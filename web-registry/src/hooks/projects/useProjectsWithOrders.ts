@@ -1,9 +1,4 @@
-import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
-import {
-  ProjectInfo,
-  QueryProjectsResponse,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import shuffle from 'lodash/shuffle';
+import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import {
   ProjectsSellOrders,
@@ -12,13 +7,9 @@ import {
 import useEcocreditQuery from 'hooks/useEcocreditQuery';
 import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
 
-import {
-  hasMetadata,
-  isOtherProject,
-  prioritizeWithSellOrders,
-} from './useProjectsWithOrders.utils';
+import { selectProjects } from './useProjectsWithOrders.utils';
 
-interface ProjectsWithOrdersProps {
+export interface ProjectsWithOrdersProps {
   limit?: number;
   metadata?: boolean; // to discard projects without metadata prop
   random?: boolean; // to shuffle the projects (along with limit allows a random subselection)
@@ -46,31 +37,16 @@ export function useProjectsWithOrders({
 
   const { projectsWithOrderData, loading: loadingWithOrders } =
     useProjectsSellOrders({
-      projects: selectProjects(projects, sellOrders),
+      projects: selectProjects({
+        projects,
+        sellOrders,
+        metadata,
+        random,
+        projectId,
+      }),
       sellOrders,
       limit,
     });
-
-  function selectProjects(
-    _projects: ProjectInfo[] | undefined,
-    sellOrders: SellOrderInfo[] | undefined,
-  ): ProjectInfo[] | undefined {
-    if (!_projects || !sellOrders) return;
-
-    if (projectId)
-      _projects = _projects.filter(proj => isOtherProject(proj, projectId));
-
-    if (random)
-      return prioritizeWithSellOrders(
-        shuffle(_projects).filter(hasMetadata),
-        sellOrders,
-        limit,
-      );
-
-    if (metadata) return _projects.filter(hasMetadata);
-
-    return _projects;
-  }
 
   return {
     projectsWithOrderData,

@@ -6,10 +6,19 @@ import { formatNumber } from 'web-components/lib/utils/format';
 
 import { microToDenom } from 'lib/denom.utils';
 
-export const getPurchaseInfo = (
-  projectId: string,
-  sellOrders: SellOrderInfo[],
-): PurchaseInfo => {
+type GetPurchaseInfoParams = {
+  projectId: string;
+  sellOrders: SellOrderInfo[];
+  regenPrice?: number;
+};
+
+const REGEN_DENOM = 'uregen';
+
+export const getPurchaseInfo = ({
+  projectId,
+  sellOrders,
+  regenPrice,
+}: GetPurchaseInfoParams): PurchaseInfo => {
   const ordersForThisProject = sellOrders.filter(order =>
     order.batchDenom.startsWith(projectId),
   );
@@ -27,14 +36,36 @@ export const getPurchaseInfo = (
     .reduce((total, quantity) => total + quantity, 0);
 
   const prices = ordersForThisProject
-    .map(order => microToDenom(order.askAmount))
+    .map(order => {
+      const amount = microToDenom(order.askAmount);
+      const denomPrice = order.askDenom === REGEN_DENOM ? regenPrice ?? 0 : 1;
+
+      return amount * denomPrice;
+    })
     .sort((a, b) => a - b);
-  const priceMin = formatNumber(prices?.[0], 2);
-  const priceMax = formatNumber(prices?.[prices.length - 1], 2);
+  const priceMin = prices?.[0];
+  const priceMax = prices?.[prices.length - 1];
+  const priceMinDisplayed =
+    priceMin > 0
+      ? formatNumber({
+          num: priceMin,
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })
+      : '';
+  const priceMaxDisplayed =
+    priceMax > 0
+      ? formatNumber({
+          num: priceMax,
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })
+      : '';
+  const hasPrice = priceMinDisplayed !== '' && priceMaxDisplayed !== '';
 
   return {
     sellInfo: {
-      pricePerTon: `${priceMin}-${priceMax}`,
+      pricePerTon: hasPrice ? `$${priceMinDisplayed}-${priceMaxDisplayed}` : '',
       creditsAvailable,
     },
   };

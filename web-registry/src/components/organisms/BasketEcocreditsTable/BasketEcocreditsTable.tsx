@@ -88,7 +88,7 @@ export const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
             {item.batchDenom}
           </Box>,
           <AccountLink address={item.issuer} />,
-          formatNumber(item.totalAmount),
+          formatNumber({ num: item.totalAmount }),
           item.classId,
           <GreyText>{formatDate(item.startDate)}</GreyText>,
           <GreyText>{formatDate(item.endDate)}</GreyText>,

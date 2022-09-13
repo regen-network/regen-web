@@ -133,13 +133,13 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           </Link>,
           <AccountLink address={batch.issuer} />,
           <WithLoader isLoading={!batch.tradableSupply} variant="skeleton">
-            <Box>{formatNumber(batch.tradableSupply)}</Box>
+            <Box>{formatNumber({ num: batch.tradableSupply })}</Box>
           </WithLoader>,
           <WithLoader isLoading={!batch.retiredSupply} variant="skeleton">
-            <Box>{formatNumber(batch.retiredSupply)}</Box>
+            <Box>{formatNumber({ num: batch.retiredSupply })}</Box>
           </WithLoader>,
           <WithLoader isLoading={!batch.cancelledAmount} variant="skeleton">
-            <Box>{formatNumber(batch.cancelledAmount)}</Box>
+            <Box>{formatNumber({ num: batch.cancelledAmount })}</Box>
           </WithLoader>,
           <Box className={styles.noWrap}>
             {formatDate(batch.startDate as Date, undefined, true)}

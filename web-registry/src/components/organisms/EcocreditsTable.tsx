@@ -75,9 +75,9 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
               {row.classId}
             </Link>
           </WithLoader>,
-          formatNumber(row.balance?.tradableAmount),
-          formatNumber(row.balance?.retiredAmount),
-          formatNumber(row.balance?.escrowedAmount),
+          formatNumber({ num: row.balance?.tradableAmount }),
+          formatNumber({ num: row.balance?.retiredAmount }),
+          formatNumber({ num: row.balance?.escrowedAmount }),
           <GreyText>{formatDate(row.startDate)}</GreyText>,
           <GreyText>{formatDate(row.endDate)}</GreyText>,
           <WithLoader isLoading={!row.projectLocation} variant="skeleton">

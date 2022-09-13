@@ -15,6 +15,7 @@ interface CreateSellOrderModalProps
 
 const CreateSellOrderModal: React.FC<CreateSellOrderModalProps> = ({
   batchDenoms,
+  allowedDenoms,
   sellDenom,
   availableAmountByBatch,
   open,
@@ -25,6 +26,7 @@ const CreateSellOrderModal: React.FC<CreateSellOrderModalProps> = ({
   <FormModalTemplate title={title} open={open} onClose={onClose}>
     <CreateSellOrderForm
       batchDenoms={batchDenoms}
+      allowedDenoms={allowedDenoms}
       sellDenom={sellDenom}
       availableAmountByBatch={availableAmountByBatch}
       onClose={onClose}

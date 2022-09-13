@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SxProps, useTheme } from '@mui/material';
 import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
+import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
@@ -47,6 +48,7 @@ import {
   useQueryBaskets,
 } from 'hooks';
 import type { BasketTokens } from 'hooks/useBasketTokens';
+import useMarketplaceQuery from 'hooks/useMarketplaceQuery';
 
 import useBasketPutSubmit from './hooks/useBasketPutSubmit';
 import useBasketTakeSubmit from './hooks/useBasketTakeSubmit';
@@ -64,6 +66,7 @@ import {
 } from './MyEcocredits.contants';
 import {
   getAvailableAmountByBatch,
+  getDenomAllowedOptions,
   getOtherSellOrderBatchDenomOptions,
 } from './MyEcocredits.utils';
 
@@ -147,6 +150,16 @@ export const MyEcocredits = (): JSX.Element => {
     address: accountAddress,
     paginationParams,
   });
+  const allowedDenomsResponse = useMarketplaceQuery<QueryAllowedDenomsResponse>(
+    {
+      query: 'allowedDenoms',
+      params: {},
+    },
+  );
+  const allowedDenomOptions = getDenomAllowedOptions({
+    allowedDenoms: allowedDenomsResponse?.data?.allowedDenoms,
+  });
+
   const basketsWithClasses = useBasketsWithClasses(baskets);
   const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN || '';
   const { basketTokens, fetchBasketTokens } = useBasketTokens(
@@ -397,6 +410,7 @@ export const MyEcocredits = (): JSX.Element => {
               sellOrderCreateOpen,
             }),
           ]}
+          allowedDenoms={allowedDenomOptions}
           sellDenom={'REGEN'}
           availableAmountByBatch={getAvailableAmountByBatch({ credits })}
           open={true}

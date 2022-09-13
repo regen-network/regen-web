@@ -19,6 +19,7 @@ import {
   queryClasses,
   queryClassInfo,
   queryCreditTypes,
+  queryParams,
   queryProject,
   queryProjects,
   queryProjectsByAdmin,
@@ -101,6 +102,11 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
     [],
   );
 
+  const paramsQuery = useCallback(
+    (client, params) => queryParams({ request: params }),
+    [],
+  );
+
   const projects = useCallback(
     (client, params) => queryProjects({ client, request: params }),
     [],
@@ -155,6 +161,9 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
       case 'creditTypes':
         response = creditTypes(client, params);
         break;
+      case 'params':
+        response = paramsQuery(client, params);
+        break;
       case 'projects':
         response = projects(client, params);
         break;
@@ -195,6 +204,7 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
     classInfo,
     classes,
     creditTypes,
+    paramsQuery,
     projects,
     projectsByAdmin,
     project,

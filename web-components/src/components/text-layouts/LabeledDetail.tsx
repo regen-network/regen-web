@@ -3,7 +3,7 @@ import { SxProps } from '@mui/material';
 
 import type { Theme } from 'src/theme/muiTheme';
 
-import { FlexCol } from '../box';
+import { Flex } from '../box';
 import { Label } from '../typography';
 import type { LabelSize } from '../typography/sizing';
 
@@ -14,7 +14,7 @@ export const LabeledDetail: React.FC<{
   sxLabel?: SxProps<Theme>;
   labelSize?: LabelSize;
 }> = ({ label, children, labelSize, sx = [], sxLabel = [] }) => (
-  <FlexCol sx={{ gap: 2, ...sx }}>
+  <Flex col sx={{ gap: 2, ...sx }}>
     <Label
       size={labelSize || 'sm'}
       sx={[
@@ -25,5 +25,5 @@ export const LabeledDetail: React.FC<{
       {label}
     </Label>
     <div>{children}</div>
-  </FlexCol>
+  </Flex>
 );

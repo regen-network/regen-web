@@ -36,6 +36,7 @@ import {
   QueryProjectResponse,
   QueryProjectsByAdminRequest,
   QueryProjectsByAdminResponse,
+  QueryProjectsByClassRequest,
   QueryProjectsByClassResponse,
   QueryProjectsRequest,
   QueryProjectsResponse,
@@ -365,12 +366,16 @@ export const queryClassIssuers = async (
   }
 };
 
-export const queryProjectsByClass = async (
-  classId: string,
-): Promise<QueryProjectsByClassResponse> => {
-  const client = await getQueryClient();
+interface QueryProjectsByClassProps extends EcocreditQueryClientProps {
+  request: DeepPartial<QueryProjectsByClassRequest>;
+}
+
+export const queryProjectsByClass = async ({
+  client,
+  request,
+}: QueryProjectsByClassProps): Promise<QueryProjectsByClassResponse> => {
   try {
-    return client.ProjectsByClass({ classId });
+    return client.ProjectsByClass({ classId: request.classId });
   } catch (err) {
     throw new Error(`Error fetching projects by class: ${err}`);
   }
@@ -486,6 +491,11 @@ type ProjectsByAdminParams = {
   params: DeepPartial<QueryProjectsByAdminRequest>;
 };
 
+type ProjectsByClassParams = {
+  query: 'projectsByClass';
+  params: DeepPartial<QueryProjectsByClassRequest>;
+};
+
 type ProjectParams = {
   query: 'project';
   params: DeepPartial<QueryProjectRequest>;
@@ -505,6 +515,7 @@ export type EcocreditQueryProps =
   | CreditTypesParams
   | ProjectsParams
   | ProjectsByAdminParams
+  | ProjectsByClassParams
   | ProjectParams;
 
 // typing the response
@@ -523,6 +534,7 @@ export type EcocreditQueryResponse =
   | QueryParamsResponse
   | QueryProjectsResponse
   | QueryProjectsByAdminResponse
+  | QueryProjectsByClassResponse
   | QueryProjectResponse;
 
 /**

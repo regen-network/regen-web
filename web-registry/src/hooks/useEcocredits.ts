@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   BatchInfo,
-  QueryBalancesResponse,
   QueryBatchesResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
@@ -12,6 +11,7 @@ import { getEcocreditsForAccount } from 'lib/ecocredit/api';
 import { ledgerRESTUri } from 'lib/ledger';
 
 import useEcocreditQuery from './useEcocreditQuery';
+import useQueryBalances from './useQueryBalances';
 
 type Props = {
   address?: string;
@@ -21,6 +21,7 @@ type Props = {
 export default function useEcocredits({ address, paginationParams }: Props): {
   credits: BatchInfoWithBalance[];
   fetchCredits: () => Promise<void>;
+  reloadBalances: () => Promise<void>;
   isLoadingCredits: boolean;
 } {
   const [credits, setCredits] = useState<BatchInfoWithBalance[]>();
@@ -31,15 +32,14 @@ export default function useEcocredits({ address, paginationParams }: Props): {
     params: {},
     query: 'batches',
   });
-  const balancesResponse = useEcocreditQuery<QueryBalancesResponse>({
-    params: { address },
-    query: 'balances',
+  const { balancesResponse, fetchBalances } = useQueryBalances({
+    address,
   });
 
   useEffect(() => {
     // Initialize credits with empty classId and projectLocation to render components consuming data right away
     if (balancesResponse && batchesResponse && !credits) {
-      const initialCredits = balancesResponse?.data?.balances.map(balance => {
+      const initialCredits = balancesResponse?.balances.map(balance => {
         const batch = batchesResponse?.data?.batches.find(
           batch => batch.denom === balance.batchDenom,
         ) as BatchInfo;
@@ -70,7 +70,7 @@ export default function useEcocredits({ address, paginationParams }: Props): {
         address,
         paginationParams,
         loadedCredits: credits ?? [],
-        balances: balancesResponse?.data?.balances,
+        balances: balancesResponse?.balances,
         batches: batchesResponse?.data?.batches,
       });
       if (newCredits) setCredits(newCredits);
@@ -80,6 +80,30 @@ export default function useEcocredits({ address, paginationParams }: Props): {
       isFetchingRef.current = false;
     }
   }, [address, credits, paginationParams, balancesResponse, batchesResponse]);
+
+  const reloadBalances = useCallback(async () => {
+    const newBalancesReponse = await fetchBalances({ address });
+    const updatedCredits = credits?.map(credit => {
+      if (credit.balance) {
+        const newBalance = newBalancesReponse?.balances.find(
+          balance => balance.batchDenom === credit.denom,
+        ) ?? {
+          ...credit.balance,
+          escrowedAmount: '0',
+          retiredAmount: '0',
+          tradableAmount: '0',
+        };
+        return {
+          ...credit,
+          balance: newBalance,
+        };
+      }
+
+      return credit;
+    });
+
+    setCredits(updatedCredits);
+  }, [address, credits, fetchBalances]);
 
   useEffect(() => {
     if (!ledgerRESTUri || !address) return;
@@ -104,5 +128,10 @@ export default function useEcocredits({ address, paginationParams }: Props): {
     }
   }, [fetchCredits, address, paginationParams, credits]);
 
-  return { credits: credits ?? [], fetchCredits, isLoadingCredits };
+  return {
+    credits: credits ?? [],
+    fetchCredits,
+    reloadBalances,
+    isLoadingCredits,
+  };
 }

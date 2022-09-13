@@ -1,7 +1,7 @@
 import { Link, SxProps } from '@mui/material';
 import { truncate } from 'lodash';
 
-import { FlexCol } from 'web-components/lib/components/box';
+import { Flex } from 'web-components/lib/components/box';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import { LabeledDetail } from 'web-components/lib/components/text-layouts';
@@ -19,10 +19,10 @@ export const CreditClassFinished = (props: {
 }): JSX.Element => {
   const { classId, hash } = props;
   return (
-    <FlexCol>
+    <Flex col>
       <OnBoardingCard>
         <Title variant="h5">Create Credit Class</Title>
-        <FlexCol sx={{ mt: 6, gap: 6 }}>
+        <Flex col sx={{ mt: 6, gap: 6 }}>
           <LabeledDetail label="Credit Class ID" sxLabel={sxs.label}>
             <Body size="lg">{classId}</Body>
           </LabeledDetail>
@@ -33,7 +33,7 @@ export const CreditClassFinished = (props: {
               </Link>
             </Body>
           </LabeledDetail>
-        </FlexCol>
+        </Flex>
       </OnBoardingCard>
       <OutlinedButton
         sx={{ alignSelf: 'center' }}
@@ -42,6 +42,6 @@ export const CreditClassFinished = (props: {
       >
         see credit class page
       </OutlinedButton>
-    </FlexCol>
+    </Flex>
   );
 };

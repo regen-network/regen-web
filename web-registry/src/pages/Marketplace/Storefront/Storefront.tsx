@@ -67,15 +67,18 @@ export const Storefront = (): JSX.Element => {
   const batchDenoms = useMemo(
     () =>
       sellOrders
-        ?.slice(offset, offset + rowsPerPage)
+        ?.sort(sortBySellOrderId)
+        .slice(offset, offset + rowsPerPage)
         .map(sellOrder => sellOrder.batchDenom),
     [sellOrders, offset, rowsPerPage],
   );
+
   const [batchInfosMap] = useState(new Map<string, BatchInfo>());
   const newBatchDenoms = useMemo(
     () => batchDenoms?.filter(batchDenom => !batchInfosMap.has(batchDenom)),
     [batchDenoms, batchInfosMap],
   );
+
   const batchInfoResponses = useQueryListBatchInfo(newBatchDenoms);
   const batchInfos = updateBatchInfosMap({ batchInfosMap, batchInfoResponses });
 
@@ -119,7 +122,7 @@ export const Storefront = (): JSX.Element => {
         batchInfos,
         sellOrders,
         projectsInfosByHandleMap,
-      }).sort(sortBySellOrderId),
+      }),
     [batchInfos, sellOrders, projectsInfosByHandleMap],
   );
 

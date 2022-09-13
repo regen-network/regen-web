@@ -57,7 +57,7 @@ const IconLabel = ({
   isCompact = false,
   smallSvg = false,
 }: IconLabelProps): JSX.Element => {
-  const mobileSize = isCompact ? 80 : 120;
+  const mobileSize = isCompact ? 20 : 30;
   return (
     <div>
       <Link
@@ -74,12 +74,12 @@ const IconLabel = ({
             borderRadius: '50%',
             transition: 'all 200ms ease-in-out',
             width: {
-              xs: 60,
-              tablet: mobileSize,
+              xs: theme.spacing(15),
+              tablet: theme.spacing(mobileSize),
             },
             height: {
-              xs: 60,
-              tablet: mobileSize,
+              xs: theme.spacing(15),
+              tablet: theme.spacing(mobileSize),
             },
             ':hover': {
               color: 'secondary.light',
@@ -149,7 +149,13 @@ const ConnectSection = ({
       topSection={false}
       imageData={background.childImageSharp.fluid}
     >
-      <Center col maxWidth={isCompact ? 740 : 'auto'} margin="0 auto">
+      <Center
+        col
+        sx={theme => ({
+          maxWidth: isCompact ? theme.spacing(185) : 'auto',
+          margin: '0 auto',
+        })}
+      >
         <Title
           className={titleClassName}
           variant="h2"

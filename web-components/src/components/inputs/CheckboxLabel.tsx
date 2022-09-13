@@ -50,7 +50,11 @@ export default function CheckboxLabel({
       />
       {showError && (
         <FormHelperText error={showError} sx={{ ml: 9 }}>
-          <Subtitle size="sm" sx={{ color: theme.palette.error.main }}>
+          <Subtitle
+            as="span"
+            size="sm"
+            sx={{ color: theme.palette.error.main }}
+          >
             {fieldError}
           </Subtitle>
         </FormHelperText>

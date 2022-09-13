@@ -1,3 +1,4 @@
+import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import {
   BatchInfo,
   QueryBatchResponse,
@@ -8,11 +9,11 @@ import { Item } from 'web-components/lib/components/modal/ConfirmModal';
 import { NormalizedSellOrder } from './Storefront.types';
 
 export const sortBySellOrderId = (
-  sellOrderA: NormalizedSellOrder,
-  sellOrderB: NormalizedSellOrder,
+  sellOrderA: SellOrderInfo,
+  sellOrderB: SellOrderInfo,
 ): number => {
   if (sellOrderA.id && sellOrderB.id) {
-    return Number(sellOrderA.id) > Number(sellOrderB.id) ? 1 : -1;
+    return Number(sellOrderA.id) < Number(sellOrderB.id) ? 1 : -1;
   }
 
   return 0;

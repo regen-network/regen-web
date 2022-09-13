@@ -4,6 +4,7 @@ import { IntercomProvider } from 'react-use-intercom';
 import { Auth0Provider } from '@auth0/auth0-react';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 
@@ -25,6 +26,9 @@ const config = {
 
 const intercomId = process.env.REACT_APP_INTERCOM_APP_ID || '';
 
+// Create a client
+const queryClient = new QueryClient();
+
 // const onRedirectCallback = (appState: AppState) => {
 //   // If using a Hash Router, you need to use window.history.replaceState to
 //   // remove the `code` and `state` query parameters from the callback url.
@@ -44,17 +48,19 @@ ReactDOM.render(
     cacheLocation="localstorage"
   >
     <AuthApolloProvider>
-      <IntercomProvider appId={intercomId} autoBoot>
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <WalletProvider>
-            <LedgerProvider>
-              <ThemeProvider injectFonts>
-                <App />
-              </ThemeProvider>
-            </LedgerProvider>
-          </WalletProvider>
-        </LocalizationProvider>
-      </IntercomProvider>
+      <QueryClientProvider client={queryClient}>
+        <IntercomProvider appId={intercomId} autoBoot>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <WalletProvider>
+              <LedgerProvider>
+                <ThemeProvider injectFonts>
+                  <App />
+                </ThemeProvider>
+              </LedgerProvider>
+            </WalletProvider>
+          </LocalizationProvider>
+        </IntercomProvider>
+      </QueryClientProvider>
     </AuthApolloProvider>
   </Auth0Provider>,
   document.getElementById('root'),

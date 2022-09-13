@@ -40,9 +40,9 @@ const getSellOrdersTableRow = ({
       {askDenom === 'usdc' && <USDCIcon />}
       {askDenom === 'uregen' && <RegenTokenIcon />}
     </Box>
-    {`${formatNumber(microToDenom(askAmount))}`}
+    {`${formatNumber({ num: microToDenom(askAmount) })}`}
   </Box>,
-  <Box>{formatNumber(amountAvailable)}</Box>,
+  <Box>{formatNumber({ num: amountAvailable })}</Box>,
   <WithLoader isLoading={project?.classIdUrl === undefined} variant="skeleton">
     <Link href={`/credit-classes/${project?.classIdUrl}`}>
       {project?.classIdName && ReactHtmlParser(project?.classIdName)}

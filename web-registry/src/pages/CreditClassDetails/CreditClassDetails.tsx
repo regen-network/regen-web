@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Route, Routes, useParams } from 'react-router-dom';
 import {
   ClassInfo,
@@ -18,14 +18,13 @@ import { onChainClassRegExp } from 'lib/ledger';
 import { getMetadata } from 'lib/metadata-graph';
 import { client } from 'sanity';
 
-import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow';
-import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow';
+import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
+import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
+import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
+import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import { useResetErrorBanner } from 'pages/Marketplace/Storefront/hooks/useResetErrorBanner';
-import { useProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { useEcocreditQuery } from 'hooks';
-import useEcocreditsByProject from 'hooks/useEcocreditsByProject';
-import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
 
 import CreditClassDetailsSimple from './CreditClassDetailsSimple';
 import CreditClassDetailsWithContent from './CreditClassDetailsWithContent';
@@ -85,8 +84,8 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
     skip: !iri || !!isOnChainClassId,
   });
 
-  const { sellOrdersResponse } = useQuerySellOrders();
-  const sellOrders = sellOrdersResponse?.sellOrders;
+  const dbCreditClassByOnChainId = dbDataByOnChainId?.creditClassByOnChainId;
+  const dbCreditClassByUri = dbDataByUri?.creditClassByUri;
 
   const { data: projectsByClassResponse } =
     useEcocreditQuery<QueryProjectsByClassResponse>({
@@ -94,23 +93,13 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
       params: { classId: creditClassId },
     });
 
-  const { projectsWithOrderData, loading: loadingProjects } =
-    useProjectsSellOrders({
-      projects: projectsByClassResponse?.projects ?? [],
-      sellOrders,
-    });
-
-  const { credits, isLoadingCredits } = useEcocreditsByProject({
-    address: wallet?.address,
-    projectId: projectsWithOrderData[0]?.id,
+  const { isBuyFlowDisabled, projectsWithOrderData } = useBuySellOrderData({
+    projects: projectsByClassResponse?.projects ?? [],
   });
 
-  const dbCreditClassByOnChainId = dbDataByOnChainId?.creditClassByOnChainId;
-  const dbCreditClassByUri = dbDataByUri?.creditClassByUri;
-
-  const isSellButtonDisabled = isLoadingCredits || credits.length === 0;
-  const isBuyButtonDisabled =
-    loadingProjects || projectsWithOrderData[0]?.sellOrders.length === 0;
+  const { isSellFlowDisabled, credits } = useCreateSellOrderData({
+    projectId: projectsWithOrderData[0]?.id,
+  });
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
@@ -165,8 +154,8 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
         />
       )}
       <SellOrdersActionsBar
-        isSellButtonDisabled={isSellButtonDisabled}
-        isBuyButtonDisabled={isBuyButtonDisabled}
+        isSellButtonDisabled={isSellFlowDisabled}
+        isBuyButtonDisabled={isBuyFlowDisabled}
         onSellButtonClick={
           wallet?.address
             ? () => setIsSellFlowStarted(true)

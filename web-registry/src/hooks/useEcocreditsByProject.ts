@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import {
   BatchInfo,
   QueryBalancesResponse,
-  QueryBatchesResponse,
+  QueryBatchesByProjectResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
@@ -14,33 +14,41 @@ import useEcocreditQuery from './useEcocreditQuery';
 type Props = {
   address?: string;
   projectId?: string;
+  widthAdditionalData?: boolean;
 };
 
-export default function useEcocreditsByProject({ address, projectId }: Props): {
+export default function useEcocreditsByProject({
+  address,
+  projectId,
+  widthAdditionalData = true,
+}: Props): {
   credits: BatchInfoWithBalance[];
   fetchCredits: () => Promise<void>;
   isLoadingCredits: boolean;
 } {
   const [credits, setCredits] = useState<BatchInfoWithBalance[]>();
+
   const [isLoadingCredits, setIsLoadingCredits] = useState(true);
 
-  const batchesResponse = useEcocreditQuery<QueryBatchesResponse>({
-    params: { projectId },
+  const batchesResponse = useEcocreditQuery<QueryBatchesByProjectResponse>({
+    params: projectId ? { projectId } : undefined,
     query: 'batchesByProject',
   });
 
   const balancesResponse = useEcocreditQuery<QueryBalancesResponse>({
-    params: { address },
+    params: address ? { address } : undefined,
     query: 'balances',
   });
 
   useEffect(() => {
     // Initialize credits with empty classId and projectLocation to render components consuming data right away
-    if (balancesResponse && batchesResponse && !credits) {
+    if (balancesResponse.data && batchesResponse.data && !credits) {
       const initialCredits = balancesResponse?.data?.balances.map(balance => {
         const batch = batchesResponse?.data?.batches.find(
           batch => batch.denom === balance.batchDenom,
         ) as BatchInfo;
+
+        if (!batch) return undefined;
 
         return {
           ...batch,
@@ -51,7 +59,11 @@ export default function useEcocreditsByProject({ address, projectId }: Props): {
       });
 
       if (initialCredits) {
-        setCredits(initialCredits);
+        setCredits(
+          initialCredits.filter(
+            credit => credit !== undefined,
+          ) as BatchInfoWithBalance[],
+        );
         setIsLoadingCredits(false);
       }
     }
@@ -86,10 +98,10 @@ export default function useEcocreditsByProject({ address, projectId }: Props): {
       );
     }
 
-    if (shouldFetch) {
+    if (shouldFetch && widthAdditionalData) {
       fetchCredits();
     }
-  }, [fetchCredits, address, credits]);
+  }, [fetchCredits, address, credits, widthAdditionalData]);
 
   return { credits: credits ?? [], fetchCredits, isLoadingCredits };
 }

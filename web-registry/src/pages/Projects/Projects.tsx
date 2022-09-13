@@ -8,7 +8,7 @@ import SelectTextFieldBase from 'web-components/lib/components/inputs/SelectText
 import { Loading } from 'web-components/lib/components/loading';
 import { Body, Subtitle } from 'web-components/lib/components/typography';
 
-import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow';
+import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 
 import { useProjects } from './hooks/useProjects';
 import {

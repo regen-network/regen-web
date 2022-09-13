@@ -433,7 +433,7 @@ type BalanceParams = {
 
 type BalancesParams = {
   query: 'balances';
-  params: DeepPartial<QueryBalancesRequest>;
+  params?: DeepPartial<QueryBalancesRequest>;
 };
 
 type BatchInfoParams = {
@@ -453,7 +453,7 @@ type BatchesByClassParams = {
 
 type BatchesByProjectParams = {
   query: 'batchesByProject';
-  params: DeepPartial<QueryBatchesByProjectRequest>;
+  params?: DeepPartial<QueryBatchesByProjectRequest>;
 };
 
 type BatchesByIssuerParams = {
@@ -684,7 +684,7 @@ export const queryBatchesByProject = async ({
     });
   } catch (err) {
     throw new Error(
-      `Error in the Batches query of the ledger ecocredit module: ${err}`,
+      `Error in the Batches by project query of the ledger ecocredit module: ${err}`,
     );
   }
 };

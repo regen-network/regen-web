@@ -15,14 +15,13 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 
-import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow';
-import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow';
+import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
+import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
+import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
+import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import { useResetErrorBanner } from 'pages/Marketplace/Storefront/hooks/useResetErrorBanner';
-import { useProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { usePaginatedBatchesByProject } from 'hooks/batches/usePaginatedBatchesByProject';
-import useEcocreditsByProject from 'hooks/useEcocreditsByProject';
-import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
 
 import {
   useProjectByHandleQuery,
@@ -160,27 +159,18 @@ function ProjectDetails(): JSX.Element {
     viewOnLedger,
   } = useIssuanceModal(data);
 
-  const { sellOrdersResponse } = useQuerySellOrders();
-  const sellOrders = sellOrdersResponse?.sellOrders;
   const projects = useMemo(
     () => (onChainProject ? [onChainProject] : undefined),
     [onChainProject],
   );
 
-  const { projectsWithOrderData, loading: loadingProjects } =
-    useProjectsSellOrders({
-      projects: projects,
-      sellOrders,
-    });
-
-  const { credits, isLoadingCredits } = useEcocreditsByProject({
-    address: wallet?.address,
-    projectId: projectsWithOrderData[0]?.id,
+  const { isBuyFlowDisabled, projectsWithOrderData } = useBuySellOrderData({
+    projects,
   });
 
-  const isSellButtonDisabled = isLoadingCredits || credits.length === 0;
-  const isBuyButtonDisabled =
-    loadingProjects || projectsWithOrderData[0]?.sellOrders.length === 0;
+  const { credits, isSellFlowDisabled } = useCreateSellOrderData({
+    projectId: projectsWithOrderData[0]?.id,
+  });
 
   if (!isLoading && !project) return <NotFoundPage />;
   return (
@@ -212,8 +202,8 @@ function ProjectDetails(): JSX.Element {
       )}
 
       <SellOrdersActionsBar
-        isSellButtonDisabled={isSellButtonDisabled}
-        isBuyButtonDisabled={isBuyButtonDisabled}
+        isSellButtonDisabled={isSellFlowDisabled}
+        isBuyButtonDisabled={isBuyFlowDisabled}
         onSellButtonClick={
           wallet?.address
             ? () => setIsSellFlowStarted(true)

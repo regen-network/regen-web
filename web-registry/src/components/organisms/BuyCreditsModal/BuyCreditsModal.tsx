@@ -35,7 +35,6 @@ import DenomLabel from 'components/molecules/DenomLabel';
 import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
 import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
 import {
-  amountToSpend,
   getCreditCountValidation,
   getOptions,
   handleBuyCreditsSubmit,

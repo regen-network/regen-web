@@ -15,6 +15,7 @@ import DefaultProject from 'assets/default-project.jpg';
 type Props = {
   projects?: ProjectInfo[];
   sellOrders?: SellOrderInfo[];
+  regenPrice?: number;
   limit?: number;
 };
 
@@ -26,6 +27,7 @@ export interface ProjectsSellOrders {
 export const useProjectsSellOrders = ({
   projects,
   sellOrders,
+  regenPrice,
   limit,
 }: Props): ProjectsSellOrders => {
   const [projectsWithOrderData, setProjectsWithOrderData] = useState<
@@ -42,13 +44,14 @@ export const useProjectsSellOrders = ({
           projects,
           sellOrders,
           limit ?? projects.length,
+          regenPrice,
         );
         setProjectsWithOrderData(_projectsWithOrders);
         setLoading(false);
       }
     };
     normalize();
-  }, [projectsWithOrderData, projects, sellOrders, limit]);
+  }, [projectsWithOrderData, projects, sellOrders, regenPrice, limit]);
 
   return { projectsWithOrderData, loading };
 };
@@ -57,6 +60,7 @@ const getProjectDisplayData = async (
   projects: ProjectInfo[],
   sellOrders: SellOrderInfo[],
   limit: number,
+  regenPrice?: number,
 ): Promise<ProjectWithOrderData[]> => {
   const projectsWithOrderData = await Promise.all(
     projects
@@ -71,7 +75,11 @@ const getProjectDisplayData = async (
               id: String(sellOrder.id),
             };
           });
-        const purchaseInfo = getPurchaseInfo(project.id, sellOrders);
+        const purchaseInfo = getPurchaseInfo({
+          projectId: project.id,
+          sellOrders,
+          regenPrice,
+        });
         let metadata;
         if (project.metadata.length) {
           try {

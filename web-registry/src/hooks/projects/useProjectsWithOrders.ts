@@ -1,4 +1,11 @@
 import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { useQuery } from '@tanstack/react-query';
+
+import {
+  fetchSimplePrice,
+  GECKO_REGEN_ID,
+  GECKO_USD_CURRENCY,
+} from 'lib/coingecko';
 
 import {
   ProjectsSellOrders,
@@ -32,6 +39,10 @@ export function useProjectsWithOrders({
     });
   const projects = data?.projects;
 
+  const regenPriceQuery = useQuery(['regenPrice'], () =>
+    fetchSimplePrice({ ids: GECKO_REGEN_ID, vsCurrencies: GECKO_USD_CURRENCY }),
+  );
+
   const { sellOrdersResponse } = useQuerySellOrders();
   const sellOrders = sellOrdersResponse?.sellOrders;
 
@@ -45,6 +56,7 @@ export function useProjectsWithOrders({
         projectId,
       }),
       sellOrders,
+      regenPrice: regenPriceQuery?.data?.regen?.usd,
       limit,
     });
 

@@ -34,6 +34,7 @@ const Home: React.FC = () => {
 
   const { data, loading: loadingSanity } = useAllHomePageQuery({ client });
   const { data: creditClassData } = useAllCreditClassQuery({ client });
+
   const content = data?.allHomePage?.[0];
   const heroSection = content?.heroSection;
 

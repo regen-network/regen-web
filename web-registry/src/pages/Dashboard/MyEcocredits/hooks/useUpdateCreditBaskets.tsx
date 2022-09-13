@@ -19,7 +19,7 @@ const useUpdateCreditBaskets = ({
 }: Props): ReturnType => {
   useEffect(() => {
     // Get available baskets to put credits into
-    if (basketsWithClasses && basketsWithClasses.length > 0) {
+    if (credits && basketsWithClasses && basketsWithClasses.length > 0) {
       setCreditBaskets(
         credits.map(credit =>
           basketsWithClasses.filter(

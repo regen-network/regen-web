@@ -126,7 +126,7 @@ export const MyEcocredits = (): JSX.Element => {
     setIsProcessingModalOpen(false);
     // Refetch basket/ecocredits data so it shows latest values
     fetchBasketTokens();
-    fetchCredits();
+    reloadBalances();
   };
 
   const {
@@ -143,7 +143,7 @@ export const MyEcocredits = (): JSX.Element => {
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
   const accountAddress = wallet?.address;
-  const { credits, fetchCredits, isLoadingCredits } = useEcocredits({
+  const { credits, reloadBalances, isLoadingCredits } = useEcocredits({
     address: accountAddress,
     paginationParams,
   });

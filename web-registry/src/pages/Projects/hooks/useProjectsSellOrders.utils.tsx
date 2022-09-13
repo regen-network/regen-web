@@ -40,6 +40,7 @@ export const getPurchaseInfo = (
   };
 };
 
+// This comparison function prioritizes (it puts first) the projects that have sell orders.
 export const sortProjectsBySellOrdersAvailability =
   (sellOrders: SellOrderInfo[]) =>
   (projectA: ProjectInfo, projectB: ProjectInfo) => {
@@ -50,7 +51,9 @@ export const sortProjectsBySellOrdersAvailability =
       order.batchDenom.startsWith(`${projectB?.id}-`),
     );
 
-    if (ordersForProjectA && !ordersForProjectB) return 1;
-    if (!ordersForProjectA && ordersForProjectB) return -1;
+    if (ordersForProjectA.length > 0 && ordersForProjectB.length === 0)
+      return -1;
+    if (ordersForProjectA.length === 0 && ordersForProjectB.length > 0)
+      return 1;
     return 0;
   };

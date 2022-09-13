@@ -28,8 +28,6 @@ type Props = {
 
 type ReturnType = (values: CreateSellOrderFormValues) => Promise<void>;
 
-const PRICE_DENOM = 'uregen';
-
 const useCreateSellOrderSubmit = ({
   accountAddress,
   signAndBroadcast,
@@ -41,7 +39,7 @@ const useCreateSellOrderSubmit = ({
   const createSellOrderSubmit = useCallback(
     async (values: CreateSellOrderFormValues): Promise<void> => {
       if (!accountAddress) return Promise.reject();
-      const { amount, batchDenom, price, disableAutoRetire } = values;
+      const { amount, batchDenom, price, disableAutoRetire, askDenom } = values;
 
       // convert to udenom
       const priceInMicro = price ? String(denomToMicro(price)) : ''; // TODO: When other currencies, check for micro denom before converting
@@ -51,7 +49,7 @@ const useCreateSellOrderSubmit = ({
           {
             batchDenom,
             quantity: String(amount),
-            askPrice: { denom: PRICE_DENOM, amount: priceInMicro },
+            askPrice: { denom: askDenom, amount: priceInMicro },
             disableAutoRetire,
           },
         ],

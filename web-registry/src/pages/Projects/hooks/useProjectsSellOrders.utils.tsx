@@ -44,16 +44,14 @@ export const getPurchaseInfo = (
 export const sortProjectsBySellOrdersAvailability =
   (sellOrders: SellOrderInfo[]) =>
   (projectA: ProjectInfo, projectB: ProjectInfo) => {
-    const ordersForProjectA = sellOrders.filter(order =>
+    const ordersForProjectA = sellOrders.some(order =>
       order.batchDenom.startsWith(`${projectA?.id}-`),
     );
-    const ordersForProjectB = sellOrders.filter(order =>
+    const ordersForProjectB = sellOrders.some(order =>
       order.batchDenom.startsWith(`${projectB?.id}-`),
     );
 
-    if (ordersForProjectA.length > 0 && ordersForProjectB.length === 0)
-      return -1;
-    if (ordersForProjectA.length === 0 && ordersForProjectB.length > 0)
-      return 1;
+    if (ordersForProjectA && !ordersForProjectB) return -1;
+    if (!ordersForProjectA && ordersForProjectB) return 1;
     return 0;
   };

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Skeleton } from '@mui/material';
 import { useTheme } from '@mui/styles';
@@ -6,14 +6,10 @@ import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1
 import { QueryProjectResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
-import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';
 import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
-import { StickyBar } from 'web-components/lib/components/sticky-bar/StickyBar';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
@@ -21,8 +17,9 @@ import { getBatchesTotal } from 'lib/ecocredit/api';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow';
+import { useResetErrorBanner } from 'pages/Marketplace/Storefront/hooks/useResetErrorBanner';
 import { useProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders';
-import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
+import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { usePaginatedBatchesByProject } from 'hooks/batches/usePaginatedBatchesByProject';
 import useEcocreditsByProject from 'hooks/useEcocreditsByProject';
 import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
@@ -70,6 +67,8 @@ function ProjectDetails(): JSX.Element {
   });
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
+  const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
+  useResetErrorBanner({ displayErrorBanner, setDisplayErrorBanner });
 
   // Page mode (info/Tx)
   const isTxMode =
@@ -179,8 +178,9 @@ function ProjectDetails(): JSX.Element {
     projectId: projectsWithOrderData[0]?.id,
   });
 
-  const isErrorBannerActive =
-    (isBuyFlowStarted || isSellFlowStarted) && !wallet?.address;
+  const isSellButtonDisabled = isLoadingCredits || credits.length === 0;
+  const isBuyButtonDisabled =
+    loadingProjects || projectsWithOrderData[0]?.sellOrders.length === 0;
 
   if (!isLoading && !project) return <NotFoundPage />;
   return (
@@ -211,30 +211,20 @@ function ProjectDetails(): JSX.Element {
         </Box>
       )}
 
-      <StickyBar>
-        <Box
-          sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}
-        >
-          <OutlinedButton
-            startIcon={<CurrentCreditsIcon height="18px" width="18px" />}
-            onClick={() => setIsSellFlowStarted(true)}
-            disabled={isLoadingCredits || credits.length === 0}
-            sx={{ mr: 5 }}
-          >
-            {'SELL'}
-          </OutlinedButton>
-          <ContainedButton
-            startIcon={<CurrentCreditsIcon height="18px" width="18px" />}
-            onClick={() => setIsBuyFlowStarted(true)}
-            disabled={
-              loadingProjects ||
-              projectsWithOrderData[0]?.sellOrders.length === 0
-            }
-          >
-            {'BUY CREDITS'}
-          </ContainedButton>
-        </Box>
-      </StickyBar>
+      <SellOrdersActionsBar
+        isSellButtonDisabled={isSellButtonDisabled}
+        isBuyButtonDisabled={isBuyButtonDisabled}
+        onSellButtonClick={
+          wallet?.address
+            ? () => setIsSellFlowStarted(true)
+            : () => setDisplayErrorBanner(true)
+        }
+        onBuyButtonClick={
+          wallet?.address
+            ? () => setIsBuyFlowStarted(true)
+            : () => setDisplayErrorBanner(true)
+        }
+      />
 
       <ProjectTopSection
         data={data}
@@ -302,7 +292,7 @@ function ProjectDetails(): JSX.Element {
         setIsFlowStarted={setIsSellFlowStarted}
         credits={credits}
       />
-      {isErrorBannerActive && (
+      {displayErrorBanner && (
         <ErrorBanner text="Please install Keplr extension to use Regen Ledger features" />
       )}
     </Box>

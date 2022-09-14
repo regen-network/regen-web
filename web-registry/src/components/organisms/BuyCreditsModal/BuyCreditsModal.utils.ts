@@ -8,8 +8,8 @@ import { UISellOrderInfo } from 'pages/Projects/Projects.types';
 import { BuyCreditsProject, BuyCreditsValues } from '..';
 
 export const getSellOrderLabel = (sellOrder: UISellOrderInfo): string => {
-  const { id, askAmount, askDenom = '', quantity } = { ...sellOrder };
-  const denom = formatDenomText(askDenom);
+  const { id, askAmount, askDisplayDenom = '', quantity } = { ...sellOrder };
+  const denom = formatDenomText(askDisplayDenom);
   const price = microToDenom(askAmount);
   return `${id} (${price} ${denom}/credit: ${quantity} credit(s) available)`;
 };

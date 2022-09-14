@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
-import { FlexCol } from 'web-components/lib/components/box';
+import { Flex } from 'web-components/lib/components/box';
 import { CreateProjectCard } from 'web-components/lib/components/cards/CreateCards/CreateProjectCard';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import { Body } from 'web-components/lib/components/typography';
@@ -71,14 +71,14 @@ const ProjectList: React.FC = () => {
           Get started with your first project.
         </Body>
       )}
-      <FlexCol sx={{ justifyContent: 'center' }}>
+      <Flex col justify="center">
         {/* TODO: Existing Projects. see regen-network/regen-registry#360 */}
         <CreateProjectCard
           sx={{ mt: [6, 8] }}
           onClick={submitCreateProject}
           isFirstProject={isFirstProject}
         />
-      </FlexCol>
+      </Flex>
     </OnBoardingSection>
   );
 };

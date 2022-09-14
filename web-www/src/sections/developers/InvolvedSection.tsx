@@ -67,7 +67,7 @@ const InvolvedSection = (): JSX.Element => {
       ),
       href: 'https://docs.google.com/document/d/1-CRfpZgPxiaZB4nhMwKKkeWbLDI5dYc0hmGwnGkCHP4/edit',
       label: 'Our RFC process',
-      small: true,
+      smallSvg: true,
     },
     {
       icon: (
@@ -78,7 +78,7 @@ const InvolvedSection = (): JSX.Element => {
       ),
       href: 'https://www.notion.so/Regen-Network-Roadmap-b804e0d0af7b485ea89c9a723328fd65',
       label: 'View our Roadmap',
-      small: true,
+      smallSvg: true,
     },
     {
       icon: (
@@ -89,7 +89,7 @@ const InvolvedSection = (): JSX.Element => {
       ),
       href: 'https://discord.gg/BDcBJu3',
       label: 'Chat with us on Discord',
-      small: true,
+      smallSvg: true,
     },
     {
       icon: (
@@ -100,7 +100,7 @@ const InvolvedSection = (): JSX.Element => {
       ),
       href: 'https://docs.regen.network',
       label: 'Developer Docs',
-      small: true,
+      smallSvg: true,
     },
   ];
   return (

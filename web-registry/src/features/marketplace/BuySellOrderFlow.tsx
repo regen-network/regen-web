@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 
+import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
@@ -28,6 +29,7 @@ export const BuySellOrderFlow = ({ selectedProject }: Props): JSX.Element => {
   const [txButtonTitle, setTxButtonTitle] = useState<string>('');
   const [txModalHeader, setTxModalHeader] = useState<string>('');
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
+  const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
   const navigate = useNavigate();
 
   const closeBuyModal = (): void => setIsBuyModalOpen(false);
@@ -58,12 +60,6 @@ export const BuySellOrderFlow = ({ selectedProject }: Props): JSX.Element => {
     navigate('/ecocredits/dashboard');
   };
 
-  useEffect(() => {
-    if (selectedProject) {
-      setIsBuyModalOpen(true);
-    }
-  }, [selectedProject]);
-
   const {
     signAndBroadcast,
     setDeliverTxResponse,
@@ -85,6 +81,14 @@ export const BuySellOrderFlow = ({ selectedProject }: Props): JSX.Element => {
     setTxModalTitle,
     buttonTitle: VIEW_ECOCREDITS,
   });
+
+  useEffect(() => {
+    if (selectedProject && accountAddress) {
+      setIsBuyModalOpen(true);
+    } else if (selectedProject && !accountAddress) {
+      setDisplayErrorBanner(true);
+    }
+  }, [selectedProject, accountAddress]);
 
   return (
     <>
@@ -125,6 +129,9 @@ export const BuySellOrderFlow = ({ selectedProject }: Props): JSX.Element => {
         onButtonClick={handleTxModalClose}
         buttonTitle="close"
       />
+      {displayErrorBanner && (
+        <ErrorBanner text="Please connect to Keplr to use Regen Ledger features" />
+      )}
     </>
   );
 };

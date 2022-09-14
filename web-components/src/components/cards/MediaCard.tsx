@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { CardMedia, SxProps } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 import { makeStyles } from '@mui/styles';
@@ -62,16 +63,27 @@ export default function MediaCard({
   sx = [],
 }: MediaCardProps): JSX.Element {
   const classes = useStyles({});
-  const optimizedImage = (): JSX.Element => (
-    <MediaCardImage
-      apiServerUrl={apiServerUrl}
-      backgroundGradient={backgroundGradient}
-      classes={classes}
-      imageClassName={imageClassName}
-      imageStorageBaseUrl={imageStorageBaseUrl}
-      imgSrc={imgSrc}
-      tag={tag}
-    />
+  const optimizedImage = useCallback(
+    (): JSX.Element => (
+      <MediaCardImage
+        apiServerUrl={apiServerUrl}
+        backgroundGradient={backgroundGradient}
+        classes={classes}
+        imageClassName={imageClassName}
+        imageStorageBaseUrl={imageStorageBaseUrl}
+        imgSrc={imgSrc}
+        tag={tag}
+      />
+    ),
+    [
+      apiServerUrl,
+      backgroundGradient,
+      classes,
+      imageClassName,
+      imageStorageBaseUrl,
+      imgSrc,
+      tag,
+    ],
   );
 
   const media = (

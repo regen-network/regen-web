@@ -13,7 +13,7 @@ export function useQueryIfCreditClassCreator(): boolean {
         setIsCreator(false);
       } else {
         try {
-          const result = await queryParams();
+          const result = await queryParams({});
           const allowlistEnabled = result.params?.allowlistEnabled;
           if (allowlistEnabled) {
             const _isCreator =

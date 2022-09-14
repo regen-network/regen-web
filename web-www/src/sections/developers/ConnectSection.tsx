@@ -82,7 +82,7 @@ const DevelopersConnectSection: React.FC = () => {
       ),
       href: 'https://regen-network.gitlab.io/whitepaper/WhitePaper.pdf',
       label: 'Whitepaper',
-      small: true,
+      smallSvg: true,
     },
     {
       icon: (

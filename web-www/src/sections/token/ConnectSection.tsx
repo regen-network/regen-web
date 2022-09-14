@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
+import { useTheme } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
 
 import DiscordIcon from 'web-components/lib/components/icons/social/DiscordIcon';
@@ -15,11 +16,6 @@ import { TokenConnectSectionQuery } from '../../generated/graphql';
 const useStyles = makeStyles((theme: Theme) => ({
   connect: {
     marginTop: theme.spacing(24),
-  },
-  title: {
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(32),
-    },
   },
 }));
 
@@ -63,7 +59,7 @@ const TokenConnectSection = (): JSX.Element => {
       ),
       href: 'https://discord.gg/BDcBJu3',
       label: 'Discord community',
-      small: true,
+      smallSvg: true,
     },
     {
       icon: (
@@ -79,7 +75,6 @@ const TokenConnectSection = (): JSX.Element => {
   return (
     <ConnectSection
       className={styles.connect}
-      titleClassName={styles.title}
       header={data?.connectSectionHeader || ''}
       background={background as any} // TODO fix this type - should be able to use `FluidObject`
       icons={icons}

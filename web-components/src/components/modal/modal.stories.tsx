@@ -310,6 +310,7 @@ export const createSellOrderModal = (): JSX.Element => (
         value: 'C01-20190101-20201010-003',
       },
     ]}
+    allowedDenoms={[{ label: 'REGEN', value: 'uregen' }]}
     title={'Create Sell Order'}
     availableAmountByBatch={{}}
     sellDenom={'REGEN'}

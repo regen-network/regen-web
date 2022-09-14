@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 
 import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
@@ -16,9 +17,13 @@ import { getHashUrl } from 'lib/block-explorer';
 
 import useCreateSellOrderSubmit from 'pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit';
 import { CREATE_SELL_ORDER_TITLE } from 'pages/Dashboard/MyEcocredits/MyEcocredits.contants';
-import { getAvailableAmountByBatch } from 'pages/Dashboard/MyEcocredits/MyEcocredits.utils';
+import {
+  getAvailableAmountByBatch,
+  getDenomAllowedOptions,
+} from 'pages/Dashboard/MyEcocredits/MyEcocredits.utils';
 import { Link } from 'components/atoms';
 import { useMsgClient } from 'hooks';
+import useMarketplaceQuery from 'hooks/useMarketplaceQuery';
 
 type Props = {
   isFlowStarted: boolean;
@@ -105,6 +110,16 @@ export const CreateSellOrderFlow = ({
     onTxBroadcast,
   });
 
+  const allowedDenomsResponse = useMarketplaceQuery<QueryAllowedDenomsResponse>(
+    {
+      query: 'allowedDenoms',
+      params: {},
+    },
+  );
+  const allowedDenomOptions = getDenomAllowedOptions({
+    allowedDenoms: allowedDenomsResponse?.data?.allowedDenoms,
+  });
+
   return (
     <>
       <CreateSellOrderModal
@@ -115,6 +130,7 @@ export const CreateSellOrderFlow = ({
         onClose={closeCreateModal}
         onSubmit={createSellOrderSubmit}
         title={CREATE_SELL_ORDER_TITLE}
+        allowedDenoms={allowedDenomOptions}
       />
       <ProcessingModal
         open={isProcessingModalOpen}

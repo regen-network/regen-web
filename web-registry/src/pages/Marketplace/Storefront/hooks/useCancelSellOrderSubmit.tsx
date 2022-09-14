@@ -75,7 +75,11 @@ const useCancelSellOrderSubmit = ({
       {
         label: 'price per credit',
         value: {
-          name: formatNumber(microToDenom(askAmount)),
+          name: formatNumber({
+            num: microToDenom(askAmount),
+            maximumFractionDigits: 2,
+            minimumFractionDigits: 2,
+          }),
           icon: (
             <Box
               sx={{

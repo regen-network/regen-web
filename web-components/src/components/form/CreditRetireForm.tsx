@@ -5,12 +5,15 @@ import { Field, Form, Formik, FormikErrors, useFormikContext } from 'formik';
 
 import { Theme } from '../../theme/muiTheme';
 import { getJurisdictionIsoCode } from '../../utils/locationStandard';
+import { Flex } from '../box';
+import InfoIcon from '../icons/InfoIcon';
 import AmountField from '../inputs/AmountField';
 import ControlledTextField from '../inputs/ControlledTextField';
 import SelectFieldFallback from '../inputs/SelectFieldFallback';
 import TextField from '../inputs/TextField';
 import { requiredMessage, validateAmount } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
+import Tooltip from '../tooltip/InfoTooltip';
 import { Body, Title } from '../typography';
 import Submit from './Submit';
 
@@ -59,6 +62,14 @@ const useStyles = makeStyles((theme: Theme) => ({
         marginLeft: theme.spacing(2.375),
       },
     },
+  },
+  info: {
+    cursor: 'pointer',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontWeight: 'bold',
+    fontSize: theme.typography.pxToRem(16),
   },
 }));
 
@@ -154,9 +165,20 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
       <>
         {showNotesField && (
           <>
-            <Title variant="h5" sx={sxs.title}>
-              Transaction note
-            </Title>
+            <Flex sx={sxs.title}>
+              <Title variant="h5" sx={{ mr: 2 }}>
+                Transaction note
+              </Title>
+              <Tooltip
+                arrow
+                placement="top"
+                title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')"
+              >
+                <div>
+                  <InfoIcon className={styles.info} />
+                </div>
+              </Tooltip>
+            </Flex>
             <Field
               name={`${arrayPrefix}note`}
               type="text"

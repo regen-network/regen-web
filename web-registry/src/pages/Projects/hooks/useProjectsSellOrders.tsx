@@ -88,20 +88,16 @@ const getProjectDisplayData = async (
 
         return {
           id: project.id,
-          name: metadata?.['http://schema.org/name'] || project.id,
+          name: metadata?.['schema:name'] || project.id,
           imgSrc:
-            metadata?.['http://regen.network/previewPhoto']?.['@value'] ||
-            DefaultProject,
+            metadata?.['regen:previewPhoto']?.['@value'] || DefaultProject,
           place:
-            metadata?.['http://schema.org/location']?.place_name ||
-            project.jurisdiction,
-          area: metadata?.['http://regen.network/projectSize']?.[
-            'qudt:numericValue'
-          ]?.['@value'],
+            metadata?.['schema:location']?.place_name || project.jurisdiction,
+          area: metadata?.['regen:projectSize']?.['qudt:numericValue']?.[
+            '@value'
+          ],
           areaUnit:
-            metadata?.['http://regen.network/projectSize']?.['qudt:unit']?.[
-              '@value'
-            ] || '',
+            metadata?.['regen:projectSize']?.['qudt:unit']?.['@value'] || '',
           purchaseInfo,
           href: `/projects/${project.id}`,
           sellOrders: sellOrdersNormalized,

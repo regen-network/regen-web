@@ -6,7 +6,13 @@ import getApiUri from './apiUri';
 export const getMetadata = async (iri: string): Promise<any> => {
   if (!iri) throw new Error('No metadata iri provided');
   const { data } = await axios.get(`${getApiUri()}/metadata-graph/${iri}`);
-  const compacted = await jsonld.compact(data, {});
+  const compacted = await jsonld.compact(data, {
+    schema: 'http://schema.org/',
+    regen: 'http://regen.network/',
+    qudt: 'http://qudt.org/schema/qudt/',
+    unit: 'http://qudt.org/vocab/unit/',
+    xsd: 'http://www.w3.org/2001/XMLSchema#',
+  });
   return compacted;
 };
 

@@ -5095,10 +5095,10 @@
     prop-types "^15.6.1"
     react-lifecycles-compat "^3.0.4"
 
-"@regen-network/api@^0.4.0-alpha1.3":
-  version "0.4.0-alpha1.3"
-  resolved "https://registry.yarnpkg.com/@regen-network/api/-/api-0.4.0-alpha1.3.tgz#a2fd756dd6bb26ee6a3e592375c6d43e27db220c"
-  integrity sha512-m24zKrACGLmLjWspqTidJQG6vFsSt9djPhFx7tT5/meT1y9yviLkdrJofUXXAIV8CpX3C9QF/Nr/T3JWDmlPIg==
+"@regen-network/api@^0.4.0-alpha1.4":
+  version "0.4.0-alpha1.4"
+  resolved "https://registry.yarnpkg.com/@regen-network/api/-/api-0.4.0-alpha1.4.tgz#ce77ba58db8612c3a747a488b4c777e84cbca954"
+  integrity sha512-u7zCSjYnNdnuit+tI65WjiTAy1Z0pESyMamcwAG7y4xXtbLf3lTLbgxg06CxpSEEthaCrM9+CHeEL+b695+MSA==
   dependencies:
     "@cosmjs/proto-signing" "0.28.13"
     "@cosmjs/stargate" "0.28.13"

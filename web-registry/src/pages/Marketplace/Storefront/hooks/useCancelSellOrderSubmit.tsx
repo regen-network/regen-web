@@ -3,7 +3,6 @@ import { Box } from '@mui/material';
 import { MsgCancelSellOrder } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
 import { getDenomtrace } from 'utils/ibc/getDenomTrace';
 
-import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import {
   formatNumber,

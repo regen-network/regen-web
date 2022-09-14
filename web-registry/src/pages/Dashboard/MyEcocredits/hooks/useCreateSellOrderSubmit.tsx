@@ -9,11 +9,9 @@ import { getFormattedNumber } from 'web-components/lib/utils/format';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { denomToMicro } from 'lib/denom.utils';
-import { queryDenomTraceByHashes } from 'lib/ibc/transfer/api';
 
 import DenomIcon from 'components/molecules/DenomIcon';
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
-import { IBC_DENOM_PREFIX } from 'hooks/useQuerySellOrders';
 
 import {
   CREATE_SELL_ORDER_BUTTON,

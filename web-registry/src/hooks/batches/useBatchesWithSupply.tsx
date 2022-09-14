@@ -26,8 +26,8 @@ export const useBatchesWithSupply = ({
         batch => ({
           ...batch,
           cancelledAmount: '',
-          retiredSupply: '',
-          tradableSupply: '',
+          retiredAmount: '',
+          tradableAmount: '',
         }),
       );
       setBatchesWithSupply(batchesWithDefaultSupply);
@@ -84,11 +84,11 @@ export const useBatchesWithSupply = ({
         offset,
         offset + rowsPerPage,
       );
-      shouldFetch = displayedBatches.some(batch => batch.tradableSupply === '');
+      shouldFetch = displayedBatches.some(batch => batch.tradableAmount === '');
     } else if (batchesWithSupply) {
       // Fetch all batches if at least one row without supply
       shouldFetch = batchesWithSupply.some(
-        batch => batch.tradableSupply === '',
+        batch => batch.tradableAmount === '',
       );
     }
 

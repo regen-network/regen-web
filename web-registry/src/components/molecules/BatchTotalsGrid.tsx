@@ -19,15 +19,15 @@ export const BatchTotalsGrid: React.FC<{
       <LabeledNumber
         label="Total Credits Issued"
         number={
-          +batch.tradableSupply + +batch.retiredSupply + +batch.cancelledAmount
+          +batch.tradableAmount + +batch.retiredAmount + +batch.cancelledAmount
         }
       />
     </GridItem>
     <GridItem>
-      <LabeledNumber label="Credits Tradable" number={batch.tradableSupply} />
+      <LabeledNumber label="Credits Tradable" number={batch.tradableAmount} />
     </GridItem>
     <GridItem>
-      <LabeledNumber label="Credits Retired" number={batch.retiredSupply} />
+      <LabeledNumber label="Credits Retired" number={batch.retiredAmount} />
     </GridItem>
     <GridItem>
       <LabeledNumber label="Credits Cancelled" number={batch.cancelledAmount} />

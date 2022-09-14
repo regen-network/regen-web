@@ -67,6 +67,7 @@ function ProjectDetails(): JSX.Element {
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
   const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
+
   useResetErrorBanner({ displayErrorBanner, setDisplayErrorBanner });
 
   // Page mode (info/Tx)
@@ -283,7 +284,10 @@ function ProjectDetails(): JSX.Element {
         credits={credits}
       />
       {displayErrorBanner && (
-        <ErrorBanner text="Please install Keplr extension to use Regen Ledger features" />
+        <ErrorBanner
+          text="Please install Keplr extension to use Regen Ledger features"
+          onClose={() => setDisplayErrorBanner(false)}
+        />
       )}
     </Box>
   );

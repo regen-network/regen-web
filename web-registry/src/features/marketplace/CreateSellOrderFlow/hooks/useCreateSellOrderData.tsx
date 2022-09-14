@@ -22,7 +22,7 @@ export const useCreateSellOrderData = ({ projectId }: Props): ReponseType => {
   });
 
   const isSellFlowDisabled =
-    (isLoadingCredits || credits.length === 0) && !wallet?.address;
+    (isLoadingCredits || credits.length === 0) && Boolean(wallet?.address);
 
   return {
     isSellFlowDisabled,

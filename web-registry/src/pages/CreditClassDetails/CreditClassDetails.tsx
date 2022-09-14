@@ -178,7 +178,10 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
         credits={credits}
       />
       {displayErrorBanner && (
-        <ErrorBanner text="Please install Keplr extension to use Regen Ledger features" />
+        <ErrorBanner
+          text="Please install Keplr extension to use Regen Ledger features"
+          onClose={() => setDisplayErrorBanner(false)}
+        />
       )}
 
       {/* // TODO Display not found or error status

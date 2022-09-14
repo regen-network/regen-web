@@ -9,7 +9,7 @@ import { queryDenomTraceByHashes } from 'lib/ibc/transfer/api';
 
 import { useLedger } from '../ledger';
 
-const IBC_DENOM_PREFIX = 'ibc/';
+export const IBC_DENOM_PREFIX = 'ibc/';
 
 export const useQuerySellOrders = function (): {
   sellOrdersResponse: QuerySellOrdersResponse | undefined;

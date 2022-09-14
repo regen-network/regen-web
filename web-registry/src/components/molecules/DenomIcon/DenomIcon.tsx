@@ -12,7 +12,7 @@ import GravUsdcIcon from 'web-components/lib/components/icons/coins/GravUsdcIcon
 import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 
 export interface Props {
-  denom: string;
+  denom?: string;
   sx?: SxProps<Theme>;
   iconSx?: SxProps<Theme>;
 }

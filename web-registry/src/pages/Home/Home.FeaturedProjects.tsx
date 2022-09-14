@@ -76,7 +76,10 @@ export const FeaturedProjects = ({
           <ContainedButton>{'DISCOVER PROJECTS'}</ContainedButton>
         </Link>
       </Box>
-      <BuySellOrderFlow selectedProject={selectedProject} />
+      <BuySellOrderFlow
+        selectedProject={selectedProject}
+        setSelectedProject={setSelectedProject}
+      />
     </div>
   );
 };

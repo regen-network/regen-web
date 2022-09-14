@@ -1,11 +1,13 @@
 import axios from 'axios';
+import * as jsonld from 'jsonld';
 
 import getApiUri from './apiUri';
 
 export const getMetadata = async (iri: string): Promise<any> => {
   if (!iri) throw new Error('No metadata iri provided');
   const { data } = await axios.get(`${getApiUri()}/metadata-graph/${iri}`);
-  return data;
+  const compacted = await jsonld.compact(data, {});
+  return compacted;
 };
 
 /**

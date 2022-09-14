@@ -10,9 +10,7 @@ import {
   ConfirmationModal,
   CreditsPurchaseForm,
 } from '../../organisms';
-
-const IMAGE_STORAGE_BASE_URL = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
-const API_URI = process.env.REACT_APP_API_URI;
+import { API_URI, IMAGE_STORAGE_BASE_URL } from './ProjectDetails.config';
 
 interface InputProps {
   testProject: any;

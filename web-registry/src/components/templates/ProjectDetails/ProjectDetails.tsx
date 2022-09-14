@@ -27,19 +27,15 @@ import { useLedger } from '../../../ledger';
 import { chainId } from '../../../lib/ledger';
 import { NotFoundPage } from '../../../pages/NotFound/NotFound';
 import { client as sanityClient } from '../../../sanity';
-import {
-  MoreProjectsSection,
-  ProjectImpactSection,
-  ProjectTopSection,
-} from '../../organisms';
+import { ProjectImpactSection, ProjectTopSection } from '../../organisms';
 import { Credits } from '../../organisms/BuyCreditsModal/BuyCreditsModal';
 import useGeojson from './hooks/useGeojson';
 import useImpact from './hooks/useImpact';
 import useIssuanceModal from './hooks/useIssuanceModal';
 import useMedia from './hooks/useMedia';
-import useOtherProjects from './hooks/useOtherProjects';
 import useSeo from './hooks/useSeo';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
+import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProjects';
 import { ProjectDocumentation } from './ProjectDetails.ProjectDocumentation';
 import { ProjectTimeline } from './ProjectDetails.ProjectTimeline';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
@@ -142,7 +138,6 @@ function ProjectDetails(): JSX.Element {
   });
   const mediaData = useMedia({ metadata: offChainProjectMetadata, geojson });
   const impactData = useImpact({ coBenefitsIris, primaryImpactIRI });
-  const otherProjects = useOtherProjects(projectId as string);
   const isLoading = loading || loadingDataByHandle;
 
   const {
@@ -217,11 +212,7 @@ function ProjectDetails(): JSX.Element {
         />
       )}
 
-      {otherProjects && otherProjects.length > 0 && (
-        <div className="topo-background-alternate">
-          <MoreProjectsSection projects={otherProjects} />
-        </div>
-      )}
+      <MoreProjects />
 
       {issuanceModalData && (
         <IssuanceModal

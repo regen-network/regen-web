@@ -1,3 +1,7 @@
+import { AllowedDenom } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
+
+import { Option } from 'web-components/lib/components/inputs/SelectTextField';
+
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 
 type GetOtherSellOrderBatchDenomOptionsProps = {
@@ -35,3 +39,25 @@ export const getAvailableAmountByBatch = ({
     }),
     {} as { [key: string]: number },
   );
+
+type GetDenomAllowedOptionsParams = {
+  allowedDenoms?: AllowedDenom[];
+};
+
+export const getDenomAllowedOptions = ({
+  allowedDenoms,
+}: GetDenomAllowedOptionsParams): Option[] => {
+  const allowedDenomsOptions: Option[] =
+    allowedDenoms?.map(denom => ({
+      label: denom.displayDenom.toUpperCase(),
+      value: denom.bankDenom,
+    })) ?? [];
+  allowedDenomsOptions.unshift({
+    label: 'Choose denom',
+    value: '',
+    disabled: true,
+    selected: true,
+  });
+
+  return allowedDenomsOptions;
+};

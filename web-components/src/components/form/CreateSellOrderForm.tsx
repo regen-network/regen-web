@@ -12,11 +12,12 @@ import {
   validatePrice,
 } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
-import { Label, Subtitle } from '../typography';
+import { Subtitle } from '../typography';
 import Submit from './Submit';
 
 export interface CreateSellOrderProps {
   batchDenoms: Option[];
+  allowedDenoms: Option[];
   sellDenom: string;
   availableAmountByBatch: { [batchDenom: string]: number };
   onSubmit: (values: FormValues) => Promise<void>;
@@ -28,13 +29,14 @@ interface FormProps extends CreateSellOrderProps {
 
 export interface FormValues {
   batchDenom?: string;
+  askDenom?: string;
   price?: number;
   amount?: number;
   disableAutoRetire?: boolean;
 }
 
 const CreateSellOrderForm: React.FC<FormProps> = ({
-  sellDenom,
+  allowedDenoms,
   batchDenoms,
   availableAmountByBatch,
   onClose,
@@ -77,7 +79,15 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
       validate={validateHandler}
       onSubmit={onSubmit}
     >
-      {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
+      {({
+        values,
+        errors,
+        submitForm,
+        isSubmitting,
+        isValid,
+        submitCount,
+        status,
+      }) => (
         <Form>
           <Field
             name="batchDenom"
@@ -86,7 +96,14 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
             options={options}
             sx={{ mb: 10.5 }}
           />
-          <Box sx={{ display: 'flex', alignItems: 'end', mb: 0.5 }}>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'end',
+              mb: 0.5,
+            }}
+          >
             <Field
               component={NumberTextField}
               name="price"
@@ -94,11 +111,15 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
               increment={0.1}
               min={0.0}
               arrows={false}
-              sx={{ maxWidth: '238px' }}
+              errors={errors}
+              sx={{ maxWidth: 239.5 }}
             />
-            <Label size="sm" sx={{ mb: 5, ml: 5, color: 'info.dark' }}>
-              {sellDenom}
-            </Label>
+            <Field
+              name="askDenom"
+              component={SelectTextField}
+              options={allowedDenoms}
+              sx={{ maxWidth: 239.5 }}
+            />
           </Box>
           <AmountField
             name="amount"

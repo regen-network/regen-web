@@ -27,7 +27,10 @@ export function FeaturedProjects(): JSX.Element {
           <ContainedButton>{'DISCOVER PROJECTS'}</ContainedButton>
         </Link>
       </Box>
-      <BuySellOrderFlow selectedProject={selectedProject} />
+      <BuySellOrderFlow
+        selectedProject={selectedProject}
+        setSelectedProject={setSelectedProject}
+      />
     </div>
   );
 }

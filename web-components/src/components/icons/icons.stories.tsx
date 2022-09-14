@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 
-import { FlexCol } from '../box';
+import { Flex } from '../box';
 import AccountabilityIcon from './AccountabilityIcon';
 import ArrowDownIcon from './ArrowDownIcon';
 import AvailableCreditsIcon from './AvailableCreditsIcon';
@@ -44,8 +44,10 @@ import { ProjectPageIconSmall } from './ProjectPageIconSmall';
 import RegenIcon from './RegenIcon';
 import RegenLedgerIcon from './RegenLedgerIcon';
 import RegenLogoIcon from './RegenLogoIcon';
+import RegenMarketIcon from './RegenMarketIcon';
 import { RegenTokenIcon } from './RegenTokenIcon';
 import RegistrationIcon from './RegistrationIcon';
+import RegistryIcon from './RegistryIcon';
 import ReviewIcon from './ReviewIcon';
 import SatelliteIcon from './SatelliteIcon';
 import { SaveIcon } from './SaveIcon';
@@ -82,7 +84,8 @@ function LabeledIcon(props: {
 }): JSX.Element {
   return (
     <Grid item sm={3} md={2} lg={1.5} sx={{ border: 1, borderRadius: 3 }}>
-      <FlexCol
+      <Flex
+        col
         sx={{
           justifyContent: 'flex-end',
           alignItems: 'center',
@@ -93,7 +96,7 @@ function LabeledIcon(props: {
       >
         <div>{props.icon}</div>
         <div>{props.label}</div>
-      </FlexCol>
+      </Flex>
     </Grid>
   );
 }
@@ -151,7 +154,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<EmailIcon color="grey" />} label="EmailIcon" />
     <LabeledIcon
       icon={<EmptyCartIcon sx={{ color: 'info.main' }} />}
-      label="EmptyCardIcon"
+      label="EmptyCartIcon"
     />
     <LabeledIcon icon={<EyeIcon />} label="EyeIcon" />
     <LabeledIcon icon={<FacebookIcon color="blue" />} label="FacebookIcon" />
@@ -178,8 +181,13 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<RegenIcon />} label="RegenIcon" />
     <LabeledIcon icon={<RegenLedgerIcon />} label="RegenLedgerIcon" />
     <LabeledIcon icon={<RegenLogoIcon color="grey" />} label="RegenLogoIcon" />
+    <LabeledIcon
+      icon={<RegenMarketIcon sx={{ fontSize: 64 }} />}
+      label="RegenMarketIcon"
+    />
     <LabeledIcon icon={<RegenTokenIcon />} label="RegenTokenIcon" />
     <LabeledIcon icon={<RegistrationIcon />} label="RegistrationIcon" />
+    <LabeledIcon icon={<RegistryIcon />} label="RegistryIcon" />
     <LabeledIcon icon={<ReviewIcon />} label="ReviewIcon" />
     <LabeledIcon icon={<SatelliteIcon />} label="SatelliteIcon" />
     <LabeledIcon icon={<SaveIcon color="green" />} label="SaveIcon" />

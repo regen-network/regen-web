@@ -1,7 +1,7 @@
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { Box } from '@mui/material';
 
-import { Flex, FlexCol } from '../box';
+import { Flex } from '../box';
 import ContainedButton from './ContainedButton';
 import { EditButton } from './EditButton';
 import { ExpandButton } from './ExpandButton';
@@ -71,7 +71,7 @@ export const expandButton = (): JSX.Element => (
 );
 
 export const textButton = (): JSX.Element => (
-  <FlexCol sx={{ alignItems: 'flex-start' }}>
+  <Flex col>
     <TextButton textSize="lg">Text button lg</TextButton>
     <TextButton textSize="md">Text button md</TextButton>
     <TextButton textSize="sm">Text button sm</TextButton>
@@ -79,7 +79,7 @@ export const textButton = (): JSX.Element => (
     <TextButton sx={{ color: 'red', py: [10] }}>
       Text button custom styles
     </TextButton>
-  </FlexCol>
+  </Flex>
 );
 
 export const editButton = () => <EditButton onClick={() => {}} />;

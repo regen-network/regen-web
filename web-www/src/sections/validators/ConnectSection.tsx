@@ -62,7 +62,7 @@ const ValidatorsConnectSection = (): JSX.Element => {
       ),
       href: 'https://discord.gg/BDcBJu3',
       label: 'Discord community',
-      small: true,
+      smallSvg: true,
     },
     {
       icon: (
@@ -73,7 +73,7 @@ const ValidatorsConnectSection = (): JSX.Element => {
       ),
       href: 'https://github.com/regen-network/testnets#regen-ledger-testnets',
       label: 'Past testnets',
-      small: true,
+      smallSvg: true,
     },
     {
       icon: (
@@ -84,7 +84,7 @@ const ValidatorsConnectSection = (): JSX.Element => {
       ),
       href: 'https://forms.gle/U2qCRizswUvLG4M19',
       label: 'Sign up for future testnets, US only',
-      small: true,
+      smallSvg: true,
     },
     {
       icon: (
@@ -95,7 +95,7 @@ const ValidatorsConnectSection = (): JSX.Element => {
       ),
       href: 'https://forms.gle/CZRfbXjdp6gctF5m9',
       label: 'Sign up for future testnets, non-US',
-      small: true,
+      smallSvg: true,
     },
   ];
   return (

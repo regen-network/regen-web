@@ -4,9 +4,13 @@ import { MsgCancelSellOrder } from '@regen-network/api/lib/generated/regen/ecocr
 
 import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 import { Item } from 'web-components/lib/components/modal/TxModal';
-import { getFormattedNumber } from 'web-components/lib/utils/format';
+import {
+  formatNumber,
+  getFormattedNumber,
+} from 'web-components/lib/utils/format';
 
 import { UseStateSetter } from 'types/react/use-state';
+import { microToDenom } from 'lib/denom.utils';
 
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
 
@@ -71,7 +75,11 @@ const useCancelSellOrderSubmit = ({
       {
         label: 'price per credit',
         value: {
-          name: askAmount,
+          name: formatNumber({
+            num: microToDenom(askAmount),
+            maximumFractionDigits: 2,
+            minimumFractionDigits: 2,
+          }),
           icon: (
             <Box
               sx={{

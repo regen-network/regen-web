@@ -27,6 +27,7 @@ const getSellOrdersTableRow = ({
   sellOrder: {
     askAmount,
     askDenom,
+    askDisplayDenom,
     batchDenom,
     id,
     amountAvailable,
@@ -42,7 +43,7 @@ const getSellOrdersTableRow = ({
   </WithLoader>,
   <Box sx={{ fontWeight: 700, display: 'flex', alignItems: 'center' }}>
     <DenomIcon
-      denom={askDenom}
+      denom={askDisplayDenom}
       sx={{ mr: 1, display: 'flex', alignItems: 'center' }}
     />
     {`${getDenomCurrencyPrefix({ denom: askDenom })}${formatNumber({

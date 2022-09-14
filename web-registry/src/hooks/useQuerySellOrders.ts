@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import {
   QueryClientImpl,
-  QuerySellOrdersResponse,
+  SellOrderInfo,
 } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import uniq from 'lodash/uniq';
 
@@ -11,14 +11,22 @@ import { useLedger } from '../ledger';
 
 export const IBC_DENOM_PREFIX = 'ibc/';
 
+export type SellOrderInfoExtented = SellOrderInfo & {
+  askDisplayDenom: string;
+};
+
+type QuerySellOrdersResponseExtented = {
+  sellOrders: SellOrderInfoExtented[];
+};
+
 export const useQuerySellOrders = function (): {
-  sellOrdersResponse: QuerySellOrdersResponse | undefined;
+  sellOrdersResponse: QuerySellOrdersResponseExtented | undefined;
   refetchSellOrders: () => void;
 } {
   const { api } = useLedger();
   const [queryClient, setQueryClient] = useState<QueryClientImpl>();
   const [sellOrdersResponse, setSellOrdersResponse] = useState<
-    QuerySellOrdersResponse | undefined
+    QuerySellOrdersResponseExtented | undefined
   >(undefined);
   const [refetchCount, setRefetchCount] = useState(0);
 
@@ -61,13 +69,14 @@ export const useQuerySellOrders = function (): {
 
         return {
           ...sellOrder,
-          askDenom: denomTrace ? denomTrace.baseDenom : sellOrder.askDenom,
+          askDisplayDenom: denomTrace
+            ? denomTrace.baseDenom
+            : sellOrder.askDenom,
         };
       });
 
       // Set updated response
       setSellOrdersResponse({
-        ...sellOrdersResponse,
         sellOrders: sellOrdersWithBaseDenom,
       });
     }

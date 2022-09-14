@@ -243,7 +243,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                               }}
                             >
                               <DenomIcon
-                                denom={selectedSellOrder?.askDenom ?? ''}
+                                denom={selectedSellOrder?.askDisplayDenom ?? ''}
                                 sx={{ mr: 1.5, mt: 1, alignSelf: 'flex-start' }}
                                 iconSx={{ height: 26 }}
                               />
@@ -253,7 +253,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                                   '-'}
                               </Title>
                               <DenomLabel
-                                denom={selectedSellOrder?.askDenom ?? ''}
+                                denom={selectedSellOrder?.askDisplayDenom ?? ''}
                                 size="sm"
                                 sx={{ color: 'info.dark' }}
                               />

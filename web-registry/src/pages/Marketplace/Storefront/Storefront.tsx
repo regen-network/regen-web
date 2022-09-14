@@ -186,6 +186,7 @@ export const Storefront = (): JSX.Element => {
 
   const {
     askAmount,
+    askDisplayDenom,
     askDenom,
     batchDenom,
     id: orderId,
@@ -204,7 +205,7 @@ export const Storefront = (): JSX.Element => {
       postalCode: '',
       retirementAction: 'autoretire',
       price: Number(askAmount),
-      askDenom: askDenom,
+      askDenom,
       batchDenom: batchDenom,
       sellOrderId: orderId,
     }),
@@ -281,6 +282,7 @@ export const Storefront = (): JSX.Element => {
               id: orderId,
               askAmount,
               askDenom,
+              askDisplayDenom,
               batchDenom,
               seller,
               quantity: amountAvailable,

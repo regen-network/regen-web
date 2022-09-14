@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { Box } from '@mui/material';
 import { MsgBuyDirect } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
+import { getDenomtrace } from 'utils/ibc/getDenomTrace';
 
 import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 import { Item } from 'web-components/lib/components/modal/TxModal';
@@ -10,6 +11,7 @@ import { getJurisdictionIsoCode } from 'web-components/lib/utils/locationStandar
 import { UseStateSetter } from 'types/react/use-state';
 import { microToDenom } from 'lib/denom.utils';
 
+import DenomIcon from 'components/molecules/DenomIcon';
 import { BuyCreditsValues } from 'components/organisms';
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
 
@@ -89,7 +91,9 @@ const useBuySellOrderSubmit = ({
         () => setSelectedSellOrder && setSelectedSellOrder(null),
       );
 
-      if (batchDenom && creditCount) {
+      if (batchDenom && creditCount && askDenom) {
+        const baseDenom = await getDenomtrace({ denom: askDenom });
+
         setCardItems([
           {
             label: 'total purchase price',
@@ -100,10 +104,10 @@ const useBuySellOrderSubmit = ({
                   sx={{
                     mr: '4px',
                     display: 'inline-block',
-                    verticalAlign: 'middle',
+                    verticalAlign: 'bottom',
                   }}
                 >
-                  <RegenTokenIcon />
+                  <DenomIcon denom={baseDenom} sx={{ display: 'flex' }} />
                 </Box>
               ),
             },

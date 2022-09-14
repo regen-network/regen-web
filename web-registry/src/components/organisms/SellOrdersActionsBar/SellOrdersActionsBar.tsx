@@ -33,7 +33,6 @@ export const SellOrdersActionsBar = ({
       >
         <span>
           <OutlinedButton
-            startIcon={<CurrentCreditsIcon height="18px" width="18px" />}
             onClick={onSellButtonClick}
             disabled={isSellButtonDisabled}
             sx={{ mr: 5 }}

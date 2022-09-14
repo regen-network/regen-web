@@ -1,5 +1,7 @@
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
+import { useLedger } from 'ledger';
+
 import { useProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders';
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
@@ -16,6 +18,7 @@ type ReponseType = {
 export const useBuySellOrderData = ({ projects }: Props): ReponseType => {
   const { sellOrdersResponse } = useQuerySellOrders();
   const sellOrders = sellOrdersResponse?.sellOrders;
+  const { wallet } = useLedger();
 
   const { projectsWithOrderData, loading: loadingProjects } =
     useProjectsSellOrders({
@@ -24,7 +27,8 @@ export const useBuySellOrderData = ({ projects }: Props): ReponseType => {
     });
 
   const isBuyFlowDisabled =
-    loadingProjects || projectsWithOrderData[0]?.sellOrders.length === 0;
+    (loadingProjects || projectsWithOrderData[0]?.sellOrders.length === 0) &&
+    !wallet?.address;
 
   return {
     isBuyFlowDisabled,

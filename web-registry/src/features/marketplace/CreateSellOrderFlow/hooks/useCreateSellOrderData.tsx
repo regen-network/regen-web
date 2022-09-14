@@ -21,7 +21,8 @@ export const useCreateSellOrderData = ({ projectId }: Props): ReponseType => {
     widthAdditionalData: false,
   });
 
-  const isSellFlowDisabled = isLoadingCredits || credits.length === 0;
+  const isSellFlowDisabled =
+    (isLoadingCredits || credits.length === 0) && !wallet?.address;
 
   return {
     isSellFlowDisabled,

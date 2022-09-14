@@ -3,7 +3,7 @@ import { SxProps } from '@mui/material';
 
 import type { Theme } from 'src/theme/muiTheme';
 
-import { Flex, FlexCol } from '../../box';
+import { Flex } from '../../box';
 import { EditButton } from '../../buttons/EditButton';
 import { Label } from '../../typography';
 import OnBoardingCard from '../OnBoardingCard';
@@ -33,7 +33,9 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
         <Label size="sm">{title}</Label>
         <EditButton onClick={onEditClick} />
       </Flex>
-      <FlexCol sx={{ mt: [4, 7], pb: 4, gap: [8, 10] }}>{children}</FlexCol>
+      <Flex col sx={{ mt: [4, 7], pb: 4, gap: [8, 10] }}>
+        {children}
+      </Flex>
     </OnBoardingCard>
   );
 };

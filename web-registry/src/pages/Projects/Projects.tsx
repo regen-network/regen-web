@@ -123,7 +123,10 @@ export const Projects: React.FC = () => {
           </Box>
         ))}
       </Box>
-      <BuySellOrderFlow selectedProject={selectedProject} />
+      <BuySellOrderFlow
+        selectedProject={selectedProject}
+        setSelectedProject={setSelectedProject}
+      />
     </Flex>
   );
 };

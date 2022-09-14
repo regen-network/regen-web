@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 
+import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
 
+import { UseStateSetter } from 'types/react/use-state';
 import { getHashUrl } from 'lib/block-explorer';
 
 import useBuySellOrderSubmit from 'pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit';
@@ -19,18 +21,26 @@ import { useMsgClient } from 'hooks';
 
 type Props = {
   selectedProject: ProjectWithOrderData | null;
+  setSelectedProject: UseStateSetter<ProjectWithOrderData | null>;
 };
 
-export const BuySellOrderFlow = ({ selectedProject }: Props): JSX.Element => {
+export const BuySellOrderFlow = ({
+  selectedProject,
+  setSelectedProject,
+}: Props): JSX.Element => {
   const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [txModalTitle, setTxModalTitle] = useState<string>('');
   const [txButtonTitle, setTxButtonTitle] = useState<string>('');
   const [txModalHeader, setTxModalHeader] = useState<string>('');
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
+  const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
   const navigate = useNavigate();
 
-  const closeBuyModal = (): void => setIsBuyModalOpen(false);
+  const closeBuyModal = (): void => {
+    setIsBuyModalOpen(false);
+    setSelectedProject(null);
+  };
   const closeProcessingModal = (): void => setIsProcessingModalOpen(false);
 
   const handleTxQueued = (): void => {
@@ -42,6 +52,7 @@ export const BuySellOrderFlow = ({ selectedProject }: Props): JSX.Element => {
     setTxModalHeader('');
     setDeliverTxResponse(undefined);
     setError(undefined);
+    setSelectedProject(null);
   };
   const handleError = (): void => {
     closeProcessingModal();
@@ -57,12 +68,6 @@ export const BuySellOrderFlow = ({ selectedProject }: Props): JSX.Element => {
     handleTxModalClose();
     navigate('/ecocredits/dashboard');
   };
-
-  useEffect(() => {
-    if (selectedProject) {
-      setIsBuyModalOpen(true);
-    }
-  }, [selectedProject]);
 
   const {
     signAndBroadcast,
@@ -85,6 +90,14 @@ export const BuySellOrderFlow = ({ selectedProject }: Props): JSX.Element => {
     setTxModalTitle,
     buttonTitle: VIEW_ECOCREDITS,
   });
+
+  useEffect(() => {
+    if (selectedProject && accountAddress) {
+      setIsBuyModalOpen(true);
+    } else if (selectedProject && !accountAddress) {
+      setDisplayErrorBanner(true);
+    }
+  }, [selectedProject, accountAddress]);
 
   return (
     <>
@@ -125,6 +138,9 @@ export const BuySellOrderFlow = ({ selectedProject }: Props): JSX.Element => {
         onButtonClick={handleTxModalClose}
         buttonTitle="close"
       />
+      {displayErrorBanner && (
+        <ErrorBanner text="Please connect to Keplr to use Regen Ledger features" />
+      )}
     </>
   );
 };

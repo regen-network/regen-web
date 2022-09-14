@@ -16,6 +16,7 @@ export interface NumberTextFieldProps extends TextFieldProps {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     position: 'relative',
+    width: '100%',
   },
   arrows: {
     position: 'absolute',

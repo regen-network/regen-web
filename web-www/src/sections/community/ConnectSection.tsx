@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
+import { useTheme } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
 
 import DiscordIcon from 'web-components/lib/components/icons/social/DiscordIcon';
@@ -23,8 +24,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   item: {
     [theme.breakpoints.up('sm')]: {
-      maxWidth: '20%',
-      flexBasis: '20%',
+      maxWidth: '25%',
+      flexBasis: '25%',
+    },
+    [theme.breakpoints.down('sm')]: {
+      maxWidth: '27%',
     },
   },
 }));
@@ -92,7 +96,7 @@ const CommunityConnectSection: React.FC = () => {
       href: content?.discordUrl || '',
       label: 'Discord',
       subLabel: content?.discordSubLabel || '',
-      small: true,
+      smallSvg: true,
     },
   ];
   return (

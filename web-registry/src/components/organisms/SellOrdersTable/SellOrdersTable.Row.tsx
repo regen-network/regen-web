@@ -2,6 +2,8 @@ import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { Box } from '@mui/material';
 
+import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
+import InfoLabel from 'web-components/lib/components/info-label';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';
 
@@ -71,6 +73,17 @@ const getSellOrdersTableRow = ({
   >
     {batchDenom}
   </Link>,
+  <Box>
+    <InfoLabel
+      label="Tradeable"
+      icon={
+        <ArrowDownIcon
+          color="#8F8F8F"
+          sx={{ display: 'flex', alignItems: 'center' }}
+        />
+      }
+    />
+  </Box>,
   <WithLoader isLoading={batchStartDate === undefined} variant="skeleton">
     <Box sx={{ color: 'info.main' }}>
       {batchStartDate ? formatDate(batchStartDate) : ''}

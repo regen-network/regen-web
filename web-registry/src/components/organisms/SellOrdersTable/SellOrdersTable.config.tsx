@@ -9,6 +9,7 @@ export const SELL_ORDERS_ROW = [
   <Box sx={{ width: '70px', whiteSpace: 'normal' }}>{'AMOUNT AVAILABLE'}</Box>,
   <Box sx={{ width: '70px', whiteSpace: 'normal' }}>{'CREDIT CLASS'}</Box>,
   <Box sx={{ width: '74px', whiteSpace: 'normal' }}>{'BATCH DENOM'}</Box>,
+  <Box sx={{ width: '74px', whiteSpace: 'normal' }}>{'PURCHASE OPTION'}</Box>,
   <Box sx={{ width: '84px', whiteSpace: 'normal' }}>{'BATCH START DATE'}</Box>,
   <Box sx={{ width: '72px', whiteSpace: 'normal' }}>{'BATCH END DATE'}</Box>,
   'SELLER',

@@ -9,12 +9,17 @@ import { getInfoLabelColorMapping } from './InfoLabel.utils';
 
 export interface Props {
   label: string;
-  variant: InfoLabelVariant;
+  variant?: InfoLabelVariant;
   icon?: React.ReactNode;
   sx?: SxProps<Theme>;
 }
 
-const InfoLabel = ({ label, variant, icon, sx = [] }: Props): JSX.Element => {
+const InfoLabel = ({
+  label,
+  variant = 'default',
+  icon,
+  sx = [],
+}: Props): JSX.Element => {
   const theme = useTheme();
   const infoLabelColorMapping = useMemo(
     () => getInfoLabelColorMapping({ theme }),

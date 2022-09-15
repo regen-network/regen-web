@@ -4,8 +4,11 @@ import StaticMap from 'web-components/lib/components/map/StaticMap';
 import { Asset } from 'web-components/lib/components/sliders/ProjectMedia';
 import { UrlType } from 'web-components/lib/utils/schemaURL';
 
-const IMAGE_STORAGE_BASE_URL = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
-const API_URI = process.env.REACT_APP_API_URI;
+import {
+  API_URI,
+  IMAGE_STORAGE_BASE_URL,
+  MAPBOX_TOKEN,
+} from '../ProjectDetails.config';
 
 interface InputProps {
   metadata: any;
@@ -38,10 +41,7 @@ export default function useMedia({
     }
     if (geojson) {
       noGalleryAssets.push(
-        <StaticMap
-          geojson={geojson}
-          mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
-        />,
+        <StaticMap geojson={geojson} mapboxToken={MAPBOX_TOKEN} />,
       );
     }
 

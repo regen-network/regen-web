@@ -208,6 +208,7 @@ export const Storefront = (): JSX.Element => {
       askDenom,
       batchDenom: batchDenom,
       sellOrderId: orderId,
+      agreeErpa: false,
     }),
     [askAmount, askDenom, batchDenom, orderId],
   );
@@ -337,7 +338,10 @@ export const Storefront = (): JSX.Element => {
         )}
       />
       {displayErrorBanner && (
-        <ErrorBanner text="Please connect to Keplr to use Regen Ledger features" />
+        <ErrorBanner
+          text="Please connect to Keplr to use Regen Ledger features"
+          onClose={() => setDisplayErrorBanner(false)}
+        />
       )}
     </Box>
   );

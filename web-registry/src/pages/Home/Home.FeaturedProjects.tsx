@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 
-import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow';
+import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 import { ProjectCardsSection } from 'components/organisms/ProjectCardsSection/ProjectCardsSection';
 
@@ -14,13 +14,17 @@ export function FeaturedProjects(): JSX.Element {
   const { featuredProjects } = useFeaturedProjects();
   const [selectedProject, setSelectedProject] =
     useState<ProjectWithOrderData | null>(null);
+  const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
 
   return (
     <div id="projects">
       <ProjectCardsSection
         title="Featured Projects"
         projects={featuredProjects}
-        onButtonClick={setSelectedProject}
+        onButtonClick={({ project }) => {
+          setSelectedProject(project);
+          setIsBuyFlowStarted(true);
+        }}
       />
       <Box sx={{ display: 'flex', justifyContent: 'center', mb: 20 }}>
         <Link to="/projects">
@@ -28,8 +32,9 @@ export function FeaturedProjects(): JSX.Element {
         </Link>
       </Box>
       <BuySellOrderFlow
+        isFlowStarted={isBuyFlowStarted}
+        setIsFlowStarted={setIsBuyFlowStarted}
         selectedProject={selectedProject}
-        setSelectedProject={setSelectedProject}
       />
     </div>
   );

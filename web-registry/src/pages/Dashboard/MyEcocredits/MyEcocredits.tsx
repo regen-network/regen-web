@@ -132,6 +132,8 @@ export const MyEcocredits = (): JSX.Element => {
     reloadBalances();
   };
 
+  const onCreateSellOrderBroadcast = (): void => setSellOrderCreateOpen(-1);
+
   const {
     signAndBroadcast,
     setDeliverTxResponse,
@@ -231,8 +233,8 @@ export const MyEcocredits = (): JSX.Element => {
     signAndBroadcast,
     setCardItems,
     setTxModalHeader,
-    setSellOrderCreateOpen,
     setTxButtonTitle,
+    onTxBroadcast: onCreateSellOrderBroadcast,
   });
 
   const sxs = {

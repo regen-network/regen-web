@@ -6,6 +6,7 @@ import {
   FooterItemProps as FooterItem,
 } from 'web-components/lib/components/footer/footer-new';
 
+import { URL_PRIVACY, URL_TERMS_SERVICE } from '../../globals';
 import { chainId, nctBasket } from '../../lib/ledger';
 import { Link, RegistryIconLink } from '../atoms';
 
@@ -77,8 +78,8 @@ const AppFooter: React.FC = () => {
       footerItems={footerItems}
       iconLink={RegistryIconLink}
       linkComponent={Link}
-      privacyUrl="https://www.regen.network/privacy-policy"
-      termsUrl="https://www.regen.network/terms-service"
+      privacyUrl={URL_PRIVACY}
+      termsUrl={URL_TERMS_SERVICE}
     />
   );
 };

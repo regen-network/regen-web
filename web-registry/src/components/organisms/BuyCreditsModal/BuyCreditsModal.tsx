@@ -7,7 +7,7 @@ import Collapse from '@mui/material/Collapse';
 import Grid from '@mui/material/Grid';
 import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import cx from 'clsx';
-import { Field, Form, Formik } from 'formik';
+import { Field, Form, Formik, FormikErrors } from 'formik';
 import { RadioGroup } from 'formik-mui';
 
 import { Flex } from 'web-components/lib/components/box';
@@ -15,11 +15,13 @@ import Card from 'web-components/lib/components/cards/Card';
 import Submit from 'web-components/lib/components/form/Submit';
 import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
 import { Image } from 'web-components/lib/components/image';
+import AgreeErpaCheckbox from 'web-components/lib/components/inputs/AgreeErpaCheckbox';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
 import SelectFieldFallback from 'web-components/lib/components/inputs/SelectFieldFallback';
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
+import { requirementAgreement } from 'web-components/lib/components/inputs/validation';
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import Tooltip from 'web-components/lib/components/tooltip/InfoTooltip';
 import {
@@ -88,6 +90,7 @@ export interface BuyCreditsValues {
   askDenom?: string;
   batchDenom?: string;
   sellOrderId: string;
+  agreeErpa: boolean;
 }
 
 const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
@@ -104,12 +107,27 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
   const { selectedSellOrder, SetSelectedSellOrderElement } =
     useSetSelectedSellOrder(project);
 
+  const validationHandler = (
+    values: BuyCreditsValues,
+  ): FormikErrors<BuyCreditsValues> => {
+    let errors: FormikErrors<BuyCreditsValues> = {};
+
+    if (!values.agreeErpa) errors.agreeErpa = requirementAgreement;
+
+    return errors;
+  };
+
   const allowedDenomsResponse = useMarketplaceQuery<QueryAllowedDenomsResponse>(
     {
       query: 'allowedDenoms',
       params: {},
     },
   );
+
+  const sellOrdersOptions = getOptions({
+    project,
+    allowedDenomsData: allowedDenomsResponse?.data,
+  });
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -152,6 +170,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
           enableReinitialize
           validateOnMount
           initialValues={initialValues || BUY_CREDITS_MODAL_DEFAULT_VALUES}
+          validate={validationHandler}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
             try {
@@ -179,9 +198,12 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                   <Field
                     name="sellOrderId"
                     component={SelectTextField}
-                    options={getOptions({ project })}
+                    options={sellOrdersOptions}
                     sx={{ mb: theme.spacing(10.5) }}
-                    disabled={!!initialValues?.sellOrderId}
+                    disabled={
+                      !!initialValues?.sellOrderId ||
+                      sellOrdersOptions.length === 1
+                    }
                   />
                   <SetSelectedSellOrderElement />
                   <Collapse in={!!selectedSellOrder}>
@@ -390,6 +412,8 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       optional
                     />
                   </Collapse>
+
+                  <AgreeErpaCheckbox />
                 </Form>
                 <Submit
                   isSubmitting={isSubmitting}

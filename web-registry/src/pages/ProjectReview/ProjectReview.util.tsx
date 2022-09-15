@@ -119,6 +119,5 @@ const getStateProvince = (
   stateProvince: string,
 ): string | undefined => {
   const subdivision = iso3166.subdivision(countryKey, stateProvince);
-  console.log('subdivision', subdivision);
   return subdivision?.name;
 };

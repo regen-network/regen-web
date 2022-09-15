@@ -22,7 +22,6 @@ const ProjectMetadataCFC: React.FC<CFCMetadataProps> = ({
   const [expanded, setExpanded] = useState(false);
   const cfcProjectId = metadata?.['regen:cfcProjectId'];
 
-  console.log('ProjectMetadataCFC', projectId, metadata);
   if (!metadata || !cfcProjectId) {
     return null;
   }

@@ -1,0 +1,21 @@
+import { FlexCol } from 'web-components/lib/components/box';
+
+const SideBarBox: React.FC = ({ children }) => {
+  return (
+    <FlexCol
+      sx={{
+        borderRadius: '10px',
+        border: theme => `1px solid ${theme.palette.grey[100]}`,
+        bgcolor: 'primary.main',
+        px: 5,
+        py: 11,
+        my: 4,
+        minWidth: theme => ['0', theme.spacing(91.75)],
+      }}
+    >
+      {children}
+    </FlexCol>
+  );
+};
+
+export { SideBarBox };

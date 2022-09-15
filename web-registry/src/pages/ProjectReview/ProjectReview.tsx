@@ -22,7 +22,7 @@ import {
 } from '../../generated/graphql';
 import {
   ProjectMetadataLD,
-  VCSProjectMetadataLD,
+  VCSProjectMetadataLD, //TODO
 } from '../../generated/json-ld';
 import useMsgClient from '../../hooks/useMsgClient';
 import { getHashUrl } from '../../lib/block-explorer';

@@ -1,25 +1,47 @@
+import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import { formatNumber } from 'web-components/lib/utils/format';
 
-import { formatDenomText, microToDenom } from 'lib/denom.utils';
+import { microToDenom } from 'lib/denom.utils';
 
 import { UISellOrderInfo } from 'pages/Projects/Projects.types';
+import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
 
 import { BuyCreditsProject, BuyCreditsValues } from '..';
 
-export const getSellOrderLabel = (sellOrder: UISellOrderInfo): string => {
-  const { id, askAmount, askDenom = '', quantity } = { ...sellOrder };
-  const denom = formatDenomText(askDenom);
+type GetSellOrderLabelParams = {
+  sellOrder: UISellOrderInfo;
+  allowedDenomsData?: QueryAllowedDenomsResponse;
+};
+export const getSellOrderLabel = ({
+  sellOrder,
+  allowedDenomsData,
+}: GetSellOrderLabelParams): string => {
+  const { id, askAmount, askDenom, quantity } = {
+    ...sellOrder,
+  };
   const price = microToDenom(askAmount);
-  return `${id} (${price} ${denom}/credit: ${quantity} credit(s) available)`;
+  const displayDenom = findDisplayDenom({
+    allowedDenomsData,
+    denom: askDenom,
+  });
+  return `${id} (${price} ${displayDenom}/credit: ${quantity} credit(s) available)`;
 };
 
-export const getOptions = (project: BuyCreditsProject): Option[] => {
+type GetOptionsParams = {
+  project: BuyCreditsProject;
+  allowedDenomsData?: QueryAllowedDenomsResponse;
+};
+export const getOptions = ({
+  project,
+  allowedDenomsData,
+}: GetOptionsParams): Option[] => {
   if (!project?.sellOrders?.length) return [];
 
   const sellOrderOptions = project?.sellOrders.map(sellOrder => {
     return {
-      label: getSellOrderLabel(sellOrder),
+      label: getSellOrderLabel({ sellOrder, allowedDenomsData }),
       value: sellOrder.id,
     };
   });

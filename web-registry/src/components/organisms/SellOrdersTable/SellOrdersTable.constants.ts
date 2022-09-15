@@ -1,0 +1,2 @@
+export const MAXIMUM_FRACTION_DIGITS = 2;
+export const MINIMUM_FRACTION_DIGITS = 2;

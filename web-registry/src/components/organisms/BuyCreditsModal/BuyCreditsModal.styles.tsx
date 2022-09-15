@@ -5,9 +5,6 @@ export const useBuyCreditsModalStyles = makeStyles(theme => ({
     height: '100%',
     borderRadius: theme.spacing(2),
   },
-  flex: {
-    display: 'flex',
-  },
   flexColumn: {
     display: 'flex',
     flexDirection: 'column',

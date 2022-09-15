@@ -4,6 +4,7 @@ import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCar
 
 export interface UISellOrderInfo extends Omit<SellOrderInfo, 'id' | '$type'> {
   id: string;
+  askBaseDenom: string;
 }
 
 export interface ProjectWithOrderData extends ProjectCardProps {

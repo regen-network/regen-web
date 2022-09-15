@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { Box } from '@mui/material';
 import { MsgCancelSellOrder } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
+import { getDenomtrace } from 'utils/ibc/getDenomTrace';
 
-import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import {
   formatNumber,
@@ -12,6 +12,7 @@ import {
 import { UseStateSetter } from 'types/react/use-state';
 import { microToDenom } from 'lib/denom.utils';
 
+import DenomIcon from 'components/molecules/DenomIcon';
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import {
@@ -49,7 +50,8 @@ const useCancelSellOrderSubmit = ({
   const cancelSellOrderSubmit = useCallback(async (): Promise<void> => {
     if (!accountAddress) return Promise.reject();
 
-    const { batchDenom, amountAvailable, askAmount, id } = selectedSellOrder;
+    const { batchDenom, amountAvailable, askAmount, id, askDenom } =
+      selectedSellOrder;
     setIsProcessingModalOpen(true);
     setSelectedSellOrder(null);
 
@@ -66,6 +68,8 @@ const useCancelSellOrderSubmit = ({
 
     signAndBroadcast(tx, () => setSelectedSellOrder(null));
     setIsProcessingModalOpen(false);
+
+    const baseDenom = await getDenomtrace({ denom: askDenom });
 
     setCardItems([
       {
@@ -85,10 +89,10 @@ const useCancelSellOrderSubmit = ({
               sx={{
                 mr: '4px',
                 display: 'inline-block',
-                verticalAlign: 'middle',
+                verticalAlign: 'bottom',
               }}
             >
-              <RegenTokenIcon />
+              <DenomIcon denom={baseDenom} sx={{ display: 'flex' }} />
             </Box>
           ),
         },

@@ -30,11 +30,11 @@ const Layout: React.FC<PageProps> = ({ children, location }) => {
       items: [
         {
           title: 'Buyers',
-          href: 'https://registry.regen.network/buyers/',
+          href: 'https://app.regen.network/buyers/',
         },
         {
           title: 'Land Stewards',
-          href: 'https://registry.regen.network/land-stewards/',
+          href: 'https://app.regen.network/land-stewards/',
         },
         {
           title: 'Community',

@@ -1,10 +1,11 @@
-import React from 'react';
+import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Skeleton } from '@mui/material';
 import { useTheme } from '@mui/styles';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import { QueryProjectResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
+import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
 import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import SEO from 'web-components/lib/components/seo';
@@ -14,6 +15,12 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 
+import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
+import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
+import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
+import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
+import { useResetErrorBanner } from 'pages/Marketplace/Storefront/hooks/useResetErrorBanner';
+import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { usePaginatedBatchesByProject } from 'hooks/batches/usePaginatedBatchesByProject';
 
 import {
@@ -53,9 +60,15 @@ const testProject: Project = {};
 function ProjectDetails(): JSX.Element {
   const theme = useTheme<Theme>();
   const { projectId } = useParams();
+  const { wallet } = useLedger();
   const { data: sanityCreditClassData } = useAllCreditClassQuery({
     client: sanityClient,
   });
+  const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
+  const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
+  const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
+
+  useResetErrorBanner({ displayErrorBanner, setDisplayErrorBanner });
 
   // Page mode (info/Tx)
   const isTxMode =
@@ -147,6 +160,19 @@ function ProjectDetails(): JSX.Element {
     viewOnLedger,
   } = useIssuanceModal(data);
 
+  const projects = useMemo(
+    () => (onChainProject ? [onChainProject] : undefined),
+    [onChainProject],
+  );
+
+  const { isBuyFlowDisabled, projectsWithOrderData } = useBuySellOrderData({
+    projects,
+  });
+
+  const { credits, isSellFlowDisabled } = useCreateSellOrderData({
+    projectId: projectsWithOrderData[0]?.id,
+  });
+
   if (!isLoading && !project) return <NotFoundPage />;
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
@@ -175,6 +201,21 @@ function ProjectDetails(): JSX.Element {
           />
         </Box>
       )}
+
+      <SellOrdersActionsBar
+        isSellButtonDisabled={isSellFlowDisabled}
+        isBuyButtonDisabled={isBuyFlowDisabled}
+        onSellButtonClick={
+          wallet?.address
+            ? () => setIsSellFlowStarted(true)
+            : () => setDisplayErrorBanner(true)
+        }
+        onBuyButtonClick={
+          wallet?.address
+            ? () => setIsBuyFlowStarted(true)
+            : () => setDisplayErrorBanner(true)
+        }
+      />
 
       <ProjectTopSection
         data={data}
@@ -229,6 +270,23 @@ function ProjectDetails(): JSX.Element {
           projectId={projectId}
           testProject={testProject}
           creditDenom={creditClassDenom || creditClassName}
+        />
+      )}
+
+      <BuySellOrderFlow
+        isFlowStarted={isBuyFlowStarted}
+        setIsFlowStarted={setIsBuyFlowStarted}
+        selectedProject={projectsWithOrderData[0]}
+      />
+      <CreateSellOrderFlow
+        isFlowStarted={isSellFlowStarted}
+        setIsFlowStarted={setIsSellFlowStarted}
+        credits={credits}
+      />
+      {displayErrorBanner && (
+        <ErrorBanner
+          text="Please install Keplr extension to use Regen Ledger features"
+          onClose={() => setDisplayErrorBanner(false)}
         />
       )}
     </Box>

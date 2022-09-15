@@ -1,5 +1,2 @@
+https://registry.regen.network/*  https://app.regen.network/:splat 301!
 /*    /index.html   200
-
-/projects  /projects/wilmot  200
-/projects/impactag  /projects/wilmot  200
-/projects/impactag/admin /projects/wilmot/admin 200

@@ -18,6 +18,7 @@ import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
 import { KeplrRoute, ProtectedRoute, ScrollToTop } from './components/atoms';
 import PageLoader from './components/atoms/PageLoader';
 import { AppFooter, RegistryNav } from './components/organisms';
+import { URL_PRIVACY, URL_TERMS_SERVICE } from './globals';
 import isAdmin from './lib/admin';
 import { useGoogleAnalyticsInit } from './lib/ga';
 import { ProjectMetadata } from './pages/ProjectMetadata/ProjectMetadata';
@@ -314,10 +315,7 @@ const App: React.FC = (): JSX.Element => {
             <Route path="*" element={<NotFoundPage />} />
           </SentryRoutes>
         </Suspense>
-        <CookiesBanner
-          privacyUrl="https://www.regen.network/privacy-policy/"
-          TOSUrl="https://www.regen.network/terms-service/"
-        />
+        <CookiesBanner privacyUrl={URL_PRIVACY} TOSUrl={URL_TERMS_SERVICE} />
         <footer>
           <AppFooter />
         </footer>

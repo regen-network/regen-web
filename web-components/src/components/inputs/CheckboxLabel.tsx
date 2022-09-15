@@ -3,6 +3,7 @@ import FormControlLabel, {
   FormControlLabelProps,
 } from '@mui/material/FormControlLabel';
 import FormHelperText from '@mui/material/FormHelperText';
+import { useTheme } from '@mui/styles';
 import { getIn } from 'formik';
 import { CheckboxProps } from 'formik-mui';
 
@@ -20,6 +21,7 @@ export default function CheckboxLabel({
   sx = [],
   ...props
 }: CheckboxLabelProps): JSX.Element {
+  const theme = useTheme();
   const {
     form: { errors, touched },
     field: { name },
@@ -47,7 +49,15 @@ export default function CheckboxLabel({
         label={isLabelStringOrNumber ? <Subtitle>{label}</Subtitle> : label}
       />
       {showError && (
-        <FormHelperText error={showError}>{fieldError}</FormHelperText>
+        <FormHelperText error={showError} sx={{ ml: 9 }}>
+          <Subtitle
+            as="span"
+            size="sm"
+            sx={{ color: theme.palette.error.main }}
+          >
+            {fieldError}
+          </Subtitle>
+        </FormHelperText>
       )}
     </>
   );

@@ -1,3 +1,4 @@
+import { URL_WEB_PRIVACY, URL_WEB_TERMS_SERVICE } from '../../utils/globals';
 import { BasketPutForm } from './BasketPutForm';
 import { BasketTakeForm } from './BasketTakeForm';
 import { CreditRetireForm } from './CreditRetireForm';
@@ -42,18 +43,18 @@ export const userProfile = (): JSX.Element => (
 export const signUpForm = (): JSX.Element => (
   <LoginForm
     submit={submit}
-    termsLink="https://www.regen.network/terms-service/"
+    termsLink={URL_WEB_TERMS_SERVICE}
     loginFromSignup={submit}
-    privacyLink="https://www.regen.network/privacy-policy/"
+    privacyLink={URL_WEB_PRIVACY}
   />
 );
 
 export const loginForm = (): JSX.Element => (
   <LoginForm
     submit={submit}
-    termsLink="https://www.regen.network/terms-service/"
+    termsLink={URL_WEB_TERMS_SERVICE}
     signupFromLogin="/"
-    privacyLink="https://www.regen.network/privacy-policy/"
+    privacyLink={URL_WEB_PRIVACY}
   />
 );
 

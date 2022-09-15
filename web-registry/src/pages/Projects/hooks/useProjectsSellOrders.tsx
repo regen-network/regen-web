@@ -19,21 +19,25 @@ type Props = {
   limit?: number;
 };
 
+export interface ProjectsSellOrders {
+  projectsWithOrderData: ProjectWithOrderData[];
+  loading: boolean;
+}
+
 export const useProjectsSellOrders = ({
   projects,
   sellOrders,
   regenPrice,
   limit,
-}: Props): {
-  projectsWithOrderData: ProjectWithOrderData[];
-  loading: boolean;
-} => {
+}: Props): ProjectsSellOrders => {
   const [projectsWithOrderData, setProjectsWithOrderData] = useState<
     ProjectWithOrderData[]
   >([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    if (projectsWithOrderData.length > 0) return;
+
     const normalize = async (): Promise<void> => {
       if (projects && sellOrders) {
         const _projectsWithOrders = await getProjectDisplayData(
@@ -47,7 +51,7 @@ export const useProjectsSellOrders = ({
       }
     };
     normalize();
-  }, [projects, sellOrders, regenPrice, limit]);
+  }, [projectsWithOrderData, projects, sellOrders, regenPrice, limit]);
 
   return { projectsWithOrderData, loading };
 };

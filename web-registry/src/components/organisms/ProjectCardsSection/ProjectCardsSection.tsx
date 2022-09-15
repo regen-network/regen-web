@@ -9,12 +9,13 @@ import WithLoader from 'components/atoms/WithLoader';
 
 import { API_URI, IMAGE_STORAGE_BASE_URL } from './ProjectCardsSection.config';
 import { useSectionStyles } from './ProjectCardsSection.styles';
+import { ProjectCardOnButtonClickParams } from './ProjectCardsSection.types';
 
 interface Props {
   projects: ProjectWithOrderData[];
   title?: string;
   titleAlign?: 'center' | 'left';
-  onButtonClick?: ({ project }: { project: ProjectWithOrderData }) => void;
+  onButtonClick?: (params: ProjectCardOnButtonClickParams) => void;
 }
 
 export function ProjectCardsSection({
@@ -53,7 +54,9 @@ export function ProjectCardsSection({
                 place={project.place}
                 area={project.area}
                 areaUnit={project.areaUnit}
-                onButtonClick={onButtonClick && (() => onButtonClick(project))}
+                onButtonClick={
+                  onButtonClick && (() => onButtonClick({ project }))
+                }
                 purchaseInfo={project.purchaseInfo}
                 onClick={() => navigate(`/projects/${project.id}`)}
                 imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}

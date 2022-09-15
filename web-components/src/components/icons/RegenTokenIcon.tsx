@@ -1,11 +1,11 @@
 import React from 'react';
-import SvgIcon from '@mui/material/SvgIcon';
+import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
-interface IconProps {
+interface IconProps extends SvgIconProps {
   className?: string;
 }
 
-function RegenTokenIcon({ className }: IconProps): JSX.Element {
+function RegenTokenIcon({ className, sx = [] }: IconProps): JSX.Element {
   return (
     <SvgIcon
       className={className}
@@ -14,6 +14,7 @@ function RegenTokenIcon({ className }: IconProps): JSX.Element {
       viewBox="0 0 70 70"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      sx={[...(Array.isArray(sx) ? sx : [sx])]}
     >
       <circle cx="35" cy="35" r="35" fill="url(#paint0_linear)" />
       <path

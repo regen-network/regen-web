@@ -8,6 +8,7 @@ import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
 import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';
 import PlayIcon from '../icons/PlayIcon';
 import { Image, OptimizeImageProps } from '../image';
+import { ProjectAsset } from './ProjectMedia.ProjectAsset';
 
 export interface Media {
   src: string;
@@ -30,7 +31,7 @@ interface StyleProps {
   mobileHeight?: string | number;
 }
 
-function isMedia(a: Asset): a is Media {
+export function isMedia(a: Asset): a is Media {
   return (a as Media).src !== undefined;
 }
 
@@ -283,19 +284,6 @@ export default function ProjectMedia({
     },
   };
 
-  const ProjectAsset: React.FC<{ asset: Asset }> = ({ asset }) =>
-    isMedia(asset) ? (
-      <Image
-        className={classes.image}
-        src={asset.src}
-        alt={asset.src}
-        imageStorageBaseUrl={imageStorageBaseUrl}
-        apiServerUrl={apiServerUrl}
-      />
-    ) : (
-      <div className={classes.element}>{asset}</div>
-    );
-
   return (
     <div>
       {matches && gridView ? (
@@ -303,21 +291,41 @@ export default function ProjectMedia({
           {assets.length >= 4 && (
             <Grid container className={classes.grid}>
               <Grid item className={classes.sideGrid}>
-                <ProjectAsset asset={assets[0]} />
+                <ProjectAsset
+                  asset={assets[0]}
+                  apiServerUrl={apiServerUrl}
+                  imageStorageBaseUrl={imageStorageBaseUrl}
+                  classes={classes}
+                />
                 {imageCredits && (
                   <div className={classes.imageCredits}>{imageCredits}</div>
                 )}
               </Grid>
               <Grid item className={classes.centreGrid}>
                 <div className={classes.imageContainer}>
-                  <ProjectAsset asset={assets[1]} />
+                  <ProjectAsset
+                    asset={assets[1]}
+                    apiServerUrl={apiServerUrl}
+                    imageStorageBaseUrl={imageStorageBaseUrl}
+                    classes={classes}
+                  />
                 </div>
                 <div className={classes.imageContainer}>
-                  <ProjectAsset asset={assets[2]} />
+                  <ProjectAsset
+                    asset={assets[2]}
+                    apiServerUrl={apiServerUrl}
+                    imageStorageBaseUrl={imageStorageBaseUrl}
+                    classes={classes}
+                  />
                 </div>
               </Grid>
               <Grid item className={classes.sideGrid}>
-                <ProjectAsset asset={assets[3]} />
+                <ProjectAsset
+                  asset={assets[3]}
+                  apiServerUrl={apiServerUrl}
+                  imageStorageBaseUrl={imageStorageBaseUrl}
+                  classes={classes}
+                />
               </Grid>
             </Grid>
           )}
@@ -335,7 +343,12 @@ export default function ProjectMedia({
                   className={classes.elementContainer}
                   key={i}
                 >
-                  <ProjectAsset asset={a} />
+                  <ProjectAsset
+                    asset={a}
+                    apiServerUrl={apiServerUrl}
+                    imageStorageBaseUrl={imageStorageBaseUrl}
+                    classes={classes}
+                  />
                   {i === 0 && isMedia(a) && imageCredits && (
                     <Box className={classes.imageCredits} sx={{ pl: 5 }}>
                       {imageCredits}

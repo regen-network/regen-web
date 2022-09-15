@@ -4,7 +4,7 @@ import {
   EEUR_DENOM,
   GRAVITY_USDC_DENOM,
   REGEN_DENOM,
-} from 'config/allowedDenoms';
+} from 'config/allowedBaseDenoms';
 
 import AxlUsdcIcon from 'web-components/lib/components/icons/coins/AxlUsdcIcon';
 import EeurIcon from 'web-components/lib/components/icons/coins/EeurIcon';

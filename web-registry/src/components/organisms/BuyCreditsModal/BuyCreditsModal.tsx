@@ -5,6 +5,7 @@ import { Box, useTheme } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import Collapse from '@mui/material/Collapse';
 import Grid from '@mui/material/Grid';
+import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import cx from 'clsx';
 import { Field, Form, Formik } from 'formik';
 import { RadioGroup } from 'formik-mui';
@@ -26,11 +27,13 @@ import {
   Title,
 } from 'web-components/lib/components/typography';
 
-import { formatDenomText, microToDenom } from 'lib/denom.utils';
+import { microToDenom } from 'lib/denom.utils';
 
 import { UISellOrderInfo } from 'pages/Projects/Projects.types';
 import DenomIcon from 'components/molecules/DenomIcon';
 import DenomLabel from 'components/molecules/DenomLabel';
+import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
+import useMarketplaceQuery from 'hooks/useMarketplaceQuery';
 
 import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
 import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
@@ -90,7 +93,6 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
   open,
   onSubmit,
   onClose,
-  onTxQueued,
   initialValues,
   project,
   apiServerUrl,
@@ -100,6 +102,13 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
   const theme = useTheme();
   const { selectedSellOrder, SetSelectedSellOrderElement } =
     useSetSelectedSellOrder(project);
+
+  const allowedDenomsResponse = useMarketplaceQuery<QueryAllowedDenomsResponse>(
+    {
+      query: 'allowedDenoms',
+      params: {},
+    },
+  );
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -171,7 +180,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                   <Field
                     name="sellOrderId"
                     component={SelectTextField}
-                    options={getOptions(project)}
+                    options={getOptions({ project })}
                     sx={{ mb: theme.spacing(10.5) }}
                     disabled={!!initialValues?.sellOrderId}
                   />
@@ -192,9 +201,10 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       >
                         {`${microToDenom(
                           selectedSellOrder?.askAmount || '',
-                        )} ${formatDenomText(
-                          selectedSellOrder?.askDenom || '',
-                        )}/credit`}
+                        )} ${findDisplayDenom({
+                          allowedDenomsData: allowedDenomsResponse?.data,
+                          denom: selectedSellOrder?.askDenom ?? '',
+                        })}/credit`}
                       </Body>
                       <Body
                         size="md"
@@ -243,7 +253,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                               }}
                             >
                               <DenomIcon
-                                denom={selectedSellOrder?.askDisplayDenom ?? ''}
+                                denom={selectedSellOrder?.askBaseDenom ?? ''}
                                 sx={{ mr: 1.5, mt: 1, alignSelf: 'flex-start' }}
                                 iconSx={{ height: 26 }}
                               />
@@ -253,7 +263,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                                   '-'}
                               </Title>
                               <DenomLabel
-                                denom={selectedSellOrder?.askDisplayDenom ?? ''}
+                                denom={selectedSellOrder?.askDenom ?? ''}
                                 size="sm"
                                 sx={{ color: 'info.dark' }}
                               />

@@ -1,4 +1,4 @@
-import { EUR_DENOMS, USD_DENOMS } from 'config/allowedDenoms';
+import { EUR_DENOMS, USD_DENOMS } from 'config/allowedBaseDenoms';
 
 import { SellOrderStatus } from '../../../pages/Marketplace/Storefront/Storefront.types';
 
@@ -26,13 +26,13 @@ export const getSellOrderColor = ({
 };
 
 type GetDenomCurrencyPrefixParams = {
-  denom: string;
+  baseDenom: string;
 };
 export const getDenomCurrencyPrefix = ({
-  denom,
+  baseDenom,
 }: GetDenomCurrencyPrefixParams): string => {
-  if (USD_DENOMS.includes(denom)) return '$';
-  if (EUR_DENOMS.includes(denom)) return '€';
+  if (USD_DENOMS.includes(baseDenom)) return '$';
+  if (EUR_DENOMS.includes(baseDenom)) return '€';
 
   return '';
 };

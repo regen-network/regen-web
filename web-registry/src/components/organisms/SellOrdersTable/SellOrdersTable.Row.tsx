@@ -27,7 +27,7 @@ const getSellOrdersTableRow = ({
   sellOrder: {
     askAmount,
     askDenom,
-    askDisplayDenom,
+    askBaseDenom,
     batchDenom,
     id,
     amountAvailable,
@@ -43,10 +43,10 @@ const getSellOrdersTableRow = ({
   </WithLoader>,
   <Box sx={{ fontWeight: 700, display: 'flex', alignItems: 'center' }}>
     <DenomIcon
-      denom={askDisplayDenom}
+      denom={askBaseDenom}
       sx={{ mr: 1, display: 'flex', alignItems: 'center' }}
     />
-    {`${getDenomCurrencyPrefix({ denom: askDenom })}${formatNumber({
+    {`${getDenomCurrencyPrefix({ baseDenom: askBaseDenom })}${formatNumber({
       num: microToDenom(askAmount),
       maximumFractionDigits: MAXIMUM_FRACTION_DIGITS,
       minimumFractionDigits: MINIMUM_FRACTION_DIGITS,

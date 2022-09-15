@@ -12,7 +12,7 @@ import { useLedger } from '../ledger';
 export const IBC_DENOM_PREFIX = 'ibc/';
 
 export type SellOrderInfoExtented = SellOrderInfo & {
-  askDisplayDenom: string;
+  askBaseDenom: string;
 };
 
 type QuerySellOrdersResponseExtented = {
@@ -69,9 +69,7 @@ export const useQuerySellOrders = function (): {
 
         return {
           ...sellOrder,
-          askDisplayDenom: denomTrace
-            ? denomTrace.baseDenom
-            : sellOrder.askDenom,
+          askBaseDenom: denomTrace ? denomTrace.baseDenom : sellOrder.askDenom,
         };
       });
 

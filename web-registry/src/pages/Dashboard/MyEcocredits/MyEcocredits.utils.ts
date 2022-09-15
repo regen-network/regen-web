@@ -49,7 +49,7 @@ export const getDenomAllowedOptions = ({
 }: GetDenomAllowedOptionsParams): Option[] => {
   const allowedDenomsOptions: Option[] =
     allowedDenoms?.map(denom => ({
-      label: denom.displayDenom.toUpperCase(),
+      label: denom.displayDenom,
       value: denom.bankDenom,
     })) ?? [];
   allowedDenomsOptions.unshift({

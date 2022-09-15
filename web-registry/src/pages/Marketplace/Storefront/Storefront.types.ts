@@ -17,7 +17,7 @@ export type NormalizedSellOrder = {
   status?: SellOrderStatus;
   askAmount: string;
   askDenom: string;
-  askDisplayDenom: string;
+  askBaseDenom: string;
   amountAvailable: string;
   amountSold?: string;
   batchDenom: string;

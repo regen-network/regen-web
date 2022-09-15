@@ -72,7 +72,7 @@ export const normalizeSellOrders = ({
     ({
       askAmount,
       askDenom,
-      askDisplayDenom,
+      askBaseDenom,
       batchDenom,
       id,
       quantity,
@@ -105,7 +105,7 @@ export const normalizeSellOrders = ({
         status: 'Partially filled',
         askAmount,
         askDenom,
-        askDisplayDenom,
+        askBaseDenom,
         amountAvailable: quantity,
         amountSold: undefined,
         batchDenom,

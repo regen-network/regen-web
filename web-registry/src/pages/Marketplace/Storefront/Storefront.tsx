@@ -186,7 +186,7 @@ export const Storefront = (): JSX.Element => {
 
   const {
     askAmount,
-    askDisplayDenom,
+    askBaseDenom,
     askDenom,
     batchDenom,
     id: orderId,
@@ -282,7 +282,7 @@ export const Storefront = (): JSX.Element => {
               id: orderId,
               askAmount,
               askDenom,
-              askDisplayDenom,
+              askBaseDenom,
               batchDenom,
               seller,
               quantity: amountAvailable,

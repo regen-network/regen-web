@@ -25,10 +25,6 @@ const AppFooter: React.FC = () => {
           title: 'Credit Classes',
           href: '/',
         },
-        // {
-        //   title: 'Baskets',
-        //   href: '/',
-        // },
       ],
     },
     {
@@ -38,14 +34,6 @@ const AppFooter: React.FC = () => {
           title: 'Storefront',
           href: `/storefront`,
         },
-        // {
-        //   title: 'My Orders',
-        //   href: `/`,
-        // },
-        // {
-        //   title: 'Trade History',
-        //   href: `/`,
-        // },
       ],
     },
     {
@@ -55,14 +43,6 @@ const AppFooter: React.FC = () => {
           title: 'Activity',
           href: '/stats/activity',
         },
-        // {
-        //   title: 'Ownership List',
-        //   href: '/',
-        // },
-        // {
-        //   title: 'Ecocredit Batches',
-        //   href: '/',
-        // },
       ],
     },
     {
@@ -83,19 +63,6 @@ const AppFooter: React.FC = () => {
       ],
     },
   ];
-
-  // if (chainId) {
-  //   if (nctBasket) {
-  //     footerItems[0].items.unshift({
-  //       title: 'NCT',
-  //       href: '/baskets/eco.uC.NCT',
-  //     });
-  //   }
-  //   footerItems[0].items.push({
-  //     title: 'Activity',
-  //     href: '/stats/activity',
-  //   });
-  // }
 
   return isHidden ? null : (
     <Footer

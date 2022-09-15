@@ -192,6 +192,7 @@ function ProjectDetails(): JSX.Element {
         geojson={geojson}
         isGISFile={isGISFile}
         metadata={onChainProjectMetadata}
+        projectId={projectId}
       />
 
       {impactData?.length > 0 && (

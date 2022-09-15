@@ -47,6 +47,7 @@ function ProjectTopSection({
   batchData,
   setPaginationParams,
   metadata,
+  projectId,
 }: {
   data?: any; // TODO: when all project are onchain, this can be ProjectByOnChainIdQuery
   sanityCreditClassData?: AllCreditClassQuery;
@@ -59,6 +60,7 @@ function ProjectTopSection({
   setPaginationParams: UseStateSetter<TablePaginationParams>;
   metadata?: any;
   // metadata?: Partial<ProjectMetadataLD>;
+  projectId?: string;
 }): JSX.Element {
   const styles = useProjectTopSectionStyles();
 
@@ -197,7 +199,9 @@ function ProjectTopSection({
             />
           </Link>
           {isVCSProject && <ProjectMetadataVCS metadata={metadata} />}
-          {isCFCProject && <ProjectMetadataCFC metadata={metadata} />}
+          {isCFCProject && (
+            <ProjectMetadataCFC metadata={metadata} projectId={projectId} />
+          )}
           <LazyLoad offset={50}>
             {videoURL &&
               (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(

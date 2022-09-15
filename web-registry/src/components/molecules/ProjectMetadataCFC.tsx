@@ -11,15 +11,19 @@ import { LineItemLabelAbove, LineItemLabelAboveProps } from '.';
 
 export interface CFCMetadataProps {
   metadata?: CFCProjectMetadataLD;
+  projectId?: string;
 }
 
-const ProjectMetadataCFC: React.FC<CFCMetadataProps> = ({ metadata }) => {
+const ProjectMetadataCFC: React.FC<CFCMetadataProps> = ({
+  metadata,
+  projectId,
+}) => {
   const theme = useTheme();
   const [expanded, setExpanded] = useState(false);
-  const projectId = metadata?.['regen:cfcProjectId'];
+  const cfcProjectId = metadata?.['regen:cfcProjectId'];
 
-  console.log('ProjectMetadataCFC', metadata);
-  if (!metadata || !projectId) {
+  console.log('ProjectMetadataCFC', projectId, metadata);
+  if (!metadata || !cfcProjectId) {
     return null;
   }
 
@@ -36,7 +40,7 @@ const ProjectMetadataCFC: React.FC<CFCMetadataProps> = ({ metadata }) => {
 
   return (
     <Box sx={{ pt: 8 }}>
-      <Title variant="h5">Additional Metadata</Title>
+      <Title variant="h5">Additional Info</Title>
       <Collapse collapsedSize={theme.spacing(24)} in={expanded}>
         <Box
           sx={{
@@ -45,6 +49,16 @@ const ProjectMetadataCFC: React.FC<CFCMetadataProps> = ({ metadata }) => {
             pt: 8,
           }}
         >
+          <LineItem label="project id" data={projectId} />
+          <LineItem
+            label="documents"
+            data={
+              <ArrowLink
+                label="Project Design Document"
+                href={metadata?.['regen:projectDesignDocument']?.['@value']}
+              />
+            }
+          />
           <LineItem
             label="offset generation method"
             data={metadata?.['regen:offsetGenerationMethod']}
@@ -64,19 +78,19 @@ const ProjectMetadataCFC: React.FC<CFCMetadataProps> = ({ metadata }) => {
               }
             />
           )}
-          {projectId && (
+          {cfcProjectId && (
             <LineItem
-              label="cfc project id"
+              label="reference id (cfc project id)"
               data={
                 <ArrowLink
-                  label={projectId.toString()}
+                  label={cfcProjectId}
                   href={metadata?.['regen:cfcProjectPage']?.['@value']}
                 />
               }
             />
           )}
           <LineItem
-            label="vcs project type"
+            label="project type"
             data={metadata?.['regen:projectType']}
           />
           {startDate && (

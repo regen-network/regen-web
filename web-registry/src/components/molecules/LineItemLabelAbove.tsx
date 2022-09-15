@@ -8,7 +8,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 export interface LineItemLabelAboveProps {
   sx?: SxProps<Theme>;
   label: string;
-  data: string | JSX.Element | number;
+  data?: string | JSX.Element | number;
 }
 
 // TODO should this be consolidated with the LineItem component?

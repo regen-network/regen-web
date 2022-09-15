@@ -337,7 +337,10 @@ export const Storefront = (): JSX.Element => {
         )}
       />
       {displayErrorBanner && (
-        <ErrorBanner text="Please connect to Keplr to use Regen Ledger features" />
+        <ErrorBanner
+          text="Please connect to Keplr to use Regen Ledger features"
+          onClose={() => setDisplayErrorBanner(false)}
+        />
       )}
     </Box>
   );

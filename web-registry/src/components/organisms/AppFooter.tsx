@@ -7,71 +7,62 @@ import {
 } from 'web-components/lib/components/footer/footer-new';
 
 import { URL_PRIVACY, URL_TERMS_SERVICE } from '../../globals';
-import { chainId, nctBasket } from '../../lib/ledger';
 import { Link, RegistryIconLink } from '../atoms';
 
 const AppFooter: React.FC = () => {
   const { pathname } = useLocation();
   const isHidden = ['/project-pages'].some(route => pathname.startsWith(route));
 
-  const footerItems: [FooterItem, FooterItem, FooterItem] = [
+  const footerItems: [FooterItem, FooterItem, FooterItem, FooterItem] = [
     {
-      title: 'Registry App',
+      title: 'Explore',
       items: [
         {
           title: 'Projects',
-          href: '/#projects',
+          href: '/projects',
+        },
+        {
+          title: 'Credit Classes',
+          href: '/',
         },
       ],
     },
     {
-      title: 'stakeholders',
+      title: 'Trade',
       items: [
         {
-          title: 'Buyers',
-          href: `/buyers`,
-        },
-        {
-          title: 'Land Stewards',
-          href: `/land-stewards`,
+          title: 'Storefront',
+          href: `/storefront`,
         },
       ],
     },
     {
-      title: 'program',
+      title: 'Stats',
+      items: [
+        {
+          title: 'Activity',
+          href: '/stats/activity',
+        },
+      ],
+    },
+    {
+      title: 'Learn More',
       items: [
         {
           title: 'Program Guide',
           href: 'https://library.regen.network/v/regen-registry-program-guide/',
         },
         {
-          title: 'Create a Methodology',
-          href: '/create-methodology',
+          title: 'How-to Articles',
+          href: 'https://guides.regen.network/',
         },
         {
-          title: 'Methodology Review Process',
-          href: '/methodology-review-process',
-        },
-        {
-          title: 'Regen Registry Library',
-          href: 'https://library.regen.network/',
+          title: 'How-to Videos',
+          href: 'https://www.youtube.com/playlist?list=PLtrLQfpXvAUxDUxhaqzPJiH__-LKtkIUz',
         },
       ],
     },
   ];
-
-  if (chainId) {
-    if (nctBasket) {
-      footerItems[0].items.unshift({
-        title: 'NCT',
-        href: '/baskets/eco.uC.NCT',
-      });
-    }
-    footerItems[0].items.push({
-      title: 'Activity',
-      href: '/stats/activity',
-    });
-  }
 
   return isHidden ? null : (
     <Footer

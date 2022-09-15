@@ -1,11 +1,11 @@
 import { Link as LinkExt, SxProps, Theme } from '@mui/material';
 import { useTheme } from '@mui/styles';
 
+import {
+  URL_REGISTRY_MARKETPLACE_LEGAL,
+  URL_REGISTRY_TERMS_SERVICE,
+} from '../../utils/globals';
 import AgreeCheckbox from './AgreeCheckbox';
-
-const URL_TERMS_SERVICE = 'https://www.regen.network/terms-service/';
-const URL_MARKETPLACE_LEGAL =
-  'https://regennetwork.notion.site/Regen-Marketplace-Contracts-7bc2b0075ee64c1a957463bb5eddcead';
 
 interface Props {
   sx?: SxProps<Theme>;
@@ -20,7 +20,7 @@ const AgreeErpaCheckbox: React.FC<Props> = ({ sx }: Props) => {
         <>
           {'I agree to the '}
           <LinkExt
-            href={URL_MARKETPLACE_LEGAL}
+            href={URL_REGISTRY_MARKETPLACE_LEGAL}
             target="_blank"
             rel="noopener noreferrer"
             sx={{ color: theme.palette.secondary.main }}
@@ -29,7 +29,7 @@ const AgreeErpaCheckbox: React.FC<Props> = ({ sx }: Props) => {
           </LinkExt>
           {' and '}
           <LinkExt
-            href={URL_TERMS_SERVICE}
+            href={URL_REGISTRY_TERMS_SERVICE}
             target="_blank"
             rel="noopener noreferrer"
             sx={{ color: theme.palette.secondary.main }}

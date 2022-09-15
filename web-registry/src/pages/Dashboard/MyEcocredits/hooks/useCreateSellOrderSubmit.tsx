@@ -24,7 +24,7 @@ type Props = {
   setCardItems: UseStateSetter<Item[] | undefined>;
   setTxModalHeader: UseStateSetter<string | undefined>;
   setTxButtonTitle: UseStateSetter<string | undefined>;
-  setSellOrderCreateOpen: UseStateSetter<number>;
+  onTxBroadcast: () => void;
 };
 
 type ReturnType = (values: CreateSellOrderFormValues) => Promise<void>;
@@ -35,7 +35,7 @@ const useCreateSellOrderSubmit = ({
   setTxModalHeader,
   setCardItems,
   setTxButtonTitle,
-  setSellOrderCreateOpen,
+  onTxBroadcast,
 }: Props): ReturnType => {
   const createSellOrderSubmit = useCallback(
     async (values: CreateSellOrderFormValues): Promise<void> => {
@@ -62,7 +62,7 @@ const useCreateSellOrderSubmit = ({
         memo: undefined,
       };
 
-      signAndBroadcast(tx, () => setSellOrderCreateOpen(-1));
+      signAndBroadcast(tx, onTxBroadcast);
 
       if (batchDenom && amount && askDenom) {
         const baseDenom = await getDenomtrace({ denom: askDenom });
@@ -102,9 +102,9 @@ const useCreateSellOrderSubmit = ({
       accountAddress,
       setCardItems,
       setTxModalHeader,
-      setSellOrderCreateOpen,
       setTxButtonTitle,
       signAndBroadcast,
+      onTxBroadcast,
     ],
   );
 

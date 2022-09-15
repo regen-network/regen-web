@@ -45,7 +45,9 @@ export const getOptions = ({
       value: sellOrder.id,
     };
   });
-  return [{ label: 'Choose a sell order', value: '' }, ...sellOrderOptions];
+  return sellOrderOptions.length > 1
+    ? [{ label: 'Choose a sell order', value: '' }, ...sellOrderOptions]
+    : sellOrderOptions;
 };
 
 export const handleBuyCreditsSubmit = async (

@@ -110,6 +110,11 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
     },
   );
 
+  const sellOrdersOptions = getOptions({
+    project,
+    allowedDenomsData: allowedDenomsResponse?.data,
+  });
+
   return (
     <Modal open={open} onClose={onClose}>
       <div className={styles.root}>
@@ -180,9 +185,12 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                   <Field
                     name="sellOrderId"
                     component={SelectTextField}
-                    options={getOptions({ project })}
+                    options={sellOrdersOptions}
                     sx={{ mb: theme.spacing(10.5) }}
-                    disabled={!!initialValues?.sellOrderId}
+                    disabled={
+                      !!initialValues?.sellOrderId ||
+                      sellOrdersOptions.length === 1
+                    }
                   />
                   <SetSelectedSellOrderElement />
                   <Collapse in={!!selectedSellOrder}>

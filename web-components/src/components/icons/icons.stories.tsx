@@ -13,6 +13,10 @@ import CheckedIcon from './CheckedIcon';
 import CheckIcon from './CheckIcon';
 import CloseIcon from './CloseIcon';
 import CoBenefitsIcon from './CoBenefitsIcon';
+import AxlUsdcIcon from './coins/AxlUsdcIcon';
+import EeurIcon from './coins/EeurIcon';
+import GravUsdcIcon from './coins/GravUsdcIcon';
+import UsdcIcon from './coins/UsdcIcon';
 import CountingIcon from './CountingIcon';
 import { CreditBatchIcon } from './CreditBatchIcon';
 import { CreditBatchLightIcon } from './CreditBatchLightIcon';
@@ -103,6 +107,7 @@ function LabeledIcon(props: {
 
 export const allIcons = (): JSX.Element => (
   <Grid container gap={4}>
+    <LabeledIcon icon={<AxlUsdcIcon />} label="AxlUsdcIcon" />
     <LabeledIcon icon={<AccountabilityIcon />} label="AccountabilityIcon" />
     <LabeledIcon
       icon={
@@ -151,6 +156,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<DocumentIcon />} label="DocumentIcon" />
     <LabeledIcon icon={<DropdownIcon />} label="DropdownIcon" />
     <LabeledIcon icon={<EditIcon />} label="EditIcon" />
+    <LabeledIcon icon={<EeurIcon />} label="EeurIcon" />
     <LabeledIcon icon={<EmailIcon color="grey" />} label="EmailIcon" />
     <LabeledIcon
       icon={<EmptyCartIcon sx={{ color: 'info.main' }} />}
@@ -160,6 +166,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<FacebookIcon color="blue" />} label="FacebookIcon" />
     <LabeledIcon icon={<FarmerIcon />} label="FarmerIcon" />
     <LabeledIcon icon={<GithubIcon color="grey" />} label="GithubIcon" />
+    <LabeledIcon icon={<GravUsdcIcon />} label="GravUsdcIcon" />
     <LabeledIcon icon={<HorizontalDotsIcon />} label="HorizontalDotsIcon" />
     <LabeledIcon icon={<InfoIcon />} label="InfoIcon" />
     <LabeledIcon icon={<InfoIconOutlined />} label="InfoIconOutlined" />
@@ -202,6 +209,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<TrustIcon />} label="TrustIcon" />
     <LabeledIcon icon={<TrustDocumentIcon />} label="TrustDocumentIcon" />
     <LabeledIcon icon={<TwitterIcon color="blue" />} label="TwitterIcon" />
+    <LabeledIcon icon={<UsdcIcon />} label="UsdcIcon" />
     <LabeledIcon icon={<VerifiedIcon color="#000" />} label="VerifiedIcon" />
     <LabeledIcon icon={<WalletIcon />} label="WalletIcon" />
     <LabeledIcon

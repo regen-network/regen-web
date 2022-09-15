@@ -38,7 +38,7 @@ export default function useEcocredits({ address, paginationParams }: Props): {
 
   useEffect(() => {
     // Initialize credits with empty classId and projectLocation to render components consuming data right away
-    if (balancesResponse && batchesResponse && !credits) {
+    if (balancesResponse && batchesResponse.data && !credits) {
       const initialCredits = balancesResponse?.balances.map(balance => {
         const batch = batchesResponse?.data?.batches.find(
           batch => batch.denom === balance.batchDenom,

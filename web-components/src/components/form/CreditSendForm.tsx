@@ -3,12 +3,14 @@ import { makeStyles } from '@mui/styles';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 
 import { Theme } from '../../theme/muiTheme';
+import AgreeErpaCheckbox from '../inputs/AgreeErpaCheckbox';
 import AmountField from '../inputs/AmountField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import TextField from '../inputs/TextField';
 import {
   insufficientCredits,
   requiredMessage,
+  requirementAgreement,
   validateAmount,
 } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
@@ -61,6 +63,7 @@ export interface FormValues extends RetireFormValues {
   recipient: string;
   tradableAmount: number;
   withRetire?: boolean;
+  agreeErpa: boolean;
 }
 
 const CreditSendForm: React.FC<FormProps> = ({
@@ -79,6 +82,7 @@ const CreditSendForm: React.FC<FormProps> = ({
     tradableAmount: 0,
     withRetire: false,
     ...initialValuesRetire,
+    agreeErpa: false,
   };
 
   const validateHandler = (values: FormValues): FormikErrors<FormValues> => {
@@ -122,6 +126,8 @@ const CreditSendForm: React.FC<FormProps> = ({
         errors.retiredAmount = insufficientCredits;
       }
     }
+
+    if (!values.agreeErpa) errors.agreeErpa = requirementAgreement;
 
     return errors;
   };
@@ -176,6 +182,8 @@ const CreditSendForm: React.FC<FormProps> = ({
               />
             </>
           )}
+
+          <AgreeErpaCheckbox sx={{ mt: values.withRetire ? 10 : 6 }} />
 
           <Submit
             isSubmitting={isSubmitting}

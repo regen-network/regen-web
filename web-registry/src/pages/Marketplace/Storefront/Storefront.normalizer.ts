@@ -1,8 +1,9 @@
-import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import {
   BatchInfo,
   ProjectInfo,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+
+import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 import { AllProjectsQuery } from '../../../generated/graphql';
 import { NormalizedSellOrder } from './Storefront.types';
@@ -54,7 +55,7 @@ export const normalizeProjectsInfosByHandleMap = ({
 /* normalizeSellOrders */
 
 type NormalizedSellOrderProps = {
-  sellOrders?: SellOrderInfo[];
+  sellOrders?: SellOrderInfoExtented[];
   batchInfos: BatchInfo[];
   projectsInfosByHandleMap: Map<
     string,
@@ -71,6 +72,7 @@ export const normalizeSellOrders = ({
     ({
       askAmount,
       askDenom,
+      askBaseDenom,
       batchDenom,
       id,
       quantity,
@@ -103,6 +105,7 @@ export const normalizeSellOrders = ({
         status: 'Partially filled',
         askAmount,
         askDenom,
+        askBaseDenom,
         amountAvailable: quantity,
         amountSold: undefined,
         batchDenom,

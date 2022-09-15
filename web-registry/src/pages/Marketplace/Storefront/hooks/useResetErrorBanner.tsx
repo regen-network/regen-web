@@ -19,7 +19,7 @@ export const useResetErrorBanner = ({
     if (displayErrorBanner) {
       timeout = setTimeout(
         () => setDisplayErrorBanner(false),
-        DEFAULT_DURATION,
+        DEFAULT_DURATION - 1000,
       );
     }
 

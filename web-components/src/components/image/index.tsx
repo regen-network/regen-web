@@ -64,9 +64,11 @@ const Image: React.FC<ImageProps> = ({
   useEffect(() => {
     if (!serverFailed) {
       const clientWidth = rest.width || imgRef?.current?.clientWidth || 0;
-      setWidth(clientWidth);
+      if (clientWidth !== width) {
+        setWidth(clientWidth);
+      }
     }
-  }, [rest, imgRef, serverFailed]);
+  }, [rest, imgRef, serverFailed, width]);
 
   useEffect(() => {
     if (!!delay) {

@@ -8,7 +8,7 @@ import SelectTextFieldBase from 'web-components/lib/components/inputs/SelectText
 import { Loading } from 'web-components/lib/components/loading';
 import { Body, Subtitle } from 'web-components/lib/components/typography';
 
-import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow';
+import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 
 import { useProjects } from './hooks/useProjects';
 import {
@@ -25,6 +25,7 @@ export const Projects: React.FC = () => {
     useState<ProjectWithOrderData | null>(null);
 
   const { projects, loading } = useProjects(sort);
+  const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
 
   const handleSort = (event: SelectChangeEvent<unknown>): void => {
     setSort(event.target.value as string);
@@ -85,7 +86,10 @@ export const Projects: React.FC = () => {
               place={project?.place}
               area={project?.area}
               areaUnit={project?.areaUnit}
-              onButtonClick={() => setSelectedProject(project)}
+              onButtonClick={() => {
+                setSelectedProject(project);
+                setIsBuyFlowStarted(true);
+              }}
               purchaseInfo={project.purchaseInfo}
               onClick={() => navigate(`/projects/${project.id}`)}
               imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
@@ -97,8 +101,9 @@ export const Projects: React.FC = () => {
         ))}
       </Box>
       <BuySellOrderFlow
+        isFlowStarted={isBuyFlowStarted}
+        setIsFlowStarted={setIsBuyFlowStarted}
         selectedProject={selectedProject}
-        setSelectedProject={setSelectedProject}
       />
     </Flex>
   );

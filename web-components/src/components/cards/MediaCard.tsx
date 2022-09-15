@@ -1,5 +1,5 @@
-import React from 'react';
-import { CardMedia, styled, SxProps } from '@mui/material';
+import { useCallback } from 'react';
+import { CardMedia, SxProps } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 import { makeStyles } from '@mui/styles';
 import cx from 'clsx';
@@ -7,9 +7,10 @@ import cx from 'clsx';
 import type { Theme } from 'src/theme/muiTheme';
 
 import { parseText } from '../../utils/textParser';
-import { Image, OptimizeImageProps } from '../image';
-import { Label, Title } from '../typography';
+import { OptimizeImageProps } from '../image';
+import { Title } from '../typography';
 import Card from './Card';
+import { MediaCardImage } from './MediaCard.Image';
 
 export interface MediaCardProps extends OptimizeImageProps {
   children?: any;
@@ -39,17 +40,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const BackgroundGradient = styled('div')({
-  height: '100%',
-  zIndex: 0,
-  position: 'absolute',
-  bottom: 0,
-  width: '100%',
-  borderRadius: '9px 9px 0px 0px',
-  background:
-    'linear-gradient(180.28deg, rgba(0, 0, 0, 0) 65.91%, rgba(0, 0, 0, 0.6) 99.59%)',
-});
-
 export default function MediaCard({
   children,
   name,
@@ -73,35 +63,27 @@ export default function MediaCard({
   sx = [],
 }: MediaCardProps): JSX.Element {
   const classes = useStyles({});
-
-  const optimizedImage = (): JSX.Element => (
-    <Image
-      className={cx(imageClassName, classes.image)}
-      backgroundImage
-      src={imgSrc}
-      imageStorageBaseUrl={imageStorageBaseUrl}
-      apiServerUrl={apiServerUrl}
-    >
-      {backgroundGradient && <BackgroundGradient />}
-      {tag && (
-        <Label
-          sx={theme => ({
-            position: 'absolute',
-            bottom: theme.spacing(5),
-            left: theme.spacing(5),
-            py: 1.75,
-            px: 3.75,
-            color: 'primary.main',
-            backgroundColor: 'secondary.main',
-            boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.1)',
-            borderRadius: '50px',
-            textShadow: '0px 0px 2px rgba(0, 0, 0, 0.3)',
-          })}
-        >
-          {tag}
-        </Label>
-      )}
-    </Image>
+  const optimizedImage = useCallback(
+    (): JSX.Element => (
+      <MediaCardImage
+        apiServerUrl={apiServerUrl}
+        backgroundGradient={backgroundGradient}
+        classes={classes}
+        imageClassName={imageClassName}
+        imageStorageBaseUrl={imageStorageBaseUrl}
+        imgSrc={imgSrc}
+        tag={tag}
+      />
+    ),
+    [
+      apiServerUrl,
+      backgroundGradient,
+      classes,
+      imageClassName,
+      imageStorageBaseUrl,
+      imgSrc,
+      tag,
+    ],
   );
 
   const media = (

@@ -5106,10 +5106,10 @@
     prop-types "^15.6.1"
     react-lifecycles-compat "^3.0.4"
 
-"@regen-network/api@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@regen-network/api/-/api-0.3.0.tgz#dcb62908e28a04a404459125f3ad45bd7cf507fb"
-  integrity sha512-7mO8ssoB4oQeZXVcdI258KJNIwExyofhvrS8tG7R6tufui+bmOpLStJGrrU3tPqsQufYOqzUqh1u/pNdWcVBEQ==
+"@regen-network/api@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@regen-network/api/-/api-0.3.1.tgz#da73037f06fc04d62acc863992a2acd68c1cc08f"
+  integrity sha512-5W0l/KdrkVB1Tr001rfMtsqBnJEQvaeQmt51ccf225tJS8zcCtGXuyfQ4w2YsoFwygzgyfe0kQ8XClTA3Kirug==
   dependencies:
     "@cosmjs/stargate" "^0.27.0"
 

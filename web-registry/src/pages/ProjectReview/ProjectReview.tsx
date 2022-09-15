@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactPlayerLazy from 'react-player/lazy';
 import { useNavigate, useParams } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { Box, CardMedia, useMediaQuery, useTheme } from '@mui/material';
+import * as jsonld from 'jsonld';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import Card from 'web-components/lib/components/cards/Card';
@@ -19,7 +20,10 @@ import {
   useProjectByIdQuery,
   useUpdateProjectByIdMutation,
 } from '../../generated/graphql';
-import { VCSProjectMetadataLD } from '../../generated/json-ld';
+import {
+  ProjectMetadataLD,
+  VCSProjectMetadataLD,
+} from '../../generated/json-ld';
 import useMsgClient from '../../hooks/useMsgClient';
 import { getHashUrl } from '../../lib/block-explorer';
 import { isVCSCreditClass } from '../../lib/ecocredit/api';
@@ -40,6 +44,7 @@ export const ProjectReview: React.FC = () => {
     fetchPolicy: 'cache-and-network',
   });
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
+  const [metadata, setMetadata] = useState<Partial<VCSProjectMetadataLD>>({});
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
   const [bannerError, setBannerError] = useState('');
   const [updateProject] = useUpdateProjectByIdMutation();
@@ -86,7 +91,30 @@ export const ProjectReview: React.FC = () => {
   const editPath = `/project-pages/${projectId}`;
   const creditClassId = project?.creditClassByCreditClassId?.onChainId;
   const isVCS = !!creditClassId && isVCSCreditClass(creditClassId);
-  const metadata: Partial<VCSProjectMetadataLD> = project?.metadata;
+  const metadataRaw = project?.metadata;
+
+  console.log('metadataRaw', metadataRaw);
+
+  useEffect(() => {
+    const compactMetadata = async (): Promise<void> => {
+      const meta = await jsonld.compact(
+        { ...metadataRaw },
+        {
+          schema: 'http://schema.org/',
+          regen: 'http://regen.network/',
+          qudt: 'http://qudt.org/schema/qudt/',
+          unit: 'http://qudt.org/vocab/unit/',
+          xsd: 'http://www.w3.org/2001/XMLSchema#',
+          geojson: 'https://purl.org/geojson/vocab#',
+          'geojson:coordinates': { '@container': '@list' },
+        },
+      );
+      if (meta) setMetadata(meta as Partial<VCSProjectMetadataLD>);
+    };
+
+    compactMetadata();
+  }, [metadataRaw]);
+
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
   const videoUrl = metadata?.['regen:videoURL']?.['@value'];
@@ -106,14 +134,19 @@ export const ProjectReview: React.FC = () => {
       return;
     }
     const vcsProjectId = metadata?.['regen:vcsProjectId'];
+    const cfcProjectId = metadata?.['regen:cfcProjectId'];
     await projectCreateSubmit({
-      classId: creditClassId || '',
+      classId: 'C45', // TODO
+      // classId: creditClassId || '',
       admin: wallet?.address || '',
       metadata,
       jurisdiction: jurisdiction || '',
-      referenceId: isVCS && vcsProjectId ? `VCS-${vcsProjectId}` : '', // TODO: regen-network/regen-registry#1104
+      // referenceId: isVCS && vcsProjectId ? `VCS-${vcsProjectId}` : '', // TODO: regen-network/regen-registry#1104
+      referenceId: cfcProjectId, // TODO: regen-network/regen-registry#1104
     });
   };
+
+  console.log('metadata', metadata);
 
   return (
     <OnboardingFormTemplate activeStep={1} title="Review" loading={loading}>
@@ -139,7 +172,9 @@ export const ProjectReview: React.FC = () => {
         title="Location"
         onEditClick={() => navigate(`${editPath}/location`)}
       >
-        <ItemDisplay>{metadata?.['schema:location']?.place_name}</ItemDisplay>
+        <ItemDisplay>
+          {metadata?.['schema:location']?.['geojson:place_name']}
+        </ItemDisplay>
       </ReviewCard>
       <ReviewCard
         title="Description"

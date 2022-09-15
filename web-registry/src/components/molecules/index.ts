@@ -1,4 +1,3 @@
-export * from './AdditionalProjectMetadata';
 export * from './BackgroundImgSection';
 export * from './BatchInfoGrid';
 export * from './BatchMetadata';
@@ -18,6 +17,8 @@ export * from './OverviewCards';
 export * from './PlanStepper';
 export * from './PracticesOutcomesSection';
 export * from './ProjectBatchTotals';
+export * from './ProjectMetadataCFC';
+export * from './ProjectMetadataVCS';
 export * from './ProjectPageFooter';
 export * from './ReviewProcessInfo';
 export * from './Statistic';

@@ -22,7 +22,7 @@ const LinkWithArrow: React.FC<LinkWithArrowProps> = ({
   className,
   target,
 }) => {
-  const defaultTarget = href.startsWith('/') ? '_self' : '_blank';
+  const defaultTarget = href?.startsWith('/') ? '_self' : '_blank';
   return (
     <Link
       href={href}

@@ -12,3 +12,11 @@ export interface NameUrl {
   'schema:name': string;
   'schema:url': URL;
 }
+
+export interface URLList {
+  '@list': URL[];
+}
+
+export interface StringList {
+  '@list': URL[];
+}

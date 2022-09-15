@@ -1,6 +1,11 @@
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 
-import { TypeValue, URL } from 'web-components/lib/types/rdf';
+import {
+  StringList,
+  TypeValue,
+  URL,
+  URLList,
+} from 'web-components/lib/types/rdf';
 
 export interface ProjectMetadataLD {
   '@context': Context;
@@ -17,7 +22,9 @@ export interface ProjectMetadataLD {
   'regen:projectSize': ProjectSize;
   'regen:projectStartDate': TypeValue;
   'regen:projectEndDate': TypeValue;
-  'schema:location': GeocodeFeature;
+  'schema:location': any;
+  'schema:description'?: string;
+  // 'schema:location': GeocodeFeature;
   'regen:boundaries': TypeValue;
   'regen:creditClass': CreditClass;
   'regen:landManagementActions': LandManagementActions;
@@ -32,6 +39,7 @@ export interface ProjectMetadataLD {
   'regen:projectQuote': ProjectQuote;
   'regen:landStewardStoryTitle': string;
   'regen:vcsProjectId'?: number;
+  'regen:cfcProjectId'?: string;
 }
 
 interface ProjectSize {
@@ -66,10 +74,6 @@ interface NameImageDescription {
 
 interface LandManagementActions {
   '@list': NameImageDescription[];
-}
-
-interface URLList {
-  '@list': URL[];
 }
 
 interface ProjectQuote {

@@ -7,13 +7,13 @@ import { formatDate } from 'web-components/lib/utils/format';
 
 import { VCSProjectMetadataLD } from '../../generated/json-ld';
 import { LinkWithArrow, LinkWithArrowProps } from '../atoms';
-import { LineItemLabelAbove, LineItemLabelAboveProps } from '../molecules';
+import { LineItemLabelAbove, LineItemLabelAboveProps } from '.';
 
 export interface MetadataProps {
   metadata?: VCSProjectMetadataLD;
 }
 
-const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
+const ProjectMetadataVCS: React.FC<MetadataProps> = ({ metadata }) => {
   const theme = useTheme();
   const [expanded, setExpanded] = useState(false);
   const projectId = metadata?.['regen:vcsProjectId'];
@@ -101,4 +101,4 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
   );
 };
 
-export { AdditionalProjectMetadata };
+export { ProjectMetadataVCS };

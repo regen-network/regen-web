@@ -5,6 +5,7 @@
 // with [schema-dts](https://github.com/google/schema-dts) which is specifically
 // made for this purpose.
 
+export * from './cfc-project-metadata';
 export * from './credit-class-metadata';
 export * from './project-metadata';
 export * from './vcs-project-metadata';

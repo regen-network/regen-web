@@ -30,6 +30,7 @@ export default function useMedia({
       (photo: UrlType) => !!photo?.['@value'],
     );
     const previewPhoto = metadata?.['regen:previewPhoto']?.['@value'];
+    console.log('previewPhoto');
     const noGallery = !galleryPhotos || galleryPhotos?.length === 0;
     const noGalleryAssets: Asset[] = [];
 

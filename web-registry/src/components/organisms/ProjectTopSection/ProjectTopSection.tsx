@@ -13,8 +13,10 @@ import Section from 'web-components/lib/components/section';
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
+import { ProjectMetadataLD } from 'generated/json-ld';
 import { UseStateSetter } from 'types/react/use-state';
 
+import { ProjectMetadataCFC } from 'components/molecules/ProjectMetadataCFC';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import {
@@ -30,7 +32,7 @@ import {
   BatchTotalsForProject,
 } from '../../../types/ledger/ecocredit';
 import { ProjectTopLink } from '../../atoms';
-import { AdditionalProjectMetadata, ProjectBatchTotals } from '../../molecules';
+import { ProjectBatchTotals, ProjectMetadataVCS } from '../../molecules';
 import { CreditBatches } from '../CreditBatches/CreditBatches';
 import {
   ProjectTopSectionQuoteMark,
@@ -44,6 +46,7 @@ function ProjectTopSection({
   isGISFile,
   batchData,
   setPaginationParams,
+  metadata,
 }: {
   data?: any; // TODO: when all project are onchain, this can be ProjectByOnChainIdQuery
   sanityCreditClassData?: AllCreditClassQuery;
@@ -54,6 +57,8 @@ function ProjectTopSection({
     totals?: BatchTotalsForProject;
   };
   setPaginationParams: UseStateSetter<TablePaginationParams>;
+  metadata?: any;
+  // metadata?: Partial<ProjectMetadataLD>;
 }): JSX.Element {
   const styles = useProjectTopSectionStyles();
 
@@ -61,7 +66,6 @@ function ProjectTopSection({
   const apiServerUrl = process.env.REACT_APP_API_URI;
 
   const project = data?.projectByOnChainId || data?.projectByHandle; // TODO: eventually just projectByOnChainId
-  const metadata = project?.metadata;
 
   const videoURL = metadata?.['regen:videoURL']?.['@value'];
   const landStewardPhoto = metadata?.['regen:landStewardPhoto']?.['@value'];
@@ -81,6 +85,7 @@ function ProjectTopSection({
   const landStewardStoryTitle = metadata?.['regen:landStewardStoryTitle'];
   const landStewardStory = metadata?.['regen:landStewardStory'];
   const isVCSProject = !!metadata?.['regen:vcsProjectId'];
+  const isCFCProject = !!metadata?.['regen:cfcProjectId'];
 
   const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.[
     '@list'
@@ -191,7 +196,8 @@ function ProjectTopSection({
               sx={{ mt: [8, 20], mb: [2, 8] }}
             />
           </Link>
-          {isVCSProject && <AdditionalProjectMetadata metadata={metadata} />}
+          {isVCSProject && <ProjectMetadataVCS metadata={metadata} />}
+          {isCFCProject && <ProjectMetadataCFC metadata={metadata} />}
           <LazyLoad offset={50}>
             {videoURL &&
               (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(

@@ -140,7 +140,7 @@ function ProjectDetails(): JSX.Element {
     metadata: offChainProjectMetadata,
     creditClassName,
   });
-  const mediaData = useMedia({ metadata: offChainProjectMetadata, geojson });
+  const mediaData = useMedia({ metadata: onChainProjectMetadata, geojson });
   const impactData = useImpact({ coBenefitsIris, primaryImpactIRI });
   const otherProjects = useOtherProjects(projectId as string);
   const isLoading = loading || loadingDataByHandle;
@@ -191,6 +191,7 @@ function ProjectDetails(): JSX.Element {
         setPaginationParams={setPaginationParams}
         geojson={geojson}
         isGISFile={isGISFile}
+        metadata={onChainProjectMetadata}
       />
 
       {impactData?.length > 0 && (

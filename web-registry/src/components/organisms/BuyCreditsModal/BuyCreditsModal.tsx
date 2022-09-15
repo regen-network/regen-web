@@ -10,6 +10,7 @@ import cx from 'clsx';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 import { RadioGroup } from 'formik-mui';
 
+import { Flex } from 'web-components/lib/components/box';
 import Card from 'web-components/lib/components/cards/Card';
 import Submit from 'web-components/lib/components/form/Submit';
 import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
@@ -182,8 +183,6 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
         >
           {({
             values,
-            errors,
-            touched,
             submitForm,
             isValid,
             isSubmitting,
@@ -324,17 +323,30 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                     />
                   </Field>
                   <Collapse in={values['retirementAction'] === 'autoretire'}>
-                    <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
-                      Retirement note
-                    </Title>
-                    <Field
-                      className={styles.field}
-                      component={ControlledTextField}
-                      label="Add retirement transaction details (stored in the tx memo)"
-                      name="retirementNote"
-                      optional
-                    />
-                    <div className={styles.flex}>
+                    <Flex>
+                      <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
+                        Retirement note
+                      </Title>
+                      <Tooltip
+                        arrow
+                        placement="top"
+                        title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')"
+                      >
+                        <div>
+                          <InfoIcon className={styles.info} />
+                        </div>
+                      </Tooltip>
+                    </Flex>
+                    <Box>
+                      <Field
+                        component={ControlledTextField}
+                        label="Add retirement transaction details (stored in the tx memo)"
+                        name="retirementNote"
+                        optional
+                        sx={{ mb: { xs: 10, sm: 12 } }}
+                      />
+                    </Box>
+                    <Flex>
                       <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
                         Credit retirement location
                       </Title>
@@ -347,7 +359,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                           <InfoIcon className={styles.info} />
                         </div>
                       </Tooltip>
-                    </div>
+                    </Flex>
                     <Body sx={{ color: 'info.dark', mb: { xs: 0, sm: 3 } }}>
                       Please enter a location for the retirement of these
                       credits. This prevents double counting of credits in

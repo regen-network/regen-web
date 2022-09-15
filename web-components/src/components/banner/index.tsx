@@ -5,6 +5,7 @@ import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 export interface BannerBaseProps {
   text: string;
   duration?: number;
+  onClose?: () => void;
 }
 
 interface StyleProps {
@@ -56,6 +57,7 @@ export default function Banner({
   text,
   color,
   duration = 5000,
+  onClose,
 }: BannerProps): JSX.Element {
   const classes = useStyles({ color });
   const [open, setOpen] = useState(true);
@@ -65,7 +67,12 @@ export default function Banner({
       anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
       className={classes.root}
       open={open}
-      onClose={() => setOpen(false)}
+      onClose={() => {
+        setOpen(false);
+        if (onClose) {
+          onClose();
+        }
+      }}
       autoHideDuration={duration}
     >
       <div>{text}</div>

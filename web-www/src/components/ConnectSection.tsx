@@ -1,12 +1,12 @@
 import React from 'react';
 import { Box, Grid, Link } from '@mui/material';
-import { Variant } from '@mui/material/styles/createTypography';
 import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 import { FluidObject } from 'gatsby-image';
 
 import { Body, Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Center } from 'web-components/src/components/box';
 
 import BackgroundSection from './BackgroundSection';
 
@@ -17,23 +17,10 @@ interface StyleProps {
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
     [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(17.75),
+      paddingBottom: theme.spacing(20),
     },
     [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(22.5),
-    },
-  },
-  title: {
-    textAlign: 'center',
-    color: theme.palette.primary.main,
-    lineHeight: '150%',
-    margin: '0 auto',
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(18),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(5),
-      paddingBottom: theme.spacing(15.5),
+      paddingBottom: theme.spacing(28.5),
     },
   },
 }));
@@ -43,15 +30,17 @@ export interface IconLabelProps {
   label: string;
   subLabel?: string;
   href: string;
-  small?: boolean;
+  isCompact?: boolean;
+  smallSvg?: boolean;
 }
 
 interface ConnectSectionProps {
   header: string;
   icons: IconLabelProps[];
   itemClassName?: string;
+  /** removes `label` and `subLabel on items, presents in a more compact form */
+  isCompact?: boolean;
   titleClassName?: string;
-  titleVariant?: Variant;
   className?: string;
   background: {
     childImageSharp: {
@@ -65,8 +54,10 @@ const IconLabel = ({
   label,
   subLabel,
   href,
-  small = false,
+  isCompact = false,
+  smallSvg = false,
 }: IconLabelProps): JSX.Element => {
+  const mobileSize = isCompact ? 20 : 30;
   return (
     <div>
       <Link
@@ -78,19 +69,21 @@ const IconLabel = ({
         <Box
           sx={theme => ({
             bgcolor: 'secondary.main',
+            background:
+              'linear-gradient(201.8deg, #4FB573 14.67%, #B9E1C7 97.14%);',
             borderRadius: '50%',
-            transitionDuration: '200ms',
-            transitionProperty: 'color, background-color',
-            transitionTimingFunction: 'ease-in-out',
+            transition: 'all 200ms ease-in-out',
             width: {
               xs: theme.spacing(15),
-              tablet: theme.spacing(30),
+              tablet: theme.spacing(mobileSize),
             },
             height: {
               xs: theme.spacing(15),
-              tablet: theme.spacing(30),
+              tablet: theme.spacing(mobileSize),
             },
             ':hover': {
+              color: 'secondary.light',
+              background: theme.palette.secondary.light,
               bgcolor: 'secondary.light',
             },
             '& svg': {
@@ -98,8 +91,8 @@ const IconLabel = ({
               width: '100%',
               height: '100%',
               p: {
-                xs: small ? 3 : 0,
-                tablet: small ? 6 : 0,
+                xs: smallSvg ? 3 : 0,
+                tablet: smallSvg ? 6 : 0,
               },
             },
           })}
@@ -107,30 +100,33 @@ const IconLabel = ({
           {icon}
         </Box>
       </Link>
-      <Title
-        color="primary"
-        align="center"
-        sx={{
-          fontSize: theme => [14, 16, theme.typography.h4.fontSize],
-          pt: [1.5, 5.25],
-        }}
-      >
-        {label}
-      </Title>
-      {subLabel && (
-        <Body
-          size="lg"
-          mobileSize="sm"
-          color="primary.main"
-          sx={{
-            textAlign: 'center',
-            display: 'flex',
-            justifyContent: 'center',
-            pt: [1.5, 5.25],
-          }}
-        >
-          {subLabel}
-        </Body>
+      {!isCompact && (
+        <>
+          <Title
+            color="primary"
+            align="center"
+            variant="h5"
+            sx={{ pt: [1.5, 5.25] }}
+          >
+            {label}
+          </Title>
+
+          {subLabel && (
+            <Body
+              size="lg"
+              mobileSize="sm"
+              color="primary.main"
+              sx={{
+                textAlign: 'center',
+                display: 'flex',
+                justifyContent: 'center',
+                pt: [1.5, 5.25],
+              }}
+            >
+              {subLabel}
+            </Body>
+          )}
+        </>
       )}
     </div>
   );
@@ -141,9 +137,9 @@ const ConnectSection = ({
   titleClassName,
   className,
   background,
+  isCompact,
   icons,
   itemClassName,
-  titleVariant = 'h2',
 }: ConnectSectionProps): JSX.Element => {
   const classes = useStyles({});
   return (
@@ -152,23 +148,45 @@ const ConnectSection = ({
       linearGradient="unset"
       topSection={false}
       imageData={background.childImageSharp.fluid}
-      header={header}
-      titleClassName={clsx(titleClassName, classes.title)}
-      titleVariant={titleVariant}
     >
-      <Grid container spacing={4} justifyContent="center" rowGap={8}>
-        {icons.map((item, i) => (
-          <Grid item xs={4} md={2} className={itemClassName} key={i}>
-            <IconLabel
-              href={item.href}
-              icon={item.icon}
-              small={item.small}
-              label={item.label}
-              subLabel={item.subLabel}
-            />
-          </Grid>
-        ))}
-      </Grid>
+      <Center
+        col
+        sx={theme => ({
+          maxWidth: isCompact ? theme.spacing(185) : 'auto',
+          margin: '0 auto',
+        })}
+      >
+        <Title
+          className={titleClassName}
+          variant="h2"
+          mobileVariant="h3"
+          align="center"
+          color="primary.main"
+        >
+          {header}
+        </Title>
+        <Grid
+          container
+          spacing={4}
+          justifyContent={['space-around', 'center']}
+          rowGap={8}
+          columnGap={1}
+          sx={{ mt: [8, 10] }}
+        >
+          {icons.map((item, i) => (
+            <Grid item xs={3} md={2} className={itemClassName} key={i}>
+              <IconLabel
+                href={item.href}
+                icon={item.icon}
+                smallSvg={item.smallSvg}
+                label={item.label}
+                isCompact={isCompact}
+                subLabel={item.subLabel}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Center>
     </BackgroundSection>
   );
 };

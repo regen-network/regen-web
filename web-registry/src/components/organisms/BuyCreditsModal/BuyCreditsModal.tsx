@@ -333,7 +333,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                         title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')"
                       >
                         <div>
-                          <InfoIcon className={styles.info} />
+                          <InfoIcon />
                         </div>
                       </Tooltip>
                     </Flex>
@@ -356,7 +356,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                         title="The retirement location can be where you live or your business operates."
                       >
                         <div>
-                          <InfoIcon className={styles.info} />
+                          <InfoIcon />
                         </div>
                       </Tooltip>
                     </Flex>

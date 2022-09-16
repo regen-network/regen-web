@@ -63,14 +63,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       },
     },
   },
-  info: {
-    cursor: 'pointer',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontWeight: 'bold',
-    fontSize: theme.typography.pxToRem(16),
-  },
 }));
 
 export interface CreditRetireProps extends CreditRetireFieldsProps {
@@ -175,7 +167,7 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
                 title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')"
               >
                 <div>
-                  <InfoIcon className={styles.info} />
+                  <InfoIcon />
                 </div>
               </Tooltip>
             </Flex>

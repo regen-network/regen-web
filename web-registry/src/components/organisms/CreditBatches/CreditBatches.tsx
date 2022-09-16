@@ -62,7 +62,7 @@ const headCells: HeadCell[] = [
     label: 'total amount cancelled',
     wrap: true,
     tooltip:
-      "Cancel credits have been removed from from the credit batch's tradable supply. Cancelling credits is permanent and implies the credits have been moved to another chain or registry.",
+      "Cancelled credits have been removed from from the credit batch's tradable supply. Cancelling credits is permanent and implies the credits have been moved to another chain or registry.",
   },
   { id: 'startDate', numeric: true, label: 'start date' },
   { id: 'endDate', numeric: true, label: 'end date' },

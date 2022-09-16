@@ -6,6 +6,7 @@ import {
   RenderActionButtonsFunc,
   TablePaginationParams,
 } from 'web-components/lib/components/table/ActionsTable';
+import InfoIconTooltip from 'web-components/lib/components/tooltip/InfoIconTooltip';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
@@ -22,6 +23,7 @@ const GreyText = styled('span')(({ theme }) => ({
 const BreakText = styled('div')({
   whiteSpace: 'normal',
   wordWrap: 'break-word',
+  textAlign: 'end',
 });
 
 type EcocreditsTableProps = {
@@ -61,7 +63,17 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
         'Credit Class',
         <BreakText>Amount Tradable</BreakText>,
         <BreakText>Amount Retired</BreakText>,
-        <BreakText>Amount Escrowed</BreakText>,
+        <Box display="flex">
+          <BreakText>Amount Escrowed</BreakText>
+          <Box alignSelf="flex-end" ml={2}>
+            <InfoIconTooltip
+              outlined
+              title={
+                'Credits are held in escrow when a sell order is created, and taken out of escrow when the sell order is either cancelled, updated with a reduced quantity, or processed.'
+              }
+            />
+          </Box>
+        </Box>,
         'Batch Start Date',
         'Batch End Date',
         'Project Location',

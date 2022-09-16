@@ -7,6 +7,7 @@ import {
   ActionsTable,
   TablePaginationParams,
 } from 'web-components/lib/components/table/ActionsTable';
+import InfoIconTooltip from 'web-components/lib/components/tooltip/InfoIconTooltip';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncateHash } from 'web-components/lib/utils/truncate';
 
@@ -35,6 +36,7 @@ interface HeadCell {
   label: string;
   numeric: boolean;
   wrap?: boolean;
+  tooltip?: string; // the content for the info tooltip
 }
 
 const headCells: HeadCell[] = [
@@ -59,6 +61,8 @@ const headCells: HeadCell[] = [
     numeric: true,
     label: 'total amount cancelled',
     wrap: true,
+    tooltip:
+      "Cancel credits have been removed from from the credit batch's tradable supply. Cancelling credits is permanent and implies the credits have been moved to another chain or registry.",
   },
   { id: 'startDate', numeric: true, label: 'start date' },
   { id: 'endDate', numeric: true, label: 'end date' },
@@ -105,8 +109,17 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
     <ActionsTable
       tableLabel="credit batch table"
       headerRows={columnsToShow.map(headCell => (
-        <Box className={cx(headCell.wrap && styles.wrap)} key={headCell.id}>
+        <Box
+          display="flex"
+          className={cx(headCell.wrap && styles.wrap)}
+          key={headCell.id}
+        >
           {headCell.label}
+          {headCell.tooltip && (
+            <Box alignSelf="flex-end" ml={2}>
+              <InfoIconTooltip outlined title={headCell.tooltip} />
+            </Box>
+          )}
         </Box>
       ))}
       onTableChange={onTableChange}

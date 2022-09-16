@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(14),
     },
     [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(25),
+      paddingBottom: theme.spacing(30),
     },
   },
   sliderContainer: {

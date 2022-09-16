@@ -6,7 +6,6 @@ import BackgroundImage from 'gatsby-background-image';
 
 import SEO from '../components/seo';
 import { HomePageWebQuery } from '../generated/graphql';
-import { BannerTextSection } from '../sections/home/BannerTextSection';
 import CarbonPlusSection from '../sections/home/CarbonPlusSection';
 import ClimateSection from '../sections/home/ClimateSection';
 import HomeFoldSection from '../sections/home/FoldSection';
@@ -49,9 +48,8 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
         imageUrl={`${data?.seoImage?.publicURL}`}
       />
       <HomeFoldSection />
-      <HomeValuesSection />
-      <BannerTextSection />
       <Box display={{ xs: 'block', sm: 'none' }}>
+        <CarbonPlusSection />
         <BackgroundImage
           Tag="div"
           fluid={data?.backgroundMobile?.childImageSharp?.fluid as any}
@@ -62,20 +60,20 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
         >
           <ClimateSection />
         </BackgroundImage>
-        <CarbonPlusSection />
       </Box>
-      <Box display={{ xs: 'none', sm: 'block' }}>
+      <Box display={{ xs: 'none', sm: 'block' }} sx={{ mb: 10 }}>
+        <CarbonPlusSection />
         <BackgroundImage
           Tag="div"
           fluid={data?.background?.childImageSharp?.fluid as any}
           backgroundColor={theme.palette.grey['50']}
         >
           <ClimateSection />
-          <CarbonPlusSection />
         </BackgroundImage>
       </Box>
-      <HomeLedger />
+      <HomeValuesSection />
       <MarketplaceSection />
+      <HomeLedger />
       <BlogSection />
     </>
   );

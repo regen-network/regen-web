@@ -120,7 +120,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   titleContainer: {
     [theme.breakpoints.up('md')]: {
-      paddingLeft: 'calc(15% + 20.9375rem)',
+      paddingLeft: 'calc(18% + 20.9375rem)',
       paddingRight: '8%',
       marginTop: '-6%',
     },

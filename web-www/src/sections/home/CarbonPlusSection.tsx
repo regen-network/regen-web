@@ -16,9 +16,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingTop: theme.spacing(15),
+      paddingBottom: theme.spacing(10),
     },
     [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
       paddingTop: theme.spacing(30),
+      paddingBottom: theme.spacing(20),
       paddingLeft: theme.spacing(37.5),
     },
   },

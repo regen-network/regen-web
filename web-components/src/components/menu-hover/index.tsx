@@ -117,6 +117,8 @@ const MenuHover = ({
           horizontal: 'right',
         }}
         PaperProps={{ onMouseEnter: popoverEnter, onMouseLeave: popoverLeave }}
+        disableScrollLock={true}
+        sx={{ position: 'absolute' }}
       >
         <Paper className={styles.paper} elevation={5}>
           <MenuList classes={{ root: styles.text, padding: styles.noOutline }}>

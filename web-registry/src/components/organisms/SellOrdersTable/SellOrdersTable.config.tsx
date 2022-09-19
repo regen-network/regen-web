@@ -7,7 +7,7 @@ import { PURCHASE_OPTION_TOOLTIP } from './SellOrdersTable.constants';
 
 export const SELL_ORDERS_ROW = [
   <Box sx={{ width: '64px', whiteSpace: 'normal' }}>{'SELL ORDER ID'}</Box>,
-  'PROJECT',
+  <Box>PROJECT</Box>,
   <Box sx={{ width: '86px', whiteSpace: 'normal' }}>
     {'ASK PRICE PER CREDIT'}
   </Box>,

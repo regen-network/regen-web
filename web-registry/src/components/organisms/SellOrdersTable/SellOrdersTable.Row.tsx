@@ -2,7 +2,6 @@ import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { Box } from '@mui/material';
 
-import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import InfoLabel from 'web-components/lib/components/info-label';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';
@@ -19,6 +18,7 @@ import {
   MAXIMUM_FRACTION_DIGITS,
   MINIMUM_FRACTION_DIGITS,
 } from './SellOrdersTable.constants';
+import { SellOrderPurchaseIcon } from './SellOrderstable.PurchaseIcon';
 import { getDenomCurrencyPrefix } from './SellOrdersTable.utils';
 
 type Props = {
@@ -28,7 +28,6 @@ type Props = {
 const getSellOrdersTableRow = ({
   sellOrder: {
     askAmount,
-    askDenom,
     askBaseDenom,
     batchDenom,
     id,
@@ -37,6 +36,7 @@ const getSellOrdersTableRow = ({
     batchStartDate,
     batchEndDate,
     project,
+    disableAutoRetire,
   },
 }: Props): React.ReactNode[] => [
   <Link href={`/marketplace/sell-order/${id}`}>{id}</Link>,
@@ -75,13 +75,9 @@ const getSellOrdersTableRow = ({
   </Link>,
   <Box>
     <InfoLabel
-      label="Tradeable"
-      icon={
-        <ArrowDownIcon
-          color="#8F8F8F"
-          sx={{ display: 'flex', alignItems: 'center' }}
-        />
-      }
+      label={disableAutoRetire ? 'Tradeable' : 'Retired'}
+      variant={disableAutoRetire ? 'success' : 'default'}
+      icon={<SellOrderPurchaseIcon disableAutoRetire={disableAutoRetire} />}
     />
   </Box>,
   <WithLoader isLoading={batchStartDate === undefined} variant="skeleton">

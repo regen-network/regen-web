@@ -1,12 +1,12 @@
 import React from 'react';
 import { useTheme } from '@mui/material';
-import SvgIcon from '@mui/material/SvgIcon';
+import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
-interface IconProps {
+interface IconProps extends SvgIconProps {
   className?: string;
 }
 
-function InfoIconOutlined({ className }: IconProps): JSX.Element {
+function InfoIconOutlined({ className, sx = [] }: IconProps): JSX.Element {
   const theme = useTheme();
 
   return (
@@ -16,6 +16,7 @@ function InfoIconOutlined({ className }: IconProps): JSX.Element {
       width="25"
       height="26"
       xmlns="http://www.w3.org/2000/svg"
+      sx={[...(Array.isArray(sx) ? sx : [sx])]}
     >
       <circle
         cx="12.5"

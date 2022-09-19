@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import cx from 'clsx';
+import { tableStyles } from 'styles/table';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import Section from 'web-components/lib/components/section';
@@ -125,13 +126,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           <WithLoader isLoading={!batch.projectName} variant="skeleton">
             <Link
               href={`/projects/${batch?.projectId}`}
-              sx={{
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                display: 'block',
-                maxWidth: '125px',
-              }}
+              sx={tableStyles.ellipsisColumn}
             >
               {batch?.projectName}
             </Link>
@@ -140,15 +135,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
             <Link
               key="classId"
               href={`/credit-classes/${batch.classId}`}
-              sx={{
-                whiteSpace: 'nowrap',
-                display: 'block',
-                maxWidth: '125px',
-                '& p': {
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                },
-              }}
+              sx={tableStyles.ellipsisContentColumn}
             >
               <BlockContent content={batch.className} />
             </Link>

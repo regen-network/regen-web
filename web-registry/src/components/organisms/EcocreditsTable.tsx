@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, styled } from '@mui/material';
+import { tableStyles } from 'styles/table';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import {
@@ -75,13 +76,7 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
           <WithLoader isLoading={!row.projectName} variant="skeleton">
             <Link
               href={`/projects/${row?.projectId}`}
-              sx={{
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                display: 'block',
-                maxWidth: '125px',
-              }}
+              sx={tableStyles.ellipsisColumn}
             >
               {row?.projectName}
             </Link>
@@ -90,15 +85,7 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
             <Link
               key="class_id"
               href={`/credit-classes/${row.classId}`}
-              sx={{
-                whiteSpace: 'nowrap',
-                display: 'block',
-                maxWidth: '125px',
-                '& p': {
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                },
-              }}
+              sx={tableStyles.ellipsisContentColumn}
             >
               {row?.className && <BlockContent content={row?.className} />}
             </Link>

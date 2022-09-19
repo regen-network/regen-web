@@ -40,7 +40,7 @@ const useCreateSellOrderSubmit = ({
   const createSellOrderSubmit = useCallback(
     async (values: CreateSellOrderFormValues): Promise<void> => {
       if (!accountAddress) return Promise.reject();
-      const { amount, batchDenom, price, disableAutoRetire, askDenom } = values;
+      const { amount, batchDenom, price, enableAutoRetire, askDenom } = values;
 
       // convert to udenom
       const priceInMicro = price ? String(denomToMicro(price)) : ''; // TODO: When other currencies, check for micro denom before converting
@@ -51,7 +51,7 @@ const useCreateSellOrderSubmit = ({
             batchDenom,
             quantity: String(amount),
             askPrice: { denom: askDenom, amount: priceInMicro },
-            disableAutoRetire,
+            disableAutoRetire: !enableAutoRetire,
           },
         ],
       });

@@ -28,6 +28,8 @@ export interface BatchInfoWithSupply
     Omit<QuerySupplyResponse, '$type'> {
   txhash?: string;
   classId?: string;
+  className?: string;
+  projectName?: string;
   projectLocation?: string;
 }
 

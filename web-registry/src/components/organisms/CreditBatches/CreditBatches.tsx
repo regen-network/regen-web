@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import cx from 'clsx';
 
+import { BlockContent } from 'web-components/lib/components/block-content';
 import Section from 'web-components/lib/components/section';
 import {
   ActionsTable,
@@ -39,6 +40,7 @@ interface HeadCell {
 
 const headCells: HeadCell[] = [
   { id: 'txhash', numeric: false, label: 'tx hash' },
+  { id: 'projectName', numeric: false, label: 'project' },
   { id: 'classId', numeric: false, label: 'credit class' },
   { id: 'denom', numeric: false, label: 'batch denom' },
   { id: 'issuer', numeric: false, label: 'issuer' },
@@ -120,9 +122,35 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           >
             {truncateHash(batch.txhash)}
           </Link>,
+          <WithLoader isLoading={!batch.projectName} variant="skeleton">
+            <Link
+              href={`/projects/${batch?.projectId}`}
+              sx={{
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                display: 'block',
+                maxWidth: '125px',
+              }}
+            >
+              {batch?.projectName}
+            </Link>
+          </WithLoader>,
           <WithLoader isLoading={!batch.classId} variant="skeleton">
-            <Link key="classId" href={`/credit-classes/${batch.classId}`}>
-              {batch.classId}
+            <Link
+              key="classId"
+              href={`/credit-classes/${batch.classId}`}
+              sx={{
+                whiteSpace: 'nowrap',
+                display: 'block',
+                maxWidth: '125px',
+                '& p': {
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                },
+              }}
+            >
+              <BlockContent content={batch.className} />
             </Link>
           </WithLoader>,
           <Link

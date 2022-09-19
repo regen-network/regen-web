@@ -3,8 +3,11 @@ import { BatchInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/q
 
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 
+import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { addDataToBatch } from 'lib/ecocredit/api';
+
+import { client as sanityClient } from '../../sanity';
 
 type Props = {
   batches?: BatchInfo[];
@@ -18,6 +21,9 @@ export const useBatchesWithSupply = ({
   const [batchesWithSupply, setBatchesWithSupply] = useState<
     BatchInfoWithSupply[] | undefined
   >();
+  const { data: sanityCreditClassData } = useAllCreditClassQuery({
+    client: sanityClient,
+  });
 
   useEffect(() => {
     // Initialize batches with empty supply to render components consuming data right away
@@ -39,13 +45,21 @@ export const useBatchesWithSupply = ({
     let ignore = false;
     const addSupplyToBatches = async (): Promise<void> => {
       // Fetch one page of batches
-      if (batches && batchesWithSupply && paginationParams) {
+      if (
+        batches &&
+        batchesWithSupply &&
+        paginationParams &&
+        sanityCreditClassData
+      ) {
         const { offset, rowsPerPage } = paginationParams;
         // current page batches
         const displayedBatches = batches.slice(offset, offset + rowsPerPage);
         try {
           // add supply to page batches
-          const newBatchesWithData = await addDataToBatch(displayedBatches);
+          const newBatchesWithData = await addDataToBatch({
+            batches: displayedBatches,
+            sanityCreditClassData,
+          });
           if (!ignore) {
             // merge new batches into state variable
             setBatchesWithSupply([
@@ -64,7 +78,7 @@ export const useBatchesWithSupply = ({
       } else if (batches) {
         // Fetch all batches
         try {
-          const batchesWithSupply = await addDataToBatch(batches);
+          const batchesWithSupply = await addDataToBatch({ batches });
           if (!ignore) {
             setBatchesWithSupply(batchesWithSupply);
           }
@@ -99,7 +113,7 @@ export const useBatchesWithSupply = ({
     return () => {
       ignore = true;
     };
-  }, [batches, batchesWithSupply, paginationParams]);
+  }, [batches, batchesWithSupply, paginationParams, sanityCreditClassData]);
 
   return batchesWithSupply;
 };

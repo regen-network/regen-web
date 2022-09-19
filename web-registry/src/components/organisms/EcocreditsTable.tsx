@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, styled } from '@mui/material';
 
+import { BlockContent } from 'web-components/lib/components/block-content';
 import {
   ActionsTable,
   RenderActionButtonsFunc,
@@ -58,6 +59,7 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
           Batch Denom
         </Box>,
         'Issuer',
+        'Project',
         'Credit Class',
         <BreakText>Amount Tradable</BreakText>,
         <BreakText>Amount Retired</BreakText>,
@@ -70,9 +72,35 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
         return [
           <Link href={`/credit-batches/${row.denom}`}>{row.denom}</Link>,
           <AccountLink address={row.issuer} />,
+          <WithLoader isLoading={!row.projectName} variant="skeleton">
+            <Link
+              href={`/projects/${row?.projectId}`}
+              sx={{
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                display: 'block',
+                maxWidth: '125px',
+              }}
+            >
+              {row?.projectName}
+            </Link>
+          </WithLoader>,
           <WithLoader isLoading={!row.classId} variant="skeleton">
-            <Link key="class_id" href={`/credit-classes/${row.classId}`}>
-              {row.classId}
+            <Link
+              key="class_id"
+              href={`/credit-classes/${row.classId}`}
+              sx={{
+                whiteSpace: 'nowrap',
+                display: 'block',
+                maxWidth: '125px',
+                '& p': {
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                },
+              }}
+            >
+              {row?.className && <BlockContent content={row?.className} />}
             </Link>
           </WithLoader>,
           formatNumber({ num: row.balance?.tradableAmount }),

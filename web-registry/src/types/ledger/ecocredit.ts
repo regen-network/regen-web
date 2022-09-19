@@ -19,6 +19,8 @@ export interface BatchInfoWithBalance
   extends IBatchInfo,
     Omit<QueryBalanceResponse, '$type'> {
   classId?: string;
+  className?: string;
+  projectName?: string;
   projectLocation?: string;
 }
 

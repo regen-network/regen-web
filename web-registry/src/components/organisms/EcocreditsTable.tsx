@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, styled } from '@mui/material';
-import { tableStyles } from 'styles/table';
+import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import {
@@ -48,6 +48,7 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
       onTableChange={onTableChange}
       /* eslint-disable react/jsx-key */
       headerRows={[
+        <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>{'Project'}</Box>,
         <Box
           sx={{
             minWidth: {
@@ -60,7 +61,6 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
           Batch Denom
         </Box>,
         'Issuer',
-        'Project',
         'Credit Class',
         <BreakText>Amount Tradable</BreakText>,
         <BreakText>Amount Retired</BreakText>,
@@ -71,8 +71,6 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
       ]}
       rows={credits.map((row, i) => {
         return [
-          <Link href={`/credit-batches/${row.denom}`}>{row.denom}</Link>,
-          <AccountLink address={row.issuer} />,
           <WithLoader isLoading={!row.projectName} variant="skeleton">
             <Link
               href={`/projects/${row?.projectId}`}
@@ -81,6 +79,8 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
               {row?.projectName}
             </Link>
           </WithLoader>,
+          <Link href={`/credit-batches/${row.denom}`}>{row.denom}</Link>,
+          <AccountLink address={row.issuer} />,
           <WithLoader isLoading={!row.classId} variant="skeleton">
             <Link
               key="class_id"

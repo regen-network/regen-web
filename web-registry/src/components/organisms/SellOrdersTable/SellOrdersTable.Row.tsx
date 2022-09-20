@@ -1,7 +1,8 @@
 import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
 import { Box } from '@mui/material';
+import { tableStyles } from 'styles/table';
 
+import { BlockContent } from 'web-components/lib/components/block-content';
 import InfoLabel from 'web-components/lib/components/info-label';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';
@@ -41,7 +42,9 @@ const getSellOrdersTableRow = ({
 }: Props): React.ReactNode[] => [
   <Link href={`/marketplace/sell-order/${id}`}>{id}</Link>,
   <WithLoader isLoading={project?.name === undefined} variant="skeleton">
-    <Link href={`/projects/${project?.id}}`}>{project?.name}</Link>
+    <Link href={`/projects/${project?.id}`} sx={tableStyles.ellipsisColumn}>
+      {project?.name}
+    </Link>
   </WithLoader>,
   <Box sx={{ fontWeight: 700, display: 'flex', alignItems: 'center' }}>
     <DenomIcon
@@ -56,20 +59,16 @@ const getSellOrdersTableRow = ({
   </Box>,
   <Box>{formatNumber({ num: amountAvailable })}</Box>,
   <WithLoader isLoading={project?.classIdUrl === undefined} variant="skeleton">
-    <Link href={`/credit-classes/${project?.classIdUrl}`}>
-      {project?.classIdName && ReactHtmlParser(project?.classIdName)}
+    <Link
+      href={`/credit-classes/${project?.classIdUrl}`}
+      sx={tableStyles.ellipsisContentColumn}
+    >
+      {project?.classIdName && <BlockContent content={project?.classIdName} />}
     </Link>
   </WithLoader>,
   <Link
     href={`/credit-batches/${batchDenom}`}
-    sx={{
-      whiteSpace: 'nowrap',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      display: 'block',
-      maxWidth: '74px',
-      direction: 'rtl',
-    }}
+    sx={{ ...tableStyles.ellipsisColumn, direction: 'rtl' }}
   >
     {batchDenom}
   </Link>,

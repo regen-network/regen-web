@@ -73,11 +73,19 @@ const getSellOrdersTableRow = ({
   >
     {batchDenom}
   </Link>,
-  <Box>
+  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+    {!disableAutoRetire && (
+      <InfoLabel
+        label="Tradeable"
+        variant="success"
+        icon={<SellOrderPurchaseIcon icon="arrowDown" />}
+        sx={{ mr: 4 }}
+      />
+    )}
     <InfoLabel
-      label={disableAutoRetire ? 'Tradeable' : 'Retired'}
-      variant={disableAutoRetire ? 'success' : 'default'}
-      icon={<SellOrderPurchaseIcon disableAutoRetire={disableAutoRetire} />}
+      label="Retired"
+      variant="default"
+      icon={<SellOrderPurchaseIcon icon="tradeable" />}
     />
   </Box>,
   <WithLoader isLoading={batchStartDate === undefined} variant="skeleton">

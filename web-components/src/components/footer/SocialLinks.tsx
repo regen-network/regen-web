@@ -56,6 +56,7 @@ const SocialLinks: React.FC<Props> = ({ className }) => {
     <div className={className}>
       <Label
         size="lg"
+        mobileSize="sm"
         sx={{ textAlign: { sm: 'center' }, mb: { xs: 4.5, sm: 3.75 } }}
       >
         join the community

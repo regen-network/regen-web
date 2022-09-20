@@ -19,6 +19,8 @@ export interface BatchInfoWithBalance
   extends IBatchInfo,
     Omit<QueryBalanceResponse, '$type'> {
   classId?: string;
+  className?: string;
+  projectName?: string;
   projectLocation?: string;
 }
 
@@ -28,6 +30,8 @@ export interface BatchInfoWithSupply
     Omit<QuerySupplyResponse, '$type'> {
   txhash?: string;
   classId?: string;
+  className?: string;
+  projectName?: string;
   projectLocation?: string;
 }
 

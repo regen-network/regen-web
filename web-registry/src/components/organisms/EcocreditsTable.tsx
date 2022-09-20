@@ -1,6 +1,8 @@
 import React from 'react';
 import { Box, styled } from '@mui/material';
+import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
 
+import { BlockContent } from 'web-components/lib/components/block-content';
 import {
   ActionsTable,
   RenderActionButtonsFunc,
@@ -46,6 +48,7 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
       onTableChange={onTableChange}
       /* eslint-disable react/jsx-key */
       headerRows={[
+        <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>{'Project'}</Box>,
         <Box
           sx={{
             minWidth: {
@@ -68,11 +71,23 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
       ]}
       rows={credits.map((row, i) => {
         return [
+          <WithLoader isLoading={!row.projectName} variant="skeleton">
+            <Link
+              href={`/projects/${row?.projectId}`}
+              sx={tableStyles.ellipsisColumn}
+            >
+              {row?.projectName}
+            </Link>
+          </WithLoader>,
           <Link href={`/credit-batches/${row.denom}`}>{row.denom}</Link>,
           <AccountLink address={row.issuer} />,
           <WithLoader isLoading={!row.classId} variant="skeleton">
-            <Link key="class_id" href={`/credit-classes/${row.classId}`}>
-              {row.classId}
+            <Link
+              key="class_id"
+              href={`/credit-classes/${row.classId}`}
+              sx={tableStyles.ellipsisContentColumn}
+            >
+              {row?.className && <BlockContent content={row?.className} />}
             </Link>
           </WithLoader>,
           formatNumber({ num: row.balance?.tradableAmount }),

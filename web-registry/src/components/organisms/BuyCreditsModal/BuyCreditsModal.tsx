@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { Link } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
@@ -39,13 +39,13 @@ import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.uti
 import useMarketplaceQuery from 'hooks/useMarketplaceQuery';
 
 import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
+import { SetSelectedSellOrderElement } from './BuyCreditsModal.SetSelectedSellOrderElement';
 import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
 import {
   getCreditCountValidation,
   getOptions,
   handleBuyCreditsSubmit,
 } from './BuyCreditsModal.utils';
-import { useSetSelectedSellOrder } from './hooks/useSetSelectedSellOrder';
 
 const LocationCountryField = lazy(
   () => import('web-components/lib/components/inputs/LocationCountryField'),
@@ -104,8 +104,9 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
 }) => {
   const styles = useBuyCreditsModalStyles();
   const theme = useTheme();
-  const { selectedSellOrder, SetSelectedSellOrderElement } =
-    useSetSelectedSellOrder(project);
+  const [selectedSellOrder, setSelectedSellOrder] = useState<
+    UISellOrderInfo | undefined
+  >(undefined);
 
   const validationHandler = (
     values: BuyCreditsValues,
@@ -205,7 +206,11 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       sellOrdersOptions.length === 1
                     }
                   />
-                  <SetSelectedSellOrderElement />
+                  <SetSelectedSellOrderElement
+                    project={project}
+                    selectedSellOrder={selectedSellOrder}
+                    setSelectedSellOrder={setSelectedSellOrder}
+                  />
                   <Collapse in={!!selectedSellOrder}>
                     <div className={styles.field}>
                       <Title variant="h5" sx={{ mb: 2, mr: 2 }}>

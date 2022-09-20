@@ -131,9 +131,12 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
               {batch?.projectName}
             </Link>
           </WithLoader>,
-          <WithLoader isLoading={!batch.classId} variant="skeleton">
+          <WithLoader
+            isLoading={!batch.classId}
+            variant="skeleton"
+            key="classId"
+          >
             <Link
-              key="classId"
               href={`/credit-classes/${batch.classId}`}
               sx={tableStyles.ellipsisContentColumn}
             >

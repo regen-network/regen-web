@@ -21,7 +21,7 @@ export const SELL_ORDERS_ROW = [
       whiteSpace: 'normal',
     }}
   >
-    <Box sx={{ mr: 1 }}>{'PURCHASE OPTION'}</Box>
+    <Box sx={{ mr: 1 }}>{'PURCHASE OPTIONS'}</Box>
     <InfoTooltip title={PURCHASE_OPTION_TOOLTIP} arrow placement="top">
       <Box sx={{ display: 'flex', alignItems: 'bottom' }}>
         <QuestionIconOutlined sx={{ color: 'secondary.main' }} />

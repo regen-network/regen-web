@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 
@@ -93,6 +93,14 @@ export const BuySellOrderFlow = ({
     buttonTitle: VIEW_ECOCREDITS,
   });
 
+  const project = useMemo(
+    () => ({
+      id: selectedProject?.id.toString() ?? '',
+      sellOrders: selectedProject?.sellOrders,
+    }),
+    [selectedProject],
+  );
+
   useEffect(() => {
     if (isFlowStarted && selectedProject && accountAddress) {
       setIsBuyModalOpen(true);
@@ -107,10 +115,7 @@ export const BuySellOrderFlow = ({
         open={isBuyModalOpen}
         onClose={closeBuyModal}
         onSubmit={buySellOrderSubmit}
-        project={{
-          id: selectedProject?.id.toString() ?? '',
-          sellOrders: selectedProject?.sellOrders,
-        }}
+        project={project}
       />
       <ProcessingModal
         open={isProcessingModalOpen}

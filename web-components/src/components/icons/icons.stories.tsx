@@ -45,6 +45,8 @@ import PointerIcon from './PointerIcon';
 import PrintIcon from './PrintIcon';
 import { ProjectPageIcon } from './ProjectPageIcon';
 import { ProjectPageIconSmall } from './ProjectPageIconSmall';
+import QuestionIcon from './QuestionIcon';
+import QuestionIconOutlined from './QuestionIconOutlined';
 import RegenIcon from './RegenIcon';
 import RegenLedgerIcon from './RegenLedgerIcon';
 import RegenLogoIcon from './RegenLogoIcon';
@@ -70,6 +72,7 @@ import YoutubeIcon from './social/YoutubeIcon';
 import SoilSampleIcon from './SoilSampleIcon';
 import { Spinner } from './Spinner';
 import TotalCreditsIcon from './TotalCreditsIcon';
+import TradeableIcon from './TradeableIcon';
 import TrashIcon from './TrashIcon';
 import TrustDocumentIcon from './TrustDocumentIcon';
 import TrustIcon from './TrustIcon';
@@ -185,6 +188,11 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<PrintIcon />} label="PrintIcon" />
     <LabeledIcon icon={<ProjectPageIcon />} label="ProjectPageIcon" />
     <LabeledIcon icon={<ProjectPageIconSmall />} label="ProjectPageIconSmall" />
+    <LabeledIcon icon={<QuestionIcon />} label="QuestionIcon" />
+    <LabeledIcon
+      icon={<QuestionIconOutlined sx={{ color: 'secondary.main' }} />}
+      label="QuestionIconOutlined"
+    />
     <LabeledIcon icon={<RegenIcon />} label="RegenIcon" />
     <LabeledIcon icon={<RegenLedgerIcon />} label="RegenLedgerIcon" />
     <LabeledIcon icon={<RegenLogoIcon color="grey" />} label="RegenLogoIcon" />
@@ -205,6 +213,10 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<Spinner />} label="Spinner" />
     <LabeledIcon icon={<TelegramIcon color="blue" />} label="TelegramIcon" />
     <LabeledIcon icon={<TotalCreditsIcon />} label="TotalCreditsIcon" />
+    <LabeledIcon
+      icon={<TradeableIcon sx={{ color: 'grey.600' }} />}
+      label="tradeableIcon"
+    />
     <LabeledIcon icon={<TrashIcon color="grey" />} label="TrashIcon" />
     <LabeledIcon icon={<TrustIcon />} label="TrustIcon" />
     <LabeledIcon icon={<TrustDocumentIcon />} label="TrustDocumentIcon" />

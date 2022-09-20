@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 
+import InfoIcon from '../icons/InfoIcon';
 import AmountField from '../inputs/AmountField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import NumberTextField from '../inputs/NumberTextField';
@@ -12,6 +13,7 @@ import {
   validatePrice,
 } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
+import InfoTooltip from '../tooltip/InfoTooltip';
 import { Subtitle } from '../typography';
 import Submit from './Submit';
 
@@ -32,7 +34,7 @@ export interface FormValues {
   askDenom?: string;
   price?: number;
   amount?: number;
-  disableAutoRetire?: boolean;
+  enableAutoRetire?: boolean;
 }
 
 const CreateSellOrderForm: React.FC<FormProps> = ({
@@ -48,7 +50,7 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
     batchDenom: batchDenoms[0]?.value ?? '',
     price: undefined,
     amount: undefined,
-    disableAutoRetire: false,
+    enableAutoRetire: true,
   };
 
   useEffect(() => {
@@ -131,13 +133,26 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
           <Field
             component={CheckboxLabel}
             type="checkbox"
-            name="disableAutoRetire"
+            name="enableAutoRetire"
             label={
-              <Subtitle size="lg" color="primary.contrastText">
-                Disable auto-retire
-              </Subtitle>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Subtitle size="lg" color="primary.contrastText" sx={{ mr: 2 }}>
+                  Require that credits are retired upon purchase
+                </Subtitle>
+                <InfoTooltip
+                  title={
+                    'If you uncheck this option, buyers will be able to choose to keep the credits tradable'
+                  }
+                  arrow
+                  placement="top"
+                >
+                  <span>
+                    <InfoIcon />
+                  </span>
+                </InfoTooltip>
+              </Box>
             }
-            sx={{ mt: 12 }}
+            sx={{ mt: 12, mr: 2 }}
           />
           <Submit
             isSubmitting={isSubmitting}

@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
 import {
   BatchInfo,
@@ -40,6 +41,7 @@ import { useResetErrorBanner } from './hooks/useResetErrorBanner';
 import {
   BUY_SELL_ORDER_ACTION,
   BUY_SELL_ORDER_BUTTON,
+  BUY_SELL_ORDER_TITLE,
   CANCEL_SELL_ORDER_ACTION,
 } from './Storefront.constants';
 import {
@@ -103,6 +105,7 @@ export const Storefront = (): JSX.Element => {
   const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
   const [selectedAction, setSelectedAction] = useState<SellOrderActions>();
   const isBuyModalOpen = selectedSellOrder !== null && selectedAction === 'buy';
+  const navigate = useNavigate();
   const isCancelModalOpen =
     selectedSellOrder !== null && selectedAction === 'cancel';
   useResetErrorBanner({ displayErrorBanner, setDisplayErrorBanner });
@@ -146,7 +149,11 @@ export const Storefront = (): JSX.Element => {
   };
 
   const onButtonClick = (): void => {
-    handleTxModalClose();
+    if (txModalTitle === BUY_SELL_ORDER_TITLE) {
+      navigate('/ecocredits/dashboard');
+    } else {
+      handleTxModalClose();
+    }
   };
 
   const {

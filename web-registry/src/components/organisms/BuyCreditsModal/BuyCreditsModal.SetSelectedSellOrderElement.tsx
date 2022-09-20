@@ -20,17 +20,13 @@ export const SetSelectedSellOrderElement = ({
   const { values, setFieldValue } = useFormikContext<BuyCreditsValues>();
 
   useEffect(() => {
-    if (!selectedSellOrder && project.sellOrders?.[0] !== undefined) {
+    if (!selectedSellOrder && project.sellOrders?.length === 1) {
       setSelectedSellOrder(project?.sellOrders?.[0]);
     }
   }, [project, selectedSellOrder, setSelectedSellOrder]);
 
   useEffect(() => {
-    if (
-      selectedSellOrder &&
-      values.sellOrderId &&
-      selectedSellOrder?.id !== values.sellOrderId
-    ) {
+    if (values.sellOrderId && selectedSellOrder?.id !== values.sellOrderId) {
       const _selectedSellOrder = project?.sellOrders?.find(
         sellOrder => sellOrder.id === values?.sellOrderId,
       );

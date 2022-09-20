@@ -24,6 +24,7 @@ import {
 import { Title } from 'web-components/lib/components/typography';
 
 import { useAllProjectsQuery } from 'generated/graphql';
+import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { getHashUrl } from 'lib/block-explorer';
 
 import { Link } from 'components/atoms';
@@ -35,8 +36,10 @@ import useMsgClient from 'hooks/useMsgClient';
 import useQueryListBatchInfo from 'hooks/useQueryListBatchInfo';
 import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
 
+import { client as sanityClient } from '../../../sanity';
 import useBuySellOrderSubmit from './hooks/useBuySellOrderSubmit';
 import useCancelSellOrderSubmit from './hooks/useCancelSellOrderSubmit';
+import { useFetchMetadataProjects } from './hooks/useFetchMetadataProjects';
 import { useResetErrorBanner } from './hooks/useResetErrorBanner';
 import {
   BUY_SELL_ORDER_ACTION,
@@ -93,6 +96,15 @@ export const Storefront = (): JSX.Element => {
     params: {},
   });
 
+  const { data: sanityCreditClassData } = useAllCreditClassQuery({
+    client: sanityClient,
+  });
+
+  const { projectsWithMetadata: onChainprojectsWithMedata } =
+    useFetchMetadataProjects({
+      projects: onChainProjects?.projects,
+    });
+
   const [selectedSellOrder, setSelectedSellOrder] = useState<number | null>(
     null,
   );
@@ -114,9 +126,10 @@ export const Storefront = (): JSX.Element => {
     () =>
       normalizeProjectsInfosByHandleMap({
         offChainProjects: offChainProjectData?.allProjects,
-        onChainProjects: onChainProjects?.projects,
+        onChainProjects: onChainprojectsWithMedata,
+        sanityCreditClassData,
       }),
-    [offChainProjectData, onChainProjects],
+    [offChainProjectData, onChainprojectsWithMedata, sanityCreditClassData],
   );
 
   const normalizedSellOrders = useMemo(

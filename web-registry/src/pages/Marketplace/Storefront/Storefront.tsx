@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
 import {
   BatchInfo,
@@ -23,6 +24,7 @@ import {
 import { Title } from 'web-components/lib/components/typography';
 
 import { useAllProjectsQuery } from 'generated/graphql';
+import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { getHashUrl } from 'lib/block-explorer';
 
 import { Link } from 'components/atoms';
@@ -34,12 +36,15 @@ import useMsgClient from 'hooks/useMsgClient';
 import useQueryListBatchInfo from 'hooks/useQueryListBatchInfo';
 import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
 
+import { client as sanityClient } from '../../../sanity';
 import useBuySellOrderSubmit from './hooks/useBuySellOrderSubmit';
 import useCancelSellOrderSubmit from './hooks/useCancelSellOrderSubmit';
+import { useFetchMetadataProjects } from './hooks/useFetchMetadataProjects';
 import { useResetErrorBanner } from './hooks/useResetErrorBanner';
 import {
   BUY_SELL_ORDER_ACTION,
   BUY_SELL_ORDER_BUTTON,
+  BUY_SELL_ORDER_TITLE,
   CANCEL_SELL_ORDER_ACTION,
 } from './Storefront.constants';
 import {
@@ -91,6 +96,15 @@ export const Storefront = (): JSX.Element => {
     params: {},
   });
 
+  const { data: sanityCreditClassData } = useAllCreditClassQuery({
+    client: sanityClient,
+  });
+
+  const { projectsWithMetadata: onChainprojectsWithMedata } =
+    useFetchMetadataProjects({
+      projects: onChainProjects?.projects,
+    });
+
   const [selectedSellOrder, setSelectedSellOrder] = useState<number | null>(
     null,
   );
@@ -103,6 +117,7 @@ export const Storefront = (): JSX.Element => {
   const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
   const [selectedAction, setSelectedAction] = useState<SellOrderActions>();
   const isBuyModalOpen = selectedSellOrder !== null && selectedAction === 'buy';
+  const navigate = useNavigate();
   const isCancelModalOpen =
     selectedSellOrder !== null && selectedAction === 'cancel';
   useResetErrorBanner({ displayErrorBanner, setDisplayErrorBanner });
@@ -111,9 +126,10 @@ export const Storefront = (): JSX.Element => {
     () =>
       normalizeProjectsInfosByHandleMap({
         offChainProjects: offChainProjectData?.allProjects,
-        onChainProjects: onChainProjects?.projects,
+        onChainProjects: onChainprojectsWithMedata,
+        sanityCreditClassData,
       }),
-    [offChainProjectData, onChainProjects],
+    [offChainProjectData, onChainprojectsWithMedata, sanityCreditClassData],
   );
 
   const normalizedSellOrders = useMemo(
@@ -146,7 +162,11 @@ export const Storefront = (): JSX.Element => {
   };
 
   const onButtonClick = (): void => {
-    handleTxModalClose();
+    if (txModalTitle === BUY_SELL_ORDER_TITLE) {
+      navigate('/ecocredits/dashboard');
+    } else {
+      handleTxModalClose();
+    }
   };
 
   const {

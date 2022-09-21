@@ -4,6 +4,8 @@ import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
+import WithLoader from 'components/atoms/WithLoader';
+
 import { getBatchesWithSupply } from '../../lib/ecocredit/api';
 import { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { Statistic } from '../molecules';
@@ -92,19 +94,22 @@ const CreditTotals: React.FC = () => {
   return (
     <Grid container spacing={6} className={styles.root}>
       <Grid item xs={12} sm={3} className={styles.item}>
-        <Statistic label="ecocredits tradeable" count={totals.tradeable} />
+        <Statistic
+          label="ecocredits tradeable"
+          count={totals.tradeable ? totals.tradeable : undefined}
+        />
       </Grid>
       <Grid item xs={12} sm={3} className={styles.item}>
         <Statistic
           label="ecocredits retired"
-          count={totals.retired}
+          count={totals.retired ? totals.retired : undefined}
           arrow="downLeft"
         />
       </Grid>
       <Grid item xs={12} sm={3} className={styles.item}>
         <Statistic
           label="ecocredits created"
-          count={totals.created}
+          count={totals.created ? totals.created : undefined}
           arrow="upRight"
         />
       </Grid>

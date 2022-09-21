@@ -73,7 +73,7 @@ const getSellOrdersTableRow = ({
     {batchDenom}
   </Link>,
   <Box sx={{ display: 'flex', alignItems: 'center' }}>
-    {!disableAutoRetire && (
+    {disableAutoRetire && (
       <InfoLabel
         label="Tradeable"
         variant="success"
@@ -82,7 +82,7 @@ const getSellOrdersTableRow = ({
       />
     )}
     <InfoLabel
-      label="Retired"
+      label={disableAutoRetire ? 'Retireable' : 'Retired'}
       variant="default"
       icon={<SellOrderPurchaseIcon icon="tradeable" />}
     />

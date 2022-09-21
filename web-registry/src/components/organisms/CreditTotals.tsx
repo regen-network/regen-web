@@ -4,8 +4,6 @@ import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import WithLoader from 'components/atoms/WithLoader';
-
 import { getBatchesWithSupply } from '../../lib/ecocredit/api';
 import { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { Statistic } from '../molecules';
@@ -75,7 +73,7 @@ const CreditTotals: React.FC = () => {
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       try {
-        const res = await getBatchesWithSupply();
+        const res = await getBatchesWithSupply({ withAllData: false });
         const data: BatchInfoWithSupply[] = res?.data;
 
         if (data) {

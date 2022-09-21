@@ -2,6 +2,7 @@ import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1
 import {
   GetTxsEventRequest,
   GetTxsEventResponse,
+  OrderBy,
   ServiceClientImpl,
 } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import {
@@ -200,7 +201,9 @@ export const getEcocreditTxs = async (): Promise<TxResponse[]> => {
       try {
         const response = await getTxsByEvent({
           events: [`${messageActionEquals}'${msgType.message}'`],
+          orderBy: OrderBy.ORDER_BY_DESC,
         });
+
         if (response?.txResponses) {
           allTxs = [...allTxs, ...response.txResponses];
         }

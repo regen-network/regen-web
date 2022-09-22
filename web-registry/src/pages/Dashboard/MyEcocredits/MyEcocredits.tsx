@@ -152,6 +152,7 @@ export const MyEcocredits = (): JSX.Element => {
     address: accountAddress,
     paginationParams,
   });
+
   const allowedDenomsResponse = useMarketplaceQuery<QueryAllowedDenomsResponse>(
     {
       query: 'allowedDenoms',

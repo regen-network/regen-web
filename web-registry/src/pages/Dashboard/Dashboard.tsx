@@ -18,7 +18,6 @@ import { useWallet } from 'lib/wallet';
 import { useEcocreditQuery } from 'hooks';
 import { useQueryIfCreditClassAdmin } from 'hooks/useQueryIfCreditClassAdmin';
 import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator';
-import { useQueryIfIssuer } from 'hooks/useQueryIfIssuer';
 import { useQueryIfProjectAdmin } from 'hooks/useQueryIfProjectAdmin';
 
 import MyCreditBatches from './MyCreditBatches';

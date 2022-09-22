@@ -44,6 +44,7 @@ const sxs = {
 const Dashboard = (): JSX.Element => {
   const theme = useTheme();
   const isIssuer = useQueryIfIssuer();
+  // const isIssuer = false;
   const isCreditClassCreator = useQueryIfCreditClassCreator();
   const isCreditClassAdmin = useQueryIfCreditClassAdmin();
   const isProjectAdmin = useQueryIfProjectAdmin();

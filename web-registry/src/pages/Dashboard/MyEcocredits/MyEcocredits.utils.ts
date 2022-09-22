@@ -20,7 +20,7 @@ export const getOtherSellOrderBatchDenomOptions = ({
     .filter(
       credit =>
         credit.denom !== credits[sellOrderCreateOpen].denom &&
-        Number(credit.balance?.tradableAmount) === 0,
+        Number(credit.balance?.tradableAmount) > 0,
     )
     .map(credit => ({
       label: credit.denom,

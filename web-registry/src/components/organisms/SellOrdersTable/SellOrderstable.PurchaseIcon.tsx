@@ -1,13 +1,13 @@
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import TradeableIcon from 'web-components/lib/components/icons/TradeableIcon';
 
-type PurchaseIconsType = 'arrowDown' | 'tradeable';
+type PurchaseIconsType = 'arrowDown' | 'tradable';
 
 type Props = { icon: PurchaseIconsType };
 
 export const SellOrderPurchaseIcon = ({ icon }: Props): JSX.Element => {
   const isArrowDown = icon === 'arrowDown';
-  const isTradeable = icon === 'tradeable';
+  const isTradable = icon === 'tradable';
 
   return (
     <>
@@ -17,7 +17,7 @@ export const SellOrderPurchaseIcon = ({ icon }: Props): JSX.Element => {
           sx={{ display: 'flex', alignItems: 'center', fontSize: 18 }}
         />
       )}
-      {isTradeable && (
+      {isTradable && (
         <TradeableIcon
           sx={{
             display: 'flex',

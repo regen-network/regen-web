@@ -75,16 +75,16 @@ const getSellOrdersTableRow = ({
   <Box sx={{ display: 'flex', alignItems: 'center' }}>
     {disableAutoRetire && (
       <InfoLabel
-        label="Tradeable"
+        label="Tradable"
         variant="success"
         icon={<SellOrderPurchaseIcon icon="arrowDown" />}
         sx={{ mr: 4 }}
       />
     )}
     <InfoLabel
-      label={disableAutoRetire ? 'Retireable' : 'Retired'}
+      label="Retirable"
       variant="default"
-      icon={<SellOrderPurchaseIcon icon="tradeable" />}
+      icon={<SellOrderPurchaseIcon icon="tradable" />}
     />
   </Box>,
   <WithLoader isLoading={batchStartDate === undefined} variant="skeleton">

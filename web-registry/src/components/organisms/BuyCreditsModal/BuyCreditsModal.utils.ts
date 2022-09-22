@@ -53,10 +53,10 @@ export const getOptions = ({
   if (!project?.sellOrders?.length) return [];
 
   const retirableSellOrders = project.sellOrders.filter(
-    sellOrder => sellOrder.disableAutoRetire,
+    sellOrder => !sellOrder.disableAutoRetire,
   );
   const retirableAndTradableSellOrders = project.sellOrders.filter(
-    sellOrder => !sellOrder.disableAutoRetire,
+    sellOrder => sellOrder.disableAutoRetire,
   );
 
   const retirableOptions = getSellOrdersOptions({

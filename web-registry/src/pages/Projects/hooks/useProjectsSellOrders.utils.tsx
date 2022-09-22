@@ -67,7 +67,10 @@ export const getPurchaseInfo = ({
   return {
     sellInfo: {
       pricePerTon: hasPrice ? `$${priceMinDisplayed}-${priceMaxDisplayed}` : '',
-      creditsAvailable: roundFloatNumber({ number: creditsAvailable }),
+      creditsAvailable: roundFloatNumber({
+        number: creditsAvailable,
+        decimals: 0,
+      }),
     },
   };
 };

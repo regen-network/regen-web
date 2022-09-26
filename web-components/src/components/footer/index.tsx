@@ -69,7 +69,7 @@ const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
       <List sx={{ p: 0 }}>
         {items.map((item, index) => (
           <ListItem
-            sx={{ py: 0.75, px: 0, ':first-of-type': { p: 0 } }}
+            sx={{ py: 0.75, px: 0, ':first-of-type': { pt: 0 } }}
             key={index}
           >
             <Link

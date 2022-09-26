@@ -9,6 +9,7 @@ import MobileMenu from '../mobile-menu';
 import { HeaderLogoLink } from './HeaderLogoLink';
 import { HeaderMenuHover, HeaderMenuItem } from './HeaderMenuHover';
 import { NavLink, NavLinkProps } from './NavLink';
+import MarketplaceLaunchBanner from './MarketplaceLaunchBanner';
 
 export interface node {
   [key: number]: React.ReactNode;
@@ -221,6 +222,7 @@ export default function Header({
         className={styles.container}
         maxWidth={fullWidth ? false : 'xl'}
       >
+        <MarketplaceLaunchBanner />
         <Box className={styles.header}>
           <HomeLink
             color={isTablet ? theme.palette.primary.contrastText : color}

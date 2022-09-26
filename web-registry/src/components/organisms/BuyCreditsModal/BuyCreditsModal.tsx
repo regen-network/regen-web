@@ -318,9 +318,12 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       description={
                         <>
                           {
-                            'These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible.'
+                            'These credits will be retired upon purchase and will not be tradable. Retirement is permanent and non-reversible.'
                           }
-                          <DynamicLink href="/" sx={{ ml: 1 }}>
+                          <DynamicLink
+                            href="https://guides.regen.network/guides/regen-marketplace/ecocredits/buy-ecocredits/by-project#5.-select-credit-retirement-options"
+                            sx={{ ml: 1 }}
+                          >
                             Learn more»
                           </DynamicLink>
                         </>
@@ -336,9 +339,12 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       description={
                         <>
                           {
-                            'These credits will be a tradeable asset. They can be retired later via Regen Registry.'
+                            'These credits will be a tradable asset. They can be retired later via Regen Registry.'
                           }
-                          <DynamicLink href="/" sx={{ ml: 1 }}>
+                          <DynamicLink
+                            href="https://guides.regen.network/guides/regen-marketplace/ecocredits/buy-ecocredits/by-project#5.-select-credit-retirement-options"
+                            sx={{ ml: 1 }}
+                          >
                             Learn more»
                           </DynamicLink>
                         </>

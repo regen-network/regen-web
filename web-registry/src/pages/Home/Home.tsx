@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, CardMedia, useMediaQuery } from '@mui/material';
-import { useTheme } from '@mui/styles';
+import { Box, CardMedia } from '@mui/material';
 import { gradients } from 'styles/gradients';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
@@ -29,7 +28,6 @@ const Home: React.FC = () => {
   const [modalLink, setModalLink] = useState<string>('');
 
   const styles = useHomeStyles();
-  const theme = useTheme();
 
   // Featured projects fetching
 
@@ -42,8 +40,6 @@ const Home: React.FC = () => {
   const creditClassesContent = creditClassData?.allCreditClass;
 
   const { batchesWithSupply, setPaginationParams } = usePaginatedBatches();
-
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   useEffect(() => {
     const anchor = window.location.hash.slice(1);
@@ -146,7 +142,7 @@ const Home: React.FC = () => {
         >
           <CreditClassCards
             btnText="Learn More"
-            justifyContent={isMobile ? 'center' : 'flex-start'}
+            justifyContent={['center', 'center', 'flex-start']}
             creditClassesContent={creditClassesContent} // CMS data
           />
         </Section>

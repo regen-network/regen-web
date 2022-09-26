@@ -23,6 +23,7 @@ import {
   queryProject,
   queryProjects,
   queryProjectsByAdmin,
+  queryProjectsByClass,
 } from '../lib/ecocredit/api';
 
 // TODO - this hook is still missing batch query functionality
@@ -117,6 +118,11 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
     [],
   );
 
+  const projectsByClass = useCallback(
+    (client, params) => queryProjectsByClass({ client, request: params }),
+    [],
+  );
+
   const project = useCallback(
     (client, params) => queryProject({ client, request: params }),
     [],
@@ -169,6 +175,9 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
         break;
       case 'projectsByAdmin':
         response = projectsByAdmin(client, params);
+        break;
+      case 'projectsByClass':
+        response = projectsByClass(client, params);
         break;
       case 'project':
         response = project(client, params);

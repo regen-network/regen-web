@@ -36,6 +36,7 @@ import {
   QueryProjectResponse,
   QueryProjectsByAdminRequest,
   QueryProjectsByAdminResponse,
+  QueryProjectsByClassRequest,
   QueryProjectsByClassResponse,
   QueryProjectsRequest,
   QueryProjectsResponse,
@@ -365,17 +366,6 @@ export const queryClassIssuers = async (
   }
 };
 
-export const queryProjectsByClass = async (
-  classId: string,
-): Promise<QueryProjectsByClassResponse> => {
-  const client = await getQueryClient();
-  try {
-    return client.ProjectsByClass({ classId });
-  } catch (err) {
-    throw new Error(`Error fetching projects by class: ${err}`);
-  }
-};
-
 export const getProject = async (
   projectId: string,
 ): Promise<QueryProjectResponse> => {
@@ -486,6 +476,11 @@ type ProjectsByAdminParams = {
   params: DeepPartial<QueryProjectsByAdminRequest>;
 };
 
+type ProjectsByClassParams = {
+  query: 'projectsByClass';
+  params: DeepPartial<QueryProjectsByClassRequest>;
+};
+
 type ProjectParams = {
   query: 'project';
   params: DeepPartial<QueryProjectRequest>;
@@ -505,6 +500,7 @@ export type EcocreditQueryProps =
   | CreditTypesParams
   | ProjectsParams
   | ProjectsByAdminParams
+  | ProjectsByClassParams
   | ProjectParams;
 
 // typing the response
@@ -522,6 +518,7 @@ export type EcocreditQueryResponse =
   | QueryCreditTypesResponse
   | QueryParamsResponse
   | QueryProjectsResponse
+  | QueryProjectsByClassResponse
   | QueryProjectsByAdminResponse
   | QueryProjectResponse;
 
@@ -771,6 +768,23 @@ export const queryProjectsByAdmin = async ({
     throw new Error(
       `Error in the ProjectsByAdmin query of the ledger ecocredit module: ${err}`,
     );
+  }
+};
+
+// ProjectsByClass
+
+interface QueryProjectsByClassProps extends EcocreditQueryClientProps {
+  request: DeepPartial<QueryProjectsByClassRequest>;
+}
+
+export const queryProjectsByClass = async ({
+  client,
+  request,
+}: QueryProjectsByClassProps): Promise<QueryProjectsByClassResponse> => {
+  try {
+    return await client.ProjectsByClass(request);
+  } catch (err) {
+    throw new Error(`Error fetching projects by class: ${err}`);
   }
 };
 

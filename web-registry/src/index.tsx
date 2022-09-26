@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { IntercomProvider } from 'react-use-intercom';
 import amplitudePlugin from '@analytics/amplitude';
+import googleAnalytics from '@analytics/google-analytics';
 import { Auth0Provider } from '@auth0/auth0-react';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -47,6 +48,9 @@ const analytics = Analytics({
       apiKey: process.env.REACT_APP_AMPLITUDE_API_KEY,
       // by default we will not track users, they must opt-in.
       enabled: false,
+    }),
+    googleAnalytics({
+      measurementIds: ['G-6ZGJM8JXYN'],
     }),
   ],
   // see here for debugging tools:

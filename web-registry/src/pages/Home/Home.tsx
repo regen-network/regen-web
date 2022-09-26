@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, CardMedia, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/styles';
+import { gradients } from 'styles/gradients';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { Loading } from 'web-components/lib/components/loading';
@@ -59,9 +60,14 @@ const Home: React.FC = () => {
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <BackgroundImgSection
-        img={heroSection?.background?.image?.asset?.url || ''}
-        linearGradient="linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%);"
+        img={
+          'https://cdn.sanity.io/images/jm12rn9t/production/ae7630b9aa71e3d701b692ed576ba0fbd4c0433a-1440x760.jpg?w=2000&fit=max&auto=format' ||
+          heroSection?.background?.image?.asset?.url ||
+          ''
+        }
+        linearGradient="linear-gradient(203.09deg, #000000 45.49%, #5E9078 92.1%);"
         classes={{ section: styles.section }}
+        sx={{ display: 'flex', alignItems: 'center', height: [600, 600, 760] }}
       >
         <Box
           sx={{
@@ -72,7 +78,7 @@ const Home: React.FC = () => {
             pt: { xs: 8, sm: 15 },
           }}
         >
-          <Box sx={{ pr: 4, maxWidth: '585px' }}>
+          <Box sx={{ pr: 4, alignSelf: 'center', maxWidth: '585px' }}>
             <Title
               variant="h1"
               sx={{
@@ -80,7 +86,14 @@ const Home: React.FC = () => {
                 lineHeight: { xs: '140%', sm: '130%' },
               }}
             >
-              {heroSection?.title}
+              Discover{' '}
+              <Box sx={{ display: 'inline-block', ...gradients.blueGreen }}>
+                Ecocredits
+              </Box>{' '}
+              and NCT{' '}
+              <Box sx={{ display: 'inline-block', ...gradients.blueGreen }}>
+                basket tokens
+              </Box>
             </Title>
             <Body
               as="div"
@@ -99,13 +112,17 @@ const Home: React.FC = () => {
           <Box
             sx={{
               alignSelf: 'center',
-              maxWidth: { xs: '187px', sm: '100%' },
+              maxWidth: ['252px', '560px'],
             }}
           >
             <img
               loading="lazy"
               style={{ width: '100%' }}
-              src={heroSection?.icon?.image?.asset?.url || ''}
+              src={
+                'https://cdn.sanity.io/images/jm12rn9t/production/5402a5e5868601a1920b270178dfbe0b60da6683-590x503.png?w=2000&fit=max&auto=format' ||
+                heroSection?.icon?.image?.asset?.url ||
+                ''
+              }
               alt={heroSection?.icon?.imageAlt || 'icon'}
             />
           </Box>

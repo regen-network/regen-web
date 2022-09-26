@@ -7,9 +7,11 @@ import { Label, Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { formatNumber } from 'web-components/lib/utils/format';
 
+import WithLoader from 'components/atoms/WithLoader';
+
 interface StatisticProps {
   label: string;
-  count: number;
+  count?: number;
   arrow?: 'upRight' | 'downLeft';
 }
 
@@ -55,7 +57,13 @@ const Statistic: React.FC<StatisticProps> = ({ label, count, arrow }) => {
             />
           </Box>
         )}
-        <Title variant="h3">{formatNumber({ num: count })}</Title>
+        <WithLoader
+          isLoading={count === undefined}
+          variant="skeleton"
+          sx={{ width: '100%' }}
+        >
+          <Title variant="h3">{formatNumber({ num: count })}</Title>
+        </WithLoader>
       </Box>
     </Box>
   );

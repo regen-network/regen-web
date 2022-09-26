@@ -8,15 +8,6 @@ import 'clientjs';
 const COOKIE_GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_COOKIES_ENABLED =
   'gatsby-plugin-google-analytics-gdpr_cookies-enabled';
 const trackingId = 'UA-119338253-2';
-// the following running modes are used with window.GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_RUNNING_WITH_MODE
-const GA_MODE_RUNNING_COOKIES_DISABLED = 'runningCookiesDisabled';
-const GA_MODE_RUNNING_COOKIES_ENABLED = 'runningCookieEnabled';
-
-declare global {
-  interface Window {
-    GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_RUNNING_WITH_MODE: string;
-  }
-}
 
 function determineClientId(): number {
   const client = new window.ClientJS();
@@ -27,24 +18,19 @@ function determineClientId(): number {
 function initializeGA(): void {
   let gaOptions = {};
   if (!isCookiesEnabled()) {
+    // if the user does not have cookies enabled, we make sure to respect
+    // the choice when initializing GA by disabling cookies for GA.
     const clientFingerprint = determineClientId();
     gaOptions = {
       storage: 'none', // disable cookies for google analytics
+      // because we do not want to use a cookie, which is where by default the
+      // google analytics plugin creates and stores the pseudonoymus clientId,
+      // we pass our own method for generating a client fingerprint. see here
+      // for more:
+      // https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#clientId
       clientId: clientFingerprint, // set custom client fingerprint
     };
-    window.GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_RUNNING_WITH_MODE =
-      GA_MODE_RUNNING_COOKIES_DISABLED;
-  } else {
-    window.GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_RUNNING_WITH_MODE =
-      GA_MODE_RUNNING_COOKIES_ENABLED;
   }
-
-  // var ractGaOptions = { gaOptions: gaOptions };
-  // if (pluginOptions.reactGaOptions !== undefined) {
-  //   gaOptions = { ...pluginOptions.reactGaOptions.gaOptions, ...gaOptions };
-  //   ractGaOptions = { ...pluginOptions.reactGaOptions, ...{ gaOptions: gaOptions } };
-  // }
-
   ReactGA.initialize(trackingId, { gaOptions });
   ReactGA.set({ anonymizeIp: true });
 }
@@ -62,6 +48,9 @@ export function useGoogleAnalyticsInit(): void {
 
   useEffect(() => {
     if (process.env.NODE_ENV === 'production') {
+      // if the user is coming from regen.network and they have not yet
+      // accepted the cookie use policy, we assume that they have not yet
+      // agreed to the policy, and we say that we must run without cookies.
       if (
         Cookies.get(
           COOKIE_GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_COOKIES_ENABLED,
@@ -79,27 +68,8 @@ export function useGoogleAnalyticsInit(): void {
 
   useEffect(() => {
     if (initialized) {
+      // send pageviews to GA
       ReactGA.pageview(location.pathname + location.search);
     }
   }, [initialized, location]);
-}
-
-function isGARunningInCorrectMode(): boolean {
-  const runningWithCookiesEnabled =
-    window.GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_RUNNING_WITH_MODE ===
-    GA_MODE_RUNNING_COOKIES_ENABLED;
-  return isCookiesEnabled() === runningWithCookiesEnabled;
-}
-
-export function setPageView(location: { pathname: string }): void {
-  if (process.env.NODE_ENV === 'production') {
-    // restart google analytics with correct settings if needed
-    if (!isGARunningInCorrectMode()) {
-      ReactGA.ga('remove');
-      initializeGA();
-    }
-
-    ReactGA.set({ page: location.pathname, anonymizeIp: true });
-    ReactGA.pageview(location.pathname);
-  }
 }

@@ -1,4 +1,5 @@
 import { Box } from '@mui/material';
+import { ELLIPSIS_COLUMN_WIDTH } from 'styles/table';
 
 import QuestionIconOutlined from 'web-components/lib/components/icons/QuestionIconOutlined';
 import InfoTooltip from 'web-components/lib/components/tooltip/InfoTooltip';
@@ -7,7 +8,7 @@ import { PURCHASE_OPTION_TOOLTIP } from './SellOrdersTable.constants';
 
 export const SELL_ORDERS_ROW = [
   <Box sx={{ width: '64px', whiteSpace: 'normal' }}>{'SELL ORDER ID'}</Box>,
-  'PROJECT',
+  <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>PROJECT</Box>,
   <Box sx={{ width: '86px', whiteSpace: 'normal' }}>
     {'ASK PRICE PER CREDIT'}
   </Box>,

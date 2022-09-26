@@ -47,6 +47,11 @@ import { uniq } from 'lodash';
 
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 
+import { AllCreditClassQuery } from 'generated/sanity-graphql';
+import { getMetadata } from 'lib/metadata-graph';
+
+import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
+
 import { connect as connectToApi } from '../../ledger';
 import type {
   BatchInfoWithBalance,
@@ -96,11 +101,13 @@ export const getBatchesTotal = (
 type GetCreditsWithDataParams = {
   balances: BatchBalanceInfo[];
   batches: BatchInfo[];
+  sanityCreditClassData?: AllCreditClassQuery;
 };
 
 const getCreditsWithData = async ({
   balances,
   batches,
+  sanityCreditClassData,
 }: GetCreditsWithDataParams): Promise<BatchInfoWithBalance[]> => {
   const credits: (BatchInfoWithBalance | undefined)[] = await Promise.all(
     balances.map(async balance => {
@@ -110,11 +117,27 @@ const getCreditsWithData = async ({
 
       const classId = await getClassIdForBatch(batch);
       const project = await getProject(batch?.projectId);
+      let metadata;
+      if (project?.project?.metadata.length) {
+        try {
+          metadata = await getMetadata(project.project.metadata);
+        } catch (error) {
+          // eslint-disable-next-line
+          console.error(error);
+        }
+      }
+
+      const creditClassSanity = findSanityCreditClass({
+        sanityCreditClassData,
+        creditClassIdOrUrl: classId ?? '',
+      });
 
       return {
         ...batch,
         balance,
         classId,
+        className: creditClassSanity?.nameRaw,
+        projectName: metadata?.['schema:name'] ?? batch.projectId,
         projectLocation: project.project?.jurisdiction,
       };
     }),
@@ -131,6 +154,7 @@ type GetEcocreditsForAccountParams = {
   paginationParams?: TablePaginationParams;
   balances?: BatchBalanceInfo[];
   batches?: BatchInfo[];
+  sanityCreditClassData?: AllCreditClassQuery;
 };
 
 export const getEcocreditsForAccount = async ({
@@ -139,6 +163,7 @@ export const getEcocreditsForAccount = async ({
   batches = [],
   loadedCredits,
   paginationParams,
+  sanityCreditClassData,
 }: GetEcocreditsForAccountParams): Promise<BatchInfoWithBalance[]> => {
   try {
     if (paginationParams) {
@@ -147,6 +172,7 @@ export const getEcocreditsForAccount = async ({
       const displayedCredits = await getCreditsWithData({
         balances: displayedBalances,
         batches,
+        sanityCreditClassData,
       });
       return [
         ...loadedCredits.slice(0, offset),
@@ -154,7 +180,11 @@ export const getEcocreditsForAccount = async ({
         ...loadedCredits.slice(offset + rowsPerPage, loadedCredits.length),
       ];
     } else {
-      return await getCreditsWithData({ balances, batches });
+      return await getCreditsWithData({
+        balances,
+        batches,
+        sanityCreditClassData,
+      });
     }
   } catch (err) {
     throw new Error(`Could not get ecocredits for account ${address}, ${err}`);
@@ -191,7 +221,7 @@ export const getBatchesWithSupply = async (
   data: BatchInfoWithSupply[];
 }> => {
   const batches = await queryEcoBatches(creditClassId, params);
-  const batchesWithData = await addDataToBatch(batches);
+  const batchesWithData = await addDataToBatch({ batches });
   return { data: batchesWithData };
 };
 
@@ -207,14 +237,20 @@ export const getBatchesByProjectWithSupply = async (
     client,
     request: { projectId },
   });
-  const batchesWithData = await addDataToBatch(batches?.batches);
+  const batchesWithData = await addDataToBatch({ batches: batches?.batches });
   return { data: batchesWithData };
 };
 
 /** Adds Tx Hash and supply info to batch for use in tables */
-export const addDataToBatch = async (
-  batches: BatchInfo[],
-): Promise<BatchInfoWithSupply[]> => {
+type AddDataToBatchParams = {
+  batches: BatchInfo[];
+  sanityCreditClassData?: AllCreditClassQuery;
+};
+
+export const addDataToBatch = async ({
+  batches,
+  sanityCreditClassData,
+}: AddDataToBatchParams): Promise<BatchInfoWithSupply[]> => {
   try {
     /* TODO: this is limited to 100 results. We need to find a better way */
     const txs = await getTxsByEvent({
@@ -229,11 +265,28 @@ export const addDataToBatch = async (
         const txhash = getTxHashForBatch(txs.txResponses, batch.denom);
         const classId = getClassIdForBatch(batch);
         const project = await getProject(batch.projectId);
+        let metadata;
+        if (project?.project?.metadata.length) {
+          try {
+            metadata = await getMetadata(project.project.metadata);
+          } catch (error) {
+            // eslint-disable-next-line
+            console.error(error);
+          }
+        }
+
+        const creditClassSanity = findSanityCreditClass({
+          sanityCreditClassData,
+          creditClassIdOrUrl: classId ?? '',
+        });
+
         return {
           ...batch,
           ...supplyData,
           txhash,
           classId,
+          className: creditClassSanity?.nameRaw,
+          projectName: metadata?.['schema:name'] ?? batch.projectId,
           projectLocation: project.project?.jurisdiction,
         };
       }),

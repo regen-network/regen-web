@@ -1,24 +1,27 @@
-import {
-  BatchInfo,
-  ProjectInfo,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { BatchInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
+import { AllCreditClassQuery } from 'generated/sanity-graphql';
+
+import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 import { AllProjectsQuery } from '../../../generated/graphql';
+import { ProjectInfoWithMetadata } from './hooks/useFetchMetadataProjects';
 import { NormalizedSellOrder } from './Storefront.types';
 
 /* normalizeprojectsInfosByHandleMap */
 
 type NormalizeprojectsInfosByHandleMapProps = {
   offChainProjects: AllProjectsQuery['allProjects'];
-  onChainProjects?: ProjectInfo[];
+  onChainProjects?: ProjectInfoWithMetadata[];
+  sanityCreditClassData?: AllCreditClassQuery;
 };
 
 // eslint-disable-next-line
 export const normalizeProjectsInfosByHandleMap = ({
   offChainProjects,
   onChainProjects = [],
+  sanityCreditClassData,
 }: NormalizeprojectsInfosByHandleMapProps) => {
   const projectsMap = new Map<
     string,
@@ -31,9 +34,15 @@ export const normalizeProjectsInfosByHandleMap = ({
     const creditClassVersion = creditClass?.creditClassVersionsById?.nodes[0];
 
     if (project?.handle) {
+      const creditClassSanity = findSanityCreditClass({
+        sanityCreditClassData,
+        creditClassIdOrUrl:
+          creditClassVersion?.metadata?.['http://schema.org/url']?.['@value'],
+      });
+
       projectsMap.set(project?.handle, {
         name: project?.handle,
-        classIdName: creditClassVersion?.name ?? '',
+        classIdName: creditClassSanity?.nameRaw ?? '',
         classIdUrl: isVCSProject
           ? creditClass?.onChainId
           : creditClassVersion?.metadata?.['http://schema.org/url']?.['@value'],
@@ -42,9 +51,14 @@ export const normalizeProjectsInfosByHandleMap = ({
   });
 
   onChainProjects.forEach(project => {
+    const creditClassSanity = findSanityCreditClass({
+      sanityCreditClassData,
+      creditClassIdOrUrl: project?.classId,
+    });
+
     projectsMap.set(project?.id, {
-      name: project?.id,
-      classIdName: project?.classId,
+      name: project.metadata?.['schema:name'] || project.id,
+      classIdName: creditClassSanity?.nameRaw ?? project?.classId,
       classIdUrl: project?.classId,
     });
   });

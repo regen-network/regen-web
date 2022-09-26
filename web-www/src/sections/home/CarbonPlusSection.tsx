@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const query = graphql`
   query homeCarbonplusSection {
-    cow: file(relativePath: { eq: "cow.png" }) {
+    cow: file(relativePath: { eq: "marketplace-preview.png" }) {
       childImageSharp {
         fluid(quality: 90) {
           ...GatsbyImageSharpFluid_withWebp

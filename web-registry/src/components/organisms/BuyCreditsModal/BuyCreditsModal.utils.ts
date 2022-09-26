@@ -28,6 +28,19 @@ export const getSellOrderLabel = ({
   });
   return `${id} (${price} ${displayDenom}/credit: ${quantity} credit(s) available)`;
 };
+type GetSellOrdersOptionsParams = {
+  sellOrders: UISellOrderInfo[];
+  allowedDenomsData?: QueryAllowedDenomsResponse;
+};
+const getSellOrdersOptions = ({
+  sellOrders,
+  allowedDenomsData,
+}: GetSellOrdersOptionsParams): Option[] => {
+  return sellOrders.map(sellOrder => ({
+    label: getSellOrderLabel({ sellOrder, allowedDenomsData }),
+    value: sellOrder.id,
+  }));
+};
 
 type GetOptionsParams = {
   project: BuyCreditsProject;
@@ -39,15 +52,35 @@ export const getOptions = ({
 }: GetOptionsParams): Option[] => {
   if (!project?.sellOrders?.length) return [];
 
-  const sellOrderOptions = project?.sellOrders.map(sellOrder => {
-    return {
-      label: getSellOrderLabel({ sellOrder, allowedDenomsData }),
-      value: sellOrder.id,
-    };
+  const retirableSellOrders = project.sellOrders.filter(
+    sellOrder => !sellOrder.disableAutoRetire,
+  );
+  const retirableAndTradableSellOrders = project.sellOrders.filter(
+    sellOrder => sellOrder.disableAutoRetire,
+  );
+
+  const retirableOptions = getSellOrdersOptions({
+    sellOrders: retirableSellOrders,
+    allowedDenomsData,
   });
-  return sellOrderOptions.length > 1
-    ? [{ label: 'Choose a sell order', value: '' }, ...sellOrderOptions]
-    : sellOrderOptions;
+
+  const retirableAndTradableOptions = getSellOrdersOptions({
+    sellOrders: retirableAndTradableSellOrders,
+    allowedDenomsData,
+  });
+
+  const allOptionsLength =
+    retirableOptions.length + retirableAndTradableOptions.length;
+
+  return allOptionsLength > 1
+    ? [
+        { label: 'Choose a sell order', value: '', disabled: true },
+        { label: 'RETIRABLE ONLY', value: '', disabled: true },
+        ...retirableOptions,
+        { label: 'TRADABLE AND RETIRABLE', value: '', disabled: true },
+        ...retirableAndTradableOptions,
+      ]
+    : retirableOptions.concat(retirableAndTradableOptions);
 };
 
 export const handleBuyCreditsSubmit = async (

@@ -33,6 +33,7 @@ import {
 import { microToDenom } from 'lib/denom.utils';
 
 import { UISellOrderInfo } from 'pages/Projects/Projects.types';
+import { Link as DynamicLink } from 'components/atoms/Link';
 import DenomIcon from 'components/molecules/DenomIcon';
 import DenomLabel from 'components/molecules/DenomLabel';
 import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
@@ -300,7 +301,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                     </div>
                   </Collapse>
                   <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
-                    Retirement of credits
+                    Purchase options
                   </Title>
                   <Field
                     className={styles.field}
@@ -313,8 +314,20 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       type="radio"
                       value="autoretire"
                       checked={values['retirementAction'] === 'autoretire'}
-                      label="Auto-retire credits" // Retire credits now
-                      description="These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible."
+                      label="Retire credits now"
+                      description={
+                        <>
+                          {
+                            'These credits will be retired upon purchase and will not be tradable. Retirement is permanent and non-reversible.'
+                          }
+                          <DynamicLink
+                            href="https://guides.regen.network/guides/regen-marketplace/ecocredits/buy-ecocredits/by-project#5.-select-credit-retirement-options"
+                            sx={{ ml: 1 }}
+                          >
+                            Learn more»
+                          </DynamicLink>
+                        </>
+                      }
                     />
                     <Field
                       className={styles.toggle}
@@ -322,8 +335,20 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       type="radio"
                       value="manual"
                       checked={values['retirementAction'] === 'manual'} // if disableAutoRetire, this is an option
-                      label="Retire credits manually" // Allow retirement later
-                      description="These credits will be a tradeable asset. They can be retired later via Regen Registry."
+                      label="Buy tradable ecocredits"
+                      description={
+                        <>
+                          {
+                            'These credits will be a tradable asset. They can be retired later via Regen Registry.'
+                          }
+                          <DynamicLink
+                            href="https://guides.regen.network/guides/regen-marketplace/ecocredits/buy-ecocredits/by-project#5.-select-credit-retirement-options"
+                            sx={{ ml: 1 }}
+                          >
+                            Learn more»
+                          </DynamicLink>
+                        </>
+                      }
                       disabled={!selectedSellOrder?.disableAutoRetire} // if disableAutoRetire is false, this is disabled
                     />
                   </Field>

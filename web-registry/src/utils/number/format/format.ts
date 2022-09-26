@@ -1,4 +1,4 @@
-type RoundFloatNumberParamsOptions = {
+export type RoundFloatNumberParamsOptions = {
   decimals?: number;
 };
 

@@ -40,7 +40,7 @@ const getSellOrdersTableRow = ({
     disableAutoRetire,
   },
 }: Props): React.ReactNode[] => [
-  <Link href={`/marketplace/sell-order/${id}`}>{id}</Link>,
+  <Box sx={{ color: 'info.main' }}>{id}</Box>,
   <WithLoader isLoading={project?.name === undefined} variant="skeleton">
     <Link href={`/projects/${project?.id}`} sx={tableStyles.ellipsisColumn}>
       {project?.name}

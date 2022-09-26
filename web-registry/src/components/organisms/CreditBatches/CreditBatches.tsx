@@ -85,7 +85,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
     if (creditBatches) {
       setBatches(creditBatches);
     } else if (creditClassId) {
-      getBatchesWithSupply(creditClassId)
+      getBatchesWithSupply({ creditClassId })
         .then(sortableBatches => {
           setBatches(sortableBatches.data);
         })

@@ -2,6 +2,7 @@ import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1
 import {
   GetTxsEventRequest,
   GetTxsEventResponse,
+  OrderBy,
   ServiceClientImpl,
 } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import {
@@ -200,7 +201,9 @@ export const getEcocreditTxs = async (): Promise<TxResponse[]> => {
       try {
         const response = await getTxsByEvent({
           events: [`${messageActionEquals}'${msgType.message}'`],
+          orderBy: OrderBy.ORDER_BY_DESC,
         });
+
         if (response?.txResponses) {
           allTxs = [...allTxs, ...response.txResponses];
         }
@@ -214,14 +217,21 @@ export const getEcocreditTxs = async (): Promise<TxResponse[]> => {
   });
 };
 
-export const getBatchesWithSupply = async (
-  creditClassId?: string | null,
-  params?: URLSearchParams,
-): Promise<{
+type GetBatchesWithSupplyParams = {
+  creditClassId?: string | null;
+  params?: URLSearchParams;
+  withAllData?: boolean;
+};
+
+export const getBatchesWithSupply = async ({
+  creditClassId,
+  params,
+  withAllData = true,
+}: GetBatchesWithSupplyParams): Promise<{
   data: BatchInfoWithSupply[];
 }> => {
   const batches = await queryEcoBatches(creditClassId, params);
-  const batchesWithData = await addDataToBatch({ batches });
+  const batchesWithData = await addDataToBatch({ batches, withAllData });
   return { data: batchesWithData };
 };
 
@@ -245,11 +255,13 @@ export const getBatchesByProjectWithSupply = async (
 type AddDataToBatchParams = {
   batches: BatchInfo[];
   sanityCreditClassData?: AllCreditClassQuery;
+  withAllData?: boolean;
 };
 
 export const addDataToBatch = async ({
   batches,
   sanityCreditClassData,
+  withAllData = true,
 }: AddDataToBatchParams): Promise<BatchInfoWithSupply[]> => {
   try {
     /* TODO: this is limited to 100 results. We need to find a better way */
@@ -262,23 +274,26 @@ export const addDataToBatch = async ({
     return Promise.all(
       batches.map(async batch => {
         const supplyData = await queryEcoBatchSupply(batch.denom);
-        const txhash = getTxHashForBatch(txs.txResponses, batch.denom);
-        const classId = getClassIdForBatch(batch);
-        const project = await getProject(batch.projectId);
-        let metadata;
-        if (project?.project?.metadata.length) {
-          try {
-            metadata = await getMetadata(project.project.metadata);
-          } catch (error) {
-            // eslint-disable-next-line
-            console.error(error);
-          }
-        }
+        let txhash, classId, project, metadata, creditClassSanity;
 
-        const creditClassSanity = findSanityCreditClass({
-          sanityCreditClassData,
-          creditClassIdOrUrl: classId ?? '',
-        });
+        if (withAllData) {
+          txhash = getTxHashForBatch(txs.txResponses, batch.denom);
+          classId = getClassIdForBatch(batch);
+          project = await getProject(batch.projectId);
+          if (project?.project?.metadata.length) {
+            try {
+              metadata = await getMetadata(project.project.metadata);
+            } catch (error) {
+              // eslint-disable-next-line
+              console.error(error);
+            }
+          }
+
+          creditClassSanity = findSanityCreditClass({
+            sanityCreditClassData,
+            creditClassIdOrUrl: classId ?? '',
+          });
+        }
 
         return {
           ...batch,
@@ -287,7 +302,7 @@ export const addDataToBatch = async ({
           classId,
           className: creditClassSanity?.nameRaw,
           projectName: metadata?.['schema:name'] ?? batch.projectId,
-          projectLocation: project.project?.jurisdiction,
+          projectLocation: project?.project?.jurisdiction,
         };
       }),
     );

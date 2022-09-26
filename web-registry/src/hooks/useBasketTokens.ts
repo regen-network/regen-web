@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   QueryBalanceResponse,
   QueryDenomMetadataResponse,
@@ -27,10 +27,12 @@ export default function useBasketTokens(
   const fetchBalance = useQueryBalance();
   const fetchDenomMetadata = useQueryDenomMetadata();
   const [basketTokens, setBasketTokens] = useState<BasketTokens[]>([]);
+  const isFetchingRef = useRef(false);
 
   const fetchBasketTokens = useCallback(async (): Promise<void> => {
-    if (!baskets) return;
+    if (!baskets || isFetchingRef.current) return;
 
+    isFetchingRef.current = true;
     const _basketTokens = await Promise.all(
       baskets.basketsInfo.map(async basket => ({
         basket,
@@ -46,6 +48,7 @@ export default function useBasketTokens(
       basket.balance?.balance?.amount !== '0';
 
     setBasketTokens(_basketTokens.filter(withPositiveBalance));
+    isFetchingRef.current = false;
   }, [baskets, address, fetchBalance, fetchDenomMetadata]);
 
   useEffect(() => {

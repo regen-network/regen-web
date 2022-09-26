@@ -114,7 +114,11 @@ const AmplitudeAnalytics: React.FC = (): JSX.Element => {
   const analytics = useAnalytics();
   useEffect(() => {
     // send page view whenever react-router location changes
-    analytics.page();
+    analytics.page({
+      path: location.pathname,
+      search: location.search,
+      title: location.pathname,
+    });
   }, [location, analytics]);
   return <></>;
 };

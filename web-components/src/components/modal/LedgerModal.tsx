@@ -120,7 +120,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: theme.spacing(15.25),
     textAlign: 'center',
   },
-  marginRight: {
+  marginLeft: {
     marginLeft: theme.spacing(2.5),
   },
   dropdownIcon: {
@@ -374,7 +374,7 @@ export default function LedgerModal({
                     className={clsx(
                       classes.label,
                       classes.blockchain,
-                      classes.marginRight,
+                      classes.marginLeft,
                     )}
                   >
                     blockchain data (devnet)

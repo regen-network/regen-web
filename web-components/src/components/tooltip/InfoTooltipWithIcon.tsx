@@ -7,13 +7,13 @@ interface Props {
   outlined?: boolean;
 }
 
-export default function InfoIconTooltip({
+export default function InfoTooltipWithIcon({
   title,
   outlined,
 }: Props): JSX.Element {
   return (
     <InfoTooltip arrow placement="top" title={title}>
-      <div>{outlined ? <InfoIconOutlined /> : <InfoIcon />}</div>
+      <span>{outlined ? <InfoIconOutlined /> : <InfoIcon />}</span>
     </InfoTooltip>
   );
 }

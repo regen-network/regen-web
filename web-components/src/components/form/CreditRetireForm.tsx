@@ -12,7 +12,7 @@ import SelectFieldFallback from '../inputs/SelectFieldFallback';
 import TextField from '../inputs/TextField';
 import { requiredMessage, validateAmount } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
-import InfoIconTooltip from '../tooltip/InfoIconTooltip';
+import InfoTooltipWithIcon from '../tooltip/InfoTooltipWithIcon';
 import { Body, Title } from '../typography';
 import Submit from './Submit';
 
@@ -160,7 +160,7 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
               <Title variant="h5" sx={{ mr: 2 }}>
                 Transaction note
               </Title>
-              <InfoIconTooltip title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')" />
+              <InfoTooltipWithIcon title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')" />
             </Flex>
             <Field
               name={`${arrayPrefix}note`}

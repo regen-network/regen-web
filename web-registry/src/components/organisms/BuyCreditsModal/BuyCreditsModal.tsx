@@ -22,7 +22,7 @@ import SelectTextField from 'web-components/lib/components/inputs/SelectTextFiel
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import { requirementAgreement } from 'web-components/lib/components/inputs/validation';
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
-import InfoIconTooltip from 'web-components/lib/components/tooltip/InfoIconTooltip';
+import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
 import {
   Body,
   Subtitle,
@@ -331,7 +331,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
                         Retirement note
                       </Title>
-                      <InfoIconTooltip title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')" />
+                      <InfoTooltipWithIcon title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')" />
                     </Flex>
                     <Box>
                       <Field
@@ -346,7 +346,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
                         Credit retirement location
                       </Title>
-                      <InfoIconTooltip title="The retirement location can be where you live or your business operates." />
+                      <InfoTooltipWithIcon title="The retirement location can be where you live or your business operates." />
                     </Flex>
                     <Body sx={{ color: 'info.dark', mb: { xs: 0, sm: 3 } }}>
                       Please enter a location for the retirement of these

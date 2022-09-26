@@ -9,7 +9,7 @@ import {
   ActionsTable,
   TablePaginationParams,
 } from 'web-components/lib/components/table/ActionsTable';
-import InfoIconTooltip from 'web-components/lib/components/tooltip/InfoIconTooltip';
+import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncateHash } from 'web-components/lib/utils/truncate';
 
@@ -120,7 +120,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           {headCell.label}
           {headCell.tooltip && (
             <Box alignSelf="flex-end" ml={2}>
-              <InfoIconTooltip outlined title={headCell.tooltip} />
+              <InfoTooltipWithIcon outlined title={headCell.tooltip} />
             </Box>
           )}
         </Box>

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
 import {
@@ -39,6 +39,7 @@ import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
 import { client as sanityClient } from '../../../sanity';
 import useBuySellOrderSubmit from './hooks/useBuySellOrderSubmit';
 import useCancelSellOrderSubmit from './hooks/useCancelSellOrderSubmit';
+import { useCheckSellOrderAvailabilty } from './hooks/useCheckSellOrderAvailabilty';
 import { useFetchMetadataProjects } from './hooks/useFetchMetadataProjects';
 import { useResetErrorBanner } from './hooks/useResetErrorBanner';
 import {
@@ -116,6 +117,7 @@ export const Storefront = (): JSX.Element => {
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
   const [selectedAction, setSelectedAction] = useState<SellOrderActions>();
+  const selectedSellOrderIdRef = useRef<number>();
   const isBuyModalOpen = selectedSellOrder !== null && selectedAction === 'buy';
   const navigate = useNavigate();
   const isCancelModalOpen =
@@ -190,6 +192,7 @@ export const Storefront = (): JSX.Element => {
     setTxModalHeader,
     setTxModalTitle,
     buttonTitle: BUY_SELL_ORDER_BUTTON,
+    refetchSellOrders,
   });
 
   const cancelSellOrderSubmit = useCancelSellOrderSubmit({
@@ -233,6 +236,15 @@ export const Storefront = (): JSX.Element => {
     [askAmount, askDenom, batchDenom, orderId],
   );
 
+  useCheckSellOrderAvailabilty({
+    selectedSellOrderIdRef,
+    setError,
+    selectedSellOrderId:
+      selectedSellOrder !== null
+        ? Number(sellOrders?.[selectedSellOrder].id)
+        : undefined,
+  });
+
   return (
     <Box sx={{ backgroundColor: 'grey.50' }}>
       <Section>
@@ -273,8 +285,12 @@ export const Storefront = (): JSX.Element => {
                           <CreditsIcon color={theme.palette.secondary.main} />
                         }
                         size="small"
-                        onClick={() => {
+                        onClick={async () => {
                           if (accountAddress) {
+                            selectedSellOrderIdRef.current = Number(
+                              sellOrders?.[i].id,
+                            );
+                            refetchSellOrders();
                             setSelectedAction('buy');
                             setSelectedSellOrder(i);
                           } else {
@@ -341,7 +357,7 @@ export const Storefront = (): JSX.Element => {
         txHash={txHash ?? ''}
         txHashUrl={txHashUrl}
         cardTitle={txModalTitle}
-        buttonTitle={txButtonTitle}
+        buttonTitle={'Close'}
         linkComponent={Link}
         onButtonClick={onButtonClick}
       />

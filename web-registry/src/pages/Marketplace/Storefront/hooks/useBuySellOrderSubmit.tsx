@@ -13,6 +13,7 @@ import { microToDenom } from 'lib/denom.utils';
 import DenomIcon from 'components/molecules/DenomIcon';
 import { BuyCreditsValues } from 'components/organisms';
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
+import { RefetchSellOrdersResponse } from 'hooks/useQuerySellOrders';
 
 import {
   BUY_SELL_ORDER_HEADER,
@@ -28,6 +29,7 @@ type Props = {
   setTxModalHeader: UseStateSetter<string>;
   setTxButtonTitle: UseStateSetter<string>;
   setSelectedSellOrder?: UseStateSetter<number | null>;
+  refetchSellOrders?: () => RefetchSellOrdersResponse;
 };
 
 type ReturnType = (values: BuyCreditsValues) => Promise<void>;
@@ -41,6 +43,7 @@ const useBuySellOrderSubmit = ({
   setTxButtonTitle,
   setSelectedSellOrder,
   buttonTitle,
+  refetchSellOrders,
 }: Props): ReturnType => {
   const buySellOrderSubmit = useCallback(
     async (values: BuyCreditsValues): Promise<void> => {
@@ -58,6 +61,15 @@ const useBuySellOrderSubmit = ({
         askDenom,
         postalCode,
       } = values;
+
+      if (refetchSellOrders) {
+        const sellOrders = await refetchSellOrders();
+        const currentSellOrder = sellOrders?.find(
+          sellOrder => String(sellOrder.id) === sellOrderId,
+        );
+        if (!currentSellOrder) return Promise.reject();
+      }
+
       const isTradeable = retirementAction === 'manual';
 
       const msg = MsgBuyDirect.fromPartial({
@@ -134,6 +146,7 @@ const useBuySellOrderSubmit = ({
       setTxModalTitle,
       setTxButtonTitle,
       buttonTitle,
+      refetchSellOrders,
     ],
   );
 

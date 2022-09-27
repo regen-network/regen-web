@@ -6,7 +6,6 @@ import getApiUri from './apiUri';
 export const getMetadata = async (iri: string): Promise<any> => {
   if (!iri) throw new Error('No metadata iri provided');
   const { data } = await axios.get(`${getApiUri()}/metadata-graph/${iri}`);
-  // console.log('iri', iri);
   console.log('raw', { ...data });
 
   const compacted = await jsonld.compact(data, {
@@ -17,6 +16,11 @@ export const getMetadata = async (iri: string): Promise<any> => {
     xsd: 'http://www.w3.org/2001/XMLSchema#',
     geojson: 'https://purl.org/geojson/vocab#',
     'geojson:coordinates': { '@container': '@list' },
+    'regen:ecosystemType': { '@container': '@list' },
+    'regen:projectActivities': { '@container': '@list' },
+    'regen:offsetGenerationMethod"': { '@container': '@list' },
+    'regen:sectoralScope': { '@container': '@list' },
+    'schema:itemListElement': { '@container': '@list' },
   });
   console.log('compacted', compacted);
   return compacted;

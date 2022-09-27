@@ -25,6 +25,10 @@ const AdditionalInfo: React.FC<AdditionalInfoProps> = ({
   const sectoralScopes = metadata?.['regen:sectoralScope'];
   const verificationMethod = metadata?.['regen:verificationMethod'];
   const sourceRegistry = metadata?.['regen:sourceRegistry'];
+  const ecosystemTypes = metadata?.['regen:ecosystemType'];
+  const projectActivities = metadata?.['regen:projectActivities'];
+  const carbonOffsetStandard = metadata?.['regen:carbonOffsetStandard'];
+  console.log('metadata', metadata);
 
   const getCreditType = (creditTypeAbbrev: string): string => {
     // TODO: add credit types as they come online, or fetch from ledger somehow
@@ -37,8 +41,7 @@ const AdditionalInfo: React.FC<AdditionalInfoProps> = ({
   };
 
   return (
-    <Box sx={{ pt: 8 }}>
-      <Title variant="h5">Additional Info</Title>
+    <Box sx={{ pt: 8, display: 'flex', flexWrap: 'wrap' }}>
       <LineItemLabelAbove
         label="credit type"
         data={
@@ -56,10 +59,28 @@ const AdditionalInfo: React.FC<AdditionalInfoProps> = ({
               target="_blank"
             >
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Body size="xl" sx={{ mr: 1 }}>
+                <Body size="xl">
                   {sourceRegistry?.['schema:name']}
+                  <SmallArrowIcon sx={{ mt: '3px', ml: '7px', fontSize: 16 }} />
                 </Body>
-                <SmallArrowIcon sx={{ mt: '-2px', fontSize: 16 }} />
+              </Box>
+            </Link>
+          }
+        />
+      )}
+      {carbonOffsetStandard?.['schema:name'] && (
+        <LineItemLabelAbove
+          label="carbon offset standard"
+          data={
+            <Link
+              href={carbonOffsetStandard?.['schema:url']?.['@value']}
+              target="_blank"
+            >
+              <Box sx={{ display: 'flex' }}>
+                <Body size="xl">
+                  {carbonOffsetStandard?.['schema:name']}
+                  <SmallArrowIcon sx={{ mt: '3px', ml: '7px', fontSize: 16 }} />
+                </Body>
               </Box>
             </Link>
           }
@@ -77,7 +98,49 @@ const AdditionalInfo: React.FC<AdditionalInfoProps> = ({
             <>
               {offsetGenerationMethods.map((method: any, i: number) => (
                 <Body key={i} size="xl">
-                  {startCase(method)}
+                  {startCase(method?.['@value'])}
+                </Body>
+              ))}
+            </>
+          }
+        />
+      )}
+      {projectActivities && projectActivities?.length > 0 && (
+        <LineItemLabelAbove
+          label="project activities"
+          data={
+            <>
+              {projectActivities.map((projectActivity: any, i: number) => (
+                <Body key={i} size="xl">
+                  {startCase(projectActivity)}
+                </Body>
+              ))}
+            </>
+          }
+        />
+      )}
+      {sectoralScopes && sectoralScopes?.length > 0 && (
+        <LineItemLabelAbove
+          label={`sectoral scope${sectoralScopes.length > 1 ? 's' : ''}`}
+          data={
+            <>
+              {sectoralScopes.map((sector: any, i: number) => (
+                <Body key={i} size="xl">
+                  {sector?.['@value']}
+                </Body>
+              ))}
+            </>
+          }
+        />
+      )}
+      {ecosystemTypes && ecosystemTypes?.length > 0 && (
+        <LineItemLabelAbove
+          label="ecosystem type"
+          data={
+            <>
+              {ecosystemTypes.map((ecosystemType: any, i: number) => (
+                <Body key={i} size="xl">
+                  {startCase(ecosystemType)}
                 </Body>
               ))}
             </>
@@ -88,20 +151,6 @@ const AdditionalInfo: React.FC<AdditionalInfoProps> = ({
         <LineItemLabelAbove
           label="verification method"
           data={<Body size="xl">{startCase(verificationMethod)}</Body>}
-        />
-      )}
-      {sectoralScopes && sectoralScopes?.length > 0 && (
-        <LineItemLabelAbove
-          label={`sectoral scope${sectoralScopes.length > 1 ? 's' : ''}`}
-          data={
-            <>
-              {sectoralScopes.map((sector: string, i: number) => (
-                <Body key={i} size="xl">
-                  {sector}
-                </Body>
-              ))}
-            </>
-          }
         />
       )}
     </Box>

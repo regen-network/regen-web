@@ -153,6 +153,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 {metadata?.['schema:description']}
               </ReadMore>
             )}
+            <AdditionalInfo onChainClass={onChainClass} metadata={metadata} />
           </Box>
           <Box
             sx={{
@@ -160,9 +161,6 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
               flexDirection: 'column',
             }}
           >
-            <SideBarBox>
-              <AdditionalInfo onChainClass={onChainClass} metadata={metadata} />
-            </SideBarBox>
             <SideBarBox>
               <div className={styles.sidebarItemMargin}>
                 <Label size="xs" color="primary.contrastText" mb={3}>

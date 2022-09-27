@@ -109,7 +109,7 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
         isLandSteward={isLandSteward}
       />
     );
-  } else if (onChainClass && dbCreditClassByOnChainId) {
+  } else if (onChainClass) {
     return (
       <CreditClassDetailsSimple
         dbClass={dbCreditClassByOnChainId}

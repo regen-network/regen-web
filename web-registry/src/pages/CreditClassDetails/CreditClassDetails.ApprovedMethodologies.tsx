@@ -39,7 +39,7 @@ const ApprovedMethodologiesList: React.FC<{
               <Label sx={{ fontSize: [16], mr: 2 }}>{`+ ${
                 count - 1
               } more`}</Label>{' '}
-              <SmallArrowIcon sx={{ mt: '-2px', fontSize: 16 }} />
+              <SmallArrowIcon sx={{ mb: 0.3, height: 9, width: 13 }} />
             </Link>
           )}
         </Box>

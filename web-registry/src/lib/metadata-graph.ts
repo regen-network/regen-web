@@ -18,7 +18,7 @@ export const getMetadata = async (iri: string): Promise<any> => {
     'geojson:coordinates': { '@container': '@list' },
     'regen:ecosystemType': { '@container': '@list' },
     'regen:projectActivities': { '@container': '@list' },
-    'regen:offsetGenerationMethod"': { '@container': '@list' },
+    'regen:offsetGenerationMethod': { '@container': '@list' },
     'regen:sectoralScope': { '@container': '@list' },
     'schema:itemListElement': { '@container': '@list' },
   });

@@ -3,11 +3,11 @@ import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/q
 import { startCase } from 'lodash';
 
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
-import { Body, Title } from 'web-components/lib/components/typography';
+import { Body } from 'web-components/lib/components/typography';
 
 import { CreditClassMetadataLD } from 'generated/json-ld';
 
-import { Link } from 'components/atoms';
+import { Link, LinkWithArrow } from 'components/atoms';
 import { LineItemLabelAbove } from 'components/molecules';
 
 import { ApprovedMethodologiesList } from './CreditClassDetails.ApprovedMethodologies';
@@ -28,7 +28,13 @@ const AdditionalInfo: React.FC<AdditionalInfoProps> = ({
   const ecosystemTypes = metadata?.['regen:ecosystemType'];
   const projectActivities = metadata?.['regen:projectActivities'];
   const carbonOffsetStandard = metadata?.['regen:carbonOffsetStandard'];
-  console.log('metadata', metadata);
+
+  // This can be deleted if all class metadata is updated to latest standard
+  const getValue = (val: any): string => {
+    let value = val;
+    if (val?.['@value']) value = val['@value'];
+    return startCase(value);
+  };
 
   const getCreditType = (creditTypeAbbrev: string): string => {
     // TODO: add credit types as they come online, or fetch from ledger somehow
@@ -54,17 +60,11 @@ const AdditionalInfo: React.FC<AdditionalInfoProps> = ({
         <LineItemLabelAbove
           label="registry"
           data={
-            <Link
+            <LinkWithArrow
+              sx={{ fontSize: 22 }}
+              label={sourceRegistry?.['schema:name']}
               href={sourceRegistry?.['schema:url']?.['@value']}
-              target="_blank"
-            >
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Body size="xl">
-                  {sourceRegistry?.['schema:name']}
-                  <SmallArrowIcon sx={{ mt: '3px', ml: '7px', fontSize: 16 }} />
-                </Body>
-              </Box>
-            </Link>
+            />
           }
         />
       )}
@@ -72,17 +72,11 @@ const AdditionalInfo: React.FC<AdditionalInfoProps> = ({
         <LineItemLabelAbove
           label="carbon offset standard"
           data={
-            <Link
+            <LinkWithArrow
+              sx={{ fontSize: 22 }}
+              label={carbonOffsetStandard?.['schema:name']}
               href={carbonOffsetStandard?.['schema:url']?.['@value']}
-              target="_blank"
-            >
-              <Box sx={{ display: 'flex' }}>
-                <Body size="xl">
-                  {carbonOffsetStandard?.['schema:name']}
-                  <SmallArrowIcon sx={{ mt: '3px', ml: '7px', fontSize: 16 }} />
-                </Body>
-              </Box>
-            </Link>
+            />
           }
         />
       )}
@@ -98,7 +92,7 @@ const AdditionalInfo: React.FC<AdditionalInfoProps> = ({
             <>
               {offsetGenerationMethods.map((method: any, i: number) => (
                 <Body key={i} size="xl">
-                  {startCase(method?.['@value'])}
+                  {getValue(method)}
                 </Body>
               ))}
             </>
@@ -126,7 +120,7 @@ const AdditionalInfo: React.FC<AdditionalInfoProps> = ({
             <>
               {sectoralScopes.map((sector: any, i: number) => (
                 <Body key={i} size="xl">
-                  {sector?.['@value']}
+                  {getValue(sector)}
                 </Body>
               ))}
             </>

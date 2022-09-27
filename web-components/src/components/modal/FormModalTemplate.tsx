@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
       padding: `${theme.spacing(10.75)} ${theme.spacing(7.5)} ${theme.spacing(
         12.5,
       )}`,
-      maxWidth: theme.spacing(140),
+      maxWidth: theme.spacing(148),
     },
   },
   mainTitle: {

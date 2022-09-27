@@ -158,7 +158,7 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
           <>
             <Flex sx={sxs.title}>
               <Title variant="h5" sx={{ mr: 2 }}>
-                Transaction note
+                Retirement note
               </Title>
               <InfoTooltipWithIcon title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')" />
             </Flex>
@@ -231,19 +231,11 @@ export const CreditRetireFields = ({
   arrayIndex,
 }: CreditRetireFieldsProps): JSX.Element => {
   return (
-    <>
-      <AmountField
-        name={`${arrayPrefix}retiredAmount`}
-        label="Amount retired"
-        availableAmount={availableTradableAmount}
-        denom={batchDenom}
-      />
-      <BottomCreditRetireFields
-        mapboxToken={mapboxToken}
-        arrayPrefix={arrayPrefix}
-        arrayIndex={arrayIndex}
-      />
-    </>
+    <BottomCreditRetireFields
+      mapboxToken={mapboxToken}
+      arrayPrefix={arrayPrefix}
+      arrayIndex={arrayIndex}
+    />
   );
 };
 

@@ -3,6 +3,12 @@ import { makeStyles } from '@mui/styles';
 export const useHomeStyles = makeStyles(theme => ({
   section: {
     paddingBottom: theme.spacing(16.25),
+    maxWidth: '1240px',
+    width: '100%',
+    [theme.breakpoints.up('lg')]: {
+      paddingLeft: 0,
+      paddingRight: 0,
+    },
   },
   title: {
     marginBottom: theme.spacing(8.75),

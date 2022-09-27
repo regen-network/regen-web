@@ -63,7 +63,11 @@ const Home: React.FC = () => {
         }
         linearGradient="linear-gradient(203.09deg, #000000 45.49%, #5E9078 92.1%);"
         classes={{ section: styles.section }}
-        sx={{ display: 'flex', alignItems: 'center', height: [600, 600, 760] }}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          height: [600, 600, 760],
+        }}
       >
         <Box
           sx={{

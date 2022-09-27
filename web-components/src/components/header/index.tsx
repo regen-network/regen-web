@@ -8,8 +8,8 @@ import cx from 'clsx';
 import MobileMenu from '../mobile-menu';
 import { HeaderLogoLink } from './HeaderLogoLink';
 import { HeaderMenuHover, HeaderMenuItem } from './HeaderMenuHover';
-import { NavLink, NavLinkProps } from './NavLink';
 import MarketplaceLaunchBanner from './MarketplaceLaunchBanner';
+import { NavLink, NavLinkProps } from './NavLink';
 
 export interface node {
   [key: number]: React.ReactNode;
@@ -210,53 +210,61 @@ export default function Header({
 
   const styles = useStyles({ color, borderBottom, fullWidth });
   return (
-    <div
-      className={cx(
-        styles.borderBottom,
-        absolute && styles.absolute,
-        transparent ? styles.transparent : styles.background,
-      )}
-    >
-      <Container
-        disableGutters
-        className={styles.container}
-        maxWidth={fullWidth ? false : 'xl'}
+    <>
+      <MarketplaceLaunchBanner />
+      <div
+        className={cx(
+          styles.borderBottom,
+          absolute && styles.absolute,
+          transparent ? styles.transparent : styles.background,
+        )}
       >
-        <MarketplaceLaunchBanner />
-        <Box className={styles.header}>
-          <HomeLink
-            color={isTablet ? theme.palette.primary.contrastText : color}
-          />
-          <Box className={styles.desktop} display={{ xs: 'none', md: 'block' }}>
-            <MenuList className={styles.menuList}>
-              {menuItems?.map((item, index) => {
-                return (
-                  <HeaderMenuHover
-                    key={index}
-                    linkComponent={linkComponent}
-                    item={item}
-                    pathname={pathname}
-                  />
-                );
-              })}
-              {isRegistry && extras}
-            </MenuList>
-          </Box>
-
-          <Box className={styles.mobile} display={{ xs: 'block', md: 'none' }}>
-            <MobileMenu
-              linkComponent={linkComponent}
-              isRegistry={isRegistry}
-              pathname={pathname}
-              menuItems={menuItems}
-              isAuthenticated={isAuthenticated}
-              onLogin={onLogin}
-              onLogout={onLogout}
-              onSignup={onSignup}
+        <Container
+          disableGutters
+          className={styles.container}
+          maxWidth={fullWidth ? false : 'xl'}
+        >
+          <Box className={styles.header}>
+            <HomeLink
+              color={isTablet ? theme.palette.primary.contrastText : color}
             />
+            <Box
+              className={styles.desktop}
+              display={{ xs: 'none', md: 'block' }}
+            >
+              <MenuList className={styles.menuList}>
+                {menuItems?.map((item, index) => {
+                  return (
+                    <HeaderMenuHover
+                      key={index}
+                      linkComponent={linkComponent}
+                      item={item}
+                      pathname={pathname}
+                    />
+                  );
+                })}
+                {isRegistry && extras}
+              </MenuList>
+            </Box>
+
+            <Box
+              className={styles.mobile}
+              display={{ xs: 'block', md: 'none' }}
+            >
+              <MobileMenu
+                linkComponent={linkComponent}
+                isRegistry={isRegistry}
+                pathname={pathname}
+                menuItems={menuItems}
+                isAuthenticated={isAuthenticated}
+                onLogin={onLogin}
+                onLogout={onLogout}
+                onSignup={onSignup}
+              />
+            </Box>
           </Box>
-        </Box>
-      </Container>
-    </div>
+        </Container>
+      </div>
+    </>
   );
 }

@@ -3,6 +3,7 @@ import { Box, IconButton, Link } from '@mui/material';
 import { DefaultTheme as Theme, useTheme } from '@mui/styles';
 import { isPast } from 'date-fns';
 import { Field, FieldArray, useFormikContext } from 'formik';
+import { JsonLd } from 'jsonld/jsonld-spec';
 import * as Yup from 'yup';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -27,6 +28,7 @@ import { AddCertificationModal } from 'web-components/lib/components/modal/AddCe
 import { Body } from 'web-components/lib/components/typography';
 import { NameUrl } from 'web-components/lib/types/rdf';
 import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
+import { CFCBatchMetadataLD } from 'web-components/lib/types/rdf/C02-city-forest-credits-batch';
 
 import { MetadataJSONField } from '../../../../components/molecules';
 import useQueryProjectsByIssuer from '../../../../hooks/useQueryProjectsByIssuer';
@@ -39,7 +41,8 @@ export interface CreditBasicsFormValues {
   projectId: string;
   startDate: Date | null;
   endDate: Date | null;
-  metadata?: Partial<VCSBatchMetadataLD>;
+  metadata?: any;
+  // metadata?: Partial<VCSBatchMetadataLD>;
 }
 
 const vcsMetadataSchema: Yup.AnyObjectSchema = Yup.object({
@@ -101,7 +104,8 @@ export default function CreditBasics({
   const { wallet } = useWallet();
   const projects = useQueryProjectsByIssuer(wallet!.address); // TODO: We should not use the typescript bypass! here (should try to avoid using period)
 
-  const { values, validateForm } = useFormikContext<CreditBasicsFormValues>();
+  const { values, validateForm, errors } =
+    useFormikContext<CreditBasicsFormValues>();
   const { projectId } = values;
   const { classId, isVCS } = useUpdateProjectClass(projectId);
   const projectOptions = useUpdateProjectOptions(projects);
@@ -116,6 +120,10 @@ export default function CreditBasics({
   useEffect(() => {
     validateForm();
   }, [validateForm]);
+
+  console.log('projectId, classId', projectId, classId);
+  console.log('values', values);
+  console.log('errors', errors);
 
   return (
     <OnBoardingCard>
@@ -174,9 +182,9 @@ export default function CreditBasics({
             }
           />
         </>
-      ) : projectId && classId ? (
-        <MetadataJSONField classId={classId} required={!isVCS} />
-      ) : null}
+      ) : (
+        classId && <MetadataJSONField classId={classId} />
+      )}
     </OnBoardingCard>
   );
 }

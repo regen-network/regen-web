@@ -44,6 +44,7 @@ const useProjectCreateSubmit = ({ signAndBroadcast }: Props): ReturnType => {
             Partial<ProjectMetadataLD> | Partial<VCSProjectMetadataLD>
           >
         | undefined;
+      console.log('project metadata', metadata);
 
       try {
         iriResponse = await generateIri(metadata);

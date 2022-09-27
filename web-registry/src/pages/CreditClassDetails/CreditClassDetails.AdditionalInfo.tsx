@@ -2,12 +2,11 @@ import { Box } from '@mui/material';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { startCase } from 'lodash';
 
-import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import { Body } from 'web-components/lib/components/typography';
 
 import { CreditClassMetadataLD } from 'generated/json-ld';
 
-import { Link, LinkWithArrow } from 'components/atoms';
+import { LinkWithArrow } from 'components/atoms';
 import { LineItemLabelAbove } from 'components/molecules';
 
 import { ApprovedMethodologiesList } from './CreditClassDetails.ApprovedMethodologies';

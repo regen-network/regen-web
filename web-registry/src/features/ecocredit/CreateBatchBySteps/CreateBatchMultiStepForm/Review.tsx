@@ -77,9 +77,11 @@ function CreditBatchInfo({
       <ItemDisplay name={'Start and end date'}>
         {`${formatDate(data.startDate)} - ${formatDate(data.endDate)}`}
       </ItemDisplay>
-      <ItemDisplay name={'VCS retirement serial number'}>
-        {metadata['regen:vcsRetirementSerialNumber']}
-      </ItemDisplay>
+      {metadata['regen:vcsRetirementSerialNumber'] && (
+        <ItemDisplay name={'VCS retirement serial number'}>
+          {metadata['regen:vcsRetirementSerialNumber']}
+        </ItemDisplay>
+      )}
       {metadata['regen:additionalCertifications']?.map((cert, index) => (
         <AdditionalCertificationDisplay
           key={`additional-certification-${index}`}

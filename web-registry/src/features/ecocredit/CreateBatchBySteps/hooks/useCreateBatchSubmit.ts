@@ -2,8 +2,11 @@ import { useState } from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { MsgCreateBatch } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 import { BatchIssuance } from '@regen-network/api/lib/generated/regen/ecocredit/v1/types';
+import { JsonLdProcessor, NodeObject } from 'jsonld';
+import { cloneDeep, merge } from 'lodash';
 
 import type { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
+import { CFCBatchMetadataLD } from 'web-components/lib/types/rdf/C02-city-forest-credits-batch';
 
 import { useLedger } from 'ledger';
 import { generateIri, IriFromMetadataSuccess } from 'lib/metadata-graph';
@@ -11,11 +14,12 @@ import { generateIri, IriFromMetadataSuccess } from 'lib/metadata-graph';
 import { useMsgClient } from 'hooks';
 
 import { CreateBatchFormValues } from '../CreateBatchMultiStepForm/CreateBatchMultiStepForm';
+import useUpdateProjectClass from './useUpdateProjectClass';
 
 // TODO
 // Right now, just case "C01" (aka. VCS)
 
-function prepareMetadata(
+function prepareVCSMetadata(
   projectId: string,
   partialMetadata: Partial<VCSBatchMetadataLD>,
 ): VCSBatchMetadataLD | undefined {
@@ -46,15 +50,23 @@ async function prepareMsg(
   issuer: string,
   data: CreateBatchFormValues,
 ): Promise<Partial<MsgCreateBatch> | undefined> {
+  console.log('data', data);
   // First, complete the metadata
-  const metadata: VCSBatchMetadataLD | undefined = prepareMetadata(
-    data.projectId,
-    data.metadata as Partial<VCSBatchMetadataLD>,
-  );
+  let metadata: VCSBatchMetadataLD | CFCBatchMetadataLD | undefined =
+    prepareVCSMetadata(
+      data.projectId,
+      data.metadata as Partial<VCSBatchMetadataLD>,
+    );
+  if (!metadata) metadata = JSON.parse(data.metadata);
   if (!metadata) return;
+  console.log('metadata', metadata);
 
-  // then, generate the offchain iri from the metadata
-  let iriResponse: IriFromMetadataSuccess<VCSBatchMetadataLD> | undefined;
+  // generate IRI
+  let iriResponse:
+    | IriFromMetadataSuccess<
+        Partial<VCSBatchMetadataLD> | Partial<CFCBatchMetadataLD>
+      >
+    | undefined;
 
   try {
     iriResponse = await generateIri(metadata);
@@ -63,7 +75,7 @@ async function prepareMsg(
     throw new Error(err as string);
   }
 
-  // finally, build de Msg for Tx
+  // finally, build Msg for Tx
   const issuance: BatchIssuance[] = data.recipients.map(recipient => {
     let issuanceRecipient: Partial<BatchIssuance> = {
       recipient: recipient.recipient,
@@ -146,6 +158,8 @@ export default function useCreateBatchSubmit(): ReturnType {
       try {
         setStatus('message');
         message = await prepareMsg(accountAddress, data);
+        console.log('message', message);
+
         if (!message) return;
       } catch (err) {
         setError(err as string);

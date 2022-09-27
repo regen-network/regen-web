@@ -142,7 +142,7 @@ const CreditSendForm: React.FC<FormProps> = ({
             name={'totalAmount'}
             label={
               <Flex align="center">
-                <Box sx={{ mr: 1 }}>{'Total amount of credits'}</Box>
+                <Box sx={{ mr: 1 }}>{'Amount of credits'}</Box>
                 <InfoTooltip
                   title="By default these credits are tradable but you may check “retire all credits upon transfer” below to automatically retire them upon sending."
                   arrow
@@ -157,9 +157,6 @@ const CreditSendForm: React.FC<FormProps> = ({
                   </Box>
                 </InfoTooltip>
               </Flex>
-            }
-            auxiliarLabel={
-              values.withRetire ? '' : 'These credits will be tradable.'
             }
             availableAmount={availableTradableAmount}
             denom={batchDenom}

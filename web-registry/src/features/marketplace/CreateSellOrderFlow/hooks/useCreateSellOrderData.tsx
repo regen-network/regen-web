@@ -21,15 +21,17 @@ export const useCreateSellOrderData = ({ projectId }: Props): ReponseType => {
     widthAdditionalData: false,
   });
 
-  const hasTradeableCredits = credits.some(
-    credit => Number(credit.balance?.tradableAmount ?? 0) > 0,
+  const tradableCredits = credits.filter(
+    credit => Number(credit.balance?.tradableAmount) > 0,
   );
+
+  const hasTradeableCredits = tradableCredits.length > 0;
 
   const isSellFlowDisabled =
     (isLoadingCredits || !hasTradeableCredits) && Boolean(wallet?.address);
 
   return {
     isSellFlowDisabled,
-    credits,
+    credits: tradableCredits,
   };
 };

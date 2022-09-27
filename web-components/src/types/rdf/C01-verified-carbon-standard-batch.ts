@@ -4,7 +4,7 @@ import { NameUrl } from '.';
 
 export interface VCSBatchMetadataLD {
   '@context'?: Context;
-  '@type': string;
+  '@type': 'regen:C01-CreditBatch';
   'regen:vcsProjectId': string;
   'regen:vcsRetirementSerialNumber': string;
   'regen:additionalCertifications': NameUrl[];

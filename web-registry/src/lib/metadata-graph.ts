@@ -21,6 +21,8 @@ export const getMetadata = async (iri: string): Promise<any> => {
     'regen:offsetGenerationMethod': { '@container': '@list' },
     'regen:sectoralScope': { '@container': '@list' },
     'schema:itemListElement': { '@container': '@list' },
+    'regen:verificationReports': { '@container': '@list' },
+    'regen:cfcCreditSerialNumbers': { '@container': '@list' },
   });
   console.log('compacted', compacted);
   return compacted;

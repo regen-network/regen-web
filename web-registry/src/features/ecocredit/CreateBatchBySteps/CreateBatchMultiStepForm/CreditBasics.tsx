@@ -3,7 +3,6 @@ import { Box, IconButton, Link } from '@mui/material';
 import { DefaultTheme as Theme, useTheme } from '@mui/styles';
 import { isPast } from 'date-fns';
 import { Field, FieldArray, useFormikContext } from 'formik';
-import { JsonLd } from 'jsonld/jsonld-spec';
 import * as Yup from 'yup';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -27,8 +26,6 @@ import {
 import { AddCertificationModal } from 'web-components/lib/components/modal/AddCertificationModal';
 import { Body } from 'web-components/lib/components/typography';
 import { NameUrl } from 'web-components/lib/types/rdf';
-import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
-import { CFCBatchMetadataLD } from 'web-components/lib/types/rdf/C02-city-forest-credits-batch';
 
 import { MetadataJSONField } from '../../../../components/molecules';
 import useQueryProjectsByIssuer from '../../../../hooks/useQueryProjectsByIssuer';
@@ -42,7 +39,7 @@ export interface CreditBasicsFormValues {
   startDate: Date | null;
   endDate: Date | null;
   metadata?: any;
-  // metadata?: Partial<VCSBatchMetadataLD>;
+  // metadata?: Partial<VCSBatchMetadataLD>; //TODO
 }
 
 const vcsMetadataSchema: Yup.AnyObjectSchema = Yup.object({

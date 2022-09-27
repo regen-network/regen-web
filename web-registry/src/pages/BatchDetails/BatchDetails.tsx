@@ -7,6 +7,7 @@ import { Loading } from 'web-components/lib/components/loading';
 import Section from 'web-components/lib/components/section';
 import { Title } from 'web-components/lib/components/typography';
 import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
+import { CFCBatchMetadataLD } from 'web-components/lib/types/rdf/C02-city-forest-credits-batch';
 
 import { useProjectByOnChainIdQuery } from 'generated/graphql';
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
@@ -27,7 +28,9 @@ export const BatchDetails: React.FC = () => {
   const { batchDenom } = useParams();
   const [ledgerLoading, setLedgerLoading] = useState(false);
   const [batch, setBatch] = useState<BatchInfoWithSupply>();
-  const [metadata, setMetadata] = useState<VCSBatchMetadataLD>();
+  const [metadata, setMetadata] = useState<
+    VCSBatchMetadataLD | CFCBatchMetadataLD
+  >();
   const walletContext = useWallet();
   const accountAddress = walletContext.wallet?.address;
   const { credits: userEcocredits } = useEcocredits({

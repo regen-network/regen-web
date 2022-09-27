@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { asyncSome } from 'lib/asyncSome';
 
@@ -13,6 +13,7 @@ function useQueryIfIssuer(): boolean {
   const [isIssuer, setIsIssuer] = useState(false);
   const { wallet } = useWallet();
   const onChainClasses = useQueryListClasses();
+  const isFetchingRef = useRef(false);
 
   useEffect(() => {
     const queryIfIssuer = async (): Promise<void> => {
@@ -20,6 +21,9 @@ function useQueryIfIssuer(): boolean {
         setIsIssuer(false);
         return;
       }
+
+      isFetchingRef.current = true;
+
       const foundOne = await asyncSome(
         onChainClasses?.classes,
         async creditClass => {
@@ -29,9 +33,12 @@ function useQueryIfIssuer(): boolean {
       );
 
       setIsIssuer(foundOne);
+      isFetchingRef.current = false;
     };
 
-    queryIfIssuer();
+    if (!isFetchingRef.current) {
+      queryIfIssuer();
+    }
   }, [onChainClasses?.classes, wallet?.address]);
   return isIssuer;
 }

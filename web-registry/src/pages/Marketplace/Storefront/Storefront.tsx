@@ -28,6 +28,7 @@ import { useAllProjectsQuery } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { getHashUrl } from 'lib/block-explorer';
 
+import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { BuyCreditsModal, BuyCreditsValues } from 'components/organisms';
@@ -70,6 +71,10 @@ export const Storefront = (): JSX.Element => {
   const { offset, rowsPerPage } = paginationParams;
   const { sellOrdersResponse, refetchSellOrders } = useQuerySellOrders();
   const sellOrders = sellOrdersResponse?.sellOrders;
+  const uiSellOrdersInfo = useMemo(
+    () => sellOrders?.map(normalizeToUISellOrderInfo),
+    [sellOrders],
+  );
 
   const batchDenoms = useMemo(
     () =>
@@ -174,7 +179,11 @@ export const Storefront = (): JSX.Element => {
     }
   };
 
-  const onSubmitError = ({ creditCount }: BuyCreditsValues): void => {
+  const onSubmitCallback = ({
+    creditCount,
+    sellOrderId,
+  }: BuyCreditsValues): void => {
+    selectedSellOrderIdRef.current = Number(sellOrderId);
     submittedQuantityRef.current = creditCount;
   };
 
@@ -202,7 +211,7 @@ export const Storefront = (): JSX.Element => {
     setTxModalTitle,
     buttonTitle: BUY_SELL_ORDER_BUTTON,
     refetchSellOrders,
-    onSubmitError,
+    onSubmitCallback,
   });
 
   const cancelSellOrderSubmit = useCancelSellOrderSubmit({
@@ -250,7 +259,7 @@ export const Storefront = (): JSX.Element => {
     selectedSellOrderIdRef,
     submittedQuantityRef,
     setError,
-    sellOrders,
+    sellOrders: uiSellOrdersInfo,
     setCardItems,
     setTxModalHeader,
     setTxModalTitle,

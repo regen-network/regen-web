@@ -5,7 +5,7 @@ import { Item } from 'web-components/lib/components/modal/TxModal';
 
 import { UseStateSetter } from 'types/react/use-state';
 
-import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
+import { UISellOrderInfo } from 'pages/Projects/Projects.types';
 
 import { checkIsBuyOrderInvalid } from '../Storefront.utils';
 
@@ -16,7 +16,7 @@ type Props = {
   setTxModalTitle: UseStateSetter<string>;
   setTxModalHeader: UseStateSetter<string>;
   setCardItems: UseStateSetter<Item[] | undefined>;
-  sellOrders?: SellOrderInfoExtented[];
+  sellOrders?: UISellOrderInfo[];
 };
 
 export const useCheckSellOrderAvailabilty = ({
@@ -51,11 +51,11 @@ export const useCheckSellOrderAvailabilty = ({
       ]);
     }
   }, [
+    sellOrders,
     selectedSellOrderIdRef,
     submittedQuantityRef,
     setError,
     setTxModalTitle,
-    sellOrders,
     setCardItems,
     setTxModalHeader,
   ]);

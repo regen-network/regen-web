@@ -6,6 +6,7 @@ import {
 
 import { Item } from 'web-components/lib/components/modal/ConfirmModal';
 
+import { UISellOrderInfo } from 'pages/Projects/Projects.types';
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 import { NormalizedSellOrder } from './Storefront.types';
@@ -56,7 +57,7 @@ export const updateBatchInfosMap = ({
 };
 
 type CheckIsBuyOrderInvalidParams = {
-  sellOrders?: SellOrderInfoExtented[];
+  sellOrders?: UISellOrderInfo[];
   creditCount?: number;
   sellOrderId?: string;
 };
@@ -71,7 +72,7 @@ export const checkIsBuyOrderInvalid = ({
   sellOrderId,
 }: CheckIsBuyOrderInvalidParams): CheckIsBuyOrderInvalidResponse => {
   const currentSellOrder = sellOrders?.find(
-    sellOrder => String(sellOrder.id) === sellOrderId,
+    sellOrder => sellOrder.id === sellOrderId,
   );
   const quantityAfterOrder =
     Number(currentSellOrder?.quantity ?? 0) - creditCount;

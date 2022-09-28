@@ -10,6 +10,7 @@ import { getJurisdictionIsoCode } from 'web-components/lib/utils/locationStandar
 import { UseStateSetter } from 'types/react/use-state';
 import { microToDenom } from 'lib/denom.utils';
 
+import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import DenomIcon from 'components/molecules/DenomIcon';
 import { BuyCreditsValues } from 'components/organisms';
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
@@ -31,7 +32,7 @@ type Props = {
   setTxButtonTitle: UseStateSetter<string>;
   setSelectedSellOrder?: UseStateSetter<number | null>;
   refetchSellOrders?: () => RefetchSellOrdersResponse;
-  onSubmitError?: (values: BuyCreditsValues) => void;
+  onSubmitCallback?: (values: BuyCreditsValues) => void;
 };
 
 type ReturnType = (values: BuyCreditsValues) => Promise<void>;
@@ -46,11 +47,15 @@ const useBuySellOrderSubmit = ({
   setSelectedSellOrder,
   buttonTitle,
   refetchSellOrders,
-  onSubmitError,
+  onSubmitCallback,
 }: Props): ReturnType => {
   const buySellOrderSubmit = useCallback(
     async (values: BuyCreditsValues): Promise<void> => {
       if (!accountAddress) return Promise.reject();
+
+      if (onSubmitCallback) {
+        onSubmitCallback(values);
+      }
 
       const {
         batchDenom,
@@ -67,14 +72,14 @@ const useBuySellOrderSubmit = ({
 
       if (refetchSellOrders) {
         const sellOrders = await refetchSellOrders();
+        const uiSellOrdersInfo = sellOrders?.map(normalizeToUISellOrderInfo);
         const { isBuyOrderInvalid } = checkIsBuyOrderInvalid({
           creditCount,
           sellOrderId,
-          sellOrders,
+          sellOrders: uiSellOrdersInfo,
         });
 
         if (isBuyOrderInvalid) {
-          onSubmitError && onSubmitError(values);
           return Promise.reject();
         }
       }
@@ -156,7 +161,7 @@ const useBuySellOrderSubmit = ({
       setTxButtonTitle,
       buttonTitle,
       refetchSellOrders,
-      onSubmitError,
+      onSubmitCallback,
     ],
   );
 

@@ -120,12 +120,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: theme.spacing(15.25),
     textAlign: 'center',
   },
-  infoIcon: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+  marginLeft: {
     marginLeft: theme.spacing(2.5),
-    cursor: 'pointer',
   },
   dropdownIcon: {
     width: theme.spacing(3.25),
@@ -351,7 +347,9 @@ export default function LedgerModal({
             justifyContent="center"
             className={classes.title}
           >
-            <Title variant="h5">Summary</Title>
+            <Title variant="h5" mr={2.5}>
+              Summary
+            </Title>
             <CustomTooltip
               arrow
               placement="top"
@@ -360,7 +358,7 @@ export default function LedgerModal({
               )}
             >
               <span>
-                <InfoIcon className={classes.infoIcon} />
+                <InfoIcon />
               </span>
             </CustomTooltip>
           </Grid>
@@ -372,7 +370,13 @@ export default function LedgerModal({
             <>
               <Grid container wrap="nowrap" className={classes.blockchainTitle}>
                 <Grid item container alignItems="center">
-                  <div className={clsx(classes.label, classes.blockchain)}>
+                  <div
+                    className={clsx(
+                      classes.label,
+                      classes.blockchain,
+                      classes.marginLeft,
+                    )}
+                  >
                     blockchain data (devnet)
                   </div>
                   <CustomTooltip
@@ -383,7 +387,7 @@ export default function LedgerModal({
                     )}
                   >
                     <span>
-                      <InfoIcon className={classes.infoIcon} />
+                      <InfoIcon />
                     </span>
                   </CustomTooltip>
                 </Grid>

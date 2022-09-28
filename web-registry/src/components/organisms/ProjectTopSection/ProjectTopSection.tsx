@@ -36,6 +36,7 @@ import {
   ProjectTopSectionQuoteMark,
   useProjectTopSectionStyles,
 } from './ProjectTopSection.styles';
+import { getDisplayAdmin } from './ProjectTopSection.utils';
 
 function ProjectTopSection({
   data,
@@ -268,6 +269,7 @@ function ProjectTopSection({
         </Grid>
         <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
           <ProjectTopCard
+            projectAdmin={data.admin && getDisplayAdmin(data.admin)}
             projectDeveloper={getDisplayParty(
               'regen:projectDeveloper',
               metadata,

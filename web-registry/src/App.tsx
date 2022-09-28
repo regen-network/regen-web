@@ -23,7 +23,6 @@ import PageLoader from './components/atoms/PageLoader';
 import { AppFooter, RegistryNav } from './components/organisms';
 import { URL_PRIVACY, URL_TERMS_SERVICE } from './globals';
 import isAdmin from './lib/admin';
-import { useGoogleAnalyticsInit } from './lib/ga';
 import { ProjectMetadata } from './pages/ProjectMetadata/ProjectMetadata';
 
 import './App.css';
@@ -104,12 +103,7 @@ Sentry.init({
 
 export const history = createBrowserHistory();
 
-const GoogleAnalytics: React.FC = (): JSX.Element => {
-  useGoogleAnalyticsInit();
-  return <></>;
-};
-
-const AmplitudeAnalytics: React.FC = (): JSX.Element => {
+const PageViewTracking: React.FC = (): JSX.Element => {
   const location = useLocation();
   const analytics = useAnalytics();
   useEffect(() => {
@@ -148,8 +142,7 @@ const App: React.FC = (): JSX.Element => {
 
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <GoogleAnalytics />
-      <AmplitudeAnalytics />
+      <PageViewTracking />
       <ScrollToTop />
       <MobileSupportModal />
       <div>

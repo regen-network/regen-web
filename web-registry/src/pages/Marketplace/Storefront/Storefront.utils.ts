@@ -7,7 +7,6 @@ import {
 import { Item } from 'web-components/lib/components/modal/ConfirmModal';
 
 import { UISellOrderInfo } from 'pages/Projects/Projects.types';
-import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 import { NormalizedSellOrder } from './Storefront.types';
 

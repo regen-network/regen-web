@@ -5,7 +5,7 @@ import {
   BatchInfo,
   QueryProjectsResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { ERRORS, errorsMapping, findErrorByCodeEnum } from 'config/errors';
+import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -30,7 +30,7 @@ import { getHashUrl } from 'lib/block-explorer';
 
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
-import { BuyCreditsModal } from 'components/organisms';
+import { BuyCreditsModal, BuyCreditsValues } from 'components/organisms';
 import SellOrdersTable from 'components/organisms/SellOrdersTable/SellOrdersTable';
 import useEcocreditQuery from 'hooks/useEcocreditQuery';
 import useMsgClient from 'hooks/useMsgClient';
@@ -119,6 +119,7 @@ export const Storefront = (): JSX.Element => {
   const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
   const [selectedAction, setSelectedAction] = useState<SellOrderActions>();
   const selectedSellOrderIdRef = useRef<number>();
+  const submittedQuantityRef = useRef<number>();
   const isBuyModalOpen = selectedSellOrder !== null && selectedAction === 'buy';
   const navigate = useNavigate();
   const isCancelModalOpen =
@@ -148,6 +149,7 @@ export const Storefront = (): JSX.Element => {
   const handleTxQueued = (): void => setIsProcessingModalOpen(true);
   const handleTxDelivered = (): void => {
     setIsProcessingModalOpen(false);
+    selectedSellOrderIdRef.current = undefined;
     refetchSellOrders();
   };
   const handleError = (): void => setIsProcessingModalOpen(false);
@@ -170,6 +172,10 @@ export const Storefront = (): JSX.Element => {
     } else {
       handleTxModalClose();
     }
+  };
+
+  const onSubmitError = ({ creditCount }: BuyCreditsValues): void => {
+    submittedQuantityRef.current = creditCount;
   };
 
   const {
@@ -196,6 +202,7 @@ export const Storefront = (): JSX.Element => {
     setTxModalTitle,
     buttonTitle: BUY_SELL_ORDER_BUTTON,
     refetchSellOrders,
+    onSubmitError,
   });
 
   const cancelSellOrderSubmit = useCancelSellOrderSubmit({
@@ -241,6 +248,7 @@ export const Storefront = (): JSX.Element => {
 
   useCheckSellOrderAvailabilty({
     selectedSellOrderIdRef,
+    submittedQuantityRef,
     setError,
     sellOrders,
     setCardItems,
@@ -293,6 +301,7 @@ export const Storefront = (): JSX.Element => {
                             selectedSellOrderIdRef.current = Number(
                               sellOrders?.[i].id,
                             );
+                            submittedQuantityRef.current = undefined;
                             refetchSellOrders();
                             setSelectedAction('buy');
                             setSelectedSellOrder(i);

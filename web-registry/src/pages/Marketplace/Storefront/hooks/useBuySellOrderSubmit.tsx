@@ -31,6 +31,7 @@ type Props = {
   setTxButtonTitle: UseStateSetter<string>;
   setSelectedSellOrder?: UseStateSetter<number | null>;
   refetchSellOrders?: () => RefetchSellOrdersResponse;
+  onSubmitError?: (values: BuyCreditsValues) => void;
 };
 
 type ReturnType = (values: BuyCreditsValues) => Promise<void>;
@@ -45,6 +46,7 @@ const useBuySellOrderSubmit = ({
   setSelectedSellOrder,
   buttonTitle,
   refetchSellOrders,
+  onSubmitError,
 }: Props): ReturnType => {
   const buySellOrderSubmit = useCallback(
     async (values: BuyCreditsValues): Promise<void> => {
@@ -71,7 +73,10 @@ const useBuySellOrderSubmit = ({
           sellOrders,
         });
 
-        if (isBuyOrderInvalid) return Promise.reject();
+        if (isBuyOrderInvalid) {
+          onSubmitError && onSubmitError(values);
+          return Promise.reject();
+        }
       }
 
       const isTradeable = retirementAction === 'manual';
@@ -151,6 +156,7 @@ const useBuySellOrderSubmit = ({
       setTxButtonTitle,
       buttonTitle,
       refetchSellOrders,
+      onSubmitError,
     ],
   );
 

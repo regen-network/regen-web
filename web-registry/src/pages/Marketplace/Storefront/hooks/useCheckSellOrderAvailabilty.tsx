@@ -12,6 +12,7 @@ import { checkIsBuyOrderInvalid } from '../Storefront.utils';
 type Props = {
   setError: (error: string | undefined) => void;
   selectedSellOrderIdRef: MutableRefObject<number | undefined>;
+  submittedQuantityRef: MutableRefObject<number | undefined>;
   setTxModalTitle: UseStateSetter<string>;
   setTxModalHeader: UseStateSetter<string>;
   setCardItems: UseStateSetter<Item[] | undefined>;
@@ -21,6 +22,7 @@ type Props = {
 export const useCheckSellOrderAvailabilty = ({
   setError,
   selectedSellOrderIdRef,
+  submittedQuantityRef,
   setTxModalTitle,
   setCardItems,
   setTxModalHeader,
@@ -31,9 +33,10 @@ export const useCheckSellOrderAvailabilty = ({
     const sellOrderId = selectedSellOrderId
       ? String(selectedSellOrderId)
       : undefined;
-    const { isBuyOrderInvalid, quantityAfterOrder } = checkIsBuyOrderInvalid({
+    const { isBuyOrderInvalid, amountAvailable } = checkIsBuyOrderInvalid({
       sellOrderId,
       sellOrders,
+      creditCount: submittedQuantityRef.current,
     });
 
     if (isBuyOrderInvalid) {
@@ -43,12 +46,13 @@ export const useCheckSellOrderAvailabilty = ({
       setCardItems([
         {
           label: 'AMOUNT AVAILABLE',
-          value: { name: Math.max(quantityAfterOrder, 0) },
+          value: { name: amountAvailable },
         },
       ]);
     }
   }, [
     selectedSellOrderIdRef,
+    submittedQuantityRef,
     setError,
     setTxModalTitle,
     sellOrders,

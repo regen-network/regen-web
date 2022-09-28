@@ -62,7 +62,7 @@ type CheckIsBuyOrderInvalidParams = {
 };
 type CheckIsBuyOrderInvalidResponse = {
   isBuyOrderInvalid: boolean;
-  quantityAfterOrder: number;
+  amountAvailable: number;
 };
 
 export const checkIsBuyOrderInvalid = ({
@@ -78,5 +78,8 @@ export const checkIsBuyOrderInvalid = ({
   const isBuyOrderInvalid =
     sellOrderId !== undefined && (!currentSellOrder || quantityAfterOrder < 0);
 
-  return { isBuyOrderInvalid, quantityAfterOrder };
+  return {
+    isBuyOrderInvalid,
+    amountAvailable: Number(currentSellOrder?.quantity ?? 0),
+  };
 };

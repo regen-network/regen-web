@@ -51,6 +51,10 @@ const analytics = Analytics({
     }),
     googleAnalytics({
       measurementIds: ['G-6ZGJM8JXYN'],
+      enabled: false,
+      gtagConfig: {
+        anonymize_ip: true,
+      },
     }),
   ],
   // see here for debugging tools:

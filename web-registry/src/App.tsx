@@ -121,10 +121,10 @@ const App: React.FC = (): JSX.Element => {
   const { user, isLoading, error } = useAuth0();
   const SentryRoutes = Sentry.withSentryReactRouterV6Routing(Routes);
   const { plugins } = useAnalytics();
-  // user opt-in
-  plugins.enable(['amplitude']).then(() => {
-    console.log('amplitude enabled');
-  });
+  // user opt-in, right now we just enable all of the analytics
+  // providers. but this shows how to conditional enable or even
+  // disable certain providers.
+  plugins.enable(['amplitude', 'google-analytics']).then(() => {});
 
   if (isLoading) {
     return <div></div>;

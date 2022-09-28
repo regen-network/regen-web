@@ -209,13 +209,14 @@ export default function Header({
   // );
 
   const styles = useStyles({ color, borderBottom, fullWidth });
+  const isBrowser = typeof window !== 'undefined';
+  const isBannerSite =
+    window.location.hostname === 'www.regen.network' ||
+    window.location.hostname.endsWith('regen-website.netlify.app');
+  const showBanner = isBrowser && isBannerSite;
   return (
     <>
-      {typeof window !== 'undefined' &&
-        (window.location.hostname === 'www.regen.network' ||
-          window.location.hostname.endsWith('regen-website.netlify.app')) && (
-          <MarketplaceLaunchBanner />
-        )}
+      {showBanner && <MarketplaceLaunchBanner />}
       <div
         className={cx(
           styles.borderBottom,

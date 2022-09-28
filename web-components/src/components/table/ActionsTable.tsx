@@ -37,6 +37,7 @@ const BorderLeft = styled('div')(({ theme }) => ({
   left: 0,
   bottom: 0,
   borderLeft: `1px solid ${theme.palette.info.light}`,
+  boxShadow: `-1px 0px 1px rgba(0,0,0,.05), -2px 0px 4px rgba(0,0,0,.15), -6px 0px 10px rgba(0,0,0,.5)`,
 }));
 
 export const DEFAULT_ROWS_PER_PAGE = 5;

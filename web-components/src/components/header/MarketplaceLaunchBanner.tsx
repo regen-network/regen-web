@@ -23,7 +23,7 @@ const MarketplaceLaunchBanner: React.FC<Props> = props => {
         </span>{' '}
         <Link
           href="https://app.regen.network"
-          sx={{ textDecoration: 'underline' }}
+          sx={{ textDecoration: 'underline!important' }}
         >
           Regen Marketplace
         </Link>{' '}

@@ -5,6 +5,7 @@ import {
   BatchInfo,
   QueryProjectsResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { ERRORS, errorsMapping, findErrorByCodeEnum } from 'config/errors';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -182,6 +183,8 @@ export const Storefront = (): JSX.Element => {
   const accountAddress = wallet?.address;
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
+  const errorEnum = findErrorByCodeEnum({ errorCode: error });
+  const ErrorIcon = errorsMapping[errorEnum].icon;
 
   const buySellOrderSubmit = useBuySellOrderSubmit({
     accountAddress,
@@ -239,10 +242,10 @@ export const Storefront = (): JSX.Element => {
   useCheckSellOrderAvailabilty({
     selectedSellOrderIdRef,
     setError,
-    selectedSellOrderId:
-      selectedSellOrder !== null
-        ? Number(sellOrders?.[selectedSellOrder].id)
-        : undefined,
+    sellOrders,
+    setCardItems,
+    setTxModalHeader,
+    setTxModalTitle,
   });
 
   return (
@@ -356,8 +359,11 @@ export const Storefront = (): JSX.Element => {
         onClose={handleTxModalClose}
         txHash={txHash ?? ''}
         txHashUrl={txHashUrl}
+        title={txModalHeader}
         cardTitle={txModalTitle}
-        buttonTitle={'Close'}
+        buttonTitle={'CLOSE WINDOW'}
+        cardItems={cardItems}
+        icon={<ErrorIcon sx={{ fontSize: 100 }} />}
         linkComponent={Link}
         onButtonClick={onButtonClick}
       />

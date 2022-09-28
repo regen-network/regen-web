@@ -19,6 +19,7 @@ import {
   BUY_SELL_ORDER_HEADER,
   BUY_SELL_ORDER_TITLE,
 } from '../Storefront.constants';
+import { checkIsBuyOrderInvalid } from '../Storefront.utils';
 
 type Props = {
   accountAddress?: string;
@@ -64,10 +65,13 @@ const useBuySellOrderSubmit = ({
 
       if (refetchSellOrders) {
         const sellOrders = await refetchSellOrders();
-        const currentSellOrder = sellOrders?.find(
-          sellOrder => String(sellOrder.id) === sellOrderId,
-        );
-        if (!currentSellOrder) return Promise.reject();
+        const { isBuyOrderInvalid } = checkIsBuyOrderInvalid({
+          creditCount,
+          sellOrderId,
+          sellOrders,
+        });
+
+        if (isBuyOrderInvalid) return Promise.reject();
       }
 
       const isTradeable = retirementAction === 'manual';

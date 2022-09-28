@@ -19,7 +19,9 @@ type QuerySellOrdersResponseExtented = {
   sellOrders: SellOrderInfoExtented[];
 };
 
-export type RefetchSellOrdersResponse = Promise<SellOrderInfoExtented[] | void>;
+export type RefetchSellOrdersResponse = Promise<
+  SellOrderInfoExtented[] | undefined
+>;
 
 export const useQuerySellOrders = function (): {
   sellOrdersResponse: QuerySellOrdersResponseExtented | undefined;
@@ -74,6 +76,8 @@ export const useQuerySellOrders = function (): {
 
       return sellOrdersWithBaseDenom;
     }
+
+    return undefined;
   }, [queryClient]);
 
   useEffect(() => {

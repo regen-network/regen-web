@@ -108,6 +108,8 @@ const PageViewTracking: React.FC = (): JSX.Element => {
   const analytics = useAnalytics();
   useEffect(() => {
     // send page view whenever react-router location changes
+    // this sends page views to all analytics plugins:
+    // https://getanalytics.io/plugins/
     analytics.page({
       path: location.pathname,
       search: location.search,

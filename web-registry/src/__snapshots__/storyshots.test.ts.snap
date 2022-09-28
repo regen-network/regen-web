@@ -3420,6 +3420,36 @@ exports[`Storyshots Tooltip Info 1`] = `
 </MemoryRouter>
 `;
 
+exports[`Storyshots Tooltip Info With Icon 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
 exports[`Storyshots Tooltip Main Title 1`] = `
 <MemoryRouter
   initialEntries={

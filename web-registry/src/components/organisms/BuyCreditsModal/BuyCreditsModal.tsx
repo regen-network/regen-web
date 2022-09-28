@@ -13,7 +13,6 @@ import { RadioGroup } from 'formik-mui';
 import { Flex } from 'web-components/lib/components/box';
 import Card from 'web-components/lib/components/cards/Card';
 import Submit from 'web-components/lib/components/form/Submit';
-import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
 import { Image } from 'web-components/lib/components/image';
 import AgreeErpaCheckbox from 'web-components/lib/components/inputs/AgreeErpaCheckbox';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
@@ -23,7 +22,7 @@ import SelectTextField from 'web-components/lib/components/inputs/SelectTextFiel
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import { requirementAgreement } from 'web-components/lib/components/inputs/validation';
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
-import Tooltip from 'web-components/lib/components/tooltip/InfoTooltip';
+import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
 import {
   Body,
   Subtitle,
@@ -357,15 +356,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
                         Retirement note
                       </Title>
-                      <Tooltip
-                        arrow
-                        placement="top"
-                        title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')"
-                      >
-                        <div>
-                          <InfoIcon className={styles.info} />
-                        </div>
-                      </Tooltip>
+                      <InfoTooltipWithIcon title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')" />
                     </Flex>
                     <Box>
                       <Field
@@ -380,15 +371,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
                         Credit retirement location
                       </Title>
-                      <Tooltip
-                        arrow
-                        placement="top"
-                        title="The retirement location can be where you live or your business operates."
-                      >
-                        <div>
-                          <InfoIcon className={styles.info} />
-                        </div>
-                      </Tooltip>
+                      <InfoTooltipWithIcon title="The retirement location can be where you live or your business operates." />
                     </Flex>
                     <Body sx={{ color: 'info.dark', mb: { xs: 0, sm: 3 } }}>
                       Please enter a location for the retirement of these

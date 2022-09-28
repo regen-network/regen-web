@@ -269,7 +269,7 @@ function ProjectTopSection({
         </Grid>
         <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
           <ProjectTopCard
-            projectAdmin={data.admin && getDisplayAdmin(data.admin)}
+            projectAdmin={getDisplayAdmin(data?.admin)}
             projectDeveloper={getDisplayParty(
               'regen:projectDeveloper',
               metadata,

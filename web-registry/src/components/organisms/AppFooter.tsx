@@ -60,6 +60,10 @@ const AppFooter: React.FC = () => {
           title: 'How-to Videos',
           href: 'https://www.youtube.com/playlist?list=PLtrLQfpXvAUxDUxhaqzPJiH__-LKtkIUz',
         },
+        {
+          title: 'Support',
+          href: 'https://discord.com/channels/684494798358315010/1016745508590596116',
+        },
       ],
     },
   ];

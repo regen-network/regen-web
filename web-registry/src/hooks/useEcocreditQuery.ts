@@ -219,6 +219,7 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
     project,
     batchesByProject,
     batchesByIssuer,
+    projectsByClass,
   ]);
 
   return { data, loading, error };

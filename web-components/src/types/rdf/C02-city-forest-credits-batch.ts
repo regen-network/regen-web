@@ -4,7 +4,7 @@ export interface CFCBatchMetadataLD {
   '@context': Context;
   '@type': 'regen:C02-CreditBatch';
   'regen:cfcCreditSerialNumbers': string[];
-  'regen:cfcVintageYear': { '@type': 'xsd:gYear'; '@value': string }; //TODO
+  'regen:cfcVintageYear': XSDYear;
   'regen:verificationReports': UrlType[];
 }
 
@@ -16,4 +16,9 @@ interface Context {
   'regen:cfcCreditSerialNumbers': { '@container': '@list' };
   'regen:verificationReports': { '@container': '@list' };
   'schema:url': { '@type': 'schema:URL' };
+}
+
+interface XSDYear {
+  '@type': 'xsd:gYear';
+  '@value': string;
 }

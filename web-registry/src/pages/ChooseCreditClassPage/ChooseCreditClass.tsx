@@ -46,7 +46,6 @@ const ChooseCreditClass: React.FC = () => {
                 projectPatch: {
                   creditClassId: creditClassId || undefined, // If creditClassId is '', pass undefined instead
                   metadata,
-                  onChainId: creditClassOnChainId,
                 },
               },
             },

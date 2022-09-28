@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ReactPlayerLazy from 'react-player/lazy';
 import { useNavigate, useParams } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { Box, CardMedia, useMediaQuery, useTheme } from '@mui/material';
-import * as jsonld from 'jsonld';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import Card from 'web-components/lib/components/cards/Card';
@@ -12,6 +11,7 @@ import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/Revi
 import { Photo } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.Photo';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
+import { UrlType } from 'web-components/lib/utils/schemaURL';
 
 import { Link } from '../../components/atoms';
 import { ProjectPageFooter } from '../../components/molecules';
@@ -20,17 +20,18 @@ import {
   useProjectByIdQuery,
   useUpdateProjectByIdMutation,
 } from '../../generated/graphql';
-import {
-  ProjectMetadataLD,
-  VCSProjectMetadataLD, //TODO
-} from '../../generated/json-ld';
 import useMsgClient from '../../hooks/useMsgClient';
 import { getHashUrl } from '../../lib/block-explorer';
 import { isVCSCreditClass } from '../../lib/ecocredit/api';
 import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
 import { useCreateProjectContext } from '../ProjectCreate';
+import { useCompactMetadata } from './hooks/useCompactMetadata';
 import { useProjectCreateSubmit } from './hooks/useProjectCreateSubmit';
-import { getJurisdiction, getOnChainProjectId } from './ProjectReview.util';
+import {
+  getJurisdiction,
+  getOnChainProjectId,
+  getProjectReferenceID,
+} from './ProjectReview.util';
 import { VCSMetadata } from './ProjectReview.VCSMetadata';
 
 export const ProjectReview: React.FC = () => {
@@ -44,7 +45,6 @@ export const ProjectReview: React.FC = () => {
     fetchPolicy: 'cache-and-network',
   });
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
-  const [metadata, setMetadata] = useState<Partial<VCSProjectMetadataLD>>({});
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
   const [bannerError, setBannerError] = useState('');
   const [updateProject] = useUpdateProjectByIdMutation();
@@ -90,34 +90,15 @@ export const ProjectReview: React.FC = () => {
   const project = data?.projectById;
   const editPath = `/project-pages/${projectId}`;
   const creditClassId = project?.creditClassByCreditClassId?.onChainId;
-  const isVCS = !!creditClassId && isVCSCreditClass(creditClassId);
   const metadataRaw = project?.metadata;
-
-  console.log('metadataRaw', metadataRaw);
-
-  useEffect(() => {
-    const compactMetadata = async (): Promise<void> => {
-      const meta = await jsonld.compact(
-        { ...metadataRaw },
-        {
-          schema: 'http://schema.org/',
-          regen: 'http://regen.network/',
-          qudt: 'http://qudt.org/schema/qudt/',
-          unit: 'http://qudt.org/vocab/unit/',
-          xsd: 'http://www.w3.org/2001/XMLSchema#',
-          geojson: 'https://purl.org/geojson/vocab#',
-          'geojson:coordinates': { '@container': '@list' },
-        },
-      );
-      if (meta) setMetadata(meta as Partial<VCSProjectMetadataLD>);
-    };
-
-    compactMetadata();
-  }, [metadataRaw]);
+  const metadata = useCompactMetadata({ metadataRaw });
+  const isVCS = isVCSCreditClass(creditClassId);
 
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
   const videoUrl = metadata?.['regen:videoURL']?.['@value'];
+  const referenceId = getProjectReferenceID(metadata, creditClassId);
+
   const submit = async (): Promise<void> => {
     let jurisdiction;
     try {
@@ -133,20 +114,15 @@ export const ProjectReview: React.FC = () => {
       );
       return;
     }
-    const vcsProjectId = metadata?.['regen:vcsProjectId'];
-    const cfcProjectId = metadata?.['regen:cfcProjectId'];
+
     await projectCreateSubmit({
-      classId: 'C45', // TODO
-      // classId: creditClassId || '',
+      classId: creditClassId || '',
       admin: wallet?.address || '',
       metadata,
       jurisdiction: jurisdiction || '',
-      // referenceId: isVCS && vcsProjectId ? `VCS-${vcsProjectId}` : '', // TODO: regen-network/regen-registry#1104
-      referenceId: cfcProjectId, // TODO: regen-network/regen-registry#1104
+      referenceId,
     });
   };
-
-  console.log('metadata', metadata);
 
   return (
     <OnboardingFormTemplate activeStep={1} title="Review" loading={loading}>
@@ -190,10 +166,11 @@ export const ProjectReview: React.FC = () => {
           <Photo src={metadata?.['regen:previewPhoto']?.['@value']} />
         )}
         {metadata?.['regen:galleryPhotos']?.['@list']
-          ?.filter(photo => !!photo?.['@value'])
-          ?.map(photo => (
-            <Photo src={photo?.['@value']} />
-          ))}
+          ?.filter((photo: UrlType) => !!photo?.['@value'])
+          ?.map(
+            (photo: UrlType) =>
+              photo?.['@value'] && <Photo src={photo?.['@value']} />,
+          )}
         {videoUrl && (
           <Card>
             <CardMedia

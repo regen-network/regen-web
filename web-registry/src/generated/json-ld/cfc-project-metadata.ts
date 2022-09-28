@@ -5,12 +5,11 @@ import { ProjectMetadataLD } from './project-metadata';
 // type generated from https://github.com/regen-network/regen-registry-standards/blob/main/jsonld/projects/C02-project.jsonld
 
 export interface CFCProjectMetadataLD extends ProjectMetadataLD {
-  '@type': 'regen:C02-Project';
-  'regen:cfcProjectId': string;
-  'regen:cfcProjectPage': URL;
-  'regen:projectDesignDocument': URL;
-  'regen:projectOperator': RegenProjectOperator;
-  'regen:offsetProtocol': RegenOffsetProtocol;
+  'regen:cfcProjectId'?: string;
+  'regen:cfcProjectPage'?: URL;
+  'regen:projectDesignDocument'?: URL;
+  'regen:projectOperator'?: RegenProjectOperator;
+  'regen:offsetProtocol'?: RegenOffsetProtocol;
 }
 
 interface RegenOffsetProtocol {

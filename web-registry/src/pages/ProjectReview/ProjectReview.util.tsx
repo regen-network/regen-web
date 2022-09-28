@@ -3,8 +3,11 @@ import iso3166 from 'iso-3166-2';
 
 import { getISOString } from 'web-components/lib/utils/locationStandard';
 
+import { isCFCCreditClass, isVCSCreditClass } from 'lib/ecocredit/api';
+
 import {
-  ProjectMetadataLD,
+  CFCProjectMetadataLD,
+  ProjectMetadataLDUnion,
   VCSProjectMetadataLD,
 } from '../../generated/json-ld';
 
@@ -26,7 +29,7 @@ export const getOnChainProjectId = (
 };
 
 export const getJurisdiction = async (
-  metadata: Partial<ProjectMetadataLD> | Partial<VCSProjectMetadataLD>,
+  metadata: Partial<ProjectMetadataLDUnion>,
 ): Promise<string | undefined> => {
   if (!mapboxToken) return Promise.reject('Missing map API token');
   let isoString;
@@ -53,12 +56,15 @@ export const getJurisdiction = async (
     }
   });
 
+  console.log('location', location);
   // if GeocodeFeature context is insufficient, we can get a country code from place_name
   if (!countryKey && location?.['geojson:place_name']) {
     const placeSegments = location['geojson:place_name'].split(',');
     // find the country key
     placeSegments.forEach((segment: string) => {
-      const isUnitedStates = segment.toLowerCase().includes('united states'); // TODO
+      const isUnitedStates =
+        segment.toLowerCase().includes('united states') ||
+        segment.toLowerCase().includes('usa'); // TODO
       if (isUnitedStates) countryKey = 'US';
       const foundCountry = getCountryKey(segment.trim());
       if (foundCountry) {
@@ -111,4 +117,23 @@ const getStateProvince = (
 ): string | undefined => {
   const subdivision = iso3166.subdivision(countryKey, stateProvince);
   return subdivision?.name;
+};
+
+// TODO: Handle for all cases: regen-network/regen-registry#1104
+export const getProjectReferenceID = (
+  metadata: Partial<ProjectMetadataLDUnion>,
+  creditClassId?: string | null,
+): string => {
+  if (!creditClassId) return '';
+  const isVCS = isVCSCreditClass(creditClassId);
+  const vcsProjectId = (metadata as Partial<VCSProjectMetadataLD>)?.[
+    'regen:vcsProjectId'
+  ];
+  if (isVCS && vcsProjectId) return `VCS-${vcsProjectId}`;
+  const isCFC = isCFCCreditClass(creditClassId);
+  const cfcProjectId = (metadata as Partial<CFCProjectMetadataLD>)?.[
+    'regen:cfcProjectId'
+  ];
+  if (isCFC && cfcProjectId) return `CFC-${cfcProjectId}`;
+  return '';
 };

@@ -56,7 +56,7 @@ const ProjectMetadataVCS: React.FC<MetadataProps> = ({ metadata }) => {
                   href={
                     metadata?.['regen:projectActivity']?.['schema:url']?.[
                       '@value'
-                    ]
+                    ] || ''
                   }
                   label={metadata?.['regen:projectActivity']?.['schema:name']}
                 />
@@ -69,7 +69,7 @@ const ProjectMetadataVCS: React.FC<MetadataProps> = ({ metadata }) => {
               data={
                 <ArrowLink
                   label={projectId.toString()}
-                  href={metadata?.['regen:vcsProjectPage']?.['@value']}
+                  href={metadata?.['regen:vcsProjectPage']?.['@value'] || ''}
                 />
               }
             />

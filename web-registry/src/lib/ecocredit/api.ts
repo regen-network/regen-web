@@ -889,6 +889,10 @@ export const queryEcoBatches = async (
   }
 };
 
-export const isVCSCreditClass = (creditClassId?: string): boolean => {
-  return creditClassId === 'C01';
+export const isVCSCreditClass = (creditClassId?: string | null): boolean => {
+  return !!creditClassId && creditClassId === 'C01';
+};
+
+export const isCFCCreditClass = (creditClassId?: string | null): boolean => {
+  return !!creditClassId && creditClassId === 'C02';
 };

@@ -2,28 +2,14 @@ import axios from 'axios';
 import * as jsonld from 'jsonld';
 
 import getApiUri from './apiUri';
+import { COMPACT_CONTEXT } from './rdf.compact-context';
 
 export const getMetadata = async (iri: string): Promise<any> => {
   if (!iri) throw new Error('No metadata iri provided');
   const { data } = await axios.get(`${getApiUri()}/metadata-graph/${iri}`);
   console.log('raw', { ...data });
 
-  const compacted = await jsonld.compact(data, {
-    schema: 'http://schema.org/',
-    regen: 'http://regen.network/',
-    qudt: 'http://qudt.org/schema/qudt/',
-    unit: 'http://qudt.org/vocab/unit/',
-    xsd: 'http://www.w3.org/2001/XMLSchema#',
-    geojson: 'https://purl.org/geojson/vocab#',
-    'geojson:coordinates': { '@container': '@list' },
-    'regen:ecosystemType': { '@container': '@list' },
-    'regen:projectActivities': { '@container': '@list' },
-    'regen:offsetGenerationMethod': { '@container': '@list' },
-    'regen:sectoralScope': { '@container': '@list' },
-    'schema:itemListElement': { '@container': '@list' },
-    'regen:verificationReports': { '@container': '@list' },
-    'regen:cfcCreditSerialNumbers': { '@container': '@list' },
-  });
+  const compacted = jsonld.compact(data, COMPACT_CONTEXT);
   console.log('compacted', compacted);
   return compacted;
 };

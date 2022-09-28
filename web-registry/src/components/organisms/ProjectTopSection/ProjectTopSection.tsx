@@ -59,7 +59,7 @@ function ProjectTopSection({
   };
   setPaginationParams: UseStateSetter<TablePaginationParams>;
   metadata?: any;
-  // metadata?: Partial<ProjectMetadataLD>;
+  // metadata?: Partial<ProjectMetadataLD>; TODO
   projectId?: string;
 }): JSX.Element {
   const styles = useProjectTopSectionStyles();

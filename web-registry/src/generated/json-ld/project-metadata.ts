@@ -1,17 +1,14 @@
-import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
-
-import {
-  StringList,
-  TypeValue,
-  URL,
-  URLList,
-} from 'web-components/lib/types/rdf';
+import { TypeValue } from 'web-components/lib/types/rdf';
+import { UrlList, UrlType } from 'web-components/lib/utils/schemaURL';
 
 export interface ProjectMetadataLD {
   '@context': Context;
   '@type': string;
   'schema:name': string;
-  'schema:image': URL;
+  'schema:image': UrlType;
+  'schema:creditText': string;
+  'schema:description'?: string;
+  'schema:location': any; // TODO
   'regen:projectType': string;
   'regen:projectActivity': ProjectActivity;
   'regen:projectDeveloper': ProjectStakeholder;
@@ -22,24 +19,26 @@ export interface ProjectMetadataLD {
   'regen:projectSize': ProjectSize;
   'regen:projectStartDate': TypeValue;
   'regen:projectEndDate': TypeValue;
-  'schema:location': any;
-  'schema:description'?: string;
-  // 'schema:location': GeocodeFeature;
   'regen:boundaries': TypeValue;
   'regen:creditClass': CreditClass;
   'regen:landManagementActions': LandManagementActions;
-  'regen:galleryPhotos': URLList;
-  'regen:previewPhoto': URL;
-  'regen:videoURL': URL;
-  'schema:creditText': string;
+  'regen:galleryPhotos': UrlList;
+  'regen:previewPhoto': UrlType;
+  'regen:videoURL': UrlType;
   'regen:glanceText': TypeValue[];
   'regen:landStory': string;
   'regen:landStewardStory': string;
-  'regen:landStewardPhoto': URL;
+  'regen:landStewardPhoto': UrlType;
   'regen:projectQuote': ProjectQuote;
   'regen:landStewardStoryTitle': string;
-  'regen:vcsProjectId'?: number;
-  'regen:cfcProjectId'?: string;
+}
+
+interface Context {
+  schema: string;
+  regen: string;
+  qudt: string;
+  unit: string;
+  xsd: string;
 }
 
 interface ProjectSize {
@@ -49,7 +48,7 @@ interface ProjectSize {
 
 interface ProjectActivity {
   'schema:name': string;
-  'schema:url': URL;
+  'schema:url': UrlType;
 }
 
 export interface ProjectStakeholder {
@@ -57,9 +56,9 @@ export interface ProjectStakeholder {
   'schema:name': string;
   'schema:description': string;
   'schema:email': string;
-  'schema:logo'?: URL;
-  'schema:image': URL;
-  'schema:location': GeocodeFeature;
+  'schema:logo'?: UrlType;
+  'schema:image': UrlType;
+  'schema:location': any;
   'schema:legalName': string;
   'regen:sharePermission': boolean;
   'regen:responsiblePerson': string;
@@ -68,7 +67,7 @@ export interface ProjectStakeholder {
 
 interface NameImageDescription {
   'schema:name': string;
-  'schema:image': URL;
+  'schema:image': UrlType;
   'schema:description': string;
 }
 
@@ -85,12 +84,4 @@ interface ProjectQuote {
 interface CreditClass {
   '@id': string;
   '@type': string;
-}
-
-interface Context {
-  schema: string;
-  regen: string;
-  qudt: string;
-  unit: string;
-  xsd: string;
 }

@@ -54,7 +54,9 @@ const ProjectMetadataCFC: React.FC<CFCMetadataProps> = ({
             data={
               <ArrowLink
                 label="Project Design Document"
-                href={metadata?.['regen:projectDesignDocument']?.['@value']}
+                href={
+                  metadata?.['regen:projectDesignDocument']?.['@value'] || ''
+                }
               />
             }
           />
@@ -70,7 +72,7 @@ const ProjectMetadataCFC: React.FC<CFCMetadataProps> = ({
                   href={
                     metadata?.['regen:projectActivity']?.['schema:url']?.[
                       '@value'
-                    ]
+                    ] || ''
                   }
                   label={metadata?.['regen:projectActivity']?.['schema:name']}
                 />
@@ -83,7 +85,7 @@ const ProjectMetadataCFC: React.FC<CFCMetadataProps> = ({
               data={
                 <ArrowLink
                   label={cfcProjectId}
-                  href={metadata?.['regen:cfcProjectPage']?.['@value']}
+                  href={metadata?.['regen:cfcProjectPage']?.['@value'] || ''}
                 />
               }
             />

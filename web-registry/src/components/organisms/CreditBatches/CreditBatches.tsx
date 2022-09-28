@@ -108,10 +108,10 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
     );
   }
 
-  const someTx = batches.some(b => b.txhash);
+  const someTx = batches.some(batch => batch.txhash);
 
   if (!someTx) {
-    columnsToShow = columnsToShow.filter(col => col.id !== 'txhash');
+    columnsToShow = columnsToShow.filter(column => column.id !== 'txhash');
   }
 
   const table = (
@@ -137,11 +137,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
         let result = [];
         if (someTx) {
           result.push(
-            <Link
-              href={getHashUrl(batch.txhash)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link href={getHashUrl(batch.txhash)}>
               {truncateHash(batch.txhash)}
             </Link>,
           );

@@ -7,7 +7,7 @@ export default function useOtherProjects(projectId: string) {
   const { data: projectsData } = useMoreProjectsQuery();
   const allProjects = projectsData?.allProjects?.nodes;
   const otherProjects = allProjects?.filter(
-    p => p?.handle !== projectId && p?.onChainId !== projectId,
+    p => !!p?.handle && p.handle !== projectId,
   );
   return otherProjects;
 }

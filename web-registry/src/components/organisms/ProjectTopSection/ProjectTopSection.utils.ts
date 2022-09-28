@@ -9,7 +9,8 @@ const addressesMap = [
   'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46', // Redwood - Shared dev account
 ];
 
-export const getDisplayAdmin = (address: string): User | undefined => {
+export const getDisplayAdmin = (address?: string): User | undefined => {
+  if (!address) return;
   if (addressesMap.includes(address)) {
     return {
       name: 'Regen Network Development, Inc',

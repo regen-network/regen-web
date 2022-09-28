@@ -178,10 +178,12 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           <Box className={styles.noWrap}>
             {formatDate(batch.endDate as Date, undefined, true)}
           </Box>,
-          <WithLoader isLoading={!batch.projectLocation} variant="skeleton">
-            <Box key="projectLocation" className={styles.noWrap}>
-              {batch.projectLocation}
-            </Box>
+          <WithLoader
+            key="projectLocation"
+            isLoading={!batch.projectLocation}
+            variant="skeleton"
+          >
+            <Box className={styles.noWrap}>{batch.projectLocation}</Box>
           </WithLoader>,
         ].filter(item => {
           return (

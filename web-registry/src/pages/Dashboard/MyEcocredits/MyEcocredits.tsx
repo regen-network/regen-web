@@ -36,6 +36,7 @@ import {
 import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { getHashUrl } from 'lib/block-explorer';
+import { chainInfo } from 'lib/wallet';
 
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
@@ -75,6 +76,9 @@ import {
 // import { ReactComponent as Sell } from 'assets/svgs/sell.svg';
 import { ReactComponent as PutInBasket } from 'assets/svgs/put-in-basket.svg';
 import { ReactComponent as TakeFromBasket } from 'assets/svgs/take-from-basket.svg';
+
+// address prefix `regen` used to narrow address validation for recipients
+const addressPrefix = chainInfo.bech32Config.bech32PrefixAccAddr;
 
 export const MyEcocredits = (): JSX.Element => {
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);
@@ -351,6 +355,7 @@ export const MyEcocredits = (): JSX.Element => {
           open={creditSendOpen > -1}
           onClose={() => setCreditSendOpen(-1)}
           onSubmit={creditSendSubmit}
+          addressPrefix={addressPrefix}
         />
       )}
       {basketPutOpen > -1 && (

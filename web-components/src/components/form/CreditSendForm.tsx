@@ -9,6 +9,8 @@ import CheckboxLabel from '../inputs/CheckboxLabel';
 import TextField from '../inputs/TextField';
 import {
   insufficientCredits,
+  invalidRegenAddress,
+  isValidAddress,
   requiredMessage,
   requirementAgreement,
   validateAmount,
@@ -52,6 +54,7 @@ export interface CreditSendProps extends BottomCreditRetireFieldsProps {
   batchDenom: string;
   availableTradableAmount: number;
   onSubmit: (values: FormValues) => Promise<void>;
+  addressPrefix?: string;
 }
 
 interface FormProps extends CreditSendProps {
@@ -71,6 +74,7 @@ const CreditSendForm: React.FC<FormProps> = ({
   batchDenom,
   availableTradableAmount,
   mapboxToken,
+  addressPrefix,
   onClose,
   onSubmit,
 }) => {
@@ -94,6 +98,10 @@ const CreditSendForm: React.FC<FormProps> = ({
 
     if (!values.recipient) {
       errors.recipient = requiredMessage;
+    }
+
+    if (values.recipient && !isValidAddress(values.recipient, addressPrefix)) {
+      errors.recipient = invalidRegenAddress;
     }
 
     if (!values.withRetire) {

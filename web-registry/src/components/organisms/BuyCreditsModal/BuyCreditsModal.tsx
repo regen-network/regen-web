@@ -13,7 +13,6 @@ import { RadioGroup } from 'formik-mui';
 import { Flex } from 'web-components/lib/components/box';
 import Card from 'web-components/lib/components/cards/Card';
 import Submit from 'web-components/lib/components/form/Submit';
-import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
 import { Image } from 'web-components/lib/components/image';
 import AgreeErpaCheckbox from 'web-components/lib/components/inputs/AgreeErpaCheckbox';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
@@ -23,7 +22,7 @@ import SelectTextField from 'web-components/lib/components/inputs/SelectTextFiel
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import { requirementAgreement } from 'web-components/lib/components/inputs/validation';
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
-import Tooltip from 'web-components/lib/components/tooltip/InfoTooltip';
+import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
 import {
   Body,
   Subtitle,
@@ -33,6 +32,7 @@ import {
 import { microToDenom } from 'lib/denom.utils';
 
 import { UISellOrderInfo } from 'pages/Projects/Projects.types';
+import { Link as DynamicLink } from 'components/atoms/Link';
 import DenomIcon from 'components/molecules/DenomIcon';
 import DenomLabel from 'components/molecules/DenomLabel';
 import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
@@ -300,7 +300,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                     </div>
                   </Collapse>
                   <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
-                    Retirement of credits
+                    Purchase options
                   </Title>
                   <Field
                     className={styles.field}
@@ -313,8 +313,20 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       type="radio"
                       value="autoretire"
                       checked={values['retirementAction'] === 'autoretire'}
-                      label="Auto-retire credits" // Retire credits now
-                      description="These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible."
+                      label="Retire credits now"
+                      description={
+                        <>
+                          {
+                            'These credits will be retired upon purchase and will not be tradable. Retirement is permanent and non-reversible.'
+                          }
+                          <DynamicLink
+                            href="https://guides.regen.network/guides/regen-marketplace/ecocredits/buy-ecocredits/by-project#5.-select-credit-retirement-options"
+                            sx={{ ml: 1 }}
+                          >
+                            Learn more»
+                          </DynamicLink>
+                        </>
+                      }
                     />
                     <Field
                       className={styles.toggle}
@@ -322,8 +334,20 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       type="radio"
                       value="manual"
                       checked={values['retirementAction'] === 'manual'} // if disableAutoRetire, this is an option
-                      label="Retire credits manually" // Allow retirement later
-                      description="These credits will be a tradeable asset. They can be retired later via Regen Registry."
+                      label="Buy tradable ecocredits"
+                      description={
+                        <>
+                          {
+                            'These credits will be a tradable asset. They can be retired later via Regen Registry.'
+                          }
+                          <DynamicLink
+                            href="https://guides.regen.network/guides/regen-marketplace/ecocredits/buy-ecocredits/by-project#5.-select-credit-retirement-options"
+                            sx={{ ml: 1 }}
+                          >
+                            Learn more»
+                          </DynamicLink>
+                        </>
+                      }
                       disabled={!selectedSellOrder?.disableAutoRetire} // if disableAutoRetire is false, this is disabled
                     />
                   </Field>
@@ -332,15 +356,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
                         Retirement note
                       </Title>
-                      <Tooltip
-                        arrow
-                        placement="top"
-                        title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')"
-                      >
-                        <div>
-                          <InfoIcon className={styles.info} />
-                        </div>
-                      </Tooltip>
+                      <InfoTooltipWithIcon title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')" />
                     </Flex>
                     <Box>
                       <Field
@@ -355,15 +371,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
                         Credit retirement location
                       </Title>
-                      <Tooltip
-                        arrow
-                        placement="top"
-                        title="The retirement location can be where you live or your business operates."
-                      >
-                        <div>
-                          <InfoIcon className={styles.info} />
-                        </div>
-                      </Tooltip>
+                      <InfoTooltipWithIcon title="The retirement location can be where you live or your business operates." />
                     </Flex>
                     <Body sx={{ color: 'info.dark', mb: { xs: 0, sm: 3 } }}>
                       Please enter a location for the retirement of these

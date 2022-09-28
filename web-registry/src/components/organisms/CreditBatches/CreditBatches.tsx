@@ -108,6 +108,12 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
     );
   }
 
+  const someTx = batches.some(batch => batch.txhash);
+
+  if (!someTx) {
+    columnsToShow = columnsToShow.filter(column => column.id !== 'txhash');
+  }
+
   const table = (
     <ActionsTable
       tableLabel="credit batch table"
@@ -126,16 +132,18 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
         </Box>
       ))}
       onTableChange={onTableChange}
-      rows={batches.map(batch =>
+      rows={batches.map(batch => {
         /* eslint-disable react/jsx-key */
-        [
-          <Link
-            href={getHashUrl(batch.txhash)}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {truncateHash(batch.txhash)}
-          </Link>,
+        let result = [];
+        if (someTx) {
+          result.push(
+            <Link href={getHashUrl(batch.txhash)}>
+              {truncateHash(batch.txhash)}
+            </Link>,
+          );
+        }
+
+        result.push(
           <WithLoader isLoading={!batch.projectName} variant="skeleton">
             <Link
               href={`/projects/${batch?.projectId}`}
@@ -185,13 +193,15 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           >
             <Box className={styles.noWrap}>{batch.projectLocation}</Box>
           </WithLoader>,
-        ].filter(item => {
+        );
+
+        return result.filter(item => {
           return (
             !(creditClassId && item?.key === 'classId') &&
             !filteredColumns?.includes(String(item?.key))
           );
-        }),
-      )}
+        });
+      })}
       /* eslint-enable react/jsx-key */
     />
   );

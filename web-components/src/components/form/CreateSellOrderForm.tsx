@@ -8,6 +8,7 @@ import CheckboxLabel from '../inputs/CheckboxLabel';
 import NumberTextField from '../inputs/NumberTextField';
 import SelectTextField, { Option } from '../inputs/SelectTextField';
 import {
+  requiredDenom,
   requiredMessage,
   validateAmount,
   validatePrice,
@@ -49,6 +50,7 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
   const initialValues = {
     batchDenom: batchDenoms[0]?.value ?? '',
     price: undefined,
+    askDenom: undefined,
     amount: undefined,
     enableAutoRetire: true,
   };
@@ -71,6 +73,10 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
 
     const errPrice = validatePrice(values.price);
     if (errPrice) errors.price = errPrice;
+
+    if (!values.askDenom) {
+      errors.askDenom = requiredDenom;
+    }
 
     return errors;
   };
@@ -121,6 +127,7 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
               name="askDenom"
               component={SelectTextField}
               options={allowedDenoms}
+              errors={errors}
               sx={{ maxWidth: 239.5 }}
             />
           </Box>

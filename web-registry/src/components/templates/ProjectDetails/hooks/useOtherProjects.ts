@@ -6,5 +6,8 @@ import { useMoreProjectsQuery } from '../../../../generated/graphql';
 export default function useOtherProjects(projectId: string) {
   const { data: projectsData } = useMoreProjectsQuery();
   const allProjects = projectsData?.allProjects?.nodes;
-  return allProjects?.filter(p => p?.handle !== projectId);
+  const otherProjects = allProjects?.filter(
+    p => p?.handle !== projectId && p?.onChainId !== projectId,
+  );
+  return otherProjects;
 }

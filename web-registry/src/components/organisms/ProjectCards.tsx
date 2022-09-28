@@ -71,31 +71,34 @@ const ProjectCards: React.FC<Props> = props => {
 
   const LinkedProject: React.FC<{
     project: MoreProjectFieldsFragment;
-  }> = ({ project }) => (
-    <ProjectCard
-      sx={theme => ({ width: { xs: theme.spacing(73), md: '100%' } })}
-      name={project.metadata?.['schema:name']}
-      imgSrc={
-        project.metadata?.['regen:previewPhoto']?.['@value'] || DefaultProject
-      }
-      imageStorageBaseUrl={imageStorageBaseUrl}
-      apiServerUrl={apiServerUrl}
-      place={project.metadata?.['schema:location']?.place_name}
-      area={
-        project.metadata?.['regen:projectSize']?.['qudt:numericValue']?.[
-          '@value'
-        ]
-      }
-      areaUnit={
-        qudtUnitMap[
-          project.metadata?.['regen:projectSize']?.['qudt:unit']?.[
+  }> = ({ project }) => {
+    console.log('project', project);
+    return (
+      <ProjectCard
+        sx={theme => ({ width: { xs: theme.spacing(73), md: '100%' } })}
+        name={project.metadata?.['schema:name']}
+        imgSrc={
+          project.metadata?.['regen:previewPhoto']?.['@value'] || DefaultProject
+        }
+        imageStorageBaseUrl={imageStorageBaseUrl}
+        apiServerUrl={apiServerUrl}
+        place={project.metadata?.['schema:location']?.place_name}
+        area={
+          project.metadata?.['regen:projectSize']?.['qudt:numericValue']?.[
             '@value'
-          ] as qudtUnit
-        ]
-      }
-      registry={project.partyByRegistryId}
-    />
-  );
+          ]
+        }
+        areaUnit={
+          qudtUnitMap[
+            project.metadata?.['regen:projectSize']?.['qudt:unit']?.[
+              '@value'
+            ] as qudtUnit
+          ]
+        }
+        registry={project.partyByRegistryId}
+      />
+    );
+  };
 
   return isMobile ? (
     <div className={styles.swipe}>

@@ -9,7 +9,7 @@ export const getMetadata = async (iri: string): Promise<any> => {
   const { data } = await axios.get(`${getApiUri()}/metadata-graph/${iri}`);
   console.log('raw', { ...data });
 
-  const compacted = jsonld.compact(data, COMPACT_CONTEXT);
+  const compacted = await jsonld.compact(data, COMPACT_CONTEXT);
   console.log('compacted', compacted);
   return compacted;
 };

@@ -212,7 +212,8 @@ export default function Header({
   return (
     <>
       {typeof window !== 'undefined' &&
-        window.location.hostname === 'www.regen.network' && (
+        (window.location.hostname === 'www.regen.network' ||
+          window.location.hostname.endsWith('regen-website.netlify.app')) && (
           <MarketplaceLaunchBanner />
         )}
       <div

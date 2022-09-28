@@ -109,7 +109,9 @@ function ProjectDetails(): JSX.Element {
   const onChainProject = projectResponse?.project;
 
   // TODO: when all projects are on-chain, just use dataByOnChainId
-  const data = isOnChainId ? dataByOnChainId : dataByHandle;
+  const data = isOnChainId
+    ? { ...dataByOnChainId, admin: onChainProject?.admin }
+    : dataByHandle;
   const project = isOnChainId
     ? dataByOnChainId?.projectByOnChainId
     : dataByHandle?.projectByHandle;

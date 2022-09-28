@@ -14,6 +14,7 @@ const CreditSendModal: React.FC<CreditSendModalProps> = ({
   availableTradableAmount,
   mapboxToken,
   open,
+  addressPrefix,
   onSubmit,
   onClose,
 }) => (
@@ -25,6 +26,7 @@ const CreditSendModal: React.FC<CreditSendModalProps> = ({
       mapboxToken={mapboxToken}
       onSubmit={onSubmit}
       onClose={onClose}
+      addressPrefix={addressPrefix}
     />
   </FormModalTemplate>
 );

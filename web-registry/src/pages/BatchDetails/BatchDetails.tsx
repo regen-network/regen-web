@@ -72,11 +72,12 @@ export const BatchDetails: React.FC = () => {
   });
 
   const project = offchainData?.projectByOnChainId;
+  const loading = ledgerLoading || dbLoading;
 
-  if (ledgerLoading || dbLoading) return <Loading />;
+  if (loading) return <Loading />;
 
   // TODO placeholder until we have a more descriptive not found graphic
-  if (!batch || error) return <NotFoundPage />;
+  if (!loading && (!batch || error)) return <NotFoundPage />;
 
   return (
     <Box sx={{ backgroundColor: 'grey.50' }}>
@@ -103,42 +104,33 @@ export const BatchDetails: React.FC = () => {
             </OutlinedButton>
           )}
         </Box>
-        <Box sx={{ display: 'flex', flexWrap: ['wrap', 'nowrap'] }}>
-          <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-            <BatchInfoGrid
-              batch={batch}
-              projectOnChainId={onChainId}
-              projectName={project?.metadata?.['schema:name'] || onChainId}
-              sx={{ py: 10, borderBottom: 1, borderColor: 'grey.100' }}
-            />
-            <Title variant="h5" sx={{ mt: 10, mb: 8 }}>
-              All credits
-            </Title>
-            <BatchTotalsGrid batch={batch} />
-          </Box>
-          <Box
-            sx={{
-              my: [0, 10],
-              ml: [0, 10],
-              minWidth: ['100%', '33%', '370px'],
-            }}
-          >
+        {batch && (
+          <Box sx={{ display: 'flex', flexWrap: ['wrap', 'nowrap'] }}>
+            <Box
+              sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}
+            >
+              <BatchInfoGrid
+                batch={batch}
+                projectOnChainId={onChainId}
+                projectName={project?.metadata?.['schema:name'] || onChainId}
+                sx={{ py: 10, borderBottom: 1, borderColor: 'grey.100' }}
+              />
+              <Title variant="h5" sx={{ mt: 10, mb: 8 }}>
+                All credits
+              </Title>
+              <BatchTotalsGrid batch={batch} />
+            </Box>
             <Box
               sx={{
-                py: 7,
-                px: 5,
-                backgroundColor: 'primary.main',
-                border: 1,
-                borderColor: 'info.light',
+                my: [0, 10],
+                ml: [0, 10],
+                minWidth: ['100%', '33%', '370px'],
               }}
             >
-              <Title variant="h5" sx={{ mb: 4 }}>
-                Metadata
-              </Title>
               <BatchMetadata data={metadata} />
             </Box>
           </Box>
-        </Box>
+        )}
       </Section>
     </Box>
   );

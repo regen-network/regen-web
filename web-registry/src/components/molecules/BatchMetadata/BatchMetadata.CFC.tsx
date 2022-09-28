@@ -16,6 +16,7 @@ export const CFCBatchMetadata = ({
   return (
     <>
       <MetaDetail label="cfc retirement serial numbers">
+        {/* TODO */}
         {serialNumbers?.join(', ') || '-'}
       </MetaDetail>
       <MetaDetail label="cfc vintage year">

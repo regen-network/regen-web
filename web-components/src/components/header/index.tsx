@@ -210,12 +210,16 @@ export default function Header({
 
   const styles = useStyles({ color, borderBottom, fullWidth });
   const showBanner = () => {
-    const isBrowser = typeof window !== 'undefined';
-    const isBannerSite =
-    window.location.hostname === 'www.regen.network' ||
-    window.location.hostname.endsWith('regen-website.netlify.app') ||
-    window.location.host === 'localhost:8000';
-    return isBrowser && isBannerSite;
+    if (window) {
+      const isBrowser = typeof window !== 'undefined';
+      const isBannerSite =
+      window.location.hostname === 'www.regen.network' ||
+      window.location.hostname.endsWith('regen-website.netlify.app') ||
+      window.location.host === 'localhost:8000';
+      return isBrowser && isBannerSite;
+    } else {
+      return false;
+    }
   }
   return (
     <>

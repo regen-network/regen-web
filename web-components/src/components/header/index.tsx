@@ -210,17 +210,17 @@ export default function Header({
 
   const styles = useStyles({ color, borderBottom, fullWidth });
   const showBanner = () => {
-    if (window) {
-      const isBrowser = typeof window !== 'undefined';
-      const isBannerSite =
-      window.location.hostname === 'www.regen.network' ||
-      window.location.hostname.endsWith('regen-website.netlify.app') ||
-      window.location.host === 'localhost:8000';
-      return isBrowser && isBannerSite;
-    } else {
-      return false;
-    }
-  }
+    // if we're in the registry, where we have REACT_APP prefixed
+    // keys in the env vars, do not show the banner. in other words,
+    // only show the banner on the website.
+    return Object.keys(process.env).reduce((prev, curr) => {
+      if (curr.startsWith('REACT_APP')) {
+        return false;
+      } else {
+        return prev;
+      }
+    }, true);
+  };
   return (
     <>
       {showBanner() && <MarketplaceLaunchBanner />}

@@ -1,11 +1,7 @@
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import iso3166 from 'iso-3166-2';
 
-import {
-  getISOString,
-  getJurisdictionIsoCode,
-} from 'web-components/lib/utils/locationStandard';
+import { getISOString } from 'web-components/lib/utils/locationStandard';
 
 import {
   ProjectMetadataLD,
@@ -62,7 +58,7 @@ export const getJurisdiction = async (
     const placeSegments = location['geojson:place_name'].split(',');
     // find the country key
     placeSegments.forEach((segment: string) => {
-      const isUnitedStates = segment.toLowerCase().includes('united states');
+      const isUnitedStates = segment.toLowerCase().includes('united states'); // TODO
       if (isUnitedStates) countryKey = 'US';
       const foundCountry = getCountryKey(segment.trim());
       if (foundCountry) {
@@ -93,11 +89,6 @@ export const getJurisdiction = async (
       stateProvince,
       postalCode,
     });
-    // isoString = await getJurisdictionIsoCode({
-    //   country: countryKey,
-    //   stateProvince,
-    //   postalCode,
-    // });
   } catch (err) {
     return Promise.reject(err);
   }

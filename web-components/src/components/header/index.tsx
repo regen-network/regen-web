@@ -211,7 +211,7 @@ export default function Header({
   const styles = useStyles({ color, borderBottom, fullWidth });
   return (
     <>
-      <MarketplaceLaunchBanner />
+      {window.location.hostname === "www.regen.network" && <MarketplaceLaunchBanner />}
       <div
         className={cx(
           styles.borderBottom,

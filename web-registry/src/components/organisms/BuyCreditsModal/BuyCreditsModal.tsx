@@ -9,6 +9,7 @@ import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/reg
 import cx from 'clsx';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 import { RadioGroup } from 'formik-mui';
+import { useAnalytics } from 'use-analytics';
 
 import { Flex } from 'web-components/lib/components/box';
 import Card from 'web-components/lib/components/cards/Card';
@@ -33,6 +34,7 @@ import {
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
+import { getFormattedNumber } from 'web-components/lib/utils/format';
 
 import { microToDenom } from 'lib/denom.utils';
 
@@ -112,6 +114,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
   const [selectedSellOrder, setSelectedSellOrder] = useState<
     UISellOrderInfo | undefined
   >(undefined);
+  const { track } = useAnalytics();
 
   const validationHandler = (
     values: BuyCreditsValues,
@@ -187,6 +190,24 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
             setSubmitting(true);
             try {
               await handleBuyCreditsSubmit(values, onSubmit, selectedSellOrder);
+              const track_data: any = {
+                price: selectedSellOrder?.askAmount,
+                batchDenom: selectedSellOrder?.batchDenom,
+                projectName: project.name,
+                creditClassName: project.id.split('-')[0],
+              };
+              if (values.retirementAction === 'manual') {
+                track_data['amountTradable'] = getFormattedNumber(
+                  values.creditCount,
+                );
+                track_data['amountRetired'] = getFormattedNumber(0);
+              } else if (values.retirementAction === 'autoretire') {
+                track_data['amountTradable'] = getFormattedNumber(
+                  values.creditCount,
+                );
+                track_data['amountRetired'] = getFormattedNumber(0);
+              }
+              track('buy2', track_data);
               setSubmitting(false);
             } catch (e) {
               setSubmitting(false);

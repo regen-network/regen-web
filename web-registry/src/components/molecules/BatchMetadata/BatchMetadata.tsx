@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 import { Title } from 'web-components/lib/components/typography';
 import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 import { CFCBatchMetadataLD } from 'web-components/lib/types/rdf/C02-city-forest-credits-batch';
+import { CreditBatchMetadataUnionLD } from 'web-components/lib/types/rdf/credit-batch-union-ld';
 
 import { CFCBatchMetadata } from './BatchMetadata.CFC';
 import { VCSBatchMetadata } from './BatchMetadata.VCS';
@@ -10,10 +11,14 @@ import { VCSBatchMetadata } from './BatchMetadata.VCS';
 export const BatchMetadata = ({
   data,
 }: {
-  data?: VCSBatchMetadataLD | CFCBatchMetadataLD;
+  data?: Partial<CreditBatchMetadataUnionLD>;
 }): JSX.Element => {
-  const isVCS = data?.['@type'] === 'regen:C01-CreditBatch';
-  const isCFC = data?.['@type'] === 'regen:C02-CreditBatch';
+  const isVCS =
+    (data as Partial<VCSBatchMetadataLD>)?.['@type'] ===
+    'regen:C01-CreditBatch';
+  const isCFC =
+    (data as Partial<CFCBatchMetadataLD>)?.['@type'] ===
+    'regen:C02-CreditBatch';
   return (
     <Box
       sx={{
@@ -28,8 +33,12 @@ export const BatchMetadata = ({
         Additional Info
       </Title>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        {isVCS && <VCSBatchMetadata data={data} />}
-        {isCFC && <CFCBatchMetadata data={data} />}
+        {isVCS && (
+          <VCSBatchMetadata data={data as Partial<VCSBatchMetadataLD>} />
+        )}
+        {isCFC && (
+          <CFCBatchMetadata data={data as Partial<CFCBatchMetadataLD>} />
+        )}
       </Box>
     </Box>
   );

@@ -1,11 +1,14 @@
 import { UrlType } from 'src/utils/schemaURL';
 
+// type generated from https://github.com/regen-network/regen-registry-standards/blob/main/jsonld/credit-batches/C02-batch.jsonld
+
 export interface CFCBatchMetadataLD {
-  '@context': Context;
-  '@type': 'regen:C02-CreditBatch';
-  'regen:cfcCreditSerialNumbers': string[];
-  'regen:cfcVintageYear': XSDYear;
-  'regen:verificationReports': UrlType[];
+  '@context'?: Context;
+  '@type'?: string;
+  // '@type'?: 'regen:C02-CreditBatch';
+  'regen:cfcCreditSerialNumbers'?: string[];
+  'regen:cfcVintageYear'?: XSDYear;
+  'regen:verificationReports'?: UrlType[];
 }
 
 interface Context {

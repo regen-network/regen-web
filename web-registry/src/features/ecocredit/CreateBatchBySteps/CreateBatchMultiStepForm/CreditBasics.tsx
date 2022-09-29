@@ -38,8 +38,7 @@ export interface CreditBasicsFormValues {
   projectId: string;
   startDate: Date | null;
   endDate: Date | null;
-  metadata?: any;
-  // metadata?: Partial<VCSBatchMetadataLD>; //TODO
+  metadata?: any; //TODO: type that works for any metadata shape
 }
 
 const vcsMetadataSchema: Yup.AnyObjectSchema = Yup.object({

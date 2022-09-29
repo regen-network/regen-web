@@ -47,12 +47,15 @@ async function prepareMsg(
   issuer: string,
   data: CreateBatchFormValues,
 ): Promise<Partial<MsgCreateBatch> | undefined> {
+  if (!data.metadata) return;
   // First, complete the metadata
-  let metadata: VCSBatchMetadataLD | CFCBatchMetadataLD | undefined =
-    prepareVCSMetadata(
-      data.projectId,
-      data.metadata as Partial<VCSBatchMetadataLD>,
-    );
+  let metadata:
+    | Partial<VCSBatchMetadataLD>
+    | Partial<CFCBatchMetadataLD>
+    | undefined = prepareVCSMetadata(
+    data.projectId,
+    data.metadata as Partial<VCSBatchMetadataLD>,
+  );
   if (!metadata) metadata = JSON.parse(data.metadata);
   if (!metadata) return;
 

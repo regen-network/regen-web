@@ -96,7 +96,11 @@ export const getOptions = ({
 
   return allOptionsLength > 1
     ? [
-        { label: 'Choose a sell order', value: '', disabled: true },
+        {
+          label: <Box sx={{ color: 'info.main' }}>{'Choose a sell order'}</Box>,
+          value: '',
+          disabled: true,
+        },
         {
           label: <Box sx={{ fontWeight: 700 }}>{'TRADABLE AND RETIRABLE'}</Box>,
           value: '',

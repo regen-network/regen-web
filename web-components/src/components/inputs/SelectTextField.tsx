@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Box, MenuItem, Theme, useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { TextFieldProps } from 'formik-mui';
@@ -53,6 +53,19 @@ export default function SelectTextField({
       select
       SelectProps={{
         native,
+        displayEmpty: true,
+        renderValue: native
+          ? undefined
+          : selected => {
+              const selectedOption = options?.find(
+                option => option.value === selected,
+              );
+              if (selectedOption) {
+                return selectedOption.label;
+              }
+
+              return options?.[0].label;
+            },
         IconComponent: disabled
           ? () => <DropdownIcon color={theme.palette.grey['400']} />
           : DropdownIcon,

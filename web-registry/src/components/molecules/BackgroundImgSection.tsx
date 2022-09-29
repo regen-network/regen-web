@@ -1,4 +1,5 @@
 import React from 'react';
+import { SxProps } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
 import { makeStyles } from '@mui/styles';
 import cx from 'clsx';
@@ -11,6 +12,7 @@ type Props = {
   /** sets larger `minHeight` on mobile to match gatsby `BackgroundSection` */
   isBanner?: boolean;
   linearGradient?: string;
+  sx?: SxProps<Theme>;
   classes?: {
     section?: string;
     root?: string;
@@ -54,14 +56,17 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
   }),
 }));
 
-const BackgroundImgSection: React.FC<Props> = ({ classes, ...props }) => {
+const BackgroundImgSection: React.FC<Props> = ({
+  classes,
+  sx = [],
+  ...props
+}) => {
   const styles = useStyles({
     isBanner: !!props.isBanner,
     linearGradient: props?.linearGradient,
   });
 
   return (
-    // <div className={props?.linearGradient ? styles.backgroundGradient : ''}>
     <CardMedia
       image={props.img}
       classes={{
@@ -69,6 +74,7 @@ const BackgroundImgSection: React.FC<Props> = ({ classes, ...props }) => {
           [styles.backgroundGradient]: props?.linearGradient,
         }),
       }}
+      sx={Array.isArray(sx) ? sx : [sx]}
     >
       <Section classes={{ root: cx(styles.section, classes?.section) }}>
         <div className={cx(styles.main, classes && classes.main)}>
@@ -76,7 +82,6 @@ const BackgroundImgSection: React.FC<Props> = ({ classes, ...props }) => {
         </div>
       </Section>
     </CardMedia>
-    // </div>
   );
 };
 

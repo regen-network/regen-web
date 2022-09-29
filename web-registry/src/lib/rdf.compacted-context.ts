@@ -1,3 +1,6 @@
+import * as jsonld from 'jsonld';
+import { JsonLdDocument, NodeObject } from 'jsonld';
+
 export const COMPACTED_CONTEXT = JSON.parse(
   JSON.stringify({
     schema: 'http://schema.org/',
@@ -16,3 +19,7 @@ export const COMPACTED_CONTEXT = JSON.parse(
     'schema:itemListElement': { '@container': '@list' },
   }),
 );
+
+export const jsonLdCompact = async (
+  data: JsonLdDocument,
+): Promise<NodeObject> => jsonld.compact(data, COMPACTED_CONTEXT);

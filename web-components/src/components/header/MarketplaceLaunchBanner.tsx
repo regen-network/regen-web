@@ -9,11 +9,12 @@ const bannerColor = '#7BC796';
 
 const MarketplaceLaunchBanner: React.FC<Props> = props => {
   return (
-    <Box
-      sx={{
+    <div
+      style={{
         textAlign: 'center',
         backgroundColor: bannerColor,
-        py: [4, 5],
+        paddingTop: 25,
+        paddingBottom: 25,
         borderBottom: `5px solid ${bannerColor}`, // TODO: this is a hack to get around a weird display glitch that seems to be caused by the mobile drawer
       }}
     >
@@ -29,7 +30,7 @@ const MarketplaceLaunchBanner: React.FC<Props> = props => {
         </Link>{' '}
         has launched!
       </Subtitle>
-    </Box>
+    </div>
   );
 };
 

@@ -1,15 +1,16 @@
 import { useCallback } from 'react';
 import { Box } from '@mui/material';
 import { MsgSell } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
+import { getDenomtrace } from 'utils/ibc/getDenomTrace';
 
 import { FormValues as CreateSellOrderFormValues } from 'web-components/lib/components/form/CreateSellOrderForm';
-import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { getFormattedNumber } from 'web-components/lib/utils/format';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { denomToMicro } from 'lib/denom.utils';
 
+import DenomIcon from 'components/molecules/DenomIcon';
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import {
@@ -23,7 +24,7 @@ type Props = {
   setCardItems: UseStateSetter<Item[] | undefined>;
   setTxModalHeader: UseStateSetter<string | undefined>;
   setTxButtonTitle: UseStateSetter<string | undefined>;
-  setSellOrderCreateOpen: UseStateSetter<number>;
+  onTxBroadcast: () => void;
 };
 
 type ReturnType = (values: CreateSellOrderFormValues) => Promise<void>;
@@ -34,12 +35,12 @@ const useCreateSellOrderSubmit = ({
   setTxModalHeader,
   setCardItems,
   setTxButtonTitle,
-  setSellOrderCreateOpen,
+  onTxBroadcast,
 }: Props): ReturnType => {
   const createSellOrderSubmit = useCallback(
     async (values: CreateSellOrderFormValues): Promise<void> => {
       if (!accountAddress) return Promise.reject();
-      const { amount, batchDenom, price, disableAutoRetire, askDenom } = values;
+      const { amount, batchDenom, price, enableAutoRetire, askDenom } = values;
 
       // convert to udenom
       const priceInMicro = price ? String(denomToMicro(price)) : ''; // TODO: When other currencies, check for micro denom before converting
@@ -50,7 +51,7 @@ const useCreateSellOrderSubmit = ({
             batchDenom,
             quantity: String(amount),
             askPrice: { denom: askDenom, amount: priceInMicro },
-            disableAutoRetire,
+            disableAutoRetire: !enableAutoRetire,
           },
         ],
       });
@@ -61,9 +62,11 @@ const useCreateSellOrderSubmit = ({
         memo: undefined,
       };
 
-      signAndBroadcast(tx, () => setSellOrderCreateOpen(-1));
+      signAndBroadcast(tx, onTxBroadcast);
 
-      if (batchDenom && amount) {
+      if (batchDenom && amount && askDenom) {
+        const baseDenom = await getDenomtrace({ denom: askDenom });
+
         setCardItems([
           {
             label: 'batch denom',
@@ -78,10 +81,10 @@ const useCreateSellOrderSubmit = ({
                   sx={{
                     mr: '4px',
                     display: 'inline-block',
-                    verticalAlign: 'middle',
+                    verticalAlign: 'bottom',
                   }}
                 >
-                  <RegenTokenIcon />
+                  <DenomIcon denom={baseDenom} sx={{ display: 'flex' }} />
                 </Box>
               ),
             },
@@ -99,9 +102,9 @@ const useCreateSellOrderSubmit = ({
       accountAddress,
       setCardItems,
       setTxModalHeader,
-      setSellOrderCreateOpen,
       setTxButtonTitle,
       signAndBroadcast,
+      onTxBroadcast,
     ],
   );
 

@@ -1,8 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, CardMedia, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/styles';
-import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { useQuery } from '@tanstack/react-query';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { Loading } from 'web-components/lib/components/loading';
@@ -10,17 +8,7 @@ import Modal from 'web-components/lib/components/modal';
 import Section from 'web-components/lib/components/section';
 import { Body, Title } from 'web-components/lib/components/typography';
 
-import {
-  fetchSimplePrice,
-  GECKO_REGEN_ID,
-  GECKO_USD_CURRENCY,
-} from 'lib/coingecko';
-
-import { useProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders';
-import { useSortProjects } from 'pages/Projects/hooks/useSortProjects';
-import { useEcocreditQuery } from 'hooks';
 import { usePaginatedBatches } from 'hooks/batches/usePaginatedBatches';
-import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
 
 import topographyImg from '../../assets/background-contour-1.jpg';
 import horsesImg from '../../assets/horses-grazing.png';
@@ -32,7 +20,6 @@ import {
   useAllHomePageQuery,
 } from '../../generated/sanity-graphql';
 import { client } from '../../sanity';
-import { FEATURE_PROJECTS_COUNT, PROJECTS_SORT } from './Home.constants';
 import { FeaturedProjects } from './Home.FeaturedProjects';
 import { useHomeStyles } from './Home.styles';
 
@@ -47,38 +34,11 @@ const Home: React.FC = () => {
 
   const { data, loading: loadingSanity } = useAllHomePageQuery({ client });
   const { data: creditClassData } = useAllCreditClassQuery({ client });
-  const regenPriceQuery = useQuery(['regenPrice'], () =>
-    fetchSimplePrice({ ids: GECKO_REGEN_ID, vsCurrencies: GECKO_USD_CURRENCY }),
-  );
 
   const content = data?.allHomePage?.[0];
   const heroSection = content?.heroSection;
 
   const creditClassesContent = creditClassData?.allCreditClass;
-
-  const { data: ecocreditData } = useEcocreditQuery<QueryProjectsResponse>({
-    query: 'projects',
-    params: {},
-  });
-  const { sellOrdersResponse } = useQuerySellOrders();
-  const sellOrders = sellOrdersResponse?.sellOrders;
-
-  const projects = useMemo(
-    () => ecocreditData?.projects?.filter(project => project.metadata),
-    [ecocreditData?.projects],
-  );
-
-  const { projectsWithOrderData, loading: loadingProjects } =
-    useProjectsSellOrders({
-      projects,
-      sellOrders,
-      regenPrice: regenPriceQuery?.data?.regen?.usd,
-      limit: FEATURE_PROJECTS_COUNT,
-    });
-  const sortedProjects = useSortProjects({
-    projects: projectsWithOrderData,
-    sort: PROJECTS_SORT,
-  });
 
   const { batchesWithSupply, setPaginationParams } = usePaginatedBatches();
 
@@ -152,7 +112,7 @@ const Home: React.FC = () => {
         </Box>
       </BackgroundImgSection>
 
-      <FeaturedProjects projects={sortedProjects} isLoading={loadingProjects} />
+      <FeaturedProjects />
 
       <CardMedia image={topographyImg}>
         <CreditBatches

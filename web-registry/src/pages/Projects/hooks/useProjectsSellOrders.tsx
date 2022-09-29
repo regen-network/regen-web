@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { getMetadata } from 'lib/metadata-graph';
+
+import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 import { ProjectWithOrderData } from '../Projects.types';
 import {
@@ -14,26 +15,30 @@ import DefaultProject from 'assets/default-project.jpg';
 
 type Props = {
   projects?: ProjectInfo[];
-  sellOrders?: SellOrderInfo[];
+  sellOrders?: SellOrderInfoExtented[];
   regenPrice?: number;
   limit?: number;
 };
+
+export interface ProjectsSellOrders {
+  projectsWithOrderData: ProjectWithOrderData[];
+  loading: boolean;
+}
 
 export const useProjectsSellOrders = ({
   projects,
   sellOrders,
   regenPrice,
   limit,
-}: Props): {
-  projectsWithOrderData: ProjectWithOrderData[];
-  loading: boolean;
-} => {
+}: Props): ProjectsSellOrders => {
   const [projectsWithOrderData, setProjectsWithOrderData] = useState<
     ProjectWithOrderData[]
   >([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    if (projectsWithOrderData.length > 0) return;
+
     const normalize = async (): Promise<void> => {
       if (projects && sellOrders) {
         const _projectsWithOrders = await getProjectDisplayData(
@@ -47,14 +52,14 @@ export const useProjectsSellOrders = ({
       }
     };
     normalize();
-  }, [projects, sellOrders, regenPrice, limit]);
+  }, [projectsWithOrderData, projects, sellOrders, regenPrice, limit]);
 
   return { projectsWithOrderData, loading };
 };
 
 const getProjectDisplayData = async (
   projects: ProjectInfo[],
-  sellOrders: SellOrderInfo[],
+  sellOrders: SellOrderInfoExtented[],
   limit: number,
   regenPrice?: number,
 ): Promise<ProjectWithOrderData[]> => {

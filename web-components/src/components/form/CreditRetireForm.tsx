@@ -5,12 +5,14 @@ import { Field, Form, Formik, FormikErrors, useFormikContext } from 'formik';
 
 import { Theme } from '../../theme/muiTheme';
 import { getJurisdictionIsoCode } from '../../utils/locationStandard';
+import { Flex } from '../box';
 import AmountField from '../inputs/AmountField';
 import ControlledTextField from '../inputs/ControlledTextField';
 import SelectFieldFallback from '../inputs/SelectFieldFallback';
 import TextField from '../inputs/TextField';
 import { requiredMessage, validateAmount } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
+import InfoTooltipWithIcon from '../tooltip/InfoTooltipWithIcon';
 import { Body, Title } from '../typography';
 import Submit from './Submit';
 
@@ -154,9 +156,12 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
       <>
         {showNotesField && (
           <>
-            <Title variant="h5" sx={sxs.title}>
-              Transaction note
-            </Title>
+            <Flex sx={sxs.title}>
+              <Title variant="h5" sx={{ mr: 2 }}>
+                Transaction note
+              </Title>
+              <InfoTooltipWithIcon title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')" />
+            </Flex>
             <Field
               name={`${arrayPrefix}note`}
               type="text"

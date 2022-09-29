@@ -80,6 +80,7 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
 
   const batchesByProject = useCallback(
     (client, params) => queryBatchesByProject({ client, request: params }),
+
     [],
   );
 
@@ -216,6 +217,7 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
     paramsQuery,
     projects,
     projectsByAdmin,
+    projectsByClass,
     project,
     batchesByProject,
     batchesByIssuer,

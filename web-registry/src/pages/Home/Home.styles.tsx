@@ -10,15 +10,6 @@ export const useHomeStyles = makeStyles(theme => ({
       marginBottom: theme.spacing(8),
     },
   },
-  projectCards: {
-    [theme.breakpoints.down('md')]: {
-      width: '100vw',
-      marginLeft: theme.spacing(-8),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginLeft: theme.spacing(-4),
-    },
-  },
   bottomSectionWidth: {
     maxWidth: theme.spacing(200),
   },

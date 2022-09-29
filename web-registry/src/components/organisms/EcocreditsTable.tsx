@@ -1,11 +1,14 @@
 import React from 'react';
 import { Box, styled } from '@mui/material';
+import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
 
+import { BlockContent } from 'web-components/lib/components/block-content';
 import {
   ActionsTable,
   RenderActionButtonsFunc,
   TablePaginationParams,
 } from 'web-components/lib/components/table/ActionsTable';
+import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
@@ -22,6 +25,7 @@ const GreyText = styled('span')(({ theme }) => ({
 const BreakText = styled('div')({
   whiteSpace: 'normal',
   wordWrap: 'break-word',
+  textAlign: 'end',
 });
 
 type EcocreditsTableProps = {
@@ -46,6 +50,7 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
       onTableChange={onTableChange}
       /* eslint-disable react/jsx-key */
       headerRows={[
+        <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>{'Project'}</Box>,
         <Box
           sx={{
             minWidth: {
@@ -61,18 +66,40 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
         'Credit Class',
         <BreakText>Amount Tradable</BreakText>,
         <BreakText>Amount Retired</BreakText>,
-        <BreakText>Amount Escrowed</BreakText>,
+        <Box display="flex">
+          <BreakText>Amount Escrowed</BreakText>
+          <Box alignSelf="flex-end" ml={2}>
+            <InfoTooltipWithIcon
+              outlined
+              title={
+                'Credits are held in escrow when a sell order is created, and taken out of escrow when the sell order is either cancelled, updated with a reduced quantity, or processed.'
+              }
+            />
+          </Box>
+        </Box>,
         'Batch Start Date',
         'Batch End Date',
         'Project Location',
       ]}
       rows={credits.map((row, i) => {
         return [
+          <WithLoader isLoading={!row.projectName} variant="skeleton">
+            <Link
+              href={`/projects/${row?.projectId}`}
+              sx={tableStyles.ellipsisColumn}
+            >
+              {row?.projectName}
+            </Link>
+          </WithLoader>,
           <Link href={`/credit-batches/${row.denom}`}>{row.denom}</Link>,
           <AccountLink address={row.issuer} />,
           <WithLoader isLoading={!row.classId} variant="skeleton">
-            <Link key="class_id" href={`/credit-classes/${row.classId}`}>
-              {row.classId}
+            <Link
+              key="class_id"
+              href={`/credit-classes/${row.classId}`}
+              sx={tableStyles.ellipsisContentColumn}
+            >
+              {row?.className && <BlockContent content={row?.className} />}
             </Link>
           </WithLoader>,
           formatNumber({ num: row.balance?.tradableAmount }),

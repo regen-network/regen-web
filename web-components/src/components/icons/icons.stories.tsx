@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 
-import { FlexCol } from '../box';
+import { Flex } from '../box';
 import AccountabilityIcon from './AccountabilityIcon';
 import ArrowDownIcon from './ArrowDownIcon';
 import AvailableCreditsIcon from './AvailableCreditsIcon';
@@ -13,6 +13,10 @@ import CheckedIcon from './CheckedIcon';
 import CheckIcon from './CheckIcon';
 import CloseIcon from './CloseIcon';
 import CoBenefitsIcon from './CoBenefitsIcon';
+import AxlUsdcIcon from './coins/AxlUsdcIcon';
+import EeurIcon from './coins/EeurIcon';
+import GravUsdcIcon from './coins/GravUsdcIcon';
+import UsdcIcon from './coins/UsdcIcon';
 import CountingIcon from './CountingIcon';
 import { CreditBatchIcon } from './CreditBatchIcon';
 import { CreditBatchLightIcon } from './CreditBatchLightIcon';
@@ -41,11 +45,15 @@ import PointerIcon from './PointerIcon';
 import PrintIcon from './PrintIcon';
 import { ProjectPageIcon } from './ProjectPageIcon';
 import { ProjectPageIconSmall } from './ProjectPageIconSmall';
+import QuestionIcon from './QuestionIcon';
+import QuestionIconOutlined from './QuestionIconOutlined';
 import RegenIcon from './RegenIcon';
 import RegenLedgerIcon from './RegenLedgerIcon';
 import RegenLogoIcon from './RegenLogoIcon';
+import RegenMarketIcon from './RegenMarketIcon';
 import { RegenTokenIcon } from './RegenTokenIcon';
 import RegistrationIcon from './RegistrationIcon';
+import RegistryIcon from './RegistryIcon';
 import ReviewIcon from './ReviewIcon';
 import SatelliteIcon from './SatelliteIcon';
 import { SaveIcon } from './SaveIcon';
@@ -64,6 +72,7 @@ import YoutubeIcon from './social/YoutubeIcon';
 import SoilSampleIcon from './SoilSampleIcon';
 import { Spinner } from './Spinner';
 import TotalCreditsIcon from './TotalCreditsIcon';
+import TradeableIcon from './TradeableIcon';
 import TrashIcon from './TrashIcon';
 import TrustDocumentIcon from './TrustDocumentIcon';
 import TrustIcon from './TrustIcon';
@@ -82,7 +91,8 @@ function LabeledIcon(props: {
 }): JSX.Element {
   return (
     <Grid item sm={3} md={2} lg={1.5} sx={{ border: 1, borderRadius: 3 }}>
-      <FlexCol
+      <Flex
+        col
         sx={{
           justifyContent: 'flex-end',
           alignItems: 'center',
@@ -93,13 +103,14 @@ function LabeledIcon(props: {
       >
         <div>{props.icon}</div>
         <div>{props.label}</div>
-      </FlexCol>
+      </Flex>
     </Grid>
   );
 }
 
 export const allIcons = (): JSX.Element => (
   <Grid container gap={4}>
+    <LabeledIcon icon={<AxlUsdcIcon />} label="AxlUsdcIcon" />
     <LabeledIcon icon={<AccountabilityIcon />} label="AccountabilityIcon" />
     <LabeledIcon
       icon={
@@ -148,15 +159,17 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<DocumentIcon />} label="DocumentIcon" />
     <LabeledIcon icon={<DropdownIcon />} label="DropdownIcon" />
     <LabeledIcon icon={<EditIcon />} label="EditIcon" />
+    <LabeledIcon icon={<EeurIcon />} label="EeurIcon" />
     <LabeledIcon icon={<EmailIcon color="grey" />} label="EmailIcon" />
     <LabeledIcon
       icon={<EmptyCartIcon sx={{ color: 'info.main' }} />}
-      label="EmptyCardIcon"
+      label="EmptyCartIcon"
     />
     <LabeledIcon icon={<EyeIcon />} label="EyeIcon" />
     <LabeledIcon icon={<FacebookIcon color="blue" />} label="FacebookIcon" />
     <LabeledIcon icon={<FarmerIcon />} label="FarmerIcon" />
     <LabeledIcon icon={<GithubIcon color="grey" />} label="GithubIcon" />
+    <LabeledIcon icon={<GravUsdcIcon />} label="GravUsdcIcon" />
     <LabeledIcon icon={<HorizontalDotsIcon />} label="HorizontalDotsIcon" />
     <LabeledIcon icon={<InfoIcon />} label="InfoIcon" />
     <LabeledIcon icon={<InfoIconOutlined />} label="InfoIconOutlined" />
@@ -175,11 +188,21 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<PrintIcon />} label="PrintIcon" />
     <LabeledIcon icon={<ProjectPageIcon />} label="ProjectPageIcon" />
     <LabeledIcon icon={<ProjectPageIconSmall />} label="ProjectPageIconSmall" />
+    <LabeledIcon icon={<QuestionIcon />} label="QuestionIcon" />
+    <LabeledIcon
+      icon={<QuestionIconOutlined sx={{ color: 'secondary.main' }} />}
+      label="QuestionIconOutlined"
+    />
     <LabeledIcon icon={<RegenIcon />} label="RegenIcon" />
     <LabeledIcon icon={<RegenLedgerIcon />} label="RegenLedgerIcon" />
     <LabeledIcon icon={<RegenLogoIcon color="grey" />} label="RegenLogoIcon" />
+    <LabeledIcon
+      icon={<RegenMarketIcon sx={{ fontSize: 64 }} />}
+      label="RegenMarketIcon"
+    />
     <LabeledIcon icon={<RegenTokenIcon />} label="RegenTokenIcon" />
     <LabeledIcon icon={<RegistrationIcon />} label="RegistrationIcon" />
+    <LabeledIcon icon={<RegistryIcon />} label="RegistryIcon" />
     <LabeledIcon icon={<ReviewIcon />} label="ReviewIcon" />
     <LabeledIcon icon={<SatelliteIcon />} label="SatelliteIcon" />
     <LabeledIcon icon={<SaveIcon color="green" />} label="SaveIcon" />
@@ -190,10 +213,15 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<Spinner />} label="Spinner" />
     <LabeledIcon icon={<TelegramIcon color="blue" />} label="TelegramIcon" />
     <LabeledIcon icon={<TotalCreditsIcon />} label="TotalCreditsIcon" />
+    <LabeledIcon
+      icon={<TradeableIcon sx={{ color: 'grey.600' }} />}
+      label="tradeableIcon"
+    />
     <LabeledIcon icon={<TrashIcon color="grey" />} label="TrashIcon" />
     <LabeledIcon icon={<TrustIcon />} label="TrustIcon" />
     <LabeledIcon icon={<TrustDocumentIcon />} label="TrustDocumentIcon" />
     <LabeledIcon icon={<TwitterIcon color="blue" />} label="TwitterIcon" />
+    <LabeledIcon icon={<UsdcIcon />} label="UsdcIcon" />
     <LabeledIcon icon={<VerifiedIcon color="#000" />} label="VerifiedIcon" />
     <LabeledIcon icon={<WalletIcon />} label="WalletIcon" />
     <LabeledIcon

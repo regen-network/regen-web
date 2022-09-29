@@ -1,46 +1,51 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { Link } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import Collapse from '@mui/material/Collapse';
 import Grid from '@mui/material/Grid';
+import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import cx from 'clsx';
-import { Field, Form, Formik } from 'formik';
+import { Field, Form, Formik, FormikErrors } from 'formik';
 import { RadioGroup } from 'formik-mui';
 
+import { Flex } from 'web-components/lib/components/box';
 import Card from 'web-components/lib/components/cards/Card';
 import Submit from 'web-components/lib/components/form/Submit';
-import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
-import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 import { Image } from 'web-components/lib/components/image';
+import AgreeErpaCheckbox from 'web-components/lib/components/inputs/AgreeErpaCheckbox';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
 import SelectFieldFallback from 'web-components/lib/components/inputs/SelectFieldFallback';
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
+import { requirementAgreement } from 'web-components/lib/components/inputs/validation';
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
-import Tooltip from 'web-components/lib/components/tooltip/InfoTooltip';
+import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
 import {
   Body,
-  Label,
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
 
-import { formatDenomText, microToDenom } from 'lib/denom.utils';
+import { microToDenom } from 'lib/denom.utils';
 
 import { UISellOrderInfo } from 'pages/Projects/Projects.types';
+import { Link as DynamicLink } from 'components/atoms/Link';
+import DenomIcon from 'components/molecules/DenomIcon';
+import DenomLabel from 'components/molecules/DenomLabel';
+import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
+import useMarketplaceQuery from 'hooks/useMarketplaceQuery';
 
 import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
+import { SetSelectedSellOrderElement } from './BuyCreditsModal.SetSelectedSellOrderElement';
 import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
 import {
-  amountToSpend,
   getCreditCountValidation,
   getOptions,
   handleBuyCreditsSubmit,
 } from './BuyCreditsModal.utils';
-import { useSetSelectedSellOrder } from './hooks/useSetSelectedSellOrder';
 
 const LocationCountryField = lazy(
   () => import('web-components/lib/components/inputs/LocationCountryField'),
@@ -85,13 +90,13 @@ export interface BuyCreditsValues {
   askDenom?: string;
   batchDenom?: string;
   sellOrderId: string;
+  agreeErpa: boolean;
 }
 
 const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
   open,
   onSubmit,
   onClose,
-  onTxQueued,
   initialValues,
   project,
   apiServerUrl,
@@ -99,8 +104,31 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
 }) => {
   const styles = useBuyCreditsModalStyles();
   const theme = useTheme();
-  const { selectedSellOrder, SetSelectedSellOrderElement } =
-    useSetSelectedSellOrder(project);
+  const [selectedSellOrder, setSelectedSellOrder] = useState<
+    UISellOrderInfo | undefined
+  >(undefined);
+
+  const validationHandler = (
+    values: BuyCreditsValues,
+  ): FormikErrors<BuyCreditsValues> => {
+    let errors: FormikErrors<BuyCreditsValues> = {};
+
+    if (!values.agreeErpa) errors.agreeErpa = requirementAgreement;
+
+    return errors;
+  };
+
+  const allowedDenomsResponse = useMarketplaceQuery<QueryAllowedDenomsResponse>(
+    {
+      query: 'allowedDenoms',
+      params: {},
+    },
+  );
+
+  const sellOrdersOptions = getOptions({
+    project,
+    allowedDenomsData: allowedDenomsResponse?.data,
+  });
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -143,6 +171,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
           enableReinitialize
           validateOnMount
           initialValues={initialValues || BUY_CREDITS_MODAL_DEFAULT_VALUES}
+          validate={validationHandler}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
             try {
@@ -155,8 +184,6 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
         >
           {({
             values,
-            errors,
-            touched,
             submitForm,
             isValid,
             isSubmitting,
@@ -172,11 +199,18 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                   <Field
                     name="sellOrderId"
                     component={SelectTextField}
-                    options={getOptions(project)}
+                    options={sellOrdersOptions}
                     sx={{ mb: theme.spacing(10.5) }}
-                    disabled={!!initialValues?.sellOrderId}
+                    disabled={
+                      !!initialValues?.sellOrderId ||
+                      sellOrdersOptions.length === 1
+                    }
                   />
-                  <SetSelectedSellOrderElement />
+                  <SetSelectedSellOrderElement
+                    project={project}
+                    selectedSellOrder={selectedSellOrder}
+                    setSelectedSellOrder={setSelectedSellOrder}
+                  />
                   <Collapse in={!!selectedSellOrder}>
                     <div className={styles.field}>
                       <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
@@ -193,9 +227,10 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       >
                         {`${microToDenom(
                           selectedSellOrder?.askAmount || '',
-                        )} ${formatDenomText(
-                          selectedSellOrder?.askDenom || '',
-                        )}/credit`}
+                        )} ${findDisplayDenom({
+                          allowedDenomsData: allowedDenomsResponse?.data,
+                          denom: selectedSellOrder?.askDenom ?? '',
+                        })}/credit`}
                       </Body>
                       <Body
                         size="md"
@@ -241,25 +276,23 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                               sx={{
                                 display: 'flex',
                                 alignItems: 'baseline',
-                                flexWrap: 'wrap',
                               }}
                             >
-                              <Box
-                                sx={{ display: 'flex', alignItems: 'baseline' }}
-                              >
-                                <RegenTokenIcon className={styles.regenIcon} />
-                                <Title variant="h4" sx={{ mr: 1.5 }}>
-                                  {amountToSpend({
-                                    askAmount: Number(
-                                      selectedSellOrder?.askAmount,
-                                    ),
-                                    creditCount: values?.creditCount,
-                                  })}
-                                </Title>
-                              </Box>
-                              <Label size="sm" color="info.dark">
-                                {'REGEN'}
-                              </Label>
+                              <DenomIcon
+                                denom={selectedSellOrder?.askBaseDenom ?? ''}
+                                sx={{ mr: 1.5, mt: 1, alignSelf: 'flex-start' }}
+                                iconSx={{ height: 26 }}
+                              />
+                              <Title variant="h4" sx={{ mr: 1.5 }}>
+                                {values.creditCount *
+                                  microToDenom(selectedSellOrder?.askAmount) ||
+                                  '-'}
+                              </Title>
+                              <DenomLabel
+                                denom={selectedSellOrder?.askDenom ?? ''}
+                                size="sm"
+                                sx={{ color: 'info.dark' }}
+                              />
                             </Box>
                           </div>
                         </Box>
@@ -267,7 +300,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                     </div>
                   </Collapse>
                   <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
-                    Retirement of credits
+                    Purchase options
                   </Title>
                   <Field
                     className={styles.field}
@@ -280,8 +313,20 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       type="radio"
                       value="autoretire"
                       checked={values['retirementAction'] === 'autoretire'}
-                      label="Auto-retire credits" // Retire credits now
-                      description="These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible."
+                      label="Retire credits now"
+                      description={
+                        <>
+                          {
+                            'These credits will be retired upon purchase and will not be tradable. Retirement is permanent and non-reversible.'
+                          }
+                          <DynamicLink
+                            href="https://guides.regen.network/guides/regen-marketplace/ecocredits/buy-ecocredits/by-project#5.-select-credit-retirement-options"
+                            sx={{ ml: 1 }}
+                          >
+                            Learn more»
+                          </DynamicLink>
+                        </>
+                      }
                     />
                     <Field
                       className={styles.toggle}
@@ -289,36 +334,45 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       type="radio"
                       value="manual"
                       checked={values['retirementAction'] === 'manual'} // if disableAutoRetire, this is an option
-                      label="Retire credits manually" // Allow retirement later
-                      description="These credits will be a tradeable asset. They can be retired later via Regen Registry."
+                      label="Buy tradable ecocredits"
+                      description={
+                        <>
+                          {
+                            'These credits will be a tradable asset. They can be retired later via Regen Registry.'
+                          }
+                          <DynamicLink
+                            href="https://guides.regen.network/guides/regen-marketplace/ecocredits/buy-ecocredits/by-project#5.-select-credit-retirement-options"
+                            sx={{ ml: 1 }}
+                          >
+                            Learn more»
+                          </DynamicLink>
+                        </>
+                      }
                       disabled={!selectedSellOrder?.disableAutoRetire} // if disableAutoRetire is false, this is disabled
                     />
                   </Field>
                   <Collapse in={values['retirementAction'] === 'autoretire'}>
-                    <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
-                      Retirement note
-                    </Title>
-                    <Field
-                      className={styles.field}
-                      component={ControlledTextField}
-                      label="Add retirement transaction details (stored in the tx memo)"
-                      name="retirementNote"
-                      optional
-                    />
-                    <div className={styles.flex}>
+                    <Flex>
+                      <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
+                        Retirement note
+                      </Title>
+                      <InfoTooltipWithIcon title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')" />
+                    </Flex>
+                    <Box>
+                      <Field
+                        component={ControlledTextField}
+                        label="Add retirement transaction details (stored in the tx memo)"
+                        name="retirementNote"
+                        optional
+                        sx={{ mb: { xs: 10, sm: 12 } }}
+                      />
+                    </Box>
+                    <Flex>
                       <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
                         Credit retirement location
                       </Title>
-                      <Tooltip
-                        arrow
-                        placement="top"
-                        title="The retirement location can be where you live or your business operates."
-                      >
-                        <div>
-                          <InfoIcon className={styles.info} />
-                        </div>
-                      </Tooltip>
-                    </div>
+                      <InfoTooltipWithIcon title="The retirement location can be where you live or your business operates." />
+                    </Flex>
                     <Body sx={{ color: 'info.dark', mb: { xs: 0, sm: 3 } }}>
                       Please enter a location for the retirement of these
                       credits. This prevents double counting of credits in
@@ -371,6 +425,8 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       optional
                     />
                   </Collapse>
+
+                  <AgreeErpaCheckbox />
                 </Form>
                 <Submit
                   isSubmitting={isSubmitting}

@@ -1,5 +1,6 @@
 import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { roundFloatNumber } from 'utils/number/format/format';
 
 import { PurchaseInfo } from 'web-components/lib/components/cards/ProjectCard/ProjectCard.types';
 import { formatNumber } from 'web-components/lib/utils/format';
@@ -32,7 +33,7 @@ export const getPurchaseInfo = ({
   }
 
   const creditsAvailable = ordersForThisProject
-    .map(order => parseInt(order.quantity))
+    .map(order => parseFloat(order.quantity))
     .reduce((total, quantity) => total + quantity, 0);
 
   const prices = ordersForThisProject
@@ -66,22 +67,25 @@ export const getPurchaseInfo = ({
   return {
     sellInfo: {
       pricePerTon: hasPrice ? `$${priceMinDisplayed}-${priceMaxDisplayed}` : '',
-      creditsAvailable,
+      creditsAvailable: roundFloatNumber(creditsAvailable, {
+        decimals: 0,
+      }),
     },
   };
 };
 
+// This comparison function prioritizes (it puts first) the projects that have sell orders.
 export const sortProjectsBySellOrdersAvailability =
   (sellOrders: SellOrderInfo[]) =>
   (projectA: ProjectInfo, projectB: ProjectInfo) => {
-    const ordersForProjectA = sellOrders.filter(order =>
+    const ordersForProjectA = sellOrders.some(order =>
       order.batchDenom.startsWith(`${projectA?.id}-`),
     );
-    const ordersForProjectB = sellOrders.filter(order =>
+    const ordersForProjectB = sellOrders.some(order =>
       order.batchDenom.startsWith(`${projectB?.id}-`),
     );
 
-    if (ordersForProjectA && !ordersForProjectB) return 1;
-    if (!ordersForProjectA && ordersForProjectB) return -1;
+    if (ordersForProjectA && !ordersForProjectB) return -1;
+    if (!ordersForProjectA && ordersForProjectB) return 1;
     return 0;
   };

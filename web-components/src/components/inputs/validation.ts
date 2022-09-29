@@ -16,6 +16,7 @@ export const invalidJSON: string = 'Please enter valid JSON-LD';
 export const invalidAddress: string = 'Invalid address';
 export const invalidRegenAddress: string = 'Invalid regen address';
 export const MAX_FRACTION_DIGITS: number = 6; // useful for conversion to micro udenom (BigInt)
+export const requiredDenom: string = 'Please choose a denom';
 
 export const numericOnlyRE = /^\d*$/gm;
 

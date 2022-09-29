@@ -1,10 +1,11 @@
-import React from 'react';
+import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Skeleton } from '@mui/material';
 import { useTheme } from '@mui/styles';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import { QueryProjectResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
+import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
 import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import SEO from 'web-components/lib/components/seo';
@@ -14,6 +15,12 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 
+import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
+import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
+import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
+import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
+import { useResetErrorBanner } from 'pages/Marketplace/Storefront/hooks/useResetErrorBanner';
+import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { usePaginatedBatchesByProject } from 'hooks/batches/usePaginatedBatchesByProject';
 
 import {
@@ -27,19 +34,15 @@ import { useLedger } from '../../../ledger';
 import { chainId } from '../../../lib/ledger';
 import { NotFoundPage } from '../../../pages/NotFound/NotFound';
 import { client as sanityClient } from '../../../sanity';
-import {
-  MoreProjectsSection,
-  ProjectImpactSection,
-  ProjectTopSection,
-} from '../../organisms';
+import { ProjectImpactSection, ProjectTopSection } from '../../organisms';
 import { Credits } from '../../organisms/BuyCreditsModal/BuyCreditsModal';
 import useGeojson from './hooks/useGeojson';
 import useImpact from './hooks/useImpact';
 import useIssuanceModal from './hooks/useIssuanceModal';
 import useMedia from './hooks/useMedia';
-import useOtherProjects from './hooks/useOtherProjects';
 import useSeo from './hooks/useSeo';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
+import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProjects';
 import { ProjectDocumentation } from './ProjectDetails.ProjectDocumentation';
 import { ProjectTimeline } from './ProjectDetails.ProjectTimeline';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
@@ -57,9 +60,15 @@ const testProject: Project = {};
 function ProjectDetails(): JSX.Element {
   const theme = useTheme<Theme>();
   const { projectId } = useParams();
+  const { wallet } = useLedger();
   const { data: sanityCreditClassData } = useAllCreditClassQuery({
     client: sanityClient,
   });
+  const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
+  const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
+  const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
+
+  useResetErrorBanner({ displayErrorBanner, setDisplayErrorBanner });
 
   // Page mode (info/Tx)
   const isTxMode =
@@ -100,7 +109,9 @@ function ProjectDetails(): JSX.Element {
   const onChainProject = projectResponse?.project;
 
   // TODO: when all projects are on-chain, just use dataByOnChainId
-  const data = isOnChainId ? dataByOnChainId : dataByHandle;
+  const data = isOnChainId
+    ? { ...dataByOnChainId, admin: onChainProject?.admin }
+    : dataByHandle;
   const project = isOnChainId
     ? dataByOnChainId?.projectByOnChainId
     : dataByHandle?.projectByHandle;
@@ -142,7 +153,6 @@ function ProjectDetails(): JSX.Element {
   });
   const mediaData = useMedia({ metadata: onChainProjectMetadata, geojson });
   const impactData = useImpact({ coBenefitsIris, primaryImpactIRI });
-  const otherProjects = useOtherProjects(projectId as string);
   const isLoading = loading || loadingDataByHandle;
 
   const {
@@ -151,6 +161,19 @@ function ProjectDetails(): JSX.Element {
     setIssuanceModalOpen,
     viewOnLedger,
   } = useIssuanceModal(data);
+
+  const projects = useMemo(
+    () => (onChainProject ? [onChainProject] : undefined),
+    [onChainProject],
+  );
+
+  const { isBuyFlowDisabled, projectsWithOrderData } = useBuySellOrderData({
+    projects,
+  });
+
+  const { credits, isSellFlowDisabled } = useCreateSellOrderData({
+    projectId: projectsWithOrderData[0]?.id,
+  });
 
   if (!isLoading && !project) return <NotFoundPage />;
   return (
@@ -180,6 +203,21 @@ function ProjectDetails(): JSX.Element {
           />
         </Box>
       )}
+
+      <SellOrdersActionsBar
+        isSellButtonDisabled={isSellFlowDisabled}
+        isBuyButtonDisabled={isBuyFlowDisabled}
+        onSellButtonClick={
+          wallet?.address
+            ? () => setIsSellFlowStarted(true)
+            : () => setDisplayErrorBanner(true)
+        }
+        onBuyButtonClick={
+          wallet?.address
+            ? () => setIsBuyFlowStarted(true)
+            : () => setDisplayErrorBanner(true)
+        }
+      />
 
       <ProjectTopSection
         data={data}
@@ -218,11 +256,7 @@ function ProjectDetails(): JSX.Element {
         />
       )}
 
-      {otherProjects && otherProjects.length > 0 && (
-        <div className="topo-background-alternate">
-          <MoreProjectsSection projects={otherProjects} />
-        </div>
-      )}
+      <MoreProjects />
 
       {issuanceModalData && (
         <IssuanceModal
@@ -239,6 +273,23 @@ function ProjectDetails(): JSX.Element {
           projectId={projectId}
           testProject={testProject}
           creditDenom={creditClassDenom || creditClassName}
+        />
+      )}
+
+      <BuySellOrderFlow
+        isFlowStarted={isBuyFlowStarted}
+        setIsFlowStarted={setIsBuyFlowStarted}
+        selectedProject={projectsWithOrderData[0]}
+      />
+      <CreateSellOrderFlow
+        isFlowStarted={isSellFlowStarted}
+        setIsFlowStarted={setIsSellFlowStarted}
+        credits={credits}
+      />
+      {displayErrorBanner && (
+        <ErrorBanner
+          text="Please install Keplr extension to use Regen Ledger features"
+          onClose={() => setDisplayErrorBanner(false)}
         />
       )}
     </Box>

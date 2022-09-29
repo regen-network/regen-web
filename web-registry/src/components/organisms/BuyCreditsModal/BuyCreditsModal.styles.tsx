@@ -5,9 +5,6 @@ export const useBuyCreditsModalStyles = makeStyles(theme => ({
     height: '100%',
     borderRadius: theme.spacing(2),
   },
-  flex: {
-    display: 'flex',
-  },
   flexColumn: {
     display: 'flex',
     flexDirection: 'column',
@@ -83,14 +80,6 @@ export const useBuyCreditsModalStyles = makeStyles(theme => ({
   },
   marginRight: {
     marginRight: theme.spacing(4),
-  },
-  info: {
-    cursor: 'pointer',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontWeight: 'bold',
-    fontSize: theme.typography.pxToRem(16),
   },
   toggle: {
     backgroundColor: theme.palette.primary.main,

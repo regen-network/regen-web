@@ -9,4 +9,5 @@ export const BUY_CREDITS_MODAL_DEFAULT_VALUES = {
   askDenom: 'uregen',
   batchDenom: '',
   sellOrderId: '',
+  agreeErpa: false,
 };

@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+import { floorFloatNumber } from 'utils/number/format/format';
 
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import { formatNumber } from 'web-components/lib/utils/format';
@@ -31,6 +32,7 @@ export const getSellOrderLabel = ({
     denom: askDenom,
   });
   const denomPrefix = getDenomCurrencyPrefix({ baseDenom: askBaseDenom });
+  const truncatedQuantity = floorFloatNumber(parseFloat(quantity));
   return (
     <Box sx={{ ml: 4 }}>
       <Box
@@ -38,7 +40,7 @@ export const getSellOrderLabel = ({
       >{`${denomPrefix}${price} ${displayDenom}/credit: `}</Box>
       <Box
         sx={{ display: 'inline', mr: 1 }}
-      >{`${quantity} credit(s) available`}</Box>
+      >{`${truncatedQuantity} credit(s) available`}</Box>
       <Box sx={{ display: 'inline', color: 'info.main' }}>{`(#${id})`}</Box>
     </Box>
   );

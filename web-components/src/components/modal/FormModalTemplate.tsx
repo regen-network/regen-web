@@ -4,6 +4,8 @@ import { makeStyles } from '@mui/styles';
 import Modal, { RegenModalProps } from '../modal';
 import { Body, Title } from '../typography';
 
+const SCROLL_BAR_WIDTH = 8;
+
 const useStyles = makeStyles(theme => ({
   modal: {
     [theme.breakpoints.up('sm')]: {
@@ -11,7 +13,7 @@ const useStyles = makeStyles(theme => ({
       padding: `${theme.spacing(10.75)} ${theme.spacing(7.5)} ${theme.spacing(
         12.5,
       )}`,
-      maxWidth: theme.spacing(140),
+      maxWidth: theme.spacing(140 + SCROLL_BAR_WIDTH),
     },
   },
   mainTitle: {

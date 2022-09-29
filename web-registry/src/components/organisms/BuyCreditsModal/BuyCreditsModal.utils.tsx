@@ -13,6 +13,19 @@ import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.uti
 import { BuyCreditsProject, BuyCreditsValues } from '..';
 import { getDenomCurrencyPrefix } from '../SellOrdersTable/SellOrdersTable.utils';
 
+/* sortBySellOrderId */
+
+const sortBySellOrderId = (
+  sellOrderA: UISellOrderInfo,
+  sellOrderB: UISellOrderInfo,
+): number => {
+  if (sellOrderA.id && sellOrderB.id) {
+    return Number(sellOrderA.id) < Number(sellOrderB.id) ? 1 : -1;
+  }
+
+  return 0;
+};
+
 /* getSellOrderLabel */
 
 type GetSellOrderLabelParams = {
@@ -74,12 +87,12 @@ export const getOptions = ({
 }: GetOptionsParams): Option[] => {
   if (!project?.sellOrders?.length) return [];
 
-  const retirableSellOrders = project.sellOrders.filter(
-    sellOrder => !sellOrder.disableAutoRetire,
-  );
-  const retirableAndTradableSellOrders = project.sellOrders.filter(
-    sellOrder => sellOrder.disableAutoRetire,
-  );
+  const retirableSellOrders = project.sellOrders
+    .filter(sellOrder => !sellOrder.disableAutoRetire)
+    .sort(sortBySellOrderId);
+  const retirableAndTradableSellOrders = project.sellOrders
+    .filter(sellOrder => sellOrder.disableAutoRetire)
+    .sort(sortBySellOrderId);
 
   const retirableOptions = getSellOrdersOptions({
     sellOrders: retirableSellOrders,

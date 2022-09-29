@@ -9,6 +9,9 @@ import { UISellOrderInfo } from 'pages/Projects/Projects.types';
 import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
 
 import { BuyCreditsProject, BuyCreditsValues } from '..';
+import { getDenomCurrencyPrefix } from '../SellOrdersTable/SellOrdersTable.utils';
+
+/* getSellOrderLabel */
 
 type GetSellOrderLabelParams = {
   sellOrder: UISellOrderInfo;
@@ -18,7 +21,7 @@ export const getSellOrderLabel = ({
   sellOrder,
   allowedDenomsData,
 }: GetSellOrderLabelParams): string => {
-  const { id, askAmount, askDenom, quantity } = {
+  const { id, askAmount, askDenom, quantity, askBaseDenom } = {
     ...sellOrder,
   };
   const price = microToDenom(askAmount);
@@ -26,8 +29,12 @@ export const getSellOrderLabel = ({
     allowedDenomsData,
     denom: askDenom,
   });
-  return `${id} (${price} ${displayDenom}/credit: ${quantity} credit(s) available)`;
+  const denomPrefix = getDenomCurrencyPrefix({ baseDenom: askBaseDenom });
+  return `${denomPrefix}${price} ${displayDenom}/credit: ${quantity} credit(s) available (#${id})`;
 };
+
+/* getSellOrdersOptions */
+
 type GetSellOrdersOptionsParams = {
   sellOrders: UISellOrderInfo[];
   allowedDenomsData?: QueryAllowedDenomsResponse;
@@ -41,6 +48,8 @@ const getSellOrdersOptions = ({
     value: sellOrder.id,
   }));
 };
+
+/* getOptions */
 
 type GetOptionsParams = {
   project: BuyCreditsProject;
@@ -75,13 +84,15 @@ export const getOptions = ({
   return allOptionsLength > 1
     ? [
         { label: 'Choose a sell order', value: '', disabled: true },
-        { label: 'RETIRABLE ONLY', value: '', disabled: true },
-        ...retirableOptions,
         { label: 'TRADABLE AND RETIRABLE', value: '', disabled: true },
         ...retirableAndTradableOptions,
+        { label: 'RETIRABLE ONLY', value: '', disabled: true },
+        ...retirableOptions,
       ]
     : retirableOptions.concat(retirableAndTradableOptions);
 };
+
+/* handleBuyCreditsSubmit */
 
 export const handleBuyCreditsSubmit = async (
   values: BuyCreditsValues,
@@ -105,6 +116,8 @@ export const handleBuyCreditsSubmit = async (
   await onSubmit(fullValues);
 };
 
+/* getCreditCountValidation */
+
 export const getCreditCountValidation =
   (creditAvailable: number) => (creditCount: number) => {
     let error;
@@ -113,6 +126,8 @@ export const getCreditCountValidation =
     }
     return error;
   };
+
+/* amountToSpend */
 
 type AmountToSpendParams = {
   creditCount: number;

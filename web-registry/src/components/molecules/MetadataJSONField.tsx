@@ -34,9 +34,6 @@ export function MetadataJSONField({
 
   useEffect(() => {
     // reset metadata if classId changes and still in Object form
-    console.log('useEffect', classId, metadata, name);
-    console.log('useEffect typeof metadata', typeof metadata);
-
     if (typeof metadata !== 'string' || formikName === 'loading') {
       setFieldValue(name, '');
       // using this timeout fixes a timing bug when transitioning from metadata Object
@@ -46,8 +43,6 @@ export function MetadataJSONField({
       }, 700);
     }
   }, [classId, formikName, metadata, name, setFieldTouched, setFieldValue]);
-  console.log('formikName, name', formikName, name);
-  console.log('typeof metadata', typeof metadata);
 
   return (
     <Box sx={{ mt: 10 }}>

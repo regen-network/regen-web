@@ -1,4 +1,4 @@
-export const COMPACT_CONTEXT = JSON.parse(
+export const COMPACTED_CONTEXT = JSON.parse(
   JSON.stringify({
     schema: 'http://schema.org/',
     regen: 'http://regen.network/',

@@ -56,7 +56,6 @@ export const getJurisdiction = async (
     }
   });
 
-  console.log('location', location);
   // if GeocodeFeature context is insufficient, we can get a country code from place_name
   if (!countryKey && location?.['geojson:place_name']) {
     const placeSegments = location['geojson:place_name'].split(',');
@@ -81,16 +80,18 @@ export const getJurisdiction = async (
       }
     });
   }
-  // console.log('iso3166 \n', iso3166.data);
-  console.log('countryKey', countryKey);
-  console.log('stateProvince', stateProvince);
-  console.log('postalCode', postalCode);
+
   try {
     isoString = await getISOString(mapboxToken, {
       countryKey,
       stateProvince,
       postalCode,
     });
+    // eslint-disable-next-line no-console
+    console.log(
+      'Jurisdiction ISO string based on location provided:',
+      isoString,
+    );
   } catch (err) {
     return Promise.reject(err);
   }
@@ -104,9 +105,11 @@ const getCountryKey = (country: string): string => {
     );
   });
   if (foundKey) return foundKey;
+
   // TODO: iso3166 did not pick up these US variants. May need to add more data sources.
   const isUnitedStates = /United States|USA|U.S./.test(country);
   if (isUnitedStates) return 'US';
+
   return '';
 };
 

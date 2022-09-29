@@ -118,10 +118,6 @@ export default function CreditBasics({
     validateForm();
   }, [validateForm]);
 
-  console.log('projectId, classId', projectId, classId);
-  console.log('values', values);
-  console.log('errors', errors);
-
   return (
     <OnBoardingCard>
       <Field

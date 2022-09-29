@@ -2,16 +2,12 @@ import axios from 'axios';
 import * as jsonld from 'jsonld';
 
 import getApiUri from './apiUri';
-import { COMPACT_CONTEXT } from './rdf.compact-context';
+import { COMPACTED_CONTEXT } from './rdf.compacted-context';
 
 export const getMetadata = async (iri: string): Promise<any> => {
   if (!iri) throw new Error('No metadata iri provided');
   const { data } = await axios.get(`${getApiUri()}/metadata-graph/${iri}`);
-  console.log('raw', { ...data });
-
-  const compacted = await jsonld.compact(data, COMPACT_CONTEXT);
-  console.log('compacted', compacted);
-  return compacted;
+  return await jsonld.compact(data, COMPACTED_CONTEXT);
 };
 
 /**

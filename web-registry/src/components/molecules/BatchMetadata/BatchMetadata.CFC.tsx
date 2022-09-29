@@ -10,7 +10,6 @@ export const CFCBatchMetadata = ({
 }: {
   data?: CFCBatchMetadataLD;
 }): JSX.Element => {
-  console.log('CFCBatchMetadata', data);
   const reports = data?.['regen:verificationReports'];
   const serialNumbers = data?.['regen:cfcCreditSerialNumbers'];
   return (

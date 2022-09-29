@@ -39,7 +39,6 @@ const useProjectCreateSubmit = ({ signAndBroadcast }: Props): ReturnType => {
       let iriResponse:
         | IriFromMetadataSuccess<Partial<ProjectMetadataLDUnion>>
         | undefined;
-      console.log('project metadata', metadata);
 
       try {
         iriResponse = await generateIri(metadata);
@@ -55,8 +54,6 @@ const useProjectCreateSubmit = ({ signAndBroadcast }: Props): ReturnType => {
         jurisdiction,
         referenceId,
       });
-
-      console.log('msg', msg);
 
       const tx = {
         msgs: [msg],

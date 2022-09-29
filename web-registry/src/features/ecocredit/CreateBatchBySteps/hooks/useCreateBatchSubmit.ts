@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { MsgCreateBatch } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 import { BatchIssuance } from '@regen-network/api/lib/generated/regen/ecocredit/v1/types';
-import { JsonLdProcessor, NodeObject } from 'jsonld';
-import { cloneDeep, merge } from 'lodash';
 
 import type { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 import { CFCBatchMetadataLD } from 'web-components/lib/types/rdf/C02-city-forest-credits-batch';
@@ -14,10 +12,9 @@ import { generateIri, IriFromMetadataSuccess } from 'lib/metadata-graph';
 import { useMsgClient } from 'hooks';
 
 import { CreateBatchFormValues } from '../CreateBatchMultiStepForm/CreateBatchMultiStepForm';
-import useUpdateProjectClass from './useUpdateProjectClass';
 
 // TODO
-// Right now, just case "C01" (aka. VCS)
+// Right now, just cases "C01" (aka. VCS)
 
 function prepareVCSMetadata(
   projectId: string,
@@ -50,7 +47,6 @@ async function prepareMsg(
   issuer: string,
   data: CreateBatchFormValues,
 ): Promise<Partial<MsgCreateBatch> | undefined> {
-  console.log('data', data);
   // First, complete the metadata
   let metadata: VCSBatchMetadataLD | CFCBatchMetadataLD | undefined =
     prepareVCSMetadata(
@@ -59,7 +55,6 @@ async function prepareMsg(
     );
   if (!metadata) metadata = JSON.parse(data.metadata);
   if (!metadata) return;
-  console.log('metadata', metadata);
 
   // generate IRI
   let iriResponse:
@@ -158,8 +153,6 @@ export default function useCreateBatchSubmit(): ReturnType {
       try {
         setStatus('message');
         message = await prepareMsg(accountAddress, data);
-        console.log('message', message);
-
         if (!message) return;
       } catch (err) {
         setError(err as string);

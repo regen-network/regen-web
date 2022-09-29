@@ -26,9 +26,9 @@ import { isVCSCreditClass } from '../../lib/ecocredit/api';
 import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
 import { useCreateProjectContext } from '../ProjectCreate';
 import { useCompactMetadata } from './hooks/useCompactMetadata';
+import { useGetJurisdiction } from './hooks/useGetJurisdiction';
 import { useProjectCreateSubmit } from './hooks/useProjectCreateSubmit';
 import {
-  getJurisdiction,
   getOnChainProjectId,
   getProjectReferenceID,
 } from './ProjectReview.util';
@@ -92,6 +92,7 @@ export const ProjectReview: React.FC = () => {
   const creditClassId = project?.creditClassByCreditClassId?.onChainId;
   const metadataRaw = project?.metadata;
   const metadata = useCompactMetadata({ metadataRaw });
+  const jurisdiction = useGetJurisdiction({ metadata });
   const isVCS = isVCSCreditClass(creditClassId);
 
   const txHash = deliverTxResponse?.transactionHash;
@@ -100,17 +101,9 @@ export const ProjectReview: React.FC = () => {
   const referenceId = getProjectReferenceID(metadata, creditClassId);
 
   const submit = async (): Promise<void> => {
-    let jurisdiction;
-    try {
-      jurisdiction = await getJurisdiction(metadata);
-      // eslint-disable-next-line
-      console.log(
-        'Jurisdiction ISO string based on location provided:',
-        jurisdiction,
-      );
-    } catch (err) {
+    if (!jurisdiction) {
       setBannerError(
-        `Error getting ISO string for jurisdiction: ${err as string}`,
+        `Error getting ISO string for jurisdiction. Please edit your location.`,
       );
       return;
     }
@@ -151,6 +144,7 @@ export const ProjectReview: React.FC = () => {
         <ItemDisplay>
           {metadata?.['schema:location']?.['geojson:place_name']}
         </ItemDisplay>
+        <ItemDisplay name="Jurisdiction">{jurisdiction}</ItemDisplay>
       </ReviewCard>
       <ReviewCard
         title="Description"

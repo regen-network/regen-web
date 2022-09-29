@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { JsonLdDocument, JsonLdProcessor } from 'jsonld';
 
 import { ProjectMetadataLDUnion } from 'generated/json-ld';
-import { COMPACT_CONTEXT } from 'lib/rdf.compact-context';
+import { COMPACTED_CONTEXT } from 'lib/rdf.compacted-context';
 
 type Props = {
   metadataRaw: JsonLdDocument;
@@ -17,7 +17,7 @@ export const useCompactMetadata = ({
     const compactMetadata = async (): Promise<void> => {
       const compactMetadata = await JsonLdProcessor.compact(
         metadataRaw,
-        COMPACT_CONTEXT,
+        COMPACTED_CONTEXT,
       );
       if (compactMetadata) {
         setMetadata(compactMetadata as Partial<ProjectMetadataLDUnion>);

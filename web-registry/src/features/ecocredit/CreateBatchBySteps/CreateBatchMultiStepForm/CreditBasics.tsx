@@ -101,8 +101,7 @@ export default function CreditBasics({
   const { wallet } = useWallet();
   const projects = useQueryProjectsByIssuer(wallet!.address); // TODO: We should not use the typescript bypass! here (should try to avoid using period)
 
-  const { values, validateForm, errors } =
-    useFormikContext<CreditBasicsFormValues>();
+  const { values, validateForm } = useFormikContext<CreditBasicsFormValues>();
   const { projectId } = values;
   const { classId, isVCS } = useUpdateProjectClass(projectId);
   const projectOptions = useUpdateProjectOptions(projects);

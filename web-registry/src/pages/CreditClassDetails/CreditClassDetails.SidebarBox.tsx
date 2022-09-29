@@ -1,8 +1,9 @@
-import { FlexCol } from 'web-components/lib/components/box';
+import { Flex } from 'web-components/lib/components/box';
 
 const SideBarBox: React.FC = ({ children }) => {
   return (
-    <FlexCol
+    <Flex
+      col
       sx={{
         borderRadius: '10px',
         border: theme => `1px solid ${theme.palette.grey[100]}`,
@@ -14,7 +15,7 @@ const SideBarBox: React.FC = ({ children }) => {
       }}
     >
       {children}
-    </FlexCol>
+    </Flex>
   );
 };
 

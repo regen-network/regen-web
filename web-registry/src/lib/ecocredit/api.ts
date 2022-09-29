@@ -855,23 +855,6 @@ export const queryProjectsByAdmin = async ({
   }
 };
 
-// ProjectsByClass
-
-interface QueryProjectsByClassProps extends EcocreditQueryClientProps {
-  request: DeepPartial<QueryProjectsByClassRequest>;
-}
-
-export const queryProjectsByClass = async ({
-  client,
-  request,
-}: QueryProjectsByClassProps): Promise<QueryProjectsByClassResponse> => {
-  try {
-    return await client.ProjectsByClass(request);
-  } catch (err) {
-    throw new Error(`Error fetching projects by class: ${err}`);
-  }
-};
-
 // Project (by id)
 
 interface QueryProjectProps extends EcocreditQueryClientProps {

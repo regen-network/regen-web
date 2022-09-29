@@ -24,6 +24,7 @@ const ProjectMetadataVCS: React.FC<MetadataProps> = ({ metadata }) => {
 
   const startDate = metadata?.['regen:projectStartDate']?.['@value'];
   const endDate = metadata?.['regen:projectEndDate']?.['@value'];
+  const methodology = metadata?.['regen:vcsMethodology'];
 
   const LineItem = (props: LineItemLabelAboveProps): JSX.Element => (
     <LineItemLabelAbove sx={{ mb: { xs: 6, sm: 8 } }} {...props} />
@@ -44,6 +45,28 @@ const ProjectMetadataVCS: React.FC<MetadataProps> = ({ metadata }) => {
             pt: 8,
           }}
         >
+          {projectId && (
+            <LineItem
+              label="vcs project id"
+              data={
+                <ArrowLink
+                  label={projectId.toString()}
+                  href={metadata?.['regen:vcsProjectPage']?.['@value'] || ''}
+                />
+              }
+            />
+          )}
+          {methodology && (
+            <LineItem
+              label="methodology"
+              data={
+                <ArrowLink
+                  label={methodology?.['schema:name']}
+                  href={methodology?.['schema:url']?.['@value'] || ''}
+                />
+              }
+            />
+          )}
           <LineItem
             label="offset generation method"
             data={metadata?.['regen:offsetGenerationMethod']}
@@ -59,17 +82,6 @@ const ProjectMetadataVCS: React.FC<MetadataProps> = ({ metadata }) => {
                     ] || ''
                   }
                   label={metadata?.['regen:projectActivity']?.['schema:name']}
-                />
-              }
-            />
-          )}
-          {projectId && (
-            <LineItem
-              label="vcs project id"
-              data={
-                <ArrowLink
-                  label={projectId.toString()}
-                  href={metadata?.['regen:vcsProjectPage']?.['@value'] || ''}
                 />
               }
             />

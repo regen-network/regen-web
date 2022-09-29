@@ -13,7 +13,7 @@ import Section from 'web-components/lib/components/section';
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
-import { ProjectMetadataLD } from 'generated/json-ld';
+import { CFCProjectMetadataLD, VCSProjectMetadataLD } from 'generated/json-ld';
 import { UseStateSetter } from 'types/react/use-state';
 
 import { ProjectMetadataCFC } from 'components/molecules/ProjectMetadataCFC';
@@ -24,7 +24,7 @@ import {
   useSdgByIriQuery,
 } from '../../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../../lib/imgSrc';
-import { qudtUnit, qudtUnitMap } from '../../../lib/rdf';
+import { getAreaUnit } from '../../../lib/rdf';
 import { getDisplayParty, getParty } from '../../../lib/transform';
 import { client } from '../../../sanity';
 import {
@@ -46,7 +46,6 @@ function ProjectTopSection({
   isGISFile,
   batchData,
   setPaginationParams,
-  metadata,
   projectId,
 }: {
   data?: any; // TODO: when all project are onchain, this can be ProjectByOnChainIdQuery
@@ -58,8 +57,6 @@ function ProjectTopSection({
     totals?: BatchTotalsForProject;
   };
   setPaginationParams: UseStateSetter<TablePaginationParams>;
-  metadata?: any;
-  // metadata?: Partial<ProjectMetadataLD>; TODO
   projectId?: string;
 }): JSX.Element {
   const styles = useProjectTopSectionStyles();
@@ -68,26 +65,31 @@ function ProjectTopSection({
   const apiServerUrl = process.env.REACT_APP_API_URI;
 
   const project = data?.projectByOnChainId || data?.projectByHandle; // TODO: eventually just projectByOnChainId
-
+  const metadata = project?.metadata; // TODO: this is from postgres metadata - needs to be from metadata resolver instead
   const videoURL = metadata?.['regen:videoURL']?.['@value'];
   const landStewardPhoto = metadata?.['regen:landStewardPhoto']?.['@value'];
+  const projectSize = metadata?.['regen:projectSize'];
   const area =
-    metadata?.['regen:projectSize']?.['qudt:numericValue']?.['@value'];
-  const unit: qudtUnit | undefined =
-    metadata?.['regen:projectSize']?.['qudt:unit']?.['@value'];
+    projectSize?.['qudt:numericValue']?.['@value'] ||
+    projectSize?.['qudt:numericValue'];
+  const unit =
+    projectSize?.['qudt:unit']?.['@value'] || projectSize?.['qudt:unit'];
+  const areaUnit = getAreaUnit(unit);
   const creditClass = project?.creditClassByCreditClassId;
   const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
-  const methodologyVersion =
-    creditClass?.methodologyByMethodologyId?.methodologyVersionsById
-      ?.nodes?.[0];
   const quote = metadata?.['regen:projectQuote'];
-  const glanceText = metadata?.['regen:glanceText']?.['@list'];
+  const glanceText: string[] | undefined =
+    metadata?.['regen:glanceText']?.['@list'];
   const primaryDescription =
     metadata?.['regen:landStory'] || metadata?.['schema:description'];
   const landStewardStoryTitle = metadata?.['regen:landStewardStoryTitle'];
   const landStewardStory = metadata?.['regen:landStewardStory'];
-  const isVCSProject = !!metadata?.['regen:vcsProjectId'];
-  const isCFCProject = !!metadata?.['regen:cfcProjectId'];
+  const isVCSProject = !!(metadata as VCSProjectMetadataLD)?.[
+    'regen:vcsProjectId'
+  ];
+  const isCFCProject = !!(metadata as CFCProjectMetadataLD)?.[
+    'regen:cfcProjectId'
+  ];
 
   const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.[
     '@list'
@@ -123,7 +125,7 @@ function ProjectTopSection({
               // TODO Format and show on-chain project location if no off-chain location
               place={metadata?.['schema:location']?.['place_name']}
               area={area}
-              areaUnit={unit && qudtUnitMap[unit]}
+              areaUnit={areaUnit}
             />
             <Box
               sx={{
@@ -139,17 +141,6 @@ function ProjectTopSection({
                   name={
                     creditClassVersion?.metadata?.[
                       'http://regen.network/offsetGenerationMethod'
-                    ]
-                  }
-                />
-              )}
-              {methodologyVersion && (
-                <ProjectTopLink
-                  label="methodology"
-                  name={methodologyVersion.name}
-                  url={
-                    methodologyVersion.metadata?.['http://schema.org/url']?.[
-                      '@value'
                     ]
                   }
                 />
@@ -198,9 +189,14 @@ function ProjectTopSection({
               sx={{ mt: [8, 20], mb: [2, 8] }}
             />
           </Link>
-          {isVCSProject && <ProjectMetadataVCS metadata={metadata} />}
+          {isVCSProject && (
+            <ProjectMetadataVCS metadata={metadata as VCSProjectMetadataLD} />
+          )}
           {isCFCProject && (
-            <ProjectMetadataCFC metadata={metadata} projectId={projectId} />
+            <ProjectMetadataCFC
+              metadata={metadata as CFCProjectMetadataLD}
+              projectId={projectId}
+            />
           )}
           <LazyLoad offset={50}>
             {videoURL &&

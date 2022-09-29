@@ -152,7 +152,7 @@ function ProjectDetails(): JSX.Element {
     viewOnLedger,
   } = useIssuanceModal(data);
 
-  // if (!isLoading && !project) return <NotFoundPage />;
+  if (!isLoading && !project) return <NotFoundPage />;
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO
@@ -191,7 +191,6 @@ function ProjectDetails(): JSX.Element {
         setPaginationParams={setPaginationParams}
         geojson={geojson}
         isGISFile={isGISFile}
-        metadata={onChainProjectMetadata}
         projectId={projectId}
       />
 

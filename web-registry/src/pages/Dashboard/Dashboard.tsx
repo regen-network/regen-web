@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react';
 import { Box, SxProps } from '@mui/material';
 import { useTheme } from '@mui/styles';
-import { QueryProjectsByAdminResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { Center, Flex } from 'web-components/lib/components/box';
 import { CreditBatchIcon } from 'web-components/lib/components/icons/CreditBatchIcon';
@@ -15,9 +14,9 @@ import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 
 import { useWallet } from 'lib/wallet';
 
-import { useEcocreditQuery } from 'hooks';
 import { useQueryIfCreditClassAdmin } from 'hooks/useQueryIfCreditClassAdmin';
 import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator';
+import { useQueryIfIssuer } from 'hooks/useQueryIfIssuer';
 import { useQueryIfProjectAdmin } from 'hooks/useQueryIfProjectAdmin';
 
 import MyCreditBatches from './MyCreditBatches';
@@ -44,16 +43,11 @@ const sxs = {
 
 const Dashboard = (): JSX.Element => {
   const theme = useTheme();
+  const isIssuer = useQueryIfIssuer();
   const isCreditClassCreator = useQueryIfCreditClassCreator();
   const isCreditClassAdmin = useQueryIfCreditClassAdmin();
   const isProjectAdmin = useQueryIfProjectAdmin();
   const { wallet } = useWallet();
-  const { data: projectsResponse } =
-    useEcocreditQuery<QueryProjectsByAdminResponse>({
-      query: 'projectsByAdmin',
-      params: { admin: wallet?.address },
-    });
-  const isIssuer = (projectsResponse?.projects.length ?? 0) > 0;
   const projectTabHidden = !isIssuer || !isProjectAdmin;
   const creditClassTabHidden = !isCreditClassCreator || !isCreditClassAdmin;
 

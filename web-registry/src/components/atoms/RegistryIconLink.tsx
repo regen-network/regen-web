@@ -9,8 +9,8 @@ export const RegistryIconLink: React.FC<{ color: string }> = ({ color }) => {
     <Link to="/">
       <Box
         sx={{
-          width: { xs: 100, sm: 117 },
-          height: { xs: 'auto', sm: 77 },
+          width: { xs: 62, md: 117 },
+          height: { xs: 'auto', md: 77 },
         }}
       >
         <RegenMarketIcon sx={{ color }} />

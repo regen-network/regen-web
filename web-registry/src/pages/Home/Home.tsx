@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Box, CardMedia, useMediaQuery } from '@mui/material';
-import { useTheme } from '@mui/styles';
+import { Box, CardMedia } from '@mui/material';
+import { gradients } from 'styles/gradients';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { Loading } from 'web-components/lib/components/loading';
@@ -28,7 +28,6 @@ const Home: React.FC = () => {
   const [modalLink, setModalLink] = useState<string>('');
 
   const styles = useHomeStyles();
-  const theme = useTheme();
 
   // Featured projects fetching
 
@@ -41,8 +40,6 @@ const Home: React.FC = () => {
   const creditClassesContent = creditClassData?.allCreditClass;
 
   const { batchesWithSupply, setPaginationParams } = usePaginatedBatches();
-
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   useEffect(() => {
     const anchor = window.location.hash.slice(1);
@@ -60,8 +57,13 @@ const Home: React.FC = () => {
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <BackgroundImgSection
         img={heroSection?.background?.image?.asset?.url || ''}
-        linearGradient="linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%);"
+        linearGradient="linear-gradient(203.09deg, #000000 45.49%, #5E9078 92.1%);"
         classes={{ section: styles.section }}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          height: [600, 600, 760],
+        }}
       >
         <Box
           sx={{
@@ -72,7 +74,7 @@ const Home: React.FC = () => {
             pt: { xs: 8, sm: 15 },
           }}
         >
-          <Box sx={{ pr: 4, maxWidth: '585px' }}>
+          <Box sx={{ pr: 4, alignSelf: 'center', maxWidth: '585px' }}>
             <Title
               variant="h1"
               sx={{
@@ -80,7 +82,14 @@ const Home: React.FC = () => {
                 lineHeight: { xs: '140%', sm: '130%' },
               }}
             >
-              {heroSection?.title}
+              Discover{' '}
+              <Box sx={{ display: 'inline-block', ...gradients.blueGreen }}>
+                Ecocredits
+              </Box>{' '}
+              and NCT{' '}
+              <Box sx={{ display: 'inline-block', ...gradients.blueGreen }}>
+                basket tokens
+              </Box>
             </Title>
             <Body
               as="div"
@@ -99,7 +108,7 @@ const Home: React.FC = () => {
           <Box
             sx={{
               alignSelf: 'center',
-              maxWidth: { xs: '187px', sm: '100%' },
+              maxWidth: ['252px', '560px'],
             }}
           >
             <img
@@ -129,7 +138,7 @@ const Home: React.FC = () => {
         >
           <CreditClassCards
             btnText="Learn More"
-            justifyContent={isMobile ? 'center' : 'flex-start'}
+            justifyContent={['center', 'center', 'flex-start']}
             creditClassesContent={creditClassesContent} // CMS data
           />
         </Section>

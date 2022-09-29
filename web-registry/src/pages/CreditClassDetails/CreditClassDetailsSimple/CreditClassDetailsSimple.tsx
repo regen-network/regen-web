@@ -19,7 +19,7 @@ import { AdditionalInfo } from '../CreditClassDetails.AdditionalInfo';
 import { SideBarBox } from '../CreditClassDetails.SidebarBox';
 
 interface CreditDetailsProps {
-  dbClass: CreditClassByOnChainIdQuery['creditClassByOnChainId'];
+  dbClass?: CreditClassByOnChainIdQuery['creditClassByOnChainId'];
   onChainClass: ClassInfo;
   issuers?: string[];
   metadata?: CreditClassMetadataLD;

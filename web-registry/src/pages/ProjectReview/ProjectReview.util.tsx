@@ -62,10 +62,6 @@ export const getJurisdiction = async (
     const placeSegments = location['geojson:place_name'].split(',');
     // find the country key
     placeSegments.forEach((segment: string) => {
-      const isUnitedStates =
-        segment.toLowerCase().includes('united states') ||
-        segment.toLowerCase().includes('usa'); // TODO
-      if (isUnitedStates) countryKey = 'US';
       const foundCountry = getCountryKey(segment.trim());
       if (foundCountry) {
         countryKey = foundCountry;
@@ -108,6 +104,9 @@ const getCountryKey = (country: string): string => {
     );
   });
   if (foundKey) return foundKey;
+  // TODO: iso3166 did not pick up these US variants. May need to add more data sources.
+  const isUnitedStates = /United States|USA|U.S./.test(country);
+  if (isUnitedStates) return 'US';
   return '';
 };
 

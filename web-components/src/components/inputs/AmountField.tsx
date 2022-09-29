@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 import { Field } from 'formik';
@@ -39,8 +39,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontFamily: 'Muli',
     fontSize: '12px',
     color: theme.palette.info.dark,
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(1),
   },
   denom: {
     fontFamily: 'Muli',
@@ -52,39 +51,56 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface AuxiliarLabelProps {
   availableAmount: number;
   denom: string;
+  auxiliarLabel?: string;
   className?: string;
 }
 
 interface AmountLabelProps {
-  label?: string;
+  label?: string | JSX.Element;
+  auxiliarLabel?: string;
   availableAmount: number;
   denom: string;
 }
 
 interface AmountFieldProps extends AmountLabelProps {
   name: string;
+  auxiliarLabel?: string;
   className?: string;
 }
 
 const AuxiliarLabel: React.FC<AuxiliarLabelProps> = ({
   availableAmount,
   denom,
+  auxiliarLabel,
   className,
 }) => {
   const styles = useStyles();
   return (
-    <span className={className}>
-      <span className={styles.availableLabel}>Available:</span>{' '}
-      <span className={styles.availableAmount}>
-        {getFormattedNumber(availableAmount)}
-      </span>
-      <span className={styles.denom}>{denom}</span>
-    </span>
+    <Box className={className} component="span" sx={{ flexGrow: 1 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: auxiliarLabel ? 'space-between' : 'flex-end',
+        }}
+      >
+        {auxiliarLabel && (
+          <span className={styles.availableLabel}>{auxiliarLabel}</span>
+        )}
+        <span>
+          <span className={styles.availableLabel}>Available:</span>{' '}
+          <span className={styles.availableAmount}>
+            {getFormattedNumber(availableAmount)}
+          </span>
+          <span className={styles.denom}>{denom}</span>
+        </span>
+      </Box>
+    </Box>
   );
 };
 
 const AmountLabel: React.FC<AmountLabelProps> = ({
   label,
+  auxiliarLabel,
   availableAmount,
   denom,
 }) => {
@@ -94,6 +110,7 @@ const AmountLabel: React.FC<AmountLabelProps> = ({
       <span className={styles.mainLabel}>{label}</span>
       <AuxiliarLabel
         availableAmount={availableAmount}
+        auxiliarLabel={auxiliarLabel}
         denom={denom}
         className={styles.auxiliarLabelDesktop}
       />
@@ -147,6 +164,7 @@ const AmountTextField: React.FC<AmountTextFieldProps> = ({
 const AmountField: React.FC<AmountFieldProps> = ({
   name,
   label = 'Amount',
+  auxiliarLabel,
   availableAmount,
   denom,
   className,
@@ -163,6 +181,7 @@ const AmountField: React.FC<AmountFieldProps> = ({
         label={
           <AmountLabel
             label={label}
+            auxiliarLabel={auxiliarLabel}
             availableAmount={availableAmount}
             denom={denom}
           />

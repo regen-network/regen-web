@@ -6,6 +6,7 @@ import type { Item } from 'web-components/lib/components/modal/TxModal';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import type { UseStateSetter } from 'types/react/use-state';
+import { getAccountUrl } from 'lib/block-explorer';
 
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
@@ -40,16 +41,22 @@ const useCreditSendSubmit = ({
     async (values: CreditSendFormValues): Promise<void> => {
       if (!accountAddress) return Promise.reject();
       const batchDenom = credits[creditSendOpen].denom;
-      const recipient = values.recipient;
+      const {
+        withRetire,
+        recipient,
+        totalAmount,
+        retirementJurisdiction,
+        note,
+      } = values;
       const msg = MsgSend.fromPartial({
         sender: accountAddress,
         recipient,
         credits: [
           {
             batchDenom,
-            tradableAmount: values.tradableAmount.toString(),
-            retiredAmount: values.retiredAmount.toString(),
-            retirementJurisdiction: values.retirementJurisdiction,
+            tradableAmount: withRetire ? '' : totalAmount.toString(),
+            retiredAmount: withRetire ? totalAmount.toString() : '',
+            retirementJurisdiction: retirementJurisdiction,
           },
         ],
       });
@@ -57,7 +64,7 @@ const useCreditSendSubmit = ({
       const tx = {
         msgs: [msg],
         fee: undefined,
-        memo: values?.note,
+        memo: note,
       };
 
       await signAndBroadcast(tx, () => setCreditSendOpen(-1));
@@ -69,16 +76,12 @@ const useCreditSendSubmit = ({
               value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
             },
             {
-              label: 'amount tradable',
-              value: { name: values.tradableAmount.toString() },
-            },
-            {
-              label: 'amount retired',
-              value: { name: values.retiredAmount.toString() },
+              label: 'amount sent',
+              value: { name: totalAmount.toString() },
             },
             {
               label: 'recipient',
-              value: { name: recipient },
+              value: { name: recipient, url: getAccountUrl(recipient) },
             },
           ].filter(item => item.value.name !== '0'),
         );

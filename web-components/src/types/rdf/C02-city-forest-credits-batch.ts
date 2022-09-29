@@ -5,7 +5,6 @@ import { UrlType } from 'src/utils/schemaURL';
 export interface CFCBatchMetadataLD {
   '@context'?: Context;
   '@type'?: string;
-  // '@type'?: 'regen:C02-CreditBatch';
   'regen:cfcCreditSerialNumbers'?: string[];
   'regen:cfcVintageYear'?: XSDYear;
   'regen:verificationReports'?: UrlType[];

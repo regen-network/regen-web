@@ -1,5 +1,7 @@
 import { Box } from '@mui/material';
 
+import { Flex } from 'web-components/lib/components/box';
+import { Body } from 'web-components/lib/components/typography';
 import { CFCBatchMetadataLD } from 'web-components/lib/types/rdf/C02-city-forest-credits-batch';
 
 import { LinkOrDash } from './BatchMetadata.LinkOrDash';
@@ -15,8 +17,13 @@ export const CFCBatchMetadata = ({
   return (
     <>
       <MetaDetail label="cfc retirement serial numbers">
-        {/* TODO */}
-        {serialNumbers?.join(', ') || '-'}
+        <Flex col>
+          {serialNumbers?.map((serialNumber: string) => (
+            <Body mobileSize="md" styleLinks={false}>
+              {serialNumber}
+            </Body>
+          ))}
+        </Flex>
       </MetaDetail>
       <MetaDetail label="cfc vintage year">
         {data?.['regen:cfcVintageYear']?.['@value'] || '-'}
@@ -24,7 +31,7 @@ export const CFCBatchMetadata = ({
       <MetaDetail label="verification reports">
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           {reports && reports?.length > 0
-            ? reports?.map((report, i) => (
+            ? reports?.map((report: any, i: number) => (
                 <LinkOrDash
                   key={i}
                   href={report?.['schema:url']?.['@value']}

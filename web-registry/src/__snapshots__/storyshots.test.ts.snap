@@ -2700,6 +2700,126 @@ exports[`Storyshots Registry/Molecules/Scrollable Codebox Scrollable Codebox 1`]
 </MemoryRouter>
 `;
 
+exports[`Storyshots Registry/Organisms/Credit Class Form Create Credit Class Form 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Registry/Organisms/Credit Class Form Credit Class Finished 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Registry/Organisms/Credit Class Form Credit Class Form 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Registry/Organisms/Credit Class Form Credit Class Review 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
 exports[`Storyshots Registry/Organisms/MediaForm Media Form 1`] = `
 <MemoryRouter
   initialEntries={

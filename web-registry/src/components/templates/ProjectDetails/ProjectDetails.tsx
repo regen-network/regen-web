@@ -151,7 +151,7 @@ function ProjectDetails(): JSX.Element {
     metadata: offChainProjectMetadata,
     creditClassName,
   });
-  const mediaData = useMedia({ metadata: onChainProjectMetadata, geojson });
+  const mediaData = useMedia({ metadata: offChainProjectMetadata, geojson });
   const impactData = useImpact({ coBenefitsIris, primaryImpactIRI });
   const isLoading = loading || loadingDataByHandle;
 

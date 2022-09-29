@@ -1,5 +1,5 @@
 import React from 'react';
-import { Theme, useTheme } from '@mui/material';
+import { Box, MenuItem, Theme, useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { TextFieldProps } from 'formik-mui';
 
@@ -17,7 +17,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 
 export interface Option {
   value: string;
-  label: string;
+  label: string | JSX.Element;
   disabled?: boolean;
   selected?: boolean;
 }
@@ -26,6 +26,7 @@ export interface SelectTextFieldProps
   extends TextFieldProps,
     DefaultStyleProps {
   options?: Option[];
+  native?: boolean;
 }
 
 interface StyleProps {
@@ -35,6 +36,7 @@ interface StyleProps {
 export default function SelectTextField({
   options,
   disabled,
+  native = true,
   ...props
 }: SelectTextFieldProps): JSX.Element {
   const {
@@ -50,7 +52,7 @@ export default function SelectTextField({
       className={styles.root}
       select
       SelectProps={{
-        native: true,
+        native,
         IconComponent: disabled
           ? () => <DropdownIcon color={theme.palette.grey['400']} />
           : DropdownIcon,
@@ -58,17 +60,20 @@ export default function SelectTextField({
     >
       {options ? (
         options.map(option => (
-          <option
+          <Box
             key={option.value}
             value={option.value}
             disabled={option.disabled}
             selected={option.selected}
+            component={native ? 'option' : MenuItem}
           >
             {option.label}
-          </option>
+          </Box>
         ))
       ) : (
-        <option key="loading">No options available</option>
+        <Box component={native ? 'option' : MenuItem} key="loading">
+          No options available
+        </Box>
       )}
     </TextField>
   );

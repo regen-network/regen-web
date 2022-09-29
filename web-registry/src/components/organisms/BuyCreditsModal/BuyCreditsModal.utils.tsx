@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
@@ -20,7 +21,7 @@ type GetSellOrderLabelParams = {
 export const getSellOrderLabel = ({
   sellOrder,
   allowedDenomsData,
-}: GetSellOrderLabelParams): string => {
+}: GetSellOrderLabelParams): JSX.Element => {
   const { id, askAmount, askDenom, quantity, askBaseDenom } = {
     ...sellOrder,
   };
@@ -30,7 +31,17 @@ export const getSellOrderLabel = ({
     denom: askDenom,
   });
   const denomPrefix = getDenomCurrencyPrefix({ baseDenom: askBaseDenom });
-  return `${denomPrefix}${price} ${displayDenom}/credit: ${quantity} credit(s) available (#${id})`;
+  return (
+    <Box sx={{ ml: 4 }}>
+      <Box
+        sx={{ display: 'inline', fontWeight: 700 }}
+      >{`${denomPrefix}${price} ${displayDenom}/credit: `}</Box>
+      <Box
+        sx={{ display: 'inline', mr: 1 }}
+      >{`${quantity} credit(s) available`}</Box>
+      <Box sx={{ display: 'inline', color: 'info.main' }}>{`(#${id})`}</Box>
+    </Box>
+  );
 };
 
 /* getSellOrdersOptions */
@@ -84,9 +95,17 @@ export const getOptions = ({
   return allOptionsLength > 1
     ? [
         { label: 'Choose a sell order', value: '', disabled: true },
-        { label: 'TRADABLE AND RETIRABLE', value: '', disabled: true },
+        {
+          label: <Box sx={{ fontWeight: 700 }}>{'TRADABLE AND RETIRABLE'}</Box>,
+          value: '',
+          disabled: true,
+        },
         ...retirableAndTradableOptions,
-        { label: 'RETIRABLE ONLY', value: '', disabled: true },
+        {
+          label: <Box sx={{ fontWeight: 700 }}>{'RETIRABLE ONLY'}</Box>,
+          value: '',
+          disabled: true,
+        },
         ...retirableOptions,
       ]
     : retirableOptions.concat(retirableAndTradableOptions);

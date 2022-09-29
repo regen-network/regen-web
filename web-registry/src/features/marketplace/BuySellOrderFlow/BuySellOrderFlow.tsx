@@ -133,11 +133,12 @@ export const BuySellOrderFlow = ({
 
   useEffect(() => {
     if (isFlowStarted && selectedProject && accountAddress) {
+      refetchSellOrders();
       setIsBuyModalOpen(true);
     } else if (selectedProject && isFlowStarted && !accountAddress) {
       setDisplayErrorBanner(true);
     }
-  }, [selectedProject, isFlowStarted, accountAddress]);
+  }, [selectedProject, isFlowStarted, accountAddress, refetchSellOrders]);
 
   useCheckSellOrderAvailabilty({
     selectedSellOrderIdRef,

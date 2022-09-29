@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Grid } from '@mui/material';
 
+import { useCreateProjectContext } from 'pages/ProjectCreate';
+
 import {
   useShaclGraphByUriQuery,
   useUpdateProjectByIdMutation,
@@ -17,6 +19,7 @@ const ChooseCreditClass: React.FC = () => {
   const [error, setError] = useErrorTimeout();
   const { projectId } = useParams();
   const { creditClassOptions, loading } = useGetCreditClassOptions();
+  const { setCreditClassId } = useCreateProjectContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
       uri: 'http://regen.network/ProjectPageShape',
@@ -30,6 +33,7 @@ const ChooseCreditClass: React.FC = () => {
   ): Promise<void> {
     if (graphData?.shaclGraphByUri?.graph) {
       const metadata = getProjectPageBaseData(creditClassOnChainId);
+      setCreditClassId(creditClassOnChainId);
 
       try {
         const report = await validate(
@@ -50,7 +54,6 @@ const ChooseCreditClass: React.FC = () => {
               },
             },
           });
-
           navigate(`/project-pages/${projectId}/basic-info`);
         } catch (e) {
           setError(`There was a problem updating this project: ${e}`);

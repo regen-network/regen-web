@@ -56,11 +56,7 @@ const Home: React.FC = () => {
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <BackgroundImgSection
-        img={
-          'https://cdn.sanity.io/images/jm12rn9t/production/ae7630b9aa71e3d701b692ed576ba0fbd4c0433a-1440x760.jpg?w=2000&fit=max&auto=format' ||
-          heroSection?.background?.image?.asset?.url ||
-          ''
-        }
+        img={heroSection?.background?.image?.asset?.url || ''}
         linearGradient="linear-gradient(203.09deg, #000000 45.49%, #5E9078 92.1%);"
         classes={{ section: styles.section }}
         sx={{
@@ -118,11 +114,7 @@ const Home: React.FC = () => {
             <img
               loading="lazy"
               style={{ width: '100%' }}
-              src={
-                'https://cdn.sanity.io/images/jm12rn9t/production/5402a5e5868601a1920b270178dfbe0b60da6683-590x503.png?w=2000&fit=max&auto=format' ||
-                heroSection?.icon?.image?.asset?.url ||
-                ''
-              }
+              src={heroSection?.icon?.image?.asset?.url || ''}
               alt={heroSection?.icon?.imageAlt || 'icon'}
             />
           </Box>

@@ -1,14 +1,16 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
+import { Box } from '@mui/system';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 
 import { Theme } from '../../theme/muiTheme';
+import { Flex } from '../box';
+import InfoIcon from '../icons/InfoIcon';
 import AgreeErpaCheckbox from '../inputs/AgreeErpaCheckbox';
 import AmountField from '../inputs/AmountField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import TextField from '../inputs/TextField';
 import {
-  insufficientCredits,
   invalidRegenAddress,
   isValidAddress,
   requiredMessage,
@@ -16,14 +18,13 @@ import {
   validateAmount,
 } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
+import InfoTooltip from '../tooltip/InfoTooltip';
 import { Subtitle } from '../typography';
 import {
   BottomCreditRetireFieldsProps,
   CreditRetireFields,
   initialValues as initialValuesRetire,
   RetireFormValues,
-  RetirementReminder,
-  validateCreditRetire,
 } from './CreditRetireForm';
 import Submit from './Submit';
 
@@ -64,7 +65,7 @@ interface FormProps extends CreditSendProps {
 export interface FormValues extends RetireFormValues {
   sender: string;
   recipient: string;
-  tradableAmount: number;
+  totalAmount: number;
   withRetire?: boolean;
   agreeErpa: boolean;
 }
@@ -83,7 +84,7 @@ const CreditSendForm: React.FC<FormProps> = ({
   const initialValues = {
     sender,
     recipient: '',
-    tradableAmount: 0,
+    totalAmount: 0,
     withRetire: false,
     ...initialValuesRetire,
     agreeErpa: false,
@@ -104,36 +105,11 @@ const CreditSendForm: React.FC<FormProps> = ({
       errors.recipient = invalidRegenAddress;
     }
 
-    if (!values.withRetire) {
-      const errAmount = validateAmount(
-        availableTradableAmount,
-        values.tradableAmount,
-      );
-      if (errAmount) errors.tradableAmount = errAmount;
-    }
-
-    // Retire form validation (optional subform)
-    if (values.withRetire) {
-      // also check tradable amount because with retirement is allowed to be zero
-      const errAmount = validateAmount(
-        availableTradableAmount,
-        values.tradableAmount,
-        undefined,
-        true, //zero allowed
-      );
-      if (errAmount) errors.tradableAmount = errAmount;
-
-      errors = validateCreditRetire(availableTradableAmount, values, errors);
-
-      // combo validation: send + retire
-      if (
-        Number(values.tradableAmount) + Number(values.retiredAmount) >
-        availableTradableAmount
-      ) {
-        errors.tradableAmount = insufficientCredits;
-        errors.retiredAmount = insufficientCredits;
-      }
-    }
+    const errAmount = validateAmount(
+      availableTradableAmount,
+      values.totalAmount,
+    );
+    if (errAmount) errors.totalAmount = errAmount;
 
     if (!values.agreeErpa) errors.agreeErpa = requirementAgreement;
 
@@ -161,9 +137,27 @@ const CreditSendForm: React.FC<FormProps> = ({
             label="Recipient"
             component={TextField}
           />
+
           <AmountField
-            name={'tradableAmount'}
-            label={'Amount tradable'}
+            name={'totalAmount'}
+            label={
+              <Flex align="center">
+                <Box sx={{ mr: 1 }}>{'Amount of credits'}</Box>
+                <InfoTooltip
+                  title="By default these credits are tradable but you may check “retire all credits upon transfer” below to automatically retire them upon sending."
+                  arrow
+                  placement="top"
+                >
+                  <Box
+                    sx={{
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <InfoIcon />
+                  </Box>
+                </InfoTooltip>
+              </Flex>
+            }
             availableAmount={availableTradableAmount}
             denom={batchDenom}
           />
@@ -175,14 +169,18 @@ const CreditSendForm: React.FC<FormProps> = ({
             className={styles.checkboxLabel}
             label={
               <Subtitle size="lg" color="primary.contrastText">
-                Send additional retired credits
+                <Box sx={{ display: 'inline' }}>
+                  Retire all credits upon transfer
+                </Box>{' '}
+                <Box sx={{ display: 'inline', fontWeight: 400 }}>
+                  {'(retirement is permanent and non-reversible)'}
+                </Box>
               </Subtitle>
             }
           />
 
           {values.withRetire && (
             <>
-              <RetirementReminder sx={{ mt: 8 }} />
               <CreditRetireFields
                 availableTradableAmount={availableTradableAmount}
                 batchDenom={batchDenom}

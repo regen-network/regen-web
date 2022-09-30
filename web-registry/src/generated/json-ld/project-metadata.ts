@@ -8,7 +8,7 @@ export interface ProjectMetadataLD {
   'schema:image': UrlType;
   'schema:creditText': string;
   'schema:description'?: string;
-  'schema:location': any; // TODO
+  'schema:location': any;
   'regen:projectType': string;
   'regen:projectActivity': ProjectActivity;
   'regen:projectDeveloper': ProjectStakeholder;

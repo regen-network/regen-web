@@ -21,7 +21,7 @@ import { MemoizedProjects as Projects } from '../CreditClassDetails.Projects';
 import { SideBarBox } from '../CreditClassDetails.SidebarBox';
 
 interface CreditDetailsProps {
-  dbClass: CreditClassByOnChainIdQuery['creditClassByOnChainId'];
+  dbClass?: CreditClassByOnChainIdQuery['creditClassByOnChainId'];
   onChainClass: ClassInfo;
   issuers?: string[];
   metadata?: CreditClassMetadataLD;

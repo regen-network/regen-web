@@ -145,7 +145,7 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
           isLandSteward={isLandSteward}
         />
       )}
-      {onChainClass && dbCreditClassByOnChainId && (
+      {onChainClass && (
         <CreditClassDetailsSimple
           dbClass={dbCreditClassByOnChainId}
           onChainClass={onChainClass}

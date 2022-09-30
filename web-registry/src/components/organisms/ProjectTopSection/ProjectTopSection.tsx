@@ -110,8 +110,9 @@ function ProjectTopSection({
   const creditClassSanity = findSanityCreditClass({
     sanityCreditClassData,
     creditClassIdOrUrl:
-      creditClass?.onChainId ??
-      creditClassVersion?.metadata?.['http://schema.org/url']?.['@value'],
+      creditClass?.onChainId ||
+      creditClassVersion?.metadata?.['http://schema.org/url']?.['@value'] ||
+      projectId?.split('-')?.[0], // if no offChain credit class
   });
 
   return (

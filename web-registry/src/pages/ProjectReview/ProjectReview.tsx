@@ -37,7 +37,7 @@ import { VCSMetadata } from './ProjectReview.VCSMetadata';
 export const ProjectReview: React.FC = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
-  const { setDeliverTxResponse } = useCreateProjectContext();
+  const { setDeliverTxResponse, creditClassId } = useCreateProjectContext();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { data, loading } = useProjectByIdQuery({
@@ -89,7 +89,6 @@ export const ProjectReview: React.FC = () => {
   const { projectCreateSubmit } = useProjectCreateSubmit({ signAndBroadcast });
   const project = data?.projectById;
   const editPath = `/project-pages/${projectId}`;
-  const creditClassId = project?.creditClassByCreditClassId?.onChainId;
   const metadataRaw = project?.metadata;
   const metadata = useCompactMetadata({ metadataRaw });
   const jurisdiction = useGetJurisdiction({ metadata });

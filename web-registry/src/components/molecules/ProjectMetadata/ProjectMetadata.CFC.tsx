@@ -29,6 +29,8 @@ const ProjectMetadataCFC: React.FC<CFCMetadataProps> = ({
   const startDate = metadata?.['regen:projectStartDate']?.['@value'];
   const endDate = metadata?.['regen:projectEndDate']?.['@value'];
   const offsetProtocol = metadata?.['regen:offsetProtocol'];
+  const projectDesignDocument = metadata?.['regen:projectDesignDocument'];
+  const projectActivity = metadata?.['regen:projectActivity'];
 
   return (
     <Box sx={{ pt: 8 }}>
@@ -42,30 +44,28 @@ const ProjectMetadataCFC: React.FC<CFCMetadataProps> = ({
           }}
         >
           <MetaDetail label="project id" data={projectId} />
-          <MetaDetail
-            label="documents"
-            data={
-              <ArrowLink
-                label="Project Design Document"
-                href={metadata?.['regen:projectDesignDocument'] || ''}
-              />
-            }
-          />
+          {projectDesignDocument && (
+            <MetaDetail
+              label="documents"
+              data={
+                <ArrowLink
+                  label="Project Design Document"
+                  href={String(projectDesignDocument) || ''}
+                />
+              }
+            />
+          )}
           <MetaDetail
             label="offset generation method"
             data={metadata?.['regen:offsetGenerationMethod']}
           />
-          {metadata?.['regen:projectActivity']?.['schema:name'] && (
+          {projectActivity?.['schema:name'] && (
             <MetaDetail
               label="project activity"
               data={
                 <ArrowLink
-                  label={metadata?.['regen:projectActivity']?.['schema:name']}
-                  href={
-                    metadata?.['regen:projectActivity']?.['schema:url']?.[
-                      '@value'
-                    ] || ''
-                  }
+                  label={projectActivity?.['schema:name']}
+                  href={projectActivity?.['schema:url']?.['@value'] || ''}
                 />
               }
             />

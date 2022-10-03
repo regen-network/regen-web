@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
+import { useAnalytics } from 'use-analytics';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
@@ -57,6 +58,7 @@ export const BuySellOrderFlow = ({
   const selectedSellOrderIdRef = useRef<number>();
   const submittedQuantityRef = useRef<number>();
   const navigate = useNavigate();
+  const { track } = useAnalytics();
 
   const closeBuyModal = (): void => {
     setIsBuyModalOpen(false);
@@ -77,6 +79,7 @@ export const BuySellOrderFlow = ({
     selectedSellOrderIdRef.current = undefined;
   };
   const handleError = (): void => {
+    console.log('handleError of the BuySellOrderFlow is triggered');
     closeProcessingModal();
     setTxModalTitle('Buy Credits Error');
   };

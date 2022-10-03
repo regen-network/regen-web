@@ -243,7 +243,7 @@ export default function Header({
               display={{ xs: 'none', md: 'block' }}
             >
               <MenuList className={styles.menuList}>
-                {menuItems?.map(item, index => {
+                {menuItems?.map((item, index) => {
                   return (
                     <HeaderMenuHover
                       key={index}

@@ -7,7 +7,9 @@ export default {
   component: MarketplaceLaunchBanner,
 } as ComponentMeta<typeof MarketplaceLaunchBanner>;
 
-const Template: ComponentStory<typeof MarketplaceLaunchBanner> = args => <MarketplaceLaunchBanner {...args}/>;
+const Template: ComponentStory<typeof MarketplaceLaunchBanner> = () => (
+  <MarketplaceLaunchBanner />
+);
 
 export const Default = Template.bind({});
 

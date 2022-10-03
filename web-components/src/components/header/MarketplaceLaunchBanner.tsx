@@ -2,10 +2,7 @@ import { Link, useTheme } from '@mui/material';
 
 import { Subtitle } from '../typography';
 
-type Props = {};
-
-
-const MarketplaceLaunchBanner = ({}: Props): JSX.Element => {
+const MarketplaceLaunchBanner = (): JSX.Element => {
   const theme = useTheme();
   const bannerColor = theme.palette.secondary.dark;
   return (

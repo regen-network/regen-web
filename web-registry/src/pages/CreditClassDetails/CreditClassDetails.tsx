@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Route, Routes, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import {
   ClassInfo,
   QueryProjectsByClassResponse,
@@ -33,27 +33,9 @@ interface CreditDetailsProps {
   isLandSteward?: boolean;
 }
 
-function CreditClassDetails(): JSX.Element {
-  return (
-    <Routes>
-      <Route
-        caseSensitive
-        path="/*"
-        element={<CreditClassDetail isLandSteward={true} />}
-      />
-      <Route
-        path="buyer"
-        element={<CreditClassDetail isLandSteward={false} />}
-      />
-      <Route
-        path="land-steward"
-        element={<CreditClassDetail isLandSteward={true} />}
-      />
-    </Routes>
-  );
-}
-
-function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
+function CreditClassDetails({
+  isLandSteward,
+}: CreditDetailsProps): JSX.Element {
   const { wallet } = useLedger();
   const { creditClassId } = useParams();
   const [onChainClass, setOnChainClass] = useState<ClassInfo | undefined>(

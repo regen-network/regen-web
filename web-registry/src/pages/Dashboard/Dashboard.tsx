@@ -48,7 +48,7 @@ const Dashboard = (): JSX.Element => {
   const isCreditClassAdmin = useQueryIfCreditClassAdmin();
   const isProjectAdmin = useQueryIfProjectAdmin();
   const walletContext = useWallet();
-  const projectTabHidden = !isIssuer || !isProjectAdmin;
+  const projectTabHidden = !isIssuer && !isProjectAdmin;
   const creditClassTabHidden = !isCreditClassCreator || !isCreditClassAdmin;
 
   // TODO: We should handle these as nested routes, converting this to an

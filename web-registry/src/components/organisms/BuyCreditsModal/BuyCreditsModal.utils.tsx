@@ -11,7 +11,6 @@ import { UISellOrderInfo } from 'pages/Projects/Projects.types';
 import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
 
 import { BuyCreditsProject, BuyCreditsValues } from '..';
-import { getDenomCurrencyPrefix } from '../SellOrdersTable/SellOrdersTable.utils';
 
 /* sortBySellOrderId */
 
@@ -36,7 +35,7 @@ export const getSellOrderLabel = ({
   sellOrder,
   allowedDenomsData,
 }: GetSellOrderLabelParams): JSX.Element => {
-  const { id, askAmount, askDenom, quantity, askBaseDenom } = {
+  const { id, askAmount, askDenom, quantity } = {
     ...sellOrder,
   };
   const price = microToDenom(askAmount);
@@ -44,13 +43,12 @@ export const getSellOrderLabel = ({
     allowedDenomsData,
     denom: askDenom,
   });
-  const denomPrefix = getDenomCurrencyPrefix({ baseDenom: askBaseDenom });
   const truncatedQuantity = floorFloatNumber(parseFloat(quantity));
   return (
     <Box sx={{ ml: 4 }}>
       <Box
         sx={{ display: 'inline', fontWeight: 700 }}
-      >{`${denomPrefix}${price} ${displayDenom}/credit: `}</Box>
+      >{`${price} ${displayDenom}/credit: `}</Box>
       <Box
         sx={{ display: 'inline', mr: 1 }}
       >{`${truncatedQuantity} credit(s) available`}</Box>

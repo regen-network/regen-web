@@ -22,7 +22,10 @@ const MarketplaceLaunchBanner = (): JSX.Element => {
         </span>{' '}
         <Link
           href="https://app.regen.network"
-          sx={{ textDecoration: 'underline!important' }}
+          sx={{
+            textDecoration: 'underline!important',
+            color: 'primary.main',
+          }}
         >
           Regen Marketplace
         </Link>{' '}

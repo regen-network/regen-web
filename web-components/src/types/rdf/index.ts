@@ -16,7 +16,3 @@ export interface NameUrl {
 export interface URLList {
   '@list': URL[];
 }
-
-export interface StringList {
-  '@list': URL[];
-}

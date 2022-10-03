@@ -6,8 +6,8 @@ import { ProjectMetadataLD } from './project-metadata';
 
 export interface CFCProjectMetadataLD extends ProjectMetadataLD {
   'regen:cfcProjectId'?: string;
-  'regen:cfcProjectPage'?: URL;
-  'regen:projectDesignDocument'?: URL;
+  'regen:cfcProjectPage'?: string;
+  'regen:projectDesignDocument'?: string;
   'regen:projectOperator'?: RegenProjectOperator;
   'regen:offsetProtocol'?: RegenOffsetProtocol;
 }

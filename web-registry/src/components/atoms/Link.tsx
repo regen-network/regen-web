@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Link as MuiLink, LinkProps as MuiLinkProps } from '@mui/material';
+import { Box, Link as MuiLink, LinkProps as MuiLinkProps } from '@mui/material';
 
 interface LinkProps extends MuiLinkProps {
   href: string; // require href
@@ -16,6 +16,8 @@ export const Link: React.FC<LinkProps> = ({
   target,
   ...linkProps
 }) => {
+  if (!href) return <Box {...linkProps}>{children}</Box>;
+
   const isInternalLink = (href: string): boolean =>
     !!href && href.startsWith('/');
 

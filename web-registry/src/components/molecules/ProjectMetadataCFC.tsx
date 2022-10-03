@@ -6,11 +6,11 @@ import { Title } from 'web-components/lib/components/typography';
 import { formatDate } from 'web-components/lib/utils/format';
 
 import { CFCProjectMetadataLD } from '../../generated/json-ld';
-import { LinkWithArrow, LinkWithArrowProps } from '../atoms';
+import { LinkWithArrow } from '../atoms';
 import { LineItemLabelAbove, LineItemLabelAboveProps } from '.';
 
 export interface CFCMetadataProps {
-  metadata?: CFCProjectMetadataLD;
+  metadata?: Partial<CFCProjectMetadataLD>;
   projectId?: string;
 }
 
@@ -33,10 +33,6 @@ const ProjectMetadataCFC: React.FC<CFCMetadataProps> = ({
     <LineItemLabelAbove sx={{ mb: { xs: 6, sm: 8 } }} {...props} />
   );
 
-  const ArrowLink = (props: LinkWithArrowProps): JSX.Element => (
-    <LinkWithArrow sx={{ fontSize: { xs: '18px', sm: '22px' } }} {...props} />
-  );
-
   return (
     <Box sx={{ pt: 8 }}>
       <Title variant="h5">Additional Info</Title>
@@ -52,11 +48,9 @@ const ProjectMetadataCFC: React.FC<CFCMetadataProps> = ({
           <LineItem
             label="documents"
             data={
-              <ArrowLink
+              <LinkWithArrow
                 label="Project Design Document"
-                href={
-                  metadata?.['regen:projectDesignDocument']?.['@value'] || ''
-                }
+                href={metadata?.['regen:projectDesignDocument'] || ''}
               />
             }
           />
@@ -68,13 +62,13 @@ const ProjectMetadataCFC: React.FC<CFCMetadataProps> = ({
             <LineItem
               label="project activity"
               data={
-                <ArrowLink
+                <LinkWithArrow
+                  label={metadata?.['regen:projectActivity']?.['schema:name']}
                   href={
                     metadata?.['regen:projectActivity']?.['schema:url']?.[
                       '@value'
                     ] || ''
                   }
-                  label={metadata?.['regen:projectActivity']?.['schema:name']}
                 />
               }
             />
@@ -83,9 +77,9 @@ const ProjectMetadataCFC: React.FC<CFCMetadataProps> = ({
             <LineItem
               label="reference id (cfc project id)"
               data={
-                <ArrowLink
+                <LinkWithArrow
                   label={cfcProjectId}
-                  href={metadata?.['regen:cfcProjectPage']?.['@value'] || ''}
+                  href={metadata?.['regen:cfcProjectPage'] || ''}
                 />
               }
             />

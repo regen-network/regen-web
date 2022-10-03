@@ -6,11 +6,11 @@ import { Title } from 'web-components/lib/components/typography';
 import { formatDate } from 'web-components/lib/utils/format';
 
 import { VCSProjectMetadataLD } from '../../generated/json-ld';
-import { LinkWithArrow, LinkWithArrowProps } from '../atoms';
+import { LinkWithArrow } from '../atoms';
 import { LineItemLabelAbove, LineItemLabelAboveProps } from '.';
 
 export interface MetadataProps {
-  metadata?: VCSProjectMetadataLD;
+  metadata?: Partial<VCSProjectMetadataLD>;
 }
 
 const ProjectMetadataVCS: React.FC<MetadataProps> = ({ metadata }) => {
@@ -30,10 +30,6 @@ const ProjectMetadataVCS: React.FC<MetadataProps> = ({ metadata }) => {
     <LineItemLabelAbove sx={{ mb: { xs: 6, sm: 8 } }} {...props} />
   );
 
-  const ArrowLink = (props: LinkWithArrowProps): JSX.Element => (
-    <LinkWithArrow sx={{ fontSize: { xs: '18px', sm: '22px' } }} {...props} />
-  );
-
   return (
     <Box sx={{ pt: 8 }}>
       <Title variant="h5">Additional Metadata</Title>
@@ -49,7 +45,7 @@ const ProjectMetadataVCS: React.FC<MetadataProps> = ({ metadata }) => {
             <LineItem
               label="vcs project id"
               data={
-                <ArrowLink
+                <LinkWithArrow
                   label={projectId.toString()}
                   href={metadata?.['regen:vcsProjectPage']?.['@value'] || ''}
                 />
@@ -60,7 +56,7 @@ const ProjectMetadataVCS: React.FC<MetadataProps> = ({ metadata }) => {
             <LineItem
               label="methodology"
               data={
-                <ArrowLink
+                <LinkWithArrow
                   label={methodology?.['schema:name']}
                   href={methodology?.['schema:url']?.['@value'] || ''}
                 />
@@ -75,7 +71,7 @@ const ProjectMetadataVCS: React.FC<MetadataProps> = ({ metadata }) => {
             <LineItem
               label="project activity"
               data={
-                <ArrowLink
+                <LinkWithArrow
                   href={
                     metadata?.['regen:projectActivity']?.['schema:url']?.[
                       '@value'

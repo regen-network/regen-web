@@ -298,16 +298,25 @@ const App: React.FC = (): JSX.Element => {
             <Route path="credit-classes">
               {/* TODO: Index route is same as /create-credit-class for now */}
               <Route index element={<CreateCreditClassInfo />} />
-              <Route path=":creditClassId" element={<CreditClassDetails />} />
+              <Route path=":creditClassId/*">
+                <Route
+                  index
+                  element={<CreditClassDetails isLandSteward={true} />}
+                />
+                <Route
+                  path="buyer"
+                  element={<CreditClassDetails isLandSteward={false} />}
+                />
+                <Route
+                  path="land-steward"
+                  element={<CreditClassDetails isLandSteward={true} />}
+                />
+              </Route>
               <Route
                 path="create"
                 element={<KeplrRoute component={CreateCreditClass} />}
               />
             </Route>
-            {/* <Route
-              path="credit-classes/:creditClassId/*"
-              element={<CreditClassDetails />}
-            /> */}
             <Route path="stats/activity" element={<Activity />} />
             <Route>
               <Route path="storefront" element={<Storefront />} />

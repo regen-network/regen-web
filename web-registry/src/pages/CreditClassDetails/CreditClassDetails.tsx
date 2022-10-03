@@ -94,7 +94,7 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
     });
 
   const { isBuyFlowDisabled, projectsWithOrderData } = useBuySellOrderData({
-    projects: projectsByClassResponse?.projects ?? [],
+    projects: projectsByClassResponse?.projects,
   });
 
   const { isSellFlowDisabled, credits } = useCreateSellOrderData({

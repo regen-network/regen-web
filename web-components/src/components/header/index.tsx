@@ -243,10 +243,10 @@ export default function Header({
               display={{ xs: 'none', md: 'block' }}
             >
               <MenuList className={styles.menuList}>
-                {menuItems?.map(item => {
+                {menuItems?.map(item, index => {
                   return (
                     <HeaderMenuHover
-                      key={pathname}
+                      key={index}
                       linkComponent={linkComponent}
                       item={item}
                       pathname={pathname}

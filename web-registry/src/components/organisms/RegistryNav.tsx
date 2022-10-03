@@ -22,13 +22,14 @@ import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
 import { chainId } from '../../lib/ledger';
 import { useWallet } from '../../lib/wallet';
 import { RegistryIconLink, RegistryNavLink, WalletButton } from '../atoms';
+import { MobileSupportModal } from './Modals/MobileSupport/MobileSupportModal';
 
 const RegistryNav: React.FC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { wallet, loaded, disconnect } = useWallet();
   const theme = useTheme<Theme>();
-  const desktop = useMediaQuery(theme.breakpoints.up('sm'));
+  const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const fullWidthRegExp: RegExp = /projects\/[a-z-]+/;
@@ -185,36 +186,45 @@ const RegistryNav: React.FC = () => {
     : theme.palette.primary.light;
 
   return (
-    <Header
-      isRegistry
-      linkComponent={RegistryNavLink}
-      homeLink={RegistryIconLink}
-      isAuthenticated={isAuthenticated}
-      onLogin={() => loginWithRedirect({ redirectUri: window.location.origin })}
-      onLogout={() => logout({ returnTo: window.location.origin })}
-      onSignup={() => navigate('/signup')}
-      menuItems={menuItems}
-      color={color}
-      transparent={isTransparent}
-      absolute={isTransparent}
-      borderBottom={false} // TODO: there's some bug where this won't change on routes - hardcoded for now
-      fullWidth={fullWidthRegExp.test(pathname)}
-      pathname={pathname}
-      extras={
-        <Box display="flex" justifyContent="center" alignItems="center">
-          {chainId && loaded && wallet?.address && disconnect && desktop && (
-            <UserMenuItem
-              address={wallet?.shortAddress}
-              avatar={DefaultAvatar}
-              disconnect={disconnect}
-              pathname={pathname}
-              linkComponent={RegistryNavLink}
-            />
-          )}
-          <WalletButton />
-        </Box>
-      }
-    />
+    <>
+      <Header
+        isRegistry
+        linkComponent={RegistryNavLink}
+        homeLink={RegistryIconLink}
+        isAuthenticated={isAuthenticated}
+        onLogin={() =>
+          loginWithRedirect({ redirectUri: window.location.origin })
+        }
+        onLogout={() => logout({ returnTo: window.location.origin })}
+        onSignup={() => navigate('/signup')}
+        menuItems={menuItems}
+        color={color}
+        transparent={isTransparent}
+        absolute={isTransparent}
+        borderBottom={false} // TODO: there's some bug where this won't change on routes - hardcoded for now
+        fullWidth={fullWidthRegExp.test(pathname)}
+        pathname={pathname}
+        extras={
+          <Box display="flex" justifyContent="center" alignItems="center">
+            {chainId &&
+              loaded &&
+              wallet?.address &&
+              disconnect &&
+              isDesktop && (
+                <UserMenuItem
+                  address={wallet?.shortAddress}
+                  avatar={DefaultAvatar}
+                  disconnect={disconnect}
+                  pathname={pathname}
+                  linkComponent={RegistryNavLink}
+                />
+              )}
+            <WalletButton />
+          </Box>
+        }
+      />
+      <MobileSupportModal />
+    </>
   );
 };
 

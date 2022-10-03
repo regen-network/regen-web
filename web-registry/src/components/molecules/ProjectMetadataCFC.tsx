@@ -28,6 +28,7 @@ const ProjectMetadataCFC: React.FC<CFCMetadataProps> = ({
 
   const startDate = metadata?.['regen:projectStartDate']?.['@value'];
   const endDate = metadata?.['regen:projectEndDate']?.['@value'];
+  const offsetProtocol = metadata?.['regen:offsetProtocol'];
 
   const LineItem = (props: LineItemLabelAboveProps): JSX.Element => (
     <LineItemLabelAbove sx={{ mb: { xs: 6, sm: 8 } }} {...props} />
@@ -80,6 +81,19 @@ const ProjectMetadataCFC: React.FC<CFCMetadataProps> = ({
                 <LinkWithArrow
                   label={cfcProjectId}
                   href={metadata?.['regen:cfcProjectPage'] || ''}
+                />
+              }
+            />
+          )}
+          {offsetProtocol && (
+            <LineItem
+              label="offset protocol"
+              data={
+                <LinkWithArrow
+                  label={offsetProtocol['schema:name']}
+                  href={
+                    metadata?.['regen:offsetProtocol']?.['schema:url'] || ''
+                  }
                 />
               }
             />

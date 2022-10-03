@@ -1,13 +1,13 @@
-import React from 'react';
-import { Box, Link } from '@mui/material';
+import { Link, useTheme } from '@mui/material';
 
 import { Subtitle } from '../typography';
 
 type Props = {};
 
-const bannerColor = '#7BC796';
 
-const MarketplaceLaunchBanner: React.FC<Props> = props => {
+const MarketplaceLaunchBanner = ({}: Props): JSX.Element => {
+  const theme = useTheme();
+  const bannerColor = theme.palette.secondary.dark;
   return (
     <div
       style={{
@@ -15,11 +15,11 @@ const MarketplaceLaunchBanner: React.FC<Props> = props => {
         backgroundColor: bannerColor,
         paddingTop: 25,
         paddingBottom: 25,
-        borderBottom: `5px solid ${bannerColor}`, // TODO: this is a hack to get around a weird display glitch that seems to be caused by the mobile drawer
+        borderBottom: `5px solid {bannerColor}`,
       }}
     >
       <Subtitle sx={{ color: 'primary.main' }}>
-        <span role="img" aria-label="mainnet launch">
+        <span role="img" aria-label="marketplace launch">
           🚀
         </span>{' '}
         <Link

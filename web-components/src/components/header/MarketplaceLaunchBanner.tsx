@@ -9,6 +9,7 @@ const MarketplaceLaunchBanner = (): JSX.Element => {
     <div
       style={{
         textAlign: 'center',
+        color: theme.palette.primary.main,
         backgroundColor: bannerColor,
         paddingTop: 25,
         paddingBottom: 25,

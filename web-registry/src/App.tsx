@@ -298,10 +298,11 @@ const App: React.FC = (): JSX.Element => {
             <Route path="credit-classes">
               {/* TODO: Index route is same as /create-credit-class for now */}
               <Route index element={<CreateCreditClassInfo />} />
-              <Route
-                path=":creditClassId/*"
-                element={<CreditClassDetails isLandSteward={true} />}
-              >
+              <Route path=":creditClassId/*">
+                <Route
+                  index
+                  element={<CreditClassDetails isLandSteward={true} />}
+                />
                 <Route
                   path="buyer"
                   element={<CreditClassDetails isLandSteward={false} />}

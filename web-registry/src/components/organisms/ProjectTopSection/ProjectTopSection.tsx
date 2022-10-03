@@ -16,7 +16,7 @@ import { Body, Label, Title } from 'web-components/lib/components/typography';
 import { CFCProjectMetadataLD, VCSProjectMetadataLD } from 'generated/json-ld';
 import { UseStateSetter } from 'types/react/use-state';
 
-import { ProjectMetadataCFC } from 'components/molecules/ProjectMetadataCFC';
+import { ProjectMetadataCFC } from 'components/molecules/ProjectMetadata/ProjectMetadata.CFC';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import {

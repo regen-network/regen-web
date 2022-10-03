@@ -2,7 +2,6 @@ import React from 'react';
 import { SxProps } from '@mui/system';
 
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
-import { Body } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { parseText } from 'web-components/lib/utils/textParser';
 
@@ -35,12 +34,8 @@ const LinkWithArrow: React.FC<LinkWithArrowProps> = ({
       target={target || defaultTarget}
       rel="noreferrer"
     >
-      <Body size="xl">
-        {parseText(label)}
-        {href && (
-          <SmallArrowIcon sx={{ ml: 2, mb: 0.3, height: 9, width: 13 }} />
-        )}
-      </Body>
+      {parseText(label)}
+      {href && <SmallArrowIcon sx={{ ml: 2, mb: 0.3, height: 9, width: 13 }} />}
     </Link>
   );
 };

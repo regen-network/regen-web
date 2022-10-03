@@ -4,7 +4,7 @@ import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-ca
 import { LinkOrDash } from './BatchMetadata.LinkOrDash';
 import { MetaDetail } from './BatchMetadata.MetaDetail';
 
-export const VCSBatchMetadata = ({
+export const BatchMetadataVCS = ({
   data,
 }: {
   data?: Partial<VCSBatchMetadataLD>;
@@ -18,7 +18,7 @@ export const VCSBatchMetadata = ({
       <MetaDetail label="additional certifications">
         <Flex col sx={{ gap: 2 }}>
           {additionalCertifications && additionalCertifications?.length > 0
-            ? additionalCertifications?.map((cert, i) => (
+            ? additionalCertifications.map((cert, i) => (
                 <LinkOrDash
                   key={i}
                   href={cert?.['schema:url']?.['@value']}

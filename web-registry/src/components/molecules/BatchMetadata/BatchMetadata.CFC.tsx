@@ -5,7 +5,7 @@ import { CFCBatchMetadataLD } from 'web-components/lib/types/rdf/C02-city-forest
 import { LinkOrDash } from './BatchMetadata.LinkOrDash';
 import { MetaDetail } from './BatchMetadata.MetaDetail';
 
-export const CFCBatchMetadata = ({
+export const BatchMetadataCFC = ({
   data,
 }: {
   data?: Partial<CFCBatchMetadataLD>;
@@ -29,7 +29,7 @@ export const CFCBatchMetadata = ({
       <MetaDetail label="verification reports">
         <Flex col sx={{ gap: 2 }}>
           {reports && reports?.length > 0
-            ? reports?.map((report: any, i: number) => (
+            ? reports.map((report: any, i: number) => (
                 <LinkOrDash
                   key={i}
                   href={report?.['schema:url']?.['@value']}

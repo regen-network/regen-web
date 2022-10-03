@@ -1,12 +1,13 @@
 import { Box } from '@mui/material';
 
+import { Flex } from 'web-components/lib/components/box';
 import { Title } from 'web-components/lib/components/typography';
 import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 import { CFCBatchMetadataLD } from 'web-components/lib/types/rdf/C02-city-forest-credits-batch';
 import { CreditBatchMetadataUnionLD } from 'web-components/lib/types/rdf/credit-batch-union-ld';
 
-import { CFCBatchMetadata } from './BatchMetadata.CFC';
-import { VCSBatchMetadata } from './BatchMetadata.VCS';
+import { BatchMetadataCFC } from './BatchMetadata.CFC';
+import { BatchMetadataVCS } from './BatchMetadata.VCS';
 
 export const BatchMetadata = ({
   data,
@@ -32,14 +33,14 @@ export const BatchMetadata = ({
       <Title variant="h5" sx={{ mb: 4 }}>
         Additional Info
       </Title>
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+      <Flex col sx={{ gap: 8 }}>
         {isVCS && (
-          <VCSBatchMetadata data={data as Partial<VCSBatchMetadataLD>} />
+          <BatchMetadataVCS data={data as Partial<VCSBatchMetadataLD>} />
         )}
         {isCFC && (
-          <CFCBatchMetadata data={data as Partial<CFCBatchMetadataLD>} />
+          <BatchMetadataCFC data={data as Partial<CFCBatchMetadataLD>} />
         )}
-      </Box>
+      </Flex>
     </Box>
   );
 };

@@ -1,4 +1,4 @@
-import { Link, useTheme } from '@mui/material';
+import { useTheme } from '@mui/material';
 
 import { Subtitle } from '../typography';
 
@@ -20,15 +20,15 @@ const MarketplaceLaunchBanner = (): JSX.Element => {
         <span role="img" aria-label="marketplace launch">
           🚀
         </span>{' '}
-        <Link
+        <a
           href="https://app.regen.network"
-          sx={{
-            textDecoration: 'underline!important',
-            color: 'primary.main',
+          style={{
+            color: theme.palette.primary.main,
+            textDecorationLine: 'underline',
           }}
         >
           Regen Marketplace
-        </Link>{' '}
+        </a>{' '}
         has launched!
       </Subtitle>
     </div>

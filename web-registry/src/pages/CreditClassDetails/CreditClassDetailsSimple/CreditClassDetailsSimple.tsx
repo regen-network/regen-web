@@ -13,8 +13,7 @@ import { getAccountUrl } from 'lib/block-explorer';
 
 import { AccountLink } from 'components/atoms/AccountLink';
 import { EcocreditsSection } from 'components/molecules';
-import { CreditBatches, MoreProjectsSection } from 'components/organisms';
-import { useProjectsWithOrders } from 'hooks/projects/useProjectsWithOrders';
+import { CreditBatches } from 'components/organisms';
 
 import { AdditionalInfo } from '../CreditClassDetails.AdditionalInfo';
 import { MemoizedProjects as Projects } from '../CreditClassDetails.Projects';

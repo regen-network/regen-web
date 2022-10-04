@@ -6,6 +6,8 @@ import {
 
 import { Item } from 'web-components/lib/components/modal/ConfirmModal';
 
+import { UISellOrderInfo } from 'pages/Projects/Projects.types';
+
 import { NormalizedSellOrder } from './Storefront.types';
 
 export const sortBySellOrderId = (
@@ -51,4 +53,33 @@ export const updateBatchInfosMap = ({
   });
 
   return Array.from(batchInfosMap?.values());
+};
+
+type CheckIsBuyOrderInvalidParams = {
+  sellOrders?: UISellOrderInfo[];
+  creditCount?: number;
+  sellOrderId?: string;
+};
+type CheckIsBuyOrderInvalidResponse = {
+  isBuyOrderInvalid: boolean;
+  amountAvailable: number;
+};
+
+export const checkIsBuyOrderInvalid = ({
+  creditCount = 0,
+  sellOrders,
+  sellOrderId,
+}: CheckIsBuyOrderInvalidParams): CheckIsBuyOrderInvalidResponse => {
+  const currentSellOrder = sellOrders?.find(
+    sellOrder => sellOrder.id === sellOrderId,
+  );
+  const quantityAfterOrder =
+    Number(currentSellOrder?.quantity ?? 0) - creditCount;
+  const isBuyOrderInvalid =
+    sellOrderId !== undefined && (!currentSellOrder || quantityAfterOrder < 0);
+
+  return {
+    isBuyOrderInvalid,
+    amountAvailable: Number(currentSellOrder?.quantity ?? 0),
+  };
 };

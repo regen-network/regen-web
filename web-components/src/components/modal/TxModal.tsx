@@ -132,11 +132,13 @@ const TxModal: React.FC<TxModalProps> = ({
         {cardItems?.map((item, i) => (
           <CardItem {...item} linkComponent={linkComponent} key={i} />
         ))}
-        <CardItem
-          label="hash"
-          value={{ name: truncate(txHash), url: txHashUrl }}
-          linkComponent={linkComponent}
-        />
+        {txHash && (
+          <CardItem
+            label="hash"
+            value={{ name: truncate(txHash), url: txHashUrl }}
+            linkComponent={linkComponent}
+          />
+        )}
       </Card>
       <OutlinedButton
         sx={{ fontSize: { xs: 12, sm: 18 } }}

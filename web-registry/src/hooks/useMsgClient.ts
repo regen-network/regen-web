@@ -14,7 +14,7 @@ interface TxData {
 export type SignAndBroadcastType = (
   message: TxData,
   onBroadcast?: () => void, // an optional callback that gets called between sign and broadcast
-) => Promise<void>;
+) => Promise<void | string>;
 
 type MsgClientType = {
   signAndBroadcast: SignAndBroadcastType;
@@ -64,7 +64,7 @@ export default function useMsgClient(
   );
 
   const broadcast = useCallback(
-    async (txBytes: Uint8Array) => {
+    async (txBytes: Uint8Array): Promise<void | string> => {
       if (!api?.msgClient || !txBytes) return;
       handleTxQueued();
       const _deliverTxResponse = await api.msgClient.broadcast(txBytes);
@@ -73,6 +73,7 @@ export default function useMsgClient(
       if (_deliverTxResponse.code !== 0) {
         setError(_deliverTxResponse.rawLog);
         handleError();
+        return _deliverTxResponse.rawLog;
       } else {
         setDeliverTxResponse(_deliverTxResponse);
         handleTxDelivered(_deliverTxResponse);
@@ -87,13 +88,14 @@ export default function useMsgClient(
         const txBytes = await sign(tx);
         if (txBytes) {
           if (closeForm) closeForm();
-          await broadcast(txBytes);
+          return await broadcast(txBytes);
         }
       } catch (err) {
         if (closeForm) closeForm();
         handleError();
         assertIsError(err);
         setError(err.message);
+        return err.message;
       }
 
       return;

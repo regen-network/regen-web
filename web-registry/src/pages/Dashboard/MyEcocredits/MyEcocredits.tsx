@@ -294,7 +294,11 @@ export const MyEcocredits = (): JSX.Element => {
                         />
                       ),
                       label: CREDIT_SEND_TITLE,
-                      onClick: () => setCreditSendOpen(i),
+                      onClick: () => {
+                        track('send1');
+                        console.log('send1');
+                        setCreditSendOpen(i);
+                      },
                     },
                     {
                       icon: (

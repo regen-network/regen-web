@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/system';
 import { Field, Form, Formik, FormikErrors } from 'formik';
+import { useTrack } from 'use-analytics';
 
 import { Theme } from '../../theme/muiTheme';
 import { Flex } from '../box';
@@ -83,6 +84,7 @@ const CreditSendForm: React.FC<FormProps> = ({
   onSubmit,
 }) => {
   const styles = useStyles();
+  const track = useTrack();
 
   const initialValues = {
     sender,
@@ -203,7 +205,11 @@ const CreditSendForm: React.FC<FormProps> = ({
             status={status}
             isValid={isValid}
             submitCount={submitCount}
-            submitForm={submitForm}
+            submitForm={() => {
+              track('send2');
+              console.log('send2');
+              submitForm();
+            }}
             label={'Send'}
           />
         </Form>

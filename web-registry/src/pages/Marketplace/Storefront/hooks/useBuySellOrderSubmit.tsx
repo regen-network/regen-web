@@ -10,14 +10,17 @@ import { getJurisdictionIsoCode } from 'web-components/lib/utils/locationStandar
 import { UseStateSetter } from 'types/react/use-state';
 import { microToDenom } from 'lib/denom.utils';
 
+import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import DenomIcon from 'components/molecules/DenomIcon';
 import { BuyCreditsValues } from 'components/organisms';
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
+import { RefetchSellOrdersResponse } from 'hooks/useQuerySellOrders';
 
 import {
   BUY_SELL_ORDER_HEADER,
   BUY_SELL_ORDER_TITLE,
 } from '../Storefront.constants';
+import { checkIsBuyOrderInvalid } from '../Storefront.utils';
 
 type Props = {
   accountAddress?: string;
@@ -28,6 +31,8 @@ type Props = {
   setTxModalHeader: UseStateSetter<string>;
   setTxButtonTitle: UseStateSetter<string>;
   setSelectedSellOrder?: UseStateSetter<number | null>;
+  refetchSellOrders?: () => RefetchSellOrdersResponse;
+  onSubmitCallback?: (values: BuyCreditsValues) => void;
 };
 
 type ReturnType = (values: BuyCreditsValues) => Promise<void>;
@@ -41,10 +46,16 @@ const useBuySellOrderSubmit = ({
   setTxButtonTitle,
   setSelectedSellOrder,
   buttonTitle,
+  refetchSellOrders,
+  onSubmitCallback,
 }: Props): ReturnType => {
   const buySellOrderSubmit = useCallback(
     async (values: BuyCreditsValues): Promise<void> => {
       if (!accountAddress) return Promise.reject();
+
+      if (onSubmitCallback) {
+        onSubmitCallback(values);
+      }
 
       const {
         batchDenom,
@@ -58,6 +69,21 @@ const useBuySellOrderSubmit = ({
         askDenom,
         postalCode,
       } = values;
+
+      if (refetchSellOrders) {
+        const sellOrders = await refetchSellOrders();
+        const uiSellOrdersInfo = sellOrders?.map(normalizeToUISellOrderInfo);
+        const { isBuyOrderInvalid } = checkIsBuyOrderInvalid({
+          creditCount,
+          sellOrderId,
+          sellOrders: uiSellOrdersInfo,
+        });
+
+        if (isBuyOrderInvalid) {
+          return Promise.reject();
+        }
+      }
+
       const isTradeable = retirementAction === 'manual';
 
       const msg = MsgBuyDirect.fromPartial({
@@ -85,10 +111,15 @@ const useBuySellOrderSubmit = ({
         memo: retirementNote,
       };
 
-      await signAndBroadcast(
+      const error = await signAndBroadcast(
         tx,
         () => setSelectedSellOrder && setSelectedSellOrder(null),
       );
+
+      if (error && refetchSellOrders) {
+        await refetchSellOrders();
+        return Promise.reject();
+      }
 
       if (batchDenom && creditCount && askDenom) {
         const baseDenom = await getDenomtrace({ denom: askDenom });
@@ -134,6 +165,8 @@ const useBuySellOrderSubmit = ({
       setTxModalTitle,
       setTxButtonTitle,
       buttonTitle,
+      refetchSellOrders,
+      onSubmitCallback,
     ],
   );
 

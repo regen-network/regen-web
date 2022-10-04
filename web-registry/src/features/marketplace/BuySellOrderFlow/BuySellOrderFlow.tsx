@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
@@ -13,11 +14,14 @@ import { UseStateSetter } from 'types/react/use-state';
 import { getHashUrl } from 'lib/block-explorer';
 
 import useBuySellOrderSubmit from 'pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit';
+import { useCheckSellOrderAvailabilty } from 'pages/Marketplace/Storefront/hooks/useCheckSellOrderAvailabilty';
+import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { VIEW_ECOCREDITS } from 'pages/Projects/Projects.config';
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 import { Link } from 'components/atoms';
-import { BuyCreditsModal } from 'components/organisms';
+import { BuyCreditsModal, BuyCreditsValues } from 'components/organisms';
 import { useMsgClient } from 'hooks';
+import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
 
 type Props = {
   isFlowStarted: boolean;
@@ -37,6 +41,21 @@ export const BuySellOrderFlow = ({
   const [txModalHeader, setTxModalHeader] = useState<string>('');
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
+  const { sellOrdersResponse, refetchSellOrders } = useQuerySellOrders();
+  const projectSellOrderIds = useMemo(
+    () => selectedProject?.sellOrders.map(sellOrder => sellOrder.id),
+    [selectedProject],
+  );
+  const sellOrders = sellOrdersResponse?.sellOrders;
+  const projectUiSellOrdersInfo = useMemo(
+    () =>
+      sellOrders
+        ?.map(normalizeToUISellOrderInfo)
+        .filter(sellOrder => projectSellOrderIds?.includes(sellOrder.id)),
+    [sellOrders, projectSellOrderIds],
+  );
+  const selectedSellOrderIdRef = useRef<number>();
+  const submittedQuantityRef = useRef<number>();
   const navigate = useNavigate();
 
   const closeBuyModal = (): void => {
@@ -70,6 +89,13 @@ export const BuySellOrderFlow = ({
     handleTxModalClose();
     navigate('/ecocredits/dashboard');
   };
+  const onSubmitCallback = ({
+    creditCount,
+    sellOrderId,
+  }: BuyCreditsValues): void => {
+    selectedSellOrderIdRef.current = Number(sellOrderId);
+    submittedQuantityRef.current = creditCount;
+  };
 
   const {
     signAndBroadcast,
@@ -82,6 +108,8 @@ export const BuySellOrderFlow = ({
   const accountAddress = wallet?.address;
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
+  const errorEnum = findErrorByCodeEnum({ errorCode: error });
+  const ErrorIcon = errorsMapping[errorEnum].icon;
 
   const buySellOrderSubmit = useBuySellOrderSubmit({
     accountAddress,
@@ -91,23 +119,36 @@ export const BuySellOrderFlow = ({
     setTxModalHeader,
     setTxModalTitle,
     buttonTitle: VIEW_ECOCREDITS,
+    refetchSellOrders,
+    onSubmitCallback,
   });
 
   const project = useMemo(
     () => ({
       id: selectedProject?.id.toString() ?? '',
-      sellOrders: selectedProject?.sellOrders,
+      sellOrders: projectUiSellOrdersInfo,
     }),
-    [selectedProject],
+    [selectedProject, projectUiSellOrdersInfo],
   );
 
   useEffect(() => {
     if (isFlowStarted && selectedProject && accountAddress) {
+      refetchSellOrders();
       setIsBuyModalOpen(true);
     } else if (selectedProject && isFlowStarted && !accountAddress) {
       setDisplayErrorBanner(true);
     }
-  }, [selectedProject, isFlowStarted, accountAddress]);
+  }, [selectedProject, isFlowStarted, accountAddress, refetchSellOrders]);
+
+  useCheckSellOrderAvailabilty({
+    selectedSellOrderIdRef,
+    submittedQuantityRef,
+    setError,
+    sellOrders: projectUiSellOrdersInfo,
+    setCardItems,
+    setTxModalHeader,
+    setTxModalTitle,
+  });
 
   return (
     <>
@@ -140,10 +181,13 @@ export const BuySellOrderFlow = ({
         onClose={handleTxModalClose}
         txHash={txHash ?? ''}
         txHashUrl={txHashUrl}
+        title={txModalHeader}
         cardTitle={txModalTitle}
         linkComponent={Link}
         onButtonClick={handleTxModalClose}
-        buttonTitle="close"
+        buttonTitle={'CLOSE WINDOW'}
+        cardItems={cardItems}
+        icon={<ErrorIcon sx={{ fontSize: 100 }} />}
       />
       {displayErrorBanner && (
         <ErrorBanner text="Please connect to Keplr to use Regen Ledger features" />

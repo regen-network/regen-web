@@ -1,5 +1,10 @@
 import { User } from 'web-components/lib/components/user/UserInfo';
 
+import { Maybe, PartyFieldsFragment } from 'generated/graphql';
+import { ProjectMetadataLD } from 'generated/json-ld';
+import { CFCProjectMetadataLD } from 'generated/json-ld/cfc-project-metadata';
+import { getDisplayParty } from 'lib/transform';
+
 // TODO
 // This is a temporary hack to show Regen as a Project Admin when applicable
 
@@ -20,5 +25,28 @@ export const getDisplayAdmin = (address?: string): User | undefined => {
         'Regen Network realigns the agricultural economy with ecological health by creating the global marketplace for planetary stewardship.',
     };
   }
+  return;
+};
+
+export const getDisplayDeveloper = (
+  metadata?: ProjectMetadataLD,
+  party?: Maybe<PartyFieldsFragment>,
+): User | undefined => {
+  if (!metadata) return;
+  if (metadata?.['regen:projectDeveloper']) {
+    return getDisplayParty('regen:projectDeveloper', metadata, party);
+  }
+  // Possibly temporary: CFC case
+  const projectOperator = (metadata as Partial<CFCProjectMetadataLD>)?.[
+    'regen:projectOperator'
+  ];
+  if (projectOperator) {
+    return {
+      name: projectOperator?.['schema:name'],
+      type: 'ORGANIZATION',
+      link: projectOperator?.['schema:url'],
+    };
+  }
+
   return;
 };

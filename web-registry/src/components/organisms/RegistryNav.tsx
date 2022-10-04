@@ -28,7 +28,7 @@ const RegistryNav: React.FC = () => {
   const { pathname } = useLocation();
   const { wallet, loaded, disconnect } = useWallet();
   const theme = useTheme<Theme>();
-  const desktop = useMediaQuery(theme.breakpoints.up('sm'));
+  const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const fullWidthRegExp: RegExp = /projects\/[a-z-]+/;
@@ -202,7 +202,7 @@ const RegistryNav: React.FC = () => {
       pathname={pathname}
       extras={
         <Box display="flex" justifyContent="center" alignItems="center">
-          {chainId && loaded && wallet?.address && disconnect && desktop && (
+          {chainId && loaded && wallet?.address && disconnect && isDesktop && (
             <UserMenuItem
               address={wallet?.shortAddress}
               avatar={DefaultAvatar}

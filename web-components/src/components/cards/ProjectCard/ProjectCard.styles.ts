@@ -16,9 +16,9 @@ export const useProjectCardStyles = makeStyles((theme: Theme) => ({
     },
   },
   placeInfo: {
-    flex: '1 0 auto',
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(1.75, 5.25, 5.25),
+      flex: '1 0 auto',
     },
     [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(1.75, 4.5, 5),

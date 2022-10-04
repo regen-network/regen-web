@@ -23,7 +23,7 @@ const AppFooter: React.FC = () => {
         },
         {
           title: 'Credit Classes',
-          href: '/',
+          href: '/#credit-classes',
         },
       ],
     },

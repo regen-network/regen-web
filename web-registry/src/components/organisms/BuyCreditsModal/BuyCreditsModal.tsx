@@ -188,26 +188,26 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
           validate={validationHandler}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
+            const track_data: any = {
+              price: selectedSellOrder?.askAmount,
+              batchDenom: selectedSellOrder?.batchDenom,
+              projectName: project.name,
+              creditClassName: project.id.split('-')[0],
+            };
+            if (values.retirementAction === 'manual') {
+              track_data['amountTradable'] = getFormattedNumber(
+                values.creditCount,
+              );
+              track_data['amountRetired'] = getFormattedNumber(0);
+            } else if (values.retirementAction === 'autoretire') {
+              track_data['amountTradable'] = getFormattedNumber(
+                values.creditCount,
+              );
+              track_data['amountRetired'] = getFormattedNumber(0);
+            }
+            track('buy2', track_data);
             try {
               await handleBuyCreditsSubmit(values, onSubmit, selectedSellOrder);
-              const track_data: any = {
-                price: selectedSellOrder?.askAmount,
-                batchDenom: selectedSellOrder?.batchDenom,
-                projectName: project.name,
-                creditClassName: project.id.split('-')[0],
-              };
-              if (values.retirementAction === 'manual') {
-                track_data['amountTradable'] = getFormattedNumber(
-                  values.creditCount,
-                );
-                track_data['amountRetired'] = getFormattedNumber(0);
-              } else if (values.retirementAction === 'autoretire') {
-                track_data['amountTradable'] = getFormattedNumber(
-                  values.creditCount,
-                );
-                track_data['amountRetired'] = getFormattedNumber(0);
-              }
-              track('buy2', track_data);
               setSubmitting(false);
             } catch (e) {
               setSubmitting(false);

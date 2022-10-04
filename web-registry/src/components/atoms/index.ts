@@ -2,6 +2,7 @@ export * from './AccountLink';
 export * from './KeplrRoute';
 export * from './Link';
 export * from './LinkWithArrow';
+export * from './MetadataArrowLink';
 export * from './OptimizedImage';
 export * from './OptimizedImage';
 export * from './PeerReviewed';

@@ -8,7 +8,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 export interface LineItemLabelAboveProps {
   sx?: SxProps<Theme>;
   label: string;
-  data: string | JSX.Element | number;
+  data?: string | JSX.Element | number;
 }
 
 // TODO should this be consolidated with the LineItem component?
@@ -22,8 +22,8 @@ const LineItemLabelAbove: React.FC<LineItemLabelAboveProps> = ({
     <Box
       sx={{
         width: { xs: '100%', sm: '50%' },
-        pr: 4,
-        mb: { xs: 8, sm: 8 },
+        pr: [0, 8],
+        mb: 8,
         ...sx,
       }}
     >

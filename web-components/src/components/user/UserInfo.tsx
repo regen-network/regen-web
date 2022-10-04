@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from '@mui/material';
 import Grid, { GridDirection } from '@mui/material/Grid';
 
 import OrganizationIcon from '../icons/OrganizationIcon';
@@ -76,9 +77,13 @@ export default function UserInfo({
         }}
       >
         {user.link ? (
-          <a href={user.link} target="_blank" rel="noopener noreferrer">
+          <Link
+            sx={{ color: 'primary.contrastText' }}
+            href={user.link}
+            target="_blank"
+          >
             {name}
-          </a>
+          </Link>
         ) : (
           name
         )}

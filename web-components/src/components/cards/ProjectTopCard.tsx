@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
         12.5,
       )}`,
     },
-    '& :only-child': {
+    '& :only-child, & :last-child': {
       marginBottom: 0,
     },
   },

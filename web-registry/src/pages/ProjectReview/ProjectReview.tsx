@@ -11,6 +11,7 @@ import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/Revi
 import { Photo } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.Photo';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
+import { UrlType } from 'web-components/lib/utils/schemaURL';
 
 import { Link } from '../../components/atoms';
 import { ProjectPageFooter } from '../../components/molecules';
@@ -19,20 +20,24 @@ import {
   useProjectByIdQuery,
   useUpdateProjectByIdMutation,
 } from '../../generated/graphql';
-import { VCSProjectMetadataLD } from '../../generated/json-ld';
 import useMsgClient from '../../hooks/useMsgClient';
 import { getHashUrl } from '../../lib/block-explorer';
 import { isVCSCreditClass } from '../../lib/ecocredit/api';
 import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
 import { useCreateProjectContext } from '../ProjectCreate';
+import { useCompactMetadata } from './hooks/useCompactMetadata';
+import { useGetJurisdiction } from './hooks/useGetJurisdiction';
 import { useProjectCreateSubmit } from './hooks/useProjectCreateSubmit';
-import { getJurisdiction, getOnChainProjectId } from './ProjectReview.util';
+import {
+  getOnChainProjectId,
+  getProjectReferenceID,
+} from './ProjectReview.util';
 import { VCSMetadata } from './ProjectReview.VCSMetadata';
 
 export const ProjectReview: React.FC = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
-  const { setDeliverTxResponse } = useCreateProjectContext();
+  const { setDeliverTxResponse, creditClassId } = useCreateProjectContext();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { data, loading } = useProjectByIdQuery({
@@ -84,34 +89,30 @@ export const ProjectReview: React.FC = () => {
   const { projectCreateSubmit } = useProjectCreateSubmit({ signAndBroadcast });
   const project = data?.projectById;
   const editPath = `/project-pages/${projectId}`;
-  const creditClassId = project?.creditClassByCreditClassId?.onChainId;
-  const isVCS = !!creditClassId && isVCSCreditClass(creditClassId);
-  const metadata: Partial<VCSProjectMetadataLD> = project?.metadata;
+  const metadataRaw = project?.metadata;
+  const metadata = useCompactMetadata({ metadataRaw });
+  const jurisdiction = useGetJurisdiction({ metadata });
+  const isVCS = isVCSCreditClass(creditClassId);
+
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
   const videoUrl = metadata?.['regen:videoURL']?.['@value'];
+  const referenceId = getProjectReferenceID(metadata, creditClassId);
+
   const submit = async (): Promise<void> => {
-    let jurisdiction;
-    try {
-      jurisdiction = await getJurisdiction(metadata);
-      // eslint-disable-next-line
-      console.log(
-        'Jurisdiction ISO string based on location provided:',
-        jurisdiction,
-      );
-    } catch (err) {
+    if (!jurisdiction) {
       setBannerError(
-        `Error getting ISO string for jurisdiction: ${err as string}`,
+        `Error getting ISO string for jurisdiction. Please edit your location.`,
       );
       return;
     }
-    const vcsProjectId = metadata?.['regen:vcsProjectId'];
+
     await projectCreateSubmit({
       classId: creditClassId || '',
       admin: wallet?.address || '',
       metadata,
       jurisdiction: jurisdiction || '',
-      referenceId: isVCS && vcsProjectId ? `VCS-${vcsProjectId}` : '', // TODO: regen-network/regen-registry#1104
+      referenceId,
     });
   };
 
@@ -139,7 +140,10 @@ export const ProjectReview: React.FC = () => {
         title="Location"
         onEditClick={() => navigate(`${editPath}/location`)}
       >
-        <ItemDisplay>{metadata?.['schema:location']?.place_name}</ItemDisplay>
+        <ItemDisplay>
+          {metadata?.['schema:location']?.['geojson:place_name']}
+        </ItemDisplay>
+        <ItemDisplay name="Jurisdiction">{jurisdiction}</ItemDisplay>
       </ReviewCard>
       <ReviewCard
         title="Description"
@@ -155,10 +159,11 @@ export const ProjectReview: React.FC = () => {
           <Photo src={metadata?.['regen:previewPhoto']?.['@value']} />
         )}
         {metadata?.['regen:galleryPhotos']?.['@list']
-          ?.filter(photo => !!photo?.['@value'])
-          ?.map(photo => (
-            <Photo src={photo?.['@value']} />
-          ))}
+          ?.filter((photo: UrlType) => !!photo?.['@value'])
+          ?.map(
+            (photo: UrlType) =>
+              photo?.['@value'] && <Photo src={photo?.['@value']} />,
+          )}
         {videoUrl && (
           <Card>
             <CardMedia

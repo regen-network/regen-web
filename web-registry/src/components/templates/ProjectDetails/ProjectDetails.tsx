@@ -108,7 +108,7 @@ function ProjectDetails(): JSX.Element {
   });
   const onChainProject = projectResponse?.project;
 
-  // TODO: when all projects are on-chain, just use dataByOnChainId
+  // TODO: when all projects are on-chain, just use dataByOnChainId, (or leave out postgres altogether)
   const data = isOnChainId
     ? { ...dataByOnChainId, admin: onChainProject?.admin }
     : dataByHandle;
@@ -116,12 +116,14 @@ function ProjectDetails(): JSX.Element {
     ? dataByOnChainId?.projectByOnChainId
     : dataByHandle?.projectByHandle;
 
+  // Legacy projects use project.metadata. On-chain projects use IRI resolver.
   const offChainProjectMetadata: ProjectMetadataLD = project?.metadata;
   const onChainProjectMetadata = useQueryMetadataGraph(
     onChainProject?.metadata,
   );
+  const metadata = onChainProjectMetadata ?? offChainProjectMetadata;
   const managementActions =
-    offChainProjectMetadata?.['regen:landManagementActions']?.['@list'];
+    metadata?.['regen:landManagementActions']?.['@list'];
 
   const { batchesWithSupply, setPaginationParams } =
     usePaginatedBatchesByProject({ projectId: String(onChainProjectId) });
@@ -148,10 +150,10 @@ function ProjectDetails(): JSX.Element {
   const { geojson, isGISFile } = useGeojson(offChainProjectMetadata);
 
   const seoData = useSeo({
-    metadata: offChainProjectMetadata,
+    metadata,
     creditClassName,
   });
-  const mediaData = useMedia({ metadata: offChainProjectMetadata, geojson });
+  const mediaData = useMedia({ metadata, geojson });
   const impactData = useImpact({ coBenefitsIris, primaryImpactIRI });
   const isLoading = loading || loadingDataByHandle;
 
@@ -229,6 +231,7 @@ function ProjectDetails(): JSX.Element {
         setPaginationParams={setPaginationParams}
         geojson={geojson}
         isGISFile={isGISFile}
+        projectId={projectId}
       />
 
       {impactData?.length > 0 && (
@@ -268,7 +271,7 @@ function ProjectDetails(): JSX.Element {
 
       {isTxMode && (
         <TransactionModals
-          metadata={onChainProjectMetadata}
+          metadata={metadata}
           projectId={projectId}
           testProject={testProject}
           creditDenom={creditClassDenom || creditClassName}

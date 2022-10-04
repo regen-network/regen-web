@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 
+import { Flex } from 'web-components/lib/components/box';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { Loading } from 'web-components/lib/components/loading';
 import Section from 'web-components/lib/components/section';
 import { Title } from 'web-components/lib/components/typography';
 import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
+import { CFCBatchMetadataLD } from 'web-components/lib/types/rdf/C02-city-forest-credits-batch';
 
 import { useProjectByOnChainIdQuery } from 'generated/graphql';
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
@@ -27,7 +29,9 @@ export const BatchDetails: React.FC = () => {
   const { batchDenom } = useParams();
   const [ledgerLoading, setLedgerLoading] = useState(false);
   const [batch, setBatch] = useState<BatchInfoWithSupply>();
-  const [metadata, setMetadata] = useState<VCSBatchMetadataLD>();
+  const [metadata, setMetadata] = useState<
+    VCSBatchMetadataLD | CFCBatchMetadataLD
+  >();
   const walletContext = useWallet();
   const accountAddress = walletContext.wallet?.address;
   const { credits: userEcocredits } = useEcocredits({
@@ -69,11 +73,12 @@ export const BatchDetails: React.FC = () => {
   });
 
   const project = offchainData?.projectByOnChainId;
+  const loading = ledgerLoading || dbLoading;
 
-  if (ledgerLoading || dbLoading) return <Loading />;
+  if (loading) return <Loading />;
 
   // TODO placeholder until we have a more descriptive not found graphic
-  if (!batch || error) return <NotFoundPage />;
+  if (!loading && (!batch || error)) return <NotFoundPage />;
 
   return (
     <Box sx={{ backgroundColor: 'grey.50' }}>
@@ -100,42 +105,32 @@ export const BatchDetails: React.FC = () => {
             </OutlinedButton>
           )}
         </Box>
-        <Box sx={{ display: 'flex', flexWrap: ['wrap', 'nowrap'] }}>
-          <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-            <BatchInfoGrid
-              batch={batch}
-              projectOnChainId={onChainId}
-              projectName={project?.metadata?.['schema:name'] || onChainId}
-              sx={{ py: 10, borderBottom: 1, borderColor: 'grey.100' }}
-            />
-            <Title variant="h5" sx={{ mt: 10, mb: 8 }}>
-              All credits
-            </Title>
-            <BatchTotalsGrid batch={batch} />
-          </Box>
-          <Box
-            sx={{
-              my: [0, 10],
-              ml: [0, 10],
-              minWidth: ['100%', '33%', '370px'],
-            }}
-          >
+        {batch && (
+          <Box sx={{ display: 'flex', flexWrap: ['wrap', 'nowrap'] }}>
+            <Flex col sx={{ width: '100%' }}>
+              <BatchInfoGrid
+                batch={batch}
+                projectOnChainId={onChainId}
+                projectName={project?.metadata?.['schema:name'] || onChainId}
+                sx={{ py: 10, borderBottom: 1, borderColor: 'grey.100' }}
+              />
+              <Title variant="h5" sx={{ mt: 10, mb: 8 }}>
+                All credits
+              </Title>
+              <BatchTotalsGrid batch={batch} />
+            </Flex>
             <Box
               sx={{
-                py: 7,
-                px: 5,
-                backgroundColor: 'primary.main',
-                border: 1,
-                borderColor: 'info.light',
+                pt: 10,
+                mb: [0, 10],
+                ml: [0, 10],
+                minWidth: ['100%', '33%', '370px'],
               }}
             >
-              <Title variant="h5" sx={{ mb: 4 }}>
-                Metadata
-              </Title>
               <BatchMetadata data={metadata} />
             </Box>
           </Box>
-        </Box>
+        )}
       </Section>
     </Box>
   );

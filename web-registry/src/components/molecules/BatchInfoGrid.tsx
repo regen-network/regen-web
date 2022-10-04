@@ -64,7 +64,7 @@ const GridItem: React.FC = ({ children }) => (
 const BatchDetail: React.FC<{ label: string }> = ({ label, children }) => (
   <LabeledDetail label={label}>
     <Body
-      size="lg"
+      size="xl"
       styleLinks={false}
       sx={{ display: 'flex', alignItems: 'center' }}
     >

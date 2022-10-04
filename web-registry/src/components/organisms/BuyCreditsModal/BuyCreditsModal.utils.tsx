@@ -1,4 +1,6 @@
+import { Box } from '@mui/material';
 import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+import { floorFloatNumber } from 'utils/number/format/format';
 
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import { formatNumber } from 'web-components/lib/utils/format';
@@ -10,6 +12,21 @@ import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.uti
 
 import { BuyCreditsProject, BuyCreditsValues } from '..';
 
+/* sortBySellOrderId */
+
+const sortBySellOrderId = (
+  sellOrderA: UISellOrderInfo,
+  sellOrderB: UISellOrderInfo,
+): number => {
+  if (sellOrderA.id && sellOrderB.id) {
+    return Number(sellOrderA.id) < Number(sellOrderB.id) ? 1 : -1;
+  }
+
+  return 0;
+};
+
+/* getSellOrderLabel */
+
 type GetSellOrderLabelParams = {
   sellOrder: UISellOrderInfo;
   allowedDenomsData?: QueryAllowedDenomsResponse;
@@ -17,7 +34,7 @@ type GetSellOrderLabelParams = {
 export const getSellOrderLabel = ({
   sellOrder,
   allowedDenomsData,
-}: GetSellOrderLabelParams): string => {
+}: GetSellOrderLabelParams): JSX.Element => {
   const { id, askAmount, askDenom, quantity } = {
     ...sellOrder,
   };
@@ -26,8 +43,22 @@ export const getSellOrderLabel = ({
     allowedDenomsData,
     denom: askDenom,
   });
-  return `${id} (${price} ${displayDenom}/credit: ${quantity} credit(s) available)`;
+  const truncatedQuantity = floorFloatNumber(parseFloat(quantity));
+  return (
+    <Box sx={{ ml: 4 }}>
+      <Box
+        sx={{ display: 'inline', fontWeight: 700 }}
+      >{`${price} ${displayDenom}/credit: `}</Box>
+      <Box
+        sx={{ display: 'inline', mr: 1 }}
+      >{`${truncatedQuantity} credit(s) available`}</Box>
+      <Box sx={{ display: 'inline', color: 'info.main' }}>{`(#${id})`}</Box>
+    </Box>
+  );
 };
+
+/* getSellOrdersOptions */
+
 type GetSellOrdersOptionsParams = {
   sellOrders: UISellOrderInfo[];
   allowedDenomsData?: QueryAllowedDenomsResponse;
@@ -42,6 +73,8 @@ const getSellOrdersOptions = ({
   }));
 };
 
+/* getOptions */
+
 type GetOptionsParams = {
   project: BuyCreditsProject;
   allowedDenomsData?: QueryAllowedDenomsResponse;
@@ -52,12 +85,12 @@ export const getOptions = ({
 }: GetOptionsParams): Option[] => {
   if (!project?.sellOrders?.length) return [];
 
-  const retirableSellOrders = project.sellOrders.filter(
-    sellOrder => !sellOrder.disableAutoRetire,
-  );
-  const retirableAndTradableSellOrders = project.sellOrders.filter(
-    sellOrder => sellOrder.disableAutoRetire,
-  );
+  const retirableSellOrders = project.sellOrders
+    .filter(sellOrder => !sellOrder.disableAutoRetire)
+    .sort(sortBySellOrderId);
+  const retirableAndTradableSellOrders = project.sellOrders
+    .filter(sellOrder => sellOrder.disableAutoRetire)
+    .sort(sortBySellOrderId);
 
   const retirableOptions = getSellOrdersOptions({
     sellOrders: retirableSellOrders,
@@ -74,14 +107,28 @@ export const getOptions = ({
 
   return allOptionsLength > 1
     ? [
-        { label: 'Choose a sell order', value: '', disabled: true },
-        { label: 'RETIRABLE ONLY', value: '', disabled: true },
-        ...retirableOptions,
-        { label: 'TRADABLE AND RETIRABLE', value: '', disabled: true },
+        {
+          label: <Box sx={{ color: 'info.main' }}>{'Choose a sell order'}</Box>,
+          value: '',
+          disabled: true,
+        },
+        {
+          label: <Box sx={{ fontWeight: 700 }}>{'TRADABLE AND RETIRABLE'}</Box>,
+          value: '',
+          disabled: true,
+        },
         ...retirableAndTradableOptions,
+        {
+          label: <Box sx={{ fontWeight: 700 }}>{'RETIRABLE ONLY'}</Box>,
+          value: '',
+          disabled: true,
+        },
+        ...retirableOptions,
       ]
     : retirableOptions.concat(retirableAndTradableOptions);
 };
+
+/* handleBuyCreditsSubmit */
 
 export const handleBuyCreditsSubmit = async (
   values: BuyCreditsValues,
@@ -105,6 +152,8 @@ export const handleBuyCreditsSubmit = async (
   await onSubmit(fullValues);
 };
 
+/* getCreditCountValidation */
+
 export const getCreditCountValidation =
   (creditAvailable: number) => (creditCount: number) => {
     let error;
@@ -113,6 +162,8 @@ export const getCreditCountValidation =
     }
     return error;
   };
+
+/* amountToSpend */
 
 type AmountToSpendParams = {
   creditCount: number;

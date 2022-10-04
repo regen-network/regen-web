@@ -81,7 +81,6 @@ export const BuySellOrderFlow = ({
   const handleError = (): void => {
     closeProcessingModal();
     setTxModalTitle('Buy Credits Error');
-    track('buyFailure');
   };
   const handleTxDelivered = async (
     _deliverTxResponse: DeliverTxResponse,

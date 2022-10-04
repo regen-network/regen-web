@@ -10,6 +10,7 @@ import { Title } from '../typography';
 export interface SectionProps {
   children?: any;
   className?: string;
+  id?: string;
   classes?: {
     root?: string;
     title?: string;
@@ -88,6 +89,7 @@ const Section = ({
   children,
   classes,
   className,
+  id,
   sx,
   titleLineHeight,
   titleColor,
@@ -110,6 +112,7 @@ const Section = ({
       component="section"
       withSlider={withSlider}
       className={className || (classes && classes.root)}
+      id={id}
     >
       {title && (
         <div

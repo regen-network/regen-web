@@ -121,7 +121,7 @@ export const BatchDetails: React.FC = () => {
             </Flex>
             <Box
               sx={{
-                mt: [10, 0],
+                pt: 10,
                 mb: [0, 10],
                 ml: [0, 10],
                 minWidth: ['100%', '33%', '370px'],

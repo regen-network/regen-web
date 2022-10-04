@@ -15,6 +15,8 @@ import { createBrowserHistory } from 'history';
 
 import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
 
+import { MobileSupportModal } from 'components/organisms/Modals/MobileSupport/MobileSupportModal';
+
 import { KeplrRoute, ProtectedRoute, ScrollToTop } from './components/atoms';
 import PageLoader from './components/atoms/PageLoader';
 import { AppFooter, RegistryNav } from './components/organisms';
@@ -128,6 +130,7 @@ const App: React.FC = (): JSX.Element => {
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <GoogleAnalytics />
       <ScrollToTop />
+      <MobileSupportModal />
       <div>
         <RegistryNav />
         <Suspense fallback={<PageLoader />}>

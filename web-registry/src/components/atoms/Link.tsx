@@ -1,11 +1,6 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-<<<<<<< HEAD
-import { Link as MuiLink, LinkProps as MuiLinkProps } from '@mui/material';
-=======
-import { HashLink } from 'react-router-hash-link';
 import { Box, Link as MuiLink, LinkProps as MuiLinkProps } from '@mui/material';
->>>>>>> 4152ca51 (feat: enter and display CFC metadata (#1232))
 
 interface LinkProps extends MuiLinkProps {
   href: string; // require href

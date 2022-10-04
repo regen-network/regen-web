@@ -6,7 +6,6 @@ import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/Revie
 import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.ItemDisplay';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import { Body, Subtitle } from 'web-components/lib/components/typography';
-import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 import {
   formatDate,
   getFormattedNumber,
@@ -63,7 +62,7 @@ function CreditBatchInfo({
   dataDisplay,
 }: CreditBatchInfoProps): JSX.Element {
   const { handleActiveStep } = useMultiStep();
-  const metadata = data.metadata as VCSBatchMetadataLD;
+  const metadata = data.metadata;
 
   return (
     <ReviewCard
@@ -77,21 +76,25 @@ function CreditBatchInfo({
       <ItemDisplay name={'Start and end date'}>
         {`${formatDate(data.startDate)} - ${formatDate(data.endDate)}`}
       </ItemDisplay>
-      <ItemDisplay name={'VCS retirement serial number'}>
-        {metadata['regen:vcsRetirementSerialNumber']}
-      </ItemDisplay>
-      {metadata['regen:additionalCertifications']?.map((cert, index) => (
-        <AdditionalCertificationDisplay
-          key={`additional-certification-${index}`}
-          name={cert['schema:name']}
-          url={cert['schema:url']['@value']}
-          index={
-            metadata['regen:additionalCertifications']?.length > 1
-              ? `${index + 1}`
-              : undefined
-          }
-        />
-      ))}
+      {metadata?.['regen:vcsRetirementSerialNumber'] && (
+        <ItemDisplay name={'VCS retirement serial number'}>
+          {metadata['regen:vcsRetirementSerialNumber']}
+        </ItemDisplay>
+      )}
+      {metadata?.['regen:additionalCertifications']?.map(
+        (cert: any, index: number) => (
+          <AdditionalCertificationDisplay
+            key={`additional-certification-${index}`}
+            name={cert?.['schema:name'] || ''}
+            url={cert?.['schema:url']?.['@value']}
+            index={
+              metadata?.['regen:additionalCertifications']?.length > 1
+                ? `${index + 1}`
+                : undefined
+            }
+          />
+        ),
+      )}
     </ReviewCard>
   );
 }

@@ -26,7 +26,6 @@ import {
 import { AddCertificationModal } from 'web-components/lib/components/modal/AddCertificationModal';
 import { Body } from 'web-components/lib/components/typography';
 import { NameUrl } from 'web-components/lib/types/rdf';
-import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 
 import { MetadataJSONField } from '../../../../components/molecules';
 import useQueryProjectsByIssuer from '../../../../hooks/useQueryProjectsByIssuer';
@@ -39,7 +38,7 @@ export interface CreditBasicsFormValues {
   projectId: string;
   startDate: Date | null;
   endDate: Date | null;
-  metadata?: Partial<VCSBatchMetadataLD>;
+  metadata?: any; //TODO: type that works for any metadata shape
 }
 
 const vcsMetadataSchema: Yup.AnyObjectSchema = Yup.object({
@@ -174,9 +173,9 @@ export default function CreditBasics({
             }
           />
         </>
-      ) : projectId && classId ? (
-        <MetadataJSONField classId={classId} required={!isVCS} />
-      ) : null}
+      ) : (
+        classId && <MetadataJSONField classId={classId} />
+      )}
     </OnBoardingCard>
   );
 }

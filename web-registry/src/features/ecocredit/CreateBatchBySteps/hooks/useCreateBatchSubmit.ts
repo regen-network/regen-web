@@ -4,6 +4,7 @@ import { MsgCreateBatch } from '@regen-network/api/lib/generated/regen/ecocredit
 import { BatchIssuance } from '@regen-network/api/lib/generated/regen/ecocredit/v1/types';
 
 import type { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
+import { CFCBatchMetadataLD } from 'web-components/lib/types/rdf/C02-city-forest-credits-batch';
 
 import { useLedger } from 'ledger';
 import { generateIri, IriFromMetadataSuccess } from 'lib/metadata-graph';
@@ -13,9 +14,9 @@ import { useMsgClient } from 'hooks';
 import { CreateBatchFormValues } from '../CreateBatchMultiStepForm/CreateBatchMultiStepForm';
 
 // TODO
-// Right now, just case "C01" (aka. VCS)
+// Right now, just cases C01 (VCS) and C02 (CFC)
 
-function prepareMetadata(
+function prepareVCSMetadata(
   projectId: string,
   partialMetadata: Partial<VCSBatchMetadataLD>,
 ): VCSBatchMetadataLD | undefined {
@@ -46,15 +47,24 @@ async function prepareMsg(
   issuer: string,
   data: CreateBatchFormValues,
 ): Promise<Partial<MsgCreateBatch> | undefined> {
+  if (!data.metadata) return;
   // First, complete the metadata
-  const metadata: VCSBatchMetadataLD | undefined = prepareMetadata(
+  let metadata:
+    | Partial<VCSBatchMetadataLD>
+    | Partial<CFCBatchMetadataLD>
+    | undefined = prepareVCSMetadata(
     data.projectId,
     data.metadata as Partial<VCSBatchMetadataLD>,
   );
+  if (!metadata) metadata = JSON.parse(data.metadata);
   if (!metadata) return;
 
-  // then, generate the offchain iri from the metadata
-  let iriResponse: IriFromMetadataSuccess<VCSBatchMetadataLD> | undefined;
+  // generate IRI
+  let iriResponse:
+    | IriFromMetadataSuccess<
+        Partial<VCSBatchMetadataLD> | Partial<CFCBatchMetadataLD>
+      >
+    | undefined;
 
   try {
     iriResponse = await generateIri(metadata);
@@ -63,7 +73,7 @@ async function prepareMsg(
     throw new Error(err as string);
   }
 
-  // finally, build de Msg for Tx
+  // finally, build Msg for Tx
   const issuance: BatchIssuance[] = data.recipients.map(recipient => {
     let issuanceRecipient: Partial<BatchIssuance> = {
       recipient: recipient.recipient,

@@ -34,7 +34,7 @@ export function MetadataJSONField({
 
   useEffect(() => {
     // reset metadata if classId changes and still in Object form
-    if (typeof metadata !== 'string') {
+    if (typeof metadata !== 'string' || formikName === 'loading') {
       setFieldValue(name, '');
       // using this timeout fixes a timing bug when transitioning from metadata Object
       setTimeout(() => {
@@ -42,7 +42,7 @@ export function MetadataJSONField({
         setFieldTouched(name, false);
       }, 700);
     }
-  }, [classId, metadata, setFieldValue, name, setFieldTouched]);
+  }, [classId, formikName, metadata, name, setFieldTouched, setFieldValue]);
 
   return (
     <Box sx={{ mt: 10 }}>

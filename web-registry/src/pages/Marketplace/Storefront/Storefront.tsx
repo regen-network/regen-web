@@ -195,6 +195,7 @@ export const Storefront = (): JSX.Element => {
     error,
     setError,
   } = useMsgClient(handleTxQueued, handleTxDelivered, handleError);
+
   const accountAddress = wallet?.address;
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);

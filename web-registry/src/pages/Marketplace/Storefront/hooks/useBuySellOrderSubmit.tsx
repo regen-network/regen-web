@@ -111,10 +111,15 @@ const useBuySellOrderSubmit = ({
         memo: retirementNote,
       };
 
-      await signAndBroadcast(
+      const error = await signAndBroadcast(
         tx,
         () => setSelectedSellOrder && setSelectedSellOrder(null),
       );
+
+      if (error && refetchSellOrders) {
+        await refetchSellOrders();
+        return Promise.reject();
+      }
 
       if (batchDenom && creditCount && askDenom) {
         const baseDenom = await getDenomtrace({ denom: askDenom });

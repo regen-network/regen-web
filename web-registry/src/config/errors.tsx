@@ -12,7 +12,7 @@ export const errorsMapping: Record<
 > = {
   [ERRORS.DEFAULT]: {
     code: 'default',
-    label: 'Sorry, something went wront!',
+    label: 'Sorry, something went wrong!',
     icon: BrokenLinkIcon,
   },
   [ERRORS.SELL_ORDER_PURCHASED]: {

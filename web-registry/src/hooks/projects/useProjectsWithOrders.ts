@@ -6,6 +6,7 @@ import {
   GECKO_REGEN_ID,
   GECKO_USD_CURRENCY,
 } from 'lib/coingecko';
+import { EcocreditQueryProps } from 'lib/ecocredit/api';
 
 import {
   ProjectsSellOrders,
@@ -34,11 +35,12 @@ export function useProjectsWithOrders({
   projectId,
   classId,
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
+  const queryParams: EcocreditQueryProps = classId
+    ? { query: 'projectsByClass', params: { classId } }
+    : { query: 'projects', params: {} };
+
   const { data, loading: loadingProjects } =
-    useEcocreditQuery<QueryProjectsResponse>({
-      query: 'projects',
-      params: {},
-    });
+    useEcocreditQuery<QueryProjectsResponse>(queryParams);
   const projects = data?.projects;
 
   const regenPriceQuery = useQuery(['regenPrice'], () =>
@@ -56,7 +58,6 @@ export function useProjectsWithOrders({
         metadata,
         random,
         projectId,
-        classId,
       }),
       sellOrders,
       regenPrice: regenPriceQuery?.data?.regen?.usd,

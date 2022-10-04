@@ -20,7 +20,6 @@ export function selectProjects({
   metadata = false,
   random = false,
   projectId,
-  classId,
 }: SelectProjectsParams): ProjectInfo[] | undefined {
   if (!projects || !sellOrders) return;
 
@@ -28,9 +27,6 @@ export function selectProjects({
 
   if (projectId) _projects = projects.filter(p => isOtherProject(p, projectId));
   else _projects = [...projects];
-
-  if (classId)
-    _projects = _projects.filter(project => project.classId === classId);
 
   if (random) return shuffle(_projects).filter(hasMetadata);
   if (metadata) return _projects.filter(hasMetadata);

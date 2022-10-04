@@ -16,7 +16,7 @@ import { Body, Label, Title } from 'web-components/lib/components/typography';
 import { CFCProjectMetadataLD, VCSProjectMetadataLD } from 'generated/json-ld';
 import { UseStateSetter } from 'types/react/use-state';
 
-import { ProjectMetadataCFC } from 'components/molecules/ProjectMetadataCFC';
+import { ProjectMetadataCFC } from 'components/molecules/ProjectMetadata/ProjectMetadata.CFC';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import {
@@ -38,7 +38,10 @@ import {
   ProjectTopSectionQuoteMark,
   useProjectTopSectionStyles,
 } from './ProjectTopSection.styles';
-import { getDisplayAdmin } from './ProjectTopSection.utils';
+import {
+  getDisplayAdmin,
+  getDisplayDeveloper,
+} from './ProjectTopSection.utils';
 
 function ProjectTopSection({
   data,
@@ -277,8 +280,7 @@ function ProjectTopSection({
         <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
           <ProjectTopCard
             projectAdmin={getDisplayAdmin(data?.admin)}
-            projectDeveloper={getDisplayParty(
-              'regen:projectDeveloper',
+            projectDeveloper={getDisplayDeveloper(
               metadata,
               project?.partyByDeveloperId,
             )}

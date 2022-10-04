@@ -27,7 +27,10 @@ const LinkWithArrow: React.FC<LinkWithArrowProps> = ({
     <Link
       href={href}
       className={className}
-      sx={{ color: 'info.dark', ...sx }}
+      sx={{
+        color: 'info.dark',
+        ...sx,
+      }}
       target={target || defaultTarget}
       rel="noreferrer"
     >

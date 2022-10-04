@@ -14,7 +14,7 @@ import { useMsgClient } from 'hooks';
 import { CreateBatchFormValues } from '../CreateBatchMultiStepForm/CreateBatchMultiStepForm';
 
 // TODO
-// Right now, just cases "C01" (aka. VCS)
+// Right now, just cases C01 (VCS) and C02 (CFC)
 
 function prepareVCSMetadata(
   projectId: string,

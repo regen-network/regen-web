@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 
+import { Flex } from 'web-components/lib/components/box';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { Loading } from 'web-components/lib/components/loading';
 import Section from 'web-components/lib/components/section';
@@ -106,9 +107,7 @@ export const BatchDetails: React.FC = () => {
         </Box>
         {batch && (
           <Box sx={{ display: 'flex', flexWrap: ['wrap', 'nowrap'] }}>
-            <Box
-              sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}
-            >
+            <Flex col sx={{ width: '100%' }}>
               <BatchInfoGrid
                 batch={batch}
                 projectOnChainId={onChainId}
@@ -119,10 +118,11 @@ export const BatchDetails: React.FC = () => {
                 All credits
               </Title>
               <BatchTotalsGrid batch={batch} />
-            </Box>
+            </Flex>
             <Box
               sx={{
-                my: [0, 10],
+                pt: 10,
+                mb: [0, 10],
                 ml: [0, 10],
                 minWidth: ['100%', '33%', '370px'],
               }}

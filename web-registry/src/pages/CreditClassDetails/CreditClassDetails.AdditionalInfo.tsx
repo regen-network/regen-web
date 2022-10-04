@@ -6,14 +6,14 @@ import { Body } from 'web-components/lib/components/typography';
 
 import { CreditClassMetadataLD } from 'generated/json-ld';
 
-import { LinkWithArrow } from 'components/atoms';
+import { ArrowLink } from 'components/atoms/MetadataArrowLink';
 import { LineItemLabelAbove } from 'components/molecules';
 
 import { ApprovedMethodologiesList } from './CreditClassDetails.ApprovedMethodologies';
 
 interface AdditionalInfoProps {
   onChainClass: ClassInfo;
-  metadata?: CreditClassMetadataLD;
+  metadata?: Partial<CreditClassMetadataLD>;
 }
 
 const AdditionalInfo: React.FC<AdditionalInfoProps> = ({
@@ -59,8 +59,7 @@ const AdditionalInfo: React.FC<AdditionalInfoProps> = ({
         <LineItemLabelAbove
           label="registry"
           data={
-            <LinkWithArrow
-              sx={{ fontSize: 22 }}
+            <ArrowLink
               label={sourceRegistry?.['schema:name']}
               href={sourceRegistry?.['schema:url']?.['@value']}
             />
@@ -71,8 +70,7 @@ const AdditionalInfo: React.FC<AdditionalInfoProps> = ({
         <LineItemLabelAbove
           label="carbon offset standard"
           data={
-            <LinkWithArrow
-              sx={{ fontSize: 22 }}
+            <ArrowLink
               label={carbonOffsetStandard?.['schema:name']}
               href={carbonOffsetStandard?.['schema:url']?.['@value']}
             />

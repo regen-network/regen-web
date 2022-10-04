@@ -12,6 +12,7 @@ export interface RegenModalProps {
   className?: string;
   closeIconColor?: string;
   isIFrame?: boolean;
+  isFullscreenMobile?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -20,29 +21,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'absolute',
     overflow: 'auto',
     '-webkit-overflow-scrolling': 'touch',
-    [theme.breakpoints.up('sm')]: {
-      // '&::-webkit-scrollbar': {
-      //   width: '0.5em',
-      // },
-      // '&::-webkit-scrollbar-track': {
-      //   boxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
-      //   webkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
-      //   marginTop: '20px',
-      //   marginBottom: '20px',
-      //   borderRadius: '6px',
-      // },
-      // '&::-webkit-scrollbar-thumb': {
-      //   backgroundColor: 'rgba(0,0,0,.2)',
-      //   borderRadius: '6px',
-      // },
-      borderRadius: '5px',
-      transform: 'translate(-50%, -50%)',
-      top: '50%',
-      left: '50%',
-      padding: `${theme.spacing(10.75)} ${theme.spacing(16.5)} ${theme.spacing(
-        15,
-      )}`,
-    },
     maxWidth: theme.spacing(150),
     [theme.breakpoints.up('md')]: {
       width: '50%',
@@ -52,6 +30,34 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: '70%',
       maxHeight: '90%',
     },
+    backgroundColor: theme.palette.grey[50],
+    border: `1px solid ${theme.palette.grey[50]}`,
+    boxShadow: theme.shadows[6],
+    '& iframe': {
+      width: '100%',
+      height: '100%',
+      border: 'none',
+    },
+  },
+  notFullscreenMobile: {
+    [theme.breakpoints.up('xs')]: {
+      transform: 'translate(-50%, -50%)',
+      top: '50%',
+      left: '50%',
+      width: '90%',
+      maxHeight: '90%',
+      borderRadius: '5px',
+      padding: `${theme.spacing(10.75)} ${theme.spacing(4)} ${theme.spacing(
+        15,
+      )}`,
+    },
+    [theme.breakpoints.up('sm')]: {
+      padding: `${theme.spacing(10.75)} ${theme.spacing(16.5)} ${theme.spacing(
+        15,
+      )}`,
+    },
+  },
+  fullscreenMobile: {
     [theme.breakpoints.down('sm')]: {
       left: '0px',
       top: '0px',
@@ -62,13 +68,14 @@ const useStyles = makeStyles((theme: Theme) => ({
         20,
       )}`,
     },
-    backgroundColor: theme.palette.grey[50],
-    border: `1px solid ${theme.palette.grey[50]}`,
-    boxShadow: theme.shadows[6],
-    '& iframe': {
-      width: '100%',
-      height: '100%',
-      border: 'none',
+    [theme.breakpoints.up('sm')]: {
+      borderRadius: '5px',
+      transform: 'translate(-50%, -50%)',
+      top: '50%',
+      left: '50%',
+      padding: `${theme.spacing(10.75)} ${theme.spacing(16.5)} ${theme.spacing(
+        15,
+      )}`,
     },
   },
   closeIcon: {
@@ -99,13 +106,21 @@ const RegenModal: React.FC<RegenModalProps> = ({
   className,
   closeIconColor,
   isIFrame,
+  isFullscreenMobile = true,
 }) => {
   const styles = useStyles();
   return (
     <Modal open={open} onClose={onClose}>
       <RemoveScroll>
         <div
-          className={clsx(styles.content, isIFrame && styles.iframe, className)}
+          className={clsx(
+            styles.content,
+            isFullscreenMobile
+              ? styles.fullscreenMobile
+              : styles.notFullscreenMobile,
+            isIFrame && styles.iframe,
+            className,
+          )}
         >
           {children}
           <div className={styles.closeIcon} onClick={onClose}>

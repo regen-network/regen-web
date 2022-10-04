@@ -22,8 +22,8 @@ const LineItemLabelAbove: React.FC<LineItemLabelAboveProps> = ({
     <Box
       sx={{
         width: { xs: '100%', sm: '50%' },
-        pr: 4,
-        mb: { xs: 8, sm: 8 },
+        pr: [0, 8],
+        mb: 8,
         ...sx,
       }}
     >

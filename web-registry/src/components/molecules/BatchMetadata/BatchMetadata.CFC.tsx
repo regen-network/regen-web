@@ -1,5 +1,3 @@
-import { Box } from '@mui/material';
-
 import { Flex } from 'web-components/lib/components/box';
 import { Body } from 'web-components/lib/components/typography';
 import { CFCBatchMetadataLD } from 'web-components/lib/types/rdf/C02-city-forest-credits-batch';
@@ -7,10 +5,10 @@ import { CFCBatchMetadataLD } from 'web-components/lib/types/rdf/C02-city-forest
 import { LinkOrDash } from './BatchMetadata.LinkOrDash';
 import { MetaDetail } from './BatchMetadata.MetaDetail';
 
-export const CFCBatchMetadata = ({
+export const BatchMetadataCFC = ({
   data,
 }: {
-  data?: CFCBatchMetadataLD;
+  data?: Partial<CFCBatchMetadataLD>;
 }): JSX.Element => {
   const reports = data?.['regen:verificationReports'];
   const serialNumbers = data?.['regen:cfcCreditSerialNumbers'];
@@ -29,9 +27,9 @@ export const CFCBatchMetadata = ({
         {data?.['regen:cfcVintageYear']?.['@value'] || '-'}
       </MetaDetail>
       <MetaDetail label="verification reports">
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <Flex col sx={{ gap: 2 }}>
           {reports && reports?.length > 0
-            ? reports?.map((report: any, i: number) => (
+            ? reports.map((report: any, i: number) => (
                 <LinkOrDash
                   key={i}
                   href={report?.['schema:url']?.['@value']}
@@ -39,7 +37,7 @@ export const CFCBatchMetadata = ({
                 />
               ))
             : '-'}
-        </Box>
+        </Flex>
       </MetaDetail>
     </>
   );

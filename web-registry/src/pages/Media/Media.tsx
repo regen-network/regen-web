@@ -73,8 +73,6 @@ const Media = (): JSX.Element => {
   };
 
   function navigateNext(): void {
-    // TODO: replace 'review' with path name once
-    // https://github.com/regen-network/regen-registry/issues/447 is merged
     navigate(`/project-pages/${projectId}/metadata`);
   }
 

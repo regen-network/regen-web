@@ -1,26 +1,37 @@
 import React from 'react';
 
 import { BrokenLinkIcon } from '../icons/BrokenLinkIcon';
-import { TxModal, TxModalProps } from './TxModal';
+import { Item, TxModal, TxModalProps } from './TxModal';
 
 interface Props extends TxModalProps {
   error: string;
+  cardItems?: Item[];
 }
 
-const TxErrorModal: React.FC<Props> = props => {
+const TxErrorModal: React.FC<Props> = ({
+  error,
+  cardItems,
+  title,
+  icon,
+  ...props
+}) => {
   return (
     <TxModal
-      icon={<BrokenLinkIcon sx={{ pb: 4.5 }} />}
-      cardItems={[
-        {
-          label: 'error',
-          value: {
-            name: props.error,
-          },
-          color: 'error.main',
-        },
-      ]}
-      title="Sorry, your transaction was not successful."
+      icon={icon ?? <BrokenLinkIcon sx={{ pb: 4.5 }} />}
+      cardItems={
+        cardItems
+          ? cardItems
+          : [
+              {
+                label: 'error',
+                value: {
+                  name: error,
+                },
+                color: 'error.main',
+              },
+            ]
+      }
+      title={title ?? 'Sorry, your transaction was not successful.'}
       {...props}
     />
   );

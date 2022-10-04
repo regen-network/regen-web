@@ -15,7 +15,6 @@ export function FeaturedProjects(): JSX.Element {
   const [selectedProject, setSelectedProject] =
     useState<ProjectWithOrderData | null>(null);
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
-
   return (
     <div id="projects">
       <ProjectCardsSection

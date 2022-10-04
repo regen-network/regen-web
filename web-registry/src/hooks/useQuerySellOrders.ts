@@ -19,21 +19,19 @@ type QuerySellOrdersResponseExtented = {
   sellOrders: SellOrderInfoExtented[];
 };
 
+export type RefetchSellOrdersResponse = Promise<
+  SellOrderInfoExtented[] | undefined
+>;
+
 export const useQuerySellOrders = function (): {
   sellOrdersResponse: QuerySellOrdersResponseExtented | undefined;
-  refetchSellOrders: () => void;
+  refetchSellOrders: () => RefetchSellOrdersResponse;
 } {
   const { api } = useLedger();
   const [queryClient, setQueryClient] = useState<QueryClientImpl>();
   const [sellOrdersResponse, setSellOrdersResponse] = useState<
     QuerySellOrdersResponseExtented | undefined
   >(undefined);
-  const [refetchCount, setRefetchCount] = useState(0);
-
-  const refetchSellOrders = useCallback(
-    () => setRefetchCount(refetchCount + 1),
-    [refetchCount],
-  );
 
   useEffect(() => {
     if (!api?.queryClient) return;
@@ -41,12 +39,10 @@ export const useQuerySellOrders = function (): {
     setQueryClient(_queryClient);
   }, [api?.queryClient]);
 
-  useEffect(() => {
-    if (!queryClient) return;
-
-    async function fetchData(client: QueryClientImpl): Promise<void> {
+  const refetchSellOrders = useCallback(async (): RefetchSellOrdersResponse => {
+    if (queryClient) {
       // Fetching all sell orders
-      const sellOrdersResponse = await client.SellOrders({});
+      const sellOrdersResponse = await queryClient.SellOrders({});
       const { sellOrders } = sellOrdersResponse;
 
       // Find sell orders that have ibc askDenom and gather their hash
@@ -77,10 +73,16 @@ export const useQuerySellOrders = function (): {
       setSellOrdersResponse({
         sellOrders: sellOrdersWithBaseDenom,
       });
+
+      return sellOrdersWithBaseDenom;
     }
 
-    fetchData(queryClient);
-  }, [queryClient, refetchCount]);
+    return undefined;
+  }, [queryClient]);
+
+  useEffect(() => {
+    refetchSellOrders();
+  }, [queryClient, refetchSellOrders]);
 
   return { sellOrdersResponse, refetchSellOrders };
 };

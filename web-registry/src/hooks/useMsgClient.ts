@@ -11,9 +11,15 @@ interface TxData {
   memo?: string;
 }
 
+interface OptionalCallbacks {
+  onError?: () => void;
+  onSuccess?: () => void;
+}
+
 export type SignAndBroadcastType = (
   message: TxData,
   onBroadcast?: () => void, // an optional callback that gets called between sign and broadcast
+  { onError, onSuccess }?: OptionalCallbacks,
 ) => Promise<void | string>;
 
 type MsgClientType = {
@@ -83,15 +89,24 @@ export default function useMsgClient(
   );
 
   const signAndBroadcast = useCallback(
-    async (tx: TxData, closeForm?: () => void) => {
+    async (
+      tx: TxData,
+      closeForm?: () => void,
+      { onError, onSuccess }: OptionalCallbacks = {},
+    ) => {
       try {
         const txBytes = await sign(tx);
         if (txBytes) {
           if (closeForm) closeForm();
-          return await broadcast(txBytes);
+          try {
+            return await broadcast(txBytes);
+          } finally {
+            if (onSuccess) onSuccess();
+          }
         }
       } catch (err) {
         if (closeForm) closeForm();
+        if (onError) onError();
         handleError();
         assertIsError(err);
         setError(err.message);

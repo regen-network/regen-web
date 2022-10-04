@@ -64,8 +64,15 @@ const useCreateSellOrderSubmit = ({
         memo: undefined,
       };
 
-      signAndBroadcast(tx, onTxBroadcast);
-      track('sellSuccess');
+      const onError = (): void => {
+        track('sellFailure');
+        console.log('sellFailure');
+      };
+      const onSuccess = (): void => {
+        track('sellSuccess');
+        console.log('sellSuccess');
+      };
+      signAndBroadcast(tx, onTxBroadcast, { onError, onSuccess });
 
       if (batchDenom && amount && askDenom) {
         const baseDenom = await getDenomtrace({ denom: askDenom });

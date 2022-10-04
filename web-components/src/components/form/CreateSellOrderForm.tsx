@@ -64,8 +64,6 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
   const validateHandler = (values: FormValues): FormikErrors<FormValues> => {
     let errors: FormikErrors<FormValues> = {};
 
-    track('sell2');
-
     if (!values.batchDenom) {
       errors.batchDenom = requiredMessage;
     }
@@ -180,7 +178,11 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
             status={status}
             isValid={isValid}
             submitCount={submitCount}
-            submitForm={submitForm}
+            submitForm={() => {
+              track('sell2');
+              console.log('sell2');
+              submitForm();
+            }}
             label="Create Sell Order"
           />
         </Form>

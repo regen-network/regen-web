@@ -7,6 +7,10 @@ import { formatNumber } from 'web-components/lib/utils/format';
 
 import { microToDenom } from 'lib/denom.utils';
 
+import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
+
+import { UISellOrderInfo } from '../Projects.types';
+
 type GetPurchaseInfoParams = {
   projectId: string;
   sellOrders: SellOrderInfo[];
@@ -89,3 +93,10 @@ export const sortProjectsBySellOrdersAvailability =
     if (!ordersForProjectA && ordersForProjectB) return 1;
     return 0;
   };
+
+export const normalizeToUISellOrderInfo = (
+  sellOrder: SellOrderInfoExtented,
+): UISellOrderInfo => ({
+  ...sellOrder,
+  id: String(sellOrder.id),
+});

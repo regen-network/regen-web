@@ -20,7 +20,6 @@ import {
   MINIMUM_FRACTION_DIGITS,
 } from './SellOrdersTable.constants';
 import { SellOrderPurchaseIcon } from './SellOrderstable.PurchaseIcon';
-import { getDenomCurrencyPrefix } from './SellOrdersTable.utils';
 
 type Props = {
   sellOrder: NormalizedSellOrder;
@@ -51,7 +50,7 @@ const getSellOrdersTableRow = ({
       denom={askBaseDenom}
       sx={{ mr: 1, display: 'flex', alignItems: 'center' }}
     />
-    {`${getDenomCurrencyPrefix({ baseDenom: askBaseDenom })}${formatNumber({
+    {`${formatNumber({
       num: microToDenom(askAmount),
       maximumFractionDigits: MAXIMUM_FRACTION_DIGITS,
       minimumFractionDigits: MINIMUM_FRACTION_DIGITS,

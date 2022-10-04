@@ -48,6 +48,7 @@ const WalletButton: React.FC = () => {
     if (connect) {
       await connect();
       track('login', { date: Date(), account: { wallet: wallet?.address } });
+      console.log('login');
     }
   };
 

@@ -282,6 +282,7 @@ export const MyEcocredits = (): JSX.Element => {
                       label: CREATE_SELL_ORDER_SHORT,
                       onClick: () => {
                         track('sell1');
+                        console.log('sell1');
                         setSellOrderCreateOpen(i);
                       },
                     },

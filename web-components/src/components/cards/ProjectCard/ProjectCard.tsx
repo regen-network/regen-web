@@ -234,6 +234,7 @@ export function ProjectCard({
                         creditClassName: purchaseInfo.creditClass?.name,
                         projectName: name,
                       });
+                      console.log('buy1');
                       onButtonClick && onButtonClick();
                     }}
                     size="small"

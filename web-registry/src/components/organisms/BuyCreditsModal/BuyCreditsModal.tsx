@@ -194,7 +194,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
               <div>
                 <Form translate="yes">
                   <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
-                    {'Sell order ID'}
+                    {'Sell order'}
                   </Title>
                   <Field
                     name="sellOrderId"
@@ -205,6 +205,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       !!initialValues?.sellOrderId ||
                       sellOrdersOptions.length === 1
                     }
+                    native={false}
                   />
                   <SetSelectedSellOrderElement
                     project={project}

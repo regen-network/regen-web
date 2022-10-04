@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { Box } from '@mui/material';
 import { MsgSell } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
+import { useTrack } from 'use-analytics';
 import { getDenomtrace } from 'utils/ibc/getDenomTrace';
 
 import { FormValues as CreateSellOrderFormValues } from 'web-components/lib/components/form/CreateSellOrderForm';
@@ -37,6 +38,7 @@ const useCreateSellOrderSubmit = ({
   setTxButtonTitle,
   onTxBroadcast,
 }: Props): ReturnType => {
+  const track = useTrack();
   const createSellOrderSubmit = useCallback(
     async (values: CreateSellOrderFormValues): Promise<void> => {
       if (!accountAddress) return Promise.reject();
@@ -63,6 +65,7 @@ const useCreateSellOrderSubmit = ({
       };
 
       signAndBroadcast(tx, onTxBroadcast);
+      track('sellSuccess');
 
       if (batchDenom && amount && askDenom) {
         const baseDenom = await getDenomtrace({ denom: askDenom });
@@ -105,6 +108,7 @@ const useCreateSellOrderSubmit = ({
       setTxButtonTitle,
       signAndBroadcast,
       onTxBroadcast,
+      track,
     ],
   );
 

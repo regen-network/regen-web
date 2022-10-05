@@ -17,6 +17,7 @@ export const invalidAddress: string = 'Invalid address';
 export const invalidRegenAddress: string = 'Invalid regen address';
 export const MAX_FRACTION_DIGITS: number = 6; // useful for conversion to micro udenom (BigInt)
 export const requiredDenom: string = 'Please choose a denom';
+export const invalidDecimalCount: string = `More than ${MAX_FRACTION_DIGITS} decimal places not allowed`;
 
 export const numericOnlyRE = /^\d*$/gm;
 
@@ -44,6 +45,10 @@ export function validatePassword(password: string): boolean {
   return hasUpperCase && hasLowerCase && hasNumber && hasSpecialCharacter;
 }
 
+const decimalCount = (num: number): number => {
+  return num.toString().split(/\./)?.[1]?.length;
+};
+
 export function validateAmount(
   availableTradableAmount: number,
   amount?: number,
@@ -58,6 +63,8 @@ export function validateAmount(
     return invalidAmount;
   } else if (amount > availableTradableAmount) {
     return customInsufficientCredits || insufficientCredits;
+  } else if (decimalCount(amount) > MAX_FRACTION_DIGITS) {
+    return invalidDecimalCount;
   }
   return;
 }
@@ -88,7 +95,7 @@ export function validatePrice(
   if (!price) {
     return requiredMessage;
   }
-  const priceDecimalPlaces = price?.toString().split(/\.|,/)?.[1]?.length;
+  const priceDecimalPlaces = decimalCount(price);
   maximumFractionDigits = maximumFractionDigits || MAX_FRACTION_DIGITS;
   if (!!priceDecimalPlaces && priceDecimalPlaces > maximumFractionDigits) {
     return `Maximum ${maximumFractionDigits} decimal places`;

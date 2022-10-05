@@ -19,6 +19,7 @@ import ControlledTextField from 'web-components/lib/components/inputs/Controlled
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
 import SelectFieldFallback from 'web-components/lib/components/inputs/SelectFieldFallback';
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
+import TextField from 'web-components/lib/components/inputs/TextField';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import {
   invalidMemoLength,
@@ -367,15 +368,15 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       </Title>
                       <InfoTooltipWithIcon title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')" />
                     </Flex>
-                    <Box>
+                    <Flex>
                       <Field
-                        component={ControlledTextField}
+                        component={TextField}
                         label="Add retirement transaction details (stored in the tx memo)"
                         name="retirementNote"
                         optional
                         sx={{ mb: { xs: 10, sm: 12 } }}
                       />
-                    </Box>
+                    </Flex>
                     <Flex>
                       <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
                         Credit retirement location

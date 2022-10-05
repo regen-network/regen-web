@@ -70,10 +70,7 @@ export default function useMsgClient(
   );
 
   const broadcast = useCallback(
-    async (
-      txBytes: Uint8Array,
-      { onError, onSuccess }: OptionalCallbacks = {},
-    ): Promise<void | string> => {
+    async (txBytes: Uint8Array): Promise<void> => {
       if (!api?.msgClient || !txBytes) return;
       handleTxQueued();
       const _deliverTxResponse = await api.msgClient.broadcast(txBytes);
@@ -82,12 +79,10 @@ export default function useMsgClient(
       if (_deliverTxResponse.code !== 0) {
         setError(_deliverTxResponse.rawLog);
         handleError();
-        if (onError) onError();
-        return _deliverTxResponse.rawLog;
+        throw new Error(_deliverTxResponse.rawLog);
       } else {
         setDeliverTxResponse(_deliverTxResponse);
         handleTxDelivered(_deliverTxResponse);
-        if (onSuccess) onSuccess();
       }
     },
     [api?.msgClient, handleTxQueued, handleTxDelivered, handleError],
@@ -103,13 +98,15 @@ export default function useMsgClient(
         const txBytes = await sign(tx);
         if (txBytes) {
           if (closeForm) closeForm();
-          await broadcast(txBytes, { onError, onSuccess });
+          await broadcast(txBytes);
+          if (onSuccess) onSuccess();
         }
       } catch (err) {
         if (closeForm) closeForm();
         handleError();
         assertIsError(err);
         setError(err.message);
+        if (onError) onError();
         return err.message;
       }
 

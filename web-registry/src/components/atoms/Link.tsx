@@ -1,11 +1,7 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-<<<<<<< HEAD
-import { Box, Link as MuiLink, LinkProps as MuiLinkProps } from '@mui/material';
-=======
 import { HashLink } from 'react-router-hash-link';
-import { Link as MuiLink, LinkProps as MuiLinkProps } from '@mui/material';
->>>>>>> ebe17435 (feat: fix credit class link (#1347))
+import { Box, Link as MuiLink, LinkProps as MuiLinkProps } from '@mui/material';
 
 interface LinkProps extends MuiLinkProps {
   href: string; // require href

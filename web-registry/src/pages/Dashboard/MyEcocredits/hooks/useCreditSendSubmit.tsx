@@ -71,11 +71,9 @@ const useCreditSendSubmit = ({
 
       const onError = (): void => {
         track('sendFailure');
-        console.log('sendFailure');
       };
       const onSuccess = (): void => {
         track('sendSuccess');
-        console.log('sendSuccess');
       };
       await signAndBroadcast(tx, () => setCreditSendOpen(-1), {
         onError,

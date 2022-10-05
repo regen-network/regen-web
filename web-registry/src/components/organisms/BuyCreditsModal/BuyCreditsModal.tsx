@@ -208,7 +208,6 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                 track_data['amountRetired'] = getFormattedNumber(0);
               }
               track('buy2', track_data);
-              console.log('buy2');
             }
             try {
               await handleBuyCreditsSubmit(values, onSubmit, selectedSellOrder);

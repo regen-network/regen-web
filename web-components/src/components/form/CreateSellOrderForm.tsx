@@ -89,7 +89,6 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
       validate={validateHandler}
       onSubmit={async values => {
         track('sell2');
-        console.log('sell2');
         await onSubmit(values);
       }}
     >

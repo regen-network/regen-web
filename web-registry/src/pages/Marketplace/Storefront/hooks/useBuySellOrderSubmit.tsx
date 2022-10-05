@@ -115,11 +115,9 @@ const useBuySellOrderSubmit = ({
 
       const onError = (): void => {
         track('buyFailure');
-        console.log('buyFailure');
       };
       const onSuccess = (): void => {
         track('buySuccess');
-        console.log('buySuccess');
       };
       const error = await signAndBroadcast(
         tx,

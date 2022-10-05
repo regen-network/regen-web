@@ -129,7 +129,11 @@ const CreditSendForm: React.FC<FormProps> = ({
     <Formik
       initialValues={initialValues}
       validate={validateHandler}
-      onSubmit={onSubmit}
+      onSubmit={async values => {
+        track('send2');
+        console.log('send2');
+        await onSubmit(values);
+      }}
     >
       {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
         <Form>
@@ -205,11 +209,7 @@ const CreditSendForm: React.FC<FormProps> = ({
             status={status}
             isValid={isValid}
             submitCount={submitCount}
-            submitForm={() => {
-              track('send2');
-              console.log('send2');
-              submitForm();
-            }}
+            submitForm={submitForm}
             label={'Send'}
           />
         </Form>

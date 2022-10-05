@@ -87,7 +87,11 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
     <Formik
       initialValues={initialValues}
       validate={validateHandler}
-      onSubmit={onSubmit}
+      onSubmit={async values => {
+        track('sell2');
+        console.log('sell2');
+        await onSubmit(values);
+      }}
     >
       {({
         values,
@@ -178,11 +182,7 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
             status={status}
             isValid={isValid}
             submitCount={submitCount}
-            submitForm={() => {
-              track('sell2');
-              console.log('sell2');
-              submitForm();
-            }}
+            submitForm={submitForm}
             label="Create Sell Order"
           />
         </Form>

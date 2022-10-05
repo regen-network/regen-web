@@ -83,14 +83,14 @@ export const getBatchesTotal = (
     const totals = batches.reduce(
       (acc, batch) => {
         acc.cancelledAmount += Number(batch?.cancelledAmount ?? 0);
-        acc.retiredSupply += Number(batch?.retiredSupply ?? 0);
-        acc.tradableSupply += Number(batch?.tradableSupply ?? 0);
+        acc.retiredAmount += Number(batch?.retiredAmount ?? 0);
+        acc.tradableAmount += Number(batch?.tradableAmount ?? 0);
         return acc;
       },
       {
         cancelledAmount: 0,
-        retiredSupply: 0,
-        tradableSupply: 0,
+        retiredAmount: 0,
+        tradableAmount: 0,
       },
     );
     return { totals };

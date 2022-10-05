@@ -173,8 +173,9 @@ export const Storefront = (): JSX.Element => {
         batchInfos,
         sellOrders,
         projectsInfosByHandleMap,
+        projectsWithMetadataMap,
       }),
-    [batchInfos, sellOrders, projectsInfosByHandleMap],
+    [batchInfos, sellOrders, projectsInfosByHandleMap, projectsWithMetadataMap],
   );
 
   const handleTxQueued = (): void => setIsProcessingModalOpen(true);

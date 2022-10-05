@@ -112,6 +112,7 @@ const useCreditSendSubmit = ({
       setTxModalHeader,
       setTxModalTitle,
       signAndBroadcast,
+      track,
     ],
   );
 

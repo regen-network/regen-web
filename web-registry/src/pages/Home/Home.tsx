@@ -135,6 +135,7 @@ const Home: React.FC = () => {
         <Section
           title="Credit Classes"
           classes={{ root: styles.section, title: styles.title }}
+          id="credit-classes"
         >
           <CreditClassCards
             btnText="Learn More"

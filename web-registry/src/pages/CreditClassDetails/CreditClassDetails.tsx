@@ -127,7 +127,7 @@ function CreditClassDetails({
           isLandSteward={isLandSteward}
         />
       )}
-      {onChainClass && dbCreditClassByOnChainId && (
+      {onChainClass && (
         <CreditClassDetailsSimple
           dbClass={dbCreditClassByOnChainId}
           onChainClass={onChainClass}

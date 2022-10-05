@@ -95,6 +95,11 @@ export const qudtUnitMap = {
   'unit:AC': 'acres',
 };
 
+export const getAreaUnit = (value?: qudtUnit): string => {
+  if (!value) return '';
+  return qudtUnitMap[value] || '';
+};
+
 export function getProjectShapeIri(creditClassId?: string | null): string {
   return creditClassId
     ? `http://regen.network/${creditClassId}-ProjectShape`

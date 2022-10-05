@@ -52,7 +52,7 @@ export const Projects: React.FC = () => {
           gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 400px))',
           gridGap: '1.125rem',
           flex: 1,
-          justifyContent: { xs: 'flex-start', md: 'flex-start' },
+          justifyContent: 'center',
           maxWidth: theme => ({
             xs: '100%',
             lg: theme.typography.pxToRem(1400),

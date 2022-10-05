@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { getMetadata } from 'lib/metadata-graph';
+import { useWallet } from 'lib/wallet';
 
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
@@ -19,6 +20,7 @@ type Props = {
   sellOrders?: SellOrderInfoExtented[];
   regenPrice?: number;
   limit?: number;
+  userAddress?: string;
 };
 
 export interface ProjectsSellOrders {
@@ -31,11 +33,13 @@ export const useProjectsSellOrders = ({
   sellOrders,
   regenPrice,
   limit,
+  userAddress,
 }: Props): ProjectsSellOrders => {
   const [projectsWithOrderData, setProjectsWithOrderData] = useState<
     ProjectWithOrderData[]
   >([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const { wallet } = useWallet();
 
   useEffect(() => {
     if (projectsWithOrderData.length > 0) return;
@@ -47,13 +51,21 @@ export const useProjectsSellOrders = ({
           sellOrders,
           limit ?? projects.length,
           regenPrice,
+          wallet?.address,
         );
         setProjectsWithOrderData(_projectsWithOrders);
         setLoading(false);
       }
     };
     normalize();
-  }, [projectsWithOrderData, projects, sellOrders, regenPrice, limit]);
+  }, [
+    projectsWithOrderData,
+    projects,
+    sellOrders,
+    regenPrice,
+    limit,
+    wallet?.address,
+  ]);
 
   return { projectsWithOrderData, loading };
 };
@@ -63,6 +75,7 @@ const getProjectDisplayData = async (
   sellOrders: SellOrderInfoExtented[],
   limit: number,
   regenPrice?: number,
+  userAddress?: string,
 ): Promise<ProjectWithOrderData[]> => {
   const projectsWithOrderData = await Promise.all(
     projects
@@ -76,6 +89,7 @@ const getProjectDisplayData = async (
           projectId: project.id,
           sellOrders,
           regenPrice,
+          userAddress,
         });
         let metadata;
         if (project.metadata.length) {

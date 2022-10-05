@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { MockedProvider } from '@apollo/client/testing';
 import { useAuth0 } from '@auth0/auth0-react';
 import mediaQuery from 'css-mediaquery';
+import { useAnalytics } from 'use-analytics';
 
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 
@@ -28,6 +29,8 @@ const user = {
 };
 jest.mock('@auth0/auth0-react');
 const mockedAuth0 = useAuth0 as jest.Mock;
+jest.mock('use-analytics');
+const mockedAnalytics = useAnalytics as jest.Mock;
 
 describe('App', () => {
   beforeAll(() => {
@@ -43,6 +46,14 @@ describe('App', () => {
         user,
         logout: jest.fn(),
         loginWithRedirect: jest.fn(),
+      });
+      mockedAnalytics.mockReturnValue({
+        plugins: {
+          enable: async () => {
+            jest.fn();
+          },
+        },
+        page: jest.fn(),
       });
     });
 

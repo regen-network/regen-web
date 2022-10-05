@@ -2,27 +2,24 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import { makeStyles } from '@mui/styles';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { startCase } from 'lodash';
 
-import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import ReadMore from 'web-components/lib/components/read-more';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
+import { Label, Title } from 'web-components/lib/components/typography';
 import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { CreditClassByOnChainIdQuery } from 'generated/graphql';
-import {
-  ApprovedMethodologies,
-  CreditClassMetadataLD,
-} from 'generated/json-ld';
+import { CreditClassMetadataLD } from 'generated/json-ld';
 import { getAccountUrl } from 'lib/block-explorer';
 
-import { Link } from 'components/atoms';
 import { AccountLink } from 'components/atoms/AccountLink';
-import { EcocreditsSection, LineItemLabelAbove } from 'components/molecules';
+import { EcocreditsSection } from 'components/molecules';
 import { CreditBatches, MoreProjectsSection } from 'components/organisms';
 
+import { AdditionalInfo } from '../CreditClassDetails.AdditionalInfo';
+import { SideBarBox } from '../CreditClassDetails.SidebarBox';
+
 interface CreditDetailsProps {
-  dbClass: CreditClassByOnChainIdQuery['creditClassByOnChainId'];
+  dbClass?: CreditClassByOnChainIdQuery['creditClassByOnChainId'];
   onChainClass: ClassInfo;
   issuers?: string[];
   metadata?: CreditClassMetadataLD;
@@ -51,18 +48,6 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     fontSize: theme.typography.pxToRem(12),
     color: theme.palette.primary.contrastText,
     marginBottom: theme.spacing(3),
-  },
-  box: {
-    display: 'flex',
-    flexDirection: 'column',
-    borderRadius: 5,
-    border: `1px solid ${theme.palette.grey[100]}`,
-    background: theme.palette.primary.main,
-    padding: theme.spacing(11, 5),
-    margin: theme.spacing(4, 0),
-    [theme.breakpoints.up('sm')]: {
-      minWidth: theme.spacing(91.75),
-    },
   },
   link: {
     color: theme.palette.secondary.main,
@@ -113,20 +98,6 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
   metadata,
 }) => {
   const styles = useStyles();
-  const offsetGenerationMethods = metadata?.['regen:offsetGenerationMethod'];
-  const sectoralScopes = metadata?.['regen:sectoralScope'];
-  const verificationMethod = metadata?.['regen:verificationMethod'];
-  const sourceRegistry = metadata?.['regen:sourceRegistry'];
-
-  const getCreditType = (creditTypeAbbrev: string): string => {
-    // TODO: add credit types as they come online, or fetch from ledger somehow
-    return (
-      {
-        // eslint-disable-next-line prettier/prettier
-        C: 'Carbon',
-      }[creditTypeAbbrev] || creditTypeAbbrev
-    );
-  };
 
   const Projects: React.FC = () => {
     const projects = dbClass?.projectsByCreditClassId?.nodes;
@@ -139,46 +110,6 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
           projects={projects}
         />
       </div>
-    );
-  };
-
-  const ApprovedMethodologies: React.FC<{
-    methodologyList?: ApprovedMethodologies;
-  }> = ({ methodologyList }) => {
-    if (!methodologyList) return null;
-
-    const methodologies = methodologyList?.['schema:itemListElement'];
-    const count = methodologies?.length;
-    const firstMethodology = methodologies?.[0];
-
-    if (!count || count < 1) return null;
-    return (
-      <LineItemLabelAbove
-        label="approved methodologies"
-        data={
-          <Box>
-            <Body size="xl" key={firstMethodology?.['schema:name']}>
-              {firstMethodology?.['schema:name']}
-            </Body>
-            {count > 1 && (
-              <Link
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  color: 'secondary.main',
-                }}
-                href={methodologyList?.['schema:url']?.['@value']}
-                target="_blank"
-              >
-                <Label sx={{ fontSize: [16], mr: 2 }}>{`+ ${
-                  count - 1
-                } more`}</Label>{' '}
-                <SmallArrowIcon className={styles.arrow} />
-              </Link>
-            )}
-          </Box>
-        }
-      />
     );
   };
 
@@ -222,78 +153,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 {metadata?.['schema:description']}
               </ReadMore>
             )}
-            <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-              <LineItemLabelAbove
-                label="credit type"
-                data={
-                  <Body size="xl" sx={{ mr: 1 }}>
-                    {getCreditType(onChainClass.creditTypeAbbrev)}
-                  </Body>
-                }
-              />
-              {sourceRegistry?.['schema:name'] && (
-                <LineItemLabelAbove
-                  label="registry"
-                  data={
-                    <Link
-                      href={sourceRegistry?.['schema:url']?.['@value']}
-                      target="_blank"
-                    >
-                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Body size="xl" sx={{ mr: 1 }}>
-                          {sourceRegistry?.['schema:name']}
-                        </Body>
-                        <SmallArrowIcon
-                          sx={{ mt: '-2px' }}
-                          className={styles.arrow}
-                        />
-                      </Box>
-                    </Link>
-                  }
-                />
-              )}
-              <ApprovedMethodologies
-                methodologyList={metadata?.['regen:approvedMethodologies']}
-              />
-              {offsetGenerationMethods && offsetGenerationMethods?.length > 0 && (
-                <LineItemLabelAbove
-                  label={`offset generation method${
-                    offsetGenerationMethods.length > 1 ? 's' : ''
-                  }`}
-                  data={
-                    <>
-                      {offsetGenerationMethods.map((method, i) => (
-                        <Body key={i} size="xl">
-                          {startCase(method)}
-                        </Body>
-                      ))}
-                    </>
-                  }
-                />
-              )}
-              {verificationMethod && (
-                <LineItemLabelAbove
-                  label="verification method"
-                  data={<Body size="xl">{startCase(verificationMethod)}</Body>}
-                />
-              )}
-              {sectoralScopes && sectoralScopes?.length > 0 && (
-                <LineItemLabelAbove
-                  label={`sectoral scope${
-                    sectoralScopes.length > 1 ? 's' : ''
-                  }`}
-                  data={
-                    <>
-                      {sectoralScopes.map((sector, i) => (
-                        <Body key={i} size="xl">
-                          {sector}
-                        </Body>
-                      ))}
-                    </>
-                  }
-                />
-              )}
-            </Box>
+            <AdditionalInfo onChainClass={onChainClass} metadata={metadata} />
           </Box>
           <Box
             sx={{
@@ -301,7 +161,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
               flexDirection: 'column',
             }}
           >
-            <Box className={styles.box}>
+            <SideBarBox>
               <div className={styles.sidebarItemMargin}>
                 <Label size="xs" color="primary.contrastText" mb={3}>
                   admin
@@ -326,7 +186,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                   ))}
                 </Box>
               </div>
-            </Box>
+            </SideBarBox>
           </Box>
         </Box>
       </EcocreditsSection>

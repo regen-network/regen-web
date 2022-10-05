@@ -8,6 +8,7 @@ import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 import { ProjectWithOrderData } from '../Projects.types';
 import {
   getPurchaseInfo,
+  normalizeToUISellOrderInfo,
   sortProjectsBySellOrdersAvailability,
 } from './useProjectsSellOrders.utils';
 
@@ -70,12 +71,7 @@ const getProjectDisplayData = async (
       .map(async (project: ProjectInfo) => {
         const sellOrdersNormalized = sellOrders
           .filter(sellOrder => sellOrder?.batchDenom?.startsWith(project.id))
-          .map(sellOrder => {
-            return {
-              ...sellOrder,
-              id: String(sellOrder.id),
-            };
-          });
+          .map(normalizeToUISellOrderInfo);
         const purchaseInfo = getPurchaseInfo({
           projectId: project.id,
           sellOrders,

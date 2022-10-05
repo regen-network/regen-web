@@ -1,10 +1,11 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
 import {
   BatchInfo,
   QueryProjectsResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -27,9 +28,10 @@ import { useAllProjectsQuery } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { getHashUrl } from 'lib/block-explorer';
 
+import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
-import { BuyCreditsModal } from 'components/organisms';
+import { BuyCreditsModal, BuyCreditsValues } from 'components/organisms';
 import SellOrdersTable from 'components/organisms/SellOrdersTable/SellOrdersTable';
 import useEcocreditQuery from 'hooks/useEcocreditQuery';
 import useMsgClient from 'hooks/useMsgClient';
@@ -39,6 +41,7 @@ import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
 import { client as sanityClient } from '../../../sanity';
 import useBuySellOrderSubmit from './hooks/useBuySellOrderSubmit';
 import useCancelSellOrderSubmit from './hooks/useCancelSellOrderSubmit';
+import { useCheckSellOrderAvailabilty } from './hooks/useCheckSellOrderAvailabilty';
 import { useFetchMetadataProjects } from './hooks/useFetchMetadataProjects';
 import { useResetErrorBanner } from './hooks/useResetErrorBanner';
 import {
@@ -68,6 +71,10 @@ export const Storefront = (): JSX.Element => {
   const { offset, rowsPerPage } = paginationParams;
   const { sellOrdersResponse, refetchSellOrders } = useQuerySellOrders();
   const sellOrders = sellOrdersResponse?.sellOrders;
+  const uiSellOrdersInfo = useMemo(
+    () => sellOrders?.map(normalizeToUISellOrderInfo),
+    [sellOrders],
+  );
 
   const batchDenoms = useMemo(
     () =>
@@ -116,6 +123,8 @@ export const Storefront = (): JSX.Element => {
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
   const [selectedAction, setSelectedAction] = useState<SellOrderActions>();
+  const selectedSellOrderIdRef = useRef<number>();
+  const submittedQuantityRef = useRef<number>();
   const isBuyModalOpen = selectedSellOrder !== null && selectedAction === 'buy';
   const navigate = useNavigate();
   const isCancelModalOpen =
@@ -145,6 +154,7 @@ export const Storefront = (): JSX.Element => {
   const handleTxQueued = (): void => setIsProcessingModalOpen(true);
   const handleTxDelivered = (): void => {
     setIsProcessingModalOpen(false);
+    selectedSellOrderIdRef.current = undefined;
     refetchSellOrders();
   };
   const handleError = (): void => setIsProcessingModalOpen(false);
@@ -169,6 +179,14 @@ export const Storefront = (): JSX.Element => {
     }
   };
 
+  const onSubmitCallback = ({
+    creditCount,
+    sellOrderId,
+  }: BuyCreditsValues): void => {
+    selectedSellOrderIdRef.current = Number(sellOrderId);
+    submittedQuantityRef.current = creditCount;
+  };
+
   const {
     signAndBroadcast,
     setDeliverTxResponse,
@@ -177,9 +195,12 @@ export const Storefront = (): JSX.Element => {
     error,
     setError,
   } = useMsgClient(handleTxQueued, handleTxDelivered, handleError);
+
   const accountAddress = wallet?.address;
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
+  const errorEnum = findErrorByCodeEnum({ errorCode: error });
+  const ErrorIcon = errorsMapping[errorEnum].icon;
 
   const buySellOrderSubmit = useBuySellOrderSubmit({
     accountAddress,
@@ -190,6 +211,8 @@ export const Storefront = (): JSX.Element => {
     setTxModalHeader,
     setTxModalTitle,
     buttonTitle: BUY_SELL_ORDER_BUTTON,
+    refetchSellOrders,
+    onSubmitCallback,
   });
 
   const cancelSellOrderSubmit = useCancelSellOrderSubmit({
@@ -233,6 +256,16 @@ export const Storefront = (): JSX.Element => {
     [askAmount, askDenom, batchDenom, orderId],
   );
 
+  useCheckSellOrderAvailabilty({
+    selectedSellOrderIdRef,
+    submittedQuantityRef,
+    setError,
+    sellOrders: uiSellOrdersInfo,
+    setCardItems,
+    setTxModalHeader,
+    setTxModalTitle,
+  });
+
   return (
     <Box sx={{ backgroundColor: 'grey.50' }}>
       <Section>
@@ -273,8 +306,13 @@ export const Storefront = (): JSX.Element => {
                           <CreditsIcon color={theme.palette.secondary.main} />
                         }
                         size="small"
-                        onClick={() => {
+                        onClick={async () => {
                           if (accountAddress) {
+                            selectedSellOrderIdRef.current = Number(
+                              sellOrders?.[i].id,
+                            );
+                            submittedQuantityRef.current = undefined;
+                            refetchSellOrders();
                             setSelectedAction('buy');
                             setSelectedSellOrder(i);
                           } else {
@@ -340,8 +378,11 @@ export const Storefront = (): JSX.Element => {
         onClose={handleTxModalClose}
         txHash={txHash ?? ''}
         txHashUrl={txHashUrl}
+        title={txModalHeader}
         cardTitle={txModalTitle}
-        buttonTitle={txButtonTitle}
+        buttonTitle={'CLOSE WINDOW'}
+        cardItems={cardItems}
+        icon={<ErrorIcon sx={{ fontSize: 100 }} />}
         linkComponent={Link}
         onButtonClick={onButtonClick}
       />

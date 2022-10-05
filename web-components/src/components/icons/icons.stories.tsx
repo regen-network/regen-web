@@ -57,6 +57,7 @@ import RegistryIcon from './RegistryIcon';
 import ReviewIcon from './ReviewIcon';
 import SatelliteIcon from './SatelliteIcon';
 import { SaveIcon } from './SaveIcon';
+import SellOrderNotFoundIcon from './SellOrderNotFoundIcon';
 import ShadedCreditsIcon from './ShadedCreditsIcon';
 import ShieldIcon from './ShieldIcon';
 import SmallArrowIcon from './SmallArrowIcon';
@@ -206,6 +207,10 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<ReviewIcon />} label="ReviewIcon" />
     <LabeledIcon icon={<SatelliteIcon />} label="SatelliteIcon" />
     <LabeledIcon icon={<SaveIcon color="green" />} label="SaveIcon" />
+    <LabeledIcon
+      icon={<SellOrderNotFoundIcon />}
+      label="SellOrderNotFoundIcon"
+    />
     <LabeledIcon icon={<ShadedCreditsIcon />} label="ShadedCreditsIcon" />
     <LabeledIcon icon={<ShieldIcon />} label="ShieldIcon" />
     <LabeledIcon icon={<SmallArrowIcon />} label="SmallArrowIcon" />

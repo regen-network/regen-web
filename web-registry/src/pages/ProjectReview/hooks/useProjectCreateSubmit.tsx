@@ -1,10 +1,7 @@
 import { useCallback } from 'react';
 import { MsgCreateProject } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 
-import {
-  ProjectMetadataLD,
-  VCSProjectMetadataLD,
-} from '../../../generated/json-ld';
+import { ProjectMetadataLDUnion } from '../../../generated/json-ld';
 import { SignAndBroadcastType } from '../../../hooks/useMsgClient';
 import {
   generateIri,
@@ -14,7 +11,7 @@ import {
 interface MsgCreateProjectValues {
   classId: string;
   admin: string;
-  metadata: Partial<ProjectMetadataLD> | Partial<VCSProjectMetadataLD>;
+  metadata: Partial<ProjectMetadataLDUnion>;
   jurisdiction: string;
   referenceId?: string;
 }
@@ -40,9 +37,7 @@ const useProjectCreateSubmit = ({ signAndBroadcast }: Props): ReturnType => {
         return Promise.reject('cant create project without a class ID');
 
       let iriResponse:
-        | IriFromMetadataSuccess<
-            Partial<ProjectMetadataLD> | Partial<VCSProjectMetadataLD>
-          >
+        | IriFromMetadataSuccess<Partial<ProjectMetadataLDUnion>>
         | undefined;
 
       try {

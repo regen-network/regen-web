@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, SelectChangeEvent } from '@mui/material';
+import { spacing } from 'styles/spacing';
 
 import { Flex } from 'web-components/lib/components/box';
 import { ProjectCard } from 'web-components/lib/components/cards/ProjectCard';
@@ -39,7 +40,7 @@ export const Projects: React.FC = () => {
         bgcolor: 'grey.50',
         borderTop: 1,
         borderColor: 'grey.100',
-        px: [6, 8.75],
+        py: [6, 8.75],
         pt: 8.75,
         pb: 25,
         justifyContent: 'center',
@@ -51,8 +52,12 @@ export const Projects: React.FC = () => {
           gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 400px))',
           gridGap: '1.125rem',
           flex: 1,
-          justifyContent: 'center',
-          maxWidth: '1700px',
+          justifyContent: { xs: 'flex-start', md: 'flex-start' },
+          maxWidth: theme => ({
+            xs: '100%',
+            lg: theme.typography.pxToRem(1400),
+          }),
+          ...spacing.header,
         }}
       >
         <Flex flex={1} sx={{ gridColumn: '1 / -1' }}>
@@ -66,8 +71,13 @@ export const Projects: React.FC = () => {
               <Subtitle size="lg">Projects</Subtitle>
               <Body size="lg"> ({projects.length})</Body>
             </Flex>
-            <Flex alignItems="center" sx={{ width: ['60%', 'auto'] }}>
-              <Box sx={{ width: [0, 63], visibility: ['hidden', 'visible'] }}>
+            <Flex alignItems="center" sx={{ width: { xs: '60%', md: 'auto' } }}>
+              <Box
+                sx={{
+                  width: [0, 0, 63],
+                  visibility: { xs: 'hidden', md: 'visible' },
+                }}
+              >
                 <Body size="xs">Sort by:</Body>
               </Box>
               <SelectTextFieldBase

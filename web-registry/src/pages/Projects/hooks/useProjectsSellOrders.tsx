@@ -40,6 +40,9 @@ export const useProjectsSellOrders = ({
   useEffect(() => {
     if (projectsWithOrderData.length > 0) return;
     const normalize = async (): Promise<void> => {
+      console.log('normalize called');
+      console.log('projects', projects);
+      console.log('sellOrders', sellOrders);
       if (projects && sellOrders) {
         const _projectsWithOrders = await getProjectDisplayData(
           projects,

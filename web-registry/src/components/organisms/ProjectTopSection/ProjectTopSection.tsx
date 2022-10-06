@@ -296,7 +296,9 @@ function ProjectTopSection({
             )}
             // TODO if no off-chain data, use on-chain project.issuer
             issuer={getParty(project?.partyByIssuerId)}
-            reseller={getParty(project?.partyByResellerId)}
+            reseller={
+              !isVCSProject ? getParty(project?.partyByResellerId) : undefined
+            }
             sdgs={sdgs}
           />
         </Grid>

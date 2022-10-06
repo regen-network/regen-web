@@ -178,9 +178,12 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
             />
           </>
         )}
-        <Title variant="h5" sx={sxs.title}>
-          Location of retirement
-        </Title>
+        <Flex sx={sxs.title}>
+          <Title variant="h5" sx={{ mr: 2 }}>
+            Location of retirement
+          </Title>
+          <InfoTooltipWithIcon title="The retirement location can be where you live or your business operates." />
+        </Flex>
 
         <Body>
           Please enter a location for the retirement of these credits. This

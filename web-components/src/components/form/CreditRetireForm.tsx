@@ -231,11 +231,19 @@ export const CreditRetireFields = ({
   arrayIndex,
 }: CreditRetireFieldsProps): JSX.Element => {
   return (
-    <BottomCreditRetireFields
-      mapboxToken={mapboxToken}
-      arrayPrefix={arrayPrefix}
-      arrayIndex={arrayIndex}
-    />
+    <>
+      <AmountField
+        name={`${arrayPrefix}retiredAmount`}
+        label="Amount retired"
+        availableAmount={availableTradableAmount}
+        denom={batchDenom}
+      />
+      <BottomCreditRetireFields
+        mapboxToken={mapboxToken}
+        arrayPrefix={arrayPrefix}
+        arrayIndex={arrayIndex}
+      />
+    </>
   );
 };
 

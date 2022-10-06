@@ -4,6 +4,10 @@ import iso3166, { CountryInfo, SubdivisionInfo } from 'iso-3166-2';
 
 import { Option } from '../components/inputs/SelectTextField';
 
+const EXCLUDED_COUNTRIES = ['AQ', 'MQ', 'PR'];
+const DEFAULT_COUNTRY = 'US';
+const POSTAL_CODE_MAX_LENGTH = 64;
+
 /**
  * Function to get the countries raw data as a map from `iso3166`
  */
@@ -97,8 +101,6 @@ export const getISOString = async (
 // Util function to prepare jurisdiction ISO code
 // based on package iso-3166-2
 
-const POSTAL_CODE_MAX_LENGTH = 64;
-
 type LocationType = {
   country: string; // iso 3166-1 alpha 2 (ie. US)
   stateProvince?: string; // iso 3166-2 (ie. US-CO)
@@ -132,15 +134,27 @@ export const getJurisdictionIsoCode = ({
  * the default country as the first option in the list, after the placeholder.
  */
 
-const DEFAULT_COUNTRY = 'US';
-
 const COUNTRY_OPTION_PLACEHOLDER: Option = {
   value: '',
   label: 'Please choose a country',
 };
 
-export function getCountryOptions(): Option[] {
-  const countries = getCountriesIsoCodes()
+interface CountryOptionsProps {
+  exclude?: boolean;
+}
+
+const isNotExcluded = (code: string): boolean => {
+  return !EXCLUDED_COUNTRIES.includes(code);
+};
+
+export function getCountryOptions({
+  exclude = false,
+}: CountryOptionsProps): Option[] {
+  const countriesCodes = exclude
+    ? getCountriesIsoCodes().filter(isNotExcluded)
+    : getCountriesIsoCodes();
+
+  const countries = countriesCodes
     .map(key => ({
       value: key,
       label: getCountryNameByCode(key),

@@ -1,11 +1,13 @@
 import { Flex } from 'web-components/lib/components/box';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
-import { Body } from 'web-components/lib/components/typography';
+import { Body, Label } from 'web-components/lib/components/typography';
 
 import { ApprovedMethodologies } from 'generated/json-ld';
 
 import { Link } from 'components/atoms';
 import { LineItemLabelAbove } from 'components/molecules';
+
+import { MAX_METHODOLOGIE_LINKS } from './CreditClassDetails.constants';
 
 const ApprovedMethodologiesList: React.FC<{
   methodologyList?: ApprovedMethodologies;
@@ -22,12 +24,11 @@ const ApprovedMethodologiesList: React.FC<{
       label="approved methodologies"
       data={
         <Flex flexDirection="column">
-          {methodologies.map(methodologie => {
+          {methodologies.slice(0, MAX_METHODOLOGIE_LINKS).map(methodologie => {
             return (
               <Link
                 sx={{
                   display: 'flex',
-                  alignItems: 'baseline',
                   color: 'secondary.main',
                 }}
                 href={methodologie?.['schema:url']?.['@value']}
@@ -35,11 +36,34 @@ const ApprovedMethodologiesList: React.FC<{
               >
                 <Body size="xl" key={methodologie?.['schema:name']}>
                   {methodologie?.['schema:name']}
+                  <SmallArrowIcon
+                    sx={{
+                      mb: 0.3,
+                      height: 9,
+                      width: 13,
+                      ml: 2,
+                      display: 'inline',
+                    }}
+                  />
                 </Body>
-                <SmallArrowIcon sx={{ mb: 0.3, height: 9, width: 13, ml: 2 }} />
               </Link>
             );
           })}
+          {count > MAX_METHODOLOGIE_LINKS && (
+            <Link
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                color: 'secondary.main',
+              }}
+              href={methodologyList?.['schema:url']?.['@value']}
+              target="_blank"
+            >
+              <Label sx={{ fontSize: [16], mt: 2 }}>{`+ ${
+                count - MAX_METHODOLOGIE_LINKS
+              } more`}</Label>
+            </Link>
+          )}
         </Flex>
       }
     />

@@ -13,9 +13,10 @@ import { getAccountUrl } from 'lib/block-explorer';
 
 import { AccountLink } from 'components/atoms/AccountLink';
 import { EcocreditsSection } from 'components/molecules';
-import { CreditBatches, MoreProjectsSection } from 'components/organisms';
+import { CreditBatches } from 'components/organisms';
 
 import { AdditionalInfo } from '../CreditClassDetails.AdditionalInfo';
+import { MemoizedProjects as Projects } from '../CreditClassDetails.Projects';
 import { SideBarBox } from '../CreditClassDetails.SidebarBox';
 
 interface CreditDetailsProps {
@@ -99,20 +100,6 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
 }) => {
   const styles = useStyles();
 
-  const Projects: React.FC = () => {
-    const projects = dbClass?.projectsByCreditClassId?.nodes;
-    if (!projects || projects.length < 1) return null;
-    return (
-      <div className="topo-background-alternate">
-        <MoreProjectsSection
-          classes={{ root: styles.sectionPadding, title: styles.title }}
-          title="Projects"
-          projects={projects}
-        />
-      </div>
-    );
-  };
-
   return (
     <Box
       sx={{
@@ -190,7 +177,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
           </Box>
         </Box>
       </EcocreditsSection>
-      <Projects />
+      <Projects classId={onChainClass.id} />
       <div className="topo-background-alternate">
         <CreditBatches
           creditClassId={onChainClass.id}

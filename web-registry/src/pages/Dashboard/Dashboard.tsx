@@ -48,8 +48,8 @@ const Dashboard = (): JSX.Element => {
   const isCreditClassAdmin = useQueryIfCreditClassAdmin();
   const isProjectAdmin = useQueryIfProjectAdmin();
   const walletContext = useWallet();
-  const projectTabHidden = !isIssuer || !isProjectAdmin;
-  const creditClassTabHidden = !isCreditClassCreator || !isCreditClassAdmin;
+  const showProjectTab = isIssuer || isProjectAdmin;
+  const showCreditClassTab = isCreditClassCreator || isCreditClassAdmin;
 
   // TODO: We should handle these as nested routes, converting this to an
   // <Outlet> layout component if we think we'll need to route to a page
@@ -66,7 +66,7 @@ const Dashboard = (): JSX.Element => {
     {
       label: 'Projects',
       icon: <ProjectPageIcon />,
-      hidden: projectTabHidden,
+      hidden: !showProjectTab,
       content: (
         <LazyLoad>
           <Flex sx={sxs.padTop}>
@@ -78,7 +78,7 @@ const Dashboard = (): JSX.Element => {
     {
       label: 'Credit Classes',
       icon: <CreditClassIcon sx={{ opacity: '70%' }} />,
-      hidden: creditClassTabHidden,
+      hidden: !showCreditClassTab,
       content: (
         <LazyLoad>
           <Flex sx={sxs.padTop}>

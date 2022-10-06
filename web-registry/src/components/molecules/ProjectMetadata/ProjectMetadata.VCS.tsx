@@ -5,15 +5,15 @@ import { ExpandButton } from 'web-components/lib/components/buttons/ExpandButton
 import { Title } from 'web-components/lib/components/typography';
 import { formatDate } from 'web-components/lib/utils/format';
 
-import { VCSProjectMetadataLD } from '../../generated/json-ld';
-import { LinkWithArrow, LinkWithArrowProps } from '../atoms';
-import { LineItemLabelAbove, LineItemLabelAboveProps } from '../molecules';
+import { VCSProjectMetadataLD } from '../../../generated/json-ld';
+import { ArrowLink } from '../../atoms/MetadataArrowLink';
+import { MetaDetail } from './ProjectMetadata.MetaDetail';
 
 export interface MetadataProps {
-  metadata?: VCSProjectMetadataLD;
+  metadata?: Partial<VCSProjectMetadataLD>;
 }
 
-const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
+const ProjectMetadataVCS: React.FC<MetadataProps> = ({ metadata }) => {
   const theme = useTheme();
   const [expanded, setExpanded] = useState(false);
   const projectId = metadata?.['regen:vcsProjectId'];
@@ -24,14 +24,7 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
 
   const startDate = metadata?.['regen:projectStartDate']?.['@value'];
   const endDate = metadata?.['regen:projectEndDate']?.['@value'];
-
-  const LineItem = (props: LineItemLabelAboveProps): JSX.Element => (
-    <LineItemLabelAbove sx={{ mb: { xs: 6, sm: 8 } }} {...props} />
-  );
-
-  const ArrowLink = (props: LinkWithArrowProps): JSX.Element => (
-    <LinkWithArrow sx={{ fontSize: { xs: '18px', sm: '22px' } }} {...props} />
-  );
+  const methodology = metadata?.['regen:vcsMethodology'];
 
   return (
     <Box sx={{ pt: 8 }}>
@@ -44,45 +37,59 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
             pt: 8,
           }}
         >
-          <LineItem
+          {projectId && (
+            <MetaDetail
+              label="vcs project id"
+              data={
+                <ArrowLink
+                  label={projectId.toString()}
+                  href={metadata?.['regen:vcsProjectPage']?.['@value'] || ''}
+                />
+              }
+            />
+          )}
+          {methodology && (
+            <MetaDetail
+              label="methodology"
+              data={
+                <ArrowLink
+                  label={methodology?.['schema:name']}
+                  href={methodology?.['schema:url']?.['@value'] || ''}
+                />
+              }
+            />
+          )}
+          <MetaDetail
             label="offset generation method"
             data={metadata?.['regen:offsetGenerationMethod']}
           />
           {metadata?.['regen:projectActivity']?.['schema:name'] && (
-            <LineItem
+            <MetaDetail
               label="project activity"
               data={
                 <ArrowLink
                   href={
                     metadata?.['regen:projectActivity']?.['schema:url']?.[
                       '@value'
-                    ]
+                    ] || ''
                   }
                   label={metadata?.['regen:projectActivity']?.['schema:name']}
                 />
               }
             />
           )}
-          {projectId && (
-            <LineItem
-              label="vcs project id"
-              data={
-                <ArrowLink
-                  label={projectId.toString()}
-                  href={metadata?.['regen:vcsProjectPage']?.['@value']}
-                />
-              }
-            />
-          )}
-          <LineItem
+          <MetaDetail
             label="vcs project type"
             data={metadata?.['regen:projectType']}
           />
           {startDate && (
-            <LineItem label="project start date" data={formatDate(startDate)} />
+            <MetaDetail
+              label="project start date"
+              data={formatDate(startDate)}
+            />
           )}
           {endDate && (
-            <LineItem label="project end date" data={formatDate(endDate)} />
+            <MetaDetail label="project end date" data={formatDate(endDate)} />
           )}
         </Box>
       </Collapse>
@@ -101,4 +108,4 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
   );
 };
 
-export { AdditionalProjectMetadata };
+export { ProjectMetadataVCS };

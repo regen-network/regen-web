@@ -10,7 +10,12 @@ import AmountField from '../inputs/AmountField';
 import ControlledTextField from '../inputs/ControlledTextField';
 import SelectFieldFallback from '../inputs/SelectFieldFallback';
 import TextField from '../inputs/TextField';
-import { requiredMessage, validateAmount } from '../inputs/validation';
+import {
+  invalidMemoLength,
+  requiredMessage,
+  validateAmount,
+  validateMemoLength,
+} from '../inputs/validation';
 import { RegenModalProps } from '../modal';
 import InfoTooltipWithIcon from '../tooltip/InfoTooltipWithIcon';
 import { Body, Title } from '../typography';
@@ -231,11 +236,19 @@ export const CreditRetireFields = ({
   arrayIndex,
 }: CreditRetireFieldsProps): JSX.Element => {
   return (
-    <BottomCreditRetireFields
-      mapboxToken={mapboxToken}
-      arrayPrefix={arrayPrefix}
-      arrayIndex={arrayIndex}
-    />
+    <>
+      <AmountField
+        name={`${arrayPrefix}retiredAmount`}
+        label="Amount retired"
+        availableAmount={availableTradableAmount}
+        denom={batchDenom}
+      />
+      <BottomCreditRetireFields
+        mapboxToken={mapboxToken}
+        arrayPrefix={arrayPrefix}
+        arrayIndex={arrayIndex}
+      />
+    </>
   );
 };
 
@@ -267,6 +280,10 @@ export const validateCreditRetire = (
     values.retiredAmount,
   );
   if (errAmount) errors.retiredAmount = errAmount;
+
+  if (values.note && !validateMemoLength(values.note)) {
+    errors.note = invalidMemoLength;
+  }
 
   return errors;
 };

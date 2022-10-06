@@ -1,5 +1,3 @@
-import { URL } from 'web-components/lib/types/rdf';
-
 import { ProjectMetadataLD } from './project-metadata';
 
 // type generated from https://github.com/regen-network/regen-registry-standards/blob/main/jsonld/projects/C02-project.jsonld

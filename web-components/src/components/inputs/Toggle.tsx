@@ -1,11 +1,10 @@
 import React from 'react';
-import { Box, Collapse, FormControlLabel } from '@mui/material';
+import { Box, Collapse, FormControlLabel, TooltipProps } from '@mui/material';
 import { FieldProps } from 'formik';
 
-import InfoIconOutlined from '../icons/InfoIconOutlined';
 import Checkbox from '../inputs/Checkbox';
 import Radio from '../inputs/Radio';
-import Tooltip from '../tooltip/InfoTooltip';
+import InfoTooltipWithIcon from '../tooltip/InfoTooltipWithIcon';
 import { Body } from '../typography';
 
 interface ToggleProps extends FieldProps {
@@ -16,7 +15,7 @@ interface ToggleProps extends FieldProps {
   description?: any;
   content?: any;
   activeContent?: any;
-  tooltip?: string;
+  tooltip?: TooltipProps['title'];
   disabled?: boolean;
   value?: string;
   triggerOnChange?: (v: any) => Promise<void>;
@@ -30,7 +29,7 @@ const Toggle: React.FC<ToggleProps> = ({
   content,
   activeContent,
   tooltip,
-  disabled,
+  disabled = false,
   type,
   value,
   field,
@@ -48,20 +47,24 @@ const Toggle: React.FC<ToggleProps> = ({
           flexDirection: 'column',
           borderRadius: '5px',
           transition: '200ms ease-in-out;',
+          backgroundColor: 'primary.main',
           mt: 3.25,
           p: [3.25, 3.5],
+        },
+        disabled && {
+          backgroundColor: 'info.light',
+          borderColor: 'grey.100',
         },
         checked && {
           borderColor: 'secondary.contrastText',
           boxShadow: 1,
-          bgcolor: 'grey.50',
         },
       ]}
       className={className}
     >
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Box sx={{ display: 'flex' }}>
         <FormControlLabel
-          sx={{ alignItems: 'flex-start' }}
+          sx={{ alignItems: 'flex-start', mr: 2 }}
           control={
             type === 'checkbox' ? (
               <Checkbox
@@ -80,8 +83,11 @@ const Toggle: React.FC<ToggleProps> = ({
           label={
             <Body
               size="lg"
-              color="black"
-              sx={[{ ml: 1 }, checked && { fontWeight: 700 }]}
+              sx={[
+                { ml: 1 },
+                checked && { fontWeight: 700 },
+                { color: disabled ? 'info.dark' : 'black' },
+              ]}
             >
               {label}
             </Body>
@@ -90,18 +96,13 @@ const Toggle: React.FC<ToggleProps> = ({
           disabled={disabled}
           checked={checked}
         />
-        {tooltip && (
-          <Tooltip arrow placement="top" title={tooltip}>
-            <Box sx={{ cursor: 'pointer' }}>
-              <InfoIconOutlined />
-            </Box>
-          </Tooltip>
-        )}
+        {tooltip && <InfoTooltipWithIcon title={tooltip} />}
       </Box>
       {description && (
         <Body
           size="md"
           mobileSize="xs"
+          styleLinks={!disabled}
           sx={[
             {
               pl: 6.9,
@@ -110,7 +111,7 @@ const Toggle: React.FC<ToggleProps> = ({
               pl: 8,
             },
             !!disabled && {
-              color: 'grey.600',
+              color: 'info.main',
             },
             !!disabled &&
               type === 'checkbox' && {

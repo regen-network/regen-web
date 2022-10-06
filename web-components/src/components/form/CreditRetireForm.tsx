@@ -10,7 +10,12 @@ import AmountField from '../inputs/AmountField';
 import ControlledTextField from '../inputs/ControlledTextField';
 import SelectFieldFallback from '../inputs/SelectFieldFallback';
 import TextField from '../inputs/TextField';
-import { requiredMessage, validateAmount } from '../inputs/validation';
+import {
+  invalidMemoLength,
+  requiredMessage,
+  validateAmount,
+  validateMemoLength,
+} from '../inputs/validation';
 import { RegenModalProps } from '../modal';
 import InfoTooltipWithIcon from '../tooltip/InfoTooltipWithIcon';
 import { Body, Title } from '../typography';
@@ -275,6 +280,10 @@ export const validateCreditRetire = (
     values.retiredAmount,
   );
   if (errAmount) errors.retiredAmount = errAmount;
+
+  if (values.note && !validateMemoLength(values.note)) {
+    errors.note = invalidMemoLength;
+  }
 
   return errors;
 };

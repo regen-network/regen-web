@@ -9,9 +9,9 @@ import { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { Statistic } from '../molecules';
 
 interface CreditTotalData {
-  tradeable: number;
-  retired: number;
-  created: number;
+  tradeable?: number;
+  retired?: number;
+  created?: number;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -31,9 +31,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 const CreditTotals: React.FC = () => {
   const styles = useStyles();
   const [totals, setTotals] = useState<CreditTotalData>({
-    tradeable: 0,
-    retired: 0,
-    created: 0,
+    tradeable: undefined,
+    retired: undefined,
+    created: undefined,
   });
 
   const parseNumber = (value: any): number => {
@@ -92,22 +92,19 @@ const CreditTotals: React.FC = () => {
   return (
     <Grid container spacing={6} className={styles.root}>
       <Grid item xs={12} sm={3} className={styles.item}>
-        <Statistic
-          label="ecocredits tradeable"
-          count={totals.tradeable ? totals.tradeable : undefined}
-        />
+        <Statistic label="ecocredits tradeable" count={totals.tradeable} />
       </Grid>
       <Grid item xs={12} sm={3} className={styles.item}>
         <Statistic
           label="ecocredits retired"
-          count={totals.retired ? totals.retired : undefined}
+          count={totals.retired}
           arrow="downLeft"
         />
       </Grid>
       <Grid item xs={12} sm={3} className={styles.item}>
         <Statistic
           label="ecocredits created"
-          count={totals.created ? totals.created : undefined}
+          count={totals.created}
           arrow="upRight"
         />
       </Grid>

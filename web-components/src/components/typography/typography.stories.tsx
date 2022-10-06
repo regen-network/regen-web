@@ -1,3 +1,5 @@
+import { Link } from '@mui/material';
+
 import { Body, Label, Subtitle, Title } from '../../components/typography';
 
 export default {

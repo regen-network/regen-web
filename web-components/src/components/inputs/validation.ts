@@ -1,22 +1,32 @@
 import { Bech32Address } from '@keplr-wallet/cosmos';
 
+/* Messages */
+
 export const requiredMessage: string = 'This field is required';
 export const invalidEmailMessage: string = 'Please enter a valid email address';
 export const invalidPassword: string =
   'Your password must contain at least 1 letter, 1 number, 1 special character (!@#$%^&*) and at least 8 characters';
 export const requirementAgreement: string = 'You must agree to continue';
 export const invalidAmount: string = 'Please enter a valid amount';
-export const insufficientCredits: string = `You don't have enough credits`;
-export const invalidDate: string = `Invalid date`;
-export const invalidPastDate: string = `Must be a date in the past`;
-export const invalidURL: string = `Please enter a valid URL`;
-export const invalidVCSRetirement: string = `Please enter a valid VCS retirement serial number`;
-export const invalidVCSID: string = `Please enter a valid VCS Project ID`;
+export const insufficientCredits: string = "You don't have enough credits";
+export const invalidDate: string = 'Invalid date';
+export const invalidPastDate: string = 'Must be a date in the past';
+export const invalidURL: string = 'Please enter a valid URL';
+export const invalidVCSRetirement: string =
+  'Please enter a valid VCS retirement serial number';
+export const invalidVCSID: string = 'Please enter a valid VCS Project ID';
 export const invalidJSON: string = 'Please enter valid JSON-LD';
 export const invalidAddress: string = 'Invalid address';
 export const invalidRegenAddress: string = 'Invalid regen address';
-export const MAX_FRACTION_DIGITS: number = 6; // useful for conversion to micro udenom (BigInt)
 export const requiredDenom: string = 'Please choose a denom';
+export const invalidMemoLength: string = 'Must be 512 characters or fewer';
+
+/* Constants, limits */
+
+export const MAX_FRACTION_DIGITS: number = 6; // useful for conversion to micro udenom (BigInt)
+export const MEMO_MAX_LENGTH: number = 512;
+
+/* Validation Functions */
 
 export const numericOnlyRE = /^\d*$/gm;
 
@@ -29,6 +39,10 @@ export function validateEmail(email: string): boolean {
   return /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,10})$/i.test(
     email,
   );
+}
+
+export function validateMemoLength(str: string): boolean {
+  return str.length <= MEMO_MAX_LENGTH;
 }
 
 export function validatePassword(password: string): boolean {

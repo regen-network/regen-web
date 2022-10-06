@@ -6,6 +6,7 @@ import {
   GECKO_REGEN_ID,
   GECKO_USD_CURRENCY,
 } from 'lib/coingecko';
+import { EcocreditQueryProps } from 'lib/ecocredit/api';
 
 import {
   ProjectsSellOrders,
@@ -21,6 +22,7 @@ export interface ProjectsWithOrdersProps {
   metadata?: boolean; // to discard projects without metadata prop
   random?: boolean; // to shuffle the projects (along with limit allows a random subselection)
   projectId?: string; // to discard an specific project
+  classId?: string; // to filter by class
 }
 
 /**
@@ -31,12 +33,14 @@ export function useProjectsWithOrders({
   metadata = false,
   random = false,
   projectId,
+  classId,
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
+  const queryParams: EcocreditQueryProps = classId
+    ? { query: 'projectsByClass', params: { classId } }
+    : { query: 'projects', params: {} };
+
   const { data, loading: loadingProjects } =
-    useEcocreditQuery<QueryProjectsResponse>({
-      query: 'projects',
-      params: {},
-    });
+    useEcocreditQuery<QueryProjectsResponse>(queryParams);
   const projects = data?.projects;
 
   const regenPriceQuery = useQuery(['regenPrice'], () =>

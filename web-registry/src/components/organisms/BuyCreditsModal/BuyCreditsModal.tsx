@@ -19,8 +19,13 @@ import ControlledTextField from 'web-components/lib/components/inputs/Controlled
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
 import SelectFieldFallback from 'web-components/lib/components/inputs/SelectFieldFallback';
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
+import TextField from 'web-components/lib/components/inputs/TextField';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
-import { requirementAgreement } from 'web-components/lib/components/inputs/validation';
+import {
+  invalidMemoLength,
+  requirementAgreement,
+  validateMemoLength,
+} from 'web-components/lib/components/inputs/validation';
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
 import {
@@ -113,6 +118,10 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
   ): FormikErrors<BuyCreditsValues> => {
     let errors: FormikErrors<BuyCreditsValues> = {};
 
+    if (values.retirementNote && !validateMemoLength(values.retirementNote)) {
+      errors.retirementNote = invalidMemoLength;
+    }
+
     if (!values.agreeErpa) errors.agreeErpa = requirementAgreement;
 
     return errors;
@@ -129,6 +138,8 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
     project,
     allowedDenomsData: allowedDenomsResponse?.data,
   });
+
+  const isDisableAutoRetire = selectedSellOrder?.disableAutoRetire;
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -309,7 +320,6 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                     name="retirementAction"
                   >
                     <Field
-                      className={styles.toggle}
                       component={Toggle}
                       type="radio"
                       value="autoretire"
@@ -330,7 +340,6 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       }
                     />
                     <Field
-                      className={styles.toggle}
                       component={Toggle}
                       type="radio"
                       value="manual"
@@ -343,13 +352,41 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                           }
                           <DynamicLink
                             href="https://guides.regen.network/guides/regen-marketplace/ecocredits/buy-ecocredits/by-project#5.-select-credit-retirement-options"
-                            sx={{ ml: 1 }}
+                            sx={[
+                              {
+                                ml: 1,
+                              },
+                              !isDisableAutoRetire && {
+                                color: 'info.main',
+                                fontWeight: 700,
+                              },
+                            ]}
                           >
                             Learn more»
                           </DynamicLink>
                         </>
                       }
-                      disabled={!selectedSellOrder?.disableAutoRetire} // if disableAutoRetire is false, this is disabled
+                      disabled={!isDisableAutoRetire} // if disableAutoRetire is false, this is disabled
+                      tooltip={
+                        !isDisableAutoRetire ? (
+                          <Box sx={{ textAlign: 'start' }}>
+                            {
+                              'The seller of these credits has chosen to only allow for immediate retiring of credits. These credits cannot be purchased as a tradable asset.'
+                            }
+                            <DynamicLink
+                              href="https://guides.regen.network/guides/regen-marketplace/ecocredits/buy-ecocredits/by-project#5.-select-credit-retirement-options"
+                              sx={{
+                                ml: 1,
+                                display: 'inline',
+                                color: 'secondary.main',
+                                fontWeight: 700,
+                              }}
+                            >
+                              Learn more»
+                            </DynamicLink>
+                          </Box>
+                        ) : undefined
+                      }
                     />
                   </Field>
                   <Collapse in={values['retirementAction'] === 'autoretire'}>
@@ -359,15 +396,15 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       </Title>
                       <InfoTooltipWithIcon title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')" />
                     </Flex>
-                    <Box>
+                    <Flex>
                       <Field
-                        component={ControlledTextField}
+                        component={TextField}
                         label="Add retirement transaction details (stored in the tx memo)"
                         name="retirementNote"
                         optional
                         sx={{ mb: { xs: 10, sm: 12 } }}
                       />
-                    </Box>
+                    </Flex>
                     <Flex>
                       <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
                         Credit retirement location

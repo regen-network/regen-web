@@ -11,16 +11,19 @@ import AmountField from '../inputs/AmountField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import TextField from '../inputs/TextField';
 import {
+  invalidMemoLength,
   invalidRegenAddress,
   isValidAddress,
   requiredMessage,
   requirementAgreement,
   validateAmount,
+  validateMemoLength,
 } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
 import InfoTooltip from '../tooltip/InfoTooltip';
 import { Subtitle } from '../typography';
 import {
+  BottomCreditRetireFields,
   BottomCreditRetireFieldsProps,
   CreditRetireFields,
   initialValues as initialValuesRetire,
@@ -113,6 +116,10 @@ const CreditSendForm: React.FC<FormProps> = ({
 
     if (!values.agreeErpa) errors.agreeErpa = requirementAgreement;
 
+    if (values.note && !validateMemoLength(values.note)) {
+      errors.note = invalidMemoLength;
+    }
+
     return errors;
   };
 
@@ -181,10 +188,9 @@ const CreditSendForm: React.FC<FormProps> = ({
 
           {values.withRetire && (
             <>
-              <CreditRetireFields
-                availableTradableAmount={availableTradableAmount}
-                batchDenom={batchDenom}
+              <BottomCreditRetireFields
                 mapboxToken={mapboxToken}
+                arrayPrefix=""
               />
             </>
           )}

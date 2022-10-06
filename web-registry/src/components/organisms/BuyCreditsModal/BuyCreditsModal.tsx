@@ -139,6 +139,8 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
     allowedDenomsData: allowedDenomsResponse?.data,
   });
 
+  const isDisableAutoRetire = selectedSellOrder?.disableAutoRetire;
+
   return (
     <Modal open={open} onClose={onClose}>
       <div className={styles.root}>
@@ -318,7 +320,6 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                     name="retirementAction"
                   >
                     <Field
-                      className={styles.toggle}
                       component={Toggle}
                       type="radio"
                       value="autoretire"
@@ -339,7 +340,6 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       }
                     />
                     <Field
-                      className={styles.toggle}
                       component={Toggle}
                       type="radio"
                       value="manual"
@@ -352,13 +352,41 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                           }
                           <DynamicLink
                             href="https://guides.regen.network/guides/regen-marketplace/ecocredits/buy-ecocredits/by-project#5.-select-credit-retirement-options"
-                            sx={{ ml: 1 }}
+                            sx={[
+                              {
+                                ml: 1,
+                              },
+                              !isDisableAutoRetire && {
+                                color: 'info.main',
+                                fontWeight: 700,
+                              },
+                            ]}
                           >
                             Learn more»
                           </DynamicLink>
                         </>
                       }
-                      disabled={!selectedSellOrder?.disableAutoRetire} // if disableAutoRetire is false, this is disabled
+                      disabled={!isDisableAutoRetire} // if disableAutoRetire is false, this is disabled
+                      tooltip={
+                        !isDisableAutoRetire ? (
+                          <Box sx={{ textAlign: 'start' }}>
+                            {
+                              'The seller of these credits has chosen to only allow for immediate retiring of credits. These credits cannot be purchased as a tradable asset.'
+                            }
+                            <DynamicLink
+                              href="https://guides.regen.network/guides/regen-marketplace/ecocredits/buy-ecocredits/by-project#5.-select-credit-retirement-options"
+                              sx={{
+                                ml: 1,
+                                display: 'inline',
+                                color: 'secondary.main',
+                                fontWeight: 700,
+                              }}
+                            >
+                              Learn more»
+                            </DynamicLink>
+                          </Box>
+                        ) : undefined
+                      }
                     />
                   </Field>
                   <Collapse in={values['retirementAction'] === 'autoretire'}>

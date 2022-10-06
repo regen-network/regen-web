@@ -81,7 +81,4 @@ export const useBuyCreditsModalStyles = makeStyles(theme => ({
   marginRight: {
     marginRight: theme.spacing(4),
   },
-  toggle: {
-    backgroundColor: theme.palette.primary.main,
-  },
 }));

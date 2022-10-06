@@ -199,7 +199,7 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
                 />
               }
             >
-              <LocationCountryField name={`${arrayPrefix}country`} />
+              <LocationCountryField exclude name={`${arrayPrefix}country`} />
             </Suspense>
           </Grid>
           <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>

@@ -8,18 +8,20 @@ interface FieldProps {
   className?: string;
   optional?: boolean;
   name?: string;
+  exclude?: boolean;
 }
 
 const LocationCountryField: React.FC<FieldProps> = ({
+  name = 'country',
   className,
   optional = false,
-  name = 'country',
+  exclude = false,
 }) => {
   const [options, setOptions] = useState<Option[]>([]);
 
   useEffect(() => {
-    setOptions(getCountryOptions());
-  }, []);
+    setOptions(getCountryOptions({ exclude }));
+  }, [exclude]);
 
   return (
     <Field

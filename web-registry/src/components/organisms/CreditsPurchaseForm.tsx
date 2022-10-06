@@ -8,7 +8,6 @@ import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
 import { Field, Form, Formik } from 'formik';
 import { loader } from 'graphql.macro';
-import iso3166 from 'iso-3166-2';
 
 import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
 import Submit from 'web-components/lib/components/form/Submit';
@@ -23,6 +22,7 @@ import {
 } from 'web-components/lib/components/inputs/validation';
 import { Body, Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
+import { getCountryNameByCode } from 'web-components/lib/utils/locationStandard';
 
 const LocationCountryField = lazy(
   () => import('web-components/lib/components/inputs/LocationCountryField'),
@@ -205,7 +205,7 @@ function CreditsPurchaseForm({
               text: city,
               context: [
                 { id: 'region', text: state },
-                { id: 'country', text: iso3166.data[country].name },
+                { id: 'country', text: getCountryNameByCode(country) },
               ],
             };
             const addressResult = await createAddress({

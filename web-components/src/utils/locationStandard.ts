@@ -1,10 +1,55 @@
 import MapboxClient from '@mapbox/mapbox-sdk';
 import mbxGeocoder from '@mapbox/mapbox-sdk/services/geocoding';
-import iso3166 from 'iso-3166-2';
+import iso3166, { CountryInfo, SubdivisionInfo } from 'iso-3166-2';
 
 import { Option } from '../components/inputs/SelectTextField';
 
+const EXCLUDED_COUNTRIES = ['AQ', 'MQ', 'PR'];
+const DEFAULT_COUNTRY = 'US';
 const POSTAL_CODE_MAX_LENGTH = 64;
+
+/**
+ * Function to get the countries raw data as a map from `iso3166`
+ */
+const getIsoCountries = (): CountryInfo.Map => iso3166.data;
+
+/**
+ * Function to get the list of countries iso codes
+ */
+const getCountriesIsoCodes = (): string[] => Object.keys(getIsoCountries());
+
+/**
+ * Function to get the country object by code or name from `iso3166`
+ */
+const getIsoCountry = (countryCodeOrName: string): CountryInfo.Full | null =>
+  iso3166.country(countryCodeOrName);
+
+/**
+ * Function to get the subdivision object by full code or partial country code
+ * and partial subdivision code/name from `iso3166`
+ */
+interface IsoSubdivisionProps {
+  code?: string; // full subdivision code
+  country?: string; // country code (partial 1)
+  subdivision?: string; // subdivion code / name (partial 2)
+}
+
+export const getIsoSubdivision = ({
+  code,
+  country,
+  subdivision,
+}: IsoSubdivisionProps): SubdivisionInfo.Full | null => {
+  if (code) return iso3166.subdivision(code);
+  if (country && subdivision) return iso3166.subdivision(country, subdivision);
+  return null;
+};
+
+/**
+ * Function to get the country name by country code directly from raw data
+ */
+export const getCountryNameByCode = (code: string): string =>
+  // iso3166.country(code)?.name;
+  getIsoCountries()[code].name;
 
 /**
  * Fetches from mapbox to compose a proper ISO 3166-2 standard location string
@@ -32,7 +77,7 @@ export const getISOString = async (
   await geocoderService
     .forwardGeocode({
       mode: 'mapbox.places',
-      query: `${iso3166.data[countryKey].name}+${stateProvince}`,
+      query: `${getCountryNameByCode(countryKey)}+${stateProvince}`,
       types: ['country', 'region'],
     })
     .send()
@@ -68,9 +113,9 @@ export const getJurisdictionIsoCode = ({
   postalCode,
 }: LocationType): string => {
   // check iso country
-  if (!iso3166.country(country)) throw new Error(`Invalid country: ${country}`);
+  if (!getIsoCountry(country)) throw new Error(`Invalid country: ${country}`);
   // check subdivision exists, also iso subdivision (failing search is an empty object)
-  if (!stateProvince || !iso3166.subdivision(stateProvince)?.code)
+  if (!stateProvince || !getIsoSubdivision({ code: stateProvince })?.code)
     return country;
   // TODO - text fields allow whitespace strings..
   // The trim must be done before the check, since an empty string
@@ -89,18 +134,31 @@ export const getJurisdictionIsoCode = ({
  * the default country as the first option in the list, after the placeholder.
  */
 
-const DEFAULT_COUNTRY = 'US';
-
 const COUNTRY_OPTION_PLACEHOLDER: Option = {
   value: '',
   label: 'Please choose a country',
 };
 
-export function getCountryOptions(): Option[] {
-  const countries = Object.keys(iso3166.data)
+interface CountryOptionsProps {
+  exclude?: boolean;
+}
+
+// isIncluded means that we keep it included because it is not in excluded list
+const isIncluded = (code: string): boolean => {
+  return !EXCLUDED_COUNTRIES.includes(code);
+};
+
+export function getCountryOptions({
+  exclude = false,
+}: CountryOptionsProps): Option[] {
+  const countriesCodes = exclude
+    ? getCountriesIsoCodes().filter(isIncluded)
+    : getCountriesIsoCodes();
+
+  const countries = countriesCodes
     .map(key => ({
       value: key,
-      label: iso3166.data[key].name,
+      label: getCountryNameByCode(key),
     }))
     .sort((a, b) => a.label.localeCompare(b.label));
 
@@ -130,7 +188,7 @@ const COUNTRY_SUBDIVISION_OPTION_PLACEHOLDER: Option = {
 };
 
 export function getCountrySubdivisionOptions(country: string): Option[] {
-  const countrySubdivisions = iso3166.country(country);
+  const countrySubdivisions = getIsoCountry(country);
 
   const options: Option[] = Object.keys(countrySubdivisions?.sub || {})
     .map(isoCode => ({
@@ -144,3 +202,33 @@ export function getCountrySubdivisionOptions(country: string): Option[] {
 
   return options;
 }
+
+/**
+ * Function to check if country names matches in lower case
+ */
+
+const isValidCountryName = (
+  countryName: string,
+  countryCode: string,
+): boolean => {
+  return (
+    getCountryNameByCode(countryCode).toLowerCase() ===
+    countryName.toLowerCase()
+  );
+};
+
+/**
+ * Function to get the country code by name, doing some specific checks
+ */
+export const getCountryCodeByName = (countryName: string): string => {
+  const foundCode = getCountriesIsoCodes().find(countryCode => {
+    return isValidCountryName(countryName, countryCode);
+  });
+  if (foundCode) return foundCode;
+
+  // TODO: iso3166 did not pick up these US variants. May need to add more data sources.
+  const isUnitedStates = /United States|USA|U.S./.test(countryName);
+  if (isUnitedStates) return 'US';
+
+  return '';
+};

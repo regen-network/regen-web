@@ -14,7 +14,7 @@
     "@mui/material": "^5.1.0",
     "@mui/styles": "^5.1.0",
     "@rdfjs/parser-jsonld": "^1.2.1",
-    "@regen-network/api": "^0.3.1",
+    "@regen-network/api": "0.4.0",
     "@sentry/react": "^7.11.1",
     "@sentry/tracing": "^7.11.1",
     "@stripe/stripe-js": "^1.5.0",

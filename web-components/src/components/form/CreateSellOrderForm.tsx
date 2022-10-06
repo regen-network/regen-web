@@ -108,28 +108,37 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
           <Box
             sx={{
               display: 'flex',
+              flexDirection: { xs: 'column', sm: 'row' },
               justifyContent: 'space-between',
               alignItems: 'end',
               mb: 0.5,
             }}
           >
-            <Field
-              component={NumberTextField}
-              name="price"
-              label="Price"
-              increment={0.1}
-              min={0.0}
-              arrows={false}
-              errors={errors}
-              sx={{ maxWidth: 239.5 }}
-            />
-            <Field
-              name="askDenom"
-              component={SelectTextField}
-              options={allowedDenoms}
-              errors={errors}
-              sx={{ maxWidth: 239.5 }}
-            />
+            <Box
+              sx={{
+                width: '100%',
+                mr: { xs: 0, sm: 2.4 },
+                mb: { xs: 10, sm: 0 },
+              }}
+            >
+              <Field
+                component={NumberTextField}
+                name="price"
+                label="Price"
+                increment={0.1}
+                min={0.0}
+                arrows={false}
+                errors={errors}
+              />
+            </Box>
+            <Box sx={{ width: '100%', ml: { xs: 0, sm: 2.4 } }}>
+              <Field
+                name="askDenom"
+                component={SelectTextField}
+                options={allowedDenoms}
+                errors={errors}
+              />
+            </Box>
           </Box>
           <AmountField
             name="amount"

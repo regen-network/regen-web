@@ -13,6 +13,8 @@ import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingM
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { UrlType } from 'web-components/lib/utils/schemaURL';
 
+import { VCSProjectMetadataLD } from 'generated/json-ld';
+
 import { Link } from '../../components/atoms';
 import { ProjectPageFooter } from '../../components/molecules';
 import { OnboardingFormTemplate } from '../../components/templates';
@@ -196,7 +198,7 @@ export const ProjectReview: React.FC = () => {
         onEditClick={() => navigate(`${editPath}/metadata`)}
       >
         {isVCS ? (
-          <VCSMetadata metadata={metadata} />
+          <VCSMetadata metadata={metadata as VCSProjectMetadataLD} />
         ) : (
           <Box
             sx={theme => ({

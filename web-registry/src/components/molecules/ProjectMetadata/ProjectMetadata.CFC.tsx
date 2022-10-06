@@ -26,8 +26,8 @@ const ProjectMetadataCFC: React.FC<CFCMetadataProps> = ({
     return null;
   }
 
-  const startDate = metadata?.['regen:projectStartDate']?.['@value'];
-  const endDate = metadata?.['regen:projectEndDate']?.['@value'];
+  const startDate = metadata?.['regen:projectStartDate'];
+  const endDate = metadata?.['regen:projectEndDate'];
   const offsetProtocol = metadata?.['regen:offsetProtocol'];
   const projectDesignDocument = metadata?.['regen:projectDesignDocument'];
   const projectActivity = metadata?.['regen:projectActivity'];

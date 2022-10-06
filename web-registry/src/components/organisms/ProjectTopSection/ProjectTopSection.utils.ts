@@ -29,7 +29,7 @@ export const getDisplayAdmin = (address?: string): User | undefined => {
 };
 
 export const getDisplayDeveloper = (
-  metadata?: ProjectMetadataLD,
+  metadata?: ProjectMetadataLD | CFCProjectMetadataLD,
   party?: Maybe<PartyFieldsFragment>,
 ): User | undefined => {
   if (!metadata) return;

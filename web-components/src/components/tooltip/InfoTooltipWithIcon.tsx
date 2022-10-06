@@ -1,9 +1,11 @@
+import { TooltipProps } from '@mui/material';
+
 import InfoIcon from '../icons/InfoIcon';
 import InfoIconOutlined from '../icons/InfoIconOutlined';
 import InfoTooltip from './InfoTooltip';
 
 interface Props {
-  title: string;
+  title: TooltipProps['title'];
   outlined?: boolean;
 }
 

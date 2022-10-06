@@ -20,7 +20,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     'input:disabled ~ &': {
       boxShadow: 'none',
-      background: theme.palette.grey[300],
+      background: theme.palette.primary.main,
+      borderColor: theme.palette.grey['100'],
+      border: '1px solid',
     },
   },
   checkedRadioBtn: {

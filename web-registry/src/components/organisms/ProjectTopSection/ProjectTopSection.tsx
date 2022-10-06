@@ -288,9 +288,7 @@ function ProjectTopSection({
             // TODO if no off-chain data, use on-chain project.issuer
             issuer={getParty(project?.partyByIssuerId)}
             reseller={
-              !isVCSProject &&
-              project?.partyByResellerId &&
-              getParty(project?.partyByResellerId)
+              !isVCSProject ? getParty(project?.partyByResellerId) : undefined
             }
             sdgs={sdgs}
           />

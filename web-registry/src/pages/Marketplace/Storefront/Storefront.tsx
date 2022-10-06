@@ -157,7 +157,9 @@ export const Storefront = (): JSX.Element => {
     selectedSellOrderIdRef.current = undefined;
     refetchSellOrders();
   };
-  const handleError = (): void => setIsProcessingModalOpen(false);
+  const handleError = (): void => {
+    setIsProcessingModalOpen(false);
+  };
   const handleTxModalClose = (): void => {
     setCardItems(undefined);
     setTxModalTitle('');
@@ -165,6 +167,7 @@ export const Storefront = (): JSX.Element => {
     setDeliverTxResponse(undefined);
     setError(undefined);
     setSelectedAction(undefined);
+    selectedSellOrderIdRef.current = undefined;
   };
 
   const handleCancelModalClose = (): void => {

@@ -30,6 +30,7 @@ export const invalidMemoLength: string = `Must be ${MEMO_MAX_LENGTH} characters 
 /* Validation Functions */
 
 export const numericOnlyRE = /^\d*$/gm;
+const decimalSymbolRE = /\./;
 
 // RegEx based on https://verra.org/wp-content/uploads/2020/09/VCU-Serial-Number-Help-Format.pdf
 // TODO: it is possible to do additional validation to make sure dates and project ID match serial number. See link above.
@@ -60,7 +61,7 @@ export function validatePassword(password: string): boolean {
 }
 
 const decimalCount = (num: number): number => {
-  return num.toString().split(/\./)?.[1]?.length;
+  return num.toString().split(decimalSymbolRE)?.[1]?.length;
 };
 
 export function validateAmount(

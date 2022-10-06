@@ -77,8 +77,6 @@ export default function useMsgClient(
       // The transaction succeeded iff code is 0.
       // TODO: this can give false positives. Some errors return code 0.
       if (_deliverTxResponse.code !== 0) {
-        setError(_deliverTxResponse.rawLog);
-        handleError();
         throw new Error(_deliverTxResponse.rawLog);
       } else {
         setDeliverTxResponse(_deliverTxResponse);

@@ -21,6 +21,7 @@ import { RegenModalProps } from '../modal';
 import InfoTooltip from '../tooltip/InfoTooltip';
 import { Subtitle } from '../typography';
 import {
+  BottomCreditRetireFields,
   BottomCreditRetireFieldsProps,
   CreditRetireFields,
   initialValues as initialValuesRetire,
@@ -181,10 +182,9 @@ const CreditSendForm: React.FC<FormProps> = ({
 
           {values.withRetire && (
             <>
-              <CreditRetireFields
-                availableTradableAmount={availableTradableAmount}
-                batchDenom={batchDenom}
+              <BottomCreditRetireFields
                 mapboxToken={mapboxToken}
+                arrayPrefix=""
               />
             </>
           )}

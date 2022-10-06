@@ -143,7 +143,8 @@ interface CountryOptionsProps {
   exclude?: boolean;
 }
 
-const isNotExcluded = (code: string): boolean => {
+// isIncluded means that we keep it included because it is not in excluded list
+const isIncluded = (code: string): boolean => {
   return !EXCLUDED_COUNTRIES.includes(code);
 };
 
@@ -151,7 +152,7 @@ export function getCountryOptions({
   exclude = false,
 }: CountryOptionsProps): Option[] {
   const countriesCodes = exclude
-    ? getCountriesIsoCodes().filter(isNotExcluded)
+    ? getCountriesIsoCodes().filter(isIncluded)
     : getCountriesIsoCodes();
 
   const countries = countriesCodes

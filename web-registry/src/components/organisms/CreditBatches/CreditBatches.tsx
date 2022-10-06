@@ -48,13 +48,13 @@ const headCells: HeadCell[] = [
   { id: 'denom', numeric: false, label: 'batch denom' },
   { id: 'issuer', numeric: false, label: 'issuer' },
   {
-    id: 'tradableSupply',
+    id: 'tradableAmount',
     numeric: true,
     label: 'total amount tradable',
     wrap: true,
   },
   {
-    id: 'retiredSupply',
+    id: 'retiredAmount',
     numeric: true,
     label: 'total amount retired',
     wrap: true,
@@ -171,11 +171,11 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
             {batch.denom}
           </Link>,
           <AccountLink address={batch.issuer} />,
-          <WithLoader isLoading={!batch.tradableSupply} variant="skeleton">
-            <Box>{formatNumber({ num: batch.tradableSupply })}</Box>
+          <WithLoader isLoading={!batch.tradableAmount} variant="skeleton">
+            <Box>{formatNumber({ num: batch.tradableAmount })}</Box>
           </WithLoader>,
-          <WithLoader isLoading={!batch.retiredSupply} variant="skeleton">
-            <Box>{formatNumber({ num: batch.retiredSupply })}</Box>
+          <WithLoader isLoading={!batch.retiredAmount} variant="skeleton">
+            <Box>{formatNumber({ num: batch.retiredAmount })}</Box>
           </WithLoader>,
           <WithLoader isLoading={!batch.cancelledAmount} variant="skeleton">
             <Box>{formatNumber({ num: batch.cancelledAmount })}</Box>

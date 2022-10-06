@@ -11,11 +11,13 @@ import AmountField from '../inputs/AmountField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import TextField from '../inputs/TextField';
 import {
+  invalidMemoLength,
   invalidRegenAddress,
   isValidAddress,
   requiredMessage,
   requirementAgreement,
   validateAmount,
+  validateMemoLength,
 } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
 import InfoTooltip from '../tooltip/InfoTooltip';
@@ -113,6 +115,10 @@ const CreditSendForm: React.FC<FormProps> = ({
     if (errAmount) errors.totalAmount = errAmount;
 
     if (!values.agreeErpa) errors.agreeErpa = requirementAgreement;
+
+    if (values.note && !validateMemoLength(values.note)) {
+      errors.note = invalidMemoLength;
+    }
 
     return errors;
   };

@@ -10,7 +10,12 @@ import AmountField from '../inputs/AmountField';
 import ControlledTextField from '../inputs/ControlledTextField';
 import SelectFieldFallback from '../inputs/SelectFieldFallback';
 import TextField from '../inputs/TextField';
-import { requiredMessage, validateAmount } from '../inputs/validation';
+import {
+  invalidMemoLength,
+  requiredMessage,
+  validateAmount,
+  validateMemoLength,
+} from '../inputs/validation';
 import { RegenModalProps } from '../modal';
 import InfoTooltipWithIcon from '../tooltip/InfoTooltipWithIcon';
 import { Body, Title } from '../typography';
@@ -173,9 +178,12 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
             />
           </>
         )}
-        <Title variant="h5" sx={sxs.title}>
-          Location of retirement
-        </Title>
+        <Flex sx={sxs.title}>
+          <Title variant="h5" sx={{ mr: 2 }}>
+            Location of retirement
+          </Title>
+          <InfoTooltipWithIcon title="The retirement location can be where you live or your business operates." />
+        </Flex>
 
         <Body>
           Please enter a location for the retirement of these credits. This
@@ -275,6 +283,10 @@ export const validateCreditRetire = (
     values.retiredAmount,
   );
   if (errAmount) errors.retiredAmount = errAmount;
+
+  if (values.note && !validateMemoLength(values.note)) {
+    errors.note = invalidMemoLength;
+  }
 
   return errors;
 };

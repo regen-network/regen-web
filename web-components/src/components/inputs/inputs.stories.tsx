@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Button, FormLabel } from '@mui/material';
+import { Box } from '@mui/system';
 import { Field, Form, Formik } from 'formik';
 import { RadioGroup } from 'formik-mui';
 
@@ -172,6 +173,7 @@ function ToggleVariants(): JSX.Element {
                   label="Disabled"
                   description="description disabled lorem ipsum"
                   checked={values['radioValue'] === 'disabled'}
+                  tooltip="The seller of these credits has chosen to only allow for immediate retiring of credits. These credits cannot be purchased as a tradable asset."
                 />
               </Field>
             </OnBoardingCard>

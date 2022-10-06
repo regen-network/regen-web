@@ -38,8 +38,6 @@ export const useProjectsSellOrders = ({
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    if (projectsWithOrderData.length > 0) return;
-
     const normalize = async (): Promise<void> => {
       if (projects && sellOrders) {
         const _projectsWithOrders = await getProjectDisplayData(
@@ -53,7 +51,7 @@ export const useProjectsSellOrders = ({
       }
     };
     normalize();
-  }, [projectsWithOrderData, projects, sellOrders, regenPrice, limit]);
+  }, [projects, sellOrders, regenPrice, limit]);
 
   return { projectsWithOrderData, loading };
 };

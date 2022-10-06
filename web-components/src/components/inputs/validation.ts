@@ -1,5 +1,10 @@
 import { Bech32Address } from '@keplr-wallet/cosmos';
 
+/* Constants, limits */
+
+export const MAX_FRACTION_DIGITS: number = 6; // useful for conversion to micro udenom (BigInt)
+export const MEMO_MAX_LENGTH: number = 512;
+
 /* Messages */
 
 export const requiredMessage: string = 'This field is required';
@@ -19,16 +24,13 @@ export const invalidJSON: string = 'Please enter valid JSON-LD';
 export const invalidAddress: string = 'Invalid address';
 export const invalidRegenAddress: string = 'Invalid regen address';
 export const requiredDenom: string = 'Please choose a denom';
-export const invalidMemoLength: string = 'Must be 512 characters or fewer';
-
-/* Constants, limits */
-
-export const MAX_FRACTION_DIGITS: number = 6; // useful for conversion to micro udenom (BigInt)
-export const MEMO_MAX_LENGTH: number = 512;
+export const invalidDecimalCount: string = `More than ${MAX_FRACTION_DIGITS} decimal places not allowed`;
+export const invalidMemoLength: string = `Must be ${MEMO_MAX_LENGTH} characters or fewer`;
 
 /* Validation Functions */
 
 export const numericOnlyRE = /^\d*$/gm;
+const decimalSymbolRE = /\./;
 
 // RegEx based on https://verra.org/wp-content/uploads/2020/09/VCU-Serial-Number-Help-Format.pdf
 // TODO: it is possible to do additional validation to make sure dates and project ID match serial number. See link above.
@@ -58,6 +60,10 @@ export function validatePassword(password: string): boolean {
   return hasUpperCase && hasLowerCase && hasNumber && hasSpecialCharacter;
 }
 
+const decimalCount = (num: number): number => {
+  return num.toString().split(decimalSymbolRE)?.[1]?.length;
+};
+
 export function validateAmount(
   availableTradableAmount: number,
   amount?: number,
@@ -72,6 +78,8 @@ export function validateAmount(
     return invalidAmount;
   } else if (amount > availableTradableAmount) {
     return customInsufficientCredits || insufficientCredits;
+  } else if (decimalCount(amount) > MAX_FRACTION_DIGITS) {
+    return invalidDecimalCount;
   }
   return;
 }
@@ -102,7 +110,7 @@ export function validatePrice(
   if (!price) {
     return requiredMessage;
   }
-  const priceDecimalPlaces = price?.toString().split(/\.|,/)?.[1]?.length;
+  const priceDecimalPlaces = decimalCount(price);
   maximumFractionDigits = maximumFractionDigits || MAX_FRACTION_DIGITS;
   if (!!priceDecimalPlaces && priceDecimalPlaces > maximumFractionDigits) {
     return `Maximum ${maximumFractionDigits} decimal places`;

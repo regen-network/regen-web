@@ -230,7 +230,9 @@ export function ProjectCard({
                     startIcon={
                       <CurrentCreditsIcon height="18px" width="18px" />
                     }
-                    disabled={purchaseInfo.sellInfo.creditsAvailable === 0}
+                    disabled={
+                      purchaseInfo.sellInfo.creditsAvailableForUser === 0
+                    }
                     sx={{ width: '100%' }}
                   >
                     {'BUY ECOCREDITS'}

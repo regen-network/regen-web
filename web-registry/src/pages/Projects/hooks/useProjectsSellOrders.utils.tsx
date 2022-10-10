@@ -15,6 +15,7 @@ type GetPurchaseInfoParams = {
   projectId: string;
   sellOrders: SellOrderInfo[];
   regenPrice?: number;
+  userAddress?: string;
 };
 
 const REGEN_DENOM = 'uregen';
@@ -23,6 +24,7 @@ export const getPurchaseInfo = ({
   projectId,
   sellOrders,
   regenPrice,
+  userAddress,
 }: GetPurchaseInfoParams): PurchaseInfo => {
   const ordersForThisProject = sellOrders.filter(order =>
     order.batchDenom.startsWith(projectId),
@@ -32,11 +34,17 @@ export const getPurchaseInfo = ({
       sellInfo: {
         pricePerTon: `-`,
         creditsAvailable: 0,
+        creditsAvailableForUser: 0,
       },
     };
   }
 
   const creditsAvailable = ordersForThisProject
+    .map(order => parseFloat(order.quantity))
+    .reduce((total, quantity) => total + quantity, 0);
+
+  const creditsAvailableForUser = ordersForThisProject
+    .filter(order => order.seller !== userAddress)
     .map(order => parseFloat(order.quantity))
     .reduce((total, quantity) => total + quantity, 0);
 
@@ -72,6 +80,9 @@ export const getPurchaseInfo = ({
     sellInfo: {
       pricePerTon: hasPrice ? `$${priceMinDisplayed}-${priceMaxDisplayed}` : '',
       creditsAvailable: roundFloatNumber(creditsAvailable, {
+        decimals: 0,
+      }),
+      creditsAvailableForUser: roundFloatNumber(creditsAvailableForUser, {
         decimals: 0,
       }),
     },

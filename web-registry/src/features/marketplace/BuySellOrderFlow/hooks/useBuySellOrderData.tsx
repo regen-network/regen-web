@@ -25,9 +25,11 @@ export const useBuySellOrderData = ({ projects }: Props): ReponseType => {
       projects,
       sellOrders,
     });
-
+  const sellOrdersAvailable = projectsWithOrderData[0]?.sellOrders.filter(
+    sellOrder => sellOrder.seller !== wallet?.address,
+  );
   const isBuyFlowDisabled =
-    (loadingProjects || projectsWithOrderData[0]?.sellOrders.length === 0) &&
+    (loadingProjects || sellOrdersAvailable.length === 0) &&
     Boolean(wallet?.address);
 
   return {

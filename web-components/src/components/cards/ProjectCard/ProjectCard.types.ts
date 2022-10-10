@@ -19,7 +19,7 @@ export interface PurchaseInfo {
   sellInfo?: {
     pricePerTon: string;
     creditsAvailable: number;
-    userCreditsAvailable: number;
+    creditsAvailableForUser: number;
     denomLogo?: JSX.Element;
   };
 }

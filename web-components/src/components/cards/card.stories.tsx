@@ -101,7 +101,7 @@ export const projectCard = (): JSX.Element => (
       purchaseInfo={{
         sellInfo: {
           creditsAvailable: 1200,
-          userCreditsAvailable: 1190,
+          creditsAvailableForUser: 1190,
           pricePerTon: '17.20-24.20',
         },
       }}

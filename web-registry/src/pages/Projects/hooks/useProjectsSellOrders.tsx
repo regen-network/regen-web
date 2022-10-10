@@ -20,7 +20,6 @@ type Props = {
   sellOrders?: SellOrderInfoExtented[];
   regenPrice?: number;
   limit?: number;
-  userAddress?: string;
 };
 
 export interface ProjectsSellOrders {
@@ -33,7 +32,6 @@ export const useProjectsSellOrders = ({
   sellOrders,
   regenPrice,
   limit,
-  userAddress,
 }: Props): ProjectsSellOrders => {
   const [projectsWithOrderData, setProjectsWithOrderData] = useState<
     ProjectWithOrderData[]

@@ -34,7 +34,7 @@ export const getPurchaseInfo = ({
       sellInfo: {
         pricePerTon: `-`,
         creditsAvailable: 0,
-        userCreditsAvailable: 0,
+        creditsAvailableForUser: 0,
       },
     };
   }
@@ -43,7 +43,7 @@ export const getPurchaseInfo = ({
     .map(order => parseFloat(order.quantity))
     .reduce((total, quantity) => total + quantity, 0);
 
-  const userCreditsAvailable = ordersForThisProject
+  const creditsAvailableForUser = ordersForThisProject
     .filter(order => order.seller !== userAddress)
     .map(order => parseFloat(order.quantity))
     .reduce((total, quantity) => total + quantity, 0);
@@ -82,7 +82,7 @@ export const getPurchaseInfo = ({
       creditsAvailable: roundFloatNumber(creditsAvailable, {
         decimals: 0,
       }),
-      userCreditsAvailable: roundFloatNumber(userCreditsAvailable, {
+      creditsAvailableForUser: roundFloatNumber(creditsAvailableForUser, {
         decimals: 0,
       }),
     },

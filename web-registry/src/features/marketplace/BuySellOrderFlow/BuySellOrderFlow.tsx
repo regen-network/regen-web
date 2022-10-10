@@ -126,9 +126,11 @@ export const BuySellOrderFlow = ({
   const project = useMemo(
     () => ({
       id: selectedProject?.id.toString() ?? '',
-      sellOrders: projectUiSellOrdersInfo,
+      sellOrders: projectUiSellOrdersInfo?.filter(
+        sellOrder => sellOrder.seller !== accountAddress,
+      ),
     }),
-    [selectedProject, projectUiSellOrdersInfo],
+    [selectedProject, projectUiSellOrdersInfo, accountAddress],
   );
 
   useEffect(() => {

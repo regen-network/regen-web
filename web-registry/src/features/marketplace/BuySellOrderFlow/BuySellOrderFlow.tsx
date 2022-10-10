@@ -74,6 +74,7 @@ export const BuySellOrderFlow = ({
     setDeliverTxResponse(undefined);
     setError(undefined);
     setIsFlowStarted(false);
+    selectedSellOrderIdRef.current = undefined;
   };
   const handleError = (): void => {
     closeProcessingModal();
@@ -84,6 +85,7 @@ export const BuySellOrderFlow = ({
   ): Promise<void> => {
     closeProcessingModal();
     closeBuyModal();
+    selectedSellOrderIdRef.current = undefined;
   };
   const onTxSuccessButtonClick = (): void => {
     handleTxModalClose();

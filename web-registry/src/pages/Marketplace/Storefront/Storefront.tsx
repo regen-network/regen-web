@@ -42,7 +42,10 @@ import { client as sanityClient } from '../../../sanity';
 import useBuySellOrderSubmit from './hooks/useBuySellOrderSubmit';
 import useCancelSellOrderSubmit from './hooks/useCancelSellOrderSubmit';
 import { useCheckSellOrderAvailabilty } from './hooks/useCheckSellOrderAvailabilty';
-import { useFetchMetadataProjects } from './hooks/useFetchMetadataProjects';
+import {
+  ProjectInfoWithMetadata,
+  useFetchMetadataProjects,
+} from './hooks/useFetchMetadataProjects';
 import { useResetErrorBanner } from './hooks/useResetErrorBanner';
 import {
   BUY_SELL_ORDER_ACTION,
@@ -59,6 +62,7 @@ import {
   getCancelCardItems,
   sortBySellOrderId,
   updateBatchInfosMap,
+  updateProjectsWithMetadataMap,
 } from './Storefront.utils';
 
 export const Storefront = (): JSX.Element => {
@@ -85,12 +89,13 @@ export const Storefront = (): JSX.Element => {
     [sellOrders, offset, rowsPerPage],
   );
 
+  // Bach pagination
+
   const [batchInfosMap] = useState(new Map<string, BatchInfo>());
   const newBatchDenoms = useMemo(
     () => batchDenoms?.filter(batchDenom => !batchInfosMap.has(batchDenom)),
     [batchDenoms, batchInfosMap],
   );
-
   const batchInfoResponses = useQueryListBatchInfo(newBatchDenoms);
   const batchInfos = updateBatchInfosMap({ batchInfosMap, batchInfoResponses });
 
@@ -107,10 +112,31 @@ export const Storefront = (): JSX.Element => {
     client: sanityClient,
   });
 
-  const { projectsWithMetadata: onChainprojectsWithMedata } =
+  // Project metadata pagination
+
+  const [projectsWithMetadataMap] = useState(
+    new Map<string, ProjectInfoWithMetadata>(),
+  );
+  const newProjectsId = useMemo(
+    () => batchInfoResponses?.map(batchInfo => batchInfo.batch?.projectId),
+    [batchInfoResponses],
+  );
+  const newProjects = useMemo(
+    () =>
+      onChainProjects?.projects.filter(project =>
+        newProjectsId?.includes(project.id),
+      ),
+    [newProjectsId, onChainProjects?.projects],
+  );
+  const { projectsWithMetadata: newProjectsWithMetadata } =
     useFetchMetadataProjects({
-      projects: onChainProjects?.projects,
+      projects: newProjects,
     });
+
+  const onChainprojectsWithMedata = updateProjectsWithMetadataMap({
+    projectsWithMetadataMap,
+    newProjectsWithMetadata,
+  });
 
   const [selectedSellOrder, setSelectedSellOrder] = useState<number | null>(
     null,
@@ -147,8 +173,9 @@ export const Storefront = (): JSX.Element => {
         batchInfos,
         sellOrders,
         projectsInfosByHandleMap,
+        projectsWithMetadataMap,
       }),
-    [batchInfos, sellOrders, projectsInfosByHandleMap],
+    [batchInfos, sellOrders, projectsInfosByHandleMap, projectsWithMetadataMap],
   );
 
   const handleTxQueued = (): void => setIsProcessingModalOpen(true);

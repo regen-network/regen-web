@@ -83,7 +83,7 @@ export default function useMsgClient(
         handleTxDelivered(_deliverTxResponse);
       }
     },
-    [api?.msgClient, handleTxQueued, handleTxDelivered, handleError],
+    [api?.msgClient, handleTxQueued, handleTxDelivered],
   );
 
   const signAndBroadcast = useCallback(

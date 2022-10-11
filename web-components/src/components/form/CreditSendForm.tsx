@@ -26,7 +26,6 @@ import { Subtitle } from '../typography';
 import {
   BottomCreditRetireFields,
   BottomCreditRetireFieldsProps,
-  CreditRetireFields,
   initialValues as initialValuesRetire,
   RetireFormValues,
 } from './CreditRetireForm';

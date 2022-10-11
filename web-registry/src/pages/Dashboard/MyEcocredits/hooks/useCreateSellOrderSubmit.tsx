@@ -9,6 +9,7 @@ import { getFormattedNumber } from 'web-components/lib/utils/format';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { denomToMicro } from 'lib/denom.utils';
+import { getProjectName } from 'lib/ecocredit/api';
 
 import DenomIcon from 'components/molecules/DenomIcon';
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
@@ -67,7 +68,17 @@ const useCreateSellOrderSubmit = ({
       if (batchDenom && amount && askDenom) {
         const baseDenom = await getDenomtrace({ denom: askDenom });
 
+        const projectId = batchDenom.substring(0, batchDenom.indexOf('-', 4));
+        const projectName = await getProjectName(projectId);
+
         setCardItems([
+          {
+            label: 'project',
+            value: {
+              name: projectName ?? projectId,
+              url: `/projects/${projectId}`,
+            },
+          },
           {
             label: 'batch denom',
             value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },

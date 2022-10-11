@@ -71,7 +71,18 @@ const useCancelSellOrderSubmit = ({
 
     const baseDenom = await getDenomtrace({ denom: askDenom });
 
+    const projectId =
+      selectedSellOrder.project?.id ??
+      batchDenom.substring(0, batchDenom.indexOf('-', 4));
+
     setCardItems([
+      {
+        label: 'project',
+        value: {
+          name: selectedSellOrder.project?.name || projectId,
+          url: `/projects/${projectId}`,
+        },
+      },
       {
         label: 'batch denom',
         value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },

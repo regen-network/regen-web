@@ -9,6 +9,7 @@ import { getJurisdictionIsoCode } from 'web-components/lib/utils/locationStandar
 
 import { UseStateSetter } from 'types/react/use-state';
 import { microToDenom } from 'lib/denom.utils';
+import { getProjectName } from 'lib/ecocredit/api';
 
 import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import DenomIcon from 'components/molecules/DenomIcon';
@@ -124,6 +125,9 @@ const useBuySellOrderSubmit = ({
       if (batchDenom && creditCount && askDenom) {
         const baseDenom = await getDenomtrace({ denom: askDenom });
 
+        const projectId = batchDenom.substring(0, batchDenom.indexOf('-', 4));
+        const projectName = await getProjectName(projectId);
+
         setCardItems([
           {
             label: 'total purchase price',
@@ -140,6 +144,13 @@ const useBuySellOrderSubmit = ({
                   <DenomIcon denom={baseDenom} sx={{ display: 'flex' }} />
                 </Box>
               ),
+            },
+          },
+          {
+            label: 'project',
+            value: {
+              name: projectName ?? projectId,
+              url: `/projects/${projectId}`,
             },
           },
           {

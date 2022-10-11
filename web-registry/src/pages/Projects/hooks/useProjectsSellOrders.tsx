@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { getMetadata } from 'lib/metadata-graph';
@@ -37,26 +37,36 @@ export const useProjectsSellOrders = ({
     ProjectWithOrderData[]
   >([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const isFetchingRef = useRef(false);
 
   useEffect(() => {
-    if (projectsWithOrderData.length > 0) return;
     const normalize = async (): Promise<void> => {
-      console.log('normalize called');
-      console.log('projects', projects);
-      console.log('sellOrders', sellOrders);
+      if (isFetchingRef.current || projectsWithOrderData.length > 0) {
+        return;
+      }
       if (projects && sellOrders) {
-        const _projectsWithOrders = await getProjectDisplayData(
-          projects,
-          sellOrders,
-          limit ?? projects.length,
-          regenPrice,
-        );
-        setProjectsWithOrderData(_projectsWithOrders);
-        setLoading(false);
+        try {
+          isFetchingRef.current = true;
+          const _projectsWithOrders = await getProjectDisplayData(
+            projects,
+            sellOrders,
+            limit ?? projects.length,
+            regenPrice,
+          );
+          if (_projectsWithOrders) {
+            setProjectsWithOrderData(_projectsWithOrders);
+          }
+        } catch (err) {
+          console.error(err); // eslint-disable-line no-console
+        } finally {
+          console.log('finally');
+          setLoading(false);
+          isFetchingRef.current = false;
+        }
       }
     };
     normalize();
-  }, [projects, sellOrders, regenPrice, limit, projectsWithOrderData.length]);
+  }, [projects, sellOrders, regenPrice, limit, projectsWithOrderData]);
 
   return { projectsWithOrderData, loading };
 };

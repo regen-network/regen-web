@@ -16,6 +16,7 @@ interface Props {
   title?: string;
   titleAlign?: 'center' | 'left';
   onButtonClick?: (params: ProjectCardOnButtonClickParams) => void;
+  loading?: boolean;
 }
 
 export function ProjectCardsSection({
@@ -23,6 +24,7 @@ export function ProjectCardsSection({
   title = 'Projects',
   titleAlign = 'center',
   onButtonClick,
+  loading,
 }: Props): JSX.Element {
   const navigate = useNavigate();
   const styles = useSectionStyles();
@@ -34,7 +36,7 @@ export function ProjectCardsSection({
       classes={{ root: styles.section, title: styles.title }}
     >
       <WithLoader
-        isLoading={projects?.length === 0}
+        isLoading={!!loading}
         sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
       >
         <Box

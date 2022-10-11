@@ -58,6 +58,14 @@ export const BuySellOrderFlow = ({
   const submittedQuantityRef = useRef<number>();
   const navigate = useNavigate();
 
+  const projectCardItem: Item = {
+    label: 'project',
+    value: {
+      name: selectedProject?.name || selectedProject?.id || '-',
+      url: `/projects/${selectedProject?.id}`,
+    },
+  };
+
   const closeBuyModal = (): void => {
     setIsBuyModalOpen(false);
     setIsFlowStarted(false);
@@ -154,6 +162,21 @@ export const BuySellOrderFlow = ({
     setTxModalTitle,
   });
 
+  const getCardItemsWithProject = (
+    projectCardItem: Item,
+    cardItems: Item[] | undefined,
+  ): Item[] | undefined => {
+    if (!cardItems) return;
+    const firstIsPrice = cardItems[0].label.toString().includes('price');
+    return firstIsPrice
+      ? [
+          ...cardItems.slice(0, 1),
+          { ...projectCardItem },
+          ...cardItems.slice(2),
+        ]
+      : [{ ...projectCardItem }, ...[...cardItems]];
+  };
+
   return (
     <>
       <BuyCreditsModal
@@ -174,7 +197,7 @@ export const BuySellOrderFlow = ({
         title={txModalHeader}
         cardTitle={txModalTitle}
         buttonTitle={txButtonTitle}
-        cardItems={cardItems}
+        cardItems={getCardItemsWithProject(projectCardItem, cardItems)}
         linkComponent={Link}
         onButtonClick={onTxSuccessButtonClick}
         icon={<CelebrateIcon sx={{ width: '85px', height: '106px' }} />}
@@ -190,7 +213,7 @@ export const BuySellOrderFlow = ({
         linkComponent={Link}
         onButtonClick={handleTxModalClose}
         buttonTitle={'CLOSE WINDOW'}
-        cardItems={cardItems}
+        cardItems={getCardItemsWithProject(projectCardItem, cardItems)}
         icon={<ErrorIcon sx={{ fontSize: 100 }} />}
       />
       {displayErrorBanner && (

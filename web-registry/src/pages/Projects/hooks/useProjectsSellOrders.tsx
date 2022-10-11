@@ -59,7 +59,6 @@ export const useProjectsSellOrders = ({
         } catch (err) {
           console.error(err); // eslint-disable-line no-console
         } finally {
-          console.log('finally');
           setLoading(false);
           isFetchingRef.current = false;
         }

@@ -62,6 +62,15 @@ const useCreditRetireSubmit = ({
       if (batchDenom && amount) {
         setCardItems([
           {
+            label: 'project',
+            value: {
+              name:
+                credits[creditRetireOpen].projectName ||
+                credits[creditRetireOpen].projectId,
+              url: `/projects/${credits[creditRetireOpen].projectId}`,
+            },
+          },
+          {
             label: 'batch denom',
             value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
           },

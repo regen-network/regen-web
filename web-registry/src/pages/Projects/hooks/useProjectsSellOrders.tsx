@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { getMetadata } from 'lib/metadata-graph';
+import { useWallet } from 'lib/wallet';
 
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
@@ -38,6 +39,7 @@ export const useProjectsSellOrders = ({
   >([]);
   const [loading, setLoading] = useState<boolean>(true);
   const isFetchingRef = useRef(false);
+  const { wallet } = useWallet();
 
   useEffect(() => {
     const normalize = async (): Promise<void> => {
@@ -52,6 +54,7 @@ export const useProjectsSellOrders = ({
             sellOrders,
             limit ?? projects.length,
             regenPrice,
+            wallet?.address,
           );
           if (_projectsWithOrders) {
             setProjectsWithOrderData(_projectsWithOrders);
@@ -65,7 +68,14 @@ export const useProjectsSellOrders = ({
       }
     };
     normalize();
-  }, [projects, sellOrders, regenPrice, limit, projectsWithOrderData]);
+  }, [
+    projects,
+    sellOrders,
+    regenPrice,
+    limit,
+    projectsWithOrderData,
+    wallet?.address,
+  ]);
 
   return { projectsWithOrderData, loading };
 };
@@ -75,6 +85,7 @@ const getProjectDisplayData = async (
   sellOrders: SellOrderInfoExtented[],
   limit: number,
   regenPrice?: number,
+  userAddress?: string,
 ): Promise<ProjectWithOrderData[]> => {
   const projectsWithOrderData = await Promise.all(
     projects
@@ -88,6 +99,7 @@ const getProjectDisplayData = async (
           projectId: project.id,
           sellOrders,
           regenPrice,
+          userAddress,
         });
         let metadata;
         if (project.metadata.length) {

@@ -74,6 +74,7 @@ export const BuySellOrderFlow = ({
     setDeliverTxResponse(undefined);
     setError(undefined);
     setIsFlowStarted(false);
+    selectedSellOrderIdRef.current = undefined;
   };
   const handleError = (): void => {
     closeProcessingModal();
@@ -84,6 +85,7 @@ export const BuySellOrderFlow = ({
   ): Promise<void> => {
     closeProcessingModal();
     closeBuyModal();
+    selectedSellOrderIdRef.current = undefined;
   };
   const onTxSuccessButtonClick = (): void => {
     handleTxModalClose();
@@ -126,9 +128,11 @@ export const BuySellOrderFlow = ({
   const project = useMemo(
     () => ({
       id: selectedProject?.id.toString() ?? '',
-      sellOrders: projectUiSellOrdersInfo,
+      sellOrders: projectUiSellOrdersInfo?.filter(
+        sellOrder => sellOrder.seller !== accountAddress,
+      ),
     }),
-    [selectedProject, projectUiSellOrdersInfo],
+    [selectedProject, projectUiSellOrdersInfo, accountAddress],
   );
 
   useEffect(() => {

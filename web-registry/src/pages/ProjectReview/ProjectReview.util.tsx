@@ -1,7 +1,10 @@
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import iso3166 from 'iso-3166-2';
 
-import { getISOString } from 'web-components/lib/utils/locationStandard';
+import {
+  getCountryCodeByName,
+  getISOString,
+  getIsoSubdivision,
+} from 'web-components/lib/utils/locationStandard';
 
 import { isCFCCreditClass, isVCSCreditClass } from 'lib/ecocredit/api';
 
@@ -43,7 +46,7 @@ export const getJurisdiction = async (
   let postalCode = '';
   context.forEach(ctx => {
     if (ctx?.['geojson:id'].includes('country')) {
-      countryKey = getCountryKey(ctx?.['geojson:text']);
+      countryKey = getCountryCodeByName(ctx?.['geojson:text'].trim());
       return;
     }
     if (ctx?.['geojson:id'].includes('region')) {
@@ -61,7 +64,7 @@ export const getJurisdiction = async (
     const placeSegments = location['geojson:place_name'].split(',');
     // find the country key
     placeSegments.forEach((segment: string) => {
-      const foundCountry = getCountryKey(segment.trim());
+      const foundCountry = getCountryCodeByName(segment.trim());
       if (foundCountry) {
         countryKey = foundCountry;
         return;
@@ -98,26 +101,14 @@ export const getJurisdiction = async (
   return Promise.resolve(isoString);
 };
 
-const getCountryKey = (country: string): string => {
-  const foundKey = Object.keys(iso3166.data).find(key => {
-    return (
-      iso3166.data[key].name.toLowerCase() === country.trim().toLowerCase()
-    );
-  });
-  if (foundKey) return foundKey;
-
-  // TODO: iso3166 did not pick up these US variants. May need to add more data sources.
-  const isUnitedStates = /United States|USA|U.S./.test(country);
-  if (isUnitedStates) return 'US';
-
-  return '';
-};
-
 const getStateProvince = (
   countryKey: string,
   stateProvince: string,
 ): string | undefined => {
-  const subdivision = iso3166.subdivision(countryKey, stateProvince);
+  const subdivision = getIsoSubdivision({
+    country: countryKey,
+    subdivision: stateProvince,
+  });
   return subdivision?.name;
 };
 

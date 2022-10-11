@@ -99,7 +99,11 @@ export const projectCard = (): JSX.Element => (
       imgSrc="/coorong.png"
       onClick={onClick}
       purchaseInfo={{
-        sellInfo: { creditsAvailable: 1200, pricePerTon: '17.20-24.20 ' },
+        sellInfo: {
+          creditsAvailable: 1200,
+          creditsAvailableForUser: 1190,
+          pricePerTon: '17.20-24.20',
+        },
       }}
       sx={{ maxWidth: 338, mr: 10, mb: 10 }}
     />

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { useLedger } from 'ledger';
@@ -18,7 +17,6 @@ type ReponseType = {
 
 export const useBuySellOrderData = ({ projects }: Props): ReponseType => {
   const { sellOrdersResponse } = useQuerySellOrders();
-  const [isBuyFlowDisabled, setIsBuyFlowDisabled] = useState(true);
   const sellOrders = sellOrdersResponse?.sellOrders;
   const { wallet } = useLedger();
 
@@ -27,15 +25,14 @@ export const useBuySellOrderData = ({ projects }: Props): ReponseType => {
       projects,
       sellOrders,
     });
-
-  useEffect(() => {
-    const _isBuyFlowDisabled =
-      (loadingProjects ||
-        !projectsWithOrderData.length ||
-        projectsWithOrderData[0]?.sellOrders?.length === 0) &&
-      Boolean(wallet?.address);
-    setIsBuyFlowDisabled(_isBuyFlowDisabled);
-  }, [loadingProjects, projectsWithOrderData, wallet?.address]);
+  const sellOrdersAvailable = projectsWithOrderData[0]?.sellOrders.filter(
+    sellOrder => sellOrder.seller !== wallet?.address,
+  );
+  const isBuyFlowDisabled =
+    (loadingProjects ||
+      projectsWithOrderData?.length === 0 ||
+      sellOrdersAvailable?.length === 0) &&
+    Boolean(wallet?.address);
 
   return {
     isBuyFlowDisabled,

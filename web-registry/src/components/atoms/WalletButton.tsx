@@ -47,7 +47,7 @@ const WalletButton: React.FC = () => {
   const connectToKeplr = async (): Promise<void> => {
     if (connect) {
       await connect();
-      track('login', { date: Date(), account: { wallet: wallet?.address } });
+      track('login', { date: Date(), account: wallet?.address });
     }
   };
 

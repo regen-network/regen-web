@@ -130,7 +130,7 @@ const CreditSendForm: React.FC<FormProps> = ({
       validate={validateHandler}
       onSubmit={async values => {
         track('send2');
-        await onSubmit(values);
+        onSubmit(values);
       }}
     >
       {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (

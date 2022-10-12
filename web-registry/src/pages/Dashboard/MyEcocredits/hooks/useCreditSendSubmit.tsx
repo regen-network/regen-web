@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { MsgSend } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
+import { useTrack } from 'use-analytics';
 
 import type { FormValues as CreditSendFormValues } from 'web-components/lib/components/form/CreditSendForm';
 import type { Item } from 'web-components/lib/components/modal/TxModal';
@@ -37,6 +38,7 @@ const useCreditSendSubmit = ({
   setTxModalHeader,
   setTxModalTitle,
 }: Props): ReturnType => {
+  const track = useTrack();
   const creditSendSubmit = useCallback(
     async (values: CreditSendFormValues): Promise<void> => {
       if (!accountAddress) return Promise.reject();
@@ -67,7 +69,16 @@ const useCreditSendSubmit = ({
         memo: note,
       };
 
-      await signAndBroadcast(tx, () => setCreditSendOpen(-1));
+      const onError = (): void => {
+        track('sendFailure');
+      };
+      const onSuccess = (): void => {
+        track('sendSuccess');
+      };
+      await signAndBroadcast(tx, () => setCreditSendOpen(-1), {
+        onError,
+        onSuccess,
+      });
       if (batchDenom && recipient) {
         setCardItems(
           [
@@ -99,6 +110,7 @@ const useCreditSendSubmit = ({
       setTxModalHeader,
       setTxModalTitle,
       signAndBroadcast,
+      track,
     ],
   );
 

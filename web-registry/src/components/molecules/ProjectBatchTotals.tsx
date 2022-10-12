@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, SxProps, Theme } from '@mui/material';
+import { quantityFormatNumberOptions } from 'config/decimals';
 
 import { LabeledNumber } from 'web-components/lib/components/text-layouts';
 
@@ -35,15 +36,21 @@ export function ProjectBatchTotals({
         <LabeledNumber
           label="Credits Tradable"
           number={totals.tradableAmount}
+          formatNumberOptions={quantityFormatNumberOptions}
         />
       </GridItem>
       <GridItem>
-        <LabeledNumber label="Credits Retired" number={totals.retiredAmount} />
+        <LabeledNumber
+          label="Credits Retired"
+          number={totals.retiredAmount}
+          formatNumberOptions={quantityFormatNumberOptions}
+        />
       </GridItem>
       <GridItem>
         <LabeledNumber
           label="Credits Cancelled"
           number={totals.cancelledAmount}
+          formatNumberOptions={quantityFormatNumberOptions}
         />
       </GridItem>
     </Grid>

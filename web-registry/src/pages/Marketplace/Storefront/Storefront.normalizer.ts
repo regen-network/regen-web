@@ -75,12 +75,14 @@ type NormalizedSellOrderProps = {
     string,
     { name: string; classIdName: string; classIdUrl: string }
   >;
+  projectsWithMetadataMap: Map<string, ProjectInfoWithMetadata>;
 };
 
 export const normalizeSellOrders = ({
   batchInfos,
   sellOrders = [],
   projectsInfosByHandleMap,
+  projectsWithMetadataMap,
 }: NormalizedSellOrderProps): NormalizedSellOrder[] =>
   sellOrders.map(
     ({
@@ -99,7 +101,9 @@ export const normalizeSellOrders = ({
       );
       const projectId = currentBatch?.projectId ?? '';
       const isLoading =
-        currentBatch === undefined || projectsInfosByHandleMap.size === 0;
+        currentBatch === undefined ||
+        projectsInfosByHandleMap.size === 0 ||
+        projectsWithMetadataMap.size === 0;
 
       return {
         id: String(id),

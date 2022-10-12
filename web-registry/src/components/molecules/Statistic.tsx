@@ -5,13 +5,12 @@ import { Dictionary } from 'lodash';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import { Label, Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { formatNumber } from 'web-components/lib/utils/format';
 
 import WithLoader from 'components/atoms/WithLoader';
 
 interface StatisticProps {
   label: string;
-  count?: number;
+  count?: string;
   arrow?: 'upRight' | 'downLeft';
 }
 
@@ -62,7 +61,7 @@ const Statistic: React.FC<StatisticProps> = ({ label, count, arrow }) => {
           variant="skeleton"
           sx={{ width: '100%' }}
         >
-          <Title variant="h3">{formatNumber({ num: count })}</Title>
+          <Title variant="h3">{count}</Title>
         </WithLoader>
       </Box>
     </Box>

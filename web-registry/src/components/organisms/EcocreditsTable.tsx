@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, styled } from '@mui/material';
+import { quantityFormatNumberOptions } from 'config/decimals';
 import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
@@ -102,9 +103,18 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
               {row?.className && <BlockContent content={row?.className} />}
             </Link>
           </WithLoader>,
-          formatNumber({ num: row.balance?.tradableAmount }),
-          formatNumber({ num: row.balance?.retiredAmount }),
-          formatNumber({ num: row.balance?.escrowedAmount }),
+          formatNumber({
+            num: row.balance?.tradableAmount,
+            ...quantityFormatNumberOptions,
+          }),
+          formatNumber({
+            num: row.balance?.retiredAmount,
+            ...quantityFormatNumberOptions,
+          }),
+          formatNumber({
+            num: row.balance?.escrowedAmount,
+            ...quantityFormatNumberOptions,
+          }),
           <GreyText>{formatDate(row.startDate)}</GreyText>,
           <GreyText>{formatDate(row.endDate)}</GreyText>,
           <WithLoader isLoading={!row.projectLocation} variant="skeleton">

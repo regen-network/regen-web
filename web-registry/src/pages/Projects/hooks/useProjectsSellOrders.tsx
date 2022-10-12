@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable no-console */
+import { useEffect, useRef, useState } from 'react';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { getMetadata } from 'lib/metadata-graph';
@@ -37,31 +38,42 @@ export const useProjectsSellOrders = ({
     ProjectWithOrderData[]
   >([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const isFetchingRef = useRef(false);
   const { wallet } = useWallet();
 
   useEffect(() => {
-    if (projectsWithOrderData.length > 0) return;
-
     const normalize = async (): Promise<void> => {
+      if (isFetchingRef.current || projectsWithOrderData.length > 0) {
+        return;
+      }
       if (projects && sellOrders) {
-        const _projectsWithOrders = await getProjectDisplayData(
-          projects,
-          sellOrders,
-          limit ?? projects.length,
-          regenPrice,
-          wallet?.address,
-        );
-        setProjectsWithOrderData(_projectsWithOrders);
-        setLoading(false);
+        try {
+          isFetchingRef.current = true;
+          const _projectsWithOrders = await getProjectDisplayData(
+            projects,
+            sellOrders,
+            limit ?? projects.length,
+            regenPrice,
+            wallet?.address,
+          );
+          if (_projectsWithOrders) {
+            setProjectsWithOrderData(_projectsWithOrders);
+          }
+        } catch (err) {
+          console.error(err); // eslint-disable-line no-console
+        } finally {
+          setLoading(false);
+          isFetchingRef.current = false;
+        }
       }
     };
     normalize();
   }, [
-    projectsWithOrderData,
     projects,
     sellOrders,
     regenPrice,
     limit,
+    projectsWithOrderData,
     wallet?.address,
   ]);
 

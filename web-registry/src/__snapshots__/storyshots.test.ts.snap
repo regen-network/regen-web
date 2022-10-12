@@ -2190,6 +2190,36 @@ exports[`Storyshots Map Map 1`] = `
 </MemoryRouter>
 `;
 
+exports[`Storyshots MarketplaceLaunchBanner Default 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
 exports[`Storyshots Modal Basket Put Modal 1`] = `
 <MemoryRouter
   initialEntries={

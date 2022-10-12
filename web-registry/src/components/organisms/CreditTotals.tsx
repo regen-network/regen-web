@@ -1,17 +1,19 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
+import { quantityFormatNumberOptions } from 'config/decimals';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
+import { formatNumber } from 'web-components/lib/utils/format';
 
 import { getBatchesWithSupply } from '../../lib/ecocredit/api';
 import { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { Statistic } from '../molecules';
 
 interface CreditTotalData {
-  tradeable?: number;
-  retired?: number;
-  created?: number;
+  tradeable?: string;
+  retired?: string;
+  created?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -62,9 +64,12 @@ const CreditTotals: React.FC = () => {
       });
 
       return {
-        tradeable: Math.floor(tradeable),
-        retired: Math.floor(retired),
-        created: Math.floor(created),
+        tradeable: formatNumber({
+          num: tradeable,
+          ...quantityFormatNumberOptions,
+        }),
+        retired: formatNumber({ num: retired, ...quantityFormatNumberOptions }),
+        created: formatNumber({ num: created, ...quantityFormatNumberOptions }),
       };
     },
     [],

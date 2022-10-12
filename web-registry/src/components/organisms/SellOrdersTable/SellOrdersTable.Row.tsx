@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
+import { quantityFormatNumberOptions } from 'config/decimals';
 import { tableStyles } from 'styles/table';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
@@ -56,7 +57,9 @@ const getSellOrdersTableRow = ({
       minimumFractionDigits: MINIMUM_FRACTION_DIGITS,
     })}`}
   </Box>,
-  <Box>{formatNumber({ num: amountAvailable })}</Box>,
+  <Box>
+    {formatNumber({ num: amountAvailable, ...quantityFormatNumberOptions })}
+  </Box>,
   <WithLoader isLoading={project?.classIdUrl === undefined} variant="skeleton">
     <Link
       href={`/credit-classes/${project?.classIdUrl}`}

@@ -1,16 +1,24 @@
 import React from 'react';
 
+import { formatNumber } from '../../utils/format';
 import { Title } from '../typography';
 import { LabeledDetail } from './LabeledDetail';
+
+type Props = {
+  label: string;
+  number: number | string;
+  formatNumberOptions?: {
+    minimumFractionDigits?: number;
+    maximumFractionDigits?: number;
+  };
+};
 
 /** Grey label over a rounded, formatted number */
 export function LabeledNumber({
   label,
   number,
-}: {
-  label: string;
-  number: number | string;
-}): JSX.Element {
+  formatNumberOptions = {},
+}: Props): JSX.Element {
   return (
     <LabeledDetail
       label={label}
@@ -19,7 +27,12 @@ export function LabeledNumber({
         justifyContent: 'space-between',
       }}
     >
-      <Title variant="h3">{Math.round(Number(number)).toLocaleString()}</Title>
+      <Title variant="h3">
+        {formatNumber({
+          num: number,
+          ...formatNumberOptions,
+        })}
+      </Title>
     </LabeledDetail>
   );
 }

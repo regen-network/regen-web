@@ -125,8 +125,11 @@ const App: React.FC = (): JSX.Element => {
   const { plugins } = useAnalytics();
   // user opt-in, right now we just enable all of the analytics
   // providers. but this shows how to conditional enable or even
-  // disable certain providers.
-  plugins.enable(['amplitude', 'google-analytics']).then(() => {});
+  // disable certain providers. REACT_APP_ANALYTICS_ENABLED is
+  // the flag used so that analytics is only enabled in production.
+  if (process.env.REACT_APP_ANALYTICS_ENABLED) {
+    plugins.enable(['amplitude', 'google-analytics']).then(() => {});
+  }
 
   if (isLoading) {
     return <div></div>;

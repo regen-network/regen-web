@@ -1,4 +1,4 @@
-import { chainId, ledgerRESTUri, ledgerRPCUri } from '../ledger';
+import { chainId, ledgerRESTUri, ledgerRPCUri } from '../../ledger';
 
 const chainName = process.env.REACT_APP_LEDGER_CHAIN_NAME;
 

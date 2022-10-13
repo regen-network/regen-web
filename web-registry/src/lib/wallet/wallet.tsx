@@ -5,7 +5,7 @@ import { Window as KeplrWindow } from '@keplr-wallet/types';
 import { truncate } from 'web-components/lib/utils/truncate';
 
 import { chainId } from '../ledger';
-import { chainInfo } from './wallet.config';
+import { chainInfo } from './chainInfo/chainInfo';
 
 const AUTO_CONNECT_WALLET_KEY = 'auto_connect_wallet';
 const KEPLR_WALLET_EXTENSION = 'keplr-wallet-extension';

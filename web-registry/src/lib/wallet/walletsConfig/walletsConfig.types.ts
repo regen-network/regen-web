@@ -1,0 +1,33 @@
+import { ChainInfo, Keplr } from '@keplr-wallet/types';
+import WalletConnect from '@walletconnect/client';
+import { IKeplrWalletConnectV1 } from '../connectors/connectors.types';
+import { OfflineSigner } from '@cosmjs/proto-signing';
+
+export type WalletClient = Keplr | IKeplrWalletConnectV1;
+
+export enum WalletType {
+  Keplr = 'keplr',
+  WalletConnectKeplr = 'walletconnect_keplr',
+}
+
+export interface Wallet {
+  // A unique identifier among all wallets.
+  type: WalletType;
+  // The name of the wallet.
+  name: string;
+  // A description of the wallet.
+  description: string;
+  // The URL of the wallet logo.
+  imageUrl: string;
+  // A function that returns an instantiated wallet client, with
+  // `walletConnect` passed if `type === WalletType.WalletConnectKeplr`.
+  getClient: (
+    chainInfo: ChainInfo,
+    walletConnect?: WalletConnect,
+  ) => Promise<WalletClient | undefined>;
+  // A function that returns the function to retrieve the `OfflineSigner`
+  // for this wallet.
+  getOfflineSignerFunction: (
+    client: WalletClient,
+  ) => (chainId: string) => OfflineSigner | Promise<OfflineSigner>;
+}

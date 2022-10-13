@@ -4,7 +4,7 @@ import {
   initialValues as recipientsInitialValues,
 } from 'web-components/lib/components/form/RecipientsForm';
 
-import { chainInfo } from 'lib/wallet/wallet.config';
+import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
 import {
   creditBasicsInitialValues,

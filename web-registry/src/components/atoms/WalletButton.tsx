@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
+import { useAnalytics } from 'use-analytics';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -41,10 +42,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 const WalletButton: React.FC = () => {
   const styles = useStyles();
   const { wallet, connect, connectionType, loaded, error } = useWallet();
+  const { track } = useAnalytics();
 
   const connectToKeplr = async (): Promise<void> => {
     if (connect) {
       await connect();
+      track('login', { date: Date(), account: wallet?.address });
     }
   };
 

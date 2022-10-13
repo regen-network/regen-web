@@ -103,7 +103,7 @@ const AdditionalInfo: React.FC<AdditionalInfoProps> = ({
             <>
               {projectActivities.map((projectActivity: any, i: number) => (
                 <Body key={i} size="xl">
-                  {startCase(projectActivity)}
+                  {getValue(projectActivity)}
                 </Body>
               ))}
             </>
@@ -131,7 +131,7 @@ const AdditionalInfo: React.FC<AdditionalInfoProps> = ({
             <>
               {ecosystemTypes.map((ecosystemType: any, i: number) => (
                 <Body key={i} size="xl">
-                  {startCase(ecosystemType)}
+                  {getValue(ecosystemType)}
                 </Body>
               ))}
             </>
@@ -141,7 +141,7 @@ const AdditionalInfo: React.FC<AdditionalInfoProps> = ({
       {verificationMethod && (
         <LineItemLabelAbove
           label="verification method"
-          data={<Body size="xl">{startCase(verificationMethod)}</Body>}
+          data={<Body size="xl">{getValue(verificationMethod)}</Body>}
         />
       )}
     </Box>

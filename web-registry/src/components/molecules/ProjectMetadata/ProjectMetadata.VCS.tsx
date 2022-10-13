@@ -25,7 +25,6 @@ const ProjectMetadataVCS: React.FC<MetadataProps> = ({
   if (!metadata || !projectId) {
     return null;
   }
-  console.log('ProjectMetadataVCS', metadata);
 
   const startDate = metadata?.['regen:projectStartDate']?.['@value'];
   const endDate = metadata?.['regen:projectEndDate']?.['@value'];

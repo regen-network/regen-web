@@ -28,7 +28,7 @@ import {
   useSdgByIriQuery,
 } from '../../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../../lib/imgSrc';
-import { getAreaUnit } from '../../../lib/rdf';
+import { getAreaUnit, qudtUnit } from '../../../lib/rdf';
 import { getDisplayParty, getParty } from '../../../lib/transform';
 import { client } from '../../../sanity';
 import {
@@ -58,8 +58,7 @@ function ProjectTopSection({
   projectId,
 }: {
   data?: any; // TODO: when all project are onchain, this can be ProjectByOnChainIdQuery
-  metadata?: any;
-  // metadata?: ProjectMetadataLDUnion;
+  metadata?: ProjectMetadataLDUnion;
   sanityCreditClassData?: AllCreditClassQuery;
   geojson?: any;
   isGISFile?: boolean;
@@ -79,12 +78,9 @@ function ProjectTopSection({
   const videoURL = metadata?.['regen:videoURL']?.['@value'];
   const landStewardPhoto = metadata?.['regen:landStewardPhoto']?.['@value'];
   const projectSize = metadata?.['regen:projectSize'];
-  const area =
-    projectSize?.['qudt:numericValue']?.['@value'] ||
-    projectSize?.['qudt:numericValue'];
-  const unit =
-    projectSize?.['qudt:unit']?.['@value'] || projectSize?.['qudt:unit'];
-  const areaUnit = getAreaUnit(unit);
+  const area = projectSize?.['qudt:numericValue']?.['@value'];
+  const unit = projectSize?.['qudt:unit']?.['@value'];
+  const areaUnit = getAreaUnit(unit as qudtUnit);
   const creditClass = project?.creditClassByCreditClassId;
   const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
   const quote = metadata?.['regen:projectQuote'];
@@ -138,7 +134,7 @@ function ProjectTopSection({
                 metadata?.['schema:location']?.['place_name'] ||
                 metadata?.['schema:location']?.['geojson:place_name']
               }
-              area={area}
+              area={Number(area)}
               areaUnit={areaUnit}
             />
             <Box

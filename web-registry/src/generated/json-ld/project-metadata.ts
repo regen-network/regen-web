@@ -27,7 +27,7 @@ export interface ProjectMetadataLD {
   'regen:galleryPhotos': UrlList;
   'regen:previewPhoto': UrlType;
   'regen:videoURL': UrlType;
-  'regen:glanceText': TypeValue[];
+  'regen:glanceText': any;
   'regen:landStory': string;
   'regen:landStewardStory': string;
   'regen:landStewardPhoto': UrlType;

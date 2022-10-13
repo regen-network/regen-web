@@ -25,7 +25,6 @@ const ProjectMetadataCFC: React.FC<CFCMetadataProps> = ({
   if (!metadata || !cfcProjectId) {
     return null;
   }
-  console.log('ProjectMetadataCFC', metadata);
 
   const startDate = metadata?.['regen:projectStartDate']?.['@value'];
   const endDate = metadata?.['regen:projectEndDate']?.['@value'];

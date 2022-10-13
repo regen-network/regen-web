@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
+import { useTrack } from 'use-analytics';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
@@ -42,6 +43,7 @@ export const BuySellOrderFlow = ({
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
   const { sellOrdersResponse, refetchSellOrders } = useQuerySellOrders();
+  const track = useTrack();
   const projectSellOrderIds = useMemo(
     () => selectedProject?.sellOrders.map(sellOrder => sellOrder.id),
     [selectedProject],
@@ -86,6 +88,7 @@ export const BuySellOrderFlow = ({
     closeProcessingModal();
     closeBuyModal();
     selectedSellOrderIdRef.current = undefined;
+    track('buySuccess');
   };
   const onTxSuccessButtonClick = (): void => {
     handleTxModalClose();

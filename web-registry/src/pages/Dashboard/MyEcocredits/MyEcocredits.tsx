@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { SxProps, useTheme } from '@mui/material';
 import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+import { useTrack } from 'use-analytics';
 
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
@@ -97,6 +98,7 @@ export const MyEcocredits = (): JSX.Element => {
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
   const [txButtonTitle, setTxButtonTitle] = useState<string | undefined>();
   const navigate = useNavigate();
+  const track = useTrack();
 
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
@@ -278,7 +280,10 @@ export const MyEcocredits = (): JSX.Element => {
                     {
                       icon: <AvailableCreditsIconAlt sx={sxs.arrow} />,
                       label: CREATE_SELL_ORDER_SHORT,
-                      onClick: () => setSellOrderCreateOpen(i),
+                      onClick: () => {
+                        track('sell1');
+                        setSellOrderCreateOpen(i);
+                      },
                     },
                     {
                       icon: (
@@ -289,7 +294,10 @@ export const MyEcocredits = (): JSX.Element => {
                         />
                       ),
                       label: CREDIT_SEND_TITLE,
-                      onClick: () => setCreditSendOpen(i),
+                      onClick: () => {
+                        track('send1');
+                        setCreditSendOpen(i);
+                      },
                     },
                     {
                       icon: (

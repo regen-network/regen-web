@@ -11,9 +11,15 @@ interface TxData {
   memo?: string;
 }
 
+interface OptionalCallbacks {
+  onError?: () => void;
+  onSuccess?: () => void;
+}
+
 export type SignAndBroadcastType = (
   message: TxData,
   onBroadcast?: () => void, // an optional callback that gets called between sign and broadcast
+  { onError, onSuccess }?: OptionalCallbacks,
 ) => Promise<void | string>;
 
 type MsgClientType = {
@@ -64,37 +70,41 @@ export default function useMsgClient(
   );
 
   const broadcast = useCallback(
-    async (txBytes: Uint8Array): Promise<void | string> => {
+    async (txBytes: Uint8Array): Promise<void> => {
       if (!api?.msgClient || !txBytes) return;
       handleTxQueued();
       const _deliverTxResponse = await api.msgClient.broadcast(txBytes);
       // The transaction succeeded iff code is 0.
       // TODO: this can give false positives. Some errors return code 0.
       if (_deliverTxResponse.code !== 0) {
-        setError(_deliverTxResponse.rawLog);
-        handleError();
-        return _deliverTxResponse.rawLog;
+        throw new Error(_deliverTxResponse.rawLog);
       } else {
         setDeliverTxResponse(_deliverTxResponse);
         handleTxDelivered(_deliverTxResponse);
       }
     },
-    [api?.msgClient, handleTxQueued, handleTxDelivered, handleError],
+    [api?.msgClient, handleTxQueued, handleTxDelivered],
   );
 
   const signAndBroadcast = useCallback(
-    async (tx: TxData, closeForm?: () => void) => {
+    async (
+      tx: TxData,
+      closeForm?: () => void,
+      { onError, onSuccess }: OptionalCallbacks = {},
+    ) => {
       try {
         const txBytes = await sign(tx);
         if (txBytes) {
           if (closeForm) closeForm();
-          return await broadcast(txBytes);
+          await broadcast(txBytes);
+          if (onSuccess) onSuccess();
         }
       } catch (err) {
         if (closeForm) closeForm();
         handleError();
         assertIsError(err);
         setError(err.message);
+        if (onError) onError();
         return err.message;
       }
 

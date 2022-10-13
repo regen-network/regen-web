@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { Box } from '@mui/material';
 import { MsgBuyDirect } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
+import { useTrack } from 'use-analytics';
 import { getDenomtrace } from 'utils/ibc/getDenomTrace';
 
 import { Item } from 'web-components/lib/components/modal/TxModal';
@@ -49,6 +50,7 @@ const useBuySellOrderSubmit = ({
   refetchSellOrders,
   onSubmitCallback,
 }: Props): ReturnType => {
+  const track = useTrack();
   const buySellOrderSubmit = useCallback(
     async (values: BuyCreditsValues): Promise<void> => {
       if (!accountAddress) return Promise.reject();
@@ -111,9 +113,16 @@ const useBuySellOrderSubmit = ({
         memo: retirementNote,
       };
 
+      const onError = (): void => {
+        track('buyFailure');
+      };
+      const onSuccess = (): void => {
+        track('buySuccess');
+      };
       const error = await signAndBroadcast(
         tx,
         () => setSelectedSellOrder && setSelectedSellOrder(null),
+        { onError, onSuccess },
       );
 
       if (error && refetchSellOrders) {
@@ -167,6 +176,7 @@ const useBuySellOrderSubmit = ({
       buttonTitle,
       refetchSellOrders,
       onSubmitCallback,
+      track,
     ],
   );
 

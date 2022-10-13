@@ -11,12 +11,16 @@ import { MetaDetail } from './ProjectMetadata.MetaDetail';
 
 export interface MetadataProps {
   metadata?: Partial<VCSProjectMetadataLD>;
+  projectId?: string;
 }
 
-const ProjectMetadataVCS: React.FC<MetadataProps> = ({ metadata }) => {
+const ProjectMetadataVCS: React.FC<MetadataProps> = ({
+  metadata,
+  projectId,
+}) => {
   const theme = useTheme();
   const [expanded, setExpanded] = useState(false);
-  const projectId = metadata?.['regen:vcsProjectId'];
+  const vcsProjectId = metadata?.['regen:vcsProjectId'];
 
   if (!metadata || !projectId) {
     return null;
@@ -37,17 +41,7 @@ const ProjectMetadataVCS: React.FC<MetadataProps> = ({ metadata }) => {
             pt: 8,
           }}
         >
-          {projectId && (
-            <MetaDetail
-              label="vcs project id"
-              data={
-                <ArrowLink
-                  label={projectId.toString()}
-                  href={metadata?.['regen:vcsProjectPage']?.['@value'] || ''}
-                />
-              }
-            />
-          )}
+          <MetaDetail label="project id" data={projectId} />
           {methodology && (
             <MetaDetail
               label="methodology"
@@ -61,7 +55,10 @@ const ProjectMetadataVCS: React.FC<MetadataProps> = ({ metadata }) => {
           )}
           <MetaDetail
             label="offset generation method"
-            data={metadata?.['regen:offsetGenerationMethod']}
+            data={
+              metadata?.['regen:offsetGenerationMethod'] ||
+              metadata?.['http://regen.network/offsetGenerationMethod']
+            }
           />
           {metadata?.['regen:projectActivity']?.['schema:name'] && (
             <MetaDetail
@@ -74,6 +71,17 @@ const ProjectMetadataVCS: React.FC<MetadataProps> = ({ metadata }) => {
                     ] || ''
                   }
                   label={metadata?.['regen:projectActivity']?.['schema:name']}
+                />
+              }
+            />
+          )}
+          {vcsProjectId && (
+            <MetaDetail
+              label="vcs project id"
+              data={
+                <ArrowLink
+                  label={vcsProjectId.toString()}
+                  href={metadata?.['regen:vcsProjectPage']?.['@value'] || ''}
                 />
               }
             />

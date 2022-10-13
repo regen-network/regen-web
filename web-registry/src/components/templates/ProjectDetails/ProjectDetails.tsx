@@ -6,7 +6,6 @@ import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1
 import { QueryProjectResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
-import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
 import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
@@ -31,11 +30,9 @@ import { ProjectMetadataLD } from '../../../generated/json-ld/index';
 import useEcocreditQuery from '../../../hooks/useEcocreditQuery';
 import useQueryMetadataGraph from '../../../hooks/useQueryMetadataGraph';
 import { useLedger } from '../../../ledger';
-import { chainId } from '../../../lib/ledger';
 import { NotFoundPage } from '../../../pages/NotFound/NotFound';
 import { client as sanityClient } from '../../../sanity';
 import { ProjectImpactSection, ProjectTopSection } from '../../organisms';
-import { Credits } from '../../organisms/BuyCreditsModal/BuyCreditsModal';
 import useGeojson from './hooks/useGeojson';
 import useImpact from './hooks/useImpact';
 import useIssuanceModal from './hooks/useIssuanceModal';
@@ -46,16 +43,6 @@ import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProje
 import { ProjectDocumentation } from './ProjectDetails.ProjectDocumentation';
 import { ProjectTimeline } from './ProjectDetails.ProjectTimeline';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
-import { TransactionModals } from './ProjectDetails.TransactionModals';
-
-interface Project {
-  creditPrice?: CreditPrice;
-  stripePrice?: string;
-  credits?: Credits;
-}
-
-// Update for testing purchase credits modal
-const testProject: Project = {};
 
 function ProjectDetails(): JSX.Element {
   const theme = useTheme<Theme>();
@@ -69,10 +56,6 @@ function ProjectDetails(): JSX.Element {
   const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
 
   useResetErrorBanner({ displayErrorBanner, setDisplayErrorBanner });
-
-  // Page mode (info/Tx)
-  const isTxMode =
-    chainId && (testProject.creditPrice || testProject.stripePrice);
 
   // Tx client
   const { api } = useLedger({ forceExp: true });
@@ -135,8 +118,6 @@ function ProjectDetails(): JSX.Element {
     project?.creditClassByCreditClassId?.creditClassVersionsById?.nodes?.[0];
 
   const creditClassName = creditClassVersion?.name;
-  const creditClassDenom =
-    creditClassVersion?.metadata?.['http://regen.network/creditDenom'];
   const coBenefitsIris =
     creditClassVersion?.metadata?.['http://regen.network/coBenefits']?.[
       '@list'
@@ -273,15 +254,6 @@ function ProjectDetails(): JSX.Element {
           open={issuanceModalOpen}
           onClose={() => setIssuanceModalOpen(false)}
           {...issuanceModalData}
-        />
-      )}
-
-      {isTxMode && (
-        <TransactionModals
-          metadata={metadata}
-          projectId={projectId}
-          testProject={testProject}
-          creditDenom={creditClassDenom || creditClassName}
         />
       )}
 

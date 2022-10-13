@@ -26,7 +26,7 @@ import {
   useUpdateProjectByIdMutation,
 } from '../../generated/graphql';
 import { getProjectShapeIri } from '../../lib/rdf';
-import { useWallet } from '../../lib/wallet';
+import { useWallet } from '../../lib/wallet/wallet';
 import { useProjectEditContext } from '../ProjectEdit';
 
 function getPartyIds(

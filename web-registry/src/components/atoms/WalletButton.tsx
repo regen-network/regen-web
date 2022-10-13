@@ -8,7 +8,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import Keplr from '../../assets/keplr.png';
 import { chainId } from '../../lib/ledger';
-import { useWallet } from '../../lib/wallet';
+import { useWallet } from '../../lib/wallet/wallet';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

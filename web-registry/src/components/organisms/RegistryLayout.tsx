@@ -12,11 +12,12 @@ import { HeaderMenuItem } from 'web-components/lib/components/header/HeaderMenuH
 import { UserMenuItem } from 'web-components/lib/components/header/UserMenuItem';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
+import { useWallet } from 'lib/wallet/wallet';
+
 import { PageViewTracking } from 'components/molecules/PageViewTracking';
 
 import DefaultAvatar from '../../assets/avatar.png';
 import { chainId } from '../../lib/ledger';
-import { useWallet } from '../../lib/wallet';
 import {
   RegistryIconLink,
   RegistryNavLink,

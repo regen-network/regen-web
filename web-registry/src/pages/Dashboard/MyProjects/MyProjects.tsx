@@ -12,7 +12,7 @@ import {
   useWalletByAddrQuery,
 } from 'generated/graphql';
 import { getProjectPageBaseData } from 'lib/rdf';
-import { useWallet } from 'lib/wallet';
+import { useWallet } from 'lib/wallet/wallet';
 
 interface MyProjectsProps {
   isIssuer: boolean;

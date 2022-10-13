@@ -11,7 +11,7 @@ interface Props {
 }
 
 function ProjectsSection({ classId }: Props): JSX.Element {
-  const { projectsWithOrderData } = useProjectsWithOrders({
+  const { projectsWithOrderData, loading } = useProjectsWithOrders({
     classId,
   });
 
@@ -24,6 +24,7 @@ function ProjectsSection({ classId }: Props): JSX.Element {
       <ProjectCardsSection
         title="Projects"
         projects={projectsWithOrderData}
+        loading={loading}
         onButtonClick={({ project }) => {
           setSelectedProject(project);
           setIsBuyFlowStarted(true);

@@ -1,8 +1,6 @@
-import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { ProjectStakeholder } from '../../../../generated/json-ld';
-import { setPageView } from '../../../../lib/ga';
 
 function getVisiblePartyName(party?: ProjectStakeholder): string | undefined {
   return party?.['regen:showOnProjectPage']
@@ -13,15 +11,14 @@ function getVisiblePartyName(party?: ProjectStakeholder): string | undefined {
 interface InputProps {
   metadata: any;
   creditClassName: string | undefined;
-  handleReset?: () => void;
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export default function useSeo({
-  metadata,
-  creditClassName,
-  handleReset,
-}: InputProps) {
+export default function useSeo({ metadata, creditClassName }: InputProps) {
+  // this function is used to format credit class metadata into SEO
+  // optimization tags for the project pages. i believe the main use case is at
+  // the very least to get links to a particular credit class page formatting
+  // nicely in twitter/google.
   const location = useLocation();
 
   const partyName =
@@ -32,11 +29,6 @@ export default function useSeo({
 
   const metadataLocation = metadata?.['schema:location'];
   const projectAddress = metadataLocation?.['place_name'];
-
-  useEffect(() => {
-    setPageView(location);
-    handleReset && handleReset(); // reset when location changes
-  }, [location, handleReset]);
 
   const siteMetadata = {
     title: `Regen Network Registry`,

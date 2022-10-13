@@ -44,7 +44,7 @@ export const getDisplayDeveloper = (
     return {
       name: projectOperator?.['schema:name'],
       type: 'ORGANIZATION',
-      link: projectOperator?.['schema:url'],
+      link: projectOperator?.['schema:url']?.['@value'] || '',
     };
   }
 

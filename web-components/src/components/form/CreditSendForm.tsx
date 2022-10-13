@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/system';
 import { Field, Form, Formik, FormikErrors } from 'formik';
+import { useTrack } from 'use-analytics';
 
 import { Theme } from '../../theme/muiTheme';
 import { Flex } from '../box';
@@ -25,7 +26,6 @@ import { Subtitle } from '../typography';
 import {
   BottomCreditRetireFields,
   BottomCreditRetireFieldsProps,
-  CreditRetireFields,
   initialValues as initialValuesRetire,
   RetireFormValues,
 } from './CreditRetireForm';
@@ -83,6 +83,7 @@ const CreditSendForm: React.FC<FormProps> = ({
   onSubmit,
 }) => {
   const styles = useStyles();
+  const track = useTrack();
 
   const initialValues = {
     sender,
@@ -127,7 +128,10 @@ const CreditSendForm: React.FC<FormProps> = ({
     <Formik
       initialValues={initialValues}
       validate={validateHandler}
-      onSubmit={onSubmit}
+      onSubmit={async values => {
+        track('send2');
+        onSubmit(values);
+      }}
     >
       {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
         <Form>

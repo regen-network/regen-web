@@ -1,10 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { IntercomProvider } from 'react-use-intercom';
+import amplitudePlugin from '@analytics/amplitude';
+import googleAnalytics from '@analytics/google-analytics';
 import { Auth0Provider } from '@auth0/auth0-react';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Analytics from 'analytics';
+import doNotTrack from 'analytics-plugin-do-not-track';
+import { AnalyticsProvider } from 'use-analytics';
 
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 
@@ -36,6 +41,27 @@ const queryClient = new QueryClient();
 //   history.replace((appState && appState.returnTo) || window.location.pathname);
 // };
 
+const analytics = Analytics({
+  plugins: [
+    doNotTrack(),
+    amplitudePlugin({
+      apiKey: process.env.REACT_APP_AMPLITUDE_API_KEY,
+      // by default we will not track users, they must opt-in.
+      enabled: false,
+    }),
+    googleAnalytics({
+      measurementIds: ['G-6ZGJM8JXYN'],
+      enabled: false,
+      gtagConfig: {
+        anonymize_ip: true,
+      },
+    }),
+  ],
+  // see here for debugging tools:
+  // https://getanalytics.io/debugging/
+  debug: process.env.NODE_ENV === 'development',
+});
+
 ReactDOM.render(
   <Auth0Provider
     domain={config.domain}
@@ -54,7 +80,9 @@ ReactDOM.render(
             <WalletProvider>
               <LedgerProvider>
                 <ThemeProvider injectFonts>
-                  <App />
+                  <AnalyticsProvider instance={analytics}>
+                    <App />
+                  </AnalyticsProvider>
                 </ThemeProvider>
               </LedgerProvider>
             </WalletProvider>

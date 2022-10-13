@@ -9,6 +9,8 @@ import {
 } from 'web-components/lib/components/inputs/RoleField';
 import { ProfileFormValues } from 'web-components/lib/components/modal/ProfileModal';
 
+import { useCreateProjectContext } from 'pages/ProjectCreate';
+
 import { RolesForm, RolesValues } from '../../components/organisms';
 import {
   EditFormTemplate,
@@ -107,6 +109,8 @@ const Roles: React.FC = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit } = useProjectEditContext();
+  const { creditClassId } = useCreateProjectContext();
+
   const { user } = useAuth0();
   const userEmail = user?.email;
 
@@ -118,7 +122,6 @@ const Roles: React.FC = () => {
     fetchPolicy: 'cache-and-network',
   });
   const project = data?.projectById;
-  const creditClassId = project?.creditClassByCreditClassId?.onChainId;
 
   const { data: userProfileData } = useGetOrganizationProfileByEmailQuery({
     skip: !userEmail,

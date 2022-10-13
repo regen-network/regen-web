@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import cx from 'clsx';
+import { quantityFormatNumberOptions } from 'config/decimals';
 import { tableStyles } from 'styles/table';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
@@ -172,13 +173,28 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           </Link>,
           <AccountLink address={batch.issuer} />,
           <WithLoader isLoading={!batch.tradableAmount} variant="skeleton">
-            <Box>{formatNumber({ num: batch.tradableAmount })}</Box>
+            <Box>
+              {formatNumber({
+                num: batch.tradableAmount,
+                ...quantityFormatNumberOptions,
+              })}
+            </Box>
           </WithLoader>,
           <WithLoader isLoading={!batch.retiredAmount} variant="skeleton">
-            <Box>{formatNumber({ num: batch.retiredAmount })}</Box>
+            <Box>
+              {formatNumber({
+                num: batch.retiredAmount,
+                ...quantityFormatNumberOptions,
+              })}
+            </Box>
           </WithLoader>,
           <WithLoader isLoading={!batch.cancelledAmount} variant="skeleton">
-            <Box>{formatNumber({ num: batch.cancelledAmount })}</Box>
+            <Box>
+              {formatNumber({
+                num: batch.cancelledAmount,
+                ...quantityFormatNumberOptions,
+              })}
+            </Box>
           </WithLoader>,
           <Box className={styles.noWrap}>
             {formatDate(batch.startDate as Date, undefined, true)}

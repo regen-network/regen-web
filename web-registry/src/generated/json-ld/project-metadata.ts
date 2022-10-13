@@ -16,6 +16,8 @@ export interface ProjectMetadataLD {
   'regen:landOwner': ProjectStakeholder;
   'regen:projectOriginator': ProjectStakeholder;
   'regen:offsetGenerationMethod': string;
+  // TODO: not sure why regen:offsetGenerationMethod isn't compacting as expected so added this:
+  'http://regen.network/offsetGenerationMethod'?: string;
   'regen:projectSize': ProjectSize;
   'regen:projectStartDate': TypeValue;
   'regen:projectEndDate': TypeValue;

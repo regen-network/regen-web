@@ -25,6 +25,7 @@ const ProjectMetadataCFC: React.FC<CFCMetadataProps> = ({
   if (!metadata || !cfcProjectId) {
     return null;
   }
+  console.log('ProjectMetadataCFC', metadata);
 
   const startDate = metadata?.['regen:projectStartDate']?.['@value'];
   const endDate = metadata?.['regen:projectEndDate']?.['@value'];
@@ -50,14 +51,17 @@ const ProjectMetadataCFC: React.FC<CFCMetadataProps> = ({
               data={
                 <ArrowLink
                   label="Project Design Document"
-                  href={String(projectDesignDocument) || ''}
+                  href={String(projectDesignDocument?.['@value']) || ''}
                 />
               }
             />
           )}
           <MetaDetail
             label="offset generation method"
-            data={metadata?.['regen:offsetGenerationMethod']}
+            data={
+              metadata?.['regen:offsetGenerationMethod'] ||
+              metadata?.['http://regen.network/offsetGenerationMethod']
+            }
           />
           {projectActivity?.['schema:name'] && (
             <MetaDetail
@@ -76,7 +80,7 @@ const ProjectMetadataCFC: React.FC<CFCMetadataProps> = ({
               data={
                 <ArrowLink
                   label={cfcProjectId}
-                  href={metadata?.['regen:cfcProjectPage'] || ''}
+                  href={metadata?.['regen:cfcProjectPage']?.['@value'] || ''}
                 />
               }
             />
@@ -87,7 +91,7 @@ const ProjectMetadataCFC: React.FC<CFCMetadataProps> = ({
               data={
                 <ArrowLink
                   label={offsetProtocol?.['schema:name']}
-                  href={offsetProtocol?.['schema:url'] || ''}
+                  href={offsetProtocol?.['schema:url']?.['@value'] || ''}
                 />
               }
             />

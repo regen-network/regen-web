@@ -31,7 +31,7 @@ export default function useSeo({ metadata, creditClassName }: InputProps) {
   const projectAddress = metadataLocation?.['place_name'];
 
   const siteMetadata = {
-    title: `Regen Network Registry`,
+    title: `Regen Marketplace`,
     description:
       creditClassName && partyName && projectAddress
         ? `Learn about ${creditClassName} credits sourced from ${partyName} in ${projectAddress}.`

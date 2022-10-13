@@ -17,7 +17,9 @@ export const Link: React.FC<LinkProps> = ({
   target,
   ...linkProps
 }) => {
-  if (!href) return <Box {...linkProps}>{children}</Box>;
+  if (!href || typeof href !== 'string') {
+    return <Box {...linkProps}>{children}</Box>;
+  }
 
   const isInternalLink = (href: string): boolean =>
     !!href && href.startsWith('/');

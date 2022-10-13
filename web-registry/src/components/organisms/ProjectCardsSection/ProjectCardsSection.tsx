@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
@@ -26,7 +25,6 @@ export function ProjectCardsSection({
   onButtonClick,
   loading,
 }: Props): JSX.Element {
-  const navigate = useNavigate();
   const styles = useSectionStyles();
 
   return (
@@ -60,7 +58,8 @@ export function ProjectCardsSection({
                   onButtonClick && (() => onButtonClick({ project }))
                 }
                 purchaseInfo={project.purchaseInfo}
-                onClick={() => navigate(`/projects/${project.id}`)}
+                href={`/projects/${project.id}`}
+                target={'_self'}
                 imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
                 apiServerUrl={API_URI}
                 truncateTitle={true}

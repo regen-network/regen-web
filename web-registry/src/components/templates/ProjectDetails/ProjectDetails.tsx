@@ -117,11 +117,9 @@ function ProjectDetails(): JSX.Element {
     : dataByHandle?.projectByHandle;
 
   // Legacy projects use project.metadata. On-chain projects use IRI resolver.
-  const offChainProjectMetadata: ProjectMetadataLD = project?.metadata;
-  const onChainProjectMetadata = useQueryMetadataGraph(
-    onChainProject?.metadata,
-  );
-  const metadata = onChainProjectMetadata ?? offChainProjectMetadata;
+  const projectTableMetadata: ProjectMetadataLD = project?.metadata;
+  const iriResolvedMetadata = useQueryMetadataGraph(onChainProject?.metadata);
+  const metadata = iriResolvedMetadata ?? projectTableMetadata;
   const managementActions =
     metadata?.['regen:landManagementActions']?.['@list'];
 
@@ -147,7 +145,7 @@ function ProjectDetails(): JSX.Element {
     creditClassVersion?.metadata?.['http://regen.network/indicator']?.['@id'],
   ];
 
-  const { geojson, isGISFile } = useGeojson(offChainProjectMetadata);
+  const { geojson, isGISFile } = useGeojson(metadata);
 
   const seoData = useSeo({
     metadata,
@@ -223,6 +221,7 @@ function ProjectDetails(): JSX.Element {
 
       <ProjectTopSection
         data={data}
+        metadata={metadata}
         sanityCreditClassData={sanityCreditClassData}
         batchData={{
           batches: batchesWithSupply,

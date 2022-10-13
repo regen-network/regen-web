@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import { Field, Form, Formik, FormikErrors } from 'formik';
+import { useTrack } from 'use-analytics';
 
 import InfoIcon from '../icons/InfoIcon';
 import AmountField from '../inputs/AmountField';
@@ -46,6 +47,7 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
   onSubmit,
 }) => {
   const [options, setOptions] = useState<Option[]>([]);
+  const track = useTrack();
 
   const initialValues = {
     batchDenom: batchDenoms[0]?.value ?? '',
@@ -85,7 +87,10 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
     <Formik
       initialValues={initialValues}
       validate={validateHandler}
-      onSubmit={onSubmit}
+      onSubmit={async values => {
+        track('sell2');
+        onSubmit(values);
+      }}
     >
       {({
         values,

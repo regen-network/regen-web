@@ -9,6 +9,7 @@
   REACT_APP_BLOCK_EXPLORER="https://www.mintscan.io"
   REACT_APP_LEDGER_CHAIN_ID = "regen-1"
   REACT_APP_SENTRY_ENVIRONMENT="production"
+  REACT_APP_ANALYTICS_ENABLED="true"
 
 [context.deploy-preview.environment]
   REACT_APP_SANITY_TAG="default"

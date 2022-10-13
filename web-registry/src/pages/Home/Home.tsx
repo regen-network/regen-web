@@ -6,6 +6,7 @@ import { BlockContent } from 'web-components/lib/components/block-content';
 import { Loading } from 'web-components/lib/components/loading';
 import Modal from 'web-components/lib/components/modal';
 import Section from 'web-components/lib/components/section';
+import SEO from 'web-components/lib/components/seo';
 import { Body, Title } from 'web-components/lib/components/typography';
 
 import { usePaginatedBatches } from 'hooks/batches/usePaginatedBatches';
@@ -22,7 +23,6 @@ import {
 import { client } from '../../sanity';
 import { FeaturedProjects } from './Home.FeaturedProjects';
 import { useHomeStyles } from './Home.styles';
-import SEO from 'web-components/lib/components/seo';
 
 const Home: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -56,15 +56,15 @@ const Home: React.FC = () => {
 
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
-      <SEO 
+      <SEO
         title="Regen Marketplace"
         description=""
         // TODO: add link to preview image
         imageUrl="TODO"
         siteMetadata={{
-          title: "Regen Marketplace",
-          description: "",
-          author: "Regen Network Development, Inc.",
+          title: 'Regen Marketplace',
+          description: '',
+          author: 'Regen Network Development, Inc.',
           siteUrl: window.location.href,
         }}
       />

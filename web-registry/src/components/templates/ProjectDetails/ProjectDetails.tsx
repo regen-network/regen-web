@@ -175,7 +175,7 @@ function ProjectDetails(): JSX.Element {
     projectId: projectsWithOrderData[0]?.id,
   });
 
-  if (!isLoading && !project) return <NotFoundPage />;
+  if (!isLoading && !project && !data) return <NotFoundPage />;
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO

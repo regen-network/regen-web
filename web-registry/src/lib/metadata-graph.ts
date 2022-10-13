@@ -6,7 +6,6 @@ import { jsonLdCompact } from './rdf.compacted-context';
 export const getMetadata = async (iri?: string): Promise<any> => {
   if (!iri) throw new Error('No metadata iri provided');
   const { data } = await axios.get(`${getApiUri()}/metadata-graph/${iri}`);
-  console.log('raw', data);
   return await jsonLdCompact(data);
 };
 

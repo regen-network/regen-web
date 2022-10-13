@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import {
   BrowserRouter,
   createRoutesFromChildren,
@@ -12,6 +12,7 @@ import { OAuthError, useAuth0 } from '@auth0/auth0-react';
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
 import { createBrowserHistory } from 'history';
+import { useAnalytics } from 'use-analytics';
 
 import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
 
@@ -22,7 +23,6 @@ import PageLoader from './components/atoms/PageLoader';
 import { AppFooter, RegistryNav } from './components/organisms';
 import { URL_PRIVACY, URL_TERMS_SERVICE } from './globals';
 import isAdmin from './lib/admin';
-import { useGoogleAnalyticsInit } from './lib/ga';
 import { ProjectMetadata } from './pages/ProjectMetadata/ProjectMetadata';
 
 import './App.css';
@@ -103,14 +103,33 @@ Sentry.init({
 
 export const history = createBrowserHistory();
 
-const GoogleAnalytics: React.FC = (): JSX.Element => {
-  useGoogleAnalyticsInit();
+const PageViewTracking: React.FC = (): JSX.Element => {
+  const location = useLocation();
+  const analytics = useAnalytics();
+  useEffect(() => {
+    // send page view whenever react-router location changes
+    // this sends page views to all analytics plugins:
+    // https://getanalytics.io/plugins/
+    analytics.page({
+      path: location.pathname,
+      search: location.search,
+      title: location.pathname,
+    });
+  }, [location, analytics]);
   return <></>;
 };
 
 const App: React.FC = (): JSX.Element => {
   const { user, isLoading, error } = useAuth0();
   const SentryRoutes = Sentry.withSentryReactRouterV6Routing(Routes);
+  const { plugins } = useAnalytics();
+  // user opt-in, right now we just enable all of the analytics
+  // providers. but this shows how to conditional enable or even
+  // disable certain providers. REACT_APP_ANALYTICS_ENABLED is
+  // the flag used so that analytics is only enabled in production.
+  if (process.env.REACT_APP_ANALYTICS_ENABLED) {
+    plugins.enable(['amplitude', 'google-analytics']).then(() => {});
+  }
 
   if (isLoading) {
     return <div></div>;
@@ -128,7 +147,7 @@ const App: React.FC = (): JSX.Element => {
 
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <GoogleAnalytics />
+      <PageViewTracking />
       <ScrollToTop />
       <MobileSupportModal />
       <div>

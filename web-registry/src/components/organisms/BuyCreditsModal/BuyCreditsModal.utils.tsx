@@ -144,6 +144,7 @@ export const handleBuyCreditsSubmit = async (
   const fullValues: BuyCreditsValues = {
     ...values,
     price: Number(selectedSellOrder.askAmount),
+    askDenom: selectedSellOrder.askDenom,
     batchDenom: selectedSellOrder.batchDenom,
     sellOrderId: selectedSellOrder.id,
     country: retirementAction === 'autoretire' ? country : '',

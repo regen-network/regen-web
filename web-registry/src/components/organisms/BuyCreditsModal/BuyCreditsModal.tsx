@@ -327,7 +327,13 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                                 })}
                               </Title>
                               <DenomLabel
-                                denom={selectedSellOrder?.askDenom ?? ''}
+                                denom={
+                                  findDisplayDenom({
+                                    allowedDenomsData:
+                                      allowedDenomsResponse?.data,
+                                    denom: selectedSellOrder?.askDenom ?? '',
+                                  }) ?? ''
+                                }
                                 size="sm"
                                 sx={{ color: 'info.dark' }}
                               />

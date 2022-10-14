@@ -10,6 +10,7 @@ import {
   MsgUpdateSellOrders,
 } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
 import {
+  MsgBridge,
   MsgCancel,
   MsgCreateBatch,
   MsgCreateClass,
@@ -19,6 +20,8 @@ import {
   MsgUpdateClassAdmin,
   MsgUpdateClassIssuers,
   MsgUpdateClassMetadata,
+  MsgUpdateProjectAdmin,
+  MsgUpdateProjectMetadata,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 import {
   MsgCancel as MsgCancelAlpha,
@@ -130,5 +133,17 @@ export const ECOCREDIT_MESSAGE_TYPES = {
   UPDATE_SELL_ORDER: {
     message: `/${MsgUpdateSellOrders.$type}`,
     readable: 'update sell order',
+  },
+  BRIDGE: {
+    message: `/${MsgBridge.$type}`,
+    readable: 'bridge',
+  },
+  UPDATE_PROJECT_METADATA: {
+    message: `/${MsgUpdateProjectMetadata.$type}`,
+    readable: 'update project metadata',
+  },
+  UPDATE_PROJECT_ADMIN: {
+    message: `/${MsgUpdateProjectAdmin.$type}`,
+    readable: 'update project admin',
   },
 };

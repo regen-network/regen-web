@@ -237,6 +237,7 @@ export const MyEcocredits = (): JSX.Element => {
 
   const createSellOrderSubmit = useCreateSellOrderSubmit({
     accountAddress,
+    credits,
     signAndBroadcast,
     setCardItems,
     setTxModalHeader,

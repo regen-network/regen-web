@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+import { quantityFormatNumberOptions } from 'config/decimals';
 import { floorFloatNumber } from 'utils/number/format/format';
 
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
@@ -167,7 +168,7 @@ export const getCreditCountValidation =
 
 type AmountToSpendParams = {
   creditCount: number;
-  askAmount: number;
+  askAmount?: string;
 };
 
 export const amountToSpend = ({
@@ -176,6 +177,5 @@ export const amountToSpend = ({
 }: AmountToSpendParams): String =>
   formatNumber({
     num: creditCount * microToDenom(askAmount),
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
+    ...quantityFormatNumberOptions,
   }) ?? '-';

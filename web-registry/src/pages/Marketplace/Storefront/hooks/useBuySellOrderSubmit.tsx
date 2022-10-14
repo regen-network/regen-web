@@ -10,8 +10,8 @@ import { getJurisdictionIsoCode } from 'web-components/lib/utils/locationStandar
 
 import { UseStateSetter } from 'types/react/use-state';
 import { microToDenom } from 'lib/denom.utils';
-import { getProjectName } from 'lib/ecocredit/api';
 
+// import { getProjectName } from 'lib/ecocredit/api';
 import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import DenomIcon from 'components/molecules/DenomIcon';
 import { BuyCreditsValues } from 'components/organisms';
@@ -24,9 +24,15 @@ import {
 } from '../Storefront.constants';
 import { checkIsBuyOrderInvalid } from '../Storefront.utils';
 
+interface Project {
+  id: string;
+  name: string;
+}
+
 type Props = {
   accountAddress?: string;
   buttonTitle: string;
+  project?: Project;
   signAndBroadcast: SignAndBroadcastType;
   setCardItems: UseStateSetter<Item[] | undefined>;
   setTxModalTitle: UseStateSetter<string>;
@@ -41,13 +47,14 @@ type ReturnType = (values: BuyCreditsValues) => Promise<void>;
 
 const useBuySellOrderSubmit = ({
   accountAddress,
+  buttonTitle,
+  project,
   signAndBroadcast,
   setTxModalHeader,
   setCardItems,
   setTxModalTitle,
   setTxButtonTitle,
   setSelectedSellOrder,
-  buttonTitle,
   refetchSellOrders,
   onSubmitCallback,
 }: Props): ReturnType => {
@@ -131,11 +138,8 @@ const useBuySellOrderSubmit = ({
         return Promise.reject();
       }
 
-      if (batchDenom && creditCount && askDenom) {
+      if (batchDenom && creditCount && askDenom && project) {
         const baseDenom = await getDenomtrace({ denom: askDenom });
-
-        const projectId = batchDenom.substring(0, batchDenom.indexOf('-', 4));
-        const projectName = await getProjectName(projectId);
 
         setCardItems([
           {
@@ -158,8 +162,8 @@ const useBuySellOrderSubmit = ({
           {
             label: 'project',
             value: {
-              name: projectName ?? projectId,
-              url: `/projects/${projectId}`,
+              name: project.name,
+              url: `/projects/${project.id}`,
             },
           },
           {
@@ -178,16 +182,17 @@ const useBuySellOrderSubmit = ({
     },
     [
       accountAddress,
+      onSubmitCallback,
+      refetchSellOrders,
       signAndBroadcast,
+      project,
+      track,
       setSelectedSellOrder,
       setCardItems,
       setTxModalHeader,
       setTxModalTitle,
       setTxButtonTitle,
       buttonTitle,
-      refetchSellOrders,
-      onSubmitCallback,
-      track,
     ],
   );
 

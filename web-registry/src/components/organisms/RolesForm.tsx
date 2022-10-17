@@ -491,7 +491,7 @@ const RolesForm: React.FC<RolesFormProps> = ({
                   description={`The individual or organization that is in charge of managing the project and ${
                     profile
                       ? 'will appear on the project page'
-                      : 'is the main point of contact with Regen Registry'
+                      : 'is the main point of contact with Regen Marketplace'
                   }.`}
                   name="regen:projectDeveloper"
                   options={entities}

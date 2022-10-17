@@ -20,7 +20,7 @@ const ResourcesPage: React.FC<PageProps> = ({ location }) => {
   return (
     <>
       <SEO
-        description="Learn more about the ins and outs of how the Regen Ledger and Regen Registry function."
+        description="Learn more about the ins and outs of how the Regen Ledger and Regen Marketplace function."
         title="Resources"
         location={location}
         imageUrl={data.seoImage.publicURL}

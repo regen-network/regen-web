@@ -407,6 +407,7 @@ export class KeplrWalletConnectV1 implements IKeplrWalletConnectV1 {
   }
 
   getOfflineSigner(chainId: string): OfflineSigner & OfflineDirectSigner {
+    // @ts-ignore
     return new CosmJSOfflineSigner(chainId, this);
   }
 
@@ -415,11 +416,14 @@ export class KeplrWalletConnectV1 implements IKeplrWalletConnectV1 {
   ): Promise<OfflineSigner | OfflineDirectSigner> {
     const key = await this.getKey(chainId);
     return key.isNanoLedger
-      ? new CosmJSOfflineSignerOnlyAmino(chainId, this)
-      : new CosmJSOfflineSigner(chainId, this);
+      ? // @ts-ignore
+        new CosmJSOfflineSignerOnlyAmino(chainId, this)
+      : // @ts-ignore
+        new CosmJSOfflineSigner(chainId, this);
   }
 
   getOfflineSignerOnlyAmino(chainId: string): OfflineSigner {
+    // @ts-ignore
     return new CosmJSOfflineSignerOnlyAmino(chainId, this);
   }
 

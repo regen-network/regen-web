@@ -1,11 +1,14 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { OfflineSigner } from '@cosmjs/proto-signing';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
+import { isMobile as checkIsMobile } from '@walletconnect/browser-utils';
 
 import { truncate } from 'web-components/lib/utils/truncate';
 
 import { chainId } from '../ledger';
 import { chainInfo } from './chainInfo/chainInfo';
+import { walletsConfig } from './walletsConfig/walletsConfig';
+import { WalletType } from './walletsConfig/walletsConfig.types';
 
 const AUTO_CONNECT_WALLET_KEY = 'auto_connect_wallet';
 const KEPLR_WALLET_EXTENSION = 'keplr-wallet-extension';
@@ -55,36 +58,34 @@ export const WalletProvider: React.FC = ({ children }) => {
 
   const connect = async (): Promise<void> => {
     try {
-      await connectWallet();
-      setConnectionType(KEPLR_WALLET_EXTENSION);
+      await connectWallet(WalletType.Keplr);
+      setConnectionType(WalletType.Keplr);
       localStorage.setItem(AUTO_CONNECT_WALLET_KEY, KEPLR_WALLET_EXTENSION);
     } catch (e) {
       setError(e);
     }
   };
 
-  const connectWallet = async (): Promise<void> => {
-    if (window.keplr && chainId) {
-      await window.keplr.experimentalSuggestChain(chainInfo);
+  const connectWallet = async (walletType: WalletType): Promise<void> => {
+    const wallet = walletsConfig.find(wallet => wallet.type === walletType);
+    const walletClient = await wallet?.getClient();
+    if (wallet?.type === WalletType.Keplr) {
+      await walletClient?.experimentalSuggestChain(chainInfo);
+    }
+    await walletClient?.enable(chainInfo.chainId);
+    const offlineSigner = await walletClient?.getOfflineSignerAuto(
+      chainId ?? '',
+    );
+    const key = await walletClient?.getKey(chainId ?? '');
 
-      // Enabling before using the Keplr is recommended.
-      // This method will ask the user whether or not to allow access if they haven't visited this website.
-      // Also, it will request user to unlock the wallet if the wallet is locked.
-      await window.keplr.enable(chainId);
-
-      const offlineSigner = window.getOfflineSignerAuto
-        ? await window.getOfflineSignerAuto(chainId)
-        : undefined;
-      const key = await window.keplr.getKey(chainId);
-      if (key && key.bech32Address && offlineSigner) {
-        const wallet = {
-          offlineSigner,
-          address: key.bech32Address,
-          shortAddress: truncate(key.bech32Address),
-        };
-        setWallet(wallet);
-      }
-    } else if (!window.keplr) {
+    if (key && key.bech32Address && offlineSigner) {
+      const wallet = {
+        offlineSigner,
+        address: key.bech32Address,
+        shortAddress: truncate(key.bech32Address),
+      };
+      setWallet(wallet);
+    } else {
       throw new Error(
         'Please install Keplr extension to use Regen Ledger feature',
       );
@@ -95,7 +96,7 @@ export const WalletProvider: React.FC = ({ children }) => {
   useEffect(() => {
     const tryConnectWallet = async (): Promise<void> => {
       try {
-        await connectWallet();
+        await connectWallet(WalletType.Keplr);
       } catch (e) {
         setError(e);
       } finally {

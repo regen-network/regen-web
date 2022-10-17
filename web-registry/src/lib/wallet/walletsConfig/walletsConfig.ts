@@ -1,4 +1,4 @@
-import { Wallet, WalletType } from './welletsConfig.types';
+import { Wallet, WalletType } from './walletsConfig.types';
 
 export const KeplrWallet: Wallet = {
   type: WalletType.Keplr,
@@ -19,7 +19,7 @@ export const WalletConnectKeplrWallet: Wallet = {
   description: 'Keplr Mobile',
   imageUrl: '/walletconnect-keplr.png',
   getClient: async (chainInfo, walletConnect) => {
-    if (walletConnect?.connected) {
+    if (walletConnect?.connected && chainInfo) {
       return new (await import('../connectors')).KeplrWalletConnectV1(
         walletConnect,
         [chainInfo],
@@ -32,3 +32,5 @@ export const WalletConnectKeplrWallet: Wallet = {
     // This function expects to be bound to the `client` instance.
     client.getOfflineSignerOnlyAmino.bind(client),
 };
+
+export const walletsConfig = [KeplrWallet, WalletConnectKeplrWallet];

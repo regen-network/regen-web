@@ -49,6 +49,7 @@ import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
 import { SetSelectedSellOrderElement } from './BuyCreditsModal.SetSelectedSellOrderElement';
 import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
 import {
+  amountToSpend,
   getCreditCountValidation,
   getOptions,
   handleBuyCreditsSubmit,
@@ -320,12 +321,19 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                                 iconSx={{ height: 26 }}
                               />
                               <Title variant="h4" sx={{ mr: 1.5 }}>
-                                {values.creditCount *
-                                  microToDenom(selectedSellOrder?.askAmount) ||
-                                  '-'}
+                                {amountToSpend({
+                                  askAmount: selectedSellOrder?.askAmount,
+                                  creditCount: values.creditCount,
+                                })}
                               </Title>
                               <DenomLabel
-                                denom={selectedSellOrder?.askDenom ?? ''}
+                                denom={
+                                  findDisplayDenom({
+                                    allowedDenomsData:
+                                      allowedDenomsResponse?.data,
+                                    denom: selectedSellOrder?.askDenom ?? '',
+                                  }) ?? ''
+                                }
                                 size="sm"
                                 sx={{ color: 'info.dark' }}
                               />

@@ -380,7 +380,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       description={
                         <>
                           {
-                            'These credits will be a tradable asset. They can be retired later via Regen Registry.'
+                            'These credits will be a tradable asset. They can be retired later via Regen Marketplace.'
                           }
                           <DynamicLink
                             href="https://guides.regen.network/guides/regen-marketplace/ecocredits/buy-ecocredits/by-project#5.-select-credit-retirement-options"

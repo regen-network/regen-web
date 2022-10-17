@@ -68,7 +68,7 @@
     "lint-fix": "eslint ./src --fix -c .eslintrc.js --ext .ts,.tsx",
     "format": "prettier --write --loglevel warn './src/**/*.{ts,tsx,json,md,css}'",
     "format-and-fix": "yarn format && yarn lint-fix",
-    "start": "react-app-rewired start",
+    "start": "HTTPS=true react-app-rewired start",
     "build": "react-app-rewired build",
     "test-update-snapshot": "react-scripts test --updateSnapshot",
     "graphql:codegen": "graphql-codegen --config codegen.yml",

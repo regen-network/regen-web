@@ -11,6 +11,11 @@ export enum WalletType {
   WalletConnectKeplr = 'walletconnect_keplr',
 }
 
+type GetClientParams = {
+  chainInfo?: ChainInfo;
+  walletConnect?: WalletConnect;
+};
+
 export interface Wallet {
   // A unique identifier among all wallets.
   type: WalletType;
@@ -22,10 +27,10 @@ export interface Wallet {
   imageUrl: string;
   // A function that returns an instantiated wallet client, with
   // `walletConnect` passed if `type === WalletType.WalletConnectKeplr`.
-  getClient: (
-    chainInfo?: ChainInfo,
-    walletConnect?: WalletConnect,
-  ) => Promise<WalletClient | undefined>;
+  getClient: ({
+    chainInfo,
+    walletConnect,
+  }: GetClientParams) => Promise<WalletClient | undefined>;
   // A function that returns the function to retrieve the `OfflineSigner`
   // for this wallet.
   getOfflineSignerFunction: (

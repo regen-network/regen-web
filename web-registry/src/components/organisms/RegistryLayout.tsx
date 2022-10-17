@@ -25,7 +25,6 @@ import {
   WalletButton,
 } from '../atoms';
 import { AppFooter } from './AppFooter';
-import { MobileSupportModal } from './Modals/MobileSupport/MobileSupportModal';
 
 const RegistryLayout: React.FC = () => {
   const navigate = useNavigate();
@@ -81,6 +80,7 @@ const RegistryLayout: React.FC = () => {
 
   return (
     <>
+      <WalletButton />
       <Header
         isRegistry
         linkComponent={RegistryNavLink}
@@ -121,7 +121,6 @@ const RegistryLayout: React.FC = () => {
       <AppFooter />
       <PageViewTracking />
       <ScrollToTop />
-      <MobileSupportModal />
       <CookiesBanner privacyUrl={URL_PRIVACY} TOSUrl={URL_TERMS_SERVICE} />
     </>
   );

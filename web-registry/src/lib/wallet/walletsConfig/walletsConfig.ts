@@ -18,7 +18,11 @@ export const WalletConnectKeplrWallet: Wallet = {
   name: 'WalletConnect',
   description: 'Keplr Mobile',
   imageUrl: '/walletconnect-keplr.png',
-  getClient: async (chainInfo, walletConnect) => {
+  getClient: async ({ chainInfo, walletConnect }) => {
+    console.log(
+      '🚀 ~ file: walletsConfig.ts ~ line 23 ~ getClient: ~ walletConnect',
+      walletConnect,
+    );
     if (walletConnect?.connected && chainInfo) {
       return new (await import('../connectors')).KeplrWalletConnectV1(
         walletConnect,

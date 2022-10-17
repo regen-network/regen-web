@@ -1,17 +1,20 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useRef, useState } from 'react';
 import { OfflineSigner } from '@cosmjs/proto-signing';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
+import { alertTitleClasses } from '@mui/material';
 import { isMobile as checkIsMobile } from '@walletconnect/browser-utils';
 
 import { truncate } from 'web-components/lib/utils/truncate';
 
 import { chainId } from '../ledger';
 import { chainInfo } from './chainInfo/chainInfo';
+import { KeplrWalletConnectV1 } from './connectors';
+import { ConnectWalletParams } from './wallet.types';
+import { getWalletConnectInstance } from './wallet.utils';
 import { walletsConfig } from './walletsConfig/walletsConfig';
 import { WalletType } from './walletsConfig/walletsConfig.types';
 
 const AUTO_CONNECT_WALLET_KEY = 'auto_connect_wallet';
-const KEPLR_WALLET_EXTENSION = 'keplr-wallet-extension';
 
 const emptySender = { address: '', shortAddress: '' };
 
@@ -49,6 +52,12 @@ export const WalletProvider: React.FC = ({ children }) => {
   // only once we know what's the actual wallet connection status.
   const [loaded, setLoaded] = useState<boolean>(false);
   const [error, setError] = useState<unknown>(undefined);
+  // If set, opens QR code modal.
+  const [walletConnectUri, setWalletConnectUri] = useState<
+    string | undefined
+  >();
+
+  const onQrCloseCallback = useRef<() => void>();
 
   const disconnect = (): void => {
     setWallet(emptySender);
@@ -58,26 +67,57 @@ export const WalletProvider: React.FC = ({ children }) => {
 
   const connect = async (): Promise<void> => {
     try {
-      await connectWallet(WalletType.Keplr);
-      setConnectionType(WalletType.Keplr);
-      localStorage.setItem(AUTO_CONNECT_WALLET_KEY, KEPLR_WALLET_EXTENSION);
+      if (checkIsMobile()) {
+        await connectWallet({ walletType: WalletType.WalletConnectKeplr });
+        setConnectionType(WalletType.WalletConnectKeplr);
+      } else {
+        await connectWallet({ walletType: WalletType.Keplr });
+        setConnectionType(WalletType.Keplr);
+        localStorage.setItem(AUTO_CONNECT_WALLET_KEY, WalletType.Keplr);
+      }
     } catch (e) {
       setError(e);
     }
   };
 
-  const connectWallet = async (walletType: WalletType): Promise<void> => {
-    const wallet = walletsConfig.find(wallet => wallet.type === walletType);
-    const walletClient = await wallet?.getClient();
-    if (wallet?.type === WalletType.Keplr) {
+  const connectWallet = async ({
+    walletType,
+  }: ConnectWalletParams): Promise<void> => {
+    const walletConfig = walletsConfig.find(
+      walletConfig => walletConfig.type === walletType,
+    );
+    let walletConnect;
+    let offlineSigner;
+    if (walletConfig?.type === WalletType.WalletConnectKeplr) {
+      walletConnect = await getWalletConnectInstance({
+        setWalletConnectUri,
+        onQrCloseCallback,
+      });
+      await walletConnect.connect();
+    }
+    const walletClient = await walletConfig?.getClient({
+      chainInfo,
+      walletConnect,
+    });
+    if (walletClient instanceof KeplrWalletConnectV1) {
+      // walletClient.dontOpenAppOnEnable = true;
+    }
+    if (walletConfig?.type === WalletType.Keplr) {
       await walletClient?.experimentalSuggestChain(chainInfo);
     }
-    await walletClient?.enable(chainInfo.chainId);
-    const offlineSigner = await walletClient?.getOfflineSignerAuto(
-      chainId ?? '',
-    );
-    const key = await walletClient?.getKey(chainId ?? '');
+    try {
+      await walletClient?.enable(chainInfo.chainId);
+    } catch (e) {
+      alert(e);
+    }
 
+    if (walletClient) {
+      offlineSigner = await walletConfig?.getOfflineSignerFunction(
+        walletClient,
+      )(chainInfo.chainId);
+    }
+
+    const key = await walletClient?.getKey(chainId ?? '');
     if (key && key.bech32Address && offlineSigner) {
       const wallet = {
         offlineSigner,
@@ -96,7 +136,7 @@ export const WalletProvider: React.FC = ({ children }) => {
   useEffect(() => {
     const tryConnectWallet = async (): Promise<void> => {
       try {
-        await connectWallet(WalletType.Keplr);
+        await connectWallet({ walletType: WalletType.Keplr });
       } catch (e) {
         setError(e);
       } finally {
@@ -111,6 +151,22 @@ export const WalletProvider: React.FC = ({ children }) => {
       setLoaded(true);
     }
   }, []);
+
+  // Execute onQrCloseCallback if WalletConnect URI is cleared, since it
+  // has now been closed.
+  useEffect(() => {
+    if (!walletConnectUri && onQrCloseCallback) {
+      onQrCloseCallback.current?.();
+      onQrCloseCallback.current = undefined;
+    }
+  }, [walletConnectUri, onQrCloseCallback]);
+
+  useEffect(() => {
+    if (walletConnectUri) {
+      const navigateToAppURL = `intent://wcV1?${walletConnectUri}#Intent;package=com.chainapsis.keplr;scheme=keplrwallet;end;`;
+      window.location.href = navigateToAppURL;
+    }
+  }, [walletConnectUri]);
 
   return (
     <WalletContext.Provider

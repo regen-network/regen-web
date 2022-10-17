@@ -58,12 +58,12 @@ const Home: React.FC = () => {
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO
         title="Regen Marketplace"
-        description=""
-        // TODO: add link to preview image
-        imageUrl="TODO"
+        description="Introducing Regen Marketplace, the place to buy, sell, and retire on-chain carbon and ecological assets."
+        imageUrl="http://localhost:8080/static/preview.png"
         siteMetadata={{
           title: 'Regen Marketplace',
-          description: '',
+          description:
+            'Introducing Regen Marketplace, the place to buy, sell, and retire on-chain carbon and ecological assets.',
           author: 'Regen Network Development, Inc.',
           siteUrl: window.location.href,
         }}

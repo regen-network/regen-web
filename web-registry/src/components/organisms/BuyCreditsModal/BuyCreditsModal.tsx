@@ -146,8 +146,13 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
 
   const isDisableAutoRetire = selectedSellOrder?.disableAutoRetire;
 
+  const handleClose = (): void => {
+    setSelectedSellOrder(undefined);
+    onClose();
+  };
+
   return (
-    <Modal open={open} onClose={onClose}>
+    <Modal open={open} onClose={handleClose}>
       <div className={styles.root}>
         <Title
           variant="h3"
@@ -500,7 +505,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                 </Form>
                 <Submit
                   isSubmitting={isSubmitting}
-                  onClose={onClose}
+                  onClose={handleClose}
                   status={status}
                   isValid={isValid}
                   submitCount={submitCount}

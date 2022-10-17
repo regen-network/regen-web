@@ -37,6 +37,7 @@ const Home: React.FC = () => {
 
   const content = data?.allHomePage?.[0];
   const heroSection = content?.heroSection;
+  const seo = content?.seo;
 
   const creditClassesContent = creditClassData?.allCreditClass;
 
@@ -57,13 +58,12 @@ const Home: React.FC = () => {
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO
-        title="Regen Marketplace"
-        description="Introducing Regen Marketplace, the place to buy, sell, and retire on-chain carbon and ecological assets."
-        imageUrl="http://localhost:8080/static/preview.png"
+        title={seo?.title || ''}
+        description={seo?.description || ''}
+        imageUrl={seo?.image?.asset?.url || ''} // TODO: specify dimensions here. See: https://www.sanity.io/docs/image-urls
         siteMetadata={{
-          title: 'Regen Marketplace',
-          description:
-            'Introducing Regen Marketplace, the place to buy, sell, and retire on-chain carbon and ecological assets.',
+          title: seo?.title || '',
+          description: seo?.description || '',
           author: 'Regen Network Development, Inc.',
           siteUrl: window.location.href,
         }}

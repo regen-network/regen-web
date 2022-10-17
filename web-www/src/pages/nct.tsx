@@ -17,13 +17,7 @@ const query = graphql`
   query nctPage {
     sanityNctPage {
       seo {
-        title
-        description
-        image {
-          asset {
-            url
-          }
-        }
+        ...seoFields
       }
     }
   }

@@ -152,14 +152,14 @@ const SharePermissionField = ({
       label={
         <Body size="sm">
           I have this organization’s permission to share their information with
-          Regen Registry
+          Regen Marketplace
         </Body>
       }
     />
     <Tooltip
       arrow
       placement="top"
-      title="Even if you work closely with this organization, make sure you have their permission to be part of Regen Registry."
+      title="Even if you work closely with this organization, make sure you have their permission to be part of Regen Marketplace."
     >
       <Box sx={{ cursor: 'pointer' }}>
         <QuestionIcon />

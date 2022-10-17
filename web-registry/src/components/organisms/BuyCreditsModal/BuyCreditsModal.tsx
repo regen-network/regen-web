@@ -275,6 +275,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       >
                         {'Batch denom: '}
                         <Body
+                          as="span"
                           sx={{ fontWeight: 'normal', display: 'inline-block' }}
                         >
                           {selectedSellOrder?.batchDenom}

@@ -148,6 +148,7 @@ const useBuySellOrderSubmit = ({
               name: String(microToDenom(price) * creditCount),
               icon: (
                 <Box
+                  component="span"
                   sx={{
                     mr: '4px',
                     display: 'inline-block',

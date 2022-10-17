@@ -218,6 +218,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
             try {
               await handleBuyCreditsSubmit(values, onSubmit, selectedSellOrder);
               setSubmitting(false);
+              setSelectedSellOrder(undefined);
             } catch (e) {
               setSubmitting(false);
             }
@@ -244,7 +245,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                     sx={{ mb: theme.spacing(10.5) }}
                     disabled={
                       !!initialValues?.sellOrderId ||
-                      sellOrdersOptions.length === 1
+                      sellOrdersOptions?.length === 1
                     }
                     native={false}
                   />

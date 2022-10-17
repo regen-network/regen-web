@@ -37,6 +37,7 @@ const Home: React.FC = () => {
 
   const content = data?.allHomePage?.[0];
   const heroSection = content?.heroSection;
+  const seo = content?.seo;
 
   const creditClassesContent = creditClassData?.allCreditClass;
 
@@ -57,13 +58,12 @@ const Home: React.FC = () => {
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO
-        title="Regen Marketplace"
-        description=""
-        // TODO: add link to preview image
-        imageUrl="TODO"
+        title={seo?.title || ''}
+        description={seo?.description || ''}
+        imageUrl={seo?.image?.asset?.url || ''} // TODO: specify dimensions here. See: https://www.sanity.io/docs/image-urls
         siteMetadata={{
-          title: 'Regen Marketplace',
-          description: '',
+          title: seo?.title || '',
+          description: seo?.description || '',
           author: 'Regen Network Development, Inc.',
           siteUrl: window.location.href,
         }}

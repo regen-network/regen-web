@@ -49,6 +49,7 @@ import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
 import { SetSelectedSellOrderElement } from './BuyCreditsModal.SetSelectedSellOrderElement';
 import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
 import {
+  amountToSpend,
   getCreditCountValidation,
   getOptions,
   handleBuyCreditsSubmit,
@@ -320,12 +321,19 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                                 iconSx={{ height: 26 }}
                               />
                               <Title variant="h4" sx={{ mr: 1.5 }}>
-                                {values.creditCount *
-                                  microToDenom(selectedSellOrder?.askAmount) ||
-                                  '-'}
+                                {amountToSpend({
+                                  askAmount: selectedSellOrder?.askAmount,
+                                  creditCount: values.creditCount,
+                                })}
                               </Title>
                               <DenomLabel
-                                denom={selectedSellOrder?.askDenom ?? ''}
+                                denom={
+                                  findDisplayDenom({
+                                    allowedDenomsData:
+                                      allowedDenomsResponse?.data,
+                                    denom: selectedSellOrder?.askDenom ?? '',
+                                  }) ?? ''
+                                }
                                 size="sm"
                                 sx={{ color: 'info.dark' }}
                               />
@@ -372,7 +380,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       description={
                         <>
                           {
-                            'These credits will be a tradable asset. They can be retired later via Regen Registry.'
+                            'These credits will be a tradable asset. They can be retired later via Regen Marketplace.'
                           }
                           <DynamicLink
                             href="https://guides.regen.network/guides/regen-marketplace/ecocredits/buy-ecocredits/by-project#5.-select-credit-retirement-options"

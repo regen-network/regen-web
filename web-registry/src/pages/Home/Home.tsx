@@ -74,7 +74,7 @@ const Home: React.FC = () => {
             pt: { xs: 8, sm: 15 },
           }}
         >
-          <Box sx={{ pr: 4, alignSelf: 'center', maxWidth: '585px' }}>
+          <Box sx={{ pr: [0, 4], alignSelf: 'center', maxWidth: '715px' }}>
             <Title
               variant="h1"
               sx={{
@@ -82,13 +82,17 @@ const Home: React.FC = () => {
                 lineHeight: { xs: '140%', sm: '130%' },
               }}
             >
-              Discover{' '}
-              <Box sx={{ display: 'inline-block', ...gradients.blueGreen }}>
-                Ecocredits
-              </Box>{' '}
-              and NCT{' '}
-              <Box sx={{ display: 'inline-block', ...gradients.blueGreen }}>
-                basket tokens
+              <Box sx={{ display: 'inline-block' }}>
+                Unlock{' '}
+                <Box sx={{ display: 'inline-block', ...gradients.blueGreen }}>
+                  Regenerative Finance
+                </Box>
+                <Box sx={{ display: { xs: 'none', md: 'inline-block' } }}>
+                  with{' '}
+                  <Box sx={{ display: 'inline-block', ...gradients.blueGreen }}>
+                    Regen Marketplace
+                  </Box>
+                </Box>
               </Box>
             </Title>
             <Body

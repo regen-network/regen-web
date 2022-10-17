@@ -3,6 +3,7 @@ import { Box, SxProps } from '@mui/material';
 import { useTheme } from '@mui/styles';
 
 import { Center, Flex } from 'web-components/lib/components/box';
+import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
 import { CreditBatchIcon } from 'web-components/lib/components/icons/CreditBatchIcon';
 import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClassIcon';
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
@@ -24,6 +25,7 @@ import MyCreditBatches from './MyCreditBatches';
 const MyEcocredits = React.lazy(() => import('./MyEcocredits'));
 const MyProjects = React.lazy(() => import('./MyProjects'));
 const MyCreditClasses = React.lazy(() => import('./MyCreditClasses'));
+const MyBridge = React.lazy(() => import('./MyBridge'));
 
 const LazyLoad: React.FC = ({ children }) => (
   <Suspense
@@ -100,6 +102,17 @@ const Dashboard = (): JSX.Element => {
         <LazyLoad>
           <Flex sx={sxs.padTop}>
             <MyCreditBatches address={walletContext?.wallet?.address} />
+          </Flex>
+        </LazyLoad>
+      ),
+    },
+    {
+      label: 'Bridge',
+      icon: <BridgeIcon />,
+      content: (
+        <LazyLoad>
+          <Flex sx={sxs.padTop}>
+            <MyBridge />
           </Flex>
         </LazyLoad>
       ),

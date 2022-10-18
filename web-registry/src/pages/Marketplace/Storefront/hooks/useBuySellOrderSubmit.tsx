@@ -167,11 +167,11 @@ const useBuySellOrderSubmit = ({
             },
           },
           {
-            label: 'batch denom',
+            label: 'credit batch id',
             value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
           },
           {
-            label: isTradeable ? 'NUMBER OF CREDITS' : 'amount retired',
+            label: isTradeable ? 'amount of credits' : 'amount retired',
             value: { name: getFormattedNumber(creditCount) },
           },
         ]);

@@ -105,11 +105,11 @@ const useCancelSellOrderSubmit = ({
         },
       },
       {
-        label: 'batch denom',
+        label: 'credit batch id',
         value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
       },
       {
-        label: 'number of credits',
+        label: 'amount',
         value: { name: getFormattedNumber(Number(amountAvailable)) },
       },
     ]);

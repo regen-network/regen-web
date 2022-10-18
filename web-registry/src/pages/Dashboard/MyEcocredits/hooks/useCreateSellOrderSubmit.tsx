@@ -110,11 +110,11 @@ const useCreateSellOrderSubmit = ({
             },
           },
           {
-            label: 'batch denom',
+            label: 'credit batch id',
             value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
           },
           {
-            label: 'number of credits',
+            label: 'amount of credits',
             value: { name: getFormattedNumber(amount) },
           },
         ]);

@@ -21,14 +21,14 @@ export default function useGeojson(metadata: any): {
       await fetch(mapFile)
         .then(r => r.text())
         .then(text => {
-          let geojson;
+          let _geojson;
           if (isKMLFile) {
             const dom = new DOMParser().parseFromString(text, 'text/xml');
-            geojson = togeojson.kml(dom);
+            _geojson = togeojson.kml(dom);
           } else {
-            geojson = JSON.parse(text);
+            _geojson = JSON.parse(text);
           }
-          setGeojson(geojson);
+          setGeojson(_geojson);
         });
     };
 

@@ -37,31 +37,31 @@ export const getJurisdiction = async (
   if (!mapboxToken) return Promise.reject('Missing map API token');
   let isoString;
   const location = metadata?.['schema:location'];
-  if (!location?.['geojson:context'] && !location?.['geojson:place_name']) {
+  if (!location?.['context'] && !location?.['place_name']) {
     return Promise.reject('Please select a location for this project.');
   }
-  const context: any[] = location?.['geojson:context'] || [];
+  const context: any[] = location?.['context'] || [];
   let countryKey = '';
   let stateProvince = '';
   let postalCode = '';
   context.forEach(ctx => {
-    if (ctx?.['geojson:id'].includes('country')) {
-      countryKey = getCountryCodeByName(ctx?.['geojson:text'].trim());
+    if (ctx?.['id'].includes('country')) {
+      countryKey = getCountryCodeByName(ctx?.['text'].trim());
       return;
     }
-    if (ctx?.['geojson:id'].includes('region')) {
-      stateProvince = ctx?.['geojson:text'];
+    if (ctx?.['id'].includes('region')) {
+      stateProvince = ctx?.['text'];
       return;
     }
-    if (ctx?.['geojson:id'].includes('postcode')) {
-      postalCode = ctx?.['geojson:text'];
+    if (ctx?.['id'].includes('postcode')) {
+      postalCode = ctx?.['text'];
       return;
     }
   });
 
   // if GeocodeFeature context is insufficient, we can get a country code from place_name
-  if (!countryKey && location?.['geojson:place_name']) {
-    const placeSegments = location['geojson:place_name'].split(',');
+  if (!countryKey && location?.['place_name']) {
+    const placeSegments = location['place_name'].split(',');
     // find the country key
     placeSegments.forEach((segment: string) => {
       const foundCountry = getCountryCodeByName(segment.trim());
@@ -73,7 +73,7 @@ export const getJurisdiction = async (
   }
 
   if (countryKey && !stateProvince) {
-    const placeSegments = location['geojson:place_name'].split(',');
+    const placeSegments = location['place_name'].split(',');
 
     placeSegments.forEach((segment: string) => {
       const foundStateProvince = getStateProvince(countryKey, segment.trim());

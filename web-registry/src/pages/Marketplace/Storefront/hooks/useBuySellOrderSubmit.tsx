@@ -11,7 +11,6 @@ import { getJurisdictionIsoCode } from 'web-components/lib/utils/locationStandar
 import { UseStateSetter } from 'types/react/use-state';
 import { microToDenom } from 'lib/denom.utils';
 
-// import { getProjectName } from 'lib/ecocredit/api';
 import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import DenomIcon from 'components/molecules/DenomIcon';
 import { BuyCreditsValues } from 'components/organisms';

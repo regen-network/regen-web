@@ -41,15 +41,6 @@ export const useProjectTopSectionStyles = makeStyles((theme: Theme) => ({
       marginBottom: theme.spacing(8.5),
     },
   },
-  iframe: {
-    border: 'none',
-    [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(109.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      height: theme.spacing(55.25),
-    },
-  },
   quotes: {
     color: theme.palette.secondary.main,
     lineHeight: 0,

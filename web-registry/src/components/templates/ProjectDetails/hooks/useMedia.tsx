@@ -39,11 +39,6 @@ export default function useMedia({
     if (previewPhoto) {
       noGalleryAssets.push({ src: previewPhoto, type: 'image' });
     }
-    if (geojson) {
-      noGalleryAssets.push(
-        <StaticMap geojson={geojson} mapboxToken={MAPBOX_TOKEN} />,
-      );
-    }
 
     const _assets = noGallery
       ? noGalleryAssets
@@ -51,6 +46,10 @@ export default function useMedia({
           src: photo['@value'],
           type: 'image',
         }));
+
+    if (geojson && _assets.length < 2) {
+      _assets.push(<StaticMap geojson={geojson} mapboxToken={MAPBOX_TOKEN} />);
+    }
 
     setAssets(_assets);
   }, [geojson, metadata]);

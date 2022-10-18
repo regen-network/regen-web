@@ -77,17 +77,6 @@ const useCancelSellOrderSubmit = ({
 
     setCardItems([
       {
-        label: 'project',
-        value: {
-          name: selectedSellOrder.project?.name || projectId,
-          url: `/projects/${projectId}`,
-        },
-      },
-      {
-        label: 'batch denom',
-        value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
-      },
-      {
         label: 'price per credit',
         value: {
           name: formatNumber({
@@ -107,6 +96,17 @@ const useCancelSellOrderSubmit = ({
             </Box>
           ),
         },
+      },
+      {
+        label: 'project',
+        value: {
+          name: selectedSellOrder.project?.name || projectId,
+          url: `/projects/${projectId}`,
+        },
+      },
+      {
+        label: 'batch denom',
+        value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
       },
       {
         label: 'number of credits',

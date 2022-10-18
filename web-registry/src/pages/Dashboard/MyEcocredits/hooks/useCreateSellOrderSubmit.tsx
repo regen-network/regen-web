@@ -86,17 +86,6 @@ const useCreateSellOrderSubmit = ({
 
         setCardItems([
           {
-            label: 'project',
-            value: {
-              name: projectName ?? projectId,
-              url: `/projects/${projectId}`,
-            },
-          },
-          {
-            label: 'batch denom',
-            value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
-          },
-          {
             label: 'price per credit',
             value: {
               name: String(price),
@@ -112,6 +101,17 @@ const useCreateSellOrderSubmit = ({
                 </Box>
               ),
             },
+          },
+          {
+            label: 'project',
+            value: {
+              name: projectName ?? projectId,
+              url: `/projects/${projectId}`,
+            },
+          },
+          {
+            label: 'batch denom',
+            value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
           },
           {
             label: 'number of credits',

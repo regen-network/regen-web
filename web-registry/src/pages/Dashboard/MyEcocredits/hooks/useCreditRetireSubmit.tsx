@@ -75,7 +75,7 @@ const useCreditRetireSubmit = ({
             value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
           },
           {
-            label: 'number of credits',
+            label: 'amount retired',
             value: { name: amount },
           },
         ]);

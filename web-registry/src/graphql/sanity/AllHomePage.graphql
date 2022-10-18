@@ -1,5 +1,8 @@
 query allHomePage {
   allHomePage {
+    seo {
+      ...seoFields
+    }
     heroSection {
       title
       bodyRaw

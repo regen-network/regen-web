@@ -105,7 +105,7 @@ const HomeLedger: React.FC = () => {
         <Grid item xs={12} className={styles.text}>
           <Title align="left" variant="h1" className={styles.title}>
             <span className={styles.green}>Regen Ledger</span> powers{' '}
-            <span className={styles.green}>Regen Registry</span>
+            <span className={styles.green}>Regen Marketplace</span>
           </Title>
           <Body size="xl" mobileSize="md" sx={{ pb: [6, 8.5], pt: [3, 5] }}>
             {content?.ledgerDescription}

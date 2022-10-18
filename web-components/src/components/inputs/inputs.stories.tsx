@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Button, FormLabel } from '@mui/material';
-import { Box } from '@mui/system';
 import { Field, Form, Formik } from 'formik';
 import { RadioGroup } from 'formik-mui';
 

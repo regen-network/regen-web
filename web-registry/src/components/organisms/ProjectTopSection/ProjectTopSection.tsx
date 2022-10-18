@@ -1,9 +1,17 @@
 import LazyLoad from 'react-lazyload';
+import ReactPlayerLazy from 'react-player/lazy';
 import { Link } from 'react-router-dom';
-import { Box, Grid, Skeleton } from '@mui/material';
-import cx from 'clsx';
+import {
+  Box,
+  CardMedia,
+  Grid,
+  Skeleton,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
+import Card from 'web-components/lib/components/cards/Card';
 import CreditClassCard from 'web-components/lib/components/cards/CreditClassCard';
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
@@ -13,7 +21,11 @@ import Section from 'web-components/lib/components/section';
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
-import { CFCProjectMetadataLD, VCSProjectMetadataLD } from 'generated/json-ld';
+import {
+  CFCProjectMetadataLD,
+  ProjectMetadataLDUnion,
+  VCSProjectMetadataLD,
+} from 'generated/json-ld';
 import { UseStateSetter } from 'types/react/use-state';
 
 import { ProjectMetadataCFC } from 'components/molecules/ProjectMetadata/ProjectMetadata.CFC';
@@ -24,7 +36,7 @@ import {
   useSdgByIriQuery,
 } from '../../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../../lib/imgSrc';
-import { getAreaUnit } from '../../../lib/rdf';
+import { getAreaUnit, qudtUnit } from '../../../lib/rdf';
 import { getDisplayParty, getParty } from '../../../lib/transform';
 import { client } from '../../../sanity';
 import {
@@ -45,6 +57,7 @@ import {
 
 function ProjectTopSection({
   data,
+  metadata,
   sanityCreditClassData,
   geojson,
   isGISFile,
@@ -53,6 +66,7 @@ function ProjectTopSection({
   projectId,
 }: {
   data?: any; // TODO: when all project are onchain, this can be ProjectByOnChainIdQuery
+  metadata?: ProjectMetadataLDUnion;
   sanityCreditClassData?: AllCreditClassQuery;
   geojson?: any;
   isGISFile?: boolean;
@@ -64,21 +78,19 @@ function ProjectTopSection({
   projectId?: string;
 }): JSX.Element {
   const styles = useProjectTopSectionStyles();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
 
   const project = data?.projectByOnChainId || data?.projectByHandle; // TODO: eventually just projectByOnChainId
-  const metadata = project?.metadata; // TODO: this is from postgres metadata - needs to be from metadata resolver instead
   const videoURL = metadata?.['regen:videoURL']?.['@value'];
   const landStewardPhoto = metadata?.['regen:landStewardPhoto']?.['@value'];
   const projectSize = metadata?.['regen:projectSize'];
-  const area =
-    projectSize?.['qudt:numericValue']?.['@value'] ||
-    projectSize?.['qudt:numericValue'];
-  const unit =
-    projectSize?.['qudt:unit']?.['@value'] || projectSize?.['qudt:unit'];
-  const areaUnit = getAreaUnit(unit);
+  const area = projectSize?.['qudt:numericValue']?.['@value'];
+  const unit = projectSize?.['qudt:unit']?.['@value'];
+  const areaUnit = getAreaUnit(unit as qudtUnit);
   const creditClass = project?.creditClassByCreditClassId;
   const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
   const quote = metadata?.['regen:projectQuote'];
@@ -128,8 +140,11 @@ function ProjectTopSection({
             <ProjectPlaceInfo
               iconClassName={styles.icon}
               // TODO Format and show on-chain project location if no off-chain location
-              place={metadata?.['schema:location']?.['place_name']}
-              area={area}
+              place={
+                metadata?.['schema:location']?.['place_name'] ||
+                metadata?.['schema:location']?.['geojson:place_name']
+              }
+              area={Number(area)}
               areaUnit={areaUnit}
             />
             <Box
@@ -195,7 +210,10 @@ function ProjectTopSection({
             />
           </Link>
           {isVCSProject && (
-            <ProjectMetadataVCS metadata={metadata as VCSProjectMetadataLD} />
+            <ProjectMetadataVCS
+              metadata={metadata as VCSProjectMetadataLD}
+              projectId={projectId}
+            />
           )}
           {isCFCProject && (
             <ProjectMetadataCFC
@@ -204,24 +222,17 @@ function ProjectTopSection({
             />
           )}
           <LazyLoad offset={50}>
-            {videoURL &&
-              (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(
-                videoURL,
-              ) ||
-              /https:\/\/player.vimeo.com\/video\/[a-zA-Z0-9_.-]+/.test(
-                videoURL,
-              ) ? (
-                <iframe
-                  className={cx(styles.iframe, styles.media)}
-                  title={metadata?.['schema:name'] || 'project'}
-                  src={videoURL}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                ></iframe>
-              ) : (
-                <video className={styles.media} controls>
-                  <source src={videoURL} />
-                </video>
-              ))}
+            {videoURL && (
+              <Card className={styles.media}>
+                <CardMedia
+                  component={ReactPlayerLazy}
+                  url={videoURL}
+                  height={isMobile ? 221 : 438}
+                  fallback={<Skeleton height={isMobile ? 221 : 438} />}
+                  width="100%"
+                />
+              </Card>
+            )}
             {landStewardPhoto && (
               <img
                 className={styles.media}

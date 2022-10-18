@@ -1,10 +1,15 @@
 import { useCallback } from 'react';
 import { Box } from '@mui/material';
 import { MsgBuyDirect } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
+import { quantityFormatNumberOptions } from 'config/decimals';
+import { useTrack } from 'use-analytics';
 import { getDenomtrace } from 'utils/ibc/getDenomTrace';
 
 import { Item } from 'web-components/lib/components/modal/TxModal';
-import { getFormattedNumber } from 'web-components/lib/utils/format';
+import {
+  formatNumber,
+  getFormattedNumber,
+} from 'web-components/lib/utils/format';
 import { getJurisdictionIsoCode } from 'web-components/lib/utils/locationStandard';
 
 import { UseStateSetter } from 'types/react/use-state';
@@ -49,6 +54,7 @@ const useBuySellOrderSubmit = ({
   refetchSellOrders,
   onSubmitCallback,
 }: Props): ReturnType => {
+  const track = useTrack();
   const buySellOrderSubmit = useCallback(
     async (values: BuyCreditsValues): Promise<void> => {
       if (!accountAddress) return Promise.reject();
@@ -111,9 +117,16 @@ const useBuySellOrderSubmit = ({
         memo: retirementNote,
       };
 
+      const onError = (): void => {
+        track('buyFailure');
+      };
+      const onSuccess = (): void => {
+        track('buySuccess');
+      };
       const error = await signAndBroadcast(
         tx,
         () => setSelectedSellOrder && setSelectedSellOrder(null),
+        { onError, onSuccess },
       );
 
       if (error && refetchSellOrders) {
@@ -128,7 +141,10 @@ const useBuySellOrderSubmit = ({
           {
             label: 'total purchase price',
             value: {
-              name: String(microToDenom(price) * creditCount),
+              name: formatNumber({
+                num: creditCount * microToDenom(price),
+                ...quantityFormatNumberOptions,
+              }),
               icon: (
                 <Box
                   sx={{
@@ -167,6 +183,7 @@ const useBuySellOrderSubmit = ({
       buttonTitle,
       refetchSellOrders,
       onSubmitCallback,
+      track,
     ],
   );
 

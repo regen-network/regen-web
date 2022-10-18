@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useState } from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import Collapse from '@mui/material/Collapse';
@@ -9,6 +9,7 @@ import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/reg
 import cx from 'clsx';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 import { RadioGroup } from 'formik-mui';
+import { useAnalytics } from 'use-analytics';
 
 import { Flex } from 'web-components/lib/components/box';
 import Card from 'web-components/lib/components/cards/Card';
@@ -33,6 +34,7 @@ import {
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
+import { getFormattedNumber } from 'web-components/lib/utils/format';
 
 import { microToDenom } from 'lib/denom.utils';
 
@@ -47,6 +49,7 @@ import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
 import { SetSelectedSellOrderElement } from './BuyCreditsModal.SetSelectedSellOrderElement';
 import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
 import {
+  amountToSpend,
   getCreditCountValidation,
   getOptions,
   handleBuyCreditsSubmit,
@@ -109,9 +112,11 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
 }) => {
   const styles = useBuyCreditsModalStyles();
   const theme = useTheme();
+  const location = useLocation();
   const [selectedSellOrder, setSelectedSellOrder] = useState<
     UISellOrderInfo | undefined
   >(undefined);
+  const { track } = useAnalytics();
 
   const validationHandler = (
     values: BuyCreditsValues,
@@ -141,8 +146,13 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
 
   const isDisableAutoRetire = selectedSellOrder?.disableAutoRetire;
 
+  const handleClose = (): void => {
+    setSelectedSellOrder(undefined);
+    onClose();
+  };
+
   return (
-    <Modal open={open} onClose={onClose}>
+    <Modal open={open} onClose={handleClose}>
       <div className={styles.root}>
         <Title
           variant="h3"
@@ -185,9 +195,30 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
           validate={validationHandler}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
+            if (location.pathname.includes('projects')) {
+              const track_data: any = {
+                price: selectedSellOrder?.askAmount,
+                batchDenom: selectedSellOrder?.batchDenom,
+                projectName: project.name,
+                creditClassName: project.id.split('-')[0],
+              };
+              if (values.retirementAction === 'manual') {
+                track_data['amountTradable'] = getFormattedNumber(
+                  values.creditCount,
+                );
+                track_data['amountRetired'] = getFormattedNumber(0);
+              } else if (values.retirementAction === 'autoretire') {
+                track_data['amountTradable'] = getFormattedNumber(
+                  values.creditCount,
+                );
+                track_data['amountRetired'] = getFormattedNumber(0);
+              }
+              track('buy2', track_data);
+            }
             try {
               await handleBuyCreditsSubmit(values, onSubmit, selectedSellOrder);
               setSubmitting(false);
+              setSelectedSellOrder(undefined);
             } catch (e) {
               setSubmitting(false);
             }
@@ -214,7 +245,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                     sx={{ mb: theme.spacing(10.5) }}
                     disabled={
                       !!initialValues?.sellOrderId ||
-                      sellOrdersOptions.length === 1
+                      sellOrdersOptions?.length === 1
                     }
                     native={false}
                   />
@@ -296,12 +327,19 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                                 iconSx={{ height: 26 }}
                               />
                               <Title variant="h4" sx={{ mr: 1.5 }}>
-                                {values.creditCount *
-                                  microToDenom(selectedSellOrder?.askAmount) ||
-                                  '-'}
+                                {amountToSpend({
+                                  askAmount: selectedSellOrder?.askAmount,
+                                  creditCount: values.creditCount,
+                                })}
                               </Title>
                               <DenomLabel
-                                denom={selectedSellOrder?.askDenom ?? ''}
+                                denom={
+                                  findDisplayDenom({
+                                    allowedDenomsData:
+                                      allowedDenomsResponse?.data,
+                                    denom: selectedSellOrder?.askDenom ?? '',
+                                  }) ?? ''
+                                }
                                 size="sm"
                                 sx={{ color: 'info.dark' }}
                               />
@@ -348,7 +386,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       description={
                         <>
                           {
-                            'These credits will be a tradable asset. They can be retired later via Regen Registry.'
+                            'These credits will be a tradable asset. They can be retired later via Regen Marketplace.'
                           }
                           <DynamicLink
                             href="https://guides.regen.network/guides/regen-marketplace/ecocredits/buy-ecocredits/by-project#5.-select-credit-retirement-options"
@@ -468,7 +506,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                 </Form>
                 <Submit
                   isSubmitting={isSubmitting}
-                  onClose={onClose}
+                  onClose={handleClose}
                   status={status}
                   isValid={isValid}
                   submitCount={submitCount}

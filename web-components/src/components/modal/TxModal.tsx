@@ -121,6 +121,9 @@ const TxModal: React.FC<TxModalProps> = ({
       </Title>
       <Card
         sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          flexShrink: 0,
           width: '100%',
           px: { sm: 7.75, xs: 5.5 },
           py: { sm: 9, xs: 7.5 },

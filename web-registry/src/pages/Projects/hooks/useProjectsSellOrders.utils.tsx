@@ -1,5 +1,6 @@
 import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { QUANTITY_MAX_DECIMALS } from 'config/decimals';
 import { roundFloatNumber } from 'utils/number/format/format';
 
 import { PurchaseInfo } from 'web-components/lib/components/cards/ProjectCard/ProjectCard.types';
@@ -80,10 +81,10 @@ export const getPurchaseInfo = ({
     sellInfo: {
       pricePerTon: hasPrice ? `$${priceMinDisplayed}-${priceMaxDisplayed}` : '',
       creditsAvailable: roundFloatNumber(creditsAvailable, {
-        decimals: 0,
+        decimals: QUANTITY_MAX_DECIMALS,
       }),
       creditsAvailableForUser: roundFloatNumber(creditsAvailableForUser, {
-        decimals: 0,
+        decimals: QUANTITY_MAX_DECIMALS,
       }),
     },
   };

@@ -1,0 +1,9 @@
+fragment seoFields on Seo {
+  title
+  description
+  image {
+    asset {
+      url
+    }
+  }
+}

@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Box, SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
+import { useAnalytics } from 'use-analytics';
 
 import { formatStandardInfo } from '../../../utils/format';
 import OutlinedButton from '../../buttons/OutlinedButton';
@@ -56,6 +58,8 @@ export function ProjectCard({
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
   const classes = useProjectCardStyles();
+  const location = useLocation();
+  const { track } = useAnalytics();
 
   const [open, setOpen] = useState<boolean>(true);
 
@@ -224,6 +228,12 @@ export function ProjectCard({
                   <OutlinedButton
                     onClick={event => {
                       event.stopPropagation();
+                      track('buy1', {
+                        url: location.pathname,
+                        cardType: 'project',
+                        creditClassName: purchaseInfo.creditClass?.name,
+                        projectName: name,
+                      });
                       onButtonClick && onButtonClick();
                     }}
                     size="small"

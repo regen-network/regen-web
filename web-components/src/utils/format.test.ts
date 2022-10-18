@@ -47,4 +47,22 @@ describe('formatNumber', () => {
     // Then
     expect(result).toEqual(expectedResult);
   });
+
+  test('Should format 3.599999999 to 3.6', () => {
+    // Given
+    const num = 3.599999999;
+    const minimumFractionDigits = 0;
+    const maximumFractionDigits = 6;
+    const expectedResult = '3.6';
+
+    // When
+    const result = formatNumber({
+      num,
+      minimumFractionDigits,
+      maximumFractionDigits,
+    });
+
+    // Then
+    expect(result).toEqual(expectedResult);
+  });
 });

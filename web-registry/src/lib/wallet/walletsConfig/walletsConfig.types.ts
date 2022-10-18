@@ -19,12 +19,6 @@ type GetClientParams = {
 export interface Wallet {
   // A unique identifier among all wallets.
   type: WalletType;
-  // The name of the wallet.
-  name: string;
-  // A description of the wallet.
-  description: string;
-  // The URL of the wallet logo.
-  imageUrl: string;
   // A function that returns an instantiated wallet client, with
   // `walletConnect` passed if `type === WalletType.WalletConnectKeplr`.
   getClient: ({

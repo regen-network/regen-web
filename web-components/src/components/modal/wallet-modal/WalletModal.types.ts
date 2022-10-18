@@ -4,5 +4,5 @@ export type Wallet = {
   name: string;
   description: string;
   imageUrl: string;
-  onClick: () => void;
+  onClick: () => void | Promise<void>;
 };

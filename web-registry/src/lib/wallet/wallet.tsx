@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useRef, useState } from 'react';
 import { OfflineSigner } from '@cosmjs/proto-signing';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
-import { alertTitleClasses } from '@mui/material';
 import { isMobile as checkIsMobile } from '@walletconnect/browser-utils';
 
 import { truncate } from 'web-components/lib/utils/truncate';
@@ -36,6 +35,7 @@ type ContextType = {
   disconnect?: () => void;
   connectionType?: string;
   error?: unknown;
+  walletConnectUri?: string;
 };
 
 const WalletContext = createContext<ContextType>({
@@ -56,10 +56,6 @@ export const WalletProvider: React.FC = ({ children }) => {
   const [walletConnectUri, setWalletConnectUri] = useState<
     string | undefined
   >();
-  console.log(
-    '🚀 ~ file: wallet.tsx ~ line 57 ~ walletConnectUri',
-    walletConnectUri,
-  );
 
   const onQrCloseCallback = useRef<() => void>();
 
@@ -168,7 +164,7 @@ export const WalletProvider: React.FC = ({ children }) => {
   useEffect(() => {
     if (walletConnectUri) {
       const navigateToAppURL = `intent://wcV1?${walletConnectUri}#Intent;package=com.chainapsis.keplr;scheme=keplrwallet;end;`;
-      window.location.href = navigateToAppURL;
+      // window.location.href = navigateToAppURL;
     }
   }, [walletConnectUri]);
 
@@ -181,6 +177,7 @@ export const WalletProvider: React.FC = ({ children }) => {
         disconnect,
         connectionType,
         error,
+        walletConnectUri,
       }}
     >
       {children}

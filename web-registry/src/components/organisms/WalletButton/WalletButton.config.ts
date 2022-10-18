@@ -1,32 +1,26 @@
-import {
-  Wallet,
-  WalletModalState,
-} from 'web-components/lib/components/modal/wallet-modal/WalletModal.types';
+import { Wallet } from 'web-components/lib/components/modal/wallet-modal/WalletModal.types';
 
-import { UseStateSetter } from 'types/react/use-state';
+import { ConnectParams } from 'lib/wallet/wallet.types';
+import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
 
 type GetWalletsUiConfigParams = {
-  setModalState: UseStateSetter<WalletModalState>;
-  connectToWallet: () => Promise<void>;
+  connectToWallet: (params: ConnectParams) => Promise<void>;
 };
 
 export const getAllWalletsUiConfig = ({
   connectToWallet,
-  setModalState,
 }: GetWalletsUiConfigParams): Wallet[] => [
   {
     name: 'Keplr Wallet',
     description: 'Keplr Chrome Extension',
     imageUrl: '/png/wallets/keplr-wallet-extension.png',
-    onClick: connectToWallet,
+    onClick: () => connectToWallet({ walletType: WalletType.Keplr }),
   },
   {
     name: 'WalletConnect',
     description: 'Keplr Mobile',
     imageUrl: '/png/wallets/walletconnect-keplr.png',
-    onClick: async () => {
-      await connectToWallet();
-      setModalState('wallet-mobile');
-    },
+    onClick: () =>
+      connectToWallet({ walletType: WalletType.WalletConnectKeplr }),
   },
 ];

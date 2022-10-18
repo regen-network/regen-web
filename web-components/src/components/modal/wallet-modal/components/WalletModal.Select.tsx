@@ -1,7 +1,6 @@
 import { Box } from '@mui/system';
 
 import { Body, Title } from '../../../../components/typography';
-
 import { Wallet } from '../WalletModal.types';
 
 export interface Props {

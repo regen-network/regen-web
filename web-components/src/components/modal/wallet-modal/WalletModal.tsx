@@ -1,7 +1,7 @@
 import { SxProps } from '@mui/material';
 import { Box } from '@mui/system';
-import { Theme } from '../../../theme/muiTheme';
 
+import { Theme } from '../../../theme/muiTheme';
 import Modal, { RegenModalProps } from '..';
 import { WalletModalMobile } from './components/WalletModal.Mobile';
 import { WalletModalSelect } from './components/WalletModal.Select';

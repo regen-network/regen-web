@@ -1,48 +1,21 @@
-import React, { useCallback, useMemo, useState } from 'react';
-import { makeStyles } from '@mui/styles';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import WalletModal from 'web-components/lib/components/modal/wallet-modal';
 import { WalletModalState } from 'web-components/lib/components/modal/wallet-modal/WalletModal.types';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+
+import { ConnectParams } from 'lib/wallet/wallet.types';
+import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
 
 import Keplr from '../../../assets/keplr.png';
 import { chainId } from '../../../lib/ledger';
 import { useWallet } from '../../../lib/wallet/wallet';
-import { getWalletsUiConfig } from './WalletButton.utils';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  icon: {
-    paddingRight: theme.spacing(2),
-  },
-  walletAddress: {
-    fontSize: theme.typography.pxToRem(10),
-  },
-  alert: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-  alertIcon: {
-    justifyContent: 'center',
-    paddingTop: theme.spacing(4),
-    paddingBottom: 0,
-  },
-  alertMessage: {
-    paddingTop: theme.spacing(1),
-    '& a': {
-      color: theme.palette.secondary.main,
-    },
-  },
-}));
+import { useWalletButtonStyles } from './WalletButton.styles';
+import { getMobileConnectUrl, getWalletsUiConfig } from './WalletButton.utils';
 
 const WalletButton: React.FC = () => {
-  const styles = useStyles();
+  const styles = useWalletButtonStyles();
   const { wallet, connect, connectionType, loaded, error, walletConnectUri } =
     useWallet();
 
@@ -55,16 +28,32 @@ const WalletButton: React.FC = () => {
     setIsModalOpen(false);
     setModalState('wallet-select');
   };
-  const connectToWallet = useCallback(async (): Promise<void> => {
-    if (connect) {
-      await connect();
-    }
-  }, [connect]);
+  const connectToWallet = useCallback(
+    async ({ walletType }: ConnectParams): Promise<void> => {
+      if (connect) {
+        await connect({ walletType });
+        if (walletType === WalletType.Keplr) {
+          onModalClose();
+        }
+        if (walletType === WalletType.WalletConnectKeplr) {
+          setModalState('wallet-mobile');
+        }
+      }
+    },
+    [connect],
+  );
 
   const walletsUiConfig = useMemo(
-    () => getWalletsUiConfig({ connectToWallet, setModalState }),
-    [connectToWallet, setModalState],
+    () => getWalletsUiConfig({ connectToWallet }),
+    [connectToWallet],
   );
+  const mobileConnectUrl = getMobileConnectUrl({ uri: walletConnectUri });
+
+  useEffect(() => {
+    if (mobileConnectUrl) {
+      window.location.href = mobileConnectUrl;
+    }
+  }, [mobileConnectUrl]);
 
   return chainId ? (
     <>
@@ -85,6 +74,7 @@ const WalletButton: React.FC = () => {
         wallets={walletsUiConfig}
         state={modalState}
         uri={walletConnectUri}
+        mobileConnectUrl={mobileConnectUrl}
       />
     </>
   ) : (

@@ -1,14 +1,13 @@
 import React, { createContext, useEffect, useRef, useState } from 'react';
 import { OfflineSigner } from '@cosmjs/proto-signing';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
-import { isMobile as checkIsMobile } from '@walletconnect/browser-utils';
 
 import { truncate } from 'web-components/lib/utils/truncate';
 
 import { chainId } from '../ledger';
 import { chainInfo } from './chainInfo/chainInfo';
 import { KeplrWalletConnectV1 } from './connectors';
-import { ConnectWalletParams } from './wallet.types';
+import { ConnectParams, ConnectWalletParams } from './wallet.types';
 import { getWalletConnectInstance } from './wallet.utils';
 import { walletsConfig } from './walletsConfig/walletsConfig';
 import { WalletType } from './walletsConfig/walletsConfig.types';
@@ -31,7 +30,7 @@ declare global {
 type ContextType = {
   wallet?: Wallet;
   loaded: boolean;
-  connect?: () => Promise<void>;
+  connect?: (params: ConnectParams) => Promise<void>;
   disconnect?: () => void;
   connectionType?: string;
   error?: unknown;
@@ -65,14 +64,12 @@ export const WalletProvider: React.FC = ({ children }) => {
     localStorage.removeItem(AUTO_CONNECT_WALLET_KEY);
   };
 
-  const connect = async (): Promise<void> => {
+  const connect = async ({ walletType }: ConnectParams): Promise<void> => {
     try {
-      if (checkIsMobile()) {
-        await connectWallet({ walletType: WalletType.WalletConnectKeplr });
-        setConnectionType(WalletType.WalletConnectKeplr);
-      } else {
-        await connectWallet({ walletType: WalletType.Keplr });
-        setConnectionType(WalletType.Keplr);
+      await connectWallet({ walletType });
+      setConnectionType(walletType);
+
+      if (walletType === WalletType.WalletConnectKeplr) {
         localStorage.setItem(AUTO_CONNECT_WALLET_KEY, WalletType.Keplr);
       }
     } catch (e) {
@@ -93,7 +90,9 @@ export const WalletProvider: React.FC = ({ children }) => {
         setWalletConnectUri,
         onQrCloseCallback,
       });
-      await walletConnect.connect();
+      if (!walletConnect.connected) {
+        await walletConnect.createSession();
+      }
     }
     const walletClient = await walletConfig?.getClient({
       chainInfo,
@@ -108,7 +107,7 @@ export const WalletProvider: React.FC = ({ children }) => {
     try {
       await walletClient?.enable(chainInfo.chainId);
     } catch (e) {
-      alert(e);
+      console.error(e);
     }
 
     if (walletClient) {
@@ -125,10 +124,6 @@ export const WalletProvider: React.FC = ({ children }) => {
         shortAddress: truncate(key.bech32Address),
       };
       setWallet(wallet);
-    } else {
-      throw new Error(
-        'Please install Keplr extension to use Regen Ledger feature',
-      );
     }
   };
 
@@ -160,13 +155,6 @@ export const WalletProvider: React.FC = ({ children }) => {
       onQrCloseCallback.current = undefined;
     }
   }, [walletConnectUri, onQrCloseCallback]);
-
-  useEffect(() => {
-    if (walletConnectUri) {
-      const navigateToAppURL = `intent://wcV1?${walletConnectUri}#Intent;package=com.chainapsis.keplr;scheme=keplrwallet;end;`;
-      // window.location.href = navigateToAppURL;
-    }
-  }, [walletConnectUri]);
 
   return (
     <WalletContext.Provider

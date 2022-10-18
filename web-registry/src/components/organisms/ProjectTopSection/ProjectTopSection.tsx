@@ -1,9 +1,17 @@
 import LazyLoad from 'react-lazyload';
+import ReactPlayerLazy from 'react-player/lazy';
 import { Link } from 'react-router-dom';
-import { Box, Grid, Skeleton } from '@mui/material';
-import cx from 'clsx';
+import {
+  Box,
+  CardMedia,
+  Grid,
+  Skeleton,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
+import Card from 'web-components/lib/components/cards/Card';
 import CreditClassCard from 'web-components/lib/components/cards/CreditClassCard';
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
@@ -70,6 +78,8 @@ function ProjectTopSection({
   projectId?: string;
 }): JSX.Element {
   const styles = useProjectTopSectionStyles();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
@@ -212,24 +222,17 @@ function ProjectTopSection({
             />
           )}
           <LazyLoad offset={50}>
-            {videoURL &&
-              (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(
-                videoURL,
-              ) ||
-              /https:\/\/player.vimeo.com\/video\/[a-zA-Z0-9_.-]+/.test(
-                videoURL,
-              ) ? (
-                <iframe
-                  className={cx(styles.iframe, styles.media)}
-                  title={metadata?.['schema:name'] || 'project'}
-                  src={videoURL}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                ></iframe>
-              ) : (
-                <video className={styles.media} controls>
-                  <source src={videoURL} />
-                </video>
-              ))}
+            {videoURL && (
+              <Card className={styles.media}>
+                <CardMedia
+                  component={ReactPlayerLazy}
+                  url={videoURL}
+                  height={isMobile ? 221 : 438}
+                  fallback={<Skeleton height={isMobile ? 221 : 438} />}
+                  width="100%"
+                />
+              </Card>
+            )}
             {landStewardPhoto && (
               <img
                 className={styles.media}

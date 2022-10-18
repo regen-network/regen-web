@@ -13,6 +13,7 @@ import { walletsConfig } from './walletsConfig/walletsConfig';
 import { WalletType } from './walletsConfig/walletsConfig.types';
 
 const AUTO_CONNECT_WALLET_KEY = 'auto_connect_wallet';
+const WALLET_CONNECT_KEY = 'walletconnect';
 
 const emptySender = { address: '', shortAddress: '' };
 
@@ -62,6 +63,7 @@ export const WalletProvider: React.FC = ({ children }) => {
     setWallet(emptySender);
     setConnectionType(undefined);
     localStorage.removeItem(AUTO_CONNECT_WALLET_KEY);
+    localStorage.removeItem(WALLET_CONNECT_KEY);
   };
 
   const connect = async ({ walletType }: ConnectParams): Promise<void> => {
@@ -99,7 +101,7 @@ export const WalletProvider: React.FC = ({ children }) => {
       walletConnect,
     });
     if (walletClient instanceof KeplrWalletConnectV1) {
-      // walletClient.dontOpenAppOnEnable = true;
+      walletClient.dontOpenAppOnEnable = true;
     }
     if (walletConfig?.type === WalletType.Keplr) {
       await walletClient?.experimentalSuggestChain(chainInfo);

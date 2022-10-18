@@ -1,16 +1,10 @@
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
-const defaultOptions = {};
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+const defaultOptions =  {}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -25,6 +19,8 @@ export type Scalars = {
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
 };
+
+
 
 export type BasicStepCardSection = {
   __typename?: 'BasicStepCardSection';
@@ -1380,6 +1376,7 @@ export type CustomImageSorting = {
   imageAlt?: Maybe<SortOrder>;
 };
 
+
 export type DateFilter = {
   /** Checks if the value is equal to the given input. */
   eq?: Maybe<Scalars['Date']>;
@@ -1394,6 +1391,7 @@ export type DateFilter = {
   /** Checks if the value is lesser than or equal to the given input. */
   lte?: Maybe<Scalars['Date']>;
 };
+
 
 export type DatetimeFilter = {
   /** Checks if the value is equal to the given input. */
@@ -2196,6 +2194,7 @@ export type HomePage = Document & {
   /** Current document revision */
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
+  seo?: Maybe<Seo>;
   heroSection?: Maybe<HomePageTopSection>;
   bottomBanner?: Maybe<BottomBanner>;
 };
@@ -2209,6 +2208,7 @@ export type HomePageFilter = {
   _updatedAt?: Maybe<DatetimeFilter>;
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
+  seo?: Maybe<SeoFilter>;
   heroSection?: Maybe<HomePageTopSectionFilter>;
   bottomBanner?: Maybe<BottomBannerFilter>;
 };
@@ -2220,6 +2220,7 @@ export type HomePageSorting = {
   _updatedAt?: Maybe<SortOrder>;
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
+  seo?: Maybe<SeoSorting>;
   heroSection?: Maybe<HomePageTopSectionSorting>;
   bottomBanner?: Maybe<BottomBannerSorting>;
 };
@@ -2549,6 +2550,7 @@ export type IntFilter = {
   /** Checks if the value is lesser than or equal to the given input. */
   lte?: Maybe<Scalars['Int']>;
 };
+
 
 export type LabeledTextLinkable = {
   __typename?: 'LabeledTextLinkable';
@@ -3986,173 +3988,216 @@ export type RootQuery = {
   allDocument: Array<Document>;
 };
 
+
 export type RootQueryBuyersPageArgs = {
   id: Scalars['ID'];
 };
+
 
 export type RootQueryCaseStudiesPageArgs = {
   id: Scalars['ID'];
 };
 
+
 export type RootQueryCaseStudyPageArgs = {
   id: Scalars['ID'];
 };
+
 
 export type RootQueryCommunityPageArgs = {
   id: Scalars['ID'];
 };
 
+
 export type RootQueryContactPageArgs = {
   id: Scalars['ID'];
 };
+
 
 export type RootQueryCreateCreditClassPageArgs = {
   id: Scalars['ID'];
 };
 
+
 export type RootQueryCreateMethodologyPageArgs = {
   id: Scalars['ID'];
 };
+
 
 export type RootQueryCreditClassArgs = {
   id: Scalars['ID'];
 };
 
+
 export type RootQueryDevelopersPageArgs = {
   id: Scalars['ID'];
 };
+
 
 export type RootQueryDocArgs = {
   id: Scalars['ID'];
 };
 
+
 export type RootQueryEcologicalImpactArgs = {
   id: Scalars['ID'];
 };
+
 
 export type RootQueryEcologicalOutcomeArgs = {
   id: Scalars['ID'];
 };
 
+
 export type RootQueryFaqArgs = {
   id: Scalars['ID'];
 };
+
 
 export type RootQueryFaqPageArgs = {
   id: Scalars['ID'];
 };
 
+
 export type RootQueryFeaturedSectionArgs = {
   id: Scalars['ID'];
 };
+
 
 export type RootQueryFundPageArgs = {
   id: Scalars['ID'];
 };
 
+
 export type RootQueryHomePageArgs = {
   id: Scalars['ID'];
 };
+
 
 export type RootQueryHomePageWebArgs = {
   id: Scalars['ID'];
 };
 
+
 export type RootQueryImageGridItemArgs = {
   id: Scalars['ID'];
 };
+
 
 export type RootQueryLandManagementPracticeArgs = {
   id: Scalars['ID'];
 };
 
+
 export type RootQueryLandStewardsPageArgs = {
   id: Scalars['ID'];
 };
+
 
 export type RootQueryMainnetPageArgs = {
   id: Scalars['ID'];
 };
 
+
 export type RootQueryMediaArgs = {
   id: Scalars['ID'];
 };
+
 
 export type RootQueryMethodologyArgs = {
   id: Scalars['ID'];
 };
 
+
 export type RootQueryMethodologyReviewProcessPageArgs = {
   id: Scalars['ID'];
 };
+
 
 export type RootQueryNctPageArgs = {
   id: Scalars['ID'];
 };
 
+
 export type RootQueryPartnersPageArgs = {
   id: Scalars['ID'];
 };
+
 
 export type RootQueryPresskitPageArgs = {
   id: Scalars['ID'];
 };
 
+
 export type RootQueryRegenTeamMemberArgs = {
   id: Scalars['ID'];
 };
+
 
 export type RootQueryResourceArgs = {
   id: Scalars['ID'];
 };
 
+
 export type RootQueryResourcesPageArgs = {
   id: Scalars['ID'];
 };
+
 
 export type RootQuerySciencePageArgs = {
   id: Scalars['ID'];
 };
 
+
 export type RootQuerySdgArgs = {
   id: Scalars['ID'];
 };
+
 
 export type RootQuerySharedSectionsArgs = {
   id: Scalars['ID'];
 };
 
+
 export type RootQueryTagArgs = {
   id: Scalars['ID'];
 };
+
 
 export type RootQueryTeamPageArgs = {
   id: Scalars['ID'];
 };
 
+
 export type RootQueryTokenPageArgs = {
   id: Scalars['ID'];
 };
+
 
 export type RootQueryValidatorsPageArgs = {
   id: Scalars['ID'];
 };
 
+
 export type RootQueryWalletAddressRegistrationPageArgs = {
   id: Scalars['ID'];
 };
+
 
 export type RootQuerySanityImageAssetArgs = {
   id: Scalars['ID'];
 };
 
+
 export type RootQuerySanityFileAssetArgs = {
   id: Scalars['ID'];
 };
 
+
 export type RootQueryDocumentArgs = {
   id: Scalars['ID'];
 };
+
 
 export type RootQueryAllBuyersPageArgs = {
   where?: Maybe<BuyersPageFilter>;
@@ -4161,12 +4206,14 @@ export type RootQueryAllBuyersPageArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type RootQueryAllCaseStudiesPageArgs = {
   where?: Maybe<CaseStudiesPageFilter>;
   sort?: Maybe<Array<CaseStudiesPageSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type RootQueryAllCaseStudyPageArgs = {
   where?: Maybe<CaseStudyPageFilter>;
@@ -4175,12 +4222,14 @@ export type RootQueryAllCaseStudyPageArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type RootQueryAllCommunityPageArgs = {
   where?: Maybe<CommunityPageFilter>;
   sort?: Maybe<Array<CommunityPageSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type RootQueryAllContactPageArgs = {
   where?: Maybe<ContactPageFilter>;
@@ -4189,12 +4238,14 @@ export type RootQueryAllContactPageArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type RootQueryAllCreateCreditClassPageArgs = {
   where?: Maybe<CreateCreditClassPageFilter>;
   sort?: Maybe<Array<CreateCreditClassPageSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type RootQueryAllCreateMethodologyPageArgs = {
   where?: Maybe<CreateMethodologyPageFilter>;
@@ -4203,12 +4254,14 @@ export type RootQueryAllCreateMethodologyPageArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type RootQueryAllCreditClassArgs = {
   where?: Maybe<CreditClassFilter>;
   sort?: Maybe<Array<CreditClassSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type RootQueryAllDevelopersPageArgs = {
   where?: Maybe<DevelopersPageFilter>;
@@ -4217,12 +4270,14 @@ export type RootQueryAllDevelopersPageArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type RootQueryAllDocArgs = {
   where?: Maybe<DocFilter>;
   sort?: Maybe<Array<DocSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type RootQueryAllEcologicalImpactArgs = {
   where?: Maybe<EcologicalImpactFilter>;
@@ -4231,12 +4286,14 @@ export type RootQueryAllEcologicalImpactArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type RootQueryAllEcologicalOutcomeArgs = {
   where?: Maybe<EcologicalOutcomeFilter>;
   sort?: Maybe<Array<EcologicalOutcomeSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type RootQueryAllFaqArgs = {
   where?: Maybe<FaqFilter>;
@@ -4245,12 +4302,14 @@ export type RootQueryAllFaqArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type RootQueryAllFaqPageArgs = {
   where?: Maybe<FaqPageFilter>;
   sort?: Maybe<Array<FaqPageSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type RootQueryAllFeaturedSectionArgs = {
   where?: Maybe<FeaturedSectionFilter>;
@@ -4259,12 +4318,14 @@ export type RootQueryAllFeaturedSectionArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type RootQueryAllFundPageArgs = {
   where?: Maybe<FundPageFilter>;
   sort?: Maybe<Array<FundPageSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type RootQueryAllHomePageArgs = {
   where?: Maybe<HomePageFilter>;
@@ -4273,12 +4334,14 @@ export type RootQueryAllHomePageArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type RootQueryAllHomePageWebArgs = {
   where?: Maybe<HomePageWebFilter>;
   sort?: Maybe<Array<HomePageWebSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type RootQueryAllImageGridItemArgs = {
   where?: Maybe<ImageGridItemFilter>;
@@ -4287,12 +4350,14 @@ export type RootQueryAllImageGridItemArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type RootQueryAllLandManagementPracticeArgs = {
   where?: Maybe<LandManagementPracticeFilter>;
   sort?: Maybe<Array<LandManagementPracticeSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type RootQueryAllLandStewardsPageArgs = {
   where?: Maybe<LandStewardsPageFilter>;
@@ -4301,12 +4366,14 @@ export type RootQueryAllLandStewardsPageArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type RootQueryAllMainnetPageArgs = {
   where?: Maybe<MainnetPageFilter>;
   sort?: Maybe<Array<MainnetPageSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type RootQueryAllMediaArgs = {
   where?: Maybe<MediaFilter>;
@@ -4315,12 +4382,14 @@ export type RootQueryAllMediaArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type RootQueryAllMethodologyArgs = {
   where?: Maybe<MethodologyFilter>;
   sort?: Maybe<Array<MethodologySorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type RootQueryAllMethodologyReviewProcessPageArgs = {
   where?: Maybe<MethodologyReviewProcessPageFilter>;
@@ -4329,12 +4398,14 @@ export type RootQueryAllMethodologyReviewProcessPageArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type RootQueryAllNctPageArgs = {
   where?: Maybe<NctPageFilter>;
   sort?: Maybe<Array<NctPageSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type RootQueryAllPartnersPageArgs = {
   where?: Maybe<PartnersPageFilter>;
@@ -4343,12 +4414,14 @@ export type RootQueryAllPartnersPageArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type RootQueryAllPresskitPageArgs = {
   where?: Maybe<PresskitPageFilter>;
   sort?: Maybe<Array<PresskitPageSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type RootQueryAllRegenTeamMemberArgs = {
   where?: Maybe<RegenTeamMemberFilter>;
@@ -4357,12 +4430,14 @@ export type RootQueryAllRegenTeamMemberArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type RootQueryAllResourceArgs = {
   where?: Maybe<ResourceFilter>;
   sort?: Maybe<Array<ResourceSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type RootQueryAllResourcesPageArgs = {
   where?: Maybe<ResourcesPageFilter>;
@@ -4371,12 +4446,14 @@ export type RootQueryAllResourcesPageArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type RootQueryAllSciencePageArgs = {
   where?: Maybe<SciencePageFilter>;
   sort?: Maybe<Array<SciencePageSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type RootQueryAllSdgArgs = {
   where?: Maybe<SdgFilter>;
@@ -4385,12 +4462,14 @@ export type RootQueryAllSdgArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type RootQueryAllSharedSectionsArgs = {
   where?: Maybe<SharedSectionsFilter>;
   sort?: Maybe<Array<SharedSectionsSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type RootQueryAllTagArgs = {
   where?: Maybe<TagFilter>;
@@ -4399,12 +4478,14 @@ export type RootQueryAllTagArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type RootQueryAllTeamPageArgs = {
   where?: Maybe<TeamPageFilter>;
   sort?: Maybe<Array<TeamPageSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type RootQueryAllTokenPageArgs = {
   where?: Maybe<TokenPageFilter>;
@@ -4413,12 +4494,14 @@ export type RootQueryAllTokenPageArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type RootQueryAllValidatorsPageArgs = {
   where?: Maybe<ValidatorsPageFilter>;
   sort?: Maybe<Array<ValidatorsPageSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type RootQueryAllWalletAddressRegistrationPageArgs = {
   where?: Maybe<WalletAddressRegistrationPageFilter>;
@@ -4427,6 +4510,7 @@ export type RootQueryAllWalletAddressRegistrationPageArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type RootQueryAllSanityImageAssetArgs = {
   where?: Maybe<SanityImageAssetFilter>;
   sort?: Maybe<Array<SanityImageAssetSorting>>;
@@ -4434,12 +4518,14 @@ export type RootQueryAllSanityImageAssetArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type RootQueryAllSanityFileAssetArgs = {
   where?: Maybe<SanityFileAssetFilter>;
   sort?: Maybe<Array<SanityFileAssetSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type RootQueryAllDocumentArgs = {
   where?: Maybe<DocumentFilter>;
@@ -5117,7 +5203,7 @@ export enum SortOrder {
   /** Sorts on the value in ascending order. */
   Asc = 'ASC',
   /** Sorts on the value in descending order. */
-  Desc = 'DESC',
+  Desc = 'DESC'
 }
 
 export type Span = {
@@ -5885,985 +5971,920 @@ export type WalletAddressRegistrationWalletSectionSorting = {
   walletFoundButtonText?: Maybe<SortOrder>;
 };
 
-export type AllBuyersPageQueryVariables = Exact<{ [key: string]: never }>;
+export type AllBuyersPageQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type AllBuyersPageQuery = { __typename?: 'RootQuery' } & {
-  allBuyersPage: Array<
-    { __typename?: 'BuyersPage' } & Pick<BuyersPage, 'footerButtonText'> & {
-        heroSection?: Maybe<
-          { __typename?: 'HeroSection' } & HeroSectionFieldsFragment
-        >;
-        imageGridSection?: Maybe<
-          { __typename?: 'ImageGridSection' } & ImageGridSectionFieldsFragment
-        >;
-        featuredSection?: Maybe<
-          { __typename?: 'FeaturedSection' } & FeaturedSectionFieldsFragment
-        >;
-        faqSection?: Maybe<
-          { __typename?: 'BottomBanner' } & BottomBannerFieldsFragment
-        >;
-        metadata?: Maybe<
-          { __typename?: 'PageMetadata' } & PageMetadataFieldsFragment
-        >;
-      }
-  >;
-};
 
-export type AllCreateCreditClassPageQueryVariables = Exact<{
-  [key: string]: never;
-}>;
+export type AllBuyersPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allBuyersPage: Array<(
+    { __typename?: 'BuyersPage' }
+    & Pick<BuyersPage, 'footerButtonText'>
+    & { heroSection?: Maybe<(
+      { __typename?: 'HeroSection' }
+      & HeroSectionFieldsFragment
+    )>, imageGridSection?: Maybe<(
+      { __typename?: 'ImageGridSection' }
+      & ImageGridSectionFieldsFragment
+    )>, featuredSection?: Maybe<(
+      { __typename?: 'FeaturedSection' }
+      & FeaturedSectionFieldsFragment
+    )>, faqSection?: Maybe<(
+      { __typename?: 'BottomBanner' }
+      & BottomBannerFieldsFragment
+    )>, metadata?: Maybe<(
+      { __typename?: 'PageMetadata' }
+      & PageMetadataFieldsFragment
+    )> }
+  )> }
+);
 
-export type AllCreateCreditClassPageQuery = { __typename?: 'RootQuery' } & {
-  allCreateCreditClassPage: Array<
-    { __typename?: 'CreateCreditClassPage' } & Pick<
-      CreateCreditClassPage,
-      'footerLink'
-    > & {
-        heroSection?: Maybe<
-          { __typename?: 'HeroSection' } & HeroSectionFieldsFragment
-        >;
-        stepCardSection?: Maybe<
-          { __typename?: 'StepCardSection' } & Pick<
-            StepCardSection,
-            'title' | 'descriptionRaw'
-          > & {
-              stepCards?: Maybe<
-                Array<
-                  Maybe<{ __typename?: 'StepCard' } & StepCardFieldsFragment>
-                >
-              >;
-            }
-        >;
-        creditTypeSection?: Maybe<
-          { __typename?: 'CreditTypeSection' } & Pick<
-            CreditTypeSection,
-            | 'title'
-            | 'subtitleTop'
-            | 'descriptionTopRaw'
-            | 'subtitleBottom'
-            | 'descriptionBottomRaw'
-          > & {
-              institutionalCards?: Maybe<
-                Array<Maybe<{ __typename?: 'Card' } & CardFieldsFragment>>
-              >;
-              flexCreditCards?: Maybe<
-                Array<Maybe<{ __typename?: 'Card' } & CardFieldsFragment>>
-              >;
-            }
-        >;
-        outcomeSection?: Maybe<
-          { __typename?: 'HeroSection' } & HeroSectionFieldsFragment
-        >;
-        outcomes?: Maybe<
-          Array<
-            Maybe<
-              {
-                __typename?: 'EcologicalOutcome';
-              } & EcologicalOutcomeFieldsFragment
-            >
-          >
-        >;
-        resources?: Maybe<
-          Array<Maybe<{ __typename?: 'Resource' } & ResourceFieldsFragment>>
-        >;
-        bottomBanner?: Maybe<
-          { __typename?: 'BottomBanner' } & BottomBannerFieldsFragment
-        >;
-        metadata?: Maybe<
-          { __typename?: 'PageMetadata' } & PageMetadataFieldsFragment
-        >;
-      }
-  >;
-};
+export type AllCreateCreditClassPageQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type AllCreateMethodologyPageQueryVariables = Exact<{
-  [key: string]: never;
-}>;
 
-export type AllCreateMethodologyPageQuery = { __typename?: 'RootQuery' } & {
-  allCreateMethodologyPage: Array<
-    { __typename?: 'CreateMethodologyPage' } & Pick<
-      CreateMethodologyPage,
-      'footerLink'
-    > & {
-        heroSection?: Maybe<
-          { __typename?: 'HeroSection' } & HeroSectionFieldsFragment
-        >;
-        stepCardSection?: Maybe<
-          { __typename?: 'StepCardSection' } & Pick<
-            StepCardSection,
-            'title' | 'descriptionRaw'
-          > & {
-              stepCards?: Maybe<
-                Array<
-                  Maybe<{ __typename?: 'StepCard' } & StepCardFieldsFragment>
-                >
-              >;
-            }
-        >;
-        outcomeSection?: Maybe<
-          { __typename?: 'HeroSection' } & HeroSectionFieldsFragment
-        >;
-        outcomes?: Maybe<
-          Array<
-            Maybe<
-              {
-                __typename?: 'EcologicalOutcome';
-              } & EcologicalOutcomeFieldsFragment
-            >
-          >
-        >;
-        resources?: Maybe<
-          Array<Maybe<{ __typename?: 'Resource' } & ResourceFieldsFragment>>
-        >;
-        peerReviewSection?: Maybe<
-          { __typename?: 'BottomBanner' } & BottomBannerFieldsFragment
-        >;
-        createCreditClassSection?: Maybe<
-          { __typename?: 'BottomBanner' } & BottomBannerFieldsFragment
-        >;
-        metadata?: Maybe<
-          { __typename?: 'PageMetadata' } & PageMetadataFieldsFragment
-        >;
-      }
-  >;
-};
+export type AllCreateCreditClassPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allCreateCreditClassPage: Array<(
+    { __typename?: 'CreateCreditClassPage' }
+    & Pick<CreateCreditClassPage, 'footerLink'>
+    & { heroSection?: Maybe<(
+      { __typename?: 'HeroSection' }
+      & HeroSectionFieldsFragment
+    )>, stepCardSection?: Maybe<(
+      { __typename?: 'StepCardSection' }
+      & Pick<StepCardSection, 'title' | 'descriptionRaw'>
+      & { stepCards?: Maybe<Array<Maybe<(
+        { __typename?: 'StepCard' }
+        & StepCardFieldsFragment
+      )>>> }
+    )>, creditTypeSection?: Maybe<(
+      { __typename?: 'CreditTypeSection' }
+      & Pick<CreditTypeSection, 'title' | 'subtitleTop' | 'descriptionTopRaw' | 'subtitleBottom' | 'descriptionBottomRaw'>
+      & { institutionalCards?: Maybe<Array<Maybe<(
+        { __typename?: 'Card' }
+        & CardFieldsFragment
+      )>>>, flexCreditCards?: Maybe<Array<Maybe<(
+        { __typename?: 'Card' }
+        & CardFieldsFragment
+      )>>> }
+    )>, outcomeSection?: Maybe<(
+      { __typename?: 'HeroSection' }
+      & HeroSectionFieldsFragment
+    )>, outcomes?: Maybe<Array<Maybe<(
+      { __typename?: 'EcologicalOutcome' }
+      & EcologicalOutcomeFieldsFragment
+    )>>>, resources?: Maybe<Array<Maybe<(
+      { __typename?: 'Resource' }
+      & ResourceFieldsFragment
+    )>>>, bottomBanner?: Maybe<(
+      { __typename?: 'BottomBanner' }
+      & BottomBannerFieldsFragment
+    )>, metadata?: Maybe<(
+      { __typename?: 'PageMetadata' }
+      & PageMetadataFieldsFragment
+    )> }
+  )> }
+);
 
-export type AllCreditClassQueryVariables = Exact<{ [key: string]: never }>;
+export type AllCreateMethodologyPageQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type AllCreditClassQuery = { __typename?: 'RootQuery' } & {
-  allCreditClass: Array<
-    { __typename?: 'CreditClass' } & Pick<
-      CreditClass,
-      'path' | 'nameRaw' | 'descriptionRaw' | 'shortDescriptionRaw'
-    > & {
-        iri?: Maybe<{ __typename?: 'Slug' } & Pick<Slug, 'current'>>;
-        image?: Maybe<
-          { __typename?: 'CustomImage' } & CustomImageFieldsFragment
-        >;
-        ecologicalImpact?: Maybe<
-          Array<
-            Maybe<
-              {
-                __typename?: 'EcologicalImpactRelation';
-              } & EcologicalImpactRelationFieldsFragment
-            >
-          >
-        >;
-        overviewCards?: Maybe<
-          Array<Maybe<{ __typename?: 'Card' } & CardFieldsFragment>>
-        >;
-        sdgs?: Maybe<
-          Array<
-            Maybe<
-              { __typename?: 'Sdg' } & Pick<Sdg, 'title'> & {
-                  image?: Maybe<
-                    { __typename?: 'CustomImage' } & CustomImageFieldsFragment
-                  >;
-                }
-            >
-          >
-        >;
-        buyer?: Maybe<
-          { __typename?: 'Buyer' } & Pick<Buyer, 'projectsTitle'> & {
-              heroSection?: Maybe<
-                { __typename?: 'HeroSection' } & HeroSectionFieldsFragment
-              >;
-              resources?: Maybe<
-                Array<
-                  Maybe<{ __typename?: 'Resource' } & ResourceFieldsFragment>
-                >
-              >;
-              videos?: Maybe<
-                Array<Maybe<{ __typename?: 'Media' } & MediaFieldsFragment>>
-              >;
-              ctaButton?: Maybe<
-                { __typename?: 'Button' } & ButtonFieldsFragment
-              >;
-            }
-        >;
-        landSteward?: Maybe<
-          { __typename?: 'LandSteward' } & Pick<
-            LandSteward,
-            'projectsTitle' | 'featuredProjectIds'
-          > & {
-              heroSection?: Maybe<
-                { __typename?: 'HeroSection' } & HeroSectionFieldsFragment
-              >;
-              resources?: Maybe<
-                Array<
-                  Maybe<{ __typename?: 'Resource' } & ResourceFieldsFragment>
-                >
-              >;
-              videos?: Maybe<
-                Array<Maybe<{ __typename?: 'Media' } & MediaFieldsFragment>>
-              >;
-              ctaButton?: Maybe<
-                { __typename?: 'Button' } & ButtonFieldsFragment
-              >;
-              steps?: Maybe<
-                Array<
-                  Maybe<
-                    { __typename?: 'FullStepCardSection' } & Pick<
-                      FullStepCardSection,
-                      'preTitle' | 'title' | 'descriptionRaw'
-                    > & {
-                        stepCards?: Maybe<
-                          Array<
-                            Maybe<
-                              {
-                                __typename?: 'StepCard';
-                              } & StepCardFieldsFragment
-                            >
-                          >
-                        >;
-                      }
-                  >
-                >
-              >;
-              connectSection?: Maybe<
-                { __typename?: 'ConnectSection' } & Pick<
-                  ConnectSection,
-                  'title'
-                > & {
-                    links?: Maybe<
-                      Array<
-                        Maybe<
-                          { __typename?: 'ConnectSectionLink' } & Pick<
-                            ConnectSectionLink,
-                            'name' | 'descriptionRaw'
-                          > & {
-                              icon?: Maybe<
-                                { __typename?: 'Image' } & {
-                                  asset?: Maybe<
-                                    { __typename?: 'SanityImageAsset' } & Pick<
-                                      SanityImageAsset,
-                                      'url'
-                                    >
-                                  >;
-                                }
-                              >;
-                              href?: Maybe<
-                                { __typename?: 'Link' } & LinkFieldsFragment
-                              >;
-                            }
-                        >
-                      >
-                    >;
-                  }
-              >;
-            }
-        >;
-      }
-  >;
-};
 
-export type AllHomePageQueryVariables = Exact<{ [key: string]: never }>;
+export type AllCreateMethodologyPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allCreateMethodologyPage: Array<(
+    { __typename?: 'CreateMethodologyPage' }
+    & Pick<CreateMethodologyPage, 'footerLink'>
+    & { heroSection?: Maybe<(
+      { __typename?: 'HeroSection' }
+      & HeroSectionFieldsFragment
+    )>, stepCardSection?: Maybe<(
+      { __typename?: 'StepCardSection' }
+      & Pick<StepCardSection, 'title' | 'descriptionRaw'>
+      & { stepCards?: Maybe<Array<Maybe<(
+        { __typename?: 'StepCard' }
+        & StepCardFieldsFragment
+      )>>> }
+    )>, outcomeSection?: Maybe<(
+      { __typename?: 'HeroSection' }
+      & HeroSectionFieldsFragment
+    )>, outcomes?: Maybe<Array<Maybe<(
+      { __typename?: 'EcologicalOutcome' }
+      & EcologicalOutcomeFieldsFragment
+    )>>>, resources?: Maybe<Array<Maybe<(
+      { __typename?: 'Resource' }
+      & ResourceFieldsFragment
+    )>>>, peerReviewSection?: Maybe<(
+      { __typename?: 'BottomBanner' }
+      & BottomBannerFieldsFragment
+    )>, createCreditClassSection?: Maybe<(
+      { __typename?: 'BottomBanner' }
+      & BottomBannerFieldsFragment
+    )>, metadata?: Maybe<(
+      { __typename?: 'PageMetadata' }
+      & PageMetadataFieldsFragment
+    )> }
+  )> }
+);
 
-export type AllHomePageQuery = { __typename?: 'RootQuery' } & {
-  allHomePage: Array<
-    { __typename?: 'HomePage' } & {
-      heroSection?: Maybe<
-        { __typename?: 'HomePageTopSection' } & Pick<
-          HomePageTopSection,
-          'title' | 'bodyRaw'
-        > & {
-            button?: Maybe<{ __typename?: 'Button' } & ButtonFieldsFragment>;
-            background?: Maybe<
-              { __typename?: 'CustomImage' } & CustomImageFieldsFragment
-            >;
-            icon?: Maybe<
-              { __typename?: 'CustomImage' } & CustomImageFieldsFragment
-            >;
-          }
-      >;
-      bottomBanner?: Maybe<
-        { __typename?: 'BottomBanner' } & BottomBannerFieldsFragment
-      >;
-    }
-  >;
-};
+export type AllCreditClassQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type AllLandStewardsPageQueryVariables = Exact<{ [key: string]: never }>;
 
-export type AllLandStewardsPageQuery = { __typename?: 'RootQuery' } & {
-  allLandStewardsPage: Array<
-    { __typename?: 'LandStewardsPage' } & {
-      heroSection?: Maybe<
-        { __typename?: 'HeroSection' } & HeroSectionFieldsFragment
-      >;
-      designedForFarmersSection?: Maybe<
-        { __typename?: 'ImageItemsSection' } & Pick<
-          ImageItemsSection,
-          'title'
-        > & {
-            imageCards?: Maybe<
-              Array<Maybe<{ __typename?: 'Card' } & CardFieldsFragment>>
-            >;
-          }
-      >;
-      joinFarmersSection?: Maybe<
-        { __typename?: 'DualImageSection' } & Pick<
-          DualImageSection,
-          'title'
-        > & {
-            left?: Maybe<
-              {
-                __typename?: 'ImageBoldTextLabel';
-              } & ImageBoldTextLabelFieldsFragment
-            >;
-            right?: Maybe<
-              {
-                __typename?: 'ImageBoldTextLabel';
-              } & ImageBoldTextLabelFieldsFragment
-            >;
-          }
-      >;
-      practicesOutcomesSection?: Maybe<
-        { __typename?: 'PracticesOutcomesSection' } & Pick<
-          PracticesOutcomesSection,
-          'title' | 'note'
-        > & {
-            practices?: Maybe<
-              Array<
-                Maybe<
-                  {
-                    __typename?: 'LandManagementPractice';
-                  } & LandManagementPracticeFieldsFragment
-                >
-              >
-            >;
-            outcomes?: Maybe<
-              Array<
-                Maybe<
-                  {
-                    __typename?: 'EcologicalOutcome';
-                  } & EcologicalOutcomeFieldsFragment
-                >
-              >
-            >;
-          }
-      >;
-      timelineSection?: Maybe<
-        { __typename?: 'TimelineSection' } & Pick<TimelineSection, 'header'> & {
-            timelineItems?: Maybe<
-              Array<
-                Maybe<
-                  { __typename?: 'TimelineItem' } & TimelineItemFieldsFragment
-                >
-              >
-            >;
-          }
-      >;
-      featuredSection?: Maybe<
-        { __typename?: 'FeaturedSection' } & FeaturedSectionFieldsFragment
-      >;
-      moreQuestionsSection?: Maybe<
-        { __typename?: 'BottomBanner' } & BottomBannerFieldsFragment
-      >;
-      footerButton?: Maybe<{ __typename?: 'Button' } & ButtonFieldsFragment>;
-      metadata?: Maybe<
-        { __typename?: 'PageMetadata' } & PageMetadataFieldsFragment
-      >;
-    }
-  >;
-};
+export type AllCreditClassQuery = (
+  { __typename?: 'RootQuery' }
+  & { allCreditClass: Array<(
+    { __typename?: 'CreditClass' }
+    & Pick<CreditClass, 'path' | 'nameRaw' | 'descriptionRaw' | 'shortDescriptionRaw'>
+    & { iri?: Maybe<(
+      { __typename?: 'Slug' }
+      & Pick<Slug, 'current'>
+    )>, image?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
+    )>, ecologicalImpact?: Maybe<Array<Maybe<(
+      { __typename?: 'EcologicalImpactRelation' }
+      & EcologicalImpactRelationFieldsFragment
+    )>>>, overviewCards?: Maybe<Array<Maybe<(
+      { __typename?: 'Card' }
+      & CardFieldsFragment
+    )>>>, sdgs?: Maybe<Array<Maybe<(
+      { __typename?: 'Sdg' }
+      & Pick<Sdg, 'title'>
+      & { image?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )> }
+    )>>>, buyer?: Maybe<(
+      { __typename?: 'Buyer' }
+      & Pick<Buyer, 'projectsTitle'>
+      & { heroSection?: Maybe<(
+        { __typename?: 'HeroSection' }
+        & HeroSectionFieldsFragment
+      )>, resources?: Maybe<Array<Maybe<(
+        { __typename?: 'Resource' }
+        & ResourceFieldsFragment
+      )>>>, videos?: Maybe<Array<Maybe<(
+        { __typename?: 'Media' }
+        & MediaFieldsFragment
+      )>>>, ctaButton?: Maybe<(
+        { __typename?: 'Button' }
+        & ButtonFieldsFragment
+      )> }
+    )>, landSteward?: Maybe<(
+      { __typename?: 'LandSteward' }
+      & Pick<LandSteward, 'projectsTitle' | 'featuredProjectIds'>
+      & { heroSection?: Maybe<(
+        { __typename?: 'HeroSection' }
+        & HeroSectionFieldsFragment
+      )>, resources?: Maybe<Array<Maybe<(
+        { __typename?: 'Resource' }
+        & ResourceFieldsFragment
+      )>>>, videos?: Maybe<Array<Maybe<(
+        { __typename?: 'Media' }
+        & MediaFieldsFragment
+      )>>>, ctaButton?: Maybe<(
+        { __typename?: 'Button' }
+        & ButtonFieldsFragment
+      )>, steps?: Maybe<Array<Maybe<(
+        { __typename?: 'FullStepCardSection' }
+        & Pick<FullStepCardSection, 'preTitle' | 'title' | 'descriptionRaw'>
+        & { stepCards?: Maybe<Array<Maybe<(
+          { __typename?: 'StepCard' }
+          & StepCardFieldsFragment
+        )>>> }
+      )>>>, connectSection?: Maybe<(
+        { __typename?: 'ConnectSection' }
+        & Pick<ConnectSection, 'title'>
+        & { links?: Maybe<Array<Maybe<(
+          { __typename?: 'ConnectSectionLink' }
+          & Pick<ConnectSectionLink, 'name' | 'descriptionRaw'>
+          & { icon?: Maybe<(
+            { __typename?: 'Image' }
+            & { asset?: Maybe<(
+              { __typename?: 'SanityImageAsset' }
+              & Pick<SanityImageAsset, 'url'>
+            )> }
+          )>, href?: Maybe<(
+            { __typename?: 'Link' }
+            & LinkFieldsFragment
+          )> }
+        )>>> }
+      )> }
+    )> }
+  )> }
+);
 
-export type AllMethodologyQueryVariables = Exact<{ [key: string]: never }>;
+export type AllHomePageQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type AllMethodologyQuery = { __typename?: 'RootQuery' } & {
-  allMethodology: Array<
-    { __typename?: 'Methodology' } & Pick<
-      Methodology,
-      'path' | 'nameRaw' | 'descriptionRaw'
-    > & {
-        steps?: Maybe<
-          {
-            __typename?: 'BasicStepCardSection';
-          } & BasicStepCardSectionFieldsFragment
-        >;
-        documentation?: Maybe<
-          { __typename?: 'Documentation' } & Pick<Documentation, 'title'> & {
-              button?: Maybe<{ __typename?: 'Button' } & ButtonFieldsFragment>;
-              image?: Maybe<
-                { __typename?: 'CustomImage' } & CustomImageFieldsFragment
-              >;
-            }
-        >;
-        ecologicalImpact?: Maybe<
-          Array<
-            Maybe<
-              {
-                __typename?: 'EcologicalImpactRelation';
-              } & EcologicalImpactRelationFieldsFragment
-            >
-          >
-        >;
-        resources?: Maybe<
-          Array<Maybe<{ __typename?: 'Resource' } & ResourceFieldsFragment>>
-        >;
-        bottomSection?: Maybe<
-          { __typename?: 'HeroSection' } & HeroSectionFieldsFragment
-        >;
-      }
-  >;
-};
 
-export type ReviewSectionFieldsFragment = {
-  __typename?: 'ReviewSection';
-} & Pick<
-  ReviewSection,
-  'title' | 'timespan' | 'descriptionRaw' | 'disclaimerTop' | 'disclaimerBottom'
-> & {
-    button?: Maybe<{ __typename?: 'Button' } & ButtonFieldsFragment>;
-    stepCardsSubsections?: Maybe<
-      Array<
-        Maybe<
-          {
-            __typename?: 'BasicStepCardSection';
-          } & BasicStepCardSectionFieldsFragment
-        >
-      >
-    >;
-  };
+export type AllHomePageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allHomePage: Array<(
+    { __typename?: 'HomePage' }
+    & { seo?: Maybe<(
+      { __typename?: 'Seo' }
+      & SeoFieldsFragment
+    )>, heroSection?: Maybe<(
+      { __typename?: 'HomePageTopSection' }
+      & Pick<HomePageTopSection, 'title' | 'bodyRaw'>
+      & { button?: Maybe<(
+        { __typename?: 'Button' }
+        & ButtonFieldsFragment
+      )>, background?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )>, icon?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )> }
+    )>, bottomBanner?: Maybe<(
+      { __typename?: 'BottomBanner' }
+      & BottomBannerFieldsFragment
+    )> }
+  )> }
+);
 
-export type AllMethodologyReviewProcessPageQueryVariables = Exact<{
-  [key: string]: never;
-}>;
+export type AllLandStewardsPageQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type AllMethodologyReviewProcessPageQuery = {
-  __typename?: 'RootQuery';
-} & {
-  allMethodologyReviewProcessPage: Array<
-    { __typename?: 'MethodologyReviewProcessPage' } & {
-      heroSection?: Maybe<
-        { __typename?: 'HeroSection' } & HeroSectionFieldsFragment
-      >;
-      internalReviewSection?: Maybe<
-        { __typename?: 'ReviewSection' } & ReviewSectionFieldsFragment
-      >;
-      externalReviewSection?: Maybe<
-        { __typename?: 'ReviewSection' } & ReviewSectionFieldsFragment
-      >;
-      bottomBanner?: Maybe<
-        { __typename?: 'BottomBanner' } & BottomBannerFieldsFragment
-      >;
-      metadata?: Maybe<
-        { __typename?: 'PageMetadata' } & PageMetadataFieldsFragment
-      >;
-    }
-  >;
-};
 
-export type BasicStepCardSectionFieldsFragment = {
-  __typename?: 'BasicStepCardSection';
-} & Pick<BasicStepCardSection, 'title'> & {
-    stepCards?: Maybe<
-      Array<Maybe<{ __typename?: 'StepCard' } & StepCardFieldsFragment>>
-    >;
-  };
+export type AllLandStewardsPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allLandStewardsPage: Array<(
+    { __typename?: 'LandStewardsPage' }
+    & { heroSection?: Maybe<(
+      { __typename?: 'HeroSection' }
+      & HeroSectionFieldsFragment
+    )>, designedForFarmersSection?: Maybe<(
+      { __typename?: 'ImageItemsSection' }
+      & Pick<ImageItemsSection, 'title'>
+      & { imageCards?: Maybe<Array<Maybe<(
+        { __typename?: 'Card' }
+        & CardFieldsFragment
+      )>>> }
+    )>, joinFarmersSection?: Maybe<(
+      { __typename?: 'DualImageSection' }
+      & Pick<DualImageSection, 'title'>
+      & { left?: Maybe<(
+        { __typename?: 'ImageBoldTextLabel' }
+        & ImageBoldTextLabelFieldsFragment
+      )>, right?: Maybe<(
+        { __typename?: 'ImageBoldTextLabel' }
+        & ImageBoldTextLabelFieldsFragment
+      )> }
+    )>, practicesOutcomesSection?: Maybe<(
+      { __typename?: 'PracticesOutcomesSection' }
+      & Pick<PracticesOutcomesSection, 'title' | 'note'>
+      & { practices?: Maybe<Array<Maybe<(
+        { __typename?: 'LandManagementPractice' }
+        & LandManagementPracticeFieldsFragment
+      )>>>, outcomes?: Maybe<Array<Maybe<(
+        { __typename?: 'EcologicalOutcome' }
+        & EcologicalOutcomeFieldsFragment
+      )>>> }
+    )>, timelineSection?: Maybe<(
+      { __typename?: 'TimelineSection' }
+      & Pick<TimelineSection, 'header'>
+      & { timelineItems?: Maybe<Array<Maybe<(
+        { __typename?: 'TimelineItem' }
+        & TimelineItemFieldsFragment
+      )>>> }
+    )>, featuredSection?: Maybe<(
+      { __typename?: 'FeaturedSection' }
+      & FeaturedSectionFieldsFragment
+    )>, moreQuestionsSection?: Maybe<(
+      { __typename?: 'BottomBanner' }
+      & BottomBannerFieldsFragment
+    )>, footerButton?: Maybe<(
+      { __typename?: 'Button' }
+      & ButtonFieldsFragment
+    )>, metadata?: Maybe<(
+      { __typename?: 'PageMetadata' }
+      & PageMetadataFieldsFragment
+    )> }
+  )> }
+);
 
-export type BottomBannerFieldsFragment = { __typename?: 'BottomBanner' } & Pick<
-  BottomBanner,
-  'title' | 'descriptionRaw'
-> & {
-    button?: Maybe<{ __typename?: 'Button' } & ButtonFieldsFragment>;
-    secondButton?: Maybe<{ __typename?: 'Button' } & ButtonFieldsFragment>;
-    image?: Maybe<{ __typename?: 'CustomImage' } & CustomImageFieldsFragment>;
-  };
+export type AllMethodologyQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type ButtonFieldsFragment = { __typename?: 'Button' } & Pick<
-  Button,
-  'buttonText' | 'buttonModal' | 'buttonBlankTarget'
-> & { buttonLink?: Maybe<{ __typename?: 'Link' } & LinkFieldsFragment> };
 
-export type CardFieldsFragment = { __typename?: 'Card' } & Pick<
-  Card,
-  'title' | 'descriptionRaw'
-> & {
-    icon?: Maybe<
-      { __typename?: 'Image' } & {
-        asset?: Maybe<
-          { __typename?: 'SanityImageAsset' } & Pick<SanityImageAsset, 'url'>
-        >;
-      }
-    >;
-  };
+export type AllMethodologyQuery = (
+  { __typename?: 'RootQuery' }
+  & { allMethodology: Array<(
+    { __typename?: 'Methodology' }
+    & Pick<Methodology, 'path' | 'nameRaw' | 'descriptionRaw'>
+    & { steps?: Maybe<(
+      { __typename?: 'BasicStepCardSection' }
+      & BasicStepCardSectionFieldsFragment
+    )>, documentation?: Maybe<(
+      { __typename?: 'Documentation' }
+      & Pick<Documentation, 'title'>
+      & { button?: Maybe<(
+        { __typename?: 'Button' }
+        & ButtonFieldsFragment
+      )>, image?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )> }
+    )>, ecologicalImpact?: Maybe<Array<Maybe<(
+      { __typename?: 'EcologicalImpactRelation' }
+      & EcologicalImpactRelationFieldsFragment
+    )>>>, resources?: Maybe<Array<Maybe<(
+      { __typename?: 'Resource' }
+      & ResourceFieldsFragment
+    )>>>, bottomSection?: Maybe<(
+      { __typename?: 'HeroSection' }
+      & HeroSectionFieldsFragment
+    )> }
+  )> }
+);
 
-export type CustomImageFieldsFragment = { __typename?: 'CustomImage' } & Pick<
-  CustomImage,
-  'imageAlt' | 'imageHref'
-> & {
-    image?: Maybe<
-      { __typename?: 'Image' } & {
-        asset?: Maybe<
-          { __typename?: 'SanityImageAsset' } & Pick<
-            SanityImageAsset,
-            'altText' | 'url'
-          >
-        >;
-      }
-    >;
-  };
+export type ReviewSectionFieldsFragment = (
+  { __typename?: 'ReviewSection' }
+  & Pick<ReviewSection, 'title' | 'timespan' | 'descriptionRaw' | 'disclaimerTop' | 'disclaimerBottom'>
+  & { button?: Maybe<(
+    { __typename?: 'Button' }
+    & ButtonFieldsFragment
+  )>, stepCardsSubsections?: Maybe<Array<Maybe<(
+    { __typename?: 'BasicStepCardSection' }
+    & BasicStepCardSectionFieldsFragment
+  )>>> }
+);
 
-export type EcologicalImpactRelationFieldsFragment = {
-  __typename?: 'EcologicalImpactRelation';
-} & Pick<EcologicalImpactRelation, 'primary'> & {
-    ecologicalImpact?: Maybe<
-      { __typename?: 'EcologicalImpact' } & Pick<
-        EcologicalImpact,
-        'name' | 'descriptionRaw'
-      > & {
-          image?: Maybe<
-            { __typename?: 'CustomImage' } & CustomImageFieldsFragment
-          >;
-        }
-    >;
-  };
+export type AllMethodologyReviewProcessPageQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type EcologicalOutcomeFieldsFragment = {
-  __typename?: 'EcologicalOutcome';
-} & Pick<EcologicalOutcome, 'title' | 'descriptionRaw'> & {
-    image?: Maybe<{ __typename?: 'CustomImage' } & CustomImageFieldsFragment>;
-  };
 
-export type FeaturedSectionFieldsFragment = {
-  __typename?: 'FeaturedSection';
-} & Pick<FeaturedSection, 'header' | 'titleRaw' | 'descriptionRaw'> & {
-    button?: Maybe<{ __typename?: 'Button' } & ButtonFieldsFragment>;
-    image?: Maybe<{ __typename?: 'CustomImage' } & CustomImageFieldsFragment>;
-  };
+export type AllMethodologyReviewProcessPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allMethodologyReviewProcessPage: Array<(
+    { __typename?: 'MethodologyReviewProcessPage' }
+    & { heroSection?: Maybe<(
+      { __typename?: 'HeroSection' }
+      & HeroSectionFieldsFragment
+    )>, internalReviewSection?: Maybe<(
+      { __typename?: 'ReviewSection' }
+      & ReviewSectionFieldsFragment
+    )>, externalReviewSection?: Maybe<(
+      { __typename?: 'ReviewSection' }
+      & ReviewSectionFieldsFragment
+    )>, bottomBanner?: Maybe<(
+      { __typename?: 'BottomBanner' }
+      & BottomBannerFieldsFragment
+    )>, metadata?: Maybe<(
+      { __typename?: 'PageMetadata' }
+      & PageMetadataFieldsFragment
+    )> }
+  )> }
+);
 
-export type HeroSectionFieldsFragment = { __typename?: 'HeroSection' } & Pick<
-  HeroSection,
-  'title' | 'descriptionRaw' | 'tooltipText'
->;
+export type BasicStepCardSectionFieldsFragment = (
+  { __typename?: 'BasicStepCardSection' }
+  & Pick<BasicStepCardSection, 'title'>
+  & { stepCards?: Maybe<Array<Maybe<(
+    { __typename?: 'StepCard' }
+    & StepCardFieldsFragment
+  )>>> }
+);
 
-export type ImageBoldTextLabelFieldsFragment = {
-  __typename?: 'ImageBoldTextLabel';
-} & Pick<ImageBoldTextLabel, 'boldText' | 'label'> & {
-    image?: Maybe<{ __typename?: 'CustomImage' } & CustomImageFieldsFragment>;
-  };
+export type BottomBannerFieldsFragment = (
+  { __typename?: 'BottomBanner' }
+  & Pick<BottomBanner, 'title' | 'descriptionRaw'>
+  & { button?: Maybe<(
+    { __typename?: 'Button' }
+    & ButtonFieldsFragment
+  )>, secondButton?: Maybe<(
+    { __typename?: 'Button' }
+    & ButtonFieldsFragment
+  )>, image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )> }
+);
 
-export type ImageGridItemFieldsFragment = {
-  __typename?: 'ImageGridItem';
-} & Pick<ImageGridItem, 'header' | 'descriptionRaw'> & {
-    image?: Maybe<{ __typename?: 'CustomImage' } & CustomImageFieldsFragment>;
-  };
+export type ButtonFieldsFragment = (
+  { __typename?: 'Button' }
+  & Pick<Button, 'buttonText' | 'buttonModal' | 'buttonBlankTarget'>
+  & { buttonLink?: Maybe<(
+    { __typename?: 'Link' }
+    & LinkFieldsFragment
+  )> }
+);
 
-export type ImageGridSectionFieldsFragment = {
-  __typename?: 'ImageGridSection';
-} & {
-  backgroundImage?: Maybe<
-    { __typename?: 'CustomImage' } & CustomImageFieldsFragment
-  >;
-  items?: Maybe<
-    Array<Maybe<{ __typename?: 'ImageGridItem' } & ImageGridItemFieldsFragment>>
-  >;
-};
+export type CardFieldsFragment = (
+  { __typename?: 'Card' }
+  & Pick<Card, 'title' | 'descriptionRaw'>
+  & { icon?: Maybe<(
+    { __typename?: 'Image' }
+    & { asset?: Maybe<(
+      { __typename?: 'SanityImageAsset' }
+      & Pick<SanityImageAsset, 'url'>
+    )> }
+  )> }
+);
+
+export type CustomImageFieldsFragment = (
+  { __typename?: 'CustomImage' }
+  & Pick<CustomImage, 'imageAlt' | 'imageHref'>
+  & { image?: Maybe<(
+    { __typename?: 'Image' }
+    & { asset?: Maybe<(
+      { __typename?: 'SanityImageAsset' }
+      & Pick<SanityImageAsset, 'altText' | 'url'>
+    )> }
+  )> }
+);
+
+export type EcologicalImpactRelationFieldsFragment = (
+  { __typename?: 'EcologicalImpactRelation' }
+  & Pick<EcologicalImpactRelation, 'primary'>
+  & { ecologicalImpact?: Maybe<(
+    { __typename?: 'EcologicalImpact' }
+    & Pick<EcologicalImpact, 'name' | 'descriptionRaw'>
+    & { image?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
+    )> }
+  )> }
+);
+
+export type EcologicalOutcomeFieldsFragment = (
+  { __typename?: 'EcologicalOutcome' }
+  & Pick<EcologicalOutcome, 'title' | 'descriptionRaw'>
+  & { image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )> }
+);
+
+export type FeaturedSectionFieldsFragment = (
+  { __typename?: 'FeaturedSection' }
+  & Pick<FeaturedSection, 'header' | 'titleRaw' | 'descriptionRaw'>
+  & { button?: Maybe<(
+    { __typename?: 'Button' }
+    & ButtonFieldsFragment
+  )>, image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )> }
+);
+
+export type HeroSectionFieldsFragment = (
+  { __typename?: 'HeroSection' }
+  & Pick<HeroSection, 'title' | 'descriptionRaw' | 'tooltipText'>
+);
+
+export type ImageBoldTextLabelFieldsFragment = (
+  { __typename?: 'ImageBoldTextLabel' }
+  & Pick<ImageBoldTextLabel, 'boldText' | 'label'>
+  & { image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )> }
+);
+
+export type ImageGridItemFieldsFragment = (
+  { __typename?: 'ImageGridItem' }
+  & Pick<ImageGridItem, 'header' | 'descriptionRaw'>
+  & { image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )> }
+);
+
+export type ImageGridSectionFieldsFragment = (
+  { __typename?: 'ImageGridSection' }
+  & { backgroundImage?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )>, items?: Maybe<Array<Maybe<(
+    { __typename?: 'ImageGridItem' }
+    & ImageGridItemFieldsFragment
+  )>>> }
+);
 
 export type EcologicalImpactByIriQueryVariables = Exact<{
   iris?: Maybe<Array<Scalars['String']> | Scalars['String']>;
 }>;
 
-export type EcologicalImpactByIriQuery = { __typename?: 'RootQuery' } & {
-  allEcologicalImpact: Array<
-    { __typename?: 'EcologicalImpact' } & Pick<
-      EcologicalImpact,
-      'name' | 'descriptionRaw'
-    > & {
-        image?: Maybe<
-          { __typename?: 'CustomImage' } & CustomImageFieldsFragment
-        >;
-        standard?: Maybe<
-          { __typename?: 'CustomImage' } & CustomImageFieldsFragment
-        >;
-      }
-  >;
-};
 
-export type LandManagementPracticeFieldsFragment = {
-  __typename?: 'LandManagementPractice';
-} & Pick<LandManagementPractice, 'title' | 'descriptionRaw'> & {
-    icon?: Maybe<
-      { __typename?: 'Image' } & {
-        asset?: Maybe<
-          { __typename?: 'SanityImageAsset' } & Pick<SanityImageAsset, 'url'>
-        >;
-      }
-    >;
-  };
+export type EcologicalImpactByIriQuery = (
+  { __typename?: 'RootQuery' }
+  & { allEcologicalImpact: Array<(
+    { __typename?: 'EcologicalImpact' }
+    & Pick<EcologicalImpact, 'name' | 'descriptionRaw'>
+    & { image?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
+    )>, standard?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
+    )> }
+  )> }
+);
 
-export type LinkFieldsFragment = { __typename?: 'Link' } & Pick<
-  Link,
-  'buttonHref'
-> & { buttonDoc?: Maybe<{ __typename?: 'Doc' } & Pick<Doc, 'href'>> };
+export type LandManagementPracticeFieldsFragment = (
+  { __typename?: 'LandManagementPractice' }
+  & Pick<LandManagementPractice, 'title' | 'descriptionRaw'>
+  & { icon?: Maybe<(
+    { __typename?: 'Image' }
+    & { asset?: Maybe<(
+      { __typename?: 'SanityImageAsset' }
+      & Pick<SanityImageAsset, 'url'>
+    )> }
+  )> }
+);
 
-export type MediaFieldsFragment = { __typename?: 'Media' } & Pick<
-  Media,
-  'title' | 'author' | 'date' | 'href' | 'type'
-> & {
-    image?: Maybe<{ __typename?: 'CustomImage' } & CustomImageFieldsFragment>;
-  };
+export type LinkFieldsFragment = (
+  { __typename?: 'Link' }
+  & Pick<Link, 'buttonHref'>
+  & { buttonDoc?: Maybe<(
+    { __typename?: 'Doc' }
+    & Pick<Doc, 'href'>
+  )> }
+);
 
-export type PageMetadataFieldsFragment = { __typename?: 'PageMetadata' } & Pick<
-  PageMetadata,
-  'description'
-> & {
-    openGraphImage?: Maybe<
-      { __typename?: 'Image' } & {
-        asset?: Maybe<
-          { __typename?: 'SanityImageAsset' } & Pick<SanityImageAsset, 'url'>
-        >;
-      }
-    >;
-  };
+export type MediaFieldsFragment = (
+  { __typename?: 'Media' }
+  & Pick<Media, 'title' | 'author' | 'date' | 'href' | 'type'>
+  & { image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )> }
+);
 
-export type ResourceFieldsFragment = { __typename?: 'Resource' } & Pick<
-  Resource,
-  '_updatedAt' | 'titleRaw' | 'descriptionRaw' | 'lastUpdated'
-> & {
-    image?: Maybe<{ __typename?: 'CustomImage' } & CustomImageFieldsFragment>;
-    button?: Maybe<{ __typename?: 'Button' } & ButtonFieldsFragment>;
-  };
+export type PageMetadataFieldsFragment = (
+  { __typename?: 'PageMetadata' }
+  & Pick<PageMetadata, 'description'>
+  & { openGraphImage?: Maybe<(
+    { __typename?: 'Image' }
+    & { asset?: Maybe<(
+      { __typename?: 'SanityImageAsset' }
+      & Pick<SanityImageAsset, 'url'>
+    )> }
+  )> }
+);
+
+export type ResourceFieldsFragment = (
+  { __typename?: 'Resource' }
+  & Pick<Resource, '_updatedAt' | 'titleRaw' | 'descriptionRaw' | 'lastUpdated'>
+  & { image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )>, button?: Maybe<(
+    { __typename?: 'Button' }
+    & ButtonFieldsFragment
+  )> }
+);
+
+export type SeoFieldsFragment = (
+  { __typename?: 'Seo' }
+  & Pick<Seo, 'title' | 'description'>
+  & { image?: Maybe<(
+    { __typename?: 'Image' }
+    & { asset?: Maybe<(
+      { __typename?: 'SanityImageAsset' }
+      & Pick<SanityImageAsset, 'url'>
+    )> }
+  )> }
+);
 
 export type SdgByIriQueryVariables = Exact<{
   iris?: Maybe<Array<Scalars['String']> | Scalars['String']>;
 }>;
 
-export type SdgByIriQuery = { __typename?: 'RootQuery' } & {
-  allSdg: Array<
-    { __typename?: 'Sdg' } & Pick<Sdg, 'title'> & {
-        image?: Maybe<
-          { __typename?: 'CustomImage' } & CustomImageFieldsFragment
-        >;
-      }
-  >;
-};
 
-export type StepCardFieldsFragment = { __typename?: 'StepCard' } & Pick<
-  StepCard,
-  'isActive' | 'title' | 'descriptionRaw' | 'tagName' | 'videoSrc'
-> & {
-    icon?: Maybe<
-      { __typename?: 'Image' } & {
-        asset?: Maybe<
-          { __typename?: 'SanityImageAsset' } & Pick<SanityImageAsset, 'url'>
-        >;
-      }
-    >;
-    button?: Maybe<{ __typename?: 'Button' } & ButtonFieldsFragment>;
-    faqs?: Maybe<
-      Array<Maybe<{ __typename?: 'Faq' } & Pick<Faq, 'question' | 'answerRaw'>>>
-    >;
-    image?: Maybe<{ __typename?: 'CustomImage' } & CustomImageFieldsFragment>;
-  };
+export type SdgByIriQuery = (
+  { __typename?: 'RootQuery' }
+  & { allSdg: Array<(
+    { __typename?: 'Sdg' }
+    & Pick<Sdg, 'title'>
+    & { image?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
+    )> }
+  )> }
+);
 
-export type TimelineItemFieldsFragment = { __typename?: 'TimelineItem' } & Pick<
-  TimelineItem,
-  'title' | 'url'
-> & {
-    image?: Maybe<
-      { __typename?: 'Image' } & {
-        asset?: Maybe<
-          { __typename?: 'SanityImageAsset' } & Pick<SanityImageAsset, 'url'>
-        >;
-      }
-    >;
-    tags?: Maybe<Array<Maybe<{ __typename?: 'Tag' } & TagFieldsFragment>>>;
-  };
+export type StepCardFieldsFragment = (
+  { __typename?: 'StepCard' }
+  & Pick<StepCard, 'isActive' | 'title' | 'descriptionRaw' | 'tagName' | 'videoSrc'>
+  & { icon?: Maybe<(
+    { __typename?: 'Image' }
+    & { asset?: Maybe<(
+      { __typename?: 'SanityImageAsset' }
+      & Pick<SanityImageAsset, 'url'>
+    )> }
+  )>, button?: Maybe<(
+    { __typename?: 'Button' }
+    & ButtonFieldsFragment
+  )>, faqs?: Maybe<Array<Maybe<(
+    { __typename?: 'Faq' }
+    & Pick<Faq, 'question' | 'answerRaw'>
+  )>>>, image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )> }
+);
 
-export type TagFieldsFragment = { __typename?: 'Tag' } & Pick<
-  Tag,
-  'name' | 'color'
->;
+export type TimelineItemFieldsFragment = (
+  { __typename?: 'TimelineItem' }
+  & Pick<TimelineItem, 'title' | 'url'>
+  & { image?: Maybe<(
+    { __typename?: 'Image' }
+    & { asset?: Maybe<(
+      { __typename?: 'SanityImageAsset' }
+      & Pick<SanityImageAsset, 'url'>
+    )> }
+  )>, tags?: Maybe<Array<Maybe<(
+    { __typename?: 'Tag' }
+    & TagFieldsFragment
+  )>>> }
+);
+
+export type TagFieldsFragment = (
+  { __typename?: 'Tag' }
+  & Pick<Tag, 'name' | 'color'>
+);
 
 export const LinkFieldsFragmentDoc = gql`
-  fragment linkFields on Link {
-    buttonHref
-    buttonDoc {
-      href
-    }
-  }
-`;
-export const ButtonFieldsFragmentDoc = gql`
-  fragment buttonFields on Button {
-    buttonText
-    buttonLink {
-      ...linkFields
-    }
-    buttonModal
-    buttonBlankTarget
-  }
-  ${LinkFieldsFragmentDoc}
-`;
-export const CustomImageFieldsFragmentDoc = gql`
-  fragment customImageFields on CustomImage {
-    imageAlt
-    imageHref
-    image {
-      asset {
-        altText
-        url
-      }
-    }
-  }
-`;
-export const StepCardFieldsFragmentDoc = gql`
-  fragment stepCardFields on StepCard {
-    isActive
-    icon {
-      asset {
-        url
-      }
-    }
-    title
-    descriptionRaw
-    button {
-      ...buttonFields
-    }
-    tagName
-    faqs {
-      question
-      answerRaw
-    }
-    image {
-      ...customImageFields
-    }
-    videoSrc
-  }
-  ${ButtonFieldsFragmentDoc}
-  ${CustomImageFieldsFragmentDoc}
-`;
-export const BasicStepCardSectionFieldsFragmentDoc = gql`
-  fragment basicStepCardSectionFields on BasicStepCardSection {
-    title
-    stepCards {
-      ...stepCardFields
-    }
-  }
-  ${StepCardFieldsFragmentDoc}
-`;
-export const ReviewSectionFieldsFragmentDoc = gql`
-  fragment reviewSectionFields on ReviewSection {
-    title
-    timespan
-    descriptionRaw
-    button {
-      ...buttonFields
-    }
-    disclaimerTop
-    disclaimerBottom
-    stepCardsSubsections {
-      ...basicStepCardSectionFields
-    }
-  }
-  ${ButtonFieldsFragmentDoc}
-  ${BasicStepCardSectionFieldsFragmentDoc}
-`;
-export const BottomBannerFieldsFragmentDoc = gql`
-  fragment bottomBannerFields on BottomBanner {
-    title
-    descriptionRaw
-    button {
-      ...buttonFields
-    }
-    secondButton {
-      ...buttonFields
-    }
-    image {
-      ...customImageFields
-    }
-  }
-  ${ButtonFieldsFragmentDoc}
-  ${CustomImageFieldsFragmentDoc}
-`;
-export const CardFieldsFragmentDoc = gql`
-  fragment cardFields on Card {
-    title
-    descriptionRaw
-    icon {
-      asset {
-        url
-      }
-    }
-  }
-`;
-export const EcologicalImpactRelationFieldsFragmentDoc = gql`
-  fragment ecologicalImpactRelationFields on EcologicalImpactRelation {
-    primary
-    ecologicalImpact {
-      name
-      descriptionRaw
-      image {
-        ...customImageFields
-      }
-    }
-  }
-  ${CustomImageFieldsFragmentDoc}
-`;
-export const EcologicalOutcomeFieldsFragmentDoc = gql`
-  fragment ecologicalOutcomeFields on EcologicalOutcome {
-    title
-    descriptionRaw
-    image {
-      ...customImageFields
-    }
-  }
-  ${CustomImageFieldsFragmentDoc}
-`;
-export const FeaturedSectionFieldsFragmentDoc = gql`
-  fragment featuredSectionFields on FeaturedSection {
-    header
-    titleRaw
-    descriptionRaw
-    button {
-      ...buttonFields
-    }
-    image {
-      ...customImageFields
-    }
-  }
-  ${ButtonFieldsFragmentDoc}
-  ${CustomImageFieldsFragmentDoc}
-`;
-export const HeroSectionFieldsFragmentDoc = gql`
-  fragment heroSectionFields on HeroSection {
-    title
-    descriptionRaw
-    tooltipText
-  }
-`;
-export const ImageBoldTextLabelFieldsFragmentDoc = gql`
-  fragment imageBoldTextLabelFields on ImageBoldTextLabel {
-    boldText
-    label
-    image {
-      ...customImageFields
-    }
-  }
-  ${CustomImageFieldsFragmentDoc}
-`;
-export const ImageGridItemFieldsFragmentDoc = gql`
-  fragment imageGridItemFields on ImageGridItem {
-    header
-    descriptionRaw
-    image {
-      ...customImageFields
-    }
-  }
-  ${CustomImageFieldsFragmentDoc}
-`;
-export const ImageGridSectionFieldsFragmentDoc = gql`
-  fragment imageGridSectionFields on ImageGridSection {
-    backgroundImage {
-      ...customImageFields
-    }
-    items {
-      ...imageGridItemFields
-    }
-  }
-  ${CustomImageFieldsFragmentDoc}
-  ${ImageGridItemFieldsFragmentDoc}
-`;
-export const LandManagementPracticeFieldsFragmentDoc = gql`
-  fragment landManagementPracticeFields on LandManagementPractice {
-    title
-    descriptionRaw
-    icon {
-      asset {
-        url
-      }
-    }
-  }
-`;
-export const MediaFieldsFragmentDoc = gql`
-  fragment mediaFields on Media {
-    title
-    author
-    date
-    image {
-      ...customImageFields
-    }
+    fragment linkFields on Link {
+  buttonHref
+  buttonDoc {
     href
-    type
   }
-  ${CustomImageFieldsFragmentDoc}
-`;
-export const PageMetadataFieldsFragmentDoc = gql`
-  fragment pageMetadataFields on PageMetadata {
-    description
-    openGraphImage {
-      asset {
-        url
-      }
+}
+    `;
+export const ButtonFieldsFragmentDoc = gql`
+    fragment buttonFields on Button {
+  buttonText
+  buttonLink {
+    ...linkFields
+  }
+  buttonModal
+  buttonBlankTarget
+}
+    ${LinkFieldsFragmentDoc}`;
+export const CustomImageFieldsFragmentDoc = gql`
+    fragment customImageFields on CustomImage {
+  imageAlt
+  imageHref
+  image {
+    asset {
+      altText
+      url
     }
   }
-`;
-export const ResourceFieldsFragmentDoc = gql`
-  fragment resourceFields on Resource {
-    _updatedAt
-    titleRaw
+}
+    `;
+export const StepCardFieldsFragmentDoc = gql`
+    fragment stepCardFields on StepCard {
+  isActive
+  icon {
+    asset {
+      url
+    }
+  }
+  title
+  descriptionRaw
+  button {
+    ...buttonFields
+  }
+  tagName
+  faqs {
+    question
+    answerRaw
+  }
+  image {
+    ...customImageFields
+  }
+  videoSrc
+}
+    ${ButtonFieldsFragmentDoc}
+${CustomImageFieldsFragmentDoc}`;
+export const BasicStepCardSectionFieldsFragmentDoc = gql`
+    fragment basicStepCardSectionFields on BasicStepCardSection {
+  title
+  stepCards {
+    ...stepCardFields
+  }
+}
+    ${StepCardFieldsFragmentDoc}`;
+export const ReviewSectionFieldsFragmentDoc = gql`
+    fragment reviewSectionFields on ReviewSection {
+  title
+  timespan
+  descriptionRaw
+  button {
+    ...buttonFields
+  }
+  disclaimerTop
+  disclaimerBottom
+  stepCardsSubsections {
+    ...basicStepCardSectionFields
+  }
+}
+    ${ButtonFieldsFragmentDoc}
+${BasicStepCardSectionFieldsFragmentDoc}`;
+export const BottomBannerFieldsFragmentDoc = gql`
+    fragment bottomBannerFields on BottomBanner {
+  title
+  descriptionRaw
+  button {
+    ...buttonFields
+  }
+  secondButton {
+    ...buttonFields
+  }
+  image {
+    ...customImageFields
+  }
+}
+    ${ButtonFieldsFragmentDoc}
+${CustomImageFieldsFragmentDoc}`;
+export const CardFieldsFragmentDoc = gql`
+    fragment cardFields on Card {
+  title
+  descriptionRaw
+  icon {
+    asset {
+      url
+    }
+  }
+}
+    `;
+export const EcologicalImpactRelationFieldsFragmentDoc = gql`
+    fragment ecologicalImpactRelationFields on EcologicalImpactRelation {
+  primary
+  ecologicalImpact {
+    name
     descriptionRaw
     image {
       ...customImageFields
     }
-    button {
-      ...buttonFields
-    }
-    lastUpdated
   }
-  ${CustomImageFieldsFragmentDoc}
-  ${ButtonFieldsFragmentDoc}
-`;
+}
+    ${CustomImageFieldsFragmentDoc}`;
+export const EcologicalOutcomeFieldsFragmentDoc = gql`
+    fragment ecologicalOutcomeFields on EcologicalOutcome {
+  title
+  descriptionRaw
+  image {
+    ...customImageFields
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+export const FeaturedSectionFieldsFragmentDoc = gql`
+    fragment featuredSectionFields on FeaturedSection {
+  header
+  titleRaw
+  descriptionRaw
+  button {
+    ...buttonFields
+  }
+  image {
+    ...customImageFields
+  }
+}
+    ${ButtonFieldsFragmentDoc}
+${CustomImageFieldsFragmentDoc}`;
+export const HeroSectionFieldsFragmentDoc = gql`
+    fragment heroSectionFields on HeroSection {
+  title
+  descriptionRaw
+  tooltipText
+}
+    `;
+export const ImageBoldTextLabelFieldsFragmentDoc = gql`
+    fragment imageBoldTextLabelFields on ImageBoldTextLabel {
+  boldText
+  label
+  image {
+    ...customImageFields
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+export const ImageGridItemFieldsFragmentDoc = gql`
+    fragment imageGridItemFields on ImageGridItem {
+  header
+  descriptionRaw
+  image {
+    ...customImageFields
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+export const ImageGridSectionFieldsFragmentDoc = gql`
+    fragment imageGridSectionFields on ImageGridSection {
+  backgroundImage {
+    ...customImageFields
+  }
+  items {
+    ...imageGridItemFields
+  }
+}
+    ${CustomImageFieldsFragmentDoc}
+${ImageGridItemFieldsFragmentDoc}`;
+export const LandManagementPracticeFieldsFragmentDoc = gql`
+    fragment landManagementPracticeFields on LandManagementPractice {
+  title
+  descriptionRaw
+  icon {
+    asset {
+      url
+    }
+  }
+}
+    `;
+export const MediaFieldsFragmentDoc = gql`
+    fragment mediaFields on Media {
+  title
+  author
+  date
+  image {
+    ...customImageFields
+  }
+  href
+  type
+}
+    ${CustomImageFieldsFragmentDoc}`;
+export const PageMetadataFieldsFragmentDoc = gql`
+    fragment pageMetadataFields on PageMetadata {
+  description
+  openGraphImage {
+    asset {
+      url
+    }
+  }
+}
+    `;
+export const ResourceFieldsFragmentDoc = gql`
+    fragment resourceFields on Resource {
+  _updatedAt
+  titleRaw
+  descriptionRaw
+  image {
+    ...customImageFields
+  }
+  button {
+    ...buttonFields
+  }
+  lastUpdated
+}
+    ${CustomImageFieldsFragmentDoc}
+${ButtonFieldsFragmentDoc}`;
+export const SeoFieldsFragmentDoc = gql`
+    fragment seoFields on Seo {
+  title
+  description
+  image {
+    asset {
+      url
+    }
+  }
+}
+    `;
 export const TagFieldsFragmentDoc = gql`
-  fragment tagFields on Tag {
-    name
-    color
-  }
-`;
+    fragment tagFields on Tag {
+  name
+  color
+}
+    `;
 export const TimelineItemFieldsFragmentDoc = gql`
-  fragment timelineItemFields on TimelineItem {
-    title
-    url
-    image {
-      asset {
-        url
-      }
-    }
-    tags {
-      ...tagFields
+    fragment timelineItemFields on TimelineItem {
+  title
+  url
+  image {
+    asset {
+      url
     }
   }
-  ${TagFieldsFragmentDoc}
-`;
+  tags {
+    ...tagFields
+  }
+}
+    ${TagFieldsFragmentDoc}`;
 export const AllBuyersPageDocument = gql`
-  query allBuyersPage {
-    allBuyersPage {
-      heroSection {
-        ...heroSectionFields
-      }
-      imageGridSection {
-        ...imageGridSectionFields
-      }
-      featuredSection {
-        ...featuredSectionFields
-      }
-      faqSection {
-        ...bottomBannerFields
-      }
-      footerButtonText
-      metadata {
-        ...pageMetadataFields
-      }
+    query allBuyersPage {
+  allBuyersPage {
+    heroSection {
+      ...heroSectionFields
+    }
+    imageGridSection {
+      ...imageGridSectionFields
+    }
+    featuredSection {
+      ...featuredSectionFields
+    }
+    faqSection {
+      ...bottomBannerFields
+    }
+    footerButtonText
+    metadata {
+      ...pageMetadataFields
     }
   }
-  ${HeroSectionFieldsFragmentDoc}
-  ${ImageGridSectionFieldsFragmentDoc}
-  ${FeaturedSectionFieldsFragmentDoc}
-  ${BottomBannerFieldsFragmentDoc}
-  ${PageMetadataFieldsFragmentDoc}
-`;
+}
+    ${HeroSectionFieldsFragmentDoc}
+${ImageGridSectionFieldsFragmentDoc}
+${FeaturedSectionFieldsFragmentDoc}
+${BottomBannerFieldsFragmentDoc}
+${PageMetadataFieldsFragmentDoc}`;
 
 /**
  * __useAllBuyersPageQuery__
@@ -6880,92 +6901,68 @@ export const AllBuyersPageDocument = gql`
  *   },
  * });
  */
-export function useAllBuyersPageQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    AllBuyersPageQuery,
-    AllBuyersPageQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<AllBuyersPageQuery, AllBuyersPageQueryVariables>(
-    AllBuyersPageDocument,
-    options,
-  );
-}
-export function useAllBuyersPageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    AllBuyersPageQuery,
-    AllBuyersPageQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<AllBuyersPageQuery, AllBuyersPageQueryVariables>(
-    AllBuyersPageDocument,
-    options,
-  );
-}
-export type AllBuyersPageQueryHookResult = ReturnType<
-  typeof useAllBuyersPageQuery
->;
-export type AllBuyersPageLazyQueryHookResult = ReturnType<
-  typeof useAllBuyersPageLazyQuery
->;
-export type AllBuyersPageQueryResult = Apollo.QueryResult<
-  AllBuyersPageQuery,
-  AllBuyersPageQueryVariables
->;
+export function useAllBuyersPageQuery(baseOptions?: Apollo.QueryHookOptions<AllBuyersPageQuery, AllBuyersPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllBuyersPageQuery, AllBuyersPageQueryVariables>(AllBuyersPageDocument, options);
+      }
+export function useAllBuyersPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllBuyersPageQuery, AllBuyersPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllBuyersPageQuery, AllBuyersPageQueryVariables>(AllBuyersPageDocument, options);
+        }
+export type AllBuyersPageQueryHookResult = ReturnType<typeof useAllBuyersPageQuery>;
+export type AllBuyersPageLazyQueryHookResult = ReturnType<typeof useAllBuyersPageLazyQuery>;
+export type AllBuyersPageQueryResult = Apollo.QueryResult<AllBuyersPageQuery, AllBuyersPageQueryVariables>;
 export const AllCreateCreditClassPageDocument = gql`
-  query allCreateCreditClassPage {
-    allCreateCreditClassPage {
-      heroSection {
-        ...heroSectionFields
-      }
-      stepCardSection {
-        title
-        descriptionRaw
-        stepCards {
-          ...stepCardFields
-        }
-      }
-      creditTypeSection {
-        title
-        subtitleTop
-        descriptionTopRaw
-        subtitleBottom
-        descriptionBottomRaw
-        institutionalCards {
-          ...cardFields
-        }
-        flexCreditCards {
-          ...cardFields
-        }
-      }
-      outcomeSection {
-        ...heroSectionFields
-      }
-      outcomes {
-        ...ecologicalOutcomeFields
-      }
-      resources {
-        ...resourceFields
-      }
-      bottomBanner {
-        ...bottomBannerFields
-      }
-      footerLink
-      metadata {
-        ...pageMetadataFields
+    query allCreateCreditClassPage {
+  allCreateCreditClassPage {
+    heroSection {
+      ...heroSectionFields
+    }
+    stepCardSection {
+      title
+      descriptionRaw
+      stepCards {
+        ...stepCardFields
       }
     }
+    creditTypeSection {
+      title
+      subtitleTop
+      descriptionTopRaw
+      subtitleBottom
+      descriptionBottomRaw
+      institutionalCards {
+        ...cardFields
+      }
+      flexCreditCards {
+        ...cardFields
+      }
+    }
+    outcomeSection {
+      ...heroSectionFields
+    }
+    outcomes {
+      ...ecologicalOutcomeFields
+    }
+    resources {
+      ...resourceFields
+    }
+    bottomBanner {
+      ...bottomBannerFields
+    }
+    footerLink
+    metadata {
+      ...pageMetadataFields
+    }
   }
-  ${HeroSectionFieldsFragmentDoc}
-  ${StepCardFieldsFragmentDoc}
-  ${CardFieldsFragmentDoc}
-  ${EcologicalOutcomeFieldsFragmentDoc}
-  ${ResourceFieldsFragmentDoc}
-  ${BottomBannerFieldsFragmentDoc}
-  ${PageMetadataFieldsFragmentDoc}
-`;
+}
+    ${HeroSectionFieldsFragmentDoc}
+${StepCardFieldsFragmentDoc}
+${CardFieldsFragmentDoc}
+${EcologicalOutcomeFieldsFragmentDoc}
+${ResourceFieldsFragmentDoc}
+${BottomBannerFieldsFragmentDoc}
+${PageMetadataFieldsFragmentDoc}`;
 
 /**
  * __useAllCreateCreditClassPageQuery__
@@ -6982,81 +6979,57 @@ export const AllCreateCreditClassPageDocument = gql`
  *   },
  * });
  */
-export function useAllCreateCreditClassPageQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    AllCreateCreditClassPageQuery,
-    AllCreateCreditClassPageQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<
-    AllCreateCreditClassPageQuery,
-    AllCreateCreditClassPageQueryVariables
-  >(AllCreateCreditClassPageDocument, options);
-}
-export function useAllCreateCreditClassPageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    AllCreateCreditClassPageQuery,
-    AllCreateCreditClassPageQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<
-    AllCreateCreditClassPageQuery,
-    AllCreateCreditClassPageQueryVariables
-  >(AllCreateCreditClassPageDocument, options);
-}
-export type AllCreateCreditClassPageQueryHookResult = ReturnType<
-  typeof useAllCreateCreditClassPageQuery
->;
-export type AllCreateCreditClassPageLazyQueryHookResult = ReturnType<
-  typeof useAllCreateCreditClassPageLazyQuery
->;
-export type AllCreateCreditClassPageQueryResult = Apollo.QueryResult<
-  AllCreateCreditClassPageQuery,
-  AllCreateCreditClassPageQueryVariables
->;
-export const AllCreateMethodologyPageDocument = gql`
-  query allCreateMethodologyPage {
-    allCreateMethodologyPage {
-      heroSection {
-        ...heroSectionFields
+export function useAllCreateCreditClassPageQuery(baseOptions?: Apollo.QueryHookOptions<AllCreateCreditClassPageQuery, AllCreateCreditClassPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllCreateCreditClassPageQuery, AllCreateCreditClassPageQueryVariables>(AllCreateCreditClassPageDocument, options);
       }
-      stepCardSection {
-        title
-        descriptionRaw
-        stepCards {
-          ...stepCardFields
+export function useAllCreateCreditClassPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllCreateCreditClassPageQuery, AllCreateCreditClassPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllCreateCreditClassPageQuery, AllCreateCreditClassPageQueryVariables>(AllCreateCreditClassPageDocument, options);
         }
-      }
-      outcomeSection {
-        ...heroSectionFields
-      }
-      outcomes {
-        ...ecologicalOutcomeFields
-      }
-      resources {
-        ...resourceFields
-      }
-      peerReviewSection {
-        ...bottomBannerFields
-      }
-      createCreditClassSection {
-        ...bottomBannerFields
-      }
-      footerLink
-      metadata {
-        ...pageMetadataFields
+export type AllCreateCreditClassPageQueryHookResult = ReturnType<typeof useAllCreateCreditClassPageQuery>;
+export type AllCreateCreditClassPageLazyQueryHookResult = ReturnType<typeof useAllCreateCreditClassPageLazyQuery>;
+export type AllCreateCreditClassPageQueryResult = Apollo.QueryResult<AllCreateCreditClassPageQuery, AllCreateCreditClassPageQueryVariables>;
+export const AllCreateMethodologyPageDocument = gql`
+    query allCreateMethodologyPage {
+  allCreateMethodologyPage {
+    heroSection {
+      ...heroSectionFields
+    }
+    stepCardSection {
+      title
+      descriptionRaw
+      stepCards {
+        ...stepCardFields
       }
     }
+    outcomeSection {
+      ...heroSectionFields
+    }
+    outcomes {
+      ...ecologicalOutcomeFields
+    }
+    resources {
+      ...resourceFields
+    }
+    peerReviewSection {
+      ...bottomBannerFields
+    }
+    createCreditClassSection {
+      ...bottomBannerFields
+    }
+    footerLink
+    metadata {
+      ...pageMetadataFields
+    }
   }
-  ${HeroSectionFieldsFragmentDoc}
-  ${StepCardFieldsFragmentDoc}
-  ${EcologicalOutcomeFieldsFragmentDoc}
-  ${ResourceFieldsFragmentDoc}
-  ${BottomBannerFieldsFragmentDoc}
-  ${PageMetadataFieldsFragmentDoc}
-`;
+}
+    ${HeroSectionFieldsFragmentDoc}
+${StepCardFieldsFragmentDoc}
+${EcologicalOutcomeFieldsFragmentDoc}
+${ResourceFieldsFragmentDoc}
+${BottomBannerFieldsFragmentDoc}
+${PageMetadataFieldsFragmentDoc}`;
 
 /**
  * __useAllCreateMethodologyPageQuery__
@@ -7073,131 +7046,107 @@ export const AllCreateMethodologyPageDocument = gql`
  *   },
  * });
  */
-export function useAllCreateMethodologyPageQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    AllCreateMethodologyPageQuery,
-    AllCreateMethodologyPageQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<
-    AllCreateMethodologyPageQuery,
-    AllCreateMethodologyPageQueryVariables
-  >(AllCreateMethodologyPageDocument, options);
-}
-export function useAllCreateMethodologyPageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    AllCreateMethodologyPageQuery,
-    AllCreateMethodologyPageQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<
-    AllCreateMethodologyPageQuery,
-    AllCreateMethodologyPageQueryVariables
-  >(AllCreateMethodologyPageDocument, options);
-}
-export type AllCreateMethodologyPageQueryHookResult = ReturnType<
-  typeof useAllCreateMethodologyPageQuery
->;
-export type AllCreateMethodologyPageLazyQueryHookResult = ReturnType<
-  typeof useAllCreateMethodologyPageLazyQuery
->;
-export type AllCreateMethodologyPageQueryResult = Apollo.QueryResult<
-  AllCreateMethodologyPageQuery,
-  AllCreateMethodologyPageQueryVariables
->;
-export const AllCreditClassDocument = gql`
-  query allCreditClass {
-    allCreditClass {
-      path
-      iri {
-        current
+export function useAllCreateMethodologyPageQuery(baseOptions?: Apollo.QueryHookOptions<AllCreateMethodologyPageQuery, AllCreateMethodologyPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllCreateMethodologyPageQuery, AllCreateMethodologyPageQueryVariables>(AllCreateMethodologyPageDocument, options);
       }
-      nameRaw
-      descriptionRaw
-      shortDescriptionRaw
+export function useAllCreateMethodologyPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllCreateMethodologyPageQuery, AllCreateMethodologyPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllCreateMethodologyPageQuery, AllCreateMethodologyPageQueryVariables>(AllCreateMethodologyPageDocument, options);
+        }
+export type AllCreateMethodologyPageQueryHookResult = ReturnType<typeof useAllCreateMethodologyPageQuery>;
+export type AllCreateMethodologyPageLazyQueryHookResult = ReturnType<typeof useAllCreateMethodologyPageLazyQuery>;
+export type AllCreateMethodologyPageQueryResult = Apollo.QueryResult<AllCreateMethodologyPageQuery, AllCreateMethodologyPageQueryVariables>;
+export const AllCreditClassDocument = gql`
+    query allCreditClass {
+  allCreditClass {
+    path
+    iri {
+      current
+    }
+    nameRaw
+    descriptionRaw
+    shortDescriptionRaw
+    image {
+      ...customImageFields
+    }
+    ecologicalImpact {
+      ...ecologicalImpactRelationFields
+    }
+    overviewCards {
+      ...cardFields
+    }
+    sdgs {
+      title
       image {
         ...customImageFields
       }
-      ecologicalImpact {
-        ...ecologicalImpactRelationFields
+    }
+    buyer {
+      heroSection {
+        ...heroSectionFields
       }
-      overviewCards {
-        ...cardFields
+      resources {
+        ...resourceFields
       }
-      sdgs {
+      videos {
+        ...mediaFields
+      }
+      projectsTitle
+      ctaButton {
+        ...buttonFields
+      }
+    }
+    landSteward {
+      heroSection {
+        ...heroSectionFields
+      }
+      resources {
+        ...resourceFields
+      }
+      videos {
+        ...mediaFields
+      }
+      projectsTitle
+      ctaButton {
+        ...buttonFields
+      }
+      featuredProjectIds
+      steps {
+        preTitle
         title
-        image {
-          ...customImageFields
+        descriptionRaw
+        stepCards {
+          ...stepCardFields
         }
       }
-      buyer {
-        heroSection {
-          ...heroSectionFields
-        }
-        resources {
-          ...resourceFields
-        }
-        videos {
-          ...mediaFields
-        }
-        projectsTitle
-        ctaButton {
-          ...buttonFields
-        }
-      }
-      landSteward {
-        heroSection {
-          ...heroSectionFields
-        }
-        resources {
-          ...resourceFields
-        }
-        videos {
-          ...mediaFields
-        }
-        projectsTitle
-        ctaButton {
-          ...buttonFields
-        }
-        featuredProjectIds
-        steps {
-          preTitle
-          title
+      connectSection {
+        title
+        links {
+          name
           descriptionRaw
-          stepCards {
-            ...stepCardFields
+          icon {
+            asset {
+              url
+            }
           }
-        }
-        connectSection {
-          title
-          links {
-            name
-            descriptionRaw
-            icon {
-              asset {
-                url
-              }
-            }
-            href {
-              ...linkFields
-            }
+          href {
+            ...linkFields
           }
         }
       }
     }
   }
-  ${CustomImageFieldsFragmentDoc}
-  ${EcologicalImpactRelationFieldsFragmentDoc}
-  ${CardFieldsFragmentDoc}
-  ${HeroSectionFieldsFragmentDoc}
-  ${ResourceFieldsFragmentDoc}
-  ${MediaFieldsFragmentDoc}
-  ${ButtonFieldsFragmentDoc}
-  ${StepCardFieldsFragmentDoc}
-  ${LinkFieldsFragmentDoc}
-`;
+}
+    ${CustomImageFieldsFragmentDoc}
+${EcologicalImpactRelationFieldsFragmentDoc}
+${CardFieldsFragmentDoc}
+${HeroSectionFieldsFragmentDoc}
+${ResourceFieldsFragmentDoc}
+${MediaFieldsFragmentDoc}
+${ButtonFieldsFragmentDoc}
+${StepCardFieldsFragmentDoc}
+${LinkFieldsFragmentDoc}`;
 
 /**
  * __useAllCreditClassQuery__
@@ -7214,65 +7163,45 @@ export const AllCreditClassDocument = gql`
  *   },
  * });
  */
-export function useAllCreditClassQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    AllCreditClassQuery,
-    AllCreditClassQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<AllCreditClassQuery, AllCreditClassQueryVariables>(
-    AllCreditClassDocument,
-    options,
-  );
-}
-export function useAllCreditClassLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    AllCreditClassQuery,
-    AllCreditClassQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<AllCreditClassQuery, AllCreditClassQueryVariables>(
-    AllCreditClassDocument,
-    options,
-  );
-}
-export type AllCreditClassQueryHookResult = ReturnType<
-  typeof useAllCreditClassQuery
->;
-export type AllCreditClassLazyQueryHookResult = ReturnType<
-  typeof useAllCreditClassLazyQuery
->;
-export type AllCreditClassQueryResult = Apollo.QueryResult<
-  AllCreditClassQuery,
-  AllCreditClassQueryVariables
->;
-export const AllHomePageDocument = gql`
-  query allHomePage {
-    allHomePage {
-      heroSection {
-        title
-        bodyRaw
-        button {
-          ...buttonFields
-        }
-        background {
-          ...customImageFields
-        }
-        icon {
-          ...customImageFields
-        }
+export function useAllCreditClassQuery(baseOptions?: Apollo.QueryHookOptions<AllCreditClassQuery, AllCreditClassQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllCreditClassQuery, AllCreditClassQueryVariables>(AllCreditClassDocument, options);
       }
-      bottomBanner {
-        ...bottomBannerFields
+export function useAllCreditClassLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllCreditClassQuery, AllCreditClassQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllCreditClassQuery, AllCreditClassQueryVariables>(AllCreditClassDocument, options);
+        }
+export type AllCreditClassQueryHookResult = ReturnType<typeof useAllCreditClassQuery>;
+export type AllCreditClassLazyQueryHookResult = ReturnType<typeof useAllCreditClassLazyQuery>;
+export type AllCreditClassQueryResult = Apollo.QueryResult<AllCreditClassQuery, AllCreditClassQueryVariables>;
+export const AllHomePageDocument = gql`
+    query allHomePage {
+  allHomePage {
+    seo {
+      ...seoFields
+    }
+    heroSection {
+      title
+      bodyRaw
+      button {
+        ...buttonFields
+      }
+      background {
+        ...customImageFields
+      }
+      icon {
+        ...customImageFields
       }
     }
+    bottomBanner {
+      ...bottomBannerFields
+    }
   }
-  ${ButtonFieldsFragmentDoc}
-  ${CustomImageFieldsFragmentDoc}
-  ${BottomBannerFieldsFragmentDoc}
-`;
+}
+    ${SeoFieldsFragmentDoc}
+${ButtonFieldsFragmentDoc}
+${CustomImageFieldsFragmentDoc}
+${BottomBannerFieldsFragmentDoc}`;
 
 /**
  * __useAllHomePageQuery__
@@ -7289,100 +7218,78 @@ export const AllHomePageDocument = gql`
  *   },
  * });
  */
-export function useAllHomePageQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    AllHomePageQuery,
-    AllHomePageQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<AllHomePageQuery, AllHomePageQueryVariables>(
-    AllHomePageDocument,
-    options,
-  );
-}
-export function useAllHomePageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    AllHomePageQuery,
-    AllHomePageQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<AllHomePageQuery, AllHomePageQueryVariables>(
-    AllHomePageDocument,
-    options,
-  );
-}
+export function useAllHomePageQuery(baseOptions?: Apollo.QueryHookOptions<AllHomePageQuery, AllHomePageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllHomePageQuery, AllHomePageQueryVariables>(AllHomePageDocument, options);
+      }
+export function useAllHomePageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllHomePageQuery, AllHomePageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllHomePageQuery, AllHomePageQueryVariables>(AllHomePageDocument, options);
+        }
 export type AllHomePageQueryHookResult = ReturnType<typeof useAllHomePageQuery>;
-export type AllHomePageLazyQueryHookResult = ReturnType<
-  typeof useAllHomePageLazyQuery
->;
-export type AllHomePageQueryResult = Apollo.QueryResult<
-  AllHomePageQuery,
-  AllHomePageQueryVariables
->;
+export type AllHomePageLazyQueryHookResult = ReturnType<typeof useAllHomePageLazyQuery>;
+export type AllHomePageQueryResult = Apollo.QueryResult<AllHomePageQuery, AllHomePageQueryVariables>;
 export const AllLandStewardsPageDocument = gql`
-  query allLandStewardsPage {
-    allLandStewardsPage {
-      heroSection {
-        ...heroSectionFields
-      }
-      designedForFarmersSection {
-        title
-        imageCards {
-          ...cardFields
-        }
-      }
-      joinFarmersSection {
-        title
-        left {
-          ...imageBoldTextLabelFields
-        }
-        right {
-          ...imageBoldTextLabelFields
-        }
-      }
-      practicesOutcomesSection {
-        title
-        note
-        practices {
-          ...landManagementPracticeFields
-        }
-        outcomes {
-          ...ecologicalOutcomeFields
-        }
-      }
-      timelineSection {
-        header
-        timelineItems {
-          ...timelineItemFields
-        }
-      }
-      featuredSection {
-        ...featuredSectionFields
-      }
-      moreQuestionsSection {
-        ...bottomBannerFields
-      }
-      footerButton {
-        ...buttonFields
-      }
-      metadata {
-        ...pageMetadataFields
+    query allLandStewardsPage {
+  allLandStewardsPage {
+    heroSection {
+      ...heroSectionFields
+    }
+    designedForFarmersSection {
+      title
+      imageCards {
+        ...cardFields
       }
     }
+    joinFarmersSection {
+      title
+      left {
+        ...imageBoldTextLabelFields
+      }
+      right {
+        ...imageBoldTextLabelFields
+      }
+    }
+    practicesOutcomesSection {
+      title
+      note
+      practices {
+        ...landManagementPracticeFields
+      }
+      outcomes {
+        ...ecologicalOutcomeFields
+      }
+    }
+    timelineSection {
+      header
+      timelineItems {
+        ...timelineItemFields
+      }
+    }
+    featuredSection {
+      ...featuredSectionFields
+    }
+    moreQuestionsSection {
+      ...bottomBannerFields
+    }
+    footerButton {
+      ...buttonFields
+    }
+    metadata {
+      ...pageMetadataFields
+    }
   }
-  ${HeroSectionFieldsFragmentDoc}
-  ${CardFieldsFragmentDoc}
-  ${ImageBoldTextLabelFieldsFragmentDoc}
-  ${LandManagementPracticeFieldsFragmentDoc}
-  ${EcologicalOutcomeFieldsFragmentDoc}
-  ${TimelineItemFieldsFragmentDoc}
-  ${FeaturedSectionFieldsFragmentDoc}
-  ${BottomBannerFieldsFragmentDoc}
-  ${ButtonFieldsFragmentDoc}
-  ${PageMetadataFieldsFragmentDoc}
-`;
+}
+    ${HeroSectionFieldsFragmentDoc}
+${CardFieldsFragmentDoc}
+${ImageBoldTextLabelFieldsFragmentDoc}
+${LandManagementPracticeFieldsFragmentDoc}
+${EcologicalOutcomeFieldsFragmentDoc}
+${TimelineItemFieldsFragmentDoc}
+${FeaturedSectionFieldsFragmentDoc}
+${BottomBannerFieldsFragmentDoc}
+${ButtonFieldsFragmentDoc}
+${PageMetadataFieldsFragmentDoc}`;
 
 /**
  * __useAllLandStewardsPageQuery__
@@ -7399,76 +7306,52 @@ export const AllLandStewardsPageDocument = gql`
  *   },
  * });
  */
-export function useAllLandStewardsPageQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    AllLandStewardsPageQuery,
-    AllLandStewardsPageQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<
-    AllLandStewardsPageQuery,
-    AllLandStewardsPageQueryVariables
-  >(AllLandStewardsPageDocument, options);
-}
-export function useAllLandStewardsPageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    AllLandStewardsPageQuery,
-    AllLandStewardsPageQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<
-    AllLandStewardsPageQuery,
-    AllLandStewardsPageQueryVariables
-  >(AllLandStewardsPageDocument, options);
-}
-export type AllLandStewardsPageQueryHookResult = ReturnType<
-  typeof useAllLandStewardsPageQuery
->;
-export type AllLandStewardsPageLazyQueryHookResult = ReturnType<
-  typeof useAllLandStewardsPageLazyQuery
->;
-export type AllLandStewardsPageQueryResult = Apollo.QueryResult<
-  AllLandStewardsPageQuery,
-  AllLandStewardsPageQueryVariables
->;
+export function useAllLandStewardsPageQuery(baseOptions?: Apollo.QueryHookOptions<AllLandStewardsPageQuery, AllLandStewardsPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllLandStewardsPageQuery, AllLandStewardsPageQueryVariables>(AllLandStewardsPageDocument, options);
+      }
+export function useAllLandStewardsPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllLandStewardsPageQuery, AllLandStewardsPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllLandStewardsPageQuery, AllLandStewardsPageQueryVariables>(AllLandStewardsPageDocument, options);
+        }
+export type AllLandStewardsPageQueryHookResult = ReturnType<typeof useAllLandStewardsPageQuery>;
+export type AllLandStewardsPageLazyQueryHookResult = ReturnType<typeof useAllLandStewardsPageLazyQuery>;
+export type AllLandStewardsPageQueryResult = Apollo.QueryResult<AllLandStewardsPageQuery, AllLandStewardsPageQueryVariables>;
 export const AllMethodologyDocument = gql`
-  query allMethodology {
-    allMethodology {
-      path
-      nameRaw
-      descriptionRaw
-      steps {
-        ...basicStepCardSectionFields
+    query allMethodology {
+  allMethodology {
+    path
+    nameRaw
+    descriptionRaw
+    steps {
+      ...basicStepCardSectionFields
+    }
+    documentation {
+      title
+      button {
+        ...buttonFields
       }
-      documentation {
-        title
-        button {
-          ...buttonFields
-        }
-        image {
-          ...customImageFields
-        }
-      }
-      ecologicalImpact {
-        ...ecologicalImpactRelationFields
-      }
-      resources {
-        ...resourceFields
-      }
-      bottomSection {
-        ...heroSectionFields
+      image {
+        ...customImageFields
       }
     }
+    ecologicalImpact {
+      ...ecologicalImpactRelationFields
+    }
+    resources {
+      ...resourceFields
+    }
+    bottomSection {
+      ...heroSectionFields
+    }
   }
-  ${BasicStepCardSectionFieldsFragmentDoc}
-  ${ButtonFieldsFragmentDoc}
-  ${CustomImageFieldsFragmentDoc}
-  ${EcologicalImpactRelationFieldsFragmentDoc}
-  ${ResourceFieldsFragmentDoc}
-  ${HeroSectionFieldsFragmentDoc}
-`;
+}
+    ${BasicStepCardSectionFieldsFragmentDoc}
+${ButtonFieldsFragmentDoc}
+${CustomImageFieldsFragmentDoc}
+${EcologicalImpactRelationFieldsFragmentDoc}
+${ResourceFieldsFragmentDoc}
+${HeroSectionFieldsFragmentDoc}`;
 
 /**
  * __useAllMethodologyQuery__
@@ -7485,65 +7368,41 @@ export const AllMethodologyDocument = gql`
  *   },
  * });
  */
-export function useAllMethodologyQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    AllMethodologyQuery,
-    AllMethodologyQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<AllMethodologyQuery, AllMethodologyQueryVariables>(
-    AllMethodologyDocument,
-    options,
-  );
-}
-export function useAllMethodologyLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    AllMethodologyQuery,
-    AllMethodologyQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<AllMethodologyQuery, AllMethodologyQueryVariables>(
-    AllMethodologyDocument,
-    options,
-  );
-}
-export type AllMethodologyQueryHookResult = ReturnType<
-  typeof useAllMethodologyQuery
->;
-export type AllMethodologyLazyQueryHookResult = ReturnType<
-  typeof useAllMethodologyLazyQuery
->;
-export type AllMethodologyQueryResult = Apollo.QueryResult<
-  AllMethodologyQuery,
-  AllMethodologyQueryVariables
->;
+export function useAllMethodologyQuery(baseOptions?: Apollo.QueryHookOptions<AllMethodologyQuery, AllMethodologyQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllMethodologyQuery, AllMethodologyQueryVariables>(AllMethodologyDocument, options);
+      }
+export function useAllMethodologyLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllMethodologyQuery, AllMethodologyQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllMethodologyQuery, AllMethodologyQueryVariables>(AllMethodologyDocument, options);
+        }
+export type AllMethodologyQueryHookResult = ReturnType<typeof useAllMethodologyQuery>;
+export type AllMethodologyLazyQueryHookResult = ReturnType<typeof useAllMethodologyLazyQuery>;
+export type AllMethodologyQueryResult = Apollo.QueryResult<AllMethodologyQuery, AllMethodologyQueryVariables>;
 export const AllMethodologyReviewProcessPageDocument = gql`
-  query allMethodologyReviewProcessPage {
-    allMethodologyReviewProcessPage {
-      heroSection {
-        ...heroSectionFields
-      }
-      internalReviewSection {
-        ...reviewSectionFields
-      }
-      externalReviewSection {
-        ...reviewSectionFields
-      }
-      bottomBanner {
-        ...bottomBannerFields
-      }
-      metadata {
-        ...pageMetadataFields
-      }
+    query allMethodologyReviewProcessPage {
+  allMethodologyReviewProcessPage {
+    heroSection {
+      ...heroSectionFields
+    }
+    internalReviewSection {
+      ...reviewSectionFields
+    }
+    externalReviewSection {
+      ...reviewSectionFields
+    }
+    bottomBanner {
+      ...bottomBannerFields
+    }
+    metadata {
+      ...pageMetadataFields
     }
   }
-  ${HeroSectionFieldsFragmentDoc}
-  ${ReviewSectionFieldsFragmentDoc}
-  ${BottomBannerFieldsFragmentDoc}
-  ${PageMetadataFieldsFragmentDoc}
-`;
+}
+    ${HeroSectionFieldsFragmentDoc}
+${ReviewSectionFieldsFragmentDoc}
+${BottomBannerFieldsFragmentDoc}
+${PageMetadataFieldsFragmentDoc}`;
 
 /**
  * __useAllMethodologyReviewProcessPageQuery__
@@ -7560,55 +7419,31 @@ export const AllMethodologyReviewProcessPageDocument = gql`
  *   },
  * });
  */
-export function useAllMethodologyReviewProcessPageQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    AllMethodologyReviewProcessPageQuery,
-    AllMethodologyReviewProcessPageQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<
-    AllMethodologyReviewProcessPageQuery,
-    AllMethodologyReviewProcessPageQueryVariables
-  >(AllMethodologyReviewProcessPageDocument, options);
-}
-export function useAllMethodologyReviewProcessPageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    AllMethodologyReviewProcessPageQuery,
-    AllMethodologyReviewProcessPageQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<
-    AllMethodologyReviewProcessPageQuery,
-    AllMethodologyReviewProcessPageQueryVariables
-  >(AllMethodologyReviewProcessPageDocument, options);
-}
-export type AllMethodologyReviewProcessPageQueryHookResult = ReturnType<
-  typeof useAllMethodologyReviewProcessPageQuery
->;
-export type AllMethodologyReviewProcessPageLazyQueryHookResult = ReturnType<
-  typeof useAllMethodologyReviewProcessPageLazyQuery
->;
-export type AllMethodologyReviewProcessPageQueryResult = Apollo.QueryResult<
-  AllMethodologyReviewProcessPageQuery,
-  AllMethodologyReviewProcessPageQueryVariables
->;
+export function useAllMethodologyReviewProcessPageQuery(baseOptions?: Apollo.QueryHookOptions<AllMethodologyReviewProcessPageQuery, AllMethodologyReviewProcessPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllMethodologyReviewProcessPageQuery, AllMethodologyReviewProcessPageQueryVariables>(AllMethodologyReviewProcessPageDocument, options);
+      }
+export function useAllMethodologyReviewProcessPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllMethodologyReviewProcessPageQuery, AllMethodologyReviewProcessPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllMethodologyReviewProcessPageQuery, AllMethodologyReviewProcessPageQueryVariables>(AllMethodologyReviewProcessPageDocument, options);
+        }
+export type AllMethodologyReviewProcessPageQueryHookResult = ReturnType<typeof useAllMethodologyReviewProcessPageQuery>;
+export type AllMethodologyReviewProcessPageLazyQueryHookResult = ReturnType<typeof useAllMethodologyReviewProcessPageLazyQuery>;
+export type AllMethodologyReviewProcessPageQueryResult = Apollo.QueryResult<AllMethodologyReviewProcessPageQuery, AllMethodologyReviewProcessPageQueryVariables>;
 export const EcologicalImpactByIriDocument = gql`
-  query EcologicalImpactByIri($iris: [String!]) {
-    allEcologicalImpact(where: { iri: { current: { in: $iris } } }) {
-      name
-      descriptionRaw
-      image {
-        ...customImageFields
-      }
-      standard {
-        ...customImageFields
-      }
+    query EcologicalImpactByIri($iris: [String!]) {
+  allEcologicalImpact(where: {iri: {current: {in: $iris}}}) {
+    name
+    descriptionRaw
+    image {
+      ...customImageFields
+    }
+    standard {
+      ...customImageFields
     }
   }
-  ${CustomImageFieldsFragmentDoc}
-`;
+}
+    ${CustomImageFieldsFragmentDoc}`;
 
 /**
  * __useEcologicalImpactByIriQuery__
@@ -7626,51 +7461,27 @@ export const EcologicalImpactByIriDocument = gql`
  *   },
  * });
  */
-export function useEcologicalImpactByIriQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    EcologicalImpactByIriQuery,
-    EcologicalImpactByIriQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<
-    EcologicalImpactByIriQuery,
-    EcologicalImpactByIriQueryVariables
-  >(EcologicalImpactByIriDocument, options);
-}
-export function useEcologicalImpactByIriLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    EcologicalImpactByIriQuery,
-    EcologicalImpactByIriQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<
-    EcologicalImpactByIriQuery,
-    EcologicalImpactByIriQueryVariables
-  >(EcologicalImpactByIriDocument, options);
-}
-export type EcologicalImpactByIriQueryHookResult = ReturnType<
-  typeof useEcologicalImpactByIriQuery
->;
-export type EcologicalImpactByIriLazyQueryHookResult = ReturnType<
-  typeof useEcologicalImpactByIriLazyQuery
->;
-export type EcologicalImpactByIriQueryResult = Apollo.QueryResult<
-  EcologicalImpactByIriQuery,
-  EcologicalImpactByIriQueryVariables
->;
-export const SdgByIriDocument = gql`
-  query SdgByIri($iris: [String!]) {
-    allSdg(where: { iri: { current: { in: $iris } } }) {
-      title
-      image {
-        ...customImageFields
+export function useEcologicalImpactByIriQuery(baseOptions?: Apollo.QueryHookOptions<EcologicalImpactByIriQuery, EcologicalImpactByIriQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<EcologicalImpactByIriQuery, EcologicalImpactByIriQueryVariables>(EcologicalImpactByIriDocument, options);
       }
+export function useEcologicalImpactByIriLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<EcologicalImpactByIriQuery, EcologicalImpactByIriQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<EcologicalImpactByIriQuery, EcologicalImpactByIriQueryVariables>(EcologicalImpactByIriDocument, options);
+        }
+export type EcologicalImpactByIriQueryHookResult = ReturnType<typeof useEcologicalImpactByIriQuery>;
+export type EcologicalImpactByIriLazyQueryHookResult = ReturnType<typeof useEcologicalImpactByIriLazyQuery>;
+export type EcologicalImpactByIriQueryResult = Apollo.QueryResult<EcologicalImpactByIriQuery, EcologicalImpactByIriQueryVariables>;
+export const SdgByIriDocument = gql`
+    query SdgByIri($iris: [String!]) {
+  allSdg(where: {iri: {current: {in: $iris}}}) {
+    title
+    image {
+      ...customImageFields
     }
   }
-  ${CustomImageFieldsFragmentDoc}
-`;
+}
+    ${CustomImageFieldsFragmentDoc}`;
 
 /**
  * __useSdgByIriQuery__
@@ -7688,32 +7499,14 @@ export const SdgByIriDocument = gql`
  *   },
  * });
  */
-export function useSdgByIriQuery(
-  baseOptions?: Apollo.QueryHookOptions<SdgByIriQuery, SdgByIriQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<SdgByIriQuery, SdgByIriQueryVariables>(
-    SdgByIriDocument,
-    options,
-  );
-}
-export function useSdgByIriLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    SdgByIriQuery,
-    SdgByIriQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<SdgByIriQuery, SdgByIriQueryVariables>(
-    SdgByIriDocument,
-    options,
-  );
-}
+export function useSdgByIriQuery(baseOptions?: Apollo.QueryHookOptions<SdgByIriQuery, SdgByIriQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SdgByIriQuery, SdgByIriQueryVariables>(SdgByIriDocument, options);
+      }
+export function useSdgByIriLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SdgByIriQuery, SdgByIriQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SdgByIriQuery, SdgByIriQueryVariables>(SdgByIriDocument, options);
+        }
 export type SdgByIriQueryHookResult = ReturnType<typeof useSdgByIriQuery>;
-export type SdgByIriLazyQueryHookResult = ReturnType<
-  typeof useSdgByIriLazyQuery
->;
-export type SdgByIriQueryResult = Apollo.QueryResult<
-  SdgByIriQuery,
-  SdgByIriQueryVariables
->;
+export type SdgByIriLazyQueryHookResult = ReturnType<typeof useSdgByIriLazyQuery>;
+export type SdgByIriQueryResult = Apollo.QueryResult<SdgByIriQuery, SdgByIriQueryVariables>;

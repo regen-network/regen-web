@@ -146,8 +146,13 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
 
   const isDisableAutoRetire = selectedSellOrder?.disableAutoRetire;
 
+  const handleClose = (): void => {
+    setSelectedSellOrder(undefined);
+    onClose();
+  };
+
   return (
-    <Modal open={open} onClose={onClose}>
+    <Modal open={open} onClose={handleClose}>
       <div className={styles.root}>
         <Title
           variant="h3"
@@ -213,6 +218,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
             try {
               await handleBuyCreditsSubmit(values, onSubmit, selectedSellOrder);
               setSubmitting(false);
+              setSelectedSellOrder(undefined);
             } catch (e) {
               setSubmitting(false);
             }
@@ -239,7 +245,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                     sx={{ mb: theme.spacing(10.5) }}
                     disabled={
                       !!initialValues?.sellOrderId ||
-                      sellOrdersOptions.length === 1
+                      sellOrdersOptions?.length === 1
                     }
                     native={false}
                   />
@@ -381,7 +387,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       description={
                         <>
                           {
-                            'These credits will be a tradable asset. They can be retired later via Regen Registry.'
+                            'These credits will be a tradable asset. They can be retired later via Regen Marketplace.'
                           }
                           <DynamicLink
                             href="https://guides.regen.network/guides/regen-marketplace/ecocredits/buy-ecocredits/by-project#5.-select-credit-retirement-options"
@@ -501,7 +507,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                 </Form>
                 <Submit
                   isSubmitting={isSubmitting}
-                  onClose={onClose}
+                  onClose={handleClose}
                   status={status}
                   isValid={isValid}
                   submitCount={submitCount}

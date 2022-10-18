@@ -77,6 +77,20 @@ describe('roundFloatNumber', () => {
     // Then
     expect(result).toEqual(expectedResult);
   });
+  test('Should round number to 1 decimal', () => {
+    // Given
+    const number = 3.599999999;
+    const expectedResult = 3.6;
+    const options: RoundFloatNumberParamsOptions = {
+      decimals: 6,
+    };
+
+    // When
+    const result = roundFloatNumber(number, options);
+
+    // Then
+    expect(result).toEqual(expectedResult);
+  });
 });
 
 describe('floorFloatNumber', () => {

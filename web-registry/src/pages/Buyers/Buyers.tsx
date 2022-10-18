@@ -105,7 +105,9 @@ const BuyersPage = (): JSX.Element => {
           <MoreProjectsSection
             classes={{ title: styles.title }}
             title={'Projects'}
-            projects={projectsData?.allProjects?.nodes}
+            projects={projectsData?.allProjects?.nodes.filter(project => {
+              return !!project?.onChainId || !!project?.handle;
+            })}
           />
         </div>
       )}

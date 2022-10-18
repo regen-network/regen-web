@@ -24,13 +24,15 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+export interface ItemValue {
+  name: string | number;
+  url?: string;
+  icon?: React.ReactNode;
+}
+
 export interface Item {
   label: string;
-  value: {
-    name: string | number;
-    url?: string;
-    icon?: React.ReactNode;
-  };
+  value: ItemValue | ItemValue[];
   color?: string;
 }
 
@@ -63,26 +65,41 @@ export const CardItem: React.FC<CardItemProps> = ({
   value,
   linkComponent: LinkComponent,
 }) => {
+  const renderValue = (value: ItemValue): React.ReactNode => (
+    <Subtitle
+      key={value.name}
+      size="lg"
+      mobileSize="sm"
+      color={color || 'info.dark'}
+    >
+      {value.icon && value.icon}
+      {value.url ? (
+        <LinkComponent
+          sx={{ color: 'secondary.main' }}
+          href={value.url}
+          target={value.url.startsWith('/') ? '_self' : '_blank'}
+        >
+          {value.name}
+        </LinkComponent>
+      ) : (
+        <>{value.name}</>
+      )}
+    </Subtitle>
+  );
+
+  const renderItemValue = (value: ItemValue | ItemValue[]): React.ReactNode => {
+    if (Array.isArray(value))
+      return <>{value.map(item => renderValue(item as ItemValue))}</>;
+
+    return renderValue(value as ItemValue);
+  };
+
   return (
     <Box sx={{ pt: 5 }}>
       <Label size="sm" sx={{ pb: [3, 2.25], color }}>
         {label}
       </Label>
-
-      <Subtitle size="lg" mobileSize="sm" color={color || 'info.dark'}>
-        {value.icon && value.icon}
-        {value.url ? (
-          <LinkComponent
-            sx={{ color: 'secondary.main' }}
-            href={value.url}
-            target={value.url.startsWith('/') ? '_self' : '_blank'}
-          >
-            {value.name}
-          </LinkComponent>
-        ) : (
-          <>{value.name}</>
-        )}
-      </Subtitle>
+      {renderItemValue(value)}
     </Box>
   );
 };

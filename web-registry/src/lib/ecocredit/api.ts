@@ -149,6 +149,19 @@ const getCreditsWithData = async ({
   );
 };
 
+export const getProjectName = async (
+  projectId: string,
+): Promise<string | undefined> => {
+  const project = await getProject(projectId);
+  let metadata;
+  if (project?.project?.metadata.length) {
+    try {
+      metadata = await getMetadata(project.project.metadata);
+    } catch (error) {}
+  }
+  return metadata?.['schema:name'];
+};
+
 type GetEcocreditsForAccountParams = {
   address: string;
   loadedCredits: BatchInfoWithBalance[];

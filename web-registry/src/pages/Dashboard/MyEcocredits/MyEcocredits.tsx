@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SxProps, useTheme } from '@mui/material';
 import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
@@ -28,7 +28,7 @@ import {
 } from 'web-components/lib/components/modal/CreditSendModal';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
-import { Item } from 'web-components/lib/components/modal/TxModal';
+import { Item, ItemValue } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
 import {
   DEFAULT_ROWS_PER_PAGE,
@@ -36,7 +36,9 @@ import {
 } from 'web-components/lib/components/table/ActionsTable';
 import type { Theme } from 'web-components/lib/theme/muiTheme';
 
+import { CreditItemEventTake, EventTx } from 'types/ledger/base';
 import { getHashUrl } from 'lib/block-explorer';
+import { getProjectName } from 'lib/ecocredit/api';
 import { chainInfo } from 'lib/wallet';
 
 import { Link } from 'components/atoms';
@@ -97,6 +99,11 @@ export const MyEcocredits = (): JSX.Element => {
   const [txModalHeader, setTxModalHeader] = useState<string | undefined>();
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
   const [txButtonTitle, setTxButtonTitle] = useState<string | undefined>();
+  const [projectsResultTake, setProjectsResultTake] = useState<
+    ItemValue | ItemValue[] | undefined
+  >();
+  const [cardItemsTakeDone, setCardItemsTakeDone] = useState<boolean>(false);
+
   const navigate = useNavigate();
   const track = useTrack();
 
@@ -113,6 +120,8 @@ export const MyEcocredits = (): JSX.Element => {
 
   const handleTxModalClose = (): void => {
     setCardItems(undefined);
+    setProjectsResultTake(undefined);
+    setCardItemsTakeDone(false);
     setTxModalTitle(undefined);
     setTxModalHeader(undefined);
     setTxButtonTitle(undefined);
@@ -148,6 +157,83 @@ export const MyEcocredits = (): JSX.Element => {
     error,
     setError,
   } = useMsgClient(handleTxQueued, handleTxDelivered, handleError);
+
+  useEffect(() => {
+    if (
+      projectsResultTake ||
+      !cardItems ||
+      !deliverTxResponse ||
+      !deliverTxResponse.rawLog
+    )
+      return;
+
+    const rawLog = JSON.parse(deliverTxResponse.rawLog);
+    const rawEventTake: EventTx = rawLog[0].events.find((event: EventTx) =>
+      event.type.includes('EventTake'),
+    );
+    if (!rawEventTake) return;
+
+    const creditsAttribute = rawEventTake.attributes.find(
+      attribute => attribute.key === 'credits',
+    );
+    if (!creditsAttribute) return;
+
+    const creditsFromTake = JSON.parse(creditsAttribute.value);
+    const projectsFromBatchesTake: string[] = creditsFromTake.map(
+      (credit: CreditItemEventTake) =>
+        credit.batch_denom.substring(0, credit.batch_denom.indexOf('-', 4)),
+    );
+
+    // projects ids
+    const projectsFromTake = [...new Set(projectsFromBatchesTake)];
+
+    const prepareProject = async (projectId: string): Promise<ItemValue> => ({
+      name: (await getProjectName(projectId)) ?? projectId,
+      url: `/projects/${projectId}`,
+    });
+
+    const prepareCardItemsBasketTake = (projectIds: string[]): void => {
+      if (projectIds.length === 1) {
+        prepareProject(projectIds[0]).then(setProjectsResultTake);
+      } else {
+        Promise.all(projectIds.map(prepareProject)).then(setProjectsResultTake);
+      }
+    };
+
+    prepareCardItemsBasketTake(projectsFromTake);
+  }, [
+    projectsResultTake,
+    deliverTxResponse,
+    cardItems,
+    setCardItems,
+    setProjectsResultTake,
+  ]);
+
+  useEffect(() => {
+    if (!projectsResultTake || !cardItems || cardItemsTakeDone) return;
+
+    if (Array.isArray(projectsResultTake)) {
+      setCardItems([
+        ...cardItems.slice(0, 1),
+        { label: 'projects', value: [...projectsResultTake] },
+        ...cardItems.slice(1),
+      ]);
+    } else {
+      setCardItems([
+        ...cardItems.slice(0, 1),
+        { label: 'project', value: { ...projectsResultTake } },
+        ...cardItems.slice(1),
+      ]);
+    }
+
+    setCardItemsTakeDone(true);
+  }, [
+    projectsResultTake,
+    cardItems,
+    setCardItems,
+    cardItemsTakeDone,
+    setCardItemsTakeDone,
+  ]);
 
   const theme = useTheme();
   const baskets = useQueryBaskets();

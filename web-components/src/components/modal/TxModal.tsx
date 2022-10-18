@@ -1,10 +1,11 @@
-import React from 'react';
-import { Box, Theme } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Collapse, Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { SxProps } from '@mui/system';
 
 import { truncate } from '../../utils/truncate';
 import OutlinedButton from '../buttons/OutlinedButton';
+import { TextButton } from '../buttons/TextButton';
 import Card from '../cards/Card';
 import { LinkItem } from '../footer/footer-new';
 import Modal, { RegenModalProps } from '../modal';
@@ -55,17 +56,18 @@ export interface TxModalProps extends RegenModalProps {
   title?: string;
 }
 
-interface CardItemProps extends Item {
+interface CardItemValueProps {
+  value: ItemValue;
+  color?: string;
   linkComponent: LinkComponentProp;
 }
 
-export const CardItem: React.FC<CardItemProps> = ({
-  color,
-  label,
+const CardItemValue = ({
   value,
+  color,
   linkComponent: LinkComponent,
-}) => {
-  const renderValue = (value: ItemValue): React.ReactNode => (
+}: CardItemValueProps): JSX.Element => {
+  return (
     <Subtitle
       key={value.name}
       size="lg"
@@ -86,20 +88,85 @@ export const CardItem: React.FC<CardItemProps> = ({
       )}
     </Subtitle>
   );
+};
 
-  const renderItemValue = (value: ItemValue | ItemValue[]): React.ReactNode => {
-    if (Array.isArray(value))
-      return <>{value.map(item => renderValue(item as ItemValue))}</>;
+interface CardItemValueListProps {
+  value: ItemValue[];
+  color?: string;
+  linkComponent: LinkComponentProp;
+}
 
-    return renderValue(value as ItemValue);
-  };
+const CardItemValueList = (props: CardItemValueListProps): JSX.Element => {
+  const [expanded, setExpanded] = useState<boolean>(false);
 
+  if (props.value.length <= 2) {
+    return (
+      <>
+        {props.value.map(row => (
+          <CardItemValue {...props} value={row} />
+        ))}
+      </>
+    );
+  }
+
+  const alwaysVisible = props.value.slice(0, 2);
+  const underCollapse = props.value.slice(2);
+
+  return (
+    <>
+      {alwaysVisible.map(row => (
+        <CardItemValue {...props} value={row} />
+      ))}
+
+      <TextButton
+        textSize="xxs"
+        onClick={() => setExpanded(!expanded)}
+        sx={{
+          px: [0],
+          ':hover': { bgcolor: 'transparent !important' },
+        }}
+      >
+        {expanded ? '- see less' : '+ see more'}
+      </TextButton>
+
+      <Collapse in={expanded}>
+        {underCollapse.map(row => (
+          <CardItemValue {...props} value={row} />
+        ))}
+      </Collapse>
+    </>
+  );
+};
+
+interface CardItemProps extends Item {
+  linkComponent: LinkComponentProp;
+}
+
+export const CardItem: React.FC<CardItemProps> = ({
+  color,
+  label,
+  value,
+  linkComponent,
+}) => {
   return (
     <Box sx={{ pt: 5 }}>
       <Label size="sm" sx={{ pb: [3, 2.25], color }}>
         {label}
       </Label>
-      {renderItemValue(value)}
+
+      {Array.isArray(value) ? (
+        <CardItemValueList
+          value={value}
+          color={color}
+          linkComponent={linkComponent}
+        />
+      ) : (
+        <CardItemValue
+          value={value}
+          color={color}
+          linkComponent={linkComponent}
+        />
+      )}
     </Box>
   );
 };

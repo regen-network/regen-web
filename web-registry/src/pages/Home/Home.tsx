@@ -6,6 +6,7 @@ import { BlockContent } from 'web-components/lib/components/block-content';
 import { Loading } from 'web-components/lib/components/loading';
 import Modal from 'web-components/lib/components/modal';
 import Section from 'web-components/lib/components/section';
+import SEO from 'web-components/lib/components/seo';
 import { Body, Title } from 'web-components/lib/components/typography';
 
 import { usePaginatedBatches } from 'hooks/batches/usePaginatedBatches';
@@ -36,6 +37,7 @@ const Home: React.FC = () => {
 
   const content = data?.allHomePage?.[0];
   const heroSection = content?.heroSection;
+  const seo = content?.seo;
 
   const creditClassesContent = creditClassData?.allCreditClass;
 
@@ -55,6 +57,17 @@ const Home: React.FC = () => {
 
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
+      <SEO
+        title={seo?.title || ''}
+        description={seo?.description || ''}
+        imageUrl={seo?.image?.asset?.url || ''} // TODO: specify dimensions here. See: https://www.sanity.io/docs/image-urls
+        siteMetadata={{
+          title: seo?.title || '',
+          description: seo?.description || '',
+          author: 'Regen Network Development, Inc.',
+          siteUrl: window.location.href,
+        }}
+      />
       <BackgroundImgSection
         img={heroSection?.background?.image?.asset?.url || ''}
         linearGradient="linear-gradient(203.09deg, #000000 45.49%, #5E9078 92.1%);"

@@ -75,6 +75,13 @@ const useBasketPutSubmit = ({
             },
           },
           {
+            label: 'credit batch id',
+            value: {
+              name: credits[basketPutOpen].denom,
+              url: `/credit-batches/${credits[basketPutOpen].denom}`,
+            },
+          },
+          {
             label: 'amount',
             value: { name: amount },
           },

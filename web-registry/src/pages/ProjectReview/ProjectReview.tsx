@@ -141,7 +141,7 @@ export const ProjectReview: React.FC = () => {
         onEditClick={() => navigate(`${editPath}/location`)}
       >
         <ItemDisplay>
-          {metadata?.['schema:location']?.['geojson:place_name']}
+          {metadata?.['schema:location']?.['place_name']}
         </ItemDisplay>
         <ItemDisplay name="Jurisdiction">{jurisdiction}</ItemDisplay>
       </ReviewCard>

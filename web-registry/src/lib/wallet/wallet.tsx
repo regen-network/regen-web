@@ -56,6 +56,10 @@ export const WalletProvider: React.FC = ({ children }) => {
   const [walletConnectUri, setWalletConnectUri] = useState<
     string | undefined
   >();
+  console.log(
+    '🚀 ~ file: wallet.tsx ~ line 57 ~ walletConnectUri',
+    walletConnectUri,
+  );
 
   const onQrCloseCallback = useRef<() => void>();
 

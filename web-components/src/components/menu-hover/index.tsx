@@ -44,7 +44,7 @@ const MenuHover = ({
   };
 
   const togglePopover = (): void => {
-    setOpenedPopover(openedPopover => !openedPopover);
+    setOpenedPopover(true);
   };
 
   return (

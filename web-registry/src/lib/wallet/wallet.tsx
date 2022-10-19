@@ -165,6 +165,7 @@ export const WalletProvider: React.FC = ({ children }) => {
     }
   }, [walletConnectUri, onQrCloseCallback]);
 
+  // Finalize wallet initialization on connect event
   useEffect(() => {
     const onWalletConnectEvent = async (): Promise<void> => {
       const walletClient = await walletConfigRef.current?.getClient({

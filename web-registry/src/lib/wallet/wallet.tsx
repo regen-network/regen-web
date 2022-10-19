@@ -103,20 +103,25 @@ export const WalletProvider: React.FC = ({ children }) => {
         setWalletConnectUri,
         onQrCloseCallback,
       });
-      if (walletConnect.connected) {
-        await walletConnect.killSession();
-      }
       if (!walletConnect.connected) {
         await walletConnect.createSession();
       }
       setWalletConnect(walletConnect);
     }
 
+    const walletClient = await walletConfig?.getClient({
+      chainInfo,
+      walletConnect,
+    });
+
+    if (
+      walletConfig?.type === WalletType.WalletConnectKeplr &&
+      walletConnect?.connected
+    ) {
+      finalizeConnection({ setWallet, walletClient, walletConfig });
+    }
+
     if (walletConfig?.type === WalletType.Keplr) {
-      const walletClient = await walletConfig?.getClient({
-        chainInfo,
-        walletConnect,
-      });
       await walletClient?.experimentalSuggestChain(chainInfo);
       finalizeConnection({ setWallet, walletClient, walletConfig });
     }

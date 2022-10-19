@@ -116,18 +116,6 @@ export const BuySellOrderFlow = ({
   const errorEnum = findErrorByCodeEnum({ errorCode: error });
   const ErrorIcon = errorsMapping[errorEnum].icon;
 
-  const buySellOrderSubmit = useBuySellOrderSubmit({
-    accountAddress,
-    signAndBroadcast,
-    setCardItems,
-    setTxButtonTitle,
-    setTxModalHeader,
-    setTxModalTitle,
-    buttonTitle: VIEW_ECOCREDITS,
-    refetchSellOrders,
-    onSubmitCallback,
-  });
-
   const project = useMemo(
     () => ({
       id: selectedProject?.id.toString() ?? '',
@@ -137,6 +125,28 @@ export const BuySellOrderFlow = ({
     }),
     [selectedProject, projectUiSellOrdersInfo, accountAddress],
   );
+
+  const projectData = useMemo(() => {
+    if (!selectedProject || !selectedProject.id) return;
+    const projectId = selectedProject.id;
+    return {
+      id: projectId,
+      name: selectedProject.name ?? projectId,
+    };
+  }, [selectedProject]);
+
+  const buySellOrderSubmit = useBuySellOrderSubmit({
+    accountAddress,
+    project: projectData,
+    signAndBroadcast,
+    setCardItems,
+    setTxButtonTitle,
+    setTxModalHeader,
+    setTxModalTitle,
+    buttonTitle: VIEW_ECOCREDITS,
+    refetchSellOrders,
+    onSubmitCallback,
+  });
 
   useEffect(() => {
     if (isFlowStarted && selectedProject && accountAddress) {

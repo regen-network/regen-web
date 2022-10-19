@@ -27,9 +27,15 @@ import {
 } from '../Storefront.constants';
 import { checkIsBuyOrderInvalid } from '../Storefront.utils';
 
+interface Project {
+  id: string;
+  name: string;
+}
+
 type Props = {
   accountAddress?: string;
   buttonTitle: string;
+  project?: Project;
   signAndBroadcast: SignAndBroadcastType;
   setCardItems: UseStateSetter<Item[] | undefined>;
   setTxModalTitle: UseStateSetter<string>;
@@ -44,13 +50,14 @@ type ReturnType = (values: BuyCreditsValues) => Promise<void>;
 
 const useBuySellOrderSubmit = ({
   accountAddress,
+  buttonTitle,
+  project,
   signAndBroadcast,
   setTxModalHeader,
   setCardItems,
   setTxModalTitle,
   setTxButtonTitle,
   setSelectedSellOrder,
-  buttonTitle,
   refetchSellOrders,
   onSubmitCallback,
 }: Props): ReturnType => {
@@ -134,7 +141,7 @@ const useBuySellOrderSubmit = ({
         return Promise.reject();
       }
 
-      if (batchDenom && creditCount && askDenom) {
+      if (batchDenom && creditCount && askDenom && project) {
         const baseDenom = await getDenomtrace({ denom: askDenom });
 
         setCardItems([
@@ -147,6 +154,7 @@ const useBuySellOrderSubmit = ({
               }),
               icon: (
                 <Box
+                  component="span"
                   sx={{
                     mr: '4px',
                     display: 'inline-block',
@@ -159,11 +167,18 @@ const useBuySellOrderSubmit = ({
             },
           },
           {
-            label: 'batch denom',
+            label: 'project',
+            value: {
+              name: project.name,
+              url: `/projects/${project.id}`,
+            },
+          },
+          {
+            label: 'credit batch id',
             value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
           },
           {
-            label: isTradeable ? 'NUMBER OF CREDITS' : 'amount retired',
+            label: isTradeable ? 'amount of credits' : 'amount retired',
             value: { name: getFormattedNumber(creditCount) },
           },
         ]);
@@ -174,16 +189,17 @@ const useBuySellOrderSubmit = ({
     },
     [
       accountAddress,
+      onSubmitCallback,
+      refetchSellOrders,
       signAndBroadcast,
+      project,
+      track,
       setSelectedSellOrder,
       setCardItems,
       setTxModalHeader,
       setTxModalTitle,
       setTxButtonTitle,
       buttonTitle,
-      refetchSellOrders,
-      onSubmitCallback,
-      track,
     ],
   );
 

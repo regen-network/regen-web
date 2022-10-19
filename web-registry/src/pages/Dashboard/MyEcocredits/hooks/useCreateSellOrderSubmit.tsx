@@ -8,6 +8,7 @@ import { FormValues as CreateSellOrderFormValues } from 'web-components/lib/comp
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { getFormattedNumber } from 'web-components/lib/utils/format';
 
+import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { denomToMicro } from 'lib/denom.utils';
 
@@ -21,6 +22,7 @@ import {
 
 type Props = {
   accountAddress?: string;
+  credits?: BatchInfoWithBalance[];
   signAndBroadcast: SignAndBroadcastType;
   setCardItems: UseStateSetter<Item[] | undefined>;
   setTxModalHeader: UseStateSetter<string | undefined>;
@@ -32,6 +34,7 @@ type ReturnType = (values: CreateSellOrderFormValues) => Promise<void>;
 
 const useCreateSellOrderSubmit = ({
   accountAddress,
+  credits,
   signAndBroadcast,
   setTxModalHeader,
   setCardItems,
@@ -72,14 +75,16 @@ const useCreateSellOrderSubmit = ({
       };
       signAndBroadcast(tx, onTxBroadcast, { onError, onSuccess });
 
-      if (batchDenom && amount && askDenom) {
+      if (batchDenom && amount && askDenom && credits) {
         const baseDenom = await getDenomtrace({ denom: askDenom });
 
+        const batchInfo = credits.find(batch => batch.denom === batchDenom);
+        const projectId =
+          batchInfo?.projectId ||
+          batchDenom.substring(0, batchDenom.indexOf('-', 4));
+        const projectName = batchInfo?.projectName;
+
         setCardItems([
-          {
-            label: 'batch denom',
-            value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
-          },
           {
             label: 'price per credit',
             value: {
@@ -98,7 +103,18 @@ const useCreateSellOrderSubmit = ({
             },
           },
           {
-            label: 'number of credits',
+            label: 'project',
+            value: {
+              name: projectName ?? projectId,
+              url: `/projects/${projectId}`,
+            },
+          },
+          {
+            label: 'credit batch id',
+            value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
+          },
+          {
+            label: 'amount of credits',
             value: { name: getFormattedNumber(amount) },
           },
         ]);
@@ -108,12 +124,13 @@ const useCreateSellOrderSubmit = ({
     },
     [
       accountAddress,
+      signAndBroadcast,
+      onTxBroadcast,
+      credits,
+      track,
       setCardItems,
       setTxModalHeader,
       setTxButtonTitle,
-      signAndBroadcast,
-      onTxBroadcast,
-      track,
     ],
   );
 

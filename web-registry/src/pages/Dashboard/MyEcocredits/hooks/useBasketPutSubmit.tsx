@@ -66,6 +66,22 @@ const useBasketPutSubmit = ({
             value: { name: basket.name },
           },
           {
+            label: 'project',
+            value: {
+              name:
+                credits[basketPutOpen].projectName ||
+                credits[basketPutOpen].projectId,
+              url: `/projects/${credits[basketPutOpen].projectId}`,
+            },
+          },
+          {
+            label: 'credit batch id',
+            value: {
+              name: credits[basketPutOpen].denom,
+              url: `/credit-batches/${credits[basketPutOpen].denom}`,
+            },
+          },
+          {
             label: 'amount',
             value: { name: amount },
           },

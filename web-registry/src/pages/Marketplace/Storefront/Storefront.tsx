@@ -232,8 +232,21 @@ export const Storefront = (): JSX.Element => {
   const errorEnum = findErrorByCodeEnum({ errorCode: error });
   const ErrorIcon = errorsMapping[errorEnum].icon;
 
+  const projectData = useMemo(() => {
+    const sellOrder = normalizedSellOrders?.find(
+      sellOrder => Number(sellOrder.id) === selectedSellOrderIdRef.current,
+    );
+    const projectId = sellOrder?.project?.id;
+    if (!projectId) return;
+    return {
+      id: projectId,
+      name: sellOrder?.project?.name ?? projectId,
+    };
+  }, [normalizedSellOrders]);
+
   const buySellOrderSubmit = useBuySellOrderSubmit({
     accountAddress,
+    project: projectData,
     signAndBroadcast,
     setCardItems,
     setSelectedSellOrder,

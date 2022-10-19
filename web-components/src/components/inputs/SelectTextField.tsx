@@ -72,9 +72,9 @@ export default function SelectTextField({
       }}
     >
       {options ? (
-        options.map(option => (
+        options.map((option, index) => (
           <Box
-            key={option.value}
+            key={`${option.value}-${index}`}
             value={option.value}
             disabled={option.disabled}
             selected={option.selected}

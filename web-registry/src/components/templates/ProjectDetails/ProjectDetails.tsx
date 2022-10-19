@@ -175,6 +175,14 @@ function ProjectDetails(): JSX.Element {
     projectId: projectsWithOrderData[0]?.id,
   });
 
+  const creditsWithProjectName = useMemo(() => {
+    if (!credits || credits.length === 0 || !projectsWithOrderData[0]) return;
+    return credits.map(batch => ({
+      ...batch,
+      projectName: projectsWithOrderData[0]?.name,
+    }));
+  }, [credits, projectsWithOrderData]);
+
   if (!isLoading && !project && !data) return <NotFoundPage />;
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
@@ -285,7 +293,7 @@ function ProjectDetails(): JSX.Element {
       <CreateSellOrderFlow
         isFlowStarted={isSellFlowStarted}
         setIsFlowStarted={setIsSellFlowStarted}
-        credits={credits}
+        credits={creditsWithProjectName}
       />
       {displayErrorBanner && (
         <ErrorBanner

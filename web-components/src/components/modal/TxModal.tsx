@@ -8,7 +8,8 @@ import OutlinedButton from '../buttons/OutlinedButton';
 import Card from '../cards/Card';
 import { LinkItem } from '../footer/footer-new';
 import Modal, { RegenModalProps } from '../modal';
-import { Label, Subtitle, Title } from '../typography';
+import { Label, Title } from '../typography';
+import { CardItemValue, CardItemValueList } from './TxModal.CardItemValue';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,13 +25,15 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+export interface ItemValue {
+  name: string | number;
+  url?: string;
+  icon?: React.ReactNode;
+}
+
 export interface Item {
   label: string;
-  value: {
-    name: string | number;
-    url?: string;
-    icon?: React.ReactNode;
-  };
+  value: ItemValue | ItemValue[];
   color?: string;
 }
 
@@ -39,7 +42,7 @@ interface LinkProps extends LinkItem {
   sx?: SxProps<Theme>;
 }
 
-type LinkComponentProp = React.FC<LinkProps>;
+export type LinkComponentProp = React.FC<LinkProps>;
 
 export interface TxModalProps extends RegenModalProps {
   onButtonClick: () => void;
@@ -61,7 +64,7 @@ export const CardItem: React.FC<CardItemProps> = ({
   color,
   label,
   value,
-  linkComponent: LinkComponent,
+  linkComponent,
 }) => {
   return (
     <Box sx={{ pt: 5 }}>
@@ -69,20 +72,19 @@ export const CardItem: React.FC<CardItemProps> = ({
         {label}
       </Label>
 
-      <Subtitle size="lg" mobileSize="sm" color={color || 'info.dark'}>
-        {value.icon && value.icon}
-        {value.url ? (
-          <LinkComponent
-            sx={{ color: 'secondary.main' }}
-            href={value.url}
-            target={value.url.startsWith('/') ? '_self' : '_blank'}
-          >
-            {value.name}
-          </LinkComponent>
-        ) : (
-          <>{value.name}</>
-        )}
-      </Subtitle>
+      {Array.isArray(value) ? (
+        <CardItemValueList
+          value={value}
+          color={color}
+          linkComponent={linkComponent}
+        />
+      ) : (
+        <CardItemValue
+          value={value}
+          color={color}
+          linkComponent={linkComponent}
+        />
+      )}
     </Box>
   );
 };

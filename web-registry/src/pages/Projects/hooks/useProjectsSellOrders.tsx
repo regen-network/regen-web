@@ -8,6 +8,7 @@ import { useWallet } from 'lib/wallet';
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 import { ProjectWithOrderData } from '../Projects.types';
+import { GECKO_PRICES } from './useProjectsSellOrders.types';
 import {
   getPurchaseInfo,
   normalizeToUISellOrderInfo,
@@ -19,7 +20,7 @@ import DefaultProject from 'assets/default-project.jpg';
 type Props = {
   projects?: ProjectInfo[];
   sellOrders?: SellOrderInfoExtented[];
-  regenPrice?: number;
+  geckoPrices?: GECKO_PRICES;
   limit?: number;
 };
 
@@ -31,7 +32,7 @@ export interface ProjectsSellOrders {
 export const useProjectsSellOrders = ({
   projects,
   sellOrders,
-  regenPrice,
+  geckoPrices,
   limit,
 }: Props): ProjectsSellOrders => {
   const [projectsWithOrderData, setProjectsWithOrderData] = useState<
@@ -53,7 +54,7 @@ export const useProjectsSellOrders = ({
             projects,
             sellOrders,
             limit ?? projects.length,
-            regenPrice,
+            geckoPrices,
             wallet?.address,
           );
           if (_projectsWithOrders) {
@@ -71,7 +72,7 @@ export const useProjectsSellOrders = ({
   }, [
     projects,
     sellOrders,
-    regenPrice,
+    geckoPrices,
     limit,
     projectsWithOrderData,
     wallet?.address,
@@ -84,7 +85,7 @@ const getProjectDisplayData = async (
   projects: ProjectInfo[],
   sellOrders: SellOrderInfoExtented[],
   limit: number,
-  regenPrice?: number,
+  geckoPrices?: GECKO_PRICES,
   userAddress?: string,
 ): Promise<ProjectWithOrderData[]> => {
   const projectsWithOrderData = await Promise.all(
@@ -98,7 +99,7 @@ const getProjectDisplayData = async (
         const purchaseInfo = getPurchaseInfo({
           projectId: project.id,
           sellOrders,
-          regenPrice,
+          geckoPrices,
           userAddress,
         });
         let metadata;

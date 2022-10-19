@@ -13,10 +13,9 @@ export const KeplrWallet: WalletConfig = {
 export const WalletConnectKeplrWallet: WalletConfig = {
   type: WalletType.WalletConnectKeplr,
   getClient: async ({ chainInfo, walletConnect }) => {
-    if (walletConnect?.connected && chainInfo) {
-      return new (await import('../connectors')).KeplrWalletConnectV1(
+    if (walletConnect?.connected) {
+      return new (await import('@keplr-wallet/wc-client')).KeplrWalletConnectV1(
         walletConnect,
-        [chainInfo],
       );
     }
 

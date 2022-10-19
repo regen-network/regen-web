@@ -4,7 +4,6 @@ import { Window as KeplrWindow } from '@keplr-wallet/types';
 import WalletConnect from '@walletconnect/client';
 
 import { chainInfo } from './chainInfo/chainInfo';
-import { KeplrWalletConnectV1 } from './connectors';
 import { ConnectParams, ConnectWalletParams } from './wallet.types';
 import { finalizeConnection, getWalletConnectInstance } from './wallet.utils';
 import { walletsConfig } from './walletsConfig/walletsConfig';
@@ -172,9 +171,6 @@ export const WalletProvider: React.FC = ({ children }) => {
         chainInfo,
         walletConnect,
       });
-      if (walletClient instanceof KeplrWalletConnectV1) {
-        walletClient.dontOpenAppOnEnable = true;
-      }
 
       finalizeConnection({
         setWallet,

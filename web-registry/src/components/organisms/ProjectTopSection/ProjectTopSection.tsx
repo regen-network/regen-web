@@ -9,6 +9,7 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import Card from 'web-components/lib/components/cards/Card';
@@ -57,6 +58,7 @@ import {
 
 function ProjectTopSection({
   data,
+  onChainProject,
   metadata,
   sanityCreditClassData,
   geojson,
@@ -64,8 +66,10 @@ function ProjectTopSection({
   batchData,
   setPaginationParams,
   projectId,
+  loading,
 }: {
   data?: any; // TODO: when all project are onchain, this can be ProjectByOnChainIdQuery
+  onChainProject?: ProjectInfo;
   metadata?: ProjectMetadataLDUnion;
   sanityCreditClassData?: AllCreditClassQuery;
   geojson?: any;
@@ -76,6 +80,7 @@ function ProjectTopSection({
   };
   setPaginationParams: UseStateSetter<TablePaginationParams>;
   projectId?: string;
+  loading?: boolean;
 }): JSX.Element {
   const styles = useProjectTopSectionStyles();
   const theme = useTheme();
@@ -154,7 +159,9 @@ function ProjectTopSection({
                 mt: 2.5,
               }}
             >
-              {!metadata && <Skeleton variant="text" height={124} />}
+              {!metadata && !loading && (
+                <Skeleton variant="text" height={124} />
+              )}
               {!isVCSProject && (
                 <ProjectTopLink
                   label="offset generation method"
@@ -168,9 +175,8 @@ function ProjectTopSection({
             </Box>
           </Box>
           {/* Used to prevent layout shift */}
-          {(!data || isGISFile === undefined || (isGISFile && !geojson)) && (
-            <Skeleton height={200} />
-          )}
+          {(!data || isGISFile === undefined || (isGISFile && !geojson)) &&
+            !loading && <Skeleton height={200} />}
           {geojson && isGISFile && glanceText && (
             <LazyLoad offset={50} once>
               <Box sx={{ pt: 6 }}>
@@ -186,7 +192,7 @@ function ProjectTopSection({
             </LazyLoad>
           )}
           {/* Used to prevent layout shift */}
-          {!metadata && <Skeleton height={200} />}
+          {!metadata && !loading && <Skeleton height={200} />}
           {landStewardStoryTitle && (
             <Title sx={{ pt: { xs: 11.75, sm: 14 } }} variant="h2">
               Story
@@ -290,7 +296,7 @@ function ProjectTopSection({
         </Grid>
         <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
           <ProjectTopCard
-            projectAdmin={getDisplayAdmin(data?.admin)}
+            projectAdmin={getDisplayAdmin(data?.admin || onChainProject?.admin)}
             projectDeveloper={getDisplayDeveloper(
               metadata,
               project?.partyByDeveloperId,

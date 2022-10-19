@@ -102,6 +102,8 @@ function ProjectDetails(): JSX.Element {
     variables: { onChainId: onChainProjectId as string },
   });
 
+  console.log('loading', loading);
+
   const { data: projectResponse } = useEcocreditQuery<QueryProjectResponse>({
     query: 'project',
     params: { projectId },
@@ -154,6 +156,8 @@ function ProjectDetails(): JSX.Element {
   const mediaData = useMedia({ metadata, geojson });
   const impactData = useImpact({ coBenefitsIris, primaryImpactIRI });
   const isLoading = loading || loadingDataByHandle;
+
+  console.log('loadingDataByHandle', loadingDataByHandle);
 
   const {
     issuanceModalData,
@@ -229,6 +233,7 @@ function ProjectDetails(): JSX.Element {
 
       <ProjectTopSection
         data={data}
+        onChainProject={onChainProject}
         metadata={metadata}
         sanityCreditClassData={sanityCreditClassData}
         batchData={{
@@ -239,6 +244,7 @@ function ProjectDetails(): JSX.Element {
         geojson={geojson}
         isGISFile={isGISFile}
         projectId={projectId}
+        loading={isLoading}
       />
 
       {impactData?.length > 0 && (

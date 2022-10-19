@@ -1,4 +1,5 @@
 import { User } from 'web-components/lib/components/user/UserInfo';
+import { truncate } from 'web-components/lib/utils/truncate';
 
 import { Maybe, PartyFieldsFragment } from 'generated/graphql';
 import { ProjectMetadataLD } from 'generated/json-ld';
@@ -25,7 +26,11 @@ export const getDisplayAdmin = (address?: string): User | undefined => {
         'Regen Network realigns the agricultural economy with ecological health by creating the global marketplace for planetary stewardship.',
     };
   }
-  return;
+  return {
+    name: truncate(address),
+    type: 'ORGANIZATION',
+    link: `/ecocredits/accounts/${address}`,
+  };
 };
 
 export const getDisplayDeveloper = (

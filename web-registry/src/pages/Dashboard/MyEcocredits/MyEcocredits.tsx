@@ -58,6 +58,7 @@ import useCreateSellOrderSubmit from './hooks/useCreateSellOrderSubmit';
 import useCreditRetireSubmit from './hooks/useCreditRetireSubmit';
 import useCreditSendSubmit from './hooks/useCreditSendSubmit';
 import useOpenTakeModal from './hooks/useOpenTakeModal';
+import { useUpdateCardItemsTakeBasket } from './hooks/useUpdateCardItemsTakeBasket';
 import useUpdateCreditBaskets from './hooks/useUpdateCreditBaskets';
 import { useUpdateTxModalTitle } from './hooks/useUpdateTxModalTitle';
 import {
@@ -97,6 +98,7 @@ export const MyEcocredits = (): JSX.Element => {
   const [txModalHeader, setTxModalHeader] = useState<string | undefined>();
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
   const [txButtonTitle, setTxButtonTitle] = useState<string | undefined>();
+
   const navigate = useNavigate();
   const track = useTrack();
 
@@ -113,6 +115,7 @@ export const MyEcocredits = (): JSX.Element => {
 
   const handleTxModalClose = (): void => {
     setCardItems(undefined);
+    setCardItemsTakeDone(false);
     setTxModalTitle(undefined);
     setTxModalHeader(undefined);
     setTxButtonTitle(undefined);
@@ -148,6 +151,12 @@ export const MyEcocredits = (): JSX.Element => {
     error,
     setError,
   } = useMsgClient(handleTxQueued, handleTxDelivered, handleError);
+
+  const { setCardItemsTakeDone } = useUpdateCardItemsTakeBasket({
+    deliverTxResponse,
+    cardItems,
+    setCardItems,
+  });
 
   const theme = useTheme();
   const baskets = useQueryBaskets();
@@ -237,6 +246,7 @@ export const MyEcocredits = (): JSX.Element => {
 
   const createSellOrderSubmit = useCreateSellOrderSubmit({
     accountAddress,
+    credits,
     signAndBroadcast,
     setCardItems,
     setTxModalHeader,

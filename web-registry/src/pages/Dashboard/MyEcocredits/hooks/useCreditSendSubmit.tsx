@@ -83,7 +83,16 @@ const useCreditSendSubmit = ({
         setCardItems(
           [
             {
-              label: 'batch denom',
+              label: 'project',
+              value: {
+                name:
+                  credits[creditSendOpen].projectName ||
+                  credits[creditSendOpen].projectId,
+                url: `/projects/${credits[creditSendOpen].projectId}`,
+              },
+            },
+            {
+              label: 'credit batch id',
               value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
             },
             {

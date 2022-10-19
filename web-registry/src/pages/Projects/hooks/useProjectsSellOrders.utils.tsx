@@ -16,14 +16,14 @@ import { UISellOrderInfo } from '../Projects.types';
 type GetPurchaseInfoParams = {
   projectId: string;
   sellOrders: SellOrderInfoExtented[];
-  geckoPrice?: { regenPrice?: number; eeurPrice?: number };
+  geckoPrices?: { regenPrice?: number; eeurPrice?: number };
   userAddress?: string;
 };
 
 export const getPurchaseInfo = ({
   projectId,
   sellOrders,
-  geckoPrice = {},
+  geckoPrices = {},
   userAddress,
 }: GetPurchaseInfoParams): PurchaseInfo => {
   const ordersForThisProject = sellOrders.filter(order =>
@@ -38,7 +38,7 @@ export const getPurchaseInfo = ({
       },
     };
   }
-  const { eeurPrice, regenPrice } = geckoPrice;
+  const { eeurPrice, regenPrice } = geckoPrices;
 
   const creditsAvailable = ordersForThisProject
     .map(order => parseFloat(order.quantity))

@@ -63,7 +63,7 @@ export function useProjectsWithOrders({
         projectId,
       }),
       sellOrders,
-      geckoPrice: {
+      geckoPrices: {
         regenPrice: regenPriceQuery?.data?.regen?.usd,
         eeurPrice: regenPriceQuery?.data?.['e-money-eur']?.usd,
       },

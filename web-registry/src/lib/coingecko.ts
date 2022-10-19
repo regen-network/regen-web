@@ -10,6 +10,9 @@ export type FetchSimplePriceResponse = {
 };
 
 export const GECKO_REGEN_ID = 'regen';
+export const GECKO_EEUR_ID = 'e-money-eur';
+export const GECKO_USDC_ID = 'usd-coin';
+export const GECKO_TOKEN_IDS = `${GECKO_REGEN_ID},${GECKO_EEUR_ID},${GECKO_USDC_ID}`;
 export const GECKO_USD_CURRENCY = 'USD';
 const COINGECKO_API_URL = 'https://api.coingecko.com/api/v3/';
 

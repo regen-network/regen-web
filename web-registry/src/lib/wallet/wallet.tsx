@@ -82,6 +82,11 @@ export const WalletProvider: React.FC = ({ children }) => {
 
       if (walletType === WalletType.Keplr) {
         localStorage.setItem(AUTO_CONNECT_WALLET_KEY, WalletType.Keplr);
+      } else {
+        localStorage.setItem(
+          AUTO_CONNECT_WALLET_KEY,
+          WalletType.WalletConnectKeplr,
+        );
       }
     } catch (e) {
       setError(e);
@@ -129,18 +134,23 @@ export const WalletProvider: React.FC = ({ children }) => {
 
   // Automatically connect wallet if connected before
   useEffect(() => {
+    const autoConnectWalletType = localStorage.getItem(AUTO_CONNECT_WALLET_KEY);
+
     const tryConnectWallet = async (): Promise<void> => {
-      try {
-        await connectWallet({ walletType: WalletType.Keplr });
-      } catch (e) {
-        setError(e);
-      } finally {
-        setLoaded(true);
+      if (autoConnectWalletType) {
+        try {
+          await connectWallet({
+            walletType: autoConnectWalletType as WalletType,
+          });
+        } catch (e) {
+          setError(e);
+        } finally {
+          setLoaded(true);
+        }
       }
     };
 
-    const autoConnectionType = localStorage.getItem(AUTO_CONNECT_WALLET_KEY);
-    if (autoConnectionType) {
+    if (autoConnectWalletType) {
       tryConnectWallet();
     } else {
       setLoaded(true);

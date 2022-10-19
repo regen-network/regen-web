@@ -1,5 +1,6 @@
 import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { EEUR_DENOM, REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { QUANTITY_MAX_DECIMALS } from 'config/decimals';
 import { roundFloatNumber } from 'utils/number/format/format';
 
@@ -14,17 +15,15 @@ import { UISellOrderInfo } from '../Projects.types';
 
 type GetPurchaseInfoParams = {
   projectId: string;
-  sellOrders: SellOrderInfo[];
-  regenPrice?: number;
+  sellOrders: SellOrderInfoExtented[];
+  geckoPrice?: { regenPrice?: number; eeurPrice?: number };
   userAddress?: string;
 };
-
-const REGEN_DENOM = 'uregen';
 
 export const getPurchaseInfo = ({
   projectId,
   sellOrders,
-  regenPrice,
+  geckoPrice = {},
   userAddress,
 }: GetPurchaseInfoParams): PurchaseInfo => {
   const ordersForThisProject = sellOrders.filter(order =>
@@ -39,6 +38,7 @@ export const getPurchaseInfo = ({
       },
     };
   }
+  const { eeurPrice, regenPrice } = geckoPrice;
 
   const creditsAvailable = ordersForThisProject
     .map(order => parseFloat(order.quantity))
@@ -52,11 +52,18 @@ export const getPurchaseInfo = ({
   const prices = ordersForThisProject
     .map(order => {
       const amount = microToDenom(order.askAmount);
-      const denomPrice = order.askDenom === REGEN_DENOM ? regenPrice ?? 0 : 1;
+      let denomPrice = 1;
+      if (order.askBaseDenom === REGEN_DENOM) {
+        denomPrice = regenPrice ?? 0;
+      }
+      if (order.askBaseDenom === EEUR_DENOM) {
+        denomPrice = eeurPrice ?? 0;
+      }
 
       return amount * denomPrice;
     })
     .sort((a, b) => a - b);
+
   const priceMin = prices?.[0];
   const priceMax = prices?.[prices.length - 1];
   const priceMinDisplayed =

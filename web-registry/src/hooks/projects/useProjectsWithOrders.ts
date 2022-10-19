@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import {
   fetchSimplePrice,
-  GECKO_REGEN_ID,
+  GECKO_TOKEN_IDS,
   GECKO_USD_CURRENCY,
 } from 'lib/coingecko';
 import { EcocreditQueryProps } from 'lib/ecocredit/api';
@@ -44,7 +44,10 @@ export function useProjectsWithOrders({
   const projects = data?.projects;
 
   const regenPriceQuery = useQuery(['regenPrice'], () =>
-    fetchSimplePrice({ ids: GECKO_REGEN_ID, vsCurrencies: GECKO_USD_CURRENCY }),
+    fetchSimplePrice({
+      ids: GECKO_TOKEN_IDS,
+      vsCurrencies: GECKO_USD_CURRENCY,
+    }),
   );
 
   const { sellOrdersResponse } = useQuerySellOrders();
@@ -60,7 +63,10 @@ export function useProjectsWithOrders({
         projectId,
       }),
       sellOrders,
-      regenPrice: regenPriceQuery?.data?.regen?.usd,
+      geckoPrice: {
+        regenPrice: regenPriceQuery?.data?.regen?.usd,
+        eeurPrice: regenPriceQuery?.data?.['e-money-eur']?.usd,
+      },
       limit,
     });
 

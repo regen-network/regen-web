@@ -3,9 +3,12 @@ import { styled, useTheme } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 
-import CreditsIcon from '../icons/CreditsIcon';
-import { Label } from '../typography';
-import { HeaderMenuHover, HeaderMenuHoverBase } from './HeaderMenuHover';
+import CreditsIcon from '../../icons/CreditsIcon';
+import { Label } from '../../typography';
+import {
+  HeaderMenuHover,
+  HeaderMenuHoverBase,
+} from './HeaderMenuHover/HeaderMenuHover';
 
 interface UserMenuItemProps extends HeaderMenuHoverBase {
   address: string;

@@ -2,7 +2,6 @@ import React from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import Box from '@mui/material/Box';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/styles';
 import { URL_PRIVACY, URL_TERMS_SERVICE } from 'globals';
 
@@ -31,7 +30,6 @@ const RegistryLayout: React.FC = () => {
   const { pathname } = useLocation();
   const { wallet, loaded, disconnect } = useWallet();
   const theme = useTheme<Theme>();
-  const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const fullWidthRegExp: RegExp = /projects\/[a-z-]+/;
@@ -80,7 +78,6 @@ const RegistryLayout: React.FC = () => {
 
   return (
     <>
-      <WalletButton />
       <Header
         isRegistry
         linkComponent={RegistryNavLink}
@@ -100,19 +97,15 @@ const RegistryLayout: React.FC = () => {
         pathname={pathname}
         extras={
           <Box display="flex" justifyContent="center" alignItems="center">
-            {chainId &&
-              loaded &&
-              wallet?.address &&
-              disconnect &&
-              isDesktop && (
-                <UserMenuItem
-                  address={wallet?.shortAddress}
-                  avatar={DefaultAvatar}
-                  disconnect={disconnect}
-                  pathname={pathname}
-                  linkComponent={RegistryNavLink}
-                />
-              )}
+            {chainId && loaded && wallet?.address && disconnect && (
+              <UserMenuItem
+                address={wallet?.shortAddress}
+                avatar={DefaultAvatar}
+                disconnect={disconnect}
+                pathname={pathname}
+                linkComponent={RegistryNavLink}
+              />
+            )}
             <WalletButton />
           </Box>
         }

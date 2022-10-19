@@ -46,7 +46,10 @@ const WalletButton: React.FC = () => {
     () => getWalletsUiConfig({ connectToWallet }),
     [connectToWallet],
   );
-  const mobileConnectUrl = getMobileConnectUrl({ uri: walletConnectUri });
+  const mobileConnectUrl = useMemo(
+    () => getMobileConnectUrl({ uri: walletConnectUri }),
+    [walletConnectUri],
+  );
 
   useEffect(() => {
     if (mobileConnectUrl) {
@@ -65,7 +68,10 @@ const WalletButton: React.FC = () => {
     <>
       <div className={styles.root}>
         {!wallet?.address && loaded && (
-          <OutlinedButton onClick={onButtonClick} sx={{ height: 40 }}>
+          <OutlinedButton
+            onClick={onButtonClick}
+            sx={{ xs: { height: 30 }, md: { height: 40 } }}
+          >
             <img className={styles.icon} src={Keplr} alt="keplr" />
             connect wallet
           </OutlinedButton>

@@ -3,17 +3,12 @@ import {
   isMobile as checkIsMobile,
 } from '@walletconnect/browser-utils';
 
-import {
-  Wallet,
-  WalletModalState,
-} from 'web-components/lib/components/modal/wallet-modal/WalletModal.types';
+import { Wallet } from 'web-components/lib/components/modal/wallet-modal/WalletModal.types';
 
-import { UseStateSetter } from 'types/react/use-state';
 import { ConnectParams } from 'lib/wallet/wallet.types';
 
 import { getAllWalletsUiConfig } from './WalletButton.config';
-
-const mobileWalletsName = ['WalletConnect'];
+import { mobileWalletsName } from './WalletButton.constants';
 
 /* getWalletsUiConfig */
 
@@ -46,7 +41,7 @@ type GetMobileConnectUrlParams = {
 export const getMobileConnectUrl = ({
   uri,
 }: GetMobileConnectUrlParams): string | undefined => {
-  if (checkIsMobile()) {
+  if (checkIsMobile() && uri) {
     return checkIsAndroid()
       ? `intent://wcV1?${uri}#Intent;package=com.chainapsis.keplr;scheme=keplrwallet;end;`
       : `keplrwallet://wcV1?${uri}`;

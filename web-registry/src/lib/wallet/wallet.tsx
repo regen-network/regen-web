@@ -61,7 +61,11 @@ export const WalletProvider: React.FC = ({ children }) => {
 
   const onQrCloseCallback = useRef<() => void>();
 
-  const disconnect = (): void => {
+  const disconnect = async (): Promise<void> => {
+    if (walletConnect) {
+      await walletConnect.killSession();
+    }
+
     setWallet(emptySender);
     setConnectionType(undefined);
     setWalletConnect(undefined);
@@ -76,7 +80,7 @@ export const WalletProvider: React.FC = ({ children }) => {
       await connectWallet({ walletType });
       setConnectionType(walletType);
 
-      if (walletType === WalletType.WalletConnectKeplr) {
+      if (walletType === WalletType.Keplr) {
         localStorage.setItem(AUTO_CONNECT_WALLET_KEY, WalletType.Keplr);
       }
     } catch (e) {
@@ -99,6 +103,9 @@ export const WalletProvider: React.FC = ({ children }) => {
         setWalletConnectUri,
         onQrCloseCallback,
       });
+      if (walletConnect.connected) {
+        await walletConnect.killSession();
+      }
       if (!walletConnect.connected) {
         await walletConnect.createSession();
       }
@@ -168,18 +175,6 @@ export const WalletProvider: React.FC = ({ children }) => {
         }
 
         onWalletConnectEvent();
-      });
-    }
-  }, [walletConnect]);
-
-  useEffect(() => {
-    if (walletConnect) {
-      walletConnect.on('disconnect', error => {
-        if (error) {
-          throw error;
-        }
-
-        walletConnect.killSession();
       });
     }
   }, [walletConnect]);

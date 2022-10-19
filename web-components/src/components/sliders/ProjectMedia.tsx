@@ -329,14 +329,14 @@ export default function ProjectMedia({
               </Grid>
             </Grid>
           )}
-          {(assets.length === 1 || assets.length === 2) && (
+          {assets.length >= 1 && assets.length <= 3 && (
             <Grid
               container
               columnSpacing={5}
               columns={15}
               className={classes.grid}
             >
-              {assets.map((a, i) => (
+              {assets.slice(0, 2).map((a, i) => (
                 <Grid
                   xs={assets.length === 1 ? 15 : i === 0 ? 8 : 7}
                   item

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   ClassInfo,
@@ -26,6 +26,7 @@ import { useResetErrorBanner } from 'pages/Marketplace/Storefront/hooks/useReset
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { useEcocreditQuery } from 'hooks';
 
+import { getProjectNameFromProjectsData } from './CreditClassDetails.utils';
 import CreditClassDetailsSimple from './CreditClassDetailsSimple';
 import CreditClassDetailsWithContent from './CreditClassDetailsWithContent';
 
@@ -82,6 +83,18 @@ function CreditClassDetails({
   const { isSellFlowDisabled, credits } = useCreateSellOrderData({
     projectId: projectsWithOrderData[0]?.id,
   });
+
+  const creditsWithProjectName = useMemo(() => {
+    if (!credits || credits.length === 0) return;
+    return credits.map(batch => ({
+      ...batch,
+      projectName:
+        getProjectNameFromProjectsData(
+          batch.projectId,
+          projectsWithOrderData,
+        ) ?? undefined,
+    }));
+  }, [credits, projectsWithOrderData]);
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
@@ -157,7 +170,7 @@ function CreditClassDetails({
       <CreateSellOrderFlow
         isFlowStarted={isSellFlowStarted}
         setIsFlowStarted={setIsSellFlowStarted}
-        credits={credits}
+        credits={creditsWithProjectName}
       />
       {displayErrorBanner && (
         <ErrorBanner

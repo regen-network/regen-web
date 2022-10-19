@@ -16,8 +16,7 @@ import { getMobileConnectUrl, getWalletsUiConfig } from './WalletButton.utils';
 
 const WalletButton: React.FC = () => {
   const styles = useWalletButtonStyles();
-  const { wallet, connect, connectionType, loaded, error, walletConnectUri } =
-    useWallet();
+  const { wallet, connect, loaded, error, walletConnectUri } = useWallet();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalState, setModalState] =
@@ -55,10 +54,17 @@ const WalletButton: React.FC = () => {
     }
   }, [mobileConnectUrl]);
 
+  useEffect(() => {
+    if (wallet?.address) {
+      setModalState('wallet-select');
+      setIsModalOpen(false);
+    }
+  }, [wallet?.address]);
+
   return chainId ? (
     <>
       <div className={styles.root}>
-        {!wallet?.address && loaded && !connectionType && (
+        {!wallet?.address && loaded && (
           <OutlinedButton onClick={onButtonClick} sx={{ height: 40 }}>
             <img className={styles.icon} src={Keplr} alt="keplr" />
             connect wallet

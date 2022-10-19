@@ -1,6 +1,6 @@
-import { Wallet, WalletType } from './walletsConfig.types';
+import { WalletConfig, WalletType } from './walletsConfig.types';
 
-export const KeplrWallet: Wallet = {
+export const KeplrWallet: WalletConfig = {
   type: WalletType.Keplr,
   getClient: async () =>
     // @ts-ignore
@@ -10,7 +10,7 @@ export const KeplrWallet: Wallet = {
     client.getOfflineSignerAuto.bind(client),
 };
 
-export const WalletConnectKeplrWallet: Wallet = {
+export const WalletConnectKeplrWallet: WalletConfig = {
   type: WalletType.WalletConnectKeplr,
   getClient: async ({ chainInfo, walletConnect }) => {
     if (walletConnect?.connected && chainInfo) {
@@ -19,7 +19,8 @@ export const WalletConnectKeplrWallet: Wallet = {
         [chainInfo],
       );
     }
-    throw new Error('Mobile wallet not connected.');
+
+    return undefined;
   },
   // WalletConnect only supports Amino signing.
   getOfflineSignerFunction: client =>

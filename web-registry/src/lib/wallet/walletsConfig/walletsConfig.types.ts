@@ -16,7 +16,7 @@ type GetClientParams = {
   walletConnect?: WalletConnect;
 };
 
-export interface Wallet {
+export interface WalletConfig {
   // A unique identifier among all wallets.
   type: WalletType;
   // A function that returns an instantiated wallet client, with

@@ -12,11 +12,12 @@ import { microToDenom } from 'lib/denom.utils';
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 import { UISellOrderInfo } from '../Projects.types';
+import { GECKO_PRICES } from './useProjectsSellOrders.types';
 
 type GetPurchaseInfoParams = {
   projectId: string;
   sellOrders: SellOrderInfoExtented[];
-  geckoPrices?: { regenPrice?: number; eeurPrice?: number };
+  geckoPrices?: GECKO_PRICES;
   userAddress?: string;
 };
 
@@ -38,7 +39,7 @@ export const getPurchaseInfo = ({
       },
     };
   }
-  const { eeurPrice, regenPrice } = geckoPrices;
+  const { eeurPrice, regenPrice, usdcPrice } = geckoPrices;
 
   const creditsAvailable = ordersForThisProject
     .map(order => parseFloat(order.quantity))
@@ -52,7 +53,8 @@ export const getPurchaseInfo = ({
   const prices = ordersForThisProject
     .map(order => {
       const amount = microToDenom(order.askAmount);
-      let denomPrice = 1;
+      let denomPrice = usdcPrice ?? 1;
+
       if (order.askBaseDenom === REGEN_DENOM) {
         denomPrice = regenPrice ?? 0;
       }

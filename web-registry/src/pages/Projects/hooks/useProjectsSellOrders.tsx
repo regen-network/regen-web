@@ -8,6 +8,7 @@ import { useWallet } from 'lib/wallet';
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 import { ProjectWithOrderData } from '../Projects.types';
+import { GECKO_PRICES } from './useProjectsSellOrders.types';
 import {
   getPurchaseInfo,
   normalizeToUISellOrderInfo,
@@ -19,7 +20,7 @@ import DefaultProject from 'assets/default-project.jpg';
 type Props = {
   projects?: ProjectInfo[];
   sellOrders?: SellOrderInfoExtented[];
-  geckoPrices?: { regenPrice?: number; eeurPrice?: number };
+  geckoPrices?: GECKO_PRICES;
   limit?: number;
 };
 
@@ -84,7 +85,7 @@ const getProjectDisplayData = async (
   projects: ProjectInfo[],
   sellOrders: SellOrderInfoExtented[],
   limit: number,
-  geckoPrices?: { regenPrice?: number; eeurPrice?: number },
+  geckoPrices?: GECKO_PRICES,
   userAddress?: string,
 ): Promise<ProjectWithOrderData[]> => {
   const projectsWithOrderData = await Promise.all(

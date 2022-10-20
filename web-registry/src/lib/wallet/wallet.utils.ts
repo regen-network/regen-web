@@ -3,7 +3,6 @@ import WalletConnect from '@walletconnect/client';
 import truncate from 'lodash/truncate';
 
 import { UseStateSetter } from 'types/react/use-state';
-import { chainId } from 'lib/ledger';
 
 import { chainInfo } from './chainInfo/chainInfo';
 import { Wallet } from './wallet';
@@ -68,6 +67,7 @@ export const finalizeConnection = async ({
   try {
     await walletClient?.enable(chainInfo.chainId);
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.error(e);
   }
 

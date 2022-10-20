@@ -36,9 +36,12 @@ export const useConnectWallet = ({
       );
       walletConfigRef.current = walletConfig;
 
+      const isKeplr = walletConfig?.type === WalletType.Keplr;
+      const isWalletConnectKeplr =
+        walletConfig?.type === WalletType.WalletConnectKeplr;
       let walletConnect;
 
-      if (walletConfig?.type === WalletType.WalletConnectKeplr) {
+      if (isWalletConnectKeplr) {
         walletConnect = await getWalletConnectInstance({
           setWalletConnectUri,
           onQrCloseCallback,
@@ -54,15 +57,16 @@ export const useConnectWallet = ({
         walletConnect,
       });
 
+      // Only Keplr browser extension supports suggesting chain.
+      // Not WalletConnect nor embedded Keplr Mobile web.
       if (
-        walletConfig?.type === WalletType.WalletConnectKeplr &&
-        walletConnect?.connected
+        walletConfig?.type === WalletType.Keplr &&
+        walletClient?.mode !== 'mobile-web'
       ) {
-        finalizeConnection({ setWallet, walletClient, walletConfig });
+        await walletClient?.experimentalSuggestChain(chainInfo);
       }
 
-      if (walletConfig?.type === WalletType.Keplr) {
-        await walletClient?.experimentalSuggestChain(chainInfo);
+      if ((isWalletConnectKeplr && walletConnect?.connected) || isKeplr) {
         finalizeConnection({ setWallet, walletClient, walletConfig });
       }
     },

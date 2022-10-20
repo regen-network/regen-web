@@ -147,7 +147,8 @@ function ProjectTopSection({
               // TODO Format and show on-chain project location if no off-chain location
               place={
                 metadata?.['schema:location']?.['place_name'] ||
-                metadata?.['schema:location']?.['geojson:place_name']
+                metadata?.['schema:location']?.['geojson:place_name'] ||
+                onChainProject?.jurisdiction
               }
               area={Number(area)}
               areaUnit={areaUnit}
@@ -159,9 +160,7 @@ function ProjectTopSection({
                 mt: 2.5,
               }}
             >
-              {!metadata && !loading && (
-                <Skeleton variant="text" height={124} />
-              )}
+              {!metadata && loading && <Skeleton variant="text" height={124} />}
               {!isVCSProject && (
                 <ProjectTopLink
                   label="offset generation method"
@@ -176,7 +175,7 @@ function ProjectTopSection({
           </Box>
           {/* Used to prevent layout shift */}
           {(!data || isGISFile === undefined || (isGISFile && !geojson)) &&
-            !loading && <Skeleton height={200} />}
+            loading && <Skeleton height={200} />}
           {geojson && isGISFile && glanceText && (
             <LazyLoad offset={50} once>
               <Box sx={{ pt: 6 }}>
@@ -192,7 +191,7 @@ function ProjectTopSection({
             </LazyLoad>
           )}
           {/* Used to prevent layout shift */}
-          {!metadata && !loading && <Skeleton height={200} />}
+          {!metadata && loading && <Skeleton height={200} />}
           {landStewardStoryTitle && (
             <Title sx={{ pt: { xs: 11.75, sm: 14 } }} variant="h2">
               Story

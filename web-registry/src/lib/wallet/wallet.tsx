@@ -1,18 +1,17 @@
-import React, { createContext, useEffect, useRef, useState } from 'react';
+import React, { createContext, useRef, useState } from 'react';
 import { OfflineSigner } from '@cosmjs/proto-signing';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 import WalletConnect from '@walletconnect/client';
 
-import { chainInfo } from './chainInfo/chainInfo';
-import { ConnectParams, ConnectWalletParams } from './wallet.types';
-import { finalizeConnection, getWalletConnectInstance } from './wallet.utils';
-import { walletsConfig } from './walletsConfig/walletsConfig';
-import { WalletConfig, WalletType } from './walletsConfig/walletsConfig.types';
-
-const AUTO_CONNECT_WALLET_KEY = 'auto_connect_wallet';
-const WALLET_CONNECT_KEY = 'walletconnect';
-
-const emptySender = { address: '', shortAddress: '' };
+import { useAutoConnect } from './hooks/useAutoConnect';
+import { useConnect } from './hooks/useConnect';
+import { useConnectWallet } from './hooks/useConnectWallet';
+import { useDisconnect } from './hooks/useDisconnect';
+import { useWalletConnectCallback } from './hooks/useWalletConnectCallback';
+import { useWalletConnectFinalize } from './hooks/useWalletConnectFinalize';
+import { emptySender } from './wallet.constants';
+import { ConnectParams } from './wallet.types';
+import { WalletConfig } from './walletsConfig/walletsConfig.types';
 
 export interface Wallet {
   offlineSigner?: OfflineSigner;
@@ -40,6 +39,10 @@ const WalletContext = createContext<ContextType>({
 });
 
 export const WalletProvider: React.FC = ({ children }) => {
+  // Because initiating the wallet is asyncronous, when users enter the app, the wallet is seen as not loaded.
+  // This is being used so that we display the "connect wallet" or the connected wallet address
+  // only once we know what's the actual wallet connection status.
+  const [loaded, setLoaded] = useState<boolean>(false);
   const [wallet, setWallet] = useState<Wallet>(emptySender);
   const [connectionType, setConnectionType] = useState<string | undefined>(
     undefined,
@@ -48,148 +51,35 @@ export const WalletProvider: React.FC = ({ children }) => {
     WalletConnect | undefined
   >();
   const walletConfigRef = useRef<WalletConfig | undefined>();
-  // Because initiating the wallet is asyncronous, when users enter the app, the wallet is seen as not loaded.
-  // This is being used so that we display the "connect wallet" or the connected wallet address
-  // only once we know what's the actual wallet connection status.
-  const [loaded, setLoaded] = useState<boolean>(false);
   const [error, setError] = useState<unknown>(undefined);
-  // If set, opens QR code modal.
   const [walletConnectUri, setWalletConnectUri] = useState<
     string | undefined
   >();
 
   const onQrCloseCallback = useRef<() => void>();
 
-  const disconnect = async (): Promise<void> => {
-    if (walletConnect) {
-      await walletConnect.killSession();
-    }
+  const disconnect = useDisconnect({
+    setConnectionType,
+    setWallet,
+    setWalletConnect,
+    setWalletConnectUri,
+    walletConfigRef,
+    walletConnect,
+  });
 
-    setWallet(emptySender);
-    setConnectionType(undefined);
-    setWalletConnect(undefined);
-    setWalletConnectUri(undefined);
-    walletConfigRef.current = undefined;
-    localStorage.removeItem(AUTO_CONNECT_WALLET_KEY);
-    localStorage.removeItem(WALLET_CONNECT_KEY);
-  };
+  const connectWallet = useConnectWallet({
+    onQrCloseCallback,
+    setWallet,
+    setWalletConnect,
+    setWalletConnectUri,
+    walletConfigRef,
+  });
 
-  const connect = async ({ walletType }: ConnectParams): Promise<void> => {
-    try {
-      await connectWallet({ walletType });
-      setConnectionType(walletType);
+  const connect = useConnect({ connectWallet, setConnectionType, setError });
 
-      if (walletType === WalletType.Keplr) {
-        localStorage.setItem(AUTO_CONNECT_WALLET_KEY, WalletType.Keplr);
-      } else {
-        localStorage.setItem(
-          AUTO_CONNECT_WALLET_KEY,
-          WalletType.WalletConnectKeplr,
-        );
-      }
-    } catch (e) {
-      setError(e);
-    }
-  };
-
-  const connectWallet = async ({
-    walletType,
-  }: ConnectWalletParams): Promise<void> => {
-    const walletConfig = walletsConfig.find(
-      walletConfig => walletConfig.type === walletType,
-    );
-    walletConfigRef.current = walletConfig;
-
-    let walletConnect;
-
-    if (walletConfig?.type === WalletType.WalletConnectKeplr) {
-      walletConnect = await getWalletConnectInstance({
-        setWalletConnectUri,
-        onQrCloseCallback,
-      });
-      if (!walletConnect.connected) {
-        await walletConnect.createSession();
-      }
-      setWalletConnect(walletConnect);
-    }
-
-    const walletClient = await walletConfig?.getClient({
-      chainInfo,
-      walletConnect,
-    });
-
-    if (
-      walletConfig?.type === WalletType.WalletConnectKeplr &&
-      walletConnect?.connected
-    ) {
-      finalizeConnection({ setWallet, walletClient, walletConfig });
-    }
-
-    if (walletConfig?.type === WalletType.Keplr) {
-      await walletClient?.experimentalSuggestChain(chainInfo);
-      finalizeConnection({ setWallet, walletClient, walletConfig });
-    }
-  };
-
-  // Automatically connect wallet if connected before
-  useEffect(() => {
-    const autoConnectWalletType = localStorage.getItem(AUTO_CONNECT_WALLET_KEY);
-
-    const tryConnectWallet = async (): Promise<void> => {
-      if (autoConnectWalletType) {
-        try {
-          await connectWallet({
-            walletType: autoConnectWalletType as WalletType,
-          });
-        } catch (e) {
-          setError(e);
-        } finally {
-          setLoaded(true);
-        }
-      }
-    };
-
-    if (autoConnectWalletType) {
-      tryConnectWallet();
-    } else {
-      setLoaded(true);
-    }
-  }, []);
-
-  // Execute onQrCloseCallback if WalletConnect URI is cleared, since it
-  // has now been closed.
-  useEffect(() => {
-    if (!walletConnectUri && onQrCloseCallback) {
-      onQrCloseCallback.current?.();
-      onQrCloseCallback.current = undefined;
-    }
-  }, [walletConnectUri, onQrCloseCallback]);
-
-  // Finalize wallet initialization on connect event
-  useEffect(() => {
-    const onWalletConnectEvent = async (): Promise<void> => {
-      const walletClient = await walletConfigRef.current?.getClient({
-        chainInfo,
-        walletConnect,
-      });
-
-      finalizeConnection({
-        setWallet,
-        walletClient: walletClient,
-        walletConfig: walletConfigRef.current,
-      });
-    };
-
-    if (walletConnect) {
-      walletConnect.on('connect', error => {
-        if (error) {
-          throw error;
-        }
-
-        onWalletConnectEvent();
-      });
-    }
-  }, [walletConnect]);
+  useAutoConnect({ connectWallet, setError, setLoaded });
+  useWalletConnectCallback({ onQrCloseCallback, walletConnectUri });
+  useWalletConnectFinalize({ setWallet, walletConfigRef, walletConnect });
 
   return (
     <WalletContext.Provider

@@ -1,0 +1,33 @@
+import { useEffect } from 'react';
+
+import { Wallet } from '../wallet';
+import { AUTO_CONNECT_WALLET_KEY } from '../wallet.constants';
+import { WalletType } from '../walletsConfig/walletsConfig.types';
+import { ConnectWalletType } from './useConnectWallet';
+
+type Props = {
+  wallet: Wallet;
+  loaded: boolean;
+  connectWallet: ConnectWalletType;
+};
+
+export const useDetectKeplrMobileBrowser = ({
+  wallet,
+  connectWallet,
+  loaded,
+}: Props): void => {
+  useEffect(() => {
+    if (typeof window === 'undefined' || !loaded || wallet.address !== '') {
+      return;
+    }
+
+    import('@keplr-wallet/stores')
+      .then(({ getKeplrFromWindow }) => getKeplrFromWindow())
+      .then(keplr => {
+        if (keplr && keplr.mode === 'mobile-web') {
+          connectWallet({ walletType: WalletType.Keplr });
+          localStorage.setItem(AUTO_CONNECT_WALLET_KEY, WalletType.Keplr);
+        }
+      });
+  }, [connectWallet, loaded, wallet]);
+};

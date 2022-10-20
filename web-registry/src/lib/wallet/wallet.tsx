@@ -6,7 +6,9 @@ import WalletConnect from '@walletconnect/client';
 import { useAutoConnect } from './hooks/useAutoConnect';
 import { useConnect } from './hooks/useConnect';
 import { useConnectWallet } from './hooks/useConnectWallet';
+import { useDetectKeplrMobileBrowser } from './hooks/useDetectKeplrMobileBrowser';
 import { useDisconnect } from './hooks/useDisconnect';
+import { useOnAccountChange } from './hooks/useOnAccountChange';
 import { useWalletConnectCallback } from './hooks/useWalletConnectCallback';
 import { useWalletConnectFinalize } from './hooks/useWalletConnectFinalize';
 import { emptySender } from './wallet.constants';
@@ -78,6 +80,8 @@ export const WalletProvider: React.FC = ({ children }) => {
   const connect = useConnect({ connectWallet, setConnectionType, setError });
 
   useAutoConnect({ connectWallet, setError, setLoaded });
+  useOnAccountChange({ connectWallet, wallet });
+  useDetectKeplrMobileBrowser({ connectWallet, loaded, wallet });
   useWalletConnectCallback({ onQrCloseCallback, walletConnectUri });
   useWalletConnectFinalize({ setWallet, walletConfigRef, walletConnect });
 

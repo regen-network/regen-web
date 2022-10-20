@@ -5,7 +5,7 @@ export const walletConnectClientMeta = {
   name: 'Regen Network Registry',
   description: 'Discover Ecocredits and NCT basket tokens',
   url: 'https://app.regen.network/',
-  icons: ['https://moonphase.is/image.svg'],
+  icons: ['https://app.regen.network/png/logo/regen.png'],
 };
 
 export const emptySender = { address: '', shortAddress: '' };

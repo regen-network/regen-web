@@ -27,6 +27,7 @@ const WalletButton: React.FC = () => {
     setIsModalOpen(false);
     setModalState('wallet-select');
   };
+
   const connectToWallet = useCallback(
     async ({ walletType }: ConnectParams): Promise<void> => {
       if (connect) {

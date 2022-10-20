@@ -251,6 +251,9 @@ export const MyEcocredits = (): JSX.Element => {
     } as SxProps<Theme>,
   };
 
+  // eslint-disable-next-line no-console
+  console.log('credits', credits);
+
   return (
     <>
       <WithLoader

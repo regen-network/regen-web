@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 
+import { Box } from '../box';
 import AgreeErpaCheckbox from '../inputs/AgreeErpaCheckbox';
 import AmountField from '../inputs/AmountField';
+import FormLabel from '../inputs/FormLabel';
 import SelectTextField from '../inputs/SelectTextField';
 import TextField from '../inputs/TextField';
 import { requirementAgreement } from '../inputs/validation';
@@ -59,7 +61,12 @@ const BridgeForm: React.FC<FormProps> = ({ onClose, onSubmit }) => {
           <Field
             name="recipient"
             type="text"
-            label="Recipient"
+            label={
+              <FormLabel
+                label="Recipient"
+                description="This is the polygon address of the recipient."
+              />
+            }
             component={TextField}
           />
           <AmountField

@@ -42,7 +42,7 @@ const FormModalTemplate: React.FC<FormModalTemplateProps> = ({
   return (
     <Modal className={styles.modal} open={open} onClose={onClose}>
       {imgSrc && (
-        <Flex align="center" sx={{ pb: [5, 10] }}>
+        <Flex justifyContent="center" sx={{ pb: [5, 10] }}>
           <img src={imgSrc} height={imgHeight || 34} alt={imgAlt} />
         </Flex>
       )}

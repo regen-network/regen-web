@@ -10,9 +10,6 @@ interface BridgeModalProps extends RegenModalProps, BridgeProps {}
 export const BRIDGE_TITLE = 'Bridge Ecocredits to Polygon';
 const BRIDGE_SUBTITLE =
   'This service allows you to bridge NCT-elligible ecocredits to Polygon in the form of TCO2s.';
-const TOUCAN_LOGO =
-  'https://toucan.earth/_next/image?url=%2Fimg%2Ftoucan-logo.svg&w=256&q=75';
-const TOUCAN_ALT = 'Toucan logo';
 
 const BridgeModal: React.FC<BridgeModalProps> = ({
   availableBridgeableAmount,

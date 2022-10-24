@@ -7,9 +7,12 @@ import FormLabel from '../inputs/FormLabel';
 import SelectTextField from '../inputs/SelectTextField';
 import TextField from '../inputs/TextField';
 import {
+  invalidPolygonAddress,
+  isValidEthAddress,
   requiredMessage,
   requirementAgreement,
   validateAmount,
+  validatePolygonAddress,
 } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
 import Submit from './Submit';
@@ -46,11 +49,12 @@ const BridgeForm: React.FC<FormProps> = ({
   const validateHandler = (values: FormValues): FormikErrors<FormValues> => {
     let errors: FormikErrors<FormValues> = {};
 
-    if (!values.recipient) {
-      errors.recipient = requiredMessage;
-    }
+    const errRecipient = validatePolygonAddress(values.recipient);
+    if (errRecipient) errors.recipient = errRecipient;
+
     const errAmount = validateAmount(availableBridgeableAmount, values.amount);
     if (errAmount) errors.amount = errAmount;
+
     if (!values.agreeErpa) errors.agreeErpa = requirementAgreement;
 
     return errors;

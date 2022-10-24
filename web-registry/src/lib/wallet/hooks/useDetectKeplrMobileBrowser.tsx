@@ -11,6 +11,7 @@ type Props = {
   connectWallet: ConnectWalletType;
 };
 
+// This hooks handle the keplr native app integration connection
 export const useDetectKeplrMobileBrowser = ({
   wallet,
   connectWallet,

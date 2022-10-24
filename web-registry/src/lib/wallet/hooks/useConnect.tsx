@@ -17,6 +17,7 @@ type Props = {
 
 type ConnectType = ({ walletType }: ConnectParams) => Promise<void>;
 
+// This hook returns a callback meant to be called by the UI (ie: WalletButton)
 export const useConnect = ({
   setError,
   connectWallet,

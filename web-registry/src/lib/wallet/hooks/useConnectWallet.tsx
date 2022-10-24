@@ -22,6 +22,8 @@ export type ConnectWalletType = ({
   walletType,
 }: ConnectWalletParams) => Promise<void>;
 
+// This hook returns a callback that performs the wallet connection.
+// The callback is meant to be called by other hooks.
 export const useConnectWallet = ({
   onQrCloseCallback,
   setWalletConnectUri,

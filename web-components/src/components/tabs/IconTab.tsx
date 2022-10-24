@@ -15,23 +15,26 @@ export interface IconTabProps extends RegenTab {
   sxInner?: SxProps<Theme>;
 }
 
-const StyledTab = styled(Tab)<TabProps & { size: TextSize }>(
-  ({ theme, size }) => ({
-    textTransform: 'none',
-    borderColor: theme.palette.secondary.main,
-    color: theme.palette.primary.contrastText,
-    minHeight: '40px',
-    paddingLeft: 0,
-    paddingRight: 0,
+const StyledTab = styled(Tab, {
+  shouldForwardProp: prop => prop !== 'size',
+})<TabProps & { size: TextSize }>(({ theme, size }) => ({
+  textTransform: 'none',
+  borderColor: theme.palette.secondary.main,
+  color: theme.palette.primary.contrastText,
+  minHeight: '40px',
+  paddingLeft: 0,
+  paddingRight: 0,
+  margin: '0 12px',
+  [theme.breakpoints.up('sm')]: {
     margin: size === 'xl' ? '0 25px' : '0 12px',
-    '&.Mui-selected': {
-      color: theme.palette.primary.contrastText,
-    },
-    '& .MuiSvgIcon-root': {
-      color: theme.palette.secondary.main,
-    },
-  }),
-);
+  },
+  '&.Mui-selected': {
+    color: theme.palette.primary.contrastText,
+  },
+  '& .MuiSvgIcon-root': {
+    color: theme.palette.secondary.main,
+  },
+}));
 
 const IconTab = ({
   label,

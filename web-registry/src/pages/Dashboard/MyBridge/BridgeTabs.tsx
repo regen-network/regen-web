@@ -36,8 +36,11 @@ export const BridgeTabs = (): JSX.Element => {
           size={'xl'}
           sxs={{
             tab: {
-              outer: { mt: '20px', mx: '10px' },
-              inner: { mb: '12px', ml: 0 },
+              outer: {
+                mt: { xs: '10px', sm: '15px', lg: '20px' },
+                mx: { xs: '6px', sm: '8px', lg: '10px' },
+              },
+              inner: { mb: { xs: '6px', sm: '9px', lg: '12px' }, ml: 0 },
             },
             panel: { inner: { p: 0 } },
           }}

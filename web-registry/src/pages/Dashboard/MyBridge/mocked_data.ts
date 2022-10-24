@@ -13,12 +13,12 @@ export const MOCK_BRIDGE_DATA = [
     balance: {
       $type: 'regen.ecocredit.v1.BatchBalanceInfo',
       address: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
-      batchDenom: 'C01-001-18540707-19870212-001',
+      batchDenom: 'C03-001-18540707-19870212-001',
       tradableAmount: '0',
       retiredAmount: '2',
       escrowedAmount: '0',
     },
-    classId: 'C01',
+    classId: 'C03',
     className: [
       {
         _key: 'ed8c8e179db2',
@@ -28,14 +28,14 @@ export const MOCK_BRIDGE_DATA = [
             _key: 'f534d59b71fe',
             _type: 'span',
             marks: [],
-            text: 'Verified Carbon Standard',
+            text: 'Toucan Credits',
           },
         ],
         markDefs: [],
         style: 'normal',
       },
     ],
-    projectName: 'The Mai Ndombe REDD+ Project',
+    projectName: 'Jones Farm',
     projectLocation: 'US',
   },
 ];

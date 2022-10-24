@@ -66,12 +66,12 @@ export const BridgableTable = ({
           display="flex"
           sx={{
             width: {
-              sm: '100%',
+              xs: '8rem',
               lg: '10rem',
             },
           }}
         >
-          <Box sx={{ width: { sm: '100%', lg: '4.2rem' } }}>
+          <Box sx={{ width: '4.2rem' }}>
             <BreakText>Credit Batch Id</BreakText>
           </Box>
           <Box alignSelf="flex-end" ml={2}>
@@ -86,10 +86,10 @@ export const BridgableTable = ({
             <InfoTooltipWithIcon outlined title={'...'} />
           </Box>
         </Box>,
-        <Box sx={{ width: { sm: '100%', lg: '6.25rem' } }}>
+        <Box sx={{ width: '6.25rem' }}>
           <BreakText>Batch Start Date</BreakText>
         </Box>,
-        <Box sx={{ width: { sm: '100%', lg: '6.25rem' } }}>
+        <Box sx={{ width: '6.25rem' }}>
           <BreakText>Batch End Date</BreakText>
         </Box>,
         'Project Location',

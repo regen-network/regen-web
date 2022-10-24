@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 
+import { Flex } from '../box';
 import Modal, { RegenModalProps } from '../modal';
 import { Body, Title } from '../typography';
 
@@ -16,22 +17,22 @@ const useStyles = makeStyles(theme => ({
       maxWidth: theme.spacing(140 + SCROLL_BAR_WIDTH),
     },
   },
-  mainTitle: {
-    paddingBottom: theme.spacing(7.5),
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(12.5),
-    },
-  },
 }));
 
 interface FormModalTemplateProps extends RegenModalProps {
   title: string;
   subtitle?: string;
+  imgSrc?: string;
+  imgHeight?: number;
+  imgAlt?: string;
 }
 
 const FormModalTemplate: React.FC<FormModalTemplateProps> = ({
   title,
   subtitle,
+  imgSrc,
+  imgHeight,
+  imgAlt,
   open,
   onClose,
   children,
@@ -40,6 +41,11 @@ const FormModalTemplate: React.FC<FormModalTemplateProps> = ({
 
   return (
     <Modal className={styles.modal} open={open} onClose={onClose}>
+      {imgSrc && (
+        <Flex align="center" sx={{ pb: [5, 10] }}>
+          <img src={imgSrc} height={imgHeight || 34} alt={imgAlt} />
+        </Flex>
+      )}
       <Title sx={{ pb: [7.5, 10] }} variant="h3" align="center">
         {title}
       </Title>

@@ -1,5 +1,5 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useState } from 'react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { WalletModal } from './WalletModal';
 import { getWalletsMock, uriMock } from './WalletModal.mock';

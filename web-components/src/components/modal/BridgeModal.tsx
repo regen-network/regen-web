@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { BridgeForm, BridgeProps } from '../form/BridgeForm';
+import { ToucanIcon } from '../icons/ToucanIcon';
 import { RegenModalProps } from '../modal';
 import { FormModalTemplate } from './FormModalTemplate';
 
@@ -23,9 +24,7 @@ const BridgeModal: React.FC<BridgeModalProps> = ({
   <FormModalTemplate
     title={BRIDGE_TITLE}
     subtitle={BRIDGE_SUBTITLE}
-    imgSrc={TOUCAN_LOGO}
-    imgHeight={34}
-    imgAlt={TOUCAN_ALT}
+    image={<ToucanIcon sx={{ width: 109, height: 32 }} />}
     open={open}
     onClose={onClose}
   >

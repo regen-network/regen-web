@@ -22,17 +22,13 @@ const useStyles = makeStyles(theme => ({
 interface FormModalTemplateProps extends RegenModalProps {
   title: string;
   subtitle?: string;
-  imgSrc?: string;
-  imgHeight?: number;
-  imgAlt?: string;
+  image?: JSX.Element;
 }
 
 const FormModalTemplate: React.FC<FormModalTemplateProps> = ({
   title,
   subtitle,
-  imgSrc,
-  imgHeight,
-  imgAlt,
+  image,
   open,
   onClose,
   children,
@@ -41,9 +37,9 @@ const FormModalTemplate: React.FC<FormModalTemplateProps> = ({
 
   return (
     <Modal className={styles.modal} open={open} onClose={onClose}>
-      {imgSrc && (
+      {image && (
         <Flex justifyContent="center" sx={{ pb: [5, 10] }}>
-          <img src={imgSrc} height={imgHeight || 34} alt={imgAlt} />
+          {image}
         </Flex>
       )}
       <Title sx={{ pb: [7.5, 10] }} variant="h3" align="center">

@@ -7,9 +7,6 @@ import FormLabel from '../inputs/FormLabel';
 import SelectTextField from '../inputs/SelectTextField';
 import TextField from '../inputs/TextField';
 import {
-  invalidPolygonAddress,
-  isValidEthAddress,
-  requiredMessage,
   requirementAgreement,
   validateAmount,
   validatePolygonAddress,

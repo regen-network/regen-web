@@ -73,7 +73,7 @@ const headCells: HeadCell[] = [
   { id: 'projectLocation', numeric: false, label: 'project location' },
 ];
 
-const CreditBatches: React.FC<CreditBatchProps> = ({
+const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
   creditClassId,
   filteredColumns,
   withSection = false,

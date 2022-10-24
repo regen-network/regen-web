@@ -13,11 +13,9 @@ type Fill = {
   shade: string;
 };
 
-const DocumentIcon: React.FC<Props & Partial<typeof SvgIcon>> = ({
-  className,
-  fileType,
-  ...props
-}) => {
+const DocumentIcon: React.FC<
+  React.PropsWithChildren<Props & Partial<typeof SvgIcon>>
+> = ({ className, fileType, ...props }) => {
   const theme: Theme = useTheme();
   const getFill = (): Fill => {
     switch (fileType) {

@@ -71,7 +71,7 @@ interface FormProps extends BasketTakeProps {
   onClose: RegenModalProps['onClose'];
 }
 
-const BasketTakeForm: React.FC<FormProps> = ({
+const BasketTakeForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   mapboxToken,
   accountAddress,
   basket,

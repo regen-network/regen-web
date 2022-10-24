@@ -70,7 +70,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ConfirmationModal: React.FC<Props> = ({
+const ConfirmationModal: React.FC<React.PropsWithChildren<Props>> = ({
   open,
   onClose,
   transactionHash,

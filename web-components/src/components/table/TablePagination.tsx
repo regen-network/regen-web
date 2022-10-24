@@ -115,7 +115,9 @@ export interface TablePaginationProps {
   onChangeRowsPerPage: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const TablePagination: React.FC<TablePaginationProps> = props => {
+export const TablePagination: React.FC<
+  React.PropsWithChildren<TablePaginationProps>
+> = props => {
   return (
     <StyledTablePagination
       rowsPerPageOptions={props.rowsPerPageOptions}

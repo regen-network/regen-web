@@ -11,7 +11,7 @@ interface FieldProps {
   exclude?: boolean;
 }
 
-const LocationCountryField: React.FC<FieldProps> = ({
+const LocationCountryField: React.FC<React.PropsWithChildren<FieldProps>> = ({
   name = 'country',
   className,
   optional = false,

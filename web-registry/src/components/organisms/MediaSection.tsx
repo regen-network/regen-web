@@ -21,7 +21,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const MediaSection: React.FC<MediaSectionProps> = ({ header, items }) => {
+const MediaSection: React.FC<React.PropsWithChildren<MediaSectionProps>> = ({
+  header,
+  items,
+}) => {
   const styles = useStyles();
 
   return (

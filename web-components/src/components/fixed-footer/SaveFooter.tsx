@@ -91,7 +91,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
-const SaveFooter: React.FC<Props> = ({
+const SaveFooter: React.FC<React.PropsWithChildren<Props>> = ({
   saveText = 'Save & Next',
   hideProgress = false,
   ...props

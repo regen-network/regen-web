@@ -99,9 +99,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const OverviewCards: React.FC<{
-  cards?: Maybe<Array<Maybe<CardFieldsFragment>>>;
-}> = props => {
+const OverviewCards: React.FC<
+  React.PropsWithChildren<{
+    cards?: Maybe<Array<Maybe<CardFieldsFragment>>>;
+  }>
+> = props => {
   const styles = useStyles();
   return (
     <Grid container spacing={4} className={styles.cardWrap}>
@@ -125,13 +127,9 @@ const OverviewCards: React.FC<{
   );
 };
 
-const CreditClassOverviewSection: React.FC<CreditClassOverviewSectionProps> = ({
-  dbClass,
-  className,
-  nameRaw,
-  overviewCards,
-  sdgs,
-}) => {
+const CreditClassOverviewSection: React.FC<
+  React.PropsWithChildren<CreditClassOverviewSectionProps>
+> = ({ dbClass, className, nameRaw, overviewCards, sdgs }) => {
   const styles = useStyles();
   const theme = useTheme();
   const isMobile: boolean = useMediaQuery(theme.breakpoints.down('sm'));

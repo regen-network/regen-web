@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import ReactHtmlParser from 'react-html-parser';
+import ReactHtmlParser from 'html-react-parser';
 
 export function parseText(
   content: string | JSX.Element,

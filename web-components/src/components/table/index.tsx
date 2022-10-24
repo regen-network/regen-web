@@ -83,7 +83,9 @@ const StyledTableCell = withStyles(theme => ({
   },
 }))(TableCell);
 
-const StyledTableSortLabel: React.FC<TableSortLabelProps> = props => {
+const StyledTableSortLabel: React.FC<
+  React.PropsWithChildren<TableSortLabelProps>
+> = props => {
   return (
     <TableSortLabel {...props} IconComponent={DropdownIcon}>
       {props.children}

@@ -91,11 +91,9 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   },
 }));
 
-const CreditClassDetailsWithContent: React.FC<CreditDetailsProps> = ({
-  dbClass,
-  content,
-  isLandSteward,
-}) => {
+const CreditClassDetailsWithContent: React.FC<
+  React.PropsWithChildren<CreditDetailsProps>
+> = ({ dbClass, content, isLandSteward }) => {
   const [modalIframeLink, setModalIframeLink] = useState<string>('');
   const [isBuyerModalOpen, setBuyerModalOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);

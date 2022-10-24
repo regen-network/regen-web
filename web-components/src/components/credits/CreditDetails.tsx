@@ -1,7 +1,7 @@
 import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
 import { Box } from '@mui/material';
 import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import ReactHtmlParser from 'html-react-parser';
 
 import CreditsIcon from '../icons/CreditsIcon';
 import { Body, Title } from '../typography';

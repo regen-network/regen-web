@@ -12,9 +12,11 @@ import { getSanityImgSrc } from '../../lib/imgSrc';
 /**
  * ImpactCard wrapping content from Sanity
  */
-const WrappedImpactCard: React.FC<{
-  outcome: Maybe<EcologicalOutcomeFieldsFragment>;
-}> = ({ outcome }) => {
+const WrappedImpactCard: React.FC<
+  React.PropsWithChildren<{
+    outcome: Maybe<EcologicalOutcomeFieldsFragment>;
+  }>
+> = ({ outcome }) => {
   return (
     <ImpactCard
       name={outcome?.title || ''}

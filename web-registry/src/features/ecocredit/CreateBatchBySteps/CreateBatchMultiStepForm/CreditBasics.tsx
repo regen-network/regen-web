@@ -180,9 +180,11 @@ export default function CreditBasics({
   );
 }
 
-const AdditionalCerfications: React.FC<{
-  certifications: NameUrl[];
-}> = ({ certifications }) => {
+const AdditionalCerfications: React.FC<
+  React.PropsWithChildren<{
+    certifications: NameUrl[];
+  }>
+> = ({ certifications }) => {
   const theme = useTheme<Theme>();
   const [modalOpen, setModalOpen] = useState(false);
 

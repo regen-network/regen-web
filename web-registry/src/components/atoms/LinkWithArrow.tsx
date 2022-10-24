@@ -15,7 +15,7 @@ export interface LinkWithArrowProps {
   target?: '_blank' | '_self';
 }
 
-const LinkWithArrow: React.FC<LinkWithArrowProps> = ({
+const LinkWithArrow: React.FC<React.PropsWithChildren<LinkWithArrowProps>> = ({
   sx,
   href,
   label,

@@ -10,7 +10,11 @@ interface Props {
   sx?: SxProps<Theme>;
 }
 
-const AgreeCheckbox: React.FC<Props> = ({ name, label, sx }: Props) => {
+const AgreeCheckbox: React.FC<React.PropsWithChildren<Props>> = ({
+  name,
+  label,
+  sx,
+}: Props) => {
   return (
     <Field
       component={CheckboxLabel}

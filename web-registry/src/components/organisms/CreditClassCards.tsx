@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const CreditClassCards: React.FC<Props> = ({
+const CreditClassCards: React.FC<React.PropsWithChildren<Props>> = ({
   justifyContent = 'center',
   ...props
 }) => {

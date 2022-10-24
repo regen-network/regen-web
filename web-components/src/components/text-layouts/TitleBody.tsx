@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
 import { Box, SxProps } from '@mui/material';
+import ReactHtmlParser from 'html-react-parser';
 
 import type { Theme } from 'src/theme/muiTheme';
 

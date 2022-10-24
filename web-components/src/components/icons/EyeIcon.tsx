@@ -10,11 +10,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const EyeIcon: React.FC<{
-  color?: string;
-  visible?: boolean;
-  className?: string;
-}> = ({ visible = true, className, color, ...props }) => {
+const EyeIcon: React.FC<
+  React.PropsWithChildren<{
+    color?: string;
+    visible?: boolean;
+    className?: string;
+  }>
+> = ({ visible = true, className, color, ...props }) => {
   const classes = useStyles({});
   const theme = useTheme();
   color = color || theme.palette.secondary.main;

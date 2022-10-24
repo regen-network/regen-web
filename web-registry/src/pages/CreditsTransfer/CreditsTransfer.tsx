@@ -65,11 +65,13 @@ interface Result {
   walletId: string;
 }
 
-const CreditsTransfer: React.FC<{
-  addressId?: string;
-  buyerWalletId?: string;
-  onTransfer?: (vintageId: string) => void;
-}> = ({
+const CreditsTransfer: React.FC<
+  React.PropsWithChildren<{
+    addressId?: string;
+    buyerWalletId?: string;
+    onTransfer?: (vintageId: string) => void;
+  }>
+> = ({
   onTransfer,
   addressId: passedAddressId,
   buyerWalletId: passedBuyerWalletId = '',

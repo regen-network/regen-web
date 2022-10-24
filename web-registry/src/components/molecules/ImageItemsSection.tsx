@@ -23,7 +23,9 @@ interface Props {
   content: ImageItemsSectionProps;
 }
 
-const ImageItemsSection: React.FC<Props> = ({ content }) => {
+const ImageItemsSection: React.FC<React.PropsWithChildren<Props>> = ({
+  content,
+}) => {
   const styles = useStyles();
   const imageItems: ImageItemProps[] =
     content?.imageCards?.map(i => ({

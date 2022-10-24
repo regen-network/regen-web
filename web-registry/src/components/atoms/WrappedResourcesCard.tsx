@@ -12,9 +12,11 @@ import { getSanityImgSrc } from '../../lib/imgSrc';
  * ResourcesCard wrapping content from Sanity
  * TODO: once we migrate website content, this can be deleted
  */
-const WrappedResourcesCard: React.FC<{
-  resource: Maybe<ResourceFieldsFragment>;
-}> = ({ resource }) => {
+const WrappedResourcesCard: React.FC<
+  React.PropsWithChildren<{
+    resource: Maybe<ResourceFieldsFragment>;
+  }>
+> = ({ resource }) => {
   return (
     <ResourcesCard
       image={{ publicURL: getSanityImgSrc(resource?.image) }}

@@ -30,7 +30,10 @@ const useStyles = makeStyles(theme => ({
 
 interface Props extends RegenModalProps {}
 
-const ProcessingModal: React.FC<Props> = ({ open, onClose }) => {
+const ProcessingModal: React.FC<React.PropsWithChildren<Props>> = ({
+  open,
+  onClose,
+}) => {
   const styles = useStyles();
 
   return (

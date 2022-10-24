@@ -18,7 +18,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 /** Custom styles on top of MUI's `Checkbox` component */
-const Checkbox: React.FC<CheckboxProps> = (props: CheckboxProps) => {
+const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
+  props: CheckboxProps,
+) => {
   const classes = useStyles();
   const { form, field, triggerOnChange, disabled } = props;
 

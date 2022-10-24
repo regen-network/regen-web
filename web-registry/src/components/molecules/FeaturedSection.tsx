@@ -39,7 +39,9 @@ interface Props {
   content: FeaturedSectionProps;
 }
 
-const FeaturedSection: React.FC<Props> = ({ content }) => {
+const FeaturedSection: React.FC<React.PropsWithChildren<Props>> = ({
+  content,
+}) => {
   const styles = useStyles();
 
   if (

@@ -108,7 +108,7 @@ export const initialValues = {
   recipients: [{ ...recipientInitialValues }],
 };
 
-export const RecipientsForm: React.FC<FormProps> = ({
+export const RecipientsForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   addressPrefix,
   mapboxToken,
   onSubmit,
@@ -146,7 +146,9 @@ interface ButtonProps {
   onClick: () => void;
 }
 
-const DeleteButton: React.FC<ButtonProps> = ({ onClick }) => {
+const DeleteButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
+  onClick,
+}) => {
   const theme = useTheme<Theme>();
 
   return (
@@ -176,7 +178,9 @@ const DeleteButton: React.FC<ButtonProps> = ({ onClick }) => {
   );
 };
 
-const AddRecipientButton: React.FC<ButtonProps> = ({ onClick }) => (
+const AddRecipientButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
+  onClick,
+}) => (
   <OnBoardingCard>
     <OutlinedButton onClick={onClick} sx={{ width: '100%' }}>
       + Add recipient

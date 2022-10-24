@@ -24,7 +24,7 @@ export default function useQueryDenomMetadata(): FetchDenomMetadata {
   }, [api?.queryClient]);
 
   const fetchDenomMetadata = useCallback(
-    async denom => {
+    async (denom: string): Promise<QueryDenomMetadataResponse | undefined> => {
       if (!queryClient) return;
 
       try {

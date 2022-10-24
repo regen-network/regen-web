@@ -27,9 +27,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const OverviewCards: React.FC<{
-  cards?: Maybe<Array<Maybe<CardFieldsFragment>>>;
-}> = props => {
+const OverviewCards: React.FC<
+  React.PropsWithChildren<{
+    cards?: Maybe<Array<Maybe<CardFieldsFragment>>>;
+  }>
+> = props => {
   const styles = useStyles();
   return (
     <Grid container spacing={4} className={styles.wrap}>

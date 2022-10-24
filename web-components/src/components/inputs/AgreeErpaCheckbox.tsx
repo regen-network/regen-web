@@ -11,7 +11,9 @@ interface Props {
   sx?: SxProps<Theme>;
 }
 
-const AgreeErpaCheckbox: React.FC<Props> = ({ sx }: Props) => {
+const AgreeErpaCheckbox: React.FC<React.PropsWithChildren<Props>> = ({
+  sx,
+}: Props) => {
   const theme = useTheme();
   return (
     <AgreeCheckbox

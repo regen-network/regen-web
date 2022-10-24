@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import ReactHtmlParser from 'react-html-parser';
 import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
+import ReactHtmlParser from 'html-react-parser';
 
 import { ExpandButton } from '../buttons/ExpandButton';
 import { Texts, truncate } from '../read-more/truncate';
@@ -59,19 +59,21 @@ export default function Action({
         {name}
       </Subtitle>
       <Body size="sm" mobileSize="sm">
-        {ReactHtmlParser(desc)}
-        {texts.rest.length !== 0 && (
-          <ExpandButton
-            size="small"
-            onClick={handleChange}
-            expanded={expanded}
-            sx={{
-              p: [0],
-              ml: 2,
-              ':hover': { bgcolor: 'transparent !important' },
-            }}
-          />
-        )}
+        <>
+          {ReactHtmlParser(desc)}
+          {texts.rest.length !== 0 && (
+            <ExpandButton
+              size="small"
+              onClick={handleChange}
+              expanded={expanded}
+              sx={{
+                p: [0],
+                ml: 2,
+                ':hover': { bgcolor: 'transparent !important' },
+              }}
+            />
+          )}
+        </>
       </Body>
     </div>
   );

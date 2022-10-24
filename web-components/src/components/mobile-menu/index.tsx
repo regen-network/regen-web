@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import ReactHtmlParser from 'react-html-parser';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import { useTheme } from '@mui/styles';
 import clsx from 'clsx';
+import ReactHtmlParser from 'html-react-parser';
 
 import { Center } from '../box';
 import { HeaderMenuItem } from '../header/components/HeaderMenuHover/HeaderMenuHover';
@@ -19,14 +19,14 @@ type Props = {
   isRegistry?: boolean;
   pathname: string;
   isAuthenticated?: boolean;
-  linkComponent: React.FC<NavLinkProps>;
   extras?: JSX.Element;
+  linkComponent: React.FC<React.PropsWithChildren<NavLinkProps>>;
   onSignup?: () => void;
   onLogin?: () => void;
   onLogout?: () => void;
 };
 
-const MobileMenu: React.FC<Props> = ({
+const MobileMenu: React.FC<React.PropsWithChildren<Props>> = ({
   menuItems,
   pathname,
   isRegistry,

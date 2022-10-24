@@ -130,7 +130,7 @@ const useStyles = makeStyles<Theme>(theme => ({
   },
 }));
 
-const SwitchFooter: React.FC<SwitchFooterProps> = ({
+const SwitchFooter: React.FC<React.PropsWithChildren<SwitchFooterProps>> = ({
   buttonText,
   activeOption,
   leftOption,

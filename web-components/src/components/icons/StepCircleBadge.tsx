@@ -23,7 +23,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const StepCircleBadge: React.FC<Props> = ({ className, icon, isActive }) => {
+const StepCircleBadge: React.FC<React.PropsWithChildren<Props>> = ({
+  className,
+  icon,
+  isActive,
+}) => {
   const classes = useStyles();
 
   return (

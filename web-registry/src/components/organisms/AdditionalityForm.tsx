@@ -45,10 +45,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const AdditionalityForm: React.FC<AdditionalityFormProps> = props => {
+export const AdditionalityForm: React.FC<
+  React.PropsWithChildren<AdditionalityFormProps>
+> = props => {
   const classes = useStyles();
 
-  const DateLabel: React.FC = () => (
+  const DateLabel: React.FC<React.PropsWithChildren<unknown>> = () => (
     <Subtitle size="sm" mb={1}>
       Choose a practice start date
     </Subtitle>

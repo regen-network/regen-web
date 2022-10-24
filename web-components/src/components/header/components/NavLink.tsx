@@ -31,7 +31,7 @@ export type NavLinkProps = {
   overrideClassname?: string;
 };
 
-export const NavLink: React.FC<NavLinkProps> = ({
+export const NavLink: React.FC<React.PropsWithChildren<NavLinkProps>> = ({
   children,
   href,
   pathname,

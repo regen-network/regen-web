@@ -144,7 +144,7 @@ function setFieldValueInOtherFields(
   }
 }
 
-const RoleField: React.FC<Props> = ({
+const RoleField: React.FC<React.PropsWithChildren<Props>> = ({
   className,
   classes,
   label,

@@ -194,12 +194,9 @@ async function setType(
   setFieldTouched(fieldName, true);
 }
 
-const OrganizationFormlet: React.FC<OrganizationFormletProps> = ({
-  role,
-  entity,
-  setFieldValue,
-  setFieldTouched,
-}) => {
+const OrganizationFormlet: React.FC<
+  React.PropsWithChildren<OrganizationFormletProps>
+> = ({ role, entity, setFieldValue, setFieldTouched }) => {
   const styles = useStyles();
   const theme = useTheme();
   const apiUri = getApiUri();
@@ -254,12 +251,9 @@ const OrganizationFormlet: React.FC<OrganizationFormletProps> = ({
   );
 };
 
-const IndividualFormlet: React.FC<IndividualFormletProps> = ({
-  entity,
-  role,
-  setFieldValue,
-  setFieldTouched,
-}) => {
+const IndividualFormlet: React.FC<
+  React.PropsWithChildren<IndividualFormletProps>
+> = ({ entity, role, setFieldValue, setFieldTouched }) => {
   const styles = useStyles();
   const { projectId } = useParams();
   const apiUri = getApiUri();
@@ -360,11 +354,9 @@ function getInitialValues(values?: DisplayValues): DisplayValues | undefined {
   }
 }
 
-const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({
-  submit,
-  initialValues,
-  ...props
-}) => {
+const EntityDisplayForm: React.FC<
+  React.PropsWithChildren<EntityDisplayFormProps>
+> = ({ submit, initialValues, ...props }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const styles = useStyles();
   const { confirmSave, isEdit } = useProjectEditContext();

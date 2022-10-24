@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const CreateMethodology: React.FC = () => {
+const CreateMethodology: React.FC<React.PropsWithChildren<unknown>> = () => {
   const styles = useStyles();
   const theme = useTheme<Theme>();
   const [open, setOpen] = useState(false);

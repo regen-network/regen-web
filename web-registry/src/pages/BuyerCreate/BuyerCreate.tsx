@@ -34,9 +34,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const BuyerCreate: React.FC<{
-  onCreate?: (walletId: string, addressId: string) => void;
-}> = ({ onCreate }) => {
+const BuyerCreate: React.FC<
+  React.PropsWithChildren<{
+    onCreate?: (walletId: string, addressId: string) => void;
+  }>
+> = ({ onCreate }) => {
   const classes = useStyles();
 
   const [createUser, { data: userData, error: userError }] =

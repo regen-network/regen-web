@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const CreditTotals: React.FC = () => {
+const CreditTotals: React.FC<React.PropsWithChildren<unknown>> = () => {
   const styles = useStyles();
   const [totals, setTotals] = useState<CreditTotalData>({
     tradeable: undefined,

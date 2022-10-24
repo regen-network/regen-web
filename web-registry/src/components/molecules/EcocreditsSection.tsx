@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const EcocreditsSection: React.FC<Props> = props => {
+const EcocreditsSection: React.FC<React.PropsWithChildren<Props>> = props => {
   const styles = useStyles();
 
   return (

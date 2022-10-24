@@ -14,7 +14,7 @@ import { useProjectByIdQuery } from '../../generated/graphql';
 import { getHashUrl } from '../../lib/block-explorer';
 import { useCreateProjectContext } from '../ProjectCreate';
 
-const ProjectFinished: React.FC = () => {
+const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { deliverTxResponse } = useCreateProjectContext();
   const { projectId } = useParams();
   const navigate = useNavigate();

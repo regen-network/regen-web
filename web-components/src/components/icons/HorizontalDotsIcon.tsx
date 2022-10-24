@@ -2,10 +2,12 @@ import React from 'react';
 import { SvgIcon } from '@mui/material';
 import { useTheme } from '@mui/styles';
 
-export const HorizontalDotsIcon: React.FC<{
-  color?: string;
-  className?: string;
-}> = ({ className, color, ...props }) => {
+export const HorizontalDotsIcon: React.FC<
+  React.PropsWithChildren<{
+    color?: string;
+    className?: string;
+  }>
+> = ({ className, color, ...props }) => {
   const theme = useTheme();
   color = color || theme.palette.secondary.main;
 

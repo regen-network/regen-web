@@ -158,7 +158,7 @@ const steps: Step[] = [
   },
 ];
 
-const GettingStarted: React.FC = () => {
+const GettingStarted: React.FC<React.PropsWithChildren<unknown>> = () => {
   const classes = useStyles();
   const [stepsMap, setStepsMap] = useState<any>({});
 

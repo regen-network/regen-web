@@ -31,7 +31,7 @@ interface Props extends FieldProps {
   triggerOnChange?: (v: any) => Promise<void>;
 }
 
-const LocationField: React.FC<Props> = ({
+const LocationField: React.FC<React.PropsWithChildren<Props>> = ({
   className,
   label,
   optional,

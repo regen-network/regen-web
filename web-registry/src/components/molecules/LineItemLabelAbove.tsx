@@ -12,11 +12,9 @@ export interface LineItemLabelAboveProps {
 }
 
 // TODO should this be consolidated with the LineItem component?
-const LineItemLabelAbove: React.FC<LineItemLabelAboveProps> = ({
-  sx,
-  label,
-  data,
-}) => {
+const LineItemLabelAbove: React.FC<
+  React.PropsWithChildren<LineItemLabelAboveProps>
+> = ({ sx, label, data }) => {
   if (!data) return null;
   return (
     <Box

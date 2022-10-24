@@ -11,7 +11,7 @@ import {
 } from '../../components/organisms';
 import useBasketDetails from './hooks/useBasketDetails';
 
-const BasketDetails: React.FC = () => {
+const BasketDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { basketDenom } = useParams<{ basketDenom: string }>();
   const data = useBasketDetails(basketDenom);
 
@@ -46,7 +46,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const SectionLayout: React.FC = ({ children }) => {
+const SectionLayout: React.FC<React.PropsWithChildren<unknown>> = ({
+  children,
+}) => {
   const styles = useStyles();
 
   return (

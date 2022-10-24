@@ -142,13 +142,9 @@ function EnhancedTableHead(props: EnhancedTableProps): JSX.Element {
   );
 }
 
-const DocumentationTable: React.FC<DocumentationTableProps> = ({
-  rows,
-  canClickRow = false,
-  onViewOnLedger,
-  txClient,
-  className,
-}) => {
+const DocumentationTable: React.FC<
+  React.PropsWithChildren<DocumentationTableProps>
+> = ({ rows, canClickRow = false, onViewOnLedger, txClient, className }) => {
   const styles = useStyles();
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<keyof DocumentRowData>('name');

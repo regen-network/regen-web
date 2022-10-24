@@ -49,7 +49,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SocialLinks: React.FC<Props> = ({ className }) => {
+const SocialLinks: React.FC<React.PropsWithChildren<Props>> = ({
+  className,
+}) => {
   const styles = useStyles();
 
   return (

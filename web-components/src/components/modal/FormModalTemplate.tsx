@@ -25,14 +25,9 @@ interface FormModalTemplateProps extends RegenModalProps {
   image?: JSX.Element;
 }
 
-const FormModalTemplate: React.FC<FormModalTemplateProps> = ({
-  title,
-  subtitle,
-  image,
-  open,
-  onClose,
-  children,
-}) => {
+const FormModalTemplate: React.FC<
+  React.PropsWithChildren<FormModalTemplateProps>
+> = ({ title, subtitle, image, open, onClose, children }) => {
   const styles = useStyles();
 
   return (

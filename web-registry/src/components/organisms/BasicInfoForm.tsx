@@ -59,11 +59,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const BasicInfoForm: React.FC<{
-  submit: (values: BasicInfoFormValues) => Promise<void>;
-  initialValues?: BasicInfoFormValues;
-  onNext?: () => void;
-}> = ({ submit, initialValues, onNext }) => {
+const BasicInfoForm: React.FC<
+  React.PropsWithChildren<{
+    submit: (values: BasicInfoFormValues) => Promise<void>;
+    initialValues?: BasicInfoFormValues;
+    onNext?: () => void;
+  }>
+> = ({ submit, initialValues, onNext }) => {
   const classes = useStyles();
   const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({

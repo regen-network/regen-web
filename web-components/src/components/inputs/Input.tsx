@@ -33,7 +33,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 /** Custom styles on top of MUI's `Input` component */
-const Input: React.FC<InputProps> = ({ className, ...props }) => {
+const Input: React.FC<React.PropsWithChildren<InputProps>> = ({
+  className,
+  ...props
+}) => {
   const styles = useStyles();
   return (
     <MuiInput

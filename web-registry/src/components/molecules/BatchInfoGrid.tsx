@@ -11,12 +11,14 @@ import {
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { LinkWithArrow } from '../atoms';
 
-export const BatchInfoGrid: React.FC<{
-  batch: BatchInfoWithSupply;
-  projectOnChainId?: string | null;
-  projectName?: string;
-  sx?: SxProps<Theme>;
-}> = ({ batch, projectOnChainId, projectName, sx }) => (
+export const BatchInfoGrid: React.FC<
+  React.PropsWithChildren<{
+    batch: BatchInfoWithSupply;
+    projectOnChainId?: string | null;
+    projectName?: string;
+    sx?: SxProps<Theme>;
+  }>
+> = ({ batch, projectOnChainId, projectName, sx }) => (
   <Grid
     container
     rowGap={6}
@@ -58,13 +60,16 @@ const batchDate = (date?: string | Date): string => {
   return formatDate(date, DATE_FORMAT_SECONDARY, true);
 };
 
-const GridItem: React.FC = ({ children }) => (
+const GridItem: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => (
   <Grid item xs={12} sm={5}>
     {children}
   </Grid>
 );
 
-const BatchDetail: React.FC<{ label: string }> = ({ label, children }) => (
+const BatchDetail: React.FC<React.PropsWithChildren<{ label: string }>> = ({
+  label,
+  children,
+}) => (
   <LabeledDetail label={label}>
     <Body
       size="xl"

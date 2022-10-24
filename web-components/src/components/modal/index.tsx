@@ -99,7 +99,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const RegenModal: React.FC<RegenModalProps> = ({
+const RegenModal: React.FC<React.PropsWithChildren<RegenModalProps>> = ({
   open,
   onClose,
   children,

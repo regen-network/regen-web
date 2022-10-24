@@ -63,7 +63,10 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
 /**
  * Hero section with optional background image, centered title, and button with action. Passing no img will render with a light background and dark text & buttons
  */
-const HeroAction: React.FC<Props> = ({ classes, ...props }) => {
+const HeroAction: React.FC<React.PropsWithChildren<Props>> = ({
+  classes,
+  ...props
+}) => {
   const lightBg = props.lightBg || !props.img;
   const styles = useStyles({ lightBg });
 

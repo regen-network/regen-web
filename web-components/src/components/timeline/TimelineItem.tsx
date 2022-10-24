@@ -1,7 +1,7 @@
 import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
 import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import ReactHtmlParser from 'html-react-parser';
 
 import ContainedButton from '../buttons/ContainedButton';
 import ShieldIcon from '../icons/ShieldIcon';

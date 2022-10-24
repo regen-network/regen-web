@@ -83,7 +83,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const StepFAQs: React.FC<StepFAQProps> = ({ questionItems, isActive }) => {
+const StepFAQs: React.FC<React.PropsWithChildren<StepFAQProps>> = ({
+  questionItems,
+  isActive,
+}) => {
   const classes = useStyles();
   const theme = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);

@@ -21,7 +21,9 @@ const useStyles = makeStyles<Theme, { isLoaded: boolean }>(theme => {
   };
 });
 
-export const HeaderLogoLink: React.FC<{ color: string }> = ({ color }) => {
+export const HeaderLogoLink: React.FC<
+  React.PropsWithChildren<{ color: string }>
+> = ({ color }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const styles = useStyles({ isLoaded });
 

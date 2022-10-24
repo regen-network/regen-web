@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import ReactHtmlParser from 'react-html-parser';
+import ReactHtmlParser from 'html-react-parser';
 import Grid from '@mui/material/Grid';
 import { DefaultTheme as Theme, makeStyles, withStyles } from '@mui/styles';
 import {

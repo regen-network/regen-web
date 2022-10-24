@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const BuyerCreditsTransfer: React.FC = () => {
+const BuyerCreditsTransfer: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [step, setStep] = useState(1);
   const [buyerWalletId, setBuyerWalletId] = useState('');
   const [vintageId, setVintageId] = useState('');

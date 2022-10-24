@@ -40,7 +40,7 @@ const useStyles = makeStyles<Theme>(theme => ({
  * To get an optimized image, you must include imageStorageBaseUrl and apiServerUrl.
  * Note: not compatible with SVGs
  */
-const Image: React.FC<ImageProps> = ({
+const Image: React.FC<React.PropsWithChildren<ImageProps>> = ({
   src,
   alt = '',
   options = { q: 100 },

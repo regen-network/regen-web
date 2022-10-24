@@ -132,10 +132,12 @@ const errorMsgs: Errors = {
   'regen:projectQuote': quoteError,
 };
 
-const ModalContent: React.FC<{
-  exampleProjectUrl: string;
-  fieldName: exampleFieldName;
-}> = ({ exampleProjectUrl, fieldName }) => {
+const ModalContent: React.FC<
+  React.PropsWithChildren<{
+    exampleProjectUrl: string;
+    fieldName: exampleFieldName;
+  }>
+> = ({ exampleProjectUrl, fieldName }) => {
   const styles = useStyles();
 
   return (
@@ -156,7 +158,10 @@ const ModalContent: React.FC<{
   );
 };
 
-const StoryForm: React.FC<StoryFormProps> = ({ initialValues, ...props }) => {
+const StoryForm: React.FC<React.PropsWithChildren<StoryFormProps>> = ({
+  initialValues,
+  ...props
+}) => {
   const styles = useStyles();
   const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({

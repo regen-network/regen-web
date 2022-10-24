@@ -56,7 +56,7 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
   }),
 }));
 
-const BackgroundImgSection: React.FC<Props> = ({
+const BackgroundImgSection: React.FC<React.PropsWithChildren<Props>> = ({
   classes,
   sx = [],
   ...props

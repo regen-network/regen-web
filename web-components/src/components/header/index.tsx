@@ -30,8 +30,8 @@ interface HeaderProps {
   fullWidth?: boolean;
   isAuthenticated?: boolean;
   menuItems?: HeaderMenuItem[];
-  linkComponent?: React.FC<NavLinkProps>;
-  homeLink?: React.FC<{ color: string }>;
+  linkComponent?: React.FC<React.PropsWithChildren<NavLinkProps>>;
+  homeLink?: React.FC<React.PropsWithChildren<{ color: string }>>;
   isRegistry?: boolean;
   extras?: JSX.Element;
   onSignup?: () => void;

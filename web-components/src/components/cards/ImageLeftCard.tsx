@@ -1,8 +1,8 @@
 import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
 import { Box, CardContent } from '@mui/material';
 import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import cx from 'clsx';
+import ReactHtmlParser from 'html-react-parser';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import { Image } from '../image';

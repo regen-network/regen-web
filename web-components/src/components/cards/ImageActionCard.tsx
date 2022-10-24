@@ -28,7 +28,7 @@ type Props = {
   startIcon?: React.ReactNode;
 };
 
-const ImageActionCard: React.FC<Props> = props => {
+const ImageActionCard: React.FC<React.PropsWithChildren<Props>> = props => {
   const styles = useStyles();
   const theme = useTheme();
   return (

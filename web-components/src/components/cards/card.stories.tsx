@@ -190,7 +190,7 @@ const stubFaqs: QuestionItem[] = [
   { question: 'What is the question', answer: 'This is the answer' },
 ];
 
-export const stepCard: React.FC = () => {
+export const stepCard: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <StepCard
       icon={<FarmerIcon />}

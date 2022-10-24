@@ -39,7 +39,7 @@ type Props = {
   cancelText?: string;
 };
 
-export const OnboardingSubmit: React.FC<Props> = ({
+export const OnboardingSubmit: React.FC<React.PropsWithChildren<Props>> = ({
   onSubmit,
   onCancel,
   disabled,

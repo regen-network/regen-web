@@ -42,7 +42,9 @@ export type BasketOverviewProps = {
   startDateWindow?: string;
 };
 
-export const BasketOverview: React.FC<BasketOverviewProps> = ({
+export const BasketOverview: React.FC<
+  React.PropsWithChildren<BasketOverviewProps>
+> = ({
   name,
   displayDenom,
   description,

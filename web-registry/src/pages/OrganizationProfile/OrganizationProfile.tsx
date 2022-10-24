@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 type AcctType = 'user' | 'organization';
 
-const OrganizationProfile: React.FC = () => {
+const OrganizationProfile: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { user } = useAuth0();
   const [acctType, setAcctType] = useState<AcctType>('user');
@@ -234,7 +234,10 @@ const OrganizationProfile: React.FC = () => {
   );
 };
 
-const PopIn: React.FC<{ isOpen: boolean }> = ({ children, isOpen }) => {
+const PopIn: React.FC<React.PropsWithChildren<{ isOpen: boolean }>> = ({
+  children,
+  isOpen,
+}) => {
   return (
     <div style={{ display: 'flex' }}>
       <Zoom in={isOpen}>

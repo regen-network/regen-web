@@ -62,16 +62,18 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ProjectCards: React.FC<Props> = props => {
+const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
   const styles = useStyles();
   const theme: Theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
 
-  const LinkedProject: React.FC<{
-    project: MoreProjectFieldsFragment;
-  }> = ({ project }) => (
+  const LinkedProject: React.FC<
+    React.PropsWithChildren<{
+      project: MoreProjectFieldsFragment;
+    }>
+  > = ({ project }) => (
     <ProjectCard
       sx={theme => ({ width: { xs: theme.spacing(73), md: '100%' } })}
       name={project.metadata?.['schema:name']}

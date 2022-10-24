@@ -8,12 +8,14 @@ import { Label } from '../typography';
 import type { LabelSize } from '../typography/sizing';
 
 /** Grey label over child elements */
-export const LabeledDetail: React.FC<{
-  label: string;
-  sx?: SxProps<Theme>;
-  sxLabel?: SxProps<Theme>;
-  labelSize?: LabelSize;
-}> = ({ label, children, labelSize, sx = [], sxLabel = [] }) => (
+export const LabeledDetail: React.FC<
+  React.PropsWithChildren<{
+    label: string;
+    sx?: SxProps<Theme>;
+    sxLabel?: SxProps<Theme>;
+    labelSize?: LabelSize;
+  }>
+> = ({ label, children, labelSize, sx = [], sxLabel = [] }) => (
   <Flex col sx={{ gap: 2, ...sx }}>
     <Label
       size={labelSize || 'sm'}

@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 /** Custom styles on top of MUI's `Radio` component */
-const Radio: React.FC<RadioProps> = props => {
+const Radio: React.FC<React.PropsWithChildren<RadioProps>> = props => {
   const classes = useStyles();
   return (
     <MuiRadio

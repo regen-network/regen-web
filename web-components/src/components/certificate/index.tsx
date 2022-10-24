@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
+import ReactHtmlParser from 'html-react-parser';
 import Grid from '@mui/material/Grid';
 import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import clsx from 'clsx';

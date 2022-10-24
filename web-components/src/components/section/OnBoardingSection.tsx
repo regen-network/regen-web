@@ -72,7 +72,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const OnBoardingSection: React.FC<OnBoardingSectionProps> = ({
+const OnBoardingSection: React.FC<
+  React.PropsWithChildren<OnBoardingSectionProps>
+> = ({
   formContainer = false,
   linkText,
   onLinkClick,

@@ -8,7 +8,7 @@ import { ReactComponent as Ribbon } from '../../assets/svgs/yellow-ribbon.svg';
 /**
  * Icon with yellow ribbon and 'Peer Reviewed' label
  */
-const PeerReviewed: React.FC = () => {
+const PeerReviewed: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <Box display="flex" flexWrap="nowrap" alignItems="center">
       <Box mr={1.5}>

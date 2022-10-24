@@ -48,7 +48,9 @@ interface Props {
   content: PracticesOutcomesSectionProps;
 }
 
-const PracticesOutcomesSection: React.FC<Props> = ({ content }) => {
+const PracticesOutcomesSection: React.FC<React.PropsWithChildren<Props>> = ({
+  content,
+}) => {
   const classes = useStyles();
   const theme = useTheme();
   const { practices, outcomes, title } = content;

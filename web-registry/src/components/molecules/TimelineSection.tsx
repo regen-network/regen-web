@@ -44,7 +44,9 @@ interface Props {
   content: TimelineSectionProps;
 }
 
-const TimelineSection: React.FC<Props> = ({ content }) => {
+const TimelineSection: React.FC<React.PropsWithChildren<Props>> = ({
+  content,
+}) => {
   const styles = useStyles();
 
   const items: Item[] =

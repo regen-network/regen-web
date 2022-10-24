@@ -39,7 +39,10 @@ const useStyles = makeStyles((theme: Theme) => ({
  * Hero section with title, description and background image justified to the lower left with our section component.
  * Optional tooltip when using underlined text in description.
  */
-const HeroTitle: React.FC<Props> = ({ classes, ...props }) => {
+const HeroTitle: React.FC<React.PropsWithChildren<Props>> = ({
+  classes,
+  ...props
+}) => {
   const styles = useStyles();
 
   return (

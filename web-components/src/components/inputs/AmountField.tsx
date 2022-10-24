@@ -68,7 +68,7 @@ interface AmountFieldProps extends AmountLabelProps {
   className?: string;
 }
 
-const AuxiliarLabel: React.FC<AuxiliarLabelProps> = ({
+const AuxiliarLabel: React.FC<React.PropsWithChildren<AuxiliarLabelProps>> = ({
   availableAmount,
   denom,
   auxiliarLabel,
@@ -98,7 +98,7 @@ const AuxiliarLabel: React.FC<AuxiliarLabelProps> = ({
   );
 };
 
-const AmountLabel: React.FC<AmountLabelProps> = ({
+const AmountLabel: React.FC<React.PropsWithChildren<AmountLabelProps>> = ({
   label,
   auxiliarLabel,
   availableAmount,
@@ -122,46 +122,44 @@ interface AmountTextFieldProps extends RegenTextFieldProps {
   availableAmount: number;
 }
 
-const AmountTextField: React.FC<AmountTextFieldProps> = ({
-  availableAmount,
-  ...props
-}: AmountTextFieldProps) => {
-  const {
-    form: { setFieldValue },
-    field: { name },
-  } = props;
-  return (
-    <TextField
-      {...props}
-      endAdornment={
-        <Grid
-          container
-          alignItems="center"
-          sx={theme => ({
-            fontFamily: theme.typography.h1.fontFamily,
-            color: theme.palette.info.dark,
-            textTransform: 'uppercase',
-            fontWeight: 800,
-            letterSpacing: '1px',
-            backgroundColor: theme.palette.grey[100],
-            fontSize: theme.spacing(3),
-            cursor: 'pointer',
-            px: 5,
-            height: {
-              xs: theme.spacing(12.5),
-              sm: theme.spacing(15),
-            },
-          })}
-          onClick={() => setFieldValue(name, availableAmount)}
-        >
-          max
-        </Grid>
-      }
-    />
-  );
-};
+const AmountTextField: React.FC<React.PropsWithChildren<AmountTextFieldProps>> =
+  ({ availableAmount, ...props }: AmountTextFieldProps) => {
+    const {
+      form: { setFieldValue },
+      field: { name },
+    } = props;
+    return (
+      <TextField
+        {...props}
+        endAdornment={
+          <Grid
+            container
+            alignItems="center"
+            sx={theme => ({
+              fontFamily: theme.typography.h1.fontFamily,
+              color: theme.palette.info.dark,
+              textTransform: 'uppercase',
+              fontWeight: 800,
+              letterSpacing: '1px',
+              backgroundColor: theme.palette.grey[100],
+              fontSize: theme.spacing(3),
+              cursor: 'pointer',
+              px: 5,
+              height: {
+                xs: theme.spacing(12.5),
+                sm: theme.spacing(15),
+              },
+            })}
+            onClick={() => setFieldValue(name, availableAmount)}
+          >
+            max
+          </Grid>
+        }
+      />
+    );
+  };
 
-const AmountField: React.FC<AmountFieldProps> = ({
+const AmountField: React.FC<React.PropsWithChildren<AmountFieldProps>> = ({
   name,
   label = 'Amount',
   auxiliarLabel,

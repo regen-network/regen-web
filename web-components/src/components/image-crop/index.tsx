@@ -84,7 +84,7 @@ export default function ImageCrop({
   }, [completedCrop, onCropSubmit]);
 
   const onLoad = useCallback(
-    img => {
+    (img: HTMLImageElement) => {
       imgRef.current = img;
       const imgWidth = img.width;
       const imgHeight = img.height;

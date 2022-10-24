@@ -126,7 +126,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
-const DatePickField: React.FC<DatePickProps> = ({
+const DatePickField: React.FC<React.PropsWithChildren<DatePickProps>> = ({
   label,
   sx,
   optional = false,

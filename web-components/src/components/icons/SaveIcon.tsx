@@ -2,11 +2,9 @@ import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
 import { useTheme } from '@mui/styles';
 
-const SaveIcon: React.FC<{ color?: string; className?: string }> = ({
-  className,
-  color,
-  ...props
-}) => {
+const SaveIcon: React.FC<
+  React.PropsWithChildren<{ color?: string; className?: string }>
+> = ({ className, color, ...props }) => {
   const theme = useTheme();
   color = color || theme.palette.primary.main;
 

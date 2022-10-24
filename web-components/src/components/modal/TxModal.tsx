@@ -43,7 +43,7 @@ interface LinkProps extends LinkItem {
   sx?: SxProps<Theme>;
 }
 
-export type LinkComponentProp = React.FC<LinkProps>;
+export type LinkComponentProp = React.FC<React.PropsWithChildren<LinkProps>>;
 
 export interface TxModalProps extends RegenModalProps {
   onButtonClick: () => void;
@@ -62,7 +62,7 @@ interface CardItemProps extends Item {
   linkComponent: LinkComponentProp;
 }
 
-export const CardItem: React.FC<CardItemProps> = ({
+export const CardItem: React.FC<React.PropsWithChildren<CardItemProps>> = ({
   color,
   label,
   value,
@@ -91,7 +91,7 @@ export const CardItem: React.FC<CardItemProps> = ({
   );
 };
 
-const TxModal: React.FC<TxModalProps> = ({
+const TxModal: React.FC<React.PropsWithChildren<TxModalProps>> = ({
   icon,
   title,
   description,

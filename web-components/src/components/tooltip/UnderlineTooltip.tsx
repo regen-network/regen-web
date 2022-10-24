@@ -18,7 +18,7 @@ interface Props {
   title?: string;
 }
 
-const UnderlineTooltip: React.FC<Props> = props => {
+const UnderlineTooltip: React.FC<React.PropsWithChildren<Props>> = props => {
   const styles = useStyles();
 
   return (

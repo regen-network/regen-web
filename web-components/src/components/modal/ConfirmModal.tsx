@@ -38,7 +38,7 @@ interface LinkProps extends LinkItem {
   sx?: SxProps<Theme>;
 }
 
-type LinkComponentProp = React.FC<LinkProps>;
+type LinkComponentProp = React.FC<React.PropsWithChildren<LinkProps>>;
 
 export interface ConfirmModalProps extends RegenModalProps {
   onConfirm: () => void;
@@ -55,7 +55,7 @@ interface CardItemProps extends Item {
   linkComponent: LinkComponentProp;
 }
 
-export const CardItem: React.FC<CardItemProps> = ({
+export const CardItem: React.FC<React.PropsWithChildren<CardItemProps>> = ({
   color,
   label,
   value,
@@ -85,7 +85,7 @@ export const CardItem: React.FC<CardItemProps> = ({
   );
 };
 
-const ConfirmModal: React.FC<ConfirmModalProps> = ({
+const ConfirmModal: React.FC<React.PropsWithChildren<ConfirmModalProps>> = ({
   icon,
   title,
   onCancelTitle,

@@ -7,7 +7,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const EditFormTemplate: React.FC = props => {
+const EditFormTemplate: React.FC<React.PropsWithChildren<unknown>> = props => {
   const styles = useStyles();
 
   return <div className={styles.root}>{props.children}</div>;

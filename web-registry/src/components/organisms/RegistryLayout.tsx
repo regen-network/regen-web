@@ -23,7 +23,7 @@ import { RegistryIconLink, RegistryNavLink, ScrollToTop } from '../atoms';
 import { AppFooter } from './AppFooter';
 import { WalletButton } from './WalletButton/WalletButton';
 
-const RegistryLayout: React.FC = () => {
+const RegistryLayout: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { wallet, loaded, disconnect } = useWallet();

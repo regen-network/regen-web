@@ -73,7 +73,7 @@ export interface FormValues extends RetireFormValues {
   agreeErpa: boolean;
 }
 
-const CreditSendForm: React.FC<FormProps> = ({
+const CreditSendForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   sender,
   batchDenom,
   availableTradableAmount,

@@ -58,11 +58,13 @@ function getUnits(
   return 0;
 }
 
-const CreditsRetire: React.FC<{
-  addressId?: string;
-  buyerWalletId?: string;
-  creditVintageId?: string;
-}> = ({
+const CreditsRetire: React.FC<
+  React.PropsWithChildren<{
+    addressId?: string;
+    buyerWalletId?: string;
+    creditVintageId?: string;
+  }>
+> = ({
   addressId: passedAddressId = '',
   buyerWalletId: passedBuyerWalletId = '',
   creditVintageId: passedVintageId = '',

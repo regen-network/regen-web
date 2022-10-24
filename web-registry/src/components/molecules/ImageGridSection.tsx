@@ -30,7 +30,9 @@ interface Props {
   content: ImageGridSectionProps;
 }
 
-const ImageGridSection: React.FC<Props> = ({ content }) => {
+const ImageGridSection: React.FC<React.PropsWithChildren<Props>> = ({
+  content,
+}) => {
   const styles = useStyles();
   const backgroundImage = content.backgroundImage?.image?.asset?.url;
 

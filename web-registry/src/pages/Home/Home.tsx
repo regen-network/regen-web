@@ -24,7 +24,7 @@ import { client } from '../../sanity';
 import { FeaturedProjects } from './Home.FeaturedProjects';
 import { useHomeStyles } from './Home.styles';
 
-const Home: React.FC = () => {
+const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [open, setOpen] = useState(false);
   const [modalLink, setModalLink] = useState<string>('');
 

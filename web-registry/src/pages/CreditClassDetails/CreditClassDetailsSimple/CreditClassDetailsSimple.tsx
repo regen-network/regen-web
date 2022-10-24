@@ -92,12 +92,9 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   },
 }));
 
-const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
-  dbClass,
-  onChainClass,
-  issuers,
-  metadata,
-}) => {
+const CreditClassDetailsSimple: React.FC<
+  React.PropsWithChildren<CreditDetailsProps>
+> = ({ dbClass, onChainClass, issuers, metadata }) => {
   const styles = useStyles();
 
   return (

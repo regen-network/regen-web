@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const EditProjectPageFooter: React.FC<Props> = ({
+const EditProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
   saveText = 'Save',
   onSave,
   saveDisabled,

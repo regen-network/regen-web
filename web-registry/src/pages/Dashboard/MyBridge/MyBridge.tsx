@@ -5,7 +5,13 @@ import { BridgeInfo } from './MyBridge.BridgeInfo';
 
 export const MyBridge = (): JSX.Element => {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+      }}
+    >
       <BridgeTabs />
       <BridgeInfo />
     </Box>

@@ -18,47 +18,8 @@ import { AccountLink, Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { NoCredits } from 'components/molecules';
 
-const MOCK_BRIDGABLE = [
-  {
-    $type: 'regen.ecocredit.v1.BatchInfo',
-    issuer: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
-    projectId: 'C01-001',
-    denom: 'C01-001-18540707-19870212-001',
-    metadata:
-      'regen:13toVgLYkjxCmV8LHeZDuK3hVZLhRJ3xzkj4vdA3cretbTuFrakRjQY.rdf',
-    startDate: '1854-07-07T06:59:56.000Z',
-    endDate: '1987-02-12T07:00:00.000Z',
-    issuanceDate: '2022-06-28T18:10:53.000Z',
-    open: false,
-    balance: {
-      $type: 'regen.ecocredit.v1.BatchBalanceInfo',
-      address: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
-      batchDenom: 'C01-001-18540707-19870212-001',
-      tradableAmount: '0',
-      retiredAmount: '2',
-      escrowedAmount: '0',
-    },
-    classId: 'C01',
-    className: [
-      {
-        _key: 'ed8c8e179db2',
-        _type: 'block',
-        children: [
-          {
-            _key: 'f534d59b71fe',
-            _type: 'span',
-            marks: [],
-            text: 'Verified Carbon Standard',
-          },
-        ],
-        markDefs: [],
-        style: 'normal',
-      },
-    ],
-    projectName: 'The Mai Ndombe REDD+ Project',
-    projectLocation: 'US',
-  },
-];
+// TODO: mocked data
+import { MOCK_BRIDGE_DATA } from './mocked_data';
 
 const GreyText = styled('span')(({ theme }) => ({
   color: theme.palette.info.main,
@@ -82,11 +43,12 @@ type BridgableTableProps = {
 };
 
 export const BridgableTable = ({
-  credits,
+  // credits, // TODO: mocked data
   renderActionButtons,
   onTableChange,
 }: BridgableTableProps): JSX.Element => {
-  credits = MOCK_BRIDGABLE;
+  // TODO: mocked data
+  const credits = MOCK_BRIDGE_DATA;
 
   if (!credits?.length) {
     return <NoCredits title="No bridgable ecocredits to display" />;
@@ -95,37 +57,27 @@ export const BridgableTable = ({
   return (
     <ActionsTable
       tableLabel="bridgable ecocredits table"
+      sx={{ root: { borderRadius: 0 } }}
       renderActionButtons={renderActionButtons}
       onTableChange={onTableChange}
-      /* eslint-disable react/jsx-key */
       headerRows={[
         <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>{'Project'}</Box>,
         <Box
           display="flex"
           sx={{
-            minWidth: {
-              xs: 'auto',
-              sm: '11rem',
-              lg: '13rem',
+            width: {
+              sm: '100%',
+              lg: '10rem',
             },
           }}
         >
-          <BreakText>Credit Batch Id</BreakText>
+          <Box sx={{ width: { sm: '100%', lg: '4.2rem' } }}>
+            <BreakText>Credit Batch Id</BreakText>
+          </Box>
           <Box alignSelf="flex-end" ml={2}>
             <InfoTooltipWithIcon outlined title={'...'} />
           </Box>
         </Box>,
-        // <Box
-        //   sx={{
-        //     minWidth: {
-        //       xs: 'auto',
-        //       sm: '11rem',
-        //       lg: '13rem',
-        //     },
-        //   }}
-        // >
-        //   Credit Batch Id
-        // </Box>,
         'Issuer',
         'Credit Class',
         <Box display="flex">
@@ -134,10 +86,12 @@ export const BridgableTable = ({
             <InfoTooltipWithIcon outlined title={'...'} />
           </Box>
         </Box>,
-        // <BreakText>Amount</BreakText>,
-        // <BreakText>Amount</BreakText>,
-        'Batch Start Date',
-        'Batch End Date',
+        <Box sx={{ width: { sm: '100%', lg: '6.25rem' } }}>
+          <BreakText>Batch Start Date</BreakText>
+        </Box>,
+        <Box sx={{ width: { sm: '100%', lg: '6.25rem' } }}>
+          <BreakText>Batch End Date</BreakText>
+        </Box>,
         'Project Location',
       ]}
       rows={credits.map((row, i) => {
@@ -165,22 +119,13 @@ export const BridgableTable = ({
             num: row.balance?.tradableAmount,
             ...quantityFormatNumberOptions,
           }),
-          // formatNumber({
-          //   num: row.balance?.retiredAmount,
-          //   ...quantityFormatNumberOptions,
-          // }),
-          // formatNumber({
-          //   num: row.balance?.escrowedAmount,
-          //   ...quantityFormatNumberOptions,
-          // }),
-          <GreyText>{formatDate(row.startDate)}</GreyText>,
-          <GreyText>{formatDate(row.endDate)}</GreyText>,
+          <GreyText>{formatDate(row.startDate, 'MMM D, YYYY')}</GreyText>,
+          <GreyText>{formatDate(row.endDate, 'MMM D, YYYY')}</GreyText>,
           <WithLoader isLoading={!row.projectLocation} variant="skeleton">
             <Box>{row.projectLocation}</Box>
           </WithLoader>,
         ];
       })}
-      /* eslint-enable react/jsx-key */
     />
   );
 };

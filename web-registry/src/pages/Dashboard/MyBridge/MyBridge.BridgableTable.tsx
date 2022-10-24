@@ -1,14 +1,16 @@
-import { Box, styled } from '@mui/material';
+import { Box, styled, SxProps, useTheme } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
+import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
 import {
   ActionsTable,
-  RenderActionButtonsFunc,
   TablePaginationParams,
 } from 'web-components/lib/components/table/ActionsTable';
 import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
+import type { Theme } from 'web-components/lib/theme/muiTheme';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
@@ -20,6 +22,8 @@ import { NoCredits } from 'components/molecules';
 
 // TODO: mocked data
 import { MOCK_BRIDGE_DATA } from './mocked_data';
+
+const BRIDGE_ACTION = 'Bridge';
 
 const GreyText = styled('span')(({ theme }) => ({
   color: theme.palette.info.main,
@@ -36,17 +40,14 @@ const BreakTextEnd = styled('div')({
   textAlign: 'end',
 });
 
-type BridgableTableProps = {
-  credits?: BatchInfoWithBalance[];
-  renderActionButtons?: RenderActionButtonsFunc;
-  onTableChange?: UseStateSetter<TablePaginationParams>;
-};
+// type BridgableTableProps = {
+//   credits?: BatchInfoWithBalance[];
+//   onTableChange?: UseStateSetter<TablePaginationParams>;
+// };
 
-export const BridgableTable = ({
-  // credits, // TODO: mocked data
-  renderActionButtons,
-  onTableChange,
-}: BridgableTableProps): JSX.Element => {
+export const BridgableTable = (): JSX.Element => {
+  const theme = useTheme();
+
   // TODO: mocked data
   const credits = MOCK_BRIDGE_DATA;
 
@@ -54,12 +55,32 @@ export const BridgableTable = ({
     return <NoCredits title="No bridgable ecocredits to display" />;
   }
 
+  const sxs = {
+    icon: {
+      width: theme.spacing(6),
+      height: theme.spacing(6),
+    } as SxProps<Theme>,
+  };
+
   return (
     <ActionsTable
       tableLabel="bridgable ecocredits table"
       sx={{ root: { borderRadius: 0 } }}
-      renderActionButtons={renderActionButtons}
-      onTableChange={onTableChange}
+      renderActionButtons={(i: number) => (
+        <OutlinedButton
+          startIcon={<BridgeIcon sx={{ width: '24px', height: '24px' }} />}
+          size="small"
+          onClick={async () => {
+            // eslint-disable-next-line no-console
+            console.log('*** Open bridge form modal');
+            // track('bridge1');
+            // setBridgeOpen(i);
+          }}
+        >
+          {BRIDGE_ACTION}
+        </OutlinedButton>
+      )}
+      // onTableChange={onTableChange}
       headerRows={[
         <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>{'Project'}</Box>,
         <Box

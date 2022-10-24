@@ -26,7 +26,7 @@ declare global {
   interface Window extends KeplrWindow {}
 }
 
-type ContextType = {
+export type WalletContextType = {
   wallet?: Wallet;
   loaded: boolean;
   connect?: (params: ConnectParams) => Promise<void>;
@@ -36,7 +36,7 @@ type ContextType = {
   walletConnectUri?: string;
 };
 
-const WalletContext = createContext<ContextType>({
+const WalletContext = createContext<WalletContextType>({
   loaded: false,
 });
 
@@ -102,4 +102,5 @@ export const WalletProvider: React.FC = ({ children }) => {
   );
 };
 
-export const useWallet = (): ContextType => React.useContext(WalletContext);
+export const useWallet = (): WalletContextType =>
+  React.useContext(WalletContext);

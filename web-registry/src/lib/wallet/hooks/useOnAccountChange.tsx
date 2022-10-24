@@ -16,7 +16,6 @@ export const useOnAccountChange = ({ wallet, connectWallet }: Props): void => {
     }
 
     const listener = (): void => {
-      // Reconnect to wallet, since name/address may have changed.
       if (wallet) {
         connectWallet({ walletType: WalletType.Keplr });
       }

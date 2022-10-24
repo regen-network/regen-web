@@ -1,47 +1,40 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import WalletModal from 'web-components/lib/components/modal/wallet-modal';
 import { WalletModalState } from 'web-components/lib/components/modal/wallet-modal/WalletModal.types';
 
-import { ConnectParams } from 'lib/wallet/wallet.types';
-import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
-
 import Keplr from '../../../assets/keplr.png';
 import { chainId } from '../../../lib/ledger';
 import { useWallet } from '../../../lib/wallet/wallet';
+import { useConnectToWallet } from './hooks/useConnectToWallet';
+import { useNavigateToMobileUrl } from './hooks/useNavigateToMobileUrl';
+import { useResetModalOnConnect } from './hooks/useResetModalOnConnect';
 import { useWalletButtonStyles } from './WalletButton.styles';
 import { getMobileConnectUrl, getWalletsUiConfig } from './WalletButton.utils';
 
 const WalletButton: React.FC = () => {
   const styles = useWalletButtonStyles();
   const { wallet, connect, loaded, error, walletConnectUri } = useWallet();
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalState, setModalState] =
     useState<WalletModalState>('wallet-select');
 
-  const onButtonClick = (): void => setIsModalOpen(true);
-  const onModalClose = (): void => {
+  const onButtonClick = useCallback(
+    (): void => setIsModalOpen(true),
+    [setIsModalOpen],
+  );
+  const onModalClose = useCallback((): void => {
     setIsModalOpen(false);
     setModalState('wallet-select');
-  };
+  }, [setIsModalOpen, setModalState]);
 
-  const connectToWallet = useCallback(
-    async ({ walletType }: ConnectParams): Promise<void> => {
-      if (connect) {
-        await connect({ walletType });
-        if (walletType === WalletType.Keplr) {
-          onModalClose();
-        }
-        if (walletType === WalletType.WalletConnectKeplr) {
-          setModalState('wallet-mobile');
-        }
-      }
-    },
-    [connect],
-  );
+  const connectToWallet = useConnectToWallet({
+    onModalClose,
+    setModalState,
+    connect,
+  });
 
   const walletsUiConfig = useMemo(
     () => getWalletsUiConfig({ connectToWallet }),
@@ -52,18 +45,8 @@ const WalletButton: React.FC = () => {
     [walletConnectUri],
   );
 
-  useEffect(() => {
-    if (mobileConnectUrl) {
-      window.location.href = mobileConnectUrl;
-    }
-  }, [mobileConnectUrl]);
-
-  useEffect(() => {
-    if (wallet?.address) {
-      setModalState('wallet-select');
-      setIsModalOpen(false);
-    }
-  }, [wallet?.address]);
+  useNavigateToMobileUrl({ mobileConnectUrl });
+  useResetModalOnConnect({ setIsModalOpen, setModalState, wallet });
 
   return chainId ? (
     <>

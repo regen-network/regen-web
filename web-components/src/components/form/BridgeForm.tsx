@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 
-import { Box } from '../box';
 import AgreeErpaCheckbox from '../inputs/AgreeErpaCheckbox';
 import AmountField from '../inputs/AmountField';
 import FormLabel from '../inputs/FormLabel';
 import SelectTextField from '../inputs/SelectTextField';
 import TextField from '../inputs/TextField';
-import { requirementAgreement } from '../inputs/validation';
+import {
+  requiredMessage,
+  requirementAgreement,
+  validateAmount,
+} from '../inputs/validation';
 import { RegenModalProps } from '../modal';
 import Submit from './Submit';
 
 export interface BridgeProps {
+  batchDenom: string;
+  availableBridgeableAmount: number;
   onSubmit: (values: FormValues) => Promise<void>;
 }
 
@@ -20,24 +25,32 @@ interface FormProps extends BridgeProps {
 }
 
 export interface FormValues {
+  recipient: string;
+  amount?: number;
   agreeErpa: boolean;
 }
 
-const BridgeForm: React.FC<FormProps> = ({ onClose, onSubmit }) => {
+const BridgeForm: React.FC<FormProps> = ({
+  onClose,
+  onSubmit,
+  availableBridgeableAmount,
+  batchDenom,
+}) => {
   const initialValues = {
-    batchDenom: undefined,
     amount: undefined,
+    recipient: '',
     agreeErpa: false,
+    batchDenom,
   };
 
   const validateHandler = (values: FormValues): FormikErrors<FormValues> => {
     let errors: FormikErrors<FormValues> = {};
 
-    // if (!values.basketDenom) {
-    //   errors.basketDenom = requiredMessage;
-    // }
-    // const errAmount = validateAmount(availableTradableAmount, values.amount);
-    // if (errAmount) errors.amount = errAmount;
+    if (!values.recipient) {
+      errors.recipient = requiredMessage;
+    }
+    const errAmount = validateAmount(availableBridgeableAmount, values.amount);
+    if (errAmount) errors.amount = errAmount;
     if (!values.agreeErpa) errors.agreeErpa = requirementAgreement;
 
     return errors;
@@ -72,8 +85,8 @@ const BridgeForm: React.FC<FormProps> = ({ onClose, onSubmit }) => {
           <AmountField
             name="amount"
             label="Amount"
-            availableAmount={11}
-            denom={'c03-xyz'}
+            availableAmount={availableBridgeableAmount}
+            denom={batchDenom}
           />
           <AgreeErpaCheckbox sx={{ mt: 10 }} />
           <Submit

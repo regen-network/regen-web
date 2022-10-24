@@ -14,6 +14,8 @@ const TOUCAN_LOGO =
 const TOUCAN_ALT = 'Toucan logo';
 
 const BridgeModal: React.FC<BridgeModalProps> = ({
+  availableBridgeableAmount,
+  batchDenom,
   open,
   onClose,
   onSubmit,
@@ -27,7 +29,12 @@ const BridgeModal: React.FC<BridgeModalProps> = ({
     open={open}
     onClose={onClose}
   >
-    <BridgeForm onClose={onClose} onSubmit={onSubmit} />
+    <BridgeForm
+      onClose={onClose}
+      onSubmit={onSubmit}
+      availableBridgeableAmount={availableBridgeableAmount}
+      batchDenom={batchDenom}
+    />
   </FormModalTemplate>
 );
 

@@ -325,6 +325,8 @@ export const bridgeModal = (): JSX.Element => (
   <BridgeModal
     open={true}
     onClose={() => null}
-    onSubmit={async () => alert('submit')}
+    onSubmit={async values => alert(JSON.stringify(values))}
+    batchDenom="C03-002-20190101-20201010-003"
+    availableBridgeableAmount={100}
   />
 );

@@ -13,6 +13,7 @@ import {
 } from './components/HeaderMenuHover/HeaderMenuHover';
 import { NavLink, NavLinkProps } from './components/NavLink';
 import { useHeaderStyles } from './Header.styles';
+import MarketplaceLaunchBanner from './MarketplaceLaunchBanner';
 
 export interface node {
   [key: number]: React.ReactNode;
@@ -61,6 +62,17 @@ export default function Header({
   const isTablet = useMediaQuery(theme.breakpoints.down('md'));
   const styles = useHeaderStyles({ color, borderBottom, fullWidth });
 
+  // if we're in the registry, where we have REACT_APP prefixed
+  // keys in the env vars, do not show the banner. in other words,
+  // only show the banner on the website.
+  const showBanner = Object.keys(process.env).reduce((prev, curr) => {
+    if (curr.startsWith('REACT_APP')) {
+      return false;
+    } else {
+      return prev;
+    }
+  }, true);
+
   return (
     <>
       {showBanner && <MarketplaceLaunchBanner />}
@@ -71,37 +83,14 @@ export default function Header({
           transparent ? styles.transparent : styles.background,
         )}
       >
-        <Box className={styles.header}>
-          <HomeLink
-            color={isTablet ? theme.palette.primary.contrastText : color}
-          />
-          <Box className={styles.desktop} display={{ xs: 'none', md: 'block' }}>
-            <MenuList className={styles.menuList}>
-              {menuItems?.map((item, index) => {
-                return (
-                  <HeaderMenuHover
-                    key={index}
-                    linkComponent={linkComponent}
-                    item={item}
-                    pathname={pathname}
-                  />
-                );
-              })}
-              {isRegistry && extras}
-            </MenuList>
-          </Box>
-
-          <Box className={styles.mobile} display={{ xs: 'block', md: 'none' }}>
-            <MobileMenu
-              linkComponent={linkComponent}
-              isRegistry={isRegistry}
-              pathname={pathname}
-              menuItems={menuItems}
-              isAuthenticated={isAuthenticated}
-              onLogin={onLogin}
-              onLogout={onLogout}
-              onSignup={onSignup}
-              extras={extras}
+        <Container
+          disableGutters
+          className={styles.container}
+          maxWidth={fullWidth ? false : 'xl'}
+        >
+          <Box className={styles.header}>
+            <HomeLink
+              color={isTablet ? theme.palette.primary.contrastText : color}
             />
             <Box
               className={styles.desktop}
@@ -135,6 +124,7 @@ export default function Header({
                 onLogin={onLogin}
                 onLogout={onLogout}
                 onSignup={onSignup}
+                extras={extras}
               />
             </Box>
           </Box>

@@ -7,8 +7,8 @@ import { URL_PRIVACY, URL_TERMS_SERVICE } from 'globals';
 
 import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
 import Header, { HeaderColors } from 'web-components/lib/components/header';
-import { HeaderMenuItem } from 'web-components/lib/components/header/HeaderMenuHover';
-import { UserMenuItem } from 'web-components/lib/components/header/UserMenuItem';
+import { HeaderMenuItem } from 'web-components/lib/components/header/components/HeaderMenuHover/HeaderMenuHover';
+import { UserMenuItem } from 'web-components/lib/components/header/components/UserMenuItem';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { useWallet } from 'lib/wallet/wallet';

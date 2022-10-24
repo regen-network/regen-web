@@ -16,7 +16,6 @@ type GetClientParams = {
 };
 
 export interface WalletConfig {
-  // A unique identifier among all wallets.
   type: WalletType;
   // A function that returns an instantiated wallet client, with
   // `walletConnect` passed if `type === WalletType.WalletConnectKeplr`.

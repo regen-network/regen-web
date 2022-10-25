@@ -30,12 +30,12 @@ export interface FormValues {
   agreeErpa: boolean;
 }
 
-const BridgeForm: React.FC<FormProps> = ({
+const BridgeForm = ({
   onClose,
   onSubmit,
   availableBridgeableAmount,
   batchDenom,
-}) => {
+}: FormProps): JSX.Element => {
   const initialValues = {
     amount: undefined,
     recipient: '',

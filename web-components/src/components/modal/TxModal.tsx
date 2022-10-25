@@ -128,14 +128,8 @@ const TxModal: React.FC<TxModalProps> = ({
         <Body
           size="lg"
           sx={{
-            pt: {
-              xs: 2.5,
-              sm: 5,
-            },
-            pb: {
-              xs: 4.75,
-              sm: 0,
-            },
+            pt: [2.5, 5],
+            pb: [4.75, 0],
           }}
         >
           {ReactHtmlParser(description)}

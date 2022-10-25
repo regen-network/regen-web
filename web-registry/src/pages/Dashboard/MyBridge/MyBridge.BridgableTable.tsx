@@ -1,4 +1,4 @@
-import { Box, styled, SxProps, useTheme } from '@mui/material';
+import { Box, styled } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
 
@@ -7,14 +7,10 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
 import {
   ActionsTable,
-  TablePaginationParams,
+  // TablePaginationParams,
 } from 'web-components/lib/components/table/ActionsTable';
 import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
-import type { Theme } from 'web-components/lib/theme/muiTheme';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
-
-import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
-import { UseStateSetter } from 'types/react/use-state';
 
 import { AccountLink, Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
@@ -46,21 +42,12 @@ const BreakTextEnd = styled('div')({
 // };
 
 export const BridgableTable = (): JSX.Element => {
-  const theme = useTheme();
-
   // TODO: mocked data
   const credits = MOCK_BRIDGE_DATA;
 
   if (!credits?.length) {
     return <NoCredits title="No bridgable ecocredits to display" />;
   }
-
-  const sxs = {
-    icon: {
-      width: theme.spacing(6),
-      height: theme.spacing(6),
-    } as SxProps<Theme>,
-  };
 
   return (
     <ActionsTable

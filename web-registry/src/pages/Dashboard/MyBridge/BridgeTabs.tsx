@@ -2,9 +2,9 @@ import Card from 'web-components/lib/components/cards/Card';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 
-import { CardStyles, TabsStyles } from './BridgeTabs.styles';
 import { BridgableTable } from './MyBridge.BridgableTable';
 import { BridgedTable } from './MyBridge.BridgedTable';
+import { CardStyles, TabsStyles } from './MyBridge.styles';
 
 const tabs: IconTabProps[] = [
   {

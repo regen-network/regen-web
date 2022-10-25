@@ -1,12 +1,15 @@
 import { useState } from 'react';
-import { Box, styled } from '@mui/material';
+import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
+import { random } from 'lodash';
 import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
 import EmptyCartIcon from 'web-components/lib/components/icons/EmptyCartIcon';
+import ErrorIcon from 'web-components/lib/components/icons/ErrorIcon';
+import PendingIcon from 'web-components/lib/components/icons/PendingIcon';
+import SuccessIcon from 'web-components/lib/components/icons/SuccessIcon';
+import InfoLabel from 'web-components/lib/components/info-label';
 import {
   ActionsTable,
   DEFAULT_ROWS_PER_PAGE,
@@ -22,24 +25,16 @@ import WithLoader from 'components/atoms/WithLoader';
 import { NoCredits } from 'components/molecules';
 import { useEcocredits } from 'hooks';
 
-import { WithLoaderStyles } from './BridgeTabs.styles';
+import {
+  AMOUNT_BRIDGED_TOOLTIP,
+  BRIDGED_STATUS,
+  CREDIT_BATCH_TOOLTIP,
+  NO_BRIDGED_CREDITS,
+} from './MyBridge.constants';
+import { WithLoaderStyles } from './MyBridge.styles';
+import { BreakText, BreakTextEnd, GreyText } from './MyBridge.utils';
 
-const BRIDGE_ACTION = 'Bridge';
-
-const GreyText = styled('span')(({ theme }) => ({
-  color: theme.palette.info.main,
-}));
-
-const BreakText = styled('div')({
-  whiteSpace: 'normal',
-  wordWrap: 'break-word',
-});
-
-const BreakTextEnd = styled('div')({
-  whiteSpace: 'normal',
-  wordWrap: 'break-word',
-  textAlign: 'end',
-});
+const iconStyle = { height: '16px', verticalAlign: 'middle', mb: '2px' };
 
 export const BridgedTable = (): JSX.Element => {
   const { wallet } = useLedger();
@@ -56,10 +51,42 @@ export const BridgedTable = (): JSX.Element => {
     paginationParams,
   });
 
+  const getStatusLabel = (status: string): JSX.Element | undefined => {
+    switch (status) {
+      case 'complete':
+        return (
+          <InfoLabel
+            label="Complete"
+            variant="complete"
+            icon={<SuccessIcon sx={iconStyle} />}
+          />
+        );
+      case 'pending':
+        return (
+          <InfoLabel
+            label="Pending"
+            variant="pending"
+            icon={<PendingIcon sx={iconStyle} />}
+          />
+        );
+      case 'error':
+        return (
+          <InfoLabel
+            label="Error"
+            variant="error"
+            icon={<ErrorIcon sx={iconStyle} />}
+          />
+        );
+
+      default:
+        return;
+    }
+  };
+
   if (!credits?.length && !isLoadingCredits) {
     return (
       <NoCredits
-        title="No bridged ecocredits found"
+        title={NO_BRIDGED_CREDITS}
         icon={
           <EmptyCartIcon
             sx={{ width: '100px', height: '100px', color: 'info.main' }}
@@ -77,7 +104,17 @@ export const BridgedTable = (): JSX.Element => {
         onTableChange={setPaginationParams}
         headerRows={[
           'Status',
-          'Note / Link',
+          <Box
+            display="flex"
+            sx={{
+              width: {
+                xs: '8rem',
+                lg: '10rem',
+              },
+            }}
+          >
+            Note / Link
+          </Box>,
           <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>{'Project'}</Box>,
           <Box
             display="flex"
@@ -92,7 +129,7 @@ export const BridgedTable = (): JSX.Element => {
               <BreakText>Credit Batch Id</BreakText>
             </Box>
             <Box alignSelf="flex-end" ml={2}>
-              <InfoTooltipWithIcon outlined title={'...'} />
+              <InfoTooltipWithIcon outlined title={CREDIT_BATCH_TOOLTIP} />
             </Box>
           </Box>,
           'Issuer',
@@ -100,12 +137,7 @@ export const BridgedTable = (): JSX.Element => {
           <Box display="flex">
             <BreakTextEnd>Amount Bridged</BreakTextEnd>
             <Box alignSelf="flex-end" ml={2}>
-              <InfoTooltipWithIcon
-                outlined
-                title={
-                  'Amount bridged is the same as amount cancelled in the ledger documentation'
-                }
-              />
+              <InfoTooltipWithIcon outlined title={AMOUNT_BRIDGED_TOOLTIP} />
             </Box>
           </Box>,
           <Box sx={{ width: '6.25rem' }}>
@@ -118,7 +150,7 @@ export const BridgedTable = (): JSX.Element => {
         ]}
         rows={credits.map((row, i) => {
           return [
-            <GreyText>...</GreyText>,
+            <GreyText>{getStatusLabel(BRIDGED_STATUS[random(0, 2)])}</GreyText>,
             <GreyText>...</GreyText>,
             <WithLoader isLoading={!row.projectName} variant="skeleton">
               <Link

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, styled } from '@mui/material';
+import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
 
@@ -22,24 +22,14 @@ import WithLoader from 'components/atoms/WithLoader';
 import { NoCredits } from 'components/molecules';
 import { useEcocredits } from 'hooks';
 
-import { WithLoaderStyles } from './BridgeTabs.styles';
-
-const BRIDGE_ACTION = 'Bridge';
-
-const GreyText = styled('span')(({ theme }) => ({
-  color: theme.palette.info.main,
-}));
-
-const BreakText = styled('div')({
-  whiteSpace: 'normal',
-  wordWrap: 'break-word',
-});
-
-const BreakTextEnd = styled('div')({
-  whiteSpace: 'normal',
-  wordWrap: 'break-word',
-  textAlign: 'end',
-});
+import {
+  AMOUNT_BRIDGABLE_TOOLTIP,
+  BRIDGE_ACTION,
+  CREDIT_BATCH_TOOLTIP,
+  NO_BRIDGABLE_CREDITS,
+} from './MyBridge.constants';
+import { WithLoaderStyles } from './MyBridge.styles';
+import { BreakText, BreakTextEnd, GreyText } from './MyBridge.utils';
 
 export const BridgableTable = (): JSX.Element => {
   const { wallet } = useLedger();
@@ -59,7 +49,7 @@ export const BridgableTable = (): JSX.Element => {
   if (!credits?.length && !isLoadingCredits) {
     return (
       <NoCredits
-        title="No bridgable ecocredits found"
+        title={NO_BRIDGABLE_CREDITS}
         icon={
           <EmptyCartIcon
             sx={{ width: '100px', height: '100px', color: 'info.main' }}
@@ -104,7 +94,7 @@ export const BridgableTable = (): JSX.Element => {
               <BreakText>Credit Batch Id</BreakText>
             </Box>
             <Box alignSelf="flex-end" ml={2}>
-              <InfoTooltipWithIcon outlined title={'...'} />
+              <InfoTooltipWithIcon outlined title={CREDIT_BATCH_TOOLTIP} />
             </Box>
           </Box>,
           'Issuer',
@@ -112,7 +102,7 @@ export const BridgableTable = (): JSX.Element => {
           <Box display="flex">
             <BreakTextEnd>Amount Bridgable</BreakTextEnd>
             <Box alignSelf="flex-end" ml={2}>
-              <InfoTooltipWithIcon outlined title={'...'} />
+              <InfoTooltipWithIcon outlined title={AMOUNT_BRIDGABLE_TOOLTIP} />
             </Box>
           </Box>,
           <Box sx={{ width: '6.25rem' }}>

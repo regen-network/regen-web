@@ -6,6 +6,7 @@ export const WithLoaderStyles = {
   justifyContent: 'center',
   flexDirection: 'col',
   alignItems: 'center',
+  py: 25,
 };
 
 export const TabsStyles = {

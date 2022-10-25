@@ -53,10 +53,7 @@ const WalletButton: React.FC = () => {
     <>
       <div className={styles.root}>
         {!wallet?.address && loaded && (
-          <OutlinedButton
-            onClick={onButtonClick}
-            sx={{ xs: { height: 30 }, md: { height: 40 } }}
-          >
+          <OutlinedButton onClick={onButtonClick} size="small">
             <img className={styles.icon} src={Keplr} alt="keplr" />
             connect wallet
           </OutlinedButton>

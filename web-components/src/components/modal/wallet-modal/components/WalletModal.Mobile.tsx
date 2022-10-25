@@ -1,5 +1,4 @@
-import { Box } from '@mui/system';
-
+import { Center } from '../../../../components/box';
 import { IconTabs } from '../../../../components/tabs/IconTabs';
 import { getWalletModalMobileTabs } from './WalletModal.Mobile.config';
 
@@ -14,9 +13,17 @@ const WalletModalMobile = ({ uri, mobileConnectUrl }: Props): JSX.Element => {
     mobileConnectUrl,
   });
   return (
-    <Box sx={{ minHeight: 530 }}>
-      <IconTabs tabs={walletModalMobileTabs} />
-    </Box>
+    <Center sx={{ minHeight: 400 }}>
+      <IconTabs
+        tabs={walletModalMobileTabs}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      />
+    </Center>
   );
 };
 

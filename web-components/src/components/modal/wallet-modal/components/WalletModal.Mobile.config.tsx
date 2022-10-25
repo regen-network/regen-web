@@ -1,4 +1,3 @@
-import { Box } from '@mui/system';
 import QRCode from 'qrcode.react';
 
 import { Center } from '../../../../components/box';
@@ -20,11 +19,11 @@ export const getWalletModalMobileTabs = ({
       ? {
           label: 'Mobile',
           content: (
-            <Center sx={{ pt: 2, flexDirection: 'column' }}>
+            <Center sx={{ pt: 9, flexDirection: 'column', height: 340 }}>
               <Subtitle sx={{ color: 'info.dark' }}>
                 {'Connect to Mobile Wallet'}
               </Subtitle>
-              <Center sx={{ py: 44 }}>
+              <Center sx={{ width: 300, height: 300 }}>
                 <a href={mobileConnectUrl}>
                   <ContainedButton>{'Connect'}</ContainedButton>
                 </a>
@@ -34,15 +33,11 @@ export const getWalletModalMobileTabs = ({
         }
       : undefined,
     {
-      label: 'QR Code',
+      label: 'Scan the QR code',
       content: (
-        <Box sx={{ pt: 2 }}>
-          <QRCode
-            size={500}
-            style={{ width: '100%', height: '100%' }}
-            value={uri ?? ''}
-          />
-        </Box>
+        <Center sx={{ pt: 9, height: 340 }}>
+          <QRCode size={300} value={uri ?? ''} />
+        </Center>
       ),
     },
   ].filter(item => item !== undefined) as IconTabProps[];

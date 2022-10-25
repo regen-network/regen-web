@@ -56,7 +56,7 @@ export const BridgableTable = (): JSX.Element => {
     paginationParams,
   });
 
-  if (!credits?.length) {
+  if (!credits?.length && !isLoadingCredits) {
     return (
       <NoCredits
         title="No bridgable ecocredits found"

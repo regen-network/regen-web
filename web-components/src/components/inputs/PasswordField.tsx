@@ -65,7 +65,9 @@ export default function PasswordField({
     <TextField
       label="Password"
       type={showPassword ? 'text' : 'password'}
-      helperText={score !== undefined ? getScoreLabel(score) : errors[name]}
+      helperText={
+        score !== undefined ? getScoreLabel(score) : String(errors[name])
+      }
       FormHelperTextProps={{ filled: score !== undefined }}
       triggerOnChange={onChange}
       endAdornment={

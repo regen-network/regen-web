@@ -24,7 +24,7 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
   const classes = useStyles();
   const { form, field, triggerOnChange, disabled } = props;
 
-  const onChange = (e: React.ChangeEvent<any>): void => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const value = e.target.checked;
     form.setFieldValue(field.name, value);
     if (triggerOnChange) {

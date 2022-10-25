@@ -185,7 +185,7 @@ export default function TimelineItem({
   const classes = useStyles({ circleColor, barColor, odd, last });
   return (
     <div className={classes.content}>
-      {date && <div className={classes.date}>{date}</div>}
+      {date && <div className={classes.date}>{String(date)}</div>}
       <Title variant="h5" sx={{ display: 'flex' }}>
         {summary}
       </Title>

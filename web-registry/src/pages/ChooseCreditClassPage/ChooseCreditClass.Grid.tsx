@@ -5,6 +5,7 @@ import Grid, { GridProps } from '@mui/material/Grid';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { Loading } from 'web-components/lib/components/loading';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { ERROR_TIMEOUT } from './ChooseCreditClass.config';
 
@@ -28,7 +29,7 @@ const ChooseCreditClassGrid: React.FC<React.PropsWithChildren<TemplateProps>> =
             container
             spacing={4}
             justifyContent={justifyContent}
-            sx={theme => ({
+            sx={(theme: Theme) => ({
               mt: [4.75, 8.5],
               pr: [8, 8, 4],
               maxWidth: theme.spacing(208),

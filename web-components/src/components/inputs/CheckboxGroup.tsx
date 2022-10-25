@@ -104,7 +104,9 @@ export default function CheckboxGroup({
         ))}
       </FormGroup>
       {errors && errors[name] && (
-        <span className="MuiFormHelperText-root Mui-error">{errors[name]}</span>
+        <span className="MuiFormHelperText-root Mui-error">
+          {String(errors[name])}
+        </span>
       )}
     </FormControl>
   );

@@ -135,7 +135,7 @@ const AmountTextField: React.FC<React.PropsWithChildren<AmountTextFieldProps>> =
           <Grid
             container
             alignItems="center"
-            sx={theme => ({
+            sx={(theme: Theme) => ({
               fontFamily: theme.typography.h1.fontFamily,
               color: theme.palette.info.dark,
               textTransform: 'uppercase',

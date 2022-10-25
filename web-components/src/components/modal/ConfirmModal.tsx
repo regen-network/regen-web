@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Button, Theme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { SxProps } from '@mui/system';
 
 import ContainedButton from '../buttons/ContainedButton';
@@ -9,7 +9,7 @@ import { LinkItem } from '../footer/footer-new';
 import { Label, Subtitle, Title } from '../typography';
 import Modal, { RegenModalProps } from '.';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -97,7 +97,7 @@ const ConfirmModal: React.FC<React.PropsWithChildren<ConfirmModalProps>> = ({
   cardItems,
   linkComponent,
 }) => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
   return (
     <Modal open={open} onClose={onClose} className={styles.root}>
       {icon}

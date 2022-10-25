@@ -1,6 +1,7 @@
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
-export const useMenuHoverStyles = makeStyles((theme: Theme) => ({
+export const useMenuHoverStyles = makeStyles()((theme: Theme) => ({
   popover: {
     pointerEvents: 'none',
   },

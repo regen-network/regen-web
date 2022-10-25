@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme, useTheme } from '@mui/styles';
 import ReactHtmlParser from 'html-react-parser';
 
 import CreditsIcon from '../icons/CreditsIcon';
@@ -24,7 +25,9 @@ interface StyleProps {
   background?: string;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+const useStyles = makeStyles()((theme: Theme) => ({
   root: props => ({
     backgroundImage: props.background
       ? `url("${props.background}")`
@@ -103,7 +106,7 @@ export default function CreditInfo({
   background,
   title,
 }: CreditInfoProps): JSX.Element {
-  const classes = useStyles({ background });
+  const { classes } = useStyles({ background });
   const theme = useTheme();
 
   return (

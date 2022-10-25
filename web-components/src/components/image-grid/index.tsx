@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme } from '@mui/styles';
 
 import { Body, Title } from '../typography';
 
@@ -15,7 +16,13 @@ export interface StyleProps {
   even: boolean;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+const useStyles = makeStyles()((theme: Theme) => ({
   root: props => ({
     [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
       flexDirection: props.even ? 'row-reverse' : 'row',
@@ -95,7 +102,7 @@ export default function ImageGrid({
   description,
   even,
 }: ImageGridProps): JSX.Element {
-  const classes = useStyles({ even });
+  const { classes } = useStyles({ even });
 
   return (
     <Grid container alignItems="center" className={classes.root}>

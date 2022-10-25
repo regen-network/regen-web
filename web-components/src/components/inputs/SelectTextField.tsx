@@ -1,13 +1,14 @@
 import React from 'react';
 import { Box, MenuItem, Theme, useTheme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { TextFieldProps } from 'formik-mui';
 
 import DropdownIcon from '../icons/DropdownIcon';
 import { DefaultStyleProps } from './FieldFormControl';
 import TextField from './TextField';
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. ArrowFunctionExpression in CSS prop.
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     '& select': {
       color: props => (props.default ? theme.palette.info.main : 'inherit'),
@@ -42,7 +43,7 @@ export default function SelectTextField({
   const {
     field: { value },
   } = props;
-  const styles = useStyles({ default: !value });
+  const { classes: styles } = useStyles({ default: !value });
   const theme = useTheme();
 
   return (

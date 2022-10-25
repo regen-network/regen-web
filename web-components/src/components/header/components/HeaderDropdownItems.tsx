@@ -1,12 +1,12 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import ReactHtmlParser from 'html-react-parser';
 
 import { Title } from '../../typography';
 import { NavLinkProps } from './NavLink';
 
-const useStyles = makeStyles(theme => {
+const useStyles = makeStyles()(theme => {
   const { pxToRem } = theme.typography;
   return {
     item: {
@@ -44,7 +44,7 @@ export type HeaderDropdownItemProps = {
 export const HeaderDropdownItem: React.FC<
   React.PropsWithChildren<HeaderDropdownItemProps>
 > = ({ svg: SVG, icon, linkComponent: LinkComponent, ...props }) => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
   return (
     <Box
       display="flex"
@@ -74,7 +74,7 @@ export const HeaderDropdownColumn: React.FC<
     title?: string;
   }>
 > = props => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
   return (
     <Box display="flex" flexDirection="column">
       {props.title && (

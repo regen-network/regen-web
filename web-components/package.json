@@ -21,8 +21,8 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "@emotion/react": "^11.5.0",
-    "@emotion/styled": "^11.3.0",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
     "@keplr-wallet/cosmos": "^0.10.5",
     "@mapbox/mapbox-sdk": "^0.10.0",
     "@mapbox/togeojson": "^0.16.0",
@@ -64,6 +64,7 @@
     "react-remove-scroll": "^2.3.0",
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",
+    "tss-react": "^4.4.1",
     "victory": "^36.6.8",
     "yup": "^0.32.11",
     "zxcvbn": "^4.4.2"

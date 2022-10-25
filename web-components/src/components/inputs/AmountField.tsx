@@ -1,14 +1,13 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 import { Field } from 'formik';
 
 import { Theme } from '../../theme/muiTheme';
 import { getFormattedNumber } from '../../utils/format';
 import TextField, { RegenTextFieldProps } from '../inputs/TextField';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   textField: {
     '& .MuiInputBase-root': {
       paddingRight: '0 !important',
@@ -74,7 +73,7 @@ const AuxiliarLabel: React.FC<React.PropsWithChildren<AuxiliarLabelProps>> = ({
   auxiliarLabel,
   className,
 }) => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
   return (
     <Box className={className} component="span" sx={{ flexGrow: 1 }}>
       <Box
@@ -104,7 +103,7 @@ const AmountLabel: React.FC<React.PropsWithChildren<AmountLabelProps>> = ({
   availableAmount,
   denom,
 }) => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
   return (
     <Grid container justifyContent="space-between">
       <span className={styles.mainLabel}>{label}</span>
@@ -167,31 +166,29 @@ const AmountField: React.FC<React.PropsWithChildren<AmountFieldProps>> = ({
   denom,
   className,
 }) => {
-  const styles = useStyles();
-  return (
-    <>
-      <Field
-        name={name}
-        type="number"
-        component={AmountTextField}
-        availableAmount={availableAmount}
-        className={clsx(styles.textField, className)}
-        label={
-          <AmountLabel
-            label={label}
-            auxiliarLabel={auxiliarLabel}
-            availableAmount={availableAmount}
-            denom={denom}
-          />
-        }
-      />
-      <AuxiliarLabel
-        availableAmount={availableAmount}
-        denom={denom}
-        className={styles.auxiliarLabelMobile}
-      />
-    </>
-  );
+  const { classes: styles, cx } = useStyles();
+  return <>
+    <Field
+      name={name}
+      type="number"
+      component={AmountTextField}
+      availableAmount={availableAmount}
+      className={cx(styles.textField, className)}
+      label={
+        <AmountLabel
+          label={label}
+          auxiliarLabel={auxiliarLabel}
+          availableAmount={availableAmount}
+          denom={denom}
+        />
+      }
+    />
+    <AuxiliarLabel
+      availableAmount={availableAmount}
+      denom={denom}
+      className={styles.auxiliarLabelMobile}
+    />
+  </>;
 };
 
 export default AmountField;

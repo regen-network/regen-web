@@ -2,12 +2,8 @@ import React, { useState } from 'react';
 import Tab, { TabProps } from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import {
-  DefaultTheme as Theme,
-  makeStyles,
-  useTheme,
-  withStyles,
-} from '@mui/styles';
+import { makeStyles, withStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme, useTheme } from '@mui/styles';
 
 export interface RegenTab extends TabProps {
   content?: JSX.Element;
@@ -23,7 +19,8 @@ interface StyleProps {
   background: string;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. ArrowFunctionExpression in CSS prop.
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     flexGrow: 1,
     backgroundImage: props => `url("${props.background}")`,
@@ -46,13 +43,13 @@ export function a11yProps(index: any): object {
   };
 }
 
-const CustomTabs = withStyles((theme: Theme) => ({
+const CustomTabs = withStyles(Tabs, (theme: Theme) => ({
   indicator: {
     display: 'none',
   },
-}))(Tabs);
+}));
 
-const CustomTab = withStyles((theme: Theme) => ({
+const CustomTab = withStyles(Tab, (theme: Theme) => ({
   root: {
     fontFamily: theme.typography.h1.fontFamily,
     fontWeight: 800,
@@ -103,13 +100,13 @@ const CustomTab = withStyles((theme: Theme) => ({
     borderRight: `2px solid ${theme.palette.secondary.dark}`,
     zIndex: 2,
   },
-}))(Tab);
+}));
 
 export default function RegenTabs({
   tabs,
   background,
 }: RegenTabsProps): JSX.Element {
-  const classes = useStyles({ background });
+  const { classes } = useStyles({ background });
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
 

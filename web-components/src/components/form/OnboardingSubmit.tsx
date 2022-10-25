@@ -1,11 +1,11 @@
 import React from 'react';
 import { Grid } from '@mui/material';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme } from '@mui/styles';
 
 import ContainedButton from '../buttons/ContainedButton';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   button: {
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(8),
@@ -46,14 +46,14 @@ export const OnboardingSubmit: React.FC<React.PropsWithChildren<Props>> = ({
   submitText = 'Next',
   cancelText = 'Back',
 }) => {
-  const classes = useStyles();
+  const { classes, cx } = useStyles();
   return (
     <Grid container justifyContent={!!onCancel ? 'space-between' : 'flex-end'}>
       {!!onCancel && (
         <ContainedButton
           variant="text"
           onClick={onCancel}
-          className={clsx(classes.cancelBtn, classes.button)}
+          className={cx(classes.cancelBtn, classes.button)}
         >
           {cancelText}
         </ContainedButton>

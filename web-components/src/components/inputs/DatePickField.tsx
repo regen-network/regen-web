@@ -1,6 +1,6 @@
 import React from 'react';
 import { SxProps, TextField } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -23,7 +23,11 @@ interface StyleProps extends TextFieldProps {
   disabled?: boolean;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+const useStyles = makeStyles()((theme: Theme) => ({
   root: props => ({
     '& .MuiInputBase-formControl': {
       marginTop: props.label ? theme.spacing(2.25) : 0,
@@ -134,7 +138,7 @@ const DatePickField: React.FC<React.PropsWithChildren<DatePickProps>> = ({
   ...fieldProps
 }) => {
   const { form, field, meta } = fieldProps;
-  const styles = useStyles({
+  const { classes: styles } = useStyles({
     disabled: form.isSubmitting,
     errors: !!form.errors[field.name],
     optional: !!optional,

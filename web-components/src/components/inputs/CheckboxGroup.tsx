@@ -5,13 +5,14 @@ import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import FormLabel from '@mui/material/FormLabel';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme } from '@mui/styles';
 import { FieldProps } from 'formik';
 
 import CheckedIcon from '../icons/CheckedIcon';
 import UncheckedIcon from '../icons/UncheckedIcon';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     '& label': {
       lineHeight: '140%',
@@ -67,7 +68,7 @@ export default function CheckboxGroup({
   options,
   ...props
 }: CheckboxGroupProps): JSX.Element {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const {
     form: { setFieldValue, errors },
     field: { name, value },

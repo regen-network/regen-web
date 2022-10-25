@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, IconButton, Link } from '@mui/material';
-import { DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { Box, IconButton, Link, useTheme } from '@mui/material';
 import { isPast } from 'date-fns';
 import { Field, FieldArray, useFormikContext } from 'formik';
 import * as Yup from 'yup';
@@ -25,6 +24,7 @@ import {
 } from 'web-components/lib/components/inputs/validation';
 import { AddCertificationModal } from 'web-components/lib/components/modal/AddCertificationModal';
 import { Body } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import { NameUrl } from 'web-components/lib/types/rdf';
 
 import { MetadataJSONField } from '../../../../components/molecules';

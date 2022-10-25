@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import ReactHtmlParser from 'html-react-parser';
 import Grid from '@mui/material/Grid';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme } from '@mui/styles';
 
 import { BlockContent, SanityBlockOr } from '../block-content';
 import { Body, Label, Title } from '../typography';
@@ -17,7 +18,7 @@ interface HexaImagesProps {
   items: HexaImage[];
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   grid: {
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       flexDirection: 'column-reverse',
@@ -164,7 +165,7 @@ function renderText(text: SanityBlockOr<string>): any {
 }
 
 export default function HexaImages({ items }: HexaImagesProps): JSX.Element {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const [selected, setSelected] = useState(0);
 
   return (

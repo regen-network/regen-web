@@ -3,7 +3,8 @@ import Slider from 'react-slick';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme, useTheme } from '@mui/styles';
 
 import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';
 import PlayIcon from '../icons/PlayIcon';
@@ -35,7 +36,11 @@ export function isMedia(a: Asset): a is Media {
   return (a as Media).src !== undefined;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+const useStyles = makeStyles()((theme: Theme) => ({
   root: props => ({
     [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(8.75),
@@ -216,7 +221,7 @@ export default function ProjectMedia({
   apiServerUrl,
   imageCredits,
 }: ProjectMediaProps): JSX.Element {
-  const classes = useStyles({ mobileHeight, xsBorderRadius });
+  const { classes } = useStyles({ mobileHeight, xsBorderRadius });
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
 

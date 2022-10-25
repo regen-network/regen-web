@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useTheme } from '@mui/styles';
+import { useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';

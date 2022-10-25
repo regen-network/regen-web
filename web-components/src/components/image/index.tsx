@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme } from '@mui/styles';
 
 import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';
 
@@ -19,7 +19,7 @@ export interface ImageProps extends OptimizeImageProps {
   delay?: number;
 }
 
-const useStyles = makeStyles<Theme>(theme => ({
+const useStyles = makeStyles()(theme => ({
   figure: {
     marginBlockStart: 0,
     marginBlockEnd: 0,
@@ -53,7 +53,7 @@ const Image: React.FC<React.PropsWithChildren<ImageProps>> = ({
   height,
   ...rest
 }) => {
-  const classes = useStyles({});
+  const { classes, cx } = useStyles({});
   const imgRef = useRef<HTMLDivElement | null>(null);
   const [width, setWidth] = useState(0);
   const [optimizedSrc, setOptimizedSrc] = useState('');
@@ -124,13 +124,13 @@ const Image: React.FC<React.PropsWithChildren<ImageProps>> = ({
   };
 
   return (
-    <figure ref={imgRef} className={clsx(className, classes.figure)}>
+    <figure ref={imgRef} className={cx(className, classes.figure)}>
       {
         // If the container width has been set, display the image else null
         width > 0 && optimizedSrc && readyToLoad ? (
           backgroundImage ? (
             <div
-              className={clsx(className, classes.background)}
+              className={cx(className, classes.background)}
               style={{ backgroundImage: `url(${optimizedSrc}), url(${src})` }}
             >
               {children}

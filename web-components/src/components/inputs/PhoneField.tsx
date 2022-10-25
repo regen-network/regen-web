@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PhoneInput from 'react-phone-input-2';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme } from '@mui/styles';
 import { FieldProps } from 'formik';
 
 import FieldFormControl from './FieldFormControl';
@@ -18,7 +19,9 @@ interface StyleProps {
   disabled?: boolean;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+const useStyles = makeStyles()((theme: Theme) => ({
   input: props => ({
     width: '100% !important',
     border: `1px solid ${theme.palette.grey[100]} !important`,
@@ -54,7 +57,7 @@ export default function RegenPhoneField({
 }: RegenPhoneFieldProps): JSX.Element {
   const [countryCode, setCountryCode] = useState('us');
   const { form, field } = fieldProps;
-  const classes = useStyles({ disabled: form.isSubmitting });
+  const { classes } = useStyles({ disabled: form.isSubmitting });
 
   return (
     <FieldFormControl

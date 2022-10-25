@@ -1,5 +1,6 @@
 import React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme } from '@mui/styles';
 
 interface GaugeProps {
   amount: number;
@@ -14,7 +15,11 @@ interface StyleProps {
   borderRadius?: string;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. ArrowFunctionExpression in CSS prop.
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. ArrowFunctionExpression in CSS prop.
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     height: props => props.height || theme.spacing(1.25),
     borderRadius: props => props.borderRadius || '0.5rem',
@@ -36,7 +41,7 @@ export default function Gauge({
   height,
   borderRadius,
 }: GaugeProps): JSX.Element {
-  const classes = useStyles({
+  const { classes } = useStyles({
     percentage: totalAmount ? (100 * amount) / totalAmount : 0,
     height,
     borderRadius,

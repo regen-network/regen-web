@@ -1,6 +1,7 @@
 import React from 'react';
 import Slider from 'react-slick';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme, useTheme } from '@mui/styles';
 
 import MapCard from '../cards/MapCard';
 
@@ -9,7 +10,7 @@ export interface MapCardsProps {
   afterChange: (id: string) => void;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     '& .slick-track': {
       display: 'flex',
@@ -34,7 +35,7 @@ export default function MapCards({
   features,
   afterChange,
 }: MapCardsProps): JSX.Element {
-  const classes = useStyles({});
+  const { classes } = useStyles({});
   const theme = useTheme();
   const settings = {
     centerMode: true,

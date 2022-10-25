@@ -1,6 +1,6 @@
 import React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme } from '@mui/styles';
 
 type Props = {
   className?: string;
@@ -8,7 +8,7 @@ type Props = {
   isActive?: boolean;
 };
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   circle: {
     display: 'flex',
     alignItems: 'center',
@@ -28,11 +28,11 @@ const StepCircleBadge: React.FC<React.PropsWithChildren<Props>> = ({
   icon,
   isActive,
 }) => {
-  const classes = useStyles();
+  const { classes, cx } = useStyles();
 
   return (
     <div
-      className={clsx(className, classes.circle, isActive && classes.active)}
+      className={cx(className, classes.circle, isActive && classes.active)}
     >
       {icon}
     </div>

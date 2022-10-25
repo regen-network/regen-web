@@ -33,7 +33,9 @@ const MenuHover = ({
   const [openedPopover, setOpenedPopover] = useState(false);
   const popoverAnchor = useRef(null);
 
-  const styles = useMenuHoverStyles({ textColor: textColor ?? '' });
+  const { classes: styles } = useMenuHoverStyles({
+    textColor: textColor ?? '',
+  });
 
   const popoverEnter = (): void => {
     setOpenedPopover(true);

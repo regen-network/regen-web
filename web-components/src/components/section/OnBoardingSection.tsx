@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Link } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import { Body } from '../typography';
 import Section from './index';
@@ -21,7 +20,7 @@ interface OnBoardingSectionProps {
   };
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   root: {
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(12.5, 0, 30),
@@ -82,7 +81,7 @@ const OnBoardingSection: React.FC<
   classes,
   ...p
 }) => {
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
   const { root, title, titleWrap } = styles;
 
   return (

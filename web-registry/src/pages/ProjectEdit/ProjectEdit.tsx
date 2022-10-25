@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useMediaQuery } from '@mui/material';
-import { makeStyles, useTheme } from '@mui/styles';
+import { useMediaQuery, useTheme } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { startCase } from 'lodash';
 
 import Banner from 'web-components/lib/components/banner';

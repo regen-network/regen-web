@@ -1,7 +1,7 @@
 import React from 'react';
 import { MenuItem } from '@mui/material';
-import { makeStyles, useTheme } from '@mui/styles';
-import cx from 'clsx';
+import { useTheme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import MenuHover, { MenuTitle } from '../menu-hover';
 import {
@@ -10,7 +10,7 @@ import {
 } from './HeaderDropdownItems';
 import { NavLinkProps } from './NavLink';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   menuItem: {
     boxSizing: 'border-box',
     height: '100%',
@@ -61,7 +61,7 @@ interface HeaderMenuHoverProps extends HeaderMenuHoverBase {
 const HeaderMenuHover: React.FC<React.PropsWithChildren<HeaderMenuHoverProps>> =
   ({ item, pathname, linkComponent: LinkComponent }) => {
     const theme = useTheme();
-    const styles = useStyles();
+    const { classes: styles, cx } = useStyles();
 
     const Content: React.FC<React.PropsWithChildren<unknown>> = () => {
       if (item.href && !item.dropdownItems && !item.renderDropdownItems) {

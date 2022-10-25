@@ -1,8 +1,7 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
-import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import DiscordIcon from '../icons/social/DiscordIcon';
 import FacebookIcon from '../icons/social/FacebookIcon';
@@ -19,7 +18,7 @@ interface Props {
   className?: string;
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   social: {
     [theme.breakpoints.up('sm')]: {
       justifyContent: 'center',
@@ -52,7 +51,7 @@ const useStyles = makeStyles(theme => ({
 const SocialLinks: React.FC<React.PropsWithChildren<Props>> = ({
   className,
 }) => {
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
 
   return (
     <div className={className}>

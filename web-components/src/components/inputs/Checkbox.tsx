@@ -1,6 +1,7 @@
 import React from 'react';
 import MuiCheckbox from '@mui/material/Checkbox';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme } from '@mui/styles';
 import { CheckboxProps as MuiCheckboxProps, fieldToCheckbox } from 'formik-mui';
 
 import CheckedIcon from '../icons/CheckedIcon';
@@ -10,7 +11,7 @@ interface CheckboxProps extends MuiCheckboxProps {
   triggerOnChange?: (v: any) => Promise<void>;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   check: {
     height: theme.spacing(5),
     width: theme.spacing(5),
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
   props: CheckboxProps,
 ) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const { form, field, triggerOnChange, disabled } = props;
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {

@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
+import { useTheme } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 
 import { ImageItemProps } from 'web-components/lib/components/image-item';

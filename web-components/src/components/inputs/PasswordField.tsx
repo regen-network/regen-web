@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 // import { ZXCVBNResult } from 'zxcvbn';
 import IconButton from '@mui/material/IconButton';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme, useTheme } from '@mui/styles';
 
 import EyeIcon from '../icons/EyeIcon';
 import TextField, { RegenTextFieldProps } from './TextField';
@@ -13,7 +14,7 @@ interface PasswordFieldProps extends RegenTextFieldProps {
   signup?: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   eyeIcon: {
     width: `${theme.spacing(4.75)} !important`,
     height: `${theme.spacing(4)} !important`,
@@ -34,7 +35,7 @@ export default function PasswordField({
 }: PasswordFieldProps): JSX.Element {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
-  const classes = useStyles();
+  const { classes } = useStyles();
   const [showPassword, setShowPassword] = useState<boolean>(!matches);
   const [score, setScore] = useState<number | undefined>();
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme, useTheme } from '@mui/styles';
 
 import CloseIcon from '../icons/CloseIcon';
 import Card from './Card';
@@ -19,7 +20,9 @@ interface StyleProps {
   color: string;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. ArrowFunctionExpression in CSS prop.
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. ArrowFunctionExpression in CSS prop.
+const useStyles = makeStyles()((theme: Theme) => ({
   image: {
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(25),
@@ -94,7 +97,7 @@ export default function CreditCard({
   isPopup,
   onClose,
 }: MapCardProps): JSX.Element {
-  const classes = useStyles({ color });
+  const { classes } = useStyles({ color });
   const theme = useTheme();
   // const matches = useMediaQuery(theme.breakpoints.up('sm'));
 

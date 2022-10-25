@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Grid from '@mui/material/Grid';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme, useTheme } from '@mui/styles';
 
 import copyTextToClipboard from '../../utils/copy';
 import Banner from '../banner';
@@ -21,7 +22,9 @@ interface StyleProps {
   xsSize?: string | number;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+const useStyles = makeStyles()((theme: Theme) => ({
   iconContainer: props => ({
     backgroundColor: theme.palette.secondary.dark,
     borderRadius: '50%',
@@ -62,7 +65,7 @@ export default function ShareIcons({
   xsSize,
 }: ShareIconsProps): JSX.Element {
   const theme = useTheme();
-  const classes = useStyles({ xsSize });
+  const { classes } = useStyles({ xsSize });
   const [copied, setCopied] = useState(false);
 
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme, useTheme } from '@mui/styles';
 
 import Card from './Card';
 
@@ -9,7 +9,7 @@ export interface GreenCardProps {
   className?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     borderTop: `solid 10px ${theme.palette.secondary.dark}`,
     backgroundColor: theme.palette.grey['200'],
@@ -28,12 +28,12 @@ export default function GreenCard({
   children,
   className,
 }: GreenCardProps): JSX.Element {
-  const classes = useStyles();
+  const { classes, cx } = useStyles();
   const theme = useTheme();
 
   return (
     <Card
-      className={clsx(className, classes.root)}
+      className={cx(className, classes.root)}
       borderColor={theme.palette.grey[100]}
       borderRadius="10px"
       elevation={1}

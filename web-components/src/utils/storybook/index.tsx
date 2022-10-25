@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme } from '@mui/styles';
 
 import ThemeProvider from '../../theme/RegenThemeProvider';
 
@@ -7,7 +8,9 @@ interface Props {
   readonly children: React.ReactNode;
 }
 
-const globalStyles = makeStyles((theme: Theme) => ({
+// TODO jss-to-tss-react codemod: '@global' is not supported by tss-react.
+// See https://mui.com/material-ui/customization/how-to-customize/#4-global-css-override for alternatives.
+const globalStyles = makeStyles()((theme: Theme) => ({
   '@global': {
     '*': {
       boxSizing: 'inherit',

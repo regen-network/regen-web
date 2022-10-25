@@ -9,8 +9,8 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme } from '@mui/styles';
 
 import Modal from '../modal';
 import Tag from '../tag';
@@ -43,7 +43,9 @@ interface ContentProps {
   onTitleClick?: (url: string) => void;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+const useStyles = makeStyles()((theme: Theme) => ({
   timeline: {
     padding: 0,
   },
@@ -155,7 +157,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 }));
 
 function Content({ item, index, onTitleClick }: ContentProps): JSX.Element {
-  const classes = useStyles({ even: index % 2 === 0 });
+  const { classes } = useStyles({ even: index % 2 === 0 });
   return (
     <Grid container wrap="nowrap" className={classes.content}>
       <Grid item sx={{ display: 'flex', alignItems: 'center' }}>
@@ -198,68 +200,66 @@ function Content({ item, index, onTitleClick }: ContentProps): JSX.Element {
 }
 
 export default function NewTimeline({ items }: Props): JSX.Element {
-  const classes = useStyles({});
+  const { classes, cx } = useStyles({});
   const [iframeSrc, setIframeSrc] = useState('');
-  return (
-    <>
-      <Box display={{ xs: 'none', md: 'block' }}>
-        <Timeline position="alternate" className={classes.timeline}>
-          {items.map((item, index) => {
-            const connectorClassName = [classes.connector];
-            if (index === 0) {
-              connectorClassName.push(classes.firstConnector);
-            }
-            if (index === items.length - 1) {
-              connectorClassName.push(classes.lastConnector);
-            }
-            return (
-              <TimelineItem key={index}>
-                <TimelineOppositeContent className={classes.oppositeContent}>
-                  <img src={item.imgSrc} alt={item.title} />
-                </TimelineOppositeContent>
-                <TimelineSeparator className={classes.separator}>
-                  <TimelineDot className={classes.dot} />
-                  <TimelineConnector className={clsx(connectorClassName)} />
-                </TimelineSeparator>
-                <TimelineContent>
-                  <Content
-                    item={item}
-                    index={index}
-                    onTitleClick={setIframeSrc}
-                  />
-                </TimelineContent>
-              </TimelineItem>
-            );
-          })}
-        </Timeline>
-      </Box>
-      <Box display={{ xs: 'block', md: 'none' }}>
-        <Timeline className={classes.timeline}>
-          {items.map((item, index) => {
-            const connectorClassName = [classes.connector];
-            if (index === 0) {
-              connectorClassName.push(classes.firstConnector);
-            }
-            if (index === items.length - 1) {
-              connectorClassName.push(classes.lastConnector);
-            }
-            return (
-              <TimelineItem key={index} className={classes.item}>
-                <TimelineSeparator className={classes.separator}>
-                  <TimelineDot className={classes.dot} />
-                  <TimelineConnector className={clsx(connectorClassName)} />
-                </TimelineSeparator>
-                <TimelineContent>
-                  <Content item={item} index={index} />
-                </TimelineContent>
-              </TimelineItem>
-            );
-          })}
-        </Timeline>
-      </Box>
-      <Modal open={!!iframeSrc} onClose={() => setIframeSrc('')} isIFrame>
-        <iframe title="airtable-signup-form" src={iframeSrc} />
-      </Modal>
-    </>
-  );
+  return <>
+    <Box display={{ xs: 'none', md: 'block' }}>
+      <Timeline position="alternate" className={classes.timeline}>
+        {items.map((item, index) => {
+          const connectorClassName = [classes.connector];
+          if (index === 0) {
+            connectorClassName.push(classes.firstConnector);
+          }
+          if (index === items.length - 1) {
+            connectorClassName.push(classes.lastConnector);
+          }
+          return (
+            <TimelineItem key={index}>
+              <TimelineOppositeContent className={classes.oppositeContent}>
+                <img src={item.imgSrc} alt={item.title} />
+              </TimelineOppositeContent>
+              <TimelineSeparator className={classes.separator}>
+                <TimelineDot className={classes.dot} />
+                <TimelineConnector className={cx(connectorClassName)} />
+              </TimelineSeparator>
+              <TimelineContent>
+                <Content
+                  item={item}
+                  index={index}
+                  onTitleClick={setIframeSrc}
+                />
+              </TimelineContent>
+            </TimelineItem>
+          );
+        })}
+      </Timeline>
+    </Box>
+    <Box display={{ xs: 'block', md: 'none' }}>
+      <Timeline className={classes.timeline}>
+        {items.map((item, index) => {
+          const connectorClassName = [classes.connector];
+          if (index === 0) {
+            connectorClassName.push(classes.firstConnector);
+          }
+          if (index === items.length - 1) {
+            connectorClassName.push(classes.lastConnector);
+          }
+          return (
+            <TimelineItem key={index} className={classes.item}>
+              <TimelineSeparator className={classes.separator}>
+                <TimelineDot className={classes.dot} />
+                <TimelineConnector className={cx(connectorClassName)} />
+              </TimelineSeparator>
+              <TimelineContent>
+                <Content item={item} index={index} />
+              </TimelineContent>
+            </TimelineItem>
+          );
+        })}
+      </Timeline>
+    </Box>
+    <Modal open={!!iframeSrc} onClose={() => setIframeSrc('')} isIFrame>
+      <iframe title="airtable-signup-form" src={iframeSrc} />
+    </Modal>
+  </>;
 }

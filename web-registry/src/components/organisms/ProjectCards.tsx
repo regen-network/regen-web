@@ -1,8 +1,9 @@
 import React from 'react';
+import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';

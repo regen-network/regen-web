@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Collapse } from '@mui/material';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme, useTheme } from '@mui/styles';
 
 import MinusIcon from '../icons/MinusIcon';
 import PlusIcon from '../icons/PlusIcon';
@@ -13,7 +13,7 @@ interface StepFAQProps {
   isActive?: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   faq: {
     display: 'flex',
     flexDirection: 'column',
@@ -87,12 +87,12 @@ const StepFAQs: React.FC<React.PropsWithChildren<StepFAQProps>> = ({
   questionItems,
   isActive,
 }) => {
-  const classes = useStyles();
+  const { classes, cx } = useStyles();
   const theme = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className={clsx(classes.faq, isExpanded && classes.lessPaddingBottom)}>
+    <div className={cx(classes.faq, isExpanded && classes.lessPaddingBottom)}>
       <div className={classes.top}>
         <Title variant="h6" className={classes.title}>
           top faqs
@@ -121,7 +121,7 @@ const StepFAQs: React.FC<React.PropsWithChildren<StepFAQProps>> = ({
             classNames={{
               root: classes.questionRoot,
               container: classes.questionContainer,
-              gradient: clsx(
+              gradient: cx(
                 classes.gradient,
                 !isActive && classes.inactiveGradient,
               ),

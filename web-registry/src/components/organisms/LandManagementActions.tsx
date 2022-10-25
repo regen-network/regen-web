@@ -1,8 +1,9 @@
 import React, { useCallback, useRef } from 'react';
 import Slider from 'react-slick';
+import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 
 import Action, { ActionProps } from 'web-components/lib/components/action';
 import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';

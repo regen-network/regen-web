@@ -1,7 +1,6 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import { makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import Card from '../cards/Card';
 import CheckIcon from '../icons/CheckIcon';
@@ -25,7 +24,7 @@ interface OverviewItem {
   tooltip?: string;
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -68,12 +67,12 @@ function OverviewCard({
   icon,
   item,
 }: OverviewCardProps): JSX.Element {
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
 
   return (
     // <Card className={clsx(className, styles.root, classes && classes.root)}>
     <Card
-      className={clsx(className, classes?.root)}
+      className={cx(className, classes?.root)}
       sx={{
         display: 'flex',
         flexDirection: 'column',

@@ -1,8 +1,8 @@
 import React from 'react';
 import LazyLoad from 'react-lazyload';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme, useTheme } from '@mui/styles';
 
 import ResponsiveSlider from '../sliders/ResponsiveSlider';
 import { Title } from '../typography';
@@ -16,7 +16,7 @@ interface SliderSectionProps {
   };
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(30),
@@ -50,7 +50,7 @@ function SliderSection({
   title,
   classes,
 }: SliderSectionProps): JSX.Element {
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
   const theme: Theme = useTheme();
   const isMobile: boolean = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet: boolean = useMediaQuery(

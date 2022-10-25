@@ -1,6 +1,6 @@
 import React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme } from '@mui/styles';
 
 interface StyleProps {
   color?: string;
@@ -12,7 +12,9 @@ export interface TagProps {
   name: string;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+const useStyles = makeStyles()((theme: Theme) => ({
   tag: props => ({
     backgroundColor: props.color || theme.palette.secondary.main,
     color: theme.palette.primary.main,
@@ -34,7 +36,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 }));
 
 export default function Tag({ className, name, color }: TagProps): JSX.Element {
-  const classes = useStyles({ color });
+  const { classes, cx } = useStyles({ color });
 
-  return <span className={clsx(className, classes.tag)}>{name}</span>;
+  return <span className={cx(className, classes.tag)}>{name}</span>;
 }

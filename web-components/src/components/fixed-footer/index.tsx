@@ -1,14 +1,15 @@
 import React from 'react';
 import Grid, { GridProps } from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme, useTheme } from '@mui/styles';
 
 interface FixedFooterProps {
   children?: any;
   justifyContent?: GridProps['justifyContent'];
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   background: {
     position: 'fixed',
     bottom: '0px',
@@ -58,7 +59,7 @@ export default function FixedFooter({
   children,
   justifyContent,
 }: FixedFooterProps): JSX.Element {
-  const classes = useStyles({});
+  const { classes } = useStyles({});
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
 

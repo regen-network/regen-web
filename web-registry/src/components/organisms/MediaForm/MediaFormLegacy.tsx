@@ -6,8 +6,8 @@ import {
   Grid,
   styled,
   useMediaQuery,
+  useTheme,
 } from '@mui/material';
-import { useTheme } from '@mui/styles';
 import { Field, Form, getIn, useFormikContext } from 'formik';
 
 import FormLabel from 'web-components/lib/components/inputs/FormLabel';

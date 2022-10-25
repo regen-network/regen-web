@@ -1,7 +1,7 @@
 import React from 'react';
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme, useTheme } from '@mui/styles';
 
 import { directionRotate } from './ArrowDownIcon';
 
@@ -16,7 +16,9 @@ interface StyleProps {
   rotate: string;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>(() => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+const useStyles = makeStyles()(() => ({
   root: props => ({
     transform: `rotate(${props.rotate})`,
   }),
@@ -29,7 +31,7 @@ export default function BreadcrumbIcon({
   color,
 }: Props): JSX.Element {
   const rotate: string = directionRotate[direction];
-  const classes = useStyles({ rotate });
+  const { classes, cx } = useStyles({ rotate });
   const theme = useTheme();
   color = color || theme.palette.secondary.main;
 
@@ -37,7 +39,7 @@ export default function BreadcrumbIcon({
     <SvgIcon
       fill="none"
       viewBox="0 0 33 20"
-      className={clsx(className, classes.root)}
+      className={cx(className, classes.root)}
       onClick={onClick}
     >
       <rect

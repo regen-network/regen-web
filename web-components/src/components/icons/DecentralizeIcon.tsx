@@ -1,6 +1,7 @@
 import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme } from '@mui/styles';
 
 interface DecentralizeIconProps {
   color?: string;
@@ -13,7 +14,9 @@ interface StyleProps {
   width?: string;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>(theme => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+const useStyles = makeStyles()(theme => ({
   root: props => ({
     height: props.height || theme.spacing(31.25),
     width: props.width || theme.spacing(55.25),
@@ -24,7 +27,7 @@ export default function DecentralizeIcon({
   height,
   width,
 }: DecentralizeIconProps): JSX.Element {
-  const classes = useStyles({ height, width });
+  const { classes } = useStyles({ height, width });
 
   return (
     <SvgIcon

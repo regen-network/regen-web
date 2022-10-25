@@ -1,12 +1,13 @@
 import React from 'react';
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme, useTheme } from '@mui/styles';
 
 interface CloseIconProps extends SvgIconProps {
   svgColor?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     width: theme.spacing(6.5),
     height: theme.spacing(6.5),
@@ -17,7 +18,7 @@ export default function CloseIcon({
   svgColor,
   ...props
 }: CloseIconProps): JSX.Element {
-  const classes = useStyles({});
+  const { classes } = useStyles({});
   const theme = useTheme();
 
   return (

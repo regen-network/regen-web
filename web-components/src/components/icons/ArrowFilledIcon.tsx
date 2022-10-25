@@ -1,7 +1,7 @@
 import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme } from '@mui/styles';
 
 interface ArrowFilledIconProps {
   color: string;
@@ -27,7 +27,9 @@ export const directionRotate: DirectionRotate = {
   next: '-90deg',
 };
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+const useStyles = makeStyles()((theme: Theme) => ({
   icon: props => ({
     transform: `rotate(${props.rotate})`,
     height: theme.spacing(7),
@@ -40,11 +42,11 @@ export default function ArrowFilledIcon({
   direction = 'down',
 }: ArrowFilledIconProps): JSX.Element {
   const rotate: string = directionRotate[direction];
-  const classes = useStyles({ rotate });
+  const { classes, cx } = useStyles({ rotate });
 
   return (
     <SvgIcon
-      className={clsx(className, classes.icon)}
+      className={cx(className, classes.icon)}
       viewBox="0 0 12 28"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

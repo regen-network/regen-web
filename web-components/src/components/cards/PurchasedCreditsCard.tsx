@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme, useTheme } from '@mui/styles';
 
 import Card from './Card';
 
@@ -11,7 +12,7 @@ interface CreditCardProps {
   icon: JSX.Element;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   container: {
     backgroundColor: theme.palette.primary.main,
     paddingTop: theme.spacing(8.75),
@@ -68,7 +69,7 @@ export default function CreditCard({
   date,
   icon,
 }: CreditCardProps): JSX.Element {
-  const classes = useStyles({});
+  const { classes } = useStyles({});
   const theme = useTheme();
   return (
     <Card

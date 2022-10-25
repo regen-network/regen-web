@@ -1,5 +1,6 @@
 import React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme } from '@mui/styles';
 
 import { Body, Subtitle } from '../typography';
 import Card from './Card';
@@ -19,7 +20,13 @@ interface StyleProps {
   largeFontSize: boolean;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+const useStyles = makeStyles()((theme: Theme) => ({
   background: props => ({
     backgroundImage: `url(${props.imgSrc})`,
     backgroundRepeat: 'no-repeat',
@@ -91,7 +98,7 @@ export default function ImpactCard({
   monitored = false,
   largeFontSize = false,
 }: ImpactCardProps): JSX.Element {
-  const classes = useStyles({ imgSrc, monitored, largeFontSize });
+  const { classes } = useStyles({ imgSrc, monitored, largeFontSize });
   // const theme = useTheme();
   const largeFont = largeFontSize || monitored;
   return (

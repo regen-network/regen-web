@@ -1,21 +1,15 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import LinearProgress from '@mui/material/LinearProgress';
-import {
-  createStyles,
-  DefaultTheme as Theme,
-  makeStyles,
-  useTheme,
-  withStyles,
-} from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles, withStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme, useTheme } from '@mui/styles';
 
 import ContainedButton from '../buttons/ContainedButton';
 import OutlinedButton from '../buttons/OutlinedButton';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
 import FixedFooter from './';
 
-const StyledLinearProgress = withStyles((theme: Theme) =>
+const StyledLinearProgress = withStyles(LinearProgress, (theme: Theme) =>
   createStyles({
     root: {
       position: 'absolute',
@@ -37,8 +31,7 @@ const StyledLinearProgress = withStyles((theme: Theme) =>
       background:
         'linear-gradient(81.77deg, rgba(79, 181, 115, 0.7) 0%, rgba(35, 142, 73, 0.7) 73.42%);',
     },
-  }),
-)(LinearProgress);
+  }));
 
 interface Props {
   onPrev?: () => void;
@@ -56,7 +49,9 @@ interface Props {
 }
 
 type StyleProps = { hideProgress: boolean };
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+const useStyles = makeStyles()((theme: Theme) => ({
   root: props => ({
     marginBottom: props.hideProgress ? 0 : theme.spacing(1),
     [theme.breakpoints.up('sm')]: {
@@ -96,7 +91,7 @@ const SaveFooter: React.FC<React.PropsWithChildren<Props>> = ({
   hideProgress = false,
   ...props
 }) => {
-  const classes = useStyles({ hideProgress });
+  const { classes, cx } = useStyles({ hideProgress });
   const theme: Theme = useTheme();
 
   return (
@@ -105,7 +100,7 @@ const SaveFooter: React.FC<React.PropsWithChildren<Props>> = ({
         <Grid item className={classes.arrows}>
           {props.onPrev && (
             <OutlinedButton
-              className={clsx(classes.btn, classes.back)}
+              className={cx(classes.btn, classes.back)}
               onClick={props.onPrev}
             >
               <ArrowDownIcon

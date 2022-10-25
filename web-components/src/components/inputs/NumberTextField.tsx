@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme } from '@mui/styles';
 import { TextFieldProps } from 'formik-mui';
 
 import SpinIcon from '../icons/SpinIcon';
@@ -13,7 +14,7 @@ export interface NumberTextFieldProps extends TextFieldProps {
   arrows?: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     position: 'relative',
     width: '100%',
@@ -47,7 +48,7 @@ export default function NumberTextField({
   arrows = true,
   ...props
 }: NumberTextFieldProps): JSX.Element {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const {
     field: { value, name },
     form: { setFieldValue },

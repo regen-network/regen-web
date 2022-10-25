@@ -1,12 +1,15 @@
 import React from 'react';
 import MuiInputLabel, { InputLabelProps } from '@mui/material/InputLabel';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme } from '@mui/styles';
 
 interface LabelProps extends InputLabelProps {
   optional?: boolean;
 }
 
-const useStyles = makeStyles<Theme, LabelProps>((theme: Theme) => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+const useStyles = makeStyles()((theme: Theme) => ({
   root: props => ({
     lineHeight: '140%',
     color: theme.palette.primary.contrastText,
@@ -38,7 +41,7 @@ export default function RegenInputLabel({
   optional = false,
   ...props
 }: LabelProps): JSX.Element {
-  const classes = useStyles({ optional });
+  const { classes } = useStyles({ optional });
 
   return (
     <MuiInputLabel {...props} classes={{ root: classes.root }}>

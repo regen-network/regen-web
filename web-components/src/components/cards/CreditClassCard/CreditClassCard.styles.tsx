@@ -1,8 +1,9 @@
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import type { Theme } from '../../../theme/muiTheme';
 
-export const useCreditClassCardStyles = makeStyles((theme: Theme) => ({
+// TODO jss-to-tss-react codemod: usages of this hook outside of this file will not be converted.
+export const useCreditClassCardStyles = makeStyles()((theme: Theme) => ({
   image: {
     height: theme.spacing(35),
     width: '100%',

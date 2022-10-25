@@ -1,9 +1,10 @@
 import React, { useCallback, useRef } from 'react';
 import LazyLoad from 'react-lazyload';
 import Slider from 'react-slick';
+import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import cx from 'clsx';
 
 import { BlockContent } from 'web-components/lib/components/block-content';

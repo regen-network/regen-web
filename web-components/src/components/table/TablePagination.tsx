@@ -1,11 +1,11 @@
 import React from 'react';
 import { Grid, TablePagination as MuiTablePagination } from '@mui/material';
-import { makeStyles, withStyles } from '@mui/styles';
+import { makeStyles, withStyles } from 'tss-react/mui';
 
 import { Theme } from '../../theme/muiTheme';
 import PrevNextButton from '../buttons/PrevNextButton';
 
-const useStylesAction = makeStyles((theme: Theme) => ({
+const useStylesAction = makeStyles()((theme: Theme) => ({
   buttonsWrapper: {
     display: 'flex',
     marginRight: theme.spacing(7.5),
@@ -16,7 +16,7 @@ const useStylesAction = makeStyles((theme: Theme) => ({
 }));
 
 const TablePaginationActions = (props: any): any => {
-  const classes = useStylesAction();
+  const { classes } = useStylesAction();
   const { count, page, rowsPerPage, onPageChange } = props;
   const pageTotal = Math.ceil(count / rowsPerPage);
 
@@ -55,7 +55,7 @@ const TablePaginationActions = (props: any): any => {
   );
 };
 
-const StyledTablePagination = withStyles((theme: Theme) => ({
+const StyledTablePagination = withStyles(MuiTablePagination, (theme: Theme) => ({
   root: {
     height: theme.spacing(29),
     borderTop: `1px solid ${theme.palette.info.light}`,
@@ -104,7 +104,7 @@ const StyledTablePagination = withStyles((theme: Theme) => ({
   displayedRows: {
     marginRight: theme.spacing(7.5),
   },
-}))(MuiTablePagination);
+}));
 
 export interface TablePaginationProps {
   rowsPerPageOptions: number[];

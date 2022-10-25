@@ -9,9 +9,12 @@ import ReactMapGL, {
   WebMercatorViewport,
 } from 'react-map-gl';
 import useMediaQuery from '@mui/material/useMediaQuery';
+
 // import { FeatureCollection } from 'geojson'; TODO
 // import { AllGeoJSON } from '@turf/helpers';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+
+import { DefaultTheme as Theme, useTheme } from '@mui/styles';
 import bbox from '@turf/bbox';
 
 // import MapCards from '../sliders/MapCards';
@@ -32,7 +35,7 @@ interface MapProps {
   mapboxToken: string | undefined;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     width: '100%',
     position: 'relative',
@@ -130,7 +133,7 @@ interface PopupInfo {
 }
 
 export default function Map({ geojson, mapboxToken }: MapProps): JSX.Element {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
 

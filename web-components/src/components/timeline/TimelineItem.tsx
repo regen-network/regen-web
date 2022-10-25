@@ -1,5 +1,6 @@
 import React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme } from '@mui/styles';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import ReactHtmlParser from 'html-react-parser';
 
@@ -26,7 +27,13 @@ interface StyleProps {
 }
 
 // TODO: define spacing object with elements sizings for computation
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+const useStyles = makeStyles()((theme: Theme) => ({
   content: props => ({
     backgroundColor: theme.palette.primary.main,
     position: 'relative',
@@ -182,7 +189,7 @@ export default function TimelineItem({
   txClient,
   onViewOnLedger,
 }: TimelineItemProps): JSX.Element {
-  const classes = useStyles({ circleColor, barColor, odd, last });
+  const { classes } = useStyles({ circleColor, barColor, odd, last });
   return (
     <div className={classes.content}>
       {date && <div className={classes.date}>{String(date)}</div>}

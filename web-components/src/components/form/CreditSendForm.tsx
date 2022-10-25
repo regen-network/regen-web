@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { Box } from '@mui/system';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 import { useTrack } from 'use-analytics';
@@ -47,7 +47,7 @@ import Submit from './Submit';
  *    retirement_location: must be a valid location
  */
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   checkboxLabel: {
     marginTop: theme.spacing(10.75),
   },
@@ -82,7 +82,7 @@ const CreditSendForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   onClose,
   onSubmit,
 }) => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
   const track = useTrack();
 
   const initialValues = {

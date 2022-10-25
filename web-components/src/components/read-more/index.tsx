@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Fade from '@mui/material/Fade';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme } from '@mui/styles';
 
 import { ExpandButton } from '../buttons/ExpandButton';
 import { Body } from '../typography';
@@ -18,7 +18,7 @@ export interface ReadMoreProps {
   };
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     marginBottom: theme.spacing(7),
     width: 'inherit',
@@ -50,7 +50,7 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
   children,
   classes,
 }) => {
-  const styles = useStyles({});
+  const { classes: styles, cx } = useStyles({});
   const [expanded, setExpanded] = useState(false);
   const texts: Texts = truncate(children, maxLength, restMinLength);
   const Button: React.FC<React.PropsWithChildren<unknown>> = () => (

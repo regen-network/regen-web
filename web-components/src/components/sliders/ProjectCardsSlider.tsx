@@ -2,7 +2,8 @@ import React from 'react';
 import Slider from 'react-slick';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme, useTheme } from '@mui/styles';
 
 import ProjectCard, { ProjectCardProps } from '../cards/ProjectCard';
 
@@ -10,7 +11,7 @@ export interface ProjectCardsProps {
   projects: ProjectCardProps[];
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(10.25),
@@ -63,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function ProjectCardsSlider({
   projects,
 }: ProjectCardsProps): JSX.Element {
-  const classes = useStyles({});
+  const { classes } = useStyles({});
   const theme = useTheme();
   const desktop = useMediaQuery(theme.breakpoints.up('md'));
   const mobile = useMediaQuery(theme.breakpoints.down('sm'));

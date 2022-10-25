@@ -3,8 +3,8 @@ import Slider, { Settings as SlickSettings } from 'react-slick';
 import Grid from '@mui/material/Grid';
 import { Variant } from '@mui/material/styles/createTypography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme, useTheme } from '@mui/styles';
 
 import PrevNextButton from '../buttons/PrevNextButton';
 import { Title } from '../typography';
@@ -36,7 +36,11 @@ interface StyleProps {
   itemWidth?: string;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(11.75),
@@ -165,7 +169,7 @@ export default function ResponsiveSlider({
     ? 1
     : Math.min(items.length, 2);
 
-  const styles = useStyles({ gridView, padding, title, itemWidth });
+  const { classes: styles, cx } = useStyles({ gridView, padding, title, itemWidth });
 
   let slider: any = useRef(null);
 

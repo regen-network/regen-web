@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme } from '@mui/styles';
 
 import RegenIcon from '../../icons/RegenIcon';
 
-const useStyles = makeStyles<Theme, { isLoaded: boolean }>(theme => {
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+const useStyles = makeStyles()(theme => {
   const { pxToRem } = theme.typography;
 
   return {
@@ -25,7 +28,7 @@ export const HeaderLogoLink: React.FC<
   React.PropsWithChildren<{ color: string }>
 > = ({ color }) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const styles = useStyles({ isLoaded });
+  const { classes: styles } = useStyles({ isLoaded });
 
   // TODO: this is a hack to make the SVG render properly in safari - it's not a
   // perfect solution but should work until we can dedicate time to find

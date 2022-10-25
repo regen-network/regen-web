@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Theme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { SxProps } from '@mui/system';
 import ReactHtmlParser from 'html-react-parser';
 
@@ -12,7 +12,7 @@ import Modal, { RegenModalProps } from '../modal';
 import { Body, Label, Title } from '../typography';
 import { CardItemValue, CardItemValueList } from './TxModal.CardItemValue';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -105,7 +105,7 @@ const TxModal: React.FC<React.PropsWithChildren<TxModalProps>> = ({
   txHashUrl,
   linkComponent,
 }) => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
   return (
     <Modal open={open} onClose={onClose} className={styles.root}>
       {icon}

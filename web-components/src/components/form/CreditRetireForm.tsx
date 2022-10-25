@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useEffect } from 'react';
 import { Grid, SxProps } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { Field, Form, Formik, FormikErrors, useFormikContext } from 'formik';
 
 import { Theme } from '../../theme/muiTheme';
@@ -45,7 +45,7 @@ const LocationStateField = lazy(() => import('../inputs/LocationStateField'));
  *      | subdivision code with postal code: `${iso-3166-2} ${postalCode}`
  */
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   noteTextField: {
     '& label': {
       whiteSpace: 'unset',
@@ -115,7 +115,7 @@ export interface BottomCreditRetireFieldsProps {
 export const BottomCreditRetireFields: React.FC<
   React.PropsWithChildren<BottomCreditRetireFieldsProps>
 > = ({ mapboxToken, arrayPrefix = '', arrayIndex }) => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
   const { values, setFieldValue } = useFormikContext<
     RetireFormValues | RetireFormValuesArray
   >();

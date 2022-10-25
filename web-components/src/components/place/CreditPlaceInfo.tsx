@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme, useTheme } from '@mui/styles';
 
 import PlaceInfo from './PlaceInfo';
 
@@ -9,7 +10,7 @@ interface CreditPlaceInfoProps {
   fontSize?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   outcome: {
     color: theme.palette.secondary.main,
   },
@@ -20,7 +21,7 @@ export default function CreditPlaceInfo({
   outcome,
   fontSize,
 }: CreditPlaceInfoProps): JSX.Element {
-  const classes = useStyles({});
+  const { classes } = useStyles({});
   const theme = useTheme();
 
   return (

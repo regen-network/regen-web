@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles, styled, useTheme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { styled, useTheme } from '@mui/styles';
 import { Field, FieldArray, Form, Formik, useFormikContext } from 'formik';
 import * as Yup from 'yup';
 
@@ -24,7 +25,7 @@ import {
   RetirementReminder,
 } from './CreditRetireForm';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   checkboxLabel: {
     marginTop: theme.spacing(10.75),
   },
@@ -191,7 +192,7 @@ const AddRecipientButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
 export function RecipientsFieldArray({
   mapboxToken,
 }: BottomCreditRetireFieldsProps): React.ReactElement {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
   const { values } = useFormikContext<FormValues>();
 
   return (

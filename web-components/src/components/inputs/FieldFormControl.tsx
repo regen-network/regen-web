@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormControl, FormHelperText, SxProps } from '@mui/material';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme } from '@mui/styles';
 import { FieldProps, getIn } from 'formik';
 
 import FormLabel from './FormLabel';
@@ -36,7 +36,9 @@ interface StyleProps {
   error: boolean;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+const useStyles = makeStyles()((theme: Theme) => ({
   error: props => ({
     color: theme.palette.error.main,
     borderColor: theme.palette.error.main,
@@ -102,7 +104,7 @@ export default function FieldFormControl({
   }
 
   const hasError = fieldTouched && errorMessage;
-  const styles = useStyles({
+  const { classes: styles, cx } = useStyles({
     disabled,
     description,
     error: hasError,

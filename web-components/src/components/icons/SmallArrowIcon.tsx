@@ -1,8 +1,7 @@
 import React from 'react';
 import { SxProps, Theme } from '@mui/material';
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
-import { makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import { Direction, DirectionRotate, StyleProps } from './ArrowDownIcon';
 
@@ -22,7 +21,9 @@ export const directionRotate: DirectionRotate = {
   upRight: '-45deg',
 };
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+const useStyles = makeStyles()((theme: Theme) => ({
   icon: props => ({
     transform: `rotate(${props.rotate})`,
   }),
@@ -35,11 +36,11 @@ export default function ArrowDownIcon({
   sx,
 }: ArrowDownIconProps): JSX.Element {
   const rotate: string = directionRotate[direction];
-  const classes = useStyles({ rotate });
+  const { classes, cx } = useStyles({ rotate });
   return (
     <SvgIcon
       fontSize={fontSize}
-      className={clsx(className, classes.icon)}
+      className={cx(className, classes.icon)}
       sx={sx}
       width="13"
       height="9"

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Crop } from 'react-image-crop';
 import { IconButton, IconButtonProps, useMediaQuery } from '@mui/material';
-import { makeStyles, useTheme } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
+import { useTheme } from '@mui/styles';
 import { FieldProps } from 'formik';
 
 import OutlinedButton from '../buttons/OutlinedButton';
@@ -30,7 +30,7 @@ export interface ImageDropProps extends FieldProps {
   onUpload?: (imageFile: File) => Promise<string>;
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   root: {
     height: '100%',
     width: '100%',
@@ -93,7 +93,7 @@ function ImageDrop({
   const [cropModalOpen, setCropModalOpen] = useState(false);
   const [initialImage, setInitialImage] = useState('');
   const [fileName, setFileName] = useState('');
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('tablet'));
   const { form, field } = fieldProps;

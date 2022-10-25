@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { SxProps, TextField } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
-import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 import { FieldProps, FormikErrors, FormikProps } from 'formik';
 
 import { getURLInitialValue } from '../../utils/schemaURL';
@@ -21,7 +20,7 @@ import { ProfileFormValues, ProfileModal } from '../modal/ProfileModal';
 import { Label } from '../typography';
 import FieldFormControl from './FieldFormControl';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -161,7 +160,7 @@ const RoleField: React.FC<React.PropsWithChildren<Props>> = ({
   projectId,
   ...fieldProps
 }) => {
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
   const [organizationEdit, setOrganizationEdit] =
     useState<OrganizationFormValues | null>();
   const [individualEdit, setIndividualEdit] =

@@ -1,5 +1,6 @@
 import React from 'react';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme, useTheme } from '@mui/styles';
 
 import ArrowDownIcon from '../icons/ArrowDownIcon';
 
@@ -48,31 +49,31 @@ const getBackgroundColor = (
   }
 };
 
-const useStyles = makeStyles<Theme, { disabled: boolean; dark: boolean }>(
-  theme => ({
-    root: props => ({
-      borderRadius: '50%',
-      fontSize: theme.spacing(6),
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      border: `2px solid ${getBorderColor(theme, props.disabled, props.dark)}`,
-      backgroundColor: getBackgroundColor(theme, props.disabled, props.dark),
-      boxSizing: 'border-box',
-      boxShadow: 'none',
-      opacity: props.disabled ? 0.4 : 1,
-      cursor: props.disabled ? 'not-allowed' : 'pointer',
-      [theme.breakpoints.up('sm')]: {
-        width: theme.spacing(12.5),
-        height: theme.spacing(12.5),
-      },
-      [theme.breakpoints.down('sm')]: {
-        width: theme.spacing(10),
-        height: theme.spacing(10),
-      },
-    }),
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+const useStyles = makeStyles()(theme => ({
+  root: props => ({
+    borderRadius: '50%',
+    fontSize: theme.spacing(6),
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    border: `2px solid ${getBorderColor(theme, props.disabled, props.dark)}`,
+    backgroundColor: getBackgroundColor(theme, props.disabled, props.dark),
+    boxSizing: 'border-box',
+    boxShadow: 'none',
+    opacity: props.disabled ? 0.4 : 1,
+    cursor: props.disabled ? 'not-allowed' : 'pointer',
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing(12.5),
+      height: theme.spacing(12.5),
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: theme.spacing(10),
+      height: theme.spacing(10),
+    },
   }),
-);
+}));
 
 export default function PrevNextButton({
   direction,
@@ -81,7 +82,7 @@ export default function PrevNextButton({
   dark = false,
 }: PrevNextButtonProps): JSX.Element {
   const theme = useTheme();
-  const styles = useStyles({ disabled: !!disabled, dark: !!dark });
+  const { classes: styles } = useStyles({ disabled: !!disabled, dark: !!dark });
   return (
     <div
       className={styles.root}

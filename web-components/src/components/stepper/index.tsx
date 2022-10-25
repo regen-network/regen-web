@@ -6,8 +6,8 @@ import {
   Stepper,
   SxProps,
 } from '@mui/material';
-import { DefaultTheme as Theme, makeStyles, withStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles, withStyles } from 'tss-react/mui';
+import { DefaultTheme as Theme } from '@mui/styles';
 
 import RegenStepIcon from './StepIcon';
 
@@ -24,7 +24,9 @@ interface StyleProps {
   background?: string;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
+// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
+const useStyles = makeStyles()((theme: Theme) => ({
   root: props => ({
     display: 'flex',
     justifyContent: 'center',
@@ -59,7 +61,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
-const RegenStepConnector = withStyles((theme: Theme) => ({
+const RegenStepConnector = withStyles(StepConnector, (theme: Theme, _params, classes) => ({
   alternativeLabel: {
     [theme.breakpoints.up('sm')]: {
       top: theme.spacing(3.75),
@@ -73,19 +75,19 @@ const RegenStepConnector = withStyles((theme: Theme) => ({
     },
   },
   active: {
-    '& $line': {
+    [`& .${classes.line}`]: {
       borderColor: theme.palette.info.main,
     },
   },
   completed: {
-    '& $line': {
+    [`& .${classes.line}`]: {
       borderColor: theme.palette.info.main,
     },
   },
   line: {
     borderColor: theme.palette.info.main,
   },
-}))(StepConnector);
+}));
 
 const RegenStepper = ({
   className,
@@ -95,13 +97,13 @@ const RegenStepper = ({
   onStepClick,
   sx,
 }: StepperProps): JSX.Element => {
-  const classes = useStyles({ background });
+  const { classes, cx } = useStyles({ background });
 
   return (
     <div className={classes.root}>
       <Stepper
         sx={sx}
-        className={clsx(className, classes.stepper)}
+        className={cx(className, classes.stepper)}
         activeStep={activeStep}
         alternativeLabel
         connector={<RegenStepConnector />}
@@ -113,7 +115,7 @@ const RegenStepper = ({
           >
             <StepLabel
               classes={{
-                alternativeLabel: clsx(
+                alternativeLabel: cx(
                   classes.alternativeLabel,
                   onStepClick && classes.hover,
                 ),

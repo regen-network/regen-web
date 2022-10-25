@@ -1,12 +1,15 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, SvgIconProps } from '@mui/material';
 
 import { StyledTableContainer } from 'web-components/lib/components/table';
 import { Title } from 'web-components/lib/components/typography';
 
 import { ReactComponent as CloudData } from '../../assets/svgs/cloud-data.svg';
 
-const NoCredits: React.FC<{ title: string }> = ({ title }) => {
+const NoCredits: React.FC<{
+  title: string;
+  icon?: (props: SvgIconProps) => JSX.Element;
+}> = ({ title, icon }) => {
   return (
     <StyledTableContainer>
       <Box
@@ -18,7 +21,7 @@ const NoCredits: React.FC<{ title: string }> = ({ title }) => {
           alignItems: 'center',
         }}
       >
-        <CloudData />
+        {icon ?? <CloudData />}
         <Title variant="h4" sx={{ mt: 5 }}>
           {title}
         </Title>

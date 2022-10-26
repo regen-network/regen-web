@@ -13,10 +13,10 @@ interface StyleProps {
 }
 
 const useStyles = makeStyles<StyleProps>()((theme, { height, width }) => ({
-  root: props => ({
+  root: {
     height: height || theme.spacing(31.25),
     width: width || theme.spacing(55.25),
-  }),
+  },
 }));
 
 export default function DecentralizeIcon({

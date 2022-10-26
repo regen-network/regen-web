@@ -1,5 +1,5 @@
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
-import { useTheme } from '@mui/styles';
+import { useTheme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
 import { directionRotate } from './ArrowDownIcon';

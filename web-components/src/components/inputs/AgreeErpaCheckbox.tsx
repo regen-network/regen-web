@@ -1,5 +1,5 @@
 import { Link as LinkExt, SxProps, Theme } from '@mui/material';
-import { useTheme } from '@mui/styles';
+import { useTheme } from '@mui/material';
 
 import {
   URL_REGISTRY_MARKETPLACE_LEGAL,

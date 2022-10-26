@@ -85,7 +85,7 @@ const useStyles = makeStyles()(theme => ({
 }));
 
 interface EnhancedTableProps {
-  classes: ReturnType<typeof useStyles>;
+  classes: Record<string, string>;
   onRequestSort: (
     event: React.MouseEvent<unknown>,
     property: keyof DocumentRowData,

@@ -1,7 +1,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import { makeStyles } from 'tss-react/mui';
 import ReactHtmlParser from 'html-react-parser';
+import { makeStyles } from 'tss-react/mui';
 
 import { Title } from '../../typography';
 import { NavLinkProps } from './NavLink';

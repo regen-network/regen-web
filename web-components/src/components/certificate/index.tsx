@@ -233,7 +233,7 @@ function Stakeholder({
   info: StakeholderInfo;
   total: number;
 }): JSX.Element {
-  const { classes } = useStyles();
+  const { classes } = useStyles({});
 
   return (
     <Grid item xs={6}>

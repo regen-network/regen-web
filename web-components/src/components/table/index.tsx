@@ -30,11 +30,16 @@ const StyledTableRow = withStyles(TableRow, theme => ({
   },
 }));
 
+// fix issue with emotion+TS
+// https://github.com/emotion-js/emotion/issues/1182
+const uppercase: 'uppercase' = 'uppercase';
+const nowrap: 'nowrap' = 'nowrap';
+
 const StyledTableCell = withStyles(TableCell, theme => ({
   head: {
     fontFamily: theme.typography.h1.fontFamily,
     fontWeight: 800,
-    textTransform: 'uppercase',
+    textTransform: uppercase,
     letterSpacing: '1px',
     fontSize: theme.typography.pxToRem(11),
     color: theme.palette.info.main,
@@ -43,7 +48,7 @@ const StyledTableCell = withStyles(TableCell, theme => ({
     height: theme.spacing(19),
     lineHeight: theme.spacing(4),
     verticalAlign: 'bottom',
-    whiteSpace: 'nowrap',
+    whiteSpace: nowrap,
     '& .MuiTableSortLabel-active': {
       color: theme.palette.info.main,
     },

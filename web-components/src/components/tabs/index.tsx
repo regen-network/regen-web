@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Tab, { TabProps } from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { useTheme } from '@mui/material';
 import { makeStyles, withStyles } from 'tss-react/mui';
 
 export interface RegenTab extends TabProps {

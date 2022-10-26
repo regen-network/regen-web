@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import { DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { useTheme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
 import CloseIcon from '../icons/CloseIcon';

@@ -8,7 +8,7 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
-import { useTheme } from '@mui/styles';
+import { useTheme } from '@mui/material';
 import { FieldProps } from 'formik';
 
 import OutlinedButton from '../buttons/OutlinedButton';

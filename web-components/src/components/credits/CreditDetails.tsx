@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { useTheme } from '@mui/styles';
+import { useTheme } from '@mui/material';
 import ReactHtmlParser from 'html-react-parser';
 import { makeStyles } from 'tss-react/mui';
 

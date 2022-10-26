@@ -2,7 +2,8 @@ import React from 'react';
 import LazyLoad from 'react-lazyload';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from 'tss-react/mui';
-import { DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { useTheme } from '@mui/material';
 
 import ResponsiveSlider from '../sliders/ResponsiveSlider';
 import { Title } from '../typography';

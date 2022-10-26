@@ -1,6 +1,6 @@
 import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
-import { useTheme } from '@mui/styles';
+import { useTheme } from '@mui/material';
 
 const SaveIcon: React.FC<
   React.PropsWithChildren<{ color?: string; className?: string }>

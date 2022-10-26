@@ -59,7 +59,7 @@ export default function ImageItem({
   buttonHref,
   buttonTarget,
 }: ImageItemProps): JSX.Element {
-  const { classes: styles, cx } = useStyles({ titleVariant });
+  const { classes: styles, cx } = useStyles();
 
   return (
     <div className={cx(styles.root, classes?.root, className)}>

@@ -55,56 +55,63 @@ const TablePaginationActions = (props: any): any => {
   );
 };
 
-const StyledTablePagination = withStyles(MuiTablePagination, (theme: Theme) => ({
-  root: {
-    height: theme.spacing(29),
-    borderTop: `1px solid ${theme.palette.info.light}`,
-    borderBottom: 'none',
-  },
-  selectLabel: {
-    fontSize: '1rem',
-    '&:first-of-type': {
-      fontFamily: 'Muli',
-      fontSize: '0.75rem',
-      fontWeight: 800,
-      letterSpacing: '1px',
-      textTransform: 'uppercase',
-      color: theme.palette.grey[500],
+// fix issue with emotion+TS
+// https://github.com/emotion-js/emotion/issues/1182
+const uppercase: 'uppercase' = 'uppercase';
+
+const StyledTablePagination = withStyles(
+  MuiTablePagination,
+  (theme: Theme) => ({
+    root: {
+      height: theme.spacing(29),
+      borderTop: `1px solid ${theme.palette.info.light}`,
+      borderBottom: 'none',
+    },
+    selectLabel: {
+      fontSize: '1rem',
+      '&:first-of-type': {
+        fontFamily: 'Muli',
+        fontSize: '0.75rem',
+        fontWeight: 800,
+        letterSpacing: '1px',
+        textTransform: uppercase,
+        color: theme.palette.grey[500],
+        [theme.breakpoints.down('sm')]: {
+          display: 'none',
+        },
+      },
+      [theme.breakpoints.down('sm')]: {
+        marginRight: theme.spacing(10),
+      },
+    },
+    select: {
+      fontSize: '1rem',
+      lineHeight: '1.5rem',
+      border: `1px solid ${theme.palette.grey[100]}`,
+      borderRadius: '2px',
+      paddingTop: theme.spacing(4),
+      paddingBottom: theme.spacing(4),
+      paddingLeft: theme.spacing(3),
+      paddingRight: `${theme.spacing(12)} !important`,
+      marginLeft: theme.spacing(4),
       [theme.breakpoints.down('sm')]: {
         display: 'none',
       },
     },
-    [theme.breakpoints.down('sm')]: {
-      marginRight: theme.spacing(10),
+    selectIcon: {
+      color: theme.palette.secondary.main,
+      marginRight: theme.spacing(2),
+      fontSize: '1.75rem',
+      top: 'calc(50% - 16px)',
+      [theme.breakpoints.down('sm')]: {
+        display: 'none',
+      },
     },
-  },
-  select: {
-    fontSize: '1rem',
-    lineHeight: '1.5rem',
-    border: `1px solid ${theme.palette.grey[100]}`,
-    borderRadius: '2px',
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-    paddingLeft: theme.spacing(3),
-    paddingRight: `${theme.spacing(12)} !important`,
-    marginLeft: theme.spacing(4),
-    [theme.breakpoints.down('sm')]: {
-      display: 'none',
+    displayedRows: {
+      marginRight: theme.spacing(7.5),
     },
-  },
-  selectIcon: {
-    color: theme.palette.secondary.main,
-    marginRight: theme.spacing(2),
-    fontSize: '1.75rem',
-    top: 'calc(50% - 16px)',
-    [theme.breakpoints.down('sm')]: {
-      display: 'none',
-    },
-  },
-  displayedRows: {
-    marginRight: theme.spacing(7.5),
-  },
-}));
+  }),
+);
 
 export interface TablePaginationProps {
   rowsPerPageOptions: number[];

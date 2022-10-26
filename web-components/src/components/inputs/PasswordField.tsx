@@ -4,7 +4,8 @@ import React, { useEffect, useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from 'tss-react/mui';
-import { DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { useTheme } from '@mui/material';
 
 import EyeIcon from '../icons/EyeIcon';
 import TextField, { RegenTextFieldProps } from './TextField';

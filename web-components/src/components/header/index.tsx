@@ -1,8 +1,7 @@
 import React from 'react';
-import { MenuList, useMediaQuery } from '@mui/material';
+import { MenuList, useMediaQuery, useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import { useTheme } from '@mui/styles';
 
 import MobileMenu from '../mobile-menu';
 import { HeaderLogoLink } from './components/HeaderLogoLink';

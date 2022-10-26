@@ -1,5 +1,4 @@
 import { withStyles } from 'tss-react/mui';
-
 import Tooltip from './';
 
 // fix issue with emotion+TS

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Grid from '@mui/material/Grid';
-import { useTheme } from '@mui/styles';
+import { useTheme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
 import copyTextToClipboard from '../../utils/copy';

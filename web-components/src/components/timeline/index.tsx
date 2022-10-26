@@ -1,7 +1,8 @@
 import React from 'react';
 import LazyLoad from 'react-lazyload';
 import { makeStyles } from 'tss-react/mui';
-import { DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { useTheme } from '@mui/material';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
 import TimelineItem from './TimelineItem';

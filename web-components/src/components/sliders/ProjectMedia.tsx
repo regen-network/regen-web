@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/styles';
+import { useTheme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
 import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';

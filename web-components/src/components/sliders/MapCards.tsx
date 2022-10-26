@@ -1,7 +1,8 @@
 import React from 'react';
 import Slider from 'react-slick';
 import { makeStyles } from 'tss-react/mui';
-import { DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { useTheme } from '@mui/material';
 
 import MapCard from '../cards/MapCard';
 

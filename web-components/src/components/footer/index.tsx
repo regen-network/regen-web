@@ -94,7 +94,7 @@ export default function Footer({
   privacyUrl,
   apiUri = 'http://localhost:5000',
 }: FooterProps): JSX.Element {
-  const { classes } = useStyles({ paddingBottom: false });
+  const { classes } = useStyles();
 
   return (
     <Box

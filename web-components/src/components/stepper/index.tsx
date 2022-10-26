@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Step,
   StepConnector,
@@ -6,8 +5,8 @@ import {
   Stepper,
   SxProps,
 } from '@mui/material';
-import { makeStyles, withStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles, withStyles } from 'tss-react/mui';
 
 import RegenStepIcon from './StepIcon';
 
@@ -24,15 +23,13 @@ interface StyleProps {
   background?: string;
 }
 
-// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
-// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
-const useStyles = makeStyles()((theme: Theme) => ({
-  root: props => ({
+const useStyles = makeStyles<StyleProps>()((theme, { background }) => ({
+  root: {
     display: 'flex',
     justifyContent: 'center',
     backgroundColor: theme.palette.info.light,
-    backgroundImage: `url(${props.background})`,
-  }),
+    backgroundImage: `url(${background})`,
+  },
   stepper: {
     width: '100%',
     backgroundColor: 'transparent',
@@ -61,33 +58,36 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
 }));
 
-const RegenStepConnector = withStyles(StepConnector, (theme: Theme, _params, classes) => ({
-  alternativeLabel: {
-    [theme.breakpoints.up('sm')]: {
-      top: theme.spacing(3.75),
-      left: `calc(-50% + ${theme.spacing(3.75)})`,
-      right: `calc(50% + ${theme.spacing(3.75)})`,
+const RegenStepConnector = withStyles(
+  StepConnector,
+  (theme: Theme, _params, classes) => ({
+    alternativeLabel: {
+      [theme.breakpoints.up('sm')]: {
+        top: theme.spacing(3.75),
+        left: `calc(-50% + ${theme.spacing(3.75)})`,
+        right: `calc(50% + ${theme.spacing(3.75)})`,
+      },
+      [theme.breakpoints.down('sm')]: {
+        top: theme.spacing(2.75),
+        left: `calc(-50% + ${theme.spacing(2.5)})`,
+        right: `calc(50% + ${theme.spacing(2.5)})`,
+      },
     },
-    [theme.breakpoints.down('sm')]: {
-      top: theme.spacing(2.75),
-      left: `calc(-50% + ${theme.spacing(2.5)})`,
-      right: `calc(50% + ${theme.spacing(2.5)})`,
+    active: {
+      [`& .${classes.line}`]: {
+        borderColor: theme.palette.info.main,
+      },
     },
-  },
-  active: {
-    [`& .${classes.line}`]: {
+    completed: {
+      [`& .${classes.line}`]: {
+        borderColor: theme.palette.info.main,
+      },
+    },
+    line: {
       borderColor: theme.palette.info.main,
     },
-  },
-  completed: {
-    [`& .${classes.line}`]: {
-      borderColor: theme.palette.info.main,
-    },
-  },
-  line: {
-    borderColor: theme.palette.info.main,
-  },
-}));
+  }),
+);
 
 const RegenStepper = ({
   className,

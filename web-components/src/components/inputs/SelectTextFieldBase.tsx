@@ -1,5 +1,4 @@
-import React from 'react';
-import { SelectProps, Theme, useTheme } from '@mui/material';
+import { SelectProps, useTheme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
 import DropdownIcon from '../icons/DropdownIcon';
@@ -10,11 +9,10 @@ import TextFieldBase from './TextFieldBase';
 // of a Formik context.
 // TODO: use this as a style base for SelectTextField
 
-// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. ArrowFunctionExpression in CSS prop.
-const useStyles = makeStyles()((theme: Theme) => ({
+const useStyles = makeStyles<StyleProps>()((theme, { defaultStyle }) => ({
   root: {
     '& select': {
-      color: props => (props.default ? theme.palette.info.main : 'inherit'),
+      color: defaultStyle ? theme.palette.info.main : 'inherit',
     },
   },
 }));
@@ -30,7 +28,7 @@ export interface SelectTextFieldProps extends DefaultStyleProps, SelectProps {
 }
 
 interface StyleProps {
-  default: boolean;
+  defaultStyle: boolean;
 }
 
 export default function SelectTextFieldBase({
@@ -40,7 +38,7 @@ export default function SelectTextFieldBase({
   defaultStyle,
   ...selectProps
 }: SelectTextFieldProps): JSX.Element {
-  const { classes: styles } = useStyles({ default: !!defaultStyle });
+  const { classes: styles } = useStyles({ defaultStyle: !!defaultStyle });
   const theme = useTheme();
 
   return (

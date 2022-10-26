@@ -50,7 +50,7 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
   children,
   classes,
 }) => {
-  const { classes: styles, cx } = useStyles({});
+  const { classes: styles, cx } = useStyles();
   const [expanded, setExpanded] = useState(false);
   const texts: Texts = truncate(children, maxLength, restMinLength);
   const Button: React.FC<React.PropsWithChildren<unknown>> = () => (

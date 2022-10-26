@@ -21,7 +21,7 @@ export default function CreditPlaceInfo({
   outcome,
   fontSize,
 }: CreditPlaceInfoProps): JSX.Element {
-  const { classes } = useStyles({});
+  const { classes } = useStyles();
   const theme = useTheme();
 
   return (

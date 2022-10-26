@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Tab, { TabProps } from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { makeStyles, withStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { makeStyles, withStyles } from 'tss-react/mui';
 
 export interface RegenTab extends TabProps {
   content?: JSX.Element;
@@ -19,11 +19,10 @@ interface StyleProps {
   background: string;
 }
 
-// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. ArrowFunctionExpression in CSS prop.
-const useStyles = makeStyles()((theme: Theme) => ({
+const useStyles = makeStyles<StyleProps>()((theme, { background }) => ({
   root: {
     flexGrow: 1,
-    backgroundImage: props => `url("${props.background}")`,
+    backgroundImage: `url("${background}")`,
     backgroundSize: 'cover',
     // backgroundColor: theme.palette.background.paper,
   },

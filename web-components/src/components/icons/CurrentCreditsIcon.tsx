@@ -1,7 +1,5 @@
-import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
 import { makeStyles } from 'tss-react/mui';
-import { DefaultTheme as Theme } from '@mui/styles';
 
 interface CurrentCreditsIconProps {
   className?: string;
@@ -15,13 +13,11 @@ interface StyleProps {
   width?: string;
 }
 
-// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
-// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
-const useStyles = makeStyles()((theme: Theme) => ({
-  root: props => ({
-    height: props.height || theme.spacing(13.5),
-    width: props.width || theme.spacing(14.75),
-  }),
+const useStyles = makeStyles<StyleProps>()((theme, { height, width }) => ({
+  root: {
+    height: height || theme.spacing(13.5),
+    width: width || theme.spacing(14.75),
+  },
 }));
 
 export default function CurrentCreditsIcon({

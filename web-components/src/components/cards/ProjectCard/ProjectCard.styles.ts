@@ -1,7 +1,6 @@
 import { Theme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
-// TODO jss-to-tss-react codemod: usages of this hook outside of this file will not be converted.
 export const useProjectCardStyles = makeStyles()((theme: Theme) => ({
   separator: {
     border: `0.5px solid ${theme.palette.grey[100]}`,

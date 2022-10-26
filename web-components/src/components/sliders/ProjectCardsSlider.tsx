@@ -64,7 +64,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
 export default function ProjectCardsSlider({
   projects,
 }: ProjectCardsProps): JSX.Element {
-  const { classes } = useStyles({});
+  const { classes } = useStyles();
   const theme = useTheme();
   const desktop = useMediaQuery(theme.breakpoints.up('md'));
   const mobile = useMediaQuery(theme.breakpoints.down('sm'));

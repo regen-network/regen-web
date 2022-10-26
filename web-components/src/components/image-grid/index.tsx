@@ -1,7 +1,5 @@
-import React from 'react';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from 'tss-react/mui';
-import { DefaultTheme as Theme } from '@mui/styles';
 
 import { Body, Title } from '../typography';
 
@@ -16,25 +14,19 @@ export interface StyleProps {
   even: boolean;
 }
 
-// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
-// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
-// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
-// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
-// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
-// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
-const useStyles = makeStyles()((theme: Theme) => ({
-  root: props => ({
+const useStyles = makeStyles<StyleProps>()((theme, { even }) => ({
+  root: {
     [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
-      flexDirection: props.even ? 'row-reverse' : 'row',
+      flexDirection: even ? 'row-reverse' : 'row',
     },
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       flexDirection: 'column',
     },
-  }),
-  text: props => ({
+  },
+  text: {
     [theme.breakpoints.up('md')]: {
-      paddingLeft: props.even ? theme.spacing(37.5) : theme.spacing(10),
-      paddingRight: props.even ? theme.spacing(10) : theme.spacing(37.5),
+      paddingLeft: even ? theme.spacing(37.5) : theme.spacing(10),
+      paddingRight: even ? theme.spacing(10) : theme.spacing(37.5),
     },
     [theme.breakpoints.down('md')]: {
       paddingLeft: theme.spacing(10),
@@ -50,8 +42,8 @@ const useStyles = makeStyles()((theme: Theme) => ({
       paddingLeft: theme.spacing(4),
     },
     [theme.breakpoints.up('xl')]: {
-      paddingLeft: props.even ? theme.spacing(5) : theme.spacing(10),
-      paddingRight: props.even ? theme.spacing(10) : theme.spacing(5),
+      paddingLeft: even ? theme.spacing(5) : theme.spacing(10),
+      paddingRight: even ? theme.spacing(10) : theme.spacing(5),
     },
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingTop: theme.spacing(10),
@@ -60,8 +52,8 @@ const useStyles = makeStyles()((theme: Theme) => ({
       flexBasis: '100%',
       maxWidth: '100%',
     },
-  }),
-  title: props => ({
+  },
+  title: {
     [theme.breakpoints.up('sm')]: {
       lineHeight: '130%',
       marginBottom: theme.spacing(3),
@@ -77,9 +69,9 @@ const useStyles = makeStyles()((theme: Theme) => ({
     [theme.breakpoints.up('xl')]: {
       maxWidth: theme.spacing(145),
     },
-    marginLeft: props.even ? 'auto' : 0,
-    marginRight: props.even ? 0 : 'auto',
-  }),
+    marginLeft: even ? 'auto' : 0,
+    marginRight: even ? 0 : 'auto',
+  },
   image: {
     height: '100%',
     width: '100%',

@@ -63,7 +63,7 @@ export default function ArticleCard({
   type,
   play = false,
 }: ArticleCardProps): JSX.Element {
-  const { classes: styles } = useStyles({});
+  const { classes: styles } = useStyles();
   return (
     <MediaCard
       className={className}

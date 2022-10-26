@@ -1,8 +1,8 @@
 import React from 'react';
 import { FormControl, FormHelperText, SxProps } from '@mui/material';
-import { makeStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme } from '@mui/styles';
 import { FieldProps, getIn } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 
 import FormLabel from './FormLabel';
 
@@ -36,24 +36,22 @@ interface StyleProps {
   error: boolean;
 }
 
-// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
-// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
-const useStyles = makeStyles()((theme: Theme) => ({
-  error: props => ({
+const useStyles = makeStyles<StyleProps>()((theme, { error }) => ({
+  error: {
     color: theme.palette.error.main,
     borderColor: theme.palette.error.main,
     marginTop: theme.spacing(1),
     marginBottom: 0,
     fontFamily: '"Lato",-apple-system,sans-serif',
     fontWeight: 'bold',
-    visibility: props.error ? 'visible' : 'hidden',
+    visibility: error ? 'visible' : 'hidden',
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(3.5),
     },
     [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
     },
-  }),
+  },
   label: {
     marginBottom: theme.spacing(2.25),
   },

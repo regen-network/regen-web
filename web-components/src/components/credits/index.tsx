@@ -23,7 +23,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
 }));
 
 export default function Credits(props: CreditsProps): JSX.Element {
-  const { classes } = useStyles({});
+  const { classes } = useStyles();
   return (
     <Grid container direction="column">
       <GaugeText

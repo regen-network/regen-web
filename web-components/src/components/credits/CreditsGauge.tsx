@@ -20,7 +20,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
 }));
 
 export default function CreditsGauge(props: CreditsProps): JSX.Element {
-  const { classes } = useStyles({});
+  const { classes } = useStyles();
   const available: number = props.issued - props.purchased;
   return (
     <Grid container direction="column">

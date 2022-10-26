@@ -41,7 +41,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
 export default function LandManagementActions({
   actions,
 }: LandManagementActionsProps): JSX.Element {
-  const { classes } = useStyles({});
+  const { classes } = useStyles();
   const theme: Theme = useTheme();
   const slides: number = useMediaQuery(theme.breakpoints.up('sm')) ? 3 : 1;
 

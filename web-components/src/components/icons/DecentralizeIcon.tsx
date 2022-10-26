@@ -1,7 +1,5 @@
-import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
 import { makeStyles } from 'tss-react/mui';
-import { DefaultTheme as Theme } from '@mui/styles';
 
 interface DecentralizeIconProps {
   color?: string;
@@ -14,12 +12,10 @@ interface StyleProps {
   width?: string;
 }
 
-// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
-// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
-const useStyles = makeStyles()(theme => ({
+const useStyles = makeStyles<StyleProps>()((theme, { height, width }) => ({
   root: props => ({
-    height: props.height || theme.spacing(31.25),
-    width: props.width || theme.spacing(55.25),
+    height: height || theme.spacing(31.25),
+    width: width || theme.spacing(55.25),
   }),
 }));
 

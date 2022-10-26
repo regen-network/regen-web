@@ -61,7 +61,7 @@ export default function MediaCard({
   apiServerUrl,
   sx = [],
 }: MediaCardProps): JSX.Element {
-  const { classes, cx } = useStyles({});
+  const { classes, cx } = useStyles();
   const optimizedImage = useCallback(
     (): JSX.Element => (
       <MediaCardImage

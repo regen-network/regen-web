@@ -11,7 +11,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
 }));
 
 export default function TotalCreditsIcon(): JSX.Element {
-  const { classes } = useStyles({});
+  const { classes } = useStyles();
 
   return (
     <SvgIcon viewBox="0 0 54 58" className={classes.root}>

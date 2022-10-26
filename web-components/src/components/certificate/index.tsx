@@ -1,8 +1,8 @@
 import React from 'react';
-import ReactHtmlParser from 'html-react-parser';
 import Grid from '@mui/material/Grid';
-import { makeStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme } from '@mui/styles';
+import ReactHtmlParser from 'html-react-parser';
+import { makeStyles } from 'tss-react/mui';
 
 import { pluralize } from '../../utils/pluralize';
 import RegenIcon from '../icons/RegenIcon';
@@ -33,10 +33,9 @@ interface CertificateProps {
   retired?: boolean;
 }
 
-// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. ArrowFunctionExpression in CSS prop.
-const useStyles = makeStyles()((theme: Theme) => ({
+const useStyles = makeStyles<StyleProps>()((theme, { background }) => ({
   root: {
-    backgroundImage: props => `url("${props.background}")`,
+    backgroundImage: `url("${background}")`,
     backgroundSize: 'cover',
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(8),
@@ -234,7 +233,7 @@ function Stakeholder({
   info: StakeholderInfo;
   total: number;
 }): JSX.Element {
-  const { classes } = useStyles({});
+  const { classes } = useStyles();
 
   return (
     <Grid item xs={6}>

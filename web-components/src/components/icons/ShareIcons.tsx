@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Grid from '@mui/material/Grid';
+import { useTheme } from '@mui/styles';
 import { makeStyles } from 'tss-react/mui';
-import { DefaultTheme as Theme, useTheme } from '@mui/styles';
 
 import copyTextToClipboard from '../../utils/copy';
 import Banner from '../banner';
@@ -22,18 +22,16 @@ interface StyleProps {
   xsSize?: string | number;
 }
 
-// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
-// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
-const useStyles = makeStyles()((theme: Theme) => ({
-  iconContainer: props => ({
+const useStyles = makeStyles<StyleProps>()((theme, { xsSize }) => ({
+  iconContainer: {
     backgroundColor: theme.palette.secondary.dark,
     borderRadius: '50%',
     display: 'block',
     width: theme.spacing(12.5),
     height: theme.spacing(12.5),
     [theme.breakpoints.down('sm')]: {
-      width: props.xsSize || theme.spacing(12.5),
-      height: props.xsSize || theme.spacing(12.5),
+      width: xsSize || theme.spacing(12.5),
+      height: xsSize || theme.spacing(12.5),
     },
     cursor: 'pointer',
     '&:hover': {
@@ -44,7 +42,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
       width: '100%',
       height: '100%',
     },
-  }),
+  },
   small: {
     padding: theme.spacing(2),
   },

@@ -1,8 +1,7 @@
-import React from 'react';
 import { Box } from '@mui/material';
-import { makeStyles } from 'tss-react/mui';
-import { DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { useTheme } from '@mui/styles';
 import ReactHtmlParser from 'html-react-parser';
+import { makeStyles } from 'tss-react/mui';
 
 import CreditsIcon from '../icons/CreditsIcon';
 import { Body, Title } from '../typography';
@@ -25,18 +24,14 @@ interface StyleProps {
   background?: string;
 }
 
-// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
-// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
-const useStyles = makeStyles()((theme: Theme) => ({
-  root: props => ({
-    backgroundImage: props.background
-      ? `url("${props.background}")`
-      : 'transparent',
+const useStyles = makeStyles<StyleProps>()((theme, { background }) => ({
+  root: {
+    backgroundImage: background ? `url("${background}")` : 'transparent',
     backgroundSize: 'cover',
-    border: props.background
+    border: background
       ? `1px solid ${theme.palette.secondary.contrastText}`
       : 'none',
-    borderRadius: props.background ? '5px' : 'none',
+    borderRadius: background ? '5px' : 'none',
     position: 'relative',
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(14.5)} ${theme.spacing(8)} ${theme.spacing(
@@ -48,7 +43,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
         11.5,
       )}`,
     },
-  }),
+  },
   icon: {
     marginRight: theme.spacing(2.5),
     [theme.breakpoints.down('sm')]: {
@@ -135,7 +130,7 @@ export default function CreditInfo({
             {title}
           </Title>
         </div>
-        <div className={classes.activitiesItem}>
+        <div>
           <Box component="ul" sx={{ m: 0, mt: 4.5, paddingInlineStart: 0 }}>
             {creditClass.keyOutcomesActivitiesDesc && (
               <Body

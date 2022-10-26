@@ -24,7 +24,7 @@ function RegenLogoIcon({
   onMouseEnter,
   onMouseLeave,
 }: Props): JSX.Element {
-  const { classes, cx } = useStyles({});
+  const { classes, cx } = useStyles();
 
   return (
     <SvgIcon

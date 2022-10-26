@@ -41,12 +41,14 @@ export const directionRotate: DirectionRotate = {
   upRight: '225deg',
 };
 
-// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
-// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
-const useStyles = makeStyles()((theme: Theme) => ({
-  icon: props => ({
-    transform: `rotate(${props.rotate})`,
-  }),
+type UseStylesParams = {
+  rotate: string;
+};
+
+const useStyles = makeStyles<UseStylesParams>()((theme, { rotate }) => ({
+  icon: {
+    transform: `rotate(${rotate})`,
+  },
 }));
 
 export default function ArrowDownIcon({

@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Link, useTheme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
-
-import type { Theme } from 'src/theme/muiTheme';
 
 import copyTextToClipboard from '../../utils/copy';
 import { parseText } from '../../utils/textParser';
@@ -39,20 +37,18 @@ interface ClassNames {
   icon?: string;
 }
 
-// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
-// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
-const useStyles = makeStyles()((theme: Theme) => ({
-  root: props => ({
-    borderBottom: !props.last ? `1px solid ${theme.palette.grey[100]}` : 'none',
+const useStyles = makeStyles<StyleProps>()((theme, { first, last }) => ({
+  root: {
+    borderBottom: !last ? `1px solid ${theme.palette.grey[100]}` : 'none',
     [theme.breakpoints.up('sm')]: {
-      paddingTop: props.first ? theme.spacing(7) : theme.spacing(12.5),
+      paddingTop: first ? theme.spacing(7) : theme.spacing(12.5),
       paddingBottom: theme.spacing(12.5),
     },
     [theme.breakpoints.down('sm')]: {
-      paddingTop: props.first ? theme.spacing(7) : theme.spacing(10.75),
+      paddingTop: first ? theme.spacing(7) : theme.spacing(10.75),
       paddingBottom: theme.spacing(10.75),
     },
-  }),
+  },
   icon: {
     cursor: 'pointer',
     [theme.breakpoints.up('sm')]: {

@@ -35,7 +35,7 @@ export default function MapCards({
   features,
   afterChange,
 }: MapCardsProps): JSX.Element {
-  const { classes } = useStyles({});
+  const { classes } = useStyles();
   const theme = useTheme();
   const settings = {
     centerMode: true,

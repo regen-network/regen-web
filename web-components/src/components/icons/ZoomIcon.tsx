@@ -11,7 +11,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
 }));
 
 export default function ZoomIcon(): JSX.Element {
-  const { classes } = useStyles({});
+  const { classes } = useStyles();
 
   return (
     <SvgIcon viewBox="0 0 13 14" className={classes.root}>

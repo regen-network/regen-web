@@ -1,20 +1,22 @@
 import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
 import { makeStyles } from 'tss-react/mui';
-import { DefaultTheme as Theme } from '@mui/styles';
 
 interface PlayIconProps extends React.HTMLProps<HTMLDivElement> {
   width?: string;
   height?: string;
 }
 
-// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
-// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
-const useStyles = makeStyles()((theme: Theme) => ({
-  root: props => ({
-    width: props.width || 'inherit',
-    height: props.height || 'inherit',
-  }),
+type UseStylesParams = {
+  width?: string;
+  height?: string;
+};
+
+const useStyles = makeStyles<UseStylesParams>()((theme, { height, width }) => ({
+  root: {
+    width: width || 'inherit',
+    height: height || 'inherit',
+  },
 }));
 
 export default function PlayIcon({

@@ -18,7 +18,7 @@ export default function CloseIcon({
   svgColor,
   ...props
 }: CloseIconProps): JSX.Element {
-  const { classes } = useStyles({});
+  const { classes } = useStyles();
   const theme = useTheme();
 
   return (

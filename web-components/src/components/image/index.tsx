@@ -53,7 +53,7 @@ const Image: React.FC<React.PropsWithChildren<ImageProps>> = ({
   height,
   ...rest
 }) => {
-  const { classes, cx } = useStyles({});
+  const { classes, cx } = useStyles();
   const imgRef = useRef<HTMLDivElement | null>(null);
   const [width, setWidth] = useState(0);
   const [optimizedSrc, setOptimizedSrc] = useState('');

@@ -34,7 +34,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
 export default function ProtectedSpecies({
   species,
 }: ProtectedSpeciesProps): JSX.Element {
-  const { classes } = useStyles({});
+  const { classes } = useStyles();
   const settings = {
     // className: 'center',
     // centerMode: true,

@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import { makeStyles } from 'tss-react/mui';
-import { DefaultTheme as Theme } from '@mui/styles';
 
 export interface BannerBaseProps {
   text: string;
@@ -15,15 +14,13 @@ interface StyleProps {
 
 interface BannerProps extends BannerBaseProps, StyleProps {}
 
-// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
-// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
-const useStyles = makeStyles()((theme: Theme) => ({
-  root: props => ({
+const useStyles = makeStyles<StyleProps>()((theme, { color }) => ({
+  root: {
     justifyContent: 'center',
     top: '0px',
     left: '0px',
     zIndex: 1000,
-    background: props.color || theme.palette.secondary.main,
+    background: color || theme.palette.secondary.main,
     color: theme.palette.primary.main,
     lineHeight: '145%',
     fontWeight: 'bold',
@@ -53,7 +50,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
       fontSize: theme.spacing(3.5),
       height: theme.spacing(11.5),
     },
-  }),
+  },
 }));
 
 export default function Banner({

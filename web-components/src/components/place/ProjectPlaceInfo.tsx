@@ -29,7 +29,7 @@ export default function ProjectPlaceInfo({
   color,
   iconClassName,
 }: ProjectPlaceInfoProps): JSX.Element {
-  const { classes } = useStyles({});
+  const { classes } = useStyles();
   let displayedArea: string | undefined;
   if (area) {
     displayedArea = new Intl.NumberFormat('en-US').format(area);

@@ -1,7 +1,7 @@
 import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
-import { makeStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 interface ArrowFilledIconProps {
   color: string;
@@ -27,13 +27,15 @@ export const directionRotate: DirectionRotate = {
   next: '-90deg',
 };
 
-// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
-// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
-const useStyles = makeStyles()((theme: Theme) => ({
-  icon: props => ({
-    transform: `rotate(${props.rotate})`,
+type UseStylesParams = {
+  rotate: string;
+};
+
+const useStyles = makeStyles<UseStylesParams>()((theme, { rotate }) => ({
+  icon: {
+    transform: `rotate(${rotate})`,
     height: theme.spacing(7),
-  }),
+  },
 }));
 
 export default function ArrowFilledIcon({

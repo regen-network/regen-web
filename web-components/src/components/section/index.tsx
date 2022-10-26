@@ -1,8 +1,7 @@
-import React from 'react';
 import { Box, styled, SxProps } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
-import { makeStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { parseText } from '../../utils/textParser';
 import { Title } from '../typography';
@@ -66,26 +65,29 @@ const Root = styled(Box, {
   },
 }));
 
-// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
-// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
-const useStyles = makeStyles()((theme: Theme) => ({
-  title: props => ({
-    color: props.titleColor || 'inherit',
-    lineHeight: props.titleLineHeight || '140%',
-    textAlign: props.titleAlign || (props.topRight ? 'left' : 'center'),
-    [theme.breakpoints.down('sm')]: {
-      paddingRight: props.withSlider ? theme.spacing(4) : 0,
+const useStyles = makeStyles<StyleProps>()(
+  (
+    theme,
+    { topRight, withSlider, titleAlign, titleColor, titleLineHeight },
+  ) => ({
+    title: {
+      color: titleColor || 'inherit',
+      lineHeight: titleLineHeight || '140%',
+      textAlign: titleAlign || (topRight ? 'left' : 'center'),
+      [theme.breakpoints.down('sm')]: {
+        paddingRight: withSlider ? theme.spacing(4) : 0,
+      },
+    },
+    titleText: {
+      flex: 2,
+    },
+    spaceBetween: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'baseline',
     },
   }),
-  titleText: {
-    flex: 2,
-  },
-  spaceBetween: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'baseline',
-  },
-}));
+);
 
 const Section = ({
   children,

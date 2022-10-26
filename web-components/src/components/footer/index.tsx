@@ -61,7 +61,7 @@ const sxs = {
 };
 
 const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
-  const { classes } = useStyles({});
+  const { classes } = useStyles();
   return (
     <div className={classes.footerItem}>
       <Label size="lg" mobileSize="sm" sx={sxs.text}>

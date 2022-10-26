@@ -46,7 +46,7 @@ export default function GlanceCard({
   isGISFile,
   mapboxToken,
 }: GlanceCardProps): JSX.Element {
-  const { classes } = useStyles({});
+  const { classes } = useStyles();
 
   return (
     <Card className={classes.root}>

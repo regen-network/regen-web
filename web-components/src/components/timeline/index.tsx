@@ -50,7 +50,7 @@ export default function Timeline({
   txClient,
   onViewOnLedger,
 }: TimelineProps): JSX.Element {
-  const { classes } = useStyles({});
+  const { classes } = useStyles();
   const theme = useTheme();
 
   return (

@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from 'tss-react/mui';
-import { DefaultTheme as Theme } from '@mui/styles';
 
 import RegenIcon from '../../icons/RegenIcon';
 
-// TODO jss-to-tss-react codemod: Unable to handle style definition reliably. Unsupported arrow function syntax.
-// Arrow function has parameter type of Identifier instead of ObjectPattern (e.g. `(props) => ({...})` instead of `({color}) => ({...})`).
-const useStyles = makeStyles()(theme => {
+type UseStylesParams = {
+  isLoaded: boolean;
+};
+
+const useStyles = makeStyles<UseStylesParams>()((theme, { isLoaded }) => {
   const { pxToRem } = theme.typography;
 
   return {
-    icon: props => ({
-      display: props.isLoaded ? 'block' : 'inline-block',
+    icon: {
+      display: isLoaded ? 'block' : 'inline-block',
       height: 'auto',
       width: pxToRem(186),
       [theme.breakpoints.down('md')]: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles()(theme => {
       [theme.breakpoints.down('sm')]: {
         width: pxToRem(104),
       },
-    }),
+    },
   };
 });
 

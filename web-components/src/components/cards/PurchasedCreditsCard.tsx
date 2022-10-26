@@ -69,7 +69,7 @@ export default function CreditCard({
   date,
   icon,
 }: CreditCardProps): JSX.Element {
-  const { classes } = useStyles({});
+  const { classes } = useStyles();
   const theme = useTheme();
   return (
     <Card

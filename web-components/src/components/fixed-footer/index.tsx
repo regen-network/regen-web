@@ -59,7 +59,7 @@ export default function FixedFooter({
   children,
   justifyContent,
 }: FixedFooterProps): JSX.Element {
-  const { classes } = useStyles({});
+  const { classes } = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
 

@@ -1,4 +1,3 @@
-import { DefaultTheme as Theme } from '@mui/styles';
 import { makeStyles } from 'tss-react/mui';
 
 interface StyleProps {
@@ -7,8 +6,8 @@ interface StyleProps {
   fullWidth: boolean;
 }
 
-export const useHeaderStyles = makeStyles<Theme, StyleProps>()(
-  (theme: Theme) => {
+export const useHeaderStyles = makeStyles<StyleProps>()(
+  (theme, { color, borderBottom }) => {
     const {
       typography: { pxToRem },
     } = theme;
@@ -20,18 +19,18 @@ export const useHeaderStyles = makeStyles<Theme, StyleProps>()(
           width: '100vw',
         },
       },
-      borderBottom: props => ({
+      borderBottom: {
         [theme.breakpoints.up('sm')]: {
-          borderBottom: props.borderBottom
+          borderBottom: borderBottom
             ? `1px ${theme.palette.grey[100]} solid`
             : 'none',
         },
         [theme.breakpoints.down('sm')]: {
           borderBottom: `1px ${theme.palette.grey[100]} solid`,
         },
-      }),
-      header: props => ({
-        color: props.color,
+      },
+      header: {
+        color: color,
         position: 'relative',
         zIndex: 10,
         display: 'flex',
@@ -50,14 +49,14 @@ export const useHeaderStyles = makeStyles<Theme, StyleProps>()(
           background: theme.palette.primary.main,
         },
         '& ul > li > a, & ul > li > div > span': {
-          color: props.color,
+          color: color,
           textDecoration: 'none',
           paddingTop: theme.spacing(0.25),
           '&:link, &:visited, &:hover, &:active': {
             textDecoration: 'none',
           },
         },
-      }),
+      },
       menuList: {
         [theme.breakpoints.up('sm')]: {
           display: 'flex',
@@ -71,7 +70,7 @@ export const useHeaderStyles = makeStyles<Theme, StyleProps>()(
         },
         '& li.MuiMenuItem-root, li.MuiMenuItem-root > div': {
           display: 'flex',
-          alignSelf: 'center',
+          alignSelf: 'baseline',
           'background-color': 'inherit',
           'text-decoration': 'none',
         },
@@ -93,13 +92,13 @@ export const useHeaderStyles = makeStyles<Theme, StyleProps>()(
           fontSize: pxToRem(9),
         },
       },
-      loginBtn: props => ({
+      loginBtn: {
         textTransform: 'none',
-        color: props.color,
+        color: color,
         '&:hover': {
           backgroundColor: 'transparent',
         },
-      }),
+      },
       // BEGIN HACK setting jss styles (duplicated from mui components built-in emotion styles)
       // so it's initially rendered on gatsby build
       // Remove once migrations from mui jss to emotion and to latest gatsby done

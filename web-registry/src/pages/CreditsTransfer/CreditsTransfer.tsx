@@ -12,7 +12,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -28,7 +28,7 @@ import {
   useTransferCreditsMutation,
 } from '../../generated/graphql';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   input: {
     padding: theme.spacing(1),
   },
@@ -76,7 +76,7 @@ const CreditsTransfer: React.FC<
   addressId: passedAddressId,
   buyerWalletId: passedBuyerWalletId = '',
 }) => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
 
   const [transferCredits, { data, loading, error }] =
     useTransferCreditsMutation({

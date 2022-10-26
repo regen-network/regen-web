@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { Field, Form, Formik } from 'formik';
 
 import Card from 'web-components/lib/components/cards/Card';
@@ -77,7 +77,7 @@ type exampleFieldName =
   | 'regen:landStewardStoryTitle'
   | 'regen:projectQuote';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   storyCard: {
     paddingBottom: 0,
     marginBottom: theme.spacing(13),
@@ -138,7 +138,7 @@ const ModalContent: React.FC<
     fieldName: exampleFieldName;
   }>
 > = ({ exampleProjectUrl, fieldName }) => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
 
   return (
     <div className={styles.modalContent}>
@@ -162,7 +162,7 @@ const StoryForm: React.FC<React.PropsWithChildren<StoryFormProps>> = ({
   initialValues,
   ...props
 }) => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
   const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {

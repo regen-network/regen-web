@@ -1,7 +1,9 @@
 import React from 'react';
-import { Box, Button, Theme } from '@mui/material';
-import { makeStyles } from 'tss-react/mui';
+import { Box, Button } from '@mui/material';
 import { SxProps } from '@mui/system';
+import { makeStyles } from 'tss-react/mui';
+
+import { Theme } from 'src/theme/muiTheme';
 
 import ContainedButton from '../buttons/ContainedButton';
 import Card from '../cards/Card';

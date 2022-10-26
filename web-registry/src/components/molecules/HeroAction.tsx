@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
@@ -33,14 +32,14 @@ type StyleProps = {
   lightBg: boolean;
 };
 
-const useStyles = makeStyles<Theme, StyleProps>(theme => ({
-  main: props => ({
+const useStyles = makeStyles<StyleProps>()((theme, { lightBg }) => ({
+  main: {
     display: 'flex',
     flexDirection: 'column',
     alignContent: 'center',
     justifyContent: 'center',
     margin: '0 auto',
-    ...(!props.lightBg && {
+    ...(!lightBg && {
       '& a': {
         transition: '200ms ease-in-out',
         color: theme.palette.secondary.contrastText,
@@ -49,7 +48,7 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
         },
       },
     }),
-  }),
+  },
   btn: {
     margin: theme.spacing(10, 4, 0),
     [theme.breakpoints.down('sm')]: {
@@ -68,7 +67,7 @@ const HeroAction: React.FC<React.PropsWithChildren<Props>> = ({
   ...props
 }) => {
   const lightBg = props.lightBg || !props.img;
-  const styles = useStyles({ lightBg });
+  const { classes: styles, cx } = useStyles({ lightBg });
 
   const Button = lightBg ? OutlinedButton : ContainedButton;
   const button = props.bottomBanner?.button;
@@ -79,7 +78,7 @@ const HeroAction: React.FC<React.PropsWithChildren<Props>> = ({
       img={props.img || ''}
       classes={{
         main: cx(styles.main, classes?.main),
-        section: cx(styles.section, classes?.section),
+        section: classes?.section,
       }}
       isBanner={props.isBanner}
     >

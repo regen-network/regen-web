@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -35,7 +34,7 @@ export interface BasicInfoFormValues {
   };
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   parcelField: {
     marginTop: theme.spacing(4),
   },
@@ -66,7 +65,7 @@ const BasicInfoForm: React.FC<
     onNext?: () => void;
   }>
 > = ({ submit, initialValues, onNext }) => {
-  const classes = useStyles();
+  const { classes, cx } = useStyles();
   const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
@@ -155,14 +154,14 @@ const BasicInfoForm: React.FC<
                   }}
                 >
                   <Field
-                    className={clsx(classes.parcelField, classes.parcelSize)}
+                    className={cx(classes.parcelField, classes.parcelSize)}
                     component={TextField}
                     type="number"
                     name="regen:projectSize.qudt:numericValue.@value"
                     defaultStyle={false}
                   />
                   <Field
-                    className={clsx(classes.parcelField, classes.parcelUnit)}
+                    className={cx(classes.parcelField, classes.parcelUnit)}
                     component={SelectTextField}
                     name="regen:projectSize.qudt:unit.@value"
                     options={[

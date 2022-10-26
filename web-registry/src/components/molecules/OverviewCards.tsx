@@ -1,13 +1,13 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { OverviewCard } from 'web-components/lib/components/cards/OverviewCard';
 
 import { CardFieldsFragment, Maybe } from '../../generated/sanity-graphql';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   wrap: {
     justifyContent: 'center',
     [theme.breakpoints.down('sm')]: {
@@ -32,7 +32,7 @@ const OverviewCards: React.FC<
     cards?: Maybe<Array<Maybe<CardFieldsFragment>>>;
   }>
 > = props => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
   return (
     <Grid container spacing={4} className={styles.wrap}>
       {props.cards?.map((card, i) => (

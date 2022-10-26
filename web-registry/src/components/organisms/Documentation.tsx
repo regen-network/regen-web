@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
 import Section from 'web-components/lib/components/section';
@@ -15,7 +15,7 @@ export interface DocumentationProps {
   documents: Document[];
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   section: {
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(22.25),
@@ -39,7 +39,7 @@ function Documentation({
   onViewOnLedger,
   documents,
 }: DocumentationProps): JSX.Element {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
 
   return (
     <Section

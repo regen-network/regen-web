@@ -44,7 +44,7 @@ const GalleryImgGrid = styled(Grid)(({ theme }) => ({
 
 /** Form content for legacy projects - must be used within a <Formik> context */
 const MediaFormLegacy = (): JSX.Element => {
-  const styles = useMediaFormStyles();
+  const { classes } = useMediaFormStyles();
   const theme = useTheme();
   const apiUri = getApiUri();
   const { projectId } = useParams();
@@ -61,12 +61,12 @@ const MediaFormLegacy = (): JSX.Element => {
 
   const smallImgFieldProps: Partial<ImageUploadProps> = {
     ...imgFieldProps,
-    classes: { button: styles.smallButton },
+    classes: { button: classes.smallButton },
   };
 
   const largeImgFieldProps: Partial<ImageUploadProps> = {
     ...imgFieldProps,
-    classes: { main: styles.fullSizeMedia },
+    classes: { main: classes.fullSizeMedia },
   };
 
   return (

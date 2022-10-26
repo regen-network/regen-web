@@ -2,12 +2,16 @@ import React from 'react';
 import MuiCheckbox from '@mui/material/Checkbox';
 import { makeStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme } from '@mui/styles';
-import { CheckboxProps as MuiCheckboxProps, fieldToCheckbox } from 'formik-mui';
+import {
+  CheckboxProps as FormikCheckboxProps,
+  fieldToCheckbox,
+} from 'formik-mui';
+import { CheckboxProps as MuiCheckboxProps } from '@mui/material/Checkbox';
 
 import CheckedIcon from '../icons/CheckedIcon';
 import UncheckedIcon from '../icons/UncheckedIcon';
 
-interface CheckboxProps extends MuiCheckboxProps {
+interface CheckboxProps extends FormikCheckboxProps {
   triggerOnChange?: (v: any) => Promise<void>;
 }
 
@@ -35,7 +39,7 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
 
   return (
     <MuiCheckbox
-      {...fieldToCheckbox(props)}
+      {...(fieldToCheckbox(props) as MuiCheckboxProps)}
       onChange={onChange}
       color="secondary"
       icon={<UncheckedIcon className={classes.check} />}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import Section from 'web-components/lib/components/section';
 import Timeline, {
@@ -14,7 +14,7 @@ import {
   TimelineSection as TimelineSectionProps,
 } from '../../generated/sanity-graphql';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     backgroundColor: theme.palette.grey[50],
     borderTop: `1px solid ${theme.palette.info.light}`,
@@ -47,7 +47,7 @@ interface Props {
 const TimelineSection: React.FC<React.PropsWithChildren<Props>> = ({
   content,
 }) => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
 
   const items: Item[] =
     content?.timelineItems?.map((t: Maybe<TimelineItem>) => ({

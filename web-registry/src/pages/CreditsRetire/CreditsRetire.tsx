@@ -6,7 +6,7 @@ import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -18,7 +18,7 @@ import {
   useRetireCreditsMutation,
 } from '../../generated/graphql';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     padding: theme.spacing(5),
   },
@@ -69,7 +69,7 @@ const CreditsRetire: React.FC<
   buyerWalletId: passedBuyerWalletId = '',
   creditVintageId: passedVintageId = '',
 }) => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
 
   const [retireCredits, { data, loading, error }] = useRetireCreditsMutation({
     errorPolicy: 'ignore',

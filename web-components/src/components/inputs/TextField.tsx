@@ -1,10 +1,12 @@
-import InputAdornment from '@mui/material/InputAdornment';
-import MuiTextField from '@mui/material/TextField';
-import { fieldToTextField, TextFieldProps } from 'formik-mui';
 import React, { ReactNode } from 'react';
+import InputAdornment from '@mui/material/InputAdornment';
+import MuiTextField, {
+  TextFieldProps as MuiTextFieldProps,
+} from '@mui/material/TextField';
+import { FormikErrors } from 'formik';
+import { fieldToTextField, TextFieldProps } from 'formik-mui';
 import { makeStyles } from 'tss-react/mui';
 
-import { FormikErrors } from 'formik';
 import { DefaultStyleProps } from './FieldFormControl';
 import InputLabel from './InputLabel';
 
@@ -159,7 +161,12 @@ function TriggerTextField({
     }
     setFieldValue(name, transformValue ? transformValue(value) : value);
   };
-  return <MuiTextField {...fieldToTextField(props)} onChange={onChange} />;
+  return (
+    <MuiTextField
+      {...(fieldToTextField(props) as MuiTextFieldProps)}
+      onChange={onChange}
+    />
+  );
 }
 
 export default function RegenTextField({

@@ -1,9 +1,9 @@
 import React from 'react';
+import { Theme } from '@mui/material';
 import Box from '@mui/material/Box';
 import { SxProps } from '@mui/system';
 
 import { Body, Label } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 export interface LineItemLabelAboveProps {
   sx?: SxProps<Theme>;

@@ -1,7 +1,6 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import Section from 'web-components/lib/components/section';
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -14,7 +13,7 @@ interface Props {
   title?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     backgroundColor: theme.palette.grey['50'],
   },
@@ -29,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const EcocreditsSection: React.FC<React.PropsWithChildren<Props>> = props => {
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
 
   return (
     <Box

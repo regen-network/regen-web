@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { SxProps } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
 import { Field, Form, Formik } from 'formik';
@@ -39,7 +39,7 @@ const CREATE_USER_ORGANIZATION = loader(
 );
 const CREATE_ADDRESS = loader('../../graphql/CreateAddress.graphql');
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   form: {
     [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(5.75),
@@ -123,7 +123,7 @@ function CreditsPurchaseForm({
   stripePrice,
   onClose,
 }: CreditsPurchaseFormProps): JSX.Element {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const { projectId } = useParams();
 
   const [createUser] = useMutation(CREATE_USER, {

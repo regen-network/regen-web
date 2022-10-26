@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { styled } from '@mui/system';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -54,7 +54,7 @@ export const BasketOverview: React.FC<
   minStartDate,
   startDateWindow,
 }) => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
 
   const getDateCriteria = (
     minStartDate?: string,
@@ -127,7 +127,7 @@ export const BasketOverview: React.FC<
  * Styles and styled components
  */
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   content: {
     display: 'flex',
     width: '100%',

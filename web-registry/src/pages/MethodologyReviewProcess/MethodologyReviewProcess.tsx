@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
-import { makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
+import { useTheme } from '@mui/material';
 
 import Modal from 'web-components/lib/components/modal';
 import Section from 'web-components/lib/components/section';
@@ -19,7 +20,7 @@ import {
 import { useAllMethodologyReviewProcessPageQuery } from '../../generated/sanity-graphql';
 import { client } from '../../sanity';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   root: {
     background: theme.palette.primary.main,
   },
@@ -41,7 +42,7 @@ const useStyles = makeStyles(theme => ({
 
 const MethodologyReviewProcess: React.FC<React.PropsWithChildren<unknown>> =
   () => {
-    const styles = useStyles();
+    const { classes: styles } = useStyles();
     const theme = useTheme();
     const [open, setOpen] = useState(false);
     const [modalLink, setModalLink] = useState<string>();

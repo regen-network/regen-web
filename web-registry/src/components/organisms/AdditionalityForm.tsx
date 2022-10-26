@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { Field, Form, Formik } from 'formik';
 import { RadioGroup } from 'formik-mui';
 
@@ -31,7 +31,7 @@ export interface AdditionalityValues {
   environmentalConditions: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   card: {
     margin: theme.spacing(3, 0, 3),
     '&:first-of-type': {
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export const AdditionalityForm: React.FC<
   React.PropsWithChildren<AdditionalityFormProps>
 > = props => {
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   const DateLabel: React.FC<React.PropsWithChildren<unknown>> = () => (
     <Subtitle size="sm" mb={1}>

@@ -3,8 +3,7 @@ import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -20,7 +19,7 @@ type Props = {
   };
 };
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     [theme.breakpoints.down('md')]: {
       flexWrap: 'nowrap',
@@ -64,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
   const theme: Theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
@@ -120,7 +119,7 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
   ) : (
     <Grid
       container
-      className={clsx(styles.root, props.classes && props.classes.root)}
+      className={cx(styles.root, props.classes && props.classes.root)}
       spacing={5}
     >
       {props.projects.map((project, i) => {

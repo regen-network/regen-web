@@ -6,7 +6,6 @@ import CardContent from '@mui/material/CardContent';
 import Collapse from '@mui/material/Collapse';
 import Grid from '@mui/material/Grid';
 import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
-import cx from 'clsx';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 import { RadioGroup } from 'formik-mui';
 import { useAnalytics } from 'use-analytics';
@@ -110,7 +109,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
     apiServerUrl,
     imageStorageBaseUrl,
   }) => {
-    const styles = useBuyCreditsModalStyles();
+    const { classes, cx } = useBuyCreditsModalStyles();
     const theme = useTheme();
     const [selectedSellOrder, setSelectedSellOrder] = useState<
       UISellOrderInfo | undefined
@@ -142,8 +141,6 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
       allowedDenomsData: allowedDenomsResponse?.data,
     });
 
-    const isDisableAutoRetire = selectedSellOrder?.disableAutoRetire;
-
     const handleClose = (): void => {
       setSelectedSellOrder(undefined);
       onClose();
@@ -151,7 +148,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
 
     return (
       <Modal open={open} onClose={handleClose}>
-        <div className={styles.root}>
+        <div className={classes.root}>
           <Title
             variant="h3"
             align="center"
@@ -160,10 +157,10 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
             {'Buy Ecocredits'}
           </Title>
           {project.name && (
-            <Card className={cx(styles.thumbnailCard, styles.field)}>
-              <CardContent className={styles.cardContent}>
+            <Card className={cx(classes.thumbnailCard, classes.field)}>
+              <CardContent className={classes.cardContent}>
                 <Image
-                  className={cx(styles.projectThumbnail, styles.marginRight)}
+                  className={cx(classes.projectThumbnail, classes.marginRight)}
                   src={
                     project.image ||
                     'https://regen-registry.s3.amazonaws.com/projects/wilmot/time-controlled-rotational-grazing.jpg'
@@ -172,7 +169,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                   apiServerUrl={apiServerUrl}
                   backgroundImage
                 />
-                <div className={styles.flexColumn}>
+                <div className={classes.flexColumn}>
                   <Title sx={{ fontSize: { xs: 16, sm: 21 } }}>
                     {project.creditDenom &&
                       ReactHtmlParser(project.creditDenom)}{' '}
@@ -250,7 +247,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                       setSelectedSellOrder={setSelectedSellOrder}
                     />
                     <Collapse in={!!selectedSellOrder}>
-                      <div className={styles.field}>
+                      <div className={classes.field}>
                         <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
                           Amount of credits
                         </Title>
@@ -314,10 +311,10 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                               {selectedSellOrder?.batchDenom}
                             </Body>
                           </Body>
-                          <div className={styles.creditWidget}>
-                            <div className={styles.marginRight}>
+                          <div className={classes.creditWidget}>
+                            <div className={classes.marginRight}>
                               <Field
-                                className={styles.creditInput}
+                                className={classes.creditInput}
                                 component={NumberTextField}
                                 name="creditCount"
                                 min={1}
@@ -339,8 +336,8 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                               </Title>
                               <div
                                 className={cx(
-                                  styles.flexColumn,
-                                  styles.marginRight,
+                                  classes.flexColumn,
+                                  classes.marginRight,
                                 )}
                               >
                                 <Box
@@ -389,7 +386,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                       Purchase options
                     </Title>
                     <Field
-                      className={styles.field}
+                      className={classes.field}
                       component={RadioGroup}
                       name="retirementAction"
                     >
@@ -453,12 +450,12 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                         credits. This prevents double counting of credits in
                         different locations. These credits will auto-retire.
                       </Body>
-                      <Grid container className={styles.stateCountryGrid}>
+                      <Grid container className={classes.stateCountryGrid}>
                         <Grid
                           item
                           xs={12}
                           sm={6}
-                          className={styles.stateCountryTextField}
+                          className={classes.stateCountryTextField}
                         >
                           <Suspense
                             fallback={
@@ -475,7 +472,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                           item
                           xs={12}
                           sm={6}
-                          className={styles.stateCountryTextField}
+                          className={classes.stateCountryTextField}
                         >
                           <Suspense
                             fallback={
@@ -493,7 +490,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                         </Grid>
                       </Grid>
                       <Field
-                        className={cx(styles.field, styles.postalCodeField)}
+                        className={cx(classes.field, classes.postalCodeField)}
                         component={ControlledTextField}
                         label="Postal Code"
                         name="postalCode"

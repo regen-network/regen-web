@@ -14,10 +14,10 @@ export const RegistryNavLink: React.FC<React.PropsWithChildren<NavLinkProps>> =
   ({ children, href, overrideClassname }) => {
     const isActive =
       window && window.location && window.location.pathname === href;
-    const styles = useNavLinkStyles({ isActive: !!isActive });
+    const { classes } = useNavLinkStyles({ isActive: !!isActive });
 
     return (
-      <Link href={href} className={overrideClassname ?? styles.navLink}>
+      <Link href={href} className={overrideClassname ?? classes.navLink}>
         {children}
       </Link>
     );

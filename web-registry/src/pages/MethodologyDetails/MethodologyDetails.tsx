@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
@@ -16,7 +16,7 @@ import { useAllMethodologyQuery } from '../../generated/sanity-graphql';
 import mock from '../../mocks/mock.json';
 import { client } from '../../sanity';
 
-const useStyles = makeStyles<Theme>((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -28,7 +28,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 }));
 
 function MethodologyDetails(): JSX.Element {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
   const { methodologyId } = useParams();
   const { data } = useAllMethodologyQuery({ client });
   const content = data?.allMethodology?.find(

@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
@@ -13,7 +13,7 @@ interface Props {
   saveText?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     marginBottom: theme.spacing(1),
     justifyContent: 'flex-end',
@@ -48,7 +48,7 @@ const EditProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
   onSave,
   saveDisabled,
 }) => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
 
   return (
     <FixedFooter>

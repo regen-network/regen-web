@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Theme } from '@mui/material';
+import { Box } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 import { SxProps } from '@mui/system';
 import ReactHtmlParser from 'html-react-parser';
@@ -11,6 +11,7 @@ import { LinkItem } from '../footer/footer-new';
 import Modal, { RegenModalProps } from '../modal';
 import { Body, Label, Title } from '../typography';
 import { CardItemValue, CardItemValueList } from './TxModal.CardItemValue';
+import { Theme } from 'src/theme/muiTheme';
 
 const useStyles = makeStyles()(theme => ({
   root: {

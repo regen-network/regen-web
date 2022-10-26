@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { useAnalytics } from 'use-analytics';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
@@ -10,7 +10,7 @@ import Keplr from '../../assets/keplr.png';
 import { chainId } from '../../lib/ledger';
 import { useWallet } from '../../lib/wallet';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const WalletButton: React.FC<React.PropsWithChildren<unknown>> = () => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
   const { wallet, connect, connectionType, loaded, error } = useWallet();
   const { track } = useAnalytics();
 

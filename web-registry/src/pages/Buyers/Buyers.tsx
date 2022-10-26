@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
@@ -20,7 +20,7 @@ import { useMoreProjectsQuery } from '../../generated/graphql';
 import { useAllBuyersPageQuery } from '../../generated/sanity-graphql';
 import { client } from '../../sanity';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   heroMain: {
     maxWidth: theme.typography.pxToRem(775),
     paddingBottom: theme.spacing(20),
@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const BuyersPage = (): JSX.Element => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const { data } = useAllBuyersPageQuery({ client });

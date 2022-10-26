@@ -1,4 +1,4 @@
-import { Box, SxProps, Theme } from '@mui/material';
+import { Box, SvgIconProps, SxProps, Theme } from '@mui/material';
 import {
   AXELAR_USDC_DENOM,
   EEUR_DENOM,
@@ -14,7 +14,7 @@ import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIc
 export interface Props {
   denom?: string;
   sx?: SxProps<Theme>;
-  iconSx?: SxProps<Theme>;
+  iconSx?: SvgIconProps['sx'];
 }
 
 const DenomIcon = ({ denom, sx = [], iconSx = [] }: Props): JSX.Element => {

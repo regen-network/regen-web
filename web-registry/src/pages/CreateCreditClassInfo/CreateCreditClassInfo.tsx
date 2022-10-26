@@ -28,7 +28,7 @@ import writingOnPaperImg from 'assets/writing-on-paper.png';
 
 const CreateCreditClassInfo: React.FC<React.PropsWithChildren<unknown>> =
   () => {
-    const styles = useCreditClassInfoStyles();
+    const { classes } = useCreditClassInfoStyles();
     const theme = useTheme();
     const [open, setOpen] = useState(false);
     const [modalLink, setModalLink] = useState<string | undefined>();
@@ -82,18 +82,18 @@ const CreateCreditClassInfo: React.FC<React.PropsWithChildren<unknown>> =
     const resourceCardsShown = isDesktop ? 3 : 2;
 
     return (
-      <div className={styles.root}>
+      <div className={classes.root}>
         <HeroTitle
           isBanner
           img={writingOnPaperImg}
           title={content?.heroSection?.title}
           descriptionRaw={content?.heroSection?.descriptionRaw}
-          classes={{ main: styles.heroMain }}
+          classes={{ main: classes.heroMain }}
         />
 
         <Section
           title={content?.stepCardSection?.title || ''}
-          classes={{ root: styles.padBottom, title: styles.sectionTitle }}
+          classes={{ root: classes.padBottom, title: classes.sectionTitle }}
         >
           <Box display={['block', 'flex']} justifyContent="center">
             <Box
@@ -110,11 +110,11 @@ const CreateCreditClassInfo: React.FC<React.PropsWithChildren<unknown>> =
           </Box>
         </Section>
 
-        <CardMedia image={topographyImg} className={styles.topoSection}>
+        <CardMedia image={topographyImg} className={classes.topoSection}>
           <Section
             title={content?.creditTypeSection?.title || ''}
             titleAlign={isMobile ? 'left' : 'center'}
-            classes={{ root: styles.padBottom, title: styles.sectionTitle }}
+            classes={{ root: classes.padBottom, title: classes.sectionTitle }}
           >
             <Box mt={[8, 16]}>
               <SubtitleAndDescription
@@ -143,7 +143,7 @@ const CreateCreditClassInfo: React.FC<React.PropsWithChildren<unknown>> =
           </Section>
         </CardMedia>
 
-        <Section className={styles.padBottom}>
+        <Section className={classes.padBottom}>
           <SubtitleAndDescription
             align="center"
             title={content?.outcomeSection?.title || ''}
@@ -159,14 +159,14 @@ const CreateCreditClassInfo: React.FC<React.PropsWithChildren<unknown>> =
           />
         </Section>
 
-        <CardMedia image={topographyImg} className={styles.topoSection}>
-          <Section withSlider className={styles.padBottom}>
+        <CardMedia image={topographyImg} className={classes.topoSection}>
+          <Section withSlider className={classes.padBottom}>
             <ResponsiveSlider
               infinite={false}
               itemWidth="90%"
               classes={{
-                title: styles.resourcesTitle,
-                root: styles.resourcesRoot,
+                title: classes.resourcesTitle,
+                root: classes.resourcesRoot,
               }}
               padding={theme.spacing(2.5)}
               title="Resources"
@@ -186,7 +186,7 @@ const CreateCreditClassInfo: React.FC<React.PropsWithChildren<unknown>> =
 
         <HeroAction
           isBanner
-          classes={{ main: styles.bottomSection }}
+          classes={{ main: classes.bottomSection }}
           img={fernImg}
           bottomBanner={content?.bottomBanner}
           openModal={openModal}

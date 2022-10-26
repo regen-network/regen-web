@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 
-import { Flex } from '../box';
+import { Box, Flex } from '../box';
 import Modal, { RegenModalProps } from '../modal';
 import { Body, Title } from '../typography';
 
@@ -38,19 +38,19 @@ const FormModalTemplate: React.FC<FormModalTemplateProps> = ({
   return (
     <Modal className={styles.modal} open={open} onClose={onClose}>
       {image && (
-        <Flex justifyContent="center" sx={{ pb: [5, 10] }}>
+        <Flex justifyContent="center" sx={{ pb: 5 }}>
           {image}
         </Flex>
       )}
-      <Title sx={{ pb: [7.5, 10] }} variant="h3" align="center">
+      <Title variant="h3" align="center">
         {title}
       </Title>
       {subtitle && (
-        <Body size="lg" mobileSize="sm" align="center" sx={{ pb: [7.5, 10] }}>
+        <Body size="lg" mobileSize="sm" align="center" sx={{ mt: 5 }}>
           {subtitle}
         </Body>
       )}
-      {children}
+      <Box sx={{ mt: [7.5, 10] }}>{children}</Box>
     </Modal>
   );
 };

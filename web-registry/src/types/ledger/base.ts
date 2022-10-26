@@ -13,3 +13,18 @@ export interface PageResponse {
   next_key: string | null;
   total: string;
 }
+
+export interface EventAttribute {
+  key: string;
+  value: string;
+}
+
+export interface EventTx {
+  type: string;
+  attributes: EventAttribute[];
+}
+
+export interface CreditItemEventTake {
+  batch_denom: string;
+  amount: string;
+}

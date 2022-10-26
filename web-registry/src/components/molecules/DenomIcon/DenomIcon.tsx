@@ -19,7 +19,7 @@ export interface Props {
 
 const DenomIcon = ({ denom, sx = [], iconSx = [] }: Props): JSX.Element => {
   return (
-    <Box sx={[...(Array.isArray(sx) ? sx : [sx])]}>
+    <Box component="span" sx={[...(Array.isArray(sx) ? sx : [sx])]}>
       {denom === GRAVITY_USDC_DENOM && <GravUsdcIcon sx={iconSx} />}
       {denom === AXELAR_USDC_DENOM && <AxlUsdcIcon sx={iconSx} />}
       {denom === EEUR_DENOM && <EeurIcon sx={iconSx} />}

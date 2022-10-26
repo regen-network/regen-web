@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
-import { makeStyles } from 'tss-react/mui';
 import { styled } from '@mui/system';
+import { makeStyles } from 'tss-react/mui';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Section from 'web-components/lib/components/section';

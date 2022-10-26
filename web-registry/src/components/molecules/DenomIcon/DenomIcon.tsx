@@ -1,4 +1,5 @@
-import { Box, SvgIconProps, SxProps, Theme } from '@mui/material';
+import { Box } from '@mui/material';
+import { SxProps, Theme } from '@mui/system';
 import {
   AXELAR_USDC_DENOM,
   EEUR_DENOM,
@@ -14,10 +15,10 @@ import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIc
 export interface Props {
   denom?: string;
   sx?: SxProps<Theme>;
-  iconSx?: SvgIconProps['sx'];
+  iconSx?: SxProps<Theme>;
 }
 
-const DenomIcon = ({ denom, sx = [], iconSx = [] }: Props): JSX.Element => {
+const DenomIcon = ({ denom, sx = [], iconSx }: Props): JSX.Element => {
   return (
     <Box component="span" sx={[...(Array.isArray(sx) ? sx : [sx])]}>
       {denom === GRAVITY_USDC_DENOM && <GravUsdcIcon sx={iconSx} />}

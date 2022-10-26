@@ -1,7 +1,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import { makeStyles } from 'tss-react/mui';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { makeStyles } from 'tss-react/mui';
 
 import ReadMore from 'web-components/lib/components/read-more';
 import { Label, Title } from 'web-components/lib/components/typography';

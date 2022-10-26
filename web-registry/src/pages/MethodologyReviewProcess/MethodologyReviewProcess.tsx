@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import { makeStyles } from 'tss-react/mui';
-import { useTheme } from '@mui/material';
 
 import Modal from 'web-components/lib/components/modal';
 import Section from 'web-components/lib/components/section';

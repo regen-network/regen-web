@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles } from 'tss-react/mui';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import { makeStyles } from 'tss-react/mui';
 
 import Section from 'web-components/lib/components/section';
 import {

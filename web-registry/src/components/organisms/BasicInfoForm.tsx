@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { makeStyles } from 'tss-react/mui';
 import { Field, Form, Formik, FormikErrors } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';

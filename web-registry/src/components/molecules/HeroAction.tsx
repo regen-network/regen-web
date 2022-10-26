@@ -6,7 +6,6 @@ import { BlockContent } from 'web-components/lib/components/block-content';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { Body, Title } from 'web-components/lib/components/typography';
-import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 import {
   BottomBannerFieldsFragment,

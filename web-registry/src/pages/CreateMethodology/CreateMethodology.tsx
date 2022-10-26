@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { useTheme } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from 'tss-react/mui';
-import { useTheme } from '@mui/material';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import FixedFooter from 'web-components/lib/components/fixed-footer';

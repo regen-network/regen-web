@@ -32,6 +32,7 @@ const LinkWithArrow: React.FC<React.PropsWithChildren<LinkWithArrowProps>> = ({
       href={href}
       className={className}
       sx={{
+        // @ts-ignore
         color: 'info.dark',
         ...sx,
       }}

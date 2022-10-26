@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link as RouterLink, useParams } from 'react-router-dom';
 import { Link, useTheme } from '@mui/material';
-import { makeStyles } from 'tss-react/mui';
 import { Field, Form, Formik } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 
 import Card from 'web-components/lib/components/cards/Card';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';

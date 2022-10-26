@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
-import { makeStyles } from 'tss-react/mui';
 import { quantityFormatNumberOptions } from 'config/decimals';
+import { makeStyles } from 'tss-react/mui';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { formatNumber } from 'web-components/lib/utils/format';

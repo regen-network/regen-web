@@ -1,8 +1,8 @@
 import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
 import { Box, Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { SxProps } from '@mui/system';
+import ReactHtmlParser from 'html-react-parser';
 
 import { truncate } from '../../utils/truncate';
 import OutlinedButton from '../buttons/OutlinedButton';

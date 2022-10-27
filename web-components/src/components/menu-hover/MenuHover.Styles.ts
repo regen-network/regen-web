@@ -14,7 +14,7 @@ export const useMenuHoverStyles = makeStyles()((theme: Theme) => ({
       backgroundColor: 'transparent',
     },
     '& li > a': {
-      'font-family': 'lato',
+      fontFamily: 'lato',
       color: '#000',
       textDecoration: 'none',
       '&:link, &:visited, &:hover, &:active': {
@@ -30,7 +30,7 @@ export const useMenuHoverStyles = makeStyles()((theme: Theme) => ({
     },
   },
   paper: {
-    'border-radius': '2px',
+    borderRadius: '2px',
     border: `1px solid ${theme.palette.grey[400]}`,
     padding: theme.spacing(5, 9),
   },

@@ -6,10 +6,10 @@ import {
   IconButton,
   LinearProgress,
   useMediaQuery,
+  useTheme,
 } from '@mui/material';
-import { makeStyles } from 'tss-react/mui';
-import { useTheme } from '@mui/material';
 import { FieldProps } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import Card from '../cards/Card';

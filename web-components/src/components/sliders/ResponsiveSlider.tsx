@@ -1,9 +1,9 @@
 import { useCallback, useRef, useState } from 'react';
 import Slider, { Settings as SlickSettings } from 'react-slick';
+import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { Variant } from '@mui/material/styles/createTypography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
 import PrevNextButton from '../buttons/PrevNextButton';

@@ -8,15 +8,13 @@ import ReactMapGL, {
   Source,
   WebMercatorViewport,
 } from 'react-map-gl';
+import { useTheme } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
-
+import { DefaultTheme as Theme } from '@mui/styles';
+import bbox from '@turf/bbox';
 // import { FeatureCollection } from 'geojson'; TODO
 // import { AllGeoJSON } from '@turf/helpers';
 import { makeStyles } from 'tss-react/mui';
-
-import { DefaultTheme as Theme } from '@mui/styles';
-import { useTheme } from '@mui/material';
-import bbox from '@turf/bbox';
 
 // import MapCards from '../sliders/MapCards';
 import OutlinedButton from '../buttons/OutlinedButton';

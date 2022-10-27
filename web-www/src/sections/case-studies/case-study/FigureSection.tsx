@@ -33,7 +33,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
             ? '100%'
             : props.figures[0].spacing || '50%',
       },
-      '&:nth-child(2)': {
+      '&:nth-of-type(2)': {
         flexBasis:
           props.figures.length === 1
             ? '100%'

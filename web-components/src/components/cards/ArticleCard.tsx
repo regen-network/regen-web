@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { makeStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import PlayIcon from '../icons/PlayIcon';

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Collapse } from '@mui/material';
-import { makeStyles } from 'tss-react/mui';
+import { Button, Collapse, useTheme } from '@mui/material';
 import { DefaultTheme as Theme } from '@mui/styles';
-import { useTheme } from '@mui/material';
+import { makeStyles } from 'tss-react/mui';
 
 import MinusIcon from '../icons/MinusIcon';
 import PlusIcon from '../icons/PlusIcon';

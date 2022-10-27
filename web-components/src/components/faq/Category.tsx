@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import GreenCard from '../cards/GreenCard';
 import { Label } from '../typography';

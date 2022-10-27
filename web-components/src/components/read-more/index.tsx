@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Fade from '@mui/material/Fade';
-import { makeStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { ExpandButton } from '../buttons/ExpandButton';
 import { Body } from '../typography';

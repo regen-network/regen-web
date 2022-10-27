@@ -1,12 +1,13 @@
 import React from 'react';
-import MuiCheckbox from '@mui/material/Checkbox';
-import { makeStyles } from 'tss-react/mui';
+import MuiCheckbox, {
+  CheckboxProps as MuiCheckboxProps,
+} from '@mui/material/Checkbox';
 import { DefaultTheme as Theme } from '@mui/styles';
 import {
   CheckboxProps as FormikCheckboxProps,
   fieldToCheckbox,
 } from 'formik-mui';
-import { CheckboxProps as MuiCheckboxProps } from '@mui/material/Checkbox';
+import { makeStyles } from 'tss-react/mui';
 
 import CheckedIcon from '../icons/CheckedIcon';
 import UncheckedIcon from '../icons/UncheckedIcon';

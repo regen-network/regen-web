@@ -1,8 +1,8 @@
 import React from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 import Modal from '@mui/material/Modal';
-import { makeStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import CloseIcon from '../icons/CloseIcon';
 
@@ -20,7 +20,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     outline: 'none',
     position: 'absolute',
     overflow: 'auto',
-    '-webkit-overflow-scrolling': 'touch',
+    WebkitOverflowScrolling: 'touch',
     maxWidth: theme.spacing(150),
     [theme.breakpoints.up('md')]: {
       width: '50%',

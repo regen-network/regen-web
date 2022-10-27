@@ -67,7 +67,7 @@ const useStyles = makeStyles()(theme => ({
     },
   },
   sdgGridItem: {
-    '&:nth-child(odd)': {
+    '&:nth-of-type(odd)': {
       [theme.breakpoints.down('sm')]: {
         paddingRight: theme.spacing(5.5 / 2),
       },
@@ -75,7 +75,7 @@ const useStyles = makeStyles()(theme => ({
         paddingRight: theme.spacing(6.8 / 2),
       },
     },
-    '&:nth-child(even)': {
+    '&:nth-of-type(even)': {
       [theme.breakpoints.down('sm')]: {
         paddingLeft: theme.spacing(5.5 / 2),
       },

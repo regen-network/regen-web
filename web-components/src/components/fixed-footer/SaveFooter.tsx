@@ -1,8 +1,8 @@
 import React from 'react';
+import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import LinearProgress from '@mui/material/LinearProgress';
 import { DefaultTheme as Theme } from '@mui/styles';
-import { useTheme } from '@mui/material';
 import { makeStyles, withStyles } from 'tss-react/mui';
 
 import ContainedButton from '../buttons/ContainedButton';

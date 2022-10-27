@@ -16,7 +16,7 @@ const useStyles = makeStyles()(theme => ({
     lineHeight: theme.spacing(6),
     paddingRight: theme.spacing(7.375),
     paddingLeft: theme.spacing(7.375),
-    'background-color': 'inherit',
+    backgroundColor: 'inherit',
     '& > a': {
       borderBottom: '2px solid transparent',
       '&:hover': {

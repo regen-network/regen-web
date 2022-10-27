@@ -1,6 +1,6 @@
 import React from 'react';
-import { DefaultTheme as Theme } from '@mui/styles';
 import { useTheme } from '@mui/material';
+import { DefaultTheme as Theme } from '@mui/styles';
 import { makeStyles } from 'tss-react/mui';
 
 import ArrowDownIcon from '../icons/ArrowDownIcon';

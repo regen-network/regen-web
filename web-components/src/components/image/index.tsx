@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { makeStyles } from 'tss-react/mui';
-import { DefaultTheme as Theme } from '@mui/styles';
 
 import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';
 

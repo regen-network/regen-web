@@ -1,7 +1,5 @@
-import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import { makeStyles } from 'tss-react/mui';
-import { DefaultTheme as Theme } from '@mui/styles';
 
 interface UserAvatarProps {
   alt?: string;
@@ -10,11 +8,6 @@ interface UserAvatarProps {
   border?: boolean;
   href?: string;
   icon?: any;
-}
-
-interface StyleProps {
-  spacing: Sizes;
-  border: boolean;
 }
 
 // TODO `Sizes` and `getSize` were moved from the prior /sizing helpers. This is

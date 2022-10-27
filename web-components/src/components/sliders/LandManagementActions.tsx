@@ -1,11 +1,11 @@
 import React, { useCallback, useRef } from 'react';
 // import LandManagementActionsItem, { ItemProps } from './Item';
 import Slider from 'react-slick';
+import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { makeStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme } from '@mui/styles';
-import { useTheme } from '@mui/material';
+import { makeStyles } from 'tss-react/mui';
 
 import Action, { ActionProps } from '../action';
 import PrevNextButton from '../buttons/PrevNextButton';

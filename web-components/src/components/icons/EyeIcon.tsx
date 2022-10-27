@@ -1,8 +1,8 @@
 import React from 'react';
-import SvgIcon from '@mui/material/SvgIcon';
-import { makeStyles } from 'tss-react/mui';
-import { DefaultTheme as Theme } from '@mui/styles';
 import { useTheme } from '@mui/material';
+import SvgIcon from '@mui/material/SvgIcon';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 const useStyles = makeStyles()((theme: Theme) => ({
   root: {

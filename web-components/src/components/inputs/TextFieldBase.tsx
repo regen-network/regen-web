@@ -1,6 +1,6 @@
+import React, { ReactNode } from 'react';
 import InputAdornment from '@mui/material/InputAdornment';
 import MuiTextField, { BaseTextFieldProps } from '@mui/material/TextField';
-import React, { ReactNode } from 'react';
 import { makeStyles } from 'tss-react/mui';
 
 import { DefaultStyleProps } from './FieldFormControl';
@@ -122,7 +122,7 @@ export const useTextFieldStyles = makeStyles<UseStylesParams>()(
       // '& input, & select.MuiSelect-select': {},
       '& input[type=number]': {
         '&::-webkit-inner-spin-button, &::-webkit-outer-spin-button': {
-          '-webkit-appearance': 'none',
+          WebkitAppearance: 'none',
           margin: 0,
         },
       },

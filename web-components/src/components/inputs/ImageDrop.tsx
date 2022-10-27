@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Crop } from 'react-image-crop';
-import { IconButton, IconButtonProps, useMediaQuery } from '@mui/material';
-import { makeStyles } from 'tss-react/mui';
-import { useTheme } from '@mui/material';
+import {
+  IconButton,
+  IconButtonProps,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { FieldProps } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import TrashIcon from '../icons/TrashIcon';

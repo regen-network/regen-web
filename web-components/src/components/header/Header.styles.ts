@@ -71,8 +71,8 @@ export const useHeaderStyles = makeStyles<StyleProps>()(
         '& li.MuiMenuItem-root, li.MuiMenuItem-root > div': {
           display: 'flex',
           alignSelf: 'baseline',
-          'background-color': 'inherit',
-          'text-decoration': 'none',
+          backgroundColor: 'inherit',
+          textDecoration: 'none',
         },
         position: 'relative',
         width: 'unset',

@@ -18,10 +18,10 @@ const StyledTableRow = withStyles(TableRow, theme => ({
   root: {
     color: theme.palette.info.dark,
     height: theme.spacing(25),
-    '&:nth-child(odd)': {
+    '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.grey[50],
     },
-    '&:nth-child(even)': {
+    '&:nth-of-type(even)': {
       backgroundColor: theme.palette.primary.main,
     },
     '& .MuiTableCell-body': {

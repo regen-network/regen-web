@@ -1,7 +1,14 @@
 import React from 'react';
+import {
+  Box,
+  Grid,
+  Link,
+  List,
+  ListItem,
+  SxProps,
+  useTheme,
+} from '@mui/material';
 import ReactHtmlParser from 'html-react-parser';
-import { Box, Grid, Link, List, ListItem, SxProps } from '@mui/material';
-import { useTheme } from '@mui/material';
 
 import { HeaderLogoLink } from '../header/components/HeaderLogoLink';
 import CoinGeckoIcon from '../icons/CoinGeckoIcon';

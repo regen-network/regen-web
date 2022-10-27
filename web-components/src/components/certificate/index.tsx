@@ -1,6 +1,4 @@
-import React from 'react';
 import Grid from '@mui/material/Grid';
-import { DefaultTheme as Theme } from '@mui/styles';
 import ReactHtmlParser from 'html-react-parser';
 import { makeStyles } from 'tss-react/mui';
 

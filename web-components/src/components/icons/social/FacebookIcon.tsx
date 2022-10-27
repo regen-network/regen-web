@@ -1,7 +1,7 @@
 import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
-import { makeStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import withHoverColor, { Props } from '../withHoverColor';
 

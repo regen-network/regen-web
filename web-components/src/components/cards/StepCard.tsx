@@ -1,8 +1,7 @@
 import React from 'react';
-import { Box, CardMedia } from '@mui/material';
-import { makeStyles } from 'tss-react/mui';
+import { Box, CardMedia, useTheme } from '@mui/material';
 import { DefaultTheme as Theme } from '@mui/styles';
-import { useTheme } from '@mui/material';
+import { makeStyles } from 'tss-react/mui';
 
 import ContainedButton from '../buttons/ContainedButton';
 import Card from '../cards/Card';

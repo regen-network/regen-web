@@ -4,8 +4,8 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import { makeStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import NewsletterForm from '../form/NewsletterForm';
 import Section from '../section';

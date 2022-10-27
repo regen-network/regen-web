@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { makeStyles } from 'tss-react/mui';
 import ReactHtmlParser from 'html-react-parser';
+import { makeStyles } from 'tss-react/mui';
 
 import { ExpandButton } from '../buttons/ExpandButton';
 import { Texts, truncate } from '../read-more/truncate';

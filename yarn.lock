@@ -5380,12 +5380,6 @@
     prop-types "^15.8.1"
     react-is "^18.2.0"
 
-<<<<<<< HEAD
-"@mui/base@5.0.0-alpha.104":
-  version "5.0.0-alpha.104"
-  resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-alpha.104.tgz#1792e962dd782f1fa434f4aa7bab5410ed946644"
-  integrity sha512-tQPxZTzfYMwxYfKhEwufbTfdLpNjFdW7bXq6dK0j8651AAyZL4M8wynWUQ98hH1362R26mZFhVxHB2UD9t7VuA==
-=======
 "@mui/base@5.0.0-alpha.103":
   version "5.0.0-alpha.103"
   resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-alpha.103.tgz#90a91d1eba29ffa0bb243b25e6b1db3a9b4beeda"
@@ -5400,11 +5394,10 @@
     prop-types "^15.8.1"
     react-is "^18.2.0"
 
-"@mui/base@5.0.0-alpha.68":
-  version "5.0.0-alpha.68"
-  resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-alpha.68.tgz#d93d77e662bc8dce47c9415fc6cbcac6658efab7"
-  integrity sha512-q+3gX6EHuM/AyOn8fkoANQxSzIHBeuNsrGgb7SPP0y7NuM+4ZHG/b9882+OfHcilaSqPDWUQoLbphcBpw/m/RA==
->>>>>>> 2c5fa51b (chore: update to react 18 part 6)
+"@mui/base@5.0.0-alpha.104":
+  version "5.0.0-alpha.104"
+  resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-alpha.104.tgz#1792e962dd782f1fa434f4aa7bab5410ed946644"
+  integrity sha512-tQPxZTzfYMwxYfKhEwufbTfdLpNjFdW7bXq6dK0j8651AAyZL4M8wynWUQ98hH1362R26mZFhVxHB2UD9t7VuA==
   dependencies:
     "@babel/runtime" "^7.19.0"
     "@emotion/is-prop-valid" "^1.2.0"
@@ -5420,17 +5413,15 @@
   resolved "https://registry.yarnpkg.com/@mui/core-downloads-tracker/-/core-downloads-tracker-5.10.10.tgz#a3e5d2f6e5146e9a85d48824c386a31be1746ba3"
   integrity sha512-aDuE2PNEh+hAndxEWlZgq7uiFPZKJtnkPDX7v6kSCrMXA32ZaQ6rZi5olmC7DUHt/BaOSxb7N/im/ss0XBkDhA==
 
-<<<<<<< HEAD
-"@mui/core-downloads-tracker@^5.10.12":
-  version "5.10.12"
-  resolved "https://registry.yarnpkg.com/@mui/core-downloads-tracker/-/core-downloads-tracker-5.10.12.tgz#ff36abc5f4aac3c762d116e12ab51c2688d93da1"
-  integrity sha512-cR8lOS606G++iVHR8I6ySgMAEiPoA3DxO/nLeqiv7w7d1707kvKoV4/7SWjh4ui+kHb052xlf/G196q2EKx31w==
-=======
 "@mui/core-downloads-tracker@^5.10.11":
   version "5.10.11"
   resolved "https://registry.yarnpkg.com/@mui/core-downloads-tracker/-/core-downloads-tracker-5.10.11.tgz#e91640dfd2bd62c7f5b27da7e540f5d07e5cbc50"
   integrity sha512-u5ff+UCFDHcR8MoQ8tuJR4c35vt7T/ki3aMEE2O3XQoGs8KJSrBiisFpFKyldg9/W2NSyoZxN+kxEGIfRxh+9Q==
->>>>>>> 2c5fa51b (chore: update to react 18 part 6)
+
+"@mui/core-downloads-tracker@^5.10.12":
+  version "5.10.12"
+  resolved "https://registry.yarnpkg.com/@mui/core-downloads-tracker/-/core-downloads-tracker-5.10.12.tgz#ff36abc5f4aac3c762d116e12ab51c2688d93da1"
+  integrity sha512-cR8lOS606G++iVHR8I6ySgMAEiPoA3DxO/nLeqiv7w7d1707kvKoV4/7SWjh4ui+kHb052xlf/G196q2EKx31w==
 
 "@mui/icons-material@^5.1.0":
   version "5.10.9"
@@ -7611,11 +7602,7 @@
     "@types/cheerio" "*"
     "@types/react" "*"
 
-<<<<<<< HEAD
 "@types/eslint@^7.29.0":
-=======
-"@types/eslint@^7.28.2":
->>>>>>> 2c5fa51b (chore: update to react 18 part 6)
   version "7.29.0"
   resolved "https://registry.yarnpkg.com/@types/eslint/-/eslint-7.29.0.tgz#e56ddc8e542815272720bb0b4ccc2aff9c3e1c78"
   integrity sha512-VNcvioYDH8/FxaeTKkM4/TiTwt6pBV9E3OfGmvaw8tPl0rrHCJ4Ll15HRT+pMiFAf/MLQvAzC+6RzUMEL9Ceng==
@@ -8081,10 +8068,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-dom@^18.0.6":
-  version "18.0.6"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.0.6.tgz#36652900024842b74607a17786b6662dd1e103a1"
-  integrity sha512-/5OFZgfIPSwy+YuIBP/FgJnQnsxhZhjjrnxudMddeblOouIodEQ75X14Rr4wGSG/bknL+Omy9iWlLo1u/9GzAA==
+"@types/react-dom@^18.0.7":
+  version "18.0.7"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.0.7.tgz#ee7cf8ec4e6977e3f0a7b1d38bd89c75aa2aec28"
+  integrity sha512-HaXc+BbqAZE1RdsK3tC8SbkFy6UL2xF76lT9rQs5JkPrJg3rWA3Ou/Lhw3YJQzEDkBpmJ79nBsfnd05WrBd2QQ==
   dependencies:
     "@types/react" "*"
 
@@ -8181,7 +8168,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^18.0.21":
+"@types/react@*":
   version "18.0.21"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.21.tgz#b8209e9626bb00a34c76f55482697edd2b43cc67"
   integrity sha512-7QUCOxvFgnD5Jk8ZKlUAhVcRj7GuJRjnjjiY/IUBWKgOlnvDvTMLD4RTF7NPyVmbRhNrbomZiOepg7M/2Kj1mA==
@@ -8196,6 +8183,15 @@
   integrity sha512-Xt40xQsrkdvjn1EyWe1Bc0dJLcil/9x2vAuW7ya+PuQip4UYUaXyhzWmAbwRsdMgwOFHpfp7/FFZebDU6Y8VHA==
   dependencies:
     "@types/prop-types" "*"
+    csstype "^3.0.2"
+
+"@types/react@^18.0.23":
+  version "18.0.23"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.23.tgz#4190ecd58b99fa79fe2e67832bdcb287e5f893e4"
+  integrity sha512-R1wTULtCiJkudAN2DJGoYYySbGtOdzZyUWAACYinKdiQC8auxso4kLDUhQ7AJ2kh3F6A6z4v69U6tNY39hihVQ==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/scheduler" "*"
     csstype "^3.0.2"
 
 "@types/resolve@0.0.8":
@@ -26698,7 +26694,16 @@ react-docgen@^5.0.0:
     node-dir "^0.1.10"
     strip-indent "^3.0.0"
 
-react-dom@18.2.0, react-dom@^17.0.2, react-dom@^18.2.0:
+react-dom@^17.0.2:
+  version "17.0.2"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.2.tgz#ecffb6845e3ad8dbfcdc498f0d0a939736502c23"
+  integrity sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    scheduler "^0.20.2"
+
+react-dom@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.2.0.tgz#22aaf38708db2674ed9ada224ca4aa708d821e3d"
   integrity sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==
@@ -26715,7 +26720,6 @@ react-dropzone@^11.3.4:
     file-selector "^0.4.0"
     prop-types "^15.8.1"
 
-<<<<<<< HEAD
 react-element-to-jsx-string@^14.3.4:
   version "14.3.4"
   resolved "https://registry.yarnpkg.com/react-element-to-jsx-string/-/react-element-to-jsx-string-14.3.4.tgz#709125bc72f06800b68f9f4db485f2c7d31218a8"
@@ -26725,8 +26729,6 @@ react-element-to-jsx-string@^14.3.4:
     is-plain-object "5.0.0"
     react-is "17.0.2"
 
-=======
->>>>>>> 2c5fa51b (chore: update to react 18 part 6)
 react-error-overlay@6.0.9, react-error-overlay@^3.0.0, react-error-overlay@^6.0.9:
   version "6.0.9"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.9.tgz#3c743010c9359608c375ecd6bc76f35d93995b0a"
@@ -27089,7 +27091,15 @@ react-use-intercom@^1.2.0:
   resolved "https://registry.yarnpkg.com/react-use-intercom/-/react-use-intercom-1.5.0.tgz#a44661f95dc68ae4bc2bcf17aca1d8574f05f37a"
   integrity sha512-ck+rfDdh5l4tnvXDPIm6fXgwvX8AnB/zLhyCwHECAHTNpcBdIR07Y5oEOquCz7LQFrWDuhEqcKuDcTLaWQ4YBA==
 
-react@18.2.0, react@^17.0.2, react@^18.2.0:
+react@^17.0.2:
+  version "17.0.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
+  integrity sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+
+react@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==

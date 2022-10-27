@@ -51,7 +51,7 @@ const useStyles = makeStyles<StyleProps>()((theme, { lightBg }) => ({
   btn: {
     margin: theme.spacing(10, 4, 0),
     [theme.breakpoints.down('sm')]: {
-      '&:nth-child(2)': {
+      '&:nth-of-type(2)': {
         marginTop: theme.spacing(6),
       },
     },

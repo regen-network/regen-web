@@ -2,8 +2,8 @@ import React, { useCallback, useRef, useState } from 'react';
 import ReactCrop, { Crop } from 'react-image-crop';
 import { Button } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { makeStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import ContainedButton from '../buttons/ContainedButton';
 import { getCroppedImg } from './canvas-utils';

@@ -40,7 +40,7 @@ const useStyles = makeStyles<StyleProps>()(
           color: theme.palette.primary.contrastText,
         },
         '&::after': {
-          content: optional ? '" (optional)"' : '',
+          content: optional ? '" (optional)"' : '""',
           fontWeight: 'normal',
           color: theme.palette.info.main,
           [theme.breakpoints.up('sm')]: {
@@ -94,7 +94,7 @@ const useStyles = makeStyles<StyleProps>()(
       },
       '& input[type=number]': {
         '&::-webkit-inner-spin-button, &::-webkit-outer-spin-button': {
-          '-webkit-appearance': 'none',
+          WebkitAppearance: 'none',
           margin: 0,
         },
       },

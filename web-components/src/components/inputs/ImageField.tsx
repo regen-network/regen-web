@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Avatar, Box } from '@mui/material';
-import { makeStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme } from '@mui/styles';
 import { FieldProps } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import AvatarIcon from '../icons/AvatarIcon';

@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
-import { makeStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { parseText } from '../../utils/textParser';
 import OutlinedButton from '../buttons/OutlinedButton';

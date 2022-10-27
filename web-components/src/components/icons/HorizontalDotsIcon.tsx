@@ -1,6 +1,5 @@
 import React from 'react';
-import { SvgIcon } from '@mui/material';
-import { useTheme } from '@mui/material';
+import { SvgIcon, useTheme } from '@mui/material';
 
 export const HorizontalDotsIcon: React.FC<
   React.PropsWithChildren<{

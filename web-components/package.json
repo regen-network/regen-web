@@ -38,6 +38,8 @@
     "@turf/invariant": "^6.1.2",
     "@types/iso-3166-2": "^1.0.0",
     "@types/js-cookie": "^2.2.6",
+    "@types/react": "^18.0.23",
+    "@types/react-dom": "^18.0.7",
     "@types/react-google-recaptcha": "^2.1.0",
     "@types/react-helmet": "^6.1.0",
     "@types/react-html-parser": "^2.0.1",

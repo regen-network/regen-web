@@ -1,9 +1,9 @@
 import React from 'react';
 import LazyLoad from 'react-lazyload';
-import { makeStyles } from 'tss-react/mui';
-import { DefaultTheme as Theme } from '@mui/styles';
 import { useTheme } from '@mui/material';
+import { DefaultTheme as Theme } from '@mui/styles';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import { makeStyles } from 'tss-react/mui';
 
 import TimelineItem from './TimelineItem';
 
@@ -36,7 +36,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
       width: '50%',
       alignSelf: 'flex-end',
     },
-    '&:nth-child(odd)': {
+    '&:nth-of-type(odd)': {
       [theme.breakpoints.up('sm')]: {
         justifyContent: 'flex-end',
         alignSelf: 'flex-start',

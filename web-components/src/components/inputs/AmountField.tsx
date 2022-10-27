@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
-import { makeStyles } from 'tss-react/mui';
 import { Field } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 
 import { Theme } from '../../theme/muiTheme';
 import { getFormattedNumber } from '../../utils/format';
@@ -167,28 +167,30 @@ const AmountField: React.FC<React.PropsWithChildren<AmountFieldProps>> = ({
   className,
 }) => {
   const { classes: styles, cx } = useStyles();
-  return <>
-    <Field
-      name={name}
-      type="number"
-      component={AmountTextField}
-      availableAmount={availableAmount}
-      className={cx(styles.textField, className)}
-      label={
-        <AmountLabel
-          label={label}
-          auxiliarLabel={auxiliarLabel}
-          availableAmount={availableAmount}
-          denom={denom}
-        />
-      }
-    />
-    <AuxiliarLabel
-      availableAmount={availableAmount}
-      denom={denom}
-      className={styles.auxiliarLabelMobile}
-    />
-  </>;
+  return (
+    <>
+      <Field
+        name={name}
+        type="number"
+        component={AmountTextField}
+        availableAmount={availableAmount}
+        className={cx(styles.textField, className)}
+        label={
+          <AmountLabel
+            label={label}
+            auxiliarLabel={auxiliarLabel}
+            availableAmount={availableAmount}
+            denom={denom}
+          />
+        }
+      />
+      <AuxiliarLabel
+        availableAmount={availableAmount}
+        denom={denom}
+        className={styles.auxiliarLabelMobile}
+      />
+    </>
+  );
 };
 
 export default AmountField;

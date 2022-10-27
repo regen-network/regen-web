@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import ReactHtmlParser from 'html-react-parser';
 import Grid from '@mui/material/Grid';
-import { makeStyles, withStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme } from '@mui/styles';
 import {
   GetTxResponse,
   ServiceClientImpl,
 } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import ReactHtmlParser from 'html-react-parser';
+import { makeStyles, withStyles } from 'tss-react/mui';
 
 import { parseText } from '../../utils/textParser';
 import ContainedButton from '../buttons/ContainedButton';
@@ -258,26 +258,20 @@ const numberFormat = new Intl.NumberFormat('en-US');
 function SummaryItem({ item }: { item: Item }): JSX.Element {
   const { classes, cx } = useStyles();
 
-  return <>
-    {item.value ? (
-      <Grid container className={classes.summaryItem}>
-        <Grid
-          className={cx(classes.label, classes.summaryLabel)}
-          xs={4}
-          item
-        >
-          {item.label}
+  return (
+    <>
+      {item.value ? (
+        <Grid container className={classes.summaryItem}>
+          <Grid className={cx(classes.label, classes.summaryLabel)} xs={4} item>
+            {item.label}
+          </Grid>
+          <Grid xs={8} className={cx(classes.value, classes.summaryValue)} item>
+            {parseText(item.value)}
+          </Grid>
         </Grid>
-        <Grid
-          xs={8}
-          className={cx(classes.value, classes.summaryValue)}
-          item
-        >
-          {parseText(item.value)}
-        </Grid>
-      </Grid>
-    ) : null}
-  </>;
+      ) : null}
+    </>
+  );
 }
 export default function LedgerModal({
   summary,

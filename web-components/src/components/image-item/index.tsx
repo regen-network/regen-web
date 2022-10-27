@@ -1,8 +1,8 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import { Variant } from '@mui/material/styles/createTypography';
-import { makeStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import ContainedButton from '../buttons/ContainedButton';
 import { Body, Title } from '../typography';

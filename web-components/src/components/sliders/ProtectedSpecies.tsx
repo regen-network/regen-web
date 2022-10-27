@@ -1,8 +1,8 @@
 import React, { useCallback, useRef } from 'react';
 import Slider from 'react-slick';
 import Grid from '@mui/material/Grid';
-import { makeStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import PrevNextButton from '../buttons/PrevNextButton';
 import ProtectedSpeciesItem, { ItemProps } from './Item';

@@ -4,9 +4,9 @@ import mbxGeocoder, {
   GeocodeFeature,
   GeocodeQueryType,
 } from '@mapbox/mapbox-sdk/services/geocoding';
-import { makeStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme } from '@mui/styles';
 import { FieldProps } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 
 import FieldFormControl from './FieldFormControl';
 import Input from './Input';

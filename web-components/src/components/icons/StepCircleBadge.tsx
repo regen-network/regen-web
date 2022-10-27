@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 type Props = {
   className?: string;
@@ -31,9 +31,7 @@ const StepCircleBadge: React.FC<React.PropsWithChildren<Props>> = ({
   const { classes, cx } = useStyles();
 
   return (
-    <div
-      className={cx(className, classes.circle, isActive && classes.active)}
-    >
+    <div className={cx(className, classes.circle, isActive && classes.active)}>
       {icon}
     </div>
   );

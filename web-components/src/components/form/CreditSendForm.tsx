@@ -1,7 +1,7 @@
 import React from 'react';
-import { makeStyles } from 'tss-react/mui';
 import { Box } from '@mui/system';
 import { Field, Form, Formik, FormikErrors } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 import { useTrack } from 'use-analytics';
 
 import { Theme } from '../../theme/muiTheme';

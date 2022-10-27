@@ -1,6 +1,4 @@
-import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
-import { DefaultTheme as Theme } from '@mui/styles';
 import { makeStyles } from 'tss-react/mui';
 
 interface ArrowFilledIconProps {

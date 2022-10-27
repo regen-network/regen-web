@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableHead from '@mui/material/TableHead';
-import { makeStyles } from 'tss-react/mui';
 // import TablePagination from '@mui/material/TablePagination';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import { makeStyles } from 'tss-react/mui';
 
 import { getFormattedDate } from '../../utils/format';
 import ContainedButton from '../buttons/ContainedButton';

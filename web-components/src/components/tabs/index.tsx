@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { useTheme } from '@mui/material';
 import Tab, { TabProps } from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { DefaultTheme as Theme } from '@mui/styles';
-import { useTheme } from '@mui/material';
 import { makeStyles, withStyles } from 'tss-react/mui';
 
 export interface RegenTab extends TabProps {
@@ -81,10 +81,10 @@ const CustomTab = withStyles(Tab, (theme: Theme) => ({
     '&:not(:first-child)': {
       marginLeft: '-2px',
     },
-    '&:nth-child(odd)': {
+    '&:nth-of-type(odd)': {
       borderTopLeftRadius: 5,
     },
-    '&:nth-child(even)': {
+    '&:nth-of-type(even)': {
       borderTopRightRadius: 5,
     },
   },

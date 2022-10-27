@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { SxProps, TextField } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
-import { makeStyles } from 'tss-react/mui';
 import { FieldProps, FormikErrors, FormikProps } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 
 import { getURLInitialValue } from '../../utils/schemaURL';
 import OutlinedButton from '../buttons/OutlinedButton';

@@ -4,8 +4,8 @@ import mbxGeocoder, {
   GeocodeQueryType,
 } from '@mapbox/mapbox-sdk/services/geocoding';
 import TextField from '@mui/material/TextField';
-import { makeStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 interface GeocoderProps {
   token: string | undefined;

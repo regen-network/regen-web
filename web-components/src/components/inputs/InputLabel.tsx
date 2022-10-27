@@ -24,7 +24,7 @@ const useStyles = makeStyles<UseStylesParams>()((theme, { optional }) => ({
       color: theme.palette.primary.contrastText,
     },
     '&::after': {
-      content: !!optional ? '" (optional)"' : '',
+      content: !!optional ? '" (optional)"' : '""',
       fontWeight: 'normal',
       color: theme.palette.info.main,
       [theme.breakpoints.up('sm')]: {

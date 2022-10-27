@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
-import { makeStyles } from 'tss-react/mui';
 import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { Image, OptimizeImageProps } from '../image';
 import StaticMap from '../map/StaticMap';

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
+import { loaderStyles } from 'styles/loader';
 import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
@@ -32,9 +33,10 @@ import {
   AMOUNT_BRIDGABLE_TOOLTIP,
   BRIDGE_ACTION,
   CREDIT_BATCH_TOOLTIP,
+  DATE_FORMAT_STRING,
   NO_BRIDGABLE_CREDITS,
 } from './BridgableEcocreditsTable.constants';
-import { withLoaderStyles } from './BridgableEcocreditsTable.styles';
+// import { withLoaderStyles } from './BridgableEcocreditsTable.styles';
 
 // TODO - Right now the data has been mocked using the ecocredit query.
 //      - Delete before merge.
@@ -70,15 +72,10 @@ export const BridgableEcocreditsTable = (): JSX.Element => {
   }
 
   return (
-    <WithLoader isLoading={isLoadingCredits} sx={withLoaderStyles}>
+    <WithLoader isLoading={isLoadingCredits} sx={loaderStyles.withLoaderBlock}>
       <ActionsTable
         tableLabel="bridgable ecocredits table"
-        sx={{
-          root: {
-            borderRadius: 0,
-            borderWidth: '1 0 0 0',
-          },
-        }}
+        sx={tableStyles.rootOnlyTopBorder}
         renderActionButtons={(i: number) => (
           <OutlinedButton
             startIcon={<BridgeIcon sx={{ width: '24px', height: '24px' }} />}
@@ -153,8 +150,10 @@ export const BridgableEcocreditsTable = (): JSX.Element => {
               num: row.balance?.tradableAmount,
               ...quantityFormatNumberOptions,
             }),
-            <GreyText>{formatDate(row.startDate, 'MMM D, YYYY')}</GreyText>,
-            <GreyText>{formatDate(row.endDate, 'MMM D, YYYY')}</GreyText>,
+            <GreyText>
+              {formatDate(row.startDate, DATE_FORMAT_STRING)}
+            </GreyText>,
+            <GreyText>{formatDate(row.endDate, DATE_FORMAT_STRING)}</GreyText>,
             <WithLoader isLoading={!row.projectLocation} variant="skeleton">
               <Box>{row.projectLocation}</Box>
             </WithLoader>,

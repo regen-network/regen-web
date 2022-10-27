@@ -2,14 +2,12 @@ import { useState } from 'react';
 import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 import { random } from 'lodash';
+import { loaderStyles } from 'styles/loader';
 import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import EmptyCartIcon from 'web-components/lib/components/icons/EmptyCartIcon';
-import ErrorIcon from 'web-components/lib/components/icons/ErrorIcon';
-import PendingIcon from 'web-components/lib/components/icons/PendingIcon';
-import SuccessIcon from 'web-components/lib/components/icons/SuccessIcon';
-import InfoLabel from 'web-components/lib/components/info-label';
+import { InfoLabelVariant } from 'web-components/lib/components/info-label/InfoLabel.types';
 import {
   ActionsTable,
   DEFAULT_ROWS_PER_PAGE,
@@ -26,6 +24,7 @@ import {
   BreakTextEnd,
   GreyText,
   Link,
+  StatusLabel,
 } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { NoCredits } from 'components/molecules';
@@ -37,7 +36,6 @@ import {
   CREDIT_BATCH_TOOLTIP,
   NO_BRIDGED_CREDITS,
 } from './BridgedEcocreditsTable.constants';
-import { iconStyle, withLoaderStyles } from './BridgedEcocreditsTable.styles';
 
 // TODO - Right now the data has been mocked using the ecocredit query.
 //      - Delete before merge.
@@ -57,38 +55,6 @@ export const BridgedEcocreditsTable = (): JSX.Element => {
     paginationParams,
   });
 
-  const getStatusLabel = (status: string): JSX.Element | undefined => {
-    switch (status) {
-      case 'complete':
-        return (
-          <InfoLabel
-            label="Complete"
-            variant="complete"
-            icon={<SuccessIcon sx={iconStyle} />}
-          />
-        );
-      case 'pending':
-        return (
-          <InfoLabel
-            label="Pending"
-            variant="pending"
-            icon={<PendingIcon sx={iconStyle} />}
-          />
-        );
-      case 'error':
-        return (
-          <InfoLabel
-            label="Error"
-            variant="error"
-            icon={<ErrorIcon sx={iconStyle} />}
-          />
-        );
-
-      default:
-        return;
-    }
-  };
-
   if (!credits?.length && !isLoadingCredits) {
     return (
       <NoCredits
@@ -103,15 +69,10 @@ export const BridgedEcocreditsTable = (): JSX.Element => {
   }
 
   return (
-    <WithLoader isLoading={isLoadingCredits} sx={withLoaderStyles}>
+    <WithLoader isLoading={isLoadingCredits} sx={loaderStyles.withLoaderBlock}>
       <ActionsTable
         tableLabel="bridged ecocredits table"
-        sx={{
-          root: {
-            borderRadius: 0,
-            borderWidth: '1 0 0 0',
-          },
-        }}
+        sx={tableStyles.rootOnlyTopBorder}
         onTableChange={setPaginationParams}
         headerRows={[
           'Status',
@@ -161,7 +122,13 @@ export const BridgedEcocreditsTable = (): JSX.Element => {
         ]}
         rows={credits.map((row, i) => {
           return [
-            <GreyText>{getStatusLabel(BRIDGED_STATUS[random(0, 2)])}</GreyText>,
+            <GreyText>
+              {
+                <StatusLabel
+                  status={BRIDGED_STATUS[random(0, 2)] as InfoLabelVariant}
+                />
+              }
+            </GreyText>,
             <GreyText>...</GreyText>,
             <WithLoader isLoading={!row.projectName} variant="skeleton">
               <Link

@@ -1,6 +1,8 @@
 import { styled } from '@mui/material';
 
-export const BreakText = styled('div')({
+import { Box } from 'web-components/lib/components/box/Box';
+
+export const BreakText = styled(Box)({
   whiteSpace: 'normal',
   wordWrap: 'break-word',
 });

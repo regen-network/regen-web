@@ -121,7 +121,7 @@ const Dashboard = (): JSX.Element => {
 
   return (
     <Box sx={{ bgcolor: 'grey.50' }}>
-      <Section sx={{ root: { pb: [21.25, 28.28] } }}>
+      <Section>
         <IconTabs aria-label="dashboard tabs" tabs={tabs} />
       </Section>
     </Box>

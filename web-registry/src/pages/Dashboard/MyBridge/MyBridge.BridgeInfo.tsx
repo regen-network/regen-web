@@ -4,6 +4,7 @@ import Card from 'web-components/lib/components/cards/Card';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import { Body, Label } from 'web-components/lib/components/typography';
 import { Title } from 'web-components/lib/components/typography/Title';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { Link } from 'components/atoms';
 
@@ -20,7 +21,7 @@ export const BridgeInfo = (): JSX.Element => {
   return (
     <Card
       sx={[
-        theme => ({
+        (theme: Theme) => ({
           display: 'flex',
           width: '100%',
           justifyContent: 'space-evenly',

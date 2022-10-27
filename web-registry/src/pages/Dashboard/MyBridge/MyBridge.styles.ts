@@ -1,15 +1,17 @@
-export const CardStyles = { mb: '20px', pt: 0, px: 0, pb: '25px' };
-
-export const WithLoaderStyles = {
+export const wrapperStyles = {
   display: 'flex',
+  flexDirection: 'column',
   width: '100%',
-  justifyContent: 'center',
-  flexDirection: 'col',
-  alignItems: 'center',
-  py: 25,
 };
 
-export const TabsStyles = {
+export const cardStyles = {
+  mb: '20px',
+  pt: 0,
+  px: 0,
+  pb: '25px',
+};
+
+export const tabsStyles = {
   tab: {
     outer: {
       mt: { xs: '10px', sm: '15px', lg: '20px' },

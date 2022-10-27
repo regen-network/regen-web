@@ -20,7 +20,13 @@ import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 
 import { useLedger } from 'ledger';
 
-import { AccountLink, Link } from 'components/atoms';
+import {
+  AccountLink,
+  BreakText,
+  BreakTextEnd,
+  GreyText,
+  Link,
+} from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { NoCredits } from 'components/molecules';
 import { useEcocredits } from 'hooks';
@@ -30,13 +36,13 @@ import {
   BRIDGED_STATUS,
   CREDIT_BATCH_TOOLTIP,
   NO_BRIDGED_CREDITS,
-} from './MyBridge.constants';
-import { WithLoaderStyles } from './MyBridge.styles';
-import { BreakText, BreakTextEnd, GreyText } from './MyBridge.utils';
+} from './BridgedEcocreditsTable.constants';
+import { iconStyle, withLoaderStyles } from './BridgedEcocreditsTable.styles';
 
-const iconStyle = { height: '16px', verticalAlign: 'middle', mb: '2px' };
+// TODO - Right now the data has been mocked using the ecocredit query.
+//      - Delete before merge.
 
-export const BridgedTable = (): JSX.Element => {
+export const BridgedEcocreditsTable = (): JSX.Element => {
   const { wallet } = useLedger();
 
   const [paginationParams, setPaginationParams] =
@@ -97,10 +103,15 @@ export const BridgedTable = (): JSX.Element => {
   }
 
   return (
-    <WithLoader isLoading={isLoadingCredits} sx={WithLoaderStyles}>
+    <WithLoader isLoading={isLoadingCredits} sx={withLoaderStyles}>
       <ActionsTable
         tableLabel="bridged ecocredits table"
-        sx={{ root: { borderRadius: 0 } }}
+        sx={{
+          root: {
+            borderRadius: 0,
+            borderWidth: '1 0 0 0',
+          },
+        }}
         onTableChange={setPaginationParams}
         headerRows={[
           'Status',

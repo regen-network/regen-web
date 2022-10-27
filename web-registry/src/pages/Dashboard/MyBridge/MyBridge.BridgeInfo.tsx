@@ -14,7 +14,6 @@ const links = [
   { label: 'user guide', url: '/' },
   { label: 'how-to videos', url: '/' },
   { label: 'security', url: '/' },
-  { label: 'lorem ipsum', url: '/' },
 ];
 
 export const BridgeInfo = (): JSX.Element => {
@@ -29,7 +28,6 @@ export const BridgeInfo = (): JSX.Element => {
           p: { xs: 5, sm: 8, md: 12 },
           borderRadius: '10px',
           borderColor: 'grey.100',
-          // height: { xs: theme.spacing(62.5), sm: theme.spacing(92.5) },
           minHeight: theme.spacing(61.2),
           backgroundColor: 'info.light',
           backgroundImage: {
@@ -48,7 +46,7 @@ export const BridgeInfo = (): JSX.Element => {
           </Title>
           <Body
             size="lg"
-            sx={{ pr: { xs: 0, lg: '50px' }, mb: { xs: 4, md: 6, lg: 0 } }}
+            sx={{ pr: { xs: 0, lg: 12.5 }, mb: { xs: 4, md: 6, lg: 0 } }}
           >
             Move your assets easily to another chain using our cross-chain
             bridge service.

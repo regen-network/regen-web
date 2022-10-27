@@ -17,7 +17,13 @@ import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 
 import { useLedger } from 'ledger';
 
-import { AccountLink, Link } from 'components/atoms';
+import {
+  AccountLink,
+  BreakText,
+  BreakTextEnd,
+  GreyText,
+  Link,
+} from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { NoCredits } from 'components/molecules';
 import { useEcocredits } from 'hooks';
@@ -27,11 +33,15 @@ import {
   BRIDGE_ACTION,
   CREDIT_BATCH_TOOLTIP,
   NO_BRIDGABLE_CREDITS,
-} from './MyBridge.constants';
-import { WithLoaderStyles } from './MyBridge.styles';
-import { BreakText, BreakTextEnd, GreyText } from './MyBridge.utils';
+} from './BridgableEcocreditsTable.constants';
+import { withLoaderStyles } from './BridgableEcocreditsTable.styles';
 
-export const BridgableTable = (): JSX.Element => {
+// TODO - Right now the data has been mocked using the ecocredit query.
+//      - Delete before merge.
+
+// TODO - We will filter this by C03 class eventually
+
+export const BridgableEcocreditsTable = (): JSX.Element => {
   const { wallet } = useLedger();
 
   const [paginationParams, setPaginationParams] =
@@ -60,10 +70,15 @@ export const BridgableTable = (): JSX.Element => {
   }
 
   return (
-    <WithLoader isLoading={isLoadingCredits} sx={WithLoaderStyles}>
+    <WithLoader isLoading={isLoadingCredits} sx={withLoaderStyles}>
       <ActionsTable
         tableLabel="bridgable ecocredits table"
-        sx={{ root: { borderRadius: 0 } }}
+        sx={{
+          root: {
+            borderRadius: 0,
+            borderWidth: '1 0 0 0',
+          },
+        }}
         renderActionButtons={(i: number) => (
           <OutlinedButton
             startIcon={<BridgeIcon sx={{ width: '24px', height: '24px' }} />}

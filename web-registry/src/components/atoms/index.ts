@@ -1,4 +1,7 @@
 export * from './AccountLink';
+export * from './BreakText';
+export * from './BreakTextEnd';
+export * from './GreyText';
 export * from './KeplrRoute';
 export * from './Link';
 export * from './LinkWithArrow';

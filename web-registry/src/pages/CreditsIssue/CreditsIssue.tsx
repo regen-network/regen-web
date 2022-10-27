@@ -57,6 +57,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+// TODO Deprecated: delete legacy credits admin - all on-chain now
 // TODO Migrate to use Formik and custom input components
 function CreditsIssue(): JSX.Element {
   const classes = useStyles();

@@ -16,8 +16,6 @@ import {
 import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 
-import { useLedger } from 'ledger';
-
 import {
   AccountLink,
   BreakText,
@@ -36,16 +34,19 @@ import {
   DATE_FORMAT_STRING,
   NO_BRIDGABLE_CREDITS,
 } from './BridgableEcocreditsTable.constants';
-// import { withLoaderStyles } from './BridgableEcocreditsTable.styles';
 
 // TODO - Right now the data has been mocked using the ecocredit query.
 //      - Delete before merge.
 
 // TODO - We will filter this by C03 class eventually
 
-export const BridgableEcocreditsTable = (): JSX.Element => {
-  const { wallet } = useLedger();
+interface Props {
+  accountAddress: string | undefined;
+}
 
+export const BridgableEcocreditsTable = ({
+  accountAddress,
+}: Props): JSX.Element => {
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
       page: 0,
@@ -54,7 +55,7 @@ export const BridgableEcocreditsTable = (): JSX.Element => {
     });
 
   const { credits, isLoadingCredits } = useEcocredits({
-    address: wallet?.address,
+    address: accountAddress,
     paginationParams,
   });
 

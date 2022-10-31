@@ -16,8 +16,6 @@ import {
 import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 
-import { useLedger } from 'ledger';
-
 import {
   AccountLink,
   BreakText,
@@ -34,15 +32,24 @@ import {
   AMOUNT_BRIDGED_TOOLTIP,
   BRIDGED_STATUS,
   CREDIT_BATCH_TOOLTIP,
+  DATE_FORMAT_STRING,
   NO_BRIDGED_CREDITS,
 } from './BridgedEcocreditsTable.constants';
 
 // TODO - Right now the data has been mocked using the ecocredit query.
 //      - Delete before merge.
 
-export const BridgedEcocreditsTable = (): JSX.Element => {
-  const { wallet } = useLedger();
+// TODO - We will filter this by C03 class eventually
 
+interface Props {
+  accountAddress: string | undefined;
+  privateAccess?: boolean;
+}
+
+export const BridgedEcocreditsTable = ({
+  accountAddress,
+  privateAccess = false,
+}: Props): JSX.Element => {
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
       page: 0,
@@ -51,7 +58,7 @@ export const BridgedEcocreditsTable = (): JSX.Element => {
     });
 
   const { credits, isLoadingCredits } = useEcocredits({
-    address: wallet?.address,
+    address: accountAddress,
     paginationParams,
   });
 
@@ -76,17 +83,19 @@ export const BridgedEcocreditsTable = (): JSX.Element => {
         onTableChange={setPaginationParams}
         headerRows={[
           'Status',
-          <Box
-            display="flex"
-            sx={{
-              width: {
-                xs: '8rem',
-                lg: '10rem',
-              },
-            }}
-          >
-            Note / Link
-          </Box>,
+          privateAccess && (
+            <Box
+              display="flex"
+              sx={{
+                width: {
+                  xs: '8rem',
+                  lg: '10rem',
+                },
+              }}
+            >
+              Note / Link
+            </Box>
+          ),
           <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>{'Project'}</Box>,
           <Box
             display="flex"
@@ -129,7 +138,7 @@ export const BridgedEcocreditsTable = (): JSX.Element => {
                 />
               }
             </GreyText>,
-            <GreyText>...</GreyText>,
+            privateAccess && <GreyText>...</GreyText>, // TODO: Note/Link
             <WithLoader isLoading={!row.projectName} variant="skeleton">
               <Link
                 href={`/projects/${row?.projectId}`}
@@ -153,8 +162,10 @@ export const BridgedEcocreditsTable = (): JSX.Element => {
               num: row.balance?.tradableAmount,
               ...quantityFormatNumberOptions,
             }),
-            <GreyText>{formatDate(row.startDate, 'MMM D, YYYY')}</GreyText>,
-            <GreyText>{formatDate(row.endDate, 'MMM D, YYYY')}</GreyText>,
+            <GreyText>
+              {formatDate(row.startDate, DATE_FORMAT_STRING)}
+            </GreyText>,
+            <GreyText>{formatDate(row.endDate, DATE_FORMAT_STRING)}</GreyText>,
             <WithLoader isLoading={!row.projectLocation} variant="skeleton">
               <Box>{row.projectLocation}</Box>
             </WithLoader>,

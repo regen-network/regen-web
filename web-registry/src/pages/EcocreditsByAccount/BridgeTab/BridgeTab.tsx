@@ -1,49 +1,36 @@
-import { SxProps } from '@mui/material';
+import { tabsStyles } from 'styles/tabs';
 
-import { Box } from 'web-components/lib/components/box';
+import { Flex } from 'web-components/lib/components/box';
 import Card from 'web-components/lib/components/cards/Card';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 
-import { BridgedEcocreditsTable } from 'components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable';
+import { useLedger } from 'ledger';
 
-const wrapperStyles = {
-  display: 'flex',
-  flexDirection: 'column',
-  width: '100%',
-} as SxProps;
-
-const cardStyles = {
-  mb: '20px',
-  pt: 0,
-  px: 0,
-} as SxProps;
-
-const tabsStyles = {
-  tab: {
-    outer: {
-      mt: { xs: '10px', sm: '15px', lg: '20px' },
-      mx: { xs: '6px', sm: '8px', lg: '10px' },
-    } as SxProps,
-    inner: { mb: { xs: '6px', sm: '9px', lg: '12px' }, ml: 0 } as SxProps,
-  },
-  panel: { inner: { p: 0 } as SxProps },
-};
-
-const tabs: IconTabProps[] = [
-  {
-    label: 'Bridged ecocredits',
-    content: <BridgedEcocreditsTable />,
-  },
-];
+import { BridgeInfo } from 'components/molecules';
+import { BridgedEcocreditsTable } from 'components/organisms';
 
 export const BridgeTab = (): JSX.Element => {
+  const { wallet } = useLedger();
+
+  const tabs: IconTabProps[] = [
+    {
+      label: 'Bridged ecocredits',
+      content: <BridgedEcocreditsTable accountAddress={wallet?.address} />,
+    },
+  ];
+
   return (
-    <Box sx={wrapperStyles}>
-      <Card sx={cardStyles}>
-        <IconTabs tabs={tabs} size={'xl'} hideIndicator sxs={tabsStyles} />
+    <Flex flexDirection="column" sx={{ width: '100%' }}>
+      <Card sx={{ mb: 5 }}>
+        <IconTabs
+          tabs={tabs}
+          size={'xl'}
+          hideIndicator
+          sxs={tabsStyles.tabsInsideCard}
+        />
       </Card>
-      {/* <BridgeInfo /> */}
-    </Box>
+      <BridgeInfo />
+    </Flex>
   );
 };

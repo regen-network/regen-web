@@ -25,7 +25,11 @@ exports[`Storyshots Action Action 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -55,7 +59,11 @@ exports[`Storyshots Action Action Long Description 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -85,7 +93,11 @@ exports[`Storyshots Blog Post Blog Post 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -115,7 +127,11 @@ exports[`Storyshots Buttons Combined 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -145,7 +161,11 @@ exports[`Storyshots Buttons Contained Button 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -175,7 +195,11 @@ exports[`Storyshots Buttons Edit Button 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -205,7 +229,11 @@ exports[`Storyshots Buttons Expand Button 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -235,7 +263,11 @@ exports[`Storyshots Buttons Next Button 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -265,7 +297,11 @@ exports[`Storyshots Buttons Outlined Button 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -295,7 +331,11 @@ exports[`Storyshots Buttons Prev Button 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -325,7 +365,11 @@ exports[`Storyshots Buttons Table Action Buttons 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -355,7 +399,11 @@ exports[`Storyshots Buttons Text Button 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -385,7 +433,11 @@ exports[`Storyshots Cards Glance Card 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -415,7 +467,11 @@ exports[`Storyshots Cards Green Card 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -445,7 +501,11 @@ exports[`Storyshots Cards Green Top Icon Card 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -475,7 +535,11 @@ exports[`Storyshots Cards Image Action Card 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -505,7 +569,11 @@ exports[`Storyshots Cards Impact Card 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -535,7 +603,11 @@ exports[`Storyshots Cards Map Card 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -565,7 +637,11 @@ exports[`Storyshots Cards Monitored Impact Card 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -595,7 +671,11 @@ exports[`Storyshots Cards On Boarding Card 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -625,7 +705,11 @@ exports[`Storyshots Cards Overview Card 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -655,7 +739,11 @@ exports[`Storyshots Cards Overview Cards Group 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -685,7 +773,11 @@ exports[`Storyshots Cards Project Card 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -715,7 +807,11 @@ exports[`Storyshots Cards Project Top Card 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -745,7 +841,11 @@ exports[`Storyshots Cards Purchased Credits Card 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -775,7 +875,11 @@ exports[`Storyshots Cards Resources Card 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -805,7 +909,11 @@ exports[`Storyshots Cards Review Card 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -835,7 +943,11 @@ exports[`Storyshots Cards Step Card 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -865,7 +977,11 @@ exports[`Storyshots Cards/Create Card Create Credit Class Card 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -895,7 +1011,11 @@ exports[`Storyshots Cards/Create Card Create Project Card 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -925,7 +1045,11 @@ exports[`Storyshots Cards/Create Card First Credit Class Card 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -955,7 +1079,11 @@ exports[`Storyshots Cards/Create Card First Project Card 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -985,7 +1113,11 @@ exports[`Storyshots Cards/Create Card No Title Or Icon 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1015,7 +1147,11 @@ exports[`Storyshots Cards/Create Card With Title And Icon 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1045,7 +1181,11 @@ exports[`Storyshots Cards/CreditClassCard Default 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1075,7 +1215,11 @@ exports[`Storyshots Cards/ReviewCard Item Display 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1105,7 +1249,11 @@ exports[`Storyshots Cards/ReviewCard Photo 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1135,7 +1283,11 @@ exports[`Storyshots Cards/ReviewCard Review Card 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1165,7 +1317,11 @@ exports[`Storyshots Cards/ReviewCard Review Card Base 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1195,7 +1351,11 @@ exports[`Storyshots Certificate Certificate 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1225,7 +1385,11 @@ exports[`Storyshots Charts Bar Chart 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1255,7 +1419,11 @@ exports[`Storyshots Credits Credit Details 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1285,7 +1453,11 @@ exports[`Storyshots Credits Credits Gauge 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1315,7 +1487,11 @@ exports[`Storyshots Document Document 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1345,7 +1521,11 @@ exports[`Storyshots Dummy Default 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1375,7 +1555,11 @@ exports[`Storyshots EmptyState Default 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1405,7 +1589,11 @@ exports[`Storyshots EmptyState With Children 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1435,7 +1623,11 @@ exports[`Storyshots FAQ Category 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1465,7 +1657,11 @@ exports[`Storyshots FAQ Faq 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1495,7 +1691,11 @@ exports[`Storyshots FAQ Navigation 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1525,7 +1725,11 @@ exports[`Storyshots FAQ Question 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1555,7 +1759,11 @@ exports[`Storyshots Footers Fixed Footer 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1585,7 +1793,11 @@ exports[`Storyshots Footers Save Footer 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1615,7 +1827,11 @@ exports[`Storyshots Footers Switch Footer 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1645,7 +1861,11 @@ exports[`Storyshots Forms Basket Put Form 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1675,7 +1895,11 @@ exports[`Storyshots Forms Basket Take Form 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1705,7 +1929,11 @@ exports[`Storyshots Forms Credit Batch Recipients Form 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1735,7 +1963,11 @@ exports[`Storyshots Forms Credit Retire Form 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1765,7 +1997,11 @@ exports[`Storyshots Forms Credit Send Form 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1795,7 +2031,11 @@ exports[`Storyshots Forms Login Form 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1825,7 +2065,11 @@ exports[`Storyshots Forms Sign Up Form 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1855,7 +2099,11 @@ exports[`Storyshots Forms User Profile 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1885,7 +2133,11 @@ exports[`Storyshots Icons All Icons 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1915,7 +2167,11 @@ exports[`Storyshots Image Grid Image Grid 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1945,7 +2201,11 @@ exports[`Storyshots Image Image Default Quality 100 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -1975,7 +2235,11 @@ exports[`Storyshots Image Item Image Item 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2005,7 +2269,11 @@ exports[`Storyshots Image Original Image 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2035,7 +2303,11 @@ exports[`Storyshots InfoLabel Default 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2065,7 +2337,11 @@ exports[`Storyshots Inputs Date Pick Field 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2095,7 +2371,11 @@ exports[`Storyshots Inputs Roles Input 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2125,7 +2405,11 @@ exports[`Storyshots Inputs Toggle 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2155,7 +2439,11 @@ exports[`Storyshots Loading Loading Spinner 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2185,7 +2473,11 @@ exports[`Storyshots Map Map 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2215,7 +2507,11 @@ exports[`Storyshots MarketplaceLaunchBanner Default 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2245,7 +2541,11 @@ exports[`Storyshots Modal Basket Put Modal 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2275,7 +2575,11 @@ exports[`Storyshots Modal Basket Take Modal 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2305,7 +2609,11 @@ exports[`Storyshots Modal Confirm Modal 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2335,7 +2643,11 @@ exports[`Storyshots Modal Create Sell Order Modal 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2365,7 +2677,11 @@ exports[`Storyshots Modal Credit Retire Modal 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2395,7 +2711,11 @@ exports[`Storyshots Modal Credit Send Modal 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2425,7 +2745,11 @@ exports[`Storyshots Modal Crop Round Image Modal 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2455,7 +2779,11 @@ exports[`Storyshots Modal Crop Square Image Modal 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2485,7 +2813,11 @@ exports[`Storyshots Modal Ledger Modal 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2515,7 +2847,11 @@ exports[`Storyshots Modal Modal 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2545,7 +2881,11 @@ exports[`Storyshots Modal Processing Modal 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2575,7 +2915,11 @@ exports[`Storyshots Modal Tx Error Modal 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2605,7 +2949,11 @@ exports[`Storyshots Modal Tx Successful Modal 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2635,7 +2983,11 @@ exports[`Storyshots Party Party Address 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2665,7 +3017,11 @@ exports[`Storyshots Place Project Place Info 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2695,7 +3051,11 @@ exports[`Storyshots ReadMore Read More 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2725,7 +3085,11 @@ exports[`Storyshots Registry/Molecules/Scrollable Codebox Scrollable Codebox 1`]
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2755,7 +3119,11 @@ exports[`Storyshots Registry/Organisms/Credit Class Form Create Credit Class For
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2785,7 +3153,11 @@ exports[`Storyshots Registry/Organisms/Credit Class Form Credit Class Finished 1
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2815,7 +3187,11 @@ exports[`Storyshots Registry/Organisms/Credit Class Form Credit Class Form 1`] =
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2845,7 +3221,11 @@ exports[`Storyshots Registry/Organisms/Credit Class Form Credit Class Review 1`]
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2875,7 +3255,11 @@ exports[`Storyshots Registry/Organisms/MediaForm Media Form 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2905,7 +3289,11 @@ exports[`Storyshots Registry/Organisms/MediaForm Media Form Legacy 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2935,7 +3323,11 @@ exports[`Storyshots Registry/Organisms/Project Metadata Form Project Metadata Fo
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2965,7 +3357,11 @@ exports[`Storyshots Registry/Templates/Multi Step Template Multi Step Template 1
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -2995,7 +3391,11 @@ exports[`Storyshots Sliders Project Media 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3025,7 +3425,11 @@ exports[`Storyshots Sliders Project Media With Map 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3055,7 +3459,11 @@ exports[`Storyshots Sliders Protected Species 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3085,7 +3493,11 @@ exports[`Storyshots StickyBar Default 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3115,7 +3527,11 @@ exports[`Storyshots Table Actions Table 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3145,7 +3561,11 @@ exports[`Storyshots Table Documentation Table 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3175,7 +3595,11 @@ exports[`Storyshots Table Table Pagination 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3205,7 +3629,11 @@ exports[`Storyshots Tabs Icon Tabs 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3235,7 +3663,11 @@ exports[`Storyshots Tabs Mrv Tabs 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3265,7 +3697,11 @@ exports[`Storyshots Text Layouts Labeled Detail 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3295,7 +3731,11 @@ exports[`Storyshots Text Layouts Labeled Number 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3325,7 +3765,11 @@ exports[`Storyshots Text Layouts Title Description 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3355,7 +3799,11 @@ exports[`Storyshots Timeline New Timeline 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3385,7 +3833,11 @@ exports[`Storyshots Timeline Timeline 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3415,7 +3867,11 @@ exports[`Storyshots Timeline Timeline Item 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3445,7 +3901,11 @@ exports[`Storyshots Tooltip Info 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3475,7 +3935,11 @@ exports[`Storyshots Tooltip Info With Icon 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3505,7 +3969,11 @@ exports[`Storyshots Tooltip Main Title 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3535,7 +4003,11 @@ exports[`Storyshots Typography Body 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3565,7 +4037,11 @@ exports[`Storyshots Typography Label 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3595,7 +4071,11 @@ exports[`Storyshots Typography Subtitle 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3625,7 +4105,11 @@ exports[`Storyshots Typography Title 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3655,7 +4139,11 @@ exports[`Storyshots User Big User Avatar 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3685,7 +4173,11 @@ exports[`Storyshots User Column User Info 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3715,7 +4207,11 @@ exports[`Storyshots User Fallback User Avatar 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3745,7 +4241,11 @@ exports[`Storyshots User Medium User Avatar 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3775,7 +4275,11 @@ exports[`Storyshots User User Avatar With Link 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3805,7 +4309,11 @@ exports[`Storyshots User User Info 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;
@@ -3835,7 +4343,11 @@ exports[`Storyshots User With Title 1`] = `
         </RouterLogger>
       }
       path="/"
-    />
+    >
+      <Route
+        index={true}
+      />
+    </Route>
   </Routes>
 </MemoryRouter>
 `;

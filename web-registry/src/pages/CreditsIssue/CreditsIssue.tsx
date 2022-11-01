@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { SetStateAction, useState } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { gql, useMutation } from '@apollo/client';
 import { DatePicker } from '@mui/lab';
@@ -57,6 +57,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+// TODO Deprecated: delete legacy credits admin - all on-chain now
 // TODO Migrate to use Formik and custom input components
 function CreditsIssue(): JSX.Element {
   const classes = useStyles();
@@ -260,26 +261,30 @@ function CreditsIssue(): JSX.Element {
         <div className={classes.datePicker}>
           <InputLabel id="project-select-label">Start Date</InputLabel>
           <DatePicker
-            renderInput={params => <TextField {...params} />}
+            renderInput={(params: any) => <TextField {...params} />}
             openTo="year"
             className={classes.input}
             toolbarPlaceholder="Click to choose a date"
             views={['year', 'month']}
             value={startDate}
-            onChange={date => setStartDate(date)}
+            onChange={(date: SetStateAction<Date | null | undefined>) =>
+              setStartDate(date)
+            }
             InputProps={{ disableUnderline: true }}
           />
         </div>
         <div className={classes.datePicker}>
           <InputLabel id="project-select-label">End Date</InputLabel>
           <DatePicker
-            renderInput={params => <TextField {...params} />}
+            renderInput={(params: any) => <TextField {...params} />}
             openTo="year"
             className={classes.input}
             toolbarPlaceholder="Click to choose a date"
             views={['year', 'month']}
             value={endDate}
-            onChange={date => setEndDate(date)}
+            onChange={(date: SetStateAction<Date | null | undefined>) =>
+              setEndDate(date)
+            }
             InputProps={{ disableUnderline: true }}
           />
         </div>

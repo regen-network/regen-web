@@ -54,8 +54,6 @@
     "@types/css-mediaquery": "^0.1.1",
     "@types/jest": "27.0.3",
     "@types/node": "13.1.1",
-    "@types/react": "17.0.2",
-    "@types/react-dom": "17.0.2",
     "babel-loader": "8.1.0",
     "css-mediaquery": "0.1.2",
     "eslint-config-prettier": "^8.3.0",
@@ -69,6 +67,8 @@
   "resolutions": {
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2",
     "babel-eslint": "^10.1.0",
     "**/@typescript-eslint/eslint-plugin": "^4.5.0",
     "**/@typescript-eslint/parser": "^4.5.0",

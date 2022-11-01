@@ -4,8 +4,8 @@ import { IntercomProvider } from 'react-use-intercom';
 import amplitudePlugin from '@analytics/amplitude';
 import googleAnalytics from '@analytics/google-analytics';
 import { Auth0Provider } from '@auth0/auth0-react';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Analytics from 'analytics';
 import doNotTrack from 'analytics-plugin-do-not-track';
@@ -33,7 +33,6 @@ const intercomId = process.env.REACT_APP_INTERCOM_APP_ID || '';
 
 // Create a client
 const queryClient = new QueryClient();
-
 // const onRedirectCallback = (appState: AppState) => {
 //   // If using a Hash Router, you need to use window.history.replaceState to
 //   // remove the `code` and `state` query parameters from the callback url.

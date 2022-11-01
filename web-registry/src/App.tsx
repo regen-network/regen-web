@@ -144,7 +144,6 @@ const App: React.FC = (): JSX.Element => {
     const email: string = authError.error_description.split(':')[1];
     history.push(`/verify-email?email=${email}`);
   }
-
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <PageViewTracking />

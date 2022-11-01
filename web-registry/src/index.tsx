@@ -33,6 +33,7 @@ const intercomId = process.env.REACT_APP_INTERCOM_APP_ID || '';
 
 // Create a client
 const queryClient = new QueryClient();
+
 // const onRedirectCallback = (appState: AppState) => {
 //   // If using a Hash Router, you need to use window.history.replaceState to
 //   // remove the `code` and `state` query parameters from the callback url.

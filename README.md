@@ -23,6 +23,7 @@ The website for the [Regen Network](https://regen.network) decentralized infrast
   - [Typography](#typography)
     - [Sizing guide](#sizing-guide)
   - [Timeout Issue on Slower Connections](#timeout-issue-on-slower-connections)
+  - [Netlify](#netlify)
 
 ## Installation
 
@@ -282,3 +283,33 @@ yarn install --network-timeout 500000
 ```
 
 instead of `yarn install`
+
+## Netlify
+
+Currently we use netlify to deploy this application.
+Please see the `netlify.toml` in the project root for information about the different deployment environments.
+
+### Debugging Netlify deploys
+
+In case you are seeing a build/deploy failure from Netlify, there is a helpful way to debug.
+Netlify provides the source code for [their build-image](https://github.com/netlify/build-image).
+This docker image can be used to run a netlify build worker on your local machine.
+This allows you to test settings and parameters of the build.
+Hopefully this allows you to reproduce the error/failure you are dealing with.
+
+```sh
+git clone https://github.com/netlify/build-image
+cd build-images
+docker pull netlify/build:focal
+./test-tools/start-image.sh ../regen-web/
+```
+
+Make sure that any changes you want to test in the local build are committed.
+Uncommited changes are ignored by the Netlify build image.
+
+After running the `start-image.sh` script you will drop into the docker container.
+Then you will be able to run any commands, i.e. the build:
+
+```sh
+/opt/build-bin/build yarn build
+```

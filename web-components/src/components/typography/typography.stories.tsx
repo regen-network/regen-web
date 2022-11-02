@@ -7,13 +7,13 @@ export default {
 
 export const title = (): JSX.Element => (
   <>
-    <Title variant="h1">Title H1</Title>
-    <Title variant="h2">Title H2</Title>
-    <Title variant="h3">Title H3</Title>
-    <Title variant="h4">Title H4</Title>
-    <Title variant="h5">Title H5</Title>
+    <Title variant="h1">Title variant h1</Title>
+    <Title variant="h2">Title variant h2</Title>
+    <Title variant="h3">Title variant h3</Title>
+    <Title variant="h4">Title variant h4</Title>
+    <Title variant="h5">Title variant h5</Title>
     <Title variant="h6" mobileVariant="h1">
-      Title H6 - h1 on mobile
+      Title variant h6 (h1 on mobile)
     </Title>
   </>
 );
@@ -44,7 +44,7 @@ export const body = (): JSX.Element => (
 
 export const label = (): JSX.Element => (
   <>
-    <Label size="lg">Label size LG</Label>
+    <Label size="lg">Label size lg</Label>
     <Label>Label size md (default)</Label>
     <Label size="sm">Label size sm </Label>
     <Label size="xs">Label size xs </Label>

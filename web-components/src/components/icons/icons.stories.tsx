@@ -28,6 +28,7 @@ import DropdownIcon from './DropdownIcon';
 import EditIcon from './EditIcon';
 import EmailIcon from './EmailIcon';
 import EmptyCartIcon from './EmptyCartIcon';
+import ErrorIcon from './ErrorIcon';
 import EyeIcon from './EyeIcon';
 import FarmerIcon from './FarmerIcon';
 import { HorizontalDotsIcon } from './HorizontalDotsIcon';
@@ -37,6 +38,7 @@ import InterfaceIcon from './InterfaceIcon';
 import LinkIcon from './LinkIcon';
 import MinusIcon from './MinusIcon';
 import OrganizationIcon from './OrganizationIcon';
+import PendingIcon from './PendingIcon';
 import PhoneIcon from './PhoneIcon';
 import PinIcon from './PinIcon';
 import PlayIcon from './PlayIcon';
@@ -72,6 +74,7 @@ import TwitterIcon from './social/TwitterIcon';
 import YoutubeIcon from './social/YoutubeIcon';
 import SoilSampleIcon from './SoilSampleIcon';
 import { Spinner } from './Spinner';
+import SuccessIcon from './SuccessIcon';
 import TotalCreditsIcon from './TotalCreditsIcon';
 import TradeableIcon from './TradeableIcon';
 import TrashIcon from './TrashIcon';
@@ -166,6 +169,7 @@ export const allIcons = (): JSX.Element => (
       icon={<EmptyCartIcon sx={{ color: 'info.main' }} />}
       label="EmptyCartIcon"
     />
+    <LabeledIcon icon={<ErrorIcon />} label="ErrorIcon" />
     <LabeledIcon icon={<EyeIcon />} label="EyeIcon" />
     <LabeledIcon icon={<FacebookIcon color="blue" />} label="FacebookIcon" />
     <LabeledIcon icon={<FarmerIcon />} label="FarmerIcon" />
@@ -181,6 +185,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<MediumIcon color="grey" />} label="MediumIcon" />
     <LabeledIcon icon={<MinusIcon />} label="MinusIcon" />
     <LabeledIcon icon={<OrganizationIcon />} label="OrganizationIcon" />
+    <LabeledIcon icon={<PendingIcon />} label="PendingIcon" />
     <LabeledIcon icon={<PhoneIcon />} label="PhoneIcon" />
     <LabeledIcon icon={<PinIcon fontSize="small" />} label="PinIcon" />
     <LabeledIcon icon={<PlayIcon height={'20px'} />} label="PlayIcon" />
@@ -216,6 +221,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<SmallArrowIcon />} label="SmallArrowIcon" />
     <LabeledIcon icon={<SoilSampleIcon />} label="SoilSampleIcon" />
     <LabeledIcon icon={<Spinner />} label="Spinner" />
+    <LabeledIcon icon={<SuccessIcon />} label="SuccessIcon" />
     <LabeledIcon icon={<TelegramIcon color="blue" />} label="TelegramIcon" />
     <LabeledIcon icon={<TotalCreditsIcon />} label="TotalCreditsIcon" />
     <LabeledIcon

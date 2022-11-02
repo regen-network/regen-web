@@ -17,17 +17,18 @@ import Submit from './Submit';
 export interface BridgeProps {
   batchDenom: string;
   availableBridgeableAmount: number;
-  onSubmit: (values: FormValues) => Promise<void>;
+  onSubmit: (values: BridgeFormValues) => Promise<void>;
 }
 
 interface FormProps extends BridgeProps {
   onClose: RegenModalProps['onClose'];
 }
 
-export interface FormValues {
+export interface BridgeFormValues {
   recipient: string;
   amount?: number;
   agreeErpa: boolean;
+  target: string;
 }
 
 const BridgeForm = ({
@@ -41,10 +42,13 @@ const BridgeForm = ({
     recipient: '',
     agreeErpa: false,
     batchDenom,
+    target: 'polygon', //TODO: temp?
   };
 
-  const validateHandler = (values: FormValues): FormikErrors<FormValues> => {
-    let errors: FormikErrors<FormValues> = {};
+  const validateHandler = (
+    values: BridgeFormValues,
+  ): FormikErrors<BridgeFormValues> => {
+    let errors: FormikErrors<BridgeFormValues> = {};
 
     const errRecipient = validatePolygonAddress(values.recipient);
     if (errRecipient) errors.recipient = errRecipient;
@@ -66,7 +70,7 @@ const BridgeForm = ({
       {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
         <Form>
           <Field
-            name="chain"
+            name="target"
             label="Chain"
             component={SelectTextField}
             options={[{ label: 'Polygon', value: 'polygon' }]}

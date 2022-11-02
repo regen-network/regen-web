@@ -16,7 +16,7 @@ import { UseStateSetter } from 'types/react/use-state';
 import { getHashUrl } from 'lib/block-explorer';
 
 import useCreateSellOrderSubmit from 'pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit';
-import { CREATE_SELL_ORDER_TITLE } from 'pages/Dashboard/MyEcocredits/MyEcocredits.contants';
+import { CREATE_SELL_ORDER_TITLE } from 'pages/Dashboard/MyEcocredits/MyEcocredits.constants';
 import {
   getAvailableAmountByBatch,
   getDenomAllowedOptions,

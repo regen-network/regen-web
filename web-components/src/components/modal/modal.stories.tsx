@@ -232,6 +232,9 @@ export const txSuccessfulModal = (): JSX.Element => (
       { label: 'basket', value: { name: 'NCT' } },
       { label: 'amount', value: { name: 100 } },
     ]}
+    description={
+      'Visit <a href="https://app.regen.network" target="_blank">this link</a> to view the transaction.'
+    }
   />
 );
 export const txErrorModal = (): JSX.Element => (

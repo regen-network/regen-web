@@ -1,4 +1,7 @@
 export * from './AccountLink';
+export * from './BreakText';
+export * from './BreakTextEnd';
+export * from './GreyText';
 export * from './KeplrRoute';
 export * from './Link';
 export * from './LinkWithArrow';
@@ -16,6 +19,7 @@ export * from './RegistryNavLink';
 export * from './SanityButton';
 export * from './ScrollToTop';
 export * from './ScrollToTop';
+export * from './StatusLabel';
 export * from './WalletButton';
 export * from './WrappedImpactCard';
 export * from './WrappedResourcesCard';

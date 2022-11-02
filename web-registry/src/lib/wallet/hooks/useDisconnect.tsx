@@ -32,7 +32,12 @@ export const useDisconnect = ({
 }: Props): DisconnectType => {
   const disconnect = useCallback(async (): Promise<void> => {
     if (walletConnect) {
-      await walletConnect.killSession();
+      try {
+        await walletConnect.killSession();
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+      }
     }
 
     setWallet(emptySender);

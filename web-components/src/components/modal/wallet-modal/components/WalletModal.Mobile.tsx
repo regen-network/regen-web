@@ -19,11 +19,15 @@ const WalletModalMobile = ({
     <Center sx={{ minHeight: 400 }}>
       <IconTabs
         tabs={walletModalMobileTabs}
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
+        sxs={{
+          tab: {
+            outer: {
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+            },
+          },
         }}
       />
     </Center>

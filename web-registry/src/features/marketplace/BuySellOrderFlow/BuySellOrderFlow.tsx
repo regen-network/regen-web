@@ -88,7 +88,6 @@ export const BuySellOrderFlow = ({
     closeProcessingModal();
     closeBuyModal();
     selectedSellOrderIdRef.current = undefined;
-    track('buySuccess');
   };
   const onTxSuccessButtonClick = (): void => {
     handleTxModalClose();

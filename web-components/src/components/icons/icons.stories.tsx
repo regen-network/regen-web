@@ -76,6 +76,7 @@ import SoilSampleIcon from './SoilSampleIcon';
 import { Spinner } from './Spinner';
 import SuccessIcon from './SuccessIcon';
 import TotalCreditsIcon from './TotalCreditsIcon';
+import { ToucanIcon } from './ToucanIcon';
 import TradeableIcon from './TradeableIcon';
 import TrashIcon from './TrashIcon';
 import TrustDocumentIcon from './TrustDocumentIcon';
@@ -224,6 +225,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<SuccessIcon />} label="SuccessIcon" />
     <LabeledIcon icon={<TelegramIcon color="blue" />} label="TelegramIcon" />
     <LabeledIcon icon={<TotalCreditsIcon />} label="TotalCreditsIcon" />
+    <LabeledIcon icon={<ToucanIcon />} label="ToucanIcon" />
     <LabeledIcon
       icon={<TradeableIcon sx={{ color: 'grey.600' }} />}
       label="tradeableIcon"

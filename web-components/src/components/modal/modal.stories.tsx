@@ -4,6 +4,7 @@ import { Avatar, Button, Card, CardMedia, Link } from '@mui/material';
 import Modal from '.';
 import { BasketPutModal } from './BasketPutModal';
 import { BasketTakeModal } from './BasketTakeModal';
+import { BridgeModal } from './BridgeModal';
 import { ConfirmModal } from './ConfirmModal';
 import { CreateSellOrderModal } from './CreateSellOrderModal';
 import { CreditRetireModal } from './CreditRetireModal';
@@ -320,5 +321,15 @@ export const createSellOrderModal = (): JSX.Element => (
     open={true}
     onClose={() => null}
     onSubmit={async () => alert('submit')}
+  />
+);
+
+export const bridgeModal = (): JSX.Element => (
+  <BridgeModal
+    open={true}
+    onClose={() => null}
+    onSubmit={async values => alert(JSON.stringify(values))}
+    batchDenom="C03-002-20190101-20201010-003"
+    availableBridgeableAmount={100}
   />
 );

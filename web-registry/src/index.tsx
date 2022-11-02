@@ -44,6 +44,12 @@ const queryClient = new QueryClient();
 //   history.replace((appState && appState.returnTo) || window.location.pathname);
 // };
 
+// our current analytics setup uses both amplitude and google analytics.
+// our amplitude and GA have been set up with a development and production environment.
+// for amplitude this means that we have a development and production API key.
+// for GA this means that we have a development and production measurement id.
+// be careful not to use the production API key or measurement id in a non-prod environment.
+// but you can safely use the development API key and measurement id in non-prod environments.
 const GA_DEVELOPMENT_MEASUREMENT_ID = "G-9ENS4JTCWY"
 const analytics = Analytics({
   plugins: [

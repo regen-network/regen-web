@@ -28,7 +28,7 @@ export const useWalletConnectFinalize = ({
 
       finalizeConnection({
         setWallet,
-        walletClient: walletClient,
+        walletClient,
         walletConfig: walletConfigRef.current,
       });
     };

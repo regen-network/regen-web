@@ -58,7 +58,7 @@ export const WalletProvider: React.FC = ({ children }) => {
     string | undefined
   >();
 
-  const onQrCloseCallback = useRef<() => void>();
+  const onQrCloseCallbackRef = useRef<() => void>();
 
   const disconnect = useDisconnect({
     setConnectionType,
@@ -70,7 +70,7 @@ export const WalletProvider: React.FC = ({ children }) => {
   });
 
   const connectWallet = useConnectWallet({
-    onQrCloseCallback,
+    onQrCloseCallbackRef,
     setWallet,
     setWalletConnect,
     setWalletConnectUri,
@@ -82,7 +82,7 @@ export const WalletProvider: React.FC = ({ children }) => {
   useAutoConnect({ connectWallet, setError, setLoaded });
   useOnAccountChange({ connectWallet, wallet });
   useDetectKeplrMobileBrowser({ connectWallet, loaded, wallet });
-  useWalletConnectCallback({ onQrCloseCallback, walletConnectUri });
+  useWalletConnectCallback({ onQrCloseCallbackRef, walletConnectUri });
   useWalletConnectFinalize({ setWallet, walletConfigRef, walletConnect });
 
   return (

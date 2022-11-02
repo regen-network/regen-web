@@ -12,6 +12,7 @@ type Props = {
   connectWallet: ConnectWalletType;
 };
 
+// Auto connect user if we saved a connection type, from last session, in localstorage
 export const useAutoConnect = ({
   setError,
   setLoaded,

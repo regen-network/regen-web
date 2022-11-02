@@ -5,7 +5,6 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import WalletModal from 'web-components/lib/components/modal/wallet-modal';
 import { WalletModalState } from 'web-components/lib/components/modal/wallet-modal/WalletModal.types';
 
-import Keplr from '../../../assets/keplr.png';
 import { chainId } from '../../../lib/ledger';
 import { useWallet } from '../../../lib/wallet/wallet';
 import { useConnectToWallet } from './hooks/useConnectToWallet';
@@ -13,6 +12,8 @@ import { useNavigateToMobileUrl } from './hooks/useNavigateToMobileUrl';
 import { useResetModalOnConnect } from './hooks/useResetModalOnConnect';
 import { useWalletButtonStyles } from './WalletButton.styles';
 import { getMobileConnectUrl, getWalletsUiConfig } from './WalletButton.utils';
+
+import Keplr from 'assets/keplr.png';
 
 const WalletButton: React.FC = () => {
   const styles = useWalletButtonStyles();
@@ -67,7 +68,7 @@ const WalletButton: React.FC = () => {
         onClose={onModalClose}
         wallets={walletsUiConfig}
         state={modalState}
-        uri={walletConnectUri}
+        qrCodeUri={walletConnectUri}
         mobileConnectUrl={mobileConnectUrl}
       />
     </>

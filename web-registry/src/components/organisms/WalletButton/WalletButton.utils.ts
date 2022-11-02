@@ -43,8 +43,10 @@ export const getMobileConnectUrl = ({
 }: GetMobileConnectUrlParams): string | undefined => {
   if (checkIsMobile() && uri) {
     return checkIsAndroid()
-      ? `intent://wcV1?${uri}#Intent;package=com.chainapsis.keplr;scheme=keplrwallet;end;`
-      : `keplrwallet://wcV1?${uri}`;
+      ? // Deeplink Android: intent://path/#Intent;scheme=yourapp;package=com.yourapp.example;end;
+        `intent://wcV1?${uri}#Intent;package=com.chainapsis.keplr;scheme=keplrwallet;end;`
+      : // Deeplink iOS: yourapp://path
+        `keplrwallet://wcV1?${uri}`;
   }
 
   return undefined;

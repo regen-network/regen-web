@@ -26,6 +26,8 @@ export const useDetectKeplrMobileBrowser = ({
       .then(({ getKeplrFromWindow }) => getKeplrFromWindow())
       .then(keplr => {
         if (keplr && keplr.mode === 'mobile-web') {
+          // When used within Keplr mobile browser the connection type is the same
+          // as with the desktop extention.
           connectWallet({ walletType: WalletType.Keplr });
           localStorage.setItem(AUTO_CONNECT_WALLET_KEY, WalletType.Keplr);
         }

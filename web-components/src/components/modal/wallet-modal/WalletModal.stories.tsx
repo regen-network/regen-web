@@ -39,7 +39,7 @@ export const Default = Template.bind({});
 
 Default.args = {
   onClose: () => undefined,
-  uri: uriMock,
+  qrCodeUri: uriMock,
   mobileConnectUrl: '#',
 };
 

@@ -52,8 +52,20 @@ const UserMenuItem: React.FC<UserMenuItemProps> = ({
               alt="default avatar"
               src={avatar}
             />
-            {/* TODO hide address on mobile https://github.com/regen-network/regen-web/issues/786 */}
-            {address}
+            <Box
+              sx={{
+                display: 'inline-block',
+                maxWidth: {
+                  xs: '130px',
+                  md: '100%',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                },
+              }}
+            >
+              {address}
+            </Box>
           </Box>
         ),
         dropdownItems: [

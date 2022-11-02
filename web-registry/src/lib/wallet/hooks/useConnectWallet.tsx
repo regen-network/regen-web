@@ -13,7 +13,7 @@ import { WalletConfig, WalletType } from '../walletsConfig/walletsConfig.types';
 type Props = {
   setWalletConnectUri: UseStateSetter<string | undefined>;
   setWalletConnect: UseStateSetter<WalletConnect | undefined>;
-  onQrCloseCallback: MutableRefObject<(() => void) | undefined>;
+  onQrCloseCallbackRef: MutableRefObject<(() => void) | undefined>;
   walletConfigRef: MutableRefObject<WalletConfig | undefined>;
   setWallet: UseStateSetter<Wallet>;
 };
@@ -25,7 +25,7 @@ export type ConnectWalletType = ({
 // This hook returns a callback that performs the wallet connection.
 // The callback is meant to be called by other hooks.
 export const useConnectWallet = ({
-  onQrCloseCallback,
+  onQrCloseCallbackRef,
   setWalletConnectUri,
   walletConfigRef,
   setWallet,
@@ -46,7 +46,7 @@ export const useConnectWallet = ({
       if (isWalletConnectKeplr) {
         walletConnect = await getWalletConnectInstance({
           setWalletConnectUri,
-          onQrCloseCallback,
+          onQrCloseCallbackRef,
         });
         if (!walletConnect.connected) {
           await walletConnect.createSession();
@@ -61,10 +61,7 @@ export const useConnectWallet = ({
 
       // Only Keplr browser extension supports suggesting chain.
       // Not WalletConnect nor embedded Keplr Mobile web.
-      if (
-        walletConfig?.type === WalletType.Keplr &&
-        walletClient?.mode !== 'mobile-web'
-      ) {
+      if (isKeplr && walletClient?.mode !== 'mobile-web') {
         await walletClient?.experimentalSuggestChain(chainInfo);
       }
 
@@ -73,7 +70,7 @@ export const useConnectWallet = ({
       }
     },
     [
-      onQrCloseCallback,
+      onQrCloseCallbackRef,
       setWallet,
       setWalletConnect,
       setWalletConnectUri,

@@ -6,7 +6,11 @@ import { UseStateSetter } from 'types/react/use-state';
 
 import { chainInfo } from './chainInfo/chainInfo';
 import { Wallet } from './wallet';
-import { walletConnectClientMeta } from './wallet.constants';
+import {
+  WALLET_CONNECT_BRIDGE_URL,
+  WALLET_CONNECT_SIGNING_METHODS,
+  walletConnectClientMeta,
+} from './wallet.constants';
 import {
   WalletClient,
   WalletConfig,
@@ -16,26 +20,24 @@ import {
 
 type GetWalletConnectInstanceParams = {
   setWalletConnectUri: UseStateSetter<string | undefined>;
-  onQrCloseCallback: MutableRefObject<(() => void) | undefined>;
+  onQrCloseCallbackRef: MutableRefObject<(() => void) | undefined>;
 };
 
 export const getWalletConnectInstance = async ({
   setWalletConnectUri,
-  onQrCloseCallback,
+  onQrCloseCallbackRef,
 }: GetWalletConnectInstanceParams): Promise<WalletConnect> => {
   const walletConnect = new (await import('@walletconnect/client')).default({
-    bridge: 'https://bridge.walletconnect.org',
-    signingMethods: [
-      'keplr_enable_wallet_connect_v1',
-      'keplr_sign_amino_wallet_connect_v1',
-    ],
+    bridge: WALLET_CONNECT_BRIDGE_URL,
+    signingMethods: WALLET_CONNECT_SIGNING_METHODS,
     qrcodeModal: {
-      open: (uri: string, callback: () => void) => {
-        // Open QR modal by setting URI.
+      // The protocol establishes a remote connection between two apps and/or devices using a Bridge server to relay payloads.
+      // These payloads are symmetrically encrypted through a shared key between the two peers.
+      // The connection is initiated by one peer displaying a QR Code or deep link with a standard WalletConnect URI and is established when the counter-party approves this connection request.
+      open: (uri: string, onQrCloseCallback: () => void) => {
         setWalletConnectUri(uri);
-        onQrCloseCallback.current = callback;
+        onQrCloseCallbackRef.current = onQrCloseCallback;
       },
-      // Occurs on disconnect, which is handled elsewhere.
       close: () => undefined,
     },
   });

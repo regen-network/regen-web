@@ -3,13 +3,16 @@ import { IconTabs } from '../../../../components/tabs/IconTabs';
 import { getWalletModalMobileTabs } from './WalletModal.Mobile.config';
 
 export interface Props {
-  uri?: string;
+  qrCodeUri?: string;
   mobileConnectUrl?: string;
 }
 
-const WalletModalMobile = ({ uri, mobileConnectUrl }: Props): JSX.Element => {
+const WalletModalMobile = ({
+  qrCodeUri,
+  mobileConnectUrl,
+}: Props): JSX.Element => {
   const walletModalMobileTabs = getWalletModalMobileTabs({
-    uri,
+    qrCodeUri,
     mobileConnectUrl,
   });
   return (

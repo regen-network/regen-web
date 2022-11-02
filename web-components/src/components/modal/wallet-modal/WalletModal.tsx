@@ -8,7 +8,7 @@ import { Wallet, WalletModalState } from './WalletModal.types';
 export interface Props extends RegenModalProps {
   state?: WalletModalState;
   wallets: Wallet[];
-  uri?: string;
+  qrCodeUri?: string;
   mobileConnectUrl?: string;
 }
 
@@ -17,7 +17,7 @@ const WalletModal = ({
   onClose,
   state = 'wallet-select',
   wallets,
-  uri,
+  qrCodeUri,
   mobileConnectUrl,
 }: Props): JSX.Element => {
   const isSelectState = state === 'wallet-select';
@@ -27,7 +27,10 @@ const WalletModal = ({
       <Box>
         {isSelectState && <WalletModalSelect wallets={wallets} />}
         {isMobileState && (
-          <WalletModalMobile uri={uri} mobileConnectUrl={mobileConnectUrl} />
+          <WalletModalMobile
+            qrCodeUri={qrCodeUri}
+            mobileConnectUrl={mobileConnectUrl}
+          />
         )}
       </Box>
     </Modal>

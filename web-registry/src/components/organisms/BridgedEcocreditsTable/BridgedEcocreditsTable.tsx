@@ -84,15 +84,7 @@ export const BridgedEcocreditsTable = ({
         headerRows={[
           'Status',
           privateAccess && (
-            <Box
-              display="flex"
-              sx={{
-                width: {
-                  xs: '8rem',
-                  lg: '10rem',
-                },
-              }}
-            >
+            <Box display="flex" sx={{ width: { xs: '8rem', lg: '10rem' } }}>
               Note / Link
             </Box>
           ),

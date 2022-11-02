@@ -9,12 +9,15 @@ import React, {
 import {
   Box,
   styled,
+  SxProps,
   Table,
   TableBody,
   TableFooter,
   TableHead,
   TableRow,
 } from '@mui/material';
+
+import type { Theme } from 'src/theme/muiTheme';
 
 import {
   getTablePaginationPadding,
@@ -56,13 +59,25 @@ export type TablePaginationParams = {
   offset: number;
 };
 
-const ActionsTable: React.FC<{
+interface ActionsTableProps {
   tableLabel: string;
   headerRows: React.ReactNode[];
   rows: React.ReactNode[][];
   renderActionButtons?: RenderActionButtonsFunc;
   onTableChange?: Dispatch<SetStateAction<TablePaginationParams>>;
-}> = ({ tableLabel, headerRows, rows, renderActionButtons, onTableChange }) => {
+  sx?: {
+    root?: SxProps<Theme>;
+  };
+}
+
+const ActionsTable: React.FC<ActionsTableProps> = ({
+  tableLabel,
+  headerRows,
+  rows,
+  renderActionButtons,
+  onTableChange,
+  sx,
+}) => {
   const [page, setPage] = useState(0);
   const [offset, setOffset] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(DEFAULT_ROWS_PER_PAGE);
@@ -131,6 +146,7 @@ const ActionsTable: React.FC<{
         borderColor: 'info.light',
         borderRadius: '8px',
         overflow: 'hidden',
+        ...sx?.root,
       }}
     >
       <StyledTableContainer>

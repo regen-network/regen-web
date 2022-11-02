@@ -23,6 +23,7 @@ export const invalidVCSID: string = 'Please enter a valid VCS Project ID';
 export const invalidJSON: string = 'Please enter valid JSON-LD';
 export const invalidAddress: string = 'Invalid address';
 export const invalidRegenAddress: string = 'Invalid regen address';
+export const invalidPolygonAddress: string = 'Invalid Polygon address';
 export const requiredDenom: string = 'Please choose a denom';
 export const invalidDecimalCount: string = `More than ${MAX_FRACTION_DIGITS} decimal places not allowed`;
 export const invalidMemoLength: string = `Must be ${MEMO_MAX_LENGTH} characters or fewer`;
@@ -114,6 +115,26 @@ export function validatePrice(
   maximumFractionDigits = maximumFractionDigits || MAX_FRACTION_DIGITS;
   if (!!priceDecimalPlaces && priceDecimalPlaces > maximumFractionDigits) {
     return `Maximum ${maximumFractionDigits} decimal places`;
+  }
+  return;
+}
+
+/**
+ * Checks if the given string is an ETH address
+ *
+ * @method isValidEthAddress
+ * @param {String} address the given HEX adress
+ * @return {Boolean}
+ */
+const isValidEthAddress = (address: string): boolean => {
+  return /^(0x)?[0-9a-f]{40}$/i.test(address);
+};
+
+export function validatePolygonAddress(address: string): string | undefined {
+  if (!address) {
+    return requiredMessage;
+  } else if (!isValidEthAddress(address)) {
+    return invalidPolygonAddress;
   }
   return;
 }

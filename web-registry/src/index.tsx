@@ -44,6 +44,7 @@ const queryClient = new QueryClient();
 //   history.replace((appState && appState.returnTo) || window.location.pathname);
 // };
 
+const GA_DEVELOPMENT_MEASUREMENT_ID = "G-9ENS4JTCWY"
 const analytics = Analytics({
   plugins: [
     doNotTrack(),
@@ -53,7 +54,7 @@ const analytics = Analytics({
       enabled: false,
     }),
     googleAnalytics({
-      measurementIds: ['G-6ZGJM8JXYN'],
+      measurementIds: [process.env.REACT_APP_GA_MEASUREMENT_ID || GA_DEVELOPMENT_MEASUREMENT_ID],
       enabled: false,
       gtagConfig: {
         anonymize_ip: true,

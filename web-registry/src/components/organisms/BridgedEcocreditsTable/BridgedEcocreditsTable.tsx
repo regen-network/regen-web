@@ -26,7 +26,7 @@ import {
 } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { NoCredits } from 'components/molecules';
-import { useEcocredits } from 'hooks';
+import { useBridged } from 'hooks/bridge/useBridged';
 
 import {
   AMOUNT_BRIDGED_TOOLTIP,
@@ -36,8 +36,8 @@ import {
   NO_BRIDGED_CREDITS,
 } from './BridgedEcocreditsTable.constants';
 
-// TODO - Right now the data has been mocked using the ecocredit query.
-//      - Delete before merge.
+// TODO - A hook scaffolding `useBridged` has been implemented for the data request
+// that simply simulates a request with an empty response.
 
 // TODO - We will filter this by C03 class eventually
 
@@ -57,7 +57,7 @@ export const BridgedEcocreditsTable = ({
       offset: 0,
     });
 
-  const { credits, isLoadingCredits } = useEcocredits({
+  const { credits, isLoadingCredits } = useBridged({
     address: accountAddress,
     paginationParams,
   });

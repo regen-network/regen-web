@@ -48,6 +48,7 @@ export function formatStandardInfo(info: StandardInfo): string {
 
 /** wrapper for dayjs format function with default format `MMMM D, YYYY` (ex
  * "December 31, 2016") */
+export const DATE_FORMAT_SECONDARY = 'MMM D, YYYY';
 export function formatDate(
   date: dayjs.ConfigType,
   format: string = 'MMMM D, YYYY',

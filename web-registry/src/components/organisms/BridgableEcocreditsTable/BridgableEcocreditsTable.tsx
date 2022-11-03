@@ -14,9 +14,11 @@ import {
   TablePaginationParams,
 } from 'web-components/lib/components/table/ActionsTable';
 import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
-import { formatDate, formatNumber } from 'web-components/lib/utils/format';
-
-import { useLedger } from 'ledger';
+import {
+  DATE_FORMAT_SECONDARY,
+  formatDate,
+  formatNumber,
+} from 'web-components/lib/utils/format';
 
 import {
   AccountLink,
@@ -33,19 +35,21 @@ import {
   AMOUNT_BRIDGABLE_TOOLTIP,
   BRIDGE_ACTION,
   CREDIT_BATCH_TOOLTIP,
-  DATE_FORMAT_STRING,
   NO_BRIDGABLE_CREDITS,
 } from './BridgableEcocreditsTable.constants';
-// import { withLoaderStyles } from './BridgableEcocreditsTable.styles';
 
 // TODO - A hook scaffolding `useBridgable` has been implemented for the data request
 // that simply simulates a request with an empty response.
 
 // TODO - We will filter this by C03 class eventually
 
-export const BridgableEcocreditsTable = (): JSX.Element => {
-  const { wallet } = useLedger();
+interface Props {
+  accountAddress: string | undefined;
+}
 
+export const BridgableEcocreditsTable = ({
+  accountAddress,
+}: Props): JSX.Element => {
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
       page: 0,
@@ -54,7 +58,7 @@ export const BridgableEcocreditsTable = (): JSX.Element => {
     });
 
   const { credits, isLoadingCredits } = useBridgable({
-    address: wallet?.address,
+    address: accountAddress,
     paginationParams,
   });
 
@@ -151,9 +155,11 @@ export const BridgableEcocreditsTable = (): JSX.Element => {
               ...quantityFormatNumberOptions,
             }),
             <GreyText>
-              {formatDate(row.startDate, DATE_FORMAT_STRING)}
+              {formatDate(row.startDate, DATE_FORMAT_SECONDARY)}
             </GreyText>,
-            <GreyText>{formatDate(row.endDate, DATE_FORMAT_STRING)}</GreyText>,
+            <GreyText>
+              {formatDate(row.endDate, DATE_FORMAT_SECONDARY)}
+            </GreyText>,
             <WithLoader isLoading={!row.projectLocation} variant="skeleton">
               <Box>{row.projectLocation}</Box>
             </WithLoader>,

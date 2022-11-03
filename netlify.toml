@@ -26,6 +26,8 @@
   REACT_APP_LEDGER_CHAIN_NAME = "Regen - Redwood Testnet"
   REACT_APP_BLOCK_EXPLORER = "https://redwood.regen.aneka.io"
   REACT_APP_SENTRY_ENVIRONMENT="development"
+  # TODO: remove before merging
+  REACT_APP_ANALYTICS_ENABLED="true"
 
 [context.hambach.environment]
   REACT_APP_SANITY_TAG = "default"

@@ -29,7 +29,7 @@ export const useBridgable = ({ address, paginationParams }: Props): Output => {
     if (isLoadingCredits) return;
     const _bridgableCredits = credits.filter(
       credit =>
-        credit.classId === 'C01' && Number(credit.balance?.tradableAmount) > 0, //TODO: CO3
+        credit.classId === 'C03' && Number(credit.balance?.tradableAmount) > 0,
     );
     setBridgableCredits(_bridgableCredits);
   }, [credits, isLoadingCredits]);

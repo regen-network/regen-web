@@ -8,14 +8,15 @@ import { FormModalTemplate } from 'web-components/lib/components/modal/FormModal
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 
+import {
+  BRIDGE_MODAL_SUBTITLE,
+  BRIDGE_MODAL_TITLE,
+} from './BridgeModal.constants';
+
 interface BridgeModalProps extends RegenModalProps {
   batch?: BatchInfoWithBalance;
   onSubmit: BridgeProps['onSubmit'];
 }
-
-export const BRIDGE_TITLE = 'Bridge Ecocredits to Polygon';
-const BRIDGE_SUBTITLE =
-  'This service allows you to bridge NCT-eligible ecocredits to Polygon in the form of TCO2s.';
 
 const BridgeModal = ({
   batch,
@@ -24,8 +25,8 @@ const BridgeModal = ({
   onSubmit,
 }: BridgeModalProps): JSX.Element => (
   <FormModalTemplate
-    title={BRIDGE_TITLE}
-    subtitle={BRIDGE_SUBTITLE}
+    title={BRIDGE_MODAL_TITLE}
+    subtitle={BRIDGE_MODAL_SUBTITLE}
     image={<ToucanIcon sx={{ width: 109, height: 32 }} />}
     open={open}
     onClose={onClose}

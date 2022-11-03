@@ -4,5 +4,3 @@ export const CREDIT_BATCH_TOOLTIP =
 export const AMOUNT_BRIDGABLE_TOOLTIP =
   'The amount bridgable is the same as the amount tradable. Credits that have been retired cannot be bridged.';
 export const NO_BRIDGABLE_CREDITS = 'No bridgable ecocredits found';
-
-export const DATE_FORMAT_STRING = 'MMM D, YYYY';

@@ -32,6 +32,7 @@ const StatusLabel = ({ status, label }: Props): JSX.Element => {
       label={label ?? status}
       variant={status}
       icon={renderIcon(status)}
+      sx={{ textTransform: 'capitalize' }}
     />
   );
 };

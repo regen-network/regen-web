@@ -2,6 +2,7 @@ export * from './BackgroundImgSection';
 export * from './BatchInfoGrid';
 export * from './BatchMetadata/BatchMetadata';
 export * from './BatchTotalsGrid';
+export * from './BridgeInfo';
 export * from './EcocreditsSection';
 export * from './EditProjectPageFooter';
 export * from './FeaturedSection';

@@ -36,6 +36,7 @@ export const BridgeFlow = ({
   const [txModalTitle, setTxModalTitle] = useState<string>('');
   const [txButtonTitle, setTxButtonTitle] = useState<string>('');
   const [txModalHeader, setTxModalHeader] = useState<string>('');
+  const [txModalDescription, setTxModalDescription] = useState<string>('');
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
@@ -49,6 +50,7 @@ export const BridgeFlow = ({
 
   const handleTxModalClose = (): void => {
     setTxModalTitle('');
+    setTxModalDescription('');
     setBatchToBridge(undefined);
     setError(undefined);
   };
@@ -56,6 +58,7 @@ export const BridgeFlow = ({
   const handleError = (): void => {
     setIsProcessingModalOpen(false);
     setTxModalTitle(BRIDGE_HEADER);
+    setTxModalDescription('');
   };
 
   const handleTxDelivered = async (
@@ -83,6 +86,7 @@ export const BridgeFlow = ({
     setTxModalHeader,
     setTxModalTitle,
     setTxButtonTitle,
+    setTxModalDescription,
   });
 
   useEffect(() => {

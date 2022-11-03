@@ -14,6 +14,7 @@ import {
   BRIDGE_BUTTON_TEXT,
   BRIDGE_HEADER,
   BRIDGE_TITLE,
+  BRIDGE_TX_DESCRIPTION,
 } from '../BridgeFlow.constants';
 
 type Props = {
@@ -25,6 +26,7 @@ type Props = {
   setTxModalHeader: UseStateSetter<string>;
   setTxModalTitle: UseStateSetter<string>;
   setTxButtonTitle: UseStateSetter<string>;
+  setTxModalDescription: UseStateSetter<string>;
 };
 
 type ReturnType = (values: BridgeFormValues) => Promise<void>;
@@ -38,6 +40,7 @@ const useCreditBridgeSubmit = ({
   setTxModalHeader,
   setTxModalTitle,
   setTxButtonTitle,
+  setTxModalDescription,
 }: Props): ReturnType => {
   const track = useTrack();
 
@@ -93,6 +96,7 @@ const useCreditBridgeSubmit = ({
           setTxModalHeader(BRIDGE_HEADER);
           setTxModalTitle(BRIDGE_TITLE);
           setTxButtonTitle(BRIDGE_BUTTON_TEXT);
+          setTxModalDescription(BRIDGE_TX_DESCRIPTION);
         }
         track('bridgeSuccess');
       };

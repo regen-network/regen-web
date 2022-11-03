@@ -113,6 +113,7 @@ export const BridgeFlow = ({
         txHash={txHash ?? ''}
         txHashUrl={txHashUrl}
         title={txModalHeader}
+        description={txModalDescription}
         cardTitle={txModalTitle}
         buttonTitle={txButtonTitle}
         cardItems={cardItems}

@@ -116,6 +116,7 @@ const useCreditBridgeSubmit = ({
       setTxButtonTitle,
       setTxModalHeader,
       setTxModalTitle,
+      setTxModalDescription,
       signAndBroadcast,
       track,
     ],

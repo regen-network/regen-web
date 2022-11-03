@@ -55,6 +55,9 @@ export const BridgableEcocreditsTable = ({
     BatchInfoWithBalance | undefined
   >();
 
+export const BridgableEcocreditsTable = ({
+  accountAddress,
+}: Props): JSX.Element => {
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
       page: 0,

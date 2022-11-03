@@ -18,6 +18,10 @@ type Params = {
   isBuyButtonDisabled: boolean;
   onSellButtonClick: () => void;
   onBuyButtonClick: () => void;
+  onChainProjectId?: string;
+  projectName?: string;
+  onChainCreditClassId?: string;
+  creditClassName?: string;
 };
 
 export const SellOrdersActionsBar = ({
@@ -25,6 +29,10 @@ export const SellOrdersActionsBar = ({
   isBuyButtonDisabled,
   onSellButtonClick,
   onBuyButtonClick,
+  onChainProjectId,
+  projectName,
+  onChainCreditClassId,
+  creditClassName,
 }: Params): JSX.Element => {
   const location = useLocation();
   const { track } = useAnalytics();
@@ -55,9 +63,16 @@ export const SellOrdersActionsBar = ({
             <ContainedButton
               startIcon={<CurrentCreditsIcon height="18px" width="18px" />}
               onClick={() => {
+                // if any of the values used in event data are undefined,
+                // then they are not included in the tracking data.
+                // this is a feature of the track API.
                 track('buy1', {
                   url: location.pathname,
-                  buttonId: 'stickyBar',
+                  buttonLocation: 'stickyNav',
+                  projectName,
+                  projectId: onChainProjectId,
+                  creditClassName,
+                  creditClassId: onChainCreditClassId,
                 });
                 onBuyButtonClick();
               }}

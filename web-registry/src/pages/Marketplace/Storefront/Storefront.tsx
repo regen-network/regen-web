@@ -355,8 +355,9 @@ export const Storefront = (): JSX.Element => {
                         onClick={async () => {
                           track('buy1', {
                             url: location.pathname,
-                            buttonId: 'sellOrderTable',
-                            projectName: project?.name,
+                            buttonLocation: 'sellOrderTable',
+                            projectName: normalizedSellOrders[i].project?.name,
+                            projectId: normalizedSellOrders[i].project?.id,
                           });
                           if (accountAddress) {
                             selectedSellOrderIdRef.current = Number(

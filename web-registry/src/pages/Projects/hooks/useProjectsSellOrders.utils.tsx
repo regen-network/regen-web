@@ -14,6 +14,11 @@ import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 import { UISellOrderInfo } from '../Projects.types';
 import { GECKO_PRICES } from './useProjectsSellOrders.types';
 
+const getPriceToDisplay = (min: string, max: string): string => {
+  if (min === max) return `$${min}`;
+  return `$${min}-${max}`;
+};
+
 type GetPurchaseInfoParams = {
   projectId: string;
   sellOrders: SellOrderInfoExtented[];
@@ -88,7 +93,9 @@ export const getPurchaseInfo = ({
 
   return {
     sellInfo: {
-      pricePerTon: hasPrice ? `$${priceMinDisplayed}-${priceMaxDisplayed}` : '',
+      pricePerTon: hasPrice
+        ? getPriceToDisplay(priceMinDisplayed, priceMaxDisplayed)
+        : '',
       creditsAvailable: roundFloatNumber(creditsAvailable, {
         decimals: QUANTITY_MAX_DECIMALS,
       }),

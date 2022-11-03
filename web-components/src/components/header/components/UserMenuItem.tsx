@@ -52,20 +52,7 @@ const UserMenuItem: React.FC<UserMenuItemProps> = ({
               alt="default avatar"
               src={avatar}
             />
-            <Box
-              sx={{
-                display: 'inline-block',
-                maxWidth: {
-                  xs: '130px',
-                  md: '100%',
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                },
-              }}
-            >
-              {address}
-            </Box>
+            {address}
           </Box>
         ),
         dropdownItems: [

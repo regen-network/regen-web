@@ -24,11 +24,6 @@ interface IconTabsProps {
   hideIndicator?: boolean;
 }
 
-// interface NoIndicatorTabsProps extends TabsProps {
-
-// }
-
-// const StyledTabs = styled(Tabs)<TabsProps>(({ theme }) => ({
 const StyledTabs = styled(Tabs, {
   shouldForwardProp: prop => prop !== 'hideIndicator',
 })<TabsProps & { hideIndicator: boolean }>(({ theme, hideIndicator }) => ({
@@ -60,6 +55,8 @@ const IconTabs: React.FC<IconTabsProps> = ({
         <StyledTabs
           value={value}
           onChange={handleChange}
+          variant="scrollable"
+          scrollButtons={false}
           aria-label="tabs"
           hideIndicator={hideIndicator}
         >

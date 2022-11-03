@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import LazyLoad from 'react-lazyload';
 import { useParams } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
@@ -13,43 +14,37 @@ import { BridgeTab } from './BridgeTab/BridgeTab';
 import { PortfolioHeader } from './EcocreditsByAccount.Header';
 import { PortfolioTab } from './PortfolioTab/EcocreditsByAccount.PortfolioTab';
 
-// const tabsStyles = {
-//   tab: {
-//     outer: {
-//       // mt: { xs: '10px', sm: '15px', lg: '20px' },
-//       mx: { xs: '6px', sm: '8px', lg: '10px' },
-//     } as SxProps,
-//     // inner: { mb: { xs: '6px', sm: '9px', lg: '12px' }, ml: 0 } as SxProps,
-//   },
-//   panel: { inner: { p: 0 } as SxProps },
-// };
-
 export const EcocreditsByAccount = (): JSX.Element => {
   const { accountAddress } = useParams<{ accountAddress: string }>();
   const theme = useTheme();
 
-  const tabs: IconTabProps[] = [
-    {
-      label: 'Portfolio',
-      icon: (
-        <CreditsIcon color={theme.palette.secondary.main} fontSize="small" />
-      ),
-      content: (
-        <LazyLoad>{<PortfolioTab accountAddress={accountAddress} />}</LazyLoad>
-      ),
-    },
-    {
-      label: 'Bridge',
-      icon: <BridgeIcon />,
-      content: (
-        <LazyLoad>
-          <Flex sx={{ pt: 10, pb: [21.25, 28.28] }}>
-            <BridgeTab />
-          </Flex>
-        </LazyLoad>
-      ),
-    },
-  ];
+  const tabs: IconTabProps[] = useMemo(
+    () => [
+      {
+        label: 'Portfolio',
+        icon: (
+          <CreditsIcon color={theme.palette.secondary.main} fontSize="small" />
+        ),
+        content: (
+          <LazyLoad>
+            {<PortfolioTab accountAddress={accountAddress} />}
+          </LazyLoad>
+        ),
+      },
+      {
+        label: 'Bridge',
+        icon: <BridgeIcon />,
+        content: (
+          <LazyLoad>
+            <Flex sx={{ pt: 10, pb: [21.25, 28.28] }}>
+              <BridgeTab />
+            </Flex>
+          </LazyLoad>
+        ),
+      },
+    ],
+    [accountAddress, theme.palette.secondary.main],
+  );
 
   return (
     <Box sx={{ backgroundColor: 'grey.50' }}>
@@ -60,11 +55,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
         sx={{ title: { pl: 3 } }}
       >
         <PortfolioHeader accountAddress={accountAddress} />
-        <IconTabs
-          aria-label="public profile tabs"
-          tabs={tabs}
-          // sxs={tabsStyles}
-        />
+        <IconTabs aria-label="public profile tabs" tabs={tabs} />
       </Section>
     </Box>
   );

@@ -97,9 +97,7 @@ export const BridgeInfo = (): JSX.Element => {
           sm={12}
           md={12}
           lg={2}
-          sx={[
-            theme => ({ minHeight: { xs: theme.spacing(61.2), lg: 'auto' } }),
-          ]}
+          sx={theme => ({ minHeight: { xs: theme.spacing(61.2), lg: 'auto' } })}
         />
       </Grid>
     </Card>

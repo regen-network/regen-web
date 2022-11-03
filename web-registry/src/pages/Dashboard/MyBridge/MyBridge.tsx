@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { tabsStyles } from 'styles/tabs';
 
 import { Flex } from 'web-components/lib/components/box';
@@ -16,21 +17,24 @@ import {
 export const MyBridge = (): JSX.Element => {
   const { wallet } = useLedger();
 
-  const tabs: IconTabProps[] = [
-    {
-      label: 'Bridgable ecocredits',
-      content: <BridgableEcocreditsTable accountAddress={wallet?.address} />,
-    },
-    {
-      label: 'Bridged ecocredits',
-      content: (
-        <BridgedEcocreditsTable
-          privateAccess
-          accountAddress={wallet?.address}
-        />
-      ),
-    },
-  ];
+  const tabs: IconTabProps[] = useMemo(
+    () => [
+      {
+        label: 'Bridgable ecocredits',
+        content: <BridgableEcocreditsTable accountAddress={wallet?.address} />,
+      },
+      {
+        label: 'Bridged ecocredits',
+        content: (
+          <BridgedEcocreditsTable
+            privateAccess
+            accountAddress={wallet?.address}
+          />
+        ),
+      },
+    ],
+    [wallet?.address],
+  );
 
   return (
     <Flex flexDirection="column" sx={{ width: '100%' }}>

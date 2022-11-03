@@ -15,6 +15,14 @@ import { client as sanityClient } from '../sanity';
 import useEcocreditQuery from './useEcocreditQuery';
 import useQueryBalances from './useQueryBalances';
 
+const hasBatchBalance = (batchWithBalance: BatchInfoWithBalance): boolean => {
+  return (
+    batchWithBalance?.balance?.tradableAmount !== '0' ||
+    batchWithBalance.balance.retiredAmount !== '0' ||
+    batchWithBalance.balance.escrowedAmount !== '0'
+  );
+};
+
 type Props = {
   address?: string;
   paginationParams?: TablePaginationParams;
@@ -37,6 +45,7 @@ export default function useEcocredits({ address, paginationParams }: Props): {
   const { balancesResponse, fetchBalances } = useQueryBalances({
     address,
   });
+
   const { data: sanityCreditClassData } = useAllCreditClassQuery({
     client: sanityClient,
   });
@@ -49,20 +58,22 @@ export default function useEcocredits({ address, paginationParams }: Props): {
       sanityCreditClassData &&
       !credits
     ) {
-      const initialCredits = balancesResponse?.balances.map(balance => {
-        const batch = batchesResponse?.data?.batches.find(
-          batch => batch.denom === balance.batchDenom,
-        ) as BatchInfo;
+      const initialCredits = balancesResponse?.balances
+        .map(balance => {
+          const batch = batchesResponse?.data?.batches.find(
+            batch => batch.denom === balance.batchDenom,
+          ) as BatchInfo;
 
-        return {
-          ...batch,
-          balance,
-          className: '',
-          classId: '',
-          projectName: '',
-          projectLocation: '',
-        };
-      });
+          return {
+            ...batch,
+            balance,
+            className: '',
+            classId: '',
+            projectName: '',
+            projectLocation: '',
+          };
+        })
+        .filter(hasBatchBalance);
 
       if (initialCredits) {
         setCredits(initialCredits);

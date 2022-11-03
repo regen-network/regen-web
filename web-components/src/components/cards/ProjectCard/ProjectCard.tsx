@@ -232,6 +232,7 @@ export function ProjectCard({
                       event.stopPropagation();
                       track('buy1', {
                         url: location.pathname,
+                        cardType: 'project',
                         buttonLocation: 'projectCard',
                         projectName: name,
                         projectId: id,

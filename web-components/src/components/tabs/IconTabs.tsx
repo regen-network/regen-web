@@ -21,16 +21,25 @@ interface IconTabsProps {
       inner?: SxProps<Theme>;
     };
   };
+  hideIndicator?: boolean;
 }
 
-const StyledTabs = styled(Tabs)<TabsProps>(({ theme }) => ({
+const StyledTabs = styled(Tabs, {
+  shouldForwardProp: prop => prop !== 'hideIndicator',
+})<TabsProps & { hideIndicator: boolean }>(({ theme, hideIndicator }) => ({
   '& .MuiTabs-indicator': {
+    display: hideIndicator && 'none',
     backgroundColor: theme.palette.secondary.main,
     height: '3px',
   },
 }));
 
-const IconTabs: React.FC<IconTabsProps> = ({ tabs, size, sxs }) => {
+const IconTabs: React.FC<IconTabsProps> = ({
+  tabs,
+  size,
+  sxs,
+  hideIndicator = false,
+}) => {
   const [value, setValue] = useState(0);
 
   const handleChange = (
@@ -43,7 +52,14 @@ const IconTabs: React.FC<IconTabsProps> = ({ tabs, size, sxs }) => {
   return (
     <div>
       <Box sx={{ ...sxs?.tab?.outer }}>
-        <StyledTabs value={value} onChange={handleChange} aria-label="tabs">
+        <StyledTabs
+          value={value}
+          onChange={handleChange}
+          variant="scrollable"
+          scrollButtons={false}
+          aria-label="tabs"
+          hideIndicator={hideIndicator}
+        >
           {tabs.map((tab, index) => (
             <IconTab
               key={`tab-${index}`}

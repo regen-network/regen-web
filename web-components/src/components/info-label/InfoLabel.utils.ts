@@ -11,4 +11,7 @@ export const getInfoLabelColorMapping = ({
 }: GetInfoLabelColorParams): Record<InfoLabelVariant, string> => ({
   default: theme.palette.info.light,
   success: theme.palette.secondary.light,
+  complete: theme.palette.secondary.light,
+  pending: theme.palette.warning.contrastText,
+  error: theme.palette.error.contrastText,
 });

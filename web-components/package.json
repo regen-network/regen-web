@@ -1,8 +1,10 @@
 {
-  "name": "web-components",
-  "version": "0.0.0",
-  "private": true,
-  "main": "build/index.js",
+  "name": "@regen-network/web-components",
+  "version": "0.1.0",
+  "files": [
+    "lib/",
+    "README.md"
+  ],
   "scripts": {
     "remove-previous-files": "shx rm -rf ./lib/* ./tsconfig.tsbuildinfo",
     "copy-assets": "cp ./src/theme/fonts.css ./lib/theme/fonts.css && cp -R ./src/theme/assets ./lib/theme/",
@@ -83,5 +85,20 @@
     "react-dom": "17.0.2",
     "@types/react": "17.0.2",
     "@types/react-dom": "17.0.2"
-  }
+  },
+  "description": "See main [README.md](../README.md)",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/regen-network/regen-web.git#master"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/regen-network/regen-web/issues"
+  },
+  "homepage": "https://github.com/regen-network/regen-web/tree/master#readme"
 }

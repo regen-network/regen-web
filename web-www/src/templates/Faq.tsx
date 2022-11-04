@@ -1,8 +1,7 @@
 import React from 'react';
+import { BlockContent } from '@regen-network/web-components/lib/components/block-content';
+import { FAQProps } from '@regen-network/web-components/lib/components/faq';
 import { graphql, PageProps, useStaticQuery } from 'gatsby';
-
-import { BlockContent } from 'web-components/lib/components/block-content';
-import { FAQProps } from 'web-components/lib/components/faq';
 
 import Faq from '../components/Faq';
 import { FaqPageQuery } from '../generated/graphql';

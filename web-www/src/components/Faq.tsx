@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@mui/styles';
+import FAQ, {
+  FAQProps,
+} from '@regen-network/web-components/lib/components/faq';
+import Section from '@regen-network/web-components/lib/components/section';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import { navigate, PageProps } from 'gatsby';
-
-import FAQ, { FAQProps } from 'web-components/lib/components/faq';
-import Section from 'web-components/lib/components/section';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import SEO from '../components/seo';
 

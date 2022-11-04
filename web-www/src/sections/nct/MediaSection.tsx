@@ -1,10 +1,9 @@
 import React from 'react';
 import type { Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import ArticleCard from '@regen-network/web-components/lib/components/cards/ArticleCard';
+import { SliderSection } from '@regen-network/web-components/lib/components/section/SliderSection';
 import { graphql, useStaticQuery } from 'gatsby';
-
-import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
-import { SliderSection } from 'web-components/lib/components/section/SliderSection';
 
 import type { NctMediaSectionQuery } from '../../generated/graphql';
 import { sanityMediaToArticleCardProps } from '../../util/sanity-transforms';

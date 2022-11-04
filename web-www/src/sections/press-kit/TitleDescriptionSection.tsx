@@ -1,10 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
+import Section from '@regen-network/web-components/lib/components/section';
+import { TitleBody } from '@regen-network/web-components/lib/components/text-layouts';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import { graphql, useStaticQuery } from 'gatsby';
-
-import Section from 'web-components/lib/components/section';
-import { TitleBody } from 'web-components/lib/components/text-layouts';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { PresskitTitleDescriptionSectionQuery } from '../../generated/graphql';
 

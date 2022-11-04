@@ -1,13 +1,12 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import { makeStyles } from '@mui/styles';
+import Section from '@regen-network/web-components/lib/components/section';
+import { TitleBody } from '@regen-network/web-components/lib/components/text-layouts';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
 import SanityImage from 'gatsby-plugin-sanity-image';
-
-import Section from 'web-components/lib/components/section';
-import { TitleBody } from 'web-components/lib/components/text-layouts';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { DevLedgerSectionQuery } from '../../generated/graphql';
 

@@ -2,16 +2,19 @@ import React from 'react';
 import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
+import ContainedButton from '@regen-network/web-components/lib/components/buttons/ContainedButton';
+import Section from '@regen-network/web-components/lib/components/section';
+import Tooltip from '@regen-network/web-components/lib/components/tooltip';
+import {
+  Body,
+  Label,
+  Title,
+} from '@regen-network/web-components/lib/components/typography';
+import type { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import type { FluidObject } from 'gatsby-image';
 import SanityImage from 'gatsby-plugin-sanity-image';
-
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import Section from 'web-components/lib/components/section';
-import Tooltip from 'web-components/lib/components/tooltip';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
-import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 import type { HomeMarketPlaceSectionQuery } from '../../generated/graphql';
 

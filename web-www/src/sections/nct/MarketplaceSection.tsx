@@ -1,11 +1,13 @@
 import React from 'react';
 import { Box } from '@mui/material';
+import Section from '@regen-network/web-components/lib/components/section';
+import {
+  Body,
+  Title,
+} from '@regen-network/web-components/lib/components/typography';
+import { BlockContent } from '@regen-network/web-components/lib/components/block-content';
 import { graphql, useStaticQuery } from 'gatsby';
 import SanityImage from 'gatsby-plugin-sanity-image';
-
-import Section from 'web-components/lib/components/section';
-import { Body, Title } from 'web-components/lib/components/typography';
-import { BlockContent } from 'web-components/src/components/block-content';
 
 import type { NctMarketplaceSectionQuery } from '../../generated/graphql';
 

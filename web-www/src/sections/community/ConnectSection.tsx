@@ -1,12 +1,11 @@
 import React from 'react';
 import { useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import DiscordIcon from '@regen-network/web-components/lib/components/icons/social/DiscordIcon';
+import TelegramIcon from '@regen-network/web-components/lib/components/icons/social/TelegramIcon';
+import TwitterIcon from '@regen-network/web-components/lib/components/icons/social/TwitterIcon';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import { graphql, useStaticQuery } from 'gatsby';
-
-import DiscordIcon from 'web-components/lib/components/icons/social/DiscordIcon';
-import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
-import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import ConnectSection, {
   IconLabelProps,

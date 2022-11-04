@@ -1,20 +1,19 @@
 import React from 'react';
 import { Box, Grid, LinearProgress, Theme } from '@mui/material';
 import { createStyles, makeStyles, withStyles } from '@mui/styles';
-import { graphql, useStaticQuery } from 'gatsby';
-import Img, { FluidObject } from 'gatsby-image';
-import SanityImage from 'gatsby-plugin-sanity-image';
-
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import Section from 'web-components/lib/components/section';
+import ContainedButton from '@regen-network/web-components/lib/components/buttons/ContainedButton';
+import Section from '@regen-network/web-components/lib/components/section';
 import {
   Body,
   Label,
   Subtitle,
   Title,
-} from 'web-components/lib/components/typography';
-import { getFormattedDate } from 'web-components/lib/utils/format';
-import { BlockContent } from 'web-components/src/components/block-content';
+} from '@regen-network/web-components/lib/components/typography';
+import { getFormattedDate } from '@regen-network/web-components/lib/utils/format';
+import { BlockContent } from '@regen-network/web-components/lib/components/block-content';
+import { graphql, useStaticQuery } from 'gatsby';
+import Img, { FluidObject } from 'gatsby-image';
+import SanityImage from 'gatsby-plugin-sanity-image';
 
 import {
   MainnetLaunchInfoSectionQuery,

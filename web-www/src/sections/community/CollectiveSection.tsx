@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import ContainedButton from '@regen-network/web-components/lib/components/buttons/ContainedButton';
+import Modal from '@regen-network/web-components/lib/components/modal';
+import Section from '@regen-network/web-components/lib/components/section';
+import {
+  Body,
+  Title,
+} from '@regen-network/web-components/lib/components/typography';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
+import { BlockContent } from '@regen-network/web-components/lib/components/block-content';
 import clsx from 'clsx';
 import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import { FluidObject } from 'gatsby-image';
-
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import Modal from 'web-components/lib/components/modal';
-import Section from 'web-components/lib/components/section';
-import { Body, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { BlockContent } from 'web-components/src/components/block-content';
 
 import { CommunityCollectiveSectionQuery } from '../../generated/graphql';
 

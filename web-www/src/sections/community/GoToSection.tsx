@@ -1,10 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
+import ImageItem from '@regen-network/web-components/lib/components/image-item';
+import Section from '@regen-network/web-components/lib/components/section';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import { graphql, useStaticQuery } from 'gatsby';
-
-import ImageItem from 'web-components/lib/components/image-item';
-import Section from 'web-components/lib/components/section';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { CommunityGoToSectionQuery } from '../../generated/graphql';
 

@@ -1,10 +1,9 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
+import { Body } from '@regen-network/web-components/lib/components/typography';
+import type { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import Img, { FluidObject } from 'gatsby-image';
-
-import { Body } from 'web-components/lib/components/typography';
-import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 import BackgroundSection from '../../../components/BackgroundSection';
 import type {

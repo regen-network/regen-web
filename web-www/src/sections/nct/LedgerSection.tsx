@@ -1,14 +1,17 @@
 import React from 'react';
 import { Box } from '@mui/material';
+import OutlinedButton from '@regen-network/web-components/lib/components/buttons/OutlinedButton';
+import Section from '@regen-network/web-components/lib/components/section';
+import {
+  Body,
+  Label,
+  Title,
+} from '@regen-network/web-components/lib/components/typography';
+import { BlockContent } from '@regen-network/web-components/lib/components/block-content';
 import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import { FluidObject } from 'gatsby-image';
 import SanityImage from 'gatsby-plugin-sanity-image';
-
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import Section from 'web-components/lib/components/section';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
-import { BlockContent } from 'web-components/src/components/block-content';
 
 import type { NctLedgerSectionQuery } from '../../generated/graphql';
 

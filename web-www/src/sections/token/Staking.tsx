@@ -2,11 +2,14 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
 
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import Section from 'web-components/lib/components/section';
-import { Body, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { BlockContent } from 'web-components/src/components/block-content';
+import ContainedButton from '@regen-network/web-components/lib/components/buttons/ContainedButton';
+import Section from '@regen-network/web-components/lib/components/section';
+import {
+  Body,
+  Title,
+} from '@regen-network/web-components/lib/components/typography';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
+import { BlockContent } from '@regen-network/web-components/lib/components/block-content';
 
 import { TokenStakingQuery } from '../../generated/graphql';
 

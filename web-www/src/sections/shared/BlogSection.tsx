@@ -1,12 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
+import { BlogPostProps } from '@regen-network/web-components/lib/components/blog-post';
+import Section from '@regen-network/web-components/lib/components/section';
+import BlogPosts from '@regen-network/web-components/lib/components/sliders/BlogPosts';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import { graphql, useStaticQuery } from 'gatsby';
 import SanityImage from 'gatsby-plugin-sanity-image';
-
-import { BlogPostProps } from 'web-components/lib/components/blog-post';
-import Section from 'web-components/lib/components/section';
-import BlogPosts from 'web-components/lib/components/sliders/BlogPosts';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { SharedBlogSectionQuery } from '../../generated/graphql';
 

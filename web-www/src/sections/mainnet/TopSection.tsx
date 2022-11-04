@@ -1,10 +1,9 @@
 import React from 'react';
 import { Box } from '@mui/material';
+import Countdown from '@regen-network/web-components/lib/components/countdown';
+import { Title } from '@regen-network/web-components/lib/components/typography';
 import { graphql, useStaticQuery } from 'gatsby';
 import type { FluidObject } from 'gatsby-image';
-
-import Countdown from 'web-components/lib/components/countdown';
-import { Title } from 'web-components/lib/components/typography';
 
 import BackgroundSection from '../../components/BackgroundSection';
 import type { MainnetTopSectionQuery } from '../../generated/graphql';

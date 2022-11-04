@@ -1,8 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import { graphql, useStaticQuery } from 'gatsby';
-
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import BackgroundSection from '../../components/BackgroundSection';
 import { DevelopersTopSectionQuery } from '../../generated/graphql';

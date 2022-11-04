@@ -1,8 +1,7 @@
 import React from 'react';
+import ContainedButton from '@regen-network/web-components/lib/components/buttons/ContainedButton';
+import FixedFooter from '@regen-network/web-components/lib/components/fixed-footer';
 import { graphql, PageProps, useStaticQuery } from 'gatsby';
-
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import FixedFooter from 'web-components/lib/components/fixed-footer';
 
 import SEO from '../components/seo';
 import { MainnetPageQuery } from '../generated/graphql';

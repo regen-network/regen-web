@@ -1,12 +1,14 @@
 import React from 'react';
 import { Box, Grid, Link } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import {
+  Body,
+  Title,
+} from '@regen-network/web-components/lib/components/typography';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
+import { Center } from '@regen-network/web-components/lib/components/box';
 import clsx from 'clsx';
 import { FluidObject } from 'gatsby-image';
-
-import { Body, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { Center } from 'web-components/src/components/box';
 
 import BackgroundSection from './BackgroundSection';
 

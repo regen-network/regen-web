@@ -4,7 +4,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import { FluidObject } from 'gatsby-image';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 
 import TokenPool from './TokenPool';
 

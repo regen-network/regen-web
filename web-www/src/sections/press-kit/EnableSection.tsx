@@ -1,12 +1,14 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
+import {
+  Body,
+  Title,
+} from '@regen-network/web-components/lib/components/typography';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
+import { BlockContent } from '@regen-network/web-components/lib/components/block-content';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
-
-import { Body, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { BlockContent } from 'web-components/src/components/block-content';
 
 import { PresskitEnableSectionQuery } from '../../generated/graphql';
 

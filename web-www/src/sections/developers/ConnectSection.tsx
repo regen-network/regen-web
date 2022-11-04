@@ -1,14 +1,13 @@
 import React from 'react';
 import { useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import GithubIcon from '@regen-network/web-components/lib/components/icons/social/GithubIcon';
+import MediumIcon from '@regen-network/web-components/lib/components/icons/social/MediumIcon';
+import TelegramIcon from '@regen-network/web-components/lib/components/icons/social/TelegramIcon';
+import TwitterIcon from '@regen-network/web-components/lib/components/icons/social/TwitterIcon';
+import WhitepaperIcon from '@regen-network/web-components/lib/components/icons/WhitepaperIcon';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import { graphql, useStaticQuery } from 'gatsby';
-
-import GithubIcon from 'web-components/lib/components/icons/social/GithubIcon';
-import MediumIcon from 'web-components/lib/components/icons/social/MediumIcon';
-import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
-import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
-import WhitepaperIcon from 'web-components/lib/components/icons/WhitepaperIcon';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import ConnectSection, {
   IconLabelProps,

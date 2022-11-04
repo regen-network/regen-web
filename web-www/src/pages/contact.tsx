@@ -1,26 +1,28 @@
 import React from 'react';
 import { Box, Grid, useMediaQuery, useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import Banner from '@regen-network/web-components/lib/components/banner';
+import ContainedButton from '@regen-network/web-components/lib/components/buttons/ContainedButton';
+import Card from '@regen-network/web-components/lib/components/cards/Card';
+import SelectTextField from '@regen-network/web-components/lib/components/inputs/SelectTextField';
+import TextField from '@regen-network/web-components/lib/components/inputs/TextField';
+import {
+  invalidEmailMessage,
+  requiredMessage,
+  validateEmail,
+} from '@regen-network/web-components/lib/components/inputs/validation';
+import Section from '@regen-network/web-components/lib/components/section';
+import {
+  Body,
+  Title,
+} from '@regen-network/web-components/lib/components/typography';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
+import { BlockContent } from '@regen-network/web-components/lib/components/block-content';
 import axios from 'axios';
 import cx from 'clsx';
 import { Field, Form, Formik } from 'formik';
 import { graphql, PageProps, useStaticQuery } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
-
-import Banner from 'web-components/lib/components/banner';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import Card from 'web-components/lib/components/cards/Card';
-import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
-import TextField from 'web-components/lib/components/inputs/TextField';
-import {
-  invalidEmailMessage,
-  requiredMessage,
-  validateEmail,
-} from 'web-components/lib/components/inputs/validation';
-import Section from 'web-components/lib/components/section';
-import { Body, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { BlockContent } from 'web-components/src/components/block-content';
 
 import SEO from '../components/seo';
 import type { ContactPageQuery } from '../generated/graphql';

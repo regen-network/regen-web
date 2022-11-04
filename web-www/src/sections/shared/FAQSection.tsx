@@ -1,13 +1,12 @@
 import React, { ReactChild } from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
+import ContainedButton from '@regen-network/web-components/lib/components/buttons/ContainedButton';
+import Section from '@regen-network/web-components/lib/components/section';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import clsx from 'clsx';
 import { Link } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import { FluidObject } from 'gatsby-image';
-
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import Section from 'web-components/lib/components/section';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 interface FAQSectionProps {
   category?: string;

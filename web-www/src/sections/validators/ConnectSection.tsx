@@ -1,12 +1,11 @@
 import React from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
+import RegenLogoIcon from '@regen-network/web-components/lib/components/icons/RegenLogoIcon';
+import DiscordIcon from '@regen-network/web-components/lib/components/icons/social/DiscordIcon';
+import TelegramIcon from '@regen-network/web-components/lib/components/icons/social/TelegramIcon';
+import WhitepaperIcon from '@regen-network/web-components/lib/components/icons/WhitepaperIcon';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import { graphql, useStaticQuery } from 'gatsby';
-
-import RegenLogoIcon from 'web-components/lib/components/icons/RegenLogoIcon';
-import DiscordIcon from 'web-components/lib/components/icons/social/DiscordIcon';
-import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
-import WhitepaperIcon from 'web-components/lib/components/icons/WhitepaperIcon';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import ConnectSection, {
   IconLabelProps,

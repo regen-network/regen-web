@@ -2,13 +2,15 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
+import GreenMediaCard from '@regen-network/web-components/lib/components/cards/GreenMediaCard';
+import ResponsiveSlider from '@regen-network/web-components/lib/components/sliders/ResponsiveSlider';
+import { TitleBody } from '@regen-network/web-components/lib/components/text-layouts';
+import {
+  Body,
+  Title,
+} from '@regen-network/web-components/lib/components/typography';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import { graphql, useStaticQuery } from 'gatsby';
-
-import GreenMediaCard from 'web-components/lib/components/cards/GreenMediaCard';
-import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import { TitleBody } from 'web-components/lib/components/text-layouts';
-import { Body, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import BackgroundSection from '../../components/BackgroundSection';
 import { ValidatorsWhoSectionQuery } from '../../generated/graphql';

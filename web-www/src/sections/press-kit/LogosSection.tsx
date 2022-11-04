@@ -1,12 +1,11 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
+import ContainedButton from '@regen-network/web-components/lib/components/buttons/ContainedButton';
+import RegenIcon from '@regen-network/web-components/lib/components/icons/RegenIcon';
+import Section from '@regen-network/web-components/lib/components/section';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import { graphql, useStaticQuery } from 'gatsby';
-
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import RegenIcon from 'web-components/lib/components/icons/RegenIcon';
-import Section from 'web-components/lib/components/section';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { PresskitLogosSectionQuery } from '../../generated/graphql';
 

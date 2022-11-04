@@ -2,12 +2,11 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
+import Section from '@regen-network/web-components/lib/components/section';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
+import { BlockContent } from '@regen-network/web-components/lib/components/block-content';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
-
-import Section from 'web-components/lib/components/section';
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { BlockContent } from 'web-components/src/components/block-content';
 
 import {
   CaseStudyFundingSectionQuery,

@@ -2,11 +2,14 @@ import React from 'react';
 import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
+import {
+  Body,
+  Label,
+  Title,
+} from '@regen-network/web-components/lib/components/typography';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import clsx from 'clsx';
 import Img, { FluidObject } from 'gatsby-image';
-
-import { Body, Label, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import BackgroundSection from '../../../components/BackgroundSection';
 import { SanityCaseStudyBottomSection } from '../../../generated/graphql';

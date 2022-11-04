@@ -1,14 +1,13 @@
 import React from 'react';
 import { useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import ImpactCard from '@regen-network/web-components/lib/components/cards/ImpactCard';
+import Section from '@regen-network/web-components/lib/components/section';
+import ResponsiveSlider from '@regen-network/web-components/lib/components/sliders/ResponsiveSlider';
+import { TitleBody } from '@regen-network/web-components/lib/components/text-layouts';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
+import { BlockContent } from '@regen-network/web-components/lib/components/block-content';
 import { graphql, useStaticQuery } from 'gatsby';
-
-import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
-import Section from 'web-components/lib/components/section';
-import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import { TitleBody } from 'web-components/lib/components/text-layouts';
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { BlockContent } from 'web-components/src/components/block-content';
 
 import { ScienceTitleDescriptionSectionQuery } from '../../generated/graphql';
 

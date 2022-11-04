@@ -1,12 +1,14 @@
 import React from 'react';
 import LazyLoad from 'react-lazyload';
 import { Box, styled, SxProps, useTheme } from '@mui/material';
-
-import GithubIcon from 'web-components/lib/components/icons/social/GithubIcon';
-import LinkedInIcon from 'web-components/lib/components/icons/social/LinkedInIcon';
-import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
-import { Label, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import GithubIcon from '@regen-network/web-components/lib/components/icons/social/GithubIcon';
+import LinkedInIcon from '@regen-network/web-components/lib/components/icons/social/LinkedInIcon';
+import TwitterIcon from '@regen-network/web-components/lib/components/icons/social/TwitterIcon';
+import {
+  Label,
+  Title,
+} from '@regen-network/web-components/lib/components/typography';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 
 import { SanityRegenTeamMember } from '../../generated/graphql';
 

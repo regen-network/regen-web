@@ -3,11 +3,11 @@ import { useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
 
-import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
-import Section from 'web-components/lib/components/section';
-import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import { Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import ArticleCard from '@regen-network/web-components/lib/components/cards/ArticleCard';
+import Section from '@regen-network/web-components/lib/components/section';
+import ResponsiveSlider from '@regen-network/web-components/lib/components/sliders/ResponsiveSlider';
+import { Title } from '@regen-network/web-components/lib/components/typography';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 
 import { TokenMediaSectionQuery } from '../../generated/graphql';
 

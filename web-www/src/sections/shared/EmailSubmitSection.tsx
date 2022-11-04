@@ -1,13 +1,15 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
+import NewsletterForm from '@regen-network/web-components/lib/components/form/NewsletterForm';
+import {
+  Label,
+  Title,
+} from '@regen-network/web-components/lib/components/typography';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
+import { BlockContent } from '@regen-network/web-components/lib/components/block-content';
 import clsx from 'clsx';
 import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
-
-import NewsletterForm from 'web-components/lib/components/form/NewsletterForm';
-import { Label, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { BlockContent } from 'web-components/src/components/block-content';
 
 import { EmailSubmitSectionQuery } from '../../generated/graphql';
 

@@ -1,8 +1,7 @@
 import React from 'react';
+import Section from '@regen-network/web-components/lib/components/section';
+import { TitleBody } from '@regen-network/web-components/lib/components/text-layouts';
 import { graphql, useStaticQuery } from 'gatsby';
-
-import Section from 'web-components/src/components/section';
-import { TitleBody } from 'web-components/src/components/text-layouts';
 
 import { FundThesisSectionQuery } from '../../generated/graphql';
 

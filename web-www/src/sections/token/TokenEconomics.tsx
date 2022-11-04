@@ -3,10 +3,13 @@ import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 import { graphql, useStaticQuery } from 'gatsby';
 
-import Section from 'web-components/lib/components/section';
-import { Body, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { BlockContent } from 'web-components/src/components/block-content';
+import Section from '@regen-network/web-components/lib/components/section';
+import {
+  Body,
+  Title,
+} from '@regen-network/web-components/lib/components/typography';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
+import { BlockContent } from '@regen-network/web-components/lib/components/block-content';
 
 import { TokenEconomicsQuery } from '../../generated/graphql';
 

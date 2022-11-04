@@ -1,13 +1,12 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import ArticleCard from '@regen-network/web-components/lib/components/cards/ArticleCard';
+import SelectTextField from '@regen-network/web-components/lib/components/inputs/SelectTextField';
+import Section from '@regen-network/web-components/lib/components/section';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import { Field, Form, Formik } from 'formik';
 import { graphql, PageProps, useStaticQuery } from 'gatsby';
-
-import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
-import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
-import Section from 'web-components/lib/components/section';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import SEO from '../components/seo';
 import { MediaPageQuery, SanityMedia } from '../generated/graphql';

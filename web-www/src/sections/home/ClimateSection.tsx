@@ -3,13 +3,16 @@ import ReactHtmlParser from 'react-html-parser';
 import { Box, useTheme } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from '@mui/styles';
+import Card from '@regen-network/web-components/lib/components/cards/Card';
+import {
+  Body,
+  Label,
+  Title,
+} from '@regen-network/web-components/lib/components/typography';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import clsx from 'clsx';
 import { graphql, useStaticQuery } from 'gatsby';
 import SanityImage from 'gatsby-plugin-sanity-image';
-
-import Card from 'web-components/lib/components/cards/Card';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { HomeClimateSectionQuery } from '../../generated/graphql';
 

@@ -1,15 +1,18 @@
 import React from 'react';
 import { Box, Link } from '@mui/material';
+import ContainedButton from '@regen-network/web-components/lib/components/buttons/ContainedButton';
+import SmallArrowIcon from '@regen-network/web-components/lib/components/icons/SmallArrowIcon';
+import Section from '@regen-network/web-components/lib/components/section';
+import {
+  Body,
+  Label,
+  Title,
+} from '@regen-network/web-components/lib/components/typography';
+import { BlockContent } from '@regen-network/web-components/lib/components/block-content';
 import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import type { FluidObject } from 'gatsby-image';
 import SanityImage from 'gatsby-plugin-sanity-image';
-
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
-import Section from 'web-components/lib/components/section';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
-import { BlockContent } from 'web-components/src/components/block-content';
 
 import type { NctOverviewSectionQuery } from '../../generated/graphql';
 

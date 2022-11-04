@@ -6,9 +6,8 @@
  */
 
 import React from 'react';
+import SEO from '@regen-network/web-components/lib/components/seo';
 import { graphql, useStaticQuery } from 'gatsby';
-
-import SEO from 'web-components/lib/components/seo';
 
 interface Props {
   description?: string;

@@ -1,15 +1,18 @@
 import React from 'react';
 import { Box, Grid, SxProps, useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import MediaCard from '@regen-network/web-components/lib/components/cards/MediaCard';
+import Section from '@regen-network/web-components/lib/components/section';
+import {
+  Body,
+  Label,
+  Title,
+} from '@regen-network/web-components/lib/components/typography';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
+import { BlockContent } from '@regen-network/web-components/lib/components/block-content';
 import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import { FluidObject } from 'gatsby-image';
-
-import MediaCard from 'web-components/lib/components/cards/MediaCard';
-import Section from 'web-components/lib/components/section';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { BlockContent } from 'web-components/src/components/block-content';
 
 import {
   CaseStudyAboutSectionQuery,

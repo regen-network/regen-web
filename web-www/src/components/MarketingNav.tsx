@@ -1,12 +1,13 @@
 import React from 'react';
 import { useTheme } from '@mui/styles';
+import Header, {
+  HeaderColors,
+} from '@regen-network/web-components/lib/components/header';
+import { HeaderDropdownItemProps } from '@regen-network/web-components/lib/components/header/components/HeaderDropdownItems';
+import { HeaderMenuItem } from '@regen-network/web-components/lib/components/header/components/HeaderMenuHover/HeaderMenuHover';
+import { NavLink } from '@regen-network/web-components/lib/components/header/components/NavLink';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import { PageProps } from 'gatsby';
-
-import Header, { HeaderColors } from 'web-components/lib/components/header';
-import { HeaderDropdownItemProps } from 'web-components/lib/components/header/components/HeaderDropdownItems';
-import { HeaderMenuItem } from 'web-components/lib/components/header/components/HeaderMenuHover/HeaderMenuHover';
-import { NavLink } from 'web-components/lib/components/header/components/NavLink';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 // import RegistryIcon from '../../static/media/svgs/nav-dropdown/registry.svg';
 import BuyersIcon from '../../static/media/svgs/nav-dropdown/buyers.svg';

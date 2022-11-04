@@ -1,13 +1,15 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
+import { ResourcesCardProps } from '@regen-network/web-components/lib/components/cards/ResourcesCard';
+import Section from '@regen-network/web-components/lib/components/section';
+import ResourceCardsSlider from '@regen-network/web-components/lib/components/sliders/ResourceCards';
+import {
+  Body,
+  Title,
+} from '@regen-network/web-components/lib/components/typography';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
+import { BlockContent } from '@regen-network/web-components/lib/components/block-content';
 import { graphql, useStaticQuery } from 'gatsby';
-
-import { ResourcesCardProps } from 'web-components/lib/components/cards/ResourcesCard';
-import Section from 'web-components/lib/components/section';
-import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
-import { Body, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { BlockContent } from 'web-components/src/components/block-content';
 
 import { CommunityCollaborateSectionQuery } from '../../generated/graphql';
 

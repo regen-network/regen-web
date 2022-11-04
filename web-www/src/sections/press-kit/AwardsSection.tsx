@@ -1,12 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
+import Section from '@regen-network/web-components/lib/components/section';
+import ResponsiveSlider from '@regen-network/web-components/lib/components/sliders/ResponsiveSlider';
+import { Title } from '@regen-network/web-components/lib/components/typography';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
-
-import Section from 'web-components/lib/components/section';
-import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import { Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { PresskitAwardsSectionQuery } from '../../generated/graphql';
 

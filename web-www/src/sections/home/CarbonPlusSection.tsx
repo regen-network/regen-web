@@ -3,12 +3,15 @@ import ReactHtmlParser from 'react-html-parser';
 import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
+import ContainedButton from '@regen-network/web-components/lib/components/buttons/ContainedButton';
+import {
+  Body,
+  Label,
+  Title,
+} from '@regen-network/web-components/lib/components/typography';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
-
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { HomeCarbonplusSectionQuery } from '../../generated/graphql';
 

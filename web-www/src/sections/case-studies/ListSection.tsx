@@ -1,11 +1,10 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
+import ResourcesCard from '@regen-network/web-components/lib/components/cards/ResourcesCard';
+import Section from '@regen-network/web-components/lib/components/section';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import { graphql, useStaticQuery } from 'gatsby';
-
-import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
-import Section from 'web-components/lib/components/section';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { CaseStudiesListSectionQuery } from '../../generated/graphql';
 

@@ -1,13 +1,12 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import { makeStyles } from '@mui/styles';
+import { Title } from '@regen-network/web-components/lib/components/typography';
+import type { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
+import { BlockContent } from '@regen-network/web-components/lib/components/block-content';
 import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import type { FluidObject } from 'gatsby-image';
-
-import { Title } from 'web-components/lib/components/typography';
-import type { Theme } from 'web-components/lib/theme/muiTheme';
-import { BlockContent } from 'web-components/src/components/block-content';
 
 import type { BannerTextSectionQuery } from '../../generated/graphql';
 

@@ -4,15 +4,15 @@ import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
 
-import Card from 'web-components/lib/components/cards/Card';
-import Section from 'web-components/lib/components/section';
+import Card from '@regen-network/web-components/lib/components/cards/Card';
+import Section from '@regen-network/web-components/lib/components/section';
 import {
   Body,
   Subtitle,
   Title,
-} from 'web-components/lib/components/typography';
-import type { Theme } from 'web-components/lib/theme/muiTheme';
-import { BlockContent } from 'web-components/src/components/block-content';
+} from '@regen-network/web-components/lib/components/typography';
+import type { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
+import { BlockContent } from '@regen-network/web-components/lib/components/block-content';
 
 import type { TokenInfoSectionQuery } from '../../generated/graphql';
 

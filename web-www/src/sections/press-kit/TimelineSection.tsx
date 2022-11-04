@@ -1,11 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
+import Section from '@regen-network/web-components/lib/components/section';
+import Timeline from '@regen-network/web-components/lib/components/timeline';
+import { Body } from '@regen-network/web-components/lib/components/typography';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import { graphql, useStaticQuery } from 'gatsby';
-
-import Section from 'web-components/lib/components/section';
-import Timeline from 'web-components/lib/components/timeline';
-import { Body } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { PresskitTimelineSectionQuery } from '../../generated/graphql';
 

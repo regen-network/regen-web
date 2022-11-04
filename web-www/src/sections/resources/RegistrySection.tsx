@@ -2,12 +2,14 @@ import React from 'react';
 import { SxProps } from '@mui/material';
 import Box from '@mui/material/Box';
 import { makeStyles } from '@mui/styles';
+import ResourceCardsSlider from '@regen-network/web-components/lib/components/sliders/ResourceCards';
+import { DocumentationTable } from '@regen-network/web-components/lib/components/table/DocumentationTable';
+import {
+  Label,
+  Title,
+} from '@regen-network/web-components/lib/components/typography';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import { graphql, useStaticQuery } from 'gatsby';
-
-import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
-import { DocumentationTable } from 'web-components/lib/components/table/DocumentationTable';
-import { Label, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import BackgroundSection from '../../components/BackgroundSection';
 import {

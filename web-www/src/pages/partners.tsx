@@ -1,15 +1,17 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
+import GreenCard from '@regen-network/web-components/lib/components/cards/GreenCard';
+import GreenMediaCard from '@regen-network/web-components/lib/components/cards/GreenMediaCard';
+import Section from '@regen-network/web-components/lib/components/section';
+import {
+  Body,
+  Title,
+} from '@regen-network/web-components/lib/components/typography';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
+import { BlockContent } from '@regen-network/web-components/lib/components/block-content';
 import clsx from 'clsx';
 import { graphql, PageProps, useStaticQuery } from 'gatsby';
-
-import GreenCard from 'web-components/lib/components/cards/GreenCard';
-import GreenMediaCard from 'web-components/lib/components/cards/GreenMediaCard';
-import Section from 'web-components/lib/components/section';
-import { Body, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { BlockContent } from 'web-components/src/components/block-content';
 
 import SEO from '../components/seo';
 import { PartnersPageQuery } from '../generated/graphql';

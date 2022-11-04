@@ -1,18 +1,17 @@
 import React from 'react';
 import { useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import EmailIcon from '@regen-network/web-components/lib/components/icons/EmailIcon';
+import DiscordIcon from '@regen-network/web-components/lib/components/icons/social/DiscordIcon';
+import FacebookIcon from '@regen-network/web-components/lib/components/icons/social/FacebookIcon';
+import GithubIcon from '@regen-network/web-components/lib/components/icons/social/GithubIcon';
+import LinkedInIcon from '@regen-network/web-components/lib/components/icons/social/LinkedInIcon';
+import MediumIcon from '@regen-network/web-components/lib/components/icons/social/MediumIcon';
+import TelegramIcon from '@regen-network/web-components/lib/components/icons/social/TelegramIcon';
+import TwitterIcon from '@regen-network/web-components/lib/components/icons/social/TwitterIcon';
+import YoutubeIcon from '@regen-network/web-components/lib/components/icons/social/YoutubeIcon';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import { graphql, useStaticQuery } from 'gatsby';
-
-import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
-import DiscordIcon from 'web-components/lib/components/icons/social/DiscordIcon';
-import FacebookIcon from 'web-components/lib/components/icons/social/FacebookIcon';
-import GithubIcon from 'web-components/lib/components/icons/social/GithubIcon';
-import LinkedInIcon from 'web-components/lib/components/icons/social/LinkedInIcon';
-import MediumIcon from 'web-components/lib/components/icons/social/MediumIcon';
-import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
-import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
-import YoutubeIcon from 'web-components/lib/components/icons/social/YoutubeIcon';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import ConnectSection, {
   IconLabelProps,

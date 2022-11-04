@@ -1,15 +1,14 @@
 import React from 'react';
 import { Grid, useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import HexaImages from '@regen-network/web-components/lib/components/hexa-images';
+import MediumIcon from '@regen-network/web-components/lib/components/icons/social/MediumIcon';
+import TelegramIcon from '@regen-network/web-components/lib/components/icons/social/TelegramIcon';
+import TwitterIcon from '@regen-network/web-components/lib/components/icons/social/TwitterIcon';
+import { Title } from '@regen-network/web-components/lib/components/typography';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import { graphql, StaticQuery } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
-
-import HexaImages from 'web-components/lib/components/hexa-images';
-import MediumIcon from 'web-components/lib/components/icons/social/MediumIcon';
-import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
-import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
-import { Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import BackgroundSection from '../../components/BackgroundSection';
 import { ScienceCommunitySectionQuery } from '../../generated/graphql';

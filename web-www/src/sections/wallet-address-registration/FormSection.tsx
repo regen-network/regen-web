@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { Collapse } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import Section from '@regen-network/web-components/lib/components/section';
+import { Body } from '@regen-network/web-components/lib/components/typography';
+import type { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import axios from 'axios';
 import { graphql, useStaticQuery } from 'gatsby';
-
-import Section from 'web-components/lib/components/section';
-import { Body } from 'web-components/lib/components/typography';
-import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 import type { WalletAddrRegFormSectionQuery } from '../../generated/graphql';
 import WalletConnectionButton from './WalletConnectionButton';

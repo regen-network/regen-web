@@ -1,12 +1,14 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
+import GreenTopIconCard from '@regen-network/web-components/lib/components/cards/GreenTopIconCard';
+import {
+  Body,
+  Title,
+} from '@regen-network/web-components/lib/components/typography';
+import type { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
+import { BlockContent } from '@regen-network/web-components/lib/components/block-content';
 import { graphql, useStaticQuery } from 'gatsby';
-
-import GreenTopIconCard from 'web-components/lib/components/cards/GreenTopIconCard';
-import { Body, Title } from 'web-components/lib/components/typography';
-import type { Theme } from 'web-components/lib/theme/muiTheme';
-import { BlockContent } from 'web-components/src/components/block-content';
 
 import BackgroundSection from '../../components/BackgroundSection';
 import type { MainnetWhatsNextSectionQuery } from '../../generated/graphql';

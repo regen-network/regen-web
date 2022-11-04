@@ -1,12 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
-import { graphql, useStaticQuery } from 'gatsby';
-
-import Section from 'web-components/lib/components/section';
+import Section from '@regen-network/web-components/lib/components/section';
 import ProjectMedia, {
   Media,
-} from 'web-components/lib/components/sliders/ProjectMedia';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+} from '@regen-network/web-components/lib/components/sliders/ProjectMedia';
+import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
+import { graphql, useStaticQuery } from 'gatsby';
 
 import { PresskitPhotosSectionQuery } from '../../generated/graphql';
 

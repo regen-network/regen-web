@@ -1,9 +1,8 @@
 import React from 'react';
 import { Grid, Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import Section from '@regen-network/web-components/lib/components/section';
 import clsx from 'clsx';
-
-import Section from 'web-components/lib/components/section';
 
 import type { SanityRegenTeamMember } from '../../generated/graphql';
 import { TeamItem } from './TeamItem';

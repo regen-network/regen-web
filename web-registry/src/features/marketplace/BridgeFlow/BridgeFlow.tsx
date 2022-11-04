@@ -48,13 +48,6 @@ export const BridgeFlow = ({
     track('bridge3');
   };
 
-  const handleTxModalClose = (): void => {
-    setTxModalTitle('');
-    setTxModalDescription('');
-    setBatchToBridge(undefined);
-    setError(undefined);
-  };
-
   const handleError = (): void => {
     setIsProcessingModalOpen(false);
     setTxModalTitle(BRIDGE_HEADER);
@@ -64,14 +57,30 @@ export const BridgeFlow = ({
   const handleTxDelivered = async (
     _deliverTxResponse: DeliverTxResponse,
   ): Promise<void> => {};
+  const {
+    signAndBroadcast,
+    wallet,
+    error,
+    setError,
+    deliverTxResponse,
+    setDeliverTxResponse,
+  } = useMsgClient(handleTxQueued, handleTxDelivered, handleError);
+
+  const handleTxModalClose = (): void => {
+    setCardItems(undefined);
+    setTxModalHeader('');
+    setTxModalTitle('');
+    setTxModalDescription('');
+    setBatchToBridge(undefined);
+    setDeliverTxResponse(undefined);
+    setError(undefined);
+    setIsProcessingModalOpen(false);
+  };
 
   const onTxSuccessButtonClick = (): void => {
     handleTxModalClose();
-    navigate('/ecocredits/dashboard'); // TODO /bridge?
+    navigate('/ecocredits/dashboard');
   };
-
-  const { signAndBroadcast, wallet, error, setError, deliverTxResponse } =
-    useMsgClient(handleTxQueued, handleTxDelivered, handleError);
 
   const accountAddress = wallet?.address;
   const txHash = deliverTxResponse?.transactionHash;
@@ -108,7 +117,7 @@ export const BridgeFlow = ({
         onClose={() => setIsProcessingModalOpen(false)}
       />
       <TxSuccessfulModal
-        open={!!txHash && !error}
+        open={!!txHash && !error} //TODO
         onClose={handleTxModalClose}
         txHash={txHash ?? ''}
         txHashUrl={txHashUrl}

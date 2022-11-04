@@ -29,7 +29,9 @@ export const useBridgable = ({ address, paginationParams }: Props): Output => {
     if (isLoadingCredits) return;
     const _bridgableCredits = credits.filter(
       credit =>
-        credit.classId === 'C03' && Number(credit.balance?.tradableAmount) > 0,
+        credit.denom.startsWith(
+          `${process.env.REACT_APP_BRIDGE_CREDIT_CLASS_ID}-`,
+        ) && Number(credit.balance?.tradableAmount) > 0,
     );
     setBridgableCredits(_bridgableCredits);
   }, [credits, isLoadingCredits]);

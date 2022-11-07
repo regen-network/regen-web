@@ -12,6 +12,12 @@ import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
 import { createBrowserHistory } from 'history';
 
+import MyBridge from 'pages/Dashboard/MyBridge';
+import MyCreditBatches from 'pages/Dashboard/MyCreditBatches';
+import MyCreditClasses from 'pages/Dashboard/MyCreditClasses';
+import MyEcocredits from 'pages/Dashboard/MyEcocredits';
+import MyProjects from 'pages/Dashboard/MyProjects';
+
 import { KeplrRoute, ProtectedRoute } from './components/atoms';
 import { RegistryLayout } from './components/organisms';
 import { ProjectMetadata } from './pages/ProjectMetadata/ProjectMetadata';
@@ -120,10 +126,22 @@ export const routes = createRoutesFromElements(
       path="post-purchase/:projectId/:walletId/:name"
       element={<PostPurchase />}
     />
-    <Route
-      path="ecocredits/dashboard"
-      element={<KeplrRoute component={Dashboard} />}
-    />
+    <Route path="ecocredits" element={<KeplrRoute component={Dashboard} />}>
+      <Route
+        path="portfolio"
+        element={<KeplrRoute component={MyEcocredits} />}
+      />
+      <Route path="projects" element={<KeplrRoute component={MyProjects} />} />
+      <Route
+        path="credit-classes"
+        element={<KeplrRoute component={MyCreditClasses} />}
+      />
+      <Route
+        path="credit-batches"
+        element={<KeplrRoute component={MyCreditBatches} />}
+      />
+      <Route path="bridge" element={<KeplrRoute component={MyBridge} />} />
+    </Route>
     <Route
       path="ecocredits/accounts/:accountAddress"
       element={<EcocreditsByAccount />}

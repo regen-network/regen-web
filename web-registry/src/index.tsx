@@ -1,5 +1,6 @@
-import React from 'react';
+import { Suspense } from 'react';
 import ReactDOM from 'react-dom';
+import { RouterProvider } from 'react-router-dom';
 import { IntercomProvider } from 'react-use-intercom';
 import amplitudePlugin from '@analytics/amplitude';
 import googleAnalytics from '@analytics/google-analytics';
@@ -13,8 +14,10 @@ import { AnalyticsProvider } from 'use-analytics';
 
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 
+import PageLoader from 'components/atoms/PageLoader';
+
 import { AuthApolloProvider } from './apollo';
-import App from './App';
+import { router } from './App';
 import { LedgerProvider } from './ledger';
 import { WalletProvider } from './lib/wallet';
 import * as serviceWorker from './serviceWorker';
@@ -81,7 +84,12 @@ ReactDOM.render(
               <LedgerProvider>
                 <ThemeProvider injectFonts>
                   <AnalyticsProvider instance={analytics}>
-                    <App />
+                    <Suspense fallback={PageLoader}>
+                      <RouterProvider
+                        router={router}
+                        fallbackElement={PageLoader}
+                      />
+                    </Suspense>
                   </AnalyticsProvider>
                 </ThemeProvider>
               </LedgerProvider>

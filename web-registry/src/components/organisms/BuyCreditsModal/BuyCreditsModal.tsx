@@ -194,24 +194,18 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
           validate={validationHandler}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
-            const track_data: any = {
+            const trackData: {
+              price?: string;
+              batchDenom?: string;
+              projectName?: string | null;
+              creditClassName?: string;
+            } = {
               price: selectedSellOrder?.askAmount,
               batchDenom: selectedSellOrder?.batchDenom,
               projectName: project.name,
               creditClassName: project.id.split('-')[0],
             };
-            if (values.retirementAction === 'manual') {
-              track_data['amountTradable'] = getFormattedNumber(
-                values.creditCount,
-              );
-              track_data['amountRetired'] = getFormattedNumber(0);
-            } else if (values.retirementAction === 'autoretire') {
-              track_data['amountTradable'] = getFormattedNumber(
-                values.creditCount,
-              );
-              track_data['amountRetired'] = getFormattedNumber(0);
-            }
-            track('buy2', track_data);
+            track('buy2', trackData);
             try {
               await handleBuyCreditsSubmit(values, onSubmit, selectedSellOrder);
               setSubmitting(false);

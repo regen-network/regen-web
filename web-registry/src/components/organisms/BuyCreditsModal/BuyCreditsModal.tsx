@@ -34,7 +34,6 @@ import {
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
-import { getFormattedNumber } from 'web-components/lib/utils/format';
 
 import { microToDenom } from 'lib/denom.utils';
 

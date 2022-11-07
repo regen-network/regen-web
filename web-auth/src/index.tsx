@@ -1,7 +1,7 @@
 import './index.css';
 
 import CssBaseline from '@mui/material/CssBaseline';
-import ThemeProvider from '@regen-network/web-components/lib/theme/RegenThemeProvider';
+import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';

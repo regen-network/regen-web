@@ -1,12 +1,12 @@
-import { makeStyles } from '@mui/styles';
 import LoginForm, {
   Values,
-} from '@regen-network/web-components/lib/components/form/LoginForm';
-import OnBoardingSection from '@regen-network/web-components/lib/components/section/OnBoardingSection';
-import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
+} from 'web-components/lib/components/form/LoginForm';
+import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import { WebAuth } from 'auth0-js';
 import axios from 'axios';
 import React, { useCallback } from 'react';
+import { makeStyles } from 'tss-react/mui';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 const searchParams = new URLSearchParams(window.location.search);
@@ -26,7 +26,7 @@ const auth0 = new WebAuth({
   redirectUri,
 });
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   logo: {
     display: 'flex',
     [theme.breakpoints.up('sm')]: {
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 function App(): JSX.Element {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   const submit = useCallback(

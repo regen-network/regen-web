@@ -18,7 +18,7 @@ type Params = {
   isBuyButtonDisabled: boolean;
   onSellButtonClick: () => void;
   onBuyButtonClick: () => void;
-  onChainProjectId?: string;
+  onChainProjectId?: string | null;
   projectName?: string;
   onChainCreditClassId?: string;
   creditClassName?: string;

@@ -75,7 +75,7 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-scripts test",
-    "test-no-watch": "react-scripts test --watchAll=false",
+    "test-no-watch": "react-scripts test --watchAll=false --forceExit",
     "test-update-snapshot": "react-scripts test --updateSnapshot",
     "graphql:codegen": "graphql-codegen --config codegen.yml",
     "graphql:codegen-sanity": "graphql-codegen --config sanity-codegen.yml",

@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom';
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
+import { createBrowserHistory } from 'history';
 
 import { KeplrRoute, ProtectedRoute } from './components/atoms';
 import { RegistryLayout } from './components/organisms';
@@ -69,6 +70,8 @@ const ProjectEdit = lazy(() => import('./pages/ProjectEdit'));
 const Activity = lazy(() => import('./pages/Activity'));
 const CreateBatch = lazy(() => import('./pages/CreateBatch'));
 const Storefront = lazy(() => import('./pages/Marketplace/Storefront'));
+
+export const history = createBrowserHistory();
 
 Sentry.init({
   dsn: 'https://f5279ac3b8724af88ffb4cdfad92a2d4@o1377530.ingest.sentry.io/6688446',

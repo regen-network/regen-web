@@ -1,6 +1,7 @@
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { OAuthError, useAuth0 } from '@auth0/auth0-react';
 import { Box } from '@mui/material';
+import { history } from 'App';
 
 import { AdminNav } from '../../components/organisms';
 import isAdmin from '../../lib/admin';
@@ -8,7 +9,6 @@ import isAdmin from '../../lib/admin';
 function Admin(): JSX.Element {
   const { user, error } = useAuth0();
   const isUserAdmin = isAdmin(user);
-  const navigate = useNavigate();
 
   const authError = error as OAuthError;
   if (
@@ -17,7 +17,7 @@ function Admin(): JSX.Element {
     authError.error_description.indexOf('email_not_verified:') > -1
   ) {
     const email: string = authError.error_description.split(':')[1];
-    navigate(`/verify-email?email=${email}`);
+    history.push(`/verify-email?email=${email}`);
   }
 
   return (

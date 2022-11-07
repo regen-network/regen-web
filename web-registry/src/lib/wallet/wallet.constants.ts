@@ -7,7 +7,7 @@ export const WALLET_CONNECT_SIGNING_METHODS = [
 ];
 
 export const walletConnectClientMeta = {
-  name: 'Regen Network Registry',
+  name: 'Regen Marketplace',
   description: 'Discover Ecocredits and NCT basket tokens',
   url: 'https://app.regen.network/',
   icons: ['https://app.regen.network/png/logo/regen.png'],

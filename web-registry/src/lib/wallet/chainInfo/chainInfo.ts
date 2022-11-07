@@ -52,7 +52,7 @@ export const chainInfo = {
       coinDecimals: 6,
       // (Optional) Keplr can show the fiat value of the coin if a coingecko id is provided.
       // You can get id from https://api.coingecko.com/api/v3/coins/list if it is listed.
-      // coinGeckoId: ""
+      coinGeckoId: 'regen',
     },
   ],
   // List of coin/tokens used as a fee token in this chain.

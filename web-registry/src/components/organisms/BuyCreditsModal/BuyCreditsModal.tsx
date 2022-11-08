@@ -197,12 +197,12 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
               price?: string;
               batchDenom?: string;
               projectName?: string | null;
-              creditClassName?: string;
+              creditClassId?: string;
             } = {
               price: selectedSellOrder?.askAmount,
               batchDenom: selectedSellOrder?.batchDenom,
               projectName: project.name,
-              creditClassName: project.id.split('-')[0],
+              creditClassId: project.id.split('-')[0],
             };
             track('buy2', trackData);
             try {

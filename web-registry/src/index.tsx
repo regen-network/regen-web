@@ -122,10 +122,10 @@ root.render(
               <LedgerProvider>
                 <ThemeProvider injectFonts>
                   <AnalyticsProvider instance={analytics}>
-                    <Suspense fallback={PageLoader}>
+                    <Suspense fallback={<PageLoader />}>
                       <RouterProvider
                         router={router}
-                        fallbackElement={PageLoader}
+                        fallbackElement={<PageLoader />}
                       />
                     </Suspense>
                   </AnalyticsProvider>

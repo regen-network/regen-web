@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { useWallet } from '../lib/wallet';
+import { useWallet } from '../lib/wallet/wallet';
 import { useQueryListAdminClasses } from './useQueryListAdminClasses';
 
 export function useQueryIfCreditClassAdmin(): boolean {

@@ -13,7 +13,7 @@ const defaultTheme = createTheme({
   },
 });
 
-const { pxToRem } = defaultTheme.typography;
+export const { pxToRem } = defaultTheme.typography;
 
 const headerFontFamily = ['"Muli"', '-apple-system', 'sans-serif'].join(',');
 const defaultFontFamily = ['"Lato"', '-apple-system', 'sans-serif'].join(',');

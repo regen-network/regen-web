@@ -1,46 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { MenuList, Paper, Popover } from '@mui/material';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 
 import DropdownIcon from '../icons/DropdownIcon';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  popover: {
-    pointerEvents: 'none',
-  },
-  popoverContent: {
-    pointerEvents: 'auto',
-    marginTop: theme.spacing(4),
-  },
-  text: {
-    '& li.MuiMenuItem-root:hover': {
-      backgroundColor: 'transparent',
-    },
-    '& li > a': {
-      'font-family': 'lato',
-      color: '#000',
-      textDecoration: 'none',
-      '&:link, &:visited, &:hover, &:active': {
-        textDecoration: 'none',
-      },
-    },
-    backgroundColor: 'rgba(0, 0, 0, 0)',
-  },
-  noOutline: {
-    outline: 'none',
-    '&:focus, &:selected': {
-      outline: 'none',
-    },
-  },
-  paper: {
-    'border-radius': '2px',
-    border: `1px solid ${theme.palette.grey[400]}`,
-    padding: theme.spacing(5, 9),
-  },
-  icon: {
-    marginLeft: theme.spacing(1),
-  },
-}));
+import { useMenuHoverStyles } from './MenuHover.Styles';
 
 export interface MenuTitle {
   title?: string;
@@ -71,7 +33,7 @@ const MenuHover = ({
   const [openedPopover, setOpenedPopover] = useState(false);
   const popoverAnchor = useRef(null);
 
-  const styles = useStyles({ textColor: textColor ?? '' });
+  const styles = useMenuHoverStyles({ textColor: textColor ?? '' });
 
   const popoverEnter = (): void => {
     setOpenedPopover(true);
@@ -79,6 +41,10 @@ const MenuHover = ({
 
   const popoverLeave = (): void => {
     setOpenedPopover(false);
+  };
+
+  const togglePopover = (): void => {
+    setOpenedPopover(true);
   };
 
   return (
@@ -89,6 +55,7 @@ const MenuHover = ({
         aria-haspopup="true"
         onMouseEnter={popoverEnter}
         onMouseLeave={popoverLeave}
+        onClick={togglePopover}
       >
         {title && (
           <span className={classes?.title}>

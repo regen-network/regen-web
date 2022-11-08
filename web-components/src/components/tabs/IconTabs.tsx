@@ -17,6 +17,7 @@ interface LinkProps extends LinkItem {
 export type LinkComponentProp = React.FC<LinkProps>;
 
 interface IconTabsProps {
+  activeTab?: number;
   tabs: IconTabProps[];
   size?: TextSize;
   linkComponent?: LinkComponentProp;
@@ -58,6 +59,7 @@ const StyledTabs = styled(Tabs, {
 );
 
 const IconTabs: React.FC<IconTabsProps> = ({
+  activeTab = 0,
   tabs,
   size,
   sxs,
@@ -65,7 +67,7 @@ const IconTabs: React.FC<IconTabsProps> = ({
   hideIndicator = false,
   mobileFullWidth = false,
 }) => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(activeTab);
   const hasContent = tabs.some(tab => tab.content !== undefined);
 
   const handleChange = (

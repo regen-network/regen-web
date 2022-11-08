@@ -17,6 +17,8 @@ import MyCreditBatches from 'pages/Dashboard/MyCreditBatches';
 import MyCreditClasses from 'pages/Dashboard/MyCreditClasses';
 import MyEcocredits from 'pages/Dashboard/MyEcocredits';
 import MyProjects from 'pages/Dashboard/MyProjects';
+import { BridgeTab } from 'pages/EcocreditsByAccount/BridgeTab/BridgeTab';
+import { PortfolioTab } from 'pages/EcocreditsByAccount/PortfolioTab/EcocreditsByAccount.PortfolioTab';
 
 import { KeplrRoute, ProtectedRoute } from './components/atoms';
 import { RegistryLayout } from './components/organisms';
@@ -145,7 +147,10 @@ export const routes = createRoutesFromElements(
     <Route
       path="ecocredits/accounts/:accountAddress"
       element={<EcocreditsByAccount />}
-    />
+    >
+      <Route path="portfolio" element={<PortfolioTab />} />
+      <Route path="bridge" element={<BridgeTab />} />
+    </Route>
     <Route
       path="ecocredits/create-batch"
       element={<KeplrRoute component={CreateBatch} />}

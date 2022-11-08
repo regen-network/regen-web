@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/styles';
 
@@ -29,6 +29,7 @@ const Dashboard = (): JSX.Element => {
   const isProjectAdmin = useQueryIfProjectAdmin();
   const showProjectTab = isIssuer || isProjectAdmin;
   const showCreditClassTab = isCreditClassCreator || isCreditClassAdmin;
+  const location = useLocation();
 
   const tabs: IconTabProps[] = useMemo(
     () => [
@@ -73,12 +74,18 @@ const Dashboard = (): JSX.Element => {
     ],
   );
 
+  const activeTab = Math.max(
+    tabs.findIndex(tab => location.pathname.includes(tab.href ?? '')),
+    0,
+  );
+
   return (
     <Box sx={{ bgcolor: 'grey.50' }}>
       <Section>
         <IconTabs
           aria-label="dashboard tabs"
           tabs={tabs}
+          activeTab={activeTab}
           linkComponent={Link}
           mobileFullWidth
         />

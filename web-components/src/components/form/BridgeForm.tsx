@@ -14,6 +14,8 @@ import {
 import { RegenModalProps } from '../modal';
 import Submit from './Submit';
 
+const BRIDGE_ALLOWED_CHAINS = [{ label: 'Polygon', value: 'polygon' }];
+
 export interface BridgeProps {
   batchDenom: string;
   availableBridgeableAmount: number;
@@ -42,7 +44,7 @@ const BridgeForm = ({
     recipient: '',
     agreeErpa: false,
     batchDenom,
-    target: 'polygon', //TODO: temp?
+    target: BRIDGE_ALLOWED_CHAINS[0].value, // polygon
   };
 
   const validateHandler = (
@@ -73,7 +75,7 @@ const BridgeForm = ({
             name="target"
             label="Chain"
             component={SelectTextField}
-            options={[{ label: 'Polygon', value: 'polygon' }]}
+            options={BRIDGE_ALLOWED_CHAINS}
             disabled
           />
           <Field

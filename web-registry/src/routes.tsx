@@ -41,6 +41,7 @@ const CreditsTransfer = lazy(() => import('./pages/CreditsTransfer'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Description = lazy(() => import('./pages/Description'));
 const EntityDisplay = lazy(() => import('./pages/EntityDisplay'));
+const EcocreditBatches = lazy(() => import('./pages/EcocreditBatches'));
 const EcocreditsByAccount = lazy(() => import('./pages/EcocreditsByAccount'));
 const Home = lazy(() => import('./pages/Home'));
 const LandStewards = lazy(() => import('./pages/LandStewards'));
@@ -115,10 +116,15 @@ export const routes = createRoutesFromElements(
     <Route
       path="ecocredits/accounts/:accountAddress"
       element={<EcocreditsByAccount />}
+<<<<<<< HEAD:web-registry/src/routes.tsx
     >
       <Route path="portfolio" element={<PortfolioTab />} />
       <Route path="bridge" element={<BridgeTab />} />
     </Route>
+=======
+    />
+    <Route path="ecocredit-batches" element={<EcocreditBatches />} />
+>>>>>>> 95e379f3 (feat: create ecocredit batches page):web-registry/src/App.tsx
     <Route
       path="ecocredits/create-batch"
       element={<KeplrRoute component={CreateBatch} />}

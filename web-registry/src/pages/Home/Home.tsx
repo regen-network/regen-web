@@ -41,8 +41,6 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   const creditClassesContent = creditClassData?.allCreditClass;
 
-  const { batchesWithSupply, setPaginationParams } = usePaginatedBatches();
-
   useEffect(() => {
     const anchor = window.location.hash.slice(1);
     if (anchor) {
@@ -139,14 +137,6 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
       </BackgroundImgSection>
 
       <FeaturedProjects />
-
-      <CardMedia image={topographyImg}>
-        <CreditBatches
-          creditBatches={batchesWithSupply}
-          onTableChange={setPaginationParams}
-          withSection
-        />
-      </CardMedia>
 
       {creditClassesContent && (
         <Section

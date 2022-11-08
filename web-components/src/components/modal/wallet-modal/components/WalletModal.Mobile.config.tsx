@@ -4,6 +4,7 @@ import { Center } from '../../../../components/box';
 import ContainedButton from '../../../../components/buttons/ContainedButton';
 import { IconTabProps } from '../../../../components/tabs/IconTab';
 import { Subtitle } from '../../../../components/typography';
+import { MOBILE_LABEL, QR_CODE_LABEL } from './WalletModal.Mobile.constants';
 
 type getWalletModalMobileTabsParams = {
   mobileConnectUrl?: string;
@@ -16,7 +17,7 @@ export const getWalletModalMobileTabs = ({
 }: getWalletModalMobileTabsParams): IconTabProps[] =>
   [
     {
-      label: 'Mobile',
+      label: MOBILE_LABEL,
       content: (
         <Center sx={{ pt: 9, flexDirection: 'column', height: 340 }}>
           <Subtitle sx={{ color: 'info.dark' }}>
@@ -31,7 +32,7 @@ export const getWalletModalMobileTabs = ({
       ),
     },
     {
-      label: 'Scan with the Keplr mobile app',
+      label: QR_CODE_LABEL,
       content: (
         <Center sx={{ pt: 9, height: 340 }}>
           <QRCode size={300} value={qrCodeUri ?? ''} />
@@ -39,7 +40,12 @@ export const getWalletModalMobileTabs = ({
       ),
     },
   ].filter(item => {
-    if (!mobileConnectUrl && item.label === 'Mobile') {
+    // Only show QRCode on desktop
+    if (!mobileConnectUrl && item.label === MOBILE_LABEL) {
+      return false;
+    }
+    // Only show Deeplink button on mobile
+    if (mobileConnectUrl && item.label === QR_CODE_LABEL) {
       return false;
     }
     return true;

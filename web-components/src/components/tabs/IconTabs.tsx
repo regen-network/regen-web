@@ -89,9 +89,7 @@ const IconTabs: React.FC<IconTabsProps> = ({
               icon={tab?.icon}
               hidden={tab?.hidden}
               size={size}
-              sxInner={{
-                ...sxs?.tab?.inner,
-              }}
+              sxInner={{ ...sxs?.tab?.inner }}
               {...a11yProps(index)}
             />
           ))}

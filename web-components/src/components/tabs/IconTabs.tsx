@@ -30,6 +30,9 @@ const StyledTabs = styled(Tabs, {
     prop !== 'hideIndicator' && prop !== 'mobileFullWidth',
 })<TabsProps & { mobileFullWidth: boolean; hideIndicator: boolean }>(
   ({ mobileFullWidth, theme, hideIndicator }) => ({
+    '& .MuiTabs-flexContainer': {
+      display: 'block',
+    },
     '& .MuiTabs-scroller': {
       [theme.breakpoints.down('md')]: {
         paddingRight: mobileFullWidth ? theme.spacing(10) : 0,
@@ -92,7 +95,6 @@ const IconTabs: React.FC<IconTabsProps> = ({
                 ...sxs?.tab?.inner,
               }}
               {...a11yProps(index)}
-              // last={index === tabs.length - 1}
             />
           ))}
         </StyledTabs>

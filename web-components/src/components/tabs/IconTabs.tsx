@@ -22,23 +22,38 @@ interface IconTabsProps {
     };
   };
   hideIndicator?: boolean;
+  mobileFullWidth?: boolean;
 }
 
 const StyledTabs = styled(Tabs, {
-  shouldForwardProp: prop => prop !== 'hideIndicator',
-})<TabsProps & { hideIndicator: boolean }>(({ theme, hideIndicator }) => ({
-  '& .MuiTabs-indicator': {
-    display: hideIndicator && 'none',
-    backgroundColor: theme.palette.secondary.main,
-    height: '3px',
-  },
-}));
+  shouldForwardProp: prop =>
+    prop !== 'hideIndicator' && prop !== 'mobileFullWidth',
+})<TabsProps & { mobileFullWidth: boolean; hideIndicator: boolean }>(
+  ({ mobileFullWidth, theme, hideIndicator }) => ({
+    '& .MuiTabs-scroller': {
+      [theme.breakpoints.down('md')]: {
+        paddingRight: mobileFullWidth ? theme.spacing(10) : 0,
+        paddingLeft: mobileFullWidth ? theme.spacing(10) : 0,
+      },
+      [theme.breakpoints.down('sm')]: {
+        paddingRight: mobileFullWidth ? theme.spacing(4) : 0,
+        paddingLeft: mobileFullWidth ? theme.spacing(4) : 0,
+      },
+    },
+    '& .MuiTabs-indicator': {
+      display: hideIndicator && 'none',
+      backgroundColor: theme.palette.secondary.main,
+      height: '3px',
+    },
+  }),
+);
 
 const IconTabs: React.FC<IconTabsProps> = ({
   tabs,
   size,
   sxs,
   hideIndicator = false,
+  mobileFullWidth = false,
 }) => {
   const [value, setValue] = useState(0);
 
@@ -51,7 +66,12 @@ const IconTabs: React.FC<IconTabsProps> = ({
 
   return (
     <div>
-      <Box sx={{ ...sxs?.tab?.outer }}>
+      <Box
+        sx={{
+          ...sxs?.tab?.outer,
+          mx: mobileFullWidth ? { xs: -4, sm: -10, md: 0 } : 0,
+        }}
+      >
         <StyledTabs
           value={value}
           onChange={handleChange}
@@ -59,6 +79,7 @@ const IconTabs: React.FC<IconTabsProps> = ({
           scrollButtons={false}
           aria-label="tabs"
           hideIndicator={hideIndicator}
+          mobileFullWidth={mobileFullWidth}
         >
           {tabs.map((tab, index) => (
             <IconTab
@@ -67,8 +88,11 @@ const IconTabs: React.FC<IconTabsProps> = ({
               icon={tab?.icon}
               hidden={tab?.hidden}
               size={size}
-              sxInner={{ ...sxs?.tab?.inner }}
+              sxInner={{
+                ...sxs?.tab?.inner,
+              }}
               {...a11yProps(index)}
+              // last={index === tabs.length - 1}
             />
           ))}
         </StyledTabs>

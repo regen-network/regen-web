@@ -1,16 +1,9 @@
-import React, { lazy } from 'react';
+import { lazy } from 'react';
 import {
   createBrowserRouter,
-  createRoutesFromChildren,
   createRoutesFromElements,
-  matchRoutes,
   Route,
-  useLocation,
-  useNavigationType,
 } from 'react-router-dom';
-import * as Sentry from '@sentry/react';
-import { BrowserTracing } from '@sentry/tracing';
-import { createBrowserHistory } from 'history';
 
 import MyBridge from 'pages/Dashboard/MyBridge';
 import MyCreditBatches from 'pages/Dashboard/MyCreditBatches';
@@ -23,8 +16,6 @@ import { PortfolioTab } from 'pages/EcocreditsByAccount/PortfolioTab/EcocreditsB
 import { KeplrRoute, ProtectedRoute } from './components/atoms';
 import { RegistryLayout } from './components/organisms';
 import { ProjectMetadata } from './pages/ProjectMetadata/ProjectMetadata';
-
-import './App.css';
 
 const Additionality = lazy(() => import('./pages/Additionality'));
 const Admin = lazy(() => import('./pages/Admin'));
@@ -78,29 +69,6 @@ const ProjectEdit = lazy(() => import('./pages/ProjectEdit'));
 const Activity = lazy(() => import('./pages/Activity'));
 const CreateBatch = lazy(() => import('./pages/CreateBatch'));
 const Storefront = lazy(() => import('./pages/Marketplace/Storefront'));
-
-export const history = createBrowserHistory();
-
-Sentry.init({
-  dsn: 'https://f5279ac3b8724af88ffb4cdfad92a2d4@o1377530.ingest.sentry.io/6688446',
-  integrations: [
-    new BrowserTracing({
-      routingInstrumentation: Sentry.reactRouterV6Instrumentation(
-        React.useEffect,
-        useLocation,
-        useNavigationType,
-        createRoutesFromChildren,
-        matchRoutes,
-      ),
-    }),
-  ],
-
-  // Set tracesSampleRate to 1.0 to capture 100%
-  // of transactions for performance monitoring.
-  // We recommend adjusting this value in production
-  tracesSampleRate: 1.0,
-  environment: process.env.REACT_APP_SENTRY_ENVIRONMENT || 'development',
-});
 
 export const routes = createRoutesFromElements(
   <Route element={<RegistryLayout />}>

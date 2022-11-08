@@ -14,7 +14,7 @@ import { useProjectByOnChainIdQuery } from 'generated/graphql';
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { getBatchWithSupplyForDenom } from 'lib/ecocredit/api';
 import { getMetadata } from 'lib/metadata-graph';
-import { useWallet } from 'lib/wallet';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { NotFoundPage } from 'pages/NotFound/NotFound';
 import { Link } from 'components/atoms';

@@ -3,7 +3,7 @@ import React from 'react';
 import {
   NavLinkProps,
   useNavLinkStyles,
-} from 'web-components/lib/components/header/NavLink';
+} from 'web-components/lib/components/header/components/NavLink';
 
 import { Link } from './Link';
 

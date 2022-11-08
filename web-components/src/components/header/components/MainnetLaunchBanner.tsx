@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Link } from '@mui/material';
 
-import Countdown from '../countdown';
-import { Subtitle } from '../typography';
+import Countdown from '../../countdown';
+import { Subtitle } from '../../typography';
 
 type Props = {
   launchDate: string;

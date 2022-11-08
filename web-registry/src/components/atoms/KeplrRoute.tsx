@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 
 import { chainId } from '../../lib/ledger';
-import { useWallet } from '../../lib/wallet';
+import { useWallet } from '../../lib/wallet/wallet';
 
 interface Props {
   component: React.ComponentType;

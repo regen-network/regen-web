@@ -42,11 +42,6 @@ import {
   NO_BRIDGABLE_CREDITS,
 } from './BridgableEcocreditsTable.constants';
 
-// TODO - A hook scaffolding `useBridgable` has been implemented for the data request
-// that simply simulates a request with an empty response.
-
-// TODO - We will filter this by C03 class eventually
-
 interface Props {
   accountAddress: string | undefined;
 }
@@ -55,6 +50,7 @@ export const BridgableEcocreditsTable = ({
   accountAddress,
 }: Props): JSX.Element => {
   const track = useTrack();
+
   const [batchToBridge, setBatchToBridge] = useState<
     BatchInfoWithBalance | undefined
   >();

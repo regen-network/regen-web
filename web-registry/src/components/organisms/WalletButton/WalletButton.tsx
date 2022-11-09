@@ -39,6 +39,7 @@ const WalletButton: React.FC = () => {
   }, [setIsModalOpen, setModalState]);
 
   const connectToWallet = useConnectToWallet({
+    address: wallet?.address,
     onModalClose,
     setModalState,
     connect,

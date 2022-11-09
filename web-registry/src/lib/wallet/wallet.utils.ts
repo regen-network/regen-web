@@ -53,19 +53,12 @@ type FinalizeConnectionParams = {
   walletClient?: WalletClient;
   walletConfig?: WalletConfig;
   setWallet: UseStateSetter<Wallet>;
-  track?: (
-    eventName: string,
-    payload?: any,
-    options?: any,
-    callback?: (...params: any[]) => any,
-  ) => Promise<any>;
 };
 
 export const finalizeConnection = async ({
   walletClient,
   walletConfig,
   setWallet,
-  track,
 }: FinalizeConnectionParams): Promise<void> => {
   let offlineSigner;
 
@@ -89,7 +82,6 @@ export const finalizeConnection = async ({
       address: key.bech32Address,
       shortAddress: truncate(key.bech32Address),
     };
-    if (track) track('loginNew', { date: Date(), account: wallet.address });
     setWallet(wallet);
   }
 };

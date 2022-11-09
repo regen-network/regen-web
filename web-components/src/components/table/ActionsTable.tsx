@@ -26,6 +26,7 @@ import {
   StyledTableRow,
   // StyledTableSortLabel,
 } from './';
+import { DEFAULT_TABLE_PAGINATION_PARAMS } from './ActionsTable.constants';
 // import {
 //   getComparator,
 //   Order,
@@ -42,8 +43,6 @@ const BorderLeft = styled('div')(({ theme }) => ({
   borderLeft: `1px solid ${theme.palette.info.light}`,
   boxShadow: `-1px 0px 1px rgba(0,0,0,.05), -2px 0px 4px rgba(0,0,0,.15), -6px 0px 10px rgba(0,0,0,.5)`,
 }));
-
-export const DEFAULT_ROWS_PER_PAGE = 5;
 
 /** `i` represents the index of the current row in the data set - ie it can be
  * used in the parent component to access that row's data. ex.
@@ -65,6 +64,7 @@ interface ActionsTableProps {
   rows: React.ReactNode[][];
   renderActionButtons?: RenderActionButtonsFunc;
   onTableChange?: Dispatch<SetStateAction<TablePaginationParams>>;
+  initialPaginationParams?: TablePaginationParams;
   sx?: {
     root?: SxProps<Theme>;
   };
@@ -76,11 +76,17 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
   rows,
   renderActionButtons,
   onTableChange,
+  initialPaginationParams = DEFAULT_TABLE_PAGINATION_PARAMS,
   sx,
 }) => {
-  const [page, setPage] = useState(0);
-  const [offset, setOffset] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(DEFAULT_ROWS_PER_PAGE);
+  const {
+    offset: initialOffset,
+    page: initialPage,
+    rowsPerPage: initialRowsPerPage,
+  } = initialPaginationParams;
+  const [page, setPage] = useState(initialPage);
+  const [offset, setOffset] = useState(initialOffset);
+  const [rowsPerPage, setRowsPerPage] = useState(initialRowsPerPage);
   const [displayRows, setDisplayRows] = useState<React.ReactNode[][]>(rows);
   // const [order, setOrder] = useState<Order>('desc');
   // const [orderBy, setOrderBy] = useState<keyof TableCredits>('start_date');

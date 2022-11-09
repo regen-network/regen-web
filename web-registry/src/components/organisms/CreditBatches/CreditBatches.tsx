@@ -31,6 +31,7 @@ interface CreditBatchProps {
   withSection?: boolean;
   creditBatches?: BatchInfoWithSupply[];
   onTableChange?: UseStateSetter<TablePaginationParams>;
+  initialPaginationParams?: TablePaginationParams;
   titleAlign?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
 }
 
@@ -80,6 +81,7 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
   creditBatches,
   titleAlign = 'center',
   onTableChange,
+  initialPaginationParams,
 }) => {
   const { classes } = useCreditBatchesStyles();
   const [batches, setBatches] = useState<BatchInfoWithSupply[]>([]);
@@ -133,6 +135,7 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
         </Box>
       ))}
       onTableChange={onTableChange}
+      initialPaginationParams={initialPaginationParams}
       rows={batches.map(batch => {
         /* eslint-disable react/jsx-key */
         let result = [];

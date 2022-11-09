@@ -12,9 +12,9 @@ import MyEcocredits from 'pages/Dashboard/MyEcocredits';
 import MyProjects from 'pages/Dashboard/MyProjects';
 import { BridgeTab } from 'pages/EcocreditsByAccount/BridgeTab/BridgeTab';
 import { PortfolioTab } from 'pages/EcocreditsByAccount/PortfolioTab/EcocreditsByAccount.PortfolioTab';
+import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
 
 import { KeplrRoute, ProtectedRoute } from './components/atoms';
-import { RegistryLayout } from './components/organisms';
 import { ProjectMetadata } from './pages/ProjectMetadata/ProjectMetadata';
 
 const Additionality = lazy(() => import('./pages/Additionality'));
@@ -116,15 +116,11 @@ export const routes = createRoutesFromElements(
     <Route
       path="ecocredits/accounts/:accountAddress"
       element={<EcocreditsByAccount />}
-<<<<<<< HEAD:web-registry/src/routes.tsx
     >
       <Route path="portfolio" element={<PortfolioTab />} />
       <Route path="bridge" element={<BridgeTab />} />
     </Route>
-=======
-    />
-    <Route path="ecocredit-batches" element={<EcocreditBatches />} />
->>>>>>> 95e379f3 (feat: create ecocredit batches page):web-registry/src/App.tsx
+    <Route path="ecocredit-batches/:page" element={<EcocreditBatches />} />
     <Route
       path="ecocredits/create-batch"
       element={<KeplrRoute component={CreateBatch} />}

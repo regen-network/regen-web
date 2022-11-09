@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 
 import Section from 'web-components/lib/components/section';
@@ -7,7 +9,19 @@ import { CreditBatches } from 'components/organisms';
 import { usePaginatedBatches } from 'hooks/batches/usePaginatedBatches';
 
 export const EcocreditBatches = (): JSX.Element => {
-  const { batchesWithSupply, setPaginationParams } = usePaginatedBatches();
+  const navigate = useNavigate();
+  const { page: routePage } = useParams();
+  const { batchesWithSupply, setPaginationParams, paginationParams } =
+    usePaginatedBatches();
+  const { page } = paginationParams;
+
+  useEffect(() => {
+    // route page index starts at 1
+    // but page index starts at 0 for ActionsTable
+    if (routePage !== String(page + 1)) {
+      navigate(`/ecocredit-batches/${page + 1}`);
+    }
+  }, [page, routePage, navigate]);
 
   return (
     <Box sx={{ backgroundColor: 'grey.50' }}>
@@ -19,6 +33,7 @@ export const EcocreditBatches = (): JSX.Element => {
           <CreditBatches
             creditBatches={batchesWithSupply}
             onTableChange={setPaginationParams}
+            initialPaginationParams={paginationParams}
           />
         </Box>
       </Section>

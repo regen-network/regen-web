@@ -25,7 +25,7 @@ export const getMenuItems = (pathname: string): HeaderMenuItem[] => [
       },
       {
         pathname,
-        href: '/ecocredit-batches',
+        href: '/ecocredit-batches/1',
         title: 'Ecocredit batches',
         linkComponent: Link,
       },

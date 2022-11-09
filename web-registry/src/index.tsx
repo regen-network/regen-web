@@ -120,10 +120,10 @@ root.render(
       <QueryClientProvider client={queryClient}>
         <IntercomProvider appId={intercomId} autoBoot>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <WalletProvider>
-              <LedgerProvider>
-                <ThemeProvider injectFonts>
-                  <AnalyticsProvider instance={analytics}>
+            <AnalyticsProvider instance={analytics}>
+              <WalletProvider>
+                <LedgerProvider>
+                  <ThemeProvider injectFonts>
                     <GlobalProvider>
                       <Suspense fallback={<PageLoader />}>
                         <RouterProvider
@@ -132,10 +132,10 @@ root.render(
                         />
                       </Suspense>
                     </GlobalProvider>
-                  </AnalyticsProvider>
-                </ThemeProvider>
-              </LedgerProvider>
-            </WalletProvider>
+                  </ThemeProvider>
+                </LedgerProvider>
+              </WalletProvider>
+            </AnalyticsProvider>
           </LocalizationProvider>
         </IntercomProvider>
       </QueryClientProvider>

@@ -56,6 +56,7 @@ export type TablePaginationParams = {
   page: number;
   rowsPerPage: number;
   offset: number;
+  count?: number;
 };
 
 interface ActionsTableProps {
@@ -65,6 +66,7 @@ interface ActionsTableProps {
   renderActionButtons?: RenderActionButtonsFunc;
   onTableChange?: Dispatch<SetStateAction<TablePaginationParams>>;
   initialPaginationParams?: TablePaginationParams;
+  isRoutePagination?: boolean;
   sx?: {
     root?: SxProps<Theme>;
   };
@@ -77,6 +79,7 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
   renderActionButtons,
   onTableChange,
   initialPaginationParams = DEFAULT_TABLE_PAGINATION_PARAMS,
+  isRoutePagination = false,
   sx,
 }) => {
   const {
@@ -139,10 +142,12 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
     (_: unknown, newPage: number) => {
       const offset = newPage * rowsPerPage;
       setPage(newPage);
-      setOffset(offset);
+      if (!isRoutePagination) {
+        setOffset(offset);
+      }
       onTableChange && onTableChange({ page: newPage, rowsPerPage, offset });
     },
-    [onTableChange, rowsPerPage],
+    [onTableChange, rowsPerPage, isRoutePagination],
   );
 
   return (
@@ -228,7 +233,7 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
                   rowsPerPageOptions={[5, 10]}
                   rowsPerPage={rowsPerPage}
                   onChangeRowsPerPage={onChangeRowsPerPage}
-                  count={rows.length}
+                  count={initialPaginationParams?.count ?? rows.length}
                   page={page}
                   onPageChange={onPageChange}
                 />

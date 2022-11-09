@@ -17,7 +17,7 @@ export const EcocreditBatches = (): JSX.Element => {
 
   useEffect(() => {
     // route page index starts at 1
-    // but page index starts at 0 for ActionsTable
+    // but page index starts at 0 for mui Table
     if (routePage !== String(page + 1)) {
       navigate(`/ecocredit-batches/${page + 1}`);
     }
@@ -34,6 +34,7 @@ export const EcocreditBatches = (): JSX.Element => {
             creditBatches={batchesWithSupply}
             onTableChange={setPaginationParams}
             initialPaginationParams={paginationParams}
+            isRoutePagination
           />
         </Box>
       </Section>

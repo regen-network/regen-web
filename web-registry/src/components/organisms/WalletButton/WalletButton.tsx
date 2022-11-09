@@ -1,11 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import { useTrack } from 'use-analytics';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -35,9 +28,6 @@ const WalletButton: React.FC = () => {
   const [modalState, setModalState] =
     useState<WalletModalState>('wallet-select');
   const isConnected = loaded ? !!wallet?.address : null;
-  const track = useTrack();
-  const wrappedTrack = useCallback(track, []);
-  const addressRef = useRef<string>();
 
   const onButtonClick = useCallback(
     (): void => setIsModalOpen(true),
@@ -70,17 +60,6 @@ const WalletButton: React.FC = () => {
     isConnected,
   });
   useResetModalOnConnect({ setIsModalOpen, setModalState, wallet });
-
-  const address = wallet?.address;
-  useEffect(() => {
-    if (!!address && address !== addressRef.current) {
-      addressRef.current = address;
-      console.log(Date(), address);
-      console.log('NEW LOGIN EVENT');
-      console.log('addressRef', addressRef.current);
-      //wrappedTrack('NEW LOGIN EVENT');
-    }
-  }, [address]);
 
   return chainId ? (
     <>

@@ -91,6 +91,7 @@ export const Projects: React.FC = () => {
         {projects?.map(project => (
           <Box key={project?.id}>
             <ProjectCard
+              id={project?.id}
               name={project?.name}
               imgSrc={project?.imgSrc}
               place={project?.place}

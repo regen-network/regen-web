@@ -7,6 +7,8 @@ import {
   ReactQueryBatchesResponse,
 } from './queries.ecocredit.types';
 
+/* getBatchesQuery */
+
 export const getBatchesQuery = ({
   client,
   request,
@@ -28,7 +30,10 @@ export const getBatchesQuery = ({
   },
   enabled,
   staleTime: Infinity,
+  keepPreviousData: true,
 });
+
+/* getBatchesQuery */
 
 export const getAddDataToBatchesQuery = ({
   batches,

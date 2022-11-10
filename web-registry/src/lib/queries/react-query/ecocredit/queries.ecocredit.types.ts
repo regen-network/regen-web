@@ -14,6 +14,7 @@ export type ReactQueryBatchesResponse = {
   queryKey: string[];
   queryFn: () => Promise<QueryBatchesResponse | void>;
   enabled: boolean;
+  keepPreviousData: boolean;
   staleTime: number;
 };
 

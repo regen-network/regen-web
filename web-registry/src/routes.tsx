@@ -136,7 +136,6 @@ export const routes = createRoutesFromElements(
       loader={ecocreditBatchesLoader({
         ecocreditClientAsync,
         queryClient: reactQueryClient,
-        sanityClient,
       })}
     />
 >>>>>>> 6cac8014 (wip: use loader):web-registry/src/App.tsx

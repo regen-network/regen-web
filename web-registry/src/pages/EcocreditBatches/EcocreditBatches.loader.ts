@@ -1,4 +1,3 @@
-import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import { QueryBatchesResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { QueryClient } from '@tanstack/react-query';
 
@@ -9,7 +8,6 @@ import { PAGINATED_BATCHES_ROWS_PER_PAGE } from 'hooks/batches/usePaginatedBatch
 
 type LoaderType = {
   queryClient: QueryClient;
-  sanityClient: ApolloClient<NormalizedCacheObject>;
   ecocreditClientAsync: Promise<EcocreditQueryClient | undefined>;
 };
 

@@ -2,6 +2,7 @@ import { QueryClientImpl as EcocreditQueryClientImpl } from '@regen-network/api/
 
 import { connect } from 'ledger';
 
+// Light ecocredit client without signer, to be used in route loaders
 export const ecocreditClientAsync = connect().then(api =>
   api?.queryClient ? new EcocreditQueryClientImpl(api.queryClient) : undefined,
 );

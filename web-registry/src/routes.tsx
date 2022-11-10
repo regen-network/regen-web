@@ -16,7 +16,6 @@ import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayo
 
 import { ecocreditClientAsync } from 'lib/clients/ecocreditQueryClient';
 import { reactQueryClient } from 'lib/clients/reactQueryClient';
-import { client as sanityClient } from 'sanity';
 
 import { ecocreditBatchesLoader } from 'pages/EcocreditBatches/EcocreditBatches.loader';
 

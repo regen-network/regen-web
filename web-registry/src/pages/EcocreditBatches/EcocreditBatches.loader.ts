@@ -16,7 +16,11 @@ export const batchesQuery = ({
   client,
   request,
 }: QueryBatchesProps): BatchesQueryType => ({
-  queryKey: ['batches', String(request.pagination?.offset ?? 0)],
+  queryKey: [
+    'batches',
+    String(request.pagination?.offset ?? 0),
+    String(request.pagination?.limit ?? 0),
+  ],
   queryFn: async () => {
     const batches = await queryBatches({ client, request });
 

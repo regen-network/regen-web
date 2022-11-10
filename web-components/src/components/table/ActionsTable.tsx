@@ -91,6 +91,7 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
   const [offset, setOffset] = useState(initialOffset);
   const [rowsPerPage, setRowsPerPage] = useState(initialRowsPerPage);
   const [displayRows, setDisplayRows] = useState<React.ReactNode[][]>(rows);
+  const maxCount = Math.max(initialPaginationParams?.count ?? 0, rows.length);
   // const [order, setOrder] = useState<Order>('desc');
   // const [orderBy, setOrderBy] = useState<keyof TableCredits>('start_date');
 
@@ -133,9 +134,10 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
           page,
           rowsPerPage: newRowsPerPage,
           offset: 0,
+          count: initialPaginationParams.count,
         });
     },
-    [onTableChange, page],
+    [onTableChange, page, initialPaginationParams],
   );
 
   const onPageChange = useCallback(
@@ -145,9 +147,15 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
       if (!isRoutePagination) {
         setOffset(offset);
       }
-      onTableChange && onTableChange({ page: newPage, rowsPerPage, offset });
+      onTableChange &&
+        onTableChange({
+          page: newPage,
+          rowsPerPage,
+          offset,
+          count: initialPaginationParams.count,
+        });
     },
-    [onTableChange, rowsPerPage, isRoutePagination],
+    [onTableChange, rowsPerPage, isRoutePagination, initialPaginationParams],
   );
 
   return (
@@ -225,7 +233,7 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
             </TableBody>
           </Table>
         </Box>
-        {rows.length > 5 && (
+        {maxCount > 5 && (
           <Table>
             <TableFooter sx={{ position: 'sticky', left: 0 }}>
               <TableRow>

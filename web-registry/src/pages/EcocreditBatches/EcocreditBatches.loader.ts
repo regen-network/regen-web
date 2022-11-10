@@ -1,7 +1,10 @@
 import { QueryBatchesResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { QueryClient } from '@tanstack/react-query';
 
+import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import {
+  addDataToBatch,
+  AddDataToBatchParams,
   EcocreditQueryClient,
   queryBatches,
   QueryBatchesProps,
@@ -10,6 +13,11 @@ import {
 type BatchesQueryType = {
   queryKey: string[];
   queryFn: () => Promise<QueryBatchesResponse>;
+};
+
+type AddDataToBatchesQueryType = {
+  queryKey: string[];
+  queryFn: () => Promise<BatchInfoWithSupply[]>;
 };
 
 export const batchesQuery = ({
@@ -25,6 +33,21 @@ export const batchesQuery = ({
     const batches = await queryBatches({ client, request });
 
     return batches;
+  },
+});
+
+export const addDataToBatchesQuery = ({
+  batches,
+  sanityCreditClassData,
+}: AddDataToBatchParams): AddDataToBatchesQueryType => ({
+  queryKey: ['addDataTobatches', batches.map(batch => batch.denom).join(',')],
+  queryFn: async () => {
+    const batchesWithSupply = await addDataToBatch({
+      batches,
+      sanityCreditClassData,
+    });
+
+    return batchesWithSupply;
   },
 });
 

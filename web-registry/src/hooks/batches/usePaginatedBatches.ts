@@ -11,7 +11,10 @@ import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
 import { addDataToBatch } from 'lib/ecocredit/api';
 
-import { batchesQuery } from 'pages/EcocreditBatches/EcocreditBatches.loader';
+import {
+  addDataToBatchesQuery,
+  batchesQuery,
+} from 'pages/EcocreditBatches/EcocreditBatches.loader';
 
 import { client as sanityClient } from '../../sanity';
 
@@ -83,17 +86,17 @@ export const usePaginatedBatches = (): {
 
   useEffect(() => {
     const fetchBatchWithSupply = async (): Promise<void> => {
-      if (batches && sanityCreditClassData) {
-        const batchesWithSupply = await addDataToBatch({
-          batches,
-          sanityCreditClassData,
-        });
+      if (queryClient && batches && sanityCreditClassData) {
+        const query = addDataToBatchesQuery({ batches, sanityCreditClassData });
+        const batchesWithSupply =
+          queryClient.getQueryData<BatchInfoWithSupply[]>(query.queryKey) ??
+          (await queryClient.fetchQuery(query));
         setBatchesWithSupply(batchesWithSupply);
       }
     };
 
     fetchBatchWithSupply();
-  }, [batches, sanityCreditClassData]);
+  }, [batches, sanityCreditClassData, queryClient]);
 
   return {
     batchesWithSupply: batchesWithSupply ?? batchesWithDefaultSupply,

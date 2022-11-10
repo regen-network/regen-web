@@ -1,11 +1,12 @@
 import { useMemo, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
 import {
   BatchInfo,
   QueryProjectsResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
+import { useAnalytics } from 'use-analytics';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -153,6 +154,8 @@ export const Storefront = (): JSX.Element => {
   const submittedQuantityRef = useRef<number>();
   const isBuyModalOpen = selectedSellOrder !== null && selectedAction === 'buy';
   const navigate = useNavigate();
+  const location = useLocation();
+  const { track } = useAnalytics();
   const isCancelModalOpen =
     selectedSellOrder !== null && selectedAction === 'cancel';
   useResetErrorBanner({ displayErrorBanner, setDisplayErrorBanner });
@@ -350,6 +353,12 @@ export const Storefront = (): JSX.Element => {
                         }
                         size="small"
                         onClick={async () => {
+                          track('buy1', {
+                            url: location.pathname,
+                            buttonLocation: 'sellOrderTable',
+                            projectName: normalizedSellOrders[i].project?.name,
+                            projectId: normalizedSellOrders[i].project?.id,
+                          });
                           if (accountAddress) {
                             selectedSellOrderIdRef.current = Number(
                               sellOrders?.[i].id,

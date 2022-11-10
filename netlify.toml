@@ -10,6 +10,7 @@
   REACT_APP_LEDGER_CHAIN_ID = "regen-1"
   REACT_APP_SENTRY_ENVIRONMENT="production"
   REACT_APP_ANALYTICS_ENABLED="true"
+  REACT_APP_GA_MEASUREMENT_ID="G-6ZGJM8JXYN"
 
 [context.deploy-preview.environment]
   REACT_APP_SANITY_TAG = "default"

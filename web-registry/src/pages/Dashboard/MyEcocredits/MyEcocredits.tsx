@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { SxProps, useTheme } from '@mui/material';
 import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
-import { useTrack } from 'use-analytics';
 
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
@@ -37,6 +36,7 @@ import {
 import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { getHashUrl } from 'lib/block-explorer';
+import { useTracker } from 'lib/tracker/useTracker';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
 import { Link } from 'components/atoms';
@@ -100,7 +100,7 @@ export const MyEcocredits = (): JSX.Element => {
   const [txButtonTitle, setTxButtonTitle] = useState<string | undefined>();
 
   const navigate = useNavigate();
-  const track = useTrack();
+  const { track } = useTracker();
 
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({

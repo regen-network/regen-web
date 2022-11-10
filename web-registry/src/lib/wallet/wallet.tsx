@@ -2,7 +2,8 @@ import React, { createContext, useRef, useState } from 'react';
 import { OfflineSigner } from '@cosmjs/proto-signing';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 import WalletConnect from '@walletconnect/client';
-import { useTrack } from 'use-analytics';
+
+import { useTracker } from 'lib/tracker/useTracker';
 
 import { useAutoConnect } from './hooks/useAutoConnect';
 import { useConnect } from './hooks/useConnect';
@@ -60,7 +61,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const [walletConnectUri, setWalletConnectUri] = useState<
     string | undefined
   >();
-  const track = useTrack();
+  const { track } = useTracker();
 
   const onQrCloseCallbackRef = useRef<() => void>();
 

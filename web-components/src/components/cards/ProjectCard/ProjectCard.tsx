@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Box, SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
-import { useAnalytics } from 'use-analytics';
+import { Buy1Event } from 'web-registry/src/lib/tracker/types';
+import { useTracker } from 'web-registry/src/lib/tracker/useTracker';
 
 import { formatStandardInfo } from '../../../utils/format';
 import OutlinedButton from '../../buttons/OutlinedButton';
@@ -61,7 +62,7 @@ export function ProjectCard({
   const theme = useTheme();
   const { classes } = useProjectCardStyles();
   const location = useLocation();
-  const { track } = useAnalytics();
+  const { track } = useTracker();
 
   const [open, setOpen] = useState<boolean>(true);
 
@@ -230,13 +231,14 @@ export function ProjectCard({
                   <OutlinedButton
                     onClick={event => {
                       event.stopPropagation();
-                      track('buy1', {
+                      const trackData: Buy1Event = {
                         url: location.pathname,
                         cardType: 'project',
                         buttonLocation: 'projectCard',
                         projectName: name,
                         projectId: id,
-                      });
+                      };
+                      track('buy1', trackData);
                       onButtonClick && onButtonClick();
                     }}
                     size="small"

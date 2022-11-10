@@ -2,7 +2,6 @@ import { useCallback } from 'react';
 import { Box } from '@mui/material';
 import { MsgBuyDirect } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
 import { quantityFormatNumberOptions } from 'config/decimals';
-import { useTrack } from 'use-analytics';
 import { getDenomtrace } from 'utils/ibc/getDenomTrace';
 
 import { Item } from 'web-components/lib/components/modal/TxModal';
@@ -14,6 +13,7 @@ import { getJurisdictionIsoCode } from 'web-components/lib/utils/locationStandar
 
 import { UseStateSetter } from 'types/react/use-state';
 import { microToDenom } from 'lib/denom.utils';
+import { useTracker } from 'lib/tracker/useTracker';
 
 import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import DenomIcon from 'components/molecules/DenomIcon';
@@ -61,7 +61,7 @@ const useBuySellOrderSubmit = ({
   refetchSellOrders,
   onSubmitCallback,
 }: Props): ReturnType => {
-  const track = useTrack();
+  const { track } = useTracker();
   const buySellOrderSubmit = useCallback(
     async (values: BuyCreditsValues): Promise<void> => {
       if (!accountAddress) return Promise.reject();

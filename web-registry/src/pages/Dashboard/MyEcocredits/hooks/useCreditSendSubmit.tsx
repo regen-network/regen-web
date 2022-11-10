@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
 import { MsgSend } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
-import { useTrack } from 'use-analytics';
 
 import type { FormValues as CreditSendFormValues } from 'web-components/lib/components/form/CreditSendForm';
 import type { Item } from 'web-components/lib/components/modal/TxModal';
@@ -8,6 +7,7 @@ import type { Item } from 'web-components/lib/components/modal/TxModal';
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import type { UseStateSetter } from 'types/react/use-state';
 import { getAccountUrl } from 'lib/block-explorer';
+import { useTracker } from 'lib/tracker/useTracker';
 
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
@@ -38,7 +38,7 @@ const useCreditSendSubmit = ({
   setTxModalHeader,
   setTxModalTitle,
 }: Props): ReturnType => {
-  const track = useTrack();
+  const { track } = useTracker();
   const creditSendSubmit = useCallback(
     async (values: CreditSendFormValues): Promise<void> => {
       if (!accountAddress) return Promise.reject();

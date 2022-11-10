@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@mui/system';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 import { makeStyles } from 'tss-react/mui';
-import { useTrack } from 'use-analytics';
+import { useTracker } from 'web-registry/src/lib/tracker/useTracker';
 
 import { Theme } from '../../theme/muiTheme';
 import { Flex } from '../box';
@@ -83,7 +83,7 @@ const CreditSendForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   onSubmit,
 }) => {
   const { classes: styles } = useStyles();
-  const track = useTrack();
+  const { track } = useTracker();
 
   const initialValues = {
     sender,

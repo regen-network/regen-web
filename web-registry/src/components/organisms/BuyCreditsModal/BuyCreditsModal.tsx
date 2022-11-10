@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useState } from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import Collapse from '@mui/material/Collapse';
@@ -8,7 +8,6 @@ import Grid from '@mui/material/Grid';
 import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 import { RadioGroup } from 'formik-mui';
-import { useAnalytics } from 'use-analytics';
 
 import { Flex } from 'web-components/lib/components/box';
 import Card from 'web-components/lib/components/cards/Card';
@@ -35,6 +34,8 @@ import {
 } from 'web-components/lib/components/typography';
 
 import { microToDenom } from 'lib/denom.utils';
+import { Buy2Event } from 'lib/tracker/types';
+import { useTracker } from 'lib/tracker/useTracker';
 
 import { UISellOrderInfo } from 'pages/Projects/Projects.types';
 import { Link as DynamicLink } from 'components/atoms/Link';
@@ -114,7 +115,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
     const [selectedSellOrder, setSelectedSellOrder] = useState<
       UISellOrderInfo | undefined
     >(undefined);
-    const { track } = useAnalytics();
+    const { track } = useTracker();
 
     const validationHandler = (
       values: BuyCreditsValues,

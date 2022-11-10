@@ -3,6 +3,7 @@ import WalletConnect from '@walletconnect/client';
 import truncate from 'lodash/truncate';
 
 import { UseStateSetter } from 'types/react/use-state';
+import { LoginEvent } from 'lib/tracker/types';
 
 import { chainInfo } from './chainInfo/chainInfo';
 import { Wallet } from './wallet';
@@ -89,7 +90,10 @@ export const finalizeConnection = async ({
       address: key.bech32Address,
       shortAddress: truncate(key.bech32Address),
     };
-    if (track) track('login', { date: Date(), account: wallet.address });
+    if (track) {
+      const trackData: LoginEvent = { date: Date(), account: wallet.address };
+      track('login', trackData);
+    }
     setWallet(wallet);
   }
 };

@@ -9,11 +9,14 @@ import { AddDataToBatchParams, QueryBatchesProps } from 'lib/ecocredit/api';
 
 export type QueryBatchesLoaderProps = Omit<QueryBatchesProps, 'client'> & {
   client?: QueryBatchesProps['client'];
+  enabled: boolean;
 };
 
 export type QueryBatchesLoaderResponse = {
-  queryKey?: string[];
+  queryKey: string[];
   queryFn: () => Promise<QueryBatchesResponse | void>;
+  enabled: boolean;
+  staleTime: number;
 };
 
 /* AddDataToBatchesQuery */
@@ -28,6 +31,7 @@ export type AddDataToBatchLoaderParams = Omit<
 export type AddDataToBatchesQueryLoaderResponse = {
   queryKey?: string[];
   queryFn: () => Promise<BatchInfoWithSupply[] | void>;
+  staleTime: number;
 };
 
 /* getAllCreditClassesQuery */

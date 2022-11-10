@@ -2,8 +2,6 @@ import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import { QueryBatchesResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { QueryClient } from '@tanstack/react-query';
 
-import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/ActionsTable.constants';
-
 import {
   AllCreditClassDocument,
   AllCreditClassQuery,
@@ -14,7 +12,7 @@ import {
   queryBatches,
 } from 'lib/ecocredit/api';
 
-import { ROWS_PER_PAGE } from 'hooks/batches/usePaginatedBatches';
+import { PAGINATED_BATCHES_ROWS_PER_PAGE } from 'hooks/batches/usePaginatedBatches';
 
 import {
   AddDataToBatchesQueryLoaderResponse,
@@ -28,8 +26,9 @@ import {
 export const getBatchesQuery = ({
   client,
   request,
+  enabled,
 }: QueryBatchesLoaderProps): QueryBatchesLoaderResponse => ({
-  queryKey: client && [
+  queryKey: [
     'batches',
     String(request.pagination?.offset ?? 0),
     String(request.pagination?.limit ?? 0),
@@ -43,6 +42,8 @@ export const getBatchesQuery = ({
 
     return undefined;
   },
+  enabled,
+  staleTime: Infinity,
 });
 
 export const getAddDataToBatchesQuery = ({
@@ -65,6 +66,7 @@ export const getAddDataToBatchesQuery = ({
 
     return undefined;
   },
+  staleTime: Infinity,
 });
 
 export const getAllCreditClassesQuery = ({
@@ -88,7 +90,7 @@ type LoaderType = {
 };
 
 export const ecocreditBatchesLoader =
-  ({ queryClient, ecocreditClientAsync, sanityClient }: LoaderType) =>
+  ({ queryClient, ecocreditClientAsync }: LoaderType) =>
   async ({ params }: { params: any }) => {
     const ecocreditClient = await ecocreditClientAsync;
     const page = Number(params.page) - 1;
@@ -97,31 +99,18 @@ export const ecocreditBatchesLoader =
       client: ecocreditClient,
       request: {
         pagination: {
-          offset: page * ROWS_PER_PAGE,
-          limit: ROWS_PER_PAGE,
+          offset: page * PAGINATED_BATCHES_ROWS_PER_PAGE,
+          limit: PAGINATED_BATCHES_ROWS_PER_PAGE,
           countTotal: true,
         },
       },
+      enabled: !!ecocreditClient,
     });
-    const allCreditClassesQuery = getAllCreditClassesQuery({ sanityClient });
 
     const batches =
       queryClient.getQueryData<QueryBatchesResponse>(
         batchesQuery.queryKey ?? [],
       ) ?? (await queryClient.fetchQuery(batchesQuery));
-    const allCreditClasses =
-      queryClient.getQueryData<AllCreditClassQuery>(
-        allCreditClassesQuery.queryKey,
-      ) ?? (await queryClient.fetchQuery(allCreditClassesQuery));
 
-    const addDataToBatchesQuery = getAddDataToBatchesQuery({
-      batches: batches?.batches,
-      sanityCreditClassData: allCreditClasses,
-    });
-    const batchesWithSupply =
-      queryClient.getQueryData<AllCreditClassQuery>(
-        addDataToBatchesQuery.queryKey ?? [],
-      ) ?? queryClient.fetchQuery(addDataToBatchesQuery);
-
-    return { batches, batchesWithSupply };
+    return { batches };
   };

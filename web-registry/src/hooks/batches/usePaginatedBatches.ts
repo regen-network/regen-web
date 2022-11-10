@@ -16,7 +16,7 @@ import {
 
 import { client as sanityClient } from '../../sanity';
 
-export const ROWS_PER_PAGE = 10;
+export const PAGINATED_BATCHES_ROWS_PER_PAGE = 10;
 
 export const usePaginatedBatches = (): {
   batchesWithSupply: BatchInfoWithSupply[] | undefined;
@@ -31,7 +31,7 @@ export const usePaginatedBatches = (): {
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
       page,
-      rowsPerPage: ROWS_PER_PAGE,
+      rowsPerPage: PAGINATED_BATCHES_ROWS_PER_PAGE,
       offset: 0,
     });
   const { rowsPerPage } = paginationParams;
@@ -41,17 +41,17 @@ export const usePaginatedBatches = (): {
   );
 
   /* Fetch current page batches */
-
   const batchesResult = useQuery(
     getBatchesQuery({
       client: ecocreditClient,
       request: {
         pagination: {
           offset: page * rowsPerPage,
-          limit: routePage !== undefined ? rowsPerPage : undefined,
+          limit: rowsPerPage,
           countTotal: true,
         },
       },
+      enabled: !!ecocreditClient,
     }),
   );
 

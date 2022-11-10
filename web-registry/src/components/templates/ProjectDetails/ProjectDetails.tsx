@@ -225,6 +225,8 @@ function ProjectDetails(): JSX.Element {
             ? () => setIsBuyFlowStarted(true)
             : () => setDisplayErrorBanner(true)
         }
+        onChainProjectId={onChainProjectId}
+        projectName={metadata?.['schema:name']}
       />
 
       <ProjectTopSection

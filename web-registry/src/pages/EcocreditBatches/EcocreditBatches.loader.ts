@@ -2,6 +2,8 @@ import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import { QueryBatchesResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { QueryClient } from '@tanstack/react-query';
 
+import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/ActionsTable.constants';
+
 import {
   AllCreditClassDocument,
   AllCreditClassQuery,
@@ -11,6 +13,8 @@ import {
   EcocreditQueryClient,
   queryBatches,
 } from 'lib/ecocredit/api';
+
+import { ROWS_PER_PAGE } from 'hooks/batches/usePaginatedBatches';
 
 import {
   AddDataToBatchesQueryLoaderResponse,
@@ -85,12 +89,19 @@ type LoaderType = {
 
 export const ecocreditBatchesLoader =
   ({ queryClient, ecocreditClientAsync, sanityClient }: LoaderType) =>
-  async () => {
+  async ({ params }: { params: any }) => {
     const ecocreditClient = await ecocreditClientAsync;
+    const page = Number(params.page) - 1;
 
     const batchesQuery = getBatchesQuery({
       client: ecocreditClient,
-      request: {},
+      request: {
+        pagination: {
+          offset: page * ROWS_PER_PAGE,
+          limit: ROWS_PER_PAGE,
+          countTotal: true,
+        },
+      },
     });
     const allCreditClassesQuery = getAllCreditClassesQuery({ sanityClient });
 

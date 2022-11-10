@@ -4,19 +4,19 @@ import { useQuery } from '@tanstack/react-query';
 
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 
-import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
 
 import {
   getAddDataToBatchesQuery,
+  getAllCreditClassesQuery,
   getBatchesQuery,
 } from 'pages/EcocreditBatches/EcocreditBatches.loader';
 
 import { client as sanityClient } from '../../sanity';
 
-const ROWS_PER_PAGE = 10;
+export const ROWS_PER_PAGE = 10;
 
 export const usePaginatedBatches = (): {
   batchesWithSupply: BatchInfoWithSupply[] | undefined;
@@ -36,9 +36,9 @@ export const usePaginatedBatches = (): {
     });
   const { rowsPerPage } = paginationParams;
 
-  const { data: sanityCreditClassData } = useAllCreditClassQuery({
-    client: sanityClient,
-  });
+  const sanityCreditClassDataResult = useQuery(
+    getAllCreditClassesQuery({ sanityClient }),
+  );
 
   /* Fetch current page batches */
 
@@ -61,7 +61,7 @@ export const usePaginatedBatches = (): {
   const batchesWithSupplyResult = useQuery(
     getAddDataToBatchesQuery({
       batches,
-      sanityCreditClassData,
+      sanityCreditClassData: sanityCreditClassDataResult.data,
     }),
   );
 

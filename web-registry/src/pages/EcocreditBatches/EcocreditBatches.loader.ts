@@ -1,5 +1,11 @@
+import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
+import { QueryBatchesResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { QueryClient } from '@tanstack/react-query';
 
+import {
+  AllCreditClassDocument,
+  AllCreditClassQuery,
+} from 'generated/sanity-graphql';
 import {
   addDataToBatch,
   EcocreditQueryClient,
@@ -9,11 +15,13 @@ import {
 import {
   AddDataToBatchesQueryLoaderResponse,
   AddDataToBatchLoaderParams,
+  GetAllCreditClassesLoaderParams,
+  GetAllCreditClassesLoaderResponse,
   QueryBatchesLoaderProps,
   QueryBatchesLoaderResponse,
 } from './EcocreditBatches.types';
 
-export const batchesQuery = ({
+export const getBatchesQuery = ({
   client,
   request,
 }: QueryBatchesLoaderProps): QueryBatchesLoaderResponse => ({
@@ -33,7 +41,7 @@ export const batchesQuery = ({
   },
 });
 
-export const addDataToBatchesQuery = ({
+export const getAddDataToBatchesQuery = ({
   batches,
   sanityCreditClassData,
 }: AddDataToBatchLoaderParams): AddDataToBatchesQueryLoaderResponse => ({
@@ -55,17 +63,54 @@ export const addDataToBatchesQuery = ({
   },
 });
 
+export const getAllCreditClassesQuery = ({
+  sanityClient,
+}: GetAllCreditClassesLoaderParams): GetAllCreditClassesLoaderResponse => ({
+  queryKey: ['AllCreditClassQuery'],
+  queryFn: async () => {
+    const { data: sanityCreditClassData } =
+      await sanityClient.query<AllCreditClassQuery>({
+        query: AllCreditClassDocument,
+      });
+
+    return sanityCreditClassData;
+  },
+});
+
 type LoaderType = {
   queryClient: QueryClient;
-  ecocreditClient: EcocreditQueryClient;
+  sanityClient: ApolloClient<NormalizedCacheObject>;
+  ecocreditClientAsync: Promise<EcocreditQueryClient | undefined>;
 };
 
 export const ecocreditBatchesLoader =
-  ({ queryClient, ecocreditClient }: LoaderType) =>
+  ({ queryClient, ecocreditClientAsync, sanityClient }: LoaderType) =>
   async () => {
-    const query = batchesQuery({ client: ecocreditClient, request: {} });
-    return (
-      queryClient.getQueryData(query.queryKey ?? []) ??
-      (await queryClient.fetchQuery(query))
-    );
+    const ecocreditClient = await ecocreditClientAsync;
+
+    const batchesQuery = getBatchesQuery({
+      client: ecocreditClient,
+      request: {},
+    });
+    const allCreditClassesQuery = getAllCreditClassesQuery({ sanityClient });
+
+    const batches =
+      queryClient.getQueryData<QueryBatchesResponse>(
+        batchesQuery.queryKey ?? [],
+      ) ?? (await queryClient.fetchQuery(batchesQuery));
+    const allCreditClasses =
+      queryClient.getQueryData<AllCreditClassQuery>(
+        allCreditClassesQuery.queryKey,
+      ) ?? (await queryClient.fetchQuery(allCreditClassesQuery));
+
+    const addDataToBatchesQuery = getAddDataToBatchesQuery({
+      batches: batches?.batches,
+      sanityCreditClassData: allCreditClasses,
+    });
+    const batchesWithSupply =
+      queryClient.getQueryData<AllCreditClassQuery>(
+        addDataToBatchesQuery.queryKey ?? [],
+      ) ?? queryClient.fetchQuery(addDataToBatchesQuery);
+
+    return { batches, batchesWithSupply };
   };

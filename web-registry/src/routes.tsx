@@ -14,6 +14,12 @@ import { BridgeTab } from 'pages/EcocreditsByAccount/BridgeTab/BridgeTab';
 import { PortfolioTab } from 'pages/EcocreditsByAccount/PortfolioTab/EcocreditsByAccount.PortfolioTab';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
 
+import { ecocreditClientAsync } from 'lib/clients/ecocreditQueryClient';
+import { reactQueryClient } from 'lib/clients/reactQueryClient';
+import { client as sanityClient } from 'sanity';
+
+import { ecocreditBatchesLoader } from 'pages/EcocreditBatches/EcocreditBatches.loader';
+
 import { KeplrRoute, ProtectedRoute } from './components/atoms';
 import { ProjectMetadata } from './pages/ProjectMetadata/ProjectMetadata';
 
@@ -116,11 +122,24 @@ export const routes = createRoutesFromElements(
     <Route
       path="ecocredits/accounts/:accountAddress"
       element={<EcocreditsByAccount />}
+<<<<<<< HEAD:web-registry/src/routes.tsx
     >
       <Route path="portfolio" element={<PortfolioTab />} />
       <Route path="bridge" element={<BridgeTab />} />
     </Route>
     <Route path="ecocredit-batches/:page" element={<EcocreditBatches />} />
+=======
+    />
+    <Route
+      path="ecocredit-batches/:page"
+      element={<EcocreditBatches />}
+      loader={ecocreditBatchesLoader({
+        ecocreditClientAsync,
+        queryClient: reactQueryClient,
+        sanityClient,
+      })}
+    />
+>>>>>>> 6cac8014 (wip: use loader):web-registry/src/App.tsx
     <Route
       path="ecocredits/create-batch"
       element={<KeplrRoute component={CreateBatch} />}

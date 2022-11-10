@@ -10,8 +10,8 @@ import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
 
 import {
-  addDataToBatchesQuery,
-  batchesQuery,
+  getAddDataToBatchesQuery,
+  getBatchesQuery,
 } from 'pages/EcocreditBatches/EcocreditBatches.loader';
 
 import { client as sanityClient } from '../../sanity';
@@ -25,7 +25,9 @@ export const usePaginatedBatches = (): {
 } => {
   const { ecocreditClient } = useLedger();
   const { page: routePage } = useParams();
-  const page = routePage ? Number(routePage) - 1 : 0;
+  // Page index starts at 1 for route
+  // Page index starts at 0 for MUI Table
+  const page = Number(routePage) - 1;
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
       page,
@@ -38,8 +40,10 @@ export const usePaginatedBatches = (): {
     client: sanityClient,
   });
 
+  /* Fetch current page batches */
+
   const batchesResult = useQuery(
-    batchesQuery({
+    getBatchesQuery({
       client: ecocreditClient,
       request: {
         pagination: {
@@ -50,7 +54,19 @@ export const usePaginatedBatches = (): {
       },
     }),
   );
+
+  /* Fetch current page batches supplies */
+
   const batches = batchesResult.data?.batches;
+  const batchesWithSupplyResult = useQuery(
+    getAddDataToBatchesQuery({
+      batches,
+      sanityCreditClassData,
+    }),
+  );
+
+  /* Format hook returned variables */
+
   const batchesPagination = batchesResult.data?.pagination;
   const allBatchesCount = Number(batchesPagination?.total ?? 0);
   const batchesWithDefaultSupply: BatchInfoWithSupply[] | undefined =
@@ -60,13 +76,6 @@ export const usePaginatedBatches = (): {
       retiredAmount: '',
       tradableAmount: '',
     }));
-
-  const batchesWithSupplyResult = useQuery(
-    addDataToBatchesQuery({
-      batches,
-      sanityCreditClassData,
-    }),
-  );
   const batchesWithSupply = batchesWithSupplyResult.data;
 
   return {

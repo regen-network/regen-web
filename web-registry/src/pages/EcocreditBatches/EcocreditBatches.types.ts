@@ -1,5 +1,7 @@
+import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import { QueryBatchesResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
+import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { AddDataToBatchParams, QueryBatchesProps } from 'lib/ecocredit/api';
 
@@ -26,4 +28,15 @@ export type AddDataToBatchLoaderParams = Omit<
 export type AddDataToBatchesQueryLoaderResponse = {
   queryKey?: string[];
   queryFn: () => Promise<BatchInfoWithSupply[] | void>;
+};
+
+/* getAllCreditClassesQuery */
+
+export type GetAllCreditClassesLoaderParams = {
+  sanityClient: ApolloClient<NormalizedCacheObject>;
+};
+
+export type GetAllCreditClassesLoaderResponse = {
+  queryKey: string[];
+  queryFn: () => Promise<AllCreditClassQuery>;
 };

@@ -1,53 +1,57 @@
-import { QueryBatchesResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { QueryClient } from '@tanstack/react-query';
 
-import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import {
   addDataToBatch,
-  AddDataToBatchParams,
   EcocreditQueryClient,
   queryBatches,
-  QueryBatchesProps,
 } from 'lib/ecocredit/api';
 
-type BatchesQueryType = {
-  queryKey: string[];
-  queryFn: () => Promise<QueryBatchesResponse>;
-};
-
-type AddDataToBatchesQueryType = {
-  queryKey: string[];
-  queryFn: () => Promise<BatchInfoWithSupply[]>;
-};
+import {
+  AddDataToBatchesQueryLoaderResponse,
+  AddDataToBatchLoaderParams,
+  QueryBatchesLoaderProps,
+  QueryBatchesLoaderResponse,
+} from './EcocreditBatches.types';
 
 export const batchesQuery = ({
   client,
   request,
-}: QueryBatchesProps): BatchesQueryType => ({
-  queryKey: [
+}: QueryBatchesLoaderProps): QueryBatchesLoaderResponse => ({
+  queryKey: client && [
     'batches',
     String(request.pagination?.offset ?? 0),
     String(request.pagination?.limit ?? 0),
   ],
   queryFn: async () => {
-    const batches = await queryBatches({ client, request });
+    if (client) {
+      const batches = await queryBatches({ client, request });
 
-    return batches;
+      return batches;
+    }
+
+    return undefined;
   },
 });
 
 export const addDataToBatchesQuery = ({
   batches,
   sanityCreditClassData,
-}: AddDataToBatchParams): AddDataToBatchesQueryType => ({
-  queryKey: ['addDataTobatches', batches.map(batch => batch.denom).join(',')],
+}: AddDataToBatchLoaderParams): AddDataToBatchesQueryLoaderResponse => ({
+  queryKey: batches && [
+    'addDataTobatches',
+    batches.map(batch => batch.denom).join(','),
+  ],
   queryFn: async () => {
-    const batchesWithSupply = await addDataToBatch({
-      batches,
-      sanityCreditClassData,
-    });
+    if (batches) {
+      const batchesWithSupply = await addDataToBatch({
+        batches,
+        sanityCreditClassData,
+      });
 
-    return batchesWithSupply;
+      return batchesWithSupply;
+    }
+
+    return undefined;
   },
 });
 
@@ -61,7 +65,7 @@ export const ecocreditBatchesLoader =
   async () => {
     const query = batchesQuery({ client: ecocreditClient, request: {} });
     return (
-      queryClient.getQueryData(query.queryKey) ??
+      queryClient.getQueryData(query.queryKey ?? []) ??
       (await queryClient.fetchQuery(query))
     );
   };

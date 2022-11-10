@@ -89,7 +89,7 @@ export const finalizeConnection = async ({
       address: key.bech32Address,
       shortAddress: truncate(key.bech32Address),
     };
-    if (track) track('loginNew', { date: Date(), account: wallet.address });
+    if (track) track('login', { date: Date(), account: wallet.address });
     setWallet(wallet);
   }
 };

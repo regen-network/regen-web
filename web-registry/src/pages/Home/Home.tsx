@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Box, CardMedia } from '@mui/material';
+import { Box } from '@mui/material';
 import { gradients } from 'styles/gradients';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { Loading } from 'web-components/lib/components/loading';
 import Modal from 'web-components/lib/components/modal';
-import Section from 'web-components/lib/components/section';
 import SEO from 'web-components/lib/components/seo';
 import { Body, Title } from 'web-components/lib/components/typography';
 
-import { usePaginatedBatches } from 'hooks/batches/usePaginatedBatches';
-
-import topographyImg from '../../assets/background-contour-1.jpg';
 import horsesImg from '../../assets/horses-grazing.png';
 import { SanityButton } from '../../components/atoms';
 import { BackgroundImgSection, HeroAction } from '../../components/molecules';
-import { CreditBatches, CreditClassCards } from '../../components/organisms';
+import { CreditClassCards } from '../../components/organisms';
 import {
   useAllCreditClassQuery,
   useAllHomePageQuery,
@@ -139,9 +135,17 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
       <FeaturedProjects />
 
       {creditClassesContent && (
-        <Section
+        <BackgroundImgSection
+          img={heroSection?.background?.image?.asset?.url || ''}
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+          }}
           title="Credit Classes"
-          classes={{ root: classes.section, title: classes.title }}
+          classes={{
+            root: classes.creditClassBackground,
+            title: classes.title,
+          }}
           id="credit-classes"
         >
           <CreditClassCards
@@ -149,7 +153,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
             justifyContent={['center', 'center', 'flex-start']}
             creditClassesContent={creditClassesContent} // CMS data
           />
-        </Section>
+        </BackgroundImgSection>
       )}
 
       <HeroAction

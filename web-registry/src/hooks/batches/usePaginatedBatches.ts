@@ -7,12 +7,11 @@ import { TablePaginationParams } from 'web-components/lib/components/table/Actio
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
-
 import {
   getAddDataToBatchesQuery,
-  getAllCreditClassesQuery,
   getBatchesQuery,
-} from 'pages/EcocreditBatches/EcocreditBatches.loader';
+} from 'lib/queries/react-query/ecocredit/queries.ecocredit';
+import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/queries.sanity';
 
 import { client as sanityClient } from '../../sanity';
 

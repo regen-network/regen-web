@@ -16,8 +16,8 @@ export const EcocreditBatches = (): JSX.Element => {
   const { page } = paginationParams;
 
   useEffect(() => {
-    // route page index starts at 1
-    // but page index starts at 0 for mui Table
+    // Page index starts at 1 for route
+    // Page index starts at 0 for MUI Table
     if (routePage !== String(page + 1)) {
       navigate(`/ecocredit-batches/${page + 1}`);
     }

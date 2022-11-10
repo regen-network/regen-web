@@ -22,6 +22,7 @@ import { getAbbreviation } from './ProjectCard.utils';
 export interface ProjectCardProps extends MediaCardProps {
   id?: string;
   name: string;
+  creditClassId?: string;
   imgSrc: string;
   place: string;
   area: number;
@@ -42,6 +43,7 @@ export interface ProjectCardProps extends MediaCardProps {
 export function ProjectCard({
   id,
   name,
+  creditClassId,
   imgSrc,
   place,
   area,
@@ -237,6 +239,7 @@ export function ProjectCard({
                         buttonLocation: 'projectCard',
                         projectName: name,
                         projectId: id,
+                        creditClassId,
                       };
                       track('buy1', trackData);
                       onButtonClick && onButtonClick();

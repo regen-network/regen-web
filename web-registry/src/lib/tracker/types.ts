@@ -10,7 +10,7 @@ export interface Buy1Event {
   projectName?: string | null;
   projectId?: string | null;
   creditClassName?: string;
-  creditClassId?: string;
+  creditClassId?: string | null;
 }
 
 export interface Buy2Event {

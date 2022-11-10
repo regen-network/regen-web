@@ -359,6 +359,8 @@ export const Storefront = (): JSX.Element => {
                             buttonLocation: 'sellOrderTable',
                             projectName: normalizedSellOrders[i].project?.name,
                             projectId: normalizedSellOrders[i].project?.id,
+                            creditClassId:
+                              normalizedSellOrders[i].project?.classIdUrl,
                           };
                           track('buy1', trackData);
                           if (accountAddress) {

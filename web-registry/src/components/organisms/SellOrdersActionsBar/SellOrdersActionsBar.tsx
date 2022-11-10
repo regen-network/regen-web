@@ -72,8 +72,8 @@ export const SellOrdersActionsBar = ({
                   buttonLocation: 'stickyNav',
                   projectName,
                   projectId: onChainProjectId,
-                  creditClassName,
                   creditClassId: onChainCreditClassId,
+                  creditClassName,
                 };
                 track('buy1', trackData);
                 onBuyButtonClick();

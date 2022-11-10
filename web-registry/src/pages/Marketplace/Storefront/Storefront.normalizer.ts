@@ -58,7 +58,9 @@ export const normalizeProjectsInfosByHandleMap = ({
 
     projectsMap.set(project?.id, {
       name: project.metadata?.['schema:name'] || project.id,
+      // TODO: why is this being called classIdName?
       classIdName: creditClassSanity?.nameRaw ?? project?.classId,
+      // TODO: why is this being called classIdUrl?
       classIdUrl: project?.classId,
     });
   });

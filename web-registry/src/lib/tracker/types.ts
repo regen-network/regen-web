@@ -18,6 +18,7 @@ export interface Buy2Event {
   price?: string;
   batchDenom?: string;
   projectName?: string | null;
+  projectId?: string | null;
   creditClassId?: string;
   quantity?: number;
   currencyDenom?: string;

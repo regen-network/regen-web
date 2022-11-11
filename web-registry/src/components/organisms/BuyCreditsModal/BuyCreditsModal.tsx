@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useState } from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import Collapse from '@mui/material/Collapse';
@@ -116,6 +116,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
       UISellOrderInfo | undefined
     >(undefined);
     const { track } = useTracker();
+    const location = useLocation();
 
     const validationHandler = (
       values: BuyCreditsValues,
@@ -194,16 +195,15 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
             validate={validationHandler}
             onSubmit={async (values, { setSubmitting }) => {
               setSubmitting(true);
-              const trackData: {
-                price?: string;
-                batchDenom?: string;
-                projectName?: string | null;
-                creditClassId?: string;
-              } = {
+              const trackData: Buy2Event = {
+                url: location.pathname,
                 price: selectedSellOrder?.askAmount,
                 batchDenom: selectedSellOrder?.batchDenom,
-                projectName: project.name,
+                projectId: project.id,
                 creditClassId: project.id.split('-')[0],
+                quantity: values.creditCount,
+                currencyDenom: selectedSellOrder?.askDenom,
+                retirementAction: values.retirementAction,
               };
               track('buy2', trackData);
               try {

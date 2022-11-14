@@ -8,6 +8,7 @@ import { TabPanel } from './TabPanel';
 
 interface IconTabsProps {
   tabs: IconTabProps[];
+<<<<<<< HEAD
 }
 
 const StyledTabs = styled(Tabs)<TabsProps>(({ theme }) => ({
@@ -18,6 +19,53 @@ const StyledTabs = styled(Tabs)<TabsProps>(({ theme }) => ({
 }));
 
 const IconTabs: React.FC<IconTabsProps> = ({ tabs }) => {
+=======
+  size?: TextSize;
+  sxs?: {
+    tab?: {
+      outer?: SxProps<Theme>;
+      inner?: SxProps<Theme>;
+    };
+    panel?: {
+      inner?: SxProps<Theme>;
+    };
+  };
+  hideIndicator?: boolean;
+  mobileFullWidth?: boolean;
+}
+
+const StyledTabs = styled(Tabs, {
+  shouldForwardProp: prop =>
+    prop !== 'hideIndicator' && prop !== 'mobileFullWidth',
+})<TabsProps & { mobileFullWidth: boolean; hideIndicator: boolean }>(
+  ({ mobileFullWidth, theme, hideIndicator }) => ({
+    '& .MuiTabs-flexContainer': {
+      display: 'block',
+    },
+    '& .MuiTabs-scroller': {
+      [theme.breakpoints.down('md')]: {
+        paddingLeft: mobileFullWidth ? theme.spacing(10) : 0,
+      },
+      [theme.breakpoints.down('sm')]: {
+        paddingLeft: mobileFullWidth ? theme.spacing(4) : 0,
+      },
+    },
+    '& .MuiTabs-indicator': {
+      display: hideIndicator && 'none',
+      backgroundColor: theme.palette.secondary.main,
+      height: '3px',
+    },
+  }),
+);
+
+const IconTabs: React.FC<IconTabsProps> = ({
+  tabs,
+  size,
+  sxs,
+  hideIndicator = false,
+  mobileFullWidth = false,
+}) => {
+>>>>>>> bfdf4d0a (fix: profile tabs spacing (#1550))
   const [value, setValue] = useState(0);
 
   const handleChange = (
@@ -29,8 +77,26 @@ const IconTabs: React.FC<IconTabsProps> = ({ tabs }) => {
 
   return (
     <div>
+<<<<<<< HEAD
       <div>
         <StyledTabs value={value} onChange={handleChange} aria-label="tabs">
+=======
+      <Box
+        sx={{
+          ...sxs?.tab?.outer,
+          mx: mobileFullWidth ? { xs: -4, sm: -10, md: 0 } : 0,
+        }}
+      >
+        <StyledTabs
+          value={value}
+          onChange={handleChange}
+          variant="scrollable"
+          scrollButtons={false}
+          aria-label="tabs"
+          hideIndicator={hideIndicator}
+          mobileFullWidth={mobileFullWidth}
+        >
+>>>>>>> bfdf4d0a (fix: profile tabs spacing (#1550))
           {tabs.map((tab, index) => (
             <IconTab
               key={`tab-${index}`}

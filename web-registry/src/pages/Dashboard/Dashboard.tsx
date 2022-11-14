@@ -108,8 +108,13 @@ const Dashboard = (): JSX.Element => {
 
   return (
     <Box sx={{ bgcolor: 'grey.50' }}>
+<<<<<<< HEAD
       <Section sx={{ root: { pb: [21.25, 28.28] } }}>
         <IconTabs aria-label="dashboard tabs" tabs={tabs} />
+=======
+      <Section>
+        <IconTabs aria-label="dashboard tabs" tabs={tabs} mobileFullWidth />
+>>>>>>> bfdf4d0a (fix: profile tabs spacing (#1550))
       </Section>
     </Box>
   );

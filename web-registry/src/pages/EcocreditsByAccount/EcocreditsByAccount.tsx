@@ -20,6 +20,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
 
   return (
     <Box sx={{ backgroundColor: 'grey.50' }}>
+<<<<<<< HEAD
       <Section title="Portfolio" titleVariant="h2" titleAlign="left">
         <Box sx={{ mt: { xs: 1.25, sm: 3 } }}>
           <Label size="sm" mobileSize="sm" sx={{ display: 'inline' }}>
@@ -44,6 +45,20 @@ export const EcocreditsByAccount = (): JSX.Element => {
           </Body>
         </Box>
         <Portfolio credits={credits} basketTokens={basketTokens} />
+=======
+      <Section
+        title="Profile"
+        titleVariant="h2"
+        titleAlign="left"
+        sx={{ title: { pl: 3 } }}
+      >
+        <PortfolioHeader accountAddress={accountAddress} />
+        <IconTabs
+          aria-label="public profile tabs"
+          tabs={tabs}
+          mobileFullWidth
+        />
+>>>>>>> bfdf4d0a (fix: profile tabs spacing (#1550))
       </Section>
     </Box>
   );

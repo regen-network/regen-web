@@ -25,8 +25,9 @@ export const useHomeStyles = makeStyles()(theme => ({
     paddingBottom: theme.spacing(17.75),
   },
   creditClassBackground: {
-    backgroundBlendMode: 'lighten',
-    backgroundColor: theme.palette.grey['50'],
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: theme.spacing(22.25),
+    },
     paddingBottom: theme.spacing(22.25),
     border: '1px solid',
     borderColor: theme.palette.grey['100'],

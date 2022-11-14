@@ -6,8 +6,8 @@
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "@mui/lab": "^5.0.0-alpha.54",
-    "@mui/material": "^5.1.0",
-    "@mui/styles": "^5.1.0",
+    "@mui/material": "5.1.0",
+    "@mui/styles": "5.1.0",
     "@regen-network/web-components": "0.1.0",
     "@sanity/image-url": "^1.0.1",
     "axios": "^0.21.1",
@@ -52,6 +52,10 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "prettier": "2.4.1"
+  },
+  "resolutions": {
+    "@mui/material": "5.1.0",
+    "@mui/styles": "5.1.0"
   },
   "keywords": [
     "gatsby"

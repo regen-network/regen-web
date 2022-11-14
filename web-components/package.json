@@ -1,6 +1,6 @@
 {
   "name": "@regen-network/web-components",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "files": [
     "lib/",
     "README.md"
@@ -30,8 +30,8 @@
     "@mapbox/togeojson": "^0.16.0",
     "@mui/icons-material": "^5.1.0",
     "@mui/lab": "^5.0.0-alpha.54",
-    "@mui/material": "^5.1.0",
-    "@mui/styles": "^5.1.0",
+    "@mui/material": "5.9.0",
+    "@mui/styles": "5.9.0",
     "@mui/x-date-pickers": "^5.0.0-alpha.2",
     "@sanity/block-content-to-react": "^3.0.0",
     "@turf/bbox": "^6.0.1",
@@ -84,7 +84,9 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "@types/react": "17.0.2",
-    "@types/react-dom": "17.0.2"
+    "@types/react-dom": "17.0.2",
+    "@mui/material": "5.9.0",
+    "@mui/styles": "5.9.0"
   },
   "description": "See main [README.md](../README.md)",
   "directories": {

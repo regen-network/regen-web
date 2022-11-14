@@ -28,7 +28,7 @@
     "gatsby-plugin-react-svg": "^3.0.1",
     "gatsby-plugin-sanity-image": "^0.9.0",
     "gatsby-plugin-sharp": "^2.6.0",
-    "gatsby-plugin-typescript": "2.12.1",
+    "gatsby-plugin-typescript": "4.24.0",
     "gatsby-source-filesystem": "^2.3.0",
     "gatsby-source-sanity": "6.0.4",
     "gatsby-transformer-remark": "^2.8.25",
@@ -55,7 +55,8 @@
   },
   "resolutions": {
     "@mui/material": "5.1.0",
-    "@mui/styles": "5.1.0"
+    "@mui/styles": "5.1.0",
+    "graphql": "^14.6.0"
   },
   "keywords": [
     "gatsby"

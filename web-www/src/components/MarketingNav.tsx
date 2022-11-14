@@ -3,9 +3,9 @@ import { useTheme } from '@mui/styles';
 import Header, {
   HeaderColors,
 } from '@regen-network/web-components/lib/components/header';
-import { HeaderDropdownItemProps } from '@regen-network/web-components/lib/components/header/components/HeaderDropdownItems';
-import { HeaderMenuItem } from '@regen-network/web-components/lib/components/header/components/HeaderMenuHover/HeaderMenuHover';
-import { NavLink } from '@regen-network/web-components/lib/components/header/components/NavLink';
+import { HeaderDropdownItemProps } from '@regen-network/web-components/lib/components/header/HeaderDropdownItems';
+import { HeaderMenuItem } from '@regen-network/web-components/lib/components/header/HeaderMenuHover';
+import { NavLink } from '@regen-network/web-components/lib/components/header/NavLink';
 import { Theme } from '@regen-network/web-components/lib/theme/muiTheme';
 import { PageProps } from 'gatsby';
 

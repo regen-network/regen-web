@@ -122,7 +122,7 @@ const Dashboard = (): JSX.Element => {
   return (
     <Box sx={{ bgcolor: 'grey.50' }}>
       <Section>
-        <IconTabs aria-label="dashboard tabs" tabs={tabs} />
+        <IconTabs aria-label="dashboard tabs" tabs={tabs} mobileFullWidth />
       </Section>
     </Box>
   );

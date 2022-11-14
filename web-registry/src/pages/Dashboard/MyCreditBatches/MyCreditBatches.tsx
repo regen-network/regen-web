@@ -8,7 +8,7 @@ import { CreditBatchLightIcon } from 'web-components/lib/components/icons/Credit
 import PlusIcon from 'web-components/lib/components/icons/PlusIcon';
 import { Label } from 'web-components/lib/components/typography';
 
-import { useWallet } from 'lib/wallet';
+import { useWallet } from 'lib/wallet/wallet';
 
 import WithLoader from 'components/atoms/WithLoader';
 import { CreditBatches } from 'components/organisms';

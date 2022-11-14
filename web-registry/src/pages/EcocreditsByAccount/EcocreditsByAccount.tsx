@@ -55,7 +55,11 @@ export const EcocreditsByAccount = (): JSX.Element => {
         sx={{ title: { pl: 3 } }}
       >
         <PortfolioHeader accountAddress={accountAddress} />
-        <IconTabs aria-label="public profile tabs" tabs={tabs} />
+        <IconTabs
+          aria-label="public profile tabs"
+          tabs={tabs}
+          mobileFullWidth
+        />
       </Section>
     </Box>
   );

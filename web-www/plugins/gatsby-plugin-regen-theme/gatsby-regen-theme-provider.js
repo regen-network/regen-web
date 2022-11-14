@@ -1,7 +1,6 @@
-import React from 'react';
 import { StyledEngineProvider } from '@mui/material/styles';
-
-import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
+import ThemeProvider from '@regen-network/web-components/lib/theme/RegenThemeProvider';
+import React from 'react';
 
 const GatsbyPluginRegenThemeProvider = ({ children }) => {
   return (

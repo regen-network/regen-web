@@ -1,7 +1,8 @@
 import { Link, Outlet } from 'react-router-dom';
 import { OAuthError, useAuth0 } from '@auth0/auth0-react';
 import { Box } from '@mui/material';
-import { history } from 'App';
+
+import history from 'lib/history';
 
 import { AdminNav } from '../../components/organisms';
 import isAdmin from '../../lib/admin';

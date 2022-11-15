@@ -3,7 +3,7 @@ import { OfflineSigner } from '@cosmjs/proto-signing';
 import { RegenApi } from '@regen-network/api';
 
 import { expLedger, ledgerExpRPCUri, ledgerRPCUri } from './lib/ledger';
-import { useWallet, Wallet } from './lib/wallet';
+import { useWallet, Wallet } from './lib/wallet/wallet';
 
 interface ContextValue {
   loading: boolean;

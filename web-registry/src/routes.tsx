@@ -1,22 +1,21 @@
-import React, { lazy } from 'react';
+import { lazy } from 'react';
 import {
   createBrowserRouter,
-  createRoutesFromChildren,
   createRoutesFromElements,
-  matchRoutes,
   Route,
-  useLocation,
-  useNavigationType,
 } from 'react-router-dom';
-import * as Sentry from '@sentry/react';
-import { BrowserTracing } from '@sentry/tracing';
-import { createBrowserHistory } from 'history';
+
+import MyBridge from 'pages/Dashboard/MyBridge';
+import MyCreditBatches from 'pages/Dashboard/MyCreditBatches';
+import MyCreditClasses from 'pages/Dashboard/MyCreditClasses';
+import MyEcocredits from 'pages/Dashboard/MyEcocredits';
+import MyProjects from 'pages/Dashboard/MyProjects';
+import { BridgeTab } from 'pages/EcocreditsByAccount/BridgeTab/BridgeTab';
+import { PortfolioTab } from 'pages/EcocreditsByAccount/PortfolioTab/EcocreditsByAccount.PortfolioTab';
 
 import { KeplrRoute, ProtectedRoute } from './components/atoms';
 import { RegistryLayout } from './components/organisms';
 import { ProjectMetadata } from './pages/ProjectMetadata/ProjectMetadata';
-
-import './App.css';
 
 const Additionality = lazy(() => import('./pages/Additionality'));
 const Admin = lazy(() => import('./pages/Admin'));
@@ -71,29 +70,6 @@ const Activity = lazy(() => import('./pages/Activity'));
 const CreateBatch = lazy(() => import('./pages/CreateBatch'));
 const Storefront = lazy(() => import('./pages/Marketplace/Storefront'));
 
-export const history = createBrowserHistory();
-
-Sentry.init({
-  dsn: 'https://f5279ac3b8724af88ffb4cdfad92a2d4@o1377530.ingest.sentry.io/6688446',
-  integrations: [
-    new BrowserTracing({
-      routingInstrumentation: Sentry.reactRouterV6Instrumentation(
-        React.useEffect,
-        useLocation,
-        useNavigationType,
-        createRoutesFromChildren,
-        matchRoutes,
-      ),
-    }),
-  ],
-
-  // Set tracesSampleRate to 1.0 to capture 100%
-  // of transactions for performance monitoring.
-  // We recommend adjusting this value in production
-  tracesSampleRate: 1.0,
-  environment: process.env.REACT_APP_SENTRY_ENVIRONMENT || 'development',
-});
-
 export const routes = createRoutesFromElements(
   <Route element={<RegistryLayout />}>
     <Route path="/" element={<Home />} />
@@ -120,14 +96,29 @@ export const routes = createRoutesFromElements(
       path="post-purchase/:projectId/:walletId/:name"
       element={<PostPurchase />}
     />
-    <Route
-      path="ecocredits/dashboard"
-      element={<KeplrRoute component={Dashboard} />}
-    />
+    <Route path="ecocredits" element={<KeplrRoute component={Dashboard} />}>
+      <Route
+        path="portfolio"
+        element={<KeplrRoute component={MyEcocredits} />}
+      />
+      <Route path="projects" element={<KeplrRoute component={MyProjects} />} />
+      <Route
+        path="credit-classes"
+        element={<KeplrRoute component={MyCreditClasses} />}
+      />
+      <Route
+        path="credit-batches"
+        element={<KeplrRoute component={MyCreditBatches} />}
+      />
+      <Route path="bridge" element={<KeplrRoute component={MyBridge} />} />
+    </Route>
     <Route
       path="ecocredits/accounts/:accountAddress"
       element={<EcocreditsByAccount />}
-    />
+    >
+      <Route path="portfolio" element={<PortfolioTab />} />
+      <Route path="bridge" element={<BridgeTab />} />
+    </Route>
     <Route
       path="ecocredits/create-batch"
       element={<KeplrRoute component={CreateBatch} />}

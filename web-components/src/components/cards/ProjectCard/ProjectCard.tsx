@@ -19,6 +19,7 @@ import { PurchaseInfo } from './ProjectCard.types';
 import { getAbbreviation } from './ProjectCard.utils';
 
 export interface ProjectCardProps extends MediaCardProps {
+  id?: string;
   name: string;
   imgSrc: string;
   place: string;
@@ -38,6 +39,7 @@ export interface ProjectCardProps extends MediaCardProps {
 }
 
 export function ProjectCard({
+  id,
   name,
   imgSrc,
   place,
@@ -231,8 +233,9 @@ export function ProjectCard({
                       track('buy1', {
                         url: location.pathname,
                         cardType: 'project',
-                        creditClassName: purchaseInfo.creditClass?.name,
+                        buttonLocation: 'projectCard',
                         projectName: name,
+                        projectId: id,
                       });
                       onButtonClick && onButtonClick();
                     }}

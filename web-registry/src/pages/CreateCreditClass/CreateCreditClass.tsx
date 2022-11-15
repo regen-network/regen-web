@@ -1,6 +1,6 @@
 import { Box } from 'web-components/lib/components/box';
 
-import { useWallet } from 'lib/wallet';
+import { useWallet } from 'lib/wallet/wallet';
 
 import type { CreditClassValues } from 'components/organisms/CreditClassForms';
 import {

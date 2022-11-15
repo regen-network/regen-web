@@ -156,7 +156,6 @@ function TriggerTextField({
     }
     setFieldValue(name, transformValue ? transformValue(value) : value);
   };
-  // @ts-ignore
   return <MuiTextField {...fieldToTextField(props)} onChange={onChange} />;
 }
 

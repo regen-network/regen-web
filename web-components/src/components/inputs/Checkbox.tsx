@@ -31,7 +31,6 @@ const Checkbox: React.FC<CheckboxProps> = (props: CheckboxProps) => {
   };
 
   return (
-    // @ts-ignore
     <MuiCheckbox
       {...fieldToCheckbox(props)}
       onChange={onChange}

@@ -30741,9 +30741,9 @@ weak-lru-cache@^1.2.2:
   integrity sha512-DEAoo25RfSYMuTGc9vPJzZcZullwIqRDSI9LOy+fkCJPi6hykCnfKaXTuPBDuXAUcqHXyOgFtHNp/kB2FjYHbw==
 
 web-components@0.0.0:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/web-components/-/web-components-0.1.4.tgz#5097add0094d19eb67b318cde83188505693c110"
-  integrity sha512-lQIbsBVT4lT8bzx3Yv4m2WASYGFNMnNv9iUF/eNfXOB2ded4IETzXRSVno9Uf5tqftnqIBZlAE7jHrf6y4c3ww==
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/web-components/-/web-components-0.1.5.tgz#f0b95337dc6555addb022c38007af6b773c6d360"
+  integrity sha512-kbFcx25x5g+B1etJZk2CAt0mL8OYAeWKxetCc8AOwqyoGDlyDeHFPOuXs+yiXGxaGGYz8+py9fRUXWjww5FMGw==
 
 web-namespaces@^1.0.0, web-namespaces@^1.1.2:
   version "1.1.4"

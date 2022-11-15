@@ -1,13 +1,13 @@
 {
   "name": "@regen-network/web-components",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "files": [
     "lib/",
     "README.md"
   ],
   "scripts": {
     "remove-previous-files": "shx rm -rf ./lib/* ./tsconfig.tsbuildinfo",
-    "copy-assets": "cp ./src/theme/fonts.css ./lib/theme/fonts.css && cp -R ./src/theme/assets ./lib/theme/",
+    "copy-assets": "cp ./src/theme/*.css ./lib/theme && cp -R ./src/theme/assets ./lib/theme/",
     "watch": "yarn remove-previous-files && tsc --watch && yarn copy-assets",
     "build": "yarn remove-previous-files && tsc && yarn copy-assets",
     "lint": "eslint ./src  -c .eslintrc.js --max-warnings 0 --ext .ts,.tsx",

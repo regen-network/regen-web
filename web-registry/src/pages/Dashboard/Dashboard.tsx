@@ -13,7 +13,7 @@ import Section from 'web-components/lib/components/section';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 
-import { useWallet } from 'lib/wallet';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { useQueryIfCreditClassAdmin } from 'hooks/useQueryIfCreditClassAdmin';
 import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator';
@@ -122,7 +122,7 @@ const Dashboard = (): JSX.Element => {
   return (
     <Box sx={{ bgcolor: 'grey.50' }}>
       <Section>
-        <IconTabs aria-label="dashboard tabs" tabs={tabs} />
+        <IconTabs aria-label="dashboard tabs" tabs={tabs} mobileFullWidth />
       </Section>
     </Box>
   );

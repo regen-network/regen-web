@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 
-import RegenIcon from '../icons/RegenIcon';
+import RegenIcon from '../../icons/RegenIcon';
 
 const useStyles = makeStyles<Theme, { isLoaded: boolean }>(theme => {
   const { pxToRem } = theme.typography;

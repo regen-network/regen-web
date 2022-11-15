@@ -29,15 +29,16 @@ export const useQuerySellOrders = function (): {
 } {
   const { api } = useLedger();
   const [queryClient, setQueryClient] = useState<QueryClientImpl>();
+
   const [sellOrdersResponse, setSellOrdersResponse] = useState<
     QuerySellOrdersResponseExtented | undefined
   >(undefined);
 
   useEffect(() => {
-    if (!api?.queryClient) return;
+    if (!api?.queryClient || queryClient !== undefined) return;
     const _queryClient: QueryClientImpl = new QueryClientImpl(api.queryClient);
     setQueryClient(_queryClient);
-  }, [api?.queryClient]);
+  }, [api?.queryClient, queryClient]);
 
   const refetchSellOrders = useCallback(async (): RefetchSellOrdersResponse => {
     if (queryClient) {

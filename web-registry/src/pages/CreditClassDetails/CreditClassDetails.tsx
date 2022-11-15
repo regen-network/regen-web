@@ -161,6 +161,8 @@ function CreditClassDetails({
             ? () => setIsBuyFlowStarted(true)
             : () => setDisplayErrorBanner(true)
         }
+        onChainCreditClassId={onChainClass?.id}
+        creditClassName={metadata?.['schema:name']}
       />
       <BuySellOrderFlow
         isFlowStarted={isBuyFlowStarted}

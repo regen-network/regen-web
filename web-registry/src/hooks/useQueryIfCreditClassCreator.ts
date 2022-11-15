@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { queryParams } from 'lib/ecocredit/api';
 
-import { useWallet } from '../lib/wallet';
+import { useWallet } from '../lib/wallet/wallet';
 
 export function useQueryIfCreditClassCreator(): boolean {
   const [isCreator, setIsCreator] = useState(false);

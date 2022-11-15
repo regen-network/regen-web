@@ -29,7 +29,7 @@ import { NameUrl } from 'web-components/lib/types/rdf';
 
 import { MetadataJSONField } from '../../../../components/molecules';
 import useQueryProjectsByIssuer from '../../../../hooks/useQueryProjectsByIssuer';
-import { useWallet } from '../../../../lib/wallet';
+import { useWallet } from '../../../../lib/wallet/wallet';
 import useSaveProjectSelectedOption from '../hooks/useSaveProjectSelectedOption';
 import useUpdateProjectClass from '../hooks/useUpdateProjectClass';
 import useUpdateProjectOptions from '../hooks/useUpdateProjectOptions';

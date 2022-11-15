@@ -3,9 +3,12 @@ import { styled, useTheme } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 
-import CreditsIcon from '../icons/CreditsIcon';
-import { Label } from '../typography';
-import { HeaderMenuHover, HeaderMenuHoverBase } from './HeaderMenuHover';
+import CreditsIcon from '../../icons/CreditsIcon';
+import { Label } from '../../typography';
+import {
+  HeaderMenuHover,
+  HeaderMenuHoverBase,
+} from './HeaderMenuHover/HeaderMenuHover';
 
 interface UserMenuItemProps extends HeaderMenuHoverBase {
   address: string;
@@ -49,7 +52,6 @@ const UserMenuItem: React.FC<UserMenuItemProps> = ({
               alt="default avatar"
               src={avatar}
             />
-            {/* TODO hide address on mobile https://github.com/regen-network/regen-web/issues/786 */}
             {address}
           </Box>
         ),

@@ -3,9 +3,9 @@ import { useTheme } from '@mui/styles';
 import { PageProps } from 'gatsby';
 
 import Header, { HeaderColors } from 'web-components/lib/components/header';
-import { HeaderDropdownItemProps } from 'web-components/lib/components/header/HeaderDropdownItems';
-import { HeaderMenuItem } from 'web-components/lib/components/header/HeaderMenuHover';
-import { NavLink } from 'web-components/lib/components/header/NavLink';
+import { HeaderDropdownItemProps } from 'web-components/lib/components/header/components/HeaderDropdownItems';
+import { HeaderMenuItem } from 'web-components/lib/components/header/components/HeaderMenuHover/HeaderMenuHover';
+import { NavLink } from 'web-components/lib/components/header/components/NavLink';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 // import RegistryIcon from '../../static/media/svgs/nav-dropdown/registry.svg';

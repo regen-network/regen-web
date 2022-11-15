@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { asyncSome } from 'lib/asyncSome';
 
 import { queryClassIssuers } from '../lib/ecocredit/api';
-import { useWallet } from '../lib/wallet';
+import { useWallet } from '../lib/wallet/wallet';
 import useQueryListClasses from './useQueryListClasses';
 
 /**

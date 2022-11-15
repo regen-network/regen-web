@@ -5831,10 +5831,10 @@
     "@cosmjs/stargate" "0.28.13"
     "@cosmjs/tendermint-rpc" "0.28.13"
 
-"@regen-network/web-components@0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@regen-network/web-components/-/web-components-0.1.3.tgz#b240ed807aad55912d6f6b3551eb15b9d3f84864"
-  integrity sha512-NeyUYHbHqE4dzSJOU3eciK59rde3qGfWEomQuk4o8vULu6W11YfYdPM6kEsz0MtgcMSjUGdd/dvEVFyDPiGBFA==
+"@regen-network/web-components@0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@regen-network/web-components/-/web-components-0.1.4.tgz#bdcfd4107e484c92567ad7fad5094b92249f03f4"
+  integrity sha512-VOFyvfgh1gnNXrmPRbuYUjz+yYhPeo1K1ZnMzc2vrv1Rn/B0AjhXOcxNdiSDmgN9jHeAQMBIxmKks8qjMDja6A==
   dependencies:
     "@emotion/react" "^11.5.0"
     "@emotion/styled" "^11.3.0"
@@ -5864,9 +5864,7 @@
     html-react-parser "^3.0.4"
     iso-3166-2 "^1.0.0"
     js-cookie "^2.2.1"
-    react "^17.0.2"
     react-countdown "^2.3.2"
-    react-dom "^17.0.2"
     react-dropzone "^11.3.4"
     react-google-recaptcha "^2.1.0"
     react-html-parser "^2.0.2"
@@ -26326,7 +26324,7 @@ react-docgen@^5.0.0:
     node-dir "^0.1.10"
     strip-indent "^3.0.0"
 
-react-dom@17.0.2, react-dom@^17.0.2:
+react-dom@17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.2.tgz#ecffb6845e3ad8dbfcdc498f0d0a939736502c23"
   integrity sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==

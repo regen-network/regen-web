@@ -25,13 +25,12 @@ const hasBatchBalance = (batchWithBalance: BatchInfoWithBalance): boolean => {
 };
 
 /* If a creditClassId is provided, filter by that. */
-const isOfCreditClass = (
-  balance: BatchBalanceInfo,
-  creditClassId?: string,
-): boolean => {
-  if (!creditClassId) return true;
-  return balance.batchDenom.startsWith(`${creditClassId}-`);
-};
+const isOfCreditClass =
+  (creditClassId?: string) =>
+  (balance: BatchBalanceInfo): boolean => {
+    if (!creditClassId) return true;
+    return balance.batchDenom.startsWith(`${creditClassId}-`);
+  };
 
 type Props = {
   address?: string;
@@ -75,7 +74,7 @@ export default function useEcocredits({
       !credits
     ) {
       const initialCredits = balancesResponse?.balances
-        .filter(balance => isOfCreditClass(balance, creditClassId))
+        .filter(isOfCreditClass(creditClassId))
         .map(balance => {
           const batch = batchesResponse?.data?.batches.find(
             batch => batch.denom === balance.batchDenom,
@@ -116,8 +115,8 @@ export default function useEcocredits({
         address,
         paginationParams,
         loadedCredits: credits ?? [],
-        balances: balancesResponse?.balances.filter(balance =>
-          isOfCreditClass(balance, creditClassId),
+        balances: balancesResponse?.balances.filter(
+          isOfCreditClass(creditClassId),
         ),
         batches: batchesResponse?.data?.batches,
         sanityCreditClassData,

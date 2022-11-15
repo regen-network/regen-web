@@ -1,6 +1,7 @@
 import {
   CFCProjectMetadataLD,
   ProjectMetadataLD,
+  ToucanProjectMetadataLD,
   VCSProjectMetadataLD,
 } from '.';
 
@@ -8,4 +9,10 @@ import {
 export type ProjectMetadataLDUnion =
   | ProjectMetadataLD
   | VCSProjectMetadataLD
-  | CFCProjectMetadataLD;
+  | CFCProjectMetadataLD
+  | ToucanProjectMetadataLD;
+
+export type ProjectMetadataLDX = ProjectMetadataLD &
+  VCSProjectMetadataLD &
+  CFCProjectMetadataLD &
+  ToucanProjectMetadataLD;

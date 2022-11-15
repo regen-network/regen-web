@@ -103,6 +103,7 @@ function ProjectDetails(): JSX.Element {
   const projectTableMetadata: ProjectMetadataLD = project?.metadata;
   const iriResolvedMetadata = useQueryMetadataGraph(onChainProject?.metadata);
   const metadata = iriResolvedMetadata ?? projectTableMetadata;
+
   const managementActions =
     metadata?.['regen:landManagementActions']?.['@list'];
 

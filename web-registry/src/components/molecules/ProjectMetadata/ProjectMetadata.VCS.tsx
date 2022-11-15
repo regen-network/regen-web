@@ -5,12 +5,16 @@ import { ExpandButton } from 'web-components/lib/components/buttons/ExpandButton
 import { Title } from 'web-components/lib/components/typography';
 import { formatDate } from 'web-components/lib/utils/format';
 
-import { VCSProjectMetadataLD } from '../../../generated/json-ld';
+import {
+  ProjectMetadataLDX,
+  ToucanProjectMetadataLD,
+  VCSProjectMetadataLD,
+} from '../../../generated/json-ld';
 import { ArrowLink } from '../../atoms/MetadataArrowLink';
 import { MetaDetail } from './ProjectMetadata.MetaDetail';
 
 export interface MetadataProps {
-  metadata?: Partial<VCSProjectMetadataLD>;
+  metadata?: Partial<ProjectMetadataLDX>;
   projectId?: string;
 }
 
@@ -29,6 +33,9 @@ const ProjectMetadataVCS: React.FC<MetadataProps> = ({
   const startDate = metadata?.['regen:projectStartDate']?.['@value'];
   const endDate = metadata?.['regen:projectEndDate']?.['@value'];
   const methodology = metadata?.['regen:vcsMethodology'];
+  const approvedMethodologies = metadata?.['regen:approvedMethodologies'];
+  const methodologyCount = approvedMethodologies?.length;
+  const toucanProjectTokenId = metadata?.['regen:toucanProjectTokenId'];
 
   return (
     <Box sx={{ pt: 8 }}>
@@ -53,6 +60,43 @@ const ProjectMetadataVCS: React.FC<MetadataProps> = ({
               }
             />
           )}
+          {approvedMethodologies && methodologyCount && methodologyCount > 0 && (
+            <MetaDetail
+              label={`methodolog${methodologyCount > 1 ? 'ies' : 'y'}`}
+              data={
+                <>
+                  {approvedMethodologies.map(methodology => (
+                    <ArrowLink
+                      label={methodology?.['schema:name']}
+                      href={methodology?.['schema:url']?.['@value'] || ''}
+                    />
+                  ))}
+                </>
+              }
+            />
+          )}
+          {toucanProjectTokenId && (
+            <MetaDetail
+              label="toucan project token id"
+              data={
+                <ArrowLink
+                  label={toucanProjectTokenId.toString()}
+                  href={metadata?.['regen:toucanURI'] || ''}
+                />
+              }
+            />
+          )}
+          {vcsProjectId && (
+            <MetaDetail
+              label="vcs project id"
+              data={
+                <ArrowLink
+                  label={vcsProjectId.toString()}
+                  href={metadata?.['regen:vcsProjectPage']?.['@value'] || ''}
+                />
+              }
+            />
+          )}
           <MetaDetail
             label="offset generation method"
             data={
@@ -71,17 +115,6 @@ const ProjectMetadataVCS: React.FC<MetadataProps> = ({
                     ] || ''
                   }
                   label={metadata?.['regen:projectActivity']?.['schema:name']}
-                />
-              }
-            />
-          )}
-          {vcsProjectId && (
-            <MetaDetail
-              label="vcs project id"
-              data={
-                <ArrowLink
-                  label={vcsProjectId.toString()}
-                  href={metadata?.['regen:vcsProjectPage']?.['@value'] || ''}
                 />
               }
             />

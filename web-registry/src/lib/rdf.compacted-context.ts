@@ -23,6 +23,9 @@ export const COMPACTED_CONTEXT = {
       },
     },
   },
+  'regen:approvedMethodologies': {
+    '@container': '@list',
+  },
 };
 
 export const jsonLdCompact = async (

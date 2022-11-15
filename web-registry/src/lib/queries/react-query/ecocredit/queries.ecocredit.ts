@@ -20,13 +20,8 @@ export const getBatchesQuery = ({
     String(request.pagination?.limit ?? 0),
   ],
   queryFn: async () => {
-    if (client) {
-      const batches = await queryBatches({ client, request });
-
-      return batches;
-    }
-
-    return undefined;
+    if (!client) return;
+    return await queryBatches({ client, request });
   },
   enabled,
   staleTime: Infinity,
@@ -40,20 +35,18 @@ export const getAddDataToBatchesQuery = ({
   sanityCreditClassData,
 }: ReactQueryAddDataToBatchParams): ReactQueryAddDataToBatchesResponse => ({
   queryKey: batches && [
-    'addDataTobatches',
+    'addDataToBatches',
     batches.map(batch => batch.denom).join(','),
   ],
   queryFn: async () => {
-    if (batches) {
-      const batchesWithSupply = await addDataToBatch({
-        batches,
-        sanityCreditClassData,
-      });
+    if (!batches) return;
 
-      return batchesWithSupply;
-    }
+    const batchesWithSupply = await addDataToBatch({
+      batches,
+      sanityCreditClassData,
+    });
 
-    return undefined;
+    return batchesWithSupply;
   },
   staleTime: Infinity,
 });

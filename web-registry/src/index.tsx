@@ -1,12 +1,20 @@
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { RouterProvider } from 'react-router-dom';
+import {
+  createRoutesFromChildren,
+  matchRoutes,
+  RouterProvider,
+  useLocation,
+  useNavigationType,
+} from 'react-router-dom';
 import { IntercomProvider } from 'react-use-intercom';
 import amplitudePlugin from '@analytics/amplitude';
 import googleAnalytics from '@analytics/google-analytics';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import * as Sentry from '@sentry/react';
+import { BrowserTracing } from '@sentry/tracing';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Analytics from 'analytics';
 import doNotTrack from 'analytics-plugin-do-not-track';
@@ -17,11 +25,12 @@ import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 import PageLoader from 'components/atoms/PageLoader';
 
 import { AuthApolloProvider } from './apollo';
-import { router } from './App';
 import { LedgerProvider } from './ledger';
 import { WalletProvider } from './lib/wallet/wallet';
+import { router } from './routes';
 import * as serviceWorker from './serviceWorker';
-// import history from './lib/history';
+
+import './App.css';
 
 const config = {
   domain:
@@ -31,18 +40,29 @@ const config = {
   returnTo: window.location.origin || 'http://localhost:3000/',
   audience: 'https://regen-registry-server.herokuapp.com/',
 };
-
 const intercomId = process.env.REACT_APP_INTERCOM_APP_ID || '';
-
-// Create a client
 const queryClient = new QueryClient();
 
-// const onRedirectCallback = (appState: AppState) => {
-//   // If using a Hash Router, you need to use window.history.replaceState to
-//   // remove the `code` and `state` query parameters from the callback url.
-//   // window.history.replaceState({}, document.title, window.location.pathname);
-//   history.replace((appState && appState.returnTo) || window.location.pathname);
-// };
+Sentry.init({
+  dsn: 'https://f5279ac3b8724af88ffb4cdfad92a2d4@o1377530.ingest.sentry.io/6688446',
+  integrations: [
+    new BrowserTracing({
+      routingInstrumentation: Sentry.reactRouterV6Instrumentation(
+        useEffect,
+        useLocation,
+        useNavigationType,
+        createRoutesFromChildren,
+        matchRoutes,
+      ),
+    }),
+  ],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+  environment: process.env.REACT_APP_SENTRY_ENVIRONMENT || 'development',
+});
 
 // our current analytics setup uses both amplitude and google analytics.
 // our amplitude and GA have been set up with a development and production environment.

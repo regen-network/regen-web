@@ -1,12 +1,11 @@
+import { useParams } from 'react-router-dom';
+
 import { Portfolio } from 'components/organisms';
 import { useBasketTokens, useEcocredits, useQueryBaskets } from 'hooks';
 
-interface Props {
-  accountAddress: string | undefined;
-}
-
-export const PortfolioTab = ({ accountAddress }: Props): JSX.Element => {
+export const PortfolioTab = (): JSX.Element => {
   const baskets = useQueryBaskets();
+  const { accountAddress } = useParams<{ accountAddress: string }>();
   const { credits } = useEcocredits({ address: accountAddress });
   const { basketTokens } = useBasketTokens(accountAddress, baskets);
 

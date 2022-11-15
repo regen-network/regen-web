@@ -8,7 +8,7 @@ import {
 
 import theme from './muiTheme';
 
-import 'web-components/src/theme/index.css';
+import './index.css';
 
 declare module '@mui/styles/defaultTheme' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -31,7 +31,7 @@ const RegenThemeProvider = ({
   }
 
   if (injectFonts) {
-    require('web-components/src/theme/fonts.css');
+    require('./fonts.css');
   }
 
   return (

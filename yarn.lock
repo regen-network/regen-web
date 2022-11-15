@@ -5831,10 +5831,10 @@
     "@cosmjs/stargate" "0.28.13"
     "@cosmjs/tendermint-rpc" "0.28.13"
 
-"@regen-network/web-components@0.1.5":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@regen-network/web-components/-/web-components-0.1.5.tgz#814d76b008112922dd9aec422862c910808bbf20"
-  integrity sha512-wnPfQcfzN+JeSiI+h480P3zwsY/yucYAjNxkqcVi7nK3U94idE1smljoC53wzfRN6K6zvKYolcqZNoh7Z1E7/Q==
+"@regen-network/web-components@0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@regen-network/web-components/-/web-components-0.1.6.tgz#3685f74e0cc0028f11425333c129fd55dd6b5786"
+  integrity sha512-u8UOdvHHVeXqG+pO2aidAVoT1RWIwnznPmAcT745pU4APl1azl6fUyoK61IyGSzDP4lJgLE8Uf8uIEmw608BTg==
   dependencies:
     "@emotion/react" "^11.5.0"
     "@emotion/styled" "^11.3.0"

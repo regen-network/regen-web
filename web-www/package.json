@@ -6,9 +6,9 @@
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "@mui/lab": "^5.0.0-alpha.54",
-    "@mui/material": "5.9.0",
-    "@mui/styles": "5.9.0",
-    "@regen-network/web-components": "0.1.6",
+    "@mui/material": "^5.9.0",
+    "@mui/styles": "^5.9.0",
+    "@regen-network/web-components": "0.1.7",
     "@sanity/image-url": "^1.0.1",
     "axios": "^0.21.1",
     "clsx": "1.1.0",
@@ -54,8 +54,6 @@
     "prettier": "2.4.1"
   },
   "resolutions": {
-    "@mui/material": "5.9.0",
-    "@mui/styles": "5.9.0",
     "react": "^17.0.2",
     "react-dom": "17.0.2"
   },

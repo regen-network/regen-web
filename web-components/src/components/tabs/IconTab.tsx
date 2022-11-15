@@ -7,17 +7,20 @@ import type { Theme } from 'src/theme/muiTheme';
 import { TextSize } from '../typography/sizing';
 import { Subtitle } from '../typography/Subtitle';
 import { RegenTab } from './';
+import { LinkComponentProp } from './IconTabs';
 
 export interface IconTabProps extends RegenTab {
   icon?: JSX.Element;
   hidden?: boolean;
   size?: TextSize;
+  href?: string;
+  linkComponent?: LinkComponentProp;
   sxInner?: SxProps<Theme>;
 }
 
 const StyledTab = styled(Tab, {
   shouldForwardProp: prop => prop !== 'size',
-})<TabProps & { size: TextSize }>(({ theme, size }) => ({
+})<TabProps & { href?: string; size: TextSize }>(({ theme, size }) => ({
   textTransform: 'none',
   borderColor: theme.palette.secondary.main,
   color: theme.palette.primary.contrastText,
@@ -41,10 +44,14 @@ const IconTab = ({
   hidden,
   size = 'lg',
   sxInner,
+  href,
+  linkComponent,
   ...props
 }: IconTabProps): JSX.Element | null => {
   return hidden ? null : (
     <StyledTab
+      LinkComponent={linkComponent}
+      href={href}
       iconPosition="start"
       size={size}
       label={

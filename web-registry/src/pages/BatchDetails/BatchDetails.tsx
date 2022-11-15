@@ -99,7 +99,7 @@ export const BatchDetails: React.FC = () => {
               sx={{ maxWidth: 'max-content', px: 7 }}
               size="small"
               component={Link}
-              href="/ecocredits/dashboard"
+              href="/ecocredits/portfolio"
             >
               view in portfolio
             </OutlinedButton>

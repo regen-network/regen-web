@@ -8,7 +8,7 @@ import { useAnalytics } from 'use-analytics';
 
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 
-import { routes } from './App';
+import { routes } from './routes';
 
 import './jest.mock';
 

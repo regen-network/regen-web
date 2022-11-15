@@ -5,19 +5,18 @@ import {
   Route,
 } from 'react-router-dom';
 
+import { ecocreditClientAsync } from 'lib/clients/ecocreditQueryClient';
+import { reactQueryClient } from 'lib/clients/reactQueryClient';
+
 import MyBridge from 'pages/Dashboard/MyBridge';
 import MyCreditBatches from 'pages/Dashboard/MyCreditBatches';
 import MyCreditClasses from 'pages/Dashboard/MyCreditClasses';
 import MyEcocredits from 'pages/Dashboard/MyEcocredits';
 import MyProjects from 'pages/Dashboard/MyProjects';
+import { ecocreditBatchesLoader } from 'pages/EcocreditBatches/EcocreditBatches.loader';
 import { BridgeTab } from 'pages/EcocreditsByAccount/BridgeTab/BridgeTab';
 import { PortfolioTab } from 'pages/EcocreditsByAccount/PortfolioTab/EcocreditsByAccount.PortfolioTab';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
-
-import { ecocreditClientAsync } from 'lib/clients/ecocreditQueryClient';
-import { reactQueryClient } from 'lib/clients/reactQueryClient';
-
-import { ecocreditBatchesLoader } from 'pages/EcocreditBatches/EcocreditBatches.loader';
 
 import { KeplrRoute, ProtectedRoute } from './components/atoms';
 import { ProjectMetadata } from './pages/ProjectMetadata/ProjectMetadata';
@@ -121,14 +120,10 @@ export const routes = createRoutesFromElements(
     <Route
       path="ecocredits/accounts/:accountAddress"
       element={<EcocreditsByAccount />}
-<<<<<<< HEAD:web-registry/src/routes.tsx
     >
       <Route path="portfolio" element={<PortfolioTab />} />
       <Route path="bridge" element={<BridgeTab />} />
     </Route>
-    <Route path="ecocredit-batches/:page" element={<EcocreditBatches />} />
-=======
-    />
     <Route
       path="ecocredit-batches/:page"
       element={<EcocreditBatches />}
@@ -137,7 +132,6 @@ export const routes = createRoutesFromElements(
         queryClient: reactQueryClient,
       })}
     />
->>>>>>> 6cac8014 (wip: use loader):web-registry/src/App.tsx
     <Route
       path="ecocredits/create-batch"
       element={<KeplrRoute component={CreateBatch} />}

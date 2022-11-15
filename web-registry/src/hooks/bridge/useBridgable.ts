@@ -22,18 +22,14 @@ export const useBridgable = ({ address, paginationParams }: Props): Output => {
   >([]);
   const { credits, isLoadingCredits } = useEcocredits({
     address,
+    creditClassId: process.env.REACT_APP_BRIDGE_CREDIT_CLASS_ID,
     paginationParams,
   });
 
   useEffect(() => {
     if (isLoadingCredits) return;
-    const _bridgableCredits = credits.filter(
-      credit =>
-        credit.denom.startsWith(
-          `${process.env.REACT_APP_BRIDGE_CREDIT_CLASS_ID}-`,
-        ) && Number(credit.balance?.tradableAmount) > 0,
-    );
-    setBridgableCredits(_bridgableCredits);
+
+    setBridgableCredits(credits);
   }, [credits, isLoadingCredits]);
 
   return { bridgableCredits, isLoadingCredits };

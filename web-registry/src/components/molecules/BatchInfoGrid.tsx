@@ -3,7 +3,10 @@ import { Box, Grid, SxProps, Theme } from '@mui/material';
 
 import { LabeledDetail } from 'web-components/lib/components/text-layouts';
 import { Body } from 'web-components/lib/components/typography';
-import { formatDate } from 'web-components/lib/utils/format';
+import {
+  DATE_FORMAT_SECONDARY,
+  formatDate,
+} from 'web-components/lib/utils/format';
 
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { LinkWithArrow } from '../atoms';
@@ -52,7 +55,7 @@ export const BatchInfoGrid: React.FC<{
 
 const batchDate = (date?: string | Date): string => {
   if (!date) return '-';
-  return formatDate(date, 'MMM D, YYYY', true);
+  return formatDate(date, DATE_FORMAT_SECONDARY, true);
 };
 
 const GridItem: React.FC = ({ children }) => (

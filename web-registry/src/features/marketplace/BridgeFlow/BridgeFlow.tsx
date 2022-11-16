@@ -117,7 +117,7 @@ export const BridgeFlow = ({
         onClose={() => setIsProcessingModalOpen(false)}
       />
       <TxSuccessfulModal
-        open={!!txHash && !error} //TODO
+        open={!!txHash && !error}
         onClose={handleTxModalClose}
         txHash={txHash ?? ''}
         txHashUrl={txHashUrl}

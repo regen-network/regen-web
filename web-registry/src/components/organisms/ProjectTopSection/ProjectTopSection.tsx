@@ -198,7 +198,7 @@ function ProjectTopSection({
             </Title>
           )}
           {primaryDescription && (
-            <Body size="xl" mobileSize="md" pt={[3.75, 7.5]}>
+            <Body size="xl" mobileSize="md" py={[3.75, 6]}>
               {primaryDescription}
             </Body>
           )}
@@ -211,7 +211,7 @@ function ProjectTopSection({
                 />
               }
               imgSrc={getSanityImgSrc(creditClassSanity?.image)}
-              sx={{ mt: [8, 20], mb: [2, 8] }}
+              sx={{ mt: [2, 4], py: [2, 6] }}
             />
           </Link>
           {isVCSProject && (

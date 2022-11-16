@@ -12,20 +12,15 @@ import {
   useWalletByAddrQuery,
 } from 'generated/graphql';
 import { getProjectPageBaseData } from 'lib/rdf';
-import { useWallet } from 'lib/wallet';
+import { useWallet } from 'lib/wallet/wallet';
 
-interface MyProjectsProps {
-  isIssuer: boolean;
-  isProjectAdmin: boolean;
-}
+import { useDashboardContext } from '../Dashboard.context';
 
-const MyProjects = ({
-  isIssuer,
-  isProjectAdmin,
-}: MyProjectsProps): JSX.Element => {
+const MyProjects = (): JSX.Element => {
   const [error, setError] = useState<string | null>(null);
   const { wallet } = useWallet();
   const navigate = useNavigate();
+  const { isIssuer, isProjectAdmin } = useDashboardContext();
   const [createProject] = useCreateProjectMutation();
   const [createWallet] = useCreateWalletMutation();
   const { data: walletData } = useWalletByAddrQuery({

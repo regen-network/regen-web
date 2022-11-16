@@ -18,6 +18,8 @@ import { OrganizationFormValues } from 'web-components/lib/components/modal/Orga
 import { ProfileFormValues } from 'web-components/lib/components/modal/ProfileModal';
 import { Subtitle } from 'web-components/lib/components/typography';
 
+import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
+
 import {
   GetOrganizationProfileByEmailQuery,
   ShaclGraphByUriQuery,
@@ -35,7 +37,6 @@ import {
   getProjectPageBaseData,
   validate,
 } from '../../lib/rdf';
-import { chainInfo } from '../../lib/wallet';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../molecules';
 

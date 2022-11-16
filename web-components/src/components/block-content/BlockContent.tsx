@@ -47,6 +47,9 @@ const CustomBlockContent: React.FC<{
         <UnderlineTooltip {...props} title={tooltipText} />
       ),
     },
+    types: {
+      undefined: () => <></>,
+    },
   };
 
   if (content) {

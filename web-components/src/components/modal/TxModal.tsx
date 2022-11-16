@@ -2,13 +2,14 @@ import React from 'react';
 import { Box, Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { SxProps } from '@mui/system';
+import ReactHtmlParser from 'html-react-parser';
 
 import { truncate } from '../../utils/truncate';
 import OutlinedButton from '../buttons/OutlinedButton';
 import Card from '../cards/Card';
 import { LinkItem } from '../footer/footer-new';
 import Modal, { RegenModalProps } from '../modal';
-import { Label, Title } from '../typography';
+import { Body, Label, Title } from '../typography';
 import { CardItemValue, CardItemValueList } from './TxModal.CardItemValue';
 
 const useStyles = makeStyles(theme => ({
@@ -54,6 +55,7 @@ export interface TxModalProps extends RegenModalProps {
   txHashUrl: string;
   icon?: JSX.Element;
   title?: string;
+  description?: string;
 }
 
 interface CardItemProps extends Item {
@@ -92,6 +94,7 @@ export const CardItem: React.FC<CardItemProps> = ({
 const TxModal: React.FC<TxModalProps> = ({
   icon,
   title,
+  description,
   buttonTitle = 'view your portfolio',
   open,
   onClose,
@@ -121,6 +124,17 @@ const TxModal: React.FC<TxModalProps> = ({
       >
         {title}
       </Title>
+      {description && (
+        <Body
+          size="lg"
+          sx={{
+            pt: [2.5, 5],
+            pb: [4.75, 0],
+          }}
+        >
+          {ReactHtmlParser(description)}
+        </Body>
+      )}
       <Card
         sx={{
           display: 'flex',

@@ -354,15 +354,14 @@ export const Storefront = (): JSX.Element => {
                         }
                         size="small"
                         onClick={async () => {
-                          const trackData: Buy1Event = {
+                          track<'buy1', Buy1Event>('buy1', {
                             url: location.pathname,
                             buttonLocation: 'sellOrderTable',
                             projectName: normalizedSellOrders[i].project?.name,
                             projectId: normalizedSellOrders[i].project?.id,
                             creditClassId:
                               normalizedSellOrders[i].project?.classIdUrl,
-                          };
-                          track('buy1', trackData);
+                          });
                           if (accountAddress) {
                             selectedSellOrderIdRef.current = Number(
                               sellOrders?.[i].id,

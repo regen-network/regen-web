@@ -68,10 +68,10 @@ const useCreateSellOrderSubmit = ({
       };
 
       const onError = (): void => {
-        track('sellFailure');
+        track<'sellFailure'>('sellFailure');
       };
       const onSuccess = (): void => {
-        track('sellSuccess');
+        track<'sellSuccess'>('sellSuccess');
       };
       signAndBroadcast(tx, onTxBroadcast, { onError, onSuccess });
 

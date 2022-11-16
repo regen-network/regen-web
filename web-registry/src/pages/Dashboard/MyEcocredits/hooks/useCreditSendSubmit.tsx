@@ -70,10 +70,10 @@ const useCreditSendSubmit = ({
       };
 
       const onError = (): void => {
-        track('sendFailure');
+        track<'sendFailure'>('sendFailure');
       };
       const onSuccess = (): void => {
-        track('sendSuccess');
+        track<'sendSuccess'>('sendSuccess');
       };
       await signAndBroadcast(tx, () => setCreditSendOpen(-1), {
         onError,

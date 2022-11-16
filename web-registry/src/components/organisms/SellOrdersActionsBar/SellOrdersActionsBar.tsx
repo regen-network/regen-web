@@ -64,18 +64,14 @@ export const SellOrdersActionsBar = ({
             <ContainedButton
               startIcon={<CurrentCreditsIcon height="18px" width="18px" />}
               onClick={() => {
-                // if any of the values used in event data are undefined,
-                // then they are not included in the tracking data.
-                // this is a feature of the track API.
-                const trackData: Buy1Event = {
+                track<'buy1', Buy1Event>('buy1', {
                   url: location.pathname,
                   buttonLocation: 'stickyNav',
                   projectName,
                   projectId: onChainProjectId,
                   creditClassId: onChainCreditClassId,
                   creditClassName,
-                };
-                track('buy1', trackData);
+                });
                 onBuyButtonClick();
               }}
               disabled={isBuyButtonDisabled}

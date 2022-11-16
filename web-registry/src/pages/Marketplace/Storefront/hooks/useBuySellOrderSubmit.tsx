@@ -125,10 +125,10 @@ const useBuySellOrderSubmit = ({
       };
 
       const onError = (): void => {
-        track('buyFailure');
+        track<'buyFailure'>('buyFailure');
       };
       const onSuccess = (): void => {
-        track('buySuccess');
+        track<'buySuccess'>('buySuccess');
       };
       const error = await signAndBroadcast(
         tx,

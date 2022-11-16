@@ -291,7 +291,7 @@ export const MyEcocredits = (): JSX.Element => {
                       icon: <AvailableCreditsIconAlt sx={sxs.arrow} />,
                       label: CREATE_SELL_ORDER_SHORT,
                       onClick: () => {
-                        track('sell1');
+                        track<'sell1'>('sell1');
                         setSellOrderCreateOpen(i);
                       },
                     },
@@ -305,7 +305,7 @@ export const MyEcocredits = (): JSX.Element => {
                       ),
                       label: CREDIT_SEND_TITLE,
                       onClick: () => {
-                        track('send1');
+                        track<'send1'>('send1');
                         setCreditSendOpen(i);
                       },
                     },

@@ -88,7 +88,7 @@ const CreateSellOrderForm: React.FC<React.PropsWithChildren<FormProps>> = ({
       initialValues={initialValues}
       validate={validateHandler}
       onSubmit={async values => {
-        track('sell2');
+        track<'sell2'>('sell2');
         onSubmit(values);
       }}
     >

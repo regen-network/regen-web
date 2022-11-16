@@ -195,7 +195,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
             validate={validationHandler}
             onSubmit={async (values, { setSubmitting }) => {
               setSubmitting(true);
-              const trackData: Buy2Event = {
+              track<'buy2', Buy2Event>('buy2', {
                 url: location.pathname,
                 price: selectedSellOrder?.askAmount,
                 batchDenom: selectedSellOrder?.batchDenom,
@@ -204,8 +204,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                 quantity: values.creditCount,
                 currencyDenom: selectedSellOrder?.askDenom,
                 retirementAction: values.retirementAction,
-              };
-              track('buy2', trackData);
+              });
               try {
                 await handleBuyCreditsSubmit(
                   values,

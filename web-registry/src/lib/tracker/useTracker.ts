@@ -1,17 +1,19 @@
 import { useTrack } from 'use-analytics';
 
-import { Buy2Event, LoginEvent } from './types';
+import { Track } from './types';
 
 interface UseTracker {
-  track: (
-    eventName: string,
-    payload?: any | LoginEvent | Buy2Event,
-    options?: any,
-    callback?: (...params: any[]) => any,
-  ) => Promise<any>;
+  track: Track;
 }
 
 export const useTracker = (): UseTracker => {
   const track = useTrack();
-  return { track };
+  return {
+    track: <IEventName extends string, IPayload = void>(
+      eventName: IEventName,
+      payload?: IPayload,
+    ) => {
+      return track(eventName, payload);
+    },
+  };
 };

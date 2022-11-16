@@ -1,3 +1,8 @@
+export type Track = <IEventName extends string, IPayload = void>(
+  eventName: IEventName,
+  payload?: IPayload,
+) => Promise<any>;
+
 export interface LoginEvent {
   date: string;
   account: string;

@@ -233,15 +233,14 @@ export function ProjectCard({
                   <OutlinedButton
                     onClick={event => {
                       event.stopPropagation();
-                      const trackData: Buy1Event = {
+                      track<'buy1', Buy1Event>('buy1', {
                         url: location.pathname,
                         cardType: 'project',
                         buttonLocation: 'projectCard',
                         projectName: name,
                         projectId: id,
                         creditClassId,
-                      };
-                      track('buy1', trackData);
+                      });
                       onButtonClick && onButtonClick();
                     }}
                     size="small"

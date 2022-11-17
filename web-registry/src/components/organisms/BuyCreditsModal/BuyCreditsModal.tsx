@@ -141,6 +141,8 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
       allowedDenomsData: allowedDenomsResponse?.data,
     });
 
+    const isDisableAutoRetire = selectedSellOrder?.disableAutoRetire;
+
     const handleClose = (): void => {
       setSelectedSellOrder(undefined);
       onClose();
@@ -277,109 +279,80 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                         >
                           {'Batch denom: '}
                           <Body
-                            size="md"
-                            mobileSize="md"
+                            as="span"
                             sx={{
-                              color: 'primary.contrastText',
-                              fontWeight: 700,
-                              mb: 3,
+                              fontWeight: 'normal',
+                              display: 'inline-block',
                             }}
                           >
-                            {`${microToDenom(
-                              selectedSellOrder?.askAmount || '',
-                            )} ${findDisplayDenom({
-                              allowedDenomsData: allowedDenomsResponse?.data,
-                              denom: selectedSellOrder?.askDenom ?? '',
-                            })}/credit`}
+                            {selectedSellOrder?.batchDenom}
                           </Body>
-                          <Body
-                            size="md"
-                            sx={{
-                              color: 'primary.light',
-                              fontWeight: 700,
-                              mb: 3,
-                            }}
-                          >
-                            {'Batch denom: '}
-                            <Body
-                              as="span"
-                              sx={{
-                                fontWeight: 'normal',
-                                display: 'inline-block',
-                              }}
-                            >
-                              {selectedSellOrder?.batchDenom}
-                            </Body>
-                          </Body>
-                          <div className={classes.creditWidget}>
-                            <div className={classes.marginRight}>
-                              <Field
-                                className={classes.creditInput}
-                                component={NumberTextField}
-                                name="creditCount"
-                                min={1}
-                                max={selectedSellOrder?.quantity}
-                                validate={getCreditCountValidation(
-                                  Number(selectedSellOrder?.quantity),
-                                )}
-                              />
-                            </div>
-                            <Box
-                              sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                height: 60,
-                              }}
-                            >
-                              <Title variant="h6" sx={{ mr: 4 }}>
-                                =
-                              </Title>
-                              <div
-                                className={cx(
-                                  classes.flexColumn,
-                                  classes.marginRight,
-                                )}
-                              >
-                                <Box
-                                  sx={{
-                                    display: 'flex',
-                                    alignItems: 'baseline',
-                                  }}
-                                >
-                                  <DenomIcon
-                                    denom={
-                                      selectedSellOrder?.askBaseDenom ?? ''
-                                    }
-                                    sx={{
-                                      mr: 1.5,
-                                      mt: 1,
-                                      alignSelf: 'flex-start',
-                                    }}
-                                    iconSx={{ height: 26 }}
-                                  />
-                                  <Title variant="h4" sx={{ mr: 1.5 }}>
-                                    {amountToSpend({
-                                      askAmount: selectedSellOrder?.askAmount,
-                                      creditCount: values.creditCount,
-                                    })}
-                                  </Title>
-                                  <DenomLabel
-                                    denom={
-                                      findDisplayDenom({
-                                        allowedDenomsData:
-                                          allowedDenomsResponse?.data,
-                                        denom:
-                                          selectedSellOrder?.askDenom ?? '',
-                                      }) ?? ''
-                                    }
-                                    size="sm"
-                                    sx={{ color: 'info.dark' }}
-                                  />
-                                </Box>
-                              </div>
-                            </Box>
-                          </div>
                         </Body>
+                        <div className={classes.creditWidget}>
+                          <div className={classes.marginRight}>
+                            <Field
+                              className={classes.creditInput}
+                              component={NumberTextField}
+                              name="creditCount"
+                              min={1}
+                              max={selectedSellOrder?.quantity}
+                              validate={getCreditCountValidation(
+                                Number(selectedSellOrder?.quantity),
+                              )}
+                            />
+                          </div>
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              height: 60,
+                            }}
+                          >
+                            <Title variant="h6" sx={{ mr: 4 }}>
+                              =
+                            </Title>
+                            <div
+                              className={cx(
+                                classes.flexColumn,
+                                classes.marginRight,
+                              )}
+                            >
+                              <Box
+                                sx={{
+                                  display: 'flex',
+                                  alignItems: 'baseline',
+                                }}
+                              >
+                                <DenomIcon
+                                  denom={selectedSellOrder?.askBaseDenom ?? ''}
+                                  sx={{
+                                    mr: 1.5,
+                                    mt: 1,
+                                    alignSelf: 'flex-start',
+                                  }}
+                                  iconSx={{ height: 26 }}
+                                />
+                                <Title variant="h4" sx={{ mr: 1.5 }}>
+                                  {amountToSpend({
+                                    askAmount: selectedSellOrder?.askAmount,
+                                    creditCount: values.creditCount,
+                                  })}
+                                </Title>
+                                <DenomLabel
+                                  denom={
+                                    findDisplayDenom({
+                                      allowedDenomsData:
+                                        allowedDenomsResponse?.data,
+                                      denom: selectedSellOrder?.askDenom ?? '',
+                                    }) ?? ''
+                                  }
+                                  size="sm"
+                                  sx={{ color: 'info.dark' }}
+                                />
+                              </Box>
+                            </div>
+                          </Box>
+                        </div>
                       </div>
                     </Collapse>
                     <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
@@ -411,16 +384,53 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                         }
                       />
                       <Field
-                        component={TextField}
-                        label="Add retirement transaction details (stored in the tx memo)"
-                        name="retirementNote"
-                        optional
-                        sx={{
-                          mb: { xs: 10, sm: 12 },
-                          '& label': {
-                            whiteSpace: 'unset',
-                          },
-                        }}
+                        component={Toggle}
+                        type="radio"
+                        value="manual"
+                        checked={values['retirementAction'] === 'manual'} // if disableAutoRetire, this is an option
+                        label="Buy tradable ecocredits"
+                        description={
+                          <>
+                            {
+                              'These credits will be a tradable asset. They can be retired later via Regen Marketplace.'
+                            }
+                            <DynamicLink
+                              href="https://guides.regen.network/guides/regen-marketplace/ecocredits/buy-ecocredits/by-project#5.-select-credit-retirement-options"
+                              sx={[
+                                {
+                                  ml: 1,
+                                },
+                                !isDisableAutoRetire && {
+                                  color: 'info.main',
+                                  fontWeight: 700,
+                                },
+                              ]}
+                            >
+                              Learn more»
+                            </DynamicLink>
+                          </>
+                        }
+                        disabled={!isDisableAutoRetire} // if disableAutoRetire is false, this is disabled
+                        tooltip={
+                          !isDisableAutoRetire ? (
+                            <Box sx={{ textAlign: 'start' }}>
+                              {
+                                'The seller of these credits has chosen to only allow for immediate retiring of credits. These credits cannot be purchased as a tradable asset.'
+                              }
+                              <DynamicLink
+                                href="https://guides.regen.network/guides/regen-marketplace/ecocredits/buy-ecocredits/by-project#5.-select-credit-retirement-options"
+                                sx={{
+                                  ml: 1,
+                                  display: 'inline',
+                                  color: 'secondary.main',
+                                  fontWeight: 700,
+                                }}
+                              >
+                                Learn more»
+                              </DynamicLink>
+                            </Box>
+                          ) : undefined
+                        }
                       />
                     </Field>
                     <Collapse in={values['retirementAction'] === 'autoretire'}>
@@ -436,7 +446,12 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                           label="Add retirement transaction details (stored in the tx memo)"
                           name="retirementNote"
                           optional
-                          sx={{ mb: { xs: 10, sm: 12 } }}
+                          sx={{
+                            mb: { xs: 10, sm: 12 },
+                            '& label': {
+                              whiteSpace: 'unset',
+                            },
+                          }}
                         />
                       </Flex>
                       <Flex>

@@ -36,7 +36,7 @@ export * from './ProjectImpactSection';
 export * from './ProjectLocationForm';
 export * from './ProjectMetadataForm/ProjectMetadataForm';
 export * from './ProjectTopSection/ProjectTopSection';
-export * from './RegistryNav';
+export * from './RegistryLayout';
 export * from './ResourcesSection';
 export * from './RolesForm';
 export * from './SDGs';

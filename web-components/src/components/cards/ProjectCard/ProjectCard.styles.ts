@@ -1,7 +1,7 @@
 import { Theme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
-export const useProjectCardStyles = makeStyles((theme: Theme) => ({
+export const useProjectCardStyles = makeStyles()((theme: Theme) => ({
   separator: {
     border: `0.5px solid ${theme.palette.grey[100]}`,
     [theme.breakpoints.up('sm')]: {

@@ -7,7 +7,7 @@ import {
 } from '../../components/organisms';
 import { OnboardingFormTemplate } from '../../components/templates';
 
-const Eligibility: React.FC = () => {
+const Eligibility: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
 
   async function saveAndExit(): Promise<void> {

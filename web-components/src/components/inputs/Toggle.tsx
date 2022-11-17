@@ -21,7 +21,7 @@ interface ToggleProps extends FieldProps {
   triggerOnChange?: (v: any) => Promise<void>;
 }
 
-const Toggle: React.FC<ToggleProps> = ({
+const Toggle: React.FC<React.PropsWithChildren<ToggleProps>> = ({
   className,
   label,
   checked,

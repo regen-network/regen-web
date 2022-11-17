@@ -1,8 +1,8 @@
 import React from 'react';
 import LazyLoad from 'react-lazyload';
+import { useTheme } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { makeStyles, useTheme } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import Section from 'web-components/lib/components/section';
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -19,7 +19,7 @@ interface MoreProjectsProps {
   };
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     width: '100%',
     paddingBottom: theme.spacing(22.25),
@@ -37,7 +37,7 @@ const MoreProjectsSection = ({
   projects,
   title,
 }: MoreProjectsProps): JSX.Element => {
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
   const theme = useTheme<Theme>();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 

@@ -1,9 +1,10 @@
 import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import Slider from 'react-slick';
+import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';
 import PlayIcon from '../icons/PlayIcon';
@@ -35,166 +36,168 @@ export function isMedia(a: Asset): a is Media {
   return (a as Media).src !== undefined;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  root: props => ({
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(8.75),
-    },
-    '& .slick-slide img': {
+const useStyles = makeStyles<StyleProps>()(
+  (theme, { xsBorderRadius, mobileHeight }) => ({
+    root: {
       [theme.breakpoints.down('sm')]: {
-        height: props.mobileHeight ? props.mobileHeight : 'inherit',
-        objectFit: props.mobileHeight ? 'cover' : 'inherit',
-        objectPosition: '0% 0%',
+        marginBottom: theme.spacing(8.75),
+      },
+      '& .slick-slide img': {
+        [theme.breakpoints.down('sm')]: {
+          height: mobileHeight ? mobileHeight : 'inherit',
+          objectFit: mobileHeight ? 'cover' : 'inherit',
+          objectPosition: '0% 0%',
+        },
+      },
+      '& .slick-dots': {
+        bottom: 'auto',
+        overflow: 'hidden',
+        '& ul': {
+          padding: 0,
+          whiteSpace: 'nowrap',
+        },
+        [theme.breakpoints.up('sm')]: {
+          textAlign: 'left',
+          paddingTop: theme.spacing(3.5),
+          '& ul': {
+            marginLeft: '-8px',
+            '& li': {
+              width: 60,
+              height: 60,
+              margin: '0 8px',
+              '&.slick-active': {
+                '& img': {
+                  border: `2px solid ${theme.palette.secondary.dark}`,
+                },
+              },
+            },
+          },
+        },
+        [theme.breakpoints.down('sm')]: {
+          height: theme.spacing(6),
+          '& ul': {
+            margin: '8px 0 -6.5px',
+            '& li': {
+              width: theme.spacing(2.5),
+              margin: '0 6.5px',
+              '&.slick-active': {
+                '& div': {
+                  backgroundColor: theme.palette.secondary.dark,
+                },
+              },
+            },
+          },
+        },
       },
     },
-    '& .slick-dots': {
-      bottom: 'auto',
-      overflow: 'hidden',
-      '& ul': {
-        padding: 0,
-        whiteSpace: 'nowrap',
+    thumbnail: {
+      position: 'relative',
+      display: 'inline-block',
+      '& img': {
+        width: 60,
+        height: 60,
+        borderRadius: '5px',
+        // border: `1px solid ${theme.palette.info.light}`,
+        boxSizing: 'border-box',
+        objectFit: 'cover',
       },
+    },
+    play: {
+      position: 'absolute',
+      left: 19,
+      top: 19,
+      width: 22,
+      height: 22,
+      backgroundColor: theme.palette.primary.main,
+      borderRadius: '50%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    item: {
+      width: '100%',
       [theme.breakpoints.up('sm')]: {
-        textAlign: 'left',
-        paddingTop: theme.spacing(3.5),
-        '& ul': {
-          marginLeft: '-8px',
-          '& li': {
-            width: 60,
-            height: 60,
-            margin: '0 8px',
-            '&.slick-active': {
-              '& img': {
-                border: `2px solid ${theme.palette.secondary.dark}`,
-              },
-            },
-          },
-        },
+        borderRadius: '5px',
       },
       [theme.breakpoints.down('sm')]: {
-        height: theme.spacing(6),
-        '& ul': {
-          margin: '8px 0 -6.5px',
-          '& li': {
-            width: theme.spacing(2.5),
-            margin: '0 6.5px',
-            '&.slick-active': {
-              '& div': {
-                backgroundColor: theme.palette.secondary.dark,
-              },
-            },
-          },
-        },
+        borderRadius: xsBorderRadius ? '5px' : 'none',
+      },
+    },
+    dot: {
+      height: theme.spacing(2.5),
+      width: theme.spacing(2.5),
+      backgroundColor: theme.palette.grey[100],
+      borderRadius: '50%',
+    },
+    sideGrid: {
+      flexGrow: 0,
+      maxWidth: '37%',
+      flexBasis: '37%',
+      maxHeight: theme.spacing(113),
+      position: 'relative',
+    },
+    centreGrid: {
+      flexGrow: 0,
+      maxWidth: '26%',
+      flexBasis: '26%',
+      maxHeight: theme.spacing(113),
+    },
+    imageContainer: {
+      paddingLeft: theme.spacing(2.5),
+      paddingRight: theme.spacing(2.5),
+      height: '50%',
+      '&:first-child': {
+        paddingBottom: theme.spacing(1.25),
+      },
+      '&:last-child': {
+        paddingTop: theme.spacing(1.25),
+      },
+    },
+    image: {
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+      borderRadius: '5px',
+      objectPosition: '50% 50%',
+    },
+    grid: {
+      padding: theme.spacing(2.5),
+    },
+    imageCredits: {
+      color: theme.palette.primary.main,
+      position: 'absolute',
+      [theme.breakpoints.up('sm')]: {
+        fontSize: theme.typography.pxToRem(12),
+        left: theme.typography.pxToRem(13),
+        bottom: theme.typography.pxToRem(9),
+      },
+      [theme.breakpoints.down('sm')]: {
+        fontSize: theme.typography.pxToRem(11),
+        left: theme.typography.pxToRem(9),
+        bottom: theme.typography.pxToRem(6),
+      },
+    },
+    sliderImageContainer: {
+      position: 'relative',
+    },
+    elementContainer: {
+      position: 'relative',
+      [theme.breakpoints.up('sm')]: {
+        height: theme.spacing(100),
+      },
+      [theme.breakpoints.down('sm')]: {
+        height: theme.spacing(56),
+      },
+    },
+    element: {
+      [theme.breakpoints.up('sm')]: {
+        borderRadius: '5px',
+        overflow: 'hidden',
+        height: '100%',
       },
     },
   }),
-  thumbnail: {
-    position: 'relative',
-    display: 'inline-block',
-    '& img': {
-      width: 60,
-      height: 60,
-      borderRadius: '5px',
-      // border: `1px solid ${theme.palette.info.light}`,
-      boxSizing: 'border-box',
-      objectFit: 'cover',
-    },
-  },
-  play: {
-    position: 'absolute',
-    left: 19,
-    top: 19,
-    width: 22,
-    height: 22,
-    backgroundColor: theme.palette.primary.main,
-    borderRadius: '50%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  item: props => ({
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      borderRadius: '5px',
-    },
-    [theme.breakpoints.down('sm')]: {
-      borderRadius: props.xsBorderRadius ? '5px' : 'none',
-    },
-  }),
-  dot: {
-    height: theme.spacing(2.5),
-    width: theme.spacing(2.5),
-    backgroundColor: theme.palette.grey[100],
-    borderRadius: '50%',
-  },
-  sideGrid: {
-    flexGrow: 0,
-    maxWidth: '37%',
-    flexBasis: '37%',
-    maxHeight: theme.spacing(113),
-    position: 'relative',
-  },
-  centreGrid: {
-    flexGrow: 0,
-    maxWidth: '26%',
-    flexBasis: '26%',
-    maxHeight: theme.spacing(113),
-  },
-  imageContainer: {
-    paddingLeft: theme.spacing(2.5),
-    paddingRight: theme.spacing(2.5),
-    height: '50%',
-    '&:first-child': {
-      paddingBottom: theme.spacing(1.25),
-    },
-    '&:last-child': {
-      paddingTop: theme.spacing(1.25),
-    },
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-    borderRadius: '5px',
-    objectPosition: '50% 50%',
-  },
-  grid: {
-    padding: theme.spacing(2.5),
-  },
-  imageCredits: {
-    color: theme.palette.primary.main,
-    position: 'absolute',
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(12),
-      left: theme.typography.pxToRem(13),
-      bottom: theme.typography.pxToRem(9),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(11),
-      left: theme.typography.pxToRem(9),
-      bottom: theme.typography.pxToRem(6),
-    },
-  },
-  sliderImageContainer: {
-    position: 'relative',
-  },
-  elementContainer: {
-    position: 'relative',
-    [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(100),
-    },
-    [theme.breakpoints.down('sm')]: {
-      height: theme.spacing(56),
-    },
-  },
-  element: {
-    [theme.breakpoints.up('sm')]: {
-      borderRadius: '5px',
-      overflow: 'hidden',
-      height: '100%',
-    },
-  },
-}));
+);
 
 function getThumbnailStyle(thumbsTranslate: number): object {
   const translate: string = `translate(${thumbsTranslate}px, 0)`;
@@ -216,7 +219,7 @@ export default function ProjectMedia({
   apiServerUrl,
   imageCredits,
 }: ProjectMediaProps): JSX.Element {
-  const classes = useStyles({ mobileHeight, xsBorderRadius });
+  const { classes } = useStyles({ mobileHeight, xsBorderRadius });
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
 

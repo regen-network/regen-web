@@ -1,7 +1,7 @@
 import React from 'react';
-import { Box, CardMedia } from '@mui/material';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
-import cx from 'clsx';
+import { Box, CardMedia, useTheme } from '@mui/material';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import ContainedButton from '../buttons/ContainedButton';
 import Card from '../cards/Card';
@@ -35,7 +35,7 @@ export interface Step {
   onBtnClick?: () => void;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -124,7 +124,7 @@ function StepCard({
   imageStorageBaseUrl,
   apiServerUrl,
 }: StepCardProps): JSX.Element {
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
   const theme = useTheme();
   return (
     <div className={styles.root}>

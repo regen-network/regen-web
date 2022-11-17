@@ -24,11 +24,11 @@ import { client } from '../../sanity';
 import { FeaturedProjects } from './Home.FeaturedProjects';
 import { useHomeStyles } from './Home.styles';
 
-const Home: React.FC = () => {
+const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [open, setOpen] = useState(false);
   const [modalLink, setModalLink] = useState<string>('');
 
-  const styles = useHomeStyles();
+  const { classes } = useHomeStyles();
 
   // Featured projects fetching
 
@@ -71,7 +71,7 @@ const Home: React.FC = () => {
       <BackgroundImgSection
         img={heroSection?.background?.image?.asset?.url || ''}
         linearGradient="linear-gradient(203.09deg, #000000 45.49%, #5E9078 92.1%);"
-        classes={{ section: styles.section }}
+        classes={{ section: classes.section }}
         sx={{
           display: 'flex',
           alignItems: 'center',
@@ -151,7 +151,7 @@ const Home: React.FC = () => {
       {creditClassesContent && (
         <Section
           title="Credit Classes"
-          classes={{ root: styles.section, title: styles.title }}
+          classes={{ root: classes.section, title: classes.title }}
           id="credit-classes"
         >
           <CreditClassCards
@@ -165,8 +165,8 @@ const Home: React.FC = () => {
       <HeroAction
         isBanner
         classes={{
-          main: styles.bottomSectionWidth,
-          section: styles.bottomSection,
+          main: classes.bottomSectionWidth,
+          section: classes.bottomSection,
         }}
         img={horsesImg}
         openModal={(href: string): void => {

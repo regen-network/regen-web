@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Timeline from '@mui/lab/Timeline';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
@@ -9,8 +9,7 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import Modal from '../modal';
 import Tag from '../tag';
@@ -43,7 +42,7 @@ interface ContentProps {
   onTitleClick?: (url: string) => void;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+const useStyles = makeStyles<StyleProps>()((theme, params) => ({
   timeline: {
     padding: 0,
   },
@@ -61,7 +60,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       marginLeft: theme.spacing(4),
     },
   },
-  content: props => ({
+  content: {
     backgroundColor: theme.palette.primary.main,
     position: 'relative',
     border: `1px solid ${theme.palette.info.light}`,
@@ -74,7 +73,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingBottom: theme.spacing(4),
     },
     [theme.breakpoints.up('md')]: {
-      marginLeft: props.even ? theme.spacing(3) : theme.spacing(-3),
+      marginLeft: params?.even ? theme.spacing(3) : theme.spacing(-3),
     },
     [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(4),
@@ -87,18 +86,18 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       backgroundColor: theme.palette.primary.main,
       position: 'absolute',
       [theme.breakpoints.up('md')]: {
-        right: props.even ? 'auto' : theme.spacing(-2),
-        left: props.even ? theme.spacing(-2) : 'auto',
-        borderRight: props.even
+        right: params?.even ? 'auto' : theme.spacing(-2),
+        left: params?.even ? theme.spacing(-2) : 'auto',
+        borderRight: params?.even
           ? 'none'
           : `1px solid ${theme.palette.info.light}`,
-        borderTop: props.even
+        borderTop: params?.even
           ? 'none'
           : `1px solid ${theme.palette.info.light}`,
-        borderLeft: props.even
+        borderLeft: params?.even
           ? `1px solid ${theme.palette.info.light}`
           : 'none',
-        borderBottom: props.even
+        borderBottom: params?.even
           ? `1px solid ${theme.palette.info.light}`
           : 'none',
       },
@@ -113,7 +112,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       height: theme.spacing(4),
       zIndex: 100,
     },
-  }),
+  },
   tags: {
     textAlign: 'left',
     marginBottom: theme.spacing(4),
@@ -155,7 +154,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 }));
 
 function Content({ item, index, onTitleClick }: ContentProps): JSX.Element {
-  const classes = useStyles({ even: index % 2 === 0 });
+  const { classes } = useStyles({ even: index % 2 === 0 });
   return (
     <Grid container wrap="nowrap" className={classes.content}>
       <Grid item sx={{ display: 'flex', alignItems: 'center' }}>
@@ -198,7 +197,7 @@ function Content({ item, index, onTitleClick }: ContentProps): JSX.Element {
 }
 
 export default function NewTimeline({ items }: Props): JSX.Element {
-  const classes = useStyles({});
+  const { classes, cx } = useStyles({});
   const [iframeSrc, setIframeSrc] = useState('');
   return (
     <>
@@ -219,7 +218,7 @@ export default function NewTimeline({ items }: Props): JSX.Element {
                 </TimelineOppositeContent>
                 <TimelineSeparator className={classes.separator}>
                   <TimelineDot className={classes.dot} />
-                  <TimelineConnector className={clsx(connectorClassName)} />
+                  <TimelineConnector className={cx(connectorClassName)} />
                 </TimelineSeparator>
                 <TimelineContent>
                   <Content
@@ -247,7 +246,7 @@ export default function NewTimeline({ items }: Props): JSX.Element {
               <TimelineItem key={index} className={classes.item}>
                 <TimelineSeparator className={classes.separator}>
                   <TimelineDot className={classes.dot} />
-                  <TimelineConnector className={clsx(connectorClassName)} />
+                  <TimelineConnector className={cx(connectorClassName)} />
                 </TimelineSeparator>
                 <TimelineContent>
                   <Content item={item} index={index} />

@@ -1,18 +1,21 @@
-import React from 'react';
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 interface props extends SvgIconProps {
   width?: string;
   height?: string;
 }
 
-const useStyles = makeStyles<Theme, props>((theme: Theme) => ({
-  root: props => ({
-    width: props.width || 'inherit',
-    height: props.height || 'inherit',
-  }),
+type UseStylesParams = {
+  width?: string;
+  height?: string;
+};
+
+const useStyles = makeStyles<UseStylesParams>()((theme, { height, width }) => ({
+  root: {
+    width: width || 'inherit',
+    height: height || 'inherit',
+  },
 }));
 
 export default function HamburgerIcon({
@@ -21,11 +24,11 @@ export default function HamburgerIcon({
   className,
   ...props
 }: props): JSX.Element {
-  const classes = useStyles({ width, height });
+  const { classes, cx } = useStyles({ width, height });
 
   return (
     <SvgIcon
-      className={clsx(className, classes.root)}
+      className={cx(className, classes.root)}
       viewBox="0 0 29 22"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

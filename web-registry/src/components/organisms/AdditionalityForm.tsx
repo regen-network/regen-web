@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import { Field, Form, Formik } from 'formik';
 import { RadioGroup } from 'formik-mui';
+import { makeStyles } from 'tss-react/mui';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import ControlledFormLabel from 'web-components/lib/components/form/ControlledFormLabel';
@@ -31,7 +31,7 @@ export interface AdditionalityValues {
   environmentalConditions: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   card: {
     margin: theme.spacing(3, 0, 3),
     '&:first-of-type': {
@@ -45,10 +45,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const AdditionalityForm: React.FC<AdditionalityFormProps> = props => {
-  const classes = useStyles();
+export const AdditionalityForm: React.FC<
+  React.PropsWithChildren<AdditionalityFormProps>
+> = props => {
+  const { classes } = useStyles();
 
-  const DateLabel: React.FC = () => (
+  const DateLabel: React.FC<React.PropsWithChildren<unknown>> = () => (
     <Subtitle size="sm" mb={1}>
       Choose a practice start date
     </Subtitle>

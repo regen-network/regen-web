@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import ReactHtmlParser from 'react-html-parser';
+import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
-import { useTheme } from '@mui/styles';
-import clsx from 'clsx';
+import ReactHtmlParser from 'html-react-parser';
 
 import { Center } from '../box';
 import { HeaderMenuItem } from '../header/components/HeaderMenuHover/HeaderMenuHover';
@@ -19,14 +18,14 @@ type Props = {
   isRegistry?: boolean;
   pathname: string;
   isAuthenticated?: boolean;
-  linkComponent: React.FC<NavLinkProps>;
   extras?: JSX.Element;
+  linkComponent: React.FC<React.PropsWithChildren<NavLinkProps>>;
   onSignup?: () => void;
   onLogin?: () => void;
   onLogout?: () => void;
 };
 
-const MobileMenu: React.FC<Props> = ({
+const MobileMenu: React.FC<React.PropsWithChildren<Props>> = ({
   menuItems,
   pathname,
   isRegistry,
@@ -34,7 +33,7 @@ const MobileMenu: React.FC<Props> = ({
   linkComponent: Link,
   ...props
 }) => {
-  const styles = useMobileMenuStyles();
+  const { classes: styles, cx } = useMobileMenuStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
@@ -51,7 +50,7 @@ const MobileMenu: React.FC<Props> = ({
       <Center>
         {isRegistry && extras}
         <HamburgerIcon
-          className={clsx(styles.hamburger, styles.icon)}
+          className={cx(styles.hamburger, styles.icon)}
           onClick={handleOpen}
           width="29px"
           height="22px"
@@ -66,7 +65,7 @@ const MobileMenu: React.FC<Props> = ({
         onClose={handleClose}
       >
         <CloseIcon
-          className={clsx(styles.close, styles.icon)}
+          className={cx(styles.close, styles.icon)}
           onClick={handleClose}
           svgColor={theme.palette.primary.main}
         />
@@ -77,7 +76,7 @@ const MobileMenu: React.FC<Props> = ({
                 key={i}
                 className={
                   pathname === item.href
-                    ? clsx(styles.menuItem, styles.currentMenuItem)
+                    ? cx(styles.menuItem, styles.currentMenuItem)
                     : styles.menuItem
                 }
               >
@@ -91,10 +90,7 @@ const MobileMenu: React.FC<Props> = ({
                           <MenuItem
                             className={
                               pathname === dropdownItem.href
-                                ? clsx(
-                                    styles.subMenuItem,
-                                    styles.currentMenuItem,
-                                  )
+                                ? cx(styles.subMenuItem, styles.currentMenuItem)
                                 : styles.subMenuItem
                             }
                             key={`${i}-${j}`}

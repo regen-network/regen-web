@@ -6,7 +6,9 @@ import { Theme } from 'src/theme/muiTheme';
 /** simpler loader with a minimum height of 150 px
  * @param sx - additional styles for container
  */
-export const Loading: React.FC<{ sx?: SxProps<Theme> }> = ({ sx }) => {
+export const Loading: React.FC<
+  React.PropsWithChildren<{ sx?: SxProps<Theme> }>
+> = ({ sx }) => {
   return (
     <Box
       sx={{

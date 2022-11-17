@@ -1,11 +1,8 @@
-import React from 'react';
 import { Avatar } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { Body, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { Maybe, Scalars } from '../../generated/sanity-graphql';
 
@@ -22,7 +19,7 @@ interface StyleProps {
   small?: boolean;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+const useStyles = makeStyles<StyleProps>()((theme, { small }) => ({
   root: {
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(0, 4),
@@ -30,7 +27,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       width: theme.typography.pxToRem(374),
     },
   },
-  iconContainer: props => ({
+  iconContainer: {
     backgroundColor: theme.palette.secondary.main,
     textDecoration: 'none',
     width: theme.spacing(30),
@@ -46,13 +43,13 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       width: '100%',
       height: '100%',
       [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
-        padding: props.small ? theme.spacing(6) : 0,
+        padding: small ? theme.spacing(6) : 0,
       },
       [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-        padding: props.small ? theme.spacing(3) : 0,
+        padding: small ? theme.spacing(3) : 0,
       },
     },
-  }),
+  },
   icon: {
     color: 'transparent',
     width: '100%',
@@ -77,7 +74,7 @@ const IconLabel = ({
   descriptionRaw,
   small = false,
 }: IconLabelProps): JSX.Element => {
-  const styles = useStyles({ small });
+  const { classes: styles, cx } = useStyles({ small });
   return (
     <div className={cx(styles.root, className)}>
       <a

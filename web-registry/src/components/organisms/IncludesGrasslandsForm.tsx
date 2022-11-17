@@ -19,9 +19,9 @@ interface IncludesGrasslandsFormValues {
   includesGrasslands?: string; // Radio always produces a string. We convert back to a Boolean on submit
 }
 
-export const IncludesGrasslandsForm: React.FC<IncludesGrasslandsFormProps> = ({
-  submit,
-}) => {
+export const IncludesGrasslandsForm: React.FC<
+  React.PropsWithChildren<IncludesGrasslandsFormProps>
+> = ({ submit }) => {
   return (
     <Formik
       initialValues={{

@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import RegenIcon from '../../icons/RegenIcon';
 
-const useStyles = makeStyles<Theme, { isLoaded: boolean }>(theme => {
+type UseStylesParams = {
+  isLoaded: boolean;
+};
+
+const useStyles = makeStyles<UseStylesParams>()((theme, { isLoaded }) => {
   const { pxToRem } = theme.typography;
 
   return {
-    icon: props => ({
-      display: props.isLoaded ? 'block' : 'inline-block',
+    icon: {
+      display: isLoaded ? 'block' : 'inline-block',
       height: 'auto',
       width: pxToRem(186),
       [theme.breakpoints.down('md')]: {
@@ -17,13 +21,15 @@ const useStyles = makeStyles<Theme, { isLoaded: boolean }>(theme => {
       [theme.breakpoints.down('sm')]: {
         width: pxToRem(104),
       },
-    }),
+    },
   };
 });
 
-export const HeaderLogoLink: React.FC<{ color: string }> = ({ color }) => {
+export const HeaderLogoLink: React.FC<
+  React.PropsWithChildren<{ color: string }>
+> = ({ color }) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const styles = useStyles({ isLoaded });
+  const { classes: styles } = useStyles({ isLoaded });
 
   // TODO: this is a hack to make the SVG render properly in safari - it's not a
   // perfect solution but should work until we can dedicate time to find

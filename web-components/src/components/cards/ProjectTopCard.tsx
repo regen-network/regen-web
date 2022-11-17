@@ -1,7 +1,6 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import { Title } from '../typography';
 import { User } from '../user/UserInfo';
@@ -27,7 +26,7 @@ interface ProjectTopCardProps {
   sdgs?: SDG[];
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   root: {
     backgroundColor: theme.palette.grey[50],
     [theme.breakpoints.down('sm')]: {
@@ -68,7 +67,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   sdgGridItem: {
-    '&:nth-child(odd)': {
+    '&:nth-of-type(odd)': {
       [theme.breakpoints.down('sm')]: {
         paddingRight: theme.spacing(5.5 / 2),
       },
@@ -76,7 +75,7 @@ const useStyles = makeStyles(theme => ({
         paddingRight: theme.spacing(6.8 / 2),
       },
     },
-    '&:nth-child(even)': {
+    '&:nth-of-type(even)': {
       [theme.breakpoints.down('sm')]: {
         paddingLeft: theme.spacing(5.5 / 2),
       },
@@ -119,7 +118,7 @@ export default function ProjectTopCard({
   reseller,
   sdgs,
 }: ProjectTopCardProps): JSX.Element {
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
   return (
     <Card className={cx(styles.root, classes && classes.root)}>
       {sdgs && (

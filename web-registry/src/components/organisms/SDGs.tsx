@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
@@ -10,7 +10,7 @@ interface Props {
   sdgs: Array<Maybe<Sdg>>;
 }
 
-const useStyles = makeStyles<Theme>((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   image: {
     borderRadius: 2,
     [theme.breakpoints.up('sm')]: {
@@ -37,7 +37,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 }));
 
 function SDGs({ sdgs }: Props): JSX.Element {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
 
   return (
     <div className={styles.sdgs}>

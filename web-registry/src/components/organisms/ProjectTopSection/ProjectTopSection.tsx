@@ -82,7 +82,7 @@ function ProjectTopSection({
   projectId?: string;
   loading?: boolean;
 }): JSX.Element {
-  const styles = useProjectTopSectionStyles();
+  const { classes } = useProjectTopSectionStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -130,14 +130,14 @@ function ProjectTopSection({
   });
 
   return (
-    <Section classes={{ root: styles.section }}>
+    <Section classes={{ root: classes.section }}>
       <Grid container>
         <Grid item xs={12} md={8} sx={{ pr: { md: 19 } }}>
           {/* TODO Show on-chain project id if no off-chain name */}
           <Title variant="h1">{metadata?.['schema:name']}</Title>
           <Box sx={{ pt: { xs: 5, sm: 6 } }}>
             <ProjectPlaceInfo
-              iconClassName={styles.icon}
+              iconClassName={classes.icon}
               // TODO Format and show on-chain project location if no off-chain location
               place={
                 metadata?.['schema:location']?.['place_name'] ||
@@ -214,7 +214,7 @@ function ProjectTopSection({
           />
           <LazyLoad offset={50}>
             {videoURL && (
-              <Card className={styles.media}>
+              <Card className={classes.media}>
                 <CardMedia
                   component={ReactPlayerLazy}
                   url={videoURL}
@@ -226,14 +226,14 @@ function ProjectTopSection({
             )}
             {landStewardPhoto && (
               <img
-                className={styles.media}
+                className={classes.media}
                 alt={landStewardPhoto}
                 src={landStewardPhoto}
               />
             )}
           </LazyLoad>
           {landStewardStoryTitle && (
-            <Title variant="h4" className={styles.tagline}>
+            <Title variant="h4" className={classes.tagline}>
               {landStewardStoryTitle}
             </Title>
           )}
@@ -246,7 +246,7 @@ function ProjectTopSection({
             <div>
               <Title
                 variant="h4"
-                className={styles.tagline}
+                className={classes.tagline}
                 sx={{ ml: { xs: 4, sm: 4.5 } }}
               >
                 <ProjectTopSectionQuoteMark

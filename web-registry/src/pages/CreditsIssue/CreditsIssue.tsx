@@ -14,7 +14,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -29,7 +29,7 @@ const ISSUE_CREDITS = gql`
   }
 `;
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     padding: theme.spacing(5),
   },
@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 // TODO Deprecated: delete legacy credits admin - all on-chain now
 // TODO Migrate to use Formik and custom input components
 function CreditsIssue(): JSX.Element {
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   const [issueCredits, { data, loading, error }] = useMutation(ISSUE_CREDITS, {
     errorPolicy: 'ignore',

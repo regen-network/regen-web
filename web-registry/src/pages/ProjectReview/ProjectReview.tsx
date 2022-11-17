@@ -34,7 +34,7 @@ import {
 } from './ProjectReview.util';
 import { VCSMetadata } from './ProjectReview.VCSMetadata';
 
-export const ProjectReview: React.FC = () => {
+export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
   const { setDeliverTxResponse, creditClassId } = useCreateProjectContext();

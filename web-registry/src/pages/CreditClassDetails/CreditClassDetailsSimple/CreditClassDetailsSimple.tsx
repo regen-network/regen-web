@@ -1,7 +1,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import { makeStyles } from '@mui/styles';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { makeStyles } from 'tss-react/mui';
 
 import ReadMore from 'web-components/lib/components/read-more';
 import { Label, Title } from 'web-components/lib/components/typography';
@@ -26,7 +26,7 @@ interface CreditDetailsProps {
   metadata?: CreditClassMetadataLD;
 }
 
-const useStyles = makeStyles<Theme>((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   sectionPadding: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(30),
@@ -92,13 +92,10 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   },
 }));
 
-const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
-  dbClass,
-  onChainClass,
-  issuers,
-  metadata,
-}) => {
-  const styles = useStyles();
+const CreditClassDetailsSimple: React.FC<
+  React.PropsWithChildren<CreditDetailsProps>
+> = ({ dbClass, onChainClass, issuers, metadata }) => {
+  const { classes: styles } = useStyles();
 
   return (
     <Box

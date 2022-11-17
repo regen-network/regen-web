@@ -1,7 +1,6 @@
 import React from 'react';
 import { Avatar, Box, Link } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import Card from 'web-components/lib/components/cards/Card';
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
@@ -14,7 +13,7 @@ interface Props extends RegenModalProps {
   transactionHash?: string;
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -70,12 +69,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ConfirmationModal: React.FC<Props> = ({
+const ConfirmationModal: React.FC<React.PropsWithChildren<Props>> = ({
   open,
   onClose,
   transactionHash,
 }) => {
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
 
   return (
     <Modal className={styles.root} open={open} onClose={onClose}>

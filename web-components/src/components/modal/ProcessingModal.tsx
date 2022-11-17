@@ -1,12 +1,11 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import { Spinner } from '../icons/Spinner';
 import Modal, { RegenModalProps } from '../modal';
 import { Body, Title } from '../typography';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -30,8 +29,11 @@ const useStyles = makeStyles(theme => ({
 
 interface Props extends RegenModalProps {}
 
-const ProcessingModal: React.FC<Props> = ({ open, onClose }) => {
-  const styles = useStyles();
+const ProcessingModal: React.FC<React.PropsWithChildren<Props>> = ({
+  open,
+  onClose,
+}) => {
+  const { classes: styles, cx } = useStyles();
 
   return (
     <Modal className={styles.root} open={open} onClose={onClose}>

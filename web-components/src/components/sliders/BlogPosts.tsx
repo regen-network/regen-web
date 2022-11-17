@@ -1,7 +1,9 @@
 import React from 'react';
 import Slider from 'react-slick';
+import { useTheme } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import BlogPost, { BlogPostProps } from '../blog-post';
 
@@ -9,7 +11,7 @@ export interface BlogPostsProps {
   posts: BlogPostProps[];
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(7.75),
@@ -53,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export default function BlogPosts({ posts }: BlogPostsProps): JSX.Element {
-  const classes = useStyles({});
+  const { classes } = useStyles();
   const theme = useTheme();
   const desktop = useMediaQuery(theme.breakpoints.up('md'));
   const mobile = useMediaQuery(theme.breakpoints.down('sm'));

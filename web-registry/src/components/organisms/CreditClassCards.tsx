@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '@mui/material';
 import Grid, { GridProps } from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { makeStyles, useTheme } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import {
   BlockContent,
@@ -26,7 +26,7 @@ type Props = {
   };
 };
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     [theme.breakpoints.down('sm')]: {
       width: 'unset',
@@ -39,12 +39,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const CreditClassCards: React.FC<Props> = ({
+const CreditClassCards: React.FC<React.PropsWithChildren<Props>> = ({
   justifyContent = 'center',
   ...props
 }) => {
   const navigate = useNavigate();
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
   const theme = useTheme<Theme>();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -52,7 +52,7 @@ const CreditClassCards: React.FC<Props> = ({
     <Grid
       container
       justifyContent={justifyContent}
-      className={clsx(styles.root, props.classes && props.classes.root)}
+      className={cx(styles.root, props.classes && props.classes.root)}
       spacing={isMobile ? 0 : 5}
     >
       {props.creditClassesContent?.map((c, i) => {
@@ -69,7 +69,7 @@ const CreditClassCards: React.FC<Props> = ({
             sm={6}
             md={4}
             key={i}
-            className={clsx(styles.card, props.classes && props.classes.card)}
+            className={cx(styles.card, props.classes && props.classes.card)}
           >
             <ImageActionCard
               key={i}

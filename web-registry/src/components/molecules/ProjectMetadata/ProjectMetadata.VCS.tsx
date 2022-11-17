@@ -14,7 +14,7 @@ export interface MetadataProps {
   projectId?: string;
 }
 
-const ProjectMetadataVCS: React.FC<MetadataProps> = ({
+const ProjectMetadataVCS: React.FC<React.PropsWithChildren<MetadataProps>> = ({
   metadata,
   projectId,
 }) => {

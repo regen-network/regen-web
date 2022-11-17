@@ -1,13 +1,8 @@
-import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 interface SpinIconProps {
   direction?: 'next' | 'prev' | 'down' | 'up';
-}
-
-interface StyleProps {
-  rotate: string;
 }
 
 interface DirectionRotate {
@@ -24,19 +19,23 @@ const directionRotate: DirectionRotate = {
   next: '-90deg',
 };
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  icon: props => ({
-    transform: `rotate(${props.rotate})`,
+export interface StyleProps {
+  rotate: string;
+}
+
+const useStyles = makeStyles<StyleProps>()((theme, { rotate }) => ({
+  icon: {
+    transform: `rotate(${rotate})`,
     fill: theme.palette.primary.main,
     fontSize: '0.5rem',
-  }),
+  },
 }));
 
 export default function SpinIcon({
   direction = 'up',
 }: SpinIconProps): JSX.Element {
   const rotate: string = directionRotate[direction];
-  const classes = useStyles({ rotate });
+  const { classes } = useStyles({ rotate });
   return (
     <SvgIcon viewBox="0 0 8 5" className={classes.icon}>
       <path d="M0.5 4.5L4 1L7.5 4.5" stroke="#D2D5D9" />

@@ -2,7 +2,8 @@ import React, { useCallback, useRef, useState } from 'react';
 import ReactCrop, { Crop } from 'react-image-crop';
 import { Button } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import ContainedButton from '../buttons/ContainedButton';
 import { getCroppedImg } from './canvas-utils';
@@ -17,7 +18,7 @@ export interface ImageCropProps {
   fixedCrop: Partial<Crop>;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -61,7 +62,7 @@ export default function ImageCrop({
   onCancel,
   fixedCrop,
 }: ImageCropProps): JSX.Element {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const imgRef = useRef<any>(null);
   const [crop, setCrop] = useState<Partial<Crop>>(fixedCrop);
   const [loading, setLoading] = useState<boolean>(false);
@@ -84,7 +85,7 @@ export default function ImageCrop({
   }, [completedCrop, onCropSubmit]);
 
   const onLoad = useCallback(
-    img => {
+    (img: HTMLImageElement) => {
       imgRef.current = img;
       const imgWidth = img.width;
       const imgHeight = img.height;

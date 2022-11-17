@@ -1,7 +1,8 @@
 import React, { useCallback, useRef } from 'react';
 import Slider from 'react-slick';
 import Grid from '@mui/material/Grid';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import PrevNextButton from '../buttons/PrevNextButton';
 import ProtectedSpeciesItem, { ItemProps } from './Item';
@@ -10,7 +11,7 @@ export interface ProtectedSpeciesProps {
   species: ItemProps[];
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     marginLeft: theme.spacing(-5.25),
   },
@@ -33,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function ProtectedSpecies({
   species,
 }: ProtectedSpeciesProps): JSX.Element {
-  const classes = useStyles({});
+  const { classes } = useStyles();
   const settings = {
     // className: 'center',
     // centerMode: true,

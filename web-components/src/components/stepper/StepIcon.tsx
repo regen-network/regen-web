@@ -1,9 +1,9 @@
 import React from 'react';
 import { StepIconProps } from '@mui/material/StepIcon';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
-const useStyles = makeStyles<Theme>((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     zIndex: 1,
     backgroundColor: theme.palette.grey[600],
@@ -36,12 +36,12 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 }));
 
 const RegenStepIcon = (props: StepIconProps): JSX.Element => {
-  const classes = useStyles();
+  const { classes, cx } = useStyles();
   const { active, completed, icon } = props;
 
   return (
     <div
-      className={clsx(classes.root, {
+      className={cx(classes.root, {
         [classes.active]: active,
         [classes.completed]: completed,
       })}

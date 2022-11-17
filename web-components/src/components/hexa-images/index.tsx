@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import ReactHtmlParser from 'react-html-parser';
 import Grid from '@mui/material/Grid';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import ReactHtmlParser from 'html-react-parser';
+import { makeStyles } from 'tss-react/mui';
 
 import { BlockContent, SanityBlockOr } from '../block-content';
 import { Body, Label, Title } from '../typography';
@@ -17,7 +18,7 @@ interface HexaImagesProps {
   items: HexaImage[];
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   grid: {
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       flexDirection: 'column-reverse',
@@ -56,33 +57,33 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('sm')]: {
       height: theme.spacing(20),
       width: theme.spacing(20),
-      '&:nth-child(4)': {
+      '&:nth-of-type(4)': {
         marginLeft: theme.spacing(10),
       },
-      '&:nth-child(4), &:nth-child(5), &:nth-child(6)': {
+      '&:nth-of-type(4), &:nth-of-type(5), &:nth-of-type(6)': {
         marginTop: theme.spacing(-2),
       },
     },
     [theme.breakpoints.between('sm', 'lg')]: {
       height: theme.spacing(31.25),
       width: theme.spacing(33),
-      '&:nth-child(4)': {
+      '&:nth-of-type(4)': {
         marginLeft: theme.spacing(17.25),
       },
-      '&:nth-child(4), &:nth-child(5), &:nth-child(6)': {
+      '&:nth-of-type(4), &:nth-of-type(5), &:nth-of-type(6)': {
         marginTop: theme.spacing(-2.5),
       },
     },
     [theme.breakpoints.up('lg')]: {
       height: theme.spacing(44.25),
       width: theme.spacing(44),
-      '&:not(:nth-child(6))': {
+      '&:not(:nth-of-type(6))': {
         marginRight: theme.spacing(3),
       },
-      '&:nth-child(4)': {
+      '&:nth-of-type(4)': {
         marginLeft: theme.spacing(23.5),
       },
-      '&:nth-child(4), &:nth-child(5), &:nth-child(6)': {
+      '&:nth-of-type(4), &:nth-of-type(5), &:nth-of-type(6)': {
         marginTop: theme.spacing(-3.75),
       },
     },
@@ -164,7 +165,7 @@ function renderText(text: SanityBlockOr<string>): any {
 }
 
 export default function HexaImages({ items }: HexaImagesProps): JSX.Element {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const [selected, setSelected] = useState(0);
 
   return (

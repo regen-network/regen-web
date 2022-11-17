@@ -1,6 +1,7 @@
 import React from 'react';
-import { makeStyles, styled, useTheme } from '@mui/styles';
+import { styled, useTheme } from '@mui/styles';
 import { Field, FieldArray, Form, Formik, useFormikContext } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 import * as Yup from 'yup';
 
 import { Theme } from '../../theme/muiTheme';
@@ -24,7 +25,7 @@ import {
   RetirementReminder,
 } from './CreditRetireForm';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   checkboxLabel: {
     marginTop: theme.spacing(10.75),
   },
@@ -108,7 +109,7 @@ export const initialValues = {
   recipients: [{ ...recipientInitialValues }],
 };
 
-export const RecipientsForm: React.FC<FormProps> = ({
+export const RecipientsForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   addressPrefix,
   mapboxToken,
   onSubmit,
@@ -146,7 +147,9 @@ interface ButtonProps {
   onClick: () => void;
 }
 
-const DeleteButton: React.FC<ButtonProps> = ({ onClick }) => {
+const DeleteButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
+  onClick,
+}) => {
   const theme = useTheme<Theme>();
 
   return (
@@ -176,7 +179,9 @@ const DeleteButton: React.FC<ButtonProps> = ({ onClick }) => {
   );
 };
 
-const AddRecipientButton: React.FC<ButtonProps> = ({ onClick }) => (
+const AddRecipientButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
+  onClick,
+}) => (
   <OnBoardingCard>
     <OutlinedButton onClick={onClick} sx={{ width: '100%' }}>
       + Add recipient
@@ -187,7 +192,7 @@ const AddRecipientButton: React.FC<ButtonProps> = ({ onClick }) => (
 export function RecipientsFieldArray({
   mapboxToken,
 }: BottomCreditRetireFieldsProps): React.ReactElement {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
   const { values } = useFormikContext<FormValues>();
 
   return (

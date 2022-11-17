@@ -1,9 +1,11 @@
 import React, { useCallback, useRef } from 'react';
 // import LandManagementActionsItem, { ItemProps } from './Item';
 import Slider from 'react-slick';
+import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import Action, { ActionProps } from '../action';
 import PrevNextButton from '../buttons/PrevNextButton';
@@ -12,7 +14,7 @@ export interface LandManagementActionsProps {
   actions: ActionProps[];
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(-2.5),
@@ -40,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function LandManagementActions({
   actions,
 }: LandManagementActionsProps): JSX.Element {
-  const classes = useStyles({});
+  const { classes } = useStyles();
   const theme: Theme = useTheme();
   const slides: number = useMediaQuery(theme.breakpoints.up('sm')) ? 3 : 1;
 

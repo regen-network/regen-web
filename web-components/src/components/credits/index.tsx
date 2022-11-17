@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { pluralize } from '../../utils/pluralize';
 import Gauge from './Gauge';
@@ -14,7 +15,7 @@ export interface CreditsProps {
   unit?: string; // currency?
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   gauge: {
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(1.5),
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export default function Credits(props: CreditsProps): JSX.Element {
-  const classes = useStyles({});
+  const { classes } = useStyles();
   return (
     <Grid container direction="column">
       <GaugeText

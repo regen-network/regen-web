@@ -1,8 +1,9 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
 import axios from 'axios';
 import { Field, Form, Formik } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 
 import CheckboxGroup from '../inputs/CheckboxGroup';
 import SelectTextField from '../inputs/SelectTextField';
@@ -30,7 +31,7 @@ interface Values {
   onBehalfOf: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   form: {
     paddingTop: theme.spacing(7.5),
   },
@@ -49,7 +50,7 @@ export default function MoreInfoForm({
   onSubmit,
   apiUrl,
 }: MoreInfoFormProps): JSX.Element {
-  const classes = useStyles();
+  const { classes } = useStyles();
   return (
     <div>
       <Title align="center" variant="h4" sx={{ mb: [4.75, 5] }}>

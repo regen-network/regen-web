@@ -1,6 +1,4 @@
-import { SxProps } from '@mui/material';
-
-import type { Theme } from 'web-components/lib/theme/muiTheme';
+import { SxProps, Theme } from '@mui/material';
 
 export const getMediaBoxStyles = (theme: Theme): SxProps<Theme> => ({
   minHeight: {

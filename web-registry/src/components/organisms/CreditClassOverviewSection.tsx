@@ -1,8 +1,8 @@
 import React from 'react';
+import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { makeStyles, useTheme } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { OverviewCard } from 'web-components/lib/components/cards/OverviewCard';
@@ -27,7 +27,7 @@ interface CreditClassOverviewSectionProps {
   sdgs?: Maybe<Array<Maybe<Sdg>>>;
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   sectionRoot: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(30),
@@ -99,10 +99,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const OverviewCards: React.FC<{
-  cards?: Maybe<Array<Maybe<CardFieldsFragment>>>;
-}> = props => {
-  const styles = useStyles();
+const OverviewCards: React.FC<
+  React.PropsWithChildren<{
+    cards?: Maybe<Array<Maybe<CardFieldsFragment>>>;
+  }>
+> = props => {
+  const { classes: styles } = useStyles();
   return (
     <Grid container spacing={4} className={styles.cardWrap}>
       {props.cards?.map((card, i) => (
@@ -125,14 +127,10 @@ const OverviewCards: React.FC<{
   );
 };
 
-const CreditClassOverviewSection: React.FC<CreditClassOverviewSectionProps> = ({
-  dbClass,
-  className,
-  nameRaw,
-  overviewCards,
-  sdgs,
-}) => {
-  const styles = useStyles();
+const CreditClassOverviewSection: React.FC<
+  React.PropsWithChildren<CreditClassOverviewSectionProps>
+> = ({ dbClass, className, nameRaw, overviewCards, sdgs }) => {
+  const { classes: styles, cx } = useStyles();
   const theme = useTheme();
   const isMobile: boolean = useMediaQuery(theme.breakpoints.down('sm'));
 

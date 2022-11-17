@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Skeleton } from '@mui/material';
-import { useTheme } from '@mui/styles';
+import { Box, Skeleton, useTheme } from '@mui/material';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import { QueryProjectResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
@@ -9,7 +8,6 @@ import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { getBatchesTotal } from 'lib/ecocredit/api';
@@ -45,7 +43,7 @@ import { ProjectTimeline } from './ProjectDetails.ProjectTimeline';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
 
 function ProjectDetails(): JSX.Element {
-  const theme = useTheme<Theme>();
+  const theme = useTheme();
   const { projectId } = useParams();
   const { wallet } = useLedger();
   const { data: sanityCreditClassData } = useAllCreditClassQuery({

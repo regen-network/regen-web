@@ -1,11 +1,11 @@
 import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import withHoverColor, { Props } from './withHoverColor';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(16),
@@ -24,12 +24,12 @@ function RegenLogoIcon({
   onMouseEnter,
   onMouseLeave,
 }: Props): JSX.Element {
-  const classes = useStyles({});
+  const { classes, cx } = useStyles();
 
   return (
     <SvgIcon
       viewBox="0 0 64 65"
-      className={clsx(className, classes.root)}
+      className={cx(className, classes.root)}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >

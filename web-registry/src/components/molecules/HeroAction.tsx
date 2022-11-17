@@ -1,13 +1,11 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { Body, Title } from 'web-components/lib/components/typography';
-import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 import {
   BottomBannerFieldsFragment,
@@ -33,14 +31,14 @@ type StyleProps = {
   lightBg: boolean;
 };
 
-const useStyles = makeStyles<Theme, StyleProps>(theme => ({
-  main: props => ({
+const useStyles = makeStyles<StyleProps>()((theme, { lightBg }) => ({
+  main: {
     display: 'flex',
     flexDirection: 'column',
     alignContent: 'center',
     justifyContent: 'center',
     margin: '0 auto',
-    ...(!props.lightBg && {
+    ...(!lightBg && {
       '& a': {
         transition: '200ms ease-in-out',
         color: theme.palette.secondary.contrastText,
@@ -49,11 +47,11 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
         },
       },
     }),
-  }),
+  },
   btn: {
     margin: theme.spacing(10, 4, 0),
     [theme.breakpoints.down('sm')]: {
-      '&:nth-child(2)': {
+      '&:nth-of-type(2)': {
         marginTop: theme.spacing(6),
       },
     },
@@ -63,9 +61,12 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
 /**
  * Hero section with optional background image, centered title, and button with action. Passing no img will render with a light background and dark text & buttons
  */
-const HeroAction: React.FC<Props> = ({ classes, ...props }) => {
+const HeroAction: React.FC<React.PropsWithChildren<Props>> = ({
+  classes,
+  ...props
+}) => {
   const lightBg = props.lightBg || !props.img;
-  const styles = useStyles({ lightBg });
+  const { classes: styles, cx } = useStyles({ lightBg });
 
   const Button = lightBg ? OutlinedButton : ContainedButton;
   const button = props.bottomBanner?.button;
@@ -76,7 +77,7 @@ const HeroAction: React.FC<Props> = ({ classes, ...props }) => {
       img={props.img || ''}
       classes={{
         main: cx(styles.main, classes?.main),
-        section: cx(styles.section, classes?.section),
+        section: classes?.section,
       }}
       isBanner={props.isBanner}
     >

@@ -53,15 +53,17 @@ const WalletButton: React.FC = () => {
   return chainId ? (
     <>
       <div className={styles.root}>
-        {!wallet?.address && loaded && (
-          <OutlinedButton onClick={onButtonClick} size="small">
-            <img className={styles.icon} src={Keplr} alt="keplr" />
-            connect wallet
-          </OutlinedButton>
-        )}
-        {error && (
-          <ErrorBanner text="Please install Keplr extension to use Regen Ledger features" />
-        )}
+        <>
+          {!wallet?.address && loaded && (
+            <OutlinedButton onClick={onButtonClick} size="small">
+              <img className={styles.icon} src={Keplr} alt="keplr" />
+              connect wallet
+            </OutlinedButton>
+          )}
+          {error && (
+            <ErrorBanner text="Please install Keplr extension to use Regen Ledger features" />
+          )}
+        </>
       </div>
       <WalletModal
         open={isModalOpen}

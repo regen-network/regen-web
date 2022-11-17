@@ -1,7 +1,6 @@
-import React from 'react';
+import { useTheme } from '@mui/material';
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import { directionRotate } from './ArrowDownIcon';
 
@@ -16,10 +15,10 @@ interface StyleProps {
   rotate: string;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>(() => ({
-  root: props => ({
-    transform: `rotate(${props.rotate})`,
-  }),
+const useStyles = makeStyles<StyleProps>()((theme, { rotate }) => ({
+  root: {
+    transform: `rotate(${rotate})`,
+  },
 }));
 
 export default function BreadcrumbIcon({
@@ -29,7 +28,7 @@ export default function BreadcrumbIcon({
   color,
 }: Props): JSX.Element {
   const rotate: string = directionRotate[direction];
-  const classes = useStyles({ rotate });
+  const { classes, cx } = useStyles({ rotate });
   const theme = useTheme();
   color = color || theme.palette.secondary.main;
 
@@ -37,7 +36,7 @@ export default function BreadcrumbIcon({
     <SvgIcon
       fill="none"
       viewBox="0 0 33 20"
-      className={clsx(className, classes.root)}
+      className={cx(className, classes.root)}
       onClick={onClick}
     >
       <rect

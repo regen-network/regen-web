@@ -1,10 +1,10 @@
 import React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import Tooltip from '../tooltip';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   underline: {
     color: theme.palette.info.contrastText,
     borderBottom: `3px dashed ${theme.palette.info.contrastText}`,
@@ -18,8 +18,8 @@ interface Props {
   title?: string;
 }
 
-const UnderlineTooltip: React.FC<Props> = props => {
-  const styles = useStyles();
+const UnderlineTooltip: React.FC<React.PropsWithChildren<Props>> = props => {
+  const { classes: styles, cx } = useStyles();
 
   return (
     <Tooltip

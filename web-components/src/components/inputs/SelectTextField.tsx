@@ -1,16 +1,19 @@
-import React from 'react';
-import { Box, MenuItem, Theme, useTheme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { Box, MenuItem, useTheme } from '@mui/material';
 import { TextFieldProps } from 'formik-mui';
+import { makeStyles } from 'tss-react/mui';
 
 import DropdownIcon from '../icons/DropdownIcon';
 import { DefaultStyleProps } from './FieldFormControl';
 import TextField from './TextField';
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+interface StyleProps {
+  defaultStyle: boolean;
+}
+
+const useStyles = makeStyles<StyleProps>()((theme, { defaultStyle }) => ({
   root: {
     '& select': {
-      color: props => (props.default ? theme.palette.info.main : 'inherit'),
+      color: defaultStyle ? theme.palette.info.main : 'inherit',
     },
   },
 }));
@@ -29,10 +32,6 @@ export interface SelectTextFieldProps
   native?: boolean;
 }
 
-interface StyleProps {
-  default: boolean;
-}
-
 export default function SelectTextField({
   options,
   disabled,
@@ -42,7 +41,7 @@ export default function SelectTextField({
   const {
     field: { value },
   } = props;
-  const styles = useStyles({ default: !value });
+  const { classes: styles } = useStyles({ defaultStyle: !value });
   const theme = useTheme();
 
   return (

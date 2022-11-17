@@ -21,7 +21,7 @@ const CreditClassCard = ({
   imageStorageBaseUrl,
   sx = [],
 }: Props): JSX.Element => {
-  const classes = useCreditClassCardStyles({});
+  const { classes } = useCreditClassCardStyles();
 
   return (
     <Box

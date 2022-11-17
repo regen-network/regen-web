@@ -20,7 +20,9 @@ const Svg = styled(SvgIcon)({
   animation: `${rotationKeyframe} 1.25s linear infinite`,
 });
 
-export const Spinner: React.FC<IconProps> = ({ className }) => (
+export const Spinner: React.FC<React.PropsWithChildren<IconProps>> = ({
+  className,
+}) => (
   <Svg
     className={className}
     xmlns="http://www.w3.org/2000/svg"

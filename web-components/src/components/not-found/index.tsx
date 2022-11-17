@@ -1,6 +1,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import ContainedButton from '../buttons/ContainedButton';
 import { Body, Label, Title } from '../typography';
@@ -10,7 +11,7 @@ interface NotFoundProps {
   home?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   container: {
     textAlign: 'center',
     height: '100%',
@@ -49,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const NotFound = ({ img, home = '/' }: NotFoundProps): JSX.Element => {
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>

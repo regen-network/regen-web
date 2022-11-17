@@ -1,8 +1,8 @@
 import React from 'react';
 import { FormControl, FormHelperText, SxProps } from '@mui/material';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { DefaultTheme as Theme } from '@mui/styles';
 import { FieldProps, getIn } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 
 import FormLabel from './FormLabel';
 
@@ -36,22 +36,22 @@ interface StyleProps {
   error: boolean;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  error: props => ({
+const useStyles = makeStyles<StyleProps>()((theme, { error }) => ({
+  error: {
     color: theme.palette.error.main,
     borderColor: theme.palette.error.main,
     marginTop: theme.spacing(1),
     marginBottom: 0,
     fontFamily: '"Lato",-apple-system,sans-serif',
     fontWeight: 'bold',
-    visibility: props.error ? 'visible' : 'hidden',
+    visibility: error ? 'visible' : 'hidden',
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(3.5),
     },
     [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
     },
-  }),
+  },
   label: {
     marginBottom: theme.spacing(2.25),
   },
@@ -102,7 +102,7 @@ export default function FieldFormControl({
   }
 
   const hasError = fieldTouched && errorMessage;
-  const styles = useStyles({
+  const { classes: styles, cx } = useStyles({
     disabled,
     description,
     error: hasError,

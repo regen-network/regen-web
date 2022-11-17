@@ -1,7 +1,6 @@
 import React from 'react';
 import { CardContent, useTheme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import { Theme } from 'src/theme/muiTheme';
 
@@ -10,7 +9,7 @@ import OutlinedButton from '../buttons/OutlinedButton';
 import MediaCard from '../cards/MediaCard';
 import { Body, Title } from '../typography';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     height: '100%',
     borderRadius: theme.spacing(2),
@@ -28,13 +27,13 @@ type Props = {
   startIcon?: React.ReactNode;
 };
 
-const ImageActionCard: React.FC<Props> = props => {
-  const styles = useStyles();
+const ImageActionCard: React.FC<React.PropsWithChildren<Props>> = props => {
+  const { classes: styles, cx } = useStyles();
   const theme = useTheme();
   return (
     <MediaCard
       imgSrc={props.imgSrc}
-      className={clsx(styles.root, props.className)}
+      className={cx(styles.root, props.className)}
       elevation={1}
       borderRadius="10px"
       borderColor={theme.palette.grey[100]}

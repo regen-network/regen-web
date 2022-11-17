@@ -13,7 +13,9 @@ interface CreateSellOrderModalProps
   title: string;
 }
 
-const CreateSellOrderModal: React.FC<CreateSellOrderModalProps> = ({
+const CreateSellOrderModal: React.FC<
+  React.PropsWithChildren<CreateSellOrderModalProps>
+> = ({
   batchDenoms,
   allowedDenoms,
   sellDenom,

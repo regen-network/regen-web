@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
-import { random } from 'lodash';
 import { loaderStyles } from 'styles/loader';
 import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
 
@@ -34,7 +33,7 @@ import { useBridged } from 'hooks/bridge/useBridged';
 
 import {
   AMOUNT_BRIDGED_TOOLTIP,
-  BRIDGED_STATUS,
+  BRIDGED_STATUSES,
   CREDIT_BATCH_TOOLTIP,
   NO_BRIDGED_CREDITS,
 } from './BridgedEcocreditsTable.constants';
@@ -48,19 +47,11 @@ export const BridgedEcocreditsTable = ({
   accountAddress,
   privateAccess = false,
 }: Props): JSX.Element => {
-  const [paginationParams, setPaginationParams] =
-    useState<TablePaginationParams>({
-      page: 0,
-      rowsPerPage: DEFAULT_ROWS_PER_PAGE,
-      offset: 0,
-    });
-
-  const { credits, isLoadingCredits } = useBridged({
+  const { bridgedCredits, isLoadingCredits } = useBridged({
     address: accountAddress,
-    paginationParams,
   });
 
-  if (!credits?.length && !isLoadingCredits) {
+  if (!bridgedCredits?.length && !isLoadingCredits) {
     return (
       <NoCredits
         title={NO_BRIDGED_CREDITS}
@@ -78,7 +69,6 @@ export const BridgedEcocreditsTable = ({
       <ActionsTable
         tableLabel="bridged ecocredits table"
         sx={tableStyles.rootOnlyTopBorder}
-        onTableChange={setPaginationParams}
         headerRows={[
           'Status',
           privateAccess && (
@@ -119,12 +109,12 @@ export const BridgedEcocreditsTable = ({
           </Box>,
           'Project Location',
         ]}
-        rows={credits.map((row, i) => {
+        rows={bridgedCredits.map((row, i) => {
           return [
             <GreyText>
               {
                 <StatusLabel
-                  status={BRIDGED_STATUS[random(0, 2)] as InfoLabelVariant}
+                  status={BRIDGED_STATUSES[row.status] as InfoLabelVariant}
                 />
               }
             </GreyText>,
@@ -149,7 +139,7 @@ export const BridgedEcocreditsTable = ({
               </Link>
             </WithLoader>,
             formatNumber({
-              num: row.balance?.tradableAmount,
+              num: row.amount,
               ...quantityFormatNumberOptions,
             }),
             <GreyText>

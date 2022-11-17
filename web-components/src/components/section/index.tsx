@@ -1,8 +1,7 @@
-import React from 'react';
 import { Box, styled, SxProps } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { parseText } from '../../utils/textParser';
 import { Title } from '../typography';
@@ -66,24 +65,29 @@ const Root = styled(Box, {
   },
 }));
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  title: props => ({
-    color: props.titleColor || 'inherit',
-    lineHeight: props.titleLineHeight || '140%',
-    textAlign: props.titleAlign || (props.topRight ? 'left' : 'center'),
-    [theme.breakpoints.down('sm')]: {
-      paddingRight: props.withSlider ? theme.spacing(4) : 0,
+const useStyles = makeStyles<StyleProps>()(
+  (
+    theme,
+    { topRight, withSlider, titleAlign, titleColor, titleLineHeight },
+  ) => ({
+    title: {
+      color: titleColor || 'inherit',
+      lineHeight: titleLineHeight || '140%',
+      textAlign: titleAlign || (topRight ? 'left' : 'center'),
+      [theme.breakpoints.down('sm')]: {
+        paddingRight: withSlider ? theme.spacing(4) : 0,
+      },
+    },
+    titleText: {
+      flex: 2,
+    },
+    spaceBetween: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'baseline',
     },
   }),
-  titleText: {
-    flex: 2,
-  },
-  spaceBetween: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'baseline',
-  },
-}));
+);
 
 const Section = ({
   children,
@@ -99,7 +103,7 @@ const Section = ({
   topRight,
   withSlider = false,
 }: SectionProps): JSX.Element => {
-  const styles = useStyles({
+  const { classes: styles, cx } = useStyles({
     withSlider,
     titleLineHeight,
     titleAlign,
@@ -116,7 +120,7 @@ const Section = ({
     >
       {title && (
         <div
-          className={clsx(
+          className={cx(
             classes && classes.titleWrap,
             topRight && styles.spaceBetween,
           )}
@@ -124,7 +128,7 @@ const Section = ({
           <Title
             as="div"
             sx={sx?.title}
-            className={clsx(styles.title, classes && classes.title)}
+            className={cx(styles.title, classes && classes.title)}
             variant={titleVariant}
             align={titleAlign}
           >

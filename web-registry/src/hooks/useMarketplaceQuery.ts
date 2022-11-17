@@ -32,7 +32,8 @@ export default function useMarketplaceQuery<
   }, [api?.queryClient, client]);
 
   const allowedDenoms = useCallback(
-    (client, params) => queryAllowedDenoms({ client, request: params }),
+    (client: any, params: any) =>
+      queryAllowedDenoms({ client, request: params }),
     [],
   );
 

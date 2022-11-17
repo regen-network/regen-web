@@ -1,4 +1,4 @@
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -13,7 +13,7 @@ type Props = {
   steps?: Maybe<BasicStepCardSectionFieldsFragment>;
 };
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   stepSection: {
     paddingTop: 0,
   },
@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 function MethodologySteps({ steps }: Props): JSX.Element {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
 
   return (
     <OnBoardingSection

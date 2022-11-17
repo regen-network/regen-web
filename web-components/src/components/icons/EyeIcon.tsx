@@ -1,21 +1,24 @@
 import React from 'react';
+import { useTheme } from '@mui/material';
 import SvgIcon from '@mui/material/SvgIcon';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
-import clsx from 'clsx';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     // width: theme.spacing(6.5),
     // height: theme.spacing(6.5),
   },
 }));
 
-const EyeIcon: React.FC<{
-  color?: string;
-  visible?: boolean;
-  className?: string;
-}> = ({ visible = true, className, color, ...props }) => {
-  const classes = useStyles({});
+const EyeIcon: React.FC<
+  React.PropsWithChildren<{
+    color?: string;
+    visible?: boolean;
+    className?: string;
+  }>
+> = ({ visible = true, className, color, ...props }) => {
+  const { classes, cx } = useStyles();
   const theme = useTheme();
   color = color || theme.palette.secondary.main;
 
@@ -24,7 +27,7 @@ const EyeIcon: React.FC<{
       {visible ? (
         <SvgIcon
           viewBox="0 0 19 14"
-          className={clsx(className, classes.root)}
+          className={cx(className, classes.root)}
           {...props}
         >
           <svg
@@ -53,7 +56,7 @@ const EyeIcon: React.FC<{
       ) : (
         <SvgIcon
           viewBox="0 0 19 16"
-          className={clsx(className, classes.root)}
+          className={cx(className, classes.root)}
           {...props}
         >
           <path

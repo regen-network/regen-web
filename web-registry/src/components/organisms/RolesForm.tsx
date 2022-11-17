@@ -97,7 +97,7 @@ function getEntity(
   return null;
 }
 
-const RolesForm: React.FC<RolesFormProps> = ({
+const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   initialValues,
   projectCreator,
   creditClassId,

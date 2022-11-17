@@ -6,7 +6,7 @@ import {
 } from '../../components/organisms/AdditionalityForm';
 import { OnboardingFormTemplate } from '../../components/templates';
 
-const Additionality: React.FC = () => {
+const Additionality: React.FC<React.PropsWithChildren<unknown>> = () => {
   async function saveAndExit(): Promise<void> {
     // TODO: functionality
   }

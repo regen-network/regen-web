@@ -25,7 +25,7 @@ import {
 } from 'components/molecules';
 import { useEcocredits } from 'hooks';
 
-export const BatchDetails: React.FC = () => {
+export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { batchDenom } = useParams();
   const [ledgerLoading, setLedgerLoading] = useState(false);
   const [batch, setBatch] = useState<BatchInfoWithSupply>();

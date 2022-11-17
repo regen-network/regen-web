@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
-import { Box, SxProps } from '@mui/material';
-import { useTheme } from '@mui/styles';
+import { Box, SxProps, useTheme } from '@mui/material';
 
 import { Theme } from '../../theme/muiTheme';
 import { Body } from '../typography';

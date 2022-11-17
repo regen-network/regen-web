@@ -59,7 +59,7 @@ export function ProjectCard({
   ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
-  const classes = useProjectCardStyles();
+  const { classes } = useProjectCardStyles();
   const location = useLocation();
   const { track } = useAnalytics();
 

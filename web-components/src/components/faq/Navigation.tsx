@@ -1,15 +1,11 @@
 import React from 'react';
+import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
-import {
-  DefaultTheme as Theme,
-  makeStyles,
-  useTheme,
-  withStyles,
-} from '@mui/styles';
-import cx from 'clsx';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles, withStyles } from 'tss-react/mui';
 
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
 
@@ -25,7 +21,7 @@ interface NavigationProps {
   showIcon?: boolean;
 }
 
-const StyledList = withStyles(theme => ({
+const StyledList = withStyles(List, theme => ({
   root: {
     paddingTop: 0,
     paddingBottom: 0,
@@ -39,9 +35,9 @@ const StyledList = withStyles(theme => ({
       border: `1px solid ${theme.palette.grey[100]}`,
     },
   },
-}))(List);
+}));
 
-const StyledListItemButton = withStyles(theme => ({
+const StyledListItemButton = withStyles(ListItemButton, theme => ({
   root: {
     fontSize: theme.spacing(3.5),
     fontFamily: theme.typography.h1.fontFamily,
@@ -74,9 +70,9 @@ const StyledListItemButton = withStyles(theme => ({
       },
     },
   },
-}))(ListItemButton);
+}));
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   action: {
     display: 'flex',
     alignItems: 'center',
@@ -100,7 +96,7 @@ const Navigation = ({
   category,
   showIcon,
 }: NavigationProps): JSX.Element => {
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
   const theme = useTheme();
 
   return (

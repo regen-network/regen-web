@@ -1,9 +1,9 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
 import axios from 'axios';
-import clsx from 'clsx';
 import { Field, Form, Formik } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 
 import ContainedButton from '../buttons/ContainedButton';
 import TextField from '../inputs/TextField';
@@ -60,7 +60,7 @@ interface Values {
   email: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   grid: {
     maxWidth: theme.spacing(163.75),
     margin: '0 auto',
@@ -101,7 +101,7 @@ export default function NewsletterForm({
   buttonClassName,
   gridXs = { textField: 8, button: 4 },
 }: NewsletterFormProps): JSX.Element {
-  const classes = useStyles();
+  const { classes, cx } = useStyles();
 
   return (
     <Formik
@@ -160,7 +160,7 @@ export default function NewsletterForm({
                 <Field
                   placeholder={inputPlaceholder}
                   component={TextField}
-                  className={clsx(textFieldClassName, classes.textField)}
+                  className={cx(textFieldClassName, classes.textField)}
                   type="email"
                   name="email"
                   defaultStyle={false}

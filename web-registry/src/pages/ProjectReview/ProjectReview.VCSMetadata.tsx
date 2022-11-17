@@ -10,7 +10,9 @@ interface Props {
   metadata: Partial<VCSProjectMetadataLD>;
 }
 
-const VCSMetadata: React.FC<Props> = ({ metadata }) => {
+const VCSMetadata: React.FC<React.PropsWithChildren<Props>> = ({
+  metadata,
+}) => {
   return (
     <>
       <ItemDisplay name="Offset generation method">

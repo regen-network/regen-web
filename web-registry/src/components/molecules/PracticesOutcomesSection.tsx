@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
-import clsx from 'clsx';
+import { useTheme } from '@mui/material';
+import { makeStyles } from 'tss-react/mui';
 
 import { ImageItemProps } from 'web-components/lib/components/image-item';
 import Section from 'web-components/lib/components/section';
@@ -12,7 +12,7 @@ import type { Theme } from 'web-components/lib/theme/muiTheme';
 import type { PracticesOutcomesSection as PracticesOutcomesSectionProps } from '../../generated/sanity-graphql';
 import { WrappedImpactCard } from '../atoms';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(14),
@@ -48,8 +48,10 @@ interface Props {
   content: PracticesOutcomesSectionProps;
 }
 
-const PracticesOutcomesSection: React.FC<Props> = ({ content }) => {
-  const classes = useStyles();
+const PracticesOutcomesSection: React.FC<React.PropsWithChildren<Props>> = ({
+  content,
+}) => {
+  const { classes, cx } = useStyles();
   const theme = useTheme();
   const { practices, outcomes, title } = content;
 
@@ -83,7 +85,7 @@ const PracticesOutcomesSection: React.FC<Props> = ({ content }) => {
       <ResponsiveSlider
         itemWidth="90%"
         padding={theme.spacing(2.5)}
-        className={clsx(classes.outcomes, classes.slider)}
+        className={cx(classes.outcomes, classes.slider)}
         title="Ecological Outcomes"
         arrows
         slidesToShow={outcomeCards.length <= 2 ? outcomeCards.length : 3}

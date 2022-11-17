@@ -1,8 +1,9 @@
 import React, { useCallback, useRef } from 'react';
 import Slider from 'react-slick';
+import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import Action, { ActionProps } from 'web-components/lib/components/action';
 import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
@@ -16,7 +17,7 @@ export interface LandManagementActionsProps {
   subtitle?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   section: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(21.5),
@@ -77,7 +78,7 @@ function LandManagementActions({
   title,
   subtitle,
 }: LandManagementActionsProps): JSX.Element {
-  const styles = useStyles({});
+  const { classes: styles } = useStyles();
   const theme: Theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet: boolean = useMediaQuery(

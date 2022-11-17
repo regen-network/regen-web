@@ -1,6 +1,6 @@
 import React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import GreenCard from './GreenCard';
 
@@ -10,7 +10,7 @@ export interface GreenMediaCardProps {
   className?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -36,11 +36,11 @@ export default function GreenMediaCard({
   imageUrl,
   link,
 }: GreenMediaCardProps): JSX.Element {
-  const classes = useStyles();
+  const { classes, cx } = useStyles();
 
   return (
     <a href={link} target="_blank" rel="noopener noreferrer">
-      <GreenCard className={clsx(className, classes.root)}>
+      <GreenCard className={cx(className, classes.root)}>
         <img className={classes.img} src={imageUrl} alt={imageUrl} />
       </GreenCard>
     </a>

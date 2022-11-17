@@ -23,7 +23,7 @@ export default function useQueryBasket(basketDenom?: string): {
   const [queryClient, setQueryClient] = useState<QueryClientImpl | undefined>();
 
   const fetchBasket = useCallback(
-    async ({ basketDenom }) => {
+    async ({ basketDenom }: any) => {
       if (!queryClient) return;
 
       try {

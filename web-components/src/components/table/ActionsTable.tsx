@@ -70,7 +70,7 @@ interface ActionsTableProps {
   };
 }
 
-const ActionsTable: React.FC<ActionsTableProps> = ({
+const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
   tableLabel,
   headerRows,
   rows,

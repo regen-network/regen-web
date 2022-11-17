@@ -30,7 +30,7 @@ const sxs = {
   } as SxProps,
 };
 
-export const Portfolio: React.FC<PortfolioProps> = ({
+export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
   credits,
   basketTokens,
   renderCreditActionButtons,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
 import { SliderSection } from 'web-components/lib/components/section/SliderSection';
@@ -14,15 +14,18 @@ interface MediaSectionProps {
   items?: Maybe<Array<Maybe<MediaFieldsFragment>>>;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   card: {
     border: `1px solid ${theme.palette.grey[100]}`,
     borderRadius: '10px',
   },
 }));
 
-const MediaSection: React.FC<MediaSectionProps> = ({ header, items }) => {
-  const styles = useStyles();
+const MediaSection: React.FC<React.PropsWithChildren<MediaSectionProps>> = ({
+  header,
+  items,
+}) => {
+  const { classes: styles } = useStyles();
 
   return (
     <div>

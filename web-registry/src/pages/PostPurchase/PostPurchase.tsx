@@ -3,7 +3,7 @@ import ReactHtmlParser from 'react-html-parser';
 import { useParams } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { Box, Grid } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import ShareIcons from 'web-components/lib/components/icons/ShareIcons';
@@ -53,7 +53,7 @@ const WALLET = gql`
   }
 `;
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   image: {
     width: '100%',
     borderRadius: '10px',
@@ -91,7 +91,7 @@ function GridItem({
 }
 
 function PostPurchase(): JSX.Element {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const { walletId, projectId, name } = useParams();
   const options: Intl.DateTimeFormatOptions = {
     year: 'numeric',

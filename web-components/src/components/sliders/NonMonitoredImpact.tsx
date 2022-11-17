@@ -1,7 +1,8 @@
 import React, { useCallback, useRef } from 'react';
 import Slider from 'react-slick';
 import Grid from '@mui/material/Grid';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import PrevNextButton from '../buttons/PrevNextButton';
 import ImpactCard, { ImpactCardProps } from '../cards/ImpactCard';
@@ -10,7 +11,7 @@ export interface NonMonitoredImpactProps {
   impact: ImpactCardProps[];
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     marginLeft: theme.spacing(-5.25),
     // paddingTop: theme.spacing(3),
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function NonMonitoredImpact({
   impact,
 }: NonMonitoredImpactProps): JSX.Element {
-  const classes = useStyles({});
+  const { classes } = useStyles();
   const settings = {
     speed: 500,
     rows: 1,

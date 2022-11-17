@@ -54,78 +54,83 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
   }, [api?.queryClient, client]);
 
   const balance = useCallback(
-    (client, params) => queryBalance({ client, request: params }),
+    (client: any, params: any) => queryBalance({ client, request: params }),
     [],
   );
 
   const balances = useCallback(
-    (client, params) => queryBalances({ client, request: params }),
+    (client: any, params: any) => queryBalances({ client, request: params }),
     [],
   );
 
   const batchInfo = useCallback(
-    (client, params) => queryBatchInfo({ client, request: params }),
+    (client: any, params: any) => queryBatchInfo({ client, request: params }),
     [],
   );
 
   const batches = useCallback(
-    (client, params) => queryBatches({ client, request: params }),
+    (client: any, params: any) => queryBatches({ client, request: params }),
     [],
   );
 
   const batchesByClass = useCallback(
-    (client, params) => queryBatchesByClass({ client, request: params }),
+    (client: any, params: any) =>
+      queryBatchesByClass({ client, request: params }),
     [],
   );
 
   const batchesByProject = useCallback(
-    (client, params) => queryBatchesByProject({ client, request: params }),
+    (client: any, params: any) =>
+      queryBatchesByProject({ client, request: params }),
 
     [],
   );
 
   const batchesByIssuer = useCallback(
-    (client, params) => queryBatchesByIssuer({ client, request: params }),
+    (client: any, params: any) =>
+      queryBatchesByIssuer({ client, request: params }),
     [],
   );
 
   const classInfo = useCallback(
-    (client, params) => queryClassInfo({ client, request: params }),
+    (client: any, params: any) => queryClassInfo({ client, request: params }),
     [],
   );
 
   const classes = useCallback(
-    (client, params) => queryClasses({ client, request: params }),
+    (client: any, params: any) => queryClasses({ client, request: params }),
     [],
   );
 
   const creditTypes = useCallback(
-    (client, params) => queryCreditTypes({ client, request: params }),
+    (client: any, params: any) => queryCreditTypes({ client, request: params }),
     [],
   );
 
   const paramsQuery = useCallback(
-    (client, params) => queryParams({ request: params }),
+    (client: any, params: any) => queryParams({ request: params }),
     [],
   );
 
   const projects = useCallback(
-    (client, params) => queryProjects({ client, request: params }),
+    (client: any, params: any) => queryProjects({ client, request: params }),
     [],
   );
 
   const projectsByAdmin = useCallback(
-    (client, params) => queryProjectsByAdmin({ client, request: params }),
+    (client: any, params: any) =>
+      queryProjectsByAdmin({ client, request: params }),
     [],
   );
 
   const projectsByClass = useCallback(
-    (client, params) => queryProjectsByClass({ client, request: params }),
+    (client: any, params: any) =>
+      queryProjectsByClass({ client, request: params }),
     [],
   );
 
   const project = useCallback(
-    (client, params) => queryProject({ client, request: params }),
+    (client: any, params: any) => queryProject({ client, request: params }),
     [],
   );
 

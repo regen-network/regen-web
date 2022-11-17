@@ -15,7 +15,7 @@ import {
 } from '../../generated/graphql';
 import { useProjectEditContext } from '../ProjectEdit';
 
-const ProjectLocation: React.FC = () => {
+const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit } = useProjectEditContext();

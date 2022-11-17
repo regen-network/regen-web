@@ -1,14 +1,14 @@
 import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 interface IconProps {
   className?: string;
   isActive?: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     width: theme.spacing(9.25),
     height: theme.spacing(9.25),
@@ -16,11 +16,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 function ShadedCreditsIcon({ className, isActive }: IconProps): JSX.Element {
-  const classes = useStyles();
+  const { classes, cx } = useStyles();
 
   return (
     <SvgIcon
-      className={clsx(className, classes.root)}
+      className={cx(className, classes.root)}
       width="90"
       height="97"
       viewBox="0 0 90 97"

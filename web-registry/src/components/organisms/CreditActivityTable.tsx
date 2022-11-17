@@ -56,7 +56,7 @@ const headCells: HeadCell[] = [
 
 const ROWS_PER_PAGE_OPTIONS = { options: [5, 10, 20, 50], default: 10 };
 
-const CreditActivityTable: React.FC = () => {
+const CreditActivityTable: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [txs, setTxs] = useState<TxRowData[]>([]);
   const [order, setOrder] = useState<Order>('desc');
   const [orderBy, setOrderBy] = useState<string>('date');

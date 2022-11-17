@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import ReactHtmlParser from 'react-html-parser';
-import { makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import ReactHtmlParser from 'html-react-parser';
+import { makeStyles } from 'tss-react/mui';
 
 import { ExpandButton } from '../buttons/ExpandButton';
 import { Texts, truncate } from '../read-more/truncate';
@@ -14,7 +13,7 @@ export interface ActionProps {
   className?: string;
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -40,7 +39,7 @@ export default function Action({
   imgSrc,
   className,
 }: ActionProps): JSX.Element {
-  const classes = useStyles();
+  const { classes, cx } = useStyles();
 
   const [expanded, setExpanded] = useState(false);
   const texts: Texts = truncate(description, 310, 100);
@@ -53,25 +52,27 @@ export default function Action({
   };
 
   return (
-    <div className={clsx(classes.root, className)}>
+    <div className={cx(classes.root, className)}>
       <img className={classes.image} src={imgSrc} alt={name} />
       <Subtitle size="lg" sx={{ pt: [2.8, 2.5], pb: [1.2, 2.25] }}>
         {name}
       </Subtitle>
       <Body size="sm" mobileSize="sm">
-        {ReactHtmlParser(desc)}
-        {texts.rest.length !== 0 && (
-          <ExpandButton
-            size="small"
-            onClick={handleChange}
-            expanded={expanded}
-            sx={{
-              p: [0],
-              ml: 2,
-              ':hover': { bgcolor: 'transparent !important' },
-            }}
-          />
-        )}
+        <>
+          {ReactHtmlParser(desc)}
+          {texts.rest.length !== 0 && (
+            <ExpandButton
+              size="small"
+              onClick={handleChange}
+              expanded={expanded}
+              sx={{
+                p: [0],
+                ml: 2,
+                ':hover': { bgcolor: 'transparent !important' },
+              }}
+            />
+          )}
+        </>
       </Body>
     </div>
   );

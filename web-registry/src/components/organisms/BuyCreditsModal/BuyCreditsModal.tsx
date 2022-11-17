@@ -431,7 +431,12 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                         label="Add retirement transaction details (stored in the tx memo)"
                         name="retirementNote"
                         optional
-                        sx={{ mb: { xs: 10, sm: 12 } }}
+                        sx={{
+                          mb: { xs: 10, sm: 12 },
+                          '& label': {
+                            whiteSpace: 'unset',
+                          },
+                        }}
                       />
                     </Flex>
                     <Flex>

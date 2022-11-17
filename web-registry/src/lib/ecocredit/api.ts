@@ -43,12 +43,14 @@ import {
   QueryProjectsResponse,
   QuerySupplyResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { MsgBridge } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 import axios from 'axios';
 import { uniq } from 'lodash';
 
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
+import { getBridgeTxStatus } from 'lib/bridge';
 import { getMetadata } from 'lib/metadata-graph';
 
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
@@ -116,7 +118,7 @@ const getCreditsWithData = async ({
 
       if (!batch) return undefined;
 
-      const classId = await getClassIdForBatch(batch);
+      const classId = getClassIdForBatch(batch);
       const project = await getProject(batch?.projectId);
       let metadata;
       if (project?.project?.metadata.length) {
@@ -215,6 +217,78 @@ export const getEcocreditTxs = async (): Promise<TxResponse[]> => {
   ).then(() => {
     return allTxs;
   });
+};
+
+export const getBridgedEcocreditsForAccount = async (
+  addr?: string,
+  sanityCreditClassData?: AllCreditClassQuery,
+): Promise<any> => {
+  if (addr) {
+    // Since bridged ecocredits are canceled on Regen Ledger,
+    // the only way to get them is to fetch txs by event
+    const res = await getTxsByEvent({
+      events: [
+        `${messageActionEquals}'/${MsgBridge.$type}'`,
+        `message.sender='${addr}'`,
+      ],
+      orderBy: OrderBy.ORDER_BY_DESC,
+    });
+    return (
+      await Promise.all(
+        res?.txs.map(async (tx, i) => {
+          // Get the tx status using the bridge service api
+          const { status } = await getBridgeTxStatus(res.txResponses[i].txhash);
+          if (tx.body) {
+            return await Promise.all(
+              tx.body.messages
+                .filter(m => m.typeUrl === `/${MsgBridge.$type}`)
+                .map(async m => {
+                  // Decoding the bridge msg to get the batch(es) info used to bridge ecocredits
+                  const msgBridge = MsgBridge.decode(m.value);
+                  return await Promise.all(
+                    msgBridge.credits.map(async ({ batchDenom, amount }) => {
+                      // TODO optimize this so we don't query batch and project info/metadata
+                      // multiple times if we already did
+                      const { batch } = await queryEcoBatchInfo(batchDenom);
+
+                      if (batch) {
+                        const { projectId } = batch;
+                        const { project } = await getProject(projectId);
+                        let metadata;
+                        if (project?.metadata.length) {
+                          try {
+                            metadata = await getMetadata(project.metadata);
+                          } catch (error) {}
+                        }
+
+                        // TODO should we use getMetadata instead of Sanity?
+                        const creditClassSanity = findSanityCreditClass({
+                          sanityCreditClassData,
+                          creditClassIdOrUrl: project?.classId ?? '',
+                        });
+
+                        return {
+                          amount,
+                          status,
+                          classId: project?.classId,
+                          className: creditClassSanity?.nameRaw,
+                          projectName:
+                            metadata?.['schema:name'] ?? batch.projectId,
+                          projectLocation: project?.jurisdiction,
+                          ...batch,
+                        };
+                      }
+                      return;
+                    }),
+                  );
+                }),
+            );
+          }
+          return;
+        }),
+      )
+    ).flat(2);
+  }
 };
 
 type GetBatchesWithSupplyParams = {

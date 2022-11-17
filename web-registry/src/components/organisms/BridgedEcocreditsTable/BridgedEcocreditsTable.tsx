@@ -39,11 +39,6 @@ import {
   NO_BRIDGED_CREDITS,
 } from './BridgedEcocreditsTable.constants';
 
-// TODO - A hook scaffolding `useBridged` has been implemented for the data request
-// that simply simulates a request with an empty response.
-
-// TODO - We will filter this by C03 class eventually
-
 interface Props {
   accountAddress: string | undefined;
   privateAccess?: boolean;

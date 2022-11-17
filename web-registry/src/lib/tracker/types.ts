@@ -1,4 +1,4 @@
-export type Track = <IEventName extends string, IPayload = void>(
+export type Track = <IEventName extends string, IPayload = any>(
   eventName: IEventName,
   payload?: IPayload,
 ) => Promise<any>;
@@ -52,3 +52,27 @@ export interface BuyFailureEvent {
   retirementAction?: string;
   errorMessage?: string;
 }
+
+export interface Sell1Event {
+  projectId: string;
+  projectName?: string;
+  creditClassId?: string;
+}
+
+export interface Sell2Event {}
+
+export interface SellSuccessEvent {}
+
+export interface SellFailureEvent {}
+
+export interface Send1Event {
+  projectId: string;
+  projectName?: string;
+  creditClassId?: string;
+}
+
+export interface Send2Event {}
+
+export interface SendSuccessEvent {}
+
+export interface SendFailureEvent {}

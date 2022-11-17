@@ -36,6 +36,7 @@ import {
 import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { getHashUrl } from 'lib/block-explorer';
+import { Sell1Event, Send1Event } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
@@ -291,7 +292,11 @@ export const MyEcocredits = (): JSX.Element => {
                       icon: <AvailableCreditsIconAlt sx={sxs.arrow} />,
                       label: CREATE_SELL_ORDER_SHORT,
                       onClick: () => {
-                        track<'sell1'>('sell1');
+                        track<'sell1', Sell1Event>('sell1', {
+                          projectId: credits[i].projectId,
+                          projectName: credits[i]?.projectName,
+                          creditClassId: credits[i]?.classId,
+                        });
                         setSellOrderCreateOpen(i);
                       },
                     },
@@ -305,7 +310,11 @@ export const MyEcocredits = (): JSX.Element => {
                       ),
                       label: CREDIT_SEND_TITLE,
                       onClick: () => {
-                        track<'send1'>('send1');
+                        track<'send1', Send1Event>('send1', {
+                          projectId: credits[i].projectId,
+                          projectName: credits[i]?.projectName,
+                          creditClassId: credits[i]?.classId,
+                        });
                         setCreditSendOpen(i);
                       },
                     },

@@ -60,12 +60,8 @@ describe('App', () => {
 
     it('renders without crashing', () => {
       const router = createMemoryRouter(routes);
-<<<<<<< HEAD
-      const div = document.createElement('div');
-=======
       const container = document.createElement('div');
       document.body.appendChild(container);
->>>>>>> cf2a7cc5 (chore: update react 18 (#1518))
       ReactDOM.render(
         <MockedProvider mocks={[]}>
           <ThemeProvider>
@@ -89,12 +85,8 @@ describe('App', () => {
 
     it('renders without crashing', () => {
       const router = createMemoryRouter(routes);
-<<<<<<< HEAD
-      const div = document.createElement('div');
-=======
       const container = document.createElement('div');
       document.body.appendChild(container);
->>>>>>> cf2a7cc5 (chore: update react 18 (#1518))
       ReactDOM.render(
         <MockedProvider mocks={[]}>
           <ThemeProvider>

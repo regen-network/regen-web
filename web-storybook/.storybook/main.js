@@ -36,6 +36,10 @@ module.exports = {
         ),
       }),
     ];
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@ledgerhq/devices/hid-framing': '@ledgerhq/devices/lib/hid-framing',
+    };
     return config;
   },
 };

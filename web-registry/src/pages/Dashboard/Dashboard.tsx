@@ -53,6 +53,7 @@ const Dashboard = (): JSX.Element => {
   const showProjectTab = isIssuer || isProjectAdmin;
   const showCreditClassTab = isCreditClassCreator || isCreditClassAdmin;
 
+<<<<<<< HEAD
   // TODO: We should handle these as nested routes, converting this to an
   // <Outlet> layout component if we think we'll need to route to a page
   // directly. See:
@@ -118,6 +119,56 @@ const Dashboard = (): JSX.Element => {
       ),
     },
   ];
+=======
+  const tabs: IconTabProps[] = useMemo(
+    () => [
+      {
+        label: 'Portfolio',
+        icon: (
+          <CreditsIcon color={theme.palette.secondary.main} fontSize="small" />
+        ),
+        href: '/ecocredits/portfolio',
+      },
+      {
+        label: 'Projects',
+        icon: <ProjectPageIcon />,
+        href: '/ecocredits/projects',
+        hidden: !showProjectTab,
+      },
+      {
+        label: 'Credit Classes',
+        icon: <CreditClassIcon sx={{ opacity: '70%' }} />,
+        href: '/ecocredits/credit-classes',
+        hidden: !showCreditClassTab,
+      },
+      {
+        label: 'Credit Batches',
+        icon: (
+          <CreditBatchIcon sx={{ color: 'secondary.dark', opacity: '70%' }} />
+        ),
+        href: '/ecocredits/credit-batches',
+        hidden: !isIssuer,
+      },
+      {
+        label: 'Bridge',
+        icon: <BridgeIcon />,
+        href: '/ecocredits/bridge',
+        hidden: process.env.REACT_APP_LEDGER_CHAIN_ID === 'regen-1', // TODO: Hide in PROD - remove when Bridge is ready
+      },
+    ],
+    [
+      isIssuer,
+      showCreditClassTab,
+      showProjectTab,
+      theme.palette.secondary.main,
+    ],
+  );
+
+  const activeTab = Math.max(
+    tabs.findIndex(tab => location.pathname.includes(tab.href ?? '')),
+    0,
+  );
+>>>>>>> f37835ac (chore: feature flag to temporarily hide Bridge tab in mainnet (regen-1) (#1568))
 
   return (
     <Box sx={{ bgcolor: 'grey.50' }}>

@@ -61,6 +61,8 @@ import type {
   BatchInfoWithSupply,
   BatchTotalsForProject,
   BridgedEcocredits,
+  ClassProjectInfo,
+  IBatchInfo,
 } from '../../types/ledger/ecocredit';
 import { expLedger, ledgerRESTUri } from '../ledger';
 import { ECOCREDIT_MESSAGE_TYPES, messageActionEquals } from './constants';
@@ -118,31 +120,15 @@ const getCreditsWithData = async ({
       const batch = batches.find(batch => batch.denom === balance.batchDenom);
 
       if (!batch) return undefined;
-
-      const classId = getClassIdForBatch(batch);
-      const project = await getProject(batch?.projectId);
-      let metadata;
-      if (project?.project?.metadata.length) {
-        try {
-          metadata = await getMetadata(project.project.metadata);
-        } catch (error) {
-          // eslint-disable-next-line
-          console.error(error);
-        }
-      }
-
-      const creditClassSanity = findSanityCreditClass({
+      const classProjectInfo = await getClassProjectForBatch(
+        batch,
         sanityCreditClassData,
-        creditClassIdOrUrl: classId ?? '',
-      });
+      );
 
       return {
         ...batch,
+        ...classProjectInfo,
         balance,
-        classId,
-        className: creditClassSanity?.nameRaw,
-        projectName: metadata?.['schema:name'] ?? batch.projectId,
-        projectLocation: project.project?.jurisdiction,
       };
     }),
   );
@@ -251,31 +237,17 @@ export const getBridgedEcocreditsForAccount = async (
                       // TODO optimize this so we don't query batch and project info/metadata
                       // multiple times if we already did
                       const { batch } = await queryEcoBatchInfo(batchDenom);
+                      let classProjectInfo: ClassProjectInfo | undefined;
 
                       if (batch) {
-                        const { projectId } = batch;
-                        const { project } = await getProject(projectId);
-                        let metadata;
-                        if (project?.metadata.length) {
-                          try {
-                            metadata = await getMetadata(project.metadata);
-                          } catch (error) {}
-                        }
-
-                        // TODO should we use getMetadata instead of Sanity?
-                        const creditClassSanity = findSanityCreditClass({
+                        classProjectInfo = await getClassProjectForBatch(
+                          batch,
                           sanityCreditClassData,
-                          creditClassIdOrUrl: project?.classId ?? '',
-                        });
-
+                        );
                         return {
                           amount,
                           status,
-                          classId: project?.classId,
-                          className: creditClassSanity?.nameRaw,
-                          projectName:
-                            metadata?.['schema:name'] ?? batch.projectId,
-                          projectLocation: project?.jurisdiction,
+                          ...classProjectInfo,
                           ...batch,
                         };
                       }
@@ -307,7 +279,7 @@ export const getBatchesWithSupply = async ({
   data: BatchInfoWithSupply[];
 }> => {
   const batches = await queryEcoBatches(creditClassId, params);
-  const batchesWithData = await addDataToBatch({ batches, withAllData });
+  const batchesWithData = await addDataToBatches({ batches, withAllData });
   return { data: batchesWithData };
 };
 
@@ -323,22 +295,47 @@ export const getBatchesByProjectWithSupply = async (
     client,
     request: { projectId },
   });
-  const batchesWithData = await addDataToBatch({ batches: batches?.batches });
+  const batchesWithData = await addDataToBatches({ batches: batches?.batches });
   return { data: batchesWithData };
 };
 
-/** Adds Tx Hash and supply info to batch for use in tables */
-type AddDataToBatchParams = {
-  batches: BatchInfo[];
-  sanityCreditClassData?: AllCreditClassQuery;
-  withAllData?: boolean;
+const getClassProjectForBatch = async (
+  batch: BatchInfo,
+  sanityCreditClassData?: AllCreditClassQuery,
+): Promise<ClassProjectInfo> => {
+  const { projectId } = batch;
+  const { project } = await getProject(projectId);
+  let metadata;
+  if (project?.metadata.length) {
+    try {
+      metadata = await getMetadata(project.metadata);
+    } catch (error) {}
+  }
+
+  // TODO should we use credit class metadata instead of Sanity eventually?
+  const creditClassSanity = findSanityCreditClass({
+    sanityCreditClassData,
+    creditClassIdOrUrl: project?.classId ?? '',
+  });
+
+  return {
+    classId: project?.classId,
+    className: creditClassSanity?.nameRaw,
+    projectName: metadata?.['schema:name'] ?? batch.projectId,
+    projectLocation: project?.jurisdiction,
+  };
 };
 
-export const addDataToBatch = async ({
+/* addDataToBatches adds Tx Hash and supply info to batch for use in tables */
+export const addDataToBatches = async ({
   batches,
   sanityCreditClassData,
   withAllData = true,
-}: AddDataToBatchParams): Promise<BatchInfoWithSupply[]> => {
+}: {
+  batches: BatchInfo[];
+  sanityCreditClassData?: AllCreditClassQuery;
+  withAllData?: boolean;
+}): Promise<BatchInfoWithSupply[]> => {
   try {
     /* TODO: this is limited to 100 results. We need to find a better way */
     const txs = await getTxsByEvent({
@@ -350,35 +347,21 @@ export const addDataToBatch = async ({
     return Promise.all(
       batches.map(async batch => {
         const supplyData = await queryEcoBatchSupply(batch.denom);
-        let txhash, classId, project, metadata, creditClassSanity;
+        let txhash, classProjectInfo;
 
         if (withAllData) {
           txhash = getTxHashForBatch(txs.txResponses, batch.denom);
-          classId = getClassIdForBatch(batch);
-          project = await getProject(batch.projectId);
-          if (project?.project?.metadata.length) {
-            try {
-              metadata = await getMetadata(project.project.metadata);
-            } catch (error) {
-              // eslint-disable-next-line
-              console.error(error);
-            }
-          }
-
-          creditClassSanity = findSanityCreditClass({
+          classProjectInfo = await getClassProjectForBatch(
+            batch,
             sanityCreditClassData,
-            creditClassIdOrUrl: classId ?? '',
-          });
+          );
         }
 
         return {
           ...batch,
+          ...classProjectInfo,
           ...supplyData,
           txhash,
-          classId,
-          className: creditClassSanity?.nameRaw,
-          projectName: metadata?.['schema:name'] ?? batch.projectId,
-          projectLocation: project?.project?.jurisdiction,
         };
       }),
     );

@@ -14,12 +14,14 @@ export interface BatchTotalsForProject
 
 export interface IBatchInfo extends Omit<BatchInfo, '$type'> {}
 
-interface IBatchInfoWithClassProject extends IBatchInfo {
+export interface ClassProjectInfo {
   classId?: string;
   className?: string;
   projectName?: string;
   projectLocation?: string;
 }
+
+interface IBatchInfoWithClassProject extends IBatchInfo, ClassProjectInfo {}
 
 // /** combines the ledger `BatchInfo` with ledger `QueryBalanceResponse` */
 export interface BatchInfoWithBalance

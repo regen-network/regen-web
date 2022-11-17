@@ -12,7 +12,7 @@ import {
 } from '../../generated/graphql';
 import { useProjectEditContext } from '../ProjectEdit';
 
-const BasicInfo: React.FC = () => {
+const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const [updateProject] = useUpdateProjectByIdMutation();

@@ -1,9 +1,10 @@
 import React from 'react';
 import Slider from 'react-slick';
+import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
-import clsx from 'clsx';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import ResourcesCard, { ResourcesCardProps } from '../cards/ResourcesCard';
 
@@ -14,7 +15,7 @@ export interface ResourceCardsProps {
   target?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   slider: {
     [theme.breakpoints.down('sm')]: {
       width: '95%',
@@ -59,7 +60,7 @@ export default function ResourceCards({
   target = '_blank',
 }: ResourceCardsProps): JSX.Element {
   const theme = useTheme();
-  const classes = useStyles();
+  const { classes, cx } = useStyles();
   const desktop = useMediaQuery(theme.breakpoints.up('md'));
   const mobile = useMediaQuery(theme.breakpoints.down('sm'));
   const tablet = useMediaQuery(theme.breakpoints.up('sm'));
@@ -81,7 +82,7 @@ export default function ResourceCards({
   return (
     <div className={classes.slider}>
       {!desktop ? (
-        <Slider {...settings} className={clsx(className, classes.slider)}>
+        <Slider {...settings} className={cx(className, classes.slider)}>
           {items.map((item, index) => (
             <div key={index} className={classes.item}>
               <ResourcesCard

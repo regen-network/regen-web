@@ -15,7 +15,6 @@
       "web-registry",
       "web-components",
       "web-storybook",
-      "web-www",
       "web-auth"
     ]
   },
@@ -30,13 +29,11 @@
     "lint": "lerna run lint",
     "format-and-fix": "lerna run format-and-fix",
     "storybook": "lerna run storybook --stream",
-    "test": "lerna run --scope web-registry test --stream",
+    "test": "lerna run --scope web-registry test-no-watch --stream",
     "test-components": "lerna run --scope web-components test --stream",
     "start": "lerna run --scope web-registry start --stream",
-    "start-www": "lerna run --scope web-www start --stream",
     "start-auth": "lerna run --scope web-auth start --stream",
     "watch": "lerna run watch --stream",
-    "build-www": "yarn build-components && lerna run --scope web-www build --stream",
     "test-update-snapshot": "lerna run --scope web-registry test-update-snapshot --stream"
   },
   "devDependencies": {
@@ -47,9 +44,9 @@
     "@graphql-codegen/typescript-operations": "^1.18.0",
     "@graphql-codegen/typescript-react-apollo": "2.2.4",
     "@storybook/addon-actions": "^6.4.9",
+    "@storybook/addon-controls": "^6.4.9",
     "@storybook/addon-links": "^6.4.9",
     "@storybook/addon-viewport": "^6.4.9",
-    "@storybook/addon-controls": "^6.4.9",
     "@storybook/react": "^6.4.9",
     "@types/css-mediaquery": "^0.1.1",
     "@types/jest": "27.0.3",
@@ -65,10 +62,6 @@
     "typescript": "^4.4.4"
   },
   "resolutions": {
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "@types/react": "17.0.2",
-    "@types/react-dom": "17.0.2",
     "babel-eslint": "^10.1.0",
     "**/@typescript-eslint/eslint-plugin": "^4.5.0",
     "**/@typescript-eslint/parser": "^4.5.0",

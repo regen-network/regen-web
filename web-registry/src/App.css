@@ -10,7 +10,7 @@
   border-bottom: 1px solid #d2d5d9;
 }
 
-.topo-background-alternate:nth-child(odd) {
+.topo-background-alternate:nth-of-type(odd) {
   background-image: url(./assets/topo-background-large.jpeg);
   background-size: cover;
   background-position: center;

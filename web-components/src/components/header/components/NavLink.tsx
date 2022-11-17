@@ -1,10 +1,14 @@
 import React from 'react';
 import Link from '@mui/material/Link';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
-export const useNavLinkStyles = makeStyles<Theme, { isActive: boolean }>(
-  theme => ({
-    navLink: props => ({
+type UseNavLinkStylesParams = {
+  isActive: boolean;
+};
+
+export const useNavLinkStyles = makeStyles<UseNavLinkStylesParams>()(
+  (theme, { isActive }) => ({
+    navLink: {
       color: theme.palette.primary.contrastText,
       textDecoration: 'none',
       fontWeight: 400,
@@ -12,7 +16,7 @@ export const useNavLinkStyles = makeStyles<Theme, { isActive: boolean }>(
       lineHeight: '150%', // mockups show 240%, but that messes up the underline
       cursor: 'pointer',
       borderBottom: `2px solid ${
-        props.isActive ? theme.palette.secondary.main : 'transparent'
+        isActive ? theme.palette.secondary.main : 'transparent'
       }`,
       '&:hover': {
         borderBottom: `2px solid ${theme.palette.secondary.main}`,
@@ -20,7 +24,7 @@ export const useNavLinkStyles = makeStyles<Theme, { isActive: boolean }>(
       '&:link, &:visited, &:hover, &:active': {
         textDecoration: 'none',
       },
-    }),
+    },
   }),
 );
 
@@ -31,13 +35,13 @@ export type NavLinkProps = {
   overrideClassname?: string;
 };
 
-export const NavLink: React.FC<NavLinkProps> = ({
+export const NavLink: React.FC<React.PropsWithChildren<NavLinkProps>> = ({
   children,
   href,
   pathname,
   overrideClassname,
 }) => {
-  const styles = useNavLinkStyles({ isActive: pathname === href });
+  const { classes: styles } = useNavLinkStyles({ isActive: pathname === href });
 
   return (
     <Link className={overrideClassname ?? styles.navLink} href={href}>

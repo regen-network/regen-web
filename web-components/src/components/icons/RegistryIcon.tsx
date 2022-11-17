@@ -6,7 +6,10 @@ interface Props {
   className?: string;
 }
 
-const RegistryIcon: React.FC<Props> = ({ color, className }) => {
+const RegistryIcon: React.FC<React.PropsWithChildren<Props>> = ({
+  color,
+  className,
+}) => {
   color = color ? color : '#000';
   return (
     <SvgIcon viewBox="0 0 117 76" className={className}>

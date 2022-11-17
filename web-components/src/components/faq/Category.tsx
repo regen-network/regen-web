@@ -1,5 +1,6 @@
 import React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import GreenCard from '../cards/GreenCard';
 import { Label } from '../typography';
@@ -11,7 +12,7 @@ interface CategoryProps {
   questions: QuestionItem[];
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     backgroundColor: theme.palette.primary.main,
     [theme.breakpoints.down('sm')]: {
@@ -28,7 +29,7 @@ const Category = ({
   name,
   questionId,
 }: CategoryProps): JSX.Element => {
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   return (
     <GreenCard className={classes.root}>

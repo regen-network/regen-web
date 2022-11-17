@@ -7,7 +7,7 @@ import { chainId } from '../../lib/ledger';
 import { useWallet } from '../../lib/wallet/wallet';
 
 interface Props {
-  component: React.ComponentType;
+  component: React.ComponentType<React.PropsWithChildren<unknown>>;
 }
 
 const KeplrRoute = ({ component: Component }: Props): JSX.Element => {

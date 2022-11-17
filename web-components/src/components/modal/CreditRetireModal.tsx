@@ -8,7 +8,9 @@ interface CreditRetireModalProps extends RegenModalProps, CreditRetireProps {}
 
 export const CREDIT_RETIRE_TITLE = 'Retire';
 
-const CreditRetireModal: React.FC<CreditRetireModalProps> = ({
+const CreditRetireModal: React.FC<
+  React.PropsWithChildren<CreditRetireModalProps>
+> = ({
   batchDenom,
   availableTradableAmount,
   mapboxToken,

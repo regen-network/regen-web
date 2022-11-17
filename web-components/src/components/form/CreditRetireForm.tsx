@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useEffect } from 'react';
 import { Grid, SxProps } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import { Field, Form, Formik, FormikErrors, useFormikContext } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 
 import { Theme } from '../../theme/muiTheme';
 import { getJurisdictionIsoCode } from '../../utils/locationStandard';
@@ -45,7 +45,7 @@ const LocationStateField = lazy(() => import('../inputs/LocationStateField'));
  *      | subdivision code with postal code: `${iso-3166-2} ${postalCode}`
  */
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   noteTextField: {
     '& label': {
       whiteSpace: 'unset',
@@ -112,124 +112,125 @@ export interface BottomCreditRetireFieldsProps {
   arrayIndex?: number;
 }
 
-export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
-  ({ mapboxToken, arrayPrefix = '', arrayIndex }) => {
-    const styles = useStyles();
-    const { values, setFieldValue } = useFormikContext<
-      RetireFormValues | RetireFormValuesArray
-    >();
-    const item =
-      typeof arrayIndex === 'number'
-        ? (values as RetireFormValuesArray).recipients[arrayIndex]
-        : (values as RetireFormValues);
+export const BottomCreditRetireFields: React.FC<
+  React.PropsWithChildren<BottomCreditRetireFieldsProps>
+> = ({ mapboxToken, arrayPrefix = '', arrayIndex }) => {
+  const { classes: styles } = useStyles();
+  const { values, setFieldValue } = useFormikContext<
+    RetireFormValues | RetireFormValuesArray
+  >();
+  const item =
+    typeof arrayIndex === 'number'
+      ? (values as RetireFormValuesArray).recipients[arrayIndex]
+      : (values as RetireFormValues);
 
-    const { country, stateProvince, postalCode } = item;
+  const { country, stateProvince, postalCode } = item;
 
-    useEffect(() => {
-      const retirementJurisdictionName = `${arrayPrefix}retirementJurisdiction`;
+  useEffect(() => {
+    const retirementJurisdictionName = `${arrayPrefix}retirementJurisdiction`;
 
-      if (!country) {
-        setFieldValue(retirementJurisdictionName, null);
-        return;
-      }
+    if (!country) {
+      setFieldValue(retirementJurisdictionName, null);
+      return;
+    }
 
-      const jurisdiction = getJurisdictionIsoCode({
-        country,
-        stateProvince,
-        postalCode,
-      });
-
-      setFieldValue(retirementJurisdictionName, jurisdiction);
-    }, [
+    const jurisdiction = getJurisdictionIsoCode({
       country,
       stateProvince,
       postalCode,
-      setFieldValue,
-      mapboxToken,
-      arrayPrefix,
-    ]);
+    });
 
-    // showNotesField
-    // When in the same form we have a set of credit retirement (for example,
-    // because there are several recipients when we issue a batch of credits),
-    // we only show the retirement note fields for the first occurrence (first recipient)
-    const noArray = arrayPrefix === '' && typeof arrayIndex === 'undefined';
-    const isFirstItem = !noArray && arrayIndex === 0;
-    const showNotesField = noArray || isFirstItem;
+    setFieldValue(retirementJurisdictionName, jurisdiction);
+  }, [
+    country,
+    stateProvince,
+    postalCode,
+    setFieldValue,
+    mapboxToken,
+    arrayPrefix,
+  ]);
 
-    return (
-      <>
-        {showNotesField && (
-          <>
-            <Flex sx={sxs.title}>
-              <Title variant="h5" sx={{ mr: 2 }}>
-                Retirement note
-              </Title>
-              <InfoTooltipWithIcon title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')" />
-            </Flex>
-            <Field
-              name={`${arrayPrefix}note`}
-              type="text"
-              label="Add retirement transaction details (stored in the tx memo)"
-              component={TextField}
-              className={styles.noteTextField}
-              optional
-              defaultStyle={false}
-            />
-          </>
-        )}
-        <Flex sx={sxs.title}>
-          <Title variant="h5" sx={{ mr: 2 }}>
-            Location of retirement
-          </Title>
-          <InfoTooltipWithIcon title="The retirement location can be where you live or your business operates." />
-        </Flex>
+  // showNotesField
+  // When in the same form we have a set of credit retirement (for example,
+  // because there are several recipients when we issue a batch of credits),
+  // we only show the retirement note fields for the first occurrence (first recipient)
+  const noArray = arrayPrefix === '' && typeof arrayIndex === 'undefined';
+  const isFirstItem = !noArray && arrayIndex === 0;
+  const showNotesField = noArray || isFirstItem;
 
-        <Body>
-          Please enter a location for the retirement of these credits. This
-          prevents double counting of credits in different locations.
-        </Body>
-        <Grid container className={styles.stateCountryGrid}>
-          <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-            <Suspense
-              fallback={
-                <SelectFieldFallback
-                  label="Country"
-                  name={`${arrayPrefix}country`}
-                />
-              }
-            >
-              <LocationCountryField exclude name={`${arrayPrefix}country`} />
-            </Suspense>
-          </Grid>
-          <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-            <Suspense
-              fallback={
-                <SelectFieldFallback
-                  label="State / Region"
-                  name={`${arrayPrefix}stateProvince`}
-                  optional={!postalCode}
-                />
-              }
-            >
-              <LocationStateField
-                country={country}
-                optional={!postalCode}
-                name={`${arrayPrefix}stateProvince`}
-                initialSelection={stateProvince}
+  return (
+    <>
+      {showNotesField && (
+        <>
+          <Flex sx={sxs.title}>
+            <Title variant="h5" sx={{ mr: 2 }}>
+              Retirement note
+            </Title>
+            <InfoTooltipWithIcon title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')" />
+          </Flex>
+          <Field
+            name={`${arrayPrefix}note`}
+            type="text"
+            label="Add retirement transaction details (stored in the tx memo)"
+            component={TextField}
+            className={styles.noteTextField}
+            optional
+            defaultStyle={false}
+          />
+        </>
+      )}
+      <Flex sx={sxs.title}>
+        <Title variant="h5" sx={{ mr: 2 }}>
+          Location of retirement
+        </Title>
+        <InfoTooltipWithIcon title="The retirement location can be where you live or your business operates." />
+      </Flex>
+
+      <Body>
+        Please enter a location for the retirement of these credits. This
+        prevents double counting of credits in different locations.
+      </Body>
+      <Grid container className={styles.stateCountryGrid}>
+        <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
+          <Suspense
+            fallback={
+              <SelectFieldFallback
+                label="Country"
+                name={`${arrayPrefix}country`}
               />
-            </Suspense>
-          </Grid>
+            }
+          >
+            <LocationCountryField exclude name={`${arrayPrefix}country`} />
+          </Suspense>
         </Grid>
-        <Field
-          component={ControlledTextField}
-          label="Postal Code"
-          name={`${arrayPrefix}postalCode`}
-          optional
-        />
-      </>
-    );
-  };
+        <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
+          <Suspense
+            fallback={
+              <SelectFieldFallback
+                label="State / Region"
+                name={`${arrayPrefix}stateProvince`}
+                optional={!postalCode}
+              />
+            }
+          >
+            <LocationStateField
+              country={country}
+              optional={!postalCode}
+              name={`${arrayPrefix}stateProvince`}
+              initialSelection={stateProvince}
+            />
+          </Suspense>
+        </Grid>
+      </Grid>
+      <Field
+        component={ControlledTextField}
+        label="Postal Code"
+        name={`${arrayPrefix}postalCode`}
+        optional
+      />
+    </>
+  );
+};
 
 export const CreditRetireFields = ({
   batchDenom,
@@ -298,7 +299,7 @@ export const initialValues = {
   stateProvince: '',
 };
 
-const CreditRetireForm: React.FC<FormProps> = ({
+const CreditRetireForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   batchDenom,
   availableTradableAmount,
   mapboxToken,

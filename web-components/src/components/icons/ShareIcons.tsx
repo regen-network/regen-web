@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import copyTextToClipboard from '../../utils/copy';
 import Banner from '../banner';
@@ -21,16 +22,16 @@ interface StyleProps {
   xsSize?: string | number;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  iconContainer: props => ({
+const useStyles = makeStyles<StyleProps>()((theme, { xsSize }) => ({
+  iconContainer: {
     backgroundColor: theme.palette.secondary.dark,
     borderRadius: '50%',
     display: 'block',
     width: theme.spacing(12.5),
     height: theme.spacing(12.5),
     [theme.breakpoints.down('sm')]: {
-      width: props.xsSize || theme.spacing(12.5),
-      height: props.xsSize || theme.spacing(12.5),
+      width: xsSize || theme.spacing(12.5),
+      height: xsSize || theme.spacing(12.5),
     },
     cursor: 'pointer',
     '&:hover': {
@@ -41,7 +42,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       width: '100%',
       height: '100%',
     },
-  }),
+  },
   small: {
     padding: theme.spacing(2),
   },
@@ -62,7 +63,7 @@ export default function ShareIcons({
   xsSize,
 }: ShareIconsProps): JSX.Element {
   const theme = useTheme();
-  const classes = useStyles({ xsSize });
+  const { classes } = useStyles({ xsSize });
   const [copied, setCopied] = useState(false);
 
   return (

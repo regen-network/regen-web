@@ -1,6 +1,5 @@
-import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 interface DecentralizeIconProps {
   color?: string;
@@ -13,18 +12,18 @@ interface StyleProps {
   width?: string;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>(theme => ({
-  root: props => ({
-    height: props.height || theme.spacing(31.25),
-    width: props.width || theme.spacing(55.25),
-  }),
+const useStyles = makeStyles<StyleProps>()((theme, { height, width }) => ({
+  root: {
+    height: height || theme.spacing(31.25),
+    width: width || theme.spacing(55.25),
+  },
 }));
 
 export default function DecentralizeIcon({
   height,
   width,
 }: DecentralizeIconProps): JSX.Element {
-  const classes = useStyles({ height, width });
+  const { classes } = useStyles({ height, width });
 
   return (
     <SvgIcon

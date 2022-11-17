@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import InputAdornment from '@mui/material/InputAdornment';
-import MuiTextField from '@mui/material/TextField';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import MuiTextField, {
+  TextFieldProps as MuiTextFieldProps,
+} from '@mui/material/TextField';
+import { FormikErrors } from 'formik';
 import { fieldToTextField, TextFieldProps } from 'formik-mui';
+import { makeStyles } from 'tss-react/mui';
 
 import { DefaultStyleProps } from './FieldFormControl';
 import InputLabel from './InputLabel';
@@ -27,118 +29,121 @@ export interface RegenTextFieldProps
   customInputProps?: { min?: number; max?: number };
 }
 
-interface StyleProps extends TextFieldProps {
+type UseStylesParams = {
   errors: boolean;
-  optional: boolean;
-}
+  label: ReactNode;
+  formErrors: FormikErrors<any>;
+};
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  root: props => ({
-    '& label': {
-      lineHeight: '140%',
-      transform: 'scale(1)',
-      color: theme.palette.primary.contrastText,
-      fontWeight: 'bold',
-      position: 'relative',
-      textAlign: 'left',
-      [theme.breakpoints.up('sm')]: {
-        fontSize: theme.spacing(4.5),
-      },
-      [theme.breakpoints.down('sm')]: {
-        fontSize: theme.spacing(4),
-      },
-      '&.Mui-focused': {
-        display: 'block',
-      },
-      '&.Mui-disabled': {
+const useStyles = makeStyles<UseStylesParams>()(
+  (theme, { errors, label, formErrors }) => ({
+    root: {
+      '& label': {
+        lineHeight: '140%',
+        transform: 'scale(1)',
         color: theme.palette.primary.contrastText,
+        fontWeight: 'bold',
+        position: 'relative',
+        textAlign: 'left',
+        [theme.breakpoints.up('sm')]: {
+          fontSize: theme.spacing(4.5),
+        },
+        [theme.breakpoints.down('sm')]: {
+          fontSize: theme.spacing(4),
+        },
+        '&.Mui-focused': {
+          display: 'block',
+        },
+        '&.Mui-disabled': {
+          color: theme.palette.primary.contrastText,
+        },
       },
-    },
-    '& .MuiInputBase-formControl': {
-      marginTop: props.label ? theme.spacing(2.25) : 0,
-      '&.Mui-disabled': {
-        backgroundColor: theme.palette.info.light,
+      '& .MuiInputBase-formControl': {
+        marginTop: label ? theme.spacing(2.25) : 0,
+        '&.Mui-disabled': {
+          backgroundColor: theme.palette.info.light,
+        },
       },
-    },
-    '& .MuiFormHelperText-root': {
-      fontWeight: 'bold',
-      color: theme.palette.primary.light,
-      position: props.errors ? 'absolute' : 'inherit',
-      lineHeight: Object.keys(props.form.errors).length > 0 ? 1.3 : 1.66,
-      bottom: props.errors ? theme.spacing(-5) : 0,
-      [theme.breakpoints.up('sm')]: {
-        fontSize: theme.spacing(3.5),
+      '& .MuiFormHelperText-root': {
+        fontWeight: 'bold',
+        color: theme.palette.primary.light,
+        position: errors ? 'absolute' : 'inherit',
+        lineHeight: Object.keys(formErrors).length > 0 ? 1.3 : 1.66,
+        bottom: errors ? theme.spacing(-5) : 0,
+        [theme.breakpoints.up('sm')]: {
+          fontSize: theme.spacing(3.5),
+        },
+        [theme.breakpoints.down('sm')]: {
+          fontSize: theme.spacing(3),
+        },
+        '&.MuiFormHelperText-filled': {
+          color: theme.palette.info.main,
+        },
+        '&.Mui-error': {
+          color: theme.palette.error.main,
+        },
       },
-      [theme.breakpoints.down('sm')]: {
-        fontSize: theme.spacing(3),
+      '& .MuiSvgIcon-root': {
+        width: theme.spacing(3.25),
+        height: theme.spacing(2.5),
+        top: 'calc(50% - 5px)',
+        [theme.breakpoints.up('sm')]: {
+          right: theme.spacing(3.75),
+        },
+        [theme.breakpoints.down('sm')]: {
+          right: theme.spacing(3.25),
+        },
+        position: 'absolute',
+        pointerEvents: 'none',
       },
-      '&.MuiFormHelperText-filled': {
-        color: theme.palette.info.main,
+      '& .MuiInputBase-root': {
+        backgroundColor: theme.palette.primary.main,
+        border: `1px solid ${theme.palette.grey[100]}`,
+        borderRadius: '2px',
+        [theme.breakpoints.up('sm')]: {
+          paddingLeft: theme.spacing(3.75),
+          paddingRight: theme.spacing(3.75),
+          fontSize: theme.spacing(4.5),
+          height: theme.spacing(15), // 11.25
+        },
+        [theme.breakpoints.down('sm')]: {
+          paddingLeft: theme.spacing(3.25),
+          paddingRight: theme.spacing(3.25),
+          fontSize: theme.spacing(4),
+          height: theme.spacing(12.5), // 8.75
+        },
+        '& .MuiInputAdornment-root p': {
+          color: theme.palette.info.main,
+        },
+        '&.Mui-error': {
+          '& input, & .MuiSelect-select': {
+            borderColor: theme.palette.error.main,
+          },
+        },
       },
-      '&.Mui-error': {
-        color: theme.palette.error.main,
-      },
-    },
-    '& .MuiSvgIcon-root': {
-      width: theme.spacing(3.25),
-      height: theme.spacing(2.5),
-      top: 'calc(50% - 5px)',
-      [theme.breakpoints.up('sm')]: {
-        right: theme.spacing(3.75),
-      },
-      [theme.breakpoints.down('sm')]: {
-        right: theme.spacing(3.25),
-      },
-      position: 'absolute',
-      pointerEvents: 'none',
-    },
-    '& .MuiInputBase-root': {
-      backgroundColor: theme.palette.primary.main,
-      border: `1px solid ${theme.palette.grey[100]}`,
-      borderRadius: '2px',
-      [theme.breakpoints.up('sm')]: {
-        paddingLeft: theme.spacing(3.75),
-        paddingRight: theme.spacing(3.75),
-        fontSize: theme.spacing(4.5),
-        height: theme.spacing(15), // 11.25
-      },
-      [theme.breakpoints.down('sm')]: {
-        paddingLeft: theme.spacing(3.25),
-        paddingRight: theme.spacing(3.25),
-        fontSize: theme.spacing(4),
-        height: theme.spacing(12.5), // 8.75
-      },
-      '& .MuiInputAdornment-root p': {
-        color: theme.palette.info.main,
-      },
-      '&.Mui-error': {
-        '& input, & .MuiSelect-select': {
-          borderColor: theme.palette.error.main,
+      // '& input, & select.MuiSelect-select': {},
+      '& input[type=number]': {
+        '&::-webkit-inner-spin-button, &::-webkit-outer-spin-button': {
+          WebkitAppearance: 'none',
+          margin: 0,
         },
       },
     },
-    // '& input, & select.MuiSelect-select': {},
-    '& input[type=number]': {
-      '&::-webkit-inner-spin-button, &::-webkit-outer-spin-button': {
-        '-webkit-appearance': 'none',
-        margin: 0,
+    firstOfType: {
+      '&:first-of-type': {
+        marginTop: 0,
+      },
+    },
+    default: {
+      [theme.breakpoints.up('sm')]: {
+        marginTop: theme.typography.pxToRem(40),
+      },
+      [theme.breakpoints.down('sm')]: {
+        marginTop: theme.typography.pxToRem(33),
       },
     },
   }),
-  firstOfType: {
-    '&:first-of-type': {
-      marginTop: 0,
-    },
-  },
-  default: {
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.typography.pxToRem(40),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginTop: theme.typography.pxToRem(33),
-    },
-  },
-}));
+);
 
 function TriggerTextField({
   triggerOnChange,
@@ -156,7 +161,12 @@ function TriggerTextField({
     }
     setFieldValue(name, transformValue ? transformValue(value) : value);
   };
-  return <MuiTextField {...fieldToTextField(props)} onChange={onChange} />;
+  return (
+    <MuiTextField
+      {...(fieldToTextField(props) as MuiTextFieldProps)}
+      onChange={onChange}
+    />
+  );
 }
 
 export default function RegenTextField({
@@ -172,10 +182,10 @@ export default function RegenTextField({
   customInputProps = {},
   ...props
 }: RegenTextFieldProps): JSX.Element {
-  const styles = useStyles({
-    ...props,
+  const { classes: styles, cx } = useStyles({
     errors,
-    optional: !!optional,
+    formErrors: props.form.errors,
+    label: props.label,
   });
   const baseClasses = [styles.root, props.className];
   const defaultClasses = [styles.default, ...baseClasses];
@@ -191,7 +201,7 @@ export default function RegenTextField({
       variant="standard"
       transformValue={transformValue}
       triggerOnChange={triggerOnChange}
-      className={clsx(rootClasses)}
+      className={cx(rootClasses)}
       InputProps={{
         disableUnderline: true,
         startAdornment: startAdornment ? (

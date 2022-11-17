@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import { styled } from '@mui/system';
+import { makeStyles } from 'tss-react/mui';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Section from 'web-components/lib/components/section';
@@ -42,7 +42,9 @@ export type BasketOverviewProps = {
   startDateWindow?: string;
 };
 
-export const BasketOverview: React.FC<BasketOverviewProps> = ({
+export const BasketOverview: React.FC<
+  React.PropsWithChildren<BasketOverviewProps>
+> = ({
   name,
   displayDenom,
   description,
@@ -52,7 +54,7 @@ export const BasketOverview: React.FC<BasketOverviewProps> = ({
   minStartDate,
   startDateWindow,
 }) => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
 
   const getDateCriteria = (
     minStartDate?: string,
@@ -125,7 +127,7 @@ export const BasketOverview: React.FC<BasketOverviewProps> = ({
  * Styles and styled components
  */
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   content: {
     display: 'flex',
     width: '100%',

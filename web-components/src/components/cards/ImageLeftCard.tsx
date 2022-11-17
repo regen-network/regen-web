@@ -1,8 +1,8 @@
 import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
 import { Box, CardContent } from '@mui/material';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { DefaultTheme as Theme } from '@mui/styles';
+import ReactHtmlParser from 'html-react-parser';
+import { makeStyles } from 'tss-react/mui';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import { Image } from '../image';
@@ -26,7 +26,7 @@ export interface ImageLeftCardProps {
   buttonBlankTarget?: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     display: 'flex',
     borderRadius: 9,
@@ -80,7 +80,7 @@ function ImageLeftCard({
   buttonIcon,
   buttonBlankTarget,
 }: ImageLeftCardProps): JSX.Element {
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
 
   return (
     <Card className={cx(styles.root, classes?.root, className)} elevation={1}>

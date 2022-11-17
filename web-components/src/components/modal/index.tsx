@@ -1,8 +1,8 @@
 import React from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 import Modal from '@mui/material/Modal';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import CloseIcon from '../icons/CloseIcon';
 
@@ -15,12 +15,12 @@ export interface RegenModalProps {
   isFullscreenMobile?: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   content: {
     outline: 'none',
     position: 'absolute',
     overflow: 'auto',
-    '-webkit-overflow-scrolling': 'touch',
+    WebkitOverflowScrolling: 'touch',
     maxWidth: theme.spacing(150),
     [theme.breakpoints.up('md')]: {
       width: '50%',
@@ -99,7 +99,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const RegenModal: React.FC<RegenModalProps> = ({
+const RegenModal: React.FC<React.PropsWithChildren<RegenModalProps>> = ({
   open,
   onClose,
   children,
@@ -108,12 +108,12 @@ const RegenModal: React.FC<RegenModalProps> = ({
   isIFrame,
   isFullscreenMobile = true,
 }) => {
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
   return (
     <Modal open={open} onClose={onClose}>
       <RemoveScroll>
         <div
-          className={clsx(
+          className={cx(
             styles.content,
             isFullscreenMobile
               ? styles.fullscreenMobile

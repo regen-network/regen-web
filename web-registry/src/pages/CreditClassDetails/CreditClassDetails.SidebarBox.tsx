@@ -1,6 +1,8 @@
 import { Flex } from 'web-components/lib/components/box';
 
-const SideBarBox: React.FC = ({ children }) => {
+const SideBarBox: React.FC<React.PropsWithChildren<unknown>> = ({
+  children,
+}) => {
   return (
     <Flex
       col

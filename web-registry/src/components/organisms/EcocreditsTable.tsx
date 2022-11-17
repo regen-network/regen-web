@@ -35,11 +35,9 @@ type EcocreditsTableProps = {
   onTableChange?: UseStateSetter<TablePaginationParams>;
 };
 
-export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
-  credits,
-  renderActionButtons,
-  onTableChange,
-}) => {
+export const EcocreditsTable: React.FC<
+  React.PropsWithChildren<EcocreditsTableProps>
+> = ({ credits, renderActionButtons, onTableChange }) => {
   if (!credits?.length) {
     return <NoCredits title="No ecocredits to display" />;
   }

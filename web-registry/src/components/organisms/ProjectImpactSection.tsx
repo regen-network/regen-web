@@ -1,10 +1,10 @@
 import React, { useCallback, useRef } from 'react';
 import LazyLoad from 'react-lazyload';
 import Slider from 'react-slick';
+import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { makeStyles, useTheme } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
@@ -23,7 +23,7 @@ interface ProjectImpactProps {
   };
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(21.5),
@@ -91,7 +91,7 @@ function ProjectImpactSection({
   title,
   classes,
 }: ProjectImpactProps): JSX.Element {
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
   const theme: Theme = useTheme();
   const isMobile: boolean = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet: boolean = useMediaQuery(

@@ -10,7 +10,7 @@ interface Props extends ButtonProps {
   text?: string;
 }
 
-const ExpandButton: React.FC<Props> = ({
+const ExpandButton: React.FC<React.PropsWithChildren<Props>> = ({
   expanded,
   sx,
   text = 'read',

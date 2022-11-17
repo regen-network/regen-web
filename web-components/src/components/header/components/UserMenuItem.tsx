@@ -23,7 +23,7 @@ const Separator = styled('hr')(({ theme }) => ({
   marginBottom: theme.spacing(6),
 }));
 
-const UserMenuItem: React.FC<UserMenuItemProps> = ({
+const UserMenuItem: React.FC<React.PropsWithChildren<UserMenuItemProps>> = ({
   address,
   avatar,
   disconnect,

@@ -7,14 +7,16 @@ import { UnderlineTooltip } from '../tooltip/UnderlineTooltip';
 export type SanityBlockContent = any[] | any; // copied from Sanity's types
 export type SanityBlockOr<T> = T | SanityBlockContent;
 
-const CustomBlockContent: React.FC<{
-  className?: string;
-  content: SanityBlockContent;
-  tooltipText?: string;
-  /** note: this is passed to the wrapper element */
-  sx?: SxProps<Theme>;
-  onClickModalLink?: (href: string) => any;
-}> = ({ onClickModalLink, content, tooltipText, className, sx = [] }) => {
+const CustomBlockContent: React.FC<
+  React.PropsWithChildren<{
+    className?: string;
+    content: SanityBlockContent;
+    tooltipText?: string;
+    /** note: this is passed to the wrapper element */
+    sx?: SxProps<Theme>;
+    onClickModalLink?: (href: string) => any;
+  }>
+> = ({ onClickModalLink, content, tooltipText, className, sx = [] }) => {
   const serializers = {
     marks: {
       link: (props: any) => {

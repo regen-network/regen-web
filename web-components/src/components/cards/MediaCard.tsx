@@ -1,8 +1,7 @@
 import { useCallback } from 'react';
 import { CardMedia, SxProps } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
-import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import type { Theme } from 'src/theme/muiTheme';
 
@@ -33,7 +32,7 @@ export interface MediaCardProps extends OptimizeImageProps {
   sx?: SxProps<Theme>;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   image: {
     height: theme.spacing(48.75),
     position: 'relative',
@@ -62,7 +61,7 @@ export default function MediaCard({
   apiServerUrl,
   sx = [],
 }: MediaCardProps): JSX.Element {
-  const classes = useStyles({});
+  const { classes, cx } = useStyles();
   const optimizedImage = useCallback(
     (): JSX.Element => (
       <MediaCardImage

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import Section from 'web-components/lib/components/section';
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -11,7 +11,7 @@ import {
 } from '../../components/organisms';
 import useBasketDetails from './hooks/useBasketDetails';
 
-const BasketDetails: React.FC = () => {
+const BasketDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { basketDenom } = useParams<{ basketDenom: string }>();
   const data = useBasketDetails(basketDenom);
 
@@ -32,7 +32,7 @@ export { BasketDetails };
 // The following component is of type layout, something
 // provisional since this section will contain tabs soon
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     width: '100%',
     padding: theme.spacing(15, 5, 20),
@@ -46,8 +46,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const SectionLayout: React.FC = ({ children }) => {
-  const styles = useStyles();
+const SectionLayout: React.FC<React.PropsWithChildren<unknown>> = ({
+  children,
+}) => {
+  const { classes: styles } = useStyles();
 
   return (
     <Section

@@ -14,7 +14,7 @@ import { ChooseCreditClassItem } from './ChooseCreditClass.Item';
 import { useErrorTimeout } from './hooks/useErrorTimeout';
 import { useGetCreditClassOptions } from './hooks/useGetCreditClassOptions';
 
-const ChooseCreditClass: React.FC = () => {
+const ChooseCreditClass: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const [error, setError] = useErrorTimeout();
   const { projectId } = useParams();

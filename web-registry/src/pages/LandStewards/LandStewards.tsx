@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
@@ -20,7 +20,7 @@ import {
 import { useAllLandStewardsPageQuery } from '../../generated/sanity-graphql';
 import { client } from '../../sanity';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   heroMain: {
     maxWidth: theme.typography.pxToRem(775),
     paddingBottom: theme.spacing(20),
@@ -73,7 +73,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const LandStewards = (): JSX.Element => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
   const [open, setOpen] = useState(false);
   const [modalLink, setModalLink] = useState<string | undefined>();
   const location = useLocation();

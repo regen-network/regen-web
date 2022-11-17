@@ -1,6 +1,7 @@
 import React from 'react';
+import { useTheme } from '@mui/material';
 import SvgIcon from '@mui/material/SvgIcon';
-import { DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
 
 type Props = {
   fileType?: string;
@@ -13,11 +14,9 @@ type Fill = {
   shade: string;
 };
 
-const DocumentIcon: React.FC<Props & Partial<typeof SvgIcon>> = ({
-  className,
-  fileType,
-  ...props
-}) => {
+const DocumentIcon: React.FC<
+  React.PropsWithChildren<Props & Partial<typeof SvgIcon>>
+> = ({ className, fileType, ...props }) => {
   const theme: Theme = useTheme();
   const getFill = (): Fill => {
     switch (fileType) {

@@ -1,8 +1,8 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import { Variant } from '@mui/material/styles/createTypography';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import ContainedButton from '../buttons/ContainedButton';
 import { Body, Title } from '../typography';
@@ -26,7 +26,7 @@ export interface StyleProps {
   titleVariant: string;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     textAlign: 'center',
   },
@@ -59,14 +59,14 @@ export default function ImageItem({
   buttonHref,
   buttonTarget,
 }: ImageItemProps): JSX.Element {
-  const styles = useStyles({ titleVariant });
+  const { classes: styles, cx } = useStyles();
 
   return (
-    <div className={clsx(styles.root, classes?.root, className)}>
+    <div className={cx(styles.root, classes?.root, className)}>
       <Grid
         container
         justifyContent="center"
-        className={clsx(styles.image, classes?.image)}
+        className={cx(styles.image, classes?.image)}
       >
         {img}
       </Grid>
@@ -75,7 +75,7 @@ export default function ImageItem({
         variant={titleVariant}
         className={
           titleVariant === 'h3'
-            ? clsx(styles.title, styles.h3title)
+            ? cx(styles.title, styles.h3title)
             : styles.title
         }
       >

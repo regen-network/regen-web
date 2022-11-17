@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Collapse } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import { BasketInfo } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { Field, Form, Formik, FormikErrors } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 
 import type { Theme } from '../../theme/muiTheme';
 import QuestionIconOutlined from '../icons/QuestionIconOutlined';
@@ -37,7 +37,7 @@ import Submit from './Submit';
 const RETIRED_UPON_TAKE_TOOLTIP =
   'The creator of this basket has chosen that all credits must be retired upon take.';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   checkboxLabel: {
     marginTop: theme.spacing(10.75),
   },
@@ -71,7 +71,7 @@ interface FormProps extends BasketTakeProps {
   onClose: RegenModalProps['onClose'];
 }
 
-const BasketTakeForm: React.FC<FormProps> = ({
+const BasketTakeForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   mapboxToken,
   accountAddress,
   basket,
@@ -80,7 +80,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
   onClose,
   onSubmit,
 }) => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
 
   const initialValues = {
     amount: 0,

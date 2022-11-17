@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { Body, Title } from 'web-components/lib/components/typography';
@@ -14,7 +14,7 @@ type Props = {
   descriptionRaw?: Maybe<Scalars['JSON']>;
 };
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   section: {
     display: 'flex',
     justifyContent: 'center',
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 function MethodologyTestSection({ title, descriptionRaw }: Props): JSX.Element {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
 
   return (
     <BackgroundImgSection

@@ -1,14 +1,14 @@
 import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 interface IconProps {
   className?: string;
   isActive?: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     width: theme.spacing(9.25),
     height: theme.spacing(9.25),
@@ -17,11 +17,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 function FarmerIcon({ className, isActive }: IconProps): JSX.Element {
-  const classes = useStyles();
+  const { classes, cx } = useStyles();
 
   return isActive ? (
     <SvgIcon
-      className={clsx(className, classes.root)}
+      className={cx(className, classes.root)}
       width="74"
       height="67"
       viewBox="0 0 74 67"
@@ -312,7 +312,7 @@ function FarmerIcon({ className, isActive }: IconProps): JSX.Element {
     </SvgIcon>
   ) : (
     <SvgIcon
-      className={clsx(className, classes.root)}
+      className={cx(className, classes.root)}
       width="72"
       height="66"
       viewBox="0 0 72 66"

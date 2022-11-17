@@ -43,22 +43,24 @@ export default function useBasketQuery<T extends BasketQueryResponse>({
   }, [api?.queryClient, client]);
 
   const basket = useCallback(
-    (client, params) => queryBasket({ client, request: params }),
+    (client: any, params: any) => queryBasket({ client, request: params }),
     [],
   );
 
   const baskets = useCallback(
-    (client, params) => queryBaskets({ client, request: params }),
+    (client: any, params: any) => queryBaskets({ client, request: params }),
     [],
   );
 
   const basketBalances = useCallback(
-    (client, params) => queryBasketBalances({ client, request: params }),
+    (client: any, params: any) =>
+      queryBasketBalances({ client, request: params }),
     [],
   );
 
   const basketBalance = useCallback(
-    (client, params) => queryBasketBalance({ client, request: params }),
+    (client: any, params: any) =>
+      queryBasketBalance({ client, request: params }),
     [],
   );
 

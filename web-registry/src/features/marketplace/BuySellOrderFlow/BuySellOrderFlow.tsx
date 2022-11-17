@@ -89,7 +89,7 @@ export const BuySellOrderFlow = ({
   };
   const onTxSuccessButtonClick = (): void => {
     handleTxModalClose();
-    navigate('/ecocredits/dashboard');
+    navigate('/ecocredits/portfolio');
   };
   const onSubmitCallback = ({
     creditCount,

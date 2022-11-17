@@ -1,5 +1,5 @@
-import React, { Suspense } from 'react';
-import ReactDOM from 'react-dom';
+import { Suspense } from 'react';
+import ReactDOM, { unmountComponentAtNode } from 'react-dom';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { MockedProvider } from '@apollo/client/testing';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -8,7 +8,7 @@ import { useAnalytics } from 'use-analytics';
 
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 
-import { routes } from './App';
+import { routes } from './routes';
 
 import './jest.mock';
 
@@ -59,8 +59,9 @@ describe('App', () => {
     });
 
     it('renders without crashing', () => {
-      const div = document.createElement('div');
       const router = createMemoryRouter(routes);
+      const container = document.createElement('div');
+      document.body.appendChild(container);
       ReactDOM.render(
         <MockedProvider mocks={[]}>
           <ThemeProvider>
@@ -69,9 +70,9 @@ describe('App', () => {
             </Suspense>
           </ThemeProvider>
         </MockedProvider>,
-        div,
+        container,
       );
-      ReactDOM.unmountComponentAtNode(div);
+      unmountComponentAtNode(container);
     });
   });
 
@@ -83,8 +84,9 @@ describe('App', () => {
     });
 
     it('renders without crashing', () => {
-      const div = document.createElement('div');
       const router = createMemoryRouter(routes);
+      const container = document.createElement('div');
+      document.body.appendChild(container);
       ReactDOM.render(
         <MockedProvider mocks={[]}>
           <ThemeProvider>
@@ -94,9 +96,9 @@ describe('App', () => {
           </ThemeProvider>
           ,
         </MockedProvider>,
-        div,
+        container,
       );
-      ReactDOM.unmountComponentAtNode(div);
+      unmountComponentAtNode(container);
     });
   });
 });

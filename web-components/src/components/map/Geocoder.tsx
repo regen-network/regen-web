@@ -4,7 +4,8 @@ import mbxGeocoder, {
   GeocodeQueryType,
 } from '@mapbox/mapbox-sdk/services/geocoding';
 import TextField from '@mui/material/TextField';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 interface GeocoderProps {
   token: string | undefined;
@@ -16,7 +17,7 @@ interface GeocoderProps {
   required?: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   result: {
     border: `1px solid ${theme.palette.info.light}`,
     backgroundColor: theme.palette.primary.main,
@@ -34,7 +35,7 @@ export default function Geocoder({
   className,
   required = false,
 }: GeocoderProps): JSX.Element {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const baseClient = MapboxClient({ accessToken });
   const geocoderService = mbxGeocoder(baseClient);
   const [address, setAddress] = useState<string>('');

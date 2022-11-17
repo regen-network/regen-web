@@ -25,6 +25,7 @@ function SanityButton({
   btn,
   openModal,
   variant = 'contained',
+  sx = [],
   ...btnProps
 }: Props): JSX.Element {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ function SanityButton({
 
   const Button = variant === 'contained' ? ContainedButton : OutlinedButton;
   return (
-    <Button onClick={handleClick} {...btnProps}>
+    <Button onClick={handleClick} {...btnProps} sx={sx as any}>
       {btn?.buttonText}
     </Button>
   );

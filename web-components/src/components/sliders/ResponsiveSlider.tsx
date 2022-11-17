@@ -1,10 +1,10 @@
-import React, { useCallback, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import Slider, { Settings as SlickSettings } from 'react-slick';
+import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { Variant } from '@mui/material/styles/createTypography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import PrevNextButton from '../buttons/PrevNextButton';
 import { Title } from '../typography';
@@ -36,102 +36,104 @@ interface StyleProps {
   itemWidth?: string;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  root: {
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(11.75),
+const useStyles = makeStyles<StyleProps>()(
+  (theme, { gridView, itemWidth, padding, title }) => ({
+    root: {
+      [theme.breakpoints.down('sm')]: {
+        paddingTop: theme.spacing(11.75),
+      },
+      [theme.breakpoints.up('sm')]: {
+        paddingTop: theme.spacing(8),
+      },
     },
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(8),
-    },
-  },
-  slider: props => ({
-    [theme.breakpoints.down('sm')]: {
-      width: props.itemWidth || '70%',
-      paddingTop: props.title ? theme.spacing(4) : 0,
-    },
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: props.padding ? `-${props.padding}` : 0,
-      paddingTop: props.title ? theme.spacing(8) : 0,
-    },
-    '& .slick-dots': {
-      bottom: 'auto',
-      overflow: 'hidden',
-      height: theme.spacing(6),
-      '& ul': {
-        padding: 0,
-        whiteSpace: 'nowrap',
-        margin: '8px 0 -6.5px',
-        '& li': {
-          height: theme.spacing(3.75),
-          width: theme.spacing(3.75),
-          margin: '0 6.5px',
-          '&.slick-active': {
-            '& div': {
-              backgroundColor: theme.palette.secondary.dark,
+    slider: {
+      [theme.breakpoints.down('sm')]: {
+        width: itemWidth || '70%',
+        paddingTop: title ? theme.spacing(4) : 0,
+      },
+      [theme.breakpoints.up('sm')]: {
+        marginLeft: padding ? `-${padding}` : 0,
+        paddingTop: title ? theme.spacing(8) : 0,
+      },
+      '& .slick-dots': {
+        bottom: 'auto',
+        overflow: 'hidden',
+        height: theme.spacing(6),
+        '& ul': {
+          padding: 0,
+          whiteSpace: 'nowrap',
+          margin: '8px 0 -6.5px',
+          '& li': {
+            height: theme.spacing(3.75),
+            width: theme.spacing(3.75),
+            margin: '0 6.5px',
+            '&.slick-active': {
+              '& div': {
+                backgroundColor: theme.palette.secondary.dark,
+              },
+            },
+          },
+        },
+      },
+      '& .slick-list': {
+        [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+          overflow: 'visible',
+        },
+        '& .slick-slide': {
+          display: 'flex',
+          '& > div': {
+            width: '97%',
+          },
+        },
+      },
+      '& .slick-track': {
+        display: 'flex',
+        '& .slick-slide': {
+          height: 'inherit',
+          display: 'flex',
+          margin: theme.spacing(4, 0),
+          [theme.breakpoints.down('sm')]: {
+            paddingRight: theme.spacing(5),
+            '&:last-child': {
+              paddingRight: 0,
             },
           },
         },
       },
     },
-    '& .slick-list': {
-      [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-        overflow: 'visible',
-      },
-      '& .slick-slide': {
-        display: 'flex',
-        '& > div': {
-          width: '97%',
-        },
+    buttons: {
+      '& div:last-child': {
+        marginLeft: theme.spacing(2),
       },
     },
-    '& .slick-track': {
-      display: 'flex',
-      '& .slick-slide': {
-        height: 'inherit',
-        display: 'flex',
-        margin: theme.spacing(4, 0),
-        [theme.breakpoints.down('sm')]: {
-          paddingRight: theme.spacing(5),
-          '&:last-child': {
-            paddingRight: 0,
-          },
+    title: {
+      letterSpacing: '1px',
+      textTransform: 'uppercase',
+      fontWeight: 800,
+      color: theme.palette.info.main,
+      [theme.breakpoints.down('sm')]: {
+        fontSize: theme.spacing(3.5),
+      },
+    },
+    dot: {
+      height: theme.spacing(3.75),
+      width: theme.spacing(3.75),
+      backgroundColor: theme.palette.grey[100],
+      borderRadius: '50%',
+    },
+    item: {
+      height: '100%',
+      paddingBottom: gridView ? theme.spacing(5) : 0,
+      [theme.breakpoints.up('sm')]: {
+        paddingLeft: padding || theme.spacing(4),
+        paddingRight: padding || theme.spacing(4),
+        '&:last-child': {
+          paddingRight: 0,
         },
       },
     },
   }),
-  buttons: {
-    '& div:last-child': {
-      marginLeft: theme.spacing(2),
-    },
-  },
-  title: {
-    letterSpacing: '1px',
-    textTransform: 'uppercase',
-    fontWeight: 800,
-    color: theme.palette.info.main,
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3.5),
-    },
-  },
-  dot: {
-    height: theme.spacing(3.75),
-    width: theme.spacing(3.75),
-    backgroundColor: theme.palette.grey[100],
-    borderRadius: '50%',
-  },
-  item: props => ({
-    height: '100%',
-    paddingBottom: props.gridView ? theme.spacing(5) : 0,
-    [theme.breakpoints.up('sm')]: {
-      paddingLeft: props.padding || theme.spacing(4),
-      paddingRight: props.padding || theme.spacing(4),
-      '&:last-child': {
-        paddingRight: 0,
-      },
-    },
-  }),
-}));
+);
 
 export default function ResponsiveSlider({
   items = [],
@@ -165,7 +167,12 @@ export default function ResponsiveSlider({
     ? 1
     : Math.min(items.length, 2);
 
-  const styles = useStyles({ gridView, padding, title, itemWidth });
+  const { classes: styles, cx } = useStyles({
+    gridView,
+    padding,
+    title,
+    itemWidth,
+  });
 
   let slider: any = useRef(null);
 

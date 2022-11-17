@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState } from 'react';
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useMediaQuery } from '@mui/material';
-import { makeStyles, useTheme } from '@mui/styles';
+import { useMediaQuery, useTheme } from '@mui/material';
 import { startCase } from 'lodash';
+import { makeStyles } from 'tss-react/mui';
 
 import Banner from 'web-components/lib/components/banner';
 import Navigation from 'web-components/lib/components/faq/Navigation';
@@ -12,7 +12,7 @@ import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { Link } from '../../components/atoms';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
@@ -119,7 +119,7 @@ const ProjectEditContext = createContext<ContextType>({
 });
 
 function ProjectEdit(): JSX.Element {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
   const theme = useTheme<Theme>();
   const navigate = useNavigate();
   const [saved, setSaved] = useState(false);

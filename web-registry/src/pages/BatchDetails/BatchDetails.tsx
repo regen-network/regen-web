@@ -25,7 +25,7 @@ import {
 } from 'components/molecules';
 import { useEcocredits } from 'hooks';
 
-export const BatchDetails: React.FC = () => {
+export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { batchDenom } = useParams();
   const [ledgerLoading, setLedgerLoading] = useState(false);
   const [batch, setBatch] = useState<BatchInfoWithSupply>();
@@ -99,7 +99,7 @@ export const BatchDetails: React.FC = () => {
               sx={{ maxWidth: 'max-content', px: 7 }}
               size="small"
               component={Link}
-              href="/ecocredits/dashboard"
+              href="/ecocredits/portfolio"
             >
               view in portfolio
             </OutlinedButton>

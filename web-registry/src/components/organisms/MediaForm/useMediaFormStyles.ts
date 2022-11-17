@@ -1,6 +1,6 @@
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
-export const useMediaFormStyles = makeStyles(theme => ({
+export const useMediaFormStyles = makeStyles()(theme => ({
   fullSizeMedia: {
     width: '100%',
     [theme.breakpoints.up('sm')]: {

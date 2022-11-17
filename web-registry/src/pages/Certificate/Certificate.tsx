@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
 import ReactToPrint from 'react-to-print';
+import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import { makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
@@ -28,7 +29,7 @@ import {
 } from '../../generated/graphql';
 import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     backgroundColor: theme.palette.primary.main,
   },
@@ -167,7 +168,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 function CertificatePage(): JSX.Element {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const theme = useTheme();
   const [current, setCurrent] = useState<number>(0);
 

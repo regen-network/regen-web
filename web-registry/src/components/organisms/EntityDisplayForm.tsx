@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link as RouterLink, useParams } from 'react-router-dom';
 import { Link, useTheme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import { Field, Form, Formik } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 
 import Card from 'web-components/lib/components/cards/Card';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -105,7 +105,7 @@ type Errors = {
     | string;
 };
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   field: {
     marginBottom: theme.spacing(8),
   },
@@ -194,13 +194,10 @@ async function setType(
   setFieldTouched(fieldName, true);
 }
 
-const OrganizationFormlet: React.FC<OrganizationFormletProps> = ({
-  role,
-  entity,
-  setFieldValue,
-  setFieldTouched,
-}) => {
-  const styles = useStyles();
+const OrganizationFormlet: React.FC<
+  React.PropsWithChildren<OrganizationFormletProps>
+> = ({ role, entity, setFieldValue, setFieldTouched }) => {
+  const { classes: styles } = useStyles();
   const theme = useTheme();
   const apiUri = getApiUri();
   const { projectId } = useParams();
@@ -254,13 +251,10 @@ const OrganizationFormlet: React.FC<OrganizationFormletProps> = ({
   );
 };
 
-const IndividualFormlet: React.FC<IndividualFormletProps> = ({
-  entity,
-  role,
-  setFieldValue,
-  setFieldTouched,
-}) => {
-  const styles = useStyles();
+const IndividualFormlet: React.FC<
+  React.PropsWithChildren<IndividualFormletProps>
+> = ({ entity, role, setFieldValue, setFieldTouched }) => {
+  const { classes: styles } = useStyles();
   const { projectId } = useParams();
   const apiUri = getApiUri();
   const triggerOnChange = async (value: boolean): Promise<void> => {
@@ -360,13 +354,11 @@ function getInitialValues(values?: DisplayValues): DisplayValues | undefined {
   }
 }
 
-const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({
-  submit,
-  initialValues,
-  ...props
-}) => {
+const EntityDisplayForm: React.FC<
+  React.PropsWithChildren<EntityDisplayFormProps>
+> = ({ submit, initialValues, ...props }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
   const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {

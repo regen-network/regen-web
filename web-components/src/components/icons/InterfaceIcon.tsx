@@ -1,13 +1,13 @@
 import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 interface IconProps {
   className?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     width: theme.spacing(9.25),
     height: theme.spacing(9.25),
@@ -16,11 +16,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 function InterfaceIcon({ className }: IconProps): JSX.Element {
-  const classes = useStyles();
+  const { classes, cx } = useStyles();
 
   return (
     <SvgIcon
-      className={clsx(className, classes.root)}
+      className={cx(className, classes.root)}
       viewBox="0 0 120 87"
       xmlns="http://www.w3.org/2000/svg"
     >

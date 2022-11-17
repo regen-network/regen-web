@@ -6,10 +6,10 @@ import {
   IconButton,
   LinearProgress,
   useMediaQuery,
+  useTheme,
 } from '@mui/material';
-import { makeStyles, useTheme } from '@mui/styles';
-import cx from 'clsx';
 import { FieldProps } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import Card from '../cards/Card';
@@ -29,7 +29,7 @@ export interface VideoInputProps extends FieldProps {
   buttonText?: string;
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   root: {
     height: '100%',
     width: '100%',
@@ -79,7 +79,7 @@ function VideoInput({
 }: VideoInputProps): JSX.Element {
   const [videoUrl, setVideoUrl] = useState('');
   const [videoLoaded, setVideoLoaded] = useState(false);
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { form, field } = fieldProps;

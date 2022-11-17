@@ -23,7 +23,7 @@ const Separator = styled('hr')(({ theme }) => ({
   marginBottom: theme.spacing(6),
 }));
 
-const UserMenuItem: React.FC<UserMenuItemProps> = ({
+const UserMenuItem: React.FC<React.PropsWithChildren<UserMenuItemProps>> = ({
   address,
   avatar,
   disconnect,
@@ -60,7 +60,7 @@ const UserMenuItem: React.FC<UserMenuItemProps> = ({
             pathname,
             linkComponent,
             title: 'My Portfolio',
-            href: '/ecocredits/dashboard',
+            href: '/ecocredits/portfolio',
             icon: (
               <CreditsIcon
                 sx={{ height: 18, width: 20 }}

@@ -1,12 +1,12 @@
 import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
 import Box from '@mui/material/Box';
-import { makeStyles } from '@mui/styles';
+import ReactHtmlParser from 'html-react-parser';
+import { makeStyles } from 'tss-react/mui';
 
 import { Title } from '../../typography';
 import { NavLinkProps } from './NavLink';
 
-const useStyles = makeStyles(theme => {
+const useStyles = makeStyles()(theme => {
   const { pxToRem } = theme.typography;
   return {
     item: {
@@ -33,19 +33,18 @@ export type HeaderDropdownItemProps = {
   title: string;
   href: string;
   pathname: string;
-  linkComponent: React.FC<NavLinkProps>;
-  svg?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  linkComponent: React.FC<React.PropsWithChildren<NavLinkProps>>;
+  svg?: React.FunctionComponent<
+    React.PropsWithChildren<React.SVGProps<SVGSVGElement>>
+  >;
   icon?: JSX.Element;
   right?: () => JSX.Element;
 };
 
-export const HeaderDropdownItem: React.FC<HeaderDropdownItemProps> = ({
-  svg: SVG,
-  icon,
-  linkComponent: LinkComponent,
-  ...props
-}) => {
-  const styles = useStyles();
+export const HeaderDropdownItem: React.FC<
+  React.PropsWithChildren<HeaderDropdownItemProps>
+> = ({ svg: SVG, icon, linkComponent: LinkComponent, ...props }) => {
+  const { classes: styles } = useStyles();
   return (
     <Box
       display="flex"
@@ -68,12 +67,14 @@ export const HeaderDropdownItem: React.FC<HeaderDropdownItemProps> = ({
 };
 
 /** column with a title and links */
-export const HeaderDropdownColumn: React.FC<{
-  items: HeaderDropdownItemProps[];
-  linkComponent: React.FC<NavLinkProps>;
-  title?: string;
-}> = props => {
-  const styles = useStyles();
+export const HeaderDropdownColumn: React.FC<
+  React.PropsWithChildren<{
+    items: HeaderDropdownItemProps[];
+    linkComponent: React.FC<React.PropsWithChildren<NavLinkProps>>;
+    title?: string;
+  }>
+> = props => {
+  const { classes: styles } = useStyles();
   return (
     <Box display="flex" flexDirection="column">
       {props.title && (

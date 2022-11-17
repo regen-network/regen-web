@@ -1,8 +1,8 @@
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import type { Theme } from '../../../theme/muiTheme';
 
-export const useCreditClassCardStyles = makeStyles((theme: Theme) => ({
+export const useCreditClassCardStyles = makeStyles()((theme: Theme) => ({
   image: {
     height: theme.spacing(35),
     width: '100%',

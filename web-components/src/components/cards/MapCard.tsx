@@ -1,6 +1,6 @@
-import React from 'react';
+import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import CloseIcon from '../icons/CloseIcon';
 import Card from './Card';
@@ -19,7 +19,7 @@ interface StyleProps {
   color: string;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+const useStyles = makeStyles<StyleProps>()((theme, { color }) => ({
   image: {
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(25),
@@ -35,13 +35,13 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   container: {
     position: 'relative',
     [theme.breakpoints.up('sm')]: {
-      borderTop: props => `solid 9px ${props.color}`,
+      borderTop: `solid 9px ${color}`,
       padding: `${theme.spacing(9.5)} ${theme.spacing(7.75)} ${theme.spacing(
         7.25,
       )}`,
     },
     [theme.breakpoints.down('sm')]: {
-      borderTop: props => `solid 6px ${props.color}`,
+      borderTop: `solid 6px ${color}`,
       padding: `${theme.spacing(6)} ${theme.spacing(3.75)} ${theme.spacing(
         4.25,
       )}`,
@@ -94,7 +94,7 @@ export default function CreditCard({
   isPopup,
   onClose,
 }: MapCardProps): JSX.Element {
-  const classes = useStyles({ color });
+  const { classes } = useStyles({ color });
   const theme = useTheme();
   // const matches = useMediaQuery(theme.breakpoints.up('sm'));
 

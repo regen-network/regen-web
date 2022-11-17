@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
-import { makeStyles } from '@mui/styles';
 import { quantityFormatNumberOptions } from 'config/decimals';
+import { makeStyles } from 'tss-react/mui';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { formatNumber } from 'web-components/lib/utils/format';
@@ -16,7 +16,7 @@ interface CreditTotalData {
   created?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     [theme.breakpoints.up('md')]: {
       padding: theme.spacing(7, 0, 11),
@@ -30,8 +30,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const CreditTotals: React.FC = () => {
-  const styles = useStyles();
+const CreditTotals: React.FC<React.PropsWithChildren<unknown>> = () => {
+  const { classes: styles } = useStyles();
   const [totals, setTotals] = useState<CreditTotalData>({
     tradeable: undefined,
     retired: undefined,

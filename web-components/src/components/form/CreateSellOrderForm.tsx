@@ -39,7 +39,7 @@ export interface FormValues {
   enableAutoRetire?: boolean;
 }
 
-const CreateSellOrderForm: React.FC<FormProps> = ({
+const CreateSellOrderForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   allowedDenoms,
   batchDenoms,
   availableAmountByBatch,

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import PlaceInfo from './PlaceInfo';
 
@@ -13,7 +14,7 @@ interface ProjectPlaceInfoProps {
   iconClassName?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   separator: {
     fontWeight: 100,
   },
@@ -28,7 +29,7 @@ export default function ProjectPlaceInfo({
   color,
   iconClassName,
 }: ProjectPlaceInfoProps): JSX.Element {
-  const classes = useStyles({});
+  const { classes } = useStyles();
   let displayedArea: string | undefined;
   if (area) {
     displayedArea = new Intl.NumberFormat('en-US').format(area);

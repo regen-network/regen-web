@@ -1,5 +1,4 @@
-import { Link as LinkExt, SxProps, Theme } from '@mui/material';
-import { useTheme } from '@mui/styles';
+import { Link as LinkExt, SxProps, Theme, useTheme } from '@mui/material';
 
 import {
   URL_REGISTRY_MARKETPLACE_LEGAL,
@@ -11,7 +10,9 @@ interface Props {
   sx?: SxProps<Theme>;
 }
 
-const AgreeErpaCheckbox: React.FC<Props> = ({ sx }: Props) => {
+const AgreeErpaCheckbox: React.FC<React.PropsWithChildren<Props>> = ({
+  sx,
+}: Props) => {
   const theme = useTheme();
   return (
     <AgreeCheckbox

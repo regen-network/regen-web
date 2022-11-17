@@ -4,14 +4,23 @@ import Tabs, { TabsProps } from '@mui/material/Tabs';
 
 import type { Theme } from 'src/theme/muiTheme';
 
+import { LinkItem } from '../footer/footer-new';
 import { TextSize } from '../typography/sizing';
 import { a11yProps } from './';
 import { IconTab, IconTabProps } from './IconTab';
 import { TabPanel } from './TabPanel';
 
+interface LinkProps extends LinkItem {
+  sx?: SxProps<Theme>;
+}
+
+export type LinkComponentProp = React.FC<LinkProps>;
+
 interface IconTabsProps {
+  activeTab?: number;
   tabs: IconTabProps[];
   size?: TextSize;
+  linkComponent?: LinkComponentProp;
   sxs?: {
     tab?: {
       outer?: SxProps<Theme>;
@@ -50,13 +59,16 @@ const StyledTabs = styled(Tabs, {
 );
 
 const IconTabs: React.FC<IconTabsProps> = ({
+  activeTab = 0,
   tabs,
   size,
   sxs,
+  linkComponent,
   hideIndicator = false,
   mobileFullWidth = false,
 }) => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(activeTab);
+  const hasContent = tabs.some(tab => tab.content !== undefined);
 
   const handleChange = (
     event: React.ChangeEvent<{}>,
@@ -89,23 +101,26 @@ const IconTabs: React.FC<IconTabsProps> = ({
               icon={tab?.icon}
               hidden={tab?.hidden}
               size={size}
+              href={tab.href}
+              linkComponent={linkComponent}
               sxInner={{ ...sxs?.tab?.inner }}
               {...a11yProps(index)}
             />
           ))}
         </StyledTabs>
       </Box>
-      {tabs.map((tab, index) => (
-        <TabPanel
-          key={index}
-          value={value}
-          index={index}
-          hidden={tab.hidden || value !== index}
-          sxs={{ ...sxs?.panel }}
-        >
-          {tab.content}
-        </TabPanel>
-      ))}
+      {hasContent &&
+        tabs.map((tab, index) => (
+          <TabPanel
+            key={index}
+            value={value}
+            index={index}
+            hidden={tab.hidden || value !== index}
+            sxs={{ ...sxs?.panel }}
+          >
+            {tab.content}
+          </TabPanel>
+        ))}
     </div>
   );
 };

@@ -41,7 +41,7 @@ export const AccountLink = ({
     <MuiLink
       {...linkProps}
       component={RouterLink}
-      to={`/ecocredits/accounts/${address}`}
+      to={`/ecocredits/accounts/${address}/portfolio`}
     >
       {content}
     </MuiLink>

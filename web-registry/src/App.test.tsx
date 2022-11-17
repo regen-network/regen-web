@@ -8,7 +8,7 @@ import { useAnalytics } from 'use-analytics';
 
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 
-import { routes } from './App';
+import { routes } from './routes';
 
 import './jest.mock';
 
@@ -59,8 +59,8 @@ describe('App', () => {
     });
 
     it('renders without crashing', () => {
-      const div = document.createElement('div');
       const router = createMemoryRouter(routes);
+      const div = document.createElement('div');
       ReactDOM.render(
         <MockedProvider mocks={[]}>
           <ThemeProvider>
@@ -83,8 +83,8 @@ describe('App', () => {
     });
 
     it('renders without crashing', () => {
-      const div = document.createElement('div');
       const router = createMemoryRouter(routes);
+      const div = document.createElement('div');
       ReactDOM.render(
         <MockedProvider mocks={[]}>
           <ThemeProvider>

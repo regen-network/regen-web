@@ -1,14 +1,16 @@
 import React from 'react';
-import { Collapse } from '@mui/material';
+import { Box, Collapse } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { BasketInfo } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 
 import type { Theme } from '../../theme/muiTheme';
+import QuestionIconOutlined from '../icons/QuestionIconOutlined';
 import AmountField from '../inputs/AmountField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import { validateAmount } from '../inputs/validation';
 import type { RegenModalProps } from '../modal';
+import InfoTooltip from '../tooltip/InfoTooltip';
 import { Subtitle } from '../typography';
 import {
   BottomCreditRetireFields,
@@ -31,6 +33,9 @@ import Submit from './Submit';
  *  if retire_on_take is true:
  *    retirement_jurisdiction: must be a valid location
  */
+
+const RETIRED_UPON_TAKE_TOOLTIP =
+  'The creator of this basket has chosen that all credits must be retired upon take.';
 
 const useStyles = makeStyles((theme: Theme) => ({
   checkboxLabel: {
@@ -147,8 +152,23 @@ const BasketTakeForm: React.FC<FormProps> = ({
               disabled={!basket.disableAutoRetire}
               className={styles.checkboxLabel}
               label={
-                <Subtitle size="lg" color="primary.contrastText">
+                <Subtitle display="flex" size="lg" color="primary.contrastText">
                   Retire credits upon transfer
+                  {values.retireOnTake && !basket.disableAutoRetire && (
+                    <InfoTooltip
+                      title={RETIRED_UPON_TAKE_TOOLTIP}
+                      arrow
+                      placement="top"
+                    >
+                      <Box
+                        sx={{ display: 'flex', alignItems: 'center', ml: 2 }}
+                      >
+                        <QuestionIconOutlined
+                          sx={{ color: 'secondary.main' }}
+                        />
+                      </Box>
+                    </InfoTooltip>
+                  )}
                 </Subtitle>
               }
             />

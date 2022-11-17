@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import { useWallet } from 'lib/wallet';
+import { useWallet } from 'lib/wallet/wallet';
 
 import useQueryListProjects from './useQueryListProjects';
 

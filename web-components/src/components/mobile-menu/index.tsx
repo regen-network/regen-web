@@ -3,109 +3,16 @@ import ReactHtmlParser from 'react-html-parser';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import MenuItem from '@mui/material/MenuItem';
-// import Divider from '@mui/material/Divider';
 import MenuList from '@mui/material/MenuList';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import { useTheme } from '@mui/styles';
 import clsx from 'clsx';
 
-import { HeaderMenuItem } from '../header/HeaderMenuHover';
-import { NavLinkProps } from '../header/NavLink';
-// import ContainedButton from '../buttons/ContainedButton';
-// import Button from '@mui/material/Button';
+import { Center } from '../box';
+import { HeaderMenuItem } from '../header/components/HeaderMenuHover/HeaderMenuHover';
+import { NavLinkProps } from '../header/components/NavLink';
 import CloseIcon from '../icons/CloseIcon';
 import HamburgerIcon from '../icons/HamburgerIcon';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    display: 'inline-block',
-    padding: theme.spacing(1),
-    'align-items': 'unset',
-  },
-  drawer: {
-    '& .MuiDrawer-paper': {
-      backgroundColor: theme.palette.primary.light,
-      width: '85%',
-      maxWidth: '350px',
-    },
-    '& .MuiBackdrop-root, & .MuiDrawer-paper': {
-      top: theme.spacing(15),
-    },
-  },
-  menuList: {
-    paddingTop: theme.spacing(12.25),
-    paddingBottom: theme.spacing(20),
-  },
-  menuItem: {
-    display: 'block',
-    fontFamily: theme.typography.h1.fontFamily,
-    color: theme.palette.primary.main,
-    letterSpacing: '1px',
-    textTransform: 'uppercase',
-    fontSize: theme.spacing(3.25),
-    lineHeight: theme.spacing(4),
-    fontWeight: 800,
-    paddingTop: 0,
-    paddingBottom: 0,
-    paddingLeft: theme.spacing(5),
-    minHeight: theme.spacing(9.75),
-    '& a': {
-      '&:link, &:visited, &:hover, &:active': {
-        textDecoration: 'none',
-      },
-    },
-  },
-  subMenuItem: {
-    fontSize: theme.spacing(2.75),
-    lineHeight: theme.spacing(3.5),
-    fontWeight: 800,
-    paddingTop: 0,
-    paddingBottom: 0,
-    paddingLeft: theme.spacing(6),
-    minHeight: theme.spacing(9),
-  },
-  icon: {
-    cursor: 'pointer',
-  },
-  subMenuTitle: {
-    color: theme.palette.info.main,
-  },
-  hamburger: {
-    width: theme.spacing(6.5),
-    height: theme.spacing(6.5),
-  },
-  close: {
-    position: 'absolute',
-    top: theme.spacing(4),
-    right: theme.spacing(4),
-    zIndex: 1,
-  },
-  currentMenuItem: {
-    '& > a': {
-      borderBottom: `2px solid ${theme.palette.secondary.main}`,
-    },
-  },
-  loginBtns: {
-    marginLeft: theme.spacing(4),
-  },
-  signUpBtn: {
-    fontSize: theme.typography.pxToRem(12),
-    padding: theme.spacing(2, 7),
-  },
-  loginBtn: {
-    textTransform: 'none',
-    color: theme.palette.primary.main,
-    '&:hover': {
-      backgroundColor: 'transparent',
-    },
-  },
-  divider: {
-    backgroundColor: theme.palette.info.main,
-    width: '85%',
-    margin: '0 auto',
-    marginBottom: theme.spacing(8),
-    marginTop: theme.spacing(4),
-  },
-}));
+import { useMobileMenuStyles } from './MobileMenu.styles';
 
 type Props = {
   menuItems?: HeaderMenuItem[];
@@ -113,6 +20,7 @@ type Props = {
   pathname: string;
   isAuthenticated?: boolean;
   linkComponent: React.FC<NavLinkProps>;
+  extras?: JSX.Element;
   onSignup?: () => void;
   onLogin?: () => void;
   onLogout?: () => void;
@@ -121,10 +29,12 @@ type Props = {
 const MobileMenu: React.FC<Props> = ({
   menuItems,
   pathname,
+  isRegistry,
+  extras,
   linkComponent: Link,
   ...props
 }) => {
-  const styles = useStyles();
+  const styles = useMobileMenuStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
@@ -138,12 +48,16 @@ const MobileMenu: React.FC<Props> = ({
 
   return (
     <div className={styles.root}>
-      <HamburgerIcon
-        className={clsx(styles.hamburger, styles.icon)}
-        onClick={handleOpen}
-        width="29px"
-        height="22px"
-      />
+      <Center>
+        {isRegistry && extras}
+        <HamburgerIcon
+          className={clsx(styles.hamburger, styles.icon)}
+          onClick={handleOpen}
+          width="29px"
+          height="22px"
+          sx={{ ml: 4 }}
+        />
+      </Center>
       <Drawer
         elevation={0}
         className={styles.drawer}
@@ -214,27 +128,6 @@ const MobileMenu: React.FC<Props> = ({
                 )}
               </MenuItem>
             ))}
-            {/* {props.isRegistry && (
-              <>
-                <Divider light className={styles.divider} />
-                <li className={styles.loginBtns}>
-                  {props.isAuthenticated ? (
-                    <Button variant="text" className={styles.loginBtn} onClick={props.onLogout}>
-                      Logout
-                    </Button>
-                  ) : (
-                    <>
-                      <Button variant="text" className={styles.loginBtn} onClick={props.onLogin}>
-                        Login
-                      </Button>
-                      <ContainedButton size="small" className={styles.signUpBtn} onClick={props.onSignup}>
-                        Sign Up
-                      </ContainedButton>
-                    </>
-                  )}
-                </li>
-              </>
-            )} */}
           </div>
         </MenuList>
       </Drawer>

@@ -6,7 +6,7 @@ const isAneka = explorer?.includes('aneka');
 export const getAccountUrl = (address: string | undefined): string => {
   if (!address) return '';
   if (address.startsWith('regen')) {
-    return `/ecocredits/accounts/${address}`;
+    return `/ecocredits/accounts/${address}/portfolio`;
   }
   if (isAneka) {
     return `${explorer}/accounts/${address}`;

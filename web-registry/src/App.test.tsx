@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
+import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { MockedProvider } from '@apollo/client/testing';
 import { useAuth0 } from '@auth0/auth0-react';
 import mediaQuery from 'css-mediaquery';
@@ -7,7 +8,7 @@ import { useAnalytics } from 'use-analytics';
 
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 
-import App from './App';
+import { routes } from './routes';
 
 import './jest.mock';
 
@@ -58,11 +59,14 @@ describe('App', () => {
     });
 
     it('renders without crashing', () => {
+      const router = createMemoryRouter(routes);
       const div = document.createElement('div');
       ReactDOM.render(
         <MockedProvider mocks={[]}>
           <ThemeProvider>
-            <App />
+            <Suspense fallback={null}>
+              <RouterProvider router={router} />
+            </Suspense>
           </ThemeProvider>
         </MockedProvider>,
         div,
@@ -79,11 +83,14 @@ describe('App', () => {
     });
 
     it('renders without crashing', () => {
+      const router = createMemoryRouter(routes);
       const div = document.createElement('div');
       ReactDOM.render(
         <MockedProvider mocks={[]}>
           <ThemeProvider>
-            <App />
+            <Suspense fallback={null}>
+              <RouterProvider router={router} />
+            </Suspense>
           </ThemeProvider>
           ,
         </MockedProvider>,

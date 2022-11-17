@@ -1,5 +1,5 @@
 import Grid from '@mui/material/Grid';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import ContainedButton from '../buttons/ContainedButton';
 
@@ -16,7 +16,7 @@ interface SubmitProps {
   label?: string;
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   submitButton: {
     textAlign: 'right',
     maxWidth: 'max-content',
@@ -67,7 +67,7 @@ export default function Submit({
   submitForm,
   label = 'submit',
 }: SubmitProps): JSX.Element {
-  const classes = useStyles();
+  const { classes } = useStyles();
   return (
     <Grid
       sx={{ pt: 12.5 }}

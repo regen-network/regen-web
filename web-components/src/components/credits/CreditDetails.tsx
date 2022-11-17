@@ -1,7 +1,6 @@
-import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
-import { Box } from '@mui/material';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import { Box, useTheme } from '@mui/material';
+import ReactHtmlParser from 'html-react-parser';
+import { makeStyles } from 'tss-react/mui';
 
 import CreditsIcon from '../icons/CreditsIcon';
 import { Body, Title } from '../typography';
@@ -24,16 +23,14 @@ interface StyleProps {
   background?: string;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  root: props => ({
-    backgroundImage: props.background
-      ? `url("${props.background}")`
-      : 'transparent',
+const useStyles = makeStyles<StyleProps>()((theme, { background }) => ({
+  root: {
+    backgroundImage: background ? `url("${background}")` : 'transparent',
     backgroundSize: 'cover',
-    border: props.background
+    border: background
       ? `1px solid ${theme.palette.secondary.contrastText}`
       : 'none',
-    borderRadius: props.background ? '5px' : 'none',
+    borderRadius: background ? '5px' : 'none',
     position: 'relative',
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(14.5)} ${theme.spacing(8)} ${theme.spacing(
@@ -45,7 +42,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         11.5,
       )}`,
     },
-  }),
+  },
   icon: {
     marginRight: theme.spacing(2.5),
     [theme.breakpoints.down('sm')]: {
@@ -103,7 +100,7 @@ export default function CreditInfo({
   background,
   title,
 }: CreditInfoProps): JSX.Element {
-  const classes = useStyles({ background });
+  const { classes } = useStyles({ background });
   const theme = useTheme();
 
   return (
@@ -132,7 +129,7 @@ export default function CreditInfo({
             {title}
           </Title>
         </div>
-        <div className={classes.activitiesItem}>
+        <div>
           <Box component="ul" sx={{ m: 0, mt: 4.5, paddingInlineStart: 0 }}>
             {creditClass.keyOutcomesActivitiesDesc && (
               <Body

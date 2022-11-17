@@ -1,9 +1,7 @@
 import React from 'react';
-import { MenuList, useMediaQuery } from '@mui/material';
+import { MenuList, useMediaQuery, useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import { useTheme } from '@mui/styles';
-import cx from 'clsx';
 
 import MobileMenu from '../mobile-menu';
 import { HeaderLogoLink } from './components/HeaderLogoLink';
@@ -30,8 +28,8 @@ interface HeaderProps {
   fullWidth?: boolean;
   isAuthenticated?: boolean;
   menuItems?: HeaderMenuItem[];
-  linkComponent?: React.FC<NavLinkProps>;
-  homeLink?: React.FC<{ color: string }>;
+  linkComponent?: React.FC<React.PropsWithChildren<NavLinkProps>>;
+  homeLink?: React.FC<React.PropsWithChildren<{ color: string }>>;
   isRegistry?: boolean;
   extras?: JSX.Element;
   onSignup?: () => void;
@@ -60,7 +58,11 @@ export default function Header({
 }: HeaderProps): JSX.Element {
   const theme = useTheme();
   const isTablet = useMediaQuery(theme.breakpoints.down('md'));
-  const styles = useHeaderStyles({ color, borderBottom, fullWidth });
+  const { classes: styles, cx } = useHeaderStyles({
+    color,
+    borderBottom,
+    fullWidth,
+  });
 
   // if we're in the registry, where we have REACT_APP prefixed
   // keys in the env vars, do not show the banner. in other words,

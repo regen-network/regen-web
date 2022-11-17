@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Link, useTheme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import clsx from 'clsx';
-
-import type { Theme } from 'src/theme/muiTheme';
+import { makeStyles } from 'tss-react/mui';
 
 import copyTextToClipboard from '../../utils/copy';
 import { parseText } from '../../utils/textParser';
@@ -40,18 +37,18 @@ interface ClassNames {
   icon?: string;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  root: props => ({
-    borderBottom: !props.last ? `1px solid ${theme.palette.grey[100]}` : 'none',
+const useStyles = makeStyles<StyleProps>()((theme, { first, last }) => ({
+  root: {
+    borderBottom: !last ? `1px solid ${theme.palette.grey[100]}` : 'none',
     [theme.breakpoints.up('sm')]: {
-      paddingTop: props.first ? theme.spacing(7) : theme.spacing(12.5),
+      paddingTop: first ? theme.spacing(7) : theme.spacing(12.5),
       paddingBottom: theme.spacing(12.5),
     },
     [theme.breakpoints.down('sm')]: {
-      paddingTop: props.first ? theme.spacing(7) : theme.spacing(10.75),
+      paddingTop: first ? theme.spacing(7) : theme.spacing(10.75),
       paddingBottom: theme.spacing(10.75),
     },
-  }),
+  },
   icon: {
     cursor: 'pointer',
     [theme.breakpoints.up('sm')]: {
@@ -108,7 +105,7 @@ const Question = ({
   const [open, setOpen] = useState(id === questionId);
   const [copied, setCopied] = useState(false);
 
-  const classes = useStyles({ first, last });
+  const { classes, cx } = useStyles({ first, last });
   const theme = useTheme();
 
   useEffect(() => {
@@ -120,7 +117,7 @@ const Question = ({
   };
 
   return (
-    <div className={clsx(classes.root, classNames?.root)} id={id}>
+    <div className={cx(classes.root, classNames?.root)} id={id}>
       <Box className={classNames?.container} sx={{ px: [5.25, 7.75] }}>
         <Title
           variant="h5"
@@ -136,11 +133,11 @@ const Question = ({
           {question}
           {open ? (
             <BreadcrumbIcon
-              className={clsx(classes.icon, classNames?.icon)}
+              className={cx(classes.icon, classNames?.icon)}
               direction="up"
             />
           ) : (
-            <BreadcrumbIcon className={clsx(classes.icon, classNames?.icon)} />
+            <BreadcrumbIcon className={cx(classes.icon, classNames?.icon)} />
           )}
         </Title>
         <Body
@@ -163,7 +160,7 @@ const Question = ({
               maxHeight: theme => [theme.spacing(18), theme.spacing(21.75)],
             },
           ]}
-          className={clsx(!open && classNames?.collapsed)}
+          className={cx(!open && classNames?.collapsed)}
         >
           {parseText(answer)}
           {open ? (
@@ -194,7 +191,7 @@ const Question = ({
               </Link>
             )
           ) : (
-            <div className={clsx(classes.gradient, classNames?.gradient)} />
+            <div className={cx(classes.gradient, classNames?.gradient)} />
           )}
         </Body>
       </Box>

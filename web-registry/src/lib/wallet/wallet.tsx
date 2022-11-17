@@ -40,7 +40,9 @@ const WalletContext = createContext<WalletContextType>({
   loaded: false,
 });
 
-export const WalletProvider: React.FC = ({ children }) => {
+export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
+  children,
+}) => {
   // Because initiating the wallet is asyncronous, when users enter the app, the wallet is seen as not loaded.
   // This is being used so that we display the "connect wallet" or the connected wallet address
   // only once we know what's the actual wallet connection status.

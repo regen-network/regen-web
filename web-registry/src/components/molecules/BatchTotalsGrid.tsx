@@ -5,10 +5,12 @@ import { LabeledNumber } from 'web-components/lib/components/text-layouts';
 
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 
-export const BatchTotalsGrid: React.FC<{
-  batch: BatchInfoWithSupply;
-  sx?: SxProps<Theme>;
-}> = ({ batch, sx }) => (
+export const BatchTotalsGrid: React.FC<
+  React.PropsWithChildren<{
+    batch: BatchInfoWithSupply;
+    sx?: SxProps<Theme>;
+  }>
+> = ({ batch, sx }) => (
   <Grid
     container
     rowGap={6}
@@ -35,7 +37,7 @@ export const BatchTotalsGrid: React.FC<{
   </Grid>
 );
 
-const GridItem: React.FC = ({ children }) => (
+const GridItem: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => (
   <Grid item xs={12} sm={5}>
     {children}
   </Grid>

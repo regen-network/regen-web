@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@mui/styles';
 import { Field, Form, Formik } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 
 import Card from 'web-components/lib/components/cards/Card';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -77,7 +77,7 @@ type exampleFieldName =
   | 'regen:landStewardStoryTitle'
   | 'regen:projectQuote';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   storyCard: {
     paddingBottom: 0,
     marginBottom: theme.spacing(13),
@@ -132,11 +132,13 @@ const errorMsgs: Errors = {
   'regen:projectQuote': quoteError,
 };
 
-const ModalContent: React.FC<{
-  exampleProjectUrl: string;
-  fieldName: exampleFieldName;
-}> = ({ exampleProjectUrl, fieldName }) => {
-  const styles = useStyles();
+const ModalContent: React.FC<
+  React.PropsWithChildren<{
+    exampleProjectUrl: string;
+    fieldName: exampleFieldName;
+  }>
+> = ({ exampleProjectUrl, fieldName }) => {
+  const { classes: styles } = useStyles();
 
   return (
     <div className={styles.modalContent}>
@@ -156,8 +158,11 @@ const ModalContent: React.FC<{
   );
 };
 
-const StoryForm: React.FC<StoryFormProps> = ({ initialValues, ...props }) => {
-  const styles = useStyles();
+const StoryForm: React.FC<React.PropsWithChildren<StoryFormProps>> = ({
+  initialValues,
+  ...props
+}) => {
+  const { classes: styles } = useStyles();
   const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {

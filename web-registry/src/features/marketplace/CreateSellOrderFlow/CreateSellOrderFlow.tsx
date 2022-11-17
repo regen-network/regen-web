@@ -73,7 +73,7 @@ export const CreateSellOrderFlow = ({
   };
   const onTxSuccessButtonClick = (): void => {
     handleTxModalClose();
-    navigate('/ecocredits/dashboard');
+    navigate('/ecocredits/portfolio');
   };
 
   const onTxBroadcast = (): void => setIsCreateSellOrderOpen(false);

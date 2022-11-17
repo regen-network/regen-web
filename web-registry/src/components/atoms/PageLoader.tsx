@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, CircularProgress } from '@mui/material';
 
-const PageLoader = (): JSX.Element => {
+const PageLoader: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <Box
       sx={{

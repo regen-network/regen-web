@@ -17,7 +17,10 @@ interface FormProps extends CertificationProps {
   onClose: RegenModalProps['onClose'];
 }
 
-const CertificationForm: React.FC<FormProps> = ({ onClose, onSubmit }) => {
+const CertificationForm: React.FC<React.PropsWithChildren<FormProps>> = ({
+  onClose,
+  onSubmit,
+}) => {
   const initialValues: NameUrl = {
     'schema:name': '',
     'schema:url': {

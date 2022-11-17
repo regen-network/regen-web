@@ -1,9 +1,8 @@
-import React from 'react';
+import { useTheme } from '@mui/material';
 import SvgIcon from '@mui/material/SvgIcon';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
-import { directionRotate, StyleProps } from './ArrowDownIcon';
+import { directionRotate } from './ArrowDownIcon';
 
 interface Props {
   color?: string;
@@ -12,16 +11,20 @@ interface Props {
   onClick?: () => void;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  icon: props => ({
-    transform: `rotate(${props.rotate})`,
+type UseStylesParams = {
+  rotate: string;
+};
+
+const useStyles = makeStyles<UseStylesParams>()((theme, { rotate }) => ({
+  icon: {
+    transform: `rotate(${rotate})`,
     width: '11px',
     height: '8px',
     position: 'relative',
     '&:hover': {
       borderBottom: 'none',
     },
-  }),
+  },
 }));
 
 export default function DropdownIcon({
@@ -37,12 +40,12 @@ export default function DropdownIcon({
   }
 
   const rotate: string = directionRotate[direction];
-  const classes = useStyles({ rotate });
+  const { classes, cx } = useStyles({ rotate });
   const theme = useTheme();
 
   return (
     <SvgIcon
-      className={clsx(className, classes.icon)}
+      className={cx(className, classes.icon)}
       width="11"
       height="8"
       viewBox="0 0 11 8"

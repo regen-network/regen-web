@@ -1,7 +1,8 @@
 import React from 'react';
 import { Box, useTheme } from '@mui/material';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
 import { Field, Form, Formik, FormikErrors } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 
 import { UrlType } from '../../utils/schemaURL';
 import { Button } from '../buttons/Button';
@@ -139,7 +140,7 @@ function ProfileModal({
   );
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   card: {
     marginTop: 0,
   },
@@ -150,7 +151,7 @@ const ProfileOnBoardingCard = ({
 }: {
   children?: React.ReactNode;
 }): JSX.Element => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
 
   return <OnBoardingCard className={styles.card}>{children}</OnBoardingCard>;
 };

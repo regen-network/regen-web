@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { styled, useTheme } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -9,6 +9,7 @@ import {
   HeaderMenuHover,
   HeaderMenuHoverBase,
 } from './HeaderMenuHover/HeaderMenuHover';
+import { getUserMenuItems } from './UserMenuItem.config';
 
 interface UserMenuItemProps extends HeaderMenuHoverBase {
   address: string;
@@ -23,7 +24,7 @@ const Separator = styled('hr')(({ theme }) => ({
   marginBottom: theme.spacing(6),
 }));
 
-const UserMenuItem: React.FC<UserMenuItemProps> = ({
+const UserMenuItem: React.FC<React.PropsWithChildren<UserMenuItemProps>> = ({
   address,
   avatar,
   disconnect,
@@ -31,6 +32,10 @@ const UserMenuItem: React.FC<UserMenuItemProps> = ({
   linkComponent,
 }) => {
   const theme = useTheme();
+  const userMenuItems = useMemo(
+    () => getUserMenuItems({ linkComponent, pathname, theme }),
+    [linkComponent, pathname, theme],
+  );
   return (
     <HeaderMenuHover
       pathname={pathname}
@@ -55,20 +60,7 @@ const UserMenuItem: React.FC<UserMenuItemProps> = ({
             {address}
           </Box>
         ),
-        dropdownItems: [
-          {
-            pathname,
-            linkComponent,
-            title: 'My Portfolio',
-            href: '/ecocredits/dashboard',
-            icon: (
-              <CreditsIcon
-                sx={{ height: 18, width: 20 }}
-                color={theme.palette.secondary.main}
-              />
-            ),
-          },
-        ],
+        dropdownItems: userMenuItems,
         extras: (
           <Box sx={{ mx: -3.5 }}>
             <Separator />

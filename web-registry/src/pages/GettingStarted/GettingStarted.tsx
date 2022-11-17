@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { Step, StepCard } from 'web-components/lib/components/cards/StepCard';
 import { QuestionItem } from 'web-components/lib/components/faq/Question';
@@ -14,7 +14,7 @@ import TrustIcon from 'web-components/lib/components/icons/TrustIcon';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   content: {
     paddingTop: theme.spacing(12),
     [theme.breakpoints.down('sm')]: {
@@ -158,8 +158,8 @@ const steps: Step[] = [
   },
 ];
 
-const GettingStarted: React.FC = () => {
-  const classes = useStyles();
+const GettingStarted: React.FC<React.PropsWithChildren<unknown>> = () => {
+  const { classes } = useStyles();
   const [stepsMap, setStepsMap] = useState<any>({});
 
   // TODO: maybe just organize JSON this way (indexed by stepNumber)?

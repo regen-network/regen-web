@@ -6,7 +6,7 @@ import { LabeledNumber } from 'web-components/lib/components/text-layouts';
 
 import type { BatchTotalsForProject } from '../../types/ledger/ecocredit';
 
-const GridItem: React.FC = ({ children }) => (
+const GridItem: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => (
   <Grid item xs={5} sm={3}>
     {children}
   </Grid>

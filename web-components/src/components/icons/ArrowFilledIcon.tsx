@@ -1,7 +1,5 @@
-import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 interface ArrowFilledIconProps {
   color: string;
@@ -27,11 +25,15 @@ export const directionRotate: DirectionRotate = {
   next: '-90deg',
 };
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  icon: props => ({
-    transform: `rotate(${props.rotate})`,
+type UseStylesParams = {
+  rotate: string;
+};
+
+const useStyles = makeStyles<UseStylesParams>()((theme, { rotate }) => ({
+  icon: {
+    transform: `rotate(${rotate})`,
     height: theme.spacing(7),
-  }),
+  },
 }));
 
 export default function ArrowFilledIcon({
@@ -40,11 +42,11 @@ export default function ArrowFilledIcon({
   direction = 'down',
 }: ArrowFilledIconProps): JSX.Element {
   const rotate: string = directionRotate[direction];
-  const classes = useStyles({ rotate });
+  const { classes, cx } = useStyles({ rotate });
 
   return (
     <SvgIcon
-      className={clsx(className, classes.icon)}
+      className={cx(className, classes.icon)}
       viewBox="0 0 12 28"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

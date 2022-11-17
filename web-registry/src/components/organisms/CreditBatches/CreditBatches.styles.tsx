@@ -1,8 +1,8 @@
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-export const useCreditBatchesStyles = makeStyles((theme: Theme) => ({
+export const useCreditBatchesStyles = makeStyles()((theme: Theme) => ({
   section: {
     [theme.breakpoints.up('md')]: {
       paddingBottom: theme.spacing(22.25),

@@ -8,7 +8,11 @@ type Props = {
   sx?: SxProps<Theme>;
 };
 
-const OnBoardingCard: React.FC<Props> = ({ children, className, sx = [] }) => {
+const OnBoardingCard: React.FC<React.PropsWithChildren<Props>> = ({
+  children,
+  className,
+  sx = [],
+}) => {
   return (
     <Card
       borderColor="info.light"

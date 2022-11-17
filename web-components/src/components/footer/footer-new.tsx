@@ -1,7 +1,14 @@
 import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
-import { Box, Grid, Link, List, ListItem, SxProps } from '@mui/material';
-import { useTheme } from '@mui/styles';
+import {
+  Box,
+  Grid,
+  Link,
+  List,
+  ListItem,
+  SxProps,
+  useTheme,
+} from '@mui/material';
+import ReactHtmlParser from 'html-react-parser';
 
 import { HeaderLogoLink } from '../header/components/HeaderLogoLink';
 import CoinGeckoIcon from '../icons/CoinGeckoIcon';
@@ -26,10 +33,10 @@ interface FooterItemItem extends LinkItem {
 export interface FooterItemProps {
   title: string;
   items: FooterItemItem[];
-  linkComponent?: React.FC<{ href: string }>;
+  linkComponent?: React.FC<React.PropsWithChildren<{ href: string }>>;
 }
 
-const FooterItem: React.FC<FooterItemProps> = ({
+const FooterItem: React.FC<React.PropsWithChildren<FooterItemProps>> = ({
   title,
   items,
   linkComponent: LinkComponent = Link,
@@ -62,18 +69,20 @@ const FooterItem: React.FC<FooterItemProps> = ({
   );
 };
 
-const Footer: React.FC<{
-  footerItems: [
-    FooterItemProps,
-    FooterItemProps,
-    FooterItemProps,
-    FooterItemProps,
-  ];
-  termsUrl: string;
-  privacyUrl: string;
-  iconLink?: React.FC<{ color: string }>;
-  linkComponent?: React.FC<{ href: string }>;
-}> = ({
+const Footer: React.FC<
+  React.PropsWithChildren<{
+    footerItems: [
+      FooterItemProps,
+      FooterItemProps,
+      FooterItemProps,
+      FooterItemProps,
+    ];
+    termsUrl: string;
+    privacyUrl: string;
+    iconLink?: React.FC<React.PropsWithChildren<{ color: string }>>;
+    linkComponent?: React.FC<React.PropsWithChildren<{ href: string }>>;
+  }>
+> = ({
   footerItems,
   termsUrl,
   privacyUrl,

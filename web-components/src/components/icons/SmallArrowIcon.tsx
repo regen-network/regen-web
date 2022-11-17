@@ -1,10 +1,9 @@
 import React from 'react';
 import { SxProps, Theme } from '@mui/material';
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
-import { makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
-import { Direction, DirectionRotate, StyleProps } from './ArrowDownIcon';
+import { Direction, DirectionRotate } from './ArrowDownIcon';
 
 interface ArrowDownIconProps {
   className?: string;
@@ -22,10 +21,14 @@ export const directionRotate: DirectionRotate = {
   upRight: '-45deg',
 };
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  icon: props => ({
-    transform: `rotate(${props.rotate})`,
-  }),
+export interface StyleProps {
+  rotate: string;
+}
+
+const useStyles = makeStyles<StyleProps>()((theme, { rotate }) => ({
+  icon: {
+    transform: `rotate(${rotate})`,
+  },
 }));
 
 export default function ArrowDownIcon({
@@ -35,11 +38,11 @@ export default function ArrowDownIcon({
   sx,
 }: ArrowDownIconProps): JSX.Element {
   const rotate: string = directionRotate[direction];
-  const classes = useStyles({ rotate });
+  const { classes, cx } = useStyles({ rotate });
   return (
     <SvgIcon
       fontSize={fontSize}
-      className={clsx(className, classes.icon)}
+      className={cx(className, classes.icon)}
       sx={sx}
       width="13"
       height="9"

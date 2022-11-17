@@ -18,7 +18,6 @@ export * from './OverviewCards';
 export * from './PlanStepper';
 export * from './PracticesOutcomesSection';
 export * from './ProjectBatchTotals';
-export * from './ProjectMetadata/ProjectMetadata.CFC';
 export * from './ProjectMetadata/ProjectMetadata';
 export * from './ProjectPageFooter';
 export * from './ReviewProcessInfo';

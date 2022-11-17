@@ -9,7 +9,6 @@ import {
   ProjectByOnChainIdQuery,
 } from '../generated/graphql';
 import {
-  ProjectMetadataLD,
   ProjectMetadataLDUnion,
   ProjectStakeholder,
 } from '../generated/json-ld/index';

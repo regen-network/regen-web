@@ -60,6 +60,7 @@ import type {
   BatchInfoWithBalance,
   BatchInfoWithSupply,
   BatchTotalsForProject,
+  BridgedEcocredits,
 } from '../../types/ledger/ecocredit';
 import { expLedger, ledgerRESTUri } from '../ledger';
 import { ECOCREDIT_MESSAGE_TYPES, messageActionEquals } from './constants';
@@ -222,7 +223,7 @@ export const getEcocreditTxs = async (): Promise<TxResponse[]> => {
 export const getBridgedEcocreditsForAccount = async (
   addr?: string,
   sanityCreditClassData?: AllCreditClassQuery,
-): Promise<any> => {
+): Promise<(BridgedEcocredits | undefined)[] | undefined> => {
   if (addr) {
     // Since bridged ecocredits are canceled on Regen Ledger,
     // the only way to get them is to fetch txs by event
@@ -235,7 +236,7 @@ export const getBridgedEcocreditsForAccount = async (
     });
     return (
       await Promise.all(
-        res?.txs.map(async (tx, i) => {
+        res.txs.map(async (tx, i) => {
           // Get the tx status using the bridge service api
           const { status } = await getBridgeTxStatus(res.txResponses[i].txhash);
           if (tx.body) {
@@ -289,6 +290,7 @@ export const getBridgedEcocreditsForAccount = async (
       )
     ).flat(2);
   }
+  return;
 };
 
 type GetBatchesWithSupplyParams = {

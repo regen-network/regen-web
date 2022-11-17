@@ -59,8 +59,8 @@ describe('App', () => {
     });
 
     it('renders without crashing', () => {
-      const div = document.createElement('div');
       const router = createMemoryRouter(routes);
+      const div = document.createElement('div');
       ReactDOM.render(
         <MockedProvider mocks={[]}>
           <ThemeProvider>
@@ -83,8 +83,8 @@ describe('App', () => {
     });
 
     it('renders without crashing', () => {
-      const div = document.createElement('div');
       const router = createMemoryRouter(routes);
+      const div = document.createElement('div');
       ReactDOM.render(
         <MockedProvider mocks={[]}>
           <ThemeProvider>

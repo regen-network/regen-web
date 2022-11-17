@@ -1,5 +1,9 @@
 import { lazy } from 'react';
-import { createRoutesFromElements, Route } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+} from 'react-router-dom';
 
 import MyBridge from 'pages/Dashboard/MyBridge';
 import MyCreditBatches from 'pages/Dashboard/MyCreditBatches';
@@ -67,7 +71,7 @@ const CreateBatch = lazy(() => import('./pages/CreateBatch'));
 const Storefront = lazy(() => import('./pages/Marketplace/Storefront'));
 
 export const routes = createRoutesFromElements(
-  <Route element={<RegistryLayout />}>
+  <Route element={RegistryLayout}>
     <Route path="/" element={<Home />} />
     <Route path="verify-email" element={<VerifyEmail />} />
     <Route path="add" element={<Additionality />} />
@@ -241,3 +245,7 @@ export const routes = createRoutesFromElements(
     <Route path="*" element={<NotFoundPage />} />
   </Route>,
 );
+
+export const router = createBrowserRouter(routes, {
+  basename: process.env.PUBLIC_URL,
+});

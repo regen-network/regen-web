@@ -31261,9 +31261,9 @@ weak-lru-cache@^1.2.2:
   integrity sha512-DEAoo25RfSYMuTGc9vPJzZcZullwIqRDSI9LOy+fkCJPi6hykCnfKaXTuPBDuXAUcqHXyOgFtHNp/kB2FjYHbw==
 
 web-components@0.0.0:
-  version "0.1.11"
-  resolved "https://registry.yarnpkg.com/web-components/-/web-components-0.1.11.tgz#b8fe888c3941ad778db945cf09221577183598d6"
-  integrity sha512-RcSzg+hXkYIdmpI8ciSDXTeduALeT53Gi2rjNoV9oVSJizh9u/6WYUBbfCjFRikQjXu5IFY0TRGvCKVB8H/uhw==
+  version "0.1.12"
+  resolved "https://registry.yarnpkg.com/web-components/-/web-components-0.1.12.tgz#1974a8c741887ee70dbdb6cb47caac89a0676303"
+  integrity sha512-F7wkRvUKrtWjDKkDv2W815/diC/jnRIm2T8T8lTG6vPReeVJPsiA62zic0WnS74wuk4uX0sgOZhQGRxSTrsPXw==
   dependencies:
     aws-sdk "^2.2.39"
     axios "^0.9.1"

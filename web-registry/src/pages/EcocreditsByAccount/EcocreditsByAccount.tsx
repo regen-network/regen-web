@@ -34,6 +34,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
       {
         label: 'Bridge',
         icon: <BridgeIcon />,
+<<<<<<< HEAD
         content: (
           <LazyLoad>
             <Flex sx={{ pt: 10, pb: [21.25, 28.28] }}>
@@ -41,6 +42,10 @@ export const EcocreditsByAccount = (): JSX.Element => {
             </Flex>
           </LazyLoad>
         ),
+=======
+        href: `/ecocredits/accounts/${accountAddress}/bridge`,
+        hidden: process.env.REACT_APP_LEDGER_CHAIN_ID === 'regen-1', // TODO: Hides in PROD - remove when Bridge is ready
+>>>>>>> b8e4f949 (chore: temporarily hide Bridge tab in account view (#1572))
       },
     ],
     [accountAddress, theme.palette.secondary.main],

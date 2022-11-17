@@ -22,14 +22,9 @@ import Section from 'web-components/lib/components/section';
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
-import {
-  CFCProjectMetadataLD,
-  ProjectMetadataLDUnion,
-  VCSProjectMetadataLD,
-} from 'generated/json-ld';
+import { ProjectMetadataLDUnion } from 'generated/json-ld';
 import { UseStateSetter } from 'types/react/use-state';
 
-import { ProjectMetadataCFC } from 'components/molecules/ProjectMetadata/ProjectMetadata.CFC';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import {
@@ -45,7 +40,7 @@ import {
   BatchTotalsForProject,
 } from '../../../types/ledger/ecocredit';
 import { ProjectTopLink } from '../../atoms';
-import { ProjectBatchTotals, ProjectMetadataVCS } from '../../molecules';
+import { ProjectBatchTotals, ProjectMetadata } from '../../molecules';
 import { CreditBatches } from '../CreditBatches/CreditBatches';
 import {
   ProjectTopSectionQuoteMark,
@@ -208,10 +203,7 @@ function ProjectTopSection({
               sx={{ mt: [2, 4], py: [2, 6] }}
             />
           </Link>
-          <ProjectMetadataVCS
-            metadata={metadata as VCSProjectMetadataLD}
-            projectId={projectId}
-          />
+          <ProjectMetadata metadata={metadata} projectId={projectId} />
           <LazyLoad offset={50}>
             {videoURL && (
               <Card className={classes.media}>

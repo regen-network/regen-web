@@ -14,33 +14,37 @@ export interface MetadataProps {
   projectId?: string;
 }
 
-const ProjectMetadataVCS: React.FC<React.PropsWithChildren<MetadataProps>> = ({
+const ProjectMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
   metadata,
   projectId,
 }) => {
   const theme = useTheme();
   const [expanded, setExpanded] = useState(false);
-  const vcsProjectId = metadata?.['regen:vcsProjectId'];
-  const cfcProjectId = metadata?.['regen:cfcProjectId'];
 
   if (!metadata || !projectId) {
     return null;
   }
 
+  const vcsProjectId = metadata?.['regen:vcsProjectId'];
+  const cfcProjectId = metadata?.['regen:cfcProjectId'];
+  const toucanProjectTokenId = metadata?.['regen:toucanProjectTokenId'];
   const startDate = metadata?.['regen:projectStartDate']?.['@value'];
   const endDate = metadata?.['regen:projectEndDate']?.['@value'];
   const methodology = metadata?.['regen:vcsMethodology'];
   const approvedMethodologies = metadata?.['regen:approvedMethodologies'];
   const methodologyCount = approvedMethodologies?.length;
-  const toucanProjectTokenId = metadata?.['regen:toucanProjectTokenId'];
 
+  const offsetGenerationMethod =
+    metadata?.['regen:offsetGenerationMethod'] ||
+    metadata?.['http://regen.network/offsetGenerationMethod'];
   const offsetProtocol = metadata?.['regen:offsetProtocol'];
   const projectDesignDocument = metadata?.['regen:projectDesignDocument'];
   const projectActivity = metadata?.['regen:projectActivity'];
+  const projectType = metadata?.['regen:projectType'];
 
   return (
     <Box sx={{ pt: 8 }}>
-      <Title variant="h5">Additional Metadata</Title>
+      <Title variant="h5">Additional Info</Title>
       <Collapse collapsedSize={theme.spacing(24)} in={expanded}>
         <Box
           sx={{
@@ -98,32 +102,29 @@ const ProjectMetadataVCS: React.FC<React.PropsWithChildren<MetadataProps>> = ({
               }
             />
           )}
-          <MetaDetail
-            label="offset generation method"
-            data={
-              metadata?.['regen:offsetGenerationMethod'] ||
-              metadata?.['http://regen.network/offsetGenerationMethod']
-            }
-          />
-          {metadata?.['regen:projectActivity']?.['schema:name'] && (
+          {offsetGenerationMethod && (
+            <MetaDetail
+              label="offset generation method"
+              data={offsetGenerationMethod}
+            />
+          )}
+          {projectActivity?.['schema:name'] && (
             <MetaDetail
               label="project activity"
               data={
                 <ArrowLink
-                  href={
-                    metadata?.['regen:projectActivity']?.['schema:url']?.[
-                      '@value'
-                    ] || ''
-                  }
-                  label={metadata?.['regen:projectActivity']?.['schema:name']}
+                  href={projectActivity?.['schema:url']?.['@value'] || ''}
+                  label={projectActivity?.['schema:name']}
                 />
               }
             />
           )}
-          <MetaDetail
-            label="vcs project type" //TODO vcs/non
-            data={metadata?.['regen:projectType']}
-          />
+          {projectType && (
+            <MetaDetail
+              label={`${vcsProjectId ? 'vcs ' : ''}project type`}
+              data={metadata?.['regen:projectType']}
+            />
+          )}
 
           {projectDesignDocument && (
             <MetaDetail
@@ -185,4 +186,4 @@ const ProjectMetadataVCS: React.FC<React.PropsWithChildren<MetadataProps>> = ({
   );
 };
 
-export { ProjectMetadataVCS };
+export { ProjectMetadata };

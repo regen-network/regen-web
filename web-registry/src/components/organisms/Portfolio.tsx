@@ -38,8 +38,8 @@ export const Portfolio: React.FC<PortfolioProps> = ({
   onTableChange,
 }) => {
   return (
-    <Box sx={{ pb: { xs: 21.25, sm: 28.28 } }}>
-      <Box sx={{ pt: 12.75 }}>
+    <Box>
+      <Box>
         <Label sx={sxs.title}>ecocredits</Label>
         <EcocreditsTable
           credits={credits}

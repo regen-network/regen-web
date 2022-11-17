@@ -8,22 +8,19 @@ import { CreditBatchLightIcon } from 'web-components/lib/components/icons/Credit
 import PlusIcon from 'web-components/lib/components/icons/PlusIcon';
 import { Label } from 'web-components/lib/components/typography';
 
+import { useWallet } from 'lib/wallet/wallet';
+
 import WithLoader from 'components/atoms/WithLoader';
 import { CreditBatches } from 'components/organisms';
 import { usePaginatedBatchesByIssuer } from 'hooks/batches/usePaginatedBatchesByIssuer';
 
 import { NO_CREDIT_BATCHES_MESSAGE } from './MyCreditBatches.constants';
 
-type MyCreditBatchesProps = {
-  address?: string;
-};
-
-export const MyCreditBatches = ({
-  address,
-}: MyCreditBatchesProps): JSX.Element => {
+export const MyCreditBatches = (): JSX.Element => {
   const theme = useTheme();
+  const { wallet } = useWallet();
   const { batchesWithSupply, setPaginationParams } =
-    usePaginatedBatchesByIssuer({ address });
+    usePaginatedBatchesByIssuer({ address: wallet?.address });
   const hasNoBatches = batchesWithSupply && batchesWithSupply?.length === 0;
 
   return (

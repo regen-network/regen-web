@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
-import LazyLoad from 'react-lazyload';
-import { useParams } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
 
 import { Flex } from 'web-components/lib/components/box';
@@ -10,13 +9,15 @@ import Section from 'web-components/lib/components/section';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 
-import { BridgeTab } from './BridgeTab/BridgeTab';
+import { Link } from 'components/atoms';
+
 import { PortfolioHeader } from './EcocreditsByAccount.Header';
-import { PortfolioTab } from './PortfolioTab/EcocreditsByAccount.PortfolioTab';
+import { ecocreditsByAccountStyles } from './EcocreditsByAccount.styles';
 
 export const EcocreditsByAccount = (): JSX.Element => {
   const { accountAddress } = useParams<{ accountAddress: string }>();
   const theme = useTheme();
+  const location = useLocation();
 
   const tabs: IconTabProps[] = useMemo(
     () => [
@@ -25,25 +26,20 @@ export const EcocreditsByAccount = (): JSX.Element => {
         icon: (
           <CreditsIcon color={theme.palette.secondary.main} fontSize="small" />
         ),
-        content: (
-          <LazyLoad>
-            {<PortfolioTab accountAddress={accountAddress} />}
-          </LazyLoad>
-        ),
+        href: `/ecocredits/accounts/${accountAddress}/portfolio`,
       },
       {
         label: 'Bridge',
         icon: <BridgeIcon />,
-        content: (
-          <LazyLoad>
-            <Flex sx={{ pt: 10, pb: [21.25, 28.28] }}>
-              <BridgeTab />
-            </Flex>
-          </LazyLoad>
-        ),
+        href: `/ecocredits/accounts/${accountAddress}/bridge`,
       },
     ],
     [accountAddress, theme.palette.secondary.main],
+  );
+
+  const activeTab = Math.max(
+    tabs.findIndex(tab => location.pathname.includes(tab.href ?? '')),
+    0,
   );
 
   return (
@@ -58,8 +54,15 @@ export const EcocreditsByAccount = (): JSX.Element => {
         <IconTabs
           aria-label="public profile tabs"
           tabs={tabs}
+          linkComponent={Link}
+          activeTab={activeTab}
           mobileFullWidth
         />
+        <Flex sx={{ ...ecocreditsByAccountStyles.padding }}>
+          <Box sx={{ width: '100%' }}>
+            <Outlet />
+          </Box>
+        </Flex>
       </Section>
     </Box>
   );

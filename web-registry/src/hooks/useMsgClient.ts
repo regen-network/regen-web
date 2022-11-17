@@ -3,7 +3,7 @@ import { DeliverTxResponse, StdFee } from '@cosmjs/stargate';
 
 import { useLedger } from '../ledger';
 import { assertIsError } from '../lib/error';
-import { Wallet } from '../lib/wallet';
+import { Wallet } from '../lib/wallet/wallet';
 
 interface TxData {
   msgs: any[];

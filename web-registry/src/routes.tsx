@@ -71,7 +71,7 @@ const CreateBatch = lazy(() => import('./pages/CreateBatch'));
 const Storefront = lazy(() => import('./pages/Marketplace/Storefront'));
 
 export const routes = createRoutesFromElements(
-  <Route element={RegistryLayout}>
+  <Route element={<RegistryLayout />}>
     <Route path="/" element={<Home />} />
     <Route path="verify-email" element={<VerifyEmail />} />
     <Route path="add" element={<Additionality />} />

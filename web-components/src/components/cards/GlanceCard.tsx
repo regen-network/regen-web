@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { Image, OptimizeImageProps } from '../image';
 import StaticMap from '../map/StaticMap';
@@ -16,7 +17,7 @@ interface GlanceCardProps extends OptimizeImageProps {
   mapboxToken?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     backgroundColor: theme.palette.primary.main,
     [theme.breakpoints.up('sm')]: {
@@ -45,7 +46,7 @@ export default function GlanceCard({
   isGISFile,
   mapboxToken,
 }: GlanceCardProps): JSX.Element {
-  const classes = useStyles({});
+  const { classes } = useStyles();
 
   return (
     <Card className={classes.root}>

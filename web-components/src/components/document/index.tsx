@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 export interface DocumentInfo {
   name: string;
@@ -7,7 +8,7 @@ export interface DocumentInfo {
   link: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     color: theme.palette.info.dark,
     lineHeight: '150%',
@@ -36,7 +37,7 @@ export default function Document({
   info,
   link,
 }: DocumentInfo): JSX.Element {
-  const classes = useStyles();
+  const { classes } = useStyles();
   return (
     <div className={classes.root}>
       <span>{name} </span>

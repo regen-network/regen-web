@@ -8,7 +8,9 @@ export interface Props {
   onMouseLeave: () => void;
 }
 
-function withHoverColor(BaseComponent: ComponentType<Props>) {
+function withHoverColor(
+  BaseComponent: ComponentType<React.PropsWithChildren<Props>>,
+) {
   return (props: {
     hoverColor?: string;
     color?: string;

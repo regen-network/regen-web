@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableHead from '@mui/material/TableHead';
-import { makeStyles } from '@mui/styles';
 // import TablePagination from '@mui/material/TablePagination';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import { getFormattedDate } from '../../utils/format';
 import ContainedButton from '../buttons/ContainedButton';
@@ -47,7 +46,7 @@ interface HeadCell {
   numeric: boolean;
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   rowClickable: {
     cursor: 'pointer',
   },
@@ -86,7 +85,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 interface EnhancedTableProps {
-  classes: ReturnType<typeof useStyles>;
+  classes: Record<string, string>;
   onRequestSort: (
     event: React.MouseEvent<unknown>,
     property: keyof DocumentRowData,
@@ -142,14 +141,10 @@ function EnhancedTableHead(props: EnhancedTableProps): JSX.Element {
   );
 }
 
-const DocumentationTable: React.FC<DocumentationTableProps> = ({
-  rows,
-  canClickRow = false,
-  onViewOnLedger,
-  txClient,
-  className,
-}) => {
-  const styles = useStyles();
+const DocumentationTable: React.FC<
+  React.PropsWithChildren<DocumentationTableProps>
+> = ({ rows, canClickRow = false, onViewOnLedger, txClient, className }) => {
+  const { classes: styles, cx } = useStyles();
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<keyof DocumentRowData>('name');
 
@@ -204,7 +199,7 @@ const DocumentationTable: React.FC<DocumentationTableProps> = ({
                 <StyledTableRow
                   tabIndex={-1}
                   key={row.name}
-                  className={clsx(canClickRow && styles.rowClickable)}
+                  className={cx(canClickRow && styles.rowClickable)}
                   onClick={() => handleClickNavigate(row.url)}
                 >
                   <StyledTableCell
@@ -234,7 +229,7 @@ const DocumentationTable: React.FC<DocumentationTableProps> = ({
                       align="right"
                     >
                       <ContainedButton
-                        className={clsx(styles.button, styles.ledgerBtn)}
+                        className={cx(styles.button, styles.ledgerBtn)}
                         onClick={() =>
                           onViewOnLedger(
                             row.eventByEventId.creditVintageByEventId,

@@ -1,5 +1,6 @@
 import Tooltip from '@mui/material/Tooltip';
-import { DefaultTheme as Theme, withStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { withStyles } from 'tss-react/mui';
 
 function arrowGenerator(): any {
   return {
@@ -48,7 +49,7 @@ function arrowGenerator(): any {
   };
 }
 
-const CustomTooltip = withStyles((theme: Theme) => ({
+const CustomTooltip = withStyles(Tooltip, (theme: Theme) => ({
   popper: {
     [theme.breakpoints.down('sm')]: {
       width: '90%',
@@ -83,6 +84,6 @@ const CustomTooltip = withStyles((theme: Theme) => ({
     },
   },
   popperArrow: arrowGenerator(),
-}))(Tooltip);
+}));
 
 export default CustomTooltip;

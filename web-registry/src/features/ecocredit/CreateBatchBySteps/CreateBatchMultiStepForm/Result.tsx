@@ -219,7 +219,10 @@ type CardItemListProps = {
   values: LinkItem[];
 };
 
-const CardItemList: React.FC<CardItemListProps> = ({ label, values }) => {
+const CardItemList: React.FC<React.PropsWithChildren<CardItemListProps>> = ({
+  label,
+  values,
+}) => {
   return (
     <Box sx={{ pt: 5 }}>
       <Label size="sm" sx={{ pb: [3, 2.25] }}>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import Modal from 'web-components/lib/components/modal';
@@ -23,7 +22,7 @@ type Props = {
   stepCards?: Maybe<Array<Maybe<StepCardFieldsFragment>>>;
 };
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   stepSection: {
     paddingTop: 0,
   },
@@ -52,7 +51,7 @@ function StepsSection({
   preTitle,
   descriptionRaw,
 }: Props): JSX.Element {
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
   const [modalIframeLink, setModalIframeLink] = useState<string>('');
 
   return (

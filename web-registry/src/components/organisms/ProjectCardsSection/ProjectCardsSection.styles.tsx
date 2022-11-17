@@ -1,6 +1,6 @@
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
-export const useSectionStyles = makeStyles(theme => ({
+export const useSectionStyles = makeStyles()(theme => ({
   section: {
     paddingTop: theme.spacing(21.5),
     paddingBottom: theme.spacing(16.25),

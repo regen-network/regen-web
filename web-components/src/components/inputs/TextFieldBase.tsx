@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import InputAdornment from '@mui/material/InputAdornment';
 import MuiTextField, { BaseTextFieldProps } from '@mui/material/TextField';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import { DefaultStyleProps } from './FieldFormControl';
 import InputLabel from './InputLabel';
@@ -24,15 +23,14 @@ export interface RegenTextFieldProps
   label?: string;
 }
 
-interface StyleProps {
+type UseStylesParams = {
   errors: boolean;
-  optional: boolean;
-  label: boolean;
-}
+  label: ReactNode;
+};
 
-export const useTextFieldStyles = makeStyles<Theme, StyleProps>(
-  (theme: Theme) => ({
-    root: props => ({
+export const useTextFieldStyles = makeStyles<UseStylesParams>()(
+  (theme, { errors, label }) => ({
+    root: {
       '& label': {
         lineHeight: '140%',
         transform: 'scale(1)',
@@ -54,12 +52,12 @@ export const useTextFieldStyles = makeStyles<Theme, StyleProps>(
         },
       },
       '& .MuiInputBase-formControl': {
-        marginTop: props.label ? theme.spacing(2.25) : 0,
+        marginTop: label ? theme.spacing(2.25) : 0,
         [theme.breakpoints.up('sm')]: {
-          marginBottom: props.errors ? theme.spacing(5.25) : 0,
+          marginBottom: errors ? theme.spacing(5.25) : 0,
         },
         [theme.breakpoints.down('sm')]: {
-          marginBottom: props.errors ? theme.spacing(4.75) : 0,
+          marginBottom: errors ? theme.spacing(4.75) : 0,
         },
         '&.Mui-disabled': {
           backgroundColor: theme.palette.info.light,
@@ -68,7 +66,7 @@ export const useTextFieldStyles = makeStyles<Theme, StyleProps>(
       '& .MuiFormHelperText-root': {
         fontWeight: 'bold',
         color: theme.palette.primary.light,
-        position: props.errors ? 'absolute' : 'inherit',
+        position: errors ? 'absolute' : 'inherit',
         bottom: 0,
         [theme.breakpoints.up('sm')]: {
           fontSize: theme.spacing(3.5),
@@ -124,11 +122,11 @@ export const useTextFieldStyles = makeStyles<Theme, StyleProps>(
       // '& input, & select.MuiSelect-select': {},
       '& input[type=number]': {
         '&::-webkit-inner-spin-button, &::-webkit-outer-spin-button': {
-          '-webkit-appearance': 'none',
+          WebkitAppearance: 'none',
           margin: 0,
         },
       },
-    }),
+    },
     firstOfType: {
       '&:first-of-type': {
         marginTop: 0,
@@ -158,11 +156,9 @@ export default function TextFieldBase({
   label,
   ...props
 }: RegenTextFieldProps): JSX.Element {
-  const styles = useTextFieldStyles({
-    ...props,
+  const { classes: styles, cx } = useTextFieldStyles({
     errors,
-    optional: !!optional,
-    label: !!label,
+    label: label,
   });
   const baseClasses = [styles.root, props.className];
   const defaultClasses = [styles.default, ...baseClasses];
@@ -176,7 +172,7 @@ export default function TextFieldBase({
     <MuiTextField
       {...props}
       variant="standard"
-      className={clsx(rootClasses)}
+      className={cx(rootClasses)}
       InputProps={{
         disableUnderline: true,
         startAdornment: startAdornment ? (

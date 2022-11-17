@@ -1,5 +1,4 @@
-import React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 interface GaugeProps {
   amount: number;
@@ -14,21 +13,23 @@ interface StyleProps {
   borderRadius?: string;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  root: {
-    height: props => props.height || theme.spacing(1.25),
-    borderRadius: props => props.borderRadius || '0.5rem',
-    backgroundColor: theme.palette.info.light,
-    border: `1px solid ${theme.palette.grey[100]}`,
-  },
-  gauge: props => ({
-    width: `${props.percentage}%`,
-    height: '100%',
-    backgroundColor: theme.palette.secondary.main,
-    borderTopLeftRadius: props.borderRadius || '0.5rem',
-    borderBottomLeftRadius: props.borderRadius || '0.5rem',
+const useStyles = makeStyles<StyleProps>()(
+  (theme, { percentage, borderRadius, height }) => ({
+    root: {
+      height: height || theme.spacing(1.25),
+      borderRadius: borderRadius || '0.5rem',
+      backgroundColor: theme.palette.info.light,
+      border: `1px solid ${theme.palette.grey[100]}`,
+    },
+    gauge: {
+      width: `${percentage}%`,
+      height: '100%',
+      backgroundColor: theme.palette.secondary.main,
+      borderTopLeftRadius: borderRadius || '0.5rem',
+      borderBottomLeftRadius: borderRadius || '0.5rem',
+    },
   }),
-}));
+);
 
 export default function Gauge({
   amount,
@@ -36,7 +37,7 @@ export default function Gauge({
   height,
   borderRadius,
 }: GaugeProps): JSX.Element {
-  const classes = useStyles({
+  const { classes } = useStyles({
     percentage: totalAmount ? (100 * amount) / totalAmount : 0,
     height,
     borderRadius,

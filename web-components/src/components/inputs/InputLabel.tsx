@@ -1,13 +1,16 @@
-import React from 'react';
 import MuiInputLabel, { InputLabelProps } from '@mui/material/InputLabel';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 interface LabelProps extends InputLabelProps {
   optional?: boolean;
 }
 
-const useStyles = makeStyles<Theme, LabelProps>((theme: Theme) => ({
-  root: props => ({
+type UseStylesParams = {
+  optional: boolean;
+};
+
+const useStyles = makeStyles<UseStylesParams>()((theme, { optional }) => ({
+  root: {
     lineHeight: '140%',
     color: theme.palette.primary.contrastText,
     fontWeight: 'bold',
@@ -21,7 +24,7 @@ const useStyles = makeStyles<Theme, LabelProps>((theme: Theme) => ({
       color: theme.palette.primary.contrastText,
     },
     '&::after': {
-      content: !!props.optional ? '" (optional)"' : '',
+      content: !!optional ? '" (optional)"' : '""',
       fontWeight: 'normal',
       color: theme.palette.info.main,
       [theme.breakpoints.up('sm')]: {
@@ -31,14 +34,14 @@ const useStyles = makeStyles<Theme, LabelProps>((theme: Theme) => ({
         fontSize: theme.spacing(3.5),
       },
     },
-  }),
+  },
 }));
 
 export default function RegenInputLabel({
   optional = false,
   ...props
 }: LabelProps): JSX.Element {
-  const classes = useStyles({ optional });
+  const { classes } = useStyles({ optional });
 
   return (
     <MuiInputLabel {...props} classes={{ root: classes.root }}>

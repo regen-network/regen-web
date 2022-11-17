@@ -32,7 +32,7 @@ function getInitialValues(value: any): any {
   return value?.['@type'] ? value : undefined;
 }
 
-const EntityDisplay: React.FC = () => {
+const EntityDisplay: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { projectId } = useParams();
   const { isEdit } = useProjectEditContext();
   const navigate = useNavigate();

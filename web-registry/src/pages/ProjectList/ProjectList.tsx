@@ -12,7 +12,7 @@ import {
   useGetUserProfileByEmailQuery,
 } from '../../generated/graphql';
 
-const ProjectList: React.FC = () => {
+const ProjectList: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
 
   // TODO Create provider to get directly user data if logged in

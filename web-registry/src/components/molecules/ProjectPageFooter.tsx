@@ -13,7 +13,7 @@ interface Props {
   saveDisabled: boolean;
 }
 
-const ProjectPageFooter: React.FC<Props> = ({
+const ProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
   saveText,
   saveDisabled,
   onSave,

@@ -58,7 +58,7 @@ const StyledTabs = styled(Tabs, {
   }),
 );
 
-const IconTabs: React.FC<IconTabsProps> = ({
+const IconTabs: React.FC<React.PropsWithChildren<IconTabsProps>> = ({
   activeTab = 0,
   tabs,
   size,

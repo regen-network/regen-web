@@ -6,10 +6,12 @@ import { Title } from 'web-components/lib/components/typography';
 
 import { ReactComponent as CloudData } from '../../assets/svgs/cloud-data.svg';
 
-const NoCredits: React.FC<{
-  title: string;
-  icon?: JSX.Element;
-}> = ({ title, icon }) => {
+const NoCredits: React.FC<
+  React.PropsWithChildren<{
+    title: string;
+    icon?: JSX.Element;
+  }>
+> = ({ title, icon }) => {
   return (
     <StyledTableContainer>
       <Box

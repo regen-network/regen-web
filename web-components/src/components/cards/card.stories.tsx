@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box, Theme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { QuestionItem } from '../faq/Question';
 import CurrentCreditsIcon from '../icons/CurrentCreditsIcon';
@@ -190,7 +190,7 @@ const stubFaqs: QuestionItem[] = [
   { question: 'What is the question', answer: 'This is the answer' },
 ];
 
-export const stepCard: React.FC = () => {
+export const stepCard: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <StepCard
       icon={<FarmerIcon />}
@@ -209,7 +209,7 @@ export const stepCard: React.FC = () => {
   );
 };
 
-const useStylesOverview = makeStyles((theme: Theme) => ({
+const useStylesOverview = makeStyles()((theme: Theme) => ({
   root: {
     display: 'flex',
     [theme.breakpoints.up('sm')]: {
@@ -228,7 +228,7 @@ const useStylesOverview = makeStyles((theme: Theme) => ({
 }));
 
 function OverviewCards(): JSX.Element {
-  const styles = useStylesOverview();
+  const { classes: styles } = useStylesOverview();
 
   const items = [
     {

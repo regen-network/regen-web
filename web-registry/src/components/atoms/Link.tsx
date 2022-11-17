@@ -11,7 +11,7 @@ interface LinkProps extends MuiLinkProps {
  * @returns a Material UI `Link` - will use React Router for local links.
  * Defaults to `target='_blank'` for external links.
  */
-export const Link: React.FC<LinkProps> = ({
+export const Link: React.FC<React.PropsWithChildren<LinkProps>> = ({
   href,
   children,
   target,

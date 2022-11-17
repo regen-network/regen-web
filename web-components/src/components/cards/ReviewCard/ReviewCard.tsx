@@ -14,7 +14,7 @@ export interface ReviewCardProps {
   sx?: SxProps<Theme>;
 }
 
-export const ReviewCard: React.FC<ReviewCardProps> = ({
+export const ReviewCard: React.FC<React.PropsWithChildren<ReviewCardProps>> = ({
   title,
   onEditClick,
   children,

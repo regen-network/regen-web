@@ -1,6 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import Card from 'web-components/lib/components/cards/Card';
@@ -20,7 +19,7 @@ interface MethodologyDetailsColumnProps {
   className?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   card: {
     display: 'flex',
     flexDirection: 'column',
@@ -42,7 +41,7 @@ function MethodologyDetailsColumn({
   classes,
   className,
 }: MethodologyDetailsColumnProps): JSX.Element {
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
 
   return (
     <div className={cx(classes?.root, className)}>

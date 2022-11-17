@@ -1,13 +1,13 @@
 import React from 'react';
 import { SxProps, Theme } from '@mui/material';
 import SvgIcon from '@mui/material/SvgIcon';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 interface BrokenLinkIconProps {
   sx?: SxProps<Theme>;
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   root: {
     width: theme.spacing(26.75),
     height: theme.spacing(18.5),
@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function BrokenLinkIcon({ sx }: BrokenLinkIconProps): JSX.Element {
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   return (
     <SvgIcon

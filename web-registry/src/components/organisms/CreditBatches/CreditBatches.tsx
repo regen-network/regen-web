@@ -73,7 +73,7 @@ const headCells: HeadCell[] = [
   { id: 'projectLocation', numeric: false, label: 'project location' },
 ];
 
-const CreditBatches: React.FC<CreditBatchProps> = ({
+const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
   creditClassId,
   filteredColumns,
   withSection = false,
@@ -81,7 +81,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
   titleAlign = 'center',
   onTableChange,
 }) => {
-  const styles = useCreditBatchesStyles();
+  const { classes } = useCreditBatchesStyles();
   const [batches, setBatches] = useState<BatchInfoWithSupply[]>([]);
   let columnsToShow = [...headCells];
 
@@ -121,7 +121,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
       headerRows={columnsToShow.map(headCell => (
         <Box
           display="flex"
-          className={cx(headCell.wrap && styles.wrap)}
+          className={cx(headCell.wrap && classes.wrap)}
           key={headCell.id}
         >
           {headCell.label}
@@ -166,7 +166,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
             </Link>
           </WithLoader>,
           <Link
-            className={styles.noWrap}
+            className={classes.noWrap}
             href={`/credit-batches/${batch.denom}`}
           >
             {batch.denom}
@@ -196,10 +196,10 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
               })}
             </Box>
           </WithLoader>,
-          <Box className={styles.noWrap}>
+          <Box className={classes.noWrap}>
             {formatDate(batch.startDate as Date, undefined, true)}
           </Box>,
-          <Box className={styles.noWrap}>
+          <Box className={classes.noWrap}>
             {formatDate(batch.endDate as Date, undefined, true)}
           </Box>,
           <WithLoader
@@ -207,7 +207,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
             isLoading={!batch.projectLocation}
             variant="skeleton"
           >
-            <Box className={styles.noWrap}>{batch.projectLocation}</Box>
+            <Box className={classes.noWrap}>{batch.projectLocation}</Box>
           </WithLoader>,
         );
 
@@ -225,7 +225,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
   return ledgerRESTUri && batches.length > 0 ? (
     withSection ? (
       <Section
-        classes={{ root: styles.section, title: styles.title }}
+        classes={{ root: classes.section, title: classes.title }}
         title="Credit Batches"
         titleVariant="h2"
         titleAlign={titleAlign}

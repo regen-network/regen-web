@@ -9,8 +9,7 @@ import {
   RadioGroup,
   Zoom,
 } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -29,7 +28,7 @@ import {
   useUpdatePartyByIdMutation,
 } from '../../generated/graphql';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   topCard: {
     marginBottom: 0,
   },
@@ -63,7 +62,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 type AcctType = 'user' | 'organization';
 
-const OrganizationProfile: React.FC = () => {
+const OrganizationProfile: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { user } = useAuth0();
   const [acctType, setAcctType] = useState<AcctType>('user');
@@ -184,7 +183,7 @@ const OrganizationProfile: React.FC = () => {
     }
   }
 
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
   const isIndividual = acctType === 'user';
   const isOrg = acctType === 'organization';
 
@@ -206,13 +205,13 @@ const OrganizationProfile: React.FC = () => {
             onChange={({ target: { value } }) => setAcctType(value as AcctType)}
           >
             <FormControlLabel
-              className={clsx(styles.radio, isIndividual && styles.radioActive)}
+              className={cx(styles.radio, isIndividual && styles.radioActive)}
               value="user"
               control={<Radio className={styles.radioBtn} />}
               label="No, I will register projects only as an individual"
             />
             <FormControlLabel
-              className={clsx(styles.radio, isOrg && styles.radioActive)}
+              className={cx(styles.radio, isOrg && styles.radioActive)}
               value="organization"
               control={<Radio className={styles.radioBtn} />}
               label="Yes, I am part of an organization which will be associated with my project(s)"
@@ -234,7 +233,10 @@ const OrganizationProfile: React.FC = () => {
   );
 };
 
-const PopIn: React.FC<{ isOpen: boolean }> = ({ children, isOpen }) => {
+const PopIn: React.FC<React.PropsWithChildren<{ isOpen: boolean }>> = ({
+  children,
+  isOpen,
+}) => {
   return (
     <div style={{ display: 'flex' }}>
       <Zoom in={isOpen}>

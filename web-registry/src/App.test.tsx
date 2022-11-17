@@ -1,5 +1,5 @@
-import React, { Suspense } from 'react';
-import ReactDOM from 'react-dom';
+import { Suspense } from 'react';
+import ReactDOM, { unmountComponentAtNode } from 'react-dom';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { MockedProvider } from '@apollo/client/testing';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -60,7 +60,12 @@ describe('App', () => {
 
     it('renders without crashing', () => {
       const router = createMemoryRouter(routes);
+<<<<<<< HEAD
       const div = document.createElement('div');
+=======
+      const container = document.createElement('div');
+      document.body.appendChild(container);
+>>>>>>> cf2a7cc5 (chore: update react 18 (#1518))
       ReactDOM.render(
         <MockedProvider mocks={[]}>
           <ThemeProvider>
@@ -69,9 +74,9 @@ describe('App', () => {
             </Suspense>
           </ThemeProvider>
         </MockedProvider>,
-        div,
+        container,
       );
-      ReactDOM.unmountComponentAtNode(div);
+      unmountComponentAtNode(container);
     });
   });
 
@@ -84,7 +89,12 @@ describe('App', () => {
 
     it('renders without crashing', () => {
       const router = createMemoryRouter(routes);
+<<<<<<< HEAD
       const div = document.createElement('div');
+=======
+      const container = document.createElement('div');
+      document.body.appendChild(container);
+>>>>>>> cf2a7cc5 (chore: update react 18 (#1518))
       ReactDOM.render(
         <MockedProvider mocks={[]}>
           <ThemeProvider>
@@ -94,9 +104,9 @@ describe('App', () => {
           </ThemeProvider>
           ,
         </MockedProvider>,
-        div,
+        container,
       );
-      ReactDOM.unmountComponentAtNode(div);
+      unmountComponentAtNode(container);
     });
   });
 });

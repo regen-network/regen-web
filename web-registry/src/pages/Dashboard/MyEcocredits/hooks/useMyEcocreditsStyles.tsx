@@ -1,7 +1,6 @@
-import { Theme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
-const useMyEcocreditsStyles = makeStyles((theme: Theme) => ({
+const useMyEcocreditsStyles = makeStyles()(theme => ({
   arrow: {
     width: theme.spacing(6),
     height: theme.spacing(6),

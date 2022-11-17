@@ -3,38 +3,43 @@ import { TableSortLabel, TableSortLabelProps } from '@mui/material';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
-import { withStyles } from '@mui/styles';
+import { withStyles } from 'tss-react/mui';
 
 import DropdownIcon from '../icons/DropdownIcon';
 
-const StyledTableContainer = withStyles(theme => ({
+const StyledTableContainer = withStyles(TableContainer, theme => ({
   root: {
     backgroundColor: theme.palette.primary.main,
     overflowY: 'hidden',
   },
-}))(TableContainer);
+}));
 
-const StyledTableRow = withStyles(theme => ({
+const StyledTableRow = withStyles(TableRow, theme => ({
   root: {
     color: theme.palette.info.dark,
     height: theme.spacing(25),
-    '&:nth-child(odd)': {
+    '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.grey[50],
     },
-    '&:nth-child(even)': {
+    '&:nth-of-type(even)': {
       backgroundColor: theme.palette.primary.main,
     },
     '& .MuiTableCell-body': {
       padding: theme.spacing(4, 4),
     },
   },
-}))(TableRow);
+}));
 
-const StyledTableCell = withStyles(theme => ({
+// fix issue with emotion+TS
+// https://github.com/emotion-js/emotion/issues/1182
+const uppercase: 'uppercase' = 'uppercase';
+const nowrap: 'nowrap' = 'nowrap';
+
+const StyledTableCell = withStyles(TableCell, theme => ({
   head: {
     fontFamily: theme.typography.h1.fontFamily,
     fontWeight: 800,
-    textTransform: 'uppercase',
+    textTransform: uppercase,
     letterSpacing: '1px',
     fontSize: theme.typography.pxToRem(11),
     color: theme.palette.info.main,
@@ -43,7 +48,7 @@ const StyledTableCell = withStyles(theme => ({
     height: theme.spacing(19),
     lineHeight: theme.spacing(4),
     verticalAlign: 'bottom',
-    whiteSpace: 'nowrap',
+    whiteSpace: nowrap,
     '& .MuiTableSortLabel-active': {
       color: theme.palette.info.main,
     },
@@ -81,9 +86,11 @@ const StyledTableCell = withStyles(theme => ({
       },
     },
   },
-}))(TableCell);
+}));
 
-const StyledTableSortLabel: React.FC<TableSortLabelProps> = props => {
+const StyledTableSortLabel: React.FC<
+  React.PropsWithChildren<TableSortLabelProps>
+> = props => {
   return (
     <TableSortLabel {...props} IconComponent={DropdownIcon}>
       {props.children}

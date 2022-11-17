@@ -12,16 +12,18 @@ import {
 
 import { WrappedStepCard } from '../atoms';
 
-const StepCardsWithDescription: React.FC<{
-  descriptionRaw?: Maybe<Scalars['JSON']>;
-  bottomDescription?: {
-    title: string;
-    body?: Maybe<Scalars['JSON']>;
-  };
-  stepCards?: Maybe<Array<Maybe<StepCardFieldsFragment>>>;
-  openModal: (link: string) => void;
-  className?: string;
-}> = ({
+const StepCardsWithDescription: React.FC<
+  React.PropsWithChildren<{
+    descriptionRaw?: Maybe<Scalars['JSON']>;
+    bottomDescription?: {
+      title: string;
+      body?: Maybe<Scalars['JSON']>;
+    };
+    stepCards?: Maybe<Array<Maybe<StepCardFieldsFragment>>>;
+    openModal: (link: string) => void;
+    className?: string;
+  }>
+> = ({
   stepCards,
   className,
   descriptionRaw,

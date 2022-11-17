@@ -8,7 +8,7 @@ import { useHeaderMenuHoverStyles } from './HeaderMenuHover.styles';
 
 type Props = {
   item: HeaderMenuItem;
-  linkComponent: React.FC<NavLinkProps>;
+  linkComponent: React.FC<React.PropsWithChildren<NavLinkProps>>;
   pathname: string;
 };
 

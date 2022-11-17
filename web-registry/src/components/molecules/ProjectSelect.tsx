@@ -18,7 +18,7 @@ interface FieldProps {
 
 const defaultProjectOption = { value: '', label: 'Choose Project' };
 
-const ProjectSelect: React.FC<FieldProps> = ({
+const ProjectSelect: React.FC<React.PropsWithChildren<FieldProps>> = ({
   creditClassId,
   name = "metadata['regen:vcsProjectId']",
   required,

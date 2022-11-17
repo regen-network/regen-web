@@ -1,9 +1,9 @@
 import React from 'react';
 import { Radio as MuiRadio, RadioProps } from '@mui/material';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   radioBtn: {
     borderRadius: '50%',
     width: 16,
@@ -42,13 +42,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 /** Custom styles on top of MUI's `Radio` component */
-const Radio: React.FC<RadioProps> = props => {
-  const classes = useStyles();
+const Radio: React.FC<React.PropsWithChildren<RadioProps>> = props => {
+  const { classes, cx } = useStyles();
   return (
     <MuiRadio
       {...props}
       checkedIcon={
-        <span className={clsx(classes.radioBtn, classes.checkedRadioBtn)} />
+        <span className={cx(classes.radioBtn, classes.checkedRadioBtn)} />
       }
       icon={<span className={classes.radioBtn} />}
     />

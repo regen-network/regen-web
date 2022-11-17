@@ -1,6 +1,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
 import { Label } from '../typography';
@@ -21,7 +22,7 @@ interface Props extends FAQProps {
   questionId?: string; // current question title from url anchor
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   navigation: {
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(57.5),
@@ -42,7 +43,7 @@ const FAQ = ({
   categories,
   questionId,
 }: Props): JSX.Element => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   if (!categories.length) {
     return <></>;
   }

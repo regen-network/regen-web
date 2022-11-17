@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import ReactHtmlParser from 'react-html-parser';
 import Grid from '@mui/material/Grid';
-import { DefaultTheme as Theme, makeStyles, withStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
 import {
   GetTxResponse,
   ServiceClientImpl,
 } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
-import clsx from 'clsx';
+import ReactHtmlParser from 'html-react-parser';
+import { makeStyles, withStyles } from 'tss-react/mui';
 
 import { parseText } from '../../utils/textParser';
 import ContainedButton from '../buttons/ContainedButton';
@@ -39,7 +39,7 @@ interface LedgerModalProps extends RegenModalProps {
   handleBack: () => void;
 }
 
-const CustomTooltip: any = withStyles((theme: Theme) => ({
+const CustomTooltip: any = withStyles(Tooltip, (theme: Theme) => ({
   tooltip: {
     background: theme.palette.primary.main,
     fontSize: theme.spacing(3.5),
@@ -48,9 +48,9 @@ const CustomTooltip: any = withStyles((theme: Theme) => ({
     paddingLeft: theme.spacing(8.5),
     paddingRight: theme.spacing(8.5),
   },
-}))(Tooltip);
+}));
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     maxWidth: theme.spacing(175),
   },
@@ -256,24 +256,16 @@ const useStyles = makeStyles((theme: Theme) => ({
 const numberFormat = new Intl.NumberFormat('en-US');
 
 function SummaryItem({ item }: { item: Item }): JSX.Element {
-  const classes = useStyles();
+  const { classes, cx } = useStyles();
 
   return (
     <>
       {item.value ? (
         <Grid container className={classes.summaryItem}>
-          <Grid
-            className={clsx(classes.label, classes.summaryLabel)}
-            xs={4}
-            item
-          >
+          <Grid className={cx(classes.label, classes.summaryLabel)} xs={4} item>
             {item.label}
           </Grid>
-          <Grid
-            xs={8}
-            className={clsx(classes.value, classes.summaryValue)}
-            item
-          >
+          <Grid xs={8} className={cx(classes.value, classes.summaryValue)} item>
             {parseText(item.value)}
           </Grid>
         </Grid>
@@ -290,7 +282,7 @@ export default function LedgerModal({
   txHash,
   ...props
 }: LedgerModalProps): JSX.Element {
-  const classes = useStyles();
+  const { classes, cx } = useStyles();
   const [open, setOpen] = useState(true);
   const [txRes, setTxRes] = useState<GetTxResponse | undefined>();
 
@@ -371,7 +363,7 @@ export default function LedgerModal({
               <Grid container wrap="nowrap" className={classes.blockchainTitle}>
                 <Grid item container alignItems="center">
                   <div
-                    className={clsx(
+                    className={cx(
                       classes.label,
                       classes.blockchain,
                       classes.marginLeft,
@@ -403,12 +395,12 @@ export default function LedgerModal({
                 className={
                   open
                     ? classes.blockchainData
-                    : clsx(classes.blockchainData, classes.collapsed)
+                    : cx(classes.blockchainData, classes.collapsed)
                 }
               >
                 <Grid container className={classes.blockchainItem}>
                   <Grid
-                    className={clsx(classes.label, classes.blockchainLabel)}
+                    className={cx(classes.label, classes.blockchainLabel)}
                     xs={4}
                     item
                   >
@@ -417,14 +409,14 @@ export default function LedgerModal({
                   <Grid
                     xs={8}
                     item
-                    className={clsx(classes.value, classes.blockchainValue)}
+                    className={cx(classes.value, classes.blockchainValue)}
                   >
                     {txRes.txResponse.txhash}
                   </Grid>
                 </Grid>
                 <Grid container className={classes.blockchainItem}>
                   <Grid
-                    className={clsx(classes.label, classes.blockchainLabel)}
+                    className={cx(classes.label, classes.blockchainLabel)}
                     xs={4}
                     item
                   >
@@ -433,14 +425,14 @@ export default function LedgerModal({
                   <Grid
                     xs={8}
                     item
-                    className={clsx(classes.value, classes.blockchainValue)}
+                    className={cx(classes.value, classes.blockchainValue)}
                   >
                     {numberFormat.format(txRes.txResponse.height.low)}
                   </Grid>
                 </Grid>
                 <Grid container className={classes.blockchainItem}>
                   <Grid
-                    className={clsx(classes.label, classes.blockchainLabel)}
+                    className={cx(classes.label, classes.blockchainLabel)}
                     xs={4}
                     item
                   >
@@ -449,7 +441,7 @@ export default function LedgerModal({
                   <Grid
                     xs={8}
                     item
-                    className={clsx(classes.value, classes.blockchainValue)}
+                    className={cx(classes.value, classes.blockchainValue)}
                   >
                     {txRes.txResponse.code === 0 && (
                       <span className={classes.success}>success</span>
@@ -459,7 +451,7 @@ export default function LedgerModal({
                 {txRes.txResponse.timestamp && (
                   <Grid container className={classes.blockchainItem}>
                     <Grid
-                      className={clsx(classes.label, classes.blockchainLabel)}
+                      className={cx(classes.label, classes.blockchainLabel)}
                       xs={4}
                       item
                     >
@@ -468,7 +460,7 @@ export default function LedgerModal({
                     <Grid
                       xs={8}
                       item
-                      className={clsx(classes.value, classes.blockchainValue)}
+                      className={cx(classes.value, classes.blockchainValue)}
                     >
                       {txRes.txResponse.timestamp}
                     </Grid>
@@ -476,7 +468,7 @@ export default function LedgerModal({
                 )}
                 <Grid container className={classes.blockchainItem}>
                   <Grid
-                    className={clsx(classes.label, classes.blockchainLabel)}
+                    className={cx(classes.label, classes.blockchainLabel)}
                     xs={4}
                     item
                   >
@@ -485,14 +477,14 @@ export default function LedgerModal({
                   <Grid
                     xs={8}
                     item
-                    className={clsx(classes.value, classes.blockchainValue)}
+                    className={cx(classes.value, classes.blockchainValue)}
                   >
                     {(txRes.tx.body && txRes.tx.body.memo) || '-'}
                   </Grid>
                 </Grid>
                 <Grid container className={classes.blockchainItem}>
                   <Grid
-                    className={clsx(classes.label, classes.blockchainLabel)}
+                    className={cx(classes.label, classes.blockchainLabel)}
                     xs={4}
                     item
                   >
@@ -501,7 +493,7 @@ export default function LedgerModal({
                   <Grid
                     xs={8}
                     item
-                    className={clsx(classes.value, classes.blockchainValue)}
+                    className={cx(classes.value, classes.blockchainValue)}
                   >
                     {txRes.tx.authInfo &&
                     txRes.tx.authInfo.fee &&
@@ -515,7 +507,7 @@ export default function LedgerModal({
                 </Grid>
                 <Grid container className={classes.blockchainItem}>
                   <Grid
-                    className={clsx(classes.label, classes.blockchainLabel)}
+                    className={cx(classes.label, classes.blockchainLabel)}
                     xs={12}
                     sm={4}
                     item
@@ -526,7 +518,7 @@ export default function LedgerModal({
                     xs={12}
                     sm={8}
                     item
-                    className={clsx(
+                    className={cx(
                       classes.logs,
                       classes.value,
                       classes.blockchainValue,

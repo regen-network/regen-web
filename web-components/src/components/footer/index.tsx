@@ -4,7 +4,8 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import NewsletterForm from '../form/NewsletterForm';
 import Section from '../section';
@@ -23,7 +24,7 @@ interface FooterProps {
   apiUri?: string;
 }
 
-const useStyles = makeStyles<Theme>((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   textField: {
     paddingRight: theme.spacing(2.5),
     '& .MuiInputBase-root': {
@@ -60,7 +61,7 @@ const sxs = {
 };
 
 const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
-  const classes = useStyles({});
+  const { classes } = useStyles();
   return (
     <div className={classes.footerItem}>
       <Label size="lg" mobileSize="sm" sx={sxs.text}>
@@ -93,7 +94,7 @@ export default function Footer({
   privacyUrl,
   apiUri = 'http://localhost:5000',
 }: FooterProps): JSX.Element {
-  const classes = useStyles({ paddingBottom: false });
+  const { classes } = useStyles();
 
   return (
     <Box

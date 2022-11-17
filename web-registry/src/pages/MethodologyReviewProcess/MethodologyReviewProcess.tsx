@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
-import { makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import Modal from 'web-components/lib/components/modal';
 import Section from 'web-components/lib/components/section';
@@ -19,7 +20,7 @@ import {
 import { useAllMethodologyReviewProcessPageQuery } from '../../generated/sanity-graphql';
 import { client } from '../../sanity';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   root: {
     background: theme.palette.primary.main,
   },
@@ -39,96 +40,101 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const MethodologyReviewProcess: React.FC = () => {
-  const styles = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = useState(false);
-  const [modalLink, setModalLink] = useState<string>();
-  const openModal = (href?: string | null): void => {
-    setModalLink(href || undefined);
-    setOpen(true);
-  };
+const MethodologyReviewProcess: React.FC<React.PropsWithChildren<unknown>> =
+  () => {
+    const { classes: styles } = useStyles();
+    const theme = useTheme();
+    const [open, setOpen] = useState(false);
+    const [modalLink, setModalLink] = useState<string>();
+    const openModal = (href?: string | null): void => {
+      setModalLink(href || undefined);
+      setOpen(true);
+    };
 
-  const { data } = useAllMethodologyReviewProcessPageQuery({ client });
-  const content = data?.allMethodologyReviewProcessPage?.[0];
+    const { data } = useAllMethodologyReviewProcessPageQuery({ client });
+    const content = data?.allMethodologyReviewProcessPage?.[0];
 
-  const MaxW924: React.FC = ({ children }) => (
-    <Box display={['block', 'flex']} justifyContent="center">
-      <Box maxWidth={theme.typography.pxToRem(924)}>{children}</Box>
-    </Box>
-  );
+    const MaxW924: React.FC<React.PropsWithChildren<unknown>> = ({
+      children,
+    }) => (
+      <Box display={['block', 'flex']} justifyContent="center">
+        <Box maxWidth={theme.typography.pxToRem(924)}>{children}</Box>
+      </Box>
+    );
 
-  return (
-    <div className={styles.root}>
-      <HeroTitle
-        isBanner
-        img={typewriterReview}
-        title={content?.heroSection?.title}
-        descriptionRaw={content?.heroSection?.descriptionRaw}
-        classes={{ main: styles.heroMain }}
-      />
+    return (
+      <div className={styles.root}>
+        <HeroTitle
+          isBanner
+          img={typewriterReview}
+          title={content?.heroSection?.title}
+          descriptionRaw={content?.heroSection?.descriptionRaw}
+          classes={{ main: styles.heroMain }}
+        />
 
-      <Section className={styles.section}>
-        <MaxW924>
-          <ReviewProcessInfo
-            reviewSection={content?.internalReviewSection}
-            openModal={openModal}
-          />
-        </MaxW924>
-      </Section>
+        <Section className={styles.section}>
+          <MaxW924>
+            <ReviewProcessInfo
+              reviewSection={content?.internalReviewSection}
+              openModal={openModal}
+            />
+          </MaxW924>
+        </Section>
 
-      <BackgroundImgSection
-        img={topographyImg}
-        classes={{ root: styles.topoBg, section: styles.section }}
-      >
-        <MaxW924>
-          <ReviewProcessInfo
-            reviewSection={content?.externalReviewSection}
-            openModal={openModal}
-          />
-        </MaxW924>
-        <Box
-          display="flex"
-          alignSelf="center"
-          flexDirection="column"
-          mt={[2, 5]}
-          mx={[-1, 'inherit']}
+        <BackgroundImgSection
+          img={topographyImg}
+          classes={{ root: styles.topoBg, section: styles.section }}
         >
-          {content?.externalReviewSection?.stepCardsSubsections?.map((s, i) => (
-            <Box mt={[12, 15]} key={'subsection' + i}>
-              <Title variant="h3" align="center">
-                {s?.title}
-              </Title>
-              <Box maxWidth={theme.typography.pxToRem(753)} mt={8}>
-                {s?.stepCards?.map((stepCard, i) => (
-                  <WrappedStepCard
-                    key={i}
-                    stepNumber={i}
-                    stepCard={stepCard}
-                    openModal={openModal}
-                  />
-                ))}
-              </Box>
-            </Box>
-          ))}
-        </Box>
-      </BackgroundImgSection>
+          <MaxW924>
+            <ReviewProcessInfo
+              reviewSection={content?.externalReviewSection}
+              openModal={openModal}
+            />
+          </MaxW924>
+          <Box
+            display="flex"
+            alignSelf="center"
+            flexDirection="column"
+            mt={[2, 5]}
+            mx={[-1, 'inherit']}
+          >
+            {content?.externalReviewSection?.stepCardsSubsections?.map(
+              (s, i) => (
+                <Box mt={[12, 15]} key={'subsection' + i}>
+                  <Title variant="h3" align="center">
+                    {s?.title}
+                  </Title>
+                  <Box maxWidth={theme.typography.pxToRem(753)} mt={8}>
+                    {s?.stepCards?.map((stepCard, i) => (
+                      <WrappedStepCard
+                        key={i}
+                        stepNumber={i}
+                        stepCard={stepCard}
+                        openModal={openModal}
+                      />
+                    ))}
+                  </Box>
+                </Box>
+              ),
+            )}
+          </Box>
+        </BackgroundImgSection>
 
-      <HeroAction
-        isBanner
-        img={fernImg}
-        bottomBanner={content?.bottomBanner}
-        openModal={(href: string): void => {
-          setModalLink(href);
-          setOpen(true);
-        }}
-      />
+        <HeroAction
+          isBanner
+          img={fernImg}
+          bottomBanner={content?.bottomBanner}
+          openModal={(href: string): void => {
+            setModalLink(href);
+            setOpen(true);
+          }}
+        />
 
-      <Modal open={open} onClose={() => setOpen(false)} isIFrame>
-        <iframe title="airtable-signup-form" src={modalLink} />
-      </Modal>
-    </div>
-  );
-};
+        <Modal open={open} onClose={() => setOpen(false)} isIFrame>
+          <iframe title="airtable-signup-form" src={modalLink} />
+        </Modal>
+      </div>
+    );
+  };
 
 export { MethodologyReviewProcess };

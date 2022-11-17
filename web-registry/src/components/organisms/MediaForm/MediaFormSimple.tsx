@@ -26,7 +26,7 @@ export interface MediaErrorsSimple extends MediaBaseErrors {
 
 /** Simplified media form content for new project-page flow */
 const MediaFormSimple = (): JSX.Element => {
-  const styles = useMediaFormStyles();
+  const { classes } = useMediaFormStyles();
   const apiServerUrl = getApiUri();
   const { projectId } = useParams();
   const { values } = useFormikContext<MediaValuesSimple>();
@@ -36,7 +36,7 @@ const MediaFormSimple = (): JSX.Element => {
     projectId,
     optional: true,
     isDrop: true,
-    classes: { main: styles.fullSizeMedia },
+    classes: { main: classes.fullSizeMedia },
     buttonText: '+ Add Photo',
     fixedCrop: cropAspect,
   };

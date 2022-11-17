@@ -19,14 +19,16 @@ export interface ProjectLocationFormValues {
   'schema:location': Partial<GeocodeFeature>;
 }
 
-const ProjectLocationForm: React.FC<{
-  mapToken: string;
-  submit: (values: ProjectLocationFormValues) => Promise<void>;
-  saveAndExit: (values: ProjectLocationFormValues) => Promise<void>;
-  initialValues?: ProjectLocationFormValues;
-  onNext?: () => void;
-  onPrev?: () => void;
-}> = ({ submit, initialValues, mapToken, ...props }) => {
+const ProjectLocationForm: React.FC<
+  React.PropsWithChildren<{
+    mapToken: string;
+    submit: (values: ProjectLocationFormValues) => Promise<void>;
+    saveAndExit: (values: ProjectLocationFormValues) => Promise<void>;
+    initialValues?: ProjectLocationFormValues;
+    onNext?: () => void;
+    onPrev?: () => void;
+  }>
+> = ({ submit, initialValues, mapToken, ...props }) => {
   const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {

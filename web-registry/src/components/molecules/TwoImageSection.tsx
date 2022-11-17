@@ -56,9 +56,9 @@ const LabeledImage = (props: {
   </Image>
 );
 
-export const TwoImageSection: React.FC<{ content: DualImageSection }> = ({
-  content,
-}) => {
+export const TwoImageSection: React.FC<
+  React.PropsWithChildren<{ content: DualImageSection }>
+> = ({ content }) => {
   return (
     <Grid container sx={{ position: 'relative' }}>
       <Box

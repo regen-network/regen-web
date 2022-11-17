@@ -1,6 +1,7 @@
 import React from 'react';
 import { Crop } from 'react-image-crop';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import ImageCrop from '../image-crop';
 import { Title } from '../typography';
@@ -15,7 +16,7 @@ export interface CropImageModalProps {
   fixedCrop?: Partial<Crop>;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   modal: {
     [theme.breakpoints.up('md')]: {
       height: '70%',
@@ -52,7 +53,7 @@ export default function CropImageModal({
   initialImage,
   fixedCrop = {},
 }: CropImageModalProps): JSX.Element {
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   return (
     <Modal open={open} onClose={onClose} className={classes.modal}>

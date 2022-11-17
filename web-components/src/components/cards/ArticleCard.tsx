@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import PlayIcon from '../icons/PlayIcon';
@@ -31,7 +32,7 @@ export interface ArticleCardProps {
   play?: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   play: {
     background: theme.palette.primary.main,
     borderRadius: '50%',
@@ -62,7 +63,7 @@ export default function ArticleCard({
   type,
   play = false,
 }: ArticleCardProps): JSX.Element {
-  const styles = useStyles({});
+  const { classes: styles } = useStyles();
   return (
     <MediaCard
       className={className}

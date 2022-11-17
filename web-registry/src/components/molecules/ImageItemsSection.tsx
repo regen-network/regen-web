@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { ImageItemProps } from 'web-components/lib/components/image-item';
 import Section from 'web-components/lib/components/section';
@@ -8,7 +8,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { ImageItemsSection as ImageItemsSectionProps } from '../../generated/sanity-graphql';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(14),
@@ -23,8 +23,10 @@ interface Props {
   content: ImageItemsSectionProps;
 }
 
-const ImageItemsSection: React.FC<Props> = ({ content }) => {
-  const styles = useStyles();
+const ImageItemsSection: React.FC<React.PropsWithChildren<Props>> = ({
+  content,
+}) => {
+  const { classes: styles } = useStyles();
   const imageItems: ImageItemProps[] =
     content?.imageCards?.map(i => ({
       img: <img src={i?.icon?.asset?.url || ''} alt={`${i?.title}`} />,

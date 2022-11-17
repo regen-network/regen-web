@@ -14,7 +14,7 @@ import {
 import { getProjectShapeIri } from '../../lib/rdf';
 import { useProjectEditContext } from '../ProjectEdit';
 
-const Description: React.FC = () => {
+const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit } = useProjectEditContext();

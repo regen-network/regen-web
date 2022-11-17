@@ -9,7 +9,7 @@ import {
 import { URL_PRIVACY, URL_TERMS_SERVICE } from '../../globals';
 import { Link, RegistryIconLink } from '../atoms';
 
-const AppFooter: React.FC = () => {
+const AppFooter: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { pathname } = useLocation();
   const isHidden = ['/project-pages'].some(route => pathname.startsWith(route));
 

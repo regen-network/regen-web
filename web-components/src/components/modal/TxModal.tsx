@@ -1,8 +1,10 @@
 import React from 'react';
-import { Box, Theme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { Box } from '@mui/material';
 import { SxProps } from '@mui/system';
 import ReactHtmlParser from 'html-react-parser';
+import { makeStyles } from 'tss-react/mui';
+
+import { Theme } from 'src/theme/muiTheme';
 
 import { truncate } from '../../utils/truncate';
 import OutlinedButton from '../buttons/OutlinedButton';
@@ -12,7 +14,7 @@ import Modal, { RegenModalProps } from '../modal';
 import { Body, Label, Title } from '../typography';
 import { CardItemValue, CardItemValueList } from './TxModal.CardItemValue';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -43,7 +45,7 @@ interface LinkProps extends LinkItem {
   sx?: SxProps<Theme>;
 }
 
-export type LinkComponentProp = React.FC<LinkProps>;
+export type LinkComponentProp = React.FC<React.PropsWithChildren<LinkProps>>;
 
 export interface TxModalProps extends RegenModalProps {
   onButtonClick: () => void;
@@ -62,7 +64,7 @@ interface CardItemProps extends Item {
   linkComponent: LinkComponentProp;
 }
 
-export const CardItem: React.FC<CardItemProps> = ({
+export const CardItem: React.FC<React.PropsWithChildren<CardItemProps>> = ({
   color,
   label,
   value,
@@ -91,7 +93,7 @@ export const CardItem: React.FC<CardItemProps> = ({
   );
 };
 
-const TxModal: React.FC<TxModalProps> = ({
+const TxModal: React.FC<React.PropsWithChildren<TxModalProps>> = ({
   icon,
   title,
   description,
@@ -105,7 +107,7 @@ const TxModal: React.FC<TxModalProps> = ({
   txHashUrl,
   linkComponent,
 }) => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
   return (
     <Modal open={open} onClose={onClose} className={styles.root}>
       {icon}

@@ -23,7 +23,7 @@ export interface FormValues {
   amount?: number;
 }
 
-const BasketPutForm: React.FC<FormProps> = ({
+const BasketPutForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   batchDenom,
   basketOptions,
   availableTradableAmount,

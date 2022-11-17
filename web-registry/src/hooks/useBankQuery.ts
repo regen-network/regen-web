@@ -43,22 +43,24 @@ export default function useBankQuery<T extends BankQueryResponse>({
   }, [api?.queryClient, client]);
 
   const allBalances = useCallback(
-    (client, params) => queryAllBalances({ client, request: params }),
+    (client: any, params: any) => queryAllBalances({ client, request: params }),
     [],
   );
 
   const balance = useCallback(
-    (client, params) => queryBalance({ client, request: params }),
+    (client: any, params: any) => queryBalance({ client, request: params }),
     [],
   );
 
   const denomMetadata = useCallback(
-    (client, params) => queryDenomMetadata({ client, request: params }),
+    (client: any, params: any) =>
+      queryDenomMetadata({ client, request: params }),
     [],
   );
 
   const denomsMetadata = useCallback(
-    (client, params) => queryDenomsMetadata({ client, request: params }),
+    (client: any, params: any) =>
+      queryDenomsMetadata({ client, request: params }),
     [],
   );
 

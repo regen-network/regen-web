@@ -15,10 +15,12 @@ import {
 } from '../../generated/sanity-graphql';
 import { SanityButton } from '../atoms';
 
-const ReviewProcessInfo: React.FC<{
-  reviewSection?: Maybe<ReviewSectionFieldsFragment>;
-  openModal: (link: string) => void;
-}> = props => {
+const ReviewProcessInfo: React.FC<
+  React.PropsWithChildren<{
+    reviewSection?: Maybe<ReviewSectionFieldsFragment>;
+    openModal: (link: string) => void;
+  }>
+> = props => {
   return (
     <Box
       display="flex"

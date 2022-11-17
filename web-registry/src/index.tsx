@@ -1,5 +1,5 @@
 import { Suspense, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import {
   createRoutesFromChildren,
   matchRoutes,
@@ -100,7 +100,10 @@ const analytics = Analytics({
   debug: process.env.NODE_ENV === 'development',
 });
 
-ReactDOM.render(
+const container = document.getElementById('root') as HTMLElement;
+const root = createRoot(container);
+
+root.render(
   <Auth0Provider
     domain={config.domain}
     clientId={config.clientId}
@@ -119,10 +122,10 @@ ReactDOM.render(
               <LedgerProvider>
                 <ThemeProvider injectFonts>
                   <AnalyticsProvider instance={analytics}>
-                    <Suspense fallback={PageLoader}>
+                    <Suspense fallback={<PageLoader />}>
                       <RouterProvider
                         router={router}
-                        fallbackElement={PageLoader}
+                        fallbackElement={<PageLoader />}
                       />
                     </Suspense>
                   </AnalyticsProvider>
@@ -134,7 +137,6 @@ ReactDOM.render(
       </QueryClientProvider>
     </AuthApolloProvider>
   </Auth0Provider>,
-  document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change

@@ -1,6 +1,5 @@
 import React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import ContainedButton from '../buttons/ContainedButton';
 import FixedFooter from './';
@@ -15,7 +14,7 @@ interface SwitchFooterProps {
   onToggleClick: () => void;
 }
 
-const useStyles = makeStyles<Theme>(theme => ({
+const useStyles = makeStyles()(theme => ({
   root: {
     display: 'flex',
     flex: 1,
@@ -130,7 +129,7 @@ const useStyles = makeStyles<Theme>(theme => ({
   },
 }));
 
-const SwitchFooter: React.FC<SwitchFooterProps> = ({
+const SwitchFooter: React.FC<React.PropsWithChildren<SwitchFooterProps>> = ({
   buttonText,
   activeOption,
   leftOption,
@@ -139,7 +138,7 @@ const SwitchFooter: React.FC<SwitchFooterProps> = ({
   onCtaClick,
   onToggleClick,
 }) => {
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
 
   return (
     <FixedFooter>
@@ -148,7 +147,7 @@ const SwitchFooter: React.FC<SwitchFooterProps> = ({
           {label && <span className={styles.label}>{label}</span>}
           <div className={styles.toggleContainer}>
             <div
-              className={clsx(
+              className={cx(
                 styles.option,
                 activeOption === leftOption ? styles.active : styles.inactive,
               )}
@@ -157,7 +156,7 @@ const SwitchFooter: React.FC<SwitchFooterProps> = ({
               {leftOption}
             </div>
             <div
-              className={clsx(
+              className={cx(
                 styles.option,
                 activeOption === rightOption ? styles.active : styles.inactive,
               )}

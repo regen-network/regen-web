@@ -1,14 +1,14 @@
 import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 interface IconProps {
   className?: string;
   isActive?: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     fill: theme.palette.primary.main,
   },
@@ -18,11 +18,11 @@ export default function AccountabilityIcon({
   className,
   isActive,
 }: IconProps): JSX.Element {
-  const classes = useStyles();
+  const { classes, cx } = useStyles();
 
   return isActive ? (
     <SvgIcon
-      className={clsx(className, classes.root)}
+      className={cx(className, classes.root)}
       width="75"
       height="75"
       viewBox="0 0 75 75"
@@ -107,7 +107,7 @@ export default function AccountabilityIcon({
     </SvgIcon>
   ) : (
     <SvgIcon
-      className={clsx(className, classes.root)}
+      className={cx(className, classes.root)}
       width="110"
       height="110"
       viewBox="0 0 110 110"

@@ -26,14 +26,13 @@ const MenuHover = ({
   title,
   renderTitle,
   classes,
-  textColor,
   dropdownColor,
   children,
 }: Props): JSX.Element => {
   const [openedPopover, setOpenedPopover] = useState(false);
   const popoverAnchor = useRef(null);
 
-  const styles = useMenuHoverStyles({ textColor: textColor ?? '' });
+  const { classes: styles } = useMenuHoverStyles();
 
   const popoverEnter = (): void => {
     setOpenedPopover(true);

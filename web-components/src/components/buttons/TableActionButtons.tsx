@@ -5,10 +5,12 @@ import { HorizontalDotsIcon } from '../icons/HorizontalDotsIcon';
 import OutlinedButton from './OutlinedButton';
 
 /** Displays a dropdown icon with action buttons */
-const TableActionButtons: React.FC<{
-  buttons: { label: string; onClick: () => void; icon?: JSX.Element }[];
-  sx?: SxProps<Theme>;
-}> = ({ buttons, sx }) => {
+const TableActionButtons: React.FC<
+  React.PropsWithChildren<{
+    buttons: { label: string; onClick: () => void; icon?: JSX.Element }[];
+    sx?: SxProps<Theme>;
+  }>
+> = ({ buttons, sx }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   function handleMobileMenuOpen({

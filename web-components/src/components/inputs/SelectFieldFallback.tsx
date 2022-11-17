@@ -8,11 +8,9 @@ interface SelectFallbackProps {
   optional?: boolean;
 }
 
-const SelectFieldFallback: React.FC<SelectFallbackProps> = ({
-  name,
-  label,
-  optional = false,
-}) => (
+const SelectFieldFallback: React.FC<
+  React.PropsWithChildren<SelectFallbackProps>
+> = ({ name, label, optional = false }) => (
   <Field
     name={name}
     label={label}

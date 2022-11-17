@@ -1,6 +1,4 @@
-import React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 interface StyleProps {
   color?: string;
@@ -12,9 +10,9 @@ export interface TagProps {
   name: string;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  tag: props => ({
-    backgroundColor: props.color || theme.palette.secondary.main,
+const useStyles = makeStyles<StyleProps>()((theme, { color }) => ({
+  tag: {
+    backgroundColor: color || theme.palette.secondary.main,
     color: theme.palette.primary.main,
     lineHeight: theme.spacing(4.5),
     fontSize: theme.spacing(3.5),
@@ -30,11 +28,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     '&:last-child': {
       marginRight: 0,
     },
-  }),
+  },
 }));
 
 export default function Tag({ className, name, color }: TagProps): JSX.Element {
-  const classes = useStyles({ color });
+  const { classes, cx } = useStyles({ color });
 
-  return <span className={clsx(className, classes.tag)}>{name}</span>;
+  return <span className={cx(className, classes.tag)}>{name}</span>;
 }

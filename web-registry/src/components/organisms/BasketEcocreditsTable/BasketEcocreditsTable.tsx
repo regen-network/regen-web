@@ -39,10 +39,9 @@ type BasketEcocreditsTableProps = {
   renderActionButtons?: RenderActionButtonsFunc;
 };
 
-export const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
-  batches,
-  renderActionButtons,
-}) => {
+export const BasketEcocreditsTable: React.FC<
+  React.PropsWithChildren<BasketEcocreditsTableProps>
+> = ({ batches, renderActionButtons }) => {
   if (!batches?.length) {
     return <NoCredits title="No credit batches to display" />;
   }

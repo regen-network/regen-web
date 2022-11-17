@@ -14,7 +14,7 @@ interface Props {
   target?: '_blank' | '_self';
 }
 
-const ProjectTopLink: React.FC<Props> = ({
+const ProjectTopLink: React.FC<React.PropsWithChildren<Props>> = ({
   label,
   name,
   url,

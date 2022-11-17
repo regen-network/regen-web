@@ -105,7 +105,7 @@ function stripIds(values: RolesValues): RolesValues {
   return values;
 }
 
-const Roles: React.FC = () => {
+const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit } = useProjectEditContext();

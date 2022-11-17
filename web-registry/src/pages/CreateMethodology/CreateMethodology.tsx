@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { useTheme } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
@@ -22,7 +23,7 @@ import { StepCardsWithDescription } from '../../components/organisms';
 import { useAllCreateMethodologyPageQuery } from '../../generated/sanity-graphql';
 import { client } from '../../sanity';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     background: theme.palette.primary.main,
   },
@@ -85,8 +86,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const CreateMethodology: React.FC = () => {
-  const styles = useStyles();
+const CreateMethodology: React.FC<React.PropsWithChildren<unknown>> = () => {
+  const { classes: styles } = useStyles();
   const theme = useTheme<Theme>();
   const [open, setOpen] = useState(false);
   const [modalLink, setModalLink] = useState<string>();

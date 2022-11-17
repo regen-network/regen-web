@@ -1,8 +1,8 @@
 import { Box, SxProps } from '@mui/material';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     fontFamily: 'Nilland',
     color: theme.palette.primary.main,
@@ -26,9 +26,9 @@ export default function InfoIcon({
   className?: string;
   sx?: SxProps<Theme>;
 }): JSX.Element {
-  const classes = useStyles();
+  const { classes, cx } = useStyles();
   return (
-    <Box sx={sx} className={clsx(className, classes.root)}>
+    <Box sx={sx} className={cx(className, classes.root)}>
       i
     </Box>
   );

@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
+import { useTheme } from '@mui/material';
 import Tab, { TabProps } from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import {
-  DefaultTheme as Theme,
-  makeStyles,
-  useTheme,
-  withStyles,
-} from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles, withStyles } from 'tss-react/mui';
 
 export interface RegenTab extends TabProps {
   content?: JSX.Element;
@@ -23,10 +20,10 @@ interface StyleProps {
   background: string;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+const useStyles = makeStyles<StyleProps>()((theme, { background }) => ({
   root: {
     flexGrow: 1,
-    backgroundImage: props => `url("${props.background}")`,
+    backgroundImage: `url("${background}")`,
     backgroundSize: 'cover',
     // backgroundColor: theme.palette.background.paper,
   },
@@ -46,13 +43,13 @@ export function a11yProps(index: any): object {
   };
 }
 
-const CustomTabs = withStyles((theme: Theme) => ({
+const CustomTabs = withStyles(Tabs, (theme: Theme) => ({
   indicator: {
     display: 'none',
   },
-}))(Tabs);
+}));
 
-const CustomTab = withStyles((theme: Theme) => ({
+const CustomTab = withStyles(Tab, (theme: Theme) => ({
   root: {
     fontFamily: theme.typography.h1.fontFamily,
     fontWeight: 800,
@@ -84,10 +81,10 @@ const CustomTab = withStyles((theme: Theme) => ({
     '&:not(:first-child)': {
       marginLeft: '-2px',
     },
-    '&:nth-child(odd)': {
+    '&:nth-of-type(odd)': {
       borderTopLeftRadius: 5,
     },
-    '&:nth-child(even)': {
+    '&:nth-of-type(even)': {
       borderTopRightRadius: 5,
     },
   },
@@ -103,13 +100,13 @@ const CustomTab = withStyles((theme: Theme) => ({
     borderRight: `2px solid ${theme.palette.secondary.dark}`,
     zIndex: 2,
   },
-}))(Tab);
+}));
 
 export default function RegenTabs({
   tabs,
   background,
 }: RegenTabsProps): JSX.Element {
-  const classes = useStyles({ background });
+  const { classes } = useStyles({ background });
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
 

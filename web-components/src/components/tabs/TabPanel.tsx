@@ -13,7 +13,7 @@ interface TabPanelProps {
   };
 }
 
-const TabPanel: React.FC<TabPanelProps> = props => {
+const TabPanel: React.FC<React.PropsWithChildren<TabPanelProps>> = props => {
   const { children, value, index, hidden, sxs, ...other } = props;
 
   return (

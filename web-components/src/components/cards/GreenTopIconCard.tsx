@@ -8,14 +8,16 @@ import OutlinedButton from '../buttons/OutlinedButton';
 import { Body, Title } from '../typography';
 import Card from './Card';
 
-const GreenTopIconCard: React.FC<{
-  title: string;
-  description: SanityBlockOr<string>;
-  linkUrl: string;
-  linkText: string;
-  imgSrc: string;
-  sx?: SxProps<Theme>;
-}> = props => {
+const GreenTopIconCard: React.FC<
+  React.PropsWithChildren<{
+    title: string;
+    description: SanityBlockOr<string>;
+    linkUrl: string;
+    linkText: string;
+    imgSrc: string;
+    sx?: SxProps<Theme>;
+  }>
+> = props => {
   return (
     <Card
       sx={{

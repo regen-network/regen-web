@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Step,
   StepConnector,
@@ -6,8 +5,8 @@ import {
   Stepper,
   SxProps,
 } from '@mui/material';
-import { DefaultTheme as Theme, makeStyles, withStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles, withStyles } from 'tss-react/mui';
 
 import RegenStepIcon from './StepIcon';
 
@@ -24,13 +23,13 @@ interface StyleProps {
   background?: string;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  root: props => ({
+const useStyles = makeStyles<StyleProps>()((theme, { background }) => ({
+  root: {
     display: 'flex',
     justifyContent: 'center',
     backgroundColor: theme.palette.info.light,
-    backgroundImage: `url(${props.background})`,
-  }),
+    backgroundImage: `url(${background})`,
+  },
   stepper: {
     width: '100%',
     backgroundColor: 'transparent',
@@ -59,33 +58,36 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
-const RegenStepConnector = withStyles((theme: Theme) => ({
-  alternativeLabel: {
-    [theme.breakpoints.up('sm')]: {
-      top: theme.spacing(3.75),
-      left: `calc(-50% + ${theme.spacing(3.75)})`,
-      right: `calc(50% + ${theme.spacing(3.75)})`,
+const RegenStepConnector = withStyles(
+  StepConnector,
+  (theme: Theme, _params, classes) => ({
+    alternativeLabel: {
+      [theme.breakpoints.up('sm')]: {
+        top: theme.spacing(3.75),
+        left: `calc(-50% + ${theme.spacing(3.75)})`,
+        right: `calc(50% + ${theme.spacing(3.75)})`,
+      },
+      [theme.breakpoints.down('sm')]: {
+        top: theme.spacing(2.75),
+        left: `calc(-50% + ${theme.spacing(2.5)})`,
+        right: `calc(50% + ${theme.spacing(2.5)})`,
+      },
     },
-    [theme.breakpoints.down('sm')]: {
-      top: theme.spacing(2.75),
-      left: `calc(-50% + ${theme.spacing(2.5)})`,
-      right: `calc(50% + ${theme.spacing(2.5)})`,
+    active: {
+      [`& .${classes.line}`]: {
+        borderColor: theme.palette.info.main,
+      },
     },
-  },
-  active: {
-    '& $line': {
+    completed: {
+      [`& .${classes.line}`]: {
+        borderColor: theme.palette.info.main,
+      },
+    },
+    line: {
       borderColor: theme.palette.info.main,
     },
-  },
-  completed: {
-    '& $line': {
-      borderColor: theme.palette.info.main,
-    },
-  },
-  line: {
-    borderColor: theme.palette.info.main,
-  },
-}))(StepConnector);
+  }),
+);
 
 const RegenStepper = ({
   className,
@@ -95,13 +97,13 @@ const RegenStepper = ({
   onStepClick,
   sx,
 }: StepperProps): JSX.Element => {
-  const classes = useStyles({ background });
+  const { classes, cx } = useStyles({ background });
 
   return (
     <div className={classes.root}>
       <Stepper
         sx={sx}
-        className={clsx(className, classes.stepper)}
+        className={cx(className, classes.stepper)}
         activeStep={activeStep}
         alternativeLabel
         connector={<RegenStepConnector />}
@@ -113,7 +115,7 @@ const RegenStepper = ({
           >
             <StepLabel
               classes={{
-                alternativeLabel: clsx(
+                alternativeLabel: cx(
                   classes.alternativeLabel,
                   onStepClick && classes.hover,
                 ),

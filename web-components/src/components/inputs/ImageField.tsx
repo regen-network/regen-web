@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Avatar, Box } from '@mui/material';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
 import { FieldProps } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import AvatarIcon from '../icons/AvatarIcon';
@@ -9,7 +10,7 @@ import { getImageSrc } from '../image-crop/canvas-utils';
 import CropImageModal from '../modal/CropImageModal';
 import FieldFormControl from './FieldFormControl';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   avatar: {
     backgroundColor: theme.palette.grey[100],
     color: theme.palette.info.main,
@@ -62,7 +63,7 @@ export default function ImageField({
 }: Props): JSX.Element {
   const [initialImage, setInitialImage] = useState('');
   const [fileName, setFileName] = useState('');
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
   const {
     form,
     field: { name, value },

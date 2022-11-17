@@ -69,13 +69,15 @@ const AppFooter: React.FC = () => {
   ];
 
   return isHidden ? null : (
-    <Footer
-      footerItems={footerItems}
-      iconLink={RegistryIconLink}
-      linkComponent={Link}
-      privacyUrl={URL_PRIVACY}
-      termsUrl={URL_TERMS_SERVICE}
-    />
+    <footer>
+      <Footer
+        footerItems={footerItems}
+        iconLink={RegistryIconLink}
+        linkComponent={Link}
+        privacyUrl={URL_PRIVACY}
+        termsUrl={URL_TERMS_SERVICE}
+      />
+    </footer>
   );
 };
 

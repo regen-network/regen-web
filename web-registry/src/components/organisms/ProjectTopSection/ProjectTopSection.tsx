@@ -70,7 +70,7 @@ function ProjectTopSection({
 }: {
   data?: any; // TODO: when all project are onchain, this can be ProjectByOnChainIdQuery
   onChainProject?: ProjectInfo;
-  metadata?: ProjectMetadataLDUnion;
+  metadata?: Partial<ProjectMetadataLDUnion>;
   sanityCreditClassData?: AllCreditClassQuery;
   geojson?: any;
   isGISFile?: boolean;
@@ -105,12 +105,6 @@ function ProjectTopSection({
     metadata?.['regen:landStory'] || metadata?.['schema:description'];
   const landStewardStoryTitle = metadata?.['regen:landStewardStoryTitle'];
   const landStewardStory = metadata?.['regen:landStewardStory'];
-  const isVCSProject = !!(metadata as VCSProjectMetadataLD)?.[
-    'regen:vcsProjectId'
-  ];
-  const isCFCProject = !!(metadata as CFCProjectMetadataLD)?.[
-    'regen:cfcProjectId'
-  ];
 
   const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.[
     '@list'
@@ -161,7 +155,7 @@ function ProjectTopSection({
               }}
             >
               {!metadata && loading && <Skeleton variant="text" height={124} />}
-              {!isVCSProject && (
+              {!onChainProject && (
                 <ProjectTopLink
                   label="offset generation method"
                   name={
@@ -214,18 +208,10 @@ function ProjectTopSection({
               sx={{ mt: [2, 4], py: [2, 6] }}
             />
           </Link>
-          {isVCSProject && (
-            <ProjectMetadataVCS
-              metadata={metadata as VCSProjectMetadataLD}
-              projectId={projectId}
-            />
-          )}
-          {isCFCProject && (
-            <ProjectMetadataCFC
-              metadata={metadata as CFCProjectMetadataLD}
-              projectId={projectId}
-            />
-          )}
+          <ProjectMetadataVCS
+            metadata={metadata as VCSProjectMetadataLD}
+            projectId={projectId}
+          />
           <LazyLoad offset={50}>
             {videoURL && (
               <Card className={styles.media}>
@@ -313,7 +299,7 @@ function ProjectTopSection({
             // TODO if no off-chain data, use on-chain project.issuer
             issuer={getParty(project?.partyByIssuerId)}
             reseller={
-              !isVCSProject ? getParty(project?.partyByResellerId) : undefined
+              !onChainProject ? getParty(project?.partyByResellerId) : undefined
             }
             sdgs={sdgs}
           />

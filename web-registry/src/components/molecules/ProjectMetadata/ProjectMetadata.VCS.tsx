@@ -5,16 +5,12 @@ import { ExpandButton } from 'web-components/lib/components/buttons/ExpandButton
 import { Title } from 'web-components/lib/components/typography';
 import { formatDate } from 'web-components/lib/utils/format';
 
-import {
-  ProjectMetadataLDX,
-  ToucanProjectMetadataLD,
-  VCSProjectMetadataLD,
-} from '../../../generated/json-ld';
+import { ProjectMetadataLDUnion } from '../../../generated/json-ld';
 import { ArrowLink } from '../../atoms/MetadataArrowLink';
 import { MetaDetail } from './ProjectMetadata.MetaDetail';
 
 export interface MetadataProps {
-  metadata?: Partial<ProjectMetadataLDX>;
+  metadata?: Partial<ProjectMetadataLDUnion>;
   projectId?: string;
 }
 
@@ -25,6 +21,7 @@ const ProjectMetadataVCS: React.FC<MetadataProps> = ({
   const theme = useTheme();
   const [expanded, setExpanded] = useState(false);
   const vcsProjectId = metadata?.['regen:vcsProjectId'];
+  const cfcProjectId = metadata?.['regen:cfcProjectId'];
 
   if (!metadata || !projectId) {
     return null;
@@ -36,6 +33,10 @@ const ProjectMetadataVCS: React.FC<MetadataProps> = ({
   const approvedMethodologies = metadata?.['regen:approvedMethodologies'];
   const methodologyCount = approvedMethodologies?.length;
   const toucanProjectTokenId = metadata?.['regen:toucanProjectTokenId'];
+
+  const offsetProtocol = metadata?.['regen:offsetProtocol'];
+  const projectDesignDocument = metadata?.['regen:projectDesignDocument'];
+  const projectActivity = metadata?.['regen:projectActivity'];
 
   return (
     <Box sx={{ pt: 8 }}>
@@ -120,11 +121,46 @@ const ProjectMetadataVCS: React.FC<MetadataProps> = ({
             />
           )}
           <MetaDetail
-            label="vcs project type"
+            label="vcs project type" //TODO vcs/non
             data={metadata?.['regen:projectType']}
           />
-          {startDate && (
+
+          {projectDesignDocument && (
             <MetaDetail
+              label="documents"
+              data={
+                <ArrowLink
+                  label="Project Design Document"
+                  href={String(projectDesignDocument?.['@value']) || ''}
+                />
+              }
+            />
+          )}
+          {cfcProjectId && (
+            <MetaDetail
+              label="reference id (cfc project id)"
+              data={
+                <ArrowLink
+                  label={cfcProjectId}
+                  href={metadata?.['regen:cfcProjectPage']?.['@value'] || ''}
+                />
+              }
+            />
+          )}
+          {offsetProtocol && (
+            <MetaDetail
+              label="offset protocol"
+              data={
+                <ArrowLink
+                  label={offsetProtocol?.['schema:name']}
+                  href={offsetProtocol?.['schema:url']?.['@value'] || ''}
+                />
+              }
+            />
+          )}
+
+          {startDate && (
+            <MetaDetail // TODO: where?
               label="project start date"
               data={formatDate(startDate)}
             />

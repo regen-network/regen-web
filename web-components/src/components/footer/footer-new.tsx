@@ -3,7 +3,7 @@ import ReactHtmlParser from 'react-html-parser';
 import { Box, Grid, Link, List, ListItem, SxProps } from '@mui/material';
 import { useTheme } from '@mui/styles';
 
-import { HeaderLogoLink } from '../header/HeaderLogoLink';
+import { HeaderLogoLink } from '../header/components/HeaderLogoLink';
 import CoinGeckoIcon from '../icons/CoinGeckoIcon';
 import Section from '../section';
 import { Body, Label } from '../typography';

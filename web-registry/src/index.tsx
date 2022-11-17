@@ -19,7 +19,7 @@ import PageLoader from 'components/atoms/PageLoader';
 import { AuthApolloProvider } from './apollo';
 import { router } from './App';
 import { LedgerProvider } from './ledger';
-import { WalletProvider } from './lib/wallet';
+import { WalletProvider } from './lib/wallet/wallet';
 import * as serviceWorker from './serviceWorker';
 // import history from './lib/history';
 

@@ -37,7 +37,7 @@ import {
 import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { getHashUrl } from 'lib/block-explorer';
-import { chainInfo } from 'lib/wallet';
+import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';

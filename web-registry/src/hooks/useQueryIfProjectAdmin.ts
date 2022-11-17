@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { useWallet } from '../lib/wallet';
+import { useWallet } from '../lib/wallet/wallet';
 import { useQueryListAdminProjects } from './useQueryListAdminProjects';
 
 export function useQueryIfProjectAdmin(): boolean {

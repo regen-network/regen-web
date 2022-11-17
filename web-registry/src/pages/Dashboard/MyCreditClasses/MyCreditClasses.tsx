@@ -4,16 +4,11 @@ import { Grid } from '@mui/material';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { CreateCreditClassCard } from 'web-components/lib/components/cards/CreateCards';
 
-interface MyCreditClassesProps {
-  isCreditClassCreator: boolean;
-  isCreditClassAdmin: boolean;
-}
+import { useDashboardContext } from '../Dashboard.context';
 
-export const MyCreditClasses = ({
-  isCreditClassCreator,
-  isCreditClassAdmin,
-}: MyCreditClassesProps): JSX.Element => {
+export const MyCreditClasses = (): JSX.Element => {
   const navigate = useNavigate();
+  const { isCreditClassCreator, isCreditClassAdmin } = useDashboardContext();
   const isFirstCreditClass = false;
   const error = '';
 

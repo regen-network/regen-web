@@ -1,5 +1,4 @@
 import React from 'react';
-import { DeliverTxResponse } from '@cosmjs/stargate';
 import { Avatar, Box, Link } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import cx from 'clsx';
@@ -12,7 +11,7 @@ import CowIllustration from '../../assets/cow-illustration.png';
 import CarbonCreditFruit from '../../assets/svgs/carbon-credit-fruit.svg';
 
 interface Props extends RegenModalProps {
-  data?: DeliverTxResponse;
+  transactionHash?: string;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -71,7 +70,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ConfirmationModal: React.FC<Props> = ({ open, onClose, data }) => {
+const ConfirmationModal: React.FC<Props> = ({
+  open,
+  onClose,
+  transactionHash,
+}) => {
   const styles = useStyles();
 
   return (
@@ -124,11 +127,11 @@ const ConfirmationModal: React.FC<Props> = ({ open, onClose, data }) => {
             <Link
               color="secondary.main"
               fontWeight={700}
-              href={`${process.env.REACT_APP_BLOCK_EXPLORER}/txs/${data?.transactionHash}`}
+              href={`${process.env.REACT_APP_BLOCK_EXPLORER}/txs/${transactionHash}`}
               target="_blank"
               rel="noopener noreferrer"
             >
-              {data?.transactionHash?.substring(0, 13).toLowerCase()}...
+              {transactionHash?.substring(0, 13).toLowerCase()}...
             </Link>
           </Box>
         </div>

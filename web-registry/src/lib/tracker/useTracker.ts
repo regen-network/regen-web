@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useTrack } from 'use-analytics';
 
 import { Track } from './types';
@@ -8,12 +9,13 @@ interface UseTracker {
 
 export const useTracker = (): UseTracker => {
   const track = useTrack();
-  return {
-    track: <IEventName extends string, IPayload = void>(
-      eventName: IEventName,
-      payload?: IPayload,
-    ) => {
+  const wrapTrack = useCallback<Track>(
+    (eventName, payload?) => {
       return track(eventName, payload);
     },
+    [track],
+  );
+  return {
+    track: wrapTrack,
   };
 };

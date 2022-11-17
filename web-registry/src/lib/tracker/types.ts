@@ -29,3 +29,26 @@ export interface Buy2Event {
   currencyDenom?: string;
   retirementAction?: string;
 }
+
+export interface BuySuccessEvent {
+  url: string;
+  price?: string;
+  batchDenom?: string;
+  projectName?: string | null;
+  projectId?: string | null;
+  quantity: number;
+  currencyDenom?: string;
+  retirementAction?: string;
+}
+
+export interface BuyFailureEvent {
+  url: string;
+  price?: string;
+  batchDenom?: string;
+  projectName?: string | null;
+  projectId?: string | null;
+  quantity: number;
+  currencyDenom?: string;
+  retirementAction?: string;
+  errorMessage?: string;
+}

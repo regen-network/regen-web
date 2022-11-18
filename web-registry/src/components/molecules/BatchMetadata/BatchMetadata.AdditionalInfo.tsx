@@ -1,0 +1,79 @@
+import { Flex } from 'web-components/lib/components/box';
+import { Body } from 'web-components/lib/components/typography';
+import { CreditBatchMetadataUnionLD } from 'web-components/lib/types/rdf/credit-batch-union-ld';
+
+import { LinkOrDash } from './BatchMetadata.LinkOrDash';
+import { MetaDetail } from './BatchMetadata.MetaDetail';
+
+export const BatchMetadataAdditionalInfo = ({
+  data,
+}: {
+  data?: Partial<CreditBatchMetadataUnionLD>;
+}): JSX.Element => {
+  // VCS
+  const vcsRetirementSerialNumber = data?.['regen:vcsRetirementSerialNumber'];
+  const additionalCertifications = data?.['regen:additionalCertifications'];
+
+  // CFC
+  const reports = data?.['regen:verificationReports'];
+  const serialNumbers = data?.['regen:cfcCreditSerialNumbers'];
+  const cfcVintageYear = data?.['regen:cfcVintageYear'];
+
+  // Toucan
+
+  return (
+    <>
+      {vcsRetirementSerialNumber && (
+        <MetaDetail label="vcs retirement serial number">
+          {data?.['regen:vcsRetirementSerialNumber'] || '-'}
+        </MetaDetail>
+      )}
+
+      {additionalCertifications && additionalCertifications?.length > 0 && (
+        <MetaDetail label="additional certifications">
+          <Flex col sx={{ gap: 2 }}>
+            {additionalCertifications.map((cert, i) => (
+              <LinkOrDash
+                key={i}
+                href={cert?.['schema:url']?.['@value']}
+                label={cert?.['schema:name']}
+              />
+            ))}
+          </Flex>
+        </MetaDetail>
+      )}
+
+      {serialNumbers && serialNumbers?.length > 0 && (
+        <MetaDetail label="cfc retirement serial numbers">
+          <Flex col>
+            {serialNumbers?.map((serialNumber: string) => (
+              <Body mobileSize="md" styleLinks={false}>
+                {serialNumber}
+              </Body>
+            ))}
+          </Flex>
+        </MetaDetail>
+      )}
+
+      {cfcVintageYear && (
+        <MetaDetail label="cfc vintage year">
+          {data?.['regen:cfcVintageYear']?.['@value'] || '-'}
+        </MetaDetail>
+      )}
+
+      {reports && reports?.length > 0 && (
+        <MetaDetail label="verification reports">
+          <Flex col sx={{ gap: 2 }}>
+            {reports.map((report: any, i: number) => (
+              <LinkOrDash
+                key={i}
+                href={report?.['schema:url']?.['@value']}
+                label="Verification report"
+              />
+            ))}
+          </Flex>
+        </MetaDetail>
+      )}
+    </>
+  );
+};

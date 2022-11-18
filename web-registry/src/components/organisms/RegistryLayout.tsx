@@ -27,7 +27,6 @@ const RegistryLayout: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { pathname } = useLocation();
   const { wallet, loaded, disconnect } = useWallet();
   const theme = useTheme<Theme>();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const fullWidthRegExp: RegExp = /projects\/[a-z-]+/;
@@ -97,9 +96,7 @@ const RegistryLayout: React.FC<React.PropsWithChildren<unknown>> = () => {
           <Box display="flex" justifyContent="center" alignItems="center">
             {chainId && loaded && wallet?.address && disconnect && (
               <UserMenuItem
-                address={
-                  isMobile ? truncate(wallet?.address) : wallet?.shortAddress
-                }
+                address={truncate(wallet?.address)}
                 avatar={DefaultAvatar}
                 disconnect={disconnect}
                 pathname={pathname}

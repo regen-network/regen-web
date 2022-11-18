@@ -1,6 +1,8 @@
 import { useCallback, useState } from 'react';
 import { DeliverTxResponse, StdFee } from '@cosmjs/stargate';
 
+import { useGlobalStore } from 'lib/context/globalContext';
+
 import { useLedger } from '../ledger';
 import { assertIsError } from '../lib/error';
 import { Wallet } from '../lib/wallet/wallet';
@@ -38,6 +40,7 @@ export default function useMsgClient(
 ): MsgClientType {
   const { api, wallet } = useLedger();
   const [error, setError] = useState<string | undefined>();
+  const [txCount, setGlobalStore] = useGlobalStore(store => store['txCount']);
   const [deliverTxResponse, setDeliverTxResponse] = useState<
     DeliverTxResponse | undefined
   >();
@@ -57,6 +60,8 @@ export default function useMsgClient(
         gas: '200000',
       };
 
+      setGlobalStore({ txCount: txCount + 1 });
+
       const txBytes = await api.msgClient.sign(
         wallet.address,
         msgs,
@@ -66,7 +71,7 @@ export default function useMsgClient(
 
       return txBytes;
     },
-    [api?.msgClient, wallet?.address],
+    [api?.msgClient, wallet?.address, txCount, setGlobalStore],
   );
 
   const broadcast = useCallback(

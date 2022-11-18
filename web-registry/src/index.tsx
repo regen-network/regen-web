@@ -22,6 +22,8 @@ import { AnalyticsProvider } from 'use-analytics';
 
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 
+import { GlobalProvider } from 'lib/context/globalContext';
+
 import PageLoader from 'components/atoms/PageLoader';
 
 import { AuthApolloProvider } from './apollo';
@@ -122,12 +124,14 @@ root.render(
               <LedgerProvider>
                 <ThemeProvider injectFonts>
                   <AnalyticsProvider instance={analytics}>
-                    <Suspense fallback={<PageLoader />}>
-                      <RouterProvider
-                        router={router}
-                        fallbackElement={<PageLoader />}
-                      />
-                    </Suspense>
+                    <GlobalProvider>
+                      <Suspense fallback={<PageLoader />}>
+                        <RouterProvider
+                          router={router}
+                          fallbackElement={<PageLoader />}
+                        />
+                      </Suspense>
+                    </GlobalProvider>
                   </AnalyticsProvider>
                 </ThemeProvider>
               </LedgerProvider>

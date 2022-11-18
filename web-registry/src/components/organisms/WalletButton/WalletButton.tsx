@@ -5,6 +5,8 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import WalletModal from 'web-components/lib/components/modal/wallet-modal';
 import { WalletModalState } from 'web-components/lib/components/modal/wallet-modal/WalletModal.types';
 
+import { useGlobalStore } from 'lib/context/globalContext';
+
 import { chainId } from '../../../lib/ledger';
 import { useWallet } from '../../../lib/wallet/wallet';
 import { useConnectToWallet } from './hooks/useConnectToWallet';
@@ -19,6 +21,7 @@ const WalletButton: React.FC = () => {
   const styles = useWalletButtonStyles();
   const { wallet, connect, loaded, error, walletConnectUri } = useWallet();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [txCount] = useGlobalStore(store => store['txCount']);
   const [modalState, setModalState] =
     useState<WalletModalState>('wallet-select');
 
@@ -47,7 +50,7 @@ const WalletButton: React.FC = () => {
     [walletConnectUri],
   );
 
-  useNavigateToMobileUrl({ mobileConnectUrl });
+  useNavigateToMobileUrl({ mobileConnectUrl, txCount });
   useResetModalOnConnect({ setIsModalOpen, setModalState, wallet });
 
   return chainId ? (

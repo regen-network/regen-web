@@ -62,7 +62,7 @@ import type {
   BatchTotalsForProject,
   BridgedEcocredits,
   ClassProjectInfo,
-  IBatchInfo,
+  IBatchInfoWithClassProject,
 } from '../../types/ledger/ecocredit';
 import { expLedger, ledgerRESTUri } from '../ledger';
 import { ECOCREDIT_MESSAGE_TYPES, messageActionEquals } from './constants';
@@ -209,7 +209,7 @@ export const getEcocreditTxs = async (): Promise<TxResponse[]> => {
 export const getBridgedEcocreditsForAccount = async (
   addr?: string,
   sanityCreditClassData?: AllCreditClassQuery,
-): Promise<(BridgedEcocredits | undefined)[] | undefined> => {
+): Promise<BridgedEcocredits[] | undefined> => {
   if (addr) {
     // Since bridged ecocredits are canceled on Regen Ledger,
     // the only way to get them is to fetch txs by event
@@ -220,47 +220,50 @@ export const getBridgedEcocreditsForAccount = async (
       ],
       orderBy: OrderBy.ORDER_BY_DESC,
     });
-    return (
-      await Promise.all(
-        res.txs.map(async (tx, i) => {
-          // Get the tx status using the bridge service api
-          const { status } = await getBridgeTxStatus(res.txResponses[i].txhash);
-          if (tx.body) {
-            return await Promise.all(
-              tx.body.messages
-                .filter(m => m.typeUrl === `/${MsgBridge.$type}`)
-                .map(async m => {
-                  // Decoding the bridge msg to get the batch(es) info used to bridge ecocredits
-                  const msgBridge = MsgBridge.decode(m.value);
-                  return await Promise.all(
-                    msgBridge.credits.map(async ({ batchDenom, amount }) => {
-                      // TODO optimize this so we don't query batch and project info/metadata
-                      // multiple times if we already did
-                      const { batch } = await queryEcoBatchInfo(batchDenom);
-                      let classProjectInfo: ClassProjectInfo | undefined;
 
-                      if (batch) {
-                        classProjectInfo = await getClassProjectForBatch(
-                          batch,
-                          sanityCreditClassData,
-                        );
-                        return {
-                          amount,
-                          status,
-                          ...classProjectInfo,
-                          ...batch,
-                        };
-                      }
-                      return;
-                    }),
-                  );
-                }),
-            );
+    const bridgedCredits: BridgedEcocredits[] = [];
+    const batchesMap = new Map<string, IBatchInfoWithClassProject>();
+    for (let i = 0; i < res.txs.length; i++) {
+      const txBody = res.txs[i].body;
+      if (txBody) {
+        // Get the tx status using the bridge service api
+        const { status } = await getBridgeTxStatus(res.txResponses[i].txhash);
+        const messages = txBody.messages.filter(
+          m => m.typeUrl === `/${MsgBridge.$type}`,
+        );
+        for (let j = 0; j < messages.length; j++) {
+          // Decoding the bridge msg to get the batch(es) info used to bridge ecocredits
+          const message = messages[j];
+          const { credits } = MsgBridge.decode(message.value);
+          for (let k = 0; k < credits.length; k++) {
+            console.log(k, batchesMap);
+
+            const { batchDenom, amount } = credits[k];
+            // TODO optimize this so we don't query batch and project info/metadata
+            // multiple times if we already did
+            let cachedBatch = batchesMap.get(batchDenom);
+            if (!cachedBatch) {
+              const { batch } = await queryEcoBatchInfo(batchDenom);
+              let classProjectInfo: ClassProjectInfo | undefined;
+              if (batch) {
+                classProjectInfo = await getClassProjectForBatch(
+                  batch,
+                  sanityCreditClassData,
+                );
+                cachedBatch = { ...classProjectInfo, ...batch };
+                batchesMap.set(batchDenom, cachedBatch);
+              }
+            }
+            bridgedCredits.push({
+              amount,
+              status,
+              ...(cachedBatch as IBatchInfoWithClassProject),
+            });
           }
-          return;
-        }),
-      )
-    ).flat(2);
+        }
+      }
+    }
+    return bridgedCredits;
   }
   return;
 };

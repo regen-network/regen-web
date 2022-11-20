@@ -21,7 +21,9 @@ export interface ClassProjectInfo {
   projectLocation?: string;
 }
 
-interface IBatchInfoWithClassProject extends IBatchInfo, ClassProjectInfo {}
+export interface IBatchInfoWithClassProject
+  extends IBatchInfo,
+    ClassProjectInfo {}
 
 // /** combines the ledger `BatchInfo` with ledger `QueryBalanceResponse` */
 export interface BatchInfoWithBalance

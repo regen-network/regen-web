@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { BridgedEcocredits } from 'types/ledger/ecocredit';
@@ -17,17 +17,19 @@ interface Output {
 export const useBridged = ({ address }: Props): Output => {
   const [bridgedCredits, setCredits] = useState<BridgedEcocredits[]>([]);
   const [isLoadingCredits, setIsLoadingCredits] = useState(true);
+  const isFetchingRef = useRef(false);
 
   const { data: sanityCreditClassData } = useAllCreditClassQuery({
     client: sanityClient,
   });
 
   const fetchCredits = useCallback(async (): Promise<void> => {
-    if (!address) {
+    if (!address || isFetchingRef.current) {
       return;
     }
 
     try {
+      isFetchingRef.current = true;
       const newCredits = await getBridgedEcocreditsForAccount(
         address,
         sanityCreditClassData,
@@ -36,6 +38,7 @@ export const useBridged = ({ address }: Props): Output => {
     } catch (err) {
       console.error(err); // eslint-disable-line no-console
     } finally {
+      isFetchingRef.current = false;
       setIsLoadingCredits(false);
     }
   }, [address, sanityCreditClassData]);

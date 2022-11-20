@@ -229,8 +229,10 @@ export const getBridgedEcocreditsForAccount = async (
       const txBody = res.txs[i].body;
       if (txBody) {
         // Get the tx status using the bridge service api
-        const { status, destination_tx_hash: destinationTxHash } =
-          await getBridgeTxStatus(res.txResponses[i].txhash);
+        let status, destinationTxHash;
+        const txStatus = await getBridgeTxStatus(res.txResponses[i].txhash);
+        status = txStatus?.status;
+        destinationTxHash = txStatus?.destination_tx_hash;
         const messages = txBody.messages.filter(
           m => m.typeUrl === `/${MsgBridge.$type}`,
         );
@@ -239,11 +241,7 @@ export const getBridgedEcocreditsForAccount = async (
           const message = messages[j];
           const { credits } = MsgBridge.decode(message.value);
           for (let k = 0; k < credits.length; k++) {
-            console.log(k, batchesMap);
-
             const { batchDenom, amount } = credits[k];
-            // TODO optimize this so we don't query batch and project info/metadata
-            // multiple times if we already did
             let cachedBatch = batchesMap.get(batchDenom);
             if (!cachedBatch) {
               const { batch } = await queryEcoBatchInfo(batchDenom);

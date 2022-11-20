@@ -53,6 +53,6 @@ export type BridgedTxStatus =
 
 export interface BridgedEcocredits extends IBatchInfoWithClassProject {
   amount: string;
-  status: BridgedTxStatus;
+  status?: BridgedTxStatus;
   destinationTxHash?: string;
 }

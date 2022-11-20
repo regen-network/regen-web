@@ -20,6 +20,7 @@
   REACT_APP_BLOCK_EXPLORER = "https://redwood.regen.aneka.io"
   REACT_APP_SENTRY_ENVIRONMENT="development"
   REACT_APP_TOUCAN_LINK="https://mumbai.polygonscan.com/tx"
+  REACT_APP_BRIDGE_API_URI="https://toucan-bridge-staging.herokuapp.com/"
 
 [context.hambach.environment]
   REACT_APP_SANITY_TAG = "default"
@@ -33,6 +34,7 @@
   REACT_APP_EXP_LEDGER = "true"
   REACT_APP_SENTRY_ENVIRONMENT="hambach"
   REACT_APP_TOUCAN_LINK="https://mumbai.polygonscan.com/tx"
+  REACT_APP_BRIDGE_API_URI="https://toucan-bridge-staging.herokuapp.com/"
 
 [context.redwood.environment]
   REACT_APP_SANITY_TAG = "default"
@@ -45,6 +47,7 @@
   REACT_APP_BLOCK_EXPLORER = "https://redwood.regen.aneka.io"
   REACT_APP_SENTRY_ENVIRONMENT = "redwood"
   REACT_APP_TOUCAN_LINK="https://mumbai.polygonscan.com/tx"
+  REACT_APP_BRIDGE_API_URI="https://toucan-bridge-staging.herokuapp.com/"
 
 [build.environment]
   NODE_OPTIONS = "--max-old-space-size=10216"

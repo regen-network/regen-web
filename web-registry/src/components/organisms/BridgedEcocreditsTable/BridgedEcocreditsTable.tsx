@@ -108,13 +108,13 @@ export const BridgedEcocreditsTable = ({
         rows={bridgedCredits.map((row, i) => {
           return [
             <GreyText>
-              {
+              {row.status && (
                 <StatusLabel
                   status={BRIDGED_STATUSES[row.status] as InfoLabelVariant}
                 />
-              }
+              )}
             </GreyText>,
-            privateAccess && (
+            privateAccess && row.status && (
               <GreyText>{getNote(row.status, row.destinationTxHash)}</GreyText>
             ),
             <WithLoader isLoading={!row.projectName} variant="skeleton">

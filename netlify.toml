@@ -7,6 +7,7 @@
   REACT_APP_SENTRY_ENVIRONMENT="production"
   REACT_APP_ANALYTICS_ENABLED="true"
   REACT_APP_GA_MEASUREMENT_ID="G-6ZGJM8JXYN"
+  REACT_APP_TOUCAN_LINK="https://toucan.earth/overview?chainId=137"
 
 [context.deploy-preview.environment]
   REACT_APP_SANITY_TAG = "default"
@@ -18,6 +19,7 @@
   REACT_APP_LEDGER_CHAIN_NAME = "Regen - Redwood Testnet"
   REACT_APP_BLOCK_EXPLORER = "https://redwood.regen.aneka.io"
   REACT_APP_SENTRY_ENVIRONMENT="development"
+  REACT_APP_TOUCAN_LINK="https://mumbai.polygonscan.com/tx"
 
 [context.hambach.environment]
   REACT_APP_SANITY_TAG = "default"
@@ -30,6 +32,7 @@
   REACT_APP_BLOCK_EXPLORER = "https://hambach.regen.aneka.io"
   REACT_APP_EXP_LEDGER = "true"
   REACT_APP_SENTRY_ENVIRONMENT="hambach"
+  REACT_APP_TOUCAN_LINK="https://mumbai.polygonscan.com/tx"
 
 [context.redwood.environment]
   REACT_APP_SANITY_TAG = "default"
@@ -41,6 +44,7 @@
   REACT_APP_LEDGER_CHAIN_NAME = "Regen - Redwood Testnet"
   REACT_APP_BLOCK_EXPLORER = "https://redwood.regen.aneka.io"
   REACT_APP_SENTRY_ENVIRONMENT = "redwood"
+  REACT_APP_TOUCAN_LINK="https://mumbai.polygonscan.com/tx"
 
 [build.environment]
   NODE_OPTIONS = "--max-old-space-size=10216"

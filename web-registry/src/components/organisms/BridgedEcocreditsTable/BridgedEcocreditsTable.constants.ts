@@ -1,8 +1,12 @@
+export const STATUS_PENDING = 'pending';
+export const STATUS_COMPLETE = 'complete';
+export const STATUS_ERROR = 'error';
+
 export const BRIDGED_STATUSES = {
-  regen_ready: 'pending',
-  evm_broadcast: 'pending',
-  evm_confirmed: 'complete',
-  error: 'error',
+  regen_ready: STATUS_PENDING,
+  evm_broadcast: STATUS_PENDING,
+  evm_confirmed: STATUS_COMPLETE,
+  error: STATUS_ERROR,
 };
 
 export const CREDIT_BATCH_TOOLTIP =

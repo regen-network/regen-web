@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 import { loaderStyles } from 'styles/loader';
@@ -7,11 +6,7 @@ import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
 import { BlockContent } from 'web-components/lib/components/block-content';
 import EmptyCartIcon from 'web-components/lib/components/icons/EmptyCartIcon';
 import { InfoLabelVariant } from 'web-components/lib/components/info-label/InfoLabel.types';
-import {
-  ActionsTable,
-  DEFAULT_ROWS_PER_PAGE,
-  TablePaginationParams,
-} from 'web-components/lib/components/table/ActionsTable';
+import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
 import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
 import {
   DATE_FORMAT_SECONDARY,
@@ -37,6 +32,7 @@ import {
   CREDIT_BATCH_TOOLTIP,
   NO_BRIDGED_CREDITS,
 } from './BridgedEcocreditsTable.constants';
+import { getNote } from './BridgedEcocreditsTable.utils';
 
 interface Props {
   accountAddress: string | undefined;
@@ -118,7 +114,9 @@ export const BridgedEcocreditsTable = ({
                 />
               }
             </GreyText>,
-            privateAccess && <GreyText>...</GreyText>, // TODO: Note/Link
+            privateAccess && (
+              <GreyText>{getNote(row.status, row.destinationTxHash)}</GreyText>
+            ),
             <WithLoader isLoading={!row.projectName} variant="skeleton">
               <Link
                 href={`/projects/${row?.projectId}`}

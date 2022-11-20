@@ -13,6 +13,7 @@ export const getBridgeTxStatus = async (
   const { data } = await axios.get(
     // using a proxy to bridge service api for now
     `${getApiUri()}/bridge/regen/events/${hash}/status`,
+    // `${process.env.REACT_APP_BRIDGE_API_URI}/regen/events/${hash}/status`,
   );
   return data;
 };

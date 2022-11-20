@@ -212,7 +212,9 @@ export const getBridgedEcocreditsForAccount = async (
 ): Promise<BridgedEcocredits[] | undefined> => {
   if (addr) {
     // Since bridged ecocredits are canceled on Regen Ledger,
-    // the only way to get them is to fetch txs by event
+    // the only way to get them is to fetch txs by event and loop through the tx messages.
+    // Txs can have multiple messages and MsgBridge messages can have multiple credits
+    // so we can't really support pagination.
     const res = await getTxsByEvent({
       events: [
         `${messageActionEquals}'/${MsgBridge.$type}'`,
@@ -227,7 +229,8 @@ export const getBridgedEcocreditsForAccount = async (
       const txBody = res.txs[i].body;
       if (txBody) {
         // Get the tx status using the bridge service api
-        const { status } = await getBridgeTxStatus(res.txResponses[i].txhash);
+        const { status, destination_tx_hash: destinationTxHash } =
+          await getBridgeTxStatus(res.txResponses[i].txhash);
         const messages = txBody.messages.filter(
           m => m.typeUrl === `/${MsgBridge.$type}`,
         );
@@ -257,6 +260,7 @@ export const getBridgedEcocreditsForAccount = async (
             bridgedCredits.push({
               amount,
               status,
+              destinationTxHash,
               ...(cachedBatch as IBatchInfoWithClassProject),
             });
           }

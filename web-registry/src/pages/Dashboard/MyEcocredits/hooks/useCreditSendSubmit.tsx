@@ -11,7 +11,7 @@ import { getAccountUrl } from 'lib/block-explorer';
 
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
-import { SEND_HEADER } from '../MyEcocredits.contants';
+import { SEND_HEADER } from '../MyEcocredits.constants';
 
 type Props = {
   accountAddress?: string;

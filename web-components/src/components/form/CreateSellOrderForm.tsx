@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import { Field, Form, Formik, FormikErrors } from 'formik';
+import { Sell2Event } from 'web-registry/src/lib/tracker/types';
 import { useTracker } from 'web-registry/src/lib/tracker/useTracker';
 
 import InfoIcon from '../icons/InfoIcon';
@@ -88,7 +89,13 @@ const CreateSellOrderForm: React.FC<React.PropsWithChildren<FormProps>> = ({
       initialValues={initialValues}
       validate={validateHandler}
       onSubmit={async values => {
-        track<'sell2'>('sell2');
+        track<'sell2', Sell2Event>('sell2', {
+          batchDenom: values.batchDenom,
+          price: values.price,
+          quantity: values.amount,
+          currencyDenom: values.askDenom,
+          enableAutoRetire: values.enableAutoRetire,
+        });
         onSubmit(values);
       }}
     >

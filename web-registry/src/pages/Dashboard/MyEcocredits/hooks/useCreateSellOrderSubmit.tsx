@@ -10,6 +10,7 @@ import { getFormattedNumber } from 'web-components/lib/utils/format';
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { denomToMicro } from 'lib/denom.utils';
+import { SellFailureEvent, SellSuccessEvent } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import DenomIcon from 'components/molecules/DenomIcon';
@@ -67,11 +68,34 @@ const useCreateSellOrderSubmit = ({
         memo: undefined,
       };
 
-      const onError = (): void => {
-        track<'sellFailure'>('sellFailure');
+      const onError = (err?: Error): void => {
+        const batchInfo = credits?.find(batch => batch.denom === batchDenom);
+        track<'sellFailure', SellFailureEvent>('sellFailure', {
+          batchDenom,
+          projectId: batchInfo?.projectId,
+          projectName: !!batchInfo?.projectName
+            ? batchInfo.projectName
+            : undefined,
+          creditClassId: batchInfo?.projectId.split('-')[0],
+          price,
+          enableAutoRetire,
+          currencyDenom: askDenom,
+          errorMessage: err?.message,
+        });
       };
       const onSuccess = (): void => {
-        track<'sellSuccess'>('sellSuccess');
+        const batchInfo = credits?.find(batch => batch.denom === batchDenom);
+        track<'sellSuccess', SellSuccessEvent>('sellSuccess', {
+          batchDenom,
+          projectId: batchInfo?.projectId,
+          projectName: !!batchInfo?.projectName
+            ? batchInfo.projectName
+            : undefined,
+          creditClassId: batchInfo?.projectId.split('-')[0],
+          price,
+          enableAutoRetire,
+          currencyDenom: askDenom,
+        });
       };
       signAndBroadcast(tx, onTxBroadcast, { onError, onSuccess });
 

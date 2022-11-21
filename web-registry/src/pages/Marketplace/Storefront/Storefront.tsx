@@ -360,7 +360,7 @@ export const Storefront = (): JSX.Element => {
                             projectName: normalizedSellOrders[i].project?.name,
                             projectId: normalizedSellOrders[i].project?.id,
                             creditClassId:
-                              normalizedSellOrders[i].project?.classIdUrl,
+                              normalizedSellOrders[i].project?.classId,
                           });
                           if (accountAddress) {
                             selectedSellOrderIdRef.current = Number(

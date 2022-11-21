@@ -60,12 +60,14 @@ const getSellOrdersTableRow = ({
   <Box>
     {formatNumber({ num: amountAvailable, ...quantityFormatNumberOptions })}
   </Box>,
-  <WithLoader isLoading={project?.classIdUrl === undefined} variant="skeleton">
+  <WithLoader isLoading={project?.classId === undefined} variant="skeleton">
     <Link
-      href={`/credit-classes/${project?.classIdUrl}`}
+      href={`/credit-classes/${project?.classId}`}
       sx={tableStyles.ellipsisContentColumn}
     >
-      {project?.classIdName && <BlockContent content={project?.classIdName} />}
+      {project?.classIdOrName && (
+        <BlockContent content={project?.classIdOrName} />
+      )}
     </Link>
   </WithLoader>,
   <Link

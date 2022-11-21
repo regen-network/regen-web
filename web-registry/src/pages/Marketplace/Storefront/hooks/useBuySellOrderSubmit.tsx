@@ -128,7 +128,6 @@ const useBuySellOrderSubmit = ({
       };
 
       const onError = (err?: Error): void => {
-        console.log(err);
         track<'buyFailure', BuyFailureEvent>('buyFailure', {
           url: location.pathname,
           price: String(price),

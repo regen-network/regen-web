@@ -1,12 +1,9 @@
 import React, { useCallback, useMemo, useState } from 'react';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
-import { Center } from 'web-components/lib/components/box';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import RegenModal from 'web-components/lib/components/modal';
 import WalletModal from 'web-components/lib/components/modal/wallet-modal';
 import { WalletModalState } from 'web-components/lib/components/modal/wallet-modal/WalletModal.types';
-import { Title } from 'web-components/lib/components/typography';
 
 import { useGlobalStore } from 'lib/context/globalContext';
 

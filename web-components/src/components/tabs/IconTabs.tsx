@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, styled, SxProps } from '@mui/material';
 import Tabs, { TabsProps } from '@mui/material/Tabs';
 
@@ -76,6 +76,10 @@ const IconTabs: React.FC<React.PropsWithChildren<IconTabsProps>> = ({
   ): void => {
     setValue(newValue);
   };
+
+  useEffect(() => {
+    setValue(activeTab);
+  }, [activeTab]);
 
   return (
     <div>

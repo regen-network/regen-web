@@ -14,6 +14,8 @@ import {
   BridgedEcocreditsTable,
 } from 'components/organisms';
 
+import { useActiveTab } from './hooks/useActiveTab';
+
 export const MyBridge = (): JSX.Element => {
   const { wallet } = useLedger();
 
@@ -36,10 +38,17 @@ export const MyBridge = (): JSX.Element => {
     [wallet?.address],
   );
 
+  const activeTab = useActiveTab(tabs);
+
   return (
     <Flex flexDirection="column" sx={{ width: '100%' }}>
       <Card sx={{ mb: 5 }}>
-        <IconTabs tabs={tabs} size={'xl'} sxs={tabsStyles.tabsInsideCard} />
+        <IconTabs
+          tabs={tabs}
+          size="xl"
+          sxs={tabsStyles.tabsInsideCard}
+          activeTab={activeTab}
+        />
       </Card>
       <BridgeInfo />
     </Flex>

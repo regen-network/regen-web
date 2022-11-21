@@ -34,6 +34,16 @@ export const BuySellOrderFlow = ({
   isFlowStarted,
   setIsFlowStarted,
 }: Props): JSX.Element => {
+  /**
+   * ui management
+   */
+  const navigate = useNavigate();
+
+  // persistence for Tx details (orderId and amount)
+  const selectedSellOrderIdRef = useRef<number>();
+  const submittedQuantityRef = useRef<number>();
+
+  // modals and display
   const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [txModalTitle, setTxModalTitle] = useState<string>('');
@@ -41,32 +51,12 @@ export const BuySellOrderFlow = ({
   const [txModalHeader, setTxModalHeader] = useState<string>('');
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
-  const { sellOrdersResponse, refetchSellOrders } = useQuerySellOrders();
-  const projectSellOrderIds = useMemo(
-    () => selectedProject?.sellOrders.map(sellOrder => sellOrder.id),
-    [selectedProject],
-  );
-  const sellOrders = sellOrdersResponse?.sellOrders;
-  const projectUiSellOrdersInfo = useMemo(
-    () =>
-      sellOrders
-        ?.map(normalizeToUISellOrderInfo)
-        .filter(sellOrder => projectSellOrderIds?.includes(sellOrder.id)),
-    [sellOrders, projectSellOrderIds],
-  );
-  const selectedSellOrderIdRef = useRef<number>();
-  const submittedQuantityRef = useRef<number>();
-  const navigate = useNavigate();
 
   const closeBuyModal = (): void => {
     setIsBuyModalOpen(false);
     setIsFlowStarted(false);
   };
   const closeProcessingModal = (): void => setIsProcessingModalOpen(false);
-
-  const handleTxQueued = (): void => {
-    setIsProcessingModalOpen(true);
-  };
   const handleTxModalClose = (): void => {
     setCardItems(undefined);
     setTxModalTitle('');
@@ -76,9 +66,16 @@ export const BuySellOrderFlow = ({
     setIsFlowStarted(false);
     selectedSellOrderIdRef.current = undefined;
   };
-  const handleError = (): void => {
-    closeProcessingModal();
-    setTxModalTitle('Buy Credits Error');
+  const onTxSuccessButtonClick = (): void => {
+    handleTxModalClose();
+    navigate('/ecocredits/portfolio');
+  };
+
+  /**
+   * ledger msg hook setup
+   */
+  const handleTxQueued = (): void => {
+    setIsProcessingModalOpen(true);
   };
   const handleTxDelivered = async (
     _deliverTxResponse: DeliverTxResponse,
@@ -87,16 +84,9 @@ export const BuySellOrderFlow = ({
     closeBuyModal();
     selectedSellOrderIdRef.current = undefined;
   };
-  const onTxSuccessButtonClick = (): void => {
-    handleTxModalClose();
-    navigate('/ecocredits/portfolio');
-  };
-  const onSubmitCallback = ({
-    creditCount,
-    sellOrderId,
-  }: BuyCreditsValues): void => {
-    selectedSellOrderIdRef.current = Number(sellOrderId);
-    submittedQuantityRef.current = creditCount;
+  const handleError = (): void => {
+    closeProcessingModal();
+    setTxModalTitle('Buy Credits Error');
   };
 
   const {
@@ -107,12 +97,34 @@ export const BuySellOrderFlow = ({
     error,
     setError,
   } = useMsgClient(handleTxQueued, handleTxDelivered, handleError);
+
   const accountAddress = wallet?.address;
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
   const errorEnum = findErrorByCodeEnum({ errorCode: error });
   const ErrorIcon = errorsMapping[errorEnum].icon;
 
+  /**
+   * data processing (business logic)
+   */
+
+  const projectSellOrderIds = useMemo(
+    () => selectedProject?.sellOrders.map(sellOrder => sellOrder.id),
+    [selectedProject],
+  );
+
+  const { sellOrdersResponse, refetchSellOrders } = useQuerySellOrders();
+  const allSellOrders = sellOrdersResponse?.sellOrders;
+
+  const projectUiSellOrdersInfo = useMemo(
+    () =>
+      allSellOrders
+        ?.map(normalizeToUISellOrderInfo)
+        .filter(sellOrder => projectSellOrderIds?.includes(sellOrder.id)),
+    [allSellOrders, projectSellOrderIds],
+  );
+
+  // project data prepared for buy modal
   const project = useMemo(
     () => ({
       id: selectedProject?.id.toString() ?? '',
@@ -123,7 +135,31 @@ export const BuySellOrderFlow = ({
     [selectedProject, projectUiSellOrdersInfo, accountAddress],
   );
 
-  const projectData = useMemo(() => {
+  /**
+   * checker fn !!
+   */
+  useCheckSellOrderAvailabilty({
+    selectedSellOrderIdRef,
+    submittedQuantityRef,
+    setError,
+    sellOrders: projectUiSellOrdersInfo,
+    setCardItems,
+    setTxModalHeader,
+    setTxModalTitle,
+  });
+
+  /**
+   * Submit hook setup
+   */
+  const onSubmitCallback = ({
+    creditCount,
+    sellOrderId,
+  }: BuyCreditsValues): void => {
+    selectedSellOrderIdRef.current = Number(sellOrderId);
+    submittedQuantityRef.current = creditCount;
+  };
+
+  const projectDisplayData = useMemo(() => {
     if (!selectedProject || !selectedProject.id) return;
     const projectId = selectedProject.id;
     return {
@@ -134,7 +170,7 @@ export const BuySellOrderFlow = ({
 
   const buySellOrderSubmit = useBuySellOrderSubmit({
     accountAddress,
-    project: projectData,
+    project: projectDisplayData,
     signAndBroadcast,
     setCardItems,
     setTxButtonTitle,
@@ -145,6 +181,9 @@ export const BuySellOrderFlow = ({
     onSubmitCallback,
   });
 
+  /**
+   * ui update effect
+   */
   useEffect(() => {
     if (isFlowStarted && selectedProject && accountAddress) {
       refetchSellOrders();
@@ -153,16 +192,6 @@ export const BuySellOrderFlow = ({
       setDisplayErrorBanner(true);
     }
   }, [selectedProject, isFlowStarted, accountAddress, refetchSellOrders]);
-
-  useCheckSellOrderAvailabilty({
-    selectedSellOrderIdRef,
-    submittedQuantityRef,
-    setError,
-    sellOrders: projectUiSellOrdersInfo,
-    setCardItems,
-    setTxModalHeader,
-    setTxModalTitle,
-  });
 
   return (
     <>

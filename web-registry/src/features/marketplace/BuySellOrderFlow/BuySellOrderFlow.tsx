@@ -26,11 +26,11 @@ import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
 type Props = {
   isFlowStarted: boolean;
   setIsFlowStarted: UseStateSetter<boolean>;
-  selectedProject: ProjectWithOrderData | null;
+  projects?: ProjectWithOrderData[] | null | undefined;
 };
 
 export const BuySellOrderFlow = ({
-  selectedProject,
+  projects,
   isFlowStarted,
   setIsFlowStarted,
 }: Props): JSX.Element => {
@@ -107,10 +107,27 @@ export const BuySellOrderFlow = ({
   /**
    * data processing (business logic)
    */
+  const [selectedProject, setSelectedProject] =
+    useState<ProjectWithOrderData>();
 
-  const projectSellOrderIds = useMemo(
-    () => selectedProject?.sellOrders.map(sellOrder => sellOrder.id),
-    [selectedProject],
+  useEffect(() => {
+    if (projects?.length === 1) setSelectedProject(projects[0]);
+  }, [projects]);
+
+  const setSelectedProjectById = (projectId: string): void | undefined => {
+    if (!projects || projects.length <= 1) return;
+    const found = projects.find(project => project.id === projectId);
+    if (found) setSelectedProject(found);
+  };
+
+  const sellOrderIds = useMemo(
+    () =>
+      projects &&
+      projects
+        .map(project => project.sellOrders)
+        .flat()
+        .map(sellOrder => sellOrder.id),
+    [projects],
   );
 
   const { sellOrdersResponse, refetchSellOrders } = useQuerySellOrders();
@@ -120,19 +137,28 @@ export const BuySellOrderFlow = ({
     () =>
       allSellOrders
         ?.map(normalizeToUISellOrderInfo)
-        .filter(sellOrder => projectSellOrderIds?.includes(sellOrder.id)),
-    [allSellOrders, projectSellOrderIds],
+        .filter(sellOrder => sellOrderIds?.includes(sellOrder.id)),
+    [allSellOrders, sellOrderIds],
   );
 
-  // project data prepared for buy modal
-  const project = useMemo(
-    () => ({
-      id: selectedProject?.id.toString() ?? '',
-      sellOrders: projectUiSellOrdersInfo?.filter(
+  // project data prepared for buy modal (add projectId and filter the seller)
+  const _project = useMemo(
+    () =>
+      selectedProject && {
+        id: selectedProject?.id.toString() ?? '',
+        sellOrders: projectUiSellOrdersInfo?.filter(
+          sellOrder => sellOrder.seller !== accountAddress,
+        ),
+      },
+    [selectedProject, projectUiSellOrdersInfo, accountAddress],
+  );
+
+  const _sellOrders = useMemo(
+    () =>
+      projectUiSellOrdersInfo?.filter(
         sellOrder => sellOrder.seller !== accountAddress,
       ),
-    }),
-    [selectedProject, projectUiSellOrdersInfo, accountAddress],
+    [projectUiSellOrdersInfo, accountAddress],
   );
 
   /**
@@ -185,13 +211,13 @@ export const BuySellOrderFlow = ({
    * ui update effect
    */
   useEffect(() => {
-    if (isFlowStarted && selectedProject && accountAddress) {
+    if (projects && isFlowStarted && accountAddress) {
       refetchSellOrders();
       setIsBuyModalOpen(true);
-    } else if (selectedProject && isFlowStarted && !accountAddress) {
+    } else if (projects && isFlowStarted && !accountAddress) {
       setDisplayErrorBanner(true);
     }
-  }, [selectedProject, isFlowStarted, accountAddress, refetchSellOrders]);
+  }, [projects, isFlowStarted, accountAddress, refetchSellOrders]);
 
   return (
     <>
@@ -199,7 +225,11 @@ export const BuySellOrderFlow = ({
         open={isBuyModalOpen}
         onClose={closeBuyModal}
         onSubmit={buySellOrderSubmit}
-        project={project}
+        project={_project}
+        sellOrders={_sellOrders}
+        setSelectedProjectById={
+          projects && projects?.length > 1 ? setSelectedProjectById : undefined
+        }
       />
       <ProcessingModal
         open={isProcessingModalOpen}

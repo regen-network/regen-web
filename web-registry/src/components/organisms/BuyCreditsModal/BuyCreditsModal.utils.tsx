@@ -11,7 +11,12 @@ import { microToDenom } from 'lib/denom.utils';
 import { UISellOrderInfo } from 'pages/Projects/Projects.types';
 import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
 
-import { BuyCreditsProject, BuyCreditsValues } from '..';
+import { BuyCreditsValues } from '..';
+
+const getProjectFromBatch = (batchDenom: string): string => {
+  const parts = batchDenom.split('-');
+  return `${parts[0]}-${parts[1]}`;
+};
 
 /* sortBySellOrderId */
 
@@ -31,12 +36,14 @@ const sortBySellOrderId = (
 type GetSellOrderLabelParams = {
   sellOrder: UISellOrderInfo;
   allowedDenomsData?: QueryAllowedDenomsResponse;
+  setSelectedProjectById?: (projectId: string) => void;
 };
 export const getSellOrderLabel = ({
   sellOrder,
   allowedDenomsData,
+  setSelectedProjectById,
 }: GetSellOrderLabelParams): JSX.Element => {
-  const { id, askAmount, askDenom, quantity } = {
+  const { id, askAmount, askDenom, quantity, batchDenom } = {
     ...sellOrder,
   };
   const price = microToDenom(askAmount);
@@ -45,15 +52,32 @@ export const getSellOrderLabel = ({
     denom: askDenom,
   });
   const truncatedQuantity = floorFloatNumber(parseFloat(quantity));
+
+  const getSupplementaryData = (
+    id: string,
+    batchDenom: string,
+    withProject: boolean,
+  ): string => {
+    return withProject
+      ? `(#${id}, ${getProjectFromBatch(batchDenom)})`
+      : `(#${id})`;
+  };
+
+  const clickHandler = setSelectedProjectById
+    ? () => setSelectedProjectById(getProjectFromBatch(batchDenom))
+    : () => {};
+
   return (
-    <Box sx={{ ml: 4 }}>
+    <Box onClick={clickHandler} sx={{ ml: 4 }}>
       <Box
         sx={{ display: 'inline', fontWeight: 700 }}
       >{`${price} ${displayDenom}/credit: `}</Box>
       <Box
         sx={{ display: 'inline', mr: 1 }}
       >{`${truncatedQuantity} credit(s) available`}</Box>
-      <Box sx={{ display: 'inline', color: 'info.main' }}>{`(#${id})`}</Box>
+      <Box sx={{ display: 'inline', color: 'info.main' }}>
+        {getSupplementaryData(id, batchDenom, Boolean(setSelectedProjectById))}
+      </Box>
     </Box>
   );
 };
@@ -63,13 +87,19 @@ export const getSellOrderLabel = ({
 type GetSellOrdersOptionsParams = {
   sellOrders: UISellOrderInfo[];
   allowedDenomsData?: QueryAllowedDenomsResponse;
+  setSelectedProjectById?: (projectId: string) => void;
 };
 const getSellOrdersOptions = ({
   sellOrders,
   allowedDenomsData,
+  setSelectedProjectById,
 }: GetSellOrdersOptionsParams): Option[] => {
   return sellOrders.map(sellOrder => ({
-    label: getSellOrderLabel({ sellOrder, allowedDenomsData }),
+    label: getSellOrderLabel({
+      sellOrder,
+      allowedDenomsData,
+      setSelectedProjectById,
+    }),
     value: sellOrder.id,
   }));
 };
@@ -77,30 +107,34 @@ const getSellOrdersOptions = ({
 /* getOptions */
 
 type GetOptionsParams = {
-  project: BuyCreditsProject;
+  sellOrders?: UISellOrderInfo[];
   allowedDenomsData?: QueryAllowedDenomsResponse;
+  setSelectedProjectById?: (projectId: string) => void;
 };
 export const getOptions = ({
-  project,
+  sellOrders,
   allowedDenomsData,
+  setSelectedProjectById,
 }: GetOptionsParams): Option[] => {
-  if (!project?.sellOrders?.length) return [];
+  if (!sellOrders?.length) return [{ label: '', value: '' }];
 
-  const retirableSellOrders = project.sellOrders
+  const retirableSellOrders = sellOrders
     .filter(sellOrder => !sellOrder.disableAutoRetire)
     .sort(sortBySellOrderId);
-  const retirableAndTradableSellOrders = project.sellOrders
+  const retirableAndTradableSellOrders = sellOrders
     .filter(sellOrder => sellOrder.disableAutoRetire)
     .sort(sortBySellOrderId);
 
   const retirableOptions = getSellOrdersOptions({
     sellOrders: retirableSellOrders,
     allowedDenomsData,
+    setSelectedProjectById,
   });
 
   const retirableAndTradableOptions = getSellOrdersOptions({
     sellOrders: retirableAndTradableSellOrders,
     allowedDenomsData,
+    setSelectedProjectById,
   });
 
   const allOptionsLength =

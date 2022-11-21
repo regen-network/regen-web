@@ -137,7 +137,7 @@ const getCreditsWithData = async ({
         ...batch,
         balance,
         classId,
-        className: creditClassSanity?.nameRaw,
+        className: creditClassSanity?.nameRaw ?? classId,
         projectName: metadata?.['schema:name'] ?? batch.projectId,
         projectLocation: project.project?.jurisdiction,
       };

@@ -26,7 +26,7 @@ import { useEcocredits } from 'hooks';
 
 export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { batchDenom } = useParams();
-  const [ledgerLoading, setLedgerLoading] = useState(false);
+  const [ledgerLoading, setLedgerLoading] = useState(true);
   const [batch, setBatch] = useState<BatchInfoWithSupply>();
   const [metadata, setMetadata] =
     useState<Partial<CreditBatchMetadataUnionLD>>();
@@ -41,7 +41,6 @@ export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
     const fetch = async (): Promise<void> => {
       if (batchDenom) {
         try {
-          setLedgerLoading(true);
           const batch = await getBatchWithSupplyForDenom(batchDenom);
           setBatch(batch);
           if (batch.metadata) {
@@ -53,6 +52,8 @@ export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
         } finally {
           setLedgerLoading(false);
         }
+      } else {
+        setLedgerLoading(false);
       }
     };
     fetch();

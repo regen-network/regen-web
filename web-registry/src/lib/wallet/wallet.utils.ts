@@ -87,7 +87,7 @@ export const finalizeConnection = async ({
     };
     if (track) {
       track<'login', LoginEvent>('login', {
-        date: Date(),
+        date: new Date().toUTCString(),
         account: wallet.address,
       });
     }

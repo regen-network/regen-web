@@ -40,7 +40,7 @@ import {
   BatchTotalsForProject,
 } from '../../../types/ledger/ecocredit';
 import { ProjectTopLink } from '../../atoms';
-import { ProjectBatchTotals, ProjectMetadata } from '../../molecules';
+import { ProjectBatchTotals, ProjectPageMetadata } from '../../molecules';
 import { CreditBatches } from '../CreditBatches/CreditBatches';
 import {
   ProjectTopSectionQuoteMark,
@@ -203,7 +203,7 @@ function ProjectTopSection({
               sx={{ mt: [2, 4], py: [2, 6] }}
             />
           </Link>
-          <ProjectMetadata metadata={metadata} projectId={projectId} />
+          <ProjectPageMetadata metadata={metadata} projectId={projectId} />
           <LazyLoad offset={50}>
             {videoURL && (
               <Card className={classes.media}>

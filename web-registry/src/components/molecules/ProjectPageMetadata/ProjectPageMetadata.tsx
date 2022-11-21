@@ -7,14 +7,14 @@ import { formatDate } from 'web-components/lib/utils/format';
 
 import { ProjectMetadataLDUnion } from '../../../generated/json-ld';
 import { ArrowLink } from '../../atoms/MetadataArrowLink';
-import { MetaDetail } from './ProjectMetadata.MetaDetail';
+import { MetaDetail } from './ProjectPageMetadata.MetaDetail';
 
 export interface MetadataProps {
   metadata?: Partial<ProjectMetadataLDUnion>;
   projectId?: string;
 }
 
-const ProjectMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
+const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
   metadata,
   projectId,
 }) => {
@@ -25,22 +25,28 @@ const ProjectMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
     return null;
   }
 
-  const vcsProjectId = metadata?.['regen:vcsProjectId'];
-  const cfcProjectId = metadata?.['regen:cfcProjectId'];
-  const toucanProjectTokenId = metadata?.['regen:toucanProjectTokenId'];
+  // Common
   const startDate = metadata?.['regen:projectStartDate']?.['@value'];
   const endDate = metadata?.['regen:projectEndDate']?.['@value'];
-  const methodology = metadata?.['regen:vcsMethodology'];
-  const approvedMethodologies = metadata?.['regen:approvedMethodologies'];
-  const methodologyCount = approvedMethodologies?.length;
-
   const offsetGenerationMethod =
     metadata?.['regen:offsetGenerationMethod'] ||
     metadata?.['http://regen.network/offsetGenerationMethod'];
-  const offsetProtocol = metadata?.['regen:offsetProtocol'];
-  const projectDesignDocument = metadata?.['regen:projectDesignDocument'];
   const projectActivity = metadata?.['regen:projectActivity'];
   const projectType = metadata?.['regen:projectType'];
+
+  // VCS
+  const vcsProjectId = metadata?.['regen:vcsProjectId'];
+  const methodology = metadata?.['regen:vcsMethodology'];
+
+  // CFC
+  const cfcProjectId = metadata?.['regen:cfcProjectId'];
+  const projectDesignDocument = metadata?.['regen:projectDesignDocument'];
+  const offsetProtocol = metadata?.['regen:offsetProtocol'];
+
+  // Toucan
+  const toucanProjectTokenId = metadata?.['regen:toucanProjectTokenId'];
+  const approvedMethodologies = metadata?.['regen:approvedMethodologies'];
+  const methodologyCount = approvedMethodologies?.length;
 
   return (
     <Box sx={{ pt: 8 }}>
@@ -125,7 +131,6 @@ const ProjectMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
               data={metadata?.['regen:projectType']}
             />
           )}
-
           {projectDesignDocument && (
             <MetaDetail
               label="documents"
@@ -159,9 +164,8 @@ const ProjectMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
               }
             />
           )}
-
           {startDate && (
-            <MetaDetail // TODO: where?
+            <MetaDetail
               label="project start date"
               data={formatDate(startDate)}
             />
@@ -186,4 +190,4 @@ const ProjectMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
   );
 };
 
-export { ProjectMetadata };
+export { ProjectPageMetadata };

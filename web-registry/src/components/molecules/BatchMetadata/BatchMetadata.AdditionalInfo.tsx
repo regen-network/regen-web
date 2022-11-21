@@ -20,15 +20,17 @@ export const BatchMetadataAdditionalInfo = ({
   const cfcVintageYear = data?.['regen:cfcVintageYear'];
 
   // Toucan
+  const toucanVintageTokenId = data?.['regen:toucanVintageTokenId']?.toString();
+  const toucanURI = data?.['regen:toucanURI'];
 
   return (
     <>
+      {/* VCS */}
       {vcsRetirementSerialNumber && (
         <MetaDetail label="vcs retirement serial number">
           {data?.['regen:vcsRetirementSerialNumber'] || '-'}
         </MetaDetail>
       )}
-
       {additionalCertifications && additionalCertifications?.length > 0 && (
         <MetaDetail label="additional certifications">
           <Flex col sx={{ gap: 2 }}>
@@ -43,6 +45,7 @@ export const BatchMetadataAdditionalInfo = ({
         </MetaDetail>
       )}
 
+      {/* CFC */}
       {serialNumbers && serialNumbers?.length > 0 && (
         <MetaDetail label="cfc retirement serial numbers">
           <Flex col>
@@ -54,13 +57,11 @@ export const BatchMetadataAdditionalInfo = ({
           </Flex>
         </MetaDetail>
       )}
-
       {cfcVintageYear && (
         <MetaDetail label="cfc vintage year">
           {data?.['regen:cfcVintageYear']?.['@value'] || '-'}
         </MetaDetail>
       )}
-
       {reports && reports?.length > 0 && (
         <MetaDetail label="verification reports">
           <Flex col sx={{ gap: 2 }}>
@@ -72,6 +73,13 @@ export const BatchMetadataAdditionalInfo = ({
               />
             ))}
           </Flex>
+        </MetaDetail>
+      )}
+
+      {/* Toucan */}
+      {toucanVintageTokenId && (
+        <MetaDetail label="Toucan Vintage Token Id">
+          <LinkOrDash href={toucanURI} label={toucanVintageTokenId} />
         </MetaDetail>
       )}
     </>

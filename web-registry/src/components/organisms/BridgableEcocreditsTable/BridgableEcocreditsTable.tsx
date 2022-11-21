@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 import { loaderStyles } from 'styles/loader';
 import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
+import { useTrack } from 'use-analytics';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';

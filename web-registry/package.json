@@ -72,7 +72,7 @@
     "lint-fix": "eslint ./src --fix -c .eslintrc.js --ext .ts,.tsx",
     "format": "prettier --write --loglevel warn './src/**/*.{ts,tsx,json,md,css}'",
     "format-and-fix": "yarn format && yarn lint-fix",
-    "start": "HTTPS=true react-app-rewired start",
+    "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-scripts test",
     "test-no-watch": "react-scripts test --watchAll=false --forceExit",

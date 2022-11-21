@@ -12,7 +12,7 @@ export interface UseStoreDataReturn<Store> {
 
 /* Fast Context internal data/logic */
 // store all data into a ref to prevent rerenders
-// subscription mecanism also store in a ref
+// subscription mecanism also stored in a ref
 // -> register subscribers on useStore(selector) call
 // -> call all subscribers on setStore({field: value}) call
 export function useStoreData<Store>({

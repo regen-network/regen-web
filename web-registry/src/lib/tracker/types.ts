@@ -4,52 +4,45 @@ export type Track = <IEventName extends string, IPayload = any>(
 ) => Promise<any>;
 
 export interface LoginEvent {
-  date: string;
   account: string;
+  date: string;
 }
 
-export interface Buy1Event {
-  url: string;
-  cardType?: string;
-  buttonLocation: string;
-  projectName?: string | null;
-  projectId?: string | null;
-  creditClassName?: string;
+interface BuyBaseEvent {
   creditClassId?: string | null;
+  projectId?: string | null;
+  projectName?: string | null;
+  url: string;
 }
 
-export interface Buy2Event {
-  url: string;
-  price?: string;
+export interface Buy1Event extends BuyBaseEvent {
+  buttonLocation: string;
+  cardType?: string;
+  creditClassName?: string;
+}
+
+export interface Buy2Event extends BuyBaseEvent {
   batchDenom?: string;
-  projectName?: string | null;
-  projectId?: string | null;
-  creditClassId?: string;
+  currencyDenom?: string;
+  price?: string;
   quantity?: number;
-  currencyDenom?: string;
   retirementAction?: string;
 }
 
-export interface BuySuccessEvent {
-  url: string;
-  price?: string;
+interface BuyOutcomeBaseEvent {
   batchDenom?: string;
-  projectName?: string | null;
-  projectId?: string | null;
-  quantity: number;
   currencyDenom?: string;
+  price?: string;
+  projectId?: string | null;
+  projectName?: string | null;
+  quantity: number;
   retirementAction?: string;
+  url: string;
 }
 
-export interface BuyFailureEvent {
-  url: string;
-  price?: string;
-  batchDenom?: string;
-  projectName?: string | null;
-  projectId?: string | null;
-  quantity: number;
-  currencyDenom?: string;
-  retirementAction?: string;
+export interface BuySuccessEvent extends BuyOutcomeBaseEvent {}
+
+export interface BuyFailureEvent extends BuyOutcomeBaseEvent {
   errorMessage?: string;
 }
 

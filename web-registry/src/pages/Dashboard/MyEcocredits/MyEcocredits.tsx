@@ -311,6 +311,7 @@ export const MyEcocredits = (): JSX.Element => {
                       label: CREDIT_SEND_TITLE,
                       onClick: () => {
                         track<'send1', Send1Event>('send1', {
+                          batchDenom: credits[i].denom,
                           projectId: credits[i].projectId,
                           projectName: credits[i]?.projectName,
                           creditClassId: credits[i]?.classId,

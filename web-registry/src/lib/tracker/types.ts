@@ -84,14 +84,31 @@ export interface SellFailureEvent extends SellOutcomeBaseEvent {
   errorMessage?: string;
 }
 
-export interface Send1Event {
+interface SendBaseEvent {
+  batchDenom: string;
+  creditClassId?: string;
   projectId: string;
   projectName?: string;
-  creditClassId?: string;
 }
 
-export interface Send2Event {}
+export interface Send1Event extends SendBaseEvent {}
 
-export interface SendSuccessEvent {}
+export interface Send2Event extends SendBaseEvent {
+  enableAutoRetire?: boolean;
+  quantity?: number;
+}
 
-export interface SendFailureEvent {}
+interface SendOutcomeBaseEvent {
+  batchDenom?: string;
+  creditClassId?: string;
+  enableAutoRetire?: boolean;
+  projectId?: string;
+  projectName?: string;
+  quantity?: number;
+}
+
+export interface SendSuccessEvent extends SendOutcomeBaseEvent {}
+
+export interface SendFailureEvent extends SendOutcomeBaseEvent {
+  errorMessage?: string;
+}

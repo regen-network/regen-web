@@ -129,7 +129,6 @@ const CreditSendForm: React.FC<React.PropsWithChildren<FormProps>> = ({
       initialValues={initialValues}
       validate={validateHandler}
       onSubmit={async values => {
-        track<'send2'>('send2'); //TODO: move to onSubmit, regen-network/regen-registry#1365
         onSubmit(values);
       }}
     >

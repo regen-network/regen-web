@@ -7,6 +7,11 @@ import type { Item } from 'web-components/lib/components/modal/TxModal';
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import type { UseStateSetter } from 'types/react/use-state';
 import { getAccountUrl } from 'lib/block-explorer';
+import {
+  Send2Event,
+  SendFailureEvent,
+  SendSuccessEvent,
+} from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
@@ -41,8 +46,17 @@ const useCreditSendSubmit = ({
   const { track } = useTracker();
   const creditSendSubmit = useCallback(
     async (values: CreditSendFormValues): Promise<void> => {
-      if (!accountAddress) return Promise.reject();
       const batchDenom = credits[creditSendOpen].denom;
+      track<'send2', Send2Event>('send2', {
+        batchDenom,
+        quantity: values.totalAmount,
+        enableAutoRetire: values.withRetire,
+        creditClassId: credits[creditSendOpen].classId,
+        projectId: credits[creditSendOpen].projectId,
+        projectName: credits[creditSendOpen].projectName,
+      });
+      if (!accountAddress) return Promise.reject();
+
       const {
         withRetire,
         recipient,
@@ -69,11 +83,32 @@ const useCreditSendSubmit = ({
         memo: note,
       };
 
-      const onError = (): void => {
-        track<'sendFailure'>('sendFailure');
+      const onError = (err?: Error): void => {
+        const batchInfo = credits?.find(batch => batch.denom === batchDenom);
+        track<'sendFailure', SendFailureEvent>('sendFailure', {
+          batchDenom,
+          projectId: batchInfo?.projectId,
+          projectName: !!batchInfo?.projectName
+            ? batchInfo.projectName
+            : undefined,
+          creditClassId: batchInfo?.projectId.split('-')[0],
+          enableAutoRetire: withRetire,
+          quantity: totalAmount,
+          errorMessage: err?.message,
+        });
       };
       const onSuccess = (): void => {
-        track<'sendSuccess'>('sendSuccess');
+        const batchInfo = credits?.find(batch => batch.denom === batchDenom);
+        track<'sendSuccess', SendSuccessEvent>('sendSuccess', {
+          batchDenom,
+          projectId: batchInfo?.projectId,
+          projectName: !!batchInfo?.projectName
+            ? batchInfo.projectName
+            : undefined,
+          creditClassId: batchInfo?.projectId.split('-')[0],
+          enableAutoRetire: withRetire,
+          quantity: totalAmount,
+        });
       };
       await signAndBroadcast(tx, () => setCreditSendOpen(-1), {
         onError,

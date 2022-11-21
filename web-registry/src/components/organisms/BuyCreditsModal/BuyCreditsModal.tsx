@@ -200,6 +200,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                 price: selectedSellOrder?.askAmount,
                 batchDenom: selectedSellOrder?.batchDenom,
                 projectId: project.id,
+                projectName: project.name,
                 creditClassId: project.id.split('-')[0],
                 quantity: values.creditCount,
                 currencyDenom: selectedSellOrder?.askDenom,

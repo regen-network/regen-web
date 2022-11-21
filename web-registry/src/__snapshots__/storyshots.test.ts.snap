@@ -2618,40 +2618,6 @@ exports[`Storyshots Modal Basket Take Modal 1`] = `
 </MemoryRouter>
 `;
 
-exports[`Storyshots Modal Bridge Modal 1`] = `
-<MemoryRouter
-  initialEntries={
-    Array [
-      Object {
-        "pathname": "/",
-        "search": "",
-        "state": undefined,
-      },
-    ]
-  }
->
-  <Routes>
-    <Route
-      element={
-        <RouterLogger>
-          <RegenThemeProvider
-            injectFonts={true}
-          >
-            <CssBaseline />
-            <Unknown />
-          </RegenThemeProvider>
-        </RouterLogger>
-      }
-      path="/"
-    >
-      <Route
-        index={true}
-      />
-    </Route>
-  </Routes>
-</MemoryRouter>
-`;
-
 exports[`Storyshots Modal Confirm Modal 1`] = `
 <MemoryRouter
   initialEntries={
@@ -3060,6 +3026,40 @@ exports[`Storyshots Modal/WalletModal Default 1`] = `
 </MemoryRouter>
 `;
 
+exports[`Storyshots Modal/WalletModal Default 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    >
+      <Route
+        index={true}
+      />
+    </Route>
+  </Routes>
+</MemoryRouter>
+`;
+
 exports[`Storyshots Party Party Address 1`] = `
 <MemoryRouter
   initialEntries={
@@ -3163,6 +3163,40 @@ exports[`Storyshots ReadMore Read More 1`] = `
 `;
 
 exports[`Storyshots Registry/Molecules/Scrollable Codebox Scrollable Codebox 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    >
+      <Route
+        index={true}
+      />
+    </Route>
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Registry/Organisms/Bridge Modal Bridge Modal 1`] = `
 <MemoryRouter
   initialEntries={
     Array [

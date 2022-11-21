@@ -9,7 +9,7 @@ import type { UseStateSetter } from 'types/react/use-state';
 
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
-import { RETIRE_HEADER } from '../MyEcocredits.contants';
+import { RETIRE_HEADER } from '../MyEcocredits.constants';
 
 type Props = {
   accountAddress?: string;

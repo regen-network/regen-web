@@ -11,7 +11,7 @@ import type { UseStateSetter } from 'types/react/use-state';
 import type { BasketTokens } from 'hooks/useBasketTokens';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
-import { PUT_HEADER } from '../MyEcocredits.contants';
+import { PUT_HEADER } from '../MyEcocredits.constants';
 
 type Props = {
   accountAddress?: string;

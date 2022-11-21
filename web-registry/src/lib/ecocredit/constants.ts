@@ -11,6 +11,7 @@ import {
 } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
 import {
   MsgBridge,
+  MsgBridgeReceive,
   MsgCancel,
   MsgCreateBatch,
   MsgCreateClass,
@@ -137,6 +138,10 @@ export const ECOCREDIT_MESSAGE_TYPES = {
   BRIDGE: {
     message: `/${MsgBridge.$type}`,
     readable: 'bridge',
+  },
+  BRIDGE_RECEIVE: {
+    message: `/${MsgBridgeReceive.$type}`,
+    readable: 'bridge receive',
   },
   UPDATE_PROJECT_METADATA: {
     message: `/${MsgUpdateProjectMetadata.$type}`,

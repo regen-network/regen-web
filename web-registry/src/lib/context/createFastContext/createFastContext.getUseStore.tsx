@@ -8,13 +8,13 @@ interface GetUseStoreParams<Store> {
   initialState: Store;
 }
 
-/* Fast Context exposed API */
-// Arg: select any field from the store, ie: (store) => store.myField
-// Response: [myField, storeSetter]
 export function getUseStore<Store>({
   StoreContext,
   initialState,
 }: GetUseStoreParams<Store>) {
+  /* Fast Context exposed API */
+  // Arg: select any field from the store, ie: (store) => store.myField
+  // Response: [myField, storeSetter]
   function useStore<SelectorOutput>(
     selector: (store: Store) => SelectorOutput,
   ): [SelectorOutput, (value: Partial<Store>) => void] {

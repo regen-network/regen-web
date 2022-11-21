@@ -4,17 +4,17 @@ interface UseStoreDataParams<Store> {
   initialState: Store;
 }
 
-/* Fast Context internal data/logic */
-// store all data into a ref to prevent rerenders
-// subscription mecanism also store in a ref
-// -> register subscribers on useStore(selector) call
-// -> call all subscribers on setStore({field: value}) call
 export interface UseStoreDataReturn<Store> {
   get: () => Store;
   set: (value: Partial<Store>) => void;
   subscribe: (callback: () => void) => () => void;
 }
 
+/* Fast Context internal data/logic */
+// store all data into a ref to prevent rerenders
+// subscription mecanism also store in a ref
+// -> register subscribers on useStore(selector) call
+// -> call all subscribers on setStore({field: value}) call
 export function useStoreData<Store>({
   initialState,
 }: UseStoreDataParams<Store>): UseStoreDataReturn<Store> {

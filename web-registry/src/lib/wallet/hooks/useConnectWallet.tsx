@@ -77,7 +77,12 @@ export const useConnectWallet = ({
       }
 
       if ((isWalletConnectKeplr && walletConnect?.connected) || isKeplr) {
-        await finalizeConnection({ setWallet, walletClient, walletConfig, track });
+        await finalizeConnection({
+          setWallet,
+          walletClient,
+          walletConfig,
+          track,
+        });
       }
     },
     [

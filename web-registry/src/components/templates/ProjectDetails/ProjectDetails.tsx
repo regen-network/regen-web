@@ -10,7 +10,7 @@ import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 
 import { graphqlClient } from 'lib/clients/graphqlClient';
-import { ProjectMetadataLD } from 'lib/db/types/json-ld';
+import { NonQueryableProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
@@ -120,14 +120,15 @@ function ProjectDetails(): JSX.Element {
     : projectByHandle?.data.projectByHandle;
 
   // Legacy projects use project.metadata. On-chain projects use IRI resolver.
-  const projectTableMetadata: ProjectMetadataLD = project?.metadata;
+  const projectTableMetadata: NonQueryableProjectMetadataLD = project?.metadata;
   const iriResolvedMetadata = useQuery(
     getMetadataQuery({ iri: onChainProject?.metadata }),
   );
   const metadata = iriResolvedMetadata.data ?? projectTableMetadata;
 
+  const nonQueryableMetadata = projectTableMetadata;
   const managementActions =
-    metadata?.['regen:landManagementActions']?.['@list'];
+    nonQueryableMetadata?.['regen:landManagementActions']?.['@list'];
 
   const { batchesWithSupply, setPaginationParams, paginationParams } =
     usePaginatedBatchesByProject({ projectId: String(onChainProjectId) });
@@ -155,7 +156,7 @@ function ProjectDetails(): JSX.Element {
     metadata,
     creditClassName,
   });
-  const mediaData = useMedia({ metadata, geojson });
+  const mediaData = useMedia({ metadata: nonQueryableMetadata, geojson });
   const impactData = useImpact({ coBenefitsIris, primaryImpactIRI });
 
   const isLoading = loadingProjectByOnChainId || loadingProjectByHandle;
@@ -230,6 +231,7 @@ function ProjectDetails(): JSX.Element {
         data={data}
         onChainProject={onChainProject}
         metadata={metadata}
+        nonQueryableMetadata={nonQueryableMetadata}
         sanityCreditClassData={sanityCreditClassData}
         batchData={{
           batches: batchesWithSupply,

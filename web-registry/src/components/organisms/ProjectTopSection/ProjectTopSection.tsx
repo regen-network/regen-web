@@ -45,6 +45,7 @@ function ProjectTopSection({
   data,
   onChainProject,
   metadata,
+  nonQueryableMetadata,
   sanityCreditClassData,
   geojson,
   isGISFile,
@@ -63,21 +64,24 @@ function ProjectTopSection({
 
   const project = data?.projectByOnChainId || data?.projectByHandle; // TODO: eventually just projectByOnChainId
   const projectName = metadata?.['schema:name'];
-  const videoURL = metadata?.['regen:videoURL']?.['@value'];
-  const landStewardPhoto = metadata?.['regen:landStewardPhoto']?.['@value'];
+  const videoURL = nonQueryableMetadata?.['regen:videoURL']?.['@value'];
+  const landStewardPhoto =
+    nonQueryableMetadata?.['regen:landStewardPhoto']?.['@value'];
   const projectSize = metadata?.['regen:projectSize'];
   const area = projectSize?.['qudt:numericValue']?.['@value'];
   const unit = projectSize?.['qudt:unit']?.['@value'];
   const areaUnit = getAreaUnit(unit as qudtUnit);
   const creditClass = project?.creditClassByCreditClassId;
   const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
-  const quote = metadata?.['regen:projectQuote'];
+  const quote = nonQueryableMetadata?.['regen:projectQuote'];
   const glanceText: string[] | undefined =
-    metadata?.['regen:glanceText']?.['@list'];
+    nonQueryableMetadata?.['regen:glanceText']?.['@list'];
   const primaryDescription =
-    metadata?.['regen:landStory'] || metadata?.['schema:description'];
-  const landStewardStoryTitle = metadata?.['regen:landStewardStoryTitle'];
-  const landStewardStory = metadata?.['regen:landStewardStory'];
+    nonQueryableMetadata?.['regen:landStory'] ||
+    nonQueryableMetadata?.['schema:description'];
+  const landStewardStoryTitle =
+    nonQueryableMetadata?.['regen:landStewardStoryTitle'];
+  const landStewardStory = nonQueryableMetadata?.['regen:landStewardStory'];
 
   const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.[
     '@list'

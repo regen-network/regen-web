@@ -4,16 +4,9 @@ export interface ProjectMetadataLD {
   '@context': Context;
   '@type': string;
   'schema:name': string;
-  'schema:image': UrlType;
-  'schema:creditText': string;
-  'schema:description'?: string;
   'schema:location': any;
   'regen:projectType': string;
   'regen:projectActivity': ProjectActivity;
-  'regen:projectDeveloper': ProjectStakeholder;
-  'regen:landSteward': ProjectStakeholder;
-  'regen:landOwner': ProjectStakeholder;
-  'regen:projectOriginator': ProjectStakeholder;
   'regen:offsetGenerationMethod': string;
   // TODO: not sure why regen:offsetGenerationMethod isn't compacting as expected so added this:
   'http://regen.network/offsetGenerationMethod'?: string;
@@ -22,7 +15,16 @@ export interface ProjectMetadataLD {
   'regen:projectEndDate': TypeValue;
   'regen:boundaries': TypeValue;
   'regen:creditClass': CreditClass;
-  'regen:landManagementActions': LandManagementActions;
+  'regen:projectDeveloper': ProjectStakeholder;
+  'regen:landSteward': ProjectStakeholder;
+  'regen:landOwner': ProjectStakeholder;
+  'regen:projectOriginator': ProjectStakeholder;
+}
+
+export interface NonQueryableProjectMetadataLD {
+  'schema:image': UrlType;
+  'schema:creditText': string;
+  'schema:description'?: string;
   'regen:galleryPhotos': UrlList;
   'regen:previewPhoto': UrlType;
   'regen:videoURL': UrlType;
@@ -32,6 +34,7 @@ export interface ProjectMetadataLD {
   'regen:landStewardPhoto': UrlType;
   'regen:projectQuote': ProjectQuote;
   'regen:landStewardStoryTitle': string;
+  'regen:landManagementActions': LandManagementActions;
 }
 
 interface Context {

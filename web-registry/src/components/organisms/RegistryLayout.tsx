@@ -1,7 +1,11 @@
 import React from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
+<<<<<<< HEAD
 import { useMediaQuery } from '@mui/material';
+=======
+import { useTheme } from '@mui/material';
+>>>>>>> c7fdfecf (feat: improve transactions signing UX for mobile (#1587))
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
 import { URL_PRIVACY, URL_TERMS_SERVICE } from 'globals';
@@ -28,7 +32,6 @@ const RegistryLayout: React.FC = () => {
   const { pathname } = useLocation();
   const { wallet, loaded, disconnect } = useWallet();
   const theme = useTheme<Theme>();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const fullWidthRegExp: RegExp = /projects\/[a-z-]+/;
@@ -98,9 +101,7 @@ const RegistryLayout: React.FC = () => {
           <Box display="flex" justifyContent="center" alignItems="center">
             {chainId && loaded && wallet?.address && disconnect && (
               <UserMenuItem
-                address={
-                  isMobile ? truncate(wallet?.address) : wallet?.shortAddress
-                }
+                address={truncate(wallet?.address)}
                 avatar={DefaultAvatar}
                 disconnect={disconnect}
                 pathname={pathname}

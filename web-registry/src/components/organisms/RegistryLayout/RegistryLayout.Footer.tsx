@@ -43,6 +43,10 @@ const RegistryLayoutFooter: React.FC<React.PropsWithChildren<unknown>> = () => {
           title: 'Activity',
           href: '/stats/activity',
         },
+        {
+          title: 'Ecocredit batches',
+          href: '/ecocredit-batches/1',
+        },
       ],
     },
     {

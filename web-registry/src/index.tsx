@@ -23,11 +23,8 @@ import { AnalyticsProvider } from 'use-analytics';
 
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 
-<<<<<<< HEAD
-import { WalletProvider } from 'lib/wallet/wallet';
-=======
 import { GlobalProvider } from 'lib/context/globalContext';
->>>>>>> c7fdfecf (feat: improve transactions signing UX for mobile (#1587))
+import { WalletProvider } from 'lib/wallet/wallet';
 
 import PageLoader from 'components/atoms/PageLoader';
 

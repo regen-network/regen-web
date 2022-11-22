@@ -1,6 +1,6 @@
-import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
+import { useLedger } from 'ledger';
 import {
   fetchSimplePrice,
   GECKO_EEUR_ID,
@@ -8,14 +8,14 @@ import {
   GECKO_USD_CURRENCY,
   GECKO_USDC_ID,
 } from 'lib/coingecko';
-import { EcocreditQueryProps } from 'lib/ecocredit/api';
+import { getProjectsByClassQuery } from 'lib/queries/react-query/ecocredit/getProjectsByClass/getProjectsByClassQuery';
+import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
+import { getSellOrdersQuery } from 'lib/queries/react-query/marketplace/getSellOrdersQuery/getSellOrdersQuery';
 
 import {
   ProjectsSellOrders,
   useProjectsSellOrders,
 } from 'pages/Projects/hooks/useProjectsSellOrders';
-import useEcocreditQuery from 'hooks/useEcocreditQuery';
-import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
 
 import { selectProjects } from './useProjectsWithOrders.utils';
 
@@ -37,33 +37,53 @@ export function useProjectsWithOrders({
   projectId,
   classId,
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
-  const queryParams: EcocreditQueryProps = classId
-    ? { query: 'projectsByClass', params: { classId } }
-    : { query: 'projects', params: {} };
+  const { ecocreditClient, marketplaceClient } = useLedger();
+  const reactQueryClient = useQueryClient();
 
-  const { data, loading: loadingProjects } =
-    useEcocreditQuery<QueryProjectsResponse>(queryParams);
-  const projects = data?.projects;
+  /* Queries */
 
+  const { data: projectsData } = useQuery(
+    getProjectsQuery({
+      enabled: !classId,
+      client: ecocreditClient,
+      request: {},
+    }),
+  );
+  const { data: projectsByClassData } = useQuery(
+    getProjectsByClassQuery({
+      enabled: !!classId,
+      client: ecocreditClient,
+      request: { classId },
+    }),
+  );
   const regenPriceQuery = useQuery(['regenPrice'], () =>
     fetchSimplePrice({
       ids: GECKO_TOKEN_IDS,
       vsCurrencies: GECKO_USD_CURRENCY,
     }),
   );
+  const { data: sellOrders } = useQuery(
+    getSellOrdersQuery({
+      client: marketplaceClient,
+      reactQueryClient,
+      request: {},
+    }),
+  );
 
-  const { sellOrdersResponse } = useQuerySellOrders();
-  const sellOrders = sellOrdersResponse?.sellOrders;
+  /* Filtering/Sorting */
+
+  const projects = projectsData?.projects ?? projectsByClassData?.projects;
+  const selectedProjects = selectProjects({
+    projects,
+    sellOrders,
+    metadata,
+    random,
+    projectId,
+  });
 
   const { projectsWithOrderData, loading: loadingWithOrders } =
     useProjectsSellOrders({
-      projects: selectProjects({
-        projects,
-        sellOrders,
-        metadata,
-        random,
-        projectId,
-      }),
+      projects: selectedProjects,
       sellOrders,
       geckoPrices: {
         regenPrice: regenPriceQuery?.data?.regen?.usd,
@@ -75,6 +95,6 @@ export function useProjectsWithOrders({
 
   return {
     projectsWithOrderData,
-    loading: loadingProjects || loadingWithOrders,
+    loading: loadingWithOrders,
   };
 }

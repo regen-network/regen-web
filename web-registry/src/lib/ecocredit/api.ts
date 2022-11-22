@@ -501,7 +501,7 @@ export const queryClassIssuers = async (
   }
 };
 
-interface QueryProjectsByClassProps extends EcocreditQueryClientProps {
+export interface QueryProjectsByClassProps extends EcocreditQueryClientProps {
   request: DeepPartial<QueryProjectsByClassRequest>;
 }
 
@@ -886,7 +886,7 @@ export const queryCreditTypes = async ({
 
 // Projects
 
-interface QueryProjectsProps extends EcocreditQueryClientProps {
+export interface QueryProjectsProps extends EcocreditQueryClientProps {
   request: DeepPartial<QueryProjectsRequest>;
 }
 

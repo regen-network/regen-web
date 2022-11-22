@@ -36,7 +36,7 @@ import {
 import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { getHashUrl } from 'lib/block-explorer';
-import { Sell1Event, Send1Event } from 'lib/tracker/types';
+import { Retire1Event, Sell1Event, Send1Event } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
@@ -328,7 +328,15 @@ export const MyEcocredits = (): JSX.Element => {
                         />
                       ),
                       label: CREDIT_RETIRE_TITLE,
-                      onClick: () => setCreditRetireOpen(i),
+                      onClick: () => {
+                        track<'retire1', Retire1Event>('retire1', {
+                          batchDenom: credits[i].denom,
+                          projectId: credits[i].projectId,
+                          projectName: credits[i]?.projectName,
+                          creditClassId: credits[i]?.classId,
+                        });
+                        setCreditRetireOpen(i);
+                      },
                     },
                   ];
 

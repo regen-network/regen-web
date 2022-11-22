@@ -1,20 +1,34 @@
 import { Box, Grid } from '@mui/material';
 
-import Card from 'web-components/lib/components/cards/Card';
-import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
-import { Body, Label } from 'web-components/lib/components/typography';
-import { Title } from 'web-components/lib/components/typography/Title';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Theme } from '../../../theme/muiTheme';
+import { BlockContent, SanityBlockOr } from '../../block-content';
+import SmallArrowIcon from '../../icons/SmallArrowIcon';
+import { LinkComponentProp } from '../../modal/ConfirmModal';
+import { Body, Label } from '../../typography';
+import { Title } from '../../typography/Title';
+import Card from '../Card';
 
-import { Link } from 'components/atoms';
+export interface GettingStartedResourceCardProps {
+  header: string;
+  description: SanityBlockOr<string>;
+  imageUrl: string;
+  mobileImageUrl: string;
+  links: {
+    buttonText: string;
+    buttonHref: string;
+    buttonTarget?: string;
+  }[];
+  linkComponent: LinkComponentProp;
+}
 
-const links = [
-  { label: 'user guide', url: '/' },
-  { label: 'how-to videos', url: '/' },
-  { label: 'security', url: '/' },
-];
-
-export const BridgeInfo = (): JSX.Element => {
+export const GettingStartedResourcesCard = ({
+  header,
+  description,
+  imageUrl,
+  mobileImageUrl,
+  links,
+  linkComponent: LinkComponent,
+}: GettingStartedResourceCardProps): JSX.Element => {
   return (
     <Card
       sx={[
@@ -29,8 +43,8 @@ export const BridgeInfo = (): JSX.Element => {
           minHeight: theme.spacing(61.2),
           backgroundColor: 'info.light',
           backgroundImage: {
-            xs: `url(${'bridgeMobile'})`,
-            lg: `url(${'bridgeDesktop'})`,
+            xs: `url(${mobileImageUrl})`,
+            lg: `url(${imageUrl})`,
           },
           backgroundPosition: { xs: 'bottom', sm: 'right bottom', lg: 'right' },
           backgroundRepeat: 'no-repeat',
@@ -40,14 +54,13 @@ export const BridgeInfo = (): JSX.Element => {
       <Grid container spacing={16}>
         <Grid item xs={12} sm={9} md={7} lg={5}>
           <Title variant="h5" sx={{ mb: 4, mt: { xs: 2 } }}>
-            Bridging ecocredits
+            {header}
           </Title>
           <Body
             size="lg"
             sx={{ pr: { xs: 0, lg: 12.5 }, mb: { xs: 4, md: 6, lg: 0 } }}
           >
-            Move your assets easily to another chain using our cross-chain
-            bridge service.
+            <BlockContent content={description} />
           </Body>
         </Grid>
         <Grid
@@ -67,11 +80,15 @@ export const BridgeInfo = (): JSX.Element => {
             }}
           >
             <Grid container spacing={4}>
-              {links.map(link => (
-                <Grid item xs={6} key={link.label}>
-                  <Link sx={{ color: 'secondary.main' }} href={link.url}>
+              {links.map(({ buttonText, buttonHref, buttonTarget }) => (
+                <Grid item xs={6} key={buttonText}>
+                  <LinkComponent
+                    sx={{ color: 'secondary.main' }}
+                    href={buttonHref}
+                    target={buttonTarget}
+                  >
                     <Label size="xs">
-                      {link.label}
+                      {buttonText}
                       <SmallArrowIcon
                         sx={{
                           mb: 0.3,
@@ -82,7 +99,7 @@ export const BridgeInfo = (): JSX.Element => {
                         }}
                       />
                     </Label>
-                  </Link>
+                  </LinkComponent>
                 </Grid>
               ))}
             </Grid>
@@ -94,9 +111,7 @@ export const BridgeInfo = (): JSX.Element => {
           sm={12}
           md={12}
           lg={2}
-          sx={[
-            theme => ({ minHeight: { xs: theme.spacing(61.2), lg: 'auto' } }),
-          ]}
+          sx={theme => ({ minHeight: { xs: theme.spacing(61.2), lg: 'auto' } })}
         />
       </Grid>
     </Card>

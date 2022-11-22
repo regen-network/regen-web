@@ -8,9 +8,6 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { Link } from 'components/atoms';
 
-import bridgeMobile from 'assets/bridge.svg';
-import bridgeDesktop from 'assets/bridge-side.svg';
-
 const links = [
   { label: 'user guide', url: '/' },
   { label: 'how-to videos', url: '/' },
@@ -32,8 +29,8 @@ export const BridgeInfo = (): JSX.Element => {
           minHeight: theme.spacing(61.2),
           backgroundColor: 'info.light',
           backgroundImage: {
-            xs: `url(${bridgeMobile})`,
-            lg: `url(${bridgeDesktop})`,
+            xs: `url(${'bridgeMobile'})`,
+            lg: `url(${'bridgeDesktop'})`,
           },
           backgroundPosition: { xs: 'bottom', sm: 'right bottom', lg: 'right' },
           backgroundRepeat: 'no-repeat',

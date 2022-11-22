@@ -1,0 +1,40 @@
+import { Link } from '@mui/material';
+
+import { GettingStartedResourcesCard } from './GettingStartedResourcesCard';
+
+export default {
+  title: 'Cards/GettingStartedResourcesCard',
+  Component: GettingStartedResourcesCard,
+};
+
+export const gettingStartedResourcesCard = () => (
+  <GettingStartedResourcesCard
+    header="Bridging"
+    description={[
+      {
+        _key: '6d8f24dd57d3',
+        _type: 'block',
+        children: [
+          {
+            _key: '044591f88f82',
+            _type: 'span',
+            marks: [],
+            text: 'Move your assets easily to another chain using our cross-chain bridge service.',
+          },
+        ],
+        markDefs: [],
+        style: 'normal',
+      },
+    ]}
+    imageUrl={'./bridge-side.svg'}
+    mobileImageUrl={'./bridge.svg'}
+    links={[
+      {
+        buttonText: 'Learn about bridging',
+        buttonHref: 'https://guides.regen.network/guides/regen-marketplace',
+        buttonTarget: '_blank',
+      },
+    ]}
+    linkComponent={Link}
+  />
+);

@@ -1,13 +1,8 @@
 import React from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-<<<<<<< HEAD
-import { useMediaQuery } from '@mui/material';
-=======
 import { useTheme } from '@mui/material';
->>>>>>> c7fdfecf (feat: improve transactions signing UX for mobile (#1587))
 import Box from '@mui/material/Box';
-import { useTheme } from '@mui/styles';
 import { URL_PRIVACY, URL_TERMS_SERVICE } from 'globals';
 
 import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';

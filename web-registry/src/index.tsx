@@ -121,14 +121,6 @@ ReactDOM.render(
               <LedgerProvider>
                 <ThemeProvider injectFonts>
                   <AnalyticsProvider instance={analytics}>
-<<<<<<< HEAD
-                    <Suspense fallback={PageLoader}>
-                      <RouterProvider
-                        router={router}
-                        fallbackElement={PageLoader}
-                      />
-                    </Suspense>
-=======
                     <GlobalProvider>
                       <Suspense fallback={<PageLoader />}>
                         <RouterProvider
@@ -137,7 +129,6 @@ ReactDOM.render(
                         />
                       </Suspense>
                     </GlobalProvider>
->>>>>>> c7fdfecf (feat: improve transactions signing UX for mobile (#1587))
                   </AnalyticsProvider>
                 </ThemeProvider>
               </LedgerProvider>

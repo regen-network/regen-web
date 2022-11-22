@@ -10,6 +10,7 @@ import { ArrowLink } from 'components/atoms/MetadataArrowLink';
 import { LineItemLabelAbove } from 'components/molecules';
 
 import { ApprovedMethodologiesList } from './CreditClassDetails.ApprovedMethodologies';
+import { MetaDetail } from './CreditClassDetails.MetaDetail';
 
 interface AdditionalInfoProps {
   onChainClass: ClassInfo;
@@ -45,14 +46,9 @@ const AdditionalInfo: React.FC<React.PropsWithChildren<AdditionalInfoProps>> =
 
     return (
       <Box sx={{ pt: 8, display: 'flex', flexWrap: 'wrap' }}>
-        <LineItemLabelAbove
-          label="credit type"
-          data={
-            <Body size="xl" sx={{ mr: 1 }}>
-              {getCreditType(onChainClass.creditTypeAbbrev)}
-            </Body>
-          }
-        />
+        <MetaDetail label="credit type">
+          {getCreditType(onChainClass.creditTypeAbbrev)}
+        </MetaDetail>
         {sourceRegistry?.['schema:name'] && (
           <LineItemLabelAbove
             label="registry"

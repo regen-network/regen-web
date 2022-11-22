@@ -1,6 +1,8 @@
 import { useCallback, useState } from 'react';
 import { DeliverTxResponse, StdFee } from '@cosmjs/stargate';
 
+import { useGlobalStore } from 'lib/context/globalContext';
+
 import { useLedger } from '../ledger';
 import { assertIsError } from '../lib/error';
 import { Wallet } from '../lib/wallet/wallet';
@@ -38,6 +40,9 @@ export default function useMsgClient(
 ): MsgClientType {
   const { api, wallet } = useLedger();
   const [error, setError] = useState<string | undefined>();
+  const [, setGlobalStore] = useGlobalStore(
+    store => store['isWaitingForSigning'],
+  );
   const [deliverTxResponse, setDeliverTxResponse] = useState<
     DeliverTxResponse | undefined
   >();
@@ -57,6 +62,8 @@ export default function useMsgClient(
         gas: '200000',
       };
 
+      setGlobalStore({ isWaitingForSigning: true });
+
       const txBytes = await api.msgClient.sign(
         wallet.address,
         msgs,
@@ -64,9 +71,11 @@ export default function useMsgClient(
         memo || '',
       );
 
+      setGlobalStore({ isWaitingForSigning: false });
+
       return txBytes;
     },
-    [api?.msgClient, wallet?.address],
+    [api?.msgClient, wallet?.address, setGlobalStore],
   );
 
   const broadcast = useCallback(
@@ -105,12 +114,13 @@ export default function useMsgClient(
         assertIsError(err);
         setError(err.message);
         if (onError) onError();
+        setGlobalStore({ isWaitingForSigning: false });
         return err.message;
       }
 
       return;
     },
-    [sign, broadcast, handleError],
+    [sign, broadcast, handleError, setGlobalStore],
   );
 
   return {

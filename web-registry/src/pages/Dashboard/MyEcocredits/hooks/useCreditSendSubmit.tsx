@@ -83,8 +83,8 @@ const useCreditSendSubmit = ({
         memo: note,
       };
 
+      const batchInfo = credits[creditSendOpen];
       const onError = (err?: Error): void => {
-        const batchInfo = credits?.find(batch => batch.denom === batchDenom);
         track<'sendFailure', SendFailureEvent>('sendFailure', {
           batchDenom,
           projectId: batchInfo?.projectId,
@@ -98,7 +98,6 @@ const useCreditSendSubmit = ({
         });
       };
       const onSuccess = (): void => {
-        const batchInfo = credits?.find(batch => batch.denom === batchDenom);
         track<'sendSuccess', SendSuccessEvent>('sendSuccess', {
           batchDenom,
           projectId: batchInfo?.projectId,

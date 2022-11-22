@@ -118,6 +118,7 @@ const CreditClassDetailsSimple: React.FC<
           <Box
             sx={{
               mr: { xs: 0, md: 12 },
+              flex: 1,
             }}
           >
             <Box sx={{ mb: 6 }}>

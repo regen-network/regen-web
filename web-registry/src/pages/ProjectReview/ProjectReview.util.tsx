@@ -44,20 +44,22 @@ export const getJurisdiction = async (
   let countryKey = '';
   let stateProvince = '';
   let postalCode = '';
-  context.forEach(ctx => {
-    if (ctx?.['id'].includes('country')) {
-      countryKey = getCountryCodeByName(ctx?.['text'].trim());
-      return;
-    }
-    if (ctx?.['id'].includes('region')) {
-      stateProvince = ctx?.['text'];
-      return;
-    }
-    if (ctx?.['id'].includes('postcode')) {
-      postalCode = ctx?.['text'];
-      return;
-    }
-  });
+  if (Array.isArray(context)) {
+    context.forEach(ctx => {
+      if (ctx?.['id'].includes('country')) {
+        countryKey = getCountryCodeByName(ctx?.['text'].trim());
+        return;
+      }
+      if (ctx?.['id'].includes('region')) {
+        stateProvince = ctx?.['text'];
+        return;
+      }
+      if (ctx?.['id'].includes('postcode')) {
+        postalCode = ctx?.['text'];
+        return;
+      }
+    });
+  }
 
   // if GeocodeFeature context is insufficient, we can get a country code from place_name
   if (!countryKey && location?.['place_name']) {

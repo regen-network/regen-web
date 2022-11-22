@@ -5,11 +5,14 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import WalletModal from 'web-components/lib/components/modal/wallet-modal';
 import { WalletModalState } from 'web-components/lib/components/modal/wallet-modal/WalletModal.types';
 
+import { useGlobalStore } from 'lib/context/globalContext';
+
 import { chainId } from '../../../lib/ledger';
 import { useWallet } from '../../../lib/wallet/wallet';
 import { useConnectToWallet } from './hooks/useConnectToWallet';
 import { useNavigateToMobileUrl } from './hooks/useNavigateToMobileUrl';
 import { useResetModalOnConnect } from './hooks/useResetModalOnConnect';
+import { MobileSigningModal } from './WalletButton.SigningModal';
 import { useWalletButtonStyles } from './WalletButton.styles';
 import { getMobileConnectUrl, getWalletsUiConfig } from './WalletButton.utils';
 
@@ -19,8 +22,12 @@ const WalletButton: React.FC = () => {
   const styles = useWalletButtonStyles();
   const { wallet, connect, loaded, error, walletConnectUri } = useWallet();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isWaitingForSigning, setGlobalStore] = useGlobalStore(
+    store => store['isWaitingForSigning'],
+  );
   const [modalState, setModalState] =
     useState<WalletModalState>('wallet-select');
+  const isConnected = loaded ? !!wallet?.address : null;
 
   const onButtonClick = useCallback(
     (): void => setIsModalOpen(true),
@@ -47,7 +54,11 @@ const WalletButton: React.FC = () => {
     [walletConnectUri],
   );
 
-  useNavigateToMobileUrl({ mobileConnectUrl });
+  useNavigateToMobileUrl({
+    mobileConnectUrl,
+    isWaitingForSigning,
+    isConnected,
+  });
   useResetModalOnConnect({ setIsModalOpen, setModalState, wallet });
 
   return chainId ? (
@@ -72,6 +83,10 @@ const WalletButton: React.FC = () => {
         state={modalState}
         qrCodeUri={walletConnectUri}
         mobileConnectUrl={mobileConnectUrl}
+      />
+      <MobileSigningModal
+        isOpen={isWaitingForSigning}
+        onClose={() => setGlobalStore({ isWaitingForSigning: false })}
       />
     </>
   ) : (

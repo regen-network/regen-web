@@ -9,7 +9,7 @@ import {
   ProjectByOnChainIdQuery,
 } from '../generated/graphql';
 import {
-  ProjectMetadataLD,
+  ProjectMetadataLDUnion,
   ProjectStakeholder,
 } from '../generated/json-ld/index';
 
@@ -188,10 +188,10 @@ type StakeholderType =
   | 'regen:projectOriginator';
 
 const getPartyFromMetadata = (
-  metadata: ProjectMetadataLD,
+  metadata: Partial<ProjectMetadataLDUnion>,
   role: StakeholderType,
 ): Party | undefined => {
-  const metadataRole: ProjectStakeholder = metadata[role];
+  const metadataRole: ProjectStakeholder | undefined = metadata[role];
   if (!metadataRole) return undefined;
 
   return {
@@ -209,7 +209,7 @@ const getPartyFromMetadata = (
 
 export function getDisplayParty(
   role: StakeholderType,
-  metadata?: ProjectMetadataLD,
+  metadata?: Partial<ProjectMetadataLDUnion>,
   party?: Maybe<PartyFieldsFragment>,
 ): Party | undefined {
   const showOnProjectPage = metadata?.[role]?.['regen:showOnProjectPage'];

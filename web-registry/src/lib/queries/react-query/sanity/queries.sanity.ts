@@ -10,6 +10,7 @@ import {
 
 export const getAllCreditClassesQuery = ({
   sanityClient,
+  enabled = true,
 }: ReactQueryGetAllCreditClassesParams): ReactQueryGetAllCreditClassesResponse => ({
   queryKey: ['AllCreditClassQuery'],
   queryFn: async () => {
@@ -21,4 +22,5 @@ export const getAllCreditClassesQuery = ({
     return sanityCreditClassData;
   },
   staleTime: Infinity,
+  enabled,
 });

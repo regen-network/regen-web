@@ -33,6 +33,7 @@ export const getBatchesQuery = ({
 export const getAddDataToBatchesQuery = ({
   batches,
   sanityCreditClassData,
+  enabled = true,
 }: ReactQueryAddDataToBatchParams): ReactQueryAddDataToBatchesResponse => ({
   queryKey: batches && [
     'addDataToBatches',
@@ -49,4 +50,5 @@ export const getAddDataToBatchesQuery = ({
     return batchesWithSupply;
   },
   staleTime: Infinity,
+  enabled,
 });

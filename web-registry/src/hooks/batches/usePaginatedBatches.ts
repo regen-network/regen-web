@@ -36,7 +36,7 @@ export const usePaginatedBatches = (): {
   const { rowsPerPage } = paginationParams;
 
   const sanityCreditClassDataResult = useQuery(
-    getAllCreditClassesQuery({ sanityClient }),
+    getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
   );
 
   /* Fetch current page batches */
@@ -61,6 +61,7 @@ export const usePaginatedBatches = (): {
     getAddDataToBatchesQuery({
       batches,
       sanityCreditClassData: sanityCreditClassDataResult.data,
+      enabled: !!sanityCreditClassDataResult.data,
     }),
   );
 

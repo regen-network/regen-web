@@ -25,10 +25,11 @@ export type ReactQueryAddDataToBatchParams = Omit<
   'batches'
 > & {
   batches?: AddDataToBatchParams['batches'];
-};
+} & { enabled?: boolean };
 
 export type ReactQueryAddDataToBatchesResponse = {
   queryKey?: string[];
   queryFn: () => Promise<BatchInfoWithSupply[] | void>;
   staleTime: number;
+  enabled: boolean;
 };

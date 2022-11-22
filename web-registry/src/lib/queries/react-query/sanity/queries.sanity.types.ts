@@ -6,10 +6,12 @@ import { AllCreditClassQuery } from 'generated/sanity-graphql';
 
 export type ReactQueryGetAllCreditClassesParams = {
   sanityClient: ApolloClient<NormalizedCacheObject>;
+  enabled?: boolean;
 };
 
 export type ReactQueryGetAllCreditClassesResponse = {
   queryKey: string[];
   queryFn: () => Promise<AllCreditClassQuery>;
   staleTime: number;
+  enabled: boolean;
 };

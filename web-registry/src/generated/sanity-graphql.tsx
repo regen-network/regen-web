@@ -6928,6 +6928,20 @@ export type TimelineItemFieldsFragment = (
   )>>> }
 );
 
+export type AllBridgePageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllBridgePageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allBridgePage: Array<(
+    { __typename?: 'BridgePage' }
+    & { gettingStartedResourcesCard?: Maybe<(
+      { __typename?: 'GettingStartedResourcesCard' }
+      & GettingStartedResourcesCardFieldsFragment
+    )> }
+  )> }
+);
+
 export type TagFieldsFragment = (
   { __typename?: 'Tag' }
   & Pick<Tag, 'name' | 'color'>
@@ -7940,3 +7954,39 @@ export function useSdgByIriLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<S
 export type SdgByIriQueryHookResult = ReturnType<typeof useSdgByIriQuery>;
 export type SdgByIriLazyQueryHookResult = ReturnType<typeof useSdgByIriLazyQuery>;
 export type SdgByIriQueryResult = Apollo.QueryResult<SdgByIriQuery, SdgByIriQueryVariables>;
+export const AllBridgePageDocument = gql`
+    query allBridgePage {
+  allBridgePage {
+    gettingStartedResourcesCard {
+      ...gettingStartedResourcesCardFields
+    }
+  }
+}
+    ${GettingStartedResourcesCardFieldsFragmentDoc}`;
+
+/**
+ * __useAllBridgePageQuery__
+ *
+ * To run a query within a React component, call `useAllBridgePageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllBridgePageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllBridgePageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllBridgePageQuery(baseOptions?: Apollo.QueryHookOptions<AllBridgePageQuery, AllBridgePageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllBridgePageQuery, AllBridgePageQueryVariables>(AllBridgePageDocument, options);
+      }
+export function useAllBridgePageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllBridgePageQuery, AllBridgePageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllBridgePageQuery, AllBridgePageQueryVariables>(AllBridgePageDocument, options);
+        }
+export type AllBridgePageQueryHookResult = ReturnType<typeof useAllBridgePageQuery>;
+export type AllBridgePageLazyQueryHookResult = ReturnType<typeof useAllBridgePageLazyQuery>;
+export type AllBridgePageQueryResult = Apollo.QueryResult<AllBridgePageQuery, AllBridgePageQueryVariables>;

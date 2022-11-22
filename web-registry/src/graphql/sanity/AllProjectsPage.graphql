@@ -1,0 +1,7 @@
+query allProjectsPage {
+  allProjectsPage {
+    gettingStartedResourcesSection {
+      ...gettingStartedResourcesSectionFields
+    }
+  }
+}

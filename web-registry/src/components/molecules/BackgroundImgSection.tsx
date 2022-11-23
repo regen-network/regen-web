@@ -16,7 +16,10 @@ type Props = {
     section?: string;
     root?: string;
     main?: string;
+    title?: string;
   };
+  title?: string;
+  id?: string;
 };
 
 type StyleProps = {
@@ -59,6 +62,8 @@ const useStyles = makeStyles<StyleProps>()(
 
 const BackgroundImgSection: React.FC<React.PropsWithChildren<Props>> = ({
   classes,
+  title,
+  id,
   sx = [],
   ...props
 }) => {
@@ -78,7 +83,14 @@ const BackgroundImgSection: React.FC<React.PropsWithChildren<Props>> = ({
       }}
       sx={Array.isArray(sx) ? sx : [sx]}
     >
-      <Section classes={{ root: cx(styles.section, classes?.section) }}>
+      <Section
+        title={title}
+        id={id}
+        classes={{
+          root: cx(styles.section, classes?.section),
+          title: classes?.title,
+        }}
+      >
         <div className={cx(styles.main, classes && classes.main)}>
           {props.children}
         </div>

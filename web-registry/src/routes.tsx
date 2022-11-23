@@ -16,11 +16,7 @@ import MyProjects from 'pages/Dashboard/MyProjects';
 import { ecocreditBatchesLoader } from 'pages/EcocreditBatches/EcocreditBatches.loader';
 import { BridgeTab } from 'pages/EcocreditsByAccount/BridgeTab/BridgeTab';
 import { PortfolioTab } from 'pages/EcocreditsByAccount/PortfolioTab/EcocreditsByAccount.PortfolioTab';
-<<<<<<< HEAD
-import { RegistryLayout } from 'components/organisms/RegistryLayout';
-=======
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
->>>>>>> a5fba83d (feat: create credit batches page (#1552))
 
 import { KeplrRoute, ProtectedRoute } from './components/atoms';
 import { ProjectMetadata } from './pages/ProjectMetadata/ProjectMetadata';

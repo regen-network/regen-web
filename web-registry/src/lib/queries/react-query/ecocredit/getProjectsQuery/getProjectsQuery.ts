@@ -8,7 +8,7 @@ import {
 export const getProjectsQuery = ({
   client,
   request,
-  enabled,
+  ...params
 }: ReactQueryProjectsProps): ReactQueryProjectsResponse => ({
   queryKey: ['projects'],
   queryFn: async () => {
@@ -16,7 +16,6 @@ export const getProjectsQuery = ({
 
     return await queryProjects({ client, request });
   },
-  enabled,
-  staleTime: Infinity,
   keepPreviousData: true,
+  ...params,
 });

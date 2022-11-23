@@ -14,7 +14,7 @@ import {
 export const getSellOrdersQuery = ({
   client,
   reactQueryClient,
-  enabled = true,
+  ...params
 }: ReactQuerySellOrdersProps): ReactQuerySellOrdersResponse => ({
   queryKey: ['sellOrders'],
   queryFn: async () => {
@@ -31,7 +31,7 @@ export const getSellOrdersQuery = ({
         .map(sellOrder => sellOrder.askDenom.replace(IBC_DENOM_PREFIX, '')),
     );
 
-    // Call DenomTrace on each ibc denom hash
+    // Call DenomsTrace on each ibc denom hash
     const denomTracesQuery = getDenomTraceByHashesQuery({
       hashes: ibcDenomHashes,
     });
@@ -54,7 +54,6 @@ export const getSellOrdersQuery = ({
 
     return sellOrdersWithBaseDenom;
   },
-  enabled,
-  staleTime: Infinity,
   keepPreviousData: true,
+  ...params,
 });

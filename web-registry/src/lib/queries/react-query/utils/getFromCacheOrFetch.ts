@@ -1,8 +1,8 @@
-import { FetchQueryOptions, QueryClient } from '@tanstack/react-query';
+import { QueryClient, QueryObserverOptions } from '@tanstack/react-query';
 
 interface GetFromCacheOrFetchParams<QueryResponse> {
   reactQueryClient?: QueryClient;
-  query: FetchQueryOptions<QueryResponse | void>;
+  query: QueryObserverOptions<QueryResponse | void>;
 }
 
 export async function getFromCacheOrFetch<QueryResponse>({

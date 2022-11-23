@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
 import { gradients } from 'styles/gradients';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
@@ -8,15 +9,14 @@ import Modal from 'web-components/lib/components/modal';
 import SEO from 'web-components/lib/components/seo';
 import { Body, Title } from 'web-components/lib/components/typography';
 
+import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
+
 import horsesImg from '../../assets/horses-grazing.png';
 import { SanityButton } from '../../components/atoms';
 import { BackgroundImgSection, HeroAction } from '../../components/molecules';
 import { CreditClassCards } from '../../components/organisms';
-import {
-  useAllCreditClassQuery,
-  useAllHomePageQuery,
-} from '../../generated/sanity-graphql';
-import { client } from '../../sanity';
+import { useAllHomePageQuery } from '../../generated/sanity-graphql';
+import { client, client as sanityClient } from '../../sanity';
 import { FeaturedProjects } from './Home.FeaturedProjects';
 import { useHomeStyles } from './Home.styles';
 
@@ -29,7 +29,9 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   // Featured projects fetching
 
   const { data, loading: loadingSanity } = useAllHomePageQuery({ client });
-  const { data: creditClassData } = useAllCreditClassQuery({ client });
+  const { data: creditClassData } = useQuery(
+    getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+  );
 
   const content = data?.allHomePage?.[0];
   const heroSection = content?.heroSection;

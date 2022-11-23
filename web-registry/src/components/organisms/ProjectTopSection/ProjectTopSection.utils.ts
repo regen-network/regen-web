@@ -2,7 +2,7 @@ import { User } from 'web-components/lib/components/user/UserInfo';
 import { truncate } from 'web-components/lib/utils/truncate';
 
 import { Maybe, PartyFieldsFragment } from 'generated/graphql';
-import { ProjectMetadataLDUnion } from 'generated/json-ld';
+import { ProjectMetadataIntersectionLD } from 'generated/json-ld';
 import { CFCProjectMetadataLD } from 'generated/json-ld/cfc-project-metadata';
 import { getDisplayParty } from 'lib/transform';
 
@@ -34,7 +34,7 @@ export const getDisplayAdmin = (address?: string): User | undefined => {
 };
 
 export const getDisplayDeveloper = (
-  metadata?: Partial<ProjectMetadataLDUnion>,
+  metadata?: Partial<ProjectMetadataIntersectionLD>,
   party?: Maybe<PartyFieldsFragment>,
 ): User | undefined => {
   if (!metadata) return;

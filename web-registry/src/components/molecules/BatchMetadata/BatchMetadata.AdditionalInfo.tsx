@@ -1,6 +1,6 @@
 import { Flex } from 'web-components/lib/components/box';
 import { Body } from 'web-components/lib/components/typography';
-import { CreditBatchMetadataUnionLD } from 'web-components/lib/types/rdf/credit-batch-union-ld';
+import { CreditBatchMetadataIntersectionLD } from 'web-components/lib/types/rdf/credit-batch-union-ld';
 
 import { LinkOrDash } from './BatchMetadata.LinkOrDash';
 import { MetaDetail } from './BatchMetadata.MetaDetail';
@@ -8,7 +8,7 @@ import { MetaDetail } from './BatchMetadata.MetaDetail';
 export const BatchMetadataAdditionalInfo = ({
   data,
 }: {
-  data?: Partial<CreditBatchMetadataUnionLD>;
+  data?: Partial<CreditBatchMetadataIntersectionLD>;
 }): JSX.Element => {
   // VCS
   const vcsRetirementSerialNumber = data?.['regen:vcsRetirementSerialNumber'];

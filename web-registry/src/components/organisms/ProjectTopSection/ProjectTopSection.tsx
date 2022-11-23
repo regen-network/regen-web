@@ -22,7 +22,7 @@ import Section from 'web-components/lib/components/section';
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
-import { ProjectMetadataLDUnion } from 'generated/json-ld';
+import { ProjectMetadataIntersectionLD } from 'generated/json-ld';
 import { UseStateSetter } from 'types/react/use-state';
 
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
@@ -65,7 +65,7 @@ function ProjectTopSection({
 }: {
   data?: any; // TODO: when all project are onchain, this can be ProjectByOnChainIdQuery
   onChainProject?: ProjectInfo;
-  metadata?: Partial<ProjectMetadataLDUnion>;
+  metadata?: Partial<ProjectMetadataIntersectionLD>;
   sanityCreditClassData?: AllCreditClassQuery;
   geojson?: any;
   isGISFile?: boolean;

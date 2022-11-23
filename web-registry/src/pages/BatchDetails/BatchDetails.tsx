@@ -7,7 +7,7 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import { Loading } from 'web-components/lib/components/loading';
 import Section from 'web-components/lib/components/section';
 import { Title } from 'web-components/lib/components/typography';
-import { CreditBatchMetadataUnionLD } from 'web-components/lib/types/rdf/credit-batch-union-ld';
+import { CreditBatchMetadataIntersectionLD } from 'web-components/lib/types/rdf/credit-batch-union-ld';
 
 import { useProjectByOnChainIdQuery } from 'generated/graphql';
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
@@ -29,7 +29,7 @@ export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [ledgerLoading, setLedgerLoading] = useState(true);
   const [batch, setBatch] = useState<BatchInfoWithSupply>();
   const [metadata, setMetadata] =
-    useState<Partial<CreditBatchMetadataUnionLD>>();
+    useState<Partial<CreditBatchMetadataIntersectionLD>>();
   const walletContext = useWallet();
   const accountAddress = walletContext.wallet?.address;
   const { credits: userEcocredits } = useEcocredits({

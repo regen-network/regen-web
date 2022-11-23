@@ -10,7 +10,7 @@ import { isCFCCreditClass, isVCSCreditClass } from 'lib/ecocredit/api';
 
 import {
   CFCProjectMetadataLD,
-  ProjectMetadataLDUnion,
+  ProjectMetadataIntersectionLD,
   VCSProjectMetadataLD,
 } from '../../generated/json-ld';
 
@@ -32,7 +32,7 @@ export const getOnChainProjectId = (
 };
 
 export const getJurisdiction = async (
-  metadata: Partial<ProjectMetadataLDUnion>,
+  metadata: Partial<ProjectMetadataIntersectionLD>,
 ): Promise<string | undefined> => {
   if (!mapboxToken) return Promise.reject('Missing map API token');
   let isoString;
@@ -116,7 +116,7 @@ const getStateProvince = (
 
 // TODO: Handle for all cases: regen-network/regen-registry#1104
 export const getProjectReferenceID = (
-  metadata: Partial<ProjectMetadataLDUnion>,
+  metadata: Partial<ProjectMetadataIntersectionLD>,
   creditClassId?: string | null,
 ): string => {
   if (!creditClassId) return '';

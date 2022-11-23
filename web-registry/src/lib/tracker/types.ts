@@ -167,3 +167,22 @@ export interface PutInBasketSuccessEvent extends PutBaseQuantityEvent {}
 export interface PutInBasketFailureEvent extends PutBaseQuantityEvent {
   errorMessage: string | undefined;
 }
+
+interface TakeBaseEvent {
+  basketName: string | undefined;
+}
+
+interface TakeBaseQuantityEvent extends TakeBaseEvent {
+  quantity: string;
+  retireOnTake: boolean;
+}
+
+export interface TakeFromBasket1 extends TakeBaseEvent {}
+
+export interface TakeFromBasket2 extends TakeBaseQuantityEvent {}
+
+export interface TakeFromBasketSuccess extends TakeBaseQuantityEvent {}
+
+export interface TakeFromBasketFailure extends TakeBaseQuantityEvent {
+  errorMessage: string | undefined;
+}

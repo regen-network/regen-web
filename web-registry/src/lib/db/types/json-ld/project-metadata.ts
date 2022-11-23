@@ -19,15 +19,7 @@ export interface ProjectMetadataLD {
   'regen:landSteward': ProjectStakeholder;
   'regen:landOwner': ProjectStakeholder;
   'regen:projectOriginator': ProjectStakeholder;
-}
 
-export interface NonQueryableProjectMetadataLD {
-  'schema:image': UrlType;
-  'schema:creditText': string;
-  'schema:description'?: string;
-  'regen:galleryPhotos': UrlList;
-  'regen:previewPhoto': UrlType;
-  'regen:videoURL': UrlType;
   'regen:glanceText': any;
   'regen:landStory': string;
   'regen:landStewardStory': string;
@@ -35,7 +27,20 @@ export interface NonQueryableProjectMetadataLD {
   'regen:projectQuote': ProjectQuote;
   'regen:landStewardStoryTitle': string;
   'regen:landManagementActions': LandManagementActions;
+  'schema:description'?: string;
 }
+
+export interface NonQueryableProjectMetadataLD {
+  'schema:image': UrlType;
+  'schema:creditText': string;
+  'regen:galleryPhotos': UrlList;
+  'regen:previewPhoto': UrlType;
+  'regen:videoURL': UrlType;
+}
+
+export interface ProjectCreateMetadataLD
+  extends ProjectMetadataLD,
+    NonQueryableProjectMetadataLD {}
 
 interface Context {
   schema: string;

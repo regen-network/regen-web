@@ -120,7 +120,8 @@ function ProjectDetails(): JSX.Element {
     : projectByHandle?.data.projectByHandle;
 
   // Legacy projects use project.metadata. On-chain projects use IRI resolver.
-  const projectTableMetadata: NonQueryableProjectMetadataLD = project?.metadata;
+  const projectTableMetadata: Partial<NonQueryableProjectMetadataLD> =
+    project?.metadata;
   const iriResolvedMetadata = useQuery(
     getMetadataQuery({ iri: onChainProject?.metadata }),
   );

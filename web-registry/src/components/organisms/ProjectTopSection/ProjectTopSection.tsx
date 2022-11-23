@@ -65,23 +65,20 @@ function ProjectTopSection({
   const project = data?.projectByOnChainId || data?.projectByHandle; // TODO: eventually just projectByOnChainId
   const projectName = metadata?.['schema:name'];
   const videoURL = nonQueryableMetadata?.['regen:videoURL']?.['@value'];
-  const landStewardPhoto =
-    nonQueryableMetadata?.['regen:landStewardPhoto']?.['@value'];
+  const landStewardPhoto = metadata?.['regen:landStewardPhoto']?.['@value'];
   const projectSize = metadata?.['regen:projectSize'];
   const area = projectSize?.['qudt:numericValue']?.['@value'];
   const unit = projectSize?.['qudt:unit']?.['@value'];
   const areaUnit = getAreaUnit(unit as qudtUnit);
   const creditClass = project?.creditClassByCreditClassId;
   const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
-  const quote = nonQueryableMetadata?.['regen:projectQuote'];
+  const quote = metadata?.['regen:projectQuote'];
   const glanceText: string[] | undefined =
-    nonQueryableMetadata?.['regen:glanceText']?.['@list'];
+    metadata?.['regen:glanceText']?.['@list'];
   const primaryDescription =
-    nonQueryableMetadata?.['regen:landStory'] ||
-    nonQueryableMetadata?.['schema:description'];
-  const landStewardStoryTitle =
-    nonQueryableMetadata?.['regen:landStewardStoryTitle'];
-  const landStewardStory = nonQueryableMetadata?.['regen:landStewardStory'];
+    metadata?.['regen:landStory'] || metadata?.['schema:description'];
+  const landStewardStoryTitle = metadata?.['regen:landStewardStoryTitle'];
+  const landStewardStory = metadata?.['regen:landStewardStory'];
 
   const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.[
     '@list'

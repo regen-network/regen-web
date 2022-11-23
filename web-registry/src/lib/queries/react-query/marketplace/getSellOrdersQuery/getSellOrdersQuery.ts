@@ -35,7 +35,7 @@ export const getSellOrdersQuery = ({
     const denomTracesQuery = getDenomTraceByHashesQuery({
       hashes: ibcDenomHashes,
     });
-    const denomTraces = await getFromCacheOrFetch<DenomTraceWithHash[]>({
+    const denomTraces = await getFromCacheOrFetch<DenomTraceWithHash[] | void>({
       query: denomTracesQuery,
       reactQueryClient,
     });

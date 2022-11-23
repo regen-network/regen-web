@@ -9,6 +9,7 @@ import {
   GECKO_USDC_ID,
 } from 'lib/coingecko';
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/normalizeProjectsWithOrderData';
+import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 import { getProjectsByClassQuery } from 'lib/queries/react-query/ecocredit/getProjectsByClass/getProjectsByClassQuery';
 import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
 import { getSellOrdersQuery } from 'lib/queries/react-query/marketplace/getSellOrdersQuery/getSellOrdersQuery';
@@ -62,12 +63,7 @@ export function useProjectsWithOrders({
       }),
     );
 
-  const regenPriceQuery = useQuery(['regenPrice'], () =>
-    fetchSimplePrice({
-      ids: GECKO_TOKEN_IDS,
-      vsCurrencies: GECKO_USD_CURRENCY,
-    }),
-  );
+  const regenPriceQuery = useQuery(getSimplePriceQuery({}));
   const { data: sellOrders } = useQuery(
     getSellOrdersQuery({
       enabled: !!marketplaceClient,

@@ -15,6 +15,7 @@ import MyProjects from 'pages/Dashboard/MyProjects';
 import { ecocreditBatchesLoader } from 'pages/EcocreditBatches/EcocreditBatches.loader';
 import { BridgeTab } from 'pages/EcocreditsByAccount/BridgeTab/BridgeTab';
 import { PortfolioTab } from 'pages/EcocreditsByAccount/PortfolioTab/EcocreditsByAccount.PortfolioTab';
+import { homeLoader } from 'pages/Home/Home.loader';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
 
 import { KeplrRoute, ProtectedRoute } from './components/atoms';
@@ -76,7 +77,13 @@ const Storefront = lazy(() => import('./pages/Marketplace/Storefront'));
 
 export const routes = createRoutesFromElements(
   <Route element={<RegistryLayout />}>
-    <Route path="/" element={<Home />} />
+    <Route
+      path="/"
+      element={<Home />}
+      loader={homeLoader({
+        queryClient: reactQueryClient,
+      })}
+    />
     <Route path="verify-email" element={<VerifyEmail />} />
     <Route path="add" element={<Additionality />} />
     <Route path="signup" element={<Signup />} />

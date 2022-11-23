@@ -10,13 +10,13 @@ import SEO from 'web-components/lib/components/seo';
 import { Body, Title } from 'web-components/lib/components/typography';
 
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
+import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
 
 import horsesImg from '../../assets/horses-grazing.png';
 import { SanityButton } from '../../components/atoms';
 import { BackgroundImgSection, HeroAction } from '../../components/molecules';
 import { CreditClassCards } from '../../components/organisms';
-import { useAllHomePageQuery } from '../../generated/sanity-graphql';
-import { client, client as sanityClient } from '../../sanity';
+import { client as sanityClient } from '../../sanity';
 import { FeaturedProjects } from './Home.FeaturedProjects';
 import { useHomeStyles } from './Home.styles';
 
@@ -26,14 +26,15 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   const { classes } = useHomeStyles();
 
-  // Featured projects fetching
-
-  const { data, loading: loadingSanity } = useAllHomePageQuery({ client });
+  const { data: allHomePageData, isFetching: isFetchingAllHomePage } = useQuery(
+    getAllHomePageQuery({ sanityClient, enabled: !!sanityClient }),
+  );
   const { data: creditClassData } = useQuery(
     getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
   );
 
-  const content = data?.allHomePage?.[0];
+  const content = allHomePageData?.allHomePage?.[0];
+
   const heroSection = content?.heroSection;
   const seo = content?.seo;
 
@@ -49,7 +50,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
     }
   }, []);
 
-  if (loadingSanity) return <Loading sx={{ minHeight: '100vh' }} />;
+  if (isFetchingAllHomePage) return <Loading sx={{ minHeight: '100vh' }} />;
 
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>

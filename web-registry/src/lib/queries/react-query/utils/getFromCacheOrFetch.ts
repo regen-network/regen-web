@@ -2,7 +2,7 @@ import { QueryClient, QueryObserverOptions } from '@tanstack/react-query';
 
 interface GetFromCacheOrFetchParams<QueryResponse> {
   reactQueryClient?: QueryClient;
-  query: QueryObserverOptions<QueryResponse | void>;
+  query: QueryObserverOptions<QueryResponse>;
 }
 
 export async function getFromCacheOrFetch<QueryResponse>({

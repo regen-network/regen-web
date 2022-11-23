@@ -12,7 +12,7 @@ import {
 export const getBatchesQuery = ({
   client,
   request,
-  enabled,
+  enabled = true,
 }: ReactQueryBatchesProps): ReactQueryBatchesResponse => ({
   queryKey: [
     'batches',

@@ -7,7 +7,7 @@ import { AddDataToBatchesParams, QueryBatchesProps } from 'lib/ecocredit/api';
 
 export type ReactQueryBatchesProps = Omit<QueryBatchesProps, 'client'> & {
   client?: QueryBatchesProps['client'];
-  enabled: boolean;
+  enabled?: boolean;
 };
 
 export type ReactQueryBatchesResponse = {

@@ -10,7 +10,7 @@ import { isCFCCreditClass, isVCSCreditClass } from 'lib/ecocredit/api';
 
 import {
   CFCProjectMetadataLD,
-  ProjectMetadataLDUnion,
+  ProjectMetadataIntersectionLD,
   VCSProjectMetadataLD,
 } from '../../generated/json-ld';
 
@@ -32,7 +32,7 @@ export const getOnChainProjectId = (
 };
 
 export const getJurisdiction = async (
-  metadata: Partial<ProjectMetadataLDUnion>,
+  metadata: Partial<ProjectMetadataIntersectionLD>,
 ): Promise<string | undefined> => {
   if (!mapboxToken) return Promise.reject('Missing map API token');
   let isoString;
@@ -44,20 +44,22 @@ export const getJurisdiction = async (
   let countryKey = '';
   let stateProvince = '';
   let postalCode = '';
-  context.forEach(ctx => {
-    if (ctx?.['id'].includes('country')) {
-      countryKey = getCountryCodeByName(ctx?.['text'].trim());
-      return;
-    }
-    if (ctx?.['id'].includes('region')) {
-      stateProvince = ctx?.['text'];
-      return;
-    }
-    if (ctx?.['id'].includes('postcode')) {
-      postalCode = ctx?.['text'];
-      return;
-    }
-  });
+  if (Array.isArray(context)) {
+    context.forEach(ctx => {
+      if (ctx?.['id'].includes('country')) {
+        countryKey = getCountryCodeByName(ctx?.['text'].trim());
+        return;
+      }
+      if (ctx?.['id'].includes('region')) {
+        stateProvince = ctx?.['text'];
+        return;
+      }
+      if (ctx?.['id'].includes('postcode')) {
+        postalCode = ctx?.['text'];
+        return;
+      }
+    });
+  }
 
   // if GeocodeFeature context is insufficient, we can get a country code from place_name
   if (!countryKey && location?.['place_name']) {
@@ -114,7 +116,7 @@ const getStateProvince = (
 
 // TODO: Handle for all cases: regen-network/regen-registry#1104
 export const getProjectReferenceID = (
-  metadata: Partial<ProjectMetadataLDUnion>,
+  metadata: Partial<ProjectMetadataIntersectionLD>,
   creditClassId?: string | null,
 ): string => {
   if (!creditClassId) return '';

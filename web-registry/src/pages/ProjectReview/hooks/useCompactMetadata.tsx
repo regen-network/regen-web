@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { JsonLdDocument } from 'jsonld';
 
-import { ProjectMetadataLDUnion } from 'generated/json-ld';
+import { ProjectMetadataIntersectionLD } from 'generated/json-ld';
 import { jsonLdCompact } from 'lib/rdf.compacted-context';
 
 type Props = {
@@ -10,14 +10,16 @@ type Props = {
 
 export const useCompactMetadata = ({
   metadataRaw,
-}: Props): Partial<ProjectMetadataLDUnion> => {
-  const [metadata, setMetadata] = useState<Partial<ProjectMetadataLDUnion>>({});
+}: Props): Partial<ProjectMetadataIntersectionLD> => {
+  const [metadata, setMetadata] = useState<
+    Partial<ProjectMetadataIntersectionLD>
+  >({});
 
   useEffect(() => {
     const compactMetadata = async (): Promise<void> => {
       const compactMetadata = await jsonLdCompact(metadataRaw);
       if (compactMetadata) {
-        setMetadata(compactMetadata as Partial<ProjectMetadataLDUnion>);
+        setMetadata(compactMetadata as Partial<ProjectMetadataIntersectionLD>);
       }
     };
 

@@ -43,7 +43,7 @@ export function ProjectCardsSection({
             gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 400px))',
             gridGap: '1.125rem',
             flex: 1,
-            justifyContent: 'center',
+            justifyContent: projects?.length > 1 ? 'center' : 'left',
           }}
         >
           {projects?.map(project => (

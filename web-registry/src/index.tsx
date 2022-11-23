@@ -45,26 +45,31 @@ const config = {
 };
 const intercomId = process.env.REACT_APP_INTERCOM_APP_ID || '';
 
-Sentry.init({
-  dsn: 'https://f5279ac3b8724af88ffb4cdfad92a2d4@o1377530.ingest.sentry.io/6688446',
-  integrations: [
-    new BrowserTracing({
-      routingInstrumentation: Sentry.reactRouterV6Instrumentation(
-        useEffect,
-        useLocation,
-        useNavigationType,
-        createRoutesFromChildren,
-        matchRoutes,
-      ),
-    }),
-  ],
-
-  // Set tracesSampleRate to 1.0 to capture 100%
-  // of transactions for performance monitoring.
-  // We recommend adjusting this value in production
-  tracesSampleRate: 1.0,
-  environment: process.env.REACT_APP_SENTRY_ENVIRONMENT || 'development',
-});
+// by default do not enable sentry unless the flag is set.
+// this reduces our monthly usage which can quickly run out if this is not set.
+// you can set this flag in local environments if testing changes to sentry.
+// currently we only want this flag set for the production environment.
+if (process.env.REACT_APP_SENTRY_ENABLED) {
+  Sentry.init({
+    dsn: 'https://f5279ac3b8724af88ffb4cdfad92a2d4@o1377530.ingest.sentry.io/6688446',
+    integrations: [
+      new BrowserTracing({
+        routingInstrumentation: Sentry.reactRouterV6Instrumentation(
+          useEffect,
+          useLocation,
+          useNavigationType,
+          createRoutesFromChildren,
+          matchRoutes,
+        ),
+      }),
+    ],
+    // Set tracesSampleRate to 1.0 to capture 100%
+    // of transactions for performance monitoring.
+    // We recommend adjusting this value in production
+    tracesSampleRate: 1.0,
+    environment: process.env.REACT_APP_SENTRY_ENVIRONMENT || 'development',
+  });
+}
 
 // our current analytics setup uses both amplitude and google analytics.
 // our amplitude and GA have been set up with a development and production environment.

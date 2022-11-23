@@ -5,14 +5,22 @@ import {
   Route,
 } from 'react-router-dom';
 
+import { ecocreditClientAsync } from 'lib/clients/ecocreditQueryClient';
+import { reactQueryClient } from 'lib/clients/reactQueryClient';
+
 import MyBridge from 'pages/Dashboard/MyBridge';
 import MyCreditBatches from 'pages/Dashboard/MyCreditBatches';
 import MyCreditClasses from 'pages/Dashboard/MyCreditClasses';
 import MyEcocredits from 'pages/Dashboard/MyEcocredits';
 import MyProjects from 'pages/Dashboard/MyProjects';
+import { ecocreditBatchesLoader } from 'pages/EcocreditBatches/EcocreditBatches.loader';
 import { BridgeTab } from 'pages/EcocreditsByAccount/BridgeTab/BridgeTab';
 import { PortfolioTab } from 'pages/EcocreditsByAccount/PortfolioTab/EcocreditsByAccount.PortfolioTab';
+<<<<<<< HEAD
 import { RegistryLayout } from 'components/organisms/RegistryLayout';
+=======
+import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
+>>>>>>> a5fba83d (feat: create credit batches page (#1552))
 
 import { KeplrRoute, ProtectedRoute } from './components/atoms';
 import { ProjectMetadata } from './pages/ProjectMetadata/ProjectMetadata';
@@ -41,6 +49,7 @@ const CreditsTransfer = lazy(() => import('./pages/CreditsTransfer'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Description = lazy(() => import('./pages/Description'));
 const EntityDisplay = lazy(() => import('./pages/EntityDisplay'));
+const EcocreditBatches = lazy(() => import('./pages/EcocreditBatches'));
 const EcocreditsByAccount = lazy(() => import('./pages/EcocreditsByAccount'));
 const Home = lazy(() => import('./pages/Home'));
 const LandStewards = lazy(() => import('./pages/LandStewards'));
@@ -119,6 +128,14 @@ export const routes = createRoutesFromElements(
       <Route path="portfolio" element={<PortfolioTab />} />
       <Route path="bridge" element={<BridgeTab />} />
     </Route>
+    <Route
+      path="ecocredit-batches/:page"
+      element={<EcocreditBatches />}
+      loader={ecocreditBatchesLoader({
+        ecocreditClientAsync,
+        queryClient: reactQueryClient,
+      })}
+    />
     <Route
       path="ecocredits/create-batch"
       element={<KeplrRoute component={CreateBatch} />}

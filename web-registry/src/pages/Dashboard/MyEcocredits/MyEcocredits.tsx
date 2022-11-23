@@ -30,11 +30,9 @@ import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingM
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
-import {
-  DEFAULT_ROWS_PER_PAGE,
-  TablePaginationParams,
-} from 'web-components/lib/components/table/ActionsTable';
+import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 import type { Theme } from 'web-components/lib/theme/muiTheme';
+import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/ActionsTable.constants';
 
 import { getHashUrl } from 'lib/block-explorer';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';

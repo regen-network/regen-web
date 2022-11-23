@@ -65,6 +65,7 @@ export const BuySellOrderFlow = ({
     setError(undefined);
     setIsFlowStarted(false);
     selectedSellOrderIdRef.current = undefined;
+    setSelectedProject(undefined);
   };
   const onTxSuccessButtonClick = (): void => {
     handleTxModalClose();

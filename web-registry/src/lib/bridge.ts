@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 import { BridgedTxStatus } from 'types/ledger/ecocredit';
-// import getApiUri from 'lib/apiUri';
 
 export const getBridgeTxStatus = async (
   hash: string,
@@ -18,10 +17,7 @@ export const getBridgeTxStatus = async (
     return;
   }
   try {
-    const { data } = await axios.get(
-      // `${getApiUri()}/bridge/regen/events/${hash}/status`, // using a proxy to bridge service api to test locally for now
-      `${apiUri}/regen/events/${hash}/status`,
-    );
+    const { data } = await axios.get(`${apiUri}/regen/events/${hash}/status`);
     return data;
   } catch (e) {}
   return;

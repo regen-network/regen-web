@@ -26,6 +26,7 @@ import {
   StyledTableRow,
   // StyledTableSortLabel,
 } from './';
+import { DEFAULT_TABLE_PAGINATION_PARAMS } from './ActionsTable.constants';
 // import {
 //   getComparator,
 //   Order,
@@ -43,8 +44,6 @@ const BorderLeft = styled('div')(({ theme }) => ({
   boxShadow: `-1px 0px 1px rgba(0,0,0,.05), -2px 0px 4px rgba(0,0,0,.15), -6px 0px 10px rgba(0,0,0,.5)`,
 }));
 
-export const DEFAULT_ROWS_PER_PAGE = 5;
-
 /** `i` represents the index of the current row in the data set - ie it can be
  * used in the parent component to access that row's data. ex.
  * ```ts
@@ -57,6 +56,7 @@ export type TablePaginationParams = {
   page: number;
   rowsPerPage: number;
   offset: number;
+  count?: number;
 };
 
 interface ActionsTableProps {
@@ -65,6 +65,8 @@ interface ActionsTableProps {
   rows: React.ReactNode[][];
   renderActionButtons?: RenderActionButtonsFunc;
   onTableChange?: Dispatch<SetStateAction<TablePaginationParams>>;
+  initialPaginationParams?: TablePaginationParams;
+  isRoutePagination?: boolean;
   sx?: {
     root?: SxProps<Theme>;
   };
@@ -76,12 +78,20 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
   rows,
   renderActionButtons,
   onTableChange,
+  initialPaginationParams = DEFAULT_TABLE_PAGINATION_PARAMS,
+  isRoutePagination = false,
   sx,
 }) => {
-  const [page, setPage] = useState(0);
-  const [offset, setOffset] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(DEFAULT_ROWS_PER_PAGE);
+  const {
+    offset: initialOffset,
+    page: initialPage,
+    rowsPerPage: initialRowsPerPage,
+  } = initialPaginationParams;
+  const [page, setPage] = useState(initialPage);
+  const [offset, setOffset] = useState(initialOffset);
+  const [rowsPerPage, setRowsPerPage] = useState(initialRowsPerPage);
   const [displayRows, setDisplayRows] = useState<React.ReactNode[][]>(rows);
+  const maxCount = Math.max(initialPaginationParams?.count ?? 0, rows.length);
   // const [order, setOrder] = useState<Order>('desc');
   // const [orderBy, setOrderBy] = useState<keyof TableCredits>('start_date');
 
@@ -124,19 +134,28 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
           page,
           rowsPerPage: newRowsPerPage,
           offset: 0,
+          count: initialPaginationParams.count,
         });
     },
-    [onTableChange, page],
+    [onTableChange, page, initialPaginationParams],
   );
 
   const onPageChange = useCallback(
     (_: unknown, newPage: number) => {
       const offset = newPage * rowsPerPage;
       setPage(newPage);
-      setOffset(offset);
-      onTableChange && onTableChange({ page: newPage, rowsPerPage, offset });
+      if (!isRoutePagination) {
+        setOffset(offset);
+      }
+      onTableChange &&
+        onTableChange({
+          page: newPage,
+          rowsPerPage,
+          offset,
+          count: initialPaginationParams.count,
+        });
     },
-    [onTableChange, rowsPerPage],
+    [onTableChange, rowsPerPage, isRoutePagination, initialPaginationParams],
   );
 
   return (
@@ -214,7 +233,7 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
             </TableBody>
           </Table>
         </Box>
-        {rows.length > 5 && (
+        {maxCount > 5 && (
           <Table>
             <TableFooter sx={{ position: 'sticky', left: 0 }}>
               <TableRow>
@@ -222,7 +241,7 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
                   rowsPerPageOptions={[5, 10]}
                   rowsPerPage={rowsPerPage}
                   onChangeRowsPerPage={onChangeRowsPerPage}
-                  count={rows.length}
+                  count={initialPaginationParams?.count ?? rows.length}
                   page={page}
                   onPageChange={onPageChange}
                 />

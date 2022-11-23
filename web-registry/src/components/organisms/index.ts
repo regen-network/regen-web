@@ -1,6 +1,5 @@
 export * from './AdditionalityForm';
 export * from './AdminNav';
-export * from './AppFooter';
 export * from './BasicInfoForm';
 export * from './BasketEcocreditsTable';
 export * from './BasketOverview';
@@ -37,7 +36,7 @@ export * from './ProjectImpactSection';
 export * from './ProjectLocationForm';
 export * from './ProjectMetadataForm/ProjectMetadataForm';
 export * from './ProjectTopSection/ProjectTopSection';
-export * from './RegistryLayout';
+export * from './RegistryLayout/RegistryLayout';
 export * from './ResourcesSection';
 export * from './RolesForm';
 export * from './SDGs';

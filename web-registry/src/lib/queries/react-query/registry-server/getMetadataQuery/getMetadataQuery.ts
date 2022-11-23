@@ -7,11 +7,12 @@ import {
 
 export const getMetadataQuery = ({
   iri,
+  ...params
 }: ReactQueryMetadataProps): ReactQueryMetadataResponse => ({
   queryKey: ['metadata', iri ?? ''],
   queryFn: async () => {
     return getMetadata(iri);
   },
-  staleTime: Infinity,
   keepPreviousData: true,
+  ...params,
 });

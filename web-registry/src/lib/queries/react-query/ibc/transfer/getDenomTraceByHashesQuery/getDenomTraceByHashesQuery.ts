@@ -1,19 +1,18 @@
 import { queryDenomTraceByHashes } from 'lib/ibc/transfer/api';
 
 import {
+  ReactQueryAddDataToBatchResponse,
   ReactQueryDenomTraceByHashesProps,
-  ReactQueryDenomTraceByHashesResponse,
 } from './getDenomTraceByHashesQuery.types';
 
 export const getDenomTraceByHashesQuery = ({
   hashes,
-  enabled = true,
-}: ReactQueryDenomTraceByHashesProps): ReactQueryDenomTraceByHashesResponse => ({
+  ...params
+}: ReactQueryDenomTraceByHashesProps): ReactQueryAddDataToBatchResponse => ({
   queryKey: ['DenomTraceByHashes', hashes.join('-')],
   queryFn: async () => {
     return queryDenomTraceByHashes({ hashes });
   },
-  enabled,
-  staleTime: Infinity,
   keepPreviousData: true,
+  ...params,
 });

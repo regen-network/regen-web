@@ -1,17 +1,14 @@
+import { QueryObserverOptions } from '@tanstack/react-query';
+
 import {
   DenomTraceWithHash,
   QueryDenomTraceByHashesParams,
 } from 'lib/ibc/transfer/api';
+import { ReactQueryBuilderResponse } from 'lib/queries/react-query/types/react-query.types';
 
-export type ReactQueryDenomTraceByHashesProps =
-  QueryDenomTraceByHashesParams & {
-    enabled?: boolean;
-  };
+export type ReactQueryAddDataToBatchResponse = QueryObserverOptions<
+  DenomTraceWithHash[] | void
+>;
 
-export type ReactQueryDenomTraceByHashesResponse = {
-  queryKey: string[];
-  queryFn: () => Promise<DenomTraceWithHash[] | void>;
-  enabled: boolean;
-  keepPreviousData: boolean;
-  staleTime: number;
-};
+export type ReactQueryDenomTraceByHashesProps = QueryDenomTraceByHashesParams &
+  ReactQueryBuilderResponse<ReactQueryAddDataToBatchResponse>;

@@ -17,7 +17,6 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { ProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders';
 import { sortProjectsBySellOrdersAvailability } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
-import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 import { selectProjects } from './useProjectsWithOrders.utils';
 

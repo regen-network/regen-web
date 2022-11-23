@@ -2,7 +2,7 @@ import { QueryBatchesResponse } from '@regen-network/api/lib/generated/regen/eco
 import { QueryClient } from '@tanstack/react-query';
 
 import { getEcocreditQueryClient } from 'lib/clients/ecocreditQueryClient';
-import { getBatchesQuery } from 'lib/queries/react-query/ecocredit/queries.ecocredit';
+import { getBatchesQuery } from 'lib/queries/react-query/ecocredit/getBatchesQuery/getBatchesQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 
 import { PAGINATED_BATCHES_ROWS_PER_PAGE } from 'hooks/batches/usePaginatedBatches';

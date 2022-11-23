@@ -1,7 +1,7 @@
 import { Box, Grid } from '@mui/material';
 
 import { Theme } from '../../../theme/muiTheme';
-import { BlockContent, SanityBlockOr } from '../../block-content';
+import { BlockContent, SanityBlockContent } from '../../block-content';
 import SmallArrowIcon from '../../icons/SmallArrowIcon';
 import { LinkComponentProp } from '../../modal/ConfirmModal';
 import { Body, Label } from '../../typography';
@@ -10,7 +10,7 @@ import Card from '../Card';
 
 export interface GettingStartedResourceCardProps {
   header: string;
-  description: SanityBlockOr<string>;
+  description: SanityBlockContent;
   imageUrl: string;
   mobileImageUrl: string;
   links: {

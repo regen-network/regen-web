@@ -6,6 +6,7 @@ export * from './BridgeInfo';
 export * from './EcocreditsSection';
 export * from './EditProjectPageFooter';
 export * from './FeaturedSection';
+export * from './GettingStartedResourcesSection';
 export * from './HeroAction';
 export * from './HeroTitle';
 export * from './ImageGridSection';

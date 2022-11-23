@@ -14,7 +14,11 @@ import { usePaginatedBatches } from 'hooks/batches/usePaginatedBatches';
 import topographyImg from '../../assets/background-contour-1.jpg';
 import horsesImg from '../../assets/horses-grazing.png';
 import { SanityButton } from '../../components/atoms';
-import { BackgroundImgSection, HeroAction } from '../../components/molecules';
+import {
+  BackgroundImgSection,
+  GettingStartedResourcesSection,
+  HeroAction,
+} from '../../components/molecules';
 import { CreditBatches, CreditClassCards } from '../../components/organisms';
 import {
   useAllCreditClassQuery,
@@ -38,6 +42,8 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const content = data?.allHomePage?.[0];
   const heroSection = content?.heroSection;
   const seo = content?.seo;
+  const gettingStartedResourcesSection =
+    content?.gettingStartedResourcesSection;
 
   const creditClassesContent = creditClassData?.allCreditClass;
 
@@ -160,6 +166,12 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
             creditClassesContent={creditClassesContent} // CMS data
           />
         </Section>
+      )}
+
+      {gettingStartedResourcesSection && (
+        <GettingStartedResourcesSection
+          section={gettingStartedResourcesSection}
+        />
       )}
 
       <HeroAction

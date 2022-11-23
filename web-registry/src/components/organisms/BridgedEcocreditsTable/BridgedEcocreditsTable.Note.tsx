@@ -9,10 +9,9 @@ import {
   STATUS_PENDING,
 } from './BridgedEcocreditsTable.constants';
 
-export const getNote = (
-  status: BridgedTxStatus,
-  txHash?: string,
-): JSX.Element | null => {
+export const Note: React.FC<
+  React.PropsWithChildren<{ status: BridgedTxStatus; txHash?: string }>
+> = ({ status, txHash }) => {
   switch (BRIDGED_STATUSES[status]) {
     case STATUS_COMPLETE:
       return (

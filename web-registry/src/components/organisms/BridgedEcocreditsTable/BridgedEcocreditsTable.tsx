@@ -32,7 +32,7 @@ import {
   CREDIT_BATCH_TOOLTIP,
   NO_BRIDGED_CREDITS,
 } from './BridgedEcocreditsTable.constants';
-import { getNote } from './BridgedEcocreditsTable.utils';
+import { Note } from './BridgedEcocreditsTable.Note';
 
 interface Props {
   accountAddress: string | undefined;
@@ -115,7 +115,9 @@ export const BridgedEcocreditsTable = ({
               )}
             </GreyText>,
             privateAccess && row.status && (
-              <GreyText>{getNote(row.status, row.destinationTxHash)}</GreyText>
+              <GreyText>
+                <Note status={row.status} txHash={row.destinationTxHash} />
+              </GreyText>
             ),
             <WithLoader isLoading={!row.projectName} variant="skeleton">
               <Link

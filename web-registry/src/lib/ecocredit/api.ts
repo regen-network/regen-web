@@ -318,6 +318,7 @@ const getClassProjectForBatch = async (
   }
 
   // TODO should we use credit class metadata instead of Sanity eventually?
+  // https://github.com/regen-network/regen-registry/issues/1428
   const creditClassSanity = findSanityCreditClass({
     sanityCreditClassData,
     creditClassIdOrUrl: project?.classId ?? '',

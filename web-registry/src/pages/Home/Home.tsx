@@ -5,7 +5,6 @@ import { gradients } from 'styles/gradients';
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { Loading } from 'web-components/lib/components/loading';
 import Modal from 'web-components/lib/components/modal';
-import Section from 'web-components/lib/components/section';
 import SEO from 'web-components/lib/components/seo';
 import { Body, Title } from 'web-components/lib/components/typography';
 
@@ -149,16 +148,12 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
       </CardMedia>
 
       {creditClassesContent && (
-<<<<<<< HEAD
-        <Section
-=======
         <BackgroundImgSection
           img={'/svg/topology.svg'}
           sx={{
             display: 'flex',
             alignItems: 'center',
           }}
->>>>>>> b67c0c14 (fix: credit class bg image (#1600))
           title="Credit Classes"
           classes={{ root: classes.section, title: classes.title }}
           id="credit-classes"
@@ -168,7 +163,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
             justifyContent={['center', 'center', 'flex-start']}
             creditClassesContent={creditClassesContent} // CMS data
           />
-        </Section>
+        </BackgroundImgSection>
       )}
 
       <HeroAction

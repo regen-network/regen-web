@@ -19,11 +19,9 @@ import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
 import Section from 'web-components/lib/components/section';
-import {
-  DEFAULT_ROWS_PER_PAGE,
-  TablePaginationParams,
-} from 'web-components/lib/components/table/ActionsTable';
+import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 import { Title } from 'web-components/lib/components/typography';
+import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/ActionsTable.constants';
 
 import { useAllProjectsQuery } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';

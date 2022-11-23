@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { OfflineSigner } from '@cosmjs/proto-signing';
 import { RegenApi } from '@regen-network/api';
+import { QueryClientImpl as EcocreditQueryClientImpl } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+
+import { EcocreditQueryClient } from 'lib/ecocredit/api';
 
 import { expLedger, ledgerExpRPCUri, ledgerRPCUri } from './lib/ledger';
 import { useWallet, Wallet } from './lib/wallet/wallet';
@@ -8,6 +11,7 @@ import { useWallet, Wallet } from './lib/wallet/wallet';
 interface ContextValue {
   loading: boolean;
   api: RegenApi | undefined;
+  ecocreditClient?: EcocreditQueryClient;
   error: unknown;
   wallet?: Wallet;
 }
@@ -42,6 +46,7 @@ export async function connect(
 const LedgerContext = React.createContext<ContextValue>({
   loading: false,
   api: undefined,
+  ecocreditClient: undefined,
   error: undefined,
 });
 
@@ -86,12 +91,20 @@ export const useLedger = (options?: ConnectParams): ContextValue => {
   const [expApi, setExpApi] = useState<RegenApi | undefined>(undefined);
   const [expLoading, setExpLoading] = useState<boolean>(false);
   const [expError, setExpError] = useState<unknown>(undefined);
+  const [ecocreditClient, setClientEcocreditClient] =
+    useState<EcocreditQueryClient>();
   const context = React.useContext(LedgerContext);
   const { wallet } = useWallet();
-
   const forceExp =
     !expLedger && // No need to get exp ledger api if it's already used as the primary one
     options?.forceExp;
+  const api = forceExp ? expApi : context.api;
+
+  useEffect(() => {
+    if (!api?.queryClient) return;
+    if (ecocreditClient) return;
+    setClientEcocreditClient(new EcocreditQueryClientImpl(api.queryClient));
+  }, [api?.queryClient, ecocreditClient]);
 
   useEffect(() => {
     if (forceExp && !expApi && !expLoading && !expError) {
@@ -115,7 +128,8 @@ export const useLedger = (options?: ConnectParams): ContextValue => {
   ]);
 
   return {
-    api: forceExp ? expApi : context.api,
+    api,
+    ecocreditClient,
     loading: forceExp ? expLoading : context.loading,
     error: forceExp ? expError : context.error,
     wallet,

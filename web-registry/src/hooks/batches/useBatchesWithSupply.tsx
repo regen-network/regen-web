@@ -21,6 +21,7 @@ export const useBatchesWithSupply = ({
   const [batchesWithSupply, setBatchesWithSupply] = useState<
     BatchInfoWithSupply[] | undefined
   >();
+
   const { data: sanityCreditClassData } = useAllCreditClassQuery({
     client: sanityClient,
   });
@@ -36,6 +37,7 @@ export const useBatchesWithSupply = ({
           tradableAmount: '',
         }),
       );
+
       setBatchesWithSupply(batchesWithDefaultSupply);
     }
   }, [batches, batchesWithSupply]);

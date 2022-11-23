@@ -15,13 +15,14 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import Analytics from 'analytics';
 import doNotTrack from 'analytics-plugin-do-not-track';
 import { AnalyticsProvider } from 'use-analytics';
 
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 
+import { reactQueryClient } from 'lib/clients/reactQueryClient';
 import { GlobalProvider } from 'lib/context/globalContext';
 
 import PageLoader from 'components/atoms/PageLoader';
@@ -43,7 +44,6 @@ const config = {
   audience: 'https://regen-registry-server.herokuapp.com/',
 };
 const intercomId = process.env.REACT_APP_INTERCOM_APP_ID || '';
-const queryClient = new QueryClient();
 
 Sentry.init({
   dsn: 'https://f5279ac3b8724af88ffb4cdfad92a2d4@o1377530.ingest.sentry.io/6688446',
@@ -117,7 +117,7 @@ root.render(
     cacheLocation="localstorage"
   >
     <AuthApolloProvider>
-      <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={reactQueryClient}>
         <IntercomProvider appId={intercomId} autoBoot>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <WalletProvider>

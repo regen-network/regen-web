@@ -23,6 +23,8 @@ import { BuyCreditsModal, BuyCreditsValues } from 'components/organisms';
 import { useMsgClient } from 'hooks';
 import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
 
+import { useSelectedProject } from './hooks/useSelectedProject';
+
 type Props = {
   isFlowStarted: boolean;
   setIsFlowStarted: UseStateSetter<boolean>;
@@ -106,20 +108,10 @@ export const BuySellOrderFlow = ({
   const ErrorIcon = errorsMapping[errorEnum].icon;
 
   /**
-   * data processing (business logic)
+   * data processing
    */
-  const [selectedProject, setSelectedProject] =
-    useState<ProjectWithOrderData>();
-
-  useEffect(() => {
-    if (projects?.length === 1) setSelectedProject(projects[0]);
-  }, [projects]);
-
-  const setSelectedProjectById = (projectId: string): void | undefined => {
-    if (!projects || projects.length <= 1) return;
-    const found = projects.find(project => project.id === projectId);
-    if (found) setSelectedProject(found);
-  };
+  const { selectedProject, setSelectedProject, setSelectedProjectById } =
+    useSelectedProject({ projects });
 
   const projectsSellOrdersIds = useMemo(
     () =>

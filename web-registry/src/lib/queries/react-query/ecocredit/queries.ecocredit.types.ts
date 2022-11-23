@@ -20,7 +20,7 @@ export type ReactQueryBatchesResponse = {
 
 /* AddDataToBatchesQuery */
 
-export type ReactQueryAddDataToBatchParams = Omit<
+export type ReactQueryAddDataToBatchesParams = Omit<
   AddDataToBatchesParams,
   'batches'
 > & {

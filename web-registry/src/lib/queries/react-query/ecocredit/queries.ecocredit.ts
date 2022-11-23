@@ -1,8 +1,8 @@
 import { addDataToBatches, queryBatches } from 'lib/ecocredit/api';
 
 import {
+  ReactQueryAddDataToBatchesParams,
   ReactQueryAddDataToBatchesResponse,
-  ReactQueryAddDataToBatchParams,
   ReactQueryBatchesProps,
   ReactQueryBatchesResponse,
 } from './queries.ecocredit.types';
@@ -34,7 +34,7 @@ export const getAddDataToBatchesQuery = ({
   batches,
   sanityCreditClassData,
   enabled = true,
-}: ReactQueryAddDataToBatchParams): ReactQueryAddDataToBatchesResponse => ({
+}: ReactQueryAddDataToBatchesParams): ReactQueryAddDataToBatchesResponse => ({
   queryKey: batches && [
     'addDataToBatches',
     batches.map(batch => batch.denom).join(','),

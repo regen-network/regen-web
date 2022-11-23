@@ -742,7 +742,7 @@ export const queryBatchInfo = async ({
 
 // Batches
 
-interface QueryBatchesProps extends EcocreditQueryClientProps {
+export interface QueryBatchesProps extends EcocreditQueryClientProps {
   request: DeepPartial<QueryBatchesRequest>;
 }
 

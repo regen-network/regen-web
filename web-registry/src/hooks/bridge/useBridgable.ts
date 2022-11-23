@@ -4,12 +4,7 @@ import { TablePaginationParams } from 'web-components/lib/components/table/Actio
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 
-// TODO - this hook is a placeholder that right now just simulates a request to
-// the network and an empty response. Use later to implement the data request.
-
-async function stall(stallTime = 3000): Promise<void> {
-  await new Promise(resolve => setTimeout(resolve, stallTime));
-}
+import useEcocredits from 'hooks/useEcocredits';
 
 interface Props {
   address?: string;
@@ -17,20 +12,25 @@ interface Props {
 }
 
 interface Output {
-  credits: BatchInfoWithBalance[];
+  bridgableCredits: BatchInfoWithBalance[];
   isLoadingCredits: boolean;
 }
 
 export const useBridgable = ({ address, paginationParams }: Props): Output => {
-  const [credits, setCredits] = useState<BatchInfoWithBalance[]>([]);
-  const [isLoadingCredits, setIsLoadingCredits] = useState(true);
+  const [bridgableCredits, setBridgableCredits] = useState<
+    BatchInfoWithBalance[]
+  >([]);
+  const { credits, isLoadingCredits } = useEcocredits({
+    address,
+    creditClassId: process.env.REACT_APP_BRIDGE_CREDIT_CLASS_ID,
+    paginationParams,
+  });
 
   useEffect(() => {
-    stall().then(() => {
-      setCredits([]);
-      setIsLoadingCredits(false);
-    });
-  }, []);
+    if (isLoadingCredits) return;
 
-  return { credits, isLoadingCredits };
+    setBridgableCredits(credits);
+  }, [credits, isLoadingCredits]);
+
+  return { bridgableCredits, isLoadingCredits };
 };

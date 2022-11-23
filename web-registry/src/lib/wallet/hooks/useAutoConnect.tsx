@@ -21,10 +21,10 @@ export const useAutoConnect = ({
   useEffect(() => {
     const autoConnectWalletType = localStorage.getItem(AUTO_CONNECT_WALLET_KEY);
 
-    const tryConnectWallet = (): void => {
+    const tryConnectWallet = async (): Promise<void> => {
       if (autoConnectWalletType) {
         try {
-          connectWallet({
+          await connectWallet({
             walletType: autoConnectWalletType as WalletType,
           });
         } catch (e) {

@@ -9,6 +9,7 @@ export const useCreditClassCardStyles = makeStyles()((theme: Theme) => ({
     position: 'relative',
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(54.5),
+      width: theme.spacing(62.5),
     },
   },
 }));

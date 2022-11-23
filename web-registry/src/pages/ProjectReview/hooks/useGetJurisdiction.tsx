@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import { ProjectMetadataLDUnion } from 'generated/json-ld';
+import { ProjectMetadataIntersectionLD } from 'generated/json-ld';
 
 import { getJurisdiction } from '../ProjectReview.util';
 
 type Props = {
-  metadata: Partial<ProjectMetadataLDUnion>;
+  metadata: Partial<ProjectMetadataIntersectionLD>;
 };
 
 export const useGetJurisdiction = ({ metadata }: Props): string | undefined => {

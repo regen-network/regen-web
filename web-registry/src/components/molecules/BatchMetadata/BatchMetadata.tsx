@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 
 import { Flex } from 'web-components/lib/components/box';
 import { Title } from 'web-components/lib/components/typography';
-import { CreditBatchMetadataIntersectionLD } from 'web-components/lib/types/rdf/credit-batch-union-ld';
+import { CreditBatchMetadataIntersectionLD } from 'web-components/lib/types/rdf/credit-batch-intersection-ld';
 
 import { BatchMetadataAdditionalInfo } from './BatchMetadata.AdditionalInfo';
 

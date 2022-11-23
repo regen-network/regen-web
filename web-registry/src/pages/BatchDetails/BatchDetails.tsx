@@ -7,7 +7,7 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import { Loading } from 'web-components/lib/components/loading';
 import Section from 'web-components/lib/components/section';
 import { Title } from 'web-components/lib/components/typography';
-import { CreditBatchMetadataIntersectionLD } from 'web-components/lib/types/rdf/credit-batch-union-ld';
+import { CreditBatchMetadataIntersectionLD } from 'web-components/lib/types/rdf/credit-batch-intersection-ld';
 
 import { useProjectByOnChainIdQuery } from 'generated/graphql';
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';

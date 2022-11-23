@@ -156,13 +156,12 @@ export default function ProjectTopCard({
             classes && classes.userInfo,
           )}
         >
-          <UserInfoWithTitle size="xl" user={projectAdmin} title="admin" />
+          <UserInfoWithTitle user={projectAdmin} title="admin" />
         </div>
       )}
       {projectDeveloper && (
         <div className={cx(styles.userInfo, classes && classes.userInfo)}>
           <UserInfoWithTitle
-            size="xl"
             user={projectDeveloper}
             title="project developer"
           />
@@ -171,27 +170,23 @@ export default function ProjectTopCard({
       {landSteward && (
         <div className={cx(styles.userInfo, classes && classes.userInfo)}>
           {/* <hr className={styles.separator} /> */}
-          <UserInfoWithTitle
-            size="xl"
-            user={landSteward}
-            title="land steward"
-          />
+          <UserInfoWithTitle user={landSteward} title="land steward" />
         </div>
       )}
       {landOwner && (
         <div className={cx(styles.userInfo, classes && classes.userInfo)}>
           {/* <hr className={styles.separator} /> */}
-          <UserInfoWithTitle size="xl" user={landOwner} title="land owner" />
+          <UserInfoWithTitle user={landOwner} title="land owner" />
         </div>
       )}
       {issuer && (
         <div className={styles.issuer}>
-          <UserInfoWithTitle size="xl" user={issuer} title="issuer" />
+          <UserInfoWithTitle user={issuer} title="issuer" />
         </div>
       )}
       {reseller && (
         <div className={styles.issuer}>
-          <UserInfoWithTitle size="xl" user={reseller} title="reseller" />
+          <UserInfoWithTitle user={reseller} title="reseller" />
         </div>
       )}
     </Card>

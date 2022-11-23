@@ -24,4 +24,12 @@ export const useHomeStyles = makeStyles()(theme => ({
     justifyContent: 'center',
     paddingBottom: theme.spacing(17.75),
   },
+  creditClassBackground: {
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: theme.spacing(22.25),
+    },
+    paddingBottom: theme.spacing(22.25),
+    border: '1px solid',
+    borderColor: theme.palette.grey['100'],
+  },
 }));

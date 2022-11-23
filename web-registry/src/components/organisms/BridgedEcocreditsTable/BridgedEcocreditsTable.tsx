@@ -10,7 +10,6 @@ import EmptyCartIcon from 'web-components/lib/components/icons/EmptyCartIcon';
 import { InfoLabelVariant } from 'web-components/lib/components/info-label/InfoLabel.types';
 import {
   ActionsTable,
-  DEFAULT_ROWS_PER_PAGE,
   TablePaginationParams,
 } from 'web-components/lib/components/table/ActionsTable';
 import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
@@ -19,6 +18,7 @@ import {
   formatDate,
   formatNumber,
 } from 'web-components/lib/utils/format';
+import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/ActionsTable.constants';
 
 import {
   AccountLink,

@@ -9,6 +9,7 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import Card from 'web-components/lib/components/cards/Card';
@@ -21,14 +22,9 @@ import Section from 'web-components/lib/components/section';
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
-import {
-  CFCProjectMetadataLD,
-  ProjectMetadataLDUnion,
-  VCSProjectMetadataLD,
-} from 'generated/json-ld';
+import { ProjectMetadataIntersectionLD } from 'generated/json-ld';
 import { UseStateSetter } from 'types/react/use-state';
 
-import { ProjectMetadataCFC } from 'components/molecules/ProjectMetadata/ProjectMetadata.CFC';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import {
@@ -44,7 +40,7 @@ import {
   BatchTotalsForProject,
 } from '../../../types/ledger/ecocredit';
 import { ProjectTopLink } from '../../atoms';
-import { ProjectBatchTotals, ProjectMetadataVCS } from '../../molecules';
+import { ProjectBatchTotals, ProjectPageMetadata } from '../../molecules';
 import { CreditBatches } from '../CreditBatches/CreditBatches';
 import {
   ProjectTopSectionQuoteMark,
@@ -57,6 +53,7 @@ import {
 
 function ProjectTopSection({
   data,
+  onChainProject,
   metadata,
   sanityCreditClassData,
   geojson,
@@ -64,9 +61,11 @@ function ProjectTopSection({
   batchData,
   setPaginationParams,
   projectId,
+  loading,
 }: {
   data?: any; // TODO: when all project are onchain, this can be ProjectByOnChainIdQuery
-  metadata?: ProjectMetadataLDUnion;
+  onChainProject?: ProjectInfo;
+  metadata?: Partial<ProjectMetadataIntersectionLD>;
   sanityCreditClassData?: AllCreditClassQuery;
   geojson?: any;
   isGISFile?: boolean;
@@ -76,6 +75,7 @@ function ProjectTopSection({
   };
   setPaginationParams: UseStateSetter<TablePaginationParams>;
   projectId?: string;
+  loading?: boolean;
 }): JSX.Element {
   const { classes } = useProjectTopSectionStyles();
   const theme = useTheme();
@@ -100,12 +100,6 @@ function ProjectTopSection({
     metadata?.['regen:landStory'] || metadata?.['schema:description'];
   const landStewardStoryTitle = metadata?.['regen:landStewardStoryTitle'];
   const landStewardStory = metadata?.['regen:landStewardStory'];
-  const isVCSProject = !!(metadata as VCSProjectMetadataLD)?.[
-    'regen:vcsProjectId'
-  ];
-  const isCFCProject = !!(metadata as CFCProjectMetadataLD)?.[
-    'regen:cfcProjectId'
-  ];
 
   const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.[
     '@list'
@@ -142,7 +136,8 @@ function ProjectTopSection({
               // TODO Format and show on-chain project location if no off-chain location
               place={
                 metadata?.['schema:location']?.['place_name'] ||
-                metadata?.['schema:location']?.['geojson:place_name']
+                metadata?.['schema:location']?.['geojson:place_name'] ||
+                onChainProject?.jurisdiction
               }
               area={Number(area)}
               areaUnit={areaUnit}
@@ -154,8 +149,8 @@ function ProjectTopSection({
                 mt: 2.5,
               }}
             >
-              {!metadata && <Skeleton variant="text" height={124} />}
-              {!isVCSProject && (
+              {!metadata && loading && <Skeleton variant="text" height={124} />}
+              {!onChainProject && (
                 <ProjectTopLink
                   label="offset generation method"
                   name={
@@ -168,9 +163,8 @@ function ProjectTopSection({
             </Box>
           </Box>
           {/* Used to prevent layout shift */}
-          {(!data || isGISFile === undefined || (isGISFile && !geojson)) && (
-            <Skeleton height={200} />
-          )}
+          {(!data || isGISFile === undefined || (isGISFile && !geojson)) &&
+            loading && <Skeleton height={200} />}
           {geojson && isGISFile && glanceText && (
             <LazyLoad offset={50} once>
               <Box sx={{ pt: 6 }}>
@@ -186,14 +180,14 @@ function ProjectTopSection({
             </LazyLoad>
           )}
           {/* Used to prevent layout shift */}
-          {!metadata && <Skeleton height={200} />}
+          {!metadata && loading && <Skeleton height={200} />}
           {landStewardStoryTitle && (
             <Title sx={{ pt: { xs: 11.75, sm: 14 } }} variant="h2">
               Story
             </Title>
           )}
           {primaryDescription && (
-            <Body size="xl" mobileSize="md" pt={[3.75, 7.5]}>
+            <Body size="xl" mobileSize="md" py={[3.75, 6]}>
               {primaryDescription}
             </Body>
           )}
@@ -206,21 +200,10 @@ function ProjectTopSection({
                 />
               }
               imgSrc={getSanityImgSrc(creditClassSanity?.image)}
-              sx={{ mt: [8, 20], mb: [2, 8] }}
+              sx={{ mt: [2, 4], py: [2, 6] }}
             />
           </Link>
-          {isVCSProject && (
-            <ProjectMetadataVCS
-              metadata={metadata as VCSProjectMetadataLD}
-              projectId={projectId}
-            />
-          )}
-          {isCFCProject && (
-            <ProjectMetadataCFC
-              metadata={metadata as CFCProjectMetadataLD}
-              projectId={projectId}
-            />
-          )}
+          <ProjectPageMetadata metadata={metadata} projectId={projectId} />
           <LazyLoad offset={50}>
             {videoURL && (
               <Card className={classes.media}>
@@ -290,7 +273,7 @@ function ProjectTopSection({
         </Grid>
         <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
           <ProjectTopCard
-            projectAdmin={getDisplayAdmin(data?.admin)}
+            projectAdmin={getDisplayAdmin(data?.admin || onChainProject?.admin)}
             projectDeveloper={getDisplayDeveloper(
               metadata,
               project?.partyByDeveloperId,
@@ -308,7 +291,7 @@ function ProjectTopSection({
             // TODO if no off-chain data, use on-chain project.issuer
             issuer={getParty(project?.partyByIssuerId)}
             reseller={
-              !isVCSProject ? getParty(project?.partyByResellerId) : undefined
+              !onChainProject ? getParty(project?.partyByResellerId) : undefined
             }
             sdgs={sdgs}
           />

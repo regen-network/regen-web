@@ -136,7 +136,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
 
       {creditClassesContent && (
         <BackgroundImgSection
-          img={heroSection?.background?.image?.asset?.url || ''}
+          img={'/svg/topology.svg'}
           sx={{
             display: 'flex',
             alignItems: 'center',

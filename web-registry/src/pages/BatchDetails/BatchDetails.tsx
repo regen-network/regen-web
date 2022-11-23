@@ -7,8 +7,7 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import { Loading } from 'web-components/lib/components/loading';
 import Section from 'web-components/lib/components/section';
 import { Title } from 'web-components/lib/components/typography';
-import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
-import { CFCBatchMetadataLD } from 'web-components/lib/types/rdf/C02-city-forest-credits-batch';
+import { CreditBatchMetadataIntersectionLD } from 'web-components/lib/types/rdf/credit-batch-intersection-ld';
 
 import { useProjectByOnChainIdQuery } from 'generated/graphql';
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
@@ -27,11 +26,10 @@ import { useEcocredits } from 'hooks';
 
 export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { batchDenom } = useParams();
-  const [ledgerLoading, setLedgerLoading] = useState(false);
+  const [ledgerLoading, setLedgerLoading] = useState(true);
   const [batch, setBatch] = useState<BatchInfoWithSupply>();
-  const [metadata, setMetadata] = useState<
-    VCSBatchMetadataLD | CFCBatchMetadataLD
-  >();
+  const [metadata, setMetadata] =
+    useState<Partial<CreditBatchMetadataIntersectionLD>>();
   const walletContext = useWallet();
   const accountAddress = walletContext.wallet?.address;
   const { credits: userEcocredits } = useEcocredits({
@@ -43,7 +41,6 @@ export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
     const fetch = async (): Promise<void> => {
       if (batchDenom) {
         try {
-          setLedgerLoading(true);
           const batch = await getBatchWithSupplyForDenom(batchDenom);
           setBatch(batch);
           if (batch.metadata) {
@@ -55,6 +52,8 @@ export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
         } finally {
           setLedgerLoading(false);
         }
+      } else {
+        setLedgerLoading(false);
       }
     };
     fetch();

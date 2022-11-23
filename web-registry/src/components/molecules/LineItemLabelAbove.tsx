@@ -17,14 +17,7 @@ const LineItemLabelAbove: React.FC<
 > = ({ sx, label, data }) => {
   if (!data) return null;
   return (
-    <Box
-      sx={{
-        width: { xs: '100%', sm: '50%' },
-        pr: [0, 8],
-        mb: 8,
-        ...sx,
-      }}
-    >
+    <Box sx={[...(Array.isArray(sx) ? sx : [sx])]}>
       <Label
         size="xs"
         sx={{

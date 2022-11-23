@@ -28,7 +28,7 @@ export const ecocreditBatchesLoader =
       },
     });
 
-    const batches = getFromCacheOrFetch<QueryBatchesResponse>({
+    const batches = getFromCacheOrFetch<QueryBatchesResponse | void>({
       query: batchesQuery,
       reactQueryClient: queryClient,
     });

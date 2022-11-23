@@ -1,15 +1,15 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import { URL_PRIVACY, URL_TERMS_SERVICE } from 'globals';
 
 import {
   Footer,
   FooterItemProps as FooterItem,
 } from 'web-components/lib/components/footer/footer-new';
 
-import { URL_PRIVACY, URL_TERMS_SERVICE } from '../../globals';
-import { Link, RegistryIconLink } from '../atoms';
+import { Link, RegistryIconLink } from 'components/atoms';
 
-const AppFooter: React.FC<React.PropsWithChildren<unknown>> = () => {
+const RegistryLayoutFooter: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { pathname } = useLocation();
   const isHidden = ['/project-pages'].some(route => pathname.startsWith(route));
 
@@ -42,6 +42,10 @@ const AppFooter: React.FC<React.PropsWithChildren<unknown>> = () => {
         {
           title: 'Activity',
           href: '/stats/activity',
+        },
+        {
+          title: 'Ecocredit batches',
+          href: '/ecocredit-batches/1',
         },
       ],
     },
@@ -81,4 +85,4 @@ const AppFooter: React.FC<React.PropsWithChildren<unknown>> = () => {
   );
 };
 
-export { AppFooter };
+export { RegistryLayoutFooter };

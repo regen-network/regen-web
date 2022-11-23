@@ -14,6 +14,9 @@ export const useHeaderMenuHoverStyles = makeStyles(theme => ({
         borderBottom: `2px solid ${theme.palette.secondary.main}`,
       },
     },
+    '& > div': {
+      borderBottom: '2px solid transparent',
+    },
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingRight: theme.spacing(1.25),
       paddingLeft: theme.spacing(1.25),

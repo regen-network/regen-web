@@ -1,4 +1,4 @@
-import { QueryClientImpl } from '@regen-network/api/lib/generated/ibc/applications/transfer/v1/query';
+import { QueryClientImpl } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { connect as connectToApi } from '../../ledger';
 

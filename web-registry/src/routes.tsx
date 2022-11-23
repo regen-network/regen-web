@@ -5,7 +5,6 @@ import {
   Route,
 } from 'react-router-dom';
 
-import { ecocreditClientAsync } from 'lib/clients/ecocreditQueryClient';
 import { reactQueryClient } from 'lib/clients/reactQueryClient';
 
 import MyBridge from 'pages/Dashboard/MyBridge';
@@ -128,7 +127,6 @@ export const routes = createRoutesFromElements(
       path="ecocredit-batches/:page"
       element={<EcocreditBatches />}
       loader={ecocreditBatchesLoader({
-        ecocreditClientAsync,
         queryClient: reactQueryClient,
       })}
     />

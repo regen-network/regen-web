@@ -1,5 +1,7 @@
 import uniq from 'lodash/uniq';
 
+import { DenomTraceWithHash } from 'lib/ibc/transfer/api';
+
 import { IBC_DENOM_PREFIX } from 'hooks/useQuerySellOrders';
 
 import { getDenomTraceByHashesQuery } from '../../ibc/transfer/getDenomTraceByHashesQuery/getDenomTraceByHashesQuery';
@@ -33,10 +35,9 @@ export const getSellOrdersQuery = ({
     const denomTracesQuery = getDenomTraceByHashesQuery({
       hashes: ibcDenomHashes,
     });
-    const denomTraces = await getFromCacheOrFetch({
+    const denomTraces = await getFromCacheOrFetch<DenomTraceWithHash[]>({
       query: denomTracesQuery,
       reactQueryClient,
-      queryKeys: denomTracesQuery.queryKey,
     });
 
     // Update sell orders by replacing ibc denoms with base denom from DenomTrace if needed

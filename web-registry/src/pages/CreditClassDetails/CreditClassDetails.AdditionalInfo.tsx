@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { startCase } from 'lodash';
 
@@ -7,7 +7,7 @@ import { Body } from 'web-components/lib/components/typography';
 import { CreditClassMetadataLD } from 'generated/json-ld';
 
 import { ArrowLink } from 'components/atoms/MetadataArrowLink';
-import { LineItemLabelAbove } from 'components/molecules';
+import { MetaDetail } from 'components/molecules';
 
 import { ApprovedMethodologiesList } from './CreditClassDetails.ApprovedMethodologies';
 
@@ -44,104 +44,106 @@ const AdditionalInfo: React.FC<React.PropsWithChildren<AdditionalInfoProps>> =
     };
 
     return (
-      <Box sx={{ pt: 8, display: 'flex', flexWrap: 'wrap' }}>
-        <LineItemLabelAbove
-          label="credit type"
-          data={
-            <Body size="xl" sx={{ mr: 1 }}>
-              {getCreditType(onChainClass.creditTypeAbbrev)}
-            </Body>
-          }
-        />
-        {sourceRegistry?.['schema:name'] && (
-          <LineItemLabelAbove
-            label="registry"
+      <Box sx={{ py: 8 }}>
+        <Grid container spacing={8}>
+          <MetaDetail
+            label="credit type"
             data={
-              <ArrowLink
-                label={sourceRegistry?.['schema:name']}
-                href={sourceRegistry?.['schema:url']?.['@value']}
-              />
+              <Body size="xl" sx={{ mr: 1 }}>
+                {getCreditType(onChainClass.creditTypeAbbrev)}
+              </Body>
             }
           />
-        )}
-        {carbonOffsetStandard?.['schema:name'] && (
-          <LineItemLabelAbove
-            label="carbon offset standard"
-            data={
-              <ArrowLink
-                label={carbonOffsetStandard?.['schema:name']}
-                href={carbonOffsetStandard?.['schema:url']?.['@value']}
-              />
-            }
+          {sourceRegistry?.['schema:name'] && (
+            <MetaDetail
+              label="registry"
+              data={
+                <ArrowLink
+                  label={sourceRegistry?.['schema:name']}
+                  href={sourceRegistry?.['schema:url']?.['@value']}
+                />
+              }
+            />
+          )}
+          {carbonOffsetStandard?.['schema:name'] && (
+            <MetaDetail
+              label="carbon offset standard"
+              data={
+                <ArrowLink
+                  label={carbonOffsetStandard?.['schema:name']}
+                  href={carbonOffsetStandard?.['schema:url']?.['@value']}
+                />
+              }
+            />
+          )}
+          <ApprovedMethodologiesList
+            methodologyList={metadata?.['regen:approvedMethodologies']}
           />
-        )}
-        <ApprovedMethodologiesList
-          methodologyList={metadata?.['regen:approvedMethodologies']}
-        />
-        {offsetGenerationMethods && offsetGenerationMethods?.length > 0 && (
-          <LineItemLabelAbove
-            label={`offset generation method${
-              offsetGenerationMethods.length > 1 ? 's' : ''
-            }`}
-            data={
-              <>
-                {offsetGenerationMethods.map((method: any, i: number) => (
-                  <Body key={i} size="xl">
-                    {getValue(method)}
-                  </Body>
-                ))}
-              </>
-            }
-          />
-        )}
-        {projectActivities && projectActivities?.length > 0 && (
-          <LineItemLabelAbove
-            label="project activities"
-            data={
-              <>
-                {projectActivities.map((projectActivity: any, i: number) => (
-                  <Body key={i} size="xl">
-                    {getValue(projectActivity)}
-                  </Body>
-                ))}
-              </>
-            }
-          />
-        )}
-        {sectoralScopes && sectoralScopes?.length > 0 && (
-          <LineItemLabelAbove
-            label={`sectoral scope${sectoralScopes.length > 1 ? 's' : ''}`}
-            data={
-              <>
-                {sectoralScopes.map((sector: any, i: number) => (
-                  <Body key={i} size="xl">
-                    {getValue(sector)}
-                  </Body>
-                ))}
-              </>
-            }
-          />
-        )}
-        {ecosystemTypes && ecosystemTypes?.length > 0 && (
-          <LineItemLabelAbove
-            label="ecosystem type"
-            data={
-              <>
-                {ecosystemTypes.map((ecosystemType: any, i: number) => (
-                  <Body key={i} size="xl">
-                    {getValue(ecosystemType)}
-                  </Body>
-                ))}
-              </>
-            }
-          />
-        )}
-        {verificationMethod && (
-          <LineItemLabelAbove
-            label="verification method"
-            data={<Body size="xl">{getValue(verificationMethod)}</Body>}
-          />
-        )}
+          {offsetGenerationMethods && offsetGenerationMethods?.length > 0 && (
+            <MetaDetail
+              label={`offset generation method${
+                offsetGenerationMethods.length > 1 ? 's' : ''
+              }`}
+              data={
+                <>
+                  {offsetGenerationMethods.map((method: any, i: number) => (
+                    <Body key={i} size="xl">
+                      {getValue(method)}
+                    </Body>
+                  ))}
+                </>
+              }
+            />
+          )}
+          {projectActivities && projectActivities?.length > 0 && (
+            <MetaDetail
+              label="project activities"
+              data={
+                <>
+                  {projectActivities.map((projectActivity: any, i: number) => (
+                    <Body key={i} size="xl">
+                      {getValue(projectActivity)}
+                    </Body>
+                  ))}
+                </>
+              }
+            />
+          )}
+          {sectoralScopes && sectoralScopes?.length > 0 && (
+            <MetaDetail
+              label={`sectoral scope${sectoralScopes.length > 1 ? 's' : ''}`}
+              data={
+                <>
+                  {sectoralScopes.map((sector: any, i: number) => (
+                    <Body key={i} size="xl">
+                      {getValue(sector)}
+                    </Body>
+                  ))}
+                </>
+              }
+            />
+          )}
+          {ecosystemTypes && ecosystemTypes?.length > 0 && (
+            <MetaDetail
+              label="ecosystem type"
+              data={
+                <>
+                  {ecosystemTypes.map((ecosystemType: any, i: number) => (
+                    <Body key={i} size="xl">
+                      {getValue(ecosystemType)}
+                    </Body>
+                  ))}
+                </>
+              }
+            />
+          )}
+          {verificationMethod && (
+            <MetaDetail
+              label="verification method"
+              data={<Body size="xl">{getValue(verificationMethod)}</Body>}
+            />
+          )}
+        </Grid>
       </Box>
     );
   };

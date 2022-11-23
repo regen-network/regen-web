@@ -1,7 +1,6 @@
 import React from 'react';
 import { SxProps } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { Body, Title } from 'web-components/lib/components/typography';
@@ -29,7 +28,7 @@ type Props = {
   };
 };
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   main: {
     justifyContent: 'flex-end',
   },
@@ -39,8 +38,11 @@ const useStyles = makeStyles((theme: Theme) => ({
  * Hero section with title, description and background image justified to the lower left with our section component.
  * Optional tooltip when using underlined text in description.
  */
-const HeroTitle: React.FC<Props> = ({ classes, ...props }) => {
-  const styles = useStyles();
+const HeroTitle: React.FC<React.PropsWithChildren<Props>> = ({
+  classes,
+  ...props
+}) => {
+  const { classes: styles, cx } = useStyles();
 
   return (
     <BackgroundImgSection

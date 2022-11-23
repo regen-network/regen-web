@@ -9,9 +9,11 @@ import { LineItemLabelAbove } from 'components/molecules';
 
 import { MAX_METHODOLOGIE_LINKS } from './CreditClassDetails.constants';
 
-const ApprovedMethodologiesList: React.FC<{
-  methodologyList?: ApprovedMethodologies;
-}> = ({ methodologyList }) => {
+const ApprovedMethodologiesList: React.FC<
+  React.PropsWithChildren<{
+    methodologyList?: ApprovedMethodologies;
+  }>
+> = ({ methodologyList }) => {
   if (!methodologyList) return null;
 
   const methodologies = methodologyList?.['schema:itemListElement'];

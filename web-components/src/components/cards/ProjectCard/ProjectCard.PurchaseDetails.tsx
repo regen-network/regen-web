@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
+import ReactHtmlParser from 'html-react-parser';
 
 import { Body, Label } from '../../typography';
 
@@ -19,13 +19,15 @@ export function PurchaseDetails({
         {title}:{' '}
       </Label>
       <Body size="sm" mobileSize="sm" display="inline">
-        {url ? (
-          <a href={url} target="_blank" rel="noopener noreferrer">
-            {parsedInfo}»
-          </a>
-        ) : (
-          parsedInfo
-        )}
+        <>
+          {url ? (
+            <a href={url} target="_blank" rel="noopener noreferrer">
+              {parsedInfo}»
+            </a>
+          ) : (
+            parsedInfo
+          )}
+        </>
       </Body>
     </div>
   );

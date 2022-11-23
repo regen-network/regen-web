@@ -1,7 +1,9 @@
 import React from 'react';
-import { Box, Button, Theme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { Box, Button } from '@mui/material';
 import { SxProps } from '@mui/system';
+import { makeStyles } from 'tss-react/mui';
+
+import { Theme } from 'src/theme/muiTheme';
 
 import ContainedButton from '../buttons/ContainedButton';
 import Card from '../cards/Card';
@@ -9,7 +11,7 @@ import { LinkItem } from '../footer/footer-new';
 import { Label, Subtitle, Title } from '../typography';
 import Modal, { RegenModalProps } from '.';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -38,7 +40,7 @@ interface LinkProps extends LinkItem {
   sx?: SxProps<Theme>;
 }
 
-type LinkComponentProp = React.FC<LinkProps>;
+type LinkComponentProp = React.FC<React.PropsWithChildren<LinkProps>>;
 
 export interface ConfirmModalProps extends RegenModalProps {
   onConfirm: () => void;
@@ -55,7 +57,7 @@ interface CardItemProps extends Item {
   linkComponent: LinkComponentProp;
 }
 
-export const CardItem: React.FC<CardItemProps> = ({
+export const CardItem: React.FC<React.PropsWithChildren<CardItemProps>> = ({
   color,
   label,
   value,
@@ -85,7 +87,7 @@ export const CardItem: React.FC<CardItemProps> = ({
   );
 };
 
-const ConfirmModal: React.FC<ConfirmModalProps> = ({
+const ConfirmModal: React.FC<React.PropsWithChildren<ConfirmModalProps>> = ({
   icon,
   title,
   onCancelTitle,
@@ -97,7 +99,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
   cardItems,
   linkComponent,
 }) => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
   return (
     <Modal open={open} onClose={onClose} className={styles.root}>
       {icon}

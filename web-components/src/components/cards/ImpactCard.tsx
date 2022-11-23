@@ -1,5 +1,4 @@
-import React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { Body, Subtitle } from '../typography';
 import Card from './Card';
@@ -19,37 +18,37 @@ interface StyleProps {
   largeFontSize: boolean;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  background: props => ({
-    backgroundImage: `url(${props.imgSrc})`,
+const useStyles = makeStyles<StyleProps>()((theme, { imgSrc, monitored }) => ({
+  background: {
+    backgroundImage: `url(${imgSrc})`,
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center top',
     backgroundColor: theme.palette.grey['200'],
     textAlign: 'center',
     position: 'relative',
     [theme.breakpoints.up('sm')]: {
-      backgroundSize: props.monitored ? 'auto 70%' : '100% auto',
+      backgroundSize: monitored ? 'auto 70%' : '100% auto',
     },
     [theme.breakpoints.down('sm')]: {
       backgroundSize: '100% auto',
     },
     height: '100%',
-  }),
-  text: props => ({
+  },
+  text: {
     [theme.breakpoints.up('sm')]: {
-      paddingLeft: props.monitored ? theme.spacing(14.5) : theme.spacing(3.75),
-      paddingRight: props.monitored ? theme.spacing(14.5) : theme.spacing(3.75),
-      paddingBottom: props.monitored ? theme.spacing(12.5) : theme.spacing(6),
-      paddingTop: props.monitored ? theme.spacing(63.75) : theme.spacing(45.5),
+      paddingLeft: monitored ? theme.spacing(14.5) : theme.spacing(3.75),
+      paddingRight: monitored ? theme.spacing(14.5) : theme.spacing(3.75),
+      paddingBottom: monitored ? theme.spacing(12.5) : theme.spacing(6),
+      paddingTop: monitored ? theme.spacing(63.75) : theme.spacing(45.5),
     },
     [theme.breakpoints.down('sm')]: {
-      paddingLeft: props.monitored ? theme.spacing(5) : theme.spacing(3.75),
-      paddingRight: props.monitored ? theme.spacing(5) : theme.spacing(3.75),
-      paddingBottom: props.monitored ? theme.spacing(8) : theme.spacing(1.5),
-      paddingTop: props.monitored ? theme.spacing(33.75) : theme.spacing(28.5),
+      paddingLeft: monitored ? theme.spacing(5) : theme.spacing(3.75),
+      paddingRight: monitored ? theme.spacing(5) : theme.spacing(3.75),
+      paddingBottom: monitored ? theme.spacing(8) : theme.spacing(1.5),
+      paddingTop: monitored ? theme.spacing(33.75) : theme.spacing(28.5),
     },
     position: 'relative',
-  }),
+  },
   monitored: {
     display: 'flex',
     alignItems: 'center',
@@ -70,15 +69,15 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
     textAlign: 'left',
   },
-  backgroundGradient: props => ({
-    height: props.monitored ? '70%' : '85%',
+  backgroundGradient: {
+    height: monitored ? '70%' : '85%',
     zIndex: 0,
     position: 'absolute',
     bottom: 0,
     width: '100%',
     background:
       'linear-gradient(180deg, rgba(250, 250, 250, 0) 2.48%, #FAFAFA 64.06%)',
-  }),
+  },
   monitoredIcon: {
     paddingRight: theme.spacing(2),
   },
@@ -91,7 +90,7 @@ export default function ImpactCard({
   monitored = false,
   largeFontSize = false,
 }: ImpactCardProps): JSX.Element {
-  const classes = useStyles({ imgSrc, monitored, largeFontSize });
+  const { classes } = useStyles({ imgSrc, monitored, largeFontSize });
   // const theme = useTheme();
   const largeFont = largeFontSize || monitored;
   return (

@@ -9,11 +9,13 @@ import { onBtnClick } from '../../lib/button';
 /**
  * StepCard wrapping content from Sanity
  */
-const WrappedStepCard: React.FC<{
-  openModal: (link: string) => void;
-  stepNumber: number;
-  stepCard: Maybe<StepCardFieldsFragment>;
-}> = ({ openModal, stepNumber, stepCard }) => {
+const WrappedStepCard: React.FC<
+  React.PropsWithChildren<{
+    openModal: (link: string) => void;
+    stepNumber: number;
+    stepCard: Maybe<StepCardFieldsFragment>;
+  }>
+> = ({ openModal, stepNumber, stepCard }) => {
   if (!stepCard) {
     return null;
   }

@@ -2614,6 +2614,7 @@ exports[`Storyshots Modal Basket Take Modal 1`] = `
         index={true}
       />
     </Route>
+<<<<<<< HEAD
   </Routes>
 </MemoryRouter>
 `;
@@ -2648,6 +2649,8 @@ exports[`Storyshots Modal Bridge Modal 1`] = `
         index={true}
       />
     </Route>
+=======
+>>>>>>> dev
   </Routes>
 </MemoryRouter>
 `;
@@ -3056,6 +3059,43 @@ exports[`Storyshots Modal/WalletModal Default 1`] = `
         index={true}
       />
     </Route>
+<<<<<<< HEAD
+=======
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Modal/WalletModal Default 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    >
+      <Route
+        index={true}
+      />
+    </Route>
+>>>>>>> dev
   </Routes>
 </MemoryRouter>
 `;
@@ -3192,6 +3232,43 @@ exports[`Storyshots Registry/Molecules/Scrollable Codebox Scrollable Codebox 1`]
         index={true}
       />
     </Route>
+<<<<<<< HEAD
+=======
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Registry/Organisms/Bridge Modal Bridge Modal 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    >
+      <Route
+        index={true}
+      />
+    </Route>
+>>>>>>> dev
   </Routes>
 </MemoryRouter>
 `;

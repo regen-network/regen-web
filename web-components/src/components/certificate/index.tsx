@@ -1,8 +1,6 @@
-import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
 import Grid from '@mui/material/Grid';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import ReactHtmlParser from 'html-react-parser';
+import { makeStyles } from 'tss-react/mui';
 
 import { pluralize } from '../../utils/pluralize';
 import RegenIcon from '../icons/RegenIcon';
@@ -33,9 +31,9 @@ interface CertificateProps {
   retired?: boolean;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+const useStyles = makeStyles<StyleProps>()((theme, { background }) => ({
   root: {
-    backgroundImage: props => `url("${props.background}")`,
+    backgroundImage: `url("${background}")`,
     backgroundSize: 'cover',
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(8),
@@ -233,7 +231,7 @@ function Stakeholder({
   info: StakeholderInfo;
   total: number;
 }): JSX.Element {
-  const classes = useStyles({});
+  const { classes } = useStyles({});
 
   return (
     <Grid item xs={6}>
@@ -262,7 +260,7 @@ export default function Certificate({
   stakeholders,
   retired = true,
 }: CertificateProps): JSX.Element {
-  const classes = useStyles({ background });
+  const { classes, cx } = useStyles({ background });
 
   return (
     <div className={classes.root}>
@@ -276,7 +274,7 @@ export default function Certificate({
           <Title variant="h3" className={classes.bannerContent}>
             Certificate of {certificateTitle}
           </Title>
-          <div className={clsx(classes.bannerSideRight, classes.bannerSide)}>
+          <div className={cx(classes.bannerSideRight, classes.bannerSide)}>
             <div className={classes.whiteTriangle} />
             <div className={classes.greenTriangle} />
           </div>

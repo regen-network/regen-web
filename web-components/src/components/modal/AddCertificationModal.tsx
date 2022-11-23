@@ -13,11 +13,9 @@ interface AddCertificationModalProps
 
 export const title = 'Additional Certificate';
 
-const AddCertificationModal: React.FC<AddCertificationModalProps> = ({
-  open,
-  onClose,
-  onSubmit,
-}) => (
+const AddCertificationModal: React.FC<
+  React.PropsWithChildren<AddCertificationModalProps>
+> = ({ open, onClose, onSubmit }) => (
   <FormModalTemplate title={title} open={open} onClose={onClose}>
     <CertificationForm onClose={onClose} onSubmit={onSubmit} />
   </FormModalTemplate>

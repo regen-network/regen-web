@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -14,7 +14,7 @@ type Props = {
   connectSection?: Maybe<ConnectSection>;
 };
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   section: {
     display: 'flex',
     justifyContent: 'center',
@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 function CreditClassConnectSection({ connectSection }: Props): JSX.Element {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
 
   return (
     <BackgroundImgSection

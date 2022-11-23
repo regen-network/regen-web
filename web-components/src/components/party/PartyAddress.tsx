@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import DropdownIcon from '../icons/DropdownIcon';
 
@@ -9,7 +10,7 @@ interface PartyAddressProps {
   onClick: () => void;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     color: theme.palette.info.dark,
     lineHeight: '150%',
@@ -38,7 +39,7 @@ export default function PartyAddress({
   name,
   address,
 }: PartyAddressProps): JSX.Element {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const [showAddress, setShowAddress] = useState<boolean>(false);
 
   const handleClick = (): void => {

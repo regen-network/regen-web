@@ -63,7 +63,9 @@ const getApi = async (
   }
 };
 
-export const LedgerProvider: React.FC = ({ children }) => {
+export const LedgerProvider: React.FC<React.PropsWithChildren<unknown>> = ({
+  children,
+}) => {
   const [api, setApi] = useState<RegenApi | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<unknown>(undefined);

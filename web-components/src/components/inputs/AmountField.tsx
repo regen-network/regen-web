@@ -1,14 +1,13 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import clsx from 'clsx';
 import { Field } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 
 import { Theme } from '../../theme/muiTheme';
 import { getFormattedNumber } from '../../utils/format';
 import TextField, { RegenTextFieldProps } from '../inputs/TextField';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   textField: {
     '& .MuiInputBase-root': {
       paddingRight: '0 !important',
@@ -68,13 +67,13 @@ interface AmountFieldProps extends AmountLabelProps {
   className?: string;
 }
 
-const AuxiliarLabel: React.FC<AuxiliarLabelProps> = ({
+const AuxiliarLabel: React.FC<React.PropsWithChildren<AuxiliarLabelProps>> = ({
   availableAmount,
   denom,
   auxiliarLabel,
   className,
 }) => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
   return (
     <Box className={className} component="span" sx={{ flexGrow: 1 }}>
       <Box
@@ -98,13 +97,13 @@ const AuxiliarLabel: React.FC<AuxiliarLabelProps> = ({
   );
 };
 
-const AmountLabel: React.FC<AmountLabelProps> = ({
+const AmountLabel: React.FC<React.PropsWithChildren<AmountLabelProps>> = ({
   label,
   auxiliarLabel,
   availableAmount,
   denom,
 }) => {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
   return (
     <Grid container justifyContent="space-between">
       <span className={styles.mainLabel}>{label}</span>
@@ -122,46 +121,44 @@ interface AmountTextFieldProps extends RegenTextFieldProps {
   availableAmount: number;
 }
 
-const AmountTextField: React.FC<AmountTextFieldProps> = ({
-  availableAmount,
-  ...props
-}: AmountTextFieldProps) => {
-  const {
-    form: { setFieldValue },
-    field: { name },
-  } = props;
-  return (
-    <TextField
-      {...props}
-      endAdornment={
-        <Grid
-          container
-          alignItems="center"
-          sx={theme => ({
-            fontFamily: theme.typography.h1.fontFamily,
-            color: theme.palette.info.dark,
-            textTransform: 'uppercase',
-            fontWeight: 800,
-            letterSpacing: '1px',
-            backgroundColor: theme.palette.grey[100],
-            fontSize: theme.spacing(3),
-            cursor: 'pointer',
-            px: 5,
-            height: {
-              xs: theme.spacing(12.5),
-              sm: theme.spacing(15),
-            },
-          })}
-          onClick={() => setFieldValue(name, availableAmount)}
-        >
-          max
-        </Grid>
-      }
-    />
-  );
-};
+const AmountTextField: React.FC<React.PropsWithChildren<AmountTextFieldProps>> =
+  ({ availableAmount, ...props }: AmountTextFieldProps) => {
+    const {
+      form: { setFieldValue },
+      field: { name },
+    } = props;
+    return (
+      <TextField
+        {...props}
+        endAdornment={
+          <Grid
+            container
+            alignItems="center"
+            sx={(theme: Theme) => ({
+              fontFamily: theme.typography.h1.fontFamily,
+              color: theme.palette.info.dark,
+              textTransform: 'uppercase',
+              fontWeight: 800,
+              letterSpacing: '1px',
+              backgroundColor: theme.palette.grey[100],
+              fontSize: theme.spacing(3),
+              cursor: 'pointer',
+              px: 5,
+              height: {
+                xs: theme.spacing(12.5),
+                sm: theme.spacing(15),
+              },
+            })}
+            onClick={() => setFieldValue(name, availableAmount)}
+          >
+            max
+          </Grid>
+        }
+      />
+    );
+  };
 
-const AmountField: React.FC<AmountFieldProps> = ({
+const AmountField: React.FC<React.PropsWithChildren<AmountFieldProps>> = ({
   name,
   label = 'Amount',
   auxiliarLabel,
@@ -169,7 +166,7 @@ const AmountField: React.FC<AmountFieldProps> = ({
   denom,
   className,
 }) => {
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
   return (
     <>
       <Field
@@ -177,7 +174,7 @@ const AmountField: React.FC<AmountFieldProps> = ({
         type="number"
         component={AmountTextField}
         availableAmount={availableAmount}
-        className={clsx(styles.textField, className)}
+        className={cx(styles.textField, className)}
         label={
           <AmountLabel
             label={label}

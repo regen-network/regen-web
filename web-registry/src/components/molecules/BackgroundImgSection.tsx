@@ -1,8 +1,7 @@
 import React from 'react';
 import { SxProps } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
-import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import Section from 'web-components/lib/components/section';
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -25,43 +24,45 @@ type StyleProps = {
   linearGradient?: string;
 };
 
-const useStyles = makeStyles<Theme, StyleProps>(theme => ({
-  section: {
-    zIndex: 1,
-    position: 'relative',
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: 0,
+const useStyles = makeStyles<StyleProps>()(
+  (theme, { isBanner, linearGradient }) => ({
+    section: {
+      zIndex: 1,
+      position: 'relative',
+      [theme.breakpoints.down('sm')]: {
+        paddingTop: 0,
+      },
     },
-  },
-  main: props => ({
-    display: 'flex',
-    flexFlow: 'column nowrap',
-    minHeight: props.isBanner ? '74vh' : 'inherit',
-    [theme.breakpoints.up('sm')]: {
-      minHeight: props.isBanner ? theme.spacing(125) : 'inherit',
+    main: {
+      display: 'flex',
+      flexFlow: 'column nowrap',
+      minHeight: isBanner ? '74vh' : 'inherit',
+      [theme.breakpoints.up('sm')]: {
+        minHeight: isBanner ? theme.spacing(125) : 'inherit',
+      },
+    },
+    backgroundGradient: {
+      position: 'relative',
+      '&::after': {
+        content: '""',
+        top: 0,
+        left: 0,
+        position: 'absolute',
+        backgroundImage: linearGradient,
+        height: '100%',
+        width: '100%',
+        opacity: 0.8,
+      },
     },
   }),
-  backgroundGradient: props => ({
-    position: 'relative',
-    '&::after': {
-      content: '""',
-      top: 0,
-      left: 0,
-      position: 'absolute',
-      backgroundImage: props.linearGradient,
-      height: '100%',
-      width: '100%',
-      opacity: 0.8,
-    },
-  }),
-}));
+);
 
-const BackgroundImgSection: React.FC<Props> = ({
+const BackgroundImgSection: React.FC<React.PropsWithChildren<Props>> = ({
   classes,
   sx = [],
   ...props
 }) => {
-  const styles = useStyles({
+  const { classes: styles, cx } = useStyles({
     isBanner: !!props.isBanner,
     linearGradient: props?.linearGradient,
   });
@@ -70,9 +71,10 @@ const BackgroundImgSection: React.FC<Props> = ({
     <CardMedia
       image={props.img}
       classes={{
-        root: cx(classes?.root, {
-          [styles.backgroundGradient]: props?.linearGradient,
-        }),
+        root: cx(
+          classes?.root,
+          props?.linearGradient ? styles.backgroundGradient : null,
+        ),
       }}
       sx={Array.isArray(sx) ? sx : [sx]}
     >

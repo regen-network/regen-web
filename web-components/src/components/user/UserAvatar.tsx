@@ -1,6 +1,5 @@
-import React from 'react';
 import Avatar from '@mui/material/Avatar';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 interface UserAvatarProps {
   alt?: string;
@@ -9,11 +8,6 @@ interface UserAvatarProps {
   border?: boolean;
   href?: string;
   icon?: any;
-}
-
-interface StyleProps {
-  spacing: Sizes;
-  border: boolean;
 }
 
 // TODO `Sizes` and `getSize` were moved from the prior /sizing helpers. This is
@@ -49,20 +43,27 @@ function getSize(size?: string): Sizes {
   return spacing;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  root: props => ({
-    border: props.border ? `1px solid ${theme.palette.grey[100]}` : 'none',
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(props.spacing.sm),
-      height: theme.spacing(props.spacing.sm),
+type UseStylesParams = {
+  border: boolean;
+  spacing: Sizes;
+};
+
+const useStyles = makeStyles<UseStylesParams>()(
+  (theme, { border, spacing }) => ({
+    root: {
+      border: border ? `1px solid ${theme.palette.grey[100]}` : 'none',
+      [theme.breakpoints.up('sm')]: {
+        width: theme.spacing(spacing.sm),
+        height: theme.spacing(spacing.sm),
+      },
+      [theme.breakpoints.down('sm')]: {
+        width: theme.spacing(spacing.xs),
+        height: theme.spacing(spacing.xs),
+      },
+      backgroundColor: theme.palette.primary.main,
     },
-    [theme.breakpoints.down('sm')]: {
-      width: theme.spacing(props.spacing.xs),
-      height: theme.spacing(props.spacing.xs),
-    },
-    backgroundColor: theme.palette.primary.main,
   }),
-}));
+);
 
 export default function UserAvatar({
   alt,
@@ -74,7 +75,7 @@ export default function UserAvatar({
 }: UserAvatarProps): JSX.Element {
   const spacing: Sizes = getSize(size);
   // TODO: is fallback icon when src not provided ok? what about the bg color?
-  const classes = useStyles({ spacing, border });
+  const { classes } = useStyles({ spacing, border });
   const avatar =
     !src || icon ? (
       <Avatar className={classes.root} alt={alt}>

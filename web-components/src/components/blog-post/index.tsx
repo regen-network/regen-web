@@ -12,7 +12,7 @@ export interface BlogPostProps {
   url: string;
 }
 
-const BlogPost: React.FC<BlogPostProps> = ({
+const BlogPost: React.FC<React.PropsWithChildren<BlogPostProps>> = ({
   header,
   description,
   img,

@@ -1,14 +1,14 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles()(() => ({
   root: {
     paddingBottom: 60,
   },
 }));
 
-const EditFormTemplate: React.FC = props => {
-  const styles = useStyles();
+const EditFormTemplate: React.FC<React.PropsWithChildren<unknown>> = props => {
+  const { classes: styles } = useStyles();
 
   return <div className={styles.root}>{props.children}</div>;
 };

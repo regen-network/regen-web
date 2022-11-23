@@ -4,7 +4,9 @@ import { Box } from '@mui/material';
 
 import RegenMarketIcon from 'web-components/lib/components/icons/RegenMarketIcon';
 
-export const RegistryIconLink: React.FC<{ color: string }> = ({ color }) => {
+export const RegistryIconLink: React.FC<
+  React.PropsWithChildren<{ color: string }>
+> = ({ color }) => {
   return (
     <Link to="/">
       <Box

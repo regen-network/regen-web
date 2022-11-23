@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { Box, Flex } from '../box';
 import Modal, { RegenModalProps } from '../modal';
@@ -7,7 +7,7 @@ import { Body, Title } from '../typography';
 
 const SCROLL_BAR_WIDTH = 8;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   modal: {
     [theme.breakpoints.up('sm')]: {
       height: 'inherit',
@@ -25,15 +25,10 @@ interface FormModalTemplateProps extends RegenModalProps {
   image?: JSX.Element;
 }
 
-const FormModalTemplate: React.FC<FormModalTemplateProps> = ({
-  title,
-  subtitle,
-  image,
-  open,
-  onClose,
-  children,
-}) => {
-  const styles = useStyles();
+const FormModalTemplate: React.FC<
+  React.PropsWithChildren<FormModalTemplateProps>
+> = ({ title, subtitle, image, open, onClose, children }) => {
+  const { classes: styles } = useStyles();
 
   return (
     <Modal className={styles.modal} open={open} onClose={onClose}>

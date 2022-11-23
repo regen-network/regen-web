@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import Banner from 'web-components/lib/components/banner';
 import { BlockContent } from 'web-components/lib/components/block-content';
@@ -36,7 +35,7 @@ interface CreditDetailsProps {
   isLandSteward?: boolean;
 }
 
-const useStyles = makeStyles<Theme>((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -91,15 +90,13 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   },
 }));
 
-const CreditClassDetailsWithContent: React.FC<CreditDetailsProps> = ({
-  dbClass,
-  content,
-  isLandSteward,
-}) => {
+const CreditClassDetailsWithContent: React.FC<
+  React.PropsWithChildren<CreditDetailsProps>
+> = ({ dbClass, content, isLandSteward }) => {
   const [modalIframeLink, setModalIframeLink] = useState<string>('');
   const [isBuyerModalOpen, setBuyerModalOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
   const navigate = useNavigate();
 
   const { creditClassId } = useParams();

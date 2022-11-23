@@ -19,7 +19,7 @@ import {
 } from './Projects.config';
 import { ProjectWithOrderData } from './Projects.types';
 
-export const Projects: React.FC = () => {
+export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const [sort, setSort] = useState<string>(sortOptions[0].value);
   const [selectedProject, setSelectedProject] =

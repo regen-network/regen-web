@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PhoneInput from 'react-phone-input-2';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import { FieldProps } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 
 import FieldFormControl from './FieldFormControl';
 
@@ -18,12 +18,12 @@ interface StyleProps {
   disabled?: boolean;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  input: props => ({
+const useStyles = makeStyles<StyleProps>()((theme, { disabled }) => ({
+  input: {
     width: '100% !important',
     border: `1px solid ${theme.palette.grey[100]} !important`,
     borderRadius: '2px !important',
-    color: props.disabled
+    color: disabled
       ? theme.palette.info.main
       : theme.palette.primary.contrastText,
     fontFamily: theme.typography.fontFamily,
@@ -42,7 +42,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     '&::placeholder': {
       color: theme.palette.grey[400],
     },
-  }),
+  },
 }));
 
 export default function RegenPhoneField({
@@ -54,7 +54,7 @@ export default function RegenPhoneField({
 }: RegenPhoneFieldProps): JSX.Element {
   const [countryCode, setCountryCode] = useState('us');
   const { form, field } = fieldProps;
-  const classes = useStyles({ disabled: form.isSubmitting });
+  const { classes } = useStyles({ disabled: form.isSubmitting });
 
   return (
     <FieldFormControl

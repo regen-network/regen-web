@@ -1,9 +1,8 @@
 import React from 'react';
 import { Button as MuiButton } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   root: {
     borderRadius: '2px',
     fontFamily: theme.typography.h1.fontFamily,
@@ -15,7 +14,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Button({ ...props }): JSX.Element {
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
 
   return (
     <MuiButton classes={{ root: cx(styles.root, props.className) }} {...props}>

@@ -1,8 +1,9 @@
 import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     width: theme.spacing(13.25),
     height: theme.spacing(14.5),
@@ -10,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export default function TotalCreditsIcon(): JSX.Element {
-  const classes = useStyles({});
+  const { classes } = useStyles();
 
   return (
     <SvgIcon viewBox="0 0 54 58" className={classes.root}>

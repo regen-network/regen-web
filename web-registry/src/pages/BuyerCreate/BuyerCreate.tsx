@@ -6,7 +6,7 @@ import FormLabel from '@mui/material/FormLabel';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import TextField from '@mui/material/TextField';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { getErrorMessage } from 'web-components/lib/components/form/errors';
 import Geocoder from 'web-components/lib/components/map/Geocoder';
@@ -18,7 +18,7 @@ import {
   useReallyCreateUserMutation,
 } from '../../generated/graphql';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     padding: theme.spacing(5),
   },
@@ -34,10 +34,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const BuyerCreate: React.FC<{
-  onCreate?: (walletId: string, addressId: string) => void;
-}> = ({ onCreate }) => {
-  const classes = useStyles();
+const BuyerCreate: React.FC<
+  React.PropsWithChildren<{
+    onCreate?: (walletId: string, addressId: string) => void;
+  }>
+> = ({ onCreate }) => {
+  const { classes } = useStyles();
 
   const [createUser, { data: userData, error: userError }] =
     useReallyCreateUserMutation();

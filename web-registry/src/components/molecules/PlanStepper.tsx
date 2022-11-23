@@ -10,7 +10,9 @@ interface PlanStepperProps {
 
 const steps = ['Create Project', 'Review', 'Finished'];
 
-const PlanStepper: React.FC<PlanStepperProps> = ({ activeStep }) => {
+const PlanStepper: React.FC<React.PropsWithChildren<PlanStepperProps>> = ({
+  activeStep,
+}) => {
   return (
     <Stepper
       sx={{ mw: 240 }}

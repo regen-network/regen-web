@@ -3,13 +3,13 @@ import Box from '@mui/material/Box';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import BuyerCreate from '../BuyerCreate';
 import CreditsRetire from '../CreditsRetire';
 import CreditsTransfer from '../CreditsTransfer';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   stepper: {
     background: theme.palette.grey[100],
   },
@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const BuyerCreditsTransfer: React.FC = () => {
+const BuyerCreditsTransfer: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [step, setStep] = useState(1);
   const [buyerWalletId, setBuyerWalletId] = useState('');
   const [vintageId, setVintageId] = useState('');
@@ -62,7 +62,7 @@ const BuyerCreditsTransfer: React.FC = () => {
     }
   }
 
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
 
   return (
     <Box>

@@ -10,7 +10,7 @@ type Props = {
 
 const bannerBlue = '#6D9BDB';
 
-const MainnetLaunchBanner: React.FC<Props> = props => {
+const MainnetLaunchBanner: React.FC<React.PropsWithChildren<Props>> = props => {
   return new Date() < new Date(props.launchDate) ? (
     <Box
       sx={{

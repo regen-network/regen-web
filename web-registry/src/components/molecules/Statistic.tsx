@@ -14,7 +14,11 @@ interface StatisticProps {
   arrow?: 'upRight' | 'downLeft';
 }
 
-const Statistic: React.FC<StatisticProps> = ({ label, count, arrow }) => {
+const Statistic: React.FC<React.PropsWithChildren<StatisticProps>> = ({
+  label,
+  count,
+  arrow,
+}) => {
   const theme = useTheme<Theme>();
 
   const getColor = (arrowDirection: string): string => {

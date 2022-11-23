@@ -1,9 +1,9 @@
 import React from 'react';
+import { Theme } from '@mui/material';
 import Box from '@mui/material/Box';
 import { SxProps } from '@mui/system';
 
 import { Body, Label } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 export interface LineItemLabelAboveProps {
   sx?: SxProps<Theme>;
@@ -12,11 +12,9 @@ export interface LineItemLabelAboveProps {
 }
 
 // TODO should this be consolidated with the LineItem component?
-const LineItemLabelAbove: React.FC<LineItemLabelAboveProps> = ({
-  sx,
-  label,
-  data,
-}) => {
+const LineItemLabelAbove: React.FC<
+  React.PropsWithChildren<LineItemLabelAboveProps>
+> = ({ sx, label, data }) => {
   if (!data) return null;
   return (
     <Box

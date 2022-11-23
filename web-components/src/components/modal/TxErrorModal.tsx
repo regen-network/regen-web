@@ -8,7 +8,7 @@ interface Props extends TxModalProps {
   cardItems?: Item[];
 }
 
-const TxErrorModal: React.FC<Props> = ({
+const TxErrorModal: React.FC<React.PropsWithChildren<Props>> = ({
   error,
   cardItems,
   title,

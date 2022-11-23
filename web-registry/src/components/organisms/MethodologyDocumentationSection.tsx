@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import EyeIcon from 'web-components/lib/components/icons/EyeIcon';
 import Section from 'web-components/lib/components/section';
@@ -18,7 +18,7 @@ interface Props {
   documentation?: Maybe<Documentation>;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   section: {
     width: '100%',
     [theme.breakpoints.up('sm')]: {
@@ -65,7 +65,7 @@ function MethodologyDocumentationSection({
   documentation,
   nameRaw,
 }: Props): JSX.Element {
-  const styles = useStyles();
+  const { classes: styles } = useStyles();
 
   return (
     <Section className={styles.section}>

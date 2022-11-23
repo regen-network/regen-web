@@ -161,6 +161,44 @@ export type BottomBannerSorting = {
   image?: Maybe<CustomImageSorting>;
 };
 
+export type BridgePage = Document & {
+  __typename?: 'BridgePage';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  /** This content will appear at the bottom of the Bridge page (on both /ecocredits/bridge and /ecocredits/accounts/{addr}/bridge) */
+  gettingStartedResourcesCard?: Maybe<GettingStartedResourcesCard>;
+};
+
+export type BridgePageFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  gettingStartedResourcesCard?: Maybe<GettingStartedResourcesCardFilter>;
+};
+
+export type BridgePageSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+};
+
 export type Button = {
   __typename?: 'Button';
   _key?: Maybe<Scalars['String']>;
@@ -2135,6 +2173,91 @@ export type GeopointSorting = {
   alt?: Maybe<SortOrder>;
 };
 
+export type GettingStartedResourcesCard = Document & {
+  __typename?: 'GettingStartedResourcesCard';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  header?: Maybe<Scalars['String']>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+  image?: Maybe<CustomImage>;
+  mobileImage?: Maybe<CustomImage>;
+  links?: Maybe<Array<Maybe<Button>>>;
+};
+
+export type GettingStartedResourcesCardFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  header?: Maybe<StringFilter>;
+  image?: Maybe<CustomImageFilter>;
+  mobileImage?: Maybe<CustomImageFilter>;
+};
+
+export type GettingStartedResourcesCardSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  header?: Maybe<SortOrder>;
+  image?: Maybe<CustomImageSorting>;
+  mobileImage?: Maybe<CustomImageSorting>;
+};
+
+export type GettingStartedResourcesSection = Document & {
+  __typename?: 'GettingStartedResourcesSection';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  header?: Maybe<Scalars['String']>;
+  resourcesCards?: Maybe<Array<Maybe<GettingStartedResourcesCard>>>;
+};
+
+export type GettingStartedResourcesSectionFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  header?: Maybe<StringFilter>;
+};
+
+export type GettingStartedResourcesSectionSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  header?: Maybe<SortOrder>;
+};
+
 export type HeroSection = {
   __typename?: 'HeroSection';
   _key?: Maybe<Scalars['String']>;
@@ -2196,6 +2319,7 @@ export type HomePage = Document & {
   _key?: Maybe<Scalars['String']>;
   seo?: Maybe<Seo>;
   heroSection?: Maybe<HomePageTopSection>;
+  gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSection>;
   bottomBanner?: Maybe<BottomBanner>;
 };
 
@@ -2210,6 +2334,7 @@ export type HomePageFilter = {
   _key?: Maybe<StringFilter>;
   seo?: Maybe<SeoFilter>;
   heroSection?: Maybe<HomePageTopSectionFilter>;
+  gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSectionFilter>;
   bottomBanner?: Maybe<BottomBannerFilter>;
 };
 
@@ -3602,6 +3727,81 @@ export type PresskitTimelineSectionSorting = {
   completedItemIndex?: Maybe<SortOrder>;
 };
 
+export type ProjectPage = Document & {
+  __typename?: 'ProjectPage';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  /** This content will appear on all project pages */
+  gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSection>;
+};
+
+export type ProjectPageFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSectionFilter>;
+};
+
+export type ProjectPageSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+};
+
+export type ProjectsPage = Document & {
+  __typename?: 'ProjectsPage';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSection>;
+};
+
+export type ProjectsPageFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSectionFilter>;
+};
+
+export type ProjectsPageSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+};
+
 export type RegenTeamMember = Document & {
   __typename?: 'RegenTeamMember';
   /** Document ID */
@@ -3902,6 +4102,7 @@ export type ReviewSectionSorting = {
 
 export type RootQuery = {
   __typename?: 'RootQuery';
+  BridgePage?: Maybe<BridgePage>;
   BuyersPage?: Maybe<BuyersPage>;
   CaseStudiesPage?: Maybe<CaseStudiesPage>;
   CaseStudyPage?: Maybe<CaseStudyPage>;
@@ -3918,6 +4119,8 @@ export type RootQuery = {
   FaqPage?: Maybe<FaqPage>;
   FeaturedSection?: Maybe<FeaturedSection>;
   FundPage?: Maybe<FundPage>;
+  GettingStartedResourcesCard?: Maybe<GettingStartedResourcesCard>;
+  GettingStartedResourcesSection?: Maybe<GettingStartedResourcesSection>;
   HomePage?: Maybe<HomePage>;
   HomePageWeb?: Maybe<HomePageWeb>;
   ImageGridItem?: Maybe<ImageGridItem>;
@@ -3930,6 +4133,8 @@ export type RootQuery = {
   NctPage?: Maybe<NctPage>;
   PartnersPage?: Maybe<PartnersPage>;
   PresskitPage?: Maybe<PresskitPage>;
+  ProjectPage?: Maybe<ProjectPage>;
+  ProjectsPage?: Maybe<ProjectsPage>;
   RegenTeamMember?: Maybe<RegenTeamMember>;
   Resource?: Maybe<Resource>;
   ResourcesPage?: Maybe<ResourcesPage>;
@@ -3944,6 +4149,7 @@ export type RootQuery = {
   SanityImageAsset?: Maybe<SanityImageAsset>;
   SanityFileAsset?: Maybe<SanityFileAsset>;
   Document?: Maybe<Document>;
+  allBridgePage: Array<BridgePage>;
   allBuyersPage: Array<BuyersPage>;
   allCaseStudiesPage: Array<CaseStudiesPage>;
   allCaseStudyPage: Array<CaseStudyPage>;
@@ -3960,6 +4166,8 @@ export type RootQuery = {
   allFaqPage: Array<FaqPage>;
   allFeaturedSection: Array<FeaturedSection>;
   allFundPage: Array<FundPage>;
+  allGettingStartedResourcesCard: Array<GettingStartedResourcesCard>;
+  allGettingStartedResourcesSection: Array<GettingStartedResourcesSection>;
   allHomePage: Array<HomePage>;
   allHomePageWeb: Array<HomePageWeb>;
   allImageGridItem: Array<ImageGridItem>;
@@ -3972,6 +4180,8 @@ export type RootQuery = {
   allNctPage: Array<NctPage>;
   allPartnersPage: Array<PartnersPage>;
   allPresskitPage: Array<PresskitPage>;
+  allProjectPage: Array<ProjectPage>;
+  allProjectsPage: Array<ProjectsPage>;
   allRegenTeamMember: Array<RegenTeamMember>;
   allResource: Array<Resource>;
   allResourcesPage: Array<ResourcesPage>;
@@ -3986,6 +4196,11 @@ export type RootQuery = {
   allSanityImageAsset: Array<SanityImageAsset>;
   allSanityFileAsset: Array<SanityFileAsset>;
   allDocument: Array<Document>;
+};
+
+
+export type RootQueryBridgePageArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -4069,6 +4284,16 @@ export type RootQueryFundPageArgs = {
 };
 
 
+export type RootQueryGettingStartedResourcesCardArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryGettingStartedResourcesSectionArgs = {
+  id: Scalars['ID'];
+};
+
+
 export type RootQueryHomePageArgs = {
   id: Scalars['ID'];
 };
@@ -4125,6 +4350,16 @@ export type RootQueryPartnersPageArgs = {
 
 
 export type RootQueryPresskitPageArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryProjectPageArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryProjectsPageArgs = {
   id: Scalars['ID'];
 };
 
@@ -4196,6 +4431,14 @@ export type RootQuerySanityFileAssetArgs = {
 
 export type RootQueryDocumentArgs = {
   id: Scalars['ID'];
+};
+
+
+export type RootQueryAllBridgePageArgs = {
+  where?: Maybe<BridgePageFilter>;
+  sort?: Maybe<Array<BridgePageSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
 };
 
 
@@ -4327,6 +4570,22 @@ export type RootQueryAllFundPageArgs = {
 };
 
 
+export type RootQueryAllGettingStartedResourcesCardArgs = {
+  where?: Maybe<GettingStartedResourcesCardFilter>;
+  sort?: Maybe<Array<GettingStartedResourcesCardSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllGettingStartedResourcesSectionArgs = {
+  where?: Maybe<GettingStartedResourcesSectionFilter>;
+  sort?: Maybe<Array<GettingStartedResourcesSectionSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
 export type RootQueryAllHomePageArgs = {
   where?: Maybe<HomePageFilter>;
   sort?: Maybe<Array<HomePageSorting>>;
@@ -4418,6 +4677,22 @@ export type RootQueryAllPartnersPageArgs = {
 export type RootQueryAllPresskitPageArgs = {
   where?: Maybe<PresskitPageFilter>;
   sort?: Maybe<Array<PresskitPageSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllProjectPageArgs = {
+  where?: Maybe<ProjectPageFilter>;
+  sort?: Maybe<Array<ProjectPageSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllProjectsPageArgs = {
+  where?: Maybe<ProjectsPageFilter>;
+  sort?: Maybe<Array<ProjectsPageSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };

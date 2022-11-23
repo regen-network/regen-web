@@ -1,5 +1,5 @@
 import { Suspense, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import {
   createRoutesFromChildren,
   matchRoutes,
@@ -21,6 +21,8 @@ import doNotTrack from 'analytics-plugin-do-not-track';
 import { AnalyticsProvider } from 'use-analytics';
 
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
+
+import { GlobalProvider } from 'lib/context/globalContext';
 
 import PageLoader from 'components/atoms/PageLoader';
 
@@ -100,7 +102,10 @@ const analytics = Analytics({
   debug: process.env.NODE_ENV === 'development',
 });
 
-ReactDOM.render(
+const container = document.getElementById('root') as HTMLElement;
+const root = createRoot(container);
+
+root.render(
   <Auth0Provider
     domain={config.domain}
     clientId={config.clientId}
@@ -119,12 +124,14 @@ ReactDOM.render(
               <LedgerProvider>
                 <ThemeProvider injectFonts>
                   <AnalyticsProvider instance={analytics}>
-                    <Suspense fallback={PageLoader}>
-                      <RouterProvider
-                        router={router}
-                        fallbackElement={PageLoader}
-                      />
-                    </Suspense>
+                    <GlobalProvider>
+                      <Suspense fallback={<PageLoader />}>
+                        <RouterProvider
+                          router={router}
+                          fallbackElement={<PageLoader />}
+                        />
+                      </Suspense>
+                    </GlobalProvider>
                   </AnalyticsProvider>
                 </ThemeProvider>
               </LedgerProvider>
@@ -134,7 +141,6 @@ ReactDOM.render(
       </QueryClientProvider>
     </AuthApolloProvider>
   </Auth0Provider>,
-  document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change

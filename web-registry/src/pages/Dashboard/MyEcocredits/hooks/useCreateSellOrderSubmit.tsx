@@ -18,7 +18,7 @@ import { SignAndBroadcastType } from 'hooks/useMsgClient';
 import {
   CREATE_SELL_ORDER_BUTTON,
   CREATE_SELL_ORDER_HEADER,
-} from '../MyEcocredits.contants';
+} from '../MyEcocredits.constants';
 
 type Props = {
   accountAddress?: string;

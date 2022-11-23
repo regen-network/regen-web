@@ -1,6 +1,6 @@
 import React from 'react';
+import { useTheme } from '@mui/material';
 import SvgIcon from '@mui/material/SvgIcon';
-import { useTheme } from '@mui/styles';
 
 import { Theme } from '../../theme/muiTheme';
 

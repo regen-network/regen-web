@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import { QueryBatchesByProjectResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import {
-  DEFAULT_ROWS_PER_PAGE,
-  TablePaginationParams,
-} from 'web-components/lib/components/table/ActionsTable';
+import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
+import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/ActionsTable.constants';
 
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';

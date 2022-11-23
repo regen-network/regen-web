@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import { useTrack } from 'use-analytics';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
@@ -41,11 +40,9 @@ export const BridgeFlow = ({
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
   const navigate = useNavigate();
-  const track = useTrack();
 
   const handleTxQueued = (): void => {
     setIsProcessingModalOpen(true);
-    track('bridge3');
   };
 
   const handleError = (): void => {

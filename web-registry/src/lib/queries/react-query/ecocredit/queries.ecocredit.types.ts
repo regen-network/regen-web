@@ -1,7 +1,7 @@
 import { QueryBatchesResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
-import { AddDataToBatchParams, QueryBatchesProps } from 'lib/ecocredit/api';
+import { AddDataToBatchesParams, QueryBatchesProps } from 'lib/ecocredit/api';
 
 /* BatchesQuery */
 
@@ -21,10 +21,10 @@ export type ReactQueryBatchesResponse = {
 /* AddDataToBatchesQuery */
 
 export type ReactQueryAddDataToBatchParams = Omit<
-  AddDataToBatchParams,
+  AddDataToBatchesParams,
   'batches'
 > & {
-  batches?: AddDataToBatchParams['batches'];
+  batches?: AddDataToBatchesParams['batches'];
 } & { enabled?: boolean };
 
 export type ReactQueryAddDataToBatchesResponse = {

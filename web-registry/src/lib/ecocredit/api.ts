@@ -331,16 +331,18 @@ const getClassProjectForBatch = async (
   };
 };
 
+export type AddDataToBatchesParams = {
+  batches: BatchInfo[];
+  sanityCreditClassData?: AllCreditClassQuery;
+  withAllData?: boolean;
+};
+
 /* addDataToBatches adds Tx Hash and supply info to batch for use in tables */
 export const addDataToBatches = async ({
   batches,
   sanityCreditClassData,
   withAllData = true,
-}: {
-  batches: BatchInfo[];
-  sanityCreditClassData?: AllCreditClassQuery;
-  withAllData?: boolean;
-}): Promise<BatchInfoWithSupply[]> => {
+}: AddDataToBatchesParams): Promise<BatchInfoWithSupply[]> => {
   try {
     /* TODO: this is limited to 100 results. We need to find a better way */
     const txs = await getTxsByEvent({

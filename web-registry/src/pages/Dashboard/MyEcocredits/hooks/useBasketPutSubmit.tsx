@@ -7,6 +7,12 @@ import type { Item } from 'web-components/lib/components/modal/TxModal';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import type { UseStateSetter } from 'types/react/use-state';
+import {
+  PutInBasket2Event,
+  PutInBasketFailureEvent,
+  PutInBasketSuccessEvent,
+} from 'lib/tracker/types';
+import { useTracker } from 'lib/tracker/useTracker';
 
 import type { BasketTokens } from 'hooks/useBasketTokens';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
@@ -42,9 +48,23 @@ const useBasketPutSubmit = ({
   setTxModalHeader,
   setTxModalTitle,
 }: Props): ReturnType => {
+  const { track } = useTracker();
+
   const basketPutSubmit = useCallback(
     async (values: BasketPutFormValues): Promise<void> => {
       const amount = values.amount?.toString();
+      const basket = baskets?.baskets.find(
+        b => b.basketDenom === values.basketDenom,
+      );
+
+      track<'putInBasket2', PutInBasket2Event>('putInBasket2', {
+        quantity: values.amount,
+        basketName: basket?.name,
+        batchDenom: credits[basketPutOpen].denom,
+        creditClassId: credits[basketPutOpen].classId,
+        projectId: credits[basketPutOpen].projectId,
+      });
+
       const msg = MsgPut.fromPartial({
         basketDenom: values.basketDenom,
         owner: accountAddress,
@@ -55,10 +75,36 @@ const useBasketPutSubmit = ({
           },
         ],
       });
-      await signAndBroadcast({ msgs: [msg] }, () => setBasketPutOpen(-1));
-      const basket = baskets?.baskets.find(
-        b => b.basketDenom === values.basketDenom,
-      );
+
+      const onError = (err?: Error): void => {
+        track<'putInBasketFailure', PutInBasketFailureEvent>(
+          'putInBasketFailure',
+          {
+            quantity: values.amount,
+            basketName: basket?.name,
+            batchDenom: credits[basketPutOpen].denom,
+            creditClassId: credits[basketPutOpen].classId,
+            projectId: credits[basketPutOpen].projectId,
+            errorMessage: err?.message,
+          },
+        );
+      };
+      const onSuccess = (): void => {
+        track<'putInBasketSuccess', PutInBasketSuccessEvent>(
+          'putInBasketSuccess',
+          {
+            quantity: values.amount,
+            basketName: basket?.name,
+            batchDenom: credits[basketPutOpen].denom,
+            creditClassId: credits[basketPutOpen].classId,
+            projectId: credits[basketPutOpen].projectId,
+          },
+        );
+      };
+      await signAndBroadcast({ msgs: [msg] }, () => setBasketPutOpen(-1), {
+        onError,
+        onSuccess,
+      });
       if (basket && amount) {
         setCardItems([
           {
@@ -101,6 +147,7 @@ const useBasketPutSubmit = ({
       setTxModalHeader,
       setTxModalTitle,
       signAndBroadcast,
+      track,
     ],
   );
 

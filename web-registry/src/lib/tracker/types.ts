@@ -146,3 +146,24 @@ export interface BridgeSuccessEvent extends BridgeBaseQuantityEvent {}
 export interface BridgeFailureEvent extends BridgeBaseQuantityEvent {
   errorMessage: string | undefined;
 }
+
+interface PutBaseEvent {
+  batchDenom: string;
+  creditClassId: string | undefined;
+  projectId: string;
+}
+
+interface PutBaseQuantityEvent extends PutBaseEvent {
+  quantity: number | undefined;
+  basketName: string | undefined;
+}
+
+export interface PutInBasket1Event extends PutBaseEvent {}
+
+export interface PutInBasket2Event extends PutBaseQuantityEvent {}
+
+export interface PutInBasketSuccessEvent extends PutBaseQuantityEvent {}
+
+export interface PutInBasketFailureEvent extends PutBaseQuantityEvent {
+  errorMessage: string | undefined;
+}

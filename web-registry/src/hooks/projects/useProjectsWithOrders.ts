@@ -63,7 +63,7 @@ export function useProjectsWithOrders({
       }),
     );
 
-  const regenPriceQuery = useQuery(getSimplePriceQuery({}));
+  const simplePrice = useQuery(getSimplePriceQuery({}));
   const { data: sellOrders } = useQuery(
     getSellOrdersQuery({
       enabled: !!marketplaceClient,
@@ -103,9 +103,9 @@ export function useProjectsWithOrders({
     projects: sortedProjects,
     sellOrders,
     geckoPrices: {
-      regenPrice: regenPriceQuery?.data?.regen?.usd,
-      eeurPrice: regenPriceQuery?.data?.[GECKO_EEUR_ID]?.usd,
-      usdcPrice: regenPriceQuery?.data?.[GECKO_USDC_ID]?.usd,
+      regenPrice: simplePrice?.data?.regen?.usd,
+      eeurPrice: simplePrice?.data?.[GECKO_EEUR_ID]?.usd,
+      usdcPrice: simplePrice?.data?.[GECKO_USDC_ID]?.usd,
     },
     metadatas,
     userAddress: wallet?.address,

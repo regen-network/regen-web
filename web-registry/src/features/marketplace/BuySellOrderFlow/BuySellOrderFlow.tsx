@@ -121,7 +121,7 @@ export const BuySellOrderFlow = ({
     if (found) setSelectedProject(found);
   };
 
-  const sellOrderIds = useMemo(
+  const projectsSellOrdersIds = useMemo(
     () =>
       projects &&
       projects
@@ -132,44 +132,31 @@ export const BuySellOrderFlow = ({
   );
 
   const { sellOrdersResponse, refetchSellOrders } = useQuerySellOrders();
-  const allSellOrders = sellOrdersResponse?.sellOrders;
-
-  const projectUiSellOrdersInfo = useMemo(
+  const _sellOrders = useMemo(
     () =>
-      allSellOrders
+      sellOrdersResponse?.sellOrders
         ?.map(normalizeToUISellOrderInfo)
-        .filter(sellOrder => sellOrderIds?.includes(sellOrder.id)),
-    [allSellOrders, sellOrderIds],
+        .filter(sellOrder => projectsSellOrdersIds?.includes(sellOrder.id))
+        .filter(sellOrder => sellOrder.seller !== accountAddress),
+    [sellOrdersResponse?.sellOrders, projectsSellOrdersIds, accountAddress],
   );
 
-  // project data prepared for buy modal (add projectId and filter the seller)
   const _project = useMemo(
     () =>
       selectedProject && {
         id: selectedProject?.id.toString() ?? '',
-        sellOrders: projectUiSellOrdersInfo?.filter(
-          sellOrder => sellOrder.seller !== accountAddress,
-        ),
       },
-    [selectedProject, projectUiSellOrdersInfo, accountAddress],
-  );
-
-  const _sellOrders = useMemo(
-    () =>
-      projectUiSellOrdersInfo?.filter(
-        sellOrder => sellOrder.seller !== accountAddress,
-      ),
-    [projectUiSellOrdersInfo, accountAddress],
+    [selectedProject],
   );
 
   /**
-   * checker fn !!
+   * Check the selected order availability on sellOrders refresh
    */
   useCheckSellOrderAvailabilty({
     selectedSellOrderIdRef,
     submittedQuantityRef,
     setError,
-    sellOrders: projectUiSellOrdersInfo,
+    sellOrders: _sellOrders,
     setCardItems,
     setTxModalHeader,
     setTxModalTitle,

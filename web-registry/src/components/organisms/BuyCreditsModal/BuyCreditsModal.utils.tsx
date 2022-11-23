@@ -13,9 +13,28 @@ import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.uti
 
 import { BuyCreditsValues } from '..';
 
-const getProjectFromBatch = (batchDenom: string): string => {
+/* getProjectFromBatchDenom */
+
+const getProjectFromBatchDenom = (batchDenom: string): string => {
   const parts = batchDenom.split('-');
   return `${parts[0]}-${parts[1]}`;
+};
+
+/* prepareSellOrderSupplementaryData */
+
+interface SellOrderSupplementaryDataInput {
+  sellOrderId: string;
+  batchDenom: string;
+  withProject: boolean;
+}
+const prepareSellOrderSupplementaryData = ({
+  sellOrderId,
+  batchDenom,
+  withProject = false,
+}: SellOrderSupplementaryDataInput): string => {
+  return withProject
+    ? `(#${sellOrderId}, ${getProjectFromBatchDenom(batchDenom)})`
+    : `(#${sellOrderId})`;
 };
 
 /* sortBySellOrderId */
@@ -53,18 +72,8 @@ export const getSellOrderLabel = ({
   });
   const truncatedQuantity = floorFloatNumber(parseFloat(quantity));
 
-  const getSupplementaryData = (
-    id: string,
-    batchDenom: string,
-    withProject: boolean,
-  ): string => {
-    return withProject
-      ? `(#${id}, ${getProjectFromBatch(batchDenom)})`
-      : `(#${id})`;
-  };
-
   const clickHandler = setSelectedProjectById
-    ? () => setSelectedProjectById(getProjectFromBatch(batchDenom))
+    ? () => setSelectedProjectById(getProjectFromBatchDenom(batchDenom))
     : () => {};
 
   return (
@@ -76,7 +85,11 @@ export const getSellOrderLabel = ({
         sx={{ display: 'inline', mr: 1 }}
       >{`${truncatedQuantity} credit(s) available`}</Box>
       <Box sx={{ display: 'inline', color: 'info.main' }}>
-        {getSupplementaryData(id, batchDenom, Boolean(setSelectedProjectById))}
+        {prepareSellOrderSupplementaryData({
+          sellOrderId: id,
+          batchDenom,
+          withProject: Boolean(setSelectedProjectById),
+        })}
       </Box>
     </Box>
   );

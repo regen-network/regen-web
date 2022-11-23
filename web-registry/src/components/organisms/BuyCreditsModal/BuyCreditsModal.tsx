@@ -163,7 +163,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
           >
             {'Buy Ecocredits'}
           </Title>
-          {project && project.name && (
+          {project?.name && (
             <Card className={cx(classes.thumbnailCard, classes.field)}>
               <CardContent className={classes.cardContent}>
                 <Image

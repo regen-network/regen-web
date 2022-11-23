@@ -149,7 +149,16 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
       </CardMedia>
 
       {creditClassesContent && (
+<<<<<<< HEAD
         <Section
+=======
+        <BackgroundImgSection
+          img={'/svg/topology.svg'}
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+          }}
+>>>>>>> b67c0c14 (fix: credit class bg image (#1600))
           title="Credit Classes"
           classes={{ root: classes.section, title: classes.title }}
           id="credit-classes"

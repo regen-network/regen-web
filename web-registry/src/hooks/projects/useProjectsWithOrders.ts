@@ -1,9 +1,4 @@
-import {
-  useIsFetching,
-  useQueries,
-  useQuery,
-  useQueryClient,
-} from '@tanstack/react-query';
+import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';
 import { GECKO_EEUR_ID, GECKO_USDC_ID } from 'lib/coingecko';

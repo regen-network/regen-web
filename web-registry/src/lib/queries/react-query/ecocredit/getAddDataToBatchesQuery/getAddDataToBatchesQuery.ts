@@ -1,8 +1,8 @@
-import { addDataToBatch } from 'lib/ecocredit/api';
+import { addDataToBatches } from 'lib/ecocredit/api';
 
 import {
-  ReactQueryAddDataToBatchParams,
-  ReactQueryAddDataToBatchResponse,
+  ReactQueryAddDataToBatchesParams,
+  ReactQueryAddDataToBatchesResponse,
 } from './getAddDataToBatchesQuery.types';
 
 export const getAddDataToBatchesQuery = ({
@@ -10,7 +10,7 @@ export const getAddDataToBatchesQuery = ({
   sanityCreditClassData,
   reactQueryClient,
   ...params
-}: ReactQueryAddDataToBatchParams): ReactQueryAddDataToBatchResponse => ({
+}: ReactQueryAddDataToBatchesParams): ReactQueryAddDataToBatchesResponse => ({
   queryKey: batches && [
     'addDataToBatches',
     batches.map(batch => batch.denom).join(','),
@@ -18,7 +18,7 @@ export const getAddDataToBatchesQuery = ({
   queryFn: async () => {
     if (!batches) return;
 
-    const batchesWithSupply = await addDataToBatch({
+    const batchesWithSupply = await addDataToBatches({
       batches,
       sanityCreditClassData,
       reactQueryClient,

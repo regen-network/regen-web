@@ -9,6 +9,8 @@ import {
 } from 'web-components/lib/components/inputs/RoleField';
 import { ProfileFormValues } from 'web-components/lib/components/modal/ProfileModal';
 
+import { getProjectShapeIri } from 'lib/rdf';
+
 import { useCreateProjectContext } from 'pages/ProjectCreate';
 
 import { RolesForm, RolesValues } from '../../components/organisms';
@@ -25,7 +27,6 @@ import {
   useShaclGraphByUriQuery,
   useUpdateProjectByIdMutation,
 } from '../../generated/graphql';
-import { getProjectShapeIri } from '../../lib/rdf';
 import { useWallet } from '../../lib/wallet/wallet';
 import { useProjectEditContext } from '../ProjectEdit';
 

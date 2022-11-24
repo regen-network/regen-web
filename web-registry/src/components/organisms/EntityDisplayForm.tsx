@@ -26,13 +26,10 @@ import {
   UrlType,
 } from 'web-components/lib/utils/schemaURL';
 
+import { getCompactedPath, getProjectPageBaseData, validate } from 'lib/rdf';
+
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import getApiUri from '../../lib/apiUri';
-import {
-  getCompactedPath,
-  getProjectPageBaseData,
-  validate,
-} from '../../lib/rdf';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../molecules';
 

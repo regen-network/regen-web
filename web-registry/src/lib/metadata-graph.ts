@@ -1,7 +1,8 @@
 import axios from 'axios';
 
+import { jsonLdCompact } from 'lib/rdf';
+
 import getApiUri from './apiUri';
-import { jsonLdCompact } from './rdf.compacted-context';
 
 export const getMetadata = async (iri?: string): Promise<any> => {
   if (!iri) throw new Error('No metadata iri provided');

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { JsonLdDocument } from 'jsonld';
 
 import { ProjectMetadataIntersectionLD } from 'generated/json-ld';
-import { jsonLdCompact } from 'lib/rdf.compacted-context';
+import { jsonLdCompact } from 'lib/rdf';
 
 type Props = {
   metadataRaw: JsonLdDocument;

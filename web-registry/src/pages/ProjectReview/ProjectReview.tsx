@@ -13,6 +13,8 @@ import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingM
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { UrlType } from 'web-components/lib/utils/schemaURL';
 
+import { qudtUnit, qudtUnitMap } from 'lib/rdf';
+
 import { Link } from '../../components/atoms';
 import { ProjectPageFooter } from '../../components/molecules';
 import { OnboardingFormTemplate } from '../../components/templates';
@@ -23,7 +25,6 @@ import {
 import useMsgClient from '../../hooks/useMsgClient';
 import { getHashUrl } from '../../lib/block-explorer';
 import { isVCSCreditClass } from '../../lib/ecocredit/api';
-import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
 import { useCreateProjectContext } from '../ProjectCreate';
 import { useCompactMetadata } from './hooks/useCompactMetadata';
 import { useGetJurisdiction } from './hooks/useGetJurisdiction';

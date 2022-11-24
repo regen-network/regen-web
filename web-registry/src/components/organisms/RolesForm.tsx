@@ -18,6 +18,12 @@ import { OrganizationFormValues } from 'web-components/lib/components/modal/Orga
 import { ProfileFormValues } from 'web-components/lib/components/modal/ProfileModal';
 import { Subtitle } from 'web-components/lib/components/typography';
 
+import {
+  defaultProjectContext,
+  getCompactedPath,
+  getProjectPageBaseData,
+  validate,
+} from 'lib/rdf';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
 import {
@@ -31,12 +37,6 @@ import {
   useUpdateUserByIdMutation,
 } from '../../generated/graphql';
 import getApiUri from '../../lib/apiUri';
-import {
-  defaultProjectContext,
-  getCompactedPath,
-  getProjectPageBaseData,
-  validate,
-} from '../../lib/rdf';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../molecules';
 

@@ -8,9 +8,10 @@ import { makeStyles } from 'tss-react/mui';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
+import { qudtUnit, qudtUnitMap } from 'lib/rdf';
+
 import DefaultProject from '../../assets/default-project.jpg';
 import { Maybe, MoreProjectFieldsFragment } from '../../generated/graphql';
-import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
 
 type Props = {
   projects: Array<Maybe<MoreProjectFieldsFragment | undefined>>;

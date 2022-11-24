@@ -7,6 +7,8 @@ import {
   getURLListInitialValue,
 } from 'web-components/lib/utils/schemaURL';
 
+import { getProjectShapeIri } from 'lib/rdf';
+
 import {
   isSimpleMediaFormValues,
   MediaForm,
@@ -21,7 +23,6 @@ import {
   useShaclGraphByUriQuery,
   useUpdateProjectByIdMutation,
 } from '../../generated/graphql';
-import { getProjectShapeIri } from '../../lib/rdf';
 import { useProjectEditContext } from '../ProjectEdit';
 
 const PHOTO_COUNT = 4;

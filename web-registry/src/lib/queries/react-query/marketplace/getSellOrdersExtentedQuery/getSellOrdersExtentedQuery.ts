@@ -11,12 +11,14 @@ import {
   ReactQuerySellOrdersExtentedResponse,
 } from './getSellOrdersExtentedQuery.types';
 
+export const SELL_ORDERS_EXTENTED_KEY = 'sellOrdersExtented';
+
 export const getSellOrdersExtentedQuery = ({
   client,
   reactQueryClient,
   ...params
 }: ReactQuerySellOrdersExtentedProps): ReactQuerySellOrdersExtentedResponse => ({
-  queryKey: ['sellOrders'],
+  queryKey: [SELL_ORDERS_EXTENTED_KEY],
   queryFn: async () => {
     if (!client) return undefined;
 

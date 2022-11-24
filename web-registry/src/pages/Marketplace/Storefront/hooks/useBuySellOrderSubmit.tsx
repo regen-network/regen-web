@@ -88,6 +88,10 @@ const useBuySellOrderSubmit = ({
 
       if (refetchSellOrders) {
         const sellOrders = await refetchSellOrders();
+        console.log(
+          '🚀 ~ file: useBuySellOrderSubmit.tsx ~ line 88 ~ sellOrders',
+          sellOrders,
+        );
         const uiSellOrdersInfo = sellOrders?.map(normalizeToUISellOrderInfo);
         const { isBuyOrderInvalid } = checkIsBuyOrderInvalid({
           creditCount,

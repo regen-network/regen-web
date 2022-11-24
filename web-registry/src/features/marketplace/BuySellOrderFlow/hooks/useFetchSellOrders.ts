@@ -1,8 +1,11 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';
-import { getSellOrdersExtentedQuery } from 'lib/queries/react-query/marketplace/getSellOrdersExtentedQuery/getSellOrdersExtentedQuery';
+import {
+  getSellOrdersExtentedQuery,
+  SELL_ORDERS_EXTENTED_KEY,
+} from 'lib/queries/react-query/marketplace/getSellOrdersExtentedQuery/getSellOrdersExtentedQuery';
 
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
@@ -14,12 +17,16 @@ type UseFetchSellOrdersResponse = {
 export const useFetchSellOrders = (): UseFetchSellOrdersResponse => {
   const { marketplaceClient } = useLedger();
   const reactQueryClient = useQueryClient();
-  const sellOrdersQuery = getSellOrdersExtentedQuery({
-    enabled: !!marketplaceClient,
-    client: marketplaceClient,
-    reactQueryClient,
-    request: {},
-  });
+  const sellOrdersQuery = useMemo(
+    () =>
+      getSellOrdersExtentedQuery({
+        enabled: !!marketplaceClient,
+        client: marketplaceClient,
+        reactQueryClient,
+        request: {},
+      }),
+    [marketplaceClient, reactQueryClient],
+  );
   const { data: sellOrders } = useQuery(sellOrdersQuery);
   const refetchSellOrders = useCallback(async (): Promise<
     SellOrderInfoExtented[] | undefined
@@ -27,7 +34,9 @@ export const useFetchSellOrders = (): UseFetchSellOrdersResponse => {
     await reactQueryClient.invalidateQueries({
       queryKey: sellOrdersQuery.queryKey,
     });
-    return await reactQueryClient.fetchQuery(sellOrdersQuery);
+    return reactQueryClient.getQueryData(
+      sellOrdersQuery.queryKey ?? [SELL_ORDERS_EXTENTED_KEY],
+    );
   }, [reactQueryClient, sellOrdersQuery]);
 
   return { sellOrders, refetchSellOrders };

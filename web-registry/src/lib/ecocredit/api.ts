@@ -54,7 +54,6 @@ import { TablePaginationParams } from 'web-components/lib/components/table/Actio
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { getBridgeTxStatus } from 'lib/bridge';
 import { getMetadata } from 'lib/metadata-graph';
-import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getSupplyQuery } from 'lib/queries/react-query/ecocredit/getSupplyQuery/getSupplyQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';

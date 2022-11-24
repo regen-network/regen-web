@@ -17,6 +17,8 @@ type UseFetchSellOrdersResponse = {
 export const useFetchSellOrders = (): UseFetchSellOrdersResponse => {
   const { marketplaceClient } = useLedger();
   const reactQueryClient = useQueryClient();
+
+  // Query
   const sellOrdersQuery = useMemo(
     () =>
       getSellOrdersExtentedQuery({
@@ -27,7 +29,11 @@ export const useFetchSellOrders = (): UseFetchSellOrdersResponse => {
       }),
     [marketplaceClient, reactQueryClient],
   );
+
+  // Fetch
   const { data: sellOrders } = useQuery(sellOrdersQuery);
+
+  // Refetch callback
   const refetchSellOrders = useCallback(async (): Promise<
     SellOrderInfoExtented[] | undefined
   > => {

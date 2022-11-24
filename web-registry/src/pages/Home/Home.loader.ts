@@ -9,7 +9,6 @@ import { getSellOrdersQuery } from 'lib/queries/react-query/marketplace/getSellO
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
-import { getFromCacheOrFetchUnresolved } from 'lib/queries/react-query/utils/getFromCacheOrFetchUnresolved';
 
 import { client as sanityClient } from '../../sanity';
 
@@ -50,23 +49,23 @@ export const homeLoader =
     });
 
     // Optionnal data
-    getFromCacheOrFetchUnresolved({
+    getFromCacheOrFetch({
       query: allCreditClassesQuery,
       reactQueryClient: queryClient,
     });
-    getFromCacheOrFetchUnresolved({
+    getFromCacheOrFetch({
       query: projectsQuery,
       reactQueryClient: queryClient,
     });
-    getFromCacheOrFetchUnresolved({
+    getFromCacheOrFetch({
       query: sellOrdersQuery,
       reactQueryClient: queryClient,
     });
-    getFromCacheOrFetchUnresolved({
+    getFromCacheOrFetch({
       query: allowedDenomQuery,
       reactQueryClient: queryClient,
     });
-    getFromCacheOrFetchUnresolved({
+    getFromCacheOrFetch({
       query: simplePriceQuery,
       reactQueryClient: queryClient,
     });

@@ -54,6 +54,7 @@ import { TablePaginationParams } from 'web-components/lib/components/table/Actio
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { getBridgeTxStatus } from 'lib/bridge';
 import { getMetadata } from 'lib/metadata-graph';
+import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getSupplyQuery } from 'lib/queries/react-query/ecocredit/getSupplyQuery/getSupplyQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
@@ -314,9 +315,19 @@ const getClassProjectForBatch = async (
   sanityCreditClassData?: AllCreditClassQuery,
   reactQueryClient?: QueryClient,
 ): Promise<ClassProjectInfo> => {
+  let metadata, projectData;
   const { projectId } = batch;
-  const { project } = await getProject(projectId);
-  let metadata;
+  if (reactQueryClient) {
+    projectData = await getFromCacheOrFetch({
+      query: getProjectQuery({
+        request: { projectId },
+      }),
+      reactQueryClient,
+    });
+  } else {
+    projectData = await getProject(projectId);
+  }
+  const project = projectData?.project;
   if (project?.metadata.length) {
     try {
       if (reactQueryClient) {

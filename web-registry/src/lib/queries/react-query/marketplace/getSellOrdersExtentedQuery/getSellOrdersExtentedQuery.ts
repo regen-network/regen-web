@@ -7,15 +7,15 @@ import { IBC_DENOM_PREFIX } from 'hooks/useQuerySellOrders';
 import { getDenomTraceByHashesQuery } from '../../ibc/transfer/getDenomTraceByHashesQuery/getDenomTraceByHashesQuery';
 import { getFromCacheOrFetch } from '../../utils/getFromCacheOrFetch';
 import {
-  ReactQuerySellOrdersProps,
-  ReactQuerySellOrdersResponse,
-} from './getSellOrdersQuery.types';
+  ReactQuerySellOrdersExtentedProps,
+  ReactQuerySellOrdersExtentedResponse,
+} from './getSellOrdersExtentedQuery.types';
 
-export const getSellOrdersQuery = ({
+export const getSellOrdersExtentedQuery = ({
   client,
   reactQueryClient,
   ...params
-}: ReactQuerySellOrdersProps): ReactQuerySellOrdersResponse => ({
+}: ReactQuerySellOrdersExtentedProps): ReactQuerySellOrdersExtentedResponse => ({
   queryKey: ['sellOrders'],
   queryFn: async () => {
     if (!client) return undefined;

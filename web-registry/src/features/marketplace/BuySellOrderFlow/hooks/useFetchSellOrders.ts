@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';
-import { getSellOrdersQuery } from 'lib/queries/react-query/marketplace/getSellOrdersQuery/getSellOrdersQuery';
+import { getSellOrdersExtentedQuery } from 'lib/queries/react-query/marketplace/getSellOrdersExtentedQuery/getSellOrdersExtentedQuery';
 
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
@@ -14,7 +14,7 @@ type UseFetchSellOrdersResponse = {
 export const useFetchSellOrders = (): UseFetchSellOrdersResponse => {
   const { marketplaceClient } = useLedger();
   const reactQueryClient = useQueryClient();
-  const sellOrdersQuery = getSellOrdersQuery({
+  const sellOrdersQuery = getSellOrdersExtentedQuery({
     enabled: !!marketplaceClient,
     client: marketplaceClient,
     reactQueryClient,

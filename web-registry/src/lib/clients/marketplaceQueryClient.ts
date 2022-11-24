@@ -2,7 +2,7 @@ import { QueryClientImpl } from '@regen-network/api/lib/generated/regen/ecocredi
 
 import { connect as connectToApi } from '../../ledger';
 
-// Light ecocredit client without signer, to be used in route loaders
+// Light marketplace client without signer, to be used in route loaders
 export const getMarketplaceQueryClient = async (): Promise<QueryClientImpl> => {
   const api = await connectToApi();
   if (!api || !api?.queryClient) return Promise.reject();

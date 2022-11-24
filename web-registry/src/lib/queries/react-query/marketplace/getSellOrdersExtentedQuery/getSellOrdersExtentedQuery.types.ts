@@ -7,11 +7,14 @@ import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 import { ReactQueryBuilderResponse } from '../../types/react-query.types';
 
-export type ReactQuerySellOrdersResponse = QueryObserverOptions<
+export type ReactQuerySellOrdersExtentedResponse = QueryObserverOptions<
   SellOrderInfoExtented[] | undefined
 >;
 
-export type ReactQuerySellOrdersProps = Omit<QuerySellOrdersProps, 'client'> & {
+export type ReactQuerySellOrdersExtentedProps = Omit<
+  QuerySellOrdersProps,
+  'client'
+> & {
   client?: MarketplaceQueryClient;
   reactQueryClient?: QueryClient;
-} & ReactQueryBuilderResponse<ReactQuerySellOrdersResponse>;
+} & ReactQueryBuilderResponse<ReactQuerySellOrdersExtentedResponse>;

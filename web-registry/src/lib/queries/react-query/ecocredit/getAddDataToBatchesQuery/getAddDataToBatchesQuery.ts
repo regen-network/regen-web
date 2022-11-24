@@ -8,6 +8,7 @@ import {
 export const getAddDataToBatchesQuery = ({
   batches,
   sanityCreditClassData,
+  reactQueryClient,
   ...params
 }: ReactQueryAddDataToBatchParams): ReactQueryAddDataToBatchResponse => ({
   queryKey: batches && [
@@ -20,6 +21,7 @@ export const getAddDataToBatchesQuery = ({
     const batchesWithSupply = await addDataToBatch({
       batches,
       sanityCreditClassData,
+      reactQueryClient,
     });
 
     return batchesWithSupply;

@@ -14,25 +14,27 @@ export interface BatchTotalsForProject
 
 export interface IBatchInfo extends Omit<BatchInfo, '$type'> {}
 
-// /** combines the ledger `BatchInfo` with ledger `QueryBalanceResponse` */
-export interface BatchInfoWithBalance
-  extends IBatchInfo,
-    Omit<QueryBalanceResponse, '$type'> {
+export interface ClassProjectInfo {
   classId?: string;
   className?: string;
   projectName?: string;
   projectLocation?: string;
 }
 
+export interface IBatchInfoWithClassProject
+  extends IBatchInfo,
+    ClassProjectInfo {}
+
+// /** combines the ledger `BatchInfo` with ledger `QueryBalanceResponse` */
+export interface BatchInfoWithBalance
+  extends IBatchInfoWithClassProject,
+    Omit<QueryBalanceResponse, '$type'> {}
+
 // /** combines the ledger `BatchInfo` with ledger `QuerySupplyResponse` */
 export interface BatchInfoWithSupply
-  extends IBatchInfo,
+  extends IBatchInfoWithClassProject,
     Omit<QuerySupplyResponse, '$type'> {
   txhash?: string;
-  classId?: string;
-  className?: string;
-  projectName?: string;
-  projectLocation?: string;
 }
 
 export type ClassID = 'C01' | 'C02' | 'C03';
@@ -41,4 +43,16 @@ type GenericObject = { [key: string]: any };
 
 export interface ProjectWithMetadataObj extends Omit<ProjectInfo, 'metadata'> {
   metadata: GenericObject;
+}
+
+export type BridgedTxStatus =
+  | 'regen_ready'
+  | 'evm_broadcast'
+  | 'evm_confirmed'
+  | 'error';
+
+export interface BridgedEcocredits extends IBatchInfoWithClassProject {
+  amount: string;
+  status?: BridgedTxStatus;
+  destinationTxHash?: string;
 }

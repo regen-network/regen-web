@@ -1,24 +1,18 @@
-import { useState } from 'react';
 import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
-import { random } from 'lodash';
 import { loaderStyles } from 'styles/loader';
 import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import EmptyCartIcon from 'web-components/lib/components/icons/EmptyCartIcon';
 import { InfoLabelVariant } from 'web-components/lib/components/info-label/InfoLabel.types';
-import {
-  ActionsTable,
-  TablePaginationParams,
-} from 'web-components/lib/components/table/ActionsTable';
+import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
 import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
 import {
   DATE_FORMAT_SECONDARY,
   formatDate,
   formatNumber,
 } from 'web-components/lib/utils/format';
-import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/ActionsTable.constants';
 
 import {
   AccountLink,
@@ -34,15 +28,11 @@ import { useBridged } from 'hooks/bridge/useBridged';
 
 import {
   AMOUNT_BRIDGED_TOOLTIP,
-  BRIDGED_STATUS,
+  BRIDGED_STATUSES,
   CREDIT_BATCH_TOOLTIP,
   NO_BRIDGED_CREDITS,
 } from './BridgedEcocreditsTable.constants';
-
-// TODO - A hook scaffolding `useBridged` has been implemented for the data request
-// that simply simulates a request with an empty response.
-
-// TODO - We will filter this by C03 class eventually
+import { Note } from './BridgedEcocreditsTable.Note';
 
 interface Props {
   accountAddress: string | undefined;
@@ -53,19 +43,11 @@ export const BridgedEcocreditsTable = ({
   accountAddress,
   privateAccess = false,
 }: Props): JSX.Element => {
-  const [paginationParams, setPaginationParams] =
-    useState<TablePaginationParams>({
-      page: 0,
-      rowsPerPage: DEFAULT_ROWS_PER_PAGE,
-      offset: 0,
-    });
-
-  const { credits, isLoadingCredits } = useBridged({
+  const { bridgedCredits, isLoadingCredits } = useBridged({
     address: accountAddress,
-    paginationParams,
   });
 
-  if (!credits?.length && !isLoadingCredits) {
+  if (!bridgedCredits?.length && !isLoadingCredits) {
     return (
       <NoCredits
         title={NO_BRIDGED_CREDITS}
@@ -83,7 +65,6 @@ export const BridgedEcocreditsTable = ({
       <ActionsTable
         tableLabel="bridged ecocredits table"
         sx={tableStyles.rootOnlyTopBorder}
-        onTableChange={setPaginationParams}
         headerRows={[
           'Status',
           privateAccess && (
@@ -124,16 +105,20 @@ export const BridgedEcocreditsTable = ({
           </Box>,
           'Project Location',
         ]}
-        rows={credits.map((row, i) => {
+        rows={bridgedCredits.map((row, i) => {
           return [
             <GreyText>
-              {
+              {row.status && (
                 <StatusLabel
-                  status={BRIDGED_STATUS[random(0, 2)] as InfoLabelVariant}
+                  status={BRIDGED_STATUSES[row.status] as InfoLabelVariant}
                 />
-              }
+              )}
             </GreyText>,
-            privateAccess && <GreyText>...</GreyText>, // TODO: Note/Link
+            privateAccess && row.status && (
+              <GreyText>
+                <Note status={row.status} txHash={row.destinationTxHash} />
+              </GreyText>
+            ),
             <WithLoader isLoading={!row.projectName} variant="skeleton">
               <Link
                 href={`/projects/${row?.projectId}`}
@@ -154,7 +139,7 @@ export const BridgedEcocreditsTable = ({
               </Link>
             </WithLoader>,
             formatNumber({
-              num: row.balance?.tradableAmount,
+              num: row.amount,
               ...quantityFormatNumberOptions,
             }),
             <GreyText>

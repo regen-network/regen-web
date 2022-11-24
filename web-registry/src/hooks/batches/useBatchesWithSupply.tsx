@@ -5,7 +5,7 @@ import { TablePaginationParams } from 'web-components/lib/components/table/Actio
 
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
-import { addDataToBatch } from 'lib/ecocredit/api';
+import { addDataToBatches } from 'lib/ecocredit/api';
 
 import { client as sanityClient } from '../../sanity';
 
@@ -58,7 +58,7 @@ export const useBatchesWithSupply = ({
         const displayedBatches = batches.slice(offset, offset + rowsPerPage);
         try {
           // add supply to page batches
-          const newBatchesWithData = await addDataToBatch({
+          const newBatchesWithData = await addDataToBatches({
             batches: displayedBatches,
             sanityCreditClassData,
           });
@@ -80,7 +80,7 @@ export const useBatchesWithSupply = ({
       } else if (batches) {
         // Fetch all batches
         try {
-          const batchesWithSupply = await addDataToBatch({ batches });
+          const batchesWithSupply = await addDataToBatches({ batches });
           if (!ignore) {
             setBatchesWithSupply(batchesWithSupply);
           }

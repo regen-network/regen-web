@@ -5,7 +5,7 @@ import { getMarketplaceQueryClient } from 'lib/clients/marketplaceQueryClient';
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
-import { getSellOrdersQuery } from 'lib/queries/react-query/marketplace/getSellOrdersQuery/getSellOrdersQuery';
+import { getSellOrdersExtentedQuery } from 'lib/queries/react-query/marketplace/getSellOrdersExtentedQuery/getSellOrdersExtentedQuery';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
@@ -31,7 +31,7 @@ export const homeLoader =
       client: ecocreditClient,
       request: {},
     });
-    const sellOrdersQuery = getSellOrdersQuery({
+    const sellOrdersQuery = getSellOrdersExtentedQuery({
       client: marketplaceClient,
       reactQueryClient: queryClient,
       request: {},

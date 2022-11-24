@@ -16,6 +16,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
 import { QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Analytics from 'analytics';
 import doNotTrack from 'analytics-plugin-do-not-track';
 import { getRouter } from 'routes';
@@ -143,6 +144,7 @@ root.render(
             </AnalyticsProvider>
           </LocalizationProvider>
         </IntercomProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </AuthApolloProvider>
   </Auth0Provider>,

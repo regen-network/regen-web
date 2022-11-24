@@ -11,8 +11,7 @@ export const getMetadataQuery = ({
 }: ReactQueryMetadataProps): ReactQueryMetadataResponse => ({
   queryKey: ['metadata', iri ?? ''],
   queryFn: async () => {
-    return getMetadata(iri);
+    return await getMetadata(iri);
   },
-  keepPreviousData: true,
   ...params,
 });

@@ -1,4 +1,4 @@
-import { QueryObserverOptions } from '@tanstack/react-query';
+import { QueryClient, QueryObserverOptions } from '@tanstack/react-query';
 
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { AddDataToBatchParams } from 'lib/ecocredit/api';
@@ -14,4 +14,5 @@ export type ReactQueryAddDataToBatchParams = Omit<
   'batches'
 > & {
   batches?: AddDataToBatchParams['batches'];
+  reactQueryClient?: QueryClient;
 } & ReactQueryBuilderResponse<ReactQueryAddDataToBatchResponse>;

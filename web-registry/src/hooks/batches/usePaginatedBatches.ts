@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 
@@ -21,6 +21,7 @@ export const usePaginatedBatches = (): {
   paginationParams: TablePaginationParams;
 } => {
   const { ecocreditClient } = useLedger();
+  const reactQueryClient = useQueryClient();
   const { page: routePage } = useParams();
   // Page index starts at 1 for route
   // Page index starts at 0 for MUI Table
@@ -60,6 +61,7 @@ export const usePaginatedBatches = (): {
       batches,
       sanityCreditClassData: sanityCreditClassDataResult.data,
       enabled: !!sanityCreditClassDataResult.data,
+      reactQueryClient,
     }),
   );
 

@@ -67,8 +67,7 @@
     "tss-react": "^4.4.1",
     "url-search-params-polyfill": "^8.1.0",
     "use-analytics": "^0.0.5",
-    "web-components": "0.0.0",
-    "yarn": "^1.22.19"
+    "web-components": "0.0.0"
   },
   "scripts": {
     "lint": "eslint ./src  -c .eslintrc.js --max-warnings 0 --ext .ts,.tsx",

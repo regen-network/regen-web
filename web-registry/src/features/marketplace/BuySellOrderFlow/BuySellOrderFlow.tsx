@@ -21,7 +21,8 @@ import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 import { Link } from 'components/atoms';
 import { BuyCreditsModal, BuyCreditsValues } from 'components/organisms';
 import { useMsgClient } from 'hooks';
-import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
+
+import { useFetchSellOrders } from './hooks/useFetchSellOrders';
 
 type Props = {
   isFlowStarted: boolean;
@@ -41,12 +42,12 @@ export const BuySellOrderFlow = ({
   const [txModalHeader, setTxModalHeader] = useState<string>('');
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
-  const { sellOrdersResponse, refetchSellOrders } = useQuerySellOrders();
+  const { sellOrders, refetchSellOrders } = useFetchSellOrders();
+
   const projectSellOrderIds = useMemo(
     () => selectedProject?.sellOrders.map(sellOrder => sellOrder.id),
     [selectedProject],
   );
-  const sellOrders = sellOrdersResponse?.sellOrders;
   const projectUiSellOrdersInfo = useMemo(
     () =>
       sellOrders

@@ -10,7 +10,7 @@ import { MarketplaceQueryClientProps } from './marketplace.types';
 
 // AllowedDenoms
 
-interface QueryAllowedDenomsProps extends MarketplaceQueryClientProps {
+export interface QueryAllowedDenomsProps extends MarketplaceQueryClientProps {
   request: DeepPartial<QueryAllowedDenomsRequest>;
 }
 

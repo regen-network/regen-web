@@ -1,13 +1,12 @@
-import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  useIsFetching,
+  useQueries,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';
-import {
-  fetchSimplePrice,
-  GECKO_EEUR_ID,
-  GECKO_TOKEN_IDS,
-  GECKO_USD_CURRENCY,
-  GECKO_USDC_ID,
-} from 'lib/coingecko';
+import { GECKO_EEUR_ID, GECKO_USDC_ID } from 'lib/coingecko';
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/normalizeProjectsWithOrderData';
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 import { getProjectsByClassQuery } from 'lib/queries/react-query/ecocredit/getProjectsByClass/getProjectsByClassQuery';

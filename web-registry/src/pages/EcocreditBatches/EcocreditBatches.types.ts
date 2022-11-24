@@ -3,7 +3,7 @@ import { QueryBatchesResponse } from '@regen-network/api/lib/generated/regen/eco
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
-import { AddDataToBatchParams, QueryBatchesProps } from 'lib/ecocredit/api';
+import { AddDataToBatchesParams, QueryBatchesProps } from 'lib/ecocredit/api';
 
 /* BatchesQuery */
 
@@ -22,10 +22,10 @@ export type QueryBatchesLoaderResponse = {
 /* AddDataToBatchesQuery */
 
 export type AddDataToBatchLoaderParams = Omit<
-  AddDataToBatchParams,
+  AddDataToBatchesParams,
   'batches'
 > & {
-  batches?: AddDataToBatchParams['batches'];
+  batches?: AddDataToBatchesParams['batches'];
 };
 
 export type AddDataToBatchesQueryLoaderResponse = {

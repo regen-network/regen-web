@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Box, CardMedia } from '@mui/material';
+import { Box } from '@mui/material';
 import { gradients } from 'styles/gradients';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { Loading } from 'web-components/lib/components/loading';
 import Modal from 'web-components/lib/components/modal';
-import Section from 'web-components/lib/components/section';
 import SEO from 'web-components/lib/components/seo';
 import { Body, Title } from 'web-components/lib/components/typography';
 
-import { usePaginatedBatches } from 'hooks/batches/usePaginatedBatches';
-
-import topographyImg from '../../assets/background-contour-1.jpg';
 import horsesImg from '../../assets/horses-grazing.png';
 import { SanityButton } from '../../components/atoms';
 import { BackgroundImgSection, HeroAction } from '../../components/molecules';
-import { CreditBatches, CreditClassCards } from '../../components/organisms';
+import { CreditClassCards } from '../../components/organisms';
 import {
   useAllCreditClassQuery,
   useAllHomePageQuery,
@@ -24,11 +20,11 @@ import { client } from '../../sanity';
 import { FeaturedProjects } from './Home.FeaturedProjects';
 import { useHomeStyles } from './Home.styles';
 
-const Home: React.FC = () => {
+const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [open, setOpen] = useState(false);
   const [modalLink, setModalLink] = useState<string>('');
 
-  const styles = useHomeStyles();
+  const { classes } = useHomeStyles();
 
   // Featured projects fetching
 
@@ -40,8 +36,6 @@ const Home: React.FC = () => {
   const seo = content?.seo;
 
   const creditClassesContent = creditClassData?.allCreditClass;
-
-  const { batchesWithSupply, setPaginationParams } = usePaginatedBatches();
 
   useEffect(() => {
     const anchor = window.location.hash.slice(1);
@@ -71,7 +65,7 @@ const Home: React.FC = () => {
       <BackgroundImgSection
         img={heroSection?.background?.image?.asset?.url || ''}
         linearGradient="linear-gradient(203.09deg, #000000 45.49%, #5E9078 92.1%);"
-        classes={{ section: styles.section }}
+        classes={{ section: classes.section }}
         sx={{
           display: 'flex',
           alignItems: 'center',
@@ -140,18 +134,18 @@ const Home: React.FC = () => {
 
       <FeaturedProjects />
 
-      <CardMedia image={topographyImg}>
-        <CreditBatches
-          creditBatches={batchesWithSupply}
-          onTableChange={setPaginationParams}
-          withSection
-        />
-      </CardMedia>
-
       {creditClassesContent && (
-        <Section
+        <BackgroundImgSection
+          img={'/svg/topology.svg'}
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+          }}
           title="Credit Classes"
-          classes={{ root: styles.section, title: styles.title }}
+          classes={{
+            root: classes.creditClassBackground,
+            title: classes.title,
+          }}
           id="credit-classes"
         >
           <CreditClassCards
@@ -159,14 +153,14 @@ const Home: React.FC = () => {
             justifyContent={['center', 'center', 'flex-start']}
             creditClassesContent={creditClassesContent} // CMS data
           />
-        </Section>
+        </BackgroundImgSection>
       )}
 
       <HeroAction
         isBanner
         classes={{
-          main: styles.bottomSectionWidth,
-          section: styles.bottomSection,
+          main: classes.bottomSectionWidth,
+          section: classes.bottomSection,
         }}
         img={horsesImg}
         openModal={(href: string): void => {

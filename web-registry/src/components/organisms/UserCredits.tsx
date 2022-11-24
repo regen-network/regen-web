@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import PurchasedCreditsCard from 'web-components/lib/components/cards/PurchasedCreditsCard';
 import AvailableCreditsIcon from 'web-components/lib/components/icons/AvailableCreditsIcon';
@@ -10,7 +10,7 @@ import TotalCreditsIcon from 'web-components/lib/components/icons/TotalCreditsIc
 import { Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(17.75)} 0 ${theme.spacing(28.25)}`,
@@ -132,7 +132,7 @@ interface PurchasedCreditsProps {
 }
 
 function UserCredits({ credits }: PurchasedCreditsProps): JSX.Element {
-  const classes = useStyles({});
+  const { classes } = useStyles();
   return (
     <div className={classes.root}>
       <Grid

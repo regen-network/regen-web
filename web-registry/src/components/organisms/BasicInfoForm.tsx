@@ -1,8 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import clsx from 'clsx';
 import { Field, Form, Formik, FormikErrors } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
@@ -35,7 +34,7 @@ export interface BasicInfoFormValues {
   };
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   parcelField: {
     marginTop: theme.spacing(4),
   },
@@ -59,12 +58,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const BasicInfoForm: React.FC<{
-  submit: (values: BasicInfoFormValues) => Promise<void>;
-  initialValues?: BasicInfoFormValues;
-  onNext?: () => void;
-}> = ({ submit, initialValues, onNext }) => {
-  const classes = useStyles();
+const BasicInfoForm: React.FC<
+  React.PropsWithChildren<{
+    submit: (values: BasicInfoFormValues) => Promise<void>;
+    initialValues?: BasicInfoFormValues;
+    onNext?: () => void;
+  }>
+> = ({ submit, initialValues, onNext }) => {
+  const { classes, cx } = useStyles();
   const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
@@ -153,14 +154,14 @@ const BasicInfoForm: React.FC<{
                   }}
                 >
                   <Field
-                    className={clsx(classes.parcelField, classes.parcelSize)}
+                    className={cx(classes.parcelField, classes.parcelSize)}
                     component={TextField}
                     type="number"
                     name="regen:projectSize.qudt:numericValue.@value"
                     defaultStyle={false}
                   />
                   <Field
-                    className={clsx(classes.parcelField, classes.parcelUnit)}
+                    className={cx(classes.parcelField, classes.parcelUnit)}
                     component={SelectTextField}
                     name="regen:projectSize.qudt:unit.@value"
                     options={[

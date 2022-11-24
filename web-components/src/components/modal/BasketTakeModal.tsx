@@ -8,7 +8,7 @@ export interface TakeModalProps extends RegenModalProps, BasketTakeProps {}
 
 export const BASKET_TAKE_TITLE = 'Take from basket';
 
-const BasketTakeModal: React.FC<TakeModalProps> = ({
+const BasketTakeModal: React.FC<React.PropsWithChildren<TakeModalProps>> = ({
   basket,
   basketDisplayDenom,
   balance,

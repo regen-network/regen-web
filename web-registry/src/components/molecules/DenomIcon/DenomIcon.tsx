@@ -1,4 +1,5 @@
-import { Box, SxProps, Theme } from '@mui/material';
+import { Box } from '@mui/material';
+import { SxProps, Theme } from '@mui/system';
 import {
   AXELAR_USDC_DENOM,
   EEUR_DENOM,
@@ -17,7 +18,7 @@ export interface Props {
   iconSx?: SxProps<Theme>;
 }
 
-const DenomIcon = ({ denom, sx = [], iconSx = [] }: Props): JSX.Element => {
+const DenomIcon = ({ denom, sx = [], iconSx }: Props): JSX.Element => {
   return (
     <Box component="span" sx={[...(Array.isArray(sx) ? sx : [sx])]}>
       {denom === GRAVITY_USDC_DENOM && <GravUsdcIcon sx={iconSx} />}

@@ -26,7 +26,7 @@ export default function useQueryBalance(): FetchBalance {
   }, [api?.queryClient]);
 
   const fetchBalance = useCallback(
-    async ({ address, denom }) => {
+    async ({ address, denom }: any) => {
       if (!queryClient) return;
 
       try {

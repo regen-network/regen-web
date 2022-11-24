@@ -10,18 +10,15 @@ import { Link } from './Link';
 /**
  * @returns a registry `Link` with the navlink styles applied.
  */
-export const RegistryNavLink: React.FC<NavLinkProps> = ({
-  children,
-  href,
-  overrideClassname,
-}) => {
-  const isActive =
-    window && window.location && window.location.pathname === href;
-  const styles = useNavLinkStyles({ isActive: !!isActive });
+export const RegistryNavLink: React.FC<React.PropsWithChildren<NavLinkProps>> =
+  ({ children, href, overrideClassname }) => {
+    const isActive =
+      window && window.location && window.location.pathname === href;
+    const { classes } = useNavLinkStyles({ isActive: !!isActive });
 
-  return (
-    <Link href={href} className={overrideClassname ?? styles.navLink}>
-      {children}
-    </Link>
-  );
-};
+    return (
+      <Link href={href} className={overrideClassname ?? classes.navLink}>
+        {children}
+      </Link>
+    );
+  };

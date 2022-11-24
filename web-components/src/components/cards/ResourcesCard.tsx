@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { parseText } from '../../utils/textParser';
 import OutlinedButton from '../buttons/OutlinedButton';
@@ -19,7 +20,7 @@ export interface ResourcesCardProps {
   titleOverwrite?: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     height: '100%',
     backgroundColor: theme.palette.primary.main,
@@ -39,7 +40,7 @@ export default function ResourcesCard({
   backgroundGradient = true,
   titleOverwrite = true,
 }: ResourcesCardProps): JSX.Element {
-  const classes = useStyles();
+  const { classes } = useStyles();
   return (
     <MediaCard
       className={classes.root}

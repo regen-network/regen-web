@@ -1,9 +1,9 @@
 import React from 'react';
 import { Input as MuiInput, InputProps } from '@mui/material';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   input: {
     backgroundColor: theme.palette.primary.main,
     border: `1px solid ${theme.palette.grey[100]}`,
@@ -33,8 +33,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 /** Custom styles on top of MUI's `Input` component */
-const Input: React.FC<InputProps> = ({ className, ...props }) => {
-  const styles = useStyles();
+const Input: React.FC<React.PropsWithChildren<InputProps>> = ({
+  className,
+  ...props
+}) => {
+  const { classes: styles, cx } = useStyles();
   return (
     <MuiInput
       {...props}

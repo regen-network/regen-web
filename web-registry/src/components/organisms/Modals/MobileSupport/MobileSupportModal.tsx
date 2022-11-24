@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Box, useMediaQuery } from '@mui/material';
-import { useTheme } from '@mui/styles';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 
 import RegenModal from 'web-components/lib/components/modal';
 import { Body, Title } from 'web-components/lib/components/typography';

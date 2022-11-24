@@ -25,13 +25,13 @@ export function ProjectCardsSection({
   onButtonClick,
   loading,
 }: Props): JSX.Element {
-  const styles = useSectionStyles();
+  const { classes } = useSectionStyles();
 
   return (
     <Section
       title={title}
       titleAlign={titleAlign}
-      classes={{ root: styles.section, title: styles.title }}
+      classes={{ root: classes.section, title: classes.title }}
     >
       <WithLoader
         isLoading={!!loading}

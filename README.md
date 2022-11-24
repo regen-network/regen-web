@@ -16,7 +16,6 @@ The website for the [Regen Network](https://regen.network) decentralized infrast
     - [Registry](#registry)
       - [GraphQL Type generation](#graphql-type-generation)
     - [Storybook](#storybook)
-    - [Website](#website)
     - [Deploying the Custom Login form to Auth0](#deploying-the-custom-login-form-to-auth0)
   - [Testing](#testing)
   - [Code style](#code-style)
@@ -24,6 +23,7 @@ The website for the [Regen Network](https://regen.network) decentralized infrast
     - [Sizing guide](#sizing-guide)
   - [Timeout Issue on Slower Connections](#timeout-issue-on-slower-connections)
   - [Netlify](#netlify)
+    - [Debugging Netlify deploys](#debugging-netlify-deploys)
 
 ## Installation
 
@@ -32,7 +32,6 @@ This project uses [lerna](https://github.com/lerna/lerna) with [yarn workspaces]
 - `web-registry`: Registry React application
 - `web-components`: React components and [material-ui](https://material-ui.com/) custom theme
 - `web-storybook`: [Storybook](https://storybook.js.org/) config
-- `web-www`: Regen website based on [Gatsby](https://www.gatsbyjs.org/)
 - `web-auth`: React application used for Auth0 Custom Universal Login
 
 ### Prerequisites
@@ -65,7 +64,6 @@ yarn build
 ## Environment variables
 
 Set variables in `.env` files in `web-registry/` and `web-storybook/` folders based on provided `.env.example` files.
-Set variables in `.env.development` and `.env.production` in `web-www/` based on `.env.development.example` and `.env.production.example` respectively.
 
 For `web-auth`, follow these [setup instructions](web-auth/README.md#setup).
 
@@ -83,12 +81,6 @@ Then, to run the registry app:
 
 ```sh
 yarn start
-```
-
-Then, to run the website (Gatsby):
-
-```sh
-yarn start-www
 ```
 
 To run Storybook:
@@ -122,10 +114,6 @@ For `/web-registry` there are two commands for the separate sources:
 1. `yarn graphql:codegen` - for registry server graphql types
 2. `yarn graphql:codegen-sanity` - for sanity CMS graphql types
 
-`/web-www` only has one commmand
-
-1.  `yarn graphql:codegen`
-
 which generates types for any **_named_** GraphQL queries and mutations in `web-registry/src/graphql/*.graphql` (note - it does not generate types for unnamed queries)
 
 ```sh
@@ -153,14 +141,6 @@ Compile `web-components` and `web-storybook` to `web-components/lib` and `web-st
 
 ```sh
 yarn build-storybook
-```
-
-### Website
-
-Compile `web-components` and `web-www` to `web-components/lib` and `web-www/public` respectively:
-
-```sh
-yarn build-www
 ```
 
 ### Deploying the Custom Login form to Auth0

@@ -4,13 +4,14 @@ import mbxGeocoder, {
   GeocodeFeature,
   GeocodeQueryType,
 } from '@mapbox/mapbox-sdk/services/geocoding';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
 import { FieldProps } from 'formik';
+import { makeStyles } from 'tss-react/mui';
 
 import FieldFormControl from './FieldFormControl';
 import Input from './Input';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   result: {
     border: `1px solid ${theme.palette.info.light}`,
     backgroundColor: theme.palette.primary.main,
@@ -31,7 +32,7 @@ interface Props extends FieldProps {
   triggerOnChange?: (v: any) => Promise<void>;
 }
 
-const LocationField: React.FC<Props> = ({
+const LocationField: React.FC<React.PropsWithChildren<Props>> = ({
   className,
   label,
   optional,
@@ -59,7 +60,7 @@ const LocationField: React.FC<Props> = ({
   const [showResults, setShowResults] = useState(true);
   const { form, field } = fieldProps;
 
-  const classes = useStyles();
+  const { classes } = useStyles();
   return (
     <FieldFormControl
       className={className}

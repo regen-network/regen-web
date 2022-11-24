@@ -137,7 +137,7 @@ const getCreditsWithData = async ({
         ...batch,
         balance,
         classId,
-        className: creditClassSanity?.nameRaw,
+        className: creditClassSanity?.nameRaw ?? classId,
         projectName: metadata?.['schema:name'] ?? batch.projectId,
         projectLocation: project.project?.jurisdiction,
       };
@@ -252,7 +252,7 @@ export const getBatchesByProjectWithSupply = async (
 };
 
 /** Adds Tx Hash and supply info to batch for use in tables */
-type AddDataToBatchParams = {
+export type AddDataToBatchParams = {
   batches: BatchInfo[];
   sanityCreditClassData?: AllCreditClassQuery;
   withAllData?: boolean;
@@ -678,7 +678,7 @@ export const queryBatchInfo = async ({
 
 // Batches
 
-interface QueryBatchesProps extends EcocreditQueryClientProps {
+export interface QueryBatchesProps extends EcocreditQueryClientProps {
   request: DeepPartial<QueryBatchesRequest>;
 }
 

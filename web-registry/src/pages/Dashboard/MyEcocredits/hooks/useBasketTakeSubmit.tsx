@@ -10,7 +10,7 @@ import type { UseStateSetter } from 'types/react/use-state';
 import type { BasketTokens } from 'hooks/useBasketTokens';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
-import { TAKE_HEADER } from '../MyEcocredits.contants';
+import { TAKE_HEADER } from '../MyEcocredits.constants';
 
 type Props = {
   accountAddress?: string;

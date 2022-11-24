@@ -20,7 +20,10 @@ interface DocumentationCardProps {
   buttonBlankTarget?: boolean;
 }
 
-const Detail: React.FC<{ label: string }> = ({ children, label }) => (
+const Detail: React.FC<React.PropsWithChildren<{ label: string }>> = ({
+  children,
+  label,
+}) => (
   <Box sx={{ display: 'flex', alignItems: 'baseline', mr: 4 }}>
     <Label size="xs" mr={1}>
       {label}

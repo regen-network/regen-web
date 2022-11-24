@@ -1,6 +1,6 @@
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
-export const useHomeStyles = makeStyles(theme => ({
+export const useHomeStyles = makeStyles()(theme => ({
   section: {
     paddingBottom: theme.spacing(16.25),
     maxWidth: '1240px',
@@ -23,5 +23,13 @@ export const useHomeStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     paddingBottom: theme.spacing(17.75),
+  },
+  creditClassBackground: {
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: theme.spacing(22.25),
+    },
+    paddingBottom: theme.spacing(22.25),
+    border: '1px solid',
+    borderColor: theme.palette.grey['100'],
   },
 }));

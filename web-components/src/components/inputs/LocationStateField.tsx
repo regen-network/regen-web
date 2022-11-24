@@ -12,7 +12,7 @@ interface FieldProps {
   initialSelection?: string;
 }
 
-const LocationStateField: React.FC<FieldProps> = ({
+const LocationStateField: React.FC<React.PropsWithChildren<FieldProps>> = ({
   country,
   name = 'stateProvince',
   className,

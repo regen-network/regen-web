@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
@@ -12,7 +12,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { FeaturedSection as FeaturedSectionProps } from '../../generated/sanity-graphql';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     paddingBottom: theme.spacing(22.5),
   },
@@ -39,8 +39,10 @@ interface Props {
   content: FeaturedSectionProps;
 }
 
-const FeaturedSection: React.FC<Props> = ({ content }) => {
-  const styles = useStyles();
+const FeaturedSection: React.FC<React.PropsWithChildren<Props>> = ({
+  content,
+}) => {
+  const { classes: styles } = useStyles();
 
   if (
     content?.header &&

@@ -1,44 +1,37 @@
 import React from 'react';
+import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import LinearProgress from '@mui/material/LinearProgress';
-import {
-  createStyles,
-  DefaultTheme as Theme,
-  makeStyles,
-  useTheme,
-  withStyles,
-} from '@mui/styles';
-import clsx from 'clsx';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles, withStyles } from 'tss-react/mui';
 
 import ContainedButton from '../buttons/ContainedButton';
 import OutlinedButton from '../buttons/OutlinedButton';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
 import FixedFooter from './';
 
-const StyledLinearProgress = withStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      right: 0,
-      [theme.breakpoints.up('sm')]: {
-        height: theme.spacing(1.75),
-      },
-      [theme.breakpoints.down('sm')]: {
-        height: theme.spacing(1.5),
-      },
-      borderRadius: theme.spacing(0, 2, 2, 0),
+const StyledLinearProgress = withStyles(LinearProgress, theme => ({
+  root: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    [theme.breakpoints.up('sm')]: {
+      height: theme.spacing(1.75),
     },
-    colorPrimary: {
-      backgroundColor: theme.palette.info.light,
+    [theme.breakpoints.down('sm')]: {
+      height: theme.spacing(1.5),
     },
-    bar: {
-      background:
-        'linear-gradient(81.77deg, rgba(79, 181, 115, 0.7) 0%, rgba(35, 142, 73, 0.7) 73.42%);',
-    },
-  }),
-)(LinearProgress);
+    borderRadius: theme.spacing(0, 2, 2, 0),
+  },
+  colorPrimary: {
+    backgroundColor: theme.palette.info.light,
+  },
+  bar: {
+    background:
+      'linear-gradient(81.77deg, rgba(79, 181, 115, 0.7) 0%, rgba(35, 142, 73, 0.7) 73.42%);',
+  },
+}));
 
 interface Props {
   onPrev?: () => void;
@@ -56,16 +49,17 @@ interface Props {
 }
 
 type StyleProps = { hideProgress: boolean };
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  root: props => ({
-    marginBottom: props.hideProgress ? 0 : theme.spacing(1),
+
+const useStyles = makeStyles<StyleProps>()((theme, { hideProgress }) => ({
+  root: {
+    marginBottom: hideProgress ? 0 : theme.spacing(1),
     [theme.breakpoints.up('sm')]: {
       justifyContent: 'space-between',
     },
     [theme.breakpoints.down('sm')]: {
       justifyContent: 'flex-end',
     },
-  }),
+  },
   arrows: {
     margin: theme.spacing(0, 2, 0, 0),
     [theme.breakpoints.up('sm')]: {
@@ -91,12 +85,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
-const SaveFooter: React.FC<Props> = ({
+const SaveFooter: React.FC<React.PropsWithChildren<Props>> = ({
   saveText = 'Save & Next',
   hideProgress = false,
   ...props
 }) => {
-  const classes = useStyles({ hideProgress });
+  const { classes, cx } = useStyles({ hideProgress });
   const theme: Theme = useTheme();
 
   return (
@@ -105,7 +99,7 @@ const SaveFooter: React.FC<Props> = ({
         <Grid item className={classes.arrows}>
           {props.onPrev && (
             <OutlinedButton
-              className={clsx(classes.btn, classes.back)}
+              className={cx(classes.btn, classes.back)}
               onClick={props.onPrev}
             >
               <ArrowDownIcon

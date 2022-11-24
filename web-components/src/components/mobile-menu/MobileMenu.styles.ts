@@ -1,11 +1,11 @@
 import { Theme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
-export const useMobileMenuStyles = makeStyles((theme: Theme) => ({
+export const useMobileMenuStyles = makeStyles()((theme: Theme) => ({
   root: {
     display: 'inline-block',
     padding: theme.spacing(1),
-    'align-items': 'unset',
+    alignItems: 'unset',
   },
   drawer: {
     '& .MuiDrawer-paper': {

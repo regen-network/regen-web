@@ -1,9 +1,9 @@
 import { styled } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-export const useProjectTopSectionStyles = makeStyles((theme: Theme) => ({
+export const useProjectTopSectionStyles = makeStyles()((theme: Theme) => ({
   section: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(16),

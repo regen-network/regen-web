@@ -48,9 +48,13 @@ export const useConnectWallet = ({
           setWalletConnectUri,
           onQrCloseCallbackRef,
         });
+
         if (!walletConnect.connected) {
           await walletConnect.createSession();
+        } else {
+          setWalletConnectUri(walletConnect.uri);
         }
+
         setWalletConnect(walletConnect);
       }
 
@@ -66,7 +70,7 @@ export const useConnectWallet = ({
       }
 
       if ((isWalletConnectKeplr && walletConnect?.connected) || isKeplr) {
-        finalizeConnection({ setWallet, walletClient, walletConfig });
+        await finalizeConnection({ setWallet, walletClient, walletConfig });
       }
     },
     [

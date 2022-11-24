@@ -41,7 +41,7 @@ export interface Values {
   privacy?: boolean;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({
+const LoginForm: React.FC<React.PropsWithChildren<LoginFormProps>> = ({
   signupFromLogin,
   loginFromSignup,
   privacyLink,

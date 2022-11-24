@@ -1,7 +1,6 @@
 import React from 'react';
 import { Avatar } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -23,7 +22,7 @@ interface CreditClassDetailsColumnProps {
   className?: string;
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   card: {
     display: 'flex',
     flexDirection: 'column',
@@ -95,7 +94,7 @@ function CreditClassDetailsColumn({
   classes,
   className,
 }: CreditClassDetailsColumnProps): JSX.Element {
-  const styles = useStyles();
+  const { classes: styles, cx } = useStyles();
   const creditClassVersion = dbClass?.creditClassVersionsById?.nodes[0];
   const methodologyVersion =
     dbClass?.methodologyByMethodologyId?.methodologyVersionsById?.nodes[0];

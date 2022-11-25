@@ -12,7 +12,7 @@ import {
 export const getSimplePriceQuery = ({
   ...params
 }: ReactQuerySimplePriceParams): ReactQuerySimplePriceResponse => ({
-  queryKey: ['regenPrice'],
+  queryKey: ['simplePrice', GECKO_TOKEN_IDS],
   queryFn: async () => {
     const simplePrice = await fetchSimplePrice({
       ids: GECKO_TOKEN_IDS,

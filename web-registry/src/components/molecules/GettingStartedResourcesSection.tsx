@@ -34,15 +34,14 @@ const GettingStartedResourcesSection: React.FC<
         items={
           section.resourcesCards?.map((item, i) => (
             <GettingStartedResourcesCard
-              // className={styles.card}
               key={i}
-              header={item?.header || ''}
-              description={item?.descriptionRaw || ''}
+              header={item?.header}
+              description={item?.descriptionRaw}
               imageUrl={getSanityImgSrc(item?.image)}
               mobileImageUrl={getSanityImgSrc(item?.mobileImage)}
               links={
                 item?.links?.map(link => ({
-                  buttonText: link?.buttonText || '',
+                  buttonText: link?.buttonText,
                   buttonHref: getBtnHref(link),
                   buttonTarget: getLinkTarget(link?.buttonBlankTarget),
                 })) || []

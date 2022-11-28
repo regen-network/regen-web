@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material';
+import { Grid, useMediaQuery, useTheme } from '@mui/material';
 
 import { Theme } from '../../../theme/muiTheme';
 import { BlockContent, SanityBlockContent } from '../../block-content';
@@ -9,12 +9,12 @@ import { Title } from '../../typography/Title';
 import Card from '../Card';
 
 export interface GettingStartedResourceCardProps {
-  header: string;
+  header?: string | null;
   description: SanityBlockContent;
   imageUrl: string;
   mobileImageUrl: string;
   links: {
-    buttonText: string;
+    buttonText?: string | null;
     buttonHref: string;
     buttonTarget?: string;
   }[];
@@ -31,6 +31,10 @@ export const GettingStartedResourcesCard = ({
   linkComponent: LinkComponent,
   fullWidth = false,
 }: GettingStartedResourceCardProps): JSX.Element => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const row = fullWidth && !isMobile;
+
   return (
     <Card
       sx={[
@@ -52,33 +56,24 @@ export const GettingStartedResourcesCard = ({
       <Grid container spacing={16}>
         <Grid
           xs={12}
-          lg={8}
+          lg={9}
           item
           container
           wrap="nowrap"
-          flexDirection="column"
+          flexDirection={row ? 'row' : 'column'}
         >
-          <Grid item>
-            <Title variant="h5" sx={{ pb: fullWidth ? 4.25 : 2.5 }}>
+          <Grid item sx={{ width: row ? '50%' : '100%' }}>
+            <Title
+              variant={fullWidth ? 'h5' : 'h4'}
+              sx={{ pb: fullWidth ? 4.25 : 2.5 }}
+            >
               {header}
             </Title>
-            <Body
-              size="lg"
-              sx={{ pb: 5 }}
-              // sx={{ pr: { xs: 0, lg: 12.5 }, mb: { xs: 4, md: 6, lg: 0 } }}
-            >
+            <Body size="lg" sx={{ pb: 5 }}>
               <BlockContent content={description} />
             </Body>
           </Grid>
-          <Grid item>
-            {/* <Box
-            sx={{
-              display: 'flex',
-              height: '100%',
-              flexDirection: 'column',
-              justifyContent: 'flex-end',
-            }}
-          > */}
+          <Grid item sx={{ pt: row ? 12.5 : 0, pl: row ? 17.5 : 0 }}>
             {links.map(({ buttonText, buttonHref, buttonTarget }) => (
               <LinkComponent
                 sx={{ color: 'secondary.main' }}
@@ -99,13 +94,12 @@ export const GettingStartedResourcesCard = ({
                 </Label>
               </LinkComponent>
             ))}
-            {/* </Box> */}
           </Grid>
         </Grid>
         <Grid
           item
           xs={12}
-          lg={4}
+          lg={3}
           sx={theme => ({ minHeight: { xs: theme.spacing(61.2), lg: 'auto' } })}
         />
       </Grid>

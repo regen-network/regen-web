@@ -19,6 +19,7 @@ export interface GettingStartedResourceCardProps {
     buttonTarget?: string;
   }[];
   linkComponent: LinkComponentProp;
+  fullWidth?: boolean;
 }
 
 export const GettingStartedResourcesCard = ({
@@ -28,15 +29,12 @@ export const GettingStartedResourcesCard = ({
   mobileImageUrl,
   links,
   linkComponent: LinkComponent,
+  fullWidth = false,
 }: GettingStartedResourceCardProps): JSX.Element => {
   return (
     <Card
       sx={[
         (theme: Theme) => ({
-          display: 'flex',
-          width: '100%',
-          justifyContent: 'space-evenly',
-          alignItems: 'center',
           p: { xs: 5, sm: 8, md: 12 },
           borderRadius: '10px',
           borderColor: 'grey.100',
@@ -52,65 +50,62 @@ export const GettingStartedResourcesCard = ({
       ]}
     >
       <Grid container spacing={16}>
-        <Grid item xs={12} sm={9} md={7} lg={5}>
-          <Title variant="h5" sx={{ mb: 4, mt: { xs: 2 } }}>
-            {header}
-          </Title>
-          <Body
-            size="lg"
-            sx={{ pr: { xs: 0, lg: 12.5 }, mb: { xs: 4, md: 6, lg: 0 } }}
-          >
-            <BlockContent content={description} />
-          </Body>
-        </Grid>
         <Grid
-          item
           xs={12}
-          sm={9}
-          md={7}
-          lg={5}
-          sx={{ pt: { xs: '20px !important' } }}
+          lg={8}
+          item
+          container
+          wrap="nowrap"
+          flexDirection="column"
         >
-          <Box
+          <Grid item>
+            <Title variant="h5" sx={{ pb: fullWidth ? 4.25 : 2.5 }}>
+              {header}
+            </Title>
+            <Body
+              size="lg"
+              sx={{ pb: 5 }}
+              // sx={{ pr: { xs: 0, lg: 12.5 }, mb: { xs: 4, md: 6, lg: 0 } }}
+            >
+              <BlockContent content={description} />
+            </Body>
+          </Grid>
+          <Grid item>
+            {/* <Box
             sx={{
               display: 'flex',
               height: '100%',
               flexDirection: 'column',
               justifyContent: 'flex-end',
             }}
-          >
-            <Grid container spacing={4}>
-              {links.map(({ buttonText, buttonHref, buttonTarget }) => (
-                <Grid item key={buttonText}>
-                  <LinkComponent
-                    sx={{ color: 'secondary.main' }}
-                    href={buttonHref}
-                    target={buttonTarget}
-                  >
-                    <Label size="xs">
-                      {buttonText}
-                      <SmallArrowIcon
-                        sx={{
-                          mb: 0.3,
-                          height: 7,
-                          width: 11,
-                          ml: 2,
-                          display: 'inline',
-                        }}
-                      />
-                    </Label>
-                  </LinkComponent>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
+          > */}
+            {links.map(({ buttonText, buttonHref, buttonTarget }) => (
+              <LinkComponent
+                sx={{ color: 'secondary.main' }}
+                href={buttonHref}
+                target={buttonTarget}
+              >
+                <Label size="xs" sx={{ lineHeight: ['30px'] }}>
+                  {buttonText}
+                  <SmallArrowIcon
+                    sx={{
+                      mb: 0.3,
+                      height: 7,
+                      width: 11,
+                      ml: 2,
+                      display: 'inline',
+                    }}
+                  />
+                </Label>
+              </LinkComponent>
+            ))}
+            {/* </Box> */}
+          </Grid>
         </Grid>
         <Grid
           item
           xs={12}
-          sm={12}
-          md={12}
-          lg={2}
+          lg={4}
           sx={theme => ({ minHeight: { xs: theme.spacing(61.2), lg: 'auto' } })}
         />
       </Grid>

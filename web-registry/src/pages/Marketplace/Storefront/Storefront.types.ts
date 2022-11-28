@@ -11,8 +11,8 @@ export type NormalizedSellOrder = {
   project?: {
     name?: string | null;
     id: string;
-    classIdName?: string | null;
-    classIdUrl?: string | null;
+    classIdOrName?: string | null;
+    classId?: string | null;
   };
   status?: SellOrderStatus;
   askAmount: string;

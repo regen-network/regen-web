@@ -18,12 +18,13 @@ import { CreditBatches } from 'components/organisms';
 import { AdditionalInfo } from '../CreditClassDetails.AdditionalInfo';
 import { MemoizedProjects as Projects } from '../CreditClassDetails.Projects';
 import { SideBarBox } from '../CreditClassDetails.SidebarBox';
+import { useCreditClassDisplayName } from './hooks/useCreditClassDisplayName';
 
 interface CreditDetailsProps {
   dbClass?: CreditClassByOnChainIdQuery['creditClassByOnChainId'];
   onChainClass: ClassInfo;
   issuers?: string[];
-  metadata?: CreditClassMetadataLD;
+  metadata?: Partial<CreditClassMetadataLD>;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -96,6 +97,7 @@ const CreditClassDetailsSimple: React.FC<
   React.PropsWithChildren<CreditDetailsProps>
 > = ({ dbClass, onChainClass, issuers, metadata }) => {
   const { classes: styles } = useStyles();
+  const displayName = useCreditClassDisplayName(onChainClass.id, metadata);
 
   return (
     <Box
@@ -116,15 +118,14 @@ const CreditClassDetailsSimple: React.FC<
           <Box
             sx={{
               mr: { xs: 0, md: 12 },
+              flex: 1,
             }}
           >
             <Box sx={{ mb: 6 }}>
               <Label size="sm" color="info.dark" mb={4}>
                 credit class
               </Label>
-              <Title variant="h1">
-                {metadata?.['schema:name']} ({onChainClass.id})
-              </Title>
+              <Title variant="h1">{displayName}</Title>
             </Box>
             {metadata?.['schema:description'] && (
               <ReadMore

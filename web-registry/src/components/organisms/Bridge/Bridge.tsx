@@ -20,6 +20,8 @@ import {
   BridgedEcocreditsTable,
 } from 'components/organisms';
 
+import { useActiveTab } from './hooks/useActiveTab';
+
 export const Bridge = ({
   privateAccess = false,
 }: {
@@ -42,7 +44,7 @@ export const Bridge = ({
       },
     ];
     if (privateAccess) {
-      tabs.push({
+      tabs.unshift({
         label: 'Bridgable ecocredits',
         content: <BridgableEcocreditsTable accountAddress={wallet?.address} />,
       });
@@ -50,6 +52,8 @@ export const Bridge = ({
     return tabs;
   }, [wallet?.address, privateAccess]);
 
+  const activeTab = useActiveTab(tabs);
+  console.log(activeTab);
   return (
     <Flex flexDirection="column" sx={{ width: '100%' }}>
       <Card sx={{ mb: 5 }}>
@@ -58,6 +62,7 @@ export const Bridge = ({
           size={'xl'}
           sxs={tabsStyles.tabsInsideCard}
           hideIndicator={!privateAccess}
+          activeTab={activeTab}
         />
       </Card>
       {card && (

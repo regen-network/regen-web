@@ -24,7 +24,13 @@ export default function UserInfoWithTitle({
       <Label size="xs" color="info.main" sx={{ mb: [4, 5.2] }}>
         {title}
       </Label>
-      <UserInfo user={user} size={size} border={border} icon={icon} />
+      <UserInfo
+        user={user}
+        size={size}
+        border={border}
+        icon={icon}
+        titleComponent="subtitle"
+      />
     </div>
   );
 }

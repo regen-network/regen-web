@@ -112,6 +112,7 @@ function ProjectDetails(): JSX.Element {
   const projectTableMetadata: ProjectMetadataLD = project?.metadata;
   const iriResolvedMetadata = useQueryMetadataGraph(onChainProject?.metadata);
   const metadata = iriResolvedMetadata ?? projectTableMetadata;
+
   const managementActions =
     metadata?.['regen:landManagementActions']?.['@list'];
 
@@ -221,6 +222,7 @@ function ProjectDetails(): JSX.Element {
 
       <ProjectTopSection
         data={data}
+        onChainProject={onChainProject}
         metadata={metadata}
         sanityCreditClassData={sanityCreditClassData}
         batchData={{
@@ -231,6 +233,7 @@ function ProjectDetails(): JSX.Element {
         geojson={geojson}
         isGISFile={isGISFile}
         projectId={projectId}
+        loading={isLoading}
       />
 
       {impactData?.length > 0 && (

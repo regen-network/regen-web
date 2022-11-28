@@ -70,11 +70,15 @@ const CustomBlockContent: React.FC<
           ...(Array.isArray(sx) ? sx : [sx]),
         ]}
       >
-        <BlockContent
-          className={className}
-          blocks={content}
-          serializers={serializers}
-        />
+        {typeof content === 'string' ? (
+          <div className={className}>{content}</div>
+        ) : (
+          <BlockContent
+            className={className}
+            blocks={content}
+            serializers={serializers}
+          />
+        )}
       </Box>
     );
   }

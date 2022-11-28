@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { MsgBuyDirect } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
 import { quantityFormatNumberOptions } from 'config/decimals';
-import { useTrack } from 'use-analytics';
 import { getDenomtrace } from 'utils/ibc/getDenomTrace';
 
 import { Item } from 'web-components/lib/components/modal/TxModal';
@@ -14,6 +14,8 @@ import { getJurisdictionIsoCode } from 'web-components/lib/utils/locationStandar
 
 import { UseStateSetter } from 'types/react/use-state';
 import { microToDenom } from 'lib/denom.utils';
+import { BuyFailureEvent, BuySuccessEvent } from 'lib/tracker/types';
+import { useTracker } from 'lib/tracker/useTracker';
 
 import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import DenomIcon from 'components/molecules/DenomIcon';
@@ -61,7 +63,8 @@ const useBuySellOrderSubmit = ({
   refetchSellOrders,
   onSubmitCallback,
 }: Props): ReturnType => {
-  const track = useTrack();
+  const { track } = useTracker();
+  const location = useLocation();
   const buySellOrderSubmit = useCallback(
     async (values: BuyCreditsValues): Promise<void> => {
       if (!accountAddress) return Promise.reject();
@@ -124,11 +127,30 @@ const useBuySellOrderSubmit = ({
         memo: retirementNote,
       };
 
-      const onError = (): void => {
-        track('buyFailure');
+      const onError = (err?: Error): void => {
+        track<'buyFailure', BuyFailureEvent>('buyFailure', {
+          url: location.pathname,
+          price: String(price),
+          batchDenom: batchDenom,
+          projectName: project?.name,
+          projectId: project?.id,
+          quantity: creditCount,
+          currencyDenom: askDenom,
+          retirementAction: retirementAction,
+          errorMessage: err?.message,
+        });
       };
       const onSuccess = (): void => {
-        track('buySuccess');
+        track<'buySuccess', BuySuccessEvent>('buySuccess', {
+          url: location.pathname,
+          price: String(price),
+          batchDenom: batchDenom,
+          projectName: project?.name,
+          projectId: project?.id,
+          quantity: creditCount,
+          currencyDenom: askDenom,
+          retirementAction: retirementAction,
+        });
       };
       const error = await signAndBroadcast(
         tx,
@@ -200,6 +222,7 @@ const useBuySellOrderSubmit = ({
       setTxModalTitle,
       setTxButtonTitle,
       buttonTitle,
+      location,
     ],
   );
 

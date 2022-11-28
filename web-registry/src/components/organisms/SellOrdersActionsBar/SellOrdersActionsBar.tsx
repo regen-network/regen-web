@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
-import { useAnalytics } from 'use-analytics';
+import { Buy1Event } from 'web-registry/src/lib/tracker/types';
+import { useTracker } from 'web-registry/src/lib/tracker/useTracker';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -35,7 +36,7 @@ export const SellOrdersActionsBar = ({
   creditClassName,
 }: Params): JSX.Element => {
   const location = useLocation();
-  const { track } = useAnalytics();
+  const { track } = useTracker();
   return (
     <StickyBar>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
@@ -63,16 +64,13 @@ export const SellOrdersActionsBar = ({
             <ContainedButton
               startIcon={<CurrentCreditsIcon height="18px" width="18px" />}
               onClick={() => {
-                // if any of the values used in event data are undefined,
-                // then they are not included in the tracking data.
-                // this is a feature of the track API.
-                track('buy1', {
+                track<'buy1', Buy1Event>('buy1', {
                   url: location.pathname,
                   buttonLocation: 'stickyNav',
                   projectName,
                   projectId: onChainProjectId,
-                  creditClassName,
                   creditClassId: onChainCreditClassId,
+                  creditClassName,
                 });
                 onBuyButtonClick();
               }}

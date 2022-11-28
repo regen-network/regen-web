@@ -105,3 +105,24 @@ export interface SendSuccessEvent extends SendOutcomeBaseEvent {}
 export interface SendFailureEvent extends SendOutcomeBaseEvent {
   errorMessage?: string;
 }
+
+interface RetireBaseEvent {
+  batchDenom: string;
+  creditClassId?: string;
+  projectId: string;
+  projectName?: string;
+}
+
+interface RetireBaseQuantityEvent extends RetireBaseEvent {
+  quantity: number;
+}
+
+export interface Retire1Event extends RetireBaseEvent {}
+
+export interface Retire2Event extends RetireBaseQuantityEvent {}
+
+export interface RetireSuccessEvent extends RetireBaseQuantityEvent {}
+
+export interface RetireFailureEvent extends RetireBaseQuantityEvent {
+  errorMessage: string | undefined;
+}

@@ -11,9 +11,9 @@ import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/Revi
 import { Photo } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.Photo';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
-import { UrlType } from 'web-components/lib/utils/schemaURL';
 
 import { qudtUnit, qudtUnitMap } from 'lib/rdf';
+import { UrlType } from 'lib/rdf/types';
 
 import { Link } from '../../components/atoms';
 import { ProjectPageFooter } from '../../components/molecules';

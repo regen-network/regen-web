@@ -1,10 +1,9 @@
+// TODO: type UrlType and getURLInitialValue
+// this has been temporarily duplicated due to moving the RDF types to the web-registry app
+
 export interface UrlType {
   '@type': 'schema:URL';
   '@value'?: string | null;
-}
-
-export interface UrlList {
-  '@list': Array<UrlType>;
 }
 
 export function getURLInitialValue(value?: UrlType): UrlType {
@@ -12,17 +11,6 @@ export function getURLInitialValue(value?: UrlType): UrlType {
     value || {
       '@type': 'schema:URL',
       '@value': null,
-    }
-  );
-}
-
-export function getURLListInitialValue(
-  arrSize: number,
-  value?: UrlList,
-): UrlList {
-  return (
-    value || {
-      '@list': Array(arrSize).fill(getURLInitialValue(undefined)),
     }
   );
 }

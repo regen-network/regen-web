@@ -1,5 +1,4 @@
-import { TypeValue } from 'web-components/lib/types/rdf';
-import { UrlType } from 'web-components/lib/utils/schemaURL';
+import { TypeValue, UrlType } from 'lib/rdf/types';
 
 import { ProjectMetadataLD } from '.';
 

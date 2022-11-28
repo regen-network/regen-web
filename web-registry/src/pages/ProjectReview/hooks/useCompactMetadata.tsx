@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { JsonLdDocument } from 'jsonld';
 
-import { ProjectMetadataIntersectionLD } from 'generated/json-ld';
+import { ProjectMetadataIntersectionLD } from 'lib/db/types/json-ld';
 import { jsonLdCompact } from 'lib/rdf';
 
 type Props = {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { ProjectMetadataLD } from '../generated/json-ld';
+import { ProjectMetadataLD } from 'lib/db/types/json-ld';
+
 import { getMetadata } from '../lib/metadata-graph';
 
 /**

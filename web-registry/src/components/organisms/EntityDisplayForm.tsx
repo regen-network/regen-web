@@ -21,12 +21,14 @@ import {
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
-import {
-  getURLInitialValue,
-  UrlType,
-} from 'web-components/lib/utils/schemaURL';
 
-import { getCompactedPath, getProjectPageBaseData, validate } from 'lib/rdf';
+import {
+  getCompactedPath,
+  getProjectPageBaseData,
+  getURLInitialValue,
+  validate,
+} from 'lib/rdf';
+import { UrlType } from 'lib/rdf/types';
 
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import getApiUri from '../../lib/apiUri';

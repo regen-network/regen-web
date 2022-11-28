@@ -25,7 +25,8 @@ import {
 import { AddCertificationModal } from 'web-components/lib/components/modal/AddCertificationModal';
 import { Body } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { NameUrl } from 'web-components/lib/types/rdf';
+
+import { NameUrl } from 'lib/rdf/types';
 
 import { MetadataJSONField } from '../../../../components/molecules';
 import useQueryProjectsByIssuer from '../../../../hooks/useQueryProjectsByIssuer';

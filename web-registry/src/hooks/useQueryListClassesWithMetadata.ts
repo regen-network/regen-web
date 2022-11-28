@@ -4,7 +4,7 @@ import {
   QueryClassesResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import { CreditClassMetadataLD } from 'generated/json-ld';
+import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 
 import { getMetadata } from '../lib/metadata-graph';
 import useQueryListClasses from './useQueryListClasses';

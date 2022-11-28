@@ -5,7 +5,8 @@ import { ExpandButton } from 'web-components/lib/components/buttons/ExpandButton
 import { Title } from 'web-components/lib/components/typography';
 import { formatDate } from 'web-components/lib/utils/format';
 
-import { ProjectMetadataIntersectionLD } from '../../../generated/json-ld';
+import { ProjectMetadataIntersectionLD } from 'lib/db/types/json-ld';
+
 import { ArrowLink } from '../../atoms/MetadataArrowLink';
 import { MetaDetail } from '../MetaDetail';
 

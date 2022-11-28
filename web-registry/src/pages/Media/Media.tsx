@@ -2,12 +2,12 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { Loading } from 'web-components/lib/components/loading';
+
 import {
+  getProjectShapeIri,
   getURLInitialValue,
   getURLListInitialValue,
-} from 'web-components/lib/utils/schemaURL';
-
-import { getProjectShapeIri } from 'lib/rdf';
+} from 'lib/rdf';
 
 import {
   isSimpleMediaFormValues,

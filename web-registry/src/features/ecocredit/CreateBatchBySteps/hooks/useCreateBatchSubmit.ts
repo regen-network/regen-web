@@ -3,10 +3,11 @@ import { DeliverTxResponse } from '@cosmjs/stargate';
 import { MsgCreateBatch } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 import { BatchIssuance } from '@regen-network/api/lib/generated/regen/ecocredit/v1/types';
 
-import type { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
-import { CFCBatchMetadataLD } from 'web-components/lib/types/rdf/C02-city-forest-credits-batch';
-
 import { useLedger } from 'ledger';
+import type {
+  CFCBatchMetadataLD,
+  VCSBatchMetadataLD,
+} from 'lib/db/types/json-ld';
 import { generateIri, IriFromMetadataSuccess } from 'lib/metadata-graph';
 
 import { useMsgClient } from 'hooks';

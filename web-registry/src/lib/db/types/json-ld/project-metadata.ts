@@ -1,5 +1,4 @@
-import { TypeValue } from 'web-components/lib/types/rdf';
-import { UrlList, UrlType } from 'web-components/lib/utils/schemaURL';
+import { TypeValue, UrlList, UrlType } from 'lib/rdf/types';
 
 export interface ProjectMetadataLD {
   '@context': Context;

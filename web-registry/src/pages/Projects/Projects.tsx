@@ -93,6 +93,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
             <ProjectCard
               id={project?.id}
               name={project?.name}
+              creditClassId={project?.creditClassId}
               imgSrc={project?.imgSrc}
               place={project?.place}
               area={project?.area}

@@ -21,6 +21,7 @@ export interface PortfolioProps {
   renderCreditActionButtons?: RenderActionButtonsFunc;
   renderBasketActionButtons?: RenderActionButtonsFunc;
   onTableChange?: UseStateSetter<TablePaginationParams>;
+  initialPaginationParams?: TablePaginationParams;
 }
 
 const sxs = {
@@ -36,6 +37,7 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
   renderCreditActionButtons,
   renderBasketActionButtons,
   onTableChange,
+  initialPaginationParams,
 }) => {
   return (
     <Box>
@@ -45,6 +47,7 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
           credits={credits}
           renderActionButtons={renderCreditActionButtons}
           onTableChange={onTableChange}
+          initialPaginationParams={initialPaginationParams}
         />
       </Box>
 

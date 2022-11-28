@@ -29,9 +29,7 @@ import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingM
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
-import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 import type { Theme } from 'web-components/lib/theme/muiTheme';
-import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/ActionsTable.constants';
 
 import { getHashUrl } from 'lib/block-explorer';
 import { Retire1Event, Sell1Event, Send1Event } from 'lib/tracker/types';
@@ -44,7 +42,6 @@ import { Portfolio } from 'components/organisms/Portfolio';
 import {
   useBasketsWithClasses,
   useBasketTokens,
-  useEcocredits,
   useMsgClient,
   useQueryBaskets,
 } from 'hooks';
@@ -56,6 +53,7 @@ import useBasketTakeSubmit from './hooks/useBasketTakeSubmit';
 import useCreateSellOrderSubmit from './hooks/useCreateSellOrderSubmit';
 import useCreditRetireSubmit from './hooks/useCreditRetireSubmit';
 import useCreditSendSubmit from './hooks/useCreditSendSubmit';
+import { useFetchEcocredits } from './hooks/useFetchEcocredits';
 import useOpenTakeModal from './hooks/useOpenTakeModal';
 import { useUpdateCardItemsTakeBasket } from './hooks/useUpdateCardItemsTakeBasket';
 import useUpdateCreditBaskets from './hooks/useUpdateCreditBaskets';
@@ -100,13 +98,6 @@ export const MyEcocredits = (): JSX.Element => {
 
   const navigate = useNavigate();
   const { track } = useTracker();
-
-  const [paginationParams, setPaginationParams] =
-    useState<TablePaginationParams>({
-      page: 0,
-      rowsPerPage: DEFAULT_ROWS_PER_PAGE,
-      offset: 0,
-    });
 
   const handleTxQueued = (): void => {
     setIsProcessingModalOpen(true);
@@ -162,10 +153,13 @@ export const MyEcocredits = (): JSX.Element => {
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
   const accountAddress = wallet?.address;
-  const { credits, reloadBalances, isLoadingCredits } = useEcocredits({
-    address: accountAddress,
+  const {
+    credits,
+    reloadBalances,
+    isLoadingCredits,
     paginationParams,
-  });
+    setPaginationParams,
+  } = useFetchEcocredits();
 
   const allowedDenomsResponse = useMarketplaceQuery<QueryAllowedDenomsResponse>(
     {
@@ -185,7 +179,7 @@ export const MyEcocredits = (): JSX.Element => {
   );
 
   useUpdateTxModalTitle({ setTxModalTitle, deliverTxResponse });
-  useUpdateCreditBaskets({ basketsWithClasses, credits, setCreditBaskets });
+  // useUpdateCreditBaskets({ basketsWithClasses, credits, setCreditBaskets });
 
   const openTakeModal = useOpenTakeModal({
     basketTokens,
@@ -270,6 +264,7 @@ export const MyEcocredits = (): JSX.Element => {
           credits={credits}
           basketTokens={basketTokens}
           onTableChange={setPaginationParams}
+          initialPaginationParams={paginationParams}
           renderCreditActionButtons={
             credits.findIndex(c => Number(c.balance?.tradableAmount) > 0) > -1
               ? (i: number) => {

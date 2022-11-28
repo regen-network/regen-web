@@ -33,11 +33,17 @@ type EcocreditsTableProps = {
   credits?: BatchInfoWithBalance[];
   renderActionButtons?: RenderActionButtonsFunc;
   onTableChange?: UseStateSetter<TablePaginationParams>;
+  initialPaginationParams?: TablePaginationParams;
 };
 
 export const EcocreditsTable: React.FC<
   React.PropsWithChildren<EcocreditsTableProps>
-> = ({ credits, renderActionButtons, onTableChange }) => {
+> = ({
+  credits,
+  renderActionButtons,
+  onTableChange,
+  initialPaginationParams,
+}) => {
   if (!credits?.length) {
     return <NoCredits title="No ecocredits to display" />;
   }
@@ -47,6 +53,7 @@ export const EcocreditsTable: React.FC<
       tableLabel="ecocredits table"
       renderActionButtons={renderActionButtons}
       onTableChange={onTableChange}
+      initialPaginationParams={initialPaginationParams}
       /* eslint-disable react/jsx-key */
       headerRows={[
         <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>{'Project'}</Box>,
@@ -90,8 +97,12 @@ export const EcocreditsTable: React.FC<
               {row?.projectName}
             </Link>
           </WithLoader>,
-          <Link href={`/credit-batches/${row.denom}`}>{row.denom}</Link>,
-          <AccountLink address={row.issuer} />,
+          <WithLoader isLoading={!row.denom} variant="skeleton">
+            <Link href={`/credit-batches/${row.denom}`}>{row.denom}</Link>
+          </WithLoader>,
+          <WithLoader isLoading={!row.denom} variant="skeleton">
+            <AccountLink address={row.issuer} />
+          </WithLoader>,
           <WithLoader isLoading={!row.classId} variant="skeleton">
             <Link
               key="class_id"

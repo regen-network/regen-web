@@ -6,7 +6,8 @@ import {
   QueryProjectsResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
-import { useAnalytics } from 'use-analytics';
+import { Buy1Event } from 'web-registry/src/lib/tracker/types';
+import { useTracker } from 'web-registry/src/lib/tracker/useTracker';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -153,7 +154,7 @@ export const Storefront = (): JSX.Element => {
   const isBuyModalOpen = selectedSellOrder !== null && selectedAction === 'buy';
   const navigate = useNavigate();
   const location = useLocation();
-  const { track } = useAnalytics();
+  const { track } = useTracker();
   const isCancelModalOpen =
     selectedSellOrder !== null && selectedAction === 'cancel';
   useResetErrorBanner({ displayErrorBanner, setDisplayErrorBanner });
@@ -351,11 +352,13 @@ export const Storefront = (): JSX.Element => {
                         }
                         size="small"
                         onClick={async () => {
-                          track('buy1', {
+                          track<'buy1', Buy1Event>('buy1', {
                             url: location.pathname,
                             buttonLocation: 'sellOrderTable',
                             projectName: normalizedSellOrders[i].project?.name,
                             projectId: normalizedSellOrders[i].project?.id,
+                            creditClassId:
+                              normalizedSellOrders[i].project?.classId,
                           });
                           if (accountAddress) {
                             selectedSellOrderIdRef.current = Number(

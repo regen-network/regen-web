@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
 import { Box } from '@mui/material';
 import { MsgSell } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
-import { useTrack } from 'use-analytics';
 import { getDenomtrace } from 'utils/ibc/getDenomTrace';
 
 import { FormValues as CreateSellOrderFormValues } from 'web-components/lib/components/form/CreateSellOrderForm';
@@ -11,6 +10,8 @@ import { getFormattedNumber } from 'web-components/lib/utils/format';
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { denomToMicro } from 'lib/denom.utils';
+import { SellFailureEvent, SellSuccessEvent } from 'lib/tracker/types';
+import { useTracker } from 'lib/tracker/useTracker';
 
 import DenomIcon from 'components/molecules/DenomIcon';
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
@@ -41,7 +42,7 @@ const useCreateSellOrderSubmit = ({
   setTxButtonTitle,
   onTxBroadcast,
 }: Props): ReturnType => {
-  const track = useTrack();
+  const { track } = useTracker();
   const createSellOrderSubmit = useCallback(
     async (values: CreateSellOrderFormValues): Promise<void> => {
       if (!accountAddress) return Promise.reject();
@@ -67,11 +68,34 @@ const useCreateSellOrderSubmit = ({
         memo: undefined,
       };
 
-      const onError = (): void => {
-        track('sellFailure');
+      const onError = (err?: Error): void => {
+        const batchInfo = credits?.find(batch => batch.denom === batchDenom);
+        track<'sellFailure', SellFailureEvent>('sellFailure', {
+          batchDenom,
+          projectId: batchInfo?.projectId,
+          projectName: !!batchInfo?.projectName
+            ? batchInfo.projectName
+            : undefined,
+          creditClassId: batchInfo?.projectId.split('-')[0],
+          price,
+          enableAutoRetire,
+          currencyDenom: askDenom,
+          errorMessage: err?.message,
+        });
       };
       const onSuccess = (): void => {
-        track('sellSuccess');
+        const batchInfo = credits?.find(batch => batch.denom === batchDenom);
+        track<'sellSuccess', SellSuccessEvent>('sellSuccess', {
+          batchDenom,
+          projectId: batchInfo?.projectId,
+          projectName: !!batchInfo?.projectName
+            ? batchInfo.projectName
+            : undefined,
+          creditClassId: batchInfo?.projectId.split('-')[0],
+          price,
+          enableAutoRetire,
+          currencyDenom: askDenom,
+        });
       };
       signAndBroadcast(tx, onTxBroadcast, { onError, onSuccess });
 

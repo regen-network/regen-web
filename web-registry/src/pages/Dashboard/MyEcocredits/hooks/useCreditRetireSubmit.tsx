@@ -6,6 +6,12 @@ import type { Item } from 'web-components/lib/components/modal/TxModal';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import type { UseStateSetter } from 'types/react/use-state';
+import {
+  Retire2Event,
+  RetireFailureEvent,
+  RetireSuccessEvent,
+} from 'lib/tracker/types';
+import { useTracker } from 'lib/tracker/useTracker';
 
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
@@ -36,10 +42,19 @@ const useCreditRetireSubmit = ({
   setTxModalHeader,
   setTxModalTitle,
 }: Props): ReturnType => {
+  const { track } = useTracker();
   const creditRetireSubmit = useCallback(
     async (values: CreditRetireFormValues): Promise<void> => {
-      if (!accountAddress) return Promise.reject();
       const batchDenom = credits[creditRetireOpen].denom;
+      track<'retire2', Retire2Event>('retire2', {
+        batchDenom,
+        creditClassId: credits[creditRetireOpen].classId,
+        projectId: credits[creditRetireOpen].projectId,
+        projectName: credits[creditRetireOpen].projectName,
+        quantity: values.retiredAmount,
+      });
+
+      if (!accountAddress) return Promise.reject();
       const amount = values.retiredAmount.toString();
       const msg = MsgRetire.fromPartial({
         owner: accountAddress,
@@ -58,7 +73,29 @@ const useCreditRetireSubmit = ({
         memo: values?.note,
       };
 
-      await signAndBroadcast(tx, () => setCreditRetireOpen(-1));
+      const onError = (err?: Error): void => {
+        track<'retireFailure', RetireFailureEvent>('retireFailure', {
+          batchDenom,
+          creditClassId: credits[creditRetireOpen].classId,
+          projectId: credits[creditRetireOpen].projectId,
+          projectName: credits[creditRetireOpen].projectName,
+          quantity: values.retiredAmount,
+          errorMessage: err?.message,
+        });
+      };
+      const onSuccess = (): void => {
+        track<'retireSuccess', RetireSuccessEvent>('retireSuccess', {
+          batchDenom,
+          creditClassId: credits[creditRetireOpen].classId,
+          projectId: credits[creditRetireOpen].projectId,
+          projectName: credits[creditRetireOpen].projectName,
+          quantity: values.retiredAmount,
+        });
+      };
+      await signAndBroadcast(tx, () => setCreditRetireOpen(-1), {
+        onError,
+        onSuccess,
+      });
       if (batchDenom && amount) {
         setCardItems([
           {
@@ -93,6 +130,7 @@ const useCreditRetireSubmit = ({
       setTxModalHeader,
       setTxModalTitle,
       signAndBroadcast,
+      track,
     ],
   );
 

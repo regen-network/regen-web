@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import { getMetadata } from 'lib/metadata-graph';
+import { getMetadata } from 'lib/db/api/metadata-graph';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';

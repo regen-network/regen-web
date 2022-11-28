@@ -4,11 +4,11 @@ import { MsgCreateBatch } from '@regen-network/api/lib/generated/regen/ecocredit
 import { BatchIssuance } from '@regen-network/api/lib/generated/regen/ecocredit/v1/types';
 
 import { useLedger } from 'ledger';
+import { generateIri, IriFromMetadataSuccess } from 'lib/db/api/metadata-graph';
 import type {
   CFCBatchMetadataLD,
   VCSBatchMetadataLD,
 } from 'lib/db/types/json-ld';
-import { generateIri, IriFromMetadataSuccess } from 'lib/metadata-graph';
 
 import { useMsgClient } from 'hooks';
 

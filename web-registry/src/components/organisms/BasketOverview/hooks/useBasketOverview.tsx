@@ -8,11 +8,12 @@ import { QueryClassResponse } from '@regen-network/api/lib/generated/regen/ecocr
 
 import { formatDuration } from 'web-components/lib/utils/format';
 
+import { getMetadata } from 'lib/db/api/metadata-graph';
+
 import { BasketOverviewProps } from '../../../../components/organisms';
 import useBankQuery from '../../../../hooks/useBankQuery';
 import useBasketQuery from '../../../../hooks/useBasketQuery';
 import useQueryListClassInfo from '../../../../hooks/useQueryListClassInfo';
-import { getMetadata } from '../../../../lib/metadata-graph';
 
 type BasketClassInfo = {
   id: string;

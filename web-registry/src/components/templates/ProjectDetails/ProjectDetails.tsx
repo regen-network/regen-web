@@ -207,6 +207,7 @@ function ProjectDetails(): JSX.Element {
         }
         onChainProjectId={onChainProjectId}
         projectName={metadata?.['schema:name']}
+        onChainCreditClassId={onChainProject?.classId}
       />
 
       <ProjectTopSection

@@ -2,7 +2,6 @@ import React from 'react';
 import { Box } from '@mui/system';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 import { makeStyles } from 'tss-react/mui';
-import { useTrack } from 'use-analytics';
 
 import { Theme } from '../../theme/muiTheme';
 import { Flex } from '../box';
@@ -83,7 +82,6 @@ const CreditSendForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   onSubmit,
 }) => {
   const { classes: styles } = useStyles();
-  const track = useTrack();
 
   const initialValues = {
     sender,
@@ -129,7 +127,6 @@ const CreditSendForm: React.FC<React.PropsWithChildren<FormProps>> = ({
       initialValues={initialValues}
       validate={validateHandler}
       onSubmit={async values => {
-        track('send2'); //TODO: move to onSubmit, regen-network/regen-registry#1365
         onSubmit(values);
       }}
     >

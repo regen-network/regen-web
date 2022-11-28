@@ -81,7 +81,7 @@ export const GettingStartedResourcesCard = ({
           >
             <Grid container spacing={4}>
               {links.map(({ buttonText, buttonHref, buttonTarget }) => (
-                <Grid item xs={6} key={buttonText}>
+                <Grid item key={buttonText}>
                   <LinkComponent
                     sx={{ color: 'secondary.main' }}
                     href={buttonHref}

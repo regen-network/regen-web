@@ -2,7 +2,8 @@ import React from 'react';
 import { useMediaQuery, useTheme } from '@mui/material';
 
 import { GettingStartedResourcesCard } from 'web-components/lib/components/cards/GettingStartedResourcesCard';
-import { SliderSection } from 'web-components/lib/components/section/SliderSection';
+import Section from 'web-components/lib/components/section';
+import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { getLinkTarget } from 'web-components/lib/utils/linkTarget';
 
@@ -21,31 +22,37 @@ const GettingStartedResourcesSection: React.FC<
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <SliderSection
+    <Section
+      visibleOverflow
       title={section.header || 'Resources for Getting Started'}
-      // titleAlign={isMobile ? 'left' : 'center'}
-      slidesToShow={2}
-      items={
-        section.resourcesCards?.map((item, i) => (
-          <GettingStartedResourcesCard
-            // className={styles.card}
-            key={i}
-            header={item?.header || ''}
-            description={item?.descriptionRaw || ''}
-            imageUrl={getSanityImgSrc(item?.image)}
-            mobileImageUrl={getSanityImgSrc(item?.mobileImage)}
-            links={
-              item?.links?.map(link => ({
-                buttonText: link?.buttonText || '',
-                buttonHref: getBtnHref(link),
-                buttonTarget: getLinkTarget(link?.buttonBlankTarget),
-              })) || []
-            }
-            linkComponent={Link}
-          />
-        )) || []
-      }
-    />
+    >
+      <ResponsiveSlider
+        visibleOverflow
+        itemWidth="80%"
+        infinite={false}
+        slidesToShow={isMobile ? 1 : 2}
+        items={
+          section.resourcesCards?.map((item, i) => (
+            <GettingStartedResourcesCard
+              // className={styles.card}
+              key={i}
+              header={item?.header || ''}
+              description={item?.descriptionRaw || ''}
+              imageUrl={getSanityImgSrc(item?.image)}
+              mobileImageUrl={getSanityImgSrc(item?.mobileImage)}
+              links={
+                item?.links?.map(link => ({
+                  buttonText: link?.buttonText || '',
+                  buttonHref: getBtnHref(link),
+                  buttonTarget: getLinkTarget(link?.buttonBlankTarget),
+                })) || []
+              }
+              linkComponent={Link}
+            />
+          )) || []
+        }
+      />
+    </Section>
   );
 };
 

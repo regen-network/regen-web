@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Box, SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
-import { useAnalytics } from 'use-analytics';
+import { Buy1Event } from 'web-registry/src/lib/tracker/types';
+import { useTracker } from 'web-registry/src/lib/tracker/useTracker';
 
 import { formatStandardInfo } from '../../../utils/format';
 import OutlinedButton from '../../buttons/OutlinedButton';
@@ -21,6 +22,7 @@ import { getAbbreviation } from './ProjectCard.utils';
 export interface ProjectCardProps extends MediaCardProps {
   id?: string;
   name: string;
+  creditClassId?: string;
   imgSrc: string;
   place: string;
   area: number;
@@ -41,6 +43,7 @@ export interface ProjectCardProps extends MediaCardProps {
 export function ProjectCard({
   id,
   name,
+  creditClassId,
   imgSrc,
   place,
   area,
@@ -61,7 +64,7 @@ export function ProjectCard({
   const theme = useTheme();
   const { classes } = useProjectCardStyles();
   const location = useLocation();
-  const { track } = useAnalytics();
+  const { track } = useTracker();
 
   const [open, setOpen] = useState<boolean>(true);
 
@@ -230,12 +233,13 @@ export function ProjectCard({
                   <OutlinedButton
                     onClick={event => {
                       event.stopPropagation();
-                      track('buy1', {
+                      track<'buy1', Buy1Event>('buy1', {
                         url: location.pathname,
                         cardType: 'project',
                         buttonLocation: 'projectCard',
                         projectName: name,
                         projectId: id,
+                        creditClassId,
                       });
                       onButtonClick && onButtonClick();
                     }}

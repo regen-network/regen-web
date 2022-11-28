@@ -3,7 +3,6 @@ import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 import { loaderStyles } from 'styles/loader';
 import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
-import { useTrack } from 'use-analytics';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -22,6 +21,7 @@ import {
 import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/ActionsTable.constants';
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
+import { useTracker } from 'lib/tracker/useTracker';
 
 import { BridgeFlow } from 'features/marketplace/BridgeFlow/BridgeFlow';
 import {
@@ -49,7 +49,7 @@ interface Props {
 export const BridgableEcocreditsTable = ({
   accountAddress,
 }: Props): JSX.Element => {
-  const track = useTrack();
+  const { track } = useTracker();
 
   const [batchToBridge, setBatchToBridge] = useState<
     BatchInfoWithBalance | undefined
@@ -95,7 +95,7 @@ export const BridgableEcocreditsTable = ({
               size="small"
               onClick={async () => {
                 setBatchToBridge(bridgableCredits[i]);
-                track('bridge1');
+                track<'bridge1'>('bridge1');
               }}
             >
               {BRIDGE_ACTION}

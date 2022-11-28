@@ -53,7 +53,7 @@ export const Bridge = ({
   }, [wallet?.address, privateAccess]);
 
   const activeTab = useActiveTab(tabs);
-  console.log(activeTab);
+
   return (
     <Flex flexDirection="column" sx={{ width: '100%' }}>
       <Card sx={{ mb: 5 }}>

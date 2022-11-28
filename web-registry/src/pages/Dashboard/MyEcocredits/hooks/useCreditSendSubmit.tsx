@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
 import { MsgSend } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
-import { useTrack } from 'use-analytics';
 
 import type { FormValues as CreditSendFormValues } from 'web-components/lib/components/form/CreditSendForm';
 import type { Item } from 'web-components/lib/components/modal/TxModal';
@@ -8,6 +7,12 @@ import type { Item } from 'web-components/lib/components/modal/TxModal';
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import type { UseStateSetter } from 'types/react/use-state';
 import { getAccountUrl } from 'lib/block-explorer';
+import {
+  Send2Event,
+  SendFailureEvent,
+  SendSuccessEvent,
+} from 'lib/tracker/types';
+import { useTracker } from 'lib/tracker/useTracker';
 
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
@@ -38,11 +43,20 @@ const useCreditSendSubmit = ({
   setTxModalHeader,
   setTxModalTitle,
 }: Props): ReturnType => {
-  const track = useTrack();
+  const { track } = useTracker();
   const creditSendSubmit = useCallback(
     async (values: CreditSendFormValues): Promise<void> => {
-      if (!accountAddress) return Promise.reject();
       const batchDenom = credits[creditSendOpen].denom;
+      track<'send2', Send2Event>('send2', {
+        batchDenom,
+        quantity: values.totalAmount,
+        enableAutoRetire: values.withRetire,
+        creditClassId: credits[creditSendOpen].classId,
+        projectId: credits[creditSendOpen].projectId,
+        projectName: credits[creditSendOpen].projectName,
+      });
+      if (!accountAddress) return Promise.reject();
+
       const {
         withRetire,
         recipient,
@@ -69,11 +83,31 @@ const useCreditSendSubmit = ({
         memo: note,
       };
 
-      const onError = (): void => {
-        track('sendFailure');
+      const batchInfo = credits[creditSendOpen];
+      const onError = (err?: Error): void => {
+        track<'sendFailure', SendFailureEvent>('sendFailure', {
+          batchDenom,
+          projectId: batchInfo?.projectId,
+          projectName: !!batchInfo?.projectName
+            ? batchInfo.projectName
+            : undefined,
+          creditClassId: batchInfo?.projectId.split('-')[0],
+          enableAutoRetire: withRetire,
+          quantity: totalAmount,
+          errorMessage: err?.message,
+        });
       };
       const onSuccess = (): void => {
-        track('sendSuccess');
+        track<'sendSuccess', SendSuccessEvent>('sendSuccess', {
+          batchDenom,
+          projectId: batchInfo?.projectId,
+          projectName: !!batchInfo?.projectName
+            ? batchInfo.projectName
+            : undefined,
+          creditClassId: batchInfo?.projectId.split('-')[0],
+          enableAutoRetire: withRetire,
+          quantity: totalAmount,
+        });
       };
       await signAndBroadcast(tx, () => setCreditSendOpen(-1), {
         onError,

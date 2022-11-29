@@ -115,7 +115,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
       <BuySellOrderFlow
         isFlowStarted={isBuyFlowStarted}
         setIsFlowStarted={setIsBuyFlowStarted}
-        selectedProject={selectedProject}
+        projects={selectedProject && [selectedProject]}
       />
     </Flex>
   );

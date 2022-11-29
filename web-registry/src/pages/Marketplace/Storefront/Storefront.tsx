@@ -387,20 +387,20 @@ export const Storefront = (): JSX.Element => {
         open={isBuyModalOpen}
         onClose={() => setSelectedSellOrder(null)}
         onSubmit={buySellOrderSubmit}
+        sellOrders={[
+          {
+            id: orderId,
+            askAmount,
+            askDenom,
+            askBaseDenom,
+            batchDenom,
+            seller,
+            quantity: amountAvailable,
+            disableAutoRetire,
+          },
+        ]}
         project={{
           id: project?.id ?? '',
-          sellOrders: [
-            {
-              id: orderId,
-              askAmount,
-              askDenom,
-              askBaseDenom,
-              batchDenom,
-              seller,
-              quantity: amountAvailable,
-              disableAutoRetire,
-            },
-          ],
         }}
         initialValues={initialValues}
       />

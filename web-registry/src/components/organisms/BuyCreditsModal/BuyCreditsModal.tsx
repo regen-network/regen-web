@@ -72,7 +72,9 @@ interface BuyCreditsModalProps extends RegenModalProps {
   onTxQueued?: (txBytes: Uint8Array) => void;
   onSubmit?: (values: BuyCreditsValues) => Promise<void>;
   initialValues?: BuyCreditsValues;
-  project: BuyCreditsProject;
+  sellOrders?: UISellOrderInfo[];
+  project?: BuyCreditsProject;
+  setSelectedProjectById?: (projectId: string) => void;
   apiServerUrl?: string;
   imageStorageBaseUrl?: string;
 }
@@ -106,7 +108,9 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
     onSubmit,
     onClose,
     initialValues,
-    project,
+    sellOrders, // corresponding to one or more projects
+    project, // is just suplemmentary data. If several projects involved, then is selected when sell order is selected
+    setSelectedProjectById, // if several projects involved, handler to select the project when sell order is selected
     apiServerUrl,
     imageStorageBaseUrl,
   }) => {
@@ -139,8 +143,9 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
       });
 
     const sellOrdersOptions = getOptions({
-      project,
+      sellOrders,
       allowedDenomsData: allowedDenomsResponse?.data,
+      setSelectedProjectById,
     });
 
     const isDisableAutoRetire = selectedSellOrder?.disableAutoRetire;
@@ -160,7 +165,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
           >
             {'Buy Ecocredits'}
           </Title>
-          {project.name && (
+          {project?.name && (
             <Card className={cx(classes.thumbnailCard, classes.field)}>
               <CardContent className={classes.cardContent}>
                 <Image
@@ -194,6 +199,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
             initialValues={initialValues || BUY_CREDITS_MODAL_DEFAULT_VALUES}
             validate={validationHandler}
             onSubmit={async (values, { setSubmitting }) => {
+              if (!project) return;
               setSubmitting(true);
               track<'buy2', Buy2Event>('buy2', {
                 url: location.pathname,
@@ -245,7 +251,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                       native={false}
                     />
                     <SetSelectedSellOrderElement
-                      project={project}
+                      sellOrders={sellOrders}
                       selectedSellOrder={selectedSellOrder}
                       setSelectedSellOrder={setSelectedSellOrder}
                     />

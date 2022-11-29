@@ -29,7 +29,7 @@ export function MoreProjects(): JSX.Element {
       <BuySellOrderFlow
         isFlowStarted={isBuyFlowStarted}
         setIsFlowStarted={setIsBuyFlowStarted}
-        selectedProject={selectedProject}
+        projects={selectedProject && [selectedProject]}
       />
     </Box>
   );

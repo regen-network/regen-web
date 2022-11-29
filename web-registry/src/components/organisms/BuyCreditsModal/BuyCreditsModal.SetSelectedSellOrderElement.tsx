@@ -5,36 +5,36 @@ import { UseStateSetter } from 'types/react/use-state';
 
 import { UISellOrderInfo } from 'pages/Projects/Projects.types';
 
-import { BuyCreditsProject, BuyCreditsValues } from './BuyCreditsModal';
+import { BuyCreditsValues } from './BuyCreditsModal';
 
 type Props = {
-  project: BuyCreditsProject;
+  sellOrders: UISellOrderInfo[] | undefined;
   selectedSellOrder: UISellOrderInfo | undefined;
   setSelectedSellOrder: UseStateSetter<UISellOrderInfo | undefined>;
 };
 export const SetSelectedSellOrderElement = ({
-  project,
+  sellOrders,
   selectedSellOrder,
   setSelectedSellOrder,
 }: Props): JSX.Element => {
   const { values, setFieldValue } = useFormikContext<BuyCreditsValues>();
 
   useEffect(() => {
-    if (!selectedSellOrder && project.sellOrders?.length === 1) {
-      setSelectedSellOrder(project?.sellOrders?.[0]);
+    if (!selectedSellOrder && sellOrders?.length === 1) {
+      setSelectedSellOrder(sellOrders?.[0]);
     }
-  }, [project, selectedSellOrder, setSelectedSellOrder]);
+  }, [sellOrders, selectedSellOrder, setSelectedSellOrder]);
 
   useEffect(() => {
     if (values.sellOrderId && selectedSellOrder?.id !== values.sellOrderId) {
-      const _selectedSellOrder = project?.sellOrders?.find(
+      const _selectedSellOrder = sellOrders?.find(
         sellOrder => sellOrder.id === values?.sellOrderId,
       );
 
       setSelectedSellOrder(_selectedSellOrder);
     }
   }, [
-    project,
+    sellOrders,
     setFieldValue,
     values.retirementAction,
     values.sellOrderId,

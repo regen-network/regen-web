@@ -25,7 +25,7 @@ export const normalizeProjectsInfosByHandleMap = ({
 }: NormalizeprojectsInfosByHandleMapProps) => {
   const projectsMap = new Map<
     string,
-    { name: string; classIdName: string; classIdUrl: string }
+    { name: string; classIdOrName: string; classId: string }
   >();
 
   offChainProjects?.nodes?.forEach(project => {
@@ -42,8 +42,8 @@ export const normalizeProjectsInfosByHandleMap = ({
 
       projectsMap.set(project?.handle, {
         name: project?.handle,
-        classIdName: creditClassSanity?.nameRaw ?? '',
-        classIdUrl: isVCSProject
+        classIdOrName: creditClassSanity?.nameRaw ?? '',
+        classId: isVCSProject
           ? creditClass?.onChainId
           : creditClassVersion?.metadata?.['http://schema.org/url']?.['@value'],
       });
@@ -58,8 +58,8 @@ export const normalizeProjectsInfosByHandleMap = ({
 
     projectsMap.set(project?.id, {
       name: project.metadata?.['schema:name'] || project.id,
-      classIdName: creditClassSanity?.nameRaw ?? project?.classId,
-      classIdUrl: project?.classId,
+      classIdOrName: creditClassSanity?.nameRaw ?? project?.classId,
+      classId: project?.classId,
     });
   });
 
@@ -73,7 +73,7 @@ type NormalizedSellOrderProps = {
   batchInfos: BatchInfo[];
   projectsInfosByHandleMap: Map<
     string,
-    { name: string; classIdName: string; classIdUrl: string }
+    { name: string; classIdOrName: string; classId: string }
   >;
   projectsWithMetadataMap: Map<string, ProjectInfoWithMetadata>;
 };
@@ -113,12 +113,12 @@ export const normalizeSellOrders = ({
             ? undefined
             : projectsInfosByHandleMap.get(projectId)?.name ?? null,
           id: projectId,
-          classIdName: isLoading
+          classIdOrName: isLoading
             ? undefined
-            : projectsInfosByHandleMap.get(projectId)?.classIdName ?? null,
-          classIdUrl: isLoading
+            : projectsInfosByHandleMap.get(projectId)?.classIdOrName ?? null,
+          classId: isLoading
             ? undefined
-            : projectsInfosByHandleMap.get(projectId)?.classIdUrl ?? null,
+            : projectsInfosByHandleMap.get(projectId)?.classId ?? null,
         },
         status: 'Partially filled',
         askAmount,

@@ -14,7 +14,7 @@ interface TxData {
 }
 
 interface OptionalCallbacks {
-  onError?: () => void;
+  onError?: (err?: Error) => void;
   onSuccess?: () => void;
 }
 
@@ -113,7 +113,7 @@ export default function useMsgClient(
         handleError();
         assertIsError(err);
         setError(err.message);
-        if (onError) onError();
+        if (onError) onError(err);
         setGlobalStore({ isWaitingForSigning: false });
         return err.message;
       }

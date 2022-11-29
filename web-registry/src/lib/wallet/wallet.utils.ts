@@ -3,6 +3,7 @@ import WalletConnect from '@walletconnect/client';
 import truncate from 'lodash/truncate';
 
 import { UseStateSetter } from 'types/react/use-state';
+import { LoginEvent, Track } from 'lib/tracker/types';
 
 import { chainInfo } from './chainInfo/chainInfo';
 import { Wallet } from './wallet';
@@ -53,12 +54,14 @@ type FinalizeConnectionParams = {
   walletClient?: WalletClient;
   walletConfig?: WalletConfig;
   setWallet: UseStateSetter<Wallet>;
+  track?: Track;
 };
 
 export const finalizeConnection = async ({
   walletClient,
   walletConfig,
   setWallet,
+  track,
 }: FinalizeConnectionParams): Promise<void> => {
   let offlineSigner;
 
@@ -82,6 +85,12 @@ export const finalizeConnection = async ({
       address: key.bech32Address,
       shortAddress: truncate(key.bech32Address),
     };
+    if (track) {
+      track<'login', LoginEvent>('login', {
+        date: new Date().toUTCString(),
+        account: wallet.address,
+      });
+    }
     setWallet(wallet);
   }
 };

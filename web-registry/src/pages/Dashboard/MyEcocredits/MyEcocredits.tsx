@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { SxProps, useTheme } from '@mui/material';
 import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
-import { useTrack } from 'use-analytics';
 
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
@@ -35,6 +34,8 @@ import type { Theme } from 'web-components/lib/theme/muiTheme';
 import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/ActionsTable.constants';
 
 import { getHashUrl } from 'lib/block-explorer';
+import { Retire1Event, Sell1Event, Send1Event } from 'lib/tracker/types';
+import { useTracker } from 'lib/tracker/useTracker';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
 import { Link } from 'components/atoms';
@@ -98,7 +99,7 @@ export const MyEcocredits = (): JSX.Element => {
   const [txButtonTitle, setTxButtonTitle] = useState<string | undefined>();
 
   const navigate = useNavigate();
-  const track = useTrack();
+  const { track } = useTracker();
 
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
@@ -289,7 +290,11 @@ export const MyEcocredits = (): JSX.Element => {
                       icon: <AvailableCreditsIconAlt sx={sxs.arrow} />,
                       label: CREATE_SELL_ORDER_SHORT,
                       onClick: () => {
-                        track('sell1');
+                        track<'sell1', Sell1Event>('sell1', {
+                          projectId: credits[i].projectId,
+                          projectName: credits[i]?.projectName,
+                          creditClassId: credits[i]?.classId,
+                        });
                         setSellOrderCreateOpen(i);
                       },
                     },
@@ -303,7 +308,12 @@ export const MyEcocredits = (): JSX.Element => {
                       ),
                       label: CREDIT_SEND_TITLE,
                       onClick: () => {
-                        track('send1');
+                        track<'send1', Send1Event>('send1', {
+                          batchDenom: credits[i].denom,
+                          projectId: credits[i].projectId,
+                          projectName: credits[i]?.projectName,
+                          creditClassId: credits[i]?.classId,
+                        });
                         setCreditSendOpen(i);
                       },
                     },
@@ -316,7 +326,15 @@ export const MyEcocredits = (): JSX.Element => {
                         />
                       ),
                       label: CREDIT_RETIRE_TITLE,
-                      onClick: () => setCreditRetireOpen(i),
+                      onClick: () => {
+                        track<'retire1', Retire1Event>('retire1', {
+                          batchDenom: credits[i].denom,
+                          projectId: credits[i].projectId,
+                          projectName: credits[i]?.projectName,
+                          creditClassId: credits[i]?.classId,
+                        });
+                        setCreditRetireOpen(i);
+                      },
                     },
                   ];
 

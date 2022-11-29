@@ -16,6 +16,12 @@ type Props = {
   onQrCloseCallbackRef: MutableRefObject<(() => void) | undefined>;
   walletConfigRef: MutableRefObject<WalletConfig | undefined>;
   setWallet: UseStateSetter<Wallet>;
+  track?: (
+    eventName: string,
+    payload?: any,
+    options?: any,
+    callback?: (...params: any[]) => any,
+  ) => Promise<any>;
 };
 
 export type ConnectWalletType = ({
@@ -30,6 +36,7 @@ export const useConnectWallet = ({
   walletConfigRef,
   setWallet,
   setWalletConnect,
+  track,
 }: Props): ConnectWalletType => {
   const connectWallet = useCallback(
     async ({ walletType }: ConnectWalletParams): Promise<void> => {
@@ -70,7 +77,12 @@ export const useConnectWallet = ({
       }
 
       if ((isWalletConnectKeplr && walletConnect?.connected) || isKeplr) {
-        await finalizeConnection({ setWallet, walletClient, walletConfig });
+        await finalizeConnection({
+          setWallet,
+          walletClient,
+          walletConfig,
+          track,
+        });
       }
     },
     [
@@ -79,6 +91,7 @@ export const useConnectWallet = ({
       setWalletConnect,
       setWalletConnectUri,
       walletConfigRef,
+      track,
     ],
   );
 

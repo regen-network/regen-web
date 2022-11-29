@@ -264,7 +264,11 @@ function ProjectDetails(): JSX.Element {
       <BuySellOrderFlow
         isFlowStarted={isBuyFlowStarted}
         setIsFlowStarted={setIsBuyFlowStarted}
-        projects={projectsWithOrderData && [projectsWithOrderData[0]]}
+        projects={
+          projectsWithOrderData?.length > 0
+            ? [projectsWithOrderData[0]]
+            : undefined
+        }
       />
       <CreateSellOrderFlow
         isFlowStarted={isSellFlowStarted}

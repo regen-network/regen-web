@@ -11,7 +11,7 @@ const BlockContentBody = ({ body }: Props): JSX.Element => (
   <Body
     size="xl"
     textAlign="center"
-    sx={{ margin: '0 auto', maxWidth: 800, pb: { xs: 12.5, sm: 12.5 } }}
+    sx={{ margin: '0 auto', maxWidth: 800, pb: { xs: 7.5, sm: 12.5 } }}
   >
     <BlockContent content={body} />
   </Body>

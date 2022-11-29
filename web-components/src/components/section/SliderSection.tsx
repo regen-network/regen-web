@@ -51,7 +51,6 @@ function SliderSection({
   items,
   title,
   slidesToShow,
-  // titleAlign = 'left',
   classes,
 }: SliderSectionProps): JSX.Element {
   const { classes: styles, cx } = useStyles();

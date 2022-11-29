@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SxProps, useTheme } from '@mui/material';
-import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
@@ -54,9 +53,9 @@ import useCreateSellOrderSubmit from './hooks/useCreateSellOrderSubmit';
 import useCreditRetireSubmit from './hooks/useCreditRetireSubmit';
 import useCreditSendSubmit from './hooks/useCreditSendSubmit';
 import { useFetchEcocredits } from './hooks/useFetchEcocredits';
+import useGetCreditBaskets from './hooks/useGetCreditBaskets';
 import useOpenTakeModal from './hooks/useOpenTakeModal';
 import { useUpdateCardItemsTakeBasket } from './hooks/useUpdateCardItemsTakeBasket';
-import useUpdateCreditBaskets from './hooks/useUpdateCreditBaskets';
 import { useUpdateTxModalTitle } from './hooks/useUpdateTxModalTitle';
 import {
   CREATE_SELL_ORDER_BUTTON,
@@ -86,9 +85,6 @@ export const MyEcocredits = (): JSX.Element => {
   const [sellOrderCreateOpen, setSellOrderCreateOpen] = useState<number>(-1);
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [cardItems, setCardItems] = useState<Item[] | undefined>();
-  const [creditBaskets, setCreditBaskets] = useState<
-    (QueryBasketResponse | undefined)[][]
-  >([]);
   const [basketTakeTokens, setBasketTakeTokens] = useState<
     BasketTokens | undefined
   >();
@@ -177,9 +173,9 @@ export const MyEcocredits = (): JSX.Element => {
     accountAddress,
     baskets,
   );
+  const creditBaskets = useGetCreditBaskets({ basketsWithClasses, credits });
 
   useUpdateTxModalTitle({ setTxModalTitle, deliverTxResponse });
-  // useUpdateCreditBaskets({ basketsWithClasses, credits, setCreditBaskets });
 
   const openTakeModal = useOpenTakeModal({
     basketTokens,

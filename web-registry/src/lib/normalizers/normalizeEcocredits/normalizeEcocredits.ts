@@ -15,10 +15,10 @@ import {
 
 interface Params {
   balance: BatchBalanceInfo;
-  project?: ProjectInfo;
-  metadata?: any;
+  project?: ProjectInfo | null;
+  metadata?: any | null;
   sanityCreditClassData?: AllCreditClassQuery;
-  batch?: BatchInfo;
+  batch?: BatchInfo | null;
 }
 
 export const normalizeEcocredits = ({
@@ -29,7 +29,10 @@ export const normalizeEcocredits = ({
   sanityCreditClassData,
 }: Params): BatchInfoWithBalance => {
   const hasAllClassInfos =
-    !!batch && !!sanityCreditClassData && !!metadata && !!project;
+    batch !== null &&
+    metadata !== null &&
+    project !== null &&
+    !!sanityCreditClassData;
 
   const classProjectInfo = hasAllClassInfos
     ? normalizeClassProjectForBatch({

@@ -54,14 +54,14 @@ export const useFetchEcocredits = (): Response => {
       }),
     [ecocreditClient, page, rowsPerPage, wallet?.address],
   );
-  const { data: balancesData, isFetching: isLoadingCredits } =
+  const { data: balancesData, isLoading: isLoadingCredits } =
     useQuery(balancesQuery);
   const balances = balancesData?.balances ?? [];
   const balancesPagination = balancesData?.pagination;
   const allBalancesCount = Number(balancesPagination?.total ?? 0);
 
   // Batches
-  const batchesData = useQueries({
+  const batchesResult = useQueries({
     queries: balances.map(balance =>
       getBatchQuery({
         client: ecocreditClient,
@@ -69,23 +69,35 @@ export const useFetchEcocredits = (): Response => {
       }),
     ),
   });
-  const batches = batchesData?.map(batchData => batchData.data) ?? [];
+  const batches = batchesResult?.map(batchResult => batchResult.data) ?? [];
+  const isBatchesLoading = batchesResult.some(
+    batchResult => batchResult.isLoading,
+  );
 
   // Projects
-  const projectsData = useQueries({
+  const projectsResults = useQueries({
     queries: batches.map(batch =>
       getProjectQuery({ request: { projectId: batch?.batch?.projectId } }),
     ),
   });
-  const projects = projectsData.map(projectData => projectData.data);
+  const projects = projectsResults.map(projectResult => projectResult.data);
+  const isProjectsLoading = projectsResults.some(
+    projectResult => projectResult.isLoading,
+  );
 
   // Metadatas
-  const metadatasData = useQueries({
+  const metadatasResults = useQueries({
     queries: projects.map(project =>
       getMetadataQuery({ iri: project?.project?.metadata }),
     ),
   });
-  const metadatas = metadatasData.map(metadataData => metadataData.data);
+
+  const metadatas = metadatasResults.map(metadataResult => {
+    return metadataResult.data;
+  });
+  const isMetadatasLoading = metadatasResults.some(
+    metadataResult => metadataResult.isLoading,
+  );
 
   // AllCreditClasses
   const { data: creditClassData } = useQuery(
@@ -93,18 +105,14 @@ export const useFetchEcocredits = (): Response => {
   );
 
   // Normalization
-  const credits = useMemo(
-    () =>
-      balances.map((balance, index) =>
-        normalizeEcocredits({
-          balance,
-          batch: batches[index]?.batch,
-          metadata: metadatas[index],
-          project: projects[index]?.project,
-          sanityCreditClassData: creditClassData,
-        }),
-      ),
-    [balances, batches, creditClassData, metadatas, projects],
+  const credits = balances.map((balance, index) =>
+    normalizeEcocredits({
+      balance,
+      batch: isBatchesLoading ? null : batches[index]?.batch,
+      metadata: isMetadatasLoading ? null : metadatas[index],
+      project: isProjectsLoading ? null : projects[index]?.project,
+      sanityCreditClassData: creditClassData,
+    }),
   );
 
   const paginationParamsWithCount = useMemo(

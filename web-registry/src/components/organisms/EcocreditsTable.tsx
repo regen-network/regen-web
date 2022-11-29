@@ -34,6 +34,7 @@ type EcocreditsTableProps = {
   renderActionButtons?: RenderActionButtonsFunc;
   onTableChange?: UseStateSetter<TablePaginationParams>;
   initialPaginationParams?: TablePaginationParams;
+  isRoutePagination?: boolean;
 };
 
 export const EcocreditsTable: React.FC<
@@ -43,6 +44,7 @@ export const EcocreditsTable: React.FC<
   renderActionButtons,
   onTableChange,
   initialPaginationParams,
+  isRoutePagination = false,
 }) => {
   if (!credits?.length) {
     return <NoCredits title="No ecocredits to display" />;
@@ -54,6 +56,7 @@ export const EcocreditsTable: React.FC<
       renderActionButtons={renderActionButtons}
       onTableChange={onTableChange}
       initialPaginationParams={initialPaginationParams}
+      isRoutePagination
       /* eslint-disable react/jsx-key */
       headerRows={[
         <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>{'Project'}</Box>,
@@ -89,7 +92,7 @@ export const EcocreditsTable: React.FC<
       ]}
       rows={credits.map((row, i) => {
         return [
-          <WithLoader isLoading={!row.projectName} variant="skeleton">
+          <WithLoader isLoading={row.projectName === ''} variant="skeleton">
             <Link
               href={`/projects/${row?.projectId}`}
               sx={tableStyles.ellipsisColumn}
@@ -103,7 +106,7 @@ export const EcocreditsTable: React.FC<
           <WithLoader isLoading={!row.denom} variant="skeleton">
             <AccountLink address={row.issuer} />
           </WithLoader>,
-          <WithLoader isLoading={!row.classId} variant="skeleton">
+          <WithLoader isLoading={row.classId === ''} variant="skeleton">
             <Link
               key="class_id"
               href={`/credit-classes/${row.classId}`}
@@ -126,7 +129,7 @@ export const EcocreditsTable: React.FC<
           }),
           <GreyText>{formatDate(row.startDate)}</GreyText>,
           <GreyText>{formatDate(row.endDate)}</GreyText>,
-          <WithLoader isLoading={!row.projectLocation} variant="skeleton">
+          <WithLoader isLoading={row.projectLocation === ''} variant="skeleton">
             <Box>{row.projectLocation}</Box>
           </WithLoader>,
         ];

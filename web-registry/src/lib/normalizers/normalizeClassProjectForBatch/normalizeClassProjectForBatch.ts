@@ -9,10 +9,10 @@ import { ClassProjectInfo } from 'types/ledger/ecocredit';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 interface Params {
-  project: ProjectInfo;
+  project?: ProjectInfo;
   metadata: any;
   sanityCreditClassData?: AllCreditClassQuery;
-  batch: BatchInfo;
+  batch?: BatchInfo;
 }
 
 export const normalizeClassProjectForBatch = ({
@@ -29,7 +29,7 @@ export const normalizeClassProjectForBatch = ({
   return {
     classId: project?.classId,
     className: creditClassSanity?.nameRaw,
-    projectName: metadata?.['schema:name'] ?? batch.projectId,
+    projectName: metadata?.['schema:name'] ?? batch?.projectId,
     projectLocation: project?.jurisdiction,
   };
 };

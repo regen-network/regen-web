@@ -181,7 +181,9 @@ export interface TakeFromBasket1 extends TakeBaseEvent {}
 
 export interface TakeFromBasket2 extends TakeBaseQuantityEvent {}
 
-export interface TakeFromBasketSuccess extends TakeBaseQuantityEvent {}
+export interface TakeFromBasketSuccess extends TakeBaseQuantityEvent {
+  batchDenoms: string[] | undefined;
+}
 
 export interface TakeFromBasketFailure extends TakeBaseQuantityEvent {
   errorMessage: string | undefined;

@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { DeliverTxResponse } from '@cosmjs/stargate';
 import { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { MsgTake } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
 
@@ -6,6 +7,7 @@ import type { MsgTakeValues } from 'web-components/lib/components/form/BasketTak
 import type { Item } from 'web-components/lib/components/modal/TxModal';
 
 import type { UseStateSetter } from 'types/react/use-state';
+import { takeEventToBatches } from 'lib/takeEventToBatches';
 import {
   TakeFromBasket2,
   TakeFromBasketFailure,
@@ -82,13 +84,15 @@ const useBasketTakeSubmit = ({
           },
         );
       };
-      const onSuccess = (): void => {
+      const onSuccess = (deliverTxResponse?: DeliverTxResponse): void => {
+        const batchesFromTake = takeEventToBatches(deliverTxResponse!);
         track<'takeFromBasketSuccess', TakeFromBasketSuccess>(
           'takeFromBasketSuccess',
           {
             basketName: basket?.name,
             quantity: amount,
             retireOnTake: values.retireOnTake,
+            batchDenoms: batchesFromTake?.map(value => value.name),
           },
         );
       };

@@ -9,7 +9,7 @@ type Props = {
 
 type ReturnType = (QueryBasketResponse | undefined)[][];
 
-const useGetCreditBaskets = ({
+const useNormalizeCreditBaskets = ({
   basketsWithClasses,
   credits,
 }: Props): ReturnType => {
@@ -25,4 +25,4 @@ const useGetCreditBaskets = ({
   return [];
 };
 
-export default useGetCreditBaskets;
+export default useNormalizeCreditBaskets;

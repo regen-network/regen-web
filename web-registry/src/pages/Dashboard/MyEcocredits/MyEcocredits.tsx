@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SxProps, useTheme } from '@mui/material';
-import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+import { useQuery } from '@tanstack/react-query';
 
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
@@ -30,7 +30,9 @@ import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
 import type { Theme } from 'web-components/lib/theme/muiTheme';
 
+import { useLedger } from 'ledger';
 import { getHashUrl } from 'lib/block-explorer';
+import { getAllowedDenomQuery } from 'lib/queries/react-query/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import { Retire1Event, Sell1Event, Send1Event } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
@@ -45,7 +47,6 @@ import {
   useQueryBaskets,
 } from 'hooks';
 import type { BasketTokens } from 'hooks/useBasketTokens';
-import useMarketplaceQuery from 'hooks/useMarketplaceQuery';
 
 import useBasketPutSubmit from './hooks/useBasketPutSubmit';
 import useBasketTakeSubmit from './hooks/useBasketTakeSubmit';
@@ -53,7 +54,7 @@ import useCreateSellOrderSubmit from './hooks/useCreateSellOrderSubmit';
 import useCreditRetireSubmit from './hooks/useCreditRetireSubmit';
 import useCreditSendSubmit from './hooks/useCreditSendSubmit';
 import { useFetchEcocredits } from './hooks/useFetchEcocredits';
-import useGetCreditBaskets from './hooks/useGetCreditBaskets';
+import useNormalizeCreditBaskets from './hooks/useNormalizeCreditBaskets';
 import useOpenTakeModal from './hooks/useOpenTakeModal';
 import { useUpdateCardItemsTakeBasket } from './hooks/useUpdateCardItemsTakeBasket';
 import { useUpdateTxModalTitle } from './hooks/useUpdateTxModalTitle';
@@ -94,6 +95,7 @@ export const MyEcocredits = (): JSX.Element => {
 
   const navigate = useNavigate();
   const { track } = useTracker();
+  const { marketplaceClient } = useLedger();
 
   const handleTxQueued = (): void => {
     setIsProcessingModalOpen(true);
@@ -145,9 +147,9 @@ export const MyEcocredits = (): JSX.Element => {
   });
 
   const theme = useTheme();
-  const baskets = useQueryBaskets();
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
+  const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN || '';
   const accountAddress = wallet?.address;
   const {
     credits,
@@ -157,23 +159,27 @@ export const MyEcocredits = (): JSX.Element => {
     setPaginationParams,
   } = useFetchEcocredits();
 
-  const allowedDenomsResponse = useMarketplaceQuery<QueryAllowedDenomsResponse>(
-    {
-      query: 'allowedDenoms',
-      params: {},
-    },
+  const { data: allowedDenomsData } = useQuery(
+    getAllowedDenomQuery({
+      client: marketplaceClient,
+      enabled: !!marketplaceClient,
+    }),
   );
+
   const allowedDenomOptions = getDenomAllowedOptions({
-    allowedDenoms: allowedDenomsResponse?.data?.allowedDenoms,
+    allowedDenoms: allowedDenomsData?.allowedDenoms,
   });
 
+  const baskets = useQueryBaskets();
   const basketsWithClasses = useBasketsWithClasses(baskets);
-  const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN || '';
   const { basketTokens, fetchBasketTokens } = useBasketTokens(
     accountAddress,
     baskets,
   );
-  const creditBaskets = useGetCreditBaskets({ basketsWithClasses, credits });
+  const creditBaskets = useNormalizeCreditBaskets({
+    basketsWithClasses,
+    credits,
+  });
 
   useUpdateTxModalTitle({ setTxModalTitle, deliverTxResponse });
 

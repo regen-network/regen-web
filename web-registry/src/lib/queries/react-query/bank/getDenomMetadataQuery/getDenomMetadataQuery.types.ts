@@ -8,8 +8,9 @@ import { QueryObserverOptions } from '@tanstack/react-query';
 
 import { ReactQueryBuilderResponse } from '../../types/react-query.types';
 
-export type ReactQueryDenomMetadataResponse =
-  QueryObserverOptions<QueryDenomMetadataResponse | void>;
+export type ReactQueryDenomMetadataResponse = QueryObserverOptions<
+  QueryDenomMetadataResponse | undefined
+>;
 
 export type ReactQueryDenomMetadataProps = {
   request: DeepPartial<QueryDenomMetadataRequest>;

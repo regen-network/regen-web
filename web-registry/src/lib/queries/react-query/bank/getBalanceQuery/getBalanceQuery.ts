@@ -10,7 +10,7 @@ export const getBalanceQuery = ({
 }: ReactQueryBalanceProps): ReactQueryBalanceResponse => ({
   queryKey: ['balance'],
   queryFn: async () => {
-    if (!client) return;
+    if (!client) return undefined;
     return await client.Balance(request);
   },
   ...params,

@@ -8,8 +8,9 @@ import { QueryObserverOptions } from '@tanstack/react-query';
 
 import { ReactQueryBuilderResponse } from '../../types/react-query.types';
 
-export type ReactQueryBalanceResponse =
-  QueryObserverOptions<QueryBalanceResponse | void>;
+export type ReactQueryBalanceResponse = QueryObserverOptions<
+  QueryBalanceResponse | undefined
+>;
 
 export type ReactQueryBalanceProps = {
   request: DeepPartial<QueryBalanceRequest>;

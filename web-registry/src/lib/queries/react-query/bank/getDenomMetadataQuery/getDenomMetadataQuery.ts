@@ -3,14 +3,14 @@ import {
   ReactQueryDenomMetadataResponse,
 } from './getDenomMetadataQuery.types';
 
-export const getBalanceQuery = ({
+export const getDenomMetadataQuery = ({
   client,
   request,
   ...params
 }: ReactQueryDenomMetadataProps): ReactQueryDenomMetadataResponse => ({
   queryKey: ['denomMetadata'],
   queryFn: async () => {
-    if (!client) return;
+    if (!client) return undefined;
     return await client.DenomMetadata(request);
   },
   ...params,

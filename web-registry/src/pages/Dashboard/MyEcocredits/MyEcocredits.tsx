@@ -40,12 +40,7 @@ import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { Portfolio } from 'components/organisms/Portfolio';
-import {
-  useBasketsWithClasses,
-  useBasketTokens,
-  useMsgClient,
-  useQueryBaskets,
-} from 'hooks';
+import { useMsgClient } from 'hooks';
 import type { BasketTokens } from 'hooks/useBasketTokens';
 
 import useBasketPutSubmit from './hooks/useBasketPutSubmit';
@@ -53,6 +48,7 @@ import useBasketTakeSubmit from './hooks/useBasketTakeSubmit';
 import useCreateSellOrderSubmit from './hooks/useCreateSellOrderSubmit';
 import useCreditRetireSubmit from './hooks/useCreditRetireSubmit';
 import useCreditSendSubmit from './hooks/useCreditSendSubmit';
+import { useFetchBaskets } from './hooks/useFetchBaskets';
 import { useFetchEcocredits } from './hooks/useFetchEcocredits';
 import useNormalizeCreditBaskets from './hooks/useNormalizeCreditBaskets';
 import useOpenTakeModal from './hooks/useOpenTakeModal';
@@ -125,7 +121,7 @@ export const MyEcocredits = (): JSX.Element => {
   const handleTxDelivered = (): void => {
     setIsProcessingModalOpen(false);
     // Refetch basket/ecocredits data so it shows latest values
-    fetchBasketTokens();
+    reloadBasketsBalance();
     reloadBalances();
   };
 
@@ -170,12 +166,9 @@ export const MyEcocredits = (): JSX.Element => {
     allowedDenoms: allowedDenomsData?.allowedDenoms,
   });
 
-  const baskets = useQueryBaskets();
-  const basketsWithClasses = useBasketsWithClasses(baskets);
-  const { basketTokens, fetchBasketTokens } = useBasketTokens(
-    accountAddress,
-    baskets,
-  );
+  const { basketTokens, baskets, basketsWithClasses, reloadBasketsBalance } =
+    useFetchBaskets();
+
   const creditBaskets = useNormalizeCreditBaskets({
     basketsWithClasses,
     credits,

@@ -3,16 +3,16 @@ import type { QueryBasketResponse } from '@regen-network/api/lib/generated/regen
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 
 type Props = {
-  basketsWithClasses: (QueryBasketResponse | undefined)[];
+  basketsWithClasses?: (QueryBasketResponse | undefined)[];
   credits: BatchInfoWithBalance[];
 };
 
-type ReturnType = (QueryBasketResponse | undefined)[][];
+type Response = (QueryBasketResponse | undefined)[][];
 
 const useNormalizeCreditBaskets = ({
   basketsWithClasses,
   credits,
-}: Props): ReturnType => {
+}: Props): Response => {
   // Get available baskets to put credits into
   if (credits && basketsWithClasses && basketsWithClasses.length > 0) {
     return credits.map(credit =>

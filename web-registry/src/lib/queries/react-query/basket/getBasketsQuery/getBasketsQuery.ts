@@ -10,7 +10,7 @@ export const getBasketsQuery = ({
 }: ReactQueryBasketsProps): ReactQueryBasketsResponse => ({
   queryKey: ['baskets'],
   queryFn: async () => {
-    if (!client) return;
+    if (!client) return undefined;
     return await client.Baskets(request);
   },
   ...params,

@@ -1,3 +1,4 @@
+import { BANK_BALANCE_KEY } from './getBalanceQuery.constants';
 import {
   ReactQueryBalanceProps,
   ReactQueryBalanceResponse,
@@ -8,7 +9,7 @@ export const getBalanceQuery = ({
   request,
   ...params
 }: ReactQueryBalanceProps): ReactQueryBalanceResponse => ({
-  queryKey: ['balance'],
+  queryKey: [BANK_BALANCE_KEY, request.address, request.denom],
   queryFn: async () => {
     if (!client) return undefined;
     return await client.Balance(request);

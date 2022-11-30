@@ -135,6 +135,7 @@ interface BridgeBaseEvent {
 
 interface BridgeBaseQuantityEvent extends BridgeBaseEvent {
   quantity: number | undefined;
+  recipient: string;
 }
 
 export interface Bridge1Event extends BridgeBaseEvent {}

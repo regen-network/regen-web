@@ -57,6 +57,7 @@ const useCreditBridgeSubmit = ({
         quantity: values.amount,
         creditClassId: creditBridgeBatch?.classId,
         projectId: creditBridgeBatch?.projectId,
+        recipient: values.recipient,
       });
 
       if (!accountAddress) return Promise.reject();
@@ -86,6 +87,7 @@ const useCreditBridgeSubmit = ({
           creditClassId: creditBridgeBatch?.classId,
           projectId: creditBridgeBatch?.projectId,
           errorMessage: err?.message,
+          recipient: values.recipient,
         });
       };
 
@@ -119,6 +121,7 @@ const useCreditBridgeSubmit = ({
           quantity: values.amount,
           creditClassId: creditBridgeBatch?.classId,
           projectId: creditBridgeBatch?.projectId,
+          recipient: values.recipient,
         });
       };
 

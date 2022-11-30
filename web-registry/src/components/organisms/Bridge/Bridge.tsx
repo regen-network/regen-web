@@ -29,7 +29,7 @@ export const Bridge = ({
 }): JSX.Element => {
   const { wallet } = useLedger();
   const { data } = useAllBridgePageQuery({ client });
-  const card = data?.allBridgePage?.[0].gettingStartedResourcesCard;
+  const card = data?.allBridgePage?.[0]?.gettingStartedResourcesCard;
 
   const tabs: IconTabProps[] = useMemo(() => {
     const tabs = [

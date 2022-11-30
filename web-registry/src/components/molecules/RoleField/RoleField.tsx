@@ -4,21 +4,25 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { FieldProps, FormikErrors, FormikProps } from 'formik';
 import { makeStyles } from 'tss-react/mui';
 
-import { getURLInitialValue } from '../../utils/schemaURL';
-import OutlinedButton from '../buttons/OutlinedButton';
-import OrganizationIcon from '../icons/OrganizationIcon';
-import UserIcon from '../icons/UserIcon';
+import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import OrganizationIcon from 'web-components/lib/components/icons/OrganizationIcon';
+import UserIcon from 'web-components/lib/components/icons/UserIcon';
+import FieldFormControl from 'web-components/lib/components/inputs/FieldFormControl';
 import {
   IndividualFormValues,
   IndividualModal,
-} from '../modal/IndividualModal';
+} from 'web-components/lib/components/modal/IndividualModal';
 import {
   OrganizationFormValues,
   OrganizationModal,
-} from '../modal/OrganizationModal';
-import { ProfileFormValues, ProfileModal } from '../modal/ProfileModal';
-import { Label } from '../typography';
-import FieldFormControl from './FieldFormControl';
+} from 'web-components/lib/components/modal/OrganizationModal';
+import {
+  ProfileFormValues,
+  ProfileModal,
+} from 'web-components/lib/components/modal/ProfileModal';
+import { Label } from 'web-components/lib/components/typography';
+
+import { getURLInitialValue } from 'lib/rdf';
 
 const useStyles = makeStyles()(theme => ({
   root: {

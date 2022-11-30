@@ -1,6 +1,7 @@
 import { Flex } from 'web-components/lib/components/box';
 import { Body } from 'web-components/lib/components/typography';
-import { CreditBatchMetadataIntersectionLD } from 'web-components/lib/types/rdf/credit-batch-intersection-ld';
+
+import { CreditBatchMetadataIntersectionLD } from 'lib/db/types/json-ld';
 
 import { LinkOrDash } from './BatchMetadata.LinkOrDash';
 import { MetaDetail } from './BatchMetadata.MetaDetail';

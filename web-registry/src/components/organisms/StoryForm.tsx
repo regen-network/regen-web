@@ -10,12 +10,9 @@ import Modal from 'web-components/lib/components/modal';
 import { Body, Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
+import { getCompactedPath, getProjectPageBaseData, validate } from 'lib/rdf';
+
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
-import {
-  getCompactedPath,
-  getProjectPageBaseData,
-  validate,
-} from '../../lib/rdf';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../molecules';
 

@@ -1,11 +1,4 @@
-export interface UrlType {
-  '@type': 'schema:URL';
-  '@value'?: string | null;
-}
-
-export interface UrlList {
-  '@list': Array<UrlType>;
-}
+import { UrlList, UrlType } from './types';
 
 export function getURLInitialValue(value?: UrlType): UrlType {
   return (

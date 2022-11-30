@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { isIndividual } from 'web-components/lib/components/inputs/RoleField';
+import { isIndividual } from 'components/molecules/RoleField/RoleField';
 
 import {
   DisplayValues,

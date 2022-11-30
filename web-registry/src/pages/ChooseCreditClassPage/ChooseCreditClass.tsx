@@ -2,13 +2,14 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Grid } from '@mui/material';
 
+import { getProjectPageBaseData, validate } from 'lib/rdf';
+
 import { useCreateProjectContext } from 'pages/ProjectCreate';
 
 import {
   useShaclGraphByUriQuery,
   useUpdateProjectByIdMutation,
 } from '../../generated/graphql';
-import { getProjectPageBaseData, validate } from '../../lib/rdf';
 import { ChooseCreditClassGrid } from './ChooseCreditClass.Grid';
 import { ChooseCreditClassItem } from './ChooseCreditClass.Item';
 import { useErrorTimeout } from './hooks/useErrorTimeout';

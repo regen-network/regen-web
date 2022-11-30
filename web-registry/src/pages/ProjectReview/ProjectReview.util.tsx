@@ -6,13 +6,12 @@ import {
   getIsoSubdivision,
 } from 'web-components/lib/utils/locationStandard';
 
-import { isCFCCreditClass, isVCSCreditClass } from 'lib/ecocredit/api';
-
 import {
   CFCProjectMetadataLD,
   ProjectMetadataIntersectionLD,
   VCSProjectMetadataLD,
-} from '../../generated/json-ld';
+} from 'lib/db/types/json-ld';
+import { isCFCCreditClass, isVCSCreditClass } from 'lib/ecocredit/api';
 
 const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN;
 

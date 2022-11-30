@@ -10,7 +10,6 @@ import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import OrganizationIcon from 'web-components/lib/components/icons/OrganizationIcon';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import { ImageUpload } from 'web-components/lib/components/inputs/ImageUpload';
-import { isIndividual } from 'web-components/lib/components/inputs/RoleField';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 import Modal from 'web-components/lib/components/modal';
@@ -21,18 +20,19 @@ import {
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
-import {
-  getURLInitialValue,
-  UrlType,
-} from 'web-components/lib/utils/schemaURL';
 
-import { useShaclGraphByUriQuery } from '../../generated/graphql';
-import getApiUri from '../../lib/apiUri';
 import {
   getCompactedPath,
   getProjectPageBaseData,
+  getURLInitialValue,
   validate,
-} from '../../lib/rdf';
+} from 'lib/rdf';
+import { UrlType } from 'lib/rdf/types';
+
+import { isIndividual } from 'components/molecules/RoleField/RoleField';
+
+import { useShaclGraphByUriQuery } from '../../generated/graphql';
+import getApiUri from '../../lib/apiUri';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../molecules';
 

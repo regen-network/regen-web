@@ -1,23 +1,17 @@
 import React from 'react';
 import { Field, Form, Formik } from 'formik';
+import { TextField } from 'formik-mui';
 import { AnyObjectSchema, object, string } from 'yup';
 
-import OnBoardingCard from '../cards/OnBoardingCard';
-import TextField from '../inputs/TextField';
-import { invalidURL, requiredMessage } from '../inputs/validation';
-import { RegenModalProps } from '../modal';
-import Submit from './Submit';
+import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
+import Submit from 'web-components/lib/components/form/Submit';
+import {
+  invalidURL,
+  requiredMessage,
+} from 'web-components/lib/components/inputs/validation';
+import { RegenModalProps } from 'web-components/lib/components/modal';
 
-// TODO: types URL and NameUrl
-// this has been temporarily duplicated due to moving the RDF types to the web-registry app
-interface URL {
-  '@type': 'http://schema.org/URL' | 'schema:URL';
-  '@value': string;
-}
-interface NameUrl {
-  'schema:name': string;
-  'schema:url': URL;
-}
+import { NameUrl } from 'lib/rdf/types';
 
 export interface CertificationProps {
   onSubmit: (values: NameUrl) => void;

@@ -50,7 +50,6 @@ import useCreditRetireSubmit from './hooks/useCreditRetireSubmit';
 import useCreditSendSubmit from './hooks/useCreditSendSubmit';
 import { useFetchBaskets } from './hooks/useFetchBaskets';
 import { useFetchEcocredits } from './hooks/useFetchEcocredits';
-import useNormalizeCreditBaskets from './hooks/useNormalizeCreditBaskets';
 import useOpenTakeModal from './hooks/useOpenTakeModal';
 import { useUpdateCardItemsTakeBasket } from './hooks/useUpdateCardItemsTakeBasket';
 import { useUpdateTxModalTitle } from './hooks/useUpdateTxModalTitle';
@@ -155,6 +154,14 @@ export const MyEcocredits = (): JSX.Element => {
     setPaginationParams,
   } = useFetchEcocredits();
 
+  const {
+    basketTokens,
+    baskets,
+    basketsWithClasses,
+    creditBaskets,
+    reloadBasketsBalance,
+  } = useFetchBaskets({ credits });
+
   const { data: allowedDenomsData } = useQuery(
     getAllowedDenomQuery({
       client: marketplaceClient,
@@ -164,14 +171,6 @@ export const MyEcocredits = (): JSX.Element => {
 
   const allowedDenomOptions = getDenomAllowedOptions({
     allowedDenoms: allowedDenomsData?.allowedDenoms,
-  });
-
-  const { basketTokens, baskets, basketsWithClasses, reloadBasketsBalance } =
-    useFetchBaskets();
-
-  const creditBaskets = useNormalizeCreditBaskets({
-    basketsWithClasses,
-    credits,
   });
 
   useUpdateTxModalTitle({ setTxModalTitle, deliverTxResponse });

@@ -9,7 +9,7 @@ type Props = {
 
 type Response = (QueryBasketResponse | undefined)[][];
 
-const useNormalizeCreditBaskets = ({
+const normalizeCreditBaskets = ({
   basketsWithClasses,
   credits,
 }: Props): Response => {
@@ -25,4 +25,4 @@ const useNormalizeCreditBaskets = ({
   return [];
 };
 
-export default useNormalizeCreditBaskets;
+export default normalizeCreditBaskets;

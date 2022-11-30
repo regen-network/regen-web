@@ -5,7 +5,9 @@ import {
 } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 
+import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { useLedger } from 'ledger';
+import normalizeCreditBaskets from 'lib/normalizers/normalizeCreditBaskets/normalizeCreditBaskets';
 import { getBalanceQuery } from 'lib/queries/react-query/bank/getBalanceQuery/getBalanceQuery';
 import { BANK_BALANCE_KEY } from 'lib/queries/react-query/bank/getBalanceQuery/getBalanceQuery.constants';
 import { getDenomMetadataQuery } from 'lib/queries/react-query/bank/getDenomMetadataQuery/getDenomMetadataQuery';
@@ -15,14 +17,19 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { BasketTokens } from 'hooks/useBasketTokens';
 
+interface Params {
+  credits: BatchInfoWithBalance[];
+}
+
 interface Response {
   baskets?: QueryBasketsResponse;
   basketTokens: BasketTokens[];
   basketsWithClasses: (QueryBasketResponse | undefined)[];
+  creditBaskets: (QueryBasketResponse | undefined)[][];
   reloadBasketsBalance: () => Promise<void>;
 }
 
-export const useFetchBaskets = (): Response => {
+export const useFetchBaskets = ({ credits }: Params): Response => {
   const { basketClient, bankClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
@@ -84,6 +91,11 @@ export const useFetchBaskets = (): Response => {
         basketToken.balance && basketToken.balance?.balance?.amount !== '0',
     );
 
+  const creditBaskets = normalizeCreditBaskets({
+    basketsWithClasses: basketDatas,
+    credits,
+  });
+
   // 6.  Reload balances callback
   const reloadBasketsBalance = useCallback(async (): Promise<void> => {
     await reactQueryClient.invalidateQueries({
@@ -95,6 +107,7 @@ export const useFetchBaskets = (): Response => {
     basketTokens,
     baskets: basketsData,
     basketsWithClasses: basketDatas,
+    creditBaskets,
     reloadBasketsBalance,
   };
 };

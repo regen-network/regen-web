@@ -7,12 +7,12 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import { Loading } from 'web-components/lib/components/loading';
 import Section from 'web-components/lib/components/section';
 import { Title } from 'web-components/lib/components/typography';
-import { CreditBatchMetadataIntersectionLD } from 'web-components/lib/types/rdf/credit-batch-intersection-ld';
 
 import { useProjectByOnChainIdQuery } from 'generated/graphql';
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
+import { getMetadata } from 'lib/db/api/metadata-graph';
+import { CreditBatchMetadataIntersectionLD } from 'lib/db/types/json-ld';
 import { getBatchWithSupplyForDenom } from 'lib/ecocredit/api';
-import { getMetadata } from 'lib/metadata-graph';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { NotFoundPage } from 'pages/NotFound/NotFound';

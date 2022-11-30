@@ -1,12 +1,10 @@
 import { useCallback } from 'react';
 import { MsgCreateProject } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 
-import { ProjectMetadataIntersectionLD } from '../../../generated/json-ld';
+import { generateIri, IriFromMetadataSuccess } from 'lib/db/api/metadata-graph';
+import { ProjectMetadataIntersectionLD } from 'lib/db/types/json-ld';
+
 import { SignAndBroadcastType } from '../../../hooks/useMsgClient';
-import {
-  generateIri,
-  IriFromMetadataSuccess,
-} from '../../../lib/metadata-graph';
 
 interface MsgCreateProjectValues {
   classId: string;

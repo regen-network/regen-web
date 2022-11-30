@@ -51,7 +51,7 @@ import { TablePaginationParams } from 'web-components/lib/components/table/Actio
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { getBridgeTxStatus } from 'lib/bridge';
-import { getMetadata } from 'lib/metadata-graph';
+import { getMetadata } from 'lib/db/api/metadata-graph';
 
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 

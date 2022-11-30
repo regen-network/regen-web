@@ -1,4 +1,4 @@
-import { UrlType } from 'web-components/lib/utils/schemaURL';
+import { UrlType } from 'lib/rdf/types';
 
 import { ProjectMetadataLD } from './project-metadata';
 

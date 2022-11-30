@@ -2,10 +2,10 @@ import { Formik, FormikHelpers } from 'formik';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
-import { UrlList, UrlType } from 'web-components/lib/utils/schemaURL';
 
 import type { ShaclGraphByUriQuery } from 'generated/graphql';
 import { getCompactedPath, getProjectPageBaseData, validate } from 'lib/rdf';
+import { UrlList, UrlType } from 'lib/rdf/types';
 
 import { useProjectEditContext } from 'pages/ProjectEdit';
 import { ProjectPageFooter } from 'components/molecules';

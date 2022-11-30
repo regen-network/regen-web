@@ -18,6 +18,8 @@ import UserAvatar from 'web-components/lib/components/user/UserAvatar';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { getFormattedPeriod } from 'web-components/lib/utils/format';
 
+import { qudtUnit, qudtUnitMap } from 'lib/rdf';
+
 import background from '../../assets/certificate-bg.png';
 import pageBackground from '../../assets/certificate-page-bg.jpg';
 import projectsBackground from '../../assets/certificate-projects-bg.jpg';
@@ -27,7 +29,6 @@ import {
   useAllPurchasesByStripeIdQuery,
   useAllPurchasesByWalletIdQuery,
 } from '../../generated/graphql';
-import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
 
 const useStyles = makeStyles()((theme: Theme) => ({
   root: {

@@ -23,7 +23,6 @@ const GettingStartedResourcesSection: React.FC<
 
   return (
     <Section
-      visibleOverflow
       title={section.header || 'Resources for Getting Started'}
       sx={{ root: { pb: { xs: 20, sm: 30 } } }}
     >

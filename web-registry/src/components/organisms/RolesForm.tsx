@@ -3,10 +3,6 @@ import { useParams } from 'react-router-dom';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import {
-  FormValues,
-  RoleField,
-} from 'web-components/lib/components/inputs/RoleField';
 import TextField from 'web-components/lib/components/inputs/TextField';
 import {
   invalidAddress,
@@ -25,6 +21,11 @@ import {
   validate,
 } from 'lib/rdf';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
+
+import {
+  FormValues,
+  RoleField,
+} from 'components/molecules/RoleField/RoleField';
 
 import {
   GetOrganizationProfileByEmailQuery,

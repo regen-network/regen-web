@@ -10,7 +10,6 @@ import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import OrganizationIcon from 'web-components/lib/components/icons/OrganizationIcon';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import { ImageUpload } from 'web-components/lib/components/inputs/ImageUpload';
-import { isIndividual } from 'web-components/lib/components/inputs/RoleField';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 import Modal from 'web-components/lib/components/modal';
@@ -29,6 +28,8 @@ import {
   validate,
 } from 'lib/rdf';
 import { UrlType } from 'lib/rdf/types';
+
+import { isIndividual } from 'components/molecules/RoleField/RoleField';
 
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import getApiUri from '../../lib/apiUri';

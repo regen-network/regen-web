@@ -3,15 +3,15 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { isEmpty } from 'lodash';
 
-import {
-  FormValues,
-  isIndividual,
-} from 'web-components/lib/components/inputs/RoleField';
 import { ProfileFormValues } from 'web-components/lib/components/modal/ProfileModal';
 
 import { getProjectShapeIri } from 'lib/rdf';
 
 import { useCreateProjectContext } from 'pages/ProjectCreate';
+import {
+  FormValues,
+  isIndividual,
+} from 'components/molecules/RoleField/RoleField';
 
 import { RolesForm, RolesValues } from '../../components/organisms';
 import {

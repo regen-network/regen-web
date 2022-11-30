@@ -28,8 +28,8 @@ type Props = {
   signAndBroadcast: SignAndBroadcastType;
   setCreditBridgeOpen: UseStateSetter<BatchInfoWithBalance | undefined>;
   setCardItems: UseStateSetter<Item[] | undefined>;
-  setTxModalHeader: UseStateSetter<string>;
-  setTxModalTitle: UseStateSetter<string>;
+  setTxModalHeader: UseStateSetter<string | undefined>;
+  setTxModalTitle: UseStateSetter<string | undefined>;
   setTxButtonTitle: UseStateSetter<string>;
   setTxModalDescription: UseStateSetter<string>;
 };

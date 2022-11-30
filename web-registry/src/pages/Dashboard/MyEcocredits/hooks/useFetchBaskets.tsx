@@ -34,7 +34,7 @@ export const useFetchBaskets = ({ credits }: Params): Response => {
   const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
 
-  // 1.  Baskets
+  // Baskets
   const { data: basketsData } = useQuery(
     getBasketsQuery({
       enabled: !!basketClient,
@@ -44,7 +44,7 @@ export const useFetchBaskets = ({ credits }: Params): Response => {
   );
   const basketsInfo = basketsData?.basketsInfo ?? [];
 
-  // 2.  Basket({denom})
+  // Basket({denom})
   const basketResults = useQueries({
     queries: basketsInfo.map(basketInfo =>
       getBasketQuery({
@@ -55,7 +55,7 @@ export const useFetchBaskets = ({ credits }: Params): Response => {
   });
   const basketDatas = basketResults.map(basketResult => basketResult.data);
 
-  // 3.  Balance({address, denom})
+  // Balance({address, denom})
   const balanceResults = useQueries({
     queries: basketsInfo.map(basketInfo =>
       getBalanceQuery({
@@ -66,7 +66,7 @@ export const useFetchBaskets = ({ credits }: Params): Response => {
   });
   const balanceDatas = balanceResults.map(balanceResult => balanceResult.data);
 
-  // 4.  DenomMetadata({denom})
+  // DenomMetadata({denom})
   const denomMetadataResults = useQueries({
     queries: basketsInfo.map(basketInfo =>
       getDenomMetadataQuery({
@@ -79,7 +79,7 @@ export const useFetchBaskets = ({ credits }: Params): Response => {
     denomMetadataResult => denomMetadataResult.data,
   );
 
-  // 5.  Normalize + filter
+  // Normalize + filter
   const basketTokens = basketsInfo
     .map((basketInfo, index) => ({
       basket: basketInfo,
@@ -96,7 +96,7 @@ export const useFetchBaskets = ({ credits }: Params): Response => {
     credits,
   });
 
-  // 6.  Reload balances callback
+  // Reload balances callback
   const reloadBasketsBalance = useCallback(async (): Promise<void> => {
     await reactQueryClient.invalidateQueries({
       queryKey: [BANK_BALANCE_KEY],

@@ -33,7 +33,7 @@ export const projectsLoader =
     // Fetch or Cache
 
     // Mandatory data
-    getFromCacheOrFetch({
+    await getFromCacheOrFetch({
       query: projectsQuery,
       reactQueryClient: queryClient,
     });

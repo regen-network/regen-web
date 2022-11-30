@@ -33,7 +33,7 @@ function ProjectsSection({ classId }: Props): JSX.Element {
       <BuySellOrderFlow
         isFlowStarted={isBuyFlowStarted}
         setIsFlowStarted={setIsBuyFlowStarted}
-        selectedProject={selectedProject}
+        projects={selectedProject && [selectedProject]}
       />
     </Box>
   );

@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useState } from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import Collapse from '@mui/material/Collapse';
@@ -8,7 +8,6 @@ import Grid from '@mui/material/Grid';
 import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 import { RadioGroup } from 'formik-mui';
-import { useAnalytics } from 'use-analytics';
 
 import { Flex } from 'web-components/lib/components/box';
 import Card from 'web-components/lib/components/cards/Card';
@@ -35,6 +34,8 @@ import {
 } from 'web-components/lib/components/typography';
 
 import { microToDenom } from 'lib/denom.utils';
+import { Buy2Event } from 'lib/tracker/types';
+import { useTracker } from 'lib/tracker/useTracker';
 
 import { UISellOrderInfo } from 'pages/Projects/Projects.types';
 import { Link as DynamicLink } from 'components/atoms/Link';
@@ -71,7 +72,9 @@ interface BuyCreditsModalProps extends RegenModalProps {
   onTxQueued?: (txBytes: Uint8Array) => void;
   onSubmit?: (values: BuyCreditsValues) => Promise<void>;
   initialValues?: BuyCreditsValues;
-  project: BuyCreditsProject;
+  sellOrders?: UISellOrderInfo[];
+  project?: BuyCreditsProject;
+  setSelectedProjectById?: (projectId: string) => void;
   apiServerUrl?: string;
   imageStorageBaseUrl?: string;
 }
@@ -105,7 +108,9 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
     onSubmit,
     onClose,
     initialValues,
-    project,
+    sellOrders, // corresponding to one or more projects
+    project, // is just suplemmentary data. If several projects involved, then is selected when sell order is selected
+    setSelectedProjectById, // if several projects involved, handler to select the project when sell order is selected
     apiServerUrl,
     imageStorageBaseUrl,
   }) => {
@@ -114,7 +119,8 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
     const [selectedSellOrder, setSelectedSellOrder] = useState<
       UISellOrderInfo | undefined
     >(undefined);
-    const { track } = useAnalytics();
+    const { track } = useTracker();
+    const location = useLocation();
 
     const validationHandler = (
       values: BuyCreditsValues,
@@ -137,8 +143,9 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
       });
 
     const sellOrdersOptions = getOptions({
-      project,
+      sellOrders,
       allowedDenomsData: allowedDenomsResponse?.data,
+      setSelectedProjectById,
     });
 
     const isDisableAutoRetire = selectedSellOrder?.disableAutoRetire;
@@ -158,7 +165,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
           >
             {'Buy Ecocredits'}
           </Title>
-          {project.name && (
+          {project?.name && (
             <Card className={cx(classes.thumbnailCard, classes.field)}>
               <CardContent className={classes.cardContent}>
                 <Image
@@ -192,19 +199,19 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
             initialValues={initialValues || BUY_CREDITS_MODAL_DEFAULT_VALUES}
             validate={validationHandler}
             onSubmit={async (values, { setSubmitting }) => {
+              if (!project) return;
               setSubmitting(true);
-              const trackData: {
-                price?: string;
-                batchDenom?: string;
-                projectName?: string | null;
-                creditClassId?: string;
-              } = {
+              track<'buy2', Buy2Event>('buy2', {
+                url: location.pathname,
                 price: selectedSellOrder?.askAmount,
                 batchDenom: selectedSellOrder?.batchDenom,
+                projectId: project.id,
                 projectName: project.name,
                 creditClassId: project.id.split('-')[0],
-              };
-              track('buy2', trackData);
+                quantity: values.creditCount,
+                currencyDenom: selectedSellOrder?.askDenom,
+                retirementAction: values.retirementAction,
+              });
               try {
                 await handleBuyCreditsSubmit(
                   values,
@@ -244,7 +251,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                       native={false}
                     />
                     <SetSelectedSellOrderElement
-                      project={project}
+                      sellOrders={sellOrders}
                       selectedSellOrder={selectedSellOrder}
                       setSelectedSellOrder={setSelectedSellOrder}
                     />

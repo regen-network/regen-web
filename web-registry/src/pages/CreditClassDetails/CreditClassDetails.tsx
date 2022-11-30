@@ -167,7 +167,7 @@ function CreditClassDetails({
       <BuySellOrderFlow
         isFlowStarted={isBuyFlowStarted}
         setIsFlowStarted={setIsBuyFlowStarted}
-        selectedProject={projectsWithOrderData[0]}
+        projects={projectsWithOrderData}
       />
       <CreateSellOrderFlow
         isFlowStarted={isSellFlowStarted}

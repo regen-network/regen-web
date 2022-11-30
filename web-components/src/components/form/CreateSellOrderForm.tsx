@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import { Field, Form, Formik, FormikErrors } from 'formik';
-import { useTrack } from 'use-analytics';
+import { Sell2Event } from 'web-registry/src/lib/tracker/types';
+import { useTracker } from 'web-registry/src/lib/tracker/useTracker';
 
 import InfoIcon from '../icons/InfoIcon';
 import AmountField from '../inputs/AmountField';
@@ -47,7 +48,7 @@ const CreateSellOrderForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   onSubmit,
 }) => {
   const [options, setOptions] = useState<Option[]>([]);
-  const track = useTrack();
+  const { track } = useTracker();
 
   const initialValues = {
     batchDenom: batchDenoms[0]?.value ?? '',
@@ -88,7 +89,13 @@ const CreateSellOrderForm: React.FC<React.PropsWithChildren<FormProps>> = ({
       initialValues={initialValues}
       validate={validateHandler}
       onSubmit={async values => {
-        track('sell2');
+        track<'sell2', Sell2Event>('sell2', {
+          batchDenom: values.batchDenom,
+          price: values.price,
+          quantity: values.amount,
+          currencyDenom: values.askDenom,
+          enableAutoRetire: values.enableAutoRetire,
+        });
         onSubmit(values);
       }}
     >

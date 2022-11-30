@@ -7,5 +7,9 @@ import { ReactQueryBuilderResponse } from '../../types/react-query.types';
 export type ReactQuerySimplePriceResponse =
   QueryObserverOptions<FetchSimplePriceResponse>;
 
-export type ReactQuerySimplePriceParams =
-  ReactQueryBuilderResponse<ReactQuerySimplePriceResponse>;
+export type ReactQuerySimplePriceParams = {
+  request?: {
+    ids?: string;
+    vsCurrencies?: string;
+  };
+} & ReactQueryBuilderResponse<ReactQuerySimplePriceResponse>;

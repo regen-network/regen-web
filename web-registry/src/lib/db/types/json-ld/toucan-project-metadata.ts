@@ -1,4 +1,4 @@
-import { URL } from 'web-components/lib/types/rdf';
+import { URL } from 'lib/rdf/types';
 
 import { VCSProjectMetadataLD } from './vcs-project-metadata';
 

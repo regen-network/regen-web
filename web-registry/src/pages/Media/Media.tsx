@@ -2,10 +2,12 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { Loading } from 'web-components/lib/components/loading';
+
 import {
+  getProjectShapeIri,
   getURLInitialValue,
   getURLListInitialValue,
-} from 'web-components/lib/utils/schemaURL';
+} from 'lib/rdf';
 
 import {
   isSimpleMediaFormValues,
@@ -21,7 +23,6 @@ import {
   useShaclGraphByUriQuery,
   useUpdateProjectByIdMutation,
 } from '../../generated/graphql';
-import { getProjectShapeIri } from '../../lib/rdf';
 import { useProjectEditContext } from '../ProjectEdit';
 
 const PHOTO_COUNT = 4;

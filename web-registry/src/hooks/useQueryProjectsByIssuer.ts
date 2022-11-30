@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { QueryProjectsByAdminResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import { getMetadata } from '../lib/metadata-graph';
+import { getMetadata } from 'lib/db/api/metadata-graph';
+
 import type { ProjectWithMetadataObj as Project } from '../types/ledger/ecocredit';
 import useEcocreditQuery from './useEcocreditQuery';
 

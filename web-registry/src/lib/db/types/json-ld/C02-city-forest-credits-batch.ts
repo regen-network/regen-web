@@ -1,4 +1,4 @@
-import { UrlType } from 'src/utils/schemaURL';
+import { UrlType } from 'lib/rdf/types';
 
 import { BatchMetadataLD } from './batch-base';
 

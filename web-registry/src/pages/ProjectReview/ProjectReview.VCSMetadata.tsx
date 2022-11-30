@@ -3,8 +3,9 @@ import React from 'react';
 import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.ItemDisplay';
 import { formatDate } from 'web-components/lib/utils/format';
 
+import { VCSProjectMetadataLD } from 'lib/db/types/json-ld';
+
 import { Link } from '../../components/atoms';
-import { VCSProjectMetadataLD } from '../../generated/json-ld';
 
 interface Props {
   metadata: Partial<VCSProjectMetadataLD>;

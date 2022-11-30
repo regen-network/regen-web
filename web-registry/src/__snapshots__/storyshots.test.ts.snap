@@ -2380,40 +2380,6 @@ exports[`Storyshots Inputs Date Pick Field 1`] = `
 </MemoryRouter>
 `;
 
-exports[`Storyshots Inputs Roles Input 1`] = `
-<MemoryRouter
-  initialEntries={
-    Array [
-      Object {
-        "pathname": "/",
-        "search": "",
-        "state": undefined,
-      },
-    ]
-  }
->
-  <Routes>
-    <Route
-      element={
-        <RouterLogger>
-          <RegenThemeProvider
-            injectFonts={true}
-          >
-            <CssBaseline />
-            <Unknown />
-          </RegenThemeProvider>
-        </RouterLogger>
-      }
-      path="/"
-    >
-      <Route
-        index={true}
-      />
-    </Route>
-  </Routes>
-</MemoryRouter>
-`;
-
 exports[`Storyshots Inputs Toggle 1`] = `
 <MemoryRouter
   initialEntries={
@@ -3026,40 +2992,6 @@ exports[`Storyshots Modal/WalletModal Default 1`] = `
 </MemoryRouter>
 `;
 
-exports[`Storyshots Modal/WalletModal Default 1`] = `
-<MemoryRouter
-  initialEntries={
-    Array [
-      Object {
-        "pathname": "/",
-        "search": "",
-        "state": undefined,
-      },
-    ]
-  }
->
-  <Routes>
-    <Route
-      element={
-        <RouterLogger>
-          <RegenThemeProvider
-            injectFonts={true}
-          >
-            <CssBaseline />
-            <Unknown />
-          </RegenThemeProvider>
-        </RouterLogger>
-      }
-      path="/"
-    >
-      <Route
-        index={true}
-      />
-    </Route>
-  </Routes>
-</MemoryRouter>
-`;
-
 exports[`Storyshots Party Party Address 1`] = `
 <MemoryRouter
   initialEntries={
@@ -3129,6 +3061,40 @@ exports[`Storyshots Place Project Place Info 1`] = `
 `;
 
 exports[`Storyshots ReadMore Read More 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    >
+      <Route
+        index={true}
+      />
+    </Route>
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Registry/Molecules/Role Field Roles Input 1`] = `
 <MemoryRouter
   initialEntries={
     Array [

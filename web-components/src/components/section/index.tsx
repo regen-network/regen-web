@@ -45,7 +45,12 @@ const Root = styled(Box, {
   ({ theme, withSlider, visibleOverflow }) => ({
     maxWidth: theme.breakpoints.values.lg,
     margin: '0 auto',
-    overflow: visibleOverflow ? 'visible' : 'hidden',
+    [theme.breakpoints.up('lg')]: {
+      overflow: visibleOverflow ? 'visible' : 'hidden',
+    },
+    [theme.breakpoints.down('lg')]: {
+      overflow: 'hidden',
+    },
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(22.25),
     },

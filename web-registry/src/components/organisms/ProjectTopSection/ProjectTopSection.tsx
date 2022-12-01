@@ -22,8 +22,9 @@ import Section from 'web-components/lib/components/section';
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
-import { ProjectMetadataIntersectionLD } from 'generated/json-ld';
 import { UseStateSetter } from 'types/react/use-state';
+import { ProjectMetadataIntersectionLD } from 'lib/db/types/json-ld';
+import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
@@ -32,7 +33,6 @@ import {
   useSdgByIriQuery,
 } from '../../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../../lib/imgSrc';
-import { getAreaUnit, qudtUnit } from '../../../lib/rdf';
 import { getDisplayParty, getParty } from '../../../lib/transform';
 import { client } from '../../../sanity';
 import {

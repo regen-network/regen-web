@@ -5,8 +5,9 @@ import ControlledFormLabel from 'web-components/lib/components/form/ControlledFo
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import { Body } from 'web-components/lib/components/typography';
 
+import { ProjectMetadataLD } from 'lib/db/types/json-ld';
+
 import { ShaclGraphByUriQuery } from '../../../generated/graphql';
-import { ProjectMetadataLD } from '../../../generated/json-ld';
 import { useProjectEditContext } from '../../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../../molecules';
 import { useProjectMetadataFormSubmit } from './hooks/useProjectMetadataFormSubmit';

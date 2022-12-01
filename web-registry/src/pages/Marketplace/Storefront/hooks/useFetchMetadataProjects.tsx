@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import { getMetadata } from 'lib/metadata-graph';
+import { getMetadata } from 'lib/db/api/metadata-graph';
 
 type Props = {
   projects?: ProjectInfo[];

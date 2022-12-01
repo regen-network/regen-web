@@ -16,3 +16,12 @@ export interface NameUrl {
 export interface URLList {
   '@list': URL[];
 }
+
+export interface UrlType {
+  '@type': 'schema:URL';
+  '@value'?: string | null;
+}
+
+export interface UrlList {
+  '@list': Array<UrlType>;
+}

@@ -1,4 +1,4 @@
-import { TypeValue, URL } from 'web-components/lib/types/rdf';
+import { TypeValue, URL } from 'lib/rdf/types';
 
 // type generated from https://github.com/regen-network/regen-registry-standards/blob/main/jsonld/credit-classes/C01-verified-carbon-standard-class.json
 

@@ -2,7 +2,7 @@ import { Flex } from 'web-components/lib/components/box';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import { Body, Label } from 'web-components/lib/components/typography';
 
-import { ApprovedMethodologies } from 'generated/json-ld';
+import { ApprovedMethodologies } from 'lib/db/types/json-ld';
 
 import { Link } from 'components/atoms';
 import { MetaDetail } from 'components/molecules';

@@ -2,6 +2,9 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { omit } from 'lodash';
 
+import { ProjectMetadataLD } from 'lib/db/types/json-ld';
+import { getProjectShapeIri } from 'lib/rdf';
+
 import {
   EditFormTemplate,
   OnboardingFormTemplate,
@@ -11,9 +14,7 @@ import {
   useShaclGraphByUriQuery,
   useUpdateProjectByIdMutation,
 } from '../../generated/graphql';
-import { ProjectMetadataLD } from '../../generated/json-ld';
 import { isVCSCreditClass } from '../../lib/ecocredit/api';
-import { getProjectShapeIri } from '../../lib/rdf';
 import { useProjectEditContext } from '../ProjectEdit';
 import { useProjectMetadataSave } from './hooks/useProjectMetadataSave';
 import { useProjectMetadataSubmit } from './hooks/useProjectMetadataSubmit';

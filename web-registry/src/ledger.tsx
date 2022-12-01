@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { OfflineSigner } from '@cosmjs/proto-signing';
 import { RegenApi } from '@regen-network/api';
+import { QueryClientImpl as MarketplaceQueryClientImpl } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import { QueryClientImpl as EcocreditQueryClientImpl } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { EcocreditQueryClient } from 'lib/ecocredit/api';
+import { MarketplaceQueryClient } from 'lib/ecocredit/marketplace/marketplace.types';
 
 import { expLedger, ledgerExpRPCUri, ledgerRPCUri } from './lib/ledger';
 import { useWallet, Wallet } from './lib/wallet/wallet';
@@ -12,6 +14,7 @@ interface ContextValue {
   loading: boolean;
   api: RegenApi | undefined;
   ecocreditClient?: EcocreditQueryClient;
+  marketplaceClient?: MarketplaceQueryClient;
   error: unknown;
   wallet?: Wallet;
 }
@@ -47,6 +50,7 @@ const LedgerContext = React.createContext<ContextValue>({
   loading: false,
   api: undefined,
   ecocreditClient: undefined,
+  marketplaceClient: undefined,
   error: undefined,
 });
 
@@ -93,6 +97,8 @@ export const useLedger = (options?: ConnectParams): ContextValue => {
   const [expError, setExpError] = useState<unknown>(undefined);
   const [ecocreditClient, setClientEcocreditClient] =
     useState<EcocreditQueryClient>();
+  const [marketplaceClient, setMarketplaceClient] =
+    useState<MarketplaceQueryClient>();
   const context = React.useContext(LedgerContext);
   const { wallet } = useWallet();
   const forceExp =
@@ -105,6 +111,12 @@ export const useLedger = (options?: ConnectParams): ContextValue => {
     if (ecocreditClient) return;
     setClientEcocreditClient(new EcocreditQueryClientImpl(api.queryClient));
   }, [api?.queryClient, ecocreditClient]);
+
+  useEffect(() => {
+    if (!api?.queryClient) return;
+    if (marketplaceClient) return;
+    setMarketplaceClient(new MarketplaceQueryClientImpl(api.queryClient));
+  }, [api?.queryClient, marketplaceClient]);
 
   useEffect(() => {
     if (forceExp && !expApi && !expLoading && !expError) {
@@ -128,8 +140,9 @@ export const useLedger = (options?: ConnectParams): ContextValue => {
   ]);
 
   return {
-    api,
+    api: forceExp ? expApi : context.api,
     ecocreditClient,
+    marketplaceClient,
     loading: forceExp ? expLoading : context.loading,
     error: forceExp ? expError : context.error,
     wallet,

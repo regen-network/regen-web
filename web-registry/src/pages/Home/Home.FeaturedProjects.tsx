@@ -11,7 +11,7 @@ import { ProjectCardsSection } from 'components/organisms/ProjectCardsSection/Pr
 import { useFeaturedProjects } from './hooks/useFeaturedProjects';
 
 export function FeaturedProjects(): JSX.Element {
-  const { featuredProjects } = useFeaturedProjects();
+  const { featuredProjects, loading } = useFeaturedProjects();
   const [selectedProject, setSelectedProject] =
     useState<ProjectWithOrderData | null>(null);
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
@@ -24,6 +24,7 @@ export function FeaturedProjects(): JSX.Element {
           setSelectedProject(project);
           setIsBuyFlowStarted(true);
         }}
+        loading={loading}
       />
       <Box sx={{ display: 'flex', justifyContent: 'center', mb: 20 }}>
         <Link to="/projects">

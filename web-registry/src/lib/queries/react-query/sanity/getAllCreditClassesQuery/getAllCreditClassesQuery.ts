@@ -6,11 +6,11 @@ import {
 import {
   ReactQueryGetAllCreditClassesParams,
   ReactQueryGetAllCreditClassesResponse,
-} from './queries.sanity.types';
+} from './getAllCreditClassesQuery.types';
 
 export const getAllCreditClassesQuery = ({
   sanityClient,
-  enabled = true,
+  ...params
 }: ReactQueryGetAllCreditClassesParams): ReactQueryGetAllCreditClassesResponse => ({
   queryKey: ['AllCreditClassQuery'],
   queryFn: async () => {
@@ -21,6 +21,5 @@ export const getAllCreditClassesQuery = ({
 
     return sanityCreditClassData;
   },
-  staleTime: Infinity,
-  enabled,
+  ...params,
 });

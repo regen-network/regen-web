@@ -108,7 +108,7 @@ export const getPurchaseInfo = ({
 
 // This comparison function prioritizes (it puts first) the projects that have sell orders.
 export const sortProjectsBySellOrdersAvailability =
-  (sellOrders: SellOrderInfo[]) =>
+  (sellOrders: SellOrderInfo[] | SellOrderInfoExtented[]) =>
   (projectA: ProjectInfo, projectB: ProjectInfo) => {
     const ordersForProjectA = sellOrders.some(order =>
       order.batchDenom.startsWith(`${projectA?.id}-`),

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { ProjectMetadataIntersectionLD } from 'generated/json-ld';
+import { ProjectMetadataIntersectionLD } from 'lib/db/types/json-ld';
 
 import { getJurisdiction } from '../ProjectReview.util';
 

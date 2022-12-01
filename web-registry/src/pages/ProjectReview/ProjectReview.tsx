@@ -11,7 +11,9 @@ import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/Revi
 import { Photo } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.Photo';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
-import { UrlType } from 'web-components/lib/utils/schemaURL';
+
+import { qudtUnit, qudtUnitMap } from 'lib/rdf';
+import { UrlType } from 'lib/rdf/types';
 
 import { Link } from '../../components/atoms';
 import { ProjectPageFooter } from '../../components/molecules';
@@ -23,7 +25,6 @@ import {
 import useMsgClient from '../../hooks/useMsgClient';
 import { getHashUrl } from '../../lib/block-explorer';
 import { isVCSCreditClass } from '../../lib/ecocredit/api';
-import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
 import { useCreateProjectContext } from '../ProjectCreate';
 import { useCompactMetadata } from './hooks/useCompactMetadata';
 import { useGetJurisdiction } from './hooks/useGetJurisdiction';

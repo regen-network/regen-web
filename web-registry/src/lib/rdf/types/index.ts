@@ -1,0 +1,27 @@
+export interface URL {
+  '@type': 'http://schema.org/URL' | 'schema:URL';
+  '@value': string;
+}
+
+export interface TypeValue {
+  '@type': string;
+  '@value': string;
+}
+
+export interface NameUrl {
+  'schema:name': string;
+  'schema:url': URL;
+}
+
+export interface URLList {
+  '@list': URL[];
+}
+
+export interface UrlType {
+  '@type': 'schema:URL';
+  '@value'?: string | null;
+}
+
+export interface UrlList {
+  '@list': Array<UrlType>;
+}

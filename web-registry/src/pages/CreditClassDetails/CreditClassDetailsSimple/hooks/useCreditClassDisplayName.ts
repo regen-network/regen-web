@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { CreditClassMetadataLD } from 'generated/json-ld';
+import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 
 export function useCreditClassDisplayName(
   creditClassId: string,

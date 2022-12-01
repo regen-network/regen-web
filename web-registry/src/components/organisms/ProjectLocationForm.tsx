@@ -6,12 +6,9 @@ import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import LocationField from 'web-components/lib/components/inputs/LocationField';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 
+import { getCompactedPath, getProjectPageBaseData, validate } from 'lib/rdf';
+
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
-import {
-  getCompactedPath,
-  getProjectPageBaseData,
-  validate,
-} from '../../lib/rdf';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../molecules';
 

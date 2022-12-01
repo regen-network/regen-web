@@ -1,22 +1,15 @@
 import {
-  QueryClientImpl,
   QueryDenomTraceResponse,
   QueryDenomTracesResponse,
 } from '@regen-network/api/lib/generated/ibc/applications/transfer/v1/query';
 import { DenomTrace } from '@regen-network/api/lib/generated/ibc/applications/transfer/v1/transfer';
 
-import { connect as connectToApi } from '../../../ledger';
-
-const getQueryClient = async (): Promise<QueryClientImpl> => {
-  const api = await connectToApi();
-  if (!api || !api?.queryClient) return Promise.reject();
-  return new QueryClientImpl(api.queryClient);
-};
+import { getTransferQueryClient } from 'lib/clients/transferQueryClient';
 
 export const queryDenomTrace = async (
   hash: string,
 ): Promise<QueryDenomTraceResponse> => {
-  const client = await getQueryClient();
+  const client = await getTransferQueryClient();
   try {
     return client.DenomTrace({ hash });
   } catch (err) {
@@ -27,7 +20,7 @@ export const queryDenomTrace = async (
 };
 
 export const queryDenomTraces = async (): Promise<QueryDenomTracesResponse> => {
-  const client = await getQueryClient();
+  const client = await getTransferQueryClient();
   try {
     return client.DenomTraces({});
   } catch (err) {
@@ -35,10 +28,10 @@ export const queryDenomTraces = async (): Promise<QueryDenomTracesResponse> => {
   }
 };
 
-type QueryDenomTraceByHashesParams = {
+export type QueryDenomTraceByHashesParams = {
   hashes: string[];
 };
-type DenomTraceWithHash = DenomTrace & { hash: string };
+export type DenomTraceWithHash = DenomTrace & { hash: string };
 
 export const queryDenomTraceByHashes = async ({
   hashes,

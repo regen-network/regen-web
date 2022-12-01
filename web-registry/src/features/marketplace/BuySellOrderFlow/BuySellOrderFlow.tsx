@@ -21,8 +21,8 @@ import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 import { Link } from 'components/atoms';
 import { BuyCreditsModal, BuyCreditsValues } from 'components/organisms';
 import { useMsgClient } from 'hooks';
-import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
 
+import { useFetchSellOrders } from './hooks/useFetchSellOrders';
 import { useSelectedProject } from './hooks/useSelectedProject';
 
 type Props = {
@@ -53,6 +53,7 @@ export const BuySellOrderFlow = ({
   const [txModalHeader, setTxModalHeader] = useState<string>('');
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
+  const { sellOrders, refetchSellOrders } = useFetchSellOrders();
 
   const closeBuyModal = (): void => {
     setIsBuyModalOpen(false);
@@ -123,14 +124,13 @@ export const BuySellOrderFlow = ({
     [projects],
   );
 
-  const { sellOrdersResponse, refetchSellOrders } = useQuerySellOrders();
   const _sellOrders = useMemo(
     () =>
-      sellOrdersResponse?.sellOrders
+      sellOrders
         ?.map(normalizeToUISellOrderInfo)
         .filter(sellOrder => projectsSellOrdersIds?.includes(sellOrder.id))
         .filter(sellOrder => sellOrder.seller !== accountAddress),
-    [sellOrdersResponse?.sellOrders, projectsSellOrdersIds, accountAddress],
+    [sellOrders, projectsSellOrdersIds, accountAddress],
   );
 
   const _project = useMemo(

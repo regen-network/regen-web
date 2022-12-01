@@ -88,6 +88,7 @@ const useBuySellOrderSubmit = ({
 
       if (refetchSellOrders) {
         const sellOrders = await refetchSellOrders();
+
         const uiSellOrdersInfo = sellOrders?.map(normalizeToUISellOrderInfo);
         const { isBuyOrderInvalid } = checkIsBuyOrderInvalid({
           creditCount,

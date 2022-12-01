@@ -19,11 +19,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Analytics from 'analytics';
 import doNotTrack from 'analytics-plugin-do-not-track';
-<<<<<<< HEAD
-import { router } from 'routes';
-=======
 import { getRouter } from 'routes';
->>>>>>> 490085d9 (perf: fetching home page (#1611))
 import { AnalyticsProvider } from 'use-analytics';
 
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
@@ -36,10 +32,6 @@ import PageLoader from 'components/atoms/PageLoader';
 
 import { AuthApolloProvider } from './apollo';
 import { LedgerProvider } from './ledger';
-<<<<<<< HEAD
-=======
-import { WalletProvider } from './lib/wallet/wallet';
->>>>>>> 490085d9 (perf: fetching home page (#1611))
 import * as serviceWorker from './serviceWorker';
 
 import './App.css';

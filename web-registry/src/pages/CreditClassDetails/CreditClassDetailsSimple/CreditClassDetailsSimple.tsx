@@ -8,8 +8,8 @@ import { Label, Title } from 'web-components/lib/components/typography';
 import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { CreditClassByOnChainIdQuery } from 'generated/graphql';
-import { CreditClassMetadataLD } from 'generated/json-ld';
 import { getAccountUrl } from 'lib/block-explorer';
+import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 
 import { AccountLink } from 'components/atoms/AccountLink';
 import { EcocreditsSection } from 'components/molecules';

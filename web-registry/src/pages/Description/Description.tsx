@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { getProjectShapeIri } from 'lib/rdf';
+
 import { DescriptionForm, DescriptionValues } from '../../components/organisms';
 import {
   EditFormTemplate,
@@ -11,7 +13,6 @@ import {
   useShaclGraphByUriQuery,
   useUpdateProjectByIdMutation,
 } from '../../generated/graphql';
-import { getProjectShapeIri } from '../../lib/rdf';
 import { useProjectEditContext } from '../ProjectEdit';
 
 const Description: React.FC<React.PropsWithChildren<unknown>> = () => {

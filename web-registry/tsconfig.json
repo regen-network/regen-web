@@ -16,7 +16,7 @@
   "include": [
     "src",
     "types/react-app-env.d.ts",
-    "types/rdf-validate-shacl/index.d.ts",
-    "types/url-search-params-polyfill.d.ts"
+    "types/url-search-params-polyfill.d.ts",
+    "lib/rdf/types/rdf-validate-shacl/index.d.ts"
   ]
 }

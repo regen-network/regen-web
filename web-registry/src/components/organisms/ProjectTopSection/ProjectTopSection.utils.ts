@@ -2,8 +2,10 @@ import { User } from 'web-components/lib/components/user/UserInfo';
 import { truncate } from 'web-components/lib/utils/truncate';
 
 import { Maybe, PartyFieldsFragment } from 'generated/graphql';
-import { ProjectMetadataIntersectionLD } from 'generated/json-ld';
-import { CFCProjectMetadataLD } from 'generated/json-ld/cfc-project-metadata';
+import {
+  CFCProjectMetadataLD,
+  ProjectMetadataIntersectionLD,
+} from 'lib/db/types/json-ld';
 import { getDisplayParty } from 'lib/transform';
 
 // TODO

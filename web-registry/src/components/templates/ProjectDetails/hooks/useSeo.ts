@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 
-import { ProjectStakeholder } from '../../../../generated/json-ld';
+import { ProjectStakeholder } from 'lib/db/types/json-ld';
 
 function getVisiblePartyName(party?: ProjectStakeholder): string | undefined {
   return party?.['regen:showOnProjectPage']

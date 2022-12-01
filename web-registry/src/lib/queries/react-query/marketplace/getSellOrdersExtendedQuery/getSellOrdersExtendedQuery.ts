@@ -9,11 +9,11 @@ import { getFromCacheOrFetch } from '../../utils/getFromCacheOrFetch';
 import {
   ReactQuerySellOrdersExtentedProps,
   ReactQuerySellOrdersExtentedResponse,
-} from './getSellOrdersExtentedQuery.types';
+} from './getSellOrdersExtendedQuery.types';
 
 export const SELL_ORDERS_EXTENTED_KEY = 'sellOrdersExtented';
 
-export const getSellOrdersExtentedQuery = ({
+export const getSellOrdersExtendedQuery = ({
   client,
   reactQueryClient,
   ...params

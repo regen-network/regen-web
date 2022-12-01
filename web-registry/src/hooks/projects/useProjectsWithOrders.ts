@@ -6,7 +6,7 @@ import { normalizeProjectsWithOrderData } from 'lib/normalizers/normalizeProject
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 import { getProjectsByClassQuery } from 'lib/queries/react-query/ecocredit/getProjectsByClass/getProjectsByClassQuery';
 import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
-import { getSellOrdersExtentedQuery } from 'lib/queries/react-query/marketplace/getSellOrdersExtentedQuery/getSellOrdersExtentedQuery';
+import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -59,7 +59,7 @@ export function useProjectsWithOrders({
 
   const simplePrice = useQuery(getSimplePriceQuery({}));
   const { data: sellOrders } = useQuery(
-    getSellOrdersExtentedQuery({
+    getSellOrdersExtendedQuery({
       enabled: !!marketplaceClient,
       client: marketplaceClient,
       reactQueryClient,

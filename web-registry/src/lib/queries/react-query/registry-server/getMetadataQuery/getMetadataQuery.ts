@@ -1,4 +1,4 @@
-import { getMetadata } from 'lib/metadata-graph';
+import { getMetadata } from 'lib/db/api/metadata-graph';
 
 import {
   ReactQueryMetadataProps,

@@ -3,9 +3,9 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';
 import {
-  getSellOrdersExtentedQuery,
+  getSellOrdersExtendedQuery,
   SELL_ORDERS_EXTENTED_KEY,
-} from 'lib/queries/react-query/marketplace/getSellOrdersExtentedQuery/getSellOrdersExtentedQuery';
+} from 'lib/queries/react-query/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
@@ -21,7 +21,7 @@ export const useFetchSellOrders = (): UseFetchSellOrdersResponse => {
   // Query
   const sellOrdersQuery = useMemo(
     () =>
-      getSellOrdersExtentedQuery({
+      getSellOrdersExtendedQuery({
         enabled: !!marketplaceClient,
         client: marketplaceClient,
         reactQueryClient,

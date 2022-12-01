@@ -1,0 +1,4 @@
+fragment titleCustomBodyFields on TitleCustomBody {
+  title
+  bodyRaw
+}

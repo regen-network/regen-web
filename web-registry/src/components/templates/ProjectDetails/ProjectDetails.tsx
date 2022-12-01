@@ -10,6 +10,7 @@ import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
+import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
@@ -24,7 +25,6 @@ import {
   useProjectByHandleQuery,
   useProjectByOnChainIdQuery,
 } from '../../../generated/graphql';
-import { ProjectMetadataLD } from '../../../generated/json-ld/index';
 import useEcocreditQuery from '../../../hooks/useEcocreditQuery';
 import useQueryMetadataGraph from '../../../hooks/useQueryMetadataGraph';
 import { useLedger } from '../../../ledger';
@@ -264,7 +264,11 @@ function ProjectDetails(): JSX.Element {
       <BuySellOrderFlow
         isFlowStarted={isBuyFlowStarted}
         setIsFlowStarted={setIsBuyFlowStarted}
-        projects={projectsWithOrderData && [projectsWithOrderData[0]]}
+        projects={
+          projectsWithOrderData?.length > 0
+            ? [projectsWithOrderData[0]]
+            : undefined
+        }
       />
       <CreateSellOrderFlow
         isFlowStarted={isSellFlowStarted}

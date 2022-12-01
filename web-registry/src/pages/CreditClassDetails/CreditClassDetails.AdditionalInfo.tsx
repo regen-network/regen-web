@@ -4,7 +4,7 @@ import { startCase } from 'lodash';
 
 import { Body } from 'web-components/lib/components/typography';
 
-import { CreditClassMetadataLD } from 'generated/json-ld';
+import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 
 import { ArrowLink } from 'components/atoms/MetadataArrowLink';
 import { MetaDetail } from 'components/molecules';

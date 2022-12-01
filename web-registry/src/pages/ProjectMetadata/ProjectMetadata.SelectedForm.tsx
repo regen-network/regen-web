@@ -1,8 +1,9 @@
 import React from 'react';
 
+import { ProjectMetadataLD } from 'lib/db/types/json-ld';
+
 import { ProjectMetadataForm } from '../../components/organisms/ProjectMetadataForm/ProjectMetadataForm';
 import { ShaclGraphByUriQuery } from '../../generated/graphql';
-import { ProjectMetadataLD } from '../../generated/json-ld';
 import { useProjectMetadataSubmitReturnedType } from './hooks/useProjectMetadataSubmit';
 
 type Props = {

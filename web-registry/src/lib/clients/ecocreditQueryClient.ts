@@ -1,8 +1,10 @@
-import { QueryClientImpl as EcocreditQueryClientImpl } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { QueryClientImpl } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import { connect } from 'ledger';
+import { connect as connectToApi } from '../../ledger';
 
 // Light ecocredit client without signer, to be used in route loaders
-export const ecocreditClientAsync = connect().then(api =>
-  api?.queryClient ? new EcocreditQueryClientImpl(api.queryClient) : undefined,
-);
+export const getEcocreditQueryClient = async (): Promise<QueryClientImpl> => {
+  const api = await connectToApi();
+  if (!api || !api?.queryClient) return Promise.reject();
+  return new QueryClientImpl(api.queryClient);
+};

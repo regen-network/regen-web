@@ -4,14 +4,15 @@ import { Party } from 'web-components/lib/components/modal/LedgerModal';
 import { getFormattedPeriod } from 'web-components/lib/utils/format';
 
 import {
+  ProjectMetadataIntersectionLD,
+  ProjectStakeholder,
+} from 'lib/db/types/json-ld';
+
+import {
   Maybe,
   PartyFieldsFragment,
   ProjectByOnChainIdQuery,
 } from '../generated/graphql';
-import {
-  ProjectMetadataIntersectionLD,
-  ProjectStakeholder,
-} from '../generated/json-ld/index';
 
 // buildIssuanceModalData builds some IssuanceModalData to provide
 // to a Timeline Event based on some optional credit vintage data.

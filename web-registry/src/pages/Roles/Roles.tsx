@@ -13,8 +13,6 @@ import {
   isIndividual,
 } from 'components/molecules/RoleField/RoleField';
 
-import { useCreateProjectContext } from 'pages/ProjectCreate';
-
 import { RolesForm, RolesValues } from '../../components/organisms';
 import {
   EditFormTemplate,

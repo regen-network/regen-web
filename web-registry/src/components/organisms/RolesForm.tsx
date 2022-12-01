@@ -14,8 +14,6 @@ import { OrganizationFormValues } from 'web-components/lib/components/modal/Orga
 import { ProfileFormValues } from 'web-components/lib/components/modal/ProfileModal';
 import { Subtitle } from 'web-components/lib/components/typography';
 
-import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
-
 import {
   defaultProjectContext,
   getCompactedPath,

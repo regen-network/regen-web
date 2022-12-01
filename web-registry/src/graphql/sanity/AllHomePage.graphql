@@ -16,6 +16,12 @@ query allHomePage {
         ...customImageFields
       }
     }
+    projectsSection {
+      ...titleCustomBodyFields
+    }
+    creditClassesSection {
+      ...titleCustomBodyFields
+    }
     bottomBanner {
       ...bottomBannerFields
     }

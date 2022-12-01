@@ -4,13 +4,21 @@ import { Box } from '@mui/material';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 
+import { Maybe, Scalars } from 'generated/sanity-graphql';
+
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 import { ProjectCardsSection } from 'components/organisms/ProjectCardsSection/ProjectCardsSection';
 
 import { useFeaturedProjects } from './hooks/useFeaturedProjects';
 
-export function FeaturedProjects(): JSX.Element {
+export function FeaturedProjects({
+  title,
+  body,
+}: {
+  title: string;
+  body: Maybe<Scalars['JSON']>;
+}): JSX.Element {
   const { featuredProjects, loading } = useFeaturedProjects();
   const [selectedProject, setSelectedProject] =
     useState<ProjectWithOrderData | null>(null);
@@ -18,7 +26,8 @@ export function FeaturedProjects(): JSX.Element {
   return (
     <div id="projects">
       <ProjectCardsSection
-        title="Featured Projects"
+        title={title}
+        body={body}
         projects={featuredProjects}
         onButtonClick={({ project }) => {
           setSelectedProject(project);

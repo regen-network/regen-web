@@ -6,7 +6,7 @@ import {
 } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { QueryObserverOptions } from '@tanstack/react-query';
 
-import { ReactQueryBuilderResponse } from '../../types/react-query.types';
+import { ReactQueryBuilderResponse } from '../../../types/react-query.types';
 
 export type ReactQueryBasketsResponse = QueryObserverOptions<
   QueryBasketsResponse | undefined

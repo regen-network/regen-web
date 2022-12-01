@@ -325,6 +325,8 @@ const getClassProjectForBatch = async (
       reactQueryClient,
     });
   } else {
+    // TODO Keeping the old path for retro-compatibility of the function.
+    // Once all paths use the react-query one we will be able to remove it.
     projectData = await getProject(projectId);
   }
   const project = projectData?.project;
@@ -336,6 +338,8 @@ const getClassProjectForBatch = async (
           reactQueryClient,
         });
       } else {
+        // TODO Keeping the old path for retro-compatibility of the function.
+        // Once all paths use the react-query one we will be able to remove it.
         metadata = await getMetadata(project.metadata);
       }
     } catch (error) {}

@@ -5,7 +5,7 @@ import { useLedger } from 'ledger';
 import {
   getSellOrdersExtendedQuery,
   SELL_ORDERS_EXTENTED_KEY,
-} from 'lib/queries/react-query/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
+} from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
@@ -37,6 +37,9 @@ export const useFetchSellOrders = (): UseFetchSellOrdersResponse => {
   const refetchSellOrders = useCallback(async (): Promise<
     SellOrderInfoExtented[] | undefined
   > => {
+    // Here invalidating the cache will automatically run again all query using this key.
+    // Below we're returning the new result from the cache because this callback needs to return the new value
+    // but in most cases it's enough for reload callbacks to just invalidate a key for refreshing the data and the UI.
     await reactQueryClient.invalidateQueries({
       queryKey: sellOrdersQuery.queryKey,
     });

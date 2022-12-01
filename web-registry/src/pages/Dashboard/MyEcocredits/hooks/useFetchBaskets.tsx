@@ -8,11 +8,11 @@ import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { useLedger } from 'ledger';
 import normalizeCreditBaskets from 'lib/normalizers/normalizeCreditBaskets/normalizeCreditBaskets';
-import { getBalanceQuery } from 'lib/queries/react-query/bank/getBalanceQuery/getBalanceQuery';
-import { BANK_BALANCE_KEY } from 'lib/queries/react-query/bank/getBalanceQuery/getBalanceQuery.constants';
-import { getDenomMetadataQuery } from 'lib/queries/react-query/bank/getDenomMetadataQuery/getDenomMetadataQuery';
-import { getBasketQuery } from 'lib/queries/react-query/basket/getBasketQuery/getBasketQuery';
-import { getBasketsQuery } from 'lib/queries/react-query/basket/getBasketsQuery/getBasketsQuery';
+import { getBalanceQuery } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery';
+import { BANK_BALANCE_KEY } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery.constants';
+import { getDenomMetadataQuery } from 'lib/queries/react-query/cosmos/bank/getDenomMetadataQuery/getDenomMetadataQuery';
+import { getBasketQuery } from 'lib/queries/react-query/ecocredit/basket/getBasketQuery/getBasketQuery';
+import { getBasketsQuery } from 'lib/queries/react-query/ecocredit/basket/getBasketsQuery/getBasketsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { BasketTokens } from 'hooks/useBasketTokens';

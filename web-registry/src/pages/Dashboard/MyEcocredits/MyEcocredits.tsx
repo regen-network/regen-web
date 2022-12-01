@@ -32,7 +32,7 @@ import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { useLedger } from 'ledger';
 import { getHashUrl } from 'lib/block-explorer';
-import { getAllowedDenomQuery } from 'lib/queries/react-query/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
+import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import { Retire1Event, Sell1Event, Send1Event } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';

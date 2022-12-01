@@ -12,7 +12,7 @@ import { getBalancesQuery } from 'lib/queries/react-query/ecocredit/getBalancesQ
 import { getBatchQuery } from 'lib/queries/react-query/ecocredit/getBatchQuery/getBatchQuery';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
-import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/queries.sanity';
+import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { client as sanityClient } from '../../../../sanity';

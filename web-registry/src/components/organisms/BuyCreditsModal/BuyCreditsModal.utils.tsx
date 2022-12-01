@@ -205,7 +205,7 @@ export const handleBuyCreditsSubmit = async (
 
 interface GetCreditCountValidationProps {
   creditAvailable: number;
-  userBalance?: number;
+  userBalance: number;
   askAmount: number;
   displayDenom?: string;
 }
@@ -220,7 +220,7 @@ export const getCreditCountValidation =
   (creditCount: number) => {
     let error;
 
-    if (askAmount && (userBalance ?? 0) < askAmount * creditCount) {
+    if (askAmount && userBalance < askAmount * creditCount) {
       error = `You don’t have enough (${displayDenom}).`;
     }
     if (creditCount > creditAvailable) {

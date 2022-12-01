@@ -1,4 +1,4 @@
-import { Grid, useMediaQuery, useTheme } from '@mui/material';
+import { Grid } from '@mui/material';
 
 import { Theme } from '../../../theme/muiTheme';
 import { BlockContent, SanityBlockContent } from '../../block-content';
@@ -31,10 +31,6 @@ export const GettingStartedResourcesCard = ({
   linkComponent: LinkComponent,
   fullWidth = false,
 }: GettingStartedResourceCardProps): JSX.Element => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const row = fullWidth && !isMobile;
-
   return (
     <Card
       sx={[
@@ -60,9 +56,16 @@ export const GettingStartedResourcesCard = ({
           item
           container
           wrap="nowrap"
-          flexDirection={row ? 'row' : 'column'}
+          flexDirection={
+            fullWidth ? { xs: 'column', sm: 'row' } : { xs: 'column' }
+          }
         >
-          <Grid item sx={{ width: row ? '50%' : '100%' }}>
+          <Grid
+            item
+            sx={{
+              width: fullWidth ? { xs: '100%', sm: '50%' } : { xs: '100%' },
+            }}
+          >
             <Title
               variant={fullWidth ? 'h5' : 'h4'}
               sx={{ pb: fullWidth ? 4.25 : 2.5 }}
@@ -73,7 +76,14 @@ export const GettingStartedResourcesCard = ({
               <BlockContent content={description} />
             </Body>
           </Grid>
-          <Grid item sx={{ pt: row ? 12.5 : 0, pl: row ? 17.5 : 0 }}>
+
+          <Grid
+            item
+            sx={{
+              pt: fullWidth ? { xs: 0, sm: 12.5 } : { xs: 0 },
+              pl: fullWidth ? { xs: 0, sm: 17.5 } : { xs: 0 },
+            }}
+          >
             {links.map(({ buttonText, buttonHref, buttonTarget }) => (
               <LinkComponent
                 sx={{ color: 'secondary.main' }}

@@ -1,21 +1,17 @@
-import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { useQuery } from '@tanstack/react-query';
+import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import {
-  fetchSimplePrice,
-  GECKO_EEUR_ID,
-  GECKO_TOKEN_IDS,
-  GECKO_USD_CURRENCY,
-  GECKO_USDC_ID,
-} from 'lib/coingecko';
-import { EcocreditQueryProps } from 'lib/ecocredit/api';
+import { useLedger } from 'ledger';
+import { GECKO_EEUR_ID, GECKO_USDC_ID } from 'lib/coingecko';
+import { normalizeProjectsWithOrderData } from 'lib/normalizers/normalizeProjectsWithOrderData';
+import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
+import { getProjectsByClassQuery } from 'lib/queries/react-query/ecocredit/getProjectsByClass/getProjectsByClassQuery';
+import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
+import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
+import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
+import { useWallet } from 'lib/wallet/wallet';
 
-import {
-  ProjectsSellOrders,
-  useProjectsSellOrders,
-} from 'pages/Projects/hooks/useProjectsSellOrders';
-import useEcocreditQuery from 'hooks/useEcocreditQuery';
-import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
+import { ProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders';
+import { sortProjectsBySellOrdersAvailability } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 
 import { selectProjects } from './useProjectsWithOrders.utils';
 
@@ -37,44 +33,80 @@ export function useProjectsWithOrders({
   projectId,
   classId,
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
-  const queryParams: EcocreditQueryProps = classId
-    ? { query: 'projectsByClass', params: { classId } }
-    : { query: 'projects', params: {} };
+  const { ecocreditClient, marketplaceClient } = useLedger();
 
-  const { data, loading: loadingProjects } =
-    useEcocreditQuery<QueryProjectsResponse>(queryParams);
-  const projects = data?.projects;
+  const reactQueryClient = useQueryClient();
+  const { wallet } = useWallet();
 
-  const regenPriceQuery = useQuery(['regenPrice'], () =>
-    fetchSimplePrice({
-      ids: GECKO_TOKEN_IDS,
-      vsCurrencies: GECKO_USD_CURRENCY,
+  /* Main Queries */
+
+  const { data: projectsData, isFetching: isLoadingProjects } = useQuery(
+    getProjectsQuery({
+      enabled: !classId && !!ecocreditClient,
+      client: ecocreditClient,
+      request: {},
     }),
   );
 
-  const { sellOrdersResponse } = useQuerySellOrders();
-  const sellOrders = sellOrdersResponse?.sellOrders;
-
-  const { projectsWithOrderData, loading: loadingWithOrders } =
-    useProjectsSellOrders({
-      projects: selectProjects({
-        projects,
-        sellOrders,
-        metadata,
-        random,
-        projectId,
+  const { data: projectsByClassData, isFetching: isLoadingProjectsByClass } =
+    useQuery(
+      getProjectsByClassQuery({
+        enabled: !!classId && !!ecocreditClient,
+        client: ecocreditClient,
+        request: { classId },
       }),
+    );
+
+  const simplePrice = useQuery(getSimplePriceQuery({}));
+  const { data: sellOrders } = useQuery(
+    getSellOrdersExtendedQuery({
+      enabled: !!marketplaceClient,
+      client: marketplaceClient,
+      reactQueryClient,
+      request: {},
+    }),
+  );
+
+  /* Filtering/Sorting */
+
+  const projects = projectsData?.projects ?? projectsByClassData?.projects;
+  const selectedProjects =
+    selectProjects({
+      projects,
       sellOrders,
-      geckoPrices: {
-        regenPrice: regenPriceQuery?.data?.regen?.usd,
-        eeurPrice: regenPriceQuery?.data?.[GECKO_EEUR_ID]?.usd,
-        usdcPrice: regenPriceQuery?.data?.[GECKO_USDC_ID]?.usd,
-      },
-      limit,
-    });
+      metadata,
+      random,
+      projectId,
+    }) ?? [];
+  const sortedProjects = selectedProjects
+    .sort(sortProjectsBySellOrdersAvailability(sellOrders ?? []))
+    .slice(0, limit);
+
+  /* Metadata queries */
+
+  const metadataResults = useQueries({
+    queries: sortedProjects.map(project =>
+      getMetadataQuery({ iri: project.metadata }),
+    ),
+  });
+  const metadatas = metadataResults.map(queryResult => queryResult.data);
+
+  /* Normalization */
+
+  const projectsWithOrderData = normalizeProjectsWithOrderData({
+    projects: sortedProjects,
+    sellOrders,
+    geckoPrices: {
+      regenPrice: simplePrice?.data?.regen?.usd,
+      eeurPrice: simplePrice?.data?.[GECKO_EEUR_ID]?.usd,
+      usdcPrice: simplePrice?.data?.[GECKO_USDC_ID]?.usd,
+    },
+    metadatas,
+    userAddress: wallet?.address,
+  });
 
   return {
     projectsWithOrderData,
-    loading: loadingProjects || loadingWithOrders,
+    loading: isLoadingProjects || isLoadingProjectsByClass,
   };
 }

@@ -23,7 +23,7 @@ export const useSortProjects = ({
   return sortedProjects;
 };
 
-const sortProjects = (
+export const sortProjects = (
   projects: ProjectWithOrderData[],
   sort: string,
 ): ProjectWithOrderData[] => {

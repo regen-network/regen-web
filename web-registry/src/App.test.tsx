@@ -8,7 +8,9 @@ import { useAnalytics } from 'use-analytics';
 
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 
-import { routes } from './routes';
+import { reactQueryClient } from 'lib/clients/reactQueryClient';
+
+import { getRoutes } from './routes';
 
 import './jest.mock';
 
@@ -59,7 +61,7 @@ describe('App', () => {
     });
 
     it('renders without crashing', () => {
-      const router = createMemoryRouter(routes);
+      const router = createMemoryRouter(getRoutes({ reactQueryClient }));
       const container = document.createElement('div');
       document.body.appendChild(container);
       ReactDOM.render(
@@ -84,7 +86,7 @@ describe('App', () => {
     });
 
     it('renders without crashing', () => {
-      const router = createMemoryRouter(routes);
+      const router = createMemoryRouter(getRoutes({ reactQueryClient }));
       const container = document.createElement('div');
       document.body.appendChild(container);
       ReactDOM.render(

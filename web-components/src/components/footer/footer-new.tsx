@@ -180,8 +180,11 @@ const Footer: React.FC<
           justifyContent="space-between"
         >
           <Grid item>
-            <Body styleLinks={false} color="primary">
-              <LinkComponent href={termsUrl}>Terms</LinkComponent> |{' '}
+            <Body styleLinks={false} color="primary" display="flex">
+              <LinkComponent href={termsUrl}>Terms</LinkComponent>
+              <Box component="span" sx={{ mx: 2 }}>
+                {'|'}
+              </Box>
               <LinkComponent href={privacyUrl}>Privacy</LinkComponent>
             </Body>
           </Grid>

@@ -41,9 +41,11 @@ import {
   QueryProjectsByClassResponse,
   QueryProjectsRequest,
   QueryProjectsResponse,
+  QuerySupplyRequest,
   QuerySupplyResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { MsgBridge } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
+import { QueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { uniq } from 'lodash';
 
@@ -52,6 +54,10 @@ import { TablePaginationParams } from 'web-components/lib/components/table/Actio
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { getBridgeTxStatus } from 'lib/bridge';
 import { getMetadata } from 'lib/db/api/metadata-graph';
+import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
+import { getSupplyQuery } from 'lib/queries/react-query/ecocredit/getSupplyQuery/getSupplyQuery';
+import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
+import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
@@ -307,13 +313,31 @@ export const getBatchesByProjectWithSupply = async (
 const getClassProjectForBatch = async (
   batch: BatchInfo,
   sanityCreditClassData?: AllCreditClassQuery,
+  reactQueryClient?: QueryClient,
 ): Promise<ClassProjectInfo> => {
+  let metadata, projectData;
   const { projectId } = batch;
-  const { project } = await getProject(projectId);
-  let metadata;
+  if (reactQueryClient) {
+    projectData = await getFromCacheOrFetch({
+      query: getProjectQuery({
+        request: { projectId },
+      }),
+      reactQueryClient,
+    });
+  } else {
+    projectData = await getProject(projectId);
+  }
+  const project = projectData?.project;
   if (project?.metadata.length) {
     try {
-      metadata = await getMetadata(project.metadata);
+      if (reactQueryClient) {
+        metadata = await getFromCacheOrFetch({
+          query: getMetadataQuery({ iri: project.metadata }),
+          reactQueryClient,
+        });
+      } else {
+        metadata = await getMetadata(project.metadata);
+      }
     } catch (error) {}
   }
 
@@ -336,6 +360,7 @@ export type AddDataToBatchesParams = {
   batches: BatchInfo[];
   sanityCreditClassData?: AllCreditClassQuery;
   withAllData?: boolean;
+  reactQueryClient?: QueryClient;
 };
 
 /* addDataToBatches adds Tx Hash and supply info to batch for use in tables */
@@ -343,6 +368,7 @@ export const addDataToBatches = async ({
   batches,
   sanityCreditClassData,
   withAllData = true,
+  reactQueryClient,
 }: AddDataToBatchesParams): Promise<BatchInfoWithSupply[]> => {
   try {
     /* TODO: this is limited to 100 results. We need to find a better way */
@@ -354,14 +380,25 @@ export const addDataToBatches = async ({
 
     return Promise.all(
       batches.map(async batch => {
-        const supplyData = await queryEcoBatchSupply(batch.denom);
-        let txhash, classProjectInfo;
+        let txhash, supplyData, classProjectInfo;
+
+        if (reactQueryClient) {
+          supplyData = (await getFromCacheOrFetch({
+            query: getSupplyQuery({
+              request: { batchDenom: batch.denom },
+            }),
+            reactQueryClient,
+          })) as QuerySupplyResponse;
+        } else {
+          supplyData = await queryEcoBatchSupply(batch.denom);
+        }
 
         if (withAllData) {
           txhash = getTxHashForBatch(txs.txResponses, batch.denom);
           classProjectInfo = await getClassProjectForBatch(
             batch,
             sanityCreditClassData,
+            reactQueryClient,
           );
         }
 
@@ -454,6 +491,10 @@ export const queryEcoBatchInfo = async (
   }
 };
 
+export interface QuerySupplyProps extends EcocreditQueryClientProps {
+  request: DeepPartial<QuerySupplyRequest>;
+}
+
 export const queryEcoBatchSupply = async (
   batchDenom: string,
 ): Promise<QuerySupplyResponse> => {
@@ -501,7 +542,7 @@ export const queryClassIssuers = async (
   }
 };
 
-interface QueryProjectsByClassProps extends EcocreditQueryClientProps {
+export interface QueryProjectsByClassProps extends EcocreditQueryClientProps {
   request: DeepPartial<QueryProjectsByClassRequest>;
 }
 
@@ -886,7 +927,7 @@ export const queryCreditTypes = async ({
 
 // Projects
 
-interface QueryProjectsProps extends EcocreditQueryClientProps {
+export interface QueryProjectsProps extends EcocreditQueryClientProps {
   request: DeepPartial<QueryProjectsRequest>;
 }
 
@@ -924,7 +965,7 @@ export const queryProjectsByAdmin = async ({
 
 // Project (by id)
 
-interface QueryProjectProps extends EcocreditQueryClientProps {
+export interface QueryProjectProps extends EcocreditQueryClientProps {
   request: DeepPartial<QueryProjectRequest>;
 }
 

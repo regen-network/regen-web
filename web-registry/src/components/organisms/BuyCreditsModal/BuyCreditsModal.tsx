@@ -5,7 +5,7 @@ import { Box, useTheme } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import Collapse from '@mui/material/Collapse';
 import Grid from '@mui/material/Grid';
-import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+import { useQuery } from '@tanstack/react-query';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 import { RadioGroup } from 'formik-mui';
 
@@ -33,7 +33,9 @@ import {
   Title,
 } from 'web-components/lib/components/typography';
 
+import { useLedger } from 'ledger';
 import { microToDenom } from 'lib/denom.utils';
+import { getAllowedDenomQuery } from 'lib/queries/react-query/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import { Buy2Event } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
@@ -42,7 +44,6 @@ import { Link as DynamicLink } from 'components/atoms/Link';
 import DenomIcon from 'components/molecules/DenomIcon';
 import DenomLabel from 'components/molecules/DenomLabel';
 import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
-import useMarketplaceQuery from 'hooks/useMarketplaceQuery';
 
 import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
 import { SetSelectedSellOrderElement } from './BuyCreditsModal.SetSelectedSellOrderElement';
@@ -72,7 +73,9 @@ interface BuyCreditsModalProps extends RegenModalProps {
   onTxQueued?: (txBytes: Uint8Array) => void;
   onSubmit?: (values: BuyCreditsValues) => Promise<void>;
   initialValues?: BuyCreditsValues;
-  project: BuyCreditsProject;
+  sellOrders?: UISellOrderInfo[];
+  project?: BuyCreditsProject;
+  setSelectedProjectById?: (projectId: string) => void;
   apiServerUrl?: string;
   imageStorageBaseUrl?: string;
 }
@@ -106,12 +109,15 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
     onSubmit,
     onClose,
     initialValues,
-    project,
+    sellOrders, // corresponding to one or more projects
+    project, // is just suplemmentary data. If several projects involved, then is selected when sell order is selected
+    setSelectedProjectById, // if several projects involved, handler to select the project when sell order is selected
     apiServerUrl,
     imageStorageBaseUrl,
   }) => {
     const { classes, cx } = useBuyCreditsModalStyles();
     const theme = useTheme();
+    const { marketplaceClient } = useLedger();
     const [selectedSellOrder, setSelectedSellOrder] = useState<
       UISellOrderInfo | undefined
     >(undefined);
@@ -132,15 +138,17 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
       return errors;
     };
 
-    const allowedDenomsResponse =
-      useMarketplaceQuery<QueryAllowedDenomsResponse>({
-        query: 'allowedDenoms',
-        params: {},
-      });
+    const { data: allowedDenomsData } = useQuery(
+      getAllowedDenomQuery({
+        client: marketplaceClient,
+        enabled: !!marketplaceClient,
+      }),
+    );
 
     const sellOrdersOptions = getOptions({
-      project,
-      allowedDenomsData: allowedDenomsResponse?.data,
+      sellOrders,
+      setSelectedProjectById,
+      allowedDenomsData,
     });
 
     const isDisableAutoRetire = selectedSellOrder?.disableAutoRetire;
@@ -160,7 +168,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
           >
             {'Buy Ecocredits'}
           </Title>
-          {project.name && (
+          {project?.name && (
             <Card className={cx(classes.thumbnailCard, classes.field)}>
               <CardContent className={classes.cardContent}>
                 <Image
@@ -194,6 +202,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
             initialValues={initialValues || BUY_CREDITS_MODAL_DEFAULT_VALUES}
             validate={validationHandler}
             onSubmit={async (values, { setSubmitting }) => {
+              if (!project) return;
               setSubmitting(true);
               track<'buy2', Buy2Event>('buy2', {
                 url: location.pathname,
@@ -245,7 +254,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                       native={false}
                     />
                     <SetSelectedSellOrderElement
-                      project={project}
+                      sellOrders={sellOrders}
                       selectedSellOrder={selectedSellOrder}
                       setSelectedSellOrder={setSelectedSellOrder}
                     />
@@ -266,7 +275,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                           {`${microToDenom(
                             selectedSellOrder?.askAmount || '',
                           )} ${findDisplayDenom({
-                            allowedDenomsData: allowedDenomsResponse?.data,
+                            allowedDenomsData,
                             denom: selectedSellOrder?.askDenom ?? '',
                           })}/credit`}
                         </Body>
@@ -342,8 +351,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                                 <DenomLabel
                                   denom={
                                     findDisplayDenom({
-                                      allowedDenomsData:
-                                        allowedDenomsResponse?.data,
+                                      allowedDenomsData,
                                       denom: selectedSellOrder?.askDenom ?? '',
                                     }) ?? ''
                                   }

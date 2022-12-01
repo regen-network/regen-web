@@ -9,6 +9,7 @@
   REACT_APP_ANALYTICS_ENABLED="true"
   REACT_APP_BRIDGE_CREDIT_CLASS_ID = "C03"
   REACT_APP_GA_MEASUREMENT_ID="G-6ZGJM8JXYN"
+  REACT_APP_TOUCAN_LINK="https://toucan.earth/overview?chainId=137"
 
 [context.deploy-preview.environment]
   REACT_APP_SANITY_TAG = "default"
@@ -19,7 +20,9 @@
   REACT_APP_LEDGER_CHAIN_ID = "regen-redwood-1"
   REACT_APP_LEDGER_CHAIN_NAME = "Regen - Redwood Testnet"
   REACT_APP_BLOCK_EXPLORER = "https://redwood.regen.aneka.io"
-  REACT_APP_SENTRY_ENVIRONMENT = "development"
+  REACT_APP_SENTRY_ENVIRONMENT="development"
+  REACT_APP_TOUCAN_LINK="https://mumbai.polygonscan.com/tx"
+  REACT_APP_BRIDGE_API_URI="https://toucan-bridge-staging.herokuapp.com"
   REACT_APP_BRIDGE_CREDIT_CLASS_ID = "C46"
 
 [context.hambach.environment]
@@ -32,7 +35,9 @@
   REACT_APP_LEDGER_CHAIN_NAME = "Regen - Hambach Testnet"
   REACT_APP_BLOCK_EXPLORER = "https://hambach.regen.aneka.io"
   REACT_APP_EXP_LEDGER = "true"
-  REACT_APP_SENTRY_ENVIRONMENT = "hambach"
+  REACT_APP_SENTRY_ENVIRONMENT="hambach"
+  REACT_APP_TOUCAN_LINK="https://mumbai.polygonscan.com/tx"
+  REACT_APP_BRIDGE_API_URI="https://toucan-bridge-staging.herokuapp.com"
 
 [context.redwood.environment]
   REACT_APP_SANITY_TAG = "default"
@@ -44,6 +49,8 @@
   REACT_APP_LEDGER_CHAIN_NAME = "Regen - Redwood Testnet"
   REACT_APP_BLOCK_EXPLORER = "https://redwood.regen.aneka.io"
   REACT_APP_SENTRY_ENVIRONMENT = "redwood"
+  REACT_APP_TOUCAN_LINK="https://mumbai.polygonscan.com/tx"
+  REACT_APP_BRIDGE_API_URI="https://toucan-bridge-staging.herokuapp.com"
   REACT_APP_BRIDGE_CREDIT_CLASS_ID = "C46"
 
 [build.environment]

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
 import { gradients } from 'styles/gradients';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
@@ -8,15 +9,16 @@ import Modal from 'web-components/lib/components/modal';
 import SEO from 'web-components/lib/components/seo';
 import { Body, Title } from 'web-components/lib/components/typography';
 
+import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
+import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
+
+import BlockContentBody from 'components/molecules/BlockContentBody';
+
 import horsesImg from '../../assets/horses-grazing.png';
 import { SanityButton } from '../../components/atoms';
 import { BackgroundImgSection, HeroAction } from '../../components/molecules';
 import { CreditClassCards } from '../../components/organisms';
-import {
-  useAllCreditClassQuery,
-  useAllHomePageQuery,
-} from '../../generated/sanity-graphql';
-import { client } from '../../sanity';
+import { client as sanityClient } from '../../sanity';
 import { FeaturedProjects } from './Home.FeaturedProjects';
 import { useHomeStyles } from './Home.styles';
 
@@ -26,13 +28,18 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   const { classes } = useHomeStyles();
 
-  // Featured projects fetching
+  const { data: allHomePageData, isFetching: isFetchingAllHomePage } = useQuery(
+    getAllHomePageQuery({ sanityClient, enabled: !!sanityClient }),
+  );
+  const { data: creditClassData } = useQuery(
+    getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+  );
 
-  const { data, loading: loadingSanity } = useAllHomePageQuery({ client });
-  const { data: creditClassData } = useAllCreditClassQuery({ client });
+  const content = allHomePageData?.allHomePage?.[0];
 
-  const content = data?.allHomePage?.[0];
   const heroSection = content?.heroSection;
+  const projectsSection = content?.projectsSection;
+  const creditClassesSection = content?.creditClassesSection;
   const seo = content?.seo;
 
   const creditClassesContent = creditClassData?.allCreditClass;
@@ -47,7 +54,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
     }
   }, []);
 
-  if (loadingSanity) return <Loading sx={{ minHeight: '100vh' }} />;
+  if (isFetchingAllHomePage) return <Loading sx={{ minHeight: '100vh' }} />;
 
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
@@ -132,7 +139,10 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
         </Box>
       </BackgroundImgSection>
 
-      <FeaturedProjects />
+      <FeaturedProjects
+        title={projectsSection?.title || 'Featured Projects'}
+        body={projectsSection?.bodyRaw}
+      />
 
       {creditClassesContent && (
         <BackgroundImgSection
@@ -141,13 +151,16 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
             display: 'flex',
             alignItems: 'center',
           }}
-          title="Credit Classes"
+          title={creditClassesSection?.title || 'Credit Classes'}
           classes={{
             root: classes.creditClassBackground,
             title: classes.title,
           }}
           id="credit-classes"
         >
+          {creditClassesSection?.bodyRaw && (
+            <BlockContentBody body={creditClassesSection?.bodyRaw} />
+          )}
           <CreditClassCards
             btnText="Learn More"
             justifyContent={['center', 'center', 'flex-start']}

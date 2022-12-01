@@ -4,14 +4,15 @@ import { Party } from 'web-components/lib/components/modal/LedgerModal';
 import { getFormattedPeriod } from 'web-components/lib/utils/format';
 
 import {
+  ProjectMetadataIntersectionLD,
+  ProjectStakeholder,
+} from 'lib/db/types/json-ld';
+
+import {
   Maybe,
   PartyFieldsFragment,
   ProjectByOnChainIdQuery,
 } from '../generated/graphql';
-import {
-  ProjectMetadataLD,
-  ProjectStakeholder,
-} from '../generated/json-ld/index';
 
 // buildIssuanceModalData builds some IssuanceModalData to provide
 // to a Timeline Event based on some optional credit vintage data.
@@ -188,10 +189,10 @@ type StakeholderType =
   | 'regen:projectOriginator';
 
 const getPartyFromMetadata = (
-  metadata: ProjectMetadataLD,
+  metadata: Partial<ProjectMetadataIntersectionLD>,
   role: StakeholderType,
 ): Party | undefined => {
-  const metadataRole: ProjectStakeholder = metadata[role];
+  const metadataRole: ProjectStakeholder | undefined = metadata[role];
   if (!metadataRole) return undefined;
 
   return {
@@ -209,7 +210,7 @@ const getPartyFromMetadata = (
 
 export function getDisplayParty(
   role: StakeholderType,
-  metadata?: ProjectMetadataLD,
+  metadata?: Partial<ProjectMetadataIntersectionLD>,
   party?: Maybe<PartyFieldsFragment>,
 ): Party | undefined {
   const showOnProjectPage = metadata?.[role]?.['regen:showOnProjectPage'];

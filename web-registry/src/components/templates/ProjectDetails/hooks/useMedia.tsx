@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 
 import StaticMap from 'web-components/lib/components/map/StaticMap';
 import { Asset } from 'web-components/lib/components/sliders/ProjectMedia';
-import { UrlType } from 'web-components/lib/utils/schemaURL';
+
+import { UrlType } from 'lib/rdf/types';
 
 import {
   API_URI,

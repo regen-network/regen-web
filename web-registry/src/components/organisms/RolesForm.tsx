@@ -3,10 +3,6 @@ import { useParams } from 'react-router-dom';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import {
-  FormValues,
-  RoleField,
-} from 'web-components/lib/components/inputs/RoleField';
 import TextField from 'web-components/lib/components/inputs/TextField';
 import {
   invalidAddress,
@@ -21,6 +17,19 @@ import { Subtitle } from 'web-components/lib/components/typography';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
 import {
+  defaultProjectContext,
+  getCompactedPath,
+  getProjectPageBaseData,
+  validate,
+} from 'lib/rdf';
+import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
+
+import {
+  FormValues,
+  RoleField,
+} from 'components/molecules/RoleField/RoleField';
+
+import {
   GetOrganizationProfileByEmailQuery,
   ShaclGraphByUriQuery,
   useReallyCreateOrganizationMutation,
@@ -31,12 +40,6 @@ import {
   useUpdateUserByIdMutation,
 } from '../../generated/graphql';
 import getApiUri from '../../lib/apiUri';
-import {
-  defaultProjectContext,
-  getCompactedPath,
-  getProjectPageBaseData,
-  validate,
-} from '../../lib/rdf';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../molecules';
 

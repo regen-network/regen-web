@@ -2,10 +2,10 @@ import { Flex } from 'web-components/lib/components/box';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import { Body, Label } from 'web-components/lib/components/typography';
 
-import { ApprovedMethodologies } from 'generated/json-ld';
+import { ApprovedMethodologies } from 'lib/db/types/json-ld';
 
 import { Link } from 'components/atoms';
-import { LineItemLabelAbove } from 'components/molecules';
+import { MetaDetail } from 'components/molecules';
 
 import { MAX_METHODOLOGIE_LINKS } from './CreditClassDetails.constants';
 
@@ -22,7 +22,7 @@ const ApprovedMethodologiesList: React.FC<
   if (!count || count < 1) return null;
 
   return (
-    <LineItemLabelAbove
+    <MetaDetail
       label="approved methodologies"
       data={
         <Flex flexDirection="column">

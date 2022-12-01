@@ -4,7 +4,6 @@ import { DefaultTheme as Theme } from '@mui/styles';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 import { makeStyles } from 'tss-react/mui';
 
-import { UrlType } from '../../utils/schemaURL';
 import { Button } from '../buttons/Button';
 import ContainedButton from '../buttons/ContainedButton';
 import OnBoardingCard from '../cards/OnBoardingCard';
@@ -13,6 +12,12 @@ import ControlledTextField from '../inputs/ControlledTextField';
 import { ImageUpload } from '../inputs/ImageUpload';
 import { Title } from '../typography';
 import Modal from '.';
+
+// TODO: type UrlType has been temporarily duplicated due to moving the RDF types to the web-registry app
+interface UrlType {
+  '@type': 'schema:URL';
+  '@value'?: string | null;
+}
 
 type ProfileType = 'regen:Individual' | 'regen:Organization';
 

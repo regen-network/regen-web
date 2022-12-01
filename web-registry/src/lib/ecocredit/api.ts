@@ -41,15 +41,23 @@ import {
   QueryProjectsByClassResponse,
   QueryProjectsRequest,
   QueryProjectsResponse,
+  QuerySupplyRequest,
   QuerySupplyResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { MsgBridge } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
+import { QueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { uniq } from 'lodash';
 
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
-import { getMetadata } from 'lib/metadata-graph';
+import { getBridgeTxStatus } from 'lib/bridge';
+import { getMetadata } from 'lib/db/api/metadata-graph';
+import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
+import { getSupplyQuery } from 'lib/queries/react-query/ecocredit/getSupplyQuery/getSupplyQuery';
+import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
+import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
@@ -58,6 +66,9 @@ import type {
   BatchInfoWithBalance,
   BatchInfoWithSupply,
   BatchTotalsForProject,
+  BridgedEcocredits,
+  ClassProjectInfo,
+  IBatchInfoWithClassProject,
 } from '../../types/ledger/ecocredit';
 import { expLedger, ledgerRESTUri } from '../ledger';
 import { ECOCREDIT_MESSAGE_TYPES, messageActionEquals } from './constants';
@@ -115,31 +126,15 @@ const getCreditsWithData = async ({
       const batch = batches.find(batch => batch.denom === balance.batchDenom);
 
       if (!batch) return undefined;
-
-      const classId = await getClassIdForBatch(batch);
-      const project = await getProject(batch?.projectId);
-      let metadata;
-      if (project?.project?.metadata.length) {
-        try {
-          metadata = await getMetadata(project.project.metadata);
-        } catch (error) {
-          // eslint-disable-next-line
-          console.error(error);
-        }
-      }
-
-      const creditClassSanity = findSanityCreditClass({
+      const classProjectInfo = await getClassProjectForBatch(
+        batch,
         sanityCreditClassData,
-        creditClassIdOrUrl: classId ?? '',
-      });
+      );
 
       return {
         ...batch,
+        ...classProjectInfo,
         balance,
-        classId,
-        className: creditClassSanity?.nameRaw ?? classId,
-        projectName: metadata?.['schema:name'] ?? batch.projectId,
-        projectLocation: project.project?.jurisdiction,
       };
     }),
   );
@@ -217,6 +212,70 @@ export const getEcocreditTxs = async (): Promise<TxResponse[]> => {
   });
 };
 
+export const getBridgedEcocreditsForAccount = async (
+  addr?: string,
+  sanityCreditClassData?: AllCreditClassQuery,
+): Promise<BridgedEcocredits[] | undefined> => {
+  if (addr) {
+    // Since bridged ecocredits are canceled on Regen Ledger,
+    // the only way to get them is to fetch txs by event and loop through the tx messages.
+    // Txs can have multiple messages and MsgBridge messages can have multiple credits
+    // so we can't really support pagination.
+    const res = await getTxsByEvent({
+      events: [
+        `${messageActionEquals}'/${MsgBridge.$type}'`,
+        `message.sender='${addr}'`,
+      ],
+      orderBy: OrderBy.ORDER_BY_DESC,
+    });
+
+    const bridgedCredits: BridgedEcocredits[] = [];
+    const batchesMap = new Map<string, IBatchInfoWithClassProject>();
+    for (let i = 0; i < res.txs.length; i++) {
+      const txBody = res.txs[i].body;
+      if (txBody) {
+        // Get the tx status using the bridge service api
+        let status, destinationTxHash;
+        const txStatus = await getBridgeTxStatus(res.txResponses[i].txhash);
+        status = txStatus?.status;
+        destinationTxHash = txStatus?.destination_tx_hash;
+        const messages = txBody.messages.filter(
+          m => m.typeUrl === `/${MsgBridge.$type}`,
+        );
+        for (let j = 0; j < messages.length; j++) {
+          // Decoding the bridge msg to get the batch(es) info used to bridge ecocredits
+          const message = messages[j];
+          const { credits } = MsgBridge.decode(message.value);
+          for (let k = 0; k < credits.length; k++) {
+            const { batchDenom, amount } = credits[k];
+            let cachedBatch = batchesMap.get(batchDenom);
+            if (!cachedBatch) {
+              const { batch } = await queryEcoBatchInfo(batchDenom);
+              let classProjectInfo: ClassProjectInfo | undefined;
+              if (batch) {
+                classProjectInfo = await getClassProjectForBatch(
+                  batch,
+                  sanityCreditClassData,
+                );
+                cachedBatch = { ...classProjectInfo, ...batch };
+                batchesMap.set(batchDenom, cachedBatch);
+              }
+            }
+            bridgedCredits.push({
+              amount,
+              status,
+              destinationTxHash,
+              ...(cachedBatch as IBatchInfoWithClassProject),
+            });
+          }
+        }
+      }
+    }
+    return bridgedCredits;
+  }
+  return;
+};
+
 type GetBatchesWithSupplyParams = {
   creditClassId?: string | null;
   params?: URLSearchParams;
@@ -231,7 +290,7 @@ export const getBatchesWithSupply = async ({
   data: BatchInfoWithSupply[];
 }> => {
   const batches = await queryEcoBatches(creditClassId, params);
-  const batchesWithData = await addDataToBatch({ batches, withAllData });
+  const batchesWithData = await addDataToBatches({ batches, withAllData });
   return { data: batchesWithData };
 };
 
@@ -247,22 +306,70 @@ export const getBatchesByProjectWithSupply = async (
     client,
     request: { projectId },
   });
-  const batchesWithData = await addDataToBatch({ batches: batches?.batches });
+  const batchesWithData = await addDataToBatches({ batches: batches?.batches });
   return { data: batchesWithData };
 };
 
-/** Adds Tx Hash and supply info to batch for use in tables */
-export type AddDataToBatchParams = {
+const getClassProjectForBatch = async (
+  batch: BatchInfo,
+  sanityCreditClassData?: AllCreditClassQuery,
+  reactQueryClient?: QueryClient,
+): Promise<ClassProjectInfo> => {
+  let metadata, projectData;
+  const { projectId } = batch;
+  if (reactQueryClient) {
+    projectData = await getFromCacheOrFetch({
+      query: getProjectQuery({
+        request: { projectId },
+      }),
+      reactQueryClient,
+    });
+  } else {
+    projectData = await getProject(projectId);
+  }
+  const project = projectData?.project;
+  if (project?.metadata.length) {
+    try {
+      if (reactQueryClient) {
+        metadata = await getFromCacheOrFetch({
+          query: getMetadataQuery({ iri: project.metadata }),
+          reactQueryClient,
+        });
+      } else {
+        metadata = await getMetadata(project.metadata);
+      }
+    } catch (error) {}
+  }
+
+  // TODO should we use credit class metadata instead of Sanity eventually?
+  // https://github.com/regen-network/regen-registry/issues/1428
+  const creditClassSanity = findSanityCreditClass({
+    sanityCreditClassData,
+    creditClassIdOrUrl: project?.classId ?? '',
+  });
+
+  return {
+    classId: project?.classId,
+    className: creditClassSanity?.nameRaw,
+    projectName: metadata?.['schema:name'] ?? batch.projectId,
+    projectLocation: project?.jurisdiction,
+  };
+};
+
+export type AddDataToBatchesParams = {
   batches: BatchInfo[];
   sanityCreditClassData?: AllCreditClassQuery;
   withAllData?: boolean;
+  reactQueryClient?: QueryClient;
 };
 
-export const addDataToBatch = async ({
+/* addDataToBatches adds Tx Hash and supply info to batch for use in tables */
+export const addDataToBatches = async ({
   batches,
   sanityCreditClassData,
   withAllData = true,
-}: AddDataToBatchParams): Promise<BatchInfoWithSupply[]> => {
+  reactQueryClient,
+}: AddDataToBatchesParams): Promise<BatchInfoWithSupply[]> => {
   try {
     /* TODO: this is limited to 100 results. We need to find a better way */
     const txs = await getTxsByEvent({
@@ -273,36 +380,33 @@ export const addDataToBatch = async ({
 
     return Promise.all(
       batches.map(async batch => {
-        const supplyData = await queryEcoBatchSupply(batch.denom);
-        let txhash, classId, project, metadata, creditClassSanity;
+        let txhash, supplyData, classProjectInfo;
+
+        if (reactQueryClient) {
+          supplyData = (await getFromCacheOrFetch({
+            query: getSupplyQuery({
+              request: { batchDenom: batch.denom },
+            }),
+            reactQueryClient,
+          })) as QuerySupplyResponse;
+        } else {
+          supplyData = await queryEcoBatchSupply(batch.denom);
+        }
 
         if (withAllData) {
           txhash = getTxHashForBatch(txs.txResponses, batch.denom);
-          classId = getClassIdForBatch(batch);
-          project = await getProject(batch.projectId);
-          if (project?.project?.metadata.length) {
-            try {
-              metadata = await getMetadata(project.project.metadata);
-            } catch (error) {
-              // eslint-disable-next-line
-              console.error(error);
-            }
-          }
-
-          creditClassSanity = findSanityCreditClass({
+          classProjectInfo = await getClassProjectForBatch(
+            batch,
             sanityCreditClassData,
-            creditClassIdOrUrl: classId ?? '',
-          });
+            reactQueryClient,
+          );
         }
 
         return {
           ...batch,
+          ...classProjectInfo,
           ...supplyData,
           txhash,
-          classId,
-          className: creditClassSanity?.nameRaw,
-          projectName: metadata?.['schema:name'] ?? batch.projectId,
-          projectLocation: project?.project?.jurisdiction,
         };
       }),
     );
@@ -387,6 +491,10 @@ export const queryEcoBatchInfo = async (
   }
 };
 
+export interface QuerySupplyProps extends EcocreditQueryClientProps {
+  request: DeepPartial<QuerySupplyRequest>;
+}
+
 export const queryEcoBatchSupply = async (
   batchDenom: string,
 ): Promise<QuerySupplyResponse> => {
@@ -434,7 +542,7 @@ export const queryClassIssuers = async (
   }
 };
 
-interface QueryProjectsByClassProps extends EcocreditQueryClientProps {
+export interface QueryProjectsByClassProps extends EcocreditQueryClientProps {
   request: DeepPartial<QueryProjectsByClassRequest>;
 }
 
@@ -819,7 +927,7 @@ export const queryCreditTypes = async ({
 
 // Projects
 
-interface QueryProjectsProps extends EcocreditQueryClientProps {
+export interface QueryProjectsProps extends EcocreditQueryClientProps {
   request: DeepPartial<QueryProjectsRequest>;
 }
 
@@ -857,7 +965,7 @@ export const queryProjectsByAdmin = async ({
 
 // Project (by id)
 
-interface QueryProjectProps extends EcocreditQueryClientProps {
+export interface QueryProjectProps extends EcocreditQueryClientProps {
   request: DeepPartial<QueryProjectRequest>;
 }
 

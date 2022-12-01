@@ -1,4 +1,4 @@
-import { useSortProjects } from 'pages/Projects/hooks/useSortProjects';
+import { sortProjects } from 'pages/Projects/hooks/useSortProjects';
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 import { useProjectsWithOrders } from 'hooks/projects/useProjectsWithOrders';
 
@@ -14,10 +14,7 @@ export function useFeaturedProjects(): {
     metadata: true, // to discard projects without metadata prop
   });
 
-  const sortedProjects = useSortProjects({
-    projects: projectsWithOrderData,
-    sort: PROJECTS_SORT,
-  });
+  const sortedProjects = sortProjects(projectsWithOrderData, PROJECTS_SORT);
 
   return {
     featuredProjects: sortedProjects,

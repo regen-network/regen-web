@@ -13,7 +13,7 @@ interface Props {
 
 export const PortfolioHeader = ({ accountAddress }: Props): JSX.Element => {
   return (
-    <Box sx={{ p: 3, mt: { xs: 2, sm: 4 }, mb: { xs: 4, sm: 8 } }}>
+    <Box sx={{ mt: { xs: 2, sm: 4 }, mb: { xs: 4, sm: 8 } }}>
       <Label size="sm" mobileSize="sm" sx={{ display: 'inline' }}>
         Account:
       </Label>

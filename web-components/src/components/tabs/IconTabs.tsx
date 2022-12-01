@@ -43,11 +43,14 @@ const StyledTabs = styled(Tabs, {
       display: 'block',
     },
     '& .MuiTabs-scroller': {
+      [theme.breakpoints.up('md')]: {
+        marginLeft: mobileFullWidth ? theme.spacing(-3) : 0,
+      },
       [theme.breakpoints.down('md')]: {
-        paddingLeft: mobileFullWidth ? theme.spacing(10) : 0,
+        paddingLeft: mobileFullWidth ? theme.spacing(7) : 0,
       },
       [theme.breakpoints.down('sm')]: {
-        paddingLeft: mobileFullWidth ? theme.spacing(4) : 0,
+        paddingLeft: mobileFullWidth ? theme.spacing(1) : 0,
       },
     },
     '& .MuiTabs-indicator': {

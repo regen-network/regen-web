@@ -80,10 +80,7 @@ export const BridgeFlow = ({
 
   const onTxSuccessButtonClick = (): void => {
     handleTxModalClose();
-    navigate('/ecocredits/bridge', {
-      replace: true,
-      state: { tab: 'bridged' },
-    });
+    navigate('/ecocredits/bridge/bridged');
   };
 
   const accountAddress = wallet?.address;

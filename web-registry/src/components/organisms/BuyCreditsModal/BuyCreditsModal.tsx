@@ -34,7 +34,7 @@ import {
 
 import { useLedger } from 'ledger';
 import { microToDenom } from 'lib/denom.utils';
-import { getAllowedDenomQuery } from 'lib/queries/react-query/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
+import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import { Buy2Event } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 

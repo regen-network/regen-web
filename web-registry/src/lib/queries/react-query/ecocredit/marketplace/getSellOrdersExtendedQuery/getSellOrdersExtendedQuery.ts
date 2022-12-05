@@ -4,8 +4,8 @@ import { DenomTraceWithHash } from 'lib/ibc/transfer/api';
 
 import { IBC_DENOM_PREFIX } from 'hooks/useQuerySellOrders';
 
-import { getDenomTraceByHashesQuery } from '../../ibc/transfer/getDenomTraceByHashesQuery/getDenomTraceByHashesQuery';
-import { getFromCacheOrFetch } from '../../utils/getFromCacheOrFetch';
+import { getDenomTraceByHashesQuery } from '../../../ibc/transfer/getDenomTraceByHashesQuery/getDenomTraceByHashesQuery';
+import { getFromCacheOrFetch } from '../../../utils/getFromCacheOrFetch';
 import {
   ReactQuerySellOrdersExtentedProps,
   ReactQuerySellOrdersExtentedResponse,

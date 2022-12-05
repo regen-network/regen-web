@@ -6,7 +6,7 @@ import { QueryObserverOptions } from '@tanstack/react-query';
 
 import { MarketplaceQueryClient } from 'lib/ecocredit/marketplace/marketplace.types';
 
-import { ReactQueryBuilderResponse } from '../../types/react-query.types';
+import { ReactQueryBuilderResponse } from '../../../types/react-query.types';
 
 export type ReactQueryAllowedDenomResponse = QueryObserverOptions<
   QueryAllowedDenomsResponse | undefined

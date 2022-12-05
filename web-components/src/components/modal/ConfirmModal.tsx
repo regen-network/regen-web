@@ -40,7 +40,7 @@ interface LinkProps extends LinkItem {
   sx?: SxProps<Theme>;
 }
 
-type LinkComponentProp = React.FC<React.PropsWithChildren<LinkProps>>;
+export type LinkComponentProp = React.FC<React.PropsWithChildren<LinkProps>>;
 
 export interface ConfirmModalProps extends RegenModalProps {
   onConfirm: () => void;

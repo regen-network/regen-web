@@ -21,10 +21,6 @@ import {
   CREDIT_RETIRE_TITLE,
   CreditRetireModal,
 } from 'web-components/lib/components/modal/CreditRetireModal';
-import {
-  CREDIT_SEND_TITLE,
-  CreditSendModal,
-} from 'web-components/lib/components/modal/CreditSendModal';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
@@ -40,6 +36,10 @@ import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
+import {
+  CREDIT_SEND_TITLE,
+  CreditSendModal,
+} from 'components/organisms/Modals/CreditSendModal/CreditSendModal';
 import { Portfolio } from 'components/organisms/Portfolio';
 import {
   useBasketsWithClasses,

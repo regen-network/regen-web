@@ -1,8 +1,6 @@
-import { URL_WEB_PRIVACY, URL_WEB_TERMS_SERVICE } from '../../utils/globals';
 import { BasketPutForm } from './BasketPutForm';
 import { BasketTakeForm } from './BasketTakeForm';
 import { CreditRetireForm } from './CreditRetireForm';
-import { CreditSendForm } from './CreditSendForm';
 // import OrganizationProfileForm from './OrganizationProfileForm';
 import LoginForm from './LoginForm';
 import { FormValues, RecipientsForm } from './RecipientsForm';
@@ -43,29 +41,18 @@ export const userProfile = (): JSX.Element => (
 export const signUpForm = (): JSX.Element => (
   <LoginForm
     submit={submit}
-    termsLink={URL_WEB_TERMS_SERVICE}
+    termsLink={'https://www.regen.network/terms-service/'}
     loginFromSignup={submit}
-    privacyLink={URL_WEB_PRIVACY}
+    privacyLink={'https://www.regen.network/privacy-policy/'}
   />
 );
 
 export const loginForm = (): JSX.Element => (
   <LoginForm
     submit={submit}
-    termsLink={URL_WEB_TERMS_SERVICE}
+    termsLink={'https://www.regen.network/terms-service/'}
     signupFromLogin="/"
-    privacyLink={URL_WEB_PRIVACY}
-  />
-);
-
-export const creditSendForm = (): JSX.Element => (
-  <CreditSendForm
-    sender={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'} // test account
-    availableTradableAmount={1000}
-    batchDenom={'C01-20190101-20201010-02'}
-    mapboxToken={MAPBOX_TOKEN}
-    onClose={() => null}
-    onSubmit={async () => alert('submit')}
+    privacyLink={'https://www.regen.network/privacy-policy/'}
   />
 );
 

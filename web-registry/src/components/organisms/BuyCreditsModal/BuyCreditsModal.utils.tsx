@@ -221,7 +221,7 @@ export const getCreditCountValidation =
     let error;
 
     if (askAmount && userBalance < askAmount * creditCount) {
-      error = `You don’t have enough (${displayDenom}).`;
+      error = `You don’t have enough ${displayDenom}.`;
     }
     if (creditCount > creditAvailable) {
       error = `Must be less than or equal to the max credit(s) available (${creditAvailable}).`;

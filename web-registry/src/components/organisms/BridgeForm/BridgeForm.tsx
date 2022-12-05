@@ -1,18 +1,18 @@
-import React from 'react';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 
-import AgreeErpaCheckbox from '../inputs/AgreeErpaCheckbox';
-import AmountField from '../inputs/AmountField';
-import FormLabel from '../inputs/FormLabel';
-import SelectTextField from '../inputs/SelectTextField';
-import TextField from '../inputs/TextField';
+import Submit from 'web-components/lib/components/form/Submit';
+import AmountField from 'web-components/lib/components/inputs/AmountField';
+import FormLabel from 'web-components/lib/components/inputs/FormLabel';
+import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
+import TextField from 'web-components/lib/components/inputs/TextField';
 import {
   requirementAgreement,
   validateAmount,
   validatePolygonAddress,
-} from '../inputs/validation';
-import { RegenModalProps } from '../modal';
-import Submit from './Submit';
+} from 'web-components/lib/components/inputs/validation';
+import { RegenModalProps } from 'web-components/lib/components/modal';
+
+import AgreeErpaCheckbox from 'components/atoms/AgreeErpaCheckbox';
 
 const BRIDGE_ALLOWED_CHAINS = [{ label: 'Polygon', value: 'polygon' }];
 

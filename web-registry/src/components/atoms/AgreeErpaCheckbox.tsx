@@ -1,10 +1,10 @@
 import { Link as LinkExt, SxProps, Theme, useTheme } from '@mui/material';
-
 import {
   URL_REGISTRY_MARKETPLACE_LEGAL,
   URL_REGISTRY_TERMS_SERVICE,
-} from '../../utils/globals';
-import AgreeCheckbox from './AgreeCheckbox';
+} from 'config/globals';
+
+import AgreeCheckbox from 'web-components/lib/components/inputs/AgreeCheckbox';
 
 interface Props {
   sx?: SxProps<Theme>;

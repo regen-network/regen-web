@@ -13,7 +13,6 @@ import { Flex } from 'web-components/lib/components/box';
 import Card from 'web-components/lib/components/cards/Card';
 import Submit from 'web-components/lib/components/form/Submit';
 import { Image } from 'web-components/lib/components/image';
-import AgreeErpaCheckbox from 'web-components/lib/components/inputs/AgreeErpaCheckbox';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
 import SelectFieldFallback from 'web-components/lib/components/inputs/SelectFieldFallback';
@@ -40,6 +39,7 @@ import { Buy2Event } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { UISellOrderInfo } from 'pages/Projects/Projects.types';
+import AgreeErpaCheckbox from 'components/atoms/AgreeErpaCheckbox';
 import { Link as DynamicLink } from 'components/atoms/Link';
 import DenomIcon from 'components/molecules/DenomIcon';
 import DenomLabel from 'components/molecules/DenomLabel';

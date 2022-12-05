@@ -19,6 +19,12 @@ query allHomePage {
     gettingStartedResourcesSection {
       ...gettingStartedResourcesSectionFields
     }
+    projectsSection {
+      ...titleCustomBodyFields
+    }
+    creditClassesSection {
+      ...titleCustomBodyFields
+    }
     bottomBanner {
       ...bottomBannerFields
     }

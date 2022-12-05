@@ -20180,6 +20180,30 @@
             "deprecationReason": null
           },
           {
+            "name": "projectsSection",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "TitleCustomBody",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "creditClassesSection",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "TitleCustomBody",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "gettingStartedResourcesSection",
             "description": null,
             "args": [],
@@ -20330,6 +20354,30 @@
             "deprecationReason": null
           },
           {
+            "name": "projectsSection",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TitleCustomBodyFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "creditClassesSection",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TitleCustomBodyFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "gettingStartedResourcesSection",
             "description": null,
             "type": {
@@ -20454,6 +20502,30 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "HomePageTopSectionSorting",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "projectsSection",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TitleCustomBodySorting",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "creditClassesSection",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TitleCustomBodySorting",
               "ofType": null
             },
             "defaultValue": null,

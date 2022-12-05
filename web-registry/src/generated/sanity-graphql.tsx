@@ -2319,6 +2319,8 @@ export type HomePage = Document & {
   _key?: Maybe<Scalars['String']>;
   seo?: Maybe<Seo>;
   heroSection?: Maybe<HomePageTopSection>;
+  projectsSection?: Maybe<TitleCustomBody>;
+  creditClassesSection?: Maybe<TitleCustomBody>;
   gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSection>;
   bottomBanner?: Maybe<BottomBanner>;
 };
@@ -2334,6 +2336,8 @@ export type HomePageFilter = {
   _key?: Maybe<StringFilter>;
   seo?: Maybe<SeoFilter>;
   heroSection?: Maybe<HomePageTopSectionFilter>;
+  projectsSection?: Maybe<TitleCustomBodyFilter>;
+  creditClassesSection?: Maybe<TitleCustomBodyFilter>;
   gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSectionFilter>;
   bottomBanner?: Maybe<BottomBannerFilter>;
 };
@@ -2347,6 +2351,8 @@ export type HomePageSorting = {
   _key?: Maybe<SortOrder>;
   seo?: Maybe<SeoSorting>;
   heroSection?: Maybe<HomePageTopSectionSorting>;
+  projectsSection?: Maybe<TitleCustomBodySorting>;
+  creditClassesSection?: Maybe<TitleCustomBodySorting>;
   bottomBanner?: Maybe<BottomBannerSorting>;
 };
 
@@ -6473,6 +6479,12 @@ export type AllHomePageQuery = (
     )>, gettingStartedResourcesSection?: Maybe<(
       { __typename?: 'GettingStartedResourcesSection' }
       & GettingStartedResourcesSectionFieldsFragment
+    )>, projectsSection?: Maybe<(
+      { __typename?: 'TitleCustomBody' }
+      & TitleCustomBodyFieldsFragment
+    )>, creditClassesSection?: Maybe<(
+      { __typename?: 'TitleCustomBody' }
+      & TitleCustomBodyFieldsFragment
     )>, bottomBanner?: Maybe<(
       { __typename?: 'BottomBanner' }
       & BottomBannerFieldsFragment
@@ -6928,6 +6940,11 @@ export type TimelineItemFieldsFragment = (
   )>>> }
 );
 
+export type TitleCustomBodyFieldsFragment = (
+  { __typename?: 'TitleCustomBody' }
+  & Pick<TitleCustomBody, 'title' | 'bodyRaw'>
+);
+
 export type AllBridgePageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -7227,6 +7244,12 @@ export const TimelineItemFieldsFragmentDoc = gql`
   }
 }
     ${TagFieldsFragmentDoc}`;
+export const TitleCustomBodyFieldsFragmentDoc = gql`
+    fragment titleCustomBodyFields on TitleCustomBody {
+  title
+  bodyRaw
+}
+    `;
 export const AllBuyersPageDocument = gql`
     query allBuyersPage {
   allBuyersPage {
@@ -7564,6 +7587,12 @@ export const AllHomePageDocument = gql`
     gettingStartedResourcesSection {
       ...gettingStartedResourcesSectionFields
     }
+    projectsSection {
+      ...titleCustomBodyFields
+    }
+    creditClassesSection {
+      ...titleCustomBodyFields
+    }
     bottomBanner {
       ...bottomBannerFields
     }
@@ -7573,6 +7602,7 @@ export const AllHomePageDocument = gql`
 ${ButtonFieldsFragmentDoc}
 ${CustomImageFieldsFragmentDoc}
 ${GettingStartedResourcesSectionFieldsFragmentDoc}
+${TitleCustomBodyFieldsFragmentDoc}
 ${BottomBannerFieldsFragmentDoc}`;
 
 /**

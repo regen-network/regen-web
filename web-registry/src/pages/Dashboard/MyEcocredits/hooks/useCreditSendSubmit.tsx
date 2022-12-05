@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
 import { MsgSend } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 
-import type { FormValues as CreditSendFormValues } from 'web-components/lib/components/form/CreditSendForm';
 import type { Item } from 'web-components/lib/components/modal/TxModal';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
@@ -14,6 +13,7 @@ import {
 } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
+import type { FormValues as CreditSendFormValues } from 'components/organisms/CreditSendForm/CreditSendForm';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import { SEND_HEADER } from '../MyEcocredits.constants';

@@ -1,17 +1,10 @@
 import { useEffect, useState } from 'react';
+import { ProtobufRpcClient } from '@cosmjs/stargate';
 import { RegenApi } from '@regen-network/api/lib';
-
-interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array,
-  ): Promise<Uint8Array>;
-}
 
 interface Props<ClientType> {
   api?: RegenApi;
-  ClientImpl: new (rpc: Rpc) => ClientType;
+  ClientImpl: new (rpc: ProtobufRpcClient) => ClientType;
 }
 
 export const useInitClient = <ClientType extends unknown>({

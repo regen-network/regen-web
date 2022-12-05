@@ -10,7 +10,7 @@ export const EMPTY_CREDIT_CLASS: ClassProjectInfo = {
 };
 
 export const EMPTY_BATCH_INFO: BatchInfo = {
-  $type: 'regen.ecocredit.v1.BatchInfo',
+  $type: BatchInfo.$type,
   denom: '',
   issuer: '',
   projectId: '',

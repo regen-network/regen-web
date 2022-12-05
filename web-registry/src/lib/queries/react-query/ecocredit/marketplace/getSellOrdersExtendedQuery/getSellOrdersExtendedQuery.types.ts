@@ -5,7 +5,7 @@ import { MarketplaceQueryClient } from 'lib/ecocredit/marketplace/marketplace.ty
 
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
-import { ReactQueryBuilderResponse } from '../../types/react-query.types';
+import { ReactQueryBuilderResponse } from '../../../types/react-query.types';
 
 export type ReactQuerySellOrdersExtentedResponse = QueryObserverOptions<
   SellOrderInfoExtented[] | undefined

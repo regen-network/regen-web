@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SxProps, useTheme } from '@mui/material';
-import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
-import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+import { useQuery } from '@tanstack/react-query';
 
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
@@ -25,11 +24,11 @@ import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingM
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
-import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 import type { Theme } from 'web-components/lib/theme/muiTheme';
-import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/ActionsTable.constants';
 
+import { useLedger } from 'ledger';
 import { getHashUrl } from 'lib/block-explorer';
+import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import { Retire1Event, Sell1Event, Send1Event } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
@@ -41,24 +40,18 @@ import {
   CreditSendModal,
 } from 'components/organisms/Modals/CreditSendModal/CreditSendModal';
 import { Portfolio } from 'components/organisms/Portfolio';
-import {
-  useBasketsWithClasses,
-  useBasketTokens,
-  useEcocredits,
-  useMsgClient,
-  useQueryBaskets,
-} from 'hooks';
+import { useMsgClient } from 'hooks';
 import type { BasketTokens } from 'hooks/useBasketTokens';
-import useMarketplaceQuery from 'hooks/useMarketplaceQuery';
 
 import useBasketPutSubmit from './hooks/useBasketPutSubmit';
 import useBasketTakeSubmit from './hooks/useBasketTakeSubmit';
 import useCreateSellOrderSubmit from './hooks/useCreateSellOrderSubmit';
 import useCreditRetireSubmit from './hooks/useCreditRetireSubmit';
 import useCreditSendSubmit from './hooks/useCreditSendSubmit';
+import { useFetchBaskets } from './hooks/useFetchBaskets';
+import { useFetchEcocredits } from './hooks/useFetchEcocredits';
 import useOpenTakeModal from './hooks/useOpenTakeModal';
 import { useUpdateCardItemsTakeBasket } from './hooks/useUpdateCardItemsTakeBasket';
-import useUpdateCreditBaskets from './hooks/useUpdateCreditBaskets';
 import { useUpdateTxModalTitle } from './hooks/useUpdateTxModalTitle';
 import {
   CREATE_SELL_ORDER_BUTTON,
@@ -88,9 +81,6 @@ export const MyEcocredits = (): JSX.Element => {
   const [sellOrderCreateOpen, setSellOrderCreateOpen] = useState<number>(-1);
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [cardItems, setCardItems] = useState<Item[] | undefined>();
-  const [creditBaskets, setCreditBaskets] = useState<
-    (QueryBasketResponse | undefined)[][]
-  >([]);
   const [basketTakeTokens, setBasketTakeTokens] = useState<
     BasketTokens | undefined
   >();
@@ -100,13 +90,7 @@ export const MyEcocredits = (): JSX.Element => {
 
   const navigate = useNavigate();
   const { track } = useTracker();
-
-  const [paginationParams, setPaginationParams] =
-    useState<TablePaginationParams>({
-      page: 0,
-      rowsPerPage: DEFAULT_ROWS_PER_PAGE,
-      offset: 0,
-    });
+  const { marketplaceClient } = useLedger();
 
   const handleTxQueued = (): void => {
     setIsProcessingModalOpen(true);
@@ -136,7 +120,7 @@ export const MyEcocredits = (): JSX.Element => {
   const handleTxDelivered = (): void => {
     setIsProcessingModalOpen(false);
     // Refetch basket/ecocredits data so it shows latest values
-    fetchBasketTokens();
+    reloadBasketsBalance();
     reloadBalances();
   };
 
@@ -158,34 +142,38 @@ export const MyEcocredits = (): JSX.Element => {
   });
 
   const theme = useTheme();
-  const baskets = useQueryBaskets();
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
-  const accountAddress = wallet?.address;
-  const { credits, reloadBalances, isLoadingCredits } = useEcocredits({
-    address: accountAddress,
-    paginationParams,
-  });
-
-  const allowedDenomsResponse = useMarketplaceQuery<QueryAllowedDenomsResponse>(
-    {
-      query: 'allowedDenoms',
-      params: {},
-    },
-  );
-  const allowedDenomOptions = getDenomAllowedOptions({
-    allowedDenoms: allowedDenomsResponse?.data?.allowedDenoms,
-  });
-
-  const basketsWithClasses = useBasketsWithClasses(baskets);
   const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN || '';
-  const { basketTokens, fetchBasketTokens } = useBasketTokens(
-    accountAddress,
+  const accountAddress = wallet?.address;
+  const {
+    credits,
+    reloadBalances,
+    isLoadingCredits,
+    paginationParams,
+    setPaginationParams,
+  } = useFetchEcocredits();
+
+  const {
+    basketTokens,
     baskets,
+    basketsWithClasses,
+    creditBaskets,
+    reloadBasketsBalance,
+  } = useFetchBaskets({ credits });
+
+  const { data: allowedDenomsData } = useQuery(
+    getAllowedDenomQuery({
+      client: marketplaceClient,
+      enabled: !!marketplaceClient,
+    }),
   );
+
+  const allowedDenomOptions = getDenomAllowedOptions({
+    allowedDenoms: allowedDenomsData?.allowedDenoms,
+  });
 
   useUpdateTxModalTitle({ setTxModalTitle, deliverTxResponse });
-  useUpdateCreditBaskets({ basketsWithClasses, credits, setCreditBaskets });
 
   const openTakeModal = useOpenTakeModal({
     basketTokens,
@@ -270,6 +258,8 @@ export const MyEcocredits = (): JSX.Element => {
           credits={credits}
           basketTokens={basketTokens}
           onTableChange={setPaginationParams}
+          initialPaginationParams={paginationParams}
+          isRoutePagination
           renderCreditActionButtons={
             credits.findIndex(c => Number(c.balance?.tradableAmount) > 0) > -1
               ? (i: number) => {

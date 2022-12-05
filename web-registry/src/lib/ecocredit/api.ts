@@ -325,6 +325,8 @@ const getClassProjectForBatch = async (
       reactQueryClient,
     });
   } else {
+    // TODO Keeping the old path for retro-compatibility of the function.
+    // Once all paths use the react-query one we will be able to remove it.
     projectData = await getProject(projectId);
   }
   const project = projectData?.project;
@@ -336,6 +338,8 @@ const getClassProjectForBatch = async (
           reactQueryClient,
         });
       } else {
+        // TODO Keeping the old path for retro-compatibility of the function.
+        // Once all paths use the react-query one we will be able to remove it.
         metadata = await getMetadata(project.metadata);
       }
     } catch (error) {}
@@ -744,7 +748,7 @@ export const queryBalance = async ({
 
 // Balances
 
-interface QueryBalancesProps extends EcocreditQueryClientProps {
+export interface QueryBalancesProps extends EcocreditQueryClientProps {
   request: DeepPartial<QueryBalancesRequest>;
 }
 
@@ -754,7 +758,7 @@ export const queryBalances = async ({
 }: QueryBalancesProps): Promise<QueryBalancesResponse> => {
   try {
     return await client.Balances({
-      address: request.address,
+      ...request,
     });
   } catch (err) {
     throw new Error(
@@ -765,7 +769,7 @@ export const queryBalances = async ({
 
 // Batch info
 
-interface QueryBatchInfoProps extends EcocreditQueryClientProps {
+export interface QueryBatchInfoProps extends EcocreditQueryClientProps {
   request: DeepPartial<QueryBatchRequest>;
 }
 

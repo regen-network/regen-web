@@ -9,7 +9,10 @@ import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 
-import { useAllCreditClassQuery } from 'generated/sanity-graphql';
+import {
+  useAllCreditClassQuery,
+  useAllProjectPageQuery,
+} from 'generated/sanity-graphql';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 
@@ -30,6 +33,7 @@ import useQueryMetadataGraph from '../../../hooks/useQueryMetadataGraph';
 import { useLedger } from '../../../ledger';
 import { NotFoundPage } from '../../../pages/NotFound/NotFound';
 import { client as sanityClient } from '../../../sanity';
+import { GettingStartedResourcesSection } from '../../molecules';
 import { ProjectImpactSection, ProjectTopSection } from '../../organisms';
 import useGeojson from './hooks/useGeojson';
 import useImpact from './hooks/useImpact';
@@ -46,9 +50,16 @@ function ProjectDetails(): JSX.Element {
   const theme = useTheme();
   const { projectId } = useParams();
   const { wallet } = useLedger();
+
+  const { data: sanityProjectPageData } = useAllProjectPageQuery({
+    client: sanityClient,
+  });
+  const gettingStartedResourcesSection =
+    sanityProjectPageData?.allProjectPage?.[0]?.gettingStartedResourcesSection;
   const { data: sanityCreditClassData } = useAllCreditClassQuery({
     client: sanityClient,
   });
+
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
   const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
@@ -251,6 +262,12 @@ function ProjectDetails(): JSX.Element {
       )}
 
       <MoreProjects />
+
+      {gettingStartedResourcesSection && (
+        <GettingStartedResourcesSection
+          section={gettingStartedResourcesSection}
+        />
+      )}
 
       {issuanceModalData && (
         <IssuanceModal

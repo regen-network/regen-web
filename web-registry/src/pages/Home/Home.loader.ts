@@ -1,11 +1,11 @@
 import { QueryClient } from '@tanstack/react-query';
 
-import { getEcocreditQueryClient } from 'lib/clients/ecocreditQueryClient';
-import { getMarketplaceQueryClient } from 'lib/clients/marketplaceQueryClient';
+import { getEcocreditQueryClient } from 'lib/clients/regen/ecocredit/ecocreditQueryClient';
+import { getMarketplaceQueryClient } from 'lib/clients/regen/ecocredit/marketplace/marketplaceQueryClient';
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
-import { getAllowedDenomQuery } from 'lib/queries/react-query/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
-import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
+import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
+import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';

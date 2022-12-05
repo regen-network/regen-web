@@ -4,7 +4,7 @@ import {
 } from '@regen-network/api/lib/generated/ibc/applications/transfer/v1/query';
 import { DenomTrace } from '@regen-network/api/lib/generated/ibc/applications/transfer/v1/transfer';
 
-import { getTransferQueryClient } from 'lib/clients/transferQueryClient';
+import { getTransferQueryClient } from 'lib/clients/ibc/applications/transfer/transferQueryClient';
 
 export const queryDenomTrace = async (
   hash: string,

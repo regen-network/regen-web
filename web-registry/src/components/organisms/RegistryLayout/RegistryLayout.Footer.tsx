@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { URL_PRIVACY, URL_TERMS_SERVICE } from 'globals';
+import { URL_REGISTRY_TERMS_SERVICE, URL_WEB_PRIVACY } from 'config/globals';
 
 import {
   Footer,
@@ -78,8 +78,8 @@ const RegistryLayoutFooter: React.FC<React.PropsWithChildren<unknown>> = () => {
         footerItems={footerItems}
         iconLink={RegistryIconLink}
         linkComponent={Link}
-        privacyUrl={URL_PRIVACY}
-        termsUrl={URL_TERMS_SERVICE}
+        privacyUrl={URL_WEB_PRIVACY}
+        termsUrl={URL_REGISTRY_TERMS_SERVICE}
       />
     </footer>
   );

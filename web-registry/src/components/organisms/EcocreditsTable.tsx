@@ -33,11 +33,19 @@ type EcocreditsTableProps = {
   credits?: BatchInfoWithBalance[];
   renderActionButtons?: RenderActionButtonsFunc;
   onTableChange?: UseStateSetter<TablePaginationParams>;
+  initialPaginationParams?: TablePaginationParams;
+  isRoutePagination?: boolean;
 };
 
 export const EcocreditsTable: React.FC<
   React.PropsWithChildren<EcocreditsTableProps>
-> = ({ credits, renderActionButtons, onTableChange }) => {
+> = ({
+  credits,
+  renderActionButtons,
+  onTableChange,
+  initialPaginationParams,
+  isRoutePagination = false,
+}) => {
   if (!credits?.length) {
     return <NoCredits title="No ecocredits to display" />;
   }
@@ -47,6 +55,8 @@ export const EcocreditsTable: React.FC<
       tableLabel="ecocredits table"
       renderActionButtons={renderActionButtons}
       onTableChange={onTableChange}
+      initialPaginationParams={initialPaginationParams}
+      isRoutePagination
       /* eslint-disable react/jsx-key */
       headerRows={[
         <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>{'Project'}</Box>,
@@ -82,7 +92,7 @@ export const EcocreditsTable: React.FC<
       ]}
       rows={credits.map((row, i) => {
         return [
-          <WithLoader isLoading={!row.projectName} variant="skeleton">
+          <WithLoader isLoading={row.projectName === ''} variant="skeleton">
             <Link
               href={`/projects/${row?.projectId}`}
               sx={tableStyles.ellipsisColumn}
@@ -90,9 +100,13 @@ export const EcocreditsTable: React.FC<
               {row?.projectName}
             </Link>
           </WithLoader>,
-          <Link href={`/credit-batches/${row.denom}`}>{row.denom}</Link>,
-          <AccountLink address={row.issuer} />,
-          <WithLoader isLoading={!row.classId} variant="skeleton">
+          <WithLoader isLoading={!row.denom} variant="skeleton">
+            <Link href={`/credit-batches/${row.denom}`}>{row.denom}</Link>
+          </WithLoader>,
+          <WithLoader isLoading={!row.denom} variant="skeleton">
+            <AccountLink address={row.issuer} />
+          </WithLoader>,
+          <WithLoader isLoading={row.classId === ''} variant="skeleton">
             <Link
               key="class_id"
               href={`/credit-classes/${row.classId}`}
@@ -115,7 +129,7 @@ export const EcocreditsTable: React.FC<
           }),
           <GreyText>{formatDate(row.startDate)}</GreyText>,
           <GreyText>{formatDate(row.endDate)}</GreyText>,
-          <WithLoader isLoading={!row.projectLocation} variant="skeleton">
+          <WithLoader isLoading={row.projectLocation === ''} variant="skeleton">
             <Box>{row.projectLocation}</Box>
           </WithLoader>,
         ];

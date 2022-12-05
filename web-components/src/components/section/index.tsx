@@ -26,6 +26,7 @@ export interface SectionProps {
   titleColor?: string;
   titleAlign?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
   topRight?: JSX.Element;
+  visibleOverflow?: boolean;
 }
 
 interface StyleProps {
@@ -38,32 +39,40 @@ interface StyleProps {
 
 const Root = styled(Box, {
   name: 'RegenSection',
-  shouldForwardProp: prop => prop !== 'withSlider',
-})<{ withSlider: boolean }>(({ theme, withSlider }) => ({
-  maxWidth: theme.breakpoints.values.lg,
-  margin: '0 auto',
-  overflow: 'hidden',
-  [theme.breakpoints.up('sm')]: {
-    paddingTop: theme.spacing(22.25),
-  },
-  [theme.breakpoints.up('md')]: {
-    paddingRight: theme.spacing(37.5),
-    paddingLeft: theme.spacing(37.5),
-  },
-  [theme.breakpoints.down('md')]: {
-    paddingRight: theme.spacing(10),
-    paddingLeft: theme.spacing(10),
-  },
-  [theme.breakpoints.down('sm')]: {
-    paddingRight: withSlider ? 0 : theme.spacing(4),
-    paddingLeft: theme.spacing(4),
-    paddingTop: theme.spacing(17.75),
-  },
-  [theme.breakpoints.up('xl')]: {
-    paddingRight: theme.spacing(5),
-    paddingLeft: theme.spacing(5),
-  },
-}));
+  shouldForwardProp: prop =>
+    prop !== 'withSlider' && prop !== 'visibleOverflow',
+})<{ withSlider: boolean; visibleOverflow: boolean }>(
+  ({ theme, withSlider, visibleOverflow }) => ({
+    maxWidth: theme.breakpoints.values.lg,
+    margin: '0 auto',
+    [theme.breakpoints.up('lg')]: {
+      overflow: visibleOverflow ? 'visible' : 'hidden',
+    },
+    [theme.breakpoints.down('lg')]: {
+      overflow: 'hidden',
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.spacing(22.25),
+    },
+    [theme.breakpoints.up('md')]: {
+      paddingRight: theme.spacing(37.5),
+      paddingLeft: theme.spacing(37.5),
+    },
+    [theme.breakpoints.down('md')]: {
+      paddingRight: theme.spacing(10),
+      paddingLeft: theme.spacing(10),
+    },
+    [theme.breakpoints.down('sm')]: {
+      paddingRight: withSlider ? 0 : theme.spacing(4),
+      paddingLeft: theme.spacing(4),
+      paddingTop: theme.spacing(17.75),
+    },
+    [theme.breakpoints.up('xl')]: {
+      paddingRight: theme.spacing(5),
+      paddingLeft: theme.spacing(5),
+    },
+  }),
+);
 
 const useStyles = makeStyles<StyleProps>()(
   (
@@ -102,6 +111,7 @@ const Section = ({
   title,
   topRight,
   withSlider = false,
+  visibleOverflow = false,
 }: SectionProps): JSX.Element => {
   const { classes: styles, cx } = useStyles({
     withSlider,
@@ -115,6 +125,7 @@ const Section = ({
       sx={sx?.root}
       component="section"
       withSlider={withSlider}
+      visibleOverflow={visibleOverflow}
       className={className || (classes && classes.root)}
       id={id}
     >

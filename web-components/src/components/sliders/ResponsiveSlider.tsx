@@ -27,6 +27,7 @@ export interface ResponsiveSliderProps {
   infinite?: boolean;
   dots?: boolean;
   onChange?: (i: number) => void;
+  visibleOverflow?: boolean;
 }
 
 interface StyleProps {
@@ -34,10 +35,11 @@ interface StyleProps {
   padding?: string | number;
   title?: string;
   itemWidth?: string;
+  visibleOverflow: boolean;
 }
 
 const useStyles = makeStyles<StyleProps>()(
-  (theme, { gridView, itemWidth, padding, title }) => ({
+  (theme, { gridView, itemWidth, padding, title, visibleOverflow }) => ({
     root: {
       [theme.breakpoints.down('sm')]: {
         paddingTop: theme.spacing(11.75),
@@ -76,6 +78,7 @@ const useStyles = makeStyles<StyleProps>()(
         },
       },
       '& .slick-list': {
+        overflow: visibleOverflow ? 'visible' : 'hidden',
         [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
           overflow: 'visible',
         },
@@ -149,6 +152,7 @@ export default function ResponsiveSlider({
   infinite = true,
   dots = false,
   onChange,
+  visibleOverflow = false,
 }: ResponsiveSliderProps): JSX.Element {
   const theme = useTheme();
   const [currSlide, setCurrSlide] = useState(0);
@@ -172,6 +176,7 @@ export default function ResponsiveSlider({
     padding,
     title,
     itemWidth,
+    visibleOverflow,
   });
 
   let slider: any = useRef(null);

@@ -35,7 +35,8 @@ export const GettingStartedResourcesCard = ({
     <Card
       sx={[
         (theme: Theme) => ({
-          p: { xs: 5, sm: 8, md: 12 },
+          px: { xs: 5, sm: 8.5 },
+          py: 9,
           borderRadius: '10px',
           borderColor: 'grey.100',
           minHeight: theme.spacing(61.2),
@@ -44,7 +45,7 @@ export const GettingStartedResourcesCard = ({
             xs: `url(${mobileImageUrl})`,
             lg: `url(${imageUrl})`,
           },
-          backgroundPosition: { xs: 'bottom', sm: 'right bottom', lg: 'right' },
+          backgroundPosition: 'right bottom',
           backgroundRepeat: 'no-repeat',
         }),
       ]}

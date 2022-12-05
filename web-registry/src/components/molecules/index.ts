@@ -1,3 +1,4 @@
+export * from '../organisms/GettingStartedResourcesSection/GettingStartedResourcesSection';
 export * from './BackgroundImgSection';
 export * from './BatchInfoGrid';
 export * from './BatchMetadata/BatchMetadata';
@@ -5,7 +6,6 @@ export * from './BatchTotalsGrid';
 export * from './EcocreditsSection';
 export * from './EditProjectPageFooter';
 export * from './FeaturedSection';
-export * from './GettingStartedResourcesSection';
 export * from './HeroAction';
 export * from './HeroTitle';
 export * from './ImageGridSection';

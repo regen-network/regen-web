@@ -13,6 +13,8 @@ import { getSanityImgSrc } from 'lib/imgSrc';
 
 import { Link } from 'components/atoms';
 
+import { useSectionStyles } from './GettingStartedResourcesSection.styles';
+
 const GettingStartedResourcesSection: React.FC<
   React.PropsWithChildren<{
     section: GettingStartedResourcesSectionFieldsFragment;
@@ -20,18 +22,21 @@ const GettingStartedResourcesSection: React.FC<
 > = ({ section }) => {
   const theme = useTheme<Theme>();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const { classes } = useSectionStyles();
 
   return (
     <Section
       visibleOverflow
       title={section.header || 'Resources for Getting Started'}
       sx={{ root: { pb: { xs: 20, sm: 30 } } }}
+      classes={{ title: classes.title }}
     >
       <ResponsiveSlider
         visibleOverflow
         itemWidth="80%"
         infinite={false}
         slidesToShow={isMobile ? 1 : 2}
+        classes={{ root: classes.root }}
         items={
           section.resourcesCards?.map((item, i) => (
             <GettingStartedResourcesCard

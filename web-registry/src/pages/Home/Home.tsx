@@ -16,7 +16,11 @@ import BlockContentBody from 'components/molecules/BlockContentBody';
 
 import horsesImg from '../../assets/horses-grazing.png';
 import { SanityButton } from '../../components/atoms';
-import { BackgroundImgSection, HeroAction } from '../../components/molecules';
+import {
+  BackgroundImgSection,
+  GettingStartedResourcesSection,
+  HeroAction,
+} from '../../components/molecules';
 import { CreditClassCards } from '../../components/organisms';
 import { client as sanityClient } from '../../sanity';
 import { FeaturedProjects } from './Home.FeaturedProjects';
@@ -41,6 +45,8 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const projectsSection = content?.projectsSection;
   const creditClassesSection = content?.creditClassesSection;
   const seo = content?.seo;
+  const gettingStartedResourcesSection =
+    content?.gettingStartedResourcesSection;
 
   const creditClassesContent = creditClassData?.allCreditClass;
 
@@ -167,6 +173,12 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
             creditClassesContent={creditClassesContent} // CMS data
           />
         </BackgroundImgSection>
+      )}
+
+      {gettingStartedResourcesSection && (
+        <GettingStartedResourcesSection
+          section={gettingStartedResourcesSection}
+        />
       )}
 
       <HeroAction

@@ -9,7 +9,11 @@ import SelectTextFieldBase from 'web-components/lib/components/inputs/SelectText
 import { Loading } from 'web-components/lib/components/loading';
 import { Body, Subtitle } from 'web-components/lib/components/typography';
 
+import { useAllProjectsPageQuery } from 'generated/sanity-graphql';
+import { client as sanityClient } from 'sanity';
+
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
+import { GettingStartedResourcesSection } from 'components/molecules';
 
 import { useProjects } from './hooks/useProjects';
 import {
@@ -21,6 +25,14 @@ import { ProjectWithOrderData } from './Projects.types';
 
 export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
+
+  const { data: sanityProjectsPageData } = useAllProjectsPageQuery({
+    client: sanityClient,
+  });
+  const gettingStartedResourcesSection =
+    sanityProjectsPageData?.allProjectsPage?.[0]
+      ?.gettingStartedResourcesSection;
+
   const [sort, setSort] = useState<string>(sortOptions[0].value);
   const [selectedProject, setSelectedProject] =
     useState<ProjectWithOrderData | null>(null);
@@ -35,88 +47,98 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   if (loading) return <Loading />;
 
   return (
-    <Flex
-      sx={{
-        bgcolor: 'grey.50',
-        borderTop: 1,
-        borderColor: 'grey.100',
-        py: [6, 8.75],
-        pt: 8.75,
-        pb: 25,
-        justifyContent: 'center',
-      }}
-    >
-      <Box
+    <>
+      <Flex
         sx={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 400px))',
-          gridGap: '1.125rem',
-          flex: 1,
+          bgcolor: 'grey.50',
+          borderTop: 1,
+          borderColor: 'grey.100',
+          py: [6, 8.75],
+          pt: 8.75,
+          pb: 25,
           justifyContent: 'center',
-          maxWidth: theme => ({
-            xs: '100%',
-            lg: theme.typography.pxToRem(1400),
-          }),
-          ...spacing.header,
         }}
       >
-        <Flex flex={1} sx={{ gridColumn: '1 / -1' }}>
-          <Flex
-            justifyContent="space-between"
-            alignItems="center"
-            flex={1}
-            sx={{ pb: 5 }}
-          >
-            <Flex>
-              <Subtitle size="lg">Projects</Subtitle>
-              <Body size="lg"> ({projects.length})</Body>
-            </Flex>
-            <Flex alignItems="center" sx={{ width: { xs: '60%', md: 'auto' } }}>
-              <Box
-                sx={{
-                  width: [0, 0, 63],
-                  visibility: { xs: 'hidden', md: 'visible' },
-                }}
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 400px))',
+            gridGap: '1.125rem',
+            flex: 1,
+            justifyContent: 'center',
+            maxWidth: theme => ({
+              xs: '100%',
+              lg: theme.typography.pxToRem(1400),
+            }),
+            ...spacing.header,
+          }}
+        >
+          <Flex flex={1} sx={{ gridColumn: '1 / -1' }}>
+            <Flex
+              justifyContent="space-between"
+              alignItems="center"
+              flex={1}
+              sx={{ pb: 5 }}
+            >
+              <Flex>
+                <Subtitle size="lg">Projects</Subtitle>
+                <Body size="lg"> ({projects.length})</Body>
+              </Flex>
+              <Flex
+                alignItems="center"
+                sx={{ width: { xs: '60%', md: 'auto' } }}
               >
-                <Body size="xs">Sort by:</Body>
-              </Box>
-              <SelectTextFieldBase
-                options={sortOptions}
-                defaultStyle={false}
-                onChange={handleSort}
-              />
+                <Box
+                  sx={{
+                    width: [0, 0, 63],
+                    visibility: { xs: 'hidden', md: 'visible' },
+                  }}
+                >
+                  <Body size="xs">Sort by:</Body>
+                </Box>
+                <SelectTextFieldBase
+                  options={sortOptions}
+                  defaultStyle={false}
+                  onChange={handleSort}
+                />
+              </Flex>
             </Flex>
           </Flex>
-        </Flex>
-        {projects?.map(project => (
-          <Box key={project?.id}>
-            <ProjectCard
-              id={project?.id}
-              name={project?.name}
-              creditClassId={project?.creditClassId}
-              imgSrc={project?.imgSrc}
-              place={project?.place}
-              area={project?.area}
-              areaUnit={project?.areaUnit}
-              onButtonClick={() => {
-                setSelectedProject(project);
-                setIsBuyFlowStarted(true);
-              }}
-              purchaseInfo={project.purchaseInfo}
-              onClick={() => navigate(`/projects/${project.id}`)}
-              imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
-              apiServerUrl={API_URI}
-              truncateTitle={true}
-              sx={{ width: 400, height: 479 }}
-            />
-          </Box>
-        ))}
-      </Box>
-      <BuySellOrderFlow
-        isFlowStarted={isBuyFlowStarted}
-        setIsFlowStarted={setIsBuyFlowStarted}
-        projects={selectedProject && [selectedProject]}
-      />
-    </Flex>
+          {projects?.map(project => (
+            <Box key={project?.id}>
+              <ProjectCard
+                id={project?.id}
+                name={project?.name}
+                creditClassId={project?.creditClassId}
+                imgSrc={project?.imgSrc}
+                place={project?.place}
+                area={project?.area}
+                areaUnit={project?.areaUnit}
+                onButtonClick={() => {
+                  setSelectedProject(project);
+                  setIsBuyFlowStarted(true);
+                }}
+                purchaseInfo={project.purchaseInfo}
+                onClick={() => navigate(`/projects/${project.id}`)}
+                imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
+                apiServerUrl={API_URI}
+                truncateTitle={true}
+                sx={{ width: 400, height: 479 }}
+              />
+            </Box>
+          ))}
+        </Box>
+        <BuySellOrderFlow
+          isFlowStarted={isBuyFlowStarted}
+          setIsFlowStarted={setIsBuyFlowStarted}
+          projects={selectedProject && [selectedProject]}
+        />
+      </Flex>
+      {gettingStartedResourcesSection && (
+        <GettingStartedResourcesSection
+          section={gettingStartedResourcesSection}
+        />
+      )}
+    </>
   );
 };

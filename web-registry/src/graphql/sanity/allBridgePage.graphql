@@ -1,0 +1,7 @@
+query allBridgePage {
+  allBridgePage {
+    gettingStartedResourcesCard {
+      ...gettingStartedResourcesCardFields
+    }
+  }
+}

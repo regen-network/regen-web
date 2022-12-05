@@ -3,6 +3,7 @@ import React from 'react';
 import { BlockContent } from 'web-components/lib/components/block-content';
 import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
 import { getFormattedDate } from 'web-components/lib/utils/format';
+import { getLinkTarget } from 'web-components/lib/utils/linkTarget';
 
 import { Maybe, ResourceFieldsFragment } from '../../generated/sanity-graphql';
 import { getBtnHref } from '../../lib/button';
@@ -24,7 +25,7 @@ const WrappedResourcesCard: React.FC<
       description={<BlockContent content={resource?.descriptionRaw} />}
       updated={getFormattedDate(resource?.lastUpdated || resource?._updatedAt)}
       buttonText={resource?.button?.buttonText}
-      target={resource?.button?.buttonBlankTarget ? '_blank' : '_self'}
+      target={getLinkTarget(resource?.button?.buttonBlankTarget)}
       link={getBtnHref(resource?.button)}
     />
   );

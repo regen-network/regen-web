@@ -4,6 +4,7 @@ import { DefaultTheme as Theme } from '@mui/styles';
 import ReactHtmlParser from 'html-react-parser';
 import { makeStyles } from 'tss-react/mui';
 
+import { getLinkTarget } from '../../utils/linkTarget';
 import OutlinedButton from '../buttons/OutlinedButton';
 import { Image } from '../image';
 import { Title } from '../typography';
@@ -102,7 +103,7 @@ function ImageLeftCard({
           className={styles.button}
           startIcon={buttonIcon}
           href={buttonUrl}
-          target={buttonBlankTarget ? '_blank' : '_self'}
+          target={getLinkTarget(buttonBlankTarget)}
         >
           {buttonText}
         </OutlinedButton>

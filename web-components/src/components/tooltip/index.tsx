@@ -4,7 +4,7 @@ import { withStyles } from 'tss-react/mui';
 
 function arrowGenerator(): any {
   return {
-    '&[data-popper-placement*="bottom"] $arrow': {
+    '&[data-popper-placement*="bottom"] .MuiTooltip-arrow': {
       top: 0,
       left: 0,
       marginTop: '-1.42em',
@@ -14,7 +14,7 @@ function arrowGenerator(): any {
         transformOrigin: '0 100%',
       },
     },
-    '&[data-popper-placement*="top"] $arrow': {
+    '&[data-popper-placement*="top"] .MuiTooltip-arrow': {
       bottom: 0,
       left: 0,
       marginBottom: '-1.42em',
@@ -24,7 +24,7 @@ function arrowGenerator(): any {
         transformOrigin: '100% 0',
       },
     },
-    '&[data-popper-placement*="right"] $arrow': {
+    '&[data-popper-placement*="right"] .MuiTooltip-arrow': {
       left: 0,
       marginLeft: '-1.42em',
       height: '1em',
@@ -35,7 +35,7 @@ function arrowGenerator(): any {
         transformOrigin: '100% 100%',
       },
     },
-    '&[data-popper-placement*="left"] $arrow': {
+    '&[data-popper-placement*="left"] .MuiTooltip-arrow': {
       right: 0,
       marginRight: '-1.42em',
       height: '1em',

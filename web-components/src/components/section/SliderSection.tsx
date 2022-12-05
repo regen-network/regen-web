@@ -12,6 +12,7 @@ import Section from './';
 interface SliderSectionProps {
   items: JSX.Element[];
   title: string;
+  slidesToShow?: number;
   classes?: {
     root?: string;
   };
@@ -49,6 +50,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
 function SliderSection({
   items,
   title,
+  slidesToShow,
   classes,
 }: SliderSectionProps): JSX.Element {
   const { classes: styles, cx } = useStyles();
@@ -58,7 +60,7 @@ function SliderSection({
     theme.breakpoints.between('xs', 'md'),
   );
   const isDesktop: boolean = useMediaQuery(theme.breakpoints.up('sm'));
-  const slidesCount: number = isMobile ? 1 : isTablet ? 2 : 3;
+  const slidesCount: number = isMobile ? 1 : isTablet ? 2 : slidesToShow || 3;
   const showArrows: boolean = (isTablet || isDesktop) && items?.length > 3;
 
   return (
@@ -73,7 +75,7 @@ function SliderSection({
           itemWidth="100%"
           items={items}
           renderTitle={() => (
-            <Title variant="h2" mobileVariant="h3" align="left">
+            <Title variant="h2" mobileVariant="h3" align={'left'}>
               {title}
             </Title>
           )}

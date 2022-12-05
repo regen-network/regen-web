@@ -1,0 +1,13 @@
+fragment gettingStartedResourcesCardFields on GettingStartedResourcesCard {
+  header
+  descriptionRaw
+  image {
+    ...customImageFields
+  }
+  mobileImage {
+    ...customImageFields
+  }
+  links {
+    ...buttonFields
+  }
+}

@@ -12,9 +12,15 @@ import { Body, Title } from 'web-components/lib/components/typography';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
 
+import BlockContentBody from 'components/molecules/BlockContentBody';
+
 import horsesImg from '../../assets/horses-grazing.png';
 import { SanityButton } from '../../components/atoms';
-import { BackgroundImgSection, HeroAction } from '../../components/molecules';
+import {
+  BackgroundImgSection,
+  GettingStartedResourcesSection,
+  HeroAction,
+} from '../../components/molecules';
 import { CreditClassCards } from '../../components/organisms';
 import { client as sanityClient } from '../../sanity';
 import { FeaturedProjects } from './Home.FeaturedProjects';
@@ -36,7 +42,11 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const content = allHomePageData?.allHomePage?.[0];
 
   const heroSection = content?.heroSection;
+  const projectsSection = content?.projectsSection;
+  const creditClassesSection = content?.creditClassesSection;
   const seo = content?.seo;
+  const gettingStartedResourcesSection =
+    content?.gettingStartedResourcesSection;
 
   const creditClassesContent = creditClassData?.allCreditClass;
 
@@ -135,7 +145,10 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
         </Box>
       </BackgroundImgSection>
 
-      <FeaturedProjects />
+      <FeaturedProjects
+        title={projectsSection?.title || 'Featured Projects'}
+        body={projectsSection?.bodyRaw}
+      />
 
       {creditClassesContent && (
         <BackgroundImgSection
@@ -144,19 +157,28 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
             display: 'flex',
             alignItems: 'center',
           }}
-          title="Credit Classes"
+          title={creditClassesSection?.title || 'Credit Classes'}
           classes={{
             root: classes.creditClassBackground,
             title: classes.title,
           }}
           id="credit-classes"
         >
+          {creditClassesSection?.bodyRaw && (
+            <BlockContentBody body={creditClassesSection?.bodyRaw} />
+          )}
           <CreditClassCards
             btnText="Learn More"
             justifyContent={['center', 'center', 'flex-start']}
             creditClassesContent={creditClassesContent} // CMS data
           />
         </BackgroundImgSection>
+      )}
+
+      {gettingStartedResourcesSection && (
+        <GettingStartedResourcesSection
+          section={gettingStartedResourcesSection}
+        />
       )}
 
       <HeroAction

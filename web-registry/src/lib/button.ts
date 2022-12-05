@@ -1,3 +1,5 @@
+import { getLinkTarget } from 'web-components/lib/utils/linkTarget';
+
 import {
   ButtonFieldsFragment,
   LinkFieldsFragment,
@@ -7,7 +9,7 @@ import {
 export const isInternalLink = (url: string): boolean => url.startsWith('/');
 
 export const openLink = (url: string, blankTarget: boolean): void =>
-  void window.open(url, blankTarget ? '_blank' : '_self', 'noopener');
+  void window.open(url, getLinkTarget(blankTarget), 'noopener');
 
 export function getBtnHref(button?: Maybe<ButtonFieldsFragment>): string {
   return getLinkHref(button?.buttonLink);

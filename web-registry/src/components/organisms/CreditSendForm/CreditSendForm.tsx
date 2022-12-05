@@ -3,13 +3,18 @@ import { Box } from '@mui/system';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 import { makeStyles } from 'tss-react/mui';
 
-import { Theme } from '../../theme/muiTheme';
-import { Flex } from '../box';
-import InfoIcon from '../icons/InfoIcon';
-import AgreeErpaCheckbox from '../inputs/AgreeErpaCheckbox';
-import AmountField from '../inputs/AmountField';
-import CheckboxLabel from '../inputs/CheckboxLabel';
-import TextField from '../inputs/TextField';
+import { Flex } from 'web-components/lib/components/box';
+import {
+  BottomCreditRetireFields,
+  BottomCreditRetireFieldsProps,
+  initialValues as initialValuesRetire,
+  RetireFormValues,
+} from 'web-components/lib/components/form/CreditRetireForm';
+import Submit from 'web-components/lib/components/form/Submit';
+import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
+import AmountField from 'web-components/lib/components/inputs/AmountField';
+import CheckboxLabel from 'web-components/lib/components/inputs/CheckboxLabel';
+import TextField from 'web-components/lib/components/inputs/TextField';
 import {
   invalidMemoLength,
   invalidRegenAddress,
@@ -18,17 +23,13 @@ import {
   requirementAgreement,
   validateAmount,
   validateMemoLength,
-} from '../inputs/validation';
-import { RegenModalProps } from '../modal';
-import InfoTooltip from '../tooltip/InfoTooltip';
-import { Subtitle } from '../typography';
-import {
-  BottomCreditRetireFields,
-  BottomCreditRetireFieldsProps,
-  initialValues as initialValuesRetire,
-  RetireFormValues,
-} from './CreditRetireForm';
-import Submit from './Submit';
+} from 'web-components/lib/components/inputs/validation';
+import { RegenModalProps } from 'web-components/lib/components/modal';
+import InfoTooltip from 'web-components/lib/components/tooltip/InfoTooltip';
+import { Subtitle } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
+import AgreeErpaCheckbox from 'components/atoms/AgreeErpaCheckbox';
 
 /**
  * Send sends tradable credits from one account to another account.

@@ -1,11 +1,8 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import { URL_REGISTRY_TERMS_SERVICE, URL_WEB_PRIVACY } from 'config/globals';
 
 import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
-import {
-  URL_REGISTRY_TERMS_SERVICE,
-  URL_WEB_PRIVACY,
-} from 'web-components/lib/utils/globals';
 
 import { PageViewTracking } from 'components/molecules/PageViewTracking';
 

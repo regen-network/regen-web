@@ -7,7 +7,6 @@ import { BasketTakeModal } from './BasketTakeModal';
 import { ConfirmModal } from './ConfirmModal';
 import { CreateSellOrderModal } from './CreateSellOrderModal';
 import { CreditRetireModal } from './CreditRetireModal';
-import { CreditSendModal } from './CreditSendModal';
 import CropImageModal from './CropImageModal';
 import IssuanceModal from './IssuanceModal';
 import { ProcessingModal } from './ProcessingModal';
@@ -247,18 +246,6 @@ export const txErrorModal = (): JSX.Element => (
     txHash="3F7EFAA3BBD0F4109094FEDA0D06B7E2C4C57A4720D591A1FACD42FC7E2C2583"
     txHashUrl="https://redwood.regen.aneka.io/txs/3F7EFAA3BBD0F4109094FEDA0D06B7E2C4C57A4720D591A1FACD42FC7E2C2583"
     error="Lorem ipsum dolor sit apsicing sit amut."
-  />
-);
-
-export const creditSendModal = (): JSX.Element => (
-  <CreditSendModal
-    sender={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'}
-    batchDenom={'C01-20190101-20201010-02'}
-    availableTradableAmount={1000}
-    mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN || ''}
-    open={true}
-    onClose={() => null}
-    onSubmit={async () => alert('submit')}
   />
 );
 

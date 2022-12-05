@@ -1,14 +1,11 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import { URL_REGISTRY_TERMS_SERVICE, URL_WEB_PRIVACY } from 'config/globals';
 
 import {
   Footer,
   FooterItemProps as FooterItem,
 } from 'web-components/lib/components/footer/footer-new';
-import {
-  URL_REGISTRY_TERMS_SERVICE,
-  URL_WEB_PRIVACY,
-} from 'web-components/lib/utils/globals';
 
 import { Link, RegistryIconLink } from 'components/atoms';
 

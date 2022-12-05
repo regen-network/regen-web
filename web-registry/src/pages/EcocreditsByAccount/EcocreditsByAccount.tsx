@@ -45,12 +45,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
 
   return (
     <Box sx={{ backgroundColor: 'grey.50' }}>
-      <Section
-        title="Profile"
-        titleVariant="h2"
-        titleAlign="left"
-        sx={{ title: { pl: 3 } }}
-      >
+      <Section title="Profile" titleVariant="h2" titleAlign="left">
         <PortfolioHeader accountAddress={accountAddress} />
         <IconTabs
           aria-label="public profile tabs"

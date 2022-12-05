@@ -180,8 +180,11 @@ const Footer: React.FC<
           justifyContent="space-between"
         >
           <Grid item>
-            <Body styleLinks={false} color="primary">
-              <LinkComponent href={termsUrl}>Terms</LinkComponent> |{' '}
+            <Body styleLinks={false} color="primary" display="flex">
+              <LinkComponent href={termsUrl}>Terms</LinkComponent>
+              <Box component="span" sx={{ mx: 2 }}>
+                {'|'}
+              </Box>
               <LinkComponent href={privacyUrl}>Privacy</LinkComponent>
             </Body>
           </Grid>
@@ -191,9 +194,13 @@ const Footer: React.FC<
                 href={'https://www.coingecko.com/'}
                 target="_blank"
                 rel="noreferrer"
-                sx={{ display: 'flex' }}
+                sx={{
+                  display: 'flex',
+                  lineHeight: [1.65, 1.4, 1.45, 1.35],
+                  mt: 0.5,
+                }}
               >
-                data provided by <CoinGeckoIcon sx={{ width: 80 }} />
+                data provided by <CoinGeckoIcon sx={{ width: 80, ml: 1.8 }} />
               </LinkComponent>
             </Body>
           </Grid>

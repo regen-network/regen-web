@@ -2,12 +2,12 @@ import { useCallback } from 'react';
 import { MsgBridge } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 import { useTrack } from 'use-analytics';
 
-import type { BridgeFormValues } from 'web-components/lib/components/form/BridgeForm';
 import type { Item } from 'web-components/lib/components/modal/TxModal';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import type { UseStateSetter } from 'types/react/use-state';
 
+import type { BridgeFormValues } from 'components/organisms/BridgeForm/BridgeForm';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import {

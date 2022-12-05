@@ -1,7 +1,7 @@
 import { QueryBatchesResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { QueryClient } from '@tanstack/react-query';
 
-import { getEcocreditQueryClient } from 'lib/clients/ecocreditQueryClient';
+import { getEcocreditQueryClient } from 'lib/clients/regen/ecocredit/ecocreditQueryClient';
 import { getBatchesQuery } from 'lib/queries/react-query/ecocredit/getBatchesQuery/getBatchesQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 

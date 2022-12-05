@@ -6476,6 +6476,9 @@ export type AllHomePageQuery = (
         { __typename?: 'CustomImage' }
         & CustomImageFieldsFragment
       )> }
+    )>, gettingStartedResourcesSection?: Maybe<(
+      { __typename?: 'GettingStartedResourcesSection' }
+      & GettingStartedResourcesSectionFieldsFragment
     )>, projectsSection?: Maybe<(
       { __typename?: 'TitleCustomBody' }
       & TitleCustomBodyFieldsFragment
@@ -6621,6 +6624,34 @@ export type AllMethodologyReviewProcessPageQuery = (
   )> }
 );
 
+export type AllProjectPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllProjectPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allProjectPage: Array<(
+    { __typename?: 'ProjectPage' }
+    & { gettingStartedResourcesSection?: Maybe<(
+      { __typename?: 'GettingStartedResourcesSection' }
+      & GettingStartedResourcesSectionFieldsFragment
+    )> }
+  )> }
+);
+
+export type AllProjectsPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllProjectsPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allProjectsPage: Array<(
+    { __typename?: 'ProjectsPage' }
+    & { gettingStartedResourcesSection?: Maybe<(
+      { __typename?: 'GettingStartedResourcesSection' }
+      & GettingStartedResourcesSectionFieldsFragment
+    )> }
+  )> }
+);
+
 export type BasicStepCardSectionFieldsFragment = (
   { __typename?: 'BasicStepCardSection' }
   & Pick<BasicStepCardSection, 'title'>
@@ -6710,6 +6741,30 @@ export type FeaturedSectionFieldsFragment = (
     { __typename?: 'CustomImage' }
     & CustomImageFieldsFragment
   )> }
+);
+
+export type GettingStartedResourcesSectionFieldsFragment = (
+  { __typename?: 'GettingStartedResourcesSection' }
+  & Pick<GettingStartedResourcesSection, 'header'>
+  & { resourcesCards?: Maybe<Array<Maybe<(
+    { __typename?: 'GettingStartedResourcesCard' }
+    & GettingStartedResourcesCardFieldsFragment
+  )>>> }
+);
+
+export type GettingStartedResourcesCardFieldsFragment = (
+  { __typename?: 'GettingStartedResourcesCard' }
+  & Pick<GettingStartedResourcesCard, 'header' | 'descriptionRaw'>
+  & { image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )>, mobileImage?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )>, links?: Maybe<Array<Maybe<(
+    { __typename?: 'Button' }
+    & ButtonFieldsFragment
+  )>>> }
 );
 
 export type HeroSectionFieldsFragment = (
@@ -6890,6 +6945,20 @@ export type TitleCustomBodyFieldsFragment = (
   & Pick<TitleCustomBody, 'title' | 'bodyRaw'>
 );
 
+export type AllBridgePageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllBridgePageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allBridgePage: Array<(
+    { __typename?: 'BridgePage' }
+    & { gettingStartedResourcesCard?: Maybe<(
+      { __typename?: 'GettingStartedResourcesCard' }
+      & GettingStartedResourcesCardFieldsFragment
+    )> }
+  )> }
+);
+
 export type TagFieldsFragment = (
   { __typename?: 'Tag' }
   & Pick<Tag, 'name' | 'color'>
@@ -7036,6 +7105,30 @@ export const FeaturedSectionFieldsFragmentDoc = gql`
 }
     ${ButtonFieldsFragmentDoc}
 ${CustomImageFieldsFragmentDoc}`;
+export const GettingStartedResourcesCardFieldsFragmentDoc = gql`
+    fragment gettingStartedResourcesCardFields on GettingStartedResourcesCard {
+  header
+  descriptionRaw
+  image {
+    ...customImageFields
+  }
+  mobileImage {
+    ...customImageFields
+  }
+  links {
+    ...buttonFields
+  }
+}
+    ${CustomImageFieldsFragmentDoc}
+${ButtonFieldsFragmentDoc}`;
+export const GettingStartedResourcesSectionFieldsFragmentDoc = gql`
+    fragment gettingStartedResourcesSectionFields on GettingStartedResourcesSection {
+  header
+  resourcesCards {
+    ...gettingStartedResourcesCardFields
+  }
+}
+    ${GettingStartedResourcesCardFieldsFragmentDoc}`;
 export const HeroSectionFieldsFragmentDoc = gql`
     fragment heroSectionFields on HeroSection {
   title
@@ -7491,6 +7584,9 @@ export const AllHomePageDocument = gql`
         ...customImageFields
       }
     }
+    gettingStartedResourcesSection {
+      ...gettingStartedResourcesSectionFields
+    }
     projectsSection {
       ...titleCustomBodyFields
     }
@@ -7505,6 +7601,7 @@ export const AllHomePageDocument = gql`
     ${SeoFieldsFragmentDoc}
 ${ButtonFieldsFragmentDoc}
 ${CustomImageFieldsFragmentDoc}
+${GettingStartedResourcesSectionFieldsFragmentDoc}
 ${TitleCustomBodyFieldsFragmentDoc}
 ${BottomBannerFieldsFragmentDoc}`;
 
@@ -7735,6 +7832,78 @@ export function useAllMethodologyReviewProcessPageLazyQuery(baseOptions?: Apollo
 export type AllMethodologyReviewProcessPageQueryHookResult = ReturnType<typeof useAllMethodologyReviewProcessPageQuery>;
 export type AllMethodologyReviewProcessPageLazyQueryHookResult = ReturnType<typeof useAllMethodologyReviewProcessPageLazyQuery>;
 export type AllMethodologyReviewProcessPageQueryResult = Apollo.QueryResult<AllMethodologyReviewProcessPageQuery, AllMethodologyReviewProcessPageQueryVariables>;
+export const AllProjectPageDocument = gql`
+    query allProjectPage {
+  allProjectPage {
+    gettingStartedResourcesSection {
+      ...gettingStartedResourcesSectionFields
+    }
+  }
+}
+    ${GettingStartedResourcesSectionFieldsFragmentDoc}`;
+
+/**
+ * __useAllProjectPageQuery__
+ *
+ * To run a query within a React component, call `useAllProjectPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllProjectPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllProjectPageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllProjectPageQuery(baseOptions?: Apollo.QueryHookOptions<AllProjectPageQuery, AllProjectPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllProjectPageQuery, AllProjectPageQueryVariables>(AllProjectPageDocument, options);
+      }
+export function useAllProjectPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllProjectPageQuery, AllProjectPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllProjectPageQuery, AllProjectPageQueryVariables>(AllProjectPageDocument, options);
+        }
+export type AllProjectPageQueryHookResult = ReturnType<typeof useAllProjectPageQuery>;
+export type AllProjectPageLazyQueryHookResult = ReturnType<typeof useAllProjectPageLazyQuery>;
+export type AllProjectPageQueryResult = Apollo.QueryResult<AllProjectPageQuery, AllProjectPageQueryVariables>;
+export const AllProjectsPageDocument = gql`
+    query allProjectsPage {
+  allProjectsPage {
+    gettingStartedResourcesSection {
+      ...gettingStartedResourcesSectionFields
+    }
+  }
+}
+    ${GettingStartedResourcesSectionFieldsFragmentDoc}`;
+
+/**
+ * __useAllProjectsPageQuery__
+ *
+ * To run a query within a React component, call `useAllProjectsPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllProjectsPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllProjectsPageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllProjectsPageQuery(baseOptions?: Apollo.QueryHookOptions<AllProjectsPageQuery, AllProjectsPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllProjectsPageQuery, AllProjectsPageQueryVariables>(AllProjectsPageDocument, options);
+      }
+export function useAllProjectsPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllProjectsPageQuery, AllProjectsPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllProjectsPageQuery, AllProjectsPageQueryVariables>(AllProjectsPageDocument, options);
+        }
+export type AllProjectsPageQueryHookResult = ReturnType<typeof useAllProjectsPageQuery>;
+export type AllProjectsPageLazyQueryHookResult = ReturnType<typeof useAllProjectsPageLazyQuery>;
+export type AllProjectsPageQueryResult = Apollo.QueryResult<AllProjectsPageQuery, AllProjectsPageQueryVariables>;
 export const EcologicalImpactByIriDocument = gql`
     query EcologicalImpactByIri($iris: [String!]) {
   allEcologicalImpact(where: {iri: {current: {in: $iris}}}) {
@@ -7815,3 +7984,39 @@ export function useSdgByIriLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<S
 export type SdgByIriQueryHookResult = ReturnType<typeof useSdgByIriQuery>;
 export type SdgByIriLazyQueryHookResult = ReturnType<typeof useSdgByIriLazyQuery>;
 export type SdgByIriQueryResult = Apollo.QueryResult<SdgByIriQuery, SdgByIriQueryVariables>;
+export const AllBridgePageDocument = gql`
+    query allBridgePage {
+  allBridgePage {
+    gettingStartedResourcesCard {
+      ...gettingStartedResourcesCardFields
+    }
+  }
+}
+    ${GettingStartedResourcesCardFieldsFragmentDoc}`;
+
+/**
+ * __useAllBridgePageQuery__
+ *
+ * To run a query within a React component, call `useAllBridgePageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllBridgePageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllBridgePageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllBridgePageQuery(baseOptions?: Apollo.QueryHookOptions<AllBridgePageQuery, AllBridgePageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllBridgePageQuery, AllBridgePageQueryVariables>(AllBridgePageDocument, options);
+      }
+export function useAllBridgePageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllBridgePageQuery, AllBridgePageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllBridgePageQuery, AllBridgePageQueryVariables>(AllBridgePageDocument, options);
+        }
+export type AllBridgePageQueryHookResult = ReturnType<typeof useAllBridgePageQuery>;
+export type AllBridgePageLazyQueryHookResult = ReturnType<typeof useAllBridgePageLazyQuery>;
+export type AllBridgePageQueryResult = Apollo.QueryResult<AllBridgePageQuery, AllBridgePageQueryVariables>;

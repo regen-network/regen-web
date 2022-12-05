@@ -1,0 +1,6 @@
+fragment gettingStartedResourcesSectionFields on GettingStartedResourcesSection {
+  header
+  resourcesCards {
+    ...gettingStartedResourcesCardFields
+  }
+}

@@ -16,6 +16,9 @@ query allHomePage {
         ...customImageFields
       }
     }
+    gettingStartedResourcesSection {
+      ...gettingStartedResourcesSectionFields
+    }
     projectsSection {
       ...titleCustomBodyFields
     }

@@ -30,7 +30,7 @@ export const errorsMapping: Record<
     title: 'Sorry, you don’t have any REGEN to cover transaction fees',
     description:
       'Please purchase some REGEN to cover the transaction fees for this action.',
-
+    buttonTitle: 'LEARN MORE',
     buttonLink:
       'https://guides.regen.network/guides/regen-marketplace/currencies/basics#fees',
     icon: RegenNotFoundIcon,

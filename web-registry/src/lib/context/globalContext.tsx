@@ -17,5 +17,3 @@ export const { Provider: GlobalProvider, useStore: useGlobalStore } =
       buttonTitle: '',
     },
   });
-
-export type GlobalStoreType = typeof useGlobalStore;

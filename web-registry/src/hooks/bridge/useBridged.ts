@@ -27,7 +27,7 @@ export const useBridged = ({ address }: Props): Output => {
     if (!address || isFetchingRef.current) {
       return;
     }
-
+    console.log('poll');
     try {
       isFetchingRef.current = true;
       const newCredits = await getBridgedEcocreditsForAccount(
@@ -35,6 +35,10 @@ export const useBridged = ({ address }: Props): Output => {
         sanityCreditClassData,
       );
       if (newCredits) setCredits(newCredits);
+
+      if (newCredits?.some((c: any) => c.status !== 'evm_confirmed')) {
+        setTimeout(fetchCredits, 3000);
+      }
     } catch (err) {
       console.error(err); // eslint-disable-line no-console
     } finally {

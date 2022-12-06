@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 import { loaderStyles } from 'styles/loader';
@@ -43,6 +44,7 @@ export const BridgedEcocreditsTable = ({
   accountAddress,
   privateAccess = false,
 }: Props): JSX.Element => {
+  // const [shouldPoll, setShouldPoll] = useState(true);
   const { bridgedCredits, isLoadingCredits } = useBridged({
     address: accountAddress,
   });

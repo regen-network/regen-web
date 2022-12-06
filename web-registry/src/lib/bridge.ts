@@ -18,7 +18,10 @@ export const getBridgeTxStatus = async (
   }
   try {
     const { data } = await axios.get(`${apiUri}/regen/events/${hash}/status`);
+    console.log('data ', data.status);
     return data;
-  } catch (e) {}
+  } catch (e) {
+    console.error('BridgedTxStatus error: ', e);
+  }
   return;
 };

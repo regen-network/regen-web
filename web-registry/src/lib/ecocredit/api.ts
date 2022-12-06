@@ -237,7 +237,7 @@ export const getBridgedEcocreditsForAccount = async (
         // Get the tx status using the bridge service api
         let status, destinationTxHash;
         const txStatus = await getBridgeTxStatus(res.txResponses[i].txhash);
-        status = txStatus?.status;
+        status = txStatus?.status ?? 'regen_broadcast'; // TODO: maybe not?
         destinationTxHash = txStatus?.destination_tx_hash;
         const messages = txBody.messages.filter(
           m => m.typeUrl === `/${MsgBridge.$type}`,

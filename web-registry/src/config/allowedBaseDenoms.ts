@@ -9,3 +9,4 @@ export const REGEN_DENOM = 'uregen';
 
 export const USD_DENOMS = [GRAVITY_USDC_DENOM, AXELAR_USDC_DENOM];
 export const EUR_DENOMS = [EEUR_DENOM];
+export const CAPITALIZED_DENOM = [REGEN_DENOM];

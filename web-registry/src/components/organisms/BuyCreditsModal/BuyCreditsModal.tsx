@@ -54,6 +54,8 @@ import {
   getOptions,
   handleBuyCreditsSubmit,
 } from './BuyCreditsModal.utils';
+import { useFetchUserBalance } from './hooks/useFetchUserBalance';
+import { useRefreshUserBalance } from './hooks/useRefreshUserBalance';
 
 const LocationCountryField = lazy(
   () => import('web-components/lib/components/inputs/LocationCountryField'),
@@ -121,8 +123,12 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
     const [selectedSellOrder, setSelectedSellOrder] = useState<
       UISellOrderInfo | undefined
     >(undefined);
+
     const { track } = useTracker();
     const location = useLocation();
+
+    const userBalance = useFetchUserBalance({ selectedSellOrder });
+    useRefreshUserBalance({ open });
 
     const validationHandler = (
       values: BuyCreditsValues,
@@ -306,9 +312,17 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                               name="creditCount"
                               min={1}
                               max={selectedSellOrder?.quantity}
-                              validate={getCreditCountValidation(
-                                Number(selectedSellOrder?.quantity),
-                              )}
+                              validate={getCreditCountValidation({
+                                creditAvailable: Number(
+                                  selectedSellOrder?.quantity,
+                                ),
+                                askAmount: Number(selectedSellOrder?.askAmount),
+                                displayDenom: findDisplayDenom({
+                                  allowedDenomsData,
+                                  denom: selectedSellOrder?.askDenom ?? '',
+                                }),
+                                userBalance,
+                              })}
                             />
                           </div>
                           <Box

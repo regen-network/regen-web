@@ -191,13 +191,13 @@ export const BuySellOrderFlow = ({
    * ui update effect
    */
   useEffect(() => {
-    if (projects && isFlowStarted && accountAddress) {
+    if (isFlowStarted && accountAddress) {
       refetchSellOrders();
       setIsBuyModalOpen(true);
-    } else if (projects && isFlowStarted && !accountAddress) {
+    } else if (isFlowStarted && !accountAddress) {
       setDisplayErrorBanner(true);
     }
-  }, [projects, isFlowStarted, accountAddress, refetchSellOrders]);
+  }, [isFlowStarted, accountAddress, refetchSellOrders]);
 
   return (
     <>

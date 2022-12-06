@@ -48,7 +48,7 @@ export const homeLoader =
       reactQueryClient: queryClient,
     });
 
-    // Optionnal data
+    // Optional data
     getFromCacheOrFetch({
       query: allCreditClassesQuery,
       reactQueryClient: queryClient,

@@ -37,7 +37,7 @@ export const projectsLoader =
       query: projectsQuery,
       reactQueryClient: queryClient,
     });
-    // Optionnal data
+    // Optional data
     getFromCacheOrFetch({
       query: sellOrdersQuery,
       reactQueryClient: queryClient,

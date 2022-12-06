@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import { useTrack } from 'use-analytics';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
@@ -19,7 +18,7 @@ import { Link } from 'components/atoms';
 import { BridgeModal } from 'components/organisms';
 import { useMsgClient } from 'hooks';
 
-import { BRIDGE_HEADER } from './BridgeFlow.constants';
+import { BRIDGE_TITLE } from './BridgeFlow.constants';
 import useCreditBridgeSubmit from './hooks/useCreditBridgeSubmit';
 
 type Props = {
@@ -33,24 +32,26 @@ export const BridgeFlow = ({
   isFlowStarted,
   setBatchToBridge,
 }: Props): JSX.Element => {
-  const [txModalTitle, setTxModalTitle] = useState<string>('');
+  const [txModalTitle, setTxModalTitle] = useState<string | undefined>(
+    undefined,
+  );
   const [txButtonTitle, setTxButtonTitle] = useState<string>('');
-  const [txModalHeader, setTxModalHeader] = useState<string>('');
+  const [txModalHeader, setTxModalHeader] = useState<string | undefined>(
+    undefined,
+  );
   const [txModalDescription, setTxModalDescription] = useState<string>('');
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
   const navigate = useNavigate();
-  const track = useTrack();
 
   const handleTxQueued = (): void => {
     setIsProcessingModalOpen(true);
-    track('bridge3');
   };
 
   const handleError = (): void => {
     setIsProcessingModalOpen(false);
-    setTxModalTitle(BRIDGE_HEADER);
+    setTxModalTitle(BRIDGE_TITLE);
     setTxModalDescription('');
   };
 
@@ -68,8 +69,8 @@ export const BridgeFlow = ({
 
   const handleTxModalClose = (): void => {
     setCardItems(undefined);
-    setTxModalHeader('');
-    setTxModalTitle('');
+    setTxModalHeader(undefined);
+    setTxModalTitle(undefined);
     setTxModalDescription('');
     setBatchToBridge(undefined);
     setDeliverTxResponse(undefined);
@@ -126,7 +127,7 @@ export const BridgeFlow = ({
         txHashUrl={txHashUrl}
         title={txModalHeader}
         description={txModalDescription}
-        cardTitle={txModalTitle}
+        cardTitle={txModalTitle ?? ''}
         buttonTitle={txButtonTitle}
         cardItems={cardItems}
         linkComponent={Link}
@@ -135,12 +136,12 @@ export const BridgeFlow = ({
       />
       <TxErrorModal
         error={error ?? ''}
-        open={!!error && (!!txModalTitle || !!deliverTxResponse)}
+        open={!!error}
         onClose={handleTxModalClose}
         txHash={txHash ?? ''}
         txHashUrl={txHashUrl}
         title={txModalHeader}
-        cardTitle={txModalTitle}
+        cardTitle={txModalTitle ?? ''}
         linkComponent={Link}
         onButtonClick={handleTxModalClose}
         buttonTitle={'CLOSE WINDOW'}

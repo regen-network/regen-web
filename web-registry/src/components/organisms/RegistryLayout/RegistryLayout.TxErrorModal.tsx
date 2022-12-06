@@ -8,6 +8,7 @@ import { useGlobalStore } from 'lib/context/globalContext';
 
 import { Link } from 'components/atoms';
 
+import { useResetTxModalError } from './hooks/useResetTxModalError';
 import { TX_ERROR_MODAL_BUTTON } from './RegistryLayout.constants';
 
 export const RegistryLayoutTxErrorModal = (): JSX.Element => {
@@ -29,20 +30,7 @@ export const RegistryLayoutTxErrorModal = (): JSX.Element => {
   const errorEnum = findErrorByCodeEnum({ errorCode });
   const error = errorsMapping[errorEnum];
   const ErrorIcon = error.icon;
-  const onClose = (): void =>
-    setGlobalStore({
-      errorCode: '',
-      errorModal: {
-        title: '',
-        description: '',
-        cardTitle: '',
-        cardItems: [],
-        txError: '',
-        txHash: '',
-        buttonTitle: '',
-        buttonLink: '',
-      },
-    });
+  const resetTxModalError = useResetTxModalError({ setGlobalStore });
   const txHashUrl = getHashUrl(txHash);
 
   return (
@@ -50,14 +38,14 @@ export const RegistryLayoutTxErrorModal = (): JSX.Element => {
       <TxErrorModal
         error={txError}
         open={!!errorCode}
-        onClose={onClose}
+        onClose={resetTxModalError}
         txHash={txHash ?? ''}
         txHashUrl={txHashUrl}
         title={findFirstNonEmptyString([title, error.title])}
         description={findFirstNonEmptyString([description, error.description])}
         cardTitle={cardTitle}
         linkComponent={Link}
-        onButtonClick={onClose}
+        onButtonClick={resetTxModalError}
         buttonTitle={findFirstNonEmptyString([
           buttonTitle,
           error.buttonTitle,

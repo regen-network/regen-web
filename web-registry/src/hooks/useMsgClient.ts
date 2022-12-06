@@ -3,6 +3,7 @@ import { DeliverTxResponse, StdFee } from '@cosmjs/stargate';
 import { QueryAllBalancesResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 import { useQueryClient } from '@tanstack/react-query';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
+import { ERRORS } from 'config/errors';
 
 import { useGlobalStore } from 'lib/context/globalContext';
 import { BANK_ALL_BALANCES_KEY } from 'lib/queries/react-query/cosmos/bank/getAllBalancesQuery/getAllBalancesQuery.constants';
@@ -79,8 +80,21 @@ export default function useMsgClient(
       if (
         userRegenBalance === undefined ||
         Number(userRegenBalance?.amount) < Number(fee.amount[0].amount)
-      )
+      ) {
+        setGlobalStore({
+          error: {
+            cardItems: [],
+            cardTitle: '',
+            errorCode: ERRORS.NOT_ENOUGH_REGEN_FEES,
+            txError: '',
+            txHash: '',
+            buttonTitle: 'Learn more',
+            buttonLink:
+              'https://guides.regen.network/guides/regen-marketplace/currencies/basics#fees',
+          },
+        });
         return;
+      }
 
       setGlobalStore({ isWaitingForSigning: true });
 

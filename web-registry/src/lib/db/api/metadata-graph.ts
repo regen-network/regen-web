@@ -4,9 +4,13 @@ import getApiUri from 'lib/apiUri';
 import { jsonLdCompact } from 'lib/rdf';
 
 export const getMetadata = async (iri?: string): Promise<any> => {
-  if (!iri) throw new Error('No metadata iri provided');
-  const { data } = await axios.get(`${getApiUri()}/metadata-graph/${iri}`);
-  return await jsonLdCompact(data);
+  if (!iri) return null;
+  try {
+    const { data } = await axios.get(`${getApiUri()}/metadata-graph/${iri}`);
+    return await jsonLdCompact(data);
+  } catch (err) {
+    return null;
+  }
 };
 
 /**

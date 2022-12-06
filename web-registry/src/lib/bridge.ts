@@ -17,7 +17,31 @@ export const getBridgeTxStatus = async (
     return;
   }
   try {
-    const { data } = await axios.get(`${apiUri}/regen/events/${hash}/status`);
+    const { data } = await axios
+      .get(`${apiUri}/regen/events/${hash}/status`)
+      .catch(error => {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          if (!!hash && error.response.status === 404) {
+            // We have a hash to search for, but Bridge Service hasn't found it yet.
+            // This is a common case immediately after bridging, so we can return
+            // a special pending status instead of an error.
+            // eslint-disable-next-line no-console
+            console.log(
+              `Bridge service did not find hash ${hash} yet. Marking as "Pending"...`,
+            );
+            return {
+              data: {
+                status: 'regen_hash_not_found',
+                tx_hash: hash,
+                destination_tx_hash: '',
+              },
+            };
+          }
+        }
+        throw error;
+      });
     return data;
   } catch (e) {}
   return;

@@ -4,7 +4,7 @@ import { DeliverTxResponse } from '@cosmjs/stargate';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 
 import { UseStateSetter } from 'types/react/use-state';
-import { takeEventToBatches } from 'lib/takeEventToBatches';
+import { takeEventToBatches } from 'lib/events/takeEventToBatches';
 
 type Props = {
   deliverTxResponse?: DeliverTxResponse;

@@ -7,7 +7,7 @@ import type { MsgTakeValues } from 'web-components/lib/components/form/BasketTak
 import type { Item } from 'web-components/lib/components/modal/TxModal';
 
 import type { UseStateSetter } from 'types/react/use-state';
-import { takeEventToBatches } from 'lib/takeEventToBatches';
+import { takeEventToBatches } from 'lib/events/takeEventToBatches';
 import {
   TakeFromBasket2,
   TakeFromBasketFailure,

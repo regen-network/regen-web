@@ -17,6 +17,7 @@ import { ecocreditBatchesLoader } from 'pages/EcocreditBatches/EcocreditBatches.
 import { BridgeTab } from 'pages/EcocreditsByAccount/BridgeTab/BridgeTab';
 import { PortfolioTab } from 'pages/EcocreditsByAccount/PortfolioTab/EcocreditsByAccount.PortfolioTab';
 import { homeLoader } from 'pages/Home/Home.loader';
+import { projectsLoader } from 'pages/Projects/Projects.loader';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
 
 import { KeplrRoute, ProtectedRoute } from './components/atoms';
@@ -107,7 +108,13 @@ export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
         path="methodology-review-process"
         element={<MethodologyReviewProcess />}
       />
-      <Route path="projects" element={<Projects />} />
+      <Route
+        path="projects"
+        element={<Projects />}
+        loader={projectsLoader({
+          queryClient: reactQueryClient,
+        })}
+      />
       <Route path="projects/:projectId" element={<Project />} />
       <Route
         path="post-purchase/:projectId/:walletId/:name"

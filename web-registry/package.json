@@ -96,6 +96,7 @@
   },
   "devDependencies": {
     "@keplr-wallet/types": "^0.9.0",
+    "@playwright/test": "^1.28.1",
     "@storybook/addon-storyshots": "^6.3.12",
     "@types/enzyme": "^3.10.8",
     "@types/enzyme-adapter-react-16": "^1.0.6",

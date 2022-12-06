@@ -82,16 +82,7 @@ export default function useMsgClient(
         Number(userRegenBalance?.amount) < Number(fee.amount[0].amount)
       ) {
         setGlobalStore({
-          error: {
-            cardItems: [],
-            cardTitle: '',
-            errorCode: ERRORS.NOT_ENOUGH_REGEN_FEES,
-            txError: '',
-            txHash: '',
-            buttonTitle: 'Learn more',
-            buttonLink:
-              'https://guides.regen.network/guides/regen-marketplace/currencies/basics#fees',
-          },
+          errorCode: ERRORS.NOT_ENOUGH_REGEN_FEES,
         });
         return;
       }

@@ -1,4 +1,5 @@
 import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
+import mergeWith from 'lodash/mergeWith';
 
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 
@@ -10,35 +11,41 @@ import { Link } from 'components/atoms';
 import { TX_ERROR_MODAL_BUTTON } from './RegistryLayout.constants';
 
 export const RegistryLayoutTxErrorModal = (): JSX.Element => {
-  const [
-    {
-      cardTitle,
-      cardItems,
-      errorCode,
-      txError,
-      txHash,
-      buttonTitle,
-      buttonLink,
-    },
-    setGlobalStore,
-  ] = useGlobalStore(store => store['error']);
-
+  const [errorCode, setGlobalStore] = useGlobalStore(
+    store => store['errorCode'],
+  );
+  const [errorModal] = useGlobalStore(store => store['errorModal']);
   const errorEnum = findErrorByCodeEnum({ errorCode });
   const error = errorsMapping[errorEnum];
   const ErrorIcon = error.icon;
-  const txHashUrl = getHashUrl(txHash);
   const onClose = (): void =>
     setGlobalStore({
-      error: {
+      errorCode: '',
+      errorModal: {
+        title: '',
+        description: '',
         cardTitle: '',
         cardItems: [],
-        errorCode: '',
         txError: '',
         txHash: '',
         buttonTitle: '',
         buttonLink: '',
       },
     });
+
+  const {
+    buttonLink,
+    buttonTitle,
+    cardItems,
+    cardTitle,
+    description,
+    title,
+    txError,
+    txHash,
+  } = mergeWith(errorModal, error, (errorModalValue, errorValue, key) => {
+    if (errorModalValue === '') return errorValue;
+  });
+  const txHashUrl = getHashUrl(txHash);
 
   return (
     <>
@@ -48,12 +55,12 @@ export const RegistryLayoutTxErrorModal = (): JSX.Element => {
         onClose={onClose}
         txHash={txHash ?? ''}
         txHashUrl={txHashUrl}
-        title={error.label}
-        description={error.description}
+        title={title}
+        description={description}
         cardTitle={cardTitle}
         linkComponent={Link}
         onButtonClick={onClose}
-        buttonTitle={!!buttonTitle ? buttonTitle : TX_ERROR_MODAL_BUTTON}
+        buttonTitle={buttonTitle ?? TX_ERROR_MODAL_BUTTON}
         buttonLink={buttonLink}
         cardItems={cardItems}
         icon={<ErrorIcon sx={{ fontSize: 100, color: 'grey.600' }} />}

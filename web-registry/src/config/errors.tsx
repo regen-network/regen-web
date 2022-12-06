@@ -11,23 +11,28 @@ export enum ERRORS {
 export const errorsMapping: Record<
   ERRORS,
   {
-    label: string;
+    title: string;
     description?: string;
+    buttonTitle?: string;
+    buttonLink?: string;
     icon: (props: any) => JSX.Element;
   }
 > = {
   [ERRORS.DEFAULT]: {
-    label: 'Sorry, something went wrong!',
+    title: 'Sorry, something went wrong!',
     icon: BrokenLinkIcon,
   },
   [ERRORS.SELL_ORDER_PURCHASED]: {
-    label: 'Sorry, someone has purchased this sell order!',
+    title: 'Sorry, someone has purchased this sell order!',
     icon: SellOrderNotFoundIcon,
   },
   [ERRORS.NOT_ENOUGH_REGEN_FEES]: {
-    label: 'Sorry, you don’t have any REGEN to cover transaction fees',
+    title: 'Sorry, you don’t have any REGEN to cover transaction fees',
     description:
       'Please purchase some REGEN to cover the transaction fees for this action.',
+
+    buttonLink:
+      'https://guides.regen.network/guides/regen-marketplace/currencies/basics#fees',
     icon: RegenNotFoundIcon,
   },
 };

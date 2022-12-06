@@ -5,8 +5,10 @@ import createFastContext from './createFastContext/createFastContext';
 export const { Provider: GlobalProvider, useStore: useGlobalStore } =
   createFastContext({
     isWaitingForSigning: false,
-    error: {
-      errorCode: '',
+    errorCode: '',
+    errorModal: {
+      title: '',
+      description: '',
       txHash: '',
       txError: '',
       cardTitle: '',
@@ -15,3 +17,5 @@ export const { Provider: GlobalProvider, useStore: useGlobalStore } =
       buttonTitle: '',
     },
   });
+
+export type GlobalStoreType = typeof useGlobalStore;

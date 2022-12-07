@@ -144,6 +144,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
           >
             <Pagination
               count={pagesCount}
+              page={Number(routePage)}
               onChange={(event, value) => navigate(`/projects/${value}`)}
             />
           </Flex>

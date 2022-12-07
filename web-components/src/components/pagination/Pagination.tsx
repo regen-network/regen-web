@@ -1,5 +1,6 @@
 import {
   Pagination as MuiPagination,
+  PaginationItem,
   PaginationProps,
   SxProps,
 } from '@mui/material';
@@ -11,7 +12,16 @@ export interface Props extends PaginationProps {
 }
 
 const Pagination = ({ sx = [], ...props }: Props): JSX.Element => {
-  return <MuiPagination sx={[...(Array.isArray(sx) ? sx : [sx])]} {...props} />;
+  return (
+    <MuiPagination
+      {...props}
+      sx={[...(Array.isArray(sx) ? sx : [sx])]}
+      renderItem={item => <PaginationItem {...item} />}
+      size="large"
+      showFirstButton
+      showLastButton
+    />
+  );
 };
 
 export { Pagination };

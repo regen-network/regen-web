@@ -9,6 +9,8 @@ import { Router } from '@remix-run/router';
 import { QueryClient } from '@tanstack/react-query';
 
 import MyBridge from 'pages/Dashboard/MyBridge';
+import { MyBridgableEcocreditsTable } from 'pages/Dashboard/MyBridge/MyBridge.BridgableEcocreditsTable';
+import { MyBridgedEcocreditsTable } from 'pages/Dashboard/MyBridge/MyBridge.BridgedEcocreditsTable';
 import MyCreditBatches from 'pages/Dashboard/MyCreditBatches';
 import MyCreditClasses from 'pages/Dashboard/MyCreditClasses';
 import MyEcocredits from 'pages/Dashboard/MyEcocredits';
@@ -137,7 +139,11 @@ export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
           path="credit-batches"
           element={<KeplrRoute component={MyCreditBatches} />}
         />
-        <Route path="bridge" element={<KeplrRoute component={MyBridge} />} />
+        <Route path="bridge" element={<KeplrRoute component={MyBridge} />}>
+          <Route index element={<MyBridgableEcocreditsTable />} />
+          <Route path="bridgable" element={<MyBridgableEcocreditsTable />} />
+          <Route path="bridged" element={<MyBridgedEcocreditsTable />} />
+        </Route>
       </Route>
       <Route
         path="ecocredits/accounts/:accountAddress"

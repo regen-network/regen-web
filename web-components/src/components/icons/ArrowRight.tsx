@@ -13,21 +13,13 @@ export default function ArrowRightIcon({
       sx={[{ fill: 'none' }, ...(Array.isArray(sx) ? sx : [sx])]}
       {...props}
     >
-      <svg
-        width={51}
-        height={50}
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        {...props}
-      >
-        <circle cx={25.5} cy={25} r={25} fill="#4FB573" />
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M17.75 27a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25H29.9l-5.223-5.223a.25.25 0 0 1 0-.354l1.06-1.06a.25.25 0 0 1 .354 0l7.465 7.465a.25.25 0 0 1 .074.182.25.25 0 0 1-.074.182l-7.465 7.465a.25.25 0 0 1-.354 0l-1.06-1.06a.25.25 0 0 1 0-.354L29.92 27H17.75Z"
-          fill="#fff"
-        />
-      </svg>
+      <circle cx={25.5} cy={25} r={25} fill="#4FB573" />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M17.75 27a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25H29.9l-5.223-5.223a.25.25 0 0 1 0-.354l1.06-1.06a.25.25 0 0 1 .354 0l7.465 7.465a.25.25 0 0 1 .074.182.25.25 0 0 1-.074.182l-7.465 7.465a.25.25 0 0 1-.354 0l-1.06-1.06a.25.25 0 0 1 0-.354L29.92 27H17.75Z"
+        fill="#fff"
+      />
     </SvgIcon>
   );
 }

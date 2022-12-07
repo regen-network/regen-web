@@ -9,25 +9,21 @@ export default function ArrowLeftIcon({
   return (
     <SvgIcon
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 50 50"
-      sx={[{ fill: 'none' }, ...(Array.isArray(sx) ? sx : [sx])]}
+      viewBox="0 0 51 50"
+      sx={[
+        { fill: 'none' },
+        ...(Array.isArray(sx) ? sx : [sx]),
+        { transform: 'rotate(180deg)' },
+      ]}
       {...props}
     >
-      <svg
-        width={50}
-        height={50}
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        {...props}
-      >
-        <circle r={25} transform="matrix(-1 0 0 1 25 25)" fill="#D2D5D9" />
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M32.75 27a.25.25 0 0 0 .25-.25v-1.5a.25.25 0 0 0-.25-.25H20.6l5.223-5.223a.25.25 0 0 0 0-.354l-1.06-1.06a.25.25 0 0 0-.354 0l-7.465 7.465a.25.25 0 0 0-.073.182.25.25 0 0 0 .073.182l7.465 7.465a.25.25 0 0 0 .354 0l1.06-1.06a.25.25 0 0 0 0-.354L20.58 27h12.17Z"
-          fill="#EFEFEF"
-        />
-      </svg>
+      <circle cx={25.5} cy={25} r={25} fill="currentColor" />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M17.75 27a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25H29.9l-5.223-5.223a.25.25 0 0 1 0-.354l1.06-1.06a.25.25 0 0 1 .354 0l7.465 7.465a.25.25 0 0 1 .074.182.25.25 0 0 1-.074.182l-7.465 7.465a.25.25 0 0 1-.354 0l-1.06-1.06a.25.25 0 0 1 0-.354L29.92 27H17.75Z"
+        fill="#fff"
+      />
     </SvgIcon>
   );
 }

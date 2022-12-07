@@ -52,10 +52,10 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
         sx={{
           bgcolor: 'grey.50',
           borderTop: 1,
+          borderBottom: 1,
           borderColor: 'grey.100',
-          py: [6, 8.75],
-          pt: 8.75,
-          pb: 25,
+          pt: [6, 8.75],
+          pb: [20, 25],
           justifyContent: 'center',
         }}
       >

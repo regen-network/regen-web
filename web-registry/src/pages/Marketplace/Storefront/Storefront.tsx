@@ -1,10 +1,16 @@
 import { useMemo, useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
 import { Box, useTheme } from '@mui/material';
 import {
   BatchInfo,
   QueryProjectsResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { useQueries, useQuery } from '@tanstack/react-query';
 import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
 import { Buy1Event } from 'web-registry/src/lib/tracker/types';
 import { useTracker } from 'web-registry/src/lib/tracker/useTracker';
@@ -24,19 +30,21 @@ import { TablePaginationParams } from 'web-components/lib/components/table/Actio
 import { Title } from 'web-components/lib/components/typography';
 import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/ActionsTable.constants';
 
-import { useAllProjectsQuery } from 'generated/graphql';
-import { useAllCreditClassQuery } from 'generated/sanity-graphql';
+import { useLedger } from 'ledger';
 import { getHashUrl } from 'lib/block-explorer';
+import { getBatchQuery } from 'lib/queries/react-query/ecocredit/getBatchQuery/getBatchQuery';
+import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
+import { getAllProjectsQuery } from 'lib/queries/react-query/registry-server/getAllProjectsQuery/getAllProjectsQuery';
+import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
+import { useFetchSellOrders } from 'features/marketplace/BuySellOrderFlow/hooks/useFetchSellOrders';
 import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { BuyCreditsModal, BuyCreditsValues } from 'components/organisms';
 import SellOrdersTable from 'components/organisms/SellOrdersTable/SellOrdersTable';
-import useEcocreditQuery from 'hooks/useEcocreditQuery';
 import useMsgClient from 'hooks/useMsgClient';
 import useQueryListBatchInfo from 'hooks/useQueryListBatchInfo';
-import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
 
 import { client as sanityClient } from '../../../sanity';
 import useBuySellOrderSubmit from './hooks/useBuySellOrderSubmit';
@@ -66,15 +74,23 @@ import {
 } from './Storefront.utils';
 
 export const Storefront = (): JSX.Element => {
+  const client = useApolloClient() as ApolloClient<NormalizedCacheObject>;
+  const { ecocreditClient } = useLedger();
+
+  const { page: routePage } = useParams();
+  const page = Number(routePage) - 1;
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
-      page: 0,
+      page,
       rowsPerPage: DEFAULT_ROWS_PER_PAGE,
       offset: 0,
     });
   const { offset, rowsPerPage } = paginationParams;
-  const { sellOrdersResponse, refetchSellOrders } = useQuerySellOrders();
-  const sellOrders = sellOrdersResponse?.sellOrders;
+
+  // We do not use pagination yet on the SellOrders query
+  // because the ledger currently returns sell orders ordered by seller address and not by id
+  // which would result in a list of non sequential ids in the sell orders table and look weird
+  const { sellOrders, refetchSellOrders } = useFetchSellOrders();
   const uiSellOrdersInfo = useMemo(
     () => sellOrders?.map(normalizeToUISellOrderInfo),
     [sellOrders],
@@ -89,28 +105,38 @@ export const Storefront = (): JSX.Element => {
     [sellOrders, offset, rowsPerPage],
   );
 
-  // Bach pagination
+  // Batch pagination
 
   const [batchInfosMap] = useState(new Map<string, BatchInfo>());
   const newBatchDenoms = useMemo(
     () => batchDenoms?.filter(batchDenom => !batchInfosMap.has(batchDenom)),
     [batchDenoms, batchInfosMap],
   );
+
+  // const batchesResult = useQueries({
+  //   queries:
+  //     newBatchDenoms?.map(batchDenom =>
+  //       getBatchQuery({ client: ecocreditClient, request: { batchDenom } }),
+  //     ) ?? [],
+  // });
+  // const batches = batchesResult?.map(batchResult => batchResult.data) ?? [];
+
   const batchInfoResponses = useQueryListBatchInfo(newBatchDenoms);
   const batchInfos = updateBatchInfosMap({ batchInfosMap, batchInfoResponses });
 
   // offchain stored Projects
-  const { data: offChainProjectData } = useAllProjectsQuery();
+  const { data: offChainProjectData } = useQuery(
+    getAllProjectsQuery({ client, enabled: !!client }),
+  );
 
   // onChain stored Projects
-  const { data: onChainProjects } = useEcocreditQuery<QueryProjectsResponse>({
-    query: 'projects',
-    params: {},
-  });
+  const { data: onChainProjects } = useQuery(
+    getProjectsQuery({ client: ecocreditClient, request: {} }),
+  );
 
-  const { data: sanityCreditClassData } = useAllCreditClassQuery({
-    client: sanityClient,
-  });
+  const { data: sanityCreditClassData } = useQuery(
+    getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+  );
 
   // Project metadata pagination
 

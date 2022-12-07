@@ -109,7 +109,7 @@ export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
         element={<MethodologyReviewProcess />}
       />
       <Route
-        path="projects"
+        path="projects/:page"
         element={<Projects />}
         loader={projectsLoader({
           queryClient: reactQueryClient,

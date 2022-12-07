@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Box, SelectChangeEvent } from '@mui/material';
 import { spacing } from 'styles/spacing';
 
@@ -7,6 +7,7 @@ import { Flex } from 'web-components/lib/components/box';
 import { ProjectCard } from 'web-components/lib/components/cards/ProjectCard';
 import SelectTextFieldBase from 'web-components/lib/components/inputs/SelectTextFieldBase';
 import { Loading } from 'web-components/lib/components/loading';
+import { Pagination } from 'web-components/lib/components/pagination/Pagination';
 import { Body, Subtitle } from 'web-components/lib/components/typography';
 
 import { useAllProjectsPageQuery } from 'generated/sanity-graphql';
@@ -19,12 +20,18 @@ import { useProjects } from './hooks/useProjects';
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
+  PROJECTS_PER_PAGE,
   sortOptions,
 } from './Projects.config';
 import { ProjectWithOrderData } from './Projects.types';
 
 export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
+  const { page: routePage } = useParams();
   const navigate = useNavigate();
+
+  // Page index starts at 1 for route
+  // Page index starts at 0 for logic
+  const page = Number(routePage) - 1;
 
   const { data: sanityProjectsPageData } = useAllProjectsPageQuery({
     client: sanityClient,
@@ -37,7 +44,11 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [selectedProject, setSelectedProject] =
     useState<ProjectWithOrderData | null>(null);
 
-  const { projects, loading } = useProjects(sort);
+  const { projects, projectsCount, pagesCount, loading } = useProjects({
+    sort,
+    offset: page * PROJECTS_PER_PAGE,
+  });
+
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
 
   const handleSort = (event: SelectChangeEvent<unknown>): void => {
@@ -82,7 +93,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
             >
               <Flex>
                 <Subtitle size="lg">Projects</Subtitle>
-                <Body size="lg"> ({projects.length})</Body>
+                <Body size="lg"> ({projectsCount})</Body>
               </Flex>
               <Flex
                 alignItems="center"
@@ -127,6 +138,15 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
               />
             </Box>
           ))}
+          <Flex
+            justifyContent="end"
+            sx={{ gridColumn: { xs: 1, md: 2, lg: 3 } }}
+          >
+            <Pagination
+              count={pagesCount}
+              onChange={(event, value) => navigate(`/projects/${value}`)}
+            />
+          </Flex>
         </Box>
         <BuySellOrderFlow
           isFlowStarted={isBuyFlowStarted}

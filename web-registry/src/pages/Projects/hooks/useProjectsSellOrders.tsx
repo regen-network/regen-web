@@ -26,6 +26,7 @@ type Props = {
 
 export interface ProjectsSellOrders {
   projectsWithOrderData: ProjectWithOrderData[];
+  projectsCount?: number;
   loading: boolean;
 }
 

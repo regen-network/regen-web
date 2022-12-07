@@ -4,24 +4,16 @@ import { useLocation } from 'react-router-dom';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 
 export function useActiveTab(tabs: IconTabProps[]): number {
-  const { state } = useLocation();
-
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
-    const _activeTab = state?.tab
-      ? Math.max(
-          tabs.findIndex(tab => tab.label.toLowerCase().includes(state?.tab)),
-          0,
-        )
-      : 0;
+    const _activeTab = Math.max(
+      tabs.findIndex(tab => location.pathname.includes(tab.href ?? '')),
+      0,
+    );
     setActiveTab(_activeTab);
-
-    // cleanup: reset location.state.tab
-    return () => {
-      window.history.replaceState(null, '');
-    };
-  }, [state, tabs]);
+  }, [location.pathname, tabs]);
 
   return activeTab;
 }

@@ -260,9 +260,11 @@ function ProjectDetails(): JSX.Element {
       <MoreProjects />
 
       {gettingStartedResourcesSection && (
-        <GettingStartedResourcesSection
-          section={gettingStartedResourcesSection}
-        />
+        <div className="topo-background-alternate">
+          <GettingStartedResourcesSection
+            section={gettingStartedResourcesSection}
+          />
+        </div>
       )}
 
       {issuanceModalData && (

@@ -101,7 +101,7 @@ const useCancelSellOrderSubmit = ({
         label: 'project',
         value: {
           name: selectedSellOrder.project?.name || projectId,
-          url: `/projects/${projectId}`,
+          url: `/project/${projectId}`,
         },
       },
       {

@@ -132,7 +132,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
                   setIsBuyFlowStarted(true);
                 }}
                 purchaseInfo={project.purchaseInfo}
-                onClick={() => navigate(`/projects/${project.id}`)}
+                onClick={() => navigate(`/project/${project.id}`)}
                 imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
                 apiServerUrl={API_URI}
                 truncateTitle={true}
@@ -150,7 +150,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
             <Pagination
               count={pagesCount}
               page={Number(routePage)}
-              onChange={(event, value) => navigate(`/projects/page/${value}`)}
+              onChange={(event, value) => navigate(`/projects/${value}`)}
               size={isMobile ? 'small' : 'large'}
             />
           </Flex>

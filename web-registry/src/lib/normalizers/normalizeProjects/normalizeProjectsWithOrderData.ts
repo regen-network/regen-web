@@ -42,7 +42,7 @@ export const normalizeProjectsWithOrderData = ({
       area: 0,
       areaUnit: '',
       purchaseInfo,
-      href: `/projects/${project.id}`,
+      href: `/project/${project.id}`,
       sellOrders: sellOrdersNormalized,
       metadata: project.metadata,
     } as ProjectWithOrderData;

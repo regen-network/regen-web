@@ -148,7 +148,7 @@ export const BridgableEcocreditsTable = ({
             return [
               <WithLoader isLoading={!row.projectName} variant="skeleton">
                 <Link
-                  href={`/projects/${row?.projectId}`}
+                  href={`/project/${row?.projectId}`}
                   sx={tableStyles.ellipsisColumn}
                 >
                   {row?.projectName}

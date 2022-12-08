@@ -42,7 +42,7 @@ const getSellOrdersTableRow = ({
 }: Props): React.ReactNode[] => [
   <Box sx={{ color: 'info.main' }}>{id}</Box>,
   <WithLoader isLoading={project?.name === undefined} variant="skeleton">
-    <Link href={`/projects/${project?.id}`} sx={tableStyles.ellipsisColumn}>
+    <Link href={`/project/${project?.id}`} sx={tableStyles.ellipsisColumn}>
       {project?.name}
     </Link>
   </WithLoader>,

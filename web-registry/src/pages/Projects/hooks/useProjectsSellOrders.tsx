@@ -127,7 +127,7 @@ const getProjectDisplayData = async (
           areaUnit:
             metadata?.['regen:projectSize']?.['qudt:unit']?.['@value'] || '',
           purchaseInfo,
-          href: `/projects/${project.id}`,
+          href: `/project/${project.id}`,
           sellOrders: sellOrdersNormalized,
         } as ProjectWithOrderData;
       }),

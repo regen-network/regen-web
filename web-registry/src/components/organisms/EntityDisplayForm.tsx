@@ -528,7 +528,7 @@ const EntityDisplayForm: React.FC<
           </Title>
           <Body size="md" mobileSize="md" sx={{ pb: 5 }}>
             See full{' '}
-            <RouterLink to="/projects/wilmot" target="_blank">
+            <RouterLink to="/project/wilmot" target="_blank">
               project page»
             </RouterLink>
           </Body>

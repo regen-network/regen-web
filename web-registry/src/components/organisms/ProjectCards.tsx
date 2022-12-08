@@ -109,7 +109,7 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
             <Link
               className={styles.swipeItem}
               key={projectId || i}
-              href={`/projects/${projectId}`}
+              href={`/project/${projectId}`}
             >
               <LinkedProject project={project} />
             </Link>
@@ -136,7 +136,7 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
             >
               <Link
                 className={styles.projectCard}
-                href={`/projects/${projectId}`}
+                href={`/project/${projectId}`}
               >
                 <LinkedProject project={project} />
               </Link>

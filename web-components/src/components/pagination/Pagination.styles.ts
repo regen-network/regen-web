@@ -8,6 +8,10 @@ export const usePaginationStyles = makeStyles()(theme => ({
     '.MuiPagination-ul': {
       flexWrap: 'nowrap',
     },
+    '.MuiPagination-ul>li:last-child>button': {
+      paddingRight: 0,
+      marginRight: 0,
+    },
   },
 }));
 

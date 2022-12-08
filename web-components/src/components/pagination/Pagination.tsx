@@ -30,7 +30,7 @@ const Pagination = ({ size, sx = [], ...props }: Props): JSX.Element => {
       className={classes.root}
       sx={[...(Array.isArray(sx) ? sx : [sx])]}
       renderItem={item => (
-        // Types does not have disableRipple props while it does exist
+        // Types do not have disableRipple props while it does exist
         // @ts-ignore
         <StyledPaginationItem
           slots={{

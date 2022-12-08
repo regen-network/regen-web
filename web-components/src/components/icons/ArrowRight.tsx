@@ -13,7 +13,7 @@ export default function ArrowRightIcon({
       sx={[{ fill: 'none' }, ...(Array.isArray(sx) ? sx : [sx])]}
       {...props}
     >
-      <circle cx={25.5} cy={25} r={25} fill="#4FB573" />
+      <circle cx={25.5} cy={25} r={25} fill="currentColor" />
       <path
         fillRule="evenodd"
         clipRule="evenodd"

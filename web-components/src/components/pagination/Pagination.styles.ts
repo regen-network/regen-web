@@ -1,4 +1,4 @@
-import { PaginationItem } from '@mui/material';
+import { PaginationItem, SxProps } from '@mui/material';
 import { withStyles } from 'tss-react/mui';
 
 import { pxToRem, Theme } from '../../theme/muiTheme';
@@ -11,6 +11,8 @@ export const StyledPaginationItem = withStyles(
       color: disabled ? theme.palette.grey[100] : theme.palette.secondary.main,
     },
     text: {
+      fontSize: pxToRem(18),
+      minWidth: 0,
       ':hover': {
         backgroundColor: 'transparent',
       },
@@ -28,3 +30,17 @@ export const StyledPaginationItem = withStyles(
     },
   }),
 );
+
+type GetArrowSkipStyleType = {
+  theme: Theme;
+  disabled: boolean;
+};
+
+export const getArrowSkipStyle = ({
+  theme,
+  disabled,
+}: GetArrowSkipStyleType): SxProps =>
+  ({
+    fontSize: pxToRem(50),
+    color: disabled ? theme.palette.grey[100] : theme.palette.secondary.main,
+  } as SxProps);

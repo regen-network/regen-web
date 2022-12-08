@@ -1,8 +1,11 @@
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
-interface IconProps extends SvgIconProps {}
+interface IconProps extends SvgIconProps {
+  disabled?: boolean;
+}
 
 export default function ArrowSkipRightIcon({
+  disabled,
   sx = [],
   ...props
 }: IconProps): JSX.Element {
@@ -17,27 +20,30 @@ export default function ArrowSkipRightIcon({
         r={24}
         transform="matrix(-1 0 0 1 25.5 25)"
         fill="#fff"
-        stroke="url(#a)"
+        stroke="url(#skipRight)"
         strokeWidth={2}
       />
       <path
         fillRule="evenodd"
         clipRule="evenodd"
         d="M15.37 25.27a.25.25 0 0 1 .25-.25h12.17l-5.243-5.243a.25.25 0 0 1 0-.354l1.061-1.06a.25.25 0 0 1 .354 0l7.465 7.465a.25.25 0 0 1 .073.182.25.25 0 0 1-.073.182l-7.465 7.465a.25.25 0 0 1-.354 0l-1.06-1.06a.25.25 0 0 1 0-.354l5.223-5.223H15.62a.25.25 0 0 1-.25-.25v-1.5ZM33.75 34a.25.25 0 0 1-.25-.25v-15.5a.25.25 0 0 1 .25-.25h1.5a.25.25 0 0 1 .25.25v15.5a.25.25 0 0 1-.25.25h-1.5Z"
-        fill="#4FB573"
+        fill="currentColor"
       />
       <defs>
         <linearGradient
-          id="a"
+          id="skipRight"
           x1={40.476}
           y1={0}
           x2={15.335}
           y2={55.423}
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#527984" />
-          <stop offset={0.5} stopColor="#79C6AA" />
-          <stop offset={1} stopColor="#C4DAB5" />
+          <stop stopColor={disabled ? 'currentColor' : '#527984'} />
+          <stop
+            offset={0.5}
+            stopColor={disabled ? 'currentColor' : '#79C6AA'}
+          />
+          <stop offset={1} stopColor={disabled ? 'currentColor' : '#C4DAB5'} />
         </linearGradient>
       </defs>
     </SvgIcon>

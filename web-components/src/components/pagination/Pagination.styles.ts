@@ -1,17 +1,32 @@
 import { PaginationItem, SxProps } from '@mui/material';
-import { withStyles } from 'tss-react/mui';
+import { makeStyles, withStyles } from 'tss-react/mui';
 
 import { pxToRem, Theme } from '../../theme/muiTheme';
+
+export const usePaginationStyles = makeStyles()(theme => ({
+  root: {
+    '.MuiPagination-ul': {
+      flexWrap: 'nowrap',
+    },
+  },
+}));
 
 export const StyledPaginationItem = withStyles(
   PaginationItem,
   (theme: Theme, { disabled }) => ({
     icon: {
-      fontSize: pxToRem(50),
+      fontSize: pxToRem(40),
+      [theme.breakpoints.up('md')]: {
+        fontSize: pxToRem(50),
+      },
       color: disabled ? theme.palette.grey[100] : theme.palette.secondary.main,
     },
     text: {
       fontSize: pxToRem(18),
+      padding: `0 ${pxToRem(8)}`,
+      [theme.breakpoints.up('md')]: {
+        padding: `0 ${pxToRem(10)}`,
+      },
       minWidth: 0,
       ':hover': {
         backgroundColor: 'transparent',

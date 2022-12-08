@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Box, SelectChangeEvent } from '@mui/material';
+import { Box, SelectChangeEvent, useMediaQuery, useTheme } from '@mui/material';
 import { spacing } from 'styles/spacing';
 
 import { Flex } from 'web-components/lib/components/box';
@@ -9,6 +9,7 @@ import SelectTextFieldBase from 'web-components/lib/components/inputs/SelectText
 import { Loading } from 'web-components/lib/components/loading';
 import { Pagination } from 'web-components/lib/components/pagination/Pagination';
 import { Body, Subtitle } from 'web-components/lib/components/typography';
+import { pxToRem } from 'web-components/lib/theme/muiTheme';
 
 import { useAllProjectsPageQuery } from 'generated/sanity-graphql';
 import { client as sanityClient } from 'sanity';
@@ -28,6 +29,8 @@ import { ProjectWithOrderData } from './Projects.types';
 export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { page: routePage } = useParams();
   const navigate = useNavigate();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   // Page index starts at 1 for route
   // Page index starts at 0 for logic
@@ -64,9 +67,8 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
           bgcolor: 'grey.50',
           borderTop: 1,
           borderColor: 'grey.100',
-          py: [6, 8.75],
           pt: 8.75,
-          pb: 25,
+          pb: { xs: 8.75, md: 43.5 },
           justifyContent: 'center',
         }}
       >
@@ -139,13 +141,17 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
             </Box>
           ))}
           <Flex
-            justifyContent="end"
-            sx={{ gridColumn: { xs: 1, md: 2, lg: 3 } }}
+            sx={{
+              gridColumn: '1/-1',
+              mt: pxToRem(28),
+              justifyContent: { xs: 'center', tablet: 'end' },
+            }}
           >
             <Pagination
               count={pagesCount}
               page={Number(routePage)}
               onChange={(event, value) => navigate(`/projects/page/${value}`)}
+              size={isMobile ? 'small' : 'large'}
             />
           </Flex>
         </Box>

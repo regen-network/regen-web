@@ -126,5 +126,5 @@ export const normalizeToUISellOrderInfo = (
   sellOrder: SellOrderInfoExtented,
 ): UISellOrderInfo => ({
   ...sellOrder,
-  id: String(sellOrder.id.toString()),
+  id: sellOrder.id.toString(),
 });

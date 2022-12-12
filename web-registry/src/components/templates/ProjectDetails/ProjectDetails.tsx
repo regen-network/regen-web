@@ -86,7 +86,7 @@ function ProjectDetails(): JSX.Element {
 
   const onChainProjectId = isOnChainId
     ? projectId
-    : dataByHandle?.projectByHandle?.onChainId;
+    : dataByHandle?.projectByHandle?.onChainId || '';
 
   // else fetch project by onChainId
   const { data: dataByOnChainId, loading } = useProjectByOnChainIdQuery({
@@ -233,7 +233,7 @@ function ProjectDetails(): JSX.Element {
         setPaginationParams={setPaginationParams}
         geojson={geojson}
         isGISFile={isGISFile}
-        projectId={projectId}
+        projectId={onChainProjectId}
         loading={isLoading}
       />
 

@@ -149,17 +149,7 @@ function ProjectTopSection({
                 mt: 2.5,
               }}
             >
-              {!metadata && loading && <Skeleton variant="text" height={124} />}
-              {!onChainProject && (
-                <ProjectTopLink
-                  label="offset generation method"
-                  name={
-                    creditClassVersion?.metadata?.[
-                      'http://regen.network/offsetGenerationMethod'
-                    ]
-                  }
-                />
-              )}
+              <ProjectTopLink label="project id" name={projectId} />
             </Box>
           </Box>
           {/* Used to prevent layout shift */}
@@ -203,7 +193,7 @@ function ProjectTopSection({
               sx={{ mt: [2, 4], py: [2, 6] }}
             />
           </Link>
-          <ProjectPageMetadata metadata={metadata} projectId={projectId} />
+          <ProjectPageMetadata metadata={metadata} />
           <LazyLoad offset={50}>
             {videoURL && (
               <Card className={classes.media}>

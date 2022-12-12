@@ -12,17 +12,15 @@ import { MetaDetail } from '../MetaDetail';
 
 export interface MetadataProps {
   metadata?: Partial<ProjectMetadataIntersectionLD>;
-  projectId?: string;
 }
 
 const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
   metadata,
-  projectId,
 }) => {
   const theme = useTheme();
   const [expanded, setExpanded] = useState(false);
 
-  if (!metadata || !projectId) {
+  if (!metadata) {
     return null;
   }
 
@@ -55,7 +53,6 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
       <Collapse collapsedSize={theme.spacing(24)} in={expanded}>
         <Box sx={{ py: 8 }}>
           <Grid container spacing={8}>
-            <MetaDetail label="project id" data={projectId} />
             {methodology && (
               <MetaDetail
                 label="methodology"
@@ -63,6 +60,23 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
                   <ArrowLink
                     label={methodology?.['schema:name']}
                     href={methodology?.['schema:url']?.['@value'] || ''}
+                  />
+                }
+              />
+            )}
+            {offsetGenerationMethod && (
+              <MetaDetail
+                label="offset generation method"
+                data={offsetGenerationMethod}
+              />
+            )}
+            {projectActivity?.['schema:name'] && (
+              <MetaDetail
+                label="project activity"
+                data={
+                  <ArrowLink
+                    href={projectActivity?.['schema:url']?.['@value'] || ''}
+                    label={projectActivity?.['schema:name']}
                   />
                 }
               />
@@ -100,23 +114,6 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
                   <ArrowLink
                     label={vcsProjectId.toString()}
                     href={metadata?.['regen:vcsProjectPage']?.['@value'] || ''}
-                  />
-                }
-              />
-            )}
-            {offsetGenerationMethod && (
-              <MetaDetail
-                label="offset generation method"
-                data={offsetGenerationMethod}
-              />
-            )}
-            {projectActivity?.['schema:name'] && (
-              <MetaDetail
-                label="project activity"
-                data={
-                  <ArrowLink
-                    href={projectActivity?.['schema:url']?.['@value'] || ''}
-                    label={projectActivity?.['schema:name']}
                   />
                 }
               />

@@ -114,10 +114,13 @@ export const Storefront = (): JSX.Element => {
   const batchesResult = useQueries({
     queries:
       batchDenoms?.map(batchDenom =>
-        getBatchQuery({ client: ecocreditClient, request: { batchDenom } }),
+        getBatchQuery({
+          client: ecocreditClient,
+          enabled: !!ecocreditClient,
+          request: { batchDenom },
+        }),
       ) ?? [],
   });
-  console.log('batchesResult', batchesResult);
   const batchInfos = useMemo(
     () => batchesResult?.map(batchResult => batchResult.data?.batch) ?? [],
     [batchesResult],

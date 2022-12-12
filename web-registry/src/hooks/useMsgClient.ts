@@ -1,12 +1,12 @@
 import { useCallback, useState } from 'react';
 import { DeliverTxResponse, StdFee } from '@cosmjs/stargate';
-import { QueryAllBalancesResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
+import { QueryBalanceResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 import { useQueryClient } from '@tanstack/react-query';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { ERRORS } from 'config/errors';
 
 import { useGlobalStore } from 'lib/context/globalContext';
-import { BANK_ALL_BALANCES_KEY } from 'lib/queries/react-query/cosmos/bank/getAllBalancesQuery/getAllBalancesQuery.constants';
+import { BANK_BALANCE_KEY } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery.constants';
 
 import { useLedger } from '../ledger';
 import { assertIsError } from '../lib/error';
@@ -69,13 +69,15 @@ export default function useMsgClient(
       const { msgs, fee: txFee, memo } = tx;
 
       const fee = txFee ?? defaultFee;
+      const balanceQueryKey = [BANK_BALANCE_KEY, wallet?.address, REGEN_DENOM];
 
-      const userRegenBalance = reactQueryClient
-        ?.getQueryData<QueryAllBalancesResponse | undefined>([
-          BANK_ALL_BALANCES_KEY,
-          wallet?.address,
-        ])
-        ?.balances.find(balance => balance.denom === REGEN_DENOM);
+      await reactQueryClient.refetchQueries({
+        queryKey: balanceQueryKey,
+        exact: true,
+      });
+      const userRegenBalance = reactQueryClient?.getQueryData<
+        QueryBalanceResponse | undefined
+      >(balanceQueryKey)?.balance;
 
       if (
         userRegenBalance === undefined ||

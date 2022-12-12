@@ -121,6 +121,7 @@ export const useLedger = (options?: ConnectParams): ContextValue => {
     ClientImpl: BasketQueryClientImpl,
     api,
   });
+
   const bankClient = useInitClient<BankQueryClientImpl>({
     ClientImpl: BankQueryClientImpl,
     api,

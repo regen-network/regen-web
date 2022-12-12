@@ -20,9 +20,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
   const theme = useTheme();
   const [expanded, setExpanded] = useState(false);
 
-  if (!metadata) {
-    return null;
-  }
+  if (!metadata) return null;
 
   // Common
   const startDate = metadata?.['regen:projectStartDate']?.['@value'];

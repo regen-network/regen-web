@@ -174,7 +174,7 @@ function ProjectDetails(): JSX.Element {
     }));
   }, [credits, projectsWithOrderData]);
 
-  if (!isLoading && !project && !data) return <NotFoundPage />;
+  if (!isLoading && !project && !projectResponse) return <NotFoundPage />;
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO

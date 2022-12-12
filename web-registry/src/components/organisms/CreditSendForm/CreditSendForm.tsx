@@ -108,6 +108,16 @@ const CreditSendForm: React.FC<React.PropsWithChildren<FormProps>> = ({
       errors.recipient = invalidRegenAddress;
     }
 
+    // TODO: temporarily disable sending credits to the same account
+    if (
+      values.sender &&
+      values.recipient &&
+      values.sender === values.recipient
+    ) {
+      errors.recipient =
+        'The recipient address cannot be the same as the sender address';
+    }
+
     const errAmount = validateAmount(
       availableTradableAmount,
       values.totalAmount,

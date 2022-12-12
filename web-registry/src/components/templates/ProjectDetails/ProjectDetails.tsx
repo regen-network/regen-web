@@ -86,7 +86,7 @@ function ProjectDetails(): JSX.Element {
 
   const onChainProjectId = isOnChainId
     ? projectId
-    : dataByHandle?.projectByHandle?.onChainId || '';
+    : dataByHandle?.projectByHandle?.onChainId ?? undefined;
 
   // else fetch project by onChainId
   const { data: dataByOnChainId, loading } = useProjectByOnChainIdQuery({

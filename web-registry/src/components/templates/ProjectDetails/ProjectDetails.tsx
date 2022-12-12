@@ -233,7 +233,7 @@ function ProjectDetails(): JSX.Element {
         setPaginationParams={setPaginationParams}
         geojson={geojson}
         isGISFile={isGISFile}
-        projectId={onChainProjectId}
+        onChainProjectId={onChainProjectId}
         loading={isLoading}
       />
 

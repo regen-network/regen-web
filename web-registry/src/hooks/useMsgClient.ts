@@ -1,11 +1,26 @@
 import { useCallback, useState } from 'react';
 import { DeliverTxResponse, StdFee } from '@cosmjs/stargate';
+import { QueryBalanceResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
+import { useQueryClient } from '@tanstack/react-query';
+import { REGEN_DENOM } from 'config/allowedBaseDenoms';
+import { ERRORS } from 'config/errors';
 
 import { useGlobalStore } from 'lib/context/globalContext';
+import { BANK_BALANCE_KEY } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery.constants';
 
 import { useLedger } from '../ledger';
 import { assertIsError } from '../lib/error';
 import { Wallet } from '../lib/wallet/wallet';
+
+const defaultFee = {
+  amount: [
+    {
+      denom: 'uregen',
+      amount: '5000', // TODO: what should fee and gas be?
+    },
+  ],
+  gas: '200000',
+} as StdFee;
 
 interface TxData {
   msgs: any[];
@@ -46,28 +61,40 @@ export default function useMsgClient(
   const [deliverTxResponse, setDeliverTxResponse] = useState<
     DeliverTxResponse | undefined
   >();
+  const reactQueryClient = useQueryClient();
 
   const sign = useCallback(
     async (tx: TxData): Promise<Uint8Array | undefined> => {
       if (!api?.msgClient || !wallet?.address) return;
-      const { msgs, fee, memo } = tx;
+      const { msgs, fee: txFee, memo } = tx;
 
-      const defaultFee = {
-        amount: [
-          {
-            denom: 'uregen',
-            amount: '5000', // TODO: what should fee and gas be?
-          },
-        ],
-        gas: '200000',
-      };
+      const fee = txFee ?? defaultFee;
+      const balanceQueryKey = [BANK_BALANCE_KEY, wallet?.address, REGEN_DENOM];
+
+      await reactQueryClient.refetchQueries({
+        queryKey: balanceQueryKey,
+        exact: true,
+      });
+      const userRegenBalance = reactQueryClient?.getQueryData<
+        QueryBalanceResponse | undefined
+      >(balanceQueryKey)?.balance;
+
+      if (
+        userRegenBalance === undefined ||
+        Number(userRegenBalance?.amount) < Number(fee.amount[0].amount)
+      ) {
+        setGlobalStore({
+          errorCode: ERRORS.NOT_ENOUGH_REGEN_FEES,
+        });
+        return;
+      }
 
       setGlobalStore({ isWaitingForSigning: true });
 
       const txBytes = await api.msgClient.sign(
         wallet.address,
         msgs,
-        fee || defaultFee,
+        fee,
         memo || '',
       );
 
@@ -75,7 +102,7 @@ export default function useMsgClient(
 
       return txBytes;
     },
-    [api?.msgClient, wallet?.address, setGlobalStore],
+    [api?.msgClient, wallet?.address, setGlobalStore, reactQueryClient],
   );
 
   const broadcast = useCallback(

@@ -15,22 +15,22 @@ const TxErrorModal: React.FC<React.PropsWithChildren<Props>> = ({
   icon,
   ...props
 }) => {
+  const defaultCardItems = error
+    ? ([
+        {
+          label: 'error',
+          value: {
+            name: error,
+          },
+          color: 'error.main',
+        },
+      ] as Item[])
+    : undefined;
+
   return (
     <TxModal
       icon={icon ?? <BrokenLinkIcon sx={{ pb: 4.5 }} />}
-      cardItems={
-        cardItems
-          ? cardItems
-          : [
-              {
-                label: 'error',
-                value: {
-                  name: error,
-                },
-                color: 'error.main',
-              },
-            ]
-      }
+      cardItems={cardItems ? cardItems : defaultCardItems}
       title={title ?? 'Sorry, your transaction was not successful.'}
       {...props}
     />

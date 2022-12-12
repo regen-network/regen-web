@@ -85,6 +85,7 @@ function ProjectTopSection({
   const apiServerUrl = process.env.REACT_APP_API_URI;
 
   const project = data?.projectByOnChainId || data?.projectByHandle; // TODO: eventually just projectByOnChainId
+  const projectName = metadata?.['schema:name'];
   const videoURL = metadata?.['regen:videoURL']?.['@value'];
   const landStewardPhoto = metadata?.['regen:landStewardPhoto']?.['@value'];
   const projectSize = metadata?.['regen:projectSize'];
@@ -132,7 +133,7 @@ function ProjectTopSection({
             <Skeleton height={124} />
           ) : (
             <Title variant="h1">
-              {metadata?.['schema:name'] ?? `Project ${onChainProjectId}`}
+              {projectName ?? `Project ${onChainProjectId}`}
             </Title>
           )}
           <Box sx={{ pt: { xs: 5, sm: 6 } }}>
@@ -155,7 +156,7 @@ function ProjectTopSection({
               }}
             >
               {onChainProjectId ? (
-                metadata?.['schema:name'] && (
+                projectName && (
                   <Label sx={{ pt: 1.75 }} size="xs" color="info.main">
                     project id: {onChainProjectId}
                   </Label>

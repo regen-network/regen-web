@@ -3,6 +3,7 @@ import { QueryClient } from '@tanstack/react-query';
 import { getEcocreditQueryClient } from 'lib/clients/regen/ecocredit/ecocreditQueryClient';
 import { getMarketplaceQueryClient } from 'lib/clients/regen/ecocredit/marketplace/marketplaceQueryClient';
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
+import { getBatchQuery } from 'lib/queries/react-query/ecocredit/getBatchQuery/getBatchQuery';
 import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
@@ -29,7 +30,6 @@ export const storefrontLoader =
       request: {},
     });
     const allCreditClassesQuery = getAllCreditClassesQuery({ sanityClient });
-    const simplePriceQuery = getSimplePriceQuery({});
     const projectsQuery = getProjectsQuery({
       client: ecocreditClient,
       request: {},
@@ -37,16 +37,12 @@ export const storefrontLoader =
     const allowedDenomQuery = getAllowedDenomQuery({
       client: marketplaceClient,
     });
+    const simplePriceQuery = getSimplePriceQuery({});
 
-    // Fetch or Cache
-
-    // Mandatory data
-    await getFromCacheOrFetch({
+    getFromCacheOrFetch({
       query: sellOrdersQuery,
       reactQueryClient: queryClient,
     });
-
-    // Optional data
     getFromCacheOrFetch({
       query: allCreditClassesQuery,
       reactQueryClient: queryClient,

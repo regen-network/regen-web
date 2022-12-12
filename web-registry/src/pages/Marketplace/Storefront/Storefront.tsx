@@ -117,6 +117,7 @@ export const Storefront = (): JSX.Element => {
         getBatchQuery({ client: ecocreditClient, request: { batchDenom } }),
       ) ?? [],
   });
+  console.log('batchesResult', batchesResult);
   const batchInfos = useMemo(
     () => batchesResult?.map(batchResult => batchResult.data?.batch) ?? [],
     [batchesResult],

@@ -285,9 +285,9 @@ export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
       <Route
         path="storefront"
         element={<Storefront />}
-        // loader={storefrontLoader({
-        //   queryClient: reactQueryClient,
-        // })}
+        loader={storefrontLoader({
+          queryClient: reactQueryClient,
+        })}
       />
       <Route path="*" element={<NotFoundPage />} />
     </Route>,

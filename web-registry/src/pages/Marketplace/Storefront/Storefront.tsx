@@ -6,10 +6,6 @@ import {
   useApolloClient,
 } from '@apollo/client';
 import { Box, useTheme } from '@mui/material';
-import {
-  BatchInfo,
-  QueryProjectsResponse,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
 import { Buy1Event } from 'web-registry/src/lib/tracker/types';
@@ -35,6 +31,7 @@ import { getHashUrl } from 'lib/block-explorer';
 import { getBatchQuery } from 'lib/queries/react-query/ecocredit/getBatchQuery/getBatchQuery';
 import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
 import { getAllProjectsQuery } from 'lib/queries/react-query/registry-server/getAllProjectsQuery/getAllProjectsQuery';
+import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
 import { useFetchSellOrders } from 'features/marketplace/BuySellOrderFlow/hooks/useFetchSellOrders';
@@ -44,16 +41,11 @@ import WithLoader from 'components/atoms/WithLoader';
 import { BuyCreditsModal, BuyCreditsValues } from 'components/organisms';
 import SellOrdersTable from 'components/organisms/SellOrdersTable/SellOrdersTable';
 import useMsgClient from 'hooks/useMsgClient';
-import useQueryListBatchInfo from 'hooks/useQueryListBatchInfo';
 
 import { client as sanityClient } from '../../../sanity';
 import useBuySellOrderSubmit from './hooks/useBuySellOrderSubmit';
 import useCancelSellOrderSubmit from './hooks/useCancelSellOrderSubmit';
 import { useCheckSellOrderAvailabilty } from './hooks/useCheckSellOrderAvailabilty';
-import {
-  ProjectInfoWithMetadata,
-  useFetchMetadataProjects,
-} from './hooks/useFetchMetadataProjects';
 import { useResetErrorBanner } from './hooks/useResetErrorBanner';
 import {
   BUY_SELL_ORDER_ACTION,
@@ -66,12 +58,7 @@ import {
   normalizeSellOrders,
 } from './Storefront.normalizer';
 import { SellOrderActions } from './Storefront.types';
-import {
-  getCancelCardItems,
-  sortBySellOrderId,
-  updateBatchInfosMap,
-  updateProjectsWithMetadataMap,
-} from './Storefront.utils';
+import { getCancelCardItems, sortBySellOrderId } from './Storefront.utils';
 
 export const Storefront = (): JSX.Element => {
   const client = useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -90,12 +77,32 @@ export const Storefront = (): JSX.Element => {
   // We do not use pagination yet on the SellOrders query
   // because the ledger currently returns sell orders ordered by seller address and not by id
   // which would result in a list of non sequential ids in the sell orders table and look weird
+  // TODO: use pagination as soon as this is fixed on Regen Ledger side (as part of v5.0)
   const { sellOrders, refetchSellOrders } = useFetchSellOrders();
   const uiSellOrdersInfo = useMemo(
     () => sellOrders?.map(normalizeToUISellOrderInfo),
     [sellOrders],
   );
 
+  // Off-chain stored Projects
+  const { data: offChainProjectData } = useQuery(
+    getAllProjectsQuery({ client, enabled: !!client }),
+  );
+
+  // On-chain stored Projects
+  const { data: onChainProjects } = useQuery(
+    getProjectsQuery({
+      client: ecocreditClient,
+      enabled: !!ecocreditClient,
+      request: {},
+    }),
+  );
+
+  const { data: sanityCreditClassData } = useQuery(
+    getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+  );
+
+  // Batch pagination
   const batchDenoms = useMemo(
     () =>
       sellOrders
@@ -104,65 +111,42 @@ export const Storefront = (): JSX.Element => {
         .map(sellOrder => sellOrder.batchDenom),
     [sellOrders, offset, rowsPerPage],
   );
-
-  // Batch pagination
-
-  const [batchInfosMap] = useState(new Map<string, BatchInfo>());
-  const newBatchDenoms = useMemo(
-    () => batchDenoms?.filter(batchDenom => !batchInfosMap.has(batchDenom)),
-    [batchDenoms, batchInfosMap],
-  );
-
-  // const batchesResult = useQueries({
-  //   queries:
-  //     newBatchDenoms?.map(batchDenom =>
-  //       getBatchQuery({ client: ecocreditClient, request: { batchDenom } }),
-  //     ) ?? [],
-  // });
-  // const batches = batchesResult?.map(batchResult => batchResult.data) ?? [];
-
-  const batchInfoResponses = useQueryListBatchInfo(newBatchDenoms);
-  const batchInfos = updateBatchInfosMap({ batchInfosMap, batchInfoResponses });
-
-  // offchain stored Projects
-  const { data: offChainProjectData } = useQuery(
-    getAllProjectsQuery({ client, enabled: !!client }),
-  );
-
-  // onChain stored Projects
-  const { data: onChainProjects } = useQuery(
-    getProjectsQuery({ client: ecocreditClient, request: {} }),
-  );
-
-  const { data: sanityCreditClassData } = useQuery(
-    getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+  const batchesResult = useQueries({
+    queries:
+      batchDenoms?.map(batchDenom =>
+        getBatchQuery({ client: ecocreditClient, request: { batchDenom } }),
+      ) ?? [],
+  });
+  const batchInfos = useMemo(
+    () => batchesResult?.map(batchResult => batchResult.data?.batch) ?? [],
+    [batchesResult],
   );
 
   // Project metadata pagination
-
-  const [projectsWithMetadataMap] = useState(
-    new Map<string, ProjectInfoWithMetadata>(),
+  const projectsIds = useMemo(
+    () => batchInfos.map(batchInfo => batchInfo?.projectId),
+    [batchInfos],
   );
-  const newProjectsId = useMemo(
-    () => batchInfoResponses?.map(batchInfo => batchInfo.batch?.projectId),
-    [batchInfoResponses],
-  );
-  const newProjects = useMemo(
+  const projects = useMemo(
     () =>
       onChainProjects?.projects.filter(project =>
-        newProjectsId?.includes(project.id),
+        projectsIds?.includes(project.id),
       ),
-    [newProjectsId, onChainProjects?.projects],
+    [projectsIds, onChainProjects?.projects],
   );
-  const { projectsWithMetadata: newProjectsWithMetadata } =
-    useFetchMetadataProjects({
-      projects: newProjects,
-    });
-
-  const onChainprojectsWithMedata = updateProjectsWithMetadataMap({
-    projectsWithMetadataMap,
-    newProjectsWithMetadata,
+  const metadataResults = useQueries({
+    queries:
+      projects?.map(({ metadata: iri }) => getMetadataQuery({ iri })) ?? [],
   });
+  const metadata = metadataResults.map(queryResult => queryResult.data);
+  const projectsWithMetadata = useMemo(
+    () =>
+      projects?.map((project, i) => ({
+        ...project,
+        metadata: metadata?.[i],
+      })) ?? [],
+    [projects, metadata],
+  );
 
   const [selectedSellOrder, setSelectedSellOrder] = useState<number | null>(
     null,
@@ -189,10 +173,10 @@ export const Storefront = (): JSX.Element => {
     () =>
       normalizeProjectsInfosByHandleMap({
         offChainProjects: offChainProjectData?.allProjects,
-        onChainProjects: onChainprojectsWithMedata,
+        onChainProjects: projectsWithMetadata,
         sanityCreditClassData,
       }),
-    [offChainProjectData, onChainprojectsWithMedata, sanityCreditClassData],
+    [offChainProjectData, projectsWithMetadata, sanityCreditClassData],
   );
 
   const normalizedSellOrders = useMemo(
@@ -201,9 +185,8 @@ export const Storefront = (): JSX.Element => {
         batchInfos,
         sellOrders,
         projectsInfosByHandleMap,
-        projectsWithMetadataMap,
       }),
-    [batchInfos, sellOrders, projectsInfosByHandleMap, projectsWithMetadataMap],
+    [batchInfos, sellOrders, projectsInfosByHandleMap],
   );
 
   const handleTxQueued = (): void => setIsProcessingModalOpen(true);

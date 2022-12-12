@@ -23,15 +23,15 @@ export const storefrontLoader =
     const marketplaceClient = await getMarketplaceQueryClient();
 
     // Queries
+    const sellOrdersQuery = getSellOrdersExtendedQuery({
+      client: marketplaceClient,
+      reactQueryClient: queryClient,
+      request: {},
+    });
     const allCreditClassesQuery = getAllCreditClassesQuery({ sanityClient });
     const simplePriceQuery = getSimplePriceQuery({});
     const projectsQuery = getProjectsQuery({
       client: ecocreditClient,
-      request: {},
-    });
-    const sellOrdersQuery = getSellOrdersExtendedQuery({
-      client: marketplaceClient,
-      reactQueryClient: queryClient,
       request: {},
     });
     const allowedDenomQuery = getAllowedDenomQuery({
@@ -41,18 +41,18 @@ export const storefrontLoader =
     // Fetch or Cache
 
     // Mandatory data
+    await getFromCacheOrFetch({
+      query: sellOrdersQuery,
+      reactQueryClient: queryClient,
+    });
 
-    // Optionnal data
+    // Optional data
     getFromCacheOrFetch({
       query: allCreditClassesQuery,
       reactQueryClient: queryClient,
     });
     getFromCacheOrFetch({
       query: projectsQuery,
-      reactQueryClient: queryClient,
-    });
-    getFromCacheOrFetch({
-      query: sellOrdersQuery,
       reactQueryClient: queryClient,
     });
     getFromCacheOrFetch({

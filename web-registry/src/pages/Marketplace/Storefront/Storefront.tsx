@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   ApolloClient,
   NormalizedCacheObject,
@@ -64,11 +64,9 @@ export const Storefront = (): JSX.Element => {
   const client = useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { ecocreditClient } = useLedger();
 
-  const { page: routePage } = useParams();
-  const page = Number(routePage) - 1;
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
-      page,
+      page: 0,
       rowsPerPage: DEFAULT_ROWS_PER_PAGE,
       offset: 0,
     });

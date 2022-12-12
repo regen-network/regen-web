@@ -2,12 +2,10 @@ import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
 interface IconProps extends SvgIconProps {}
 
-export function ToucanIcon({ sx }: IconProps): JSX.Element {
+export default function ToucanIcon({ sx }: IconProps): JSX.Element {
   return (
     <SvgIcon
       sx={sx}
-      width="109"
-      height="32"
       viewBox="0 0 109 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

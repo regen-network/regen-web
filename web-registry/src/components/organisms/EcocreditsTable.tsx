@@ -71,7 +71,6 @@ export const EcocreditsTable: React.FC<
         >
           Batch Denom
         </Box>,
-        'Issuer',
         'Credit Class',
         <BreakText>Amount Tradable</BreakText>,
         <BreakText>Amount Retired</BreakText>,
@@ -86,6 +85,7 @@ export const EcocreditsTable: React.FC<
             />
           </Box>
         </Box>,
+        'Issuer',
         'Batch Start Date',
         'Batch End Date',
         'Project Location',
@@ -102,9 +102,6 @@ export const EcocreditsTable: React.FC<
           </WithLoader>,
           <WithLoader isLoading={!row.denom} variant="skeleton">
             <Link href={`/credit-batches/${row.denom}`}>{row.denom}</Link>
-          </WithLoader>,
-          <WithLoader isLoading={!row.denom} variant="skeleton">
-            <AccountLink address={row.issuer} />
           </WithLoader>,
           <WithLoader isLoading={row.classId === ''} variant="skeleton">
             <Link
@@ -127,6 +124,9 @@ export const EcocreditsTable: React.FC<
             num: row.balance?.escrowedAmount,
             ...quantityFormatNumberOptions,
           }),
+          <WithLoader isLoading={!row.denom} variant="skeleton">
+            <AccountLink address={row.issuer} />
+          </WithLoader>,
           <GreyText>{formatDate(row.startDate)}</GreyText>,
           <GreyText>{formatDate(row.endDate)}</GreyText>,
           <WithLoader isLoading={row.projectLocation === ''} variant="skeleton">

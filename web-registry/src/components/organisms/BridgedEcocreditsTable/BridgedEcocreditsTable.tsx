@@ -89,7 +89,6 @@ export const BridgedEcocreditsTable = ({
               <InfoTooltipWithIcon outlined title={CREDIT_BATCH_TOOLTIP} />
             </Box>
           </Box>,
-          'Issuer',
           'Credit Class',
           <Box display="flex">
             <BreakTextEnd>Amount Bridged</BreakTextEnd>
@@ -97,6 +96,7 @@ export const BridgedEcocreditsTable = ({
               <InfoTooltipWithIcon outlined title={AMOUNT_BRIDGED_TOOLTIP} />
             </Box>
           </Box>,
+          'Issuer',
           <Box sx={{ width: '6.25rem' }}>
             <BreakText>Batch Start Date</BreakText>
           </Box>,
@@ -128,7 +128,6 @@ export const BridgedEcocreditsTable = ({
               </Link>
             </WithLoader>,
             <Link href={`/credit-batches/${row.denom}`}>{row.denom}</Link>,
-            <AccountLink address={row.issuer} />,
             <WithLoader isLoading={!row.classId} variant="skeleton">
               <Link
                 key="class_id"
@@ -142,6 +141,7 @@ export const BridgedEcocreditsTable = ({
               num: row.amount,
               ...quantityFormatNumberOptions,
             }),
+            <AccountLink address={row.issuer} />,
             <GreyText>
               {formatDate(row.startDate, DATE_FORMAT_SECONDARY)}
             </GreyText>,

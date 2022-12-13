@@ -8,5 +8,6 @@ import { ReactQueryBuilderResponse } from '../../types/react-query.types';
 export type ReactQueryProjectResponse =
   QueryObserverOptions<QueryProjectResponse | void>;
 
-export type ReactQueryProjectProps = Omit<QueryProjectProps, 'client'> &
-  ReactQueryBuilderResponse<ReactQueryProjectResponse>;
+export type ReactQueryProjectProps = Omit<QueryProjectProps, 'client'> & {
+  client?: QueryProjectProps['client'];
+} & ReactQueryBuilderResponse<ReactQueryProjectResponse>;

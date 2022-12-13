@@ -1,4 +1,4 @@
-import { getProject } from 'lib/ecocredit/api';
+import { queryProject } from 'lib/ecocredit/api';
 
 import {
   ReactQueryProjectProps,
@@ -7,11 +7,17 @@ import {
 
 export const getProjectQuery = ({
   request,
+  client,
   ...params
 }: ReactQueryProjectProps): ReactQueryProjectResponse => ({
   queryKey: ['project', request.projectId],
   queryFn: async () => {
-    return await getProject(request.projectId ?? '');
+    if (!client) return;
+
+    return await queryProject({
+      request,
+      client,
+    });
   },
   ...params,
 });

@@ -865,6 +865,7 @@ export const queryBatchesByProject = async ({
   try {
     return await client.BatchesByProject({
       projectId: request.projectId,
+      pagination: request.pagination,
     });
   } catch (err) {
     throw new Error(

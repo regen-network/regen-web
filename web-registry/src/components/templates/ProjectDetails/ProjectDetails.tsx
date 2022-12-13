@@ -85,10 +85,9 @@ function ProjectDetails(): JSX.Element {
     }),
   );
 
-  const onChainProjectId = isOnChainId
-    ? projectId
-    : projectByHandle?.data.projectByHandle?.onChainId ?? undefined;
-
+  const projectByHandleOnChainId =
+    projectByHandle?.data.projectByHandle?.onChainId ?? undefined;
+  const onChainProjectId = isOnChainId ? projectId : projectByHandleOnChainId;
   // else fetch project by onChainId
   const { data: projectByOnChainId, isLoading: loadingProjectByOnChainId } =
     useQuery(
@@ -123,7 +122,7 @@ function ProjectDetails(): JSX.Element {
   const managementActions =
     metadata?.['regen:landManagementActions']?.['@list'];
 
-  const { batchesWithSupply, setPaginationParams } =
+  const { batchesWithSupply, setPaginationParams, paginationParams } =
     usePaginatedBatchesByProject({ projectId: String(onChainProjectId) });
   const { totals: batchesTotal } = getBatchesTotal(batchesWithSupply ?? []);
 
@@ -160,13 +159,8 @@ function ProjectDetails(): JSX.Element {
     viewOnLedger,
   } = useIssuanceModal(data);
 
-  const projects = useMemo(
-    () => (onChainProject ? [onChainProject] : undefined),
-    [onChainProject],
-  );
-
   const { isBuyFlowDisabled, projectsWithOrderData } = useBuySellOrderData({
-    projects,
+    projectId: onChainProjectId,
   });
 
   const { credits, isSellFlowDisabled } = useCreateSellOrderData({
@@ -233,6 +227,7 @@ function ProjectDetails(): JSX.Element {
           batches: batchesWithSupply,
           totals: batchesTotal,
         }}
+        paginationParams={paginationParams}
         setPaginationParams={setPaginationParams}
         geojson={geojson}
         isGISFile={isGISFile}

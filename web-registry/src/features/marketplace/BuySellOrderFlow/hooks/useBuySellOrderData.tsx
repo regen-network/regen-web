@@ -1,13 +1,11 @@
-import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-
 import { useLedger } from 'ledger';
 
-import { useProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders';
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
-import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
+import { useProjectsWithOrders } from 'hooks/projects/useProjectsWithOrders';
 
 type Props = {
-  projects?: ProjectInfo[];
+  projectId?: string;
+  classId?: string;
 };
 
 type ReponseType = {
@@ -15,16 +13,15 @@ type ReponseType = {
   projectsWithOrderData: ProjectWithOrderData[];
 };
 
-export const useBuySellOrderData = ({ projects }: Props): ReponseType => {
-  const { sellOrdersResponse } = useQuerySellOrders();
-  const sellOrders = sellOrdersResponse?.sellOrders;
+export const useBuySellOrderData = ({
+  projectId,
+  classId,
+}: Props): ReponseType => {
   const { wallet } = useLedger();
 
   const { projectsWithOrderData, loading: loadingProjects } =
-    useProjectsSellOrders({
-      projects,
-      sellOrders,
-    });
+    useProjectsWithOrders({ projectId, classId });
+
   const sellOrdersAvailable = projectsWithOrderData[0]?.sellOrders.filter(
     sellOrder => sellOrder.seller !== wallet?.address,
   );

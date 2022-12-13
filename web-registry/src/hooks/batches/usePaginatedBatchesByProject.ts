@@ -50,7 +50,7 @@ export const usePaginatedBatchesByProject = ({
         projectId,
       },
       keepPreviousData: true,
-      enabled: !!ecocreditClient,
+      enabled: !!ecocreditClient && !!projectId,
     }),
   );
 

@@ -13,8 +13,8 @@ export const getBatchesByProjectQuery = ({
 }: ReactQueryBatchesByProjectProps): ReactQueryBatchesByProjectResponse => ({
   queryKey: getBatchesByProjectKey({
     projectId: request.projectId ?? '',
-    limit: String(request.pagination?.limit),
     offset: String(request.pagination?.offset),
+    limit: String(request.pagination?.limit),
   }),
   queryFn: async () => {
     if (!client) return;

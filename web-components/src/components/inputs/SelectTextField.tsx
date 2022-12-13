@@ -63,7 +63,7 @@ export default function SelectTextField({
                 return selectedOption.label;
               }
 
-              return options?.[0].label;
+              return options?.[0]?.label;
             },
         IconComponent: disabled
           ? () => <DropdownIcon color={theme.palette.grey['400']} />

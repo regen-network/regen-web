@@ -6,7 +6,7 @@ import { AddDataToBatchesParams } from 'lib/ecocredit/api';
 import { ReactQueryBuilderResponse } from '../../types/react-query.types';
 
 export type ReactQueryAddDataToBatchesResponse = QueryObserverOptions<
-  BatchInfoWithSupply[] | void
+  BatchInfoWithSupply[] | null
 >;
 
 export type ReactQueryAddDataToBatchesParams = Omit<

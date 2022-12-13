@@ -47,7 +47,7 @@ import { getIsOnChainId } from './ProjectDetails.utils';
 function ProjectDetails(): JSX.Element {
   const theme = useTheme();
   const { projectId } = useParams();
-  const { wallet } = useLedger();
+  const { wallet, ecocreditClient } = useLedger();
 
   const { data: sanityProjectPageData } = useQuery(
     getAllProjectPageQuery({ sanityClient, enabled: !!sanityClient }),
@@ -99,7 +99,11 @@ function ProjectDetails(): JSX.Element {
     );
 
   const { data: projectResponse } = useQuery(
-    getProjectQuery({ request: { projectId } }),
+    getProjectQuery({
+      request: { projectId },
+      client: ecocreditClient,
+      enabled: !!ecocreditClient && !!projectId,
+    }),
   );
 
   const onChainProject = projectResponse?.project;

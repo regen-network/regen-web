@@ -58,6 +58,7 @@ export interface TxModalProps extends RegenModalProps {
   icon?: JSX.Element;
   title?: string;
   description?: string;
+  buttonLink?: string;
 }
 
 interface CardItemProps extends Item {
@@ -106,8 +107,10 @@ const TxModal: React.FC<React.PropsWithChildren<TxModalProps>> = ({
   txHash,
   txHashUrl,
   linkComponent,
+  buttonLink,
 }) => {
   const { classes: styles } = useStyles();
+  const hasCardItems = !!cardItems && cardItems.length > 0;
   return (
     <Modal open={open} onClose={onClose} className={styles.root}>
       {icon}
@@ -132,38 +135,44 @@ const TxModal: React.FC<React.PropsWithChildren<TxModalProps>> = ({
           sx={{
             pt: [2.5, 5],
             pb: [4.75, 0],
+            mb: hasCardItems ? '' : { sm: 10, xs: 7.5 },
+            textAlign: 'center',
           }}
         >
           {ReactHtmlParser(description)}
         </Body>
       )}
-      <Card
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          flexShrink: 0,
-          width: '100%',
-          px: { sm: 7.75, xs: 5.5 },
-          py: { sm: 9, xs: 7.5 },
-          mt: { sm: 9.5, xs: 2.75 },
-          mb: { sm: 10, xs: 7.5 },
-        }}
-      >
-        <Title variant="h5">{cardTitle}</Title>
-        {cardItems?.map((item, i) => (
-          <CardItem {...item} linkComponent={linkComponent} key={i} />
-        ))}
-        {txHash && (
-          <CardItem
-            label="hash"
-            value={{ name: truncate(txHash), url: txHashUrl }}
-            linkComponent={linkComponent}
-          />
-        )}
-      </Card>
+      {hasCardItems && (
+        <Card
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            flexShrink: 0,
+            width: '100%',
+            px: { sm: 7.75, xs: 5.5 },
+            py: { sm: 9, xs: 7.5 },
+            mt: { sm: 9.5, xs: 2.75 },
+            mb: { sm: 10, xs: 7.5 },
+          }}
+        >
+          <Title variant="h5">{cardTitle}</Title>
+          {cardItems?.map((item, i) => (
+            <CardItem {...item} linkComponent={linkComponent} key={i} />
+          ))}
+          {txHash && (
+            <CardItem
+              label="hash"
+              value={{ name: truncate(txHash), url: txHashUrl }}
+              linkComponent={linkComponent}
+            />
+          )}
+        </Card>
+      )}
       <OutlinedButton
         sx={{ fontSize: { xs: 12, sm: 18 } }}
         onClick={onButtonClick}
+        LinkComponent={linkComponent}
+        href={buttonLink}
       >
         {buttonTitle}
       </OutlinedButton>

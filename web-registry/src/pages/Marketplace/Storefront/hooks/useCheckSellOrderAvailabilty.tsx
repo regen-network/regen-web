@@ -40,8 +40,8 @@ export const useCheckSellOrderAvailabilty = ({
     });
 
     if (isBuyOrderInvalid) {
-      setError(errorsMapping[ERRORS.SELL_ORDER_PURCHASED].code);
-      setTxModalHeader(errorsMapping[ERRORS.SELL_ORDER_PURCHASED].label);
+      setError(ERRORS.SELL_ORDER_PURCHASED);
+      setTxModalHeader(errorsMapping[ERRORS.SELL_ORDER_PURCHASED].title);
       setTxModalTitle(`Sell order #${sellOrderId}`);
       setCardItems([
         {

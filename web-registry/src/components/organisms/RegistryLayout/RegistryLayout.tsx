@@ -9,6 +9,7 @@ import { PageViewTracking } from 'components/molecules/PageViewTracking';
 import { ScrollToTop } from '../../atoms';
 import { RegistryLayoutFooter } from './RegistryLayout.Footer';
 import { RegistryLayoutHeader } from './RegistryLayout.Header';
+import { RegistryLayoutTxErrorModal } from './RegistryLayout.TxErrorModal';
 
 const RegistryLayout: React.FC = () => {
   return (
@@ -22,6 +23,7 @@ const RegistryLayout: React.FC = () => {
         privacyUrl={URL_WEB_PRIVACY}
         TOSUrl={URL_REGISTRY_TERMS_SERVICE}
       />
+      <RegistryLayoutTxErrorModal />
     </>
   );
 };

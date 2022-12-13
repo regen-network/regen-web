@@ -84,7 +84,7 @@ const BridgeForm = ({
             label={
               <FormLabel
                 label="Recipient"
-                description="This is the polygon address of the recipient."
+                description="This is the Polygon address of the recipient."
               />
             }
             component={TextField}

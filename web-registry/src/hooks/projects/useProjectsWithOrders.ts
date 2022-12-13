@@ -1,3 +1,4 @@
+import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';
@@ -88,8 +89,15 @@ export function useProjectsWithOrders({
 
   /* Normalization/Filtering/Sorting */
 
-  const projects =
-    projectsData?.projects ?? projectsByClassData?.projects ?? projectArray;
+  let projects: ProjectInfo[] | undefined;
+  if (projectId) {
+    projects = projectArray;
+  } else if (classId) {
+    projects = projectsByClassData?.projects;
+  } else {
+    projects = projectsData?.projects;
+  }
+
   const selectedProjects =
     selectProjects({
       projects,

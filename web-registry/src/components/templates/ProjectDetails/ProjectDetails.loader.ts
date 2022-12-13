@@ -1,6 +1,7 @@
 import { QueryClient } from '@tanstack/react-query';
 
 import { graphqlClient } from 'lib/clients/graphqlClient';
+import { getEcocreditQueryClient } from 'lib/clients/regen/ecocredit/ecocreditQueryClient';
 import { getMarketplaceQueryClient } from 'lib/clients/regen/ecocredit/marketplace/marketplaceQueryClient';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
@@ -25,11 +26,15 @@ export const projectDetailsLoader =
 
     // Clients
     const marketplaceClient = await getMarketplaceQueryClient();
+    const ecocreditClient = await getEcocreditQueryClient();
 
     // Queries
     const allProjectPageQuery = getAllProjectPageQuery({ sanityClient });
     const allCreditClassesQuery = getAllCreditClassesQuery({ sanityClient });
-    const projectQuery = getProjectQuery({ request: { projectId } });
+    const projectQuery = getProjectQuery({
+      request: { projectId },
+      client: ecocreditClient,
+    });
     const projectByOnChainIdQuery = getProjectByOnChainIdQuery({
       client: graphqlClient,
       enabled: !!projectId && isOnChainId,

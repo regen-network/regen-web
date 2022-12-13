@@ -1,11 +1,16 @@
 import { useCallback } from 'react';
 import { MsgBridge } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
-import { useTrack } from 'use-analytics';
 
 import type { Item } from 'web-components/lib/components/modal/TxModal';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import type { UseStateSetter } from 'types/react/use-state';
+import {
+  Bridge2Event,
+  BridgeFailureEvent,
+  BridgeSuccessEvent,
+} from 'lib/tracker/types';
+import { useTracker } from 'lib/tracker/useTracker';
 
 import type { BridgeFormValues } from 'components/organisms/BridgeForm/BridgeForm';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
@@ -23,8 +28,8 @@ type Props = {
   signAndBroadcast: SignAndBroadcastType;
   setCreditBridgeOpen: UseStateSetter<BatchInfoWithBalance | undefined>;
   setCardItems: UseStateSetter<Item[] | undefined>;
-  setTxModalHeader: UseStateSetter<string>;
-  setTxModalTitle: UseStateSetter<string>;
+  setTxModalHeader: UseStateSetter<string | undefined>;
+  setTxModalTitle: UseStateSetter<string | undefined>;
   setTxButtonTitle: UseStateSetter<string>;
   setTxModalDescription: UseStateSetter<string>;
 };
@@ -42,14 +47,20 @@ const useCreditBridgeSubmit = ({
   setTxButtonTitle,
   setTxModalDescription,
 }: Props): ReturnType => {
-  const track = useTrack();
+  const { track } = useTracker();
 
   const creditBridgeSubmit = useCallback(
     async (values: BridgeFormValues): Promise<void> => {
-      track('bridge3');
+      const batchDenom = creditBridgeBatch?.denom;
+      track<'bridge2', Bridge2Event>('bridge2', {
+        batchDenom,
+        quantity: values.amount,
+        creditClassId: creditBridgeBatch?.classId,
+        projectId: creditBridgeBatch?.projectId,
+        recipient: values.recipient,
+      });
 
       if (!accountAddress) return Promise.reject();
-      const batchDenom = creditBridgeBatch?.denom;
       const { recipient, amount, target } = values;
 
       const msg = MsgBridge.fromPartial({
@@ -69,8 +80,15 @@ const useCreditBridgeSubmit = ({
         fee: undefined,
       };
 
-      const onError = (): void => {
-        track('bridgeFailure');
+      const onError = (err?: Error): void => {
+        track<'bridgeFailure', BridgeFailureEvent>('bridgeFailure', {
+          batchDenom,
+          quantity: values.amount,
+          creditClassId: creditBridgeBatch?.classId,
+          projectId: creditBridgeBatch?.projectId,
+          errorMessage: err?.message,
+          recipient: values.recipient,
+        });
       };
 
       const onSuccess = (): void => {
@@ -98,7 +116,13 @@ const useCreditBridgeSubmit = ({
           setTxButtonTitle(BRIDGE_BUTTON_TEXT);
           setTxModalDescription(BRIDGE_TX_DESCRIPTION);
         }
-        track('bridgeSuccess');
+        track<'bridgeSuccess', BridgeSuccessEvent>('bridgeSuccess', {
+          batchDenom,
+          quantity: values.amount,
+          creditClassId: creditBridgeBatch?.classId,
+          projectId: creditBridgeBatch?.projectId,
+          recipient: values.recipient,
+        });
       };
 
       await signAndBroadcast(tx, () => setCreditBridgeOpen(undefined), {
@@ -108,6 +132,7 @@ const useCreditBridgeSubmit = ({
     },
     [
       accountAddress,
+      creditBridgeBatch?.classId,
       creditBridgeBatch?.denom,
       creditBridgeBatch?.projectId,
       creditBridgeBatch?.projectName,

@@ -5,6 +5,7 @@ import {
   BatchInfo,
   QueryProjectsResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { ERROR_BANNER } from 'config/contents';
 import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
 import { Buy1Event } from 'web-registry/src/lib/tracker/types';
 import { useTracker } from 'web-registry/src/lib/tracker/useTracker';
@@ -453,7 +454,7 @@ export const Storefront = (): JSX.Element => {
       />
       {displayErrorBanner && (
         <ErrorBanner
-          text="Please connect to Keplr to use Regen Ledger features"
+          text={ERROR_BANNER}
           onClose={() => setDisplayErrorBanner(false)}
         />
       )}

@@ -2,8 +2,8 @@ import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';
 import { GECKO_EEUR_ID, GECKO_USDC_ID } from 'lib/coingecko';
-import { normalizeProjectsWithMetadata } from 'lib/normalizers/normalizeProjects/normalizeProjectsWithMetadata';
-import { normalizeProjectsWithOrderData } from 'lib/normalizers/normalizeProjects/normalizeProjectsWithOrderData';
+import { normalizeProjectsWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
+import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 import { getProjectsByClassQuery } from 'lib/queries/react-query/ecocredit/getProjectsByClass/getProjectsByClassQuery';
 import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';

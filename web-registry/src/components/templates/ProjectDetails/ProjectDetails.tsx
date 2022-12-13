@@ -66,7 +66,7 @@ function ProjectDetails(): JSX.Element {
   useResetErrorBanner({ displayErrorBanner, setDisplayErrorBanner });
 
   // Tx client
-  const { api } = useLedger({ forceExp: true });
+  const { api } = useLedger();
   let txClient: ServiceClientImpl | undefined;
   if (api) {
     txClient = new ServiceClientImpl(api.queryClient);

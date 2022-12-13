@@ -1,0 +1,17 @@
+pull_request_rules:
+  - name: backport to redwood
+    conditions:
+      - base=dev
+      - label=backport/redwood
+    actions:
+      backport:
+        branches:
+          - redwood
+  - name: backport to hambach
+    conditions:
+      - base=dev
+      - label=backport/hambach
+    actions:
+      backport:
+        branches:
+          - hambach

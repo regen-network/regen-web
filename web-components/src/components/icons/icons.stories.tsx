@@ -53,6 +53,7 @@ import RegenIcon from './RegenIcon';
 import RegenLedgerIcon from './RegenLedgerIcon';
 import RegenLogoIcon from './RegenLogoIcon';
 import RegenMarketIcon from './RegenMarketIcon';
+import RegenNotFoundIcon from './RegenNotFoundIcon';
 import { RegenTokenIcon } from './RegenTokenIcon';
 import RegistrationIcon from './RegistrationIcon';
 import RegistryIcon from './RegistryIcon';
@@ -206,6 +207,10 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon
       icon={<RegenMarketIcon sx={{ fontSize: 64 }} />}
       label="RegenMarketIcon"
+    />
+    <LabeledIcon
+      icon={<RegenNotFoundIcon sx={{ color: 'secondary.main' }} />}
+      label="RegenNotFoundIcon"
     />
     <LabeledIcon icon={<RegenTokenIcon />} label="RegenTokenIcon" />
     <LabeledIcon icon={<RegistrationIcon />} label="RegistrationIcon" />

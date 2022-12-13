@@ -1,11 +1,15 @@
 import React, { useCallback, useMemo, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { REGEN_DENOM } from 'config/allowedBaseDenoms';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import WalletModal from 'web-components/lib/components/modal/wallet-modal';
 import { WalletModalState } from 'web-components/lib/components/modal/wallet-modal/WalletModal.types';
 
+import { useLedger } from 'ledger';
 import { useGlobalStore } from 'lib/context/globalContext';
+import { getBalanceQuery } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery';
 
 import { chainId } from '../../../lib/ledger';
 import { useWallet } from '../../../lib/wallet/wallet';
@@ -21,6 +25,7 @@ import Keplr from 'assets/keplr.png';
 const WalletButton: React.FC = () => {
   const styles = useWalletButtonStyles();
   const { wallet, connect, loaded, error, walletConnectUri } = useWallet();
+  const { bankClient } = useLedger();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isWaitingForSigning, setGlobalStore] = useGlobalStore(
     store => store['isWaitingForSigning'],
@@ -28,6 +33,15 @@ const WalletButton: React.FC = () => {
   const [modalState, setModalState] =
     useState<WalletModalState>('wallet-select');
   const isConnected = loaded ? !!wallet?.address : null;
+
+  // Populate cache with user balance once connected
+  useQuery(
+    getBalanceQuery({
+      request: { address: wallet?.address, denom: REGEN_DENOM },
+      client: bankClient,
+      enabled: !!bankClient && !!wallet?.address,
+    }),
+  );
 
   const onButtonClick = useCallback(
     (): void => setIsModalOpen(true),

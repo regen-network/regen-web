@@ -53,6 +53,7 @@ import RegenIcon from './RegenIcon';
 import RegenLedgerIcon from './RegenLedgerIcon';
 import RegenLogoIcon from './RegenLogoIcon';
 import RegenMarketIcon from './RegenMarketIcon';
+import RegenNetworkIcon from './RegenNetworkIcon';
 import RegenNotFoundIcon from './RegenNotFoundIcon';
 import { RegenTokenIcon } from './RegenTokenIcon';
 import RegistrationIcon from './RegistrationIcon';
@@ -77,7 +78,7 @@ import SoilSampleIcon from './SoilSampleIcon';
 import { Spinner } from './Spinner';
 import SuccessIcon from './SuccessIcon';
 import TotalCreditsIcon from './TotalCreditsIcon';
-import { ToucanIcon } from './ToucanIcon';
+import ToucanIcon from './ToucanIcon';
 import TradeableIcon from './TradeableIcon';
 import TrashIcon from './TrashIcon';
 import TrustDocumentIcon from './TrustDocumentIcon';
@@ -208,6 +209,7 @@ export const allIcons = (): JSX.Element => (
       icon={<RegenMarketIcon sx={{ fontSize: 64 }} />}
       label="RegenMarketIcon"
     />
+    <LabeledIcon icon={<RegenNetworkIcon />} label="RegenNetworkIcon" />
     <LabeledIcon
       icon={<RegenNotFoundIcon sx={{ color: 'secondary.main' }} />}
       label="RegenNotFoundIcon"

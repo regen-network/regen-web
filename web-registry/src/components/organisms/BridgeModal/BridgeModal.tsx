@@ -1,4 +1,6 @@
-import { ToucanIcon } from 'web-components/lib/components/icons/ToucanIcon';
+import { Flex } from 'web-components/lib/components/box/Box';
+import RegenNetworkIcon from 'web-components/lib/components/icons/RegenNetworkIcon';
+import ToucanIcon from 'web-components/lib/components/icons/ToucanIcon';
 import { RegenModalProps } from 'web-components/lib/components/modal';
 import { FormModalTemplate } from 'web-components/lib/components/modal/FormModalTemplate';
 
@@ -28,7 +30,12 @@ const BridgeModal = ({
   <FormModalTemplate
     title={BRIDGE_MODAL_TITLE}
     subtitle={BRIDGE_MODAL_SUBTITLE}
-    image={<ToucanIcon sx={{ width: 109, height: 32 }} />}
+    image={
+      <Flex sx={{ alignItems: 'center' }}>
+        <ToucanIcon sx={{ width: 88, height: 26, mr: 4 }} />
+        <RegenNetworkIcon sx={{ width: 80, height: 36 }} />
+      </Flex>
+    }
     open={open}
     onClose={onClose}
   >

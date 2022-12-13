@@ -2,7 +2,7 @@ import * as togeojson from '@mapbox/togeojson';
 
 type Params = {
   isKMLFile: boolean;
-  geojsonResult?: string;
+  geojsonResult?: string | null;
 };
 
 export const parseGeojson = ({

@@ -42,6 +42,7 @@ import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProje
 import { ProjectDocumentation } from './ProjectDetails.ProjectDocumentation';
 import { ProjectTimeline } from './ProjectDetails.ProjectTimeline';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
+import { getIsOnChainId } from './ProjectDetails.utils';
 
 function ProjectDetails(): JSX.Element {
   const theme = useTheme();
@@ -73,14 +74,13 @@ function ProjectDetails(): JSX.Element {
   }
 
   // first, check if projectId is handle or onChainId
-  const isOnChainId =
-    !!projectId && /([A-Z]{1}[\d]+)([-])([\d{3,}])\w+/.test(projectId);
+  const isOnChainId = getIsOnChainId(projectId);
 
   // if projectId is handle, query project by handle
   const { data: projectByHandle, isLoading: loadingProjectByHandle } = useQuery(
     getProjectByHandleQuery({
       client: graphqlClient,
-      enabled: !!projectId,
+      enabled: !!projectId && !isOnChainId,
       handle: projectId as string,
     }),
   );

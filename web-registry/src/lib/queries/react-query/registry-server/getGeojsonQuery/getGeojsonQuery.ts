@@ -10,7 +10,7 @@ export const getGeojsonQuery = ({
 }: ReactQueryGeojsonProps): ReactQueryGeojsonResponse => ({
   queryKey: getGeojsonKey(mapFile),
   queryFn: async () => {
-    if (!mapFile) return;
+    if (!mapFile) return null;
 
     return await fetch(mapFile).then(r => r.text());
   },

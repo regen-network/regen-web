@@ -77,7 +77,12 @@ export const useFetchEcocredits = (): Response => {
   // Projects
   const projectsResults = useQueries({
     queries: batches.map(batch =>
-      getProjectQuery({ request: { projectId: batch?.batch?.projectId } }),
+      getProjectQuery({
+        request: {
+          projectId: batch?.batch?.projectId,
+        },
+        client: ecocreditClient,
+      }),
     ),
   });
   const projects = projectsResults.map(projectResult => projectResult.data);

@@ -10,9 +10,9 @@ export const getProjectQuery = ({
   client,
   ...params
 }: ReactQueryProjectProps): ReactQueryProjectResponse => ({
-  queryKey: ['project', request.projectId],
+  queryKey: ['project', request.projectId ?? ''],
   queryFn: async () => {
-    if (!client) return;
+    if (!client) return null;
 
     return await queryProject({
       request,

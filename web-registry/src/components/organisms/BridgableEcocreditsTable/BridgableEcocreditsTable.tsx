@@ -120,7 +120,6 @@ export const BridgableEcocreditsTable = ({
                 <InfoTooltipWithIcon outlined title={CREDIT_BATCH_TOOLTIP} />
               </Box>
             </Box>,
-            'Issuer',
             'Credit Class',
             <Box display="flex">
               <BreakTextEnd>Amount Bridgable</BreakTextEnd>
@@ -131,6 +130,7 @@ export const BridgableEcocreditsTable = ({
                 />
               </Box>
             </Box>,
+            'Issuer',
             <Box sx={{ width: '6.25rem' }}>
               <BreakText>Batch Start Date</BreakText>
             </Box>,
@@ -150,7 +150,6 @@ export const BridgableEcocreditsTable = ({
                 </Link>
               </WithLoader>,
               <Link href={`/credit-batches/${row.denom}`}>{row.denom}</Link>,
-              <AccountLink address={row.issuer} />,
               <WithLoader isLoading={!row.classId} variant="skeleton">
                 <Link
                   key="class_id"
@@ -164,6 +163,7 @@ export const BridgableEcocreditsTable = ({
                 num: row.balance?.tradableAmount,
                 ...quantityFormatNumberOptions,
               }),
+              <AccountLink address={row.issuer} />,
               <GreyText>
                 {formatDate(row.startDate, DATE_FORMAT_SECONDARY)}
               </GreyText>,

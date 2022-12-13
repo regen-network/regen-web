@@ -55,4 +55,6 @@ export interface BridgedEcocredits extends IBatchInfoWithClassProject {
   amount: string;
   status?: BridgedTxStatus;
   destinationTxHash?: string;
+  txHash?: string;
+  txTimestamp?: string;
 }

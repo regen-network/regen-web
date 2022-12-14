@@ -1,2 +1,14 @@
-https://registry.regen.network/*  https://app.regen.network/:splat 301!
-/*    /index.html   200
+https://registry.regen.network/* https://app.regen.network/:splat 301!
+/projects/C02-002 /project/C02-002 301!
+/projects/C02-003 /project/C02-003 301!
+/projects/C02-004 /project/C02-004 301!
+/projects/C02-001 /project/C02-001 301!
+/projects/C01-001 /project/C01-001 301!
+/projects/C01-002 /project/C01-002 301!
+/projects/C01-003 /project/C01-003 301!
+/projects/wilmot /project/wilmot 301!
+/projects/cavan-station /project/cavan-station 301!
+/projects/woodburn /project/woodburn 301!
+/projects/pillango /project/pillango 301!
+/projects /projects/1 301!
+/* /index.html 200

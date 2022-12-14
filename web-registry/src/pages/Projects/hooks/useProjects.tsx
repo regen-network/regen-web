@@ -1,24 +1,35 @@
 import { useProjectsWithOrders } from 'hooks/projects/useProjectsWithOrders';
 
+import { PROJECTS_PER_PAGE } from '../Projects.config';
 import { ProjectWithOrderData } from '../Projects.types';
-import { useSortProjects } from './useSortProjects';
 
 interface ReturnType {
   projects: ProjectWithOrderData[];
+  projectsCount?: number;
+  pagesCount: number;
   loading: boolean;
 }
 
-export const useProjects = (sort: string): ReturnType => {
-  // get normalized projects with sell order data
-  const { projectsWithOrderData, loading } = useProjectsWithOrders({});
+interface Props {
+  sort: string;
+  offset?: number;
+}
 
-  const projects = useSortProjects({
-    projects: projectsWithOrderData,
-    sort,
-  });
+export const useProjects = ({ offset = 0, sort }: Props): ReturnType => {
+  // get normalized projects with sell order data
+  const { projectsWithOrderData, projectsCount, loading } =
+    useProjectsWithOrders({
+      limit: PROJECTS_PER_PAGE,
+      offset,
+      sort,
+    });
+
+  const pagesCount = Math.floor((projectsCount ?? 0) / PROJECTS_PER_PAGE);
 
   return {
-    projects,
+    projects: projectsWithOrderData,
+    projectsCount,
+    pagesCount,
     loading,
   };
 };

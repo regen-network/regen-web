@@ -2,7 +2,8 @@ import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';
 import { GECKO_EEUR_ID, GECKO_USDC_ID } from 'lib/coingecko';
-import { normalizeProjectsWithOrderData } from 'lib/normalizers/normalizeProjectsWithOrderData';
+import { normalizeProjectsWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
+import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 import { getProjectsByClassQuery } from 'lib/queries/react-query/ecocredit/getProjectsByClass/getProjectsByClassQuery';
 import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
@@ -11,16 +12,18 @@ import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMet
 import { useWallet } from 'lib/wallet/wallet';
 
 import { ProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders';
-import { sortProjectsBySellOrdersAvailability } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
+import { sortProjects } from 'pages/Projects/utils/sortProjects';
 
 import { selectProjects } from './useProjectsWithOrders.utils';
 
 export interface ProjectsWithOrdersProps {
   limit?: number;
+  offset?: number;
   metadata?: boolean; // to discard projects without metadata prop
   random?: boolean; // to shuffle the projects (along with limit allows a random subselection)
   projectId?: string; // to discard an specific project
   classId?: string; // to filter by class
+  sort?: string;
 }
 
 /**
@@ -28,10 +31,12 @@ export interface ProjectsWithOrdersProps {
  */
 export function useProjectsWithOrders({
   limit,
+  offset = 0,
   metadata = false,
   random = false,
   projectId,
   classId,
+  sort = '',
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
   const { ecocreditClient, marketplaceClient } = useLedger();
 
@@ -67,7 +72,7 @@ export function useProjectsWithOrders({
     }),
   );
 
-  /* Filtering/Sorting */
+  /* Normalization/Filtering/Sorting */
 
   const projects = projectsData?.projects ?? projectsByClassData?.projects;
   const selectedProjects =
@@ -78,9 +83,20 @@ export function useProjectsWithOrders({
       random,
       projectId,
     }) ?? [];
-  const sortedProjects = selectedProjects
-    .sort(sortProjectsBySellOrdersAvailability(sellOrders ?? []))
-    .slice(0, limit);
+  const projectsWithOrderData = normalizeProjectsWithOrderData({
+    projects: selectedProjects,
+    sellOrders,
+    geckoPrices: {
+      regenPrice: simplePrice?.data?.regen?.usd,
+      eeurPrice: simplePrice?.data?.[GECKO_EEUR_ID]?.usd,
+      usdcPrice: simplePrice?.data?.[GECKO_USDC_ID]?.usd,
+    },
+    userAddress: wallet?.address,
+  });
+  const sortedProjects = sortProjects(projectsWithOrderData, sort).slice(
+    offset,
+    limit ? offset + limit : undefined,
+  );
 
   /* Metadata queries */
 
@@ -91,22 +107,16 @@ export function useProjectsWithOrders({
   });
   const metadatas = metadataResults.map(queryResult => queryResult.data);
 
-  /* Normalization */
+  /* Final Normalization */
 
-  const projectsWithOrderData = normalizeProjectsWithOrderData({
-    projects: sortedProjects,
-    sellOrders,
-    geckoPrices: {
-      regenPrice: simplePrice?.data?.regen?.usd,
-      eeurPrice: simplePrice?.data?.[GECKO_EEUR_ID]?.usd,
-      usdcPrice: simplePrice?.data?.[GECKO_USDC_ID]?.usd,
-    },
+  const projectsWithMetadata = normalizeProjectsWithMetadata({
+    projectsWithOrderData: sortedProjects,
     metadatas,
-    userAddress: wallet?.address,
   });
 
   return {
-    projectsWithOrderData,
+    projectsWithOrderData: projectsWithMetadata,
+    projectsCount: projects?.length,
     loading: isLoadingProjects || isLoadingProjectsByClass,
   };
 }

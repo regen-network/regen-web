@@ -193,7 +193,7 @@ const useBuySellOrderSubmit = ({
             label: 'project',
             value: {
               name: project.name,
-              url: `/projects/${project.id}`,
+              url: `/project/${project.id}`,
             },
           },
           {

@@ -26,12 +26,12 @@ import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 
 import { reactQueryClient } from 'lib/clients/reactQueryClient';
 import { GlobalProvider } from 'lib/context/globalContext';
-import { WalletProvider } from 'lib/wallet/wallet';
 
 import PageLoader from 'components/atoms/PageLoader';
 
 import { AuthApolloProvider } from './apollo';
 import { LedgerProvider } from './ledger';
+import { WalletProvider } from './lib/wallet/wallet';
 import * as serviceWorker from './serviceWorker';
 
 import './App.css';

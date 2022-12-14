@@ -32,6 +32,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
         label: 'Bridge',
         icon: <BridgeIcon />,
         href: `/ecocredits/accounts/${accountAddress}/bridge`,
+        hidden: process.env.REACT_APP_LEDGER_CHAIN_ID === 'regen-1', // TODO: Hides in PROD - remove when Bridge is ready
       },
     ],
     [accountAddress, theme.palette.secondary.main],

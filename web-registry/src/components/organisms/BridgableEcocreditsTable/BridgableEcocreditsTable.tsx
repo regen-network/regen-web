@@ -21,6 +21,7 @@ import {
 import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/ActionsTable.constants';
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
+import { Bridge1Event } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { BridgeFlow } from 'features/marketplace/BridgeFlow/BridgeFlow';
@@ -95,7 +96,11 @@ export const BridgableEcocreditsTable = ({
               size="small"
               onClick={async () => {
                 setBatchToBridge(bridgableCredits[i]);
-                track<'bridge1'>('bridge1');
+                track<'bridge1', Bridge1Event>('bridge1', {
+                  batchDenom: bridgableCredits[i].denom,
+                  projectId: bridgableCredits[i].projectId,
+                  creditClassId: bridgableCredits[i].classId,
+                });
               }}
             >
               {BRIDGE_ACTION}

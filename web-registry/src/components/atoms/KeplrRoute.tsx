@@ -1,10 +1,11 @@
 import React from 'react';
 import { Box } from '@mui/material';
+import { ERROR_BANNER } from 'config/contents';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 
-import { chainId } from '../../lib/ledger';
-import { useWallet } from '../../lib/wallet/wallet';
+import { chainId } from 'lib/ledger';
+import { useWallet } from 'lib/wallet/wallet';
 
 interface Props {
   component: React.ComponentType<React.PropsWithChildren<unknown>>;
@@ -20,9 +21,7 @@ const KeplrRoute = ({ component: Component }: Props): JSX.Element => {
   return (
     <Box sx={{ minHeight: 600 }}>
       {connected && <Component />}
-      {displayErrorBanner && (
-        <ErrorBanner text="Please connect to Keplr to use Regen Ledger features" />
-      )}
+      {displayErrorBanner && <ErrorBanner text={ERROR_BANNER} />}
     </Box>
   );
 };

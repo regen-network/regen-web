@@ -3,8 +3,8 @@ import { DeliverTxResponse } from '@cosmjs/stargate';
 
 import { Item } from 'web-components/lib/components/modal/TxModal';
 
-import { CreditItemEventTake, EventTx } from 'types/ledger/base';
 import { UseStateSetter } from 'types/react/use-state';
+import { takeEventToBatches } from 'lib/events/takeEventToBatches';
 
 type Props = {
   deliverTxResponse?: DeliverTxResponse;
@@ -27,24 +27,8 @@ export const useUpdateCardItemsTakeBasket = ({
     if (!cardItems || !deliverTxResponse || !deliverTxResponse.rawLog) return;
     if (cardItemsTakeDone) return;
 
-    const rawLog = JSON.parse(deliverTxResponse.rawLog);
-    const rawEventTake: EventTx = rawLog[0].events.find((event: EventTx) =>
-      event.type.includes('EventTake'),
-    );
-    if (!rawEventTake) return;
-
-    const creditsAttribute = rawEventTake.attributes.find(
-      attribute => attribute.key === 'credits',
-    );
-    if (!creditsAttribute) return;
-
-    const creditsFromTake = JSON.parse(creditsAttribute.value);
-    const batchesFromTake = creditsFromTake.map(
-      (credit: CreditItemEventTake) => ({
-        name: credit.batch_denom,
-        url: `/credit-batches/${credit.batch_denom}`,
-      }),
-    );
+    const batchesFromTake = takeEventToBatches(deliverTxResponse);
+    if (!batchesFromTake) return;
 
     const moreThanOne = batchesFromTake.length > 1;
 

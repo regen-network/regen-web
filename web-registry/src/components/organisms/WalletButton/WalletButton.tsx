@@ -98,7 +98,7 @@ const WalletButton: React.FC = () => {
         mobileConnectUrl={mobileConnectUrl}
       />
       <MobileSigningModal
-        isOpen={isWaitingForSigning}
+        isOpen={isWaitingForSigning && !!walletConnectUri}
         onClose={() => setGlobalStore({ isWaitingForSigning: false })}
       />
     </>

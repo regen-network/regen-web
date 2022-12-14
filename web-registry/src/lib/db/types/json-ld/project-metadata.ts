@@ -1,8 +1,11 @@
 import { TypeValue, UrlList, UrlType } from 'lib/rdf/types';
 
+// TODO: remember that all exisiting metadata will have to be updated
+
 export interface ProjectMetadataLD {
   '@context': Context;
-  '@type': string;
+  '@type': string; // regen:C01-Project
+
   'schema:name': string;
   'schema:location': any;
   'regen:projectType': string;
@@ -13,34 +16,44 @@ export interface ProjectMetadataLD {
   'regen:projectSize': ProjectSize;
   'regen:projectStartDate': TypeValue;
   'regen:projectEndDate': TypeValue;
-  'regen:boundaries': TypeValue;
-  'regen:creditClass': CreditClass;
-  'regen:projectDeveloper': ProjectStakeholder;
-  'regen:landSteward': ProjectStakeholder;
-  'regen:landOwner': ProjectStakeholder;
-  'regen:projectOriginator': ProjectStakeholder;
-
-  'regen:glanceText': any;
-  'regen:landStory': string;
-  'regen:landStewardStory': string;
-  'regen:landStewardPhoto': UrlType;
-  'regen:projectQuote': ProjectQuote;
-  'regen:landStewardStoryTitle': string;
-  'regen:landManagementActions': LandManagementActions;
-  'schema:description'?: string;
 }
 
-export interface NonQueryableProjectMetadataLD {
+// This is unsigned metadata
+export interface ProjectPageMetadataLD {
+  '@context': Context;
+  '@type': string; // regen:C01-Project-Page
+
+  // media
   'schema:image': UrlType;
   'schema:creditText': string;
   'regen:galleryPhotos': UrlList;
   'regen:previewPhoto': UrlType;
   'regen:videoURL': UrlType;
+
+  // roles
+  'regen:projectDeveloper': ProjectStakeholder;
+  'regen:landSteward': ProjectStakeholder;
+  'regen:landOwner': ProjectStakeholder;
+  'regen:projectOriginator': ProjectStakeholder;
+
+  // marketing
+  'regen:landStory': string;
+  'regen:landStewardStory': string;
+  'regen:landStewardPhoto': UrlType;
+  'regen:projectQuote': ProjectQuote;
+  'regen:landStewardStoryTitle': string;
+  'schema:description'?: string;
+
+  // legacy? - may not exist in standards repo
+  'regen:boundaries': TypeValue;
+  'regen:creditClass': CreditClass;
+  'regen:landManagementActions': LandManagementActions;
+  'regen:glanceText': any;
 }
 
 export interface ProjectCreateMetadataLD
   extends ProjectMetadataLD,
-    NonQueryableProjectMetadataLD {}
+    ProjectPageMetadataLD {}
 
 interface Context {
   schema: string;

@@ -130,7 +130,7 @@ const useCreateSellOrderSubmit = ({
             label: 'project',
             value: {
               name: projectName ?? projectId,
-              url: `/projects/${projectId}`,
+              url: `/project/${projectId}`,
             },
           },
           {

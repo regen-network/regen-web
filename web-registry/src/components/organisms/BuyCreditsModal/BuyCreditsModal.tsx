@@ -194,7 +194,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                     Credits
                   </Title>
                   <Subtitle size="lg" mobileSize="xs">
-                    <Link to={`/projects/${project.id}`} target="_blank">
+                    <Link to={`/project/${project.id}`} target="_blank">
                       {project.name}
                     </Link>
                   </Subtitle>

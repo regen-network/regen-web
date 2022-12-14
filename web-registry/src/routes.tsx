@@ -97,7 +97,7 @@ export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
       <Route path="add" element={<Additionality />} />
       <Route path="signup" element={<Signup />} />
       <Route path="certificate" element={<CertificatePage />} />
-      <Route path="projects/wilmot/admin" element={<Seller />} />
+      <Route path="project/wilmot/admin" element={<Seller />} />
       <Route path="buyers" element={<BuyersPage />} />
       <Route path="create-methodology" element={<CreateMethodology />} />
       <Route
@@ -111,13 +111,13 @@ export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
         element={<MethodologyReviewProcess />}
       />
       <Route
-        path="projects"
+        path="projects/:page"
         element={<Projects />}
         loader={projectsLoader({
           queryClient: reactQueryClient,
         })}
       />
-      <Route path="projects/:projectId" element={<Project />} />
+      <Route path="project/:projectId" element={<Project />} />
       <Route
         path="post-purchase/:projectId/:walletId/:name"
         element={<PostPurchase />}

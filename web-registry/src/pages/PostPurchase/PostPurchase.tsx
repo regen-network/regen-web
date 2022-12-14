@@ -109,7 +109,7 @@ function PostPurchase(): JSX.Element {
     variables: { id: walletId },
   });
 
-  const url = `projects/${projectId}`;
+  const url = `project/${projectId}`;
 
   const units: number | undefined =
     walletData &&

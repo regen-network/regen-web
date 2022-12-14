@@ -155,6 +155,7 @@ function ProjectDetails(): JSX.Element {
   });
   const mediaData = useMedia({ metadata, geojson });
   const impactData = useImpact({ coBenefitsIris, primaryImpactIRI });
+
   const isLoading = loadingProjectByOnChainId || loadingProjectByHandle;
 
   const {

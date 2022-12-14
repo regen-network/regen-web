@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useApolloClient } from '@apollo/client';
 import { Box, Skeleton, useTheme } from '@mui/material';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import { useQuery } from '@tanstack/react-query';
@@ -9,7 +10,6 @@ import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 
-import { graphqlClient } from 'lib/clients/graphqlClient';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
@@ -48,6 +48,7 @@ function ProjectDetails(): JSX.Element {
   const theme = useTheme();
   const { projectId } = useParams();
   const { wallet, ecocreditClient } = useLedger();
+  const apolloClient = useApolloClient();
 
   const { data: sanityProjectPageData } = useQuery(
     getAllProjectPageQuery({ sanityClient, enabled: !!sanityClient }),
@@ -79,7 +80,7 @@ function ProjectDetails(): JSX.Element {
   // if projectId is handle, query project by handle
   const { data: projectByHandle, isLoading: loadingProjectByHandle } = useQuery(
     getProjectByHandleQuery({
-      client: graphqlClient,
+      client: apolloClient,
       enabled: !!projectId && !isOnChainId,
       handle: projectId as string,
     }),
@@ -92,7 +93,7 @@ function ProjectDetails(): JSX.Element {
   const { data: projectByOnChainId, isLoading: loadingProjectByOnChainId } =
     useQuery(
       getProjectByOnChainIdQuery({
-        client: graphqlClient,
+        client: apolloClient,
         enabled: !!onChainProjectId,
         onChainId: onChainProjectId as string,
       }),

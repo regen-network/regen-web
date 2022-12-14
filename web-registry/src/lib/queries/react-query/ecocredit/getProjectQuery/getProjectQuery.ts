@@ -13,11 +13,14 @@ export const getProjectQuery = ({
   queryKey: ['project', request.projectId ?? ''],
   queryFn: async () => {
     if (!client) return null;
-
-    return await queryProject({
-      request,
-      client,
-    });
+    try {
+      return await queryProject({
+        request,
+        client,
+      });
+    } catch (e) {
+      return null;
+    }
   },
   ...params,
 });

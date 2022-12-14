@@ -1,8 +1,4 @@
-import {
-  ApolloClient,
-  ApolloQueryResult,
-  NormalizedCacheObject,
-} from '@apollo/client';
+import { ApolloClient, ApolloQueryResult } from '@apollo/client';
 import { QueryObserverOptions } from '@tanstack/react-query';
 
 import {
@@ -16,6 +12,6 @@ export type ReactQueryProjectByOnChainIdResponse = QueryObserverOptions<
 >;
 
 export type ReactQueryProjectByOnChainIdProps = {
-  client: ApolloClient<NormalizedCacheObject>;
+  client: ApolloClient<object>;
 } & ProjectByOnChainIdQueryVariables &
   ReactQueryBuilderResponse<ReactQueryProjectByOnChainIdResponse>;

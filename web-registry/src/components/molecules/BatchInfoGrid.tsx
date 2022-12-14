@@ -33,7 +33,7 @@ export const BatchInfoGrid: React.FC<
         <Box component="span" sx={{ textTransform: 'capitalize' }}>
           <LinkWithArrow
             label={projectName || '-'}
-            href={projectOnChainId ? `/projects/${projectOnChainId}` : ''}
+            href={projectOnChainId ? `/project/${projectOnChainId}` : ''}
           />
         </Box>
       </BatchDetail>

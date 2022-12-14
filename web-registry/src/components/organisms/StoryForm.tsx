@@ -173,7 +173,7 @@ const StoryForm: React.FC<React.PropsWithChildren<StoryFormProps>> = ({
     const content = (
       <ModalContent
         fieldName={fieldName}
-        exampleProjectUrl={'/projects/wilmot'}
+        exampleProjectUrl={'/project/wilmot'}
       />
     );
     setModalContent(content);

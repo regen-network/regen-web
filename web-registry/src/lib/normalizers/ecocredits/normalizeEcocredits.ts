@@ -7,7 +7,7 @@ import {
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 
-import { normalizeClassProjectForBatch } from '../normalizeClassProjectForBatch/normalizeClassProjectForBatch';
+import { normalizeClassProjectForBatch } from '../classProjectForBatch/normalizeClassProjectForBatch';
 import {
   EMPTY_BATCH_INFO,
   EMPTY_CREDIT_CLASS,

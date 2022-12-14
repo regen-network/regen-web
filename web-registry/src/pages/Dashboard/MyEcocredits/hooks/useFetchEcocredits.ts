@@ -7,7 +7,7 @@ import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/Actio
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
-import { normalizeEcocredits } from 'lib/normalizers/normalizeEcocredits/normalizeEcocredits';
+import { normalizeEcocredits } from 'lib/normalizers/ecocredits/normalizeEcocredits';
 import { getBalancesQuery } from 'lib/queries/react-query/ecocredit/getBalancesQuery/getBalancesQuery';
 import { getBatchQuery } from 'lib/queries/react-query/ecocredit/getBatchQuery/getBatchQuery';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';

@@ -145,7 +145,7 @@ function UserCredits({ credits }: PurchasedCreditsProps): JSX.Element {
           <Title variant="h3">
             Credits for{' '}
             <Link
-              to={`/projects/${credits.project.id}`}
+              to={`/project/${credits.project.id}`}
               className={classes.projectName}
             >
               {credits.project.name}

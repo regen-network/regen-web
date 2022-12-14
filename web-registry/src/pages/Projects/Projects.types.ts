@@ -10,4 +10,5 @@ export interface UISellOrderInfo extends Omit<SellOrderInfo, 'id' | '$type'> {
 export interface ProjectWithOrderData extends ProjectCardProps {
   id: string;
   sellOrders: UISellOrderInfo[];
+  metadata?: string;
 }

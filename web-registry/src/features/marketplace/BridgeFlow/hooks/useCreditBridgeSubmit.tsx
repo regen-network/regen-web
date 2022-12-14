@@ -99,7 +99,7 @@ const useCreditBridgeSubmit = ({
               value: {
                 name:
                   creditBridgeBatch.projectName || creditBridgeBatch.projectId,
-                url: `/projects/${creditBridgeBatch.projectId}`,
+                url: `/project/${creditBridgeBatch.projectId}`,
               },
             },
             {

@@ -8,7 +8,7 @@ import { Link } from 'components/atoms';
 export const getMenuItems = (pathname: string): HeaderMenuItem[] => [
   {
     title: 'Projects',
-    href: '/projects',
+    href: '/projects/1',
   },
   {
     title: 'Trade',

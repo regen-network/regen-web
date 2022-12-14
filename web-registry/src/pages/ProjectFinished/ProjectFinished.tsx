@@ -58,7 +58,7 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
         <OutlinedButton
           sx={{ margin: '0 auto' }}
           role="link"
-          onClick={() => navigate(`/projects/${projectOnChainId}`)}
+          onClick={() => navigate(`/project/${projectOnChainId}`)}
         >
           see project page
         </OutlinedButton>

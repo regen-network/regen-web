@@ -84,7 +84,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
                 label={`methodolog${methodologyCount > 1 ? 'ies' : 'y'}`}
                 data={
                   <>
-                    {approvedMethodologies.map(methodology => (
+                    {approvedMethodologies.map((methodology: any) => (
                       <ArrowLink
                         label={methodology?.['schema:name']}
                         href={methodology?.['schema:url']?.['@value'] || ''}

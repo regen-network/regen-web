@@ -1,14 +1,14 @@
 import {
   CFCProjectMetadataLD,
-  NonQueryableProjectMetadataLD,
   ProjectMetadataLD,
+  ProjectPageMetadataLD,
   ToucanProjectMetadataLD,
   VCSProjectMetadataLD,
 } from '.';
 
 // A combination of existing Project metadata schemas, to allow more flexible UIs
 export type ProjectMetadataIntersectionLD = ProjectMetadataLD &
-  NonQueryableProjectMetadataLD &
+  ProjectPageMetadataLD &
   VCSProjectMetadataLD &
   CFCProjectMetadataLD &
   ToucanProjectMetadataLD;

@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 import StaticMap from 'web-components/lib/components/map/StaticMap';
 import { Asset } from 'web-components/lib/components/sliders/ProjectMedia';
 

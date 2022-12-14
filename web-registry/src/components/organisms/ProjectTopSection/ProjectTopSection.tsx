@@ -60,7 +60,7 @@ function ProjectTopSection({
   isGISFile,
   batchData,
   setPaginationParams,
-  projectId,
+  onChainProjectId,
   loading,
 }: {
   data?: any; // TODO: when all project are onchain, this can be ProjectByOnChainIdQuery
@@ -74,7 +74,7 @@ function ProjectTopSection({
     totals?: BatchTotalsForProject;
   };
   setPaginationParams: UseStateSetter<TablePaginationParams>;
-  projectId?: string;
+  onChainProjectId?: string;
   loading?: boolean;
 }): JSX.Element {
   const { classes } = useProjectTopSectionStyles();
@@ -85,6 +85,7 @@ function ProjectTopSection({
   const apiServerUrl = process.env.REACT_APP_API_URI;
 
   const project = data?.projectByOnChainId || data?.projectByHandle; // TODO: eventually just projectByOnChainId
+  const projectName = metadata?.['schema:name'];
   const videoURL = metadata?.['regen:videoURL']?.['@value'];
   const landStewardPhoto = metadata?.['regen:landStewardPhoto']?.['@value'];
   const projectSize = metadata?.['regen:projectSize'];
@@ -121,15 +122,20 @@ function ProjectTopSection({
     creditClassIdOrUrl:
       creditClass?.onChainId ||
       creditClassVersion?.metadata?.['http://schema.org/url']?.['@value'] ||
-      projectId?.split('-')?.[0], // if no offChain credit class
+      onChainProjectId?.split('-')?.[0], // if no offChain credit class
   });
 
   return (
     <Section classes={{ root: classes.section }}>
       <Grid container>
         <Grid item xs={12} md={8} sx={{ pr: { md: 19 } }}>
-          {/* TODO Show on-chain project id if no off-chain name */}
-          <Title variant="h1">{metadata?.['schema:name']}</Title>
+          {!metadata && loading ? (
+            <Skeleton height={124} />
+          ) : (
+            <Title variant="h1">
+              {projectName ?? `Project ${onChainProjectId}`}
+            </Title>
+          )}
           <Box sx={{ pt: { xs: 5, sm: 6 } }}>
             <ProjectPlaceInfo
               iconClassName={classes.icon}
@@ -149,8 +155,13 @@ function ProjectTopSection({
                 mt: 2.5,
               }}
             >
-              {!metadata && loading && <Skeleton variant="text" height={124} />}
-              {!onChainProject && (
+              {onChainProjectId ? (
+                projectName && (
+                  <Label sx={{ pt: 1.75 }} size="xs" color="info.main">
+                    project id: {onChainProjectId}
+                  </Label>
+                )
+              ) : (
                 <ProjectTopLink
                   label="offset generation method"
                   name={
@@ -203,7 +214,7 @@ function ProjectTopSection({
               sx={{ mt: [2, 4], py: [2, 6] }}
             />
           </Link>
-          <ProjectPageMetadata metadata={metadata} projectId={projectId} />
+          {onChainProjectId && <ProjectPageMetadata metadata={metadata} />}
           <LazyLoad offset={50}>
             {videoURL && (
               <Card className={classes.media}>

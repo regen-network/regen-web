@@ -143,7 +143,6 @@ function ProjectEdit(): JSX.Element {
         'entity display',
         'media',
         'story',
-        'settings',
       ]}
       category={section?.replace('-', ' ')}
       onClick={sectionName => navigateSection(sectionName)}

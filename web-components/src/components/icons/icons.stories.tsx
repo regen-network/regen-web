@@ -1,9 +1,14 @@
 import React from 'react';
+import { ArrowLeft, ArrowRight } from '@mui/icons-material';
 import { Grid } from '@mui/material';
 
 import { Flex } from '../box';
 import AccountabilityIcon from './AccountabilityIcon';
 import ArrowDownIcon from './ArrowDownIcon';
+import ArrowLeftIcon from './ArrowLeft';
+import ArrowRightIcon from './ArrowRight';
+import ArrowSkipLeftIcon from './ArrowSkipLeft';
+import ArrowSkipRightIcon from './ArrowSkipRight';
 import AvailableCreditsIcon from './AvailableCreditsIcon';
 import AvatarIcon from './AvatarIcon';
 import BlockIcon from './BlockIcon';
@@ -117,6 +122,22 @@ function LabeledIcon(props: {
 
 export const allIcons = (): JSX.Element => (
   <Grid container gap={4}>
+    <LabeledIcon
+      icon={<ArrowLeftIcon sx={{ color: 'secondary.main' }} />}
+      label="ArrowLeftIcon"
+    />
+    <LabeledIcon
+      icon={<ArrowRightIcon sx={{ color: 'secondary.main' }} />}
+      label="ArrowRightIcon"
+    />
+    <LabeledIcon
+      icon={<ArrowSkipLeftIcon sx={{ color: 'secondary.main' }} />}
+      label="ArrowSkipLeftIcon"
+    />
+    <LabeledIcon
+      icon={<ArrowSkipRightIcon sx={{ color: 'secondary.main' }} />}
+      label="ArrowSkipRightIcon"
+    />
     <LabeledIcon icon={<AxlUsdcIcon />} label="AxlUsdcIcon" />
     <LabeledIcon icon={<AccountabilityIcon />} label="AccountabilityIcon" />
     <LabeledIcon

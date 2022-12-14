@@ -153,7 +153,7 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
         result.push(
           <WithLoader isLoading={!batch.projectName} variant="skeleton">
             <Link
-              href={`/projects/${batch?.projectId}`}
+              href={`/project/${batch?.projectId}`}
               sx={tableStyles.ellipsisColumn}
             >
               {batch?.projectName}

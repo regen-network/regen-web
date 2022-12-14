@@ -309,7 +309,7 @@ function CertificatePage(): JSX.Element {
 
           projects.push(
             <ProjectCard
-              href={project.handle ? `/projects/${project.handle}` : undefined}
+              href={project.handle ? `/project/${project.handle}` : undefined}
               name={project.metadata?.['schema:name']}
               imgSrc={project.metadata?.['regen:previewPhoto']?.['@value']}
               place={project.metadata?.['schema:location']?.place_name}

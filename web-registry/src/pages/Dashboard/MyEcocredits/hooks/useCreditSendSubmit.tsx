@@ -122,7 +122,7 @@ const useCreditSendSubmit = ({
                 name:
                   credits[creditSendOpen].projectName ||
                   credits[creditSendOpen].projectId,
-                url: `/projects/${credits[creditSendOpen].projectId}`,
+                url: `/project/${credits[creditSendOpen].projectId}`,
               },
             },
             {

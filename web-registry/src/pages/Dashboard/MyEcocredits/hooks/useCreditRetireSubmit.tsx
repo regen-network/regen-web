@@ -104,7 +104,7 @@ const useCreditRetireSubmit = ({
               name:
                 credits[creditRetireOpen].projectName ||
                 credits[creditRetireOpen].projectId,
-              url: `/projects/${credits[creditRetireOpen].projectId}`,
+              url: `/project/${credits[creditRetireOpen].projectId}`,
             },
           },
           {

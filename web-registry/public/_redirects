@@ -1,4 +1,3 @@
-/* /index.html 200
 https://registry.regen.network/* https://app.regen.network/:splat 301!
 /projects/C02-002 /project/C02-002 301!
 /projects/C02-003 /project/C02-003 301!
@@ -12,3 +11,4 @@ https://registry.regen.network/* https://app.regen.network/:splat 301!
 /projects/woodburn /project/woodburn 301!
 /projects/pillango /project/pillango 301!
 /projects /projects/1 301!
+/* /index.html 200

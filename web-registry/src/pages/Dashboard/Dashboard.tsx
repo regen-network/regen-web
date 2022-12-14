@@ -64,6 +64,7 @@ const Dashboard = (): JSX.Element => {
         label: 'Bridge',
         icon: <BridgeIcon />,
         href: '/ecocredits/bridge',
+        hidden: process.env.REACT_APP_LEDGER_CHAIN_ID === 'regen-1', // TODO: Hide in PROD - remove when Bridge is ready
       },
     ],
     [

@@ -1,12 +1,18 @@
+// Type for "track" function returned by useTracker
+
 export type Track = <IEventName extends string, IPayload = any>(
   eventName: IEventName,
   payload?: IPayload,
 ) => Promise<any>;
 
+// Login tracking event metadata specification
+
 export interface LoginEvent {
   account: string;
   date: string;
 }
+
+// Buy tracking event metadata specification
 
 interface BuyBaseEvent {
   creditClassId?: string | null;
@@ -46,6 +52,8 @@ export interface BuyFailureEvent extends BuyOutcomeBaseEvent {
   errorMessage?: string;
 }
 
+// Sell tracking event metadata specification
+
 export interface Sell1Event {
   creditClassId?: string;
   projectId: string;
@@ -77,6 +85,8 @@ export interface SellFailureEvent extends SellOutcomeBaseEvent {
   errorMessage?: string;
 }
 
+// Send tracking event metadata specification
+
 interface SendBaseEvent {
   batchDenom: string;
   creditClassId?: string;
@@ -106,6 +116,8 @@ export interface SendFailureEvent extends SendOutcomeBaseEvent {
   errorMessage?: string;
 }
 
+// Retire tracking event metadata specification
+
 interface RetireBaseEvent {
   batchDenom: string;
   creditClassId?: string;
@@ -124,5 +136,74 @@ export interface Retire2Event extends RetireBaseQuantityEvent {}
 export interface RetireSuccessEvent extends RetireBaseQuantityEvent {}
 
 export interface RetireFailureEvent extends RetireBaseQuantityEvent {
+  errorMessage: string | undefined;
+}
+
+// Bridge tracking event metadata specification
+
+interface BridgeBaseEvent {
+  batchDenom: string | undefined;
+  creditClassId: string | undefined;
+  projectId: string | undefined;
+}
+
+interface BridgeBaseQuantityEvent extends BridgeBaseEvent {
+  quantity: number | undefined;
+  recipient: string;
+}
+
+export interface Bridge1Event extends BridgeBaseEvent {}
+
+export interface Bridge2Event extends BridgeBaseQuantityEvent {}
+
+export interface BridgeSuccessEvent extends BridgeBaseQuantityEvent {}
+
+export interface BridgeFailureEvent extends BridgeBaseQuantityEvent {
+  errorMessage: string | undefined;
+}
+
+// Put tracking event metadata specification
+
+interface PutBaseEvent {
+  batchDenom: string;
+  creditClassId: string | undefined;
+  projectId: string;
+}
+
+interface PutBaseQuantityEvent extends PutBaseEvent {
+  quantity: number | undefined;
+  basketName: string | undefined;
+}
+
+export interface PutInBasket1Event extends PutBaseEvent {}
+
+export interface PutInBasket2Event extends PutBaseQuantityEvent {}
+
+export interface PutInBasketSuccessEvent extends PutBaseQuantityEvent {}
+
+export interface PutInBasketFailureEvent extends PutBaseQuantityEvent {
+  errorMessage: string | undefined;
+}
+
+// Take tracking event metadata specification
+
+interface TakeBaseEvent {
+  basketName: string | undefined;
+}
+
+interface TakeBaseQuantityEvent extends TakeBaseEvent {
+  quantity: string;
+  retireOnTake: boolean;
+}
+
+export interface TakeFromBasket1 extends TakeBaseEvent {}
+
+export interface TakeFromBasket2 extends TakeBaseQuantityEvent {}
+
+export interface TakeFromBasketSuccess extends TakeBaseQuantityEvent {
+  batchDenoms: string[] | undefined;
+}
+
+export interface TakeFromBasketFailure extends TakeBaseQuantityEvent {
   errorMessage: string | undefined;
 }

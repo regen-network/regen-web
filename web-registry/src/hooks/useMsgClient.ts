@@ -30,7 +30,7 @@ interface TxData {
 
 interface OptionalCallbacks {
   onError?: (err?: Error) => void;
-  onSuccess?: () => void;
+  onSuccess?: (deliverTxResponse?: DeliverTxResponse) => void;
 }
 
 export type SignAndBroadcastType = (
@@ -106,7 +106,7 @@ export default function useMsgClient(
   );
 
   const broadcast = useCallback(
-    async (txBytes: Uint8Array): Promise<void> => {
+    async (txBytes: Uint8Array): Promise<DeliverTxResponse | undefined> => {
       if (!api?.msgClient || !txBytes) return;
       handleTxQueued();
       const _deliverTxResponse = await api.msgClient.broadcast(txBytes);
@@ -117,6 +117,7 @@ export default function useMsgClient(
       } else {
         setDeliverTxResponse(_deliverTxResponse);
         handleTxDelivered(_deliverTxResponse);
+        return _deliverTxResponse;
       }
     },
     [api?.msgClient, handleTxQueued, handleTxDelivered],
@@ -132,8 +133,8 @@ export default function useMsgClient(
         const txBytes = await sign(tx);
         if (txBytes) {
           if (closeForm) closeForm();
-          await broadcast(txBytes);
-          if (onSuccess) onSuccess();
+          const deliverTxResponse = await broadcast(txBytes);
+          if (onSuccess) onSuccess(deliverTxResponse);
         }
       } catch (err) {
         if (closeForm) closeForm();

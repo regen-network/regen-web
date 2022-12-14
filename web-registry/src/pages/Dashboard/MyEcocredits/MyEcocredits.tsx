@@ -29,7 +29,12 @@ import type { Theme } from 'web-components/lib/theme/muiTheme';
 import { useLedger } from 'ledger';
 import { getHashUrl } from 'lib/block-explorer';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
-import { Retire1Event, Sell1Event, Send1Event } from 'lib/tracker/types';
+import {
+  PutInBasket1Event,
+  Retire1Event,
+  Sell1Event,
+  Send1Event,
+} from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
@@ -335,7 +340,17 @@ export const MyEcocredits = (): JSX.Element => {
                       // buttons.splice(2, 0, { TODO: Replace once we had 'Sell'
                       icon: <PutInBasket />,
                       label: BASKET_PUT_TITLE,
-                      onClick: () => setBasketPutOpen(i),
+                      onClick: () => {
+                        track<'putInBasket1', PutInBasket1Event>(
+                          'putInBasket1',
+                          {
+                            batchDenom: credits[i].denom,
+                            projectId: credits[i].projectId,
+                            creditClassId: credits[i]?.classId,
+                          },
+                        );
+                        setBasketPutOpen(i);
+                      },
                     });
                   }
                   return <TableActionButtons buttons={buttons} />;
@@ -349,7 +364,9 @@ export const MyEcocredits = (): JSX.Element => {
                 {
                   icon: <TakeFromBasket />,
                   label: BASKET_TAKE_TITLE,
-                  onClick: () => openTakeModal(i),
+                  onClick: () => {
+                    openTakeModal(i);
+                  },
                 },
                 // This will be handled from osmosis
                 // so hiding these for now

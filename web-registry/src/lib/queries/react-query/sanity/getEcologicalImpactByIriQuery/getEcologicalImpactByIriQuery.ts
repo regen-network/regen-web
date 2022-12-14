@@ -19,6 +19,7 @@ export const getEcologicalImpactByIriQuery = ({
     const { data: ecologicalImpactByIri } =
       await sanityClient.query<EcologicalImpactByIriQuery>({
         query: EcologicalImpactByIriDocument,
+        variables: { iris },
       });
 
     return ecologicalImpactByIri;

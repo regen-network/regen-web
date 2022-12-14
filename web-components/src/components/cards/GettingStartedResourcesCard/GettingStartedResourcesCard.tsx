@@ -87,6 +87,7 @@ export const GettingStartedResourcesCard = ({
           >
             {links.map(({ buttonText, buttonHref, buttonTarget }) => (
               <LinkComponent
+                key={buttonHref}
                 sx={{ color: 'secondary.main' }}
                 href={buttonHref}
                 target={buttonTarget}

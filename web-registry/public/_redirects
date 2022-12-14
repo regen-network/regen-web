@@ -1,2 +1,10 @@
-https://registry.regen.network/*  https://app.regen.network/:splat 301!
-/*    /index.html   200
+https://registry.regen.network/_ https://app.regen.network/:splat 301!
+https://app.regen.network/projects/C02-002 https://app.regen.network/project/C02-002 301!
+https://app.regen.network/projects/C02-003 https://app.regen.network/project/C02-003 301!
+https://app.regen.network/projects/C02-004 https://app.regen.network/project/C02-004 301!
+https://app.regen.network/projects/C02-001 https://app.regen.network/project/C02-001 301!
+https://app.regen.network/projects/C01-001 https://app.regen.network/project/C01-001 301!
+https://app.regen.network/projects/C01-002 https://app.regen.network/project/C01-002 301!
+https://app.regen.network/projects/C01-003 https://app.regen.network/project/C01-003 301!
+https://app.regen.network/projects https://app.regen.network/projects/1 301!
+/_ /index.html 200

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { ERROR_BANNER } from 'config/contents';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
@@ -145,9 +146,7 @@ export const BridgeFlow = ({
         cardItems={cardItems}
         icon={<ErrorIcon sx={{ fontSize: 100 }} />}
       />
-      {displayErrorBanner && (
-        <ErrorBanner text="Please connect to Keplr to use Regen Ledger features" />
-      )}
+      {displayErrorBanner && <ErrorBanner text={ERROR_BANNER} />}
     </>
   );
 };

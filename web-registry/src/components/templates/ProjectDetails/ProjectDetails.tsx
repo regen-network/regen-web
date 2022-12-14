@@ -86,7 +86,7 @@ function ProjectDetails(): JSX.Element {
 
   const onChainProjectId = isOnChainId
     ? projectId
-    : dataByHandle?.projectByHandle?.onChainId;
+    : dataByHandle?.projectByHandle?.onChainId ?? undefined;
 
   // else fetch project by onChainId
   const { data: dataByOnChainId, loading } = useProjectByOnChainIdQuery({
@@ -174,7 +174,7 @@ function ProjectDetails(): JSX.Element {
     }));
   }, [credits, projectsWithOrderData]);
 
-  if (!isLoading && !project && !data) return <NotFoundPage />;
+  if (!isLoading && !project && !projectResponse) return <NotFoundPage />;
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO
@@ -233,7 +233,7 @@ function ProjectDetails(): JSX.Element {
         setPaginationParams={setPaginationParams}
         geojson={geojson}
         isGISFile={isGISFile}
-        projectId={projectId}
+        onChainProjectId={onChainProjectId}
         loading={isLoading}
       />
 

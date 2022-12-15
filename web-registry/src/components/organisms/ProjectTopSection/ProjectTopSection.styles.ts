@@ -6,7 +6,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 export const useProjectTopSectionStyles = makeStyles()((theme: Theme) => ({
   section: {
     [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(16),
+      paddingTop: theme.spacing(20),
       paddingBottom: theme.spacing(27.5),
     },
     [theme.breakpoints.down('sm')]: {

@@ -20,18 +20,25 @@ export const Note: React.FC<
             process.env.CONTEXT === 'production' ? '' : `/${txHash}`
           }`}
         >
-          toucan.earth
+          {'toucan.earth'}
         </Link>
       );
     case STATUS_ERROR:
       return (
         <>
-          Please contact us at{' '}
-          <Link href="support@regen.network">support@regen.network</Link> to
-          resolve this issue. Do not reinitiate the transaction.
+          {'Please contact us at '}
+          <Link href="support@regen.network">support@regen.network</Link>
+          {' to resolve this issue. Do not reinitiate the transaction.'}
         </>
       );
     case STATUS_PENDING:
+      return (
+        <>
+          {'Usually takes <30 minutes to process. Please contact us at '}
+          <Link href="support@regen.network">support@regen.network</Link>
+          {' if more time has passed.'}
+        </>
+      );
     default:
       return null;
   }

@@ -117,7 +117,7 @@ const useBasketPutSubmit = ({
               name:
                 credits[basketPutOpen].projectName ||
                 credits[basketPutOpen].projectId,
-              url: `/projects/${credits[basketPutOpen].projectId}`,
+              url: `/project/${credits[basketPutOpen].projectId}`,
             },
           },
           {

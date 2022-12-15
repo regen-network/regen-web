@@ -25,25 +25,12 @@ const useStyles = makeStyles<StyleProps>()((theme, { color }) => ({
     lineHeight: '145%',
     fontWeight: 'bold',
     textAlign: 'center',
-    paddingLeft: theme.spacing(4),
     width: '100%',
-    [theme.breakpoints.up('md')]: {
-      paddingRight: theme.spacing(37.5),
-      paddingLeft: theme.spacing(37.5),
-    },
-    [theme.breakpoints.down('md')]: {
-      paddingRight: theme.spacing(10),
-      paddingLeft: theme.spacing(10),
-    },
-    [theme.breakpoints.up('xl')]: {
-      paddingRight: theme.spacing(5),
-      paddingLeft: theme.spacing(5),
-    },
+    height: theme.spacing(17.5),
+    fontSize: theme.spacing(5),
     [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(17.5),
-      paddingTop: theme.spacing(5),
-      paddingBottom: theme.spacing(5),
-      fontSize: theme.spacing(5),
+      top: '0px',
+      left: '0px',
     },
     [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(3.25),

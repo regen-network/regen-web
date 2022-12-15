@@ -26,7 +26,7 @@ const OnboardingFormTemplate: React.FC<React.PropsWithChildren<Props>> =
           // https://github.com/regen-network/regen-registry/issues/553
           // linkText="Save & Exit"
           // onLinkClick={props.saveAndExit}
-          // exampleProjectUrl="/projects/wilmot"
+          // exampleProjectUrl="/project/wilmot"
         >
           {props.loading ? (
             <Loading />

@@ -3,6 +3,7 @@ export const STATUS_COMPLETE = 'complete';
 export const STATUS_ERROR = 'error';
 
 export const BRIDGED_STATUSES = {
+  regen_hash_not_found: STATUS_PENDING,
   regen_ready: STATUS_PENDING,
   evm_broadcast: STATUS_PENDING,
   evm_confirmed: STATUS_COMPLETE,

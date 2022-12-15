@@ -36,8 +36,8 @@ const Seller = (): JSX.Element => {
           url: `${apiUri}/create-account-link`,
           data: {
             email: user?.email,
-            refreshUrl: '/projects/wilmot/admin',
-            returnUrl: '/projects/wilmot/admin?setup=true',
+            refreshUrl: '/project/wilmot/admin',
+            returnUrl: '/project/wilmot/admin?setup=true',
           },
           headers: { authorization: `Bearer ${accessToken}` },
         });

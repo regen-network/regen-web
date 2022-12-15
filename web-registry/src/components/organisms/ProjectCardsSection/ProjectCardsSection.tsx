@@ -67,7 +67,7 @@ export function ProjectCardsSection({
                   onButtonClick && (() => onButtonClick({ project }))
                 }
                 purchaseInfo={project.purchaseInfo}
-                href={`/projects/${project.id}`}
+                href={`/project/${project.id}`}
                 target={'_self'}
                 imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
                 apiServerUrl={API_URI}

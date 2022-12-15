@@ -1,27 +1,4 @@
-import { useEffect, useState } from 'react';
-
 import { ProjectWithOrderData } from '../Projects.types';
-
-type Props = {
-  projects: ProjectWithOrderData[];
-  sort: string;
-};
-
-export const useSortProjects = ({
-  projects,
-  sort,
-}: Props): ProjectWithOrderData[] => {
-  const [sortedProjects, setSortedProjects] =
-    useState<ProjectWithOrderData[]>(projects);
-
-  useEffect(() => {
-    const projectsCopy = [...projects]; // to make sure render picks up change
-    const _sortedProjects = sortProjects(projectsCopy, sort);
-    setSortedProjects(_sortedProjects);
-  }, [projects, sort]);
-
-  return sortedProjects;
-};
 
 export const sortProjects = (
   projects: ProjectWithOrderData[],

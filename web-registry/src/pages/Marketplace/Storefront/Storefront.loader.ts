@@ -38,10 +38,15 @@ export const storefrontLoader =
     });
     const simplePriceQuery = getSimplePriceQuery({});
 
-    getFromCacheOrFetch({
+    // Fetch or Cache
+
+    // Mandatory data
+    await getFromCacheOrFetch({
       query: sellOrdersQuery,
       reactQueryClient: queryClient,
     });
+
+    // Optional data
     getFromCacheOrFetch({
       query: allCreditClassesQuery,
       reactQueryClient: queryClient,

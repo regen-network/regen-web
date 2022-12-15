@@ -61,7 +61,7 @@ import { SellOrderActions } from './Storefront.types';
 import { getCancelCardItems, sortBySellOrderId } from './Storefront.utils';
 
 export const Storefront = (): JSX.Element => {
-  const client = useApolloClient() as ApolloClient<NormalizedCacheObject>;
+  const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { ecocreditClient } = useLedger();
 
   const [paginationParams, setPaginationParams] =
@@ -84,7 +84,7 @@ export const Storefront = (): JSX.Element => {
 
   // Off-chain stored Projects
   const { data: offChainProjectData } = useQuery(
-    getAllProjectsQuery({ client, enabled: !!client }),
+    getAllProjectsQuery({ client: apolloClient, enabled: !!apolloClient }),
   );
 
   // On-chain stored Projects

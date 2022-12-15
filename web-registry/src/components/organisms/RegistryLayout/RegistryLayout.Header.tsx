@@ -19,6 +19,7 @@ import {
   getHeaderColors,
   getIsTransparent,
   getMenuItems,
+  getUserMenuItems,
 } from './RegistryLayout.config';
 import { fullWidthRegExp } from './RegistryLayout.constants';
 
@@ -31,6 +32,10 @@ const RegistryLayoutHeader: React.FC = () => {
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
   const isTransparent = useMemo(() => getIsTransparent(pathname), [pathname]);
   const menuItems = useMemo(() => getMenuItems(pathname), [pathname]);
+  const userMenuItems = useMemo(
+    () => getUserMenuItems({ linkComponent: RegistryNavLink, pathname, theme }),
+    [pathname, theme],
+  );
 
   const color = headerColors[pathname]
     ? headerColors[pathname]
@@ -64,6 +69,7 @@ const RegistryLayoutHeader: React.FC = () => {
                 disconnect={disconnect}
                 pathname={pathname}
                 linkComponent={RegistryNavLink}
+                userMenuItems={userMenuItems}
               />
             )}
             <WalletButton />

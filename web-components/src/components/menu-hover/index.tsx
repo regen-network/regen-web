@@ -65,7 +65,6 @@ const MenuHover = ({
         {renderTitle && renderTitle()}
       </span>
       <Popover
-        // disableScrollLock
         disableRestoreFocus
         id="mouse-over-popover"
         className={styles.popover}

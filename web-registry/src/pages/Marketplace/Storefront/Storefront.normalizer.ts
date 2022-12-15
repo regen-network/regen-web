@@ -6,11 +6,12 @@ import { findSanityCreditClass } from 'components/templates/ProjectDetails/Proje
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 import { AllProjectsQuery } from '../../../generated/graphql';
-import { ProjectInfoWithMetadata } from './hooks/useFetchMetadataProjects';
-import { NormalizedSellOrder } from './Storefront.types';
+import {
+  NormalizedSellOrder,
+  ProjectInfoWithMetadata,
+} from './Storefront.types';
 
 /* normalizeprojectsInfosByHandleMap */
-
 type NormalizeprojectsInfosByHandleMapProps = {
   offChainProjects: AllProjectsQuery['allProjects'];
   onChainProjects?: ProjectInfoWithMetadata[];
@@ -70,19 +71,17 @@ export const normalizeProjectsInfosByHandleMap = ({
 
 type NormalizedSellOrderProps = {
   sellOrders?: SellOrderInfoExtented[];
-  batchInfos: BatchInfo[];
+  batchInfos: (BatchInfo | undefined)[];
   projectsInfosByHandleMap: Map<
     string,
     { name: string; classIdOrName: string; classId: string }
   >;
-  projectsWithMetadataMap: Map<string, ProjectInfoWithMetadata>;
 };
 
 export const normalizeSellOrders = ({
   batchInfos,
   sellOrders = [],
   projectsInfosByHandleMap,
-  projectsWithMetadataMap,
 }: NormalizedSellOrderProps): NormalizedSellOrder[] =>
   sellOrders.map(
     ({
@@ -101,9 +100,7 @@ export const normalizeSellOrders = ({
       );
       const projectId = currentBatch?.projectId ?? '';
       const isLoading =
-        currentBatch === undefined ||
-        projectsInfosByHandleMap.size === 0 ||
-        projectsWithMetadataMap.size === 0;
+        currentBatch === undefined || projectsInfosByHandleMap.size === 0;
 
       return {
         id: String(id),

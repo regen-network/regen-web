@@ -89,7 +89,7 @@ export function ProjectCard({
       target={target}
       imageStorageBaseUrl={imageStorageBaseUrl}
       apiServerUrl={apiServerUrl}
-      sx={sx}
+      sx={{ ...sx, height: '100%' }}
       {...mediaCardProps}
     >
       <div className={classes.placeInfo}>

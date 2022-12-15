@@ -27,8 +27,8 @@ export interface ProjectPageMetadataLD {
   'regen:galleryPhotos': UrlList;
   'regen:previewPhoto': UrlType;
   'regen:videoURL': UrlType;
-  'regen:glanceText': any;
   'regen:projectDeveloper': ProjectStakeholder;
+  'regen:glanceText': any;
   'regen:landSteward': ProjectStakeholder;
   'regen:landOwner': ProjectStakeholder;
   'regen:projectOriginator': ProjectStakeholder;
@@ -85,7 +85,7 @@ interface LandManagementActions {
   '@list': NameImageDescription[];
 }
 
-interface ProjectQuote {
+export interface ProjectQuote {
   'schema:name': string;
   'regen:quote': string;
   'schema:jobTitle': string;

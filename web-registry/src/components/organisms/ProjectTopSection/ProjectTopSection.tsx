@@ -20,8 +20,6 @@ import ReadMore from 'web-components/lib/components/read-more';
 import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
-import { getAreaUnit, qudtUnit } from 'lib/rdf';
-
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { useSdgByIriQuery } from '../../../generated/sanity-graphql';
@@ -31,6 +29,8 @@ import { getDisplayParty, getParty } from '../../../lib/transform';
 import { ProjectTopLink } from '../../atoms';
 import { ProjectBatchTotals, ProjectPageMetadata } from '../../molecules';
 import { CreditBatches } from '../CreditBatches/CreditBatches';
+import { useAnchoredMetadata } from './hooks/useAnchoredMetadata';
+import { useProjectPageMetadata } from './hooks/useProjectPageMetadata';
 import {
   ProjectTopSectionQuoteMark,
   useProjectTopSectionStyles,
@@ -41,7 +41,7 @@ import { getDisplayAdmin } from './ProjectTopSection.utils';
 function ProjectTopSection({
   data,
   onChainProject,
-  metadata,
+  anchoredMetadata,
   projectPageMetadata,
   sanityCreditClassData,
   geojson,
@@ -60,29 +60,23 @@ function ProjectTopSection({
   const apiServerUrl = process.env.REACT_APP_API_URI;
 
   const project = data?.projectByOnChainId || data?.projectByHandle; // TODO: eventually just projectByOnChainId
-  const projectName = metadata?.['schema:name'];
-  const videoURL = projectPageMetadata?.['regen:videoURL']?.['@value'];
-  const landStewardPhoto =
-    projectPageMetadata?.['regen:landStewardPhoto']?.['@value'];
-  const projectSize = metadata?.['regen:projectSize'];
-  const area = projectSize?.['qudt:numericValue']?.['@value'];
-  const unit = projectSize?.['qudt:unit']?.['@value'];
-  const areaUnit = getAreaUnit(unit as qudtUnit);
   const creditClass = project?.creditClassByCreditClassId;
   const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
-  const quote = projectPageMetadata?.['regen:projectQuote'];
-  const glanceText: string[] | undefined =
-    projectPageMetadata?.['regen:glanceText']?.['@list'];
-  const primaryDescription =
-    projectPageMetadata?.['regen:landStory'] ||
-    projectPageMetadata?.['schema:description'];
-  const landStewardStoryTitle =
-    projectPageMetadata?.['regen:landStewardStoryTitle'];
-  const landStewardStory = projectPageMetadata?.['regen:landStewardStory'];
-
   const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.[
     '@list'
   ]?.map((sdg: { '@id': string }) => sdg['@id']);
+
+  const { projectName, area, areaUnit } = useAnchoredMetadata(anchoredMetadata);
+  const {
+    videoURL,
+    glanceText,
+    primaryDescription,
+    quote,
+    landStewardPhoto,
+    landStewardStoryTitle,
+    landStewardStory,
+  } = useProjectPageMetadata(projectPageMetadata);
+
   const { data: sdgData } = useSdgByIriQuery({
     client,
     variables: {
@@ -107,7 +101,7 @@ function ProjectTopSection({
     <Section classes={{ root: classes.section }}>
       <Grid container>
         <Grid item xs={12} md={8} sx={{ pr: { md: 19 } }}>
-          {!metadata && loading ? (
+          {!anchoredMetadata && loading ? (
             <Skeleton height={124} />
           ) : (
             <Title variant="h1">
@@ -117,10 +111,10 @@ function ProjectTopSection({
           <Box sx={{ pt: { xs: 5, sm: 6 } }}>
             <ProjectPlaceInfo
               iconClassName={classes.icon}
-              // TODO Format and show on-chain project location if no off-chain location
+              // TODO Format on-chain jurisdiction if no anchored location
               place={
-                metadata?.['schema:location']?.['place_name'] ||
-                metadata?.['schema:location']?.['geojson:place_name'] ||
+                anchoredMetadata?.['schema:location']?.['place_name'] ||
+                anchoredMetadata?.['schema:location']?.['geojson:place_name'] ||
                 onChainProject?.jurisdiction
               }
               area={Number(area)}
@@ -169,7 +163,7 @@ function ProjectTopSection({
             </LazyLoad>
           )}
           {/* Used to prevent layout shift */}
-          {!metadata && loading && <Skeleton height={200} />}
+          {loading && <Skeleton height={200} />}
           {landStewardStoryTitle && (
             <Title sx={{ pt: { xs: 11.75, sm: 14 } }} variant="h2">
               Story
@@ -192,7 +186,9 @@ function ProjectTopSection({
               sx={{ mt: [2, 4], py: [2, 6] }}
             />
           </Link>
-          {onChainProjectId && <ProjectPageMetadata metadata={metadata} />}
+          {onChainProjectId && (
+            <ProjectPageMetadata metadata={anchoredMetadata} />
+          )}
           <LazyLoad offset={50}>
             {videoURL && (
               <Card className={classes.media}>
@@ -265,17 +261,17 @@ function ProjectTopSection({
             projectAdmin={getDisplayAdmin(data?.admin || onChainProject?.admin)}
             projectDeveloper={getDisplayParty(
               'regen:projectDeveloper',
-              metadata,
+              projectPageMetadata,
               project?.partyByDeveloperId,
             )}
             landSteward={getDisplayParty(
               'regen:landSteward',
-              metadata,
+              projectPageMetadata,
               project?.partyByStewardId,
             )}
             landOwner={getDisplayParty(
               'regen:landOwner',
-              metadata,
+              projectPageMetadata,
               project?.partyByLandOwnerId,
             )}
             // TODO if no off-chain data, use on-chain project.issuer

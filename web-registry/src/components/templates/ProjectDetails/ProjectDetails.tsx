@@ -240,7 +240,7 @@ function ProjectDetails(): JSX.Element {
       <ProjectTopSection
         data={data}
         onChainProject={onChainProject}
-        metadata={anchoredMetadata}
+        anchoredMetadata={anchoredMetadata}
         projectPageMetadata={projectPageMetadata}
         sanityCreditClassData={sanityCreditClassData}
         batchData={{

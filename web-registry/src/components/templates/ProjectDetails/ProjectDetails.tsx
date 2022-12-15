@@ -185,22 +185,18 @@ function ProjectDetails(): JSX.Element {
       />
 
       {mediaData.assets.length === 0 && isLoading && (
-        <Box sx={getMediaBoxStyles(theme)}>
-          <Skeleton height={theme.spacing(78.75)} />
-        </Box>
+        <Skeleton sx={getMediaBoxStyles(theme)} />
       )}
 
       {mediaData.assets.length > 0 && (
-        <Box sx={getMediaBoxStyles(theme)}>
-          <ProjectMedia
-            gridView
-            assets={mediaData.assets}
-            apiServerUrl={mediaData.apiServerUrl}
-            imageStorageBaseUrl={mediaData.imageStorageBaseUrl}
-            imageCredits={mediaData.imageCredits}
-            mobileHeight={theme.spacing(78.75)}
-          />
-        </Box>
+        <ProjectMedia
+          gridView
+          assets={mediaData.assets}
+          apiServerUrl={mediaData.apiServerUrl}
+          imageStorageBaseUrl={mediaData.imageStorageBaseUrl}
+          imageCredits={mediaData.imageCredits}
+          mobileHeight={theme.spacing(78.75)}
+        />
       )}
 
       <SellOrdersActionsBar
@@ -264,9 +260,11 @@ function ProjectDetails(): JSX.Element {
       <MoreProjects />
 
       {gettingStartedResourcesSection && (
-        <GettingStartedResourcesSection
-          section={gettingStartedResourcesSection}
-        />
+        <div className="topo-background-alternate">
+          <GettingStartedResourcesSection
+            section={gettingStartedResourcesSection}
+          />
+        </div>
       )}
 
       {issuanceModalData && (

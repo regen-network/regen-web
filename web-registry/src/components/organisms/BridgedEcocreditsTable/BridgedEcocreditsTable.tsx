@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
+import dayjs from 'dayjs';
 import { loaderStyles } from 'styles/loader';
 import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
 
@@ -13,6 +14,9 @@ import {
   formatDate,
   formatNumber,
 } from 'web-components/lib/utils/format';
+import { truncateHash } from 'web-components/lib/utils/truncate';
+
+import { getHashUrl } from 'lib/block-explorer';
 
 import {
   AccountLink,
@@ -66,6 +70,8 @@ export const BridgedEcocreditsTable = ({
         tableLabel="bridged ecocredits table"
         sx={tableStyles.rootOnlyTopBorder}
         headerRows={[
+          'Tx Hash',
+          'Timestamp',
           'Status',
           privateAccess && (
             <Box display="flex" sx={{ width: { xs: '8rem', lg: '10rem' } }}>
@@ -107,6 +113,18 @@ export const BridgedEcocreditsTable = ({
         ]}
         rows={bridgedCredits.map((row, i) => {
           return [
+            <WithLoader isLoading={!row.projectName} variant="skeleton">
+              <Link
+                href={getHashUrl(row.txHash)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {truncateHash(row.txHash)}
+              </Link>
+            </WithLoader>,
+            <WithLoader isLoading={!row.projectName} variant="skeleton">
+              <GreyText>{dayjs(row.txTimestamp).fromNow()}</GreyText>
+            </WithLoader>,
             <GreyText>
               {row.status && (
                 <StatusLabel

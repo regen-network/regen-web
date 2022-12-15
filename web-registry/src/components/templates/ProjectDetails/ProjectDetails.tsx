@@ -86,7 +86,7 @@ function ProjectDetails(): JSX.Element {
 
   const onChainProjectId = isOnChainId
     ? projectId
-    : dataByHandle?.projectByHandle?.onChainId;
+    : dataByHandle?.projectByHandle?.onChainId ?? undefined;
 
   // else fetch project by onChainId
   const { data: dataByOnChainId, loading } = useProjectByOnChainIdQuery({
@@ -174,7 +174,7 @@ function ProjectDetails(): JSX.Element {
     }));
   }, [credits, projectsWithOrderData]);
 
-  if (!isLoading && !project && !data) return <NotFoundPage />;
+  if (!isLoading && !project && !projectResponse) return <NotFoundPage />;
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO
@@ -185,22 +185,18 @@ function ProjectDetails(): JSX.Element {
       />
 
       {mediaData.assets.length === 0 && isLoading && (
-        <Box sx={getMediaBoxStyles(theme)}>
-          <Skeleton height={theme.spacing(78.75)} />
-        </Box>
+        <Skeleton sx={getMediaBoxStyles(theme)} />
       )}
 
       {mediaData.assets.length > 0 && (
-        <Box sx={getMediaBoxStyles(theme)}>
-          <ProjectMedia
-            gridView
-            assets={mediaData.assets}
-            apiServerUrl={mediaData.apiServerUrl}
-            imageStorageBaseUrl={mediaData.imageStorageBaseUrl}
-            imageCredits={mediaData.imageCredits}
-            mobileHeight={theme.spacing(78.75)}
-          />
-        </Box>
+        <ProjectMedia
+          gridView
+          assets={mediaData.assets}
+          apiServerUrl={mediaData.apiServerUrl}
+          imageStorageBaseUrl={mediaData.imageStorageBaseUrl}
+          imageCredits={mediaData.imageCredits}
+          mobileHeight={theme.spacing(78.75)}
+        />
       )}
 
       <SellOrdersActionsBar
@@ -233,7 +229,7 @@ function ProjectDetails(): JSX.Element {
         setPaginationParams={setPaginationParams}
         geojson={geojson}
         isGISFile={isGISFile}
-        projectId={projectId}
+        onChainProjectId={onChainProjectId}
         loading={isLoading}
       />
 
@@ -264,9 +260,11 @@ function ProjectDetails(): JSX.Element {
       <MoreProjects />
 
       {gettingStartedResourcesSection && (
-        <GettingStartedResourcesSection
-          section={gettingStartedResourcesSection}
-        />
+        <div className="topo-background-alternate">
+          <GettingStartedResourcesSection
+            section={gettingStartedResourcesSection}
+          />
+        </div>
       )}
 
       {issuanceModalData && (

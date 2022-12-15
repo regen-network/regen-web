@@ -48,7 +48,7 @@ export function ProjectCardsSection({
           sx={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 400px))',
-            gridGap: '1.125rem',
+            gridGap: ['1.75rem', '1.5rem', '1.125rem'],
             flex: 1,
             justifyContent: projects?.length > 1 ? 'center' : 'left',
           }}
@@ -67,7 +67,7 @@ export function ProjectCardsSection({
                   onButtonClick && (() => onButtonClick({ project }))
                 }
                 purchaseInfo={project.purchaseInfo}
-                href={`/projects/${project.id}`}
+                href={`/project/${project.id}`}
                 target={'_self'}
                 imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
                 apiServerUrl={API_URI}

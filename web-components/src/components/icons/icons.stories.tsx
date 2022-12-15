@@ -1,9 +1,14 @@
 import React from 'react';
+import { ArrowLeft, ArrowRight } from '@mui/icons-material';
 import { Grid } from '@mui/material';
 
 import { Flex } from '../box';
 import AccountabilityIcon from './AccountabilityIcon';
 import ArrowDownIcon from './ArrowDownIcon';
+import ArrowLeftIcon from './ArrowLeft';
+import ArrowRightIcon from './ArrowRight';
+import ArrowSkipLeftIcon from './ArrowSkipLeft';
+import ArrowSkipRightIcon from './ArrowSkipRight';
 import AvailableCreditsIcon from './AvailableCreditsIcon';
 import AvatarIcon from './AvatarIcon';
 import BlockIcon from './BlockIcon';
@@ -53,6 +58,8 @@ import RegenIcon from './RegenIcon';
 import RegenLedgerIcon from './RegenLedgerIcon';
 import RegenLogoIcon from './RegenLogoIcon';
 import RegenMarketIcon from './RegenMarketIcon';
+import RegenNetworkIcon from './RegenNetworkIcon';
+import RegenNotFoundIcon from './RegenNotFoundIcon';
 import { RegenTokenIcon } from './RegenTokenIcon';
 import RegistrationIcon from './RegistrationIcon';
 import RegistryIcon from './RegistryIcon';
@@ -76,7 +83,7 @@ import SoilSampleIcon from './SoilSampleIcon';
 import { Spinner } from './Spinner';
 import SuccessIcon from './SuccessIcon';
 import TotalCreditsIcon from './TotalCreditsIcon';
-import { ToucanIcon } from './ToucanIcon';
+import ToucanIcon from './ToucanIcon';
 import TradeableIcon from './TradeableIcon';
 import TrashIcon from './TrashIcon';
 import TrustDocumentIcon from './TrustDocumentIcon';
@@ -115,6 +122,22 @@ function LabeledIcon(props: {
 
 export const allIcons = (): JSX.Element => (
   <Grid container gap={4}>
+    <LabeledIcon
+      icon={<ArrowLeftIcon sx={{ color: 'secondary.main' }} />}
+      label="ArrowLeftIcon"
+    />
+    <LabeledIcon
+      icon={<ArrowRightIcon sx={{ color: 'secondary.main' }} />}
+      label="ArrowRightIcon"
+    />
+    <LabeledIcon
+      icon={<ArrowSkipLeftIcon sx={{ color: 'secondary.main' }} />}
+      label="ArrowSkipLeftIcon"
+    />
+    <LabeledIcon
+      icon={<ArrowSkipRightIcon sx={{ color: 'secondary.main' }} />}
+      label="ArrowSkipRightIcon"
+    />
     <LabeledIcon icon={<AxlUsdcIcon />} label="AxlUsdcIcon" />
     <LabeledIcon icon={<AccountabilityIcon />} label="AccountabilityIcon" />
     <LabeledIcon
@@ -206,6 +229,11 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon
       icon={<RegenMarketIcon sx={{ fontSize: 64 }} />}
       label="RegenMarketIcon"
+    />
+    <LabeledIcon icon={<RegenNetworkIcon />} label="RegenNetworkIcon" />
+    <LabeledIcon
+      icon={<RegenNotFoundIcon sx={{ color: 'secondary.main' }} />}
+      label="RegenNotFoundIcon"
     />
     <LabeledIcon icon={<RegenTokenIcon />} label="RegenTokenIcon" />
     <LabeledIcon icon={<RegistrationIcon />} label="RegistrationIcon" />

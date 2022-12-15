@@ -46,6 +46,7 @@ export interface ProjectWithMetadataObj extends Omit<ProjectInfo, 'metadata'> {
 }
 
 export type BridgedTxStatus =
+  | 'regen_hash_not_found'
   | 'regen_ready'
   | 'evm_broadcast'
   | 'evm_confirmed'
@@ -55,4 +56,6 @@ export interface BridgedEcocredits extends IBatchInfoWithClassProject {
   amount: string;
   status?: BridgedTxStatus;
   destinationTxHash?: string;
+  txHash?: string;
+  txTimestamp?: string;
 }

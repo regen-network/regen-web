@@ -34,6 +34,7 @@ export const useBridged = ({ address }: Props): Output => {
         address,
         sanityCreditClassData,
       );
+
       if (newCredits) setCredits(newCredits);
     } catch (err) {
       console.error(err); // eslint-disable-line no-console

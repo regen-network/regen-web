@@ -19,6 +19,7 @@ import { ecocreditBatchesLoader } from 'pages/EcocreditBatches/EcocreditBatches.
 import { BridgeTab } from 'pages/EcocreditsByAccount/BridgeTab/BridgeTab';
 import { PortfolioTab } from 'pages/EcocreditsByAccount/PortfolioTab/EcocreditsByAccount.PortfolioTab';
 import { homeLoader } from 'pages/Home/Home.loader';
+import { storefrontLoader } from 'pages/Marketplace/Storefront/Storefront.loader';
 import { projectsLoader } from 'pages/Projects/Projects.loader';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
 
@@ -281,7 +282,13 @@ export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
         />
       </Route>
       <Route path="stats/activity" element={<Activity />} />
-      <Route path="storefront" element={<Storefront />} />
+      <Route
+        path="storefront"
+        element={<Storefront />}
+        loader={storefrontLoader({
+          queryClient: reactQueryClient,
+        })}
+      />
       <Route path="*" element={<NotFoundPage />} />
     </Route>,
   );

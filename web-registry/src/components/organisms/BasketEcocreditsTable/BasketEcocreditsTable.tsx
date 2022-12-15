@@ -68,7 +68,7 @@ export const BasketEcocreditsTable: React.FC<
           item.projectHandle === '-' ? (
             item.projectName
           ) : (
-            <Link href={`/projects/${item.projectHandle}`} target="_blank">
+            <Link href={`/project/${item.projectHandle}`} target="_blank">
               {item.projectName}
             </Link>
           );

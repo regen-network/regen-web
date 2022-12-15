@@ -1,3 +1,5 @@
+import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+
 export type SellOrderStatus =
   | 'Not yet filled'
   | 'Partially filled'
@@ -28,3 +30,7 @@ export type NormalizedSellOrder = {
 };
 
 export type SellOrderActions = 'buy' | 'cancel' | 'change';
+
+export type ProjectInfoWithMetadata = Omit<ProjectInfo, 'metadata'> & {
+  metadata: any;
+};

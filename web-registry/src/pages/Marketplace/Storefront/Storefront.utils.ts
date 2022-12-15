@@ -1,14 +1,9 @@
 import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
-import {
-  BatchInfo,
-  QueryBatchResponse,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { Item } from 'web-components/lib/components/modal/ConfirmModal';
 
 import { UISellOrderInfo } from 'pages/Projects/Projects.types';
 
-import { ProjectInfoWithMetadata } from './hooks/useFetchMetadataProjects';
 import { NormalizedSellOrder } from './Storefront.types';
 
 /* sortBySellOrderId */
@@ -41,44 +36,6 @@ export const getCancelCardItems = ({
     },
   },
 ];
-
-/* updateBatchInfosMap */
-
-type UpdateBatchInfosMapParams = {
-  batchInfosMap: Map<string, BatchInfo>;
-  batchInfoResponses?: QueryBatchResponse[] | undefined;
-};
-
-export const updateBatchInfosMap = ({
-  batchInfosMap,
-  batchInfoResponses,
-}: UpdateBatchInfosMapParams): BatchInfo[] => {
-  batchInfoResponses?.forEach(({ batch }) => {
-    if (batch) {
-      batchInfosMap.set(batch?.denom, batch);
-    }
-  });
-
-  return Array.from(batchInfosMap?.values());
-};
-
-/* updateProjectsWithMetadataMap */
-
-type UpdateProjectsWithMetadataMapParams = {
-  projectsWithMetadataMap: Map<string, ProjectInfoWithMetadata>;
-  newProjectsWithMetadata?: ProjectInfoWithMetadata[] | undefined;
-};
-
-export const updateProjectsWithMetadataMap = ({
-  projectsWithMetadataMap,
-  newProjectsWithMetadata,
-}: UpdateProjectsWithMetadataMapParams): ProjectInfoWithMetadata[] => {
-  newProjectsWithMetadata?.forEach(project => {
-    projectsWithMetadataMap.set(project.id, project);
-  });
-
-  return Array.from(projectsWithMetadataMap?.values());
-};
 
 /* checkIsBuyOrderInvalid */
 

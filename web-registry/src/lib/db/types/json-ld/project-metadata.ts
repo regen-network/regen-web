@@ -2,7 +2,7 @@ import { TypeValue, UrlList, UrlType } from 'lib/rdf/types';
 
 // TODO: remember that all exisiting metadata will have to be updated
 
-/** Signed metadata AKA "Additional Info" */
+/** Signed/anchored metadata AKA "Additional Info" */
 export interface ProjectMetadataLD {
   '@context': Context;
   '@type': string; // regen:C01-Project
@@ -19,7 +19,7 @@ export interface ProjectMetadataLD {
   'regen:projectEndDate': TypeValue;
 }
 
-/** This is unsigned metadata */
+/** Unsigned, unanchored metadata from our DB */
 export interface ProjectPageMetadataLD {
   '@context': Context;
   '@type': string; // regen:C01-Project-Page
@@ -51,10 +51,6 @@ export interface ProjectPageMetadataLD {
   'regen:landManagementActions': LandManagementActions;
   'regen:glanceText': any;
 }
-
-export interface ProjectCreateMetadataLD
-  extends ProjectMetadataLD,
-    ProjectPageMetadataLD {}
 
 interface Context {
   schema: string;

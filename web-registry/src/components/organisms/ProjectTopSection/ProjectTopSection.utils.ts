@@ -1,13 +1,6 @@
 import { User } from 'web-components/lib/components/user/UserInfo';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { Maybe, PartyFieldsFragment } from 'generated/graphql';
-import {
-  CFCProjectMetadataLD,
-  ProjectMetadataIntersectionLD,
-} from 'lib/db/types/json-ld';
-import { getDisplayParty } from 'lib/transform';
-
 // TODO
 // This is a temporary hack to show Regen as a Project Admin when applicable
 
@@ -33,27 +26,4 @@ export const getDisplayAdmin = (address?: string): User | undefined => {
     type: 'ORGANIZATION',
     link: `/ecocredits/accounts/${address}`,
   };
-};
-
-export const getDisplayDeveloper = (
-  metadata?: Partial<ProjectMetadataIntersectionLD>,
-  party?: Maybe<PartyFieldsFragment>,
-): User | undefined => {
-  if (!metadata) return;
-  if (metadata?.['regen:projectDeveloper']) {
-    return getDisplayParty('regen:projectDeveloper', metadata, party);
-  }
-  // Possibly temporary: CFC case
-  const projectOperator = (metadata as Partial<CFCProjectMetadataLD>)?.[
-    'regen:projectOperator'
-  ];
-  if (projectOperator) {
-    return {
-      name: projectOperator?.['schema:name'],
-      type: 'ORGANIZATION',
-      link: projectOperator?.['schema:url']?.['@value'] || '',
-    };
-  }
-
-  return;
 };

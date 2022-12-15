@@ -10,7 +10,10 @@ import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 
 import { graphqlClient } from 'lib/clients/graphqlClient';
-import { NonQueryableProjectMetadataLD } from 'lib/db/types/json-ld';
+import {
+  ProjectMetadataIntersectionLD,
+  ProjectPageMetadataLD,
+} from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
@@ -120,16 +123,17 @@ function ProjectDetails(): JSX.Element {
     : projectByHandle?.data.projectByHandle;
 
   // Legacy projects use project.metadata. On-chain projects use IRI resolver.
-  const projectTableMetadata: Partial<NonQueryableProjectMetadataLD> =
-    project?.metadata;
   const iriResolvedMetadata = useQuery(
     getMetadataQuery({ iri: onChainProject?.metadata }),
   );
-  const metadata = iriResolvedMetadata.data ?? projectTableMetadata;
 
-  const nonQueryableMetadata = projectTableMetadata;
+  const projectTableMetadata: ProjectPageMetadataLD = project?.metadata;
+  const metadata: Partial<ProjectMetadataIntersectionLD> =
+    iriResolvedMetadata ?? projectTableMetadata;
+  const projectPageMetadata: Partial<ProjectPageMetadataLD> =
+    projectTableMetadata;
   const managementActions =
-    nonQueryableMetadata?.['regen:landManagementActions']?.['@list'];
+    projectPageMetadata?.['regen:landManagementActions']?.['@list'];
 
   const { batchesWithSupply, setPaginationParams, paginationParams } =
     usePaginatedBatchesByProject({ projectId: String(onChainProjectId) });
@@ -151,13 +155,13 @@ function ProjectDetails(): JSX.Element {
     creditClassVersion?.metadata?.['http://regen.network/indicator']?.['@id'],
   ];
 
-  const { geojson, isGISFile } = useGeojson(metadata);
+  const { geojson, isGISFile } = useGeojson(iriResolvedMetadata);
 
   const seoData = useSeo({
     metadata,
     creditClassName,
   });
-  const mediaData = useMedia({ metadata: nonQueryableMetadata, geojson });
+  const mediaData = useMedia({ metadata: projectPageMetadata, geojson });
   const impactData = useImpact({ coBenefitsIris, primaryImpactIRI });
 
   const isLoading = loadingProjectByOnChainId || loadingProjectByHandle;
@@ -232,7 +236,7 @@ function ProjectDetails(): JSX.Element {
         data={data}
         onChainProject={onChainProject}
         metadata={metadata}
-        nonQueryableMetadata={nonQueryableMetadata}
+        projectPageMetadata={projectPageMetadata}
         sanityCreditClassData={sanityCreditClassData}
         batchData={{
           batches: batchesWithSupply,

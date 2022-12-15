@@ -36,16 +36,13 @@ import {
   useProjectTopSectionStyles,
 } from './ProjectTopSection.styles';
 import { ProjectTopSectionProps } from './ProjectTopSection.types';
-import {
-  getDisplayAdmin,
-  getDisplayDeveloper,
-} from './ProjectTopSection.utils';
+import { getDisplayAdmin } from './ProjectTopSection.utils';
 
 function ProjectTopSection({
   data,
   onChainProject,
   metadata,
-  nonQueryableMetadata,
+  projectPageMetadata,
   sanityCreditClassData,
   geojson,
   isGISFile,
@@ -64,21 +61,24 @@ function ProjectTopSection({
 
   const project = data?.projectByOnChainId || data?.projectByHandle; // TODO: eventually just projectByOnChainId
   const projectName = metadata?.['schema:name'];
-  const videoURL = nonQueryableMetadata?.['regen:videoURL']?.['@value'];
-  const landStewardPhoto = metadata?.['regen:landStewardPhoto']?.['@value'];
+  const videoURL = projectPageMetadata?.['regen:videoURL']?.['@value'];
+  const landStewardPhoto =
+    projectPageMetadata?.['regen:landStewardPhoto']?.['@value'];
   const projectSize = metadata?.['regen:projectSize'];
   const area = projectSize?.['qudt:numericValue']?.['@value'];
   const unit = projectSize?.['qudt:unit']?.['@value'];
   const areaUnit = getAreaUnit(unit as qudtUnit);
   const creditClass = project?.creditClassByCreditClassId;
   const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
-  const quote = metadata?.['regen:projectQuote'];
+  const quote = projectPageMetadata?.['regen:projectQuote'];
   const glanceText: string[] | undefined =
-    metadata?.['regen:glanceText']?.['@list'];
+    projectPageMetadata?.['regen:glanceText']?.['@list'];
   const primaryDescription =
-    metadata?.['regen:landStory'] || metadata?.['schema:description'];
-  const landStewardStoryTitle = metadata?.['regen:landStewardStoryTitle'];
-  const landStewardStory = metadata?.['regen:landStewardStory'];
+    projectPageMetadata?.['regen:landStory'] ||
+    projectPageMetadata?.['schema:description'];
+  const landStewardStoryTitle =
+    projectPageMetadata?.['regen:landStewardStoryTitle'];
+  const landStewardStory = projectPageMetadata?.['regen:landStewardStory'];
 
   const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.[
     '@list'
@@ -263,7 +263,8 @@ function ProjectTopSection({
         <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
           <ProjectTopCard
             projectAdmin={getDisplayAdmin(data?.admin || onChainProject?.admin)}
-            projectDeveloper={getDisplayDeveloper(
+            projectDeveloper={getDisplayParty(
+              'regen:projectDeveloper',
               metadata,
               project?.partyByDeveloperId,
             )}

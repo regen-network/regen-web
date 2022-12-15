@@ -9,16 +9,10 @@ export interface CFCProjectMetadataLD extends ProjectMetadataLD {
   'regen:cfcProjectPage': TypeValue;
   'regen:offsetProtocol': OffsetProtocol;
   'regen:projectDesignDocument': TypeValue;
-  'regen:projectOperator'?: ProjectOperator;
 }
 
 interface OffsetProtocol {
   'schema:name': string;
   'schema:url': UrlType;
   'schema:version': string;
-}
-
-interface ProjectOperator {
-  'schema:name': string;
-  'schema:url': UrlType;
 }

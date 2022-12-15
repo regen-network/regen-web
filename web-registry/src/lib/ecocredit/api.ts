@@ -237,6 +237,7 @@ export const getBridgedEcocreditsForAccount = async (
         // Get the tx status using the bridge service api
         let status, destinationTxHash;
         const txStatus = await getBridgeTxStatus(res.txResponses[i].txhash);
+
         status = txStatus?.status;
         destinationTxHash = txStatus?.destination_tx_hash;
         const messages = txBody.messages.filter(
@@ -265,6 +266,8 @@ export const getBridgedEcocreditsForAccount = async (
               amount,
               status,
               destinationTxHash,
+              txHash: res.txResponses[i].txhash,
+              txTimestamp: res.txResponses[i].timestamp,
               ...(cachedBatch as IBatchInfoWithClassProject),
             });
           }

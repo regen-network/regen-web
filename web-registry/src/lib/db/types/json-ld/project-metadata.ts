@@ -2,11 +2,10 @@ import { TypeValue, UrlList, UrlType } from 'lib/rdf/types';
 
 // TODO: remember that all exisiting metadata will have to be updated
 
-/** Signed/anchored metadata AKA "Additional Info" */
+/** Signed/anchored metadata AKA "Additional Info" - Editable only with a signed Ledger TX. */
 export interface ProjectMetadataLD {
   '@context': Context;
   '@type': string; // regen:C01-Project
-
   'schema:name': string;
   'schema:location': any;
   'regen:projectType': string;
@@ -19,37 +18,29 @@ export interface ProjectMetadataLD {
   'regen:projectEndDate': TypeValue;
 }
 
-/** Unsigned, unanchored metadata from our DB */
+/** Unsigned, unanchored metadata from our DB. This is editable without a Ledger TX. */
 export interface ProjectPageMetadataLD {
   '@context': Context;
   '@type': string; // regen:C01-Project-Page
-
-  // media
   'schema:image': UrlType;
   'schema:creditText': string;
   'regen:galleryPhotos': UrlList;
   'regen:previewPhoto': UrlType;
   'regen:videoURL': UrlType;
-
-  // roles
+  'regen:glanceText': any;
   'regen:projectDeveloper': ProjectStakeholder;
   'regen:landSteward': ProjectStakeholder;
   'regen:landOwner': ProjectStakeholder;
   'regen:projectOriginator': ProjectStakeholder;
-
-  // marketing
   'regen:landStory': string;
   'regen:landStewardStory': string;
   'regen:landStewardPhoto': UrlType;
   'regen:projectQuote': ProjectQuote;
   'regen:landStewardStoryTitle': string;
   'schema:description'?: string;
-
-  // legacy? - may not exist in standards repo
   'regen:boundaries': TypeValue;
   'regen:creditClass': CreditClass;
   'regen:landManagementActions': LandManagementActions;
-  'regen:glanceText': any;
 }
 
 interface Context {

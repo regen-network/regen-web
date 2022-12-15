@@ -5,13 +5,13 @@ import { ExpandButton } from 'web-components/lib/components/buttons/ExpandButton
 import { Title } from 'web-components/lib/components/typography';
 import { formatDate } from 'web-components/lib/utils/format';
 
-import { ProjectMetadataIntersectionLD } from 'lib/db/types/json-ld';
+import { AnchoredProjectMetadataIntersectionLD } from 'lib/db/types/json-ld';
 
 import { ArrowLink } from '../../atoms/MetadataArrowLink';
 import { MetaDetail } from '../MetaDetail';
 
 export interface MetadataProps {
-  metadata?: Partial<ProjectMetadataIntersectionLD>;
+  metadata?: Partial<AnchoredProjectMetadataIntersectionLD>;
 }
 
 const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
@@ -84,7 +84,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
                 label={`methodolog${methodologyCount > 1 ? 'ies' : 'y'}`}
                 data={
                   <>
-                    {approvedMethodologies.map((methodology: any) => (
+                    {approvedMethodologies.map(methodology => (
                       <ArrowLink
                         label={methodology?.['schema:name']}
                         href={methodology?.['schema:url']?.['@value'] || ''}

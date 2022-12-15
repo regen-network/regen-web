@@ -9,9 +9,14 @@ import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 
+import {
+  useAllCreditClassQuery,
+  useAllProjectPageQuery,
+} from 'generated/sanity-graphql';
 import { graphqlClient } from 'lib/clients/graphqlClient';
 import {
   ProjectMetadataIntersectionLD,
+  ProjectPageMetadataLD,
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
@@ -122,16 +127,13 @@ function ProjectDetails(): JSX.Element {
     ? projectByOnChainId?.data.projectByOnChainId
     : projectByHandle?.data.projectByHandle;
 
-  // Legacy projects use project.metadata. On-chain projects use IRI resolver.
+  /** Anchored project metadata comes from IRI resolver. */
   const iriResolvedMetadata = useQuery(
     getMetadataQuery({ iri: onChainProject?.metadata }),
   );
+  /** Un-anchored metadata from the project.metadata jsonld column. */
+  const projectPageMetadata: Partial<ProjectPageMetadataLD> = project?.metadata;
 
-  const projectTableMetadata: ProjectPageMetadataLD = project?.metadata;
-  const metadata: Partial<ProjectMetadataIntersectionLD> =
-    iriResolvedMetadata ?? projectTableMetadata;
-  const projectPageMetadata: Partial<ProjectPageMetadataLD> =
-    projectTableMetadata;
   const managementActions =
     projectPageMetadata?.['regen:landManagementActions']?.['@list'];
 
@@ -155,10 +157,13 @@ function ProjectDetails(): JSX.Element {
     creditClassVersion?.metadata?.['http://regen.network/indicator']?.['@id'],
   ];
 
-  const { geojson, isGISFile } = useGeojson(iriResolvedMetadata);
+  const { geojson, isGISFile } = useGeojson({
+    ...projectPageMetadata,
+    ...anchoredMetadata,
+  });
 
   const seoData = useSeo({
-    metadata,
+    metadata: { ...projectPageMetadata, ...anchoredMetadata },
     creditClassName,
   });
   const mediaData = useMedia({ metadata: projectPageMetadata, geojson });
@@ -228,14 +233,14 @@ function ProjectDetails(): JSX.Element {
             : () => setDisplayErrorBanner(true)
         }
         onChainProjectId={onChainProjectId}
-        projectName={metadata?.['schema:name']}
+        projectName={anchoredMetadata?.['schema:name']}
         onChainCreditClassId={onChainProject?.classId}
       />
 
       <ProjectTopSection
         data={data}
         onChainProject={onChainProject}
-        metadata={metadata}
+        metadata={anchoredMetadata}
         projectPageMetadata={projectPageMetadata}
         sanityCreditClassData={sanityCreditClassData}
         batchData={{

@@ -4,7 +4,7 @@ import { Party } from 'web-components/lib/components/modal/LedgerModal';
 import { getFormattedPeriod } from 'web-components/lib/utils/format';
 
 import {
-  ProjectMetadataIntersectionLD,
+  ProjectPageMetadataLD,
   ProjectStakeholder,
 } from 'lib/db/types/json-ld';
 
@@ -189,7 +189,7 @@ type StakeholderType =
   | 'regen:projectOriginator';
 
 const getPartyFromMetadata = (
-  metadata: Partial<ProjectMetadataIntersectionLD>,
+  metadata: Partial<ProjectPageMetadataLD>,
   role: StakeholderType,
 ): Party | undefined => {
   const metadataRole: ProjectStakeholder | undefined = metadata[role];
@@ -210,7 +210,7 @@ const getPartyFromMetadata = (
 
 export function getDisplayParty(
   role: StakeholderType,
-  metadata?: Partial<ProjectMetadataIntersectionLD>,
+  metadata?: Partial<ProjectPageMetadataLD>,
   party?: Maybe<PartyFieldsFragment>,
 ): Party | undefined {
   const showOnProjectPage = metadata?.[role]?.['regen:showOnProjectPage'];

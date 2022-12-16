@@ -66,7 +66,8 @@ function ProjectTopSection({
     '@list'
   ]?.map((sdg: { '@id': string }) => sdg['@id']);
 
-  const { projectName, area, areaUnit } = useAnchoredMetadata(anchoredMetadata);
+  const { projectName, area, areaUnit, placeName } =
+    useAnchoredMetadata(anchoredMetadata);
   const {
     videoURL,
     glanceText,
@@ -112,11 +113,7 @@ function ProjectTopSection({
             <ProjectPlaceInfo
               iconClassName={classes.icon}
               // TODO Format on-chain jurisdiction if no anchored location
-              place={
-                anchoredMetadata?.['schema:location']?.['place_name'] ||
-                anchoredMetadata?.['schema:location']?.['geojson:place_name'] ||
-                onChainProject?.jurisdiction
-              }
+              place={placeName || onChainProject?.jurisdiction}
               area={Number(area)}
               areaUnit={areaUnit}
             />

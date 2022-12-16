@@ -7,6 +7,7 @@ type UseAnchoredMetadataResponse = {
   projectName?: string;
   area?: string;
   areaUnit?: string;
+  placeName?: string;
 };
 
 const defaultValues = {
@@ -27,8 +28,11 @@ export const useAnchoredMetadata = (
     const area = projectSize?.['qudt:numericValue']?.['@value'];
     const unit = projectSize?.['qudt:unit']?.['@value'];
     const areaUnit = getAreaUnit(unit as qudtUnit);
+    const placeName =
+      anchoredMetadata?.['schema:location']?.['place_name'] ||
+      anchoredMetadata?.['schema:location']?.['geojson:place_name'];
 
-    setValues({ projectName, area, areaUnit });
+    setValues({ projectName, area, areaUnit, placeName });
   }, [anchoredMetadata]);
 
   return values;

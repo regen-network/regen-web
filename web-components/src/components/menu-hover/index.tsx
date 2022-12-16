@@ -30,6 +30,7 @@ const MenuHover = ({
   children,
 }: Props): JSX.Element => {
   const [openedPopover, setOpenedPopover] = useState(false);
+
   const popoverAnchor = useRef(null);
 
   const { classes: styles } = useMenuHoverStyles();

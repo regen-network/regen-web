@@ -7,6 +7,8 @@ import { NavLinkProps } from 'web-components/lib/components/header/components/Na
 import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 
+import { isBridgeFlag } from 'lib/ledger';
+
 import { Link } from 'components/atoms';
 
 export const getMenuItems = (pathname: string): HeaderMenuItem[] => [
@@ -50,32 +52,31 @@ export const getUserMenuItems = ({
   linkComponent,
   pathname,
   theme,
-}: GetUserMenuItemsParams): HeaderDropdownItemProps[] => [
-  {
-    pathname,
-    linkComponent,
-    title: 'My Portfolio',
-    href: '/ecocredits/portfolio',
-    icon: (
-      <CreditsIcon
-        sx={{ height: 18, width: 20 }}
-        color={theme.palette.secondary.main}
-      />
-    ),
-    importCallback: (): Promise<any> =>
-      Promise.all([
-        import('../../../pages/Dashboard/MyEcocredits'),
-        import('../../../pages/Dashboard'),
-      ]),
-  },
-  {
-    pathname,
-    linkComponent,
-    title: 'Bridge',
-    icon: <BridgeIcon />,
-    href: '/ecocredits/bridge',
-  },
-];
+}: GetUserMenuItemsParams): HeaderDropdownItemProps[] =>
+  [
+    {
+      pathname,
+      linkComponent,
+      title: 'My Portfolio',
+      href: '/ecocredits/portfolio',
+      icon: (
+        <CreditsIcon
+          sx={{ height: 18, width: 20 }}
+          color={theme.palette.secondary.main}
+        />
+      ),
+      importCallback: (): Promise<any> => import('../../../pages/Dashboard'),
+    },
+    isBridgeFlag
+      ? {
+          pathname,
+          linkComponent,
+          title: 'Bridge',
+          icon: <BridgeIcon />,
+          href: '/ecocredits/bridge',
+        }
+      : undefined,
+  ].filter(Boolean) as HeaderDropdownItemProps[];
 
 export const getIsTransparent = (pathname: string): boolean =>
   pathname === '/' ||

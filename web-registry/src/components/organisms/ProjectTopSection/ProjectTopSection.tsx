@@ -101,7 +101,7 @@ function ProjectTopSection({
     <Section classes={{ root: classes.section }}>
       <Grid container>
         <Grid item xs={12} md={8} sx={{ pr: { md: 19 } }}>
-          {!anchoredMetadata && loading ? (
+          {loading ? (
             <Skeleton height={124} />
           ) : (
             <Title variant="h1">

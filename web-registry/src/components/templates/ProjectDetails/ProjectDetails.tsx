@@ -9,16 +9,8 @@ import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 
-import {
-  useAllCreditClassQuery,
-  useAllProjectPageQuery,
-} from 'generated/sanity-graphql';
 import { graphqlClient } from 'lib/clients/graphqlClient';
-import {
-  ProjectMetadataIntersectionLD,
-  ProjectPageMetadataLD,
-  ProjectPageMetadataLD,
-} from 'lib/db/types/json-ld';
+import { ProjectPageMetadataLD } from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
@@ -128,7 +120,7 @@ function ProjectDetails(): JSX.Element {
     : projectByHandle?.data.projectByHandle;
 
   /** Anchored project metadata comes from IRI resolver. */
-  const iriResolvedMetadata = useQuery(
+  const anchoredMetadata = useQuery(
     getMetadataQuery({ iri: onChainProject?.metadata }),
   );
   /** Un-anchored metadata from the project.metadata jsonld column. */
@@ -169,7 +161,7 @@ function ProjectDetails(): JSX.Element {
   const mediaData = useMedia({ metadata: projectPageMetadata, geojson });
   const impactData = useImpact({ coBenefitsIris, primaryImpactIRI });
 
-  const isLoading = loadingProjectByOnChainId || loadingProjectByHandle;
+  const loadingDb = loadingProjectByOnChainId || loadingProjectByHandle;
 
   const {
     issuanceModalData,
@@ -194,7 +186,14 @@ function ProjectDetails(): JSX.Element {
     }));
   }, [credits, projectsWithOrderData]);
 
-  if (!isLoading && !project && !projectResponse) return <NotFoundPage />;
+  if (
+    !loadingDb &&
+    // !loadingAnchoredMetadata TODO
+    !project &&
+    !projectResponse
+  )
+    return <NotFoundPage />;
+
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO
@@ -204,7 +203,7 @@ function ProjectDetails(): JSX.Element {
         imageUrl={seoData.imageUrl}
       />
 
-      {mediaData.assets.length === 0 && isLoading && (
+      {mediaData.assets.length === 0 && loadingDb && (
         <Skeleton sx={getMediaBoxStyles(theme)} />
       )}
 
@@ -252,7 +251,10 @@ function ProjectDetails(): JSX.Element {
         geojson={geojson}
         isGISFile={isGISFile}
         onChainProjectId={onChainProjectId}
-        loading={isLoading}
+        loading={
+          loadingDb
+          // || loadingAnchoredMetadata // TODO
+        }
       />
 
       {impactData?.length > 0 && (

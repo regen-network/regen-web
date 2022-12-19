@@ -7,7 +7,7 @@ import { NavLinkProps } from 'web-components/lib/components/header/components/Na
 import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 
-import { isBridgeFlag } from 'lib/ledger';
+import { isBridgeEnabled } from 'lib/ledger';
 
 import { Link } from 'components/atoms';
 
@@ -67,7 +67,7 @@ export const getUserMenuItems = ({
       ),
       importCallback: (): Promise<any> => import('../../../pages/Dashboard'),
     },
-    isBridgeFlag
+    isBridgeEnabled
       ? {
           pathname,
           linkComponent,

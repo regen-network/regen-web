@@ -13,7 +13,7 @@ import Section from 'web-components/lib/components/section';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 
-import { isBridgeFlag } from 'lib/ledger';
+import { isBridgeEnabled } from 'lib/ledger';
 
 import { Link } from 'components/atoms';
 import { useQueryIfCreditClassAdmin } from 'hooks/useQueryIfCreditClassAdmin';
@@ -66,7 +66,7 @@ const Dashboard = (): JSX.Element => {
         label: 'Bridge',
         icon: <BridgeIcon />,
         href: '/ecocredits/bridge',
-        hidden: !isBridgeFlag,
+        hidden: !isBridgeEnabled,
       },
     ],
     [

@@ -66,7 +66,7 @@ const Dashboard = (): JSX.Element => {
         label: 'Bridge',
         icon: <BridgeIcon />,
         href: '/ecocredits/bridge',
-        hidden: isBridgeFlag,
+        hidden: !isBridgeFlag,
       },
     ],
     [

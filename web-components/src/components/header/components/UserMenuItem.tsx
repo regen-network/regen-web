@@ -1,18 +1,19 @@
-import React, { useMemo } from 'react';
-import { styled, useTheme } from '@mui/material';
+import React from 'react';
+import { styled } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 
 import { Label } from '../../typography';
+import { HeaderDropdownItemProps } from './HeaderDropdownItems';
 import {
   HeaderMenuHover,
   HeaderMenuHoverBase,
 } from './HeaderMenuHover/HeaderMenuHover';
-import { getUserMenuItems } from './UserMenuItem.config';
 
 interface UserMenuItemProps extends HeaderMenuHoverBase {
   address: string;
   avatar: string;
+  userMenuItems: HeaderDropdownItemProps[];
   disconnect: () => void;
 }
 
@@ -29,12 +30,8 @@ const UserMenuItem: React.FC<React.PropsWithChildren<UserMenuItemProps>> = ({
   disconnect,
   pathname,
   linkComponent,
+  userMenuItems,
 }) => {
-  const theme = useTheme();
-  const userMenuItems = useMemo(
-    () => getUserMenuItems({ linkComponent, pathname, theme }),
-    [linkComponent, pathname, theme],
-  );
   return (
     <HeaderMenuHover
       pathname={pathname}

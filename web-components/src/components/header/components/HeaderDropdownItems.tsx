@@ -34,6 +34,7 @@ export type HeaderDropdownItemProps = {
   href: string;
   pathname: string;
   linkComponent: React.FC<React.PropsWithChildren<NavLinkProps>>;
+  importCallback?: () => Promise<any>;
   svg?: React.FunctionComponent<
     React.PropsWithChildren<React.SVGProps<SVGSVGElement>>
   >;
@@ -43,14 +44,23 @@ export type HeaderDropdownItemProps = {
 
 export const HeaderDropdownItem: React.FC<
   React.PropsWithChildren<HeaderDropdownItemProps>
-> = ({ svg: SVG, icon, linkComponent: LinkComponent, ...props }) => {
+> = ({
+  svg: SVG,
+  icon,
+  importCallback,
+  linkComponent: LinkComponent,
+  ...props
+}) => {
   const { classes: styles } = useStyles();
+  const onHover = (): Promise<any> | undefined =>
+    importCallback && importCallback();
   return (
     <Box
       display="flex"
       flexWrap="nowrap"
       alignItems="center"
       className={styles.item}
+      onMouseEnter={onHover}
     >
       {SVG && (
         <Box mr={3}>

@@ -1,7 +1,13 @@
 import { Theme } from '@mui/material';
 
 import { HeaderColors } from 'web-components/lib/components/header';
+import { HeaderDropdownItemProps } from 'web-components/lib/components/header/components/HeaderDropdownItems';
 import { HeaderMenuItem } from 'web-components/lib/components/header/components/HeaderMenuHover/HeaderMenuHover';
+import { NavLinkProps } from 'web-components/lib/components/header/components/NavLink';
+import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
+import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
+
+import { isBridgeEnabled } from 'lib/ledger';
 
 import { Link } from 'components/atoms';
 
@@ -22,16 +28,55 @@ export const getMenuItems = (pathname: string): HeaderMenuItem[] => [
         href: '/stats/activity',
         title: 'Activity',
         linkComponent: Link,
+        importCallback: (): Promise<any> => import('../../../pages/Activity'),
       },
       {
         pathname,
         href: '/ecocredit-batches/1',
         title: 'Ecocredit batches',
         linkComponent: Link,
+        importCallback: (): Promise<any> =>
+          import('../../../pages/EcocreditBatches'),
       },
     ],
   },
 ];
+
+interface GetUserMenuItemsParams {
+  pathname: string;
+  linkComponent: React.FC<NavLinkProps>;
+  theme: Theme;
+}
+
+export const getUserMenuItems = ({
+  linkComponent,
+  pathname,
+  theme,
+}: GetUserMenuItemsParams): HeaderDropdownItemProps[] =>
+  [
+    {
+      pathname,
+      linkComponent,
+      title: 'My Portfolio',
+      href: '/ecocredits/portfolio',
+      icon: (
+        <CreditsIcon
+          sx={{ height: 18, width: 20 }}
+          color={theme.palette.secondary.main}
+        />
+      ),
+      importCallback: (): Promise<any> => import('../../../pages/Dashboard'),
+    },
+    isBridgeEnabled
+      ? {
+          pathname,
+          linkComponent,
+          title: 'Bridge',
+          icon: <BridgeIcon />,
+          href: '/ecocredits/bridge',
+        }
+      : undefined,
+  ].filter(Boolean) as HeaderDropdownItemProps[];
 
 export const getIsTransparent = (pathname: string): boolean =>
   pathname === '/' ||

@@ -11,7 +11,7 @@ interface GetUserMenuItemsParams {
   theme: Theme;
 }
 
-export const getUserMenuItems = ({
+export const getUserMenuItemsMock = ({
   linkComponent,
   pathname,
   theme,

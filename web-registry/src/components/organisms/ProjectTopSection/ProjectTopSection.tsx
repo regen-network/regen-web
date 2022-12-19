@@ -113,7 +113,7 @@ function ProjectTopSection({
             <ProjectPlaceInfo
               iconClassName={classes.icon}
               // TODO Format on-chain jurisdiction if no anchored location
-              place={placeName || onChainProject?.jurisdiction}
+              place={placeName ?? onChainProject?.jurisdiction ?? ''}
               area={Number(area)}
               areaUnit={areaUnit}
             />

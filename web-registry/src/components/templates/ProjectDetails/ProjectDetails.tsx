@@ -203,7 +203,7 @@ function ProjectDetails(): JSX.Element {
         imageUrl={seoData.imageUrl}
       />
 
-      {mediaData.assets.length === 0 && loadingDb && (
+      {mediaData.assets.length === 0 && loadingDB && (
         <Skeleton sx={getMediaBoxStyles(theme)} />
       )}
 

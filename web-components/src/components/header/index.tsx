@@ -112,7 +112,6 @@ export default function Header({
                 {isRegistry && extras}
               </MenuList>
             </Box>
-
             <Box
               className={styles.mobile}
               display={{ xs: 'block', md: 'none' }}

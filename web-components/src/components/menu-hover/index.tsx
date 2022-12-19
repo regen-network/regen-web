@@ -30,6 +30,7 @@ const MenuHover = ({
   children,
 }: Props): JSX.Element => {
   const [openedPopover, setOpenedPopover] = useState(false);
+
   const popoverAnchor = useRef(null);
 
   const { classes: styles } = useMenuHoverStyles();
@@ -64,34 +65,40 @@ const MenuHover = ({
         )}
         {renderTitle && renderTitle()}
       </span>
-      <Popover
-        // disableScrollLock
-        disableRestoreFocus
-        id="mouse-over-popover"
-        className={styles.popover}
-        classes={{
-          paper: styles.popoverContent,
-        }}
-        open={openedPopover}
-        anchorEl={popoverAnchor.current}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        PaperProps={{ onMouseEnter: popoverEnter, onMouseLeave: popoverLeave }}
-        disableScrollLock={true}
-        sx={{ position: 'absolute' }}
-      >
-        <Paper className={styles.paper} elevation={5}>
-          <MenuList classes={{ root: styles.text, padding: styles.noOutline }}>
-            {children}
-          </MenuList>
-        </Paper>
-      </Popover>
+      {popoverAnchor.current !== null && (
+        <Popover
+          disableRestoreFocus
+          id="mouse-over-popover"
+          className={styles.popover}
+          classes={{
+            paper: styles.popoverContent,
+          }}
+          open={openedPopover}
+          anchorEl={popoverAnchor.current}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          PaperProps={{
+            onMouseEnter: popoverEnter,
+            onMouseLeave: popoverLeave,
+          }}
+          disableScrollLock={true}
+          sx={{ position: 'absolute' }}
+        >
+          <Paper className={styles.paper} elevation={5}>
+            <MenuList
+              classes={{ root: styles.text, padding: styles.noOutline }}
+            >
+              {children}
+            </MenuList>
+          </Paper>
+        </Popover>
+      )}
     </div>
   );
 };

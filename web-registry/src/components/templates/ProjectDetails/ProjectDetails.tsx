@@ -10,7 +10,6 @@ import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 
 import { graphqlClient } from 'lib/clients/graphqlClient';
-import { ProjectPageMetadataLD } from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
@@ -36,6 +35,7 @@ import useGeojson from './hooks/useGeojson';
 import useImpact from './hooks/useImpact';
 import useIssuanceModal from './hooks/useIssuanceModal';
 import useMedia from './hooks/useMedia';
+import { useProject } from './hooks/useProject';
 import useSeo from './hooks/useSeo';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProjects';
@@ -124,30 +124,20 @@ function ProjectDetails(): JSX.Element {
     getMetadataQuery({ iri: onChainProject?.metadata }),
   );
   /** Un-anchored metadata from the project.metadata jsonld column. */
-  const projectPageMetadata: Partial<ProjectPageMetadataLD> = project?.metadata;
-
-  const managementActions =
-    projectPageMetadata?.['regen:landManagementActions']?.['@list'];
 
   const { batchesWithSupply, setPaginationParams, paginationParams } =
     usePaginatedBatchesByProject({ projectId: String(onChainProjectId) });
   const { totals: batchesTotal } = getBatchesTotal(batchesWithSupply ?? []);
 
-  // with project query
-  const projectEvents = project?.eventsByProjectId?.nodes;
-  const projectDocs = project?.documentsByProjectId?.nodes;
-
-  const creditClassVersion =
-    project?.creditClassByCreditClassId?.creditClassVersionsById?.nodes?.[0];
-
-  const creditClassName = creditClassVersion?.name;
-  const coBenefitsIris =
-    creditClassVersion?.metadata?.['http://regen.network/coBenefits']?.[
-      '@list'
-    ]?.map((impact: { '@id': string }) => impact['@id']) || [];
-  const primaryImpactIRI = [
-    creditClassVersion?.metadata?.['http://regen.network/indicator']?.['@id'],
-  ];
+  const {
+    projectPageMetadata,
+    managementActions,
+    projectEvents,
+    projectDocs,
+    creditClassName,
+    coBenefitsIris,
+    primaryImpactIRI,
+  } = useProject(project);
 
   const { geojson, isGISFile } = useGeojson({
     ...projectPageMetadata,
@@ -203,7 +193,7 @@ function ProjectDetails(): JSX.Element {
         imageUrl={seoData.imageUrl}
       />
 
-      {mediaData.assets.length === 0 && loadingDB && (
+      {mediaData.assets.length === 0 && loadingDb && (
         <Skeleton sx={getMediaBoxStyles(theme)} />
       )}
 

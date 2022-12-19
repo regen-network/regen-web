@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
 
 import { ProjectPageMetadataLD, ProjectQuote } from 'lib/db/types/json-ld';
 
@@ -12,10 +12,22 @@ type UseProjectPageResponse = {
   landStewardStory?: string | null;
 };
 
+const defaultValues = {
+  videoURL: undefined,
+  glanceText: undefined,
+  primaryDescription: undefined,
+  quote: undefined,
+  landStewardPhoto: undefined,
+  landStewardStoryTitle: undefined,
+  landStewardStory: undefined,
+};
+
 export const useProjectPageMetadata = (
   projectPageMetadata?: Partial<ProjectPageMetadataLD>,
 ): UseProjectPageResponse => {
-  const values: UseProjectPageResponse = useMemo(() => {
+  const [values, setValues] = useState<UseProjectPageResponse>(defaultValues);
+
+  useEffect(() => {
     const videoURL = projectPageMetadata?.['regen:videoURL']?.['@value'];
     const glanceText = projectPageMetadata?.['regen:glanceText']?.['@list'];
     const primaryDescription =
@@ -28,7 +40,7 @@ export const useProjectPageMetadata = (
       projectPageMetadata?.['regen:landStewardStoryTitle'];
     const landStewardStory = projectPageMetadata?.['regen:landStewardStory'];
 
-    return {
+    setValues({
       videoURL,
       glanceText,
       primaryDescription,
@@ -36,7 +48,7 @@ export const useProjectPageMetadata = (
       landStewardPhoto,
       landStewardStoryTitle,
       landStewardStory,
-    };
+    });
   }, [projectPageMetadata]);
 
   return values;

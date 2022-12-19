@@ -25,6 +25,11 @@ import {
   ProjectByOnChainIdQuery,
 } from 'generated/graphql';
 
+import {
+  API_URI,
+  IMAGE_STORAGE_BASE_URL,
+  MAPBOX_TOKEN,
+} from 'components/templates/ProjectDetails/ProjectDetails.config';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { useSdgByIriQuery } from '../../../generated/sanity-graphql';
@@ -43,10 +48,6 @@ import {
 } from './ProjectTopSection.styles';
 import { ProjectTopSectionProps } from './ProjectTopSection.types';
 import { getDisplayAdmin } from './ProjectTopSection.utils';
-
-const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
-const apiServerUrl = process.env.REACT_APP_API_URI;
-const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
 function ProjectTopSection({
   data,
@@ -156,11 +157,11 @@ function ProjectTopSection({
               <Box sx={{ pt: 6 }}>
                 <GlanceCard
                   text={glanceText}
-                  imageStorageBaseUrl={imageStorageBaseUrl}
-                  apiServerUrl={apiServerUrl}
+                  imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
+                  apiServerUrl={API_URI}
                   geojson={geojson}
                   isGISFile={isGISFile}
-                  mapboxToken={mapboxToken}
+                  mapboxToken={MAPBOX_TOKEN}
                 />
               </Box>
             </LazyLoad>

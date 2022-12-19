@@ -14,6 +14,7 @@ const defaultValues = {
   projectName: undefined,
   area: undefined,
   areaUnit: undefined,
+  placeName: undefined,
 };
 
 export const useAnchoredMetadata = (
@@ -29,7 +30,7 @@ export const useAnchoredMetadata = (
     const unit = projectSize?.['qudt:unit']?.['@value'];
     const areaUnit = getAreaUnit(unit as qudtUnit);
     const placeName =
-      anchoredMetadata?.['schema:location']?.['place_name'] ||
+      anchoredMetadata?.['schema:location']?.['place_name'] ??
       anchoredMetadata?.['schema:location']?.['geojson:place_name'];
 
     setValues({ projectName, area, areaUnit, placeName });

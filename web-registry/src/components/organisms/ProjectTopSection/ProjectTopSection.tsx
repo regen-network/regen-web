@@ -20,6 +20,11 @@ import ReadMore from 'web-components/lib/components/read-more';
 import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
+import {
+  ProjectByHandleQuery,
+  ProjectByOnChainIdQuery,
+} from 'generated/graphql';
+
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { useSdgByIriQuery } from '../../../generated/sanity-graphql';
@@ -30,6 +35,7 @@ import { ProjectTopLink } from '../../atoms';
 import { ProjectBatchTotals, ProjectPageMetadata } from '../../molecules';
 import { CreditBatches } from '../CreditBatches/CreditBatches';
 import { useAnchoredMetadata } from './hooks/useAnchoredMetadata';
+import { useProject } from './hooks/useProject';
 import { useProjectPageMetadata } from './hooks/useProjectPageMetadata';
 import {
   ProjectTopSectionQuoteMark,
@@ -37,6 +43,10 @@ import {
 } from './ProjectTopSection.styles';
 import { ProjectTopSectionProps } from './ProjectTopSection.types';
 import { getDisplayAdmin } from './ProjectTopSection.utils';
+
+const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
+const apiServerUrl = process.env.REACT_APP_API_URI;
+const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
 function ProjectTopSection({
   data,
@@ -56,18 +66,18 @@ function ProjectTopSection({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
-  const apiServerUrl = process.env.REACT_APP_API_URI;
+  // TODO: eventually just projectByOnChainId
+  const project =
+    (data as ProjectByOnChainIdQuery)?.projectByOnChainId ??
+    (data as ProjectByHandleQuery)?.projectByHandle ??
+    undefined;
 
-  const project = data?.projectByOnChainId || data?.projectByHandle; // TODO: eventually just projectByOnChainId
-  const creditClass = project?.creditClassByCreditClassId;
-  const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
-  const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.[
-    '@list'
-  ]?.map((sdg: { '@id': string }) => sdg['@id']);
+  const { creditClass, creditClassVersion, sdgIris, offsetGenerationMethod } =
+    useProject(project);
 
   const { projectName, area, areaUnit, placeName } =
     useAnchoredMetadata(anchoredMetadata);
+
   const {
     videoURL,
     glanceText,
@@ -85,16 +95,16 @@ function ProjectTopSection({
     },
     skip: !sdgIris,
   });
-  const sdgs = sdgData?.allSdg.map(s => ({
-    title: s.title || '',
-    imageUrl: getSanityImgSrc(s.image),
+  const sdgs = sdgData?.allSdg.map(sdg => ({
+    title: sdg.title || '',
+    imageUrl: getSanityImgSrc(sdg.image),
   }));
 
   const creditClassSanity = findSanityCreditClass({
     sanityCreditClassData,
     creditClassIdOrUrl:
-      creditClass?.onChainId ||
-      creditClassVersion?.metadata?.['http://schema.org/url']?.['@value'] ||
+      creditClass?.onChainId ??
+      creditClassVersion?.metadata?.['http://schema.org/url']?.['@value'] ??
       onChainProjectId?.split('-')?.[0], // if no offChain credit class
   });
 
@@ -133,11 +143,7 @@ function ProjectTopSection({
               ) : (
                 <ProjectTopLink
                   label="offset generation method"
-                  name={
-                    creditClassVersion?.metadata?.[
-                      'http://regen.network/offsetGenerationMethod'
-                    ]
-                  }
+                  name={offsetGenerationMethod}
                 />
               )}
             </Box>
@@ -154,7 +160,7 @@ function ProjectTopSection({
                   apiServerUrl={apiServerUrl}
                   geojson={geojson}
                   isGISFile={isGISFile}
-                  mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                  mapboxToken={mapboxToken}
                 />
               </Box>
             </LazyLoad>
@@ -201,7 +207,7 @@ function ProjectTopSection({
             {landStewardPhoto && (
               <img
                 className={classes.media}
-                alt={landStewardPhoto}
+                alt="land steward"
                 src={landStewardPhoto}
               />
             )}
@@ -255,7 +261,7 @@ function ProjectTopSection({
         </Grid>
         <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
           <ProjectTopCard
-            projectAdmin={getDisplayAdmin(data?.admin || onChainProject?.admin)}
+            projectAdmin={getDisplayAdmin(onChainProject?.admin)}
             projectDeveloper={getDisplayParty(
               'regen:projectDeveloper',
               projectPageMetadata,

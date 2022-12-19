@@ -1,8 +1,6 @@
 import { TypeValue, UrlList, UrlType } from 'lib/rdf/types';
 
-// TODO: remember that all exisiting metadata will have to be updated
-
-/** Signed/anchored metadata AKA "Additional Info" - Editable only with a signed Ledger TX. */
+/** Anchored metadata AKA "Additional Info" - Editable only with a signed Ledger TX. */
 export interface ProjectMetadataLD {
   '@context': Context;
   '@type': string; // regen:C01-Project
@@ -18,7 +16,7 @@ export interface ProjectMetadataLD {
   'regen:projectEndDate': TypeValue;
 }
 
-/** Unsigned, unanchored metadata from our DB. This is editable without a Ledger TX. */
+/** Un-anchored metadata from our DB. This is editable without a Ledger TX. */
 export interface ProjectPageMetadataLD {
   '@context': Context;
   '@type': string; // regen:C01-Project-Page

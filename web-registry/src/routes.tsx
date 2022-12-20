@@ -2,6 +2,7 @@ import { lazy } from 'react';
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Outlet,
   Route,
   RouteObject,
 } from 'react-router-dom';
@@ -52,6 +53,7 @@ const Description = lazy(() => import('./pages/Description'));
 const EntityDisplay = lazy(() => import('./pages/EntityDisplay'));
 const EcocreditBatches = lazy(() => import('./pages/EcocreditBatches'));
 const EcocreditsByAccount = lazy(() => import('./pages/EcocreditsByAccount'));
+const ErrorPage = lazy(() => import('./pages/ErrorPage'));
 const Home = lazy(() => import('./pages/Home'));
 const LandStewards = lazy(() => import('./pages/LandStewards'));
 const Media = lazy(() => import('./pages/Media'));
@@ -87,135 +89,104 @@ type RouterParams = {
 export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
   createRoutesFromElements(
     <Route element={<RegistryLayout />}>
-      <Route
-        path="/"
-        element={<Home />}
-        loader={homeLoader({
-          queryClient: reactQueryClient,
-        })}
-      />
-      <Route path="verify-email" element={<VerifyEmail />} />
-      <Route path="add" element={<Additionality />} />
-      <Route path="signup" element={<Signup />} />
-      <Route path="certificate" element={<CertificatePage />} />
-      <Route path="project/wilmot/admin" element={<Seller />} />
-      <Route path="buyers" element={<BuyersPage />} />
-      <Route path="create-methodology" element={<CreateMethodology />} />
-      <Route
-        // TODO: thould this route be moved to /credit-classes?
-        path="create-credit-class"
-        element={<CreateCreditClassInfo />}
-      />
-      <Route path="land-stewards" element={<LandStewards />} />
-      <Route
-        path="methodology-review-process"
-        element={<MethodologyReviewProcess />}
-      />
-      <Route
-        path="projects/:page"
-        element={<Projects />}
-        loader={projectsLoader({
-          queryClient: reactQueryClient,
-        })}
-      />
-      <Route path="project/:projectId" element={<Project />} />
-      <Route
-        path="post-purchase/:projectId/:walletId/:name"
-        element={<PostPurchase />}
-      />
-      <Route path="ecocredits" element={<KeplrRoute component={Dashboard} />}>
+      <Route path="/" element={<Outlet />} errorElement={<ErrorPage />}>
         <Route
-          path="portfolio"
-          element={<KeplrRoute component={MyEcocredits} />}
+          index
+          element={<Home />}
+          loader={homeLoader({
+            queryClient: reactQueryClient,
+          })}
+        />
+        <Route path="verify-email" element={<VerifyEmail />} />
+        <Route path="add" element={<Additionality />} />
+        <Route path="signup" element={<Signup />} />
+        <Route path="certificate" element={<CertificatePage />} />
+        <Route path="project/wilmot/admin" element={<Seller />} />
+        <Route path="buyers" element={<BuyersPage />} />
+        <Route path="create-methodology" element={<CreateMethodology />} />
+        <Route
+          // TODO: thould this route be moved to /credit-classes?
+          path="create-credit-class"
+          element={<CreateCreditClassInfo />}
+        />
+        <Route path="land-stewards" element={<LandStewards />} />
+        <Route
+          path="methodology-review-process"
+          element={<MethodologyReviewProcess />}
         />
         <Route
-          path="projects"
-          element={<KeplrRoute component={MyProjects} />}
+          path="projects/:page"
+          element={<Projects />}
+          loader={projectsLoader({
+            queryClient: reactQueryClient,
+          })}
         />
+        <Route path="project/:projectId" element={<Project />} />
         <Route
-          path="credit-classes"
-          element={<KeplrRoute component={MyCreditClasses} />}
+          path="post-purchase/:projectId/:walletId/:name"
+          element={<PostPurchase />}
         />
-        <Route
-          path="credit-batches"
-          element={<KeplrRoute component={MyCreditBatches} />}
-        />
-        <Route path="bridge" element={<KeplrRoute component={MyBridge} />}>
-          <Route index element={<MyBridgableEcocreditsTable />} />
-          <Route path="bridgable" element={<MyBridgableEcocreditsTable />} />
-          <Route path="bridged" element={<MyBridgedEcocreditsTable />} />
+        <Route path="ecocredits" element={<KeplrRoute component={Dashboard} />}>
+          <Route
+            path="portfolio"
+            element={<KeplrRoute component={MyEcocredits} />}
+          />
+          <Route
+            path="projects"
+            element={<KeplrRoute component={MyProjects} />}
+          />
+          <Route
+            path="credit-classes"
+            element={<KeplrRoute component={MyCreditClasses} />}
+          />
+          <Route
+            path="credit-batches"
+            element={<KeplrRoute component={MyCreditBatches} />}
+          />
+          <Route path="bridge" element={<KeplrRoute component={MyBridge} />}>
+            <Route index element={<MyBridgableEcocreditsTable />} />
+            <Route path="bridgable" element={<MyBridgableEcocreditsTable />} />
+            <Route path="bridged" element={<MyBridgedEcocreditsTable />} />
+          </Route>
         </Route>
-      </Route>
-      <Route
-        path="ecocredits/accounts/:accountAddress"
-        element={<EcocreditsByAccount />}
-      >
-        <Route path="portfolio" element={<PortfolioTab />} />
-        <Route path="bridge" element={<BridgeTab />} />
-      </Route>
-      <Route
-        path="ecocredit-batches/:page"
-        element={<EcocreditBatches />}
-        loader={ecocreditBatchesLoader({
-          queryClient: reactQueryClient,
-        })}
-      />
-      <Route
-        path="ecocredits/create-batch"
-        element={<KeplrRoute component={CreateBatch} />}
-      />
-      <Route path="baskets/:basketDenom" element={<BasketDetails />} />
-      <Route path="credit-batches/:batchDenom" element={<BatchDetails />} />
-      <Route
-        path="user-profile"
-        element={<ProtectedRoute component={UserProfile} />}
-      />
-      <Route
-        path="organization-profile"
-        element={<ProtectedRoute component={OrganizationProfile} />}
-      />
-      <Route
-        path="project-list"
-        element={<ProtectedRoute component={ProjectList} />}
-      />
-      <Route path="project-pages">
-        <Route path=":projectId" element={<ProjectCreate />}>
-          <Route
-            path="choose-credit-class"
-            element={<KeplrRoute component={ChooseCreditClassPage} />}
-          />
-          <Route
-            path="basic-info"
-            element={<KeplrRoute component={BasicInfo} />}
-          />
-          <Route
-            path="location"
-            element={<KeplrRoute component={ProjectLocation} />}
-          />
-          <Route path="story" element={<KeplrRoute component={Story} />} />
-          <Route
-            path="description"
-            element={<KeplrRoute component={Description} />}
-          />
-          <Route path="media" element={<KeplrRoute component={Media} />} />
-          <Route
-            path="metadata"
-            element={<KeplrRoute component={ProjectMetadata} />}
-          />
-          <Route path="roles" element={<KeplrRoute component={Roles} />} />
-          <Route
-            path="entity-display"
-            element={<KeplrRoute component={EntityDisplay} />}
-          />
-          <Route
-            path="review"
-            element={<KeplrRoute component={ProjectReview} />}
-          />
-          <Route
-            path="finished"
-            element={<KeplrRoute component={ProjectFinished} />}
-          />
-          <Route path="edit" element={<KeplrRoute component={ProjectEdit} />}>
+        <Route
+          path="ecocredits/accounts/:accountAddress"
+          element={<EcocreditsByAccount />}
+        >
+          <Route path="portfolio" element={<PortfolioTab />} />
+          <Route path="bridge" element={<BridgeTab />} />
+        </Route>
+        <Route
+          path="ecocredit-batches/:page"
+          element={<EcocreditBatches />}
+          loader={ecocreditBatchesLoader({
+            queryClient: reactQueryClient,
+          })}
+        />
+        <Route
+          path="ecocredits/create-batch"
+          element={<KeplrRoute component={CreateBatch} />}
+        />
+        <Route path="baskets/:basketDenom" element={<BasketDetails />} />
+        <Route path="credit-batches/:batchDenom" element={<BatchDetails />} />
+        <Route
+          path="user-profile"
+          element={<ProtectedRoute component={UserProfile} />}
+        />
+        <Route
+          path="organization-profile"
+          element={<ProtectedRoute component={OrganizationProfile} />}
+        />
+        <Route
+          path="project-list"
+          element={<ProtectedRoute component={ProjectList} />}
+        />
+        <Route path="project-pages">
+          <Route path=":projectId" element={<ProjectCreate />}>
+            <Route
+              path="choose-credit-class"
+              element={<KeplrRoute component={ChooseCreditClassPage} />}
+            />
             <Route
               path="basic-info"
               element={<KeplrRoute component={BasicInfo} />}
@@ -225,71 +196,107 @@ export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
               element={<KeplrRoute component={ProjectLocation} />}
             />
             <Route path="story" element={<KeplrRoute component={Story} />} />
+            <Route
+              path="description"
+              element={<KeplrRoute component={Description} />}
+            />
             <Route path="media" element={<KeplrRoute component={Media} />} />
+            <Route
+              path="metadata"
+              element={<KeplrRoute component={ProjectMetadata} />}
+            />
             <Route path="roles" element={<KeplrRoute component={Roles} />} />
             <Route
               path="entity-display"
               element={<KeplrRoute component={EntityDisplay} />}
             />
+            <Route
+              path="review"
+              element={<KeplrRoute component={ProjectReview} />}
+            />
+            <Route
+              path="finished"
+              element={<KeplrRoute component={ProjectFinished} />}
+            />
+            <Route path="edit" element={<KeplrRoute component={ProjectEdit} />}>
+              <Route
+                path="basic-info"
+                element={<KeplrRoute component={BasicInfo} />}
+              />
+              <Route
+                path="location"
+                element={<KeplrRoute component={ProjectLocation} />}
+              />
+              <Route path="story" element={<KeplrRoute component={Story} />} />
+              <Route path="media" element={<KeplrRoute component={Media} />} />
+              <Route path="roles" element={<KeplrRoute component={Roles} />} />
+              <Route
+                path="entity-display"
+                element={<KeplrRoute component={EntityDisplay} />}
+              />
+            </Route>
           </Route>
         </Route>
-      </Route>
-      <Route path="admin" element={<Admin />}>
-        <Route path="admin/credits">
+        <Route path="admin" element={<Admin />}>
+          <Route path="admin/credits">
+            <Route
+              path="create-and-transfer"
+              element={<ProtectedRoute component={BuyerCreditsTransfer} />}
+            />
+            <Route
+              path="issue"
+              element={<ProtectedRoute component={CreditsIssue} />}
+            />
+            <Route
+              path="transfer"
+              element={<ProtectedRoute component={CreditsTransfer} />}
+            />
+            <Route
+              path="retire"
+              element={<ProtectedRoute component={CreditsRetire} />}
+            />
+          </Route>
           <Route
-            path="create-and-transfer"
-            element={<ProtectedRoute component={BuyerCreditsTransfer} />}
-          />
-          <Route
-            path="issue"
-            element={<ProtectedRoute component={CreditsIssue} />}
-          />
-          <Route
-            path="transfer"
-            element={<ProtectedRoute component={CreditsTransfer} />}
-          />
-          <Route
-            path="retire"
-            element={<ProtectedRoute component={CreditsRetire} />}
-          />
-        </Route>
-        <Route
-          path="admin/buyer/create"
-          element={<ProtectedRoute component={BuyerCreate} />}
-        />
-      </Route>
-      <Route
-        path="methodologies/:methodologyId"
-        element={<MethodologyDetails />}
-      />
-      <Route path="credit-classes">
-        {/* TODO: Index route is same as /create-credit-class for now */}
-        <Route index element={<CreateCreditClassInfo />} />
-        <Route path=":creditClassId/*">
-          <Route index element={<CreditClassDetails isLandSteward={true} />} />
-          <Route
-            path="buyer"
-            element={<CreditClassDetails isLandSteward={false} />}
-          />
-          <Route
-            path="land-steward"
-            element={<CreditClassDetails isLandSteward={true} />}
+            path="admin/buyer/create"
+            element={<ProtectedRoute component={BuyerCreate} />}
           />
         </Route>
         <Route
-          path="create"
-          element={<KeplrRoute component={CreateCreditClass} />}
+          path="methodologies/:methodologyId"
+          element={<MethodologyDetails />}
         />
+        <Route path="credit-classes">
+          {/* TODO: Index route is same as /create-credit-class for now */}
+          <Route index element={<CreateCreditClassInfo />} />
+          <Route path=":creditClassId/*">
+            <Route
+              index
+              element={<CreditClassDetails isLandSteward={true} />}
+            />
+            <Route
+              path="buyer"
+              element={<CreditClassDetails isLandSteward={false} />}
+            />
+            <Route
+              path="land-steward"
+              element={<CreditClassDetails isLandSteward={true} />}
+            />
+          </Route>
+          <Route
+            path="create"
+            element={<KeplrRoute component={CreateCreditClass} />}
+          />
+        </Route>
+        <Route path="stats/activity" element={<Activity />} />
+        <Route
+          path="storefront"
+          element={<Storefront />}
+          loader={storefrontLoader({
+            queryClient: reactQueryClient,
+          })}
+        />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
-      <Route path="stats/activity" element={<Activity />} />
-      <Route
-        path="storefront"
-        element={<Storefront />}
-        loader={storefrontLoader({
-          queryClient: reactQueryClient,
-        })}
-      />
-      <Route path="*" element={<NotFoundPage />} />
     </Route>,
   );
 

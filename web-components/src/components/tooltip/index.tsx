@@ -1,4 +1,4 @@
-import Tooltip from '@mui/material/Tooltip';
+import Tooltip, { TooltipProps } from '@mui/material/Tooltip';
 import { DefaultTheme as Theme } from '@mui/styles';
 import { withStyles } from 'tss-react/mui';
 
@@ -86,4 +86,8 @@ const CustomTooltip = withStyles(Tooltip, (theme: Theme) => ({
   popperArrow: arrowGenerator(),
 }));
 
-export default CustomTooltip;
+const RegenTooltip = (props: TooltipProps): JSX.Element => (
+  <CustomTooltip enterTouchDelay={100} {...props} />
+);
+
+export default RegenTooltip;

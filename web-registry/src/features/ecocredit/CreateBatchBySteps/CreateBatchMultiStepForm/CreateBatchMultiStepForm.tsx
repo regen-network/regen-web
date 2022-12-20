@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
-import NotFound from 'web-components/lib/components/not-found';
+import NotFound from 'web-components/lib/components/views/NotFoundView';
 
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 

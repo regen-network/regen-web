@@ -1,6 +1,4 @@
-import React from 'react';
-
-import NotFound from 'web-components/lib/components/not-found';
+import NotFound from 'web-components/lib/components/views/NotFoundView';
 
 import RotationalGrazing from 'assets/rotational-grazing.png';
 

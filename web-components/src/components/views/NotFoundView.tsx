@@ -6,8 +6,8 @@ import { makeStyles } from 'tss-react/mui';
 import ContainedButton from '../buttons/ContainedButton';
 import { Body, Label, Title } from '../typography';
 
-interface NotFoundProps {
-  img: JSX.Element;
+export interface NotFoundProps {
+  img?: JSX.Element;
   home?: string;
 }
 

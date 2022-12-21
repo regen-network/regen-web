@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { ProjectPageMetadataLD } from 'lib/db/types/json-ld';
+import { jsonLdCompact } from 'lib/rdf';
 
 type UseProjectResponse = {
   projectPageMetadata?: any;
@@ -28,38 +29,46 @@ export const useProject = (project?: any): UseProjectResponse => {
   const [values, setValues] = useState<UseProjectResponse>(defaultValues);
 
   useEffect(() => {
-    /** Un-anchored metadata from the project.metadata jsonld column. */
-    const projectPageMetadata: Partial<ProjectPageMetadataLD> =
-      project?.metadata;
+    const getValues = async (): Promise<void> => {
+      /** Un-anchored metadata from the project.metadata jsonld column. */
+      const projectPageMetadata = (await jsonLdCompact(
+        project?.metadata,
+      )) as Partial<ProjectPageMetadataLD>;
 
-    const managementActions =
-      projectPageMetadata?.['regen:landManagementActions']?.['@list'];
+      const managementActions =
+        projectPageMetadata?.['regen:landManagementActions']?.['@list'];
 
-    const projectEvents = project?.eventsByProjectId?.nodes;
-    const projectDocs = project?.documentsByProjectId?.nodes;
+      const projectEvents = project?.eventsByProjectId?.nodes;
+      const projectDocs = project?.documentsByProjectId?.nodes;
 
-    const creditClassVersion =
-      project?.creditClassByCreditClassId?.creditClassVersionsById?.nodes?.[0];
+      const creditClassVersion =
+        project?.creditClassByCreditClassId?.creditClassVersionsById
+          ?.nodes?.[0];
 
-    const creditClassName = creditClassVersion?.name;
-    const coBenefitsIris =
-      creditClassVersion?.metadata?.['http://regen.network/coBenefits']?.[
-        '@list'
-      ]?.map((impact: { '@id': string }) => impact['@id']) || [];
-    const primaryImpactIRI = [
-      creditClassVersion?.metadata?.['http://regen.network/indicator']?.['@id'],
-    ];
+      const creditClassName = creditClassVersion?.name;
+      const coBenefitsIris =
+        creditClassVersion?.metadata?.['http://regen.network/coBenefits']?.[
+          '@list'
+        ]?.map((impact: { '@id': string }) => impact['@id']) || [];
+      const primaryImpactIRI = [
+        creditClassVersion?.metadata?.['http://regen.network/indicator']?.[
+          '@id'
+        ],
+      ];
 
-    setValues({
-      projectPageMetadata,
-      managementActions,
-      projectEvents,
-      projectDocs,
-      creditClassVersion,
-      creditClassName,
-      coBenefitsIris,
-      primaryImpactIRI,
-    });
+      setValues({
+        projectPageMetadata,
+        managementActions,
+        projectEvents,
+        projectDocs,
+        creditClassVersion,
+        creditClassName,
+        coBenefitsIris,
+        primaryImpactIRI,
+      });
+    };
+
+    getValues();
   }, [project]);
 
   return values;

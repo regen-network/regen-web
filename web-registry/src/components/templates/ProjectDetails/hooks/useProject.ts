@@ -14,19 +14,8 @@ type UseProjectResponse = {
   primaryImpactIRI?: any;
 };
 
-const defaultValues = {
-  projectPageMetadata: undefined,
-  managementActions: undefined,
-  projectEvents: undefined,
-  projectDocs: undefined,
-  creditClassVersion: undefined,
-  creditClassName: undefined,
-  coBenefitsIris: undefined,
-  primaryImpactIRI: undefined,
-};
-
 export const useProject = (project?: any): UseProjectResponse => {
-  const [values, setValues] = useState<UseProjectResponse>(defaultValues);
+  const [values, setValues] = useState<UseProjectResponse>({});
 
   useEffect(() => {
     const getValues = async (): Promise<void> => {

@@ -9,15 +9,8 @@ type UseProjectResponse = {
   offsetGenerationMethod?: string;
 };
 
-const defaultValues = {
-  creditClass: undefined,
-  creditClassVersion: undefined,
-  sdgIris: [],
-  offsetGenerationMethod: undefined,
-};
-
 export const useProject = (project?: any): UseProjectResponse => {
-  const [values, setValues] = useState<UseProjectResponse>(defaultValues);
+  const [values, setValues] = useState<UseProjectResponse>({});
 
   useEffect(() => {
     const creditClass = project?.creditClassByCreditClassId;

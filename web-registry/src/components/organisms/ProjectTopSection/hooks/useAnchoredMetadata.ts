@@ -10,18 +10,10 @@ type UseAnchoredMetadataResponse = {
   placeName?: string;
 };
 
-const defaultValues = {
-  projectName: undefined,
-  area: undefined,
-  areaUnit: undefined,
-  placeName: undefined,
-};
-
 export const useAnchoredMetadata = (
   anchoredMetadata?: Partial<AnchoredProjectMetadataIntersectionLD>,
 ): UseAnchoredMetadataResponse => {
-  const [values, setValues] =
-    useState<UseAnchoredMetadataResponse>(defaultValues);
+  const [values, setValues] = useState<UseAnchoredMetadataResponse>({});
 
   useEffect(() => {
     const projectName = anchoredMetadata?.['schema:name'];

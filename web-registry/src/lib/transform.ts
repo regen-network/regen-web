@@ -205,6 +205,7 @@ const getPartyFromMetadata = (
     address: metadataRole?.['schema:location']?.place_name || '',
     individual: '',
     role: '',
+    link: metadataRole?.['schema:url']?.['@value'] || '',
   };
 };
 

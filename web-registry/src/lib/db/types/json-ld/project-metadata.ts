@@ -1,4 +1,4 @@
-import { TypeValue, UrlList, UrlType } from 'lib/rdf/types';
+import { NameUrl, TypeValue, UrlList, UrlType } from 'lib/rdf/types';
 
 /** Anchored metadata AKA "Additional Info" - Editable only with a signed Ledger TX. */
 export interface ProjectMetadataLD {
@@ -7,7 +7,7 @@ export interface ProjectMetadataLD {
   'schema:name': string;
   'schema:location': any;
   'regen:projectType': string;
-  'regen:projectActivity': ProjectActivity;
+  'regen:projectActivity': NameUrl;
   'regen:offsetGenerationMethod': string;
   // TODO: not sure why regen:offsetGenerationMethod isn't compacting as expected so added this:
   'http://regen.network/offsetGenerationMethod'?: string;
@@ -42,11 +42,11 @@ export interface ProjectPageMetadataLD {
 }
 
 interface Context {
-  schema: string;
-  regen: string;
-  qudt: string;
-  unit: string;
-  xsd: string;
+  schema: 'http://schema.org/';
+  regen: 'http://regen.network/';
+  qudt: 'http://qudt.org/schema/qudt/';
+  unit: 'http://qudt.org/vocab/unit/';
+  xsd: 'http://www.w3.org/2001/XMLSchema#';
 }
 
 interface ProjectSize {
@@ -54,14 +54,10 @@ interface ProjectSize {
   'qudt:numericValue': TypeValue;
 }
 
-interface ProjectActivity {
-  'schema:name': string;
-  'schema:url': UrlType;
-}
-
 export interface ProjectStakeholder {
   '@type': string;
   'schema:name': string;
+  'schema:url'?: UrlType;
   'schema:description': string;
   'schema:email': string;
   'schema:logo'?: UrlType;

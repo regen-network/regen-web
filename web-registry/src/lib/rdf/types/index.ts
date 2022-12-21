@@ -13,10 +13,6 @@ export interface NameUrl {
   'schema:url': URL;
 }
 
-export interface URLList {
-  '@list': URL[];
-}
-
 export interface UrlType {
   '@type': 'schema:URL';
   '@value'?: string | null;

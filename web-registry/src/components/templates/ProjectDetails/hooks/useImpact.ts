@@ -17,7 +17,7 @@ export default function useImpact({
 }: InputProps): EcologicalImpact[] {
   const { data: primaryImpactData } = useQuery(
     getEcologicalImpactByIriQuery({
-      iris: primaryImpactIRI,
+      iris: primaryImpactIRI?.filter(Boolean),
       sanityClient: client,
       enabled: !!primaryImpactIRI,
     }),

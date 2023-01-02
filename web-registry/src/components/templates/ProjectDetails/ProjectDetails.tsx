@@ -78,26 +78,29 @@ function ProjectDetails(): JSX.Element {
   const isOnChainId = getIsOnChainId(projectId);
 
   // if projectId is handle, query project by handle
-  const { data: projectByHandle, isLoading: loadingProjectByHandle } = useQuery(
-    getProjectByHandleQuery({
-      client: apolloClient,
-      enabled: !!projectId && !isOnChainId,
-      handle: projectId as string,
-    }),
-  );
+  const { data: projectByHandle, isInitialLoading: loadingProjectByHandle } =
+    useQuery(
+      getProjectByHandleQuery({
+        client: apolloClient,
+        enabled: !!projectId && !isOnChainId,
+        handle: projectId as string,
+      }),
+    );
 
   const projectByHandleOnChainId =
     projectByHandle?.data.projectByHandle?.onChainId ?? undefined;
   const onChainProjectId = isOnChainId ? projectId : projectByHandleOnChainId;
   // else fetch project by onChainId
-  const { data: projectByOnChainId, isLoading: loadingProjectByOnChainId } =
-    useQuery(
-      getProjectByOnChainIdQuery({
-        client: apolloClient,
-        enabled: !!onChainProjectId,
-        onChainId: onChainProjectId as string,
-      }),
-    );
+  const {
+    data: projectByOnChainId,
+    isInitialLoading: loadingProjectByOnChainId,
+  } = useQuery(
+    getProjectByOnChainIdQuery({
+      client: apolloClient,
+      enabled: !!onChainProjectId,
+      onChainId: onChainProjectId as string,
+    }),
+  );
 
   const { data: projectResponse } = useQuery(
     getProjectQuery({

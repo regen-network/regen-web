@@ -17,12 +17,16 @@ export const getProjectByHandleQuery = ({
 }: ReactQueryProjectByHandleProps): ReactQueryProjectByHandleResponse => ({
   queryKey: getProjectByHandleKey(handle),
   queryFn: async () => {
-    const projectByHandle = await client.query<
-      ProjectByHandleQuery,
-      ProjectByHandleQueryVariables
-    >({ query: ProjectByHandleDocument, variables: { handle } });
+    try {
+      const projectByHandle = await client.query<
+        ProjectByHandleQuery,
+        ProjectByHandleQueryVariables
+      >({ query: ProjectByHandleDocument, variables: { handle } });
 
-    return projectByHandle;
+      return projectByHandle;
+    } catch (e) {
+      return null;
+    }
   },
   ...params,
 });

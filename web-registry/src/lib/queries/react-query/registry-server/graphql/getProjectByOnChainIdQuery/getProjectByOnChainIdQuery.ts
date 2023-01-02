@@ -17,12 +17,16 @@ export const getProjectByOnChainIdQuery = ({
 }: ReactQueryProjectByOnChainIdProps): ReactQueryProjectByOnChainIdResponse => ({
   queryKey: getProjectByOnChainIdKey(onChainId),
   queryFn: async () => {
-    const projectByOnChainId = await client.query<
-      ProjectByOnChainIdQuery,
-      ProjectByOnChainIdQueryVariables
-    >({ query: ProjectByOnChainIdDocument, variables: { onChainId } });
+    try {
+      const projectByOnChainId = await client.query<
+        ProjectByOnChainIdQuery,
+        ProjectByOnChainIdQueryVariables
+      >({ query: ProjectByOnChainIdDocument, variables: { onChainId } });
 
-    return projectByOnChainId;
+      return projectByOnChainId;
+    } catch (e) {
+      return null;
+    }
   },
   ...params,
 });

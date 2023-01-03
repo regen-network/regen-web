@@ -6,6 +6,7 @@ import { getMarketplaceQueryClient } from 'lib/clients/regen/ecocredit/marketpla
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
+import { getProjectByHandleQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByHandleQuery/getProjectByHandleQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
@@ -40,6 +41,12 @@ export const projectDetailsLoader =
       enabled: !!projectId && isOnChainId,
       onChainId: projectId ?? '',
     });
+    const projectByHandleQuery = getProjectByHandleQuery({
+      client: graphqlClient,
+      enabled: !!projectId && !isOnChainId,
+      handle: projectId as string,
+    });
+
     const sellOrdersQuery = getSellOrdersExtendedQuery({
       client: marketplaceClient,
       reactQueryClient: queryClient,
@@ -58,6 +65,10 @@ export const projectDetailsLoader =
     });
     await getFromCacheOrFetch({
       query: projectByOnChainIdQuery,
+      reactQueryClient: queryClient,
+    });
+    await getFromCacheOrFetch({
+      query: projectByHandleQuery,
       reactQueryClient: queryClient,
     });
 

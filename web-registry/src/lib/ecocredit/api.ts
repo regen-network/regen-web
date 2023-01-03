@@ -72,7 +72,7 @@ import type {
 } from '../../types/ledger/ecocredit';
 import { expLedger, ledgerRESTUri } from '../ledger';
 import { ECOCREDIT_MESSAGE_TYPES, messageActionEquals } from './constants';
-import { getV1AlphaBatchDenom } from './ecocredit.utils';
+import { v1AlphaBatchDenomMapping } from './ecocredit.config';
 
 const getCosmosServiceClient = async (): Promise<ServiceClientImpl> => {
   const api = await connectToApi();
@@ -413,7 +413,7 @@ export const addDataToBatches = async ({
             getTxHashForBatch(createBatchTxs.txResponses, batch.denom) ??
             getTxHashForBatch(
               createBatchAlphaTxs.txResponses,
-              getV1AlphaBatchDenom(batch.denom),
+              v1AlphaBatchDenomMapping[batch.denom],
             );
           classProjectInfo = await getClassProjectForBatch(
             batch,

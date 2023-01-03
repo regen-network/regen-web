@@ -3,4 +3,5 @@ export interface CreateFastContextReturn<Store> {
   useStore: <SelectorOutput>(
     selector: (store: Store) => SelectorOutput,
   ) => [SelectorOutput, (value: Partial<Store>) => void];
+  useSetStore: () => (value: Partial<Store>) => void;
 }

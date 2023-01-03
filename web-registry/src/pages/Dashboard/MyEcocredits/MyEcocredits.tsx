@@ -412,7 +412,7 @@ export const MyEcocredits = (): JSX.Element => {
           availableTradableAmount={Number(
             credits[basketPutOpen].balance?.tradableAmount,
           )}
-          batchDenom={credits[basketPutOpen].denom}
+          batchDenoms={[credits[basketPutOpen].denom]}
           open={basketPutOpen > -1}
           onClose={() => setBasketPutOpen(-1)}
           onSubmit={basketPutSubmit}

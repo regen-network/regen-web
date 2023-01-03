@@ -9,7 +9,7 @@ import Submit from './Submit';
 
 export interface BasketPutProps {
   basketOptions: Option[];
-  batchDenom: string;
+  batchDenoms: string[];
   availableTradableAmount: number;
   onSubmit: (values: FormValues) => Promise<void>;
 }
@@ -19,28 +19,34 @@ interface FormProps extends BasketPutProps {
 }
 
 export interface FormValues {
+  batchDenom?: string;
   basketDenom?: string;
   amount?: number;
 }
 
 const BasketPutForm: React.FC<React.PropsWithChildren<FormProps>> = ({
-  batchDenom,
+  batchDenoms,
   basketOptions,
   availableTradableAmount,
   onClose,
   onSubmit,
 }) => {
-  const [options, setOptions] = useState<Option[]>([]);
+  const hasManyBatchDenoms = batchDenoms.length > 1;
+  const hasOneBasketDenom = basketOptions.length === 1;
+  const batchDenomsOptions: Option[] = batchDenoms.map(batchDenom => ({
+    label: batchDenom,
+    value: batchDenom,
+  }));
 
   const initialValues = {
-    basketDenom: undefined,
+    batchDenom: undefined,
+    basketDenom: hasOneBasketDenom ? basketOptions[0].value : undefined,
     amount: undefined,
   };
 
-  useEffect(() => {
-    basketOptions.unshift({ value: '', label: 'choose basket' });
-    setOptions(basketOptions);
-  }, [basketOptions]);
+  const finalBasketOptions = hasOneBasketDenom
+    ? basketOptions
+    : [{ value: '', label: 'choose basket' }, ...basketOptions];
 
   const validateHandler = (values: FormValues): FormikErrors<FormValues> => {
     let errors: FormikErrors<FormValues> = {};
@@ -62,17 +68,28 @@ const BasketPutForm: React.FC<React.PropsWithChildren<FormProps>> = ({
     >
       {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
         <Form>
+          {hasManyBatchDenoms && (
+            <Field
+              name="batchDenom"
+              label="Choose ecocredits batch"
+              component={SelectTextField}
+              options={batchDenomsOptions}
+              native={false}
+            />
+          )}
           <Field
             name="basketDenom"
             label="Choose basket"
             component={SelectTextField}
-            options={options}
+            options={finalBasketOptions}
+            disabled={hasOneBasketDenom}
+            native={false}
           />
           <AmountField
             name="amount"
             label="Amount"
             availableAmount={availableTradableAmount}
-            denom={batchDenom}
+            denom={values.batchDenom ?? batchDenoms[0]}
           />
 
           <Submit

@@ -11,7 +11,7 @@ export const BASKET_PUT_TITLE = 'Put in basket';
 const BasketPutModal: React.FC<React.PropsWithChildren<BasketPutModalProps>> =
   ({
     basketOptions,
-    batchDenom,
+    batchDenoms,
     availableTradableAmount,
     open,
     onClose,
@@ -20,7 +20,7 @@ const BasketPutModal: React.FC<React.PropsWithChildren<BasketPutModalProps>> =
     <FormModalTemplate title={BASKET_PUT_TITLE} open={open} onClose={onClose}>
       <BasketPutForm
         basketOptions={basketOptions}
-        batchDenom={batchDenom}
+        batchDenoms={batchDenoms}
         availableTradableAmount={availableTradableAmount}
         onClose={onClose}
         onSubmit={onSubmit}

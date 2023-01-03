@@ -70,7 +70,7 @@ export const basketPutForm = (): JSX.Element => (
   <BasketPutForm
     basketOptions={[{ label: 'NCT', value: 'eco.uC.NCT' }]}
     availableTradableAmount={1000}
-    batchDenom={'C01-20190101-20201010-02'}
+    batchDenoms={['C01-20190101-20201010-02']}
     onClose={() => null}
     onSubmit={async () => alert('submit')}
   />

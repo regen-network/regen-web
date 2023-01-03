@@ -22,7 +22,7 @@ import {
   HeroAction,
 } from '../../components/molecules';
 import { CreditClassCards } from '../../components/organisms';
-import { client as sanityClient } from '../../sanity';
+import { client as sanityClient } from '../../lib/clients/sanity';
 import { FeaturedProjects } from './Home.FeaturedProjects';
 import { useHomeStyles } from './Home.styles';
 

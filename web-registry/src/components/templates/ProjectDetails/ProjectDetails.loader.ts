@@ -12,7 +12,7 @@ import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllC
 import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 
-import { client as sanityClient } from '../../../sanity';
+import { client as sanityClient } from '../../../lib/clients/sanity';
 import { getIsOnChainId } from './ProjectDetails.utils';
 
 type LoaderType = {

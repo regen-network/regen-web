@@ -25,9 +25,9 @@ import { getAreaUnit, qudtUnit } from 'lib/rdf';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { useSdgByIriQuery } from '../../../generated/sanity-graphql';
+import { client } from '../../../lib/clients/sanity';
 import { getSanityImgSrc } from '../../../lib/imgSrc';
 import { getDisplayParty, getParty } from '../../../lib/transform';
-import { client } from '../../../sanity';
 import { ProjectTopLink } from '../../atoms';
 import { ProjectBatchTotals, ProjectPageMetadata } from '../../molecules';
 import { CreditBatches } from '../CreditBatches/CreditBatches';

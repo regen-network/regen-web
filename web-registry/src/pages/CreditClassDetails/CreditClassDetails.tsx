@@ -10,10 +10,10 @@ import {
 } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { useLedger } from 'ledger';
+import { client } from 'lib/clients/sanity';
 import { getMetadata } from 'lib/db/api/metadata-graph';
 import { queryClassIssuers, queryEcoClassInfo } from 'lib/ecocredit/api';
 import { onChainClassRegExp } from 'lib/ledger';
-import { client } from 'sanity';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';

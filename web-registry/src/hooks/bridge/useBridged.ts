@@ -2,8 +2,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { BridgedEcocredits } from 'types/ledger/ecocredit';
+import { client as sanityClient } from 'lib/clients/sanity';
 import { getBridgedEcocreditsForAccount } from 'lib/ecocredit/api';
-import { client as sanityClient } from 'sanity';
 
 interface Props {
   address?: string;

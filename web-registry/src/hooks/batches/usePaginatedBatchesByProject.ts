@@ -10,7 +10,7 @@ import { getAddDataToBatchesQuery } from 'lib/queries/react-query/ecocredit/getA
 import { getBatchesByProjectQuery } from 'lib/queries/react-query/ecocredit/getBatchesByProjectQuery/getBatchesByProjectQuery';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
-import { client as sanityClient } from '../../sanity';
+import { client as sanityClient } from '../../lib/clients/sanity';
 
 export const PAGINATED_BATCHES_BY_PROJECT_ROWS_PER_PAGE = 5;
 

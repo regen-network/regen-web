@@ -4,7 +4,7 @@ import { getEcologicalImpactByIriQuery } from 'lib/queries/react-query/sanity/ge
 
 import { Maybe } from '../../../../generated/graphql';
 import { EcologicalImpact } from '../../../../generated/sanity-graphql';
-import { client } from '../../../../sanity';
+import { client } from '../../../../lib/clients/sanity';
 
 interface InputProps {
   coBenefitsIris: Maybe<string | string[]> | undefined;

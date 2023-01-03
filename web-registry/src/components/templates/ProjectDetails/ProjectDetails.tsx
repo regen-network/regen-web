@@ -28,8 +28,8 @@ import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/
 import { usePaginatedBatchesByProject } from 'hooks/batches/usePaginatedBatchesByProject';
 
 import { useLedger } from '../../../ledger';
+import { client as sanityClient } from '../../../lib/clients/sanity';
 import { NotFoundPage } from '../../../pages/NotFound/NotFound';
-import { client as sanityClient } from '../../../sanity';
 import { GettingStartedResourcesSection } from '../../molecules';
 import { ProjectImpactSection, ProjectTopSection } from '../../organisms';
 import useGeojson from './hooks/useGeojson';

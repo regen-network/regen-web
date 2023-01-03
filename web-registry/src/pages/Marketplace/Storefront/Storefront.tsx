@@ -43,7 +43,7 @@ import { BuyCreditsModal, BuyCreditsValues } from 'components/organisms';
 import SellOrdersTable from 'components/organisms/SellOrdersTable/SellOrdersTable';
 import useMsgClient from 'hooks/useMsgClient';
 
-import { client as sanityClient } from '../../../sanity';
+import { client as sanityClient } from '../../../lib/clients/sanity';
 import useBuySellOrderSubmit from './hooks/useBuySellOrderSubmit';
 import useCancelSellOrderSubmit from './hooks/useCancelSellOrderSubmit';
 import { useCheckSellOrderAvailabilty } from './hooks/useCheckSellOrderAvailabilty';

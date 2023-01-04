@@ -12,10 +12,7 @@ import {
 } from 'web-components/lib/components/typography';
 import { formatNumber } from 'web-components/lib/utils/format';
 
-import {
-  useBasketDetailSetStore,
-  useBasketDetailStore,
-} from 'pages/BasketDetails/BasketDetails.context';
+import { useBasketDetailSetStore } from 'pages/BasketDetails/BasketDetails.context';
 
 import forestImg from '../../../assets/forest-token.png';
 import { getAccountUrl } from '../../../lib/block-explorer';

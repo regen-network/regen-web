@@ -2,6 +2,7 @@ import createFastContext from 'lib/context/createFastContext/createFastContext';
 
 const initialState = {
   isPutModalOpen: false,
+  creditBatchDenom: '',
 };
 
 export const {

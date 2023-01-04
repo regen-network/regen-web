@@ -8,8 +8,6 @@ import {
   useBasketDetailStore,
 } from 'pages/BasketDetails/BasketDetails.context';
 import useBasketPutSubmit from 'pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit';
-import { useFetchBaskets } from 'pages/Dashboard/MyEcocredits/hooks/useFetchBaskets';
-import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 import { useMsgClient } from 'hooks';
 import { BasketTokens } from 'hooks/useBasketTokens';
 
@@ -33,9 +31,6 @@ export const BasketOverviewModals = ({ basketPutData }: Props): JSX.Element => {
   const [, setTxModalTitle] = useState<string | undefined>();
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);
 
-  const { credits } = useFetchEcocredits();
-  const { baskets } = useFetchBaskets({ credits });
-
   const handleTxQueued = (): void => void 0;
   const handleTxDelivered = (): void => void 0;
   const handleError = (): void => void 0;
@@ -47,16 +42,21 @@ export const BasketOverviewModals = ({ basketPutData }: Props): JSX.Element => {
   );
   const accountAddress = wallet?.address;
 
-  const { basketOption, creditBatchDenoms, totalTradableCredits } =
-    basketPutData;
+  const {
+    basketOption,
+    basketInfo,
+    credit,
+    creditBatchDenoms,
+    totalTradableCredits,
+  } = basketPutData;
 
   const basketPutSubmit = useBasketPutSubmit({
     accountAddress,
-    baskets,
+    baskets: basketInfo ? [basketInfo] : [],
     basketPutOpen,
     basketPutTitle: PUT_BASKET_LABEL,
     basketTakeTitle: TAKE_BASKET_LABEL,
-    credits,
+    credits: [credit],
     setBasketPutOpen,
     setBasketTakeTokens,
     setCardItems,
@@ -74,6 +74,9 @@ export const BasketOverviewModals = ({ basketPutData }: Props): JSX.Element => {
         open={isPutModalOpen}
         onClose={() => setStore({ isPutModalOpen: false })}
         onSubmit={basketPutSubmit}
+        onBatchDenomChange={batchDenom =>
+          setStore({ creditBatchDenom: batchDenom })
+        }
       />
     </>
   );

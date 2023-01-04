@@ -1,6 +1,9 @@
 import React from 'react';
 
-import { BasketPutForm, BasketPutProps } from '../form/BasketPutForm';
+import {
+  BasketPutForm,
+  BasketPutProps,
+} from '../form/BasketPutForm/BasketPutForm';
 import { RegenModalProps } from '../modal';
 import { FormModalTemplate } from './FormModalTemplate';
 
@@ -16,6 +19,7 @@ const BasketPutModal: React.FC<React.PropsWithChildren<BasketPutModalProps>> =
     open,
     onClose,
     onSubmit,
+    onBatchDenomChange,
   }) => (
     <FormModalTemplate title={BASKET_PUT_TITLE} open={open} onClose={onClose}>
       <BasketPutForm
@@ -24,6 +28,7 @@ const BasketPutModal: React.FC<React.PropsWithChildren<BasketPutModalProps>> =
         availableTradableAmount={availableTradableAmount}
         onClose={onClose}
         onSubmit={onSubmit}
+        onBatchDenomChange={onBatchDenomChange}
       />
     </FormModalTemplate>
   );

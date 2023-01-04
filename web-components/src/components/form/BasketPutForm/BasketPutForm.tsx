@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 
-import AmountField from '../inputs/AmountField';
-import SelectTextField, { Option } from '../inputs/SelectTextField';
-import { requiredMessage, validateAmount } from '../inputs/validation';
-import { RegenModalProps } from '../modal';
-import Submit from './Submit';
+import AmountField from '../../inputs/AmountField';
+import SelectTextField, { Option } from '../../inputs/SelectTextField';
+import { requiredMessage, validateAmount } from '../../inputs/validation';
+import { RegenModalProps } from '../../modal';
+import Submit from '../Submit';
+import { BasketPutFormOnChange } from './BasketPutForm.OnChange';
 
 export interface BasketPutProps {
   basketOptions: Option[];
   batchDenoms: string[];
   availableTradableAmount: number;
   onSubmit: (values: FormValues) => Promise<void>;
+  onBatchDenomChange?: (batchDenom: string | undefined) => void;
 }
 
 interface FormProps extends BasketPutProps {
@@ -30,6 +32,7 @@ const BasketPutForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   availableTradableAmount,
   onClose,
   onSubmit,
+  onBatchDenomChange,
 }) => {
   const hasManyBatchDenoms = batchDenoms.length > 1;
   const hasOneBasketDenom = basketOptions.length === 1;
@@ -39,7 +42,7 @@ const BasketPutForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   }));
 
   const initialValues = {
-    batchDenom: undefined,
+    batchDenom: batchDenoms[0],
     basketDenom: hasOneBasketDenom ? basketOptions[0].value : undefined,
     amount: undefined,
   };
@@ -101,6 +104,7 @@ const BasketPutForm: React.FC<React.PropsWithChildren<FormProps>> = ({
             submitForm={submitForm}
             label="Put in basket"
           />
+          <BasketPutFormOnChange onBatchDenomChange={onBatchDenomChange} />
         </Form>
       )}
     </Formik>

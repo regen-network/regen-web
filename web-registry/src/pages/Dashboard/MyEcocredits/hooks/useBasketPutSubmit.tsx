@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import type { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
+import type { BasketInfo } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { MsgPut } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
 
 import type { FormValues as BasketPutFormValues } from 'web-components/lib/components/form/BasketPutForm';
@@ -21,7 +21,7 @@ import { PUT_HEADER } from '../MyEcocredits.constants';
 
 type Props = {
   accountAddress?: string;
-  baskets?: QueryBasketsResponse;
+  baskets?: BasketInfo[];
   basketPutOpen: number;
   basketPutTitle: string;
   credits: BatchInfoWithBalance[];
@@ -53,8 +53,8 @@ const useBasketPutSubmit = ({
   const basketPutSubmit = useCallback(
     async (values: BasketPutFormValues): Promise<void> => {
       const amount = values.amount?.toString();
-      const basket = baskets?.baskets.find(
-        b => b.basketDenom === values.basketDenom,
+      const basket = baskets?.find(
+        basketInfo => basketInfo.basketDenom === values.basketDenom,
       );
 
       track<'putInBasket2', PutInBasket2Event>('putInBasket2', {
@@ -140,7 +140,7 @@ const useBasketPutSubmit = ({
       accountAddress,
       basketPutOpen,
       basketPutTitle,
-      baskets?.baskets,
+      baskets,
       credits,
       setBasketPutOpen,
       setCardItems,

@@ -211,7 +211,7 @@ export const MyEcocredits = (): JSX.Element => {
 
   const basketPutSubmit = useBasketPutSubmit({
     accountAddress,
-    baskets,
+    baskets: baskets?.basketsInfo,
     basketPutOpen,
     basketPutTitle: BASKET_PUT_TITLE,
     basketTakeTitle: BASKET_TAKE_TITLE,

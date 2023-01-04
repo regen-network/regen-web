@@ -24,7 +24,7 @@ export const useProjects = ({ offset = 0, sort }: Props): ReturnType => {
       sort,
     });
 
-  const pagesCount = Math.floor((projectsCount ?? 0) / PROJECTS_PER_PAGE);
+  const pagesCount = Math.ceil((projectsCount ?? 0) / PROJECTS_PER_PAGE);
 
   return {
     projects: projectsWithOrderData,

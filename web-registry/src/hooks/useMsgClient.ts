@@ -5,7 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { ERRORS } from 'config/errors';
 
-import { useGlobalStore } from 'lib/context/globalContext';
+import { useGlobalSetStore } from 'lib/context/globalContext';
 import { BANK_BALANCE_KEY } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery.constants';
 
 import { useLedger } from '../ledger';
@@ -49,15 +49,14 @@ type MsgClientType = {
 };
 
 export default function useMsgClient(
-  handleTxQueued: () => void,
-  handleTxDelivered: (deliverTxResponse: DeliverTxResponse) => void,
-  handleError: () => void,
+  handleTxQueued?: () => void,
+  handleTxDelivered?: (deliverTxResponse: DeliverTxResponse) => void,
+  handleError?: () => void,
 ): MsgClientType {
   const { api, wallet } = useLedger();
   const [error, setError] = useState<string | undefined>();
-  const [, setGlobalStore] = useGlobalStore(
-    store => store['isWaitingForSigning'],
-  );
+  const setGlobalStore = useGlobalSetStore();
+
   const [deliverTxResponse, setDeliverTxResponse] = useState<
     DeliverTxResponse | undefined
   >();
@@ -108,7 +107,7 @@ export default function useMsgClient(
   const broadcast = useCallback(
     async (txBytes: Uint8Array): Promise<DeliverTxResponse | undefined> => {
       if (!api?.msgClient || !txBytes) return;
-      handleTxQueued();
+      handleTxQueued && handleTxQueued();
       const _deliverTxResponse = await api.msgClient.broadcast(txBytes);
       // The transaction succeeded iff code is 0.
       // TODO: this can give false positives. Some errors return code 0.
@@ -116,11 +115,14 @@ export default function useMsgClient(
         throw new Error(_deliverTxResponse.rawLog);
       } else {
         setDeliverTxResponse(_deliverTxResponse);
-        handleTxDelivered(_deliverTxResponse);
+        handleTxDelivered && handleTxDelivered(_deliverTxResponse);
+        setGlobalStore({
+          txSuccessfulModal: { txHash: _deliverTxResponse.transactionHash },
+        });
         return _deliverTxResponse;
       }
     },
-    [api?.msgClient, handleTxQueued, handleTxDelivered],
+    [api?.msgClient, handleTxQueued, handleTxDelivered, setGlobalStore],
   );
 
   const signAndBroadcast = useCallback(
@@ -138,7 +140,7 @@ export default function useMsgClient(
         }
       } catch (err) {
         if (closeForm) closeForm();
-        handleError();
+        handleError && handleError();
         assertIsError(err);
         setError(err.message);
         if (onError) onError(err);

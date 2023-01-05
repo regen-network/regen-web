@@ -47,6 +47,6 @@ export const normalizeEcocredits = ({
   return {
     ...(batch ?? EMPTY_BATCH_INFO),
     ...classProjectInfo,
-    ...(balance ?? EMPTY_BALANCE_INFO),
+    balance: { ...(balance ?? EMPTY_BALANCE_INFO) },
   };
 };

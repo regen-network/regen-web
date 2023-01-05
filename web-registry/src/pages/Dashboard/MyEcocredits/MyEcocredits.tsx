@@ -48,7 +48,9 @@ import { Portfolio } from 'components/organisms/Portfolio';
 import { useMsgClient } from 'hooks';
 import type { BasketTokens } from 'hooks/useBasketTokens';
 
-import useBasketPutSubmit from './hooks/useBasketPutSubmit';
+import useBasketPutSubmit, {
+  OnTxSuccessfulProps,
+} from './hooks/useBasketPutSubmit';
 import useBasketTakeSubmit from './hooks/useBasketTakeSubmit';
 import useCreateSellOrderSubmit from './hooks/useCreateSellOrderSubmit';
 import useCreditRetireSubmit from './hooks/useCreditRetireSubmit';
@@ -96,6 +98,17 @@ export const MyEcocredits = (): JSX.Element => {
   const navigate = useNavigate();
   const { track } = useTracker();
   const { marketplaceClient } = useLedger();
+
+  const onCloseBasketPutModal = (): void => setBasketPutOpen(-1);
+  const onPutTxSuccessful = ({
+    cardItems,
+    title,
+    cardTitle,
+  }: OnTxSuccessfulProps): void => {
+    setCardItems(cardItems);
+    setTxModalHeader(title);
+    setTxModalTitle(cardTitle);
+  };
 
   const handleTxQueued = (): void => {
     setIsProcessingModalOpen(true);
@@ -212,15 +225,11 @@ export const MyEcocredits = (): JSX.Element => {
   const basketPutSubmit = useBasketPutSubmit({
     accountAddress,
     baskets: baskets?.basketsInfo,
-    basketPutOpen,
     basketPutTitle: BASKET_PUT_TITLE,
     basketTakeTitle: BASKET_TAKE_TITLE,
-    credits,
-    setBasketPutOpen,
-    setBasketTakeTokens,
-    setCardItems,
-    setTxModalHeader,
-    setTxModalTitle,
+    credit: credits[basketPutOpen],
+    onBroadcast: onCloseBasketPutModal,
+    onTxSuccessful: onPutTxSuccessful,
     signAndBroadcast,
   });
 

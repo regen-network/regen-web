@@ -3,12 +3,13 @@ import React from 'react';
 import { BrokenLinkIcon } from '../icons/BrokenLinkIcon';
 import { Item, TxModal, TxModalProps } from './TxModal';
 
-interface Props extends TxModalProps {
+export interface TxErrorModalProps extends TxModalProps {
   error: string;
+  txError?: string;
   cardItems?: Item[];
 }
 
-const TxErrorModal: React.FC<React.PropsWithChildren<Props>> = ({
+const TxErrorModal: React.FC<React.PropsWithChildren<TxErrorModalProps>> = ({
   error,
   cardItems,
   title,

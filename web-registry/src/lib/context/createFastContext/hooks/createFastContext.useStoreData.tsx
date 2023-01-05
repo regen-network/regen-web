@@ -26,7 +26,9 @@ export function useStoreData<Store>({
 
   const set = useCallback((value: Partial<Store>) => {
     store.current = { ...store.current, ...value };
-    subscribers.current.forEach(callback => callback());
+    subscribers.current.forEach(callback => {
+      return callback();
+    });
   }, []);
 
   const subscribe = useCallback((callback: () => void) => {

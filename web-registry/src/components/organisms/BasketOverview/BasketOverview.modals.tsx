@@ -1,17 +1,20 @@
-import { useState } from 'react';
+import { ERRORS } from 'config/errors';
 
 import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
-import { Item } from 'web-components/lib/components/modal/TxModal';
+
+import { useGlobalSetStore } from 'lib/context/globalContext';
 
 import {
   useBasketDetailSetStore,
   useBasketDetailStore,
 } from 'pages/BasketDetails/BasketDetails.context';
-import useBasketPutSubmit from 'pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit';
+import useBasketPutSubmit, {
+  OnTxSuccessfulProps,
+} from 'pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit';
 import { useMsgClient } from 'hooks';
-import { BasketTokens } from 'hooks/useBasketTokens';
 
 import {
+  CLOSE_BUTTON_LABEL,
   PUT_BASKET_LABEL,
   TAKE_BASKET_LABEL,
 } from './BasketOverview.constants';
@@ -22,46 +25,62 @@ type Props = {
 };
 
 export const BasketOverviewModals = ({ basketPutData }: Props): JSX.Element => {
-  const setStore = useBasketDetailSetStore();
+  const setBasketDetailStore = useBasketDetailSetStore();
+  const setGlobalStore = useGlobalSetStore();
   const [isPutModalOpen] = useBasketDetailStore(store => store.isPutModalOpen);
 
-  const [, setCardItems] = useState<Item[] | undefined>();
-  const [, setBasketTakeTokens] = useState<BasketTokens | undefined>();
-  const [, setTxModalHeader] = useState<string | undefined>();
-  const [, setTxModalTitle] = useState<string | undefined>();
-  const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);
+  // Modals callbacks
+  const onClosePutModal = (): void =>
+    setBasketDetailStore({ isPutModalOpen: false });
 
-  const handleTxQueued = (): void => void 0;
-  const handleTxDelivered = (): void => void 0;
-  const handleError = (): void => void 0;
+  const onBroadcastPutModal = (): void => {
+    onClosePutModal();
+    setGlobalStore({ processingModal: { open: true } });
+  };
 
-  const { signAndBroadcast, wallet } = useMsgClient(
-    handleTxQueued,
-    handleTxDelivered,
-    handleError,
-  );
+  const onError = (error?: Error): void => {
+    setGlobalStore({
+      errorCode: ERRORS.DEFAULT,
+      errorModal: { description: String(error) },
+      processingModal: {
+        open: false,
+      },
+    });
+  };
+
+  const onTxSuccessful = ({
+    cardItems,
+    title,
+    cardTitle,
+  }: OnTxSuccessfulProps): void => {
+    setGlobalStore({
+      processingModal: {
+        open: false,
+      },
+      txSuccessfulModal: {
+        open: true,
+        cardItems,
+        title,
+        cardTitle,
+        buttonTitle: CLOSE_BUTTON_LABEL,
+      },
+    });
+  };
+
+  const { signAndBroadcast, wallet } = useMsgClient();
   const accountAddress = wallet?.address;
 
-  const {
-    basketOption,
-    basketInfo,
-    credit,
-    creditBatchDenoms,
-    totalTradableCredits,
-  } = basketPutData;
+  const { basketOption, basketInfo, credit, creditBatchDenoms } = basketPutData;
 
   const basketPutSubmit = useBasketPutSubmit({
     accountAddress,
     baskets: basketInfo ? [basketInfo] : [],
-    basketPutOpen,
     basketPutTitle: PUT_BASKET_LABEL,
     basketTakeTitle: TAKE_BASKET_LABEL,
-    credits: [credit],
-    setBasketPutOpen,
-    setBasketTakeTokens,
-    setCardItems,
-    setTxModalHeader,
-    setTxModalTitle,
+    credit,
+    onBroadcast: onBroadcastPutModal,
+    onTxSuccessful,
+    onErrorCallback: onError,
     signAndBroadcast,
   });
 
@@ -69,13 +88,13 @@ export const BasketOverviewModals = ({ basketPutData }: Props): JSX.Element => {
     <>
       <BasketPutModal
         basketOptions={[basketOption]}
-        availableTradableAmount={totalTradableCredits}
+        availableTradableAmount={Number(credit.balance?.tradableAmount ?? '0')}
         batchDenoms={creditBatchDenoms}
         open={isPutModalOpen}
-        onClose={() => setStore({ isPutModalOpen: false })}
+        onClose={onClosePutModal}
         onSubmit={basketPutSubmit}
         onBatchDenomChange={batchDenom =>
-          setStore({ creditBatchDenom: batchDenom })
+          setBasketDetailStore({ creditBatchDenom: batchDenom })
         }
       />
     </>

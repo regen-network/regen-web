@@ -26,7 +26,7 @@ export const RegistryLayoutTxErrorModal = (): JSX.Element => {
       txError,
       txHash,
     },
-  ] = useGlobalStore(store => store['errorModal']);
+  ] = useGlobalStore(store => store.errorModal);
   const errorEnum = findErrorByCodeEnum({ errorCode });
   const error = errorsMapping[errorEnum];
   const ErrorIcon = error.icon;
@@ -36,14 +36,14 @@ export const RegistryLayoutTxErrorModal = (): JSX.Element => {
   return (
     <>
       <TxErrorModal
-        error={txError}
+        error={txError ?? ''}
         open={!!errorCode}
         onClose={resetTxModalError}
         txHash={txHash ?? ''}
         txHashUrl={txHashUrl}
         title={findFirstNonEmptyString([title, error.title])}
         description={findFirstNonEmptyString([description, error.description])}
-        cardTitle={cardTitle}
+        cardTitle={cardTitle ?? ''}
         linkComponent={Link}
         onButtonClick={resetTxModalError}
         buttonTitle={findFirstNonEmptyString([

@@ -14,6 +14,7 @@ import { useWallet } from 'lib/wallet/wallet';
 import { ProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders';
 import { sortProjects } from 'pages/Projects/utils/sortProjects';
 
+import { useLastRandomProjects } from './useLastRandomProjects';
 import { selectProjects } from './useProjectsWithOrders.utils';
 
 export interface ProjectsWithOrdersProps {
@@ -83,8 +84,12 @@ export function useProjectsWithOrders({
       random,
       projectId,
     }) ?? [];
+  const lastRandomProjects = useLastRandomProjects({
+    random,
+    selectedProjects,
+  });
   const projectsWithOrderData = normalizeProjectsWithOrderData({
-    projects: selectedProjects,
+    projects: lastRandomProjects ?? selectedProjects,
     sellOrders,
     geckoPrices: {
       regenPrice: simplePrice?.data?.regen?.usd,

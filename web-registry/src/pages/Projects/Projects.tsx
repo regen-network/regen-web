@@ -12,7 +12,7 @@ import { Body, Subtitle } from 'web-components/lib/components/typography';
 import { pxToRem } from 'web-components/lib/theme/muiTheme';
 
 import { useAllProjectsPageQuery } from 'generated/sanity-graphql';
-import { client as sanityClient } from 'sanity';
+import { client as sanityClient } from 'lib/clients/sanity';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { GettingStartedResourcesSection } from 'components/molecules';

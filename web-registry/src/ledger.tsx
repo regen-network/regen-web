@@ -10,7 +10,7 @@ import { useInitClient } from 'lib/clients/hooks/useInitClient';
 import { EcocreditQueryClient } from 'lib/ecocredit/api';
 import { MarketplaceQueryClient } from 'lib/ecocredit/marketplace/marketplace.types';
 
-import { expLedger, ledgerExpRPCUri, ledgerRPCUri } from './lib/ledger';
+import { ledgerExpRPCUri, ledgerRPCUri } from './lib/ledger';
 import { useWallet, Wallet } from './lib/wallet/wallet';
 
 interface ContextValue {
@@ -99,15 +99,9 @@ export const LedgerProvider: React.FC<React.PropsWithChildren<unknown>> = ({
 };
 
 export const useLedger = (options?: ConnectParams): ContextValue => {
-  const [expApi, setExpApi] = useState<RegenApi | undefined>(undefined);
-  const [expLoading, setExpLoading] = useState<boolean>(false);
-  const [expError, setExpError] = useState<unknown>(undefined);
   const context = React.useContext(LedgerContext);
   const { wallet } = useWallet();
-  const forceExp =
-    !expLedger && // No need to get exp ledger api if it's already used as the primary one
-    options?.forceExp;
-  const api = forceExp ? expApi : context.api;
+  const api = context.api;
 
   const ecocreditClient = useInitClient<EcocreditQueryClient>({
     ClientImpl: EcocreditQueryClientImpl,
@@ -127,35 +121,14 @@ export const useLedger = (options?: ConnectParams): ContextValue => {
     api,
   });
 
-  useEffect(() => {
-    if (forceExp && !expApi && !expLoading && !expError) {
-      getApi(
-        setExpApi,
-        setExpLoading,
-        setExpError,
-        wallet?.offlineSigner,
-        forceExp,
-      );
-    }
-  }, [
-    expApi,
-    expLoading,
-    expError,
-    setExpApi,
-    setExpLoading,
-    setExpError,
-    wallet?.offlineSigner,
-    forceExp,
-  ]);
-
   return {
-    api: forceExp ? expApi : context.api,
+    api,
     ecocreditClient,
     marketplaceClient,
     basketClient,
     bankClient,
-    loading: forceExp ? expLoading : context.loading,
-    error: forceExp ? expError : context.error,
+    loading: context.loading,
+    error: context.error,
     wallet,
   };
 };

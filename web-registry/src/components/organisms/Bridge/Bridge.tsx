@@ -9,8 +9,8 @@ import { getLinkTarget } from 'web-components/lib/utils/linkTarget';
 
 import { useAllBridgePageQuery } from 'generated/sanity-graphql';
 import { getBtnHref } from 'lib/button';
+import { client } from 'lib/clients/sanity';
 import { getSanityImgSrc } from 'lib/imgSrc';
-import { client } from 'sanity';
 
 import { Link } from 'components/atoms';
 

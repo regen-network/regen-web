@@ -21,7 +21,7 @@ import {
 import { HeroAction, HeroTitle } from '../../components/molecules';
 import { StepCardsWithDescription } from '../../components/organisms';
 import { useAllCreateMethodologyPageQuery } from '../../generated/sanity-graphql';
-import { client } from '../../sanity';
+import { client } from '../../lib/clients/sanity';
 
 const useStyles = makeStyles()((theme: Theme) => ({
   root: {

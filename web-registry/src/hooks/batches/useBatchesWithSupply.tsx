@@ -7,7 +7,7 @@ import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { addDataToBatches } from 'lib/ecocredit/api';
 
-import { client as sanityClient } from '../../sanity';
+import { client as sanityClient } from '../../lib/clients/sanity';
 
 type Props = {
   batches?: BatchInfo[];

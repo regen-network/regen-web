@@ -4,8 +4,10 @@ import shuffle from 'lodash/shuffle';
 
 import { ProjectsWithOrdersProps } from './useProjectsWithOrders';
 
-const isOtherProject = (project: ProjectInfo, projectId: string): boolean =>
-  project.id !== projectId;
+const isOtherProject = (
+  project: ProjectInfo,
+  skippedProjectId: string,
+): boolean => project.id !== skippedProjectId;
 
 const hasMetadata = (project: ProjectInfo): boolean => !!project.metadata;
 
@@ -19,13 +21,14 @@ export function selectProjects({
   sellOrders,
   metadata = false,
   random = false,
-  projectId,
+  skippedProjectId,
 }: SelectProjectsParams): ProjectInfo[] | undefined {
   if (!projects || !sellOrders) return;
 
   let _projects;
 
-  if (projectId) _projects = projects.filter(p => isOtherProject(p, projectId));
+  if (skippedProjectId)
+    _projects = projects.filter(p => isOtherProject(p, skippedProjectId));
   else _projects = [...projects];
 
   if (random) return shuffle(_projects).filter(hasMetadata);

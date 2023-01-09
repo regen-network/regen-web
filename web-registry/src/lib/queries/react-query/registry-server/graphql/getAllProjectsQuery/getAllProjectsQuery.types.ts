@@ -3,7 +3,7 @@ import { QueryObserverOptions } from '@tanstack/react-query';
 
 import { AllProjectsQuery } from 'generated/graphql';
 
-import { ReactQueryBuilderResponse } from '../../types/react-query.types';
+import { ReactQueryBuilderResponse } from '../../../types/react-query.types';
 
 export type ReactQueryGetAllProjectsResponse =
   QueryObserverOptions<AllProjectsQuery>;

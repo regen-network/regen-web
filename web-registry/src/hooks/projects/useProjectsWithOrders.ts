@@ -1,3 +1,4 @@
+import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';
@@ -5,6 +6,7 @@ import { GECKO_EEUR_ID, GECKO_USDC_ID } from 'lib/coingecko';
 import { normalizeProjectsWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
+import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getProjectsByClassQuery } from 'lib/queries/react-query/ecocredit/getProjectsByClass/getProjectsByClassQuery';
 import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
@@ -22,7 +24,8 @@ export interface ProjectsWithOrdersProps {
   offset?: number;
   metadata?: boolean; // to discard projects without metadata prop
   random?: boolean; // to shuffle the projects (along with limit allows a random subselection)
-  projectId?: string; // to discard an specific project
+  projectId?: string; // to filter by project
+  skippedProjectId?: string; // to discard a specific project
   classId?: string; // to filter by class
   sort?: string;
 }
@@ -35,9 +38,10 @@ export function useProjectsWithOrders({
   offset = 0,
   metadata = false,
   random = false,
-  projectId,
+  skippedProjectId,
   classId,
   sort = '',
+  projectId,
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
   const { ecocreditClient, marketplaceClient } = useLedger();
 
@@ -46,9 +50,20 @@ export function useProjectsWithOrders({
 
   /* Main Queries */
 
+  const { data: projectData, isFetching: isLoadingProject } = useQuery(
+    getProjectQuery({
+      enabled: !!projectId && !!ecocreditClient,
+      client: ecocreditClient,
+      request: { projectId },
+    }),
+  );
+  const projectArray = projectData?.project
+    ? [projectData?.project]
+    : undefined;
+
   const { data: projectsData, isFetching: isLoadingProjects } = useQuery(
     getProjectsQuery({
-      enabled: !classId && !!ecocreditClient,
+      enabled: !classId && !projectId && !!ecocreditClient,
       client: ecocreditClient,
       request: {},
     }),
@@ -75,14 +90,22 @@ export function useProjectsWithOrders({
 
   /* Normalization/Filtering/Sorting */
 
-  const projects = projectsData?.projects ?? projectsByClassData?.projects;
+  let projects: ProjectInfo[] | undefined;
+  if (projectId) {
+    projects = projectArray;
+  } else if (classId) {
+    projects = projectsByClassData?.projects;
+  } else {
+    projects = projectsData?.projects;
+  }
+
   const selectedProjects =
     selectProjects({
       projects,
       sellOrders,
       metadata,
       random,
-      projectId,
+      skippedProjectId,
     }) ?? [];
   const lastRandomProjects = useLastRandomProjects({
     random,
@@ -122,6 +145,6 @@ export function useProjectsWithOrders({
   return {
     projectsWithOrderData: projectsWithMetadata,
     projectsCount: projects?.length,
-    loading: isLoadingProjects || isLoadingProjectsByClass,
+    loading: isLoadingProjects || isLoadingProjectsByClass || isLoadingProject,
   };
 }

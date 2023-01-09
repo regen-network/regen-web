@@ -2,19 +2,22 @@ import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Skeleton, useTheme } from '@mui/material';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
-import { QueryProjectResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { useQuery } from '@tanstack/react-query';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 
-import {
-  useAllCreditClassQuery,
-  useAllProjectPageQuery,
-} from 'generated/sanity-graphql';
+import { graphqlClient } from 'lib/clients/graphqlClient';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
+import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
+import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
+import { getProjectByHandleQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByHandleQuery/getProjectByHandleQuery';
+import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
+import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
+import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
@@ -24,15 +27,9 @@ import { useResetErrorBanner } from 'pages/Marketplace/Storefront/hooks/useReset
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { usePaginatedBatchesByProject } from 'hooks/batches/usePaginatedBatchesByProject';
 
-import {
-  useProjectByHandleQuery,
-  useProjectByOnChainIdQuery,
-} from '../../../generated/graphql';
-import useEcocreditQuery from '../../../hooks/useEcocreditQuery';
-import useQueryMetadataGraph from '../../../hooks/useQueryMetadataGraph';
 import { useLedger } from '../../../ledger';
+import { client as sanityClient } from '../../../lib/clients/sanity';
 import { NotFoundPage } from '../../../pages/NotFound/NotFound';
-import { client as sanityClient } from '../../../sanity';
 import { GettingStartedResourcesSection } from '../../molecules';
 import { ProjectImpactSection, ProjectTopSection } from '../../organisms';
 import useGeojson from './hooks/useGeojson';
@@ -45,20 +42,23 @@ import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProje
 import { ProjectDocumentation } from './ProjectDetails.ProjectDocumentation';
 import { ProjectTimeline } from './ProjectDetails.ProjectTimeline';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
+import { getIsOnChainId } from './ProjectDetails.utils';
 
 function ProjectDetails(): JSX.Element {
   const theme = useTheme();
   const { projectId } = useParams();
-  const { wallet } = useLedger();
+  const { wallet, ecocreditClient } = useLedger();
 
-  const { data: sanityProjectPageData } = useAllProjectPageQuery({
-    client: sanityClient,
-  });
+  const { data: sanityProjectPageData } = useQuery(
+    getAllProjectPageQuery({ sanityClient, enabled: !!sanityClient }),
+  );
+
   const gettingStartedResourcesSection =
     sanityProjectPageData?.allProjectPage?.[0]?.gettingStartedResourcesSection;
-  const { data: sanityCreditClassData } = useAllCreditClassQuery({
-    client: sanityClient,
-  });
+
+  const { data: sanityCreditClassData } = useQuery(
+    getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+  );
 
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
@@ -67,56 +67,69 @@ function ProjectDetails(): JSX.Element {
   useResetErrorBanner({ displayErrorBanner, setDisplayErrorBanner });
 
   // Tx client
-  const { api } = useLedger({ forceExp: true });
+  const { api } = useLedger();
   let txClient: ServiceClientImpl | undefined;
   if (api) {
     txClient = new ServiceClientImpl(api.queryClient);
   }
 
   // first, check if projectId is handle or onChainId
-  const isOnChainId =
-    !!projectId && /([A-Z]{1}[\d]+)([-])([\d{3,}])\w+/.test(projectId);
+  const isOnChainId = getIsOnChainId(projectId);
 
   // if projectId is handle, query project by handle
-  const { data: dataByHandle, loading: loadingDataByHandle } =
-    useProjectByHandleQuery({
-      skip: !projectId,
-      variables: { handle: projectId as string },
-    });
+  const { data: projectByHandle, isInitialLoading: loadingProjectByHandle } =
+    useQuery(
+      getProjectByHandleQuery({
+        client: graphqlClient,
+        enabled: !!projectId && !isOnChainId,
+        handle: projectId as string,
+      }),
+    );
 
-  const onChainProjectId = isOnChainId
-    ? projectId
-    : dataByHandle?.projectByHandle?.onChainId ?? undefined;
-
+  const projectByHandleOnChainId =
+    projectByHandle?.data.projectByHandle?.onChainId ?? undefined;
+  const onChainProjectId = isOnChainId ? projectId : projectByHandleOnChainId;
   // else fetch project by onChainId
-  const { data: dataByOnChainId, loading } = useProjectByOnChainIdQuery({
-    skip: !isOnChainId,
-    variables: { onChainId: onChainProjectId as string },
-  });
+  const {
+    data: projectByOnChainId,
+    isInitialLoading: loadingProjectByOnChainId,
+  } = useQuery(
+    getProjectByOnChainIdQuery({
+      client: graphqlClient,
+      enabled: !!onChainProjectId,
+      onChainId: onChainProjectId as string,
+    }),
+  );
 
-  const { data: projectResponse } = useEcocreditQuery<QueryProjectResponse>({
-    query: 'project',
-    params: { projectId },
-  });
+  const { data: projectResponse } = useQuery(
+    getProjectQuery({
+      request: { projectId },
+      client: ecocreditClient,
+      enabled: !!ecocreditClient && !!projectId,
+    }),
+  );
+
   const onChainProject = projectResponse?.project;
 
   // TODO: when all projects are on-chain, just use dataByOnChainId, (or leave out postgres altogether)
   const data = isOnChainId
-    ? { ...dataByOnChainId, admin: onChainProject?.admin }
-    : dataByHandle;
+    ? { ...projectByOnChainId?.data, admin: onChainProject?.admin }
+    : projectByHandle?.data;
   const project = isOnChainId
-    ? dataByOnChainId?.projectByOnChainId
-    : dataByHandle?.projectByHandle;
+    ? projectByOnChainId?.data.projectByOnChainId
+    : projectByHandle?.data.projectByHandle;
 
   // Legacy projects use project.metadata. On-chain projects use IRI resolver.
   const projectTableMetadata: ProjectMetadataLD = project?.metadata;
-  const iriResolvedMetadata = useQueryMetadataGraph(onChainProject?.metadata);
-  const metadata = iriResolvedMetadata ?? projectTableMetadata;
+  const iriResolvedMetadata = useQuery(
+    getMetadataQuery({ iri: onChainProject?.metadata }),
+  );
+  const metadata = iriResolvedMetadata.data ?? projectTableMetadata;
 
   const managementActions =
     metadata?.['regen:landManagementActions']?.['@list'];
 
-  const { batchesWithSupply, setPaginationParams } =
+  const { batchesWithSupply, setPaginationParams, paginationParams } =
     usePaginatedBatchesByProject({ projectId: String(onChainProjectId) });
   const { totals: batchesTotal } = getBatchesTotal(batchesWithSupply ?? []);
 
@@ -144,7 +157,8 @@ function ProjectDetails(): JSX.Element {
   });
   const mediaData = useMedia({ metadata, geojson });
   const impactData = useImpact({ coBenefitsIris, primaryImpactIRI });
-  const isLoading = loading || loadingDataByHandle;
+
+  const isLoading = loadingProjectByOnChainId || loadingProjectByHandle;
 
   const {
     issuanceModalData,
@@ -153,13 +167,8 @@ function ProjectDetails(): JSX.Element {
     viewOnLedger,
   } = useIssuanceModal(data);
 
-  const projects = useMemo(
-    () => (onChainProject ? [onChainProject] : undefined),
-    [onChainProject],
-  );
-
   const { isBuyFlowDisabled, projectsWithOrderData } = useBuySellOrderData({
-    projects,
+    projectId: onChainProjectId,
   });
 
   const { credits, isSellFlowDisabled } = useCreateSellOrderData({
@@ -226,6 +235,7 @@ function ProjectDetails(): JSX.Element {
           batches: batchesWithSupply,
           totals: batchesTotal,
         }}
+        paginationParams={paginationParams}
         setPaginationParams={setPaginationParams}
         geojson={geojson}
         isGISFile={isGISFile}

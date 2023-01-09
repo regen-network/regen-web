@@ -11,12 +11,9 @@ export const getAddDataToBatchesQuery = ({
   reactQueryClient,
   ...params
 }: ReactQueryAddDataToBatchesParams): ReactQueryAddDataToBatchesResponse => ({
-  queryKey: batches && [
-    'addDataToBatches',
-    batches.map(batch => batch.denom).join(','),
-  ],
+  queryKey: ['addDataToBatches', batches?.map(batch => batch.denom).join(',')],
   queryFn: async () => {
-    if (!batches) return;
+    if (!batches) return null;
 
     const batchesWithSupply = await addDataToBatches({
       batches,

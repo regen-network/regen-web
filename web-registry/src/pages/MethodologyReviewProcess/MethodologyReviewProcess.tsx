@@ -18,7 +18,7 @@ import {
   ReviewProcessInfo,
 } from '../../components/molecules';
 import { useAllMethodologyReviewProcessPageQuery } from '../../generated/sanity-graphql';
-import { client } from '../../sanity';
+import { client } from '../../lib/clients/sanity';
 
 const useStyles = makeStyles()(theme => ({
   root: {

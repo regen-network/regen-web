@@ -15,3 +15,6 @@ export const findSanityCreditClass = ({
 
   return creditClass;
 };
+
+export const getIsOnChainId = (projectId?: string): boolean =>
+  !!projectId && /([A-Z]{1}[\d]+)([-])([\d{3,}])\w+/.test(projectId);

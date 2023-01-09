@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 
 import { useAllCreditClassesQuery } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
+import { client } from 'lib/clients/sanity';
 import { queryClassIssuers } from 'lib/ecocredit/api';
 import { useWallet } from 'lib/wallet/wallet';
-import { client } from 'sanity';
 
 import useQueryListClassesWithMetadata from 'hooks/useQueryListClassesWithMetadata';
 

@@ -13,8 +13,8 @@ import {
   ResourcesSection,
 } from '../../components/organisms';
 import { useAllMethodologyQuery } from '../../generated/sanity-graphql';
+import { client } from '../../lib/clients/sanity';
 import mock from '../../mocks/mock.json';
-import { client } from '../../sanity';
 
 const useStyles = makeStyles()((theme: Theme) => ({
   root: {

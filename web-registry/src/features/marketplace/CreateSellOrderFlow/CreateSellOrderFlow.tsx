@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+import { useQuery } from '@tanstack/react-query';
 
 import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
@@ -13,7 +13,9 @@ import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccess
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
+import { useLedger } from 'ledger';
 import { getHashUrl } from 'lib/block-explorer';
+import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 
 import useCreateSellOrderSubmit from 'pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit';
 import { CREATE_SELL_ORDER_TITLE } from 'pages/Dashboard/MyEcocredits/MyEcocredits.constants';
@@ -23,7 +25,6 @@ import {
 } from 'pages/Dashboard/MyEcocredits/MyEcocredits.utils';
 import { Link } from 'components/atoms';
 import { useMsgClient } from 'hooks';
-import useMarketplaceQuery from 'hooks/useMarketplaceQuery';
 
 type Props = {
   isFlowStarted: boolean;
@@ -42,6 +43,7 @@ export const CreateSellOrderFlow = ({
   const [txButtonTitle, setTxButtonTitle] = useState<string>();
   const [txModalHeader, setTxModalHeader] = useState<string>();
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
+  const { marketplaceClient } = useLedger();
   const navigate = useNavigate();
 
   const closeCreateModal = (): void => {
@@ -111,14 +113,15 @@ export const CreateSellOrderFlow = ({
     onTxBroadcast,
   });
 
-  const allowedDenomsResponse = useMarketplaceQuery<QueryAllowedDenomsResponse>(
-    {
-      query: 'allowedDenoms',
-      params: {},
-    },
+  const { data: allowedDenomsData } = useQuery(
+    getAllowedDenomQuery({
+      client: marketplaceClient,
+      enabled: !!marketplaceClient,
+    }),
   );
+
   const allowedDenomOptions = getDenomAllowedOptions({
-    allowedDenoms: allowedDenomsResponse?.data?.allowedDenoms,
+    allowedDenoms: allowedDenomsData?.allowedDenoms,
   });
 
   return (

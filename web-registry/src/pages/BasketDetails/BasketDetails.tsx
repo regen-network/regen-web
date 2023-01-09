@@ -1,6 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
+import { BastketDetailsActionsBar } from 'components/organisms/BastketDetailsActionsBar/BastketDetailsActionsBar';
+
 import {
   BasketEcocreditsTable,
   BasketOverview,
@@ -20,6 +22,7 @@ const BasketDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
           <BasketEcocreditsTable batches={data.creditBatches} />
         </BasketDetailsSectionLayout>
       )}
+      <BastketDetailsActionsBar />
     </>
   );
 };

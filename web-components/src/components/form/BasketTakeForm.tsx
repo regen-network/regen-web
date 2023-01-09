@@ -59,7 +59,7 @@ interface CreditTakeFormValues extends MetaRetireFormValues {
 }
 
 export interface BasketTakeProps extends BottomCreditRetireFieldsProps {
-  basket: BasketInfo;
+  basket?: BasketInfo;
   basketDisplayDenom: string;
   accountAddress: string;
   balance: number;
@@ -84,7 +84,7 @@ const BasketTakeForm: React.FC<React.PropsWithChildren<FormProps>> = ({
 
   const initialValues = {
     amount: 0,
-    retireOnTake: !basket.disableAutoRetire,
+    retireOnTake: !basket?.disableAutoRetire,
     note: '',
     country: 'US',
     stateProvince: '',
@@ -120,8 +120,8 @@ const BasketTakeForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   const submitHandler = async (values: CreditTakeFormValues): Promise<void> => {
     const msgTake: MsgTakeValues = {
       owner: accountAddress,
-      basketDenom: basket.basketDenom,
-      amount: (values.amount * Math.pow(10, basket.exponent)).toString(),
+      basketDenom: basket?.basketDenom ?? '',
+      amount: (values.amount * Math.pow(10, basket?.exponent ?? 0)).toString(),
       retireOnTake: !!values.retireOnTake,
       retirementJurisdiction: values.retirementJurisdiction,
       retirementNote: values?.note,
@@ -149,12 +149,12 @@ const BasketTakeForm: React.FC<React.PropsWithChildren<FormProps>> = ({
               component={CheckboxLabel}
               type="checkbox"
               name="retireOnTake"
-              disabled={!basket.disableAutoRetire}
+              disabled={!basket?.disableAutoRetire}
               className={styles.checkboxLabel}
               label={
                 <Subtitle display="flex" size="lg" color="primary.contrastText">
                   Retire credits upon transfer
-                  {values.retireOnTake && !basket.disableAutoRetire && (
+                  {values.retireOnTake && !basket?.disableAutoRetire && (
                     <InfoTooltip
                       title={RETIRED_UPON_TAKE_TOOLTIP}
                       arrow

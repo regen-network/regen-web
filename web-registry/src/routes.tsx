@@ -119,7 +119,13 @@ export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
           queryClient: reactQueryClient,
         })}
       />
-      <Route path="project/:projectId" element={<Project />} />
+      <Route
+        path="project/:projectId"
+        element={<Project />}
+        loader={projectDetailsLoader({
+          queryClient: reactQueryClient,
+        })}
+      />
       <Route
         path="post-purchase/:projectId/:walletId/:name"
         element={<PostPurchase />}
@@ -141,7 +147,6 @@ export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
           path="credit-batches"
           element={<KeplrRoute component={MyCreditBatches} />}
         />
-<<<<<<< HEAD
         <Route path="bridge" element={<KeplrRoute component={MyBridge} />}>
           <Route index element={<MyBridgableEcocreditsTable />} />
           <Route path="bridgable" element={<MyBridgableEcocreditsTable />} />
@@ -182,20 +187,6 @@ export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
       />
       <Route path="project-pages">
         <Route path=":projectId" element={<ProjectCreate />}>
-=======
-        <Route
-          path="project/:projectId"
-          element={<Project />}
-          loader={projectDetailsLoader({
-            queryClient: reactQueryClient,
-          })}
-        />
-        <Route
-          path="post-purchase/:projectId/:walletId/:name"
-          element={<PostPurchase />}
-        />
-        <Route path="ecocredits" element={<KeplrRoute component={Dashboard} />}>
->>>>>>> ace953c3 (perf: use react query on project page (#1689))
           <Route
             path="choose-credit-class"
             element={<KeplrRoute component={ChooseCreditClassPage} />}

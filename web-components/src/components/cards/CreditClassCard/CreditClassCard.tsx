@@ -2,7 +2,7 @@ import { Box, Card, CardContent, CardMedia, SxProps } from '@mui/material';
 
 import { Theme } from '../../../theme/muiTheme';
 import { parseText } from '../../../utils/textParser';
-import { Image, OptimizeImageProps } from '../../image';
+import { OptimizeImageProps } from '../../image';
 import { Body, Subtitle, Title } from '../../typography';
 import { useCreditClassCardStyles } from './CreditClassCard.styles';
 
@@ -40,17 +40,7 @@ const CreditClassCard = ({
           borderRadius: '10px',
         }}
       >
-        <CardMedia
-          component={(): JSX.Element => (
-            <Image
-              backgroundImage
-              src={imgSrc}
-              imageStorageBaseUrl={imageStorageBaseUrl}
-              apiServerUrl={apiServerUrl}
-              className={classes.image}
-            />
-          )}
-        />
+        <CardMedia image={imgSrc || ''} className={classes.image} />
         <CardContent>
           <Subtitle
             size="xs"

@@ -18,7 +18,7 @@ import {
 import { MoreProjectsSection } from '../../components/organisms';
 import { useMoreProjectsQuery } from '../../generated/graphql';
 import { useAllBuyersPageQuery } from '../../generated/sanity-graphql';
-import { client } from '../../sanity';
+import { client } from '../../lib/clients/sanity';
 
 const useStyles = makeStyles()(theme => ({
   heroMain: {

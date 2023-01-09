@@ -9,7 +9,7 @@ export default function useMoreProjects(
   const { projectsWithOrderData } = useProjectsWithOrders({
     limit: PROJECTS_LIMIT,
     random: true,
-    projectId,
+    skippedProjectId: projectId,
   });
 
   return projectsWithOrderData;

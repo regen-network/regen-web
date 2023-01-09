@@ -3,7 +3,6 @@ import type { BasketInfo } from '@regen-network/api/lib/generated/regen/ecocredi
 import { MsgPut } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
 
 import type { FormValues as BasketPutFormValues } from 'web-components/lib/components/form/BasketPutForm/BasketPutForm';
-import type { Item } from 'web-components/lib/components/modal/TxModal';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import {
@@ -16,19 +15,13 @@ import { useTracker } from 'lib/tracker/useTracker';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import { PUT_HEADER } from '../MyEcocredits.constants';
-
-export interface OnTxSuccessfulProps {
-  cardItems: Item[];
-  title: string;
-  cardTitle: string;
-}
+import { OnTxSuccessfulProps } from '../MyEcocredits.types';
 
 type Props = {
   accountAddress?: string;
   baskets?: BasketInfo[];
   basketPutTitle: string;
   credit: BatchInfoWithBalance;
-  basketTakeTitle: string;
   signAndBroadcast: SignAndBroadcastType;
   onBroadcast: () => void;
   onErrorCallback?: (error?: Error) => void;

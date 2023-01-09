@@ -48,9 +48,7 @@ import { Portfolio } from 'components/organisms/Portfolio';
 import { useMsgClient } from 'hooks';
 import type { BasketTokens } from 'hooks/useBasketTokens';
 
-import useBasketPutSubmit, {
-  OnTxSuccessfulProps,
-} from './hooks/useBasketPutSubmit';
+import useBasketPutSubmit from './hooks/useBasketPutSubmit';
 import useBasketTakeSubmit from './hooks/useBasketTakeSubmit';
 import useCreateSellOrderSubmit from './hooks/useCreateSellOrderSubmit';
 import useCreditRetireSubmit from './hooks/useCreditRetireSubmit';
@@ -66,6 +64,7 @@ import {
   CREATE_SELL_ORDER_TITLE,
   ERROR_BUTTON,
 } from './MyEcocredits.constants';
+import { OnTxSuccessfulProps } from './MyEcocredits.types';
 import {
   getAvailableAmountByBatch,
   getDenomAllowedOptions,
@@ -100,7 +99,7 @@ export const MyEcocredits = (): JSX.Element => {
   const { marketplaceClient } = useLedger();
 
   const onCloseBasketPutModal = (): void => setBasketPutOpen(-1);
-  const onPutTxSuccessful = ({
+  const onTxSuccessful = ({
     cardItems,
     title,
     cardTitle,
@@ -109,6 +108,7 @@ export const MyEcocredits = (): JSX.Element => {
     setTxModalHeader(title);
     setTxModalTitle(cardTitle);
   };
+  const onTakeBroadcast = (): void => setBasketTakeTokens(undefined);
 
   const handleTxQueued = (): void => {
     setIsProcessingModalOpen(true);
@@ -202,12 +202,10 @@ export const MyEcocredits = (): JSX.Element => {
   const basketTakeSubmit = useBasketTakeSubmit({
     accountAddress,
     basketTakeTitle: BASKET_TAKE_TITLE,
-    baskets,
-    setBasketTakeTokens,
-    setCardItems,
-    setTxModalTitle,
-    setTxModalHeader,
+    baskets: baskets?.basketsInfo,
     signAndBroadcast,
+    onTxSuccessful,
+    onBroadcast: onTakeBroadcast,
   });
 
   const creditSendSubmit = useCreditSendSubmit({
@@ -226,10 +224,9 @@ export const MyEcocredits = (): JSX.Element => {
     accountAddress,
     baskets: baskets?.basketsInfo,
     basketPutTitle: BASKET_PUT_TITLE,
-    basketTakeTitle: BASKET_TAKE_TITLE,
     credit: credits[basketPutOpen],
     onBroadcast: onCloseBasketPutModal,
-    onTxSuccessful: onPutTxSuccessful,
+    onTxSuccessful,
     signAndBroadcast,
   });
 

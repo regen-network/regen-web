@@ -34,6 +34,7 @@ import {
 import { CreditClass, Curator } from './BasketOverview.types';
 import { getDateCriteria } from './BasketOverview.utils';
 import { useBasketPutData } from './hooks/useBasketPutData';
+import { useBasketTakeData } from './hooks/useBasketTakeData';
 
 export type BasketOverviewProps = {
   name: string;
@@ -60,6 +61,7 @@ export const BasketOverview: React.FC<
 }) => {
   const { classes: styles } = useBasketOverviewStyles();
   const basketPutData = useBasketPutData();
+  const basketTakeData = useBasketTakeData();
   const [, setBasketDetailAtom] = useAtom(basketDetailAtom);
 
   return (
@@ -125,13 +127,24 @@ export const BasketOverview: React.FC<
                 >
                   {PUT_BASKET_LABEL}
                 </OutlinedButton>
-                <OutlinedButton>{TAKE_BASKET_LABEL}</OutlinedButton>
+                <OutlinedButton
+                  onClick={() =>
+                    setBasketDetailAtom(
+                      atom => void (atom.isTakeModalOpen = true),
+                    )
+                  }
+                >
+                  {TAKE_BASKET_LABEL}
+                </OutlinedButton>
               </Flex>
             </BasketTextContainer>
           </Grid>
         </Section>
       </BasketSectionContainer>
-      <BasketOverviewModals basketPutData={basketPutData} />
+      <BasketOverviewModals
+        basketPutData={basketPutData}
+        basketTakeData={basketTakeData}
+      />
     </>
   );
 };

@@ -26,7 +26,7 @@ const useOpenTakeModal = ({
       const selectedBasketDenom = basketTokens?.[rowIndex]?.basket?.basketDenom;
 
       track<'takeFromBasket1', TakeFromBasket1>('takeFromBasket1', {
-        basketName: basketTokens?.[rowIndex]?.basket.name,
+        basketName: basketTokens?.[rowIndex]?.basket?.name,
       });
 
       const selectedBasketTokenWithClass = basketsWithClasses.find(

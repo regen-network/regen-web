@@ -20,7 +20,7 @@ export type BasketPutData = {
   basketInfo?: BasketInfo;
   creditBatchDenoms: string[];
   credit: BatchInfoWithBalance;
-  isLoadingData: boolean;
+  isLoadingPutData: boolean;
 };
 
 export const useBasketPutData = (): BasketPutData => {
@@ -58,8 +58,7 @@ export const useBasketPutData = (): BasketPutData => {
     .filter(credit => credit.tradableAmount !== '0');
 
   const creditBatchDenoms = creditsPutable?.map(credit => credit.batchDenom);
-  const isLoadingData = isLoadingBalances || isLoadingBasket;
-
+  const isLoadingPutData = isLoadingBalances || isLoadingBasket;
   return {
     credit,
     basketInfo: basketData?.basketInfo,
@@ -68,6 +67,6 @@ export const useBasketPutData = (): BasketPutData => {
       value: basketDenom ?? '',
     },
     creditBatchDenoms: creditBatchDenoms ?? [],
-    isLoadingData,
+    isLoadingPutData,
   };
 };

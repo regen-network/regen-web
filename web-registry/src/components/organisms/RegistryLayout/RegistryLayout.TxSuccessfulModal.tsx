@@ -2,8 +2,8 @@ import { useAtom } from 'jotai';
 
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
 
+import { txSuccessfulModalAtom } from 'lib/atoms/modals.atoms';
 import { getHashUrl } from 'lib/block-explorer';
-import { txSuccessfulModalAtom } from 'lib/store/modals.store';
 
 import { Link } from 'components/atoms';
 

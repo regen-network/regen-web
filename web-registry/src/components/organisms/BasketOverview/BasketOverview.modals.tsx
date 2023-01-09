@@ -3,12 +3,12 @@ import { useAtom } from 'jotai';
 
 import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
 
-import { errorCodeAtom } from 'lib/store/error.store';
+import { errorCodeAtom } from 'lib/atoms/error.atoms';
 import {
   errorModalAtom,
   processingModalAtom,
   txSuccessfulModalAtom,
-} from 'lib/store/modals.store';
+} from 'lib/atoms/modals.atoms';
 
 import { basketDetailAtom } from 'pages/BasketDetails/BasketDetails.store';
 import useBasketPutSubmit, {

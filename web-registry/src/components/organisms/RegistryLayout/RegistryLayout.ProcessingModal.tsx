@@ -2,7 +2,7 @@ import { useAtom } from 'jotai';
 
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 
-import { processingModalAtom } from 'lib/store/modals.store';
+import { processingModalAtom } from 'lib/atoms/modals.atoms';
 
 export const RegistryLayoutProcessingModal = (): JSX.Element => {
   const [{ open }, setProcessingModalAtom] = useAtom(processingModalAtom);

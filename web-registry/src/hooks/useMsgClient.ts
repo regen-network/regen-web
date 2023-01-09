@@ -4,9 +4,11 @@ import { QueryBalanceResponse } from '@regen-network/api/lib/generated/cosmos/ba
 import { useQueryClient } from '@tanstack/react-query';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { ERRORS } from 'config/errors';
+import { useAtom } from 'jotai';
 
 import { useGlobalSetStore } from 'lib/context/globalContext';
 import { BANK_BALANCE_KEY } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery.constants';
+import { txSuccessfulModalAtom } from 'lib/store/modals.store';
 
 import { useLedger } from '../ledger';
 import { assertIsError } from '../lib/error';
@@ -56,6 +58,7 @@ export default function useMsgClient(
   const { api, wallet } = useLedger();
   const [error, setError] = useState<string | undefined>();
   const setGlobalStore = useGlobalSetStore();
+  const [, setTxSuccessfulModalAtom] = useAtom(txSuccessfulModalAtom);
 
   const [deliverTxResponse, setDeliverTxResponse] = useState<
     DeliverTxResponse | undefined
@@ -116,13 +119,18 @@ export default function useMsgClient(
       } else {
         setDeliverTxResponse(_deliverTxResponse);
         handleTxDelivered && handleTxDelivered(_deliverTxResponse);
-        setGlobalStore({
-          txSuccessfulModal: { txHash: _deliverTxResponse.transactionHash },
-        });
+        setTxSuccessfulModalAtom(
+          atom => void (atom.txHash = _deliverTxResponse.transactionHash),
+        );
         return _deliverTxResponse;
       }
     },
-    [api?.msgClient, handleTxQueued, handleTxDelivered, setGlobalStore],
+    [
+      api?.msgClient,
+      handleTxQueued,
+      handleTxDelivered,
+      setTxSuccessfulModalAtom,
+    ],
   );
 
   const signAndBroadcast = useCallback(

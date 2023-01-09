@@ -1,14 +1,14 @@
+import { useAtom } from 'jotai';
+
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 
-import { useGlobalStore } from 'lib/context/globalContext';
+import { processingModalAtom } from 'lib/store/modals.store';
 
 export const RegistryLayoutProcessingModal = (): JSX.Element => {
-  const [{ open }, setGlobalStore] = useGlobalStore(store => {
-    return store.processingModal;
-  });
+  const [{ open }, setProcessingModalAtom] = useAtom(processingModalAtom);
 
   const onClose = (): void =>
-    setGlobalStore({ processingModal: { open: false } });
+    setProcessingModalAtom(atom => void (atom.open = false));
 
   return <ProcessingModal open={!!open} onClose={onClose} />;
 };

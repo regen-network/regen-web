@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid } from '@mui/material';
+import { useAtom } from 'jotai';
 
 import { Flex } from 'web-components/lib/components/box';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -12,7 +13,7 @@ import {
 } from 'web-components/lib/components/typography';
 import { formatNumber } from 'web-components/lib/utils/format';
 
-import { useBasketDetailSetStore } from 'pages/BasketDetails/BasketDetails.context';
+import { basketDetailAtom } from 'pages/BasketDetails/BasketDetails.store';
 
 import forestImg from '../../../assets/forest-token.png';
 import { getAccountUrl } from '../../../lib/block-explorer';
@@ -59,7 +60,7 @@ export const BasketOverview: React.FC<
 }) => {
   const { classes: styles } = useBasketOverviewStyles();
   const basketPutData = useBasketPutData();
-  const setStore = useBasketDetailSetStore();
+  const [, setBasketDetailAtom] = useAtom(basketDetailAtom);
 
   return (
     <>
@@ -116,7 +117,11 @@ export const BasketOverview: React.FC<
               <Flex>
                 <OutlinedButton
                   sx={{ mr: 5 }}
-                  onClick={() => setStore({ isPutModalOpen: true })}
+                  onClick={() =>
+                    setBasketDetailAtom(
+                      atom => void (atom.isPutModalOpen = true),
+                    )
+                  }
                 >
                   {PUT_BASKET_LABEL}
                 </OutlinedButton>

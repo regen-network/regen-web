@@ -1,13 +1,16 @@
 import { ERRORS } from 'config/errors';
+import { useAtom } from 'jotai';
 
 import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
 
-import { useGlobalSetStore } from 'lib/context/globalContext';
-
+import { errorCodeAtom } from 'lib/store/error.store';
 import {
-  useBasketDetailSetStore,
-  useBasketDetailStore,
-} from 'pages/BasketDetails/BasketDetails.context';
+  errorModalAtom,
+  processingModalAtom,
+  txSuccessfulModalAtom,
+} from 'lib/store/modals.store';
+
+import { basketDetailAtom } from 'pages/BasketDetails/BasketDetails.store';
 import useBasketPutSubmit, {
   OnTxSuccessfulProps,
 } from 'pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit';
@@ -25,27 +28,25 @@ type Props = {
 };
 
 export const BasketOverviewModals = ({ basketPutData }: Props): JSX.Element => {
-  const setBasketDetailStore = useBasketDetailSetStore();
-  const setGlobalStore = useGlobalSetStore();
-  const [isPutModalOpen] = useBasketDetailStore(store => store.isPutModalOpen);
+  const [{ isPutModalOpen }, setBasketDetailAtom] = useAtom(basketDetailAtom);
+  const [, setProcessingModalAtom] = useAtom(processingModalAtom);
+  const [, setErrorCodeAtom] = useAtom(errorCodeAtom);
+  const [, setErrorModalAtom] = useAtom(errorModalAtom);
+  const [, setTxSuccessfulModalAtom] = useAtom(txSuccessfulModalAtom);
 
   // Modals callbacks
   const onClosePutModal = (): void =>
-    setBasketDetailStore({ isPutModalOpen: false });
+    setBasketDetailAtom(atom => void (atom.isPutModalOpen = false));
 
   const onBroadcastPutModal = (): void => {
     onClosePutModal();
-    setGlobalStore({ processingModal: { open: true } });
+    setProcessingModalAtom(atom => void (atom.open = true));
   };
 
   const onError = (error?: Error): void => {
-    setGlobalStore({
-      errorCode: ERRORS.DEFAULT,
-      errorModal: { description: String(error) },
-      processingModal: {
-        open: false,
-      },
-    });
+    setErrorCodeAtom(ERRORS.DEFAULT);
+    setErrorModalAtom(atom => (atom.description = String(error)));
+    setProcessingModalAtom(atom => void (atom.open = false));
   };
 
   const onTxSuccessful = ({
@@ -53,17 +54,13 @@ export const BasketOverviewModals = ({ basketPutData }: Props): JSX.Element => {
     title,
     cardTitle,
   }: OnTxSuccessfulProps): void => {
-    setGlobalStore({
-      processingModal: {
-        open: false,
-      },
-      txSuccessfulModal: {
-        open: true,
-        cardItems,
-        title,
-        cardTitle,
-        buttonTitle: CLOSE_BUTTON_LABEL,
-      },
+    setProcessingModalAtom(atom => void (atom.open = false));
+    setTxSuccessfulModalAtom(atom => {
+      atom.open = true;
+      atom.cardItems = cardItems;
+      atom.title = title;
+      atom.cardTitle = cardTitle;
+      atom.buttonTitle = CLOSE_BUTTON_LABEL;
     });
   };
 
@@ -94,7 +91,9 @@ export const BasketOverviewModals = ({ basketPutData }: Props): JSX.Element => {
         onClose={onClosePutModal}
         onSubmit={basketPutSubmit}
         onBatchDenomChange={batchDenom =>
-          setBasketDetailStore({ creditBatchDenom: batchDenom })
+          setBasketDetailAtom(
+            atom => void (atom.creditBatchDenom = batchDenom ?? ''),
+          )
         }
       />
     </>

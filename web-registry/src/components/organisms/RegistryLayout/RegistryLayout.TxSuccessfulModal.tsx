@@ -1,17 +1,19 @@
+import { useAtom } from 'jotai';
+
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
 
 import { getHashUrl } from 'lib/block-explorer';
-import { useGlobalStore } from 'lib/context/globalContext';
+import { txSuccessfulModalAtom } from 'lib/store/modals.store';
 
 import { Link } from 'components/atoms';
 
 export const RegistryLayoutTxSuccessfulModal = (): JSX.Element => {
   const [
     { cardItems, title, cardTitle, open, txHash, buttonTitle },
-    setGlobalStore,
-  ] = useGlobalStore(store => store.txSuccessfulModal);
+    setTxSuccessfulModalAtom,
+  ] = useAtom(txSuccessfulModalAtom);
   const onClose = (): void =>
-    setGlobalStore({ txSuccessfulModal: { open: false } });
+    setTxSuccessfulModalAtom(atom => void (atom.open = false));
 
   const txHashUrl = getHashUrl(txHash);
 

@@ -5,7 +5,6 @@ import {
   BasketEcocreditsTable,
   BasketOverview,
 } from '../../components/organisms';
-import { BasketDetailProvider } from './BasketDetails.context';
 import { BasketDetailsSectionLayout } from './BasketDetails.SectionLayout';
 import useBasketDetails from './hooks/useBasketDetails';
 
@@ -14,14 +13,14 @@ const BasketDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
   const data = useBasketDetails(basketDenom);
 
   return (
-    <BasketDetailProvider>
+    <>
       {data.overview && <BasketOverview {...data.overview} />}
       {data.creditBatches && (
         <BasketDetailsSectionLayout>
           <BasketEcocreditsTable batches={data.creditBatches} />
         </BasketDetailsSectionLayout>
       )}
-    </BasketDetailProvider>
+    </>
   );
 };
 

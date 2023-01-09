@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { BasketInfo } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 
@@ -10,7 +11,7 @@ import { getBasketQuery } from 'lib/queries/react-query/ecocredit/basket/getBask
 import { getBalancesQuery } from 'lib/queries/react-query/ecocredit/getBalancesQuery/getBalancesQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { useBasketDetailStore } from 'pages/BasketDetails/BasketDetails.context';
+import { basketDetailAtom } from 'pages/BasketDetails/BasketDetails.store';
 
 import { useFetchEcocredit } from './useFetchEcocredit';
 
@@ -26,9 +27,7 @@ export const useBasketPutData = (): BasketPutData => {
   const { ecocreditClient, basketClient } = useLedger();
   const { wallet } = useWallet();
   const { basketDenom } = useParams<{ basketDenom: string }>();
-  const [creditBatchDenom] = useBasketDetailStore(
-    store => store.creditBatchDenom,
-  );
+  const [{ creditBatchDenom }] = useAtom(basketDetailAtom);
 
   const { credit } = useFetchEcocredit({ batchDenom: creditBatchDenom });
 

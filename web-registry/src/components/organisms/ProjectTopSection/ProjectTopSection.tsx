@@ -9,7 +9,6 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import Card from 'web-components/lib/components/cards/Card';
@@ -19,26 +18,16 @@ import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
 import ReadMore from 'web-components/lib/components/read-more';
 import Section from 'web-components/lib/components/section';
-import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
-import { UseStateSetter } from 'types/react/use-state';
-import { ProjectMetadataIntersectionLD } from 'lib/db/types/json-ld';
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
-import {
-  AllCreditClassQuery,
-  useSdgByIriQuery,
-} from '../../../generated/sanity-graphql';
+import { useSdgByIriQuery } from '../../../generated/sanity-graphql';
+import { client } from '../../../lib/clients/sanity';
 import { getSanityImgSrc } from '../../../lib/imgSrc';
 import { getDisplayParty, getParty } from '../../../lib/transform';
-import { client } from '../../../sanity';
-import {
-  BatchInfoWithSupply,
-  BatchTotalsForProject,
-} from '../../../types/ledger/ecocredit';
 import { ProjectTopLink } from '../../atoms';
 import { ProjectBatchTotals, ProjectPageMetadata } from '../../molecules';
 import { CreditBatches } from '../CreditBatches/CreditBatches';
@@ -46,6 +35,7 @@ import {
   ProjectTopSectionQuoteMark,
   useProjectTopSectionStyles,
 } from './ProjectTopSection.styles';
+import { ProjectTopSectionProps } from './ProjectTopSection.types';
 import {
   getDisplayAdmin,
   getDisplayDeveloper,
@@ -59,24 +49,11 @@ function ProjectTopSection({
   geojson,
   isGISFile,
   batchData,
+  paginationParams,
   setPaginationParams,
   onChainProjectId,
   loading,
-}: {
-  data?: any; // TODO: when all project are onchain, this can be ProjectByOnChainIdQuery
-  onChainProject?: ProjectInfo;
-  metadata?: Partial<ProjectMetadataIntersectionLD>;
-  sanityCreditClassData?: AllCreditClassQuery;
-  geojson?: any;
-  isGISFile?: boolean;
-  batchData?: {
-    batches?: BatchInfoWithSupply[];
-    totals?: BatchTotalsForProject;
-  };
-  setPaginationParams: UseStateSetter<TablePaginationParams>;
-  onChainProjectId?: string;
-  loading?: boolean;
-}): JSX.Element {
+}: ProjectTopSectionProps): JSX.Element {
   const { classes } = useProjectTopSectionStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -319,6 +296,8 @@ function ProjectTopSection({
             creditBatches={batchData.batches}
             filteredColumns={['projectLocation']}
             onTableChange={setPaginationParams}
+            initialPaginationParams={paginationParams}
+            isRoutePagination
           />
         </Box>
       )}

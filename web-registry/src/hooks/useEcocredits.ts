@@ -12,7 +12,7 @@ import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { getEcocreditsForAccount } from 'lib/ecocredit/api';
 import { ledgerRESTUri } from 'lib/ledger';
 
-import { client as sanityClient } from '../sanity';
+import { client as sanityClient } from '../lib/clients/sanity';
 import useEcocreditQuery from './useEcocreditQuery';
 import useQueryBalances from './useQueryBalances';
 

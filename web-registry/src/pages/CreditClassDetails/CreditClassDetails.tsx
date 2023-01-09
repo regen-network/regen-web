@@ -1,9 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import {
-  ClassInfo,
-  QueryProjectsByClassResponse,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 
@@ -13,10 +10,10 @@ import {
 } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { useLedger } from 'ledger';
+import { client } from 'lib/clients/sanity';
 import { getMetadata } from 'lib/db/api/metadata-graph';
 import { queryClassIssuers, queryEcoClassInfo } from 'lib/ecocredit/api';
 import { onChainClassRegExp } from 'lib/ledger';
-import { client } from 'sanity';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
@@ -24,7 +21,6 @@ import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/Cr
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import { useResetErrorBanner } from 'pages/Marketplace/Storefront/hooks/useResetErrorBanner';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
-import { useEcocreditQuery } from 'hooks';
 
 import { getProjectNameFromProjectsData } from './CreditClassDetails.utils';
 import CreditClassDetailsSimple from './CreditClassDetailsSimple';
@@ -70,14 +66,8 @@ function CreditClassDetails({
   const dbCreditClassByOnChainId = dbDataByOnChainId?.creditClassByOnChainId;
   const dbCreditClassByUri = dbDataByUri?.creditClassByUri;
 
-  const { data: projectsByClassResponse } =
-    useEcocreditQuery<QueryProjectsByClassResponse>({
-      query: 'projectsByClass',
-      params: { classId: creditClassId },
-    });
-
   const { isBuyFlowDisabled, projectsWithOrderData } = useBuySellOrderData({
-    projects: projectsByClassResponse?.projects,
+    classId: creditClassId,
   });
 
   const { isSellFlowDisabled, credits } = useCreateSellOrderData({

@@ -48,6 +48,7 @@ const CreateSellOrderForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   onSubmit,
 }) => {
   const [options, setOptions] = useState<Option[]>([]);
+
   const { track } = useTracker();
 
   const initialValues = {
@@ -116,6 +117,7 @@ const CreateSellOrderForm: React.FC<React.PropsWithChildren<FormProps>> = ({
             options={options}
             disabled={options.length === 1}
             sx={{ mb: 10.5 }}
+            native={false}
           />
           <Box
             sx={{

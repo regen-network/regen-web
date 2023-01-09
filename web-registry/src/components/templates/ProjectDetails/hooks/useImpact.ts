@@ -1,9 +1,10 @@
+import { useQuery } from '@tanstack/react-query';
+
+import { getEcologicalImpactByIriQuery } from 'lib/queries/react-query/sanity/getEcologicalImpactByIriQuery/getEcologicalImpactByIriQuery';
+
 import { Maybe } from '../../../../generated/graphql';
-import {
-  EcologicalImpact,
-  useEcologicalImpactByIriQuery,
-} from '../../../../generated/sanity-graphql';
-import { client } from '../../../../sanity';
+import { EcologicalImpact } from '../../../../generated/sanity-graphql';
+import { client } from '../../../../lib/clients/sanity';
 
 interface InputProps {
   coBenefitsIris: Maybe<string | string[]> | undefined;
@@ -14,21 +15,21 @@ export default function useImpact({
   coBenefitsIris,
   primaryImpactIRI,
 }: InputProps): EcologicalImpact[] {
-  const { data: primaryImpactData } = useEcologicalImpactByIriQuery({
-    client,
-    variables: {
-      iris: primaryImpactIRI,
-    },
-    skip: !primaryImpactIRI,
-  });
+  const { data: primaryImpactData } = useQuery(
+    getEcologicalImpactByIriQuery({
+      iris: primaryImpactIRI?.filter(Boolean),
+      sanityClient: client,
+      enabled: !!primaryImpactIRI,
+    }),
+  );
 
-  const { data: coBenefitData } = useEcologicalImpactByIriQuery({
-    client,
-    variables: {
+  const { data: coBenefitData } = useQuery(
+    getEcologicalImpactByIriQuery({
       iris: coBenefitsIris,
-    },
-    skip: !coBenefitsIris,
-  });
+      sanityClient: client,
+      enabled: !!coBenefitsIris,
+    }),
+  );
 
   let impactData: EcologicalImpact[] = [];
 

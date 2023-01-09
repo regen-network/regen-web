@@ -854,7 +854,7 @@ export const queryBatchesByIssuer = async ({
 
 // BatchesByProject
 
-interface QueryBatchesByProjectProps extends EcocreditQueryClientProps {
+export interface QueryBatchesByProjectProps extends EcocreditQueryClientProps {
   request: DeepPartial<QueryBatchesByProjectRequest>;
 }
 
@@ -865,6 +865,7 @@ export const queryBatchesByProject = async ({
   try {
     return await client.BatchesByProject({
       projectId: request.projectId,
+      pagination: request.pagination,
     });
   } catch (err) {
     throw new Error(

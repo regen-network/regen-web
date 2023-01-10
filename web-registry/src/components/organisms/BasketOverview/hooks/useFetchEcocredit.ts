@@ -12,7 +12,7 @@ import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMet
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { client as sanityClient } from '../../../../sanity';
+import { client as sanityClient } from '../../../../lib/clients/sanity';
 
 interface Response {
   credit: BatchInfoWithBalance;

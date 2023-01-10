@@ -63,6 +63,13 @@ export const BasketOverview: React.FC<
   const basketPutData = useBasketPutData();
   const basketTakeData = useBasketTakeData();
   const [, setBasketDetailAtom] = useAtom(basketDetailAtom);
+  const { isLoadingPutData, creditBatchDenoms } = basketPutData;
+  const { isLoadingTakeData, basketToken } = basketTakeData;
+  const isPutButtonDisabled =
+    isLoadingPutData || creditBatchDenoms.length === 0;
+  const isTakeButtonDisabled =
+    isLoadingTakeData ||
+    Number(basketToken.balance?.balance?.amount ?? 0) === 0;
 
   return (
     <>
@@ -124,6 +131,7 @@ export const BasketOverview: React.FC<
                       atom => void (atom.isPutModalOpen = true),
                     )
                   }
+                  disabled={isPutButtonDisabled}
                 >
                   {PUT_BASKET_LABEL}
                 </OutlinedButton>
@@ -133,6 +141,7 @@ export const BasketOverview: React.FC<
                       atom => void (atom.isTakeModalOpen = true),
                     )
                   }
+                  disabled={isTakeButtonDisabled}
                 >
                   {TAKE_BASKET_LABEL}
                 </OutlinedButton>

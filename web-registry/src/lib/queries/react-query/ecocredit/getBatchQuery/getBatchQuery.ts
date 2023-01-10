@@ -12,7 +12,7 @@ export const getBatchQuery = ({
 }: ReactQueryBatchesProps): ReactQueryBatchResponse => ({
   queryKey: ['batch', request.batchDenom],
   queryFn: async () => {
-    if (!client) return;
+    if (!client || !request.batchDenom) return null;
     return await queryBatchInfo({ client, request });
   },
   keepPreviousData: true,

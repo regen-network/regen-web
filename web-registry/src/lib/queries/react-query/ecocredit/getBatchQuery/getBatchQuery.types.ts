@@ -6,7 +6,7 @@ import { QueryBatchInfoProps } from 'lib/ecocredit/api';
 import { ReactQueryBuilderResponse } from '../../types/react-query.types';
 
 export type ReactQueryBatchResponse =
-  QueryObserverOptions<QueryBatchResponse | void>;
+  QueryObserverOptions<QueryBatchResponse | null>;
 
 export type ReactQueryBatchesProps = Omit<QueryBatchInfoProps, 'client'> & {
   client?: QueryBatchInfoProps['client'];

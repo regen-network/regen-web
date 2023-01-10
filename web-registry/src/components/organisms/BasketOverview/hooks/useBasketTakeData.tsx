@@ -46,8 +46,8 @@ export const useBasketTakeData = (): BasketTakeData => {
 
   const basketToken: BasketTokens = {
     basket: basketData?.basketInfo,
-    balance: balanceData,
-    metadata: denomMetadata,
+    balance: balanceData ?? void 0,
+    metadata: denomMetadata ?? void 0,
   };
 
   return {

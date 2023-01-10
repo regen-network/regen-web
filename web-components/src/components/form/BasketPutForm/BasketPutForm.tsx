@@ -75,6 +75,7 @@ const BasketPutForm: React.FC<React.PropsWithChildren<FormProps>> = ({
             <Field
               name="batchDenom"
               label="Choose ecocredits batch"
+              description="This is the geographical location where the credits will retire."
               component={SelectTextField}
               options={batchDenomsOptions}
               native={false}

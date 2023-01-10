@@ -4,6 +4,7 @@ import { RadioGroup } from 'formik-mui';
 
 import OnBoardingCard from '../cards/OnBoardingCard';
 import { DatePickField } from './DatePickField';
+import SelectTextField from './SelectTextField';
 import TextField from './TextField';
 import Toggle from './Toggle';
 
@@ -198,6 +199,36 @@ export const datePickField = (): JSX.Element => (
       return (
         <Form>
           <Field component={DatePickField} name="date" label="Date" />
+        </Form>
+      );
+    }}
+  </Formik>
+);
+
+export const selectTextField = (): JSX.Element => (
+  <Formik
+    initialValues={{
+      batchDenom: 'option-2',
+    }}
+    onSubmit={(values, actions) => {
+      alert(JSON.stringify(values, null, 2));
+      actions.resetForm();
+    }}
+  >
+    {() => {
+      return (
+        <Form>
+          <Field
+            name="batchDenom"
+            label="Choose ecocredits batch"
+            description="This is the geographical location where the credits will retire."
+            component={SelectTextField}
+            options={[
+              { label: 'option 1', value: 'option-1' },
+              { label: 'option 2', value: 'option-2' },
+            ]}
+            native={false}
+          />
         </Form>
       );
     }}

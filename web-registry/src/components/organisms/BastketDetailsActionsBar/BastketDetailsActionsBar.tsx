@@ -3,7 +3,6 @@ import { Box } from '@mui/material';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';
 import { StickyBar } from 'web-components/lib/components/sticky-bar/StickyBar';
-import InfoTooltip from 'web-components/lib/components/tooltip/InfoTooltip';
 import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
 
 import { Link } from 'components/atoms';

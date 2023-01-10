@@ -19,7 +19,7 @@ const RegistryLayoutFooter: React.FC<React.PropsWithChildren<unknown>> = () => {
       items: [
         {
           title: 'Projects',
-          href: '/projects',
+          href: '/projects/1',
         },
         {
           title: 'Credit Classes',

@@ -8,16 +8,13 @@ import {
   BatchTotalsForProject,
 } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
-import {
-  NonQueryableProjectMetadataLD,
-  ProjectMetadataIntersectionLD,
-} from 'lib/db/types/json-ld';
+import { ProjectMetadataLD, ProjectPageMetadataLD } from 'lib/db/types/json-ld';
 
 export type ProjectTopSectionProps = {
   data?: any; // TODO: when all project are onchain, this can be ProjectByOnChainIdQuery
   onChainProject?: ProjectInfo;
-  metadata?: Partial<ProjectMetadataIntersectionLD>;
-  nonQueryableMetadata?: Partial<NonQueryableProjectMetadataLD>;
+  anchoredMetadata?: Partial<ProjectMetadataLD>;
+  projectPageMetadata?: Partial<ProjectPageMetadataLD>;
   sanityCreditClassData?: AllCreditClassQuery;
   geojson?: any;
   isGISFile?: boolean;

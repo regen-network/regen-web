@@ -120,10 +120,9 @@ function ProjectDetails(): JSX.Element {
     : projectByHandle?.data.projectByHandle;
 
   /** Anchored project metadata comes from IRI resolver. */
-  const anchoredMetadata = useQuery(
+  const { data: anchoredMetadata } = useQuery(
     getMetadataQuery({ iri: onChainProject?.metadata }),
   );
-  /** Un-anchored metadata from the project.metadata jsonld column. */
 
   const { batchesWithSupply, setPaginationParams, paginationParams } =
     usePaginatedBatchesByProject({ projectId: String(onChainProjectId) });

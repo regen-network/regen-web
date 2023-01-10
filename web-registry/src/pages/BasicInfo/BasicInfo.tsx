@@ -1,31 +1,25 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { useProjectEditContext } from 'pages/ProjectEdit';
+import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
+
 import { BasicInfoForm, BasicInfoFormValues } from '../../components/organisms';
 import {
   EditFormTemplate,
   OnboardingFormTemplate,
 } from '../../components/templates';
-import {
-  useProjectByIdQuery,
-  useUpdateProjectByIdMutation,
-} from '../../generated/graphql';
-import { useProjectEditContext } from '../ProjectEdit';
+import { useUpdateProjectByIdMutation } from '../../generated/graphql';
 
 const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
-  const [updateProject] = useUpdateProjectByIdMutation();
   const { isEdit } = useProjectEditContext();
-
-  const { data } = useProjectByIdQuery({
-    variables: { id: projectId },
-    fetchPolicy: 'cache-and-network',
-  });
+  const { metadata } = useProjectWithMetadata(projectId, isEdit);
+  const [updateProject] = useUpdateProjectByIdMutation();
 
   let initialFieldValues: BasicInfoFormValues | undefined;
-  if (data?.projectById?.metadata) {
-    const metadata = data.projectById.metadata;
+  if (metadata) {
     initialFieldValues = {
       'schema:name': metadata['schema:name'],
       'regen:projectSize': metadata['regen:projectSize'],
@@ -41,24 +35,27 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
   }
 
   async function submit(values: BasicInfoFormValues): Promise<void> {
-    const metadata = { ...data?.projectById?.metadata, ...values };
-    try {
-      await updateProject({
-        variables: {
-          input: {
-            id: projectId,
-            projectPatch: {
-              metadata,
+    if (isEdit) {
+      // TODO initiate on-chain tx
+    } else {
+      try {
+        await updateProject({
+          variables: {
+            input: {
+              id: projectId,
+              projectPatch: {
+                metadata: { ...metadata, ...values },
+              },
             },
           },
-        },
-      });
-      !isEdit && navigate(`/project-pages/${projectId}/location`);
-    } catch (e) {
-      // TODO: Should we display the error banner here?
-      // https://github.com/regen-network/regen-registry/issues/554
-      // eslint-disable-next-line no-console
-      console.log(e);
+        });
+        navigateNext();
+      } catch (e) {
+        // TODO: Should we display the error banner here?
+        // https://github.com/regen-network/regen-registry/issues/554
+        // eslint-disable-next-line no-console
+        console.log(e);
+      }
     }
   }
 

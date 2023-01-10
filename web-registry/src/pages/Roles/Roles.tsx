@@ -12,6 +12,7 @@ import {
   FormValues,
   isIndividual,
 } from 'components/molecules/RoleField/RoleField';
+import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
 import { RolesForm, RolesValues } from '../../components/organisms';
 import {
@@ -31,9 +32,7 @@ import { useWallet } from '../../lib/wallet/wallet';
 import { useProjectEditContext } from '../ProjectEdit';
 
 function getPartyIds(
-  i: number,
   party?: Maybe<{ __typename?: 'Party' } & PartyFieldsFragment>,
-  autoIncrementId?: boolean,
 ): Partial<FormValues | ProfileFormValues> | null {
   if (party) {
     const p = {
@@ -43,19 +42,11 @@ function getPartyIds(
       return { id: party.userByPartyId.id, ...p };
     }
     if (party.type === 'ORGANIZATION' && party.organizationByPartyId) {
-      const members =
-        party.organizationByPartyId.organizationMembersByOrganizationId?.nodes;
       return {
         id: party.organizationByPartyId.id,
-        addressId: party.addressByAddressId?.id,
-        ownerPartyId: members?.length && members[0]?.userByMemberId?.partyId,
-        ownerId: members?.length && members[0]?.userByMemberId?.id,
         ...p,
       };
     }
-  }
-  if (autoIncrementId) {
-    return { id: (i + 1).toString() };
   }
 
   return null;
@@ -71,36 +62,18 @@ function isFormValues(
 }
 
 function stripPartyIds(
-  values: FormValues | ProfileFormValues | undefined,
-): FormValues | undefined {
-  if (values?.id) {
-    delete values.id;
-  }
-  if (isFormValues(values)) {
-    delete values.partyId;
-    if (
-      !isIndividual(values) &&
-      values?.addressId &&
-      values?.ownerId &&
-      values?.ownerPartyId
-    ) {
-      delete values.addressId;
-      delete values.ownerId;
-      delete values.ownerPartyId;
-    }
-  }
+  values: ProfileFormValues | undefined,
+): ProfileFormValues | undefined {
+  delete values?.id;
+  delete values?.partyId;
+
   return values;
 }
 
 function stripIds(values: RolesValues): RolesValues {
   if (values) {
     return {
-      'regen:landOwner': stripPartyIds(values['regen:landOwner']),
-      'regen:landSteward': stripPartyIds(values['regen:landSteward']),
       'regen:projectDeveloper': stripPartyIds(values['regen:projectDeveloper']),
-      'regen:projectOriginator': stripPartyIds(
-        values['regen:projectOriginator'],
-      ),
     };
   }
   return values;
@@ -110,83 +83,38 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit } = useProjectEditContext();
-  const { creditClassId } = useCreateProjectContext();
-
-  const { user } = useAuth0();
-  const userEmail = user?.email;
+  const { onChainProject, offChainProject, metadata } = useProjectWithMetadata(
+    projectId,
+    isEdit,
+  );
+  const [updateProject] = useUpdateProjectByIdMutation();
 
   const { wallet } = useWallet();
 
-  const [updateProject] = useUpdateProjectByIdMutation();
-  const { data } = useProjectByIdQuery({
-    variables: { id: projectId },
-    fetchPolicy: 'cache-and-network',
-  });
-  const project = data?.projectById;
+  // TODO validation
+  // const { data: graphData } = useShaclGraphByUriQuery({
+  //   // do not fetch SHACL Graph until we get the on chain project credit class id (in edit mode)
+  //   // or the credit class id from the create project context,
+  //   // this prevents from fetching this twice
+  //   skip: !onChainProject || !creditClassId,
+  //   variables: {
+  //     uri: getProjectShapeIri(isEdit ? onChainProject?.classId : creditClassId),
+  //   },
+  // });
 
-  const { data: userProfileData } = useGetOrganizationProfileByEmailQuery({
-    skip: !userEmail,
-    variables: {
-      email: userEmail as string,
-    },
-  });
-
-  const { data: graphData } = useShaclGraphByUriQuery({
-    // do not fetch SHACL Graph until we get the project
-    // and the optional on chain credit class id associatied to it,
-    // this prevents from fetching this twice
-    skip: !project,
-    variables: {
-      uri: getProjectShapeIri(creditClassId),
-    },
-  });
-
-  let initialValues: RolesValues = { admin: wallet?.address };
-  if (project?.metadata) {
-    const metadata = project.metadata;
-    const i = 0;
-    // In case of on chain credit class id, we don't save the entities in the db (yet),
-    // so we just use some auto-incremented ids instead of uuid to identify entities.
-    // This can be removed once Keplr login is fully implemented and we save the entities
-    // as parties/users/orgs in the db.
-    const landOwner = {
-      ...metadata['regen:landOwner'],
-      ...getPartyIds(
-        0,
-        project?.partyByLandOwnerId,
-        !isEmpty(metadata['regen:landOwner']) && !!creditClassId,
-      ),
-    };
-    const landSteward = {
-      ...metadata['regen:landSteward'],
-      ...getPartyIds(
-        landOwner?.id && creditClassId ? Number(landOwner.id) : i,
-        project?.partyByStewardId,
-        !isEmpty(metadata['regen:landSteward']) && !!creditClassId,
-      ),
-    };
+  let initialValues: RolesValues = {
+    // In edit mode, use existing on chain project admin
+    // In creation mode, use current wallet address
+    admin: isEdit ? onChainProject?.admin : wallet?.address,
+  };
+  if (metadata) {
     const projectDeveloper = {
       ...metadata['regen:projectDeveloper'],
-      ...getPartyIds(
-        landSteward?.id && creditClassId ? Number(landSteward.id) : i,
-        project?.partyByDeveloperId,
-        !isEmpty(metadata['regen:projectDeveloper']) && !!creditClassId,
-      ),
-    };
-    const projectOriginator = {
-      ...metadata['regen:projectOriginator'],
-      ...getPartyIds(
-        projectDeveloper?.id && creditClassId ? Number(projectDeveloper.id) : i,
-        project?.partyByOriginatorId,
-        !isEmpty(metadata['regen:projectOriginator']) && !!creditClassId,
-      ),
+      ...getPartyIds(offChainProject?.partyByDeveloperId),
     };
     initialValues = {
       ...initialValues,
-      'regen:landOwner': landOwner,
-      'regen:landSteward': landSteward,
       'regen:projectDeveloper': projectDeveloper,
-      'regen:projectOriginator': projectOriginator,
     };
   }
 
@@ -195,8 +123,7 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
   }
 
   function navigateNext(): void {
-    const nextStep = creditClassId ? 'description' : 'entity-display';
-    navigate(`/project-pages/${projectId}/${nextStep}`);
+    navigate(`/project-pages/${projectId}/description`);
   }
 
   function navigatePrev(): void {
@@ -207,39 +134,11 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
     let projectPatch: ProjectPatch = {};
 
     if (
-      isFormValues(values['regen:landOwner']) &&
-      values['regen:landOwner']?.partyId
-    ) {
-      projectPatch = {
-        landOwnerId: values['regen:landOwner']?.partyId,
-        ...projectPatch,
-      };
-    }
-    if (
-      isFormValues(values['regen:landSteward']) &&
-      values['regen:landSteward']?.partyId
-    ) {
-      projectPatch = {
-        stewardId: values['regen:landSteward']?.partyId,
-        ...projectPatch,
-      };
-    }
-    if (
       isFormValues(values['regen:projectDeveloper']) &&
       values['regen:projectDeveloper']?.partyId
     ) {
       projectPatch = {
         developerId: values['regen:projectDeveloper']?.partyId,
-        ...projectPatch,
-      };
-    }
-    if (
-      isFormValues(values['regen:projectOriginator']) &&
-      values['regen:projectOriginator']?.partyId
-    ) {
-      projectPatch = {
-        originatorId: values['regen:projectOriginator']?.partyId,
-        ...projectPatch,
       };
     }
 
@@ -248,8 +147,7 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
     // update the related entities.
     // But there are not needed to make the project metadata valid
     // and are already stored through project relations (i.e. developerId, stewardId, etc.)
-    const metadata = { ...project?.metadata, ...stripIds(values) };
-    projectPatch = { metadata, ...projectPatch };
+    projectPatch = { ...metadata, ...stripIds(values), ...projectPatch };
 
     try {
       await updateProject({
@@ -274,27 +172,23 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
       onNext={navigateNext}
       onPrev={navigatePrev}
       initialValues={initialValues}
-      projectCreator={userProfileData}
-      creditClassId={creditClassId}
-      graphData={graphData}
+      // graphData={graphData}
     />
   );
 
-  return project ? (
-    isEdit ? (
-      <EditFormTemplate>
-        <Form />
-      </EditFormTemplate>
-    ) : (
-      <OnboardingFormTemplate
-        activeStep={0}
-        title="Roles"
-        saveAndExit={saveAndExit}
-      >
-        <Form />
-      </OnboardingFormTemplate>
-    )
-  ) : null;
+  return isEdit ? (
+    <EditFormTemplate>
+      <Form />
+    </EditFormTemplate>
+  ) : (
+    <OnboardingFormTemplate
+      activeStep={0}
+      title="Roles"
+      saveAndExit={saveAndExit}
+    >
+      <Form />
+    </OnboardingFormTemplate>
+  );
 };
 
 export { Roles };

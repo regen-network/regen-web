@@ -140,9 +140,9 @@ function ProjectEdit(): JSX.Element {
         'basic info',
         'location',
         'roles',
-        'entity display',
+        'description',
         'media',
-        'story',
+        'metadata',
       ]}
       category={section?.replace('-', ' ')}
       onClick={sectionName => navigateSection(sectionName)}

@@ -1,6 +1,9 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { useProjectEditContext } from 'pages/ProjectEdit';
+import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
+
 import {
   ProjectLocationForm,
   ProjectLocationFormValues,
@@ -9,26 +12,17 @@ import {
   EditFormTemplate,
   OnboardingFormTemplate,
 } from '../../components/templates';
-import {
-  useProjectByIdQuery,
-  useUpdateProjectByIdMutation,
-} from '../../generated/graphql';
-import { useProjectEditContext } from '../ProjectEdit';
+import { useUpdateProjectByIdMutation } from '../../generated/graphql';
 
 const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit } = useProjectEditContext();
-
+  const { metadata } = useProjectWithMetadata(projectId, isEdit);
   const [updateProject] = useUpdateProjectByIdMutation();
-  const { data: projectData } = useProjectByIdQuery({
-    variables: { id: projectId },
-    fetchPolicy: 'cache-and-network',
-  });
 
   let initialFieldValues: any | undefined;
-  if (projectData?.projectById?.metadata) {
-    const metadata = projectData.projectById.metadata;
+  if (metadata) {
     initialFieldValues = {
       'schema:location': metadata?.['schema:location'] || {},
     };
@@ -41,13 +35,17 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
   }
 
   async function submit(values: ProjectLocationFormValues): Promise<void> {
-    try {
-      await saveValues(values);
-      !isEdit && navigate(`/project-pages/${projectId}/roles`);
-    } catch (e) {
-      //   // TODO: Should we display the error banner here?
-      //   // https://github.com/regen-network/regen-registry/issues/554
-      console.error(e); // eslint-disable-line no-console
+    if (isEdit) {
+      // TODO initiate on-chain tx
+    } else {
+      try {
+        await saveValues(values);
+        navigateNext();
+      } catch (e) {
+        // TODO: Should we display the error banner here?
+        // https://github.com/regen-network/regen-registry/issues/554
+        console.error(e); // eslint-disable-line no-console
+      }
     }
   }
 
@@ -60,14 +58,12 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
   }
 
   async function saveValues(values: ProjectLocationFormValues): Promise<void> {
-    const metadata = { ...projectData?.projectById?.metadata, ...values };
-
     await updateProject({
       variables: {
         input: {
           id: projectId,
           projectPatch: {
-            metadata,
+            metadata: { ...metadata, ...values },
           },
         },
       },

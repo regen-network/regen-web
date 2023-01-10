@@ -46,62 +46,18 @@ interface RolesFormProps {
   onNext?: () => void;
   onPrev?: () => void;
   initialValues?: RolesValues;
-  projectCreator?: GetOrganizationProfileByEmailQuery;
-  creditClassId?: string | null;
   graphData?: ShaclGraphByUriQuery;
 }
 
 export interface RolesValues {
-  'regen:landOwner'?: FormValues | ProfileFormValues;
-  'regen:landSteward'?: FormValues | ProfileFormValues;
-  'regen:projectDeveloper'?: FormValues | ProfileFormValues;
-  'regen:projectOriginator'?: FormValues | ProfileFormValues;
+  'regen:projectDeveloper'?: ProfileFormValues;
   admin?: string;
 }
 
 const rolesErrorMessage = 'You must add one of the following roles.';
 
-function getEntity(
-  query?: GetOrganizationProfileByEmailQuery,
-): FormValues | null {
-  const user = query?.userByEmail;
-  if (user) {
-    const org =
-      user?.organizationMembersByMemberId?.nodes[0]
-        ?.organizationByOrganizationId;
-    if (org) {
-      return {
-        '@type': 'regen:Organization',
-        id: org.id,
-        partyId: org.partyId,
-        'schema:legalName': org.legalName,
-        'schema:telephone': user.phoneNumber || undefined,
-        'schema:email': user.email,
-        'regen:responsiblePerson': user.partyByPartyId?.name,
-        'regen:sharePermission': true,
-        'schema:location': org.partyByPartyId?.addressByAddressId?.feature,
-        projectCreator: true,
-      };
-    } else {
-      return {
-        '@type': 'regen:Individual',
-        id: user.id,
-        partyId: user.partyId,
-        'schema:name': user.partyByPartyId?.name,
-        'schema:telephone': user.phoneNumber || undefined,
-        'schema:email': user.email,
-        'regen:sharePermission': true,
-        projectCreator: true,
-      };
-    }
-  }
-  return null;
-}
-
 const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   initialValues,
-  projectCreator,
-  creditClassId,
   graphData,
   ...props
 }) => {
@@ -112,77 +68,63 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   >([]);
   const { confirmSave, isEdit } = useProjectEditContext();
 
-  // In case of on chain credit class id, we show a unified version
-  // of the organization/individual form, the profile form.
-  // The profile info will get displayed on the project page by default.
-  const profile = !!creditClassId;
-
   const [createUser] = useReallyCreateUserMutation();
   const [createOrganization] = useReallyCreateOrganizationMutation();
-  const [updateUserById] = useUpdateUserByIdMutation();
   const [updatePartyById] = useUpdatePartyByIdMutation();
-  const [updateOrganizationById] = useUpdateOrganizationByIdMutation();
   const [updateAddressById] = useUpdateAddressByIdMutation();
 
-  useEffect(() => {
-    let initEntities: Array<FormValues> = [];
-    const creatorEntity = getEntity(projectCreator);
-    if (initialValues) {
-      // Remove 'admin' key from initialValues object
-      // because we don't want to add it to the entities yet.
-      // We might want to change that once Keplr login is implemented
-      // and the admin address is associated with an actual user/org profile.
-      const filteredValues: RolesValues = Object.keys(initialValues)
-        .filter(key => key !== 'admin')
-        .reduce((cur, key: string) => {
-          return Object.assign(cur, {
-            [key]: initialValues[key as keyof RolesValues],
-          });
-        }, {});
+  // TODO Once Keplr login is implemented, add the off-chain profile associated
+  // to the current wallet address (creatorEntity) to the initial entities that can be picked up in the RoleField
+  // useEffect(() => {
+  //   let initEntities: Array<FormValues> = [];
 
-      let values = Object.values(filteredValues);
-      if (creatorEntity) {
-        values = [creatorEntity, ...values];
-      }
-      initEntities = values.filter(
-        // Remove duplicates and empty values
-        (v, i, self) =>
-          self.findIndex(t => t.id === v.id) === i && !!v?.['@type'],
-      );
-    } else if (creatorEntity) {
-      initEntities = [creatorEntity];
-    }
-    setEntities(initEntities);
-  }, [initialValues, projectCreator]);
+  //   if (initialValues) {
+  //     // Remove 'admin' key from initialValues object
+  //     // because we don't want to add it to the entities yet.
+  //     // We might want to change that once Keplr login is implemented
+  //     // and the admin address is associated with an actual user/org profile.
+  //     const filteredValues: RolesValues = Object.keys(initialValues)
+  //       .filter(key => key !== 'admin')
+  //       .reduce((cur, key: string) => {
+  //         return Object.assign(cur, {
+  //           [key]: initialValues[key as keyof RolesValues],
+  //         });
+  //       }, {});
 
-  const updateUser = async (
-    id: string,
-    partyId: string,
-    email?: string,
-    name?: string,
-    phoneNumber?: string,
-  ): Promise<void> => {
-    await updateUserById({
-      variables: {
-        input: {
-          id,
-          userPatch: {
-            email,
-            phoneNumber,
-          },
-        },
-      },
-    });
+  //     let values = Object.values(filteredValues);
+  //     if (creatorEntity) {
+  //       values = [creatorEntity, ...values];
+  //     }
+  //     initEntities = values.filter(
+  //       // Remove duplicates and empty values
+  //       (v, i, self) =>
+  //         self.findIndex(t => t.id === v.id) === i && !!v?.['@type'],
+  //     );
+  //   } else if (creatorEntity) {
+  //     initEntities = [creatorEntity];
+  //   }
+  //   setEntities(initEntities);
+  // }, [initialValues, projectCreator]);
+
+  // TODO
+  const update = async (updatedEntity: ProfileFormValues): Promise<void> => {
+    // if either of those change
     await updatePartyById({
       variables: {
         input: {
-          id: partyId,
+          id: updatedEntity.partyId,
           partyPatch: {
-            name,
+            name: updatedEntity['schema:name'],
+            image: updatedEntity['schema:image']?.['@value'],
+            description: updatedEntity['schema:description'],
           },
         },
       },
     });
+    // if wallet address changes
+    // await updateWalletById({
+    //   variables: { input: { addr: updatedEntity['regen:address'] } },
+    // });
   };
 
   const validateEntity = async <T extends ProfileFormValues | FormValues>(
@@ -219,42 +161,46 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     return errors;
   };
 
+  // TODO
   const validateProject = async (
     values: RolesValues,
   ): Promise<FormikErrors<RolesValues>> => {
     const errors: FormikErrors<RolesValues> = {};
-    if (graphData?.shaclGraphByUri?.graph) {
-      const projectPageData = {
-        ...getProjectPageBaseData(creditClassId),
-        ...values,
-      };
-      const report = await validate(
-        graphData.shaclGraphByUri.graph,
-        projectPageData,
-        'http://regen.network/ProjectPageRolesGroup',
-      );
-      if (!report.conforms) {
-        errors['regen:landOwner'] = rolesErrorMessage;
-        errors['regen:landSteward'] = rolesErrorMessage;
-        errors['regen:projectDeveloper'] = rolesErrorMessage;
-        errors['regen:projectOriginator'] = rolesErrorMessage;
-      }
-    }
+    // if (graphData?.shaclGraphByUri?.graph) {
+    //   const projectPageData = {
+    //     ...getProjectPageBaseData(creditClassId),
+    //     ...values,
+    //   };
+    //   const report = await validate(
+    //     graphData.shaclGraphByUri.graph,
+    //     projectPageData,
+    //     'http://regen.network/ProjectPageRolesGroup',
+    //   );
+    //   if (!report.conforms) {
+    //     errors['regen:landOwner'] = rolesErrorMessage;
+    //     errors['regen:landSteward'] = rolesErrorMessage;
+    //     errors['regen:projectDeveloper'] = rolesErrorMessage;
+    //     errors['regen:projectOriginator'] = rolesErrorMessage;
+    //   }
+    // }
     return errors;
   };
 
   const saveIndividual = async (
-    updatedEntity: IndividualFormValues,
+    updatedEntity: ProfileFormValues,
   ): Promise<FormValues> => {
     if (!updatedEntity.id) {
       // Create
       try {
+        // TODO only create party and associated wallet since we can't create a user without an email address
         const userRes = await createUser({
           variables: {
             input: {
-              email: updatedEntity['schema:email'],
+              // email: '', // keep empty for now until we have Keplr login
               name: updatedEntity['schema:name'],
-              phoneNumber: updatedEntity['schema:telephone'],
+              image: updatedEntity['schema:image']?.['@value'],
+              description: updatedEntity['schema:description'],
+              walletAddr: updatedEntity['regen:address'],
             },
           },
         });
@@ -275,13 +221,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
       // Update
       try {
         if (updatedEntity.partyId) {
-          await updateUser(
-            updatedEntity.id,
-            updatedEntity.partyId,
-            updatedEntity['schema:email'],
-            updatedEntity['schema:name'],
-            updatedEntity['schema:telephone'],
-          );
+          await update(updatedEntity);
         }
       } catch (e) {
         // TODO: Should we display the error banner here?
@@ -300,44 +240,26 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   };
 
   const saveOrganization = async (
-    updatedEntity: OrganizationFormValues,
+    updatedEntity: ProfileFormValues,
   ): Promise<FormValues> => {
     if (!updatedEntity.id) {
       // Create
       try {
-        const ownerRes = await createUser({
+        const orgRes = await createOrganization({
           variables: {
             input: {
-              email: updatedEntity['schema:email'],
-              name: updatedEntity['regen:responsiblePerson'],
-              phoneNumber: updatedEntity['schema:telephone'],
+              legalName: updatedEntity['schema:name'],
+              displayName: updatedEntity['schema:name'],
+              image: updatedEntity['schema:image']?.['@value'],
+              walletAddr: updatedEntity['regen:address'],
             },
           },
         });
-        if (ownerRes?.data?.reallyCreateUser?.user?.id) {
-          const orgRes = await createOrganization({
-            variables: {
-              input: {
-                ownerId: ownerRes?.data?.reallyCreateUser?.user?.id,
-                legalName: updatedEntity['schema:legalName'],
-                orgAddress: updatedEntity['schema:location'],
-                displayName: '', // temp values for now until EntityDisplay values are provided
-                image: '',
-                walletAddr: '',
-              },
-            },
-          });
-          if (orgRes?.data?.reallyCreateOrganization?.organization?.id) {
-            updatedEntity.id =
-              orgRes?.data?.reallyCreateOrganization?.organization?.id;
-            updatedEntity.partyId =
-              orgRes?.data?.reallyCreateOrganization?.organization?.partyId;
-            updatedEntity.addressId =
-              orgRes?.data?.reallyCreateOrganization?.organization?.partyByPartyId?.addressId;
-            updatedEntity.ownerId = ownerRes?.data?.reallyCreateUser?.user?.id;
-            updatedEntity.ownerPartyId =
-              ownerRes?.data?.reallyCreateUser?.user?.partyId;
-          }
+        if (orgRes?.data?.reallyCreateOrganization?.organization?.id) {
+          updatedEntity.id =
+            orgRes?.data?.reallyCreateOrganization?.organization?.id;
+          updatedEntity.partyId =
+            orgRes?.data?.reallyCreateOrganization?.organization?.partyId;
         }
       } catch (e) {
         // TODO: Should we display the error banner here?
@@ -350,34 +272,8 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     } else {
       // Update
       try {
-        await updateOrganizationById({
-          variables: {
-            input: {
-              id: updatedEntity.id,
-              organizationPatch: {
-                legalName: updatedEntity['schema:legalName'],
-              },
-            },
-          },
-        });
-        await updateAddressById({
-          variables: {
-            input: {
-              id: updatedEntity.addressId,
-              addressPatch: {
-                feature: updatedEntity['schema:location'],
-              },
-            },
-          },
-        });
-        if (updatedEntity.ownerId && updatedEntity.ownerPartyId) {
-          await updateUser(
-            updatedEntity.id,
-            updatedEntity.ownerPartyId,
-            updatedEntity['schema:email'],
-            updatedEntity['regen:responsiblePerson'],
-            updatedEntity['schema:telephone'],
-          );
+        if (updatedEntity.partyId) {
+          await update(updatedEntity);
         }
       } catch (e) {
         // TODO: Should we display the error banner here?
@@ -419,11 +315,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
         validateOnMount
         initialValues={
           initialValues || {
-            'regen:landOwner': initialValues?.['regen:landOwner'],
-            'regen:landSteward': initialValues?.['regen:landSteward'],
             'regen:projectDeveloper': initialValues?.['regen:projectDeveloper'],
-            'regen:projectOriginator':
-              initialValues?.['regen:projectOriginator'],
           }
         }
         onSubmit={async (values, { setSubmitting, setTouched }) => {
@@ -443,58 +335,11 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
           return (
             <Form translate="yes">
               <OnBoardingCard>
-                {!creditClassId && (
-                  <Subtitle
-                    size="lg"
-                    sx={{
-                      color: 'primary.contrastText',
-                      mb: { xs: 10, sm: 12 },
-                    }}
-                  >
-                    {rolesErrorMessage}
-                  </Subtitle>
-                )}
-                {!creditClassId && (
-                  <Field
-                    component={RoleField}
-                    label="Land Owner"
-                    optional
-                    description="The individual or organization that owns this land."
-                    name="regen:landOwner"
-                    options={entities}
-                    mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                    onSaveOrganization={saveOrganization}
-                    onSaveIndividual={saveIndividual}
-                    validateEntity={validateEntity}
-                    apiServerUrl={apiUri}
-                    projectId={projectId}
-                  />
-                )}
-                {!creditClassId && (
-                  <Field
-                    component={RoleField}
-                    label="Land Steward"
-                    optional
-                    description="The individual or organization that is performing the work on the ground. This can be a farmer, rancher, conservationist, forester, fisherman, etc."
-                    name="regen:landSteward"
-                    options={entities}
-                    mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                    onSaveOrganization={saveOrganization}
-                    onSaveIndividual={saveIndividual}
-                    validateEntity={validateEntity}
-                    apiServerUrl={apiUri}
-                    projectId={projectId}
-                  />
-                )}
                 <Field
                   component={RoleField}
                   label="Project Developer"
                   optional
-                  description={`The individual or organization that is in charge of managing the project and ${
-                    profile
-                      ? 'will appear on the project page'
-                      : 'is the main point of contact with Regen Marketplace'
-                  }.`}
+                  description="The individual or organization that is in charge of managing the project and will appear on the project page"
                   name="regen:projectDeveloper"
                   options={entities}
                   mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
@@ -502,35 +347,17 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
                   onSaveIndividual={saveIndividual}
                   onSaveProfile={saveProfile}
                   validateEntity={validateEntity}
-                  profile={profile}
                   apiServerUrl={apiUri}
                   projectId={projectId}
+                  profile
                 />
-                {!creditClassId && (
-                  <Field
-                    component={RoleField}
-                    label="Project Originator"
-                    optional
-                    description="The individual or organization that helps initiate the project."
-                    name="regen:projectOriginator"
-                    options={entities}
-                    mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                    onSaveOrganization={saveOrganization}
-                    onSaveIndividual={saveIndividual}
-                    validateEntity={validateEntity}
-                    apiServerUrl={apiUri}
-                    projectId={projectId}
-                  />
-                )}
-                {creditClassId && (
-                  <Field
-                    name="admin"
-                    type="text"
-                    label="Admin"
-                    component={TextField}
-                    disabled
-                  />
-                )}
+                <Field
+                  name="admin"
+                  type="text"
+                  label="Admin"
+                  component={TextField}
+                  disabled
+                />
               </OnBoardingCard>
               <ProjectPageFooter
                 onSave={submitForm}

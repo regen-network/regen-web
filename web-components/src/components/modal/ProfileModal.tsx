@@ -34,6 +34,8 @@ interface ProfileModalProps {
 
 export interface ProfileFormValues {
   id?: string;
+  partyId?: string;
+  walletId?: string;
   '@type': ProfileType;
   'schema:name'?: string;
   'schema:image'?: UrlType;

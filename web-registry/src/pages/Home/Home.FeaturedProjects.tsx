@@ -36,7 +36,7 @@ export function FeaturedProjects({
         loading={loading}
       />
       <Box sx={{ display: 'flex', justifyContent: 'center', mb: 20 }}>
-        <Link to="/projects">
+        <Link to="/projects/1">
           <ContainedButton>{'DISCOVER PROJECTS'}</ContainedButton>
         </Link>
       </Box>

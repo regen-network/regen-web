@@ -20,13 +20,16 @@ import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { basketDetailAtom } from 'pages/BasketDetails/BasketDetails.store';
+import { Link } from 'components/atoms';
 
 import forestImg from '../../../assets/forest-token.png';
 import { getAccountUrl } from '../../../lib/block-explorer';
 import { OptimizedImage } from '../../atoms/OptimizedImage';
 import {
+  PUT_BASKET_HREF,
   PUT_BASKET_LABEL,
   PUT_BASKET_TOOLTIP,
+  TAKE_BASKET_HREF,
   TAKE_BASKET_LABEL,
   TAKE_BASKET_TOOLTIP,
 } from './BasketOverview.constants';
@@ -39,6 +42,7 @@ import {
   BasketTextContainer,
   useBasketOverviewStyles,
 } from './BasketOverview.styles';
+import { BasketOverviewTooltip } from './BasketOverview.Tooltip';
 import { CreditClass, Curator } from './BasketOverview.types';
 import { getDateCriteria } from './BasketOverview.utils';
 import { useBasketPutData } from './hooks/useBasketPutData';
@@ -137,7 +141,16 @@ export const BasketOverview: React.FC<
               </OnBoardingCard>
               <Flex>
                 <InfoTooltip
-                  title={isPutButtonDisabled ? PUT_BASKET_TOOLTIP : ''}
+                  title={
+                    isPutButtonDisabled ? (
+                      <BasketOverviewTooltip
+                        text={PUT_BASKET_TOOLTIP}
+                        href={PUT_BASKET_HREF}
+                      />
+                    ) : (
+                      ''
+                    )
+                  }
                   arrow
                   placement="top"
                 >
@@ -160,7 +173,16 @@ export const BasketOverview: React.FC<
                   </span>
                 </InfoTooltip>
                 <InfoTooltip
-                  title={isTakeButtonDisabled ? TAKE_BASKET_TOOLTIP : ''}
+                  title={
+                    isTakeButtonDisabled ? (
+                      <BasketOverviewTooltip
+                        text={TAKE_BASKET_TOOLTIP}
+                        href={TAKE_BASKET_HREF}
+                      />
+                    ) : (
+                      ''
+                    )
+                  }
                   arrow
                   placement="top"
                 >

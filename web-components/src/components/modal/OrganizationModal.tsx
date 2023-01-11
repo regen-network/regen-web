@@ -126,8 +126,6 @@ function OrganizationModal({
                 <SharePermissionField />
                 <ProfileSubmitFooter
                   submitForm={submitForm}
-                  isValid={isValid}
-                  isSubmitting={isSubmitting}
                   onClose={onClose}
                 />
               </Form>

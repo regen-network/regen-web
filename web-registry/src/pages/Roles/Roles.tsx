@@ -22,11 +22,16 @@ import {
 import {
   Maybe,
   PartyFieldsFragment,
+  PartyType,
   ProjectPatch,
+  useCreatePartyMutation,
+  useCreateWalletMutation,
   useGetOrganizationProfileByEmailQuery,
   useProjectByIdQuery,
   useShaclGraphByUriQuery,
+  useUpdatePartyByIdMutation,
   useUpdateProjectByIdMutation,
+  useUpdateWalletByIdMutation,
 } from '../../generated/graphql';
 import { useWallet } from '../../lib/wallet/wallet';
 import { useProjectEditContext } from '../ProjectEdit';
@@ -52,20 +57,10 @@ function getPartyIds(
   return null;
 }
 
-function isFormValues(
-  values: FormValues | ProfileFormValues | undefined,
-): values is FormValues {
-  if ((values as FormValues)?.partyId) {
-    return true;
-  }
-  return false;
-}
-
 function stripPartyIds(
   values: ProfileFormValues | undefined,
 ): ProfileFormValues | undefined {
   delete values?.id;
-  delete values?.partyId;
 
   return values;
 }
@@ -88,7 +83,10 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
     isEdit,
   );
   const [updateProject] = useUpdateProjectByIdMutation();
-
+  const [createWallet] = useCreateWalletMutation();
+  const [createParty] = useCreatePartyMutation();
+  const [updateWallet] = useUpdateWalletByIdMutation();
+  const [updateParty] = useUpdatePartyByIdMutation();
   const { wallet } = useWallet();
 
   // TODO validation
@@ -110,7 +108,7 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
   if (metadata) {
     const projectDeveloper = {
       ...metadata['regen:projectDeveloper'],
-      ...getPartyIds(offChainProject?.partyByDeveloperId),
+      id: offChainProject?.partyByDeveloperId?.id,
     };
     initialValues = {
       ...initialValues,
@@ -131,25 +129,100 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
   }
 
   async function submit(values: RolesValues): Promise<void> {
-    let projectPatch: ProjectPatch = {};
-
-    if (
-      isFormValues(values['regen:projectDeveloper']) &&
-      values['regen:projectDeveloper']?.partyId
-    ) {
-      projectPatch = {
-        developerId: values['regen:projectDeveloper']?.partyId,
-      };
-    }
-
-    // We're striping the ids to not bloat the database with unnecessary data.
-    // Those ids are only stored in the local state in order to be able to
-    // update the related entities.
-    // But there are not needed to make the project metadata valid
-    // and are already stored through project relations (i.e. developerId, stewardId, etc.)
-    projectPatch = { ...metadata, ...stripIds(values), ...projectPatch };
-
+    // TODO extract function into separate file
+    // Project creation flow
     try {
+      let projectPatch: ProjectPatch = {};
+
+      const developer = values['regen:projectDeveloper'];
+      const existingDeveloperParty = offChainProject?.partyByDeveloperId;
+      const existingDeveloperWallet = existingDeveloperParty?.walletByWalletId;
+      if (developer) {
+        // 1. Handle wallet creation / update
+        // This will just fail if there's already a wallet existing with given addr
+        let walletId;
+        const addr = developer['regen:address'];
+        if (addr) {
+          // The project developer associated wallet hasn't been created yet
+          if (!existingDeveloperWallet) {
+            const res = await createWallet({
+              variables: {
+                input: {
+                  wallet: {
+                    addr,
+                  },
+                },
+              },
+            });
+            walletId = res.data?.createWallet?.wallet?.id;
+          } else if (
+            // New address is different from existing one
+            existingDeveloperWallet.addr !== addr
+          ) {
+            walletId = existingDeveloperWallet.id;
+            await updateWallet({
+              variables: {
+                input: {
+                  id: walletId,
+                  walletPatch: {
+                    addr,
+                  },
+                },
+              },
+            });
+          }
+        }
+
+        // 2. Handle party creation / update
+        // The project developer associated party hasn't been created yet
+        if (!existingDeveloperParty) {
+          const res = await createParty({
+            variables: {
+              input: {
+                party: {
+                  type:
+                    // TODO: extract reusable function and use constant
+                    developer['@type'] === 'regen:Individual'
+                      ? PartyType.User
+                      : PartyType.Organization,
+                  name: developer['schema:name'],
+                  walletId,
+                },
+              },
+            },
+          });
+          const developerId = res.data?.createParty?.party?.id;
+          projectPatch = { developerId };
+        } else if (
+          developer['schema:name'] !== existingDeveloperParty.name ||
+          developer['schema:description'] !==
+            existingDeveloperParty.description ||
+          developer['schema:image']?.['@value'] !==
+            existingDeveloperParty.image ||
+          walletId
+        ) {
+          updateParty({
+            variables: {
+              input: {
+                id: developer.id,
+                partyPatch: {
+                  name: developer['schema:name'],
+                  description: developer['schema:description'],
+                  image: developer['schema:image']?.['@value'],
+                  walletId,
+                },
+              },
+            },
+          });
+        }
+      }
+      const newMetadata = { ...stripIds(values), ...metadata };
+      // In creation mode, we store all metadata in the project.table temporarily
+      if (!isEdit)
+        projectPatch = {
+          metadata: newMetadata,
+          ...projectPatch,
+        };
       await updateProject({
         variables: {
           input: {
@@ -158,7 +231,12 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
           },
         },
       });
-      !isEdit && navigateNext();
+      if (!isEdit) {
+        navigateNext();
+      } else {
+        // In edit mode, we need to update the project on chain metadata
+        // TODO submit MsgUpdateProjectMetadata
+      }
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554
@@ -172,6 +250,7 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
       onNext={navigateNext}
       onPrev={navigatePrev}
       initialValues={initialValues}
+      projectId={offChainProject?.id}
       // graphData={graphData}
     />
   );

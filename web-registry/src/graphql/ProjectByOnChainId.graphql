@@ -1,5 +1,6 @@
 query ProjectByOnChainId($onChainId: String!) {
   projectByOnChainId(onChainId: $onChainId) {
+    id
     eventsByProjectId(orderBy: DATE_ASC) {
       nodes {
         date

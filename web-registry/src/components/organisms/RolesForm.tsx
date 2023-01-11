@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -9,17 +8,9 @@ import {
   isValidAddress,
   requiredMessage,
 } from 'web-components/lib/components/inputs/validation';
-import { IndividualFormValues } from 'web-components/lib/components/modal/IndividualModal';
-import { OrganizationFormValues } from 'web-components/lib/components/modal/OrganizationModal';
 import { ProfileFormValues } from 'web-components/lib/components/modal/ProfileModal';
-import { Subtitle } from 'web-components/lib/components/typography';
 
-import {
-  defaultProjectContext,
-  getCompactedPath,
-  getProjectPageBaseData,
-  validate,
-} from 'lib/rdf';
+import { defaultProjectContext, getCompactedPath, validate } from 'lib/rdf';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
 import {
@@ -27,16 +18,7 @@ import {
   RoleField,
 } from 'components/molecules/RoleField/RoleField';
 
-import {
-  GetOrganizationProfileByEmailQuery,
-  ShaclGraphByUriQuery,
-  useReallyCreateOrganizationMutation,
-  useReallyCreateUserMutation,
-  useUpdateAddressByIdMutation,
-  useUpdateOrganizationByIdMutation,
-  useUpdatePartyByIdMutation,
-  useUpdateUserByIdMutation,
-} from '../../generated/graphql';
+import { ShaclGraphByUriQuery } from '../../generated/graphql';
 import getApiUri from '../../lib/apiUri';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../molecules';
@@ -47,6 +29,7 @@ interface RolesFormProps {
   onPrev?: () => void;
   initialValues?: RolesValues;
   graphData?: ShaclGraphByUriQuery;
+  projectId?: string;
 }
 
 export interface RolesValues {
@@ -54,78 +37,45 @@ export interface RolesValues {
   admin?: string;
 }
 
-const rolesErrorMessage = 'You must add one of the following roles.';
-
 const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   initialValues,
   graphData,
+  projectId,
   ...props
 }) => {
   const apiUri = getApiUri();
-  const { projectId } = useParams();
   const [entities, setEntities] = useState<
     Array<FormValues | ProfileFormValues>
   >([]);
   const { confirmSave, isEdit } = useProjectEditContext();
 
-  const [createUser] = useReallyCreateUserMutation();
-  const [createOrganization] = useReallyCreateOrganizationMutation();
-  const [updatePartyById] = useUpdatePartyByIdMutation();
-  const [updateAddressById] = useUpdateAddressByIdMutation();
-
   // TODO Once Keplr login is implemented, add the off-chain profile associated
-  // to the current wallet address (creatorEntity) to the initial entities that can be picked up in the RoleField
-  // useEffect(() => {
-  //   let initEntities: Array<FormValues> = [];
+  // to the current wallet address to the initial entities that can be picked up in the RoleField
+  useEffect(() => {
+    let initEntities: Array<FormValues> = [];
 
-  //   if (initialValues) {
-  //     // Remove 'admin' key from initialValues object
-  //     // because we don't want to add it to the entities yet.
-  //     // We might want to change that once Keplr login is implemented
-  //     // and the admin address is associated with an actual user/org profile.
-  //     const filteredValues: RolesValues = Object.keys(initialValues)
-  //       .filter(key => key !== 'admin')
-  //       .reduce((cur, key: string) => {
-  //         return Object.assign(cur, {
-  //           [key]: initialValues[key as keyof RolesValues],
-  //         });
-  //       }, {});
+    if (initialValues) {
+      // Remove 'admin' key from initialValues object
+      // because we don't want to add it to the entities yet.
+      // We might want to change that once Keplr login is implemented
+      // and the admin address is associated with an actual user/org profile.
+      const filteredValues: RolesValues = Object.keys(initialValues)
+        .filter(key => key !== 'admin')
+        .reduce((cur, key: string) => {
+          return Object.assign(cur, {
+            [key]: initialValues[key as keyof RolesValues],
+          });
+        }, {});
 
-  //     let values = Object.values(filteredValues);
-  //     if (creatorEntity) {
-  //       values = [creatorEntity, ...values];
-  //     }
-  //     initEntities = values.filter(
-  //       // Remove duplicates and empty values
-  //       (v, i, self) =>
-  //         self.findIndex(t => t.id === v.id) === i && !!v?.['@type'],
-  //     );
-  //   } else if (creatorEntity) {
-  //     initEntities = [creatorEntity];
-  //   }
-  //   setEntities(initEntities);
-  // }, [initialValues, projectCreator]);
-
-  // TODO
-  const update = async (updatedEntity: ProfileFormValues): Promise<void> => {
-    // if either of those change
-    await updatePartyById({
-      variables: {
-        input: {
-          id: updatedEntity.partyId,
-          partyPatch: {
-            name: updatedEntity['schema:name'],
-            image: updatedEntity['schema:image']?.['@value'],
-            description: updatedEntity['schema:description'],
-          },
-        },
-      },
-    });
-    // if wallet address changes
-    // await updateWalletById({
-    //   variables: { input: { addr: updatedEntity['regen:address'] } },
-    // });
-  };
+      let values = Object.values(filteredValues);
+      initEntities = values.filter(
+        // Remove duplicates and empty values
+        (v, i, self) =>
+          self.findIndex(t => t.id === v.id) === i && !!v?.['@type'],
+      );
+    }
+    setEntities(initEntities);
+  }, [initialValues]);
 
   const validateEntity = async <T extends ProfileFormValues | FormValues>(
     e: T,
@@ -144,10 +94,11 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
         errors[addrPath] = invalidAddress;
       }
     }
+    // TODO might need to update regen-registry/issues/1501
     if (graphData?.shaclGraphByUri?.graph) {
       const report = await validate(
         graphData.shaclGraphByUri.graph,
-        { ...defaultProjectContext, ...e },
+        { ...defaultProjectContext, ...p },
         'http://regen.network/ProjectPageRolesGroup',
       );
       for (const result of report.results) {
@@ -161,7 +112,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     return errors;
   };
 
-  // TODO
+  // TODO regen-registry/issues/1501
   const validateProject = async (
     values: RolesValues,
   ): Promise<FormikErrors<RolesValues>> => {
@@ -177,116 +128,10 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     //     'http://regen.network/ProjectPageRolesGroup',
     //   );
     //   if (!report.conforms) {
-    //     errors['regen:landOwner'] = rolesErrorMessage;
-    //     errors['regen:landSteward'] = rolesErrorMessage;
     //     errors['regen:projectDeveloper'] = rolesErrorMessage;
-    //     errors['regen:projectOriginator'] = rolesErrorMessage;
     //   }
     // }
     return errors;
-  };
-
-  const saveIndividual = async (
-    updatedEntity: ProfileFormValues,
-  ): Promise<FormValues> => {
-    if (!updatedEntity.id) {
-      // Create
-      try {
-        // TODO only create party and associated wallet since we can't create a user without an email address
-        const userRes = await createUser({
-          variables: {
-            input: {
-              // email: '', // keep empty for now until we have Keplr login
-              name: updatedEntity['schema:name'],
-              image: updatedEntity['schema:image']?.['@value'],
-              description: updatedEntity['schema:description'],
-              walletAddr: updatedEntity['regen:address'],
-            },
-          },
-        });
-        if (userRes?.data?.reallyCreateUser?.user?.id) {
-          updatedEntity.id = userRes?.data?.reallyCreateUser?.user?.id;
-          updatedEntity.partyId =
-            userRes?.data?.reallyCreateUser?.user?.partyId;
-        }
-      } catch (e) {
-        // TODO: Should we display the error banner here?
-        // https://github.com/regen-network/regen-registry/issues/554
-        // eslint-disable-next-line no-console
-        console.log(e);
-      }
-      const newEntities = [...entities, { ...updatedEntity }];
-      setEntities(newEntities);
-    } else {
-      // Update
-      try {
-        if (updatedEntity.partyId) {
-          await update(updatedEntity);
-        }
-      } catch (e) {
-        // TODO: Should we display the error banner here?
-        // https://github.com/regen-network/regen-registry/issues/554
-        // eslint-disable-next-line no-console
-        console.log(e);
-      }
-      const updatedEntities = entities.map((existingEntity: FormValues) =>
-        existingEntity.id === updatedEntity.id
-          ? { ...updatedEntity }
-          : existingEntity,
-      );
-      setEntities(updatedEntities);
-    }
-    return Promise.resolve(updatedEntity);
-  };
-
-  const saveOrganization = async (
-    updatedEntity: ProfileFormValues,
-  ): Promise<FormValues> => {
-    if (!updatedEntity.id) {
-      // Create
-      try {
-        const orgRes = await createOrganization({
-          variables: {
-            input: {
-              legalName: updatedEntity['schema:name'],
-              displayName: updatedEntity['schema:name'],
-              image: updatedEntity['schema:image']?.['@value'],
-              walletAddr: updatedEntity['regen:address'],
-            },
-          },
-        });
-        if (orgRes?.data?.reallyCreateOrganization?.organization?.id) {
-          updatedEntity.id =
-            orgRes?.data?.reallyCreateOrganization?.organization?.id;
-          updatedEntity.partyId =
-            orgRes?.data?.reallyCreateOrganization?.organization?.partyId;
-        }
-      } catch (e) {
-        // TODO: Should we display the error banner here?
-        // https://github.com/regen-network/regen-registry/issues/554
-        // eslint-disable-next-line no-console
-        console.log(e);
-      }
-      const newEntities = [...entities, { ...updatedEntity }];
-      setEntities(newEntities);
-    } else {
-      // Update
-      try {
-        if (updatedEntity.partyId) {
-          await update(updatedEntity);
-        }
-      } catch (e) {
-        // TODO: Should we display the error banner here?
-        // https://github.com/regen-network/regen-registry/issues/554
-        // eslint-disable-next-line no-console
-        console.log(e);
-      }
-      const updatedEntities = entities.map((existingEntity: FormValues) =>
-        existingEntity.id === updatedEntity.id ? updatedEntity : existingEntity,
-      );
-      setEntities(updatedEntities);
-    }
-    return Promise.resolve(updatedEntity);
   };
 
   const saveProfile = async (
@@ -331,7 +176,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
         }}
         validate={validateProject}
       >
-        {({ submitForm, isValid, isSubmitting }) => {
+        {({ submitForm, isValid, isSubmitting, touched }) => {
           return (
             <Form translate="yes">
               <OnBoardingCard>
@@ -343,13 +188,10 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
                   name="regen:projectDeveloper"
                   options={entities}
                   mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                  onSaveOrganization={saveOrganization}
-                  onSaveIndividual={saveIndividual}
                   onSaveProfile={saveProfile}
                   validateEntity={validateEntity}
                   apiServerUrl={apiUri}
                   projectId={projectId}
-                  profile
                 />
                 <Field
                   name="admin"
@@ -363,7 +205,9 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
                 onSave={submitForm}
                 onPrev={props.onPrev}
                 onNext={props.onNext}
-                saveDisabled={!isValid || isSubmitting}
+                saveDisabled={
+                  !isValid || isSubmitting || !Object.keys(touched).length
+                }
               />
             </Form>
           );

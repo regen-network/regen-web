@@ -11,17 +11,17 @@ import {
   BUY_BASKET_TOKENS,
   BUY_BASKET_TOKENS_TOOLTIP,
   BUY_BUTTON_LINK,
-} from './BastketDetailsActionsBar.constants';
+} from './BasketDetailsActionsBar.constants';
 
-type Params = {
+type Props = {
   isBuyButtonDisabled?: boolean;
   onBuyButtonClick?: () => void;
 };
 
-export const BastketDetailsActionsBar = ({
+export const BasketDetailsActionsBar = ({
   isBuyButtonDisabled = false,
   onBuyButtonClick,
-}: Params): JSX.Element => {
+}: Props): JSX.Element => {
   return (
     <StickyBar>
       <Box

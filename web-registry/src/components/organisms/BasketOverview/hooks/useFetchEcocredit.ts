@@ -3,6 +3,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { useLedger } from 'ledger';
+import { client as sanityClient } from 'lib/clients/sanity';
 import { normalizeEcocredits } from 'lib/normalizers/ecocredits/normalizeEcocredits';
 import { getBalanceQuery } from 'lib/queries/react-query/ecocredit/getBalanceQuery/getBalanceQuery';
 import { getBalanceQueryKey } from 'lib/queries/react-query/ecocredit/getBalanceQuery/getBalanceQuery.config';
@@ -11,8 +12,6 @@ import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQue
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { useWallet } from 'lib/wallet/wallet';
-
-import { client as sanityClient } from '../../../../lib/clients/sanity';
 
 interface Response {
   credit: BatchInfoWithBalance;

@@ -91,7 +91,7 @@ export const BasketOverviewModals = ({
   const basketPutSubmit = useBasketPutSubmit({
     accountAddress,
     baskets: basketInfo ? [basketInfo] : [],
-    basketPutTitle: PUT_BASKET_LABEL?.toUpperCase(),
+    basketPutTitle: PUT_BASKET_LABEL,
     credit,
     onBroadcast,
     onTxSuccessful,
@@ -102,7 +102,7 @@ export const BasketOverviewModals = ({
   const basketTakeSubmit = useBasketTakeSubmit({
     accountAddress,
     baskets: basketInfo ? [basketInfo] : [],
-    basketTakeTitle: TAKE_BASKET_LABEL?.toUpperCase(),
+    basketTakeTitle: TAKE_BASKET_LABEL,
     onBroadcast,
     onTxSuccessful,
     onErrorCallback: onError,

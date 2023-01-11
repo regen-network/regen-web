@@ -20,7 +20,6 @@ import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { basketDetailAtom } from 'pages/BasketDetails/BasketDetails.store';
-import { Link } from 'components/atoms';
 
 import forestImg from '../../../assets/forest-token.png';
 import { getAccountUrl } from '../../../lib/block-explorer';

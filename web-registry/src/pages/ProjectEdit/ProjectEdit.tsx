@@ -166,7 +166,7 @@ function ProjectEdit(): JSX.Element {
               href={
                 section && isMobile
                   ? `/project-pages/${projectId}/edit/`
-                  : '/project-pages'
+                  : '/ecocredits/projects'
               }
               className={styles.back}
             >

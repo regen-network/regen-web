@@ -1,7 +1,10 @@
+import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import { BatchInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 
+import { GECKO_PRICES } from 'pages/Projects/hooks/useProjectsSellOrders.types';
+import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
@@ -10,6 +13,7 @@ import {
   NormalizedSellOrder,
   ProjectInfoWithMetadata,
 } from './Storefront.types';
+import { getAskUsdAmount } from './Storefront.utils';
 
 /* normalizeprojectsInfosByHandleMap */
 type NormalizeprojectsInfosByHandleMapProps = {
@@ -76,12 +80,14 @@ type NormalizedSellOrderProps = {
     string,
     { name: string; classIdOrName: string; classId: string }
   >;
+  geckoPrices?: GECKO_PRICES;
 };
 
 export const normalizeSellOrders = ({
   batchInfos,
   sellOrders = [],
   projectsInfosByHandleMap,
+  geckoPrices,
 }: NormalizedSellOrderProps): NormalizedSellOrder[] =>
   sellOrders.map(
     ({
@@ -101,6 +107,12 @@ export const normalizeSellOrders = ({
       const projectId = currentBatch?.projectId ?? '';
       const isLoading =
         currentBatch === undefined || projectsInfosByHandleMap.size === 0;
+      const askUsdAmount = getAskUsdAmount({
+        askAmount,
+        askBaseDenom,
+        quantity,
+        geckoPrices,
+      });
 
       return {
         id: String(id),
@@ -119,6 +131,7 @@ export const normalizeSellOrders = ({
         },
         status: 'Partially filled',
         askAmount,
+        askUsdAmount,
         askDenom,
         askBaseDenom,
         amountAvailable: quantity,

@@ -4,12 +4,15 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
+import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import { useQueries, useQuery } from '@tanstack/react-query';
 
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/ActionsTable.constants';
 
 import { useLedger } from 'ledger';
+import { GECKO_EEUR_ID, GECKO_USDC_ID } from 'lib/coingecko';
+import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 import { getBatchQuery } from 'lib/queries/react-query/ecocredit/getBatchQuery/getBatchQuery';
 import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
@@ -19,6 +22,7 @@ import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllC
 import { useFetchSellOrders } from 'features/marketplace/BuySellOrderFlow/hooks/useFetchSellOrders';
 import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { UISellOrderInfo } from 'pages/Projects/Projects.types';
+import useMarketplaceQuery from 'hooks/useMarketplaceQuery';
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 import { client as sanityClient } from '../../../../lib/clients/sanity';
@@ -61,6 +65,8 @@ export const useNormalizedSellOrders = (): ResponseType => {
     () => sellOrders?.map(normalizeToUISellOrderInfo),
     [sellOrders],
   );
+
+  const simplePrice = useQuery(getSimplePriceQuery({}));
 
   // Off-chain stored Projects
   const { data: offChainProjectData } = useQuery(
@@ -146,8 +152,13 @@ export const useNormalizedSellOrders = (): ResponseType => {
         batchInfos,
         sellOrders,
         projectsInfosByHandleMap,
+        geckoPrices: {
+          regenPrice: simplePrice?.data?.regen?.usd,
+          eeurPrice: simplePrice?.data?.[GECKO_EEUR_ID]?.usd,
+          usdcPrice: simplePrice?.data?.[GECKO_USDC_ID]?.usd,
+        },
       }),
-    [batchInfos, sellOrders, projectsInfosByHandleMap],
+    [batchInfos, sellOrders, projectsInfosByHandleMap, simplePrice],
   );
 
   return {

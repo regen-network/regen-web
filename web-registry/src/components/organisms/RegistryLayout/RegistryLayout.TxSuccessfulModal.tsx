@@ -9,7 +9,7 @@ import { Link } from 'components/atoms';
 
 export const RegistryLayoutTxSuccessfulModal = (): JSX.Element => {
   const [
-    { cardItems, title, cardTitle, open, txHash, buttonTitle },
+    { cardItems, title, cardTitle, open, txHash, buttonTitle, buttonLink },
     setTxSuccessfulModalAtom,
   ] = useAtom(txSuccessfulModalAtom);
   const onClose = (): void =>
@@ -24,6 +24,7 @@ export const RegistryLayoutTxSuccessfulModal = (): JSX.Element => {
       title={title}
       cardTitle={cardTitle ?? ''}
       buttonTitle={buttonTitle}
+      buttonLink={buttonLink}
       onClose={onClose}
       txHash={txHash ?? ''}
       txHashUrl={txHashUrl}

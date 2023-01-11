@@ -1,3 +1,6 @@
 export const PUT_BASKET_LABEL = 'put in basket';
+export const PUT_BASKET_TOOLTIP =
+  'You do not have any ecocredits that are elligible for this basket.';
 export const TAKE_BASKET_LABEL = 'take from basket';
-export const CLOSE_BUTTON_LABEL = 'close window';
+export const TAKE_BASKET_TOOLTIP = 'You do not have any NCT basket tokens.';
+export const VIEW_PORTFOLIO = 'view portfolio';

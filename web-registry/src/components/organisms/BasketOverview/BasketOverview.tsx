@@ -1,17 +1,23 @@
 import React from 'react';
 import { Grid } from '@mui/material';
+import { ERROR_BANNER } from 'config/contents';
 import { useAtom } from 'jotai';
 
 import { Flex } from 'web-components/lib/components/box';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Section from 'web-components/lib/components/section';
+import InfoTooltip from 'web-components/lib/components/tooltip/InfoTooltip';
 import {
   Body,
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
 import { formatNumber } from 'web-components/lib/utils/format';
+import { truncate } from 'web-components/lib/utils/truncate';
+
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { basketDetailAtom } from 'pages/BasketDetails/BasketDetails.store';
 
@@ -20,7 +26,9 @@ import { getAccountUrl } from '../../../lib/block-explorer';
 import { OptimizedImage } from '../../atoms/OptimizedImage';
 import {
   PUT_BASKET_LABEL,
+  PUT_BASKET_TOOLTIP,
   TAKE_BASKET_LABEL,
+  TAKE_BASKET_TOOLTIP,
 } from './BasketOverview.constants';
 import { BasketItem } from './BasketOverview.Item';
 import { BasketItemWithLinkList } from './BasketOverview.ItemWithLinkList';
@@ -62,19 +70,23 @@ export const BasketOverview: React.FC<
   const { classes: styles } = useBasketOverviewStyles();
   const basketPutData = useBasketPutData();
   const basketTakeData = useBasketTakeData();
+  const { wallet } = useWallet();
   const [, setBasketDetailAtom] = useAtom(basketDetailAtom);
+  const [, setErrorBannerTextAtom] = useAtom(errorBannerTextAtom);
   const { isLoadingPutData, creditBatchDenoms } = basketPutData;
   const { isLoadingTakeData, basketToken } = basketTakeData;
+  const hasAddress = !!wallet?.address;
   const isPutButtonDisabled =
-    isLoadingPutData || creditBatchDenoms.length === 0;
+    (isLoadingPutData || creditBatchDenoms.length === 0) && hasAddress;
   const isTakeButtonDisabled =
-    isLoadingTakeData ||
-    Number(basketToken.balance?.balance?.amount ?? 0) === 0;
+    (isLoadingTakeData ||
+      Number(basketToken.balance?.balance?.amount ?? 0) === 0) &&
+    hasAddress;
 
   return (
     <>
       <BasketSectionContainer>
-        <Section className={styles.content}>
+        <Section className={styles.content} isPaddingTopMobile={false}>
           <Grid container>
             <BasketImageContainer item xs={12} sm={5}>
               <OptimizedImage
@@ -105,7 +117,7 @@ export const BasketOverview: React.FC<
                   />
                   <BasketItem
                     label="curator"
-                    data={curator.name}
+                    data={truncate(curator.name)}
                     link={getAccountUrl(curator.address as string)}
                   />
                   <BasketItemWithLinkList
@@ -124,27 +136,51 @@ export const BasketOverview: React.FC<
                 </Grid>
               </OnBoardingCard>
               <Flex>
-                <OutlinedButton
-                  sx={{ mr: 5 }}
-                  onClick={() =>
-                    setBasketDetailAtom(
-                      atom => void (atom.isPutModalOpen = true),
-                    )
-                  }
-                  disabled={isPutButtonDisabled}
+                <InfoTooltip
+                  title={isPutButtonDisabled ? PUT_BASKET_TOOLTIP : ''}
+                  arrow
+                  placement="top"
                 >
-                  {PUT_BASKET_LABEL}
-                </OutlinedButton>
-                <OutlinedButton
-                  onClick={() =>
-                    setBasketDetailAtom(
-                      atom => void (atom.isTakeModalOpen = true),
-                    )
-                  }
-                  disabled={isTakeButtonDisabled}
+                  <span>
+                    <OutlinedButton
+                      sx={{ mr: 5 }}
+                      onClick={() => {
+                        if (hasAddress) {
+                          setBasketDetailAtom(
+                            atom => void (atom.isPutModalOpen = true),
+                          );
+                        } else {
+                          setErrorBannerTextAtom(ERROR_BANNER);
+                        }
+                      }}
+                      disabled={isPutButtonDisabled}
+                    >
+                      {PUT_BASKET_LABEL}
+                    </OutlinedButton>
+                  </span>
+                </InfoTooltip>
+                <InfoTooltip
+                  title={isTakeButtonDisabled ? TAKE_BASKET_TOOLTIP : ''}
+                  arrow
+                  placement="top"
                 >
-                  {TAKE_BASKET_LABEL}
-                </OutlinedButton>
+                  <span>
+                    <OutlinedButton
+                      onClick={() => {
+                        if (hasAddress) {
+                          setBasketDetailAtom(
+                            atom => void (atom.isTakeModalOpen = true),
+                          );
+                        } else {
+                          setErrorBannerTextAtom(ERROR_BANNER);
+                        }
+                      }}
+                      disabled={isTakeButtonDisabled}
+                    >
+                      {TAKE_BASKET_LABEL}
+                    </OutlinedButton>
+                  </span>
+                </InfoTooltip>
               </Flex>
             </BasketTextContainer>
           </Grid>

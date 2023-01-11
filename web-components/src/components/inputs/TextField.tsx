@@ -29,7 +29,7 @@ export interface RegenTextFieldProps
   endAdornment?: React.ReactNode;
   step?: number;
   customInputProps?: { min?: number; max?: number };
-  description?: string;
+  description?: string | React.ReactNode;
 }
 
 type UseStylesParams = {

@@ -19,9 +19,9 @@ import { OnTxSuccessfulProps } from 'pages/Dashboard/MyEcocredits/MyEcocredits.t
 import { useMsgClient } from 'hooks';
 
 import {
-  CLOSE_BUTTON_LABEL,
   PUT_BASKET_LABEL,
   TAKE_BASKET_LABEL,
+  VIEW_PORTFOLIO,
 } from './BasketOverview.constants';
 import { BasketPutData } from './hooks/useBasketPutData';
 import { BasketTakeData } from './hooks/useBasketTakeData';
@@ -73,7 +73,8 @@ export const BasketOverviewModals = ({
       atom.cardItems = cardItems;
       atom.title = title;
       atom.cardTitle = cardTitle;
-      atom.buttonTitle = CLOSE_BUTTON_LABEL;
+      atom.buttonTitle = VIEW_PORTFOLIO;
+      atom.buttonLink = '/ecocredits/portfolio';
     });
   };
 

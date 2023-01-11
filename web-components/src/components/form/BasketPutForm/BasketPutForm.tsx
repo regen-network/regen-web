@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from '@mui/material';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 
+import { Body } from '../../../components/typography';
 import AmountField from '../../inputs/AmountField';
 import SelectTextField, { Option } from '../../inputs/SelectTextField';
 import { requiredMessage, validateAmount } from '../../inputs/validation';
@@ -75,7 +77,17 @@ const BasketPutForm: React.FC<React.PropsWithChildren<FormProps>> = ({
             <Field
               name="batchDenom"
               label="Choose ecocredits batch"
-              description="This is the geographical location where the credits will retire."
+              description={
+                <Body>
+                  {'Choose any ecocredits that are eligible for this basket. '}
+                  <Link
+                    href="https://guides.regen.network/guides/regen-marketplace/baskets/put-in-basket"
+                    target="_blank"
+                  >
+                    Learn more»
+                  </Link>
+                </Body>
+              }
               component={SelectTextField}
               options={batchDenomsOptions}
               native={false}

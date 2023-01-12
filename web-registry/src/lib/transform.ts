@@ -3,10 +3,7 @@ import { IssuanceModalData } from 'web-components/lib/components/modal/IssuanceM
 import { Party } from 'web-components/lib/components/modal/LedgerModal';
 import { getFormattedPeriod } from 'web-components/lib/utils/format';
 
-import {
-  ProjectPageMetadataLD,
-  ProjectStakeholder,
-} from 'lib/db/types/json-ld';
+import { ProjectMetadataLD, ProjectStakeholder } from 'lib/db/types/json-ld';
 
 import {
   Maybe,
@@ -189,7 +186,7 @@ type StakeholderType =
   | 'regen:projectOriginator';
 
 const getPartyFromMetadata = (
-  metadata: Partial<ProjectPageMetadataLD>,
+  metadata: Partial<ProjectMetadataLD>,
   role: StakeholderType,
 ): Party | undefined => {
   const metadataRole: ProjectStakeholder | undefined = metadata[role];
@@ -211,7 +208,7 @@ const getPartyFromMetadata = (
 
 export function getDisplayParty(
   role: StakeholderType,
-  metadata?: Partial<ProjectPageMetadataLD>,
+  metadata?: Partial<ProjectMetadataLD>,
   party?: Maybe<PartyFieldsFragment>,
 ): Party | undefined {
   const showOnProjectPage = metadata?.[role]?.['regen:showOnProjectPage'];

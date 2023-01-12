@@ -265,17 +265,17 @@ function ProjectTopSection({
             projectAdmin={getDisplayAdmin(onChainProject?.admin)}
             projectDeveloper={getDisplayParty(
               'regen:projectDeveloper',
-              projectPageMetadata,
+              anchoredMetadata,
               project?.partyByDeveloperId,
             )}
             landSteward={getDisplayParty(
               'regen:landSteward',
-              projectPageMetadata,
+              anchoredMetadata,
               project?.partyByStewardId,
             )}
             landOwner={getDisplayParty(
               'regen:landOwner',
-              projectPageMetadata,
+              anchoredMetadata,
               project?.partyByLandOwnerId,
             )}
             // TODO if no off-chain data, use on-chain project.issuer

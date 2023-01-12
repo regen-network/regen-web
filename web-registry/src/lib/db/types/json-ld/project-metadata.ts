@@ -14,22 +14,22 @@ export interface ProjectMetadataLD {
   'regen:projectSize': ProjectSize;
   'regen:projectStartDate': TypeValue;
   'regen:projectEndDate': TypeValue;
+  'regen:projectDeveloper': ProjectStakeholder;
+  'regen:landSteward': ProjectStakeholder;
+  'regen:landOwner': ProjectStakeholder;
+  'regen:projectOriginator': ProjectStakeholder;
 }
 
 /** Un-anchored metadata from our DB. This is editable without a Ledger TX. */
 export interface ProjectPageMetadataLD {
   '@context': Context;
-  '@type': string; // regen:C01-Project-Page
+  '@type': string; // regen:Project-Page
   'schema:image': UrlType;
   'schema:creditText': string;
   'regen:galleryPhotos': UrlList;
   'regen:previewPhoto': UrlType;
   'regen:videoURL': UrlType;
-  'regen:projectDeveloper': ProjectStakeholder;
   'regen:glanceText': any;
-  'regen:landSteward': ProjectStakeholder;
-  'regen:landOwner': ProjectStakeholder;
-  'regen:projectOriginator': ProjectStakeholder;
   'regen:landStory': string;
   'regen:landStewardStory': string;
   'regen:landStewardPhoto': UrlType;

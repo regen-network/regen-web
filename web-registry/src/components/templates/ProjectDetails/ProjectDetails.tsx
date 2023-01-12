@@ -236,10 +236,7 @@ function ProjectDetails(): JSX.Element {
         geojson={geojson}
         isGISFile={isGISFile}
         onChainProjectId={onChainProjectId}
-        loading={
-          loadingDb
-          // || loadingAnchoredMetadata // TODO
-        }
+        loading={loadingDb || loadingAnchoredMetadata}
       />
 
       {impactData?.length > 0 && (

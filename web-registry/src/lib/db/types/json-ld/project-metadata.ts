@@ -3,7 +3,7 @@ import { NameUrl, TypeValue, UrlList, UrlType } from 'lib/rdf/types';
 /** Anchored metadata AKA "Additional Info" - Editable only with a signed Ledger TX. */
 export interface ProjectMetadataLD {
   '@context': Context;
-  '@type': string; // regen:C01-Project
+  '@type': string; // ex: regen:C01-Project
   'schema:name': string;
   'schema:location': any;
   'regen:projectType': string;
@@ -24,21 +24,28 @@ export interface ProjectMetadataLD {
 export interface ProjectPageMetadataLD {
   '@context': Context;
   '@type': string; // regen:Project-Page
-  'schema:image': UrlType;
-  'schema:creditText': string;
-  'regen:galleryPhotos': UrlList;
-  'regen:previewPhoto': UrlType;
-  'regen:videoURL': UrlType;
-  'regen:glanceText': any;
-  'regen:landStory': string;
-  'regen:landStewardStory': string;
-  'regen:landStewardPhoto': UrlType;
-  'regen:projectQuote': ProjectQuote;
-  'regen:landStewardStoryTitle': string;
+  'regen:creditClassId': string;
+
+  'regen:previewPhoto'?: UrlType;
+  'schema:image'?: UrlType; // exist?
+  'schema:creditText'?: string;
+  'regen:galleryPhotos'?: UrlList;
+  'regen:videoURL'?: UrlType;
+  'regen:glanceText'?: any;
+  'regen:landStory'?: string;
+  'regen:landStewardStory'?: string;
+  'regen:landStewardStoryTitle'?: string;
+  'regen:landStewardPhoto'?: UrlType;
+  'regen:projectQuote'?: ProjectQuote;
   'schema:description'?: string;
-  'regen:boundaries': TypeValue;
-  'regen:creditClass': CreditClass;
-  'regen:landManagementActions': LandManagementActions;
+  'regen:boundaries'?: TypeValue;
+  'regen:creditClass'?: CreditClass;
+  'regen:landManagementActions'?: LandManagementActions;
+
+  // Optional reference IDs:
+  'regen:vcsProjectId'?: number;
+  'regen:cfcProjectId'?: string;
+  'regen:toucanProjectTokenId'?: number; // TODO: we might not need this?
 }
 
 interface Context {

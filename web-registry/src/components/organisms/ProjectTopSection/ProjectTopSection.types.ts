@@ -13,8 +13,8 @@ import { ProjectMetadataLD, ProjectPageMetadataLD } from 'lib/db/types/json-ld';
 export type ProjectTopSectionProps = {
   data?: any; // TODO: when all project are onchain, this can be ProjectByOnChainIdQuery
   onChainProject?: ProjectInfo;
-  anchoredMetadata?: Partial<ProjectMetadataLD>;
-  projectPageMetadata?: Partial<ProjectPageMetadataLD>;
+  anchoredMetadata?: ProjectMetadataLD;
+  projectPageMetadata?: ProjectPageMetadataLD;
   sanityCreditClassData?: AllCreditClassQuery;
   geojson?: any;
   isGISFile?: boolean;

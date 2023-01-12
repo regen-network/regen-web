@@ -186,7 +186,7 @@ type StakeholderType =
   | 'regen:projectOriginator';
 
 const getPartyFromMetadata = (
-  metadata: Partial<ProjectMetadataLD>,
+  metadata: ProjectMetadataLD,
   role: StakeholderType,
 ): Party | undefined => {
   const metadataRole: ProjectStakeholder | undefined = metadata[role];
@@ -208,7 +208,7 @@ const getPartyFromMetadata = (
 
 export function getDisplayParty(
   role: StakeholderType,
-  metadata?: Partial<ProjectMetadataLD>,
+  metadata?: ProjectMetadataLD,
   party?: Maybe<PartyFieldsFragment>,
 ): Party | undefined {
   const showOnProjectPage = metadata?.[role]?.['regen:showOnProjectPage'];

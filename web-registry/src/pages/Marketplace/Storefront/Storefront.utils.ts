@@ -86,7 +86,7 @@ export const getAskUsdAmount = ({
   askBaseDenom,
   quantity,
   geckoPrices,
-}: GetAskUsdAmountParams): number | undefined => {
+}: GetAskUsdAmountParams): number => {
   const { eeurPrice, regenPrice, usdcPrice } = geckoPrices ?? {};
   let denomPrice = usdcPrice ?? 1;
 

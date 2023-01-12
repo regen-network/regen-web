@@ -63,7 +63,7 @@ export const Storefront = (): JSX.Element => {
     selectedSellOrder !== null && selectedAction === 'cancel';
   useResetErrorBanner({ displayErrorBanner, setDisplayErrorBanner });
 
-  // Fetching
+  // Fetching + sorting + normalizing
 
   const {
     normalizedSellOrders,
@@ -71,6 +71,7 @@ export const Storefront = (): JSX.Element => {
     isLoadingSellOrders,
     refetchSellOrders,
     setPaginationParams,
+    sortCallbacks,
   } = useNormalizedSellOrders();
 
   // Callbacks
@@ -219,6 +220,7 @@ export const Storefront = (): JSX.Element => {
           >
             <SellOrdersTable
               sellOrders={normalizedSellOrders}
+              sortCallbacks={sortCallbacks}
               onTableChange={setPaginationParams}
               renderActionButtonsFunc={(i: number) => {
                 const isOwnSellOrder =

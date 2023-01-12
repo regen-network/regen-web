@@ -1,7 +1,14 @@
 import uniq from 'lodash/uniq';
 
+import {
+  FetchSimplePriceResponse,
+  GECKO_EEUR_ID,
+  GECKO_USDC_ID,
+} from 'lib/coingecko';
 import { DenomTraceWithHash } from 'lib/ibc/transfer/api';
+import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 
+import { getAskUsdAmount } from 'pages/Marketplace/Storefront/Storefront.utils';
 import { IBC_DENOM_PREFIX } from 'hooks/useQuerySellOrders';
 
 import { getDenomTraceByHashesQuery } from '../../../ibc/transfer/getDenomTraceByHashesQuery/getDenomTraceByHashesQuery';
@@ -42,15 +49,43 @@ export const getSellOrdersExtendedQuery = ({
       reactQueryClient,
     });
 
+    // get prices to compute AskUsdAmount
+    const simplePriceData = await getFromCacheOrFetch<FetchSimplePriceResponse>(
+      {
+        query: getSimplePriceQuery({}),
+      },
+    );
+
+    const regenPrice = simplePriceData?.regen?.usd;
+    const eeurPrice = simplePriceData?.[GECKO_EEUR_ID]?.usd;
+    const usdcPrice = simplePriceData?.[GECKO_USDC_ID]?.usd;
+
     // Update sell orders by replacing ibc denoms with base denom from DenomTrace if needed
     const sellOrdersWithBaseDenom = sellOrders.map(sellOrder => {
       const denomTrace = denomTraces?.find(denomTrace =>
         sellOrder.askDenom.includes(denomTrace.hash),
       );
+      const askBaseDenom = denomTrace
+        ? denomTrace.baseDenom
+        : sellOrder.askDenom;
+
+      // Compute AskUsdAmount
+      const { askAmount, quantity } = sellOrder;
+      const askUsdAmount = getAskUsdAmount({
+        askAmount,
+        askBaseDenom,
+        quantity,
+        geckoPrices: {
+          regenPrice,
+          eeurPrice,
+          usdcPrice,
+        },
+      });
 
       return {
         ...sellOrder,
-        askBaseDenom: denomTrace ? denomTrace.baseDenom : sellOrder.askDenom,
+        askBaseDenom,
+        askUsdAmount,
       };
     });
 

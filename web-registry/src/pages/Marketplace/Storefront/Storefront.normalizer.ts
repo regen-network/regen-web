@@ -87,11 +87,11 @@ export const normalizeSellOrders = ({
   batchInfos,
   sellOrders = [],
   projectsInfosByHandleMap,
-  geckoPrices,
 }: NormalizedSellOrderProps): NormalizedSellOrder[] =>
   sellOrders.map(
     ({
       askAmount,
+      askUsdAmount,
       askDenom,
       askBaseDenom,
       batchDenom,
@@ -107,12 +107,6 @@ export const normalizeSellOrders = ({
       const projectId = currentBatch?.projectId ?? '';
       const isLoading =
         currentBatch === undefined || projectsInfosByHandleMap.size === 0;
-      const askUsdAmount = getAskUsdAmount({
-        askAmount,
-        askBaseDenom,
-        quantity,
-        geckoPrices,
-      });
 
       return {
         id: String(id),

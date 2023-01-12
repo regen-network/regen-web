@@ -70,7 +70,7 @@ const getSellOrdersTableRow = ({
       }}
     />
   </Box>,
-  <Box>
+  <Box sx={{ textAlign: 'right' }}>
     {formatNumber({ num: amountAvailable, ...quantityFormatNumberOptions })}
   </Box>,
   <WithLoader isLoading={project?.classId === undefined} variant="skeleton">

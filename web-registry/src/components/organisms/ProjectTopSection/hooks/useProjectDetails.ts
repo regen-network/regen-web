@@ -14,7 +14,9 @@ type UseProjectResponse = {
   offsetGenerationMethod?: string;
 };
 
-export const useProject = (project?: Maybe<Project>): UseProjectResponse => {
+export const useProjectDetails = (
+  project?: Maybe<Project>,
+): UseProjectResponse => {
   const [values, setValues] = useState<UseProjectResponse>({});
 
   useEffect(() => {

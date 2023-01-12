@@ -21,6 +21,8 @@ import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
 import {
+  Maybe,
+  Project,
   ProjectByHandleQuery,
   ProjectByOnChainIdQuery,
 } from 'generated/graphql';
@@ -40,7 +42,7 @@ import { ProjectTopLink } from '../../atoms';
 import { ProjectBatchTotals, ProjectPageMetadata } from '../../molecules';
 import { CreditBatches } from '../CreditBatches/CreditBatches';
 import { useAnchoredMetadata } from './hooks/useAnchoredMetadata';
-import { useProject } from './hooks/useProject';
+import { useProjectDetails } from './hooks/useProjectDetails';
 import { useProjectPageMetadata } from './hooks/useProjectPageMetadata';
 import {
   ProjectTopSectionQuoteMark,
@@ -74,7 +76,7 @@ function ProjectTopSection({
     undefined;
 
   const { creditClass, creditClassVersion, sdgIris, offsetGenerationMethod } =
-    useProject(project);
+    useProjectDetails(project as Maybe<Project>);
 
   const { projectName, area, areaUnit, placeName } =
     useAnchoredMetadata(anchoredMetadata);

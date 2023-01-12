@@ -37,7 +37,7 @@ import useGeojson from './hooks/useGeojson';
 import useImpact from './hooks/useImpact';
 import useIssuanceModal from './hooks/useIssuanceModal';
 import useMedia from './hooks/useMedia';
-import { useProject } from './hooks/useProject';
+import { useProjectDetails } from './hooks/useProjectDetails';
 import useSeo from './hooks/useSeo';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProjects';
@@ -117,14 +117,13 @@ function ProjectDetails(): JSX.Element {
   const data = isOnChainId
     ? { ...projectByOnChainId?.data, admin: onChainProject?.admin }
     : projectByHandle?.data;
-  const project: Maybe<Project> = isOnChainId
+  const project = isOnChainId
     ? projectByOnChainId?.data.projectByOnChainId
     : projectByHandle?.data.projectByHandle;
 
   /** Anchored project metadata comes from IRI resolver. */
-  const { data: anchoredMetadata } = useQuery(
-    getMetadataQuery({ iri: onChainProject?.metadata }),
-  );
+  const { data: anchoredMetadata, isInitialLoading: loadingAnchoredMetadata } =
+    useQuery(getMetadataQuery({ iri: onChainProject?.metadata }));
 
   const { batchesWithSupply, setPaginationParams, paginationParams } =
     usePaginatedBatchesByProject({ projectId: String(onChainProjectId) });
@@ -138,7 +137,7 @@ function ProjectDetails(): JSX.Element {
     creditClassName,
     coBenefitsIris,
     primaryImpactIRI,
-  } = useProject(project);
+  } = useProjectDetails(project as Maybe<Project>);
 
   const { geojson, isGISFile } = useGeojson({
     ...projectPageMetadata,
@@ -177,12 +176,7 @@ function ProjectDetails(): JSX.Element {
     }));
   }, [credits, projectsWithOrderData]);
 
-  if (
-    !loadingDb &&
-    // !loadingAnchoredMetadata TODO
-    !project &&
-    !projectResponse
-  )
+  if (!loadingDb && !loadingAnchoredMetadata && !project && !projectResponse)
     return <NotFoundPage />;
 
   return (

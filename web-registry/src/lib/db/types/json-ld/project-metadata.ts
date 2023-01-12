@@ -25,9 +25,8 @@ export interface ProjectPageMetadataLD {
   '@context': Context;
   '@type': string; // regen:Project-Page
   'regen:creditClassId': string;
-
   'regen:previewPhoto'?: UrlType;
-  'schema:image'?: UrlType; // exist?
+  'schema:image'?: UrlType;
   'schema:creditText'?: string;
   'regen:galleryPhotos'?: UrlList;
   'regen:videoURL'?: UrlType;
@@ -39,13 +38,12 @@ export interface ProjectPageMetadataLD {
   'regen:projectQuote'?: ProjectQuote;
   'schema:description'?: string;
   'regen:boundaries'?: TypeValue;
-  'regen:creditClass'?: CreditClass;
   'regen:landManagementActions'?: LandManagementActions;
 
   // Optional reference IDs:
   'regen:vcsProjectId'?: number;
   'regen:cfcProjectId'?: string;
-  'regen:toucanProjectTokenId'?: number; // TODO: we might not need this?
+  'regen:toucanProjectTokenId'?: number; // TODO: we might not need this
 }
 
 interface Context {
@@ -53,7 +51,7 @@ interface Context {
   regen: 'http://regen.network/';
   qudt: 'http://qudt.org/schema/qudt/';
   unit: 'http://qudt.org/vocab/unit/';
-  xsd: 'http://www.w3.org/2001/XMLSchema#';
+  xsd?: 'http://www.w3.org/2001/XMLSchema#';
 }
 
 interface ProjectSize {

@@ -37,9 +37,7 @@ const BuyerCreate = lazy(() => import('./pages/BuyerCreate'));
 const BuyerCreditsTransfer = lazy(() => import('./pages/BuyerCreditsTransfer'));
 const BuyersPage = lazy(() => import('./pages/Buyers'));
 const CertificatePage = lazy(() => import('./pages/Certificate'));
-const ChooseCreditClassPage = lazy(
-  () => import('./pages/ChooseCreditClassPage'),
-);
+const ChooseCreditClassPage = lazy(() => import('./pages/ChooseCreditClass'));
 const CreateCreditClassInfo = lazy(
   () => import('./pages/CreateCreditClassInfo'),
 );

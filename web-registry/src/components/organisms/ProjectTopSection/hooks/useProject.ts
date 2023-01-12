@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import { CreditClass, CreditClassVersion, Maybe } from 'generated/graphql';
+import {
+  CreditClass,
+  CreditClassVersion,
+  Maybe,
+  Project,
+} from 'generated/graphql';
 
 type UseProjectResponse = {
   creditClass?: Maybe<CreditClass>;
@@ -9,7 +14,7 @@ type UseProjectResponse = {
   offsetGenerationMethod?: string;
 };
 
-export const useProject = (project?: any): UseProjectResponse => {
+export const useProject = (project?: Maybe<Project>): UseProjectResponse => {
   const [values, setValues] = useState<UseProjectResponse>({});
 
   useEffect(() => {

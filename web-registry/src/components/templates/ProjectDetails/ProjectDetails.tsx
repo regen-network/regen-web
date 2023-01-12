@@ -9,6 +9,8 @@ import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 
+import { Project } from 'generated/graphql';
+import { Maybe } from 'graphql/jsutils/Maybe';
 import { graphqlClient } from 'lib/clients/graphqlClient';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
@@ -115,7 +117,7 @@ function ProjectDetails(): JSX.Element {
   const data = isOnChainId
     ? { ...projectByOnChainId?.data, admin: onChainProject?.admin }
     : projectByHandle?.data;
-  const project = isOnChainId
+  const project: Maybe<Project> = isOnChainId
     ? projectByOnChainId?.data.projectByOnChainId
     : projectByHandle?.data.projectByHandle;
 

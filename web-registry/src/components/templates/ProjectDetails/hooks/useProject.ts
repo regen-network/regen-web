@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import { Maybe, Project } from 'generated/graphql';
 import { ProjectPageMetadataLD } from 'lib/db/types/json-ld';
 import { jsonLdCompact } from 'lib/rdf';
 
@@ -14,7 +15,7 @@ type UseProjectResponse = {
   primaryImpactIRI?: any;
 };
 
-export const useProject = (project?: any): UseProjectResponse => {
+export const useProject = (project?: Maybe<Project>): UseProjectResponse => {
   const [values, setValues] = useState<UseProjectResponse>({});
 
   useEffect(() => {

@@ -217,11 +217,15 @@ function ProjectDetails(): JSX.Element {
             : () => setDisplayErrorBanner(true)
         }
         onChainProjectId={onChainProjectId}
-        projectName={anchoredMetadata?.['schema:name']}
+        projectName={
+          anchoredMetadata?.['schema:name'] ??
+          projectPageMetadata?.['schema:name']
+        }
         onChainCreditClassId={onChainProject?.classId}
       />
 
       <ProjectTopSection
+        projectId={projectId}
         data={data}
         onChainProject={onChainProject}
         anchoredMetadata={anchoredMetadata}

@@ -12,6 +12,7 @@ import { ProjectMetadataLD, ProjectPageMetadataLD } from 'lib/db/types/json-ld';
 
 export type ProjectTopSectionProps = {
   data?: any; // TODO: when all project are onchain, this can be ProjectByOnChainIdQuery
+  projectId?: string;
   onChainProject?: ProjectInfo;
   anchoredMetadata?: ProjectMetadataLD;
   projectPageMetadata?: ProjectPageMetadataLD;

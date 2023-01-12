@@ -26,6 +26,7 @@ import {
   ProjectByHandleQuery,
   ProjectByOnChainIdQuery,
 } from 'generated/graphql';
+import { toTitleCase } from 'lib/titleCase';
 
 import {
   API_URI,
@@ -53,6 +54,7 @@ import { getDisplayAdmin } from './ProjectTopSection.utils';
 
 function ProjectTopSection({
   data,
+  projectId,
   onChainProject,
   anchoredMetadata,
   projectPageMetadata,
@@ -111,6 +113,12 @@ function ProjectTopSection({
       onChainProjectId?.split('-')?.[0], // if no offChain credit class
   });
 
+  const displayName =
+    projectName ??
+    (onChainProjectId && `Project ${onChainProjectId}`) ??
+    (projectId && toTitleCase(projectId.replace('-', ' '))) ?? // fallback for legacy handles
+    '';
+
   return (
     <Section classes={{ root: classes.section }}>
       <Grid container>
@@ -118,9 +126,7 @@ function ProjectTopSection({
           {loading ? (
             <Skeleton height={124} />
           ) : (
-            <Title variant="h1">
-              {projectName ?? `Project ${onChainProjectId}`}
-            </Title>
+            <Title variant="h1">{displayName}</Title>
           )}
           <Box sx={{ pt: { xs: 5, sm: 6 } }}>
             <ProjectPlaceInfo

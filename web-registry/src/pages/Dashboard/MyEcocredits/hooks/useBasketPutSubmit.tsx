@@ -1,12 +1,10 @@
 import { useCallback } from 'react';
-import type { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
+import type { BasketInfo } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { MsgPut } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
 
-import type { FormValues as BasketPutFormValues } from 'web-components/lib/components/form/BasketPutForm';
-import type { Item } from 'web-components/lib/components/modal/TxModal';
+import type { FormValues as BasketPutFormValues } from 'web-components/lib/components/form/BasketPutForm/BasketPutForm';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
-import type { UseStateSetter } from 'types/react/use-state';
 import {
   PutInBasket2Event,
   PutInBasketFailureEvent,
@@ -14,24 +12,24 @@ import {
 } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
-import type { BasketTokens } from 'hooks/useBasketTokens';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import { PUT_HEADER } from '../MyEcocredits.constants';
+import { OnTxSuccessfulProps } from '../MyEcocredits.types';
 
 type Props = {
   accountAddress?: string;
-  baskets?: QueryBasketsResponse;
-  basketPutOpen: number;
+  baskets?: BasketInfo[];
   basketPutTitle: string;
-  credits: BatchInfoWithBalance[];
-  basketTakeTitle: string;
+  credit: BatchInfoWithBalance;
   signAndBroadcast: SignAndBroadcastType;
-  setBasketPutOpen: UseStateSetter<number>;
-  setBasketTakeTokens: UseStateSetter<BasketTokens | undefined>;
-  setCardItems: UseStateSetter<Item[] | undefined>;
-  setTxModalHeader: UseStateSetter<string | undefined>;
-  setTxModalTitle: UseStateSetter<string | undefined>;
+  onBroadcast: () => void;
+  onErrorCallback?: (error?: Error) => void;
+  onTxSuccessful: ({
+    cardItems,
+    title,
+    cardTitle,
+  }: OnTxSuccessfulProps) => void;
 };
 
 type ReturnType = (values: BasketPutFormValues) => Promise<void>;
@@ -39,30 +37,28 @@ type ReturnType = (values: BasketPutFormValues) => Promise<void>;
 const useBasketPutSubmit = ({
   accountAddress,
   baskets,
-  basketPutOpen,
   basketPutTitle,
-  credits,
+  credit,
   signAndBroadcast,
-  setBasketPutOpen,
-  setCardItems,
-  setTxModalHeader,
-  setTxModalTitle,
+  onBroadcast,
+  onTxSuccessful,
+  onErrorCallback,
 }: Props): ReturnType => {
   const { track } = useTracker();
 
   const basketPutSubmit = useCallback(
     async (values: BasketPutFormValues): Promise<void> => {
       const amount = values.amount?.toString();
-      const basket = baskets?.baskets.find(
-        b => b.basketDenom === values.basketDenom,
+      const basket = baskets?.find(
+        basketInfo => basketInfo.basketDenom === values.basketDenom,
       );
 
       track<'putInBasket2', PutInBasket2Event>('putInBasket2', {
         quantity: values.amount,
         basketName: basket?.name,
-        batchDenom: credits[basketPutOpen].denom,
-        creditClassId: credits[basketPutOpen].classId,
-        projectId: credits[basketPutOpen].projectId,
+        batchDenom: credit.denom,
+        creditClassId: credit.classId,
+        projectId: credit.projectId,
       });
 
       const msg = MsgPut.fromPartial({
@@ -70,7 +66,7 @@ const useBasketPutSubmit = ({
         owner: accountAddress,
         credits: [
           {
-            batchDenom: credits[basketPutOpen].denom,
+            batchDenom: credit.denom,
             amount,
           },
         ],
@@ -82,12 +78,13 @@ const useBasketPutSubmit = ({
           {
             quantity: values.amount,
             basketName: basket?.name,
-            batchDenom: credits[basketPutOpen].denom,
-            creditClassId: credits[basketPutOpen].classId,
-            projectId: credits[basketPutOpen].projectId,
+            batchDenom: credit.denom,
+            creditClassId: credit.classId,
+            projectId: credit.projectId,
             errorMessage: err?.message,
           },
         );
+        onErrorCallback && onErrorCallback(err);
       };
       const onSuccess = (): void => {
         track<'putInBasketSuccess', PutInBasketSuccessEvent>(
@@ -95,57 +92,58 @@ const useBasketPutSubmit = ({
           {
             quantity: values.amount,
             basketName: basket?.name,
-            batchDenom: credits[basketPutOpen].denom,
-            creditClassId: credits[basketPutOpen].classId,
-            projectId: credits[basketPutOpen].projectId,
+            batchDenom: credit.denom,
+            creditClassId: credit.classId,
+            projectId: credit.projectId,
           },
         );
+
+        if (basket && amount) {
+          const cardItems = [
+            {
+              label: 'basket',
+              value: { name: basket.name },
+            },
+            {
+              label: 'project',
+              value: {
+                name: credit.projectName || credit.projectId,
+                url: `/project/${credit.projectId}`,
+              },
+            },
+            {
+              label: 'credit batch id',
+              value: {
+                name: credit.denom,
+                url: `/credit-batches/${credit.denom}`,
+              },
+            },
+            {
+              label: 'amount',
+              value: { name: amount },
+            },
+          ];
+
+          onTxSuccessful({
+            cardItems,
+            title: PUT_HEADER,
+            cardTitle: basketPutTitle,
+          });
+        }
       };
-      await signAndBroadcast({ msgs: [msg] }, () => setBasketPutOpen(-1), {
+      await signAndBroadcast({ msgs: [msg] }, () => onBroadcast(), {
         onError,
         onSuccess,
       });
-      if (basket && amount) {
-        setCardItems([
-          {
-            label: 'basket',
-            value: { name: basket.name },
-          },
-          {
-            label: 'project',
-            value: {
-              name:
-                credits[basketPutOpen].projectName ||
-                credits[basketPutOpen].projectId,
-              url: `/project/${credits[basketPutOpen].projectId}`,
-            },
-          },
-          {
-            label: 'credit batch id',
-            value: {
-              name: credits[basketPutOpen].denom,
-              url: `/credit-batches/${credits[basketPutOpen].denom}`,
-            },
-          },
-          {
-            label: 'amount',
-            value: { name: amount },
-          },
-        ]);
-        setTxModalHeader(PUT_HEADER);
-        setTxModalTitle(basketPutTitle);
-      }
     },
     [
       accountAddress,
-      basketPutOpen,
       basketPutTitle,
-      baskets?.baskets,
-      credits,
-      setBasketPutOpen,
-      setCardItems,
-      setTxModalHeader,
-      setTxModalTitle,
+      baskets,
+      credit,
+      onBroadcast,
+      onTxSuccessful,
+      onErrorCallback,
       signAndBroadcast,
       track,
     ],

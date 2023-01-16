@@ -64,6 +64,7 @@ import {
   CREATE_SELL_ORDER_TITLE,
   ERROR_BUTTON,
 } from './MyEcocredits.constants';
+import { OnTxSuccessfulProps } from './MyEcocredits.types';
 import {
   getAvailableAmountByBatch,
   getDenomAllowedOptions,
@@ -96,6 +97,18 @@ export const MyEcocredits = (): JSX.Element => {
   const navigate = useNavigate();
   const { track } = useTracker();
   const { marketplaceClient } = useLedger();
+
+  const onCloseBasketPutModal = (): void => setBasketPutOpen(-1);
+  const onTxSuccessful = ({
+    cardItems,
+    title,
+    cardTitle,
+  }: OnTxSuccessfulProps): void => {
+    setCardItems(cardItems);
+    setTxModalHeader(title);
+    setTxModalTitle(cardTitle);
+  };
+  const onTakeBroadcast = (): void => setBasketTakeTokens(undefined);
 
   const handleTxQueued = (): void => {
     setIsProcessingModalOpen(true);
@@ -189,12 +202,10 @@ export const MyEcocredits = (): JSX.Element => {
   const basketTakeSubmit = useBasketTakeSubmit({
     accountAddress,
     basketTakeTitle: BASKET_TAKE_TITLE,
-    baskets,
-    setBasketTakeTokens,
-    setCardItems,
-    setTxModalTitle,
-    setTxModalHeader,
+    baskets: baskets?.basketsInfo,
     signAndBroadcast,
+    onTxSuccessful,
+    onBroadcast: onTakeBroadcast,
   });
 
   const creditSendSubmit = useCreditSendSubmit({
@@ -211,16 +222,11 @@ export const MyEcocredits = (): JSX.Element => {
 
   const basketPutSubmit = useBasketPutSubmit({
     accountAddress,
-    baskets,
-    basketPutOpen,
+    baskets: baskets?.basketsInfo,
     basketPutTitle: BASKET_PUT_TITLE,
-    basketTakeTitle: BASKET_TAKE_TITLE,
-    credits,
-    setBasketPutOpen,
-    setBasketTakeTokens,
-    setCardItems,
-    setTxModalHeader,
-    setTxModalTitle,
+    credit: credits[basketPutOpen],
+    onBroadcast: onCloseBasketPutModal,
+    onTxSuccessful,
     signAndBroadcast,
   });
 
@@ -412,7 +418,7 @@ export const MyEcocredits = (): JSX.Element => {
           availableTradableAmount={Number(
             credits[basketPutOpen].balance?.tradableAmount,
           )}
-          batchDenom={credits[basketPutOpen].denom}
+          batchDenoms={[credits[basketPutOpen].denom]}
           open={basketPutOpen > -1}
           onClose={() => setBasketPutOpen(-1)}
           onSubmit={basketPutSubmit}

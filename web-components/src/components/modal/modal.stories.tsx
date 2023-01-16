@@ -264,7 +264,7 @@ export const basketPutModal = (): JSX.Element => (
   <BasketPutModal
     basketOptions={[{ label: 'NCT', value: 'eco.uC.NCT' }]}
     availableTradableAmount={1000}
-    batchDenom={'C01-20190101-20201010-02'}
+    batchDenoms={['C01-20190101-20201010-02']}
     open={true}
     onClose={() => null}
     onSubmit={async () => alert('submit')}

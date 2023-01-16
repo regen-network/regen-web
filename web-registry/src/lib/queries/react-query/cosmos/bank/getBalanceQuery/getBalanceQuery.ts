@@ -11,7 +11,7 @@ export const getBalanceQuery = ({
 }: ReactQueryBalanceProps): ReactQueryBalanceResponse => ({
   queryKey: [BANK_BALANCE_KEY, request.address, request.denom],
   queryFn: async () => {
-    if (!client) return undefined;
+    if (!client || !request.address || !request.denom) return null;
     return await client.Balance(request);
   },
   ...params,

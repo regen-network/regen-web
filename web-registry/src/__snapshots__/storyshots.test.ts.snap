@@ -2380,6 +2380,40 @@ exports[`Storyshots Inputs Date Pick Field 1`] = `
 </MemoryRouter>
 `;
 
+exports[`Storyshots Inputs Select Text Field 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    >
+      <Route
+        index={true}
+      />
+    </Route>
+  </Routes>
+</MemoryRouter>
+`;
+
 exports[`Storyshots Inputs Toggle 1`] = `
 <MemoryRouter
   initialEntries={

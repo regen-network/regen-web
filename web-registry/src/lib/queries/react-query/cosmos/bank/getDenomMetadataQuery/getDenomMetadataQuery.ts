@@ -10,7 +10,7 @@ export const getDenomMetadataQuery = ({
 }: ReactQueryDenomMetadataProps): ReactQueryDenomMetadataResponse => ({
   queryKey: ['denomMetadata', request.denom],
   queryFn: async () => {
-    if (!client) return undefined;
+    if (!client || !request.denom) return null;
     return await client.DenomMetadata(request);
   },
   ...params,

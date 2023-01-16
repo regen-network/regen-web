@@ -12,7 +12,7 @@ import useQueryBalance from './useQueryBalance';
 import useQueryDenomMetadata from './useQueryDenomMetadata';
 
 export interface BasketTokens {
-  basket: BasketInfo;
+  basket?: BasketInfo;
   balance?: QueryBalanceResponse;
   metadata?: QueryDenomMetadataResponse;
 }

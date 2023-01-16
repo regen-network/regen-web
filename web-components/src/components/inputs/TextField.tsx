@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import { Box } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import MuiTextField, {
   TextFieldProps as MuiTextFieldProps,
@@ -7,6 +8,7 @@ import { FormikErrors } from 'formik';
 import { fieldToTextField, TextFieldProps } from 'formik-mui';
 import { makeStyles } from 'tss-react/mui';
 
+import { Body } from '../typography';
 import { DefaultStyleProps } from './FieldFormControl';
 import InputLabel from './InputLabel';
 
@@ -27,6 +29,7 @@ export interface RegenTextFieldProps
   endAdornment?: React.ReactNode;
   step?: number;
   customInputProps?: { min?: number; max?: number };
+  description?: string | React.ReactNode;
 }
 
 type UseStylesParams = {
@@ -179,6 +182,7 @@ export default function RegenTextField({
   children,
   startAdornment,
   endAdornment,
+  description,
   customInputProps = {},
   ...props
 }: RegenTextFieldProps): JSX.Element {
@@ -213,9 +217,16 @@ export default function RegenTextField({
         inputProps: { ...customInputProps },
       }}
       label={
-        <InputLabel optional={!!optional} focused={false} required={false}>
-          {props.label}
-        </InputLabel>
+        <>
+          <InputLabel optional={!!optional} focused={false} required={false}>
+            {props.label}
+          </InputLabel>
+          {description && (
+            <Box sx={{ display: 'flex', mt: 1 }}>
+              <Body size="sm">{description}</Body>
+            </Box>
+          )}
+        </>
       }
       InputLabelProps={{ focused: false, required: false }}
       fullWidth

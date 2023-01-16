@@ -22,6 +22,7 @@ export interface SectionProps {
   title?: string | JSX.Element;
   titleVariant?: Variant;
   withSlider?: boolean;
+  isPaddingTopMobile?: boolean;
   titleLineHeight?: string;
   titleColor?: string;
   titleAlign?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
@@ -40,39 +41,43 @@ interface StyleProps {
 const Root = styled(Box, {
   name: 'RegenSection',
   shouldForwardProp: prop =>
-    prop !== 'withSlider' && prop !== 'visibleOverflow',
-})<{ withSlider: boolean; visibleOverflow: boolean }>(
-  ({ theme, withSlider, visibleOverflow }) => ({
-    maxWidth: theme.breakpoints.values.lg,
-    margin: '0 auto',
-    [theme.breakpoints.up('lg')]: {
-      overflow: visibleOverflow ? 'visible' : 'hidden',
-    },
-    [theme.breakpoints.down('lg')]: {
-      overflow: 'hidden',
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(22.25),
-    },
-    [theme.breakpoints.up('md')]: {
-      paddingRight: theme.spacing(37.5),
-      paddingLeft: theme.spacing(37.5),
-    },
-    [theme.breakpoints.down('md')]: {
-      paddingRight: theme.spacing(10),
-      paddingLeft: theme.spacing(10),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingRight: withSlider ? 0 : theme.spacing(4),
-      paddingLeft: theme.spacing(4),
-      paddingTop: theme.spacing(17.75),
-    },
-    [theme.breakpoints.up('xl')]: {
-      paddingRight: theme.spacing(5),
-      paddingLeft: theme.spacing(5),
-    },
-  }),
-);
+    prop !== 'withSlider' &&
+    prop !== 'visibleOverflow' &&
+    prop !== 'isPaddingTopMobile',
+})<{
+  withSlider: boolean;
+  visibleOverflow: boolean;
+  isPaddingTopMobile: boolean;
+}>(({ theme, withSlider, visibleOverflow, isPaddingTopMobile }) => ({
+  maxWidth: theme.breakpoints.values.lg,
+  margin: '0 auto',
+  [theme.breakpoints.up('lg')]: {
+    overflow: visibleOverflow ? 'visible' : 'hidden',
+  },
+  [theme.breakpoints.down('lg')]: {
+    overflow: 'hidden',
+  },
+  [theme.breakpoints.up('sm')]: {
+    paddingTop: theme.spacing(22.25),
+  },
+  [theme.breakpoints.up('md')]: {
+    paddingRight: theme.spacing(37.5),
+    paddingLeft: theme.spacing(37.5),
+  },
+  [theme.breakpoints.down('md')]: {
+    paddingRight: theme.spacing(10),
+    paddingLeft: theme.spacing(10),
+  },
+  [theme.breakpoints.down('sm')]: {
+    paddingRight: withSlider ? 0 : theme.spacing(4),
+    paddingLeft: theme.spacing(4),
+    paddingTop: isPaddingTopMobile ? theme.spacing(17.75) : 0,
+  },
+  [theme.breakpoints.up('xl')]: {
+    paddingRight: theme.spacing(5),
+    paddingLeft: theme.spacing(5),
+  },
+}));
 
 const useStyles = makeStyles<StyleProps>()(
   (
@@ -112,6 +117,7 @@ const Section = ({
   topRight,
   withSlider = false,
   visibleOverflow = false,
+  isPaddingTopMobile = true,
 }: SectionProps): JSX.Element => {
   const { classes: styles, cx } = useStyles({
     withSlider,
@@ -126,6 +132,7 @@ const Section = ({
       component="section"
       withSlider={withSlider}
       visibleOverflow={visibleOverflow}
+      isPaddingTopMobile={isPaddingTopMobile}
       className={className || (classes && classes.root)}
       id={id}
     >

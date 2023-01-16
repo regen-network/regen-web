@@ -1,4 +1,7 @@
-import { BatchInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import {
+  BatchBalanceInfo,
+  BatchInfo,
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { ClassProjectInfo } from 'types/ledger/ecocredit';
 
@@ -16,4 +19,13 @@ export const EMPTY_BATCH_INFO: BatchInfo = {
   projectId: '',
   metadata: '',
   open: false,
+};
+
+export const EMPTY_BALANCE_INFO: BatchBalanceInfo = {
+  $type: BatchBalanceInfo.$type,
+  address: '',
+  batchDenom: '',
+  escrowedAmount: '',
+  retiredAmount: '',
+  tradableAmount: '',
 };

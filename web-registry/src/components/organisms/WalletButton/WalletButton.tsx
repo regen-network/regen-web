@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
+import { useAtom } from 'jotai';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -8,7 +9,7 @@ import WalletModal from 'web-components/lib/components/modal/wallet-modal';
 import { WalletModalState } from 'web-components/lib/components/modal/wallet-modal/WalletModal.types';
 
 import { useLedger } from 'ledger';
-import { useGlobalStore } from 'lib/context/globalContext';
+import { isWaitingForSigningAtom } from 'lib/atoms/tx.atoms';
 import { getBalanceQuery } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery';
 
 import { chainId } from '../../../lib/ledger';
@@ -27,8 +28,8 @@ const WalletButton: React.FC = () => {
   const { wallet, connect, loaded, error, walletConnectUri } = useWallet();
   const { bankClient } = useLedger();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isWaitingForSigning, setGlobalStore] = useGlobalStore(
-    store => store['isWaitingForSigning'],
+  const [isWaitingForSigning, setIsWaitingForSigningAtom] = useAtom(
+    isWaitingForSigningAtom,
   );
   const [modalState, setModalState] =
     useState<WalletModalState>('wallet-select');
@@ -99,7 +100,7 @@ const WalletButton: React.FC = () => {
       />
       <MobileSigningModal
         isOpen={isWaitingForSigning && !!walletConnectUri}
-        onClose={() => setGlobalStore({ isWaitingForSigning: false })}
+        onClose={() => setIsWaitingForSigningAtom(false)}
       />
     </>
   ) : (

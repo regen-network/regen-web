@@ -2,9 +2,11 @@ import React from 'react';
 
 import { TxModal, TxModalProps } from './TxModal';
 
-const TxSuccessfulModal: React.FC<
-  React.PropsWithChildren<TxModalProps & { title?: string }>
-> = props => {
+export interface TxSuccessfulModalProps extends TxModalProps {
+  title?: string;
+}
+
+const TxSuccessfulModal: React.FC<TxSuccessfulModalProps> = props => {
   return (
     <TxModal
       {...props}

@@ -161,6 +161,7 @@ const useCreateSellOrderSubmit = ({
       setCardItems,
       setTxModalHeader,
       setTxButtonTitle,
+      reactQueryClient,
     ],
   );
 

@@ -14,7 +14,10 @@ export const SELL_ORDERS_MAPPING: Record<
     sortKey: 'id',
     sortEnabled: true,
   },
-  [SELL_ORDERS_HEADERS.PROJECT]: { name: 'PROJECT', sortKey: 'project' },
+  [SELL_ORDERS_HEADERS.PROJECT]: {
+    name: 'PROJECT',
+    sortKey: 'project',
+  },
   [SELL_ORDERS_HEADERS.PRICE]: {
     name: 'PRICE (USD)',
     sortKey: 'price',
@@ -23,8 +26,13 @@ export const SELL_ORDERS_MAPPING: Record<
   [SELL_ORDERS_HEADERS.CURRENCY_DENOM]: {
     name: 'CURRENCY DENOM',
     sortKey: 'currency-denom',
+    sortEnabled: true,
   },
-  [SELL_ORDERS_HEADERS.AMOUNT]: { name: 'AMOUNT AVAILABLE', sortKey: 'amount' },
+  [SELL_ORDERS_HEADERS.AMOUNT]: {
+    name: 'AMOUNT AVAILABLE',
+    sortKey: 'amount',
+    sortEnabled: true,
+  },
   [SELL_ORDERS_HEADERS.CREDIT_CLASS]: {
     name: 'CREDIT CLASS',
     sortKey: 'credit-class',
@@ -32,6 +40,7 @@ export const SELL_ORDERS_MAPPING: Record<
   [SELL_ORDERS_HEADERS.BATCH_DENOM]: {
     name: 'BATCH DENOM',
     sortKey: 'batch-denom',
+    sortEnabled: true,
   },
   [SELL_ORDERS_HEADERS.PURCHASE_OPTIONS]: {
     name: 'PURCHASE OPTIONS',

@@ -3,28 +3,34 @@ import { useQuery } from '@tanstack/react-query';
 
 import { ProjectByIdQuery, ProjectByOnChainIdQuery } from 'generated/graphql';
 import { graphqlClient } from 'lib/clients/graphqlClient';
-import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 
-type OffChainProject =
+export type OffChainProject =
   | ProjectByIdQuery['projectById']
   | ProjectByOnChainIdQuery['projectByOnChainId'];
 
-interface Res {
+interface Props {
+  projectId?: string;
+  isEdit?: boolean;
+  unanchored?: boolean;
   onChainProject?: ProjectInfo;
+}
+
+interface Res {
   offChainProject?: OffChainProject;
-  metadata: any;
+  metadata: any; // TODO update with proper type
   // reload: () => void;
   // isLoading: boolean;
 }
 
-export const useProjectWithMetadata = (
-  projectId?: string,
-  isEdit?: boolean,
-  unanchored: boolean = false,
-): Res => {
+export const useProjectWithMetadata = ({
+  projectId,
+  isEdit,
+  onChainProject,
+  unanchored = false,
+}: Props): Res => {
   let metadata;
   let offChainProject: OffChainProject | undefined;
 
@@ -44,23 +50,14 @@ export const useProjectWithMetadata = (
     metadata = projectById.metadata;
   }
 
-  // In project edit mode, we can query the on-chain project.
+  // In project edit mode, we can query the on-chain (anchored) project metadata.
   // In this case, the router param projectId is the on-chain project id.
   const edit = !!projectId && isEdit;
-  const { data: projectRes } = useQuery(
-    getProjectQuery({
-      request: {
-        projectId,
-      },
-      enabled: edit,
-    }),
-  );
-  const project = projectRes?.project;
   // Metadata
   const { data: anchoredMetadata } = useQuery(
     getMetadataQuery({
-      iri: project?.metadata,
-      enabled: !!project?.metadata && edit && !unanchored,
+      iri: onChainProject?.metadata,
+      enabled: !!onChainProject?.metadata && edit && !unanchored,
     }),
   );
   const { data: projectByOnChainIdRes } = useQuery(
@@ -87,7 +84,6 @@ export const useProjectWithMetadata = (
   // }, [reactQueryClient, balancesQuery]);
 
   return {
-    onChainProject: project,
     offChainProject,
     metadata,
   };

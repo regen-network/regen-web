@@ -17,8 +17,12 @@ import { useUpdateProjectByIdMutation } from '../../generated/graphql';
 const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
-  const { isEdit } = useProjectEditContext();
-  const { metadata } = useProjectWithMetadata(projectId, isEdit);
+  const { isEdit, onChainProject } = useProjectEditContext();
+  const { metadata } = useProjectWithMetadata({
+    projectId,
+    isEdit,
+    onChainProject,
+  });
   const [updateProject] = useUpdateProjectByIdMutation();
 
   let initialFieldValues: any | undefined;

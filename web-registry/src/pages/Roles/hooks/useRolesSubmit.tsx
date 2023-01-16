@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { MsgUpdateProjectMetadata } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 
 import { ProfileFormValues } from 'web-components/lib/components/modal/ProfileModal';
 
@@ -13,30 +12,31 @@ import {
   useUpdateProjectByIdMutation,
   useUpdateWalletByIdMutation,
 } from 'generated/graphql';
-import { generateIri } from 'lib/db/api/metadata-graph';
 
-import { useProjectEditContext } from 'pages/ProjectEdit';
+import { ReturnType as ProjectEditSubmit } from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
 import { RolesValues } from 'components/organisms';
-import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
-import { SignAndBroadcastType } from 'hooks/useMsgClient';
+import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';
 
 interface Props {
-  signAndBroadcast: SignAndBroadcastType;
+  offChainProject?: OffChainProject;
+  metadata: any; // TODO update with proper type
+  projectEditSubmit: ProjectEditSubmit;
+  isEdit?: boolean;
 }
 
 type ReturnType = {
   rolesSubmit: (values: RolesValues) => Promise<void>;
 };
 
-const useRolesSubmit = ({ signAndBroadcast }: Props): ReturnType => {
+const useRolesSubmit = ({
+  projectEditSubmit,
+  offChainProject,
+  metadata,
+  isEdit,
+}: Props): ReturnType => {
   const navigate = useNavigate();
 
   const { projectId } = useParams();
-  const { isEdit } = useProjectEditContext();
-  const { onChainProject, offChainProject, metadata } = useProjectWithMetadata(
-    projectId,
-    isEdit,
-  );
   const [updateProject] = useUpdateProjectByIdMutation();
   const [createWallet] = useCreateWalletMutation();
   const [createParty] = useCreatePartyMutation();
@@ -47,7 +47,6 @@ const useRolesSubmit = ({ signAndBroadcast }: Props): ReturnType => {
     async (values: RolesValues): Promise<void> => {
       try {
         let projectPatch: ProjectPatch = {};
-
         const developer = values['regen:projectDeveloper'];
         const existingDeveloperParty = offChainProject?.partyByDeveloperId;
         const existingDeveloperWallet =
@@ -144,7 +143,7 @@ const useRolesSubmit = ({ signAndBroadcast }: Props): ReturnType => {
         await updateProject({
           variables: {
             input: {
-              id: projectId,
+              id: offChainProject?.id,
               projectPatch,
             },
           },
@@ -155,18 +154,7 @@ const useRolesSubmit = ({ signAndBroadcast }: Props): ReturnType => {
         } else {
           // In edit mode, we need to update the project on-chain metadata if needed
           if (doUpdateMetadata) {
-            const iriResponse = await generateIri(metadata);
-            if (!iriResponse) return;
-            const msg = MsgUpdateProjectMetadata.fromPartial({
-              projectId,
-              admin: onChainProject?.admin,
-              newMetadata: iriResponse.iri,
-            });
-            // TODO submit MsgUpdateProjectAdmin as part of the same tx if needed: regen-registry/issues/1500
-            const tx = {
-              msgs: [msg],
-            };
-            await signAndBroadcast(tx);
+            await projectEditSubmit(newMetadata);
           }
         }
       } catch (e) {
@@ -182,12 +170,11 @@ const useRolesSubmit = ({ signAndBroadcast }: Props): ReturnType => {
       metadata,
       navigate,
       offChainProject?.partyByDeveloperId,
-      onChainProject?.admin,
       projectId,
-      signAndBroadcast,
       updateParty,
       updateProject,
       updateWallet,
+      projectEditSubmit,
     ],
   );
 

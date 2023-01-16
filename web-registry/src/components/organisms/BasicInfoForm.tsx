@@ -72,7 +72,7 @@ const BasicInfoForm: React.FC<
       uri: 'http://regen.network/ProjectPageShape',
     },
   });
-
+  console.log('initialValues', initialValues);
   return (
     <Formik
       enableReinitialize

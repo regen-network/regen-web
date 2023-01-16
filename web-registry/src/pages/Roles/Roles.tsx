@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useMsgClient } from 'hooks';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
 import { RolesForm, RolesValues } from '../../components/organisms';
@@ -16,18 +15,20 @@ import { useRolesSubmit } from './hooks/useRolesSubmit';
 const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
-  const { isEdit } = useProjectEditContext();
-  const { onChainProject, offChainProject, metadata } = useProjectWithMetadata(
+  const { wallet } = useWallet();
+  const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
+  const { metadata, offChainProject } = useProjectWithMetadata({
     projectId,
     isEdit,
-  );
-  const { signAndBroadcast, wallet, error, setError, deliverTxResponse } =
-    useMsgClient(
-      () => {},
-      () => {},
-      () => {},
-    );
-  const { rolesSubmit } = useRolesSubmit({ signAndBroadcast });
+    onChainProject,
+  });
+  const { rolesSubmit } = useRolesSubmit({
+    projectEditSubmit,
+    offChainProject,
+    metadata,
+    isEdit,
+  });
+
   // TODO validation regen-registry/issues/1501
   // const creditClassId = isEdit
   //   ? onChainProject?.classId

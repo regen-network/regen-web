@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useProjectEditContext } from 'pages/ProjectEdit';
@@ -14,17 +14,33 @@ import { useUpdateProjectByIdMutation } from '../../generated/graphql';
 const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
-  const { isEdit } = useProjectEditContext();
-  const { metadata } = useProjectWithMetadata(projectId, isEdit);
+  const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
+  const { metadata } = useProjectWithMetadata({
+    projectId,
+    isEdit,
+    onChainProject,
+  });
   const [updateProject] = useUpdateProjectByIdMutation();
+  const [initialFieldValues, setInitialFieldValues] = useState<
+    BasicInfoFormValues | undefined
+  >();
 
-  let initialFieldValues: BasicInfoFormValues | undefined;
-  if (metadata) {
-    initialFieldValues = {
-      'schema:name': metadata['schema:name'],
-      'regen:projectSize': metadata['regen:projectSize'],
-    };
-  }
+  useEffect(() => {
+    if (metadata) {
+      setInitialFieldValues({
+        'schema:name': metadata['schema:name'],
+        'regen:projectSize': metadata['regen:projectSize'],
+      });
+    }
+  }, [metadata]);
+
+  // let initialFieldValues: BasicInfoFormValues | undefined;
+  // if (metadata) {
+  //   initialFieldValues = {
+  //     'schema:name': metadata['schema:name'],
+  //     'regen:projectSize': metadata['regen:projectSize'],
+  //   };
+  // }
 
   async function saveAndExit(): Promise<void> {
     // TODO: functionality
@@ -35,8 +51,9 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
   }
 
   async function submit(values: BasicInfoFormValues): Promise<void> {
+    const newMetadata = { ...metadata, ...values };
     if (isEdit) {
-      // TODO initiate on-chain tx
+      await projectEditSubmit(newMetadata);
     } else {
       try {
         await updateProject({
@@ -44,7 +61,7 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
             input: {
               id: projectId,
               projectPatch: {
-                metadata: { ...metadata, ...values },
+                metadata: newMetadata,
               },
             },
           },

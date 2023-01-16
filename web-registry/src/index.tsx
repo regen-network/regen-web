@@ -25,7 +25,6 @@ import { AnalyticsProvider } from 'use-analytics';
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 
 import { reactQueryClient } from 'lib/clients/reactQueryClient';
-import { GlobalProvider } from 'lib/context/globalContext';
 
 import PageLoader from 'components/atoms/PageLoader';
 
@@ -130,14 +129,12 @@ root.render(
               <WalletProvider>
                 <LedgerProvider>
                   <ThemeProvider injectFonts>
-                    <GlobalProvider>
-                      <Suspense fallback={<PageLoader />}>
-                        <RouterProvider
-                          router={getRouter({ reactQueryClient })}
-                          fallbackElement={<PageLoader />}
-                        />
-                      </Suspense>
-                    </GlobalProvider>
+                    <Suspense fallback={<PageLoader />}>
+                      <RouterProvider
+                        router={getRouter({ reactQueryClient })}
+                        fallbackElement={<PageLoader />}
+                      />
+                    </Suspense>
                   </ThemeProvider>
                 </LedgerProvider>
               </WalletProvider>

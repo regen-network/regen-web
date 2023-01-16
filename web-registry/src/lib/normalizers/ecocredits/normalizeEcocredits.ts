@@ -9,12 +9,13 @@ import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 
 import { normalizeClassProjectForBatch } from '../classProjectForBatch/normalizeClassProjectForBatch';
 import {
+  EMPTY_BALANCE_INFO,
   EMPTY_BATCH_INFO,
   EMPTY_CREDIT_CLASS,
 } from './normalizeEcocredits.constants';
 
 interface Params {
-  balance: BatchBalanceInfo;
+  balance?: BatchBalanceInfo;
   project?: ProjectInfo | null;
   metadata?: any | null;
   sanityCreditClassData?: AllCreditClassQuery;
@@ -46,6 +47,6 @@ export const normalizeEcocredits = ({
   return {
     ...(batch ?? EMPTY_BATCH_INFO),
     ...classProjectInfo,
-    balance,
+    balance: { ...(balance ?? EMPTY_BALANCE_INFO) },
   };
 };

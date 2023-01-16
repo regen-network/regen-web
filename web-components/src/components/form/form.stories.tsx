@@ -1,4 +1,4 @@
-import { BasketPutForm } from './BasketPutForm';
+import { BasketPutForm } from './BasketPutForm/BasketPutForm';
 import { BasketTakeForm } from './BasketTakeForm';
 import { CreditRetireForm } from './CreditRetireForm';
 // import OrganizationProfileForm from './OrganizationProfileForm';
@@ -70,9 +70,10 @@ export const basketPutForm = (): JSX.Element => (
   <BasketPutForm
     basketOptions={[{ label: 'NCT', value: 'eco.uC.NCT' }]}
     availableTradableAmount={1000}
-    batchDenom={'C01-20190101-20201010-02'}
+    batchDenoms={['C01-20190101-20201010-02', 'C01-20190101-20201010-03']}
     onClose={() => null}
     onSubmit={async () => alert('submit')}
+    onBatchDenomChange={batchDenom => console.log(batchDenom)}
   />
 );
 

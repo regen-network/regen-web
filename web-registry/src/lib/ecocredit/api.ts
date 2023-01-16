@@ -729,7 +729,7 @@ export type EcocreditQueryResponse =
 
 // Balance
 
-interface QueryBalanceProps extends EcocreditQueryClientProps {
+export interface QueryBalanceProps extends EcocreditQueryClientProps {
   request: DeepPartial<QueryBalanceRequest>;
 }
 

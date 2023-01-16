@@ -94,7 +94,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
         errors[addrPath] = invalidAddress;
       }
     }
-    // TODO might need to update regen-registry/issues/1501
+    // TODO might need to update, see regen-registry/issues/1501
     if (graphData?.shaclGraphByUri?.graph) {
       const report = await validate(
         graphData.shaclGraphByUri.graph,

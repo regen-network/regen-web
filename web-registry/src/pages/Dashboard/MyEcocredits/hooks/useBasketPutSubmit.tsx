@@ -5,16 +5,12 @@ import { MsgPut } from '@regen-network/api/lib/generated/regen/ecocredit/basket/
 import type { FormValues as BasketPutFormValues } from 'web-components/lib/components/form/BasketPutForm/BasketPutForm';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
-<<<<<<< HEAD
-import type { UseStateSetter } from 'types/react/use-state';
-=======
 import {
   PutInBasket2Event,
   PutInBasketFailureEvent,
   PutInBasketSuccessEvent,
 } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
->>>>>>> 0fae0f14 (feat: backet details page upgrades (#1725))
 
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
@@ -48,11 +44,11 @@ const useBasketPutSubmit = ({
   onTxSuccessful,
   onErrorCallback,
 }: Props): ReturnType => {
+  const { track } = useTracker();
+
   const basketPutSubmit = useCallback(
     async (values: BasketPutFormValues): Promise<void> => {
       const amount = values.amount?.toString();
-<<<<<<< HEAD
-=======
       const basket = baskets?.find(
         basketInfo => basketInfo.basketDenom === values.basketDenom,
       );
@@ -65,7 +61,6 @@ const useBasketPutSubmit = ({
         projectId: credit.projectId,
       });
 
->>>>>>> 0fae0f14 (feat: backet details page upgrades (#1725))
       const msg = MsgPut.fromPartial({
         basketDenom: values.basketDenom,
         owner: accountAddress,
@@ -76,42 +71,6 @@ const useBasketPutSubmit = ({
           },
         ],
       });
-<<<<<<< HEAD
-      await signAndBroadcast({ msgs: [msg] }, () => setBasketPutOpen(-1));
-      const basket = baskets?.baskets.find(
-        b => b.basketDenom === values.basketDenom,
-      );
-      if (basket && amount) {
-        setCardItems([
-          {
-            label: 'basket',
-            value: { name: basket.name },
-          },
-          {
-            label: 'project',
-            value: {
-              name:
-                credits[basketPutOpen].projectName ||
-                credits[basketPutOpen].projectId,
-              url: `/project/${credits[basketPutOpen].projectId}`,
-            },
-          },
-          {
-            label: 'credit batch id',
-            value: {
-              name: credits[basketPutOpen].denom,
-              url: `/credit-batches/${credits[basketPutOpen].denom}`,
-            },
-          },
-          {
-            label: 'amount',
-            value: { name: amount },
-          },
-        ]);
-        setTxModalHeader(PUT_HEADER);
-        setTxModalTitle(basketPutTitle);
-      }
-=======
 
       const onError = (err?: Error): void => {
         track<'putInBasketFailure', PutInBasketFailureEvent>(
@@ -176,7 +135,6 @@ const useBasketPutSubmit = ({
         onError,
         onSuccess,
       });
->>>>>>> 0fae0f14 (feat: backet details page upgrades (#1725))
     },
     [
       accountAddress,
@@ -187,6 +145,7 @@ const useBasketPutSubmit = ({
       onTxSuccessful,
       onErrorCallback,
       signAndBroadcast,
+      track,
     ],
   );
 

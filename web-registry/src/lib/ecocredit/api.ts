@@ -72,6 +72,7 @@ import type {
 } from '../../types/ledger/ecocredit';
 import { expLedger, ledgerRESTUri } from '../ledger';
 import { ECOCREDIT_MESSAGE_TYPES, messageActionEquals } from './constants';
+import { v1Alpha1BatchDenomMapping } from './ecocredit.config';
 
 const getCosmosServiceClient = async (): Promise<ServiceClientImpl> => {
   const api = await connectToApi();
@@ -379,11 +380,18 @@ export const addDataToBatches = async ({
 }: AddDataToBatchesParams): Promise<BatchInfoWithSupply[]> => {
   try {
     /* TODO: this is limited to 100 results. We need to find a better way */
-    const txs = await getTxsByEvent({
-      events: [
-        `${messageActionEquals}'${ECOCREDIT_MESSAGE_TYPES.CREATE_BATCH.message}'`,
-      ],
-    });
+    const [createBatchTxs, createBatchAlphaTxs] = await Promise.all([
+      getTxsByEvent({
+        events: [
+          `${messageActionEquals}'${ECOCREDIT_MESSAGE_TYPES.CREATE_BATCH.message}'`,
+        ],
+      }),
+      getTxsByEvent({
+        events: [
+          `${messageActionEquals}'${ECOCREDIT_MESSAGE_TYPES.CREATE_BATCH_ALPHA.message}'`,
+        ],
+      }),
+    ]);
 
     return Promise.all(
       batches.map(async batch => {
@@ -401,7 +409,12 @@ export const addDataToBatches = async ({
         }
 
         if (withAllData) {
-          txhash = getTxHashForBatch(txs.txResponses, batch.denom);
+          txhash =
+            getTxHashForBatch(createBatchTxs.txResponses, batch.denom) ??
+            getTxHashForBatch(
+              createBatchAlphaTxs.txResponses,
+              v1Alpha1BatchDenomMapping[batch.denom],
+            );
           classProjectInfo = await getClassProjectForBatch(
             batch,
             sanityCreditClassData,
@@ -424,9 +437,9 @@ export const addDataToBatches = async ({
 
 const getTxHashForBatch = (
   txResponses: TxResponse[],
-  batchDenom: string,
+  log: string,
 ): string | undefined => {
-  const match = txResponses?.find(tx => tx.rawLog.includes(batchDenom));
+  const match = txResponses?.find(tx => tx.rawLog.includes(log));
   return match?.txhash;
 };
 

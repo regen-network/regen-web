@@ -83,8 +83,8 @@ export const useFetchBaskets = ({ credits }: Params): Response => {
   const basketTokens = basketsInfo
     .map((basketInfo, index) => ({
       basket: basketInfo,
-      balance: balanceDatas[index],
-      metadata: denomMetadataDatas[index],
+      balance: balanceDatas[index] ?? void 0,
+      metadata: denomMetadataDatas[index] ?? void 0,
     }))
     .filter(
       basketToken =>

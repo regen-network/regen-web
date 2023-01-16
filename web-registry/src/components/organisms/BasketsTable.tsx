@@ -53,7 +53,7 @@ export const BasketsTable: React.FC<React.PropsWithChildren<BasketTableProps>> =
                 alignSelf="center"
               >
                 <Box sx={{ fontSize: theme => theme.spacing(4.5) }}>
-                  {row.basket.name}
+                  {row.basket?.name}
                 </Box>
                 <Box sx={{ color: 'info.main' }}>
                   {row.metadata?.metadata?.display.toLocaleString()}
@@ -64,7 +64,7 @@ export const BasketsTable: React.FC<React.PropsWithChildren<BasketTableProps>> =
               ? formatNumber({
                   num:
                     parseInt(row.balance?.balance?.amount) /
-                    Math.pow(10, row.basket.exponent),
+                    Math.pow(10, row.basket?.exponent ?? 0),
                 })
               : 0,
           ];

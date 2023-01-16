@@ -22,6 +22,13 @@ const useOpenTakeModal = ({
     (rowIndex: number): void => {
       const selectedBasketDenom = basketTokens?.[rowIndex]?.basket?.basketDenom;
 
+<<<<<<< HEAD
+=======
+      track<'takeFromBasket1', TakeFromBasket1>('takeFromBasket1', {
+        basketName: basketTokens?.[rowIndex]?.basket?.name,
+      });
+
+>>>>>>> 0fae0f14 (feat: backet details page upgrades (#1725))
       const selectedBasketTokenWithClass = basketsWithClasses.find(
         bt => bt?.basket?.basketDenom === selectedBasketDenom,
       );

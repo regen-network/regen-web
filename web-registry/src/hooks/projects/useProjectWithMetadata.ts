@@ -76,12 +76,12 @@ export const useProjectWithMetadata = ({
     }
   }
 
-  // Reload callback
+  // TODO Reload callback
   // const reloadBalances = useCallback((): void => {
   //   reactQueryClient.invalidateQueries({
-  //     queryKey: balancesQuery.queryKey,
+  //     queryKey: query.queryKey,
   //   });
-  // }, [reactQueryClient, balancesQuery]);
+  // }, [reactQueryClient, query]);
 
   return {
     offChainProject,

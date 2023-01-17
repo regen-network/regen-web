@@ -72,7 +72,7 @@ const BasicInfoForm: React.FC<
       uri: 'http://regen.network/ProjectPageShape',
     },
   });
-  console.log('initialValues', initialValues);
+
   return (
     <Formik
       enableReinitialize
@@ -120,10 +120,8 @@ const BasicInfoForm: React.FC<
         return errors;
       }}
       onSubmit={async (values, { setSubmitting, setTouched }) => {
-        setSubmitting(true);
         try {
           await submit(values);
-          setSubmitting(false);
           setTouched({}); // reset to untouched
           if (isEdit && confirmSave) confirmSave();
         } catch (e) {

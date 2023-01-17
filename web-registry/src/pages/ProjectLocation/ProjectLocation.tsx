@@ -3,24 +3,30 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { useProjectEditContext } from 'pages/ProjectEdit';
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
+import useProjectAnchoredMetadataSubmit from 'hooks/projects/useProjectAnchoredMetadataSubmit';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
 import {
   ProjectLocationForm,
   ProjectLocationFormValues,
 } from '../../components/organisms';
-import { useUpdateProjectByIdMutation } from '../../generated/graphql';
 
 const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
-  const { isEdit, onChainProject } = useProjectEditContext();
+  const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
   const { metadata } = useProjectWithMetadata({
     projectId,
     isEdit,
     onChainProject,
   });
-  const [updateProject] = useUpdateProjectByIdMutation();
+  const projectAnchoredMetadataSubmit = useProjectAnchoredMetadataSubmit({
+    projectId,
+    isEdit,
+    projectEditSubmit,
+    navigateNext,
+    metadata,
+  });
 
   let initialFieldValues: any | undefined;
   if (metadata) {
@@ -35,40 +41,12 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
     // so it can access values: https://github.com/regen-network/regen-registry/issues/561
   }
 
-  async function submit(values: ProjectLocationFormValues): Promise<void> {
-    if (isEdit) {
-      // TODO initiate on-chain tx
-    } else {
-      try {
-        await saveValues(values);
-        navigateNext();
-      } catch (e) {
-        // TODO: Should we display the error banner here?
-        // https://github.com/regen-network/regen-registry/issues/554
-        console.error(e); // eslint-disable-line no-console
-      }
-    }
-  }
-
   function navigatePrev(): void {
     navigate(`/project-pages/${projectId}/basic-info`);
   }
 
   function navigateNext(): void {
     navigate(`/project-pages/${projectId}/roles`);
-  }
-
-  async function saveValues(values: ProjectLocationFormValues): Promise<void> {
-    await updateProject({
-      variables: {
-        input: {
-          id: projectId,
-          projectPatch: {
-            metadata: { ...metadata, ...values },
-          },
-        },
-      },
-    });
   }
 
   return (
@@ -78,7 +56,7 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
       saveAndExit={saveAndExit}
     >
       <ProjectLocationForm
-        submit={submit}
+        submit={projectAnchoredMetadataSubmit}
         saveAndExit={saveAndExit}
         mapToken={process.env.REACT_APP_MAPBOX_TOKEN as string}
         initialValues={initialFieldValues}

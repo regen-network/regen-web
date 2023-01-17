@@ -5,10 +5,7 @@ import { useProjectEditContext } from 'pages/ProjectEdit';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
 import { BasicInfoForm, BasicInfoFormValues } from '../../components/organisms';
-import {
-  EditFormTemplate,
-  OnboardingFormTemplate,
-} from '../../components/templates';
+import { ProjectFormTemplate } from '../../components/templates/ProjectFormTemplate';
 import { useUpdateProjectByIdMutation } from '../../generated/graphql';
 
 const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
@@ -76,26 +73,18 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
     }
   }
 
-  const Form = (): JSX.Element => (
-    <BasicInfoForm
-      submit={submit}
-      initialValues={initialFieldValues}
-      onNext={navigateNext}
-    />
-  );
-
-  return isEdit ? (
-    <EditFormTemplate>
-      <Form />
-    </EditFormTemplate>
-  ) : (
-    <OnboardingFormTemplate
-      activeStep={0}
+  return (
+    <ProjectFormTemplate
+      isEdit={isEdit}
       title="Basic Info"
       saveAndExit={saveAndExit}
     >
-      <Form />
-    </OnboardingFormTemplate>
+      <BasicInfoForm
+        submit={submit}
+        initialValues={initialFieldValues}
+        onNext={navigateNext}
+      />
+    </ProjectFormTemplate>
   );
 };
 

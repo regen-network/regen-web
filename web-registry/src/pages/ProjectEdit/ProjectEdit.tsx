@@ -29,7 +29,6 @@ import { useMsgClient } from 'hooks';
 import { Link } from '../../components/atoms';
 import useProjectEditSubmit, { ReturnType } from './hooks/useProjectEditSubmit';
 import { EDIT_PROJECT } from './ProjectEdit.constants';
-import { projectEditAtom } from './ProjectEdit.store';
 
 const useStyles = makeStyles()((theme: Theme) => ({
   root: {

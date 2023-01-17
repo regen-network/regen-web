@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import { Loading } from 'web-components/lib/components/loading';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 
-import { PlanStepper } from '../molecules';
+import { PlanStepper } from '../../molecules';
 
 type Props = {
   title: string;

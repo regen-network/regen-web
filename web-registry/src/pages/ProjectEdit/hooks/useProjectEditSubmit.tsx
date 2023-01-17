@@ -25,9 +25,7 @@ type Props = {
   }: OnTxSuccessfulProps) => void;
 };
 
-export type ReturnType = (
-  metadata: ProjectMetadataIntersectionLD,
-) => Promise<void>;
+export type ReturnType = (metadata: any) => Promise<void>;
 
 const useProjectEditSubmit = ({
   projectId,
@@ -38,7 +36,8 @@ const useProjectEditSubmit = ({
   onErrorCallback,
 }: Props): ReturnType => {
   const projectEditSubmit = useCallback(
-    async (metadata: ProjectMetadataIntersectionLD): Promise<void> => {
+    async (metadata: any): Promise<void> => {
+      console.log('projectEditSubmit');
       const iriResponse = await generateIri(metadata);
       if (!iriResponse) return;
       const metadataMsg = MsgUpdateProjectMetadata.fromPartial({
@@ -69,6 +68,7 @@ const useProjectEditSubmit = ({
           });
         }
       };
+      console.log('signAndBroadcast');
       // TODO submit MsgUpdateProjectAdmin as part of the same tx if needed: regen-registry/issues/1500
       await signAndBroadcast({ msgs: [metadataMsg] }, () => onBroadcast(), {
         onError,

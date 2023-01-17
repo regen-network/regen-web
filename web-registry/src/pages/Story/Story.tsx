@@ -1,11 +1,9 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
+
 import { StoryForm, StoryValues } from '../../components/organisms';
-import {
-  EditFormTemplate,
-  OnboardingFormTemplate,
-} from '../../components/templates';
 import {
   useProjectByIdQuery,
   useUpdateProjectByIdMutation,
@@ -68,27 +66,19 @@ const Story: React.FC<React.PropsWithChildren<unknown>> = () => {
     navigate(`/project-pages/${projectId}/entity-display`);
   }
 
-  const Form = (): JSX.Element => (
-    <StoryForm
-      submit={submit}
-      initialValues={initialFieldValues}
-      onPrev={navigatePrev}
-      onNext={navigateNext}
-    />
-  );
-
-  return isEdit ? (
-    <EditFormTemplate>
-      <Form />
-    </EditFormTemplate>
-  ) : (
-    <OnboardingFormTemplate
-      activeStep={0}
+  return (
+    <ProjectFormTemplate
+      isEdit={isEdit}
       title="Story"
       saveAndExit={saveAndExit}
     >
-      <Form />
-    </OnboardingFormTemplate>
+      <StoryForm
+        submit={submit}
+        initialValues={initialFieldValues}
+        onPrev={navigatePrev}
+        onNext={navigateNext}
+      />
+    </ProjectFormTemplate>
   );
 };
 

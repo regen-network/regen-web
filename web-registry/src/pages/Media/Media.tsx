@@ -9,15 +9,13 @@ import {
   getURLListInitialValue,
 } from 'lib/rdf';
 
+import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
+
 import {
   isSimpleMediaFormValues,
   MediaForm,
   MediaValues,
 } from '../../components/organisms/MediaForm';
-import {
-  EditFormTemplate,
-  OnboardingFormTemplate,
-} from '../../components/templates';
 import {
   useProjectByIdQuery,
   useShaclGraphByUriQuery,
@@ -103,32 +101,23 @@ const Media = (): JSX.Element => {
       // console.log(e);
     }
   }
-
-  const Form = (): JSX.Element => (
-    <MediaForm
-      submit={submit}
-      creditClassId={creditClassId}
-      graphData={graphData}
-      initialValues={getInitialFormValues()}
-      onNext={navigateNext}
-      onPrev={navigatePrev}
-    />
-  );
-
   if (loadingProject) return <Loading />;
 
-  return isEdit ? (
-    <EditFormTemplate>
-      <Form />
-    </EditFormTemplate>
-  ) : (
-    <OnboardingFormTemplate
-      activeStep={0}
+  return (
+    <ProjectFormTemplate
+      isEdit={isEdit}
       title="Media"
       saveAndExit={saveAndExit}
     >
-      <Form />
-    </OnboardingFormTemplate>
+      <MediaForm
+        submit={submit}
+        creditClassId={creditClassId}
+        graphData={graphData}
+        initialValues={getInitialFormValues()}
+        onNext={navigateNext}
+        onPrev={navigatePrev}
+      />
+    </ProjectFormTemplate>
   );
 };
 

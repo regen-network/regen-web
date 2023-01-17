@@ -3,11 +3,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { getProjectShapeIri } from 'lib/rdf';
 
+import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
+
 import { DescriptionForm, DescriptionValues } from '../../components/organisms';
-import {
-  EditFormTemplate,
-  OnboardingFormTemplate,
-} from '../../components/templates';
 import {
   useProjectByIdQuery,
   useShaclGraphByUriQuery,
@@ -77,28 +75,20 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
     }
   }
 
-  const Form = (): JSX.Element => (
-    <DescriptionForm
-      submit={submit}
-      onNext={navigateNext}
-      onPrev={navigatePrev}
-      initialValues={initialFieldValues}
-      graphData={graphData}
-    />
-  );
-
-  return isEdit ? (
-    <EditFormTemplate>
-      <Form />
-    </EditFormTemplate>
-  ) : (
-    <OnboardingFormTemplate
-      activeStep={0}
+  return (
+    <ProjectFormTemplate
+      isEdit={isEdit}
       title="Description"
       saveAndExit={saveAndExit}
     >
-      <Form />
-    </OnboardingFormTemplate>
+      <DescriptionForm
+        submit={submit}
+        onNext={navigateNext}
+        onPrev={navigatePrev}
+        initialValues={initialFieldValues}
+        graphData={graphData}
+      />
+    </ProjectFormTemplate>
   );
 };
 

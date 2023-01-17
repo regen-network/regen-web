@@ -2,16 +2,13 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useProjectEditContext } from 'pages/ProjectEdit';
+import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
 import {
   ProjectLocationForm,
   ProjectLocationFormValues,
 } from '../../components/organisms';
-import {
-  EditFormTemplate,
-  OnboardingFormTemplate,
-} from '../../components/templates';
 import { useUpdateProjectByIdMutation } from '../../generated/graphql';
 
 const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
@@ -74,29 +71,21 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
     });
   }
 
-  const Form = (): JSX.Element => (
-    <ProjectLocationForm
-      submit={submit}
-      saveAndExit={saveAndExit}
-      mapToken={process.env.REACT_APP_MAPBOX_TOKEN as string}
-      initialValues={initialFieldValues}
-      onPrev={navigatePrev}
-      onNext={navigateNext}
-    />
-  );
-
-  return isEdit ? (
-    <EditFormTemplate>
-      <Form />
-    </EditFormTemplate>
-  ) : (
-    <OnboardingFormTemplate
-      activeStep={0}
+  return (
+    <ProjectFormTemplate
+      isEdit={isEdit}
       title="Location"
       saveAndExit={saveAndExit}
     >
-      <Form />
-    </OnboardingFormTemplate>
+      <ProjectLocationForm
+        submit={submit}
+        saveAndExit={saveAndExit}
+        mapToken={process.env.REACT_APP_MAPBOX_TOKEN as string}
+        initialValues={initialFieldValues}
+        onPrev={navigatePrev}
+        onNext={navigateNext}
+      />
+    </ProjectFormTemplate>
   );
 };
 

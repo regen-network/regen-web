@@ -170,6 +170,7 @@ const useRolesSubmit = ({
       metadata,
       navigate,
       offChainProject?.partyByDeveloperId,
+      offChainProject?.id,
       projectId,
       updateParty,
       updateProject,

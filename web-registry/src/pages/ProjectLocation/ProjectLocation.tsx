@@ -6,10 +6,7 @@ import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
 import useProjectAnchoredMetadataSubmit from 'hooks/projects/useProjectAnchoredMetadataSubmit';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
-import {
-  ProjectLocationForm,
-  ProjectLocationFormValues,
-} from '../../components/organisms';
+import { ProjectLocationForm } from '../../components/organisms';
 
 const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();

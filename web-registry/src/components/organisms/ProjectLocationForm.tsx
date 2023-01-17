@@ -9,7 +9,6 @@ import { requiredMessage } from 'web-components/lib/components/inputs/validation
 import { getCompactedPath, getProjectPageBaseData, validate } from 'lib/rdf';
 
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
-import { useProjectEditContext } from '../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../molecules';
 
 export interface ProjectLocationFormValues {
@@ -26,7 +25,6 @@ const ProjectLocationForm: React.FC<
     onPrev?: () => void;
   }>
 > = ({ submit, initialValues, mapToken, ...props }) => {
-  const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
       uri: 'http://regen.network/ProjectPageShape',
@@ -61,16 +59,9 @@ const ProjectLocationForm: React.FC<
         }
         return errors;
       }}
-      onSubmit={async (values, { setSubmitting, setTouched }) => {
-        setSubmitting(true);
-        try {
-          await submit(values);
-          setSubmitting(false);
-          setTouched({}); // reset to untouched
-          if (isEdit && confirmSave) confirmSave();
-        } catch (e) {
-          setSubmitting(false);
-        }
+      onSubmit={async (values, { setTouched }) => {
+        await submit(values);
+        setTouched({}); // reset to untouched
       }}
     >
       {({ submitForm, isValid, isSubmitting, touched, dirty }) => {

@@ -12,7 +12,6 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 
 // import { requiredMessage } from 'web-components/lib/components/inputs/validation'; TODO: regen-registry#1048
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
-import { useProjectEditContext } from '../../pages/ProjectEdit';
 // import {
 //   validate,
 //   getProjectPageBaseData,
@@ -66,7 +65,6 @@ const BasicInfoForm: React.FC<
   }>
 > = ({ submit, initialValues, onNext }) => {
   const { classes, cx } = useStyles();
-  const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
       uri: 'http://regen.network/ProjectPageShape',
@@ -119,17 +117,12 @@ const BasicInfoForm: React.FC<
         }
         return errors;
       }}
-      onSubmit={async (values, { setSubmitting, setTouched }) => {
-        try {
-          await submit(values);
-          setTouched({}); // reset to untouched
-          if (isEdit && confirmSave) confirmSave();
-        } catch (e) {
-          setSubmitting(false);
-        }
+      onSubmit={async (values, { setTouched }) => {
+        await submit(values);
+        setTouched({}); // reset to untouched
       }}
     >
-      {({ submitForm, submitCount, isValid, isSubmitting, touched }) => {
+      {({ submitForm, isValid, isSubmitting, touched }) => {
         return (
           <Form>
             <OnBoardingCard>

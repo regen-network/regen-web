@@ -11,6 +11,7 @@
     "@cosmjs/stargate": "^0.27.0",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@hookform/resolvers": "^2.9.10",
     "@keplr-wallet/provider": "^0.11.10",
     "@keplr-wallet/stores": "^0.11.10",
     "@keplr-wallet/wc-client": "^0.11.11",
@@ -56,6 +57,7 @@
     "react-app-rewired": "^2.2.1",
     "react-dom": "^18.2.0",
     "react-ga": "^3.1.2",
+    "react-hook-form": "^7.42.1",
     "react-html-parser": "^2.0.2",
     "react-lazyload": "^3.2.0",
     "react-router-dom": "^6.4.3",
@@ -69,7 +71,8 @@
     "tss-react": "^4.4.1",
     "url-search-params-polyfill": "^8.1.0",
     "use-analytics": "^0.0.5",
-    "web-components": "0.0.0"
+    "web-components": "0.0.0",
+    "zod": "^3.20.2"
   },
   "scripts": {
     "lint": "eslint ./src  -c .eslintrc.js --max-warnings 0 --ext .ts,.tsx",
@@ -98,6 +101,7 @@
     ]
   },
   "devDependencies": {
+    "@hookform/devtools": "^4.3.0",
     "@keplr-wallet/types": "^0.9.0",
     "@storybook/addon-storyshots": "^6.3.12",
     "@types/enzyme": "^3.10.8",

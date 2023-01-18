@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { SxProps, useTheme } from '@mui/material';
 import FormControlLabel, {
   FormControlLabelProps,
@@ -17,37 +17,38 @@ interface CheckboxLabelProps {
   sx?: SxProps<Theme>;
 }
 
-export default function CheckboxLabel({
-  label,
-  disabled,
-  sx = [],
-  ...props
-}: CheckboxLabelProps): JSX.Element {
-  const theme = useTheme();
-  const isLabelStringOrNumber =
-    typeof label === 'string' || typeof label === 'number';
-  const showError = false;
-  const fieldError = '';
+const CheckboxLabel = forwardRef<HTMLButtonElement, CheckboxLabelProps>(
+  ({ label, disabled, sx = [], ...props }, ref) => {
+    const theme = useTheme();
+    const isLabelStringOrNumber =
+      typeof label === 'string' || typeof label === 'number';
+    const showError = false;
+    const fieldError = '';
 
-  return (
-    <>
-      <FormControlLabel
-        className={props.className}
-        sx={[{ ml: 0 }, ...(Array.isArray(sx) ? sx : [sx])]}
-        control={<Checkbox sx={{ p: 0, mr: 3.5 }} disabled={disabled} />}
-        label={isLabelStringOrNumber ? <Subtitle>{label}</Subtitle> : label}
-      />
-      {showError && (
-        <FormHelperText error={showError} sx={{ ml: 9 }}>
-          <Subtitle
-            as="span"
-            size="sm"
-            sx={{ color: theme.palette.error.main }}
-          >
-            {fieldError}
-          </Subtitle>
-        </FormHelperText>
-      )}
-    </>
-  );
-}
+    return (
+      <>
+        <FormControlLabel
+          className={props.className}
+          sx={[{ ml: 0 }, ...(Array.isArray(sx) ? sx : [sx])]}
+          control={
+            <Checkbox sx={{ p: 0, mr: 3.5 }} disabled={disabled} ref={ref} />
+          }
+          label={isLabelStringOrNumber ? <Subtitle>{label}</Subtitle> : label}
+        />
+        {showError && (
+          <FormHelperText error={showError} sx={{ ml: 9 }}>
+            <Subtitle
+              as="span"
+              size="sm"
+              sx={{ color: theme.palette.error.main }}
+            >
+              {fieldError}
+            </Subtitle>
+          </FormHelperText>
+        )}
+      </>
+    );
+  },
+);
+
+export default CheckboxLabel;

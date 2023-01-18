@@ -5,6 +5,7 @@ import {
   SubmitHandler,
   UseFormReturn,
 } from 'react-hook-form';
+import { Box } from '@mui/material';
 
 interface Props<T extends FieldValues>
   extends Omit<ComponentProps<'form'>, 'onSubmit'> {
@@ -22,7 +23,13 @@ const Form = <T extends FieldValues>({
     <form onSubmit={form.handleSubmit(onSubmit)} {...props}>
       {/* <fieldset> passes the form's 'disabled' state to all of its elements,
           allowing us to handle disabled style variants with just css */}
-      <fieldset disabled={form.formState.isSubmitting}>{children}</fieldset>
+      <Box
+        component="fieldset"
+        disabled={form.formState.isSubmitting}
+        sx={{ borderWidth: 0 }}
+      >
+        {children}
+      </Box>
     </form>
   </FormProvider>
 );

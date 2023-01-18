@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 import InputAdornment from '@mui/material/InputAdornment';
 import MuiTextField, { BaseTextFieldProps } from '@mui/material/TextField';
 
@@ -23,55 +23,63 @@ export interface RegenTextFieldProps
   label?: ReactNode;
 }
 
-export default function TextFieldBase({
-  errors = false,
-  optional = false,
-  defaultStyle = true,
-  forceDefaultStyle = false,
-  disabled,
-  children,
-  startAdornment,
-  endAdornment,
-  customInputProps = {},
-  label,
-  ...props
-}: RegenTextFieldProps): JSX.Element {
-  const { classes: styles, cx } = useTextFieldStyles({
-    errors,
-    label: label,
-  });
-  const baseClasses = [styles.root, props.className];
-  const defaultClasses = [styles.default, ...baseClasses];
-  const rootClasses = defaultStyle
-    ? forceDefaultStyle
-      ? defaultClasses
-      : [...defaultClasses, styles.firstOfType]
-    : baseClasses;
+const TextFieldBase = forwardRef<HTMLDivElement, RegenTextFieldProps>(
+  (
+    {
+      errors = false,
+      optional = false,
+      defaultStyle = true,
+      forceDefaultStyle = false,
+      disabled,
+      children,
+      startAdornment,
+      endAdornment,
+      customInputProps = {},
+      label,
+      ...props
+    },
+    ref,
+  ) => {
+    const { classes: styles, cx } = useTextFieldStyles({
+      errors,
+      label: label,
+    });
+    const baseClasses = [styles.root, props.className];
+    const defaultClasses = [styles.default, ...baseClasses];
+    const rootClasses = defaultStyle
+      ? forceDefaultStyle
+        ? defaultClasses
+        : [...defaultClasses, styles.firstOfType]
+      : baseClasses;
 
-  return (
-    <MuiTextField
-      {...props}
-      variant="standard"
-      className={cx(rootClasses)}
-      InputProps={{
-        disableUnderline: true,
-        startAdornment: startAdornment ? (
-          <InputAdornment position="start">{startAdornment}</InputAdornment>
-        ) : null,
-        endAdornment: endAdornment ? (
-          <InputAdornment position="end">{endAdornment}</InputAdornment>
-        ) : null,
-        inputProps: { ...customInputProps },
-      }}
-      label={
-        <InputLabel optional={!!optional} focused={false} required={false}>
-          {label}
-        </InputLabel>
-      }
-      InputLabelProps={{ focused: false, required: false }}
-      fullWidth
-    >
-      {children}
-    </MuiTextField>
-  );
-}
+    return (
+      <MuiTextField
+        {...props}
+        ref={ref}
+        variant="standard"
+        className={cx(rootClasses)}
+        InputProps={{
+          disableUnderline: true,
+          startAdornment: startAdornment ? (
+            <InputAdornment position="start">{startAdornment}</InputAdornment>
+          ) : null,
+          endAdornment: endAdornment ? (
+            <InputAdornment position="end">{endAdornment}</InputAdornment>
+          ) : null,
+          inputProps: { ...customInputProps },
+        }}
+        label={
+          <InputLabel optional={!!optional} focused={false} required={false}>
+            {label}
+          </InputLabel>
+        }
+        InputLabelProps={{ focused: false, required: false }}
+        fullWidth
+      >
+        {children}
+      </MuiTextField>
+    );
+  },
+);
+
+export default TextFieldBase;

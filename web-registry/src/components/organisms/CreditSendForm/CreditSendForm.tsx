@@ -153,7 +153,7 @@ const CreditSendForm: React.FC<React.PropsWithChildren<FormProps>> = ({
 
       {formValues.withRetire && (
         <>
-          <BottomCreditRetireFields mapboxToken={mapboxToken} arrayPrefix="" />
+          <BottomCreditRetireFields mapboxToken={mapboxToken} />
         </>
       )}
 

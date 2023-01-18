@@ -6,10 +6,11 @@ import TextFieldBase from '../TextFieldBase/TextFieldBase';
 
 interface AmountTextFieldProps extends RegenTextFieldProps {
   availableAmount: number;
+  onMaxClick?: (amount: number) => void;
 }
 
 export const AmountTextField = forwardRef<HTMLDivElement, AmountTextFieldProps>(
-  ({ availableAmount, ...props }, ref) => {
+  ({ availableAmount, onMaxClick, ...props }, ref) => {
     return (
       <TextFieldBase
         {...props}
@@ -33,6 +34,7 @@ export const AmountTextField = forwardRef<HTMLDivElement, AmountTextFieldProps>(
                 sm: theme.spacing(15),
               },
             })}
+            onClick={() => onMaxClick && onMaxClick(availableAmount ?? 0)}
           >
             max
           </Grid>

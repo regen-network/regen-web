@@ -10,14 +10,12 @@ import SelectTextField, { Option } from '../SelectTextField/SelectTextField';
 
 interface FieldProps extends PropsWithChildren {
   country: string;
-  name?: string;
-  optional?: boolean;
   initialSelection?: string;
 }
 
 const LocationStateField = forwardRef<HTMLDivElement, FieldProps>(
-  ({ country, name = 'stateProvince', initialSelection }, ref) => {
-    const [stateOptions, setStateOptions] = useState<Option[]>([]);
+  ({ country, initialSelection, ...props }, ref) => {
+    const [options, setOptions] = useState<Option[]>([]);
 
     useEffect(() => {
       const options = getCountrySubdivisionOptions(country);
@@ -26,13 +24,15 @@ const LocationStateField = forwardRef<HTMLDivElement, FieldProps>(
         options.some((opt: Option) => opt.value === initialSelection);
 
       // setFieldValue(name, isValidSelection ? initialSelection : '');
-      setStateOptions(options);
-    }, [country, name, initialSelection]);
+      setOptions(options);
+    }, [country, initialSelection]);
 
     return (
       <SelectTextField
+        {...props}
         label="State / Region"
-        options={stateOptions}
+        options={options}
+        native={false}
         ref={ref}
       />
     );

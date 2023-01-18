@@ -11,6 +11,7 @@ interface AmountFieldProps extends AmountLabelProps, PropsWithChildren {
   auxiliarLabel?: string;
   formErrors: string[];
   className?: string;
+  onMaxClick?: (amount: number) => void;
 }
 
 const AmountField = forwardRef<HTMLDivElement, AmountFieldProps>(
@@ -23,6 +24,8 @@ const AmountField = forwardRef<HTMLDivElement, AmountFieldProps>(
       denom,
       formErrors,
       className,
+      onMaxClick,
+      ...props
     },
     ref,
   ) => {
@@ -30,12 +33,14 @@ const AmountField = forwardRef<HTMLDivElement, AmountFieldProps>(
     return (
       <>
         <AmountTextField
+          {...props}
           ref={ref}
           name={name}
           formErrors={formErrors}
           type="number"
           availableAmount={availableAmount}
           className={cx(styles.textField, className)}
+          onMaxClick={onMaxClick}
           label={
             <AmountLabel
               label={label}

@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { SxProps, useTheme } from '@mui/material';
 import FormControlLabel, {
   FormControlLabelProps,
@@ -18,7 +18,7 @@ interface CheckboxLabelProps {
 }
 
 const CheckboxLabel = forwardRef<HTMLButtonElement, CheckboxLabelProps>(
-  ({ label, disabled, sx = [], ...props }, ref) => {
+  ({ label, disabled, sx = [], className, ...props }, ref) => {
     const theme = useTheme();
     const isLabelStringOrNumber =
       typeof label === 'string' || typeof label === 'number';
@@ -28,10 +28,15 @@ const CheckboxLabel = forwardRef<HTMLButtonElement, CheckboxLabelProps>(
     return (
       <>
         <FormControlLabel
-          className={props.className}
+          className={className}
           sx={[{ ml: 0 }, ...(Array.isArray(sx) ? sx : [sx])]}
           control={
-            <Checkbox sx={{ p: 0, mr: 3.5 }} disabled={disabled} ref={ref} />
+            <Checkbox
+              sx={{ p: 0, mr: 3.5 }}
+              disabled={disabled}
+              ref={ref}
+              {...props}
+            />
           }
           label={isLabelStringOrNumber ? <Subtitle>{label}</Subtitle> : label}
         />

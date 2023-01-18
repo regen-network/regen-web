@@ -17,6 +17,6 @@ export const TriggerTextField = forwardRef<
         await triggerOnChange(value);
       }
     };
-    return <MuiTextField {...props} onChange={onChange} ref={ref} />;
+    return <MuiTextField {...props} ref={ref} />;
   },
 );

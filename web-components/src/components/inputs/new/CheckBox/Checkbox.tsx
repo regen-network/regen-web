@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef, PropsWithChildren } from 'react';
 import MuiCheckbox, {
   CheckboxProps as MuiCheckboxProps,
 } from '@mui/material/Checkbox';
@@ -19,10 +19,9 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
 }));
 
-/** Custom styles on top of MUI's `Checkbox` component */
-const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
-  props: CheckboxProps,
-) => {
+type Props = PropsWithChildren<CheckboxProps>;
+
+const Checkbox = forwardRef<HTMLButtonElement, Props>((props, ref) => {
   const { classes } = useStyles();
   const { triggerOnChange, disabled } = props;
 
@@ -36,7 +35,7 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
   return (
     <MuiCheckbox
       {...props}
-      onChange={onChange}
+      ref={ref}
       color="secondary"
       icon={<UncheckedIcon className={classes.check} />}
       checkedIcon={
@@ -44,6 +43,6 @@ const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
       }
     />
   );
-};
+});
 
 export default Checkbox;

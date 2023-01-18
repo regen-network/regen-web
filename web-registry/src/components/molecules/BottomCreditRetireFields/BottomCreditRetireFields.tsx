@@ -1,12 +1,8 @@
 import { Suspense, useEffect } from 'react';
-import { useFormContext, UseFormRegister } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 import { Grid } from '@mui/material';
 
 import { Flex } from 'web-components/lib/components/box';
-import {
-  RetireFormValues,
-  RetireFormValuesArray,
-} from 'web-components/lib/components/form/CreditRetireForm';
 import ControlledTextField from 'web-components/lib/components/inputs/new/ControlledTextField/ControlledTextField';
 import LocationCountryField from 'web-components/lib/components/inputs/new/LocationCountryField/LocationCountryField';
 import LocationStateField from 'web-components/lib/components/inputs/new/LocationStateField/LocationStateField';
@@ -27,26 +23,25 @@ export interface BottomCreditRetireFieldsProps {
   mapboxToken: string;
   arrayPrefix?: string;
   arrayIndex?: number;
-  register: UseFormRegister<CreditSendFormSchemaType>;
 }
 
 export const BottomCreditRetireFields: React.FC<
   React.PropsWithChildren<BottomCreditRetireFieldsProps>
-> = ({ mapboxToken, arrayPrefix = '', arrayIndex, register }) => {
+> = ({ mapboxToken, arrayPrefix = '', arrayIndex }) => {
   const { classes: styles } = useBottomCreditRetireFieldsStyles();
   const ctx = useFormContext<CreditSendFormSchemaType>();
-  const values = ctx.getValues();
+  const { register, control, setValue } = ctx;
+  const country = useWatch({ control: control, name: 'country' });
+  const stateProvince = useWatch({ control: control, name: 'stateProvince' });
+  const postalCode = useWatch({ control: control, name: 'postalCode' });
 
   // const { values, setFieldValue } = useFormikContext<
   //   RetireFormValues | RetireFormValuesArray
   // >();
-  const { country, stateProvince, postalCode } = values;
 
   useEffect(() => {
-    const retirementJurisdictionName = `${arrayPrefix}retirementJurisdiction`;
-
     if (!country) {
-      // setFieldValue(retirementJurisdictionName, null);
+      setValue('retirementJurisdiction', '');
       return;
     }
 
@@ -56,8 +51,8 @@ export const BottomCreditRetireFields: React.FC<
       postalCode,
     });
 
-    // setFieldValue(retirementJurisdictionName, jurisdiction);
-  }, [country, stateProvince, postalCode, mapboxToken, arrayPrefix]);
+    setValue('retirementJurisdiction', jurisdiction);
+  }, [country, stateProvince, postalCode, mapboxToken, arrayPrefix, setValue]);
 
   // showNotesField
   // When in the same form we have a set of credit retirement (for example,
@@ -111,8 +106,7 @@ export const BottomCreditRetireFields: React.FC<
           >
             <LocationStateField
               country={country}
-              {...register('stateProvince', { required: !!postalCode })}
-              initialSelection={stateProvince}
+              {...register('stateProvince')}
             />
           </Suspense>
         </Grid>

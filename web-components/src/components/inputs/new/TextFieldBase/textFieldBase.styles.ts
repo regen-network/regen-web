@@ -2,12 +2,15 @@ import { ReactNode } from 'react';
 import { makeStyles } from 'tss-react/mui';
 
 type UseStylesParams = {
-  errors: boolean;
+  error: boolean;
   label: ReactNode;
 };
 
+// TODO: create styled component as described in issue: regen-network/regen-web/issues/955
+// These styles are copied from TextField. Instead, use this as a style base for TextField
+
 export const useTextFieldStyles = makeStyles<UseStylesParams>()(
-  (theme, { errors, label }) => ({
+  (theme, { error, label }) => ({
     root: {
       '& label': {
         lineHeight: '140%',
@@ -32,10 +35,10 @@ export const useTextFieldStyles = makeStyles<UseStylesParams>()(
       '& .MuiInputBase-formControl': {
         marginTop: label ? theme.spacing(2.25) : 0,
         [theme.breakpoints.up('sm')]: {
-          marginBottom: errors ? theme.spacing(5.25) : 0,
+          marginBottom: error ? theme.spacing(5.25) : 0,
         },
         [theme.breakpoints.down('sm')]: {
-          marginBottom: errors ? theme.spacing(4.75) : 0,
+          marginBottom: error ? theme.spacing(4.75) : 0,
         },
         '&.Mui-disabled': {
           backgroundColor: theme.palette.info.light,
@@ -44,7 +47,7 @@ export const useTextFieldStyles = makeStyles<UseStylesParams>()(
       '& .MuiFormHelperText-root': {
         fontWeight: 'bold',
         color: theme.palette.primary.light,
-        position: errors ? 'absolute' : 'inherit',
+        position: error ? 'absolute' : 'inherit',
         bottom: 0,
         [theme.breakpoints.up('sm')]: {
           fontSize: theme.spacing(3.5),

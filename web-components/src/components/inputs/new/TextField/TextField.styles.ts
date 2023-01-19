@@ -2,13 +2,12 @@ import { ReactNode } from 'react';
 import { makeStyles } from 'tss-react/mui';
 
 type UseStylesParams = {
-  errors: boolean;
+  error: boolean;
   label: ReactNode;
-  formErrors: string[];
 };
 
 export const useTextFieldStyles = makeStyles<UseStylesParams>()(
-  (theme, { errors, label, formErrors }) => ({
+  (theme, { error, label }) => ({
     root: {
       '& label': {
         lineHeight: '140%',
@@ -39,9 +38,9 @@ export const useTextFieldStyles = makeStyles<UseStylesParams>()(
       '& .MuiFormHelperText-root': {
         fontWeight: 'bold',
         color: theme.palette.primary.light,
-        position: errors ? 'absolute' : 'inherit',
-        lineHeight: Object.keys(formErrors).length > 0 ? 1.3 : 1.66,
-        bottom: errors ? theme.spacing(-5) : 0,
+        position: error ? 'absolute' : 'inherit',
+        lineHeight: error ? 1.3 : 1.66,
+        bottom: error ? theme.spacing(-5) : 0,
         [theme.breakpoints.up('sm')]: {
           fontSize: theme.spacing(3.5),
         },

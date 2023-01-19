@@ -13,7 +13,7 @@ const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
     {
       transformValue,
       triggerOnChange,
-      errors = false,
+      error = false,
       optional = false,
       defaultStyle = true,
       forceDefaultStyle = false,
@@ -22,13 +22,13 @@ const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
       endAdornment,
       description,
       customInputProps = {},
+      name,
       ...props
     },
     ref,
   ) => {
     const { classes: styles, cx } = useTextFieldStyles({
-      errors,
-      formErrors: props.formErrors,
+      error,
       label: props.label,
     });
     const baseClasses = [styles.root, props.className];
@@ -42,11 +42,14 @@ const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
     return (
       <TriggerTextField
         {...props}
+        id={name}
+        name={name}
         ref={ref}
         variant="standard"
         transformValue={transformValue}
         triggerOnChange={triggerOnChange}
         className={cx(rootClasses)}
+        error={error}
         InputProps={{
           disableUnderline: true,
           startAdornment: startAdornment ? (

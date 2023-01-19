@@ -6,14 +6,11 @@ import { DefaultStyleProps } from '../FieldFormControl/FieldFormControl';
 import InputLabel from '../InputLabel/InputLabel';
 import { useTextFieldStyles } from './textFieldBase.styles';
 
-// TODO: create styled component as described in issue: regen-network/regen-web/issues/955
-// These styles are copied from TextField. Instead, use this as a style base for TextField
-
 export interface RegenTextFieldProps
   extends DefaultStyleProps,
     BaseTextFieldProps {
   children?: any;
-  errors?: boolean;
+  error?: boolean;
   optional?: boolean | string;
   disabled?: boolean;
   startAdornment?: React.ReactNode;
@@ -26,7 +23,7 @@ export interface RegenTextFieldProps
 const TextFieldBase = forwardRef<HTMLDivElement, RegenTextFieldProps>(
   (
     {
-      errors = false,
+      error = false,
       optional = false,
       defaultStyle = true,
       forceDefaultStyle = false,
@@ -41,7 +38,7 @@ const TextFieldBase = forwardRef<HTMLDivElement, RegenTextFieldProps>(
     ref,
   ) => {
     const { classes: styles, cx } = useTextFieldStyles({
-      errors,
+      error,
       label: label,
     });
     const baseClasses = [styles.root, props.className];
@@ -56,6 +53,7 @@ const TextFieldBase = forwardRef<HTMLDivElement, RegenTextFieldProps>(
       <MuiTextField
         {...props}
         ref={ref}
+        error={error}
         variant="standard"
         className={cx(rootClasses)}
         InputProps={{

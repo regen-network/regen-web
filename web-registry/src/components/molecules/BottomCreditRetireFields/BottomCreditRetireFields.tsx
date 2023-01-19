@@ -30,7 +30,8 @@ export const BottomCreditRetireFields: React.FC<
 > = ({ mapboxToken, fieldId, fieldIndex }) => {
   const { classes: styles } = useBottomCreditRetireFieldsStyles();
   const ctx = useFormContext<CreditSendFormSchemaType>();
-  const { register, control, setValue } = ctx;
+  const { register, control, setValue, formState } = ctx;
+  const { errors } = formState;
   const isFirstItem = fieldIndex === 0;
   const country = useWatch({
     control,
@@ -70,13 +71,14 @@ export const BottomCreditRetireFields: React.FC<
             <InfoTooltipWithIcon title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')" />
           </Flex>
           <TextField
-            formErrors={[]}
             type="text"
             label="Add retirement transaction details (stored in the tx memo)"
             className={styles.noteTextField}
             optional
             defaultStyle={false}
             key={fieldId}
+            error={!!errors?.retireFields?.[fieldIndex]?.note}
+            helperText={errors?.retireFields?.[fieldIndex]?.note?.message}
             {...register(`retireFields.${fieldIndex}.note`)}
           />
         </>
@@ -98,6 +100,8 @@ export const BottomCreditRetireFields: React.FC<
             <LocationCountryField
               exclude
               key={fieldId}
+              error={!!errors?.retireFields?.[fieldIndex]?.country}
+              helperText={errors?.retireFields?.[fieldIndex]?.country?.message}
               {...register(`retireFields.${fieldIndex}.country`)}
             />
           </Suspense>
@@ -107,8 +111,13 @@ export const BottomCreditRetireFields: React.FC<
             fallback={<SelectTextField label="State / Region" options={[]} />}
           >
             <LocationStateField
+              optional
               country={country}
               key={fieldId}
+              error={!!errors?.retireFields?.[fieldIndex]?.stateProvince}
+              helperText={
+                errors?.retireFields?.[fieldIndex]?.stateProvince?.message
+              }
               {...register(`retireFields.${fieldIndex}.stateProvince`)}
             />
           </Suspense>
@@ -118,6 +127,7 @@ export const BottomCreditRetireFields: React.FC<
         label="Postal Code"
         key={fieldId}
         optional
+        error={!!errors?.retireFields?.[fieldIndex]?.postalCode}
         {...register(`retireFields.${fieldIndex}.postalCode`)}
       />
     </>

@@ -1,15 +1,17 @@
-import { forwardRef, PropsWithChildren } from 'react';
+import { forwardRef } from 'react';
 
+import { RegenTextFieldProps } from '../TextField/TextField.types';
 import { AuxiliarLabel } from './AmountField.AuxiliarLabel';
 import { AmountLabel } from './AmountField.Label';
 import { useAmountFieldStyles } from './AmountField.styles';
 import { AmountTextField } from './AmountField.TextField';
 import { AmountLabelProps } from './AmountField.types';
 
-interface AmountFieldProps extends AmountLabelProps, PropsWithChildren {
+interface AmountFieldProps
+  extends AmountLabelProps,
+    Omit<RegenTextFieldProps, 'label'> {
   name: string;
   auxiliarLabel?: string;
-  formErrors: string[];
   className?: string;
   onMaxClick?: (amount: number) => void;
 }
@@ -22,7 +24,6 @@ const AmountField = forwardRef<HTMLDivElement, AmountFieldProps>(
       auxiliarLabel,
       availableAmount,
       denom,
-      formErrors,
       className,
       onMaxClick,
       ...props
@@ -36,7 +37,6 @@ const AmountField = forwardRef<HTMLDivElement, AmountFieldProps>(
           {...props}
           ref={ref}
           name={name}
-          formErrors={formErrors}
           type="number"
           availableAmount={availableAmount}
           className={cx(styles.textField, className)}

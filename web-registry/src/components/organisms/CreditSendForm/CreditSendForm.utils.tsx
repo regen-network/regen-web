@@ -44,17 +44,20 @@ export const validateCreditSendForm = ({
     });
   }
 
-  const errAmount = validateAmount(availableTradableAmount, values.totalAmount);
+  const errAmount = validateAmount(availableTradableAmount, values.amount);
   if (errAmount) {
-    setError('totalAmount', { message: errAmount });
+    setError('amount', { message: errAmount });
   }
 
   if (!values.agreeErpa) {
     setError('agreeErpa', { message: requirementAgreement });
   }
 
-  if (values.note && !validateMemoLength(values.note)) {
-    setError('note', { message: invalidMemoLength });
+  if (
+    values.retireFields?.[0]?.note &&
+    !validateMemoLength(values.retireFields?.[0]?.note)
+  ) {
+    setError('retireFields.0.note', { message: invalidMemoLength });
   }
 
   return;

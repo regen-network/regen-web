@@ -15,7 +15,7 @@ export const CreditSendFormSchema = z.object({
   recipient: z.string(),
   withRetire: z.boolean().optional(),
   agreeErpa: z.boolean(),
-  amount: z.number(),
+  amount: z.coerce.number(),
   retireFields: z.array(RetireFormSchema).optional(),
 });
 

@@ -1,5 +1,6 @@
 import { forwardRef } from 'react';
 import { SxProps, useTheme } from '@mui/material';
+import { CheckboxProps as MuiCheckboxProps } from '@mui/material/Checkbox';
 import FormControlLabel, {
   FormControlLabelProps,
 } from '@mui/material/FormControlLabel';
@@ -10,20 +11,31 @@ import { Theme } from 'src/theme/muiTheme';
 import { Subtitle } from '../../../typography';
 import Checkbox from '../CheckBox/Checkbox';
 
-interface CheckboxLabelProps {
+interface CheckboxLabelProps extends MuiCheckboxProps {
   label: FormControlLabelProps['label'];
   disabled?: boolean;
   className?: string;
+  error?: boolean;
+  helperText?: string;
   sx?: SxProps<Theme>;
 }
 
 const CheckboxLabel = forwardRef<HTMLButtonElement, CheckboxLabelProps>(
-  ({ label, disabled, sx = [], className, ...props }, ref) => {
+  (
+    {
+      label,
+      disabled,
+      sx = [],
+      className,
+      error = false,
+      helperText = '',
+      ...props
+    },
+    ref,
+  ) => {
     const theme = useTheme();
     const isLabelStringOrNumber =
       typeof label === 'string' || typeof label === 'number';
-    const showError = false;
-    const fieldError = '';
 
     return (
       <>
@@ -40,14 +52,14 @@ const CheckboxLabel = forwardRef<HTMLButtonElement, CheckboxLabelProps>(
           }
           label={isLabelStringOrNumber ? <Subtitle>{label}</Subtitle> : label}
         />
-        {showError && (
-          <FormHelperText error={showError} sx={{ ml: 9 }}>
+        {error && (
+          <FormHelperText error={error} sx={{ ml: 9 }}>
             <Subtitle
               as="span"
               size="sm"
               sx={{ color: theme.palette.error.main }}
             >
-              {fieldError}
+              {helperText}
             </Subtitle>
           </FormHelperText>
         )}

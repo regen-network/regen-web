@@ -19,6 +19,8 @@ export interface SelectTextFieldProps extends DefaultStyleProps {
   value?: string;
   disabled?: boolean;
   label: string;
+  error?: boolean;
+  helperText?: string;
 }
 
 const SelectTextField = forwardRef<HTMLDivElement, SelectTextFieldProps>(
@@ -31,9 +33,9 @@ const SelectTextField = forwardRef<HTMLDivElement, SelectTextFieldProps>(
     return (
       <TextField
         {...props}
+        value={value}
         ref={ref}
         label={label}
-        formErrors={[]}
         disabled={disabled}
         className={styles.root}
         select

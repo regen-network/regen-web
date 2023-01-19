@@ -10,6 +10,9 @@ import SelectTextField, { Option } from '../SelectTextField/SelectTextField';
 
 interface FieldProps extends PropsWithChildren {
   exclude?: boolean;
+  error?: boolean;
+  helperText?: string;
+  optional?: boolean;
 }
 
 const LocationCountryField = forwardRef<HTMLDivElement, FieldProps>(

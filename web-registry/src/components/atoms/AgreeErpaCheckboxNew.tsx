@@ -9,6 +9,8 @@ import CheckboxLabel from 'web-components/lib/components/inputs/new/CheckboxLabe
 import { Subtitle } from 'web-components/lib/components/typography';
 
 interface Props {
+  error?: boolean;
+  helperText?: string;
   sx?: SxProps<Theme>;
 }
 

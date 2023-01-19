@@ -19,10 +19,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { IS_DEV } from 'lib/env';
 
 import AgreeErpaCheckbox from 'components/atoms/AgreeErpaCheckboxNew';
-import {
-  BottomCreditRetireFields,
-  BottomCreditRetireFieldsProps,
-} from 'components/molecules/BottomCreditRetireFields/BottomCreditRetireFields';
+import { BottomCreditRetireFields } from 'components/molecules/BottomCreditRetireFields/BottomCreditRetireFields';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
@@ -55,19 +52,17 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
 }));
 
-export interface CreditSendProps extends BottomCreditRetireFieldsProps {
+export interface CreditSendFormProps {
   sender: string;
   batchDenom: string;
   availableTradableAmount: number;
-  onSubmit: (values: FormValues) => Promise<void>;
+  onSubmit: (values: CreditSendFormValues) => Promise<void>;
   addressPrefix?: string;
-}
-
-interface FormProps extends CreditSendProps {
   onClose: RegenModalProps['onClose'];
+  mapboxToken: string;
 }
 
-export interface FormValues extends RetireFormValues {
+export interface CreditSendFormValues extends RetireFormValues {
   sender: string;
   recipient: string;
   totalAmount: number;
@@ -75,133 +70,137 @@ export interface FormValues extends RetireFormValues {
   agreeErpa: boolean;
 }
 
-const CreditSendForm: React.FC<React.PropsWithChildren<FormProps>> = ({
-  sender,
-  batchDenom,
-  addressPrefix,
-  availableTradableAmount,
-  mapboxToken,
-  onClose,
-}) => {
-  const { classes: styles } = useStyles();
-  const form = useZodForm({
-    schema: CreditSendFormSchema,
-    defaultValues: { ...creditSendFormInitialValues, sender },
-  });
-  const withRetire = useWatch({ control: form.control, name: 'withRetire' });
-  const { isSubmitting, submitCount, isValid } = useFormState({
-    control: form.control,
-  });
-  const { fields, append, remove } = useFieldArray({
-    name: 'retireFields',
-    control: form.control,
-  });
+const CreditSendForm: React.FC<React.PropsWithChildren<CreditSendFormProps>> =
+  ({
+    sender,
+    batchDenom,
+    addressPrefix,
+    availableTradableAmount,
+    mapboxToken,
+    onClose,
+  }) => {
+    const { classes: styles } = useStyles();
+    const form = useZodForm({
+      schema: CreditSendFormSchema,
+      defaultValues: { ...creditSendFormInitialValues, sender },
+    });
+    const withRetire = useWatch({ control: form.control, name: 'withRetire' });
+    const { isSubmitting, submitCount, isValid, errors } = useFormState({
+      control: form.control,
+    });
+    const { fields, append, remove } = useFieldArray({
+      name: 'retireFields',
+      control: form.control,
+    });
 
-  const setAmount = (value: number): void => {
-    form.setValue('amount', value);
-  };
+    const setAmount = (value: number): void => {
+      form.setValue('amount', value);
+    };
 
-  useEffect(() => {
-    if (withRetire && fields.length === 0) {
-      append(initialValuesRetire);
-    }
-    if (!withRetire && fields.length > 0) {
-      remove(0);
-    }
-  }, [withRetire, fields, append, remove]);
+    useEffect(() => {
+      if (withRetire && fields.length === 0) {
+        append(initialValuesRetire);
+      }
+      if (!withRetire && fields.length > 0) {
+        remove(0);
+      }
+    }, [withRetire, fields, append, remove]);
 
-  return (
-    <>
-      <Form
-        form={form}
-        onSubmit={data =>
-          validateCreditSendForm({
-            availableTradableAmount,
-            setError: form.setError,
-            values: data,
-            addressPrefix,
-          })
-        }
-      >
-        <TextField
-          type="text"
-          label="Sender"
-          formErrors={Object.keys(form.formState.errors)}
-          disabled
-          {...form.register('sender')}
-        />
-        <TextField
-          type="text"
-          label="Recipient"
-          formErrors={Object.keys(form.formState.errors)}
-          {...form.register('recipient')}
-        />
-
-        <AmountField
-          label={
-            <Flex align="center">
-              <Box sx={{ mr: 1 }}>{'Amount of credits'}</Box>
-              <InfoTooltip
-                title="By default these credits are tradable but you may check “retire all credits upon transfer” below to automatically retire them upon sending."
-                arrow
-                placement="top"
-              >
-                <Box
-                  sx={{
-                    cursor: 'pointer',
-                  }}
-                >
-                  <InfoIcon />
-                </Box>
-              </InfoTooltip>
-            </Flex>
+    return (
+      <>
+        <Form
+          form={form}
+          onSubmit={data =>
+            validateCreditSendForm({
+              availableTradableAmount,
+              setError: form.setError,
+              values: data,
+              addressPrefix,
+            })
           }
-          formErrors={Object.keys(form.formState.errors)}
-          availableAmount={availableTradableAmount}
-          denom={batchDenom}
-          onMaxClick={setAmount}
-          {...form.register('amount')}
-        />
-
-        <CheckboxLabel
-          className={styles.checkboxLabel}
-          label={
-            <Subtitle size="lg" color="primary.contrastText">
-              <Box sx={{ display: 'inline' }}>
-                Retire all credits upon transfer
-              </Box>{' '}
-              <Box sx={{ display: 'inline', fontWeight: 400 }}>
-                {'(retirement is permanent and non-reversible)'}
-              </Box>
-            </Subtitle>
-          }
-          {...form.register('withRetire')}
-        />
-
-        {fields.map((field, index) => (
-          <BottomCreditRetireFields
-            mapboxToken={mapboxToken}
-            fieldId={field.id}
-            fieldIndex={index}
+        >
+          <TextField
+            type="text"
+            label="Sender"
+            disabled
+            {...form.register('sender')}
           />
-        ))}
+          <TextField
+            type="text"
+            label="Recipient"
+            helperText={errors.recipient?.message}
+            error={!!errors.recipient}
+            {...form.register('recipient')}
+          />
 
-        <AgreeErpaCheckbox
-          sx={{ mt: withRetire ? 10 : 6 }}
-          {...form.register('agreeErpa')}
-        />
+          <AmountField
+            label={
+              <Flex align="center">
+                <Box sx={{ mr: 1 }}>{'Amount of credits'}</Box>
+                <InfoTooltip
+                  title="By default these credits are tradable but you may check “retire all credits upon transfer” below to automatically retire them upon sending."
+                  arrow
+                  placement="top"
+                >
+                  <Box
+                    sx={{
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <InfoIcon />
+                  </Box>
+                </InfoTooltip>
+              </Flex>
+            }
+            helperText={errors.amount?.message}
+            error={!!errors.amount}
+            availableAmount={availableTradableAmount}
+            denom={batchDenom}
+            onMaxClick={setAmount}
+            {...form.register('amount')}
+          />
 
-        <Submit
-          isSubmitting={isSubmitting}
-          onClose={onClose}
-          isValid={isValid}
-          submitCount={submitCount}
-          label={'Send'}
-        />
-      </Form>
-      {IS_DEV && <DevTool control={form.control} />}
-    </>
-  );
-};
+          <CheckboxLabel
+            className={styles.checkboxLabel}
+            label={
+              <Subtitle size="lg" color="primary.contrastText">
+                <Box sx={{ display: 'inline' }}>
+                  Retire all credits upon transfer
+                </Box>{' '}
+                <Box sx={{ display: 'inline', fontWeight: 400 }}>
+                  {'(retirement is permanent and non-reversible)'}
+                </Box>
+              </Subtitle>
+            }
+            {...form.register('withRetire')}
+          />
+
+          {fields.map((field, index) => (
+            <BottomCreditRetireFields
+              mapboxToken={mapboxToken}
+              fieldId={field.id}
+              fieldIndex={index}
+            />
+          ))}
+
+          <AgreeErpaCheckbox
+            sx={{ mt: withRetire ? 10 : 6 }}
+            error={!!errors.agreeErpa}
+            helperText={errors.agreeErpa?.message}
+            {...form.register('agreeErpa')}
+          />
+
+          <Submit
+            isSubmitting={isSubmitting}
+            onClose={onClose}
+            isValid={isValid}
+            submitCount={submitCount}
+            label={'Send'}
+          />
+        </Form>
+        {IS_DEV && <DevTool control={form.control} />}
+      </>
+    );
+  };
 
 export { CreditSendForm };

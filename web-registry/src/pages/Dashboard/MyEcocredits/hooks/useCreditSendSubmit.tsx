@@ -13,7 +13,7 @@ import {
 } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
-import type { FormValues as CreditSendFormValues } from 'components/organisms/CreditSendForm/CreditSendForm';
+import type { CreditSendFormValues } from 'components/organisms/CreditSendForm/CreditSendForm';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import { SEND_HEADER } from '../MyEcocredits.constants';

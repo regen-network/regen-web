@@ -24,17 +24,22 @@ export const validateCreditSendForm = ({
   addressPrefix,
   availableTradableAmount,
   setError,
-}: Props): void => {
+}: Props): boolean => {
+  let hasError = false;
+
   if (!values.sender) {
     setError('sender', { type: 'required', message: requiredMessage });
+    hasError = true;
   }
 
   if (!values.recipient) {
     setError('recipient', { type: 'required', message: requiredMessage });
+    hasError = true;
   }
 
   if (values.recipient && !isValidAddress(values.recipient, addressPrefix)) {
     setError('recipient', { message: invalidRegenAddress });
+    hasError = true;
   }
 
   // TODO: temporarily disable sending credits to the same account
@@ -42,15 +47,18 @@ export const validateCreditSendForm = ({
     setError('recipient', {
       message: 'The recipient address cannot be the same as the sender address',
     });
+    hasError = true;
   }
 
   const errAmount = validateAmount(availableTradableAmount, values.amount);
   if (errAmount) {
     setError('amount', { message: errAmount });
+    hasError = true;
   }
 
   if (!values.agreeErpa) {
     setError('agreeErpa', { message: requirementAgreement });
+    hasError = true;
   }
 
   if (
@@ -58,7 +66,8 @@ export const validateCreditSendForm = ({
     !validateMemoLength(values.retireFields?.[0]?.note)
   ) {
     setError('retireFields.0.note', { message: invalidMemoLength });
+    hasError = true;
   }
 
-  return;
+  return hasError;
 };

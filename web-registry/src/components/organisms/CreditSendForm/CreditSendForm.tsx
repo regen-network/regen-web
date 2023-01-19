@@ -5,7 +5,6 @@ import { Box } from '@mui/system';
 import { makeStyles } from 'tss-react/mui';
 
 import { Flex } from 'web-components/lib/components/box';
-import { RetireFormValues } from 'web-components/lib/components/form/CreditRetireForm';
 import Submit from 'web-components/lib/components/form/Submit';
 import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
 import AmountField from 'web-components/lib/components/inputs/new/AmountField/AmountField';
@@ -27,7 +26,10 @@ import {
   creditSendFormInitialValues,
   initialValuesRetire,
 } from './CreditSendForm.constants';
-import { CreditSendFormSchema } from './CreditSendForm.schema';
+import {
+  CreditSendFormSchema,
+  CreditSendFormSchemaType,
+} from './CreditSendForm.schema';
 import { validateCreditSendForm } from './CreditSendForm.utils';
 
 /**
@@ -56,18 +58,10 @@ export interface CreditSendFormProps {
   sender: string;
   batchDenom: string;
   availableTradableAmount: number;
-  onSubmit: (values: CreditSendFormValues) => Promise<void>;
+  onSubmit: (values: CreditSendFormSchemaType) => Promise<void>;
   addressPrefix?: string;
   onClose: RegenModalProps['onClose'];
   mapboxToken: string;
-}
-
-export interface CreditSendFormValues extends RetireFormValues {
-  sender: string;
-  recipient: string;
-  totalAmount: number;
-  withRetire?: boolean;
-  agreeErpa: boolean;
 }
 
 const CreditSendForm: React.FC<React.PropsWithChildren<CreditSendFormProps>> =
@@ -78,6 +72,7 @@ const CreditSendForm: React.FC<React.PropsWithChildren<CreditSendFormProps>> =
     availableTradableAmount,
     mapboxToken,
     onClose,
+    onSubmit,
   }) => {
     const { classes: styles } = useStyles();
     const form = useZodForm({
@@ -110,14 +105,17 @@ const CreditSendForm: React.FC<React.PropsWithChildren<CreditSendFormProps>> =
       <>
         <Form
           form={form}
-          onSubmit={data =>
-            validateCreditSendForm({
+          onSubmit={data => {
+            const hasError = validateCreditSendForm({
               availableTradableAmount,
               setError: form.setError,
               values: data,
               addressPrefix,
-            })
-          }
+            });
+            if (!hasError) {
+              onSubmit(data);
+            }
+          }}
         >
           <TextField
             type="text"

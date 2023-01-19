@@ -1,9 +1,21 @@
-import { initialValues as initialValuesRetire } from 'web-components/lib/components/form/CreditRetireForm';
+import {
+  CreditSendFormSchemaType,
+  RetireFormSchemaType,
+} from './CreditSendForm.schema';
 
-export const creditSendFormInitialValues = {
+export const initialValuesRetire: RetireFormSchemaType = {
+  note: '',
+  country: 'US',
+  stateProvince: '',
+  postalCode: '',
+  retirementJurisdiction: '',
+};
+
+export const creditSendFormInitialValues: CreditSendFormSchemaType = {
   recipient: '',
-  totalAmount: 0,
+  amount: 0,
   withRetire: false,
-  ...initialValuesRetire,
   agreeErpa: false,
+  sender: '',
+  retireFields: [],
 };

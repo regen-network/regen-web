@@ -21,27 +21,33 @@ import {
 
 export interface BottomCreditRetireFieldsProps {
   mapboxToken: string;
-  arrayPrefix?: string;
-  arrayIndex?: number;
+  fieldIndex: number;
+  fieldId: string;
 }
 
 export const BottomCreditRetireFields: React.FC<
   React.PropsWithChildren<BottomCreditRetireFieldsProps>
-> = ({ mapboxToken, arrayPrefix = '', arrayIndex }) => {
+> = ({ mapboxToken, fieldId, fieldIndex }) => {
   const { classes: styles } = useBottomCreditRetireFieldsStyles();
   const ctx = useFormContext<CreditSendFormSchemaType>();
   const { register, control, setValue } = ctx;
-  const country = useWatch({ control: control, name: 'country' });
-  const stateProvince = useWatch({ control: control, name: 'stateProvince' });
-  const postalCode = useWatch({ control: control, name: 'postalCode' });
-
-  // const { values, setFieldValue } = useFormikContext<
-  //   RetireFormValues | RetireFormValuesArray
-  // >();
+  const isFirstItem = fieldIndex === 0;
+  const country = useWatch({
+    control,
+    name: `retireFields.${fieldIndex}.country`,
+  });
+  const stateProvince = useWatch({
+    control,
+    name: `retireFields.${fieldIndex}.stateProvince`,
+  });
+  const postalCode = useWatch({
+    control,
+    name: `retireFields.${fieldIndex}.postalCode`,
+  });
 
   useEffect(() => {
     if (!country) {
-      setValue('retirementJurisdiction', '');
+      setValue(`retireFields.${fieldIndex}.retirementJurisdiction`, '');
       return;
     }
 
@@ -50,21 +56,12 @@ export const BottomCreditRetireFields: React.FC<
       stateProvince,
       postalCode,
     });
-
-    setValue('retirementJurisdiction', jurisdiction);
-  }, [country, stateProvince, postalCode, mapboxToken, arrayPrefix, setValue]);
-
-  // showNotesField
-  // When in the same form we have a set of credit retirement (for example,
-  // because there are several recipients when we issue a batch of credits),
-  // we only show the retirement note fields for the first occurrence (first recipient)
-  const noArray = arrayPrefix === '' && typeof arrayIndex === 'undefined';
-  const isFirstItem = !noArray && arrayIndex === 0;
-  const showNotesField = noArray || isFirstItem;
+    setValue(`retireFields.${fieldIndex}.retirementJurisdiction`, jurisdiction);
+  }, [country, stateProvince, postalCode, mapboxToken, setValue, fieldIndex]);
 
   return (
     <>
-      {showNotesField && (
+      {isFirstItem && (
         <>
           <Flex sx={sxs.title}>
             <Title variant="h5" sx={{ mr: 2 }}>
@@ -79,7 +76,8 @@ export const BottomCreditRetireFields: React.FC<
             className={styles.noteTextField}
             optional
             defaultStyle={false}
-            {...register('note')}
+            key={fieldId}
+            {...register(`retireFields.${fieldIndex}.note`)}
           />
         </>
       )}
@@ -97,7 +95,11 @@ export const BottomCreditRetireFields: React.FC<
       <Grid container className={styles.stateCountryGrid}>
         <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
           <Suspense fallback={<SelectTextField label="Country" options={[]} />}>
-            <LocationCountryField exclude {...register('country')} />
+            <LocationCountryField
+              exclude
+              key={fieldId}
+              {...register(`retireFields.${fieldIndex}.country`)}
+            />
           </Suspense>
         </Grid>
         <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
@@ -106,15 +108,17 @@ export const BottomCreditRetireFields: React.FC<
           >
             <LocationStateField
               country={country}
-              {...register('stateProvince')}
+              key={fieldId}
+              {...register(`retireFields.${fieldIndex}.stateProvince`)}
             />
           </Suspense>
         </Grid>
       </Grid>
       <ControlledTextField
         label="Postal Code"
+        key={fieldId}
         optional
-        {...register('postalCode')}
+        {...register(`retireFields.${fieldIndex}.postalCode`)}
       />
     </>
   );

@@ -1,5 +1,5 @@
-import React from 'react';
-import { useFormState, useWatch } from 'react-hook-form';
+import React, { useEffect } from 'react';
+import { useFieldArray, useFormState, useWatch } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { Box } from '@mui/system';
 import { makeStyles } from 'tss-react/mui';
@@ -26,7 +26,10 @@ import {
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
-import { creditSendFormInitialValues } from './CreditSendForm.constants';
+import {
+  creditSendFormInitialValues,
+  initialValuesRetire,
+} from './CreditSendForm.constants';
 import { CreditSendFormSchema } from './CreditSendForm.schema';
 import { validateCreditSendForm } from './CreditSendForm.utils';
 
@@ -89,9 +92,23 @@ const CreditSendForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   const { isSubmitting, submitCount, isValid } = useFormState({
     control: form.control,
   });
-  const setTotalAmount = (value: number): void => {
-    form.setValue('totalAmount', value);
+  const { fields, append, remove } = useFieldArray({
+    name: 'retireFields',
+    control: form.control,
+  });
+
+  const setAmount = (value: number): void => {
+    form.setValue('amount', value);
   };
+
+  useEffect(() => {
+    if (withRetire && fields.length === 0) {
+      append(initialValuesRetire);
+    }
+    if (!withRetire && fields.length > 0) {
+      remove(0);
+    }
+  }, [withRetire, fields, append, remove]);
 
   return (
     <>
@@ -142,8 +159,8 @@ const CreditSendForm: React.FC<React.PropsWithChildren<FormProps>> = ({
           formErrors={Object.keys(form.formState.errors)}
           availableAmount={availableTradableAmount}
           denom={batchDenom}
-          onMaxClick={setTotalAmount}
-          {...form.register('totalAmount')}
+          onMaxClick={setAmount}
+          {...form.register('amount')}
         />
 
         <CheckboxLabel
@@ -161,11 +178,13 @@ const CreditSendForm: React.FC<React.PropsWithChildren<FormProps>> = ({
           {...form.register('withRetire')}
         />
 
-        {withRetire && (
-          <>
-            <BottomCreditRetireFields mapboxToken={mapboxToken} />
-          </>
-        )}
+        {fields.map((field, index) => (
+          <BottomCreditRetireFields
+            mapboxToken={mapboxToken}
+            fieldId={field.id}
+            fieldIndex={index}
+          />
+        ))}
 
         <AgreeErpaCheckbox
           sx={{ mt: withRetire ? 10 : 6 }}

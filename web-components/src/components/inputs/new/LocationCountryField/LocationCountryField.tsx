@@ -12,13 +12,13 @@ interface FieldProps extends PropsWithChildren {
   exclude?: boolean;
   error?: boolean;
   helperText?: string;
+  value?: string;
   optional?: boolean;
 }
 
 const LocationCountryField = forwardRef<HTMLDivElement, FieldProps>(
   ({ exclude = false, ...props }, ref) => {
     const [options, setOptions] = useState<Option[]>([]);
-
     useEffect(() => {
       setOptions(getCountryOptions({ exclude }));
     }, [exclude]);

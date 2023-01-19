@@ -4,6 +4,7 @@ import MuiTextField, { BaseTextFieldProps } from '@mui/material/TextField';
 
 import { DefaultStyleProps } from '../FieldFormControl/FieldFormControl';
 import InputLabel from '../InputLabel/InputLabel';
+import { useInputLabelStyles } from '../InputLabel/InputLabel.styles';
 import { useTextFieldStyles } from './textFieldBase.styles';
 
 export interface RegenTextFieldProps
@@ -48,11 +49,16 @@ const TextFieldBase = forwardRef<HTMLDivElement, RegenTextFieldProps>(
         ? defaultClasses
         : [...defaultClasses, styles.firstOfType]
       : baseClasses;
+    const id = props.id ?? props.name;
+    const { classes: labelClasses } = useInputLabelStyles({
+      optional: !!optional,
+    });
 
     return (
       <MuiTextField
         {...props}
         ref={ref}
+        id={id}
         error={error}
         variant="standard"
         className={cx(rootClasses)}
@@ -66,12 +72,13 @@ const TextFieldBase = forwardRef<HTMLDivElement, RegenTextFieldProps>(
           ) : null,
           inputProps: { ...customInputProps },
         }}
-        label={
-          <InputLabel optional={!!optional} focused={false} required={false}>
-            {label}
-          </InputLabel>
-        }
-        InputLabelProps={{ focused: false, required: false }}
+        label={label}
+        InputLabelProps={{
+          classes: labelClasses,
+          htmlFor: id,
+          focused: false,
+          required: false,
+        }}
         fullWidth
       >
         {children}

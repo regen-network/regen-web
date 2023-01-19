@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 
 import { Body } from '../../../typography';
-import InputLabel from '../../InputLabel';
+import { useInputLabelStyles } from '../InputLabel/InputLabel.styles';
 import { useTextFieldStyles } from './TextField.styles';
 import { TriggerTextField } from './TextField.TriggerTextField';
 import { RegenTextFieldProps } from './TextField.types';
@@ -22,7 +22,6 @@ const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
       endAdornment,
       description,
       customInputProps = {},
-      name,
       ...props
     },
     ref,
@@ -33,18 +32,21 @@ const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
     });
     const baseClasses = [styles.root, props.className];
     const defaultClasses = [styles.default, ...baseClasses];
+    const { classes: labelClasses } = useInputLabelStyles({
+      optional: !!optional,
+    });
     const rootClasses = defaultStyle
       ? forceDefaultStyle
         ? defaultClasses
         : [...defaultClasses, styles.firstOfType]
       : baseClasses;
+    const id = props.id ?? props.name;
 
     return (
       <TriggerTextField
         {...props}
-        id={name}
-        name={name}
         ref={ref}
+        id={id}
         variant="standard"
         transformValue={transformValue}
         triggerOnChange={triggerOnChange}
@@ -62,9 +64,7 @@ const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
         }}
         label={
           <>
-            <InputLabel optional={!!optional} focused={false} required={false}>
-              {props.label}
-            </InputLabel>
+            <Box sx={{ display: 'inline-block' }}>{props.label}</Box>
             {description && (
               <Box sx={{ display: 'flex', mt: 1 }}>
                 <Body size="sm">{description}</Body>
@@ -72,7 +72,12 @@ const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
             )}
           </>
         }
-        InputLabelProps={{ focused: false, required: false }}
+        InputLabelProps={{
+          classes: labelClasses,
+          htmlFor: id,
+          focused: false,
+          required: false,
+        }}
         fullWidth
       >
         {children}

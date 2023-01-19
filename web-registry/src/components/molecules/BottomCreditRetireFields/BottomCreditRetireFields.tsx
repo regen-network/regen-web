@@ -102,6 +102,7 @@ export const BottomCreditRetireFields: React.FC<
               key={fieldId}
               error={!!errors?.retireFields?.[fieldIndex]?.country}
               helperText={errors?.retireFields?.[fieldIndex]?.country?.message}
+              value={country}
               {...register(`retireFields.${fieldIndex}.country`)}
             />
           </Suspense>
@@ -123,11 +124,13 @@ export const BottomCreditRetireFields: React.FC<
           </Suspense>
         </Grid>
       </Grid>
-      <ControlledTextField
+      <TextField
+        type="text"
         label="Postal Code"
         key={fieldId}
         optional
         error={!!errors?.retireFields?.[fieldIndex]?.postalCode}
+        helperText={errors?.retireFields?.[fieldIndex]?.postalCode?.message}
         {...register(`retireFields.${fieldIndex}.postalCode`)}
       />
     </>

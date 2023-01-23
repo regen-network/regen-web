@@ -1,18 +1,16 @@
 import { forwardRef } from 'react';
 import { Box } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
+import MuiTextField from '@mui/material/TextField';
 
 import { Body } from '../../../typography';
 import { useInputLabelStyles } from '../InputLabel/InputLabel.styles';
 import { useTextFieldStyles } from './TextField.styles';
-import { TriggerTextField } from './TextField.TriggerTextField';
 import { RegenTextFieldProps } from './TextField.types';
 
 const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
   (
     {
-      transformValue,
-      triggerOnChange,
       error = false,
       optional = false,
       defaultStyle = true,
@@ -21,6 +19,7 @@ const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
       startAdornment,
       endAdornment,
       description,
+      label,
       customInputProps = {},
       ...props
     },
@@ -28,7 +27,7 @@ const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
   ) => {
     const { classes: styles, cx } = useTextFieldStyles({
       error,
-      label: props.label,
+      label,
     });
     const baseClasses = [styles.root, props.className];
     const defaultClasses = [styles.default, ...baseClasses];
@@ -43,13 +42,11 @@ const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
     const id = props.id ?? props.name;
 
     return (
-      <TriggerTextField
+      <MuiTextField
         {...props}
         ref={ref}
         id={id}
         variant="standard"
-        transformValue={transformValue}
-        triggerOnChange={triggerOnChange}
         className={cx(rootClasses)}
         error={error}
         InputProps={{
@@ -64,7 +61,7 @@ const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
         }}
         label={
           <>
-            <Box sx={{ display: 'inline-block' }}>{props.label}</Box>
+            <Box sx={{ display: 'inline-block' }}>{label}</Box>
             {description && (
               <Box sx={{ display: 'flex', mt: 1 }}>
                 <Body size="sm">{description}</Body>
@@ -81,7 +78,7 @@ const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
         fullWidth
       >
         {children}
-      </TriggerTextField>
+      </MuiTextField>
     );
   },
 );

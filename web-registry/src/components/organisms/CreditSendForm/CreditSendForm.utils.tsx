@@ -19,6 +19,18 @@ type Props = {
   setError: UseFormReturn<CreditSendFormSchemaType>['setError'];
 };
 
+/**
+ * Validation:
+ *    sender: must be a valid address, and their signature must be present in the transaction
+ *    recipient: must be a valid address
+ *    credits: must not be empty
+ *    batch_denom: must be a valid batch denomination
+ *    tradable_amount: must not be negative
+ *    retired_amount: must not be negative
+ *    if retired_amount is positive:
+ *    retirement_location: must be a valid location
+ */
+
 export const validateCreditSendForm = ({
   values,
   addressPrefix,

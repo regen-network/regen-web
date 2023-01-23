@@ -1,17 +1,10 @@
-import { PropsWithChildren, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { StandardTextFieldProps } from '@mui/material';
 
 import { DefaultStyleProps } from '../FieldFormControl/FieldFormControl';
 
-export interface TriggerTextFieldProps
-  extends PropsWithChildren,
-    StandardTextFieldProps {
-  triggerOnChange?: (v: any) => Promise<void>;
-  transformValue?: (v: any) => any;
-}
-
 export interface RegenTextFieldProps
-  extends TriggerTextFieldProps,
+  extends StandardTextFieldProps,
     DefaultStyleProps {
   children?: any;
   optional?: boolean | string;

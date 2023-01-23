@@ -1,36 +1,21 @@
-import React, { forwardRef, PropsWithChildren } from 'react';
+import { forwardRef, PropsWithChildren } from 'react';
 import MuiCheckbox, {
   CheckboxProps as MuiCheckboxProps,
 } from '@mui/material/Checkbox';
-import { DefaultTheme as Theme } from '@mui/styles';
-import { makeStyles } from 'tss-react/mui';
 
 import CheckedIcon from '../../../icons/CheckedIcon';
 import UncheckedIcon from '../../../icons/UncheckedIcon';
+import { useCheckboxStyles } from './Checkbox.styles';
 
 interface CheckboxProps extends MuiCheckboxProps {
   triggerOnChange?: (v: any) => Promise<void>;
 }
 
-const useStyles = makeStyles()((theme: Theme) => ({
-  check: {
-    height: theme.spacing(5),
-    width: theme.spacing(5),
-  },
-}));
-
 type Props = PropsWithChildren<CheckboxProps>;
 
 const Checkbox = forwardRef<HTMLButtonElement, Props>((props, ref) => {
-  const { classes } = useStyles();
-  const { triggerOnChange, disabled } = props;
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const value = e.target.checked;
-    if (triggerOnChange) {
-      triggerOnChange(value);
-    }
-  };
+  const { classes } = useCheckboxStyles();
+  const { disabled } = props;
 
   return (
     <MuiCheckbox

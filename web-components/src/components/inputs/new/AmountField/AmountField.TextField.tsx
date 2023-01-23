@@ -1,8 +1,8 @@
 import { forwardRef } from 'react';
 import { Grid, Theme } from '@mui/material';
 
+import TextField from '../TextField/TextField';
 import { RegenTextFieldProps } from '../TextField/TextField.types';
-import TextFieldBase from '../TextFieldBase/TextFieldBase';
 
 interface AmountTextFieldProps extends RegenTextFieldProps {
   availableAmount: number;
@@ -12,7 +12,7 @@ interface AmountTextFieldProps extends RegenTextFieldProps {
 export const AmountTextField = forwardRef<HTMLDivElement, AmountTextFieldProps>(
   ({ availableAmount, onMaxClick, ...props }, ref) => {
     return (
-      <TextFieldBase
+      <TextField
         {...props}
         ref={ref}
         endAdornment={

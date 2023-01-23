@@ -71,6 +71,7 @@ const MediaFormSimple = (): JSX.Element => {
           <React.Fragment key={i} /> // Formik expects a react element - this avoids console bug
         ),
       )}
+      {/* Fields hidden for now
       <Field
         optional
         component={ControlledTextField}
@@ -83,7 +84,7 @@ const MediaFormSimple = (): JSX.Element => {
         description="Copy and paste a video url from YouTube, Vimeo, or Facebook."
         label="Video Url"
         name="regen:videoURL.@value"
-      />
+      /> */}
     </Form>
   );
 };

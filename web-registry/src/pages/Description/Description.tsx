@@ -50,21 +50,18 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
   }
 
   async function submit(values: DescriptionValues): Promise<void> {
-    const newMetadata = { ...metadata, ...values };
     try {
-      if (offChainProject) {
-        await updateProject({
-          variables: {
-            input: {
-              id: offChainProject.id,
-              projectPatch: {
-                metadata: newMetadata,
-              },
+      await updateProject({
+        variables: {
+          input: {
+            id: offChainProject?.id,
+            projectPatch: {
+              metadata: { ...metadata, ...values },
             },
           },
-        });
-        !isEdit && navigateNext();
-      }
+        },
+      });
+      !isEdit && navigateNext();
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554

@@ -10,9 +10,7 @@ import { UrlList, UrlType } from 'lib/rdf/types';
 import { useProjectEditContext } from 'pages/ProjectEdit';
 import { ProjectPageFooter } from 'components/molecules';
 
-import { isSimpleMediaFormErrors } from './MediaForm.utils';
 import type { MediaErrorsLegacy, MediaValuesLegacy } from './MediaFormLegacy';
-import { MediaFormLegacy } from './MediaFormLegacy';
 import type { MediaErrorsSimple, MediaValuesSimple } from './MediaFormSimple';
 import { MediaFormSimple } from './MediaFormSimple';
 
@@ -38,7 +36,6 @@ interface MediaFormProps {
   onPrev?: () => void;
   onNext?: () => void;
   initialValues: MediaValues;
-  creditClassId?: string | null;
   graphData?: ShaclGraphByUriQuery;
 }
 
@@ -46,7 +43,6 @@ interface MediaFormProps {
 export const MediaForm = ({
   initialValues,
   graphData,
-  creditClassId,
   ...props
 }: MediaFormProps): JSX.Element => {
   const { confirmSave, isEdit } = useProjectEditContext();
@@ -55,10 +51,8 @@ export const MediaForm = ({
     values: MediaValues,
     { setSubmitting, setTouched }: FormikHelpers<MediaValues>,
   ): Promise<void> {
-    setSubmitting(true);
     try {
       await props.submit(values);
-      setSubmitting(false);
       setTouched({}); // reset to untouched
       if (isEdit && confirmSave) confirmSave();
     } catch (e) {
@@ -70,7 +64,7 @@ export const MediaForm = ({
     const errors: MediaErrors = {};
     if (graphData?.shaclGraphByUri?.graph) {
       const projectPageData = {
-        ...getProjectPageBaseData(creditClassId),
+        ...getProjectPageBaseData(),
         ...values,
       };
       const report = await validate(
@@ -86,26 +80,8 @@ export const MediaForm = ({
             | keyof MediaValues
             | undefined;
         }
-        // Legacy validation logic
-        if (!isSimpleMediaFormErrors(errors, creditClassId)) {
-          if (path) {
-            if (compactedPath === 'regen:previewPhoto') {
-              errors[compactedPath] = { '@value': requiredMessage };
-            } else {
-              // for gallery photos, display general error message below "Gallery Photos" section
-              errors['regen:galleryPhotos'] = 'You must add 4 photos';
-            }
-          } else {
-            // sh:or constraint not satisfied on regen:landStewardPhoto/regen:videoURL
-            errors['regen:landStewardPhoto'] = {
-              '@value': requiredMessage,
-            };
-          }
-        } else {
-          // Simple validation logic
-          if (compactedPath) {
-            errors[compactedPath] = { '@value': requiredMessage };
-          }
+        if (compactedPath) {
+          errors[compactedPath] = { '@value': requiredMessage };
         }
       }
     }
@@ -123,7 +99,7 @@ export const MediaForm = ({
       >
         {({ submitForm, isValid, isSubmitting }) => (
           <>
-            {!!creditClassId ? <MediaFormSimple /> : <MediaFormLegacy />}
+            <MediaFormSimple />
             <ProjectPageFooter
               onSave={submitForm}
               onNext={props.onNext}

@@ -3,66 +3,56 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { Loading } from 'web-components/lib/components/loading';
 
-import {
-  getProjectShapeIri,
-  getURLInitialValue,
-  getURLListInitialValue,
-} from 'lib/rdf';
+import { getURLInitialValue, getURLListInitialValue } from 'lib/rdf';
 
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
+import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
 import {
-  isSimpleMediaFormValues,
   MediaForm,
   MediaValues,
+  MediaValuesSimple,
 } from '../../components/organisms/MediaForm';
-import {
-  useProjectByIdQuery,
-  useShaclGraphByUriQuery,
-  useUpdateProjectByIdMutation,
-} from '../../generated/graphql';
+import { useUpdateProjectByIdMutation } from '../../generated/graphql';
 import { useProjectEditContext } from '../ProjectEdit';
 
 const PHOTO_COUNT = 4;
 
 const Media = (): JSX.Element => {
-  const { projectId } = useParams();
   const navigate = useNavigate();
-  const { isEdit } = useProjectEditContext();
+  const { projectId } = useParams();
+  const { isEdit, onChainProject } = useProjectEditContext();
+  const { metadata, offChainProject } = useProjectWithMetadata({
+    projectId,
+    isEdit,
+    onChainProject,
+    unanchored: true,
+  });
+
   const [updateProject] = useUpdateProjectByIdMutation();
-  const { data: projectData, loading: loadingProject } = useProjectByIdQuery({
-    variables: { id: projectId },
-    fetchPolicy: 'cache-and-network',
-  });
-  const project = projectData?.projectById;
-  const creditClassId = project?.creditClassByCreditClassId?.onChainId;
 
-  const { data: graphData } = useShaclGraphByUriQuery({
-    skip: !project,
-    variables: {
-      uri: getProjectShapeIri(creditClassId),
-    },
-  });
+  // TODO validation regen-registry/issues/1501
+  // Get ProjectPage SHACL graph (to validate unanchored data)
+  // const { data: graphData } = useShaclGraphByUriQuery({
+  //   variables: {
+  //     uri: getProjectPageShapeIri(),
+  //   },
+  // });
 
-  function getInitialFormValues(): MediaValues {
-    const values: MediaValues = {};
-    const metadata = project?.metadata || {};
-    values['regen:previewPhoto'] = getURLInitialValue(
-      metadata['regen:previewPhoto'],
-    );
-    values['regen:galleryPhotos'] = getURLListInitialValue(
-      PHOTO_COUNT,
-      metadata['regen:galleryPhotos'],
-    );
-    values['regen:videoURL'] = getURLInitialValue(metadata['regen:videoURL']);
-
-    if (isSimpleMediaFormValues(values, creditClassId)) {
-      values['schema:creditText'] = metadata['schema:creditText'] || '';
-    } else {
-      values['regen:landStewardPhoto'] = getURLInitialValue(
-        metadata['regen:landStewardPhoto'],
+  function getInitialFormValues(): MediaValuesSimple {
+    const values: MediaValuesSimple = {};
+    if (metadata) {
+      values['regen:previewPhoto'] = getURLInitialValue(
+        metadata['regen:previewPhoto'],
       );
+      values['regen:galleryPhotos'] = getURLListInitialValue(
+        PHOTO_COUNT,
+        metadata['regen:galleryPhotos'],
+      );
+      values['regen:videoURL'] = getURLInitialValue(metadata['regen:videoURL']);
+      values['schema:creditText'] = metadata['schema:creditText'] || '';
     }
+
     return values;
   }
 
@@ -76,32 +66,28 @@ const Media = (): JSX.Element => {
   }
 
   function navigatePrev(): void {
-    const prevStep = creditClassId ? 'story' : 'description';
-    navigate(`/project-pages/${projectId}/${prevStep}`);
+    navigate(`/project-pages/${projectId}/description`);
   }
 
   async function submit(values: MediaValues): Promise<void> {
-    const metadata = { ...project?.metadata, ...values };
     try {
       await updateProject({
         variables: {
           input: {
-            id: projectId,
+            id: offChainProject?.id,
             projectPatch: {
-              metadata,
+              metadata: { ...metadata, ...values },
             },
           },
         },
       });
       if (!isEdit) navigateNext();
     } catch (e) {
-      console.error('error saving media form', e); // eslint-disable-line no-console
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554
       // console.log(e);
     }
   }
-  if (loadingProject) return <Loading />;
 
   return (
     <ProjectFormTemplate
@@ -111,8 +97,7 @@ const Media = (): JSX.Element => {
     >
       <MediaForm
         submit={submit}
-        creditClassId={creditClassId}
-        graphData={graphData}
+        // graphData={graphData}
         initialValues={getInitialFormValues()}
         onNext={navigateNext}
         onPrev={navigatePrev}

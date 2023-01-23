@@ -21,7 +21,11 @@ export const getProjectByIdQuery = ({
       const projectById = await client.query<
         ProjectByIdQuery,
         ProjectByIdQueryVariables
-      >({ query: ProjectByIdDocument, variables: { id } });
+      >({
+        query: ProjectByIdDocument,
+        variables: { id },
+        fetchPolicy: 'no-cache',
+      });
 
       return projectById;
     } catch (e) {

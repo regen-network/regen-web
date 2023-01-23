@@ -8,14 +8,8 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import OrganizationIcon from 'web-components/lib/components/icons/OrganizationIcon';
 import UserIcon from 'web-components/lib/components/icons/UserIcon';
 import FieldFormControl from 'web-components/lib/components/inputs/FieldFormControl';
-import {
-  IndividualFormValues,
-  IndividualModal,
-} from 'web-components/lib/components/modal/IndividualModal';
-import {
-  OrganizationFormValues,
-  OrganizationModal,
-} from 'web-components/lib/components/modal/OrganizationModal';
+import { IndividualFormValues } from 'web-components/lib/components/modal/IndividualModal';
+import { OrganizationFormValues } from 'web-components/lib/components/modal/OrganizationModal';
 import {
   ProfileFormValues,
   ProfileModal,

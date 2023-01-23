@@ -21,7 +21,11 @@ export const getProjectByOnChainIdQuery = ({
       const projectByOnChainId = await client.query<
         ProjectByOnChainIdQuery,
         ProjectByOnChainIdQueryVariables
-      >({ query: ProjectByOnChainIdDocument, variables: { onChainId } });
+      >({
+        query: ProjectByOnChainIdDocument,
+        variables: { onChainId },
+        fetchPolicy: 'no-cache',
+      });
 
       return projectByOnChainId;
     } catch (e) {

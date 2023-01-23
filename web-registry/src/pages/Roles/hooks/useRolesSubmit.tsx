@@ -22,6 +22,7 @@ interface Props {
   metadata: any; // TODO update with proper type
   projectEditSubmit: ProjectEditSubmit;
   isEdit?: boolean;
+  metadataReload: () => Promise<void>;
 }
 
 type ReturnType = {
@@ -33,6 +34,7 @@ const useRolesSubmit = ({
   offChainProject,
   metadata,
   isEdit,
+  metadataReload,
 }: Props): ReturnType => {
   const navigate = useNavigate();
 
@@ -133,6 +135,7 @@ const useRolesSubmit = ({
             });
           }
         }
+
         const newMetadata = { ...metadata, ...stripIds(values) };
         // In creation mode, we store all metadata in the off-chain table project.metadata temporarily
         if (!isEdit)
@@ -159,6 +162,7 @@ const useRolesSubmit = ({
             await projectEditSubmit(newMetadata);
           }
         }
+        await metadataReload();
       } catch (e) {
         // TODO: Should we display the error banner here?
         // https://github.com/regen-network/regen-registry/issues/554
@@ -166,17 +170,18 @@ const useRolesSubmit = ({
       }
     },
     [
-      createParty,
-      createWallet,
-      isEdit,
-      metadata,
-      navigate,
       offChainProject?.partyByDeveloperId,
       offChainProject?.id,
-      projectId,
-      updateParty,
+      metadata,
+      isEdit,
       updateProject,
+      metadataReload,
+      createWallet,
       updateWallet,
+      createParty,
+      updateParty,
+      navigate,
+      projectId,
       projectEditSubmit,
     ],
   );

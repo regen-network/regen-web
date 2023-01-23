@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { useProjectEditContext } from 'pages/ProjectEdit';
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
-import useProjectAnchoredMetadataSubmit from 'hooks/projects/useProjectAnchoredMetadataSubmit';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
 import { ProjectLocationForm } from '../../components/organisms';
@@ -12,17 +11,12 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
-  const { metadata } = useProjectWithMetadata({
-    projectId,
-    isEdit,
-    onChainProject,
-  });
-  const projectAnchoredMetadataSubmit = useProjectAnchoredMetadataSubmit({
+  const { metadata, metadataSubmit } = useProjectWithMetadata({
     projectId,
     isEdit,
     projectEditSubmit,
     navigateNext,
-    metadata,
+    onChainProject,
   });
 
   let initialFieldValues: any | undefined;
@@ -53,7 +47,7 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
       saveAndExit={saveAndExit}
     >
       <ProjectLocationForm
-        submit={projectAnchoredMetadataSubmit}
+        submit={metadataSubmit}
         saveAndExit={saveAndExit}
         mapToken={process.env.REACT_APP_MAPBOX_TOKEN as string}
         initialValues={initialFieldValues}

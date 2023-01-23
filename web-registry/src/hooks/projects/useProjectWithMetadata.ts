@@ -1,11 +1,27 @@
+import { useCallback } from 'react';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { ProjectByIdQuery, ProjectByOnChainIdQuery } from 'generated/graphql';
+import {
+  ProjectByIdQuery,
+  ProjectByOnChainIdQuery,
+  useUpdateProjectByIdMutation,
+} from 'generated/graphql';
 import { graphqlClient } from 'lib/clients/graphqlClient';
+import { getProjectKey } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery.constants';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
+import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
+import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery.constants';
+
+import { ReturnType as ProjectEditSubmitReturnType } from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
+import {
+  BasicInfoFormValues,
+  DescriptionValues,
+  ProjectLocationFormValues,
+} from 'components/organisms';
+import { MediaValues } from 'components/organisms/MediaForm';
 
 export type OffChainProject =
   | ProjectByIdQuery['projectById']
@@ -14,25 +30,37 @@ export type OffChainProject =
 interface Props {
   projectId?: string;
   isEdit?: boolean;
-  unanchored?: boolean;
+  projectEditSubmit: ProjectEditSubmitReturnType;
+  navigateNext: () => void;
+  anchored?: boolean;
   onChainProject?: ProjectInfo;
 }
 
 interface Res {
   offChainProject?: OffChainProject;
   metadata: any; // TODO update with proper type
-  // reload: () => void;
-  // isLoading: boolean;
+  metadataReload: () => Promise<void>;
+  metadataSubmit: (values: Values) => Promise<void>;
 }
+
+type Values =
+  | BasicInfoFormValues
+  | ProjectLocationFormValues
+  | DescriptionValues
+  | MediaValues;
 
 export const useProjectWithMetadata = ({
   projectId,
   isEdit,
   onChainProject,
-  unanchored = false,
+  navigateNext,
+  projectEditSubmit,
+  anchored = true,
 }: Props): Res => {
-  let metadata;
+  let metadata: any;
   let offChainProject: OffChainProject | undefined;
+  const reactQueryClient = useQueryClient();
+  const [updateProject] = useUpdateProjectByIdMutation();
 
   // In project creation mode, we query the off-chain project since there's no on-chain project yet.
   // In this case, the router param projectId is the off-chain project uuid.
@@ -41,7 +69,7 @@ export const useProjectWithMetadata = ({
     getProjectByIdQuery({
       client: graphqlClient,
       enabled: create,
-      id: projectId as string,
+      id: projectId,
     }),
   );
   const projectById = projectByIdRes?.data?.projectById;
@@ -57,7 +85,7 @@ export const useProjectWithMetadata = ({
   const { data: anchoredMetadata } = useQuery(
     getMetadataQuery({
       iri: onChainProject?.metadata,
-      enabled: !!onChainProject?.metadata && edit && !unanchored,
+      enabled: !!onChainProject?.metadata && edit && anchored,
     }),
   );
   const { data: projectByOnChainIdRes } = useQuery(
@@ -69,22 +97,71 @@ export const useProjectWithMetadata = ({
   );
   if (edit) {
     offChainProject = projectByOnChainIdRes?.data?.projectByOnChainId;
-    if (unanchored) {
-      metadata = offChainProject?.metadata;
-    } else {
+    if (anchored) {
       metadata = anchoredMetadata;
+    } else {
+      metadata = offChainProject?.metadata;
     }
   }
+  const metadataReload = useCallback(async (): Promise<void> => {
+    if (create) {
+      await reactQueryClient.invalidateQueries({
+        queryKey: getProjectByIdKey(projectId),
+      });
+    }
+    if (edit) {
+      await reactQueryClient.invalidateQueries({
+        queryKey: getProjectKey(projectId),
+      });
+      await reactQueryClient.invalidateQueries({
+        queryKey: getProjectByOnChainIdKey(projectId),
+      });
+    }
+  }, [create, edit, reactQueryClient, projectId]);
 
-  // TODO Reload callback
-  // const reloadBalances = useCallback((): void => {
-  //   reactQueryClient.invalidateQueries({
-  //     queryKey: query.queryKey,
-  //   });
-  // }, [reactQueryClient, query]);
+  const metadataSubmit = useCallback(
+    async (values: Values): Promise<void> => {
+      const newMetadata = { ...metadata, ...values };
+      try {
+        if (isEdit && anchored) {
+          await projectEditSubmit(newMetadata);
+        } else {
+          await updateProject({
+            variables: {
+              input: {
+                id: offChainProject?.id,
+                projectPatch: {
+                  metadata: newMetadata,
+                },
+              },
+            },
+          });
+          !isEdit && navigateNext();
+        }
+        await metadataReload();
+      } catch (e) {
+        // TODO: Should we display the error banner here?
+        // https://github.com/regen-network/regen-registry/issues/554
+        // eslint-disable-next-line no-console
+        console.log(e);
+      }
+    },
+    [
+      metadata,
+      isEdit,
+      anchored,
+      metadataReload,
+      projectEditSubmit,
+      updateProject,
+      offChainProject?.id,
+      navigateNext,
+    ],
+  );
 
   return {
     offChainProject,
     metadata,
+    metadataReload,
+    metadataSubmit,
   };
 };

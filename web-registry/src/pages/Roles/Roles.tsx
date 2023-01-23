@@ -14,16 +14,19 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { projectId } = useParams();
   const { wallet } = useWallet();
   const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
-  const { metadata, offChainProject } = useProjectWithMetadata({
+  const { metadata, offChainProject, metadataReload } = useProjectWithMetadata({
     projectId,
     isEdit,
     onChainProject,
+    projectEditSubmit,
+    navigateNext,
   });
   const { rolesSubmit } = useRolesSubmit({
     projectEditSubmit,
     offChainProject,
     metadata,
     isEdit,
+    metadataReload,
   });
 
   // TODO validation regen-registry/issues/1501

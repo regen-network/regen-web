@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useProjectEditContext } from 'pages/ProjectEdit';
-import useProjectAnchoredMetadataSubmit from 'hooks/projects/useProjectAnchoredMetadataSubmit';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
 import { BasicInfoForm, BasicInfoFormValues } from '../../components/organisms';
@@ -12,17 +11,12 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
-  const { metadata } = useProjectWithMetadata({
-    projectId,
-    isEdit,
-    onChainProject,
-  });
-  const projectAnchoredMetadataSubmit = useProjectAnchoredMetadataSubmit({
+  const { metadata, metadataSubmit } = useProjectWithMetadata({
     projectId,
     isEdit,
     projectEditSubmit,
     navigateNext,
-    metadata,
+    onChainProject,
   });
 
   let initialFieldValues: BasicInfoFormValues | undefined;
@@ -47,7 +41,7 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
       saveAndExit={saveAndExit}
     >
       <BasicInfoForm
-        submit={projectAnchoredMetadataSubmit}
+        submit={metadataSubmit}
         initialValues={initialFieldValues}
         onNext={navigateNext}
       />

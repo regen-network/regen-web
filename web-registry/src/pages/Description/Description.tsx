@@ -5,21 +5,20 @@ import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
 import { DescriptionForm, DescriptionValues } from '../../components/organisms';
-import { useUpdateProjectByIdMutation } from '../../generated/graphql';
 import { useProjectEditContext } from '../ProjectEdit';
 
 const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
-  const { isEdit, onChainProject } = useProjectEditContext();
-  const { metadata, offChainProject } = useProjectWithMetadata({
+  const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
+  const { metadata, metadataSubmit } = useProjectWithMetadata({
     projectId,
     isEdit,
+    projectEditSubmit,
+    navigateNext,
     onChainProject,
-    unanchored: true,
+    anchored: false,
   });
-
-  const [updateProject] = useUpdateProjectByIdMutation();
 
   // TODO validation regen-registry/issues/1501
   // Get ProjectPage SHACL graph (to validate unanchored data)
@@ -49,26 +48,6 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
     navigate(`/project-pages/${projectId}/roles`);
   }
 
-  async function submit(values: DescriptionValues): Promise<void> {
-    try {
-      await updateProject({
-        variables: {
-          input: {
-            id: offChainProject?.id,
-            projectPatch: {
-              metadata: { ...metadata, ...values },
-            },
-          },
-        },
-      });
-      !isEdit && navigateNext();
-    } catch (e) {
-      // TODO: Should we display the error banner here?
-      // https://github.com/regen-network/regen-registry/issues/554
-      // console.log(e);
-    }
-  }
-
   return (
     <ProjectFormTemplate
       isEdit={isEdit}
@@ -76,7 +55,7 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
       saveAndExit={saveAndExit}
     >
       <DescriptionForm
-        submit={submit}
+        submit={metadataSubmit}
         onNext={navigateNext}
         onPrev={navigatePrev}
         initialValues={initialFieldValues}

@@ -2,12 +2,10 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Field, Form, useFormikContext } from 'formik';
 
-import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import {
   ImageUpload,
   ImageUploadProps,
 } from 'web-components/lib/components/inputs/ImageUpload';
-import { VideoInput } from 'web-components/lib/components/inputs/VideoInput';
 
 import getApiUri from '../../../lib/apiUri';
 import { cropAspect, MediaBaseErrors, MediaBaseValues } from './MediaForm';

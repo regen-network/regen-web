@@ -14,7 +14,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 // import {
 //   validate,
-//   getProjectPageBaseData,
+//   getProjectBaseData,
 //   getCompactedPath,
 // } from '../../lib/rdf'; TODO: regen-registry#1048
 import { ProjectPageFooter } from '../molecules';
@@ -93,7 +93,7 @@ const BasicInfoForm: React.FC<
         if (graphData?.shaclGraphByUri?.graph) {
           // TODO: Fix Validation. regen-registry#1048 .
           // Temporarily commented out to enable testing.
-          // const projectPageData = { ...getProjectPageBaseData(), ...values };
+          // const projectPageData = { ...getProjectBaseData(), ...values };
           // const report = await validate(
           //   graphData.shaclGraphByUri.graph,
           //   projectPageData,

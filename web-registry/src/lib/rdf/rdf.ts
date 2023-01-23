@@ -79,12 +79,26 @@ export function getCompactedPath(expandedPath: string): string | undefined {
   return;
 }
 
-export function getProjectPageBaseData(creditClassId?: string | null): any {
+// getProjectCreateBaseData returns the base metadata for a project that
+// is still in draft state (no on-chain project yet).
+// Its metadata, entirely stored in the off-chain table project.metadata for now,
+// has both anchored and unanchored data which is it has both types
+// - `regen:Project-Page` (for unanchored data)
+// - and `regen:CXX-Project` (for anchored data)
+export function getProjectCreateBaseData(creditClassId: string): any {
+  return {
+    ...defaultProjectContext,
+    '@type': [`regen:${creditClassId}-Project`, 'regen:Project-Page'],
+    'regen:creditClassId': creditClassId,
+  };
+}
+
+export function getProjectBaseData(creditClassId?: string | null): any {
   return {
     ...defaultProjectContext,
     '@type': creditClassId
       ? `regen:${creditClassId}-Project`
-      : ['regen:ProjectPage', 'regen:Project'],
+      : 'regen:Project-Page',
   };
 }
 

@@ -4,7 +4,7 @@ import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 
 import type { ShaclGraphByUriQuery } from 'generated/graphql';
-import { getCompactedPath, getProjectPageBaseData, validate } from 'lib/rdf';
+import { getCompactedPath, getProjectBaseData, validate } from 'lib/rdf';
 import { UrlList, UrlType } from 'lib/rdf/types';
 
 import { useProjectEditContext } from 'pages/ProjectEdit';
@@ -64,7 +64,7 @@ export const MediaForm = ({
     const errors: MediaErrors = {};
     if (graphData?.shaclGraphByUri?.graph) {
       const projectPageData = {
-        ...getProjectPageBaseData(),
+        ...getProjectBaseData(),
         ...values,
       };
       const report = await validate(

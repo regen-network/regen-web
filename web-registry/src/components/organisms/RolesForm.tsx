@@ -119,7 +119,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     const errors: FormikErrors<RolesValues> = {};
     // if (graphData?.shaclGraphByUri?.graph) {
     //   const projectPageData = {
-    //     ...getProjectPageBaseData(creditClassId),
+    //     ...getProjectBaseData(creditClassId),
     //     ...values,
     //   };
     //   const report = await validate(

@@ -23,7 +23,7 @@ import {
 
 import {
   getCompactedPath,
-  getProjectPageBaseData,
+  getProjectBaseData,
   getURLInitialValue,
   validate,
 } from 'lib/rdf';
@@ -420,7 +420,7 @@ const EntityDisplayForm: React.FC<
             }
             if (validateProject) {
               const projectPageData = {
-                ...getProjectPageBaseData(),
+                ...getProjectBaseData(),
                 ...values,
               };
               const report = await validate(

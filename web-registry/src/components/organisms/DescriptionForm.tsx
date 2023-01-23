@@ -5,7 +5,7 @@ import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 
-import { getCompactedPath, getProjectPageBaseData, validate } from 'lib/rdf';
+import { getCompactedPath, getProjectBaseData, validate } from 'lib/rdf';
 
 import { ShaclGraphByUriQuery } from '../../generated/graphql';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
@@ -36,7 +36,7 @@ const DescriptionForm = ({
   ): Promise<FormikErrors<DescriptionValues>> => {
     const errors: FormikErrors<DescriptionValues> = {};
     if (graphData?.shaclGraphByUri?.graph) {
-      const projectPageData = { ...getProjectPageBaseData(), ...values };
+      const projectPageData = { ...getProjectBaseData(), ...values };
       const report = await validate(
         graphData.shaclGraphByUri.graph,
         projectPageData,

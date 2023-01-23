@@ -11,7 +11,7 @@ import {
   useCreateWalletMutation,
   useWalletByAddrQuery,
 } from 'generated/graphql';
-import { getProjectPageBaseData } from 'lib/rdf';
+import { getProjectBaseData } from 'lib/rdf';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useDashboardContext } from '../Dashboard.context';
@@ -66,7 +66,7 @@ const MyProjects = (): JSX.Element => {
           input: {
             project: {
               walletId,
-              metadata: getProjectPageBaseData(),
+              metadata: getProjectBaseData(),
             },
           },
         },

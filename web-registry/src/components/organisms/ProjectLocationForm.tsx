@@ -6,7 +6,7 @@ import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import LocationField from 'web-components/lib/components/inputs/LocationField';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 
-import { getCompactedPath, getProjectPageBaseData, validate } from 'lib/rdf';
+import { getCompactedPath, getProjectBaseData, validate } from 'lib/rdf';
 
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { ProjectPageFooter } from '../molecules';
@@ -42,7 +42,7 @@ const ProjectLocationForm: React.FC<
           ProjectLocationFormValues | { [path: string]: string }
         > = {};
         if (graphData?.shaclGraphByUri?.graph) {
-          const projectPageData = { ...getProjectPageBaseData(), ...values };
+          const projectPageData = { ...getProjectBaseData(), ...values };
           const report = await validate(
             graphData.shaclGraphByUri.graph,
             projectPageData,

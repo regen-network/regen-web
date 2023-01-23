@@ -21,132 +21,61 @@ export const sortSellOrders = (
 ): SellOrderInfoExtented[] => {
   switch (sort) {
     case 'price-asc':
-      return sellOrders.sort(comparePriceAscending);
+      return sellOrders.sort(asc('askUsdAmount'));
     case 'price-desc':
-      return sellOrders.sort(comparePriceDescending);
+      return sellOrders.sort(desc('askUsdAmount'));
     case 'id-asc':
-      return sellOrders.sort(compareIdAscending);
+      return sellOrders.sort(asc('id', toNum));
     case 'id-desc':
-      return sellOrders.sort(compareIdDescending);
+      return sellOrders.sort(desc('id', toNum));
     case 'amount-asc':
-      return sellOrders.sort(compareAmountAscending);
+      return sellOrders.sort(asc('quantity', toNum));
     case 'amount-desc':
-      return sellOrders.sort(compareAmountDescending);
+      return sellOrders.sort(desc('quantity', toNum));
     case 'currency-denom-asc':
-      return sellOrders.sort(compareCurrencyDenomAscending);
+      return sellOrders.sort(asc('askBaseDenom'));
     case 'currency-denom-desc':
-      return sellOrders.sort(compareCurrencyDenomDescending);
+      return sellOrders.sort(desc('askBaseDenom'));
     case 'batch-denom-asc':
-      return sellOrders.sort(compareBatchDenomAscending);
+      return sellOrders.sort(asc('batchDenom'));
     case 'batch-denom-desc':
-      return sellOrders.sort(compareBatchDenomDescending);
+      return sellOrders.sort(desc('batchDenom'));
     default:
       return sellOrders;
   }
 };
+// transforms
+const toNum = (a: unknown): number => Number(a);
 
 // Generic sort
-
 type SortArgType = string | number;
+function isSortArgType(a: unknown): a is SortArgType {
+  return typeof a === 'string' || typeof a === 'number';
+}
 
-function defaultSortAsc(a: SortArgType, b: SortArgType): number {
+function createSortHandler<T>(
+  sortFn: (a: SortArgType, b: SortArgType) => number,
+) {
+  return (key: keyof T, transformFn?: (a: unknown) => SortArgType) => {
+    return (a: T, b: T): number => {
+      const aVal = transformFn ? transformFn(a[key]) : a[key];
+      const bVal = transformFn ? transformFn(b[key]) : b[key];
+      if (!isSortArgType(aVal) || !isSortArgType(bVal)) {
+        throw new Error(`Invalid sort argument type`);
+      }
+      return sortFn(aVal, bVal);
+    };
+  };
+}
+
+const asc = createSortHandler<SellOrderInfoExtented>((a, b) => {
   if (a > b) return 1; // sort a after b
   if (a < b) return -1; // sort a before b
   return 0;
-}
+});
 
-function defaultSortDesc(a: SortArgType, b: SortArgType): number {
+const desc = createSortHandler<SellOrderInfoExtented>((a, b) => {
   if (a < b) return 1; // sort a before b
   if (a > b) return -1; // sort a afer b
   return 0;
-}
-
-/* Price */
-
-// Low to high price
-function comparePriceAscending(
-  a: SellOrderInfoExtented,
-  b: SellOrderInfoExtented,
-): number {
-  return defaultSortAsc(a.askUsdAmount, b.askUsdAmount);
-}
-
-// High to low price
-function comparePriceDescending(
-  a: SellOrderInfoExtented,
-  b: SellOrderInfoExtented,
-): number {
-  return defaultSortDesc(a.askUsdAmount, b.askUsdAmount);
-}
-
-/* ID */
-
-// Low to high id
-function compareIdAscending(
-  a: SellOrderInfoExtented,
-  b: SellOrderInfoExtented,
-): number {
-  return defaultSortAsc(Number(a.id), Number(b.id));
-}
-
-// High to low id
-function compareIdDescending(
-  a: SellOrderInfoExtented,
-  b: SellOrderInfoExtented,
-): number {
-  return defaultSortDesc(Number(a.id), Number(b.id));
-}
-
-/* Amount */
-
-// Low to high amount
-function compareAmountAscending(
-  a: SellOrderInfoExtented,
-  b: SellOrderInfoExtented,
-): number {
-  return defaultSortAsc(Number(a.quantity), Number(b.quantity));
-}
-
-// High to low amount
-function compareAmountDescending(
-  a: SellOrderInfoExtented,
-  b: SellOrderInfoExtented,
-): number {
-  return defaultSortDesc(Number(a.quantity), Number(b.quantity));
-}
-
-/* Currency Denom */
-
-// Low to high currency denom
-function compareCurrencyDenomAscending(
-  a: SellOrderInfoExtented,
-  b: SellOrderInfoExtented,
-): number {
-  return defaultSortAsc(a.askBaseDenom, b.askBaseDenom);
-}
-
-// High to low currency denom
-function compareCurrencyDenomDescending(
-  a: SellOrderInfoExtented,
-  b: SellOrderInfoExtented,
-): number {
-  return defaultSortDesc(a.askBaseDenom, b.askBaseDenom);
-}
-
-/* Batch denom */
-
-// Low to high batch denom
-function compareBatchDenomAscending(
-  a: SellOrderInfoExtented,
-  b: SellOrderInfoExtented,
-): number {
-  return defaultSortAsc(a.batchDenom, b.batchDenom);
-}
-
-// High to low batch denom
-function compareBatchDenomDescending(
-  a: SellOrderInfoExtented,
-  b: SellOrderInfoExtented,
-): number {
-  return defaultSortDesc(a.batchDenom, b.batchDenom);
-}
+});

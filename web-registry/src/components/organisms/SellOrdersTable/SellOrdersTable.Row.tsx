@@ -63,7 +63,7 @@ const getSellOrdersTableRow = ({
       denom={askDenom}
       size="sm"
       sx={{
-        fontSize: '16px !important',
+        fontSize: { xs: '1rem' },
         color: 'info.main',
         fontWeight: 400,
         fontFamily: 'Lato',

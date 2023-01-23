@@ -13,6 +13,7 @@ import {
 import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/Table.constants';
 
 import { useLedger } from 'ledger';
+import { client as sanityClient } from 'lib/clients/sanity';
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 import { getBatchQuery } from 'lib/queries/react-query/ecocredit/getBatchQuery/getBatchQuery';
 import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
@@ -25,7 +26,6 @@ import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSell
 import { UISellOrderInfo } from 'pages/Projects/Projects.types';
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
-import { client as sanityClient } from '../../../../lib/clients/sanity';
 import {
   normalizeProjectsInfosByHandleMap,
   normalizeSellOrders,

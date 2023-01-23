@@ -118,6 +118,7 @@ export const BottomCreditRetireFields: React.FC<
               helperText={
                 errors?.retireFields?.[fieldIndex]?.stateProvince?.message
               }
+              value={stateProvince}
               {...register(`retireFields.${fieldIndex}.stateProvince`)}
             />
           </Suspense>

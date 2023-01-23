@@ -19,6 +19,8 @@ interface FieldProps extends PropsWithChildren {
 const LocationCountryField = forwardRef<HTMLDivElement, FieldProps>(
   ({ exclude = false, ...props }, ref) => {
     const [options, setOptions] = useState<Option[]>([]);
+    const value = options.length > 0 ? props.value ?? '' : '';
+
     useEffect(() => {
       setOptions(getCountryOptions({ exclude }));
     }, [exclude]);
@@ -26,6 +28,7 @@ const LocationCountryField = forwardRef<HTMLDivElement, FieldProps>(
     return (
       <SelectTextField
         {...props}
+        value={value}
         label="Country"
         options={options}
         native={false}

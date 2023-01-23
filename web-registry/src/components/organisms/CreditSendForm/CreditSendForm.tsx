@@ -180,6 +180,7 @@ const CreditSendForm: React.FC<React.PropsWithChildren<CreditSendFormProps>> =
 
           {fields.map((field, index) => (
             <BottomCreditRetireFields
+              key={field.id}
               mapboxToken={mapboxToken}
               fieldId={field.id}
               fieldIndex={index}

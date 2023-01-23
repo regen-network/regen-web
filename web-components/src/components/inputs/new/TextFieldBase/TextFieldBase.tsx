@@ -3,7 +3,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 import MuiTextField, { BaseTextFieldProps } from '@mui/material/TextField';
 
 import { DefaultStyleProps } from '../FieldFormControl/FieldFormControl';
-import InputLabel from '../InputLabel/InputLabel';
 import { useInputLabelStyles } from '../InputLabel/InputLabel.styles';
 import { useTextFieldStyles } from './textFieldBase.styles';
 
@@ -70,7 +69,7 @@ const TextFieldBase = forwardRef<HTMLDivElement, RegenTextFieldProps>(
           endAdornment: endAdornment ? (
             <InputAdornment position="end">{endAdornment}</InputAdornment>
           ) : null,
-          inputProps: { ...customInputProps },
+          inputProps: { ...customInputProps, step: props.step },
         }}
         label={label}
         InputLabelProps={{

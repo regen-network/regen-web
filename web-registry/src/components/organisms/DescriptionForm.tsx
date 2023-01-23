@@ -59,10 +59,8 @@ const DescriptionForm = ({
     values: DescriptionValues,
     { setSubmitting, setTouched }: FormikHelpers<DescriptionValues>,
   ): Promise<void> => {
-    setSubmitting(true);
     try {
       await submit(values);
-      setSubmitting(false);
       setTouched({}); // reset to untouched
       if (isEdit && confirmSave) confirmSave();
     } catch (e) {

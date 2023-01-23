@@ -1,41 +1,36 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { getProjectShapeIri } from 'lib/rdf';
-
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
+import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
 import { DescriptionForm, DescriptionValues } from '../../components/organisms';
-import {
-  useProjectByIdQuery,
-  useShaclGraphByUriQuery,
-  useUpdateProjectByIdMutation,
-} from '../../generated/graphql';
+import { useUpdateProjectByIdMutation } from '../../generated/graphql';
 import { useProjectEditContext } from '../ProjectEdit';
 
 const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
-  const { isEdit } = useProjectEditContext();
+  const { isEdit, onChainProject } = useProjectEditContext();
+  const { metadata, offChainProject } = useProjectWithMetadata({
+    projectId,
+    isEdit,
+    onChainProject,
+    unanchored: true,
+  });
 
   const [updateProject] = useUpdateProjectByIdMutation();
-  const { data } = useProjectByIdQuery({
-    variables: { id: projectId },
-    fetchPolicy: 'cache-and-network',
-  });
-  const project = data?.projectById;
-  const creditClassId = project?.creditClassByCreditClassId?.onChainId;
 
-  const { data: graphData } = useShaclGraphByUriQuery({
-    skip: !project,
-    variables: {
-      uri: getProjectShapeIri(creditClassId),
-    },
-  });
+  // TODO validation regen-registry/issues/1501
+  // Get ProjectPage SHACL graph (to validate unanchored data)
+  // const { data: graphData } = useShaclGraphByUriQuery({
+  //   variables: {
+  //     uri: getProjectPageShapeIri(),
+  //   },
+  // });
 
   let initialFieldValues: DescriptionValues | undefined;
-  if (data?.projectById?.metadata) {
-    const metadata = data.projectById.metadata;
+  if (metadata) {
     initialFieldValues = {
       'schema:description': metadata['schema:description'],
     };
@@ -55,19 +50,21 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
   }
 
   async function submit(values: DescriptionValues): Promise<void> {
-    const metadata = { ...data?.projectById?.metadata, ...values };
+    const newMetadata = { ...metadata, ...values };
     try {
-      await updateProject({
-        variables: {
-          input: {
-            id: projectId,
-            projectPatch: {
-              metadata,
+      if (offChainProject) {
+        await updateProject({
+          variables: {
+            input: {
+              id: offChainProject.id,
+              projectPatch: {
+                metadata: newMetadata,
+              },
             },
           },
-        },
-      });
-      !isEdit && navigateNext();
+        });
+        !isEdit && navigateNext();
+      }
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554
@@ -86,7 +83,7 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
         onNext={navigateNext}
         onPrev={navigatePrev}
         initialValues={initialFieldValues}
-        graphData={graphData}
+        // graphData={graphData}
       />
     </ProjectFormTemplate>
   );

@@ -93,9 +93,6 @@ const useStyles = makeStyles()((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'center',
     flex: 1,
-    '& form > div': {
-      marginTop: 0,
-    },
     [theme.breakpoints.down('md')]: {
       padding: 'none',
     },

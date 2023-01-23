@@ -108,6 +108,8 @@ const useRolesSubmit = ({
                         ? PartyType.User
                         : PartyType.Organization,
                     name: developer['schema:name'],
+                    description: developer['schema:description'],
+                    image: developer['schema:image']?.['@value'],
                     walletId,
                   },
                 },

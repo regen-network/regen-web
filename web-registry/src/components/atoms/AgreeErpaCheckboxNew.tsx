@@ -22,7 +22,7 @@ const AgreeErpaCheckbox = forwardRef<HTMLButtonElement, Props>(
         {...props}
         ref={ref}
         label={
-          <Subtitle size="lg" color="primary.contrastText">
+          <Subtitle size="lg" color="primary.contrastText" component="span">
             {'I agree to the '}
             <LinkExt
               href={URL_REGISTRY_MARKETPLACE_LEGAL}

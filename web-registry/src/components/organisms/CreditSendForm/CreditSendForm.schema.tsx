@@ -1,4 +1,11 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { z } from 'zod';
+
+import {
+  invalidRegenAddress,
+  isValidAddress,
+  requiredMessage,
+} from 'web-components/lib/components/inputs/validation';
 
 export const RetireFormSchema = z.object({
   note: z.string().optional(),
@@ -10,13 +17,27 @@ export const RetireFormSchema = z.object({
 
 export type RetireFormSchemaType = z.infer<typeof RetireFormSchema>;
 
-export const CreditSendFormSchema = z.object({
-  sender: z.string(),
-  recipient: z.string(),
-  withRetire: z.boolean().optional(),
-  agreeErpa: z.boolean(),
-  amount: z.coerce.number(),
-  retireFields: z.array(RetireFormSchema).optional(),
-});
+type Params = {
+  addressPrefix?: string;
+};
 
-export type CreditSendFormSchemaType = z.infer<typeof CreditSendFormSchema>;
+export const CreditSendFormSchema = ({ addressPrefix }: Params) =>
+  z.object({
+    sender: z.string(),
+    recipient: z
+      .string()
+      .refine(value => !!value, {
+        message: requiredMessage,
+      })
+      .refine(value => isValidAddress(value, addressPrefix), {
+        message: invalidRegenAddress,
+      }),
+    withRetire: z.boolean().optional(),
+    agreeErpa: z.boolean(),
+    amount: z.coerce.number(),
+    retireFields: z.array(RetireFormSchema).optional(),
+  });
+
+export type CreditSendFormSchemaType = z.infer<
+  ReturnType<typeof CreditSendFormSchema>
+>;

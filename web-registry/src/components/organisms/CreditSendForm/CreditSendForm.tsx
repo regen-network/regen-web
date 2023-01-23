@@ -77,13 +77,16 @@ const CreditSendForm: React.FC<React.PropsWithChildren<CreditSendFormProps>> =
   }) => {
     const { classes: styles } = useStyles();
     const form = useZodForm({
-      schema: CreditSendFormSchema,
+      schema: CreditSendFormSchema({ addressPrefix }),
       defaultValues: { ...creditSendFormInitialValues, sender },
+      mode: 'onBlur',
     });
+
     const withRetire = useWatch({ control: form.control, name: 'withRetire' });
     const { isSubmitting, submitCount, isValid, errors } = useFormState({
       control: form.control,
     });
+
     const { fields, append, remove } = useFieldArray({
       name: 'retireFields',
       control: form.control,
@@ -163,7 +166,7 @@ const CreditSendForm: React.FC<React.PropsWithChildren<CreditSendFormProps>> =
           <CheckboxLabel
             className={styles.checkboxLabel}
             label={
-              <Subtitle size="lg" color="primary.contrastText">
+              <Subtitle size="lg" color="primary.contrastText" component="span">
                 <Box sx={{ display: 'inline' }}>
                   Retire all credits upon transfer
                 </Box>{' '}

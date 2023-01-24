@@ -164,10 +164,8 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
           }
         }
         onSubmit={async (values, { setSubmitting, setTouched }) => {
-          setSubmitting(true);
           try {
             await props.submit(values);
-            setSubmitting(false);
             setTouched({}); // reset to untouched
             if (isEdit && confirmSave) confirmSave();
           } catch (e) {

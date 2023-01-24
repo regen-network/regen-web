@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
@@ -28,6 +28,7 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
     isEdit,
     metadataReload,
   });
+  const [initialValues, setInitialValues] = useState<RolesValues>();
 
   // TODO validation regen-registry/issues/1501
   // const creditClassId = isEdit
@@ -42,22 +43,29 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
   //   },
   // });
 
-  let initialValues: RolesValues = {
-    // In edit mode, use existing on chain project admin
-    // In creation mode, use current wallet address
-    admin: isEdit ? onChainProject?.admin : wallet?.address,
-  };
-
-  if (metadata) {
-    const projectDeveloper = {
-      ...metadata['regen:projectDeveloper'],
-      id: offChainProject?.partyByDeveloperId?.id,
+  useEffect(() => {
+    let adminValues: RolesValues = {
+      // In edit mode, use existing on chain project admin
+      // In creation mode, use current wallet address
+      admin: isEdit ? onChainProject?.admin : wallet?.address,
     };
-    initialValues = {
-      ...initialValues,
-      'regen:projectDeveloper': projectDeveloper,
-    };
-  }
+    if (metadata) {
+      const projectDeveloper = {
+        ...metadata['regen:projectDeveloper'],
+        id: offChainProject?.partyByDeveloperId?.id,
+      };
+      setInitialValues({
+        ...adminValues,
+        'regen:projectDeveloper': projectDeveloper,
+      });
+    }
+  }, [
+    isEdit,
+    metadata,
+    offChainProject?.partyByDeveloperId?.id,
+    onChainProject?.admin,
+    wallet?.address,
+  ]);
 
   async function saveAndExit(): Promise<void> {
     // TODO: functionality

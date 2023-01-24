@@ -38,11 +38,13 @@ export const normalizeBasketOverview = ({
   );
 
   const minStartDate = basketData?.basketInfo?.dateCriteria?.minStartDate;
-  const minStartDateField = minStartDate ? minStartDate.toISOString() : {};
+  const minStartDateField = minStartDate
+    ? { minStartDate: minStartDate.toISOString() }
+    : {};
 
   const startDateWindow = basketData?.basketInfo?.dateCriteria?.startDateWindow;
   const startDateWindowField = startDateWindow
-    ? formatDuration(startDateWindow?.seconds?.toNumber())
+    ? { startDateWindow: formatDuration(startDateWindow?.seconds?.toNumber()) }
     : {};
 
   const overviewFields: BasketOverviewProps = {

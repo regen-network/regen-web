@@ -67,12 +67,12 @@ const BasicInfoForm: React.FC<
   }>
 > = ({ submit, initialValues, onNext }) => {
   const { classes, cx } = useStyles();
+  const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
       uri: 'http://regen.network/ProjectPageShape',
     },
   });
-  const { confirmSave, isEdit } = useProjectEditContext();
 
   return (
     <Formik

@@ -27,12 +27,12 @@ const ProjectLocationForm: React.FC<
     onPrev?: () => void;
   }>
 > = ({ submit, initialValues, mapToken, ...props }) => {
+  const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
       uri: 'http://regen.network/ProjectPageShape',
     },
   });
-  const { confirmSave, isEdit } = useProjectEditContext();
 
   return (
     <Formik

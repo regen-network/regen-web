@@ -44,7 +44,7 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
   // });
 
   useEffect(() => {
-    let adminValues: RolesValues = {
+    let values: RolesValues = {
       // In edit mode, use existing on chain project admin
       // In creation mode, use current wallet address
       admin: isEdit ? onChainProject?.admin : wallet?.address,
@@ -54,11 +54,12 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
         ...metadata['regen:projectDeveloper'],
         id: offChainProject?.partyByDeveloperId?.id,
       };
-      setInitialValues({
-        ...adminValues,
+      values = {
+        ...values,
         'regen:projectDeveloper': projectDeveloper,
-      });
+      };
     }
+    setInitialValues(values);
   }, [
     isEdit,
     metadata,

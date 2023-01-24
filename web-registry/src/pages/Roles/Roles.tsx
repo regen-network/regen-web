@@ -27,6 +27,7 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
     metadata,
     isEdit,
     metadataReload,
+    navigateNext,
   });
   const [initialValues, setInitialValues] = useState<RolesValues>();
 

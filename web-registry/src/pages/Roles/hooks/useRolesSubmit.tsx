@@ -1,5 +1,4 @@
 import { useCallback } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
 
 import { ProfileFormValues } from 'web-components/lib/components/modal/ProfileModal';
 
@@ -23,6 +22,7 @@ interface Props {
   projectEditSubmit: ProjectEditSubmit;
   isEdit?: boolean;
   metadataReload: () => Promise<void>;
+  navigateNext: () => void;
 }
 
 type ReturnType = {
@@ -35,10 +35,8 @@ const useRolesSubmit = ({
   metadata,
   isEdit,
   metadataReload,
+  navigateNext,
 }: Props): ReturnType => {
-  const navigate = useNavigate();
-
-  const { projectId } = useParams();
   const [updateProject] = useUpdateProjectByIdMutation();
   const [createWallet] = useCreateWalletMutation();
   const [createParty] = useCreatePartyMutation();
@@ -154,8 +152,7 @@ const useRolesSubmit = ({
           },
         });
         if (!isEdit) {
-          // navigateNext();
-          navigate(`/project-pages/${projectId}/description`);
+          navigateNext();
         } else {
           // In edit mode, we need to update the project on-chain metadata if needed
           if (doUpdateMetadata) {
@@ -180,8 +177,7 @@ const useRolesSubmit = ({
       updateWallet,
       createParty,
       updateParty,
-      navigate,
-      projectId,
+      navigateNext,
       projectEditSubmit,
     ],
   );

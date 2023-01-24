@@ -42,15 +42,17 @@ import { getDisplayParty, getParty } from '../../../lib/transform';
 import { ProjectTopLink } from '../../atoms';
 import { ProjectBatchTotals, ProjectPageMetadata } from '../../molecules';
 import { CreditBatches } from '../CreditBatches/CreditBatches';
-import { useAnchoredMetadata } from './hooks/useAnchoredMetadata';
-import { useProjectDetails } from './hooks/useProjectDetails';
-import { useProjectPageMetadata } from './hooks/useProjectPageMetadata';
 import {
   ProjectTopSectionQuoteMark,
   useProjectTopSectionStyles,
 } from './ProjectTopSection.styles';
 import { ProjectTopSectionProps } from './ProjectTopSection.types';
-import { getDisplayAdmin } from './ProjectTopSection.utils';
+import {
+  getAnchoredMetadata,
+  getDisplayAdmin,
+  getProjectDetails,
+  getUnanchoredMetadata,
+} from './ProjectTopSection.utils';
 
 function ProjectTopSection({
   data,
@@ -78,10 +80,10 @@ function ProjectTopSection({
     undefined;
 
   const { creditClass, creditClassVersion, sdgIris, offsetGenerationMethod } =
-    useProjectDetails(project as Maybe<Project>);
+    getProjectDetails(project as Maybe<Project>);
 
   const { projectName, area, areaUnit, placeName } =
-    useAnchoredMetadata(anchoredMetadata);
+    getAnchoredMetadata(anchoredMetadata);
 
   const {
     videoURL,
@@ -91,7 +93,7 @@ function ProjectTopSection({
     landStewardPhoto,
     landStewardStoryTitle,
     landStewardStory,
-  } = useProjectPageMetadata(projectPageMetadata);
+  } = getUnanchoredMetadata(projectPageMetadata);
 
   const { data: sdgData } = useSdgByIriQuery({
     client,

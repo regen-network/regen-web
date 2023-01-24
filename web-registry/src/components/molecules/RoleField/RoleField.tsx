@@ -176,7 +176,10 @@ const RoleField: React.FC<React.PropsWithChildren<Props>> = ({
   };
 
   const editProfile = (entity: ProfileFormValues): void => {
-    setProfileEdit(entity);
+    setProfileEdit({
+      ...entity,
+      'schema:image': entity['schema:image'] || getURLInitialValue(),
+    });
   };
 
   return (

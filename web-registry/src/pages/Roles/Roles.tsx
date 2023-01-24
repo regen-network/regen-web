@@ -47,6 +47,7 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
     // In creation mode, use current wallet address
     admin: isEdit ? onChainProject?.admin : wallet?.address,
   };
+
   if (metadata) {
     const projectDeveloper = {
       ...metadata['regen:projectDeveloper'],

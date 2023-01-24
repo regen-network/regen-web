@@ -119,3 +119,62 @@ export function getProjectShapeIri(creditClassId?: string | null): string {
     ? `http://regen.network/${creditClassId}-ProjectShape`
     : 'http://regen.network/ProjectPageShape';
 }
+
+const unanchoredProjectContext = {
+  '@context': {
+    regen: 'http://regen.network/',
+    schema: 'http://schema.org/',
+  },
+};
+
+const unanchoredProjectKeys = [
+  'regen:creditClassId',
+  'schema:description',
+  'regen:previewPhoto',
+  'regen:galleryPhotos',
+  'regen:videoURL',
+  'schema:creditText',
+];
+
+function getFilteredProjectMetadata(
+  metadata: object,
+  anchored: boolean = true,
+): object {
+  return Object.fromEntries(
+    Object.entries(metadata).filter(([key]) => {
+      const unanchored = unanchoredProjectKeys.includes(key);
+      if (anchored) {
+        return !unanchored;
+      } else {
+        return unanchored;
+      }
+    }),
+  );
+}
+
+// TODO update metadata type and return type
+export function getAnchoredProjectMetadata(
+  metadata: object,
+  creditClassId?: string,
+): object {
+  const filtered = getFilteredProjectMetadata(metadata);
+  return {
+    ...filtered,
+    ...defaultProjectContext,
+    '@type': `regen:${creditClassId}-Project`,
+  };
+}
+
+// TODO update metadata type and return type
+export function getUnanchoredProjectMetadata(
+  metadata: object,
+  onChainId: string,
+): object {
+  const filtered = getFilteredProjectMetadata(metadata, false);
+  return {
+    ...filtered,
+    ...unanchoredProjectContext,
+    '@type': 'regen:Project-Page',
+    '@id': `${window.location.origin}/project/${onChainId}`,
+  };
+}

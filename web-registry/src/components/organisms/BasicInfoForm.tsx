@@ -10,6 +10,8 @@ import SelectTextField from 'web-components/lib/components/inputs/SelectTextFiel
 import TextField from 'web-components/lib/components/inputs/TextField';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
+import { useProjectEditContext } from 'pages';
+
 // import { requiredMessage } from 'web-components/lib/components/inputs/validation'; TODO: regen-registry#1048
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 // import {
@@ -70,6 +72,7 @@ const BasicInfoForm: React.FC<
       uri: 'http://regen.network/ProjectPageShape',
     },
   });
+  const { confirmSave, isEdit } = useProjectEditContext();
 
   return (
     <Formik
@@ -120,6 +123,7 @@ const BasicInfoForm: React.FC<
       onSubmit={async (values, { setTouched }) => {
         await submit(values);
         setTouched({}); // reset to untouched
+        if (isEdit && confirmSave) confirmSave();
       }}
     >
       {({ submitForm, isValid, isSubmitting, touched }) => {

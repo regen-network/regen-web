@@ -8,6 +8,8 @@ import { requiredMessage } from 'web-components/lib/components/inputs/validation
 
 import { getCompactedPath, getProjectBaseData, validate } from 'lib/rdf';
 
+import { useProjectEditContext } from 'pages';
+
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { ProjectPageFooter } from '../molecules';
 
@@ -30,6 +32,7 @@ const ProjectLocationForm: React.FC<
       uri: 'http://regen.network/ProjectPageShape',
     },
   });
+  const { confirmSave, isEdit } = useProjectEditContext();
 
   return (
     <Formik
@@ -62,6 +65,7 @@ const ProjectLocationForm: React.FC<
       onSubmit={async (values, { setTouched }) => {
         await submit(values);
         setTouched({}); // reset to untouched
+        if (isEdit && confirmSave) confirmSave();
       }}
     >
       {({ submitForm, isValid, isSubmitting, touched, dirty }) => {

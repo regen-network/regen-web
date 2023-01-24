@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, styled } from '@mui/material';
+import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 import { tableStyles } from 'styles/table';
 
@@ -14,33 +14,10 @@ import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { UseStateSetter } from 'types/react/use-state';
 
 import { BasketBatchInfoWithBalance } from 'pages/BasketDetails/utils/normalizeBasketEcocredits';
-import { Link } from 'components/atoms';
+import { BreakText, GreyText, Link } from 'components/atoms';
 import { AccountLink } from 'components/atoms/AccountLink';
 import WithLoader from 'components/atoms/WithLoader';
 import { NoCredits } from 'components/molecules';
-
-const GreyText = styled('span')(({ theme }) => ({
-  color: theme.palette.info.main,
-}));
-
-const BreakText = styled('div')({
-  whiteSpace: 'normal',
-  wordWrap: 'break-word',
-});
-
-export type CreditBatch = {
-  //  BatchInfo
-  classId: string;
-  batchDenom: string;
-  issuer: string;
-  totalAmount: string;
-  startDate: Date | string;
-  endDate: Date | string;
-  projectJurisdiction: string;
-  // Project info
-  projectHandle: string;
-  projectName: string;
-};
 
 type BasketEcocreditsTableProps = {
   basketCredits: BasketBatchInfoWithBalance[];

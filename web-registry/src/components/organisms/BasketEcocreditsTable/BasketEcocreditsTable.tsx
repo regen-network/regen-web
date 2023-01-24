@@ -24,7 +24,7 @@ type BasketEcocreditsTableProps = {
   renderActionButtons?: RenderActionButtonsFunc;
   onTableChange?: UseStateSetter<TablePaginationParams>;
   initialPaginationParams?: TablePaginationParams;
-  isRoutePagination?: boolean;
+  isIgnoreOffset?: boolean;
 };
 
 export const BasketEcocreditsTable: React.FC<
@@ -33,7 +33,7 @@ export const BasketEcocreditsTable: React.FC<
   basketCredits,
   renderActionButtons,
   initialPaginationParams,
-  isRoutePagination,
+  isIgnoreOffset,
   onTableChange,
 }) => {
   if (!basketCredits?.length) {
@@ -46,7 +46,7 @@ export const BasketEcocreditsTable: React.FC<
       renderActionButtons={renderActionButtons}
       onTableChange={onTableChange}
       initialPaginationParams={initialPaginationParams}
-      isRoutePagination={isRoutePagination}
+      isIgnoreOffset={isIgnoreOffset}
       headerRows={[
         <Box sx={{ minWidth: '8rem' }}>Project</Box>,
         <Box sx={{ minWidth: { xs: '8rem', sm: '11rem', md: 'auto' } }}>

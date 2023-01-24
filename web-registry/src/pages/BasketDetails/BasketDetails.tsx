@@ -36,7 +36,7 @@ const BasketDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
             basketCredits={basketCredits}
             onTableChange={setPaginationParams}
             initialPaginationParams={paginationParams}
-            isRoutePagination
+            isIgnoreOffset
           />
           {gettingStartedResourcesCard && (
             <Box sx={{ mt: 19.25 }}>

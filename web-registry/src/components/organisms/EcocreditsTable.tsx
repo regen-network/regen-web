@@ -56,7 +56,7 @@ export const EcocreditsTable: React.FC<
       renderActionButtons={renderActionButtons}
       onTableChange={onTableChange}
       initialPaginationParams={initialPaginationParams}
-      isRoutePagination
+      isRoutePagination={isRoutePagination}
       /* eslint-disable react/jsx-key */
       headerRows={[
         <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>{'Project'}</Box>,

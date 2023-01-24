@@ -1,20 +1,19 @@
+import { BasketOverviewProps } from '../../../components/organisms';
 import {
-  BasketOverviewProps,
-  CreditBatch,
-  useBasketEcocreditsTable,
-} from '../../../components/organisms';
+  FetchBasketEcocreditsType,
+  useFetchBasketEcocredits,
+} from './useFetchBasketEcocredits';
 import { useFetchBasketOverview } from './useFetchBasketOverview';
 
-type BasketDetails = {
+interface BasketDetails extends FetchBasketEcocreditsType {
   overview?: BasketOverviewProps;
-  creditBatches: CreditBatch[];
-};
+}
 
 const useBasketDetails = (basketDenom?: string): BasketDetails => {
   const overview = useFetchBasketOverview({ basketDenom });
-  // const creditBatches = useBasketEcocreditsTable(basketBalancesData);
+  const basketEcocredits = useFetchBasketEcocredits({ basketDenom });
 
-  return { overview, creditBatches: [] };
+  return { overview, ...basketEcocredits };
 };
 
 export default useBasketDetails;

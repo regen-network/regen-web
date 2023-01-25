@@ -1,10 +1,14 @@
 import { SxProps, Theme } from '@mui/material';
-import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+import { useQuery } from '@tanstack/react-query';
+import { sxToArray } from 'utils/mui/sxToArray';
 
 import { Label } from 'web-components/lib/components/typography';
 import { LabelSize } from 'web-components/lib/components/typography/sizing';
 
-import useMarketplaceQuery from 'hooks/useMarketplaceQuery';
+import { useLedger } from 'ledger';
+import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
+
+import WithLoader from 'components/atoms/WithLoader';
 
 import { findDisplayDenom } from './DenomLabel.utils';
 
@@ -15,25 +19,30 @@ export interface Props {
 }
 
 const DenomLabel = ({ denom, size, sx = [] }: Props): JSX.Element => {
-  const allowedDenomsResponse = useMarketplaceQuery<QueryAllowedDenomsResponse>(
-    {
-      query: 'allowedDenoms',
-      params: {},
-    },
-  );
+  const { marketplaceClient } = useLedger();
+  const { data: allowedDenomsData, isLoading: isLoadingAllowedDenoms } =
+    useQuery(
+      getAllowedDenomQuery({
+        client: marketplaceClient,
+        enabled: !!marketplaceClient,
+      }),
+    );
 
   const displayDenom = findDisplayDenom({
-    allowedDenomsData: allowedDenomsResponse?.data,
+    allowedDenomsData,
     denom,
   });
 
   return (
-    <Label
-      size={size}
-      sx={[{ textTransform: 'initial' }, ...(Array.isArray(sx) ? sx : [sx])]}
+    <WithLoader
+      variant="skeleton"
+      isLoading={isLoadingAllowedDenoms}
+      sx={{ width: '100%' }}
     >
-      {displayDenom}
-    </Label>
+      <Label size={size} sx={[{ textTransform: 'initial' }, ...sxToArray(sx)]}>
+        {displayDenom}
+      </Label>
+    </WithLoader>
   );
 };
 

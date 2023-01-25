@@ -25,9 +25,7 @@ type Props = {
  *    recipient: must be a valid address
  *    credits: must not be empty
  *    batch_denom: must be a valid batch denomination
- *    tradable_amount: must not be negative
- *    retired_amount: must not be negative
- *    if retired_amount is positive:
+ *    amount: must not be negative
  *    retirement_location: must be a valid location
  */
 

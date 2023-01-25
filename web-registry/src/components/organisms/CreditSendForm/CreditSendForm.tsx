@@ -3,7 +3,6 @@ import { useFieldArray, useFormState, useWatch } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { Box } from '@mui/system';
 import { makeStyles } from 'tss-react/mui';
-import { maxDecimalsToStep } from 'utils/form/maxDecimalsToStep';
 
 import { Flex } from 'web-components/lib/components/box';
 import Submit from 'web-components/lib/components/form/Submit';
@@ -150,7 +149,7 @@ const CreditSendForm: React.FC<React.PropsWithChildren<CreditSendFormProps>> =
             availableAmount={availableTradableAmount}
             denom={batchDenom}
             onMaxClick={setAmount}
-            step={maxDecimalsToStep()}
+            customInputProps={{ step: 'any' }}
             {...form.register('amount')}
           />
 

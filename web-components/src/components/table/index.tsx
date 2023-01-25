@@ -52,6 +52,9 @@ const StyledTableCell = withStyles(TableCell, theme => ({
     '& .MuiTableSortLabel-active': {
       color: theme.palette.info.main,
     },
+    '& .MuiTableSortLabel-icon': {
+      opacity: '0.5',
+    },
     '& svg': {
       alignSelf: 'end',
       top: theme.spacing(-1),

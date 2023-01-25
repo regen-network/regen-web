@@ -8,9 +8,8 @@ import InfoLabel from 'web-components/lib/components/info-label';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { microToDenom } from 'lib/denom.utils';
-
 import DenomIcon from 'components/molecules/DenomIcon';
+import DenomLabel from 'components/molecules/DenomLabel';
 
 import { getAccountUrl } from '../../../lib/block-explorer';
 import { NormalizedSellOrder } from '../../../pages/Marketplace/Storefront/Storefront.types';
@@ -28,7 +27,8 @@ type Props = {
 
 const getSellOrdersTableRow = ({
   sellOrder: {
-    askAmount,
+    askDenom,
+    askUsdAmount,
     askBaseDenom,
     batchDenom,
     id,
@@ -47,17 +47,30 @@ const getSellOrdersTableRow = ({
     </Link>
   </WithLoader>,
   <Box sx={{ fontWeight: 700, display: 'flex', alignItems: 'center' }}>
-    <DenomIcon
-      denom={askBaseDenom}
-      sx={{ mr: 1, display: 'flex', alignItems: 'center' }}
-    />
-    {`${formatNumber({
-      num: microToDenom(askAmount),
+    {`$${formatNumber({
+      num: askUsdAmount,
       maximumFractionDigits: MAXIMUM_FRACTION_DIGITS,
       minimumFractionDigits: MINIMUM_FRACTION_DIGITS,
     })}`}
   </Box>,
-  <Box>
+  <Box sx={{ fontWeight: 700, display: 'flex', alignItems: 'center' }}>
+    <DenomIcon
+      denom={askBaseDenom}
+      sx={{ mr: 2.5, display: 'flex', alignItems: 'center' }}
+      iconSx={{ fontSize: '30px' }}
+    />
+    <DenomLabel
+      denom={askDenom}
+      size="sm"
+      sx={{
+        fontSize: { xs: '1rem' },
+        color: 'info.main',
+        fontWeight: 400,
+        fontFamily: 'Lato',
+      }}
+    />
+  </Box>,
+  <Box sx={{ textAlign: 'right' }}>
     {formatNumber({ num: amountAvailable, ...quantityFormatNumberOptions })}
   </Box>,
   <WithLoader isLoading={project?.classId === undefined} variant="skeleton">

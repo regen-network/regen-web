@@ -5,7 +5,7 @@ import TableRow from '@mui/material/TableRow';
 import { TableActionButtons } from '../buttons/TableActionButtons';
 import { ActionsTable } from './ActionsTable';
 import { DocumentationTable, DocumentRowData } from './DocumentationTable';
-import { TablePagination } from './TablePagination';
+import { TablePagination } from './Table.TablePagination';
 
 export default {
   title: 'Table',

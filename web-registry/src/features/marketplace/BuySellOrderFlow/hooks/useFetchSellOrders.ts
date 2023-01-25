@@ -12,6 +12,7 @@ import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 type UseFetchSellOrdersResponse = {
   sellOrders: SellOrderInfoExtented[] | undefined;
   refetchSellOrders: () => Promise<SellOrderInfoExtented[] | undefined>;
+  isLoadingSellOrders: boolean;
 };
 
 export const useFetchSellOrders = (): UseFetchSellOrdersResponse => {
@@ -31,7 +32,8 @@ export const useFetchSellOrders = (): UseFetchSellOrdersResponse => {
   );
 
   // Fetch
-  const { data: sellOrders } = useQuery(sellOrdersQuery);
+  const { data: sellOrders, isLoading: isLoadingSellOrders } =
+    useQuery(sellOrdersQuery);
 
   // Refetch callback
   const refetchSellOrders = useCallback(async (): Promise<
@@ -48,5 +50,5 @@ export const useFetchSellOrders = (): UseFetchSellOrdersResponse => {
     );
   }, [reactQueryClient, sellOrdersQuery]);
 
-  return { sellOrders, refetchSellOrders };
+  return { sellOrders, refetchSellOrders, isLoadingSellOrders };
 };

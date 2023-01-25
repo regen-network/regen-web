@@ -1,7 +1,11 @@
 import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+import { EEUR_DENOM, REGEN_DENOM } from 'config/allowedBaseDenoms';
 
 import { Item } from 'web-components/lib/components/modal/ConfirmModal';
 
+import { microToDenom } from 'lib/denom.utils';
+
+import { GECKO_PRICES } from 'pages/Projects/hooks/useProjectsSellOrders.types';
 import { UISellOrderInfo } from 'pages/Projects/Projects.types';
 
 import { NormalizedSellOrder } from './Storefront.types';
@@ -66,4 +70,33 @@ export const checkIsBuyOrderInvalid = ({
     isBuyOrderInvalid,
     amountAvailable: Number(currentSellOrder?.quantity ?? 0),
   };
+};
+
+/* getAskUsdAmount */
+
+type GetAskUsdAmountParams = {
+  askAmount: string;
+  askBaseDenom: string;
+  quantity: string;
+  geckoPrices?: GECKO_PRICES;
+};
+
+export const getAskUsdAmount = ({
+  askAmount,
+  askBaseDenom,
+  quantity,
+  geckoPrices,
+}: GetAskUsdAmountParams): number => {
+  const { eeurPrice, regenPrice, usdcPrice } = geckoPrices ?? {};
+  let denomPrice = usdcPrice ?? 1;
+
+  if (regenPrice && askBaseDenom === REGEN_DENOM) {
+    denomPrice = regenPrice;
+  }
+
+  if (eeurPrice && askBaseDenom === EEUR_DENOM) {
+    denomPrice = eeurPrice;
+  }
+
+  return (microToDenom(askAmount) / Number(quantity)) * denomPrice;
 };

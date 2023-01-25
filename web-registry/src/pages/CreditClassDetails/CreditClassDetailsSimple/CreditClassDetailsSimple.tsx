@@ -1,11 +1,9 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { makeStyles } from 'tss-react/mui';
 
 import ReadMore from 'web-components/lib/components/read-more';
 import { Label, Title } from 'web-components/lib/components/typography';
-import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { CreditClassByOnChainIdQuery } from 'generated/graphql';
 import { getAccountUrl } from 'lib/block-explorer';
@@ -18,6 +16,7 @@ import { CreditBatches } from 'components/organisms';
 import { AdditionalInfo } from '../CreditClassDetails.AdditionalInfo';
 import { MemoizedProjects as Projects } from '../CreditClassDetails.Projects';
 import { SideBarBox } from '../CreditClassDetails.SidebarBox';
+import { useCreditClassDetailsSimpleStyles } from './CreditClassDetailsSimple.styles';
 import { useCreditClassDisplayName } from './hooks/useCreditClassDisplayName';
 
 interface CreditDetailsProps {
@@ -27,76 +26,10 @@ interface CreditDetailsProps {
   metadata?: Partial<CreditClassMetadataLD>;
 }
 
-const useStyles = makeStyles()((theme: Theme) => ({
-  sectionPadding: {
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(30),
-      paddingBottom: theme.spacing(30),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(20),
-      paddingBottom: theme.spacing(20),
-    },
-  },
-  topSection: {
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(12),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(20),
-    },
-  },
-  label: {
-    fontSize: theme.typography.pxToRem(12),
-    color: theme.palette.primary.contrastText,
-    marginBottom: theme.spacing(3),
-  },
-  link: {
-    color: theme.palette.secondary.main,
-    fontWeight: 700,
-  },
-  description: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(22),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(18),
-    },
-  },
-  marginBottom: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(12),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(8.75),
-    },
-  },
-  sidebarItemMargin: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(8.75),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(8),
-    },
-    '&:last-child': {
-      marginBottom: 0,
-    },
-  },
-  arrow: {
-    fontSize: theme.typography.pxToRem(16),
-  },
-  title: {
-    textAlign: 'left',
-  },
-  textContainer: {
-    paddingTop: 0,
-  },
-}));
-
 const CreditClassDetailsSimple: React.FC<
   React.PropsWithChildren<CreditDetailsProps>
 > = ({ dbClass, onChainClass, issuers, metadata }) => {
-  const { classes: styles } = useStyles();
+  const { classes: styles } = useCreditClassDetailsSimpleStyles();
   const displayName = useCreditClassDisplayName(onChainClass.id, metadata);
 
   return (

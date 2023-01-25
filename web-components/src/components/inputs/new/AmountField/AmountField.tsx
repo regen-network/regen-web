@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 
 import { RegenTextFieldProps } from '../TextField/TextField.types';
-import { AuxiliarLabel } from './AmountField.AuxiliarLabel';
+import { AuxiliaryLabel } from './AmountField.AuxiliaryLabel';
 import { AmountLabel } from './AmountField.Label';
 import { useAmountFieldStyles } from './AmountField.styles';
 import { AmountTextField } from './AmountField.TextField';
@@ -11,7 +11,7 @@ interface AmountFieldProps
   extends AmountLabelProps,
     Omit<RegenTextFieldProps, 'label'> {
   name: string;
-  auxiliarLabel?: string;
+  auxiliaryLabel?: string;
   className?: string;
   onMaxClick?: (amount: number) => void;
 }
@@ -21,7 +21,7 @@ const AmountField = forwardRef<HTMLDivElement, AmountFieldProps>(
     {
       name,
       label = 'Amount',
-      auxiliarLabel,
+      auxiliaryLabel,
       availableAmount,
       denom,
       className,
@@ -44,13 +44,13 @@ const AmountField = forwardRef<HTMLDivElement, AmountFieldProps>(
           label={
             <AmountLabel
               label={label}
-              auxiliarLabel={auxiliarLabel}
+              auxiliaryLabel={auxiliaryLabel}
               availableAmount={availableAmount}
               denom={denom}
             />
           }
         />
-        <AuxiliarLabel
+        <AuxiliaryLabel
           availableAmount={availableAmount}
           denom={denom}
           className={styles.auxiliarLabelMobile}

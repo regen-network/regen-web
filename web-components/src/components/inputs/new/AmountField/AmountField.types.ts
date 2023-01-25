@@ -1,6 +1,6 @@
 export interface AmountLabelProps {
   label?: string | JSX.Element;
-  auxiliarLabel?: string;
+  auxiliaryLabel?: string;
   availableAmount: number;
   denom: string;
 }

@@ -14,43 +14,41 @@ export interface ProjectMetadataLD {
   'regen:projectSize': ProjectSize;
   'regen:projectStartDate': TypeValue;
   'regen:projectEndDate': TypeValue;
-  'regen:projectDeveloper': ProjectStakeholder;
-  'regen:landSteward': ProjectStakeholder;
-  'regen:landOwner': ProjectStakeholder;
-  'regen:projectOriginator': ProjectStakeholder;
+  'regen:projectDeveloper'?: ProjectStakeholder;
+  'regen:landSteward'?: ProjectStakeholder;
+  'regen:landOwner'?: ProjectStakeholder;
+  'regen:projectOriginator'?: ProjectStakeholder;
 }
 
 /** Un-anchored metadata from our DB. This is editable without a Ledger TX. */
 export interface ProjectPageMetadataLD {
   '@context': Context;
   '@type': string; // regen:Project-Page
+  '@id': string;
   'regen:creditClassId': string;
   'regen:previewPhoto'?: UrlType;
-  'schema:image'?: UrlType;
-  'schema:creditText'?: string;
   'regen:galleryPhotos'?: UrlList;
   'regen:videoURL'?: UrlType;
+  'schema:creditText'?: string;
+  'schema:description'?: string;
+
+  // Legacy project fields
+  'schema:image'?: UrlType;
   'regen:glanceText'?: any;
   'regen:landStory'?: string;
   'regen:landStewardStory'?: string;
   'regen:landStewardStoryTitle'?: string;
   'regen:landStewardPhoto'?: UrlType;
   'regen:projectQuote'?: ProjectQuote;
-  'schema:description'?: string;
   'regen:boundaries'?: TypeValue;
   'regen:landManagementActions'?: LandManagementActions;
-
-  // Optional reference IDs:
-  'regen:vcsProjectId'?: number;
-  'regen:cfcProjectId'?: string;
-  'regen:toucanProjectTokenId'?: number; // TODO: we might not need this
 }
 
 interface Context {
   schema: 'http://schema.org/';
   regen: 'http://regen.network/';
-  qudt: 'http://qudt.org/schema/qudt/';
-  unit: 'http://qudt.org/vocab/unit/';
+  qudt?: 'http://qudt.org/schema/qudt/';
+  unit?: 'http://qudt.org/vocab/unit/';
   xsd?: 'http://www.w3.org/2001/XMLSchema#';
 }
 
@@ -62,16 +60,19 @@ interface ProjectSize {
 export interface ProjectStakeholder {
   '@type': string;
   'schema:name': string;
-  'schema:url'?: UrlType;
-  'schema:description': string;
-  'schema:email': string;
-  'schema:logo'?: UrlType;
-  'schema:image': UrlType;
-  'schema:location': any;
-  'schema:legalName': string;
-  'regen:sharePermission': boolean;
-  'regen:responsiblePerson': string;
+  'schema:description'?: string;
+  'schema:image'?: UrlType;
+  'regen:adress'?: string;
   'regen:showOnProjectPage': boolean;
+
+  // Legacy project stakeholder fields
+  'schema:url'?: UrlType;
+  'schema:email'?: string;
+  'schema:logo'?: UrlType;
+  'schema:location'?: any;
+  'schema:legalName'?: string;
+  'regen:sharePermission'?: boolean;
+  'regen:responsiblePerson'?: string;
 }
 
 interface NameImageDescription {

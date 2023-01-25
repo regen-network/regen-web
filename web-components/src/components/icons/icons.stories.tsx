@@ -40,6 +40,7 @@ import { HorizontalDotsIcon } from './HorizontalDotsIcon';
 import InfoIcon from './InfoIcon';
 import InfoIconOutlined from './InfoIconOutlined';
 import InterfaceIcon from './InterfaceIcon';
+import LinkedInBadgeIcon from './LinkedInBadgeIcon';
 import LinkIcon from './LinkIcon';
 import MinusIcon from './MinusIcon';
 import OrganizationIcon from './OrganizationIcon';
@@ -88,6 +89,7 @@ import TradeableIcon from './TradeableIcon';
 import TrashIcon from './TrashIcon';
 import TrustDocumentIcon from './TrustDocumentIcon';
 import TrustIcon from './TrustIcon';
+import TwitterBadgeIcon from './TwitterBadgeIcon';
 import VerifiedIcon from './VerifiedIcon';
 import { WalletIcon } from './WalletIcon';
 import WhitepaperIcon from './WhitepaperIcon';
@@ -209,6 +211,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<InstagramIcon />} label="InstagramIcon" />
     <LabeledIcon icon={<InterfaceIcon />} label="InterfaceIcon" />
     <LabeledIcon icon={<LinkedInIcon color="blue" />} label="LinkedInIcon" />
+    <LabeledIcon icon={<LinkedInBadgeIcon />} label="LinkedInBadgeIcon" />
     <LabeledIcon icon={<LinkIcon />} label="LinkIcon" />
     <LabeledIcon icon={<MediumIcon color="grey" />} label="MediumIcon" />
     <LabeledIcon icon={<MinusIcon />} label="MinusIcon" />
@@ -266,6 +269,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<TrustIcon />} label="TrustIcon" />
     <LabeledIcon icon={<TrustDocumentIcon />} label="TrustDocumentIcon" />
     <LabeledIcon icon={<TwitterIcon color="blue" />} label="TwitterIcon" />
+    <LabeledIcon icon={<TwitterBadgeIcon />} label="TwitterBadgeIcon" />
     <LabeledIcon icon={<UsdcIcon />} label="UsdcIcon" />
     <LabeledIcon icon={<VerifiedIcon color="#000" />} label="VerifiedIcon" />
     <LabeledIcon icon={<WalletIcon />} label="WalletIcon" />

@@ -15,12 +15,12 @@ import {
   StyledTableRow,
   StyledTableSortLabel,
 } from 'web-components/lib/components/table';
+import { useTablePagination } from 'web-components/lib/components/table/hooks/useTablePagination';
 import {
   getComparator,
   Order,
   stableSort,
-} from 'web-components/lib/components/table/sort';
-import { useTablePagination } from 'web-components/lib/components/table/useTablePagination';
+} from 'web-components/lib/components/table/Table.utils';
 import { Label } from 'web-components/lib/components/typography';
 import { formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';

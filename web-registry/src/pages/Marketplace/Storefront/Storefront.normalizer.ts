@@ -2,6 +2,7 @@ import { BatchInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/q
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 
+import { GECKO_PRICES } from 'pages/Projects/hooks/useProjectsSellOrders.types';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
@@ -76,6 +77,7 @@ type NormalizedSellOrderProps = {
     string,
     { name: string; classIdOrName: string; classId: string }
   >;
+  geckoPrices?: GECKO_PRICES;
 };
 
 export const normalizeSellOrders = ({
@@ -86,6 +88,7 @@ export const normalizeSellOrders = ({
   sellOrders.map(
     ({
       askAmount,
+      askUsdAmount,
       askDenom,
       askBaseDenom,
       batchDenom,
@@ -119,6 +122,7 @@ export const normalizeSellOrders = ({
         },
         status: 'Partially filled',
         askAmount,
+        askUsdAmount,
         askDenom,
         askBaseDenom,
         amountAvailable: quantity,

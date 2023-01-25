@@ -24,15 +24,11 @@ import {
   StyledTableCell,
   StyledTableContainer,
   StyledTableRow,
-  // StyledTableSortLabel,
 } from './';
-import { DEFAULT_TABLE_PAGINATION_PARAMS } from './ActionsTable.constants';
-// import {
-//   getComparator,
-//   Order,
-//   stableSort,
-// } from 'web-components/lib/components/table/sort';
-import { TablePagination } from './TablePagination';
+import { DEFAULT_TABLE_PAGINATION_PARAMS } from './Table.constants';
+import { SortableHead } from './Table.SortableHead';
+import { TablePagination } from './Table.TablePagination';
+import { Order } from './Table.utils';
 
 const BorderLeft = styled('div')(({ theme }) => ({
   // absolutely position border to get around MUI style quirks
@@ -59,6 +55,9 @@ export type TablePaginationParams = {
   count?: number;
 };
 
+type SortCallbackType = (sortOrder: Order) => void;
+export type SortCallbacksType = (SortCallbackType | undefined)[];
+
 interface ActionsTableProps {
   tableLabel: string;
   headerRows: React.ReactNode[];
@@ -67,6 +66,7 @@ interface ActionsTableProps {
   onTableChange?: Dispatch<SetStateAction<TablePaginationParams>>;
   initialPaginationParams?: TablePaginationParams;
   isRoutePagination?: boolean;
+  sortCallbacks?: SortCallbacksType;
   sx?: {
     root?: SxProps<Theme>;
   };
@@ -80,6 +80,7 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
   onTableChange,
   initialPaginationParams = DEFAULT_TABLE_PAGINATION_PARAMS,
   isRoutePagination = false,
+  sortCallbacks = [],
   sx,
 }) => {
   const {
@@ -92,37 +93,17 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
   const [rowsPerPage, setRowsPerPage] = useState(initialRowsPerPage);
   const [displayRows, setDisplayRows] = useState<React.ReactNode[][]>(rows);
   const maxCount = Math.max(initialPaginationParams?.count ?? 0, rows.length);
-  // const [order, setOrder] = useState<Order>('desc');
-  // const [orderBy, setOrderBy] = useState<keyof TableCredits>('start_date');
+  const [sortOrder, setSortOrder] = useState<Order>('asc');
+  const [sortBy, setSortBy] = useState<number | undefined>();
 
-  useEffect(() => {
-    setDisplayRows(rows.slice(offset, offset + rowsPerPage));
-  }, [offset, rowsPerPage, rows]);
-
-  // const handleSort = (sortBy: keyof TableCredits): void => {
-  //   const isAsc = orderBy === sortBy && order === 'asc';
-  //   setOrder(isAsc ? 'desc' : 'asc');
-  //   setOrderBy(sortBy);
-  // };
-
-  // TODO this will pass the correct fields and can replace <StyledTableCell>
-  // header components, however only works on elements within the current
-  // pagination page. See:
-  // https://app.zenhub.com/workspaces/regen-registry-5f8998bec8958d000f4609e2/issues/regen-network/regen-registry/811
-  // const SortableHead: React.FC<{ field: string }> = ({ field, children }) => {
-  //   const isCurrentSort = orderBy === field;
-  //   return (
-  //     <StyledTableCell sortDirection={isCurrentSort ? order : false}>
-  //       <StyledTableSortLabel
-  //         active={isCurrentSort}
-  //         direction={isCurrentSort ? order : 'asc'}
-  //         onClick={() => handleSort(field as keyof TableCredits)}
-  //       >
-  //         {children}
-  //       </StyledTableSortLabel>
-  //     </StyledTableCell>
-  //   );
-  // };
+  const handleSort = (selectedSortBy: number): void => {
+    const isAsc = sortBy === selectedSortBy && sortOrder === 'asc';
+    const newSortOrder: Order = isAsc ? 'desc' : 'asc';
+    setSortOrder(newSortOrder);
+    setSortBy(selectedSortBy);
+    const sortCallback = sortCallbacks[selectedSortBy];
+    sortCallback && sortCallback(newSortOrder);
+  };
 
   const onChangeRowsPerPage = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -158,6 +139,10 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
     [onTableChange, rowsPerPage, isRoutePagination, initialPaginationParams],
   );
 
+  useEffect(() => {
+    setDisplayRows(rows.slice(offset, offset + rowsPerPage));
+  }, [offset, rowsPerPage, rows]);
+
   return (
     <Box
       sx={{
@@ -184,9 +169,21 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
           <Table aria-label={tableLabel}>
             <TableHead>
               <TableRow>
-                {headerRows.map((headerRow, i) => (
-                  <StyledTableCell key={i}>{headerRow}</StyledTableCell>
-                ))}
+                {headerRows.map((headerRow, i) =>
+                  sortCallbacks[i] ? (
+                    <SortableHead
+                      key={i}
+                      fieldIndex={i}
+                      handleSort={handleSort}
+                      isActive={i === sortBy}
+                      sortOrder={sortOrder}
+                    >
+                      {headerRow}
+                    </SortableHead>
+                  ) : (
+                    <StyledTableCell key={i}>{headerRow}</StyledTableCell>
+                  ),
+                )}
                 {!!renderActionButtons && (
                   <StyledTableCell
                     sx={{
@@ -206,10 +203,6 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
               </TableRow>
             </TableHead>
             <TableBody>
-              {/* {stableSort(
-                credits as any, // TODO type coercion shouldn't be necessary here
-                getComparator(order, orderBy),
-              ).map((row, i) => ( */}
               {displayRows.map((row, i) => (
                 <StyledTableRow key={i}>
                   {row.map((elem, j) => (

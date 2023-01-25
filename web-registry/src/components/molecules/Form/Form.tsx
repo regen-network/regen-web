@@ -26,7 +26,7 @@ const Form = <T extends FieldValues>({
       <Box
         component="fieldset"
         disabled={form.formState.isSubmitting}
-        sx={{ borderWidth: 0 }}
+        sx={{ borderWidth: 0, padding: 0, margin: 0 }}
       >
         {children}
       </Box>

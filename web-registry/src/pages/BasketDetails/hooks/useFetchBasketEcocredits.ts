@@ -118,6 +118,8 @@ export const useFetchBasketEcocredits = ({
   );
 
   // Normalization
+  // isLoading -> undefined: return empty strings in normalizer to trigger skeleton
+  // !isLoading -> null/result: return results with field value different from empty strings and stop displaying the skeletons
   const basketCredits = balances.map((balance, index) =>
     normalizeBasketEcocredits({
       balance,

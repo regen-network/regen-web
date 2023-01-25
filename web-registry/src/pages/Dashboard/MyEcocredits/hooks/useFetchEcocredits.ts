@@ -110,6 +110,8 @@ export const useFetchEcocredits = (): Response => {
   );
 
   // Normalization
+  // isLoading -> undefined: return empty strings in normalizer to trigger skeleton
+  // !isLoading -> null/result: return results with field value different from empty strings and stop displaying the skeletons
   const credits = balances.map((balance, index) =>
     normalizeEcocredits({
       balance,

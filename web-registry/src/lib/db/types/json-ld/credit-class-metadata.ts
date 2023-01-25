@@ -17,6 +17,7 @@ export interface CreditClassMetadataLD {
   'regen:ecosystemType': string[];
   'regen:projectActivities': string[];
   'regen:carbonOffsetStandard': NameURL;
+  'regen:tokenizationSource': string;
 }
 
 export interface ApprovedMethodologies {

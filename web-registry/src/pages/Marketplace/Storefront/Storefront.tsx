@@ -1,12 +1,6 @@
 import { useMemo, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import {
-  ApolloClient,
-  NormalizedCacheObject,
-  useApolloClient,
-} from '@apollo/client';
 import { Box, useTheme } from '@mui/material';
-import { useQueries, useQuery } from '@tanstack/react-query';
 import { ERROR_BANNER } from 'config/contents';
 import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
 import { Buy1Event } from 'web-registry/src/lib/tracker/types';
@@ -23,30 +17,20 @@ import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
 import Section from 'web-components/lib/components/section';
-import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 import { Title } from 'web-components/lib/components/typography';
-import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/ActionsTable.constants';
 
-import { useLedger } from 'ledger';
 import { getHashUrl } from 'lib/block-explorer';
-import { getBatchQuery } from 'lib/queries/react-query/ecocredit/getBatchQuery/getBatchQuery';
-import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
-import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
-import { getAllProjectsQuery } from 'lib/queries/react-query/registry-server/graphql/getAllProjectsQuery/getAllProjectsQuery';
-import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
-import { useFetchSellOrders } from 'features/marketplace/BuySellOrderFlow/hooks/useFetchSellOrders';
-import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { BuyCreditsModal, BuyCreditsValues } from 'components/organisms';
 import SellOrdersTable from 'components/organisms/SellOrdersTable/SellOrdersTable';
 import useMsgClient from 'hooks/useMsgClient';
 
-import { client as sanityClient } from '../../../lib/clients/sanity';
 import useBuySellOrderSubmit from './hooks/useBuySellOrderSubmit';
 import useCancelSellOrderSubmit from './hooks/useCancelSellOrderSubmit';
 import { useCheckSellOrderAvailabilty } from './hooks/useCheckSellOrderAvailabilty';
+import { useNormalizedSellOrders } from './hooks/useNormalizedSellOrders';
 import { useResetErrorBanner } from './hooks/useResetErrorBanner';
 import {
   BUY_SELL_ORDER_ACTION,
@@ -54,103 +38,10 @@ import {
   BUY_SELL_ORDER_TITLE,
   CANCEL_SELL_ORDER_ACTION,
 } from './Storefront.constants';
-import {
-  normalizeProjectsInfosByHandleMap,
-  normalizeSellOrders,
-} from './Storefront.normalizer';
 import { SellOrderActions } from './Storefront.types';
-import { getCancelCardItems, sortBySellOrderId } from './Storefront.utils';
+import { getCancelCardItems } from './Storefront.utils';
 
 export const Storefront = (): JSX.Element => {
-  const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
-  const { ecocreditClient } = useLedger();
-
-  const [paginationParams, setPaginationParams] =
-    useState<TablePaginationParams>({
-      page: 0,
-      rowsPerPage: DEFAULT_ROWS_PER_PAGE,
-      offset: 0,
-    });
-  const { offset, rowsPerPage } = paginationParams;
-
-  // We do not use pagination yet on the SellOrders query
-  // because the ledger currently returns sell orders ordered by seller address and not by id
-  // which would result in a list of non sequential ids in the sell orders table and look weird
-  // TODO: use pagination as soon as this is fixed on Regen Ledger side (as part of v5.0)
-  const { sellOrders, refetchSellOrders } = useFetchSellOrders();
-  const uiSellOrdersInfo = useMemo(
-    () => sellOrders?.map(normalizeToUISellOrderInfo),
-    [sellOrders],
-  );
-
-  // Off-chain stored Projects
-  const { data: offChainProjectData } = useQuery(
-    getAllProjectsQuery({ client: apolloClient, enabled: !!apolloClient }),
-  );
-
-  // On-chain stored Projects
-  const { data: onChainProjects } = useQuery(
-    getProjectsQuery({
-      client: ecocreditClient,
-      enabled: !!ecocreditClient,
-      request: {},
-    }),
-  );
-
-  const { data: sanityCreditClassData } = useQuery(
-    getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
-  );
-
-  // Batch pagination
-  const batchDenoms = useMemo(
-    () =>
-      sellOrders
-        ?.sort(sortBySellOrderId)
-        .slice(offset, offset + rowsPerPage)
-        .map(sellOrder => sellOrder.batchDenom),
-    [sellOrders, offset, rowsPerPage],
-  );
-  const batchesResult = useQueries({
-    queries:
-      batchDenoms?.map(batchDenom =>
-        getBatchQuery({
-          client: ecocreditClient,
-          enabled: !!ecocreditClient,
-          request: { batchDenom },
-        }),
-      ) ?? [],
-  });
-  const batchInfos = useMemo(
-    () => batchesResult?.map(batchResult => batchResult.data?.batch) ?? [],
-    [batchesResult],
-  );
-
-  // Project metadata pagination
-  const projectsIds = useMemo(
-    () => batchInfos.map(batchInfo => batchInfo?.projectId),
-    [batchInfos],
-  );
-  const projects = useMemo(
-    () =>
-      onChainProjects?.projects.filter(project =>
-        projectsIds?.includes(project.id),
-      ),
-    [projectsIds, onChainProjects?.projects],
-  );
-  const metadataResults = useQueries({
-    queries:
-      projects?.map(({ metadata: iri }) => getMetadataQuery({ iri })) ?? [],
-  });
-  const metadata = metadataResults.map(queryResult => queryResult.data);
-  const projectsWithMetadata = useMemo(
-    () =>
-      projects?.map((project, i) => ({
-        ...project,
-        metadata: metadata?.[i],
-      })) ?? [],
-    [projects, metadata],
-  );
-
   const [selectedSellOrder, setSelectedSellOrder] = useState<number | null>(
     null,
   );
@@ -172,25 +63,18 @@ export const Storefront = (): JSX.Element => {
     selectedSellOrder !== null && selectedAction === 'cancel';
   useResetErrorBanner({ displayErrorBanner, setDisplayErrorBanner });
 
-  const projectsInfosByHandleMap = useMemo(
-    () =>
-      normalizeProjectsInfosByHandleMap({
-        offChainProjects: offChainProjectData?.allProjects,
-        onChainProjects: projectsWithMetadata,
-        sanityCreditClassData,
-      }),
-    [offChainProjectData, projectsWithMetadata, sanityCreditClassData],
-  );
+  // Fetching + sorting + normalizing
 
-  const normalizedSellOrders = useMemo(
-    () =>
-      normalizeSellOrders({
-        batchInfos,
-        sellOrders,
-        projectsInfosByHandleMap,
-      }),
-    [batchInfos, sellOrders, projectsInfosByHandleMap],
-  );
+  const {
+    normalizedSellOrders,
+    uiSellOrdersInfo,
+    isLoadingSellOrders,
+    refetchSellOrders,
+    setPaginationParams,
+    sortCallbacks,
+  } = useNormalizedSellOrders();
+
+  // Callbacks
 
   const handleTxQueued = (): void => setIsProcessingModalOpen(true);
   const handleTxDelivered = (): void => {
@@ -331,11 +215,12 @@ export const Storefront = (): JSX.Element => {
         </Title>
         <Box sx={{ paddingBottom: '150px' }}>
           <WithLoader
-            isLoading={sellOrders === undefined}
+            isLoading={isLoadingSellOrders}
             sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
           >
             <SellOrdersTable
               sellOrders={normalizedSellOrders}
+              sortCallbacks={sortCallbacks}
               onTableChange={setPaginationParams}
               renderActionButtonsFunc={(i: number) => {
                 const isOwnSellOrder =
@@ -374,7 +259,7 @@ export const Storefront = (): JSX.Element => {
                           });
                           if (accountAddress) {
                             selectedSellOrderIdRef.current = Number(
-                              sellOrders?.[i].id,
+                              normalizedSellOrders?.[i].id,
                             );
                             submittedQuantityRef.current = undefined;
                             refetchSellOrders();

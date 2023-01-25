@@ -3,6 +3,7 @@ import EmptyCartIcon from 'web-components/lib/components/icons/EmptyCartIcon';
 import {
   ActionsTable,
   RenderActionButtonsFunc,
+  SortCallbacksType,
   TablePaginationParams,
 } from 'web-components/lib/components/table/ActionsTable';
 
@@ -14,12 +15,14 @@ import getSellOrdersTableRow from './SellOrdersTable.Row';
 
 type Props = {
   sellOrders: NormalizedSellOrder[];
+  sortCallbacks?: SortCallbacksType;
   renderActionButtonsFunc?: RenderActionButtonsFunc;
   onTableChange?: UseStateSetter<TablePaginationParams>;
 };
 
 const SellOrdersTable = ({
   sellOrders,
+  sortCallbacks = [],
   renderActionButtonsFunc = i => void 0,
   onTableChange,
 }: Props): JSX.Element => {
@@ -33,6 +36,7 @@ const SellOrdersTable = ({
           rows={sellOrders.map(sellOrder =>
             getSellOrdersTableRow({ sellOrder }),
           )}
+          sortCallbacks={sortCallbacks}
           renderActionButtons={renderActionButtonsFunc}
           onTableChange={onTableChange}
         />

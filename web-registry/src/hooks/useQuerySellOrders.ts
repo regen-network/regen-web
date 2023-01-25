@@ -13,6 +13,7 @@ export const IBC_DENOM_PREFIX = 'ibc/';
 
 export type SellOrderInfoExtented = SellOrderInfo & {
   askBaseDenom: string;
+  askUsdAmount: number;
 };
 
 type QuerySellOrdersResponseExtented = {
@@ -67,6 +68,7 @@ export const useQuerySellOrders = function (): {
         return {
           ...sellOrder,
           askBaseDenom: denomTrace ? denomTrace.baseDenom : sellOrder.askDenom,
+          askUsdAmount: 0,
         };
       });
 

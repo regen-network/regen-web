@@ -18,7 +18,7 @@ import {
   formatDate,
   formatNumber,
 } from 'web-components/lib/utils/format';
-import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/ActionsTable.constants';
+import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/Table.constants';
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { Bridge1Event } from 'lib/tracker/types';

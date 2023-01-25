@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import { TablePagination, TablePaginationProps } from './TablePagination';
+import {
+  TablePagination,
+  TablePaginationProps,
+} from '../Table.TablePagination';
 
 /**
  * Basic offset based pagination (when the dataset doesn't change very often).

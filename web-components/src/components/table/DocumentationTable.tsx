@@ -18,7 +18,7 @@ import {
   StyledTableRow,
   StyledTableSortLabel,
 } from '.';
-import { getComparator, Order, stableSort } from './sort';
+import { getComparator, Order, stableSort } from './Table.utils';
 
 interface DocumentRowData {
   name: string;

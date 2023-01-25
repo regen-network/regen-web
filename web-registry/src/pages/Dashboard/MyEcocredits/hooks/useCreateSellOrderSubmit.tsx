@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { Box } from '@mui/material';
 import { MsgSell } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
+import { useQueryClient } from '@tanstack/react-query';
 import { getDenomtrace } from 'utils/ibc/getDenomTrace';
 
 import { FormValues as CreateSellOrderFormValues } from 'web-components/lib/components/form/CreateSellOrderForm';
@@ -10,6 +11,7 @@ import { getFormattedNumber } from 'web-components/lib/utils/format';
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { denomToMicro } from 'lib/denom.utils';
+import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { SellFailureEvent, SellSuccessEvent } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
@@ -43,6 +45,7 @@ const useCreateSellOrderSubmit = ({
   onTxBroadcast,
 }: Props): ReturnType => {
   const { track } = useTracker();
+  const reactQueryClient = useQueryClient();
   const createSellOrderSubmit = useCallback(
     async (values: CreateSellOrderFormValues): Promise<void> => {
       if (!accountAddress) return Promise.reject();
@@ -95,6 +98,9 @@ const useCreateSellOrderSubmit = ({
           price,
           enableAutoRetire,
           currencyDenom: askDenom,
+        });
+        reactQueryClient.invalidateQueries({
+          queryKey: [SELL_ORDERS_EXTENTED_KEY],
         });
       };
       signAndBroadcast(tx, onTxBroadcast, { onError, onSuccess });
@@ -155,6 +161,7 @@ const useCreateSellOrderSubmit = ({
       setCardItems,
       setTxModalHeader,
       setTxButtonTitle,
+      reactQueryClient,
     ],
   );
 

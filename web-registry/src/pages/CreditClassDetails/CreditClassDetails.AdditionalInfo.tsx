@@ -25,6 +25,7 @@ const AdditionalInfo: React.FC<React.PropsWithChildren<AdditionalInfoProps>> =
     const ecosystemTypes = metadata?.['regen:ecosystemType'];
     const projectActivities = metadata?.['regen:projectActivities'];
     const carbonOffsetStandard = metadata?.['regen:carbonOffsetStandard'];
+    const tokenizationSource = metadata?.['regen:tokenizationSource'];
 
     // This can be deleted if all class metadata is updated to latest standard
     const getValue = (val: any): string => {
@@ -121,6 +122,12 @@ const AdditionalInfo: React.FC<React.PropsWithChildren<AdditionalInfoProps>> =
                   ))}
                 </>
               }
+            />
+          )}
+          {tokenizationSource && (
+            <MetaDetail
+              label="Tokenization Source"
+              data={<Body size="xl">{tokenizationSource}</Body>}
             />
           )}
           {ecosystemTypes && ecosystemTypes?.length > 0 && (

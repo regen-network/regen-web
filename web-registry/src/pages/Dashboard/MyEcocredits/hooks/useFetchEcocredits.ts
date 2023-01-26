@@ -25,7 +25,11 @@ interface Response {
   paginationParams: TablePaginationParams;
 }
 
-export const useFetchEcocredits = (): Response => {
+interface Props {
+  address?: string;
+}
+
+export const useFetchEcocredits = ({ address }: Props): Response => {
   const { ecocreditClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
@@ -44,7 +48,7 @@ export const useFetchEcocredits = (): Response => {
         enabled: !!ecocreditClient,
         client: ecocreditClient,
         request: {
-          address: wallet?.address,
+          address: address ?? wallet?.address,
           pagination: {
             offset: page * rowsPerPage,
             limit: rowsPerPage,

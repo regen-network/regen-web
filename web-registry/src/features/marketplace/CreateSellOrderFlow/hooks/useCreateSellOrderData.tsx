@@ -15,7 +15,7 @@ type ReponseType = {
 export const useCreateSellOrderData = ({ projectId }: Props): ReponseType => {
   const { wallet } = useLedger();
 
-  const { credits, isLoadingCredits } = useFetchEcocredits();
+  const { credits, isLoadingCredits } = useFetchEcocredits({});
   const creditsForProject = credits?.filter(
     credit => credit.projectId === projectId,
   );

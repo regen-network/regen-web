@@ -297,7 +297,7 @@ function ProjectTopSection({
             filteredColumns={['projectLocation']}
             onTableChange={setPaginationParams}
             initialPaginationParams={paginationParams}
-            isRoutePagination
+            isIgnoreOffset
           />
         </Box>
       )}

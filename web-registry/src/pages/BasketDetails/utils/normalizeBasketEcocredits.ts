@@ -1,34 +1,38 @@
+import { BasketBalanceInfo } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import {
-  BatchBalanceInfo,
   BatchInfo,
   ProjectInfo,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
-import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
-
-import { normalizeClassProjectForBatch } from '../classProjectForBatch/normalizeClassProjectForBatch';
+import { ClassProjectInfo } from 'types/ledger/ecocredit';
+import { normalizeClassProjectForBatch } from 'lib/normalizers/classProjectForBatch/normalizeClassProjectForBatch';
 import {
-  EMPTY_BALANCE_INFO,
   EMPTY_BATCH_INFO,
   EMPTY_CREDIT_CLASS,
-} from './normalizeEcocredits.constants';
+} from 'lib/normalizers/ecocredits/normalizeEcocredits.constants';
 
 interface Params {
-  balance?: BatchBalanceInfo;
+  balance?: BasketBalanceInfo;
   project?: ProjectInfo | null;
   metadata?: any | null;
   sanityCreditClassData?: AllCreditClassQuery;
   batch?: BatchInfo | null;
 }
 
-export const normalizeEcocredits = ({
+export interface BasketBatchInfoWithBalance
+  extends ClassProjectInfo,
+    BatchInfo {
+  balance: string;
+}
+
+export const normalizeBasketEcocredits = ({
   balance,
   batch,
   metadata,
   project,
   sanityCreditClassData,
-}: Params): BatchInfoWithBalance => {
+}: Params): BasketBatchInfoWithBalance => {
   const hasAllClassInfos =
     batch !== undefined &&
     metadata !== undefined &&
@@ -47,6 +51,6 @@ export const normalizeEcocredits = ({
   return {
     ...(batch ?? EMPTY_BATCH_INFO),
     ...classProjectInfo,
-    balance: { ...(balance ?? EMPTY_BALANCE_INFO) },
+    balance: balance?.balance ?? '0',
   };
 };

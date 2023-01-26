@@ -1,29 +1,19 @@
-import { QueryBasketBalancesResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
-
+import { BasketOverviewProps } from '../../../components/organisms';
 import {
-  BasketOverviewProps,
-  CreditBatch,
-  useBasketEcocreditsTable,
-  useBasketOverview,
-} from '../../../components/organisms';
-import useBasketQuery from '../../../hooks/useBasketQuery';
+  FetchBasketEcocreditsType,
+  useFetchBasketEcocredits,
+} from './useFetchBasketEcocredits';
+import { useFetchBasketOverview } from './useFetchBasketOverview';
 
-type BasketDetails = {
+interface BasketDetails extends FetchBasketEcocreditsType {
   overview?: BasketOverviewProps;
-  creditBatches: CreditBatch[];
-};
+}
 
 const useBasketDetails = (basketDenom?: string): BasketDetails => {
-  // shared initial data
-  const { data: basketBalances } = useBasketQuery<QueryBasketBalancesResponse>({
-    query: 'basketBalances',
-    params: { basketDenom },
-  });
+  const overview = useFetchBasketOverview({ basketDenom });
+  const basketEcocredits = useFetchBasketEcocredits({ basketDenom });
 
-  const overview = useBasketOverview(basketDenom, basketBalances);
-  const creditBatches = useBasketEcocreditsTable(basketBalances);
-
-  return { overview, creditBatches };
+  return { overview, ...basketEcocredits };
 };
 
 export default useBasketDetails;

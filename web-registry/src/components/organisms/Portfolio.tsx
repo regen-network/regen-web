@@ -22,7 +22,7 @@ export interface PortfolioProps {
   renderBasketActionButtons?: RenderActionButtonsFunc;
   onTableChange?: UseStateSetter<TablePaginationParams>;
   initialPaginationParams?: TablePaginationParams;
-  isRoutePagination?: boolean;
+  isIgnoreOffset?: boolean;
 }
 
 const sxs = {
@@ -39,7 +39,7 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
   renderBasketActionButtons,
   onTableChange,
   initialPaginationParams,
-  isRoutePagination = false,
+  isIgnoreOffset = false,
 }) => {
   return (
     <Box>
@@ -50,7 +50,7 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
           renderActionButtons={renderCreditActionButtons}
           onTableChange={onTableChange}
           initialPaginationParams={initialPaginationParams}
-          isRoutePagination={isRoutePagination}
+          isIgnoreOffset={isIgnoreOffset}
         />
       </Box>
 

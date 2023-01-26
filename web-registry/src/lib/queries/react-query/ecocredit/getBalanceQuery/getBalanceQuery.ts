@@ -16,7 +16,7 @@ export const getBalanceQuery = ({
     batchDenom: request.batchDenom ?? '',
   }),
   queryFn: async () => {
-    if (!client) return null;
+    if (!client || !request.address || !request.batchDenom) return null;
     return await queryBalance({ client, request });
   },
   ...params,

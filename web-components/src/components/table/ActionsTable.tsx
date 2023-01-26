@@ -65,8 +65,8 @@ interface ActionsTableProps {
   renderActionButtons?: RenderActionButtonsFunc;
   onTableChange?: Dispatch<SetStateAction<TablePaginationParams>>;
   initialPaginationParams?: TablePaginationParams;
-  isRoutePagination?: boolean;
   sortCallbacks?: SortCallbacksType;
+  isIgnoreOffset?: boolean;
   sx?: {
     root?: SxProps<Theme>;
   };
@@ -79,8 +79,8 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
   renderActionButtons,
   onTableChange,
   initialPaginationParams = DEFAULT_TABLE_PAGINATION_PARAMS,
-  isRoutePagination = false,
   sortCallbacks = [],
+  isIgnoreOffset = false,
   sx,
 }) => {
   const {
@@ -125,7 +125,7 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
     (_: unknown, newPage: number) => {
       const offset = newPage * rowsPerPage;
       setPage(newPage);
-      if (!isRoutePagination) {
+      if (!isIgnoreOffset) {
         setOffset(offset);
       }
       onTableChange &&
@@ -136,7 +136,7 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
           count: initialPaginationParams.count,
         });
     },
-    [onTableChange, rowsPerPage, isRoutePagination, initialPaginationParams],
+    [onTableChange, rowsPerPage, isIgnoreOffset, initialPaginationParams],
   );
 
   useEffect(() => {

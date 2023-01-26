@@ -4,59 +4,67 @@ import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/Table.constants';
 
-import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
-import { normalizeEcocredits } from 'lib/normalizers/ecocredits/normalizeEcocredits';
-import { getBalancesQuery } from 'lib/queries/react-query/ecocredit/getBalancesQuery/getBalancesQuery';
+import { client as sanityClient } from 'lib/clients/sanity';
+import { getBasketBalancesQuery } from 'lib/queries/react-query/ecocredit/basket/getBasketBalances/getBasketBalancesQuery';
 import { getBatchQuery } from 'lib/queries/react-query/ecocredit/getBatchQuery/getBatchQuery';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
-import { useWallet } from 'lib/wallet/wallet';
 
-import { client as sanityClient } from '../../../../lib/clients/sanity';
+import {
+  BasketBatchInfoWithBalance,
+  normalizeBasketEcocredits,
+} from '../utils/normalizeBasketEcocredits';
 
-interface Response {
-  credits: BatchInfoWithBalance[];
+type Params = {
+  basketDenom?: string;
+};
+
+export interface FetchBasketEcocreditsType {
+  basketCredits: BasketBatchInfoWithBalance[];
   reloadBalances: () => void;
   isLoadingCredits: boolean;
   setPaginationParams: UseStateSetter<TablePaginationParams>;
   paginationParams: TablePaginationParams;
 }
 
-export const useFetchEcocredits = (): Response => {
-  const { ecocreditClient } = useLedger();
+export const useFetchBasketEcocredits = ({
+  basketDenom,
+}: Params): FetchBasketEcocreditsType => {
+  const { ecocreditClient, basketClient } = useLedger();
   const reactQueryClient = useQueryClient();
-  const { wallet } = useWallet();
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
       page: 0,
       rowsPerPage: DEFAULT_ROWS_PER_PAGE,
       offset: 0,
     });
+
   const { page, rowsPerPage } = paginationParams;
 
   // Balances
   const balancesQuery = useMemo(
     () =>
-      getBalancesQuery({
-        enabled: !!ecocreditClient,
-        client: ecocreditClient,
+      getBasketBalancesQuery({
+        enabled: !!basketClient,
+        client: basketClient,
         request: {
-          address: wallet?.address,
+          basketDenom,
           pagination: {
             offset: page * rowsPerPage,
             limit: rowsPerPage,
             countTotal: true,
           },
         },
+        keepPreviousData: true,
       }),
-    [ecocreditClient, page, rowsPerPage, wallet?.address],
+    [basketClient, page, rowsPerPage, basketDenom],
   );
   const { data: balancesData, isLoading: isLoadingCredits } =
     useQuery(balancesQuery);
-  const balances = balancesData?.balances ?? [];
+  const balances = balancesData?.balancesInfo ?? [];
   const balancesPagination = balancesData?.pagination;
   const allBalancesCount = Number(balancesPagination?.total ?? 0);
 
@@ -112,8 +120,8 @@ export const useFetchEcocredits = (): Response => {
   // Normalization
   // isLoading -> undefined: return empty strings in normalizer to trigger skeleton
   // !isLoading -> null/result: return results with field value different from empty strings and stop displaying the skeletons
-  const credits = balances.map((balance, index) =>
-    normalizeEcocredits({
+  const basketCredits = balances.map((balance, index) =>
+    normalizeBasketEcocredits({
       balance,
       batch: isBatchesLoading ? undefined : batches[index]?.batch,
       metadata: isMetadatasLoading ? undefined : metadatas[index],
@@ -135,7 +143,7 @@ export const useFetchEcocredits = (): Response => {
   }, [reactQueryClient, balancesQuery]);
 
   return {
-    credits,
+    basketCredits,
     isLoadingCredits,
     reloadBalances,
     setPaginationParams,

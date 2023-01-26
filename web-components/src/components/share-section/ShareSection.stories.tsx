@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { ShareSection } from './ShareSection';
-import { ShareSectionItemsMock } from './ShareSection.mock';
+import { SocialItemsMock } from './ShareSection.mock';
 
 export default {
   title: 'ShareSection',
@@ -16,7 +16,7 @@ export const Default = Template.bind({});
 
 Default.args = {
   title: 'Share',
-  items: ShareSectionItemsMock,
+  items: SocialItemsMock,
 };
 
 Default.argTypes = {};

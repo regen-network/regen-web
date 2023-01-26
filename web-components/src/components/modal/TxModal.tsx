@@ -11,6 +11,8 @@ import OutlinedButton from '../buttons/OutlinedButton';
 import Card from '../cards/Card';
 import { LinkItem } from '../footer/footer-new';
 import Modal, { RegenModalProps } from '../modal';
+import ShareSection from '../share-section';
+import { SocialItems } from '../share-section/ShareSection.types';
 import { Body, Label, Title } from '../typography';
 import { CardItemValue, CardItemValueList } from './TxModal.CardItemValue';
 
@@ -59,6 +61,7 @@ export interface TxModalProps extends RegenModalProps {
   title?: string;
   description?: string;
   buttonLink?: string;
+  socialItems?: SocialItems;
 }
 
 interface CardItemProps extends Item {
@@ -108,6 +111,7 @@ const TxModal: React.FC<React.PropsWithChildren<TxModalProps>> = ({
   txHashUrl,
   linkComponent,
   buttonLink,
+  socialItems,
 }) => {
   const { classes: styles } = useStyles();
   const hasCardItems = !!cardItems && cardItems.length > 0;
@@ -176,6 +180,9 @@ const TxModal: React.FC<React.PropsWithChildren<TxModalProps>> = ({
       >
         {buttonTitle}
       </OutlinedButton>
+      {socialItems && (
+        <ShareSection items={socialItems} sx={{ mt: 10, maxWidth: 370 }} />
+      )}
     </Modal>
   );
 };

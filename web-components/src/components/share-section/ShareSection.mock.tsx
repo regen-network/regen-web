@@ -2,7 +2,7 @@ import LinkedInBadgeIcon from '../icons/LinkedInBadgeIcon';
 import TwitterBadgeIcon from '../icons/TwitterBadgeIcon';
 import { SocialItems } from './ShareSection.types';
 
-export const ShareSectionItemsMock: SocialItems = [
+export const SocialItemsMock: SocialItems = [
   {
     Icon: TwitterBadgeIcon,
     name: 'Twitter',

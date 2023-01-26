@@ -79,7 +79,6 @@ export const BasketEcocreditsTable: React.FC<
         }),
         <WithLoader isLoading={credit.classId === ''} variant="skeleton">
           <Link
-            key="class_id"
             href={`/credit-classes/${credit.classId}`}
             sx={tableStyles.ellipsisContentColumn}
           >

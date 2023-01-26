@@ -105,7 +105,6 @@ export const EcocreditsTable: React.FC<
           </WithLoader>,
           <WithLoader isLoading={row.classId === ''} variant="skeleton">
             <Link
-              key="class_id"
               href={`/credit-classes/${row.classId}`}
               sx={tableStyles.ellipsisContentColumn}
             >

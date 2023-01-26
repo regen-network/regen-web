@@ -1,5 +1,4 @@
 import React from 'react';
-import { ArrowLeft, ArrowRight } from '@mui/icons-material';
 import { Grid } from '@mui/material';
 
 import { Flex } from '../box';
@@ -14,6 +13,7 @@ import AvatarIcon from './AvatarIcon';
 import BlockIcon from './BlockIcon';
 import BreadcrumbIcon from './BreadcrumbIcon';
 import { BrokenLinkIcon } from './BrokenLinkIcon';
+import CelebrateRegenIcon from './CelebrateRegenIcon';
 import CheckedIcon from './CheckedIcon';
 import CheckIcon from './CheckIcon';
 import CloseIcon from './CloseIcon';
@@ -158,6 +158,10 @@ export const allIcons = (): JSX.Element => (
     />
 
     <LabeledIcon icon={<BrokenLinkIcon />} label="BrokenLinkIcon" />
+    <LabeledIcon
+      icon={<CelebrateRegenIcon sx={{ fontSize: 64 }} />}
+      label="CelebrateRegenIcon"
+    />
     <LabeledIcon icon={<CheckedIcon />} label="CheckedIcon" />
     <LabeledIcon icon={<CheckIcon />} label="CheckIcon" />
     <LabeledIcon icon={<CloseIcon />} label="CloseIcon" />

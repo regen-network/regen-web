@@ -5,7 +5,6 @@ import { getSizeVariants, TextSize } from './sizing';
 interface Props extends TypographyProps {
   size?: TextSize;
   mobileSize?: TextSize;
-  component?: string;
 }
 
 export const Subtitle = styled(Typography, {

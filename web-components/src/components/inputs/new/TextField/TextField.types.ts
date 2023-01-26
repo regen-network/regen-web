@@ -8,11 +8,11 @@ export interface RegenTextFieldProps
     DefaultStyleProps {
   children?: any;
   optional?: boolean | string;
-  startAdornment?: React.ReactNode;
-  endAdornment?: React.ReactNode;
+  startAdornment?: ReactNode;
+  endAdornment?: ReactNode;
   step?: number | string;
   customInputProps?: { min?: number; max?: number; step?: string | number };
-  description?: string | React.ReactNode;
+  description?: string | ReactNode;
   label: ReactNode;
   className?: string;
   name?: string;

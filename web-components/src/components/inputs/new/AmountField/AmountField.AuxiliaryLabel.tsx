@@ -10,9 +10,12 @@ interface AuxiliaryLabelProps {
   className?: string;
 }
 
-export const AuxiliaryLabel: React.FC<
-  React.PropsWithChildren<AuxiliaryLabelProps>
-> = ({ availableAmount, denom, auxiliaryLabel, className }) => {
+export const AuxiliaryLabel = ({
+  availableAmount,
+  denom,
+  auxiliaryLabel,
+  className,
+}: AuxiliaryLabelProps): JSX.Element => {
   const { classes: styles } = useAmountFieldStyles();
   return (
     <Box className={className} component="span" sx={{ flexGrow: 1 }}>

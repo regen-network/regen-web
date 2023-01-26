@@ -156,7 +156,7 @@ const CreditSendForm: React.FC<React.PropsWithChildren<CreditSendFormProps>> =
           <CheckboxLabel
             className={styles.checkboxLabel}
             label={
-              <Subtitle size="lg" color="primary.contrastText" component="span">
+              <Subtitle size="lg" color="primary.contrastText" as="span">
                 <Box sx={{ display: 'inline' }}>
                   Retire all credits upon transfer
                 </Box>{' '}

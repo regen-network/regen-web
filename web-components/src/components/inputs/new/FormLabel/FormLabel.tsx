@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
 
+import { Flex } from '../../../../components/box';
 import ControlledFormLabel from '../../../form/ControlledFormLabel';
 import { Body } from '../../../typography';
 
@@ -32,7 +33,7 @@ export default function FormLabel({
         </ControlledFormLabel>
       )}
       {description && (
-        <Box sx={{ display: 'flex', mt: 1 }}>
+        <Flex sx={{ mt: 1 }}>
           <Body size="sm">
             {description}
             {onExampleClick && (
@@ -46,7 +47,7 @@ export default function FormLabel({
               </Box>
             )}
           </Body>
-        </Box>
+        </Flex>
       )}
     </div>
   );

@@ -22,6 +22,8 @@ interface Props extends DefaultStyleProps {
   optional?: boolean | string;
   label?: string;
   onExampleClick?: () => void;
+  error?: boolean;
+  helperText?: string;
 }
 
 /**
@@ -38,14 +40,15 @@ export default function FieldFormControl({
   onExampleClick,
   defaultStyle = true,
   forceDefaultStyle = false,
+  error = false,
+  helperText,
   ...fieldProps
 }: Props): JSX.Element {
   const hasError = false;
-  const errorMessage = '';
   const { classes: styles, cx } = useFieldFormControlStyles({
     disabled,
     description,
-    error: hasError,
+    error,
   });
   const defaultClasses = [styles.default, className];
   const rootClasses = defaultStyle
@@ -55,7 +58,7 @@ export default function FieldFormControl({
     : className;
 
   return (
-    <FormControl sx={sx} className={cx(rootClasses)} fullWidth>
+    <FormControl sx={sx} className={cx(rootClasses)} error={error} fullWidth>
       {label && (
         <FormLabel
           className={styles.label}
@@ -69,7 +72,7 @@ export default function FieldFormControl({
       {children}
 
       {hasError && (
-        <FormHelperText className={styles.error}>{errorMessage}</FormHelperText>
+        <FormHelperText className={styles.error}>{helperText}</FormHelperText>
       )}
     </FormControl>
   );

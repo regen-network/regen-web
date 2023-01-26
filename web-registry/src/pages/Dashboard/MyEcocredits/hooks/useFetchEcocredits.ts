@@ -56,7 +56,7 @@ export const useFetchEcocredits = ({ address }: Props): Response => {
           },
         },
       }),
-    [ecocreditClient, page, rowsPerPage, wallet?.address],
+    [ecocreditClient, page, rowsPerPage, wallet?.address, address],
   );
   const { data: balancesData, isLoading: isLoadingCredits } =
     useQuery(balancesQuery);

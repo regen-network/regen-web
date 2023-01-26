@@ -18,7 +18,8 @@ import useBasketDetails from './hooks/useBasketDetails';
 
 const BasketDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { basketDenom } = useParams<{ basketDenom: string }>();
-  const data = useBasketDetails(basketDenom);
+  const { overview, basketCredits, paginationParams, setPaginationParams } =
+    useBasketDetails(basketDenom);
 
   const { data: allBasketDetailsPageData } = useQuery(
     getAllBasketDetailsPageQuery({ sanityClient, enabled: !!sanityClient }),
@@ -28,10 +29,15 @@ const BasketDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   return (
     <>
-      {data.overview && <BasketOverview {...data.overview} />}
-      {data.creditBatches && (
+      {overview && <BasketOverview {...overview} />}
+      {basketCredits && (
         <BasketDetailsSectionLayout>
-          <BasketEcocreditsTable batches={data.creditBatches} />
+          <BasketEcocreditsTable
+            basketCredits={basketCredits}
+            onTableChange={setPaginationParams}
+            initialPaginationParams={paginationParams}
+            isIgnoreOffset
+          />
           {gettingStartedResourcesCard && (
             <Box sx={{ mt: 19.25 }}>
               <GettingStartedResourcesCardDefault

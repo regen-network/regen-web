@@ -34,7 +34,7 @@ type EcocreditsTableProps = {
   renderActionButtons?: RenderActionButtonsFunc;
   onTableChange?: UseStateSetter<TablePaginationParams>;
   initialPaginationParams?: TablePaginationParams;
-  isRoutePagination?: boolean;
+  isIgnoreOffset?: boolean;
 };
 
 export const EcocreditsTable: React.FC<
@@ -44,7 +44,7 @@ export const EcocreditsTable: React.FC<
   renderActionButtons,
   onTableChange,
   initialPaginationParams,
-  isRoutePagination = false,
+  isIgnoreOffset = false,
 }) => {
   if (!credits?.length) {
     return <NoCredits title="No ecocredits to display" />;
@@ -56,7 +56,7 @@ export const EcocreditsTable: React.FC<
       renderActionButtons={renderActionButtons}
       onTableChange={onTableChange}
       initialPaginationParams={initialPaginationParams}
-      isRoutePagination
+      isIgnoreOffset={isIgnoreOffset}
       /* eslint-disable react/jsx-key */
       headerRows={[
         <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>{'Project'}</Box>,
@@ -105,7 +105,6 @@ export const EcocreditsTable: React.FC<
           </WithLoader>,
           <WithLoader isLoading={row.classId === ''} variant="skeleton">
             <Link
-              key="class_id"
               href={`/credit-classes/${row.classId}`}
               sx={tableStyles.ellipsisContentColumn}
             >

@@ -34,7 +34,7 @@ export const EcocreditBatches = (): JSX.Element => {
             creditBatches={batchesWithSupply}
             onTableChange={setPaginationParams}
             initialPaginationParams={paginationParams}
-            isRoutePagination
+            isIgnoreOffset
           />
         </Box>
       </Section>

@@ -270,7 +270,7 @@ export const MyEcocredits = (): JSX.Element => {
           basketTokens={basketTokens}
           onTableChange={setPaginationParams}
           initialPaginationParams={paginationParams}
-          isRoutePagination
+          isIgnoreOffset
           renderCreditActionButtons={
             credits.findIndex(c => Number(c.balance?.tradableAmount) > 0) > -1
               ? (i: number) => {

@@ -104,6 +104,7 @@ export const useProjectWithMetadata = ({
       metadata = offChainProject?.metadata;
     }
   }
+  // Create Reload and Submit callbacks
   const metadataReload = useCallback(async (): Promise<void> => {
     if (create) {
       await reactQueryClient.invalidateQueries({

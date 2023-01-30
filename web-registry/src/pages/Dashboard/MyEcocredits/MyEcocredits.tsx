@@ -170,7 +170,7 @@ export const MyEcocredits = (): JSX.Element => {
     isLoadingCredits,
     paginationParams,
     setPaginationParams,
-  } = useFetchEcocredits();
+  } = useFetchEcocredits({});
 
   const {
     basketTokens,

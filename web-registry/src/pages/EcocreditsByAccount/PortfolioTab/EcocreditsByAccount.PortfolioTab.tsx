@@ -1,13 +1,26 @@
 import { useParams } from 'react-router-dom';
 
+import { useFetchBaskets } from 'pages/Dashboard/MyEcocredits/hooks/useFetchBaskets';
+import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 import { Portfolio } from 'components/organisms';
-import { useBasketTokens, useEcocredits, useQueryBaskets } from 'hooks';
 
 export const PortfolioTab = (): JSX.Element => {
-  const baskets = useQueryBaskets();
   const { accountAddress } = useParams<{ accountAddress: string }>();
-  const { credits } = useEcocredits({ address: accountAddress });
-  const { basketTokens } = useBasketTokens(accountAddress, baskets);
+  const { credits, paginationParams, setPaginationParams } = useFetchEcocredits(
+    { address: accountAddress },
+  );
+  const { basketTokens } = useFetchBaskets({
+    address: accountAddress,
+    credits,
+  });
 
-  return <Portfolio credits={credits} basketTokens={basketTokens} />;
+  return (
+    <Portfolio
+      credits={credits}
+      basketTokens={basketTokens}
+      onTableChange={setPaginationParams}
+      initialPaginationParams={paginationParams}
+      isIgnoreOffset
+    />
+  );
 };

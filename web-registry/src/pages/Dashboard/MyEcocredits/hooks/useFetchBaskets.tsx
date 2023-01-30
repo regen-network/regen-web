@@ -19,6 +19,7 @@ import { BasketTokens } from 'hooks/useBasketTokens';
 
 interface Params {
   credits: BatchInfoWithBalance[];
+  address?: string;
 }
 
 interface Response {
@@ -29,7 +30,7 @@ interface Response {
   reloadBasketsBalance: () => Promise<void>;
 }
 
-export const useFetchBaskets = ({ credits }: Params): Response => {
+export const useFetchBaskets = ({ credits, address }: Params): Response => {
   const { basketClient, bankClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
@@ -60,7 +61,10 @@ export const useFetchBaskets = ({ credits }: Params): Response => {
     queries: basketsInfo.map(basketInfo =>
       getBalanceQuery({
         client: bankClient,
-        request: { address: wallet?.address, denom: basketInfo.basketDenom },
+        request: {
+          address: address ?? wallet?.address,
+          denom: basketInfo.basketDenom,
+        },
       }),
     ),
   });

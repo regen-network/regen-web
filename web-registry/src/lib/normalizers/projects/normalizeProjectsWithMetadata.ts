@@ -1,11 +1,13 @@
+import { ProjectMetadataLD, ProjectPageMetadataLD } from 'lib/db/types/json-ld';
+
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 
 import DefaultProject from 'assets/default-project.jpg';
 
 interface NormalizeProjectsWithOrderDataParams {
   projectsWithOrderData?: ProjectWithOrderData[];
-  metadatas?: any[];
-  unanchoredMetadatas?: any[];
+  metadatas?: (ProjectMetadataLD | undefined)[];
+  unanchoredMetadatas?: ProjectPageMetadataLD[];
 }
 
 export const normalizeProjectsWithMetadata = ({

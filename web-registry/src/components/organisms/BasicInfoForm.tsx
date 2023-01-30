@@ -177,9 +177,9 @@ const BasicInfoForm: React.FC<
             <ProjectPageFooter
               onSave={submitForm}
               onNext={onNext}
-              saveDisabled={
-                !isValid || isSubmitting || !Object.keys(touched).length
-              }
+              isValid={isValid}
+              isSubmitting={isSubmitting}
+              touched={touched}
             />
           </Form>
         );

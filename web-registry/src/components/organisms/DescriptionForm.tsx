@@ -100,9 +100,9 @@ const DescriptionForm = ({
               onSave={submitForm}
               onNext={props.onNext}
               onPrev={props.onPrev}
-              saveDisabled={
-                !isValid || isSubmitting || !Object.keys(touched).length
-              }
+              isValid={isValid}
+              isSubmitting={isSubmitting}
+              touched={touched}
             />
           </Form>
         );

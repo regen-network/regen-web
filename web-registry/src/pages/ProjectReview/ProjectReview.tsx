@@ -223,7 +223,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
       <ProjectPageFooter
         onSave={submit}
         onPrev={() => navigate(`${editPath}/metadata`)}
-        saveDisabled={isSubmitModalOpen}
+        isSubmitting={isSubmitModalOpen}
       />
       <ProcessingModal open={isSubmitModalOpen} onClose={closeSubmitModal} />
       {error && txModalTitle && (

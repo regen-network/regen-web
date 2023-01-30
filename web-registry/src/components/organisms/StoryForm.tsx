@@ -317,9 +317,9 @@ const StoryForm: React.FC<React.PropsWithChildren<StoryFormProps>> = ({
                 onSave={submitForm}
                 onPrev={props.onPrev}
                 onNext={props.onNext}
-                saveDisabled={
-                  !isValid || isSubmitting || !Object.keys(touched).length
-                }
+                isValid={isValid}
+                isSubmitting={isSubmitting}
+                touched={touched}
               />
             </Form>
           );

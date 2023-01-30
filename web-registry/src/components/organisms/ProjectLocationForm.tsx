@@ -85,12 +85,15 @@ const ProjectLocationForm: React.FC<
               onSave={submitForm}
               onPrev={props.onPrev}
               onNext={props.onNext}
-              saveDisabled={
-                !isValid ||
-                isSubmitting ||
-                !dirty ||
-                !Object.keys(touched).length
-              }
+              isValid={isValid}
+              isSubmitting={isSubmitting}
+              touched={touched}
+              // saveDisabled={
+              //   !isValid ||
+              //   isSubmitting ||
+              //   !dirty ||
+              //   !Object.keys(touched).length
+              // }
             />
           </Form>
         );

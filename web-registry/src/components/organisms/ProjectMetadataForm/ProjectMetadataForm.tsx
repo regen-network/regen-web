@@ -71,9 +71,9 @@ export const ProjectMetadataForm = ({
               onSave={submitForm}
               onNext={onNext}
               onPrev={onPrev}
-              saveDisabled={
-                !isValid || isSubmitting || !Object.keys(touched).length
-              }
+              isValid={isValid}
+              isSubmitting={isSubmitting}
+              touched={touched}
             />
           </Form>
         );

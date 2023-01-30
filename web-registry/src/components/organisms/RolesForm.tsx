@@ -203,9 +203,9 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
                 onSave={submitForm}
                 onPrev={props.onPrev}
                 onNext={props.onNext}
-                saveDisabled={
-                  !isValid || isSubmitting || !Object.keys(touched).length
-                }
+                isValid={isValid}
+                isSubmitting={isSubmitting}
+                touched={touched}
               />
             </Form>
           );

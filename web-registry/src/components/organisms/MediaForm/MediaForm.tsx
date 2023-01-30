@@ -99,14 +99,16 @@ export const MediaForm = ({
         validate={handleValidate}
         onSubmit={handleSubmit}
       >
-        {({ submitForm, isValid, isSubmitting }) => (
+        {({ submitForm, isValid, isSubmitting, touched }) => (
           <>
             <MediaFormSimple projectId={projectId} />
             <ProjectPageFooter
               onSave={submitForm}
               onNext={props.onNext}
               onPrev={props.onPrev}
-              saveDisabled={!isValid || isSubmitting}
+              isValid={isValid}
+              isSubmitting={isSubmitting}
+              touched={touched}
             />
           </>
         )}

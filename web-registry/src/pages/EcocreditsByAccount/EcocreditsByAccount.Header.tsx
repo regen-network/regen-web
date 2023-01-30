@@ -30,7 +30,7 @@ export const PortfolioHeader = ({ accountAddress }: Props): JSX.Element => {
         }}
       >
         <LinkWithArrow
-          href={getAccountUrl(accountAddress ?? '')}
+          href={getAccountUrl(accountAddress ?? '', true)}
           label={truncate(accountAddress ?? '')}
         />
       </Body>

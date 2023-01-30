@@ -3,9 +3,12 @@ export const explorer = process.env.REACT_APP_BLOCK_EXPLORER;
 const isMintscan = explorer?.includes('mintscan');
 const isAneka = explorer?.includes('aneka');
 
-export const getAccountUrl = (address: string | undefined): string => {
+export const getAccountUrl = (
+  address: string | undefined,
+  useExplorer?: boolean,
+): string => {
   if (!address) return '';
-  if (address.startsWith('regen')) {
+  if (address.startsWith('regen') && !useExplorer) {
     return `/ecocredits/accounts/${address}/portfolio`;
   }
   if (isAneka) {

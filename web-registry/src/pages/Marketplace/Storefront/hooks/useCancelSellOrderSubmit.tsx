@@ -34,7 +34,7 @@ type Props = {
   setIsProcessingModalOpen: UseStateSetter<boolean>;
 };
 
-type ReturnType = () => Promise<void>;
+type Params = () => Promise<void>;
 
 const useCancelSellOrderSubmit = ({
   signAndBroadcast,
@@ -46,7 +46,7 @@ const useCancelSellOrderSubmit = ({
   setTxButtonTitle,
   setSelectedSellOrder,
   setIsProcessingModalOpen,
-}: Props): ReturnType => {
+}: Props): Params => {
   const cancelSellOrderSubmit = useCallback(async (): Promise<void> => {
     if (!accountAddress) return Promise.reject();
 

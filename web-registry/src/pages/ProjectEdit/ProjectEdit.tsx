@@ -4,7 +4,7 @@ import { useMediaQuery, useTheme } from '@mui/material';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';
 import { ERRORS } from 'config/errors';
-import { useAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import { startCase } from 'lodash';
 import { makeStyles } from 'tss-react/mui';
 
@@ -27,7 +27,9 @@ import { OnTxSuccessfulProps } from 'pages/Dashboard/MyEcocredits/MyEcocredits.t
 import { useMsgClient } from 'hooks';
 
 import { Link } from '../../components/atoms';
-import useProjectEditSubmit, { ReturnType } from './hooks/useProjectEditSubmit';
+import useProjectEditSubmit, {
+  UseProjectEditSubmitParams,
+} from './hooks/useProjectEditSubmit';
 import { EDIT_PROJECT } from './ProjectEdit.constants';
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -127,7 +129,7 @@ type ContextType = {
   confirmSave?: () => void;
   isEdit?: boolean;
   onChainProject?: ProjectInfo;
-  projectEditSubmit: ReturnType;
+  projectEditSubmit: UseProjectEditSubmitParams;
 };
 
 const ProjectEditContext = createContext<ContextType>({
@@ -147,10 +149,10 @@ function ProjectEdit(): JSX.Element {
   const lastPathItem = pathname.substring(pathname.lastIndexOf('/') + 1);
   const section = lastPathItem !== 'edit' ? lastPathItem : undefined;
 
-  const [, setProcessingModalAtom] = useAtom(processingModalAtom);
-  const [, setErrorCodeAtom] = useAtom(errorCodeAtom);
-  const [, setErrorModalAtom] = useAtom(errorModalAtom);
-  const [, setTxSuccessfulModalAtom] = useAtom(txSuccessfulModalAtom);
+  const setProcessingModalAtom = useSetAtom(processingModalAtom);
+  const setErrorCodeAtom = useSetAtom(errorCodeAtom);
+  const setErrorModalAtom = useSetAtom(errorModalAtom);
+  const setTxSuccessfulModalAtom = useSetAtom(txSuccessfulModalAtom);
 
   const onBroadcast = (): void => {
     setProcessingModalAtom(atom => void (atom.open = true));

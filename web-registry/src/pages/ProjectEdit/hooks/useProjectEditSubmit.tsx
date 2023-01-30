@@ -25,7 +25,7 @@ type Props = {
   }: OnTxSuccessfulProps) => void;
 };
 
-export type ReturnType = (metadata: any) => Promise<void>;
+export type UseProjectEditSubmitParams = (metadata: any) => Promise<void>;
 
 const useProjectEditSubmit = ({
   projectId,
@@ -34,7 +34,7 @@ const useProjectEditSubmit = ({
   onBroadcast,
   onTxSuccessful,
   onErrorCallback,
-}: Props): ReturnType => {
+}: Props): UseProjectEditSubmitParams => {
   const projectEditSubmit = useCallback(
     async (metadata: any): Promise<void> => {
       const iriResponse = await generateIri(metadata);

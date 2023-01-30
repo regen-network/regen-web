@@ -15,7 +15,7 @@ import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graph
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery.constants';
 
-import { ReturnType as ProjectEditSubmitReturnType } from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
+import { UseProjectEditSubmitParams } from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
 import {
   BasicInfoFormValues,
   DescriptionValues,
@@ -30,7 +30,7 @@ export type OffChainProject =
 interface Props {
   projectId?: string;
   isEdit?: boolean;
-  projectEditSubmit: ProjectEditSubmitReturnType;
+  projectEditSubmit: UseProjectEditSubmitParams;
   navigateNext: () => void;
   anchored?: boolean;
   onChainProject?: ProjectInfo;

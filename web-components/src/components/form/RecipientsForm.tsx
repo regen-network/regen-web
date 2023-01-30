@@ -46,12 +46,12 @@ export interface FormValues {
   recipients: Recipient[];
 }
 
-type ReturnType = {
+type Params = {
   recipients: Yup.ArraySchema<Yup.AnyObjectSchema>;
 };
 
 // validationSchemaFields
-export function getValidationSchemaFields(addressPrefix: string): ReturnType {
+export function getValidationSchemaFields(addressPrefix: string): Params {
   return {
     recipients: Yup.array()
       .of(

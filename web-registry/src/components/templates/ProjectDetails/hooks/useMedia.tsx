@@ -9,22 +9,19 @@ import {
   MAPBOX_TOKEN,
 } from '../ProjectDetails.config';
 
-interface InputProps {
+type InputProps = {
   metadata: any;
   geojson: any;
-}
+};
 
-interface ReturnType {
+type Params = {
   assets: any;
   imageStorageBaseUrl?: string;
   apiServerUrl?: string;
   imageCredits?: string;
-}
+};
 
-export default function useMedia({
-  metadata,
-  geojson,
-}: InputProps): ReturnType {
+export default function useMedia({ metadata, geojson }: InputProps): Params {
   let assets;
 
   const galleryPhotos = metadata?.['regen:galleryPhotos']?.['@list']?.filter(

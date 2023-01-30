@@ -12,20 +12,20 @@ import {
   useUpdateWalletByIdMutation,
 } from 'generated/graphql';
 
-import { ReturnType as ProjectEditSubmit } from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
+import { UseProjectEditSubmitParams } from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
 import { RolesValues } from 'components/organisms';
 import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';
 
 interface Props {
   offChainProject?: OffChainProject;
   metadata: any; // TODO update with proper type
-  projectEditSubmit: ProjectEditSubmit;
+  projectEditSubmit: UseProjectEditSubmitParams;
   isEdit?: boolean;
   metadataReload: () => Promise<void>;
   navigateNext: () => void;
 }
 
-type ReturnType = {
+type Params = {
   rolesSubmit: (values: RolesValues) => Promise<void>;
 };
 
@@ -36,7 +36,7 @@ const useRolesSubmit = ({
   isEdit,
   metadataReload,
   navigateNext,
-}: Props): ReturnType => {
+}: Props): Params => {
   const [updateProject] = useUpdateProjectByIdMutation();
   const [createWallet] = useCreateWalletMutation();
   const [createParty] = useCreatePartyMutation();

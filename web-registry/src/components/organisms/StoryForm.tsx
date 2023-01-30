@@ -241,7 +241,7 @@ const StoryForm: React.FC<React.PropsWithChildren<StoryFormProps>> = ({
           }
         }}
       >
-        {({ submitForm, isValid, isSubmitting, touched }) => {
+        {({ submitForm, isValid, isSubmitting, dirty }) => {
           return (
             <Form translate="yes">
               <OnBoardingCard className={styles.storyCard}>
@@ -319,7 +319,7 @@ const StoryForm: React.FC<React.PropsWithChildren<StoryFormProps>> = ({
                 onNext={props.onNext}
                 isValid={isValid}
                 isSubmitting={isSubmitting}
-                touched={touched}
+                dirty={dirty}
               />
             </Form>
           );

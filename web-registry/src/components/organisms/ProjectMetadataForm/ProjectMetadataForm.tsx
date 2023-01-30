@@ -49,7 +49,7 @@ export const ProjectMetadataForm = ({
       validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
-      {({ submitForm, isValid, isSubmitting, touched }) => {
+      {({ submitForm, isValid, isSubmitting, dirty }) => {
         return (
           <Form translate="yes">
             <OnBoardingCard>
@@ -73,7 +73,7 @@ export const ProjectMetadataForm = ({
               onPrev={onPrev}
               isValid={isValid}
               isSubmitting={isSubmitting}
-              touched={touched}
+              dirty={dirty}
             />
           </Form>
         );

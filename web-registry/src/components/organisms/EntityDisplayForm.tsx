@@ -457,7 +457,7 @@ const EntityDisplayForm: React.FC<
           values,
           setFieldValue,
           setFieldTouched,
-          touched,
+          dirty,
         }) => {
           return (
             <Form translate="yes">
@@ -512,7 +512,7 @@ const EntityDisplayForm: React.FC<
                 onPrev={props.onPrev}
                 isValid={isValid}
                 isSubmitting={isSubmitting}
-                touched={touched}
+                dirty={dirty}
               />
             </Form>
           );

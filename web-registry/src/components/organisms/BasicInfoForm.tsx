@@ -126,7 +126,7 @@ const BasicInfoForm: React.FC<
         if (isEdit && confirmSave) confirmSave();
       }}
     >
-      {({ submitForm, isValid, isSubmitting, touched }) => {
+      {({ submitForm, isValid, isSubmitting, dirty }) => {
         return (
           <Form>
             <OnBoardingCard>
@@ -179,7 +179,7 @@ const BasicInfoForm: React.FC<
               onNext={onNext}
               isValid={isValid}
               isSubmitting={isSubmitting}
-              touched={touched}
+              dirty={dirty}
             />
           </Form>
         );

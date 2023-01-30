@@ -11,15 +11,15 @@ interface Props {
   onNext?: () => void;
   saveText?: string;
   isValid?: boolean;
+  dirty?: boolean;
   isSubmitting: boolean;
-  touched?: object;
 }
 
 const ProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
   saveText,
   isValid = true,
+  dirty = true,
   isSubmitting,
-  touched = {},
   onSave,
   ...props
 }) => {
@@ -30,7 +30,7 @@ const ProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
     <EditProjectPageFooter
       saveText={saveText || 'Save'}
       onSave={onSave}
-      saveDisabled={saveDisabled || !Object.keys(touched).length}
+      saveDisabled={saveDisabled || !dirty}
     />
   ) : (
     <SaveFooter

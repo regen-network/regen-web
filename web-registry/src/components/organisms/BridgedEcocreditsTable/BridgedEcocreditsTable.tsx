@@ -28,7 +28,6 @@ import {
 } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { NoCredits } from 'components/molecules';
-import { useBridged } from 'hooks/bridge/useBridged';
 
 import {
   AMOUNT_BRIDGED_TOOLTIP,
@@ -37,6 +36,7 @@ import {
   NO_BRIDGED_CREDITS,
 } from './BridgedEcocreditsTable.constants';
 import { Note } from './BridgedEcocreditsTable.Note';
+import { useFetchBridgedEcocredits } from './hooks/useFetchBridgedEcocredits';
 
 interface Props {
   accountAddress: string | undefined;
@@ -47,11 +47,13 @@ export const BridgedEcocreditsTable = ({
   accountAddress,
   privateAccess = false,
 }: Props): JSX.Element => {
-  const { bridgedCredits, isLoadingCredits } = useBridged({
-    address: accountAddress,
-  });
+  const { bridgedCredits, isLoadingBridgedCredits } = useFetchBridgedEcocredits(
+    {
+      address: accountAddress,
+    },
+  );
 
-  if (!bridgedCredits?.length && !isLoadingCredits) {
+  if (!bridgedCredits?.length && !isLoadingBridgedCredits) {
     return (
       <NoCredits
         title={NO_BRIDGED_CREDITS}
@@ -65,7 +67,10 @@ export const BridgedEcocreditsTable = ({
   }
 
   return (
-    <WithLoader isLoading={isLoadingCredits} sx={loaderStyles.withLoaderBlock}>
+    <WithLoader
+      isLoading={isLoadingBridgedCredits}
+      sx={loaderStyles.withLoaderBlock}
+    >
       <ActionsTable
         tableLabel="bridged ecocredits table"
         sx={tableStyles.rootOnlyTopBorder}

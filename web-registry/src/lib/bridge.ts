@@ -2,16 +2,17 @@ import axios from 'axios';
 
 import { BridgedTxStatus } from 'types/ledger/ecocredit';
 
-export const getBridgeTxStatus = async (
-  hash: string,
-): Promise<
+export type GetBridgeTxStatusResponse =
   | {
       regen_tx_hash: string;
       evm_tx_hash: string;
       status: BridgedTxStatus;
     }
-  | undefined
-> => {
+  | undefined;
+
+export const getBridgeTxStatus = async (
+  hash: string,
+): Promise<GetBridgeTxStatusResponse> => {
   const apiUri = process.env.REACT_APP_BRIDGE_API_URI;
   if (!apiUri) {
     return;

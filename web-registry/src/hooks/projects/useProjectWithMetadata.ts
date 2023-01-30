@@ -95,6 +95,7 @@ export const useProjectWithMetadata = ({
       onChainId: projectId as string,
     }),
   );
+  // Select metadata
   if (edit) {
     offChainProject = projectByOnChainIdRes?.data?.projectByOnChainId;
     if (anchored) {

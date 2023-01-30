@@ -37,12 +37,14 @@ interface MediaFormProps {
   onNext?: () => void;
   initialValues: MediaValues;
   graphData?: ShaclGraphByUriQuery;
+  projectId?: string;
 }
 
 /** Formik Context + handlers for legacy and new media */
 export const MediaForm = ({
   initialValues,
   graphData,
+  projectId,
   ...props
 }: MediaFormProps): JSX.Element => {
   const { confirmSave, isEdit } = useProjectEditContext();
@@ -99,7 +101,7 @@ export const MediaForm = ({
       >
         {({ submitForm, isValid, isSubmitting }) => (
           <>
-            <MediaFormSimple />
+            <MediaFormSimple projectId={projectId} />
             <ProjectPageFooter
               onSave={submitForm}
               onNext={props.onNext}

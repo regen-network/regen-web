@@ -1,5 +1,4 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import { Field, Form, useFormikContext } from 'formik';
 
 import {
@@ -23,10 +22,14 @@ export interface MediaErrorsSimple extends MediaBaseErrors {
 }
 
 /** Simplified media form content for new project-page flow */
-const MediaFormSimple = (): JSX.Element => {
+
+const MediaFormSimple = ({
+  projectId,
+}: {
+  projectId?: string;
+}): JSX.Element => {
   const { classes } = useMediaFormStyles();
   const apiServerUrl = getApiUri();
-  const { projectId } = useParams();
   const { values } = useFormikContext<MediaValuesSimple>();
 
   const imgDefaultProps: Partial<ImageUploadProps> = {

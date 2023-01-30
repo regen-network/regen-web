@@ -18,7 +18,7 @@ const Media = (): JSX.Element => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
-  const { metadata, metadataSubmit } = useProjectWithMetadata({
+  const { offChainProject, metadata, metadataSubmit } = useProjectWithMetadata({
     projectId,
     isEdit,
     projectEditSubmit,
@@ -77,6 +77,7 @@ const Media = (): JSX.Element => {
         initialValues={getInitialFormValues()}
         onNext={navigateNext}
         onPrev={navigatePrev}
+        projectId={offChainProject?.id}
       />
     </ProjectFormTemplate>
   );

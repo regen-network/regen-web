@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import isEmpty from 'lodash/isEmpty';
 
 import { ProfileFormValues } from 'web-components/lib/components/modal/ProfileModal';
 
@@ -52,7 +53,7 @@ const useRolesSubmit = ({
         const existingDeveloperWallet =
           existingDeveloperParty?.walletByWalletId;
         let doUpdateMetadata = false;
-        if (developer) {
+        if (!isEmpty(developer)) {
           // 1. Handle wallet creation / update
           // This will just fail if there's already a wallet existing with given addr
           let walletId;

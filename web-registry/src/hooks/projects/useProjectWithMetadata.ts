@@ -65,14 +65,14 @@ export const useProjectWithMetadata = ({
   // In project creation mode, we query the off-chain project since there's no on-chain project yet.
   // In this case, the router param projectId is the off-chain project uuid.
   const create = !!projectId && !isEdit;
-  const { data: projectByIdRes } = useQuery(
+  const { data: projectByOffChainIdRes } = useQuery(
     getProjectByIdQuery({
       client: graphqlClient,
       enabled: create,
       id: projectId,
     }),
   );
-  const projectById = projectByIdRes?.data?.projectById;
+  const projectById = projectByOffChainIdRes?.data?.projectById;
   if (create && projectById) {
     offChainProject = projectById;
     metadata = projectById.metadata;

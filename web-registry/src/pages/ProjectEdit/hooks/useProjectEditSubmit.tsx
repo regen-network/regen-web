@@ -3,7 +3,6 @@ import { MsgUpdateProjectMetadata } from '@regen-network/api/lib/generated/regen
 
 import { generateIri } from 'lib/db/api/metadata-graph';
 
-// import { ProjectMetadataIntersectionLD } from 'lib/db/types/json-ld';
 import { OnTxSuccessfulProps } from 'pages/Dashboard/MyEcocredits/MyEcocredits.types';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 

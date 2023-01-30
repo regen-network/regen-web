@@ -185,16 +185,14 @@ const useRolesSubmit = ({
   return { rolesSubmit };
 };
 
-function stripPartyIds(
-  values: ProfileFormValues | undefined,
-): ProfileFormValues | undefined {
-  delete values?.id;
+function stripPartyIds(values: ProfileFormValues): ProfileFormValues {
+  delete values.id;
 
   return values;
 }
 
 function stripIds(values: RolesValues): RolesValues {
-  if (values) {
+  if (values['regen:projectDeveloper']) {
     return {
       'regen:projectDeveloper': stripPartyIds(values['regen:projectDeveloper']),
     };

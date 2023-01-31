@@ -2,6 +2,8 @@ export const STATUS_PENDING = 'pending';
 export const STATUS_COMPLETE = 'complete';
 export const STATUS_ERROR = 'error';
 export const TX_STATUS_REFRESH_INTERVAL = 10000;
+export const ONE_MINUTE_MS = 60000;
+export const TWO_MINUTE_MS = ONE_MINUTE_MS * 2;
 
 export const BRIDGED_STATUSES = {
   regen_hash_not_found: STATUS_PENDING,

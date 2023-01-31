@@ -22,10 +22,15 @@ import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllC
 import {
   BRIDGED_STATUSES,
   STATUS_PENDING,
+  TWO_MINUTE_MS,
   TX_STATUS_REFRESH_INTERVAL,
 } from '../BridgedEcocreditsTable.constants';
 import { TxCredits, TxWithHash } from '../BridgedEcocreditsTable.types';
-import { hasMessages, isQueryEnabled } from '../BridgedEcocreditsTable.utils';
+import {
+  hasMessages,
+  isQueryEnabled,
+  isTimestampBelowDuration,
+} from '../BridgedEcocreditsTable.utils';
 
 interface Props {
   address?: string;
@@ -76,7 +81,7 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
       .map(
         (tx, index): TxWithHash => ({
           ...tx,
-          txHash: txsEventData.txResponses[index].txhash,
+          txResponse: txsEventData.txResponses[index],
         }),
       )
       .filter(tx => !!tx.body) ?? [];
@@ -85,11 +90,17 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
   const txsStatusResult = useQueries({
     queries: txsWithBody.map((tx, index) =>
       getBridgeTxStatusQuery({
-        request: { txHash: tx.txHash },
+        request: { txHash: tx.txResponse.txhash },
         enabled: isQueryEnabled({ page, queryIndex: index, rowsPerPage }),
-        refetchInterval: statusToRefetchRef.current[index]
-          ? TX_STATUS_REFRESH_INTERVAL
-          : false,
+        keepPreviousData: true,
+        refetchInterval:
+          statusToRefetchRef.current[index] ||
+          isTimestampBelowDuration({
+            duration: TWO_MINUTE_MS,
+            timestamp: tx.txResponse.timestamp,
+          })
+            ? TX_STATUS_REFRESH_INTERVAL
+            : false,
       }),
     ),
   });
@@ -173,10 +184,8 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
       project: isProjectsLoading ? undefined : projects[index]?.project,
       sanityCreditClassData: creditClassData,
       credit,
-      txStatus: txsStatusResult[credit.txIndex].isFetching
-        ? undefined
-        : txsStatusResult[credit.txIndex]?.data,
-      txResponse: txsEventData?.txResponses[credit.txIndex],
+      txStatus: txsStatusResult[credit.txIndex]?.data,
+      txResponse: txsWithBody[credit.txIndex].txResponse,
     }),
   );
 

@@ -9,7 +9,7 @@ interface SubmitProps {
   isValid: boolean;
   isSubmitting: boolean;
   onClose: () => void;
-  submitForm: () => void;
+  submitForm?: () => void;
   status?: {
     serverError: string;
   };
@@ -64,7 +64,7 @@ export default function Submit({
   status,
   isValid,
   submitCount,
-  submitForm,
+  submitForm = () => void 0,
   label = 'submit',
 }: SubmitProps): JSX.Element {
   const { classes } = useStyles();
@@ -104,6 +104,7 @@ export default function Submit({
             className={classes.button}
             disabled={(submitCount > 0 && !isValid) || isSubmitting}
             onClick={submitForm}
+            type="submit"
           >
             {label}
           </ContainedButton>

@@ -47,11 +47,14 @@ export const BridgedEcocreditsTable = ({
   accountAddress,
   privateAccess = false,
 }: Props): JSX.Element => {
-  const { bridgedCredits, isLoadingBridgedCredits } = useFetchBridgedEcocredits(
-    {
-      address: accountAddress,
-    },
-  );
+  const {
+    bridgedCredits,
+    isLoadingBridgedCredits,
+    paginationParams,
+    setPaginationParams,
+  } = useFetchBridgedEcocredits({
+    address: accountAddress,
+  });
 
   if (!bridgedCredits?.length && !isLoadingBridgedCredits) {
     return (
@@ -74,6 +77,8 @@ export const BridgedEcocreditsTable = ({
       <ActionsTable
         tableLabel="bridged ecocredits table"
         sx={tableStyles.rootOnlyTopBorder}
+        initialPaginationParams={paginationParams}
+        onTableChange={setPaginationParams}
         headerRows={[
           'Tx Hash',
           'Timestamp',
@@ -130,13 +135,15 @@ export const BridgedEcocreditsTable = ({
             <WithLoader isLoading={!row.projectName} variant="skeleton">
               <GreyText>{dayjs(row.txTimestamp).fromNow()}</GreyText>
             </WithLoader>,
-            <GreyText>
-              {row.status && (
-                <StatusLabel
-                  status={BRIDGED_STATUSES[row.status] as InfoLabelVariant}
-                />
-              )}
-            </GreyText>,
+            <WithLoader isLoading={row.status === undefined} variant="skeleton">
+              <GreyText>
+                {row.status && (
+                  <StatusLabel
+                    status={BRIDGED_STATUSES[row.status] as InfoLabelVariant}
+                  />
+                )}
+              </GreyText>
+            </WithLoader>,
             privateAccess && row.status && (
               <GreyText>
                 <Note status={row.status} txHash={row.destinationTxHash} />

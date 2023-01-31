@@ -5,7 +5,7 @@ import { GetBridgeTxStatusResponse } from 'lib/bridge';
 import { ReactQueryBuilderResponse } from '../../types/react-query.types';
 
 export type ReactQueryBridgeTxStatusResponse =
-  QueryObserverOptions<GetBridgeTxStatusResponse>;
+  QueryObserverOptions<GetBridgeTxStatusResponse | null>;
 
 export type ReactQueryBridgeTxStatusParams = {
   request: {

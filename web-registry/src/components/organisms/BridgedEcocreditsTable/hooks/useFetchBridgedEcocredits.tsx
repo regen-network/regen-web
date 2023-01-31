@@ -1,8 +1,13 @@
+import { useState } from 'react';
 import { OrderBy } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import { MsgBridge } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 import { useQueries, useQuery } from '@tanstack/react-query';
 
+import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
+import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/Table.constants';
+
 import { BridgedEcocredits } from 'types/ledger/ecocredit';
+import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { messageActionEquals } from 'lib/ecocredit/constants';
@@ -15,7 +20,7 @@ import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMet
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
 import { TxCredits, TxWithHash } from '../BridgedEcocreditsTable.types';
-import { hasMessages } from '../BridgedEcocreditsTable.utils';
+import { hasMessages, isQueryEnabled } from '../BridgedEcocreditsTable.utils';
 
 interface Props {
   address?: string;
@@ -24,10 +29,20 @@ interface Props {
 interface Output {
   bridgedCredits: BridgedEcocredits[];
   isLoadingBridgedCredits: boolean;
+  setPaginationParams: UseStateSetter<TablePaginationParams>;
+  paginationParams: TablePaginationParams;
 }
 
 export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
   const { txClient, ecocreditClient } = useLedger();
+
+  const [paginationParams, setPaginationParams] =
+    useState<TablePaginationParams>({
+      page: 0,
+      rowsPerPage: DEFAULT_ROWS_PER_PAGE,
+      offset: 0,
+    });
+  const { page, rowsPerPage } = paginationParams;
 
   // AllCreditClasses
   const { data: creditClassData } = useQuery(
@@ -62,12 +77,16 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
 
   // TxsStatus
   const txsStatusResult = useQueries({
-    queries: txsWithBody.map(tx =>
+    queries: txsWithBody.map((tx, index) =>
       getBridgeTxStatusQuery({
         request: { txHash: tx.txHash },
+        enabled: isQueryEnabled({ page, queryIndex: index, rowsPerPage }),
       }),
     ),
   });
+  const isTxsStatusLoading = txsStatusResult.some(
+    txStatusResult => txStatusResult.isFetching,
+  );
 
   // Messages
   const txMessages = txsWithBody
@@ -132,8 +151,6 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
     metadataResult => metadataResult.isLoading,
   );
 
-  // normalizeBridgedEcocredits
-
   // Normalization
   // isLoading -> undefined: return empty strings in normalizer to trigger skeleton
   // !isLoading -> null/result: return results with field value different from empty strings and stop displaying the skeletons
@@ -144,10 +161,17 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
       project: isProjectsLoading ? undefined : projects[index]?.project,
       sanityCreditClassData: creditClassData,
       credit,
-      txStatus: txsStatusResult[index]?.data,
+      txStatus: isTxsStatusLoading
+        ? undefined
+        : txsStatusResult[credit.txIndex]?.data,
       txResponse: txsEventData?.txResponses[credit.txIndex],
     }),
   );
 
-  return { bridgedCredits, isLoadingBridgedCredits: isLoading };
+  return {
+    bridgedCredits,
+    isLoadingBridgedCredits: isLoading,
+    paginationParams,
+    setPaginationParams,
+  };
 };

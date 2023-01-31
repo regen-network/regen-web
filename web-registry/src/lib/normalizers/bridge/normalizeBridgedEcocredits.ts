@@ -19,7 +19,7 @@ interface Params {
   metadata?: any | null;
   sanityCreditClassData?: AllCreditClassQuery;
   batch?: BatchInfo | null;
-  txStatus?: GetBridgeTxStatusResponse;
+  txStatus?: GetBridgeTxStatusResponse | null;
   txResponse?: TxResponse;
   credit: TxCredits;
 }

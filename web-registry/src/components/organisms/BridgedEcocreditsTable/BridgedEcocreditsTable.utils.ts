@@ -11,3 +11,19 @@ export const hasMessages = (
 ): txMessages is TxMessages => {
   return !!txMessages.messages;
 };
+
+type IsQueryEnabledParams = {
+  page: number;
+  rowsPerPage: number;
+  queryIndex: number;
+};
+
+export const isQueryEnabled = ({
+  page,
+  queryIndex,
+  rowsPerPage,
+}: IsQueryEnabledParams): boolean => {
+  return (
+    page * rowsPerPage <= queryIndex && queryIndex < (page + 1) * rowsPerPage
+  );
+};

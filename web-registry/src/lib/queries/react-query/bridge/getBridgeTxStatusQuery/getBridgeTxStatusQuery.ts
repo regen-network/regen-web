@@ -12,9 +12,11 @@ export const getBridgeTxStatusQuery = ({
 }: ReactQueryBridgeTxStatusParams): ReactQueryBridgeTxStatusResponse => ({
   queryKey: [BRIDGE_TX_STATUS_QUERY_KEY, request?.txHash],
   queryFn: async () => {
-    const bridgeTxStatus = await getBridgeTxStatus(request?.txHash);
-
-    return bridgeTxStatus;
+    try {
+      return await getBridgeTxStatus(request?.txHash);
+    } catch (error) {
+      return null;
+    }
   },
   ...params,
 });

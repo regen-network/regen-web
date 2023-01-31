@@ -6,8 +6,8 @@ export const getBridgeTxStatus = async (
   hash: string,
 ): Promise<
   | {
-      tx_hash: string;
-      destination_tx_hash: string;
+      regen_tx_hash: string;
+      evm_tx_hash: string;
       status: BridgedTxStatus;
     }
   | undefined
@@ -18,7 +18,7 @@ export const getBridgeTxStatus = async (
   }
   try {
     const { data } = await axios
-      .get(`${apiUri}/regen/events/${hash}/status`)
+      .get(`${apiUri}/regen/events/${hash}`)
       .catch(error => {
         if (error.response) {
           // The request was made and the server responded with a status code
@@ -34,8 +34,8 @@ export const getBridgeTxStatus = async (
             return {
               data: {
                 status: 'regen_hash_not_found',
-                tx_hash: hash,
-                destination_tx_hash: '',
+                regen_tx_hash: hash,
+                evm_tx_hash: '',
               },
             };
           }

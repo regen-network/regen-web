@@ -240,7 +240,7 @@ export const getBridgedEcocreditsForAccount = async (
         const txStatus = await getBridgeTxStatus(res.txResponses[i].txhash);
 
         status = txStatus?.status;
-        destinationTxHash = txStatus?.destination_tx_hash;
+        destinationTxHash = txStatus?.evm_tx_hash;
         const messages = txBody.messages.filter(
           m => m.typeUrl === `/${MsgBridge.$type}`,
         );

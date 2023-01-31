@@ -13,7 +13,7 @@ import {
 } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
-import type { FormValues as CreditSendFormValues } from 'components/organisms/CreditSendForm/CreditSendForm';
+import type { CreditSendFormSchemaType } from 'components/organisms/CreditSendForm/CreditSendForm.schema';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import { SEND_HEADER } from '../MyEcocredits.constants';
@@ -30,7 +30,7 @@ type Props = {
   setTxModalTitle: UseStateSetter<string | undefined>;
 };
 
-type ReturnType = (values: CreditSendFormValues) => Promise<void>;
+type ReturnType = (values: CreditSendFormSchemaType) => Promise<void>;
 
 const useCreditSendSubmit = ({
   accountAddress,
@@ -45,11 +45,11 @@ const useCreditSendSubmit = ({
 }: Props): ReturnType => {
   const { track } = useTracker();
   const creditSendSubmit = useCallback(
-    async (values: CreditSendFormValues): Promise<void> => {
+    async (values: CreditSendFormSchemaType): Promise<void> => {
       const batchDenom = credits[creditSendOpen].denom;
       track<'send2', Send2Event>('send2', {
         batchDenom,
-        quantity: values.totalAmount,
+        quantity: values.amount,
         enableAutoRetire: values.withRetire,
         creditClassId: credits[creditSendOpen].classId,
         projectId: credits[creditSendOpen].projectId,
@@ -57,21 +57,16 @@ const useCreditSendSubmit = ({
       });
       if (!accountAddress) return Promise.reject();
 
-      const {
-        withRetire,
-        recipient,
-        totalAmount,
-        retirementJurisdiction,
-        note,
-      } = values;
+      const { withRetire, recipient, amount, retireFields } = values;
+      const { retirementJurisdiction, note } = retireFields?.[0] || {};
       const msg = MsgSend.fromPartial({
         sender: accountAddress,
         recipient,
         credits: [
           {
             batchDenom,
-            tradableAmount: withRetire ? '' : totalAmount.toString(),
-            retiredAmount: withRetire ? totalAmount.toString() : '',
+            tradableAmount: withRetire ? '' : amount.toString(),
+            retiredAmount: withRetire ? amount.toString() : '',
             retirementJurisdiction: retirementJurisdiction,
           },
         ],
@@ -93,7 +88,7 @@ const useCreditSendSubmit = ({
             : undefined,
           creditClassId: batchInfo?.projectId.split('-')[0],
           enableAutoRetire: withRetire,
-          quantity: totalAmount,
+          quantity: amount,
           errorMessage: err?.message,
         });
       };
@@ -106,7 +101,7 @@ const useCreditSendSubmit = ({
             : undefined,
           creditClassId: batchInfo?.projectId.split('-')[0],
           enableAutoRetire: withRetire,
-          quantity: totalAmount,
+          quantity: amount,
         });
       };
       await signAndBroadcast(tx, () => setCreditSendOpen(-1), {
@@ -131,7 +126,7 @@ const useCreditSendSubmit = ({
             },
             {
               label: 'amount sent',
-              value: { name: totalAmount.toString() },
+              value: { name: amount.toString() },
             },
             {
               label: 'recipient',

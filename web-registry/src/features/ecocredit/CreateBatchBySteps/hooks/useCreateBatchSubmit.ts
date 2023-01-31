@@ -109,7 +109,7 @@ type SubmissionStatus =
 
 type CreateBatchFn = (data: CreateBatchFormValues) => Promise<void>;
 
-type ReturnType = {
+type Params = {
   status: SubmissionStatus;
   deliverTxResponse: DeliverTxResponse | undefined;
   error: string | undefined;
@@ -118,7 +118,7 @@ type ReturnType = {
   closeSubmitModal: () => void;
 };
 
-export default function useCreateBatchSubmit(): ReturnType {
+export default function useCreateBatchSubmit(): Params {
   const { api } = useLedger();
   const { wallet, signAndBroadcast, deliverTxResponse, error, setError } =
     useMsgClient(handleTxQueued, handleTxDelivered, handleError);

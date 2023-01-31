@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, useTheme } from '@mui/material';
 import { DefaultTheme as Theme } from '@mui/styles';
-import { Field, Form, Formik, FormikErrors } from 'formik';
+import { Field, Form, Formik, FormikErrors, useFormikContext } from 'formik';
 import { makeStyles } from 'tss-react/mui';
 
 import { Button } from '../buttons/Button';
@@ -85,7 +85,7 @@ function ProfileModal({
           }}
           validate={validate}
         >
-          {({ submitForm, isValid, isSubmitting }) => {
+          {({ submitForm }) => {
             return (
               <Form>
                 <ProfileOnBoardingCard>
@@ -132,8 +132,6 @@ function ProfileModal({
                 </ProfileOnBoardingCard>
                 <ProfileSubmitFooter
                   submitForm={submitForm}
-                  isValid={isValid}
-                  isSubmitting={isSubmitting}
                   onClose={onClose}
                 />
               </Form>
@@ -163,40 +161,44 @@ const ProfileOnBoardingCard = ({
 
 const ProfileSubmitFooter = ({
   submitForm,
-  isValid,
-  isSubmitting,
   onClose,
 }: {
   submitForm: (() => Promise<void>) & (() => Promise<any>);
-  isValid: boolean;
-  isSubmitting: boolean;
   onClose: () => void;
-}): JSX.Element => (
-  <Box
-    sx={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      width: '100%',
-      mt: 10,
-      py: 0,
-      px: { xs: 2.5, sm: 10 },
-    }}
-  >
-    <Button
-      onClick={onClose}
-      sx={{ color: 'info.main', fontSize: [12], padding: [0], border: 'none' }}
+}): JSX.Element => {
+  const { isValid, isSubmitting, touched } = useFormikContext();
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%',
+        mt: 10,
+        py: 0,
+        px: { xs: 2.5, sm: 10 },
+      }}
     >
-      cancel
-    </Button>
-    <ContainedButton
-      onClick={submitForm}
-      sx={{ px: [17] }}
-      disabled={!isValid || isSubmitting}
-    >
-      save
-    </ContainedButton>
-  </Box>
-);
+      <Button
+        onClick={onClose}
+        sx={{
+          color: 'info.main',
+          fontSize: [12],
+          padding: [0],
+          border: 'none',
+        }}
+      >
+        cancel
+      </Button>
+      <ContainedButton
+        onClick={submitForm}
+        sx={{ px: [17] }}
+        disabled={!isValid || isSubmitting || !Object.keys(touched).length}
+      >
+        save
+      </ContainedButton>
+    </Box>
+  );
+};
 
 export { ProfileModal, ProfileOnBoardingCard, ProfileSubmitFooter };

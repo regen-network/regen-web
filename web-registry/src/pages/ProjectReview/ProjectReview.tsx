@@ -12,7 +12,12 @@ import { Photo } from 'web-components/lib/components/cards/ReviewCard/ReviewCard
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 
-import { qudtUnit, qudtUnitMap } from 'lib/rdf';
+import {
+  getAnchoredProjectMetadata,
+  getUnanchoredProjectMetadata,
+  qudtUnit,
+  qudtUnitMap,
+} from 'lib/rdf';
 import { UrlType } from 'lib/rdf/types';
 
 import { Link } from '../../components/atoms';
@@ -26,7 +31,6 @@ import useMsgClient from '../../hooks/useMsgClient';
 import { getHashUrl } from '../../lib/block-explorer';
 import { isVCSCreditClass } from '../../lib/ecocredit/api';
 import { useCreateProjectContext } from '../ProjectCreate';
-import { useCompactMetadata } from './hooks/useCompactMetadata';
 import { useGetJurisdiction } from './hooks/useGetJurisdiction';
 import { useProjectCreateSubmit } from './hooks/useProjectCreateSubmit';
 import {
@@ -38,7 +42,7 @@ import { VCSMetadata } from './ProjectReview.VCSMetadata';
 export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
-  const { setDeliverTxResponse, creditClassId } = useCreateProjectContext();
+  const { setDeliverTxResponse } = useCreateProjectContext();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { data, loading } = useProjectByIdQuery({
@@ -78,6 +82,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
           id: projectId,
           projectPatch: {
             onChainId: projectOnChainId,
+            metadata: getUnanchoredProjectMetadata(metadata, projectOnChainId),
           },
         },
       },
@@ -90,9 +95,10 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { projectCreateSubmit } = useProjectCreateSubmit({ signAndBroadcast });
   const project = data?.projectById;
   const editPath = `/project-pages/${projectId}`;
-  const metadataRaw = project?.metadata;
-  const metadata = useCompactMetadata({ metadataRaw });
+  const metadata = project?.metadata;
   const jurisdiction = useGetJurisdiction({ metadata });
+
+  const creditClassId = metadata?.['regen:creditClassId'];
   const isVCS = isVCSCreditClass(creditClassId);
 
   const txHash = deliverTxResponse?.transactionHash;
@@ -107,11 +113,10 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
       );
       return;
     }
-
     await projectCreateSubmit({
       classId: creditClassId || '',
       admin: wallet?.address || '',
-      metadata,
+      metadata: getAnchoredProjectMetadata(metadata, creditClassId),
       jurisdiction: jurisdiction || '',
       referenceId,
     });
@@ -218,7 +223,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
       <ProjectPageFooter
         onSave={submit}
         onPrev={() => navigate(`${editPath}/metadata`)}
-        saveDisabled={isSubmitModalOpen}
+        isSubmitting={isSubmitModalOpen}
       />
       <ProcessingModal open={isSubmitModalOpen} onClose={closeSubmitModal} />
       {error && txModalTitle && (

@@ -1,31 +1,26 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { useProjectEditContext } from 'pages/ProjectEdit';
+import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
+
 import { BasicInfoForm, BasicInfoFormValues } from '../../components/organisms';
-import {
-  EditFormTemplate,
-  OnboardingFormTemplate,
-} from '../../components/templates';
-import {
-  useProjectByIdQuery,
-  useUpdateProjectByIdMutation,
-} from '../../generated/graphql';
-import { useProjectEditContext } from '../ProjectEdit';
+import { ProjectFormTemplate } from '../../components/templates/ProjectFormTemplate';
 
 const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
-  const [updateProject] = useUpdateProjectByIdMutation();
-  const { isEdit } = useProjectEditContext();
-
-  const { data } = useProjectByIdQuery({
-    variables: { id: projectId },
-    fetchPolicy: 'cache-and-network',
+  const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
+  const { metadata, metadataSubmit } = useProjectWithMetadata({
+    projectId,
+    isEdit,
+    projectEditSubmit,
+    navigateNext,
+    onChainProject,
   });
 
   let initialFieldValues: BasicInfoFormValues | undefined;
-  if (data?.projectById?.metadata) {
-    const metadata = data.projectById.metadata;
+  if (metadata) {
     initialFieldValues = {
       'schema:name': metadata['schema:name'],
       'regen:projectSize': metadata['regen:projectSize'],
@@ -39,49 +34,18 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
   function navigateNext(): void {
     navigate(`/project-pages/${projectId}/location`);
   }
-
-  async function submit(values: BasicInfoFormValues): Promise<void> {
-    const metadata = { ...data?.projectById?.metadata, ...values };
-    try {
-      await updateProject({
-        variables: {
-          input: {
-            id: projectId,
-            projectPatch: {
-              metadata,
-            },
-          },
-        },
-      });
-      !isEdit && navigate(`/project-pages/${projectId}/location`);
-    } catch (e) {
-      // TODO: Should we display the error banner here?
-      // https://github.com/regen-network/regen-registry/issues/554
-      // eslint-disable-next-line no-console
-      console.log(e);
-    }
-  }
-
-  const Form = (): JSX.Element => (
-    <BasicInfoForm
-      submit={submit}
-      initialValues={initialFieldValues}
-      onNext={navigateNext}
-    />
-  );
-
-  return isEdit ? (
-    <EditFormTemplate>
-      <Form />
-    </EditFormTemplate>
-  ) : (
-    <OnboardingFormTemplate
-      activeStep={0}
+  return (
+    <ProjectFormTemplate
+      isEdit={isEdit}
       title="Basic Info"
       saveAndExit={saveAndExit}
     >
-      <Form />
-    </OnboardingFormTemplate>
+      <BasicInfoForm
+        submit={metadataSubmit}
+        initialValues={initialFieldValues}
+        onNext={navigateNext}
+      />
+    </ProjectFormTemplate>
   );
 };
 

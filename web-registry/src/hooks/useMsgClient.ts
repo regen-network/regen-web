@@ -4,7 +4,7 @@ import { QueryBalanceResponse } from '@regen-network/api/lib/generated/cosmos/ba
 import { useQueryClient } from '@tanstack/react-query';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { ERRORS } from 'config/errors';
-import { useAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 
 import { errorCodeAtom } from 'lib/atoms/error.atoms';
 import { txSuccessfulModalAtom } from 'lib/atoms/modals.atoms';
@@ -58,9 +58,9 @@ export default function useMsgClient(
 ): MsgClientType {
   const { api, wallet } = useLedger();
   const [error, setError] = useState<string | undefined>();
-  const [, setTxSuccessfulModalAtom] = useAtom(txSuccessfulModalAtom);
-  const [, setErrorCodeAtom] = useAtom(errorCodeAtom);
-  const [, setIsWaitingForSigning] = useAtom(isWaitingForSigningAtom);
+  const setTxSuccessfulModalAtom = useSetAtom(txSuccessfulModalAtom);
+  const setErrorCodeAtom = useSetAtom(errorCodeAtom);
+  const setIsWaitingForSigning = useSetAtom(isWaitingForSigningAtom);
 
   const [deliverTxResponse, setDeliverTxResponse] = useState<
     DeliverTxResponse | undefined

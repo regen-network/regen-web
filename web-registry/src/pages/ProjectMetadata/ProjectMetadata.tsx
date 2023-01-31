@@ -5,10 +5,8 @@ import { omit } from 'lodash';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getProjectShapeIri } from 'lib/rdf';
 
-import {
-  EditFormTemplate,
-  OnboardingFormTemplate,
-} from '../../components/templates';
+import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
+
 import {
   useProjectByIdQuery,
   useShaclGraphByUriQuery,
@@ -55,20 +53,9 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
       updateProject,
     });
 
-    return isEdit ? (
-      <EditFormTemplate>
-        <ProjectMetadataSelectedForm
-          submit={submit}
-          metadata={metadata}
-          graphData={graphData}
-          isVCS={isVCS}
-          onNext={() => navigate(`${editPath}/review`)}
-          onPrev={() => navigate(`${editPath}/media`)}
-        />
-      </EditFormTemplate>
-    ) : (
-      <OnboardingFormTemplate
-        activeStep={0}
+    return (
+      <ProjectFormTemplate
+        isEdit={isEdit}
         title="Metadata"
         saveAndExit={saveAndExit}
       >
@@ -80,6 +67,6 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
           onNext={() => navigate(`${editPath}/review`)}
           onPrev={() => navigate(`${editPath}/media`)}
         />
-      </OnboardingFormTemplate>
+      </ProjectFormTemplate>
     );
   };

@@ -8,14 +8,8 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import OrganizationIcon from 'web-components/lib/components/icons/OrganizationIcon';
 import UserIcon from 'web-components/lib/components/icons/UserIcon';
 import FieldFormControl from 'web-components/lib/components/inputs/FieldFormControl';
-import {
-  IndividualFormValues,
-  IndividualModal,
-} from 'web-components/lib/components/modal/IndividualModal';
-import {
-  OrganizationFormValues,
-  OrganizationModal,
-} from 'web-components/lib/components/modal/OrganizationModal';
+import { IndividualFormValues } from 'web-components/lib/components/modal/IndividualModal';
+import { OrganizationFormValues } from 'web-components/lib/components/modal/OrganizationModal';
 import {
   ProfileFormValues,
   ProfileModal,
@@ -93,16 +87,11 @@ interface Props extends FieldProps {
   optional?: boolean | string;
   placeholder?: string;
   options?: FormValues[];
-  onSaveOrganization: (
-    v: OrganizationFormValues,
-  ) => Promise<OrganizationFormValues>;
-  onSaveIndividual: (v: IndividualFormValues) => Promise<IndividualFormValues>;
   onSaveProfile: (v: ProfileFormValues) => Promise<ProfileFormValues>;
   validateEntity: (values: FormValues) => Promise<FormikErrors<FormValues>>;
   mapboxToken: string;
   apiServerUrl: string;
   projectId: string;
-  profile?: boolean;
 }
 
 interface RoleOptionType {
@@ -155,20 +144,13 @@ const RoleField: React.FC<React.PropsWithChildren<Props>> = ({
   optional,
   placeholder,
   mapboxToken,
-  onSaveOrganization,
-  onSaveIndividual,
   onSaveProfile,
   validateEntity,
-  profile,
   apiServerUrl,
   projectId,
   ...fieldProps
 }) => {
   const { classes: styles, cx } = useStyles();
-  const [organizationEdit, setOrganizationEdit] =
-    useState<OrganizationFormValues | null>();
-  const [individualEdit, setIndividualEdit] =
-    useState<IndividualFormValues | null>(null);
   const [profileEdit, setProfileEdit] = useState<ProfileFormValues | null>(
     null,
   );
@@ -181,51 +163,23 @@ const RoleField: React.FC<React.PropsWithChildren<Props>> = ({
     setValue(selectedValue);
   }, [field.value, options]);
 
-  const saveOrganization = async (
-    org: OrganizationFormValues,
-  ): Promise<void> => {
-    var savedOrg = await onSaveOrganization(org);
-    closeOrganizationModal();
-    form.setFieldValue(field.name, savedOrg);
-    setFieldValueInOtherFields(form, field.name, savedOrg);
-  };
-
-  const saveIndividual = async (user: IndividualFormValues): Promise<void> => {
-    var savedUser = await onSaveIndividual(user);
-    closeIndividualModal();
-    form.setFieldValue(field.name, savedUser);
-    setFieldValueInOtherFields(form, field.name, savedUser);
-  };
-
   const saveProfile = async (profile: ProfileFormValues): Promise<void> => {
     var savedProfile = await onSaveProfile(profile);
     closeProfileModal();
     form.setFieldValue(field.name, savedProfile);
+    form.setFieldTouched(field.name, true);
     setFieldValueInOtherFields(form, field.name, savedProfile);
-  };
-
-  const closeOrganizationModal = (): void => {
-    setOrganizationEdit(null);
-  };
-
-  const closeIndividualModal = (): void => {
-    setIndividualEdit(null);
   };
 
   const closeProfileModal = (): void => {
     setProfileEdit(null);
   };
 
-  const editEntity = (entity: FormValues): void => {
-    if (isIndividual(entity)) {
-      setIndividualEdit(entity);
-    } else {
-      setOrganizationEdit(entity);
-    }
-  };
-
   const editProfile = (entity: ProfileFormValues): void => {
-    setProfileEdit(entity);
+    setProfileEdit({
+      ...entity,
+      'schema:image': entity['schema:image'] || getURLInitialValue(),
+    });
   };
 
   return (
@@ -254,17 +208,11 @@ const RoleField: React.FC<React.PropsWithChildren<Props>> = ({
                   className={styles.add}
                   onClick={e => {
                     e.stopPropagation();
-                    if (profile) {
-                      setProfileEdit({
-                        '@type': 'regen:Organization',
-                        'regen:showOnProjectPage': true,
-                        'schema:image': getURLInitialValue(),
-                      });
-                    } else {
-                      setOrganizationEdit({
-                        '@type': 'regen:Organization',
-                      });
-                    }
+                    setProfileEdit({
+                      '@type': 'regen:Organization',
+                      'regen:showOnProjectPage': true,
+                      'schema:image': getURLInitialValue(),
+                    });
                   }}
                 >
                   <OrganizationIcon />
@@ -279,17 +227,11 @@ const RoleField: React.FC<React.PropsWithChildren<Props>> = ({
                   className={styles.add}
                   onClick={e => {
                     e.stopPropagation();
-                    if (profile) {
-                      setProfileEdit({
-                        '@type': 'regen:Individual',
-                        'regen:showOnProjectPage': true,
-                        'schema:image': getURLInitialValue(),
-                      });
-                    } else {
-                      setIndividualEdit({
-                        '@type': 'regen:Individual',
-                      });
-                    }
+                    setProfileEdit({
+                      '@type': 'regen:Individual',
+                      'regen:showOnProjectPage': true,
+                      'schema:image': getURLInitialValue(),
+                    });
                   }}
                 >
                   <UserIcon />
@@ -342,27 +284,10 @@ const RoleField: React.FC<React.PropsWithChildren<Props>> = ({
       {value && value.id && !value.projectCreator && (
         <OutlinedButton
           className={styles.edit}
-          onClick={() => (profile ? editProfile(value) : editEntity(value))}
+          onClick={() => editProfile(value)}
         >
           edit entity
         </OutlinedButton>
-      )}
-      {organizationEdit && (
-        <OrganizationModal
-          organization={organizationEdit}
-          onClose={closeOrganizationModal}
-          onSubmit={saveOrganization}
-          validate={validateEntity}
-          mapboxToken={mapboxToken}
-        />
-      )}
-      {individualEdit && (
-        <IndividualModal
-          individual={individualEdit}
-          onClose={closeIndividualModal}
-          onSubmit={saveIndividual}
-          validate={validateEntity}
-        />
       )}
       {profileEdit && (
         <ProfileModal

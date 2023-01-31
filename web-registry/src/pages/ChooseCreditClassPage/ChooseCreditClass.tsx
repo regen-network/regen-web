@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Grid } from '@mui/material';
 
-import { getProjectPageBaseData, validate } from 'lib/rdf';
+import { getProjectCreateBaseData, validate } from 'lib/rdf';
 
 import { useCreateProjectContext } from 'pages/ProjectCreate';
 
@@ -33,7 +33,7 @@ const ChooseCreditClass: React.FC<React.PropsWithChildren<unknown>> = () => {
     creditClassOnChainId: string,
   ): Promise<void> {
     if (graphData?.shaclGraphByUri?.graph) {
-      const metadata = getProjectPageBaseData(creditClassOnChainId);
+      const metadata = getProjectCreateBaseData(creditClassOnChainId);
       setCreditClassId(creditClassOnChainId);
 
       try {

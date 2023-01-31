@@ -10,12 +10,13 @@ import SelectTextField from 'web-components/lib/components/inputs/SelectTextFiel
 import TextField from 'web-components/lib/components/inputs/TextField';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
+import { useProjectEditContext } from 'pages';
+
 // import { requiredMessage } from 'web-components/lib/components/inputs/validation'; TODO: regen-registry#1048
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
-import { useProjectEditContext } from '../../pages/ProjectEdit';
 // import {
 //   validate,
-//   getProjectPageBaseData,
+//   getProjectBaseData,
 //   getCompactedPath,
 // } from '../../lib/rdf'; TODO: regen-registry#1048
 import { ProjectPageFooter } from '../molecules';
@@ -95,7 +96,7 @@ const BasicInfoForm: React.FC<
         if (graphData?.shaclGraphByUri?.graph) {
           // TODO: Fix Validation. regen-registry#1048 .
           // Temporarily commented out to enable testing.
-          // const projectPageData = { ...getProjectPageBaseData(), ...values };
+          // const projectPageData = { ...getProjectBaseData(), ...values };
           // const report = await validate(
           //   graphData.shaclGraphByUri.graph,
           //   projectPageData,
@@ -119,19 +120,13 @@ const BasicInfoForm: React.FC<
         }
         return errors;
       }}
-      onSubmit={async (values, { setSubmitting, setTouched }) => {
-        setSubmitting(true);
-        try {
-          await submit(values);
-          setSubmitting(false);
-          setTouched({}); // reset to untouched
-          if (isEdit && confirmSave) confirmSave();
-        } catch (e) {
-          setSubmitting(false);
-        }
+      onSubmit={async (values, { setTouched }) => {
+        await submit(values);
+        setTouched({}); // reset to untouched
+        if (isEdit && confirmSave) confirmSave();
       }}
     >
-      {({ submitForm, submitCount, isValid, isSubmitting, touched }) => {
+      {({ submitForm, isValid, isSubmitting, dirty }) => {
         return (
           <Form>
             <OnBoardingCard>
@@ -182,9 +177,9 @@ const BasicInfoForm: React.FC<
             <ProjectPageFooter
               onSave={submitForm}
               onNext={onNext}
-              saveDisabled={
-                !isValid || isSubmitting || !Object.keys(touched).length
-              }
+              isValid={isValid}
+              isSubmitting={isSubmitting}
+              dirty={dirty}
             />
           </Form>
         );

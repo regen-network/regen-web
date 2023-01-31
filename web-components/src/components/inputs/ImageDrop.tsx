@@ -175,6 +175,7 @@ function ImageDrop({
   const handleDelete: IconButtonProps['onClick'] = e => {
     if (field.value) {
       form.setFieldValue(field.name, null);
+      form.setFieldTouched(field.name, true);
       setInitialImage('');
       setFileName('');
     }

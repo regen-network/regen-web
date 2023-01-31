@@ -33,7 +33,7 @@ type Props = {
   onTxBroadcast: () => void;
 };
 
-type ReturnType = (values: CreateSellOrderFormValues) => Promise<void>;
+type Params = (values: CreateSellOrderFormValues) => Promise<void>;
 
 const useCreateSellOrderSubmit = ({
   accountAddress,
@@ -43,7 +43,7 @@ const useCreateSellOrderSubmit = ({
   setCardItems,
   setTxButtonTitle,
   onTxBroadcast,
-}: Props): ReturnType => {
+}: Props): Params => {
   const { track } = useTracker();
   const reactQueryClient = useQueryClient();
   const createSellOrderSubmit = useCallback(

@@ -235,6 +235,10 @@ export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
                 element={<KeplrRoute component={ProjectLocation} />}
               />
               <Route path="story" element={<KeplrRoute component={Story} />} />
+              <Route
+                path="description"
+                element={<KeplrRoute component={Description} />}
+              />
               <Route path="media" element={<KeplrRoute component={Media} />} />
               <Route path="roles" element={<KeplrRoute component={Roles} />} />
               <Route

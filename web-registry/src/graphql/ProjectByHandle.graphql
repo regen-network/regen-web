@@ -15,6 +15,7 @@ fragment partyFields on Party {
     feature
   }
   walletByWalletId {
+    id
     addr
   }
 }

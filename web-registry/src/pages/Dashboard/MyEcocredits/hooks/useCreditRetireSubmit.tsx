@@ -29,7 +29,7 @@ type Props = {
   setTxModalTitle: UseStateSetter<string | undefined>;
 };
 
-type ReturnType = (values: CreditRetireFormValues) => Promise<void>;
+type Params = (values: CreditRetireFormValues) => Promise<void>;
 
 const useCreditRetireSubmit = ({
   accountAddress,
@@ -41,7 +41,7 @@ const useCreditRetireSubmit = ({
   setCardItems,
   setTxModalHeader,
   setTxModalTitle,
-}: Props): ReturnType => {
+}: Props): Params => {
   const { track } = useTracker();
   const creditRetireSubmit = useCallback(
     async (values: CreditRetireFormValues): Promise<void> => {

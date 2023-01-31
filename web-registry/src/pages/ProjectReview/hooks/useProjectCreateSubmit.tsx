@@ -18,11 +18,11 @@ interface Props {
   signAndBroadcast: SignAndBroadcastType;
 }
 
-type ReturnType = {
+type Params = {
   projectCreateSubmit: (values: MsgCreateProjectValues) => Promise<void>;
 };
 
-const useProjectCreateSubmit = ({ signAndBroadcast }: Props): ReturnType => {
+const useProjectCreateSubmit = ({ signAndBroadcast }: Props): Params => {
   const projectCreateSubmit = useCallback(
     async ({
       classId,

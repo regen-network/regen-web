@@ -1,34 +1,26 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import {
-  ProjectLocationForm,
-  ProjectLocationFormValues,
-} from '../../components/organisms';
-import {
-  EditFormTemplate,
-  OnboardingFormTemplate,
-} from '../../components/templates';
-import {
-  useProjectByIdQuery,
-  useUpdateProjectByIdMutation,
-} from '../../generated/graphql';
-import { useProjectEditContext } from '../ProjectEdit';
+import { useProjectEditContext } from 'pages/ProjectEdit';
+import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
+import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
+
+import { ProjectLocationForm } from '../../components/organisms';
 
 const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
-  const { isEdit } = useProjectEditContext();
-
-  const [updateProject] = useUpdateProjectByIdMutation();
-  const { data: projectData } = useProjectByIdQuery({
-    variables: { id: projectId },
-    fetchPolicy: 'cache-and-network',
+  const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
+  const { metadata, metadataSubmit } = useProjectWithMetadata({
+    projectId,
+    isEdit,
+    projectEditSubmit,
+    navigateNext,
+    onChainProject,
   });
 
   let initialFieldValues: any | undefined;
-  if (projectData?.projectById?.metadata) {
-    const metadata = projectData.projectById.metadata;
+  if (metadata) {
     initialFieldValues = {
       'schema:location': metadata?.['schema:location'] || {},
     };
@@ -40,17 +32,6 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
     // so it can access values: https://github.com/regen-network/regen-registry/issues/561
   }
 
-  async function submit(values: ProjectLocationFormValues): Promise<void> {
-    try {
-      await saveValues(values);
-      !isEdit && navigate(`/project-pages/${projectId}/roles`);
-    } catch (e) {
-      //   // TODO: Should we display the error banner here?
-      //   // https://github.com/regen-network/regen-registry/issues/554
-      console.error(e); // eslint-disable-line no-console
-    }
-  }
-
   function navigatePrev(): void {
     navigate(`/project-pages/${projectId}/basic-info`);
   }
@@ -59,44 +40,21 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
     navigate(`/project-pages/${projectId}/roles`);
   }
 
-  async function saveValues(values: ProjectLocationFormValues): Promise<void> {
-    const metadata = { ...projectData?.projectById?.metadata, ...values };
-
-    await updateProject({
-      variables: {
-        input: {
-          id: projectId,
-          projectPatch: {
-            metadata,
-          },
-        },
-      },
-    });
-  }
-
-  const Form = (): JSX.Element => (
-    <ProjectLocationForm
-      submit={submit}
-      saveAndExit={saveAndExit}
-      mapToken={process.env.REACT_APP_MAPBOX_TOKEN as string}
-      initialValues={initialFieldValues}
-      onPrev={navigatePrev}
-      onNext={navigateNext}
-    />
-  );
-
-  return isEdit ? (
-    <EditFormTemplate>
-      <Form />
-    </EditFormTemplate>
-  ) : (
-    <OnboardingFormTemplate
-      activeStep={0}
+  return (
+    <ProjectFormTemplate
+      isEdit={isEdit}
       title="Location"
       saveAndExit={saveAndExit}
     >
-      <Form />
-    </OnboardingFormTemplate>
+      <ProjectLocationForm
+        submit={metadataSubmit}
+        saveAndExit={saveAndExit}
+        mapToken={process.env.REACT_APP_MAPBOX_TOKEN as string}
+        initialValues={initialFieldValues}
+        onPrev={navigatePrev}
+        onNext={navigateNext}
+      />
+    </ProjectFormTemplate>
   );
 };
 

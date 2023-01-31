@@ -6,10 +6,11 @@ import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import LocationField from 'web-components/lib/components/inputs/LocationField';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 
-import { getCompactedPath, getProjectPageBaseData, validate } from 'lib/rdf';
+import { getCompactedPath, getProjectBaseData, validate } from 'lib/rdf';
+
+import { useProjectEditContext } from 'pages';
 
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
-import { useProjectEditContext } from '../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../molecules';
 
 export interface ProjectLocationFormValues {
@@ -44,7 +45,7 @@ const ProjectLocationForm: React.FC<
           ProjectLocationFormValues | { [path: string]: string }
         > = {};
         if (graphData?.shaclGraphByUri?.graph) {
-          const projectPageData = { ...getProjectPageBaseData(), ...values };
+          const projectPageData = { ...getProjectBaseData(), ...values };
           const report = await validate(
             graphData.shaclGraphByUri.graph,
             projectPageData,
@@ -61,19 +62,13 @@ const ProjectLocationForm: React.FC<
         }
         return errors;
       }}
-      onSubmit={async (values, { setSubmitting, setTouched }) => {
-        setSubmitting(true);
-        try {
-          await submit(values);
-          setSubmitting(false);
-          setTouched({}); // reset to untouched
-          if (isEdit && confirmSave) confirmSave();
-        } catch (e) {
-          setSubmitting(false);
-        }
+      onSubmit={async (values, { setTouched }) => {
+        await submit(values);
+        setTouched({}); // reset to untouched
+        if (isEdit && confirmSave) confirmSave();
       }}
     >
-      {({ submitForm, isValid, isSubmitting, touched, dirty }) => {
+      {({ submitForm, isValid, isSubmitting, dirty }) => {
         return (
           <Form>
             <OnBoardingCard>
@@ -90,12 +85,9 @@ const ProjectLocationForm: React.FC<
               onSave={submitForm}
               onPrev={props.onPrev}
               onNext={props.onNext}
-              saveDisabled={
-                !isValid ||
-                isSubmitting ||
-                !dirty ||
-                !Object.keys(touched).length
-              }
+              isValid={isValid}
+              isSubmitting={isSubmitting}
+              dirty={dirty}
             />
           </Form>
         );

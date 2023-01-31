@@ -7,7 +7,7 @@ export const getBridgeTxStatus = async (
 ): Promise<
   | {
       regen_tx_hash: string;
-      emv_tx_hash: string;
+      evm_tx_hash: string;
       status: BridgedTxStatus;
     }
   | undefined

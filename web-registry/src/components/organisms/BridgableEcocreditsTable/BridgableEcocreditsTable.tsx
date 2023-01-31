@@ -52,14 +52,10 @@ export const BridgableEcocreditsTable = ({
     BatchInfoWithBalance | undefined
   >();
 
-  const {
-    credits: bridgableCredits,
-    isLoadingCredits,
-    setPaginationParams,
-    paginationParams,
-  } = useFetchEcocredits({
+  const { credits: bridgableCredits, isLoadingCredits } = useFetchEcocredits({
     address: accountAddress,
     creditClassId: process.env.REACT_APP_BRIDGE_CREDIT_CLASS_ID,
+    isPaginatedQuery: false,
   });
 
   if (!bridgableCredits?.length && !isLoadingCredits) {
@@ -84,8 +80,6 @@ export const BridgableEcocreditsTable = ({
         <ActionsTable
           tableLabel="bridgable ecocredits table"
           sx={tableStyles.rootOnlyTopBorder}
-          initialPaginationParams={paginationParams}
-          isIgnoreOffset
           renderActionButtons={(i: number) => (
             <OutlinedButton
               startIcon={<BridgeIcon sx={{ width: '24px', height: '24px' }} />}
@@ -102,7 +96,6 @@ export const BridgableEcocreditsTable = ({
               {BRIDGE_ACTION}
             </OutlinedButton>
           )}
-          onTableChange={setPaginationParams}
           headerRows={[
             <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>{'Project'}</Box>,
             <Box

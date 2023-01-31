@@ -7,6 +7,7 @@ export const BRIDGED_STATUSES = {
   regen_hash_not_found: STATUS_PENDING,
   regen_ready: STATUS_PENDING,
   evm_broadcast: STATUS_PENDING,
+  evm_have_height: STATUS_PENDING,
   evm_confirmed: STATUS_COMPLETE,
   error: STATUS_ERROR,
 };

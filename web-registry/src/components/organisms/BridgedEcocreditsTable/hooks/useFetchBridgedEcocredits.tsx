@@ -19,7 +19,11 @@ import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQue
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
-import { TX_STATUS_REFRESH_INTERVAL } from '../BridgedEcocreditsTable.constants';
+import {
+  BRIDGED_STATUSES,
+  STATUS_PENDING,
+  TX_STATUS_REFRESH_INTERVAL,
+} from '../BridgedEcocreditsTable.constants';
 import { TxCredits, TxWithHash } from '../BridgedEcocreditsTable.types';
 import { hasMessages, isQueryEnabled } from '../BridgedEcocreditsTable.utils';
 
@@ -36,7 +40,7 @@ interface Output {
 
 export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
   const { txClient, ecocreditClient } = useLedger();
-  const shouldRefetchStatusRef = useRef(false);
+  const statusToRefetchRef = useRef<boolean[]>([]);
 
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
@@ -83,17 +87,17 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
       getBridgeTxStatusQuery({
         request: { txHash: tx.txHash },
         enabled: isQueryEnabled({ page, queryIndex: index, rowsPerPage }),
-        refetchInterval: shouldRefetchStatusRef?.current
+        refetchInterval: statusToRefetchRef.current[index]
           ? TX_STATUS_REFRESH_INTERVAL
           : false,
       }),
     ),
   });
-  const isTxsStatusLoading = txsStatusResult.some(
-    txStatusResult => txStatusResult.isFetching,
-  );
-  shouldRefetchStatusRef.current = txsStatusResult.some(
-    txsStatusResult => txsStatusResult?.data?.status === 'evm_broadcast',
+
+  statusToRefetchRef.current = txsStatusResult.map(
+    txsStatusResult =>
+      BRIDGED_STATUSES[txsStatusResult?.data?.status ?? 'evm_confirmed'] ===
+      STATUS_PENDING,
   );
 
   // Messages
@@ -169,7 +173,7 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
       project: isProjectsLoading ? undefined : projects[index]?.project,
       sanityCreditClassData: creditClassData,
       credit,
-      txStatus: isTxsStatusLoading
+      txStatus: txsStatusResult[credit.txIndex].isFetching
         ? undefined
         : txsStatusResult[credit.txIndex]?.data,
       txResponse: txsEventData?.txResponses[credit.txIndex],

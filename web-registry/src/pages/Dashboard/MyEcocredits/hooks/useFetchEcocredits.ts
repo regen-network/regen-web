@@ -29,11 +29,13 @@ interface Response {
 interface Props {
   address?: string;
   creditClassId?: string;
+  isPaginatedQuery?: boolean;
 }
 
 export const useFetchEcocredits = ({
   address,
   creditClassId,
+  isPaginatedQuery = true,
 }: Props): Response => {
   const { ecocreditClient } = useLedger();
   const reactQueryClient = useQueryClient();
@@ -54,14 +56,23 @@ export const useFetchEcocredits = ({
         client: ecocreditClient,
         request: {
           address: address ?? wallet?.address,
-          pagination: {
-            offset: page * rowsPerPage,
-            limit: rowsPerPage,
-            countTotal: true,
-          },
+          pagination: isPaginatedQuery
+            ? {
+                offset: page * rowsPerPage,
+                limit: rowsPerPage,
+                countTotal: true,
+              }
+            : undefined,
         },
       }),
-    [ecocreditClient, page, rowsPerPage, wallet?.address, address],
+    [
+      ecocreditClient,
+      page,
+      rowsPerPage,
+      wallet?.address,
+      address,
+      isPaginatedQuery,
+    ],
   );
   const { data: balancesData, isLoading: isLoadingCredits } =
     useQuery(balancesQuery);

@@ -44,7 +44,6 @@ import {
   QuerySupplyRequest,
   QuerySupplyResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { MsgBridge } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 import { QueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { uniq } from 'lodash';
@@ -52,7 +51,6 @@ import { uniq } from 'lodash';
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
-import { getBridgeTxStatus } from 'lib/bridge';
 import { getMetadata } from 'lib/db/api/metadata-graph';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getSupplyQuery } from 'lib/queries/react-query/ecocredit/getSupplyQuery/getSupplyQuery';
@@ -66,9 +64,7 @@ import type {
   BatchInfoWithBalance,
   BatchInfoWithSupply,
   BatchTotalsForProject,
-  BridgedEcocredits,
   ClassProjectInfo,
-  IBatchInfoWithClassProject,
 } from '../../types/ledger/ecocredit';
 import { expLedger, ledgerRESTUri } from '../ledger';
 import { ECOCREDIT_MESSAGE_TYPES, messageActionEquals } from './constants';

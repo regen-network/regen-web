@@ -23,7 +23,7 @@ import {
 
 import {
   getCompactedPath,
-  getProjectPageBaseData,
+  getProjectBaseData,
   getURLInitialValue,
   validate,
 } from 'lib/rdf';
@@ -420,7 +420,7 @@ const EntityDisplayForm: React.FC<
             }
             if (validateProject) {
               const projectPageData = {
-                ...getProjectPageBaseData(),
+                ...getProjectBaseData(),
                 ...values,
               };
               const report = await validate(
@@ -457,7 +457,7 @@ const EntityDisplayForm: React.FC<
           values,
           setFieldValue,
           setFieldTouched,
-          touched,
+          dirty,
         }) => {
           return (
             <Form translate="yes">
@@ -510,9 +510,9 @@ const EntityDisplayForm: React.FC<
                 onSave={submitForm}
                 onNext={props.onNext}
                 onPrev={props.onPrev}
-                saveDisabled={
-                  !isValid || isSubmitting || !Object.keys(touched).length
-                }
+                isValid={isValid}
+                isSubmitting={isSubmitting}
+                dirty={dirty}
               />
             </Form>
           );

@@ -20797,6 +20797,22 @@ export type CreateAddressMutation = (
   )> }
 );
 
+export type CreatePartyMutationVariables = Exact<{
+  input: CreatePartyInput;
+}>;
+
+
+export type CreatePartyMutation = (
+  { __typename?: 'Mutation' }
+  & { createParty?: Maybe<(
+    { __typename?: 'CreatePartyPayload' }
+    & { party?: Maybe<(
+      { __typename?: 'Party' }
+      & Pick<Party, 'id'>
+    )> }
+  )> }
+);
+
 export type CreateProjectMutationVariables = Exact<{
   input: CreateProjectInput;
 }>;
@@ -21095,7 +21111,7 @@ export type PartyFieldsFragment = (
     & Pick<Address, 'id' | 'feature'>
   )>, walletByWalletId?: Maybe<(
     { __typename?: 'Wallet' }
-    & Pick<Wallet, 'addr'>
+    & Pick<Wallet, 'id' | 'addr'>
   )> }
 );
 
@@ -21228,7 +21244,7 @@ export type ProjectByIdQuery = (
   { __typename?: 'Query' }
   & { projectById?: Maybe<(
     { __typename?: 'Project' }
-    & Pick<Project, 'metadata' | 'developerId' | 'originatorId' | 'landOwnerId' | 'stewardId' | 'addressId' | 'onChainId'>
+    & Pick<Project, 'id' | 'metadata' | 'developerId' | 'originatorId' | 'landOwnerId' | 'stewardId' | 'addressId' | 'onChainId'>
     & { partyByDeveloperId?: Maybe<(
       { __typename?: 'Party' }
       & PartyFieldsFragment
@@ -21264,7 +21280,7 @@ export type ProjectByOnChainIdQuery = (
   { __typename?: 'Query' }
   & { projectByOnChainId?: Maybe<(
     { __typename?: 'Project' }
-    & Pick<Project, 'metadata'>
+    & Pick<Project, 'id' | 'metadata'>
     & { eventsByProjectId: (
       { __typename?: 'EventsConnection' }
       & { nodes: Array<Maybe<(
@@ -21693,6 +21709,22 @@ export type UpdateUserByIdMutation = (
   )> }
 );
 
+export type UpdateWalletByIdMutationVariables = Exact<{
+  input: UpdateWalletByIdInput;
+}>;
+
+
+export type UpdateWalletByIdMutation = (
+  { __typename?: 'Mutation' }
+  & { updateWalletById?: Maybe<(
+    { __typename?: 'UpdateWalletPayload' }
+    & { wallet?: Maybe<(
+      { __typename?: 'Wallet' }
+      & Pick<Wallet, 'id'>
+    )> }
+  )> }
+);
+
 export const ProjectFragmentDoc = gql`
     fragment project on ProjectsConnection {
   nodes {
@@ -21752,6 +21784,7 @@ export const PartyFieldsFragmentDoc = gql`
     feature
   }
   walletByWalletId {
+    id
     addr
   }
 }
@@ -22193,6 +22226,41 @@ export function useCreateAddressMutation(baseOptions?: Apollo.MutationHookOption
 export type CreateAddressMutationHookResult = ReturnType<typeof useCreateAddressMutation>;
 export type CreateAddressMutationResult = Apollo.MutationResult<CreateAddressMutation>;
 export type CreateAddressMutationOptions = Apollo.BaseMutationOptions<CreateAddressMutation, CreateAddressMutationVariables>;
+export const CreatePartyDocument = gql`
+    mutation CreateParty($input: CreatePartyInput!) {
+  createParty(input: $input) {
+    party {
+      id
+    }
+  }
+}
+    `;
+export type CreatePartyMutationFn = Apollo.MutationFunction<CreatePartyMutation, CreatePartyMutationVariables>;
+
+/**
+ * __useCreatePartyMutation__
+ *
+ * To run a mutation, you first call `useCreatePartyMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreatePartyMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createPartyMutation, { data, loading, error }] = useCreatePartyMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreatePartyMutation(baseOptions?: Apollo.MutationHookOptions<CreatePartyMutation, CreatePartyMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreatePartyMutation, CreatePartyMutationVariables>(CreatePartyDocument, options);
+      }
+export type CreatePartyMutationHookResult = ReturnType<typeof useCreatePartyMutation>;
+export type CreatePartyMutationResult = Apollo.MutationResult<CreatePartyMutation>;
+export type CreatePartyMutationOptions = Apollo.BaseMutationOptions<CreatePartyMutation, CreatePartyMutationVariables>;
 export const CreateProjectDocument = gql`
     mutation CreateProject($input: CreateProjectInput!) {
   createProject(input: $input) {
@@ -22844,6 +22912,7 @@ export type ProjectByHandleQueryResult = Apollo.QueryResult<ProjectByHandleQuery
 export const ProjectByIdDocument = gql`
     query ProjectById($id: UUID!) {
   projectById(id: $id) {
+    id
     metadata
     developerId
     originatorId
@@ -22908,6 +22977,7 @@ export type ProjectByIdQueryResult = Apollo.QueryResult<ProjectByIdQuery, Projec
 export const ProjectByOnChainIdDocument = gql`
     query ProjectByOnChainId($onChainId: String!) {
   projectByOnChainId(onChainId: $onChainId) {
+    id
     eventsByProjectId(orderBy: DATE_ASC) {
       nodes {
         date
@@ -23557,3 +23627,38 @@ export function useUpdateUserByIdMutation(baseOptions?: Apollo.MutationHookOptio
 export type UpdateUserByIdMutationHookResult = ReturnType<typeof useUpdateUserByIdMutation>;
 export type UpdateUserByIdMutationResult = Apollo.MutationResult<UpdateUserByIdMutation>;
 export type UpdateUserByIdMutationOptions = Apollo.BaseMutationOptions<UpdateUserByIdMutation, UpdateUserByIdMutationVariables>;
+export const UpdateWalletByIdDocument = gql`
+    mutation UpdateWalletById($input: UpdateWalletByIdInput!) {
+  updateWalletById(input: $input) {
+    wallet {
+      id
+    }
+  }
+}
+    `;
+export type UpdateWalletByIdMutationFn = Apollo.MutationFunction<UpdateWalletByIdMutation, UpdateWalletByIdMutationVariables>;
+
+/**
+ * __useUpdateWalletByIdMutation__
+ *
+ * To run a mutation, you first call `useUpdateWalletByIdMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateWalletByIdMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateWalletByIdMutation, { data, loading, error }] = useUpdateWalletByIdMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateWalletByIdMutation(baseOptions?: Apollo.MutationHookOptions<UpdateWalletByIdMutation, UpdateWalletByIdMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateWalletByIdMutation, UpdateWalletByIdMutationVariables>(UpdateWalletByIdDocument, options);
+      }
+export type UpdateWalletByIdMutationHookResult = ReturnType<typeof useUpdateWalletByIdMutation>;
+export type UpdateWalletByIdMutationResult = Apollo.MutationResult<UpdateWalletByIdMutation>;
+export type UpdateWalletByIdMutationOptions = Apollo.BaseMutationOptions<UpdateWalletByIdMutation, UpdateWalletByIdMutationVariables>;

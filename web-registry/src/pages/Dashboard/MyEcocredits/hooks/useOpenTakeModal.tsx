@@ -13,13 +13,13 @@ type Props = {
   setBasketTakeTokens: UseStateSetter<BasketTokens | undefined>;
 };
 
-type ReturnType = (rowIndex: number) => void;
+type Params = (rowIndex: number) => void;
 
 const useOpenTakeModal = ({
   basketsWithClasses,
   basketTokens,
   setBasketTakeTokens,
-}: Props): ReturnType => {
+}: Props): Params => {
   const { track } = useTracker();
   const openTakeModal = useCallback(
     (rowIndex: number): void => {

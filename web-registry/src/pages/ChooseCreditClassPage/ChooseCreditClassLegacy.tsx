@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { getProjectPageBaseData, validate } from 'lib/rdf';
+import { getProjectBaseData, validate } from 'lib/rdf';
 
 import {
   useAllCreditClassesQuery,
@@ -30,7 +30,7 @@ const ChooseCreditClassLegacy: React.FC<React.PropsWithChildren<unknown>> =
       creditClassUri: string,
     ): Promise<void> {
       if (graphData?.shaclGraphByUri?.graph) {
-        const metadata = getProjectPageBaseData();
+        const metadata = getProjectBaseData();
         metadata['regen:creditClass'] = {
           '@type': 'regen:CreditClass',
           '@id': creditClassUri,

@@ -34,7 +34,7 @@ type Props = {
   setTxModalDescription: UseStateSetter<string>;
 };
 
-type ReturnType = (values: BridgeFormValues) => Promise<void>;
+type Params = (values: BridgeFormValues) => Promise<void>;
 
 const useCreditBridgeSubmit = ({
   accountAddress,
@@ -46,7 +46,7 @@ const useCreditBridgeSubmit = ({
   setTxModalTitle,
   setTxButtonTitle,
   setTxModalDescription,
-}: Props): ReturnType => {
+}: Props): Params => {
   const { track } = useTracker();
 
   const creditBridgeSubmit = useCallback(

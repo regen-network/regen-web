@@ -238,6 +238,38 @@ export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
               path="entity-display"
               element={<KeplrRoute component={EntityDisplay} />}
             />
+<<<<<<< HEAD
+=======
+            <Route
+              path="review"
+              element={<KeplrRoute component={ProjectReview} />}
+            />
+            <Route
+              path="finished"
+              element={<KeplrRoute component={ProjectFinished} />}
+            />
+            <Route path="edit" element={<KeplrRoute component={ProjectEdit} />}>
+              <Route
+                path="basic-info"
+                element={<KeplrRoute component={BasicInfo} />}
+              />
+              <Route
+                path="location"
+                element={<KeplrRoute component={ProjectLocation} />}
+              />
+              <Route path="story" element={<KeplrRoute component={Story} />} />
+              <Route
+                path="description"
+                element={<KeplrRoute component={Description} />}
+              />
+              <Route path="media" element={<KeplrRoute component={Media} />} />
+              <Route path="roles" element={<KeplrRoute component={Roles} />} />
+              <Route
+                path="entity-display"
+                element={<KeplrRoute component={EntityDisplay} />}
+              />
+            </Route>
+>>>>>>> 7469ee85 (feat: Update project create/edit flows to use anchored/unanchored metadata and some bug fixes (#1746))
           </Route>
         </Route>
       </Route>

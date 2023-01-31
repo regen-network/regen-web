@@ -3,19 +3,19 @@ import { useProjectsWithOrders } from 'hooks/projects/useProjectsWithOrders';
 import { PROJECTS_PER_PAGE } from '../Projects.config';
 import { ProjectWithOrderData } from '../Projects.types';
 
-interface ReturnType {
+type Params = {
   projects: ProjectWithOrderData[];
   projectsCount?: number;
   pagesCount: number;
   loading: boolean;
-}
+};
 
-interface Props {
+type Props = {
   sort: string;
   offset?: number;
-}
+};
 
-export const useProjects = ({ offset = 0, sort }: Props): ReturnType => {
+export const useProjects = ({ offset = 0, sort }: Props): Params => {
   // get normalized projects with sell order data
   const { projectsWithOrderData, projectsCount, loading } =
     useProjectsWithOrders({

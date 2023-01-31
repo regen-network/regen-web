@@ -79,12 +79,26 @@ export function getCompactedPath(expandedPath: string): string | undefined {
   return;
 }
 
-export function getProjectPageBaseData(creditClassId?: string | null): any {
+// getProjectCreateBaseData returns the base metadata for a project that
+// is still in draft state (no on-chain project yet).
+// Its metadata, entirely stored in the off-chain table project.metadata for now,
+// has both unanchored and anchored data which is it has both types
+// - `regen:Project-Page` (for unanchored data)
+// - and `regen:CXX-Project` (for anchored data)
+export function getProjectCreateBaseData(creditClassId: string): any {
+  return {
+    ...defaultProjectContext,
+    '@type': [`regen:${creditClassId}-Project`, 'regen:Project-Page'],
+    'regen:creditClassId': creditClassId,
+  };
+}
+
+export function getProjectBaseData(creditClassId?: string | null): any {
   return {
     ...defaultProjectContext,
     '@type': creditClassId
       ? `regen:${creditClassId}-Project`
-      : ['regen:ProjectPage', 'regen:Project'],
+      : 'regen:Project-Page',
   };
 }
 
@@ -104,4 +118,63 @@ export function getProjectShapeIri(creditClassId?: string | null): string {
   return creditClassId
     ? `http://regen.network/${creditClassId}-ProjectShape`
     : 'http://regen.network/ProjectPageShape';
+}
+
+const unanchoredProjectContext = {
+  '@context': {
+    regen: 'http://regen.network/',
+    schema: 'http://schema.org/',
+  },
+};
+
+const unanchoredProjectKeys = [
+  'regen:creditClassId',
+  'schema:description',
+  'regen:previewPhoto',
+  'regen:galleryPhotos',
+  'regen:videoURL',
+  'schema:creditText',
+];
+
+function getFilteredProjectMetadata(
+  metadata: object,
+  anchored: boolean = true,
+): object {
+  return Object.fromEntries(
+    Object.entries(metadata).filter(([key]) => {
+      const unanchored = unanchoredProjectKeys.includes(key);
+      if (anchored) {
+        return !unanchored;
+      } else {
+        return unanchored;
+      }
+    }),
+  );
+}
+
+// TODO update metadata type and return type
+export function getAnchoredProjectMetadata(
+  metadata: object,
+  creditClassId?: string,
+): object {
+  const filtered = getFilteredProjectMetadata(metadata);
+  return {
+    ...filtered,
+    ...defaultProjectContext,
+    '@type': `regen:${creditClassId}-Project`,
+  };
+}
+
+// TODO update metadata type and return type
+export function getUnanchoredProjectMetadata(
+  metadata: object,
+  onChainId: string,
+): object {
+  const filtered = getFilteredProjectMetadata(metadata, false);
+  return {
+    ...filtered,
+    ...unanchoredProjectContext,
+    '@type': 'regen:Project-Page',
+    '@id': `${window.location.origin}/project/${onChainId}`,
+  };
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { isIndividual } from 'components/molecules/RoleField/RoleField';
+import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
 
 import {
   DisplayValues,
@@ -9,10 +10,6 @@ import {
   EntityDisplayValues,
   EntityFieldName,
 } from '../../components/organisms';
-import {
-  EditFormTemplate,
-  OnboardingFormTemplate,
-} from '../../components/templates';
 import {
   useProjectByIdQuery,
   useUpdatePartyByIdMutation,
@@ -122,28 +119,19 @@ const EntityDisplay: React.FC<React.PropsWithChildren<unknown>> = () => {
       // https://github.com/regen-network/regen-registry/issues/554
     }
   }
-
-  const Form = (): JSX.Element => (
-    <EntityDisplayForm
-      submit={submit}
-      initialValues={initialValues}
-      onNext={navigateNext}
-      onPrev={navigatePrev}
-    />
-  );
-
-  return isEdit ? (
-    <EditFormTemplate>
-      <Form />
-    </EditFormTemplate>
-  ) : (
-    <OnboardingFormTemplate
-      activeStep={0}
+  return (
+    <ProjectFormTemplate
+      isEdit={isEdit}
       title="Entity Display"
       saveAndExit={saveAndExit}
     >
-      <Form />
-    </OnboardingFormTemplate>
+      <EntityDisplayForm
+        submit={submit}
+        initialValues={initialValues}
+        onNext={navigateNext}
+        onPrev={navigatePrev}
+      />
+    </ProjectFormTemplate>
   );
 };
 

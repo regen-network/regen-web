@@ -32,7 +32,7 @@ type Props = {
   }: OnTxSuccessfulProps) => void;
 };
 
-type ReturnType = (values: BasketPutFormValues) => Promise<void>;
+type Params = (values: BasketPutFormValues) => Promise<void>;
 
 const useBasketPutSubmit = ({
   accountAddress,
@@ -43,7 +43,7 @@ const useBasketPutSubmit = ({
   onBroadcast,
   onTxSuccessful,
   onErrorCallback,
-}: Props): ReturnType => {
+}: Props): Params => {
   const { track } = useTracker();
 
   const basketPutSubmit = useCallback(

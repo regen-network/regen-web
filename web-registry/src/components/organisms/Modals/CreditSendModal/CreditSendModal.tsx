@@ -5,10 +5,10 @@ import { FormModalTemplate } from 'web-components/lib/components/modal/FormModal
 
 import {
   CreditSendForm,
-  CreditSendProps,
+  CreditSendFormProps,
 } from 'components/organisms/CreditSendForm/CreditSendForm';
 
-interface CreditSendModalProps extends RegenModalProps, CreditSendProps {}
+interface CreditSendModalProps extends RegenModalProps, CreditSendFormProps {}
 
 export const CREDIT_SEND_TITLE = 'Send';
 

@@ -1,50 +1,42 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useFieldArray, useFormState, useWatch } from 'react-hook-form';
+import { DevTool } from '@hookform/devtools';
 import { Box } from '@mui/system';
-import { Field, Form, Formik, FormikErrors } from 'formik';
 import { makeStyles } from 'tss-react/mui';
 
 import { Flex } from 'web-components/lib/components/box';
-import {
-  BottomCreditRetireFields,
-  BottomCreditRetireFieldsProps,
-  initialValues as initialValuesRetire,
-  RetireFormValues,
-} from 'web-components/lib/components/form/CreditRetireForm';
 import Submit from 'web-components/lib/components/form/Submit';
 import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
-import AmountField from 'web-components/lib/components/inputs/AmountField';
-import CheckboxLabel from 'web-components/lib/components/inputs/CheckboxLabel';
-import TextField from 'web-components/lib/components/inputs/TextField';
-import {
-  invalidMemoLength,
-  invalidRegenAddress,
-  isValidAddress,
-  requiredMessage,
-  requirementAgreement,
-  validateAmount,
-  validateMemoLength,
-} from 'web-components/lib/components/inputs/validation';
+import AmountField from 'web-components/lib/components/inputs/new/AmountField/AmountField';
+import CheckboxLabel from 'web-components/lib/components/inputs/new/CheckboxLabel/CheckboxLabel';
+import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
 import { RegenModalProps } from 'web-components/lib/components/modal';
 import InfoTooltip from 'web-components/lib/components/tooltip/InfoTooltip';
 import { Subtitle } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import AgreeErpaCheckbox from 'components/atoms/AgreeErpaCheckbox';
+import { IS_DEV } from 'lib/env';
+
+import AgreeErpaCheckbox from 'components/atoms/AgreeErpaCheckboxNew';
+import { BottomCreditRetireFields } from 'components/molecules/BottomCreditRetireFields/BottomCreditRetireFields';
+import Form from 'components/molecules/Form/Form';
+import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
+
+import {
+  creditSendFormInitialValues,
+  initialValuesRetire,
+} from './CreditSendForm.constants';
+import {
+  CreditSendFormSchema,
+  CreditSendFormSchemaType,
+} from './CreditSendForm.schema';
+import { validateCreditSendForm } from './CreditSendForm.utils';
 
 /**
  * Send sends tradable credits from one account to another account.
  * Sent credits can either be tradable or retired on receipt.
  * https://buf.build/regen/regen-ledger/docs/main:regen.ecocredit.v1#regen.ecocredit.v1.Msg.Send
  *
- * Validation:
- *    sender: must be a valid address, and their signature must be present in the transaction
- *    recipient: must be a valid address
- *    credits: must not be empty
- *    batch_denom: must be a valid batch denomination
- *    tradable_amount: must not be negative
- *    retired_amount: must not be negative
- *  if retired_amount is positive:
- *    retirement_location: must be a valid location
  */
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -53,112 +45,87 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
 }));
 
-export interface CreditSendProps extends BottomCreditRetireFieldsProps {
+export interface CreditSendFormProps {
   sender: string;
   batchDenom: string;
   availableTradableAmount: number;
-  onSubmit: (values: FormValues) => Promise<void>;
+  onSubmit: (values: CreditSendFormSchemaType) => Promise<void>;
   addressPrefix?: string;
-}
-
-interface FormProps extends CreditSendProps {
   onClose: RegenModalProps['onClose'];
+  mapboxToken: string;
 }
 
-export interface FormValues extends RetireFormValues {
-  sender: string;
-  recipient: string;
-  totalAmount: number;
-  withRetire?: boolean;
-  agreeErpa: boolean;
-}
-
-const CreditSendForm: React.FC<React.PropsWithChildren<FormProps>> = ({
-  sender,
-  batchDenom,
-  availableTradableAmount,
-  mapboxToken,
-  addressPrefix,
-  onClose,
-  onSubmit,
-}) => {
-  const { classes: styles } = useStyles();
-
-  const initialValues = {
+const CreditSendForm: React.FC<React.PropsWithChildren<CreditSendFormProps>> =
+  ({
     sender,
-    recipient: '',
-    totalAmount: 0,
-    withRetire: false,
-    ...initialValuesRetire,
-    agreeErpa: false,
-  };
+    batchDenom,
+    addressPrefix,
+    availableTradableAmount,
+    mapboxToken,
+    onClose,
+    onSubmit,
+  }) => {
+    const { classes: styles } = useStyles();
+    const form = useZodForm({
+      schema: CreditSendFormSchema({ addressPrefix }),
+      defaultValues: { ...creditSendFormInitialValues, sender },
+      mode: 'onBlur',
+    });
 
-  const validateHandler = (values: FormValues): FormikErrors<FormValues> => {
-    let errors: FormikErrors<FormValues> = {};
+    const withRetire = useWatch({ control: form.control, name: 'withRetire' });
+    const { isSubmitting, submitCount, isValid, errors } = useFormState({
+      control: form.control,
+    });
 
-    if (!values.sender) {
-      errors.sender = requiredMessage;
-    }
+    const { fields, append, remove } = useFieldArray({
+      name: 'retireFields',
+      control: form.control,
+    });
 
-    if (!values.recipient) {
-      errors.recipient = requiredMessage;
-    }
+    const setAmount = (value: number): void => {
+      form.setValue('amount', value);
+    };
 
-    if (values.recipient && !isValidAddress(values.recipient, addressPrefix)) {
-      errors.recipient = invalidRegenAddress;
-    }
+    useEffect(() => {
+      if (withRetire && fields.length === 0) {
+        append(initialValuesRetire);
+      }
+      if (!withRetire && fields.length > 0) {
+        remove(0);
+      }
+    }, [withRetire, fields, append, remove]);
 
-    // TODO: temporarily disable sending credits to the same account
-    if (
-      values.sender &&
-      values.recipient &&
-      values.sender === values.recipient
-    ) {
-      errors.recipient =
-        'The recipient address cannot be the same as the sender address';
-    }
-
-    const errAmount = validateAmount(
-      availableTradableAmount,
-      values.totalAmount,
-    );
-    if (errAmount) errors.totalAmount = errAmount;
-
-    if (!values.agreeErpa) errors.agreeErpa = requirementAgreement;
-
-    if (values.note && !validateMemoLength(values.note)) {
-      errors.note = invalidMemoLength;
-    }
-
-    return errors;
-  };
-
-  return (
-    <Formik
-      initialValues={initialValues}
-      validate={validateHandler}
-      onSubmit={async values => {
-        onSubmit(values);
-      }}
-    >
-      {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
-        <Form>
-          <Field
-            name="sender"
+    return (
+      <>
+        <Form
+          form={form}
+          onSubmit={data => {
+            const hasError = validateCreditSendForm({
+              availableTradableAmount,
+              setError: form.setError,
+              values: data,
+              addressPrefix,
+            });
+            if (!hasError) {
+              onSubmit(data);
+            }
+          }}
+        >
+          <TextField
             type="text"
             label="Sender"
-            component={TextField}
             disabled
+            {...form.register('sender')}
           />
-          <Field
-            name="recipient"
+          <TextField
             type="text"
             label="Recipient"
-            component={TextField}
+            helperText={errors.recipient?.message}
+            error={!!errors.recipient}
+            {...form.register('recipient')}
           />
 
           <AmountField
-            name={'totalAmount'}
             label={
               <Flex align="center">
                 <Box sx={{ mr: 1 }}>{'Amount of credits'}</Box>
@@ -177,17 +144,19 @@ const CreditSendForm: React.FC<React.PropsWithChildren<FormProps>> = ({
                 </InfoTooltip>
               </Flex>
             }
+            helperText={errors.amount?.message}
+            error={!!errors.amount}
             availableAmount={availableTradableAmount}
             denom={batchDenom}
+            onMaxClick={setAmount}
+            customInputProps={{ step: 'any' }}
+            {...form.register('amount')}
           />
 
-          <Field
-            component={CheckboxLabel}
-            type="checkbox"
-            name="withRetire"
+          <CheckboxLabel
             className={styles.checkboxLabel}
             label={
-              <Subtitle size="lg" color="primary.contrastText">
+              <Subtitle size="lg" color="primary.contrastText" as="span">
                 <Box sx={{ display: 'inline' }}>
                   Retire all credits upon transfer
                 </Box>{' '}
@@ -196,32 +165,36 @@ const CreditSendForm: React.FC<React.PropsWithChildren<FormProps>> = ({
                 </Box>
               </Subtitle>
             }
+            {...form.register('withRetire')}
           />
 
-          {values.withRetire && (
-            <>
-              <BottomCreditRetireFields
-                mapboxToken={mapboxToken}
-                arrayPrefix=""
-              />
-            </>
-          )}
+          {fields.map((field, index) => (
+            <BottomCreditRetireFields
+              key={field.id}
+              mapboxToken={mapboxToken}
+              fieldId={field.id}
+              fieldIndex={index}
+            />
+          ))}
 
-          <AgreeErpaCheckbox sx={{ mt: values.withRetire ? 10 : 6 }} />
+          <AgreeErpaCheckbox
+            sx={{ mt: withRetire ? 10 : 6 }}
+            error={!!errors.agreeErpa}
+            helperText={errors.agreeErpa?.message}
+            {...form.register('agreeErpa')}
+          />
 
           <Submit
             isSubmitting={isSubmitting}
             onClose={onClose}
-            status={status}
             isValid={isValid}
             submitCount={submitCount}
-            submitForm={submitForm}
             label={'Send'}
           />
         </Form>
-      )}
-    </Formik>
-  );
-};
+        {IS_DEV && <DevTool control={form.control} />}
+      </>
+    );
+  };
 
 export { CreditSendForm };

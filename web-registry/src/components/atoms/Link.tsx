@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { forwardRef, PropsWithChildren } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import { Box, Link as MuiLink, LinkProps as MuiLinkProps } from '@mui/material';
 
-interface LinkProps extends MuiLinkProps {
+interface LinkProps extends MuiLinkProps, PropsWithChildren {
   href: string; // require href
 }
 
@@ -11,31 +11,29 @@ interface LinkProps extends MuiLinkProps {
  * @returns a Material UI `Link` - will use React Router for local links.
  * Defaults to `target='_blank'` for external links.
  */
-export const Link: React.FC<React.PropsWithChildren<LinkProps>> = ({
-  href,
-  children,
-  target,
-  ...linkProps
-}) => {
-  if (!href || typeof href !== 'string') {
-    return <Box {...linkProps}>{children}</Box>;
-  }
+export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
+  ({ href, children, target, ...linkProps }, ref) => {
+    if (!href || typeof href !== 'string') {
+      return <Box {...linkProps}>{children}</Box>;
+    }
 
-  const isInternalLink = (href: string): boolean =>
-    !!href && href.startsWith('/');
-  const hasAnchor = href?.includes('#');
+    const isInternalLink = (href: string): boolean =>
+      !!href && href.startsWith('/');
+    const hasAnchor = href?.includes('#');
 
-  return isInternalLink(href) ? (
-    <MuiLink
-      {...linkProps}
-      component={hasAnchor ? HashLink : RouterLink}
-      to={href}
-    >
-      {children}
-    </MuiLink>
-  ) : (
-    <MuiLink {...linkProps} href={href} target={target || '_blank'}>
-      {children}
-    </MuiLink>
-  );
-};
+    return isInternalLink(href) ? (
+      <MuiLink
+        {...linkProps}
+        ref={ref}
+        component={hasAnchor ? HashLink : RouterLink}
+        to={href}
+      >
+        {children}
+      </MuiLink>
+    ) : (
+      <MuiLink {...linkProps} ref={ref} href={href} target={target || '_blank'}>
+        {children}
+      </MuiLink>
+    );
+  },
+);

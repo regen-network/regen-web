@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { OrderBy } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import { MsgBridge } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 import { useQueries, useQuery } from '@tanstack/react-query';
@@ -19,6 +19,7 @@ import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQue
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
+import { TX_STATUS_REFRESH_INTERVAL } from '../BridgedEcocreditsTable.constants';
 import { TxCredits, TxWithHash } from '../BridgedEcocreditsTable.types';
 import { hasMessages, isQueryEnabled } from '../BridgedEcocreditsTable.utils';
 
@@ -35,6 +36,7 @@ interface Output {
 
 export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
   const { txClient, ecocreditClient } = useLedger();
+  const shouldRefetchStatusRef = useRef(false);
 
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
@@ -81,11 +83,17 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
       getBridgeTxStatusQuery({
         request: { txHash: tx.txHash },
         enabled: isQueryEnabled({ page, queryIndex: index, rowsPerPage }),
+        refetchInterval: shouldRefetchStatusRef?.current
+          ? TX_STATUS_REFRESH_INTERVAL
+          : false,
       }),
     ),
   });
   const isTxsStatusLoading = txsStatusResult.some(
     txStatusResult => txStatusResult.isFetching,
+  );
+  shouldRefetchStatusRef.current = txsStatusResult.some(
+    txsStatusResult => txsStatusResult?.data?.status === 'evm_broadcast',
   );
 
   // Messages

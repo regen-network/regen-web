@@ -41,6 +41,7 @@ interface Output {
   isLoadingBridgedCredits: boolean;
   setPaginationParams: UseStateSetter<TablePaginationParams>;
   paginationParams: TablePaginationParams;
+  isRefetchingTxsStatus: boolean;
 }
 
 export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
@@ -104,12 +105,19 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
       }),
     ),
   });
+  const isFetchingTxsStatus = txsStatusResult.some(
+    txStatusResult => txStatusResult.isFetching,
+  );
 
   statusToRefetchRef.current = txsStatusResult.map(
     txsStatusResult =>
       BRIDGED_STATUSES[txsStatusResult?.data?.status ?? 'evm_confirmed'] ===
       STATUS_PENDING,
   );
+
+  const isRefetchingTxsStatus =
+    isFetchingTxsStatus &&
+    statusToRefetchRef.current.some(shouldRefetch => shouldRefetch);
 
   // Messages
   const txMessages = txsWithBody
@@ -194,5 +202,6 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
     isLoadingBridgedCredits: isLoading,
     paginationParams,
     setPaginationParams,
+    isRefetchingTxsStatus,
   };
 };

@@ -1,10 +1,11 @@
-import { Box } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 import dayjs from 'dayjs';
 import { loaderStyles } from 'styles/loader';
 import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
+import { Flex } from 'web-components/lib/components/box';
 import EmptyCartIcon from 'web-components/lib/components/icons/EmptyCartIcon';
 import { InfoLabelVariant } from 'web-components/lib/components/info-label/InfoLabel.types';
 import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
@@ -50,6 +51,7 @@ export const BridgedEcocreditsTable = ({
   const {
     bridgedCredits,
     isLoadingBridgedCredits,
+    isRefetchingTxsStatus,
     paginationParams,
     setPaginationParams,
   } = useFetchBridgedEcocredits({
@@ -82,7 +84,18 @@ export const BridgedEcocreditsTable = ({
         headerRows={[
           'Tx Hash',
           'Timestamp',
-          'Status',
+          <Flex alignItems="flex-end" justifyContent="center">
+            {'Status'}
+
+            <CircularProgress
+              color="secondary"
+              size={20}
+              sx={{
+                ml: 2,
+                visibility: isRefetchingTxsStatus ? 'visible' : 'hidden',
+              }}
+            />
+          </Flex>,
           privateAccess && (
             <Box display="flex" sx={{ width: { xs: '8rem', lg: '10rem' } }}>
               Note / Link

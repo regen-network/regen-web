@@ -37,6 +37,7 @@ import {
   BUY_SELL_ORDER_BUTTON,
   BUY_SELL_ORDER_TITLE,
   CANCEL_SELL_ORDER_ACTION,
+  STOREFRONT_SOCIAL_ITEMS,
 } from './Storefront.constants';
 import { SellOrderActions } from './Storefront.types';
 import { getCancelCardItems } from './Storefront.utils';
@@ -321,6 +322,7 @@ export const Storefront = (): JSX.Element => {
             <CelebrateIcon sx={{ width: '85px', height: '106px' }} />
           ) : undefined
         }
+        socialItems={STOREFRONT_SOCIAL_ITEMS}
       />
       <TxErrorModal
         error={error ?? ''}

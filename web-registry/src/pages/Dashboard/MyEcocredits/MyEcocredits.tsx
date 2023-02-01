@@ -63,6 +63,7 @@ import {
   CREATE_SELL_ORDER_SHORT,
   CREATE_SELL_ORDER_TITLE,
   ERROR_BUTTON,
+  SOCIAL_ITEMS_MAPPING,
 } from './MyEcocredits.constants';
 import { OnTxSuccessfulProps } from './MyEcocredits.types';
 import {
@@ -490,6 +491,7 @@ export const MyEcocredits = (): JSX.Element => {
           cardItems={cardItems}
           linkComponent={Link}
           onButtonClick={onButtonClick}
+          socialItems={SOCIAL_ITEMS_MAPPING[txModalHeader ?? '']}
         />
       )}
       <TxErrorModal

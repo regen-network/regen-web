@@ -23,6 +23,7 @@ import { Link } from 'components/atoms';
 import { BuyCreditsModal, BuyCreditsValues } from 'components/organisms';
 import { useMsgClient } from 'hooks';
 
+import { BUY_FLOW_SOCIAL_ITEMS } from './BuySellOrderFlow.constants';
 import { useFetchSellOrders } from './hooks/useFetchSellOrders';
 import { useSelectedProject } from './hooks/useSelectedProject';
 
@@ -228,6 +229,7 @@ export const BuySellOrderFlow = ({
         linkComponent={Link}
         onButtonClick={onTxSuccessButtonClick}
         icon={<CelebrateIcon sx={{ width: '85px', height: '106px' }} />}
+        socialItems={BUY_FLOW_SOCIAL_ITEMS}
       />
       <TxErrorModal
         error={error ?? ''}

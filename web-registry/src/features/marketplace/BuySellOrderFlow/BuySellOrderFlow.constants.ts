@@ -2,17 +2,7 @@ import LinkedInBadgeIcon from 'web-components/lib/components/icons/social/Linked
 import TwitterBadgeIcon from 'web-components/lib/components/icons/social/TwitterBadgeIcon';
 import { SocialItems } from 'web-components/lib/components/share-section/ShareSection.types';
 
-export const BUY_SELL_ORDER_HEADER = 'Congrats! Your purchase was successful.';
-export const BUY_SELL_ORDER_TITLE = 'Buy';
-export const BUY_SELL_ORDER_ACTION = 'BUY';
-export const BUY_SELL_ORDER_BUTTON = 'View your ecocredits';
-
-export const CANCEL_SELL_ORDER_HEADER = 'Your sell order was cancelled';
-export const CANCEL_SELL_ORDER_TITLE = 'Sell Order #';
-export const CANCEL_SELL_ORDER_ACTION = 'Cancel';
-export const CANCEL_SELL_ORDER_BUTTON = 'View all sell orders';
-
-export const STOREFRONT_SOCIAL_ITEMS: SocialItems = [
+export const BUY_FLOW_SOCIAL_ITEMS: SocialItems = [
   {
     Icon: TwitterBadgeIcon,
     name: 'Twitter',

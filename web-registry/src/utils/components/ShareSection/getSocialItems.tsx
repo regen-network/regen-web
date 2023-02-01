@@ -24,7 +24,7 @@ export const getSocialItems = ({
     {
       Icon: LinkedInBadgeIcon,
       name: 'LinkedIn',
-      href: `https://www.linkedin.com/sharing/share-offsite/?url=${linkedIn.url}}`,
+      href: `https://www.linkedin.com/sharing/share-offsite/?url=${linkedIn.url}`,
     },
   ];
 };

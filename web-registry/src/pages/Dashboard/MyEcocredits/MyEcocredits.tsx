@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SxProps, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
+import { getSocialItems } from 'utils/components/ShareSection/getSocialItems';
 
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
@@ -63,7 +64,7 @@ import {
   CREATE_SELL_ORDER_SHORT,
   CREATE_SELL_ORDER_TITLE,
   ERROR_BUTTON,
-  SOCIAL_ITEMS_MAPPING,
+  SOCIAL_TWITTER_TEXT_MAPPING,
 } from './MyEcocredits.constants';
 import { OnTxSuccessfulProps } from './MyEcocredits.types';
 import {
@@ -491,7 +492,9 @@ export const MyEcocredits = (): JSX.Element => {
           cardItems={cardItems}
           linkComponent={Link}
           onButtonClick={onButtonClick}
-          socialItems={SOCIAL_ITEMS_MAPPING[txModalHeader ?? '']}
+          socialItems={getSocialItems({
+            twitter: { text: SOCIAL_TWITTER_TEXT_MAPPING[txModalHeader ?? ''] },
+          })}
         />
       )}
       <TxErrorModal

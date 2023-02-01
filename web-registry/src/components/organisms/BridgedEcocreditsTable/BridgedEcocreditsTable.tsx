@@ -35,6 +35,7 @@ import {
   BRIDGED_STATUSES,
   CREDIT_BATCH_TOOLTIP,
   NO_BRIDGED_CREDITS,
+  STATUS_TOOLTIP,
 } from './BridgedEcocreditsTable.constants';
 import { Note } from './BridgedEcocreditsTable.Note';
 import { useFetchBridgedEcocredits } from './hooks/useFetchBridgedEcocredits';
@@ -85,14 +86,19 @@ export const BridgedEcocreditsTable = ({
           'Tx Hash',
           'Timestamp',
           <Flex alignItems="flex-end" justifyContent="center">
-            {'Status'}
+            <Box sx={{ mr: 1 }}>{'Status'}</Box>
+            <Box sx={{ mb: -1.5 }}>
+              <InfoTooltipWithIcon outlined title={STATUS_TOOLTIP} />
+            </Box>
 
             <CircularProgress
               color="secondary"
               size={20}
               sx={{
                 ml: 2,
-                visibility: isRefetchingTxsStatus ? 'visible' : 'hidden',
+                opacity: isRefetchingTxsStatus ? 1 : 0,
+                transitionProperty: 'opacity',
+                transitionDuration: isRefetchingTxsStatus ? '0s' : '3s',
               }}
             />
           </Flex>,

@@ -88,8 +88,16 @@ export const projectCard = (): JSX.Element => (
       comingSoon={false}
       areaUnit="hectares"
       imgSrc="/coorong.png"
-      tag="biodiversity"
       onClick={onClick}
+      purchaseInfo={{
+        sellInfo: {
+          creditsAvailable: 0,
+          creditsAvailableForUser: 1190,
+          pricePerTon: '17.20-24.20',
+        },
+      }}
+      creditsTooltip="These credits are sold out and will not be available in the future."
+      isSoldOut
       sx={{ maxWidth: 338, mr: 10, mb: 10 }}
     />
 

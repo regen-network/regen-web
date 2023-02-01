@@ -13,6 +13,7 @@ import { pxToRem } from 'web-components/lib/theme/muiTheme';
 
 import { useAllProjectsPageQuery } from 'generated/sanity-graphql';
 import { client as sanityClient } from 'lib/clients/sanity';
+import { useTracker } from 'lib/tracker/useTracker';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { GettingStartedResourcesSection } from 'components/molecules';
@@ -31,6 +32,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const { track } = useTracker();
 
   // Page index starts at 1 for route
   // Page index starts at 0 for logic
@@ -138,6 +140,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
                 apiServerUrl={API_URI}
                 truncateTitle={true}
                 sx={{ width: 400, height: 479 }}
+                track={track}
               />
             </Box>
           ))}

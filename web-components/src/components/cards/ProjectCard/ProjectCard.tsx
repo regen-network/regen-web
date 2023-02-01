@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Box, SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
-import { Buy1Event } from 'web-registry/src/lib/tracker/types';
-import { useTracker } from 'web-registry/src/lib/tracker/useTracker';
+import { Buy1Event, Track } from 'web-registry/src/lib/tracker/types';
 
 import { formatStandardInfo } from '../../../utils/format';
 import OutlinedButton from '../../buttons/OutlinedButton';
@@ -38,6 +37,7 @@ export interface ProjectCardProps extends MediaCardProps {
   imageStorageBaseUrl?: string;
   apiServerUrl?: string;
   sx?: SxProps<Theme>;
+  track: Track;
 }
 
 export function ProjectCard({
@@ -59,12 +59,12 @@ export function ProjectCard({
   imageStorageBaseUrl,
   apiServerUrl,
   sx,
+  track,
   ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
   const { classes } = useProjectCardStyles();
   const location = useLocation();
-  const { track } = useTracker();
 
   const [open, setOpen] = useState<boolean>(true);
 

@@ -1,1 +1,1 @@
-export { Dummy as default } from './GradientBadge';
+export { GradientBadge as default } from './GradientBadge';

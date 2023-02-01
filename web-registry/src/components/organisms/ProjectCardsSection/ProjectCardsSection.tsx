@@ -4,6 +4,7 @@ import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import Section from 'web-components/lib/components/section';
 
 import { Maybe, Scalars } from 'generated/sanity-graphql';
+import { useTracker } from 'lib/tracker/useTracker';
 
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 import WithLoader from 'components/atoms/WithLoader';
@@ -31,6 +32,7 @@ export function ProjectCardsSection({
   loading,
 }: Props): JSX.Element {
   const { classes } = useSectionStyles();
+  const { track } = useTracker();
 
   return (
     <Section
@@ -73,6 +75,7 @@ export function ProjectCardsSection({
                 apiServerUrl={API_URI}
                 truncateTitle={true}
                 sx={{ width: 400, height: 479 }}
+                track={track}
               />
             </Box>
           ))}

@@ -25,7 +25,7 @@ import {
   TWO_MINUTE_MS,
   TX_STATUS_REFRESH_INTERVAL,
 } from '../BridgedEcocreditsTable.constants';
-import { TxCredits, TxWithHash } from '../BridgedEcocreditsTable.types';
+import { TxCredits, TxWithResponse } from '../BridgedEcocreditsTable.types';
 import {
   hasMessages,
   isQueryEnabled,
@@ -76,11 +76,11 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
     }),
   );
 
-  // TxsBody
-  const txsWithBody: TxWithHash[] =
+  // TxsWithResponse
+  const txsWithResponse: TxWithResponse[] =
     txsEventData?.txs
       .map(
-        (tx, index): TxWithHash => ({
+        (tx, index): TxWithResponse => ({
           ...tx,
           txResponse: txsEventData.txResponses[index],
         }),
@@ -89,7 +89,7 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
 
   // TxsStatus
   const txsStatusResult = useQueries({
-    queries: txsWithBody.map((tx, index) =>
+    queries: txsWithResponse.map((tx, index) =>
       getBridgeTxStatusQuery({
         request: { txHash: tx.txResponse.txhash },
         enabled: isQueryEnabled({ page, queryIndex: index, rowsPerPage }),
@@ -120,7 +120,8 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
     statusToRefetchRef.current.some(shouldRefetch => shouldRefetch);
 
   // Messages
-  const txMessages = txsWithBody
+  // We save the index here in order to be able to map the credits to the txsWithResponse values at the end
+  const txMessages = txsWithResponse
     .map((tx, index) => ({
       txIndex: index,
       messages: tx.body?.messages.filter(
@@ -193,7 +194,7 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
       sanityCreditClassData: creditClassData,
       credit,
       txStatus: txsStatusResult[credit.txIndex]?.data,
-      txResponse: txsWithBody[credit.txIndex].txResponse,
+      txResponse: txsWithResponse[credit.txIndex].txResponse,
     }),
   );
 

@@ -3,7 +3,7 @@ import { Tx } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/tx';
 import { Any } from '@regen-network/api/lib/generated/google/protobuf/any';
 import { Credits } from '@regen-network/api/lib/generated/regen/ecocredit/v1/types';
 
-export interface TxWithHash extends Tx {
+export interface TxWithResponse extends Tx {
   txResponse: TxResponse;
 }
 

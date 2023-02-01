@@ -20,4 +20,4 @@ export const NO_BRIDGED_CREDITS = 'No bridged ecocredits found';
 export const AMOUNT_BRIDGED_TOOLTIP =
   'Amount bridged is the same as amount cancelled in the ledger documentation';
 export const STATUS_TOOLTIP =
-  'Status refresh automatically once every 10 seconds if in pending state.';
+  'Status refreshes automatically once every 10 seconds if in a pending state.';

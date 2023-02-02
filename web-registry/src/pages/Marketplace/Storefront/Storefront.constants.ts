@@ -8,5 +8,6 @@ export const CANCEL_SELL_ORDER_TITLE = 'Sell Order #';
 export const CANCEL_SELL_ORDER_ACTION = 'Cancel';
 export const CANCEL_SELL_ORDER_BUTTON = 'View all sell orders';
 
-export const STOREFRONT_TWITTER_TEXT =
-  'I+just+purchased+carbon+credits+on+%23RegenMarketplace+with+%40regen_network.+Let%27s+work+together+to+reduce+our+carbon+footprint.+Join+me+in+investing+in+a+regenerative+future%21+';
+export const STOREFRONT_TWITTER_TEXT = encodeURI(
+  "I just purchased carbon credits on #RegenMarketplace with @regen_network. Let's work together to reduce our carbon footprint. Join me in investing in a regenerative future! ",
+);

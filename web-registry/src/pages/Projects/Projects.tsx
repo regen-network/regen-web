@@ -28,8 +28,8 @@ import {
   PROJECTS_PER_PAGE,
   sortOptions,
 } from './Projects.config';
-import { SOLD_OUT_TOOLTIP } from './Projects.constants';
 import { ProjectWithOrderData } from './Projects.types';
+import { getCreditsTooltip } from './utils/getCreditsTooltip';
 import { getIsSoldeOut } from './utils/getIsSoldOut';
 
 export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
@@ -54,7 +54,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
     client: sanityClient,
   });
   const soldOutProjectsIds =
-    sanitySoldOutProjects?.allSoldOutProjects[0].soldOutProjectsList?.map(
+    sanitySoldOutProjects?.allSoldOutProjects?.[0]?.soldOutProjectsList?.map(
       project => String(project?.projectId),
     ) ?? [];
 
@@ -157,7 +157,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
                   sx={{ width: 400, height: 479 }}
                   track={track}
                   isSoldOut={isSoldOut}
-                  creditsTooltip={isSoldOut ? SOLD_OUT_TOOLTIP : undefined}
+                  creditsTooltip={getCreditsTooltip({ isSoldOut, project })}
                 />
               </Box>
             );

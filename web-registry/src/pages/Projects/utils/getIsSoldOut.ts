@@ -1,7 +1,7 @@
 import { ProjectWithOrderData } from '../Projects.types';
 
 type Params = {
-  project: ProjectWithOrderData;
+  project?: ProjectWithOrderData;
   soldOutProjectsIds: string[];
 };
 
@@ -10,7 +10,7 @@ export const getIsSoldeOut = ({
   soldOutProjectsIds,
 }: Params): boolean => {
   return (
-    project.purchaseInfo?.sellInfo?.creditsAvailable === 0 &&
-    soldOutProjectsIds.includes(project.id)
+    project?.purchaseInfo?.sellInfo?.creditsAvailable === 0 &&
+    soldOutProjectsIds.includes(project?.id)
   );
 };

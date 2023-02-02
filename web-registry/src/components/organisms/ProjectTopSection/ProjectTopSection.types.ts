@@ -35,4 +35,5 @@ export type ProjectTopSectionProps = {
   setPaginationParams: UseStateSetter<TablePaginationParams>;
   onChainProjectId?: string;
   loading?: boolean;
+  soldOutProjectsIds: string[];
 };

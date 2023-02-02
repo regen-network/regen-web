@@ -10,6 +10,7 @@ import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 
 import { Project } from 'generated/graphql';
+import { useAllSoldOutProjectsQuery } from 'generated/sanity-graphql';
 import { Maybe } from 'graphql/jsutils/Maybe';
 import { graphqlClient } from 'lib/clients/graphqlClient';
 import { getBatchesTotal } from 'lib/ecocredit/api';
@@ -60,6 +61,15 @@ function ProjectDetails(): JSX.Element {
 
   const gettingStartedResourcesSection =
     sanityProjectPageData?.allProjectPage?.[0]?.gettingStartedResourcesSection;
+
+  const { data: sanitySoldOutProjects } = useAllSoldOutProjectsQuery({
+    client: sanityClient,
+  });
+
+  const soldOutProjectsIds =
+    sanitySoldOutProjects?.allSoldOutProjects?.[0]?.soldOutProjectsList?.map(
+      project => String(project?.projectId),
+    ) ?? [];
 
   const { data: sanityCreditClassData } = useQuery(
     getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
@@ -258,6 +268,7 @@ function ProjectDetails(): JSX.Element {
         projectMetadata={projectMetadata}
         projectPageMetadata={offChainProjectMetadata}
         sanityCreditClassData={sanityCreditClassData}
+        soldOutProjectsIds={soldOutProjectsIds}
         batchData={{
           batches: batchesWithSupply,
           totals: batchesTotal,

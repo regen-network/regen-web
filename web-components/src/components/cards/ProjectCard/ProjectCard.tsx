@@ -240,7 +240,7 @@ export function ProjectCard({
                         {isSoldOut ? (
                           <GradientBadge label={SOLD_OUT} />
                         ) : (
-                          purchaseInfo.sellInfo.creditsAvailable || '-'
+                          purchaseInfo.sellInfo.creditsAvailable ?? '-'
                         )}
                         {creditsTooltip && (
                           <InfoTooltipWithIcon

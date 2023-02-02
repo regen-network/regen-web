@@ -11,7 +11,10 @@ import { Pagination } from 'web-components/lib/components/pagination/Pagination'
 import { Body, Subtitle } from 'web-components/lib/components/typography';
 import { pxToRem } from 'web-components/lib/theme/muiTheme';
 
-import { useAllProjectsPageQuery } from 'generated/sanity-graphql';
+import {
+  useAllProjectsPageQuery,
+  useAllSoldOutProjectsQuery,
+} from 'generated/sanity-graphql';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { useTracker } from 'lib/tracker/useTracker';
 
@@ -25,7 +28,9 @@ import {
   PROJECTS_PER_PAGE,
   sortOptions,
 } from './Projects.config';
+import { SOLD_OUT_TOOLTIP } from './Projects.constants';
 import { ProjectWithOrderData } from './Projects.types';
+import { getIsSoldeOut } from './utils/getIsSoldOut';
 
 export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { page: routePage } = useParams();
@@ -44,6 +49,14 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const gettingStartedResourcesSection =
     sanityProjectsPageData?.allProjectsPage?.[0]
       ?.gettingStartedResourcesSection;
+
+  const { data: sanitySoldOutProjects } = useAllSoldOutProjectsQuery({
+    client: sanityClient,
+  });
+  const soldOutProjectsIds =
+    sanitySoldOutProjects?.allSoldOutProjects[0].soldOutProjectsList?.map(
+      project => String(project?.projectId),
+    ) ?? [];
 
   const [sort, setSort] = useState<string>(sortOptions[0].value);
   const [selectedProject, setSelectedProject] =
@@ -120,30 +133,35 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
               </Flex>
             </Flex>
           </Flex>
-          {projects?.map(project => (
-            <Box key={project?.id}>
-              <ProjectCard
-                id={project?.id}
-                name={project?.name}
-                creditClassId={project?.creditClassId}
-                imgSrc={project?.imgSrc}
-                place={project?.place}
-                area={project?.area}
-                areaUnit={project?.areaUnit}
-                onButtonClick={() => {
-                  setSelectedProject(project);
-                  setIsBuyFlowStarted(true);
-                }}
-                purchaseInfo={project.purchaseInfo}
-                onClick={() => navigate(`/project/${project.id}`)}
-                imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
-                apiServerUrl={API_URI}
-                truncateTitle={true}
-                sx={{ width: 400, height: 479 }}
-                track={track}
-              />
-            </Box>
-          ))}
+          {projects?.map(project => {
+            const isSoldOut = getIsSoldeOut({ project, soldOutProjectsIds });
+            return (
+              <Box key={project?.id}>
+                <ProjectCard
+                  id={project?.id}
+                  name={project?.name}
+                  creditClassId={project?.creditClassId}
+                  imgSrc={project?.imgSrc}
+                  place={project?.place}
+                  area={project?.area}
+                  areaUnit={project?.areaUnit}
+                  onButtonClick={() => {
+                    setSelectedProject(project);
+                    setIsBuyFlowStarted(true);
+                  }}
+                  purchaseInfo={project.purchaseInfo}
+                  onClick={() => navigate(`/project/${project.id}`)}
+                  imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
+                  apiServerUrl={API_URI}
+                  truncateTitle={true}
+                  sx={{ width: 400, height: 479 }}
+                  track={track}
+                  isSoldOut={isSoldOut}
+                  creditsTooltip={isSoldOut ? SOLD_OUT_TOOLTIP : undefined}
+                />
+              </Box>
+            );
+          })}
           <Flex
             sx={{
               gridColumn: '1/-1',

@@ -34,9 +34,7 @@ export const Note: React.FC<
     case STATUS_PENDING:
       return (
         <>
-          {
-            'Usually takes <30 minutes to process (status automatically refresh). Please contact us at '
-          }
+          {'Usually takes <30 minutes to process. Please contact us at '}
           <Link href="support@regen.network">support@regen.network</Link>
           {' if more time has passed.'}
         </>

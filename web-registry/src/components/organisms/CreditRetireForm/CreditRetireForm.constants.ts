@@ -12,10 +12,6 @@ export const initialValuesRetire: RetireFormSchemaType = {
 };
 
 export const creditSendFormInitialValues: CreditRetireFormSchemaType = {
-  recipient: '',
   amount: 0,
-  withRetire: false,
-  agreeErpa: false,
-  sender: '',
   retireFields: [],
 };

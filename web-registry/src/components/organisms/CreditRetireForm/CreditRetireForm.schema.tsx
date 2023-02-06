@@ -1,12 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { z } from 'zod';
 
-import {
-  invalidRegenAddress,
-  isValidAddress,
-  requiredMessage,
-} from 'web-components/lib/components/inputs/validation';
-
 export const RetireFormSchema = z.object({
   note: z.string().optional(),
   country: z.string(),
@@ -17,23 +11,8 @@ export const RetireFormSchema = z.object({
 
 export type RetireFormSchemaType = z.infer<typeof RetireFormSchema>;
 
-type Params = {
-  addressPrefix?: string;
-};
-
-export const CreditRetireFormSchema = ({ addressPrefix }: Params) =>
+export const CreditRetireFormSchema = () =>
   z.object({
-    sender: z.string(),
-    recipient: z
-      .string()
-      .refine(value => !!value, {
-        message: requiredMessage,
-      })
-      .refine(value => isValidAddress(value, addressPrefix), {
-        message: invalidRegenAddress,
-      }),
-    withRetire: z.boolean().optional(),
-    agreeErpa: z.boolean(),
     amount: z.coerce.number(),
     retireFields: z.array(RetireFormSchema).optional(),
   });

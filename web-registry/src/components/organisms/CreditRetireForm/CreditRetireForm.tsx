@@ -1,23 +1,17 @@
 import React, { useEffect } from 'react';
-import { useFieldArray, useFormState, useWatch } from 'react-hook-form';
+import { useFieldArray, useFormState } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { Box } from '@mui/system';
-import { makeStyles } from 'tss-react/mui';
 
 import { Flex } from 'web-components/lib/components/box';
 import Submit from 'web-components/lib/components/form/Submit';
 import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
 import AmountField from 'web-components/lib/components/inputs/new/AmountField/AmountField';
-import CheckboxLabel from 'web-components/lib/components/inputs/new/CheckboxLabel/CheckboxLabel';
-import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
 import { RegenModalProps } from 'web-components/lib/components/modal';
 import InfoTooltip from 'web-components/lib/components/tooltip/InfoTooltip';
-import { Subtitle } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { IS_DEV } from 'lib/env';
 
-import AgreeErpaCheckbox from 'components/atoms/AgreeErpaCheckboxNew';
 import { BottomCreditRetireFields } from 'components/molecules/BottomCreditRetireFields/BottomCreditRetireFields';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
@@ -30,20 +24,7 @@ import {
   CreditRetireFormSchema,
   CreditRetireFormSchemaType,
 } from './CreditRetireForm.schema';
-import { validateCreditSendForm } from './CreditRetireForm.utils';
-
-/**
- * Send sends tradable credits from one account to another account.
- * Sent credits can either be tradable or retired on receipt.
- * https://buf.build/regen/regen-ledger/docs/main:regen.ecocredit.v1#regen.ecocredit.v1.Msg.Send
- *
- */
-
-const useStyles = makeStyles()((theme: Theme) => ({
-  checkboxLabel: {
-    marginTop: theme.spacing(10.75),
-  },
-}));
+import { validateCreditRetireForm } from './CreditRetireForm.utils';
 
 export interface CreditRetireFormProps {
   sender: string;
@@ -66,19 +47,17 @@ const CreditRetireForm: React.FC<
   onClose,
   onSubmit,
 }) => {
-  const { classes: styles } = useStyles();
   const form = useZodForm({
-    schema: CreditRetireFormSchema({ addressPrefix }),
-    defaultValues: { ...creditSendFormInitialValues, sender },
+    schema: CreditRetireFormSchema(),
+    defaultValues: { ...creditSendFormInitialValues },
     mode: 'onBlur',
   });
 
-  const withRetire = useWatch({ control: form.control, name: 'withRetire' });
   const { isSubmitting, submitCount, isValid, errors } = useFormState({
     control: form.control,
   });
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append } = useFieldArray({
     name: 'retireFields',
     control: form.control,
   });
@@ -88,44 +67,24 @@ const CreditRetireForm: React.FC<
   };
 
   useEffect(() => {
-    if (withRetire && fields.length === 0) {
-      append(initialValuesRetire);
-    }
-    if (!withRetire && fields.length > 0) {
-      remove(0);
-    }
-  }, [withRetire, fields, append, remove]);
+    append(initialValuesRetire);
+  }, [append]);
 
   return (
     <>
       <Form
         form={form}
         onSubmit={data => {
-          const hasError = validateCreditSendForm({
+          const hasError = validateCreditRetireForm({
             availableTradableAmount,
             setError: form.setError,
             values: data,
-            addressPrefix,
           });
           if (!hasError) {
             onSubmit(data);
           }
         }}
       >
-        <TextField
-          type="text"
-          label="Sender"
-          disabled
-          {...form.register('sender')}
-        />
-        <TextField
-          type="text"
-          label="Recipient"
-          helperText={errors.recipient?.message}
-          error={!!errors.recipient}
-          {...form.register('recipient')}
-        />
-
         <AmountField
           label={
             <Flex align="center">
@@ -154,21 +113,6 @@ const CreditRetireForm: React.FC<
           {...form.register('amount')}
         />
 
-        <CheckboxLabel
-          className={styles.checkboxLabel}
-          label={
-            <Subtitle size="lg" color="primary.contrastText" as="span">
-              <Box sx={{ display: 'inline' }}>
-                Retire all credits upon transfer
-              </Box>{' '}
-              <Box sx={{ display: 'inline', fontWeight: 400 }}>
-                {'(retirement is permanent and non-reversible)'}
-              </Box>
-            </Subtitle>
-          }
-          {...form.register('withRetire')}
-        />
-
         {fields.map((field, index) => (
           <BottomCreditRetireFields
             key={field.id}
@@ -177,13 +121,6 @@ const CreditRetireForm: React.FC<
             fieldIndex={index}
           />
         ))}
-
-        <AgreeErpaCheckbox
-          sx={{ mt: withRetire ? 10 : 6 }}
-          error={!!errors.agreeErpa}
-          helperText={errors.agreeErpa?.message}
-          {...form.register('agreeErpa')}
-        />
 
         <Submit
           isSubmitting={isSubmitting}

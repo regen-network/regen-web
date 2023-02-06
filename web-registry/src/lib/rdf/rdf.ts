@@ -160,6 +160,13 @@ export const ANCHORED_PROJECT_CONTEXT = {
   'qudt:numericValue': {
     '@type': 'xsd:double',
   },
+  'schema:location': {
+    '@context': {
+      '@vocab': 'https://purl.org/geojson/vocab#',
+      type: '@type',
+      coordinates: { '@container': '@list' },
+    },
+  },
 };
 
 const unanchoredProjectKeys = [

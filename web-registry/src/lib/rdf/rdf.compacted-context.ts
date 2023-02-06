@@ -11,15 +11,6 @@ export const COMPACTED_CONTEXT = {
   'regen:verificationReports': { '@container': '@list' },
   'regen:cfcCreditSerialNumbers': { '@container': '@list' },
   'schema:itemListElement': { '@container': '@list' },
-  'schema:location': {
-    '@context': {
-      type: '@type',
-      '@vocab': 'https://purl.org/geojson/vocab#',
-      coordinates: {
-        '@container': '@list',
-      },
-    },
-  },
   'regen:approvedMethodologies': {
     '@container': '@list',
   },

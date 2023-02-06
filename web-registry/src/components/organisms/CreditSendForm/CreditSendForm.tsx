@@ -22,10 +22,8 @@ import { BottomCreditRetireFields } from 'components/molecules/BottomCreditRetir
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
-import {
-  creditSendFormInitialValues,
-  initialValuesRetire,
-} from './CreditSendForm.constants';
+import { initialValuesRetire } from '../CreditRetireForm/CreditRetireForm.constants';
+import { creditSendFormInitialValues } from './CreditSendForm.constants';
 import {
   CreditSendFormSchema,
   CreditSendFormSchemaType,

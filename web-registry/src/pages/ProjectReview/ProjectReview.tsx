@@ -3,6 +3,7 @@ import ReactPlayerLazy from 'react-player/lazy';
 import { useNavigate, useParams } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { Box, CardMedia, useMediaQuery, useTheme } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import Card from 'web-components/lib/components/cards/Card';
@@ -12,21 +13,20 @@ import { Photo } from 'web-components/lib/components/cards/ReviewCard/ReviewCard
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 
+import { graphqlClient } from 'lib/clients/graphqlClient';
+import { ProjectMetadataLD } from 'lib/db/types/json-ld';
+import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 import {
   getAnchoredProjectMetadata,
   getUnanchoredProjectMetadata,
   qudtUnit,
   qudtUnitMap,
 } from 'lib/rdf';
-import { UrlType } from 'lib/rdf/types';
 
 import { Link } from '../../components/atoms';
 import { ProjectPageFooter } from '../../components/molecules';
 import { OnboardingFormTemplate } from '../../components/templates';
-import {
-  useProjectByIdQuery,
-  useUpdateProjectByIdMutation,
-} from '../../generated/graphql';
+import { useUpdateProjectByIdMutation } from '../../generated/graphql';
 import useMsgClient from '../../hooks/useMsgClient';
 import { getHashUrl } from '../../lib/block-explorer';
 import { isVCSCreditClass } from '../../lib/ecocredit/api';
@@ -45,10 +45,12 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { setDeliverTxResponse } = useCreateProjectContext();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const { data, loading } = useProjectByIdQuery({
-    variables: { id: projectId },
-    fetchPolicy: 'cache-and-network',
-  });
+  const { data, isLoading } = useQuery(
+    getProjectByIdQuery({
+      client: graphqlClient,
+      id: projectId,
+    }),
+  );
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
   const [bannerError, setBannerError] = useState('');
@@ -93,9 +95,9 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { signAndBroadcast, wallet, error, setError, deliverTxResponse } =
     useMsgClient(handleTxQueued, handleTxDelivered, handleError);
   const { projectCreateSubmit } = useProjectCreateSubmit({ signAndBroadcast });
-  const project = data?.projectById;
+  const project = data?.data?.projectById;
   const editPath = `/project-pages/${projectId}`;
-  const metadata = project?.metadata;
+  const metadata = project?.metadata as ProjectMetadataLD;
   const jurisdiction = useGetJurisdiction({ metadata });
 
   const creditClassId = metadata?.['regen:creditClassId'];
@@ -103,7 +105,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
-  const videoUrl = metadata?.['regen:videoURL']?.['@value'];
+  const videoUrl = metadata?.['regen:videoURL'];
   const referenceId = getProjectReferenceID(metadata, creditClassId);
 
   const submit = async (): Promise<void> => {
@@ -123,7 +125,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   };
 
   return (
-    <OnboardingFormTemplate activeStep={1} title="Review" loading={loading}>
+    <OnboardingFormTemplate activeStep={1} title="Review" loading={isLoading}>
       <ReviewCard
         title="Basic Info"
         onEditClick={() => navigate(`${editPath}/basic-info`)}
@@ -131,13 +133,10 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
       >
         <ItemDisplay name="Name">{metadata?.['schema:name']}</ItemDisplay>
         <ItemDisplay name="Size">
-          {metadata?.['regen:projectSize']?.['qudt:numericValue']?.['@value'] ||
-            '-'}{' '}
+          {metadata?.['regen:projectSize']?.['qudt:numericValue'] || '-'}{' '}
           {
             qudtUnitMap[
-              metadata?.['regen:projectSize']?.['qudt:unit']?.[
-                '@value'
-              ] as qudtUnit
+              metadata?.['regen:projectSize']?.['qudt:unit'] as qudtUnit
             ]
           }
         </ItemDisplay>
@@ -161,15 +160,12 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
         title={videoUrl ? 'Media' : 'Photos'}
         onEditClick={() => navigate(`${editPath}/media`)}
       >
-        {metadata?.['regen:previewPhoto']?.['@value'] && (
-          <Photo src={metadata?.['regen:previewPhoto']?.['@value']} />
+        {metadata?.['regen:previewPhoto'] && (
+          <Photo src={metadata?.['regen:previewPhoto']} />
         )}
-        {metadata?.['regen:galleryPhotos']?.['@list']
-          ?.filter((photo: UrlType) => !!photo?.['@value'])
-          ?.map(
-            (photo: UrlType) =>
-              photo?.['@value'] && <Photo src={photo?.['@value']} />,
-          )}
+        {metadata?.['regen:galleryPhotos']?.map(
+          photo => photo && <Photo src={photo} />,
+        )}
         {videoUrl && (
           <Card>
             <CardMedia

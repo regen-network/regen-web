@@ -4,6 +4,12 @@ import DatasetExt from 'rdf-ext/lib/Dataset';
 import { ValidationReport } from 'rdf-validate-shacl';
 import { Readable } from 'stream';
 
+import {
+  AnchoredProjectMetadataLD,
+  ProjectMetadataLD,
+  ProjectPageMetadataLD,
+} from 'lib/db/types/json-ld';
+
 // loadDataset parses and loads the given JSON-LD string into
 // the rdf-ext data factory.
 async function loadDataset(jsonLd: string): Promise<DatasetExt> {
@@ -52,7 +58,7 @@ export async function validate(
   return result;
 }
 
-export const defaultProjectContext: { [key: string]: string } = {
+export const DEFAULT_PROJECT_CONTEXT: { [key: string]: string } = {
   regen: 'http://regen.network/',
   schema: 'http://schema.org/',
   xsd: 'http://www.w3.org/2001/XMLSchema#',
@@ -63,14 +69,14 @@ export const defaultProjectContext: { [key: string]: string } = {
 
 // getCompactedPath returns the path that could be found in some compacted JSON-LD data
 // based on the expandedPath (comes from data returned by `validate` which returns expanded JSON-LD)
-// and the defaultProjectContext.
+// and the DEFAULT_PROJECT_CONTEXT.
 // This is useful to map validation report results path to form field names which used compacted JSON-LD.
 export function getCompactedPath(expandedPath: string): string | undefined {
-  const key = Object.keys(defaultProjectContext).find(key =>
-    expandedPath.includes(defaultProjectContext[key]),
+  const key = Object.keys(DEFAULT_PROJECT_CONTEXT).find(key =>
+    expandedPath.includes(DEFAULT_PROJECT_CONTEXT[key]),
   );
   if (key) {
-    return expandedPath.replace(defaultProjectContext[key], `${key}:`);
+    return expandedPath.replace(DEFAULT_PROJECT_CONTEXT[key], `${key}:`);
   }
   return;
 }
@@ -95,7 +101,7 @@ export function getProjectCreateBaseData(creditClassId: string): any {
 // TODO update this regen-network/regen-registry#1501
 export function getProjectBaseData(creditClassId?: string | null): any {
   return {
-    '@context': defaultProjectContext,
+    '@context': DEFAULT_PROJECT_CONTEXT,
     '@type': creditClassId
       ? `regen:${creditClassId}-Project`
       : 'regen:Project-Page',
@@ -136,7 +142,12 @@ export const UNANCHORED_PROJECT_CONTEXT = {
 };
 
 export const ANCHORED_PROJECT_CONTEXT = {
-  ...defaultProjectContext,
+  regen: 'http://regen.network/',
+  schema: 'http://schema.org/',
+  xsd: 'http://www.w3.org/2001/XMLSchema#',
+  qudt: 'http://qudt.org/schema/qudt/',
+  unit: 'http://qudt.org/vocab/unit/',
+  geojson: 'https://purl.org/geojson/vocab#',
   'schema:url': {
     '@type': 'schema:URL',
   },
@@ -176,12 +187,11 @@ function getFilteredProjectMetadata(
   );
 }
 
-// TODO update metadata type and return type
 export function getAnchoredProjectMetadata(
-  metadata: object,
+  metadata: ProjectMetadataLD,
   creditClassId?: string,
-): object {
-  const filtered = getFilteredProjectMetadata(metadata);
+): AnchoredProjectMetadataLD {
+  const filtered = getFilteredProjectMetadata(metadata) as ProjectMetadataLD;
   return {
     ...filtered,
     '@context': ANCHORED_PROJECT_CONTEXT,
@@ -189,12 +199,14 @@ export function getAnchoredProjectMetadata(
   };
 }
 
-// TODO update metadata type and return type
 export function getUnanchoredProjectMetadata(
-  metadata: object,
+  metadata: ProjectMetadataLD,
   onChainId: string,
-): object {
-  const filtered = getFilteredProjectMetadata(metadata, false);
+): ProjectPageMetadataLD {
+  const filtered = getFilteredProjectMetadata(
+    metadata,
+    false,
+  ) as ProjectMetadataLD;
   return {
     ...filtered,
     '@context': UNANCHORED_PROJECT_CONTEXT,

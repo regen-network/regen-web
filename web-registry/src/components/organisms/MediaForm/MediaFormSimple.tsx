@@ -8,6 +8,7 @@ import {
 
 import getApiUri from '../../../lib/apiUri';
 import { cropAspect, MediaBaseErrors, MediaBaseValues } from './MediaForm';
+import { PHOTO_COUNT } from './MediaForm.constants';
 import { useMediaFormStyles } from './useMediaFormStyles';
 
 export interface MediaValuesSimple extends MediaBaseValues {
@@ -41,9 +42,9 @@ const MediaFormSimple = ({
   };
 
   const shouldRenderGalleryPhoto = (i: number): boolean => {
-    // don't show option for gallery if there is no preview photo
+    // don't show option for gallery if there is no preview photo or first
     if (!values['regen:previewPhoto']) return false;
-    // if there is a preview photo, render the first gallary photo
+    // if there is a preview photo, render the first gallery photo
     if (values['regen:previewPhoto'] && i === 0) return true;
     // otherwise, render based on the presence of last index
     return Boolean(values['regen:galleryPhotos']?.[i - 1]);
@@ -58,18 +59,20 @@ const MediaFormSimple = ({
         label="Photos"
         component={ImageUpload}
       />
-      {(values['regen:galleryPhotos'] || []).map((_photo, i) =>
-        shouldRenderGalleryPhoto(i) ? (
-          <Field
-            {...imgDefaultProps}
-            key={i}
-            name={`regen:galleryPhotos[${i}]`}
-            component={ImageUpload}
-          />
-        ) : (
-          <React.Fragment key={i} /> // Formik expects a react element - this avoids console bug
-        ),
-      )}
+      {Array(PHOTO_COUNT)
+        .fill(undefined)
+        .map((_photo, i) =>
+          shouldRenderGalleryPhoto(i) ? (
+            <Field
+              {...imgDefaultProps}
+              key={i}
+              name={`regen:galleryPhotos[${i}]`}
+              component={ImageUpload}
+            />
+          ) : (
+            <React.Fragment key={i} /> // Formik expects a react element - this avoids console bug
+          ),
+        )}
       {/* Fields hidden for now
       <Field
         optional

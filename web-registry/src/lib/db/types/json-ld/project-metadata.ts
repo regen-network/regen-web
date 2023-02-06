@@ -51,11 +51,11 @@ export interface ProjectPageMetadataLD {
 }
 
 interface Context {
-  schema: 'http://schema.org/';
-  regen: 'http://regen.network/';
-  qudt?: 'http://qudt.org/schema/qudt/';
-  unit?: 'http://qudt.org/vocab/unit/';
-  xsd?: 'http://www.w3.org/2001/XMLSchema#';
+  schema: string;
+  regen: string;
+  qudt?: string;
+  unit?: string;
+  xsd?: string;
 }
 
 interface ProjectSize {

@@ -20,22 +20,17 @@ export const normalizeProjectsWithMetadata = ({
 }: NormalizeProjectsWithOrderDataParams): ProjectWithOrderData[] => {
   const projectsWithMetadata = projectsWithOrderData?.map(
     (project: ProjectWithOrderData, index) => {
-      const metadata: any = metadatas?.[index];
-      const unanchoredMetadata: any = projectPageMetadatas?.[index];
+      const metadata = metadatas?.[index];
+      const projectPageMetadata = projectPageMetadatas?.[index];
 
       return {
         ...project,
         id: project.id,
         name: metadata?.['schema:name'] || project.name,
-        imgSrc:
-          unanchoredMetadata?.['regen:previewPhoto']?.['@value'] ||
-          DefaultProject,
+        imgSrc: projectPageMetadata?.['regen:previewPhoto'] || DefaultProject,
         place: metadata?.['schema:location']?.place_name || project.place,
-        area: metadata?.['regen:projectSize']?.['qudt:numericValue']?.[
-          '@value'
-        ],
-        areaUnit:
-          metadata?.['regen:projectSize']?.['qudt:unit']?.['@value'] || '',
+        area: metadata?.['regen:projectSize']?.['qudt:numericValue'],
+        areaUnit: metadata?.['regen:projectSize']?.['qudt:unit'] || '',
       } as ProjectWithOrderData;
     },
   );

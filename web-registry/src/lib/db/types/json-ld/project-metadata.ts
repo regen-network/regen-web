@@ -60,7 +60,7 @@ interface Context {
 
 interface ProjectSize {
   'qudt:unit': string;
-  'qudt:numericValue': string;
+  'qudt:numericValue': number;
 }
 
 export interface ProjectStakeholder {

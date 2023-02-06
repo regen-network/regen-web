@@ -40,7 +40,7 @@ export const getDisplayAdmin = (address?: string): User | undefined => {
 
 type ParseProjectMetadataReturn = {
   projectName?: string;
-  area?: string;
+  area?: number;
   areaUnit?: string;
   placeName?: string;
 };

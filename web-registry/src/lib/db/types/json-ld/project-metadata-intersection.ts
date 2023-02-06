@@ -12,7 +12,7 @@ export type AnchoredProjectMetadataLD = AnchoredProjectMetadataBaseLD &
   CFCProjectMetadataLD &
   ToucanProjectMetadataLD;
 
-/** A combination of all existing Project base metadata schemas, to allow more flexible UIs */
+/** A combination of all existing Project metadata schemas, to allow more flexible UIs */
 export type ProjectMetadataLD = AnchoredProjectMetadataLD &
   ProjectPageMetadataLD;
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { omit } from 'lodash';
 
-import { ProjectMetadataLD } from 'lib/db/types/json-ld';
+import { AnchoredProjectMetadataBaseLD } from 'lib/db/types/json-ld';
 import { getProjectShapeIri } from 'lib/rdf';
 
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
@@ -32,7 +32,7 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
     const project = data?.projectById;
     const creditClassId = project?.creditClassByCreditClassId?.onChainId;
     const isVCS = !!creditClassId && isVCSCreditClass(creditClassId);
-    let metadata: Partial<ProjectMetadataLD> | undefined;
+    let metadata: Partial<AnchoredProjectMetadataBaseLD> | undefined;
     const editPath = `/project-pages/${projectId}`;
 
     const { data: graphData } = useShaclGraphByUriQuery({

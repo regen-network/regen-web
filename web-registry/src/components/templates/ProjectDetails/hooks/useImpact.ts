@@ -8,7 +8,7 @@ import { client } from '../../../../lib/clients/sanity';
 
 interface InputProps {
   coBenefitsIris: Maybe<string | string[]> | undefined;
-  primaryImpactIRI: string[];
+  primaryImpactIRI?: string;
 }
 
 export default function useImpact({
@@ -17,7 +17,7 @@ export default function useImpact({
 }: InputProps): EcologicalImpact[] {
   const { data: primaryImpactData } = useQuery(
     getEcologicalImpactByIriQuery({
-      iris: primaryImpactIRI?.filter(Boolean),
+      iris: primaryImpactIRI,
       sanityClient: client,
       enabled: !!primaryImpactIRI,
     }),

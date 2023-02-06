@@ -7,8 +7,7 @@ export default {
 
 const initialValues: MediaValues = {
   'schema:creditText': '',
-  'regen:galleryPhotos': { '@list': [] },
-  'regen:landStewardPhoto': { '@type': 'schema:URL', '@value': '' },
+  'regen:galleryPhotos': [],
 };
 
 export const mediaForm = () => (

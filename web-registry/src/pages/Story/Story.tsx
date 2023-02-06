@@ -10,6 +10,9 @@ import {
 } from '../../generated/graphql';
 import { useProjectEditContext } from '../ProjectEdit';
 
+/**
+ * @deprecated part of legacy project forms
+ */
 const Story: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();

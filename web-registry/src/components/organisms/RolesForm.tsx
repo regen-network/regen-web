@@ -98,7 +98,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     if (graphData?.shaclGraphByUri?.graph) {
       const report = await validate(
         graphData.shaclGraphByUri.graph,
-        { ...defaultProjectContext, ...p },
+        { '@context': defaultProjectContext, ...p },
         'http://regen.network/ProjectPageRolesGroup',
       );
       for (const result of report.results) {

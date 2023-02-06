@@ -21165,73 +21165,7 @@ export type ProjectByHandleQuery = (
   { __typename?: 'Query' }
   & { projectByHandle?: Maybe<(
     { __typename?: 'Project' }
-    & Pick<Project, 'onChainId' | 'metadata'>
-    & { eventsByProjectId: (
-      { __typename?: 'EventsConnection' }
-      & { nodes: Array<Maybe<(
-        { __typename?: 'Event' }
-        & Pick<Event, 'date' | 'summary' | 'description'>
-        & { creditVintageByEventId?: Maybe<(
-          { __typename?: 'CreditVintage' }
-          & CreditVintageFieldsFragment
-        )> }
-      )>> }
-    ), partyByRegistryId?: Maybe<(
-      { __typename?: 'Party' }
-      & Pick<Party, 'name'>
-      & { organizationByPartyId?: Maybe<(
-        { __typename?: 'Organization' }
-        & Pick<Organization, 'website'>
-      )> }
-    )>, creditClassByCreditClassId?: Maybe<(
-      { __typename?: 'CreditClass' }
-      & Pick<CreditClass, 'standard' | 'onChainId'>
-      & { creditClassVersionsById: (
-        { __typename?: 'CreditClassVersionsConnection' }
-        & { nodes: Array<Maybe<(
-          { __typename?: 'CreditClassVersion' }
-          & Pick<CreditClassVersion, 'name' | 'metadata'>
-        )>> }
-      ), methodologyByMethodologyId?: Maybe<(
-        { __typename?: 'Methodology' }
-        & { methodologyVersionsById: (
-          { __typename?: 'MethodologyVersionsConnection' }
-          & { nodes: Array<Maybe<(
-            { __typename?: 'MethodologyVersion' }
-            & Pick<MethodologyVersion, 'name' | 'metadata'>
-          )>> }
-        ) }
-      )> }
-    )>, partyByDeveloperId?: Maybe<(
-      { __typename?: 'Party' }
-      & PartyFieldsFragment
-    )>, partyByStewardId?: Maybe<(
-      { __typename?: 'Party' }
-      & PartyFieldsFragment
-    )>, partyByLandOwnerId?: Maybe<(
-      { __typename?: 'Party' }
-      & PartyFieldsFragment
-    )>, partyByIssuerId?: Maybe<(
-      { __typename?: 'Party' }
-      & PartyFieldsFragment
-    )>, partyByResellerId?: Maybe<(
-      { __typename?: 'Party' }
-      & PartyFieldsFragment
-    )>, documentsByProjectId: (
-      { __typename?: 'DocumentsConnection' }
-      & { nodes: Array<Maybe<(
-        { __typename?: 'Document' }
-        & Pick<Document, 'name' | 'type' | 'date' | 'url'>
-        & { eventByEventId?: Maybe<(
-          { __typename?: 'Event' }
-          & Pick<Event, 'date' | 'summary' | 'description'>
-          & { creditVintageByEventId?: Maybe<(
-            { __typename?: 'CreditVintage' }
-            & CreditVintageFieldsFragment
-          )> }
-        )> }
-      )>> }
-    ) }
+    & ProjectFieldsFragment
   )> }
 );
 
@@ -21280,74 +21214,79 @@ export type ProjectByOnChainIdQuery = (
   { __typename?: 'Query' }
   & { projectByOnChainId?: Maybe<(
     { __typename?: 'Project' }
-    & Pick<Project, 'id' | 'metadata'>
-    & { eventsByProjectId: (
-      { __typename?: 'EventsConnection' }
+    & ProjectFieldsFragment
+  )> }
+);
+
+export type ProjectFieldsFragment = (
+  { __typename?: 'Project' }
+  & Pick<Project, 'id' | 'onChainId' | 'metadata'>
+  & { eventsByProjectId: (
+    { __typename?: 'EventsConnection' }
+    & { nodes: Array<Maybe<(
+      { __typename?: 'Event' }
+      & Pick<Event, 'date' | 'summary' | 'description'>
+      & { creditVintageByEventId?: Maybe<(
+        { __typename?: 'CreditVintage' }
+        & CreditVintageFieldsFragment
+      )> }
+    )>> }
+  ), partyByRegistryId?: Maybe<(
+    { __typename?: 'Party' }
+    & Pick<Party, 'name'>
+    & { organizationByPartyId?: Maybe<(
+      { __typename?: 'Organization' }
+      & Pick<Organization, 'website'>
+    )> }
+  )>, creditClassByCreditClassId?: Maybe<(
+    { __typename?: 'CreditClass' }
+    & Pick<CreditClass, 'standard' | 'onChainId'>
+    & { creditClassVersionsById: (
+      { __typename?: 'CreditClassVersionsConnection' }
       & { nodes: Array<Maybe<(
+        { __typename?: 'CreditClassVersion' }
+        & Pick<CreditClassVersion, 'name' | 'metadata'>
+      )>> }
+    ), methodologyByMethodologyId?: Maybe<(
+      { __typename?: 'Methodology' }
+      & { methodologyVersionsById: (
+        { __typename?: 'MethodologyVersionsConnection' }
+        & { nodes: Array<Maybe<(
+          { __typename?: 'MethodologyVersion' }
+          & Pick<MethodologyVersion, 'name' | 'metadata'>
+        )>> }
+      ) }
+    )> }
+  )>, partyByDeveloperId?: Maybe<(
+    { __typename?: 'Party' }
+    & PartyFieldsFragment
+  )>, partyByStewardId?: Maybe<(
+    { __typename?: 'Party' }
+    & PartyFieldsFragment
+  )>, partyByLandOwnerId?: Maybe<(
+    { __typename?: 'Party' }
+    & PartyFieldsFragment
+  )>, partyByIssuerId?: Maybe<(
+    { __typename?: 'Party' }
+    & PartyFieldsFragment
+  )>, partyByResellerId?: Maybe<(
+    { __typename?: 'Party' }
+    & PartyFieldsFragment
+  )>, documentsByProjectId: (
+    { __typename?: 'DocumentsConnection' }
+    & { nodes: Array<Maybe<(
+      { __typename?: 'Document' }
+      & Pick<Document, 'name' | 'type' | 'date' | 'url'>
+      & { eventByEventId?: Maybe<(
         { __typename?: 'Event' }
         & Pick<Event, 'date' | 'summary' | 'description'>
         & { creditVintageByEventId?: Maybe<(
           { __typename?: 'CreditVintage' }
           & CreditVintageFieldsFragment
         )> }
-      )>> }
-    ), partyByRegistryId?: Maybe<(
-      { __typename?: 'Party' }
-      & Pick<Party, 'name'>
-      & { organizationByPartyId?: Maybe<(
-        { __typename?: 'Organization' }
-        & Pick<Organization, 'website'>
       )> }
-    )>, creditClassByCreditClassId?: Maybe<(
-      { __typename?: 'CreditClass' }
-      & Pick<CreditClass, 'standard' | 'onChainId'>
-      & { creditClassVersionsById: (
-        { __typename?: 'CreditClassVersionsConnection' }
-        & { nodes: Array<Maybe<(
-          { __typename?: 'CreditClassVersion' }
-          & Pick<CreditClassVersion, 'name' | 'metadata'>
-        )>> }
-      ), methodologyByMethodologyId?: Maybe<(
-        { __typename?: 'Methodology' }
-        & { methodologyVersionsById: (
-          { __typename?: 'MethodologyVersionsConnection' }
-          & { nodes: Array<Maybe<(
-            { __typename?: 'MethodologyVersion' }
-            & Pick<MethodologyVersion, 'name' | 'metadata'>
-          )>> }
-        ) }
-      )> }
-    )>, partyByDeveloperId?: Maybe<(
-      { __typename?: 'Party' }
-      & PartyFieldsFragment
-    )>, partyByStewardId?: Maybe<(
-      { __typename?: 'Party' }
-      & PartyFieldsFragment
-    )>, partyByLandOwnerId?: Maybe<(
-      { __typename?: 'Party' }
-      & PartyFieldsFragment
-    )>, partyByIssuerId?: Maybe<(
-      { __typename?: 'Party' }
-      & PartyFieldsFragment
-    )>, partyByResellerId?: Maybe<(
-      { __typename?: 'Party' }
-      & PartyFieldsFragment
-    )>, documentsByProjectId: (
-      { __typename?: 'DocumentsConnection' }
-      & { nodes: Array<Maybe<(
-        { __typename?: 'Document' }
-        & Pick<Document, 'name' | 'type' | 'date' | 'url'>
-        & { eventByEventId?: Maybe<(
-          { __typename?: 'Event' }
-          & Pick<Event, 'date' | 'summary' | 'description'>
-          & { creditVintageByEventId?: Maybe<(
-            { __typename?: 'CreditVintage' }
-            & CreditVintageFieldsFragment
-          )> }
-        )> }
-      )>> }
-    ) }
-  )> }
+    )>> }
+  ) }
 );
 
 export type ProjectsByMetadataQueryVariables = Exact<{
@@ -21821,6 +21760,79 @@ export const CreditVintageFieldsFragmentDoc = gql`
   }
 }
     ${PartyFieldsFragmentDoc}`;
+export const ProjectFieldsFragmentDoc = gql`
+    fragment projectFields on Project {
+  id
+  onChainId
+  eventsByProjectId(orderBy: DATE_ASC) {
+    nodes {
+      date
+      summary
+      description
+      creditVintageByEventId {
+        ...creditVintageFields
+      }
+    }
+  }
+  metadata
+  partyByRegistryId {
+    name
+    organizationByPartyId {
+      website
+    }
+  }
+  creditClassByCreditClassId {
+    standard
+    onChainId
+    creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
+      nodes {
+        name
+        metadata
+      }
+    }
+    methodologyByMethodologyId {
+      methodologyVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
+        nodes {
+          name
+          metadata
+        }
+      }
+    }
+  }
+  partyByDeveloperId {
+    ...partyFields
+  }
+  partyByStewardId {
+    ...partyFields
+  }
+  partyByLandOwnerId {
+    ...partyFields
+  }
+  partyByIssuerId {
+    ...partyFields
+  }
+  partyByResellerId {
+    ...partyFields
+  }
+  documentsByProjectId {
+    nodes {
+      name
+      type
+      date
+      url
+      eventByEventId {
+        date
+        summary
+        description
+        creditVintageByEventId {
+          ...creditVintageFields
+        }
+      }
+    }
+  }
+}
+    ${CreditVintageFieldsFragmentDoc}
+${PartyFieldsFragmentDoc}`;
 export const ProjectPartyFragmentDoc = gql`
     fragment projectParty on Party {
   id
@@ -22810,77 +22822,10 @@ export type MoreProjectsQueryResult = Apollo.QueryResult<MoreProjectsQuery, More
 export const ProjectByHandleDocument = gql`
     query ProjectByHandle($handle: String!) {
   projectByHandle(handle: $handle) {
-    onChainId
-    eventsByProjectId(orderBy: DATE_ASC) {
-      nodes {
-        date
-        summary
-        description
-        creditVintageByEventId {
-          ...creditVintageFields
-        }
-      }
-    }
-    metadata
-    partyByRegistryId {
-      name
-      organizationByPartyId {
-        website
-      }
-    }
-    creditClassByCreditClassId {
-      standard
-      onChainId
-      creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
-        nodes {
-          name
-          metadata
-        }
-      }
-      methodologyByMethodologyId {
-        methodologyVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
-          nodes {
-            name
-            metadata
-          }
-        }
-      }
-    }
-    partyByDeveloperId {
-      ...partyFields
-    }
-    partyByStewardId {
-      ...partyFields
-    }
-    partyByLandOwnerId {
-      ...partyFields
-    }
-    partyByIssuerId {
-      ...partyFields
-    }
-    partyByResellerId {
-      ...partyFields
-    }
-    documentsByProjectId {
-      nodes {
-        name
-        type
-        date
-        url
-        eventByEventId {
-          date
-          summary
-          description
-          creditVintageByEventId {
-            ...creditVintageFields
-          }
-        }
-      }
-    }
+    ...projectFields
   }
 }
-    ${CreditVintageFieldsFragmentDoc}
-${PartyFieldsFragmentDoc}`;
+    ${ProjectFieldsFragmentDoc}`;
 
 /**
  * __useProjectByHandleQuery__
@@ -22977,77 +22922,10 @@ export type ProjectByIdQueryResult = Apollo.QueryResult<ProjectByIdQuery, Projec
 export const ProjectByOnChainIdDocument = gql`
     query ProjectByOnChainId($onChainId: String!) {
   projectByOnChainId(onChainId: $onChainId) {
-    id
-    eventsByProjectId(orderBy: DATE_ASC) {
-      nodes {
-        date
-        summary
-        description
-        creditVintageByEventId {
-          ...creditVintageFields
-        }
-      }
-    }
-    metadata
-    partyByRegistryId {
-      name
-      organizationByPartyId {
-        website
-      }
-    }
-    creditClassByCreditClassId {
-      standard
-      onChainId
-      creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
-        nodes {
-          name
-          metadata
-        }
-      }
-      methodologyByMethodologyId {
-        methodologyVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
-          nodes {
-            name
-            metadata
-          }
-        }
-      }
-    }
-    partyByDeveloperId {
-      ...partyFields
-    }
-    partyByStewardId {
-      ...partyFields
-    }
-    partyByLandOwnerId {
-      ...partyFields
-    }
-    partyByIssuerId {
-      ...partyFields
-    }
-    partyByResellerId {
-      ...partyFields
-    }
-    documentsByProjectId {
-      nodes {
-        name
-        type
-        date
-        url
-        eventByEventId {
-          date
-          summary
-          description
-          creditVintageByEventId {
-            ...creditVintageFields
-          }
-        }
-      }
-    }
+    ...projectFields
   }
 }
-    ${CreditVintageFieldsFragmentDoc}
-${PartyFieldsFragmentDoc}`;
+    ${ProjectFieldsFragmentDoc}`;
 
 /**
  * __useProjectByOnChainIdQuery__

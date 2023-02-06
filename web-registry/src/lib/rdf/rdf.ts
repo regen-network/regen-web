@@ -52,29 +52,25 @@ export async function validate(
   return result;
 }
 
-export const defaultProjectContext: { '@context': { [key: string]: string } } =
-  {
-    '@context': {
-      regen: 'http://regen.network/',
-      schema: 'http://schema.org/',
-      xsd: 'http://www.w3.org/2001/XMLSchema#',
-      qudt: 'http://qudt.org/schema/qudt/',
-      unit: 'http://qudt.org/vocab/unit/',
-      geojson: 'https://purl.org/geojson/vocab#',
-    },
-  };
+export const defaultProjectContext: { [key: string]: string } = {
+  regen: 'http://regen.network/',
+  schema: 'http://schema.org/',
+  xsd: 'http://www.w3.org/2001/XMLSchema#',
+  qudt: 'http://qudt.org/schema/qudt/',
+  unit: 'http://qudt.org/vocab/unit/',
+  geojson: 'https://purl.org/geojson/vocab#',
+};
 
 // getCompactedPath returns the path that could be found in some compacted JSON-LD data
 // based on the expandedPath (comes from data returned by `validate` which returns expanded JSON-LD)
 // and the defaultProjectContext.
 // This is useful to map validation report results path to form field names which used compacted JSON-LD.
 export function getCompactedPath(expandedPath: string): string | undefined {
-  const context = defaultProjectContext['@context'];
-  const key = Object.keys(context).find(key =>
-    expandedPath.includes(context[key]),
+  const key = Object.keys(defaultProjectContext).find(key =>
+    expandedPath.includes(defaultProjectContext[key]),
   );
   if (key) {
-    return expandedPath.replace(context[key], `${key}:`);
+    return expandedPath.replace(defaultProjectContext[key], `${key}:`);
   }
   return;
 }
@@ -87,15 +83,19 @@ export function getCompactedPath(expandedPath: string): string | undefined {
 // - and `regen:CXX-Project` (for anchored data)
 export function getProjectCreateBaseData(creditClassId: string): any {
   return {
-    ...defaultProjectContext,
+    '@context': {
+      ...ANCHORED_PROJECT_CONTEXT,
+      ...UNANCHORED_PROJECT_CONTEXT,
+    },
     '@type': [`regen:${creditClassId}-Project`, 'regen:Project-Page'],
     'regen:creditClassId': creditClassId,
   };
 }
 
+// TODO update this regen-network/regen-registry#1501
 export function getProjectBaseData(creditClassId?: string | null): any {
   return {
-    ...defaultProjectContext,
+    '@context': defaultProjectContext,
     '@type': creditClassId
       ? `regen:${creditClassId}-Project`
       : 'regen:Project-Page',
@@ -120,10 +120,34 @@ export function getProjectShapeIri(creditClassId?: string | null): string {
     : 'http://regen.network/ProjectPageShape';
 }
 
-const unanchoredProjectContext = {
-  '@context': {
-    regen: 'http://regen.network/',
-    schema: 'http://schema.org/',
+export const UNANCHORED_PROJECT_CONTEXT = {
+  regen: 'http://regen.network/',
+  schema: 'http://schema.org/',
+  'regen:previewPhoto': {
+    '@type': 'schema:URL',
+  },
+  'regen:galleryPhotos': {
+    '@container': '@list',
+    '@type': 'schema:URL',
+  },
+  'regen:videoURL': {
+    '@type': 'schema:URL',
+  },
+};
+
+export const ANCHORED_PROJECT_CONTEXT = {
+  ...defaultProjectContext,
+  'schema:url': {
+    '@type': 'schema:URL',
+  },
+  'schema:image': {
+    '@type': 'schema:URL',
+  },
+  'qudt:unit': {
+    '@type': 'qudt:Unit',
+  },
+  'qudt:numericValue': {
+    '@type': 'xsd:double',
   },
 };
 
@@ -160,7 +184,7 @@ export function getAnchoredProjectMetadata(
   const filtered = getFilteredProjectMetadata(metadata);
   return {
     ...filtered,
-    ...defaultProjectContext,
+    '@context': ANCHORED_PROJECT_CONTEXT,
     '@type': `regen:${creditClassId}-Project`,
   };
 }
@@ -173,7 +197,7 @@ export function getUnanchoredProjectMetadata(
   const filtered = getFilteredProjectMetadata(metadata, false);
   return {
     ...filtered,
-    ...unanchoredProjectContext,
+    '@context': UNANCHORED_PROJECT_CONTEXT,
     '@type': 'regen:Project-Page',
     '@id': `${window.location.origin}/project/${onChainId}`,
   };

@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 interface SEOProps {
   description?: string;
   lang?: string;
-  title: string;
+  title?: string;
   imageUrl?: string;
   location?: {
     pathname: string;

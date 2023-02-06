@@ -1,4 +1,7 @@
-import { ProjectMetadataLD, ProjectPageMetadataLD } from 'lib/db/types/json-ld';
+import {
+  AnchoredProjectMetadataBaseLD,
+  ProjectPageMetadataLD,
+} from 'lib/db/types/json-ld';
 
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 
@@ -6,19 +9,19 @@ import DefaultProject from 'assets/default-project.jpg';
 
 interface NormalizeProjectsWithOrderDataParams {
   projectsWithOrderData?: ProjectWithOrderData[];
-  metadatas?: (ProjectMetadataLD | undefined)[];
-  unanchoredMetadatas?: ProjectPageMetadataLD[];
+  metadatas?: (AnchoredProjectMetadataBaseLD | undefined)[];
+  projectPageMetadatas?: ProjectPageMetadataLD[];
 }
 
 export const normalizeProjectsWithMetadata = ({
   projectsWithOrderData,
   metadatas,
-  unanchoredMetadatas,
+  projectPageMetadatas,
 }: NormalizeProjectsWithOrderDataParams): ProjectWithOrderData[] => {
   const projectsWithMetadata = projectsWithOrderData?.map(
     (project: ProjectWithOrderData, index) => {
       const metadata: any = metadatas?.[index];
-      const unanchoredMetadata: any = unanchoredMetadatas?.[index];
+      const unanchoredMetadata: any = projectPageMetadatas?.[index];
 
       return {
         ...project,

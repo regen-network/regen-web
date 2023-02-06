@@ -1,22 +1,30 @@
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
+import { Party } from 'web-components/lib/components/modal/LedgerModal';
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 
+import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import {
   BatchInfoWithSupply,
   BatchTotalsForProject,
 } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
-import { ProjectMetadataLD, ProjectPageMetadataLD } from 'lib/db/types/json-ld';
+import {
+  AnchoredProjectMetadataLD,
+  LegacyProjectMetadataLD,
+  ProjectPageMetadataLD,
+} from 'lib/db/types/json-ld';
 
 export type ProjectTopSectionProps = {
-  data?: any; // TODO: when all project are onchain, this can be ProjectByOnChainIdQuery
-  projectId?: string;
+  offChainProject?: Maybe<ProjectFieldsFragment>;
   onChainProject?: ProjectInfo;
-  anchoredMetadata?: ProjectMetadataLD;
+  projectMetadata?: AnchoredProjectMetadataLD | LegacyProjectMetadataLD;
   projectPageMetadata?: ProjectPageMetadataLD;
   sanityCreditClassData?: AllCreditClassQuery;
+  landSteward?: Party;
+  projectDeveloper?: Party;
+  landOwner?: Party;
   geojson?: any;
   isGISFile?: boolean;
   batchData?: {

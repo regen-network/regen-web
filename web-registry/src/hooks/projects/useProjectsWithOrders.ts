@@ -145,7 +145,7 @@ export function useProjectsWithOrders({
       }),
     ),
   });
-  const unanchoredMetadatas = offChainProjectResults.map(
+  const projectPageMetadatas = offChainProjectResults.map(
     queryResult => queryResult.data?.data.projectByOnChainId?.metadata,
   );
 
@@ -154,7 +154,7 @@ export function useProjectsWithOrders({
   const projectsWithMetadata = normalizeProjectsWithMetadata({
     projectsWithOrderData: sortedProjects,
     metadatas,
-    unanchoredMetadatas,
+    projectPageMetadatas,
   });
 
   return {

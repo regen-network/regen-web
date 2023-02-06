@@ -21,3 +21,8 @@ export interface UrlType {
 export interface UrlList {
   '@list': Array<UrlType>;
 }
+
+export interface CompactedNameUrl {
+  'schema:name': string;
+  'schema:url': string;
+}

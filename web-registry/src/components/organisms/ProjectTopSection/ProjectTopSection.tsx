@@ -21,14 +21,6 @@ import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
 import {
-  Maybe,
-  Project,
-  ProjectByHandleQuery,
-  ProjectByOnChainIdQuery,
-} from 'generated/graphql';
-import { toTitleCase } from 'lib/titleCase';
-
-import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
   MAPBOX_TOKEN,
@@ -38,7 +30,7 @@ import { findSanityCreditClass } from 'components/templates/ProjectDetails/Proje
 import { useSdgByIriQuery } from '../../../generated/sanity-graphql';
 import { client } from '../../../lib/clients/sanity';
 import { getSanityImgSrc } from '../../../lib/imgSrc';
-import { getDisplayParty, getParty } from '../../../lib/transform';
+import { getParty } from '../../../lib/transform';
 import { ProjectTopLink } from '../../atoms';
 import { ProjectBatchTotals, ProjectPageMetadata } from '../../molecules';
 import { CreditBatches } from '../CreditBatches/CreditBatches';
@@ -48,19 +40,22 @@ import {
 } from './ProjectTopSection.styles';
 import { ProjectTopSectionProps } from './ProjectTopSection.types';
 import {
-  getAnchoredMetadata,
   getDisplayAdmin,
-  getProjectDetails,
-  getUnanchoredMetadata,
+  isAnchoredProjectMetadata,
+  parseOffChainProject,
+  parseProjectMetadata,
+  parseProjectPageMetadata,
 } from './ProjectTopSection.utils';
 
 function ProjectTopSection({
-  data,
-  projectId,
+  offChainProject,
   onChainProject,
-  anchoredMetadata,
+  projectMetadata,
   projectPageMetadata,
   sanityCreditClassData,
+  projectDeveloper,
+  landSteward,
+  landOwner,
   geojson,
   isGISFile,
   batchData,
@@ -73,17 +68,11 @@ function ProjectTopSection({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  // TODO: eventually just projectByOnChainId
-  const project =
-    (data as ProjectByOnChainIdQuery)?.projectByOnChainId ??
-    (data as ProjectByHandleQuery)?.projectByHandle ??
-    undefined;
-
   const { creditClass, creditClassVersion, sdgIris, offsetGenerationMethod } =
-    getProjectDetails(project as Maybe<Project>);
+    parseOffChainProject(offChainProject);
 
   const { projectName, area, areaUnit, placeName } =
-    getAnchoredMetadata(anchoredMetadata);
+    parseProjectMetadata(projectMetadata);
 
   const {
     videoURL,
@@ -93,7 +82,7 @@ function ProjectTopSection({
     landStewardPhoto,
     landStewardStoryTitle,
     landStewardStory,
-  } = getUnanchoredMetadata(projectPageMetadata);
+  } = parseProjectPageMetadata(projectPageMetadata);
 
   const { data: sdgData } = useSdgByIriQuery({
     client,
@@ -116,10 +105,7 @@ function ProjectTopSection({
   });
 
   const displayName =
-    projectName ??
-    (onChainProjectId && `Project ${onChainProjectId}`) ??
-    (projectId && toTitleCase(projectId.replace('-', ' '))) ?? // fallback for legacy handles
-    '';
+    projectName ?? (onChainProjectId && `Project ${onChainProjectId}`) ?? '';
 
   return (
     <Section classes={{ root: classes.section }}>
@@ -160,7 +146,9 @@ function ProjectTopSection({
             </Box>
           </Box>
           {/* Used to prevent layout shift */}
-          {(!data || isGISFile === undefined || (isGISFile && !geojson)) &&
+          {(!offChainProject ||
+            isGISFile === undefined ||
+            (isGISFile && !geojson)) &&
             loading && <Skeleton height={200} />}
           {geojson && isGISFile && glanceText && (
             <LazyLoad offset={50} once>
@@ -200,8 +188,8 @@ function ProjectTopSection({
               sx={{ mt: [2, 4], py: [2, 6] }}
             />
           </Link>
-          {onChainProjectId && (
-            <ProjectPageMetadata metadata={anchoredMetadata} />
+          {isAnchoredProjectMetadata(projectMetadata, onChainProjectId) && (
+            <ProjectPageMetadata metadata={projectMetadata} />
           )}
           <LazyLoad offset={50}>
             {videoURL && (
@@ -273,25 +261,15 @@ function ProjectTopSection({
         <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
           <ProjectTopCard
             projectAdmin={getDisplayAdmin(onChainProject?.admin)}
-            projectDeveloper={getDisplayParty(
-              'regen:projectDeveloper',
-              anchoredMetadata,
-              project?.partyByDeveloperId,
-            )}
-            landSteward={getDisplayParty(
-              'regen:landSteward',
-              anchoredMetadata,
-              project?.partyByStewardId,
-            )}
-            landOwner={getDisplayParty(
-              'regen:landOwner',
-              anchoredMetadata,
-              project?.partyByLandOwnerId,
-            )}
+            projectDeveloper={projectDeveloper}
+            landSteward={landSteward}
+            landOwner={landOwner}
             // TODO if no off-chain data, use on-chain project.issuer
-            issuer={getParty(project?.partyByIssuerId)}
+            issuer={getParty(offChainProject?.partyByIssuerId)}
             reseller={
-              !onChainProject ? getParty(project?.partyByResellerId) : undefined
+              !onChainProject
+                ? getParty(offChainProject?.partyByResellerId)
+                : undefined
             }
             sdgs={sdgs}
           />
@@ -304,7 +282,9 @@ function ProjectTopSection({
             Credit Batches
           </Title>
           <CreditBatches
-            creditClassId={project?.creditClassByCreditClassId?.onChainId}
+            creditClassId={
+              offChainProject?.creditClassByCreditClassId?.onChainId
+            }
             creditBatches={batchData.batches}
             filteredColumns={['projectLocation']}
             onTableChange={setPaginationParams}

@@ -19,6 +19,7 @@ import { getProjectByHandleQuery } from 'lib/queries/react-query/registry-server
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
+import { getDisplayParty } from 'lib/transform';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
@@ -36,15 +37,17 @@ import { ProjectImpactSection, ProjectTopSection } from '../../organisms';
 import useGeojson from './hooks/useGeojson';
 import useImpact from './hooks/useImpact';
 import useIssuanceModal from './hooks/useIssuanceModal';
-import useMedia from './hooks/useMedia';
-import { useProjectDetails } from './hooks/useProjectDetails';
 import useSeo from './hooks/useSeo';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProjects';
 import { ProjectDocumentation } from './ProjectDetails.ProjectDocumentation';
 import { ProjectTimeline } from './ProjectDetails.ProjectTimeline';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
-import { getIsOnChainId } from './ProjectDetails.utils';
+import {
+  getIsOnChainId,
+  parseMedia,
+  parseOffChainProject,
+} from './ProjectDetails.utils';
 
 function ProjectDetails(): JSX.Element {
   const theme = useTheme();
@@ -75,7 +78,8 @@ function ProjectDetails(): JSX.Element {
     txClient = new ServiceClientImpl(api.queryClient);
   }
 
-  // first, check if projectId is handle or onChainId
+  // first, check if projectId is an off-chain project handle (for legacy projects like "wilmot")
+  // or an chain project id
   const isOnChainId = getIsOnChainId(projectId);
 
   // if projectId is handle, query project by handle
@@ -113,11 +117,7 @@ function ProjectDetails(): JSX.Element {
 
   const onChainProject = projectResponse?.project;
 
-  // TODO: when all projects are on-chain, just use dataByOnChainId, (or leave out postgres altogether)
-  const data = isOnChainId
-    ? { ...projectByOnChainId?.data, admin: onChainProject?.admin }
-    : projectByHandle?.data;
-  const project = isOnChainId
+  const offChainProject = isOnChainId
     ? projectByOnChainId?.data.projectByOnChainId
     : projectByHandle?.data.projectByHandle;
 
@@ -130,25 +130,51 @@ function ProjectDetails(): JSX.Element {
   const { totals: batchesTotal } = getBatchesTotal(batchesWithSupply ?? []);
 
   const {
-    projectPageMetadata,
+    offChainProjectMetadata,
     managementActions,
     projectEvents,
     projectDocs,
     creditClassName,
     coBenefitsIris,
     primaryImpactIRI,
-  } = useProjectDetails(project as Maybe<Project>);
+  } = parseOffChainProject(offChainProject as Maybe<Project>);
+
+  // For legacy projects (that are not on-chain), all metadata is stored off-chain
+  const projectMetadata = isOnChainId
+    ? anchoredMetadata
+    : offChainProjectMetadata;
+
+  const projectDeveloper = getDisplayParty(
+    'regen:projectDeveloper',
+    anchoredMetadata,
+    offChainProject?.partyByDeveloperId,
+  );
+  const landSteward = getDisplayParty(
+    'regen:landSteward',
+    anchoredMetadata,
+    offChainProject?.partyByStewardId,
+  );
+  const landOwner = getDisplayParty(
+    'regen:landOwner',
+    anchoredMetadata,
+    offChainProject?.partyByLandOwnerId,
+  );
 
   const { geojson, isGISFile } = useGeojson({
-    ...projectPageMetadata,
-    ...anchoredMetadata,
+    projectMetadata,
+    projectPageMetadata: offChainProjectMetadata,
   });
 
   const seoData = useSeo({
-    metadata: { ...projectPageMetadata, ...anchoredMetadata },
+    projectMetadata,
+    projectPageMetadata: offChainProjectMetadata,
+    projectDeveloper,
+    landSteward,
+    landOwner,
     creditClassName,
   });
-  const mediaData = useMedia({ metadata: projectPageMetadata, geojson });
+
+  const mediaData = parseMedia({ metadata: offChainProjectMetadata, geojson });
   const impactData = useImpact({ coBenefitsIris, primaryImpactIRI });
 
   const loadingDb = loadingProjectByOnChainId || loadingProjectByHandle;
@@ -158,7 +184,7 @@ function ProjectDetails(): JSX.Element {
     issuanceModalOpen,
     setIssuanceModalOpen,
     viewOnLedger,
-  } = useIssuanceModal(data);
+  } = useIssuanceModal(offChainProject);
 
   const { isBuyFlowDisabled, projectsWithOrderData } = useBuySellOrderData({
     projectId: onChainProjectId,
@@ -176,7 +202,12 @@ function ProjectDetails(): JSX.Element {
     }));
   }, [credits, projectsWithOrderData]);
 
-  if (!loadingDb && !loadingAnchoredMetadata && !project && !projectResponse)
+  if (
+    !loadingDb &&
+    !loadingAnchoredMetadata &&
+    !offChainProject &&
+    !projectResponse
+  )
     return <NotFoundPage />;
 
   return (
@@ -217,24 +248,23 @@ function ProjectDetails(): JSX.Element {
             : () => setDisplayErrorBanner(true)
         }
         onChainProjectId={onChainProjectId}
-        projectName={
-          anchoredMetadata?.['schema:name'] ??
-          projectPageMetadata?.['schema:name']
-        }
+        projectName={anchoredMetadata?.['schema:name']}
         onChainCreditClassId={onChainProject?.classId}
       />
 
       <ProjectTopSection
-        projectId={projectId}
-        data={data}
+        offChainProject={offChainProject}
         onChainProject={onChainProject}
-        anchoredMetadata={anchoredMetadata}
-        projectPageMetadata={projectPageMetadata}
+        projectMetadata={projectMetadata}
+        projectPageMetadata={offChainProjectMetadata}
         sanityCreditClassData={sanityCreditClassData}
         batchData={{
           batches: batchesWithSupply,
           totals: batchesTotal,
         }}
+        projectDeveloper={projectDeveloper}
+        landOwner={landOwner}
+        landSteward={landSteward}
         paginationParams={paginationParams}
         setPaginationParams={setPaginationParams}
         geojson={geojson}

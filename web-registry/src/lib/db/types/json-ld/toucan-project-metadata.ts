@@ -1,4 +1,4 @@
-import { NameUrl, TypeValue, URL } from 'lib/rdf/types';
+import { CompactedNameUrl } from 'lib/rdf/types';
 
 import { VCSProjectMetadataLD } from './vcs-project-metadata';
 
@@ -16,16 +16,16 @@ export interface ToucanProjectMetadataLD
   'regen:toucanURI': string;
 
   // optional in C03:
-  'regen:projectStartDate'?: TypeValue;
-  'regen:projectEndDate'?: TypeValue;
+  'regen:projectStartDate'?: string;
+  'regen:projectEndDate'?: string;
   'regen:projectType'?: string;
-  'regen:projectActivity'?: NameUrl;
+  'regen:projectActivity'?: CompactedNameUrl;
   'regen:offsetGenerationMethod'?: string;
 }
 
 interface ApprovedMethodology {
   'schema:identifier': string;
   'schema:name': string;
-  'schema:url': URL;
+  'schema:url': string;
   'schema:version': string;
 }

@@ -4,6 +4,7 @@ import { DevTool } from '@hookform/devtools';
 import { Box } from '@mui/system';
 
 import { Flex } from 'web-components/lib/components/box';
+import { RetirementReminder } from 'web-components/lib/components/form/CreditRetireForm';
 import Submit from 'web-components/lib/components/form/Submit';
 import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
 import AmountField from 'web-components/lib/components/inputs/new/AmountField/AmountField';
@@ -39,9 +40,7 @@ export interface CreditRetireFormProps {
 const CreditRetireForm: React.FC<
   React.PropsWithChildren<CreditRetireFormProps>
 > = ({
-  sender,
   batchDenom,
-  addressPrefix,
   availableTradableAmount,
   mapboxToken,
   onClose,
@@ -85,6 +84,7 @@ const CreditRetireForm: React.FC<
           }
         }}
       >
+        <RetirementReminder sx={{ textAlign: 'center', mb: 8 }} />
         <AmountField
           label={
             <Flex align="center">
@@ -127,7 +127,7 @@ const CreditRetireForm: React.FC<
           onClose={onClose}
           isValid={isValid}
           submitCount={submitCount}
-          label={'Send'}
+          label={'Retire'}
         />
       </Form>
       {IS_DEV && <DevTool control={form.control} />}

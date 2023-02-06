@@ -20,7 +20,7 @@ import {
 } from './ProjectBatchTotals.constants';
 
 const GridItem: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => (
-  <Grid item xs={5} sm={3}>
+  <Grid item xs={5} xl={3}>
     {children}
   </Grid>
 );

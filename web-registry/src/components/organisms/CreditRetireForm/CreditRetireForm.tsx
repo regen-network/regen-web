@@ -28,11 +28,9 @@ import {
 import { validateCreditRetireForm } from './CreditRetireForm.utils';
 
 export interface CreditRetireFormProps {
-  sender: string;
   batchDenom: string;
   availableTradableAmount: number;
   onSubmit: (values: CreditRetireFormSchemaType) => Promise<void>;
-  addressPrefix?: string;
   onClose: RegenModalProps['onClose'];
   mapboxToken: string;
 }

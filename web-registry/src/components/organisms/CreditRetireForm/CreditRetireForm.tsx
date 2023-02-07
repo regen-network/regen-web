@@ -3,13 +3,10 @@ import { useFieldArray, useFormState } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { Box } from '@mui/system';
 
-import { Flex } from 'web-components/lib/components/box';
 import { RetirementReminder } from 'web-components/lib/components/form/CreditRetireForm';
 import Submit from 'web-components/lib/components/form/Submit';
-import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
 import AmountField from 'web-components/lib/components/inputs/new/AmountField/AmountField';
 import { RegenModalProps } from 'web-components/lib/components/modal';
-import InfoTooltip from 'web-components/lib/components/tooltip/InfoTooltip';
 
 import { IS_DEV } from 'lib/env';
 
@@ -64,8 +61,10 @@ const CreditRetireForm: React.FC<
   };
 
   useEffect(() => {
-    append(initialValuesRetire);
-  }, [append]);
+    if (fields.length === 0) {
+      append(initialValuesRetire);
+    }
+  }, [append, fields]);
 
   return (
     <>
@@ -84,24 +83,7 @@ const CreditRetireForm: React.FC<
       >
         <RetirementReminder sx={{ textAlign: 'center', mb: 8 }} />
         <AmountField
-          label={
-            <Flex align="center">
-              <Box sx={{ mr: 1 }}>{'Amount of credits'}</Box>
-              <InfoTooltip
-                title="By default these credits are tradable but you may check “retire all credits upon transfer” below to automatically retire them upon sending."
-                arrow
-                placement="top"
-              >
-                <Box
-                  sx={{
-                    cursor: 'pointer',
-                  }}
-                >
-                  <InfoIcon />
-                </Box>
-              </InfoTooltip>
-            </Flex>
-          }
+          label={<Box>{'Amount retired'}</Box>}
           helperText={errors.amount?.message}
           error={!!errors.amount}
           availableAmount={availableTradableAmount}

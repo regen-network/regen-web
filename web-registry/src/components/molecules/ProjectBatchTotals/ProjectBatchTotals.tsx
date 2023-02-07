@@ -64,7 +64,7 @@ export function ProjectBatchTotals({
       </GridItem>
       <GridItem>
         <LabeledNumber
-          label="Credits Tradeable"
+          label="Credits Tradable"
           tooltipLabel={TRADEABLE_CREDITS_TOOLTIP}
           tooltipNumber={getCreditsTooltip({
             isSoldOut,

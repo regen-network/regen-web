@@ -4,8 +4,12 @@ import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 
 import type { ShaclGraphByUriQuery } from 'generated/graphql';
+<<<<<<< HEAD
 import { getCompactedPath, getProjectPageBaseData, validate } from 'lib/rdf';
 import { UrlList, UrlType } from 'lib/rdf/types';
+=======
+import { getCompactedPath, getProjectBaseData, validate } from 'lib/rdf';
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
 
 import { useProjectEditContext } from 'pages/ProjectEdit';
 import { ProjectPageFooter } from 'components/molecules';
@@ -17,15 +21,14 @@ import type { MediaErrorsSimple, MediaValuesSimple } from './MediaFormSimple';
 import { MediaFormSimple } from './MediaFormSimple';
 
 export interface MediaBaseValues {
-  'regen:previewPhoto'?: UrlType;
-  'regen:galleryPhotos'?: UrlList;
-  'regen:videoURL'?: UrlType;
+  'regen:previewPhoto'?: string | null;
+  'regen:galleryPhotos'?: Array<string | null>;
+  'regen:videoURL'?: string | null;
 }
 
-type ValueObject = { '@value': string };
 export interface MediaBaseErrors {
-  'regen:previewPhoto'?: ValueObject;
-  'regen:videoURL'?: ValueObject;
+  'regen:previewPhoto'?: string;
+  'regen:videoURL'?: string;
 }
 
 export type MediaValues = MediaValuesSimple | MediaValuesLegacy;
@@ -86,6 +89,7 @@ export const MediaForm = ({
             | keyof MediaValues
             | undefined;
         }
+<<<<<<< HEAD
         // Legacy validation logic
         if (!isSimpleMediaFormErrors(errors, creditClassId)) {
           if (path) {
@@ -106,6 +110,10 @@ export const MediaForm = ({
           if (compactedPath) {
             errors[compactedPath] = { '@value': requiredMessage };
           }
+=======
+        if (compactedPath) {
+          errors[compactedPath] = requiredMessage;
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
         }
       }
     }

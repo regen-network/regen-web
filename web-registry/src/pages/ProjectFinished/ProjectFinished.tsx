@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Box } from '@mui/system';
+import { useQuery } from '@tanstack/react-query';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -8,9 +9,11 @@ import { CardItem } from 'web-components/lib/components/modal/TxModal';
 import { Title } from 'web-components/lib/components/typography';
 import { truncateHash } from 'web-components/lib/utils/truncate';
 
+import { graphqlClient } from 'lib/clients/graphqlClient';
+import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
+
 import { Link } from '../../components/atoms';
 import { OnboardingFormTemplate } from '../../components/templates';
-import { useProjectByIdQuery } from '../../generated/graphql';
 import { getHashUrl } from '../../lib/block-explorer';
 import { useCreateProjectContext } from '../ProjectCreate';
 
@@ -18,17 +21,20 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { deliverTxResponse } = useCreateProjectContext();
   const { projectId } = useParams();
   const navigate = useNavigate();
-  const { data, loading } = useProjectByIdQuery({
-    variables: { id: projectId },
-    fetchPolicy: 'cache-and-network',
-  });
-  const projectOnChainId = data?.projectById?.onChainId || '';
+  const { data, isLoading } = useQuery(
+    getProjectByIdQuery({
+      client: graphqlClient,
+      id: projectId,
+    }),
+  );
+
+  const projectOnChainId = data?.data?.projectById?.onChainId || '';
 
   return (
     <OnboardingFormTemplate
       activeStep={2}
       title="Project has been created!"
-      loading={loading}
+      loading={isLoading}
     >
       <Box
         sx={{

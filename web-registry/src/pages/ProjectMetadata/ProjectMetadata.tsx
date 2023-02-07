@@ -1,8 +1,11 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { omit } from 'lodash';
 
-import { ProjectMetadataLD } from 'lib/db/types/json-ld';
+import { graphqlClient } from 'lib/clients/graphqlClient';
+import { AnchoredProjectMetadataBaseLD } from 'lib/db/types/json-ld';
+import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 import { getProjectShapeIri } from 'lib/rdf';
 
 import {
@@ -10,7 +13,6 @@ import {
   OnboardingFormTemplate,
 } from '../../components/templates';
 import {
-  useProjectByIdQuery,
   useShaclGraphByUriQuery,
   useUpdateProjectByIdMutation,
 } from '../../generated/graphql';
@@ -27,14 +29,16 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
     const navigate = useNavigate();
     const { isEdit } = useProjectEditContext();
     const [updateProject] = useUpdateProjectByIdMutation();
-    const { data } = useProjectByIdQuery({
-      variables: { id: projectId },
-      fetchPolicy: 'cache-and-network',
-    });
-    const project = data?.projectById;
+    const { data } = useQuery(
+      getProjectByIdQuery({
+        client: graphqlClient,
+        id: projectId,
+      }),
+    );
+    const project = data?.data?.projectById;
     const creditClassId = project?.creditClassByCreditClassId?.onChainId;
     const isVCS = !!creditClassId && isVCSCreditClass(creditClassId);
-    let metadata: Partial<ProjectMetadataLD> | undefined;
+    let metadata: Partial<AnchoredProjectMetadataBaseLD> | undefined;
     const editPath = `/project-pages/${projectId}`;
 
     const { data: graphData } = useShaclGraphByUriQuery({

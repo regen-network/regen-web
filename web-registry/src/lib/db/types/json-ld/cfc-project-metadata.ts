@@ -1,24 +1,16 @@
-import { TypeValue, UrlType } from 'lib/rdf/types';
-
-import { ProjectMetadataLD } from '.';
+import { AnchoredProjectMetadataBaseLD } from '.';
 
 // type generated from compacted https://github.com/regen-network/regen-registry-standards/blob/main/jsonld/projects/C02-project.jsonld
 
-export interface CFCProjectMetadataLD extends ProjectMetadataLD {
+export interface CFCProjectMetadataLD extends AnchoredProjectMetadataBaseLD {
   'regen:cfcProjectId': string;
-  'regen:cfcProjectPage': TypeValue;
+  'regen:cfcProjectPage': string;
   'regen:offsetProtocol': OffsetProtocol;
-  'regen:projectDesignDocument': TypeValue;
-  'regen:projectOperator'?: ProjectOperator;
+  'regen:projectDesignDocument': string;
 }
 
 interface OffsetProtocol {
   'schema:name': string;
-  'schema:url': UrlType;
+  'schema:url': string;
   'schema:version': string;
-}
-
-interface ProjectOperator {
-  'schema:name': string;
-  'schema:url': UrlType;
 }

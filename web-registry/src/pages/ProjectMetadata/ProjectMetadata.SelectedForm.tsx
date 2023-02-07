@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ProjectMetadataLD } from 'lib/db/types/json-ld';
+import { AnchoredProjectMetadataBaseLD } from 'lib/db/types/json-ld';
 
 import { ProjectMetadataForm } from '../../components/organisms/ProjectMetadataForm/ProjectMetadataForm';
 import { ShaclGraphByUriQuery } from '../../generated/graphql';
@@ -9,7 +9,7 @@ import { useProjectMetadataSubmitReturnedType } from './hooks/useProjectMetadata
 type Props = {
   isVCS: boolean;
   submit: useProjectMetadataSubmitReturnedType;
-  metadata?: Partial<ProjectMetadataLD>;
+  metadata?: Partial<AnchoredProjectMetadataBaseLD>;
   graphData?: ShaclGraphByUriQuery;
   onNext?: () => void;
   onPrev?: () => void;

@@ -13,12 +13,6 @@ import { ImageUpload } from '../inputs/ImageUpload';
 import { Title } from '../typography';
 import Modal from '.';
 
-// TODO: type UrlType has been temporarily duplicated due to moving the RDF types to the web-registry app
-interface UrlType {
-  '@type': 'schema:URL';
-  '@value'?: string | null;
-}
-
 type ProfileType = 'regen:Individual' | 'regen:Organization';
 
 interface ProfileModalProps {
@@ -36,7 +30,7 @@ export interface ProfileFormValues {
   id?: string;
   '@type': ProfileType;
   'schema:name'?: string;
-  'schema:image'?: UrlType;
+  'schema:image'?: string | null;
   'schema:description'?: string;
   'regen:address'?: string;
   // 'regen:sharePermission'?: boolean;
@@ -97,7 +91,7 @@ function ProfileModal({
                   <Field
                     component={ImageUpload}
                     label="Profile image"
-                    name="schema:image.@value"
+                    name="schema:image"
                     fallbackAvatar={
                       organization && (
                         <OrganizationIcon

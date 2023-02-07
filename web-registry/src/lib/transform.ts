@@ -4,24 +4,23 @@ import { Party } from 'web-components/lib/components/modal/LedgerModal';
 import { getFormattedPeriod } from 'web-components/lib/utils/format';
 
 import {
-  ProjectMetadataIntersectionLD,
+  AnchoredProjectMetadataBaseLD,
   ProjectStakeholder,
 } from 'lib/db/types/json-ld';
 
 import {
   Maybe,
   PartyFieldsFragment,
-  ProjectByOnChainIdQuery,
+  ProjectFieldsFragment,
 } from '../generated/graphql';
 
 // buildIssuanceModalData builds some IssuanceModalData to provide
 // to a Timeline Event based on some optional credit vintage data.
-// TODO get generated type for creditVintage and project from graphql schema.
+// TODO get generated type for creditVintage from graphql schema.
 export function buildIssuanceModalData(
-  data?: ProjectByOnChainIdQuery,
+  project?: Maybe<ProjectFieldsFragment>,
   creditVintage?: any,
 ): IssuanceModalData | null {
-  const project = data?.projectByOnChainId;
   if (project && creditVintage) {
     const documents = project.documentsByProjectId.nodes;
     const issuerWallet = creditVintage.walletByTokenizerId;
@@ -155,29 +154,18 @@ export function getParty(
   }
   const partyOrg = party.organizationByPartyId;
   const partyUser =
-    partyOrg?.organizationMembersByOrganizationId &&
-    partyOrg.organizationMembersByOrganizationId.nodes &&
-    partyOrg.organizationMembersByOrganizationId.nodes.length &&
-    partyOrg.organizationMembersByOrganizationId.nodes[0] &&
-    partyOrg.organizationMembersByOrganizationId.nodes[0].userByMemberId;
-  const partyAddress =
-    party.addressByAddressId &&
-    party.addressByAddressId.feature &&
-    party.addressByAddressId.feature.place_name;
+    partyOrg?.organizationMembersByOrganizationId?.nodes?.[0]?.userByMemberId;
+  const partyAddress = party.addressByAddressId?.feature?.place_name;
 
   return {
     name: party.name,
     location: partyAddress || '',
-    description: party.description || '',
+    description: party.description,
     type: party.type,
-    image: party.image || '',
-    address: (party.walletByWalletId && party.walletByWalletId.addr) || '',
-    role:
-      (partyUser &&
-        partyUser.partyByPartyId?.roles &&
-        partyUser.partyByPartyId.roles.length &&
-        partyUser.partyByPartyId.roles[0]) ||
-      '',
+    image: party.image,
+    address: party.walletByWalletId?.addr || '',
+    link: partyOrg?.website,
+    role: partyUser?.partyByPartyId?.roles?.[0] || '',
     individual: (partyUser && partyUser.partyByPartyId?.name) || '',
   };
 }
@@ -189,7 +177,7 @@ type StakeholderType =
   | 'regen:projectOriginator';
 
 const getPartyFromMetadata = (
-  metadata: Partial<ProjectMetadataIntersectionLD>,
+  metadata: AnchoredProjectMetadataBaseLD,
   role: StakeholderType,
 ): Party | undefined => {
   const metadataRole: ProjectStakeholder | undefined = metadata[role];
@@ -201,16 +189,18 @@ const getPartyFromMetadata = (
     type: metadataRole?.['@type'].includes('regen:Organization') // covers Organization or OrganizationDisplay
       ? 'ORGANIZATION' // to provide default image
       : '',
-    image: metadataRole?.['schema:image']?.['@value'],
-    address: metadataRole?.['schema:location']?.place_name || '',
+    image: metadataRole?.['schema:image'],
+    location: metadataRole?.['schema:location']?.place_name || '',
+    address: metadataRole?.['regen:adress'] || '',
     individual: '',
     role: '',
+    link: metadataRole?.['schema:url'] || '',
   };
 };
 
 export function getDisplayParty(
   role: StakeholderType,
-  metadata?: Partial<ProjectMetadataIntersectionLD>,
+  metadata?: AnchoredProjectMetadataBaseLD,
   party?: Maybe<PartyFieldsFragment>,
 ): Party | undefined {
   const showOnProjectPage = metadata?.[role]?.['regen:showOnProjectPage'];

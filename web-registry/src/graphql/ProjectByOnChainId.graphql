@@ -1,5 +1,6 @@
 query ProjectByOnChainId($onChainId: String!) {
   projectByOnChainId(onChainId: $onChainId) {
+<<<<<<< HEAD
     eventsByProjectId(orderBy: DATE_ASC) {
       nodes {
         date
@@ -66,5 +67,8 @@ query ProjectByOnChainId($onChainId: String!) {
         }
       }
     }
+=======
+    ...projectFields
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
   }
 }

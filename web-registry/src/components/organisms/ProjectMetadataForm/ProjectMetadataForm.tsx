@@ -5,7 +5,7 @@ import ControlledFormLabel from 'web-components/lib/components/form/ControlledFo
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import { Body } from 'web-components/lib/components/typography';
 
-import { ProjectMetadataLD } from 'lib/db/types/json-ld';
+import { AnchoredProjectMetadataBaseLD } from 'lib/db/types/json-ld';
 
 import { ShaclGraphByUriQuery } from '../../../generated/graphql';
 import { useProjectEditContext } from '../../../pages/ProjectEdit';
@@ -15,7 +15,7 @@ import { validationSchema } from './ProjectMetadataForm.utils';
 
 interface ProjectMetadataFormProps {
   submit: (values: ProjectMetadataValues) => Promise<void>;
-  initialValues?: Partial<ProjectMetadataLD>;
+  initialValues?: Partial<AnchoredProjectMetadataBaseLD>;
   graphData?: ShaclGraphByUriQuery;
   onNext?: () => void;
   onPrev?: () => void;

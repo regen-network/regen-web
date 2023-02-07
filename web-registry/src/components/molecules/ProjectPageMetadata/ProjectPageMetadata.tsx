@@ -5,13 +5,13 @@ import { ExpandButton } from 'web-components/lib/components/buttons/ExpandButton
 import { Title } from 'web-components/lib/components/typography';
 import { formatDate } from 'web-components/lib/utils/format';
 
-import { ProjectMetadataIntersectionLD } from 'lib/db/types/json-ld';
+import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 
 import { ArrowLink } from '../../atoms/MetadataArrowLink';
 import { MetaDetail } from '../MetaDetail';
 
-export interface MetadataProps {
-  metadata?: Partial<ProjectMetadataIntersectionLD>;
+interface MetadataProps {
+  metadata?: AnchoredProjectMetadataLD;
 }
 
 const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
@@ -23,8 +23,8 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
   if (!metadata) return null;
 
   // Common
-  const startDate = metadata?.['regen:projectStartDate']?.['@value'];
-  const endDate = metadata?.['regen:projectEndDate']?.['@value'];
+  const startDate = metadata?.['regen:projectStartDate'];
+  const endDate = metadata?.['regen:projectEndDate'];
   const offsetGenerationMethod =
     metadata?.['regen:offsetGenerationMethod'] ||
     metadata?.['http://regen.network/offsetGenerationMethod'];
@@ -57,7 +57,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
                 data={
                   <ArrowLink
                     label={methodology?.['schema:name']}
-                    href={methodology?.['schema:url']?.['@value'] || ''}
+                    href={methodology?.['schema:url'] || ''}
                   />
                 }
               />
@@ -73,7 +73,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
                 label="project activity"
                 data={
                   <ArrowLink
-                    href={projectActivity?.['schema:url']?.['@value'] || ''}
+                    href={projectActivity?.['schema:url'] || ''}
                     label={projectActivity?.['schema:name']}
                   />
                 }
@@ -87,7 +87,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
                     {approvedMethodologies.map(methodology => (
                       <ArrowLink
                         label={methodology?.['schema:name']}
-                        href={methodology?.['schema:url']?.['@value'] || ''}
+                        href={methodology?.['schema:url'] || ''}
                       />
                     ))}
                   </>
@@ -111,7 +111,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
                 data={
                   <ArrowLink
                     label={vcsProjectId.toString()}
-                    href={metadata?.['regen:vcsProjectPage']?.['@value'] || ''}
+                    href={metadata?.['regen:vcsProjectPage'] || ''}
                   />
                 }
               />
@@ -119,7 +119,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
             {projectType && (
               <MetaDetail
                 label={`${vcsProjectId ? 'vcs ' : ''}project type`}
-                data={metadata?.['regen:projectType']}
+                data={projectType}
               />
             )}
             {projectDesignDocument && (
@@ -128,7 +128,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
                 data={
                   <ArrowLink
                     label="Project Design Document"
-                    href={String(projectDesignDocument?.['@value']) || ''}
+                    href={projectDesignDocument}
                   />
                 }
               />
@@ -139,7 +139,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
                 data={
                   <ArrowLink
                     label={cfcProjectId}
-                    href={metadata?.['regen:cfcProjectPage']?.['@value'] || ''}
+                    href={metadata?.['regen:cfcProjectPage'] || ''}
                   />
                 }
               />
@@ -150,7 +150,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
                 data={
                   <ArrowLink
                     label={offsetProtocol?.['schema:name']}
-                    href={offsetProtocol?.['schema:url']?.['@value'] || ''}
+                    href={offsetProtocol?.['schema:url'] || ''}
                   />
                 }
               />

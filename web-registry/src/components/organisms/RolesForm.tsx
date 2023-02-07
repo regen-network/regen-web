@@ -14,12 +14,16 @@ import { OrganizationFormValues } from 'web-components/lib/components/modal/Orga
 import { ProfileFormValues } from 'web-components/lib/components/modal/ProfileModal';
 import { Subtitle } from 'web-components/lib/components/typography';
 
+<<<<<<< HEAD
 import {
   defaultProjectContext,
   getCompactedPath,
   getProjectPageBaseData,
   validate,
 } from 'lib/rdf';
+=======
+import { DEFAULT_PROJECT_CONTEXT, getCompactedPath, validate } from 'lib/rdf';
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
 import {
@@ -205,7 +209,11 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     if (graphData?.shaclGraphByUri?.graph) {
       const report = await validate(
         graphData.shaclGraphByUri.graph,
+<<<<<<< HEAD
         { ...defaultProjectContext, ...e },
+=======
+        { '@context': DEFAULT_PROJECT_CONTEXT, ...p },
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
         'http://regen.network/ProjectPageRolesGroup',
       );
       for (const result of report.results) {

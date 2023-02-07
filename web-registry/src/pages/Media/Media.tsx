@@ -1,7 +1,12 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+<<<<<<< HEAD
 import { Loading } from 'web-components/lib/components/loading';
+=======
+import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
+import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
 
 import {
   getProjectShapeIri,
@@ -24,8 +29,6 @@ import {
   useUpdateProjectByIdMutation,
 } from '../../generated/graphql';
 import { useProjectEditContext } from '../ProjectEdit';
-
-const PHOTO_COUNT = 4;
 
 const Media = (): JSX.Element => {
   const { projectId } = useParams();
@@ -58,12 +61,24 @@ const Media = (): JSX.Element => {
     );
     values['regen:videoURL'] = getURLInitialValue(metadata['regen:videoURL']);
 
+<<<<<<< HEAD
     if (isSimpleMediaFormValues(values, creditClassId)) {
       values['schema:creditText'] = metadata['schema:creditText'] || '';
     } else {
       values['regen:landStewardPhoto'] = getURLInitialValue(
         metadata['regen:landStewardPhoto'],
       );
+=======
+  function getInitialFormValues(): MediaValuesSimple {
+    let values: MediaValuesSimple = {};
+    if (metadata) {
+      values = {
+        'regen:previewPhoto': metadata['regen:previewPhoto'],
+        'regen:galleryPhotos': metadata['regen:galleryPhotos'],
+        'regen:videoURL': metadata['regen:videoURL'],
+        'schema:creditText': metadata['schema:creditText'],
+      };
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
     }
     return values;
   }

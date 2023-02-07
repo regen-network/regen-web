@@ -1,18 +1,36 @@
+import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { useQuery } from '@tanstack/react-query';
 
+import {
+  AnchoredProjectMetadataBaseLD,
+  ProjectPageMetadataLD,
+} from 'lib/db/types/json-ld';
 import { getGeojsonQuery } from 'lib/queries/react-query/registry-server/getGeojsonQuery/getGeojsonQuery';
 
 import { parseGeojson } from '../utils/parseGeojson';
 
-export default function useGeojson(metadata: any): {
-  geojson: any;
+interface UseGeojsonParams {
+  projectMetadata?: AnchoredProjectMetadataBaseLD;
+  projectPageMetadata?: ProjectPageMetadataLD;
+}
+
+export default function useGeojson({
+  projectMetadata,
+  projectPageMetadata,
+}: UseGeojsonParams): {
+  geojson?: string | GeocodeFeature;
   isGISFile: boolean;
 } {
   // Convert kml to geojson
-  const mapFile: string = metadata?.['regen:boundaries']?.['@value'];
-  const isGISFile: boolean = /\.(json|kml)$/i.test(mapFile);
-  const isKMLFile: boolean = /\.kml$/i.test(mapFile);
-  const metadataLocation = metadata?.['schema:location'];
+  const mapFile = projectPageMetadata?.['regen:boundaries'];
+  let isGISFile = false,
+    isKMLFile = false;
+  if (mapFile) {
+    isGISFile = /\.(json|kml)$/i.test(mapFile);
+    isKMLFile = /\.kml$/i.test(mapFile);
+  }
+
+  const metadataLocation = projectMetadata?.['schema:location'];
 
   const { data: geojsonResult } = useQuery(
     getGeojsonQuery({ mapFile, enabled: isGISFile && !!mapFile }),

@@ -32,6 +32,9 @@ function getInitialValues(value: any): any {
   return value?.['@type'] ? value : undefined;
 }
 
+/**
+ * @deprecated part of legacy project forms
+ */
 const EntityDisplay: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { projectId } = useParams();
   const { isEdit } = useProjectEditContext();

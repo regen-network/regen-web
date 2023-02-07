@@ -33,7 +33,11 @@ type Props = {
   onTxBroadcast: () => void;
 };
 
+<<<<<<< HEAD
 type ReturnType = (values: CreateSellOrderFormValues) => Promise<void>;
+=======
+type Return = (values: CreateSellOrderFormValues) => Promise<void>;
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
 
 const useCreateSellOrderSubmit = ({
   accountAddress,
@@ -43,7 +47,11 @@ const useCreateSellOrderSubmit = ({
   setCardItems,
   setTxButtonTitle,
   onTxBroadcast,
+<<<<<<< HEAD
 }: Props): ReturnType => {
+=======
+}: Props): Return => {
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
   const { track } = useTracker();
   const reactQueryClient = useQueryClient();
   const createSellOrderSubmit = useCallback(

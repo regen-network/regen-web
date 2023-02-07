@@ -25,31 +25,25 @@ const VCSMetadata: React.FC<React.PropsWithChildren<Props>> = ({
       <ItemDisplay name="Project activity url">
         <Link
           target="_blank"
-          href={
-            metadata?.['regen:projectActivity']?.['schema:url']?.['@value'] ||
-            ''
-          }
+          href={metadata?.['regen:projectActivity']?.['schema:url'] || ''}
         >
-          {metadata?.['regen:projectActivity']?.['schema:url']?.['@value']}
+          {metadata?.['regen:projectActivity']?.['schema:url']}
         </Link>
       </ItemDisplay>
       <ItemDisplay name="VCS project ID">
         {metadata?.['regen:vcsProjectId']}
       </ItemDisplay>
       <ItemDisplay name="VCS project page url">
-        <Link
-          target="_blank"
-          href={metadata?.['regen:vcsProjectPage']?.['@value'] || ''}
-        >
-          {metadata?.['regen:vcsProjectPage']?.['@value']}
+        <Link target="_blank" href={metadata?.['regen:vcsProjectPage'] || ''}>
+          {metadata?.['regen:vcsProjectPage']}
         </Link>
       </ItemDisplay>
       <ItemDisplay name="Project start and end date">{`${formatDate(
-        metadata?.['regen:projectStartDate']?.['@value'],
+        metadata?.['regen:projectStartDate'],
         undefined,
         true,
       )} - ${formatDate(
-        metadata?.['regen:projectEndDate']?.['@value'],
+        metadata?.['regen:projectEndDate'],
         undefined,
         true,
       )}`}</ItemDisplay>
@@ -59,11 +53,9 @@ const VCSMetadata: React.FC<React.PropsWithChildren<Props>> = ({
       <ItemDisplay name="VCS methodology url">
         <Link
           target="_blank"
-          href={
-            metadata?.['regen:vcsMethodology']?.['schema:url']?.['@value'] || ''
-          }
+          href={metadata?.['regen:vcsMethodology']?.['schema:url'] || ''}
         >
-          {metadata?.['regen:vcsMethodology']?.['schema:url']?.['@value']}
+          {metadata?.['regen:vcsMethodology']?.['schema:url']}
         </Link>
       </ItemDisplay>
     </>

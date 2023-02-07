@@ -6,7 +6,7 @@ interface UserAvatarProps {
   src?: string | null;
   size?: string;
   border?: boolean;
-  href?: string;
+  href?: string | null;
   icon?: any;
 }
 

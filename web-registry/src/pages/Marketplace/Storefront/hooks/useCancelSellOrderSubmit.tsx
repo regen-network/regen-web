@@ -34,7 +34,11 @@ type Props = {
   setIsProcessingModalOpen: UseStateSetter<boolean>;
 };
 
+<<<<<<< HEAD
 type ReturnType = () => Promise<void>;
+=======
+type Return = () => Promise<void>;
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
 
 const useCancelSellOrderSubmit = ({
   signAndBroadcast,
@@ -46,7 +50,11 @@ const useCancelSellOrderSubmit = ({
   setTxButtonTitle,
   setSelectedSellOrder,
   setIsProcessingModalOpen,
+<<<<<<< HEAD
 }: Props): ReturnType => {
+=======
+}: Props): Return => {
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
   const cancelSellOrderSubmit = useCallback(async (): Promise<void> => {
     if (!accountAddress) return Promise.reject();
 

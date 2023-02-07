@@ -32,7 +32,11 @@ type Props = {
   }: OnTxSuccessfulProps) => void;
 };
 
+<<<<<<< HEAD
 type ReturnType = (values: BasketPutFormValues) => Promise<void>;
+=======
+type Return = (values: BasketPutFormValues) => Promise<void>;
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
 
 const useBasketPutSubmit = ({
   accountAddress,
@@ -43,7 +47,11 @@ const useBasketPutSubmit = ({
   onBroadcast,
   onTxSuccessful,
   onErrorCallback,
+<<<<<<< HEAD
 }: Props): ReturnType => {
+=======
+}: Props): Return => {
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
   const { track } = useTracker();
 
   const basketPutSubmit = useCallback(

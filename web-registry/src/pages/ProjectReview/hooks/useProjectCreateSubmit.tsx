@@ -2,14 +2,14 @@ import { useCallback } from 'react';
 import { MsgCreateProject } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 
 import { generateIri, IriFromMetadataSuccess } from 'lib/db/api/metadata-graph';
-import { ProjectMetadataIntersectionLD } from 'lib/db/types/json-ld';
+import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 
 import { SignAndBroadcastType } from '../../../hooks/useMsgClient';
 
 interface MsgCreateProjectValues {
   classId: string;
   admin: string;
-  metadata: Partial<ProjectMetadataIntersectionLD>;
+  metadata: Partial<ProjectMetadataLD>;
   jurisdiction: string;
   referenceId?: string;
 }
@@ -18,11 +18,19 @@ interface Props {
   signAndBroadcast: SignAndBroadcastType;
 }
 
+<<<<<<< HEAD
 type ReturnType = {
   projectCreateSubmit: (values: MsgCreateProjectValues) => Promise<void>;
 };
 
 const useProjectCreateSubmit = ({ signAndBroadcast }: Props): ReturnType => {
+=======
+type Return = {
+  projectCreateSubmit: (values: MsgCreateProjectValues) => Promise<void>;
+};
+
+const useProjectCreateSubmit = ({ signAndBroadcast }: Props): Return => {
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
   const projectCreateSubmit = useCallback(
     async ({
       classId,
@@ -35,7 +43,7 @@ const useProjectCreateSubmit = ({ signAndBroadcast }: Props): ReturnType => {
         return Promise.reject('cant create project without a class ID');
 
       let iriResponse:
-        | IriFromMetadataSuccess<Partial<ProjectMetadataIntersectionLD>>
+        | IriFromMetadataSuccess<Partial<ProjectMetadataLD>>
         | undefined;
 
       try {

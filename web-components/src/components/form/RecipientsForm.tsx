@@ -46,12 +46,20 @@ export interface FormValues {
   recipients: Recipient[];
 }
 
+<<<<<<< HEAD
 type ReturnType = {
+=======
+type Return = {
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
   recipients: Yup.ArraySchema<Yup.AnyObjectSchema>;
 };
 
 // validationSchemaFields
+<<<<<<< HEAD
 export function getValidationSchemaFields(addressPrefix: string): ReturnType {
+=======
+export function getValidationSchemaFields(addressPrefix: string): Return {
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
   return {
     recipients: Yup.array()
       .of(

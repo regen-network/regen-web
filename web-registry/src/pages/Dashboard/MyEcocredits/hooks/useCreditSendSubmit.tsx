@@ -30,7 +30,11 @@ type Props = {
   setTxModalTitle: UseStateSetter<string | undefined>;
 };
 
+<<<<<<< HEAD
 type ReturnType = (values: CreditSendFormSchemaType) => Promise<void>;
+=======
+type Return = (values: CreditSendFormSchemaType) => Promise<void>;
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
 
 const useCreditSendSubmit = ({
   accountAddress,
@@ -42,7 +46,11 @@ const useCreditSendSubmit = ({
   setCardItems,
   setTxModalHeader,
   setTxModalTitle,
+<<<<<<< HEAD
 }: Props): ReturnType => {
+=======
+}: Props): Return => {
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
   const { track } = useTracker();
   const creditSendSubmit = useCallback(
     async (values: CreditSendFormSchemaType): Promise<void> => {

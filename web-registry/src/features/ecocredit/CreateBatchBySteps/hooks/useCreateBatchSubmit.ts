@@ -109,7 +109,11 @@ type SubmissionStatus =
 
 type CreateBatchFn = (data: CreateBatchFormValues) => Promise<void>;
 
+<<<<<<< HEAD
 type ReturnType = {
+=======
+type Return = {
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
   status: SubmissionStatus;
   deliverTxResponse: DeliverTxResponse | undefined;
   error: string | undefined;
@@ -118,7 +122,11 @@ type ReturnType = {
   closeSubmitModal: () => void;
 };
 
+<<<<<<< HEAD
 export default function useCreateBatchSubmit(): ReturnType {
+=======
+export default function useCreateBatchSubmit(): Return {
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
   const { api } = useLedger();
   const { wallet, signAndBroadcast, deliverTxResponse, error, setError } =
     useMsgClient(handleTxQueued, handleTxDelivered, handleError);

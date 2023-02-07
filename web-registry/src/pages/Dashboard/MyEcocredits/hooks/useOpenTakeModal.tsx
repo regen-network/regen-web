@@ -13,13 +13,21 @@ type Props = {
   setBasketTakeTokens: UseStateSetter<BasketTokens | undefined>;
 };
 
+<<<<<<< HEAD
 type ReturnType = (rowIndex: number) => void;
+=======
+type Return = (rowIndex: number) => void;
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
 
 const useOpenTakeModal = ({
   basketsWithClasses,
   basketTokens,
   setBasketTakeTokens,
+<<<<<<< HEAD
 }: Props): ReturnType => {
+=======
+}: Props): Return => {
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
   const { track } = useTracker();
   const openTakeModal = useCallback(
     (rowIndex: number): void => {

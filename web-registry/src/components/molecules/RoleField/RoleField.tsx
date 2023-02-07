@@ -22,8 +22,6 @@ import {
 } from 'web-components/lib/components/modal/ProfileModal';
 import { Label } from 'web-components/lib/components/typography';
 
-import { getURLInitialValue } from 'lib/rdf';
-
 const useStyles = makeStyles()(theme => ({
   root: {
     display: 'flex',
@@ -254,6 +252,7 @@ const RoleField: React.FC<React.PropsWithChildren<Props>> = ({
                   className={styles.add}
                   onClick={e => {
                     e.stopPropagation();
+<<<<<<< HEAD
                     if (profile) {
                       setProfileEdit({
                         '@type': 'regen:Organization',
@@ -265,6 +264,12 @@ const RoleField: React.FC<React.PropsWithChildren<Props>> = ({
                         '@type': 'regen:Organization',
                       });
                     }
+=======
+                    setProfileEdit({
+                      '@type': 'regen:Organization',
+                      'regen:showOnProjectPage': true,
+                    });
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
                   }}
                 >
                   <OrganizationIcon />
@@ -279,6 +284,7 @@ const RoleField: React.FC<React.PropsWithChildren<Props>> = ({
                   className={styles.add}
                   onClick={e => {
                     e.stopPropagation();
+<<<<<<< HEAD
                     if (profile) {
                       setProfileEdit({
                         '@type': 'regen:Individual',
@@ -290,6 +296,12 @@ const RoleField: React.FC<React.PropsWithChildren<Props>> = ({
                         '@type': 'regen:Individual',
                       });
                     }
+=======
+                    setProfileEdit({
+                      '@type': 'regen:Individual',
+                      'regen:showOnProjectPage': true,
+                    });
+>>>>>>> edb3ddf3 (feat: project non-queryable metadata (#1701))
                   }}
                 >
                   <UserIcon />

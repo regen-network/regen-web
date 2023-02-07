@@ -3,6 +3,7 @@ import {
   ProjectByOnChainIdQuery,
   ProjectByOnChainIdQueryVariables,
 } from 'generated/graphql';
+import { jsonLdCompact } from 'lib/rdf';
 
 import { getProjectByOnChainIdKey } from './getProjectByOnChainIdQuery.constants';
 import {
@@ -22,6 +23,13 @@ export const getProjectByOnChainIdQuery = ({
         ProjectByOnChainIdQuery,
         ProjectByOnChainIdQueryVariables
       >({ query: ProjectByOnChainIdDocument, variables: { onChainId } });
+
+      if (projectByOnChainId.data?.projectByOnChainId?.metadata) {
+        projectByOnChainId.data.projectByOnChainId.metadata =
+          await jsonLdCompact(
+            projectByOnChainId.data.projectByOnChainId.metadata,
+          );
+      }
 
       return projectByOnChainId;
     } catch (e) {

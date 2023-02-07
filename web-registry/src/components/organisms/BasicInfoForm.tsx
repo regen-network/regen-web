@@ -22,8 +22,8 @@ import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { ProjectPageFooter } from '../molecules';
 
 export interface BasicInfoFormValues {
-  'schema:name': string;
-  'regen:projectSize': {
+  'schema:name'?: string;
+  'regen:projectSize'?: {
     'qudt:numericValue'?: number | string;
     'qudt:unit': string;
   };

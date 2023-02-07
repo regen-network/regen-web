@@ -13,7 +13,7 @@ import { ImageUpload } from '../inputs/ImageUpload';
 import { Title } from '../typography';
 import Modal from '.';
 
-type ProfileType = 'regen:Individual' | 'regen:Organization';
+export type ProfileType = 'regen:Individual' | 'regen:Organization';
 
 interface ProfileModalProps {
   profile: ProfileFormValues;

@@ -8,6 +8,7 @@ import {
   useUpdateProjectByIdMutation,
 } from 'generated/graphql';
 import { graphqlClient } from 'lib/clients/graphqlClient';
+import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getProjectKey } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery.constants';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
@@ -38,7 +39,7 @@ interface Props {
 
 interface Res {
   offChainProject?: OffChainProject;
-  metadata: any; // TODO update with proper type
+  metadata?: Partial<ProjectMetadataLD>;
   metadataReload: () => Promise<void>;
   metadataSubmit: (values: Values) => Promise<void>;
 }
@@ -47,7 +48,8 @@ type Values =
   | BasicInfoFormValues
   | ProjectLocationFormValues
   | DescriptionValues
-  | MediaValues;
+  | MediaValues
+  | Partial<ProjectMetadataLD>;
 
 export const useProjectWithMetadata = ({
   projectId,
@@ -57,7 +59,7 @@ export const useProjectWithMetadata = ({
   projectEditSubmit,
   anchored = true,
 }: Props): Res => {
-  let metadata: any;
+  let metadata: Partial<ProjectMetadataLD> | undefined;
   let offChainProject: OffChainProject | undefined;
   const reactQueryClient = useQueryClient();
   const [updateProject] = useUpdateProjectByIdMutation();

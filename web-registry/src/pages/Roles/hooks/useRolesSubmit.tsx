@@ -12,6 +12,7 @@ import {
   useUpdateProjectByIdMutation,
   useUpdateWalletByIdMutation,
 } from 'generated/graphql';
+import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 
 import { UseProjectEditSubmitParams } from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
 import { RolesValues } from 'components/organisms';
@@ -19,7 +20,7 @@ import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';
 
 interface Props {
   offChainProject?: OffChainProject;
-  metadata: any; // TODO update with proper type
+  metadata?: Partial<ProjectMetadataLD>;
   projectEditSubmit: UseProjectEditSubmitParams;
   isEdit?: boolean;
   metadataReload: () => Promise<void>;

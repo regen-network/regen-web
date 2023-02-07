@@ -50,10 +50,13 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
       // In creation mode, use current wallet address
       admin: isEdit ? onChainProject?.admin : wallet?.address,
     };
-    if (metadata) {
+    if (
+      metadata?.['regen:projectDeveloper'] &&
+      offChainProject?.partyByDeveloperId?.id
+    ) {
       const projectDeveloper = {
         ...metadata['regen:projectDeveloper'],
-        id: offChainProject?.partyByDeveloperId?.id,
+        id: offChainProject.partyByDeveloperId.id,
       };
       values = {
         ...values,

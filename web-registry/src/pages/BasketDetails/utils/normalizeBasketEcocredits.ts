@@ -7,10 +7,8 @@ import {
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { ClassProjectInfo } from 'types/ledger/ecocredit';
 import { normalizeClassProjectForBatch } from 'lib/normalizers/classProjectForBatch/normalizeClassProjectForBatch';
-import {
-  EMPTY_BATCH_INFO,
-  EMPTY_CREDIT_CLASS,
-} from 'lib/normalizers/ecocredits/normalizeEcocredits.constants';
+import { EMPTY_CLASS_PROJECT_INFO } from 'lib/normalizers/classProjectForBatch/normalizeClassProjectForBatch.constants';
+import { EMPTY_BATCH_INFO } from 'lib/normalizers/ecocredits/normalizeEcocredits.constants';
 
 interface Params {
   balance?: BasketBalanceInfo;
@@ -46,7 +44,7 @@ export const normalizeBasketEcocredits = ({
         metadata,
         project,
       })
-    : EMPTY_CREDIT_CLASS;
+    : EMPTY_CLASS_PROJECT_INFO;
 
   return {
     ...(batch ?? EMPTY_BATCH_INFO),

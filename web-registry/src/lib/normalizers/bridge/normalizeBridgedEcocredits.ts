@@ -1,34 +1,38 @@
+import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
 import {
-  BatchBalanceInfo,
   BatchInfo,
   ProjectInfo,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
-import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
+import { BridgedEcocredits } from 'types/ledger/ecocredit';
+import { GetBridgeTxStatusResponse } from 'lib/bridge';
+
+import { TxCredits } from 'components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.types';
 
 import { normalizeClassProjectForBatch } from '../classProjectForBatch/normalizeClassProjectForBatch';
 import { EMPTY_CLASS_PROJECT_INFO } from '../classProjectForBatch/normalizeClassProjectForBatch.constants';
-import {
-  EMPTY_BALANCE_INFO,
-  EMPTY_BATCH_INFO,
-} from './normalizeEcocredits.constants';
+import { EMPTY_BATCH_INFO } from '../ecocredits/normalizeEcocredits.constants';
 
 interface Params {
-  balance?: BatchBalanceInfo;
   project?: ProjectInfo | null;
   metadata?: any | null;
   sanityCreditClassData?: AllCreditClassQuery;
   batch?: BatchInfo | null;
+  txStatus?: GetBridgeTxStatusResponse | null;
+  txResponse?: TxResponse;
+  credit: TxCredits;
 }
 
-export const normalizeEcocredits = ({
-  balance,
+export const normalizeBridgedEcocredits = ({
   batch,
   metadata,
   project,
   sanityCreditClassData,
-}: Params): BatchInfoWithBalance => {
+  credit,
+  txResponse,
+  txStatus,
+}: Params): BridgedEcocredits => {
   const hasAllClassInfos =
     batch !== undefined &&
     metadata !== undefined &&
@@ -47,6 +51,10 @@ export const normalizeEcocredits = ({
   return {
     ...(batch ?? EMPTY_BATCH_INFO),
     ...classProjectInfo,
-    balance: { ...(balance ?? EMPTY_BALANCE_INFO) },
+    amount: credit.amount,
+    status: txStatus?.status,
+    destinationTxHash: txStatus?.evm_tx_hash,
+    txHash: txResponse?.txhash,
+    txTimestamp: txResponse?.timestamp,
   };
 };

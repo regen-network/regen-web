@@ -20,14 +20,17 @@ import ReadMore from 'web-components/lib/components/read-more';
 import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
-import { getAreaUnit, qudtUnit } from 'lib/rdf';
-
+import {
+  API_URI,
+  IMAGE_STORAGE_BASE_URL,
+  MAPBOX_TOKEN,
+} from 'components/templates/ProjectDetails/ProjectDetails.config';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { useSdgByIriQuery } from '../../../generated/sanity-graphql';
 import { client } from '../../../lib/clients/sanity';
 import { getSanityImgSrc } from '../../../lib/imgSrc';
-import { getDisplayParty, getParty } from '../../../lib/transform';
+import { getParty } from '../../../lib/transform';
 import { ProjectTopLink } from '../../atoms';
 import { ProjectBatchTotals, ProjectPageMetadata } from '../../molecules';
 import { CreditBatches } from '../CreditBatches/CreditBatches';
@@ -38,14 +41,21 @@ import {
 import { ProjectTopSectionProps } from './ProjectTopSection.types';
 import {
   getDisplayAdmin,
-  getDisplayDeveloper,
+  isAnchoredProjectMetadata,
+  parseOffChainProject,
+  parseProjectMetadata,
+  parseProjectPageMetadata,
 } from './ProjectTopSection.utils';
 
 function ProjectTopSection({
-  data,
+  offChainProject,
   onChainProject,
-  metadata,
+  projectMetadata,
+  projectPageMetadata,
   sanityCreditClassData,
+  projectDeveloper,
+  landSteward,
+  landOwner,
   geojson,
   isGISFile,
   batchData,
@@ -58,30 +68,22 @@ function ProjectTopSection({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
-  const apiServerUrl = process.env.REACT_APP_API_URI;
+  const { creditClass, creditClassVersion, sdgIris, offsetGenerationMethod } =
+    parseOffChainProject(offChainProject);
 
-  const project = data?.projectByOnChainId || data?.projectByHandle; // TODO: eventually just projectByOnChainId
-  const projectName = metadata?.['schema:name'];
-  const videoURL = metadata?.['regen:videoURL']?.['@value'];
-  const landStewardPhoto = metadata?.['regen:landStewardPhoto']?.['@value'];
-  const projectSize = metadata?.['regen:projectSize'];
-  const area = projectSize?.['qudt:numericValue']?.['@value'];
-  const unit = projectSize?.['qudt:unit']?.['@value'];
-  const areaUnit = getAreaUnit(unit as qudtUnit);
-  const creditClass = project?.creditClassByCreditClassId;
-  const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
-  const quote = metadata?.['regen:projectQuote'];
-  const glanceText: string[] | undefined =
-    metadata?.['regen:glanceText']?.['@list'];
-  const primaryDescription =
-    metadata?.['regen:landStory'] || metadata?.['schema:description'];
-  const landStewardStoryTitle = metadata?.['regen:landStewardStoryTitle'];
-  const landStewardStory = metadata?.['regen:landStewardStory'];
+  const { projectName, area, areaUnit, placeName } =
+    parseProjectMetadata(projectMetadata);
 
-  const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.[
-    '@list'
-  ]?.map((sdg: { '@id': string }) => sdg['@id']);
+  const {
+    videoURL,
+    glanceText,
+    primaryDescription,
+    quote,
+    landStewardPhoto,
+    landStewardStoryTitle,
+    landStewardStory,
+  } = parseProjectPageMetadata(projectPageMetadata);
+
   const { data: sdgData } = useSdgByIriQuery({
     client,
     variables: {
@@ -89,39 +91,36 @@ function ProjectTopSection({
     },
     skip: !sdgIris,
   });
-  const sdgs = sdgData?.allSdg.map(s => ({
-    title: s.title || '',
-    imageUrl: getSanityImgSrc(s.image),
+  const sdgs = sdgData?.allSdg.map(sdg => ({
+    title: sdg.title || '',
+    imageUrl: getSanityImgSrc(sdg.image),
   }));
 
   const creditClassSanity = findSanityCreditClass({
     sanityCreditClassData,
     creditClassIdOrUrl:
-      creditClass?.onChainId ||
-      creditClassVersion?.metadata?.['http://schema.org/url']?.['@value'] ||
+      creditClass?.onChainId ??
+      creditClassVersion?.metadata?.['http://schema.org/url']?.['@value'] ??
       onChainProjectId?.split('-')?.[0], // if no offChain credit class
   });
+
+  const displayName =
+    projectName ?? (onChainProjectId && `Project ${onChainProjectId}`) ?? '';
 
   return (
     <Section classes={{ root: classes.section }}>
       <Grid container>
         <Grid item xs={12} md={8} sx={{ pr: { md: 19 } }}>
-          {!metadata && loading ? (
+          {loading ? (
             <Skeleton height={124} />
           ) : (
-            <Title variant="h1">
-              {projectName ?? `Project ${onChainProjectId}`}
-            </Title>
+            <Title variant="h1">{displayName}</Title>
           )}
           <Box sx={{ pt: { xs: 5, sm: 6 } }}>
             <ProjectPlaceInfo
               iconClassName={classes.icon}
-              // TODO Format and show on-chain project location if no off-chain location
-              place={
-                metadata?.['schema:location']?.['place_name'] ||
-                metadata?.['schema:location']?.['geojson:place_name'] ||
-                onChainProject?.jurisdiction
-              }
+              // TODO Format on-chain jurisdiction if no anchored location
+              place={placeName ?? onChainProject?.jurisdiction ?? ''}
               area={Number(area)}
               areaUnit={areaUnit}
             />
@@ -141,34 +140,32 @@ function ProjectTopSection({
               ) : (
                 <ProjectTopLink
                   label="offset generation method"
-                  name={
-                    creditClassVersion?.metadata?.[
-                      'http://regen.network/offsetGenerationMethod'
-                    ]
-                  }
+                  name={offsetGenerationMethod}
                 />
               )}
             </Box>
           </Box>
           {/* Used to prevent layout shift */}
-          {(!data || isGISFile === undefined || (isGISFile && !geojson)) &&
+          {(!offChainProject ||
+            isGISFile === undefined ||
+            (isGISFile && !geojson)) &&
             loading && <Skeleton height={200} />}
           {geojson && isGISFile && glanceText && (
             <LazyLoad offset={50} once>
               <Box sx={{ pt: 6 }}>
                 <GlanceCard
                   text={glanceText}
-                  imageStorageBaseUrl={imageStorageBaseUrl}
-                  apiServerUrl={apiServerUrl}
+                  imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
+                  apiServerUrl={API_URI}
                   geojson={geojson}
                   isGISFile={isGISFile}
-                  mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                  mapboxToken={MAPBOX_TOKEN}
                 />
               </Box>
             </LazyLoad>
           )}
           {/* Used to prevent layout shift */}
-          {!metadata && loading && <Skeleton height={200} />}
+          {loading && <Skeleton height={200} />}
           {landStewardStoryTitle && (
             <Title sx={{ pt: { xs: 11.75, sm: 14 } }} variant="h2">
               Story
@@ -191,7 +188,9 @@ function ProjectTopSection({
               sx={{ mt: [2, 4], py: [2, 6] }}
             />
           </Link>
-          {onChainProjectId && <ProjectPageMetadata metadata={metadata} />}
+          {isAnchoredProjectMetadata(projectMetadata, onChainProjectId) && (
+            <ProjectPageMetadata metadata={projectMetadata} />
+          )}
           <LazyLoad offset={50}>
             {videoURL && (
               <Card className={classes.media}>
@@ -207,7 +206,7 @@ function ProjectTopSection({
             {landStewardPhoto && (
               <img
                 className={classes.media}
-                alt={landStewardPhoto}
+                alt="land steward"
                 src={landStewardPhoto}
               />
             )}
@@ -261,25 +260,16 @@ function ProjectTopSection({
         </Grid>
         <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
           <ProjectTopCard
-            projectAdmin={getDisplayAdmin(data?.admin || onChainProject?.admin)}
-            projectDeveloper={getDisplayDeveloper(
-              metadata,
-              project?.partyByDeveloperId,
-            )}
-            landSteward={getDisplayParty(
-              'regen:landSteward',
-              metadata,
-              project?.partyByStewardId,
-            )}
-            landOwner={getDisplayParty(
-              'regen:landOwner',
-              metadata,
-              project?.partyByLandOwnerId,
-            )}
+            projectAdmin={getDisplayAdmin(onChainProject?.admin)}
+            projectDeveloper={projectDeveloper}
+            landSteward={landSteward}
+            landOwner={landOwner}
             // TODO if no off-chain data, use on-chain project.issuer
-            issuer={getParty(project?.partyByIssuerId)}
+            issuer={getParty(offChainProject?.partyByIssuerId)}
             reseller={
-              !onChainProject ? getParty(project?.partyByResellerId) : undefined
+              !onChainProject
+                ? getParty(offChainProject?.partyByResellerId)
+                : undefined
             }
             sdgs={sdgs}
           />
@@ -292,7 +282,9 @@ function ProjectTopSection({
             Credit Batches
           </Title>
           <CreditBatches
-            creditClassId={project?.creditClassByCreditClassId?.onChainId}
+            creditClassId={
+              offChainProject?.creditClassByCreditClassId?.onChainId
+            }
             creditBatches={batchData.batches}
             filteredColumns={['projectLocation']}
             onTableChange={setPaginationParams}

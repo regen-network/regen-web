@@ -10,7 +10,7 @@ import {
 } from 'web-components/lib/components/inputs/validation';
 import { ProfileFormValues } from 'web-components/lib/components/modal/ProfileModal';
 
-import { defaultProjectContext, getCompactedPath, validate } from 'lib/rdf';
+import { DEFAULT_PROJECT_CONTEXT, getCompactedPath, validate } from 'lib/rdf';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
 import {
@@ -98,7 +98,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     if (graphData?.shaclGraphByUri?.graph) {
       const report = await validate(
         graphData.shaclGraphByUri.graph,
-        { ...defaultProjectContext, ...p },
+        { '@context': DEFAULT_PROJECT_CONTEXT, ...p },
         'http://regen.network/ProjectPageRolesGroup',
       );
       for (const result of report.results) {

@@ -1,88 +1,87 @@
-import { TypeValue, UrlList, UrlType } from 'lib/rdf/types';
+import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 
-export interface ProjectMetadataLD {
+import { CompactedNameUrl } from 'lib/rdf/types';
+
+/** Anchored metadata AKA "Additional Info" - Editable only with a signed Ledger TX. */
+export interface AnchoredProjectMetadataBaseLD {
   '@context': Context;
-  '@type': string;
+  '@type': string; // ex: regen:C01-Project
   'schema:name': string;
-  'schema:image': UrlType;
-  'schema:creditText': string;
-  'schema:description'?: string;
-  'schema:location': any;
+  'schema:location': GeocodeFeature;
   'regen:projectType': string;
-  'regen:projectActivity': ProjectActivity;
-  'regen:projectDeveloper': ProjectStakeholder;
-  'regen:landSteward': ProjectStakeholder;
-  'regen:landOwner': ProjectStakeholder;
-  'regen:projectOriginator': ProjectStakeholder;
+  'regen:projectActivity': CompactedNameUrl;
   'regen:offsetGenerationMethod': string;
-  // TODO: not sure why regen:offsetGenerationMethod isn't compacting as expected so added this:
+  // regen:offsetGenerationMethod doesn't get compacted for project metadata because
+  // in COMPACTED_CONTEXT, we specify: 'regen:offsetGenerationMethod': { '@container': '@list' }
+  // while in project metadata, it's a string, not a list
+  // this context is used in credit classes metadata, we should probably update the credit classes metadata
+  // to use offsetGenerationMethods (plural!) since it can be a list
   'http://regen.network/offsetGenerationMethod'?: string;
   'regen:projectSize': ProjectSize;
-  'regen:projectStartDate': TypeValue;
-  'regen:projectEndDate': TypeValue;
-  'regen:boundaries': TypeValue;
-  'regen:creditClass': CreditClass;
-  'regen:landManagementActions': LandManagementActions;
-  'regen:galleryPhotos': UrlList;
-  'regen:previewPhoto': UrlType;
-  'regen:videoURL': UrlType;
-  'regen:glanceText': any;
-  'regen:landStory': string;
-  'regen:landStewardStory': string;
-  'regen:landStewardPhoto': UrlType;
-  'regen:projectQuote': ProjectQuote;
-  'regen:landStewardStoryTitle': string;
+  'regen:projectStartDate'?: string;
+  'regen:projectEndDate'?: string;
+  'regen:projectDeveloper'?: ProjectStakeholder;
+  'regen:landSteward'?: ProjectStakeholder;
+  'regen:landOwner'?: ProjectStakeholder;
+  'regen:projectOriginator'?: ProjectStakeholder;
+}
+
+/** Un-anchored metadata from our DB. This is editable without a Ledger TX. */
+export interface ProjectPageMetadataLD {
+  '@context': Context;
+  '@type': string; // regen:Project-Page
+  '@id': string;
+  'regen:creditClassId': string;
+  'regen:previewPhoto'?: string;
+  'regen:galleryPhotos'?: string[];
+  'regen:videoURL'?: string;
+  'schema:creditText'?: string;
+  'schema:description'?: string;
+
+  // Legacy project fields
+  'schema:image'?: string;
+  'regen:glanceText'?: string[];
+  'regen:landStory'?: string;
+  'regen:landStewardStory'?: string;
+  'regen:landStewardStoryTitle'?: string;
+  'regen:landStewardPhoto'?: string;
+  'regen:projectQuote'?: ProjectQuote;
+  'regen:boundaries'?: string;
+  'regen:landManagementActions'?: NameImageDescription[];
 }
 
 interface Context {
   schema: string;
   regen: string;
-  qudt: string;
-  unit: string;
-  xsd: string;
+  qudt?: string;
+  unit?: string;
+  xsd?: string;
 }
 
 interface ProjectSize {
-  'qudt:unit': TypeValue;
-  'qudt:numericValue': TypeValue;
-}
-
-interface ProjectActivity {
-  'schema:name': string;
-  'schema:url': UrlType;
+  'qudt:unit': string;
+  'qudt:numericValue': number;
 }
 
 export interface ProjectStakeholder {
   '@type': string;
   'schema:name': string;
-  'schema:description': string;
-  'schema:email': string;
-  'schema:logo'?: UrlType;
-  'schema:image': UrlType;
-  'schema:location': any;
-  'schema:legalName': string;
-  'regen:sharePermission': boolean;
-  'regen:responsiblePerson': string;
+  'schema:description'?: string;
+  'schema:image'?: string;
+  'regen:adress'?: string;
   'regen:showOnProjectPage': boolean;
+  'schema:url'?: string;
+  'schema:location'?: GeocodeFeature;
 }
 
-interface NameImageDescription {
+export interface NameImageDescription {
   'schema:name': string;
-  'schema:image': UrlType;
+  'schema:image': string;
   'schema:description': string;
 }
 
-interface LandManagementActions {
-  '@list': NameImageDescription[];
-}
-
-interface ProjectQuote {
+export interface ProjectQuote {
   'schema:name': string;
   'regen:quote': string;
   'schema:jobTitle': string;
-}
-
-interface CreditClass {
-  '@id': string;
-  '@type': string;
 }

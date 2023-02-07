@@ -1,12 +1,23 @@
 import {
+  AnchoredProjectMetadataBaseLD,
   CFCProjectMetadataLD,
-  ProjectMetadataLD,
+  ProjectPageMetadataLD,
   ToucanProjectMetadataLD,
   VCSProjectMetadataLD,
 } from '.';
 
-// A combination of existing Project metadata schemas, to allow more flexible UIs
-export type ProjectMetadataIntersectionLD = ProjectMetadataLD &
+/** A combination of existing anchored Project metadata schemas */
+export type AnchoredProjectMetadataLD = AnchoredProjectMetadataBaseLD &
   VCSProjectMetadataLD &
   CFCProjectMetadataLD &
   ToucanProjectMetadataLD;
+
+/** A combination of all existing Project metadata schemas, to allow more flexible UIs */
+export type ProjectMetadataLD = AnchoredProjectMetadataLD &
+  ProjectPageMetadataLD;
+
+/** A combination of Project metadata for legacy projects (projects that are not on-chain)
+ * For these projects, all metadata is stored off-chain
+ */
+export type LegacyProjectMetadataLD = AnchoredProjectMetadataBaseLD &
+  ProjectPageMetadataLD;

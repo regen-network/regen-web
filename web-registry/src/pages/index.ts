@@ -8,7 +8,7 @@ export * from './BuyerCreate';
 export * from './BuyerCreditsTransfer';
 export * from './Buyers';
 export * from './Certificate';
-export * from './ChooseCreditClassPage';
+export * from './ChooseCreditClass';
 export * from './CreateBatch';
 export * from './CreateCreditClass';
 export * from './CreateMethodology';

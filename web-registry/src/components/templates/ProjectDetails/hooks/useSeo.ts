@@ -1,20 +1,34 @@
 import { useLocation } from 'react-router-dom';
 
-import { ProjectStakeholder } from 'lib/db/types/json-ld';
+import { Party } from 'web-components/lib/components/modal/LedgerModal';
 
-function getVisiblePartyName(party?: ProjectStakeholder): string | undefined {
-  return party?.['regen:showOnProjectPage']
-    ? party?.['schema:name']
-    : undefined;
+import {
+  AnchoredProjectMetadataBaseLD,
+  ProjectPageMetadataLD,
+} from 'lib/db/types/json-ld';
+
+function getVisiblePartyName(party?: Party | undefined): string | undefined {
+  return party?.name;
 }
 
-interface InputProps {
-  metadata: any;
+interface UseSeoParams {
+  projectMetadata?: AnchoredProjectMetadataBaseLD;
+  projectPageMetadata?: ProjectPageMetadataLD;
+  landSteward?: Party;
+  projectDeveloper?: Party;
+  landOwner?: Party;
   creditClassName: string | undefined;
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export default function useSeo({ metadata, creditClassName }: InputProps) {
+export default function useSeo({
+  projectMetadata,
+  projectPageMetadata,
+  landSteward,
+  projectDeveloper,
+  landOwner,
+  creditClassName,
+}: UseSeoParams) {
   // this function is used to format credit class metadata into SEO
   // optimization tags for the project pages. i believe the main use case is at
   // the very least to get links to a particular credit class page formatting
@@ -22,12 +36,11 @@ export default function useSeo({ metadata, creditClassName }: InputProps) {
   const location = useLocation();
 
   const partyName =
-    getVisiblePartyName(metadata?.['regen:landSteward']) ||
-    getVisiblePartyName(metadata?.['regen:projectDeveloper']) ||
-    getVisiblePartyName(metadata?.['regen:landOwner']) ||
-    getVisiblePartyName(metadata?.['regen:projectOriginator']);
+    getVisiblePartyName(landSteward) ||
+    getVisiblePartyName(projectDeveloper) ||
+    getVisiblePartyName(landOwner);
 
-  const metadataLocation = metadata?.['schema:location'];
+  const metadataLocation = projectMetadata?.['schema:location'];
   const projectAddress = metadataLocation?.['place_name'];
 
   const siteMetadata = {
@@ -43,7 +56,9 @@ export default function useSeo({ metadata, creditClassName }: InputProps) {
   return {
     location,
     siteMetadata,
-    title: metadata?.['schema:name'],
-    imageUrl: metadata?.['schema:image']?.['@value'],
+    title: projectMetadata?.['schema:name'],
+    imageUrl:
+      projectPageMetadata?.['schema:image'] ||
+      projectPageMetadata?.['regen:previewPhoto'],
   };
 }

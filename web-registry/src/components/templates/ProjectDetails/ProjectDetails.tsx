@@ -9,8 +9,9 @@ import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 
+import { Project } from 'generated/graphql';
+import { Maybe } from 'graphql/jsutils/Maybe';
 import { graphqlClient } from 'lib/clients/graphqlClient';
-import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
@@ -18,6 +19,7 @@ import { getProjectByHandleQuery } from 'lib/queries/react-query/registry-server
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
+import { getDisplayParty } from 'lib/transform';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
@@ -35,14 +37,17 @@ import { ProjectImpactSection, ProjectTopSection } from '../../organisms';
 import useGeojson from './hooks/useGeojson';
 import useImpact from './hooks/useImpact';
 import useIssuanceModal from './hooks/useIssuanceModal';
-import useMedia from './hooks/useMedia';
 import useSeo from './hooks/useSeo';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProjects';
 import { ProjectDocumentation } from './ProjectDetails.ProjectDocumentation';
 import { ProjectTimeline } from './ProjectDetails.ProjectTimeline';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
-import { getIsOnChainId } from './ProjectDetails.utils';
+import {
+  getIsOnChainId,
+  parseMedia,
+  parseOffChainProject,
+} from './ProjectDetails.utils';
 
 function ProjectDetails(): JSX.Element {
   const theme = useTheme();
@@ -73,7 +78,8 @@ function ProjectDetails(): JSX.Element {
     txClient = new ServiceClientImpl(api.queryClient);
   }
 
-  // first, check if projectId is handle or onChainId
+  // first, check if projectId is an off-chain project handle (for legacy projects like "wilmot")
+  // or an chain project id
   const isOnChainId = getIsOnChainId(projectId);
 
   // if projectId is handle, query project by handle
@@ -111,61 +117,74 @@ function ProjectDetails(): JSX.Element {
 
   const onChainProject = projectResponse?.project;
 
-  // TODO: when all projects are on-chain, just use dataByOnChainId, (or leave out postgres altogether)
-  const data = isOnChainId
-    ? { ...projectByOnChainId?.data, admin: onChainProject?.admin }
-    : projectByHandle?.data;
-  const project = isOnChainId
+  const offChainProject = isOnChainId
     ? projectByOnChainId?.data.projectByOnChainId
     : projectByHandle?.data.projectByHandle;
 
-  // Legacy projects use project.metadata. On-chain projects use IRI resolver.
-  const projectTableMetadata: ProjectMetadataLD = project?.metadata;
-  const iriResolvedMetadata = useQuery(
-    getMetadataQuery({ iri: onChainProject?.metadata }),
-  );
-  const metadata = iriResolvedMetadata.data ?? projectTableMetadata;
-
-  const managementActions =
-    metadata?.['regen:landManagementActions']?.['@list'];
+  /** Anchored project metadata comes from IRI resolver. */
+  const { data: anchoredMetadata, isInitialLoading: loadingAnchoredMetadata } =
+    useQuery(getMetadataQuery({ iri: onChainProject?.metadata }));
 
   const { batchesWithSupply, setPaginationParams, paginationParams } =
     usePaginatedBatchesByProject({ projectId: String(onChainProjectId) });
   const { totals: batchesTotal } = getBatchesTotal(batchesWithSupply ?? []);
 
-  // with project query
-  const projectEvents = project?.eventsByProjectId?.nodes;
-  const projectDocs = project?.documentsByProjectId?.nodes;
+  const {
+    offChainProjectMetadata,
+    managementActions,
+    projectEvents,
+    projectDocs,
+    creditClassName,
+    coBenefitsIris,
+    primaryImpactIRI,
+  } = parseOffChainProject(offChainProject as Maybe<Project>);
 
-  const creditClassVersion =
-    project?.creditClassByCreditClassId?.creditClassVersionsById?.nodes?.[0];
+  // For legacy projects (that are not on-chain), all metadata is stored off-chain
+  const projectMetadata = isOnChainId
+    ? anchoredMetadata
+    : offChainProjectMetadata;
 
-  const creditClassName = creditClassVersion?.name;
-  const coBenefitsIris =
-    creditClassVersion?.metadata?.['http://regen.network/coBenefits']?.[
-      '@list'
-    ]?.map((impact: { '@id': string }) => impact['@id']) || [];
-  const primaryImpactIRI = [
-    creditClassVersion?.metadata?.['http://regen.network/indicator']?.['@id'],
-  ];
+  const projectDeveloper = getDisplayParty(
+    'regen:projectDeveloper',
+    anchoredMetadata,
+    offChainProject?.partyByDeveloperId,
+  );
+  const landSteward = getDisplayParty(
+    'regen:landSteward',
+    anchoredMetadata,
+    offChainProject?.partyByStewardId,
+  );
+  const landOwner = getDisplayParty(
+    'regen:landOwner',
+    anchoredMetadata,
+    offChainProject?.partyByLandOwnerId,
+  );
 
-  const { geojson, isGISFile } = useGeojson(metadata);
+  const { geojson, isGISFile } = useGeojson({
+    projectMetadata,
+    projectPageMetadata: offChainProjectMetadata,
+  });
 
   const seoData = useSeo({
-    metadata,
+    projectMetadata,
+    projectPageMetadata: offChainProjectMetadata,
+    projectDeveloper,
+    landSteward,
+    landOwner,
     creditClassName,
   });
-  const mediaData = useMedia({ metadata, geojson });
+
+  const mediaData = parseMedia({ metadata: offChainProjectMetadata, geojson });
   const impactData = useImpact({ coBenefitsIris, primaryImpactIRI });
 
-  const isLoading = loadingProjectByOnChainId || loadingProjectByHandle;
+  const loadingDb = loadingProjectByOnChainId || loadingProjectByHandle;
 
   const {
     issuanceModalData,
     issuanceModalOpen,
     setIssuanceModalOpen,
     viewOnLedger,
-  } = useIssuanceModal(data);
+  } = useIssuanceModal(offChainProject);
 
   const { isBuyFlowDisabled, projectsWithOrderData } = useBuySellOrderData({
     projectId: onChainProjectId,
@@ -183,7 +202,14 @@ function ProjectDetails(): JSX.Element {
     }));
   }, [credits, projectsWithOrderData]);
 
-  if (!isLoading && !project && !projectResponse) return <NotFoundPage />;
+  if (
+    !loadingDb &&
+    !loadingAnchoredMetadata &&
+    !offChainProject &&
+    !projectResponse
+  )
+    return <NotFoundPage />;
+
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO
@@ -193,7 +219,7 @@ function ProjectDetails(): JSX.Element {
         imageUrl={seoData.imageUrl}
       />
 
-      {mediaData.assets.length === 0 && isLoading && (
+      {mediaData.assets.length === 0 && loadingDb && (
         <Skeleton sx={getMediaBoxStyles(theme)} />
       )}
 
@@ -222,25 +248,29 @@ function ProjectDetails(): JSX.Element {
             : () => setDisplayErrorBanner(true)
         }
         onChainProjectId={onChainProjectId}
-        projectName={metadata?.['schema:name']}
+        projectName={anchoredMetadata?.['schema:name']}
         onChainCreditClassId={onChainProject?.classId}
       />
 
       <ProjectTopSection
-        data={data}
+        offChainProject={offChainProject}
         onChainProject={onChainProject}
-        metadata={metadata}
+        projectMetadata={projectMetadata}
+        projectPageMetadata={offChainProjectMetadata}
         sanityCreditClassData={sanityCreditClassData}
         batchData={{
           batches: batchesWithSupply,
           totals: batchesTotal,
         }}
+        projectDeveloper={projectDeveloper}
+        landOwner={landOwner}
+        landSteward={landSteward}
         paginationParams={paginationParams}
         setPaginationParams={setPaginationParams}
         geojson={geojson}
         isGISFile={isGISFile}
         onChainProjectId={onChainProjectId}
-        loading={isLoading}
+        loading={loadingDb || loadingAnchoredMetadata}
       />
 
       {impactData?.length > 0 && (

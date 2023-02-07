@@ -1,12 +1,15 @@
 import { User } from 'web-components/lib/components/user/UserInfo';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { Maybe, PartyFieldsFragment } from 'generated/graphql';
+import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import {
-  CFCProjectMetadataLD,
-  ProjectMetadataIntersectionLD,
+  AnchoredProjectMetadataBaseLD,
+  AnchoredProjectMetadataLD,
+  LegacyProjectMetadataLD,
+  ProjectPageMetadataLD,
+  ProjectQuote,
 } from 'lib/db/types/json-ld';
-import { getDisplayParty } from 'lib/transform';
+import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
 // TODO
 // This is a temporary hack to show Regen as a Project Admin when applicable
@@ -35,25 +38,87 @@ export const getDisplayAdmin = (address?: string): User | undefined => {
   };
 };
 
-export const getDisplayDeveloper = (
-  metadata?: Partial<ProjectMetadataIntersectionLD>,
-  party?: Maybe<PartyFieldsFragment>,
-): User | undefined => {
-  if (!metadata) return;
-  if (metadata?.['regen:projectDeveloper']) {
-    return getDisplayParty('regen:projectDeveloper', metadata, party);
-  }
-  // Possibly temporary: CFC case
-  const projectOperator = (metadata as Partial<CFCProjectMetadataLD>)?.[
-    'regen:projectOperator'
-  ];
-  if (projectOperator) {
-    return {
-      name: projectOperator?.['schema:name'],
-      type: 'ORGANIZATION',
-      link: projectOperator?.['schema:url']?.['@value'] || '',
-    };
-  }
+type ParseProjectMetadataReturn = {
+  projectName?: string;
+  area?: number;
+  areaUnit?: string;
+  placeName?: string;
+};
 
-  return;
+export const parseProjectMetadata = (
+  projectMetadata?: Partial<AnchoredProjectMetadataBaseLD>,
+): ParseProjectMetadataReturn => {
+  const projectName = projectMetadata?.['schema:name'];
+  const projectSize = projectMetadata?.['regen:projectSize'];
+  const area = projectSize?.['qudt:numericValue'];
+  const unit = projectSize?.['qudt:unit'];
+  const areaUnit = getAreaUnit(unit as qudtUnit);
+  const placeName = projectMetadata?.['schema:location']?.['place_name'];
+  // projectMetadata?.['schema:location']?.['geojson:place_name'];
+
+  return { projectName, area, areaUnit, placeName };
+};
+
+type ParseProjectPageMetadataReturn = {
+  videoURL?: string | null;
+  glanceText?: string[];
+  primaryDescription?: string;
+  quote?: ProjectQuote;
+  landStewardPhoto?: string | null;
+  landStewardStoryTitle?: string | null;
+  landStewardStory?: string | null;
+};
+
+export const parseProjectPageMetadata = (
+  projectPageMetadata?: Partial<ProjectPageMetadataLD>,
+): ParseProjectPageMetadataReturn => {
+  const videoURL = projectPageMetadata?.['regen:videoURL'];
+  const glanceText = projectPageMetadata?.['regen:glanceText'];
+  const primaryDescription =
+    projectPageMetadata?.['regen:landStory'] ||
+    projectPageMetadata?.['schema:description'];
+  const quote = projectPageMetadata?.['regen:projectQuote'];
+  const landStewardPhoto = projectPageMetadata?.['regen:landStewardPhoto'];
+  const landStewardStoryTitle =
+    projectPageMetadata?.['regen:landStewardStoryTitle'];
+  const landStewardStory = projectPageMetadata?.['regen:landStewardStory'];
+
+  return {
+    videoURL,
+    glanceText,
+    primaryDescription,
+    quote,
+    landStewardPhoto,
+    landStewardStoryTitle,
+    landStewardStory,
+  };
+};
+
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export const parseOffChainProject = (
+  project?: Maybe<ProjectFieldsFragment>,
+) => {
+  const creditClass = project?.creditClassByCreditClassId;
+  const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
+  const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.[
+    '@list'
+  ]?.map((sdg: { '@id': string }) => sdg['@id']);
+  const offsetGenerationMethod =
+    creditClassVersion?.metadata?.[
+      'http://regen.network/offsetGenerationMethod'
+    ];
+
+  return {
+    creditClass,
+    creditClassVersion,
+    sdgIris,
+    offsetGenerationMethod,
+  };
+};
+
+export const isAnchoredProjectMetadata = (
+  projectMetadata?: AnchoredProjectMetadataLD | LegacyProjectMetadataLD,
+  onChainProjectId?: string,
+): projectMetadata is AnchoredProjectMetadataLD => {
+  return !!onChainProjectId;
 };

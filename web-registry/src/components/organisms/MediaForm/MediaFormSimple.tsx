@@ -8,6 +8,7 @@ import {
 
 import getApiUri from '../../../lib/apiUri';
 import { cropAspect, MediaBaseErrors, MediaBaseValues } from './MediaForm';
+import { PHOTO_COUNT } from './MediaForm.constants';
 import { useMediaFormStyles } from './useMediaFormStyles';
 
 export interface MediaValuesSimple extends MediaBaseValues {
@@ -16,9 +17,7 @@ export interface MediaValuesSimple extends MediaBaseValues {
 
 export interface MediaErrorsSimple extends MediaBaseErrors {
   'schema:creditText'?: string;
-  'regen:galleryPhotos'?: {
-    '@list'?: Array<{ '@value'?: string }>;
-  };
+  'regen:galleryPhotos'?: Array<string | null>;
 }
 
 /** Simplified media form content for new project-page flow */
@@ -43,35 +42,37 @@ const MediaFormSimple = ({
   };
 
   const shouldRenderGalleryPhoto = (i: number): boolean => {
-    // don't show option for gallery if there is no preview photo
-    if (!values['regen:previewPhoto']?.['@value']) return false;
-    // if there is a preview photo, render the first gallary photo
-    if (values['regen:previewPhoto']['@value'] && i === 0) return true;
+    // don't show option for gallery if there is no preview photo or first
+    if (!values['regen:previewPhoto']) return false;
+    // if there is a preview photo, render the first gallery photo
+    if (values['regen:previewPhoto'] && i === 0) return true;
     // otherwise, render based on the presence of last index
-    return Boolean(values['regen:galleryPhotos']?.['@list'][i - 1]?.['@value']);
+    return Boolean(values['regen:galleryPhotos']?.[i - 1]);
   };
 
   return (
     <Form translate="yes">
       <Field
         {...imgDefaultProps}
-        name="regen:previewPhoto.@value"
+        name="regen:previewPhoto"
         description="Choose the photos that will show up on the project page. The first photo will be your preview photo."
         label="Photos"
         component={ImageUpload}
       />
-      {(values['regen:galleryPhotos']?.['@list'] || []).map((_photo, i) =>
-        shouldRenderGalleryPhoto(i) ? (
-          <Field
-            {...imgDefaultProps}
-            key={i}
-            name={`regen:galleryPhotos.@list[${i}].@value`}
-            component={ImageUpload}
-          />
-        ) : (
-          <React.Fragment key={i} /> // Formik expects a react element - this avoids console bug
-        ),
-      )}
+      {Array(PHOTO_COUNT)
+        .fill(undefined)
+        .map((_photo, i) =>
+          shouldRenderGalleryPhoto(i) ? (
+            <Field
+              {...imgDefaultProps}
+              key={i}
+              name={`regen:galleryPhotos[${i}]`}
+              component={ImageUpload}
+            />
+          ) : (
+            <React.Fragment key={i} /> // Formik expects a react element - this avoids console bug
+          ),
+        )}
       {/* Fields hidden for now
       <Field
         optional

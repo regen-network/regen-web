@@ -26,7 +26,7 @@ interface Props {
   navigateNext: () => void;
 }
 
-type Params = {
+type Return = {
   rolesSubmit: (values: RolesValues) => Promise<void>;
 };
 
@@ -37,7 +37,7 @@ const useRolesSubmit = ({
   isEdit,
   metadataReload,
   navigateNext,
-}: Props): Params => {
+}: Props): Return => {
   const [updateProject] = useUpdateProjectByIdMutation();
   const [createWallet] = useCreateWalletMutation();
   const [createParty] = useCreatePartyMutation();
@@ -95,8 +95,7 @@ const useRolesSubmit = ({
             developer['schema:name'] !== existingDeveloperParty?.name ||
             developer['schema:description'] !==
               existingDeveloperParty?.description ||
-            developer['schema:image']?.['@value'] !==
-              existingDeveloperParty?.image ||
+            developer['schema:image'] !== existingDeveloperParty?.image ||
             walletId;
           if (!existingDeveloperParty) {
             const res = await createParty({
@@ -110,7 +109,7 @@ const useRolesSubmit = ({
                         : PartyType.Organization,
                     name: developer['schema:name'],
                     description: developer['schema:description'],
-                    image: developer['schema:image']?.['@value'],
+                    image: developer['schema:image'],
                     walletId,
                   },
                 },
@@ -126,7 +125,7 @@ const useRolesSubmit = ({
                   partyPatch: {
                     name: developer['schema:name'],
                     description: developer['schema:description'],
-                    image: developer['schema:image']?.['@value'],
+                    image: developer['schema:image'],
                     walletId,
                   },
                 },

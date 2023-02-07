@@ -16,8 +16,6 @@ import {
 } from 'web-components/lib/components/modal/ProfileModal';
 import { Label } from 'web-components/lib/components/typography';
 
-import { getURLInitialValue } from 'lib/rdf';
-
 const useStyles = makeStyles()(theme => ({
   root: {
     display: 'flex',
@@ -176,10 +174,7 @@ const RoleField: React.FC<React.PropsWithChildren<Props>> = ({
   };
 
   const editProfile = (entity: ProfileFormValues): void => {
-    setProfileEdit({
-      ...entity,
-      'schema:image': entity['schema:image'] || getURLInitialValue(),
-    });
+    setProfileEdit(entity);
   };
 
   return (
@@ -211,7 +206,6 @@ const RoleField: React.FC<React.PropsWithChildren<Props>> = ({
                     setProfileEdit({
                       '@type': 'regen:Organization',
                       'regen:showOnProjectPage': true,
-                      'schema:image': getURLInitialValue(),
                     });
                   }}
                 >
@@ -230,7 +224,6 @@ const RoleField: React.FC<React.PropsWithChildren<Props>> = ({
                     setProfileEdit({
                       '@type': 'regen:Individual',
                       'regen:showOnProjectPage': true,
-                      'schema:image': getURLInitialValue(),
                     });
                   }}
                 >

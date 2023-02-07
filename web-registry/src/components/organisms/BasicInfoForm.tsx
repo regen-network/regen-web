@@ -24,14 +24,8 @@ import { ProjectPageFooter } from '../molecules';
 export interface BasicInfoFormValues {
   'schema:name': string;
   'regen:projectSize': {
-    'qudt:numericValue': {
-      '@type': 'xsd:double';
-      '@value'?: number | string;
-    };
-    'qudt:unit': {
-      '@type': 'qudt:Unit';
-      '@value': string;
-    };
+    'qudt:numericValue'?: number | string;
+    'qudt:unit': string;
   };
 }
 
@@ -81,14 +75,8 @@ const BasicInfoForm: React.FC<
       initialValues={{
         'schema:name': initialValues?.['schema:name'] || '',
         'regen:projectSize': initialValues?.['regen:projectSize'] || {
-          'qudt:numericValue': {
-            '@type': 'xsd:double',
-            '@value': undefined,
-          },
-          'qudt:unit': {
-            '@type': 'qudt:Unit',
-            '@value': 'unit:HA',
-          },
+          'qudt:numericValue': undefined,
+          'qudt:unit': 'unit:HA',
         },
       }}
       validate={async (values: BasicInfoFormValues) => {
@@ -152,13 +140,13 @@ const BasicInfoForm: React.FC<
                     className={cx(classes.parcelField, classes.parcelSize)}
                     component={TextField}
                     type="number"
-                    name="regen:projectSize.qudt:numericValue.@value"
+                    name="regen:projectSize.qudt:numericValue"
                     defaultStyle={false}
                   />
                   <Field
                     className={cx(classes.parcelField, classes.parcelUnit)}
                     component={SelectTextField}
-                    name="regen:projectSize.qudt:unit.@value"
+                    name="regen:projectSize.qudt:unit"
                     options={[
                       {
                         value: 'unit:HA',

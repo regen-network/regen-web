@@ -2,6 +2,7 @@ import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1
 import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';
+import { graphqlClient } from 'lib/clients/graphqlClient';
 import { GECKO_EEUR_ID, GECKO_USDC_ID } from 'lib/coingecko';
 import { normalizeProjectsWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
@@ -11,6 +12,7 @@ import { getProjectsByClassQuery } from 'lib/queries/react-query/ecocredit/getPr
 import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
+import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { ProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders';
@@ -135,11 +137,24 @@ export function useProjectsWithOrders({
   });
   const metadatas = metadataResults.map(queryResult => queryResult.data);
 
+  const offChainProjectResults = useQueries({
+    queries: sortedProjects.map(project =>
+      getProjectByOnChainIdQuery({
+        client: graphqlClient,
+        onChainId: project.id,
+      }),
+    ),
+  });
+  const projectPageMetadatas = offChainProjectResults.map(
+    queryResult => queryResult.data?.data.projectByOnChainId?.metadata,
+  );
+
   /* Final Normalization */
 
   const projectsWithMetadata = normalizeProjectsWithMetadata({
     projectsWithOrderData: sortedProjects,
     metadatas,
+    projectPageMetadatas,
   });
 
   return {

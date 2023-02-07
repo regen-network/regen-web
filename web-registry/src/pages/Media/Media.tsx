@@ -1,8 +1,6 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { getURLInitialValue, getURLListInitialValue } from 'lib/rdf';
-
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
@@ -11,8 +9,6 @@ import {
   MediaValuesSimple,
 } from '../../components/organisms/MediaForm';
 import { useProjectEditContext } from '../ProjectEdit';
-
-const PHOTO_COUNT = 4;
 
 const Media = (): JSX.Element => {
   const navigate = useNavigate();
@@ -36,17 +32,14 @@ const Media = (): JSX.Element => {
   // });
 
   function getInitialFormValues(): MediaValuesSimple {
-    const values: MediaValuesSimple = {};
+    let values: MediaValuesSimple = {};
     if (metadata) {
-      values['regen:previewPhoto'] = getURLInitialValue(
-        metadata['regen:previewPhoto'],
-      );
-      values['regen:galleryPhotos'] = getURLListInitialValue(
-        PHOTO_COUNT,
-        metadata['regen:galleryPhotos'],
-      );
-      values['regen:videoURL'] = getURLInitialValue(metadata['regen:videoURL']);
-      values['schema:creditText'] = metadata['schema:creditText'] || '';
+      values = {
+        'regen:previewPhoto': metadata['regen:previewPhoto'],
+        'regen:galleryPhotos': metadata['regen:galleryPhotos'],
+        'regen:videoURL': metadata['regen:videoURL'],
+        'schema:creditText': metadata['schema:creditText'],
+      };
     }
 
     return values;

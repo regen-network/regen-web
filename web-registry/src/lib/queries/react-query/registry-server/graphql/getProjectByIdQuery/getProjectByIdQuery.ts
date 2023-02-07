@@ -3,6 +3,7 @@ import {
   ProjectByIdQuery,
   ProjectByIdQueryVariables,
 } from 'generated/graphql';
+import { jsonLdCompact } from 'lib/rdf';
 
 import { getProjectByIdKey } from './getProjectByIdQuery.constants';
 import {
@@ -26,6 +27,12 @@ export const getProjectByIdQuery = ({
         variables: { id },
         fetchPolicy: 'no-cache',
       });
+
+      if (projectById.data?.projectById?.metadata) {
+        projectById.data.projectById.metadata = await jsonLdCompact(
+          projectById.data.projectById.metadata,
+        );
+      }
 
       return projectById;
     } catch (e) {

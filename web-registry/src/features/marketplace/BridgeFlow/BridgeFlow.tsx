@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { MsgBridge } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
+import { useQueryClient } from '@tanstack/react-query';
 import { ERROR_BANNER } from 'config/contents';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
@@ -14,6 +16,9 @@ import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccess
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { getHashUrl } from 'lib/block-explorer';
+import { messageActionEquals } from 'lib/ecocredit/constants';
+import { GET_TXS_EVENT_KEY } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery.constants';
+import { getEventsKey } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery.utils';
 
 import { Link } from 'components/atoms';
 import { BridgeModal } from 'components/organisms';
@@ -44,6 +49,7 @@ export const BridgeFlow = ({
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
+  const reactQueryClient = useQueryClient();
   const navigate = useNavigate();
 
   const handleTxQueued = (): void => {
@@ -58,7 +64,18 @@ export const BridgeFlow = ({
 
   const handleTxDelivered = async (
     _deliverTxResponse: DeliverTxResponse,
-  ): Promise<void> => {};
+  ): Promise<void> => {
+    reactQueryClient.invalidateQueries({
+      queryKey: [
+        GET_TXS_EVENT_KEY,
+        getEventsKey([
+          `${messageActionEquals}'/${MsgBridge.$type}'`,
+          `message.sender='${wallet?.address}'`,
+        ]),
+      ],
+    });
+  };
+
   const {
     signAndBroadcast,
     wallet,

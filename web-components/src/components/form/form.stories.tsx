@@ -1,6 +1,5 @@
 import { BasketPutForm } from './BasketPutForm/BasketPutForm';
 import { BasketTakeForm } from './BasketTakeForm';
-import { CreditRetireForm } from './CreditRetireForm';
 // import OrganizationProfileForm from './OrganizationProfileForm';
 import LoginForm from './LoginForm';
 import { FormValues, RecipientsForm } from './RecipientsForm';
@@ -53,16 +52,6 @@ export const loginForm = (): JSX.Element => (
     termsLink={'https://www.regen.network/terms-service/'}
     signupFromLogin="/"
     privacyLink={'https://www.regen.network/privacy-policy/'}
-  />
-);
-
-export const creditRetireForm = (): JSX.Element => (
-  <CreditRetireForm
-    availableTradableAmount={1000}
-    batchDenom={'C01-20190101-20201010-02'}
-    mapboxToken={MAPBOX_TOKEN}
-    onClose={() => null}
-    onSubmit={async () => alert('submit')}
   />
 );
 

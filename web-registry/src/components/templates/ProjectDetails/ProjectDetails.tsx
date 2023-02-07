@@ -269,6 +269,7 @@ function ProjectDetails(): JSX.Element {
         projectPageMetadata={offChainProjectMetadata}
         sanityCreditClassData={sanityCreditClassData}
         soldOutProjectsIds={soldOutProjectsIds}
+        projectWithOrderData={projectsWithOrderData[0]}
         batchData={{
           batches: batchesWithSupply,
           totals: batchesTotal,

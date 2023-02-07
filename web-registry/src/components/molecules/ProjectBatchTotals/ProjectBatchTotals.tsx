@@ -27,17 +27,17 @@ const GridItem: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => (
 
 export function ProjectBatchTotals({
   totals,
-  projectsWithOrderData,
+  projectWithOrderData,
   soldOutProjectsIds,
   sx = [],
 }: {
   totals: BatchTotalsForProject;
-  projectsWithOrderData?: ProjectWithOrderData;
+  projectWithOrderData?: ProjectWithOrderData;
   soldOutProjectsIds: string[];
   sx?: SxProps<Theme>;
 }): JSX.Element {
   const isSoldOut = getIsSoldeOut({
-    project: projectsWithOrderData,
+    project: projectWithOrderData,
     soldOutProjectsIds,
   });
   return (
@@ -68,7 +68,7 @@ export function ProjectBatchTotals({
           tooltipLabel={TRADEABLE_CREDITS_TOOLTIP}
           tooltipNumber={getCreditsTooltip({
             isSoldOut,
-            project: projectsWithOrderData,
+            project: projectWithOrderData,
           })}
           number={isSoldOut ? undefined : totals.tradableAmount}
           badgeLabel={isSoldOut ? SOLD_OUT : undefined}

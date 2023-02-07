@@ -19,12 +19,16 @@ export const getSocialItems = ({
     {
       Icon: TwitterBadgeIcon,
       name: 'Twitter',
-      href: `https://twitter.com/intent/tweet?text=${twitter.text}&url=${twitterUrl}`,
+      href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+        twitter.text,
+      )}&url=${encodeURI(twitterUrl)}`,
     },
     {
       Icon: LinkedInBadgeIcon,
       name: 'LinkedIn',
-      href: `https://www.linkedin.com/sharing/share-offsite/?url=${linkedIn.url}`,
+      href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURI(
+        linkedIn.url,
+      )}`,
     },
   ];
 };

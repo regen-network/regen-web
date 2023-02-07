@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SxProps, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { getSocialItems } from 'utils/components/ShareSection/getSocialItems';
+import { REGEN_APP_PROJECT_URL } from 'utils/components/ShareSection/getSocialItems.constants';
 
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
@@ -95,6 +96,7 @@ export const MyEcocredits = (): JSX.Element => {
   const [txModalHeader, setTxModalHeader] = useState<string | undefined>();
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
   const [txButtonTitle, setTxButtonTitle] = useState<string | undefined>();
+  const lastRetiredProjectIdRef = useRef('');
 
   const navigate = useNavigate();
   const { track } = useTracker();
@@ -260,6 +262,12 @@ export const MyEcocredits = (): JSX.Element => {
       height: theme.spacing(6),
     } as SxProps<Theme>,
   };
+
+  if (creditRetireOpen > -1) {
+    lastRetiredProjectIdRef.current = credits[creditRetireOpen]?.projectId;
+  }
+  const shareUrl =
+    REGEN_APP_PROJECT_URL + (lastRetiredProjectIdRef.current ?? '');
 
   return (
     <>
@@ -493,7 +501,11 @@ export const MyEcocredits = (): JSX.Element => {
           linkComponent={Link}
           onButtonClick={onButtonClick}
           socialItems={getSocialItems({
-            twitter: { text: SOCIAL_TWITTER_TEXT_MAPPING[txModalHeader ?? ''] },
+            twitter: {
+              text: SOCIAL_TWITTER_TEXT_MAPPING[txModalHeader ?? ''],
+              url: shareUrl,
+            },
+            linkedIn: { url: shareUrl },
           })}
         />
       )}

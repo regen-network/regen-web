@@ -1,11 +1,15 @@
 export const STATUS_PENDING = 'pending';
 export const STATUS_COMPLETE = 'complete';
 export const STATUS_ERROR = 'error';
+export const TX_STATUS_REFRESH_INTERVAL = 10000;
+export const ONE_MINUTE_MS = 60000;
+export const TWO_MINUTE_MS = ONE_MINUTE_MS * 2;
 
 export const BRIDGED_STATUSES = {
   regen_hash_not_found: STATUS_PENDING,
   regen_ready: STATUS_PENDING,
   evm_broadcast: STATUS_PENDING,
+  evm_have_height: STATUS_PENDING,
   evm_confirmed: STATUS_COMPLETE,
   error: STATUS_ERROR,
 };
@@ -15,3 +19,5 @@ export const CREDIT_BATCH_TOOLTIP =
 export const NO_BRIDGED_CREDITS = 'No bridged ecocredits found';
 export const AMOUNT_BRIDGED_TOOLTIP =
   'Amount bridged is the same as amount cancelled in the ledger documentation';
+export const STATUS_TOOLTIP =
+  'Status refreshes automatically once every 10 seconds if in a pending state.';

@@ -8,23 +8,20 @@ import { BlockContent } from 'web-components/lib/components/block-content';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
 import EmptyCartIcon from 'web-components/lib/components/icons/EmptyCartIcon';
-import {
-  ActionsTable,
-  TablePaginationParams,
-} from 'web-components/lib/components/table/ActionsTable';
+import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
 import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
 import {
   DATE_FORMAT_SECONDARY,
   formatDate,
   formatNumber,
 } from 'web-components/lib/utils/format';
-import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/Table.constants';
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { Bridge1Event } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { BridgeFlow } from 'features/marketplace/BridgeFlow/BridgeFlow';
+import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 import {
   AccountLink,
   BreakText,
@@ -34,7 +31,6 @@ import {
 } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { NoCredits } from 'components/molecules';
-import { useBridgable } from 'hooks/bridge/useBridgable';
 
 import {
   AMOUNT_BRIDGABLE_TOOLTIP,
@@ -56,16 +52,10 @@ export const BridgableEcocreditsTable = ({
     BatchInfoWithBalance | undefined
   >();
 
-  const [paginationParams, setPaginationParams] =
-    useState<TablePaginationParams>({
-      page: 0,
-      rowsPerPage: DEFAULT_ROWS_PER_PAGE,
-      offset: 0,
-    });
-
-  const { bridgableCredits, isLoadingCredits } = useBridgable({
+  const { credits: bridgableCredits, isLoadingCredits } = useFetchEcocredits({
     address: accountAddress,
-    paginationParams,
+    creditClassId: process.env.REACT_APP_BRIDGE_CREDIT_CLASS_ID,
+    isPaginatedQuery: false,
   });
 
   if (!bridgableCredits?.length && !isLoadingCredits) {
@@ -106,7 +96,6 @@ export const BridgableEcocreditsTable = ({
               {BRIDGE_ACTION}
             </OutlinedButton>
           )}
-          onTableChange={setPaginationParams}
           headerRows={[
             <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>{'Project'}</Box>,
             <Box

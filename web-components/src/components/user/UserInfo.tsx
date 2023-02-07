@@ -12,8 +12,8 @@ export interface User {
   type: string; // USER or ORGANIZATION
   location?: string;
   image?: string | null;
-  description?: string;
-  link?: string;
+  description?: string | null;
+  link?: string | null;
 }
 
 interface UserInfoProps {

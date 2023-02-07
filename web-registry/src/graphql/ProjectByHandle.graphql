@@ -22,6 +22,7 @@ fragment partyFields on Party {
 
 fragment organizationFields on Organization {
   id
+  website
   organizationMembersByOrganizationId(condition: { isOwner: true }) {
     nodes {
       userByMemberId {

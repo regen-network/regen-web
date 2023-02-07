@@ -21117,7 +21117,7 @@ export type PartyFieldsFragment = (
 
 export type OrganizationFieldsFragment = (
   { __typename?: 'Organization' }
-  & Pick<Organization, 'id'>
+  & Pick<Organization, 'id' | 'website'>
   & { organizationMembersByOrganizationId: (
     { __typename?: 'OrganizationMembersConnection' }
     & { nodes: Array<Maybe<(
@@ -21691,6 +21691,7 @@ export const MoreProjectFieldsFragmentDoc = gql`
 export const OrganizationFieldsFragmentDoc = gql`
     fragment organizationFields on Organization {
   id
+  website
   organizationMembersByOrganizationId(condition: {isOwner: true}) {
     nodes {
       userByMemberId {

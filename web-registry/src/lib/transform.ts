@@ -160,10 +160,11 @@ export function getParty(
   return {
     name: party.name,
     location: partyAddress || '',
-    description: party.description || '',
+    description: party.description,
     type: party.type,
-    image: party.image || '',
+    image: party.image,
     address: party.walletByWalletId?.addr || '',
+    link: partyOrg?.website,
     role: partyUser?.partyByPartyId?.roles?.[0] || '',
     individual: (partyUser && partyUser.partyByPartyId?.name) || '',
   };

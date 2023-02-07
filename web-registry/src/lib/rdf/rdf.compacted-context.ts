@@ -3,6 +3,10 @@ import { JsonLdDocument, NodeObject } from 'jsonld';
 
 import { ANCHORED_PROJECT_CONTEXT, UNANCHORED_PROJECT_CONTEXT } from './rdf';
 
+/** This context is meant to be used on any incoming JSON-LD document.
+ * We use this as a way to normalize the format of any incoming JSON-LD document.
+ * It simplifies parsing these documents in our application.
+ */
 export const COMPACTED_CONTEXT = {
   'regen:ecosystemType': { '@container': '@list' },
   'regen:projectActivities': { '@container': '@list' },

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Avatar, Button, Card, CardMedia, Link } from '@mui/material';
 
+import { SocialItemsMock } from '../share-section/ShareSection.mock';
 import Modal from '.';
 import { BasketPutModal } from './BasketPutModal';
 import { BasketTakeModal } from './BasketTakeModal';
@@ -234,6 +235,7 @@ export const txSuccessfulModal = (): JSX.Element => (
     description={
       'Visit <a href="https://app.regen.network" target="_blank">this link</a> to view the transaction.'
     }
+    socialItems={SocialItemsMock}
   />
 );
 export const txErrorModal = (): JSX.Element => (

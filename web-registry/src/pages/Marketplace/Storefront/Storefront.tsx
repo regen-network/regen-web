@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
 import { ERROR_BANNER } from 'config/contents';
 import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
+import { getSocialItems } from 'utils/components/ShareSection/getSocialItems';
+import { REGEN_APP_PROJECT_URL } from 'utils/components/ShareSection/getSocialItems.constants';
 import { Buy1Event } from 'web-registry/src/lib/tracker/types';
 import { useTracker } from 'web-registry/src/lib/tracker/useTracker';
 
@@ -37,6 +39,7 @@ import {
   BUY_SELL_ORDER_BUTTON,
   BUY_SELL_ORDER_TITLE,
   CANCEL_SELL_ORDER_ACTION,
+  STOREFRONT_TWITTER_TEXT,
 } from './Storefront.constants';
 import { SellOrderActions } from './Storefront.types';
 import { getCancelCardItems } from './Storefront.utils';
@@ -54,6 +57,7 @@ export const Storefront = (): JSX.Element => {
   const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
   const [selectedAction, setSelectedAction] = useState<SellOrderActions>();
   const selectedSellOrderIdRef = useRef<number>();
+  const lastProjectIdRef = useRef('');
   const submittedQuantityRef = useRef<number>();
   const isBuyModalOpen = selectedSellOrder !== null && selectedAction === 'buy';
   const navigate = useNavigate();
@@ -136,11 +140,14 @@ export const Storefront = (): JSX.Element => {
     );
     const projectId = sellOrder?.project?.id;
     if (!projectId) return;
+    lastProjectIdRef.current = projectId;
     return {
       id: projectId,
       name: sellOrder?.project?.name ?? projectId,
     };
   }, [normalizedSellOrders]);
+
+  const shareUrl = REGEN_APP_PROJECT_URL + (lastProjectIdRef.current ?? '');
 
   const buySellOrderSubmit = useBuySellOrderSubmit({
     accountAddress,
@@ -321,6 +328,10 @@ export const Storefront = (): JSX.Element => {
             <CelebrateIcon sx={{ width: '85px', height: '106px' }} />
           ) : undefined
         }
+        socialItems={getSocialItems({
+          twitter: { text: STOREFRONT_TWITTER_TEXT, url: shareUrl },
+          linkedIn: { url: shareUrl },
+        })}
       />
       <TxErrorModal
         error={error ?? ''}

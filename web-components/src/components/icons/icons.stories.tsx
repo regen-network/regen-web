@@ -74,9 +74,11 @@ import DiscordIcon from './social/DiscordIcon';
 import FacebookIcon from './social/FacebookIcon';
 import GithubIcon from './social/GithubIcon';
 import InstagramIcon from './social/InstagramIcon';
+import LinkedInBadgeIcon from './social/LinkedInBadgeIcon';
 import LinkedInIcon from './social/LinkedInIcon';
 import MediumIcon from './social/MediumIcon';
 import TelegramIcon from './social/TelegramIcon';
+import TwitterBadgeIcon from './social/TwitterBadgeIcon';
 import TwitterIcon from './social/TwitterIcon';
 import YoutubeIcon from './social/YoutubeIcon';
 import SoilSampleIcon from './SoilSampleIcon';
@@ -209,6 +211,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<InstagramIcon />} label="InstagramIcon" />
     <LabeledIcon icon={<InterfaceIcon />} label="InterfaceIcon" />
     <LabeledIcon icon={<LinkedInIcon color="blue" />} label="LinkedInIcon" />
+    <LabeledIcon icon={<LinkedInBadgeIcon />} label="LinkedInBadgeIcon" />
     <LabeledIcon icon={<LinkIcon />} label="LinkIcon" />
     <LabeledIcon icon={<MediumIcon color="grey" />} label="MediumIcon" />
     <LabeledIcon icon={<MinusIcon />} label="MinusIcon" />
@@ -266,6 +269,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<TrustIcon />} label="TrustIcon" />
     <LabeledIcon icon={<TrustDocumentIcon />} label="TrustDocumentIcon" />
     <LabeledIcon icon={<TwitterIcon color="blue" />} label="TwitterIcon" />
+    <LabeledIcon icon={<TwitterBadgeIcon />} label="TwitterBadgeIcon" />
     <LabeledIcon icon={<UsdcIcon />} label="UsdcIcon" />
     <LabeledIcon icon={<VerifiedIcon color="#000" />} label="VerifiedIcon" />
     <LabeledIcon icon={<WalletIcon />} label="WalletIcon" />

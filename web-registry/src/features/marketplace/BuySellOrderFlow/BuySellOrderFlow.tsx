@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { ERROR_BANNER } from 'config/contents';
 import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
+import { getSocialItems } from 'utils/components/ShareSection/getSocialItems';
+import { REGEN_APP_PROJECT_URL } from 'utils/components/ShareSection/getSocialItems.constants';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
@@ -23,6 +25,7 @@ import { Link } from 'components/atoms';
 import { BuyCreditsModal, BuyCreditsValues } from 'components/organisms';
 import { useMsgClient } from 'hooks';
 
+import { BUY_FLOW_TWITTER_TEXT } from './BuySellOrderFlow.constants';
 import { useFetchSellOrders } from './hooks/useFetchSellOrders';
 import { useSelectedProject } from './hooks/useSelectedProject';
 
@@ -175,6 +178,8 @@ export const BuySellOrderFlow = ({
     };
   }, [selectedProject]);
 
+  const shareUrl = REGEN_APP_PROJECT_URL + (selectedProject?.id ?? '');
+
   const buySellOrderSubmit = useBuySellOrderSubmit({
     accountAddress,
     project: projectDisplayData,
@@ -228,6 +233,10 @@ export const BuySellOrderFlow = ({
         linkComponent={Link}
         onButtonClick={onTxSuccessButtonClick}
         icon={<CelebrateIcon sx={{ width: '85px', height: '106px' }} />}
+        socialItems={getSocialItems({
+          twitter: { text: BUY_FLOW_TWITTER_TEXT, url: shareUrl },
+          linkedIn: { url: shareUrl },
+        })}
       />
       <TxErrorModal
         error={error ?? ''}

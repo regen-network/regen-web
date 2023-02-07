@@ -44,7 +44,6 @@ import {
   QuerySupplyRequest,
   QuerySupplyResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { MsgBridge } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 import { QueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { uniq } from 'lodash';
@@ -52,7 +51,6 @@ import { uniq } from 'lodash';
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
-import { getBridgeTxStatus } from 'lib/bridge';
 import { getMetadata } from 'lib/db/api/metadata-graph';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getSupplyQuery } from 'lib/queries/react-query/ecocredit/getSupplyQuery/getSupplyQuery';
@@ -66,9 +64,7 @@ import type {
   BatchInfoWithBalance,
   BatchInfoWithSupply,
   BatchTotalsForProject,
-  BridgedEcocredits,
   ClassProjectInfo,
-  IBatchInfoWithClassProject,
 } from '../../types/ledger/ecocredit';
 import { expLedger, ledgerRESTUri } from '../ledger';
 import { ECOCREDIT_MESSAGE_TYPES, messageActionEquals } from './constants';
@@ -211,73 +207,6 @@ export const getEcocreditTxs = async (): Promise<TxResponse[]> => {
   ).then(() => {
     return allTxs;
   });
-};
-
-export const getBridgedEcocreditsForAccount = async (
-  addr?: string,
-  sanityCreditClassData?: AllCreditClassQuery,
-): Promise<BridgedEcocredits[] | undefined> => {
-  if (addr) {
-    // Since bridged ecocredits are canceled on Regen Ledger,
-    // the only way to get them is to fetch txs by event and loop through the tx messages.
-    // Txs can have multiple messages and MsgBridge messages can have multiple credits
-    // so we can't really support pagination.
-    const res = await getTxsByEvent({
-      events: [
-        `${messageActionEquals}'/${MsgBridge.$type}'`,
-        `message.sender='${addr}'`,
-      ],
-      orderBy: OrderBy.ORDER_BY_DESC,
-    });
-
-    const bridgedCredits: BridgedEcocredits[] = [];
-    const batchesMap = new Map<string, IBatchInfoWithClassProject>();
-    for (let i = 0; i < res.txs.length; i++) {
-      const txBody = res.txs[i].body;
-      if (txBody) {
-        // Get the tx status using the bridge service api
-        let status, destinationTxHash;
-        const txStatus = await getBridgeTxStatus(res.txResponses[i].txhash);
-
-        status = txStatus?.status;
-        destinationTxHash = txStatus?.evm_tx_hash;
-        const messages = txBody.messages.filter(
-          m => m.typeUrl === `/${MsgBridge.$type}`,
-        );
-        for (let j = 0; j < messages.length; j++) {
-          // Decoding the bridge msg to get the batch(es) info used to bridge ecocredits
-          const message = messages[j];
-          const { credits } = MsgBridge.decode(message.value);
-          for (let k = 0; k < credits.length; k++) {
-            const { batchDenom, amount } = credits[k];
-            let cachedBatch = batchesMap.get(batchDenom);
-            if (!cachedBatch) {
-              const { batch } = await queryEcoBatchInfo(batchDenom);
-              let classProjectInfo: ClassProjectInfo | undefined;
-              if (batch) {
-                classProjectInfo = await getClassProjectForBatch(
-                  batch,
-                  sanityCreditClassData,
-                );
-                cachedBatch = { ...classProjectInfo, ...batch };
-                batchesMap.set(batchDenom, cachedBatch);
-              }
-            }
-            bridgedCredits.push({
-              amount,
-              status,
-              destinationTxHash,
-              txHash: res.txResponses[i].txhash,
-              txTimestamp: res.txResponses[i].timestamp,
-              ...(cachedBatch as IBatchInfoWithClassProject),
-            });
-          }
-        }
-      }
-    }
-    return bridgedCredits;
-  }
-  return;
 };
 
 type GetBatchesWithSupplyParams = {

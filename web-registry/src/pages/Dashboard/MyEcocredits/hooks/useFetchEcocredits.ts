@@ -16,6 +16,7 @@ import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllC
 import { useWallet } from 'lib/wallet/wallet';
 
 import { client as sanityClient } from '../../../../lib/clients/sanity';
+import { isOfCreditClass } from '../MyEcocredits.utils';
 
 interface Response {
   credits: BatchInfoWithBalance[];
@@ -27,9 +28,15 @@ interface Response {
 
 interface Props {
   address?: string;
+  creditClassId?: string;
+  isPaginatedQuery?: boolean;
 }
 
-export const useFetchEcocredits = ({ address }: Props): Response => {
+export const useFetchEcocredits = ({
+  address,
+  creditClassId,
+  isPaginatedQuery = true,
+}: Props): Response => {
   const { ecocreditClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
@@ -49,18 +56,28 @@ export const useFetchEcocredits = ({ address }: Props): Response => {
         client: ecocreditClient,
         request: {
           address: address ?? wallet?.address,
-          pagination: {
-            offset: page * rowsPerPage,
-            limit: rowsPerPage,
-            countTotal: true,
-          },
+          pagination: isPaginatedQuery
+            ? {
+                offset: page * rowsPerPage,
+                limit: rowsPerPage,
+                countTotal: true,
+              }
+            : undefined,
         },
       }),
-    [ecocreditClient, page, rowsPerPage, wallet?.address, address],
+    [
+      ecocreditClient,
+      page,
+      rowsPerPage,
+      wallet?.address,
+      address,
+      isPaginatedQuery,
+    ],
   );
   const { data: balancesData, isLoading: isLoadingCredits } =
     useQuery(balancesQuery);
-  const balances = balancesData?.balances ?? [];
+  const balances =
+    balancesData?.balances.filter(isOfCreditClass(creditClassId)) ?? [];
   const balancesPagination = balancesData?.pagination;
   const allBalancesCount = Number(balancesPagination?.total ?? 0);
 

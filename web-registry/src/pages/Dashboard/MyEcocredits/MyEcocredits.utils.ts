@@ -1,4 +1,5 @@
 import { AllowedDenom } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
+import { BatchBalanceInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 
@@ -65,3 +66,10 @@ export const getDenomAllowedOptions = ({
 
   return allowedDenomsOptions;
 };
+
+export const isOfCreditClass =
+  (creditClassId?: string) =>
+  (balance: BatchBalanceInfo): boolean => {
+    if (!creditClassId) return true;
+    return balance.batchDenom.startsWith(`${creditClassId}-`);
+  };

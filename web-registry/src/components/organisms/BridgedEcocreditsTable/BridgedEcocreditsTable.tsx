@@ -1,10 +1,11 @@
-import { Box } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 import dayjs from 'dayjs';
 import { loaderStyles } from 'styles/loader';
 import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
+import { Flex } from 'web-components/lib/components/box';
 import EmptyCartIcon from 'web-components/lib/components/icons/EmptyCartIcon';
 import { InfoLabelVariant } from 'web-components/lib/components/info-label/InfoLabel.types';
 import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
@@ -28,15 +29,16 @@ import {
 } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { NoCredits } from 'components/molecules';
-import { useBridged } from 'hooks/bridge/useBridged';
 
 import {
   AMOUNT_BRIDGED_TOOLTIP,
   BRIDGED_STATUSES,
   CREDIT_BATCH_TOOLTIP,
   NO_BRIDGED_CREDITS,
+  STATUS_TOOLTIP,
 } from './BridgedEcocreditsTable.constants';
 import { Note } from './BridgedEcocreditsTable.Note';
+import { useFetchBridgedEcocredits } from './hooks/useFetchBridgedEcocredits';
 
 interface Props {
   accountAddress: string | undefined;
@@ -47,11 +49,17 @@ export const BridgedEcocreditsTable = ({
   accountAddress,
   privateAccess = false,
 }: Props): JSX.Element => {
-  const { bridgedCredits, isLoadingCredits } = useBridged({
+  const {
+    bridgedCredits,
+    isLoadingBridgedCredits,
+    isRefetchingTxsStatus,
+    paginationParams,
+    setPaginationParams,
+  } = useFetchBridgedEcocredits({
     address: accountAddress,
   });
 
-  if (!bridgedCredits?.length && !isLoadingCredits) {
+  if (!bridgedCredits?.length && !isLoadingBridgedCredits) {
     return (
       <NoCredits
         title={NO_BRIDGED_CREDITS}
@@ -65,14 +73,35 @@ export const BridgedEcocreditsTable = ({
   }
 
   return (
-    <WithLoader isLoading={isLoadingCredits} sx={loaderStyles.withLoaderBlock}>
+    <WithLoader
+      isLoading={isLoadingBridgedCredits}
+      sx={loaderStyles.withLoaderBlock}
+    >
       <ActionsTable
         tableLabel="bridged ecocredits table"
         sx={tableStyles.rootOnlyTopBorder}
+        initialPaginationParams={paginationParams}
+        onTableChange={setPaginationParams}
         headerRows={[
           'Tx Hash',
           'Timestamp',
-          'Status',
+          <Flex alignItems="flex-end" justifyContent="center">
+            <Box sx={{ mr: 1 }}>{'Status'}</Box>
+            <Box sx={{ mb: -1.5 }}>
+              <InfoTooltipWithIcon outlined title={STATUS_TOOLTIP} />
+            </Box>
+
+            <CircularProgress
+              color="secondary"
+              size={20}
+              sx={{
+                ml: 2,
+                opacity: isRefetchingTxsStatus ? 1 : 0,
+                transitionProperty: 'opacity',
+                transitionDuration: isRefetchingTxsStatus ? '0s' : '3s',
+              }}
+            />
+          </Flex>,
           privateAccess && (
             <Box display="flex" sx={{ width: { xs: '8rem', lg: '10rem' } }}>
               Note / Link
@@ -125,13 +154,15 @@ export const BridgedEcocreditsTable = ({
             <WithLoader isLoading={!row.projectName} variant="skeleton">
               <GreyText>{dayjs(row.txTimestamp).fromNow()}</GreyText>
             </WithLoader>,
-            <GreyText>
-              {row.status && (
-                <StatusLabel
-                  status={BRIDGED_STATUSES[row.status] as InfoLabelVariant}
-                />
-              )}
-            </GreyText>,
+            <WithLoader isLoading={row.status === undefined} variant="skeleton">
+              <GreyText>
+                {row.status && (
+                  <StatusLabel
+                    status={BRIDGED_STATUSES[row.status] as InfoLabelVariant}
+                  />
+                )}
+              </GreyText>
+            </WithLoader>,
             privateAccess && row.status && (
               <GreyText>
                 <Note status={row.status} txHash={row.destinationTxHash} />

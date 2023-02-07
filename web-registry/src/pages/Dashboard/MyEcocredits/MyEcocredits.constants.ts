@@ -7,3 +7,10 @@ export const CREATE_SELL_ORDER_TITLE = 'Create Sell Order';
 export const CREATE_SELL_ORDER_SHORT = 'Sell';
 export const CREATE_SELL_ORDER_BUTTON = 'VIEW ALL SELL ORDERS';
 export const ERROR_BUTTON = 'VIEW YOUR PORTFOLIO';
+
+export const RETIRE_TWITTER_TEXT =
+  'I just offset my carbon footprint on #RegenMarketplace with @regen_network. Join me in doing our part for planetary regeneration!';
+
+export const SOCIAL_TWITTER_TEXT_MAPPING: Record<string, string> = {
+  [RETIRE_HEADER]: RETIRE_TWITTER_TEXT,
+};

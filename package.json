@@ -34,7 +34,8 @@
     "start": "lerna run --scope web-registry start --stream",
     "start-auth": "lerna run --scope web-auth start --stream",
     "watch": "lerna run watch --stream",
-    "test-update-snapshot": "lerna run --scope web-registry test-update-snapshot --stream"
+    "test-update-snapshot": "lerna run --scope web-registry test-update-snapshot --stream",
+    "bump": "lerna version --conventional-commits"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.21.4",

@@ -1,4 +1,7 @@
 export const OMITTED_METADATA_KEYS = [
+  '@id',
+  '@type',
+  'regen:creditClassId',
   'schema:name',
   'regen:projectSize',
   'schema:location',

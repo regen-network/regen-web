@@ -37,7 +37,7 @@ export const ProjectMetadataForm = ({
       enableReinitialize
       validateOnMount
       initialValues={{
-        metadata: initialValues ? JSON.stringify(initialValues) : '',
+        metadata: initialValues ? JSON.stringify(initialValues, null, 2) : '',
       }}
       validationSchema={validationSchema}
       onSubmit={async (values, { setTouched }) => {

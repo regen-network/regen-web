@@ -49,7 +49,6 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
         const parsedMetaData = JSON.parse(values.metadata);
         const projectMetadata = cloneDeep(metadata);
         merge(projectMetadata, parsedMetaData);
-        console.log(projectMetadata);
         if (projectMetadata) {
           await metadataSubmit(projectMetadata);
         }

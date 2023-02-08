@@ -36,7 +36,9 @@ export const mockMetadata = {
       '@value': '',
     },
   },
-  'regen:offsetGenerationMethod': '',
+  'regen:offsetGenerationMethod': {
+    '@list': [],
+  },
   'regen:vcsMethodology': {
     'schema:name': '',
     'schema:url': {

@@ -36,7 +36,9 @@ const code = {
       '@value': '',
     },
   },
-  'regen:offsetGenerationMethod': '',
+  'regen:offsetGenerationMethod': {
+    '@list': [],
+  },
   'regen:vcsMethodology': {
     'schema:name': '',
     'schema:url': {

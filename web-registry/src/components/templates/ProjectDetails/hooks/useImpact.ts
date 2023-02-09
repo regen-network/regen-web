@@ -5,6 +5,7 @@ import { getEcologicalImpactByIriQuery } from 'lib/queries/react-query/sanity/ge
 import { Maybe } from '../../../../generated/graphql';
 import { EcologicalImpact } from '../../../../generated/sanity-graphql';
 import { client } from '../../../../lib/clients/sanity';
+import { useSortImpact } from './useImpact.utils';
 
 interface InputProps {
   coBenefitsIris: Maybe<string | string[]> | undefined;
@@ -33,12 +34,14 @@ export default function useImpact({
 
   let impactData: EcologicalImpact[] = [];
 
+  const sortedImpact = useSortImpact({ coBenefitData, coBenefitsIris });
+
   if (primaryImpactData && primaryImpactData.allEcologicalImpact?.length) {
     impactData = [...primaryImpactData?.allEcologicalImpact];
   }
 
   if (coBenefitData && coBenefitData.allEcologicalImpact?.length) {
-    impactData = [...impactData, ...coBenefitData?.allEcologicalImpact];
+    impactData = [...impactData, ...sortedImpact];
   }
 
   return impactData;

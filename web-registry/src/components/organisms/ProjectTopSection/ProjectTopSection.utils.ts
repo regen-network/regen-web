@@ -2,7 +2,6 @@ import { User } from 'web-components/lib/components/user/UserInfo';
 import { truncate } from 'web-components/lib/utils/truncate';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
-import { SdgByIriQuery } from 'generated/sanity-graphql';
 import {
   AnchoredProjectMetadataBaseLD,
   AnchoredProjectMetadataLD,
@@ -122,34 +121,4 @@ export const isAnchoredProjectMetadata = (
   onChainProjectId?: string,
 ): projectMetadata is AnchoredProjectMetadataLD => {
   return !!onChainProjectId;
-};
-
-type UseSortSdgsParams = {
-  sdgIris?: string | string[] | null;
-  sdgData?: SdgByIriQuery;
-};
-
-type SdgType = SdgByIriQuery['allSdg'][0];
-
-// sanity does not preserve order of sdgs in the response
-// so we need to sort the sdgs based on the initial order of the iris
-export const useSortImpact = ({
-  sdgIris,
-  sdgData,
-}: UseSortSdgsParams): SdgType[] => {
-  const allSdgs = [...(sdgData?.allSdg ?? [])];
-  const initialIrisList = sdgIris ?? [];
-
-  if (typeof sdgIris === 'string') {
-    sdgIris = [sdgIris];
-  }
-  if (Array.isArray(sdgIris)) {
-    return allSdgs?.sort(
-      (sdgA, sdgB) =>
-        initialIrisList.indexOf(sdgA.iri?.current ?? '') -
-        initialIrisList.indexOf(sdgB.iri?.current ?? ''),
-    );
-  }
-
-  return allSdgs;
 };

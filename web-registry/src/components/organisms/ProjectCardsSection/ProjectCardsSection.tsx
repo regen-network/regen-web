@@ -1,22 +1,21 @@
 import { Box } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
 
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import Section from 'web-components/lib/components/section';
 
-import {
-  Maybe,
-  Scalars,
-  useAllSoldOutProjectsQuery,
-} from 'generated/sanity-graphql';
+import { Maybe, Scalars } from 'generated/sanity-graphql';
 import { client as sanityClient } from 'lib/clients/sanity';
+import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 import { getCreditsTooltip } from 'pages/Projects/utils/getCreditsTooltip';
-import { getIsSoldeOut } from 'pages/Projects/utils/getIsSoldOut';
+import { getIsSoldOut } from 'pages/Projects/utils/getIsSoldOut';
 import WithLoader from 'components/atoms/WithLoader';
 import BlockContentBody from 'components/molecules/BlockContentBody';
 
+import { useAllSoldOutProjectsIds } from './hooks/useSoldOutProjectsIds';
 import { API_URI, IMAGE_STORAGE_BASE_URL } from './ProjectCardsSection.config';
 import { useSectionStyles } from './ProjectCardsSection.styles';
 import { ProjectCardOnButtonClickParams } from './ProjectCardsSection.types';
@@ -40,13 +39,12 @@ export function ProjectCardsSection({
 }: Props): JSX.Element {
   const { classes } = useSectionStyles();
   const { track } = useTracker();
-  const { data: sanitySoldOutProjects } = useAllSoldOutProjectsQuery({
-    client: sanityClient,
+  const { data: sanitySoldOutProjects } = useQuery(
+    getSoldOutProjectsQuery({ sanityClient, enabled: !!sanityClient }),
+  );
+  const soldOutProjectsIds = useAllSoldOutProjectsIds({
+    sanitySoldOutProjects,
   });
-  const soldOutProjectsIds =
-    sanitySoldOutProjects?.allSoldOutProjects?.[0]?.soldOutProjectsList?.map(
-      project => String(project?.projectId),
-    ) ?? [];
 
   return (
     <Section
@@ -70,7 +68,7 @@ export function ProjectCardsSection({
           }}
         >
           {projects?.map(project => {
-            const isSoldOut = getIsSoldeOut({ project, soldOutProjectsIds });
+            const isSoldOut = getIsSoldOut({ project, soldOutProjectsIds });
             return (
               <Box key={project.id}>
                 <ProjectCard

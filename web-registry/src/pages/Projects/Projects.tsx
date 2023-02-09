@@ -20,6 +20,7 @@ import { useTracker } from 'lib/tracker/useTracker';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { GettingStartedResourcesSection } from 'components/molecules';
+import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 
 import { useProjects } from './hooks/useProjects';
 import {
@@ -30,7 +31,7 @@ import {
 } from './Projects.config';
 import { ProjectWithOrderData } from './Projects.types';
 import { getCreditsTooltip } from './utils/getCreditsTooltip';
-import { getIsSoldeOut } from './utils/getIsSoldOut';
+import { getIsSoldOut } from './utils/getIsSoldOut';
 
 export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { page: routePage } = useParams();
@@ -53,10 +54,9 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { data: sanitySoldOutProjects } = useAllSoldOutProjectsQuery({
     client: sanityClient,
   });
-  const soldOutProjectsIds =
-    sanitySoldOutProjects?.allSoldOutProjects?.[0]?.soldOutProjectsList?.map(
-      project => String(project?.projectId),
-    ) ?? [];
+  const soldOutProjectsIds = useAllSoldOutProjectsIds({
+    sanitySoldOutProjects,
+  });
 
   const [sort, setSort] = useState<string>(sortOptions[0].value);
   const [selectedProject, setSelectedProject] =
@@ -134,7 +134,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
             </Flex>
           </Flex>
           {projects?.map(project => {
-            const isSoldOut = getIsSoldeOut({ project, soldOutProjectsIds });
+            const isSoldOut = getIsSoldOut({ project, soldOutProjectsIds });
             return (
               <Box key={project?.id}>
                 <ProjectCard

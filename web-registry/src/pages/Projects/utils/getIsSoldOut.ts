@@ -5,7 +5,7 @@ type Params = {
   soldOutProjectsIds: string[];
 };
 
-export const getIsSoldeOut = ({
+export const getIsSoldOut = ({
   project,
   soldOutProjectsIds,
 }: Params): boolean => {

@@ -9,7 +9,7 @@ import { LabeledNumber } from 'web-components/lib/components/text-layouts';
 
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 import { getCreditsTooltip } from 'pages/Projects/utils/getCreditsTooltip';
-import { getIsSoldeOut } from 'pages/Projects/utils/getIsSoldOut';
+import { getIsSoldOut } from 'pages/Projects/utils/getIsSoldOut';
 
 import type { BatchTotalsForProject } from '../../../types/ledger/ecocredit';
 import {
@@ -36,7 +36,7 @@ export function ProjectBatchTotals({
   soldOutProjectsIds: string[];
   sx?: SxProps<Theme>;
 }): JSX.Element {
-  const isSoldOut = getIsSoldeOut({
+  const isSoldOut = getIsSoldOut({
     project: projectWithOrderData,
     soldOutProjectsIds,
   });

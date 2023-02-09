@@ -14,13 +14,16 @@ import {
 } from 'generated/graphql';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 
-import { UseProjectEditSubmitParams } from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
+import {
+  NestedPartial,
+  UseProjectEditSubmitParams,
+} from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
 import { RolesValues } from 'components/organisms';
 import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';
 
 interface Props {
   offChainProject?: OffChainProject;
-  metadata?: Partial<ProjectMetadataLD>;
+  metadata?: NestedPartial<ProjectMetadataLD>;
   projectEditSubmit: UseProjectEditSubmitParams;
   isEdit?: boolean;
   metadataReload: () => Promise<void>;
@@ -135,7 +138,10 @@ const useRolesSubmit = ({
           }
         }
 
-        const newMetadata = { ...metadata, ...stripIds(values) };
+        const newMetadata = {
+          ...metadata,
+          ...stripIds(values),
+        } as NestedPartial<ProjectMetadataLD>;
         // In creation mode, we store all metadata in the off-chain table project.metadata temporarily
         if (!isEdit)
           projectPatch = {

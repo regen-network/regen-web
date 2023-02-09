@@ -37,11 +37,16 @@ interface Props {
   onChainProject?: ProjectInfo;
 }
 
+interface MetadataSubmitProps {
+  values: Values;
+  overwrite?: boolean;
+}
+
 interface Res {
   offChainProject?: OffChainProject;
   metadata?: Partial<ProjectMetadataLD>;
   metadataReload: () => Promise<void>;
-  metadataSubmit: (values: Values) => Promise<void>;
+  metadataSubmit: (p: MetadataSubmitProps) => Promise<void>;
 }
 
 type Values =
@@ -124,8 +129,14 @@ export const useProjectWithMetadata = ({
   }, [create, edit, reactQueryClient, projectId]);
 
   const metadataSubmit = useCallback(
-    async (values: Values): Promise<void> => {
-      const newMetadata = { ...metadata, ...values };
+    async ({
+      values,
+      overwrite = false,
+    }: MetadataSubmitProps): Promise<void> => {
+      let newMetadata = values;
+      if (!overwrite) {
+        newMetadata = { ...metadata, ...values };
+      }
       try {
         if (isEdit && anchored) {
           await projectEditSubmit(newMetadata);

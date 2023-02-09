@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { cloneDeep, merge, omit } from 'lodash';
+import { merge, omit, pick } from 'lodash';
 
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getProjectShapeIri } from 'lib/rdf';
@@ -39,18 +39,18 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
       },
     });
 
-    let editabledMetadata: Partial<AnchoredProjectMetadataLD> | undefined;
+    let customMetadata: Partial<AnchoredProjectMetadataLD> | undefined;
     if (metadata) {
-      editabledMetadata = omit(metadata, OMITTED_METADATA_KEYS);
+      customMetadata = omit(metadata, OMITTED_METADATA_KEYS);
     }
 
     const submit = useCallback(
       async (values: ProjectMetadataValues): Promise<void> => {
         const parsedMetaData = JSON.parse(values.metadata);
-        const projectMetadata = cloneDeep(metadata);
-        merge(projectMetadata, parsedMetaData);
-        if (projectMetadata) {
-          await metadataSubmit(projectMetadata);
+        const baseMetadata = pick(metadata, OMITTED_METADATA_KEYS);
+        merge(baseMetadata, parsedMetaData);
+        if (baseMetadata) {
+          await metadataSubmit({ values: baseMetadata, overwrite: true });
         }
       },
       [metadata, metadataSubmit],
@@ -64,7 +64,7 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
       <ProjectFormTemplate isEdit={isEdit} title="Metadata">
         <ProjectMetadataSelectedForm
           submit={submit}
-          metadata={editabledMetadata}
+          metadata={customMetadata}
           graphData={graphData}
           isVCS={isVCS}
           onNext={navigateNext}

@@ -4,5 +4,8 @@ query SdgByIri($iris: [String!]) {
     image {
       ...customImageFields
     }
+    iri {
+      current
+    }
   }
 }

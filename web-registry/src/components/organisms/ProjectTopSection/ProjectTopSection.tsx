@@ -9,6 +9,7 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import { useSortResultWithIris } from 'utils/sanity/useSortResultWithIris';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import Card from 'web-components/lib/components/cards/Card';
@@ -35,7 +36,7 @@ import {
   ProjectTopSectionQuoteMark,
   useProjectTopSectionStyles,
 } from './ProjectTopSection.styles';
-import { ProjectTopSectionProps } from './ProjectTopSection.types';
+import { ProjectTopSectionProps, SdgType } from './ProjectTopSection.types';
 import {
   getDisplayAdmin,
   getDisplayDeveloper,
@@ -91,9 +92,21 @@ function ProjectTopSection({
     },
     skip: !sdgIris,
   });
+<<<<<<< HEAD
   const sdgs = sdgData?.allSdg.map(s => ({
     title: s.title || '',
     imageUrl: getSanityImgSrc(s.image),
+=======
+
+  const sortedSdgData = useSortResultWithIris<SdgType>({
+    dataWithIris: sdgData?.allSdg,
+    iris: sdgIris,
+  });
+
+  const sdgs = sortedSdgData.map(sdg => ({
+    title: sdg.title || '',
+    imageUrl: getSanityImgSrc(sdg.image),
+>>>>>>> 22aa75a4 (feat: sort SDGs and Impacts based on initial ordering (#1785))
   }));
 
   const creditClassSanity = findSanityCreditClass({

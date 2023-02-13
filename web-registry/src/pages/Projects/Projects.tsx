@@ -11,11 +11,16 @@ import { Pagination } from 'web-components/lib/components/pagination/Pagination'
 import { Body, Subtitle } from 'web-components/lib/components/typography';
 import { pxToRem } from 'web-components/lib/theme/muiTheme';
 
-import { useAllProjectsPageQuery } from 'generated/sanity-graphql';
+import {
+  useAllProjectsPageQuery,
+  useAllSoldOutProjectsQuery,
+} from 'generated/sanity-graphql';
 import { client as sanityClient } from 'lib/clients/sanity';
+import { useTracker } from 'lib/tracker/useTracker';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { GettingStartedResourcesSection } from 'components/molecules';
+import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 
 import { useProjects } from './hooks/useProjects';
 import {
@@ -25,12 +30,15 @@ import {
   sortOptions,
 } from './Projects.config';
 import { ProjectWithOrderData } from './Projects.types';
+import { getCreditsTooltip } from './utils/getCreditsTooltip';
+import { getIsSoldOut } from './utils/getIsSoldOut';
 
 export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { page: routePage } = useParams();
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const { track } = useTracker();
 
   // Page index starts at 1 for route
   // Page index starts at 0 for logic
@@ -42,6 +50,13 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const gettingStartedResourcesSection =
     sanityProjectsPageData?.allProjectsPage?.[0]
       ?.gettingStartedResourcesSection;
+
+  const { data: sanitySoldOutProjects } = useAllSoldOutProjectsQuery({
+    client: sanityClient,
+  });
+  const soldOutProjectsIds = useAllSoldOutProjectsIds({
+    sanitySoldOutProjects,
+  });
 
   const [sort, setSort] = useState<string>(sortOptions[0].value);
   const [selectedProject, setSelectedProject] =
@@ -118,29 +133,35 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
               </Flex>
             </Flex>
           </Flex>
-          {projects?.map(project => (
-            <Box key={project?.id}>
-              <ProjectCard
-                id={project?.id}
-                name={project?.name}
-                creditClassId={project?.creditClassId}
-                imgSrc={project?.imgSrc}
-                place={project?.place}
-                area={project?.area}
-                areaUnit={project?.areaUnit}
-                onButtonClick={() => {
-                  setSelectedProject(project);
-                  setIsBuyFlowStarted(true);
-                }}
-                purchaseInfo={project.purchaseInfo}
-                onClick={() => navigate(`/project/${project.id}`)}
-                imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
-                apiServerUrl={API_URI}
-                truncateTitle={true}
-                sx={{ width: 400, height: 479 }}
-              />
-            </Box>
-          ))}
+          {projects?.map(project => {
+            const isSoldOut = getIsSoldOut({ project, soldOutProjectsIds });
+            return (
+              <Box key={project?.id}>
+                <ProjectCard
+                  id={project?.id}
+                  name={project?.name}
+                  creditClassId={project?.creditClassId}
+                  imgSrc={project?.imgSrc}
+                  place={project?.place}
+                  area={project?.area}
+                  areaUnit={project?.areaUnit}
+                  onButtonClick={() => {
+                    setSelectedProject(project);
+                    setIsBuyFlowStarted(true);
+                  }}
+                  purchaseInfo={project.purchaseInfo}
+                  onClick={() => navigate(`/project/${project.id}`)}
+                  imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
+                  apiServerUrl={API_URI}
+                  truncateTitle={true}
+                  sx={{ width: 400, height: 479 }}
+                  track={track}
+                  isSoldOut={isSoldOut}
+                  creditsTooltip={getCreditsTooltip({ isSoldOut, project })}
+                />
+              </Box>
+            );
+          })}
           <Flex
             sx={{
               gridColumn: '1/-1',

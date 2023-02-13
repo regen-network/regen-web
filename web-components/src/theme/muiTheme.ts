@@ -15,8 +15,12 @@ const defaultTheme = createTheme({
 
 export const { pxToRem } = defaultTheme.typography;
 
-const headerFontFamily = ['"Muli"', '-apple-system', 'sans-serif'].join(',');
-const defaultFontFamily = ['"Lato"', '-apple-system', 'sans-serif'].join(',');
+export const headerFontFamily = ['"Muli"', '-apple-system', 'sans-serif'].join(
+  ',',
+);
+export const defaultFontFamily = ['"Lato"', '-apple-system', 'sans-serif'].join(
+  ',',
+);
 
 const headerDefaults = {
   fontWeight: 900,

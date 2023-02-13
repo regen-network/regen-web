@@ -1,14 +1,21 @@
 import { Box } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
 
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import Section from 'web-components/lib/components/section';
 
 import { Maybe, Scalars } from 'generated/sanity-graphql';
+import { client as sanityClient } from 'lib/clients/sanity';
+import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
+import { useTracker } from 'lib/tracker/useTracker';
 
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
+import { getCreditsTooltip } from 'pages/Projects/utils/getCreditsTooltip';
+import { getIsSoldOut } from 'pages/Projects/utils/getIsSoldOut';
 import WithLoader from 'components/atoms/WithLoader';
 import BlockContentBody from 'components/molecules/BlockContentBody';
 
+import { useAllSoldOutProjectsIds } from './hooks/useSoldOutProjectsIds';
 import { API_URI, IMAGE_STORAGE_BASE_URL } from './ProjectCardsSection.config';
 import { useSectionStyles } from './ProjectCardsSection.styles';
 import { ProjectCardOnButtonClickParams } from './ProjectCardsSection.types';
@@ -31,6 +38,13 @@ export function ProjectCardsSection({
   loading,
 }: Props): JSX.Element {
   const { classes } = useSectionStyles();
+  const { track } = useTracker();
+  const { data: sanitySoldOutProjects } = useQuery(
+    getSoldOutProjectsQuery({ sanityClient, enabled: !!sanityClient }),
+  );
+  const soldOutProjectsIds = useAllSoldOutProjectsIds({
+    sanitySoldOutProjects,
+  });
 
   return (
     <Section
@@ -53,29 +67,35 @@ export function ProjectCardsSection({
             justifyContent: projects?.length > 1 ? 'center' : 'left',
           }}
         >
-          {projects?.map(project => (
-            <Box key={project.id}>
-              <ProjectCard
-                id={project.id}
-                name={project.name}
-                creditClassId={project.creditClassId}
-                imgSrc={project.imgSrc}
-                place={project.place}
-                area={project.area}
-                areaUnit={project.areaUnit}
-                onButtonClick={
-                  onButtonClick && (() => onButtonClick({ project }))
-                }
-                purchaseInfo={project.purchaseInfo}
-                href={`/project/${project.id}`}
-                target={'_self'}
-                imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
-                apiServerUrl={API_URI}
-                truncateTitle={true}
-                sx={{ width: 400, height: 479 }}
-              />
-            </Box>
-          ))}
+          {projects?.map(project => {
+            const isSoldOut = getIsSoldOut({ project, soldOutProjectsIds });
+            return (
+              <Box key={project.id}>
+                <ProjectCard
+                  id={project.id}
+                  name={project.name}
+                  creditClassId={project.creditClassId}
+                  imgSrc={project.imgSrc}
+                  place={project.place}
+                  area={project.area}
+                  areaUnit={project.areaUnit}
+                  onButtonClick={
+                    onButtonClick && (() => onButtonClick({ project }))
+                  }
+                  purchaseInfo={project.purchaseInfo}
+                  href={`/project/${project.id}`}
+                  target={'_self'}
+                  imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
+                  apiServerUrl={API_URI}
+                  truncateTitle={true}
+                  sx={{ width: 400, height: 479 }}
+                  track={track}
+                  isSoldOut={isSoldOut}
+                  creditsTooltip={getCreditsTooltip({ isSoldOut, project })}
+                />
+              </Box>
+            );
+          })}
         </Box>
       </WithLoader>
     </Section>

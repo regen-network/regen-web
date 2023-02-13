@@ -2,18 +2,19 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Box, SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
-import { Buy1Event } from 'web-registry/src/lib/tracker/types';
-import { useTracker } from 'web-registry/src/lib/tracker/useTracker';
+import { Buy1Event, Track } from 'web-registry/src/lib/tracker/types';
 
 import { formatStandardInfo } from '../../../utils/format';
 import OutlinedButton from '../../buttons/OutlinedButton';
+import GradientBadge from '../../gradient-badge';
 import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
 import CurrentCreditsIcon from '../../icons/CurrentCreditsIcon';
 import ProjectPlaceInfo from '../../place/ProjectPlaceInfo';
+import InfoTooltipWithIcon from '../../tooltip/InfoTooltipWithIcon';
 import { Body, Subtitle } from '../../typography';
 import UserInfo, { User } from '../../user/UserInfo';
 import MediaCard, { MediaCardProps } from '../MediaCard';
-import { ERROR_CARD_PRICE } from './ProjectCard.constants';
+import { ERROR_CARD_PRICE, SOLD_OUT } from './ProjectCard.constants';
 import { PurchaseDetails } from './ProjectCard.PurchaseDetails';
 import { useProjectCardStyles } from './ProjectCard.styles';
 import { PurchaseInfo } from './ProjectCard.types';
@@ -38,6 +39,9 @@ export interface ProjectCardProps extends MediaCardProps {
   imageStorageBaseUrl?: string;
   apiServerUrl?: string;
   sx?: SxProps<Theme>;
+  track: Track;
+  isSoldOut?: boolean;
+  creditsTooltip?: string;
 }
 
 export function ProjectCard({
@@ -59,12 +63,14 @@ export function ProjectCard({
   imageStorageBaseUrl,
   apiServerUrl,
   sx,
+  track,
+  isSoldOut = false,
+  creditsTooltip,
   ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
   const { classes } = useProjectCardStyles();
   const location = useLocation();
-  const { track } = useTracker();
 
   const [open, setOpen] = useState<boolean>(true);
 
@@ -224,9 +230,25 @@ export function ProjectCard({
                       <Body
                         size="md"
                         mobileSize="sm"
-                        sx={{ fontWeight: 700, color: 'primary.contrastText' }}
+                        sx={{
+                          fontWeight: 700,
+                          color: 'primary.contrastText',
+                          display: 'flex',
+                          alignItems: 'center',
+                        }}
                       >
-                        {purchaseInfo.sellInfo.creditsAvailable || '-'}
+                        {isSoldOut ? (
+                          <GradientBadge label={SOLD_OUT} />
+                        ) : (
+                          purchaseInfo.sellInfo.creditsAvailable ?? '-'
+                        )}
+                        {creditsTooltip && (
+                          <InfoTooltipWithIcon
+                            title={creditsTooltip}
+                            sx={{ ml: 1 }}
+                            outlined
+                          />
+                        )}
                       </Body>
                     </Box>
                   </Box>

@@ -27,6 +27,9 @@ import { CreditBatchIcon } from './CreditBatchIcon';
 import { CreditBatchLightIcon } from './CreditBatchLightIcon';
 import { CreditClassIcon } from './CreditClassIcon';
 import CreditsIcon from './CreditsIcon';
+import CreditsIssuedIcon from './CreditsIssued';
+import CreditsRetiredIcon from './CreditsRetired';
+import CreditsTradeableIcon from './CreditsTradeable';
 import CurrentCreditsIcon from './CurrentCreditsIcon';
 import DocumentIcon from './DocumentIcon';
 import DropdownIcon from './DropdownIcon';
@@ -185,6 +188,9 @@ export const allIcons = (): JSX.Element => (
       icon={<CreditClassIcon sx={{ color: 'secondary.main' }} />}
       label="CreditClassIcon"
     />
+    <LabeledIcon icon={<CreditsIssuedIcon />} label="CreditsIssuedIcon" />
+    <LabeledIcon icon={<CreditsTradeableIcon />} label="CreditsTradeableIcon" />
+    <LabeledIcon icon={<CreditsRetiredIcon />} label="CreditsRetiredIcon" />
     <LabeledIcon
       icon={<CurrentCreditsIcon color="#4FB573" />}
       label="CurrentCreditsIcon"

@@ -1,0 +1,8 @@
+query allSoldOutProjects {
+  allSoldOutProjects {
+    soldOutProjectsList {
+      projectName
+      projectId
+    }
+  }
+}

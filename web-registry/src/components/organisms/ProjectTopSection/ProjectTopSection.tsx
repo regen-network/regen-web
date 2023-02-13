@@ -53,6 +53,8 @@ function ProjectTopSection({
   setPaginationParams,
   onChainProjectId,
   loading,
+  projectWithOrderData,
+  soldOutProjectsIds,
 }: ProjectTopSectionProps): JSX.Element {
   const { classes } = useProjectTopSectionStyles();
   const theme = useTheme();
@@ -251,6 +253,8 @@ function ProjectTopSection({
           )}
           {batchData?.totals && (
             <ProjectBatchTotals
+              projectWithOrderData={projectWithOrderData}
+              soldOutProjectsIds={soldOutProjectsIds}
               totals={batchData.totals}
               sx={{
                 mt: { xs: 10, sm: 12, md: 16 },

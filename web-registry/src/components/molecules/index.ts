@@ -18,7 +18,7 @@ export * from './NoCredits';
 export * from './OverviewCards';
 export * from './PlanStepper';
 export * from './PracticesOutcomesSection';
-export * from './ProjectBatchTotals';
+export * from './ProjectBatchTotals/ProjectBatchTotals';
 export * from './ProjectPageFooter';
 export * from './ProjectPageMetadata/ProjectPageMetadata';
 export * from './ReviewProcessInfo';

@@ -34,7 +34,7 @@ export interface ProfileFormValues {
   'schema:description'?: string;
   'regen:address'?: string;
   // 'regen:sharePermission'?: boolean;
-  'regen:showOnProjectPage': true;
+  'regen:showOnProjectPage': boolean;
 }
 
 function ProfileModal({

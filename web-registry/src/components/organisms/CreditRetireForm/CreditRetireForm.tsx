@@ -1,14 +1,11 @@
 import React, { useEffect } from 'react';
 import { useFieldArray, useFormState } from 'react-hook-form';
-import { DevTool } from '@hookform/devtools';
 import { Box } from '@mui/system';
 
 import { RetirementReminder } from 'web-components/lib/components/form/CreditRetireForm';
 import Submit from 'web-components/lib/components/form/Submit';
 import AmountField from 'web-components/lib/components/inputs/new/AmountField/AmountField';
 import { RegenModalProps } from 'web-components/lib/components/modal';
-
-import { IS_DEV } from 'lib/env';
 
 import { BottomCreditRetireFields } from 'components/molecules/BottomCreditRetireFields/BottomCreditRetireFields';
 import Form from 'components/molecules/Form/Form';
@@ -110,7 +107,6 @@ const CreditRetireForm: React.FC<
           label={'Retire'}
         />
       </Form>
-      {IS_DEV && <DevTool control={form.control} />}
     </>
   );
 };

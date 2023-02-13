@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useFieldArray, useFormState, useWatch } from 'react-hook-form';
-import { DevTool } from '@hookform/devtools';
 import { Box } from '@mui/system';
 import { makeStyles } from 'tss-react/mui';
 
@@ -15,17 +14,13 @@ import InfoTooltip from 'web-components/lib/components/tooltip/InfoTooltip';
 import { Subtitle } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { IS_DEV } from 'lib/env';
-
 import AgreeErpaCheckbox from 'components/atoms/AgreeErpaCheckboxNew';
 import { BottomCreditRetireFields } from 'components/molecules/BottomCreditRetireFields/BottomCreditRetireFields';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
-import {
-  creditSendFormInitialValues,
-  initialValuesRetire,
-} from './CreditSendForm.constants';
+import { initialValuesRetire } from '../CreditRetireForm/CreditRetireForm.constants';
+import { creditSendFormInitialValues } from './CreditSendForm.constants';
 import {
   CreditSendFormSchema,
   CreditSendFormSchemaType,
@@ -192,7 +187,6 @@ const CreditSendForm: React.FC<React.PropsWithChildren<CreditSendFormProps>> =
             label={'Send'}
           />
         </Form>
-        {IS_DEV && <DevTool control={form.control} />}
       </>
     );
   };

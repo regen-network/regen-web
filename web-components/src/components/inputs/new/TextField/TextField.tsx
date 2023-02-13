@@ -61,7 +61,14 @@ const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
         }}
         label={
           <>
-            <Box sx={{ display: 'inline-block' }}>{label}</Box>
+            <Box
+              sx={{
+                display: 'inline-block',
+                width: optional ? 'inherit' : '100%',
+              }}
+            >
+              {label}
+            </Box>
             {description && (
               <Box sx={{ display: 'flex', mt: 1 }}>
                 <Body size="sm">{description}</Body>

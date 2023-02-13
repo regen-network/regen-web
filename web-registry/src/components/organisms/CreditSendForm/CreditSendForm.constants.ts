@@ -1,15 +1,4 @@
-import {
-  CreditSendFormSchemaType,
-  RetireFormSchemaType,
-} from './CreditSendForm.schema';
-
-export const initialValuesRetire: RetireFormSchemaType = {
-  note: '',
-  country: 'US',
-  stateProvince: '',
-  postalCode: '',
-  retirementJurisdiction: '',
-};
+import { CreditSendFormSchemaType } from './CreditSendForm.schema';
 
 export const creditSendFormInitialValues: CreditSendFormSchemaType = {
   recipient: '',

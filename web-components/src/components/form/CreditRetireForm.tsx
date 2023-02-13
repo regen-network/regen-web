@@ -90,7 +90,7 @@ export interface RetireFormValues extends MetaRetireFormValues {
   retiredAmount: number;
 }
 
-export interface RetireFormValuesArray {
+interface RetireFormValuesArray {
   recipients: RetireFormValues[];
 }
 

@@ -16,6 +16,8 @@ import {
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
 
+import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
+
 export type ProjectTopSectionProps = {
   offChainProject?: Maybe<ProjectFieldsFragment>;
   onChainProject?: ProjectInfo;
@@ -35,4 +37,6 @@ export type ProjectTopSectionProps = {
   setPaginationParams: UseStateSetter<TablePaginationParams>;
   onChainProjectId?: string;
   loading?: boolean;
+  soldOutProjectsIds: string[];
+  projectWithOrderData: ProjectWithOrderData;
 };

@@ -12,6 +12,7 @@ import {
   useWalletByAddrQuery,
 } from 'generated/graphql';
 import { getProjectBaseData } from 'lib/rdf';
+import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useDashboardContext } from '../Dashboard.context';
@@ -29,6 +30,7 @@ const MyProjects = (): JSX.Element => {
     },
     fetchPolicy: 'cache-and-network',
   });
+  const { track } = useTracker();
 
   const projects = walletData?.walletByAddr?.projectsByWalletId?.nodes;
   const isFirstProject = !projects || projects?.length < 1;
@@ -101,6 +103,7 @@ const MyProjects = (): JSX.Element => {
                 place="TODO"
                 area={0}
                 areaUnit="ha"
+                track={track}
               />
             </Grid>
           ))}

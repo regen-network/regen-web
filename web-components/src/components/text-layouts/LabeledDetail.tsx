@@ -4,6 +4,7 @@ import { SxProps } from '@mui/material';
 import type { Theme } from 'src/theme/muiTheme';
 
 import { Flex } from '../box';
+import InfoTooltipWithIcon from '../tooltip/InfoTooltipWithIcon';
 import { Label } from '../typography';
 import type { LabelSize } from '../typography/sizing';
 
@@ -11,21 +12,42 @@ import type { LabelSize } from '../typography/sizing';
 export const LabeledDetail: React.FC<
   React.PropsWithChildren<{
     label: string;
+    tooltipLabel?: string;
     sx?: SxProps<Theme>;
     sxLabel?: SxProps<Theme>;
+    sxChildren?: SxProps<Theme>;
     labelSize?: LabelSize;
   }>
-> = ({ label, children, labelSize, sx = [], sxLabel = [] }) => (
+> = ({
+  label,
+  tooltipLabel,
+  children,
+  labelSize,
+  sx = [],
+  sxLabel = [],
+  sxChildren = [],
+}) => (
   <Flex col sx={{ gap: 2, ...sx }}>
-    <Label
-      size={labelSize || 'sm'}
-      sx={[
-        { color: 'info.main', width: '100%' },
-        ...(Array.isArray(sxLabel) ? sxLabel : [sxLabel]),
-      ]}
-    >
-      {label}
-    </Label>
-    <div>{children}</div>
+    <Flex alignItems="center">
+      <Label
+        size={labelSize || 'sm'}
+        sx={[
+          {
+            color: 'info.main',
+            width: '100%',
+            whiteSpace: 'nowrap',
+          },
+          ...(Array.isArray(sxLabel) ? sxLabel : [sxLabel]),
+        ]}
+      >
+        {label}
+      </Label>
+      {tooltipLabel && (
+        <InfoTooltipWithIcon title={tooltipLabel} sx={{ ml: 2 }} outlined />
+      )}
+    </Flex>
+    <Flex alignItems="center" sx={sxChildren}>
+      {children}
+    </Flex>
   </Flex>
 );

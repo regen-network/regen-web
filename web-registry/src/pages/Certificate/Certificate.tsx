@@ -19,6 +19,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { getFormattedPeriod } from 'web-components/lib/utils/format';
 
 import { qudtUnit, qudtUnitMap } from 'lib/rdf';
+import { useTracker } from 'lib/tracker/useTracker';
 
 import background from '../../assets/certificate-bg.png';
 import pageBackground from '../../assets/certificate-page-bg.jpg';
@@ -172,6 +173,7 @@ function CertificatePage(): JSX.Element {
   const { classes } = useStyles();
   const theme = useTheme();
   const [current, setCurrent] = useState<number>(0);
+  const { track } = useTracker();
 
   const searchParams = new URLSearchParams(window.location.search);
   const stripeId = searchParams.get('stripeId');
@@ -353,6 +355,7 @@ function CertificatePage(): JSX.Element {
                 },
                 projectType: project.type || '',
               }}
+              track={track}
             />,
           );
         }

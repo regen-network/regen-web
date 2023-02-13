@@ -3771,6 +3771,21 @@ export type PresskitTimelineSectionSorting = {
   completedItemIndex?: Maybe<SortOrder>;
 };
 
+export type Project = {
+  __typename?: 'Project';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  projectName?: Maybe<Scalars['String']>;
+  projectId?: Maybe<Scalars['String']>;
+};
+
+export type ProjectFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  projectName?: Maybe<StringFilter>;
+  projectId?: Maybe<StringFilter>;
+};
+
 export type ProjectPage = Document & {
   __typename?: 'ProjectPage';
   /** Document ID */
@@ -3807,6 +3822,13 @@ export type ProjectPageSorting = {
   _updatedAt?: Maybe<SortOrder>;
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
+};
+
+export type ProjectSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  projectName?: Maybe<SortOrder>;
+  projectId?: Maybe<SortOrder>;
 };
 
 export type ProjectsPage = Document & {
@@ -4186,6 +4208,7 @@ export type RootQuery = {
   SciencePage?: Maybe<SciencePage>;
   Sdg?: Maybe<Sdg>;
   SharedSections?: Maybe<SharedSections>;
+  SoldOutProjects?: Maybe<SoldOutProjects>;
   Tag?: Maybe<Tag>;
   TeamPage?: Maybe<TeamPage>;
   TokenPage?: Maybe<TokenPage>;
@@ -4234,6 +4257,7 @@ export type RootQuery = {
   allSciencePage: Array<SciencePage>;
   allSdg: Array<Sdg>;
   allSharedSections: Array<SharedSections>;
+  allSoldOutProjects: Array<SoldOutProjects>;
   allTag: Array<Tag>;
   allTeamPage: Array<TeamPage>;
   allTokenPage: Array<TokenPage>;
@@ -4441,6 +4465,11 @@ export type RootQuerySdgArgs = {
 
 
 export type RootQuerySharedSectionsArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQuerySoldOutProjectsArgs = {
   id: Scalars['ID'];
 };
 
@@ -4800,6 +4829,14 @@ export type RootQueryAllSdgArgs = {
 export type RootQueryAllSharedSectionsArgs = {
   where?: Maybe<SharedSectionsFilter>;
   sort?: Maybe<Array<SharedSectionsSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllSoldOutProjectsArgs = {
+  where?: Maybe<SoldOutProjectsFilter>;
+  sort?: Maybe<Array<SoldOutProjectsSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -5531,6 +5568,42 @@ export type SlugSorting = {
   _key?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
   current?: Maybe<SortOrder>;
+};
+
+export type SoldOutProjects = Document & {
+  __typename?: 'SoldOutProjects';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  soldOutProjectsList?: Maybe<Array<Maybe<Project>>>;
+};
+
+export type SoldOutProjectsFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+};
+
+export type SoldOutProjectsSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
 };
 
 export enum SortOrder {
@@ -6716,6 +6789,20 @@ export type AllProjectsPageQuery = (
       { __typename?: 'GettingStartedResourcesSection' }
       & GettingStartedResourcesSectionFieldsFragment
     )> }
+  )> }
+);
+
+export type AllSoldOutProjectsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllSoldOutProjectsQuery = (
+  { __typename?: 'RootQuery' }
+  & { allSoldOutProjects: Array<(
+    { __typename?: 'SoldOutProjects' }
+    & { soldOutProjectsList?: Maybe<Array<Maybe<(
+      { __typename?: 'Project' }
+      & Pick<Project, 'projectName' | 'projectId'>
+    )>>> }
   )> }
 );
 
@@ -8007,6 +8094,43 @@ export function useAllProjectsPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type AllProjectsPageQueryHookResult = ReturnType<typeof useAllProjectsPageQuery>;
 export type AllProjectsPageLazyQueryHookResult = ReturnType<typeof useAllProjectsPageLazyQuery>;
 export type AllProjectsPageQueryResult = Apollo.QueryResult<AllProjectsPageQuery, AllProjectsPageQueryVariables>;
+export const AllSoldOutProjectsDocument = gql`
+    query allSoldOutProjects {
+  allSoldOutProjects {
+    soldOutProjectsList {
+      projectName
+      projectId
+    }
+  }
+}
+    `;
+
+/**
+ * __useAllSoldOutProjectsQuery__
+ *
+ * To run a query within a React component, call `useAllSoldOutProjectsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllSoldOutProjectsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllSoldOutProjectsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllSoldOutProjectsQuery(baseOptions?: Apollo.QueryHookOptions<AllSoldOutProjectsQuery, AllSoldOutProjectsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllSoldOutProjectsQuery, AllSoldOutProjectsQueryVariables>(AllSoldOutProjectsDocument, options);
+      }
+export function useAllSoldOutProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllSoldOutProjectsQuery, AllSoldOutProjectsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllSoldOutProjectsQuery, AllSoldOutProjectsQueryVariables>(AllSoldOutProjectsDocument, options);
+        }
+export type AllSoldOutProjectsQueryHookResult = ReturnType<typeof useAllSoldOutProjectsQuery>;
+export type AllSoldOutProjectsLazyQueryHookResult = ReturnType<typeof useAllSoldOutProjectsLazyQuery>;
+export type AllSoldOutProjectsQueryResult = Apollo.QueryResult<AllSoldOutProjectsQuery, AllSoldOutProjectsQueryVariables>;
 export const EcologicalImpactByIriDocument = gql`
     query EcologicalImpactByIri($iris: [String!]) {
   allEcologicalImpact(where: {iri: {current: {in: $iris}}}) {

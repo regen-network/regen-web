@@ -9,6 +9,7 @@ import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { qudtUnit, qudtUnitMap } from 'lib/rdf';
+import { useTracker } from 'lib/tracker/useTracker';
 
 import DefaultProject from '../../assets/default-project.jpg';
 import { Maybe, MoreProjectFieldsFragment } from '../../generated/graphql';
@@ -69,6 +70,7 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
+  const { track } = useTracker();
 
   const LinkedProject: React.FC<
     React.PropsWithChildren<{
@@ -97,6 +99,7 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
         ]
       }
       registry={project.partyByRegistryId}
+      track={track}
     />
   );
 

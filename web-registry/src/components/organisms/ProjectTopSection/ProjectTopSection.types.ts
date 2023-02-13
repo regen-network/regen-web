@@ -2,7 +2,7 @@ import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1
 
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 
-import { AllCreditClassQuery } from 'generated/sanity-graphql';
+import { AllCreditClassQuery, SdgByIriQuery } from 'generated/sanity-graphql';
 import {
   BatchInfoWithSupply,
   BatchTotalsForProject,
@@ -30,3 +30,5 @@ export type ProjectTopSectionProps = {
   soldOutProjectsIds: string[];
   projectWithOrderData: ProjectWithOrderData;
 };
+
+export type SdgType = SdgByIriQuery['allSdg'][0];

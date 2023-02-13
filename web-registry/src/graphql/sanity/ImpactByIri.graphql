@@ -8,5 +8,8 @@ query EcologicalImpactByIri($iris: [String!]) {
     standard {
       ...customImageFields
     }
+    iri {
+      current
+    }
   }
 }

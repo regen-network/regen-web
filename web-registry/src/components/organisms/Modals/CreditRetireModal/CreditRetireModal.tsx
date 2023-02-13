@@ -1,12 +1,20 @@
 import React from 'react';
 
-import { CreditRetireForm, CreditRetireProps } from '../form/CreditRetireForm';
-import { RegenModalProps } from '../modal';
-import { FormModalTemplate } from './FormModalTemplate';
+import { RegenModalProps } from 'web-components/lib/components/modal';
+import { FormModalTemplate } from 'web-components/lib/components/modal/FormModalTemplate';
 
-interface CreditRetireModalProps extends RegenModalProps, CreditRetireProps {}
+import {
+  CreditRetireForm,
+  CreditRetireFormProps,
+} from 'components/organisms/CreditRetireForm/CreditRetireForm';
 
-export const CREDIT_RETIRE_TITLE = 'Retire';
+import { CREDIT_RETIRE_TITLE } from './CreditRetireModal.constants';
+
+interface CreditRetireModalProps
+  extends RegenModalProps,
+    CreditRetireFormProps {}
+
+export const CREDIT_SEND_TITLE = 'Send';
 
 const CreditRetireModal: React.FC<
   React.PropsWithChildren<CreditRetireModalProps>
@@ -15,8 +23,8 @@ const CreditRetireModal: React.FC<
   availableTradableAmount,
   mapboxToken,
   open,
-  onClose,
   onSubmit,
+  onClose,
 }) => (
   <FormModalTemplate title={CREDIT_RETIRE_TITLE} open={open} onClose={onClose}>
     <CreditRetireForm

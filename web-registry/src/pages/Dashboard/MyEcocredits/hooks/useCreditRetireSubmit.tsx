@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
 import { MsgRetire } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 
-import type { RetireFormValues as CreditRetireFormValues } from 'web-components/lib/components/form/CreditRetireForm';
 import type { Item } from 'web-components/lib/components/modal/TxModal';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
@@ -13,6 +12,7 @@ import {
 } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
+import { CreditRetireFormSchemaType } from 'components/organisms/CreditRetireForm/CreditRetireForm.schema';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import { RETIRE_HEADER } from '../MyEcocredits.constants';
@@ -29,7 +29,7 @@ type Props = {
   setTxModalTitle: UseStateSetter<string | undefined>;
 };
 
-type Params = (values: CreditRetireFormValues) => Promise<void>;
+type Params = (values: CreditRetireFormSchemaType) => Promise<void>;
 
 const useCreditRetireSubmit = ({
   accountAddress,
@@ -44,21 +44,24 @@ const useCreditRetireSubmit = ({
 }: Props): Params => {
   const { track } = useTracker();
   const creditRetireSubmit = useCallback(
-    async (values: CreditRetireFormValues): Promise<void> => {
+    async (values: CreditRetireFormSchemaType): Promise<void> => {
       const batchDenom = credits[creditRetireOpen].denom;
       track<'retire2', Retire2Event>('retire2', {
         batchDenom,
         creditClassId: credits[creditRetireOpen].classId,
         projectId: credits[creditRetireOpen].projectId,
         projectName: credits[creditRetireOpen].projectName,
-        quantity: values.retiredAmount,
+        quantity: values.amount,
       });
 
       if (!accountAddress) return Promise.reject();
-      const amount = values.retiredAmount.toString();
+
+      const { amount: amountValue, retireFields } = values;
+      const { retirementJurisdiction, note } = retireFields?.[0] || {};
+      const amount = values.amount.toString();
       const msg = MsgRetire.fromPartial({
         owner: accountAddress,
-        jurisdiction: values.retirementJurisdiction,
+        jurisdiction: retirementJurisdiction,
         credits: [
           {
             batchDenom,
@@ -70,7 +73,7 @@ const useCreditRetireSubmit = ({
       const tx = {
         msgs: [msg],
         fee: undefined,
-        memo: values?.note,
+        memo: note,
       };
 
       const onError = (err?: Error): void => {
@@ -79,7 +82,7 @@ const useCreditRetireSubmit = ({
           creditClassId: credits[creditRetireOpen].classId,
           projectId: credits[creditRetireOpen].projectId,
           projectName: credits[creditRetireOpen].projectName,
-          quantity: values.retiredAmount,
+          quantity: amountValue,
           errorMessage: err?.message,
         });
       };
@@ -89,7 +92,7 @@ const useCreditRetireSubmit = ({
           creditClassId: credits[creditRetireOpen].classId,
           projectId: credits[creditRetireOpen].projectId,
           projectName: credits[creditRetireOpen].projectName,
-          quantity: values.retiredAmount,
+          quantity: amountValue,
         });
       };
       await signAndBroadcast(tx, () => setCreditRetireOpen(-1), {

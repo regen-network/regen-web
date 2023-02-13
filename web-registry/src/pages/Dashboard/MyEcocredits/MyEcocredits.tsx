@@ -18,10 +18,6 @@ import {
   BasketTakeModal,
 } from 'web-components/lib/components/modal/BasketTakeModal';
 import { CreateSellOrderModal } from 'web-components/lib/components/modal/CreateSellOrderModal';
-import {
-  CREDIT_RETIRE_TITLE,
-  CreditRetireModal,
-} from 'web-components/lib/components/modal/CreditRetireModal';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
@@ -42,6 +38,8 @@ import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
+import { CreditRetireModal } from 'components/organisms/Modals/CreditRetireModal/CreditRetireModal';
+import { CREDIT_RETIRE_TITLE } from 'components/organisms/Modals/CreditRetireModal/CreditRetireModal.constants';
 import {
   CREDIT_SEND_TITLE,
   CreditSendModal,

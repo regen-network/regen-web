@@ -7,15 +7,7 @@ import {
   requiredMessage,
 } from 'web-components/lib/components/inputs/validation';
 
-export const RetireFormSchema = z.object({
-  note: z.string().optional(),
-  country: z.string(),
-  stateProvince: z.string().optional(),
-  postalCode: z.string().optional(),
-  retirementJurisdiction: z.string().optional(),
-});
-
-export type RetireFormSchemaType = z.infer<typeof RetireFormSchema>;
+import { RetireFormSchema } from '../CreditRetireForm/CreditRetireForm.schema';
 
 type Params = {
   addressPrefix?: string;

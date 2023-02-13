@@ -5,7 +5,10 @@ import {
   SubmitHandler,
   UseFormReturn,
 } from 'react-hook-form';
+import { DevTool } from '@hookform/devtools';
 import { Box } from '@mui/material';
+
+import { IS_DEV } from 'lib/env';
 
 interface Props<T extends FieldValues>
   extends Omit<ComponentProps<'form'>, 'onSubmit'> {
@@ -31,6 +34,7 @@ const Form = <T extends FieldValues>({
         {children}
       </Box>
     </form>
+    {IS_DEV && <DevTool control={form.control} />}
   </FormProvider>
 );
 

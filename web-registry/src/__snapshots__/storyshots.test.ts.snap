@@ -1938,40 +1938,6 @@ exports[`Storyshots Forms Credit Batch Recipients Form 1`] = `
 </MemoryRouter>
 `;
 
-exports[`Storyshots Forms Credit Retire Form 1`] = `
-<MemoryRouter
-  initialEntries={
-    Array [
-      Object {
-        "pathname": "/",
-        "search": "",
-        "state": undefined,
-      },
-    ]
-  }
->
-  <Routes>
-    <Route
-      element={
-        <RouterLogger>
-          <RegenThemeProvider
-            injectFonts={true}
-          >
-            <CssBaseline />
-            <Unknown />
-          </RegenThemeProvider>
-        </RouterLogger>
-      }
-      path="/"
-    >
-      <Route
-        index={true}
-      />
-    </Route>
-  </Routes>
-</MemoryRouter>
-`;
-
 exports[`Storyshots Forms Login Form 1`] = `
 <MemoryRouter
   initialEntries={
@@ -2720,40 +2686,6 @@ exports[`Storyshots Modal Create Sell Order Modal 1`] = `
 </MemoryRouter>
 `;
 
-exports[`Storyshots Modal Credit Retire Modal 1`] = `
-<MemoryRouter
-  initialEntries={
-    Array [
-      Object {
-        "pathname": "/",
-        "search": "",
-        "state": undefined,
-      },
-    ]
-  }
->
-  <Routes>
-    <Route
-      element={
-        <RouterLogger>
-          <RegenThemeProvider
-            injectFonts={true}
-          >
-            <CssBaseline />
-            <Unknown />
-          </RegenThemeProvider>
-        </RouterLogger>
-      }
-      path="/"
-    >
-      <Route
-        index={true}
-      />
-    </Route>
-  </Routes>
-</MemoryRouter>
-`;
-
 exports[`Storyshots Modal Crop Round Image Modal 1`] = `
 <MemoryRouter
   initialEntries={
@@ -3367,6 +3299,74 @@ exports[`Storyshots Registry/Organisms/Credit Class Form Credit Class Form 1`] =
 `;
 
 exports[`Storyshots Registry/Organisms/Credit Class Form Credit Class Review 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    >
+      <Route
+        index={true}
+      />
+    </Route>
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Registry/Organisms/Credit Retire Modal Credit Send Modal 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    >
+      <Route
+        index={true}
+      />
+    </Route>
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Registry/Organisms/Credit Send Form Credit Retire Form 1`] = `
 <MemoryRouter
   initialEntries={
     Array [

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Box, Theme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
+import { Track } from 'web-registry/src/lib/tracker/types';
 
 import { QuestionItem } from '../faq/Question';
 import CurrentCreditsIcon from '../icons/CurrentCreditsIcon';
@@ -75,22 +76,33 @@ export const monitoredImpactCard = (): JSX.Element => (
 );
 
 function onClick(): void {}
+const trackMock: Track = () => Promise.resolve();
 
 export const projectCard = (): JSX.Element => (
   <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' } }}>
     <ProjectCard
+      track={trackMock}
       name="Coorong Project"
       place={'Adelaide, South Australia, Australia'}
       area={200}
       comingSoon={false}
       areaUnit="hectares"
       imgSrc="/coorong.png"
-      tag="biodiversity"
       onClick={onClick}
+      purchaseInfo={{
+        sellInfo: {
+          creditsAvailable: 0,
+          creditsAvailableForUser: 1190,
+          pricePerTon: '17.20-24.20',
+        },
+      }}
+      creditsTooltip="These credits are sold out and will not be available in the future."
+      isSoldOut
       sx={{ maxWidth: 338, mr: 10, mb: 10 }}
     />
 
     <ProjectCard
+      track={trackMock}
       name="Coorong Project"
       place={'Adelaide, South Australia, Australia'}
       area={200}
@@ -109,6 +121,7 @@ export const projectCard = (): JSX.Element => (
     />
 
     <ProjectCard
+      track={trackMock}
       name="Coorong Project"
       place={'Adelaide, South Australia, Australia'}
       area={200}

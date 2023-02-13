@@ -10,6 +10,8 @@ import {
 import { UseStateSetter } from 'types/react/use-state';
 import { ProjectMetadataIntersectionLD } from 'lib/db/types/json-ld';
 
+import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
+
 export type ProjectTopSectionProps = {
   data?: any; // TODO: when all project are onchain, this can be ProjectByOnChainIdQuery
   onChainProject?: ProjectInfo;
@@ -25,4 +27,6 @@ export type ProjectTopSectionProps = {
   setPaginationParams: UseStateSetter<TablePaginationParams>;
   onChainProjectId?: string;
   loading?: boolean;
+  soldOutProjectsIds: string[];
+  projectWithOrderData: ProjectWithOrderData;
 };

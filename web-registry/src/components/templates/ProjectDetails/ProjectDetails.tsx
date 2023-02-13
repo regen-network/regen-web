@@ -18,12 +18,14 @@ import { getProjectByHandleQuery } from 'lib/queries/react-query/registry-server
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
+import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import { useResetErrorBanner } from 'pages/Marketplace/Storefront/hooks/useResetErrorBanner';
+import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { usePaginatedBatchesByProject } from 'hooks/batches/usePaginatedBatchesByProject';
 
@@ -55,6 +57,14 @@ function ProjectDetails(): JSX.Element {
 
   const gettingStartedResourcesSection =
     sanityProjectPageData?.allProjectPage?.[0]?.gettingStartedResourcesSection;
+
+  const { data: sanitySoldOutProjects } = useQuery(
+    getSoldOutProjectsQuery({ sanityClient, enabled: !!sanityClient }),
+  );
+
+  const soldOutProjectsIds = useAllSoldOutProjectsIds({
+    sanitySoldOutProjects,
+  });
 
   const { data: sanityCreditClassData } = useQuery(
     getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
@@ -231,6 +241,8 @@ function ProjectDetails(): JSX.Element {
         onChainProject={onChainProject}
         metadata={metadata}
         sanityCreditClassData={sanityCreditClassData}
+        soldOutProjectsIds={soldOutProjectsIds}
+        projectWithOrderData={projectsWithOrderData[0]}
         batchData={{
           batches: batchesWithSupply,
           totals: batchesTotal,

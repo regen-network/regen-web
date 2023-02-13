@@ -97,7 +97,7 @@ const CreditTotals: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <Grid container spacing={6} className={styles.root}>
       <Grid item xs={12} sm={3} className={styles.item}>
-        <Statistic label="ecocredits tradeable" count={totals.tradeable} />
+        <Statistic label="ecocredits tradable" count={totals.tradeable} />
       </Grid>
       <Grid item xs={12} sm={3} className={styles.item}>
         <Statistic

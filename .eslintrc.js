@@ -11,19 +11,13 @@ module.exports = {
     'import/newline-after-import': 'error',
     'import/no-duplicates': 'error',
     'react/react-in-jsx-scope': 'off',
-    '@typescript-eslint/explicit-function-return-type': [
-      'error',
-      {
-        allowExpressions: true,
-      },
-    ],
+    '@typescript-eslint/explicit-function-return-type': 'off',
   },
   overrides: [
     {
       files: ['*.stories.tsx'],
       rules: {
         'import/no-anonymous-default-export': 'off',
-        '@typescript-eslint/explicit-function-return-type': 'off',
       },
     },
   ],

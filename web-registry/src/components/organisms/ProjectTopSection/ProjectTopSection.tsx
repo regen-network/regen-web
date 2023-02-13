@@ -93,12 +93,12 @@ function ProjectTopSection({
     skip: !sdgIris,
   });
 
-  const sordtedSdgData = useSortResultWithIris<SdgType>({
+  const sortedSdgData = useSortResultWithIris<SdgType>({
     dataWithIris: sdgData?.allSdg,
     iris: sdgIris,
   });
 
-  const sdgs = sordtedSdgData.map(sdg => ({
+  const sdgs = sortedSdgData.map(sdg => ({
     title: sdg.title || '',
     imageUrl: getSanityImgSrc(sdg.image),
   }));

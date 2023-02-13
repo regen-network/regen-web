@@ -2,12 +2,7 @@ import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1
 
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 
-<<<<<<< HEAD
-import { AllCreditClassQuery } from 'generated/sanity-graphql';
-=======
-import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import { AllCreditClassQuery, SdgByIriQuery } from 'generated/sanity-graphql';
->>>>>>> 22aa75a4 (feat: sort SDGs and Impacts based on initial ordering (#1785))
 import {
   BatchInfoWithSupply,
   BatchTotalsForProject,

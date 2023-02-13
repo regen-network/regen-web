@@ -92,11 +92,6 @@ function ProjectTopSection({
     },
     skip: !sdgIris,
   });
-<<<<<<< HEAD
-  const sdgs = sdgData?.allSdg.map(s => ({
-    title: s.title || '',
-    imageUrl: getSanityImgSrc(s.image),
-=======
 
   const sortedSdgData = useSortResultWithIris<SdgType>({
     dataWithIris: sdgData?.allSdg,
@@ -106,7 +101,6 @@ function ProjectTopSection({
   const sdgs = sortedSdgData.map(sdg => ({
     title: sdg.title || '',
     imageUrl: getSanityImgSrc(sdg.image),
->>>>>>> 22aa75a4 (feat: sort SDGs and Impacts based on initial ordering (#1785))
   }));
 
   const creditClassSanity = findSanityCreditClass({

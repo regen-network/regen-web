@@ -1,17 +1,17 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { merge, omit, pick } from 'lodash';
+import { omit } from 'lodash';
 
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getProjectShapeIri } from 'lib/rdf';
 
-import { ProjectMetadataValues } from 'components/organisms';
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { isVCSCreditClass } from '../../lib/ecocredit/api';
 import { useProjectEditContext } from '../ProjectEdit';
+import { useProjectMetadataSubmit } from './hooks/useProjectMetadataSubmit';
 import { OMITTED_METADATA_KEYS } from './ProjectMetadata.config';
 import { ProjectMetadataSelectedForm } from './ProjectMetadata.SelectedForm';
 
@@ -29,6 +29,11 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
         navigateNext,
         onChainProject,
       });
+
+    const projectMetadataSubmit = useProjectMetadataSubmit({
+      metadata,
+      metadataSubmit,
+    });
     const creditClassId =
       offChainProject?.creditClassByCreditClassId?.onChainId;
     const isVCS = !!creditClassId && isVCSCreditClass(creditClassId);
@@ -44,18 +49,6 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
       customMetadata = omit(metadata, OMITTED_METADATA_KEYS);
     }
 
-    const submit = useCallback(
-      async (values: ProjectMetadataValues): Promise<void> => {
-        const parsedMetaData = JSON.parse(values.metadata);
-        const baseMetadata = pick(metadata, OMITTED_METADATA_KEYS);
-        merge(baseMetadata, parsedMetaData);
-        if (baseMetadata) {
-          await metadataSubmit({ values: baseMetadata, overwrite: true });
-        }
-      },
-      [metadata, metadataSubmit],
-    );
-
     function navigateNext(): void {
       navigate(`/project-pages/${projectId}/review`);
     }
@@ -63,7 +56,7 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
     return (
       <ProjectFormTemplate isEdit={isEdit} title="Metadata">
         <ProjectMetadataSelectedForm
-          submit={submit}
+          submit={projectMetadataSubmit}
           metadata={customMetadata}
           graphData={graphData}
           isVCS={isVCS}

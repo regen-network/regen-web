@@ -37,7 +37,7 @@ interface Props {
   onChainProject?: ProjectInfo;
 }
 
-interface MetadataSubmitProps {
+export interface MetadataSubmitProps {
   values: Values;
   overwrite?: boolean;
 }

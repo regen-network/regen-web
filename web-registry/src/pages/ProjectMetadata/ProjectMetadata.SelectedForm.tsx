@@ -4,11 +4,11 @@ import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 
 import { ProjectMetadataForm } from '../../components/organisms/ProjectMetadataForm/ProjectMetadataForm';
 import { ShaclGraphByUriQuery } from '../../generated/graphql';
-import { useProjectMetadataSubmitReturnedType } from './hooks/useProjectMetadataSubmit';
+import { UseProjectMetadataSubmitReturn } from './hooks/useProjectMetadataSubmit';
 
 type Props = {
   isVCS: boolean;
-  submit: useProjectMetadataSubmitReturnedType;
+  submit: UseProjectMetadataSubmitReturn;
   metadata?: Partial<ProjectMetadataLD>;
   graphData?: ShaclGraphByUriQuery;
   onNext?: () => void;

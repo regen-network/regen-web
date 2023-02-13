@@ -20,7 +20,6 @@ interface UseSeoParams {
   creditClassName: string | undefined;
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export default function useSeo({
   projectMetadata,
   projectPageMetadata,

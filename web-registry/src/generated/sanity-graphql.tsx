@@ -6971,6 +6971,9 @@ export type EcologicalImpactByIriQuery = (
     )>, standard?: Maybe<(
       { __typename?: 'CustomImage' }
       & CustomImageFieldsFragment
+    )>, iri?: Maybe<(
+      { __typename?: 'Slug' }
+      & Pick<Slug, 'current'>
     )> }
   )> }
 );
@@ -7054,6 +7057,9 @@ export type SdgByIriQuery = (
     & { image?: Maybe<(
       { __typename?: 'CustomImage' }
       & CustomImageFieldsFragment
+    )>, iri?: Maybe<(
+      { __typename?: 'Slug' }
+      & Pick<Slug, 'current'>
     )> }
   )> }
 );
@@ -8142,6 +8148,9 @@ export const EcologicalImpactByIriDocument = gql`
     standard {
       ...customImageFields
     }
+    iri {
+      current
+    }
   }
 }
     ${CustomImageFieldsFragmentDoc}`;
@@ -8179,6 +8188,9 @@ export const SdgByIriDocument = gql`
     title
     image {
       ...customImageFields
+    }
+    iri {
+      current
     }
   }
 }

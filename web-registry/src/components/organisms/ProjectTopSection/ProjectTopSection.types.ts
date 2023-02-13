@@ -4,7 +4,7 @@ import { Party } from 'web-components/lib/components/modal/LedgerModal';
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
-import { AllCreditClassQuery } from 'generated/sanity-graphql';
+import { AllCreditClassQuery, SdgByIriQuery } from 'generated/sanity-graphql';
 import {
   BatchInfoWithSupply,
   BatchTotalsForProject,
@@ -40,3 +40,5 @@ export type ProjectTopSectionProps = {
   soldOutProjectsIds: string[];
   projectWithOrderData: ProjectWithOrderData;
 };
+
+export type SdgType = SdgByIriQuery['allSdg'][0];

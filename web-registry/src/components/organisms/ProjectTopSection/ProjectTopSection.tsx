@@ -9,6 +9,7 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import { useSortResultWithIris } from 'utils/sanity/useSortResultWithIris';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import Card from 'web-components/lib/components/cards/Card';
@@ -38,7 +39,7 @@ import {
   ProjectTopSectionQuoteMark,
   useProjectTopSectionStyles,
 } from './ProjectTopSection.styles';
-import { ProjectTopSectionProps } from './ProjectTopSection.types';
+import { ProjectTopSectionProps, SdgType } from './ProjectTopSection.types';
 import {
   getDisplayAdmin,
   isAnchoredProjectMetadata,
@@ -93,7 +94,13 @@ function ProjectTopSection({
     },
     skip: !sdgIris,
   });
-  const sdgs = sdgData?.allSdg.map(sdg => ({
+
+  const sortedSdgData = useSortResultWithIris<SdgType>({
+    dataWithIris: sdgData?.allSdg,
+    iris: sdgIris,
+  });
+
+  const sdgs = sortedSdgData.map(sdg => ({
     title: sdg.title || '',
     imageUrl: getSanityImgSrc(sdg.image),
   }));

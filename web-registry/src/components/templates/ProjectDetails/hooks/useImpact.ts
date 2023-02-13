@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { useSortResultWithIris } from 'utils/sanity/useSortResultWithIris';
 
 import { getEcologicalImpactByIriQuery } from 'lib/queries/react-query/sanity/getEcologicalImpactByIriQuery/getEcologicalImpactByIriQuery';
 
@@ -33,12 +34,17 @@ export default function useImpact({
 
   let impactData: EcologicalImpact[] = [];
 
+  const sortedImpact = useSortResultWithIris<EcologicalImpact>({
+    dataWithIris: coBenefitData?.allEcologicalImpact ?? [],
+    iris: coBenefitsIris,
+  });
+
   if (primaryImpactData && primaryImpactData.allEcologicalImpact?.length) {
     impactData = [...primaryImpactData?.allEcologicalImpact];
   }
 
   if (coBenefitData && coBenefitData.allEcologicalImpact?.length) {
-    impactData = [...impactData, ...coBenefitData?.allEcologicalImpact];
+    impactData = [...impactData, ...sortedImpact];
   }
 
   return impactData;

@@ -5,6 +5,7 @@ export const useStyles = makeStyles()(theme => ({
     '& .MuiInputBase-root': {
       padding: 0,
       '& textarea': {
+        resize: 'vertical',
         [theme.breakpoints.up('sm')]: {
           padding: theme.spacing(3),
         },

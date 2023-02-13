@@ -48,7 +48,7 @@ type Props = {
   onSubmitCallback?: (values: BuyCreditsValues) => void;
 };
 
-type ReturnType = (values: BuyCreditsValues) => Promise<void>;
+type Params = (values: BuyCreditsValues) => Promise<void>;
 
 const useBuySellOrderSubmit = ({
   accountAddress,
@@ -62,7 +62,7 @@ const useBuySellOrderSubmit = ({
   setSelectedSellOrder,
   refetchSellOrders,
   onSubmitCallback,
-}: Props): ReturnType => {
+}: Props): Params => {
   const { track } = useTracker();
   const location = useLocation();
   const buySellOrderSubmit = useCallback(

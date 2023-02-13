@@ -1,5 +1,6 @@
 query ProjectById($id: UUID!) {
   projectById(id: $id) {
+    id
     metadata
     developerId
     originatorId

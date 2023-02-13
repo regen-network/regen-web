@@ -99,8 +99,6 @@ function IndividualModal({
                 <SharePermissionField />
                 <ProfileSubmitFooter
                   submitForm={submitForm}
-                  isValid={isValid}
-                  isSubmitting={isSubmitting}
                   onClose={onClose}
                 />
               </Form>

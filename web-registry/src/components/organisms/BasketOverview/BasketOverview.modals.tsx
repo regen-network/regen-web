@@ -1,5 +1,5 @@
 import { ERRORS } from 'config/errors';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 
 import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
 import { BasketTakeModal } from 'web-components/lib/components/modal/BasketTakeModal';
@@ -37,10 +37,10 @@ export const BasketOverviewModals = ({
 }: Props): JSX.Element => {
   const [{ isPutModalOpen, isTakeModalOpen }, setBasketDetailAtom] =
     useAtom(basketDetailAtom);
-  const [, setProcessingModalAtom] = useAtom(processingModalAtom);
-  const [, setErrorCodeAtom] = useAtom(errorCodeAtom);
-  const [, setErrorModalAtom] = useAtom(errorModalAtom);
-  const [, setTxSuccessfulModalAtom] = useAtom(txSuccessfulModalAtom);
+  const setProcessingModalAtom = useSetAtom(processingModalAtom);
+  const setErrorCodeAtom = useSetAtom(errorCodeAtom);
+  const setErrorModalAtom = useSetAtom(errorModalAtom);
+  const setTxSuccessfulModalAtom = useSetAtom(txSuccessfulModalAtom);
   const { wallet } = useWallet();
   const accountAddress = wallet?.address ?? '';
   const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN || '';

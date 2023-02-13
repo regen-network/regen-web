@@ -1,6 +1,10 @@
 import React, { createContext, useContext, useState } from 'react';
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useMediaQuery, useTheme } from '@mui/material';
+import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { useQuery } from '@tanstack/react-query';
+import { ERRORS } from 'config/errors';
+import { useSetAtom } from 'jotai';
 import { startCase } from 'lodash';
 import { makeStyles } from 'tss-react/mui';
 
@@ -10,7 +14,22 @@ import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import { Label, Title } from 'web-components/lib/components/typography';
 import type { Theme } from 'web-components/lib/theme/muiTheme';
 
+import { errorCodeAtom } from 'lib/atoms/error.atoms';
+import {
+  errorModalAtom,
+  processingModalAtom,
+  txSuccessfulModalAtom,
+} from 'lib/atoms/modals.atoms';
+import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
+
+import { OnTxSuccessfulProps } from 'pages/Dashboard/MyEcocredits/MyEcocredits.types';
+import { useMsgClient } from 'hooks';
+
 import { Link } from '../../components/atoms';
+import useProjectEditSubmit, {
+  UseProjectEditSubmitParams,
+} from './hooks/useProjectEditSubmit';
+import { EDIT_PROJECT } from './ProjectEdit.constants';
 
 const useStyles = makeStyles()((theme: Theme) => ({
   root: {
@@ -75,9 +94,6 @@ const useStyles = makeStyles()((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'center',
     flex: 1,
-    '& form > div': {
-      marginTop: 0,
-    },
     [theme.breakpoints.down('md')]: {
       padding: 'none',
     },
@@ -111,10 +127,13 @@ const useStyles = makeStyles()((theme: Theme) => ({
 type ContextType = {
   confirmSave?: () => void;
   isEdit?: boolean;
+  onChainProject?: ProjectInfo;
+  projectEditSubmit: UseProjectEditSubmitParams;
 };
 
 const ProjectEditContext = createContext<ContextType>({
-  confirmSave: () => {}, // eslint-disable-line
+  confirmSave: () => {},
+  projectEditSubmit: async () => {},
   isEdit: false,
 });
 
@@ -129,10 +148,60 @@ function ProjectEdit(): JSX.Element {
   const lastPathItem = pathname.substring(pathname.lastIndexOf('/') + 1);
   const section = lastPathItem !== 'edit' ? lastPathItem : undefined;
 
+  const setProcessingModalAtom = useSetAtom(processingModalAtom);
+  const setErrorCodeAtom = useSetAtom(errorCodeAtom);
+  const setErrorModalAtom = useSetAtom(errorModalAtom);
+  const setTxSuccessfulModalAtom = useSetAtom(txSuccessfulModalAtom);
+
+  const onBroadcast = (): void => {
+    setProcessingModalAtom(atom => void (atom.open = true));
+  };
+
+  const onTxSuccessful = ({
+    cardItems,
+    title,
+    cardTitle,
+  }: OnTxSuccessfulProps): void => {
+    setProcessingModalAtom(atom => void (atom.open = false));
+    setTxSuccessfulModalAtom(atom => {
+      atom.open = true;
+      atom.cardItems = cardItems;
+      atom.title = title;
+      atom.cardTitle = cardTitle;
+      atom.buttonTitle = EDIT_PROJECT;
+    });
+  };
+
+  const onErrorCallback = (error?: Error): void => {
+    setErrorCodeAtom(ERRORS.DEFAULT);
+    setErrorModalAtom(atom => (atom.description = String(error)));
+    setProcessingModalAtom(atom => void (atom.open = false));
+  };
+
+  const { signAndBroadcast } = useMsgClient();
+  const { data: projectRes } = useQuery(
+    getProjectQuery({
+      request: {
+        projectId,
+      },
+      enabled: !!projectId,
+    }),
+  );
+  const onChainProject = projectRes?.project;
+  const projectEditSubmit = useProjectEditSubmit({
+    projectId,
+    admin: onChainProject?.admin,
+    signAndBroadcast,
+    onBroadcast,
+    onErrorCallback,
+    onTxSuccessful,
+  });
+
   const navigateSection = (sectionName: string): void => {
     const hyphenated = sectionName.replace(' ', '-');
     navigate(`/project-pages/${projectId}/edit/${hyphenated}`);
   };
+
   const Nav = (): JSX.Element => (
     <Navigation
       classes={{ root: styles.nav, listItem: styles.navItem }}
@@ -140,12 +209,12 @@ function ProjectEdit(): JSX.Element {
         'basic info',
         'location',
         'roles',
-        'entity display',
+        'description',
         'media',
-        'story',
+        'metadata',
       ]}
       category={section?.replace('-', ' ')}
-      onClick={sectionName => navigateSection(sectionName)}
+      onClick={(sectionName: string) => navigateSection(sectionName)}
       showIcon
     />
   );
@@ -158,7 +227,9 @@ function ProjectEdit(): JSX.Element {
   };
 
   return (
-    <ProjectEditContext.Provider value={{ confirmSave, isEdit: true }}>
+    <ProjectEditContext.Provider
+      value={{ confirmSave, isEdit: true, onChainProject, projectEditSubmit }}
+    >
       <div className={styles.root}>
         <div className={styles.left}>
           <div className={styles.topAlign}>

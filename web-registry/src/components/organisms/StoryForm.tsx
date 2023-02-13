@@ -10,7 +10,7 @@ import Modal from 'web-components/lib/components/modal';
 import { Body, Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { getCompactedPath, getProjectPageBaseData, validate } from 'lib/rdf';
+import { getCompactedPath, getProjectBaseData, validate } from 'lib/rdf';
 
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
@@ -202,7 +202,7 @@ const StoryForm: React.FC<React.PropsWithChildren<StoryFormProps>> = ({
         validate={async (values: StoryValues) => {
           const errors: StoryValuesErrors = {};
           if (graphData?.shaclGraphByUri?.graph) {
-            const projectPageData = { ...getProjectPageBaseData(), ...values };
+            const projectPageData = { ...getProjectBaseData(), ...values };
             const report = await validate(
               graphData.shaclGraphByUri.graph,
               projectPageData,
@@ -241,7 +241,7 @@ const StoryForm: React.FC<React.PropsWithChildren<StoryFormProps>> = ({
           }
         }}
       >
-        {({ submitForm, isValid, isSubmitting, touched }) => {
+        {({ submitForm, isValid, isSubmitting, dirty }) => {
           return (
             <Form translate="yes">
               <OnBoardingCard className={styles.storyCard}>
@@ -317,9 +317,9 @@ const StoryForm: React.FC<React.PropsWithChildren<StoryFormProps>> = ({
                 onSave={submitForm}
                 onPrev={props.onPrev}
                 onNext={props.onNext}
-                saveDisabled={
-                  !isValid || isSubmitting || !Object.keys(touched).length
-                }
+                isValid={isValid}
+                isSubmitting={isSubmitting}
+                dirty={dirty}
               />
             </Form>
           );

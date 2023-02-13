@@ -11,14 +11,6 @@ const initialValues: MediaValues = {
   'regen:landStewardPhoto': { '@type': 'schema:URL', '@value': '' },
 };
 
-export const mediaFormLegacy = () => (
-  <MediaForm initialValues={initialValues} submit={async () => void null} />
-);
-
 export const mediaForm = () => (
-  <MediaForm
-    creditClassId="1235"
-    initialValues={initialValues}
-    submit={async () => void null}
-  />
+  <MediaForm initialValues={initialValues} submit={async () => void null} />
 );

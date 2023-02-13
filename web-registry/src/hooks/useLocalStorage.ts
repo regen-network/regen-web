@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-// type ReturnType<T> = [T, React.Dispatch<T>];
+// type Params<T> = [T, React.Dispatch<T>];
 interface StorageApi<T> {
   data: T | undefined;
   saveData: React.Dispatch<T>;

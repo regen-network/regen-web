@@ -3468,40 +3468,6 @@ exports[`Storyshots Registry/Organisms/MediaForm Media Form 1`] = `
 </MemoryRouter>
 `;
 
-exports[`Storyshots Registry/Organisms/MediaForm Media Form Legacy 1`] = `
-<MemoryRouter
-  initialEntries={
-    Array [
-      Object {
-        "pathname": "/",
-        "search": "",
-        "state": undefined,
-      },
-    ]
-  }
->
-  <Routes>
-    <Route
-      element={
-        <RouterLogger>
-          <RegenThemeProvider
-            injectFonts={true}
-          >
-            <CssBaseline />
-            <Unknown />
-          </RegenThemeProvider>
-        </RouterLogger>
-      }
-      path="/"
-    >
-      <Route
-        index={true}
-      />
-    </Route>
-  </Routes>
-</MemoryRouter>
-`;
-
 exports[`Storyshots Registry/Organisms/Project Metadata Form Project Metadata Form 1`] = `
 <MemoryRouter
   initialEntries={

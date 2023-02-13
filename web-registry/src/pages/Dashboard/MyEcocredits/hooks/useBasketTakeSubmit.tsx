@@ -32,7 +32,7 @@ type Props = {
   }: OnTxSuccessfulProps) => void;
 };
 
-type ReturnType = (values: MsgTakeValues) => Promise<void>;
+type Params = (values: MsgTakeValues) => Promise<void>;
 
 const useBasketTakeSubmit = ({
   accountAddress,
@@ -42,7 +42,7 @@ const useBasketTakeSubmit = ({
   onBroadcast,
   onTxSuccessful,
   onErrorCallback,
-}: Props): ReturnType => {
+}: Props): Params => {
   const { track } = useTracker();
   const basketTakeSubmit = useCallback(
     async (values: MsgTakeValues): Promise<void> => {

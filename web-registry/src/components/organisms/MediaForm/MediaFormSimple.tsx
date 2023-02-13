@@ -1,13 +1,10 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import { Field, Form, useFormikContext } from 'formik';
 
-import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import {
   ImageUpload,
   ImageUploadProps,
 } from 'web-components/lib/components/inputs/ImageUpload';
-import { VideoInput } from 'web-components/lib/components/inputs/VideoInput';
 
 import getApiUri from '../../../lib/apiUri';
 import { cropAspect, MediaBaseErrors, MediaBaseValues } from './MediaForm';
@@ -25,10 +22,14 @@ export interface MediaErrorsSimple extends MediaBaseErrors {
 }
 
 /** Simplified media form content for new project-page flow */
-const MediaFormSimple = (): JSX.Element => {
+
+const MediaFormSimple = ({
+  projectId,
+}: {
+  projectId?: string;
+}): JSX.Element => {
   const { classes } = useMediaFormStyles();
   const apiServerUrl = getApiUri();
-  const { projectId } = useParams();
   const { values } = useFormikContext<MediaValuesSimple>();
 
   const imgDefaultProps: Partial<ImageUploadProps> = {
@@ -71,6 +72,7 @@ const MediaFormSimple = (): JSX.Element => {
           <React.Fragment key={i} /> // Formik expects a react element - this avoids console bug
         ),
       )}
+      {/* Fields hidden for now
       <Field
         optional
         component={ControlledTextField}
@@ -83,7 +85,7 @@ const MediaFormSimple = (): JSX.Element => {
         description="Copy and paste a video url from YouTube, Vimeo, or Facebook."
         label="Video Url"
         name="regen:videoURL.@value"
-      />
+      /> */}
     </Form>
   );
 };

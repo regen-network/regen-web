@@ -29,6 +29,7 @@ export const ProjectCreate = (): JSX.Element => {
 
 export const useCreateProjectContext = (): ContextType => {
   const context = useOutletContext<ContextType>();
+
   if (context === undefined) {
     throw new Error(
       'useCreateProjectContext must be used within a nested ProjectCreate route',

@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
 import { merge, pick } from 'lodash';
 
+import { NestedPartial } from 'types/nested-partial';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 
-import { NestedPartial } from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
 import { MetadataSubmitProps } from 'hooks/projects/useProjectWithMetadata';
 
 import { ProjectMetadataValues } from '../../../components/organisms';

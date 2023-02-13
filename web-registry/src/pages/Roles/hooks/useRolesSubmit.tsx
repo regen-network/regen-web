@@ -12,12 +12,10 @@ import {
   useUpdateProjectByIdMutation,
   useUpdateWalletByIdMutation,
 } from 'generated/graphql';
+import { NestedPartial } from 'types/nested-partial';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 
-import {
-  NestedPartial,
-  UseProjectEditSubmitParams,
-} from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
+import { UseProjectEditSubmitParams } from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
 import { RolesValues } from 'components/organisms';
 import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';
 

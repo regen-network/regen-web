@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { MsgUpdateProjectMetadata } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 
+import { NestedPartial } from 'types/nested-partial';
 import { generateIri } from 'lib/db/api/metadata-graph';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 
@@ -23,10 +24,6 @@ type Props = {
     title,
     cardTitle,
   }: OnTxSuccessfulProps) => void;
-};
-
-export type NestedPartial<K> = {
-  [attr in keyof K]?: K[attr] extends object ? NestedPartial<K[attr]> : K[attr];
 };
 
 export type UseProjectEditSubmitParams = (

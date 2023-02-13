@@ -10,6 +10,7 @@ import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { ShaclGraphByUriQuery } from '../../../generated/graphql';
 import { useProjectEditContext } from '../../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../../molecules';
+import { useStyles } from './ProjectMetadataForm.styles';
 import { validationSchema } from './ProjectMetadataForm.utils';
 
 interface ProjectMetadataFormProps {
@@ -31,6 +32,7 @@ export const ProjectMetadataForm = ({
   onPrev,
 }: ProjectMetadataFormProps): JSX.Element => {
   const { confirmSave, isEdit } = useProjectEditContext();
+  const { classes: styles } = useStyles();
 
   return (
     <Formik
@@ -62,6 +64,7 @@ export const ProjectMetadataForm = ({
                 rows={5}
                 multiline
                 defaultStyle={false}
+                className={styles.field}
               />
             </OnBoardingCard>
             <ProjectPageFooter

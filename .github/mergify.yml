@@ -1,9 +1,0 @@
-pull_request_rules:
-  - name: backport to redwood
-    conditions:
-      - base=dev
-      - label=backport/redwood
-    actions:
-      backport:
-        branches:
-          - redwood

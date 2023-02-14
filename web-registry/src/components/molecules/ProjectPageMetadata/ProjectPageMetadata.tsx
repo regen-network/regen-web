@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Box, Collapse, Grid, useTheme } from '@mui/material';
 
 import { ExpandButton } from 'web-components/lib/components/buttons/ExpandButton';
-import { Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/lib/components/typography';
 import { formatDate } from 'web-components/lib/utils/format';
+import { pluralize } from 'web-components/lib/utils/pluralize';
 
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 
@@ -25,9 +26,8 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
   // Common
   const startDate = metadata?.['regen:projectStartDate'];
   const endDate = metadata?.['regen:projectEndDate'];
-  const offsetGenerationMethod =
-    metadata?.['regen:offsetGenerationMethod'] ||
-    metadata?.['http://regen.network/offsetGenerationMethod'];
+  const offsetGenerationMethods = metadata?.['regen:offsetGenerationMethod'];
+  const methodsCount = offsetGenerationMethods?.length;
   const projectActivity = metadata?.['regen:projectActivity'];
   const projectType = metadata?.['regen:projectType'];
 
@@ -62,10 +62,18 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
                 }
               />
             )}
-            {offsetGenerationMethod && (
+            {offsetGenerationMethods && methodsCount && methodsCount > 0 && (
               <MetaDetail
-                label="offset generation method"
-                data={offsetGenerationMethod}
+                label={pluralize(methodsCount, 'offset generation method')}
+                data={
+                  <>
+                    {offsetGenerationMethods.map((method, i) => (
+                      <Body key={i} size="xl">
+                        {method}
+                      </Body>
+                    ))}
+                  </>
+                }
               />
             )}
             {projectActivity?.['schema:name'] && (

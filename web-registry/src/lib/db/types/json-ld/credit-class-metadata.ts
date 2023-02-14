@@ -13,7 +13,6 @@ export interface CreditClassMetadataLD {
   'regen:verificationMethod': string;
   'regen:approvedMethodologies': ApprovedMethodologies;
   'regen:offsetGenerationMethod': string[];
-
   'regen:ecosystemType': string[];
   'regen:projectActivities': string[];
   'regen:carbonOffsetStandard': NameURL;

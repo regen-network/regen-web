@@ -12,13 +12,7 @@ export interface AnchoredProjectMetadataBaseLD {
   'schema:location': GeocodeFeature;
   'regen:projectType': string;
   'regen:projectActivity': CompactedNameUrl;
-  'regen:offsetGenerationMethod': string;
-  // regen:offsetGenerationMethod doesn't get compacted for project metadata because
-  // in COMPACTED_CONTEXT, we specify: 'regen:offsetGenerationMethod': { '@container': '@list' }
-  // while in project metadata, it's a string, not a list
-  // this context is used in credit classes metadata, we should probably update the credit classes metadata
-  // to use offsetGenerationMethods (plural!) since it can be a list
-  'http://regen.network/offsetGenerationMethod'?: string;
+  'regen:offsetGenerationMethod'?: string[];
   'regen:projectSize': ProjectSize;
   'regen:projectStartDate'?: string;
   'regen:projectEndDate'?: string;

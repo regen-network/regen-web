@@ -11,7 +11,7 @@ import { useInitClient } from 'lib/clients/hooks/useInitClient';
 import { EcocreditQueryClient } from 'lib/ecocredit/api';
 import { MarketplaceQueryClient } from 'lib/ecocredit/marketplace/marketplace.types';
 
-import { ledgerExpRPCUri, ledgerRPCUri } from './lib/ledger';
+import { ledgerRPCUri } from './lib/ledger';
 import { useWallet, Wallet } from './lib/wallet/wallet';
 
 interface ContextValue {
@@ -27,7 +27,6 @@ interface ContextValue {
 }
 
 interface ConnectParams {
-  forceExp?: boolean;
   signer?: OfflineSigner;
 }
 
@@ -43,8 +42,7 @@ export async function connect(
     // - via REST and gRPC-gateway
     connection: {
       type: 'tendermint',
-      // If forceExp = true, then use experimental testnet RPC
-      endpoint: options?.forceExp ? ledgerExpRPCUri : ledgerRPCUri,
+      endpoint: ledgerRPCUri,
       // TODO: DISABLED SIGNER
       signer: options?.signer,
       // signer, // OfflineSigner from @cosmjs/proto-signing
@@ -69,11 +67,10 @@ const getApi = async (
   setLoading: React.Dispatch<React.SetStateAction<boolean>>,
   setError: React.Dispatch<unknown>,
   signer?: OfflineSigner,
-  forceExp?: boolean,
 ): Promise<void> => {
   setLoading(true);
   try {
-    const regenApi = await connect({ forceExp, signer });
+    const regenApi = await connect({ signer });
     setApi(regenApi);
     setLoading(false);
   } catch (e) {

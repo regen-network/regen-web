@@ -45,7 +45,6 @@ import {
   QuerySupplyResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { QueryClient } from '@tanstack/react-query';
-import axios from 'axios';
 import { uniq } from 'lodash';
 
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
@@ -66,7 +65,6 @@ import type {
   BatchTotalsForProject,
   ClassProjectInfo,
 } from '../../types/ledger/ecocredit';
-import { expLedger, ledgerRESTUri } from '../ledger';
 import { ECOCREDIT_MESSAGE_TYPES, messageActionEquals } from './constants';
 import { v1Alpha1BatchDenomMapping } from './ecocredit.config';
 
@@ -964,51 +962,33 @@ export const queryEcoBatches = async (
 ): Promise<BatchInfo[]> => {
   const client = await getQueryClient();
   try {
-    // Currently, the experimental testnet Hambach is running an old version of regen-ledger (v2.0.0-beta1)
-    // which provides a different API than latest v4.0 for querying credit batches.
-    if (expLedger) {
-      if (creditClassId) {
-        if (!params) {
-          params = new URLSearchParams();
-        }
-        params.set('class_id', creditClassId);
-      }
-      const { data } = await axios.get(
-        `${ledgerRESTUri}/regen/ecocredit/v1alpha1/batches`,
-        {
-          params,
-        },
+    // With regen-ledger v4.0, we first have to query all classes and then batches per class.
+    // The url pagination params are just ignored here since they can't really be used.
+    // Indeed we cannot know in advance how many credit classes should be queried initially
+    // to get the desired number of credit batches.
+    let batchInfos: BatchInfo[] = [];
+    if (!creditClassId) {
+      const { classes } = await queryEcoClasses();
+      const arr = await Promise.all(
+        classes.map(async creditClass => {
+          const { batches } = await queryBatchesByClass({
+            client,
+            request: { classId: creditClass.id },
+          });
+          return batches;
+        }),
       );
-      return data;
+
+      batchInfos = arr.flat();
     } else {
-      // With regen-ledger v4.0, we first have to query all classes and then batches per class.
-      // The url pagination params are just ignored here since they can't really be used.
-      // Indeed we cannot know in advance how many credit classes should be queried initially
-      // to get the desired number of credit batches.
-      let batchInfos: BatchInfo[] = [];
-      if (!creditClassId) {
-        const { classes } = await queryEcoClasses();
-        const arr = await Promise.all(
-          classes.map(async creditClass => {
-            const { batches } = await queryBatchesByClass({
-              client,
-              request: { classId: creditClass.id },
-            });
-            return batches;
-          }),
-        );
-
-        batchInfos = arr.flat();
-      } else {
-        const { batches } = await queryBatchesByClass({
-          client,
-          request: { classId: creditClassId },
-        });
-        return batches;
-      }
-
-      return batchInfos;
+      const { batches } = await queryBatchesByClass({
+        client,
+        request: { classId: creditClassId },
+      });
+      return batches;
     }
+
+    return batchInfos;
   } catch (err) {
     throw new Error(`Error fetching batches: ${err}`);
   }

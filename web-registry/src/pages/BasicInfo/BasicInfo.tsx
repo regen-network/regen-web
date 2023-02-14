@@ -1,5 +1,10 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+
+import { graphqlClient } from 'lib/clients/graphqlClient';
+import { getShaclGraphByUriQuery } from 'lib/queries/react-query/registry-server/graphql/getShaclGraphByUriQuery/getShaclGraphByUriQuery';
+import { getProjectShapeIri } from 'lib/rdf';
 
 import { useProjectEditContext } from 'pages/ProjectEdit';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
@@ -11,13 +16,22 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
-  const { metadata, metadataSubmit } = useProjectWithMetadata({
+  const { metadata, metadataSubmit, creditClassId } = useProjectWithMetadata({
     projectId,
     isEdit,
     projectEditSubmit,
     navigateNext,
     onChainProject,
   });
+
+  const { data } = useQuery(
+    getShaclGraphByUriQuery({
+      client: graphqlClient,
+      uri: getProjectShapeIri(creditClassId),
+      enabled: !!creditClassId,
+    }),
+  );
+  const graphData = data?.data;
 
   let initialFieldValues: BasicInfoFormValues | undefined;
   if (metadata) {
@@ -44,6 +58,8 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
         submit={metadataSubmit}
         initialValues={initialFieldValues}
         onNext={navigateNext}
+        graphData={graphData}
+        creditClassId={creditClassId}
       />
     </ProjectFormTemplate>
   );

@@ -10,15 +10,11 @@ import SelectTextField from 'web-components/lib/components/inputs/SelectTextFiel
 import TextField from 'web-components/lib/components/inputs/TextField';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
+import { getCompactedPath, getProjectBaseData, validate } from 'lib/rdf';
+
 import { useProjectEditContext } from 'pages';
 
-// import { requiredMessage } from 'web-components/lib/components/inputs/validation'; TODO: regen-registry#1048
-import { useShaclGraphByUriQuery } from '../../generated/graphql';
-// import {
-//   validate,
-//   getProjectBaseData,
-//   getCompactedPath,
-// } from '../../lib/rdf'; TODO: regen-registry#1048
+import { ShaclGraphByUriQuery } from '../../generated/graphql';
 import { ProjectPageFooter } from '../molecules';
 
 export interface BasicInfoFormValues {
@@ -58,15 +54,12 @@ const BasicInfoForm: React.FC<
     submit: ({ values }: { values: BasicInfoFormValues }) => Promise<void>;
     initialValues?: BasicInfoFormValues;
     onNext?: () => void;
+    graphData?: ShaclGraphByUriQuery;
+    creditClassId?: string;
   }>
-> = ({ submit, initialValues, onNext }) => {
+> = ({ submit, initialValues, onNext, graphData, creditClassId }) => {
   const { classes, cx } = useStyles();
   const { confirmSave, isEdit } = useProjectEditContext();
-  const { data: graphData } = useShaclGraphByUriQuery({
-    variables: {
-      uri: 'http://regen.network/ProjectPageShape',
-    },
-  });
 
   return (
     <Formik
@@ -82,29 +75,36 @@ const BasicInfoForm: React.FC<
       validate={async (values: BasicInfoFormValues) => {
         const errors: FormikErrors<BasicInfoFormValues> = {};
         if (graphData?.shaclGraphByUri?.graph) {
-          // TODO: Fix Validation. regen-registry#1048 .
-          // Temporarily commented out to enable testing.
-          // const projectPageData = { ...getProjectBaseData(), ...values };
-          // const report = await validate(
-          //   graphData.shaclGraphByUri.graph,
-          //   projectPageData,
-          //   'http://regen.network/ProjectPageBasicInfoGroup',
-          // );
-          // for (const result of report.results) {
-          //   const path: string = result.path.value;
-          //   const compactedPath = getCompactedPath(path) as
-          //     | keyof BasicInfoFormValues
-          //     | undefined;
-          //   if (compactedPath === 'regen:size') {
-          //     errors[compactedPath] = {
-          //       'qudt:numericValue': {
-          //         '@value': requiredMessage,
-          //       },
-          //     };
-          //   } else if (compactedPath) {
-          //     errors[compactedPath] = requiredMessage;
-          //   }
-          // }
+          const projectPageData = {
+            ...getProjectBaseData(creditClassId),
+            ...values,
+          };
+          const report = await validate(
+            graphData.shaclGraphByUri.graph,
+            projectPageData,
+            'http://regen.network/ProjectPageBasicInfoGroup',
+          );
+          for (const result of report.results) {
+            const path: string = result.path.value;
+            const compactedPath = getCompactedPath(path) as
+              | keyof BasicInfoFormValues
+              | keyof BasicInfoFormValues['regen:projectSize']
+              | undefined;
+            const message = result.message?.[0]?.value;
+            if (compactedPath && message) {
+              // handle nested errors
+              if (
+                compactedPath === 'qudt:numericValue' ||
+                compactedPath === 'qudt:unit'
+              ) {
+                errors['regen:projectSize'] = {
+                  [compactedPath]: message,
+                };
+              } else {
+                errors[compactedPath] = message;
+              }
+            }
+          }
         }
         return errors;
       }}
@@ -133,7 +133,7 @@ const BasicInfoForm: React.FC<
                   sx={{
                     display: 'flex',
                     justifyContent: 'space-between',
-                    alignItems: 'flex-end',
+                    alignItems: 'baseline',
                   }}
                 >
                   <Field

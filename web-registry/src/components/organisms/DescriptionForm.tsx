@@ -86,7 +86,7 @@ const DescriptionForm = ({
           <Form translate="yes">
             <OnBoardingCard>
               <Field
-                charLimit={600}
+                charLimit={1500}
                 component={ControlledTextField}
                 label="Project description"
                 description="Describe the story of this property."

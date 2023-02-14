@@ -47,6 +47,7 @@ interface Res {
   metadata?: Partial<ProjectMetadataLD>;
   metadataReload: () => Promise<void>;
   metadataSubmit: (p: MetadataSubmitProps) => Promise<void>;
+  creditClassId?: string;
 }
 
 type Values =
@@ -66,6 +67,7 @@ export const useProjectWithMetadata = ({
 }: Props): Res => {
   let metadata: Partial<ProjectMetadataLD> | undefined;
   let offChainProject: OffChainProject | undefined;
+  let creditClassId;
   const reactQueryClient = useQueryClient();
   const [updateProject] = useUpdateProjectByIdMutation();
 
@@ -83,6 +85,7 @@ export const useProjectWithMetadata = ({
   if (create && projectById) {
     offChainProject = projectById;
     metadata = projectById.metadata;
+    creditClassId = offChainProject?.metadata?.['regen:creditClassId'];
   }
 
   // In project edit mode, we can query the on-chain (anchored) project metadata.
@@ -110,6 +113,7 @@ export const useProjectWithMetadata = ({
     } else {
       metadata = offChainProject?.metadata;
     }
+    creditClassId = onChainProject?.classId;
   }
   // Create Reload and Submit callbacks
   const metadataReload = useCallback(async (): Promise<void> => {
@@ -178,5 +182,6 @@ export const useProjectWithMetadata = ({
     metadata,
     metadataReload,
     metadataSubmit,
+    creditClassId,
   };
 };

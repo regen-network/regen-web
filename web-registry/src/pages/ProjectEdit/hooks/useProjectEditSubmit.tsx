@@ -1,7 +1,9 @@
 import { useCallback } from 'react';
 import { MsgUpdateProjectMetadata } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 
+import { NestedPartial } from 'types/nested-partial';
 import { generateIri } from 'lib/db/api/metadata-graph';
+import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 
 import { OnTxSuccessfulProps } from 'pages/Dashboard/MyEcocredits/MyEcocredits.types';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
@@ -24,7 +26,9 @@ type Props = {
   }: OnTxSuccessfulProps) => void;
 };
 
-export type UseProjectEditSubmitParams = (metadata: any) => Promise<void>;
+export type UseProjectEditSubmitParams = (
+  metadata: NestedPartial<ProjectMetadataLD>,
+) => Promise<void>;
 
 const useProjectEditSubmit = ({
   projectId,

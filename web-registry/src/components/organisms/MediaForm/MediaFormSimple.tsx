@@ -17,7 +17,7 @@ export interface MediaValuesSimple extends MediaBaseValues {
 
 export interface MediaErrorsSimple extends MediaBaseErrors {
   'schema:creditText'?: string;
-  'regen:galleryPhotos'?: Array<string | null>;
+  'regen:galleryPhotos'?: Array<string>;
 }
 
 /** Simplified media form content for new project-page flow */

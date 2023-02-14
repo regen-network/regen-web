@@ -13,7 +13,7 @@ import { ImageUpload } from '../inputs/ImageUpload';
 import { Title } from '../typography';
 import Modal from '.';
 
-type ProfileType = 'regen:Individual' | 'regen:Organization';
+export type ProfileType = 'regen:Individual' | 'regen:Organization';
 
 interface ProfileModalProps {
   profile: ProfileFormValues;
@@ -34,7 +34,7 @@ export interface ProfileFormValues {
   'schema:description'?: string;
   'regen:address'?: string;
   // 'regen:sharePermission'?: boolean;
-  'regen:showOnProjectPage': true;
+  'regen:showOnProjectPage': boolean;
 }
 
 function ProfileModal({

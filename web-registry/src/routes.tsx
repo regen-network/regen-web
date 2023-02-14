@@ -240,6 +240,10 @@ export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
               <Route path="media" element={<KeplrRoute component={Media} />} />
               <Route path="roles" element={<KeplrRoute component={Roles} />} />
               <Route
+                path="metadata"
+                element={<KeplrRoute component={ProjectMetadata} />}
+              />
+              <Route
                 path="entity-display"
                 element={<KeplrRoute component={EntityDisplay} />}
               />

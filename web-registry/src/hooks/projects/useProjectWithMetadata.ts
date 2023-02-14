@@ -8,6 +8,7 @@ import {
   useUpdateProjectByIdMutation,
 } from 'generated/graphql';
 import { graphqlClient } from 'lib/clients/graphqlClient';
+import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getProjectKey } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery.constants';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
@@ -36,18 +37,24 @@ interface Props {
   onChainProject?: ProjectInfo;
 }
 
+export interface MetadataSubmitProps {
+  values: Values;
+  overwrite?: boolean;
+}
+
 interface Res {
   offChainProject?: OffChainProject;
-  metadata: any; // TODO update with proper type
+  metadata?: Partial<ProjectMetadataLD>;
   metadataReload: () => Promise<void>;
-  metadataSubmit: (values: Values) => Promise<void>;
+  metadataSubmit: (p: MetadataSubmitProps) => Promise<void>;
 }
 
 type Values =
   | BasicInfoFormValues
   | ProjectLocationFormValues
   | DescriptionValues
-  | MediaValues;
+  | MediaValues
+  | Partial<ProjectMetadataLD>;
 
 export const useProjectWithMetadata = ({
   projectId,
@@ -57,7 +64,7 @@ export const useProjectWithMetadata = ({
   projectEditSubmit,
   anchored = true,
 }: Props): Res => {
-  let metadata: any;
+  let metadata: Partial<ProjectMetadataLD> | undefined;
   let offChainProject: OffChainProject | undefined;
   const reactQueryClient = useQueryClient();
   const [updateProject] = useUpdateProjectByIdMutation();
@@ -122,8 +129,14 @@ export const useProjectWithMetadata = ({
   }, [create, edit, reactQueryClient, projectId]);
 
   const metadataSubmit = useCallback(
-    async (values: Values): Promise<void> => {
-      const newMetadata = { ...metadata, ...values };
+    async ({
+      values,
+      overwrite = false,
+    }: MetadataSubmitProps): Promise<void> => {
+      let newMetadata = values;
+      if (!overwrite) {
+        newMetadata = { ...metadata, ...values };
+      }
       try {
         if (isEdit && anchored) {
           await projectEditSubmit(newMetadata);

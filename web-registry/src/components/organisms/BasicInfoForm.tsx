@@ -22,9 +22,9 @@ import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { ProjectPageFooter } from '../molecules';
 
 export interface BasicInfoFormValues {
-  'schema:name': string;
-  'regen:projectSize': {
-    'qudt:numericValue'?: number | string;
+  'schema:name'?: string;
+  'regen:projectSize'?: {
+    'qudt:numericValue'?: number;
     'qudt:unit': string;
   };
 }
@@ -55,7 +55,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
 
 const BasicInfoForm: React.FC<
   React.PropsWithChildren<{
-    submit: (values: BasicInfoFormValues) => Promise<void>;
+    submit: ({ values }: { values: BasicInfoFormValues }) => Promise<void>;
     initialValues?: BasicInfoFormValues;
     onNext?: () => void;
   }>
@@ -109,7 +109,7 @@ const BasicInfoForm: React.FC<
         return errors;
       }}
       onSubmit={async (values, { setTouched }) => {
-        await submit(values);
+        await submit({ values });
         setTouched({}); // reset to untouched
         if (isEdit && confirmSave) confirmSave();
       }}

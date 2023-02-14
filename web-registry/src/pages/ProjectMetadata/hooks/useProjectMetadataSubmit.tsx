@@ -1,53 +1,37 @@
 import { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { cloneDeep, merge } from 'lodash';
+import { merge, pick } from 'lodash';
+
+import { NestedPartial } from 'types/nested-partial';
+import { ProjectMetadataLD } from 'lib/db/types/json-ld';
+
+import { MetadataSubmitProps } from 'hooks/projects/useProjectWithMetadata';
 
 import { ProjectMetadataValues } from '../../../components/organisms';
-import {
-  ProjectByIdQuery,
-  useUpdateProjectByIdMutation,
-} from '../../../generated/graphql';
+import { OMITTED_METADATA_KEYS } from '../ProjectMetadata.config';
 
-type Props = {
-  project?: ProjectByIdQuery['projectById'];
-  projectId?: string;
-  updateProject: ReturnType<typeof useUpdateProjectByIdMutation>[0];
+type Params = {
+  metadata?: NestedPartial<ProjectMetadataLD>;
+  metadataSubmit: (p: MetadataSubmitProps) => Promise<void>;
 };
 
-export type useProjectMetadataSubmitReturnedType = (
+export type UseProjectMetadataSubmitReturn = (
   values: ProjectMetadataValues,
 ) => Promise<void>;
 
 export const useProjectMetadataSubmit = ({
-  project,
-  projectId,
-  updateProject,
-}: Props): useProjectMetadataSubmitReturnedType => {
-  const navigate = useNavigate();
+  metadata,
+  metadataSubmit,
+}: Params): UseProjectMetadataSubmitReturn => {
   const projectMetadataSubmit = useCallback(
-    async function submit(values: ProjectMetadataValues): Promise<void> {
+    async (values: ProjectMetadataValues): Promise<void> => {
       const parsedMetaData = JSON.parse(values.metadata);
-      const projectMetadata = cloneDeep(project?.metadata);
-      merge(projectMetadata, parsedMetaData);
-
-      try {
-        await updateProject({
-          variables: {
-            input: {
-              id: projectId,
-              projectPatch: {
-                metadata: projectMetadata,
-              },
-            },
-          },
-        });
-        navigate(`/project-pages/${projectId}/review`);
-      } catch (e) {
-        // TODO: Should we display the error banner here?
-        // https://github.com/regen-network/regen-registry/issues/554
+      const baseMetadata = pick(metadata, OMITTED_METADATA_KEYS);
+      merge(baseMetadata, parsedMetaData);
+      if (baseMetadata) {
+        await metadataSubmit({ values: baseMetadata, overwrite: true });
       }
     },
-    [navigate, project?.metadata, projectId, updateProject],
+    [metadata, metadataSubmit],
   );
 
   return projectMetadataSubmit;

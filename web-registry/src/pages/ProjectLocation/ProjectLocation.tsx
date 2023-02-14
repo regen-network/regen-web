@@ -22,7 +22,7 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
   let initialFieldValues: any | undefined;
   if (metadata) {
     initialFieldValues = {
-      'schema:location': metadata?.['schema:location'] || {},
+      'schema:location': metadata['schema:location'] || {},
     };
   }
 

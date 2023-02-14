@@ -20,7 +20,11 @@ export interface ProjectLocationFormValues {
 const ProjectLocationForm: React.FC<
   React.PropsWithChildren<{
     mapToken: string;
-    submit: (values: ProjectLocationFormValues) => Promise<void>;
+    submit: ({
+      values,
+    }: {
+      values: ProjectLocationFormValues;
+    }) => Promise<void>;
     saveAndExit: (values: ProjectLocationFormValues) => Promise<void>;
     initialValues?: ProjectLocationFormValues;
     onNext?: () => void;
@@ -63,7 +67,7 @@ const ProjectLocationForm: React.FC<
         return errors;
       }}
       onSubmit={async (values, { setTouched }) => {
-        await submit(values);
+        await submit({ values });
         setTouched({}); // reset to untouched
         if (isEdit && confirmSave) confirmSave();
       }}

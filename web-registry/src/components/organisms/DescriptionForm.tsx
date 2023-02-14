@@ -12,7 +12,7 @@ import { useProjectEditContext } from '../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../molecules';
 
 interface DescriptionFormProps {
-  submit: (values: DescriptionValues) => Promise<void>;
+  submit: ({ values }: { values: DescriptionValues }) => Promise<void>;
   onNext?: () => void;
   onPrev?: () => void;
   initialValues?: DescriptionValues;
@@ -60,7 +60,7 @@ const DescriptionForm = ({
     { setSubmitting, setTouched }: FormikHelpers<DescriptionValues>,
   ): Promise<void> => {
     try {
-      await submit(values);
+      await submit({ values });
       setTouched({}); // reset to untouched
       if (isEdit && confirmSave) confirmSave();
     } catch (e) {

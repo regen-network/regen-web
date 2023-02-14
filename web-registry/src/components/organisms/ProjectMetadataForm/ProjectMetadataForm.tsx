@@ -5,17 +5,17 @@ import ControlledFormLabel from 'web-components/lib/components/form/ControlledFo
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import { Body } from 'web-components/lib/components/typography';
 
-import { AnchoredProjectMetadataBaseLD } from 'lib/db/types/json-ld';
+import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 
 import { ShaclGraphByUriQuery } from '../../../generated/graphql';
 import { useProjectEditContext } from '../../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../../molecules';
-import { useProjectMetadataFormSubmit } from './hooks/useProjectMetadataFormSubmit';
+import { useStyles } from './ProjectMetadataForm.styles';
 import { validationSchema } from './ProjectMetadataForm.utils';
 
 interface ProjectMetadataFormProps {
   submit: (values: ProjectMetadataValues) => Promise<void>;
-  initialValues?: Partial<AnchoredProjectMetadataBaseLD>;
+  initialValues?: Partial<ProjectMetadataLD>;
   graphData?: ShaclGraphByUriQuery;
   onNext?: () => void;
   onPrev?: () => void;
@@ -32,22 +32,21 @@ export const ProjectMetadataForm = ({
   onPrev,
 }: ProjectMetadataFormProps): JSX.Element => {
   const { confirmSave, isEdit } = useProjectEditContext();
-
-  const onSubmit = useProjectMetadataFormSubmit({
-    confirmSave,
-    isEdit,
-    submit,
-  });
+  const { classes: styles } = useStyles();
 
   return (
     <Formik
       enableReinitialize
       validateOnMount
       initialValues={{
-        metadata: initialValues ? JSON.stringify(initialValues) : '',
+        metadata: initialValues ? JSON.stringify(initialValues, null, 2) : '',
       }}
       validationSchema={validationSchema}
-      onSubmit={onSubmit}
+      onSubmit={async (values, { setTouched }) => {
+        await submit(values);
+        setTouched({}); // reset to untouched
+        if (isEdit && confirmSave) confirmSave();
+      }}
     >
       {({ submitForm, isValid, isSubmitting, dirty }) => {
         return (
@@ -65,6 +64,7 @@ export const ProjectMetadataForm = ({
                 rows={5}
                 multiline
                 defaultStyle={false}
+                className={styles.field}
               />
             </OnBoardingCard>
             <ProjectPageFooter

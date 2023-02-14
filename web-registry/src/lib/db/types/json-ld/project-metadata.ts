@@ -1,5 +1,7 @@
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 
+import { ProfileType } from 'web-components/lib/components/modal/ProfileModal';
+
 import { CompactedNameUrl } from 'lib/rdf/types';
 
 /** Anchored metadata AKA "Additional Info" - Editable only with a signed Ledger TX. */
@@ -64,7 +66,7 @@ interface ProjectSize {
 }
 
 export interface ProjectStakeholder {
-  '@type': string;
+  '@type': ProfileType;
   'schema:name': string;
   'schema:description'?: string;
   'schema:image'?: string;

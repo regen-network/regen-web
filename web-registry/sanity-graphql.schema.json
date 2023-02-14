@@ -2361,6 +2361,18 @@
             "deprecationReason": null
           },
           {
+            "name": "ecologicalCreditsSection",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ImageItemsSection",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "imageGridSection",
             "description": null,
             "args": [],
@@ -2535,6 +2547,18 @@
             "deprecationReason": null
           },
           {
+            "name": "ecologicalCreditsSection",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ImageItemsSectionFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "imageGridSection",
             "description": null,
             "type": {
@@ -2683,6 +2707,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "HeroSectionSorting",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ecologicalCreditsSection",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ImageItemsSectionSorting",
               "ofType": null
             },
             "defaultValue": null,
@@ -22932,6 +22968,18 @@
             "deprecationReason": null
           },
           {
+            "name": "description",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "imageCards",
             "description": null,
             "args": [],
@@ -22994,6 +23042,18 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "description",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -23032,6 +23092,18 @@
           },
           {
             "name": "title",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -32911,7 +32983,7 @@
           },
           {
             "name": "projectName",
-            "description": null,
+            "description": "optional project name to make it easier to track projects already added to the list",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -32923,7 +32995,7 @@
           },
           {
             "name": "projectId",
-            "description": null,
+            "description": "on-chain project id",
             "args": [],
             "type": {
               "kind": "SCALAR",

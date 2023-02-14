@@ -306,6 +306,7 @@ export type BuyersPage = Document & {
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
   heroSection?: Maybe<HeroSection>;
+  ecologicalCreditsSection?: Maybe<ImageItemsSection>;
   imageGridSection?: Maybe<ImageGridSection>;
   featuredSection?: Maybe<FeaturedSection>;
   faqSection?: Maybe<BottomBanner>;
@@ -323,6 +324,7 @@ export type BuyersPageFilter = {
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
   heroSection?: Maybe<HeroSectionFilter>;
+  ecologicalCreditsSection?: Maybe<ImageItemsSectionFilter>;
   imageGridSection?: Maybe<ImageGridSectionFilter>;
   featuredSection?: Maybe<FeaturedSectionFilter>;
   faqSection?: Maybe<BottomBannerFilter>;
@@ -338,6 +340,7 @@ export type BuyersPageSorting = {
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
   heroSection?: Maybe<HeroSectionSorting>;
+  ecologicalCreditsSection?: Maybe<ImageItemsSectionSorting>;
   imageGridSection?: Maybe<ImageGridSectionSorting>;
   faqSection?: Maybe<BottomBannerSorting>;
   footerButtonText?: Maybe<SortOrder>;
@@ -2639,6 +2642,7 @@ export type ImageItemsSection = {
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
   imageCards?: Maybe<Array<Maybe<Card>>>;
 };
 
@@ -2646,12 +2650,14 @@ export type ImageItemsSectionFilter = {
   _key?: Maybe<StringFilter>;
   _type?: Maybe<StringFilter>;
   title?: Maybe<StringFilter>;
+  description?: Maybe<StringFilter>;
 };
 
 export type ImageItemsSectionSorting = {
   _key?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
+  description?: Maybe<SortOrder>;
 };
 
 export type ImageLink = {
@@ -3775,7 +3781,9 @@ export type Project = {
   __typename?: 'Project';
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
+  /** optional project name to make it easier to track projects already added to the list */
   projectName?: Maybe<Scalars['String']>;
+  /** on-chain project id */
   projectId?: Maybe<Scalars['String']>;
 };
 
@@ -6403,6 +6411,9 @@ export type AllBuyersPageQuery = (
     & { heroSection?: Maybe<(
       { __typename?: 'HeroSection' }
       & HeroSectionFieldsFragment
+    )>, ecologicalCreditsSection?: Maybe<(
+      { __typename?: 'ImageItemsSection' }
+      & ImageItemsSectionFieldsFragment
     )>, imageGridSection?: Maybe<(
       { __typename?: 'ImageGridSection' }
       & ImageGridSectionFieldsFragment
@@ -6955,6 +6966,15 @@ export type ImageGridSectionFieldsFragment = (
   )>>> }
 );
 
+export type ImageItemsSectionFieldsFragment = (
+  { __typename?: 'ImageItemsSection' }
+  & Pick<ImageItemsSection, 'title' | 'description'>
+  & { imageCards?: Maybe<Array<Maybe<(
+    { __typename?: 'Card' }
+    & CardFieldsFragment
+  )>>> }
+);
+
 export type EcologicalImpactByIriQueryVariables = Exact<{
   iris?: Maybe<Array<Scalars['String']> | Scalars['String']>;
 }>;
@@ -7219,17 +7239,6 @@ export const BottomBannerFieldsFragmentDoc = gql`
 }
     ${ButtonFieldsFragmentDoc}
 ${CustomImageFieldsFragmentDoc}`;
-export const CardFieldsFragmentDoc = gql`
-    fragment cardFields on Card {
-  title
-  descriptionRaw
-  icon {
-    asset {
-      url
-    }
-  }
-}
-    `;
 export const EcologicalImpactRelationFieldsFragmentDoc = gql`
     fragment ecologicalImpactRelationFields on EcologicalImpactRelation {
   primary
@@ -7325,6 +7334,26 @@ export const ImageGridSectionFieldsFragmentDoc = gql`
 }
     ${CustomImageFieldsFragmentDoc}
 ${ImageGridItemFieldsFragmentDoc}`;
+export const CardFieldsFragmentDoc = gql`
+    fragment cardFields on Card {
+  title
+  descriptionRaw
+  icon {
+    asset {
+      url
+    }
+  }
+}
+    `;
+export const ImageItemsSectionFieldsFragmentDoc = gql`
+    fragment imageItemsSectionFields on ImageItemsSection {
+  title
+  description
+  imageCards {
+    ...cardFields
+  }
+}
+    ${CardFieldsFragmentDoc}`;
 export const LandManagementPracticeFieldsFragmentDoc = gql`
     fragment landManagementPracticeFields on LandManagementPractice {
   title
@@ -7452,6 +7481,9 @@ export const AllBuyersPageDocument = gql`
     heroSection {
       ...heroSectionFields
     }
+    ecologicalCreditsSection {
+      ...imageItemsSectionFields
+    }
     imageGridSection {
       ...imageGridSectionFields
     }
@@ -7468,6 +7500,7 @@ export const AllBuyersPageDocument = gql`
   }
 }
     ${HeroSectionFieldsFragmentDoc}
+${ImageItemsSectionFieldsFragmentDoc}
 ${ImageGridSectionFieldsFragmentDoc}
 ${FeaturedSectionFieldsFragmentDoc}
 ${BottomBannerFieldsFragmentDoc}

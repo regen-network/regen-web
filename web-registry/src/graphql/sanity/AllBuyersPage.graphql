@@ -3,6 +3,9 @@ query allBuyersPage {
     heroSection {
       ...heroSectionFields
     }
+    ecologicalCreditsSection {
+      ...imageItemsSectionFields
+    }
     imageGridSection {
       ...imageGridSectionFields
     }

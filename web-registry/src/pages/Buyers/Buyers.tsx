@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { makeStyles } from 'tss-react/mui';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
@@ -14,42 +13,16 @@ import {
   HeroAction,
   HeroTitle,
   ImageGridSection,
+  ImageItemsSection,
 } from '../../components/molecules';
 import { MoreProjectsSection } from '../../components/organisms';
 import { useMoreProjectsQuery } from '../../generated/graphql';
 import { useAllBuyersPageQuery } from '../../generated/sanity-graphql';
 import { client } from '../../lib/clients/sanity';
-
-const useStyles = makeStyles()(theme => ({
-  heroMain: {
-    maxWidth: theme.typography.pxToRem(775),
-    paddingBottom: theme.spacing(20),
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(12),
-      '& h1': {
-        lineHeight: '130%',
-      },
-      '& h4': {
-        marginTop: theme.spacing(3),
-      },
-      '& p': {
-        fontSize: theme.typography.pxToRem(18),
-        lineHeight: '160%',
-      },
-    },
-  },
-  bottomHeroSection: {
-    paddingTop: 0,
-  },
-  title: {
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(32),
-    },
-  },
-}));
+import { useBuyersStyles } from './Buyers.styles';
 
 const BuyersPage = (): JSX.Element => {
-  const { classes: styles } = useStyles();
+  const { classes: styles } = useBuyersStyles();
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const { data } = useAllBuyersPageQuery({ client });
@@ -90,13 +63,25 @@ const BuyersPage = (): JSX.Element => {
         descriptionRaw={content?.heroSection?.descriptionRaw}
         tooltipText={content?.heroSection?.tooltipText}
         img={buyersHero}
-        linearGradient="linear-gradient(180deg, rgba(255, 249, 238, 0.74) 0%, rgba(255, 249, 238, 0) 27.6%), linear-gradient(209.5deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%)"
+        linearGradient="linear-gradient(209.5deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%)"
       />
+      {content?.ecologicalCreditsSection && (
+        <ImageItemsSection
+          content={content?.ecologicalCreditsSection}
+          sx={{
+            description: {
+              maxWidth: 790,
+              marginX: 'auto',
+            },
+            imageItem: {
+              title: { pt: 7.5 },
+            },
+          }}
+        />
+      )}
       {content?.imageGridSection && (
         <ImageGridSection content={content?.imageGridSection} />
       )}
-      {/* <ApproachSection />
-      <InvestingSection /> */}
       {content?.featuredSection && (
         <FeaturedSection content={content?.featuredSection} />
       )}

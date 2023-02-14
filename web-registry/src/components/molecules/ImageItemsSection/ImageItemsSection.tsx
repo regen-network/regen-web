@@ -1,32 +1,29 @@
 import React from 'react';
-import { makeStyles } from 'tss-react/mui';
+import { SxProps } from '@mui/material';
 
 import { ImageItemProps } from 'web-components/lib/components/image-item';
 import Section from 'web-components/lib/components/section';
 import ImageItems from 'web-components/lib/components/sliders/ImageItems';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { ImageItemsSection as ImageItemsSectionProps } from '../../generated/sanity-graphql';
-
-const useStyles = makeStyles()((theme: Theme) => ({
-  root: {
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(14),
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(25),
-    },
-  },
-}));
+import { ImageItemsSection as ImageItemsSectionProps } from '../../../generated/sanity-graphql';
+import { useImageItemsStyles } from './ImageItemsSection.styles';
 
 interface Props {
   content: ImageItemsSectionProps;
+  sx?: {
+    root?: SxProps<Theme>;
+    title?: SxProps<Theme>;
+    description?: SxProps<Theme>;
+    imageItem?: { title: SxProps<Theme> };
+  };
 }
 
 const ImageItemsSection: React.FC<React.PropsWithChildren<Props>> = ({
   content,
+  sx,
 }) => {
-  const { classes: styles } = useStyles();
+  const { classes: styles } = useImageItemsStyles();
   const imageItems: ImageItemProps[] =
     content?.imageCards?.map(i => ({
       img: <img src={i?.icon?.asset?.url || ''} alt={`${i?.title}`} />,
@@ -35,8 +32,14 @@ const ImageItemsSection: React.FC<React.PropsWithChildren<Props>> = ({
     })) || [];
 
   return (
-    <Section withSlider className={styles.root} title={content?.title || ''}>
-      <ImageItems items={imageItems} />
+    <Section
+      withSlider
+      className={styles.root}
+      title={content?.title || ''}
+      description={content?.description ?? ''}
+      sx={sx}
+    >
+      <ImageItems items={imageItems} sx={sx?.imageItem} />
     </Section>
   );
 };

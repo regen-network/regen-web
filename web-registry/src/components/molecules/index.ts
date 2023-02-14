@@ -9,7 +9,7 @@ export * from './FeaturedSection';
 export * from './HeroAction';
 export * from './HeroTitle';
 export * from './ImageGridSection';
-export * from './ImageItemsSection';
+export * from './ImageItemsSection/ImageItemsSection';
 export * from './LineItem';
 export * from './LineItemLabelAbove';
 export * from './MetadataJSONField';

@@ -82,20 +82,6 @@ const BuyersPage = (): JSX.Element => {
       {content?.imageGridSection && (
         <ImageGridSection content={content?.imageGridSection} />
       )}
-      {content?.featuredSection && (
-        <FeaturedSection content={content?.featuredSection} />
-      )}
-      {projectsData?.allProjects?.nodes && (
-        <div className="topo-background">
-          <MoreProjectsSection
-            classes={{ title: styles.title }}
-            title={'Projects'}
-            projects={projectsData?.allProjects?.nodes.filter(project => {
-              return !!project?.onChainId || !!project?.handle;
-            })}
-          />
-        </div>
-      )}
       {content?.faqSection && (
         <HeroAction
           classes={{ section: styles.bottomHeroSection }}

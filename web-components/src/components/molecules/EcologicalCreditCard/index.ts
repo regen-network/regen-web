@@ -1,1 +1,1 @@
-export { Dummy as default } from './EcologicalCreditCard';
+export { EcologicalCreditCard as default } from './EcologicalCreditCard';

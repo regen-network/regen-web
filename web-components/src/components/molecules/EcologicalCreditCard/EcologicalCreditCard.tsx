@@ -15,7 +15,7 @@ import {
   EcologicalCreditTypeType,
 } from './EcologicalCreditCard.types';
 
-export interface Props {
+export interface EcologicalCreditCardProps {
   type: EcologicalCreditTypeType;
   image: ImgType;
   title: string;
@@ -27,7 +27,7 @@ export interface Props {
     text: string;
     href: string;
   };
-  linkComponent: LinkComponentProp;
+  linkComponent?: LinkComponentProp;
   sx?: SxProps<Theme>;
 }
 
@@ -42,7 +42,7 @@ const EcologicalCreditCard = ({
   button,
   linkComponent,
   sx = [],
-}: Props): JSX.Element => {
+}: EcologicalCreditCardProps): JSX.Element => {
   return (
     <Card
       sx={[

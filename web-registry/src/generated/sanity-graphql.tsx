@@ -2591,6 +2591,7 @@ export type ImageGridItem = Document & {
   header?: Maybe<Scalars['String']>;
   descriptionRaw?: Maybe<Scalars['JSON']>;
   image?: Maybe<CustomImage>;
+  button?: Maybe<Button>;
 };
 
 export type ImageGridItemFilter = {
@@ -2604,6 +2605,7 @@ export type ImageGridItemFilter = {
   _key?: Maybe<StringFilter>;
   header?: Maybe<StringFilter>;
   image?: Maybe<CustomImageFilter>;
+  button?: Maybe<ButtonFilter>;
 };
 
 export type ImageGridItemSorting = {
@@ -2615,6 +2617,7 @@ export type ImageGridItemSorting = {
   _key?: Maybe<SortOrder>;
   header?: Maybe<SortOrder>;
   image?: Maybe<CustomImageSorting>;
+  button?: Maybe<ButtonSorting>;
 };
 
 export type ImageGridSection = {
@@ -6952,6 +6955,9 @@ export type ImageGridItemFieldsFragment = (
   & { image?: Maybe<(
     { __typename?: 'CustomImage' }
     & CustomImageFieldsFragment
+  )>, button?: Maybe<(
+    { __typename?: 'Button' }
+    & ButtonFieldsFragment
   )> }
 );
 
@@ -7321,8 +7327,12 @@ export const ImageGridItemFieldsFragmentDoc = gql`
   image {
     ...customImageFields
   }
+  button {
+    ...buttonFields
+  }
 }
-    ${CustomImageFieldsFragmentDoc}`;
+    ${CustomImageFieldsFragmentDoc}
+${ButtonFieldsFragmentDoc}`;
 export const ImageGridSectionFieldsFragmentDoc = gql`
     fragment imageGridSectionFields on ImageGridSection {
   backgroundImage {

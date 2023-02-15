@@ -22530,6 +22530,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "button",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Button",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -22656,6 +22668,18 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "button",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ButtonFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -22758,6 +22782,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "CustomImageSorting",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "button",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ButtonSorting",
               "ofType": null
             },
             "defaultValue": null,

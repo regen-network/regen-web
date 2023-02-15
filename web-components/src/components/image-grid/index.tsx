@@ -1,100 +1,32 @@
 import Grid from '@mui/material/Grid';
-import { makeStyles } from 'tss-react/mui';
+import { Box } from '@mui/system';
 
+import ContainedButton from '../buttons/ContainedButton';
+import { LinkComponentProp } from '../tabs/IconTabs';
 import { Body, Title } from '../typography';
+import { useImageGridStyles } from './imageGrid.styles';
 
 export interface ImageGridProps {
   img: JSX.Element; // using pure img tag or gatsby-image
   title: string;
   description: string | JSX.Element;
   even: boolean;
+  linkComponent?: LinkComponentProp;
+  button?: {
+    text: string;
+    href?: string;
+  };
 }
-
-export interface StyleProps {
-  even: boolean;
-}
-
-const useStyles = makeStyles<StyleProps>()((theme, { even }) => ({
-  root: {
-    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
-      flexDirection: even ? 'row-reverse' : 'row',
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      flexDirection: 'column',
-    },
-  },
-  text: {
-    [theme.breakpoints.up('md')]: {
-      paddingLeft: even ? theme.spacing(37.5) : theme.spacing(10),
-      paddingRight: even ? theme.spacing(10) : theme.spacing(37.5),
-    },
-    [theme.breakpoints.down('md')]: {
-      paddingLeft: theme.spacing(10),
-      paddingRight: theme.spacing(10),
-    },
-    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
-      flexGrow: 0,
-      flexBasis: '50%',
-      maxWidth: '50%',
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingRight: theme.spacing(4),
-      paddingLeft: theme.spacing(4),
-    },
-    [theme.breakpoints.up('xl')]: {
-      paddingLeft: even ? theme.spacing(5) : theme.spacing(10),
-      paddingRight: even ? theme.spacing(10) : theme.spacing(5),
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      paddingTop: theme.spacing(10),
-      paddingBottom: theme.spacing(18.25),
-      flexGrow: 0,
-      flexBasis: '100%',
-      maxWidth: '100%',
-    },
-  },
-  title: {
-    [theme.breakpoints.up('sm')]: {
-      lineHeight: '130%',
-      marginBottom: theme.spacing(3),
-      marginTop: theme.spacing(4),
-    },
-    [theme.breakpoints.down('sm')]: {
-      lineHeight: '145%',
-      marginBottom: theme.spacing(3.5),
-    },
-    [theme.breakpoints.between('md', 'xl')]: {
-      maxWidth: theme.spacing(115.5),
-    },
-    [theme.breakpoints.up('xl')]: {
-      maxWidth: theme.spacing(145),
-    },
-    marginLeft: even ? 'auto' : 0,
-    marginRight: even ? 0 : 'auto',
-  },
-  image: {
-    height: '100%',
-    width: '100%',
-    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
-      flexGrow: 0,
-      flexBasis: '50%',
-      maxWidth: '50%',
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      flexGrow: 0,
-      flexBasis: '100%',
-      maxWidth: '100%',
-    },
-  },
-}));
 
 export default function ImageGrid({
   img,
   title,
   description,
   even,
+  button,
+  linkComponent,
 }: ImageGridProps): JSX.Element {
-  const { classes } = useStyles({ even });
+  const { classes } = useImageGridStyles({ even });
 
   return (
     <Grid container alignItems="center" className={classes.root}>
@@ -105,9 +37,7 @@ export default function ImageGrid({
         <Title variant="h2" className={classes.title}>
           {title}
         </Title>
-        <Body
-          as="div"
-          size="xl"
+        <Box
           sx={theme => ({
             ml: even ? 'auto' : 0,
             mr: even ? 0 : 'auto',
@@ -119,8 +49,19 @@ export default function ImageGrid({
             },
           })}
         >
-          {description}
-        </Body>
+          <Body as="div" size="xl">
+            {description}
+          </Body>
+          {button?.text && (
+            <ContainedButton
+              href={button.href}
+              LinkComponent={linkComponent}
+              sx={{ mt: 4.5 }}
+            >
+              {button.text}
+            </ContainedButton>
+          )}
+        </Box>
       </Grid>
     </Grid>
   );

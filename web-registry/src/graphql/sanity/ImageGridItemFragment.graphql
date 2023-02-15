@@ -4,4 +4,7 @@ fragment imageGridItemFields on ImageGridItem {
   image {
     ...customImageFields
   }
+  button {
+    ...buttonFields
+  }
 }

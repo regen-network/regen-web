@@ -1,6 +1,9 @@
-import EcologicalCreditCardsSection from 'web-components/lib/components/organisms/EcologicalCreditCardsSection';
+import EcologicalCreditCard from 'web-components/lib/components/molecules/EcologicalCreditCard';
+import Section from 'web-components/lib/components/organisms/Section';
 
 import { AllBuyersPageQuery } from 'generated/sanity-graphql';
+
+import { Link } from 'components/atoms';
 
 import { normalizeEcologicalCreditCards } from './normalizers/normalizeEcologicalCreditCards';
 
@@ -11,12 +14,19 @@ interface Props {
 const BuyersEcologicalCreditCardsSection: React.FC<
   React.PropsWithChildren<Props>
 > = ({ content }) => {
+  const cards = normalizeEcologicalCreditCards({ content });
+
   return (
-    <EcologicalCreditCardsSection
-      title={content?.title ?? ''}
-      description={content?.descriptionRaw}
-      cards={normalizeEcologicalCreditCards({ content })}
-    />
+    <Section title={content?.title ?? ''} description={content?.descriptionRaw}>
+      {cards.map(card => (
+        <EcologicalCreditCard
+          key={card.title}
+          linkComponent={Link}
+          sx={{ mb: { xs: 5, sm: 7.5 } }}
+          {...card}
+        />
+      ))}
+    </Section>
   );
 };
 

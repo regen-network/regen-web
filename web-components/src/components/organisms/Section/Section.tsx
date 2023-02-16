@@ -1,29 +1,20 @@
+import { ReactNode } from 'react';
 import { Box, SxProps } from '@mui/material';
 import ReactHtmlParser from 'html-react-parser';
 
-import { BlockContent } from '../../../components/block-content';
-import { EcologicalCreditCardType } from '../../../components/molecules/EcologicalCreditCard/EcologicalCreditCard.types';
-import { LinkComponentProp } from '../../../components/tabs/IconTabs';
-import { Body, Title } from '../../../components/typography';
 import { Theme } from '../../../theme/muiTheme';
 import { sxToArray } from '../../../utils/mui/sxToArray';
-import EcologicalCreditCard from '../../molecules/EcologicalCreditCard';
+import { BlockContent } from '../../block-content';
+import { Body, Title } from '../../typography';
 
-export interface EcologicalCreditCardsSectionProps {
+export interface SectionProps {
   title?: string | JSX.Element;
   description?: string | JSX.Element;
-  cards?: EcologicalCreditCardType[];
-  linkComponent?: LinkComponentProp;
+  children?: ReactNode;
   sx?: SxProps<Theme>;
 }
 
-const EcologicalCreditCardsSection = ({
-  title,
-  description,
-  cards = [],
-  linkComponent,
-  sx,
-}: EcologicalCreditCardsSectionProps) => {
+const Section = ({ title, description, children, sx }: SectionProps) => {
   return (
     <Box
       sx={[
@@ -62,16 +53,9 @@ const EcologicalCreditCardsSection = ({
           </Body>
         )}
       </Box>
-      {cards.map(card => (
-        <EcologicalCreditCard
-          key={card.title}
-          {...card}
-          linkComponent={linkComponent}
-          sx={{ mb: { xs: 5, sm: 7.5 } }}
-        />
-      ))}
+      {children}
     </Box>
   );
 };
 
-export { EcologicalCreditCardsSection };
+export { Section };

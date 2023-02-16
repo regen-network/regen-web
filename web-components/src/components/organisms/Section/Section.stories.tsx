@@ -5,7 +5,7 @@ import { Section } from './Section';
 import { sectionCardsMock } from './Section.mock';
 
 export default {
-  title: 'Section',
+  title: 'organisms/Section',
   component: Section,
 } as ComponentMeta<typeof Section>;
 

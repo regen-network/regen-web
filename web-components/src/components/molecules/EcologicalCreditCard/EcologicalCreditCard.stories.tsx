@@ -5,7 +5,7 @@ import { EcologicalCreditCard } from './EcologicalCreditCard';
 import { EcologicalCreditCardMock } from './EcologicalCreditCard.mock';
 
 export default {
-  title: 'EcologicalCreditCard',
+  title: 'molecules/EcologicalCreditCard',
   component: EcologicalCreditCard,
 } as ComponentMeta<typeof EcologicalCreditCard>;
 

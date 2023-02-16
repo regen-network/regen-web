@@ -5,28 +5,12 @@ import ContainedButton from '../../../components/buttons/ContainedButton';
 import { LinkComponentProp } from '../../../components/tabs/IconTabs';
 import { Body, Title } from '../../../components/typography';
 import { pxToRem, Theme } from '../../../theme/muiTheme';
-import { ImgType } from '../../../types/shared/IconType';
 import CardRibbon from '../../atoms/CardRibbon';
 import { EcologicalCreditCardInfo } from './EcologicalCreditCard.Info';
 import { EcologicalCreditCardItemList } from './EcologicalCreditCard.ItemList';
-import {
-  EcologicalCreditCardItemListType,
-  EcologicalCreditInfoType,
-  EcologicalCreditTypeType,
-} from './EcologicalCreditCard.types';
+import { EcologicalCreditCardType } from './EcologicalCreditCard.types';
 
-export interface EcologicalCreditCardProps {
-  type: EcologicalCreditTypeType;
-  image: ImgType;
-  title: string;
-  infos: EcologicalCreditInfoType;
-  description: string;
-  offsetMethodList: EcologicalCreditCardItemListType;
-  projectActivitesList: EcologicalCreditCardItemListType;
-  button: {
-    text: string;
-    href: string;
-  };
+export interface EcologicalCreditCardProps extends EcologicalCreditCardType {
   linkComponent?: LinkComponentProp;
   sx?: SxProps<Theme>;
 }

@@ -9,16 +9,14 @@ import SEO from 'web-components/lib/components/seo';
 
 import buyersHero from '../../assets/buyers-top.jpg';
 import {
-  FeaturedSection,
   HeroAction,
   HeroTitle,
   ImageGridSection,
   ImageItemsSection,
 } from '../../components/molecules';
-import { MoreProjectsSection } from '../../components/organisms';
-import { useMoreProjectsQuery } from '../../generated/graphql';
 import { useAllBuyersPageQuery } from '../../generated/sanity-graphql';
 import { client } from '../../lib/clients/sanity';
+import { BuyersEcologicalCreditCardsSection } from './Buyers.EcologicalCreditCardsSection';
 import { useBuyersStyles } from './Buyers.styles';
 
 const BuyersPage = (): JSX.Element => {
@@ -27,7 +25,6 @@ const BuyersPage = (): JSX.Element => {
   const [open, setOpen] = useState(false);
   const { data } = useAllBuyersPageQuery({ client });
   const content = data?.allBuyersPage?.[0];
-  const { data: projectsData } = useMoreProjectsQuery();
 
   const siteMetadata = {
     title: 'For Buyers',
@@ -81,6 +78,11 @@ const BuyersPage = (): JSX.Element => {
       )}
       {content?.imageGridSection && (
         <ImageGridSection content={content?.imageGridSection} />
+      )}
+      {content?.ecologicalCreditCardsSection && (
+        <BuyersEcologicalCreditCardsSection
+          content={content?.ecologicalCreditCardsSection}
+        />
       )}
       {content?.faqSection && (
         <HeroAction

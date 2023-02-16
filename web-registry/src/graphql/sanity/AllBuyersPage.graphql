@@ -9,8 +9,8 @@ query allBuyersPage {
     imageGridSection {
       ...imageGridSectionFields
     }
-    featuredSection {
-      ...featuredSectionFields
+    ecologicalCreditCardsSection {
+      ...ecologicalCreditCardsSectionFields
     }
     faqSection {
       ...bottomBannerFields

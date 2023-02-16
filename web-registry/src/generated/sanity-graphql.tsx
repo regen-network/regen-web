@@ -308,7 +308,7 @@ export type BuyersPage = Document & {
   heroSection?: Maybe<HeroSection>;
   ecologicalCreditsSection?: Maybe<ImageItemsSection>;
   imageGridSection?: Maybe<ImageGridSection>;
-  featuredSection?: Maybe<FeaturedSection>;
+  ecologicalCreditCardsSection?: Maybe<EcologicalCreditCardsSection>;
   faqSection?: Maybe<BottomBanner>;
   footerButtonText?: Maybe<Scalars['String']>;
   metadata?: Maybe<PageMetadata>;
@@ -326,7 +326,7 @@ export type BuyersPageFilter = {
   heroSection?: Maybe<HeroSectionFilter>;
   ecologicalCreditsSection?: Maybe<ImageItemsSectionFilter>;
   imageGridSection?: Maybe<ImageGridSectionFilter>;
-  featuredSection?: Maybe<FeaturedSectionFilter>;
+  ecologicalCreditCardsSection?: Maybe<EcologicalCreditCardsSectionFilter>;
   faqSection?: Maybe<BottomBannerFilter>;
   footerButtonText?: Maybe<StringFilter>;
   metadata?: Maybe<PageMetadataFilter>;
@@ -342,6 +342,7 @@ export type BuyersPageSorting = {
   heroSection?: Maybe<HeroSectionSorting>;
   ecologicalCreditsSection?: Maybe<ImageItemsSectionSorting>;
   imageGridSection?: Maybe<ImageGridSectionSorting>;
+  ecologicalCreditCardsSection?: Maybe<EcologicalCreditCardsSectionSorting>;
   faqSection?: Maybe<BottomBannerSorting>;
   footerButtonText?: Maybe<SortOrder>;
   metadata?: Maybe<PageMetadataSorting>;
@@ -1401,6 +1402,61 @@ export type CreditClassSorting = {
   landSteward?: Maybe<LandStewardSorting>;
 };
 
+export type CreditInfos = {
+  __typename?: 'CreditInfos';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  price?: Maybe<Scalars['String']>;
+  count?: Maybe<Scalars['String']>;
+};
+
+export type CreditInfosFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  country?: Maybe<StringFilter>;
+  price?: Maybe<StringFilter>;
+  count?: Maybe<StringFilter>;
+};
+
+export type CreditInfosSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  country?: Maybe<SortOrder>;
+  price?: Maybe<SortOrder>;
+  count?: Maybe<SortOrder>;
+};
+
+export type CreditType = Document & {
+  __typename?: 'CreditType';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  image?: Maybe<Image>;
+};
+
+export type CreditTypeFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  name?: Maybe<StringFilter>;
+  image?: Maybe<ImageFilter>;
+};
+
 export type CreditTypeSection = {
   __typename?: 'CreditTypeSection';
   _key?: Maybe<Scalars['String']>;
@@ -1428,6 +1484,17 @@ export type CreditTypeSectionSorting = {
   title?: Maybe<SortOrder>;
   subtitleTop?: Maybe<SortOrder>;
   subtitleBottom?: Maybe<SortOrder>;
+};
+
+export type CreditTypeSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  name?: Maybe<SortOrder>;
+  image?: Maybe<ImageSorting>;
 };
 
 export type CustomImage = {
@@ -1803,6 +1870,81 @@ export type DualImageSectionSorting = {
   title?: Maybe<SortOrder>;
   left?: Maybe<ImageBoldTextLabelSorting>;
   right?: Maybe<ImageBoldTextLabelSorting>;
+};
+
+export type EcologicalCreditCard = Document & {
+  __typename?: 'EcologicalCreditCard';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  image?: Maybe<CustomImage>;
+  type?: Maybe<CreditType>;
+  creditInfos?: Maybe<CreditInfos>;
+  offsetMethods?: Maybe<Array<Maybe<OffsetMethod>>>;
+  projectActivities?: Maybe<Array<Maybe<ProjectActivity>>>;
+  button?: Maybe<Button>;
+};
+
+export type EcologicalCreditCardFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  description?: Maybe<StringFilter>;
+  image?: Maybe<CustomImageFilter>;
+  type?: Maybe<CreditTypeFilter>;
+  creditInfos?: Maybe<CreditInfosFilter>;
+  button?: Maybe<ButtonFilter>;
+};
+
+export type EcologicalCreditCardSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  description?: Maybe<SortOrder>;
+  image?: Maybe<CustomImageSorting>;
+  creditInfos?: Maybe<CreditInfosSorting>;
+  button?: Maybe<ButtonSorting>;
+};
+
+export type EcologicalCreditCardsSection = {
+  __typename?: 'EcologicalCreditCardsSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+  cards?: Maybe<Array<Maybe<EcologicalCreditCard>>>;
+};
+
+export type EcologicalCreditCardsSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+};
+
+export type EcologicalCreditCardsSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
 };
 
 export type EcologicalImpact = Document & {
@@ -3443,6 +3585,47 @@ export type NctTokenSectionSorting = {
   detailButton2?: Maybe<ButtonSorting>;
 };
 
+export type OffsetMethod = Document & {
+  __typename?: 'OffsetMethod';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  icon?: Maybe<Image>;
+};
+
+export type OffsetMethodFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  name?: Maybe<StringFilter>;
+  icon?: Maybe<ImageFilter>;
+};
+
+export type OffsetMethodSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  name?: Maybe<SortOrder>;
+  icon?: Maybe<ImageSorting>;
+};
+
 export type PageMetadata = {
   __typename?: 'PageMetadata';
   _key?: Maybe<Scalars['String']>;
@@ -3788,6 +3971,47 @@ export type Project = {
   projectName?: Maybe<Scalars['String']>;
   /** on-chain project id */
   projectId?: Maybe<Scalars['String']>;
+};
+
+export type ProjectActivity = Document & {
+  __typename?: 'ProjectActivity';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  icon?: Maybe<Image>;
+};
+
+export type ProjectActivityFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  name?: Maybe<StringFilter>;
+  icon?: Maybe<ImageFilter>;
+};
+
+export type ProjectActivitySorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  name?: Maybe<SortOrder>;
+  icon?: Maybe<ImageSorting>;
 };
 
 export type ProjectFilter = {
@@ -4189,10 +4413,12 @@ export type RootQuery = {
   CreateCreditClassPage?: Maybe<CreateCreditClassPage>;
   CreateMethodologyPage?: Maybe<CreateMethodologyPage>;
   CreditClass?: Maybe<CreditClass>;
+  CreditType?: Maybe<CreditType>;
   DevelopersPage?: Maybe<DevelopersPage>;
   Doc?: Maybe<Doc>;
   EcologicalImpact?: Maybe<EcologicalImpact>;
   EcologicalOutcome?: Maybe<EcologicalOutcome>;
+  EcologicalCreditCard?: Maybe<EcologicalCreditCard>;
   Faq?: Maybe<Faq>;
   FaqPage?: Maybe<FaqPage>;
   FeaturedSection?: Maybe<FeaturedSection>;
@@ -4209,8 +4435,10 @@ export type RootQuery = {
   Methodology?: Maybe<Methodology>;
   MethodologyReviewProcessPage?: Maybe<MethodologyReviewProcessPage>;
   NctPage?: Maybe<NctPage>;
+  OffsetMethod?: Maybe<OffsetMethod>;
   PartnersPage?: Maybe<PartnersPage>;
   PresskitPage?: Maybe<PresskitPage>;
+  ProjectActivity?: Maybe<ProjectActivity>;
   ProjectPage?: Maybe<ProjectPage>;
   ProjectsPage?: Maybe<ProjectsPage>;
   RegenTeamMember?: Maybe<RegenTeamMember>;
@@ -4238,10 +4466,12 @@ export type RootQuery = {
   allCreateCreditClassPage: Array<CreateCreditClassPage>;
   allCreateMethodologyPage: Array<CreateMethodologyPage>;
   allCreditClass: Array<CreditClass>;
+  allCreditType: Array<CreditType>;
   allDevelopersPage: Array<DevelopersPage>;
   allDoc: Array<Doc>;
   allEcologicalImpact: Array<EcologicalImpact>;
   allEcologicalOutcome: Array<EcologicalOutcome>;
+  allEcologicalCreditCard: Array<EcologicalCreditCard>;
   allFaq: Array<Faq>;
   allFaqPage: Array<FaqPage>;
   allFeaturedSection: Array<FeaturedSection>;
@@ -4258,8 +4488,10 @@ export type RootQuery = {
   allMethodology: Array<Methodology>;
   allMethodologyReviewProcessPage: Array<MethodologyReviewProcessPage>;
   allNctPage: Array<NctPage>;
+  allOffsetMethod: Array<OffsetMethod>;
   allPartnersPage: Array<PartnersPage>;
   allPresskitPage: Array<PresskitPage>;
+  allProjectActivity: Array<ProjectActivity>;
   allProjectPage: Array<ProjectPage>;
   allProjectsPage: Array<ProjectsPage>;
   allRegenTeamMember: Array<RegenTeamMember>;
@@ -4330,6 +4562,11 @@ export type RootQueryCreditClassArgs = {
 };
 
 
+export type RootQueryCreditTypeArgs = {
+  id: Scalars['ID'];
+};
+
+
 export type RootQueryDevelopersPageArgs = {
   id: Scalars['ID'];
 };
@@ -4346,6 +4583,11 @@ export type RootQueryEcologicalImpactArgs = {
 
 
 export type RootQueryEcologicalOutcomeArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryEcologicalCreditCardArgs = {
   id: Scalars['ID'];
 };
 
@@ -4430,12 +4672,22 @@ export type RootQueryNctPageArgs = {
 };
 
 
+export type RootQueryOffsetMethodArgs = {
+  id: Scalars['ID'];
+};
+
+
 export type RootQueryPartnersPageArgs = {
   id: Scalars['ID'];
 };
 
 
 export type RootQueryPresskitPageArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryProjectActivityArgs = {
   id: Scalars['ID'];
 };
 
@@ -4605,6 +4857,14 @@ export type RootQueryAllCreditClassArgs = {
 };
 
 
+export type RootQueryAllCreditTypeArgs = {
+  where?: Maybe<CreditTypeFilter>;
+  sort?: Maybe<Array<CreditTypeSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
 export type RootQueryAllDevelopersPageArgs = {
   where?: Maybe<DevelopersPageFilter>;
   sort?: Maybe<Array<DevelopersPageSorting>>;
@@ -4632,6 +4892,14 @@ export type RootQueryAllEcologicalImpactArgs = {
 export type RootQueryAllEcologicalOutcomeArgs = {
   where?: Maybe<EcologicalOutcomeFilter>;
   sort?: Maybe<Array<EcologicalOutcomeSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllEcologicalCreditCardArgs = {
+  where?: Maybe<EcologicalCreditCardFilter>;
+  sort?: Maybe<Array<EcologicalCreditCardSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -4765,6 +5033,14 @@ export type RootQueryAllNctPageArgs = {
 };
 
 
+export type RootQueryAllOffsetMethodArgs = {
+  where?: Maybe<OffsetMethodFilter>;
+  sort?: Maybe<Array<OffsetMethodSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
 export type RootQueryAllPartnersPageArgs = {
   where?: Maybe<PartnersPageFilter>;
   sort?: Maybe<Array<PartnersPageSorting>>;
@@ -4776,6 +5052,14 @@ export type RootQueryAllPartnersPageArgs = {
 export type RootQueryAllPresskitPageArgs = {
   where?: Maybe<PresskitPageFilter>;
   sort?: Maybe<Array<PresskitPageSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllProjectActivityArgs = {
+  where?: Maybe<ProjectActivityFilter>;
+  sort?: Maybe<Array<ProjectActivitySorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -6420,9 +6704,9 @@ export type AllBuyersPageQuery = (
     )>, imageGridSection?: Maybe<(
       { __typename?: 'ImageGridSection' }
       & ImageGridSectionFieldsFragment
-    )>, featuredSection?: Maybe<(
-      { __typename?: 'FeaturedSection' }
-      & FeaturedSectionFieldsFragment
+    )>, ecologicalCreditCardsSection?: Maybe<(
+      { __typename?: 'EcologicalCreditCardsSection' }
+      & EcologicalCreditCardsSectionFieldsFragment
     )>, faqSection?: Maybe<(
       { __typename?: 'BottomBanner' }
       & BottomBannerFieldsFragment
@@ -6877,6 +7161,71 @@ export type CustomImageFieldsFragment = (
   )> }
 );
 
+export type EcologicalCreditCardFieldsFragment = (
+  { __typename?: 'EcologicalCreditCard' }
+  & Pick<EcologicalCreditCard, 'title' | 'description'>
+  & { image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & Pick<CustomImage, 'imageHref' | 'imageAlt'>
+    & { image?: Maybe<(
+      { __typename?: 'Image' }
+      & { asset?: Maybe<(
+        { __typename?: 'SanityImageAsset' }
+        & Pick<SanityImageAsset, 'url'>
+      )> }
+    )> }
+  )>, type?: Maybe<(
+    { __typename?: 'CreditType' }
+    & Pick<CreditType, 'name'>
+    & { image?: Maybe<(
+      { __typename?: 'Image' }
+      & { asset?: Maybe<(
+        { __typename?: 'SanityImageAsset' }
+        & Pick<SanityImageAsset, 'url'>
+      )> }
+    )> }
+  )>, creditInfos?: Maybe<(
+    { __typename?: 'CreditInfos' }
+    & Pick<CreditInfos, 'country' | 'price' | 'count'>
+  )>, offsetMethods?: Maybe<Array<Maybe<(
+    { __typename?: 'OffsetMethod' }
+    & Pick<OffsetMethod, 'name'>
+    & { icon?: Maybe<(
+      { __typename?: 'Image' }
+      & { asset?: Maybe<(
+        { __typename?: 'SanityImageAsset' }
+        & Pick<SanityImageAsset, 'url'>
+      )> }
+    )> }
+  )>>>, projectActivities?: Maybe<Array<Maybe<(
+    { __typename?: 'ProjectActivity' }
+    & Pick<ProjectActivity, 'name'>
+    & { icon?: Maybe<(
+      { __typename?: 'Image' }
+      & { asset?: Maybe<(
+        { __typename?: 'SanityImageAsset' }
+        & Pick<SanityImageAsset, 'url'>
+      )> }
+    )> }
+  )>>>, button?: Maybe<(
+    { __typename?: 'Button' }
+    & Pick<Button, 'buttonText'>
+    & { buttonLink?: Maybe<(
+      { __typename?: 'Link' }
+      & Pick<Link, 'buttonHref'>
+    )> }
+  )> }
+);
+
+export type EcologicalCreditCardsSectionFieldsFragment = (
+  { __typename?: 'EcologicalCreditCardsSection' }
+  & Pick<EcologicalCreditCardsSection, 'title' | 'descriptionRaw'>
+  & { cards?: Maybe<Array<Maybe<(
+    { __typename?: 'EcologicalCreditCard' }
+    & EcologicalCreditCardFieldsFragment
+  )>>> }
+);
+
 export type EcologicalImpactRelationFieldsFragment = (
   { __typename?: 'EcologicalImpactRelation' }
   & Pick<EcologicalImpactRelation, 'primary'>
@@ -7245,6 +7594,65 @@ export const BottomBannerFieldsFragmentDoc = gql`
 }
     ${ButtonFieldsFragmentDoc}
 ${CustomImageFieldsFragmentDoc}`;
+export const EcologicalCreditCardFieldsFragmentDoc = gql`
+    fragment ecologicalCreditCardFields on EcologicalCreditCard {
+  title
+  description
+  image {
+    imageHref
+    imageAlt
+    image {
+      asset {
+        url
+      }
+    }
+  }
+  type {
+    name
+    image {
+      asset {
+        url
+      }
+    }
+  }
+  creditInfos {
+    country
+    price
+    count
+  }
+  offsetMethods {
+    name
+    icon {
+      asset {
+        url
+      }
+    }
+  }
+  projectActivities {
+    name
+    icon {
+      asset {
+        url
+      }
+    }
+  }
+  button {
+    buttonText
+    buttonLink {
+      buttonHref
+    }
+  }
+}
+    `;
+export const EcologicalCreditCardsSectionFieldsFragmentDoc = gql`
+    fragment ecologicalCreditCardsSectionFields on EcologicalCreditCardsSection {
+  title
+  descriptionRaw
+  cards {
+    ...ecologicalCreditCardFields
+  }
+}
+    ${EcologicalCreditCardFieldsFragmentDoc}`;
 export const EcologicalImpactRelationFieldsFragmentDoc = gql`
     fragment ecologicalImpactRelationFields on EcologicalImpactRelation {
   primary
@@ -7497,8 +7905,8 @@ export const AllBuyersPageDocument = gql`
     imageGridSection {
       ...imageGridSectionFields
     }
-    featuredSection {
-      ...featuredSectionFields
+    ecologicalCreditCardsSection {
+      ...ecologicalCreditCardsSectionFields
     }
     faqSection {
       ...bottomBannerFields
@@ -7512,7 +7920,7 @@ export const AllBuyersPageDocument = gql`
     ${HeroSectionFieldsFragmentDoc}
 ${ImageItemsSectionFieldsFragmentDoc}
 ${ImageGridSectionFieldsFragmentDoc}
-${FeaturedSectionFieldsFragmentDoc}
+${EcologicalCreditCardsSectionFieldsFragmentDoc}
 ${BottomBannerFieldsFragmentDoc}
 ${PageMetadataFieldsFragmentDoc}`;
 

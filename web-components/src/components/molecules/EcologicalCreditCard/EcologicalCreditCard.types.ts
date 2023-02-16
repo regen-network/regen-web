@@ -20,3 +20,17 @@ export type EcologicalCreditCardItemListType = {
   label: string;
   items: EcologicalCreditCardItemType[];
 };
+
+export type EcologicalCreditCardType = {
+  type: EcologicalCreditTypeType;
+  image: ImgType;
+  title: string;
+  infos: EcologicalCreditInfoType;
+  description: string;
+  offsetMethodList: EcologicalCreditCardItemListType;
+  projectActivitesList: EcologicalCreditCardItemListType;
+  button: {
+    text: string;
+    href: string;
+  };
+};

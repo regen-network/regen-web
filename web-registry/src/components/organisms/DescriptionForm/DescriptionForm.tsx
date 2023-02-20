@@ -5,7 +5,6 @@ import * as Yup from 'yup';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 
-import { ShaclGraphByUriQuery } from '../../../generated/graphql';
 import { useProjectEditContext } from '../../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../../molecules';
 import { DESCRIPTION_MAX_LENGTH } from './DescriptionForm.constants';
@@ -15,7 +14,6 @@ interface DescriptionFormProps {
   onNext?: () => void;
   onPrev?: () => void;
   initialValues?: DescriptionValues;
-  graphData?: ShaclGraphByUriQuery;
 }
 
 export interface DescriptionValues {

@@ -18,7 +18,6 @@ import {
   RoleField,
 } from 'components/molecules/RoleField/RoleField';
 
-import { ShaclGraphByUriQuery } from '../../generated/graphql';
 import getApiUri from '../../lib/apiUri';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../molecules';
@@ -28,7 +27,6 @@ interface RolesFormProps {
   onNext?: () => void;
   onPrev?: () => void;
   initialValues?: RolesValues;
-  graphData?: ShaclGraphByUriQuery;
   projectId?: string;
 }
 
@@ -52,13 +50,11 @@ const ProfileSchema = Yup.object().shape({
 });
 
 const RolesFormSchema = Yup.object().shape({
-  'regen:projectDeveloper': ProfileSchema,
   admin: RegenAddressSchema.required(requiredMessage),
 });
 
 const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   initialValues,
-  graphData,
   projectId,
   ...props
 }) => {

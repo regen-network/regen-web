@@ -102,23 +102,15 @@ export function getProjectCreateBaseData(
   };
 }
 
-/** getProjectBaseData returns the base JSON-LD metadata to validate a project,
+/** getProjectBaseData returns the base JSON-LD anchored metadata to validate a project,
  * with the appropriate @context and @type.
- * If a credit class id CXX is provided,
- * it returns the base anchored project metadata for this credit class,
- * i.e. with `regen:CXX-Project` type,
- * else it falls back to the generic `regen:Project-Page` type.
  */
 export function getProjectBaseData(
-  creditClassId?: string | null,
+  creditClassId: string | null,
 ): Partial<ProjectMetadataLD> {
   return {
-    '@context': creditClassId
-      ? ANCHORED_PROJECT_CONTEXT
-      : UNANCHORED_PROJECT_CONTEXT,
-    '@type': creditClassId
-      ? `regen:${creditClassId}-Project`
-      : 'regen:Project-Page',
+    '@context': ANCHORED_PROJECT_CONTEXT,
+    '@type': `regen:${creditClassId}-Project`,
   };
 }
 
@@ -129,10 +121,8 @@ export const getAreaUnit = (value?: qudtUnit): string => {
   return QUDT_UNIT_MAP[value] || '';
 };
 
-export function getProjectShapeIri(creditClassId?: string | null): string {
-  return creditClassId
-    ? `regen:${creditClassId}-ProjectShape`
-    : 'regen:ProjectPageShape';
+export function getProjectShapeIri(creditClassId: string): string {
+  return `regen:${creditClassId}-ProjectShape`;
 }
 
 function getFilteredProjectMetadata(

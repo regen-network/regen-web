@@ -31,19 +31,6 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
   });
   const [initialValues, setInitialValues] = useState<RolesValues>();
 
-  // TODO validation regen-registry/issues/1501
-  // const creditClassId = isEdit
-  //   ? onChainProject?.classId
-  //   : metadata?.['regen:creditClassId'];
-  // const { data: graphData } = useShaclGraphByUriQuery({
-  //   // do not fetch SHACL Graph until we get the creditClassId
-  //   // this prevents from fetching this twice
-  //   skip: !creditClassId,
-  //   variables: {
-  //     uri: getProjectShapeIri(creditClassId),
-  //   },
-  // });
-
   useEffect(() => {
     let values: RolesValues = {
       // In edit mode, use existing on chain project admin

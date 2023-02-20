@@ -1,6 +1,7 @@
 import React from 'react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Field, Form, Formik } from 'formik';
+import isEmpty from 'lodash/isEmpty';
 import * as Yup from 'yup';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -16,7 +17,9 @@ export interface ProjectLocationFormValues {
 }
 
 const ProjectLocationFormSchema = Yup.object().shape({
-  'schema:location': Yup.object().required(requiredMessage),
+  'schema:location': Yup.object()
+    .test('is-not-empty', requiredMessage, value => !isEmpty(value))
+    .required(requiredMessage),
 });
 
 const ProjectLocationForm: React.FC<
@@ -41,6 +44,7 @@ const ProjectLocationForm: React.FC<
       initialValues={{
         'schema:location': initialValues?.['schema:location'] || {},
       }}
+      validateOnMount
       validationSchema={ProjectLocationFormSchema}
       onSubmit={async (values, { setTouched }) => {
         await submit({ values });
@@ -48,7 +52,9 @@ const ProjectLocationForm: React.FC<
         if (isEdit && confirmSave) confirmSave();
       }}
     >
-      {({ submitForm, isValid, isSubmitting, dirty }) => {
+      {({ submitForm, isValid, isSubmitting, dirty, errors, values }) => {
+        console.log('errors', errors);
+        console.log('values', values);
         return (
           <Form>
             <OnBoardingCard>

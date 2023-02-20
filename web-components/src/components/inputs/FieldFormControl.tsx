@@ -45,6 +45,7 @@ const useStyles = makeStyles<StyleProps>()((theme, { error }) => ({
     fontFamily: '"Lato",-apple-system,sans-serif',
     fontWeight: 'bold',
     visibility: error ? 'visible' : 'hidden',
+    whiteSpace: 'pre-wrap',
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(3.5),
     },

@@ -13,6 +13,7 @@ type Props = {
   graphData?: ShaclGraphByUriQuery;
   onNext?: () => void;
   onPrev?: () => void;
+  creditClassId?: string;
 };
 
 export const ProjectMetadataSelectedForm = ({
@@ -22,6 +23,7 @@ export const ProjectMetadataSelectedForm = ({
   submit,
   onNext,
   onPrev,
+  creditClassId,
 }: Props): JSX.Element => (
   // isVCS ? (
   //   // TODO https://github.com/regen-network/regen-registry/issues/908
@@ -34,6 +36,7 @@ export const ProjectMetadataSelectedForm = ({
     submit={submit}
     initialValues={metadata}
     graphData={graphData}
+    creditClassId={creditClassId}
     onNext={onNext}
     onPrev={onPrev}
   />

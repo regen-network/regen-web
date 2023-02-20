@@ -31,6 +31,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     },
     [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(17.5),
+      paddingBottom: theme.spacing(20),
     },
   },
   title: {
@@ -53,13 +54,15 @@ const useStyles = makeStyles()((theme: Theme) => ({
     marginLeft: theme.spacing(-4),
     marginRight: theme.spacing(-4),
     overflowX: 'auto',
-    minHeight: theme.spacing(104),
     '&::-webkit-scrollbar': {
       display: 'none',
     },
   },
   item: {
     minWidth: theme.spacing(73),
+    '& > div': {
+      height: '100%',
+    },
     [theme.breakpoints.up('sm')]: {
       margin: theme.spacing(0, 1.875),
     },

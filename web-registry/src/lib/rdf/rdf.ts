@@ -1,7 +1,6 @@
 import Parser from '@rdfjs/parser-jsonld';
 import factory from 'rdf-ext';
 import DatasetExt from 'rdf-ext/lib/Dataset';
-import { ValidationReport } from 'rdf-validate-shacl';
 import { Readable } from 'stream';
 
 import {
@@ -36,11 +35,7 @@ async function loadDataset(jsonLd: string): Promise<DatasetExt> {
  * If an optional group is passed, it will validate against shapes
  * of the given sh:group.
  */
-export async function validate(
-  shapesJSON: any,
-  dataJSON: any,
-  group?: string,
-): ValidationReport {
+export async function validate(shapesJSON: any, dataJSON: any, group?: string) {
   const shapes = await loadDataset(JSON.stringify(shapesJSON));
   const data = await loadDataset(JSON.stringify(dataJSON));
   const result = await import('./rdf-lib').then(async ({ SHACLValidator }) => {

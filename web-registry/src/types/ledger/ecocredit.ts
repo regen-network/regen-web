@@ -19,6 +19,7 @@ export interface ClassProjectInfo {
   className?: string;
   projectName?: string;
   projectLocation?: string;
+  icon?: string;
 }
 
 export interface IBatchInfoWithClassProject

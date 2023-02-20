@@ -17,7 +17,9 @@ import {
 import { useAllBuyersPageQuery } from '../../generated/sanity-graphql';
 import { client } from '../../lib/clients/sanity';
 import { BuyersEcologicalCreditCardsSection } from './Buyers.EcologicalCreditCardsSection';
+import { BuyersFeaturedProjectsSection } from './Buyers.FeaturedProjectsSection';
 import { useBuyersStyles } from './Buyers.styles';
+import { useFetchProjectsByClass } from './hooks/useFetchProjectsByClass';
 
 const BuyersPage = (): JSX.Element => {
   const { classes: styles } = useBuyersStyles();
@@ -25,6 +27,11 @@ const BuyersPage = (): JSX.Element => {
   const [open, setOpen] = useState(false);
   const { data } = useAllBuyersPageQuery({ client });
   const content = data?.allBuyersPage?.[0];
+  const featuredProjectsCreditClassId =
+    content?.featuredProjectCardsSection?.cards?.[0]?.creditClass?.path;
+  const { projects, isLoadingProjects } = useFetchProjectsByClass({
+    classId: featuredProjectsCreditClassId,
+  });
 
   const siteMetadata = {
     title: 'For Buyers',
@@ -82,6 +89,12 @@ const BuyersPage = (): JSX.Element => {
       {content?.ecologicalCreditCardsSection && (
         <BuyersEcologicalCreditCardsSection
           content={content?.ecologicalCreditCardsSection}
+        />
+      )}
+      {content?.featuredProjectCardsSection && !isLoadingProjects && (
+        <BuyersFeaturedProjectsSection
+          projects={projects}
+          content={content?.featuredProjectCardsSection}
         />
       )}
       {content?.faqSection && (

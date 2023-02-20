@@ -39,7 +39,7 @@ export interface ProjectCardProps extends MediaCardProps {
   imageStorageBaseUrl?: string;
   apiServerUrl?: string;
   sx?: SxProps<Theme>;
-  track: Track;
+  track?: Track;
   isSoldOut?: boolean;
   creditsTooltip?: string;
 }
@@ -255,14 +255,15 @@ export function ProjectCard({
                   <OutlinedButton
                     onClick={event => {
                       event.stopPropagation();
-                      track<'buy1', Buy1Event>('buy1', {
-                        url: location.pathname,
-                        cardType: 'project',
-                        buttonLocation: 'projectCard',
-                        projectName: name,
-                        projectId: id,
-                        creditClassId,
-                      });
+                      track &&
+                        track<'buy1', Buy1Event>('buy1', {
+                          url: location.pathname,
+                          cardType: 'project',
+                          buttonLocation: 'projectCard',
+                          projectName: name,
+                          projectId: id,
+                          creditClassId,
+                        });
                       onButtonClick && onButtonClick();
                     }}
                     size="small"

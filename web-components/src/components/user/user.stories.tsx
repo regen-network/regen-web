@@ -12,7 +12,7 @@ const user: User = {
   location: 'South Melbourne, Victoria, Australia',
   type: 'ORGANIZATION',
   image:
-    'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
+    'https://cdn.sanity.io/images/jm12rn9t/staging/8b062589b6d8c6850a78bb13ead51d2f6f32b073-29x9.svg',
   description:
     'Odonata is a not-for-profit entity supporting biodiversity impact solutions.',
 };

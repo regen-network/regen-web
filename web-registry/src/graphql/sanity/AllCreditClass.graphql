@@ -10,6 +10,11 @@ query allCreditClass {
     image {
       ...customImageFields
     }
+    icon {
+      asset {
+        url
+      }
+    }
     ecologicalImpact {
       ...ecologicalImpactRelationFields
     }

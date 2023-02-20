@@ -10,50 +10,66 @@ import { Body, Title } from '../../typography';
 export interface SectionProps {
   title?: string | JSX.Element;
   description?: string | JSX.Element;
+  backgroundImage?: string;
   children?: ReactNode;
   sx?: SxProps<Theme>;
 }
 
-const Section = ({ title, description, children, sx }: SectionProps) => {
+const Section = ({
+  title,
+  description,
+  backgroundImage,
+  children,
+  sx,
+}: SectionProps) => {
   return (
     <Box
-      sx={[
-        {
-          maxWidth: theme => theme.breakpoints.values.lg,
-          margin: '0 auto',
-          py: { xs: 20, lg: 25 },
-          px: { xs: 3.75, lg: 0 },
-        },
-        ...sxToArray(sx),
-      ]}
+      sx={{
+        background: theme =>
+          backgroundImage
+            ? `url(${backgroundImage}), ${theme.palette.grey['50']}`
+            : 'none',
+      }}
     >
-      <Box>
-        <Title variant="h2" sx={{ textAlign: 'center' }}>
-          {title}
-        </Title>
-        {description && (
-          <Body
-            size="xl"
-            mobileSize="lg"
-            as="p"
-            textAlign="center"
-            sx={{
-              pt: [3.25, 7.75],
-              mb: { xs: 10, sm: 14 },
-              fontSize: { xs: 16, sm: 22 },
-              maxWidth: { xs: '100%', sm: 790 },
-              marginX: 'auto',
-            }}
-          >
-            {typeof description === 'string' ? (
-              ReactHtmlParser(description)
-            ) : (
-              <BlockContent content={description} />
-            )}
-          </Body>
-        )}
+      <Box
+        sx={[
+          {
+            maxWidth: theme => theme.breakpoints.values.lg,
+            margin: '0 auto',
+            py: { xs: 20, lg: 25 },
+            px: { xs: 3.75, lg: 0 },
+          },
+          ...sxToArray(sx),
+        ]}
+      >
+        <Box>
+          <Title variant="h2" sx={{ textAlign: 'center' }}>
+            {title}
+          </Title>
+          {description && (
+            <Body
+              size="xl"
+              mobileSize="lg"
+              as="p"
+              textAlign="center"
+              sx={{
+                pt: [3.25, 7.75],
+                mb: { xs: 10, sm: 14 },
+                fontSize: { xs: 16, sm: 22 },
+                maxWidth: { xs: '100%', sm: 790 },
+                marginX: 'auto',
+              }}
+            >
+              {typeof description === 'string' ? (
+                ReactHtmlParser(description)
+              ) : (
+                <BlockContent content={description} />
+              )}
+            </Body>
+          )}
+        </Box>
+        {children}
       </Box>
-      {children}
     </Box>
   );
 };

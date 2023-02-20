@@ -1,15 +1,17 @@
-import React from 'react';
 import { Link } from '@mui/material';
 import Grid, { GridDirection } from '@mui/material/Grid';
 
+import { BlockContent } from '../block-content';
 import OrganizationIcon from '../icons/OrganizationIcon';
 import { Body, Subtitle, Title } from '../typography';
 import { getMobileSize, getSizeVariant, TextSize } from '../typography/sizing';
 import UserAvatar from './UserAvatar';
+import { UserInfoTypes } from './UserInfo.types';
 
 export interface User {
   name: string;
-  type: string; // USER or ORGANIZATION
+  nameRaw?: string | JSX.Element;
+  type: UserInfoTypes;
   location?: string;
   image?: string | null;
   description?: string | null;
@@ -35,7 +37,10 @@ export default function UserInfo({
   const sizeVariant = getSizeVariant(size);
   const mobileSizeVariant = getSizeVariant(getMobileSize(size));
   const TitleComponent = titleComponent === 'title' ? Title : Subtitle;
-  const name = (
+  const { name: userName, nameRaw } = user;
+  const name = nameRaw ? (
+    <BlockContent content={nameRaw} />
+  ) : (
     <TitleComponent
       sx={({ typography }) => {
         return {
@@ -46,7 +51,7 @@ export default function UserInfo({
         };
       }}
     >
-      {user.name}
+      {userName}
     </TitleComponent>
   );
 
@@ -54,7 +59,7 @@ export default function UserInfo({
     <Grid container direction={direction} wrap="nowrap">
       <Grid item>
         <UserAvatar
-          alt={user.name}
+          alt={userName}
           src={user.image}
           href={user.link}
           size={size}

@@ -34,7 +34,7 @@ export default {
 
 const projectDeveloper: User = {
   name: 'Odonata',
-  type: 'user',
+  type: 'USER',
   location: 'South Melbourne',
   image:
     'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
@@ -44,7 +44,7 @@ const projectDeveloper: User = {
 
 const landSteward: User = {
   name: 'Ngarrindjeri Tribe',
-  type: 'user',
+  type: 'USER',
   location: 'Southern Australia',
   image: '/tribe.png',
   description:
@@ -130,7 +130,7 @@ export const projectCard = (): JSX.Element => (
       imgSrc="/coorong.png"
       tag="biodiversity"
       onClick={onClick}
-      registry={{ name: 'registry', type: 'type' }}
+      registry={{ name: 'registry', type: 'USER' }}
       sx={{ maxWidth: 338 }}
     />
   </Box>

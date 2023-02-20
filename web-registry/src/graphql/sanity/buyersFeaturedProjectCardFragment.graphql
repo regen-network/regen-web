@@ -3,6 +3,7 @@ fragment buyersFeaturedProjectCard on FeaturedProjectCard {
     projectId
   }
   creditClass {
+    path
     image {
       imageHref
       imageAlt

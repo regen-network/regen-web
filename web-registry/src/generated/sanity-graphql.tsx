@@ -6942,6 +6942,12 @@ export type AllCreditClassQuery = (
     )>, image?: Maybe<(
       { __typename?: 'CustomImage' }
       & CustomImageFieldsFragment
+    )>, icon?: Maybe<(
+      { __typename?: 'Image' }
+      & { asset?: Maybe<(
+        { __typename?: 'SanityImageAsset' }
+        & Pick<SanityImageAsset, 'url'>
+      )> }
     )>, ecologicalImpact?: Maybe<Array<Maybe<(
       { __typename?: 'EcologicalImpactRelation' }
       & EcologicalImpactRelationFieldsFragment
@@ -7372,46 +7378,6 @@ export type EcologicalOutcomeFieldsFragment = (
   )> }
 );
 
-export type BuyersFeaturedCardsSectionFieldsFragment = (
-  { __typename?: 'BuyersFeaturedProjectCardsSection' }
-  & Pick<BuyersFeaturedProjectCardsSection, 'title' | 'descriptionRaw'>
-  & { backgroundImage?: Maybe<(
-    { __typename?: 'CustomImage' }
-    & Pick<CustomImage, 'imageHref' | 'imageAlt'>
-    & { image?: Maybe<(
-      { __typename?: 'Image' }
-      & { asset?: Maybe<(
-        { __typename?: 'SanityImageAsset' }
-        & Pick<SanityImageAsset, 'url'>
-      )> }
-    )> }
-  )>, cards?: Maybe<Array<Maybe<(
-    { __typename?: 'FeaturedProjectCard' }
-    & BuyersFeaturedProjectCardFragment
-  )>>> }
-);
-
-export type BuyersFeaturedProjectCardFragment = (
-  { __typename?: 'FeaturedProjectCard' }
-  & { project?: Maybe<(
-    { __typename?: 'Project' }
-    & Pick<Project, 'projectId'>
-  )>, creditClass?: Maybe<(
-    { __typename?: 'CreditClass' }
-    & { image?: Maybe<(
-      { __typename?: 'CustomImage' }
-      & Pick<CustomImage, 'imageHref' | 'imageAlt'>
-      & { image?: Maybe<(
-        { __typename?: 'Image' }
-        & { asset?: Maybe<(
-          { __typename?: 'SanityImageAsset' }
-          & Pick<SanityImageAsset, 'url'>
-        )> }
-      )> }
-    )> }
-  )> }
-);
-
 export type FeaturedSectionFieldsFragment = (
   { __typename?: 'FeaturedSection' }
   & Pick<FeaturedSection, 'header' | 'titleRaw' | 'descriptionRaw'>
@@ -7658,6 +7624,47 @@ export type AllBridgePageQuery = (
   )> }
 );
 
+export type BuyersFeaturedCardsSectionFieldsFragment = (
+  { __typename?: 'BuyersFeaturedProjectCardsSection' }
+  & Pick<BuyersFeaturedProjectCardsSection, 'title' | 'descriptionRaw'>
+  & { backgroundImage?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & Pick<CustomImage, 'imageHref' | 'imageAlt'>
+    & { image?: Maybe<(
+      { __typename?: 'Image' }
+      & { asset?: Maybe<(
+        { __typename?: 'SanityImageAsset' }
+        & Pick<SanityImageAsset, 'url'>
+      )> }
+    )> }
+  )>, cards?: Maybe<Array<Maybe<(
+    { __typename?: 'FeaturedProjectCard' }
+    & BuyersFeaturedProjectCardFragment
+  )>>> }
+);
+
+export type BuyersFeaturedProjectCardFragment = (
+  { __typename?: 'FeaturedProjectCard' }
+  & { project?: Maybe<(
+    { __typename?: 'Project' }
+    & Pick<Project, 'projectId'>
+  )>, creditClass?: Maybe<(
+    { __typename?: 'CreditClass' }
+    & Pick<CreditClass, 'path'>
+    & { image?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & Pick<CustomImage, 'imageHref' | 'imageAlt'>
+      & { image?: Maybe<(
+        { __typename?: 'Image' }
+        & { asset?: Maybe<(
+          { __typename?: 'SanityImageAsset' }
+          & Pick<SanityImageAsset, 'url'>
+        )> }
+      )> }
+    )> }
+  )> }
+);
+
 export type TagFieldsFragment = (
   { __typename?: 'Tag' }
   & Pick<Tag, 'name' | 'color'>
@@ -7838,42 +7845,6 @@ export const EcologicalOutcomeFieldsFragmentDoc = gql`
   }
 }
     ${CustomImageFieldsFragmentDoc}`;
-export const BuyersFeaturedProjectCardFragmentDoc = gql`
-    fragment buyersFeaturedProjectCard on FeaturedProjectCard {
-  project {
-    projectId
-  }
-  creditClass {
-    image {
-      imageHref
-      imageAlt
-      image {
-        asset {
-          url
-        }
-      }
-    }
-  }
-}
-    `;
-export const BuyersFeaturedCardsSectionFieldsFragmentDoc = gql`
-    fragment buyersFeaturedCardsSectionFields on BuyersFeaturedProjectCardsSection {
-  title
-  descriptionRaw
-  backgroundImage {
-    imageHref
-    imageAlt
-    image {
-      asset {
-        url
-      }
-    }
-  }
-  cards {
-    ...buyersFeaturedProjectCard
-  }
-}
-    ${BuyersFeaturedProjectCardFragmentDoc}`;
 export const FeaturedSectionFieldsFragmentDoc = gql`
     fragment featuredSectionFields on FeaturedSection {
   header
@@ -8057,6 +8028,43 @@ export const TitleCustomBodyFieldsFragmentDoc = gql`
   bodyRaw
 }
     `;
+export const BuyersFeaturedProjectCardFragmentDoc = gql`
+    fragment buyersFeaturedProjectCard on FeaturedProjectCard {
+  project {
+    projectId
+  }
+  creditClass {
+    path
+    image {
+      imageHref
+      imageAlt
+      image {
+        asset {
+          url
+        }
+      }
+    }
+  }
+}
+    `;
+export const BuyersFeaturedCardsSectionFieldsFragmentDoc = gql`
+    fragment buyersFeaturedCardsSectionFields on BuyersFeaturedProjectCardsSection {
+  title
+  descriptionRaw
+  backgroundImage {
+    imageHref
+    imageAlt
+    image {
+      asset {
+        url
+      }
+    }
+  }
+  cards {
+    ...buyersFeaturedProjectCard
+  }
+}
+    ${BuyersFeaturedProjectCardFragmentDoc}`;
 export const AllBasketDetailsPageDocument = gql`
     query allBasketDetailsPage {
   allBasketDetailsPage {
@@ -8311,6 +8319,11 @@ export const AllCreditClassDocument = gql`
     shortDescriptionRaw
     image {
       ...customImageFields
+    }
+    icon {
+      asset {
+        url
+      }
     }
     ecologicalImpact {
       ...ecologicalImpactRelationFields

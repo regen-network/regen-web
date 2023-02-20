@@ -94,7 +94,8 @@ export default function FieldFormControl({
 
   async function handleChange(value: any): Promise<void> {
     form.setFieldValue(field.name, value);
-    form.setFieldTouched(field.name, true);
+    // see https://github.com/jaredpalmer/formik/issues/2083:
+    setTimeout(() => form.setFieldTouched(field.name, true));
   }
 
   function handleBlur(value: string): void {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, useTheme } from '@mui/material';
 import { DefaultTheme as Theme } from '@mui/styles';
-import { Field, Form, Formik, FormikErrors, useFormikContext } from 'formik';
+import { Field, Form, Formik, useFormikContext } from 'formik';
 import { makeStyles } from 'tss-react/mui';
 
 import { Button } from '../buttons/Button';

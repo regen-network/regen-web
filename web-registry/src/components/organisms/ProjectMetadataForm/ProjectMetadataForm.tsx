@@ -4,7 +4,6 @@ import { Field, Form, Formik, FormikErrors } from 'formik';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import ControlledFormLabel from 'web-components/lib/components/form/ControlledFormLabel';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
-import TextField from 'web-components/lib/components/inputs/TextField';
 import {
   invalidJSON,
   isValidJSON,
@@ -49,7 +48,6 @@ export const ProjectMetadataForm = ({
     async (values: ProjectMetadataValues) => {
       const errors: FormikErrors<ProjectMetadataValues> = {};
       const metadata = values.metadata;
-      console.log('validate');
       const validJSON = !!metadata && isValidJSON(metadata);
       if (!validJSON) {
         errors.metadata = invalidJSON;
@@ -92,7 +90,7 @@ export const ProjectMetadataForm = ({
         if (isEdit && confirmSave) confirmSave();
       }}
     >
-      {({ submitForm, isValid, isSubmitting, dirty, values }) => {
+      {({ submitForm, isValid, isSubmitting, dirty }) => {
         return (
           <Form translate="yes">
             <OnBoardingCard>

@@ -52,9 +52,7 @@ const ProjectLocationForm: React.FC<
         if (isEdit && confirmSave) confirmSave();
       }}
     >
-      {({ submitForm, isValid, isSubmitting, dirty, errors, values }) => {
-        console.log('errors', errors);
-        console.log('values', values);
+      {({ submitForm, isValid, isSubmitting, dirty }) => {
         return (
           <Form>
             <OnBoardingCard>

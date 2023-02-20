@@ -69,7 +69,7 @@ function ProfileModal({
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
             try {
-              await onSubmit(values);
+              onSubmit(values);
               setSubmitting(false);
             } catch (e) {
               setSubmitting(false);

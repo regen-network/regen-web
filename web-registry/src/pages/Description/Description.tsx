@@ -1,10 +1,5 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-
-import { graphqlClient } from 'lib/clients/graphqlClient';
-import { getShaclGraphByUriQuery } from 'lib/queries/react-query/registry-server/graphql/getShaclGraphByUriQuery/getShaclGraphByUriQuery';
-import { getProjectShapeIri } from 'lib/rdf';
 
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
@@ -24,14 +19,6 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
     onChainProject,
     anchored: false,
   });
-
-  const { data } = useQuery(
-    getShaclGraphByUriQuery({
-      client: graphqlClient,
-      uri: getProjectShapeIri(),
-    }),
-  );
-  const graphData = data?.data;
 
   let initialFieldValues: DescriptionValues | undefined;
   if (metadata) {
@@ -64,7 +51,6 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
         onNext={navigateNext}
         onPrev={navigatePrev}
         initialValues={initialFieldValues}
-        graphData={graphData}
       />
     </ProjectFormTemplate>
   );

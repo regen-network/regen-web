@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Field, Form, Formik, FormikErrors } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -11,7 +11,6 @@ import {
 } from 'web-components/lib/components/inputs/validation';
 import { ProfileFormValues } from 'web-components/lib/components/modal/ProfileModal';
 
-import { DEFAULT_PROJECT_CONTEXT, getCompactedPath, validate } from 'lib/rdf';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
 import {
@@ -41,7 +40,10 @@ export interface RolesValues {
 const RegenAddressSchema = Yup.string().test(
   'is-regen-address',
   invalidRegenAddress,
-  value => isValidAddress(value, chainInfo.bech32Config.bech32PrefixAccAddr),
+  value =>
+    value
+      ? isValidAddress(value, chainInfo.bech32Config.bech32PrefixAccAddr)
+      : true,
 );
 
 const ProfileSchema = Yup.object().shape({

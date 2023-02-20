@@ -1,10 +1,5 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-
-import { graphqlClient } from 'lib/clients/graphqlClient';
-import { getShaclGraphByUriQuery } from 'lib/queries/react-query/registry-server/graphql/getShaclGraphByUriQuery/getShaclGraphByUriQuery';
-import { getProjectShapeIri } from 'lib/rdf';
 
 import { useProjectEditContext } from 'pages/ProjectEdit';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';

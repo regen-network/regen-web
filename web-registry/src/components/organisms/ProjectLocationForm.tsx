@@ -1,13 +1,11 @@
 import React from 'react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
-import { Field, Form, Formik, FormikErrors } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import LocationField from 'web-components/lib/components/inputs/LocationField';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
-
-import { getCompactedPath, getProjectBaseData, validate } from 'lib/rdf';
 
 import { useProjectEditContext } from 'pages';
 

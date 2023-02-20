@@ -94,8 +94,7 @@ export function isValidJSON(str: string): boolean {
   return true;
 }
 
-export function isValidAddress(value?: string, prefix?: string): boolean {
-  if (!value) return false;
+export function isValidAddress(value: string, prefix?: string): boolean {
   try {
     // throws an error if the address is invalid
     Bech32Address.validate(value, prefix);

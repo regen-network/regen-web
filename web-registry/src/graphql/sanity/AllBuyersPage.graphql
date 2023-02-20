@@ -12,6 +12,9 @@ query allBuyersPage {
     ecologicalCreditCardsSection {
       ...ecologicalCreditCardsSectionFields
     }
+    featuredProjectCardsSection {
+      ...buyersFeaturedCardsSectionFields
+    }
     faqSection {
       ...bottomBannerFields
     }

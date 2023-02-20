@@ -1,0 +1,16 @@
+fragment buyersFeaturedProjectCard on FeaturedProjectCard {
+  project {
+    projectId
+  }
+  creditClass {
+    image {
+      imageHref
+      imageAlt
+      image {
+        asset {
+          url
+        }
+      }
+    }
+  }
+}

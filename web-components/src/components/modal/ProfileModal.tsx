@@ -19,9 +19,7 @@ interface ProfileModalProps {
   profile: ProfileFormValues;
   onClose: () => void;
   onSubmit: (profile: ProfileFormValues) => void;
-  validate: (
-    values: ProfileFormValues,
-  ) => Promise<FormikErrors<ProfileFormValues>>;
+  validationSchema: any;
   apiServerUrl: string;
   projectId: string;
 }
@@ -41,7 +39,7 @@ function ProfileModal({
   profile,
   onClose,
   onSubmit,
-  validate,
+  validationSchema,
   apiServerUrl,
   projectId,
 }: ProfileModalProps): JSX.Element {
@@ -77,7 +75,7 @@ function ProfileModal({
               setSubmitting(false);
             }
           }}
-          validate={validate}
+          validationSchema={validationSchema}
         >
           {({ submitForm }) => {
             return (

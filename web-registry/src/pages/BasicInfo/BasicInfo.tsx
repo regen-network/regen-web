@@ -16,22 +16,13 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
-  const { metadata, metadataSubmit, creditClassId } = useProjectWithMetadata({
+  const { metadata, metadataSubmit } = useProjectWithMetadata({
     projectId,
     isEdit,
     projectEditSubmit,
     navigateNext,
     onChainProject,
   });
-
-  const { data } = useQuery(
-    getShaclGraphByUriQuery({
-      client: graphqlClient,
-      uri: getProjectShapeIri(creditClassId),
-      enabled: !!creditClassId,
-    }),
-  );
-  const graphData = data?.data;
 
   let initialFieldValues: BasicInfoFormValues | undefined;
   if (metadata) {
@@ -58,8 +49,6 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
         submit={metadataSubmit}
         initialValues={initialFieldValues}
         onNext={navigateNext}
-        graphData={graphData}
-        creditClassId={creditClassId}
       />
     </ProjectFormTemplate>
   );

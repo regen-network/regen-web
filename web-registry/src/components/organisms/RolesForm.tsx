@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Field, Form, Formik, FormikErrors } from 'formik';
+import * as Yup from 'yup';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import TextField from 'web-components/lib/components/inputs/TextField';
 import {
-  invalidAddress,
+  invalidRegenAddress,
   isValidAddress,
   requiredMessage,
 } from 'web-components/lib/components/inputs/validation';
@@ -36,6 +37,22 @@ export interface RolesValues {
   'regen:projectDeveloper'?: ProfileFormValues;
   admin?: string;
 }
+
+const RegenAddressSchema = Yup.string().test(
+  'is-regen-address',
+  invalidRegenAddress,
+  value => isValidAddress(value, chainInfo.bech32Config.bech32PrefixAccAddr),
+);
+
+const ProfileSchema = Yup.object().shape({
+  'schema:name': Yup.string().required(requiredMessage),
+  'regen:address': RegenAddressSchema,
+});
+
+const RolesFormSchema = Yup.object().shape({
+  'regen:projectDeveloper': ProfileSchema,
+  admin: RegenAddressSchema.required(requiredMessage),
+});
 
 const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   initialValues,
@@ -77,63 +94,6 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     setEntities(initEntities);
   }, [initialValues]);
 
-  const validateEntity = async <T extends ProfileFormValues | FormValues>(
-    e: T,
-  ): Promise<{ [key in keyof T]?: string }> => {
-    const errors: { [key in keyof T]?: string } = {};
-    // We perform a separate validation for regen address
-    // because SHACL doesn't support bech32 address validation
-    const p = e as ProfileFormValues;
-    if (p['regen:address']) {
-      const isValid = isValidAddress(
-        p['regen:address'],
-        chainInfo.bech32Config.bech32PrefixAccAddr,
-      );
-      if (!isValid) {
-        const addrPath = 'regen:address' as keyof T;
-        errors[addrPath] = invalidAddress;
-      }
-    }
-    // TODO might need to update, see regen-registry/issues/1501
-    if (graphData?.shaclGraphByUri?.graph) {
-      const report = await validate(
-        graphData.shaclGraphByUri.graph,
-        { '@context': DEFAULT_PROJECT_CONTEXT, ...p },
-        'http://regen.network/ProjectPageRolesGroup',
-      );
-      for (const result of report.results) {
-        const path: string = result.path.value;
-        const compactedPath = getCompactedPath(path) as keyof T | undefined;
-        if (compactedPath) {
-          errors[compactedPath] = requiredMessage;
-        }
-      }
-    }
-    return errors;
-  };
-
-  // TODO regen-registry/issues/1501
-  const validateProject = async (
-    values: RolesValues,
-  ): Promise<FormikErrors<RolesValues>> => {
-    const errors: FormikErrors<RolesValues> = {};
-    // if (graphData?.shaclGraphByUri?.graph) {
-    //   const projectPageData = {
-    //     ...getProjectBaseData(creditClassId),
-    //     ...values,
-    //   };
-    //   const report = await validate(
-    //     graphData.shaclGraphByUri.graph,
-    //     projectPageData,
-    //     'http://regen.network/ProjectPageRolesGroup',
-    //   );
-    //   if (!report.conforms) {
-    //     errors['regen:projectDeveloper'] = rolesErrorMessage;
-    //   }
-    // }
-    return errors;
-  };
-
   const saveProfile = async (
     updatedEntity: ProfileFormValues,
   ): Promise<ProfileFormValues> => {
@@ -172,7 +132,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
             setSubmitting(false);
           }
         }}
-        validate={validateProject}
+        validationSchema={RolesFormSchema}
       >
         {({ submitForm, isValid, isSubmitting, dirty }) => {
           return (
@@ -187,9 +147,9 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
                   options={entities}
                   mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
                   onSaveProfile={saveProfile}
-                  validateEntity={validateEntity}
                   apiServerUrl={apiUri}
                   projectId={projectId}
+                  profileValidationSchema={ProfileSchema}
                 />
                 <Field
                   name="admin"

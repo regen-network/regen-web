@@ -90,6 +90,7 @@ interface Props extends FieldProps {
   mapboxToken: string;
   apiServerUrl: string;
   projectId: string;
+  profileValidationSchema: any;
 }
 
 interface RoleOptionType {
@@ -143,7 +144,7 @@ const RoleField: React.FC<React.PropsWithChildren<Props>> = ({
   placeholder,
   mapboxToken,
   onSaveProfile,
-  validateEntity,
+  profileValidationSchema,
   apiServerUrl,
   projectId,
   ...fieldProps
@@ -287,7 +288,7 @@ const RoleField: React.FC<React.PropsWithChildren<Props>> = ({
           profile={profileEdit}
           onClose={closeProfileModal}
           onSubmit={saveProfile}
-          validate={validateEntity}
+          validationSchema={profileValidationSchema}
           apiServerUrl={apiServerUrl}
           projectId={projectId}
         />

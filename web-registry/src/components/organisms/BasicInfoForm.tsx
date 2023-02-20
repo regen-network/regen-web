@@ -1,20 +1,22 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { Field, Form, Formik, FormikErrors } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import { makeStyles } from 'tss-react/mui';
+import * as Yup from 'yup';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import InputLabel from 'web-components/lib/components/inputs/InputLabel';
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
 import TextField from 'web-components/lib/components/inputs/TextField';
+import {
+  positiveNumber,
+  requiredMessage,
+} from 'web-components/lib/components/inputs/validation';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-
-import { getCompactedPath, getProjectBaseData, validate } from 'lib/rdf';
 
 import { useProjectEditContext } from 'pages';
 
-import { ShaclGraphByUriQuery } from '../../generated/graphql';
 import { ProjectPageFooter } from '../molecules';
 
 export interface BasicInfoFormValues {
@@ -49,15 +51,23 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
 }));
 
+const BasicInfoFormSchema = Yup.object().shape({
+  'schema:name': Yup.string().required(requiredMessage),
+  'regen:projectSize': Yup.object().shape({
+    'qudt:numericValue': Yup.number()
+      .positive(positiveNumber)
+      .required(requiredMessage),
+    'qudt:unit': Yup.string().required(requiredMessage),
+  }),
+});
+
 const BasicInfoForm: React.FC<
   React.PropsWithChildren<{
     submit: ({ values }: { values: BasicInfoFormValues }) => Promise<void>;
     initialValues?: BasicInfoFormValues;
     onNext?: () => void;
-    graphData?: ShaclGraphByUriQuery;
-    creditClassId?: string;
   }>
-> = ({ submit, initialValues, onNext, graphData, creditClassId }) => {
+> = ({ submit, initialValues, onNext }) => {
   const { classes, cx } = useStyles();
   const { confirmSave, isEdit } = useProjectEditContext();
 
@@ -72,47 +82,12 @@ const BasicInfoForm: React.FC<
           'qudt:unit': 'unit:HA',
         },
       }}
-      validate={async (values: BasicInfoFormValues) => {
-        const errors: FormikErrors<BasicInfoFormValues> = {};
-        if (graphData?.shaclGraphByUri?.graph) {
-          const projectPageData = {
-            ...getProjectBaseData(creditClassId),
-            ...values,
-          };
-          const report = await validate(
-            graphData.shaclGraphByUri.graph,
-            projectPageData,
-            'http://regen.network/ProjectPageBasicInfoGroup',
-          );
-          for (const result of report.results) {
-            const path: string = result.path.value;
-            const compactedPath = getCompactedPath(path) as
-              | keyof BasicInfoFormValues
-              | keyof BasicInfoFormValues['regen:projectSize']
-              | undefined;
-            const message = result.message?.[0]?.value;
-            if (compactedPath && message) {
-              // handle nested errors
-              if (
-                compactedPath === 'qudt:numericValue' ||
-                compactedPath === 'qudt:unit'
-              ) {
-                errors['regen:projectSize'] = {
-                  [compactedPath]: message,
-                };
-              } else {
-                errors[compactedPath] = message;
-              }
-            }
-          }
-        }
-        return errors;
-      }}
       onSubmit={async (values, { setTouched }) => {
         await submit({ values });
         setTouched({}); // reset to untouched
         if (isEdit && confirmSave) confirmSave();
       }}
+      validationSchema={BasicInfoFormSchema}
     >
       {({ submitForm, isValid, isSubmitting, dirty }) => {
         return (

@@ -42,7 +42,10 @@ export const normalizeEcologicalCreditCards = ({
         items:
           card?.offsetMethods?.map(method => ({
             name: method?.name ?? '',
-            image: { src: method?.icon?.asset?.url, alt: method?.name },
+            icon: {
+              src: method?.icon?.asset?.url ?? '',
+              alt: method?.name ?? '',
+            },
           })) ?? [],
       },
       projectActivitesList: {
@@ -50,9 +53,9 @@ export const normalizeEcologicalCreditCards = ({
         items:
           card?.projectActivities?.map(projectActivity => ({
             name: projectActivity?.name ?? '',
-            image: {
-              src: projectActivity?.icon?.asset?.url,
-              alt: projectActivity?.name,
+            icon: {
+              src: projectActivity?.icon?.asset?.url ?? '',
+              alt: projectActivity?.name ?? '',
             },
           })) ?? [],
       },

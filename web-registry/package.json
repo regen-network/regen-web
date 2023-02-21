@@ -112,7 +112,6 @@
     "@types/storybook__addon-storyshots": "^5.3.1",
     "@types/use-analytics": "^0.0.0",
     "@walletconnect/types": "^1.8.0",
-    "apollo": "^2.33.9",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "enzyme-to-json": "^3.6.1",

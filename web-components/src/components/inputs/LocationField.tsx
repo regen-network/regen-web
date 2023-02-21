@@ -84,6 +84,7 @@ const LocationField: React.FC<React.PropsWithChildren<Props>> = ({
             }}
             onSelect={() => form.setFieldTouched(field.name, true)}
             onChange={({ target: { value } }) => {
+              handleChange(value);
               if (value.length >= 1) {
                 const isCoordinates =
                   /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/.test(

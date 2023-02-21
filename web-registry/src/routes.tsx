@@ -108,7 +108,7 @@ export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
           path="create-credit-class"
           element={<CreateCreditClassInfo />}
         />
-        <Route path="land-stewards" element={<LandStewards />} />
+        <Route path="project-developers" element={<LandStewards />} />
         <Route
           path="methodology-review-process"
           element={<MethodologyReviewProcess />}

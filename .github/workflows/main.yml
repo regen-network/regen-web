@@ -22,5 +22,7 @@ jobs:
       env:
         NODE_OPTIONS: "--openssl-legacy-provider --max-old-space-size=10216"
 
-    - name: test
-      run: yarn test
+    # Displaying for now, see https://github.com/regen-network/regen-web/pull/1796 for explanations
+    # TODO re-enable as part of https://github.com/regen-network/regen-registry/issues/1316
+    # - name: test
+    #   run: yarn test

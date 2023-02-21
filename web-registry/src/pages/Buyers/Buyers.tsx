@@ -18,6 +18,7 @@ import { useAllBuyersPageQuery } from '../../generated/sanity-graphql';
 import { client } from '../../lib/clients/sanity';
 import { BuyersEcologicalCreditCardsSection } from './Buyers.EcologicalCreditCardsSection';
 import { BuyersFeaturedProjectsSection } from './Buyers.FeaturedProjectsSection';
+import { BuyersPartnersSection } from './Buyers.PartnersSection';
 import { useBuyersStyles } from './Buyers.styles';
 import { useFetchProjectsByClass } from './hooks/useFetchProjectsByClass';
 
@@ -96,6 +97,9 @@ const BuyersPage = (): JSX.Element => {
           projects={projects}
           content={content?.featuredProjectCardsSection}
         />
+      )}
+      {content?.partnersSection && (
+        <BuyersPartnersSection content={content?.partnersSection} />
       )}
       {content?.faqSection && (
         <HeroAction

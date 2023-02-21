@@ -1,12 +1,12 @@
 import { Settings } from 'react-slick';
 
-export const carrouselDefaultSettings: Settings = {
+export const carouselDefaultSettings: Settings = {
   infinite: true,
   slidesToShow: 5,
   slidesToScroll: 1,
   autoplay: true,
-  speed: 2000,
-  autoplaySpeed: 2000,
+  speed: 4000,
+  autoplaySpeed: 0,
   cssEase: 'linear',
   responsive: [
     {

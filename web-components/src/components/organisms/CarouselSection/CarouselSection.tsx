@@ -5,7 +5,7 @@ import { SxProps } from '@mui/material';
 import { Theme } from '../../../theme/muiTheme';
 import { sxToArray } from '../../../utils/mui/sxToArray';
 import Section from '../Section';
-import { carrouselDefaultSettings } from './CarouselSection.config';
+import { carouselDefaultSettings } from './CarouselSection.config';
 
 export interface CarouselSectionProps {
   title?: string | JSX.Element;
@@ -28,7 +28,7 @@ const CarouselSection = ({
       description={description}
       sx={[{ maxWidth: '100%' }, ...sxToArray(sx)]}
     >
-      <Slider {...carrouselDefaultSettings} {...settings}>
+      <Slider {...carouselDefaultSettings} {...settings}>
         {children}
       </Slider>
     </Section>

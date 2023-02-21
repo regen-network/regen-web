@@ -15,6 +15,9 @@ query allBuyersPage {
     featuredProjectCardsSection {
       ...buyersFeaturedCardsSectionFields
     }
+    partnersSection {
+      ...buyersPartnersSectionFields
+    }
     faqSection {
       ...bottomBannerFields
     }

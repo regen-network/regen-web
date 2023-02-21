@@ -6,7 +6,7 @@ on:
   pull_request:
 
 env:
-  NODE_OPTIONS: "--max-old-space-size=10216"
+  NODE_OPTIONS: "--max-old-space-size=10216 --openssl-legacy-provider"
 
 jobs:
   build:

@@ -54,7 +54,6 @@ const Section = ({
               textAlign="center"
               sx={{
                 pt: [3.25, 7.75],
-                mb: { xs: 10, sm: 14 },
                 fontSize: { xs: 16, sm: 22 },
                 maxWidth: { xs: '100%', sm: 790 },
                 marginX: 'auto',
@@ -68,7 +67,7 @@ const Section = ({
             </Body>
           )}
         </Box>
-        {children}
+        <Box sx={{ mt: { xs: 10, sm: 14 } }}>{children}</Box>
       </Box>
     </Box>
   );

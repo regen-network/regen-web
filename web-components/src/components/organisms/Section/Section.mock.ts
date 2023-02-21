@@ -1,4 +1,4 @@
-import { EcologicalCreditCardMock } from 'src/components/molecules/EcologicalCreditCard/EcologicalCreditCard.mock';
+import { EcologicalCreditCardMock } from '../../../components/molecules/EcologicalCreditCard/EcologicalCreditCard.mock';
 
 export const sectionCardsMock = [
   { ...EcologicalCreditCardMock },

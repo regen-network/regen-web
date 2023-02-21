@@ -37,7 +37,7 @@ const mockedAnalytics = useAnalytics as jest.Mock;
 
 // Disabling for now, see https://github.com/regen-network/regen-web/pull/1796 for explanations
 // TODO re-enable as part of https://github.com/regen-network/regen-registry/issues/1316
-xdescribe('App', () => {
+describe.skip('App', () => {
   beforeAll(() => {
     // @ts-ignore
     window.matchMedia = createMatchMedia(window.innerWidth);

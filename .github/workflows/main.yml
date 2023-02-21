@@ -6,7 +6,7 @@ on:
   pull_request:
 
 env:
-  NODE_OPTIONS: "--max-old-space-size=10216 --openssl-legacy-provider"
+  NODE_OPTIONS: "--max-old-space-size=10216"
 
 jobs:
   build:
@@ -22,6 +22,8 @@ jobs:
 
     - name: build-app
       run: yarn build
+      env:
+        NODE_OPTIONS: "--openssl-legacy-provider"
 
     - name: test
       run: yarn test

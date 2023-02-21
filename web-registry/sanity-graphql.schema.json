@@ -2626,7 +2626,7 @@
             "deprecationReason": null
           },
           {
-            "name": "faqSection",
+            "name": "contactSection",
             "description": null,
             "args": [],
             "type": {
@@ -2836,7 +2836,7 @@
             "deprecationReason": null
           },
           {
-            "name": "faqSection",
+            "name": "contactSection",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -3027,7 +3027,7 @@
             "deprecationReason": null
           },
           {
-            "name": "faqSection",
+            "name": "contactSection",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",

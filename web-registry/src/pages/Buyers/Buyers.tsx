@@ -101,12 +101,12 @@ const BuyersPage = (): JSX.Element => {
       {content?.partnersSection && (
         <BuyersPartnersSection content={content?.partnersSection} />
       )}
-      {content?.faqSection && (
+      {content?.contactSection && (
         <HeroAction
           classes={{ section: styles.bottomHeroSection }}
           isBanner
-          img={content?.faqSection?.image?.image?.asset?.url || ''}
-          bottomBanner={content?.faqSection}
+          img={content?.contactSection?.image?.image?.asset?.url || ''}
+          bottomBanner={content?.contactSection}
           openModal={() => null}
         />
       )}

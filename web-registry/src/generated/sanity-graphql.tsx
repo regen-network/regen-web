@@ -335,7 +335,7 @@ export type BuyersPage = Document & {
   ecologicalCreditCardsSection?: Maybe<EcologicalCreditCardsSection>;
   featuredProjectCardsSection?: Maybe<BuyersFeaturedProjectCardsSection>;
   partnersSection?: Maybe<BuyersPartnersSection>;
-  faqSection?: Maybe<BottomBanner>;
+  contactSection?: Maybe<BottomBanner>;
   footerButtonText?: Maybe<Scalars['String']>;
   metadata?: Maybe<PageMetadata>;
 };
@@ -355,7 +355,7 @@ export type BuyersPageFilter = {
   ecologicalCreditCardsSection?: Maybe<EcologicalCreditCardsSectionFilter>;
   featuredProjectCardsSection?: Maybe<BuyersFeaturedProjectCardsSectionFilter>;
   partnersSection?: Maybe<BuyersPartnersSectionFilter>;
-  faqSection?: Maybe<BottomBannerFilter>;
+  contactSection?: Maybe<BottomBannerFilter>;
   footerButtonText?: Maybe<StringFilter>;
   metadata?: Maybe<PageMetadataFilter>;
 };
@@ -373,7 +373,7 @@ export type BuyersPageSorting = {
   ecologicalCreditCardsSection?: Maybe<EcologicalCreditCardsSectionSorting>;
   featuredProjectCardsSection?: Maybe<BuyersFeaturedProjectCardsSectionSorting>;
   partnersSection?: Maybe<BuyersPartnersSectionSorting>;
-  faqSection?: Maybe<BottomBannerSorting>;
+  contactSection?: Maybe<BottomBannerSorting>;
   footerButtonText?: Maybe<SortOrder>;
   metadata?: Maybe<PageMetadataSorting>;
 };
@@ -6913,7 +6913,7 @@ export type AllBuyersPageQuery = (
     )>, partnersSection?: Maybe<(
       { __typename?: 'BuyersPartnersSection' }
       & BuyersPartnersSectionFieldsFragment
-    )>, faqSection?: Maybe<(
+    )>, contactSection?: Maybe<(
       { __typename?: 'BottomBanner' }
       & BottomBannerFieldsFragment
     )>, metadata?: Maybe<(
@@ -8233,7 +8233,7 @@ export const AllBuyersPageDocument = gql`
     partnersSection {
       ...buyersPartnersSectionFields
     }
-    faqSection {
+    contactSection {
       ...bottomBannerFields
     }
     footerButtonText

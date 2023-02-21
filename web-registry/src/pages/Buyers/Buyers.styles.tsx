@@ -20,6 +20,7 @@ export const useBuyersStyles = makeStyles()(theme => ({
   },
   bottomHeroSection: {
     paddingTop: 0,
+    maxWidth: 790,
   },
   title: {
     [theme.breakpoints.down('sm')]: {

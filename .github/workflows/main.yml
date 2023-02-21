@@ -5,9 +5,6 @@ on:
     branches: [ master, dev ]
   pull_request:
 
-env:
-  NODE_OPTIONS: "--max-old-space-size=10216"
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,7 +20,7 @@ jobs:
     - name: build-app
       run: yarn build
       env:
-        NODE_OPTIONS: "--openssl-legacy-provider"
+        NODE_OPTIONS: "--openssl-legacy-provider --max-old-space-size=10216"
 
     - name: test
       run: yarn test

@@ -18,7 +18,12 @@ export interface FooterItemProps {
 }
 
 interface FooterProps {
-  footerItems: [FooterItemProps, FooterItemProps, FooterItemProps];
+  footerItems: [
+    FooterItemProps,
+    FooterItemProps,
+    FooterItemProps,
+    FooterItemProps,
+  ];
   termsUrl: string;
   privacyUrl: string;
   apiUri?: string;
@@ -112,13 +117,13 @@ export default function Footer({
     >
       <Section>
         <Grid container>
-          <Grid item xs={12} sm={3}>
+          <Grid item xs={12} sm={2}>
             <FooterItem
               title={footerItems[0].title}
               items={footerItems[0].items}
             />
           </Grid>
-          <Grid item xs={12} sm={3}>
+          <Grid item xs={12} sm={2}>
             <FooterItem
               title={footerItems[1].title}
               items={footerItems[1].items}
@@ -128,6 +133,12 @@ export default function Footer({
             <FooterItem
               title={footerItems[2].title}
               items={footerItems[2].items}
+            />
+          </Grid>
+          <Grid item xs={12} sm={2}>
+            <FooterItem
+              title={footerItems[3].title}
+              items={footerItems[3].items}
             />
           </Grid>
           <Grid item xs={12} sm={4} className={classes.footerItem}>

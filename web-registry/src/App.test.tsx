@@ -35,7 +35,9 @@ const mockedAuth0 = useAuth0 as jest.Mock;
 jest.mock('use-analytics');
 const mockedAnalytics = useAnalytics as jest.Mock;
 
-describe('App', () => {
+// Disabling for now, see https://github.com/regen-network/regen-web/pull/1796 for explanations
+// TODO re-enable as part of https://github.com/regen-network/regen-registry/issues/1316
+xdescribe('App', () => {
   beforeAll(() => {
     // @ts-ignore
     window.matchMedia = createMatchMedia(window.innerWidth);

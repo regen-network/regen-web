@@ -60,14 +60,14 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
   item: {
     minWidth: theme.spacing(73),
-    '& > div': {
-      height: '100%',
-    },
     [theme.breakpoints.up('sm')]: {
       margin: theme.spacing(0, 1.875),
     },
     [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(0, 1.875),
+      '& > div': {
+        height: '100%',
+      },
       '&:first-child': {
         paddingLeft: theme.spacing(4),
       },

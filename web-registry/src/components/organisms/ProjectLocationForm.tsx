@@ -18,6 +18,9 @@ export interface ProjectLocationFormValues {
 
 const ProjectLocationFormSchema = Yup.object().shape({
   'schema:location': Yup.object()
+    // before the user selects the location, the value is a string,
+    // but we don't want to show yup default type error message
+    .typeError('')
     .test('is-not-empty', requiredMessage, value => !isEmpty(value))
     .required(requiredMessage),
 });

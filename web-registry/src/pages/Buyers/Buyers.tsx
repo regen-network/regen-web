@@ -1,10 +1,6 @@
-import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { Box } from '@mui/material';
 
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import FixedFooter from 'web-components/lib/components/fixed-footer';
-import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
-import Modal from 'web-components/lib/components/modal';
 import SEO from 'web-components/lib/components/seo';
 
 import buyersHero from '../../assets/buyers-top.jpg';
@@ -25,7 +21,6 @@ import { useFetchProjectsByClass } from './hooks/useFetchProjectsByClass';
 const BuyersPage = (): JSX.Element => {
   const { classes: styles } = useBuyersStyles();
   const location = useLocation();
-  const [open, setOpen] = useState(false);
   const { data } = useAllBuyersPageQuery({ client });
   const content = data?.allBuyersPage?.[0];
   const featuredProjectsCreditClassId =
@@ -42,14 +37,6 @@ const BuyersPage = (): JSX.Element => {
     author: 'Regen Network Development, Inc.',
     siteUrl: window.location.href,
     imageUrl: content?.metadata?.openGraphImage?.asset?.url || '',
-  };
-
-  const handleOpen = (): void => {
-    setOpen(true);
-  };
-
-  const handleClose = (): void => {
-    setOpen(false);
   };
 
   return (
@@ -85,7 +72,13 @@ const BuyersPage = (): JSX.Element => {
         />
       )}
       {content?.imageGridSection && (
-        <ImageGridSection content={content?.imageGridSection} />
+        <ImageGridSection
+          content={content?.imageGridSection}
+          sx={{
+            borderTop: theme => `1px solid ${theme.palette.grey[100]}`,
+            borderBottom: theme => `1px solid ${theme.palette.grey[100]}`,
+          }}
+        />
       )}
       {content?.ecologicalCreditCardsSection && (
         <BuyersEcologicalCreditCardsSection
@@ -96,6 +89,12 @@ const BuyersPage = (): JSX.Element => {
         <BuyersFeaturedProjectsSection
           projects={projects}
           content={content?.featuredProjectCardsSection}
+          sx={{
+            container: {
+              borderTop: theme => `1px solid ${theme.palette.grey[100]}`,
+              borderBottom: theme => `1px solid ${theme.palette.grey[100]}`,
+            },
+          }}
         />
       )}
       {content?.partnersSection && (
@@ -110,24 +109,6 @@ const BuyersPage = (): JSX.Element => {
           openModal={() => null}
         />
       )}
-
-      <FixedFooter justifyContent="flex-end">
-        <>
-          <ContainedButton
-            size="large"
-            onClick={handleOpen}
-            startIcon={<EmailIcon />}
-          >
-            {content?.footerButtonText}
-          </ContainedButton>
-        </>
-      </FixedFooter>
-      <Modal open={open} onClose={handleClose} isIFrame>
-        <iframe
-          title="airtable-buyer-intake"
-          src="https://airtable.com/embed/shrijZlxJdSmj7H8J?backgroundColor=green"
-        />
-      </Modal>
     </>
   );
 };

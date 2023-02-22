@@ -12,7 +12,10 @@ export interface SectionProps {
   description?: string | JSX.Element;
   backgroundImage?: string;
   children?: ReactNode;
-  sx?: SxProps<Theme>;
+  sx?: {
+    container?: SxProps<Theme>;
+    section?: SxProps<Theme>;
+  };
 }
 
 const Section = ({
@@ -24,12 +27,15 @@ const Section = ({
 }: SectionProps) => {
   return (
     <Box
-      sx={{
-        background: theme =>
-          backgroundImage
-            ? `url(${backgroundImage}), ${theme.palette.grey['50']}`
-            : 'none',
-      }}
+      sx={[
+        {
+          background: theme =>
+            backgroundImage
+              ? `url(${backgroundImage}), ${theme.palette.grey['50']}`
+              : 'none',
+        },
+        ...sxToArray(sx?.container),
+      ]}
     >
       <Box
         sx={[
@@ -39,7 +45,7 @@ const Section = ({
             py: { xs: 20, lg: 25 },
             px: { xs: 3.75, lg: 0 },
           },
-          ...sxToArray(sx),
+          ...sxToArray(sx?.section),
         ]}
       >
         <Box>

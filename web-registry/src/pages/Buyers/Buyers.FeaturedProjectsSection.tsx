@@ -1,17 +1,24 @@
+import { SxProps } from '@mui/material';
+
 import ProjectCard, {
   ProjectCardProps,
 } from 'web-components/lib/components/cards/ProjectCard';
 import { CardsGridContainer } from 'web-components/lib/components/organisms/CardsGridContainer/CardsGridContainer';
 import Section from 'web-components/lib/components/organisms/Section';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { AllBuyersPageQuery } from 'generated/sanity-graphql';
 
 interface Props {
   projects: ProjectCardProps[];
   content: AllBuyersPageQuery['allBuyersPage'][0]['featuredProjectCardsSection'];
+  sx?: {
+    container?: SxProps<Theme>;
+    section?: SxProps<Theme>;
+  };
 }
 
-const BuyersFeaturedProjectsSection = ({ projects, content }: Props) => {
+const BuyersFeaturedProjectsSection = ({ projects, content, sx }: Props) => {
   const featuredProjects = content?.cards?.map(
     card => card?.project?.projectId,
   );
@@ -28,6 +35,7 @@ const BuyersFeaturedProjectsSection = ({ projects, content }: Props) => {
         content?.backgroundImage?.imageHref ??
         ''
       }
+      sx={sx}
     >
       <CardsGridContainer cardsCount={filteredProjects.length}>
         {filteredProjects.map(project => (

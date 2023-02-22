@@ -26,7 +26,7 @@ const CarouselSection = ({
     <Section
       title={title}
       description={description}
-      sx={[{ maxWidth: '100%' }, ...sxToArray(sx)]}
+      sx={{ section: [{ maxWidth: '100%' }, ...sxToArray(sx)] }}
     >
       <Slider {...carouselDefaultSettings} {...settings}>
         {children}

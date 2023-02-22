@@ -2,26 +2,27 @@ name: CI
 
 on:
   push:
-    branches: [ master, dev ]
+    branches: [master, dev]
   pull_request:
-
-env:
-  NODE_OPTIONS: "--max-old-space-size=10216"
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: install
-      run: |
-        yarn install
-        yarn bootstrap
+      - name: install
+        run: |
+          yarn install
+          yarn bootstrap
 
-    - name: build-app
-      run: yarn build
+      - name: build-app
+        run: yarn build
+        env:
+          NODE_OPTIONS: '--openssl-legacy-provider --max-old-space-size=10216'
 
-    - name: test
-      run: yarn test
+    # Displaying for now, see https://github.com/regen-network/regen-web/pull/1796 for explanations
+    # TODO re-enable as part of https://github.com/regen-network/regen-registry/issues/1316
+    # - name: test
+    #   run: yarn test

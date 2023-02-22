@@ -4,8 +4,14 @@ export const useBuyersStyles = makeStyles()(theme => ({
   heroMain: {
     maxWidth: theme.typography.pxToRem(775),
     paddingBottom: theme.spacing(20),
+    paddingTop: theme.spacing(50),
+    [theme.breakpoints.up('sm')]: {
+      minHeight: 0,
+    },
     [theme.breakpoints.down('sm')]: {
+      minHeight: 0,
       paddingBottom: theme.spacing(12),
+      paddingTop: theme.spacing(40),
       '& h1': {
         lineHeight: '130%',
       },

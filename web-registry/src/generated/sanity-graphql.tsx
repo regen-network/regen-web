@@ -2542,6 +2542,7 @@ export type HeroSection = {
   _type?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   descriptionRaw?: Maybe<Scalars['JSON']>;
+  backgroundImage?: Maybe<CustomImage>;
   /** (Optional) If any text is underlined in the description, it will show this message when hovered */
   tooltipText?: Maybe<Scalars['String']>;
 };
@@ -2550,6 +2551,7 @@ export type HeroSectionFilter = {
   _key?: Maybe<StringFilter>;
   _type?: Maybe<StringFilter>;
   title?: Maybe<StringFilter>;
+  backgroundImage?: Maybe<CustomImageFilter>;
   tooltipText?: Maybe<StringFilter>;
 };
 
@@ -2557,6 +2559,7 @@ export type HeroSectionSorting = {
   _key?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
+  backgroundImage?: Maybe<CustomImageSorting>;
   tooltipText?: Maybe<SortOrder>;
 };
 
@@ -7499,6 +7502,10 @@ export type GettingStartedResourcesCardFieldsFragment = (
 export type HeroSectionFieldsFragment = (
   { __typename?: 'HeroSection' }
   & Pick<HeroSection, 'title' | 'descriptionRaw' | 'tooltipText'>
+  & { backgroundImage?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )> }
 );
 
 export type ImageBoldTextLabelFieldsFragment = (
@@ -7986,8 +7993,11 @@ export const HeroSectionFieldsFragmentDoc = gql`
   title
   descriptionRaw
   tooltipText
+  backgroundImage {
+    ...customImageFields
+  }
 }
-    `;
+    ${CustomImageFieldsFragmentDoc}`;
 export const ImageBoldTextLabelFieldsFragmentDoc = gql`
     fragment imageBoldTextLabelFields on ImageBoldTextLabel {
   boldText

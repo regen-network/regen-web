@@ -70,7 +70,11 @@ const BuyersPage = (): JSX.Element => {
             title={content?.heroSection?.title}
             descriptionRaw={content?.heroSection?.descriptionRaw}
             tooltipText={content?.heroSection?.tooltipText}
-            img={buyersHero}
+            img={
+              content?.heroSection?.backgroundImage?.image?.asset?.url ||
+              content?.heroSection?.backgroundImage?.imageHref ||
+              buyersHero
+            }
             linearGradient="linear-gradient(209.5deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%)"
           />
           {content?.ecologicalCreditsSection && (

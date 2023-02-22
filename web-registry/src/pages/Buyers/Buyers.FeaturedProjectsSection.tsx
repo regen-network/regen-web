@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { SxProps } from '@mui/material';
 
 import ProjectCard, {
@@ -19,6 +20,7 @@ interface Props {
 }
 
 const BuyersFeaturedProjectsSection = ({ projects, content, sx }: Props) => {
+  const navigate = useNavigate();
   const featuredProjects = content?.cards?.map(
     card => card?.project?.projectId,
   );
@@ -39,7 +41,11 @@ const BuyersFeaturedProjectsSection = ({ projects, content, sx }: Props) => {
     >
       <CardsGridContainer cardsCount={filteredProjects.length}>
         {filteredProjects.map(project => (
-          <ProjectCard key={project.id} {...project} />
+          <ProjectCard
+            key={project.id}
+            onClick={() => navigate(`/project/${project.id}`)}
+            {...project}
+          />
         ))}
       </CardsGridContainer>
     </Section>

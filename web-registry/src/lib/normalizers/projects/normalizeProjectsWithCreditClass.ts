@@ -20,7 +20,7 @@ interface Params {
   sanityCreditClassData?: AllCreditClassQuery;
 }
 
-export const normalizeProjectsByClass = ({
+export const normalizeProjectsWithCreditClass = ({
   metadatas,
   projectPageMetadatas,
   projects,

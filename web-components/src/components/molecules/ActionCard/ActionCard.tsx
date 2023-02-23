@@ -1,9 +1,8 @@
 import { Box, SxProps } from '@mui/material';
 
-import ContainedButton from 'src/components/buttons/ContainedButton';
-import { Body, Subtitle } from 'src/components/typography';
-import { parseText } from 'src/utils/textParser';
-
+import { BlockContent } from '../../../components/block-content';
+import ContainedButton from '../../../components/buttons/ContainedButton';
+import { Body, Subtitle } from '../../../components/typography';
 import { Theme } from '../../../theme/muiTheme';
 import { ButtonType } from '../../../types/shared/buttonType';
 import { ImageType } from '../../../types/shared/imageType';
@@ -36,7 +35,7 @@ const ActionCard = ({
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'bottom 0 right 0',
           boxShadow: '0px 2px 0px rgba(0, 0, 0, 0.15)',
-          border: theme => `1px solid ${theme.palette.grey[100]}}`,
+          border: theme => `1px solid ${theme.palette.grey[100]}`,
         },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
@@ -44,13 +43,19 @@ const ActionCard = ({
       <Box sx={{ p: 7.5 }}>
         <Box sx={{ maxWidth: 275 }}>
           <Subtitle size="xl" sx={{ mb: 2 }}>
-            {parseText(title)}
+            {title}
           </Subtitle>
-          <Body sx={{ mb: 5 }}>{parseText(description)}</Body>
+          <Body as="div" sx={{ mb: 5 }}>
+            <BlockContent content={description} />
+          </Body>
           <ContainedButton size="small" onClick={button.onClick}>
             {button.text}
           </ContainedButton>
-          {note && <Body sx={{ mt: 2.5 }}>{parseText(note)}</Body>}
+          {note && (
+            <Body as="div" sx={{ mt: 2.5 }}>
+              <BlockContent content={note} />
+            </Body>
+          )}
         </Box>
       </Box>
     </Box>

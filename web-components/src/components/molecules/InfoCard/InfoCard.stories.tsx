@@ -17,5 +17,5 @@ Default.args = {
   image: {
     src: '/illustrations/concierge-small.svg',
   },
-  note: 'Contact sales@regen.network or schedule a call.',
+  description: 'Contact sales@regen.network or schedule a call.',
 };

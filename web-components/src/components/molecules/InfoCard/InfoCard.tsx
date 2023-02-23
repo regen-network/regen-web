@@ -1,19 +1,24 @@
 import { Box, SxProps } from '@mui/material';
 
-import { Body, Subtitle } from 'src/components/typography';
-import { parseText } from 'src/utils/textParser';
-
+import { BlockContent } from '../../../components/block-content';
+import { Body, Subtitle } from '../../../components/typography';
 import { Theme } from '../../../theme/muiTheme';
 import { ImageType } from '../../../types/shared/imageType';
+import { parseText } from '../../../utils/textParser';
 
 export interface Props {
   title: string;
   image?: ImageType;
-  note?: string | JSX.Element;
+  description: string | JSX.Element;
   sx?: SxProps<Theme>;
 }
 
-const InfoCard = ({ title, image, note, sx = [] }: Props): JSX.Element => {
+const InfoCard = ({
+  title,
+  image,
+  description,
+  sx = [],
+}: Props): JSX.Element => {
   return (
     <Box
       sx={[
@@ -25,9 +30,8 @@ const InfoCard = ({ title, image, note, sx = [] }: Props): JSX.Element => {
             : 'none',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'bottom 0 right 0',
-          backgroundSize: 'auto 100%',
           boxShadow: '0px 2px 0px rgba(0, 0, 0, 0.15)',
-          border: theme => `1px solid ${theme.palette.grey[100]}}`,
+          border: theme => `1px solid ${theme.palette.grey[100]}`,
         },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
@@ -37,7 +41,9 @@ const InfoCard = ({ title, image, note, sx = [] }: Props): JSX.Element => {
           <Subtitle size="lg" sx={{ mb: 2 }}>
             {parseText(title)}
           </Subtitle>
-          {note && <Body sx={{ mt: 1.75 }}>{parseText(note)}</Body>}
+          <Body as="div" sx={{ mt: 1.75 }}>
+            <BlockContent content={description} />
+          </Body>
         </Box>
       </Box>
     </Box>

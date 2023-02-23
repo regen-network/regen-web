@@ -25,6 +25,7 @@ const InfoCard = ({ title, image, note, sx = [] }: Props): JSX.Element => {
             : 'none',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'bottom 0 right 0',
+          backgroundSize: 'auto 100%',
           boxShadow: '0px 2px 0px rgba(0, 0, 0, 0.15)',
           border: theme => `1px solid ${theme.palette.grey[100]}}`,
         },
@@ -36,7 +37,7 @@ const InfoCard = ({ title, image, note, sx = [] }: Props): JSX.Element => {
           <Subtitle size="lg" sx={{ mb: 2 }}>
             {parseText(title)}
           </Subtitle>
-          {note && <Body sx={{ mt: 2 }}>{parseText(note)}</Body>}
+          {note && <Body sx={{ mt: 1.75 }}>{parseText(note)}</Body>}
         </Box>
       </Box>
     </Box>

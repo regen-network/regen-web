@@ -1,12 +1,12 @@
 import { Box, SxProps } from '@mui/material';
 
 import { Theme } from '../../../theme/muiTheme';
-import { ImgType } from '../../../types/shared/IconType';
+import { ImageType } from '../../../types/shared/ImageType';
 import { Flex } from '../../box';
 import { Label } from '../../typography';
 
 export interface Props {
-  icon: ImgType;
+  icon: ImageType;
   label: string;
   sx?: SxProps<Theme>;
 }

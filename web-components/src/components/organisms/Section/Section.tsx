@@ -56,7 +56,7 @@ const Section = ({
             <Body
               size="xl"
               mobileSize="lg"
-              as="p"
+              as="div"
               textAlign="center"
               sx={{
                 pt: [3.25, 7.75],

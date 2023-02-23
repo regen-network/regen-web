@@ -1,8 +1,8 @@
-import { ImgType } from '../../../types/shared/IconType';
+import { ImageType } from '../../../types/shared/ImageType';
 
 export type EcologicalCreditTypeType = {
   name: string;
-  icon: ImgType;
+  icon: ImageType;
 };
 
 export type EcologicalCreditInfoType = {
@@ -12,7 +12,7 @@ export type EcologicalCreditInfoType = {
 };
 
 export type EcologicalCreditCardItemType = {
-  icon?: ImgType;
+  icon?: ImageType;
   name: string;
 };
 
@@ -23,7 +23,7 @@ export type EcologicalCreditCardItemListType = {
 
 export type EcologicalCreditCardType = {
   type: EcologicalCreditTypeType;
-  image: ImgType;
+  image: ImageType;
   title: string;
   infos: EcologicalCreditInfoType;
   description: string;

@@ -32,7 +32,6 @@ const EcologicalCreditCard = ({
       sx={[
         {
           display: 'flex',
-          height: { xs: 'auto', md: 443 },
           flexDirection: { xs: 'column', md: 'row' },
           background: 'grey.50',
           boxShadow: theme => theme.shadows[1],

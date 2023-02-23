@@ -1,7 +1,7 @@
 import { Box, SxProps } from '@mui/material';
 
 import { Theme } from '../../../theme/muiTheme';
-import { ImageType } from '../../../types/shared/ImageType';
+import { ImageType } from '../../../types/shared/imageType';
 import { Flex } from '../../box';
 import { Label } from '../../typography';
 

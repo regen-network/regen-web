@@ -1,4 +1,4 @@
-import { ImageType } from '../../../types/shared/ImageType';
+import { ImageType } from '../../../types/shared/imageType';
 
 export type EcologicalCreditTypeType = {
   name: string;

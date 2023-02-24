@@ -28,7 +28,7 @@ export const EcologicalCreditCardInfo = ({
       sx={{
         pr: 1.5,
         borderRight: '1px solid',
-        borderColor: theme => theme.palette.grey[500],
+        borderColor: 'grey.500',
       }}
     >
       {country}
@@ -37,7 +37,7 @@ export const EcologicalCreditCardInfo = ({
       sx={{
         px: 1.5,
         borderRight: '1px solid',
-        borderColor: theme => theme.palette.grey[500],
+        borderColor: 'grey.500',
       }}
     >
       {price}

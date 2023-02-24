@@ -61,6 +61,9 @@ const useStyles = makeStyles<UseStylesParams>()(
         height: theme.spacing(spacing.xs),
       },
       backgroundColor: theme.palette.primary.main,
+      img: {
+        objectFit: 'contain',
+      },
     },
   }),
 );

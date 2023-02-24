@@ -31,5 +31,6 @@ export const normalizeClassProjectForBatch = ({
     className: creditClassSanity?.nameRaw,
     projectName: metadata?.['schema:name'] ?? batch?.projectId,
     projectLocation: project?.jurisdiction,
+    icon: creditClassSanity?.icon?.asset?.url ?? '',
   };
 };

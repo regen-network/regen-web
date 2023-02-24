@@ -14,5 +14,6 @@ export const imageGrid = (): JSX.Element => (
     img={<img src="./andover.jpg" alt="andover" />}
     title={titleText}
     description={descriptionText}
+    button={{ text: 'Learn More', href: 'https://regen.network' }}
   />
 );

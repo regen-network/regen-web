@@ -2,4 +2,7 @@ fragment heroSectionFields on HeroSection {
   title
   descriptionRaw
   tooltipText
+  backgroundImage {
+    ...customImageFields
+  }
 }

@@ -1,0 +1,16 @@
+fragment buyersFeaturedCardsSectionFields on BuyersFeaturedProjectCardsSection {
+  title
+  descriptionRaw
+  backgroundImage {
+    imageHref
+    imageAlt
+    image {
+      asset {
+        url
+      }
+    }
+  }
+  cards {
+    ...buyersFeaturedProjectCard
+  }
+}

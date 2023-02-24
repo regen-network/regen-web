@@ -3,13 +3,22 @@ query allBuyersPage {
     heroSection {
       ...heroSectionFields
     }
+    ecologicalCreditsSection {
+      ...imageItemsSectionFields
+    }
     imageGridSection {
       ...imageGridSectionFields
     }
-    featuredSection {
-      ...featuredSectionFields
+    ecologicalCreditCardsSection {
+      ...ecologicalCreditCardsSectionFields
     }
-    faqSection {
+    featuredProjectCardsSection {
+      ...buyersFeaturedCardsSectionFields
+    }
+    partnersSection {
+      ...buyersPartnersSectionFields
+    }
+    contactSection {
       ...bottomBannerFields
     }
     footerButtonText

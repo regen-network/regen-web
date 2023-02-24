@@ -1,6 +1,6 @@
 import { Box, SxProps } from '@mui/material';
 
-import { Theme } from '../../theme/muiTheme';
+import { Theme } from '../../../theme/muiTheme';
 import { DummyVariant } from './Dummy.types';
 import { DummyVariantSizeMapping } from './Dummy.utils';
 

@@ -25,7 +25,6 @@ import {
   validateMemoLength,
 } from 'web-components/lib/components/inputs/validation';
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
-import InfoCard from 'web-components/lib/components/molecules/InfoCard';
 import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
 import {
   Body,

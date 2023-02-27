@@ -40,7 +40,7 @@ export default function ProjectImpactCard({
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          textAlign: 'center',
+          textAlign: 'left',
           position: 'relative',
           [theme.breakpoints.up('sm')]: {
             height: theme.spacing(59),

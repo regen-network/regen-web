@@ -225,7 +225,10 @@ export const BuySellOrderFlow = ({
       <BuyModalOptions
         content={buyModalOptionsContent?.allBuyModalOptions[0]}
         open={isBuyModalOptionsOpen}
-        onClose={() => setIsBuyModalOptionsOpen(false)}
+        onClose={() => {
+          setIsFlowStarted(false);
+          setIsBuyModalOptionsOpen(false);
+        }}
       />
       <ProcessingModal
         open={isProcessingModalOpen}

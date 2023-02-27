@@ -32,6 +32,7 @@ interface HeaderProps {
   homeLink?: React.FC<React.PropsWithChildren<{ color: string }>>;
   isRegistry?: boolean;
   extras?: JSX.Element;
+  websiteExtras?: JSX.Element;
   onSignup?: () => void;
   onLogin?: () => void;
   onLogout?: () => void;
@@ -55,6 +56,7 @@ export default function Header({
   fullWidth = false,
   pathname = '/',
   extras,
+  websiteExtras,
 }: HeaderProps): JSX.Element {
   const theme = useTheme();
   const isTablet = useMediaQuery(theme.breakpoints.down('md'));
@@ -110,6 +112,7 @@ export default function Header({
                   );
                 })}
                 {isRegistry && extras}
+                {websiteExtras}
               </MenuList>
             </Box>
             <Box
@@ -126,6 +129,7 @@ export default function Header({
                 onLogout={onLogout}
                 onSignup={onSignup}
                 extras={extras}
+                websiteExtras={websiteExtras}
               />
             </Box>
           </Box>

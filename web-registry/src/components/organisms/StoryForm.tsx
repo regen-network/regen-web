@@ -155,6 +155,9 @@ const ModalContent: React.FC<
   );
 };
 
+/**
+ * @deprecated part of legacy project forms
+ */
 const StoryForm: React.FC<React.PropsWithChildren<StoryFormProps>> = ({
   initialValues,
   ...props
@@ -202,7 +205,7 @@ const StoryForm: React.FC<React.PropsWithChildren<StoryFormProps>> = ({
         validate={async (values: StoryValues) => {
           const errors: StoryValuesErrors = {};
           if (graphData?.shaclGraphByUri?.graph) {
-            const projectPageData = { ...getProjectBaseData(), ...values };
+            const projectPageData = { ...getProjectBaseData(''), ...values };
             const report = await validate(
               graphData.shaclGraphByUri.graph,
               projectPageData,

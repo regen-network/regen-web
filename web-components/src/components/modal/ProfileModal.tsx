@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, useTheme } from '@mui/material';
 import { DefaultTheme as Theme } from '@mui/styles';
-import { Field, Form, Formik, FormikErrors, useFormikContext } from 'formik';
+import { Field, Form, Formik, useFormikContext } from 'formik';
 import { makeStyles } from 'tss-react/mui';
 
 import { Button } from '../buttons/Button';
@@ -19,9 +19,7 @@ interface ProfileModalProps {
   profile: ProfileFormValues;
   onClose: () => void;
   onSubmit: (profile: ProfileFormValues) => void;
-  validate: (
-    values: ProfileFormValues,
-  ) => Promise<FormikErrors<ProfileFormValues>>;
+  validationSchema: any;
   apiServerUrl: string;
   projectId: string;
 }
@@ -41,7 +39,7 @@ function ProfileModal({
   profile,
   onClose,
   onSubmit,
-  validate,
+  validationSchema,
   apiServerUrl,
   projectId,
 }: ProfileModalProps): JSX.Element {
@@ -71,13 +69,13 @@ function ProfileModal({
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
             try {
-              await onSubmit(values);
+              onSubmit(values);
               setSubmitting(false);
             } catch (e) {
               setSubmitting(false);
             }
           }}
-          validate={validate}
+          validationSchema={validationSchema}
         >
           {({ submitForm }) => {
             return (

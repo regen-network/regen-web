@@ -1,21 +1,29 @@
 import React from 'react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
-import { Field, Form, Formik, FormikErrors } from 'formik';
+import { Field, Form, Formik } from 'formik';
+import isEmpty from 'lodash/isEmpty';
+import * as Yup from 'yup';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import LocationField from 'web-components/lib/components/inputs/LocationField';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 
-import { getCompactedPath, getProjectBaseData, validate } from 'lib/rdf';
-
 import { useProjectEditContext } from 'pages';
 
-import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { ProjectPageFooter } from '../molecules';
 
 export interface ProjectLocationFormValues {
   'schema:location': Partial<GeocodeFeature>;
 }
+
+const ProjectLocationFormSchema = Yup.object().shape({
+  'schema:location': Yup.object()
+    // before the user selects the location, the value is a string,
+    // but we don't want to show yup default type error message
+    .typeError('')
+    .test('is-not-empty', requiredMessage, value => !isEmpty(value))
+    .required(requiredMessage),
+});
 
 const ProjectLocationForm: React.FC<
   React.PropsWithChildren<{
@@ -32,11 +40,6 @@ const ProjectLocationForm: React.FC<
   }>
 > = ({ submit, initialValues, mapToken, ...props }) => {
   const { confirmSave, isEdit } = useProjectEditContext();
-  const { data: graphData } = useShaclGraphByUriQuery({
-    variables: {
-      uri: 'http://regen.network/ProjectPageShape',
-    },
-  });
 
   return (
     <Formik
@@ -44,28 +47,8 @@ const ProjectLocationForm: React.FC<
       initialValues={{
         'schema:location': initialValues?.['schema:location'] || {},
       }}
-      validate={async (values: ProjectLocationFormValues) => {
-        const errors: FormikErrors<
-          ProjectLocationFormValues | { [path: string]: string }
-        > = {};
-        if (graphData?.shaclGraphByUri?.graph) {
-          const projectPageData = { ...getProjectBaseData(), ...values };
-          const report = await validate(
-            graphData.shaclGraphByUri.graph,
-            projectPageData,
-            'http://regen.network/ProjectPageLocationGroup',
-          );
-
-          for (const result of report.results) {
-            const path: string = result.path.value;
-            const compactedPath = getCompactedPath(path) as
-              | keyof ProjectLocationFormValues
-              | undefined;
-            if (compactedPath) errors[compactedPath] = requiredMessage;
-          }
-        }
-        return errors;
-      }}
+      validateOnMount
+      validationSchema={ProjectLocationFormSchema}
       onSubmit={async (values, { setTouched }) => {
         await submit({ values });
         setTouched({}); // reset to untouched

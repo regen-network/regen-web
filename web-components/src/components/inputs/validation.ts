@@ -21,12 +21,12 @@ export const invalidVCSRetirement: string =
   'Please enter a valid VCS retirement serial number';
 export const invalidVCSID: string = 'Please enter a valid VCS Project ID';
 export const invalidJSON: string = 'Please enter valid JSON-LD';
-export const invalidAddress: string = 'Invalid address';
 export const invalidRegenAddress: string = 'Invalid regen address';
 export const invalidPolygonAddress: string = 'Invalid Polygon address';
 export const requiredDenom: string = 'Please choose a denom';
 export const invalidDecimalCount: string = `More than ${MAX_FRACTION_DIGITS} decimal places not allowed`;
 export const invalidMemoLength: string = `Must be ${MEMO_MAX_LENGTH} characters or fewer`;
+export const positiveNumber = 'Must be positive';
 
 /* Validation Functions */
 

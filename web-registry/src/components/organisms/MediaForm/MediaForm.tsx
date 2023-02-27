@@ -1,12 +1,12 @@
 import { Formik, FormikHelpers } from 'formik';
+import * as Yup from 'yup';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-
-import type { ShaclGraphByUriQuery } from 'generated/graphql';
 
 import { useProjectEditContext } from 'pages/ProjectEdit';
 import { ProjectPageFooter } from 'components/molecules';
 
+import { PHOTO_COUNT } from './MediaForm.constants';
 import type { MediaErrorsSimple, MediaValuesSimple } from './MediaFormSimple';
 import { MediaFormSimple } from './MediaFormSimple';
 
@@ -31,14 +31,17 @@ interface MediaFormProps {
   onPrev?: () => void;
   onNext?: () => void;
   initialValues: MediaValues;
-  graphData?: ShaclGraphByUriQuery;
   projectId?: string;
 }
+
+const MediaFormSchema = Yup.object().shape({
+  'regen:previewPhoto': Yup.string(),
+  'regen:galleryPhotos': Yup.array(Yup.string()).max(PHOTO_COUNT),
+});
 
 /** Formik Context + handlers for legacy and new media */
 export const MediaForm = ({
   initialValues,
-  graphData,
   projectId,
   ...props
 }: MediaFormProps): JSX.Element => {
@@ -57,42 +60,13 @@ export const MediaForm = ({
     }
   }
 
-  const handleValidate = async (values: MediaValues): Promise<MediaErrors> => {
-    const errors: MediaErrors = {};
-    // TODO regen-registry/issues/1501
-    // if (graphData?.shaclGraphByUri?.graph) {
-    //   const projectPageData = {
-    //     ...getProjectBaseData(),
-    //     ...values,
-    //   };
-    //   const report = await validate(
-    //     graphData.shaclGraphByUri.graph,
-    //     projectPageData,
-    //     'http://regen.network/ProjectPageMediaGroup',
-    //   );
-    //   for (const result of report.results) {
-    //     const path: string = result.path?.value;
-    //     let compactedPath: keyof MediaValues | undefined;
-    //     if (path) {
-    //       compactedPath = getCompactedPath(path) as
-    //         | keyof MediaValues
-    //         | undefined;
-    //     }
-    //     if (compactedPath) {
-    //       errors[compactedPath] = requiredMessage;
-    //     }
-    //   }
-    // }
-    return errors;
-  };
-
   return (
     <OnBoardingCard>
       <Formik
         enableReinitialize
         validateOnMount
         initialValues={initialValues}
-        validate={handleValidate}
+        validationSchema={MediaFormSchema}
         onSubmit={handleSubmit}
       >
         {({ submitForm, isValid, isSubmitting, dirty }) => (

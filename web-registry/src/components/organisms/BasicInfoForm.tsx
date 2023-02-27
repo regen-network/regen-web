@@ -1,24 +1,22 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { Field, Form, Formik, FormikErrors } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import { makeStyles } from 'tss-react/mui';
+import * as Yup from 'yup';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import InputLabel from 'web-components/lib/components/inputs/InputLabel';
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
 import TextField from 'web-components/lib/components/inputs/TextField';
+import {
+  positiveNumber,
+  requiredMessage,
+} from 'web-components/lib/components/inputs/validation';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { useProjectEditContext } from 'pages';
 
-// import { requiredMessage } from 'web-components/lib/components/inputs/validation'; TODO: regen-registry#1048
-import { useShaclGraphByUriQuery } from '../../generated/graphql';
-// import {
-//   validate,
-//   getProjectBaseData,
-//   getCompactedPath,
-// } from '../../lib/rdf'; TODO: regen-registry#1048
 import { ProjectPageFooter } from '../molecules';
 
 export interface BasicInfoFormValues {
@@ -53,6 +51,16 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
 }));
 
+const BasicInfoFormSchema = Yup.object().shape({
+  'schema:name': Yup.string().required(requiredMessage),
+  'regen:projectSize': Yup.object().shape({
+    'qudt:numericValue': Yup.number()
+      .positive(positiveNumber)
+      .required(requiredMessage),
+    'qudt:unit': Yup.string().required(requiredMessage),
+  }),
+});
+
 const BasicInfoForm: React.FC<
   React.PropsWithChildren<{
     submit: ({ values }: { values: BasicInfoFormValues }) => Promise<void>;
@@ -62,11 +70,6 @@ const BasicInfoForm: React.FC<
 > = ({ submit, initialValues, onNext }) => {
   const { classes, cx } = useStyles();
   const { confirmSave, isEdit } = useProjectEditContext();
-  const { data: graphData } = useShaclGraphByUriQuery({
-    variables: {
-      uri: 'http://regen.network/ProjectPageShape',
-    },
-  });
 
   return (
     <Formik
@@ -79,40 +82,12 @@ const BasicInfoForm: React.FC<
           'qudt:unit': 'unit:HA',
         },
       }}
-      validate={async (values: BasicInfoFormValues) => {
-        const errors: FormikErrors<BasicInfoFormValues> = {};
-        if (graphData?.shaclGraphByUri?.graph) {
-          // TODO: Fix Validation. regen-registry#1048 .
-          // Temporarily commented out to enable testing.
-          // const projectPageData = { ...getProjectBaseData(), ...values };
-          // const report = await validate(
-          //   graphData.shaclGraphByUri.graph,
-          //   projectPageData,
-          //   'http://regen.network/ProjectPageBasicInfoGroup',
-          // );
-          // for (const result of report.results) {
-          //   const path: string = result.path.value;
-          //   const compactedPath = getCompactedPath(path) as
-          //     | keyof BasicInfoFormValues
-          //     | undefined;
-          //   if (compactedPath === 'regen:size') {
-          //     errors[compactedPath] = {
-          //       'qudt:numericValue': {
-          //         '@value': requiredMessage,
-          //       },
-          //     };
-          //   } else if (compactedPath) {
-          //     errors[compactedPath] = requiredMessage;
-          //   }
-          // }
-        }
-        return errors;
-      }}
       onSubmit={async (values, { setTouched }) => {
         await submit({ values });
         setTouched({}); // reset to untouched
         if (isEdit && confirmSave) confirmSave();
       }}
+      validationSchema={BasicInfoFormSchema}
     >
       {({ submitForm, isValid, isSubmitting, dirty }) => {
         return (
@@ -133,7 +108,7 @@ const BasicInfoForm: React.FC<
                   sx={{
                     display: 'flex',
                     justifyContent: 'space-between',
-                    alignItems: 'flex-end',
+                    alignItems: 'baseline',
                   }}
                 >
                   <Field

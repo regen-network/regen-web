@@ -1,59 +1,35 @@
 import React from 'react';
-import { Field, Form, Formik, FormikErrors, FormikHelpers } from 'formik';
+import { Field, Form, Formik, FormikHelpers } from 'formik';
+import * as Yup from 'yup';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
-import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 
-import { getCompactedPath, getProjectBaseData, validate } from 'lib/rdf';
-
-import { ShaclGraphByUriQuery } from '../../generated/graphql';
-import { useProjectEditContext } from '../../pages/ProjectEdit';
-import { ProjectPageFooter } from '../molecules';
+import { useProjectEditContext } from '../../../pages/ProjectEdit';
+import { ProjectPageFooter } from '../../molecules';
+import { DESCRIPTION_MAX_LENGTH } from './DescriptionForm.constants';
 
 interface DescriptionFormProps {
   submit: ({ values }: { values: DescriptionValues }) => Promise<void>;
   onNext?: () => void;
   onPrev?: () => void;
   initialValues?: DescriptionValues;
-  graphData?: ShaclGraphByUriQuery;
 }
 
 export interface DescriptionValues {
   'schema:description'?: string;
 }
 
+const DescriptionFormSchema = Yup.object().shape({
+  'schema:description': Yup.string().max(DESCRIPTION_MAX_LENGTH),
+});
+
 const DescriptionForm = ({
   submit,
   initialValues,
-  graphData,
   ...props
 }: DescriptionFormProps): JSX.Element => {
   const { confirmSave, isEdit } = useProjectEditContext();
-
-  const validateForm = async (
-    values: DescriptionValues,
-  ): Promise<FormikErrors<DescriptionValues>> => {
-    const errors: FormikErrors<DescriptionValues> = {};
-    if (graphData?.shaclGraphByUri?.graph) {
-      const projectPageData = { ...getProjectBaseData(), ...values };
-      const report = await validate(
-        graphData.shaclGraphByUri.graph,
-        projectPageData,
-        'http://regen.network/ProjectPageDescriptionGroup',
-      );
-      for (const result of report.results) {
-        const path: string = result.path.value;
-        const compactedPath = getCompactedPath(path) as
-          | keyof DescriptionValues
-          | undefined;
-        if (compactedPath) {
-          errors[compactedPath] = requiredMessage;
-        }
-      }
-    }
-    return errors;
-  };
 
   const onSubmit = async (
     values: DescriptionValues,
@@ -78,7 +54,7 @@ const DescriptionForm = ({
             initialValues?.['schema:description'] || undefined,
         }
       }
-      validate={validateForm}
+      validationSchema={DescriptionFormSchema}
       onSubmit={onSubmit}
     >
       {({ submitForm, isValid, isSubmitting, dirty }) => {
@@ -86,7 +62,7 @@ const DescriptionForm = ({
           <Form translate="yes">
             <OnBoardingCard>
               <Field
-                charLimit={600}
+                charLimit={DESCRIPTION_MAX_LENGTH}
                 component={ControlledTextField}
                 label="Project description"
                 description="Describe the story of this property."

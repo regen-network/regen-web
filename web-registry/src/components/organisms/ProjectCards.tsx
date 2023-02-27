@@ -8,7 +8,7 @@ import { makeStyles } from 'tss-react/mui';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { qudtUnit, qudtUnitMap } from 'lib/rdf';
+import { QUDT_UNIT_MAP, qudtUnit } from 'lib/rdf';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import DefaultProject from '../../assets/default-project.jpg';
@@ -92,7 +92,7 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
         ]
       }
       areaUnit={
-        qudtUnitMap[
+        QUDT_UNIT_MAP[
           project.metadata?.['regen:projectSize']?.['qudt:unit']?.[
             '@value'
           ] as qudtUnit

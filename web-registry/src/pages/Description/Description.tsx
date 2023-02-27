@@ -20,14 +20,6 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
     anchored: false,
   });
 
-  // TODO validation regen-registry/issues/1501
-  // Get ProjectPage SHACL graph (to validate unanchored data)
-  // const { data: graphData } = useShaclGraphByUriQuery({
-  //   variables: {
-  //     uri: getProjectPageShapeIri(),
-  //   },
-  // });
-
   let initialFieldValues: DescriptionValues | undefined;
   if (metadata) {
     initialFieldValues = {
@@ -59,7 +51,6 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
         onNext={navigateNext}
         onPrev={navigatePrev}
         initialValues={initialFieldValues}
-        // graphData={graphData}
       />
     </ProjectFormTemplate>
   );

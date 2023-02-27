@@ -354,6 +354,9 @@ function getInitialValues(values?: DisplayValues): DisplayValues | undefined {
   }
 }
 
+/**
+ * @deprecated part of legacy project forms
+ */
 const EntityDisplayForm: React.FC<
   React.PropsWithChildren<EntityDisplayFormProps>
 > = ({ submit, initialValues, ...props }) => {
@@ -420,7 +423,7 @@ const EntityDisplayForm: React.FC<
             }
             if (validateProject) {
               const projectPageData = {
-                ...getProjectBaseData(),
+                ...getProjectBaseData(''),
                 ...values,
               };
               const report = await validate(

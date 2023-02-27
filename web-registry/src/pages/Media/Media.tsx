@@ -23,14 +23,6 @@ const Media = (): JSX.Element => {
     anchored: false,
   });
 
-  // TODO validation regen-registry/issues/1501
-  // Get ProjectPage SHACL graph (to validate unanchored data)
-  // const { data: graphData } = useShaclGraphByUriQuery({
-  //   variables: {
-  //     uri: getProjectPageShapeIri(),
-  //   },
-  // });
-
   function getInitialFormValues(): MediaValuesSimple {
     let values: MediaValuesSimple = {};
     if (metadata) {
@@ -66,7 +58,6 @@ const Media = (): JSX.Element => {
     >
       <MediaForm
         submit={metadataSubmit}
-        // graphData={graphData}
         initialValues={getInitialFormValues()}
         onNext={navigateNext}
         onPrev={navigatePrev}

@@ -19,8 +19,8 @@ import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/gra
 import {
   getAnchoredProjectMetadata,
   getUnanchoredProjectMetadata,
+  QUDT_UNIT_MAP,
   qudtUnit,
-  qudtUnitMap,
 } from 'lib/rdf';
 
 import { Link } from '../../components/atoms';
@@ -135,7 +135,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
         <ItemDisplay name="Size">
           {metadata?.['regen:projectSize']?.['qudt:numericValue'] || '-'}{' '}
           {
-            qudtUnitMap[
+            QUDT_UNIT_MAP[
               metadata?.['regen:projectSize']?.['qudt:unit'] as qudtUnit
             ]
           }

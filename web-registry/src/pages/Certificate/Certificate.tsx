@@ -18,7 +18,7 @@ import UserAvatar from 'web-components/lib/components/user/UserAvatar';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { getFormattedPeriod } from 'web-components/lib/utils/format';
 
-import { qudtUnit, qudtUnitMap } from 'lib/rdf';
+import { QUDT_UNIT_MAP, qudtUnit } from 'lib/rdf';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import background from '../../assets/certificate-bg.png';
@@ -321,7 +321,7 @@ function CertificatePage(): JSX.Element {
                 ]
               }
               areaUnit={
-                qudtUnitMap[
+                QUDT_UNIT_MAP[
                   project.metadata?.['regen:projectSize']?.['qudt:unit']?.[
                     '@value'
                   ] as qudtUnit

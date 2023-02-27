@@ -252,11 +252,7 @@ function ProjectDetails(): JSX.Element {
             ? () => setIsSellFlowStarted(true)
             : () => setDisplayErrorBanner(true)
         }
-        onBuyButtonClick={
-          wallet?.address
-            ? () => setIsBuyFlowStarted(true)
-            : () => setDisplayErrorBanner(true)
-        }
+        onBuyButtonClick={() => setIsBuyFlowStarted(true)}
         onChainProjectId={onChainProjectId}
         projectName={anchoredMetadata?.['schema:name']}
         onChainCreditClassId={onChainProject?.classId}

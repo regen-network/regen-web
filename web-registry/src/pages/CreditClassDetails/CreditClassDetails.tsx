@@ -146,11 +146,7 @@ function CreditClassDetails({
             ? () => setIsSellFlowStarted(true)
             : () => setDisplayErrorBanner(true)
         }
-        onBuyButtonClick={
-          wallet?.address
-            ? () => setIsBuyFlowStarted(true)
-            : () => setDisplayErrorBanner(true)
-        }
+        onBuyButtonClick={() => setIsBuyFlowStarted(true)}
         onChainCreditClassId={onChainClass?.id}
         creditClassName={metadata?.['schema:name']}
       />

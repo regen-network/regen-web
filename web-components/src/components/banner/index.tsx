@@ -19,7 +19,7 @@ const useStyles = makeStyles<StyleProps>()((theme, { color }) => ({
     justifyContent: 'center',
     top: '0px',
     left: '0px',
-    zIndex: 1000,
+    zIndex: 1400,
     background: color || theme.palette.secondary.main,
     color: theme.palette.primary.main,
     lineHeight: '145%',

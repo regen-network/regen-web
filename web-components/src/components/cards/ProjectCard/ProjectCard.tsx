@@ -4,17 +4,21 @@ import { Box, SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
 import { Buy1Event, Track } from 'web-registry/src/lib/tracker/types';
 
+import { ButtonType } from '../../../types/shared/buttonType';
 import { formatStandardInfo } from '../../../utils/format';
 import OutlinedButton from '../../buttons/OutlinedButton';
 import GradientBadge from '../../gradient-badge';
 import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
-import CurrentCreditsIcon from '../../icons/CurrentCreditsIcon';
 import ProjectPlaceInfo from '../../place/ProjectPlaceInfo';
 import InfoTooltipWithIcon from '../../tooltip/InfoTooltipWithIcon';
 import { Body, Subtitle } from '../../typography';
 import UserInfo, { User } from '../../user/UserInfo';
 import MediaCard, { MediaCardProps } from '../MediaCard';
-import { ERROR_CARD_PRICE, SOLD_OUT } from './ProjectCard.constants';
+import {
+  DEFAULT_BUY_BUTTON,
+  ERROR_CARD_PRICE,
+  SOLD_OUT,
+} from './ProjectCard.constants';
 import { PurchaseDetails } from './ProjectCard.PurchaseDetails';
 import { useProjectCardStyles } from './ProjectCard.styles';
 import { PurchaseInfo } from './ProjectCard.types';
@@ -42,6 +46,7 @@ export interface ProjectCardProps extends MediaCardProps {
   track?: Track;
   isSoldOut?: boolean;
   creditsTooltip?: string;
+  button?: ButtonType;
 }
 
 export function ProjectCard({
@@ -66,11 +71,13 @@ export function ProjectCard({
   track,
   isSoldOut = false,
   creditsTooltip,
+  button = DEFAULT_BUY_BUTTON,
   ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
   const { classes } = useProjectCardStyles();
   const location = useLocation();
+  const { text: buttontext, startIcon: buttonStartIcon } = button;
 
   const [open, setOpen] = useState<boolean>(true);
 
@@ -267,15 +274,13 @@ export function ProjectCard({
                       onButtonClick && onButtonClick();
                     }}
                     size="small"
-                    startIcon={
-                      <CurrentCreditsIcon height="18px" width="18px" />
-                    }
+                    startIcon={buttonStartIcon}
                     disabled={
                       purchaseInfo.sellInfo.creditsAvailableForUser === 0
                     }
                     sx={{ width: '100%' }}
                   >
-                    {'BUY ECOCREDITS'}
+                    {buttontext}
                   </OutlinedButton>
                 </>
               )}

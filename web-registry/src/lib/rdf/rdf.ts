@@ -41,21 +41,6 @@ export async function validate(shapesJSON: any, dataJSON: any, group?: string) {
   const result = await import('./rdf-lib').then(async ({ SHACLValidator }) => {
     const validator = new SHACLValidator(shapes, { factory, group });
     const report = await validator.validate(data);
-    // for (const result of report.results) {
-    //   // See https://www.w3.org/TR/shacl/#results-validation-result for details
-    //   // about each property
-    //   const r = result as ValidationReport.results[0];
-    //   console.log('message', result.message);
-    //   console.log('path', result.path);
-    //   console.log('focusNode', result.focusNode);
-    //   console.log('severity', result.severity);
-    //   console.log(
-    //     'sourceConstraintComponent',
-    //     result.sourceConstraintComponent,
-    //   );
-    //   console.log('sourceShape', result.sourceShape);
-    // }
-
     return report;
   });
 

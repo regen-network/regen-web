@@ -1,6 +1,6 @@
 {
   "name": "@regen-network/web-components",
-  "version": "0.1.13",
+  "version": "0.2.0",
   "files": [
     "lib/",
     "README.md"

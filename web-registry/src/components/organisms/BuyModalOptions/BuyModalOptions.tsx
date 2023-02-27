@@ -9,7 +9,6 @@ import { Title } from 'web-components/lib/components/typography';
 import { AllBuyModalOptionsQuery } from 'generated/sanity-graphql';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { onBtnClick } from 'lib/button';
-import { useWallet } from 'lib/wallet/wallet';
 
 interface Props extends RegenModalProps {
   open: boolean;
@@ -26,8 +25,6 @@ export const BuyModalOptions = ({
 }: Props) => {
   const cards = content?.cards ?? [];
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
-  const { wallet } = useWallet();
-  const isConnected = !!wallet?.address;
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -51,7 +48,7 @@ export const BuyModalOptions = ({
               }}
               button={{
                 text: card?.button?.buttonText ?? '',
-                onClick: isConnected
+                onClick: card?.button?.buttonLink
                   ? () => onBtnClick(openModal, card?.button)
                   : () => setErrorBannerTextAtom(ERROR_BANNER),
               }}

@@ -112,6 +112,7 @@ type Props = {
   isRegistry?: boolean;
   pathname: string;
   isAuthenticated?: boolean;
+  websiteExtras?: JSX.Element;
   linkComponent: React.FC<NavLinkProps>;
   onSignup?: () => void;
   onLogin?: () => void;
@@ -121,6 +122,7 @@ type Props = {
 const MobileMenu: React.FC<Props> = ({
   menuItems,
   pathname,
+  websiteExtras,
   linkComponent: Link,
   ...props
 }) => {
@@ -214,6 +216,7 @@ const MobileMenu: React.FC<Props> = ({
                 )}
               </MenuItem>
             ))}
+            {websiteExtras && <MenuItem>{websiteExtras}</MenuItem>}
             {/* {props.isRegistry && (
               <>
                 <Divider light className={styles.divider} />

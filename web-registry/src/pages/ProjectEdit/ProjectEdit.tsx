@@ -121,7 +121,7 @@ function ProjectEdit(): JSX.Element {
 
   if (isNotAdmin) {
     return (
-      <ProjectEditDenied address={wallet?.address} projectId={projectId} />
+      <ProjectEditDenied address={onChainProject.admin} projectId={projectId} />
     );
   }
 

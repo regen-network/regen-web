@@ -82,7 +82,7 @@ const MyProjects = (): JSX.Element => {
             );
             const name =
               currentProject?.name ??
-              project?.metadata['schema:name'] ??
+              project?.metadata?.['schema:name'] ??
               project?.handle ??
               project?.id;
             return (

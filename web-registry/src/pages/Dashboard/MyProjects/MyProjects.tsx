@@ -71,6 +71,7 @@ const MyProjects = (): JSX.Element => {
                   walletData,
                 })
               }
+              sx={{ height: { xs: '100%' } }}
             />
           </Grid>
         )}
@@ -92,7 +93,7 @@ const MyProjects = (): JSX.Element => {
                     {...(currentProject ?? {})}
                     name={name}
                     onButtonClick={() =>
-                      navigate(`/project-pages/${project?.id}/edit`)
+                      navigate(`/project-pages/${project?.id}/edit/basic-info`)
                     }
                     track={track}
                   />

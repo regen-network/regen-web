@@ -86,7 +86,7 @@ export const getIsTransparent = (pathname: string): boolean =>
     '/methodology-review-process',
     '/create-credit-class',
     '/certificate',
-    '/land-stewards',
+    '/project-developers',
   ].some(route => pathname.startsWith(route));
 
 export const getHeaderColors = (theme: Theme): HeaderColors => ({
@@ -94,6 +94,6 @@ export const getHeaderColors = (theme: Theme): HeaderColors => ({
   '/certificate': theme.palette.primary.main,
   '/create-methodology': theme.palette.primary.main,
   '/create-credit-class': theme.palette.primary.main,
-  '/land-stewards': theme.palette.primary.main,
+  '/project-developers': theme.palette.primary.main,
   '/methodology-review-process': theme.palette.primary.main,
 });

@@ -76,18 +76,21 @@ const MyProjects = (): JSX.Element => {
         )}
         {isProjectAdmin &&
           projects?.map((project, i) => {
-            const currentProject =
-              projectsWithOrders.find(
-                projectsWithOrder =>
-                  projectsWithOrder.id === project?.onChainId,
-              ) ?? {};
+            const currentProject = projectsWithOrders.find(
+              projectsWithOrder => projectsWithOrder.id === project?.onChainId,
+            );
+            const name =
+              currentProject?.name ??
+              project?.metadata['schema:name'] ??
+              project?.handle ??
+              project?.id;
             return (
               <Grid key={i} item xs={12} md={6} lg={4}>
                 <WithLoader isLoading={isLoadingProjects} variant="skeleton">
                   <ProjectCard
                     {...DEFAULT_PROJECT}
-                    {...currentProject}
-                    name={project?.handle ?? project?.id}
+                    {...(currentProject ?? {})}
+                    name={name}
                     onButtonClick={() =>
                       navigate(`/project-pages/${project?.id}/edit`)
                     }

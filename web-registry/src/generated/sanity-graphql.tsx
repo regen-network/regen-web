@@ -22,6 +22,33 @@ export type Scalars = {
 
 
 
+export type ActionCard = {
+  __typename?: 'ActionCard';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+  button?: Maybe<Button>;
+  noteRaw?: Maybe<Scalars['JSON']>;
+  image?: Maybe<CustomImage>;
+};
+
+export type ActionCardFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  button?: Maybe<ButtonFilter>;
+  image?: Maybe<CustomImageFilter>;
+};
+
+export type ActionCardSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  button?: Maybe<ButtonSorting>;
+  image?: Maybe<CustomImageSorting>;
+};
+
 export type BasicStepCardSection = {
   __typename?: 'BasicStepCardSection';
   _key?: Maybe<Scalars['String']>;
@@ -263,6 +290,83 @@ export type ButtonSorting = {
   buttonLink?: Maybe<LinkSorting>;
   buttonModal?: Maybe<SortOrder>;
   buttonBlankTarget?: Maybe<SortOrder>;
+};
+
+export type BuyModal = Document & {
+  __typename?: 'BuyModal';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  infoCard?: Maybe<InfoCard>;
+};
+
+export type BuyModalFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  infoCard?: Maybe<InfoCardFilter>;
+};
+
+export type BuyModalOptions = Document & {
+  __typename?: 'BuyModalOptions';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  cards?: Maybe<Array<Maybe<ActionCard>>>;
+};
+
+export type BuyModalOptionsFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+};
+
+export type BuyModalOptionsSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+};
+
+export type BuyModalSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  infoCard?: Maybe<InfoCardSorting>;
 };
 
 export type Buyer = {
@@ -2954,6 +3058,29 @@ export type ImageWithTitleSorting = {
   image?: Maybe<CustomImageSorting>;
 };
 
+export type InfoCard = {
+  __typename?: 'InfoCard';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+  image?: Maybe<CustomImage>;
+};
+
+export type InfoCardFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  image?: Maybe<CustomImageFilter>;
+};
+
+export type InfoCardSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  image?: Maybe<CustomImageSorting>;
+};
+
 export type IntFilter = {
   /** Checks if the value is equal to the given input. */
   eq?: Maybe<Scalars['Int']>;
@@ -4563,6 +4690,8 @@ export type RootQuery = {
   __typename?: 'RootQuery';
   BasketDetailsPage?: Maybe<BasketDetailsPage>;
   BridgePage?: Maybe<BridgePage>;
+  BuyModal?: Maybe<BuyModal>;
+  BuyModalOptions?: Maybe<BuyModalOptions>;
   BuyersPage?: Maybe<BuyersPage>;
   CaseStudiesPage?: Maybe<CaseStudiesPage>;
   CaseStudyPage?: Maybe<CaseStudyPage>;
@@ -4619,6 +4748,8 @@ export type RootQuery = {
   Document?: Maybe<Document>;
   allBasketDetailsPage: Array<BasketDetailsPage>;
   allBridgePage: Array<BridgePage>;
+  allBuyModal: Array<BuyModal>;
+  allBuyModalOptions: Array<BuyModalOptions>;
   allBuyersPage: Array<BuyersPage>;
   allCaseStudiesPage: Array<CaseStudiesPage>;
   allCaseStudyPage: Array<CaseStudyPage>;
@@ -4682,6 +4813,16 @@ export type RootQueryBasketDetailsPageArgs = {
 
 
 export type RootQueryBridgePageArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryBuyModalArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryBuyModalOptionsArgs = {
   id: Scalars['ID'];
 };
 
@@ -4967,6 +5108,22 @@ export type RootQueryAllBasketDetailsPageArgs = {
 export type RootQueryAllBridgePageArgs = {
   where?: Maybe<BridgePageFilter>;
   sort?: Maybe<Array<BridgePageSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllBuyModalArgs = {
+  where?: Maybe<BuyModalFilter>;
+  sort?: Maybe<Array<BuyModalSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllBuyModalOptionsArgs = {
+  where?: Maybe<BuyModalOptionsFilter>;
+  sort?: Maybe<Array<BuyModalOptionsSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -6890,6 +7047,46 @@ export type AllBasketDetailsPageQuery = (
   )> }
 );
 
+export type AllBuyModalQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllBuyModalQuery = (
+  { __typename?: 'RootQuery' }
+  & { allBuyModal: Array<(
+    { __typename?: 'BuyModal' }
+    & { infoCard?: Maybe<(
+      { __typename?: 'InfoCard' }
+      & Pick<InfoCard, 'title' | 'descriptionRaw'>
+      & { image?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )> }
+    )> }
+  )> }
+);
+
+export type AllBuyModalOptionsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllBuyModalOptionsQuery = (
+  { __typename?: 'RootQuery' }
+  & { allBuyModalOptions: Array<(
+    { __typename?: 'BuyModalOptions' }
+    & Pick<BuyModalOptions, 'title'>
+    & { cards?: Maybe<Array<Maybe<(
+      { __typename?: 'ActionCard' }
+      & Pick<ActionCard, 'title' | 'descriptionRaw' | 'noteRaw'>
+      & { button?: Maybe<(
+        { __typename?: 'Button' }
+        & ButtonFieldsFragment
+      )>, image?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )> }
+    )>>> }
+  )> }
+);
+
 export type AllBuyersPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -8222,6 +8419,92 @@ export function useAllBasketDetailsPageLazyQuery(baseOptions?: Apollo.LazyQueryH
 export type AllBasketDetailsPageQueryHookResult = ReturnType<typeof useAllBasketDetailsPageQuery>;
 export type AllBasketDetailsPageLazyQueryHookResult = ReturnType<typeof useAllBasketDetailsPageLazyQuery>;
 export type AllBasketDetailsPageQueryResult = Apollo.QueryResult<AllBasketDetailsPageQuery, AllBasketDetailsPageQueryVariables>;
+export const AllBuyModalDocument = gql`
+    query allBuyModal {
+  allBuyModal {
+    infoCard {
+      title
+      descriptionRaw
+      image {
+        ...customImageFields
+      }
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+
+/**
+ * __useAllBuyModalQuery__
+ *
+ * To run a query within a React component, call `useAllBuyModalQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllBuyModalQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllBuyModalQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllBuyModalQuery(baseOptions?: Apollo.QueryHookOptions<AllBuyModalQuery, AllBuyModalQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllBuyModalQuery, AllBuyModalQueryVariables>(AllBuyModalDocument, options);
+      }
+export function useAllBuyModalLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllBuyModalQuery, AllBuyModalQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllBuyModalQuery, AllBuyModalQueryVariables>(AllBuyModalDocument, options);
+        }
+export type AllBuyModalQueryHookResult = ReturnType<typeof useAllBuyModalQuery>;
+export type AllBuyModalLazyQueryHookResult = ReturnType<typeof useAllBuyModalLazyQuery>;
+export type AllBuyModalQueryResult = Apollo.QueryResult<AllBuyModalQuery, AllBuyModalQueryVariables>;
+export const AllBuyModalOptionsDocument = gql`
+    query allBuyModalOptions {
+  allBuyModalOptions {
+    title
+    cards {
+      title
+      descriptionRaw
+      button {
+        ...buttonFields
+      }
+      noteRaw
+      image {
+        ...customImageFields
+      }
+    }
+  }
+}
+    ${ButtonFieldsFragmentDoc}
+${CustomImageFieldsFragmentDoc}`;
+
+/**
+ * __useAllBuyModalOptionsQuery__
+ *
+ * To run a query within a React component, call `useAllBuyModalOptionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllBuyModalOptionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllBuyModalOptionsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllBuyModalOptionsQuery(baseOptions?: Apollo.QueryHookOptions<AllBuyModalOptionsQuery, AllBuyModalOptionsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllBuyModalOptionsQuery, AllBuyModalOptionsQueryVariables>(AllBuyModalOptionsDocument, options);
+      }
+export function useAllBuyModalOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllBuyModalOptionsQuery, AllBuyModalOptionsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllBuyModalOptionsQuery, AllBuyModalOptionsQueryVariables>(AllBuyModalOptionsDocument, options);
+        }
+export type AllBuyModalOptionsQueryHookResult = ReturnType<typeof useAllBuyModalOptionsQuery>;
+export type AllBuyModalOptionsLazyQueryHookResult = ReturnType<typeof useAllBuyModalOptionsLazyQuery>;
+export type AllBuyModalOptionsQueryResult = Apollo.QueryResult<AllBuyModalOptionsQuery, AllBuyModalOptionsQueryVariables>;
 export const AllBuyersPageDocument = gql`
     query allBuyersPage {
   allBuyersPage {

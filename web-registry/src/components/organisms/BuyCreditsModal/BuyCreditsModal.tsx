@@ -33,8 +33,10 @@ import {
 } from 'web-components/lib/components/typography';
 
 import { useLedger } from 'ledger';
+import { client } from 'lib/clients/sanity';
 import { microToDenom } from 'lib/denom.utils';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
+import { getBuyModalQuery } from 'lib/queries/react-query/sanity/getBuyModalQuery/getBuyModalQuery';
 import { Buy2Event } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
@@ -46,6 +48,7 @@ import DenomLabel from 'components/molecules/DenomLabel';
 import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
 
 import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
+import { BuyCreditsModalInfoCard } from './BuyCreditsModal.InfoCard';
 import { SetSelectedSellOrderElement } from './BuyCreditsModal.SetSelectedSellOrderElement';
 import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
 import {
@@ -127,6 +130,10 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
     const { track } = useTracker();
     const location = useLocation();
 
+    const { data: buyModalContent } = useQuery(
+      getBuyModalQuery({ sanityClient: client }),
+    );
+
     const userBalance = useFetchUserBalance({ selectedSellOrder });
     useRefreshUserBalance({ open });
 
@@ -170,10 +177,16 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
           <Title
             variant="h3"
             align="center"
-            sx={{ pt: 0, pb: { xs: 6, sm: 7.5 }, px: { xs: 0, sm: 7.5 } }}
+            sx={{ pt: 0, pb: 5, px: { xs: 0, sm: 7.5 } }}
           >
             {'Buy Ecocredits'}
           </Title>
+          {buyModalContent && (
+            <BuyCreditsModalInfoCard
+              content={buyModalContent.allBuyModal[0]}
+              sx={{ mb: 12.5 }}
+            />
+          )}
           {project?.name && (
             <Card className={cx(classes.thumbnailCard, classes.field)}>
               <CardContent className={classes.cardContent}>

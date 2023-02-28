@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/regen-network/regen-web/compare/v1.2.0...v1.2.1) (2023-02-28)
+
+### Bug Fixes
+
+- price usd computation ([812aef3](https://github.com/regen-network/regen-web/commit/812aef3923e429df5c73e668c37e8622f72027be))
+
 # [1.2.0](https://github.com/regen-network/regen-web/compare/v1.1.0...v1.2.0) (2023-02-27)
 
 ### Bug Fixes

@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useApolloClient } from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
 import { omit } from 'lodash';
 
-import { graphqlClient } from 'lib/clients/graphqlClient';
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getShaclGraphByUriQuery } from 'lib/queries/react-query/registry-server/graphql/getShaclGraphByUriQuery/getShaclGraphByUriQuery';
 import { getProjectShapeIri } from 'lib/rdf';
@@ -21,6 +21,7 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
   () => {
     const navigate = useNavigate();
     const { projectId } = useParams();
+    const graphqlClient = useApolloClient();
     const { isEdit, onChainProject, projectEditSubmit } =
       useProjectEditContext();
     const { metadata, metadataSubmit, offChainProject } =

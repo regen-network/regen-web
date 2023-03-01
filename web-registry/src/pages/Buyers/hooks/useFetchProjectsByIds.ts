@@ -1,10 +1,10 @@
+import { useApolloClient } from '@apollo/client';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQueries, useQuery } from '@tanstack/react-query';
 
 import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCard';
 
 import { useLedger } from 'ledger';
-import { graphqlClient } from 'lib/clients/graphqlClient';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { normalizeProjectsWithCreditClass } from 'lib/normalizers/projects/normalizeProjectsWithCreditClass';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
@@ -23,6 +23,7 @@ interface Props {
 
 export const useFetchProjectsByIds = ({ projectIds }: Props): Response => {
   const { ecocreditClient } = useLedger();
+  const graphqlClient = useApolloClient();
 
   // Projects
   const projectsResults = useQueries({

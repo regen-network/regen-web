@@ -10,8 +10,6 @@ import {
 import { IntercomProvider } from 'react-use-intercom';
 import amplitudePlugin from '@analytics/amplitude';
 import googleAnalytics from '@analytics/google-analytics';
-import { useApolloClient } from '@apollo/client';
-import { Auth0Provider } from '@auth0/auth0-react';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import * as Sentry from '@sentry/react';
@@ -36,14 +34,6 @@ import * as serviceWorker from './serviceWorker';
 
 import './App.css';
 
-const config = {
-  domain:
-    process.env.REACT_APP_AUTH0_DOMAIN || 'regen-network-registry.auth0.com',
-  clientId:
-    process.env.REACT_APP_AUTH0_CLIENT_ID || 'rEuc1WLPAQVXZ7gJrWg4AL9EhWMHmLu8',
-  returnTo: window.location.origin || 'http://localhost:3000/',
-  audience: 'https://regen-registry-server.herokuapp.com/',
-};
 const intercomId = process.env.REACT_APP_INTERCOM_APP_ID || '';
 
 // by default do not enable sentry unless the flag is set.
@@ -112,43 +102,32 @@ const container = document.getElementById('root') as HTMLElement;
 const root = createRoot(container);
 
 root.render(
-  <Auth0Provider
-    domain={config.domain}
-    clientId={config.clientId}
-    redirectUri={window.location.origin}
-    // onRedirectCallback={onRedirectCallback}
-    // returnTo={config.returnTo}
-    useRefreshTokens={true}
-    audience={config.audience}
-    cacheLocation="localstorage"
-  >
+  <QueryClientProvider client={reactQueryClient}>
     <AuthApolloProvider>
-      <QueryClientProvider client={reactQueryClient}>
-        <IntercomProvider appId={intercomId} autoBoot>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <AnalyticsProvider instance={analytics}>
-              <WalletProvider>
-                <LedgerProvider>
-                  <ThemeProvider injectFonts>
-                    <Suspense fallback={<PageLoader />}>
-                      <RouterProvider
-                        router={getRouter({
-                          reactQueryClient,
-                          graphqlClient: useApolloClient(),
-                        })}
-                        fallbackElement={<PageLoader />}
-                      />
-                    </Suspense>
-                  </ThemeProvider>
-                </LedgerProvider>
-              </WalletProvider>
-            </AnalyticsProvider>
-          </LocalizationProvider>
-        </IntercomProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
+      <IntercomProvider appId={intercomId} autoBoot>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <AnalyticsProvider instance={analytics}>
+            <WalletProvider>
+              <LedgerProvider>
+                <ThemeProvider injectFonts>
+                  <Suspense fallback={<PageLoader />}>
+                    <RouterProvider
+                      router={getRouter({
+                        reactQueryClient,
+                      })}
+                      fallbackElement={<PageLoader />}
+                    />
+                  </Suspense>
+                </ThemeProvider>
+              </LedgerProvider>
+            </WalletProvider>
+          </AnalyticsProvider>
+        </LocalizationProvider>
+      </IntercomProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
     </AuthApolloProvider>
-  </Auth0Provider>,
+    ,
+  </QueryClientProvider>,
 );
 
 // If you want your app to work offline and load faster, you can change

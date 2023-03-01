@@ -1,4 +1,5 @@
 import React, { createContext, useRef, useState } from 'react';
+import { StdSignature } from '@cosmjs/launchpad';
 import { OfflineSigner } from '@cosmjs/proto-signing';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 import WalletConnect from '@walletconnect/client';
@@ -11,6 +12,7 @@ import { useConnectWallet } from './hooks/useConnectWallet';
 import { useDetectKeplrMobileBrowser } from './hooks/useDetectKeplrMobileBrowser';
 import { useDisconnect } from './hooks/useDisconnect';
 import { useOnAccountChange } from './hooks/useOnAccountChange';
+import { useSignArbitrary } from './hooks/useSignArbitrary';
 import { useWalletConnectCallback } from './hooks/useWalletConnectCallback';
 import { useWalletConnectFinalize } from './hooks/useWalletConnectFinalize';
 import { emptySender } from './wallet.constants';
@@ -28,6 +30,10 @@ declare global {
   interface Window extends KeplrWindow {}
 }
 
+export type SignArbitraryType = (
+  nonce: string,
+) => Promise<StdSignature | undefined>;
+
 export type WalletContextType = {
   wallet?: Wallet;
   loaded: boolean;
@@ -36,6 +42,7 @@ export type WalletContextType = {
   connectionType?: string;
   error?: unknown;
   walletConnectUri?: string;
+  signArbitrary?: SignArbitraryType;
 };
 
 const WalletContext = createContext<WalletContextType>({
@@ -91,6 +98,12 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   useWalletConnectCallback({ onQrCloseCallbackRef, walletConnectUri });
   useWalletConnectFinalize({ setWallet, walletConfigRef, walletConnect });
 
+  const signArbitrary = useSignArbitrary({
+    walletConfigRef,
+    walletConnect,
+    wallet,
+  });
+
   return (
     <WalletContext.Provider
       value={{
@@ -101,6 +114,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         connectionType,
         error,
         walletConnectUri,
+        signArbitrary,
       }}
     >
       {children}

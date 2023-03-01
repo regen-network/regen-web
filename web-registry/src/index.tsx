@@ -25,6 +25,7 @@ import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 
 import { apolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { reactQueryClient } from 'lib/clients/reactQueryClient';
+import { LoginProvider } from 'lib/login/login';
 
 import PageLoader from 'components/atoms/PageLoader';
 
@@ -128,7 +129,6 @@ root.render(
       </IntercomProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </AuthApolloProvider>
-    ,
   </QueryClientProvider>,
 );
 

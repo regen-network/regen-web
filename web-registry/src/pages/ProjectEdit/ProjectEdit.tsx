@@ -216,8 +216,6 @@ function ProjectEdit(): JSX.Element {
             </div>
           </div>
           {saved && <Banner text="Changes have been saved" />}
-        </div>
-        {
           <WarningModal
             open={!!isWarningModalOpen}
             navigate={() => {
@@ -227,7 +225,7 @@ function ProjectEdit(): JSX.Element {
               setIsWarningModalOpen(undefined);
             }}
           />
-        }
+        </div>
       </WithLoader>
     </ProjectEditContext.Provider>
   );

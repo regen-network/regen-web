@@ -6,6 +6,7 @@ import {
   Route,
   RouteObject,
 } from 'react-router-dom';
+import { ApolloClient } from '@apollo/client';
 import { Router } from '@remix-run/router';
 import { QueryClient } from '@tanstack/react-query';
 
@@ -84,9 +85,13 @@ const ConnectWalletPage = lazy(() => import('./pages/ConnectWalletPage'));
 
 type RouterParams = {
   reactQueryClient: QueryClient;
+  graphqlClient: ApolloClient<object>;
 };
 
-export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
+export const getRoutes = ({
+  reactQueryClient,
+  graphqlClient,
+}: RouterParams): RouteObject[] =>
   createRoutesFromElements(
     <Route element={<RegistryLayout />}>
       <Route path="/" element={<Outlet />} errorElement={<ErrorPage />}>
@@ -126,6 +131,7 @@ export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
           element={<Project />}
           loader={projectDetailsLoader({
             queryClient: reactQueryClient,
+            graphqlClient,
           })}
         />
         <Route
@@ -315,7 +321,10 @@ export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
     </Route>,
   );
 
-export const getRouter = ({ reactQueryClient }: RouterParams): Router =>
-  createBrowserRouter(getRoutes({ reactQueryClient }), {
+export const getRouter = ({
+  reactQueryClient,
+  graphqlClient,
+}: RouterParams): Router =>
+  createBrowserRouter(getRoutes({ reactQueryClient, graphqlClient }), {
     basename: process.env.PUBLIC_URL,
   });

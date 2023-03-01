@@ -1,6 +1,6 @@
+import { ApolloClient } from '@apollo/client';
 import { QueryClient } from '@tanstack/react-query';
 
-import { graphqlClient } from 'lib/clients/graphqlClient';
 import { getEcocreditQueryClient } from 'lib/clients/regen/ecocredit/ecocreditQueryClient';
 import { getMarketplaceQueryClient } from 'lib/clients/regen/ecocredit/marketplace/marketplaceQueryClient';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
@@ -17,10 +17,11 @@ import { getIsOnChainId } from './ProjectDetails.utils';
 
 type LoaderType = {
   queryClient: QueryClient;
+  graphqlClient: ApolloClient<object>;
 };
 
 export const projectDetailsLoader =
-  ({ queryClient }: LoaderType) =>
+  ({ queryClient, graphqlClient }: LoaderType) =>
   async ({ params: { projectId } }: { params: { projectId?: string } }) => {
     // Params
     const isOnChainId = getIsOnChainId(projectId);

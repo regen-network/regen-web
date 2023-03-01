@@ -10,6 +10,7 @@ import {
 import { IntercomProvider } from 'react-use-intercom';
 import amplitudePlugin from '@analytics/amplitude';
 import googleAnalytics from '@analytics/google-analytics';
+import { useApolloClient } from '@apollo/client';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -131,7 +132,10 @@ root.render(
                   <ThemeProvider injectFonts>
                     <Suspense fallback={<PageLoader />}>
                       <RouterProvider
-                        router={getRouter({ reactQueryClient })}
+                        router={getRouter({
+                          reactQueryClient,
+                          graphqlClient: useApolloClient(),
+                        })}
                         fallbackElement={<PageLoader />}
                       />
                     </Suspense>

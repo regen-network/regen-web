@@ -26,6 +26,7 @@ export interface ResponsiveSliderProps {
   itemWidth?: string;
   infinite?: boolean;
   dots?: boolean;
+  adaptiveHeight?: boolean;
   onChange?: (i: number) => void;
 }
 
@@ -56,7 +57,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
     '& .slick-dots': {
       bottom: 'auto',
-      overflow: 'hidden',
       height: theme.spacing(6),
       '& ul': {
         padding: 0,
@@ -146,6 +146,7 @@ export default function ResponsiveSlider({
   itemWidth,
   infinite = true,
   dots = false,
+  adaptiveHeight = false,
   onChange,
 }: ResponsiveSliderProps): JSX.Element {
   const theme = useTheme();
@@ -254,6 +255,7 @@ export default function ResponsiveSlider({
         afterChange={i => {
           if (onChange) onChange(i);
         }}
+        adaptiveHeight={adaptiveHeight}
       >
         {items.map((item, index) => (
           <div className={styles.item} key={index}>

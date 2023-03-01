@@ -8,7 +8,6 @@ import cx from 'clsx';
 import MobileMenu from '../mobile-menu';
 import { HeaderLogoLink } from './HeaderLogoLink';
 import { HeaderMenuHover, HeaderMenuItem } from './HeaderMenuHover';
-import MarketplaceLaunchBanner from './MarketplaceLaunchBanner';
 import { NavLink, NavLinkProps } from './NavLink';
 
 export interface node {
@@ -211,19 +210,9 @@ export default function Header({
   // );
 
   const styles = useStyles({ color, borderBottom, fullWidth });
-  // if we're in the registry, where we have REACT_APP prefixed
-  // keys in the env vars, do not show the banner. in other words,
-  // only show the banner on the website.
-  const showBanner = Object.keys(process.env).reduce((prev, curr) => {
-    if (curr.startsWith('REACT_APP')) {
-      return false;
-    } else {
-      return prev;
-    }
-  }, true);
+
   return (
     <>
-      {showBanner && <MarketplaceLaunchBanner />}
       <div
         className={cx(
           styles.borderBottom,

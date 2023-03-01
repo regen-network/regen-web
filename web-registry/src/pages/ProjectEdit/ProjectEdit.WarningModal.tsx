@@ -2,13 +2,13 @@ import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import { CancelButtonFooter } from 'web-components/lib/components/organisms/CancelButtonFooter/CancelButtonFooter';
 import { Body, Title } from 'web-components/lib/components/typography';
 
-import { ReactComponent as SadBee } from '../../../assets/svgs/sad-bee.svg';
+import { ReactComponent as SadBee } from '../../assets/svgs/sad-bee.svg';
 
 interface Props extends RegenModalProps {
   navigate: () => void;
 }
 
-export const ProjectEditWarningModal = ({ open, onClose, navigate }: Props) => {
+export const WarningModal = ({ open, onClose, navigate }: Props) => {
   return (
     <Modal open={open} onClose={onClose}>
       <SadBee />

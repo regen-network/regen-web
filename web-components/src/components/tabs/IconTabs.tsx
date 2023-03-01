@@ -4,10 +4,17 @@ import Tabs, { TabsProps } from '@mui/material/Tabs';
 
 import type { Theme } from 'src/theme/muiTheme';
 
+import { LinkItem } from '../footer/footer-new';
 import { TextSize } from '../typography/sizing';
 import { a11yProps } from './';
 import { IconTab, IconTabProps } from './IconTab';
 import { TabPanel } from './TabPanel';
+
+interface LinkProps extends LinkItem {
+  sx?: SxProps<Theme>;
+}
+
+export type LinkComponentProp = React.FC<LinkProps>;
 
 interface IconTabsProps {
   tabs: IconTabProps[];

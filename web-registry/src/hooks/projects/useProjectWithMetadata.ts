@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { useApolloClient } from '@apollo/client';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -7,7 +8,6 @@ import {
   ProjectByOnChainIdQuery,
   useUpdateProjectByIdMutation,
 } from 'generated/graphql';
-import { graphqlClient } from 'lib/clients/graphqlClient';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getProjectKey } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery.constants';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
@@ -66,6 +66,7 @@ export const useProjectWithMetadata = ({
 }: Props): Res => {
   let metadata: Partial<ProjectMetadataLD> | undefined;
   let offChainProject: OffChainProject | undefined;
+  const graphqlClient = useApolloClient();
   const reactQueryClient = useQueryClient();
   const [updateProject] = useUpdateProjectByIdMutation();
 

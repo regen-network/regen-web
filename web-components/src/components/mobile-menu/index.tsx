@@ -20,6 +20,7 @@ type Props = {
   isAuthenticated?: boolean;
   extras?: JSX.Element;
   linkComponent: React.FC<React.PropsWithChildren<NavLinkProps>>;
+  websiteExtras?: JSX.Element;
   onSignup?: () => void;
   onLogin?: () => void;
   onLogout?: () => void;
@@ -30,6 +31,7 @@ const MobileMenu: React.FC<React.PropsWithChildren<Props>> = ({
   pathname,
   isRegistry,
   extras,
+  websiteExtras,
   linkComponent: Link,
   ...props
 }) => {
@@ -124,6 +126,7 @@ const MobileMenu: React.FC<React.PropsWithChildren<Props>> = ({
                 )}
               </MenuItem>
             ))}
+            {websiteExtras && <MenuItem>{websiteExtras}</MenuItem>}
           </div>
         </MenuList>
       </Drawer>

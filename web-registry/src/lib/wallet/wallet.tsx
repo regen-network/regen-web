@@ -54,6 +54,7 @@ export type WalletContextType = {
   logout?: () => Promise<void>;
   accountId?: string;
 };
+
 const WalletContext = createContext<WalletContextType>({
   loaded: false,
 });

@@ -85,7 +85,6 @@ const MyProjects = (): JSX.Element => {
               project?.metadata?.['schema:name'] ??
               project?.handle ??
               project?.id;
-            const projectId = project?.onChainId ?? project?.id;
             return (
               <Grid key={i} item xs={12} md={6} lg={4}>
                 <WithLoader isLoading={isLoadingProjects} variant="skeleton">
@@ -93,9 +92,16 @@ const MyProjects = (): JSX.Element => {
                     {...DEFAULT_PROJECT}
                     {...(currentProject ?? {})}
                     name={name}
-                    onButtonClick={() =>
-                      navigate(`/project-pages/${projectId}/edit/basic-info`)
-                    }
+                    onButtonClick={() => {
+                      if (project?.onChainId) {
+                        navigate(
+                          `/project-pages/${project?.onChainId}/edit/basic-info`,
+                        );
+                      } else {
+                        // TODO: update to navigate to the step the user left off the flow instead of /basic-info
+                        navigate(`/project-pages/${project?.id}/basic-info`);
+                      }
+                    }}
                     track={track}
                   />
                 </WithLoader>

@@ -13,6 +13,7 @@ import { ProfileFormValues } from 'web-components/lib/components/modal/ProfileMo
 
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
+import { FormRef } from 'pages/ProjectEdit/ProjectEdit.types';
 import {
   FormValues,
   RoleField,
@@ -23,14 +24,14 @@ import { useProjectEditContext } from '../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../molecules';
 
 interface RolesFormProps {
-  submit: (values: RolesValues) => Promise<void>;
+  submit: (values: RolesFormValues) => Promise<void>;
   onNext?: () => void;
   onPrev?: () => void;
-  initialValues?: RolesValues;
+  initialValues?: RolesFormValues;
   projectId?: string;
 }
 
-export interface RolesValues {
+export interface RolesFormValues {
   'regen:projectDeveloper'?: ProfileFormValues;
   admin?: string;
 }
@@ -62,7 +63,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   const [entities, setEntities] = useState<
     Array<FormValues | ProfileFormValues>
   >([]);
-  const { confirmSave, isEdit } = useProjectEditContext();
+  const { confirmSave, isEdit, formRef } = useProjectEditContext();
 
   // TODO Once Keplr login is implemented, add the off-chain profile associated
   // to the current wallet address to the initial entities that can be picked up in the RoleField
@@ -74,11 +75,11 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
       // because we don't want to add it to the entities yet.
       // We might want to change that once Keplr login is implemented
       // and the admin address is associated with an actual user/org profile.
-      const filteredValues: RolesValues = Object.keys(initialValues)
+      const filteredValues: RolesFormValues = Object.keys(initialValues)
         .filter(key => key !== 'admin')
         .reduce((cur, key: string) => {
           return Object.assign(cur, {
-            [key]: initialValues[key as keyof RolesValues],
+            [key]: initialValues[key as keyof RolesFormValues],
           });
         }, {});
 
@@ -114,6 +115,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   return (
     <>
       <Formik
+        innerRef={formRef as FormRef<RolesFormValues>}
         enableReinitialize
         validateOnMount
         initialValues={

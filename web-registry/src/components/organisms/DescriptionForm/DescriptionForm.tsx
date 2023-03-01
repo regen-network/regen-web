@@ -5,18 +5,20 @@ import * as Yup from 'yup';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 
+import { FormRef } from 'pages/ProjectEdit/ProjectEdit.types';
+
 import { useProjectEditContext } from '../../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../../molecules';
 import { DESCRIPTION_MAX_LENGTH } from './DescriptionForm.constants';
 
 interface DescriptionFormProps {
-  submit: ({ values }: { values: DescriptionValues }) => Promise<void>;
+  submit: ({ values }: { values: DescriptionFormValues }) => Promise<void>;
   onNext?: () => void;
   onPrev?: () => void;
-  initialValues?: DescriptionValues;
+  initialValues?: DescriptionFormValues;
 }
 
-export interface DescriptionValues {
+export interface DescriptionFormValues {
   'schema:description'?: string;
 }
 
@@ -29,11 +31,11 @@ const DescriptionForm = ({
   initialValues,
   ...props
 }: DescriptionFormProps): JSX.Element => {
-  const { confirmSave, isEdit } = useProjectEditContext();
+  const { confirmSave, isEdit, formRef } = useProjectEditContext();
 
   const onSubmit = async (
-    values: DescriptionValues,
-    { setSubmitting, setTouched }: FormikHelpers<DescriptionValues>,
+    values: DescriptionFormValues,
+    { setSubmitting, setTouched }: FormikHelpers<DescriptionFormValues>,
   ): Promise<void> => {
     try {
       await submit({ values });
@@ -46,6 +48,7 @@ const DescriptionForm = ({
 
   return (
     <Formik
+      innerRef={formRef as FormRef<DescriptionFormValues>}
       enableReinitialize
       validateOnMount
       initialValues={

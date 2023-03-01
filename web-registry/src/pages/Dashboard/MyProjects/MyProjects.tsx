@@ -85,6 +85,7 @@ const MyProjects = (): JSX.Element => {
               project?.metadata?.['schema:name'] ??
               project?.handle ??
               project?.id;
+            const projectId = project?.onChainId ?? project?.id;
             return (
               <Grid key={i} item xs={12} md={6} lg={4}>
                 <WithLoader isLoading={isLoadingProjects} variant="skeleton">
@@ -93,7 +94,7 @@ const MyProjects = (): JSX.Element => {
                     {...(currentProject ?? {})}
                     name={name}
                     onButtonClick={() =>
-                      navigate(`/project-pages/${project?.id}/edit/basic-info`)
+                      navigate(`/project-pages/${projectId}/edit/basic-info`)
                     }
                     track={track}
                   />

@@ -54,6 +54,7 @@ import useCreateSellOrderSubmit from './hooks/useCreateSellOrderSubmit';
 import useCreditRetireSubmit from './hooks/useCreditRetireSubmit';
 import useCreditSendSubmit from './hooks/useCreditSendSubmit';
 import { useFetchBaskets } from './hooks/useFetchBaskets';
+import { useFetchCoins } from './hooks/useFetchCoins';
 import { useFetchEcocredits } from './hooks/useFetchEcocredits';
 import useOpenTakeModal from './hooks/useOpenTakeModal';
 import { useUpdateCardItemsTakeBasket } from './hooks/useUpdateCardItemsTakeBasket';
@@ -166,6 +167,9 @@ export const MyEcocredits = (): JSX.Element => {
   const txHashUrl = getHashUrl(txHash);
   const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN || '';
   const accountAddress = wallet?.address;
+
+  const coinBalances = useFetchCoins();
+
   const {
     credits,
     reloadBalances,
@@ -276,6 +280,7 @@ export const MyEcocredits = (): JSX.Element => {
         <Portfolio
           credits={credits}
           basketTokens={basketTokens}
+          coinBalances={coinBalances}
           onTableChange={setPaginationParams}
           initialPaginationParams={paginationParams}
           isIgnoreOffset

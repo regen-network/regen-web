@@ -1,15 +1,12 @@
-import { useCallback, useEffect } from 'react';
 import {
   ApolloClient,
-  ApolloLink,
   ApolloProvider,
-  HttpLink,
+  createHttpLink,
   InMemoryCache,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { useAuth0 } from '@auth0/auth0-react';
 
-import getApiUri from './lib/apiUri';
+import getApiUri from 'lib/apiUri';
 
 interface AuthApolloProviderProps {
   children?: any;
@@ -18,67 +15,42 @@ interface AuthApolloProviderProps {
 export const AuthApolloProvider = ({
   children,
 }: AuthApolloProviderProps): any => {
-  const { user, isLoading, isAuthenticated, getAccessTokenSilently } =
-    useAuth0();
-  const apiUri = getApiUri();
+  const baseUri = getApiUri();
 
-  const login = useCallback(async (): Promise<void> => {
-    try {
-      if (isAuthenticated && user) {
-        const token = await getAccessTokenSilently();
-        try {
-          await fetch(`${apiUri}/auth/login`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(user),
-            method: 'POST',
+  // https://www.apollographql.com/docs/react/networking/authentication
+  const httpLink = createHttpLink({
+    uri: `${baseUri}/graphql`,
+    credentials: 'include',
+  });
+
+  // https://www.apollographql.com/docs/react/api/link/apollo-link-context/#overview
+  const authLink = setContext(
+    (_, { headers }) =>
+      new Promise((success, fail) => {
+        fetch(`${baseUri}/csrfToken`, {
+          method: 'GET',
+          credentials: 'include',
+        })
+          .then(resp => {
+            resp.json().then(({ token }) => {
+              success({
+                headers: {
+                  ...headers,
+                  'X-CSRF-TOKEN': token,
+                },
+              });
+            });
+          })
+          .catch(err => {
+            fail(err);
           });
-        } catch (e) {
-          console.error(e); // eslint-disable-line no-console
-        }
-      }
-    } catch (e) {
-      console.error(e); // eslint-disable-line no-console
-    }
-  }, [apiUri, getAccessTokenSilently, isAuthenticated, user]);
+      }),
+  );
 
-  useEffect(() => {
-    login();
-  }, [login]);
-
-  if (isLoading) {
-    return <div></div>;
-  }
-
-  const httpLink = new HttpLink({ uri: `${apiUri}/graphql` });
-
-  const withToken = setContext(async () => {
-    // needed on first login
-    // TODO find more efficient solution at Auth0Provider level
-    await login();
-    // Get token or get refreshed token
-    const token = isAuthenticated ? await getAccessTokenSilently() : null;
-    return { token };
-  });
-
-  const authMiddleware = new ApolloLink((operation, forward) => {
-    const { token } = operation.getContext();
-    operation.setContext(() => ({
-      headers: {
-        Authorization: token ? `Bearer ${token}` : '',
-      },
-    }));
-    return forward(operation);
-  });
-
-  const link = ApolloLink.from([withToken, authMiddleware.concat(httpLink)]);
-
+  const link = authLink.concat(httpLink);
   const client = new ApolloClient({
     cache: new InMemoryCache(),
-    link,
+    link: authLink.concat(link),
   });
-
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
 };

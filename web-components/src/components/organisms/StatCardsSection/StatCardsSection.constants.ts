@@ -1,0 +1,2 @@
+export const STAT_CARDS_GRID_COLUMNS = 12;
+export const STAT_CARDS_GRID_CARDS_BY_ROW = 2;

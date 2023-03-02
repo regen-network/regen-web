@@ -1,8 +1,7 @@
 import { Box, SxProps } from '@mui/material';
 
-import StatCard from 'src/components/molecules/StatCard';
-import { StatCardType } from 'src/components/molecules/StatCard/StatCard.types';
-
+import StatCard from '../../../components/molecules/StatCard';
+import { StatCardType } from '../../../components/molecules/StatCard/StatCard.types';
 import { Theme } from '../../../theme/muiTheme';
 import Section from '../Section';
 import { STAT_CARDS_GRID_COLUMNS } from './StatCardsSection.constants';

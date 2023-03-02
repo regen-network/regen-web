@@ -99,6 +99,7 @@ const MyProjects = (): JSX.Element => {
                         );
                       } else {
                         // TODO: update to navigate to the step the user left off the flow instead of /basic-info
+                        // https://github.com/regen-network/regen-registry/issues/1574
                         navigate(`/project-pages/${project?.id}/basic-info`);
                       }
                     }}

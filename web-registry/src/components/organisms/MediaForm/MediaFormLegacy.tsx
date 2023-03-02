@@ -19,7 +19,7 @@ import { VideoInput } from 'web-components/lib/components/inputs/VideoInput';
 
 import { UrlType } from 'lib/rdf/types';
 
-import getApiUri from '../../../lib/apiUri';
+import { apiUri } from '../../../lib/apiUri';
 import { cropAspect, MediaBaseErrors, MediaBaseValues } from './MediaForm';
 import { useMediaFormStyles } from './useMediaFormStyles';
 
@@ -47,7 +47,6 @@ const GalleryImgGrid = styled(Grid)(({ theme }) => ({
 const MediaFormLegacy = (): JSX.Element => {
   const { classes } = useMediaFormStyles();
   const theme = useTheme();
-  const apiUri = getApiUri();
   const { projectId } = useParams();
   const { errors, touched } = useFormikContext<MediaValuesLegacy>();
   const isTabletOrLarger = useMediaQuery(theme.breakpoints.up('sm'));

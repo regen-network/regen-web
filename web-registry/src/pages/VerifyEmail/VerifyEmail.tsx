@@ -8,7 +8,7 @@ import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import { Body } from 'web-components/lib/components/typography';
 
-import getApiUri from '../../lib/apiUri';
+import { apiUri } from '../../lib/apiUri';
 
 function VerifyEmail(): JSX.Element {
   const search = new URLSearchParams(window.location.search);
@@ -20,7 +20,7 @@ function VerifyEmail(): JSX.Element {
   const resendEmail = useCallback(() => {
     setSubmitting(true);
     axios
-      .post(`${getApiUri()}/auth/verification-email`, {
+      .post(`${apiUri}/auth/verification-email`, {
         email,
       })
       .then(resp => {

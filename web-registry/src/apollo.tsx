@@ -1,19 +1,17 @@
-import {
-  ApolloClient,
-  ApolloProvider,
-  createHttpLink,
-  InMemoryCache,
-} from '@apollo/client';
+import { ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { useQuery } from '@tanstack/react-query';
 
 import getApiUri from 'lib/apiUri';
+import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 
 interface AuthApolloProviderProps {
+  apolloClientFactory: ApolloClientFactory;
   children?: any;
 }
 
 export const AuthApolloProvider = ({
+  apolloClientFactory,
   children,
 }: AuthApolloProviderProps): any => {
   const baseUri = getApiUri();
@@ -50,9 +48,13 @@ export const AuthApolloProvider = ({
   );
 
   const link = authLink.concat(httpLink);
-  const client = new ApolloClient({
+  apolloClientFactory.prepare({
     cache: new InMemoryCache(),
     link: authLink.concat(link),
   });
-  return <ApolloProvider client={client}>{children}</ApolloProvider>;
+  return (
+    <ApolloProvider client={apolloClientFactory.getClient()}>
+      {children}
+    </ApolloProvider>
+  );
 };

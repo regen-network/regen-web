@@ -23,6 +23,7 @@ import { AnalyticsProvider } from 'use-analytics';
 
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 
+import { apolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { reactQueryClient } from 'lib/clients/reactQueryClient';
 
 import PageLoader from 'components/atoms/PageLoader';
@@ -103,7 +104,7 @@ const root = createRoot(container);
 
 root.render(
   <QueryClientProvider client={reactQueryClient}>
-    <AuthApolloProvider>
+    <AuthApolloProvider apolloClientFactory={apolloClientFactory}>
       <IntercomProvider appId={intercomId} autoBoot>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <AnalyticsProvider instance={analytics}>
@@ -114,6 +115,7 @@ root.render(
                     <RouterProvider
                       router={getRouter({
                         reactQueryClient,
+                        apolloClientFactory,
                       })}
                       fallbackElement={<PageLoader />}
                     />

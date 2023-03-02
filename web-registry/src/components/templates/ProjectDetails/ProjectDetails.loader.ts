@@ -1,6 +1,6 @@
-import { useApolloClient } from '@apollo/client';
 import { QueryClient } from '@tanstack/react-query';
 
+import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { getEcocreditQueryClient } from 'lib/clients/regen/ecocredit/ecocreditQueryClient';
 import { getMarketplaceQueryClient } from 'lib/clients/regen/ecocredit/marketplace/marketplaceQueryClient';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
@@ -17,12 +17,12 @@ import { getIsOnChainId } from './ProjectDetails.utils';
 
 type LoaderType = {
   queryClient: QueryClient;
+  apolloClientFactory: ApolloClientFactory;
 };
 
 export const projectDetailsLoader =
-  ({ queryClient }: LoaderType) =>
+  ({ queryClient, apolloClientFactory }: LoaderType) =>
   async ({ params: { projectId } }: { params: { projectId?: string } }) => {
-    const graphqlClient = useApolloClient();
     // Params
     const isOnChainId = getIsOnChainId(projectId);
 
@@ -38,12 +38,12 @@ export const projectDetailsLoader =
       client: ecocreditClient,
     });
     const projectByOnChainIdQuery = getProjectByOnChainIdQuery({
-      client: graphqlClient,
+      client: apolloClientFactory.getClient(),
       enabled: !!projectId && isOnChainId,
       onChainId: projectId ?? '',
     });
     const projectByHandleQuery = getProjectByHandleQuery({
-      client: graphqlClient,
+      client: apolloClientFactory.getClient(),
       enabled: !!projectId && !isOnChainId,
       handle: projectId as string,
     });

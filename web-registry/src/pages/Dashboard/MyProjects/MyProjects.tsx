@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Grid } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { CreateProjectCard } from 'web-components/lib/components/cards/CreateCards/CreateProjectCard';
@@ -9,12 +10,18 @@ import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import {
   useCreateProjectMutation,
   useCreateWalletMutation,
-  useWalletByAddrQuery,
 } from 'generated/graphql';
+import { graphqlClient } from 'lib/clients/graphqlClient';
+import { getWalletByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getWalletByAddrQuery/getWalletByAddrQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
+import WithLoader from 'components/atoms/WithLoader';
+
 import { useDashboardContext } from '../Dashboard.context';
+import { useFetchProjectsByIdsWithOrders } from './hooks/useFetchProjectsByIdsWithOrders';
+import { DEFAULT_PROJECT } from './MyProjects.constants';
+import { submitCreateProject } from './MyProjects.utils';
 
 const MyProjects = (): JSX.Element => {
   const [error, setError] = useState<string | null>(null);
@@ -23,62 +30,29 @@ const MyProjects = (): JSX.Element => {
   const { isIssuer, isProjectAdmin } = useDashboardContext();
   const [createProject] = useCreateProjectMutation();
   const [createWallet] = useCreateWalletMutation();
-  const { data: walletData } = useWalletByAddrQuery({
-    variables: {
-      addr: wallet?.address as string,
-    },
-    fetchPolicy: 'cache-and-network',
-  });
+  const { data: walletData } = useQuery(
+    getWalletByAddrQuery({
+      addr: wallet?.address ?? '',
+      client: graphqlClient,
+      enabled: wallet?.address !== undefined,
+    }),
+  );
+
   const { track } = useTracker();
 
   const projects = walletData?.walletByAddr?.projectsByWalletId?.nodes;
   const isFirstProject = !projects || projects?.length < 1;
+  const onChainIds =
+    projects
+      ?.map(project => project?.onChainId)
+      .filter((id): id is string => {
+        return typeof id === 'string';
+      }) ?? [];
 
-  async function submitCreateWallet(): Promise<void> {
-    if (!wallet?.address) return Promise.reject();
-    try {
-      const res = await createWallet({
-        variables: {
-          input: {
-            wallet: {
-              addr: wallet.address,
-            },
-          },
-        },
-      });
-      const newWalletId = res.data?.createWallet?.wallet?.id;
-      if (newWalletId) {
-        return newWalletId;
-      }
-    } catch (e) {
-      setError('Error adding wallet address to database');
-    }
-  }
-
-  async function submitCreateProject(): Promise<void> {
-    let walletId = walletData?.walletByAddr?.id;
-    if (!walletId) {
-      walletId = await submitCreateWallet();
-    }
-
-    try {
-      const res = await createProject({
-        variables: {
-          input: {
-            project: {
-              walletId,
-            },
-          },
-        },
-      });
-      const projectId = res?.data?.createProject?.project?.id;
-      if (projectId) {
-        navigate(`/project-pages/${projectId}/choose-credit-class`);
-      }
-    } catch (e) {
-      setError('Error creating project');
-    }
-  }
+  const { projects: projectsWithOrders, isLoadingProjects } =
+    useFetchProjectsByIdsWithOrders({
+      projectIds: onChainIds,
+    });
 
   return (
     <>
@@ -87,24 +61,54 @@ const MyProjects = (): JSX.Element => {
           <Grid item xs={12} md={6} lg={4}>
             <CreateProjectCard
               isFirstProject={isFirstProject}
-              onClick={submitCreateProject}
+              onClick={() =>
+                submitCreateProject({
+                  createProject,
+                  createWallet,
+                  setError,
+                  navigate,
+                  wallet,
+                  walletData,
+                })
+              }
+              sx={{ height: { xs: '100%' } }}
             />
           </Grid>
         )}
-        {/* TODO: ProjectCards used below temporarily. Will probably be a new variation for this purpose */}
         {isProjectAdmin &&
-          projects?.map((project, i) => (
-            <Grid key={i} item xs={12} md={6} lg={4}>
-              <ProjectCard
-                name={project?.handle || project?.id}
-                imgSrc={''}
-                place="TODO"
-                area={0}
-                areaUnit="ha"
-                track={track}
-              />
-            </Grid>
-          ))}
+          projects?.map((project, i) => {
+            const currentProject = projectsWithOrders.find(
+              projectsWithOrder => projectsWithOrder.id === project?.onChainId,
+            );
+            const name =
+              currentProject?.name ??
+              project?.metadata?.['schema:name'] ??
+              project?.handle ??
+              project?.id;
+            return (
+              <Grid key={i} item xs={12} md={6} lg={4}>
+                <WithLoader isLoading={isLoadingProjects} variant="skeleton">
+                  <ProjectCard
+                    {...DEFAULT_PROJECT}
+                    {...(currentProject ?? {})}
+                    name={name}
+                    onButtonClick={() => {
+                      if (project?.onChainId) {
+                        navigate(
+                          `/project-pages/${project?.onChainId}/edit/basic-info`,
+                        );
+                      } else {
+                        // TODO: update to navigate to the step the user left off the flow instead of /basic-info
+                        // https://github.com/regen-network/regen-registry/issues/1574
+                        navigate(`/project-pages/${project?.id}/basic-info`);
+                      }
+                    }}
+                    track={track}
+                  />
+                </WithLoader>
+              </Grid>
+            );
+          })}
       </Grid>
       {error && <ErrorBanner text={error} />}
     </>

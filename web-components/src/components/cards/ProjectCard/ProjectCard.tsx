@@ -4,17 +4,21 @@ import { Box, SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
 import { Buy1Event, Track } from 'web-registry/src/lib/tracker/types';
 
+import { ButtonType } from '../../../types/shared/buttonType';
 import { formatStandardInfo } from '../../../utils/format';
 import OutlinedButton from '../../buttons/OutlinedButton';
 import GradientBadge from '../../gradient-badge';
 import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
-import CurrentCreditsIcon from '../../icons/CurrentCreditsIcon';
 import ProjectPlaceInfo from '../../place/ProjectPlaceInfo';
 import InfoTooltipWithIcon from '../../tooltip/InfoTooltipWithIcon';
 import { Body, Subtitle } from '../../typography';
 import UserInfo, { User } from '../../user/UserInfo';
 import MediaCard, { MediaCardProps } from '../MediaCard';
-import { ERROR_CARD_PRICE, SOLD_OUT } from './ProjectCard.constants';
+import {
+  DEFAULT_BUY_BUTTON,
+  ERROR_CARD_PRICE,
+  SOLD_OUT,
+} from './ProjectCard.constants';
 import { PurchaseDetails } from './ProjectCard.PurchaseDetails';
 import { useProjectCardStyles } from './ProjectCard.styles';
 import { PurchaseInfo } from './ProjectCard.types';
@@ -42,6 +46,8 @@ export interface ProjectCardProps extends MediaCardProps {
   track?: Track;
   isSoldOut?: boolean;
   creditsTooltip?: string;
+  button?: ButtonType;
+  disabled?: boolean;
 }
 
 export function ProjectCard({
@@ -66,11 +72,18 @@ export function ProjectCard({
   track,
   isSoldOut = false,
   creditsTooltip,
+  button = DEFAULT_BUY_BUTTON,
   ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
   const { classes } = useProjectCardStyles();
   const location = useLocation();
+  const { text: buttontext, startIcon: buttonStartIcon } = button;
+  const isButtonDisabled =
+    button?.disabled !== undefined
+      ? button?.disabled
+      : purchaseInfo?.sellInfo?.creditsAvailableForUser === 0;
+  const hasButton = !!onButtonClick;
 
   const [open, setOpen] = useState<boolean>(true);
 
@@ -120,9 +133,9 @@ export function ProjectCard({
         </div>
       )}
       {purchaseInfo && <div className={classes.separator} />}
-      {purchaseInfo && (
+      {(purchaseInfo || hasButton) && (
         <div className={classes.purchaseInfo}>
-          {purchaseInfo.units && (
+          {purchaseInfo?.units && (
             <>
               <span className={classes.units}>
                 {purchaseInfo.units} credits purchased
@@ -171,10 +184,10 @@ export function ProjectCard({
                   info={formatStandardInfo(purchaseInfo.methodology)}
                 />
               )}
-              {purchaseInfo.projectType && (
+              {purchaseInfo?.projectType && (
                 <PurchaseDetails
                   title="project type"
-                  info={purchaseInfo.projectType}
+                  info={purchaseInfo?.projectType}
                 />
               )}
               {additionalCertifications && (
@@ -183,8 +196,8 @@ export function ProjectCard({
                   info={additionalCertifications.join(', ')}
                 />
               )}
-              {purchaseInfo?.sellInfo && (
-                <>
+              <>
+                {purchaseInfo?.sellInfo && (
                   <Box
                     sx={{
                       display: 'flex',
@@ -252,33 +265,29 @@ export function ProjectCard({
                       </Body>
                     </Box>
                   </Box>
-                  <OutlinedButton
-                    onClick={event => {
-                      event.stopPropagation();
-                      track &&
-                        track<'buy1', Buy1Event>('buy1', {
-                          url: location.pathname,
-                          cardType: 'project',
-                          buttonLocation: 'projectCard',
-                          projectName: name,
-                          projectId: id,
-                          creditClassId,
-                        });
-                      onButtonClick && onButtonClick();
-                    }}
-                    size="small"
-                    startIcon={
-                      <CurrentCreditsIcon height="18px" width="18px" />
-                    }
-                    disabled={
-                      purchaseInfo.sellInfo.creditsAvailableForUser === 0
-                    }
-                    sx={{ width: '100%' }}
-                  >
-                    {'BUY ECOCREDITS'}
-                  </OutlinedButton>
-                </>
-              )}
+                )}
+                <OutlinedButton
+                  onClick={event => {
+                    event.stopPropagation();
+                    track &&
+                      track<'buy1', Buy1Event>('buy1', {
+                        url: location.pathname,
+                        cardType: 'project',
+                        buttonLocation: 'projectCard',
+                        projectName: name,
+                        projectId: id,
+                        creditClassId,
+                      });
+                    onButtonClick && onButtonClick();
+                  }}
+                  size="small"
+                  startIcon={buttonStartIcon}
+                  disabled={isButtonDisabled}
+                  sx={{ width: '100%' }}
+                >
+                  {buttontext}
+                </OutlinedButton>
+              </>
             </div>
           )}
         </div>

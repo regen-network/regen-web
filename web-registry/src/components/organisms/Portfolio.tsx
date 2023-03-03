@@ -20,7 +20,7 @@ import { CoinsTable } from './CoinsTable/CoinsTable';
 export interface PortfolioProps {
   credits?: BatchInfoWithBalance[];
   basketTokens: BasketTokens[];
-  coinBalances: CoinBalance[];
+  coinBalances?: CoinBalance[];
   renderCreditActionButtons?: RenderActionButtonsFunc;
   renderBasketActionButtons?: RenderActionButtonsFunc;
   onTableChange?: UseStateSetter<TablePaginationParams>;
@@ -47,10 +47,12 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
 }) => {
   return (
     <Box>
-      <Box sx={{ mb: 10 }}>
-        <Label sx={sxs.title}>assets</Label>
-        <CoinsTable coinBalances={coinBalances} />
-      </Box>
+      {coinBalances && (
+        <Box sx={{ mb: 10 }}>
+          <Label sx={sxs.title}>assets</Label>
+          <CoinsTable coinBalances={coinBalances} />
+        </Box>
+      )}
 
       <Box>
         <Label sx={sxs.title}>ecocredits</Label>

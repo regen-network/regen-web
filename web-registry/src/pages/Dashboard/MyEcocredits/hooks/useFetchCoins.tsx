@@ -11,7 +11,8 @@ import { IBC_DENOM_PREFIX } from 'hooks/useQuerySellOrders';
 
 export type CoinBalance = {
   name: string;
-  denom: string;
+  bankDenom: string;
+  baseDenom: string;
   amount: string;
 };
 
@@ -37,16 +38,11 @@ export const useFetchCoins = (): CoinBalance[] => {
       allowedDenom => allowedDenom.bankDenom,
     ) ?? [];
 
-  const allowedCoins =
-    userBalances?.balances.filter(balance =>
-      allowedBankDenoms.includes(balance?.denom),
-    ) ?? [];
-
   // Find sell orders that have ibc askDenom and gather their hash
   const ibcDenomHashes = uniq(
-    allowedCoins
-      .filter(allowedCoin => allowedCoin.denom.includes(IBC_DENOM_PREFIX))
-      .map(allowedCoin => allowedCoin.denom.replace(IBC_DENOM_PREFIX, '')),
+    allowedBankDenoms
+      .filter(denom => denom.includes(IBC_DENOM_PREFIX))
+      .map(denom => denom.replace(IBC_DENOM_PREFIX, '')),
   );
 
   // Call DenomsTrace on each ibc denom hash;
@@ -56,21 +52,25 @@ export const useFetchCoins = (): CoinBalance[] => {
     }),
   );
 
-  const coins = allowedCoins.map(coin => {
-    const denomTrace = denomTraces?.find(denomTrace =>
-      coin.denom.includes(denomTrace.hash),
-    );
-    const baseDenom = denomTrace ? denomTrace.baseDenom : coin.denom;
-    const allowedDenom = allowedDenomsData?.allowedDenoms.find(
-      denom => coin.denom === denom.bankDenom,
-    );
+  const coins =
+    allowedDenomsData?.allowedDenoms.map(allowedDenom => {
+      const coin = userBalances?.balances.find(
+        coin => coin.denom === allowedDenom.bankDenom,
+      );
+      const denomTrace = denomTraces?.find(denomTrace =>
+        coin?.denom.includes(denomTrace.hash),
+      );
+      const baseDenom = denomTrace
+        ? denomTrace.baseDenom
+        : allowedDenom.bankDenom;
 
-    return {
-      name: allowedDenom?.displayDenom ?? baseDenom,
-      denom: baseDenom,
-      amount: coin.amount,
-    };
-  });
+      return {
+        name: allowedDenom?.displayDenom ?? baseDenom,
+        bankDenom: allowedDenom.bankDenom,
+        baseDenom: baseDenom,
+        amount: coin?.amount ?? '0',
+      };
+    }) ?? [];
 
   return coins;
 };

@@ -18,6 +18,7 @@ import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingM
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
+import InfoCard from 'web-components/lib/components/molecules/InfoCard';
 import Section from 'web-components/lib/components/section';
 import { Title } from 'web-components/lib/components/typography';
 
@@ -217,6 +218,16 @@ export const Storefront = (): JSX.Element => {
   return (
     <Box sx={{ backgroundColor: 'grey.50' }}>
       <Section>
+        <Link href="/ecocredits/portfolio">
+          <InfoCard
+            title="Not sure where to get assets for ecocredits?"
+            description="Head over to your portfolio"
+            image={{
+              src: '/svg/illustrations/concierge-small.svg',
+            }}
+            sx={{ mx: 'auto', mb: 10 }}
+          />
+        </Link>
         <Title variant="h2" sx={{ mb: 8.5 }}>
           Sell orders
         </Title>

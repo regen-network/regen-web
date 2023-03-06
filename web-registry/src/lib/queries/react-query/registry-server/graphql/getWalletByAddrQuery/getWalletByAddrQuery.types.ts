@@ -1,4 +1,4 @@
-import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
+import { ApolloClient } from '@apollo/client';
 import { QueryObserverOptions } from '@tanstack/react-query';
 
 import {
@@ -12,6 +12,6 @@ export type ReactQueryGetWalletByAddrQueryResponse =
   QueryObserverOptions<WalletByAddrQuery>;
 
 export type ReactQueryGetWalletByAddrQueryParams = {
-  client: ApolloClient<NormalizedCacheObject>;
+  client: ApolloClient<unknown>;
 } & WalletByAddrQueryVariables &
   ReactQueryBuilderResponse<ReactQueryGetWalletByAddrQueryResponse>;

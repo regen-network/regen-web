@@ -1,8 +1,7 @@
 import { Box, SxProps } from '@mui/material';
 
-import { BlockContent } from 'src/components/block-content';
-import { Body, Label, Title } from 'src/components/typography';
-
+import { BlockContent } from '../../../components/block-content';
+import { Body, Label, Title } from '../../../components/typography';
 import { Theme } from '../../../theme/muiTheme';
 import { StatCardType } from './StatCard.types';
 

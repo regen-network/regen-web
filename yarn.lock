@@ -9221,7 +9221,7 @@ babel-preset-react-app@^10.0.0:
     babel-plugin-macros "^3.1.0"
     babel-plugin-transform-react-remove-prop-types "^0.4.24"
 
-babel-runtime@^6.26.0:
+babel-runtime@^6.26.0, babel-runtime@^6.5.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   integrity sha512-ITKNuq2wKlW1fJg9sSW52eepoYgZBggvOAHC0u/CYu/qxQ9EVzThCgR69BnSXLHjy2f7SY5zaQ4yt7H9ZVxY2g==
@@ -10482,7 +10482,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.5, classnames@^2.2.6:
+classnames@^2.2.3, classnames@^2.2.5, classnames@^2.2.6:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.2.tgz#351d813bf0137fcc6a76a16b88208d2560a0d924"
   integrity sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==
@@ -20619,7 +20619,7 @@ lodash@4.17.20:
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
   integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
 
-lodash@4.17.21, "lodash@>=3.5 <5", lodash@>=4.17.21, lodash@^4.0.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.7.0, lodash@~4.17.0:
+lodash@4.17.21, "lodash@>=3.5 <5", lodash@>=4.17.21, lodash@^4.0.0, lodash@^4.11.1, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.7.0, lodash@~4.17.0:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -21956,7 +21956,7 @@ moment@2.29.3:
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.3.tgz#edd47411c322413999f7a5940d526de183c031f3"
   integrity sha512-c6YRvhEo//6T2Jz/vVtYzqBzwvPT95JBQ+smCytzf7c50oMZRsR/a4w88aD34I+/QVSfnoAnSBFPJHItlOMJVw==
 
-moment@^2.27.0:
+moment@^2.12.0, moment@^2.27.0:
   version "2.29.4"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
   integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
@@ -30687,9 +30687,14 @@ weak-lru-cache@^1.2.2:
   integrity sha512-DEAoo25RfSYMuTGc9vPJzZcZullwIqRDSI9LOy+fkCJPi6hykCnfKaXTuPBDuXAUcqHXyOgFtHNp/kB2FjYHbw==
 
 web-components@0.0.0:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/web-components/-/web-components-0.0.1.tgz#2995ec0d0b56a6d8bb0620d417f8068b9bc62e37"
-  integrity sha512-eAqflNFREbBodgl6zQiQbwbrwfIgpkTmeemXOWTeSvpd+dpeq+L/YgalqH08S6Lsc6w5angz5Oe/Q0QKP1Im5Q==
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/web-components/-/web-components-1.2.0.tgz#86305a6fe6ee3b84bd03df7d14ab55f482eb3182"
+  integrity sha512-4io7SzsMTjKGjUVK5tc0IBqe8E3ax3ARA5isklOBHhh8soSB6YEsHraz40/mUCfNNM5Y7uvfIReNu4F9YGaWTg==
+  dependencies:
+    babel-runtime "^6.5.0"
+    classnames "^2.2.3"
+    lodash "^4.11.1"
+    moment "^2.12.0"
 
 web-namespaces@^1.0.0, web-namespaces@^1.1.2:
   version "1.1.4"

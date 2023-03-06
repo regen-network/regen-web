@@ -161,10 +161,10 @@ export default function ResponsiveSlider({
   const slides: number = gridView
     ? 2
     : desktop
-    ? slidesToShow || items.length
+    ? slidesToShow ?? items.length
     : mobile
     ? 1
-    : Math.min(items.length, 2);
+    : Math.min(slidesToShow ?? items.length, 2);
 
   const styles = useStyles({ gridView, padding, title, itemWidth });
 

@@ -28,6 +28,7 @@ export interface ResponsiveSliderProps {
   dots?: boolean;
   onChange?: (i: number) => void;
   visibleOverflow?: boolean;
+  adaptiveHeight?: boolean;
 }
 
 interface StyleProps {
@@ -153,6 +154,7 @@ export default function ResponsiveSlider({
   dots = false,
   onChange,
   visibleOverflow = false,
+  adaptiveHeight = false,
 }: ResponsiveSliderProps): JSX.Element {
   const theme = useTheme();
   const [currSlide, setCurrSlide] = useState(0);
@@ -266,6 +268,7 @@ export default function ResponsiveSlider({
         afterChange={i => {
           if (onChange) onChange(i);
         }}
+        adaptiveHeight={adaptiveHeight}
       >
         {items.map((item, index) => (
           <div className={styles.item} key={index}>

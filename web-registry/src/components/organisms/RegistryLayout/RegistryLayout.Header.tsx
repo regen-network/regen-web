@@ -26,7 +26,7 @@ import { fullWidthRegExp } from './RegistryLayout.constants';
 const RegistryLayoutHeader: React.FC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { wallet, loaded, disconnect } = useWallet();
+  const { wallet, loaded, disconnect, accountId } = useWallet();
   const theme = useTheme<Theme>();
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
@@ -62,16 +62,20 @@ const RegistryLayoutHeader: React.FC = () => {
         pathname={pathname}
         extras={
           <Box display="flex" justifyContent="center" alignItems="center">
-            {chainId && loaded && wallet?.address && disconnect && (
-              <UserMenuItem
-                address={truncate(wallet?.address)}
-                avatar={DefaultAvatar}
-                disconnect={disconnect}
-                pathname={pathname}
-                linkComponent={RegistryNavLink}
-                userMenuItems={userMenuItems}
-              />
-            )}
+            {chainId &&
+              loaded &&
+              accountId &&
+              wallet?.address &&
+              disconnect && (
+                <UserMenuItem
+                  address={truncate(wallet?.address)}
+                  avatar={DefaultAvatar}
+                  disconnect={disconnect}
+                  pathname={pathname}
+                  linkComponent={RegistryNavLink}
+                  userMenuItems={userMenuItems}
+                />
+              )}
             <WalletButton />
           </Box>
         }

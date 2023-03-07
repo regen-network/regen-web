@@ -26,6 +26,7 @@ export const useAutoConnect = ({
         try {
           await connectWallet({
             walletType: autoConnectWalletType as WalletType,
+            doLogin: false,
           });
         } catch (e) {
           setError(e);

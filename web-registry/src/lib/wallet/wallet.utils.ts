@@ -55,7 +55,8 @@ type FinalizeConnectionParams = {
   walletConfig?: WalletConfig;
   setWallet: UseStateSetter<Wallet>;
   track?: Track;
-  login?: () => Promise<void>;
+  login?: (wallet?: Wallet) => Promise<void>;
+  doLogin?: boolean;
 };
 
 export const finalizeConnection = async ({
@@ -64,6 +65,7 @@ export const finalizeConnection = async ({
   setWallet,
   track,
   login,
+  doLogin = true,
 }: FinalizeConnectionParams): Promise<void> => {
   let offlineSigner;
 
@@ -94,6 +96,7 @@ export const finalizeConnection = async ({
       });
     }
     setWallet(wallet);
-    await login();
+
+    if (doLogin) await login(wallet);
   }
 };

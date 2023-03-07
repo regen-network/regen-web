@@ -1,4 +1,4 @@
-import React, { createContext, useRef, useState } from 'react';
+import React, { createContext, useEffect, useRef, useState } from 'react';
 import { StdSignature } from '@cosmjs/launchpad';
 import { OfflineSigner } from '@cosmjs/proto-signing';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
@@ -32,9 +32,14 @@ declare global {
   interface Window extends KeplrWindow {}
 }
 
-export type SignArbitraryType = (
-  nonce: string,
-) => Promise<StdSignature | undefined>;
+export type SignArbitraryParams = {
+  wallet?: Wallet;
+  nonce: string;
+};
+export type SignArbitraryType = ({
+  wallet,
+  nonce,
+}: SignArbitraryParams) => Promise<StdSignature | undefined>;
 
 export type WalletContextType = {
   wallet?: Wallet;
@@ -45,11 +50,10 @@ export type WalletContextType = {
   error?: unknown;
   walletConnectUri?: string;
   signArbitrary?: SignArbitraryType;
-  login?: () => Promise<void>;
+  login?: (wallet?: Wallet) => Promise<void>;
   logout?: () => Promise<void>;
   accountId?: string;
 };
-
 const WalletContext = createContext<WalletContextType>({
   loaded: false,
 });
@@ -60,8 +64,9 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   // Because initiating the wallet is asyncronous, when users enter the app, the wallet is seen as not loaded.
   // This is being used so that we display the "connect wallet" or the connected wallet address
   // only once we know what's the actual wallet connection status.
-  const [loaded, setLoaded] = useState<boolean>(false);
+  const [loaded, setLoaded] = useState<boolean>(true);
   const [wallet, setWallet] = useState<Wallet>(emptySender);
+  const [accountId, setAccountId] = useState<string | undefined>(undefined);
   const [connectionType, setConnectionType] = useState<string | undefined>(
     undefined,
   );
@@ -86,6 +91,13 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     walletConnect,
   });
 
+  const signArbitrary = useSignArbitrary({
+    walletConfigRef,
+    walletConnect,
+    setError,
+  });
+  const login = useLogin({ signArbitrary, setError, setAccountId });
+
   const connectWallet = useConnectWallet({
     onQrCloseCallbackRef,
     setWallet,
@@ -93,16 +105,10 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     setWalletConnectUri,
     walletConfigRef,
     track,
+    login,
   });
 
   const connect = useConnect({ connectWallet, setConnectionType, setError });
-
-  const signArbitrary = useSignArbitrary({
-    walletConfigRef,
-    walletConnect,
-    wallet,
-  });
-  const login = useLogin({ signArbitrary, wallet, setError });
 
   useAutoConnect({ connectWallet, setError, setLoaded });
   useOnAccountChange({ connectWallet, wallet });
@@ -116,7 +122,9 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   });
 
   const { data } = useGetCurrentAccountQuery();
-  const accountId = data?.getCurrentAccount;
+  useEffect(() => {
+    if (data?.getCurrentAccount) setAccountId(data?.getCurrentAccount);
+  }, [data?.getCurrentAccount]);
 
   return (
     <WalletContext.Provider

@@ -29,7 +29,13 @@ type Props = {
 
 const WalletButton = ({ size = 'small' }: Props) => {
   const styles = useWalletButtonStyles();
+<<<<<<< HEAD
   const { wallet, connect, loaded, walletConnectUri } = useWallet();
+=======
+  const { accountId, wallet, connect, loaded, error, walletConnectUri, login } =
+    useWallet();
+
+>>>>>>> b7dd8ebe (refactor: mv login to existing wallet provider)
   const { bankClient } = useLedger();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isWaitingForSigning, setIsWaitingForSigningAtom] = useAtom(
@@ -48,10 +54,13 @@ const WalletButton = ({ size = 'small' }: Props) => {
     }),
   );
 
-  const onButtonClick = useCallback(
-    (): void => setIsModalOpen(true),
-    [setIsModalOpen],
-  );
+  const onButtonClick = useCallback((): void => {
+    if (!wallet?.address) {
+      setIsModalOpen(true);
+    } else if (!accountId && login) {
+      login();
+    }
+  }, [setIsModalOpen]);
   const onModalClose = useCallback((): void => {
     setIsModalOpen(false);
     setModalState('wallet-select');
@@ -83,10 +92,15 @@ const WalletButton = ({ size = 'small' }: Props) => {
     <>
       <div className={styles.root}>
         <>
+<<<<<<< HEAD
           {!wallet?.address && loaded && (
             <OutlinedButton onClick={onButtonClick} size={size}>
+=======
+          {!(accountId && wallet?.address) && loaded && (
+            <OutlinedButton onClick={onButtonClick} size="small">
+>>>>>>> b7dd8ebe (refactor: mv login to existing wallet provider)
               <img className={styles.icon} src={Keplr} alt="keplr" />
-              connect wallet
+              login
             </OutlinedButton>
           )}
         </>

@@ -4,6 +4,7 @@ import { OfflineSigner } from '@cosmjs/proto-signing';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 import WalletConnect from '@walletconnect/client';
 
+import { useGetCurrentAccountQuery } from 'generated/graphql';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { useAutoConnect } from './hooks/useAutoConnect';
@@ -11,6 +12,7 @@ import { useConnect } from './hooks/useConnect';
 import { useConnectWallet } from './hooks/useConnectWallet';
 import { useDetectKeplrMobileBrowser } from './hooks/useDetectKeplrMobileBrowser';
 import { useDisconnect } from './hooks/useDisconnect';
+import { useLogin } from './hooks/useLogin';
 import { useOnAccountChange } from './hooks/useOnAccountChange';
 import { useSignArbitrary } from './hooks/useSignArbitrary';
 import { useWalletConnectCallback } from './hooks/useWalletConnectCallback';
@@ -43,6 +45,9 @@ export type WalletContextType = {
   error?: unknown;
   walletConnectUri?: string;
   signArbitrary?: SignArbitraryType;
+  login?: () => Promise<void>;
+  logout?: () => Promise<void>;
+  accountId?: string;
 };
 
 const WalletContext = createContext<WalletContextType>({
@@ -92,17 +97,26 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
 
   const connect = useConnect({ connectWallet, setConnectionType, setError });
 
-  useAutoConnect({ connectWallet, setError, setLoaded });
-  useOnAccountChange({ connectWallet, wallet });
-  useDetectKeplrMobileBrowser({ connectWallet, loaded, wallet });
-  useWalletConnectCallback({ onQrCloseCallbackRef, walletConnectUri });
-  useWalletConnectFinalize({ setWallet, walletConfigRef, walletConnect });
-
   const signArbitrary = useSignArbitrary({
     walletConfigRef,
     walletConnect,
     wallet,
   });
+  const login = useLogin({ signArbitrary, wallet, setError });
+
+  useAutoConnect({ connectWallet, setError, setLoaded });
+  useOnAccountChange({ connectWallet, wallet });
+  useDetectKeplrMobileBrowser({ connectWallet, loaded, wallet });
+  useWalletConnectCallback({ onQrCloseCallbackRef, walletConnectUri });
+  useWalletConnectFinalize({
+    setWallet,
+    walletConfigRef,
+    walletConnect,
+    login,
+  });
+
+  const { data } = useGetCurrentAccountQuery();
+  const accountId = data?.getCurrentAccount;
 
   return (
     <WalletContext.Provider
@@ -115,6 +129,8 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         error,
         walletConnectUri,
         signArbitrary,
+        login,
+        accountId,
       }}
     >
       {children}

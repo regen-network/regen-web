@@ -55,6 +55,7 @@ type FinalizeConnectionParams = {
   walletConfig?: WalletConfig;
   setWallet: UseStateSetter<Wallet>;
   track?: Track;
+  login?: () => Promise<void>;
 };
 
 export const finalizeConnection = async ({
@@ -62,6 +63,7 @@ export const finalizeConnection = async ({
   walletConfig,
   setWallet,
   track,
+  login,
 }: FinalizeConnectionParams): Promise<void> => {
   let offlineSigner;
 
@@ -79,7 +81,7 @@ export const finalizeConnection = async ({
   }
 
   const key = await walletClient?.getKey(chainInfo.chainId);
-  if (key && key.bech32Address && offlineSigner) {
+  if (key && key.bech32Address && offlineSigner && login) {
     const wallet = {
       offlineSigner,
       address: key.bech32Address,
@@ -92,5 +94,6 @@ export const finalizeConnection = async ({
       });
     }
     setWallet(wallet);
+    await login();
   }
 };

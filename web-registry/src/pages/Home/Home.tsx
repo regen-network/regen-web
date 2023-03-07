@@ -11,7 +11,6 @@ import { Body, Title } from 'web-components/lib/components/typography';
 
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
-import { useWalletLogin } from 'lib/walletLogin/walletLogin';
 
 import BlockContentBody from 'components/molecules/BlockContentBody';
 
@@ -50,10 +49,8 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
     content?.gettingStartedResourcesSection;
 
   const creditClassesContent = creditClassData?.allCreditClass;
-  const { login } = useWalletLogin();
 
   useEffect(() => {
-    // if (login) login();
     const anchor = window.location.hash.slice(1);
     if (anchor) {
       const anchorEl = document.getElementById(anchor);
@@ -61,7 +58,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
         anchorEl.scrollIntoView();
       }
     }
-  }, [login]);
+  }, []);
 
   if (isFetchingAllHomePage) return <Loading sx={{ minHeight: '100vh' }} />;
 

@@ -77,7 +77,7 @@ const Section = ({
               }}
             >
               {typeof description === 'string' ? (
-                ReactHtmlParser(description)
+                description
               ) : (
                 <BlockContent content={description} />
               )}

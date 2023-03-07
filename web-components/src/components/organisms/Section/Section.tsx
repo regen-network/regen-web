@@ -17,6 +17,7 @@ export interface SectionProps {
     container?: SxProps<Theme>;
     section?: SxProps<Theme>;
     title?: SxProps<Theme>;
+    children?: SxProps<Theme>;
   };
 }
 
@@ -84,7 +85,9 @@ const Section = ({
             </Body>
           )}
         </Box>
-        <Box sx={{ mt: { xs: 10, sm: 14 } }}>{children}</Box>
+        <Box sx={[{ mt: { xs: 10, sm: 14 } }, ...sxToArray(sx?.children)]}>
+          {children}
+        </Box>
       </Box>
     </Box>
   );

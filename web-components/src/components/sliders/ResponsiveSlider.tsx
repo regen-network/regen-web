@@ -21,6 +21,7 @@ export interface ResponsiveSliderProps {
     root?: string;
     title?: string;
     headerWrap?: string;
+    slider?: string;
   };
   padding?: string | number;
   itemWidth?: string;
@@ -261,7 +262,7 @@ export default function ResponsiveSlider({
       <Slider
         {...settings}
         ref={slider}
-        className={styles.slider}
+        className={cx(styles.slider, classes?.slider)}
         beforeChange={(_, newIdx) => {
           setCurrSlide(newIdx);
         }}

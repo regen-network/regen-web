@@ -19,11 +19,16 @@ import { useNavigateToMobileUrl } from './hooks/useNavigateToMobileUrl';
 import { useResetModalOnConnect } from './hooks/useResetModalOnConnect';
 import { MobileSigningModal } from './WalletButton.SigningModal';
 import { useWalletButtonStyles } from './WalletButton.styles';
+import { ButtonSize } from './WalletButton.types';
 import { getMobileConnectUrl, getWalletsUiConfig } from './WalletButton.utils';
 
 import Keplr from 'assets/keplr.png';
 
-const WalletButton: React.FC = () => {
+type Props = {
+  size?: ButtonSize;
+};
+
+const WalletButton = ({ size = 'small' }: Props) => {
   const styles = useWalletButtonStyles();
   const { wallet, connect, loaded, error, walletConnectUri } = useWallet();
   const { bankClient } = useLedger();
@@ -80,7 +85,7 @@ const WalletButton: React.FC = () => {
       <div className={styles.root}>
         <>
           {!wallet?.address && loaded && (
-            <OutlinedButton onClick={onButtonClick} size="small">
+            <OutlinedButton onClick={onButtonClick} size={size}>
               <img className={styles.icon} src={Keplr} alt="keplr" />
               connect wallet
             </OutlinedButton>

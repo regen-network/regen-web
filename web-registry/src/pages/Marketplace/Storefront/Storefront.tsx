@@ -1,14 +1,13 @@
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
-import { ERROR_BANNER } from 'config/contents';
 import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
+import { useSetAtom } from 'jotai';
 import { getSocialItems } from 'utils/components/ShareSection/getSocialItems';
 import { REGEN_APP_PROJECT_URL } from 'utils/components/ShareSection/getSocialItems.constants';
 import { Buy1Event } from 'web-registry/src/lib/tracker/types';
 import { useTracker } from 'web-registry/src/lib/tracker/useTracker';
 
-import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
@@ -21,6 +20,7 @@ import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccess
 import Section from 'web-components/lib/components/section';
 import { Title } from 'web-components/lib/components/typography';
 
+import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
 import { getHashUrl } from 'lib/block-explorer';
 
 import { Link } from 'components/atoms';
@@ -33,7 +33,6 @@ import useBuySellOrderSubmit from './hooks/useBuySellOrderSubmit';
 import useCancelSellOrderSubmit from './hooks/useCancelSellOrderSubmit';
 import { useCheckSellOrderAvailabilty } from './hooks/useCheckSellOrderAvailabilty';
 import { useNormalizedSellOrders } from './hooks/useNormalizedSellOrders';
-import { useResetErrorBanner } from './hooks/useResetErrorBanner';
 import {
   BUY_SELL_ORDER_ACTION,
   BUY_SELL_ORDER_BUTTON,
@@ -54,18 +53,18 @@ export const Storefront = (): JSX.Element => {
   const [txModalHeader, setTxModalHeader] = useState<string>('');
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
-  const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
   const [selectedAction, setSelectedAction] = useState<SellOrderActions>();
   const selectedSellOrderIdRef = useRef<number>();
   const lastProjectIdRef = useRef('');
   const submittedQuantityRef = useRef<number>();
-  const isBuyModalOpen = selectedSellOrder !== null && selectedAction === 'buy';
+  const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
+  const isReadyToBuy = selectedSellOrder !== null && selectedAction === 'buy';
+  const setConnectWalletModalAtom = useSetAtom(connectWalletModalAtom);
   const navigate = useNavigate();
   const location = useLocation();
   const { track } = useTracker();
   const isCancelModalOpen =
     selectedSellOrder !== null && selectedAction === 'cancel';
-  useResetErrorBanner({ displayErrorBanner, setDisplayErrorBanner });
 
   // Fetching + sorting + normalizing
 
@@ -214,6 +213,12 @@ export const Storefront = (): JSX.Element => {
     setTxModalTitle,
   });
 
+  useEffect(() => {
+    if (isReadyToBuy && !isBuyModalOpen && accountAddress) {
+      setIsBuyModalOpen(true);
+    }
+  }, [isReadyToBuy, isBuyModalOpen, accountAddress]);
+
   return (
     <Box sx={{ backgroundColor: 'grey.50' }}>
       <Section>
@@ -264,16 +269,17 @@ export const Storefront = (): JSX.Element => {
                             creditClassId:
                               normalizedSellOrders[i].project?.classId,
                           });
-                          if (accountAddress) {
-                            selectedSellOrderIdRef.current = Number(
-                              normalizedSellOrders?.[i].id,
+                          selectedSellOrderIdRef.current = Number(
+                            normalizedSellOrders?.[i].id,
+                          );
+                          submittedQuantityRef.current = undefined;
+                          refetchSellOrders();
+                          setSelectedAction('buy');
+                          setSelectedSellOrder(i);
+                          if (!accountAddress) {
+                            setConnectWalletModalAtom(
+                              atom => void (atom.open = true),
                             );
-                            submittedQuantityRef.current = undefined;
-                            refetchSellOrders();
-                            setSelectedAction('buy');
-                            setSelectedSellOrder(i);
-                          } else {
-                            setDisplayErrorBanner(true);
                           }
                         }}
                       >
@@ -289,7 +295,10 @@ export const Storefront = (): JSX.Element => {
       </Section>
       <BuyCreditsModal
         open={isBuyModalOpen}
-        onClose={() => setSelectedSellOrder(null)}
+        onClose={() => {
+          setSelectedSellOrder(null);
+          setIsBuyModalOpen(false);
+        }}
         onSubmit={buySellOrderSubmit}
         sellOrders={[
           {
@@ -359,12 +368,6 @@ export const Storefront = (): JSX.Element => {
           normalizedSellOrders[selectedSellOrder ?? 0] ?? {},
         )}
       />
-      {displayErrorBanner && (
-        <ErrorBanner
-          text={ERROR_BANNER}
-          onClose={() => setDisplayErrorBanner(false)}
-        />
-      )}
     </Box>
   );
 };

@@ -11,7 +11,7 @@ import {
 } from './ConnectWallet.constants';
 import { ConnectWalletVariantType } from './ConnectWallet.types';
 
-export interface Props {
+export interface ConnectWalletProps {
   title: string;
   description?: string | JSX.Element;
   button: JSX.Element;
@@ -25,7 +25,7 @@ const ConnectWallet = ({
   button,
   variant,
   sx = [],
-}: Props): JSX.Element => {
+}: ConnectWalletProps): JSX.Element => {
   const marginBottoms = ConnectWalletMarginBottomMapping[variant];
   const iconFontSize = ConnectWalletIconSizeMapping[variant];
   const titleVariant = ConnectWalletVariantMapping[variant];

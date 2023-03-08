@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { useQuery } from '@tanstack/react-query';
+import { useSetAtom } from 'jotai';
 
 import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
@@ -14,6 +15,7 @@ import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccess
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
+import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
 import { getHashUrl } from 'lib/block-explorer';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 
@@ -43,6 +45,7 @@ export const CreateSellOrderFlow = ({
   const [txButtonTitle, setTxButtonTitle] = useState<string>();
   const [txModalHeader, setTxModalHeader] = useState<string>();
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
+  const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
   const { marketplaceClient } = useLedger();
   const navigate = useNavigate();
 
@@ -79,12 +82,6 @@ export const CreateSellOrderFlow = ({
   };
 
   const onTxBroadcast = (): void => setIsCreateSellOrderOpen(false);
-
-  useEffect(() => {
-    if (isFlowStarted) {
-      setIsCreateSellOrderOpen(true);
-    }
-  }, [isFlowStarted]);
 
   const {
     signAndBroadcast,
@@ -123,6 +120,16 @@ export const CreateSellOrderFlow = ({
   const allowedDenomOptions = getDenomAllowedOptions({
     allowedDenoms: allowedDenomsData?.allowedDenoms,
   });
+
+  useEffect(() => {
+    if (isFlowStarted && accountAddress) {
+      setIsCreateSellOrderOpen(true);
+    } else if (isFlowStarted) {
+      setConnectWalletModal(atom => {
+        atom.open = true;
+      });
+    }
+  }, [isFlowStarted, accountAddress, setConnectWalletModal, setIsFlowStarted]);
 
   return (
     <>

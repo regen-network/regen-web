@@ -1,25 +1,24 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-
-import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
+import { useSetAtom } from 'jotai';
 
 import {
   useCreditClassByOnChainIdQuery,
   useCreditClassByUriQuery,
 } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
-import { useLedger } from 'ledger';
+import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
 import { client } from 'lib/clients/sanity';
 import { getMetadata } from 'lib/db/api/metadata-graph';
 import { queryClassIssuers, queryEcoClassInfo } from 'lib/ecocredit/api';
 import { onChainClassRegExp } from 'lib/ledger';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
-import { useResetErrorBanner } from 'pages/Marketplace/Storefront/hooks/useResetErrorBanner';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 
 import { getProjectNameFromProjectsData } from './CreditClassDetails.utils';
@@ -33,7 +32,7 @@ interface CreditDetailsProps {
 function CreditClassDetails({
   isLandSteward,
 }: CreditDetailsProps): JSX.Element {
-  const { wallet } = useLedger();
+  const { wallet } = useWallet();
   const { creditClassId } = useParams();
   const [onChainClass, setOnChainClass] = useState<ClassInfo | undefined>(
     undefined,
@@ -43,8 +42,7 @@ function CreditClassDetails({
 
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
-  const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
-  useResetErrorBanner({ displayErrorBanner, setDisplayErrorBanner });
+  const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
 
   const { data: contentData } = useAllCreditClassQuery({ client });
   const content = contentData?.allCreditClass?.find(
@@ -139,14 +137,18 @@ function CreditClassDetails({
         />
       )}
       <SellOrdersActionsBar
-        isSellButtonDisabled={isSellFlowDisabled}
-        isBuyButtonDisabled={isBuyFlowDisabled}
-        onSellButtonClick={
-          wallet?.address
-            ? () => setIsSellFlowStarted(true)
-            : () => setDisplayErrorBanner(true)
+        isSellButtonDisabled={isSellFlowDisabled && Boolean(wallet?.address)}
+        isBuyButtonDisabled={isBuyFlowDisabled && Boolean(wallet?.address)}
+        onSellButtonClick={() =>
+          isSellFlowDisabled
+            ? setConnectWalletModal(atom => void (atom.open = true))
+            : setIsSellFlowStarted(true)
         }
-        onBuyButtonClick={() => setIsBuyFlowStarted(true)}
+        onBuyButtonClick={() =>
+          isBuyFlowDisabled
+            ? setConnectWalletModal(atom => void (atom.open = true))
+            : setIsBuyFlowStarted(true)
+        }
         onChainCreditClassId={onChainClass?.id}
         creditClassName={metadata?.['schema:name']}
       />
@@ -160,12 +162,6 @@ function CreditClassDetails({
         setIsFlowStarted={setIsSellFlowStarted}
         credits={creditsWithProjectName}
       />
-      {displayErrorBanner && (
-        <ErrorBanner
-          text="Please install Keplr extension to use Regen Ledger features"
-          onClose={() => setDisplayErrorBanner(false)}
-        />
-      )}
 
       {/* // TODO Display not found or error status
       // based on https://github.com/regen-network/regen-registry/issues/886*/}

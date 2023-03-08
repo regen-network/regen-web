@@ -1,5 +1,6 @@
 import { atomWithImmer } from 'jotai-immer';
 
+import { RegenModalProps } from 'web-components/lib/components/modal';
 import { ProcessingModalProps } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModalProps } from 'web-components/lib/components/modal/TxErrorModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
@@ -25,3 +26,7 @@ export const txSuccessfulModalAtom = atomWithImmer({
 export const processingModalAtom = atomWithImmer({
   open: false,
 } as Partial<ProcessingModalProps>);
+
+export const connectWalletModalAtom = atomWithImmer({
+  open: false,
+} as Partial<RegenModalProps>);

@@ -4,7 +4,6 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import OutlinedButton from 'src/components/buttons/OutlinedButton';
 
 import { ConnectWallet } from './ConnectWallet';
-import { ConnectWalletVariantType } from './ConnectWallet.types';
 
 export default {
   title: 'organisms/ConnectWallet',

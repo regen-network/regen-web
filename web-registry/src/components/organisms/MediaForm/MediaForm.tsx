@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 
 import { useProjectEditContext } from 'pages/ProjectEdit';
+import { FormRef } from 'pages/ProjectEdit/ProjectEdit.types';
 import { ProjectPageFooter } from 'components/molecules';
 
 import { PHOTO_COUNT } from './MediaForm.constants';
@@ -21,16 +22,16 @@ export interface MediaBaseErrors {
   'regen:videoURL'?: string;
 }
 
-export type MediaValues = MediaValuesSimple;
+export type MediaFormValues = MediaValuesSimple;
 export type MediaErrors = MediaErrorsSimple;
 
 export const cropAspect = { aspect: 322 / 211 }; // px values pulled from mockups (width / height)
 
 interface MediaFormProps {
-  submit: ({ values }: { values: MediaValues }) => Promise<void>;
+  submit: ({ values }: { values: MediaFormValues }) => Promise<void>;
   onPrev?: () => void;
   onNext?: () => void;
-  initialValues: MediaValues;
+  initialValues: MediaFormValues;
   projectId?: string;
 }
 
@@ -45,11 +46,11 @@ export const MediaForm = ({
   projectId,
   ...props
 }: MediaFormProps): JSX.Element => {
-  const { confirmSave, isEdit } = useProjectEditContext();
+  const { confirmSave, isEdit, formRef } = useProjectEditContext();
 
   async function handleSubmit(
-    values: MediaValues,
-    { setSubmitting, setTouched }: FormikHelpers<MediaValues>,
+    values: MediaFormValues,
+    { setSubmitting, setTouched }: FormikHelpers<MediaFormValues>,
   ): Promise<void> {
     try {
       await props.submit({ values });
@@ -63,6 +64,7 @@ export const MediaForm = ({
   return (
     <OnBoardingCard>
       <Formik
+        innerRef={formRef as FormRef<MediaFormValues>}
         enableReinitialize
         validateOnMount
         initialValues={initialValues}

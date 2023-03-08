@@ -10,6 +10,7 @@ import OnBoardingCard from '../cards/OnBoardingCard';
 import OrganizationIcon from '../icons/OrganizationIcon';
 import ControlledTextField from '../inputs/ControlledTextField';
 import { ImageUpload } from '../inputs/ImageUpload';
+import { CancelButtonFooter } from '../organisms/CancelButtonFooter/CancelButtonFooter';
 import { Title } from '../typography';
 import Modal from '.';
 
@@ -160,36 +161,13 @@ const ProfileSubmitFooter = ({
 }): JSX.Element => {
   const { isValid, isSubmitting, touched } = useFormikContext();
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        width: '100%',
-        mt: 10,
-        py: 0,
-        px: { xs: 2.5, sm: 10 },
-      }}
-    >
-      <Button
-        onClick={onClose}
-        sx={{
-          color: 'info.main',
-          fontSize: [12],
-          padding: [0],
-          border: 'none',
-        }}
-      >
-        cancel
-      </Button>
-      <ContainedButton
-        onClick={submitForm}
-        sx={{ px: [17] }}
-        disabled={!isValid || isSubmitting || !Object.keys(touched).length}
-      >
-        save
-      </ContainedButton>
-    </Box>
+    <CancelButtonFooter
+      onCancel={onClose}
+      label="save"
+      onClick={submitForm}
+      sx={{ px: [10.75] }}
+      disabled={!isValid || isSubmitting || !Object.keys(touched).length}
+    />
   );
 };
 

@@ -13,6 +13,7 @@ import { Body } from 'web-components/lib/components/typography';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getCompactedPath, getProjectBaseData, validate } from 'lib/rdf';
 
+import { FormRef } from 'pages/ProjectEdit/ProjectEdit.types';
 import { UseProjectMetadataSubmitReturn } from 'pages/ProjectMetadata/hooks/useProjectMetadataSubmit';
 
 import { ShaclGraphByUriQuery } from '../../../generated/graphql';
@@ -29,7 +30,7 @@ interface ProjectMetadataFormProps {
   creditClassId?: string;
 }
 
-export interface ProjectMetadataValues {
+export interface ProjectMetadataFormValues {
   metadata: string;
 }
 
@@ -41,12 +42,12 @@ export const ProjectMetadataForm = ({
   graphData,
   creditClassId,
 }: ProjectMetadataFormProps): JSX.Element => {
-  const { confirmSave, isEdit } = useProjectEditContext();
+  const { confirmSave, isEdit, formRef } = useProjectEditContext();
   const { classes: styles } = useStyles();
 
   const validateForm = useCallback(
-    async (values: ProjectMetadataValues) => {
-      const errors: FormikErrors<ProjectMetadataValues> = {};
+    async (values: ProjectMetadataFormValues) => {
+      const errors: FormikErrors<ProjectMetadataFormValues> = {};
       const metadata = values.metadata;
       const validJSON = !!metadata && isValidJSON(metadata);
       if (!validJSON) {
@@ -78,6 +79,7 @@ export const ProjectMetadataForm = ({
 
   return (
     <Formik
+      innerRef={formRef as FormRef<ProjectMetadataFormValues>}
       enableReinitialize
       validateOnMount
       initialValues={{

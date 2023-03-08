@@ -19,10 +19,10 @@ import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-serve
 import { UseProjectEditSubmitParams } from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
 import {
   BasicInfoFormValues,
-  DescriptionValues,
+  DescriptionFormValues,
   ProjectLocationFormValues,
 } from 'components/organisms';
-import { MediaValues } from 'components/organisms/MediaForm';
+import { MediaFormValues } from 'components/organisms/MediaForm';
 
 export type OffChainProject =
   | ProjectByIdQuery['projectById']
@@ -52,8 +52,8 @@ interface Res {
 type Values =
   | BasicInfoFormValues
   | ProjectLocationFormValues
-  | DescriptionValues
-  | MediaValues
+  | DescriptionFormValues
+  | MediaFormValues
   | Partial<ProjectMetadataLD>;
 
 export const useProjectWithMetadata = ({

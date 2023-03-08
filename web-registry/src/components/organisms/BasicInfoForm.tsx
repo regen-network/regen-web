@@ -16,6 +16,7 @@ import {
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { useProjectEditContext } from 'pages';
+import { FormRef } from 'pages/ProjectEdit/ProjectEdit.types';
 
 import { ProjectPageFooter } from '../molecules';
 
@@ -69,10 +70,11 @@ const BasicInfoForm: React.FC<
   }>
 > = ({ submit, initialValues, onNext }) => {
   const { classes, cx } = useStyles();
-  const { confirmSave, isEdit } = useProjectEditContext();
+  const { confirmSave, isEdit, formRef } = useProjectEditContext();
 
   return (
     <Formik
+      innerRef={formRef as FormRef<BasicInfoFormValues>}
       enableReinitialize
       validateOnMount
       initialValues={{

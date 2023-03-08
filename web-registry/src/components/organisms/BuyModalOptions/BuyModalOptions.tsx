@@ -11,10 +11,8 @@ import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { onBtnClick } from 'lib/button';
 
 interface Props extends RegenModalProps {
-  open: boolean;
   content?: AllBuyModalOptionsQuery['allBuyModalOptions'][0];
   openModal?: (link: string) => void;
-  onClose: () => void;
 }
 
 export const BuyModalOptions = ({

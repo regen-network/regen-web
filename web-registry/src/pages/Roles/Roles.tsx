@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
-import { RolesForm, RolesValues } from '../../components/organisms';
+import { RolesForm, RolesFormValues } from '../../components/organisms';
 import { useWallet } from '../../lib/wallet/wallet';
 import { useProjectEditContext } from '../ProjectEdit';
 import { useRolesSubmit } from './hooks/useRolesSubmit';
@@ -29,10 +29,10 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
     metadataReload,
     navigateNext,
   });
-  const [initialValues, setInitialValues] = useState<RolesValues>();
+  const [initialValues, setInitialValues] = useState<RolesFormValues>();
 
   useEffect(() => {
-    let values: RolesValues = {
+    let values: RolesFormValues = {
       // In edit mode, use existing on chain project admin
       // In creation mode, use current wallet address
       admin: isEdit ? onChainProject?.admin : wallet?.address,

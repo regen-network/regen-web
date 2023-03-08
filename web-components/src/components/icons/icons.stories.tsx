@@ -94,6 +94,7 @@ import TrashIcon from './TrashIcon';
 import TrustDocumentIcon from './TrustDocumentIcon';
 import TrustIcon from './TrustIcon';
 import VerifiedIcon from './VerifiedIcon';
+import WalletErrorIcon from './WalletErrorIcon';
 import { WalletIcon } from './WalletIcon';
 import WhitepaperIcon from './WhitepaperIcon';
 
@@ -279,6 +280,10 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<UsdcIcon />} label="UsdcIcon" />
     <LabeledIcon icon={<VerifiedIcon color="#000" />} label="VerifiedIcon" />
     <LabeledIcon icon={<WalletIcon />} label="WalletIcon" />
+    <LabeledIcon
+      icon={<WalletErrorIcon sx={{ fontSize: 64 }} />}
+      label="WalletErrorIcon"
+    />
     <LabeledIcon
       icon={<WhitepaperIcon color="grey" />}
       label="WhitepaperIcon"

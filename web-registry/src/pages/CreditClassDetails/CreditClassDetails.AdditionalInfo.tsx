@@ -1,6 +1,5 @@
 import { Box, Grid } from '@mui/material';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { startCase } from 'lodash';
 
 import { Body } from 'web-components/lib/components/typography';
 
@@ -31,7 +30,12 @@ const AdditionalInfo: React.FC<React.PropsWithChildren<AdditionalInfoProps>> =
     const getValue = (val: any): string => {
       let value = val;
       if (val?.['@value']) value = val['@value'];
-      return startCase(value);
+      return value.replace(/\w+/g, (str: string) =>
+        str
+          .split(' ')
+          .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' '),
+      );
     };
 
     const getCreditType = (creditTypeAbbrev: string): string => {

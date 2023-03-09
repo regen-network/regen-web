@@ -10,6 +10,7 @@ import ArrowSkipLeftIcon from './ArrowSkipLeft';
 import ArrowSkipRightIcon from './ArrowSkipRight';
 import AvailableCreditsIcon from './AvailableCreditsIcon';
 import AvatarIcon from './AvatarIcon';
+import AvatarOutlineIcon from './AvatarOutlineIcon';
 import BlockIcon from './BlockIcon';
 import BreadcrumbIcon from './BreadcrumbIcon';
 import { BrokenLinkIcon } from './BrokenLinkIcon';
@@ -153,6 +154,10 @@ export const allIcons = (): JSX.Element => (
       label="ArrowDownIcon"
     />
     <LabeledIcon icon={<AvatarIcon sx={{ height: 40 }} />} label="Avatar" />
+    <LabeledIcon
+      icon={<AvatarOutlineIcon sx={{ fontSize: 24, color: 'info.main' }} />}
+      label="AvatarOutlineIcon"
+    />
     <LabeledIcon
       icon={<AvailableCreditsIcon sx={{ height: 40 }} />}
       label="AvailableCreditsIcon"

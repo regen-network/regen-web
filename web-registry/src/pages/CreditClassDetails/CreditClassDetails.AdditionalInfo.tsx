@@ -9,6 +9,7 @@ import { ArrowLink } from 'components/atoms/MetadataArrowLink';
 import { MetaDetail } from 'components/molecules';
 
 import { ApprovedMethodologiesList } from './CreditClassDetails.ApprovedMethodologies';
+import { getValue } from './CreditClassDetails.utils';
 
 interface AdditionalInfoProps {
   onChainClass: ClassInfo;
@@ -25,18 +26,6 @@ const AdditionalInfo: React.FC<React.PropsWithChildren<AdditionalInfoProps>> =
     const projectActivities = metadata?.['regen:projectActivities'];
     const carbonOffsetStandard = metadata?.['regen:carbonOffsetStandard'];
     const tokenizationSource = metadata?.['regen:tokenizationSource'];
-
-    // This can be deleted if all class metadata is updated to latest standard
-    const getValue = (val: any): string => {
-      let value = val;
-      if (val?.['@value']) value = val['@value'];
-      return value.replace(/\w+/g, (str: string) =>
-        str
-          .split(' ')
-          .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(' '),
-      );
-    };
 
     const getCreditType = (creditTypeAbbrev: string): string => {
       // TODO: add credit types as they come online, or fetch from ledger somehow

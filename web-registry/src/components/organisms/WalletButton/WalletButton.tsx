@@ -1,9 +1,8 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { useAtom } from 'jotai';
 
-import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import WalletModal from 'web-components/lib/components/modal/wallet-modal';
 import { WalletModalState } from 'web-components/lib/components/modal/wallet-modal/WalletModal.types';
@@ -30,7 +29,7 @@ type Props = {
 
 const WalletButton = ({ size = 'small' }: Props) => {
   const styles = useWalletButtonStyles();
-  const { wallet, connect, loaded, error, walletConnectUri } = useWallet();
+  const { wallet, connect, loaded, walletConnectUri } = useWallet();
   const { bankClient } = useLedger();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isWaitingForSigning, setIsWaitingForSigningAtom] = useAtom(
@@ -89,9 +88,6 @@ const WalletButton = ({ size = 'small' }: Props) => {
               <img className={styles.icon} src={Keplr} alt="keplr" />
               connect wallet
             </OutlinedButton>
-          )}
-          {error && (
-            <ErrorBanner text="Please install Keplr extension to use Regen Ledger features" />
           )}
         </>
       </div>

@@ -13,6 +13,7 @@ import { useConnectWallet } from './hooks/useConnectWallet';
 import { useDetectKeplrMobileBrowser } from './hooks/useDetectKeplrMobileBrowser';
 import { useDisconnect } from './hooks/useDisconnect';
 import { useLogin } from './hooks/useLogin';
+import { useLogout } from './hooks/useLogout';
 import { useOnAccountChange } from './hooks/useOnAccountChange';
 import { useSignArbitrary } from './hooks/useSignArbitrary';
 import { useWalletConnectCallback } from './hooks/useWalletConnectCallback';
@@ -97,6 +98,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     setError,
   });
   const login = useLogin({ signArbitrary, setError, setAccountId });
+  const logout = useLogout({ disconnect, setError, setAccountId });
 
   const connectWallet = useConnectWallet({
     onQrCloseCallbackRef,
@@ -138,6 +140,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         walletConnectUri,
         signArbitrary,
         login,
+        logout,
         accountId,
       }}
     >

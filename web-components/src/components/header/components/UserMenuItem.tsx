@@ -14,7 +14,7 @@ interface UserMenuItemProps extends HeaderMenuHoverBase {
   address: string;
   avatar: string;
   userMenuItems: HeaderDropdownItemProps[];
-  disconnect: () => void;
+  logout: () => void;
 }
 
 const Separator = styled('hr')(({ theme }) => ({
@@ -27,7 +27,7 @@ const Separator = styled('hr')(({ theme }) => ({
 const UserMenuItem: React.FC<React.PropsWithChildren<UserMenuItemProps>> = ({
   address,
   avatar,
-  disconnect,
+  logout,
   pathname,
   linkComponent,
   userMenuItems,
@@ -60,8 +60,8 @@ const UserMenuItem: React.FC<React.PropsWithChildren<UserMenuItemProps>> = ({
         extras: (
           <Box sx={{ mx: -3.5 }}>
             <Separator />
-            <Label size="xs" onClick={disconnect} sx={{ cursor: 'pointer' }}>
-              disconnect »
+            <Label size="xs" onClick={logout} sx={{ cursor: 'pointer' }}>
+              logout »
             </Label>
           </Box>
         ),

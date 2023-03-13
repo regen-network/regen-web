@@ -26,9 +26,13 @@ import { fullWidthRegExp } from './RegistryLayout.constants';
 const RegistryLayoutHeader: React.FC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { wallet, loaded, disconnect, accountId } = useWallet();
+  const { wallet, loaded, logout, accountId } = useWallet();
   const theme = useTheme<Theme>();
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const {
+    isAuthenticated,
+    loginWithRedirect,
+    logout: auth0Logout,
+  } = useAuth0();
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
   const isTransparent = useMemo(() => getIsTransparent(pathname), [pathname]);
   const menuItems = useMemo(() => getMenuItems(pathname), [pathname]);
@@ -51,7 +55,7 @@ const RegistryLayoutHeader: React.FC = () => {
         onLogin={() =>
           loginWithRedirect({ redirectUri: window.location.origin })
         }
-        onLogout={() => logout({ returnTo: window.location.origin })}
+        onLogout={() => auth0Logout({ returnTo: window.location.origin })}
         onSignup={() => navigate('/signup')}
         menuItems={menuItems}
         color={color}
@@ -62,20 +66,16 @@ const RegistryLayoutHeader: React.FC = () => {
         pathname={pathname}
         extras={
           <Box display="flex" justifyContent="center" alignItems="center">
-            {chainId &&
-              loaded &&
-              accountId &&
-              wallet?.address &&
-              disconnect && (
-                <UserMenuItem
-                  address={truncate(wallet?.address)}
-                  avatar={DefaultAvatar}
-                  disconnect={disconnect}
-                  pathname={pathname}
-                  linkComponent={RegistryNavLink}
-                  userMenuItems={userMenuItems}
-                />
-              )}
+            {chainId && loaded && accountId && wallet?.address && logout && (
+              <UserMenuItem
+                address={truncate(wallet?.address)}
+                avatar={DefaultAvatar}
+                logout={logout}
+                pathname={pathname}
+                linkComponent={RegistryNavLink}
+                userMenuItems={userMenuItems}
+              />
+            )}
             <WalletButton />
           </Box>
         }

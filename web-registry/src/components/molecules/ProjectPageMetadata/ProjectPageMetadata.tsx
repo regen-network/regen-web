@@ -42,7 +42,8 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
 
   // Toucan
   const toucanProjectTokenId = metadata?.['regen:toucanProjectTokenId'];
-  const approvedMethodologies = metadata?.['regen:approvedMethodologies'];
+  const approvedMethodologies =
+    metadata?.['regen:approvedMethodologies']?.['schema:itemListElement'];
   const methodologyCount = approvedMethodologies?.length;
 
   return (

@@ -1,4 +1,6 @@
-import { TypeValue, URL } from 'lib/rdf/types';
+import { URL } from 'lib/rdf/types';
+
+import { ApprovedMethodologies } from './methodology';
 
 // type generated from https://github.com/regen-network/regen-registry-standards/blob/main/jsonld/credit-classes/C01-verified-carbon-standard-class.json
 
@@ -17,20 +19,6 @@ export interface CreditClassMetadataLD {
   'regen:projectActivities': string[];
   'regen:carbonOffsetStandard': NameURL;
   'regen:tokenizationSource': string;
-}
-
-export interface ApprovedMethodologies {
-  '@type': 'schema:BreadcrumbList';
-  'schema:url': URL;
-  'schema:itemListElement': ItemListElement[];
-}
-
-interface ItemListElement {
-  '@type': string;
-  'schema:url': URL;
-  'schema:name': string;
-  'schema:version': TypeValue;
-  'schema:identifier': TypeValue;
 }
 
 interface NameURL {

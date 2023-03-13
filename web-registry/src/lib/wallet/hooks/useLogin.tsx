@@ -1,9 +1,11 @@
 import { useCallback } from 'react';
-import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
 
 import { UseStateSetter } from 'types/react/use-state';
-import { apiUri } from 'lib/apiUri';
+import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { SignArbitraryType, Wallet } from 'lib/wallet/wallet';
+
+import { getAxiosInstance } from '../wallet.utils';
 
 type Params = {
   signArbitrary?: SignArbitraryType;
@@ -12,18 +14,13 @@ type Params = {
 };
 
 export const useLogin = ({ signArbitrary, setError, setAccountId }: Params) => {
+  // Step 1: Retrieve and save the CSRF tokens
+  const { data: token } = useQuery(getCsrfTokenQuery({}));
   const login = useCallback(
     async (wallet?: Wallet): Promise<void> => {
       try {
-        if (wallet?.address && signArbitrary) {
-          const instance = axios.create({
-            baseURL: apiUri,
-            withCredentials: true,
-          });
-
-          // Step 1: Retrieve and save the CSRF tokens
-          const csrfRes = await instance.get('/csrfToken');
-          instance.defaults.headers.common['X-CSRF-TOKEN'] = csrfRes.data.token;
+        if (wallet?.address && signArbitrary && token) {
+          const instance = getAxiosInstance(token);
 
           // Step 2: Retrieve a nonce for the user
           const nonceRes = await instance.get('web3auth/nonce', {
@@ -51,7 +48,7 @@ export const useLogin = ({ signArbitrary, setError, setAccountId }: Params) => {
         setError(e);
       }
     },
-    [signArbitrary, setError, setAccountId],
+    [token, signArbitrary, setError, setAccountId],
   );
 
   return login;

@@ -1,8 +1,10 @@
 import { MutableRefObject } from 'react';
 import WalletConnect from '@walletconnect/client';
+import axios from 'axios';
 import truncate from 'lodash/truncate';
 
 import { UseStateSetter } from 'types/react/use-state';
+import { apiUri } from 'lib/apiUri';
 import { LoginEvent, Track } from 'lib/tracker/types';
 
 import { chainInfo } from './chainInfo/chainInfo';
@@ -99,4 +101,14 @@ export const finalizeConnection = async ({
 
     if (doLogin) await login(wallet);
   }
+};
+
+export const getAxiosInstance = (token: string) => {
+  return axios.create({
+    baseURL: apiUri,
+    withCredentials: true,
+    headers: {
+      'X-CSRF-TOKEN': token,
+    },
+  });
 };

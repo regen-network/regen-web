@@ -8,7 +8,7 @@ export const mockClassId = 'C01';
 export const mockMetadata = {
   '@context': {
     schema: 'http://schema.org/',
-    regen: 'http://regen.network/',
+    regen: 'https://schema.regen.network#',
     qudt: 'http://qudt.org/schema/qudt/',
     unit: 'http://qudt.org/vocab/unit/',
     xsd: 'http://www.w3.org/2001/XMLSchema#',

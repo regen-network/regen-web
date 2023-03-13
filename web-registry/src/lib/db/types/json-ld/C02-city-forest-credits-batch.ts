@@ -13,7 +13,7 @@ export interface CFCBatchMetadataLD extends BatchMetadataLD {
 
 interface Context {
   schema: 'http://schema.org/';
-  regen: 'http://regen.network/';
+  regen: 'https://schema.regen.network#';
   xsd: 'http://www.w3.org/2001/XMLSchema#';
   'regen:cfcVintageYear': { '@type': 'xsd:gYear'; '@value': string };
   'regen:cfcCreditSerialNumbers': { '@container': '@list' };

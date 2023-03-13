@@ -50,7 +50,7 @@ export const AuthApolloProvider = ({
   const link = authLink.concat(httpLink);
   apolloClientFactory.prepare({
     cache: new InMemoryCache(),
-    link: link,
+    link,
   });
   return (
     <ApolloProvider client={apolloClientFactory.getClient()}>

@@ -6,7 +6,7 @@ import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 
 import { MetadataSubmitProps } from 'hooks/projects/useProjectWithMetadata';
 
-import { ProjectMetadataValues } from '../../../components/organisms';
+import { ProjectMetadataFormValues } from '../../../components/organisms';
 import { OMITTED_METADATA_KEYS } from '../ProjectMetadata.config';
 
 type Params = {
@@ -15,7 +15,7 @@ type Params = {
 };
 
 export type UseProjectMetadataSubmitReturn = (
-  values: ProjectMetadataValues,
+  values: ProjectMetadataFormValues,
 ) => Promise<void>;
 
 export const useProjectMetadataSubmit = ({
@@ -23,7 +23,7 @@ export const useProjectMetadataSubmit = ({
   metadataSubmit,
 }: Params): UseProjectMetadataSubmitReturn => {
   const projectMetadataSubmit = useCallback(
-    async (values: ProjectMetadataValues): Promise<void> => {
+    async (values: ProjectMetadataFormValues): Promise<void> => {
       const parsedMetaData = JSON.parse(values.metadata);
       const baseMetadata = pick(metadata, OMITTED_METADATA_KEYS);
       merge(baseMetadata, parsedMetaData);

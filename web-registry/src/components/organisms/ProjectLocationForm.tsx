@@ -9,6 +9,7 @@ import LocationField from 'web-components/lib/components/inputs/LocationField';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 
 import { useProjectEditContext } from 'pages';
+import { FormRef } from 'pages/ProjectEdit/ProjectEdit.types';
 
 import { ProjectPageFooter } from '../molecules';
 
@@ -39,10 +40,11 @@ const ProjectLocationForm: React.FC<
     onPrev?: () => void;
   }>
 > = ({ submit, initialValues, mapToken, ...props }) => {
-  const { confirmSave, isEdit } = useProjectEditContext();
+  const { confirmSave, isEdit, formRef } = useProjectEditContext();
 
   return (
     <Formik
+      innerRef={formRef as FormRef<ProjectLocationFormValues>}
       enableReinitialize
       initialValues={{
         'schema:location': initialValues?.['schema:location'] || {},

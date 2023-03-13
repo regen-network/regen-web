@@ -21,6 +21,7 @@ export interface ResponsiveSliderProps {
     root?: string;
     title?: string;
     headerWrap?: string;
+    slider?: string;
   };
   padding?: string | number;
   itemWidth?: string;
@@ -28,6 +29,7 @@ export interface ResponsiveSliderProps {
   dots?: boolean;
   onChange?: (i: number) => void;
   visibleOverflow?: boolean;
+  adaptiveHeight?: boolean;
 }
 
 interface StyleProps {
@@ -153,6 +155,7 @@ export default function ResponsiveSlider({
   dots = false,
   onChange,
   visibleOverflow = false,
+  adaptiveHeight = false,
 }: ResponsiveSliderProps): JSX.Element {
   const theme = useTheme();
   const [currSlide, setCurrSlide] = useState(0);
@@ -166,10 +169,10 @@ export default function ResponsiveSlider({
   const slides: number = gridView
     ? 2
     : desktop
-    ? slidesToShow || items.length
+    ? slidesToShow ?? items.length
     : mobile
     ? 1
-    : Math.min(items.length, 2);
+    : Math.min(slidesToShow ?? items.length, 2);
 
   const { classes: styles, cx } = useStyles({
     gridView,
@@ -259,13 +262,14 @@ export default function ResponsiveSlider({
       <Slider
         {...settings}
         ref={slider}
-        className={styles.slider}
+        className={cx(styles.slider, classes?.slider)}
         beforeChange={(_, newIdx) => {
           setCurrSlide(newIdx);
         }}
         afterChange={i => {
           if (onChange) onChange(i);
         }}
+        adaptiveHeight={adaptiveHeight}
       >
         {items.map((item, index) => (
           <div className={styles.item} key={index}>

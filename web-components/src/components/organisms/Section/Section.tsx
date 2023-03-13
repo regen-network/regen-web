@@ -5,9 +5,10 @@ import ReactHtmlParser from 'html-react-parser';
 import { Theme } from '../../../theme/muiTheme';
 import { sxToArray } from '../../../utils/mui/sxToArray';
 import { BlockContent } from '../../block-content';
-import { Body, Title } from '../../typography';
+import { Body, Label, Title } from '../../typography';
 
 export interface SectionProps {
+  label?: string;
   title?: string | JSX.Element;
   description?: string | JSX.Element;
   backgroundImage?: string;
@@ -15,10 +16,13 @@ export interface SectionProps {
   sx?: {
     container?: SxProps<Theme>;
     section?: SxProps<Theme>;
+    title?: SxProps<Theme>;
+    children?: SxProps<Theme>;
   };
 }
 
 const Section = ({
+  label,
   title,
   description,
   backgroundImage,
@@ -49,7 +53,15 @@ const Section = ({
         ]}
       >
         <Box>
-          <Title variant="h2" sx={{ textAlign: 'center' }}>
+          {label && (
+            <Label size="md" sx={{ mb: 2.5, color: 'info.main' }}>
+              {label}
+            </Label>
+          )}
+          <Title
+            variant="h2"
+            sx={[{ textAlign: 'center' }, ...sxToArray(sx?.title)]}
+          >
             {title}
           </Title>
           {description && (
@@ -73,7 +85,9 @@ const Section = ({
             </Body>
           )}
         </Box>
-        <Box sx={{ mt: { xs: 10, sm: 14 } }}>{children}</Box>
+        <Box sx={[{ mt: { xs: 10, sm: 14 } }, ...sxToArray(sx?.children)]}>
+          {children}
+        </Box>
       </Box>
     </Box>
   );

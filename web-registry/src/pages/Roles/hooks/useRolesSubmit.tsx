@@ -16,7 +16,7 @@ import { NestedPartial } from 'types/nested-partial';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 
 import { UseProjectEditSubmitParams } from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
-import { RolesValues } from 'components/organisms';
+import { RolesFormValues } from 'components/organisms';
 import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';
 
 interface Props {
@@ -29,7 +29,7 @@ interface Props {
 }
 
 type Return = {
-  rolesSubmit: (values: RolesValues) => Promise<void>;
+  rolesSubmit: (values: RolesFormValues) => Promise<void>;
 };
 
 const useRolesSubmit = ({
@@ -47,7 +47,7 @@ const useRolesSubmit = ({
   const [updateParty] = useUpdatePartyByIdMutation();
 
   const rolesSubmit = useCallback(
-    async (values: RolesValues): Promise<void> => {
+    async (values: RolesFormValues): Promise<void> => {
       try {
         let projectPatch: ProjectPatch = {};
         const developer = values['regen:projectDeveloper'];
@@ -196,7 +196,7 @@ function stripPartyIds(values: ProfileFormValues): ProfileFormValues {
   return values;
 }
 
-function stripIds(values: RolesValues): RolesValues {
+function stripIds(values: RolesFormValues): RolesFormValues {
   if (values['regen:projectDeveloper']) {
     return {
       'regen:projectDeveloper': stripPartyIds(values['regen:projectDeveloper']),

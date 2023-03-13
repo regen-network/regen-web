@@ -4,7 +4,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
-import { DescriptionForm, DescriptionValues } from '../../components/organisms';
+import {
+  DescriptionForm,
+  DescriptionFormValues,
+} from '../../components/organisms';
 import { useProjectEditContext } from '../ProjectEdit';
 
 const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
@@ -20,7 +23,7 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
     anchored: false,
   });
 
-  let initialFieldValues: DescriptionValues | undefined;
+  let initialFieldValues: DescriptionFormValues | undefined;
   if (metadata) {
     initialFieldValues = {
       'schema:description': metadata['schema:description'],

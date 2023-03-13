@@ -1,5 +1,6 @@
 import { CompactedNameUrl } from 'lib/rdf/types';
 
+import { ApprovedMethodologies } from './methodology';
 import { VCSProjectMetadataLD } from './vcs-project-metadata';
 
 export interface ToucanProjectMetadataLD
@@ -11,7 +12,7 @@ export interface ToucanProjectMetadataLD
     | 'regen:projectActivity'
     | 'regen:offsetGenerationMethod'
   > {
-  'regen:approvedMethodologies': ApprovedMethodology[];
+  'regen:approvedMethodologies': ApprovedMethodologies;
   'regen:toucanProjectTokenId': number;
   'regen:toucanURI': string;
 
@@ -21,11 +22,4 @@ export interface ToucanProjectMetadataLD
   'regen:projectType'?: string;
   'regen:projectActivity'?: CompactedNameUrl;
   'regen:offsetGenerationMethod'?: string;
-}
-
-interface ApprovedMethodology {
-  'schema:identifier': string;
-  'schema:name': string;
-  'schema:url': string;
-  'schema:version': string;
 }

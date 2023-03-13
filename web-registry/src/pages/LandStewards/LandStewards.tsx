@@ -7,6 +7,8 @@ import FixedFooter from 'web-components/lib/components/fixed-footer';
 import Modal from 'web-components/lib/components/modal';
 import SEO from 'web-components/lib/components/seo';
 
+import { onBtnClick } from 'lib/button';
+
 import landStewardsHero from '../../assets/land-stewards-top.jpg';
 import {
   FeaturedSection,
@@ -149,9 +151,7 @@ const LandStewards = (): JSX.Element => {
         <ContainedButton
           size="large"
           sx={{ px: { md: 12 } }}
-          onClick={() =>
-            openModal(content?.footerButton?.buttonLink?.buttonHref)
-          }
+          onClick={() => onBtnClick(openModal, content?.footerButton)}
         >
           {content?.footerButton?.buttonText}
         </ContainedButton>

@@ -99,9 +99,9 @@ export const parseOffChainProject = (
 ) => {
   const creditClass = project?.creditClassByCreditClassId;
   const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
-  const sdgIris = creditClassVersion?.metadata?.['https://schema.regen.network#SDGs']?.[
-    '@list'
-  ]?.map((sdg: { '@id': string }) => sdg['@id']);
+  const sdgIris = creditClassVersion?.metadata?.[
+    'https://schema.regen.network#SDGs'
+  ]?.['@list']?.map((sdg: { '@id': string }) => sdg['@id']);
   const offsetGenerationMethod =
     creditClassVersion?.metadata?.[
       'https://schema.regen.network#offsetGenerationMethod'

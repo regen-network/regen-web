@@ -66,7 +66,9 @@ export const parseOffChainProject = (
       '@list'
     ]?.map((impact: { '@id': string }) => impact['@id']) || [];
   const primaryImpactIRI =
-    creditClassVersion?.metadata?.['https://schema.regen.network#indicator']?.['@id'];
+    creditClassVersion?.metadata?.['https://schema.regen.network#indicator']?.[
+      '@id'
+    ];
   return {
     offChainProjectMetadata,
     managementActions,

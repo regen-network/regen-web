@@ -64,13 +64,13 @@ export function buildIssuanceModalData(
       creditVintage.methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt;
 
     const bufferPoolDist =
-      creditVintage.metadata?.['https://schema.regen.network#bufferDistribution']?.[
-        'https://schema.regen.network#bufferPool'
-      ];
+      creditVintage.metadata?.[
+        'https://schema.regen.network#bufferDistribution'
+      ]?.['https://schema.regen.network#bufferPool'];
     const permanenceReversalBufferDist =
-      creditVintage.metadata?.['https://schema.regen.network#bufferDistribution']?.[
-        'https://schema.regen.network#permanenceReversalBuffer'
-      ];
+      creditVintage.metadata?.[
+        'https://schema.regen.network#bufferDistribution'
+      ]?.['https://schema.regen.network#permanenceReversalBuffer'];
 
     let numberOfCredits: number = creditVintage.units;
     let bufferPool: number | undefined;
@@ -120,16 +120,16 @@ export function buildIssuanceModalData(
       projectName: project.metadata?.['schema:name'] || '',
       standard: {
         documentId:
-          creditClassVersion?.metadata?.['https://schema.regen.network#standard']?.[
-            'https://schema.regen.network#documentId'
-          ],
-        name: creditClassVersion?.metadata?.['https://schema.regen.network#standard']?.[
-          'http://schema.org/name'
-        ],
+          creditClassVersion?.metadata?.[
+            'https://schema.regen.network#standard'
+          ]?.['https://schema.regen.network#documentId'],
+        name: creditClassVersion?.metadata?.[
+          'https://schema.regen.network#standard'
+        ]?.['http://schema.org/name'],
         version:
-          creditClassVersion?.metadata?.['https://schema.regen.network#standard']?.[
-            'http://schema.org/version'
-          ],
+          creditClassVersion?.metadata?.[
+            'https://schema.regen.network#standard'
+          ]?.['http://schema.org/version'],
       },
       creditClass: {
         documentId: creditClassVersion?.documentId,

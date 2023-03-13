@@ -62,11 +62,11 @@ export const parseOffChainProject = (
 
   const creditClassName = creditClassVersion?.name;
   const coBenefitsIris =
-    creditClassVersion?.metadata?.['http://regen.network/coBenefits']?.[
+    creditClassVersion?.metadata?.['https://schema.regen.network#coBenefits']?.[
       '@list'
     ]?.map((impact: { '@id': string }) => impact['@id']) || [];
   const primaryImpactIRI =
-    creditClassVersion?.metadata?.['http://regen.network/indicator']?.['@id'];
+    creditClassVersion?.metadata?.['https://schema.regen.network#indicator']?.['@id'];
   return {
     offChainProjectMetadata,
     managementActions,

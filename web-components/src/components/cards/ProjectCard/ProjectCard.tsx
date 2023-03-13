@@ -88,10 +88,10 @@ export function ProjectCard({
   const [open, setOpen] = useState<boolean>(true);
 
   const serialNumber: string | undefined =
-    purchaseInfo?.vintageMetadata?.['http://regen.network/serialNumber'];
+    purchaseInfo?.vintageMetadata?.['https://schema.regen.network#serialNumber'];
   const additionalCertifications: string[] | undefined =
     purchaseInfo?.vintageMetadata?.[
-      'http://regen.network/additionalCertifications'
+      'https://schema.regen.network#additionalCertifications'
     ]?.['@list'];
   const pricePerTon = purchaseInfo?.sellInfo?.pricePerTon;
 

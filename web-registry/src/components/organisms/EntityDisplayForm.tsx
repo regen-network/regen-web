@@ -365,7 +365,7 @@ const EntityDisplayForm: React.FC<
   const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
-      uri: 'https://schema.regen.network#ProjectPageShape',
+      uri: 'regen:ProjectPageShape',
     },
   });
 

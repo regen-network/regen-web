@@ -166,7 +166,7 @@ const StoryForm: React.FC<React.PropsWithChildren<StoryFormProps>> = ({
   const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
-      uri: 'https://schema.regen.network#ProjectPageShape',
+      uri: 'regen:ProjectPageShape',
     },
   });
 

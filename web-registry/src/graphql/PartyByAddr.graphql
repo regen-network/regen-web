@@ -1,0 +1,12 @@
+query partyByAddr($addr: String!) {
+  walletByAddr(addr: $addr) {
+    id
+    partyByWalletId {
+      name
+      type
+      image
+      description
+      accountId
+    }
+  }
+}

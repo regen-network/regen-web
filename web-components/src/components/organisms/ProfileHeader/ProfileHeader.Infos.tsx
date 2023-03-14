@@ -1,10 +1,9 @@
 import { Box, SxProps } from '@mui/system';
 
-import { sxToArray } from 'src/utils/mui/sxToArray';
-
 import { Flex } from '../../../components/box';
 import { Body } from '../../../components/typography';
 import { Theme } from '../../../theme/muiTheme';
+import { sxToArray } from '../../../utils/mui/sxToArray';
 import { ProfileVariantIconMapping } from './ProfileHeader.constants';
 import { ProfileInfos, ProfileVariant } from './ProfileHeader.types';
 
@@ -37,6 +36,8 @@ export const ProfileHeaderInfos = ({
       </Box>
       {address}
     </Body>
-    <Body size="md">{description}</Body>
+    <Body size="md" sx={{ px: { xs: 3.75, sm: 0 } }}>
+      {description}
+    </Body>
   </Flex>
 );

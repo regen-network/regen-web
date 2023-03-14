@@ -9,11 +9,14 @@ import { CreditBatchIcon } from 'web-components/lib/components/icons/CreditBatch
 import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClassIcon';
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
+import { ProfileHeader } from 'web-components/lib/components/organisms/ProfileHeader/ProfileHeader';
 import Section from 'web-components/lib/components/section';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
+import { truncate } from 'web-components/lib/utils/truncate';
 
 import { isBridgeEnabled } from 'lib/ledger';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { Link } from 'components/atoms';
 import { useQueryIfCreditClassAdmin } from 'hooks/useQueryIfCreditClassAdmin';
@@ -31,6 +34,7 @@ const Dashboard = (): JSX.Element => {
   const isProjectAdmin = useQueryIfProjectAdmin();
   const showProjectTab = isIssuer || isProjectAdmin;
   const showCreditClassTab = isCreditClassCreator || isCreditClassAdmin;
+  const { wallet } = useWallet();
   const location = useLocation();
 
   const tabs: IconTabProps[] = useMemo(
@@ -85,29 +89,44 @@ const Dashboard = (): JSX.Element => {
   );
 
   return (
-    <Box sx={{ bgcolor: 'grey.50' }}>
-      <Section>
-        <IconTabs
-          aria-label="dashboard tabs"
-          tabs={tabs}
-          activeTab={activeTab}
-          linkComponent={Link}
-          mobileFullWidth
-        />
-        <Flex sx={{ ...dashBoardStyles.padTop }}>
-          <Box sx={{ width: '100%' }}>
-            <Outlet
-              context={{
-                isCreditClassCreator,
-                isCreditClassAdmin,
-                isProjectAdmin,
-                isIssuer,
-              }}
-            />
-          </Box>
-        </Flex>
-      </Section>
-    </Box>
+    <>
+      <ProfileHeader
+        name="Impact Ag"
+        backgroundImage="/jpg/profile-default-bg.jpg"
+        avatar="/jpg/profile-default-avatar.jpg"
+        infos={{
+          address: truncate(wallet?.address),
+          description:
+            'Impact Ag Partners is a specialist agricultural asset management firm and advisory service.',
+        }}
+        editLink="/profile/edit"
+        variant="organization"
+        LinkComponent={Link}
+      />
+      <Box sx={{ bgcolor: 'grey.50' }}>
+        <Section>
+          <IconTabs
+            aria-label="dashboard tabs"
+            tabs={tabs}
+            activeTab={activeTab}
+            linkComponent={Link}
+            mobileFullWidth
+          />
+          <Flex sx={{ ...dashBoardStyles.padTop }}>
+            <Box sx={{ width: '100%' }}>
+              <Outlet
+                context={{
+                  isCreditClassCreator,
+                  isCreditClassAdmin,
+                  isProjectAdmin,
+                  isIssuer,
+                }}
+              />
+            </Box>
+          </Flex>
+        </Section>
+      </Box>
+    </>
   );
 };
 

@@ -18,7 +18,7 @@ export const useFetchUserBalance = ({ selectedSellOrder }: Params): number => {
     getAllBalancesQuery({
       request: { address: wallet?.address },
       client: bankClient,
-      enabled: !!bankClient,
+      enabled: !!bankClient && !!wallet?.address,
     }),
   );
 

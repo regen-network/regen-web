@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useApolloClient } from '@apollo/client';
 import { Grid } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 
@@ -11,7 +12,6 @@ import {
   useCreateProjectMutation,
   useCreateWalletMutation,
 } from 'generated/graphql';
-import { graphqlClient } from 'lib/clients/graphqlClient';
 import { getWalletByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getWalletByAddrQuery/getWalletByAddrQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
@@ -25,6 +25,7 @@ import { submitCreateProject } from './MyProjects.utils';
 
 const MyProjects = (): JSX.Element => {
   const [error, setError] = useState<string | null>(null);
+  const graphqlClient = useApolloClient();
   const { wallet } = useWallet();
   const navigate = useNavigate();
   const { isIssuer, isProjectAdmin } = useDashboardContext();

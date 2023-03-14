@@ -11,6 +11,6 @@ export type ReactQueryProjectByHandleResponse =
   QueryObserverOptions<ApolloQueryResult<ProjectByHandleQuery> | null>;
 
 export type ReactQueryProjectByHandleProps = {
-  client: ApolloClient<object>;
+  client: ApolloClient<unknown>;
 } & ProjectByHandleQueryVariables &
   ReactQueryBuilderResponse<ReactQueryProjectByHandleResponse>;

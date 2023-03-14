@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useApolloClient } from '@apollo/client';
 import { Box, Skeleton, useTheme } from '@mui/material';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import { useQuery } from '@tanstack/react-query';
@@ -12,7 +13,6 @@ import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 import { Project } from 'generated/graphql';
 import { Maybe } from 'graphql/jsutils/Maybe';
 import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
-import { graphqlClient } from 'lib/clients/graphqlClient';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
@@ -58,6 +58,7 @@ function ProjectDetails(): JSX.Element {
   const { ecocreditClient } = useLedger();
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
   const { wallet } = useWallet();
+  const graphqlClient = useApolloClient();
 
   const { data: sanityProjectPageData } = useQuery(
     getAllProjectPageQuery({ sanityClient, enabled: !!sanityClient }),

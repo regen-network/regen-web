@@ -1,9 +1,9 @@
+import { useApolloClient } from '@apollo/client';
 import { useQueries, useQuery } from '@tanstack/react-query';
 
 import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCard';
 
 import { useLedger } from 'ledger';
-import { graphqlClient } from 'lib/clients/graphqlClient';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { normalizeProjectsWithCreditClass } from 'lib/normalizers/projects/normalizeProjectsWithCreditClass';
 import { getProjectsByClassQuery } from 'lib/queries/react-query/ecocredit/getProjectsByClass/getProjectsByClassQuery';
@@ -22,6 +22,7 @@ interface Props {
 
 export const useFetchProjectsByClass = ({ classId }: Props): Response => {
   const { ecocreditClient } = useLedger();
+  const graphqlClient = useApolloClient();
 
   // Projects by class
   const { data: projectsData, isLoading: isLoadingProjects } = useQuery(

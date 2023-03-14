@@ -1,8 +1,8 @@
+import { useApolloClient } from '@apollo/client';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';
-import { graphqlClient } from 'lib/clients/graphqlClient';
 import { GECKO_EEUR_ID, GECKO_USDC_ID } from 'lib/coingecko';
 import { normalizeProjectsWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
@@ -47,6 +47,7 @@ export function useProjectsWithOrders({
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
   const { ecocreditClient, marketplaceClient } = useLedger();
 
+  const graphqlClient = useApolloClient();
   const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
 

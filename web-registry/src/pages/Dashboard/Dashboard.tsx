@@ -1,7 +1,13 @@
 import { useMemo } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/styles';
+import { useQuery } from '@tanstack/react-query';
 
 import { Flex } from 'web-components/lib/components/box';
 import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
@@ -16,6 +22,7 @@ import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 import { truncate } from 'web-components/lib/utils/truncate';
 
 import { isBridgeEnabled } from 'lib/ledger';
+import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { Link } from 'components/atoms';
@@ -24,6 +31,11 @@ import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator
 import { useQueryIfIssuer } from 'hooks/useQueryIfIssuer';
 import { useQueryIfProjectAdmin } from 'hooks/useQueryIfProjectAdmin';
 
+import {
+  DEFAULT_PROFILE_AVATAR,
+  DEFAULT_PROFILE_BG,
+  profileVVariantMapping,
+} from './Dashboard.constants';
 import { dashBoardStyles } from './Dashboard.styles';
 
 const Dashboard = (): JSX.Element => {
@@ -36,6 +48,17 @@ const Dashboard = (): JSX.Element => {
   const showCreditClassTab = isCreditClassCreator || isCreditClassAdmin;
   const { wallet } = useWallet();
   const location = useLocation();
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
+
+  const { data: partyByAddr } = useQuery(
+    getPartyByAddrQuery({
+      client: graphqlClient,
+      addr: wallet?.address ?? '',
+      enabled: !!wallet?.address && !!graphqlClient,
+    }),
+  );
+  const party = partyByAddr?.walletByAddr?.partyByWalletId;
 
   const tabs: IconTabProps[] = useMemo(
     () => [
@@ -91,16 +114,19 @@ const Dashboard = (): JSX.Element => {
   return (
     <>
       <ProfileHeader
-        name="Impact Ag"
-        backgroundImage="/jpg/profile-default-bg.jpg"
-        avatar="/jpg/profile-default-avatar.jpg"
+        name={party?.name ?? 'Anonymous'}
+        backgroundImage={DEFAULT_PROFILE_BG}
+        avatar={party?.image ?? DEFAULT_PROFILE_AVATAR}
         infos={{
           address: truncate(wallet?.address),
           description:
+            party?.description ??
             'Impact Ag Partners is a specialist agricultural asset management firm and advisory service.',
         }}
         editLink="/profile/edit"
-        variant="organization"
+        variant={
+          party?.type ? profileVVariantMapping[party.type] : 'individual'
+        }
         LinkComponent={Link}
       />
       <Box sx={{ bgcolor: 'grey.50' }}>

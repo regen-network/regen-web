@@ -78,7 +78,9 @@ const Dashboard = (): JSX.Element => {
   );
 
   const activeTab = Math.max(
-    tabs.findIndex(tab => location.pathname.includes(tab.href ?? '')),
+    tabs
+      .filter(tab => !tab.hidden)
+      .findIndex(tab => location.pathname.includes(tab.href ?? '')),
     0,
   );
 

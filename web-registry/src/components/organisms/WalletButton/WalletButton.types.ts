@@ -3,3 +3,5 @@ export type WalletUiItem = {
   description: string;
   imageUrl: string;
 };
+
+export type ButtonSize = 'small' | 'medium' | 'large';

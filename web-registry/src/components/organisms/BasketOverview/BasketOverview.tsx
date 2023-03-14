@@ -1,7 +1,6 @@
 import React from 'react';
 import { Grid } from '@mui/material';
-import { ERROR_BANNER } from 'config/contents';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 
 import { Flex } from 'web-components/lib/components/box';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -16,7 +15,7 @@ import {
 import { formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { basketDetailAtom } from 'pages/BasketDetails/BasketDetails.store';
@@ -75,7 +74,7 @@ export const BasketOverview: React.FC<
   const basketTakeData = useBasketTakeData();
   const { wallet } = useWallet();
   const [, setBasketDetailAtom] = useAtom(basketDetailAtom);
-  const [, setErrorBannerTextAtom] = useAtom(errorBannerTextAtom);
+  const setConnectWalletModalAtom = useSetAtom(connectWalletModalAtom);
   const { isLoadingPutData, creditBatchDenoms } = basketPutData;
   const { isLoadingTakeData, basketToken } = basketTakeData;
   const hasAddress = !!wallet?.address;
@@ -162,7 +161,9 @@ export const BasketOverview: React.FC<
                             atom => void (atom.isPutModalOpen = true),
                           );
                         } else {
-                          setErrorBannerTextAtom(ERROR_BANNER);
+                          setConnectWalletModalAtom(
+                            atom => void (atom.open = true),
+                          );
                         }
                       }}
                       disabled={isPutButtonDisabled}
@@ -193,7 +194,9 @@ export const BasketOverview: React.FC<
                             atom => void (atom.isTakeModalOpen = true),
                           );
                         } else {
-                          setErrorBannerTextAtom(ERROR_BANNER);
+                          setConnectWalletModalAtom(
+                            atom => void (atom.open = true),
+                          );
                         }
                       }}
                       disabled={isTakeButtonDisabled}

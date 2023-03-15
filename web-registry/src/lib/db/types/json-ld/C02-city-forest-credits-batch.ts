@@ -1,5 +1,3 @@
-import { UrlType } from 'lib/rdf/types';
-
 import { BatchMetadataLD } from './batch-base';
 
 // type generated from https://github.com/regen-network/regen-registry-standards/blob/main/jsonld/credit-batches/C02-batch.jsonld
@@ -8,7 +6,7 @@ export interface CFCBatchMetadataLD extends BatchMetadataLD {
   '@context'?: Context;
   'regen:cfcCreditSerialNumbers'?: string[];
   'regen:cfcVintageYear'?: XSDYear;
-  'regen:verificationReports'?: UrlType[];
+  'regen:verificationReports'?: string[];
 }
 
 interface Context {

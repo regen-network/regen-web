@@ -38,7 +38,7 @@ export const BatchMetadataAdditionalInfo = ({
             {additionalCertifications.map((cert, i) => (
               <LinkOrDash
                 key={i}
-                href={cert?.['schema:url']?.['@value']}
+                href={cert?.['schema:url']}
                 label={cert?.['schema:name']}
               />
             ))}

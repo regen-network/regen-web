@@ -64,7 +64,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   // Because initiating the wallet is asyncronous, when users enter the app, the wallet is seen as not loaded.
   // This is being used so that we display the "connect wallet" or the connected wallet address
   // only once we know what's the actual wallet connection status.
-  const [loaded, setLoaded] = useState<boolean>(true);
+  const [loaded, setLoaded] = useState<boolean>(false);
   const [wallet, setWallet] = useState<Wallet>(emptySender);
   const [accountId, setAccountId] = useState<string | undefined>(undefined);
   const [connectionType, setConnectionType] = useState<string | undefined>(

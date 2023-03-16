@@ -2,7 +2,7 @@ query walletByAddr($addr: String!) {
   walletByAddr(addr: $addr) {
     id
     addr
-    projectsByWalletId {
+    projectsByAdminWalletId {
       nodes {
         id
         onChainId

@@ -41,7 +41,7 @@ const MyProjects = (): JSX.Element => {
 
   const { track } = useTracker();
 
-  const projects = walletData?.walletByAddr?.projectsByWalletId?.nodes;
+  const projects = walletData?.walletByAddr?.projectsByAdminWalletId?.nodes;
   const isFirstProject = !projects || projects?.length < 1;
   const onChainIds =
     projects

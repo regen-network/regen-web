@@ -69,7 +69,6 @@ const Project = lazy(() => import('./pages/Project'));
 const Projects = lazy(() => import('./pages/Projects'));
 const ProjectCreate = lazy(() => import('./pages/ProjectCreate'));
 const ProjectFinished = lazy(() => import('./pages/ProjectFinished'));
-const ProjectList = lazy(() => import('./pages/ProjectList'));
 const ProjectLocation = lazy(() => import('./pages/ProjectLocation'));
 const ProjectReview = lazy(() => import('./pages/ProjectReview'));
 const Roles = lazy(() => import('./pages/Roles'));
@@ -189,10 +188,6 @@ export const getRoutes = ({
         <Route
           path="organization-profile"
           element={<ProtectedRoute component={OrganizationProfile} />}
-        />
-        <Route
-          path="project-list"
-          element={<ProtectedRoute component={ProjectList} />}
         />
         <Route path="project-pages">
           <Route path=":projectId" element={<ProjectCreate />}>

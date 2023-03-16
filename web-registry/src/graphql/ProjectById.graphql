@@ -27,6 +27,7 @@ query ProjectById($id: UUID!) {
         nodes {
           name
           version
+          metadata
         }
       }
     }

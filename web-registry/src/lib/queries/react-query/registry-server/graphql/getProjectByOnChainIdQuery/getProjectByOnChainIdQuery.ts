@@ -4,7 +4,6 @@ import {
   ProjectByOnChainIdQueryVariables,
 } from 'generated/graphql';
 import { jsonLdCompactProjectMetadata } from 'lib/queries/react-query/utils/jsonLdCompactProjectMetadata';
-import { jsonLdCompact } from 'lib/rdf';
 
 import { getProjectByOnChainIdKey } from './getProjectByOnChainIdQuery.constants';
 import {
@@ -32,24 +31,6 @@ export const getProjectByOnChainIdQuery = ({
       await jsonLdCompactProjectMetadata(
         projectByOnChainId.data?.projectByOnChainId,
       );
-
-      // if (projectByOnChainId.data?.projectByOnChainId?.metadata) {
-      //   projectByOnChainId.data.projectByOnChainId.metadata =
-      //     await jsonLdCompact(
-      //       projectByOnChainId.data.projectByOnChainId.metadata,
-      //     );
-      // }
-      // const creditClassVersionMetadata =
-      //   projectByOnChainId.data?.projectByOnChainId?.creditClassByCreditClassId
-      //     ?.creditClassVersionsById.nodes[0]?.metadata;
-      // if (
-      //   projectByOnChainId.data?.projectByOnChainId?.creditClassByCreditClassId
-      //     ?.creditClassVersionsById.nodes[0] &&
-      //   creditClassVersionMetadata
-      // ) {
-      //   projectByOnChainId.data.projectByOnChainId.creditClassByCreditClassId.creditClassVersionsById.nodes[0].metadata =
-      //     await jsonLdCompact(creditClassVersionMetadata);
-      // }
 
       return projectByOnChainId;
     } catch (e) {

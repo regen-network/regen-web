@@ -22,7 +22,7 @@ export interface CreditClassMetadataLD {
 }
 
 interface NameURL {
-  'schema:url': URL;
+  'schema:url': string;
   'schema:name': string;
 }
 

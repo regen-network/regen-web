@@ -77,6 +77,7 @@ export const COMPACTED_CONTEXT = {
   'regen:cfcCreditSerialNumbers': { '@container': '@list' },
   'schema:itemListElement': { '@container': '@list' },
   'regen:additionalCertifications': { '@container': '@list' },
+  'regen:cfcVintageYear': { '@type': 'xsd:gYear' },
 
   // Generic unanchored and anchored project metadata
   ...UNANCHORED_PROJECT_CONTEXT,

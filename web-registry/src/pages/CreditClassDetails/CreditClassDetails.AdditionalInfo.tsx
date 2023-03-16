@@ -54,7 +54,7 @@ const AdditionalInfo: React.FC<React.PropsWithChildren<AdditionalInfoProps>> =
               data={
                 <ArrowLink
                   label={sourceRegistry?.['schema:name']}
-                  href={sourceRegistry?.['schema:url']?.['@value']}
+                  href={sourceRegistry?.['schema:url']}
                 />
               }
             />
@@ -65,7 +65,7 @@ const AdditionalInfo: React.FC<React.PropsWithChildren<AdditionalInfoProps>> =
               data={
                 <ArrowLink
                   label={carbonOffsetStandard?.['schema:name']}
-                  href={carbonOffsetStandard?.['schema:url']?.['@value']}
+                  href={carbonOffsetStandard?.['schema:url']}
                 />
               }
             />

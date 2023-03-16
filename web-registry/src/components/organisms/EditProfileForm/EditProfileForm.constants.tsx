@@ -2,13 +2,18 @@ import { RadioCardItem } from 'web-components/lib/components/atoms/RadioCard/Rad
 import OrganizationIcon from 'web-components/lib/components/icons/OrganizationIcon';
 import UserIcon from 'web-components/lib/components/icons/UserIcon';
 
+import {
+  DEFAULT_AVATAR,
+  DEFAULT_BG,
+} from 'pages/ProfileEdit/ProfileEdit.constants';
+
 import { EditProfileFormSchemaType } from './EditProfileForm.schema';
 
 export const editProfileFormInitialValues: EditProfileFormSchemaType = {
-  profileType: 'individual',
+  profileType: 'user',
   name: '',
-  profileImage: '',
-  backgroundImage: '',
+  profileImage: DEFAULT_AVATAR,
+  backgroundImage: DEFAULT_BG,
   description: '',
 };
 
@@ -16,7 +21,7 @@ export const radioCardItems: RadioCardItem[] = [
   {
     id: 'individual',
     label: 'Individual',
-    value: 'individual',
+    value: 'user',
     icon: <UserIcon />,
   },
   {

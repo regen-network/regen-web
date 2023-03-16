@@ -43,7 +43,7 @@ const RadioCard = forwardRef<HTMLInputElement, Props>(
                   border: theme =>
                     isSelected
                       ? `2px solid ${theme.palette.secondary.main}`
-                      : `1px solid ${theme.palette.grey[100]}`,
+                      : `2px solid ${theme.palette.grey[100]}`,
                   boxShadow: isSelected
                     ? 'none'
                     : '0px 2px 2px rgba(0, 0, 0, 0.15)',

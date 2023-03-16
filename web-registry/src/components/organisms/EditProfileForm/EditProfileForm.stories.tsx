@@ -19,7 +19,4 @@ const Template: ComponentStory<typeof EditProfileForm> = args => (
 
 export const Default = Template.bind({});
 
-Default.args = {
-  defaultAvatar: '/profile/default-avatar.jpg',
-  defaultBg: '/profile/default-bg.jpg',
-};
+Default.args = {};

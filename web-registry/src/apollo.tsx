@@ -3,6 +3,7 @@ import { setContext } from '@apollo/client/link/context';
 import { useQuery } from '@tanstack/react-query';
 
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
+import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 
 import { apiUri } from './lib/apiUri';
 
@@ -15,17 +16,7 @@ export const AuthApolloProvider = ({
   apolloClientFactory,
   children,
 }: AuthApolloProviderProps): any => {
-  const query = useQuery({
-    queryKey: ['csrfToken'],
-    queryFn: async () => {
-      const resp = await fetch(`${apiUri}/csrfToken`, {
-        method: 'GET',
-        credentials: 'include',
-      });
-      const { token } = await resp.json();
-      return { token, headers: resp.headers };
-    },
-  });
+  const query = useQuery(getCsrfTokenQuery({}));
 
   // https://www.apollographql.com/docs/react/networking/authentication
   const httpLink = createHttpLink({
@@ -40,7 +31,7 @@ export const AuthApolloProvider = ({
           success({
             headers: {
               ...headers,
-              'X-CSRF-TOKEN': query.data.token,
+              'X-CSRF-TOKEN': query.data,
             },
           });
         }

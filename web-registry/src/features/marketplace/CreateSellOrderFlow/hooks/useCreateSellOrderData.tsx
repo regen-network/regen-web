@@ -1,5 +1,4 @@
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
-import { useLedger } from 'ledger';
 
 import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 
@@ -13,8 +12,6 @@ type ReponseType = {
 };
 
 export const useCreateSellOrderData = ({ projectId }: Props): ReponseType => {
-  const { wallet } = useLedger();
-
   const { credits, isLoadingCredits } = useFetchEcocredits({});
   const creditsForProject = credits?.filter(
     credit => credit.projectId === projectId,
@@ -26,8 +23,7 @@ export const useCreateSellOrderData = ({ projectId }: Props): ReponseType => {
 
   const hasTradeableCredits = tradableCredits.length > 0;
 
-  const isSellFlowDisabled =
-    (isLoadingCredits || !hasTradeableCredits) && Boolean(wallet?.address);
+  const isSellFlowDisabled = isLoadingCredits || !hasTradeableCredits;
 
   return {
     isSellFlowDisabled,

@@ -1,8 +1,10 @@
 import { useCallback } from 'react';
+import { useSetAtom } from 'jotai';
 
 import { DEFAULT_DURATION } from 'web-components/lib/components/banner/ErrorBanner';
 
 import { UseStateSetter } from 'types/react/use-state';
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
 import { AUTO_CONNECT_WALLET_KEY } from '../wallet.constants';
 import { ConnectParams } from '../wallet.types';
@@ -23,6 +25,8 @@ export const useConnect = ({
   connectWallet,
   setConnectionType,
 }: Props): ConnectType => {
+  const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+
   const connect = useCallback(
     async ({ walletType }: ConnectParams): Promise<void> => {
       try {
@@ -44,11 +48,11 @@ export const useConnect = ({
           );
         }
       } catch (e) {
-        setError(e);
+        setErrorBannerTextAtom(String(e));
         setTimeout(() => setError(undefined), DEFAULT_DURATION);
       }
     },
-    [connectWallet, setConnectionType, setError],
+    [connectWallet, setConnectionType, setError, setErrorBannerTextAtom],
   );
 
   return connect;

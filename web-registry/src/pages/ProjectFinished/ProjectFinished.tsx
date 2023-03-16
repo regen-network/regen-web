@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useApolloClient } from '@apollo/client';
 import { Box } from '@mui/system';
 import { useQuery } from '@tanstack/react-query';
 
@@ -9,7 +10,6 @@ import { CardItem } from 'web-components/lib/components/modal/TxModal';
 import { Title } from 'web-components/lib/components/typography';
 import { truncateHash } from 'web-components/lib/utils/truncate';
 
-import { graphqlClient } from 'lib/clients/graphqlClient';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 
 import { Link } from '../../components/atoms';
@@ -21,6 +21,7 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { deliverTxResponse } = useCreateProjectContext();
   const { projectId } = useParams();
   const navigate = useNavigate();
+  const graphqlClient = useApolloClient();
   const { data, isLoading } = useQuery(
     getProjectByIdQuery({
       client: graphqlClient,

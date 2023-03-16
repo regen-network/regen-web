@@ -5,10 +5,15 @@ import { BatchMetadataLD } from './batch-base';
 export interface CFCBatchMetadataLD extends BatchMetadataLD {
   '@context'?: Context;
   'regen:cfcCreditSerialNumbers'?: string[];
+<<<<<<< HEAD
   'regen:cfcVintageYear'?: string;
   'regen:verificationReports'?: {
     'schema:url': string;
   }[];
+=======
+  'regen:cfcVintageYear'?: XSDYear;
+  'regen:verificationReports'?: string[];
+>>>>>>> e89753a7629c5951ef6f82e999e9286bd9958135
 }
 
 interface Context {

@@ -9,6 +9,8 @@ import {
 import { Router } from '@remix-run/router';
 import { QueryClient } from '@tanstack/react-query';
 
+import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
+
 import MyBridge from 'pages/Dashboard/MyBridge';
 import { MyBridgableEcocreditsTable } from 'pages/Dashboard/MyBridge/MyBridge.BridgableEcocreditsTable';
 import { MyBridgedEcocreditsTable } from 'pages/Dashboard/MyBridge/MyBridge.BridgedEcocreditsTable';
@@ -80,13 +82,18 @@ const ProjectEdit = lazy(() => import('./pages/ProjectEdit'));
 const Activity = lazy(() => import('./pages/Activity'));
 const CreateBatch = lazy(() => import('./pages/CreateBatch'));
 const Storefront = lazy(() => import('./pages/Marketplace/Storefront'));
+const ConnectWalletPage = lazy(() => import('./pages/ConnectWalletPage'));
 
 type RouterParams = {
   reactQueryClient: QueryClient;
+  apolloClientFactory: ApolloClientFactory;
 };
 
-export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
-  createRoutesFromElements(
+export const getRoutes = ({
+  reactQueryClient,
+  apolloClientFactory,
+}: RouterParams): RouteObject[] => {
+  return createRoutesFromElements(
     <Route element={<RegistryLayout />}>
       <Route path="/" element={<Outlet />} errorElement={<ErrorPage />}>
         <Route
@@ -125,6 +132,7 @@ export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
           element={<Project />}
           loader={projectDetailsLoader({
             queryClient: reactQueryClient,
+            apolloClientFactory,
           })}
         />
         <Route
@@ -310,10 +318,15 @@ export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
         />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
+      <Route path="connect-wallet" element={<ConnectWalletPage />} />
     </Route>,
   );
+};
 
-export const getRouter = ({ reactQueryClient }: RouterParams): Router =>
-  createBrowserRouter(getRoutes({ reactQueryClient }), {
+export const getRouter = ({
+  reactQueryClient,
+  apolloClientFactory,
+}: RouterParams): Router =>
+  createBrowserRouter(getRoutes({ reactQueryClient, apolloClientFactory }), {
     basename: process.env.PUBLIC_URL,
   });

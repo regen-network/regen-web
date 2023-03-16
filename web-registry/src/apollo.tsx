@@ -1,84 +1,60 @@
-import { useCallback, useEffect } from 'react';
-import {
-  ApolloClient,
-  ApolloLink,
-  ApolloProvider,
-  HttpLink,
-  InMemoryCache,
-} from '@apollo/client';
+import { ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { useAuth0 } from '@auth0/auth0-react';
+import { useQuery } from '@tanstack/react-query';
 
-import getApiUri from './lib/apiUri';
+import getApiUri from 'lib/apiUri';
+import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 
 interface AuthApolloProviderProps {
+  apolloClientFactory: ApolloClientFactory;
   children?: any;
 }
 
 export const AuthApolloProvider = ({
+  apolloClientFactory,
   children,
 }: AuthApolloProviderProps): any => {
-  const { user, isLoading, isAuthenticated, getAccessTokenSilently } =
-    useAuth0();
-  const apiUri = getApiUri();
+  const baseUri = getApiUri();
+  const query = useQuery({
+    queryKey: ['csrfToken'],
+    queryFn: async () => {
+      const resp = await fetch(`${baseUri}/csrfToken`, {
+        method: 'GET',
+        credentials: 'include',
+      });
+      const { token } = await resp.json();
+      return { token, headers: resp.headers };
+    },
+  });
 
-  const login = useCallback(async (): Promise<void> => {
-    try {
-      if (isAuthenticated && user) {
-        const token = await getAccessTokenSilently();
-        try {
-          await fetch(`${apiUri}/auth/login`, {
+  // https://www.apollographql.com/docs/react/networking/authentication
+  const httpLink = createHttpLink({
+    uri: `${baseUri}/graphql`,
+    credentials: 'include',
+  });
+  // https://www.apollographql.com/docs/react/api/link/apollo-link-context/#overview
+  const authLink = setContext(
+    (_, { headers }) =>
+      new Promise((success, fail) => {
+        if (query.isFetched && query.data) {
+          success({
             headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
+              ...headers,
+              'X-CSRF-TOKEN': query.data.token,
             },
-            body: JSON.stringify(user),
-            method: 'POST',
           });
-        } catch (e) {
-          console.error(e); // eslint-disable-line no-console
         }
-      }
-    } catch (e) {
-      console.error(e); // eslint-disable-line no-console
-    }
-  }, [apiUri, getAccessTokenSilently, isAuthenticated, user]);
+      }),
+  );
 
-  useEffect(() => {
-    login();
-  }, [login]);
-
-  if (isLoading) {
-    return <div></div>;
-  }
-
-  const httpLink = new HttpLink({ uri: `${apiUri}/graphql` });
-
-  const withToken = setContext(async () => {
-    // needed on first login
-    // TODO find more efficient solution at Auth0Provider level
-    await login();
-    // Get token or get refreshed token
-    const token = isAuthenticated ? await getAccessTokenSilently() : null;
-    return { token };
-  });
-
-  const authMiddleware = new ApolloLink((operation, forward) => {
-    const { token } = operation.getContext();
-    operation.setContext(() => ({
-      headers: {
-        Authorization: token ? `Bearer ${token}` : '',
-      },
-    }));
-    return forward(operation);
-  });
-
-  const link = ApolloLink.from([withToken, authMiddleware.concat(httpLink)]);
-
-  const client = new ApolloClient({
+  const link = authLink.concat(httpLink);
+  apolloClientFactory.prepare({
     cache: new InMemoryCache(),
     link,
   });
-
-  return <ApolloProvider client={client}>{children}</ApolloProvider>;
+  return (
+    <ApolloProvider client={apolloClientFactory.getClient()}>
+      {children}
+    </ApolloProvider>
+  );
 };

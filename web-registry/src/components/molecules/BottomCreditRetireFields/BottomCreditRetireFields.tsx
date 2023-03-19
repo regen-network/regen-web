@@ -71,7 +71,7 @@ export const BottomCreditRetireFields: React.FC<
           </Flex>
           <TextField
             type="text"
-            label="Add retirement transaction details (stored in the tx memo)"
+            label="Explain the reason you are retiring these credits"
             className={styles.noteTextField}
             optional
             defaultStyle={false}

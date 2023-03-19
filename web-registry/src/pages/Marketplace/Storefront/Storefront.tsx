@@ -190,7 +190,7 @@ export const Storefront = (): JSX.Element => {
   const initialValues = useMemo(
     () => ({
       creditCount: 1,
-      retirementNote: '',
+      retirementReason: '',
       stateProvince: '',
       country: 'US',
       postalCode: '',

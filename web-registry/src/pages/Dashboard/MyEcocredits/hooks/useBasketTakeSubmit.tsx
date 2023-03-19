@@ -65,12 +65,12 @@ const useBasketTakeSubmit = ({
         amount,
         retireOnTake: values.retireOnTake || false,
         retirementJurisdiction: values.retirementJurisdiction,
+        retirementReason: values?.retirementReason,
       });
 
       const tx = {
         msgs: [msg],
         fee: undefined,
-        memo: values?.retirementNote,
       };
 
       const onError = (err?: Error): void => {

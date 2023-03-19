@@ -78,7 +78,7 @@ const useBuySellOrderSubmit = ({
         price,
         creditCount,
         sellOrderId,
-        retirementNote,
+        retirementReason,
         stateProvince,
         retirementAction,
         country,
@@ -111,6 +111,7 @@ const useBuySellOrderSubmit = ({
             bidPrice: { amount: String(price), denom: askDenom },
             disableAutoRetire: isTradeable,
             quantity: String(creditCount),
+            retirementReason: retirementReason,
             retirementJurisdiction: isTradeable
               ? ''
               : getJurisdictionIsoCode({
@@ -125,7 +126,6 @@ const useBuySellOrderSubmit = ({
       const tx = {
         msgs: [msg],
         fee: undefined,
-        memo: retirementNote,
       };
 
       const onError = (err?: Error): void => {

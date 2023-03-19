@@ -164,14 +164,14 @@ export const BottomCreditRetireFields: React.FC<
         <>
           <Flex sx={sxs.title}>
             <Title variant="h5" sx={{ mr: 2 }}>
-              Retirement note
+              Retirement reason
             </Title>
             <InfoTooltipWithIcon title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')" />
           </Flex>
           <Field
             name={`${arrayPrefix}note`}
             type="text"
-            label="Add retirement transaction details (stored in the tx memo)"
+            label="Explain the reason you are retiring these credits"
             component={TextField}
             className={styles.noteTextField}
             optional
@@ -299,7 +299,7 @@ export const initialValues = {
   stateProvince: '',
 };
 
-const CreditRetireForm: React.FC<React.PropsWithChildren<FormProps>> = ({
+const CreditRetireForm: React.FC<FormProps> = ({
   batchDenom,
   availableTradableAmount,
   mapboxToken,

@@ -16,11 +16,12 @@ import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClass
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
 import { ProfileHeader } from 'web-components/lib/components/organisms/ProfileHeader/ProfileHeader';
-import Section from 'web-components/lib/components/section';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
+import { containerStyles } from 'web-components/lib/styles/container';
 import { truncate } from 'web-components/lib/utils/truncate';
 
+import { getAccountUrl } from 'lib/block-explorer';
 import { isBridgeEnabled } from 'lib/ledger';
 import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 import { useWallet } from 'lib/wallet/wallet';
@@ -118,7 +119,10 @@ const Dashboard = (): JSX.Element => {
         backgroundImage={DEFAULT_PROFILE_BG}
         avatar={party?.image ?? DEFAULT_PROFILE_AVATAR}
         infos={{
-          address: truncate(wallet?.address),
+          addressLink: {
+            href: getAccountUrl(wallet?.address, true),
+            text: truncate(wallet?.address),
+          },
           description:
             party?.description ??
             'Impact Ag Partners is a specialist agricultural asset management firm and advisory service.',
@@ -130,7 +134,7 @@ const Dashboard = (): JSX.Element => {
         LinkComponent={Link}
       />
       <Box sx={{ bgcolor: 'grey.50' }}>
-        <Section>
+        <Box sx={{ pt: 15, ...containerStyles, px: { xs: 5, sm: 10 } }}>
           <IconTabs
             aria-label="dashboard tabs"
             tabs={tabs}
@@ -150,7 +154,7 @@ const Dashboard = (): JSX.Element => {
               />
             </Box>
           </Flex>
-        </Section>
+        </Box>
       </Box>
     </>
   );

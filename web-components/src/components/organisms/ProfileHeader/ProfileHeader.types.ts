@@ -1,6 +1,8 @@
+import { LinkType } from '../../../types/shared/linkType';
+
 export type ProfileVariant = 'individual' | 'organization';
 
 export type ProfileInfos = {
-  address: string;
+  addressLink: LinkType;
   description?: string;
 };

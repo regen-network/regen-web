@@ -20,7 +20,7 @@ Default.args = {
   backgroundImage: '/illustrations/profile-bg.jpg',
   avatar: '/illustrations/frog.jpg',
   infos: {
-    address: 'regen91kd01...c8120d',
+    addressLink: { text: 'regen91kd01...c8120d', href: '#' },
     description:
       'Impact Ag Partners is a specialist agricultural asset management firm and advisory service.',
   },

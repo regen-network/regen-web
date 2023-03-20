@@ -1,9 +1,11 @@
-import { ElementType } from 'react';
 import { Avatar, Box, SxProps } from '@mui/material';
+
+import { LinkComponentType } from 'src/types/shared/linkComponentType';
 
 import { Flex } from '../../../components/box';
 import EditIcon from '../../../components/icons/EditIcon';
 import { Label, Title } from '../../../components/typography';
+import { containerStyles } from '../../../styles/container';
 import { Theme } from '../../../theme/muiTheme';
 import {
   EDIT_PROFILE,
@@ -26,7 +28,7 @@ export interface Props {
   variant: ProfileVariant;
   infos: ProfileInfos;
   editLink: string;
-  LinkComponent: ElementType<{ href: string }>;
+  LinkComponent: LinkComponentType;
   sx?: SxProps<Theme>;
 }
 
@@ -70,8 +72,7 @@ const ProfileHeader = ({
         alignItems={{ xs: 'center', sm: 'flex-start' }}
         width="100%"
         height="100%"
-        pl={{ xs: 0, sm: 9, md: 34.25 }}
-        pr={{ xs: 0, sm: 13.5, md: 38.75 }}
+        sx={{ ...containerStyles, px: { xs: 0, sm: 10 } }}
       >
         <Avatar
           src={avatar}
@@ -84,7 +85,7 @@ const ProfileHeader = ({
             },
             mb: { xs: 2, sm: 0 },
             border: theme => `5px solid ${theme.palette.grey[50]}`,
-            mr: 2,
+            mr: 4,
             width: {
               xs: PROFILE_AVATAR_SIZE_MOBILE,
               sm: PROFILE_AVATAR_SIZE_TABLET,
@@ -141,8 +142,9 @@ const ProfileHeader = ({
             </LinkComponent>
           </Flex>
           <ProfileHeaderInfos
-            variant={variant}
             {...infos}
+            variant={variant}
+            LinkComponent={LinkComponent}
             sx={{
               pt: { xs: 0, sm: 3.5 },
             }}

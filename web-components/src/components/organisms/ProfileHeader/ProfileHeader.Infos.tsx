@@ -1,5 +1,7 @@
 import { Box, SxProps } from '@mui/system';
 
+import { LinkComponentType } from 'src/types/shared/linkComponentType';
+
 import { Flex } from '../../../components/box';
 import { Body } from '../../../components/typography';
 import { Theme } from '../../../theme/muiTheme';
@@ -7,12 +9,17 @@ import { sxToArray } from '../../../utils/mui/sxToArray';
 import { ProfileVariantIconMapping } from './ProfileHeader.constants';
 import { ProfileInfos, ProfileVariant } from './ProfileHeader.types';
 
-type Props = { variant: ProfileVariant; sx?: SxProps<Theme> } & ProfileInfos;
+type Props = {
+  variant: ProfileVariant;
+  LinkComponent: LinkComponentType;
+  sx?: SxProps<Theme>;
+} & ProfileInfos;
 
 export const ProfileHeaderInfos = ({
-  address,
+  addressLink,
   description,
   variant,
+  LinkComponent,
   sx = [],
 }: Props) => (
   <Flex
@@ -34,7 +41,12 @@ export const ProfileHeaderInfos = ({
       <Box sx={{ fontSize: 24, mr: 1, color: 'info.main' }}>
         {ProfileVariantIconMapping[variant]}
       </Box>
-      {address}
+      <LinkComponent
+        href={addressLink.href}
+        sx={{ color: 'secondary.main', fontWeight: 700 }}
+      >
+        {addressLink.text}
+      </LinkComponent>
     </Body>
     <Body size="md" sx={{ px: { xs: 3.75, sm: 0 } }}>
       {description}

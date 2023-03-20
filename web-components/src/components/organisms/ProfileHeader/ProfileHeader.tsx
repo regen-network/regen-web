@@ -83,7 +83,7 @@ const ProfileHeader = ({
               sm: PROFILE_AVATAR_MARGIN_TOP_TABLET,
               md: PROFILE_AVATAR_MARGIN_TOP_DESKTOP,
             },
-            mb: { xs: 2, sm: 0 },
+            mb: { xs: 2.5 },
             border: theme => `5px solid ${theme.palette.grey[50]}`,
             mr: 4,
             width: {
@@ -118,6 +118,7 @@ const ProfileHeader = ({
                 color: { xs: 'main.contrastText', sm: 'primary.main' },
                 mb: 2,
                 zIndex: 1,
+                minHeight: 44.7,
               }}
             >
               {name}

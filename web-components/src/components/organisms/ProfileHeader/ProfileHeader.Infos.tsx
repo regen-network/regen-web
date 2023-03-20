@@ -36,19 +36,18 @@ export const ProfileHeaderInfos = ({
         display: 'flex',
         mb: { xs: 1.5, sm: 3 },
         color: 'primary.light',
+        '& .MuiLink-root': {
+          color: 'primary.light',
+          fontWeight: 400,
+        },
       }}
     >
       <Box sx={{ fontSize: 24, mr: 1, color: 'info.main' }}>
         {ProfileVariantIconMapping[variant]}
       </Box>
-      <LinkComponent
-        href={addressLink.href}
-        sx={{ color: 'secondary.main', fontWeight: 700 }}
-      >
-        {addressLink.text}
-      </LinkComponent>
+      <LinkComponent href={addressLink.href}>{addressLink.text}</LinkComponent>
     </Body>
-    <Body size="md" sx={{ px: { xs: 3.75, sm: 0 } }}>
+    <Body size="md" sx={{ px: { xs: 3.75, sm: 0 }, minHeight: 24 }}>
       {description}
     </Body>
   </Flex>

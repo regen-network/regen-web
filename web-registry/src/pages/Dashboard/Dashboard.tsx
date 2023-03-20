@@ -33,6 +33,7 @@ import { useQueryIfIssuer } from 'hooks/useQueryIfIssuer';
 import { useQueryIfProjectAdmin } from 'hooks/useQueryIfProjectAdmin';
 
 import {
+  DEFAULT_NAME,
   DEFAULT_PROFILE_AVATAR,
   DEFAULT_PROFILE_BG,
   profileVVariantMapping,
@@ -47,7 +48,7 @@ const Dashboard = (): JSX.Element => {
   const isProjectAdmin = useQueryIfProjectAdmin();
   const showProjectTab = isIssuer || isProjectAdmin;
   const showCreditClassTab = isCreditClassCreator || isCreditClassAdmin;
-  const { wallet } = useWallet();
+  const { wallet, accountId } = useWallet();
   const location = useLocation();
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -59,7 +60,8 @@ const Dashboard = (): JSX.Element => {
       enabled: !!wallet?.address && !!graphqlClient,
     }),
   );
-  const party = partyByAddr?.walletByAddr?.partyByWalletId;
+  const partyData = partyByAddr?.walletByAddr?.partyByWalletId;
+  const party = accountId === partyData?.accountId ? partyData : undefined;
 
   const tabs: IconTabProps[] = useMemo(
     () => [
@@ -115,17 +117,15 @@ const Dashboard = (): JSX.Element => {
   return (
     <>
       <ProfileHeader
-        name={party?.name ?? 'Anonymous'}
+        name={party?.name ? party?.name : DEFAULT_NAME}
         backgroundImage={DEFAULT_PROFILE_BG}
-        avatar={party?.image ?? DEFAULT_PROFILE_AVATAR}
+        avatar={party?.image ? party?.image : DEFAULT_PROFILE_AVATAR}
         infos={{
           addressLink: {
             href: getAccountUrl(wallet?.address, true),
             text: truncate(wallet?.address),
           },
-          description:
-            party?.description ??
-            'Impact Ag Partners is a specialist agricultural asset management firm and advisory service.',
+          description: party?.description ?? '',
         }}
         editLink="/profile/edit"
         variant={

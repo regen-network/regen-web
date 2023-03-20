@@ -1,9 +1,4 @@
 import { ElementType } from 'react';
-import { SxProps } from '@mui/system';
+import { LinkProps } from '@mui/material';
 
-import { Theme } from '../../theme/muiTheme';
-
-export type LinkComponentType = ElementType<{
-  href: string;
-  sx?: SxProps<Theme>;
-}>;
+export type LinkComponentType = ElementType<LinkProps>;

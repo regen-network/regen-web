@@ -10,6 +10,7 @@ import { LoginEvent, Track } from 'lib/tracker/types';
 import { chainInfo } from './chainInfo/chainInfo';
 import { Wallet } from './wallet';
 import {
+  KEPLR_LOGIN_TITLE,
   WALLET_CONNECT_BRIDGE_URL,
   WALLET_CONNECT_SIGNING_METHODS,
   walletConnectClientMeta,
@@ -112,3 +113,11 @@ export const getAxiosInstance = (token: string) => {
     },
   });
 };
+
+export const getArbitraryLoginData = (nonce: string) =>
+  JSON.stringify({
+    title: KEPLR_LOGIN_TITLE,
+    description:
+      'This is a transaction that allows Regen Network to authenticate you with our application.',
+    nonce,
+  });

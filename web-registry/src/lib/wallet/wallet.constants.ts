@@ -5,6 +5,7 @@ export const WALLET_CONNECT_SIGNING_METHODS = [
   'keplr_enable_wallet_connect_v1',
   'keplr_sign_amino_wallet_connect_v1',
 ];
+export const KEPLR_LOGIN_TITLE = 'Regen Network Login';
 
 export const walletConnectClientMeta = {
   name: 'Regen Marketplace',

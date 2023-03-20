@@ -5,6 +5,7 @@ import { UseStateSetter } from 'types/react/use-state';
 
 import { chainInfo } from '../chainInfo/chainInfo';
 import { SignArbitraryParams } from '../wallet';
+import { getArbitraryLoginData } from '../wallet.utils';
 import { WalletConfig } from '../walletsConfig/walletsConfig.types';
 
 type Props = {
@@ -30,12 +31,7 @@ export const useSignArbitrary = ({
           const signature = await walletClient?.signArbitrary(
             chainInfo.chainId,
             wallet.address,
-            JSON.stringify({
-              title: 'Regen Network Login',
-              description:
-                'This is a transaction that allows Regen Network to authenticate you with our application.',
-              nonce,
-            }),
+            getArbitraryLoginData(nonce),
           );
           return signature;
         }

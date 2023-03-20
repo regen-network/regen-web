@@ -116,4 +116,8 @@ export const COMPACTED_CONTEXT = {
   'regen:boundaries': {
     '@type': 'schema:URL',
   },
+
+  // Credit class version metadata
+  'regen:SDGs': { '@container': '@list' },
+  'regen:coBenefits': { '@container': '@list' },
 };

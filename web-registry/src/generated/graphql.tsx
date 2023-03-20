@@ -34,6 +34,7 @@ export type Account = Node & {
   id: Scalars['UUID'];
   createdAt?: Maybe<Scalars['Datetime']>;
   updatedAt?: Maybe<Scalars['Datetime']>;
+  nonce: Scalars['String'];
   /** Reads and enables pagination through a set of `Party`. */
   partiesByAccountId: PartiesConnection;
   /** Reads and enables pagination through a set of `Address`. */
@@ -210,6 +211,8 @@ export type AccountCondition = {
   createdAt?: Maybe<Scalars['Datetime']>;
   /** Checks for equality with the object’s `updatedAt` field. */
   updatedAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `nonce` field. */
+  nonce?: Maybe<Scalars['String']>;
 };
 
 /** An input for mutations affecting `Account` */
@@ -217,6 +220,7 @@ export type AccountInput = {
   id?: Maybe<Scalars['UUID']>;
   createdAt?: Maybe<Scalars['Datetime']>;
   updatedAt?: Maybe<Scalars['Datetime']>;
+  nonce?: Maybe<Scalars['String']>;
 };
 
 /** Represents an update to a `Account`. Fields that are set will be updated. */
@@ -224,6 +228,7 @@ export type AccountPatch = {
   id?: Maybe<Scalars['UUID']>;
   createdAt?: Maybe<Scalars['Datetime']>;
   updatedAt?: Maybe<Scalars['Datetime']>;
+  nonce?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `Account` values. */
@@ -257,6 +262,8 @@ export enum AccountsOrderBy {
   CreatedAtDesc = 'CREATED_AT_DESC',
   UpdatedAtAsc = 'UPDATED_AT_ASC',
   UpdatedAtDesc = 'UPDATED_AT_DESC',
+  NonceAsc = 'NONCE_ASC',
+  NonceDesc = 'NONCE_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -1731,39 +1738,6 @@ export type CreateFlywaySchemaHistoryPayload = {
 /** The output of our create `FlywaySchemaHistory` mutation. */
 export type CreateFlywaySchemaHistoryPayloadFlywaySchemaHistoryEdgeArgs = {
   orderBy?: Maybe<Array<FlywaySchemaHistoriesOrderBy>>;
-};
-
-/** All input for the create `Keyv` mutation. */
-export type CreateKeyvInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `Keyv` to be created by this mutation. */
-  keyv: KeyvInput;
-};
-
-/** The output of our create `Keyv` mutation. */
-export type CreateKeyvPayload = {
-  __typename?: 'CreateKeyvPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `Keyv` that was created by this mutation. */
-  keyv?: Maybe<Keyv>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** An edge for our `Keyv`. May be used by Relay 1. */
-  keyvEdge?: Maybe<KeyvsEdge>;
-};
-
-
-/** The output of our create `Keyv` mutation. */
-export type CreateKeyvPayloadKeyvEdgeArgs = {
-  orderBy?: Maybe<Array<KeyvsOrderBy>>;
 };
 
 /** All input for the create `MetadataGraph` mutation. */
@@ -4895,50 +4869,6 @@ export type DeleteFlywaySchemaHistoryPayloadFlywaySchemaHistoryEdgeArgs = {
   orderBy?: Maybe<Array<FlywaySchemaHistoriesOrderBy>>;
 };
 
-/** All input for the `deleteKeyvByKey` mutation. */
-export type DeleteKeyvByKeyInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  key: Scalars['String'];
-};
-
-/** All input for the `deleteKeyv` mutation. */
-export type DeleteKeyvInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The globally unique `ID` which will identify a single `Keyv` to be deleted. */
-  nodeId: Scalars['ID'];
-};
-
-/** The output of our delete `Keyv` mutation. */
-export type DeleteKeyvPayload = {
-  __typename?: 'DeleteKeyvPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `Keyv` that was deleted by this mutation. */
-  keyv?: Maybe<Keyv>;
-  deletedKeyvId?: Maybe<Scalars['ID']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** An edge for our `Keyv`. May be used by Relay 1. */
-  keyvEdge?: Maybe<KeyvsEdge>;
-};
-
-
-/** The output of our delete `Keyv` mutation. */
-export type DeleteKeyvPayloadKeyvEdgeArgs = {
-  orderBy?: Maybe<Array<KeyvsOrderBy>>;
-};
-
 /** All input for the `deleteMetadataGraphByIri` mutation. */
 export type DeleteMetadataGraphByIriInput = {
   /**
@@ -6210,48 +6140,31 @@ export type FlywaySchemaHistoryPatch = {
   success?: Maybe<Scalars['Boolean']>;
 };
 
-/** All input for the `getCurrentAccount` mutation. */
-export type GetCurrentAccountInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
+/** A `GetCurrentAddrsRecord` edge in the connection. */
+export type GetCurrentAddrEdge = {
+  __typename?: 'GetCurrentAddrEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `GetCurrentAddrsRecord` at the end of the edge. */
+  node?: Maybe<GetCurrentAddrsRecord>;
 };
 
-/** The output of our `getCurrentAccount` mutation. */
-export type GetCurrentAccountPayload = {
-  __typename?: 'GetCurrentAccountPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  accountId?: Maybe<Scalars['UUID']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
+/** A connection to a list of `GetCurrentAddrsRecord` values. */
+export type GetCurrentAddrsConnection = {
+  __typename?: 'GetCurrentAddrsConnection';
+  /** A list of `GetCurrentAddrsRecord` objects. */
+  nodes: Array<Maybe<GetCurrentAddrsRecord>>;
+  /** A list of edges which contains the `GetCurrentAddrsRecord` and cursor to aid in pagination. */
+  edges: Array<GetCurrentAddrEdge>;
+  /** The count of *all* `GetCurrentAddrsRecord` you could get from the connection. */
+  totalCount: Scalars['Int'];
 };
 
-/** All input for the `getCurrentAddrs` mutation. */
-export type GetCurrentAddrsInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-/** The output of our `getCurrentAddrs` mutation. */
-export type GetCurrentAddrsPayload = {
-  __typename?: 'GetCurrentAddrsPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  addrs?: Maybe<Array<Maybe<Scalars['String']>>>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
+/** The return type of our `getCurrentAddrs` query. */
+export type GetCurrentAddrsRecord = {
+  __typename?: 'GetCurrentAddrsRecord';
+  addr?: Maybe<Scalars['String']>;
+  profileType?: Maybe<PartyType>;
 };
 
 /** All input for the `getUserFirstOrganization` mutation. */
@@ -6373,67 +6286,6 @@ export type JsonFilter = {
   /** Contains the specified JSON. */
   contains?: Maybe<Scalars['JSON']>;
 };
-
-export type Keyv = Node & {
-  __typename?: 'Keyv';
-  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
-  nodeId: Scalars['ID'];
-  key: Scalars['String'];
-  value?: Maybe<Scalars['String']>;
-};
-
-/** A condition to be used against `Keyv` object types. All fields are tested for equality and combined with a logical ‘and.’ */
-export type KeyvCondition = {
-  /** Checks for equality with the object’s `key` field. */
-  key?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `value` field. */
-  value?: Maybe<Scalars['String']>;
-};
-
-/** An input for mutations affecting `Keyv` */
-export type KeyvInput = {
-  key: Scalars['String'];
-  value?: Maybe<Scalars['String']>;
-};
-
-/** Represents an update to a `Keyv`. Fields that are set will be updated. */
-export type KeyvPatch = {
-  key?: Maybe<Scalars['String']>;
-  value?: Maybe<Scalars['String']>;
-};
-
-/** A connection to a list of `Keyv` values. */
-export type KeyvsConnection = {
-  __typename?: 'KeyvsConnection';
-  /** A list of `Keyv` objects. */
-  nodes: Array<Maybe<Keyv>>;
-  /** A list of edges which contains the `Keyv` and cursor to aid in pagination. */
-  edges: Array<KeyvsEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Keyv` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Keyv` edge in the connection. */
-export type KeyvsEdge = {
-  __typename?: 'KeyvsEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Keyv` at the end of the edge. */
-  node?: Maybe<Keyv>;
-};
-
-/** Methods to use when ordering `Keyv`. */
-export enum KeyvsOrderBy {
-  Natural = 'NATURAL',
-  KeyAsc = 'KEY_ASC',
-  KeyDesc = 'KEY_DESC',
-  ValueAsc = 'VALUE_ASC',
-  ValueDesc = 'VALUE_DESC',
-  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
-  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
-}
 
 export type MetadataGraph = Node & {
   __typename?: 'MetadataGraph';
@@ -6933,8 +6785,6 @@ export type Mutation = {
   createEvent?: Maybe<CreateEventPayload>;
   /** Creates a single `FlywaySchemaHistory`. */
   createFlywaySchemaHistory?: Maybe<CreateFlywaySchemaHistoryPayload>;
-  /** Creates a single `Keyv`. */
-  createKeyv?: Maybe<CreateKeyvPayload>;
   /** Creates a single `MetadataGraph`. */
   createMetadataGraph?: Maybe<CreateMetadataGraphPayload>;
   /** Creates a single `Methodology`. */
@@ -7017,10 +6867,6 @@ export type Mutation = {
   updateFlywaySchemaHistory?: Maybe<UpdateFlywaySchemaHistoryPayload>;
   /** Updates a single `FlywaySchemaHistory` using a unique key and a patch. */
   updateFlywaySchemaHistoryByInstalledRank?: Maybe<UpdateFlywaySchemaHistoryPayload>;
-  /** Updates a single `Keyv` using its globally unique id and a patch. */
-  updateKeyv?: Maybe<UpdateKeyvPayload>;
-  /** Updates a single `Keyv` using a unique key and a patch. */
-  updateKeyvByKey?: Maybe<UpdateKeyvPayload>;
   /** Updates a single `MetadataGraph` using its globally unique id and a patch. */
   updateMetadataGraph?: Maybe<UpdateMetadataGraphPayload>;
   /** Updates a single `MetadataGraph` using a unique key and a patch. */
@@ -7153,10 +6999,6 @@ export type Mutation = {
   deleteFlywaySchemaHistory?: Maybe<DeleteFlywaySchemaHistoryPayload>;
   /** Deletes a single `FlywaySchemaHistory` using a unique key. */
   deleteFlywaySchemaHistoryByInstalledRank?: Maybe<DeleteFlywaySchemaHistoryPayload>;
-  /** Deletes a single `Keyv` using its globally unique id. */
-  deleteKeyv?: Maybe<DeleteKeyvPayload>;
-  /** Deletes a single `Keyv` using a unique key. */
-  deleteKeyvByKey?: Maybe<DeleteKeyvPayload>;
   /** Deletes a single `MetadataGraph` using its globally unique id. */
   deleteMetadataGraph?: Maybe<DeleteMetadataGraphPayload>;
   /** Deletes a single `MetadataGraph` using a unique key. */
@@ -7240,8 +7082,6 @@ export type Mutation = {
   addAddrToAccount?: Maybe<AddAddrToAccountPayload>;
   createUserOrganization?: Maybe<CreateUserOrganizationPayload>;
   createUserOrganizationIfNeeded?: Maybe<CreateUserOrganizationIfNeededPayload>;
-  getCurrentAccount?: Maybe<GetCurrentAccountPayload>;
-  getCurrentAddrs?: Maybe<GetCurrentAddrsPayload>;
   getUserFirstOrganization?: Maybe<GetUserFirstOrganizationPayload>;
   getWalletContactEmail?: Maybe<GetWalletContactEmailPayload>;
   isAdmin?: Maybe<IsAdminPayload>;
@@ -7319,12 +7159,6 @@ export type MutationCreateEventArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateFlywaySchemaHistoryArgs = {
   input: CreateFlywaySchemaHistoryInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreateKeyvArgs = {
-  input: CreateKeyvInput;
 };
 
 
@@ -7571,18 +7405,6 @@ export type MutationUpdateFlywaySchemaHistoryArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateFlywaySchemaHistoryByInstalledRankArgs = {
   input: UpdateFlywaySchemaHistoryByInstalledRankInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateKeyvArgs = {
-  input: UpdateKeyvInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateKeyvByKeyArgs = {
-  input: UpdateKeyvByKeyInput;
 };
 
 
@@ -7983,18 +7805,6 @@ export type MutationDeleteFlywaySchemaHistoryByInstalledRankArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteKeyvArgs = {
-  input: DeleteKeyvInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteKeyvByKeyArgs = {
-  input: DeleteKeyvByKeyInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteMetadataGraphArgs = {
   input: DeleteMetadataGraphInput;
 };
@@ -8249,18 +8059,6 @@ export type MutationCreateUserOrganizationArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateUserOrganizationIfNeededArgs = {
   input: CreateUserOrganizationIfNeededInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationGetCurrentAccountArgs = {
-  input: GetCurrentAccountInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationGetCurrentAddrsArgs = {
-  input: GetCurrentAddrsInput;
 };
 
 
@@ -14621,8 +14419,6 @@ export type Query = Node & {
   allEvents?: Maybe<EventsConnection>;
   /** Reads and enables pagination through a set of `FlywaySchemaHistory`. */
   allFlywaySchemaHistories?: Maybe<FlywaySchemaHistoriesConnection>;
-  /** Reads and enables pagination through a set of `Keyv`. */
-  allKeyvs?: Maybe<KeyvsConnection>;
   /** Reads and enables pagination through a set of `MetadataGraph`. */
   allMetadataGraphs?: Maybe<MetadataGraphsConnection>;
   /** Reads and enables pagination through a set of `Methodology`. */
@@ -14669,7 +14465,6 @@ export type Query = Node & {
   documentById?: Maybe<Document>;
   eventById?: Maybe<Event>;
   flywaySchemaHistoryByInstalledRank?: Maybe<FlywaySchemaHistory>;
-  keyvByKey?: Maybe<Keyv>;
   metadataGraphByIri?: Maybe<MetadataGraph>;
   methodologyById?: Maybe<Methodology>;
   methodologyVersionByIdAndCreatedAt?: Maybe<MethodologyVersion>;
@@ -14696,6 +14491,9 @@ export type Query = Node & {
   walletById?: Maybe<Wallet>;
   walletByAddr?: Maybe<Wallet>;
   getAvailableCredits?: Maybe<Scalars['BigFloat']>;
+  getCurrentAccount?: Maybe<Scalars['UUID']>;
+  getCurrentAccountId?: Maybe<Scalars['UUID']>;
+  getCurrentAddrs?: Maybe<GetCurrentAddrsConnection>;
   getCurrentUser?: Maybe<Scalars['String']>;
   getCurrentUserId?: Maybe<Scalars['UUID']>;
   /** Reads a single `Account` using its globally unique `ID`. */
@@ -14718,8 +14516,6 @@ export type Query = Node & {
   event?: Maybe<Event>;
   /** Reads a single `FlywaySchemaHistory` using its globally unique `ID`. */
   flywaySchemaHistory?: Maybe<FlywaySchemaHistory>;
-  /** Reads a single `Keyv` using its globally unique `ID`. */
-  keyv?: Maybe<Keyv>;
   /** Reads a single `MetadataGraph` using its globally unique `ID`. */
   metadataGraph?: Maybe<MetadataGraph>;
   /** Reads a single `Methodology` using its globally unique `ID`. */
@@ -14891,18 +14687,6 @@ export type QueryAllFlywaySchemaHistoriesArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<FlywaySchemaHistoriesOrderBy>>;
   condition?: Maybe<FlywaySchemaHistoryCondition>;
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryAllKeyvsArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<KeyvsOrderBy>>;
-  condition?: Maybe<KeyvCondition>;
 };
 
 
@@ -15190,12 +14974,6 @@ export type QueryFlywaySchemaHistoryByInstalledRankArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
-export type QueryKeyvByKeyArgs = {
-  key: Scalars['String'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
 export type QueryMetadataGraphByIriArgs = {
   iri: Scalars['String'];
 };
@@ -15356,6 +15134,16 @@ export type QueryGetAvailableCreditsArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryGetCurrentAddrsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryAccountArgs = {
   nodeId: Scalars['ID'];
 };
@@ -15411,12 +15199,6 @@ export type QueryEventArgs = {
 
 /** The root query type which gives access points into the data universe. */
 export type QueryFlywaySchemaHistoryArgs = {
-  nodeId: Scalars['ID'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryKeyvArgs = {
   nodeId: Scalars['ID'];
 };
 
@@ -16718,53 +16500,6 @@ export type UpdateFlywaySchemaHistoryPayload = {
 /** The output of our update `FlywaySchemaHistory` mutation. */
 export type UpdateFlywaySchemaHistoryPayloadFlywaySchemaHistoryEdgeArgs = {
   orderBy?: Maybe<Array<FlywaySchemaHistoriesOrderBy>>;
-};
-
-/** All input for the `updateKeyvByKey` mutation. */
-export type UpdateKeyvByKeyInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** An object where the defined keys will be set on the `Keyv` being updated. */
-  keyvPatch: KeyvPatch;
-  key: Scalars['String'];
-};
-
-/** All input for the `updateKeyv` mutation. */
-export type UpdateKeyvInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The globally unique `ID` which will identify a single `Keyv` to be updated. */
-  nodeId: Scalars['ID'];
-  /** An object where the defined keys will be set on the `Keyv` being updated. */
-  keyvPatch: KeyvPatch;
-};
-
-/** The output of our update `Keyv` mutation. */
-export type UpdateKeyvPayload = {
-  __typename?: 'UpdateKeyvPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `Keyv` that was updated by this mutation. */
-  keyv?: Maybe<Keyv>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** An edge for our `Keyv`. May be used by Relay 1. */
-  keyvEdge?: Maybe<KeyvsEdge>;
-};
-
-
-/** The output of our update `Keyv` mutation. */
-export type UpdateKeyvPayloadKeyvEdgeArgs = {
-  orderBy?: Maybe<Array<KeyvsOrderBy>>;
 };
 
 /** All input for the `updateMetadataGraphByIri` mutation. */
@@ -20975,6 +20710,14 @@ export type GetAvailableCreditsQuery = (
   & Pick<Query, 'getAvailableCredits'>
 );
 
+export type GetCurrentAccountQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCurrentAccountQuery = (
+  { __typename?: 'Query' }
+  & Pick<Query, 'getCurrentAccount'>
+);
+
 export type GetOrganizationProfileByEmailQueryVariables = Exact<{
   email: Scalars['String'];
 }>;
@@ -22619,6 +22362,38 @@ export function useGetAvailableCreditsLazyQuery(baseOptions?: Apollo.LazyQueryHo
 export type GetAvailableCreditsQueryHookResult = ReturnType<typeof useGetAvailableCreditsQuery>;
 export type GetAvailableCreditsLazyQueryHookResult = ReturnType<typeof useGetAvailableCreditsLazyQuery>;
 export type GetAvailableCreditsQueryResult = Apollo.QueryResult<GetAvailableCreditsQuery, GetAvailableCreditsQueryVariables>;
+export const GetCurrentAccountDocument = gql`
+    query GetCurrentAccount {
+  getCurrentAccount
+}
+    `;
+
+/**
+ * __useGetCurrentAccountQuery__
+ *
+ * To run a query within a React component, call `useGetCurrentAccountQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCurrentAccountQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCurrentAccountQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetCurrentAccountQuery(baseOptions?: Apollo.QueryHookOptions<GetCurrentAccountQuery, GetCurrentAccountQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetCurrentAccountQuery, GetCurrentAccountQueryVariables>(GetCurrentAccountDocument, options);
+      }
+export function useGetCurrentAccountLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCurrentAccountQuery, GetCurrentAccountQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetCurrentAccountQuery, GetCurrentAccountQueryVariables>(GetCurrentAccountDocument, options);
+        }
+export type GetCurrentAccountQueryHookResult = ReturnType<typeof useGetCurrentAccountQuery>;
+export type GetCurrentAccountLazyQueryHookResult = ReturnType<typeof useGetCurrentAccountLazyQuery>;
+export type GetCurrentAccountQueryResult = Apollo.QueryResult<GetCurrentAccountQuery, GetCurrentAccountQueryVariables>;
 export const GetOrganizationProfileByEmailDocument = gql`
     query GetOrganizationProfileByEmail($email: String!) {
   userByEmail(email: $email) {

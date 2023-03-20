@@ -1,8 +1,10 @@
-import React, { createContext, useRef, useState } from 'react';
+import React, { createContext, useEffect, useRef, useState } from 'react';
+import { StdSignature } from '@cosmjs/launchpad';
 import { OfflineSigner } from '@cosmjs/proto-signing';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 import WalletConnect from '@walletconnect/client';
 
+import { useGetCurrentAccountQuery } from 'generated/graphql';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { useAutoConnect } from './hooks/useAutoConnect';
@@ -10,7 +12,9 @@ import { useConnect } from './hooks/useConnect';
 import { useConnectWallet } from './hooks/useConnectWallet';
 import { useDetectKeplrMobileBrowser } from './hooks/useDetectKeplrMobileBrowser';
 import { useDisconnect } from './hooks/useDisconnect';
+import { useLogin } from './hooks/useLogin';
 import { useOnAccountChange } from './hooks/useOnAccountChange';
+import { useSignArbitrary } from './hooks/useSignArbitrary';
 import { useWalletConnectCallback } from './hooks/useWalletConnectCallback';
 import { useWalletConnectFinalize } from './hooks/useWalletConnectFinalize';
 import { emptySender } from './wallet.constants';
@@ -28,6 +32,15 @@ declare global {
   interface Window extends KeplrWindow {}
 }
 
+export type SignArbitraryParams = {
+  wallet?: Wallet;
+  nonce: string;
+};
+export type SignArbitraryType = ({
+  wallet,
+  nonce,
+}: SignArbitraryParams) => Promise<StdSignature | undefined>;
+
 export type WalletContextType = {
   wallet?: Wallet;
   loaded: boolean;
@@ -36,8 +49,11 @@ export type WalletContextType = {
   connectionType?: string;
   error?: unknown;
   walletConnectUri?: string;
+  signArbitrary?: SignArbitraryType;
+  login?: (wallet?: Wallet) => Promise<void>;
+  logout?: () => Promise<void>;
+  accountId?: string;
 };
-
 const WalletContext = createContext<WalletContextType>({
   loaded: false,
 });
@@ -50,6 +66,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   // only once we know what's the actual wallet connection status.
   const [loaded, setLoaded] = useState<boolean>(false);
   const [wallet, setWallet] = useState<Wallet>(emptySender);
+  const [accountId, setAccountId] = useState<string | undefined>(undefined);
   const [connectionType, setConnectionType] = useState<string | undefined>(
     undefined,
   );
@@ -74,6 +91,13 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     walletConnect,
   });
 
+  const signArbitrary = useSignArbitrary({
+    walletConfigRef,
+    walletConnect,
+    setError,
+  });
+  const login = useLogin({ signArbitrary, setError, setAccountId });
+
   const connectWallet = useConnectWallet({
     onQrCloseCallbackRef,
     setWallet,
@@ -81,6 +105,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     setWalletConnectUri,
     walletConfigRef,
     track,
+    login,
   });
 
   const connect = useConnect({ connectWallet, setConnectionType, setError });
@@ -89,7 +114,17 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   useOnAccountChange({ connectWallet, wallet });
   useDetectKeplrMobileBrowser({ connectWallet, loaded, wallet });
   useWalletConnectCallback({ onQrCloseCallbackRef, walletConnectUri });
-  useWalletConnectFinalize({ setWallet, walletConfigRef, walletConnect });
+  useWalletConnectFinalize({
+    setWallet,
+    walletConfigRef,
+    walletConnect,
+    login,
+  });
+
+  const { data } = useGetCurrentAccountQuery();
+  useEffect(() => {
+    if (data?.getCurrentAccount) setAccountId(data?.getCurrentAccount);
+  }, [data?.getCurrentAccount]);
 
   return (
     <WalletContext.Provider
@@ -101,6 +136,9 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         connectionType,
         error,
         walletConnectUri,
+        signArbitrary,
+        login,
+        accountId,
       }}
     >
       {children}

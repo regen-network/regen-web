@@ -8,7 +8,7 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import { Title } from 'web-components/lib/components/typography';
 
 import { AdminNav } from '../../components/organisms';
-import getApiUri from '../../lib/apiUri';
+import { apiUri } from '../../lib/apiUri';
 
 const GET_USER = gql`
   query UserByEmail($email: String!) {
@@ -30,7 +30,6 @@ const Seller = (): JSX.Element => {
     const getAccountLink = async (): Promise<void> => {
       try {
         const accessToken = await getAccessTokenSilently();
-        const apiUri = getApiUri();
         const res = await axios({
           method: 'POST',
           url: `${apiUri}/create-account-link`,
@@ -56,7 +55,6 @@ const Seller = (): JSX.Element => {
         const getLoginLink = async (): Promise<void> => {
           try {
             const accessToken = await getAccessTokenSilently();
-            const apiUri = getApiUri();
             const res = await axios({
               method: 'POST',
               url: `${apiUri}/create-login-link`,

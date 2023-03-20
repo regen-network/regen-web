@@ -11,7 +11,7 @@ import LoginForm, {
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 
 import auth0 from '../../auth0';
-import getApiUri from '../../lib/apiUri';
+import { apiUri } from '../../lib/apiUri';
 
 const CREATE_USER = loader('../../graphql/ReallyCreateUser.graphql');
 
@@ -48,7 +48,7 @@ function Signup(): JSX.Element {
                   // Subscribe to mailing list
                   if (updates === true) {
                     axios
-                      .post(`${getApiUri()}/mailerlite`, {
+                      .post(`${apiUri}/mailerlite`, {
                         email,
                       })
                       .then(resp => {

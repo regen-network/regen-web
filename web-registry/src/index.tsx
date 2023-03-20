@@ -128,7 +128,6 @@ root.render(
       </IntercomProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </AuthApolloProvider>
-    ,
   </QueryClientProvider>,
 );
 

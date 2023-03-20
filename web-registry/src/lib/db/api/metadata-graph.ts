@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-import getApiUri from 'lib/apiUri';
+import { apiUri } from 'lib/apiUri';
 import { jsonLdCompact } from 'lib/rdf';
 
 export const getMetadata = async (iri?: string): Promise<any> => {
   if (!iri) return null;
   try {
-    const { data } = await axios.get(`${getApiUri()}/metadata-graph/${iri}`);
+    const { data } = await axios.get(`${apiUri}/metadata-graph/${iri}`);
     return await jsonLdCompact(data);
   } catch (err) {
     return null;
@@ -35,7 +35,7 @@ export async function generateIri<T>(
   metadata: T,
 ): Promise<IriFromMetadata<T> | undefined> {
   try {
-    const response = await axios.post(getApiUri() + iriUrl, metadata);
+    const response = await axios.post(apiUri + iriUrl, metadata);
     return response.data;
   } catch (err) {
     throw new Error(`Error in iri generation service: ${err}`);

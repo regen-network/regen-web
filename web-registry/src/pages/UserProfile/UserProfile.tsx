@@ -18,7 +18,7 @@ import {
   useUpdatePartyByIdMutation,
   useUpdateUserByEmailMutation,
 } from '../../generated/graphql';
-import getApiUri from '../../lib/apiUri';
+import { apiUri } from '../../lib/apiUri';
 
 const messageExpired: string = 'Access expired.';
 
@@ -81,7 +81,7 @@ function UserProfile(): JSX.Element {
   const resendEmail = useCallback(() => {
     setSubmitting(true);
     axios
-      .post(`${getApiUri()}/auth/verification-email`, {
+      .post(`${apiUri}/auth/verification-email`, {
         email,
       })
       .then(resp => {

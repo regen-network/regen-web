@@ -22,6 +22,7 @@ type Props = {
     options?: any,
     callback?: (...params: any[]) => any,
   ) => Promise<any>;
+  login?: (wallet?: Wallet) => Promise<void>;
 };
 
 export type ConnectWalletType = ({
@@ -37,9 +38,10 @@ export const useConnectWallet = ({
   setWallet,
   setWalletConnect,
   track,
+  login,
 }: Props): ConnectWalletType => {
   const connectWallet = useCallback(
-    async ({ walletType }: ConnectWalletParams): Promise<void> => {
+    async ({ walletType, doLogin }: ConnectWalletParams): Promise<void> => {
       const walletConfig = walletsConfig.find(
         walletConfig => walletConfig.type === walletType,
       );
@@ -82,6 +84,8 @@ export const useConnectWallet = ({
           walletClient,
           walletConfig,
           track,
+          login,
+          doLogin,
         });
       }
     },
@@ -92,6 +96,7 @@ export const useConnectWallet = ({
       setWalletConnectUri,
       walletConfigRef,
       track,
+      login,
     ],
   );
 

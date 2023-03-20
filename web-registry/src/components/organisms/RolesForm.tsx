@@ -19,7 +19,7 @@ import {
   RoleField,
 } from 'components/molecules/RoleField/RoleField';
 
-import getApiUri from '../../lib/apiUri';
+import { apiUri } from '../../lib/apiUri';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../molecules';
 
@@ -59,7 +59,6 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   projectId,
   ...props
 }) => {
-  const apiUri = getApiUri();
   const [entities, setEntities] = useState<
     Array<FormValues | ProfileFormValues>
   >([]);

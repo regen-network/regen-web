@@ -32,7 +32,7 @@ import { UrlType } from 'lib/rdf/types';
 import { isIndividual } from 'components/molecules/RoleField/RoleField';
 
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
-import getApiUri from '../../lib/apiUri';
+import { apiUri } from '../../lib/apiUri';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../molecules';
 
@@ -199,7 +199,6 @@ const OrganizationFormlet: React.FC<
 > = ({ role, entity, setFieldValue, setFieldTouched }) => {
   const { classes: styles } = useStyles();
   const theme = useTheme();
-  const apiUri = getApiUri();
   const { projectId } = useParams();
 
   const triggerOnChange = async (value: boolean): Promise<void> => {
@@ -256,7 +255,6 @@ const IndividualFormlet: React.FC<
 > = ({ entity, role, setFieldValue, setFieldTouched }) => {
   const { classes: styles } = useStyles();
   const { projectId } = useParams();
-  const apiUri = getApiUri();
   const triggerOnChange = async (value: boolean): Promise<void> => {
     setType(role, 'Individual', value, setFieldValue, setFieldTouched);
   };

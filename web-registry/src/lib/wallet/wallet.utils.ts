@@ -1,13 +1,16 @@
 import { MutableRefObject } from 'react';
 import WalletConnect from '@walletconnect/client';
+import axios from 'axios';
 import truncate from 'lodash/truncate';
 
 import { UseStateSetter } from 'types/react/use-state';
+import { apiUri } from 'lib/apiUri';
 import { LoginEvent, Track } from 'lib/tracker/types';
 
 import { chainInfo } from './chainInfo/chainInfo';
 import { Wallet } from './wallet';
 import {
+  KEPLR_LOGIN_TITLE,
   WALLET_CONNECT_BRIDGE_URL,
   WALLET_CONNECT_SIGNING_METHODS,
   walletConnectClientMeta,
@@ -55,6 +58,8 @@ type FinalizeConnectionParams = {
   walletConfig?: WalletConfig;
   setWallet: UseStateSetter<Wallet>;
   track?: Track;
+  login?: (wallet?: Wallet) => Promise<void>;
+  doLogin?: boolean;
 };
 
 export const finalizeConnection = async ({
@@ -62,6 +67,8 @@ export const finalizeConnection = async ({
   walletConfig,
   setWallet,
   track,
+  login,
+  doLogin = true,
 }: FinalizeConnectionParams): Promise<void> => {
   let offlineSigner;
 
@@ -79,7 +86,7 @@ export const finalizeConnection = async ({
   }
 
   const key = await walletClient?.getKey(chainInfo.chainId);
-  if (key && key.bech32Address && offlineSigner) {
+  if (key && key.bech32Address && offlineSigner && login) {
     const wallet = {
       offlineSigner,
       address: key.bech32Address,
@@ -92,5 +99,25 @@ export const finalizeConnection = async ({
       });
     }
     setWallet(wallet);
+
+    if (doLogin) await login(wallet);
   }
 };
+
+export const getAxiosInstance = (token: string) => {
+  return axios.create({
+    baseURL: apiUri,
+    withCredentials: true,
+    headers: {
+      'X-CSRF-TOKEN': token,
+    },
+  });
+};
+
+export const getArbitraryLoginData = (nonce: string) =>
+  JSON.stringify({
+    title: KEPLR_LOGIN_TITLE,
+    description:
+      'This is a transaction that allows Regen Network to authenticate you with our application.',
+    nonce,
+  });

@@ -12,12 +12,14 @@ type Props = {
   walletConfigRef: MutableRefObject<WalletConfig | undefined>;
   walletConnect?: WalletConnect;
   setWallet: UseStateSetter<Wallet>;
+  login?: (wallet?: Wallet) => Promise<void>;
 };
 
 export const useWalletConnectFinalize = ({
   setWallet,
   walletConfigRef,
   walletConnect,
+  login,
 }: Props): void => {
   useEffect(() => {
     const onWalletConnectEvent = async (): Promise<void> => {
@@ -30,6 +32,7 @@ export const useWalletConnectFinalize = ({
         setWallet,
         walletClient,
         walletConfig: walletConfigRef.current,
+        login,
       });
     };
 
@@ -42,5 +45,5 @@ export const useWalletConnectFinalize = ({
         onWalletConnectEvent();
       });
     }
-  }, [setWallet, walletConnect, walletConfigRef]);
+  }, [setWallet, walletConnect, walletConfigRef, login]);
 };

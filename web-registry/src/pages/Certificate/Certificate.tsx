@@ -279,7 +279,7 @@ function CertificatePage(): JSX.Element {
                 certificateTitle={
                   creditClassVersion?.metadata?.[
                     'https://schema.regen.network#offsetGenerationMethod'
-                  ] || 'Carbon Removal'
+                  ]?.[0] || 'Carbon Removal'
                 }
                 creditUnitName={
                   creditClassVersion?.metadata?.[

@@ -167,7 +167,7 @@ function CreditClassDetailsColumn({
             data={
               creditClassVersion?.metadata?.[
                 'https://schema.regen.network#offsetGenerationMethod'
-              ]
+              ]?.[0]
             }
           />
         )}

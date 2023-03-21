@@ -20,7 +20,7 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { basketDetailAtom } from 'pages/BasketDetails/BasketDetails.store';
 
-import forestImg from '../../../assets/forest-token.png';
+import basketImg from '../../../assets/toucan-basket.png';
 import { getAccountUrl } from '../../../lib/block-explorer';
 import { OptimizedImage } from '../../atoms/OptimizedImage';
 import {
@@ -93,7 +93,7 @@ export const BasketOverview: React.FC<
             <BasketImageContainer item xs={12} sm={5}>
               <OptimizedImage
                 className={styles.image}
-                src={forestImg}
+                src={basketImg}
                 alt={name}
               />
             </BasketImageContainer>

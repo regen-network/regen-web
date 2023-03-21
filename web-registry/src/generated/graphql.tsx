@@ -19772,7 +19772,10 @@ export type WalletByAddrQuery = (
   & { walletByAddr?: Maybe<(
     { __typename?: 'Wallet' }
     & Pick<Wallet, 'id' | 'addr'>
-    & { projectsByAdminWalletId: (
+    & { partyByWalletId?: Maybe<(
+      { __typename?: 'Party' }
+      & Pick<Party, 'accountId'>
+    )>, projectsByAdminWalletId: (
       { __typename?: 'ProjectsConnection' }
       & { nodes: Array<Maybe<(
         { __typename?: 'Project' }
@@ -21485,6 +21488,9 @@ export const WalletByAddrDocument = gql`
   walletByAddr(addr: $addr) {
     id
     addr
+    partyByWalletId {
+      accountId
+    }
     projectsByAdminWalletId {
       nodes {
         id

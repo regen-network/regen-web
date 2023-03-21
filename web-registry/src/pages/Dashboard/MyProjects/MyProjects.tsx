@@ -8,10 +8,7 @@ import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { CreateProjectCard } from 'web-components/lib/components/cards/CreateCards/CreateProjectCard';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 
-import {
-  useCreateProjectMutation,
-  useCreateWalletMutation,
-} from 'generated/graphql';
+import { useCreateProjectMutation } from 'generated/graphql';
 import { getWalletByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getWalletByAddrQuery/getWalletByAddrQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
@@ -26,11 +23,10 @@ import { submitCreateProject } from './MyProjects.utils';
 const MyProjects = (): JSX.Element => {
   const [error, setError] = useState<string | null>(null);
   const graphqlClient = useApolloClient();
-  const { wallet } = useWallet();
+  const { wallet, accountId } = useWallet();
   const navigate = useNavigate();
   const { isIssuer, isProjectAdmin } = useDashboardContext();
   const [createProject] = useCreateProjectMutation();
-  const [createWallet] = useCreateWalletMutation();
   const { data: walletData } = useQuery(
     getWalletByAddrQuery({
       addr: wallet?.address ?? '',
@@ -41,7 +37,10 @@ const MyProjects = (): JSX.Element => {
 
   const { track } = useTracker();
 
-  const projects = walletData?.walletByAddr?.projectsByWalletId?.nodes;
+  const projects =
+    accountId === walletData?.walletByAddr?.partyByWalletId?.accountId
+      ? walletData?.walletByAddr?.projectsByAdminWalletId?.nodes
+      : undefined;
   const isFirstProject = !projects || projects?.length < 1;
   const onChainIds =
     projects
@@ -65,10 +64,8 @@ const MyProjects = (): JSX.Element => {
               onClick={() =>
                 submitCreateProject({
                   createProject,
-                  createWallet,
                   setError,
                   navigate,
-                  wallet,
                   walletData,
                 })
               }

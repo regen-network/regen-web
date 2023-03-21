@@ -21,6 +21,7 @@ import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 import { containerStyles } from 'web-components/lib/styles/container';
 import { truncate } from 'web-components/lib/utils/truncate';
 
+import { PartyType } from 'generated/graphql';
 import { getAccountUrl } from 'lib/block-explorer';
 import { isBridgeEnabled } from 'lib/ledger';
 import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
@@ -34,9 +35,10 @@ import { useQueryIfProjectAdmin } from 'hooks/useQueryIfProjectAdmin';
 
 import {
   DEFAULT_NAME,
-  DEFAULT_PROFILE_AVATAR,
   DEFAULT_PROFILE_BG,
-  profileVVariantMapping,
+  DEFAULT_PROFILE_COMPANY_AVATAR,
+  DEFAULT_PROFILE_USER_AVATAR,
+  profileVariantMapping,
 } from './Dashboard.constants';
 import { dashBoardStyles } from './Dashboard.styles';
 
@@ -62,6 +64,10 @@ const Dashboard = (): JSX.Element => {
   );
   const partyData = partyByAddr?.walletByAddr?.partyByWalletId;
   const party = accountId === partyData?.accountId ? partyData : undefined;
+  const isOrganization = party?.type === PartyType.Organization;
+  const defaultAvatar = isOrganization
+    ? DEFAULT_PROFILE_COMPANY_AVATAR
+    : DEFAULT_PROFILE_USER_AVATAR;
 
   const tabs: IconTabProps[] = useMemo(
     () => [
@@ -119,7 +125,7 @@ const Dashboard = (): JSX.Element => {
       <ProfileHeader
         name={party?.name ? party?.name : DEFAULT_NAME}
         backgroundImage={DEFAULT_PROFILE_BG}
-        avatar={party?.image ? party?.image : DEFAULT_PROFILE_AVATAR}
+        avatar={party?.image ? party?.image : defaultAvatar}
         infos={{
           addressLink: {
             href: getAccountUrl(wallet?.address, true),
@@ -128,9 +134,7 @@ const Dashboard = (): JSX.Element => {
           description: party?.description ?? '',
         }}
         editLink="/profile/edit"
-        variant={
-          party?.type ? profileVVariantMapping[party.type] : 'individual'
-        }
+        variant={party?.type ? profileVariantMapping[party.type] : 'individual'}
         LinkComponent={Link}
       />
       <Box sx={{ bgcolor: 'grey.50' }}>

@@ -185,18 +185,20 @@ function ProjectTopSection({
               {primaryDescription}
             </Body>
           )}
-          <Link to={`/credit-classes/${creditClassSanity?.path}`}>
-            <CreditClassCard
-              title={<BlockContent content={creditClassSanity?.nameRaw} />}
-              description={
-                <BlockContent
-                  content={creditClassSanity?.shortDescriptionRaw}
-                />
-              }
-              imgSrc={getSanityImgSrc(creditClassSanity?.image)}
-              sx={{ mt: [2, 4], py: [2, 6] }}
-            />
-          </Link>
+          {creditClassSanity && (
+            <Link to={`/credit-classes/${creditClassSanity.path}`}>
+              <CreditClassCard
+                title={<BlockContent content={creditClassSanity.nameRaw} />}
+                description={
+                  <BlockContent
+                    content={creditClassSanity.shortDescriptionRaw}
+                  />
+                }
+                imgSrc={getSanityImgSrc(creditClassSanity.image)}
+                sx={{ mt: [2, 4], py: [2, 6] }}
+              />
+            </Link>
+          )}
           {isAnchoredProjectMetadata(projectMetadata, onChainProjectId) && (
             <ProjectPageMetadata metadata={projectMetadata} />
           )}

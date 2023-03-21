@@ -9,7 +9,6 @@ import { Label } from 'web-components/lib/components/typography';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
-import { nctBasket } from 'lib/ledger';
 
 import { BasketTokens } from 'hooks/useBasketTokens';
 
@@ -54,15 +53,13 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
         />
       </Box>
 
-      {nctBasket && (
-        <Box sx={{ pt: { xs: 9.25, sm: 8.5 } }}>
-          <Label sx={sxs.title}>basket tokens</Label>
-          <BasketsTable
-            basketTokens={basketTokens}
-            renderActionButtons={renderBasketActionButtons}
-          />
-        </Box>
-      )}
+      <Box sx={{ pt: { xs: 9.25, sm: 8.5 } }}>
+        <Label sx={sxs.title}>basket tokens</Label>
+        <BasketsTable
+          basketTokens={basketTokens}
+          renderActionButtons={renderBasketActionButtons}
+        />
+      </Box>
     </Box>
   );
 };

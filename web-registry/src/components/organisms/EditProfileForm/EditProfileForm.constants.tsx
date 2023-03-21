@@ -2,6 +2,8 @@ import { RadioCardItem } from 'web-components/lib/components/atoms/RadioCard/Rad
 import OrganizationIcon from 'web-components/lib/components/icons/OrganizationIcon';
 import UserIcon from 'web-components/lib/components/icons/UserIcon';
 
+import { PartyType } from 'generated/graphql';
+
 import {
   DEFAULT_AVATAR,
   DEFAULT_BG,
@@ -10,7 +12,7 @@ import {
 import { EditProfileFormSchemaType } from './EditProfileForm.schema';
 
 export const editProfileFormInitialValues: EditProfileFormSchemaType = {
-  profileType: 'user',
+  profileType: PartyType.User,
   name: '',
   profileImage: DEFAULT_AVATAR,
   backgroundImage: DEFAULT_BG,
@@ -21,13 +23,13 @@ export const radioCardItems: RadioCardItem[] = [
   {
     id: 'individual',
     label: 'Individual',
-    value: 'user',
+    value: PartyType.User,
     icon: <UserIcon />,
   },
   {
     id: 'organization',
     label: 'Organization',
-    value: 'organization',
+    value: PartyType.Organization,
     icon: <OrganizationIcon />,
   },
 ];

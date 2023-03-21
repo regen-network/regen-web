@@ -1,5 +1,6 @@
 import React from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
+import { useSetAtom } from 'jotai';
 
 import RadioCard from 'web-components/lib/components/atoms/RadioCard';
 import { ImageField } from 'web-components/lib/components/inputs/new/ImageField/ImageField';
@@ -8,6 +9,8 @@ import { ImageFieldBackground } from 'web-components/lib/components/inputs/new/I
 import { TextAreaField } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField';
 import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
+
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
@@ -48,6 +51,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
       },
       mode: 'onBlur',
     });
+    const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
     const { isSubmitting, errors } = useFormState({
       control: form.control,
@@ -90,8 +94,13 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
             values: data,
           });
           if (!hasError) {
-            await onSubmit(data);
-            onSuccess && onSuccess();
+            try {
+              await onSubmit(data);
+              onSuccess && onSuccess();
+            } catch (e) {
+              // setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
+              setErrorBannerTextAtom(String(e));
+            }
           }
         }}
         sx={{

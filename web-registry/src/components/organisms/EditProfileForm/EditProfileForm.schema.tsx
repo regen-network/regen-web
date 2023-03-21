@@ -1,7 +1,11 @@
 import { z } from 'zod';
 
+import { PartyType } from 'generated/graphql';
+
 export const editProfileFormSchema = z.object({
-  profileType: z.union([z.string(), z.null()]).refine(val => val !== null),
+  profileType: z
+    .union([z.custom<PartyType>(), z.null()])
+    .refine(val => val !== null),
   name: z.string(),
   profileImage: z.string(),
   backgroundImage: z.string(),

@@ -8339,6 +8339,8 @@ export enum PartiesOrderBy {
   ImageDesc = 'IMAGE_DESC',
   AccountIdAsc = 'ACCOUNT_ID_ASC',
   AccountIdDesc = 'ACCOUNT_ID_DESC',
+  BgImageAsc = 'BG_IMAGE_ASC',
+  BgImageDesc = 'BG_IMAGE_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -8358,6 +8360,7 @@ export type Party = Node & {
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   accountId?: Maybe<Scalars['UUID']>;
+  bgImage?: Maybe<Scalars['String']>;
   /** Reads a single `Wallet` that is related to this `Party`. */
   walletByWalletId?: Maybe<Wallet>;
   /** Reads a single `Address` that is related to this `Party`. */
@@ -9990,6 +9993,8 @@ export type PartyCondition = {
   image?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `accountId` field. */
   accountId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `bgImage` field. */
+  bgImage?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `CreditClass` values, with data from `CreditVintage`. */
@@ -10373,6 +10378,7 @@ export type PartyInput = {
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   accountId?: Maybe<Scalars['UUID']>;
+  bgImage?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `Methodology` values, with data from `CreditClass`. */
@@ -12050,6 +12056,7 @@ export type PartyPatch = {
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   accountId?: Maybe<Scalars['UUID']>;
+  bgImage?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `Project` values, with data from `CreditVintage`. */

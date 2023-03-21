@@ -14,16 +14,37 @@ import { apiServerUrl } from 'lib/env';
 import { Link } from 'components/atoms';
 import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfileForm';
 import { EditProfileFormActionBar } from 'components/organisms/EditProfileForm/EditProfileForm.ActionBar';
+import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
 
 import { PROFILE, PROFILE_SAVED, VIEW_PROFILE } from './ProfileEdit.constants';
 
 export const ProfileEdit = () => {
   const setBannerTextAtom = useSetAtom(bannerTextAtom);
-  const userId = '1';
+  const userId = '6f3bdda8-c70e-11ed-ac59-0242ac120002';
   const [updatePartyById] = useUpdatePartyByIdMutation();
 
   /* callbacks */
-  const onSubmit = useCallback(() => Promise.resolve(void 0), []);
+  const onSubmit = useCallback(
+    async (values: EditProfileFormSchemaType) => {
+      const { profileType, profileImage, backgroundImage, name, description } =
+        values;
+      await updatePartyById({
+        variables: {
+          input: {
+            id: userId,
+            partyPatch: {
+              name,
+              description,
+              image: profileImage,
+              type: profileType,
+              bgImage: backgroundImage,
+            },
+          },
+        },
+      });
+    },
+    [userId, updatePartyById],
+  );
 
   const onSuccess = useCallback(
     () => setBannerTextAtom(PROFILE_SAVED),

@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { Box, SxProps } from '@mui/material';
 import ReactHtmlParser from 'html-react-parser';
 
+import { containerStyles } from '../../../styles/container';
 import { Theme } from '../../../theme/muiTheme';
 import { sxToArray } from '../../../utils/mui/sxToArray';
 import { BlockContent } from '../../block-content';
@@ -43,12 +44,8 @@ const Section = ({
     >
       <Box
         sx={[
-          {
-            maxWidth: theme => theme.breakpoints.values.lg,
-            margin: '0 auto',
-            py: { xs: 20, lg: 25 },
-            px: { xs: 3.75, lg: 0 },
-          },
+          containerStyles,
+          { py: { xs: 20, lg: 25 }, px: { xs: 3.75, lg: 0 } },
           ...sxToArray(sx?.section),
         ]}
       >

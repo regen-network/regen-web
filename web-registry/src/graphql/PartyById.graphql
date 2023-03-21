@@ -1,0 +1,8 @@
+query partyById($id: UUID!) {
+  partyById(id: $id) {
+    name
+    type
+    image
+    description
+  }
+}

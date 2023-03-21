@@ -19811,6 +19811,36 @@ export type MoreProjectsQuery = (
   )> }
 );
 
+export type PartyByAddrQueryVariables = Exact<{
+  addr: Scalars['String'];
+}>;
+
+
+export type PartyByAddrQuery = (
+  { __typename?: 'Query' }
+  & { walletByAddr?: Maybe<(
+    { __typename?: 'Wallet' }
+    & Pick<Wallet, 'id'>
+    & { partyByWalletId?: Maybe<(
+      { __typename?: 'Party' }
+      & Pick<Party, 'name' | 'type' | 'image' | 'description' | 'accountId'>
+    )> }
+  )> }
+);
+
+export type PartyByIdQueryVariables = Exact<{
+  id: Scalars['UUID'];
+}>;
+
+
+export type PartyByIdQuery = (
+  { __typename?: 'Query' }
+  & { partyById?: Maybe<(
+    { __typename?: 'Party' }
+    & Pick<Party, 'name' | 'type' | 'image' | 'description'>
+  )> }
+);
+
 export type PartyFieldsFragment = (
   { __typename?: 'Party' }
   & Pick<Party, 'id' | 'type' | 'name' | 'description' | 'image'>
@@ -21566,6 +21596,86 @@ export function useMoreProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type MoreProjectsQueryHookResult = ReturnType<typeof useMoreProjectsQuery>;
 export type MoreProjectsLazyQueryHookResult = ReturnType<typeof useMoreProjectsLazyQuery>;
 export type MoreProjectsQueryResult = Apollo.QueryResult<MoreProjectsQuery, MoreProjectsQueryVariables>;
+export const PartyByAddrDocument = gql`
+    query partyByAddr($addr: String!) {
+  walletByAddr(addr: $addr) {
+    id
+    partyByWalletId {
+      name
+      type
+      image
+      description
+      accountId
+    }
+  }
+}
+    `;
+
+/**
+ * __usePartyByAddrQuery__
+ *
+ * To run a query within a React component, call `usePartyByAddrQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePartyByAddrQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePartyByAddrQuery({
+ *   variables: {
+ *      addr: // value for 'addr'
+ *   },
+ * });
+ */
+export function usePartyByAddrQuery(baseOptions: Apollo.QueryHookOptions<PartyByAddrQuery, PartyByAddrQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PartyByAddrQuery, PartyByAddrQueryVariables>(PartyByAddrDocument, options);
+      }
+export function usePartyByAddrLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PartyByAddrQuery, PartyByAddrQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PartyByAddrQuery, PartyByAddrQueryVariables>(PartyByAddrDocument, options);
+        }
+export type PartyByAddrQueryHookResult = ReturnType<typeof usePartyByAddrQuery>;
+export type PartyByAddrLazyQueryHookResult = ReturnType<typeof usePartyByAddrLazyQuery>;
+export type PartyByAddrQueryResult = Apollo.QueryResult<PartyByAddrQuery, PartyByAddrQueryVariables>;
+export const PartyByIdDocument = gql`
+    query partyById($id: UUID!) {
+  partyById(id: $id) {
+    name
+    type
+    image
+    description
+  }
+}
+    `;
+
+/**
+ * __usePartyByIdQuery__
+ *
+ * To run a query within a React component, call `usePartyByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePartyByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePartyByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function usePartyByIdQuery(baseOptions: Apollo.QueryHookOptions<PartyByIdQuery, PartyByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PartyByIdQuery, PartyByIdQueryVariables>(PartyByIdDocument, options);
+      }
+export function usePartyByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PartyByIdQuery, PartyByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PartyByIdQuery, PartyByIdQueryVariables>(PartyByIdDocument, options);
+        }
+export type PartyByIdQueryHookResult = ReturnType<typeof usePartyByIdQuery>;
+export type PartyByIdLazyQueryHookResult = ReturnType<typeof usePartyByIdLazyQuery>;
+export type PartyByIdQueryResult = Apollo.QueryResult<PartyByIdQuery, PartyByIdQueryVariables>;
 export const ProjectByHandleDocument = gql`
     query ProjectByHandle($handle: String!) {
   projectByHandle(handle: $handle) {

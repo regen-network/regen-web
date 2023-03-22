@@ -121,7 +121,7 @@ export default function ProjectTopCard({
   const { classes: styles, cx } = useStyles();
   return (
     <Card className={cx(styles.root, classes && classes.root)}>
-      {sdgs && (
+      {sdgs && sdgs.length > 0 && (
         <div className={styles.sdgs}>
           <Title variant="h3" sx={{ pb: { xs: 3, sm: 4 } }}>
             SDGs

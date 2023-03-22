@@ -41,14 +41,12 @@ export function LabeledNumber({
       sxChildren={{ height: '100%' }}
     >
       {icon && <Box sx={{ mr: 2.5, display: 'inline-flex' }}>{icon}</Box>}
-      {number && (
-        <Title variant="h3">
-          {formatNumber({
-            num: number,
-            ...formatNumberOptions,
-          })}
-        </Title>
-      )}
+      <Title variant="h3">
+        {formatNumber({
+          num: number,
+          ...formatNumberOptions,
+        })}
+      </Title>
       {badgeLabel && <GradientBadge label={badgeLabel} />}
       {tooltipNumber && (
         <InfoTooltipWithIcon title={tooltipNumber} sx={{ ml: 1 }} outlined />

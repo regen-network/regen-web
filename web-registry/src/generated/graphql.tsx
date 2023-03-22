@@ -19830,7 +19830,7 @@ export type PartyByAddrQuery = (
     & Pick<Wallet, 'id'>
     & { partyByWalletId?: Maybe<(
       { __typename?: 'Party' }
-      & Pick<Party, 'name' | 'type' | 'image' | 'description' | 'accountId'>
+      & Pick<Party, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'accountId'>
     )> }
   )> }
 );
@@ -21608,9 +21608,11 @@ export const PartyByAddrDocument = gql`
   walletByAddr(addr: $addr) {
     id
     partyByWalletId {
+      id
       name
       type
       image
+      bgImage
       description
       accountId
     }

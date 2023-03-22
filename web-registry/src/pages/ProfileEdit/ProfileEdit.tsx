@@ -1,4 +1,10 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
 import { Flex } from 'web-components/lib/components/box';
@@ -10,18 +16,54 @@ import { uploadImage } from 'web-components/lib/utils/s3';
 import { useUpdatePartyByIdMutation } from 'generated/graphql';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { apiServerUrl } from 'lib/env';
+import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { Link } from 'components/atoms';
+import WithLoader from 'components/atoms/WithLoader';
 import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfileForm';
 import { EditProfileFormActionBar } from 'components/organisms/EditProfileForm/EditProfileForm.ActionBar';
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
 
-import { PROFILE, PROFILE_SAVED, VIEW_PROFILE } from './ProfileEdit.constants';
+import {
+  DEFAULT_AVATAR,
+  DEFAULT_BG,
+  DEFAULT_PROFILE_TYPE,
+  PROFILE,
+  PROFILE_SAVED,
+  VIEW_PROFILE,
+} from './ProfileEdit.constants';
 
 export const ProfileEdit = () => {
   const setBannerTextAtom = useSetAtom(bannerTextAtom);
-  const userId = '6f3bdda8-c70e-11ed-ac59-0242ac120002';
+  const { wallet, accountId } = useWallet();
   const [updatePartyById] = useUpdatePartyByIdMutation();
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
+  const reactQueryClient = useQueryClient();
+
+  const partyByAddrQuery = useMemo(
+    () =>
+      getPartyByAddrQuery({
+        client: graphqlClient,
+        addr: wallet?.address ?? '',
+        enabled: !!wallet?.address && !!graphqlClient,
+      }),
+    [graphqlClient, wallet?.address],
+  );
+  const { data: partyByAddr } = useQuery(partyByAddrQuery);
+  const partyData = partyByAddr?.walletByAddr?.partyByWalletId;
+  const party = accountId === partyData?.accountId ? partyData : undefined;
+  const initialValues: EditProfileFormSchemaType = useMemo(
+    () => ({
+      name: String(party?.name),
+      description: String(party?.description?.trimEnd()),
+      profileImage: String(party?.image ?? DEFAULT_AVATAR),
+      backgroundImage: String(party?.bgImage ?? DEFAULT_BG),
+      profileType: party?.type ?? DEFAULT_PROFILE_TYPE,
+    }),
+    [party],
+  );
 
   /* callbacks */
   const onSubmit = useCallback(
@@ -31,7 +73,7 @@ export const ProfileEdit = () => {
       await updatePartyById({
         variables: {
           input: {
-            id: userId,
+            id: party?.id,
             partyPatch: {
               name,
               description,
@@ -43,25 +85,25 @@ export const ProfileEdit = () => {
         },
       });
     },
-    [userId, updatePartyById],
+    [party, updatePartyById],
   );
 
-  const onSuccess = useCallback(
-    () => setBannerTextAtom(PROFILE_SAVED),
-    [setBannerTextAtom],
-  );
+  const onSuccess = useCallback(() => {
+    setBannerTextAtom(PROFILE_SAVED);
+    reactQueryClient.invalidateQueries({ queryKey: partyByAddrQuery.queryKey });
+  }, [setBannerTextAtom, partyByAddrQuery, reactQueryClient]);
 
   const onUpload = useCallback(
     async (imageFile: File) => {
       const result = await uploadImage(
         imageFile,
-        `profile/${userId}`,
+        `profile/${party?.id}`,
         apiServerUrl,
       );
       setBannerTextAtom(PROFILE_SAVED);
       return result;
     },
-    [setBannerTextAtom],
+    [setBannerTextAtom, party],
   );
 
   return (
@@ -80,13 +122,16 @@ export const ProfileEdit = () => {
             {VIEW_PROFILE}
           </OutlinedButton>
         </Flex>
-        <EditProfileForm
-          onSubmit={onSubmit}
-          onSuccess={onSuccess}
-          onUpload={onUpload}
-        >
-          <EditProfileFormActionBar />
-        </EditProfileForm>
+        <WithLoader isLoading={!party} sx={{ mx: 'auto' }}>
+          <EditProfileForm
+            onSubmit={onSubmit}
+            onSuccess={onSuccess}
+            onUpload={onUpload}
+            initialValues={initialValues}
+          >
+            <EditProfileFormActionBar />
+          </EditProfileForm>
+        </WithLoader>
       </Flex>
     </Flex>
   );

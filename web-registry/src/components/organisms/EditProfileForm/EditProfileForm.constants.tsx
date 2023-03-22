@@ -7,12 +7,13 @@ import { PartyType } from 'generated/graphql';
 import {
   DEFAULT_AVATAR,
   DEFAULT_BG,
+  DEFAULT_PROFILE_TYPE,
 } from 'pages/ProfileEdit/ProfileEdit.constants';
 
 import { EditProfileFormSchemaType } from './EditProfileForm.schema';
 
 export const editProfileFormInitialValues: EditProfileFormSchemaType = {
-  profileType: PartyType.User,
+  profileType: DEFAULT_PROFILE_TYPE,
   name: '',
   profileImage: DEFAULT_AVATAR,
   backgroundImage: DEFAULT_BG,

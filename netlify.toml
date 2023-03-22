@@ -23,7 +23,7 @@
   REACT_APP_SENTRY_ENVIRONMENT = "development"
   REACT_APP_TOUCAN_LINK="https://mumbai.polygonscan.com/tx"
   REACT_APP_BRIDGE_API_URI="https://toucan-bridge-staging.herokuapp.com"
-  REACT_APP_BRIDGE_CREDIT_CLASS_ID = "C46"
+  REACT_APP_BRIDGE_CREDIT_CLASS_ID = "C55"
   REACT_APP_BRIDGE="true"
 
 [context.deploy-preview.environment]
@@ -38,7 +38,7 @@
   REACT_APP_SENTRY_ENVIRONMENT = "development"
   REACT_APP_TOUCAN_LINK="https://mumbai.polygonscan.com/tx"
   REACT_APP_BRIDGE_API_URI="https://toucan-bridge-staging.herokuapp.com"
-  REACT_APP_BRIDGE_CREDIT_CLASS_ID = "C46"
+  REACT_APP_BRIDGE_CREDIT_CLASS_ID = "C55"
   REACT_APP_BRIDGE="true"
 
 [build.environment]

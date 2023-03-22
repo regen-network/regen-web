@@ -5,9 +5,9 @@ import UserIcon from 'web-components/lib/components/icons/UserIcon';
 import { PartyType } from 'generated/graphql';
 
 import {
-  DEFAULT_AVATAR,
-  DEFAULT_BG,
+  DEFAULT_PROFILE_BG,
   DEFAULT_PROFILE_TYPE,
+  DEFAULT_PROFILE_USER_AVATAR,
 } from 'pages/ProfileEdit/ProfileEdit.constants';
 
 import { EditProfileFormSchemaType } from './EditProfileForm.schema';
@@ -15,8 +15,8 @@ import { EditProfileFormSchemaType } from './EditProfileForm.schema';
 export const editProfileFormInitialValues: EditProfileFormSchemaType = {
   profileType: DEFAULT_PROFILE_TYPE,
   name: '',
-  profileImage: DEFAULT_AVATAR,
-  backgroundImage: DEFAULT_BG,
+  profileImage: DEFAULT_PROFILE_USER_AVATAR,
+  backgroundImage: DEFAULT_PROFILE_BG,
   description: '',
 };
 

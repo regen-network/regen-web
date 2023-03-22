@@ -315,7 +315,7 @@ export const getRoutes = ({
         <Route path="*" element={<NotFoundPage />} />
       </Route>
       <Route path="profile">
-        <Route path="edit" element={<ProfileEdit />} />
+        <Route path="edit" element={<KeplrRoute component={ProfileEdit} />} />
       </Route>
       <Route path="connect-wallet" element={<ConnectWalletPage />} />
     </Route>,

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
+import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
 import RadioCard from 'web-components/lib/components/atoms/RadioCard';
@@ -27,6 +28,7 @@ import {
   EditProfileFormSchemaType,
 } from './EditProfileForm.schema';
 import { validateEditProfileForm } from './EditProfileForm.utils';
+import { useUpdateDefaultAvatar } from './hooks/useUpdateDefaultAvatar';
 
 export interface EditProfileFormProps {
   initialValues?: EditProfileFormSchemaType;
@@ -85,6 +87,10 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
       form.setValue('backgroundImage', value);
     };
 
+    /* Effect */
+
+    useUpdateDefaultAvatar({ form, profileType, profileImage });
+
     return (
       <Form
         form={form}
@@ -98,8 +104,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
               await onSubmit(data);
               onSuccess && onSuccess();
             } catch (e) {
-              // setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
-              setErrorBannerTextAtom(String(e));
+              setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
             }
           }
         }}

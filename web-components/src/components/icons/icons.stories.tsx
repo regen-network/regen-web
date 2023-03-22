@@ -75,6 +75,7 @@ import ShadedCreditsIcon from './ShadedCreditsIcon';
 import ShieldIcon from './ShieldIcon';
 import SmallArrowIcon from './SmallArrowIcon';
 import DiscordIcon from './social/DiscordIcon';
+import WebsiteLinkIcon from './social/WebsiteLinkIcon';
 import FacebookIcon from './social/FacebookIcon';
 import GithubIcon from './social/GithubIcon';
 import InstagramIcon from './social/InstagramIcon';
@@ -84,6 +85,7 @@ import MediumIcon from './social/MediumIcon';
 import TelegramIcon from './social/TelegramIcon';
 import TwitterBadgeIcon from './social/TwitterBadgeIcon';
 import TwitterIcon from './social/TwitterIcon';
+import TwitterIcon2 from './social/TwitterIcon2';
 import YoutubeIcon from './social/YoutubeIcon';
 import SoilSampleIcon from './SoilSampleIcon';
 import { Spinner } from './Spinner';
@@ -267,6 +269,10 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<ShadedCreditsIcon />} label="ShadedCreditsIcon" />
     <LabeledIcon icon={<ShieldIcon />} label="ShieldIcon" />
     <LabeledIcon icon={<SmallArrowIcon />} label="SmallArrowIcon" />
+    <LabeledIcon
+      icon={<WebsiteLinkIcon sx={{ color: '#7BC796' }} />}
+      label="SocialLinkIcon"
+    />
     <LabeledIcon icon={<SoilSampleIcon />} label="SoilSampleIcon" />
     <LabeledIcon icon={<Spinner />} label="Spinner" />
     <LabeledIcon icon={<SuccessIcon />} label="SuccessIcon" />
@@ -281,6 +287,10 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<TrustIcon />} label="TrustIcon" />
     <LabeledIcon icon={<TrustDocumentIcon />} label="TrustDocumentIcon" />
     <LabeledIcon icon={<TwitterIcon color="blue" />} label="TwitterIcon" />
+    <LabeledIcon
+      icon={<TwitterIcon2 sx={{ color: '#7BC796' }} />}
+      label="TwitterIcon2"
+    />
     <LabeledIcon icon={<TwitterBadgeIcon />} label="TwitterBadgeIcon" />
     <LabeledIcon icon={<UsdcIcon />} label="UsdcIcon" />
     <LabeledIcon icon={<VerifiedIcon color="#000" />} label="VerifiedIcon" />

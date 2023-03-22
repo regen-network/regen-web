@@ -44,6 +44,7 @@ export const useLogin = ({ signArbitrary, setError, setAccountId }: Params) => {
             method: 'POST',
             credentials: 'include',
             headers: {
+              Accept: 'application/json',
               'Content-Type': 'application/json',
               'X-CSRF-TOKEN': token,
             },

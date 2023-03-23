@@ -166,7 +166,7 @@ const StoryForm: React.FC<React.PropsWithChildren<StoryFormProps>> = ({
   const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
-      uri: 'http://regen.network/ProjectPageShape',
+      uri: 'regen:ProjectPageShape',
     },
   });
 
@@ -209,7 +209,7 @@ const StoryForm: React.FC<React.PropsWithChildren<StoryFormProps>> = ({
             const report = await validate(
               graphData.shaclGraphByUri.graph,
               projectPageData,
-              'http://regen.network/ProjectPageStoryGroup',
+              'https://schema.regen.network#ProjectPageStoryGroup',
             );
             for (const result of report.results) {
               const path: string = result.path.value;

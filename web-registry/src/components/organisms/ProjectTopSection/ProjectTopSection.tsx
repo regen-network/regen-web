@@ -109,7 +109,7 @@ function ProjectTopSection({
     sanityCreditClassData,
     creditClassIdOrUrl:
       creditClass?.onChainId ??
-      creditClassVersion?.metadata?.['http://schema.org/url']?.['@value'] ??
+      creditClassVersion?.metadata?.['schema:url'] ??
       onChainProjectId?.split('-')?.[0], // if no offChain credit class
   });
 
@@ -149,7 +149,7 @@ function ProjectTopSection({
               ) : (
                 <ProjectTopLink
                   label="offset generation method"
-                  name={offsetGenerationMethod}
+                  name={offsetGenerationMethod?.[0]}
                 />
               )}
             </Box>

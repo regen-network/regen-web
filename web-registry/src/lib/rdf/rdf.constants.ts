@@ -4,7 +4,7 @@ export const QUDT_UNIT_MAP = {
 };
 
 export const DEFAULT_PROJECT_CONTEXT: { [key: string]: string } = {
-  regen: 'http://regen.network/',
+  regen: 'https://schema.regen.network#',
   schema: 'http://schema.org/',
   xsd: 'http://www.w3.org/2001/XMLSchema#',
   qudt: 'http://qudt.org/schema/qudt/',
@@ -13,7 +13,7 @@ export const DEFAULT_PROJECT_CONTEXT: { [key: string]: string } = {
 };
 
 export const UNANCHORED_PROJECT_CONTEXT = {
-  regen: 'http://regen.network/',
+  regen: 'https://schema.regen.network#',
   schema: 'http://schema.org/',
   'regen:previewPhoto': {
     '@type': 'schema:URL',
@@ -28,7 +28,7 @@ export const UNANCHORED_PROJECT_CONTEXT = {
 };
 
 export const ANCHORED_PROJECT_CONTEXT = {
-  regen: 'http://regen.network/',
+  regen: 'https://schema.regen.network#',
   schema: 'http://schema.org/',
   xsd: 'http://www.w3.org/2001/XMLSchema#',
   qudt: 'http://qudt.org/schema/qudt/',
@@ -76,6 +76,8 @@ export const COMPACTED_CONTEXT = {
   'regen:verificationReports': { '@container': '@list' },
   'regen:cfcCreditSerialNumbers': { '@container': '@list' },
   'schema:itemListElement': { '@container': '@list' },
+  'regen:additionalCertifications': { '@container': '@list' },
+  'regen:cfcVintageYear': { '@type': 'xsd:gYear' },
 
   // Generic unanchored and anchored project metadata
   ...UNANCHORED_PROJECT_CONTEXT,
@@ -114,4 +116,8 @@ export const COMPACTED_CONTEXT = {
   'regen:boundaries': {
     '@type': 'schema:URL',
   },
+
+  // Credit class version metadata
+  'regen:SDGs': { '@container': '@list' },
+  'regen:coBenefits': { '@container': '@list' },
 };

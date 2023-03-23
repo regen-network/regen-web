@@ -60,7 +60,7 @@ export const ProjectMetadataForm = ({
         const report = await validate(
           graphData.shaclGraphByUri.graph,
           projectPageData,
-          'http://regen.network/ProjectPageMetadataGroup',
+          'https://schema.regen.network#ProjectPageMetadataGroup',
         );
         for (const result of report.results) {
           const path: string = result.path.value;

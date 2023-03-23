@@ -32,7 +32,7 @@ function prepareVCSMetadata(
   const metadata: VCSBatchMetadataLD = {
     '@context': {
       schema: 'http://schema.org/',
-      regen: 'http://regen.network/',
+      regen: 'https://schema.regen.network#',
       'regen:additionalCertifications': { '@container': '@list' },
     },
     '@type': 'regen:C01-CreditBatch',

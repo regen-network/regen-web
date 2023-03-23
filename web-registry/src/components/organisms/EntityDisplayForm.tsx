@@ -363,7 +363,7 @@ const EntityDisplayForm: React.FC<
   const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
-      uri: 'http://regen.network/ProjectPageShape',
+      uri: 'regen:ProjectPageShape',
     },
   });
 
@@ -401,7 +401,7 @@ const EntityDisplayForm: React.FC<
                 const report = await validate(
                   graphData.shaclGraphByUri.graph,
                   value,
-                  'http://regen.network/ProjectPageEntityDisplayGroup',
+                  'https://schema.regen.network#ProjectPageEntityDisplayGroup',
                 );
                 for (const result of report.results) {
                   const path: string = result.path.value;
@@ -427,7 +427,7 @@ const EntityDisplayForm: React.FC<
               const report = await validate(
                 graphData.shaclGraphByUri.graph,
                 projectPageData,
-                'http://regen.network/ProjectPageEntityDisplayGroup',
+                'https://schema.regen.network#ProjectPageEntityDisplayGroup',
               );
               if (!report.conforms) {
                 // TODO: display the error banner in case of generic error

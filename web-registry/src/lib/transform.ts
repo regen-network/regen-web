@@ -31,7 +31,7 @@ export function buildIssuanceModalData(
       // Check credit vintage initial distribution to define the issuees
       if (
         creditVintage.initialDistribution[
-          'http://regen.network/projectDeveloperDistribution'
+          'https://schema.regen.network#projectDeveloperDistribution'
         ] > 0 &&
         project.partyByDeveloperId
       ) {
@@ -40,7 +40,7 @@ export function buildIssuanceModalData(
       }
       if (
         creditVintage.initialDistribution[
-          'http://regen.network/landStewardDistribution'
+          'https://schema.regen.network#landStewardDistribution'
         ] > 0 &&
         project.partyByStewardId
       ) {
@@ -49,7 +49,7 @@ export function buildIssuanceModalData(
       }
       if (
         creditVintage.initialDistribution[
-          'http://regen.network/landOwnerDistribution'
+          'https://schema.regen.network#landOwnerDistribution'
         ] > 0 &&
         project.partyByLandOwnerId
       ) {
@@ -64,13 +64,13 @@ export function buildIssuanceModalData(
       creditVintage.methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt;
 
     const bufferPoolDist =
-      creditVintage.metadata?.['http://regen.network/bufferDistribution']?.[
-        'http://regen.network/bufferPool'
-      ];
+      creditVintage.metadata?.[
+        'https://schema.regen.network#bufferDistribution'
+      ]?.['https://schema.regen.network#bufferPool'];
     const permanenceReversalBufferDist =
-      creditVintage.metadata?.['http://regen.network/bufferDistribution']?.[
-        'http://regen.network/permanenceReversalBuffer'
-      ];
+      creditVintage.metadata?.[
+        'https://schema.regen.network#bufferDistribution'
+      ]?.['https://schema.regen.network#permanenceReversalBuffer'];
 
     let numberOfCredits: number = creditVintage.units;
     let bufferPool: number | undefined;
@@ -120,16 +120,16 @@ export function buildIssuanceModalData(
       projectName: project.metadata?.['schema:name'] || '',
       standard: {
         documentId:
-          creditClassVersion?.metadata?.['http://regen.network/standard']?.[
-            'http://regen.network/documentId'
-          ],
-        name: creditClassVersion?.metadata?.['http://regen.network/standard']?.[
-          'http://schema.org/name'
-        ],
+          creditClassVersion?.metadata?.[
+            'https://schema.regen.network#standard'
+          ]?.['https://schema.regen.network#documentId'],
+        name: creditClassVersion?.metadata?.[
+          'https://schema.regen.network#standard'
+        ]?.['http://schema.org/name'],
         version:
-          creditClassVersion?.metadata?.['http://regen.network/standard']?.[
-            'http://schema.org/version'
-          ],
+          creditClassVersion?.metadata?.[
+            'https://schema.regen.network#standard'
+          ]?.['http://schema.org/version'],
       },
       creditClass: {
         documentId: creditClassVersion?.documentId,

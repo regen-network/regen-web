@@ -5,7 +5,7 @@ describe('validate', () => {
     const data = {
       '@context': {
         schema: 'http://schema.org/',
-        regen: 'http://regen.network/',
+        regen: 'https://schema.regen.network#',
       },
       '@type': 'regen:ProjectPlan',
       'schema:name': 'Awesome Project',
@@ -15,12 +15,12 @@ describe('validate', () => {
         '@id': '_:b0',
         'http://www.w3.org/ns/shacl#path': [
           {
-            '@id': 'http://regen.network/creditClass',
+            '@id': 'https://schema.regen.network#creditClass',
           },
         ],
         'http://www.w3.org/ns/shacl#class': [
           {
-            '@id': 'http://regen.network/CreditClass',
+            '@id': 'https://schema.regen.network#CreditClass',
           },
         ],
         'http://www.w3.org/ns/shacl#nodeKind': [
@@ -40,7 +40,7 @@ describe('validate', () => {
         ],
         'http://www.w3.org/ns/shacl#group': [
           {
-            '@id': 'http://regen.network/ProjectPlanCreditClassGroup',
+            '@id': 'https://schema.regen.network#ProjectPlanCreditClassGroup',
           },
         ],
       },
@@ -84,18 +84,18 @@ describe('validate', () => {
         ],
         'http://www.w3.org/ns/shacl#group': [
           {
-            '@id': 'http://regen.network/ProjectPlanBasicInfoGroup',
+            '@id': 'https://schema.regen.network#ProjectPlanBasicInfoGroup',
           },
         ],
       },
       {
-        '@id': 'http://regen.network/CreditClass',
+        '@id': 'https://schema.regen.network#CreditClass',
       },
       {
-        '@id': 'http://regen.network/ProjectPlan',
+        '@id': 'https://schema.regen.network#ProjectPlan',
       },
       {
-        '@id': 'http://regen.network/ProjectPlanBasicInfoGroup',
+        '@id': 'https://schema.regen.network#ProjectPlanBasicInfoGroup',
         '@type': ['http://www.w3.org/ns/shacl#PropertyGroup'],
         'http://www.w3.org/2000/01/rdf-schema#label': [
           {
@@ -110,7 +110,7 @@ describe('validate', () => {
         ],
       },
       {
-        '@id': 'http://regen.network/ProjectPlanCreditClassGroup',
+        '@id': 'https://schema.regen.network#ProjectPlanCreditClassGroup',
         '@type': ['http://www.w3.org/ns/shacl#PropertyGroup'],
         'http://www.w3.org/2000/01/rdf-schema#label': [
           {
@@ -125,14 +125,14 @@ describe('validate', () => {
         ],
       },
       {
-        '@id': 'http://regen.network/ProjectPlanShape',
+        '@id': 'https://schema.regen.network#ProjectPlanShape',
         '@type': [
           'http://www.w3.org/2000/01/rdf-schema#Class',
           'http://www.w3.org/ns/shacl#NodeShape',
         ],
         'http://www.w3.org/ns/shacl#targetClass': [
           {
-            '@id': 'http://regen.network/ProjectPlan',
+            '@id': 'https://schema.regen.network#ProjectPlan',
           },
         ],
         'http://www.w3.org/2000/01/rdf-schema#label': [
@@ -155,7 +155,7 @@ describe('validate', () => {
         ],
       },
       {
-        '@id': 'http://regen.network/creditClass',
+        '@id': 'https://schema.regen.network#creditClass',
       },
       {
         '@id': 'http://schema.org/name',
@@ -187,7 +187,7 @@ describe('validate', () => {
     const report2 = await validate(
       shapes,
       data,
-      'http://regen.network/ProjectPlanBasicInfoGroup',
+      'https://schema.regen.network#ProjectPlanBasicInfoGroup',
     );
     expect(report2.conforms).toEqual(true);
   });

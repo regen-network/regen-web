@@ -1,4 +1,4 @@
-import { URL } from 'lib/rdf/types';
+import { CompactedNameUrl } from 'lib/rdf/types';
 
 import { ApprovedMethodologies } from './methodology';
 
@@ -7,23 +7,18 @@ import { ApprovedMethodologies } from './methodology';
 export interface CreditClassMetadataLD {
   '@type': string;
   '@context': Context;
-  'schema:url': URL;
+  'schema:url': string;
   'schema:name': string;
   'schema:description': string;
   'regen:sectoralScope': string[];
-  'regen:sourceRegistry': NameURL;
+  'regen:sourceRegistry': CompactedNameUrl;
   'regen:verificationMethod': string;
   'regen:approvedMethodologies': ApprovedMethodologies;
   'regen:offsetGenerationMethod': string[];
   'regen:ecosystemType': string[];
   'regen:projectActivities': string[];
-  'regen:carbonOffsetStandard': NameURL;
+  'regen:carbonOffsetStandard': CompactedNameUrl;
   'regen:tokenizationSource': string;
-}
-
-interface NameURL {
-  'schema:url': URL;
-  'schema:name': string;
 }
 
 interface Context {

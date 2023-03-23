@@ -443,7 +443,7 @@ const CreditsTransfer: React.FC<
                   {vintage.projectByProjectId.partyByLandOwnerId.name}):{' '}
                   {100 *
                     vintage.initialDistribution[
-                      'http://regen.network/landOwnerDistribution'
+                      'https://schema.regen.network#landOwnerDistribution'
                     ] || 0}
                 </li>
               )}
@@ -453,7 +453,7 @@ const CreditsTransfer: React.FC<
                   {vintage.projectByProjectId.partyByDeveloperId.name}):{' '}
                   {100 *
                     vintage.initialDistribution[
-                      'http://regen.network/projectDeveloperDistribution'
+                      'https://schema.regen.network#projectDeveloperDistribution'
                     ] || 0}
                 </li>
               )}
@@ -463,7 +463,7 @@ const CreditsTransfer: React.FC<
                   {vintage.projectByProjectId.partyByStewardId.name}):{' '}
                   {100 *
                     vintage.initialDistribution[
-                      'http://regen.network/landStewardDistribution'
+                      'https://schema.regen.network#landStewardDistribution'
                     ] || 0}
                 </li>
               )}

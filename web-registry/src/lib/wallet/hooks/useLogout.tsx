@@ -2,9 +2,9 @@ import { useCallback } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import { UseStateSetter } from 'types/react/use-state';
+import { apiUri } from 'lib/apiUri';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 
-import { getAxiosInstance } from '../wallet.utils';
 import { DisconnectType } from './useDisconnect';
 
 type Params = {
@@ -18,7 +18,13 @@ export const useLogout = ({ disconnect, setError, setAccountId }: Params) => {
   const logout = useCallback(async (): Promise<void> => {
     try {
       if (disconnect && token) {
-        await getAxiosInstance(token).post(`/web3auth/logout`);
+        await fetch(`${apiUri}/web3auth/logout`, {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'X-CSRF-TOKEN': token,
+          },
+        });
         await disconnect();
         setAccountId(undefined);
       }

@@ -95,7 +95,7 @@ function CreditClassDetails({
           if (classInfo) {
             setOnChainClass(classInfo);
             const data = await getMetadata(classInfo.metadata, {
-              regen: 'https://schema.regen.network',
+              regen: 'https://schema.regen.network#',
             });
             setMetadata(data);
           }

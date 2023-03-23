@@ -12,7 +12,7 @@ const SideBarBox: React.FC<React.PropsWithChildren<unknown>> = ({
         bgcolor: 'primary.main',
         px: 5,
         py: 11,
-        my: 4,
+        my: { xs: 4, sm: 0 },
         minWidth: theme => ['0', theme.spacing(91.75)],
       }}
     >

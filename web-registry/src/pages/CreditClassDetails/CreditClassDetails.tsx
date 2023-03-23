@@ -131,6 +131,7 @@ function CreditClassDetails({
       {onChainClass && (
         <CreditClassDetailsSimple
           dbClass={dbCreditClassByOnChainId}
+          content={content}
           onChainClass={onChainClass}
           metadata={metadata}
           issuers={issuers}

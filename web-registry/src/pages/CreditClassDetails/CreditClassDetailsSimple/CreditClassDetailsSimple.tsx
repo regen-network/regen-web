@@ -6,8 +6,10 @@ import ReadMore from 'web-components/lib/components/read-more';
 import { Label, Title } from 'web-components/lib/components/typography';
 
 import { CreditClassByOnChainIdQuery } from 'generated/graphql';
+import { CreditClass } from 'generated/sanity-graphql';
 import { getAccountUrl } from 'lib/block-explorer';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
+import { getSanityImgSrc } from 'lib/imgSrc';
 
 import { AccountLink } from 'components/atoms/AccountLink';
 import { EcocreditsSection } from 'components/molecules';
@@ -22,15 +24,18 @@ import { useCreditClassDisplayName } from './hooks/useCreditClassDisplayName';
 interface CreditDetailsProps {
   dbClass?: CreditClassByOnChainIdQuery['creditClassByOnChainId'];
   onChainClass: ClassInfo;
+  content?: CreditClass;
   issuers?: string[];
   metadata?: Partial<CreditClassMetadataLD>;
 }
 
 const CreditClassDetailsSimple: React.FC<
   React.PropsWithChildren<CreditDetailsProps>
-> = ({ dbClass, onChainClass, issuers, metadata }) => {
+> = ({ dbClass, onChainClass, content, issuers, metadata }) => {
   const { classes: styles } = useCreditClassDetailsSimpleStyles();
   const displayName = useCreditClassDisplayName(onChainClass.id, metadata);
+  const image = content?.image;
+  const imageSrc = getSanityImgSrc(image);
 
   return (
     <Box
@@ -55,7 +60,21 @@ const CreditClassDetailsSimple: React.FC<
             }}
           >
             <Box sx={{ mb: 6 }}>
-              <Label size="sm" color="info.dark" mb={4}>
+              {image && (
+                <Box
+                  sx={{
+                    mb: { sm: 12.5 },
+                    mx: { xs: -4, sm: 0 },
+                  }}
+                >
+                  <img
+                    className={styles.image}
+                    alt={image.imageAlt || imageSrc}
+                    src={imageSrc}
+                  />
+                </Box>
+              )}
+              <Label size="sm" color="info.dark" mb={4} mt={{ xs: 9, sm: 0 }}>
                 credit class
               </Label>
               <Title variant="h1">{displayName}</Title>

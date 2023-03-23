@@ -15,7 +15,6 @@ const CancelButtonFooter = ({
 }: Props): JSX.Element => {
   return (
     <Grid container alignItems="center" justifyContent="flex-end">
-      (
       <Grid item>
         <Button
           onClick={onCancel}
@@ -30,7 +29,7 @@ const CancelButtonFooter = ({
           cancel
         </Button>
       </Grid>
-      )
+
       <Grid item>
         <ContainedButton {...props}>{label}</ContainedButton>
       </Grid>

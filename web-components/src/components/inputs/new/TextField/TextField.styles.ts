@@ -85,13 +85,12 @@ export const useTextFieldStyles = makeStyles<UseStylesParams>()(
           margin: 0,
         },
       },
-    },
-    firstOfType: {
+      // The styles below used to be triggered by a defaultStyle prop
+      // If you're migrating an old TextField with the defaultProp set to false you can do this instead:
+      // sx={{ mt: { xs: 0, sm: 0 }}}
       '&:first-of-type': {
         marginTop: 0,
       },
-    },
-    default: {
       [theme.breakpoints.up('sm')]: {
         marginTop: theme.typography.pxToRem(40),
       },

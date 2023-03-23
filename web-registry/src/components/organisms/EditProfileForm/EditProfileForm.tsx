@@ -163,7 +163,6 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
         <TextAreaField
           type="text"
           label="Description"
-          description="Describe any relevant background and experience. This info may be shown on the project page."
           rows={3}
           minRows={3}
           disabled={isSubmitting}
@@ -177,39 +176,36 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           <Label size="md" sx={{ textTransform: 'none', mb: 2.5 }}>
             {LINKS_LABEL}
           </Label>
-          <Box>
-            <TextField
-              type="text"
-              label=""
-              placeholder="yourwebsite.com"
-              {...form.register('websiteLink')}
-              helperText={errors?.websiteLink?.message}
-              error={!!errors?.websiteLink}
-              startAdornment={
-                <WebsiteLinkIcon sx={{ fontSize: 40, color: 'grey.100' }} />
-              }
-              sx={{
-                mb: 5,
-                '& .MuiInputBase-root': { pl: { sm: '4px !important' } },
-              }}
-            />
-          </Box>
-          <Box>
-            <TextField
-              type="text"
-              label=""
-              placeholder="yourtwitterhandle"
-              {...form.register('twitterLink')}
-              helperText={errors?.twitterLink?.message}
-              error={!!errors?.twitterLink}
-              startAdornment={
-                <TwitterIcon2 sx={{ fontSize: 40, color: 'grey.100' }} />
-              }
-              sx={{
-                '& .MuiInputBase-root': { pl: { sm: '4px !important' } },
-              }}
-            />
-          </Box>
+          <TextField
+            type="text"
+            label=""
+            placeholder="yourwebsite.com"
+            {...form.register('websiteLink')}
+            helperText={errors?.websiteLink?.message}
+            error={!!errors?.websiteLink}
+            startAdornment={
+              <WebsiteLinkIcon sx={{ fontSize: 40, color: 'grey.100' }} />
+            }
+            sx={{
+              mb: 5,
+              '& .MuiInputBase-root': { pl: { sm: '3px' } },
+            }}
+          />
+          <TextField
+            type="text"
+            label=""
+            placeholder="yourtwitterhandle"
+            {...form.register('twitterLink')}
+            helperText={errors?.twitterLink?.message}
+            error={!!errors?.twitterLink}
+            startAdornment={
+              <TwitterIcon2 sx={{ fontSize: 40, color: 'grey.100' }} />
+            }
+            sx={{
+              mt: { xs: 0, sm: 0 },
+              '& .MuiInputBase-root': { pl: { sm: '3px' } },
+            }}
+          />
         </Box>
 
         {children}

@@ -8,6 +8,8 @@ export const editProfileFormSchema = z.object({
   profileImage: z.string(),
   backgroundImage: z.string(),
   description: z.string().max(160).optional(),
+  websiteLink: z.string().optional(),
+  twitterLink: z.string().optional(),
 });
 
 export type EditProfileFormSchemaType = z.infer<typeof editProfileFormSchema>;

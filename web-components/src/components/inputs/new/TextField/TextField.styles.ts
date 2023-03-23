@@ -92,7 +92,6 @@ export const useTextFieldStyles = makeStyles<UseStylesParams>()(
           },
         },
       },
-      // '& input, & select.MuiSelect-select': {},
       '& input[type=number]': {
         '&::-webkit-inner-spin-button, &::-webkit-outer-spin-button': {
           WebkitAppearance: 'none',

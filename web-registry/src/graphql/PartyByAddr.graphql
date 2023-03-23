@@ -9,6 +9,8 @@ query partyByAddr($addr: String!) {
       bgImage
       description
       accountId
+      websiteLink
+      twitterLink
     }
   }
 }

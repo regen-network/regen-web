@@ -60,21 +60,25 @@ const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
           inputProps: { ...customInputProps },
         }}
         label={
-          <>
-            <Box
-              sx={{
-                display: 'inline-block',
-                width: optional ? 'inherit' : '100%',
-              }}
-            >
-              {label}
-            </Box>
-            {description && (
-              <Box sx={{ display: 'flex', mt: 1 }}>
-                <Body size="sm">{description}</Body>
-              </Box>
-            )}
-          </>
+          !!label || !!description ? (
+            <>
+              {label && (
+                <Box
+                  sx={{
+                    display: 'inline-block',
+                    width: optional ? 'inherit' : '100%',
+                  }}
+                >
+                  {label}
+                </Box>
+              )}
+              {description && (
+                <Box sx={{ display: 'flex', mt: 1 }}>
+                  <Body size="sm">{description}</Body>
+                </Box>
+              )}
+            </>
+          ) : undefined
         }
         InputLabelProps={{
           classes: labelClasses,

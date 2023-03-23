@@ -29,6 +29,7 @@ import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/
 
 import { usePartyInfos } from './hooks/usePartyInfos';
 import {
+  DEFAULT_NAME,
   DEFAULT_PROFILE_AVATARS,
   DEFAULT_PROFILE_BG,
   DEFAULT_PROFILE_TYPE,
@@ -60,13 +61,15 @@ export const ProfileEdit = () => {
 
   const initialValues: EditProfileFormSchemaType = useMemo(
     () => ({
-      name: String(party?.name),
+      name: String(party?.name ? party?.name : DEFAULT_NAME),
       description: String(party?.description?.trimEnd() ?? ''),
       profileImage: String(party?.image ? party?.image : defaultAvatar),
       backgroundImage: String(
         party?.bgImage ? party?.bgImage : DEFAULT_PROFILE_BG,
       ),
       profileType: party?.type ?? DEFAULT_PROFILE_TYPE,
+      twitterLink: String(party?.twitterLink ?? ''),
+      websiteLink: String(party?.websiteLink ?? ''),
     }),
     [party, defaultAvatar],
   );
@@ -74,8 +77,15 @@ export const ProfileEdit = () => {
   /* callbacks */
   const onSubmit = useCallback(
     async (values: EditProfileFormSchemaType) => {
-      const { profileType, profileImage, backgroundImage, name, description } =
-        values;
+      const {
+        profileType,
+        profileImage,
+        backgroundImage,
+        name,
+        description,
+        twitterLink,
+        websiteLink,
+      } = values;
       const isDefaultAvatar = DEFAULT_PROFILE_AVATARS.includes(profileImage);
       const isDefaultBg = DEFAULT_PROFILE_BG === backgroundImage;
       await updatePartyById({
@@ -88,6 +98,8 @@ export const ProfileEdit = () => {
               image: isDefaultAvatar ? undefined : profileImage,
               bgImage: isDefaultBg ? undefined : backgroundImage,
               type: profileType,
+              twitterLink,
+              websiteLink,
             },
           },
         },

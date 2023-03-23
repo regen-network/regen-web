@@ -1,5 +1,7 @@
 import React from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
+import { Box } from '@mui/material';
+import MuiTextField from '@mui/material/TextField';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
@@ -10,6 +12,7 @@ import { ImageFieldBackground } from 'web-components/lib/components/inputs/new/I
 import { TextAreaField } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField';
 import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
+import { Label } from 'web-components/lib/components/typography';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
@@ -18,6 +21,7 @@ import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
 import {
   editProfileFormInitialValues,
+  LINKS_LABEL,
   PROFILE_BG_ASPECT_RATIO,
   PROFILE_TYPE,
   radioCardItems,
@@ -168,6 +172,32 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
         >
           <TextAreaFieldChartCounter value={description} />
         </TextAreaField>
+        <Box sx={{ mt: 6 }}>
+          <Label size="md" sx={{ textTransform: 'none', mb: 2.5 }}>
+            {LINKS_LABEL}
+          </Label>
+          <Box>
+            <TextField
+              type="text"
+              label=""
+              placeholder="yourwebsite.com"
+              {...form.register('websiteLink')}
+              helperText={errors?.websiteLink?.message}
+              error={!!errors?.websiteLink}
+              sx={{ mb: 5 }}
+            />
+          </Box>
+          <Box>
+            <TextField
+              type="text"
+              label=""
+              placeholder="yourtwitterhandle"
+              {...form.register('twitterLink')}
+              helperText={errors?.twitterLink?.message}
+              error={!!errors?.twitterLink}
+            />
+          </Box>
+        </Box>
 
         {children}
       </Form>

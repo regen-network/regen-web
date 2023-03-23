@@ -111,7 +111,8 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
         sx={{
           border: theme => `1px solid ${theme.palette.info.light}`,
           borderRadius: '5px',
-          p: 10,
+          py: 10,
+          px: { xs: 2.5, sm: 10 },
         }}
       >
         <RadioCard

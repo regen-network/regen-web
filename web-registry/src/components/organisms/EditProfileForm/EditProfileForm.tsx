@@ -1,11 +1,12 @@
 import React from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
 import { Box } from '@mui/material';
-import MuiTextField from '@mui/material/TextField';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
 import RadioCard from 'web-components/lib/components/atoms/RadioCard';
+import TwitterIcon2 from 'web-components/lib/components/icons/social/TwitterIcon2';
+import WebsiteLinkIcon from 'web-components/lib/components/icons/social/WebsiteLinkIcon';
 import { ImageField } from 'web-components/lib/components/inputs/new/ImageField/ImageField';
 import { ImageFieldAvatar } from 'web-components/lib/components/inputs/new/ImageField/ImageField.Avatar';
 import { ImageFieldBackground } from 'web-components/lib/components/inputs/new/ImageField/ImageField.Background';
@@ -184,7 +185,13 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
               {...form.register('websiteLink')}
               helperText={errors?.websiteLink?.message}
               error={!!errors?.websiteLink}
-              sx={{ mb: 5 }}
+              startAdornment={
+                <WebsiteLinkIcon sx={{ fontSize: 40, color: 'grey.100' }} />
+              }
+              sx={{
+                mb: 5,
+                '& .MuiInputBase-root': { pl: { sm: '4px !important' } },
+              }}
             />
           </Box>
           <Box>
@@ -195,6 +202,12 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
               {...form.register('twitterLink')}
               helperText={errors?.twitterLink?.message}
               error={!!errors?.twitterLink}
+              startAdornment={
+                <TwitterIcon2 sx={{ fontSize: 40, color: 'grey.100' }} />
+              }
+              sx={{
+                '& .MuiInputBase-root': { pl: { sm: '4px !important' } },
+              }}
             />
           </Box>
         </Box>

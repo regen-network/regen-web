@@ -54,19 +54,6 @@ export const useTextFieldStyles = makeStyles<UseStylesParams>()(
           color: theme.palette.error.main,
         },
       },
-      '& .MuiSvgIcon-root': {
-        width: theme.spacing(3.25),
-        height: theme.spacing(2.5),
-        top: 'calc(50% - 5px)',
-        [theme.breakpoints.up('sm')]: {
-          right: theme.spacing(3.75),
-        },
-        [theme.breakpoints.down('sm')]: {
-          right: theme.spacing(3.25),
-        },
-        position: 'absolute',
-        pointerEvents: 'none',
-      },
       '& .MuiInputBase-root': {
         backgroundColor: theme.palette.primary.main,
         border: `1px solid ${theme.palette.grey[100]}`,

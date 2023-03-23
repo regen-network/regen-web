@@ -5,9 +5,10 @@ import { COMPACTED_CONTEXT } from './rdf.constants';
 
 export const jsonLdCompact = async (
   data: JsonLdDocument,
+  context?: object,
 ): Promise<NodeObject> => {
   return await jsonld.compact(
     data,
-    JSON.parse(JSON.stringify(COMPACTED_CONTEXT)),
+    JSON.parse(JSON.stringify({ ...COMPACTED_CONTEXT, ...context })),
   );
 };

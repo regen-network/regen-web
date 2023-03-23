@@ -3,11 +3,14 @@ import axios from 'axios';
 import getApiUri from 'lib/apiUri';
 import { jsonLdCompact } from 'lib/rdf';
 
-export const getMetadata = async (iri?: string): Promise<any> => {
+export const getMetadata = async (
+  iri?: string,
+  context?: object,
+): Promise<any> => {
   if (!iri) return null;
   try {
     const { data } = await axios.get(`${getApiUri()}/metadata-graph/${iri}`);
-    return await jsonLdCompact(data);
+    return await jsonLdCompact(data, context);
   } catch (err) {
     return null;
   }

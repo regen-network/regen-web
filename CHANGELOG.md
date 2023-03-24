@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/regen-network/regen-web/compare/v1.2.1...v1.2.2) (2023-03-24)
+
+### Bug Fixes
+
+- missing # ([2fa962d](https://github.com/regen-network/regen-web/commit/2fa962d3d570b402b15c1577fb8c965a0d42cfda))
+- use new regen IRI for compacting credit class metadata ([a2950bd](https://github.com/regen-network/regen-web/commit/a2950bd6b57501137f8304008f0728b8a18012e9))
+
 ## [1.2.1](https://github.com/regen-network/regen-web/compare/v1.2.0...v1.2.1) (2023-02-28)
 
 ### Bug Fixes

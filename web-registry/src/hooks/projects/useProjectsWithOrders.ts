@@ -3,6 +3,7 @@ import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1
 import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';
+import { client as sanityClient } from 'lib/clients/sanity';
 import { GECKO_EEUR_ID, GECKO_USDC_ID } from 'lib/coingecko';
 import { normalizeProjectsWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
@@ -13,6 +14,7 @@ import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQ
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
+import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { ProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders';
@@ -91,6 +93,11 @@ export function useProjectsWithOrders({
     }),
   );
 
+  // AllCreditClasses
+  const { data: creditClassData } = useQuery(
+    getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+  );
+
   /* Normalization/Filtering/Sorting */
 
   let projects: ProjectInfo[] | undefined;
@@ -110,6 +117,7 @@ export function useProjectsWithOrders({
       random,
       skippedProjectId,
     }) ?? [];
+
   const lastRandomProjects = useLastRandomProjects({
     random,
     selectedProjects,
@@ -124,6 +132,7 @@ export function useProjectsWithOrders({
     },
     userAddress: wallet?.address,
   });
+
   const sortedProjects = sortProjects(projectsWithOrderData, sort).slice(
     offset,
     limit ? offset + limit : undefined,
@@ -156,6 +165,7 @@ export function useProjectsWithOrders({
     projectsWithOrderData: sortedProjects,
     metadatas,
     projectPageMetadatas,
+    sanityCreditClassData: creditClassData,
   });
 
   return {

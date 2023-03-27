@@ -86,6 +86,9 @@ async function prepareMsg(
       issuanceRecipient.retirementJurisdiction =
         recipient.retirementJurisdiction;
     }
+    if (recipient.note) {
+      issuanceRecipient.retirementReason = recipient.note;
+    }
     return issuanceRecipient as BatchIssuance;
   });
 

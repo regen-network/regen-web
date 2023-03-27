@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactPlayerLazy from 'react-player/lazy';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useApolloClient } from '@apollo/client';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { Box, CardMedia, useMediaQuery, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
@@ -13,14 +14,13 @@ import { Photo } from 'web-components/lib/components/cards/ReviewCard/ReviewCard
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 
-import { graphqlClient } from 'lib/clients/graphqlClient';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 import {
   getAnchoredProjectMetadata,
   getUnanchoredProjectMetadata,
+  QUDT_UNIT_MAP,
   qudtUnit,
-  qudtUnitMap,
 } from 'lib/rdf';
 
 import { Link } from '../../components/atoms';
@@ -45,6 +45,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { setDeliverTxResponse } = useCreateProjectContext();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const graphqlClient = useApolloClient();
   const { data, isLoading } = useQuery(
     getProjectByIdQuery({
       client: graphqlClient,
@@ -135,7 +136,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
         <ItemDisplay name="Size">
           {metadata?.['regen:projectSize']?.['qudt:numericValue'] || '-'}{' '}
           {
-            qudtUnitMap[
+            QUDT_UNIT_MAP[
               metadata?.['regen:projectSize']?.['qudt:unit'] as qudtUnit
             ]
           }

@@ -1,9 +1,8 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { useAtom } from 'jotai';
 
-import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import WalletModal from 'web-components/lib/components/modal/wallet-modal';
 import { WalletModalState } from 'web-components/lib/components/modal/wallet-modal/WalletModal.types';
@@ -19,13 +18,20 @@ import { useNavigateToMobileUrl } from './hooks/useNavigateToMobileUrl';
 import { useResetModalOnConnect } from './hooks/useResetModalOnConnect';
 import { MobileSigningModal } from './WalletButton.SigningModal';
 import { useWalletButtonStyles } from './WalletButton.styles';
+import { ButtonSize } from './WalletButton.types';
 import { getMobileConnectUrl, getWalletsUiConfig } from './WalletButton.utils';
 
 import Keplr from 'assets/keplr.png';
 
-const WalletButton: React.FC = () => {
+type Props = {
+  size?: ButtonSize;
+};
+
+const WalletButton = ({ size = 'small' }: Props) => {
   const styles = useWalletButtonStyles();
-  const { wallet, connect, loaded, error, walletConnectUri } = useWallet();
+  const { accountId, wallet, connect, loaded, walletConnectUri, login } =
+    useWallet();
+
   const { bankClient } = useLedger();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isWaitingForSigning, setIsWaitingForSigningAtom] = useAtom(
@@ -44,10 +50,15 @@ const WalletButton: React.FC = () => {
     }),
   );
 
-  const onButtonClick = useCallback(
-    (): void => setIsModalOpen(true),
-    [setIsModalOpen],
-  );
+  const onButtonClick = useCallback(async (): Promise<void> => {
+    if (!wallet?.address) {
+      setIsModalOpen(true);
+    } else if (!accountId && login) {
+      // this can happen in case the session cookie expired
+      await login(wallet);
+    }
+  }, [accountId, login, wallet]);
+
   const onModalClose = useCallback((): void => {
     setIsModalOpen(false);
     setModalState('wallet-select');
@@ -79,14 +90,11 @@ const WalletButton: React.FC = () => {
     <>
       <div className={styles.root}>
         <>
-          {!wallet?.address && loaded && (
-            <OutlinedButton onClick={onButtonClick} size="small">
+          {!(accountId && wallet?.address) && loaded && (
+            <OutlinedButton onClick={onButtonClick} size={size}>
               <img className={styles.icon} src={Keplr} alt="keplr" />
-              connect wallet
+              login
             </OutlinedButton>
-          )}
-          {error && (
-            <ErrorBanner text="Please install Keplr extension to use Regen Ledger features" />
           )}
         </>
       </div>

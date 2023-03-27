@@ -53,6 +53,7 @@ export const getSellOrdersExtendedQuery = ({
     const simplePriceData = await getFromCacheOrFetch<FetchSimplePriceResponse>(
       {
         query: getSimplePriceQuery({}),
+        reactQueryClient,
       },
     );
 

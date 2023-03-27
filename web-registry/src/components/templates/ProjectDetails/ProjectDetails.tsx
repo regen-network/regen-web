@@ -1,17 +1,18 @@
 import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useApolloClient } from '@apollo/client';
 import { Box, Skeleton, useTheme } from '@mui/material';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import { useQuery } from '@tanstack/react-query';
+import { useSetAtom } from 'jotai';
 
-import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 
 import { Project } from 'generated/graphql';
 import { Maybe } from 'graphql/jsutils/Maybe';
-import { graphqlClient } from 'lib/clients/graphqlClient';
+import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
@@ -21,12 +22,12 @@ import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllC
 import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
 import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
 import { getDisplayParty } from 'lib/transform';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
-import { useResetErrorBanner } from 'pages/Marketplace/Storefront/hooks/useResetErrorBanner';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { usePaginatedBatchesByProject } from 'hooks/batches/usePaginatedBatchesByProject';
@@ -54,7 +55,10 @@ import {
 function ProjectDetails(): JSX.Element {
   const theme = useTheme();
   const { projectId } = useParams();
-  const { wallet, ecocreditClient } = useLedger();
+  const { ecocreditClient } = useLedger();
+  const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
+  const { wallet } = useWallet();
+  const graphqlClient = useApolloClient();
 
   const { data: sanityProjectPageData } = useQuery(
     getAllProjectPageQuery({ sanityClient, enabled: !!sanityClient }),
@@ -77,9 +81,6 @@ function ProjectDetails(): JSX.Element {
 
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
-  const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
-
-  useResetErrorBanner({ displayErrorBanner, setDisplayErrorBanner });
 
   // Tx client
   const { api } = useLedger();
@@ -245,17 +246,17 @@ function ProjectDetails(): JSX.Element {
       )}
 
       <SellOrdersActionsBar
-        isSellButtonDisabled={isSellFlowDisabled}
-        isBuyButtonDisabled={isBuyFlowDisabled}
-        onSellButtonClick={
-          wallet?.address
-            ? () => setIsSellFlowStarted(true)
-            : () => setDisplayErrorBanner(true)
+        isSellButtonDisabled={isSellFlowDisabled && Boolean(wallet?.address)}
+        isBuyButtonDisabled={isBuyFlowDisabled && Boolean(wallet?.address)}
+        onSellButtonClick={() =>
+          isSellFlowDisabled
+            ? setConnectWalletModal(atom => void (atom.open = true))
+            : setIsSellFlowStarted(true)
         }
-        onBuyButtonClick={
-          wallet?.address
-            ? () => setIsBuyFlowStarted(true)
-            : () => setDisplayErrorBanner(true)
+        onBuyButtonClick={() =>
+          isBuyFlowDisabled
+            ? setConnectWalletModal(atom => void (atom.open = true))
+            : setIsBuyFlowStarted(true)
         }
         onChainProjectId={onChainProjectId}
         projectName={anchoredMetadata?.['schema:name']}
@@ -342,12 +343,6 @@ function ProjectDetails(): JSX.Element {
         setIsFlowStarted={setIsSellFlowStarted}
         credits={creditsWithProjectName}
       />
-      {displayErrorBanner && (
-        <ErrorBanner
-          text="Please install Keplr extension to use Regen Ledger features"
-          onClose={() => setDisplayErrorBanner(false)}
-        />
-      )}
     </Box>
   );
 }

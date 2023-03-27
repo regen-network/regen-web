@@ -11,6 +11,6 @@ export type ReactQueryProjectByOnChainIdResponse =
   QueryObserverOptions<ApolloQueryResult<ProjectByOnChainIdQuery> | null>;
 
 export type ReactQueryProjectByOnChainIdProps = {
-  client: ApolloClient<object>;
+  client: ApolloClient<unknown>;
 } & ProjectByOnChainIdQueryVariables &
   ReactQueryBuilderResponse<ReactQueryProjectByOnChainIdResponse>;

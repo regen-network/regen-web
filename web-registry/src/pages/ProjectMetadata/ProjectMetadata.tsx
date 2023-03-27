@@ -1,14 +1,16 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useApolloClient } from '@apollo/client';
+import { useQuery } from '@tanstack/react-query';
 import { omit } from 'lodash';
 
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
+import { getShaclGraphByUriQuery } from 'lib/queries/react-query/registry-server/graphql/getShaclGraphByUriQuery/getShaclGraphByUriQuery';
 import { getProjectShapeIri } from 'lib/rdf';
 
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
-import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { isVCSCreditClass } from '../../lib/ecocredit/api';
 import { useProjectEditContext } from '../ProjectEdit';
 import { useProjectMetadataSubmit } from './hooks/useProjectMetadataSubmit';
@@ -19,6 +21,7 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
   () => {
     const navigate = useNavigate();
     const { projectId } = useParams();
+    const graphqlClient = useApolloClient();
     const { isEdit, onChainProject, projectEditSubmit } =
       useProjectEditContext();
     const { metadata, metadataSubmit, offChainProject } =
@@ -34,15 +37,17 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
       metadata,
       metadataSubmit,
     });
-    const creditClassId =
-      offChainProject?.creditClassByCreditClassId?.onChainId;
+    const creditClassId = offChainProject?.metadata?.['regen:creditClassId'];
     const isVCS = !!creditClassId && isVCSCreditClass(creditClassId);
-    const { data: graphData } = useShaclGraphByUriQuery({
-      skip: !creditClassId,
-      variables: {
-        uri: getProjectShapeIri(creditClassId),
-      },
-    });
+
+    const uri = creditClassId ? getProjectShapeIri(creditClassId) : '';
+    const { data } = useQuery(
+      getShaclGraphByUriQuery({
+        client: graphqlClient,
+        uri,
+        enabled: !!uri,
+      }),
+    );
 
     let customMetadata: Partial<AnchoredProjectMetadataLD> | undefined;
     if (metadata) {
@@ -58,7 +63,8 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
         <ProjectMetadataSelectedForm
           submit={projectMetadataSubmit}
           metadata={customMetadata}
-          graphData={graphData}
+          graphData={data?.data}
+          creditClassId={creditClassId}
           isVCS={isVCS}
           onNext={navigateNext}
           onPrev={() => navigate(`/project-pages/${projectId}/media`)}

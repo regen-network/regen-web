@@ -7,6 +7,7 @@ import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
 import { PageViewTracking } from 'components/molecules/PageViewTracking';
 
 import { ScrollToTop } from '../../atoms';
+import { RegistryLayoutConnectWalletModal } from './RegistryLayout.ConnectWalletModal';
 import { RegistryLayoutErrorBannerModal } from './RegistryLayout.ErrorBanner';
 import { RegistryLayoutFooter } from './RegistryLayout.Footer';
 import { RegistryLayoutHeader } from './RegistryLayout.Header';
@@ -30,6 +31,7 @@ const RegistryLayout: React.FC = () => {
       <RegistryLayoutTxSuccessfulModal />
       <RegistryLayoutProcessingModal />
       <RegistryLayoutErrorBannerModal />
+      <RegistryLayoutConnectWalletModal />
     </>
   );
 };

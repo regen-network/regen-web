@@ -1,10 +1,12 @@
 import { Box, styled, SxProps } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
-import { DefaultTheme as Theme } from '@mui/styles';
+import ReactHtmlParser from 'html-react-parser';
 import { makeStyles } from 'tss-react/mui';
 
+import { Theme } from '../../theme/muiTheme';
 import { parseText } from '../../utils/textParser';
-import { Title } from '../typography';
+import { BlockContent } from '../block-content';
+import { Body, Title } from '../typography';
 
 export interface SectionProps {
   children?: any;
@@ -18,9 +20,11 @@ export interface SectionProps {
   sx?: {
     root?: SxProps<Theme>;
     title?: SxProps<Theme>;
+    description?: SxProps<Theme>;
   };
   title?: string | JSX.Element;
   titleVariant?: Variant;
+  description?: string | JSX.Element;
   withSlider?: boolean;
   isPaddingTopMobile?: boolean;
   titleLineHeight?: string;
@@ -114,6 +118,7 @@ const Section = ({
   titleVariant = 'h2',
   titleAlign = 'center',
   title,
+  description,
   topRight,
   withSlider = false,
   visibleOverflow = false,
@@ -153,6 +158,22 @@ const Section = ({
             {parseText(title)}
           </Title>
           {titleAlign === 'left' && topRight}
+          {description && (
+            <Body
+              size="xl"
+              mobileSize="lg"
+              as="p"
+              pt={[3.25, 7.75]}
+              textAlign="center"
+              sx={sx?.description}
+            >
+              {typeof description === 'string' ? (
+                ReactHtmlParser(description)
+              ) : (
+                <BlockContent content={description} />
+              )}
+            </Body>
+          )}
         </div>
       )}
       {children}

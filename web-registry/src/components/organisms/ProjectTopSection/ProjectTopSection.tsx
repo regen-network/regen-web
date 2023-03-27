@@ -109,7 +109,7 @@ function ProjectTopSection({
     sanityCreditClassData,
     creditClassIdOrUrl:
       creditClass?.onChainId ??
-      creditClassVersion?.metadata?.['http://schema.org/url']?.['@value'] ??
+      creditClassVersion?.metadata?.['schema:url'] ??
       onChainProjectId?.split('-')?.[0], // if no offChain credit class
   });
 
@@ -149,7 +149,7 @@ function ProjectTopSection({
               ) : (
                 <ProjectTopLink
                   label="offset generation method"
-                  name={offsetGenerationMethod}
+                  name={offsetGenerationMethod?.[0]}
                 />
               )}
             </Box>
@@ -185,18 +185,20 @@ function ProjectTopSection({
               {primaryDescription}
             </Body>
           )}
-          <Link to={`/credit-classes/${creditClassSanity?.path}`}>
-            <CreditClassCard
-              title={<BlockContent content={creditClassSanity?.nameRaw} />}
-              description={
-                <BlockContent
-                  content={creditClassSanity?.shortDescriptionRaw}
-                />
-              }
-              imgSrc={getSanityImgSrc(creditClassSanity?.image)}
-              sx={{ mt: [2, 4], py: [2, 6] }}
-            />
-          </Link>
+          {creditClassSanity && (
+            <Link to={`/credit-classes/${creditClassSanity.path}`}>
+              <CreditClassCard
+                title={<BlockContent content={creditClassSanity.nameRaw} />}
+                description={
+                  <BlockContent
+                    content={creditClassSanity.shortDescriptionRaw}
+                  />
+                }
+                imgSrc={getSanityImgSrc(creditClassSanity.image)}
+                sx={{ mt: [2, 4], py: [2, 6] }}
+              />
+            </Link>
+          )}
           {isAnchoredProjectMetadata(projectMetadata, onChainProjectId) && (
             <ProjectPageMetadata metadata={projectMetadata} />
           )}

@@ -1,60 +1,39 @@
-import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { makeStyles } from 'tss-react/mui';
+import { useQuery } from '@tanstack/react-query';
 
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import FixedFooter from 'web-components/lib/components/fixed-footer';
-import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
-import Modal from 'web-components/lib/components/modal';
 import SEO from 'web-components/lib/components/seo';
+
+import { getAllBuyersPageQuery } from 'lib/queries/react-query/sanity/getAllBuyersPageQuery/getAllBuyersPageQuery';
+
+import WithLoader from 'components/atoms/WithLoader';
 
 import buyersHero from '../../assets/buyers-top.jpg';
 import {
-  FeaturedSection,
   HeroAction,
   HeroTitle,
   ImageGridSection,
+  ImageItemsSection,
 } from '../../components/molecules';
-import { MoreProjectsSection } from '../../components/organisms';
-import { useMoreProjectsQuery } from '../../generated/graphql';
-import { useAllBuyersPageQuery } from '../../generated/sanity-graphql';
-import { client } from '../../lib/clients/sanity';
-
-const useStyles = makeStyles()(theme => ({
-  heroMain: {
-    maxWidth: theme.typography.pxToRem(775),
-    paddingBottom: theme.spacing(20),
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(12),
-      '& h1': {
-        lineHeight: '130%',
-      },
-      '& h4': {
-        marginTop: theme.spacing(3),
-      },
-      '& p': {
-        fontSize: theme.typography.pxToRem(18),
-        lineHeight: '160%',
-      },
-    },
-  },
-  bottomHeroSection: {
-    paddingTop: 0,
-  },
-  title: {
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(32),
-    },
-  },
-}));
+import { client as sanityClient } from '../../lib/clients/sanity';
+import { BuyersEcologicalCreditCardsSection } from './Buyers.EcologicalCreditCardsSection';
+import { BuyersFeaturedProjectsSection } from './Buyers.FeaturedProjectsSection';
+import { BuyersPartnersSection } from './Buyers.PartnersSection';
+import { useBuyersStyles } from './Buyers.styles';
+import { useFetchProjectsByIds } from './hooks/useFetchProjectsByIds';
 
 const BuyersPage = (): JSX.Element => {
-  const { classes: styles } = useStyles();
+  const { classes: styles } = useBuyersStyles();
   const location = useLocation();
-  const [open, setOpen] = useState(false);
-  const { data } = useAllBuyersPageQuery({ client });
+  const { data, isLoading: isLoadingPage } = useQuery(
+    getAllBuyersPageQuery({ sanityClient }),
+  );
   const content = data?.allBuyersPage?.[0];
-  const { data: projectsData } = useMoreProjectsQuery();
+  const featuredProjectIds = content?.featuredProjectCardsSection?.cards?.map(
+    card => card?.project?.projectId ?? '',
+  );
+  const { projects, isLoadingProjects } = useFetchProjectsByIds({
+    projectIds: featuredProjectIds,
+  });
 
   const siteMetadata = {
     title: 'For Buyers',
@@ -66,14 +45,6 @@ const BuyersPage = (): JSX.Element => {
     imageUrl: content?.metadata?.openGraphImage?.asset?.url || '',
   };
 
-  const handleOpen = (): void => {
-    setOpen(true);
-  };
-
-  const handleClose = (): void => {
-    setOpen(false);
-  };
-
   return (
     <>
       <SEO
@@ -83,61 +54,83 @@ const BuyersPage = (): JSX.Element => {
         imageUrl={siteMetadata.imageUrl}
         siteMetadata={siteMetadata}
       />
-      <HeroTitle
-        classes={{ main: styles.heroMain }}
-        isBanner
-        title={content?.heroSection?.title}
-        descriptionRaw={content?.heroSection?.descriptionRaw}
-        tooltipText={content?.heroSection?.tooltipText}
-        img={buyersHero}
-        linearGradient="linear-gradient(180deg, rgba(255, 249, 238, 0.74) 0%, rgba(255, 249, 238, 0) 27.6%), linear-gradient(209.5deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%)"
-      />
-      {content?.imageGridSection && (
-        <ImageGridSection content={content?.imageGridSection} />
-      )}
-      {/* <ApproachSection />
-      <InvestingSection /> */}
-      {content?.featuredSection && (
-        <FeaturedSection content={content?.featuredSection} />
-      )}
-      {projectsData?.allProjects?.nodes && (
-        <div className="topo-background">
-          <MoreProjectsSection
-            classes={{ title: styles.title }}
-            title={'Projects'}
-            projects={projectsData?.allProjects?.nodes.filter(project => {
-              return !!project?.onChainId || !!project?.handle;
-            })}
-          />
-        </div>
-      )}
-      {content?.faqSection && (
-        <HeroAction
-          classes={{ section: styles.bottomHeroSection }}
-          isBanner
-          img={content?.faqSection?.image?.image?.asset?.url || ''}
-          bottomBanner={content?.faqSection}
-          openModal={() => null}
-        />
-      )}
-
-      <FixedFooter justifyContent="flex-end">
+      <WithLoader
+        isLoading={isLoadingPage}
+        sx={{
+          minHeight: '100vh',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
         <>
-          <ContainedButton
-            size="large"
-            onClick={handleOpen}
-            startIcon={<EmailIcon />}
-          >
-            {content?.footerButtonText}
-          </ContainedButton>
+          <HeroTitle
+            classes={{ main: styles.heroMain }}
+            isBanner
+            title={content?.heroSection?.title}
+            descriptionRaw={content?.heroSection?.descriptionRaw}
+            tooltipText={content?.heroSection?.tooltipText}
+            img={
+              content?.heroSection?.backgroundImage?.image?.asset?.url ||
+              content?.heroSection?.backgroundImage?.imageHref ||
+              buyersHero
+            }
+            linearGradient="linear-gradient(209.5deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%)"
+          />
+          {content?.ecologicalCreditsSection && (
+            <ImageItemsSection
+              content={content?.ecologicalCreditsSection}
+              sx={{
+                description: {
+                  maxWidth: 790,
+                  marginX: 'auto',
+                },
+                imageItem: {
+                  title: { pt: 7.5 },
+                },
+              }}
+            />
+          )}
+          {content?.imageGridSection && (
+            <ImageGridSection
+              content={content?.imageGridSection}
+              sx={{
+                borderTop: theme => `1px solid ${theme.palette.grey[100]}`,
+                borderBottom: theme => `1px solid ${theme.palette.grey[100]}`,
+              }}
+            />
+          )}
+          {content?.ecologicalCreditCardsSection && (
+            <BuyersEcologicalCreditCardsSection
+              content={content?.ecologicalCreditCardsSection}
+            />
+          )}
+          {content?.featuredProjectCardsSection && !isLoadingProjects && (
+            <BuyersFeaturedProjectsSection
+              projects={projects}
+              content={content?.featuredProjectCardsSection}
+              sx={{
+                container: {
+                  borderTop: theme => `1px solid ${theme.palette.grey[100]}`,
+                  borderBottom: theme => `1px solid ${theme.palette.grey[100]}`,
+                },
+              }}
+            />
+          )}
+          {content?.partnersSection && (
+            <BuyersPartnersSection content={content?.partnersSection} />
+          )}
+          {content?.contactSection && (
+            <HeroAction
+              classes={{ section: styles.bottomHeroSection }}
+              isBanner
+              img={content?.contactSection?.image?.image?.asset?.url || ''}
+              bottomBanner={content?.contactSection}
+              openModal={() => null}
+            />
+          )}
         </>
-      </FixedFooter>
-      <Modal open={open} onClose={handleClose} isIFrame>
-        <iframe
-          title="airtable-buyer-intake"
-          src="https://airtable.com/embed/shrijZlxJdSmj7H8J?backgroundColor=green"
-        />
-      </Modal>
+      </WithLoader>
     </>
   );
 };

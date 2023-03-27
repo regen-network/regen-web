@@ -38,7 +38,7 @@ export const BatchMetadataAdditionalInfo = ({
             {additionalCertifications.map((cert, i) => (
               <LinkOrDash
                 key={i}
-                href={cert?.['schema:url']?.['@value']}
+                href={cert?.['schema:url']}
                 label={cert?.['schema:name']}
               />
             ))}
@@ -60,16 +60,16 @@ export const BatchMetadataAdditionalInfo = ({
       )}
       {cfcVintageYear && (
         <MetaDetail label="cfc vintage year">
-          {data?.['regen:cfcVintageYear']?.['@value'] || '-'}
+          {data?.['regen:cfcVintageYear'] || '-'}
         </MetaDetail>
       )}
       {reports && reports?.length > 0 && (
         <MetaDetail label="verification reports">
           <Flex col sx={{ gap: 2 }}>
-            {reports.map((report: any, i: number) => (
+            {reports.map((report, i: number) => (
               <LinkOrDash
                 key={i}
-                href={report?.['schema:url']?.['@value']}
+                href={report?.['schema:url']}
                 label="Verification report"
               />
             ))}

@@ -1,12 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import { ERROR_BANNER } from 'config/contents';
+import { useQuery } from '@tanstack/react-query';
 import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
 import { getSocialItems } from 'utils/components/ShareSection/getSocialItems';
 import { REGEN_APP_PROJECT_URL } from 'utils/components/ShareSection/getSocialItems.constants';
 
-import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
@@ -15,6 +14,8 @@ import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccess
 
 import { UseStateSetter } from 'types/react/use-state';
 import { getHashUrl } from 'lib/block-explorer';
+import { client } from 'lib/clients/sanity';
+import { getBuyModalOptionsQuery } from 'lib/queries/react-query/sanity/getBuyModalOptionsQuery/getBuyModalOptionsQuery';
 
 import useBuySellOrderSubmit from 'pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit';
 import { useCheckSellOrderAvailabilty } from 'pages/Marketplace/Storefront/hooks/useCheckSellOrderAvailabilty';
@@ -23,6 +24,7 @@ import { VIEW_ECOCREDITS } from 'pages/Projects/Projects.config';
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 import { Link } from 'components/atoms';
 import { BuyCreditsModal, BuyCreditsValues } from 'components/organisms';
+import { BuyModalOptions } from 'components/organisms/BuyModalOptions/BuyModalOptions';
 import { useMsgClient } from 'hooks';
 
 import { BUY_FLOW_TWITTER_TEXT } from './BuySellOrderFlow.constants';
@@ -51,13 +53,16 @@ export const BuySellOrderFlow = ({
 
   // modals and display
   const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
+  const [isBuyModalOptionsOpen, setIsBuyModalOptionsOpen] = useState(false);
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [txModalTitle, setTxModalTitle] = useState<string>('');
   const [txButtonTitle, setTxButtonTitle] = useState<string>('');
   const [txModalHeader, setTxModalHeader] = useState<string>('');
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
-  const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
   const { sellOrders, refetchSellOrders } = useFetchSellOrders();
+  const { data: buyModalOptionsContent } = useQuery(
+    getBuyModalOptionsQuery({ sanityClient: client }),
+  );
 
   const closeBuyModal = (): void => {
     setIsBuyModalOpen(false);
@@ -201,7 +206,7 @@ export const BuySellOrderFlow = ({
       refetchSellOrders();
       setIsBuyModalOpen(true);
     } else if (isFlowStarted && !accountAddress) {
-      setDisplayErrorBanner(true);
+      setIsBuyModalOptionsOpen(true);
     }
   }, [isFlowStarted, accountAddress, refetchSellOrders]);
 
@@ -216,6 +221,14 @@ export const BuySellOrderFlow = ({
         setSelectedProjectById={
           projects && projects?.length > 1 ? setSelectedProjectById : undefined
         }
+      />
+      <BuyModalOptions
+        content={buyModalOptionsContent?.allBuyModalOptions[0]}
+        open={isBuyModalOptionsOpen}
+        onClose={() => {
+          setIsFlowStarted(false);
+          setIsBuyModalOptionsOpen(false);
+        }}
       />
       <ProcessingModal
         open={isProcessingModalOpen}
@@ -252,7 +265,6 @@ export const BuySellOrderFlow = ({
         cardItems={cardItems}
         icon={<ErrorIcon sx={{ fontSize: 100 }} />}
       />
-      {displayErrorBanner && <ErrorBanner text={ERROR_BANNER} />}
     </>
   );
 };

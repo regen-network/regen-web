@@ -2,6 +2,7 @@ import { Box } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
+import { CardsGridContainer } from 'web-components/lib/components/organisms/CardsGridContainer/CardsGridContainer';
 import Section from 'web-components/lib/components/section';
 
 import { Maybe, Scalars } from 'generated/sanity-graphql';
@@ -58,15 +59,7 @@ export function ProjectCardsSection({
         isLoading={!!loading}
         sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
       >
-        <Box
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 400px))',
-            gridGap: ['1.75rem', '1.5rem', '1.125rem'],
-            flex: 1,
-            justifyContent: projects?.length > 1 ? 'center' : 'left',
-          }}
-        >
+        <CardsGridContainer cardsCount={projects.length}>
           {projects?.map(project => {
             const isSoldOut = getIsSoldOut({ project, soldOutProjectsIds });
             return (
@@ -96,7 +89,7 @@ export function ProjectCardsSection({
               </Box>
             );
           })}
-        </Box>
+        </CardsGridContainer>
       </WithLoader>
     </Section>
   );

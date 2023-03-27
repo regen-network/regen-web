@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { useApolloClient } from '@apollo/client';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -7,7 +8,6 @@ import {
   ProjectByOnChainIdQuery,
   useUpdateProjectByIdMutation,
 } from 'generated/graphql';
-import { graphqlClient } from 'lib/clients/graphqlClient';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getProjectKey } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery.constants';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
@@ -19,10 +19,10 @@ import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-serve
 import { UseProjectEditSubmitParams } from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
 import {
   BasicInfoFormValues,
-  DescriptionValues,
+  DescriptionFormValues,
   ProjectLocationFormValues,
 } from 'components/organisms';
-import { MediaValues } from 'components/organisms/MediaForm';
+import { MediaFormValues } from 'components/organisms/MediaForm';
 
 export type OffChainProject =
   | ProjectByIdQuery['projectById']
@@ -52,8 +52,8 @@ interface Res {
 type Values =
   | BasicInfoFormValues
   | ProjectLocationFormValues
-  | DescriptionValues
-  | MediaValues
+  | DescriptionFormValues
+  | MediaFormValues
   | Partial<ProjectMetadataLD>;
 
 export const useProjectWithMetadata = ({
@@ -66,6 +66,7 @@ export const useProjectWithMetadata = ({
 }: Props): Res => {
   let metadata: Partial<ProjectMetadataLD> | undefined;
   let offChainProject: OffChainProject | undefined;
+  const graphqlClient = useApolloClient();
   const reactQueryClient = useQueryClient();
   const [updateProject] = useUpdateProjectByIdMutation();
 

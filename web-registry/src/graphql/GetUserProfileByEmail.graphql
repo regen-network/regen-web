@@ -13,9 +13,6 @@ query GetUserProfileByEmail($email: String!) {
     phoneNumber
     partyId
     roleTitle
-    projectsByCreatorId {
-      ...project
-    }
     partyByPartyId {
       name
       walletId

@@ -191,7 +191,7 @@ const CreditsRetire: React.FC<
                     addressId,
                     metadata: retireUrl
                       ? {
-                          '@type': 'http://regen.network/Retirement',
+                          '@type': 'https://schema.regen.network#Retirement',
                           'http://www.schema.org/url': retireUrl,
                         }
                       : null,

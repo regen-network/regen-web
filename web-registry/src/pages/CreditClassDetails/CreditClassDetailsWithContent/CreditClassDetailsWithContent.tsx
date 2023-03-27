@@ -13,7 +13,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { CreditClassByUriQuery, useMoreProjectsQuery } from 'generated/graphql';
 import { CreditClass } from 'generated/sanity-graphql';
-import getApiUri from 'lib/apiUri';
+import { apiUri } from 'lib/apiUri';
 import { onBtnClick } from 'lib/button';
 
 import { HeroTitle } from 'components/molecules';
@@ -280,7 +280,7 @@ const CreditClassDetailsWithContent: React.FC<
       </Modal>
       <Modal open={isBuyerModalOpen} onClose={() => setBuyerModalOpen(false)}>
         <MoreInfoForm
-          apiUrl={getApiUri()}
+          apiUrl={apiUri}
           onClose={() => setBuyerModalOpen(false)}
           onSubmit={() => {
             setBuyerModalOpen(false);

@@ -18,7 +18,7 @@ import UserAvatar from 'web-components/lib/components/user/UserAvatar';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { getFormattedPeriod } from 'web-components/lib/utils/format';
 
-import { qudtUnit, qudtUnitMap } from 'lib/rdf';
+import { QUDT_UNIT_MAP, qudtUnit } from 'lib/rdf';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import background from '../../assets/certificate-bg.png';
@@ -225,7 +225,7 @@ function CertificatePage(): JSX.Element {
             'Land Owner',
             project.partyByLandOwnerId,
             vintage.initialDistribution?.[
-              'http://regen.network/landOwnerDistribution'
+              'https://schema.regen.network#landOwnerDistribution'
             ],
           );
           if (landOwnerInfo) {
@@ -235,7 +235,7 @@ function CertificatePage(): JSX.Element {
             'Land Steward',
             project.partyByStewardId,
             vintage.initialDistribution?.[
-              'http://regen.network/landStewardDistribution'
+              'https://schema.regen.network#landStewardDistribution'
             ],
           );
           if (landStewardInfo) {
@@ -245,7 +245,7 @@ function CertificatePage(): JSX.Element {
             'Project Developer',
             project.partyByDeveloperId,
             vintage.initialDistribution?.[
-              'http://regen.network/projectDeveloperDistribution'
+              'https://schema.regen.network#projectDeveloperDistribution'
             ],
           );
           if (projectDeveloperInfo) {
@@ -278,12 +278,12 @@ function CertificatePage(): JSX.Element {
                 creditName={creditClassVersion?.name || ''}
                 certificateTitle={
                   creditClassVersion?.metadata?.[
-                    'http://regen.network/offsetGenerationMethod'
-                  ] || 'Carbon Removal'
+                    'https://schema.regen.network#offsetGenerationMethod'
+                  ]?.[0] || 'Carbon Removal'
                 }
                 creditUnitName={
                   creditClassVersion?.metadata?.[
-                    'http://regen.network/creditDenom'
+                    'https://schema.regen.network#creditDenom'
                   ]
                 }
                 projectName={project?.metadata?.['schema:name'] || ''}
@@ -321,7 +321,7 @@ function CertificatePage(): JSX.Element {
                 ]
               }
               areaUnit={
-                qudtUnitMap[
+                QUDT_UNIT_MAP[
                   project.metadata?.['regen:projectSize']?.['qudt:unit']?.[
                     '@value'
                   ] as qudtUnit

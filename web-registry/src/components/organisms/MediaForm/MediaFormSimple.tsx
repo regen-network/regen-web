@@ -6,7 +6,7 @@ import {
   ImageUploadProps,
 } from 'web-components/lib/components/inputs/ImageUpload';
 
-import getApiUri from '../../../lib/apiUri';
+import { apiUri } from '../../../lib/apiUri';
 import { cropAspect, MediaBaseErrors, MediaBaseValues } from './MediaForm';
 import { PHOTO_COUNT } from './MediaForm.constants';
 import { useMediaFormStyles } from './useMediaFormStyles';
@@ -28,11 +28,10 @@ const MediaFormSimple = ({
   projectId?: string;
 }): JSX.Element => {
   const { classes } = useMediaFormStyles();
-  const apiServerUrl = getApiUri();
   const { values } = useFormikContext<MediaValuesSimple>();
 
   const imgDefaultProps: Partial<ImageUploadProps> = {
-    apiServerUrl,
+    apiServerUrl: apiUri,
     projectId,
     optional: true,
     isDrop: true,

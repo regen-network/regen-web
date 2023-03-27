@@ -1,11 +1,11 @@
-import { MediaForm, MediaValues } from './MediaForm';
+import { MediaForm, MediaFormValues } from './MediaForm';
 
 export default {
   title: 'Registry/Organisms/MediaForm',
   component: MediaForm,
 };
 
-const initialValues: MediaValues = {
+const initialValues: MediaFormValues = {
   'schema:creditText': '',
   'regen:galleryPhotos': [],
 };

@@ -1,15 +1,14 @@
-import React, { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useRef, useState } from 'react';
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useMediaQuery, useTheme } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';
 import { ERRORS } from 'config/errors';
+import { FormikProps, FormikValues } from 'formik';
 import { useSetAtom } from 'jotai';
 import { startCase } from 'lodash';
-import { makeStyles } from 'tss-react/mui';
 
 import Banner from 'web-components/lib/components/banner';
-import Navigation from 'web-components/lib/components/faq/Navigation';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import { Label, Title } from 'web-components/lib/components/typography';
 import type { Theme } from 'web-components/lib/theme/muiTheme';
@@ -21,132 +20,51 @@ import {
   txSuccessfulModalAtom,
 } from 'lib/atoms/modals.atoms';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { OnTxSuccessfulProps } from 'pages/Dashboard/MyEcocredits/MyEcocredits.types';
+import WithLoader from 'components/atoms/WithLoader';
 import { useMsgClient } from 'hooks';
 
-import { Link } from '../../components/atoms';
 import useProjectEditSubmit, {
   UseProjectEditSubmitParams,
 } from './hooks/useProjectEditSubmit';
 import { EDIT_PROJECT } from './ProjectEdit.constants';
-
-const useStyles = makeStyles()((theme: Theme) => ({
-  root: {
-    display: 'flex',
-    justifyContent: 'center',
-    [theme.breakpoints.up('sm')]: {
-      justifyContent: 'space-evenly',
-      padding: theme.spacing(8.75),
-    },
-    [theme.breakpoints.down('md')]: {
-      padding: theme.spacing(6, 3.75),
-    },
-  },
-  left: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  right: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    [theme.breakpoints.up('sm')]: {
-      paddingLeft: theme.spacing(7.5),
-    },
-    [theme.breakpoints.down('md')]: {
-      width: '100%',
-    },
-  },
-  back: {
-    display: 'flex',
-    color: theme.palette.secondary.main,
-    fontSize: theme.typography.pxToRem(12),
-    [theme.breakpoints.up('md')]: {
-      width: theme.spacing(74.25),
-    },
-  },
-  arrow: {
-    fontSize: theme.spacing(6),
-    [theme.breakpoints.up('sm')]: {
-      marginRight: theme.spacing(2),
-    },
-    [theme.breakpoints.down('md')]: {
-      position: 'absolute',
-    },
-  },
-  nav: {
-    border: `1px solid ${theme.palette.grey[100]}`,
-    borderRadius: '10px',
-    height: 'fit-content',
-    backgroundColor: theme.palette.primary.main,
-    [theme.breakpoints.up('md')]: {
-      width: theme.spacing(74.25),
-    },
-    [theme.breakpoints.between('xs', 'xl')]: {
-      minWidth: theme.spacing(47.5),
-    },
-    [theme.breakpoints.down('md')]: {
-      width: '100%',
-    },
-  },
-  sectionContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    flex: 1,
-    [theme.breakpoints.down('md')]: {
-      padding: 'none',
-    },
-  },
-  section: {
-    flex: 1,
-    [theme.breakpoints.up('md')]: {
-      width: theme.spacing(185.75),
-    },
-  },
-  navItem: {
-    borderBottom: `1px solid ${theme.palette.grey[100]}`,
-    borderLeft: 'none !important',
-    '&:last-child': {
-      borderBottom: 'none',
-    },
-  },
-  topAlign: {
-    display: 'flex',
-    alignItems: 'center',
-    [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(10),
-      marginBottom: theme.spacing(9.5),
-    },
-    [theme.breakpoints.down('md')]: {
-      marginBottom: theme.spacing(6),
-    },
-  },
-}));
+import { ProjectEditDenied } from './ProjectEdit.Denied';
+import { ProjectEditNav } from './ProjectEdit.Nav';
+import { useProjectEditStyles } from './ProjectEdit.styles';
+import { FormRef, Values } from './ProjectEdit.types';
+import { WarningModal } from './ProjectEdit.WarningModal';
 
 type ContextType = {
   confirmSave?: () => void;
   isEdit?: boolean;
   onChainProject?: ProjectInfo;
   projectEditSubmit: UseProjectEditSubmitParams;
+  formRef: FormRef<Values>;
 };
 
 const ProjectEditContext = createContext<ContextType>({
   confirmSave: () => {},
   projectEditSubmit: async () => {},
   isEdit: false,
+  formRef: { current: null },
 });
 
 function ProjectEdit(): JSX.Element {
-  const { classes: styles } = useStyles();
+  const { classes: styles } = useProjectEditStyles();
   const theme = useTheme<Theme>();
-  const navigate = useNavigate();
   const [saved, setSaved] = useState(false);
   const { projectId } = useParams();
   const { pathname } = useLocation();
+  const { wallet } = useWallet();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const lastPathItem = pathname.substring(pathname.lastIndexOf('/') + 1);
   const section = lastPathItem !== 'edit' ? lastPathItem : undefined;
+  const [isWarningModalOpen, setIsWarningModalOpen] = useState<
+    string | undefined
+  >(undefined);
+  const navigate = useNavigate();
 
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const setErrorCodeAtom = useSetAtom(errorCodeAtom);
@@ -179,7 +97,7 @@ function ProjectEdit(): JSX.Element {
   };
 
   const { signAndBroadcast } = useMsgClient();
-  const { data: projectRes } = useQuery(
+  const { data: projectRes, isLoading } = useQuery(
     getProjectQuery({
       request: {
         projectId,
@@ -188,6 +106,11 @@ function ProjectEdit(): JSX.Element {
     }),
   );
   const onChainProject = projectRes?.project;
+  const isNotAdmin =
+    onChainProject?.admin &&
+    wallet?.address !== onChainProject.admin &&
+    !isLoading;
+
   const projectEditSubmit = useProjectEditSubmit({
     projectId,
     admin: onChainProject?.admin,
@@ -197,28 +120,6 @@ function ProjectEdit(): JSX.Element {
     onTxSuccessful,
   });
 
-  const navigateSection = (sectionName: string): void => {
-    const hyphenated = sectionName.replace(' ', '-');
-    navigate(`/project-pages/${projectId}/edit/${hyphenated}`);
-  };
-
-  const Nav = (): JSX.Element => (
-    <Navigation
-      classes={{ root: styles.nav, listItem: styles.navItem }}
-      categories={[
-        'basic info',
-        'location',
-        'roles',
-        'description',
-        'media',
-        'metadata',
-      ]}
-      category={section?.replace('-', ' ')}
-      onClick={(sectionName: string) => navigateSection(sectionName)}
-      showIcon
-    />
-  );
-
   const confirmSave = (): void => {
     setSaved(true);
     setTimeout(() => {
@@ -226,46 +127,106 @@ function ProjectEdit(): JSX.Element {
     }, 5000);
   };
 
+  const formRef = useRef<FormikProps<FormikValues>>(null);
+
+  if (isNotAdmin) {
+    return (
+      <ProjectEditDenied
+        address={onChainProject?.admin}
+        projectId={projectId}
+      />
+    );
+  }
+
+  const onBackClick = (): void => {
+    if (section) {
+      const path = isMobile
+        ? `/project-pages/${projectId}/edit`
+        : '/ecocredits/projects';
+      if (formRef.current?.dirty) {
+        setIsWarningModalOpen(path);
+      } else {
+        navigate(path);
+      }
+    } else {
+      navigate('/ecocredits/projects');
+    }
+  };
+
+  const onNavClick = (sectionName: string): void => {
+    const path = `/project-pages/${projectId}/edit/${sectionName.replace(
+      ' ',
+      '-',
+    )}`;
+    if (formRef.current?.dirty) {
+      setIsWarningModalOpen(path);
+    } else {
+      navigate(path);
+    }
+  };
+
   return (
     <ProjectEditContext.Provider
-      value={{ confirmSave, isEdit: true, onChainProject, projectEditSubmit }}
+      value={{
+        confirmSave,
+        isEdit: true,
+        onChainProject,
+        projectEditSubmit,
+        formRef,
+      }}
     >
-      <div className={styles.root}>
-        <div className={styles.left}>
-          <div className={styles.topAlign}>
-            <Link
-              href={
-                section && isMobile
-                  ? `/project-pages/${projectId}/edit/`
-                  : '/ecocredits/projects'
-              }
-              className={styles.back}
-            >
-              <ArrowDownIcon
-                className={styles.arrow}
-                color={theme.palette.secondary.main}
-                direction="prev"
-              />
-              {!isMobile && <Label>back to projects</Label>}
-            </Link>
+      <WithLoader
+        isLoading={isLoading}
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          width: '100%',
+          mt: 20,
+        }}
+      >
+        <div className={styles.root}>
+          <div className={styles.left}>
+            <div className={styles.topAlign}>
+              <Box onClick={onBackClick} className={styles.back}>
+                <ArrowDownIcon
+                  className={styles.arrow}
+                  color={theme.palette.secondary.main}
+                  direction="prev"
+                />
+                {!isMobile && <Label>back to projects</Label>}
+              </Box>
+            </div>
+            {!isMobile && (
+              <ProjectEditNav section={section} onNavClick={onNavClick} />
+            )}
           </div>
-          {!isMobile && <Nav />}
-        </div>
-        <div className={styles.right}>
-          <div className={styles.sectionContainer}>
-            <div className={styles.section}>
-              <div className={styles.topAlign}>
-                <Title variant="h3" align="center" sx={{ flex: 1 }}>
-                  {section ? startCase(section) : 'Edit Project Page'}
-                </Title>
+          <div className={styles.right}>
+            <div className={styles.sectionContainer}>
+              <div className={styles.section}>
+                <div className={styles.topAlign}>
+                  <Title variant="h3" align="center" sx={{ flex: 1 }}>
+                    {section ? startCase(section) : 'Edit Project Page'}
+                  </Title>
+                </div>
+                {isMobile && !section && (
+                  <ProjectEditNav section={section} onNavClick={onNavClick} />
+                )}
+                <Outlet />
               </div>
-              {isMobile && !section && <Nav />}
-              <Outlet />
             </div>
           </div>
+          {saved && <Banner text="Changes have been saved" />}
+          <WarningModal
+            open={!!isWarningModalOpen}
+            navigate={() => {
+              if (isWarningModalOpen) navigate(isWarningModalOpen);
+            }}
+            onClose={() => {
+              setIsWarningModalOpen(undefined);
+            }}
+          />
         </div>
-        {saved && <Banner text="Changes have been saved" />}
-      </div>
+      </WithLoader>
     </ProjectEditContext.Provider>
   );
 }

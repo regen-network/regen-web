@@ -9,6 +9,8 @@ import {
 import { Router } from '@remix-run/router';
 import { QueryClient } from '@tanstack/react-query';
 
+import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
+
 import MyBridge from 'pages/Dashboard/MyBridge';
 import { MyBridgableEcocreditsTable } from 'pages/Dashboard/MyBridge/MyBridge.BridgableEcocreditsTable';
 import { MyBridgedEcocreditsTable } from 'pages/Dashboard/MyBridge/MyBridge.BridgedEcocreditsTable';
@@ -67,7 +69,6 @@ const Project = lazy(() => import('./pages/Project'));
 const Projects = lazy(() => import('./pages/Projects'));
 const ProjectCreate = lazy(() => import('./pages/ProjectCreate'));
 const ProjectFinished = lazy(() => import('./pages/ProjectFinished'));
-const ProjectList = lazy(() => import('./pages/ProjectList'));
 const ProjectLocation = lazy(() => import('./pages/ProjectLocation'));
 const ProjectReview = lazy(() => import('./pages/ProjectReview'));
 const Roles = lazy(() => import('./pages/Roles'));
@@ -80,13 +81,18 @@ const ProjectEdit = lazy(() => import('./pages/ProjectEdit'));
 const Activity = lazy(() => import('./pages/Activity'));
 const CreateBatch = lazy(() => import('./pages/CreateBatch'));
 const Storefront = lazy(() => import('./pages/Marketplace/Storefront'));
+const ConnectWalletPage = lazy(() => import('./pages/ConnectWalletPage'));
 
 type RouterParams = {
   reactQueryClient: QueryClient;
+  apolloClientFactory: ApolloClientFactory;
 };
 
-export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
-  createRoutesFromElements(
+export const getRoutes = ({
+  reactQueryClient,
+  apolloClientFactory,
+}: RouterParams): RouteObject[] => {
+  return createRoutesFromElements(
     <Route element={<RegistryLayout />}>
       <Route path="/" element={<Outlet />} errorElement={<ErrorPage />}>
         <Route
@@ -108,7 +114,7 @@ export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
           path="create-credit-class"
           element={<CreateCreditClassInfo />}
         />
-        <Route path="land-stewards" element={<LandStewards />} />
+        <Route path="project-developers" element={<LandStewards />} />
         <Route
           path="methodology-review-process"
           element={<MethodologyReviewProcess />}
@@ -125,6 +131,7 @@ export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
           element={<Project />}
           loader={projectDetailsLoader({
             queryClient: reactQueryClient,
+            apolloClientFactory,
           })}
         />
         <Route
@@ -181,10 +188,6 @@ export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
         <Route
           path="organization-profile"
           element={<ProtectedRoute component={OrganizationProfile} />}
-        />
-        <Route
-          path="project-list"
-          element={<ProtectedRoute component={ProjectList} />}
         />
         <Route path="project-pages">
           <Route path=":projectId" element={<ProjectCreate />}>
@@ -310,10 +313,15 @@ export const getRoutes = ({ reactQueryClient }: RouterParams): RouteObject[] =>
         />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
+      <Route path="connect-wallet" element={<ConnectWalletPage />} />
     </Route>,
   );
+};
 
-export const getRouter = ({ reactQueryClient }: RouterParams): Router =>
-  createBrowserRouter(getRoutes({ reactQueryClient }), {
+export const getRouter = ({
+  reactQueryClient,
+  apolloClientFactory,
+}: RouterParams): Router =>
+  createBrowserRouter(getRoutes({ reactQueryClient, apolloClientFactory }), {
     basename: process.env.PUBLIC_URL,
   });

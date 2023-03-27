@@ -17,7 +17,7 @@ export const useOnAccountChange = ({ wallet, connectWallet }: Props): void => {
 
     const listener = (): void => {
       if (wallet) {
-        connectWallet({ walletType: WalletType.Keplr });
+        connectWallet({ walletType: WalletType.Keplr, doLogin: false });
       }
     };
 

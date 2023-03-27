@@ -1,12 +1,13 @@
 import { Formik, FormikHelpers } from 'formik';
+import * as Yup from 'yup';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 
-import type { ShaclGraphByUriQuery } from 'generated/graphql';
-
 import { useProjectEditContext } from 'pages/ProjectEdit';
+import { FormRef } from 'pages/ProjectEdit/ProjectEdit.types';
 import { ProjectPageFooter } from 'components/molecules';
 
+import { PHOTO_COUNT } from './MediaForm.constants';
 import type { MediaErrorsSimple, MediaValuesSimple } from './MediaFormSimple';
 import { MediaFormSimple } from './MediaFormSimple';
 
@@ -21,32 +22,35 @@ export interface MediaBaseErrors {
   'regen:videoURL'?: string;
 }
 
-export type MediaValues = MediaValuesSimple;
+export type MediaFormValues = MediaValuesSimple;
 export type MediaErrors = MediaErrorsSimple;
 
 export const cropAspect = { aspect: 322 / 211 }; // px values pulled from mockups (width / height)
 
 interface MediaFormProps {
-  submit: ({ values }: { values: MediaValues }) => Promise<void>;
+  submit: ({ values }: { values: MediaFormValues }) => Promise<void>;
   onPrev?: () => void;
   onNext?: () => void;
-  initialValues: MediaValues;
-  graphData?: ShaclGraphByUriQuery;
+  initialValues: MediaFormValues;
   projectId?: string;
 }
+
+const MediaFormSchema = Yup.object().shape({
+  'regen:previewPhoto': Yup.string(),
+  'regen:galleryPhotos': Yup.array(Yup.string()).max(PHOTO_COUNT),
+});
 
 /** Formik Context + handlers for legacy and new media */
 export const MediaForm = ({
   initialValues,
-  graphData,
   projectId,
   ...props
 }: MediaFormProps): JSX.Element => {
-  const { confirmSave, isEdit } = useProjectEditContext();
+  const { confirmSave, isEdit, formRef } = useProjectEditContext();
 
   async function handleSubmit(
-    values: MediaValues,
-    { setSubmitting, setTouched }: FormikHelpers<MediaValues>,
+    values: MediaFormValues,
+    { setSubmitting, setTouched }: FormikHelpers<MediaFormValues>,
   ): Promise<void> {
     try {
       await props.submit({ values });
@@ -57,42 +61,14 @@ export const MediaForm = ({
     }
   }
 
-  const handleValidate = async (values: MediaValues): Promise<MediaErrors> => {
-    const errors: MediaErrors = {};
-    // TODO regen-registry/issues/1501
-    // if (graphData?.shaclGraphByUri?.graph) {
-    //   const projectPageData = {
-    //     ...getProjectBaseData(),
-    //     ...values,
-    //   };
-    //   const report = await validate(
-    //     graphData.shaclGraphByUri.graph,
-    //     projectPageData,
-    //     'http://regen.network/ProjectPageMediaGroup',
-    //   );
-    //   for (const result of report.results) {
-    //     const path: string = result.path?.value;
-    //     let compactedPath: keyof MediaValues | undefined;
-    //     if (path) {
-    //       compactedPath = getCompactedPath(path) as
-    //         | keyof MediaValues
-    //         | undefined;
-    //     }
-    //     if (compactedPath) {
-    //       errors[compactedPath] = requiredMessage;
-    //     }
-    //   }
-    // }
-    return errors;
-  };
-
   return (
     <OnBoardingCard>
       <Formik
+        innerRef={formRef as FormRef<MediaFormValues>}
         enableReinitialize
         validateOnMount
         initialValues={initialValues}
-        validate={handleValidate}
+        validationSchema={MediaFormSchema}
         onSubmit={handleSubmit}
       >
         {({ submitForm, isValid, isSubmitting, dirty }) => (

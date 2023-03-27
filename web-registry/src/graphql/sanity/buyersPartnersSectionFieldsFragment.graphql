@@ -1,0 +1,11 @@
+fragment buyersPartnersSectionFields on BuyersPartnersSection {
+  title
+  partners {
+    name
+    logo {
+      asset {
+        url
+      }
+    }
+  }
+}

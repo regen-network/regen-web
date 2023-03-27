@@ -45,6 +45,7 @@ const useStyles = makeStyles<StyleProps>()((theme, { error }) => ({
     fontFamily: '"Lato",-apple-system,sans-serif',
     fontWeight: 'bold',
     visibility: error ? 'visible' : 'hidden',
+    whiteSpace: 'pre-wrap',
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(3.5),
     },
@@ -93,7 +94,8 @@ export default function FieldFormControl({
 
   async function handleChange(value: any): Promise<void> {
     form.setFieldValue(field.name, value);
-    form.setFieldTouched(field.name, true);
+    // see https://github.com/jaredpalmer/formik/issues/2083:
+    setTimeout(() => form.setFieldTouched(field.name, true));
   }
 
   function handleBlur(value: string): void {

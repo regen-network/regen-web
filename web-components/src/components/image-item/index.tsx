@@ -1,7 +1,9 @@
 import React from 'react';
+import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { Variant } from '@mui/material/styles/createTypography';
 import { DefaultTheme as Theme } from '@mui/styles';
+import { SxProps } from '@mui/system';
 import { makeStyles } from 'tss-react/mui';
 
 import ContainedButton from '../buttons/ContainedButton';
@@ -20,6 +22,7 @@ export interface ImageItemProps {
   buttonText?: string;
   buttonHref?: string;
   buttonTarget?: string;
+  sx?: { title: SxProps<Theme> };
 }
 
 export interface StyleProps {
@@ -58,11 +61,12 @@ export default function ImageItem({
   buttonText,
   buttonHref,
   buttonTarget,
+  sx,
 }: ImageItemProps): JSX.Element {
   const { classes: styles, cx } = useStyles();
 
   return (
-    <div className={cx(styles.root, classes?.root, className)}>
+    <Box className={cx(styles.root, classes?.root, className)}>
       <Grid
         container
         justifyContent="center"
@@ -78,6 +82,7 @@ export default function ImageItem({
             ? cx(styles.title, styles.h3title)
             : styles.title
         }
+        sx={sx?.title}
       >
         {title}
       </Title>
@@ -92,6 +97,6 @@ export default function ImageItem({
           {buttonText}
         </ContainedButton>
       )}
-    </div>
+    </Box>
   );
 }

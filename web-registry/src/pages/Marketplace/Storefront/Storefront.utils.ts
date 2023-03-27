@@ -84,7 +84,6 @@ type GetAskUsdAmountParams = {
 export const getAskUsdAmount = ({
   askAmount,
   askBaseDenom,
-  quantity,
   geckoPrices,
 }: GetAskUsdAmountParams): number => {
   const { eeurPrice, regenPrice, usdcPrice } = geckoPrices ?? {};
@@ -98,5 +97,5 @@ export const getAskUsdAmount = ({
     denomPrice = eeurPrice;
   }
 
-  return (microToDenom(askAmount) / Number(quantity)) * denomPrice;
+  return microToDenom(askAmount) * denomPrice;
 };

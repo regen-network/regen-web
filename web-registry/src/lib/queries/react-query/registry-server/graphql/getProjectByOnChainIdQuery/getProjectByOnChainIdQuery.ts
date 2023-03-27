@@ -3,7 +3,7 @@ import {
   ProjectByOnChainIdQuery,
   ProjectByOnChainIdQueryVariables,
 } from 'generated/graphql';
-import { jsonLdCompact } from 'lib/rdf';
+import { jsonLdCompactProjectMetadata } from 'lib/queries/react-query/utils/jsonLdCompactProjectMetadata';
 
 import { getProjectByOnChainIdKey } from './getProjectByOnChainIdQuery.constants';
 import {
@@ -28,12 +28,9 @@ export const getProjectByOnChainIdQuery = ({
         fetchPolicy: 'no-cache',
       });
 
-      if (projectByOnChainId.data?.projectByOnChainId?.metadata) {
-        projectByOnChainId.data.projectByOnChainId.metadata =
-          await jsonLdCompact(
-            projectByOnChainId.data.projectByOnChainId.metadata,
-          );
-      }
+      await jsonLdCompactProjectMetadata(
+        projectByOnChainId.data?.projectByOnChainId,
+      );
 
       return projectByOnChainId;
     } catch (e) {

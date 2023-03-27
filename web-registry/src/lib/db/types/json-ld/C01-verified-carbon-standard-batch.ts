@@ -1,4 +1,4 @@
-import { NameUrl } from 'lib/rdf/types';
+import { CompactedNameUrl } from 'lib/rdf/types';
 
 import { BatchMetadataLD } from './batch-base';
 
@@ -8,7 +8,7 @@ export interface VCSBatchMetadataLD extends BatchMetadataLD {
   '@context'?: Context;
   'regen:vcsProjectId'?: string;
   'regen:vcsRetirementSerialNumber'?: string;
-  'regen:additionalCertifications'?: NameUrl[];
+  'regen:additionalCertifications'?: CompactedNameUrl[];
 }
 
 interface Context {

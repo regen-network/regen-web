@@ -2,7 +2,7 @@ import { Flex } from 'web-components/lib/components/box';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import { Body, Label } from 'web-components/lib/components/typography';
 
-import { ApprovedMethodologies } from 'lib/db/types/json-ld';
+import { ApprovedMethodologies } from 'lib/db/types/json-ld/methodology';
 
 import { Link } from 'components/atoms';
 import { MetaDetail } from 'components/molecules';
@@ -33,7 +33,7 @@ const ApprovedMethodologiesList: React.FC<
                   display: 'flex',
                   color: 'secondary.main',
                 }}
-                href={methodologie?.['schema:url']?.['@value']}
+                href={methodologie?.['schema:url']}
                 target="_blank"
               >
                 <Body size="xl" key={methodologie?.['schema:name']}>
@@ -51,14 +51,14 @@ const ApprovedMethodologiesList: React.FC<
               </Link>
             );
           })}
-          {count > MAX_METHODOLOGIE_LINKS && (
+          {count > MAX_METHODOLOGIE_LINKS && methodologyList?.['schema:url'] && (
             <Link
               sx={{
                 display: 'flex',
                 alignItems: 'center',
                 color: 'secondary.main',
               }}
-              href={methodologyList?.['schema:url']?.['@value']}
+              href={methodologyList?.['schema:url']}
               target="_blank"
             >
               <Label sx={{ fontSize: [16], mt: 2 }}>{`+ ${

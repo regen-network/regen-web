@@ -10,6 +10,7 @@ import ArrowSkipLeftIcon from './ArrowSkipLeft';
 import ArrowSkipRightIcon from './ArrowSkipRight';
 import AvailableCreditsIcon from './AvailableCreditsIcon';
 import AvatarIcon from './AvatarIcon';
+import AvatarOutlineIcon from './AvatarOutlineIcon';
 import BlockIcon from './BlockIcon';
 import BreadcrumbIcon from './BreadcrumbIcon';
 import { BrokenLinkIcon } from './BrokenLinkIcon';
@@ -94,6 +95,7 @@ import TrashIcon from './TrashIcon';
 import TrustDocumentIcon from './TrustDocumentIcon';
 import TrustIcon from './TrustIcon';
 import VerifiedIcon from './VerifiedIcon';
+import WalletErrorIcon from './WalletErrorIcon';
 import { WalletIcon } from './WalletIcon';
 import WhitepaperIcon from './WhitepaperIcon';
 
@@ -152,6 +154,10 @@ export const allIcons = (): JSX.Element => (
       label="ArrowDownIcon"
     />
     <LabeledIcon icon={<AvatarIcon sx={{ height: 40 }} />} label="Avatar" />
+    <LabeledIcon
+      icon={<AvatarOutlineIcon sx={{ fontSize: 24, color: 'info.main' }} />}
+      label="AvatarOutlineIcon"
+    />
     <LabeledIcon
       icon={<AvailableCreditsIcon sx={{ height: 40 }} />}
       label="AvailableCreditsIcon"
@@ -279,6 +285,10 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<UsdcIcon />} label="UsdcIcon" />
     <LabeledIcon icon={<VerifiedIcon color="#000" />} label="VerifiedIcon" />
     <LabeledIcon icon={<WalletIcon />} label="WalletIcon" />
+    <LabeledIcon
+      icon={<WalletErrorIcon sx={{ fontSize: 64 }} />}
+      label="WalletErrorIcon"
+    />
     <LabeledIcon
       icon={<WhitepaperIcon color="grey" />}
       label="WhitepaperIcon"

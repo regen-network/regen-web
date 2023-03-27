@@ -4,7 +4,7 @@ import { HashLink } from 'react-router-hash-link';
 import { Box, Link as MuiLink, LinkProps as MuiLinkProps } from '@mui/material';
 
 interface LinkProps extends MuiLinkProps, PropsWithChildren {
-  href: string; // require href
+  href: string;
 }
 
 /**

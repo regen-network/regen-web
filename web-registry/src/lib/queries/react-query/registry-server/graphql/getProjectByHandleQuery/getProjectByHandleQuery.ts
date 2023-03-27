@@ -3,7 +3,7 @@ import {
   ProjectByHandleQuery,
   ProjectByHandleQueryVariables,
 } from 'generated/graphql';
-import { jsonLdCompact } from 'lib/rdf';
+import { jsonLdCompactProjectMetadata } from 'lib/queries/react-query/utils/jsonLdCompactProjectMetadata';
 
 import { getProjectByHandleKey } from './getProjectByHandleQuery.constants';
 import {
@@ -28,11 +28,7 @@ export const getProjectByHandleQuery = ({
         fetchPolicy: 'no-cache',
       });
 
-      if (projectByHandle.data?.projectByHandle?.metadata) {
-        projectByHandle.data.projectByHandle.metadata = await jsonLdCompact(
-          projectByHandle.data.projectByHandle.metadata,
-        );
-      }
+      await jsonLdCompactProjectMetadata(projectByHandle.data?.projectByHandle);
 
       return projectByHandle;
     } catch (e) {

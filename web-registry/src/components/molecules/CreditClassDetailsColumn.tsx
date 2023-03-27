@@ -148,26 +148,26 @@ function CreditClassDetailsColumn({
           />
         )}
         {creditClassVersion?.metadata?.[
-          'http://regen.network/ecosystemType'
+          'https://schema.regen.network#ecosystemType'
         ] && (
           <LineItem
             label="ecotype"
             data={
               creditClassVersion?.metadata?.[
-                'http://regen.network/ecosystemType'
+                'https://schema.regen.network#ecosystemType'
               ]
             }
           />
         )}
         {creditClassVersion?.metadata?.[
-          'http://regen.network/offsetGenerationMethod'
+          'https://schema.regen.network#offsetGenerationMethod'
         ] && (
           <LineItem
             label="offset generation method"
             data={
               creditClassVersion?.metadata?.[
-                'http://regen.network/offsetGenerationMethod'
-              ]
+                'https://schema.regen.network#offsetGenerationMethod'
+              ]?.[0]
             }
           />
         )}

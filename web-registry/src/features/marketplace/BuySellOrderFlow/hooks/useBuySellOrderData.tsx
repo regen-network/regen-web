@@ -26,10 +26,9 @@ export const useBuySellOrderData = ({
     sellOrder => sellOrder.seller !== wallet?.address,
   );
   const isBuyFlowDisabled =
-    (loadingProjects ||
-      projectsWithOrderData?.length === 0 ||
-      sellOrdersAvailable?.length === 0) &&
-    Boolean(wallet?.address);
+    loadingProjects ||
+    projectsWithOrderData?.length === 0 ||
+    sellOrdersAvailable?.length === 0;
 
   return {
     isBuyFlowDisabled,

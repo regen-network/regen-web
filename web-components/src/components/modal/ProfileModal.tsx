@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, useTheme } from '@mui/material';
 import { DefaultTheme as Theme } from '@mui/styles';
-import { Field, Form, Formik, FormikErrors, useFormikContext } from 'formik';
+import { Field, Form, Formik, useFormikContext } from 'formik';
 import { makeStyles } from 'tss-react/mui';
 
 import { Button } from '../buttons/Button';
@@ -10,6 +10,7 @@ import OnBoardingCard from '../cards/OnBoardingCard';
 import OrganizationIcon from '../icons/OrganizationIcon';
 import ControlledTextField from '../inputs/ControlledTextField';
 import { ImageUpload } from '../inputs/ImageUpload';
+import { CancelButtonFooter } from '../organisms/CancelButtonFooter/CancelButtonFooter';
 import { Title } from '../typography';
 import Modal from '.';
 
@@ -19,9 +20,7 @@ interface ProfileModalProps {
   profile: ProfileFormValues;
   onClose: () => void;
   onSubmit: (profile: ProfileFormValues) => void;
-  validate: (
-    values: ProfileFormValues,
-  ) => Promise<FormikErrors<ProfileFormValues>>;
+  validationSchema: any;
   apiServerUrl: string;
   projectId: string;
 }
@@ -41,7 +40,7 @@ function ProfileModal({
   profile,
   onClose,
   onSubmit,
-  validate,
+  validationSchema,
   apiServerUrl,
   projectId,
 }: ProfileModalProps): JSX.Element {
@@ -71,13 +70,13 @@ function ProfileModal({
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
             try {
-              await onSubmit(values);
+              onSubmit(values);
               setSubmitting(false);
             } catch (e) {
               setSubmitting(false);
             }
           }}
-          validate={validate}
+          validationSchema={validationSchema}
         >
           {({ submitForm }) => {
             return (
@@ -162,36 +161,13 @@ const ProfileSubmitFooter = ({
 }): JSX.Element => {
   const { isValid, isSubmitting, touched } = useFormikContext();
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        width: '100%',
-        mt: 10,
-        py: 0,
-        px: { xs: 2.5, sm: 10 },
-      }}
-    >
-      <Button
-        onClick={onClose}
-        sx={{
-          color: 'info.main',
-          fontSize: [12],
-          padding: [0],
-          border: 'none',
-        }}
-      >
-        cancel
-      </Button>
-      <ContainedButton
-        onClick={submitForm}
-        sx={{ px: [17] }}
-        disabled={!isValid || isSubmitting || !Object.keys(touched).length}
-      >
-        save
-      </ContainedButton>
-    </Box>
+    <CancelButtonFooter
+      onCancel={onClose}
+      label="save"
+      onClick={submitForm}
+      sx={{ px: [10.75] }}
+      disabled={!isValid || isSubmitting || !Object.keys(touched).length}
+    />
   );
 };
 

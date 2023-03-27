@@ -6,7 +6,7 @@ import { UseStateSetter } from 'types/react/use-state';
 import { LoginEvent, Track } from 'lib/tracker/types';
 
 import { chainInfo } from './chainInfo/chainInfo';
-import { Wallet } from './wallet';
+import { LoginType, Wallet } from './wallet';
 import {
   KEPLR_LOGIN_TITLE,
   WALLET_CONNECT_BRIDGE_URL,
@@ -54,15 +54,17 @@ export const getWalletConnectInstance = async ({
 type FinalizeConnectionParams = {
   walletClient?: WalletClient;
   walletConfig?: WalletConfig;
+  walletConnect?: WalletConnect;
   setWallet: UseStateSetter<Wallet>;
   track?: Track;
-  login?: (wallet?: Wallet) => Promise<void>;
+  login?: LoginType;
   doLogin?: boolean;
 };
 
 export const finalizeConnection = async ({
   walletClient,
   walletConfig,
+  walletConnect,
   setWallet,
   track,
   login,
@@ -98,7 +100,7 @@ export const finalizeConnection = async ({
     }
     setWallet(wallet);
 
-    if (doLogin) await login(wallet);
+    if (doLogin) await login({ walletConfig, walletConnect, wallet });
   }
 };
 

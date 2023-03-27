@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { UseStateSetter } from 'types/react/use-state';
 import { apiUri } from 'lib/apiUri';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-import { SignArbitraryType, Wallet } from 'lib/wallet/wallet';
+import { LoginParams, SignArbitraryType } from 'lib/wallet/wallet';
 
 type Params = {
   signArbitrary?: SignArbitraryType;
@@ -16,7 +16,11 @@ export const useLogin = ({ signArbitrary, setError, setAccountId }: Params) => {
   // Step 1: Retrieve and save the CSRF tokens
   const { data: token } = useQuery(getCsrfTokenQuery({}));
   const login = useCallback(
-    async (wallet?: Wallet): Promise<void> => {
+    async ({
+      walletConfig,
+      walletConnect,
+      wallet,
+    }: LoginParams): Promise<void> => {
       try {
         if (wallet?.address && signArbitrary && token) {
           // Step 2: Retrieve a nonce for the user
@@ -36,7 +40,12 @@ export const useLogin = ({ signArbitrary, setError, setAccountId }: Params) => {
           const { nonce } = await nonceRes.json();
 
           // Step 3: Generate the signature for the login request
-          const signature = await signArbitrary({ wallet, nonce: nonce || '' });
+          const signature = await signArbitrary({
+            walletConfig,
+            walletConnect,
+            wallet,
+            nonce: nonce || '',
+          });
 
           // Step 4: Submit the signature to the login endpoint
           const loginRes = await fetch(`${apiUri}/web3auth/login`, {

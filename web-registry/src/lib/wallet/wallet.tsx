@@ -33,14 +33,19 @@ declare global {
   interface Window extends KeplrWindow {}
 }
 
-export type SignArbitraryParams = {
+export type LoginParams = {
+  walletConfig?: WalletConfig;
+  walletConnect?: WalletConnect;
   wallet?: Wallet;
-  nonce: string;
 };
-export type SignArbitraryType = ({
-  wallet,
-  nonce,
-}: SignArbitraryParams) => Promise<StdSignature | undefined>;
+export type LoginType = (loginParams: LoginParams) => Promise<void>;
+
+export interface SignArbitraryParams extends LoginParams {
+  nonce: string;
+}
+export type SignArbitraryType = (
+  signArbitraryParams: SignArbitraryParams,
+) => Promise<StdSignature | undefined>;
 
 export type WalletContextType = {
   wallet?: Wallet;
@@ -51,9 +56,11 @@ export type WalletContextType = {
   error?: unknown;
   walletConnectUri?: string;
   signArbitrary?: SignArbitraryType;
-  login?: (wallet?: Wallet) => Promise<void>;
+  login?: LoginType;
   logout?: () => Promise<void>;
   accountId?: string;
+  walletConfig?: WalletConfig;
+  walletConnect?: WalletConnect;
 };
 const WalletContext = createContext<WalletContextType>({
   loaded: false,
@@ -93,8 +100,6 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   });
 
   const signArbitrary = useSignArbitrary({
-    walletConfigRef,
-    walletConnect,
     setError,
   });
   const login = useLogin({ signArbitrary, setError, setAccountId });
@@ -142,6 +147,8 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         login,
         logout,
         accountId,
+        walletConfig: walletConfigRef?.current,
+        walletConnect,
       }}
     >
       {children}

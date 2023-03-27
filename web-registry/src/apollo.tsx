@@ -1,4 +1,9 @@
-import { ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
+import {
+  ApolloProvider,
+  createHttpLink,
+  DefaultOptions,
+  InMemoryCache,
+} from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { useQuery } from '@tanstack/react-query';
 
@@ -38,10 +43,22 @@ export const AuthApolloProvider = ({
       }),
   );
 
+  const defaultOptions: DefaultOptions = {
+    watchQuery: {
+      fetchPolicy: 'no-cache',
+      errorPolicy: 'ignore',
+    },
+    query: {
+      fetchPolicy: 'no-cache',
+      errorPolicy: 'all',
+    },
+  };
+
   const link = authLink.concat(httpLink);
   apolloClientFactory.prepare({
     cache: new InMemoryCache(),
     link,
+    defaultOptions,
   });
   return (
     <ApolloProvider client={apolloClientFactory.getClient()}>

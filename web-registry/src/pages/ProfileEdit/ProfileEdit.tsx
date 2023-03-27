@@ -5,19 +5,15 @@ import {
   useApolloClient,
 } from '@apollo/client';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
 import { Flex } from 'web-components/lib/components/box';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import EyeIcon from 'web-components/lib/components/icons/EyeIcon';
 import { Title } from 'web-components/lib/components/typography';
-import { uploadImage } from 'web-components/lib/utils/s3';
 
 import { useUpdatePartyByIdMutation } from 'generated/graphql';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
-import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
-import { apiServerUrl } from 'lib/env';
 import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -27,6 +23,7 @@ import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfil
 import { EditProfileFormActionBar } from 'components/organisms/EditProfileForm/EditProfileForm.ActionBar';
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
 
+import { useOnUploadCallback } from './hooks/useOnUploadCallback';
 import { usePartyInfos } from './hooks/usePartyInfos';
 import {
   DEFAULT_NAME,
@@ -40,7 +37,6 @@ import {
 
 export const ProfileEdit = () => {
   const setBannerTextAtom = useSetAtom(bannerTextAtom);
-  const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const { wallet, accountId } = useWallet();
   const [updatePartyById] = useUpdatePartyByIdMutation();
   const graphqlClient =
@@ -113,23 +109,7 @@ export const ProfileEdit = () => {
     reactQueryClient.invalidateQueries({ queryKey: partyByAddrQuery.queryKey });
   }, [setBannerTextAtom, partyByAddrQuery, reactQueryClient]);
 
-  const onUpload = useCallback(
-    async (imageFile: File) => {
-      try {
-        const result = await uploadImage(
-          imageFile,
-          `profile/${party?.id}`,
-          apiServerUrl,
-        );
-        setBannerTextAtom(PROFILE_SAVED);
-        return result;
-      } catch (e) {
-        setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
-        return '';
-      }
-    },
-    [setBannerTextAtom, setErrorBannerTextAtom, party],
-  );
+  const onUpload = useOnUploadCallback({ partyByAddr, updatePartyById });
 
   return (
     <Flex justifyContent="center" sx={{ width: '100%' }}>

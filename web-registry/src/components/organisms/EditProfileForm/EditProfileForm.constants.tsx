@@ -45,3 +45,5 @@ export const PROFILE_BG_ASPECT_RATIO = 4;
 export const LINKS_LABEL = 'Links';
 export const WEBSITE_PLACEHOLDER = 'yourwebsite.com';
 export const TWITTER_PLACEHOLDER = 'yourtwitterhandle';
+export const PROFILE_AVATAR_FILE_NAME = 'avatar';
+export const PROFILE_BG_FILE_NAME = 'bg';

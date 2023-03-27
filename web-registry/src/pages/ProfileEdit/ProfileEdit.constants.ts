@@ -13,6 +13,8 @@ export const DEFAULT_PROFILE_USER_AVATAR = '/svg/profile-default-avatar.svg';
 export const DEFAULT_PROFILE_COMPANY_AVATAR =
   '/svg/profile-default-company.svg';
 
+export const PROFILE_S3_PATH = 'profiles';
+
 export const DEFAULT_PROFILE_AVATARS = [
   DEFAULT_PROFILE_COMPANY_AVATAR,
   DEFAULT_PROFILE_USER_AVATAR,

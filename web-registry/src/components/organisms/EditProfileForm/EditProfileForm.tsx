@@ -23,7 +23,9 @@ import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import {
   editProfileFormInitialValues,
   LINKS_LABEL,
+  PROFILE_AVATAR_FILE_NAME,
   PROFILE_BG_ASPECT_RATIO,
+  PROFILE_BG_FILE_NAME,
   PROFILE_TYPE,
   radioCardItems,
   UPLOAD_IMAGE,
@@ -139,6 +141,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           setValue={setProfileImage}
           {...form.register('profileImage')}
           name="profile-image"
+          initialFileName={PROFILE_AVATAR_FILE_NAME}
           circularCrop
           onUpload={onUpload}
         >
@@ -147,6 +150,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
         <ImageField
           label="Background image"
           setValue={setBackgroundImage}
+          initialFileName={PROFILE_BG_FILE_NAME}
           sx={{
             label: { width: '100%' },
             button: { width: '100%' },
@@ -154,7 +158,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           fixedCrop={{
             aspect: PROFILE_BG_ASPECT_RATIO,
           }}
-          {...form.register('profileImage')}
+          {...form.register('backgroundImage')}
           name="bg-image"
           onUpload={onUpload}
         >

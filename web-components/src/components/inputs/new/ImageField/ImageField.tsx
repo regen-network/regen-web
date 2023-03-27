@@ -7,12 +7,17 @@ import OutlinedButton from '../../../buttons/OutlinedButton';
 import { getImageSrc } from '../../../image-crop/canvas-utils';
 import CropImageModal from '../../../modal/CropImageModal';
 import FieldFormControl from '../FieldFormControl/FieldFormControl';
+import {
+  DEFAULT_IMAGE_EXTENSION,
+  EXTENSION_REGEX,
+} from './ImageField.constants';
 import { useImageFieldStyles } from './ImageField.styles';
 
 interface Props {
   name: string;
   label?: string;
   buttonText?: string;
+  initialFileName?: string;
   disabled?: boolean;
   optional?: boolean | string;
   circularCrop?: boolean;
@@ -33,6 +38,7 @@ export const ImageField = forwardRef<HTMLInputElement, Props>(
       label,
       optional,
       buttonText,
+      initialFileName,
       disabled = false,
       circularCrop = false,
       fixedCrop = {},
@@ -46,6 +52,7 @@ export const ImageField = forwardRef<HTMLInputElement, Props>(
   ): JSX.Element => {
     const [initialImage, setInitialImage] = useState('');
     const [fileName, setFileName] = useState('');
+    const [fileType, setFileType] = useState('');
     const { classes: styles } = useImageFieldStyles();
     const inputId = `image-upload-input-${name.toString()}`;
 
@@ -61,7 +68,12 @@ export const ImageField = forwardRef<HTMLInputElement, Props>(
     const onCropModalSubmit = async (
       croppedImage: HTMLImageElement,
     ): Promise<void> => {
-      const result = await getImageSrc(croppedImage, onUpload, fileName);
+      const result = await getImageSrc(
+        croppedImage,
+        onUpload,
+        fileName,
+        fileType,
+      );
 
       setInitialImage('');
       setValue(result);
@@ -70,6 +82,7 @@ export const ImageField = forwardRef<HTMLInputElement, Props>(
     const handleCropModalClose = (): void => {
       setInitialImage('');
       setFileName('');
+      setFileType('');
     };
 
     return (
@@ -103,8 +116,15 @@ export const ImageField = forwardRef<HTMLInputElement, Props>(
                   const [file] = files;
                   toBase64(file).then(image => {
                     if (typeof image === 'string') {
+                      const fileName = file.name;
+                      const fileExtension =
+                        fileName.match(EXTENSION_REGEX)?.[1] ??
+                        DEFAULT_IMAGE_EXTENSION;
                       setInitialImage(image);
-                      setFileName(file.name);
+                      setFileType(file.type);
+                      setFileName(
+                        `${initialFileName}.${fileExtension}` ?? fileName,
+                      );
                     }
                   });
                 }

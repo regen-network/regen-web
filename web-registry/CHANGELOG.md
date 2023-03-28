@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.3](https://github.com/regen-network/regen-web/compare/v1.2.2...v1.2.3) (2023-03-28)
+
+### Bug Fixes
+
+- handle coingecko api failure ([60f19a3](https://github.com/regen-network/regen-web/commit/60f19a353bb0cfc48e0e655a1189d69cea9313c3))
+
 ## [1.2.2](https://github.com/regen-network/regen-web/compare/v1.2.1...v1.2.2) (2023-03-24)
 
 ### Bug Fixes

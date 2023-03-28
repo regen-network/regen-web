@@ -15,12 +15,16 @@ export const getSimplePriceQuery = ({
 }: ReactQuerySimplePriceParams): ReactQuerySimplePriceResponse => ({
   queryKey: ['simplePrice', GECKO_TOKEN_IDS],
   queryFn: async () => {
-    const simplePrice = await fetchSimplePrice({
-      ids,
-      vsCurrencies,
-    });
+    try {
+      const simplePrice = await fetchSimplePrice({
+        ids,
+        vsCurrencies,
+      });
 
-    return simplePrice;
+      return simplePrice;
+    } catch (e) {
+      return null;
+    }
   },
   ...params,
 });

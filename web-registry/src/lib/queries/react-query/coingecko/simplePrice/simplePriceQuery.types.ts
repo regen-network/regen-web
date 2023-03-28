@@ -5,7 +5,7 @@ import { FetchSimplePriceResponse } from 'lib/coingecko';
 import { ReactQueryBuilderResponse } from '../../types/react-query.types';
 
 export type ReactQuerySimplePriceResponse =
-  QueryObserverOptions<FetchSimplePriceResponse>;
+  QueryObserverOptions<FetchSimplePriceResponse | null>;
 
 export type ReactQuerySimplePriceParams = {
   request?: {

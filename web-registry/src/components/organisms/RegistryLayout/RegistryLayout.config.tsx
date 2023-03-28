@@ -13,6 +13,10 @@ import { Link } from 'components/atoms';
 
 export const getMenuItems = (pathname: string): HeaderMenuItem[] => [
   {
+    title: 'NCT',
+    href: '/baskets/eco.uC.NCT',
+  },
+  {
     title: 'Projects',
     href: '/projects/1',
   },

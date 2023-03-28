@@ -52,7 +52,7 @@ const useStyles = makeStyles<UseStylesParams>()((theme, { rotate }) => ({
 }));
 
 export default function ArrowDownIcon({
-  color,
+  color = 'currentColor',
   className,
   fontSize = 'inherit',
   direction = 'down',

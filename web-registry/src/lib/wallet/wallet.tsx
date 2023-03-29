@@ -20,7 +20,7 @@ import { useWalletConnectCallback } from './hooks/useWalletConnectCallback';
 import { useWalletConnectFinalize } from './hooks/useWalletConnectFinalize';
 import { emptySender } from './wallet.constants';
 import { ConnectParams } from './wallet.types';
-import { WalletConfig } from './walletsConfig/walletsConfig.types';
+import { WalletConfig, WalletType } from './walletsConfig/walletsConfig.types';
 
 export interface Wallet {
   offlineSigner?: OfflineSigner;
@@ -61,9 +61,11 @@ export type WalletContextType = {
   accountId?: string;
   walletConfig?: WalletConfig;
   walletConnect?: WalletConnect;
+  isConnected: boolean;
 };
 const WalletContext = createContext<WalletContextType>({
   loaded: false,
+  isConnected: false,
 });
 
 export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
@@ -149,6 +151,12 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         accountId,
         walletConfig: walletConfigRef?.current,
         walletConnect,
+        isConnected:
+          !!wallet?.address &&
+          // signArbitrary (used in login) not yet supported by @keplr-wallet/wc-client
+          // https://github.com/chainapsis/keplr-wallet/issues/664
+          (walletConfigRef?.current?.type === WalletType.WalletConnectKeplr ||
+            !!accountId),
       }}
     >
       {children}

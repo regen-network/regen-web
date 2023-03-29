@@ -34,6 +34,9 @@ export const useWalletConnectFinalize = ({
         walletConfig: walletConfigRef.current,
         walletConnect,
         login,
+        // signArbitrary (used in login) not yet supported by @keplr-wallet/wc-client
+        // https://github.com/chainapsis/keplr-wallet/issues/664
+        doLogin: false,
       });
     };
 

@@ -24,7 +24,7 @@ import { fullWidthRegExp } from './RegistryLayout.constants';
 
 const RegistryLayoutHeader: React.FC = () => {
   const { pathname } = useLocation();
-  const { wallet, loaded, logout, accountId } = useWallet();
+  const { wallet, loaded, logout, isConnected } = useWallet();
   const theme = useTheme<Theme>();
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
   const isTransparent = useMemo(() => getIsTransparent(pathname), [pathname]);
@@ -53,7 +53,7 @@ const RegistryLayoutHeader: React.FC = () => {
         pathname={pathname}
         extras={
           <Box display="flex" justifyContent="center" alignItems="center">
-            {chainId && loaded && accountId && wallet?.address && logout && (
+            {chainId && loaded && isConnected && logout && (
               <UserMenuItem
                 address={truncate(wallet?.address)}
                 avatar={DefaultAvatar}

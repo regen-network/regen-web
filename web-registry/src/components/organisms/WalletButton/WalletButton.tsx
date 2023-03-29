@@ -38,6 +38,7 @@ const WalletButton = ({ size = 'small' }: Props) => {
     login,
     walletConfig,
     walletConnect,
+    isConnected,
   } = useWallet();
 
   const { bankClient } = useLedger();
@@ -47,7 +48,7 @@ const WalletButton = ({ size = 'small' }: Props) => {
   );
   const [modalState, setModalState] =
     useState<WalletModalState>('wallet-select');
-  const isConnected = loaded ? !!wallet?.address : null;
+  const isConnectedLoaded = loaded ? isConnected : null;
 
   // Populate cache with user balance once connected
   useQuery(
@@ -90,7 +91,7 @@ const WalletButton = ({ size = 'small' }: Props) => {
   useNavigateToMobileUrl({
     mobileConnectUrl,
     isWaitingForSigning,
-    isConnected,
+    isConnected: isConnectedLoaded,
   });
   useResetModalOnConnect({ setIsModalOpen, setModalState, wallet });
 
@@ -98,7 +99,7 @@ const WalletButton = ({ size = 'small' }: Props) => {
     <>
       <div className={styles.root}>
         <>
-          {!(accountId && wallet?.address) && loaded && (
+          {!isConnected && loaded && (
             <OutlinedButton onClick={onButtonClick} size={size}>
               <img className={styles.icon} src={Keplr} alt="keplr" />
               login

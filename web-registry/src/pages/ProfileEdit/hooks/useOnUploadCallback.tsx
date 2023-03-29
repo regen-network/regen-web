@@ -20,7 +20,7 @@ import {
 import { PROFILE_S3_PATH, PROFILE_SAVED } from '../ProfileEdit.constants';
 
 type Params = {
-  partyByAddr?: PartyByAddrQuery;
+  partyByAddr?: PartyByAddrQuery | null;
   updatePartyById: ReturnType<typeof useUpdatePartyByIdMutation>[0];
 };
 

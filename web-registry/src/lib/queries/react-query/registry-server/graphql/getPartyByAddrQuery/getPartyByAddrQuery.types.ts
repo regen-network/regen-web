@@ -6,7 +6,7 @@ import { PartyByAddrQuery, PartyByAddrQueryVariables } from 'generated/graphql';
 import { ReactQueryBuilderResponse } from '../../../types/react-query.types';
 
 export type ReactQueryGetPartyByAddrQueryResponse =
-  QueryObserverOptions<PartyByAddrQuery>;
+  QueryObserverOptions<PartyByAddrQuery | null>;
 
 export type ReactQueryGetPartyByIdQueryParams = {
   client: ApolloClient<NormalizedCacheObject>;

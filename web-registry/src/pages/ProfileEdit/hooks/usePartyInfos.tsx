@@ -6,7 +6,7 @@ import {
 } from '../ProfileEdit.constants';
 
 type Params = {
-  partyByAddr?: PartyByAddrQuery;
+  partyByAddr?: PartyByAddrQuery | null;
   accountId?: string;
 };
 

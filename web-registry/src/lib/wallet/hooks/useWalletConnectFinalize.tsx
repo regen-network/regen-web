@@ -4,7 +4,7 @@ import WalletConnect from '@walletconnect/client';
 import { UseStateSetter } from 'types/react/use-state';
 
 import { chainInfo } from '../chainInfo/chainInfo';
-import { Wallet } from '../wallet';
+import { LoginType, Wallet } from '../wallet';
 import { finalizeConnection } from '../wallet.utils';
 import { WalletConfig } from '../walletsConfig/walletsConfig.types';
 
@@ -12,7 +12,7 @@ type Props = {
   walletConfigRef: MutableRefObject<WalletConfig | undefined>;
   walletConnect?: WalletConnect;
   setWallet: UseStateSetter<Wallet>;
-  login?: (wallet?: Wallet) => Promise<void>;
+  login?: LoginType;
 };
 
 export const useWalletConnectFinalize = ({
@@ -32,6 +32,7 @@ export const useWalletConnectFinalize = ({
         setWallet,
         walletClient,
         walletConfig: walletConfigRef.current,
+        walletConnect,
         login,
       });
     };

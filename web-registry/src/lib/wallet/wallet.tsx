@@ -13,6 +13,7 @@ import { useConnectWallet } from './hooks/useConnectWallet';
 import { useDetectKeplrMobileBrowser } from './hooks/useDetectKeplrMobileBrowser';
 import { useDisconnect } from './hooks/useDisconnect';
 import { useLogin } from './hooks/useLogin';
+import { useLogout } from './hooks/useLogout';
 import { useOnAccountChange } from './hooks/useOnAccountChange';
 import { useSignArbitrary } from './hooks/useSignArbitrary';
 import { useWalletConnectCallback } from './hooks/useWalletConnectCallback';
@@ -32,14 +33,19 @@ declare global {
   interface Window extends KeplrWindow {}
 }
 
-export type SignArbitraryParams = {
+export type LoginParams = {
+  walletConfig?: WalletConfig;
+  walletConnect?: WalletConnect;
   wallet?: Wallet;
-  nonce: string;
 };
-export type SignArbitraryType = ({
-  wallet,
-  nonce,
-}: SignArbitraryParams) => Promise<StdSignature | undefined>;
+export type LoginType = (loginParams: LoginParams) => Promise<void>;
+
+export interface SignArbitraryParams extends LoginParams {
+  nonce: string;
+}
+export type SignArbitraryType = (
+  signArbitraryParams: SignArbitraryParams,
+) => Promise<StdSignature | undefined>;
 
 export type WalletContextType = {
   wallet?: Wallet;
@@ -50,12 +56,16 @@ export type WalletContextType = {
   error?: unknown;
   walletConnectUri?: string;
   signArbitrary?: SignArbitraryType;
-  login?: (wallet?: Wallet) => Promise<void>;
+  login?: LoginType;
   logout?: () => Promise<void>;
   accountId?: string;
+  walletConfig?: WalletConfig;
+  walletConnect?: WalletConnect;
+  isConnected: boolean;
 };
 const WalletContext = createContext<WalletContextType>({
   loaded: false,
+  isConnected: false,
 });
 
 export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
@@ -82,21 +92,11 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
 
   const onQrCloseCallbackRef = useRef<() => void>();
 
-  const disconnect = useDisconnect({
-    setConnectionType,
-    setWallet,
-    setWalletConnect,
-    setWalletConnectUri,
-    walletConfigRef,
-    walletConnect,
-  });
-
   const signArbitrary = useSignArbitrary({
-    walletConfigRef,
-    walletConnect,
     setError,
   });
   const login = useLogin({ signArbitrary, setError, setAccountId });
+  const logout = useLogout({ setError, setAccountId });
 
   const connectWallet = useConnectWallet({
     onQrCloseCallbackRef,
@@ -109,6 +109,16 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   });
 
   const connect = useConnect({ connectWallet, setConnectionType, setError });
+
+  const disconnect = useDisconnect({
+    setConnectionType,
+    setWallet,
+    setWalletConnect,
+    setWalletConnectUri,
+    walletConfigRef,
+    walletConnect,
+    logout,
+  });
 
   useAutoConnect({ connectWallet, setError, setLoaded });
   useOnAccountChange({ connectWallet, wallet });
@@ -138,7 +148,15 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         walletConnectUri,
         signArbitrary,
         login,
+        logout,
         accountId,
+        walletConfig: walletConfigRef?.current,
+        walletConnect,
+        isConnected:
+          !!wallet?.address &&
+          // signArbitrary (used in login) not yet supported by @keplr-wallet/wc-client
+          // https://github.com/chainapsis/keplr-wallet/issues/664
+          (!!walletConnect || !!accountId),
       }}
     >
       {children}

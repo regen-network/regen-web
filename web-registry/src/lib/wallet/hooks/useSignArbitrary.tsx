@@ -1,29 +1,26 @@
-import { MutableRefObject, useCallback } from 'react';
-import WalletConnect from '@walletconnect/client';
+import { useCallback } from 'react';
 
 import { UseStateSetter } from 'types/react/use-state';
 
 import { chainInfo } from '../chainInfo/chainInfo';
 import { SignArbitraryParams } from '../wallet';
 import { getArbitraryLoginData } from '../wallet.utils';
-import { WalletConfig } from '../walletsConfig/walletsConfig.types';
 
 type Props = {
-  walletConfigRef: MutableRefObject<WalletConfig | undefined>;
-  walletConnect?: WalletConnect;
   setError: UseStateSetter<unknown>;
 };
 
-export const useSignArbitrary = ({
-  walletConfigRef,
-  walletConnect,
-  setError,
-}: Props) => {
+export const useSignArbitrary = ({ setError }: Props) => {
   const signArbitrary = useCallback(
-    async ({ wallet, nonce }: SignArbitraryParams) => {
+    async ({
+      walletConfig,
+      walletConnect,
+      wallet,
+      nonce,
+    }: SignArbitraryParams) => {
       try {
         if (wallet?.address) {
-          const walletClient = await walletConfigRef.current?.getClient({
+          const walletClient = await walletConfig?.getClient({
             chainInfo,
             walletConnect,
           });
@@ -41,7 +38,7 @@ export const useSignArbitrary = ({
         return undefined;
       }
     },
-    [walletConfigRef, walletConnect, setError],
+    [setError],
   );
   return signArbitrary;
 };

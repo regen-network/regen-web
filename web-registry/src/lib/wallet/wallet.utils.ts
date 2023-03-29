@@ -1,14 +1,12 @@
 import { MutableRefObject } from 'react';
 import WalletConnect from '@walletconnect/client';
-import axios from 'axios';
 import truncate from 'lodash/truncate';
 
 import { UseStateSetter } from 'types/react/use-state';
-import { apiUri } from 'lib/apiUri';
 import { LoginEvent, Track } from 'lib/tracker/types';
 
 import { chainInfo } from './chainInfo/chainInfo';
-import { Wallet } from './wallet';
+import { LoginType, Wallet } from './wallet';
 import {
   KEPLR_LOGIN_TITLE,
   WALLET_CONNECT_BRIDGE_URL,
@@ -56,15 +54,17 @@ export const getWalletConnectInstance = async ({
 type FinalizeConnectionParams = {
   walletClient?: WalletClient;
   walletConfig?: WalletConfig;
+  walletConnect?: WalletConnect;
   setWallet: UseStateSetter<Wallet>;
   track?: Track;
-  login?: (wallet?: Wallet) => Promise<void>;
+  login?: LoginType;
   doLogin?: boolean;
 };
 
 export const finalizeConnection = async ({
   walletClient,
   walletConfig,
+  walletConnect,
   setWallet,
   track,
   login,
@@ -86,7 +86,7 @@ export const finalizeConnection = async ({
   }
 
   const key = await walletClient?.getKey(chainInfo.chainId);
-  if (key && key.bech32Address && offlineSigner && login) {
+  if (key && key.bech32Address && offlineSigner) {
     const wallet = {
       offlineSigner,
       address: key.bech32Address,
@@ -100,18 +100,11 @@ export const finalizeConnection = async ({
     }
     setWallet(wallet);
 
-    if (doLogin) await login(wallet);
+    // signArbitrary (used in login) not yet supported by @keplr-wallet/wc-client
+    // https://github.com/chainapsis/keplr-wallet/issues/664
+    if (!walletConnect && login && doLogin)
+      await login({ walletConfig, walletConnect, wallet });
   }
-};
-
-export const getAxiosInstance = (token: string) => {
-  return axios.create({
-    baseURL: apiUri,
-    withCredentials: true,
-    headers: {
-      'X-CSRF-TOKEN': token,
-    },
-  });
 };
 
 export const getArbitraryLoginData = (nonce: string) =>

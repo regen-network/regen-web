@@ -26,16 +26,12 @@ interface HeaderProps {
   borderBottom?: boolean;
   color: string;
   fullWidth?: boolean;
-  isAuthenticated?: boolean;
   menuItems?: HeaderMenuItem[];
   linkComponent?: React.FC<React.PropsWithChildren<NavLinkProps>>;
   homeLink?: React.FC<React.PropsWithChildren<{ color: string }>>;
   isRegistry?: boolean;
   extras?: JSX.Element;
   websiteExtras?: JSX.Element;
-  onSignup?: () => void;
-  onLogin?: () => void;
-  onLogout?: () => void;
   pathname?: string;
   transparent?: boolean;
 }
@@ -44,10 +40,6 @@ export default function Header({
   transparent,
   color,
   menuItems,
-  isAuthenticated,
-  onSignup,
-  onLogin,
-  onLogout,
   linkComponent = NavLink,
   homeLink: HomeLink = HeaderLogoLink,
   isRegistry = false,
@@ -124,10 +116,6 @@ export default function Header({
                 isRegistry={isRegistry}
                 pathname={pathname}
                 menuItems={menuItems}
-                isAuthenticated={isAuthenticated}
-                onLogin={onLogin}
-                onLogout={onLogout}
-                onSignup={onSignup}
                 extras={extras}
                 websiteExtras={websiteExtras}
               />

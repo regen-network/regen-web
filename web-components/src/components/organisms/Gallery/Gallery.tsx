@@ -1,11 +1,9 @@
-import * as React from 'react';
 import { useState } from 'react';
 import { Box, ButtonBase, SxProps, useTheme } from '@mui/material';
 import { AnimatePresence, motion } from 'framer-motion';
 import { wrap } from 'popmotion';
 
 import { Body, Label } from 'src/components/typography';
-import { sxToArray } from 'src/utils/mui/sxToArray';
 
 import { Theme } from '../../../theme/muiTheme';
 import ArrowDownIcon from '../../icons/ArrowDownIcon';
@@ -112,10 +110,11 @@ const Gallery = ({ sx }: Props) => {
         sx={{
           position: 'relative',
           display: 'flex',
+          flexDirection: { xs: 'column', sm: 'row' },
           justifyContent: 'center',
           alignItems: 'flex-start',
           px: { xs: 5, lg: 37.5 },
-          py: 6.25,
+          py: { xs: 5, sm: 6.25 },
           width: '100%',
           background: 'rgba(0, 0, 0, 0.5)',
           backgroundRepeat: 'no-repeat',
@@ -123,34 +122,50 @@ const Gallery = ({ sx }: Props) => {
           zIndex: 1,
         }}
       >
-        <ButtonBase
-          onClick={() => paginate(-1)}
-          sx={{ fontSize: 24, mr: 6.5 }}
-          disableRipple
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+            mb: { xs: 2.5, sm: 0 },
+          }}
         >
-          <ArrowDownIcon color={theme.palette.primary.main} direction="prev" />
-        </ButtonBase>
-        <ButtonBase
-          onClick={() => paginate(1)}
-          sx={{ fontSize: 24, mr: 6.5 }}
-          disableRipple
-        >
-          <ArrowDownIcon color={theme.palette.primary.main} direction="next" />
-        </ButtonBase>
-        <Label size="sm" sx={{ mr: 5, mt: 0.75 }}>
-          {`${imageIndex + 1}/${galleryImagesMock.length}`}
-        </Label>
+          <ButtonBase
+            onClick={() => paginate(-1)}
+            sx={{ fontSize: 24, mr: 6.5 }}
+            disableRipple
+          >
+            <ArrowDownIcon
+              color={theme.palette.primary.main}
+              direction="prev"
+            />
+          </ButtonBase>
+          <ButtonBase
+            onClick={() => paginate(1)}
+            sx={{ fontSize: 24, mr: 6.5 }}
+            disableRipple
+          >
+            <ArrowDownIcon
+              color={theme.palette.primary.main}
+              direction="next"
+            />
+          </ButtonBase>
+          <Label size="sm" sx={{ mr: 5, mt: 0.75 }}>
+            {`${imageIndex + 1}/${galleryImagesMock.length}`}
+          </Label>
+        </Box>
         <Body
           size="lg"
+          mobileSize="sm"
           sx={[
             {
               color: 'primary.main',
               maxWidth: 890,
               width: '100%',
-              minHeight: 54,
+              minHeight: { xs: 42, sm: 54 },
             },
             !isShowMore && {
-              height: 54,
+              height: { xs: 42, sm: 54 },
               background:
                 'linear-gradient(180deg, #FFFFFF 26.04%, rgba(255, 255, 255, 0) 100%);',
               backgroundClip: 'text',

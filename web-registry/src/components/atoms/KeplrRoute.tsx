@@ -10,12 +10,14 @@ interface Props {
 }
 
 const KeplrRoute = ({ component: Component }: Props): JSX.Element => {
-  const { loaded, wallet } = useWallet();
+  const { loaded, isConnected } = useWallet();
   const navigate = useNavigate();
-  const connected = chainId && wallet?.address;
+  const connected = chainId && isConnected;
 
   useEffect(() => {
-    if (loaded && !connected) navigate('/connect-wallet');
+    if (loaded && !connected) {
+      navigate('/connect-wallet');
+    }
   }, [connected, navigate, loaded]);
 
   return <Box sx={{ minHeight: 600 }}>{connected && <Component />}</Box>;

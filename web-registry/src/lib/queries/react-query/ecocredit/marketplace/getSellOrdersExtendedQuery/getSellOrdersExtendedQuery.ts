@@ -50,12 +50,11 @@ export const getSellOrdersExtendedQuery = ({
     });
 
     // get prices to compute AskUsdAmount
-    const simplePriceData = await getFromCacheOrFetch<FetchSimplePriceResponse>(
-      {
+    const simplePriceData =
+      await getFromCacheOrFetch<FetchSimplePriceResponse | null>({
         query: getSimplePriceQuery({}),
         reactQueryClient,
-      },
-    );
+      });
 
     const regenPrice = simplePriceData?.regen?.usd;
     const eeurPrice = simplePriceData?.[GECKO_EEUR_ID]?.usd;

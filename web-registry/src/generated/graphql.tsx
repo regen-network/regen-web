@@ -8339,6 +8339,12 @@ export enum PartiesOrderBy {
   ImageDesc = 'IMAGE_DESC',
   AccountIdAsc = 'ACCOUNT_ID_ASC',
   AccountIdDesc = 'ACCOUNT_ID_DESC',
+  BgImageAsc = 'BG_IMAGE_ASC',
+  BgImageDesc = 'BG_IMAGE_DESC',
+  TwitterLinkAsc = 'TWITTER_LINK_ASC',
+  TwitterLinkDesc = 'TWITTER_LINK_DESC',
+  WebsiteLinkAsc = 'WEBSITE_LINK_ASC',
+  WebsiteLinkDesc = 'WEBSITE_LINK_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -8358,6 +8364,9 @@ export type Party = Node & {
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   accountId?: Maybe<Scalars['UUID']>;
+  bgImage?: Maybe<Scalars['String']>;
+  twitterLink?: Maybe<Scalars['String']>;
+  websiteLink?: Maybe<Scalars['String']>;
   /** Reads a single `Wallet` that is related to this `Party`. */
   walletByWalletId?: Maybe<Wallet>;
   /** Reads a single `Address` that is related to this `Party`. */
@@ -9990,6 +9999,12 @@ export type PartyCondition = {
   image?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `accountId` field. */
   accountId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `bgImage` field. */
+  bgImage?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `twitterLink` field. */
+  twitterLink?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `websiteLink` field. */
+  websiteLink?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `CreditClass` values, with data from `CreditVintage`. */
@@ -10373,6 +10388,9 @@ export type PartyInput = {
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   accountId?: Maybe<Scalars['UUID']>;
+  bgImage?: Maybe<Scalars['String']>;
+  twitterLink?: Maybe<Scalars['String']>;
+  websiteLink?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `Methodology` values, with data from `CreditClass`. */
@@ -12050,6 +12068,9 @@ export type PartyPatch = {
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   accountId?: Maybe<Scalars['UUID']>;
+  bgImage?: Maybe<Scalars['String']>;
+  twitterLink?: Maybe<Scalars['String']>;
+  websiteLink?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `Project` values, with data from `CreditVintage`. */
@@ -19823,7 +19844,7 @@ export type PartyByAddrQuery = (
     & Pick<Wallet, 'id'>
     & { partyByWalletId?: Maybe<(
       { __typename?: 'Party' }
-      & Pick<Party, 'name' | 'type' | 'image' | 'description' | 'accountId'>
+      & Pick<Party, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'accountId' | 'websiteLink' | 'twitterLink'>
     )> }
   )> }
 );
@@ -21601,11 +21622,15 @@ export const PartyByAddrDocument = gql`
   walletByAddr(addr: $addr) {
     id
     partyByWalletId {
+      id
       name
       type
       image
+      bgImage
       description
       accountId
+      websiteLink
+      twitterLink
     }
   }
 }

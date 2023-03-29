@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import MuiTextField from '@mui/material/TextField';
 
+import { sxToArray } from '../../../../utils/mui/sxToArray';
 import { Body } from '../../../typography';
 import { useInputLabelStyles } from '../InputLabel/InputLabel.styles';
 import { useTextFieldStyles } from './TextField.styles';
@@ -13,41 +14,35 @@ const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
     {
       error = false,
       optional = false,
-      defaultStyle = true,
-      forceDefaultStyle = false,
       children,
       startAdornment,
       endAdornment,
       description,
       label,
       customInputProps = {},
+      sx = [],
       ...props
     },
     ref,
   ) => {
-    const { classes: styles, cx } = useTextFieldStyles({
+    const { classes: styles } = useTextFieldStyles({
       error,
       label,
     });
     const baseClasses = [styles.root, props.className];
-    const defaultClasses = [styles.default, ...baseClasses];
     const { classes: labelClasses } = useInputLabelStyles({
       optional: !!optional,
     });
-    const rootClasses = defaultStyle
-      ? forceDefaultStyle
-        ? defaultClasses
-        : [...defaultClasses, styles.firstOfType]
-      : baseClasses;
     const id = props.id ?? props.name;
+    const hasLabelOrDescription = !!label || !!description;
 
     return (
       <MuiTextField
         {...props}
+        sx={[...baseClasses, ...sxToArray(sx)]}
         ref={ref}
         id={id}
         variant="standard"
-        className={cx(rootClasses)}
         error={error}
         InputProps={{
           disableUnderline: true,
@@ -60,21 +55,25 @@ const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
           inputProps: { ...customInputProps },
         }}
         label={
-          <>
-            <Box
-              sx={{
-                display: 'inline-block',
-                width: optional ? 'inherit' : '100%',
-              }}
-            >
-              {label}
-            </Box>
-            {description && (
-              <Box sx={{ display: 'flex', mt: 1 }}>
-                <Body size="sm">{description}</Body>
-              </Box>
-            )}
-          </>
+          hasLabelOrDescription ? (
+            <>
+              {label && (
+                <Box
+                  sx={{
+                    display: 'inline-block',
+                    width: optional ? 'inherit' : '100%',
+                  }}
+                >
+                  {label}
+                </Box>
+              )}
+              {description && (
+                <Box sx={{ display: 'flex', mt: 1 }}>
+                  <Body size="sm">{description}</Body>
+                </Box>
+              )}
+            </>
+          ) : undefined
         }
         InputLabelProps={{
           classes: labelClasses,

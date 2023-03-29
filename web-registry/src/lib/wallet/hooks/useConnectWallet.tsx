@@ -4,7 +4,7 @@ import WalletConnect from '@walletconnect/client';
 import { UseStateSetter } from 'types/react/use-state';
 
 import { chainInfo } from '../chainInfo/chainInfo';
-import { Wallet } from '../wallet';
+import { LoginType, Wallet } from '../wallet';
 import { ConnectWalletParams } from '../wallet.types';
 import { finalizeConnection, getWalletConnectInstance } from '../wallet.utils';
 import { walletsConfig } from '../walletsConfig/walletsConfig';
@@ -22,7 +22,7 @@ type Props = {
     options?: any,
     callback?: (...params: any[]) => any,
   ) => Promise<any>;
-  login?: (wallet?: Wallet) => Promise<void>;
+  login?: LoginType;
 };
 
 export type ConnectWalletType = ({
@@ -83,6 +83,7 @@ export const useConnectWallet = ({
           setWallet,
           walletClient,
           walletConfig,
+          walletConnect,
           track,
           login,
           doLogin,

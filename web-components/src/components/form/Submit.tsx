@@ -1,7 +1,6 @@
 import { Box } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
-import ContainedButton from '../buttons/ContainedButton';
 import { CancelButtonFooter } from '../organisms/CancelButtonFooter/CancelButtonFooter';
 
 interface SubmitProps {

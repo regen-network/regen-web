@@ -21,25 +21,23 @@ import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 import { containerStyles } from 'web-components/lib/styles/container';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { PartyType } from 'generated/graphql';
 import { getAccountUrl } from 'lib/block-explorer';
 import { isBridgeEnabled } from 'lib/ledger';
 import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
+import {
+  DEFAULT_NAME,
+  DEFAULT_PROFILE_BG,
+  profileVariantMapping,
+} from 'pages/ProfileEdit/ProfileEdit.constants';
 import { Link } from 'components/atoms';
 import { useQueryIfCreditClassAdmin } from 'hooks/useQueryIfCreditClassAdmin';
 import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator';
 import { useQueryIfIssuer } from 'hooks/useQueryIfIssuer';
 import { useQueryIfProjectAdmin } from 'hooks/useQueryIfProjectAdmin';
 
-import {
-  DEFAULT_NAME,
-  DEFAULT_PROFILE_BG,
-  DEFAULT_PROFILE_COMPANY_AVATAR,
-  DEFAULT_PROFILE_USER_AVATAR,
-  profileVariantMapping,
-} from './Dashboard.constants';
 import { dashBoardStyles } from './Dashboard.styles';
 
 const Dashboard = (): JSX.Element => {
@@ -62,12 +60,7 @@ const Dashboard = (): JSX.Element => {
       enabled: !!wallet?.address && !!graphqlClient,
     }),
   );
-  const partyData = partyByAddr?.walletByAddr?.partyByWalletId;
-  const party = accountId === partyData?.accountId ? partyData : undefined;
-  const isOrganization = party?.type === PartyType.Organization;
-  const defaultAvatar = isOrganization
-    ? DEFAULT_PROFILE_COMPANY_AVATAR
-    : DEFAULT_PROFILE_USER_AVATAR;
+  const { party, defaultAvatar } = usePartyInfos({ accountId, partyByAddr });
 
   const tabs: IconTabProps[] = useMemo(
     () => [
@@ -124,14 +117,14 @@ const Dashboard = (): JSX.Element => {
     <>
       <ProfileHeader
         name={party?.name ? party?.name : DEFAULT_NAME}
-        backgroundImage={DEFAULT_PROFILE_BG}
+        backgroundImage={party?.bgImage ? party?.bgImage : DEFAULT_PROFILE_BG}
         avatar={party?.image ? party?.image : defaultAvatar}
         infos={{
           addressLink: {
             href: getAccountUrl(wallet?.address, true),
             text: truncate(wallet?.address),
           },
-          description: party?.description ?? '',
+          description: party?.description?.trimEnd() ?? '',
         }}
         editLink="/profile/edit"
         variant={party?.type ? profileVariantMapping[party.type] : 'individual'}

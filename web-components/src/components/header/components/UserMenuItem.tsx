@@ -61,7 +61,7 @@ const UserMenuItem: React.FC<React.PropsWithChildren<UserMenuItemProps>> = ({
           <Box sx={{ mx: -3.5 }}>
             <Separator />
             <Label size="xs" onClick={disconnect} sx={{ cursor: 'pointer' }}>
-              disconnect »
+              logout »
             </Label>
           </Box>
         ),

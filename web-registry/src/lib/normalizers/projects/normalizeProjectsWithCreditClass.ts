@@ -8,6 +8,8 @@ import {
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
 
+import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
+
 import { normalizeClassProjectForBatch } from '../classProjectForBatch/normalizeClassProjectForBatch';
 import { EMPTY_CLASS_PROJECT_INFO } from '../classProjectForBatch/normalizeClassProjectForBatch.constants';
 
@@ -40,11 +42,21 @@ export const normalizeProjectsWithCreditClass = ({
         })
       : EMPTY_CLASS_PROJECT_INFO;
 
+    const creditClass = findSanityCreditClass({
+      sanityCreditClassData,
+      creditClassIdOrUrl: project?.classId ?? '',
+    });
+    const creditClassImage =
+      creditClass?.image?.image?.asset?.url ?? creditClass?.image?.imageHref;
+
     return {
       ...project,
       id: project.id,
       name: metadata?.['schema:name'] ?? '',
-      imgSrc: projectPageMetadata?.['regen:previewPhoto'] || DefaultProject,
+      imgSrc:
+        projectPageMetadata?.['regen:previewPhoto'] ??
+        creditClassImage ??
+        DefaultProject,
       place: metadata?.['schema:location']?.place_name ?? '',
       area: metadata?.['regen:projectSize']?.['qudt:numericValue'] ?? 0,
       areaUnit: metadata?.['regen:projectSize']?.['qudt:unit'] || '',

@@ -17,13 +17,9 @@ type Props = {
   menuItems?: HeaderMenuItem[];
   isRegistry?: boolean;
   pathname: string;
-  isAuthenticated?: boolean;
   extras?: JSX.Element;
   linkComponent: React.FC<React.PropsWithChildren<NavLinkProps>>;
   websiteExtras?: JSX.Element;
-  onSignup?: () => void;
-  onLogin?: () => void;
-  onLogout?: () => void;
 };
 
 const MobileMenu: React.FC<React.PropsWithChildren<Props>> = ({

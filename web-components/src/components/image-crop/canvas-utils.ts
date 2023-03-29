@@ -82,11 +82,16 @@ export async function getImageSrc(
   croppedImage: HTMLImageElement,
   onUpload?: (file: File) => Promise<string>,
   fileName?: string,
+  fileType?: string,
 ): Promise<string> {
   let result = croppedImage.src;
 
   if (onUpload && fileName) {
-    const imageFile = await srcToFile(croppedImage.src, fileName, 'image/png');
+    const imageFile = await srcToFile(
+      croppedImage.src,
+      fileName,
+      fileType ?? 'image/png',
+    );
     result = await onUpload(imageFile);
   }
   return result;

@@ -21,9 +21,6 @@ const useStyles = makeStyles()((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(24),
     },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(12),
-    },
   },
 }));
 
@@ -39,6 +36,7 @@ const EcocreditsSection: React.FC<React.PropsWithChildren<Props>> = props => {
       )}
     >
       <Section
+        isPaddingTopMobile={false}
         className={styles.section}
         title={props.title}
         titleVariant="h3"

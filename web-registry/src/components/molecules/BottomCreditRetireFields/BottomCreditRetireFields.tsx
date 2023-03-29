@@ -72,12 +72,11 @@ export const BottomCreditRetireFields: React.FC<
           <TextField
             type="text"
             label="Explain the reason you are retiring these credits"
-            className={styles.noteTextField}
-            optional
-            defaultStyle={false}
             key={fieldId}
             error={!!errors?.retireFields?.[fieldIndex]?.note}
             helperText={errors?.retireFields?.[fieldIndex]?.note?.message}
+            className={styles.noteTextField}
+            sx={{ mt: { xs: 0, sm: 0 } }}
             {...register(`retireFields.${fieldIndex}.note`)}
           />
         </>

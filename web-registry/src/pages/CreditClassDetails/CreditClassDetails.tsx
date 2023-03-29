@@ -92,7 +92,9 @@ function CreditClassDetails({
           const classInfo = res?.class;
           if (classInfo) {
             setOnChainClass(classInfo);
-            const data = await getMetadata(classInfo.metadata);
+            const data = await getMetadata(classInfo.metadata, {
+              regen: 'https://schema.regen.network#',
+            });
             setMetadata(data);
           }
         } catch (err) {
@@ -131,6 +133,7 @@ function CreditClassDetails({
       {onChainClass && (
         <CreditClassDetailsSimple
           dbClass={dbCreditClassByOnChainId}
+          content={content}
           onChainClass={onChainClass}
           metadata={metadata}
           issuers={issuers}

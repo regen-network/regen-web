@@ -67,56 +67,69 @@ const Gallery = ({ sx }: Props) => {
     <Box
       sx={{
         position: 'relative',
-        display: 'flex',
-        alignItems: 'end',
-        aspectRatio: '1441 / 650',
-        '& img': {
-          width: '100%',
-          height: '100%',
-          position: 'absolute',
-          top: 0,
-          objectFit: 'cover',
-        },
+        background: theme.palette.primary.light,
+        pt: { xs: 15, md: 0 },
       }}
     >
-      <AnimatePresence initial={false} custom={direction}>
-        <motion.img
-          key={page}
-          src={galleryImagesMock[imageIndex].href}
-          custom={direction}
-          variants={variants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          transition={{
-            x: { type: 'spring', stiffness: 300, damping: 30 },
-            opacity: { duration: 0.2 },
-          }}
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={1}
-          onDragEnd={(e, { offset, velocity }) => {
-            const swipe = swipePower(offset.x, velocity.x);
-
-            if (swipe < -swipeConfidenceThreshold) {
-              paginate(1);
-            } else if (swipe > swipeConfidenceThreshold) {
-              paginate(-1);
-            }
-          }}
-        />
-      </AnimatePresence>
       <Box
         sx={{
           position: 'relative',
           display: 'flex',
-          flexDirection: { xs: 'column', sm: 'row' },
+          alignItems: 'end',
+          aspectRatio: '1441 / 650',
+          mb: { xs: 15, md: 0 },
+          '& img': {
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
+            top: 0,
+            objectFit: 'cover',
+          },
+        }}
+      >
+        <AnimatePresence initial={false} custom={direction}>
+          <motion.img
+            key={page}
+            src={galleryImagesMock[imageIndex].href}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: 'spring', stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 },
+            }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={1}
+            onDragEnd={(e, { offset, velocity }) => {
+              const swipe = swipePower(offset.x, velocity.x);
+
+              if (swipe < -swipeConfidenceThreshold) {
+                paginate(1);
+              } else if (swipe > swipeConfidenceThreshold) {
+                paginate(-1);
+              }
+            }}
+          />
+        </AnimatePresence>
+      </Box>
+      <Box
+        sx={{
+          position: { xs: 'relative', md: 'absolute' },
+          bottom: { xs: 'auto', md: 0 },
+          display: 'flex',
+          flexDirection: { xs: 'column', md: 'row' },
           justifyContent: 'center',
           alignItems: 'flex-start',
-          px: { xs: 5, lg: 37.5 },
-          py: { xs: 5, sm: 6.25 },
+          px: { xs: 5, md: 37.5 },
+          py: { xs: 5, md: 6.25 },
           width: '100%',
-          background: 'rgba(0, 0, 0, 0.5)',
+          background: {
+            xs: theme.palette.primary.contrastText,
+            md: 'rgba(0, 0, 0, 0.5)',
+          },
           backgroundRepeat: 'no-repeat',
           color: 'primary.main',
           zIndex: 1,
@@ -127,7 +140,7 @@ const Gallery = ({ sx }: Props) => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'flex-start',
-            mb: { xs: 2.5, sm: 0 },
+            mb: { xs: 2.5, md: 0 },
           }}
         >
           <ButtonBase
@@ -155,17 +168,17 @@ const Gallery = ({ sx }: Props) => {
           </Label>
         </Box>
         <Body
-          size="lg"
+          size="sm"
           mobileSize="sm"
           sx={[
             {
               color: 'primary.main',
               maxWidth: 890,
               width: '100%',
-              minHeight: { xs: 42, sm: 54 },
+              minHeight: { xs: 42, md: 54 },
             },
             !isShowMore && {
-              height: { xs: 42, sm: 54 },
+              height: { xs: 42, md: 54 },
               background:
                 'linear-gradient(180deg, #FFFFFF 26.04%, rgba(255, 255, 255, 0) 100%);',
               backgroundClip: 'text',

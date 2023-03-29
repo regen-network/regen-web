@@ -8,9 +8,9 @@ import {
   PartyByAddrQuery,
   useUpdatePartyByIdMutation,
 } from 'generated/graphql';
+import { apiUri } from 'lib/apiUri';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
-import { apiServerUrl } from 'lib/env';
 
 import {
   PROFILE_AVATAR_FILE_NAME,
@@ -38,7 +38,7 @@ export const useOnUploadCallback = ({
         const result = await uploadImage(
           imageFile,
           `${PROFILE_S3_PATH}/${party?.id}`,
-          apiServerUrl,
+          apiUri,
         );
         if (result.includes(PROFILE_AVATAR_FILE_NAME)) {
           await updatePartyById({

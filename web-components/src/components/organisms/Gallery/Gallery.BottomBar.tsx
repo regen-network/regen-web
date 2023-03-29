@@ -1,20 +1,26 @@
 import { useState } from 'react';
 import { Box, ButtonBase, useTheme } from '@mui/material';
 
-import { Body, Label } from 'src/components/typography';
-
+import { Body, Label } from '../../../components/typography';
 import { UseStateSetter } from '../../../types/react/useState';
 import ArrowDownIcon from '../../icons/ArrowDownIcon';
 import { galleryImagesMock } from './Gallery.mock';
+import { GalleryPhoto } from './Gallery.types';
 import { paginateGallery } from './Gallery.utils';
 
 type Props = {
+  photos: GalleryPhoto[];
   imageIndex: number;
   page: number;
   setPage: UseStateSetter<[number, number]>;
 };
 
-export const GalleryBottomBar = ({ imageIndex, page, setPage }: Props) => {
+export const GalleryBottomBar = ({
+  photos,
+  imageIndex,
+  page,
+  setPage,
+}: Props) => {
   const [isShowMore, setIsShowMore] = useState(false);
   const theme = useTheme();
 
@@ -86,7 +92,7 @@ export const GalleryBottomBar = ({ imageIndex, page, setPage }: Props) => {
         ]}
         onClick={() => setIsShowMore(true)}
       >
-        {galleryImagesMock[imageIndex].caption}
+        {photos[imageIndex]?.caption}
       </Body>
     </Box>
   );

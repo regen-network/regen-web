@@ -1,3 +1,4 @@
+import { GalleryPhoto } from 'web-components/lib/components/organisms/Gallery/Gallery.types';
 import { User } from 'web-components/lib/components/user/UserInfo';
 import { truncate } from 'web-components/lib/utils/truncate';
 
@@ -118,4 +119,22 @@ export const isAnchoredProjectMetadata = (
   onChainProjectId?: string,
 ): projectMetadata is AnchoredProjectMetadataLD => {
   return !!onChainProjectId;
+};
+
+type GetProjectGalleryPhotosProps = {
+  projectMetadata?: AnchoredProjectMetadataLD | LegacyProjectMetadataLD;
+};
+export const getProjectGalleryPhotos = ({
+  projectMetadata,
+}: GetProjectGalleryPhotosProps) => {
+  const photos: GalleryPhoto[] =
+    // @ts-ignore
+    projectMetadata?.['http://regen.network/galleryPhotos']?.[
+      '@list'
+      // @ts-ignore
+    ].map(photo => ({
+      href: photo['@value'],
+    })) ?? [];
+
+  return photos;
 };

@@ -16,6 +16,7 @@ import Card from 'web-components/lib/components/cards/Card';
 import CreditClassCard from 'web-components/lib/components/cards/CreditClassCard';
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
+import { Gallery } from 'web-components/lib/components/organisms/Gallery/Gallery';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
 import ReadMore from 'web-components/lib/components/read-more';
 import Section from 'web-components/lib/components/section';
@@ -42,6 +43,7 @@ import {
 import { ProjectTopSectionProps, SdgType } from './ProjectTopSection.types';
 import {
   getDisplayAdmin,
+  getProjectGalleryPhotos,
   isAnchoredProjectMetadata,
   parseOffChainProject,
   parseProjectMetadata,
@@ -115,6 +117,8 @@ function ProjectTopSection({
 
   const displayName =
     projectName ?? (onChainProjectId && `Project ${onChainProjectId}`) ?? '';
+
+  const projectPhotos = getProjectGalleryPhotos({ projectMetadata });
 
   return (
     <Section classes={{ root: classes.section }}>
@@ -259,6 +263,7 @@ function ProjectTopSection({
               <Body mobileSize="xs">{quote['schema:jobTitle']}</Body>
             </div>
           )}
+          <Gallery photos={projectPhotos} sx={{ my: 25 }} />
           {batchData?.totals && (
             <ProjectBatchTotals
               projectWithOrderData={projectWithOrderData}

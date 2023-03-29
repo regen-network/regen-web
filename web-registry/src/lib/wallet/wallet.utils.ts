@@ -86,7 +86,7 @@ export const finalizeConnection = async ({
   }
 
   const key = await walletClient?.getKey(chainInfo.chainId);
-  if (key && key.bech32Address && offlineSigner && login) {
+  if (key && key.bech32Address && offlineSigner) {
     const wallet = {
       offlineSigner,
       address: key.bech32Address,
@@ -100,7 +100,10 @@ export const finalizeConnection = async ({
     }
     setWallet(wallet);
 
-    if (doLogin) await login({ walletConfig, walletConnect, wallet });
+    // signArbitrary (used in login) not yet supported by @keplr-wallet/wc-client
+    // https://github.com/chainapsis/keplr-wallet/issues/664
+    if (!walletConnect && login && doLogin)
+      await login({ walletConfig, walletConnect, wallet });
   }
 };
 

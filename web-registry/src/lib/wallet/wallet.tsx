@@ -20,7 +20,7 @@ import { useWalletConnectCallback } from './hooks/useWalletConnectCallback';
 import { useWalletConnectFinalize } from './hooks/useWalletConnectFinalize';
 import { emptySender } from './wallet.constants';
 import { ConnectParams } from './wallet.types';
-import { WalletConfig, WalletType } from './walletsConfig/walletsConfig.types';
+import { WalletConfig } from './walletsConfig/walletsConfig.types';
 
 export interface Wallet {
   offlineSigner?: OfflineSigner;
@@ -92,20 +92,11 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
 
   const onQrCloseCallbackRef = useRef<() => void>();
 
-  const disconnect = useDisconnect({
-    setConnectionType,
-    setWallet,
-    setWalletConnect,
-    setWalletConnectUri,
-    walletConfigRef,
-    walletConnect,
-  });
-
   const signArbitrary = useSignArbitrary({
     setError,
   });
   const login = useLogin({ signArbitrary, setError, setAccountId });
-  const logout = useLogout({ disconnect, setError, setAccountId });
+  const logout = useLogout({ setError, setAccountId });
 
   const connectWallet = useConnectWallet({
     onQrCloseCallbackRef,
@@ -118,6 +109,16 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   });
 
   const connect = useConnect({ connectWallet, setConnectionType, setError });
+
+  const disconnect = useDisconnect({
+    setConnectionType,
+    setWallet,
+    setWalletConnect,
+    setWalletConnectUri,
+    walletConfigRef,
+    walletConnect,
+    logout,
+  });
 
   useAutoConnect({ connectWallet, setError, setLoaded });
   useOnAccountChange({ connectWallet, wallet });
@@ -155,8 +156,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
           !!wallet?.address &&
           // signArbitrary (used in login) not yet supported by @keplr-wallet/wc-client
           // https://github.com/chainapsis/keplr-wallet/issues/664
-          (walletConfigRef?.current?.type === WalletType.WalletConnectKeplr ||
-            !!accountId),
+          (!!walletConnect || !!accountId),
       }}
     >
       {children}

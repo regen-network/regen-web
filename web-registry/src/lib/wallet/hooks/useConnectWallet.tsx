@@ -86,9 +86,7 @@ export const useConnectWallet = ({
           walletConnect,
           track,
           login,
-          // signArbitrary (used in login) not yet supported by @keplr-wallet/wc-client
-          // https://github.com/chainapsis/keplr-wallet/issues/664
-          doLogin: doLogin && !isWalletConnectKeplr,
+          doLogin,
         });
       }
     },

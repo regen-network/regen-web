@@ -22,7 +22,7 @@ export const ExtraComponent = (): JSX.Element => {
         <UserMenuItem
           address={address}
           avatar={''}
-          logout={() => setAddress('')}
+          disconnect={() => setAddress('')}
           pathname={''}
           linkComponent={NavLink}
           userMenuItems={userMenuItems}

@@ -18,6 +18,7 @@ type Props = {
   setWalletConnectUri: UseStateSetter<string | undefined>;
   walletConfigRef: MutableRefObject<WalletConfig | undefined>;
   setWalletConnect: UseStateSetter<WalletConnect | undefined>;
+  logout?: () => Promise<void>;
 };
 
 export type DisconnectType = () => Promise<void>;
@@ -29,6 +30,7 @@ export const useDisconnect = ({
   setWalletConnectUri,
   setWalletConnect,
   walletConfigRef,
+  logout,
 }: Props): DisconnectType => {
   const disconnect = useCallback(async (): Promise<void> => {
     if (walletConnect) {
@@ -47,6 +49,10 @@ export const useDisconnect = ({
     walletConfigRef.current = undefined;
     localStorage.removeItem(AUTO_CONNECT_WALLET_KEY);
     localStorage.removeItem(WALLET_CONNECT_KEY);
+
+    // signArbitrary (used in login) not yet supported by @keplr-wallet/wc-client
+    // https://github.com/chainapsis/keplr-wallet/issues/664
+    if (!walletConnect && logout) await logout();
   }, [
     setConnectionType,
     setWallet,
@@ -54,6 +60,7 @@ export const useDisconnect = ({
     setWalletConnectUri,
     walletConfigRef,
     walletConnect,
+    logout,
   ]);
 
   return disconnect;

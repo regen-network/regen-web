@@ -54,19 +54,6 @@ export const useTextFieldStyles = makeStyles<UseStylesParams>()(
           color: theme.palette.error.main,
         },
       },
-      '& .MuiSvgIcon-root': {
-        width: theme.spacing(3.25),
-        height: theme.spacing(2.5),
-        top: 'calc(50% - 5px)',
-        [theme.breakpoints.up('sm')]: {
-          right: theme.spacing(3.75),
-        },
-        [theme.breakpoints.down('sm')]: {
-          right: theme.spacing(3.25),
-        },
-        position: 'absolute',
-        pointerEvents: 'none',
-      },
       '& .MuiInputBase-root': {
         backgroundColor: theme.palette.primary.main,
         border: `1px solid ${theme.palette.grey[100]}`,
@@ -92,20 +79,18 @@ export const useTextFieldStyles = makeStyles<UseStylesParams>()(
           },
         },
       },
-      // '& input, & select.MuiSelect-select': {},
       '& input[type=number]': {
         '&::-webkit-inner-spin-button, &::-webkit-outer-spin-button': {
           WebkitAppearance: 'none',
           margin: 0,
         },
       },
-    },
-    firstOfType: {
+      // The styles below used to be triggered by a defaultStyle prop
+      // If you're migrating an old TextField with the defaultProp set to false you can do this instead:
+      // sx={{ mt: { xs: 0, sm: 0 }}}
       '&:first-of-type': {
         marginTop: 0,
       },
-    },
-    default: {
       [theme.breakpoints.up('sm')]: {
         marginTop: theme.typography.pxToRem(40),
       },

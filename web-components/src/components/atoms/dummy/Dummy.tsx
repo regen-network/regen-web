@@ -12,7 +12,7 @@ export interface Props {
 /* Placeholder component that hold best practices.
 To be used as a starter to create new components  */
 const Dummy = ({ label, sx = [] }: Props): JSX.Element => {
-  return <Box sx={[...(Array.isArray(sx) ? sx : [sx])]}>{label}</Box>;
+  return <Box sx={[...sxToArray(sx)]}>{label}</Box>;
 };
 
 export { Dummy };

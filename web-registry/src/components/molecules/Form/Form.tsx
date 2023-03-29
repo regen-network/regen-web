@@ -6,7 +6,10 @@ import {
   UseFormReturn,
 } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
-import { Box } from '@mui/material';
+import { Box, SxProps } from '@mui/material';
+import { sxToArray } from 'utils/mui/sxToArray';
+
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { IS_DEV } from 'lib/env';
 
@@ -14,12 +17,14 @@ interface Props<T extends FieldValues>
   extends Omit<ComponentProps<'form'>, 'onSubmit'> {
   form: UseFormReturn<T>;
   onSubmit: SubmitHandler<T>;
+  sx?: SxProps<Theme>;
 }
 
 const Form = <T extends FieldValues>({
   form,
   onSubmit,
   children,
+  sx = [],
   ...props
 }: Props<T>): JSX.Element => (
   <FormProvider {...form}>
@@ -29,7 +34,7 @@ const Form = <T extends FieldValues>({
       <Box
         component="fieldset"
         disabled={form.formState.isSubmitting}
-        sx={{ borderWidth: 0, padding: 0, margin: 0 }}
+        sx={[{ borderWidth: 0, padding: 0, margin: 0 }, ...sxToArray(sx)]}
       >
         {children}
       </Box>

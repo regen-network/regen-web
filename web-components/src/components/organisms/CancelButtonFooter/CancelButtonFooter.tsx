@@ -29,6 +29,7 @@ const CancelButtonFooter = ({
           cancel
         </Button>
       </Grid>
+
       <Grid item>
         <ContainedButton {...props}>{label}</ContainedButton>
       </Grid>

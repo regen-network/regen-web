@@ -82,6 +82,7 @@ const Activity = lazy(() => import('./pages/Activity'));
 const CreateBatch = lazy(() => import('./pages/CreateBatch'));
 const Storefront = lazy(() => import('./pages/Marketplace/Storefront'));
 const ConnectWalletPage = lazy(() => import('./pages/ConnectWalletPage'));
+const ProfileEdit = lazy(() => import('./pages/ProfileEdit'));
 
 type RouterParams = {
   reactQueryClient: QueryClient;
@@ -312,6 +313,9 @@ export const getRoutes = ({
           })}
         />
         <Route path="*" element={<NotFoundPage />} />
+      </Route>
+      <Route path="profile">
+        <Route path="edit" element={<KeplrRoute component={ProfileEdit} />} />
       </Route>
       <Route path="connect-wallet" element={<ConnectWalletPage />} />
     </Route>,

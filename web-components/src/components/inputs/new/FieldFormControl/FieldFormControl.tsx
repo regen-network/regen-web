@@ -42,7 +42,6 @@ export default function FieldFormControl({
   forceDefaultStyle = false,
   error = false,
   helperText,
-  ...fieldProps
 }: Props): JSX.Element {
   const hasError = false;
   const { classes: styles, cx } = useFieldFormControlStyles({

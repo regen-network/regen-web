@@ -7,6 +7,7 @@ import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
 import { PageViewTracking } from 'components/molecules/PageViewTracking';
 
 import { ScrollToTop } from '../../atoms';
+import { RegistryLayoutBannerModal } from './RegistryLayout.Banner';
 import { RegistryLayoutConnectWalletModal } from './RegistryLayout.ConnectWalletModal';
 import { RegistryLayoutErrorBannerModal } from './RegistryLayout.ErrorBanner';
 import { RegistryLayoutFooter } from './RegistryLayout.Footer';
@@ -28,6 +29,7 @@ const RegistryLayout: React.FC = () => {
         TOSUrl={URL_REGISTRY_TERMS_SERVICE}
       />
       <RegistryLayoutTxErrorModal />
+      <RegistryLayoutBannerModal />
       <RegistryLayoutTxSuccessfulModal />
       <RegistryLayoutProcessingModal />
       <RegistryLayoutErrorBannerModal />

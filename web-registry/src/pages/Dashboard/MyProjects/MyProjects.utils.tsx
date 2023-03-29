@@ -17,6 +17,7 @@ export async function submitCreateProject({
   walletData,
 }: SubmitCreateProjectParams): Promise<void> {
   const adminWalletId = walletData?.walletByAddr?.id;
+
   try {
     const res = await createProject({
       variables: {

@@ -2,6 +2,8 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { Gallery } from './Gallery';
 
+import './Gallery.styles.css';
+
 export default {
   title: 'atoms/Gallery',
   component: Gallery,

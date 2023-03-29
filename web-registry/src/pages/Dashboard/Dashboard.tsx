@@ -117,7 +117,7 @@ const Dashboard = (): JSX.Element => {
     <>
       <ProfileHeader
         name={party?.name ? party?.name : DEFAULT_NAME}
-        backgroundImage={DEFAULT_PROFILE_BG}
+        backgroundImage={party?.bgImage ? party?.bgImage : DEFAULT_PROFILE_BG}
         avatar={party?.image ? party?.image : defaultAvatar}
         infos={{
           addressLink: {

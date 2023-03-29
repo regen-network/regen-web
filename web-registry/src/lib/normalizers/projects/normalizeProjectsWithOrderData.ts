@@ -45,6 +45,7 @@ export const normalizeProjectsWithOrderData = ({
       href: `/project/${project.id}`,
       sellOrders: sellOrdersNormalized,
       metadata: project.metadata,
+      creditClassId: project.classId,
     } as ProjectWithOrderData;
   });
 

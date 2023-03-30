@@ -14,6 +14,7 @@ import { TextAreaField } from 'web-components/lib/components/inputs/new/TextArea
 import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
 import { Label } from 'web-components/lib/components/typography';
+import { defaultFontFamily } from 'web-components/lib/theme/muiTheme';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
@@ -28,7 +29,9 @@ import {
   PROFILE_BG_FILE_NAME,
   PROFILE_TYPE,
   radioCardItems,
+  TWITTER_PLACEHOLDER,
   UPLOAD_IMAGE,
+  WEBSITE_PLACEHOLDER,
 } from './EditProfileForm.constants';
 import {
   editProfileFormSchema,
@@ -177,13 +180,20 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           <TextAreaFieldChartCounter value={description} />
         </TextAreaField>
         <Box sx={{ mt: 6 }}>
-          <Label size="md" sx={{ textTransform: 'none', mb: 2.5 }}>
+          <Label
+            size="md"
+            sx={{
+              textTransform: 'none',
+              mb: 2.5,
+              fontFamily: defaultFontFamily,
+            }}
+          >
             {LINKS_LABEL}
           </Label>
           <TextField
             type="text"
             label=""
-            placeholder="yourwebsite.com"
+            placeholder={WEBSITE_PLACEHOLDER}
             {...form.register('websiteLink')}
             helperText={errors?.websiteLink?.message}
             error={!!errors?.websiteLink}
@@ -198,7 +208,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           <TextField
             type="text"
             label=""
-            placeholder="yourtwitterhandle"
+            placeholder={TWITTER_PLACEHOLDER}
             {...form.register('twitterLink')}
             helperText={errors?.twitterLink?.message}
             error={!!errors?.twitterLink}

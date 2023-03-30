@@ -13,7 +13,6 @@ import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllC
 import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
 
 import BlockContentBody from 'components/molecules/BlockContentBody';
-import { SKIPPED_CLASS_ID } from 'hooks/projects/useProjectsWithOrders.constants';
 
 import horsesImg from '../../assets/horses-grazing.png';
 import { SanityButton } from '../../components/atoms';
@@ -26,6 +25,7 @@ import { CreditClassCards } from '../../components/organisms';
 import { client as sanityClient } from '../../lib/clients/sanity';
 import { FeaturedProjects } from './Home.FeaturedProjects';
 import { useHomeStyles } from './Home.styles';
+import { SKIPPED_CLASS_ID } from 'lib/env';
 
 const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [open, setOpen] = useState(false);

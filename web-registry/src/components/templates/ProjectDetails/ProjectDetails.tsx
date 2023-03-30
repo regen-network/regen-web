@@ -224,7 +224,8 @@ function ProjectDetails(): JSX.Element {
   )
     return <NotFoundPage />;
 
-  const projectPhotos = getProjectGalleryPhotos({ projectMetadata });
+  const projectPhotos = getProjectGalleryPhotos({ offChainProjectMetadata });
+  const hasProjectPhotos = projectPhotos.length > 0;
 
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
@@ -282,7 +283,9 @@ function ProjectDetails(): JSX.Element {
         landSteward={landSteward}
         loading={loadingDb || loadingAnchoredMetadata}
       />
-      <Gallery photos={projectPhotos} />
+
+      {hasProjectPhotos && <Gallery photos={projectPhotos} />}
+
       <ProjectMiddleSection
         offChainProject={offChainProject}
         soldOutProjectsIds={soldOutProjectsIds}

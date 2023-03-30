@@ -5,6 +5,7 @@ import { Asset } from 'web-components/lib/components/sliders/ProjectMedia';
 import { Document, Event, Maybe, Project } from 'generated/graphql';
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import {
+  AnchoredProjectMetadataBaseLD,
   AnchoredProjectMetadataLD,
   LegacyProjectMetadataLD,
   NameImageDescription,
@@ -131,18 +132,15 @@ export const parseMedia = ({
 };
 
 type GetProjectGalleryPhotosProps = {
-  projectMetadata?: AnchoredProjectMetadataLD | LegacyProjectMetadataLD;
+  offChainProjectMetadata?: ProjectPageMetadataLD &
+    AnchoredProjectMetadataBaseLD;
 };
 export const getProjectGalleryPhotos = ({
-  projectMetadata,
+  offChainProjectMetadata,
 }: GetProjectGalleryPhotosProps) => {
   const photos: GalleryPhoto[] =
-    // @ts-ignore
-    projectMetadata?.['http://regen.network/galleryPhotos']?.[
-      '@list'
-      // @ts-ignore
-    ].map(photo => ({
-      href: photo['@value'],
+    offChainProjectMetadata?.['regen:galleryPhotos']?.map(photo => ({
+      href: photo,
     })) ?? [];
 
   return photos;

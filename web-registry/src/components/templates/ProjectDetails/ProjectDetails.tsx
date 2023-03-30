@@ -277,21 +277,20 @@ function ProjectDetails(): JSX.Element {
         geojson={geojson}
         isGISFile={isGISFile}
         onChainProjectId={onChainProjectId}
+        projectDeveloper={projectDeveloper}
+        landOwner={landOwner}
+        landSteward={landSteward}
         loading={loadingDb || loadingAnchoredMetadata}
       />
       <Gallery photos={projectPhotos} />
       <ProjectMiddleSection
         offChainProject={offChainProject}
-        onChainProject={onChainProject}
         soldOutProjectsIds={soldOutProjectsIds}
         projectWithOrderData={projectsWithOrderData[0]}
         batchData={{
           batches: batchesWithSupply,
           totals: batchesTotal,
         }}
-        projectDeveloper={projectDeveloper}
-        landOwner={landOwner}
-        landSteward={landSteward}
         paginationParams={paginationParams}
         setPaginationParams={setPaginationParams}
       />

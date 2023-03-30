@@ -1,6 +1,3 @@
-import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-
-import { Party } from 'web-components/lib/components/modal/LedgerModal';
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
@@ -15,10 +12,6 @@ import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 
 export type ProjectMiddleSectionProps = {
   offChainProject?: Maybe<ProjectFieldsFragment>;
-  onChainProject?: ProjectInfo;
-  landSteward?: Party;
-  projectDeveloper?: Party;
-  landOwner?: Party;
   batchData?: {
     batches?: BatchInfoWithSupply[];
     totals?: BatchTotalsForProject;

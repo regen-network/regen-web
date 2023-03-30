@@ -1,32 +1,15 @@
 import { Box, Grid } from '@mui/material';
-import { useSortResultWithIris } from 'utils/sanity/useSortResultWithIris';
 
-import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import Section from 'web-components/lib/components/section';
 import { Title } from 'web-components/lib/components/typography';
 
-import { useSdgByIriQuery } from '../../../generated/sanity-graphql';
-import { client } from '../../../lib/clients/sanity';
-import { getSanityImgSrc } from '../../../lib/imgSrc';
-import { getParty } from '../../../lib/transform';
 import { ProjectBatchTotals } from '../../molecules';
 import { CreditBatches } from '../CreditBatches/CreditBatches';
 import { useProjectTopSectionStyles } from './ProjectMiddleSection.styles';
-import {
-  ProjectMiddleSectionProps,
-  SdgType,
-} from './ProjectMiddleSection.types';
-import {
-  getDisplayAdmin,
-  parseOffChainProject,
-} from './ProjectMiddleSection.utils';
+import { ProjectMiddleSectionProps } from './ProjectMiddleSection.types';
 
 function ProjectMiddleSection({
   offChainProject,
-  onChainProject,
-  projectDeveloper,
-  landSteward,
-  landOwner,
   batchData,
   paginationParams,
   setPaginationParams,
@@ -34,26 +17,6 @@ function ProjectMiddleSection({
   soldOutProjectsIds,
 }: ProjectMiddleSectionProps): JSX.Element {
   const { classes } = useProjectTopSectionStyles();
-
-  const { sdgIris } = parseOffChainProject(offChainProject);
-
-  const { data: sdgData } = useSdgByIriQuery({
-    client,
-    variables: {
-      iris: sdgIris,
-    },
-    skip: !sdgIris,
-  });
-
-  const sortedSdgData = useSortResultWithIris<SdgType>({
-    dataWithIris: sdgData?.allSdg,
-    iris: sdgIris,
-  });
-
-  const sdgs = sortedSdgData.map(sdg => ({
-    title: sdg.title || '',
-    imageUrl: getSanityImgSrc(sdg.image),
-  }));
 
   return (
     <Section classes={{ root: classes.section }}>
@@ -70,22 +33,6 @@ function ProjectMiddleSection({
               }}
             />
           )}
-        </Grid>
-        <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
-          <ProjectTopCard
-            projectAdmin={getDisplayAdmin(onChainProject?.admin)}
-            projectDeveloper={projectDeveloper}
-            landSteward={landSteward}
-            landOwner={landOwner}
-            // TODO if no off-chain data, use on-chain project.issuer
-            issuer={getParty(offChainProject?.partyByIssuerId)}
-            reseller={
-              !onChainProject
-                ? getParty(offChainProject?.partyByResellerId)
-                : undefined
-            }
-            sdgs={sdgs}
-          />
         </Grid>
       </Grid>
       {batchData?.batches && batchData.batches.length > 0 && (

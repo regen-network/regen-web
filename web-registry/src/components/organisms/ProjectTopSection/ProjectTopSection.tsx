@@ -9,15 +9,20 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import { useSortResultWithIris } from 'utils/sanity/useSortResultWithIris';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import Card from 'web-components/lib/components/cards/Card';
 import CreditClassCard from 'web-components/lib/components/cards/CreditClassCard';
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
+import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
 import ReadMore from 'web-components/lib/components/read-more';
 import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
+
+import { useSdgByIriQuery } from 'generated/sanity-graphql';
+import { getParty } from 'lib/transform';
 
 import {
   API_URI,
@@ -26,6 +31,7 @@ import {
 } from 'components/templates/ProjectDetails/ProjectDetails.config';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
+import { client } from '../../../lib/clients/sanity';
 import { getSanityImgSrc } from '../../../lib/imgSrc';
 import { ProjectTopLink } from '../../atoms';
 import { ProjectPageMetadata } from '../../molecules';
@@ -33,8 +39,9 @@ import {
   ProjectTopSectionQuoteMark,
   useProjectTopSectionStyles,
 } from './ProjectTopSection.styles';
-import { ProjectTopSectionProps } from './ProjectTopSection.types';
+import { ProjectTopSectionProps, SdgType } from './ProjectTopSection.types';
 import {
+  getDisplayAdmin,
   isAnchoredProjectMetadata,
   parseOffChainProject,
   parseProjectMetadata,
@@ -51,12 +58,15 @@ function ProjectTopSection({
   isGISFile,
   onChainProjectId,
   loading,
+  landOwner,
+  landSteward,
+  projectDeveloper,
 }: ProjectTopSectionProps): JSX.Element {
   const { classes } = useProjectTopSectionStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const { creditClass, creditClassVersion, offsetGenerationMethod } =
+  const { creditClass, creditClassVersion, offsetGenerationMethod, sdgIris } =
     parseOffChainProject(offChainProject);
 
   const { projectName, area, areaUnit, placeName } =
@@ -82,6 +92,24 @@ function ProjectTopSection({
 
   const displayName =
     projectName ?? (onChainProjectId && `Project ${onChainProjectId}`) ?? '';
+
+  const { data: sdgData } = useSdgByIriQuery({
+    client,
+    variables: {
+      iris: sdgIris,
+    },
+    skip: !sdgIris,
+  });
+
+  const sortedSdgData = useSortResultWithIris<SdgType>({
+    dataWithIris: sdgData?.allSdg,
+    iris: sdgIris,
+  });
+
+  const sdgs = sortedSdgData.map(sdg => ({
+    title: sdg.title || '',
+    imageUrl: getSanityImgSrc(sdg.image),
+  }));
 
   return (
     <Section classes={{ root: classes.section }}>
@@ -226,6 +254,22 @@ function ProjectTopSection({
               <Body mobileSize="xs">{quote['schema:jobTitle']}</Body>
             </div>
           )}
+        </Grid>
+        <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
+          <ProjectTopCard
+            projectAdmin={getDisplayAdmin(onChainProject?.admin)}
+            projectDeveloper={projectDeveloper}
+            landSteward={landSteward}
+            landOwner={landOwner}
+            // TODO if no off-chain data, use on-chain project.issuer
+            issuer={getParty(offChainProject?.partyByIssuerId)}
+            reseller={
+              !onChainProject
+                ? getParty(offChainProject?.partyByResellerId)
+                : undefined
+            }
+            sdgs={sdgs}
+          />
         </Grid>
       </Grid>
     </Section>

@@ -13,6 +13,7 @@ import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllC
 import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
 
 import BlockContentBody from 'components/molecules/BlockContentBody';
+import { SKIPPED_CLASS_ID } from 'hooks/projects/useProjectsWithOrders.constants';
 
 import horsesImg from '../../assets/horses-grazing.png';
 import { SanityButton } from '../../components/atoms';
@@ -48,7 +49,9 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const gettingStartedResourcesSection =
     content?.gettingStartedResourcesSection;
 
-  const creditClassesContent = creditClassData?.allCreditClass;
+  const creditClassesContent = creditClassData?.allCreditClass?.filter(
+    c => c.path !== SKIPPED_CLASS_ID,
+  );
 
   useEffect(() => {
     const anchor = window.location.hash.slice(1);

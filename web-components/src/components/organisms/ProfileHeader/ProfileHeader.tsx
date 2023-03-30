@@ -123,24 +123,28 @@ const ProfileHeader = ({
             >
               {name}
             </Title>
-            <LinkComponent href={editLink}>
-              <Label
-                size="sm"
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  color: 'primary.main',
-                  position: { xs: 'absolute', sm: 'relative' },
-                  top: { xs: 24, sm: 'auto' },
-                  right: { right: 17, sm: 'auto' },
-                  height: 18,
-                  mb: 4.5,
-                }}
-              >
-                <EditIcon sx={{ fontSize: 17, mr: 2, color: 'primary.main' }} />
-                {EDIT_PROFILE}
-              </Label>
-            </LinkComponent>
+            {editLink !== '' && (
+              <LinkComponent href={editLink}>
+                <Label
+                  size="sm"
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    color: 'primary.main',
+                    position: { xs: 'absolute', sm: 'relative' },
+                    top: { xs: 24, sm: 'auto' },
+                    right: { right: 17, sm: 'auto' },
+                    height: 18,
+                    mb: 4.5,
+                  }}
+                >
+                  <EditIcon
+                    sx={{ fontSize: 17, mr: 2, color: 'primary.main' }}
+                  />
+                  {EDIT_PROFILE}
+                </Label>
+              </LinkComponent>
+            )}
           </Flex>
           <ProfileHeaderInfos
             {...infos}

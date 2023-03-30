@@ -147,7 +147,7 @@ const Dashboard = (): JSX.Element => {
           description: party?.description?.trimEnd() ?? '',
           socialsLinks,
         }}
-        editLink="/profile/edit"
+        editLink={accountId ? '/profile/edit' : ''}
         variant={party?.type ? profileVariantMapping[party.type] : 'individual'}
         LinkComponent={Link}
       />

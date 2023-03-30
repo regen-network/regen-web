@@ -1,7 +1,10 @@
 import { Crop } from 'react-image-crop';
 
 /**
+ * Asynchronously crops the provided image based on the given crop area.
+ * The result is returned as a new HTMLImageElement.
  * This function was adapted from the one in the ReadMe of https://github.com/DominicTobias/react-image-crop
+ *
 //  * @param {HTMLImageElement} image - Image File Object
 //  * @param {Crop} crop - crop Object
 //  * @param {String} fileName - Name of the returned file in Promise
@@ -23,8 +26,8 @@ export async function getCroppedImg(
     crop.x !== undefined &&
     crop.y !== undefined
   ) {
-    canvas.width = crop.width * pixelRatio;
-    canvas.height = crop.height * pixelRatio;
+    canvas.width = crop.width * scaleX * pixelRatio;
+    canvas.height = crop.height * scaleY * pixelRatio;
 
     if (ctx) {
       ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
@@ -38,8 +41,8 @@ export async function getCroppedImg(
         crop.height * scaleY,
         0,
         0,
-        crop.width,
-        crop.height,
+        crop.width * scaleX,
+        crop.height * scaleY,
       );
     }
   }

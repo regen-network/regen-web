@@ -21,6 +21,7 @@ import { ProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders';
 import { sortProjects } from 'pages/Projects/utils/sortProjects';
 
 import { useLastRandomProjects } from './useLastRandomProjects';
+import { SKIPPED_CLASS_ID } from './useProjectsWithOrders.constants';
 import { selectProjects } from './useProjectsWithOrders.utils';
 
 export interface ProjectsWithOrdersProps {
@@ -116,6 +117,7 @@ export function useProjectsWithOrders({
       metadata,
       random,
       skippedProjectId,
+      skippedClassId: !classId && !projectId ? SKIPPED_CLASS_ID : undefined,
     }) ?? [];
 
   const lastRandomProjects = useLastRandomProjects({
@@ -170,7 +172,7 @@ export function useProjectsWithOrders({
 
   return {
     projectsWithOrderData: projectsWithMetadata,
-    projectsCount: projects?.length,
+    projectsCount: selectedProjects?.length,
     loading: isLoadingProjects || isLoadingProjectsByClass || isLoadingProject,
   };
 }

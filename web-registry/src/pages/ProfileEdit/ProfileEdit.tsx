@@ -52,7 +52,7 @@ export const ProfileEdit = () => {
       }),
     [graphqlClient, wallet?.address],
   );
-  const { data: partyByAddr, isLoading } = useQuery(partyByAddrQuery);
+  const { data: partyByAddr, isFetching } = useQuery(partyByAddrQuery);
   const { party, defaultAvatar } = usePartyInfos({ accountId, partyByAddr });
 
   const initialValues: EditProfileFormSchemaType = useMemo(
@@ -127,7 +127,7 @@ export const ProfileEdit = () => {
             {VIEW_PROFILE}
           </OutlinedButton>
         </Flex>
-        <WithLoader isLoading={isLoading} sx={{ mx: 'auto' }}>
+        <WithLoader isLoading={isFetching} sx={{ mx: 'auto' }}>
           <EditProfileForm
             onSubmit={onSubmit}
             onSuccess={onSuccess}

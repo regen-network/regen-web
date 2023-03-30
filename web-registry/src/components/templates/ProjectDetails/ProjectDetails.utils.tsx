@@ -6,7 +6,6 @@ import { Document, Event, Maybe, Project } from 'generated/graphql';
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import {
   AnchoredProjectMetadataBaseLD,
-  AnchoredProjectMetadataLD,
   LegacyProjectMetadataLD,
   NameImageDescription,
   ProjectPageMetadataLD,

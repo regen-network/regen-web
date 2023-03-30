@@ -1,9 +1,11 @@
 import StaticMap from 'web-components/lib/components/map/StaticMap';
+import { GalleryPhoto } from 'web-components/lib/components/organisms/Gallery/Gallery.types';
 import { Asset } from 'web-components/lib/components/sliders/ProjectMedia';
 
 import { Document, Event, Maybe, Project } from 'generated/graphql';
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import {
+  AnchoredProjectMetadataLD,
   LegacyProjectMetadataLD,
   NameImageDescription,
   ProjectPageMetadataLD,
@@ -126,4 +128,22 @@ export const parseMedia = ({
     apiServerUrl: API_URI,
     imageCredits: metadata?.['schema:creditText'],
   };
+};
+
+type GetProjectGalleryPhotosProps = {
+  projectMetadata?: AnchoredProjectMetadataLD | LegacyProjectMetadataLD;
+};
+export const getProjectGalleryPhotos = ({
+  projectMetadata,
+}: GetProjectGalleryPhotosProps) => {
+  const photos: GalleryPhoto[] =
+    // @ts-ignore
+    projectMetadata?.['http://regen.network/galleryPhotos']?.[
+      '@list'
+      // @ts-ignore
+    ].map(photo => ({
+      href: photo['@value'],
+    })) ?? [];
+
+  return photos;
 };

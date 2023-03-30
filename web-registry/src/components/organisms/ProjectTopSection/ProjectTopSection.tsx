@@ -9,14 +9,11 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import { useSortResultWithIris } from 'utils/sanity/useSortResultWithIris';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import Card from 'web-components/lib/components/cards/Card';
 import CreditClassCard from 'web-components/lib/components/cards/CreditClassCard';
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
-import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
-import { Gallery } from 'web-components/lib/components/organisms/Gallery/Gallery';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
 import ReadMore from 'web-components/lib/components/read-more';
 import Section from 'web-components/lib/components/section';
@@ -29,21 +26,15 @@ import {
 } from 'components/templates/ProjectDetails/ProjectDetails.config';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
-import { useSdgByIriQuery } from '../../../generated/sanity-graphql';
-import { client } from '../../../lib/clients/sanity';
 import { getSanityImgSrc } from '../../../lib/imgSrc';
-import { getParty } from '../../../lib/transform';
 import { ProjectTopLink } from '../../atoms';
-import { ProjectBatchTotals, ProjectPageMetadata } from '../../molecules';
-import { CreditBatches } from '../CreditBatches/CreditBatches';
+import { ProjectPageMetadata } from '../../molecules';
 import {
   ProjectTopSectionQuoteMark,
   useProjectTopSectionStyles,
 } from './ProjectTopSection.styles';
-import { ProjectTopSectionProps, SdgType } from './ProjectTopSection.types';
+import { ProjectTopSectionProps } from './ProjectTopSection.types';
 import {
-  getDisplayAdmin,
-  getProjectGalleryPhotos,
   isAnchoredProjectMetadata,
   parseOffChainProject,
   parseProjectMetadata,
@@ -56,24 +47,16 @@ function ProjectTopSection({
   projectMetadata,
   projectPageMetadata,
   sanityCreditClassData,
-  projectDeveloper,
-  landSteward,
-  landOwner,
   geojson,
   isGISFile,
-  batchData,
-  paginationParams,
-  setPaginationParams,
   onChainProjectId,
   loading,
-  projectWithOrderData,
-  soldOutProjectsIds,
 }: ProjectTopSectionProps): JSX.Element {
   const { classes } = useProjectTopSectionStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const { creditClass, creditClassVersion, sdgIris, offsetGenerationMethod } =
+  const { creditClass, creditClassVersion, offsetGenerationMethod } =
     parseOffChainProject(offChainProject);
 
   const { projectName, area, areaUnit, placeName } =
@@ -89,24 +72,6 @@ function ProjectTopSection({
     landStewardStory,
   } = parseProjectPageMetadata(projectPageMetadata);
 
-  const { data: sdgData } = useSdgByIriQuery({
-    client,
-    variables: {
-      iris: sdgIris,
-    },
-    skip: !sdgIris,
-  });
-
-  const sortedSdgData = useSortResultWithIris<SdgType>({
-    dataWithIris: sdgData?.allSdg,
-    iris: sdgIris,
-  });
-
-  const sdgs = sortedSdgData.map(sdg => ({
-    title: sdg.title || '',
-    imageUrl: getSanityImgSrc(sdg.image),
-  }));
-
   const creditClassSanity = findSanityCreditClass({
     sanityCreditClassData,
     creditClassIdOrUrl:
@@ -117,8 +82,6 @@ function ProjectTopSection({
 
   const displayName =
     projectName ?? (onChainProjectId && `Project ${onChainProjectId}`) ?? '';
-
-  const projectPhotos = getProjectGalleryPhotos({ projectMetadata });
 
   return (
     <Section classes={{ root: classes.section }}>
@@ -263,54 +226,8 @@ function ProjectTopSection({
               <Body mobileSize="xs">{quote['schema:jobTitle']}</Body>
             </div>
           )}
-          <Gallery photos={projectPhotos} sx={{ my: 25 }} />
-          {batchData?.totals && (
-            <ProjectBatchTotals
-              projectWithOrderData={projectWithOrderData}
-              soldOutProjectsIds={soldOutProjectsIds}
-              totals={batchData.totals}
-              sx={{
-                mt: { xs: 10, sm: 12, md: 16 },
-                mb: { xs: 10, sm: 12, md: 0 },
-              }}
-            />
-          )}
-        </Grid>
-        <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
-          <ProjectTopCard
-            projectAdmin={getDisplayAdmin(onChainProject?.admin)}
-            projectDeveloper={projectDeveloper}
-            landSteward={landSteward}
-            landOwner={landOwner}
-            // TODO if no off-chain data, use on-chain project.issuer
-            issuer={getParty(offChainProject?.partyByIssuerId)}
-            reseller={
-              !onChainProject
-                ? getParty(offChainProject?.partyByResellerId)
-                : undefined
-            }
-            sdgs={sdgs}
-          />
         </Grid>
       </Grid>
-      {batchData?.batches && batchData.batches.length > 0 && (
-        // spacing here based on paddding-top for `<Section />` component
-        <Box sx={{ mt: { xs: 17.75, sm: 22.25 } }}>
-          <Title variant="h3" sx={{ pb: 8 }}>
-            Credit Batches
-          </Title>
-          <CreditBatches
-            creditClassId={
-              offChainProject?.creditClassByCreditClassId?.onChainId
-            }
-            creditBatches={batchData.batches}
-            filteredColumns={['projectLocation']}
-            onTableChange={setPaginationParams}
-            initialPaginationParams={paginationParams}
-            isIgnoreOffset
-          />
-        </Box>
-      )}
     </Section>
   );
 }

@@ -4,7 +4,6 @@ import { Box, ButtonBase, useTheme } from '@mui/material';
 import { Body, Label } from '../../../components/typography';
 import { UseStateSetter } from '../../../types/react/useState';
 import ArrowDownIcon from '../../icons/ArrowDownIcon';
-import { galleryImagesMock } from './Gallery.mock';
 import { GalleryPhoto } from './Gallery.types';
 import { paginateGallery } from './Gallery.utils';
 
@@ -68,7 +67,7 @@ export const GalleryBottomBar = ({
           <ArrowDownIcon color={theme.palette.primary.main} direction="next" />
         </ButtonBase>
         <Label size="sm" sx={{ mr: 5, mt: 0.75 }}>
-          {`${imageIndex + 1}/${galleryImagesMock.length}`}
+          {`${imageIndex + 1}/${photos.length}`}
         </Label>
       </Box>
       <Body

@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
 import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
+import { Gallery } from 'web-components/lib/components/organisms/Gallery/Gallery';
 import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 
@@ -29,6 +30,7 @@ import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
+import { ProjectMiddleSection } from 'components/organisms/ProjectMiddleSection/ProjectMiddleSection';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { usePaginatedBatchesByProject } from 'hooks/batches/usePaginatedBatchesByProject';
 
@@ -48,6 +50,7 @@ import { ProjectTimeline } from './ProjectDetails.ProjectTimeline';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
 import {
   getIsOnChainId,
+  getProjectGalleryPhotos,
   parseMedia,
   parseOffChainProject,
 } from './ProjectDetails.utils';
@@ -221,6 +224,8 @@ function ProjectDetails(): JSX.Element {
   )
     return <NotFoundPage />;
 
+  const projectPhotos = getProjectGalleryPhotos({ projectMetadata });
+
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO
@@ -269,6 +274,15 @@ function ProjectDetails(): JSX.Element {
         projectMetadata={projectMetadata}
         projectPageMetadata={offChainProjectMetadata}
         sanityCreditClassData={sanityCreditClassData}
+        geojson={geojson}
+        isGISFile={isGISFile}
+        onChainProjectId={onChainProjectId}
+        loading={loadingDb || loadingAnchoredMetadata}
+      />
+      <Gallery photos={projectPhotos} />
+      <ProjectMiddleSection
+        offChainProject={offChainProject}
+        onChainProject={onChainProject}
         soldOutProjectsIds={soldOutProjectsIds}
         projectWithOrderData={projectsWithOrderData[0]}
         batchData={{
@@ -280,10 +294,6 @@ function ProjectDetails(): JSX.Element {
         landSteward={landSteward}
         paginationParams={paginationParams}
         setPaginationParams={setPaginationParams}
-        geojson={geojson}
-        isGISFile={isGISFile}
-        onChainProjectId={onChainProjectId}
-        loading={loadingDb || loadingAnchoredMetadata}
       />
 
       {impactData?.length > 0 && (

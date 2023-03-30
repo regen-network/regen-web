@@ -18,10 +18,10 @@ export interface Props {
 const Gallery = ({ photos, sx }: Props) => {
   const [[page, direction], setPage] = useState([0, 0]);
 
-  // We only have 3 images, but we paginate them absolutely (ie 1, 2, 3, 4, 5...) and
-  // then wrap that within 0-2 to find our image ID in the array below. By passing an
+  // We may have only a finite number of images (ie: 3), but we paginate them absolutely (ie 1, 2, 3, 4, 5...) and
+  // then wrap that within (ie: 0-2) to find our image ID in the array below. By passing an
   // absolute page index as the `motion` component's `key` prop, `AnimatePresence` will
-  // detect it as an entirely new image. So you can infinitely paginate as few as 1 images.
+  // detect it as an entirely new image. So we can infinitely paginate as few as 1 images.
   const imageIndex = wrap(0, photos.length, page);
 
   const theme = useTheme();
@@ -43,14 +43,16 @@ const Gallery = ({ photos, sx }: Props) => {
           position: 'relative',
           display: 'flex',
           alignItems: 'end',
+          maxHeight: 650,
           aspectRatio: '1441 / 650',
+          width: '100%',
           mb: { xs: 15, md: 0 },
           '& img': {
             width: '100%',
             height: '100%',
             position: 'absolute',
             top: 0,
-            objectFit: 'cover',
+            objectFit: 'contain',
           },
         }}
       >

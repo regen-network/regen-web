@@ -9,6 +9,7 @@ import Modal from 'web-components/lib/components/modal';
 import SEO from 'web-components/lib/components/seo';
 import { Body, Title } from 'web-components/lib/components/typography';
 
+import { SKIPPED_CLASS_ID } from 'lib/env';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
 
@@ -25,7 +26,6 @@ import { CreditClassCards } from '../../components/organisms';
 import { client as sanityClient } from '../../lib/clients/sanity';
 import { FeaturedProjects } from './Home.FeaturedProjects';
 import { useHomeStyles } from './Home.styles';
-import { SKIPPED_CLASS_ID } from 'lib/env';
 
 const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [open, setOpen] = useState(false);

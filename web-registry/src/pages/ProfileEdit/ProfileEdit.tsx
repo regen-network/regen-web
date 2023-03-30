@@ -104,12 +104,24 @@ export const ProfileEdit = () => {
     [party, updatePartyById],
   );
 
+  const refreshProfileData = useCallback(
+    () =>
+      reactQueryClient.invalidateQueries({
+        queryKey: partyByAddrQuery.queryKey,
+      }),
+    [partyByAddrQuery, reactQueryClient],
+  );
+
   const onSuccess = useCallback(() => {
     setBannerTextAtom(PROFILE_SAVED);
-    reactQueryClient.invalidateQueries({ queryKey: partyByAddrQuery.queryKey });
-  }, [setBannerTextAtom, partyByAddrQuery, reactQueryClient]);
+    refreshProfileData();
+  }, [setBannerTextAtom, refreshProfileData]);
 
-  const onUpload = useOnUploadCallback({ partyByAddr, updatePartyById });
+  const onUpload = useOnUploadCallback({
+    partyByAddr,
+    updatePartyById,
+    refreshProfileData,
+  });
 
   return (
     <Flex justifyContent="center" sx={{ width: '100%' }}>

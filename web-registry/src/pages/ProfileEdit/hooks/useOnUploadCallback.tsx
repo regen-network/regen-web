@@ -22,10 +22,12 @@ import { PROFILE_S3_PATH, PROFILE_SAVED } from '../ProfileEdit.constants';
 type Params = {
   partyByAddr?: PartyByAddrQuery | null;
   updatePartyById: ReturnType<typeof useUpdatePartyByIdMutation>[0];
+  refreshProfileData: () => Promise<void>;
 };
 
 export const useOnUploadCallback = ({
   updatePartyById,
+  refreshProfileData,
   partyByAddr,
 }: Params) => {
   const party = partyByAddr?.walletByAddr?.partyByWalletId;
@@ -34,10 +36,11 @@ export const useOnUploadCallback = ({
 
   const onUpload = useCallback(
     async (imageFile: File) => {
+      const currentTime = new Date().getTime();
       try {
         const result = await uploadImage(
           imageFile,
-          `${PROFILE_S3_PATH}/${party?.id}`,
+          `${PROFILE_S3_PATH}/${party?.id}/${currentTime}`,
           apiUri,
         );
         if (result.includes(PROFILE_AVATAR_FILE_NAME)) {
@@ -65,13 +68,20 @@ export const useOnUploadCallback = ({
           });
         }
         setBannerTextAtom(PROFILE_SAVED);
+        await refreshProfileData();
         return result;
       } catch (e) {
         setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
         return '';
       }
     },
-    [setBannerTextAtom, setErrorBannerTextAtom, party, updatePartyById],
+    [
+      setBannerTextAtom,
+      setErrorBannerTextAtom,
+      party,
+      updatePartyById,
+      refreshProfileData,
+    ],
   );
 
   return onUpload;

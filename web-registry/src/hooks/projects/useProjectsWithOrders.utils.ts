@@ -14,6 +14,7 @@ const hasMetadata = (project: ProjectInfo): boolean => !!project.metadata;
 interface SelectProjectsParams extends ProjectsWithOrdersProps {
   projects: ProjectInfo[] | undefined;
   sellOrders: SellOrderInfo[] | undefined;
+  skippedClassId?: string;
 }
 
 export function selectProjects({
@@ -22,6 +23,7 @@ export function selectProjects({
   metadata = false,
   random = false,
   skippedProjectId,
+  skippedClassId,
 }: SelectProjectsParams): ProjectInfo[] | undefined {
   if (!projects || !sellOrders) return;
 
@@ -30,6 +32,9 @@ export function selectProjects({
   if (skippedProjectId)
     _projects = projects.filter(p => isOtherProject(p, skippedProjectId));
   else _projects = [...projects];
+
+  if (skippedClassId)
+    _projects = _projects.filter(p => p.classId !== skippedClassId);
 
   if (random) return shuffle(_projects).filter(hasMetadata);
   if (metadata) return _projects.filter(hasMetadata);

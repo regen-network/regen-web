@@ -9,6 +9,7 @@ import Modal from 'web-components/lib/components/modal';
 import SEO from 'web-components/lib/components/seo';
 import { Body, Title } from 'web-components/lib/components/typography';
 
+import { SKIPPED_CLASS_ID } from 'lib/env';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
 
@@ -48,7 +49,9 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const gettingStartedResourcesSection =
     content?.gettingStartedResourcesSection;
 
-  const creditClassesContent = creditClassData?.allCreditClass;
+  const creditClassesContent = creditClassData?.allCreditClass?.filter(
+    c => c.path !== SKIPPED_CLASS_ID,
+  );
 
   useEffect(() => {
     const anchor = window.location.hash.slice(1);

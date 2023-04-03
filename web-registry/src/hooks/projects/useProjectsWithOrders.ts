@@ -5,6 +5,7 @@ import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useLedger } from 'ledger';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { GECKO_EEUR_ID, GECKO_USDC_ID } from 'lib/coingecko';
+import { SKIPPED_CLASS_ID } from 'lib/env';
 import { normalizeProjectsWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
@@ -116,6 +117,7 @@ export function useProjectsWithOrders({
       metadata,
       random,
       skippedProjectId,
+      skippedClassId: !classId && !projectId ? SKIPPED_CLASS_ID : undefined,
     }) ?? [];
 
   const lastRandomProjects = useLastRandomProjects({
@@ -170,7 +172,7 @@ export function useProjectsWithOrders({
 
   return {
     projectsWithOrderData: projectsWithMetadata,
-    projectsCount: projects?.length,
+    projectsCount: selectedProjects?.length,
     loading: isLoadingProjects || isLoadingProjectsByClass || isLoadingProject,
   };
 }

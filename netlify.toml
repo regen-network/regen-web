@@ -10,6 +10,7 @@
   REACT_APP_BRIDGE_CREDIT_CLASS_ID = "C03"
   REACT_APP_GA_MEASUREMENT_ID="G-6ZGJM8JXYN"
   REACT_APP_TOUCAN_LINK="https://toucan.earth/overview?chainId=137"
+  REACT_APP_SKIPPED_CLASS_ID="C01"
 
 [context.dev.environment]
   REACT_APP_SANITY_TAG = "default"
@@ -25,6 +26,7 @@
   REACT_APP_BRIDGE_API_URI="https://toucan-bridge-staging.herokuapp.com"
   REACT_APP_BRIDGE_CREDIT_CLASS_ID = "C56"
   REACT_APP_BRIDGE="true"
+  REACT_APP_SKIPPED_CLASS_ID="C01"
 
 [context.deploy-preview.environment]
   REACT_APP_SANITY_TAG = "default"
@@ -40,6 +42,7 @@
   REACT_APP_BRIDGE_API_URI="https://toucan-bridge-staging.herokuapp.com"
   REACT_APP_BRIDGE_CREDIT_CLASS_ID = "C56"
   REACT_APP_BRIDGE="true"
+  REACT_APP_SKIPPED_CLASS_ID="C01"
 
 [build.environment]
   NODE_OPTIONS = "--max-old-space-size=10216"

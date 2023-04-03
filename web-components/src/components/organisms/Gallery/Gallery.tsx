@@ -52,7 +52,7 @@ const Gallery = ({ photos, sx }: Props) => {
             height: '100%',
             position: 'absolute',
             top: 0,
-            objectFit: { xs: 'cover', md: 'contain' },
+            objectFit: 'contain',
           },
         }}
       >

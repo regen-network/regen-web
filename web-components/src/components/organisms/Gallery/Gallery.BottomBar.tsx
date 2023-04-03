@@ -24,9 +24,9 @@ export const GalleryBottomBar = ({
   const [isShowMore, setIsShowMore] = useState(false);
   const theme = useTheme();
   const caption = photos[imageIndex]?.caption;
-  const hasCaption =
-    caption?.description !== undefined && caption?.description !== '';
-  const hasCredit = caption?.credit !== undefined && caption?.credit !== '';
+  const credit = photos[imageIndex]?.credit;
+  const hasCaption = caption !== undefined && caption !== '';
+  const hasCredit = credit !== undefined && credit !== '';
 
   return (
     <Box
@@ -107,12 +107,10 @@ export const GalleryBottomBar = ({
             ]}
             onClick={() => setIsShowMore(isShowMore => !isShowMore)}
           >
-            <Box sx={{ display: 'inline-block', mr: 0.5 }}>
-              {caption?.description}
-            </Box>
-            {caption?.credit && (
+            <Box sx={{ display: 'inline-block', mr: 0.5 }}>{caption}</Box>
+            {credit && (
               <Box sx={{ display: 'inline-block', fontWeight: 300 }}>
-                {caption?.credit}
+                {credit}
               </Box>
             )}
           </Body>

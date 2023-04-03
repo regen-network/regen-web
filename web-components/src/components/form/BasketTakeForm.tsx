@@ -50,7 +50,7 @@ export interface MsgTakeValues {
   amount: string;
   retireOnTake: boolean;
   retirementJurisdiction?: string;
-  retirementNote?: string;
+  retirementReason?: string;
 }
 
 interface CreditTakeFormValues extends MetaRetireFormValues {
@@ -124,7 +124,7 @@ const BasketTakeForm: React.FC<React.PropsWithChildren<FormProps>> = ({
       amount: (values.amount * Math.pow(10, basket?.exponent ?? 0)).toString(),
       retireOnTake: !!values.retireOnTake,
       retirementJurisdiction: values.retirementJurisdiction,
-      retirementNote: values?.note,
+      retirementReason: values?.note,
     };
 
     return onSubmit(msgTake);

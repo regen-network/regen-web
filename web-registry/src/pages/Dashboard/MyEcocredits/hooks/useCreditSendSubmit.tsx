@@ -68,6 +68,7 @@ const useCreditSendSubmit = ({
             tradableAmount: withRetire ? '' : amount.toString(),
             retiredAmount: withRetire ? amount.toString() : '',
             retirementJurisdiction: retirementJurisdiction,
+            retirementReason: note,
           },
         ],
       });
@@ -75,7 +76,6 @@ const useCreditSendSubmit = ({
       const tx = {
         msgs: [msg],
         fee: undefined,
-        memo: note,
       };
 
       const batchInfo = credits[creditSendOpen];

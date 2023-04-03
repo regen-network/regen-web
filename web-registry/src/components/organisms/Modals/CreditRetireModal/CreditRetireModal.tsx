@@ -16,9 +16,7 @@ interface CreditRetireModalProps
 
 export const CREDIT_SEND_TITLE = 'Send';
 
-const CreditRetireModal: React.FC<
-  React.PropsWithChildren<CreditRetireModalProps>
-> = ({
+const CreditRetireModal: React.FC<CreditRetireModalProps> = ({
   batchDenom,
   availableTradableAmount,
   mapboxToken,

@@ -95,7 +95,7 @@ export interface BuyCreditsProject {
 }
 
 export interface BuyCreditsValues {
-  retirementNote?: string;
+  retirementReason?: string;
   stateProvince?: string;
   country: string;
   postalCode?: string;
@@ -142,8 +142,11 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
     ): FormikErrors<BuyCreditsValues> => {
       let errors: FormikErrors<BuyCreditsValues> = {};
 
-      if (values.retirementNote && !validateMemoLength(values.retirementNote)) {
-        errors.retirementNote = invalidMemoLength;
+      if (
+        values.retirementReason &&
+        !validateMemoLength(values.retirementReason)
+      ) {
+        errors.retirementReason = invalidMemoLength;
       }
 
       if (!values.agreeErpa) errors.agreeErpa = requirementAgreement;
@@ -472,15 +475,15 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                     <Collapse in={values['retirementAction'] === 'autoretire'}>
                       <Flex>
                         <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
-                          Retirement note
+                          Retirement reason
                         </Title>
                         <InfoTooltipWithIcon title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')" />
                       </Flex>
                       <Flex>
                         <Field
                           component={TextField}
-                          label="Add retirement transaction details (stored in the tx memo)"
-                          name="retirementNote"
+                          label="Explain the reason you are retiring these credits"
+                          name="retirementReason"
                           optional
                           sx={{
                             mb: { xs: 10, sm: 12 },

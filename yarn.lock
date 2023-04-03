@@ -5133,10 +5133,10 @@
   dependencies:
     "@types/node" "*"
 
-"@regen-network/api@0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@regen-network/api/-/api-0.5.0.tgz#372aa4857024e515e51a5d0212fce44e8fc132d8"
-  integrity sha512-VQ6Ek1sgZFSXHoIMxwWI4LHmHMIIRyXdP2Ijw4lqIvyVA4a17qfjNy81eKogvY9dccfHP1FbZiIEN2A5zxKj0A==
+"@regen-network/api@0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@regen-network/api/-/api-0.6.0.tgz#9bc4270142464dc32143fcbe229efd9e8d950d92"
+  integrity sha512-RKmWtzXaAhE+gvC2AVy+2hvsSWT6ipHDt4gDfFuxD/93pYe7xGbi0zbG+lp9PZD3qfgPs7OnE3UuiyvdRnzEaw==
   dependencies:
     "@cosmjs/proto-signing" "0.28.13"
     "@cosmjs/stargate" "0.28.13"

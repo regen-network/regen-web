@@ -68,12 +68,12 @@ const useCreditRetireSubmit = ({
             amount,
           },
         ],
+        reason: note,
       });
 
       const tx = {
         msgs: [msg],
         fee: undefined,
-        memo: note,
       };
 
       const onError = (err?: Error): void => {

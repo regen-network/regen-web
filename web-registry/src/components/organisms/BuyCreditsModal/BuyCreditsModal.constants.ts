@@ -1,6 +1,6 @@
 export const BUY_CREDITS_MODAL_DEFAULT_VALUES = {
   creditCount: 1,
-  retirementNote: '',
+  retirementReason: '',
   stateProvince: '',
   country: 'US',
   postalCode: '',

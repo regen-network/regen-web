@@ -33,7 +33,7 @@ const Gallery = ({ photos, sx }: Props) => {
           position: 'relative',
           overflow: 'hidden',
           background: theme.palette.primary.light,
-          pt: { xs: 15, md: 0 },
+          pt: { xs: 35.5, md: 0 },
         },
         ...sxToArray(sx),
       ]}
@@ -43,16 +43,16 @@ const Gallery = ({ photos, sx }: Props) => {
           position: 'relative',
           display: 'flex',
           alignItems: 'end',
-          maxHeight: 650,
+          maxHeight: 750,
           aspectRatio: '1441 / 650',
           width: '100%',
-          mb: { xs: 15, md: 0 },
+          mb: { xs: 10, md: 0 },
           '& img': {
             width: '100%',
             height: '100%',
             position: 'absolute',
             top: 0,
-            objectFit: 'contain',
+            objectFit: { xs: 'cover', md: 'contain' },
           },
         }}
       >

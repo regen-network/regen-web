@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Box, ButtonBase, useTheme } from '@mui/material';
 
 import { Body, Label } from '../../../components/typography';
+import { containerPaddingX, containerStyles } from '../../../styles/container';
 import { UseStateSetter } from '../../../types/react/useState';
 import ArrowDownIcon from '../../icons/ArrowDownIcon';
 import { GalleryPhoto } from './Gallery.types';
@@ -22,17 +23,16 @@ export const GalleryBottomBar = ({
 }: Props) => {
   const [isShowMore, setIsShowMore] = useState(false);
   const theme = useTheme();
+  const caption = photos[imageIndex]?.caption;
+  const hasCaption =
+    caption?.description !== undefined && caption?.description !== '';
+  const hasCredit = caption?.credit !== undefined && caption?.credit !== '';
 
   return (
     <Box
       sx={{
         position: { xs: 'relative', md: 'absolute' },
         bottom: { xs: 'auto', md: 0 },
-        display: 'flex',
-        flexDirection: { xs: 'column', md: 'row' },
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-        px: { xs: 5, md: 37.5 },
         py: { xs: 5, md: 6.25 },
         width: '100%',
         background: {
@@ -47,52 +47,77 @@ export const GalleryBottomBar = ({
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'center',
+          flexDirection: { xs: 'column', md: 'row' },
           alignItems: 'flex-start',
-          mb: { xs: 2.5, md: 0 },
+          ...containerPaddingX,
+          ...containerStyles,
         }}
       >
-        <ButtonBase
-          onClick={() => paginateGallery({ newDirection: -1, page, setPage })}
-          sx={{ fontSize: 24, mr: 6.5 }}
-          disableRipple
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+            mb: { xs: 2.5, md: 0 },
+          }}
         >
-          <ArrowDownIcon color={theme.palette.primary.main} direction="prev" />
-        </ButtonBase>
-        <ButtonBase
-          onClick={() => paginateGallery({ newDirection: 1, page, setPage })}
-          sx={{ fontSize: 24, mr: 6.5 }}
-          disableRipple
-        >
-          <ArrowDownIcon color={theme.palette.primary.main} direction="next" />
-        </ButtonBase>
-        <Label size="sm" sx={{ mr: 5, mt: 0.75 }}>
-          {`${imageIndex + 1}/${photos.length}`}
-        </Label>
+          <ButtonBase
+            onClick={() => paginateGallery({ newDirection: -1, page, setPage })}
+            sx={{ fontSize: 24, mr: 6.5 }}
+            disableRipple
+          >
+            <ArrowDownIcon
+              color={theme.palette.primary.main}
+              direction="prev"
+            />
+          </ButtonBase>
+          <ButtonBase
+            onClick={() => paginateGallery({ newDirection: 1, page, setPage })}
+            sx={{ fontSize: 24, mr: 6.5 }}
+            disableRipple
+          >
+            <ArrowDownIcon
+              color={theme.palette.primary.main}
+              direction="next"
+            />
+          </ButtonBase>
+          <Label size="sm" sx={{ mr: 5, mt: 0.75 }}>
+            {`${imageIndex + 1}/${photos.length}`}
+          </Label>
+        </Box>
+        {(hasCaption || hasCredit) && (
+          <Body
+            size="sm"
+            mobileSize="sm"
+            sx={[
+              {
+                color: 'primary.main',
+                maxWidth: 890,
+                width: '100%',
+                minHeight: { xs: 42, md: 54 },
+                cursor: 'pointer',
+              },
+              !isShowMore && {
+                height: { xs: 42, md: 54 },
+                background:
+                  'linear-gradient(180deg, #FFFFFF 26.04%, rgba(255, 255, 255, 0) 100%);',
+                backgroundClip: 'text',
+                textFillColor: 'transparent',
+              },
+            ]}
+            onClick={() => setIsShowMore(isShowMore => !isShowMore)}
+          >
+            <Box sx={{ display: 'inline-block', mr: 0.5 }}>
+              {caption?.description}
+            </Box>
+            {caption?.credit && (
+              <Box sx={{ display: 'inline-block', fontWeight: 300 }}>
+                {caption?.credit}
+              </Box>
+            )}
+          </Body>
+        )}
       </Box>
-      <Body
-        size="sm"
-        mobileSize="sm"
-        sx={[
-          {
-            color: 'primary.main',
-            maxWidth: 890,
-            width: '100%',
-            minHeight: { xs: 42, md: 54 },
-          },
-          !isShowMore && {
-            height: { xs: 42, md: 54 },
-            background:
-              'linear-gradient(180deg, #FFFFFF 26.04%, rgba(255, 255, 255, 0) 100%);',
-            backgroundClip: 'text',
-            textFillColor: 'transparent',
-            cursor: 'pointer',
-          },
-        ]}
-        onClick={() => setIsShowMore(true)}
-      >
-        {photos[imageIndex]?.caption}
-      </Body>
     </Box>
   );
 };

@@ -1,4 +1,7 @@
 export type GalleryPhoto = {
   href: string;
-  caption?: string;
+  caption?: {
+    description: string;
+    credit?: string;
+  };
 };

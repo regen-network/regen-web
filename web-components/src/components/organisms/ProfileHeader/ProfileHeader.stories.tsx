@@ -8,7 +8,7 @@ import { ProfileHeader } from './ProfileHeader';
 import { ProfileVariant } from './ProfileHeader.types';
 
 export default {
-  title: 'atoms/ProfileHeader',
+  title: 'organisms/ProfileHeader',
   component: ProfileHeader,
 } as ComponentMeta<typeof ProfileHeader>;
 
@@ -17,8 +17,9 @@ const Template: ComponentStory<typeof ProfileHeader> = args => (
 );
 
 export const Default = Template.bind({});
+export const WhiteBG = Template.bind({});
 
-Default.args = {
+const defaultArgs = {
   name: 'Mary Smith',
   backgroundImage: '/illustrations/profile-bg.jpg',
   avatar: '/illustrations/frog.jpg',
@@ -38,13 +39,24 @@ Default.args = {
     ],
   },
   LinkComponent: Link,
-  editLink: '',
+  editLink: '#',
 };
 
-Default.argTypes = {
+const defaultArgTypes = {
   variant: {
     control: 'radio',
     options: ['individual', 'organization'] as ProfileVariant[],
     defaultValue: 'individual' as ProfileVariant,
   },
 };
+
+Default.args = defaultArgs;
+
+Default.argTypes = defaultArgTypes;
+
+WhiteBG.args = {
+  ...defaultArgs,
+  backgroundImage: '/common/white-bg.png',
+};
+
+WhiteBG.argTypes = defaultArgTypes;

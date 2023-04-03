@@ -20,5 +20,5 @@ export const ProfileVariantIconMapping: {
   [key in ProfileVariant]: JSX.Element;
 } = {
   individual: <AvatarOutlineIcon />,
-  organization: <OrganizationIcon />,
+  organization: <OrganizationIcon color="currentColor" />,
 };

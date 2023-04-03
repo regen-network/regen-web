@@ -127,7 +127,13 @@ export const ProfileEdit = () => {
     <Flex justifyContent="center" sx={{ width: '100%' }}>
       <Flex
         flexDirection="column"
-        sx={{ width: '100%', maxWidth: 560, my: 12.5, mx: { xs: 2.5, sm: 0 } }}
+        sx={{
+          width: '100%',
+          maxWidth: 560,
+          mt: { xs: 6, sm: 12.5 },
+          mb: { xs: 25, sm: 12.5 },
+          mx: { xs: 2.5, sm: 0 },
+        }}
       >
         <Flex justifyContent="space-between" sx={{ mb: 12.5 }}>
           <Title variant="h3">{PROFILE}</Title>

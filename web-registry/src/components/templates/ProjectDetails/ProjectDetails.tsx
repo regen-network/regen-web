@@ -133,7 +133,12 @@ function ProjectDetails(): JSX.Element {
 
   /** Anchored project metadata comes from IRI resolver. */
   const { data: anchoredMetadata, isInitialLoading: loadingAnchoredMetadata } =
-    useQuery(getMetadataQuery({ iri: onChainProject?.metadata }));
+    useQuery(
+      getMetadataQuery({
+        iri: onChainProject?.metadata,
+        context: { regen: 'https://schema.regen.network#' },
+      }),
+    );
 
   const { batchesWithSupply, setPaginationParams, paginationParams } =
     usePaginatedBatchesByProject({ projectId: String(onChainProjectId) });

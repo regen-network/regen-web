@@ -9,4 +9,5 @@ export type ReactQueryMetadataResponse =
 
 export type ReactQueryMetadataProps = {
   iri?: string;
+  context?: object;
 } & ReactQueryBuilderResponse<ReactQueryMetadataResponse>;

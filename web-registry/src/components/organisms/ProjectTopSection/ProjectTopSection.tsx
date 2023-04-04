@@ -9,7 +9,6 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import { useSortResultWithIris } from 'utils/sanity/useSortResultWithIris';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import Card from 'web-components/lib/components/cards/Card';
@@ -21,7 +20,6 @@ import ReadMore from 'web-components/lib/components/read-more';
 import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
-import { useSdgByIriQuery } from 'generated/sanity-graphql';
 import { getParty } from 'lib/transform';
 
 import {
@@ -31,7 +29,6 @@ import {
 } from 'components/templates/ProjectDetails/ProjectDetails.config';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
-import { client } from '../../../lib/clients/sanity';
 import { getSanityImgSrc } from '../../../lib/imgSrc';
 import { ProjectTopLink } from '../../atoms';
 import { ProjectBatchTotals, ProjectPageMetadata } from '../../molecules';
@@ -39,7 +36,7 @@ import {
   ProjectTopSectionQuoteMark,
   useProjectTopSectionStyles,
 } from './ProjectTopSection.styles';
-import { ProjectTopSectionProps, SdgType } from './ProjectTopSection.types';
+import { ProjectTopSectionProps } from './ProjectTopSection.types';
 import {
   getDisplayAdmin,
   isAnchoredProjectMetadata,
@@ -69,7 +66,7 @@ function ProjectTopSection({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const { creditClass, creditClassVersion, offsetGenerationMethod, sdgIris } =
+  const { creditClass, creditClassVersion, offsetGenerationMethod } =
     parseOffChainProject(offChainProject);
 
   const { projectName, area, areaUnit, placeName } =
@@ -95,24 +92,6 @@ function ProjectTopSection({
 
   const displayName =
     projectName ?? (onChainProjectId && `Project ${onChainProjectId}`) ?? '';
-
-  const { data: sdgData } = useSdgByIriQuery({
-    client,
-    variables: {
-      iris: sdgIris,
-    },
-    skip: !sdgIris,
-  });
-
-  const sortedSdgData = useSortResultWithIris<SdgType>({
-    dataWithIris: sdgData?.allSdg,
-    iris: sdgIris,
-  });
-
-  const sdgs = sortedSdgData.map(sdg => ({
-    title: sdg.title || '',
-    imageUrl: getSanityImgSrc(sdg.image),
-  }));
 
   return (
     <Section classes={{ root: classes.section }}>
@@ -284,7 +263,6 @@ function ProjectTopSection({
                 ? getParty(offChainProject?.partyByResellerId)
                 : undefined
             }
-            sdgs={sdgs}
           />
         </Grid>
       </Grid>

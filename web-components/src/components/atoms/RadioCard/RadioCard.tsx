@@ -40,6 +40,7 @@ const RadioCard = forwardRef<HTMLInputElement, Props>(
                   justifyContent: 'center',
                   alignItems: 'center',
                   flexGrow: 1,
+                  width: '100%',
                   border: theme =>
                     isSelected
                       ? `2px solid ${theme.palette.secondary.main}`

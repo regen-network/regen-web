@@ -15,7 +15,10 @@ import { CreditBatchIcon } from 'web-components/lib/components/icons/CreditBatch
 import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClassIcon';
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
+import TwitterIcon2 from 'web-components/lib/components/icons/social/TwitterIcon2';
+import WebsiteLinkIcon from 'web-components/lib/components/icons/social/WebsiteLinkIcon';
 import { ProfileHeader } from 'web-components/lib/components/organisms/ProfileHeader/ProfileHeader';
+import { SocialLink } from 'web-components/lib/components/organisms/ProfileHeader/ProfileHeader.types';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 import { containerStyles } from 'web-components/lib/styles/container';
@@ -113,6 +116,23 @@ const Dashboard = (): JSX.Element => {
     0,
   );
 
+  const socialsLinks: SocialLink[] = useMemo(
+    () =>
+      [
+        {
+          href: party?.twitterLink,
+          icon: <TwitterIcon2 />,
+        },
+        {
+          href: party?.websiteLink,
+          icon: <WebsiteLinkIcon />,
+        },
+      ].filter((link): link is SocialLink => {
+        return !!link.href;
+      }),
+    [party?.twitterLink, party?.websiteLink],
+  );
+
   return (
     <>
       <ProfileHeader
@@ -125,8 +145,9 @@ const Dashboard = (): JSX.Element => {
             text: truncate(wallet?.address),
           },
           description: party?.description?.trimEnd() ?? '',
+          socialsLinks,
         }}
-        editLink="/profile/edit"
+        editLink={accountId ? '/profile/edit' : ''}
         variant={party?.type ? profileVariantMapping[party.type] : 'individual'}
         LinkComponent={Link}
       />

@@ -1,4 +1,4 @@
-import { Avatar, Box, SxProps } from '@mui/material';
+import { Avatar, Box, SxProps, useTheme } from '@mui/material';
 
 import { LinkComponentType } from 'src/types/shared/linkComponentType';
 
@@ -42,6 +42,8 @@ const ProfileHeader = ({
   LinkComponent,
   sx = [],
 }: Props): JSX.Element => {
+  const theme = useTheme();
+
   return (
     <Box
       sx={[
@@ -53,9 +55,6 @@ const ProfileHeader = ({
       ]}
     >
       <Box
-        component="img"
-        src={backgroundImage}
-        alt="user profile background image"
         sx={{
           position: 'absolute',
           width: '100%',
@@ -63,9 +62,32 @@ const ProfileHeader = ({
             xs: PROFILE_BG_HEIGHT_MOBILE,
             sm: PROFILE_BG_HEIGHT_DESKTOP,
           },
-          objectFit: 'cover',
+          '&:after': {
+            content: '""',
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            inset: 0,
+            background: {
+              xs: `linear-gradient(to bottom, ${theme.palette.primary.contrastText}, transparent)`,
+              sm: `linear-gradient(to top, ${theme.palette.primary.contrastText}, transparent)`,
+            },
+            opacity: 0.2,
+          },
         }}
-      />
+      >
+        <Box
+          component="img"
+          src={backgroundImage}
+          alt="user profile background image"
+          sx={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+        />
+      </Box>
       <Flex
         flexDirection={{ xs: 'column', sm: 'row' }}
         justifyContent={{ xs: 'flex-start', sm: 'center' }}
@@ -116,31 +138,35 @@ const ProfileHeader = ({
               mobileVariant="h4"
               sx={{
                 color: { xs: 'main.contrastText', sm: 'primary.main' },
-                mb: 2,
+                mb: { xs: 1.375, sm: 2 },
                 zIndex: 1,
-                minHeight: 44.7,
+                minHeight: { xs: 'auto', sm: 44.7 },
               }}
             >
               {name}
             </Title>
-            <LinkComponent href={editLink}>
-              <Label
-                size="sm"
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  color: 'primary.main',
-                  position: { xs: 'absolute', sm: 'relative' },
-                  top: { xs: 24, sm: 'auto' },
-                  right: { right: 17, sm: 'auto' },
-                  height: 18,
-                  mb: 4.5,
-                }}
-              >
-                <EditIcon sx={{ fontSize: 17, mr: 2, color: 'primary.main' }} />
-                {EDIT_PROFILE}
-              </Label>
-            </LinkComponent>
+            {editLink !== '' && (
+              <LinkComponent href={editLink}>
+                <Label
+                  size="sm"
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    color: 'primary.main',
+                    position: { xs: 'absolute', sm: 'relative' },
+                    top: { xs: 24, sm: 'auto' },
+                    right: { right: 17, sm: 'auto' },
+                    height: 18,
+                    mb: 4.5,
+                  }}
+                >
+                  <EditIcon
+                    sx={{ fontSize: 17, mr: 2, color: 'primary.main' }}
+                  />
+                  {EDIT_PROFILE}
+                </Label>
+              </LinkComponent>
+            )}
           </Flex>
           <ProfileHeaderInfos
             {...infos}

@@ -84,6 +84,13 @@ export default function ImageCrop({
     }
   }, [completedCrop, onCropSubmit]);
 
+  /**
+   * onLoad callback function to initialize the crop area based on the given image element.
+   * It sets both the percentage-based and pixel-based crop areas.
+   *
+   * @param {HTMLImageElement} img - The image element to be used as a reference for calculating the crop area.
+   * @returns {boolean} - Returns false to indicate that the crop state is set in this function.
+   */
   const onLoad = useCallback(
     (img: HTMLImageElement) => {
       imgRef.current = img;

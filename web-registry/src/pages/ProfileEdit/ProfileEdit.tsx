@@ -52,7 +52,7 @@ export const ProfileEdit = () => {
       }),
     [graphqlClient, wallet?.address],
   );
-  const { data: partyByAddr } = useQuery(partyByAddrQuery);
+  const { data: partyByAddr, isFetching } = useQuery(partyByAddrQuery);
   const { party, defaultAvatar } = usePartyInfos({ accountId, partyByAddr });
 
   const initialValues: EditProfileFormSchemaType = useMemo(
@@ -104,18 +104,36 @@ export const ProfileEdit = () => {
     [party, updatePartyById],
   );
 
+  const refreshProfileData = useCallback(
+    () =>
+      reactQueryClient.invalidateQueries({
+        queryKey: partyByAddrQuery.queryKey,
+      }),
+    [partyByAddrQuery, reactQueryClient],
+  );
+
   const onSuccess = useCallback(() => {
     setBannerTextAtom(PROFILE_SAVED);
-    reactQueryClient.invalidateQueries({ queryKey: partyByAddrQuery.queryKey });
-  }, [setBannerTextAtom, partyByAddrQuery, reactQueryClient]);
+    refreshProfileData();
+  }, [setBannerTextAtom, refreshProfileData]);
 
-  const onUpload = useOnUploadCallback({ partyByAddr, updatePartyById });
+  const onUpload = useOnUploadCallback({
+    partyByAddr,
+    updatePartyById,
+    refreshProfileData,
+  });
 
   return (
     <Flex justifyContent="center" sx={{ width: '100%' }}>
       <Flex
         flexDirection="column"
-        sx={{ width: '100%', maxWidth: 560, my: 12.5, mx: { xs: 2.5, sm: 0 } }}
+        sx={{
+          width: '100%',
+          maxWidth: 560,
+          mt: { xs: 6, sm: 12.5 },
+          mb: { xs: 25, sm: 12.5 },
+          mx: { xs: 2.5, sm: 0 },
+        }}
       >
         <Flex justifyContent="space-between" sx={{ mb: 12.5 }}>
           <Title variant="h3">{PROFILE}</Title>
@@ -127,7 +145,7 @@ export const ProfileEdit = () => {
             {VIEW_PROFILE}
           </OutlinedButton>
         </Flex>
-        <WithLoader isLoading={!party} sx={{ mx: 'auto' }}>
+        <WithLoader isLoading={isFetching} sx={{ mx: 'auto' }}>
           <EditProfileForm
             onSubmit={onSubmit}
             onSuccess={onSuccess}

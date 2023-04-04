@@ -12,12 +12,16 @@ export const getPartyByAddrQuery = ({
 }: ReactQueryGetPartyByIdQueryParams): ReactQueryGetPartyByAddrQueryResponse => ({
   queryKey: [PARTY_BY_ADDR_QUERY_KEY, params.addr],
   queryFn: async () => {
-    const { data } = await client.query<PartyByAddrQuery>({
-      query: PartyByAddrDocument,
-      variables: { ...params },
-    });
+    try {
+      const { data } = await client.query<PartyByAddrQuery>({
+        query: PartyByAddrDocument,
+        variables: { ...params },
+      });
 
-    return data;
+      return data;
+    } catch (e) {
+      return null;
+    }
   },
   ...params,
 });

@@ -1,13 +1,10 @@
 import React from 'react';
 import { Grid, SxProps, Theme } from '@mui/material';
+import { quantityFormatNumberOptions } from 'config/decimals';
 
 import { LabeledNumber } from 'web-components/lib/components/text-layouts';
 
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
-
-const formatNumberOptions = {
-  maximumFractionDigits: 2,
-};
 
 export const BatchTotalsGrid: React.FC<
   React.PropsWithChildren<{
@@ -27,27 +24,28 @@ export const BatchTotalsGrid: React.FC<
         number={
           +batch.tradableAmount + +batch.retiredAmount + +batch.cancelledAmount
         }
+        formatNumberOptions={quantityFormatNumberOptions}
       />
     </GridItem>
     <GridItem>
       <LabeledNumber
         label="Credits Tradable"
         number={batch.tradableAmount}
-        formatNumberOptions={formatNumberOptions}
+        formatNumberOptions={quantityFormatNumberOptions}
       />
     </GridItem>
     <GridItem>
       <LabeledNumber
         label="Credits Retired"
         number={batch.retiredAmount}
-        formatNumberOptions={formatNumberOptions}
+        formatNumberOptions={quantityFormatNumberOptions}
       />
     </GridItem>
     <GridItem>
       <LabeledNumber
         label="Credits Cancelled"
         number={batch.cancelledAmount}
-        formatNumberOptions={formatNumberOptions}
+        formatNumberOptions={quantityFormatNumberOptions}
       />
     </GridItem>
   </Grid>

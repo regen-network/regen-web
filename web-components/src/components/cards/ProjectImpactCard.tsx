@@ -1,6 +1,7 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 
+import { ImageType } from '../../types/shared/imageType';
 import { Image } from '../image';
 import { Body, Label, Title } from '../typography';
 import Card from './Card';
@@ -10,6 +11,7 @@ export interface ProjectImpactCardProps {
   name?: string | null;
   description: JSX.Element | string;
   imgSrc: string;
+  sdgs?: ImageType[];
   monitored?: boolean;
   standard?: string;
   apiServerUrl?: string;
@@ -20,12 +22,15 @@ export default function ProjectImpactCard({
   name,
   description,
   imgSrc,
+  sdgs = [],
   monitored = false,
   className,
   standard,
   imageStorageBaseUrl,
   apiServerUrl,
 }: ProjectImpactCardProps): JSX.Element {
+  const hasSdgs = sdgs.length > 0;
+
   return (
     <Card
       className={className}
@@ -91,6 +96,20 @@ export default function ProjectImpactCard({
         >
           {description}
         </Body>
+        {hasSdgs && (
+          <Grid container spacing={5.625} sx={{ mb: 3.125, mt: -5 }}>
+            {sdgs.map(sdg => (
+              <Grid key={sdg.src} item>
+                <Box
+                  component="img"
+                  sx={{ width: 97.45 }}
+                  src={sdg.src}
+                  alt={sdg.alt}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        )}
         {standard && (
           <Box sx={{ py: [2] }}>
             <Image

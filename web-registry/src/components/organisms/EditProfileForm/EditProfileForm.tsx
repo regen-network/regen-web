@@ -5,6 +5,7 @@ import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
 import RadioCard from 'web-components/lib/components/atoms/RadioCard';
+import ControlledFormLabel from 'web-components/lib/components/form/ControlledFormLabel';
 import TwitterIcon2 from 'web-components/lib/components/icons/social/TwitterIcon2';
 import WebsiteLinkIcon from 'web-components/lib/components/icons/social/WebsiteLinkIcon';
 import { ImageField } from 'web-components/lib/components/inputs/new/ImageField/ImageField';
@@ -13,8 +14,6 @@ import { ImageFieldBackground } from 'web-components/lib/components/inputs/new/I
 import { TextAreaField } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField';
 import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
-import { Label } from 'web-components/lib/components/typography';
-import { defaultFontFamily } from 'web-components/lib/theme/muiTheme';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
@@ -180,16 +179,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           <TextAreaFieldChartCounter value={description} />
         </TextAreaField>
         <Box sx={{ mt: 6 }}>
-          <Label
-            size="md"
-            sx={{
-              textTransform: 'none',
-              mb: 2.5,
-              fontFamily: defaultFontFamily,
-            }}
-          >
-            {LINKS_LABEL}
-          </Label>
+          <ControlledFormLabel optional>{LINKS_LABEL}</ControlledFormLabel>
           <TextField
             type="text"
             label=""
@@ -201,6 +191,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
               <WebsiteLinkIcon sx={{ fontSize: 40, color: 'grey.100' }} />
             }
             sx={{
+              mt: { xs: 2.5, sm: 2.5 },
               mb: 5,
               '& .MuiInputBase-root': { pl: { sm: '3px' } },
             }}

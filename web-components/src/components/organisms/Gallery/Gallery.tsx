@@ -44,7 +44,7 @@ const Gallery = ({ photos, sx }: Props) => {
           display: 'flex',
           alignItems: 'end',
           maxHeight: 750,
-          aspectRatio: '1441 / 650',
+          aspectRatio: '3/2',
           width: '100%',
           mb: { xs: 10, md: 0 },
           '& img': {
@@ -52,7 +52,7 @@ const Gallery = ({ photos, sx }: Props) => {
             height: '100%',
             position: 'absolute',
             top: 0,
-            objectFit: 'contain',
+            objectFit: { xs: 'cover', md: 'contain' },
           },
         }}
       >

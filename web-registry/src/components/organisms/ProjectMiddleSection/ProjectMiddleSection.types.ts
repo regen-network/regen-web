@@ -8,8 +8,6 @@ import {
 } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 
-import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
-
 export type ProjectMiddleSectionProps = {
   offChainProject?: Maybe<ProjectFieldsFragment>;
   batchData?: {
@@ -18,8 +16,6 @@ export type ProjectMiddleSectionProps = {
   };
   paginationParams: TablePaginationParams;
   setPaginationParams: UseStateSetter<TablePaginationParams>;
-  soldOutProjectsIds: string[];
-  projectWithOrderData: ProjectWithOrderData;
 };
 
 export type SdgType = SdgByIriQuery['allSdg'][0];

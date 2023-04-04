@@ -34,7 +34,7 @@ import { findSanityCreditClass } from 'components/templates/ProjectDetails/Proje
 import { client } from '../../../lib/clients/sanity';
 import { getSanityImgSrc } from '../../../lib/imgSrc';
 import { ProjectTopLink } from '../../atoms';
-import { ProjectPageMetadata } from '../../molecules';
+import { ProjectBatchTotals, ProjectPageMetadata } from '../../molecules';
 import {
   ProjectTopSectionQuoteMark,
   useProjectTopSectionStyles,
@@ -61,6 +61,9 @@ function ProjectTopSection({
   landOwner,
   landSteward,
   projectDeveloper,
+  projectWithOrderData,
+  soldOutProjectsIds,
+  batchData,
 }: ProjectTopSectionProps): JSX.Element {
   const { classes } = useProjectTopSectionStyles();
   const theme = useTheme();
@@ -194,6 +197,19 @@ function ProjectTopSection({
               />
             </Link>
           )}
+          <Box>
+            {batchData?.totals && (
+              <ProjectBatchTotals
+                projectWithOrderData={projectWithOrderData}
+                soldOutProjectsIds={soldOutProjectsIds}
+                totals={batchData.totals}
+                sx={{
+                  mt: { xs: 10, sm: 12, md: 16 },
+                  mb: { xs: 10, sm: 12, md: 25 },
+                }}
+              />
+            )}
+          </Box>
           {isAnchoredProjectMetadata(projectMetadata, onChainProjectId) && (
             <ProjectPageMetadata metadata={projectMetadata} />
           )}

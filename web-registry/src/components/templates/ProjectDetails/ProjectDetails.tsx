@@ -282,14 +282,18 @@ function ProjectDetails(): JSX.Element {
         landOwner={landOwner}
         landSteward={landSteward}
         loading={loadingDb || loadingAnchoredMetadata}
+        soldOutProjectsIds={soldOutProjectsIds}
+        projectWithOrderData={projectsWithOrderData[0]}
+        batchData={{
+          batches: batchesWithSupply,
+          totals: batchesTotal,
+        }}
       />
 
       {hasProjectPhotos && <Gallery photos={projectPhotos} />}
 
       <ProjectMiddleSection
         offChainProject={offChainProject}
-        soldOutProjectsIds={soldOutProjectsIds}
-        projectWithOrderData={projectsWithOrderData[0]}
         batchData={{
           batches: batchesWithSupply,
           totals: batchesTotal,

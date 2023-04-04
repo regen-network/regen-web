@@ -14,6 +14,7 @@ import { getIsSoldOut } from 'pages/Projects/utils/getIsSoldOut';
 import type { BatchTotalsForProject } from '../../../types/ledger/ecocredit';
 import {
   ISSUED_CREDITS_TOOLTIP,
+  MAX_FRACTION_DIGITS_PROJECT_CREDITS,
   RETIRED_CREDITS_TOOLTIP,
   SOLD_OUT,
   TRADEABLE_CREDITS_TOOLTIP,
@@ -49,6 +50,8 @@ export function ProjectBatchTotals({
         {
           justifyContent: 'space-between',
           alignItems: 'stretch',
+          maxWidth: 650,
+          flexDirection: { xs: 'column', sm: 'row' },
         },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
@@ -58,7 +61,10 @@ export function ProjectBatchTotals({
           label="Credits issued"
           tooltipLabel={ISSUED_CREDITS_TOOLTIP}
           number={totals.tradableAmount + totals.retiredAmount}
-          formatNumberOptions={quantityFormatNumberOptions}
+          formatNumberOptions={{
+            ...quantityFormatNumberOptions,
+            maximumFractionDigits: MAX_FRACTION_DIGITS_PROJECT_CREDITS,
+          }}
           icon={<CreditsIssuedIcon />}
         />
       </GridItem>
@@ -72,7 +78,10 @@ export function ProjectBatchTotals({
           })}
           number={isSoldOut ? undefined : totals.tradableAmount}
           badgeLabel={isSoldOut ? SOLD_OUT : undefined}
-          formatNumberOptions={quantityFormatNumberOptions}
+          formatNumberOptions={{
+            ...quantityFormatNumberOptions,
+            maximumFractionDigits: MAX_FRACTION_DIGITS_PROJECT_CREDITS,
+          }}
           icon={<CreditsTradeableIcon />}
         />
       </GridItem>
@@ -81,7 +90,10 @@ export function ProjectBatchTotals({
           label="Credits Retired"
           tooltipLabel={RETIRED_CREDITS_TOOLTIP}
           number={totals.retiredAmount}
-          formatNumberOptions={quantityFormatNumberOptions}
+          formatNumberOptions={{
+            ...quantityFormatNumberOptions,
+            maximumFractionDigits: MAX_FRACTION_DIGITS_PROJECT_CREDITS,
+          }}
           icon={<CreditsRetiredIcon />}
         />
       </GridItem>

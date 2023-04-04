@@ -2121,6 +2121,7 @@ export type EcologicalImpact = Document & {
   iri?: Maybe<Slug>;
   descriptionRaw?: Maybe<Scalars['JSON']>;
   image?: Maybe<CustomImage>;
+  sdgs?: Maybe<Array<Maybe<Sdg>>>;
   standard?: Maybe<CustomImage>;
 };
 
@@ -2673,6 +2674,7 @@ export type HomeFoldSection = {
   _type?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   body?: Maybe<Scalars['String']>;
+  image?: Maybe<CustomImage>;
 };
 
 export type HomeFoldSectionFilter = {
@@ -2680,6 +2682,7 @@ export type HomeFoldSectionFilter = {
   _type?: Maybe<StringFilter>;
   title?: Maybe<StringFilter>;
   body?: Maybe<StringFilter>;
+  image?: Maybe<CustomImageFilter>;
 };
 
 export type HomeFoldSectionSorting = {
@@ -2687,6 +2690,7 @@ export type HomeFoldSectionSorting = {
   _type?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
   body?: Maybe<SortOrder>;
+  image?: Maybe<CustomImageSorting>;
 };
 
 export type HomePage = Document & {
@@ -2785,6 +2789,9 @@ export type HomePageWeb = Document & {
   _key?: Maybe<Scalars['String']>;
   homeFoldSection?: Maybe<HomeFoldSection>;
   marketplaceSection?: Maybe<MarketplaceSection>;
+  homeWebPartnersSection?: Maybe<HomeWebPartnersSection>;
+  homeWebEcologicalCreditCardsSection?: Maybe<HomeWebEcologicalCreditCardsSection>;
+  homeWebStatsSection?: Maybe<HomeWebStatsSection>;
   bannerTextSection?: Maybe<TitleImageCustomBody>;
   climateSection?: Maybe<ClimateSection>;
   carbonPlusSection?: Maybe<CarbonPlusSection>;
@@ -2803,6 +2810,9 @@ export type HomePageWebFilter = {
   _key?: Maybe<StringFilter>;
   homeFoldSection?: Maybe<HomeFoldSectionFilter>;
   marketplaceSection?: Maybe<MarketplaceSectionFilter>;
+  homeWebPartnersSection?: Maybe<HomeWebPartnersSectionFilter>;
+  homeWebEcologicalCreditCardsSection?: Maybe<HomeWebEcologicalCreditCardsSectionFilter>;
+  homeWebStatsSection?: Maybe<HomeWebStatsSectionFilter>;
   bannerTextSection?: Maybe<TitleImageCustomBodyFilter>;
   climateSection?: Maybe<ClimateSectionFilter>;
   carbonPlusSection?: Maybe<CarbonPlusSectionFilter>;
@@ -2819,6 +2829,9 @@ export type HomePageWebSorting = {
   _key?: Maybe<SortOrder>;
   homeFoldSection?: Maybe<HomeFoldSectionSorting>;
   marketplaceSection?: Maybe<MarketplaceSectionSorting>;
+  homeWebPartnersSection?: Maybe<HomeWebPartnersSectionSorting>;
+  homeWebEcologicalCreditCardsSection?: Maybe<HomeWebEcologicalCreditCardsSectionSorting>;
+  homeWebStatsSection?: Maybe<HomeWebStatsSectionSorting>;
   bannerTextSection?: Maybe<TitleImageCustomBodySorting>;
   climateSection?: Maybe<ClimateSectionSorting>;
   carbonPlusSection?: Maybe<CarbonPlusSectionSorting>;
@@ -2844,6 +2857,69 @@ export type HomeValuesSectionSorting = {
   _key?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
   header?: Maybe<SortOrder>;
+};
+
+export type HomeWebEcologicalCreditCardsSection = {
+  __typename?: 'HomeWebEcologicalCreditCardsSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  cards?: Maybe<Array<Maybe<EcologicalCreditCard>>>;
+};
+
+export type HomeWebEcologicalCreditCardsSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+};
+
+export type HomeWebEcologicalCreditCardsSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+};
+
+export type HomeWebPartnersSection = {
+  __typename?: 'HomeWebPartnersSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  partners?: Maybe<Array<Maybe<Partner>>>;
+};
+
+export type HomeWebPartnersSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+};
+
+export type HomeWebPartnersSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+};
+
+export type HomeWebStatsSection = {
+  __typename?: 'HomeWebStatsSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  cards?: Maybe<Array<Maybe<StatCard>>>;
+};
+
+export type HomeWebStatsSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  label?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+};
+
+export type HomeWebStatsSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  label?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
 };
 
 export type IdFilter = {
@@ -4738,6 +4814,7 @@ export type RootQuery = {
   Sdg?: Maybe<Sdg>;
   SharedSections?: Maybe<SharedSections>;
   SoldOutProjects?: Maybe<SoldOutProjects>;
+  StatCard?: Maybe<StatCard>;
   Tag?: Maybe<Tag>;
   TeamPage?: Maybe<TeamPage>;
   TokenPage?: Maybe<TokenPage>;
@@ -4796,6 +4873,7 @@ export type RootQuery = {
   allSdg: Array<Sdg>;
   allSharedSections: Array<SharedSections>;
   allSoldOutProjects: Array<SoldOutProjects>;
+  allStatCard: Array<StatCard>;
   allTag: Array<Tag>;
   allTeamPage: Array<TeamPage>;
   allTokenPage: Array<TokenPage>;
@@ -5053,6 +5131,11 @@ export type RootQuerySharedSectionsArgs = {
 
 
 export type RootQuerySoldOutProjectsArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryStatCardArgs = {
   id: Scalars['ID'];
 };
 
@@ -5492,6 +5575,14 @@ export type RootQueryAllSharedSectionsArgs = {
 export type RootQueryAllSoldOutProjectsArgs = {
   where?: Maybe<SoldOutProjectsFilter>;
   sort?: Maybe<Array<SoldOutProjectsSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllStatCardArgs = {
+  where?: Maybe<StatCardFilter>;
+  sort?: Maybe<Array<StatCardSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -6274,6 +6365,51 @@ export type Span = {
   _type?: Maybe<Scalars['String']>;
   marks?: Maybe<Array<Maybe<Scalars['String']>>>;
   text?: Maybe<Scalars['String']>;
+};
+
+export type StatCard = Document & {
+  __typename?: 'StatCard';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  stat?: Maybe<Scalars['String']>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+  image?: Maybe<CustomImage>;
+};
+
+export type StatCardFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  label?: Maybe<StringFilter>;
+  stat?: Maybe<StringFilter>;
+  image?: Maybe<CustomImageFilter>;
+};
+
+export type StatCardSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  label?: Maybe<SortOrder>;
+  stat?: Maybe<SortOrder>;
+  image?: Maybe<CustomImageSorting>;
 };
 
 export type StepCard = {
@@ -7647,7 +7783,14 @@ export type EcologicalImpactRelationFieldsFragment = (
     & { image?: Maybe<(
       { __typename?: 'CustomImage' }
       & CustomImageFieldsFragment
-    )> }
+    )>, sdgs?: Maybe<Array<Maybe<(
+      { __typename?: 'Sdg' }
+      & Pick<Sdg, 'title'>
+      & { image?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )> }
+    )>>> }
   )> }
 );
 
@@ -7759,7 +7902,14 @@ export type EcologicalImpactByIriQuery = (
     & { image?: Maybe<(
       { __typename?: 'CustomImage' }
       & CustomImageFieldsFragment
-    )>, standard?: Maybe<(
+    )>, sdgs?: Maybe<Array<Maybe<(
+      { __typename?: 'Sdg' }
+      & Pick<Sdg, 'title'>
+      & { image?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )> }
+    )>>>, standard?: Maybe<(
       { __typename?: 'CustomImage' }
       & CustomImageFieldsFragment
     )>, iri?: Maybe<(
@@ -8134,6 +8284,12 @@ export const EcologicalImpactRelationFieldsFragmentDoc = gql`
     descriptionRaw
     image {
       ...customImageFields
+    }
+    sdgs {
+      title
+      image {
+        ...customImageFields
+      }
     }
   }
 }
@@ -9220,6 +9376,12 @@ export const EcologicalImpactByIriDocument = gql`
     descriptionRaw
     image {
       ...customImageFields
+    }
+    sdgs {
+      title
+      image {
+        ...customImageFields
+      }
     }
     standard {
       ...customImageFields

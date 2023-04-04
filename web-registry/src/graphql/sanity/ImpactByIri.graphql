@@ -5,6 +5,12 @@ query EcologicalImpactByIri($iris: [String!]) {
     image {
       ...customImageFields
     }
+    sdgs {
+      title
+      image {
+        ...customImageFields
+      }
+    }
     standard {
       ...customImageFields
     }

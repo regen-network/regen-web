@@ -88,12 +88,7 @@ export default function ProjectImpactCard({
           p: [4, 5],
         }}
       >
-        <Body
-          as="div"
-          size="sm"
-          mobileSize="sm"
-          sx={{ flex: '1 0 auto', pb: 4 }}
-        >
+        <Body as="div" size="sm" mobileSize="sm" sx={{ pb: 4 }}>
           {description}
         </Body>
         {hasSdgs && (

@@ -268,29 +268,6 @@ export enum AccountsOrderBy {
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
 
-/** All input for the `addAddrToAccount` mutation. */
-export type AddAddrToAccountInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  addr?: Maybe<Scalars['String']>;
-  vPartyType?: Maybe<PartyType>;
-};
-
-/** The output of our `addAddrToAccount` mutation. */
-export type AddAddrToAccountPayload = {
-  __typename?: 'AddAddrToAccountPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-};
-
 export type Address = Node & {
   __typename?: 'Address';
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
@@ -6976,7 +6953,6 @@ export type Mutation = {
   deleteWalletById?: Maybe<DeleteWalletPayload>;
   /** Deletes a single `Wallet` using a unique key. */
   deleteWalletByAddr?: Maybe<DeleteWalletPayload>;
-  addAddrToAccount?: Maybe<AddAddrToAccountPayload>;
   createUserOrganization?: Maybe<CreateUserOrganizationPayload>;
   createUserOrganizationIfNeeded?: Maybe<CreateUserOrganizationIfNeededPayload>;
   getUserFirstOrganization?: Maybe<GetUserFirstOrganizationPayload>;
@@ -7938,12 +7914,6 @@ export type MutationDeleteWalletByIdArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteWalletByAddrArgs = {
   input: DeleteWalletByAddrInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationAddAddrToAccountArgs = {
-  input: AddAddrToAccountInput;
 };
 
 

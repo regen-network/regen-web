@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import LazyLoad from 'react-lazyload';
 import Slider from 'react-slick';
 import { useTheme } from '@mui/material';
@@ -12,8 +12,9 @@ import ProjectImpactCard from 'web-components/lib/components/cards/ProjectImpact
 import Section from 'web-components/lib/components/section';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { EcologicalImpact } from '../../generated/sanity-graphql';
-import { getSanityImgSrc } from '../../lib/imgSrc';
+import { EcologicalImpact } from '../../../generated/sanity-graphql';
+import { getSanityImgSrc } from '../../../lib/imgSrc';
+import { getSdgsImages } from './ProjectImpactSection.utils';
 
 interface ProjectImpactProps {
   impact: Array<EcologicalImpact>;
@@ -151,27 +152,34 @@ function ProjectImpactSection({
       <LazyLoad offset={300}>
         {isMobile ? (
           <div className={styles.swipe}>
-            {impact.map(({ name, descriptionRaw, image }, index: number) => (
-              <div className={styles.item} key={index}>
-                <ProjectImpactCard
-                  name={name}
-                  description={<BlockContent content={descriptionRaw} />}
-                  imgSrc={getSanityImgSrc(image)}
-                  monitored={index === 0}
-                />
-              </div>
-            ))}
+            {impact.map(
+              ({ name, descriptionRaw, image, sdgs }, index: number) => (
+                <div className={styles.item} key={index}>
+                  <ProjectImpactCard
+                    name={name}
+                    description={<BlockContent content={descriptionRaw} />}
+                    imgSrc={getSanityImgSrc(image)}
+                    sdgs={getSdgsImages({ sdgs })}
+                    monitored={index === 0}
+                  />
+                </div>
+              ),
+            )}
           </div>
         ) : (
           <Slider {...settings} ref={slider} className={styles.slider}>
             {impact.map(
-              ({ name, descriptionRaw, image, standard }, index: number) => (
+              (
+                { name, descriptionRaw, image, standard, sdgs },
+                index: number,
+              ) => (
                 <ProjectImpactCard
                   key={index}
                   className={styles.item}
                   name={name}
                   description={<BlockContent content={descriptionRaw} />}
                   imgSrc={getSanityImgSrc(image)}
+                  sdgs={getSdgsImages({ sdgs })}
                   standard={getSanityImgSrc(standard)}
                   monitored={index === 0}
                 />

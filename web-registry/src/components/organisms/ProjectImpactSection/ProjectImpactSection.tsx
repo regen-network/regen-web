@@ -98,17 +98,22 @@ function ProjectImpactSection({
   const { classes: styles, cx } = useStyles();
   const theme: Theme = useTheme();
   const isMobile: boolean = useMediaQuery(theme.breakpoints.down('sm'));
-  const isTablet: boolean = useMediaQuery(
-    theme.breakpoints.between('xs', 'tablet'),
-  );
-  const slidesCount: number = isTablet ? 2 : 3;
+  const hasButtons = useMediaQuery(theme.breakpoints.between('sm', 'lg'));
 
   const settings = {
     speed: 500,
-    slidesToShow: slidesCount,
-    slidesToScroll: slidesCount,
+    slidesToShow: 3,
+    slidesToScroll: 1,
     arrows: false,
-    lazyload: true,
+    responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   const slider: any = useRef(null);
@@ -136,7 +141,7 @@ function ProjectImpactSection({
       titleAlign="left"
       topRight={
         <>
-          {!isMobile && impact.length > slidesCount && (
+          {hasButtons && (
             <Grid
               container
               justifyContent="flex-end"

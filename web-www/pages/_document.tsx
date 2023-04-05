@@ -1,6 +1,7 @@
-import { Html, Head, Main, NextScript } from 'next/document'
+import { Html, Head, Main, NextScript } from 'next/document';
+import { augmentDocumentWithEmotionCache } from './_app';
 
-export default function Document() {
+const Document = () => {
   return (
     <Html lang="en">
       <Head />
@@ -9,5 +10,9 @@ export default function Document() {
         <NextScript />
       </body>
     </Html>
-  )
-}
+  );
+};
+
+augmentDocumentWithEmotionCache(Document);
+
+export default Document;

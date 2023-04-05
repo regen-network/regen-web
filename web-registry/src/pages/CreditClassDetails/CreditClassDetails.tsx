@@ -92,9 +92,7 @@ function CreditClassDetails({
           const classInfo = res?.class;
           if (classInfo) {
             setOnChainClass(classInfo);
-            const data = await getMetadata(classInfo.metadata, {
-              regen: 'https://schema.regen.network#',
-            });
+            const data = await getMetadata(classInfo.metadata);
             setMetadata(data);
           }
         } catch (err) {

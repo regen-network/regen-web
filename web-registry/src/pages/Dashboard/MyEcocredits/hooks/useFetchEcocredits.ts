@@ -133,15 +133,22 @@ export const useFetchEcocredits = ({
   // Normalization
   // isLoading -> undefined: return empty strings in normalizer to trigger skeleton
   // !isLoading -> null/result: return results with field value different from empty strings and stop displaying the skeletons
-  const credits = balances.map((balance, index) =>
-    normalizeEcocredits({
-      balance,
-      batch: isBatchesLoading ? undefined : batches[index]?.batch,
-      metadata: isMetadatasLoading ? undefined : metadatas[index],
-      project: isProjectsLoading ? undefined : projects[index]?.project,
-      sanityCreditClassData: creditClassData,
-    }),
-  );
+  const credits = balances
+    .filter(
+      balance =>
+        balance.escrowedAmount !== '0' ||
+        balance.retiredAmount !== '0' ||
+        balance.tradableAmount !== '0',
+    )
+    .map((balance, index) =>
+      normalizeEcocredits({
+        balance,
+        batch: isBatchesLoading ? undefined : batches[index]?.batch,
+        metadata: isMetadatasLoading ? undefined : metadatas[index],
+        project: isProjectsLoading ? undefined : projects[index]?.project,
+        sanityCreditClassData: creditClassData,
+      }),
+    );
 
   const paginationParamsWithCount = useMemo(
     () => ({ ...paginationParams, count: allBalancesCount }),

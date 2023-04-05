@@ -55,7 +55,6 @@ export const parseProjectMetadata = (
   const unit = projectSize?.['qudt:unit'];
   const areaUnit = getAreaUnit(unit as qudtUnit);
   const placeName = projectMetadata?.['schema:location']?.['place_name'];
-  // projectMetadata?.['schema:location']?.['geojson:place_name'];
 
   return { projectName, area, areaUnit, placeName };
 };

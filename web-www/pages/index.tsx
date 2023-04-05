@@ -1,9 +1,19 @@
+import {
+  HomeFoldSectionDocument,
+  HomeFoldSectionQuery,
+} from '@/generated/sanity-graphql';
+import { sanityClient } from '@/lib/clients/sanityClient';
+import { Box } from '@mui/material';
+import { InferGetStaticPropsType } from 'next';
 import { Inter } from 'next/font/google';
 import Head from 'next/head';
+import { HomeFoldSection } from './home/Home.HomeFoldSection';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export default function Home() {
+export default function Home({
+  homeFoldData,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <Head>
@@ -12,7 +22,19 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main></main>
+      <Box component="main" sx={{ overflowX: 'hidden' }}>
+        <HomeFoldSection homeFoldData={homeFoldData} />
+      </Box>
     </>
   );
 }
+
+export const getStaticProps = async () => {
+  const homeFoldData = await sanityClient.query<HomeFoldSectionQuery>({
+    query: HomeFoldSectionDocument,
+  });
+
+  return {
+    props: { homeFoldData },
+  };
+};

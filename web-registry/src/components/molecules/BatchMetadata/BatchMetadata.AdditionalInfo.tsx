@@ -3,6 +3,8 @@ import { Body } from 'web-components/lib/components/typography';
 
 import { CreditBatchMetadataIntersectionLD } from 'lib/db/types/json-ld';
 
+import { LinkWithArrow } from 'components/atoms';
+
 import { LinkOrDash } from './BatchMetadata.LinkOrDash';
 import { MetaDetail } from './BatchMetadata.MetaDetail';
 
@@ -80,7 +82,7 @@ export const BatchMetadataAdditionalInfo = ({
       {/* Toucan */}
       {toucanVintageTokenId && (
         <MetaDetail label="Toucan Vintage Token Id">
-          <LinkOrDash href={toucanURI} label={toucanVintageTokenId} />
+          <LinkWithArrow href={toucanURI || ''} label={toucanVintageTokenId} />
         </MetaDetail>
       )}
     </>

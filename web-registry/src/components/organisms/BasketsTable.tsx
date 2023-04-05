@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
+import { quantityFormatNumberOptions } from 'config/decimals';
 
 import {
   ActionsTable,
@@ -65,6 +66,7 @@ export const BasketsTable: React.FC<React.PropsWithChildren<BasketTableProps>> =
                   num:
                     parseInt(row.balance?.balance?.amount) /
                     Math.pow(10, row.basket?.exponent ?? 0),
+                  ...quantityFormatNumberOptions,
                 })
               : 0,
           ];

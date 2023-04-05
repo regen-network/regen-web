@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/regen-network/regen-web/compare/v1.2.3...v1.3.0) (2023-04-05)
+
+### Bug Fixes
+
+- basket fractional balance ([#1852](https://github.com/regen-network/regen-web/issues/1852)) ([6b1a982](https://github.com/regen-network/regen-web/commit/6b1a9829d3d0736a300838eab9c3475e658eb531))
+- display toucan vintage token id even when no toucanURI ([#1854](https://github.com/regen-network/regen-web/issues/1854)) ([2cada01](https://github.com/regen-network/regen-web/commit/2cada01d0185733be5e955187c79f7f7fd906799))
+- enable balances query only if wallet addr available ([#1818](https://github.com/regen-network/regen-web/issues/1818)) ([956392b](https://github.com/regen-network/regen-web/commit/956392bf3eadbd8c8c8afbedbe4b93f294c07a1b))
+- filter credits with 0 on all columns ([#1853](https://github.com/regen-network/regen-web/issues/1853)) ([e13f7d1](https://github.com/regen-network/regen-web/commit/e13f7d1a44a024af52d7c58f7d24d728fb508c4e))
+- Handle missing fields on TCO2 credit class page ([#1817](https://github.com/regen-network/regen-web/issues/1817)) ([b80659d](https://github.com/regen-network/regen-web/commit/b80659d44b5cbdf9341866d1d1e72f0cb8690358))
+- start process button onClick ([#1813](https://github.com/regen-network/regen-web/issues/1813)) ([bae5496](https://github.com/regen-network/regen-web/commit/bae549603c938e31fb37ff8ee370795514a7c297))
+- use 2 maximumFractionDigits on credit batch page ([#1816](https://github.com/regen-network/regen-web/issues/1816)) ([62a77c9](https://github.com/regen-network/regen-web/commit/62a77c976b2b058ba124f931b0f1b843cf13a74f))
+- use quantityFormatNumberOptions in BatchTotalsGrid ([#1843](https://github.com/regen-network/regen-web/issues/1843)) ([867cafd](https://github.com/regen-network/regen-web/commit/867cafd43840f545edbb937dae90c36c11a286c8))
+- various UI issues on project page ([#1825](https://github.com/regen-network/regen-web/issues/1825)) ([87b57ef](https://github.com/regen-network/regen-web/commit/87b57ef4ac74efc0588ba55bb5eb55868e9ce655))
+
+### Features
+
+- add OTC sales option ([#1801](https://github.com/regen-network/regen-web/issues/1801)) ([504a253](https://github.com/regen-network/regen-web/commit/504a2537fef6da7d619c9d2c4e1b7bebd7a0a776))
+- add user profile header ([#1821](https://github.com/regen-network/regen-web/issues/1821)) ([a7cbc3a](https://github.com/regen-network/regen-web/commit/a7cbc3a04108b4cc4be6f0f1ef7a69ea1ffcf863))
+- edit project button ([#1805](https://github.com/regen-network/regen-web/issues/1805)) ([734b715](https://github.com/regen-network/regen-web/commit/734b715a8b1034c8ab72f00ade5fac4d199782ec))
+- implement double-csrf pattern and enable withCredentials for the registry-server graphql client ([#1798](https://github.com/regen-network/regen-web/issues/1798)) ([0b945a3](https://github.com/regen-network/regen-web/commit/0b945a30bb27245beace802be96cfeec79ba94dc))
+- Implement Keplr login flow ([#1814](https://github.com/regen-network/regen-web/issues/1814)) ([3c89133](https://github.com/regen-network/regen-web/commit/3c89133fef4a1e44c2d5e104ea04413fd021d405))
+- Implement Keplr logout ([#1819](https://github.com/regen-network/regen-web/issues/1819)) ([6047ce5](https://github.com/regen-network/regen-web/commit/6047ce5ddf6f0939b2b559f426e9fb182a92bc67))
+- profile social links ([#1839](https://github.com/regen-network/regen-web/issues/1839)) ([7654ec0](https://github.com/regen-network/regen-web/commit/7654ec0f11f195b0fe03427319cc87432d7b321b))
+- protect project edit page ([#1806](https://github.com/regen-network/regen-web/issues/1806)) ([15ac3df](https://github.com/regen-network/regen-web/commit/15ac3df5215078c1b073877eba812a4d6d9887b3))
+- update /land-stewards to /project-developers and add redirect ([#1797](https://github.com/regen-network/regen-web/issues/1797)) ([9bf9ccd](https://github.com/regen-network/regen-web/commit/9bf9ccd7f4884e5ceb41bd2c478818bbbc11dbf0))
+- Update project creation to use currently logged in user ([#1823](https://github.com/regen-network/regen-web/issues/1823)) ([bd63f24](https://github.com/regen-network/regen-web/commit/bd63f244c658a70d6ebf7c9e4cfbd04c30ff5c93))
+- use credit credit for default project image ([#1835](https://github.com/regen-network/regen-web/issues/1835)) ([10daafd](https://github.com/regen-network/regen-web/commit/10daafd33d329fe7267e65929d5204030ae37176))
+- user profile edit ([#1826](https://github.com/regen-network/regen-web/issues/1826)) ([2e53631](https://github.com/regen-network/regen-web/commit/2e53631b6637a769d35c0f2ca19fbf728a24c65b))
+- wallet connection page ([#1815](https://github.com/regen-network/regen-web/issues/1815)) ([c7668da](https://github.com/regen-network/regen-web/commit/c7668da1642723c131071886819a2b0387991591))
+- warning modal when user tries to navigate away after changing data on Project edit forms ([#1809](https://github.com/regen-network/regen-web/issues/1809)) ([024c74c](https://github.com/regen-network/regen-web/commit/024c74c96d44ca79f7feac32ce01f05f7a7cabd1))
+
 ## [1.2.3](https://github.com/regen-network/regen-web/compare/v1.2.2...v1.2.3) (2023-03-28)
 
 ### Bug Fixes

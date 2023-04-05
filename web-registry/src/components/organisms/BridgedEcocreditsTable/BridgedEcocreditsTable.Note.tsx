@@ -14,15 +14,9 @@ export const Note: React.FC<
 > = ({ status, txHash }) => {
   switch (BRIDGED_STATUSES[status]) {
     case STATUS_COMPLETE:
-      return (
-        <Link
-          href={`${process.env.REACT_APP_TOUCAN_LINK}${
-            process.env.CONTEXT === 'production' ? '' : `/${txHash}`
-          }`}
-        >
-          {'toucan.earth'}
-        </Link>
-      );
+      return process.env.REACT_APP_TOUCAN_LINK ? (
+        <Link href={process.env.REACT_APP_TOUCAN_LINK}>{'toucan.earth'}</Link>
+      ) : null;
     case STATUS_ERROR:
       return (
         <>

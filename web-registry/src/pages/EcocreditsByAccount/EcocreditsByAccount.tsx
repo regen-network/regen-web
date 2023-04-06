@@ -19,7 +19,6 @@ import { truncate } from 'web-components/lib/utils/truncate';
 
 import { getAccountUrl } from 'lib/block-explorer';
 import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
-import { useWallet } from 'lib/wallet/wallet';
 
 import { getSocialsLinks } from 'pages/Dashboard/Dashboard.utils';
 import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';

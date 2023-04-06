@@ -37,7 +37,6 @@ export const EcocreditsByAccount = (): JSX.Element => {
   const { accountAddress } = useParams<{ accountAddress: string }>();
   const theme = useTheme();
   const location = useLocation();
-  const { wallet, accountId } = useWallet();
 
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -45,11 +44,11 @@ export const EcocreditsByAccount = (): JSX.Element => {
   const { data: partyByAddr } = useQuery(
     getPartyByAddrQuery({
       client: graphqlClient,
-      addr: wallet?.address ?? '',
-      enabled: !!wallet?.address && !!graphqlClient,
+      addr: accountAddress ?? '',
+      enabled: !!accountAddress && !!graphqlClient,
     }),
   );
-  const { party, defaultAvatar } = usePartyInfos({ accountId, partyByAddr });
+  const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
 
   const socialsLinks = useMemo(
     () => getSocialsLinks({ partyByAddr }),
@@ -88,8 +87,8 @@ export const EcocreditsByAccount = (): JSX.Element => {
         avatar={party?.image ? party?.image : defaultAvatar}
         infos={{
           addressLink: {
-            href: getAccountUrl(wallet?.address, true),
-            text: truncate(wallet?.address),
+            href: getAccountUrl(accountAddress, true),
+            text: truncate(accountAddress),
           },
           description: party?.description?.trimEnd() ?? '',
           socialsLinks,

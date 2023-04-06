@@ -7,12 +7,10 @@ import {
 
 type Params = {
   partyByAddr?: PartyByAddrQuery | null;
-  accountId?: string;
 };
 
-export const usePartyInfos = ({ partyByAddr, accountId }: Params) => {
-  const partyData = partyByAddr?.walletByAddr?.partyByWalletId;
-  const party = accountId === partyData?.accountId ? partyData : undefined;
+export const usePartyInfos = ({ partyByAddr }: Params) => {
+  const party = partyByAddr?.walletByAddr?.partyByWalletId;
   const isOrganization = party?.type === PartyType.Organization;
   const defaultAvatar = isOrganization
     ? DEFAULT_PROFILE_COMPANY_AVATAR

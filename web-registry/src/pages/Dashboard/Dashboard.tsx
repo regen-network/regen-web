@@ -62,7 +62,7 @@ const Dashboard = (): JSX.Element => {
       enabled: !!wallet?.address && !!graphqlClient,
     }),
   );
-  const { party, defaultAvatar } = usePartyInfos({ accountId, partyByAddr });
+  const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
 
   const socialsLinks: SocialLink[] = useMemo(
     () => getSocialsLinks({ partyByAddr }),

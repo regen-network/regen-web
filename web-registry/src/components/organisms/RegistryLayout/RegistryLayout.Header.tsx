@@ -1,16 +1,24 @@
 import React, { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
+import { useQuery } from '@tanstack/react-query';
 
 import Header from 'web-components/lib/components/header';
 import { UserMenuItem } from 'web-components/lib/components/header/components/UserMenuItem';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { truncate } from 'web-components/lib/utils/truncate';
 
+import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import DefaultAvatar from '../../../assets/avatar.png';
+import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
+
 import { chainId } from '../../../lib/ledger';
 import { RegistryIconLink, RegistryNavLink } from '../../atoms';
 import { WalletButton } from '../WalletButton/WalletButton';
@@ -34,6 +42,18 @@ const RegistryLayoutHeader: React.FC = () => {
     [pathname, theme],
   );
 
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
+
+  const { data: partyByAddr } = useQuery(
+    getPartyByAddrQuery({
+      client: graphqlClient,
+      addr: wallet?.address ?? '',
+      enabled: !!wallet?.address && !!graphqlClient,
+    }),
+  );
+  const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
+
   const color = headerColors[pathname]
     ? headerColors[pathname]
     : theme.palette.primary.light;
@@ -56,7 +76,7 @@ const RegistryLayoutHeader: React.FC = () => {
             {chainId && loaded && isConnected && disconnect && (
               <UserMenuItem
                 address={truncate(wallet?.address)}
-                avatar={DefaultAvatar}
+                avatar={party?.image ? party?.image : defaultAvatar}
                 disconnect={disconnect}
                 pathname={pathname}
                 linkComponent={RegistryNavLink}

@@ -29,7 +29,6 @@ import {
 } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { Link } from 'components/atoms';
 
-import { PortfolioHeader } from './EcocreditsByAccount.Header';
 import { ecocreditsByAccountStyles } from './EcocreditsByAccount.styles';
 
 export const EcocreditsByAccount = (): JSX.Element => {
@@ -97,13 +96,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
         LinkComponent={Link}
       />
       <Box sx={{ backgroundColor: 'grey.50' }}>
-        <Section
-          title="Profile"
-          titleVariant="h2"
-          titleAlign="left"
-          sx={{ root: { pt: { xs: 15 } } }}
-        >
-          <PortfolioHeader accountAddress={accountAddress} />
+        <Section sx={{ root: { pt: { xs: 15 } } }}>
           <IconTabs
             aria-label="public profile tabs"
             tabs={tabs}

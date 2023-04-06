@@ -29,19 +29,12 @@ export const AuthApolloProvider = ({
     credentials: 'include',
   });
   // https://www.apollographql.com/docs/react/api/link/apollo-link-context/#overview
-  const authLink = setContext(
-    (_, { headers }) =>
-      new Promise((success, fail) => {
-        if (query.isFetched && query.data) {
-          success({
-            headers: {
-              ...headers,
-              'X-CSRF-TOKEN': query.data,
-            },
-          });
-        }
-      }),
-  );
+  const authLink = setContext((_, { headers }) => ({
+    headers: {
+      ...headers,
+      'X-CSRF-TOKEN': query.data,
+    },
+  }));
 
   const defaultOptions: DefaultOptions = {
     watchQuery: {
@@ -60,6 +53,7 @@ export const AuthApolloProvider = ({
     link,
     defaultOptions,
   });
+
   return (
     <ApolloProvider client={apolloClientFactory.getClient()}>
       {children}

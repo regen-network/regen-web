@@ -4,6 +4,7 @@ import { HomeFoldSectionQuery } from '@/generated/sanity-graphql';
 import { Body, Title } from 'web-components/lib/components/typography/index';
 import { ApolloQueryResult } from '@apollo/client';
 import clsx from 'clsx';
+import Layout from '@/components/templates/Layout/Layout';
 
 type Props = {
   className?: string;

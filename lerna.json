@@ -1,5 +1,5 @@
 {
-  "version": "1.3.0",
+  "version": "1.4.0",
   "npmClient": "yarn",
   "useWorkspaces": true,
   "packages": ["web-registry", "web-components", "web-storybook", "web-auth"]

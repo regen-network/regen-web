@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/regen-network/regen-web/compare/v1.3.0...v1.4.0) (2023-04-06)
+
+### Bug Fixes
+
+- apollo init race condition ([68517bd](https://github.com/regen-network/regen-web/commit/68517bd7c29827c62468ba98eebcc377a5a3b509))
+- remove account id check in profile edit ([51a0345](https://github.com/regen-network/regen-web/commit/51a03457dd709e21de469769352f237ee52360d0))
+- use address from route param ([dd017ec](https://github.com/regen-network/regen-web/commit/dd017ec36890a786445ec0a4b2bb1c6d7297ecaa))
+
+### Features
+
+- add profile header to public profile ([ddfac4d](https://github.com/regen-network/regen-web/commit/ddfac4d9a929c7c1c81125daa670303a216561f8))
+
 # [1.3.0](https://github.com/regen-network/regen-web/compare/v1.2.3...v1.3.0) (2023-04-05)
 
 ### Bug Fixes

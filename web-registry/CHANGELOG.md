@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.1](https://github.com/regen-network/regen-web/compare/v1.4.0...v1.4.1) (2023-04-06)
+
+### Bug Fixes
+
+- remove profile header and account from public profile ([d01925f](https://github.com/regen-network/regen-web/commit/d01925f1d2ddd1998bdd17ed1e301e08670b53f1))
+
 # [1.4.0](https://github.com/regen-network/regen-web/compare/v1.3.0...v1.4.0) (2023-04-06)
 
 ### Bug Fixes

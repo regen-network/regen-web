@@ -15,8 +15,6 @@ import { CreditBatchIcon } from 'web-components/lib/components/icons/CreditBatch
 import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClassIcon';
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
-import TwitterIcon2 from 'web-components/lib/components/icons/social/TwitterIcon2';
-import WebsiteLinkIcon from 'web-components/lib/components/icons/social/WebsiteLinkIcon';
 import { ProfileHeader } from 'web-components/lib/components/organisms/ProfileHeader/ProfileHeader';
 import { SocialLink } from 'web-components/lib/components/organisms/ProfileHeader/ProfileHeader.types';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
@@ -42,6 +40,7 @@ import { useQueryIfIssuer } from 'hooks/useQueryIfIssuer';
 import { useQueryIfProjectAdmin } from 'hooks/useQueryIfProjectAdmin';
 
 import { dashBoardStyles } from './Dashboard.styles';
+import { getSocialsLinks } from './Dashboard.utils';
 
 const Dashboard = (): JSX.Element => {
   const theme = useTheme();
@@ -64,6 +63,11 @@ const Dashboard = (): JSX.Element => {
     }),
   );
   const { party, defaultAvatar } = usePartyInfos({ accountId, partyByAddr });
+
+  const socialsLinks: SocialLink[] = useMemo(
+    () => getSocialsLinks({ partyByAddr }),
+    [partyByAddr],
+  );
 
   const tabs: IconTabProps[] = useMemo(
     () => [
@@ -114,23 +118,6 @@ const Dashboard = (): JSX.Element => {
       .filter(tab => !tab.hidden)
       .findIndex(tab => location.pathname.includes(tab.href ?? '')),
     0,
-  );
-
-  const socialsLinks: SocialLink[] = useMemo(
-    () =>
-      [
-        {
-          href: party?.twitterLink,
-          icon: <TwitterIcon2 />,
-        },
-        {
-          href: party?.websiteLink,
-          icon: <WebsiteLinkIcon />,
-        },
-      ].filter((link): link is SocialLink => {
-        return !!link.href;
-      }),
-    [party?.twitterLink, party?.websiteLink],
   );
 
   return (

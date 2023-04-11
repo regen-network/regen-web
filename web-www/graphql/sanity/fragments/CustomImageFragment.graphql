@@ -5,6 +5,12 @@ fragment customImageFields on CustomImage {
     asset {
       altText
       url
+      metadata {
+        dimensions {
+          height
+          width
+        }
+      }
     }
   }
 }

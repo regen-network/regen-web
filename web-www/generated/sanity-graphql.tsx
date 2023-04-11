@@ -7169,6 +7169,28 @@ export type WalletAddressRegistrationWalletSectionSorting = {
   walletFoundButtonText?: Maybe<SortOrder>;
 };
 
+export type BlogSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type BlogSectionQuery = (
+  { __typename?: 'RootQuery' }
+  & { allSharedSections: Array<(
+    { __typename?: 'SharedSections' }
+    & { blog?: Maybe<(
+      { __typename?: 'BlogSection' }
+      & Pick<BlogSection, 'header'>
+      & { posts?: Maybe<Array<Maybe<(
+        { __typename?: 'BlogPost' }
+        & Pick<BlogPost, 'header' | 'url' | 'descriptionRaw'>
+        & { image?: Maybe<(
+          { __typename?: 'CustomImage' }
+          & CustomImageFieldsFragment
+        )> }
+      )>>> }
+    )> }
+  )> }
+);
+
 export type CarbonPlusSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -7273,6 +7295,13 @@ export type CustomImageFieldsFragment = (
     & { asset?: Maybe<(
       { __typename?: 'SanityImageAsset' }
       & Pick<SanityImageAsset, 'altText' | 'url'>
+      & { metadata?: Maybe<(
+        { __typename?: 'SanityImageMetadata' }
+        & { dimensions?: Maybe<(
+          { __typename?: 'SanityImageDimensions' }
+          & Pick<SanityImageDimensions, 'height' | 'width'>
+        )> }
+      )> }
     )> }
   )> }
 );
@@ -7460,6 +7489,12 @@ export const CustomImageFieldsFragmentDoc = gql`
     asset {
       altText
       url
+      metadata {
+        dimensions {
+          height
+          width
+        }
+      }
     }
   }
 }
@@ -7482,6 +7517,50 @@ export const ButtonFieldsFragmentDoc = gql`
   buttonBlankTarget
 }
     ${LinkFieldsFragmentDoc}`;
+export const BlogSectionDocument = gql`
+    query blogSection {
+  allSharedSections {
+    blog {
+      header
+      posts {
+        header
+        url
+        descriptionRaw
+        image {
+          ...customImageFields
+        }
+      }
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+
+/**
+ * __useBlogSectionQuery__
+ *
+ * To run a query within a React component, call `useBlogSectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useBlogSectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useBlogSectionQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useBlogSectionQuery(baseOptions?: Apollo.QueryHookOptions<BlogSectionQuery, BlogSectionQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<BlogSectionQuery, BlogSectionQueryVariables>(BlogSectionDocument, options);
+      }
+export function useBlogSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<BlogSectionQuery, BlogSectionQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<BlogSectionQuery, BlogSectionQueryVariables>(BlogSectionDocument, options);
+        }
+export type BlogSectionQueryHookResult = ReturnType<typeof useBlogSectionQuery>;
+export type BlogSectionLazyQueryHookResult = ReturnType<typeof useBlogSectionLazyQuery>;
+export type BlogSectionQueryResult = Apollo.QueryResult<BlogSectionQuery, BlogSectionQueryVariables>;
 export const CarbonPlusSectionDocument = gql`
     query carbonPlusSection {
   allHomePageWeb {

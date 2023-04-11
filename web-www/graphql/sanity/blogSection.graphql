@@ -1,0 +1,15 @@
+query blogSection {
+  allSharedSections {
+    blog {
+      header
+      posts {
+        header
+        url
+        descriptionRaw
+        image {
+          ...customImageFields
+        }
+      }
+    }
+  }
+}

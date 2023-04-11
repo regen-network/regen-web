@@ -9,6 +9,9 @@ import BlogPost, { BlogPostProps } from '../blog-post';
 
 export interface BlogPostsProps {
   posts: BlogPostProps[];
+  classes?: {
+    item?: string;
+  };
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -54,10 +57,13 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
 }));
 
-export default function BlogPosts({ posts }: BlogPostsProps): JSX.Element {
-  const { classes } = useStyles();
+export default function BlogPosts({
+  posts,
+  classes,
+}: BlogPostsProps): JSX.Element {
+  const { classes: styles, cx } = useStyles();
   const theme = useTheme();
-  const desktop = useMediaQuery(theme.breakpoints.up('md'));
+  const desktop = useMediaQuery(theme.breakpoints.up('lg'));
   const mobile = useMediaQuery(theme.breakpoints.down('sm'));
   const slides: number = desktop ? 3 : mobile ? 1 : 2;
 
@@ -66,14 +72,14 @@ export default function BlogPosts({ posts }: BlogPostsProps): JSX.Element {
     speed: 500,
     initialSlide: 0,
     arrows: false,
-    rows: 1,
-    slidesPerRow: slides,
+    slidesToShow: slides,
+    slidesToScroll: 1,
   };
   return (
-    <div className={classes.root}>
-      <Slider {...settings} className={classes.slider}>
+    <div className={styles.root}>
+      <Slider {...settings} className={styles.slider}>
         {posts.map((post, index) => (
-          <div key={index} className={classes.item}>
+          <div key={index} className={cx(styles.item, classes?.item)}>
             <BlogPost {...post} />
           </div>
         ))}

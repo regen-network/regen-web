@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.2](https://github.com/regen-network/regen-web/compare/v1.4.1...v1.4.2) (2023-04-11)
+
+### Bug Fixes
+
+- edit user profile on first connection ([d4b830b](https://github.com/regen-network/regen-web/commit/d4b830bbcc827fe6a61eb7ba9888421a1697b592))
+
 ## [1.4.1](https://github.com/regen-network/regen-web/compare/v1.4.0...v1.4.1) (2023-04-06)
 
 ### Bug Fixes

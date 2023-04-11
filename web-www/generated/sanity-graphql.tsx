@@ -7393,6 +7393,28 @@ export type StatsSectionQuery = (
   )> }
 );
 
+export type ValuesSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ValuesSectionQuery = (
+  { __typename?: 'RootQuery' }
+  & { allHomePageWeb: Array<(
+    { __typename?: 'HomePageWeb' }
+    & { valuesSection?: Maybe<(
+      { __typename?: 'HomeValuesSection' }
+      & Pick<HomeValuesSection, 'header'>
+      & { imageItems?: Maybe<Array<Maybe<(
+        { __typename?: 'ValuesImageItem' }
+        & Pick<ValuesImageItem, 'title' | 'description'>
+        & { image?: Maybe<(
+          { __typename?: 'Image' }
+          & ImageFieldsFragment
+        )> }
+      )>>> }
+    )> }
+  )> }
+);
+
 export const ImageFieldsFragmentDoc = gql`
     fragment imageFields on Image {
   asset {
@@ -7782,3 +7804,46 @@ export function useStatsSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type StatsSectionQueryHookResult = ReturnType<typeof useStatsSectionQuery>;
 export type StatsSectionLazyQueryHookResult = ReturnType<typeof useStatsSectionLazyQuery>;
 export type StatsSectionQueryResult = Apollo.QueryResult<StatsSectionQuery, StatsSectionQueryVariables>;
+export const ValuesSectionDocument = gql`
+    query valuesSection {
+  allHomePageWeb {
+    valuesSection {
+      header
+      imageItems {
+        title
+        description
+        image {
+          ...imageFields
+        }
+      }
+    }
+  }
+}
+    ${ImageFieldsFragmentDoc}`;
+
+/**
+ * __useValuesSectionQuery__
+ *
+ * To run a query within a React component, call `useValuesSectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useValuesSectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useValuesSectionQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useValuesSectionQuery(baseOptions?: Apollo.QueryHookOptions<ValuesSectionQuery, ValuesSectionQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ValuesSectionQuery, ValuesSectionQueryVariables>(ValuesSectionDocument, options);
+      }
+export function useValuesSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ValuesSectionQuery, ValuesSectionQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ValuesSectionQuery, ValuesSectionQueryVariables>(ValuesSectionDocument, options);
+        }
+export type ValuesSectionQueryHookResult = ReturnType<typeof useValuesSectionQuery>;
+export type ValuesSectionLazyQueryHookResult = ReturnType<typeof useValuesSectionLazyQuery>;
+export type ValuesSectionQueryResult = Apollo.QueryResult<ValuesSectionQuery, ValuesSectionQueryVariables>;

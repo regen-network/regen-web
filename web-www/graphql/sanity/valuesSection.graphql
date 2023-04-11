@@ -1,0 +1,14 @@
+query valuesSection {
+  allHomePageWeb {
+    valuesSection {
+      header
+      imageItems {
+        title
+        description
+        image {
+          ...imageFields
+        }
+      }
+    }
+  }
+}

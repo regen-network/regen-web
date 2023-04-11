@@ -50,7 +50,7 @@ const Dashboard = (): JSX.Element => {
   const isProjectAdmin = useQueryIfProjectAdmin();
   const showProjectTab = isIssuer || isProjectAdmin;
   const showCreditClassTab = isCreditClassCreator || isCreditClassAdmin;
-  const { wallet, accountId } = useWallet();
+  const { wallet, accountId, isConnected } = useWallet();
   const location = useLocation();
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -59,7 +59,7 @@ const Dashboard = (): JSX.Element => {
     getPartyByAddrQuery({
       client: graphqlClient,
       addr: wallet?.address ?? '',
-      enabled: !!wallet?.address && !!graphqlClient,
+      enabled: isConnected && !!graphqlClient,
     }),
   );
   const { party, defaultAvatar } = usePartyInfos({ partyByAddr });

@@ -37,7 +37,7 @@ import {
 
 export const ProfileEdit = () => {
   const setBannerTextAtom = useSetAtom(bannerTextAtom);
-  const { wallet } = useWallet();
+  const { wallet, isConnected } = useWallet();
   const [updatePartyById] = useUpdatePartyByIdMutation();
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -48,9 +48,9 @@ export const ProfileEdit = () => {
       getPartyByAddrQuery({
         client: graphqlClient,
         addr: wallet?.address ?? '',
-        enabled: !!wallet?.address && !!graphqlClient,
+        enabled: isConnected && !!graphqlClient,
       }),
-    [graphqlClient, wallet?.address],
+    [graphqlClient, wallet?.address, isConnected],
   );
   const { data: partyByAddr, isFetching } = useQuery(partyByAddrQuery);
   const { party, defaultAvatar } = usePartyInfos({ partyByAddr });

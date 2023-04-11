@@ -49,7 +49,7 @@ const RegistryLayoutHeader: React.FC = () => {
     getPartyByAddrQuery({
       client: graphqlClient,
       addr: wallet?.address ?? '',
-      enabled: !!wallet?.address && !!graphqlClient,
+      enabled: isConnected && !!graphqlClient,
     }),
   );
   const { party, defaultAvatar } = usePartyInfos({ partyByAddr });

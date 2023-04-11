@@ -29,7 +29,7 @@ const HeaderMenuHover: React.FC<HeaderMenuHoverProps> = ({
   pathname,
   linkComponent,
 }) => {
-  const styles = useHeaderMenuHoverStyles();
+  const { classes: styles } = useHeaderMenuHoverStyles();
 
   return (
     <MenuItem

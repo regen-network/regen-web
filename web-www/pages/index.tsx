@@ -5,11 +5,8 @@ import {
 import { sanityClient } from '@/lib/clients/sanityClient';
 import { Box } from '@mui/material';
 import { InferGetStaticPropsType } from 'next';
-import { Inter } from 'next/font/google';
 import Head from 'next/head';
 import { HomeFoldSection } from './home/Home.HomeFoldSection';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export default function Home({
   homeFoldData,

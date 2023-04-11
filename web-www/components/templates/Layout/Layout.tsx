@@ -12,6 +12,7 @@ import Footer from 'web-components/lib/components/footer';
 import { MarketingNav } from '@/components/organisms/MarketingNav/MarketingNav';
 import { footerItems } from './Layout.config';
 import { useLayoutStyles } from './Layout.styles';
+import { useRouter } from 'next/router';
 
 type Props = {
   children: React.ReactNode;
@@ -19,7 +20,8 @@ type Props = {
 
 const Layout = ({ children }: Props) => {
   const { classes: styles } = useLayoutStyles();
-  const location = { pathname: '/' };
+  const router = useRouter();
+  const location = { pathname: router.pathname };
 
   return (
     <>

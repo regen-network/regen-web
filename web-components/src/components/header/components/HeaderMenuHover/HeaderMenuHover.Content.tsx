@@ -18,7 +18,7 @@ export const HeaderMenuHoverContent = ({
   pathname,
 }: Props): JSX.Element => {
   const theme = useTheme();
-  const styles = useHeaderMenuHoverStyles();
+  const { classes: styles } = useHeaderMenuHoverStyles();
 
   if (item.href && !item.dropdownItems && !item.renderDropdownItems) {
     return (

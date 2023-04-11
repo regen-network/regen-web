@@ -11,7 +11,6 @@ import {
 } from './components/HeaderMenuHover/HeaderMenuHover';
 import { NavLink, NavLinkProps } from './components/NavLink';
 import { useHeaderStyles } from './Header.styles';
-import MarketplaceLaunchBanner from './MarketplaceLaunchBanner';
 
 export interface node {
   [key: number]: React.ReactNode;
@@ -58,20 +57,8 @@ export default function Header({
     fullWidth,
   });
 
-  // if we're in the registry, where we have REACT_APP prefixed
-  // keys in the env vars, do not show the banner. in other words,
-  // only show the banner on the website.
-  const showBanner = Object.keys(process.env).reduce((prev, curr) => {
-    if (curr.startsWith('REACT_APP')) {
-      return false;
-    } else {
-      return prev;
-    }
-  }, true);
-
   return (
     <>
-      {showBanner && <MarketplaceLaunchBanner />}
       <div
         className={cx(
           styles.borderBottom,

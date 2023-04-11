@@ -7169,6 +7169,20 @@ export type WalletAddressRegistrationWalletSectionSorting = {
   walletFoundButtonText?: Maybe<SortOrder>;
 };
 
+export type CarbonPlusSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CarbonPlusSectionQuery = (
+  { __typename?: 'RootQuery' }
+  & { allHomePageWeb: Array<(
+    { __typename?: 'HomePageWeb' }
+    & { carbonPlusSection?: Maybe<(
+      { __typename?: 'CarbonPlusSection' }
+      & Pick<CarbonPlusSection, 'smallHeaderFeatured' | 'smallHeaderCreditName' | 'header' | 'description' | 'linkText' | 'linkUrl'>
+    )> }
+  )> }
+);
+
 export type HomeFoldSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -7195,6 +7209,47 @@ export type HomeFoldSectionQuery = (
 );
 
 
+export const CarbonPlusSectionDocument = gql`
+    query carbonPlusSection {
+  allHomePageWeb {
+    carbonPlusSection {
+      smallHeaderFeatured
+      smallHeaderCreditName
+      header
+      description
+      linkText
+      linkUrl
+    }
+  }
+}
+    `;
+
+/**
+ * __useCarbonPlusSectionQuery__
+ *
+ * To run a query within a React component, call `useCarbonPlusSectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCarbonPlusSectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCarbonPlusSectionQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCarbonPlusSectionQuery(baseOptions?: Apollo.QueryHookOptions<CarbonPlusSectionQuery, CarbonPlusSectionQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CarbonPlusSectionQuery, CarbonPlusSectionQueryVariables>(CarbonPlusSectionDocument, options);
+      }
+export function useCarbonPlusSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CarbonPlusSectionQuery, CarbonPlusSectionQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CarbonPlusSectionQuery, CarbonPlusSectionQueryVariables>(CarbonPlusSectionDocument, options);
+        }
+export type CarbonPlusSectionQueryHookResult = ReturnType<typeof useCarbonPlusSectionQuery>;
+export type CarbonPlusSectionLazyQueryHookResult = ReturnType<typeof useCarbonPlusSectionLazyQuery>;
+export type CarbonPlusSectionQueryResult = Apollo.QueryResult<CarbonPlusSectionQuery, CarbonPlusSectionQueryVariables>;
 export const HomeFoldSectionDocument = gql`
     query homeFoldSection {
   allHomePageWeb {

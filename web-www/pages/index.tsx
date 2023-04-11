@@ -1,4 +1,6 @@
 import {
+  CarbonPlusSectionDocument,
+  CarbonPlusSectionQuery,
   HomeFoldSectionDocument,
   HomeFoldSectionQuery,
 } from '@/generated/sanity-graphql';
@@ -6,10 +8,12 @@ import { sanityClient } from '@/lib/clients/sanityClient';
 import { Box } from '@mui/material';
 import { InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
-import { HomeFoldSection } from './home/Home.HomeFoldSection';
+import { HomeFoldSection } from './home/HomeFold/Home.HomeFold';
+import CarbonplusSection from './home/CarbonPlus/Home.CarbonPlus';
 
 export default function Home({
   homeFoldData,
+  carbonPlusData,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
@@ -21,6 +25,7 @@ export default function Home({
       </Head>
       <Box component="main" sx={{ overflowX: 'hidden' }}>
         <HomeFoldSection homeFoldData={homeFoldData} />
+        <CarbonplusSection carbonPlusData={carbonPlusData} />
       </Box>
     </>
   );
@@ -30,8 +35,11 @@ export const getStaticProps = async () => {
   const homeFoldData = await sanityClient.query<HomeFoldSectionQuery>({
     query: HomeFoldSectionDocument,
   });
+  const carbonPlusData = await sanityClient.query<CarbonPlusSectionQuery>({
+    query: CarbonPlusSectionDocument,
+  });
 
   return {
-    props: { homeFoldData },
+    props: { homeFoldData, carbonPlusData },
   };
 };

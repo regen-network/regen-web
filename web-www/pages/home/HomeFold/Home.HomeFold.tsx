@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { useHomeFoldStyles } from './Home.styles';
+import { useHomeFoldStyles } from './Home.HomeFold.styles';
 import { HomeFoldSectionQuery } from '@/generated/sanity-graphql';
 import { Body, Title } from 'web-components/lib/components/typography/index';
 import { ApolloQueryResult } from '@apollo/client';
@@ -26,7 +26,7 @@ export const HomeFoldSection = ({ className, homeFoldData }: Props) => {
           backgroundPosition: 'bottom center',
           backgroundSize: 'cover',
           paddingTop: { xs: 23.75, sm: 60 },
-          height: { xs: 550, sm: 864 },
+          height: { xs: 550, sm: 624 },
         },
       ]}
       className={clsx(classes.root, className)}

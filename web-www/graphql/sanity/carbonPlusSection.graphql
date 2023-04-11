@@ -1,0 +1,12 @@
+query carbonPlusSection {
+  allHomePageWeb {
+    carbonPlusSection {
+      smallHeaderFeatured
+      smallHeaderCreditName
+      header
+      description
+      linkText
+      linkUrl
+    }
+  }
+}

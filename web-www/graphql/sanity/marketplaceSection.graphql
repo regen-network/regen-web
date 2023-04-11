@@ -1,0 +1,17 @@
+query marketplaceSection {
+  allHomePageWeb {
+    marketplaceSection {
+      header
+      tooltip
+      body {
+        green
+        middle
+        popover
+        end
+      }
+      callToActions {
+        ...callToActionFields
+      }
+    }
+  }
+}

@@ -5,6 +5,8 @@ import {
   ClimateSectionQuery,
   HomeFoldSectionDocument,
   HomeFoldSectionQuery,
+  MarketplaceSectionDocument,
+  MarketplaceSectionQuery,
 } from '@/generated/sanity-graphql';
 import { sanityClient } from '@/lib/clients/sanityClient';
 import { Box } from '@mui/material';
@@ -13,11 +15,13 @@ import Head from 'next/head';
 import { HomeFoldSection } from './home/HomeFold/Home.HomeFold';
 import CarbonplusSection from './home/CarbonPlus/Home.CarbonPlus';
 import ClimateSection from './home/Climate/Home.Climate';
+import MarketplaceSection from './home/Marketplace/Home.Marketplace';
 
 export default function Home({
   homeFoldData,
   carbonPlusData,
   climateData,
+  marketplaceData,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
@@ -31,25 +35,30 @@ export default function Home({
         <HomeFoldSection homeFoldData={homeFoldData} />
         <CarbonplusSection carbonPlusData={carbonPlusData} />
         <ClimateSection climateData={climateData} />
+        <MarketplaceSection marketplaceData={marketplaceData} />
       </Box>
     </>
   );
 }
 
 export const getStaticProps = async () => {
-  const [homeFoldData, carbonPlusData, climateData] = await Promise.all([
-    sanityClient.query<HomeFoldSectionQuery>({
-      query: HomeFoldSectionDocument,
-    }),
-    sanityClient.query<CarbonPlusSectionQuery>({
-      query: CarbonPlusSectionDocument,
-    }),
-    sanityClient.query<ClimateSectionQuery>({
-      query: ClimateSectionDocument,
-    }),
-  ]);
+  const [homeFoldData, carbonPlusData, climateData, marketplaceData] =
+    await Promise.all([
+      sanityClient.query<HomeFoldSectionQuery>({
+        query: HomeFoldSectionDocument,
+      }),
+      sanityClient.query<CarbonPlusSectionQuery>({
+        query: CarbonPlusSectionDocument,
+      }),
+      sanityClient.query<ClimateSectionQuery>({
+        query: ClimateSectionDocument,
+      }),
+      sanityClient.query<MarketplaceSectionQuery>({
+        query: MarketplaceSectionDocument,
+      }),
+    ]);
 
   return {
-    props: { homeFoldData, carbonPlusData, climateData },
+    props: { homeFoldData, carbonPlusData, climateData, marketplaceData },
   };
 };

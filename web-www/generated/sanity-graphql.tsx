@@ -7207,6 +7207,15 @@ export type ClimateSectionQuery = (
   )> }
 );
 
+export type CallToActionFieldsFragment = (
+  { __typename?: 'CallToAction' }
+  & Pick<CallToAction, 'caption' | 'header' | 'description' | 'linkText' | 'linkUrl'>
+  & { image?: Maybe<(
+    { __typename?: 'Image' }
+    & ImageFieldsFragment
+  )> }
+);
+
 export type CustomImageFieldsFragment = (
   { __typename?: 'CustomImage' }
   & Pick<CustomImage, 'imageAlt' | 'imageHref'>
@@ -7252,18 +7261,27 @@ export type HomeFoldSectionQuery = (
   )> }
 );
 
-export const CustomImageFieldsFragmentDoc = gql`
-    fragment customImageFields on CustomImage {
-  imageAlt
-  imageHref
-  image {
-    asset {
-      altText
-      url
-    }
-  }
-}
-    `;
+export type MarketplaceSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MarketplaceSectionQuery = (
+  { __typename?: 'RootQuery' }
+  & { allHomePageWeb: Array<(
+    { __typename?: 'HomePageWeb' }
+    & { marketplaceSection?: Maybe<(
+      { __typename?: 'MarketplaceSection' }
+      & Pick<MarketplaceSection, 'header' | 'tooltip'>
+      & { body?: Maybe<(
+        { __typename?: 'BodyGreenTextWithPopover' }
+        & Pick<BodyGreenTextWithPopover, 'green' | 'middle' | 'popover' | 'end'>
+      )>, callToActions?: Maybe<Array<Maybe<(
+        { __typename?: 'CallToAction' }
+        & CallToActionFieldsFragment
+      )>>> }
+    )> }
+  )> }
+);
+
 export const ImageFieldsFragmentDoc = gql`
     fragment imageFields on Image {
   asset {
@@ -7274,6 +7292,30 @@ export const ImageFieldsFragmentDoc = gql`
         height
         width
       }
+    }
+  }
+}
+    `;
+export const CallToActionFieldsFragmentDoc = gql`
+    fragment callToActionFields on CallToAction {
+  caption
+  image {
+    ...imageFields
+  }
+  header
+  description
+  linkText
+  linkUrl
+}
+    ${ImageFieldsFragmentDoc}`;
+export const CustomImageFieldsFragmentDoc = gql`
+    fragment customImageFields on CustomImage {
+  imageAlt
+  imageHref
+  image {
+    asset {
+      altText
+      url
     }
   }
 }
@@ -7407,3 +7449,49 @@ export function useHomeFoldSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type HomeFoldSectionQueryHookResult = ReturnType<typeof useHomeFoldSectionQuery>;
 export type HomeFoldSectionLazyQueryHookResult = ReturnType<typeof useHomeFoldSectionLazyQuery>;
 export type HomeFoldSectionQueryResult = Apollo.QueryResult<HomeFoldSectionQuery, HomeFoldSectionQueryVariables>;
+export const MarketplaceSectionDocument = gql`
+    query marketplaceSection {
+  allHomePageWeb {
+    marketplaceSection {
+      header
+      tooltip
+      body {
+        green
+        middle
+        popover
+        end
+      }
+      callToActions {
+        ...callToActionFields
+      }
+    }
+  }
+}
+    ${CallToActionFieldsFragmentDoc}`;
+
+/**
+ * __useMarketplaceSectionQuery__
+ *
+ * To run a query within a React component, call `useMarketplaceSectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMarketplaceSectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMarketplaceSectionQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMarketplaceSectionQuery(baseOptions?: Apollo.QueryHookOptions<MarketplaceSectionQuery, MarketplaceSectionQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MarketplaceSectionQuery, MarketplaceSectionQueryVariables>(MarketplaceSectionDocument, options);
+      }
+export function useMarketplaceSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MarketplaceSectionQuery, MarketplaceSectionQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MarketplaceSectionQuery, MarketplaceSectionQueryVariables>(MarketplaceSectionDocument, options);
+        }
+export type MarketplaceSectionQueryHookResult = ReturnType<typeof useMarketplaceSectionQuery>;
+export type MarketplaceSectionLazyQueryHookResult = ReturnType<typeof useMarketplaceSectionLazyQuery>;
+export type MarketplaceSectionQueryResult = Apollo.QueryResult<MarketplaceSectionQuery, MarketplaceSectionQueryVariables>;

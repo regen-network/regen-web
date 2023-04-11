@@ -1,0 +1,10 @@
+fragment callToActionFields on CallToAction {
+  caption
+  image {
+    ...imageFields
+  }
+  header
+  description
+  linkText
+  linkUrl
+}

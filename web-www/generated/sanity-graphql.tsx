@@ -7328,6 +7328,17 @@ export type HomeFoldSectionQuery = (
   )> }
 );
 
+export type LedgerSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LedgerSectionQuery = (
+  { __typename?: 'RootQuery' }
+  & { allHomePageWeb: Array<(
+    { __typename?: 'HomePageWeb' }
+    & Pick<HomePageWeb, 'ledgerDescription'>
+  )> }
+);
+
 export type MarketplaceSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -7671,6 +7682,40 @@ export function useHomeFoldSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type HomeFoldSectionQueryHookResult = ReturnType<typeof useHomeFoldSectionQuery>;
 export type HomeFoldSectionLazyQueryHookResult = ReturnType<typeof useHomeFoldSectionLazyQuery>;
 export type HomeFoldSectionQueryResult = Apollo.QueryResult<HomeFoldSectionQuery, HomeFoldSectionQueryVariables>;
+export const LedgerSectionDocument = gql`
+    query ledgerSection {
+  allHomePageWeb {
+    ledgerDescription
+  }
+}
+    `;
+
+/**
+ * __useLedgerSectionQuery__
+ *
+ * To run a query within a React component, call `useLedgerSectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLedgerSectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLedgerSectionQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useLedgerSectionQuery(baseOptions?: Apollo.QueryHookOptions<LedgerSectionQuery, LedgerSectionQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<LedgerSectionQuery, LedgerSectionQueryVariables>(LedgerSectionDocument, options);
+      }
+export function useLedgerSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LedgerSectionQuery, LedgerSectionQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<LedgerSectionQuery, LedgerSectionQueryVariables>(LedgerSectionDocument, options);
+        }
+export type LedgerSectionQueryHookResult = ReturnType<typeof useLedgerSectionQuery>;
+export type LedgerSectionLazyQueryHookResult = ReturnType<typeof useLedgerSectionLazyQuery>;
+export type LedgerSectionQueryResult = Apollo.QueryResult<LedgerSectionQuery, LedgerSectionQueryVariables>;
 export const MarketplaceSectionDocument = gql`
     query marketplaceSection {
   allHomePageWeb {

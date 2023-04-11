@@ -7,6 +7,8 @@ import {
   EcologicalCreditCardsSectionQuery,
   HomeFoldSectionDocument,
   HomeFoldSectionQuery,
+  LedgerSectionDocument,
+  LedgerSectionQuery,
   MarketplaceSectionDocument,
   MarketplaceSectionQuery,
   PartnersSectionDocument,
@@ -28,6 +30,7 @@ import PartnersSection from './home/Partners/Home.Partners';
 import EcologicalCreditCardsSection from './home/EcologicalCreditCards/Home.EcologicalCreditCards';
 import StatsSection from './home/Stats/Home.stats';
 import HomeValues from './home/Values/Home.Values';
+import HomeLedger from './home/Ledger/Home.Ledger';
 
 export default function Home({
   homeFoldData,
@@ -38,6 +41,7 @@ export default function Home({
   ecologicalCreditCardsData,
   statsData,
   valuesData,
+  ledgerData,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
@@ -58,6 +62,7 @@ export default function Home({
         />
         <StatsSection statsData={statsData} />
         <HomeValues valuesData={valuesData} />
+        <HomeLedger ledgerData={ledgerData} />
       </Box>
     </>
   );
@@ -73,6 +78,7 @@ export const getStaticProps = async () => {
     ecologicalCreditCardsData,
     statsData,
     valuesData,
+    ledgerData,
   ] = await Promise.all([
     sanityClient.query<HomeFoldSectionQuery>({
       query: HomeFoldSectionDocument,
@@ -98,6 +104,9 @@ export const getStaticProps = async () => {
     sanityClient.query<ValuesSectionQuery>({
       query: ValuesSectionDocument,
     }),
+    sanityClient.query<LedgerSectionQuery>({
+      query: LedgerSectionDocument,
+    }),
   ]);
 
   return {
@@ -110,6 +119,7 @@ export const getStaticProps = async () => {
       ecologicalCreditCardsData,
       statsData,
       valuesData,
+      ledgerData,
     },
   };
 };

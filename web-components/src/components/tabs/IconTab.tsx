@@ -49,6 +49,7 @@ const IconTab = ({
   ...props
 }: IconTabProps): JSX.Element | null => {
   return hidden ? null : (
+    // @ts-ignore
     <StyledTab
       LinkComponent={linkComponent}
       href={href}

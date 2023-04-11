@@ -7371,6 +7371,28 @@ export type PartnersSectionQuery = (
   )> }
 );
 
+export type StatsSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type StatsSectionQuery = (
+  { __typename?: 'RootQuery' }
+  & { allHomePageWeb: Array<(
+    { __typename?: 'HomePageWeb' }
+    & { homeWebStatsSection?: Maybe<(
+      { __typename?: 'HomeWebStatsSection' }
+      & Pick<HomeWebStatsSection, 'label' | 'title'>
+      & { cards?: Maybe<Array<Maybe<(
+        { __typename?: 'StatCard' }
+        & Pick<StatCard, 'label' | 'stat' | 'descriptionRaw'>
+        & { image?: Maybe<(
+          { __typename?: 'CustomImage' }
+          & CustomImageFieldsFragment
+        )> }
+      )>>> }
+    )> }
+  )> }
+);
+
 export const ImageFieldsFragmentDoc = gql`
     fragment imageFields on Image {
   asset {
@@ -7715,3 +7737,48 @@ export function usePartnersSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type PartnersSectionQueryHookResult = ReturnType<typeof usePartnersSectionQuery>;
 export type PartnersSectionLazyQueryHookResult = ReturnType<typeof usePartnersSectionLazyQuery>;
 export type PartnersSectionQueryResult = Apollo.QueryResult<PartnersSectionQuery, PartnersSectionQueryVariables>;
+export const StatsSectionDocument = gql`
+    query statsSection {
+  allHomePageWeb {
+    homeWebStatsSection {
+      label
+      title
+      cards {
+        label
+        stat
+        descriptionRaw
+        image {
+          ...customImageFields
+        }
+      }
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+
+/**
+ * __useStatsSectionQuery__
+ *
+ * To run a query within a React component, call `useStatsSectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useStatsSectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useStatsSectionQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useStatsSectionQuery(baseOptions?: Apollo.QueryHookOptions<StatsSectionQuery, StatsSectionQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<StatsSectionQuery, StatsSectionQueryVariables>(StatsSectionDocument, options);
+      }
+export function useStatsSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<StatsSectionQuery, StatsSectionQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<StatsSectionQuery, StatsSectionQueryVariables>(StatsSectionDocument, options);
+        }
+export type StatsSectionQueryHookResult = ReturnType<typeof useStatsSectionQuery>;
+export type StatsSectionLazyQueryHookResult = ReturnType<typeof useStatsSectionLazyQuery>;
+export type StatsSectionQueryResult = Apollo.QueryResult<StatsSectionQuery, StatsSectionQueryVariables>;

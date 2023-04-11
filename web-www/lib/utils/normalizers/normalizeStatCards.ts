@@ -1,19 +1,16 @@
-import { StatCardType } from '@regen-network/web-components/lib/components/molecules/StatCard/StatCard.types';
-import {
-  HomeStatsSectionQuery,
-  SanityHomeWebStatsSection,
-} from '../../generated/graphql';
+import { StatsSectionQuery } from '@/generated/sanity-graphql';
+import { StatCardType } from 'web-components/lib/components/molecules/StatCard/StatCard.types';
 
 type Params = {
-  content?: HomeStatsSectionQuery['sanityHomePageWeb'];
+  content?: StatsSectionQuery['allHomePageWeb'][0]['homeWebStatsSection'];
 };
 
 export const normalizeStatCards = ({ content }: Params): StatCardType[] => {
   return (
-    content?.homeWebStatsSection?.cards?.map(card => ({
+    content?.cards?.map(card => ({
       label: card?.label ?? '',
       stat: card?.stat ?? '',
-      description: card?._rawDescription ?? '',
+      description: card?.descriptionRaw ?? '',
       image: {
         src: card?.image?.image?.asset?.url ?? card?.image?.imageHref ?? '',
         alt: card?.image?.imageAlt ?? '',

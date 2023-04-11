@@ -11,6 +11,8 @@ import {
   MarketplaceSectionQuery,
   PartnersSectionDocument,
   PartnersSectionQuery,
+  StatsSectionDocument,
+  StatsSectionQuery,
 } from '@/generated/sanity-graphql';
 import { sanityClient } from '@/lib/clients/sanityClient';
 import { Box } from '@mui/material';
@@ -22,6 +24,7 @@ import ClimateSection from './home/Climate/Home.Climate';
 import MarketplaceSection from './home/Marketplace/Home.Marketplace';
 import PartnersSection from './home/Partners/Home.Partners';
 import EcologicalCreditCardsSection from './home/EcologicalCreditCards/Home.EcologicalCreditCards';
+import StatsSection from './home/Stats/Home.stats';
 
 export default function Home({
   homeFoldData,
@@ -30,6 +33,7 @@ export default function Home({
   marketplaceData,
   partnersData,
   ecologicalCreditCardsData,
+  statsData,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
@@ -48,6 +52,7 @@ export default function Home({
         <EcologicalCreditCardsSection
           ecologicalCreditCardsData={ecologicalCreditCardsData}
         />
+        <StatsSection statsData={statsData} />
       </Box>
     </>
   );
@@ -61,6 +66,7 @@ export const getStaticProps = async () => {
     marketplaceData,
     partnersData,
     ecologicalCreditCardsData,
+    statsData,
   ] = await Promise.all([
     sanityClient.query<HomeFoldSectionQuery>({
       query: HomeFoldSectionDocument,
@@ -80,6 +86,9 @@ export const getStaticProps = async () => {
     sanityClient.query<EcologicalCreditCardsSectionQuery>({
       query: EcologicalCreditCardsSectionDocument,
     }),
+    sanityClient.query<StatsSectionQuery>({
+      query: StatsSectionDocument,
+    }),
   ]);
 
   return {
@@ -90,6 +99,7 @@ export const getStaticProps = async () => {
       marketplaceData,
       partnersData,
       ecologicalCreditCardsData,
+      statsData,
     },
   };
 };

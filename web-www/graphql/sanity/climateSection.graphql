@@ -1,0 +1,19 @@
+query climateSection {
+  allHomePageWeb {
+    climateSection {
+      header
+      description
+      image {
+        ...imageFields
+      }
+      solution {
+        title
+        body
+      }
+      problem {
+        title
+        body
+      }
+    }
+  }
+}

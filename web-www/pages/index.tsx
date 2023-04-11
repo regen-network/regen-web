@@ -1,6 +1,8 @@
 import {
   CarbonPlusSectionDocument,
   CarbonPlusSectionQuery,
+  ClimateSectionDocument,
+  ClimateSectionQuery,
   HomeFoldSectionDocument,
   HomeFoldSectionQuery,
 } from '@/generated/sanity-graphql';
@@ -10,10 +12,12 @@ import { InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 import { HomeFoldSection } from './home/HomeFold/Home.HomeFold';
 import CarbonplusSection from './home/CarbonPlus/Home.CarbonPlus';
+import ClimateSection from './home/Climate/Home.Climate';
 
 export default function Home({
   homeFoldData,
   carbonPlusData,
+  climateData,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
@@ -26,20 +30,26 @@ export default function Home({
       <Box component="main" sx={{ overflowX: 'hidden' }}>
         <HomeFoldSection homeFoldData={homeFoldData} />
         <CarbonplusSection carbonPlusData={carbonPlusData} />
+        <ClimateSection climateData={climateData} />
       </Box>
     </>
   );
 }
 
 export const getStaticProps = async () => {
-  const homeFoldData = await sanityClient.query<HomeFoldSectionQuery>({
-    query: HomeFoldSectionDocument,
-  });
-  const carbonPlusData = await sanityClient.query<CarbonPlusSectionQuery>({
-    query: CarbonPlusSectionDocument,
-  });
+  const [homeFoldData, carbonPlusData, climateData] = await Promise.all([
+    sanityClient.query<HomeFoldSectionQuery>({
+      query: HomeFoldSectionDocument,
+    }),
+    sanityClient.query<CarbonPlusSectionQuery>({
+      query: CarbonPlusSectionDocument,
+    }),
+    sanityClient.query<ClimateSectionQuery>({
+      query: ClimateSectionDocument,
+    }),
+  ]);
 
   return {
-    props: { homeFoldData, carbonPlusData },
+    props: { homeFoldData, carbonPlusData, climateData },
   };
 };

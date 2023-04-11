@@ -7183,6 +7183,57 @@ export type CarbonPlusSectionQuery = (
   )> }
 );
 
+export type ClimateSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ClimateSectionQuery = (
+  { __typename?: 'RootQuery' }
+  & { allHomePageWeb: Array<(
+    { __typename?: 'HomePageWeb' }
+    & { climateSection?: Maybe<(
+      { __typename?: 'ClimateSection' }
+      & Pick<ClimateSection, 'header' | 'description'>
+      & { image?: Maybe<(
+        { __typename?: 'Image' }
+        & ImageFieldsFragment
+      )>, solution?: Maybe<(
+        { __typename?: 'TitleBody' }
+        & Pick<TitleBody, 'title' | 'body'>
+      )>, problem?: Maybe<(
+        { __typename?: 'TitleBody' }
+        & Pick<TitleBody, 'title' | 'body'>
+      )> }
+    )> }
+  )> }
+);
+
+export type CustomImageFieldsFragment = (
+  { __typename?: 'CustomImage' }
+  & Pick<CustomImage, 'imageAlt' | 'imageHref'>
+  & { image?: Maybe<(
+    { __typename?: 'Image' }
+    & { asset?: Maybe<(
+      { __typename?: 'SanityImageAsset' }
+      & Pick<SanityImageAsset, 'altText' | 'url'>
+    )> }
+  )> }
+);
+
+export type ImageFieldsFragment = (
+  { __typename?: 'Image' }
+  & { asset?: Maybe<(
+    { __typename?: 'SanityImageAsset' }
+    & Pick<SanityImageAsset, 'altText' | 'url'>
+    & { metadata?: Maybe<(
+      { __typename?: 'SanityImageMetadata' }
+      & { dimensions?: Maybe<(
+        { __typename?: 'SanityImageDimensions' }
+        & Pick<SanityImageDimensions, 'height' | 'width'>
+      )> }
+    )> }
+  )> }
+);
+
 export type HomeFoldSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -7195,20 +7246,38 @@ export type HomeFoldSectionQuery = (
       & Pick<HomeFoldSection, 'title' | 'body'>
       & { image?: Maybe<(
         { __typename?: 'CustomImage' }
-        & Pick<CustomImage, 'imageHref' | 'imageAlt'>
-        & { image?: Maybe<(
-          { __typename?: 'Image' }
-          & { asset?: Maybe<(
-            { __typename?: 'SanityImageAsset' }
-            & Pick<SanityImageAsset, 'url'>
-          )> }
-        )> }
+        & CustomImageFieldsFragment
       )> }
     )> }
   )> }
 );
 
-
+export const CustomImageFieldsFragmentDoc = gql`
+    fragment customImageFields on CustomImage {
+  imageAlt
+  imageHref
+  image {
+    asset {
+      altText
+      url
+    }
+  }
+}
+    `;
+export const ImageFieldsFragmentDoc = gql`
+    fragment imageFields on Image {
+  asset {
+    altText
+    url
+    metadata {
+      dimensions {
+        height
+        width
+      }
+    }
+  }
+}
+    `;
 export const CarbonPlusSectionDocument = gql`
     query carbonPlusSection {
   allHomePageWeb {
@@ -7250,6 +7319,54 @@ export function useCarbonPlusSectionLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type CarbonPlusSectionQueryHookResult = ReturnType<typeof useCarbonPlusSectionQuery>;
 export type CarbonPlusSectionLazyQueryHookResult = ReturnType<typeof useCarbonPlusSectionLazyQuery>;
 export type CarbonPlusSectionQueryResult = Apollo.QueryResult<CarbonPlusSectionQuery, CarbonPlusSectionQueryVariables>;
+export const ClimateSectionDocument = gql`
+    query climateSection {
+  allHomePageWeb {
+    climateSection {
+      header
+      description
+      image {
+        ...imageFields
+      }
+      solution {
+        title
+        body
+      }
+      problem {
+        title
+        body
+      }
+    }
+  }
+}
+    ${ImageFieldsFragmentDoc}`;
+
+/**
+ * __useClimateSectionQuery__
+ *
+ * To run a query within a React component, call `useClimateSectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useClimateSectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useClimateSectionQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useClimateSectionQuery(baseOptions?: Apollo.QueryHookOptions<ClimateSectionQuery, ClimateSectionQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ClimateSectionQuery, ClimateSectionQueryVariables>(ClimateSectionDocument, options);
+      }
+export function useClimateSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ClimateSectionQuery, ClimateSectionQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ClimateSectionQuery, ClimateSectionQueryVariables>(ClimateSectionDocument, options);
+        }
+export type ClimateSectionQueryHookResult = ReturnType<typeof useClimateSectionQuery>;
+export type ClimateSectionLazyQueryHookResult = ReturnType<typeof useClimateSectionLazyQuery>;
+export type ClimateSectionQueryResult = Apollo.QueryResult<ClimateSectionQuery, ClimateSectionQueryVariables>;
 export const HomeFoldSectionDocument = gql`
     query homeFoldSection {
   allHomePageWeb {
@@ -7257,18 +7374,12 @@ export const HomeFoldSectionDocument = gql`
       title
       body
       image {
-        imageHref
-        imageAlt
-        image {
-          asset {
-            url
-          }
-        }
+        ...customImageFields
       }
     }
   }
 }
-    `;
+    ${CustomImageFieldsFragmentDoc}`;
 
 /**
  * __useHomeFoldSectionQuery__

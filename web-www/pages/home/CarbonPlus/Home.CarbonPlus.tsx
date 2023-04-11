@@ -14,9 +14,7 @@ type Props = {
   carbonPlusData?: ApolloQueryResult<CarbonPlusSectionQuery>;
 };
 
-const CarbonplusSection: React.FC = ({
-  carbonPlusData,
-}: Props): JSX.Element => {
+const CarbonplusSection = ({ carbonPlusData }: Props): JSX.Element => {
   const content = carbonPlusData?.data.allHomePageWeb[0].carbonPlusSection;
   const { classes: styles } = useCarbonPlusStyles();
 

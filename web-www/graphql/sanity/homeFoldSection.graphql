@@ -4,13 +4,7 @@ query homeFoldSection {
       title
       body
       image {
-        imageHref
-        imageAlt
-        image {
-          asset {
-            url
-          }
-        }
+        ...customImageFields
       }
     }
   }

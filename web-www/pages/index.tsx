@@ -7,6 +7,8 @@ import {
   HomeFoldSectionQuery,
   MarketplaceSectionDocument,
   MarketplaceSectionQuery,
+  PartnersSectionDocument,
+  PartnersSectionQuery,
 } from '@/generated/sanity-graphql';
 import { sanityClient } from '@/lib/clients/sanityClient';
 import { Box } from '@mui/material';
@@ -16,12 +18,14 @@ import { HomeFoldSection } from './home/HomeFold/Home.HomeFold';
 import CarbonplusSection from './home/CarbonPlus/Home.CarbonPlus';
 import ClimateSection from './home/Climate/Home.Climate';
 import MarketplaceSection from './home/Marketplace/Home.Marketplace';
+import PartnersSection from './home/Partners/Home.Partners';
 
 export default function Home({
   homeFoldData,
   carbonPlusData,
   climateData,
   marketplaceData,
+  partnersData,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
@@ -36,29 +40,44 @@ export default function Home({
         <CarbonplusSection carbonPlusData={carbonPlusData} />
         <ClimateSection climateData={climateData} />
         <MarketplaceSection marketplaceData={marketplaceData} />
+        <PartnersSection partnersData={partnersData} />
       </Box>
     </>
   );
 }
 
 export const getStaticProps = async () => {
-  const [homeFoldData, carbonPlusData, climateData, marketplaceData] =
-    await Promise.all([
-      sanityClient.query<HomeFoldSectionQuery>({
-        query: HomeFoldSectionDocument,
-      }),
-      sanityClient.query<CarbonPlusSectionQuery>({
-        query: CarbonPlusSectionDocument,
-      }),
-      sanityClient.query<ClimateSectionQuery>({
-        query: ClimateSectionDocument,
-      }),
-      sanityClient.query<MarketplaceSectionQuery>({
-        query: MarketplaceSectionDocument,
-      }),
-    ]);
+  const [
+    homeFoldData,
+    carbonPlusData,
+    climateData,
+    marketplaceData,
+    partnersData,
+  ] = await Promise.all([
+    sanityClient.query<HomeFoldSectionQuery>({
+      query: HomeFoldSectionDocument,
+    }),
+    sanityClient.query<CarbonPlusSectionQuery>({
+      query: CarbonPlusSectionDocument,
+    }),
+    sanityClient.query<ClimateSectionQuery>({
+      query: ClimateSectionDocument,
+    }),
+    sanityClient.query<MarketplaceSectionQuery>({
+      query: MarketplaceSectionDocument,
+    }),
+    sanityClient.query<PartnersSectionQuery>({
+      query: PartnersSectionDocument,
+    }),
+  ]);
 
   return {
-    props: { homeFoldData, carbonPlusData, climateData, marketplaceData },
+    props: {
+      homeFoldData,
+      carbonPlusData,
+      climateData,
+      marketplaceData,
+      partnersData,
+    },
   };
 };

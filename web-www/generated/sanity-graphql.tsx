@@ -7282,6 +7282,28 @@ export type MarketplaceSectionQuery = (
   )> }
 );
 
+export type PartnersSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PartnersSectionQuery = (
+  { __typename?: 'RootQuery' }
+  & { allHomePageWeb: Array<(
+    { __typename?: 'HomePageWeb' }
+    & { homeWebPartnersSection?: Maybe<(
+      { __typename?: 'HomeWebPartnersSection' }
+      & Pick<HomeWebPartnersSection, 'title'>
+      & { partners?: Maybe<Array<Maybe<(
+        { __typename?: 'Partner' }
+        & Pick<Partner, 'name'>
+        & { logo?: Maybe<(
+          { __typename?: 'Image' }
+          & ImageFieldsFragment
+        )> }
+      )>>> }
+    )> }
+  )> }
+);
+
 export const ImageFieldsFragmentDoc = gql`
     fragment imageFields on Image {
   asset {
@@ -7495,3 +7517,45 @@ export function useMarketplaceSectionLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type MarketplaceSectionQueryHookResult = ReturnType<typeof useMarketplaceSectionQuery>;
 export type MarketplaceSectionLazyQueryHookResult = ReturnType<typeof useMarketplaceSectionLazyQuery>;
 export type MarketplaceSectionQueryResult = Apollo.QueryResult<MarketplaceSectionQuery, MarketplaceSectionQueryVariables>;
+export const PartnersSectionDocument = gql`
+    query partnersSection {
+  allHomePageWeb {
+    homeWebPartnersSection {
+      title
+      partners {
+        name
+        logo {
+          ...imageFields
+        }
+      }
+    }
+  }
+}
+    ${ImageFieldsFragmentDoc}`;
+
+/**
+ * __usePartnersSectionQuery__
+ *
+ * To run a query within a React component, call `usePartnersSectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePartnersSectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePartnersSectionQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function usePartnersSectionQuery(baseOptions?: Apollo.QueryHookOptions<PartnersSectionQuery, PartnersSectionQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PartnersSectionQuery, PartnersSectionQueryVariables>(PartnersSectionDocument, options);
+      }
+export function usePartnersSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PartnersSectionQuery, PartnersSectionQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PartnersSectionQuery, PartnersSectionQueryVariables>(PartnersSectionDocument, options);
+        }
+export type PartnersSectionQueryHookResult = ReturnType<typeof usePartnersSectionQuery>;
+export type PartnersSectionLazyQueryHookResult = ReturnType<typeof usePartnersSectionLazyQuery>;
+export type PartnersSectionQueryResult = Apollo.QueryResult<PartnersSectionQuery, PartnersSectionQueryVariables>;

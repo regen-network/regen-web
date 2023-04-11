@@ -1,0 +1,13 @@
+query partnersSection {
+  allHomePageWeb {
+    homeWebPartnersSection {
+      title
+      partners {
+        name
+        logo {
+          ...imageFields
+        }
+      }
+    }
+  }
+}

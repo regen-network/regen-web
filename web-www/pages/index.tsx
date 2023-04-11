@@ -3,6 +3,8 @@ import {
   CarbonPlusSectionQuery,
   ClimateSectionDocument,
   ClimateSectionQuery,
+  EcologicalCreditCardsSectionDocument,
+  EcologicalCreditCardsSectionQuery,
   HomeFoldSectionDocument,
   HomeFoldSectionQuery,
   MarketplaceSectionDocument,
@@ -19,6 +21,7 @@ import CarbonplusSection from './home/CarbonPlus/Home.CarbonPlus';
 import ClimateSection from './home/Climate/Home.Climate';
 import MarketplaceSection from './home/Marketplace/Home.Marketplace';
 import PartnersSection from './home/Partners/Home.Partners';
+import EcologicalCreditCardsSection from './home/EcologicalCreditCards/Home.EcologicalCreditCards';
 
 export default function Home({
   homeFoldData,
@@ -26,6 +29,7 @@ export default function Home({
   climateData,
   marketplaceData,
   partnersData,
+  ecologicalCreditCardsData,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
@@ -35,12 +39,15 @@ export default function Home({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Box component="main" sx={{ overflowX: 'hidden' }}>
+      <Box component="main" sx={{ overflow: 'hidden' }}>
         <HomeFoldSection homeFoldData={homeFoldData} />
         <CarbonplusSection carbonPlusData={carbonPlusData} />
         <ClimateSection climateData={climateData} />
         <MarketplaceSection marketplaceData={marketplaceData} />
         <PartnersSection partnersData={partnersData} />
+        <EcologicalCreditCardsSection
+          ecologicalCreditCardsData={ecologicalCreditCardsData}
+        />
       </Box>
     </>
   );
@@ -53,6 +60,7 @@ export const getStaticProps = async () => {
     climateData,
     marketplaceData,
     partnersData,
+    ecologicalCreditCardsData,
   ] = await Promise.all([
     sanityClient.query<HomeFoldSectionQuery>({
       query: HomeFoldSectionDocument,
@@ -69,6 +77,9 @@ export const getStaticProps = async () => {
     sanityClient.query<PartnersSectionQuery>({
       query: PartnersSectionDocument,
     }),
+    sanityClient.query<EcologicalCreditCardsSectionQuery>({
+      query: EcologicalCreditCardsSectionDocument,
+    }),
   ]);
 
   return {
@@ -78,6 +89,7 @@ export const getStaticProps = async () => {
       climateData,
       marketplaceData,
       partnersData,
+      ecologicalCreditCardsData,
     },
   };
 };

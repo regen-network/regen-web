@@ -7207,6 +7207,55 @@ export type ClimateSectionQuery = (
   )> }
 );
 
+export type EcologicalCreditCardsSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type EcologicalCreditCardsSectionQuery = (
+  { __typename?: 'RootQuery' }
+  & { allHomePageWeb: Array<(
+    { __typename?: 'HomePageWeb' }
+    & { homeWebEcologicalCreditCardsSection?: Maybe<(
+      { __typename?: 'HomeWebEcologicalCreditCardsSection' }
+      & Pick<HomeWebEcologicalCreditCardsSection, 'title'>
+      & { cards?: Maybe<Array<Maybe<(
+        { __typename?: 'EcologicalCreditCard' }
+        & Pick<EcologicalCreditCard, 'title' | 'description'>
+        & { image?: Maybe<(
+          { __typename?: 'CustomImage' }
+          & CustomImageFieldsFragment
+        )>, type?: Maybe<(
+          { __typename?: 'CreditType' }
+          & Pick<CreditType, 'name'>
+          & { image?: Maybe<(
+            { __typename?: 'Image' }
+            & ImageFieldsFragment
+          )> }
+        )>, creditInfos?: Maybe<(
+          { __typename?: 'CreditInfos' }
+          & Pick<CreditInfos, 'country' | 'price' | 'count'>
+        )>, offsetMethods?: Maybe<Array<Maybe<(
+          { __typename?: 'OffsetMethod' }
+          & Pick<OffsetMethod, 'name'>
+          & { icon?: Maybe<(
+            { __typename?: 'Image' }
+            & ImageFieldsFragment
+          )> }
+        )>>>, projectActivities?: Maybe<Array<Maybe<(
+          { __typename?: 'ProjectActivity' }
+          & Pick<ProjectActivity, 'name'>
+          & { icon?: Maybe<(
+            { __typename?: 'Image' }
+            & ImageFieldsFragment
+          )> }
+        )>>>, button?: Maybe<(
+          { __typename?: 'Button' }
+          & ButtonFieldsFragment
+        )> }
+      )>>> }
+    )> }
+  )> }
+);
+
 export type CallToActionFieldsFragment = (
   { __typename?: 'CallToAction' }
   & Pick<CallToAction, 'caption' | 'header' | 'description' | 'linkText' | 'linkUrl'>
@@ -7240,6 +7289,24 @@ export type ImageFieldsFragment = (
         & Pick<SanityImageDimensions, 'height' | 'width'>
       )> }
     )> }
+  )> }
+);
+
+export type ButtonFieldsFragment = (
+  { __typename?: 'Button' }
+  & Pick<Button, 'buttonText' | 'buttonModal' | 'buttonBlankTarget'>
+  & { buttonLink?: Maybe<(
+    { __typename?: 'Link' }
+    & LinkFieldsFragment
+  )> }
+);
+
+export type LinkFieldsFragment = (
+  { __typename?: 'Link' }
+  & Pick<Link, 'buttonHref'>
+  & { buttonDoc?: Maybe<(
+    { __typename?: 'Doc' }
+    & Pick<Doc, 'href'>
   )> }
 );
 
@@ -7342,6 +7409,24 @@ export const CustomImageFieldsFragmentDoc = gql`
   }
 }
     `;
+export const LinkFieldsFragmentDoc = gql`
+    fragment linkFields on Link {
+  buttonHref
+  buttonDoc {
+    href
+  }
+}
+    `;
+export const ButtonFieldsFragmentDoc = gql`
+    fragment buttonFields on Button {
+  buttonText
+  buttonLink {
+    ...linkFields
+  }
+  buttonModal
+  buttonBlankTarget
+}
+    ${LinkFieldsFragmentDoc}`;
 export const CarbonPlusSectionDocument = gql`
     query carbonPlusSection {
   allHomePageWeb {
@@ -7431,6 +7516,77 @@ export function useClimateSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type ClimateSectionQueryHookResult = ReturnType<typeof useClimateSectionQuery>;
 export type ClimateSectionLazyQueryHookResult = ReturnType<typeof useClimateSectionLazyQuery>;
 export type ClimateSectionQueryResult = Apollo.QueryResult<ClimateSectionQuery, ClimateSectionQueryVariables>;
+export const EcologicalCreditCardsSectionDocument = gql`
+    query ecologicalCreditCardsSection {
+  allHomePageWeb {
+    homeWebEcologicalCreditCardsSection {
+      title
+      cards {
+        title
+        description
+        image {
+          ...customImageFields
+        }
+        type {
+          name
+          image {
+            ...imageFields
+          }
+        }
+        creditInfos {
+          country
+          price
+          count
+        }
+        offsetMethods {
+          name
+          icon {
+            ...imageFields
+          }
+        }
+        projectActivities {
+          name
+          icon {
+            ...imageFields
+          }
+        }
+        button {
+          ...buttonFields
+        }
+      }
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}
+${ImageFieldsFragmentDoc}
+${ButtonFieldsFragmentDoc}`;
+
+/**
+ * __useEcologicalCreditCardsSectionQuery__
+ *
+ * To run a query within a React component, call `useEcologicalCreditCardsSectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useEcologicalCreditCardsSectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useEcologicalCreditCardsSectionQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useEcologicalCreditCardsSectionQuery(baseOptions?: Apollo.QueryHookOptions<EcologicalCreditCardsSectionQuery, EcologicalCreditCardsSectionQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<EcologicalCreditCardsSectionQuery, EcologicalCreditCardsSectionQueryVariables>(EcologicalCreditCardsSectionDocument, options);
+      }
+export function useEcologicalCreditCardsSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<EcologicalCreditCardsSectionQuery, EcologicalCreditCardsSectionQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<EcologicalCreditCardsSectionQuery, EcologicalCreditCardsSectionQueryVariables>(EcologicalCreditCardsSectionDocument, options);
+        }
+export type EcologicalCreditCardsSectionQueryHookResult = ReturnType<typeof useEcologicalCreditCardsSectionQuery>;
+export type EcologicalCreditCardsSectionLazyQueryHookResult = ReturnType<typeof useEcologicalCreditCardsSectionLazyQuery>;
+export type EcologicalCreditCardsSectionQueryResult = Apollo.QueryResult<EcologicalCreditCardsSectionQuery, EcologicalCreditCardsSectionQueryVariables>;
 export const HomeFoldSectionDocument = gql`
     query homeFoldSection {
   allHomePageWeb {

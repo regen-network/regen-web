@@ -107,7 +107,9 @@ export const GalleryBottomBar = ({
             ]}
             onClick={() => setIsShowMore(isShowMore => !isShowMore)}
           >
-            <Box sx={{ display: 'inline-block', mr: 0.5 }}>{caption}</Box>
+            {caption && (
+              <Box sx={{ display: 'inline-block', mr: 0.5 }}>{caption}</Box>
+            )}
             {credit && (
               <Box sx={{ display: 'inline-block', fontWeight: 300 }}>
                 {credit}

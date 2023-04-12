@@ -293,6 +293,14 @@ function ProjectDetails(): JSX.Element {
 
       {hasProjectPhotos && <Gallery photos={projectPhotos} />}
 
+      <ProjectStorySection projectPageMetadata={offChainProjectMetadata} />
+
+      {impactData?.length > 0 && (
+        <div className="topo-background-alternate">
+          <ProjectImpactSection impact={impactData} />
+        </div>
+      )}
+
       <CreditBatchesSection
         offChainProject={offChainProject}
         batchData={{
@@ -302,14 +310,6 @@ function ProjectDetails(): JSX.Element {
         paginationParams={paginationParams}
         setPaginationParams={setPaginationParams}
       />
-
-      <ProjectStorySection projectPageMetadata={offChainProjectMetadata} />
-
-      {impactData?.length > 0 && (
-        <div className="topo-background-alternate">
-          <ProjectImpactSection impact={impactData} />
-        </div>
-      )}
 
       {projectDocs && projectDocs.length > 0 && (
         <ProjectDocumentation

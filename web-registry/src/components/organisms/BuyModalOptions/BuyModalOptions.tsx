@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { useSetAtom } from 'jotai';
 
@@ -9,11 +10,15 @@ import { Title } from 'web-components/lib/components/typography';
 import { AllBuyModalOptionsQuery } from 'generated/sanity-graphql';
 import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
 import { onBtnClick } from 'lib/button';
+import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
+
+import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 
 interface Props extends RegenModalProps {
   content?: AllBuyModalOptionsQuery['allBuyModalOptions'][0];
   openModal?: (link: string) => void;
+  selectedProject?: ProjectWithOrderData;
 }
 
 export const BuyModalOptions = ({
@@ -21,11 +26,14 @@ export const BuyModalOptions = ({
   content,
   onClose,
   openModal = () => null,
+  selectedProject,
 }: Props) => {
   const cards = content?.cards ?? [];
   const setConnectWalletModalAtom = useSetAtom(connectWalletModalAtom);
   const { loaded, wallet } = useWallet();
   const connected = wallet?.address;
+  const { track } = useTracker();
+  const location = useLocation();
 
   useEffect(() => {
     if (loaded && connected) onClose();
@@ -54,11 +62,28 @@ export const BuyModalOptions = ({
               button={{
                 text: card?.button?.buttonText ?? '',
                 onClick: card?.button?.buttonLink
-                  ? () => onBtnClick(openModal, card?.button)
-                  : () =>
+                  ? () => {
+                      if (track) {
+                        track('buyScheduleCall', {
+                          url: location.pathname,
+                          projectId: selectedProject?.id,
+                          creditClassId: selectedProject?.creditClassId,
+                        });
+                      }
+                      onBtnClick(openModal, card?.button);
+                    }
+                  : () => {
+                      if (track) {
+                        track('buyKeplr', {
+                          url: location.pathname,
+                          projectId: selectedProject?.id,
+                          creditClassId: selectedProject?.creditClassId,
+                        });
+                      }
                       setConnectWalletModalAtom(
                         atom => void (atom.open = true),
-                      ),
+                      );
+                    },
               }}
               note={card?.noteRaw ?? ''}
               sx={{ mb: isLast ? 0 : 5 }}

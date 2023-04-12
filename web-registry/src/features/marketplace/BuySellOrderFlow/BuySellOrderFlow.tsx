@@ -229,6 +229,7 @@ export const BuySellOrderFlow = ({
           setIsFlowStarted(false);
           setIsBuyModalOptionsOpen(false);
         }}
+        selectedProject={selectedProject}
       />
       <ProcessingModal
         open={isProcessingModalOpen}

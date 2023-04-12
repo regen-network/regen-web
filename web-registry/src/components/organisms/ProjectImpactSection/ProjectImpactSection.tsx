@@ -45,6 +45,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     },
     '& .slick-slide': {
       height: 'inherit',
+      marginRight: 20,
       '& > div': {
         height: '100%',
       },
@@ -65,15 +66,15 @@ const useStyles = makeStyles()((theme: Theme) => ({
       margin: theme.spacing(0, 1.875),
     },
     [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(0, 1.875),
+      margin: theme.spacing(0, 1.875),
       '& > div': {
         height: '100%',
       },
       '&:first-child': {
-        paddingLeft: theme.spacing(4),
+        marginLeft: theme.spacing(4),
       },
       '&:last-child': {
-        paddingRight: theme.spacing(4),
+        marginRight: theme.spacing(4),
       },
     },
   },
@@ -104,12 +105,20 @@ function ProjectImpactSection({
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
+    infinite: false,
     arrows: false,
     responsive: [
       {
         breakpoint: 1280,
         settings: {
           slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 857,
+        settings: {
+          slidesToShow: 1,
           slidesToScroll: 1,
         },
       },
@@ -172,7 +181,12 @@ function ProjectImpactSection({
             )}
           </div>
         ) : (
-          <Slider {...settings} ref={slider} className={styles.slider}>
+          <Slider
+            {...settings}
+            variableWidth
+            ref={slider}
+            className={styles.slider}
+          >
             {impact.map(
               (
                 { name, descriptionRaw, image, standard, sdgs },

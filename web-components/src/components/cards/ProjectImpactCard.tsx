@@ -36,7 +36,11 @@ export default function ProjectImpactCard({
       className={className}
       borderRadius="10px"
       borderColor="grey.100"
-      sx={{ display: 'flex', flexDirection: 'column' }}
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        width: { xs: 291, sm: 367 },
+      }}
     >
       <Box
         sx={theme => ({
@@ -98,8 +102,8 @@ export default function ProjectImpactCard({
                 <Box
                   component="img"
                   sx={{
-                    width: { xs: 80, sm: 97.45 },
-                    height: { xs: 80, sm: 97.45 },
+                    width: { xs: 68, sm: 92 },
+                    height: { xs: 68, sm: 92 },
                   }}
                   src={sdg.src}
                   alt={sdg.alt}

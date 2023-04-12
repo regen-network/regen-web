@@ -4,18 +4,10 @@ export const useBlogStyles = makeStyles()(theme => ({
   container: {
     borderTop: `1px solid ${theme.palette.grey['300']}`,
   },
-  item: {
-    maxWidth: 393,
-  },
+  item: {},
   image: {
     width: '100%',
-    backgroundSize: 'cover',
-    [theme.breakpoints.down('sm')]: {
-      height: theme.spacing(50.75),
-    },
-    [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(63),
-    },
+    height: '100%',
     '&:before, &:after': {
       borderRadius: '10px',
     },

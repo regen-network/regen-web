@@ -34,6 +34,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     },
     '& .slick-track': {
       display: 'flex',
+      justifyContent: 'center',
       '& .slick-slide': {
         [theme.breakpoints.down('sm')]: {
           paddingRight: theme.spacing(4.75),
@@ -49,8 +50,13 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
   item: {
     height: '100%',
+    width: '100%',
     verticalAlign: 'top',
+    [theme.breakpoints.down('sm')]: {
+      maxWidth: 308,
+    },
     [theme.breakpoints.up('sm')]: {
+      maxWidth: 366,
       paddingRight: theme.spacing(2.5),
       paddingLeft: theme.spacing(2.5),
     },
@@ -63,8 +69,8 @@ export default function BlogPosts({
 }: BlogPostsProps): JSX.Element {
   const { classes: styles, cx } = useStyles();
   const theme = useTheme();
-  const desktop = useMediaQuery(theme.breakpoints.up('lg'));
-  const mobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const desktop = useMediaQuery(theme.breakpoints.up('xl'));
+  const mobile = useMediaQuery(theme.breakpoints.down('md'));
   const slides: number = desktop ? 3 : mobile ? 1 : 2;
 
   const settings = {
@@ -77,7 +83,7 @@ export default function BlogPosts({
   };
   return (
     <div className={styles.root}>
-      <Slider {...settings} className={styles.slider}>
+      <Slider {...settings} className={styles.slider} variableWidth>
         {posts.map((post, index) => (
           <div key={index} className={cx(styles.item, classes?.item)}>
             <BlogPost {...post} />

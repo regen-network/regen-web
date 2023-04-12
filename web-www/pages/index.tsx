@@ -2,16 +2,16 @@ import { Box } from '@mui/material';
 import { InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 
-import BlogSection from './home/Blog/Home.blog';
-import CarbonplusSection from './home/CarbonPlus/Home.CarbonPlus';
-import ClimateSection from './home/Climate/Home.Climate';
-import EcologicalCreditCardsSection from './home/EcologicalCreditCards/Home.EcologicalCreditCards';
-import { HomeFoldSection } from './home/HomeFold/Home.HomeFold';
-import HomeLedger from './home/Ledger/Home.Ledger';
-import MarketplaceSection from './home/Marketplace/Home.Marketplace';
-import PartnersSection from './home/Partners/Home.Partners';
-import StatsSection from './home/Stats/Home.stats';
-import HomeValues from './home/Values/Home.Values';
+import BlogSection from '../components/templates/home/Blog/Home.blog';
+import CarbonplusSection from '../components/templates/home/CarbonPlus/Home.CarbonPlus';
+import ClimateSection from '../components/templates/home/Climate/Home.Climate';
+import EcologicalCreditCardsSection from '../components/templates/home/EcologicalCreditCards/Home.EcologicalCreditCards';
+import { HomeFoldSection } from '../components/templates/home/HomeFold/Home.HomeFold';
+import HomeLedger from '../components/templates/home/Ledger/Home.Ledger';
+import MarketplaceSection from '../components/templates/home/Marketplace/Home.Marketplace';
+import PartnersSection from '../components/templates/home/Partners/Home.Partners';
+import StatsSection from '../components/templates/home/Stats/Home.stats';
+import HomeValues from '../components/templates/home/Values/Home.Values';
 
 import {
   BlogSectionDocument,

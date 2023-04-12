@@ -1,12 +1,12 @@
-import { EcologicalCreditCardType } from '@regen-network/web-components/lib/components/molecules/EcologicalCreditCard/EcologicalCreditCard.types';
+import { EcologicalCreditCardType } from 'web-components/lib/components/molecules/EcologicalCreditCard/EcologicalCreditCard.types';
 
-import { SanityHomeWebEcologicalCreditCardsSection } from '../../generated/graphql';
+import { HomeWebEcologicalCreditCardsSection } from '../../../generated/sanity-graphql';
 
 export const OFFSET_GENERATION_METHOD = 'offset generation method';
 export const PROJECT_ACTIVITIES = 'project activities';
 
 type Params = {
-  content?: SanityHomeWebEcologicalCreditCardsSection | null;
+  content?: HomeWebEcologicalCreditCardsSection | null;
 };
 
 export const normalizeEcologicalCreditCards = ({

@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
 import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
+import { Gallery } from 'web-components/lib/components/organisms/Gallery/Gallery';
 import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 
@@ -28,6 +29,7 @@ import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellO
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
+import { CreditBatchesSection } from 'components/organisms/CreditBatchesSection/CreditBatchesSection';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { usePaginatedBatchesByProject } from 'hooks/batches/usePaginatedBatchesByProject';
@@ -48,6 +50,7 @@ import { ProjectTimeline } from './ProjectDetails.ProjectTimeline';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
 import {
   getIsOnChainId,
+  getProjectGalleryPhotos,
   parseMedia,
   parseOffChainProject,
 } from './ProjectDetails.utils';
@@ -221,6 +224,9 @@ function ProjectDetails(): JSX.Element {
   )
     return <NotFoundPage />;
 
+  const projectPhotos = getProjectGalleryPhotos({ offChainProjectMetadata });
+  const hasProjectPhotos = projectPhotos.length > 0;
+
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO
@@ -269,21 +275,31 @@ function ProjectDetails(): JSX.Element {
         projectMetadata={projectMetadata}
         projectPageMetadata={offChainProjectMetadata}
         sanityCreditClassData={sanityCreditClassData}
+        geojson={geojson}
+        isGISFile={isGISFile}
+        onChainProjectId={onChainProjectId}
+        projectDeveloper={projectDeveloper}
+        landOwner={landOwner}
+        landSteward={landSteward}
+        loading={loadingDb || loadingAnchoredMetadata}
         soldOutProjectsIds={soldOutProjectsIds}
         projectWithOrderData={projectsWithOrderData[0]}
         batchData={{
           batches: batchesWithSupply,
           totals: batchesTotal,
         }}
-        projectDeveloper={projectDeveloper}
-        landOwner={landOwner}
-        landSteward={landSteward}
+      />
+
+      {hasProjectPhotos && <Gallery photos={projectPhotos} />}
+
+      <CreditBatchesSection
+        offChainProject={offChainProject}
+        batchData={{
+          batches: batchesWithSupply,
+          totals: batchesTotal,
+        }}
         paginationParams={paginationParams}
         setPaginationParams={setPaginationParams}
-        geojson={geojson}
-        isGISFile={isGISFile}
-        onChainProjectId={onChainProjectId}
-        loading={loadingDb || loadingAnchoredMetadata}
       />
 
       {impactData?.length > 0 && (

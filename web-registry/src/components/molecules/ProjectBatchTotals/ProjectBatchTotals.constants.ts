@@ -5,3 +5,4 @@ export const TRADEABLE_CREDITS_TOOLTIP =
 export const RETIRED_CREDITS_TOOLTIP =
   'Retired credits have been taken out of circulation permanently and cannot be sold to anyone else.';
 export const SOLD_OUT = 'Sold Out';
+export const MAX_FRACTION_DIGITS_PROJECT_CREDITS = 3;

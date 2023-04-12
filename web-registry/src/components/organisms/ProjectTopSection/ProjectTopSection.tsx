@@ -21,6 +21,9 @@ import ReadMore from 'web-components/lib/components/read-more';
 import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
+import { useSdgByIriQuery } from 'generated/sanity-graphql';
+import { getParty } from 'lib/transform';
+
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
@@ -28,13 +31,10 @@ import {
 } from 'components/templates/ProjectDetails/ProjectDetails.config';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
-import { useSdgByIriQuery } from '../../../generated/sanity-graphql';
 import { client } from '../../../lib/clients/sanity';
 import { getSanityImgSrc } from '../../../lib/imgSrc';
-import { getParty } from '../../../lib/transform';
 import { ProjectTopLink } from '../../atoms';
 import { ProjectBatchTotals, ProjectPageMetadata } from '../../molecules';
-import { CreditBatches } from '../CreditBatches/CreditBatches';
 import {
   ProjectTopSectionQuoteMark,
   useProjectTopSectionStyles,
@@ -54,24 +54,22 @@ function ProjectTopSection({
   projectMetadata,
   projectPageMetadata,
   sanityCreditClassData,
-  projectDeveloper,
-  landSteward,
-  landOwner,
   geojson,
   isGISFile,
-  batchData,
-  paginationParams,
-  setPaginationParams,
   onChainProjectId,
   loading,
+  landOwner,
+  landSteward,
+  projectDeveloper,
   projectWithOrderData,
   soldOutProjectsIds,
+  batchData,
 }: ProjectTopSectionProps): JSX.Element {
   const { classes } = useProjectTopSectionStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const { creditClass, creditClassVersion, sdgIris, offsetGenerationMethod } =
+  const { creditClass, creditClassVersion, offsetGenerationMethod, sdgIris } =
     parseOffChainProject(offChainProject);
 
   const { projectName, area, areaUnit, placeName } =
@@ -86,6 +84,17 @@ function ProjectTopSection({
     landStewardStoryTitle,
     landStewardStory,
   } = parseProjectPageMetadata(projectPageMetadata);
+
+  const creditClassSanity = findSanityCreditClass({
+    sanityCreditClassData,
+    creditClassIdOrUrl:
+      creditClass?.onChainId ??
+      creditClassVersion?.metadata?.['schema:url'] ??
+      onChainProjectId?.split('-')?.[0], // if no offChain credit class
+  });
+
+  const displayName =
+    projectName ?? (onChainProjectId && `Project ${onChainProjectId}`) ?? '';
 
   const { data: sdgData } = useSdgByIriQuery({
     client,
@@ -104,17 +113,6 @@ function ProjectTopSection({
     title: sdg.title || '',
     imageUrl: getSanityImgSrc(sdg.image),
   }));
-
-  const creditClassSanity = findSanityCreditClass({
-    sanityCreditClassData,
-    creditClassIdOrUrl:
-      creditClass?.onChainId ??
-      creditClassVersion?.metadata?.['schema:url'] ??
-      onChainProjectId?.split('-')?.[0], // if no offChain credit class
-  });
-
-  const displayName =
-    projectName ?? (onChainProjectId && `Project ${onChainProjectId}`) ?? '';
 
   return (
     <Section classes={{ root: classes.section }}>
@@ -199,6 +197,19 @@ function ProjectTopSection({
               />
             </Link>
           )}
+          <Box>
+            {batchData?.totals && (
+              <ProjectBatchTotals
+                projectWithOrderData={projectWithOrderData}
+                soldOutProjectsIds={soldOutProjectsIds}
+                totals={batchData.totals}
+                sx={{
+                  mt: { xs: 10, sm: 12, md: 16 },
+                  mb: { xs: 10, sm: 12, md: 25 },
+                }}
+              />
+            )}
+          </Box>
           {isAnchoredProjectMetadata(projectMetadata, onChainProjectId) && (
             <ProjectPageMetadata metadata={projectMetadata} />
           )}
@@ -259,17 +270,6 @@ function ProjectTopSection({
               <Body mobileSize="xs">{quote['schema:jobTitle']}</Body>
             </div>
           )}
-          {batchData?.totals && (
-            <ProjectBatchTotals
-              projectWithOrderData={projectWithOrderData}
-              soldOutProjectsIds={soldOutProjectsIds}
-              totals={batchData.totals}
-              sx={{
-                mt: { xs: 10, sm: 12, md: 16 },
-                mb: { xs: 10, sm: 12, md: 0 },
-              }}
-            />
-          )}
         </Grid>
         <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
           <ProjectTopCard
@@ -288,24 +288,6 @@ function ProjectTopSection({
           />
         </Grid>
       </Grid>
-      {batchData?.batches && batchData.batches.length > 0 && (
-        // spacing here based on paddding-top for `<Section />` component
-        <Box sx={{ mt: { xs: 17.75, sm: 22.25 } }}>
-          <Title variant="h3" sx={{ pb: 8 }}>
-            Credit Batches
-          </Title>
-          <CreditBatches
-            creditClassId={
-              offChainProject?.creditClassByCreditClassId?.onChainId
-            }
-            creditBatches={batchData.batches}
-            filteredColumns={['projectLocation']}
-            onTableChange={setPaginationParams}
-            initialPaginationParams={paginationParams}
-            isIgnoreOffset
-          />
-        </Box>
-      )}
     </Section>
   );
 }

@@ -20,7 +20,7 @@ const StickyBar = ({ sx = [], children }: Props): JSX.Element => {
           px: [7, 38.5],
           boxShadow: 7,
           backgroundColor: 'primary.main',
-          zIndex: 1,
+          zIndex: 2,
         },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}

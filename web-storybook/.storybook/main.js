@@ -40,6 +40,11 @@ module.exports = {
       ...config.resolve.alias,
       '@ledgerhq/devices/hid-framing': '@ledgerhq/devices/lib/hid-framing',
     };
+    config.module.rules.push({
+      test: /\.mjs$/,
+      include: /node_modules/,
+      type: 'javascript/auto',
+    });
     return config;
   },
 };

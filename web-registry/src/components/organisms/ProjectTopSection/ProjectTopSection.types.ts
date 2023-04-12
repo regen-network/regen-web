@@ -1,7 +1,6 @@
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { Party } from 'web-components/lib/components/modal/LedgerModal';
-import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import { AllCreditClassQuery, SdgByIriQuery } from 'generated/sanity-graphql';
@@ -9,7 +8,6 @@ import {
   BatchInfoWithSupply,
   BatchTotalsForProject,
 } from 'types/ledger/ecocredit';
-import { UseStateSetter } from 'types/react/use-state';
 import {
   AnchoredProjectMetadataLD,
   LegacyProjectMetadataLD,
@@ -24,21 +22,19 @@ export type ProjectTopSectionProps = {
   projectMetadata?: AnchoredProjectMetadataLD | LegacyProjectMetadataLD;
   projectPageMetadata?: ProjectPageMetadataLD;
   sanityCreditClassData?: AllCreditClassQuery;
-  landSteward?: Party;
-  projectDeveloper?: Party;
-  landOwner?: Party;
   geojson?: any;
   isGISFile?: boolean;
+  onChainProjectId?: string;
+  landSteward?: Party;
+  landOwner?: Party;
+  projectDeveloper?: Party;
+  loading?: boolean;
+  soldOutProjectsIds: string[];
+  projectWithOrderData: ProjectWithOrderData;
   batchData?: {
     batches?: BatchInfoWithSupply[];
     totals?: BatchTotalsForProject;
   };
-  paginationParams: TablePaginationParams;
-  setPaginationParams: UseStateSetter<TablePaginationParams>;
-  onChainProjectId?: string;
-  loading?: boolean;
-  soldOutProjectsIds: string[];
-  projectWithOrderData: ProjectWithOrderData;
 };
 
 export type SdgType = SdgByIriQuery['allSdg'][0];

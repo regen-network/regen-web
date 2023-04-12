@@ -22,7 +22,7 @@ function LinkedInIcon({
 
   return (
     <SvgIcon
-      className={cx(className, classes.root)}
+      className={cx(classes.root, className)}
       viewBox="0 0 38 37"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

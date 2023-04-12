@@ -38,9 +38,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     },
   },
   button: {
-    fontSize: theme.spacing(3.5),
-    height: theme.spacing(12.5),
-    padding: theme.spacing(2.5),
+    height: '100%',
   },
   community: {
     [theme.breakpoints.up('sm')]: {
@@ -116,32 +114,38 @@ export default function Footer({
       }}
     >
       <Section>
-        <Grid container>
-          <Grid item xs={12} sm={2}>
+        <Grid
+          container
+          sx={{
+            flexDirection: { xs: 'column', sm: 'row' },
+            justifyContent: { xs: 'flex-start', md: 'center' },
+          }}
+        >
+          <Grid item sx={{ mr: 7 }}>
             <FooterItem
               title={footerItems[0].title}
               items={footerItems[0].items}
             />
           </Grid>
-          <Grid item xs={12} sm={2}>
+          <Grid item sx={{ mr: 7 }}>
             <FooterItem
               title={footerItems[1].title}
               items={footerItems[1].items}
             />
           </Grid>
-          <Grid item xs={12} sm={2}>
+          <Grid item sx={{ mr: 7 }}>
             <FooterItem
               title={footerItems[2].title}
               items={footerItems[2].items}
             />
           </Grid>
-          <Grid item xs={12} sm={2}>
+          <Grid item sx={{ mr: 7 }}>
             <FooterItem
               title={footerItems[3].title}
               items={footerItems[3].items}
             />
           </Grid>
-          <Grid item xs={12} sm={4} className={classes.footerItem}>
+          <Grid item className={classes.footerItem}>
             <Label size="lg" sx={sxs.text}>
               subscribe
             </Label>
@@ -186,7 +190,10 @@ export default function Footer({
             </Link>
           </Grid>
           <Grid item>
-            <Body size="sm">© 2021 Regen Network Development, Inc</Body>
+            <Body
+              sx={{ color: 'primary.main' }}
+              size="sm"
+            >{`© ${new Date().getUTCFullYear()} Regen Network Development, Inc`}</Body>
           </Grid>
         </Grid>
       </Section>

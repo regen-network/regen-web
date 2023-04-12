@@ -66,6 +66,8 @@ const useStyles = makeStyles()((theme: Theme) => ({
     margin: '0 auto',
   },
   textField: {
+    width: 'auto',
+    display: 'flex',
     [theme.breakpoints.down('sm')]: {
       paddingRight: theme.spacing(1.75),
     },
@@ -168,7 +170,7 @@ export default function NewsletterForm({
               </Grid>
               <Grid item xs={gridXs.button}>
                 <ContainedButton
-                  size="large"
+                  size="small"
                   className={buttonClassName}
                   disabled={(submitCount > 0 && !isValid) || isSubmitting}
                   onClick={submitForm}

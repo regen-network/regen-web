@@ -85,7 +85,6 @@ export const projectImpactCard = (): JSX.Element => (
       { src: '/sdgs/sdg3.svg', alt: 'sdg3' },
       { src: '/sdgs/sdg4.svg', alt: 'sdg4' },
       { src: '/sdgs/sdg8.svg', alt: 'sdg8' },
-      { src: '/sdgs/sdg12.svg', alt: 'sdg12' },
     ]}
     monitored
   />

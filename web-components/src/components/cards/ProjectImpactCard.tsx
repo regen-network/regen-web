@@ -97,7 +97,10 @@ export default function ProjectImpactCard({
               <Grid key={sdg.src} item>
                 <Box
                   component="img"
-                  sx={{ width: 97.45 }}
+                  sx={{
+                    width: { xs: 80, sm: 97.45 },
+                    height: { xs: 80, sm: 97.45 },
+                  }}
                   src={sdg.src}
                   alt={sdg.alt}
                 />

@@ -1,10 +1,11 @@
 import React from 'react';
-import { useTheme } from '@mui/styles';
-import Header, { HeaderColors } from 'web-components/lib/components/header';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import { Box } from '@mui/material';
+import { useTheme } from '@mui/styles';
+
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import Header, { HeaderColors } from 'web-components/lib/components/header';
 import { HeaderMenuItem } from 'web-components/lib/components/header/components/HeaderMenuHover/HeaderMenuHover';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 interface BoolProps {
   [key: string]: boolean;
@@ -15,7 +16,6 @@ type Props = {
 };
 
 const MarketingNav = ({ location }: Props) => {
-  const { pathname } = location;
   const theme = useTheme<Theme>();
   const headerColors: HeaderColors = {
     '/': theme.palette.primary.main,

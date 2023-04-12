@@ -1,3 +1,18 @@
+import { Box } from '@mui/material';
+import { InferGetStaticPropsType } from 'next';
+import Head from 'next/head';
+
+import BlogSection from './home/Blog/Home.blog';
+import CarbonplusSection from './home/CarbonPlus/Home.CarbonPlus';
+import ClimateSection from './home/Climate/Home.Climate';
+import EcologicalCreditCardsSection from './home/EcologicalCreditCards/Home.EcologicalCreditCards';
+import { HomeFoldSection } from './home/HomeFold/Home.HomeFold';
+import HomeLedger from './home/Ledger/Home.Ledger';
+import MarketplaceSection from './home/Marketplace/Home.Marketplace';
+import PartnersSection from './home/Partners/Home.Partners';
+import StatsSection from './home/Stats/Home.stats';
+import HomeValues from './home/Values/Home.Values';
+
 import {
   BlogSectionDocument,
   BlogSectionQuery,
@@ -21,19 +36,6 @@ import {
   ValuesSectionQuery,
 } from '@/generated/sanity-graphql';
 import { sanityClient } from '@/lib/clients/sanityClient';
-import { Box } from '@mui/material';
-import { InferGetStaticPropsType } from 'next';
-import Head from 'next/head';
-import { HomeFoldSection } from './home/HomeFold/Home.HomeFold';
-import CarbonplusSection from './home/CarbonPlus/Home.CarbonPlus';
-import ClimateSection from './home/Climate/Home.Climate';
-import MarketplaceSection from './home/Marketplace/Home.Marketplace';
-import PartnersSection from './home/Partners/Home.Partners';
-import EcologicalCreditCardsSection from './home/EcologicalCreditCards/Home.EcologicalCreditCards';
-import StatsSection from './home/Stats/Home.stats';
-import HomeValues from './home/Values/Home.Values';
-import HomeLedger from './home/Ledger/Home.Ledger';
-import BlogSection from './home/Blog/Home.blog';
 
 export default function Home({
   homeFoldData,

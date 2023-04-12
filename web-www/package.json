@@ -7,7 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "graphql:codegen-sanity": "graphql-codegen --config sanity-codegen.yml"
+    "graphql:codegen-sanity": "graphql-codegen --config sanity-codegen.yml",
+    "eslint": "eslint .  -c .eslintrc.js --max-warnings 0 --ext .ts,.tsx",
+    "eslint-fix": "eslint . --fix -c .eslintrc.js --ext .ts,.tsx",
+    "format": "prettier --write --loglevel warn './src/**/*.{ts,tsx,json,md,css}'",
+    "format-and-fix": "yarn format && yarn eslint-fix"
   },
   "dependencies": {
     "@apollo/client": "^3.7.11",

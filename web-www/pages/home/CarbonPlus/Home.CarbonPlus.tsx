@@ -1,14 +1,16 @@
-import { Box } from '@mui/material';
-import Grid from '@mui/material/Grid';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
+import { ApolloQueryResult } from '@apollo/client';
+import { Box } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import Image from 'next/image';
+
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
+
+import { useCarbonPlusStyles } from './Home.CarbonPlus.styles';
 
 import { CarbonPlusSectionQuery } from '@/generated/sanity-graphql';
-import { ApolloQueryResult } from '@apollo/client';
-import { useCarbonPlusStyles } from './Home.CarbonPlus.styles';
-import Image from 'next/image';
 
 type Props = {
   carbonPlusData?: ApolloQueryResult<CarbonPlusSectionQuery>;

@@ -1,11 +1,13 @@
+import { ApolloQueryResult } from '@apollo/client';
+import Image from 'next/image';
+
 import { BlogPostProps } from 'web-components/lib/components/blog-post';
 import Section from 'web-components/lib/components/section';
 import BlogPosts from 'web-components/lib/components/sliders/BlogPosts';
 
-import { BlogSectionQuery } from '@/generated/sanity-graphql';
-import { ApolloQueryResult } from '@apollo/client';
-import Image from 'next/image';
 import { useBlogStyles } from './Home.Blog.styles';
+
+import { BlogSectionQuery } from '@/generated/sanity-graphql';
 
 type Props = {
   blogData?: ApolloQueryResult<BlogSectionQuery>;

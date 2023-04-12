@@ -1,8 +1,6 @@
 import { EcologicalCreditCardType } from '@regen-network/web-components/lib/components/molecules/EcologicalCreditCard/EcologicalCreditCard.types';
-import {
-  HomeWebEcologicalCreditCardsSectionQuery,
-  SanityHomeWebEcologicalCreditCardsSection,
-} from '../../generated/graphql';
+
+import { SanityHomeWebEcologicalCreditCardsSection } from '../../generated/graphql';
 
 export const OFFSET_GENERATION_METHOD = 'offset generation method';
 export const PROJECT_ACTIVITIES = 'project activities';

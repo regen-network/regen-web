@@ -1,14 +1,16 @@
+import { ApolloQueryResult } from '@apollo/client';
 import { Box, useTheme } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import clsx from 'clsx';
+import Image from 'next/image';
+
 import Card from 'web-components/lib/components/cards/Card';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
-import { ClimateSectionQuery } from '@/generated/sanity-graphql';
-import { ApolloQueryResult } from '@apollo/client';
 import { homeStyles } from '../common/Home.styles';
 import { useClimateStyles } from './Home.Climate.styles';
-import Image from 'next/image';
+
+import { ClimateSectionQuery } from '@/generated/sanity-graphql';
 
 const GREEN_WORDS_DESC = 2;
 

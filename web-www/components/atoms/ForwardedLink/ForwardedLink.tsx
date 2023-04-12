@@ -12,4 +12,6 @@ const ForwardedLink = React.forwardRef<HTMLAnchorElement, Props>(
   },
 );
 
+ForwardedLink.displayName = 'ForwardedLink';
+
 export default ForwardedLink;

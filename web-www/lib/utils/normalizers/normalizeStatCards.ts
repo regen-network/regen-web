@@ -1,5 +1,6 @@
-import { StatsSectionQuery } from '@/generated/sanity-graphql';
 import { StatCardType } from 'web-components/lib/components/molecules/StatCard/StatCard.types';
+
+import { StatsSectionQuery } from '@/generated/sanity-graphql';
 
 type Params = {
   content?: StatsSectionQuery['allHomePageWeb'][0]['homeWebStatsSection'];

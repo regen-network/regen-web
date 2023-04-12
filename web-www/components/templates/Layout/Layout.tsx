@@ -6,13 +6,15 @@
  */
 
 import React from 'react';
+import { useRouter } from 'next/router';
+
 import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
 import Footer from 'web-components/lib/components/footer';
 
-import { MarketingNav } from '@/components/organisms/MarketingNav/MarketingNav';
 import { footerItems } from './Layout.config';
 import { useLayoutStyles } from './Layout.styles';
-import { useRouter } from 'next/router';
+
+import { MarketingNav } from '@/components/organisms/MarketingNav/MarketingNav';
 
 type Props = {
   children: React.ReactNode;

@@ -1,12 +1,14 @@
-import { EcologicalCreditCardsSectionQuery } from '@/generated/sanity-graphql';
 import { ApolloQueryResult } from '@apollo/client';
-import { Link } from '@mui/material';
+
 import EcologicalCreditCard from 'web-components/lib/components/molecules/EcologicalCreditCard';
 import Section from 'web-components/lib/components/organisms/Section';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
+
 import { useEcologicalCreditCardsStyles } from './Home.ecologicalCreditCards.styles';
+
+import ForwardedLink from '@/components/atoms/ForwardedLink/ForwardedLink';
+import { EcologicalCreditCardsSectionQuery } from '@/generated/sanity-graphql';
 import { normalizeEcologicalCreditCards } from '@/lib/utils/normalizers/normalizeEcologicalCreditCards';
-import ForwardedLink from '@/components/atoms/ForwardLink/ForwardedLink';
 
 type Props = {
   ecologicalCreditCardsData?: ApolloQueryResult<EcologicalCreditCardsSectionQuery>;

@@ -1,6 +1,8 @@
-import StatCardsSection from 'web-components/lib/components/organisms/StatCardsSection';
 import React from 'react';
 import { ApolloQueryResult } from '@apollo/client';
+
+import StatCardsSection from 'web-components/lib/components/organisms/StatCardsSection';
+
 import { StatsSectionQuery } from '@/generated/sanity-graphql';
 import { normalizeStatCards } from '@/lib/utils/normalizers/normalizeStatCards';
 

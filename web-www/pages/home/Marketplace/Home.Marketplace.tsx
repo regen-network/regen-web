@@ -1,15 +1,17 @@
+import { ApolloQueryResult } from '@apollo/client';
 import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
+import Image from 'next/image';
+
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Section from 'web-components/lib/components/section';
 import Tooltip from 'web-components/lib/components/tooltip';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
-import { MarketplaceSectionQuery } from '@/generated/sanity-graphql';
-import { ApolloQueryResult } from '@apollo/client';
 import { homeStyles } from '../common/Home.styles';
 import { useMarketplaceStyles } from './Home.Marketplace.styles';
-import Image from 'next/image';
+
+import { MarketplaceSectionQuery } from '@/generated/sanity-graphql';
 
 type Props = {
   marketplaceData?: ApolloQueryResult<MarketplaceSectionQuery>;

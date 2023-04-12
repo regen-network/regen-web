@@ -1,11 +1,13 @@
+import { ApolloQueryResult } from '@apollo/client';
+import Image from 'next/image';
+
 import { ImageItemProps } from 'web-components/lib/components/image-item';
 import Section from 'web-components/lib/components/section';
 import ImageItems from 'web-components/lib/components/sliders/ImageItems';
 
-import { ValuesSectionQuery } from '@/generated/sanity-graphql';
-import { ApolloQueryResult } from '@apollo/client';
 import { useValuesStyles } from './Home.Values.styles';
-import Image from 'next/image';
+
+import { ValuesSectionQuery } from '@/generated/sanity-graphql';
 
 type Props = {
   valuesData?: ApolloQueryResult<ValuesSectionQuery>;

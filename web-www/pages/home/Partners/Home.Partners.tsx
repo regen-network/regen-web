@@ -1,9 +1,11 @@
 import React from 'react';
-import CarouselSection from 'web-components/lib/components/organisms/CarouselSection';
-import { Box } from '@mui/material';
-import { PartnersSectionQuery } from '@/generated/sanity-graphql';
 import { ApolloQueryResult } from '@apollo/client';
+import { Box } from '@mui/material';
 import Image from 'next/image';
+
+import CarouselSection from 'web-components/lib/components/organisms/CarouselSection';
+
+import { PartnersSectionQuery } from '@/generated/sanity-graphql';
 
 type Props = {
   partnersData?: ApolloQueryResult<PartnersSectionQuery>;

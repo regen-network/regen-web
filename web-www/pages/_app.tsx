@@ -1,9 +1,8 @@
 import { ThemeProvider } from '@mui/material/styles';
 import type { AppProps } from 'next/app';
+import { createEmotionSsrAdvancedApproach } from 'tss-react/next/pagesDir';
 
 import theme from 'web-components/lib/theme/muiTheme';
-
-import { createEmotionSsrAdvancedApproach } from 'tss-react/next/pagesDir';
 
 import '../styles/font.css';
 import '../styles/web-components.css';

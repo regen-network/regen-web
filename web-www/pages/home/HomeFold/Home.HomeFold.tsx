@@ -1,9 +1,12 @@
-import { Box } from '@mui/material';
-import { useHomeFoldStyles } from './Home.HomeFold.styles';
-import { HomeFoldSectionQuery } from '@/generated/sanity-graphql';
-import { Body, Title } from 'web-components/lib/components/typography/index';
 import { ApolloQueryResult } from '@apollo/client';
+import { Box } from '@mui/material';
 import clsx from 'clsx';
+
+import { Body, Title } from 'web-components/lib/components/typography/index';
+
+import { useHomeFoldStyles } from './Home.HomeFold.styles';
+
+import { HomeFoldSectionQuery } from '@/generated/sanity-graphql';
 
 type Props = {
   className?: string;

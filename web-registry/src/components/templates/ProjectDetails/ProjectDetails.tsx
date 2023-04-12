@@ -31,6 +31,7 @@ import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/Cr
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import { CreditBatchesSection } from 'components/organisms/CreditBatchesSection/CreditBatchesSection';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
+import { ProjectStorySection } from 'components/organisms/ProjectStorySection/ProjectStorySection';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { usePaginatedBatchesByProject } from 'hooks/batches/usePaginatedBatchesByProject';
 
@@ -301,6 +302,8 @@ function ProjectDetails(): JSX.Element {
         paginationParams={paginationParams}
         setPaginationParams={setPaginationParams}
       />
+
+      <ProjectStorySection projectPageMetadata={offChainProjectMetadata} />
 
       {impactData?.length > 0 && (
         <div className="topo-background-alternate">

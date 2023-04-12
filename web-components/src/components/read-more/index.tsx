@@ -55,7 +55,7 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
   const texts: Texts = truncate(children, maxLength, restMinLength);
   const Button: React.FC<React.PropsWithChildren<unknown>> = () => (
     <ExpandButton
-      sx={{ ml: 4, pt: [0, 0], pb: [0, 0] }}
+      sx={{ pt: [0, 0], pb: [0, 0] }}
       onClick={() => setExpanded(!expanded)}
       expanded={expanded}
     />

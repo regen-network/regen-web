@@ -30,7 +30,6 @@ export interface ProjectPageMetadataLD {
   'regen:creditClassId': string;
   'regen:previewPhoto'?: string;
   'regen:galleryPhotos'?: string[];
-  'regen:videoURL'?: string;
   'schema:creditText'?: string;
   'schema:description'?: string;
 
@@ -38,13 +37,19 @@ export interface ProjectPageMetadataLD {
   'schema:image'?: string;
   'regen:glanceText'?: string[];
   'regen:landStory'?: string;
-  'regen:landStewardStory'?: string;
-  'regen:landStewardStoryTitle'?: string;
-  'regen:landStewardPhoto'?: string;
+  'regen:story'?: string;
+  'regen:storyTitle'?: string;
+  'regen:storyMedia'?: ProjectStoryMedia;
   'regen:projectQuote'?: ProjectQuote;
   'regen:boundaries'?: string;
   'regen:landManagementActions'?: NameImageDescription[];
 }
+
+export type ProjectStoryMedia = {
+  '@type': 'schema:ImageObject' | 'schema:VideoObject';
+  'schema:url': string;
+  'schema:creditText'?: string;
+};
 
 interface Context {
   schema: string;

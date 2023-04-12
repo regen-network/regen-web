@@ -1,4 +1,4 @@
-import { Box, Card, CardMedia, SxProps } from '@mui/material';
+import { Box, Card, SxProps } from '@mui/material';
 
 import { Flex } from '../../../components/box';
 import ContainedButton from '../../../components/buttons/ContainedButton';
@@ -12,12 +12,12 @@ import { EcologicalCreditCardType } from './EcologicalCreditCard.types';
 
 export interface EcologicalCreditCardProps extends EcologicalCreditCardType {
   linkComponent?: LinkComponentProp;
+  children?: React.ReactNode;
   sx?: SxProps<Theme>;
 }
 
 const EcologicalCreditCard = ({
   type,
-  image,
   title,
   infos,
   description,
@@ -25,6 +25,7 @@ const EcologicalCreditCard = ({
   projectActivitesList,
   button,
   linkComponent,
+  children,
   sx = [],
 }: EcologicalCreditCardProps): JSX.Element => {
   return (
@@ -43,15 +44,7 @@ const EcologicalCreditCard = ({
       ]}
     >
       <Box sx={{ position: 'relative' }}>
-        <CardMedia
-          src={image.src}
-          component="img"
-          alt={image.alt}
-          sx={{
-            height: { xs: 216, md: '100%' },
-            width: { xs: '100%', md: 400 },
-          }}
-        />
+        {children}
         <CardRibbon
           icon={type.icon}
           label={type.name}

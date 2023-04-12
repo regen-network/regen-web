@@ -1,4 +1,5 @@
 import { ApolloQueryResult } from '@apollo/client';
+import Image from 'next/image';
 
 import EcologicalCreditCard from 'web-components/lib/components/molecules/EcologicalCreditCard';
 import Section from 'web-components/lib/components/organisms/Section';
@@ -33,14 +34,24 @@ const EcologicalCreditCardsSection = ({ ecologicalCreditCardsData }: Props) => {
       }}
     >
       <ResponsiveSlider
-        items={cards.map(card => (
-          <EcologicalCreditCard
-            key={card.title}
-            linkComponent={ForwardedLink}
-            sx={{ mb: { xs: 5, sm: 7.5 } }}
-            {...card}
-          />
-        ))}
+        items={cards.map(card => {
+          return (
+            <EcologicalCreditCard
+              key={card.title}
+              linkComponent={ForwardedLink}
+              sx={{ mb: { xs: 5, sm: 7.5 } }}
+              {...card}
+            >
+              <Image
+                src={card.image.src}
+                alt={String(card.title)}
+                width={400}
+                height={492}
+                className={classes.image}
+              />
+            </EcologicalCreditCard>
+          );
+        })}
         slidesToShow={1}
         adaptiveHeight
         dots

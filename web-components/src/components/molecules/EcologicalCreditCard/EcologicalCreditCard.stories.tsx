@@ -1,3 +1,4 @@
+import { CardMedia } from '@mui/material';
 import { Box } from '@mui/system';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
@@ -11,7 +12,17 @@ export default {
 
 const Template: ComponentStory<typeof EcologicalCreditCard> = args => (
   <Box sx={{ maxWidth: 1140 }}>
-    <EcologicalCreditCard {...args} />
+    <EcologicalCreditCard {...args}>
+      <CardMedia
+        src={args.image.src}
+        component="img"
+        alt={args.image.alt}
+        sx={{
+          height: { xs: 216, md: '100%' },
+          width: { xs: '100%', md: 400 },
+        }}
+      />
+    </EcologicalCreditCard>
   </Box>
 );
 

@@ -12,4 +12,15 @@ export const useEcologicalCreditCardsStyles = makeStyles()(theme => ({
       },
     },
   },
+  image: {
+    objectFit: 'cover',
+    [theme.breakpoints.down('md')]: {
+      height: 216,
+      width: '100%',
+    },
+    [theme.breakpoints.up('md')]: {
+      height: '100%',
+      width: 400,
+    },
+  },
 }));

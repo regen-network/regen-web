@@ -10,7 +10,7 @@ import { Title } from 'web-components/lib/components/typography';
 import { AllBuyModalOptionsQuery } from 'generated/sanity-graphql';
 import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
 import { onBtnClick } from 'lib/button';
-import { Track } from 'lib/tracker/types';
+import { BuyModalEvent, Track } from 'lib/tracker/types';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
@@ -66,17 +66,20 @@ export const BuyModalOptions = ({
                 onClick: card?.button?.buttonLink
                   ? () => {
                       if (track && location) {
-                        track('buyScheduleCall', {
-                          url: location.pathname,
-                          projectId: selectedProject?.id,
-                          creditClassId: selectedProject?.creditClassId,
-                        });
+                        track<'buyScheduleCall', BuyModalEvent>(
+                          'buyScheduleCall',
+                          {
+                            url: location.pathname,
+                            projectId: selectedProject?.id,
+                            creditClassId: selectedProject?.creditClassId,
+                          },
+                        );
                       }
                       onBtnClick(openModal, card?.button);
                     }
                   : () => {
                       if (track && location) {
-                        track('buyKeplr', {
+                        track<'buyKeplr', BuyModalEvent>('buyKeplr', {
                           url: location.pathname,
                           projectId: selectedProject?.id,
                           creditClassId: selectedProject?.creditClassId,

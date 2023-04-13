@@ -207,3 +207,11 @@ export interface TakeFromBasketSuccess extends TakeBaseQuantityEvent {
 export interface TakeFromBasketFailure extends TakeBaseQuantityEvent {
   errorMessage: string | undefined;
 }
+
+// Buy modal options event tracking specification
+
+export interface BuyModalEvent {
+  creditClassId?: string | null;
+  projectId?: string | null;
+  url: string;
+}

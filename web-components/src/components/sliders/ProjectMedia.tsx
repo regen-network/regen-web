@@ -291,48 +291,7 @@ export default function ProjectMedia({
     <div>
       {matches && gridView ? (
         <>
-          {assets.length >= 4 && (
-            <Grid container className={classes.grid}>
-              <Grid item className={classes.sideGrid}>
-                <ProjectAsset
-                  asset={assets[0]}
-                  apiServerUrl={apiServerUrl}
-                  imageStorageBaseUrl={imageStorageBaseUrl}
-                  classes={classes}
-                />
-                {imageCredits && (
-                  <div className={classes.imageCredits}>{imageCredits}</div>
-                )}
-              </Grid>
-              <Grid item className={classes.centreGrid}>
-                <div className={classes.imageContainer}>
-                  <ProjectAsset
-                    asset={assets[1]}
-                    apiServerUrl={apiServerUrl}
-                    imageStorageBaseUrl={imageStorageBaseUrl}
-                    classes={classes}
-                  />
-                </div>
-                <div className={classes.imageContainer}>
-                  <ProjectAsset
-                    asset={assets[2]}
-                    apiServerUrl={apiServerUrl}
-                    imageStorageBaseUrl={imageStorageBaseUrl}
-                    classes={classes}
-                  />
-                </div>
-              </Grid>
-              <Grid item className={classes.sideGrid}>
-                <ProjectAsset
-                  asset={assets[3]}
-                  apiServerUrl={apiServerUrl}
-                  imageStorageBaseUrl={imageStorageBaseUrl}
-                  classes={classes}
-                />
-              </Grid>
-            </Grid>
-          )}
-          {assets.length >= 1 && assets.length <= 3 && (
+          {assets.length > 0 && (
             <Grid
               container
               columnSpacing={5}

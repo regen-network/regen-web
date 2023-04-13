@@ -12,31 +12,27 @@ function CreditBatchesSection({
   batchData,
   paginationParams,
   setPaginationParams,
-}: ProjectMiddleSectionProps): JSX.Element {
+}: ProjectMiddleSectionProps): JSX.Element | null {
   const { classes } = useProjectTopSectionStyles();
 
-  return (
+  return batchData?.batches && batchData.batches.length > 0 ? (
     <Section classes={{ root: classes.section }}>
-      {batchData?.batches && batchData.batches.length > 0 && (
-        // spacing here based on padding-top for `<Section />` component
-        <Box sx={{ mt: { xs: 17.75, sm: 22.25 } }}>
-          <Title variant="h3" sx={{ pb: 8 }}>
-            Credit Batches
-          </Title>
-          <CreditBatches
-            creditClassId={
-              offChainProject?.creditClassByCreditClassId?.onChainId
-            }
-            creditBatches={batchData.batches}
-            filteredColumns={['projectLocation']}
-            onTableChange={setPaginationParams}
-            initialPaginationParams={paginationParams}
-            isIgnoreOffset
-          />
-        </Box>
-      )}
+      {/* spacing here based on padding-top for `<Section />` component */}
+      <Box sx={{ mt: { xs: 17.75, sm: 22.25 } }}>
+        <Title variant="h3" sx={{ pb: 8 }}>
+          Credit Batches
+        </Title>
+        <CreditBatches
+          creditClassId={offChainProject?.creditClassByCreditClassId?.onChainId}
+          creditBatches={batchData.batches}
+          filteredColumns={['projectLocation']}
+          onTableChange={setPaginationParams}
+          initialPaginationParams={paginationParams}
+          isIgnoreOffset
+        />
+      </Box>
     </Section>
-  );
+  ) : null;
 }
 
 export { CreditBatchesSection };

@@ -1,0 +1,17 @@
+fragment climateSectionFields on HomePageWeb {
+  climateSection {
+    header
+    description
+    image {
+      ...imageFields
+    }
+    solution {
+      title
+      body
+    }
+    problem {
+      title
+      body
+    }
+  }
+}

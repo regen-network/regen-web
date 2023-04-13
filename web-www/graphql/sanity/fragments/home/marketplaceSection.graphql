@@ -1,0 +1,15 @@
+fragment marketplaceSectionFields on HomePageWeb {
+  marketplaceSection {
+    header
+    tooltip
+    body {
+      green
+      middle
+      popover
+      end
+    }
+    callToActions {
+      ...callToActionFields
+    }
+  }
+}

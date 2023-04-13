@@ -1,4 +1,3 @@
-import { ApolloQueryResult } from '@apollo/client';
 import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Image from 'next/image';
@@ -11,21 +10,20 @@ import { Body, Label, Title } from 'web-components/lib/components/typography';
 import { homeStyles } from '../common/Home.styles';
 import { useMarketplaceStyles } from './Home.Marketplace.styles';
 
-import { MarketplaceSectionQuery } from '@/generated/sanity-graphql';
+import { MarketplaceSectionFieldsFragment } from '@/generated/sanity-graphql';
 
 type Props = {
-  marketplaceData?: ApolloQueryResult<MarketplaceSectionQuery>;
+  marketplaceData?: MarketplaceSectionFieldsFragment['marketplaceSection'];
 };
 
 const MarketplaceSection = ({ marketplaceData }: Props) => {
   const { classes: styles } = useMarketplaceStyles();
-  const data = marketplaceData?.data.allHomePageWeb[0].marketplaceSection;
 
   return (
     <Section classes={{ root: styles.root }}>
       <div className={styles.inner}>
         <Label size="lg" sx={{ color: 'info.main', mb: 5 }}>
-          {data?.header}
+          {marketplaceData?.header}
         </Label>
         <Title variant="h2" align="center">
           <Box
@@ -34,16 +32,18 @@ const MarketplaceSection = ({ marketplaceData }: Props) => {
             component="a"
             sx={homeStyles.greenGradient}
           >
-            {data?.body?.green}{' '}
+            {marketplaceData?.body?.green}{' '}
           </Box>
-          {data?.body?.middle}{' '}
-          <Tooltip arrow placement="top" title={data?.tooltip || ''}>
-            <span className={styles.popover}>{data?.body?.popover}</span>
+          {marketplaceData?.body?.middle}{' '}
+          <Tooltip arrow placement="top" title={marketplaceData?.tooltip || ''}>
+            <span className={styles.popover}>
+              {marketplaceData?.body?.popover}
+            </span>
           </Tooltip>{' '}
-          {data?.body?.end}
+          {marketplaceData?.body?.end}
         </Title>
         <Grid container spacing={3}>
-          {data?.callToActions?.map((cta, i) => {
+          {marketplaceData?.callToActions?.map((cta, i) => {
             return !cta ? null : (
               <Grid key={cta.header || i} className={styles.gridItem} item xs>
                 <Image

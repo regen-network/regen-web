@@ -1,0 +1,10 @@
+fragment carbonPlusSectionFields on HomePageWeb {
+  carbonPlusSection {
+    smallHeaderFeatured
+    smallHeaderCreditName
+    header
+    description
+    linkText
+    linkUrl
+  }
+}

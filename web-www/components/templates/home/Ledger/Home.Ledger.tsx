@@ -1,4 +1,3 @@
-import { ApolloQueryResult } from '@apollo/client';
 import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Image from 'next/image';
@@ -9,15 +8,14 @@ import { Body, Title } from 'web-components/lib/components/typography';
 import { homeStyles } from '../common/Home.styles';
 import { useLedgerStyles } from './Home.Ledger.styles';
 
-import { LedgerSectionQuery } from '@/generated/sanity-graphql';
+import { LedgerSectionFieldsFragment } from '@/generated/sanity-graphql';
 
 type Props = {
-  ledgerData?: ApolloQueryResult<LedgerSectionQuery>;
+  ledgerDescription?: LedgerSectionFieldsFragment['ledgerDescription'];
 };
 
-const HomeLedger = ({ ledgerData }: Props) => {
+const HomeLedger = ({ ledgerDescription }: Props) => {
   const { classes: styles } = useLedgerStyles();
-  const content = ledgerData?.data.allHomePageWeb[0];
 
   return (
     <Box
@@ -58,7 +56,7 @@ const HomeLedger = ({ ledgerData }: Props) => {
             </Box>
           </Title>
           <Body size="xl" mobileSize="md" sx={{ pb: [6, 8.5], pt: [3, 5] }}>
-            {content?.ledgerDescription}
+            {ledgerDescription}
           </Body>
           <ContainedButton size="large" href="https://docs.regen.network/">
             Learn More

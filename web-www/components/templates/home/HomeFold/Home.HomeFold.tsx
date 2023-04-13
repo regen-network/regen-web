@@ -1,4 +1,3 @@
-import { ApolloQueryResult } from '@apollo/client';
 import { Box } from '@mui/material';
 import clsx from 'clsx';
 
@@ -6,20 +5,17 @@ import { Body, Title } from 'web-components/lib/components/typography/index';
 
 import { useHomeFoldStyles } from './Home.HomeFold.styles';
 
-import { HomeFoldSectionQuery } from '@/generated/sanity-graphql';
+import { HomeFoldSectionFieldsFragment } from '@/generated/sanity-graphql';
 
 type Props = {
   className?: string;
-  homeFoldData?: ApolloQueryResult<HomeFoldSectionQuery>;
+  homeFoldData?: HomeFoldSectionFieldsFragment['homeFoldSection'];
 };
 
 export const HomeFoldSection = ({ className, homeFoldData }: Props) => {
   const { classes } = useHomeFoldStyles();
-  const homeFoldSection =
-    homeFoldData?.data.allHomePageWeb?.[0]?.homeFoldSection;
   const bgImage =
-    homeFoldSection?.image?.image?.asset?.url ??
-    homeFoldSection?.image?.imageHref;
+    homeFoldData?.image?.image?.asset?.url ?? homeFoldData?.image?.imageHref;
 
   return (
     <Box
@@ -53,7 +49,7 @@ export const HomeFoldSection = ({ className, homeFoldData }: Props) => {
             mb: 3,
           }}
         >
-          {homeFoldSection?.title}
+          {homeFoldData?.title}
         </Title>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Body
@@ -66,7 +62,7 @@ export const HomeFoldSection = ({ className, homeFoldData }: Props) => {
               textShadow: '0px 4px 10px rgba(0, 0, 0, 0.3)',
             }}
           >
-            {homeFoldSection?.body}
+            {homeFoldData?.body}
           </Body>
         </Box>
       </Box>

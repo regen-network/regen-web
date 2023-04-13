@@ -1,0 +1,14 @@
+fragment statsSectionFields on HomePageWeb {
+  homeWebStatsSection {
+    label
+    title
+    cards {
+      label
+      stat
+      descriptionRaw
+      image {
+        ...customImageFields
+      }
+    }
+  }
+}

@@ -1,4 +1,3 @@
-import { ApolloQueryResult } from '@apollo/client';
 import Image from 'next/image';
 
 import { ImageItemProps } from 'web-components/lib/components/image-item';
@@ -7,30 +6,31 @@ import ImageItems from 'web-components/lib/components/sliders/ImageItems';
 
 import { useValuesStyles } from './Home.Values.styles';
 
-import { ValuesSectionQuery } from '@/generated/sanity-graphql';
+import { ValuesSectionFieldsFragment } from '@/generated/sanity-graphql';
 
 type Props = {
-  valuesData?: ApolloQueryResult<ValuesSectionQuery>;
+  valuesData?: ValuesSectionFieldsFragment['valuesSection'];
 };
 
 const HomeValues = ({ valuesData }: Props) => {
   const { classes: styles } = useValuesStyles();
-  const content = valuesData?.data.allHomePageWeb[0].valuesSection;
 
-  const imageItems: ImageItemProps[] = (content?.imageItems || []).map(item => {
-    return {
-      title: item?.title || '',
-      description: item?.description || '',
-      img: (
-        <Image
-          src={String(item?.image?.asset?.url)}
-          alt={item?.title || ''}
-          width={Number(item?.image?.asset?.metadata?.dimensions?.width)}
-          height={Number(item?.image?.asset?.metadata?.dimensions?.height)}
-        />
-      ),
-    };
-  }) as ImageItemProps[];
+  const imageItems: ImageItemProps[] = (valuesData?.imageItems || []).map(
+    item => {
+      return {
+        title: item?.title || '',
+        description: item?.description || '',
+        img: (
+          <Image
+            src={String(item?.image?.asset?.url)}
+            alt={item?.title || ''}
+            width={Number(item?.image?.asset?.metadata?.dimensions?.width)}
+            height={Number(item?.image?.asset?.metadata?.dimensions?.height)}
+          />
+        ),
+      };
+    },
+  ) as ImageItemProps[];
 
   return (
     <Section
@@ -38,7 +38,7 @@ const HomeValues = ({ valuesData }: Props) => {
       className={styles.root}
       titleVariant="h1"
       titleLineHeight="130%"
-      title={content?.header || ''}
+      title={valuesData?.header || ''}
     >
       <div className={styles.sliderContainer}>
         <ImageItems

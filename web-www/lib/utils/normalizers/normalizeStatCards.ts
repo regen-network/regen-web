@@ -1,14 +1,14 @@
 import { StatCardType } from 'web-components/lib/components/molecules/StatCard/StatCard.types';
 
-import { StatsSectionQuery } from '@/generated/sanity-graphql';
+import { StatsSectionFieldsFragment } from '@/generated/sanity-graphql';
 
 type Params = {
-  content?: StatsSectionQuery['allHomePageWeb'][0]['homeWebStatsSection'];
+  statsData?: StatsSectionFieldsFragment['homeWebStatsSection'];
 };
 
-export const normalizeStatCards = ({ content }: Params): StatCardType[] => {
+export const normalizeStatCards = ({ statsData }: Params): StatCardType[] => {
   return (
-    content?.cards?.map(card => ({
+    statsData?.cards?.map(card => ({
       label: card?.label ?? '',
       stat: card?.stat ?? '',
       description: card?.descriptionRaw ?? '',

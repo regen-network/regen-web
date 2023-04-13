@@ -1,5 +1,0 @@
-query ledgerSection {
-  allHomePageWeb {
-    ledgerDescription
-  }
-}

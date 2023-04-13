@@ -16,39 +16,29 @@ import HomeValues from '../components/templates/home/Values/Home.Values';
 import {
   BlogSectionDocument,
   BlogSectionQuery,
-  CarbonPlusSectionDocument,
-  CarbonPlusSectionQuery,
-  ClimateSectionDocument,
-  ClimateSectionQuery,
-  EcologicalCreditCardsSectionDocument,
-  EcologicalCreditCardsSectionQuery,
-  HomeFoldSectionDocument,
-  HomeFoldSectionQuery,
-  LedgerSectionDocument,
-  LedgerSectionQuery,
-  MarketplaceSectionDocument,
-  MarketplaceSectionQuery,
+  HomePageWebDocument,
+  HomePageWebQuery,
   PartnersSectionDocument,
   PartnersSectionQuery,
-  StatsSectionDocument,
-  StatsSectionQuery,
-  ValuesSectionDocument,
-  ValuesSectionQuery,
 } from '@/generated/sanity-graphql';
 import { sanityClient } from '@/lib/clients/sanityClient';
 
 export default function Home({
-  homeFoldData,
-  carbonPlusData,
-  climateData,
-  marketplaceData,
+  homeData,
   partnersData,
-  ecologicalCreditCardsData,
-  statsData,
-  valuesData,
-  ledgerData,
   blogData,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const allHomePageWeb = homeData.data.allHomePageWeb[0];
+  const homeFoldData = allHomePageWeb.homeFoldSection;
+  const carbonPlusData = allHomePageWeb.carbonPlusSection;
+  const climateData = allHomePageWeb.climateSection;
+  const marketplaceData = allHomePageWeb.marketplaceSection;
+  const ecologicalCreditCardsData =
+    allHomePageWeb.homeWebEcologicalCreditCardsSection;
+  const statsData = allHomePageWeb.homeWebStatsSection;
+  const valuesData = allHomePageWeb.valuesSection;
+  const ledgerDescription = allHomePageWeb.ledgerDescription;
+
   return (
     <>
       <Head>
@@ -68,7 +58,7 @@ export default function Home({
         />
         <StatsSection statsData={statsData} />
         <HomeValues valuesData={valuesData} />
-        <HomeLedger ledgerData={ledgerData} />
+        <HomeLedger ledgerDescription={ledgerDescription} />
         <BlogSection blogData={blogData} />
       </Box>
     </>
@@ -76,44 +66,12 @@ export default function Home({
 }
 
 export const getStaticProps = async () => {
-  const [
-    homeFoldData,
-    carbonPlusData,
-    climateData,
-    marketplaceData,
-    partnersData,
-    ecologicalCreditCardsData,
-    statsData,
-    valuesData,
-    ledgerData,
-    blogData,
-  ] = await Promise.all([
-    sanityClient.query<HomeFoldSectionQuery>({
-      query: HomeFoldSectionDocument,
-    }),
-    sanityClient.query<CarbonPlusSectionQuery>({
-      query: CarbonPlusSectionDocument,
-    }),
-    sanityClient.query<ClimateSectionQuery>({
-      query: ClimateSectionDocument,
-    }),
-    sanityClient.query<MarketplaceSectionQuery>({
-      query: MarketplaceSectionDocument,
+  const [homeData, partnersData, blogData] = await Promise.all([
+    sanityClient.query<HomePageWebQuery>({
+      query: HomePageWebDocument,
     }),
     sanityClient.query<PartnersSectionQuery>({
       query: PartnersSectionDocument,
-    }),
-    sanityClient.query<EcologicalCreditCardsSectionQuery>({
-      query: EcologicalCreditCardsSectionDocument,
-    }),
-    sanityClient.query<StatsSectionQuery>({
-      query: StatsSectionDocument,
-    }),
-    sanityClient.query<ValuesSectionQuery>({
-      query: ValuesSectionDocument,
-    }),
-    sanityClient.query<LedgerSectionQuery>({
-      query: LedgerSectionDocument,
     }),
     sanityClient.query<BlogSectionQuery>({
       query: BlogSectionDocument,
@@ -122,15 +80,8 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      homeFoldData,
-      carbonPlusData,
-      climateData,
-      marketplaceData,
+      homeData,
       partnersData,
-      ecologicalCreditCardsData,
-      statsData,
-      valuesData,
-      ledgerData,
       blogData,
     },
   };

@@ -1,4 +1,3 @@
-import { ApolloQueryResult } from '@apollo/client';
 import { Box, useTheme } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import clsx from 'clsx';
@@ -10,25 +9,24 @@ import { Body, Label, Title } from 'web-components/lib/components/typography';
 import { homeStyles } from '../common/Home.styles';
 import { useClimateStyles } from './Home.Climate.styles';
 
-import { ClimateSectionQuery } from '@/generated/sanity-graphql';
+import { ClimateSectionFieldsFragment } from '@/generated/sanity-graphql';
 
 const GREEN_WORDS_DESC = 2;
 
 type Props = {
-  climateData?: ApolloQueryResult<ClimateSectionQuery>;
+  climateData?: ClimateSectionFieldsFragment['climateSection'];
 };
 
 const ClimateSection = ({ climateData }: Props): JSX.Element => {
   const { classes: styles } = useClimateStyles();
   const theme = useTheme();
   const downMd = useMediaQuery(theme.breakpoints.down('md'));
-  const content = climateData?.data.allHomePageWeb[0].climateSection;
 
-  const descriptionGradient = content?.description
+  const descriptionGradient = climateData?.description
     ?.split(' ')
     .slice(0, GREEN_WORDS_DESC)
     .join(' ');
-  const descriptionNormal = content?.description
+  const descriptionNormal = climateData?.description
     ?.split(' ')
     .slice(GREEN_WORDS_DESC)
     .join(' ');
@@ -62,15 +60,17 @@ const ClimateSection = ({ climateData }: Props): JSX.Element => {
           borderColor="grey.100"
           borderRadius="10px"
         >
-          <Label size="sm">{content?.problem?.title}</Label>
+          <Label size="sm">{climateData?.problem?.title}</Label>
           <Body size="lg" sx={{ pt: 2 }}>
-            {content?.problem?.body}
+            {climateData?.problem?.body}
           </Body>
         </Card>
         <Image
-          src={String(content?.image?.asset?.url)}
-          width={Number(content?.image?.asset?.metadata?.dimensions?.width)}
-          height={Number(content?.image?.asset?.metadata?.dimensions?.height)}
+          src={String(climateData?.image?.asset?.url)}
+          width={Number(climateData?.image?.asset?.metadata?.dimensions?.width)}
+          height={Number(
+            climateData?.image?.asset?.metadata?.dimensions?.height,
+          )}
           alt="Map"
           className={styles.image}
         />
@@ -81,10 +81,10 @@ const ClimateSection = ({ climateData }: Props): JSX.Element => {
           borderRadius="10px"
         >
           <Label size="sm" color="info.dark">
-            {content?.solution?.title}
+            {climateData?.solution?.title}
           </Label>
           <Body size="lg" pt={2}>
-            {content?.solution?.body}
+            {climateData?.solution?.body}
           </Body>
           {downMd && <hr className={clsx(styles.line, styles.solutionLine)} />}
         </Card>
@@ -94,7 +94,7 @@ const ClimateSection = ({ climateData }: Props): JSX.Element => {
             mobileVariant="h4"
             sx={{ color: 'black', pb: { xs: 3, md: 4 }, maxWidth: 747 }}
           >
-            {content?.header}
+            {climateData?.header}
           </Title>
           <Title
             variant="h3"

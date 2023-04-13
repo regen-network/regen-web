@@ -1,4 +1,3 @@
-import { ApolloQueryResult } from '@apollo/client';
 import Image from 'next/image';
 
 import EcologicalCreditCard from 'web-components/lib/components/molecules/EcologicalCreditCard';
@@ -8,23 +7,22 @@ import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSl
 import { useEcologicalCreditCardsStyles } from './Home.ecologicalCreditCards.styles';
 
 import ForwardedLink from '@/components/atoms/ForwardedLink/ForwardedLink';
-import { EcologicalCreditCardsSectionQuery } from '@/generated/sanity-graphql';
+import { EcologicalCreditCardsSectionFieldsFragment } from '@/generated/sanity-graphql';
 import { normalizeEcologicalCreditCards } from '@/lib/utils/normalizers/normalizeEcologicalCreditCards';
 
 type Props = {
-  ecologicalCreditCardsData?: ApolloQueryResult<EcologicalCreditCardsSectionQuery>;
+  ecologicalCreditCardsData?: EcologicalCreditCardsSectionFieldsFragment['homeWebEcologicalCreditCardsSection'];
 };
 
 const EcologicalCreditCardsSection = ({ ecologicalCreditCardsData }: Props) => {
-  const content =
-    ecologicalCreditCardsData?.data.allHomePageWeb[0]
-      .homeWebEcologicalCreditCardsSection;
-  const cards = normalizeEcologicalCreditCards({ content });
+  const cards = normalizeEcologicalCreditCards({
+    ecologicalCreditCardsData,
+  });
   const { classes } = useEcologicalCreditCardsStyles();
 
   return (
     <Section
-      title={content?.title ?? ''}
+      title={ecologicalCreditCardsData?.title ?? ''}
       sx={{
         section: {
           py: { xs: 0, lg: 0 },

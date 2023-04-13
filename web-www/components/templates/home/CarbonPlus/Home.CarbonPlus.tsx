@@ -1,6 +1,4 @@
-import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import { ApolloQueryResult } from '@apollo/client';
 import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Image from 'next/image';
@@ -10,14 +8,13 @@ import { Body, Label, Title } from 'web-components/lib/components/typography';
 
 import { useCarbonPlusStyles } from './Home.CarbonPlus.styles';
 
-import { CarbonPlusSectionQuery } from '@/generated/sanity-graphql';
+import { CarbonPlusSectionFieldsFragment } from '@/generated/sanity-graphql';
 
 type Props = {
-  carbonPlusData?: ApolloQueryResult<CarbonPlusSectionQuery>;
+  carbonPlusData?: CarbonPlusSectionFieldsFragment['carbonPlusSection'];
 };
 
 const CarbonplusSection = ({ carbonPlusData }: Props): JSX.Element => {
-  const content = carbonPlusData?.data.allHomePageWeb[0].carbonPlusSection;
   const { classes: styles } = useCarbonPlusStyles();
 
   return (
@@ -26,23 +23,25 @@ const CarbonplusSection = ({ carbonPlusData }: Props): JSX.Element => {
         <Grid item xs={12} className={styles.text}>
           <Label sx={{ pb: [5, 7] }}>
             <Box component="span" sx={{ color: 'info.main' }}>
-              {content?.smallHeaderFeatured}{' '}
+              {carbonPlusData?.smallHeaderFeatured}{' '}
             </Box>
             <Box component="span" sx={{ color: 'info.main' }}>
-              {ReactHtmlParser(content?.smallHeaderCreditName || '')}
+              {ReactHtmlParser(carbonPlusData?.smallHeaderCreditName || '')}
             </Box>
           </Label>
-          <Title variant="h3">{ReactHtmlParser(content?.header || '')}</Title>
+          <Title variant="h3">
+            {ReactHtmlParser(carbonPlusData?.header || '')}
+          </Title>
           <Body size="lg" sx={{ color: 'info.dark', py: [4, 6] }}>
-            {ReactHtmlParser(content?.description || '')}
+            {ReactHtmlParser(carbonPlusData?.description || '')}
           </Body>
           <ContainedButton
             size="large"
             className={styles.button}
-            href={content?.linkUrl || ''}
-            sx={{ width: 'fit-content' }}
+            href={carbonPlusData?.linkUrl || ''}
+            sx={{ width: 'fit-carbonPlusData' }}
           >
-            {content?.linkText}
+            {carbonPlusData?.linkText}
           </ContainedButton>
         </Grid>
         <Grid className={styles.imageContainer} item xs={12}>

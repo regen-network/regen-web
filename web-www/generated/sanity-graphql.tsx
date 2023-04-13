@@ -7191,93 +7191,6 @@ export type BlogSectionQuery = (
   )> }
 );
 
-export type CarbonPlusSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CarbonPlusSectionQuery = (
-  { __typename?: 'RootQuery' }
-  & { allHomePageWeb: Array<(
-    { __typename?: 'HomePageWeb' }
-    & { carbonPlusSection?: Maybe<(
-      { __typename?: 'CarbonPlusSection' }
-      & Pick<CarbonPlusSection, 'smallHeaderFeatured' | 'smallHeaderCreditName' | 'header' | 'description' | 'linkText' | 'linkUrl'>
-    )> }
-  )> }
-);
-
-export type ClimateSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ClimateSectionQuery = (
-  { __typename?: 'RootQuery' }
-  & { allHomePageWeb: Array<(
-    { __typename?: 'HomePageWeb' }
-    & { climateSection?: Maybe<(
-      { __typename?: 'ClimateSection' }
-      & Pick<ClimateSection, 'header' | 'description'>
-      & { image?: Maybe<(
-        { __typename?: 'Image' }
-        & ImageFieldsFragment
-      )>, solution?: Maybe<(
-        { __typename?: 'TitleBody' }
-        & Pick<TitleBody, 'title' | 'body'>
-      )>, problem?: Maybe<(
-        { __typename?: 'TitleBody' }
-        & Pick<TitleBody, 'title' | 'body'>
-      )> }
-    )> }
-  )> }
-);
-
-export type EcologicalCreditCardsSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type EcologicalCreditCardsSectionQuery = (
-  { __typename?: 'RootQuery' }
-  & { allHomePageWeb: Array<(
-    { __typename?: 'HomePageWeb' }
-    & { homeWebEcologicalCreditCardsSection?: Maybe<(
-      { __typename?: 'HomeWebEcologicalCreditCardsSection' }
-      & Pick<HomeWebEcologicalCreditCardsSection, 'title'>
-      & { cards?: Maybe<Array<Maybe<(
-        { __typename?: 'EcologicalCreditCard' }
-        & Pick<EcologicalCreditCard, 'title' | 'description'>
-        & { image?: Maybe<(
-          { __typename?: 'CustomImage' }
-          & CustomImageFieldsFragment
-        )>, type?: Maybe<(
-          { __typename?: 'CreditType' }
-          & Pick<CreditType, 'name'>
-          & { image?: Maybe<(
-            { __typename?: 'Image' }
-            & ImageFieldsFragment
-          )> }
-        )>, creditInfos?: Maybe<(
-          { __typename?: 'CreditInfos' }
-          & Pick<CreditInfos, 'country' | 'price' | 'count'>
-        )>, offsetMethods?: Maybe<Array<Maybe<(
-          { __typename?: 'OffsetMethod' }
-          & Pick<OffsetMethod, 'name'>
-          & { icon?: Maybe<(
-            { __typename?: 'Image' }
-            & ImageFieldsFragment
-          )> }
-        )>>>, projectActivities?: Maybe<Array<Maybe<(
-          { __typename?: 'ProjectActivity' }
-          & Pick<ProjectActivity, 'name'>
-          & { icon?: Maybe<(
-            { __typename?: 'Image' }
-            & ImageFieldsFragment
-          )> }
-        )>>>, button?: Maybe<(
-          { __typename?: 'Button' }
-          & ButtonFieldsFragment
-        )> }
-      )>>> }
-    )> }
-  )> }
-);
-
 export type CallToActionFieldsFragment = (
   { __typename?: 'CallToAction' }
   & Pick<CallToAction, 'caption' | 'header' | 'description' | 'linkText' | 'linkUrl'>
@@ -7330,6 +7243,139 @@ export type ButtonFieldsFragment = (
   )> }
 );
 
+export type CarbonPlusSectionFieldsFragment = (
+  { __typename?: 'HomePageWeb' }
+  & { carbonPlusSection?: Maybe<(
+    { __typename?: 'CarbonPlusSection' }
+    & Pick<CarbonPlusSection, 'smallHeaderFeatured' | 'smallHeaderCreditName' | 'header' | 'description' | 'linkText' | 'linkUrl'>
+  )> }
+);
+
+export type ClimateSectionFieldsFragment = (
+  { __typename?: 'HomePageWeb' }
+  & { climateSection?: Maybe<(
+    { __typename?: 'ClimateSection' }
+    & Pick<ClimateSection, 'header' | 'description'>
+    & { image?: Maybe<(
+      { __typename?: 'Image' }
+      & ImageFieldsFragment
+    )>, solution?: Maybe<(
+      { __typename?: 'TitleBody' }
+      & Pick<TitleBody, 'title' | 'body'>
+    )>, problem?: Maybe<(
+      { __typename?: 'TitleBody' }
+      & Pick<TitleBody, 'title' | 'body'>
+    )> }
+  )> }
+);
+
+export type EcologicalCreditCardsSectionFieldsFragment = (
+  { __typename?: 'HomePageWeb' }
+  & { homeWebEcologicalCreditCardsSection?: Maybe<(
+    { __typename?: 'HomeWebEcologicalCreditCardsSection' }
+    & Pick<HomeWebEcologicalCreditCardsSection, 'title'>
+    & { cards?: Maybe<Array<Maybe<(
+      { __typename?: 'EcologicalCreditCard' }
+      & Pick<EcologicalCreditCard, 'title' | 'description'>
+      & { image?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )>, type?: Maybe<(
+        { __typename?: 'CreditType' }
+        & Pick<CreditType, 'name'>
+        & { image?: Maybe<(
+          { __typename?: 'Image' }
+          & ImageFieldsFragment
+        )> }
+      )>, creditInfos?: Maybe<(
+        { __typename?: 'CreditInfos' }
+        & Pick<CreditInfos, 'country' | 'price' | 'count'>
+      )>, offsetMethods?: Maybe<Array<Maybe<(
+        { __typename?: 'OffsetMethod' }
+        & Pick<OffsetMethod, 'name'>
+        & { icon?: Maybe<(
+          { __typename?: 'Image' }
+          & ImageFieldsFragment
+        )> }
+      )>>>, projectActivities?: Maybe<Array<Maybe<(
+        { __typename?: 'ProjectActivity' }
+        & Pick<ProjectActivity, 'name'>
+        & { icon?: Maybe<(
+          { __typename?: 'Image' }
+          & ImageFieldsFragment
+        )> }
+      )>>>, button?: Maybe<(
+        { __typename?: 'Button' }
+        & ButtonFieldsFragment
+      )> }
+    )>>> }
+  )> }
+);
+
+export type HomeFoldSectionFieldsFragment = (
+  { __typename?: 'HomePageWeb' }
+  & { homeFoldSection?: Maybe<(
+    { __typename?: 'HomeFoldSection' }
+    & Pick<HomeFoldSection, 'title' | 'body'>
+    & { image?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
+    )> }
+  )> }
+);
+
+export type LedgerSectionFieldsFragment = (
+  { __typename?: 'HomePageWeb' }
+  & Pick<HomePageWeb, 'ledgerDescription'>
+);
+
+export type MarketplaceSectionFieldsFragment = (
+  { __typename?: 'HomePageWeb' }
+  & { marketplaceSection?: Maybe<(
+    { __typename?: 'MarketplaceSection' }
+    & Pick<MarketplaceSection, 'header' | 'tooltip'>
+    & { body?: Maybe<(
+      { __typename?: 'BodyGreenTextWithPopover' }
+      & Pick<BodyGreenTextWithPopover, 'green' | 'middle' | 'popover' | 'end'>
+    )>, callToActions?: Maybe<Array<Maybe<(
+      { __typename?: 'CallToAction' }
+      & CallToActionFieldsFragment
+    )>>> }
+  )> }
+);
+
+export type StatsSectionFieldsFragment = (
+  { __typename?: 'HomePageWeb' }
+  & { homeWebStatsSection?: Maybe<(
+    { __typename?: 'HomeWebStatsSection' }
+    & Pick<HomeWebStatsSection, 'label' | 'title'>
+    & { cards?: Maybe<Array<Maybe<(
+      { __typename?: 'StatCard' }
+      & Pick<StatCard, 'label' | 'stat' | 'descriptionRaw'>
+      & { image?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )> }
+    )>>> }
+  )> }
+);
+
+export type ValuesSectionFieldsFragment = (
+  { __typename?: 'HomePageWeb' }
+  & { valuesSection?: Maybe<(
+    { __typename?: 'HomeValuesSection' }
+    & Pick<HomeValuesSection, 'header'>
+    & { imageItems?: Maybe<Array<Maybe<(
+      { __typename?: 'ValuesImageItem' }
+      & Pick<ValuesImageItem, 'title' | 'description'>
+      & { image?: Maybe<(
+        { __typename?: 'Image' }
+        & ImageFieldsFragment
+      )> }
+    )>>> }
+  )> }
+);
+
 export type LinkFieldsFragment = (
   { __typename?: 'Link' }
   & Pick<Link, 'buttonHref'>
@@ -7339,53 +7385,21 @@ export type LinkFieldsFragment = (
   )> }
 );
 
-export type HomeFoldSectionQueryVariables = Exact<{ [key: string]: never; }>;
+export type HomePageWebQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type HomeFoldSectionQuery = (
+export type HomePageWebQuery = (
   { __typename?: 'RootQuery' }
   & { allHomePageWeb: Array<(
     { __typename?: 'HomePageWeb' }
-    & { homeFoldSection?: Maybe<(
-      { __typename?: 'HomeFoldSection' }
-      & Pick<HomeFoldSection, 'title' | 'body'>
-      & { image?: Maybe<(
-        { __typename?: 'CustomImage' }
-        & CustomImageFieldsFragment
-      )> }
-    )> }
-  )> }
-);
-
-export type LedgerSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type LedgerSectionQuery = (
-  { __typename?: 'RootQuery' }
-  & { allHomePageWeb: Array<(
-    { __typename?: 'HomePageWeb' }
-    & Pick<HomePageWeb, 'ledgerDescription'>
-  )> }
-);
-
-export type MarketplaceSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type MarketplaceSectionQuery = (
-  { __typename?: 'RootQuery' }
-  & { allHomePageWeb: Array<(
-    { __typename?: 'HomePageWeb' }
-    & { marketplaceSection?: Maybe<(
-      { __typename?: 'MarketplaceSection' }
-      & Pick<MarketplaceSection, 'header' | 'tooltip'>
-      & { body?: Maybe<(
-        { __typename?: 'BodyGreenTextWithPopover' }
-        & Pick<BodyGreenTextWithPopover, 'green' | 'middle' | 'popover' | 'end'>
-      )>, callToActions?: Maybe<Array<Maybe<(
-        { __typename?: 'CallToAction' }
-        & CallToActionFieldsFragment
-      )>>> }
-    )> }
+    & CarbonPlusSectionFieldsFragment
+    & ClimateSectionFieldsFragment
+    & EcologicalCreditCardsSectionFieldsFragment
+    & HomeFoldSectionFieldsFragment
+    & LedgerSectionFieldsFragment
+    & MarketplaceSectionFieldsFragment
+    & StatsSectionFieldsFragment
+    & ValuesSectionFieldsFragment
   )> }
 );
 
@@ -7411,50 +7425,18 @@ export type PartnersSectionQuery = (
   )> }
 );
 
-export type StatsSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type StatsSectionQuery = (
-  { __typename?: 'RootQuery' }
-  & { allHomePageWeb: Array<(
-    { __typename?: 'HomePageWeb' }
-    & { homeWebStatsSection?: Maybe<(
-      { __typename?: 'HomeWebStatsSection' }
-      & Pick<HomeWebStatsSection, 'label' | 'title'>
-      & { cards?: Maybe<Array<Maybe<(
-        { __typename?: 'StatCard' }
-        & Pick<StatCard, 'label' | 'stat' | 'descriptionRaw'>
-        & { image?: Maybe<(
-          { __typename?: 'CustomImage' }
-          & CustomImageFieldsFragment
-        )> }
-      )>>> }
-    )> }
-  )> }
-);
-
-export type ValuesSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ValuesSectionQuery = (
-  { __typename?: 'RootQuery' }
-  & { allHomePageWeb: Array<(
-    { __typename?: 'HomePageWeb' }
-    & { valuesSection?: Maybe<(
-      { __typename?: 'HomeValuesSection' }
-      & Pick<HomeValuesSection, 'header'>
-      & { imageItems?: Maybe<Array<Maybe<(
-        { __typename?: 'ValuesImageItem' }
-        & Pick<ValuesImageItem, 'title' | 'description'>
-        & { image?: Maybe<(
-          { __typename?: 'Image' }
-          & ImageFieldsFragment
-        )> }
-      )>>> }
-    )> }
-  )> }
-);
-
+export const CarbonPlusSectionFieldsFragmentDoc = gql`
+    fragment carbonPlusSectionFields on HomePageWeb {
+  carbonPlusSection {
+    smallHeaderFeatured
+    smallHeaderCreditName
+    header
+    description
+    linkText
+    linkUrl
+  }
+}
+    `;
 export const ImageFieldsFragmentDoc = gql`
     fragment imageFields on Image {
   asset {
@@ -7469,16 +7451,23 @@ export const ImageFieldsFragmentDoc = gql`
   }
 }
     `;
-export const CallToActionFieldsFragmentDoc = gql`
-    fragment callToActionFields on CallToAction {
-  caption
-  image {
-    ...imageFields
+export const ClimateSectionFieldsFragmentDoc = gql`
+    fragment climateSectionFields on HomePageWeb {
+  climateSection {
+    header
+    description
+    image {
+      ...imageFields
+    }
+    solution {
+      title
+      body
+    }
+    problem {
+      title
+      body
+    }
   }
-  header
-  description
-  linkText
-  linkUrl
 }
     ${ImageFieldsFragmentDoc}`;
 export const CustomImageFieldsFragmentDoc = gql`
@@ -7517,6 +7506,123 @@ export const ButtonFieldsFragmentDoc = gql`
   buttonBlankTarget
 }
     ${LinkFieldsFragmentDoc}`;
+export const EcologicalCreditCardsSectionFieldsFragmentDoc = gql`
+    fragment ecologicalCreditCardsSectionFields on HomePageWeb {
+  homeWebEcologicalCreditCardsSection {
+    title
+    cards {
+      title
+      description
+      image {
+        ...customImageFields
+      }
+      type {
+        name
+        image {
+          ...imageFields
+        }
+      }
+      creditInfos {
+        country
+        price
+        count
+      }
+      offsetMethods {
+        name
+        icon {
+          ...imageFields
+        }
+      }
+      projectActivities {
+        name
+        icon {
+          ...imageFields
+        }
+      }
+      button {
+        ...buttonFields
+      }
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}
+${ImageFieldsFragmentDoc}
+${ButtonFieldsFragmentDoc}`;
+export const HomeFoldSectionFieldsFragmentDoc = gql`
+    fragment homeFoldSectionFields on HomePageWeb {
+  homeFoldSection {
+    title
+    body
+    image {
+      ...customImageFields
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+export const LedgerSectionFieldsFragmentDoc = gql`
+    fragment ledgerSectionFields on HomePageWeb {
+  ledgerDescription
+}
+    `;
+export const CallToActionFieldsFragmentDoc = gql`
+    fragment callToActionFields on CallToAction {
+  caption
+  image {
+    ...imageFields
+  }
+  header
+  description
+  linkText
+  linkUrl
+}
+    ${ImageFieldsFragmentDoc}`;
+export const MarketplaceSectionFieldsFragmentDoc = gql`
+    fragment marketplaceSectionFields on HomePageWeb {
+  marketplaceSection {
+    header
+    tooltip
+    body {
+      green
+      middle
+      popover
+      end
+    }
+    callToActions {
+      ...callToActionFields
+    }
+  }
+}
+    ${CallToActionFieldsFragmentDoc}`;
+export const StatsSectionFieldsFragmentDoc = gql`
+    fragment statsSectionFields on HomePageWeb {
+  homeWebStatsSection {
+    label
+    title
+    cards {
+      label
+      stat
+      descriptionRaw
+      image {
+        ...customImageFields
+      }
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+export const ValuesSectionFieldsFragmentDoc = gql`
+    fragment valuesSectionFields on HomePageWeb {
+  valuesSection {
+    header
+    imageItems {
+      title
+      description
+      image {
+        ...imageFields
+      }
+    }
+  }
+}
+    ${ImageFieldsFragmentDoc}`;
 export const BlogSectionDocument = gql`
     query blogSection {
   allSharedSections {
@@ -7561,286 +7667,54 @@ export function useBlogSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type BlogSectionQueryHookResult = ReturnType<typeof useBlogSectionQuery>;
 export type BlogSectionLazyQueryHookResult = ReturnType<typeof useBlogSectionLazyQuery>;
 export type BlogSectionQueryResult = Apollo.QueryResult<BlogSectionQuery, BlogSectionQueryVariables>;
-export const CarbonPlusSectionDocument = gql`
-    query carbonPlusSection {
+export const HomePageWebDocument = gql`
+    query homePageWeb {
   allHomePageWeb {
-    carbonPlusSection {
-      smallHeaderFeatured
-      smallHeaderCreditName
-      header
-      description
-      linkText
-      linkUrl
-    }
+    ...carbonPlusSectionFields
+    ...climateSectionFields
+    ...ecologicalCreditCardsSectionFields
+    ...homeFoldSectionFields
+    ...ledgerSectionFields
+    ...marketplaceSectionFields
+    ...statsSectionFields
+    ...valuesSectionFields
   }
 }
-    `;
+    ${CarbonPlusSectionFieldsFragmentDoc}
+${ClimateSectionFieldsFragmentDoc}
+${EcologicalCreditCardsSectionFieldsFragmentDoc}
+${HomeFoldSectionFieldsFragmentDoc}
+${LedgerSectionFieldsFragmentDoc}
+${MarketplaceSectionFieldsFragmentDoc}
+${StatsSectionFieldsFragmentDoc}
+${ValuesSectionFieldsFragmentDoc}`;
 
 /**
- * __useCarbonPlusSectionQuery__
+ * __useHomePageWebQuery__
  *
- * To run a query within a React component, call `useCarbonPlusSectionQuery` and pass it any options that fit your needs.
- * When your component renders, `useCarbonPlusSectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useHomePageWebQuery` and pass it any options that fit your needs.
+ * When your component renders, `useHomePageWebQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useCarbonPlusSectionQuery({
+ * const { data, loading, error } = useHomePageWebQuery({
  *   variables: {
  *   },
  * });
  */
-export function useCarbonPlusSectionQuery(baseOptions?: Apollo.QueryHookOptions<CarbonPlusSectionQuery, CarbonPlusSectionQueryVariables>) {
+export function useHomePageWebQuery(baseOptions?: Apollo.QueryHookOptions<HomePageWebQuery, HomePageWebQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<CarbonPlusSectionQuery, CarbonPlusSectionQueryVariables>(CarbonPlusSectionDocument, options);
+        return Apollo.useQuery<HomePageWebQuery, HomePageWebQueryVariables>(HomePageWebDocument, options);
       }
-export function useCarbonPlusSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CarbonPlusSectionQuery, CarbonPlusSectionQueryVariables>) {
+export function useHomePageWebLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<HomePageWebQuery, HomePageWebQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<CarbonPlusSectionQuery, CarbonPlusSectionQueryVariables>(CarbonPlusSectionDocument, options);
+          return Apollo.useLazyQuery<HomePageWebQuery, HomePageWebQueryVariables>(HomePageWebDocument, options);
         }
-export type CarbonPlusSectionQueryHookResult = ReturnType<typeof useCarbonPlusSectionQuery>;
-export type CarbonPlusSectionLazyQueryHookResult = ReturnType<typeof useCarbonPlusSectionLazyQuery>;
-export type CarbonPlusSectionQueryResult = Apollo.QueryResult<CarbonPlusSectionQuery, CarbonPlusSectionQueryVariables>;
-export const ClimateSectionDocument = gql`
-    query climateSection {
-  allHomePageWeb {
-    climateSection {
-      header
-      description
-      image {
-        ...imageFields
-      }
-      solution {
-        title
-        body
-      }
-      problem {
-        title
-        body
-      }
-    }
-  }
-}
-    ${ImageFieldsFragmentDoc}`;
-
-/**
- * __useClimateSectionQuery__
- *
- * To run a query within a React component, call `useClimateSectionQuery` and pass it any options that fit your needs.
- * When your component renders, `useClimateSectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useClimateSectionQuery({
- *   variables: {
- *   },
- * });
- */
-export function useClimateSectionQuery(baseOptions?: Apollo.QueryHookOptions<ClimateSectionQuery, ClimateSectionQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ClimateSectionQuery, ClimateSectionQueryVariables>(ClimateSectionDocument, options);
-      }
-export function useClimateSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ClimateSectionQuery, ClimateSectionQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ClimateSectionQuery, ClimateSectionQueryVariables>(ClimateSectionDocument, options);
-        }
-export type ClimateSectionQueryHookResult = ReturnType<typeof useClimateSectionQuery>;
-export type ClimateSectionLazyQueryHookResult = ReturnType<typeof useClimateSectionLazyQuery>;
-export type ClimateSectionQueryResult = Apollo.QueryResult<ClimateSectionQuery, ClimateSectionQueryVariables>;
-export const EcologicalCreditCardsSectionDocument = gql`
-    query ecologicalCreditCardsSection {
-  allHomePageWeb {
-    homeWebEcologicalCreditCardsSection {
-      title
-      cards {
-        title
-        description
-        image {
-          ...customImageFields
-        }
-        type {
-          name
-          image {
-            ...imageFields
-          }
-        }
-        creditInfos {
-          country
-          price
-          count
-        }
-        offsetMethods {
-          name
-          icon {
-            ...imageFields
-          }
-        }
-        projectActivities {
-          name
-          icon {
-            ...imageFields
-          }
-        }
-        button {
-          ...buttonFields
-        }
-      }
-    }
-  }
-}
-    ${CustomImageFieldsFragmentDoc}
-${ImageFieldsFragmentDoc}
-${ButtonFieldsFragmentDoc}`;
-
-/**
- * __useEcologicalCreditCardsSectionQuery__
- *
- * To run a query within a React component, call `useEcologicalCreditCardsSectionQuery` and pass it any options that fit your needs.
- * When your component renders, `useEcologicalCreditCardsSectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useEcologicalCreditCardsSectionQuery({
- *   variables: {
- *   },
- * });
- */
-export function useEcologicalCreditCardsSectionQuery(baseOptions?: Apollo.QueryHookOptions<EcologicalCreditCardsSectionQuery, EcologicalCreditCardsSectionQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<EcologicalCreditCardsSectionQuery, EcologicalCreditCardsSectionQueryVariables>(EcologicalCreditCardsSectionDocument, options);
-      }
-export function useEcologicalCreditCardsSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<EcologicalCreditCardsSectionQuery, EcologicalCreditCardsSectionQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<EcologicalCreditCardsSectionQuery, EcologicalCreditCardsSectionQueryVariables>(EcologicalCreditCardsSectionDocument, options);
-        }
-export type EcologicalCreditCardsSectionQueryHookResult = ReturnType<typeof useEcologicalCreditCardsSectionQuery>;
-export type EcologicalCreditCardsSectionLazyQueryHookResult = ReturnType<typeof useEcologicalCreditCardsSectionLazyQuery>;
-export type EcologicalCreditCardsSectionQueryResult = Apollo.QueryResult<EcologicalCreditCardsSectionQuery, EcologicalCreditCardsSectionQueryVariables>;
-export const HomeFoldSectionDocument = gql`
-    query homeFoldSection {
-  allHomePageWeb {
-    homeFoldSection {
-      title
-      body
-      image {
-        ...customImageFields
-      }
-    }
-  }
-}
-    ${CustomImageFieldsFragmentDoc}`;
-
-/**
- * __useHomeFoldSectionQuery__
- *
- * To run a query within a React component, call `useHomeFoldSectionQuery` and pass it any options that fit your needs.
- * When your component renders, `useHomeFoldSectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useHomeFoldSectionQuery({
- *   variables: {
- *   },
- * });
- */
-export function useHomeFoldSectionQuery(baseOptions?: Apollo.QueryHookOptions<HomeFoldSectionQuery, HomeFoldSectionQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<HomeFoldSectionQuery, HomeFoldSectionQueryVariables>(HomeFoldSectionDocument, options);
-      }
-export function useHomeFoldSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<HomeFoldSectionQuery, HomeFoldSectionQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<HomeFoldSectionQuery, HomeFoldSectionQueryVariables>(HomeFoldSectionDocument, options);
-        }
-export type HomeFoldSectionQueryHookResult = ReturnType<typeof useHomeFoldSectionQuery>;
-export type HomeFoldSectionLazyQueryHookResult = ReturnType<typeof useHomeFoldSectionLazyQuery>;
-export type HomeFoldSectionQueryResult = Apollo.QueryResult<HomeFoldSectionQuery, HomeFoldSectionQueryVariables>;
-export const LedgerSectionDocument = gql`
-    query ledgerSection {
-  allHomePageWeb {
-    ledgerDescription
-  }
-}
-    `;
-
-/**
- * __useLedgerSectionQuery__
- *
- * To run a query within a React component, call `useLedgerSectionQuery` and pass it any options that fit your needs.
- * When your component renders, `useLedgerSectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useLedgerSectionQuery({
- *   variables: {
- *   },
- * });
- */
-export function useLedgerSectionQuery(baseOptions?: Apollo.QueryHookOptions<LedgerSectionQuery, LedgerSectionQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<LedgerSectionQuery, LedgerSectionQueryVariables>(LedgerSectionDocument, options);
-      }
-export function useLedgerSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LedgerSectionQuery, LedgerSectionQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<LedgerSectionQuery, LedgerSectionQueryVariables>(LedgerSectionDocument, options);
-        }
-export type LedgerSectionQueryHookResult = ReturnType<typeof useLedgerSectionQuery>;
-export type LedgerSectionLazyQueryHookResult = ReturnType<typeof useLedgerSectionLazyQuery>;
-export type LedgerSectionQueryResult = Apollo.QueryResult<LedgerSectionQuery, LedgerSectionQueryVariables>;
-export const MarketplaceSectionDocument = gql`
-    query marketplaceSection {
-  allHomePageWeb {
-    marketplaceSection {
-      header
-      tooltip
-      body {
-        green
-        middle
-        popover
-        end
-      }
-      callToActions {
-        ...callToActionFields
-      }
-    }
-  }
-}
-    ${CallToActionFieldsFragmentDoc}`;
-
-/**
- * __useMarketplaceSectionQuery__
- *
- * To run a query within a React component, call `useMarketplaceSectionQuery` and pass it any options that fit your needs.
- * When your component renders, `useMarketplaceSectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useMarketplaceSectionQuery({
- *   variables: {
- *   },
- * });
- */
-export function useMarketplaceSectionQuery(baseOptions?: Apollo.QueryHookOptions<MarketplaceSectionQuery, MarketplaceSectionQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MarketplaceSectionQuery, MarketplaceSectionQueryVariables>(MarketplaceSectionDocument, options);
-      }
-export function useMarketplaceSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MarketplaceSectionQuery, MarketplaceSectionQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MarketplaceSectionQuery, MarketplaceSectionQueryVariables>(MarketplaceSectionDocument, options);
-        }
-export type MarketplaceSectionQueryHookResult = ReturnType<typeof useMarketplaceSectionQuery>;
-export type MarketplaceSectionLazyQueryHookResult = ReturnType<typeof useMarketplaceSectionLazyQuery>;
-export type MarketplaceSectionQueryResult = Apollo.QueryResult<MarketplaceSectionQuery, MarketplaceSectionQueryVariables>;
+export type HomePageWebQueryHookResult = ReturnType<typeof useHomePageWebQuery>;
+export type HomePageWebLazyQueryHookResult = ReturnType<typeof useHomePageWebLazyQuery>;
+export type HomePageWebQueryResult = Apollo.QueryResult<HomePageWebQuery, HomePageWebQueryVariables>;
 export const PartnersSectionDocument = gql`
     query partnersSection {
   allHomePageWeb {
@@ -7883,91 +7757,3 @@ export function usePartnersSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type PartnersSectionQueryHookResult = ReturnType<typeof usePartnersSectionQuery>;
 export type PartnersSectionLazyQueryHookResult = ReturnType<typeof usePartnersSectionLazyQuery>;
 export type PartnersSectionQueryResult = Apollo.QueryResult<PartnersSectionQuery, PartnersSectionQueryVariables>;
-export const StatsSectionDocument = gql`
-    query statsSection {
-  allHomePageWeb {
-    homeWebStatsSection {
-      label
-      title
-      cards {
-        label
-        stat
-        descriptionRaw
-        image {
-          ...customImageFields
-        }
-      }
-    }
-  }
-}
-    ${CustomImageFieldsFragmentDoc}`;
-
-/**
- * __useStatsSectionQuery__
- *
- * To run a query within a React component, call `useStatsSectionQuery` and pass it any options that fit your needs.
- * When your component renders, `useStatsSectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useStatsSectionQuery({
- *   variables: {
- *   },
- * });
- */
-export function useStatsSectionQuery(baseOptions?: Apollo.QueryHookOptions<StatsSectionQuery, StatsSectionQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<StatsSectionQuery, StatsSectionQueryVariables>(StatsSectionDocument, options);
-      }
-export function useStatsSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<StatsSectionQuery, StatsSectionQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<StatsSectionQuery, StatsSectionQueryVariables>(StatsSectionDocument, options);
-        }
-export type StatsSectionQueryHookResult = ReturnType<typeof useStatsSectionQuery>;
-export type StatsSectionLazyQueryHookResult = ReturnType<typeof useStatsSectionLazyQuery>;
-export type StatsSectionQueryResult = Apollo.QueryResult<StatsSectionQuery, StatsSectionQueryVariables>;
-export const ValuesSectionDocument = gql`
-    query valuesSection {
-  allHomePageWeb {
-    valuesSection {
-      header
-      imageItems {
-        title
-        description
-        image {
-          ...imageFields
-        }
-      }
-    }
-  }
-}
-    ${ImageFieldsFragmentDoc}`;
-
-/**
- * __useValuesSectionQuery__
- *
- * To run a query within a React component, call `useValuesSectionQuery` and pass it any options that fit your needs.
- * When your component renders, `useValuesSectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useValuesSectionQuery({
- *   variables: {
- *   },
- * });
- */
-export function useValuesSectionQuery(baseOptions?: Apollo.QueryHookOptions<ValuesSectionQuery, ValuesSectionQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ValuesSectionQuery, ValuesSectionQueryVariables>(ValuesSectionDocument, options);
-      }
-export function useValuesSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ValuesSectionQuery, ValuesSectionQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ValuesSectionQuery, ValuesSectionQueryVariables>(ValuesSectionDocument, options);
-        }
-export type ValuesSectionQueryHookResult = ReturnType<typeof useValuesSectionQuery>;
-export type ValuesSectionLazyQueryHookResult = ReturnType<typeof useValuesSectionLazyQuery>;
-export type ValuesSectionQueryResult = Apollo.QueryResult<ValuesSectionQuery, ValuesSectionQueryVariables>;

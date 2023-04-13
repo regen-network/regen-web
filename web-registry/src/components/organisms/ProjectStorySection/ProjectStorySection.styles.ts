@@ -1,4 +1,3 @@
-import { Box, styled } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -8,7 +7,7 @@ export const useProjectStorySectionStyles = makeStyles()((theme: Theme) => ({
     zIndex: 1,
     borderRadius: '5px',
     position: 'relative',
-    paddingTop: '66.77%',
+    paddingTop: '56.25%',
     '&:before': {
       content: '""',
       zIndex: -1,
@@ -19,8 +18,13 @@ export const useProjectStorySectionStyles = makeStyles()((theme: Theme) => ({
       left: 0,
       background:
         'linear-gradient(204.4deg, #EEF1F3 5.94%, #F1F9F6 51.92%, #F9FBF8 97.89%)',
-      transform: 'translate3d(20px, 30px, 0)',
       borderRadius: '5px',
+      [theme.breakpoints.up('sm')]: {
+        transform: 'translate3d(20px, 30px, 0)',
+      },
+      [theme.breakpoints.down('sm')]: {
+        transform: 'translate3d(10px, 10px, 0)',
+      },
     },
   },
   media: {
@@ -29,5 +33,13 @@ export const useProjectStorySectionStyles = makeStyles()((theme: Theme) => ({
     left: 0,
     borderRadius: '5px',
     overflow: 'hidden',
+  },
+  readMore: {
+    [theme.breakpoints.up('tablet')]: {
+      width: '150%',
+      '& > p:first-child': {
+        width: '67%',
+      },
+    },
   },
 }));

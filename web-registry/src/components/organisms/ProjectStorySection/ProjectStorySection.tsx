@@ -12,12 +12,12 @@ import { parseProjectPageMetadata } from './ProjectStorySection.utils';
 
 export function ProjectStorySection({
   projectPageMetadata,
-}: ProjectStorySectionProps): JSX.Element {
+}: ProjectStorySectionProps): JSX.Element | null {
   const { storyMedia, storyTitle, story } =
     parseProjectPageMetadata(projectPageMetadata);
   const { classes } = useProjectStorySectionStyles();
 
-  return (
+  return storyMedia || (storyTitle && story) ? (
     <Section
       sx={{
         root: {
@@ -97,5 +97,5 @@ export function ProjectStorySection({
         )}
       </Grid>
     </Section>
-  );
+  ) : null;
 }

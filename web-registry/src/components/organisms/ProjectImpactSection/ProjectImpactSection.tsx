@@ -8,12 +8,13 @@ import { makeStyles } from 'tss-react/mui';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
-import ProjectImpactCard from 'web-components/lib/components/cards/ProjectImpactCard';
+import ProjectImpactCard from 'web-components/lib/components/cards/ProjectImpactCard/ProjectImpactCard';
 import Section from 'web-components/lib/components/section';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { EcologicalImpact } from '../../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../../lib/imgSrc';
+import { PROJECT_STANDARD_DEFAULT_VALUE } from './ProjectImpactSection.constants';
 import { getSdgsImages } from './ProjectImpactSection.utils';
 
 interface ProjectImpactProps {
@@ -139,6 +140,11 @@ function ProjectImpactSection({
     }
   }, [slider]);
 
+  const hasStandardLogo = impact.some(item => !!item.standard);
+  const standardDefaultValue = hasStandardLogo
+    ? PROJECT_STANDARD_DEFAULT_VALUE
+    : undefined;
+
   return (
     <Section
       classes={{
@@ -167,13 +173,17 @@ function ProjectImpactSection({
         {isMobile ? (
           <div className={styles.swipe}>
             {impact.map(
-              ({ name, descriptionRaw, image, sdgs }, index: number) => (
+              (
+                { name, descriptionRaw, image, sdgs, standard },
+                index: number,
+              ) => (
                 <div className={styles.item} key={index}>
                   <ProjectImpactCard
                     name={name}
                     description={<BlockContent content={descriptionRaw} />}
                     imgSrc={getSanityImgSrc(image)}
                     sdgs={getSdgsImages({ sdgs })}
+                    standard={getSanityImgSrc(standard, standardDefaultValue)}
                     monitored={index === 0}
                   />
                 </div>
@@ -199,7 +209,7 @@ function ProjectImpactSection({
                   description={<BlockContent content={descriptionRaw} />}
                   imgSrc={getSanityImgSrc(image)}
                   sdgs={getSdgsImages({ sdgs })}
-                  standard={getSanityImgSrc(standard)}
+                  standard={getSanityImgSrc(standard, standardDefaultValue)}
                   monitored={index === 0}
                 />
               ),

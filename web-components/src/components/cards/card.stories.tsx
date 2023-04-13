@@ -18,7 +18,7 @@ import MapCard from './MapCard';
 import OnBoardingCard from './OnBoardingCard';
 import { OverviewCard } from './OverviewCard';
 import ProjectCard from './ProjectCard';
-import ProjectImpactCard from './ProjectImpactCard';
+import ProjectImpactCard from './ProjectImpactCard/ProjectImpactCard';
 import ProjectTopCard from './ProjectTopCard';
 // import CreditCard, { CreditInfo } from './CreditCard';
 import PurchasedCreditsCard from './PurchasedCreditsCard';
@@ -86,6 +86,7 @@ export const projectImpactCard = (): JSX.Element => (
       { src: '/sdgs/sdg4.svg', alt: 'sdg4' },
       { src: '/sdgs/sdg8.svg', alt: 'sdg8' },
     ]}
+    standard="https://regen-registry.s3.amazonaws.com/projects/kasigau/VCS.png"
     monitored
   />
 );

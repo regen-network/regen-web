@@ -1,10 +1,11 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
 
-import { ImageType } from '../../types/shared/imageType';
-import { Image } from '../image';
-import { Body, Label, Title } from '../typography';
-import Card from './Card';
+import { ImageType } from '../../../types/shared/imageType';
+import { Image } from '../../image';
+import { Body, Label, Title } from '../../typography';
+import Card from '../Card';
+import { useProjectImpactCardStyles } from './ProjectImpactCard.styles';
 
 export interface ProjectImpactCardProps {
   className?: string;
@@ -30,6 +31,7 @@ export default function ProjectImpactCard({
   apiServerUrl,
 }: ProjectImpactCardProps): JSX.Element {
   const hasSdgs = sdgs.length > 0;
+  const { classes } = useProjectImpactCardStyles();
 
   return (
     <Card
@@ -88,6 +90,7 @@ export default function ProjectImpactCard({
         sx={{
           display: 'flex',
           flexDirection: 'column',
+          justifyContent: 'space-between',
           flexGrow: 1,
           p: [4, 5],
         }}
@@ -95,34 +98,44 @@ export default function ProjectImpactCard({
         <Body as="div" size="sm" mobileSize="sm" sx={{ pb: 4 }}>
           {description}
         </Body>
-        {hasSdgs && (
-          <Grid container spacing={5.625} sx={{ mb: 3.125, mt: -5 }}>
-            {sdgs.map(sdg => (
-              <Grid key={sdg.src} item>
-                <Box
-                  component="img"
-                  sx={{
-                    width: { xs: 68, sm: 92 },
-                    height: { xs: 68, sm: 92 },
-                  }}
-                  src={sdg.src}
-                  alt={sdg.alt}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        )}
-        {standard && (
-          <Box sx={{ py: [2] }}>
-            <Image
-              src={standard}
-              alt={standard}
-              imageStorageBaseUrl={imageStorageBaseUrl}
-              apiServerUrl={apiServerUrl}
-              width={140}
-            />
-          </Box>
-        )}
+        <Box>
+          {hasSdgs && (
+            <Grid container spacing={5.625} sx={{ mb: 3.125, mt: -5 }}>
+              {sdgs.map(sdg => (
+                <Grid key={sdg.src} item>
+                  <Box
+                    component="img"
+                    sx={{
+                      width: { xs: 68, sm: 92 },
+                      height: { xs: 68, sm: 92 },
+                    }}
+                    src={sdg.src}
+                    alt={sdg.alt}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          )}
+          {standard && (
+            <Box
+              sx={{
+                my: [2],
+                height: 42,
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <Image
+                src={standard}
+                alt={standard}
+                imageStorageBaseUrl={imageStorageBaseUrl}
+                apiServerUrl={apiServerUrl}
+                width={158}
+                className={classes.image}
+              />
+            </Box>
+          )}
+        </Box>
       </Box>
     </Card>
   );

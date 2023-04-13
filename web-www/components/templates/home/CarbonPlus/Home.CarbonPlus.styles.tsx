@@ -14,8 +14,8 @@ export const useCarbonPlusStyles = makeStyles()(theme => ({
   },
   image: {
     float: 'right',
-    width: 'auto',
-    height: 'auto',
+    width: '100%',
+    height: '100%',
   },
   imageContainer: {
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {

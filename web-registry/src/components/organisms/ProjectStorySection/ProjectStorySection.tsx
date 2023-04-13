@@ -1,5 +1,6 @@
 import ReactPlayerLazy from 'react-player/lazy';
 import { Box, Grid } from '@mui/material';
+import cx from 'clsx';
 
 import ReadMore from 'web-components/lib/components/read-more';
 import Section from 'web-components/lib/components/section';
@@ -21,6 +22,7 @@ export function ProjectStorySection({
       sx={{
         root: {
           overflow: { md: 'visible' },
+          pb: { xs: 19.75, sm: 25 },
           ...(storyTitle &&
             story &&
             storyMedia && { pr: { tablet: 2.5, lg: 0 } }),
@@ -32,6 +34,7 @@ export function ProjectStorySection({
           <Grid
             item
             xs={12}
+            sm={storyMedia ? 5 : 12}
             // hack to avoid TS error using custom breakpoints on MUI Grid...
             {...{ tablet: storyMedia ? 6 : 12 }}
             sx={{
@@ -56,15 +59,37 @@ export function ProjectStorySection({
           </Grid>
         )}
         {storyMedia && (
-          <Grid item xs={12} {...{ tablet: storyTitle && story ? 6 : 12 }}>
-            {storyMedia['@type'] === 'schema:VideoObject' && (
-              <Box className={classes.mediaContainer}>
+          <Grid
+            item
+            xs={12}
+            sm={storyTitle && story ? 7 : 12}
+            {...{ tablet: storyTitle && story ? 6 : 12 }}
+          >
+            {storyMedia['@type'] === 'schema:VideoObject' ? (
+              <Box
+                className={cx(classes.mediaContainer, classes.videoContainer)}
+              >
                 <ReactPlayerLazy
-                  className={classes.media}
+                  className={classes.video}
                   url={storyMedia['schema:url']}
                   width="100%"
                   height="100%"
                   controls
+                />
+              </Box>
+            ) : (
+              <Box className={classes.mediaContainer}>
+                <Box
+                  component="img"
+                  src={storyMedia['schema:url']}
+                  alt="project story"
+                  sx={{
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '5px',
+                    objectFit: 'cover',
+                    ...(storyTitle && story && { maxHeight: { sm: 380 } }),
+                  }}
                 />
               </Box>
             )}

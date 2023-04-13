@@ -7,7 +7,6 @@ export const useProjectStorySectionStyles = makeStyles()((theme: Theme) => ({
     zIndex: 1,
     borderRadius: '5px',
     position: 'relative',
-    paddingTop: '56.25%',
     '&:before': {
       content: '""',
       zIndex: -1,
@@ -27,7 +26,10 @@ export const useProjectStorySectionStyles = makeStyles()((theme: Theme) => ({
       },
     },
   },
-  media: {
+  videoContainer: {
+    paddingTop: '56.25%',
+  },
+  video: {
     position: 'absolute',
     top: 0,
     left: 0,

@@ -1,6 +1,7 @@
 import { ImageType } from 'web-components/lib/types/shared/imageType';
 
 import { Maybe, Sdg } from 'generated/sanity-graphql';
+import { getSanityImgSrc } from 'lib/imgSrc';
 
 type GetSdgsImagesParams = {
   sdgs?: Maybe<Maybe<Sdg>[]>;
@@ -9,7 +10,7 @@ type GetSdgsImagesParams = {
 export const getSdgsImages = ({ sdgs }: GetSdgsImagesParams) => {
   const sdgsImages: ImageType[] =
     sdgs?.map(sdg => ({
-      src: String(sdg?.image?.image?.asset?.url ?? sdg?.image?.imageHref ?? ''),
+      src: getSanityImgSrc(sdg?.image),
       alt: String(sdg?.title ?? ''),
     })) ?? [];
 

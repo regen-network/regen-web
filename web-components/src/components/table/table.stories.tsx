@@ -4,7 +4,10 @@ import TableRow from '@mui/material/TableRow';
 
 import { TableActionButtons } from '../buttons/TableActionButtons';
 import { ActionsTable } from './ActionsTable';
-import { DocumentationTable, DocumentRowData } from './DocumentationTable';
+import {
+  DocumentationTable,
+  DocumentRowData,
+} from './DocumentationTable/DocumentationTable';
 import { TablePagination } from './Table.TablePagination';
 
 export default {

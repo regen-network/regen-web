@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Fade from '@mui/material/Fade';
 import { DefaultTheme as Theme } from '@mui/styles';
+import ReactHtmlParser from 'html-react-parser';
 import { makeStyles } from 'tss-react/mui';
 
 import { ExpandButton } from '../buttons/ExpandButton';
@@ -72,7 +73,9 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
     <div className={cx(styles.root, classes?.root)}>
       <div className={cx(styles.textContainer, classes?.textContainer)}>
         <Body size="xl" mobileSize="md">
-          <span className={styles.text}>{texts.truncated}</span>
+          <span className={styles.text}>
+            {ReactHtmlParser(texts.truncated)}
+          </span>
           {texts.rest && !expanded && <Button />}
         </Body>
         <Fade in={expanded} mountOnEnter unmountOnExit>
@@ -80,7 +83,7 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
           <div>
             <Body size="xl" mobileSize="md">
               {!texts.rest.startsWith('\n') && '\n'}
-              <span className={styles.text}>{texts.rest}</span>
+              <span className={styles.text}>{ReactHtmlParser(texts.rest)}</span>
               {texts.rest && expanded && <Button />}
             </Body>
           </div>

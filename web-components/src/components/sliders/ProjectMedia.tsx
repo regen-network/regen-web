@@ -6,6 +6,7 @@ import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from 'tss-react/mui';
 
+import { containerPaddingX, containerStyles } from '../../styles/container';
 import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';
 import PlayIcon from '../icons/PlayIcon';
 import { Image, OptimizeImageProps } from '../image';
@@ -160,9 +161,6 @@ const useStyles = makeStyles<StyleProps>()(
       borderRadius: '5px',
       objectPosition: '50% 50%',
     },
-    grid: {
-      padding: theme.spacing(2.5),
-    },
     imageCredits: {
       color: theme.palette.primary.main,
       position: 'absolute',
@@ -182,6 +180,10 @@ const useStyles = makeStyles<StyleProps>()(
     },
     elementContainer: {
       position: 'relative',
+      paddingRight: theme.spacing(5),
+      '&:last-child': {
+        paddingRight: 0,
+      },
       [theme.breakpoints.up('sm')]: {
         height: theme.spacing(100),
       },
@@ -294,9 +296,8 @@ export default function ProjectMedia({
           {assets.length > 0 && (
             <Grid
               container
-              columnSpacing={5}
               columns={15}
-              className={classes.grid}
+              sx={{ ...containerStyles, ...containerPaddingX }}
             >
               {assets.slice(0, 2).map((a, i) => (
                 <Grid

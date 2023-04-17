@@ -10,7 +10,8 @@ import { Title } from 'web-components/lib/components/typography';
 import { AllBuyModalOptionsQuery } from 'generated/sanity-graphql';
 import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
 import { onBtnClick } from 'lib/button';
-import { BuyModalEvent, Track } from 'lib/tracker/types';
+import { Track } from 'lib/tracker/types';
+import { useBuyModalOptionsTracker } from 'lib/tracker/useBuyModalOptionsTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
@@ -36,6 +37,7 @@ export const BuyModalOptions = ({
   const setConnectWalletModalAtom = useSetAtom(connectWalletModalAtom);
   const { loaded, wallet } = useWallet();
   const connected = wallet?.address;
+  const { trackBuyScheduleCall, trackBuyKeplr } = useBuyModalOptionsTracker();
 
   useEffect(() => {
     if (loaded && connected) onClose();
@@ -65,26 +67,15 @@ export const BuyModalOptions = ({
                 text: card?.button?.buttonText ?? '',
                 onClick: card?.button?.buttonLink
                   ? () => {
-                      if (track && location) {
-                        track<'buyScheduleCall', BuyModalEvent>(
-                          'buyScheduleCall',
-                          {
-                            url: location.pathname,
-                            projectId: selectedProject?.id,
-                            creditClassId: selectedProject?.creditClassId,
-                          },
-                        );
-                      }
+                      trackBuyScheduleCall({
+                        track,
+                        location,
+                        selectedProject,
+                      });
                       onBtnClick(openModal, card?.button);
                     }
                   : () => {
-                      if (track && location) {
-                        track<'buyKeplr', BuyModalEvent>('buyKeplr', {
-                          url: location.pathname,
-                          projectId: selectedProject?.id,
-                          creditClassId: selectedProject?.creditClassId,
-                        });
-                      }
+                      trackBuyKeplr({ track, location, selectedProject });
                       setConnectWalletModalAtom(
                         atom => void (atom.open = true),
                       );

@@ -18,6 +18,7 @@ import MapCard from './MapCard';
 import OnBoardingCard from './OnBoardingCard';
 import { OverviewCard } from './OverviewCard';
 import ProjectCard from './ProjectCard';
+import ProjectImpactCard from './ProjectImpactCard/ProjectImpactCard';
 import ProjectTopCard from './ProjectTopCard';
 // import CreditCard, { CreditInfo } from './CreditCard';
 import PurchasedCreditsCard from './PurchasedCreditsCard';
@@ -71,6 +72,21 @@ export const monitoredImpactCard = (): JSX.Element => (
     name="name"
     description="Healthy ecosystems and rich biodiversity are fundamental to life on our planet."
     imgSrc="/biodiversity.png"
+    monitored
+  />
+);
+
+export const projectImpactCard = (): JSX.Element => (
+  <ProjectImpactCard
+    name="Reforestation"
+    description="Preservation, afforestation (where trees were not previously) and reforestation (where trees were previously) of urban forests."
+    imgSrc="/illustrations/reforestation.png"
+    sdgs={[
+      { src: '/sdgs/sdg3.svg', alt: 'sdg3' },
+      { src: '/sdgs/sdg4.svg', alt: 'sdg4' },
+      { src: '/sdgs/sdg8.svg', alt: 'sdg8' },
+    ]}
+    standard="https://regen-registry.s3.amazonaws.com/projects/kasigau/VCS.png"
     monitored
   />
 );

@@ -55,6 +55,7 @@ import {
   parseMedia,
   parseOffChainProject,
 } from './ProjectDetails.utils';
+import { ProjectDetailsDocumentationTable } from './tables/documentation/ProjectDetails.Documentation';
 
 function ProjectDetails(): JSX.Element {
   const theme = useTheme();
@@ -312,11 +313,7 @@ function ProjectDetails(): JSX.Element {
       />
 
       {projectDocs && projectDocs.length > 0 && (
-        <ProjectDocumentation
-          docs={projectDocs}
-          txClient={txClient}
-          viewOnLedger={viewOnLedger}
-        />
+        <ProjectDetailsDocumentationTable documents={projectDocs} />
       )}
 
       {managementActions && <ManagementActions actions={managementActions} />}

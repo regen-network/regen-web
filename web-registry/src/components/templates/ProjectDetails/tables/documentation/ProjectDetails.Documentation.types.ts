@@ -1,0 +1,5 @@
+export enum DOCUMENTATION_HEADERS {
+  NAME,
+  TYPE,
+  UPLOAD_DATE,
+}

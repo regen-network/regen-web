@@ -4,6 +4,17 @@ export type ProjectStorySectionProps = {
   projectPageMetadata?: ProjectPageMetadataLD;
 };
 
+export type StoryTextProps = {
+  storyTitle: string;
+  story: string;
+  hasMedia: boolean;
+};
+
+export type StoryMediaProps = {
+  storyMedia: ProjectStoryMedia;
+  hasText: boolean;
+};
+
 export type ParseProjectPageMetadataReturn = {
   storyMedia?: ProjectStoryMedia;
   story?: string;

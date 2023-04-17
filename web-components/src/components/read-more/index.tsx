@@ -42,6 +42,13 @@ const useStyles = makeStyles()((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(14),
     },
   },
+  text: {
+    '&:after': {
+      content: '""',
+      display: 'inline-block',
+      width: theme.spacing(1),
+    },
+  },
 }));
 
 const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
@@ -55,7 +62,7 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
   const texts: Texts = truncate(children, maxLength, restMinLength);
   const Button: React.FC<React.PropsWithChildren<unknown>> = () => (
     <ExpandButton
-      sx={{ pt: [0, 0], pb: [0, 0] }}
+      sx={{ p: [0, 0] }}
       onClick={() => setExpanded(!expanded)}
       expanded={expanded}
     />
@@ -65,7 +72,7 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
     <div className={cx(styles.root, classes?.root)}>
       <div className={cx(styles.textContainer, classes?.textContainer)}>
         <Body size="xl" mobileSize="md">
-          {texts.truncated}
+          <span className={styles.text}>{texts.truncated}</span>
           {texts.rest && !expanded && <Button />}
         </Body>
         <Fade in={expanded} mountOnEnter unmountOnExit>
@@ -73,7 +80,7 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
           <div>
             <Body size="xl" mobileSize="md">
               {!texts.rest.startsWith('\n') && '\n'}
-              {texts.rest}
+              <span className={styles.text}>{texts.rest}</span>
               {texts.rest && expanded && <Button />}
             </Body>
           </div>

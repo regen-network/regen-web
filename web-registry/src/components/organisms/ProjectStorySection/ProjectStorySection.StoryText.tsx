@@ -7,9 +7,9 @@ import { useProjectStorySectionStyles } from './ProjectStorySection.styles';
 import { StoryTextProps } from './ProjectStorySection.types';
 
 export function StoryText({
-  hasMedia,
   storyTitle,
   story,
+  hasMedia,
 }: StoryTextProps): JSX.Element {
   const { classes } = useProjectStorySectionStyles();
 
@@ -17,9 +17,7 @@ export function StoryText({
     <Grid
       item
       xs={12}
-      sm={hasMedia ? 5 : 12}
-      // hack to avoid TS error using custom breakpoints on MUI Grid...
-      {...{ tablet: hasMedia ? 6 : 12 }}
+      md={hasMedia ? 6 : 12}
       sx={{
         ...(hasMedia && { pr: { sm: 10 } }),
         ...(!hasMedia && { maxWidth: { sm: 752 } }),

@@ -6,13 +6,13 @@ import { useProjectStorySectionStyles } from './ProjectStorySection.styles';
 import { StoryMediaProps } from './ProjectStorySection.types';
 
 export function StoryMedia({
-  hasText,
   storyMedia,
+  hasText,
 }: StoryMediaProps): JSX.Element {
   const { classes } = useProjectStorySectionStyles();
 
   return (
-    <Grid item xs={12} sm={hasText ? 7 : 12} {...{ tablet: hasText ? 6 : 12 }}>
+    <Grid item xs={12} md={hasText ? 6 : 12}>
       {storyMedia['@type'] === 'schema:VideoObject' ? (
         <Box className={cx(classes.mediaContainer, classes.videoContainer)}>
           <ReactPlayerLazy

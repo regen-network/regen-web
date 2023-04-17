@@ -19,9 +19,7 @@ export function ProjectStorySection({
         root: {
           overflow: { md: 'visible' },
           pb: { xs: 19.75, sm: 25 },
-          ...(storyTitle &&
-            story &&
-            storyMedia && { pr: { tablet: 2.5, lg: 0 } }),
+          ...(storyTitle && story && storyMedia && { pr: { md: 2.5, lg: 0 } }),
         },
       }}
     >
@@ -35,8 +33,8 @@ export function ProjectStorySection({
         )}
         {storyMedia && (
           <StoryMedia
-            hasText={!!storyTitle && !!story}
             storyMedia={storyMedia}
+            hasText={!!storyTitle && !!story}
           />
         )}
       </Grid>

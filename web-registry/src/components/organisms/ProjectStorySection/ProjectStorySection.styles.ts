@@ -37,7 +37,7 @@ export const useProjectStorySectionStyles = makeStyles()((theme: Theme) => ({
     overflow: 'hidden',
   },
   readMore: {
-    [theme.breakpoints.up('tablet')]: {
+    [theme.breakpoints.up('md')]: {
       width: '150%',
       '& > p:first-child': {
         width: '67%',

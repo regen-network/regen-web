@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { SxProps } from '@mui/material';
 import Box from '@mui/material/Box';
 import cx from 'clsx';
 import { quantityFormatNumberOptions } from 'config/decimals';
@@ -11,6 +12,7 @@ import {
   TablePaginationParams,
 } from 'web-components/lib/components/table/ActionsTable';
 import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncateHash } from 'web-components/lib/utils/truncate';
 
@@ -34,6 +36,9 @@ interface CreditBatchProps {
   initialPaginationParams?: TablePaginationParams;
   isIgnoreOffset?: boolean;
   titleAlign?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
+  sx?: {
+    root?: SxProps<Theme>;
+  };
 }
 
 interface HeadCell {
@@ -84,6 +89,7 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
   onTableChange,
   isIgnoreOffset = false,
   initialPaginationParams,
+  sx,
 }) => {
   const { classes } = useCreditBatchesStyles();
   const [batches, setBatches] = useState<BatchInfoWithSupply[]>([]);
@@ -139,6 +145,7 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
       onTableChange={onTableChange}
       initialPaginationParams={initialPaginationParams}
       isIgnoreOffset={isIgnoreOffset}
+      sx={sx}
       rows={batches.map(batch => {
         /* eslint-disable react/jsx-key */
         let result = [];

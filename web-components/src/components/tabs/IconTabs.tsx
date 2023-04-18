@@ -24,6 +24,7 @@ interface IconTabsProps {
   sxs?: {
     tab?: {
       outer?: SxProps<Theme>;
+      innerContainer?: SxProps<Theme>;
       inner?: SxProps<Theme>;
     };
     panel?: {
@@ -110,7 +111,10 @@ const IconTabs: React.FC<React.PropsWithChildren<IconTabsProps>> = ({
               size={size}
               href={tab.href}
               linkComponent={linkComponent}
-              sxInner={{ ...sxs?.tab?.inner }}
+              sxs={{
+                innerContainer: sxs?.tab?.innerContainer,
+                inner: sxs?.tab?.inner,
+              }}
               {...a11yProps(index)}
             />
           ))}

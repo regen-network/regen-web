@@ -29,7 +29,6 @@ import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellO
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
-import { CreditBatchesSection } from 'components/organisms/CreditBatchesSection/CreditBatchesSection';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 import { ProjectStorySection } from 'components/organisms/ProjectStorySection/ProjectStorySection';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
@@ -55,7 +54,6 @@ import {
   parseMedia,
   parseOffChainProject,
 } from './ProjectDetails.utils';
-import { ProjectDetailsDocumentationTable } from './tables/documentation/ProjectDetails.Documentation';
 import { ProjectDetailsTableTabs } from './tables/ProjectDetails.TableTabs';
 
 function ProjectDetails(): JSX.Element {
@@ -307,20 +305,6 @@ function ProjectDetails(): JSX.Element {
         </div>
       )}
 
-      <CreditBatchesSection
-        offChainProject={offChainProject}
-        batchData={{
-          batches: batchesWithSupply,
-          totals: batchesTotal,
-        }}
-        paginationParams={paginationParams}
-        setPaginationParams={setPaginationParams}
-      />
-
-      {projectDocs && projectDocs.length > 0 && (
-        <ProjectDetailsDocumentationTable documents={projectDocs} />
-      )}
-
       {impactData?.length > 0 && (
         <div className="topo-background-alternate">
           <ProjectImpactSection impact={impactData} />
@@ -330,6 +314,13 @@ function ProjectDetails(): JSX.Element {
       <ProjectDetailsTableTabs
         sortedDocuments={sortedDocuments}
         sortCallbacksDocuments={sortCallbacksDocuments}
+        offChainProject={offChainProject}
+        batchData={{
+          batches: batchesWithSupply,
+          totals: batchesTotal,
+        }}
+        paginationParams={paginationParams}
+        setPaginationParams={setPaginationParams}
       />
 
       {managementActions && <ManagementActions actions={managementActions} />}

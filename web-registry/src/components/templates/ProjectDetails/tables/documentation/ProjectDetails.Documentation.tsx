@@ -36,6 +36,7 @@ export const ProjectDetailsDocumentationTable = ({
         </OutlinedButton>
       )}
       onTableChange={onTableChange}
+      sx={{ root: { borderRadius: '0 0 8px 8px' } }}
     />
   );
 };

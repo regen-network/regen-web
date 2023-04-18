@@ -102,23 +102,13 @@ export const parseMedia = ({
 }: ParseMediaParams): ParseMediaReturn => {
   let assets: Asset[] = [];
 
-  const galleryPhotos = metadata?.['regen:galleryPhotos']?.filter(Boolean);
   const previewPhoto = metadata?.['regen:previewPhoto'];
-  const noGallery = !galleryPhotos || galleryPhotos?.length === 0;
-  const noGalleryAssets: Asset[] = [];
 
   if (previewPhoto) {
-    noGalleryAssets.push({ src: previewPhoto, type: 'image' });
+    assets.push({ src: previewPhoto, type: 'image' });
   }
 
-  assets = noGallery
-    ? noGalleryAssets
-    : galleryPhotos.map(photo => ({
-        src: photo,
-        type: 'image',
-      }));
-
-  if (geojson && assets.length < 2) {
+  if (geojson) {
     assets.push(<StaticMap geojson={geojson} mapboxToken={MAPBOX_TOKEN} />);
   }
 

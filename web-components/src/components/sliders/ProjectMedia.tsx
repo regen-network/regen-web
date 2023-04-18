@@ -6,6 +6,7 @@ import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from 'tss-react/mui';
 
+import { containerPaddingX, containerStyles } from '../../styles/container';
 import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';
 import PlayIcon from '../icons/PlayIcon';
 import { Image, OptimizeImageProps } from '../image';
@@ -160,9 +161,6 @@ const useStyles = makeStyles<StyleProps>()(
       borderRadius: '5px',
       objectPosition: '50% 50%',
     },
-    grid: {
-      padding: theme.spacing(2.5),
-    },
     imageCredits: {
       color: theme.palette.primary.main,
       position: 'absolute',
@@ -182,6 +180,10 @@ const useStyles = makeStyles<StyleProps>()(
     },
     elementContainer: {
       position: 'relative',
+      paddingRight: theme.spacing(5),
+      '&:last-child': {
+        paddingRight: 0,
+      },
       [theme.breakpoints.up('sm')]: {
         height: theme.spacing(100),
       },
@@ -291,53 +293,11 @@ export default function ProjectMedia({
     <div>
       {matches && gridView ? (
         <>
-          {assets.length >= 4 && (
-            <Grid container className={classes.grid}>
-              <Grid item className={classes.sideGrid}>
-                <ProjectAsset
-                  asset={assets[0]}
-                  apiServerUrl={apiServerUrl}
-                  imageStorageBaseUrl={imageStorageBaseUrl}
-                  classes={classes}
-                />
-                {imageCredits && (
-                  <div className={classes.imageCredits}>{imageCredits}</div>
-                )}
-              </Grid>
-              <Grid item className={classes.centreGrid}>
-                <div className={classes.imageContainer}>
-                  <ProjectAsset
-                    asset={assets[1]}
-                    apiServerUrl={apiServerUrl}
-                    imageStorageBaseUrl={imageStorageBaseUrl}
-                    classes={classes}
-                  />
-                </div>
-                <div className={classes.imageContainer}>
-                  <ProjectAsset
-                    asset={assets[2]}
-                    apiServerUrl={apiServerUrl}
-                    imageStorageBaseUrl={imageStorageBaseUrl}
-                    classes={classes}
-                  />
-                </div>
-              </Grid>
-              <Grid item className={classes.sideGrid}>
-                <ProjectAsset
-                  asset={assets[3]}
-                  apiServerUrl={apiServerUrl}
-                  imageStorageBaseUrl={imageStorageBaseUrl}
-                  classes={classes}
-                />
-              </Grid>
-            </Grid>
-          )}
-          {assets.length >= 1 && assets.length <= 3 && (
+          {assets.length > 0 && (
             <Grid
               container
-              columnSpacing={5}
               columns={15}
-              className={classes.grid}
+              sx={{ ...containerStyles, ...containerPaddingX }}
             >
               {assets.slice(0, 2).map((a, i) => (
                 <Grid
@@ -353,9 +313,7 @@ export default function ProjectMedia({
                     classes={classes}
                   />
                   {i === 0 && isMedia(a) && imageCredits && (
-                    <Box className={classes.imageCredits} sx={{ pl: 5 }}>
-                      {imageCredits}
-                    </Box>
+                    <Box className={classes.imageCredits}>{imageCredits}</Box>
                   )}
                 </Grid>
               ))}

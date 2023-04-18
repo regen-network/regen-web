@@ -242,14 +242,16 @@ function ProjectDetails(): JSX.Element {
       )}
 
       {mediaData.assets.length > 0 && (
-        <ProjectMedia
-          gridView
-          assets={mediaData.assets}
-          apiServerUrl={mediaData.apiServerUrl}
-          imageStorageBaseUrl={mediaData.imageStorageBaseUrl}
-          imageCredits={mediaData.imageCredits}
-          mobileHeight={theme.spacing(78.75)}
-        />
+        <Box sx={{ pt: { xs: 0, sm: 12.5 } }}>
+          <ProjectMedia
+            gridView
+            assets={mediaData.assets}
+            apiServerUrl={mediaData.apiServerUrl}
+            imageStorageBaseUrl={mediaData.imageStorageBaseUrl}
+            imageCredits={mediaData.imageCredits}
+            mobileHeight={theme.spacing(78.75)}
+          />
+        </Box>
       )}
 
       <SellOrdersActionsBar

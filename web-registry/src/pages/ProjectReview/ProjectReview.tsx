@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import ReactPlayerLazy from 'react-player/lazy';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import { Box, CardMedia, useMediaQuery, useTheme } from '@mui/material';
+import { Box } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
-import Card from 'web-components/lib/components/cards/Card';
 import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/ReviewCard';
 import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.ItemDisplay';
 import { Photo } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.Photo';
@@ -43,8 +41,6 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
   const { setDeliverTxResponse } = useCreateProjectContext();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const graphqlClient = useApolloClient();
   const { data, isLoading } = useQuery(
     getProjectByIdQuery({
@@ -106,7 +102,6 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
-  const videoUrl = metadata?.['regen:videoURL'];
   const referenceId = getProjectReferenceID(metadata, creditClassId);
 
   const submit = async (): Promise<void> => {
@@ -158,7 +153,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
         <ItemDisplay>{metadata?.['schema:description']}</ItemDisplay>
       </ReviewCard>
       <ReviewCard
-        title={videoUrl ? 'Media' : 'Photos'}
+        title={'Media'}
         onEditClick={() => navigate(`${editPath}/media`)}
       >
         {metadata?.['regen:previewPhoto'] && (
@@ -167,7 +162,8 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
         {metadata?.['regen:galleryPhotos']?.map(
           photo => photo && <Photo src={photo} />,
         )}
-        {videoUrl && (
+        {/* TODO: display story image or video https://github.com/regen-network/regen-registry/issues/1615 */}
+        {/* {metadata?.['regen:storyMedia'] && (
           <Card>
             <CardMedia
               component={ReactPlayerLazy}
@@ -177,7 +173,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
               width="100%"
             />
           </Card>
-        )}
+        )} */}
       </ReviewCard>
       <ReviewCard
         title="Roles"

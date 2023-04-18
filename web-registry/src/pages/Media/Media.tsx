@@ -29,7 +29,7 @@ const Media = (): JSX.Element => {
       values = {
         'regen:previewPhoto': metadata['regen:previewPhoto'],
         'regen:galleryPhotos': metadata['regen:galleryPhotos'],
-        'regen:videoURL': metadata['regen:videoURL'],
+        'regen:storyMedia': metadata['regen:storyMedia'],
         'schema:creditText': metadata['schema:creditText'],
       };
     }

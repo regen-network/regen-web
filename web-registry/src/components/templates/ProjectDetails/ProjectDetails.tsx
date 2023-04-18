@@ -31,6 +31,7 @@ import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/Cr
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import { CreditBatchesSection } from 'components/organisms/CreditBatchesSection/CreditBatchesSection';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
+import { ProjectStorySection } from 'components/organisms/ProjectStorySection/ProjectStorySection';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { usePaginatedBatchesByProject } from 'hooks/batches/usePaginatedBatchesByProject';
 
@@ -292,6 +293,14 @@ function ProjectDetails(): JSX.Element {
 
       {hasProjectPhotos && <Gallery photos={projectPhotos} />}
 
+      <ProjectStorySection projectPageMetadata={offChainProjectMetadata} />
+
+      {impactData?.length > 0 && (
+        <div className="topo-background-alternate">
+          <ProjectImpactSection impact={impactData} />
+        </div>
+      )}
+
       <CreditBatchesSection
         offChainProject={offChainProject}
         batchData={{
@@ -301,12 +310,6 @@ function ProjectDetails(): JSX.Element {
         paginationParams={paginationParams}
         setPaginationParams={setPaginationParams}
       />
-
-      {impactData?.length > 0 && (
-        <div className="topo-background-alternate">
-          <ProjectImpactSection impact={impactData} />
-        </div>
-      )}
 
       {projectDocs && projectDocs.length > 0 && (
         <ProjectDocumentation

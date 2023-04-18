@@ -1,22 +1,12 @@
 import LazyLoad from 'react-lazyload';
-import ReactPlayerLazy from 'react-player/lazy';
 import { Link } from 'react-router-dom';
-import {
-  Box,
-  CardMedia,
-  Grid,
-  Skeleton,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
+import { Box, Grid, Skeleton } from '@mui/material';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
-import Card from 'web-components/lib/components/cards/Card';
 import CreditClassCard from 'web-components/lib/components/cards/CreditClassCard';
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
-import ReadMore from 'web-components/lib/components/read-more';
 import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
@@ -63,8 +53,6 @@ function ProjectTopSection({
   batchData,
 }: ProjectTopSectionProps): JSX.Element {
   const { classes } = useProjectTopSectionStyles();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const { creditClass, creditClassVersion, offsetGenerationMethod } =
     parseOffChainProject(offChainProject);
@@ -72,15 +60,8 @@ function ProjectTopSection({
   const { projectName, area, areaUnit, placeName } =
     parseProjectMetadata(projectMetadata);
 
-  const {
-    videoURL,
-    glanceText,
-    primaryDescription,
-    quote,
-    landStewardPhoto,
-    landStewardStoryTitle,
-    landStewardStory,
-  } = parseProjectPageMetadata(projectPageMetadata);
+  const { glanceText, primaryDescription, quote } =
+    parseProjectPageMetadata(projectPageMetadata);
 
   const creditClassSanity = findSanityCreditClass({
     sanityCreditClassData,
@@ -152,11 +133,6 @@ function ProjectTopSection({
           )}
           {/* Used to prevent layout shift */}
           {loading && <Skeleton height={200} />}
-          {landStewardStoryTitle && (
-            <Title sx={{ pt: { xs: 11.75, sm: 14 } }} variant="h2">
-              Story
-            </Title>
-          )}
           {primaryDescription && (
             <Body size="xl" mobileSize="md" py={[3.75, 6]}>
               {primaryDescription}
@@ -191,36 +167,6 @@ function ProjectTopSection({
           </Box>
           {isAnchoredProjectMetadata(projectMetadata, onChainProjectId) && (
             <ProjectPageMetadata metadata={projectMetadata} />
-          )}
-          <LazyLoad offset={50}>
-            {videoURL && (
-              <Card className={classes.media}>
-                <CardMedia
-                  component={ReactPlayerLazy}
-                  url={videoURL}
-                  height={isMobile ? 221 : 438}
-                  fallback={<Skeleton height={isMobile ? 221 : 438} />}
-                  width="100%"
-                />
-              </Card>
-            )}
-            {landStewardPhoto && (
-              <img
-                className={classes.media}
-                alt="land steward"
-                src={landStewardPhoto}
-              />
-            )}
-          </LazyLoad>
-          {landStewardStoryTitle && (
-            <Title variant="h4" className={classes.tagline}>
-              {landStewardStoryTitle}
-            </Title>
-          )}
-          {landStewardStory && (
-            <ReadMore maxLength={450} restMinLength={300}>
-              {landStewardStory}
-            </ReadMore>
           )}
           {quote && (
             <div>

@@ -60,37 +60,24 @@ export const parseProjectMetadata = (
 };
 
 type ParseProjectPageMetadataReturn = {
-  videoURL?: string | null;
   glanceText?: string[];
   primaryDescription?: string;
   quote?: ProjectQuote;
-  landStewardPhoto?: string | null;
-  landStewardStoryTitle?: string | null;
-  landStewardStory?: string | null;
 };
 
 export const parseProjectPageMetadata = (
   projectPageMetadata?: Partial<ProjectPageMetadataLD>,
 ): ParseProjectPageMetadataReturn => {
-  const videoURL = projectPageMetadata?.['regen:videoURL'];
   const glanceText = projectPageMetadata?.['regen:glanceText'];
   const primaryDescription =
     projectPageMetadata?.['regen:landStory'] ||
     projectPageMetadata?.['schema:description'];
   const quote = projectPageMetadata?.['regen:projectQuote'];
-  const landStewardPhoto = projectPageMetadata?.['regen:landStewardPhoto'];
-  const landStewardStoryTitle =
-    projectPageMetadata?.['regen:landStewardStoryTitle'];
-  const landStewardStory = projectPageMetadata?.['regen:landStewardStory'];
 
   return {
-    videoURL,
     glanceText,
     primaryDescription,
     quote,
-    landStewardPhoto,
-    landStewardStoryTitle,
-    landStewardStory,
   };
 };
 

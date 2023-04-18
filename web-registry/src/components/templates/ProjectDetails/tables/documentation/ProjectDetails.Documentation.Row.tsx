@@ -10,11 +10,11 @@ type Props = {
 };
 
 const getDocumentationTableRow = ({ document }: Props): React.ReactNode[] => {
-  const { name, type, createdAt } = document ?? {};
+  const { name, type, date } = document ?? {};
   return [
     <Box sx={{ color: 'info.main' }}>{name}</Box>,
     <Box sx={{ color: 'info.main' }}>{type}</Box>,
-    <Box sx={{ color: 'info.main' }}>{formatDate(createdAt)}</Box>,
+    <Box sx={{ color: 'info.main' }}>{formatDate(date)}</Box>,
   ];
 };
 

@@ -44,9 +44,9 @@ import useGeojson from './hooks/useGeojson';
 import useImpact from './hooks/useImpact';
 import useIssuanceModal from './hooks/useIssuanceModal';
 import useSeo from './hooks/useSeo';
+import { useSortedDocuments } from './hooks/useSortedDocuments';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProjects';
-import { ProjectDocumentation } from './ProjectDetails.ProjectDocumentation';
 import { ProjectTimeline } from './ProjectDetails.ProjectTimeline';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
 import {
@@ -154,6 +154,10 @@ function ProjectDetails(): JSX.Element {
     coBenefitsIris,
     primaryImpactIRI,
   } = parseOffChainProject(offChainProject as Maybe<Project>);
+
+  const { sortCallbacksDocuments, sortedDocuments } = useSortedDocuments({
+    projectDocs,
+  });
 
   // For legacy projects (that are not on-chain), all metadata is stored off-chain
   const projectMetadata = isOnChainId
@@ -314,6 +318,19 @@ function ProjectDetails(): JSX.Element {
 
       {projectDocs && projectDocs.length > 0 && (
         <ProjectDetailsDocumentationTable documents={projectDocs} />
+      )}
+
+      {impactData?.length > 0 && (
+        <div className="topo-background-alternate">
+          <ProjectImpactSection impact={impactData} />
+        </div>
+      )}
+
+      {sortedDocuments && sortedDocuments.length > 0 && (
+        <ProjectDetailsDocumentationTable
+          documents={sortedDocuments}
+          sortCallbacks={sortCallbacksDocuments}
+        />
       )}
 
       {managementActions && <ManagementActions actions={managementActions} />}

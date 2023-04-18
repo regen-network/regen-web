@@ -11,12 +11,13 @@ export const DOCUMENTATION_MAPPING: Record<
     sortKey: 'name',
   },
   [DOCUMENTATION_HEADERS.TYPE]: {
-    name: 'NAME OF DOCUMENT',
+    name: 'DOCUMENT TYPE',
     sortKey: 'type',
+    sortEnabled: true,
   },
   [DOCUMENTATION_HEADERS.UPLOAD_DATE]: {
-    name: 'NAME OF DOCUMENT',
-    sortKey: 'type',
+    name: 'DATE OF UPLOAD',
+    sortKey: 'date',
     sortEnabled: true,
   },
 };

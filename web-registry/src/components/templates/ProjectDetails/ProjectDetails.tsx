@@ -305,23 +305,19 @@ function ProjectDetails(): JSX.Element {
         </div>
       )}
 
-      {impactData?.length > 0 && (
-        <div className="topo-background-alternate">
-          <ProjectImpactSection impact={impactData} />
-        </div>
-      )}
-
-      <ProjectDetailsTableTabs
-        sortedDocuments={sortedDocuments}
-        sortCallbacksDocuments={sortCallbacksDocuments}
-        offChainProject={offChainProject}
-        batchData={{
-          batches: batchesWithSupply,
-          totals: batchesTotal,
-        }}
-        paginationParams={paginationParams}
-        setPaginationParams={setPaginationParams}
-      />
+      <div className="topo-background-alternate">
+        <ProjectDetailsTableTabs
+          sortedDocuments={sortedDocuments}
+          sortCallbacksDocuments={sortCallbacksDocuments}
+          offChainProject={offChainProject}
+          batchData={{
+            batches: batchesWithSupply,
+            totals: batchesTotal,
+          }}
+          paginationParams={paginationParams}
+          setPaginationParams={setPaginationParams}
+        />
+      </div>
 
       {managementActions && <ManagementActions actions={managementActions} />}
 

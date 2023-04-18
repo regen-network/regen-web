@@ -33,6 +33,7 @@ export const ProjectDetailsTableTabs = (
               border: `1px solid ${theme.palette.info.light}`,
               borderBottom: 0,
               borderRadius: '8px 8px 0 0',
+              backgroundColor: 'primary.main',
             },
             innerContainer: {
               paddingTop: 8.5,

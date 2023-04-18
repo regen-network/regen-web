@@ -1,12 +1,6 @@
 import { useMemo } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
-import {
-  ApolloClient,
-  NormalizedCacheObject,
-  useApolloClient,
-} from '@apollo/client';
 import { Box, useTheme } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
 
 import { Flex } from 'web-components/lib/components/box';
 import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
@@ -17,8 +11,8 @@ import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 import { truncate } from 'web-components/lib/utils/truncate';
 
+import { usePartyByAddrQuery } from 'generated/graphql';
 import { getAccountUrl } from 'lib/block-explorer';
-import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 
 import { getSocialsLinks } from 'pages/Dashboard/Dashboard.utils';
 import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
@@ -36,16 +30,9 @@ export const EcocreditsByAccount = (): JSX.Element => {
   const theme = useTheme();
   const location = useLocation();
 
-  const graphqlClient =
-    useApolloClient() as ApolloClient<NormalizedCacheObject>;
-
-  const { data: partyByAddr } = useQuery(
-    getPartyByAddrQuery({
-      client: graphqlClient,
-      addr: accountAddress ?? '',
-      enabled: !!accountAddress && !!graphqlClient,
-    }),
-  );
+  const { data: partyByAddr } = usePartyByAddrQuery({
+    variables: { addr: accountAddress ?? '' },
+  });
   const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
 
   const socialsLinks = useMemo(

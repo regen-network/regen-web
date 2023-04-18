@@ -79,7 +79,7 @@
     "format": "prettier --write --loglevel warn './src/**/*.{ts,tsx,json,md,css}'",
     "format-and-fix": "yarn format && yarn lint-fix",
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build": "react-app-rewired --max_old_space_size=4096 build",
     "test": "react-scripts test",
     "test-no-watch": "react-scripts test --watchAll=false --forceExit",
     "test-update-snapshot": "react-scripts test --updateSnapshot",

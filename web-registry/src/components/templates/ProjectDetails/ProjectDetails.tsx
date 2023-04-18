@@ -56,6 +56,7 @@ import {
   parseOffChainProject,
 } from './ProjectDetails.utils';
 import { ProjectDetailsDocumentationTable } from './tables/documentation/ProjectDetails.Documentation';
+import { ProjectDetailsTableTabs } from './tables/ProjectDetails.TableTabs';
 
 function ProjectDetails(): JSX.Element {
   const theme = useTheme();
@@ -326,12 +327,10 @@ function ProjectDetails(): JSX.Element {
         </div>
       )}
 
-      {sortedDocuments && sortedDocuments.length > 0 && (
-        <ProjectDetailsDocumentationTable
-          documents={sortedDocuments}
-          sortCallbacks={sortCallbacksDocuments}
-        />
-      )}
+      <ProjectDetailsTableTabs
+        sortedDocuments={sortedDocuments}
+        sortCallbacksDocuments={sortCallbacksDocuments}
+      />
 
       {managementActions && <ManagementActions actions={managementActions} />}
 

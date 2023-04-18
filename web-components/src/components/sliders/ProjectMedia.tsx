@@ -313,9 +313,7 @@ export default function ProjectMedia({
                     classes={classes}
                   />
                   {i === 0 && isMedia(a) && imageCredits && (
-                    <Box className={classes.imageCredits} sx={{ pl: 5 }}>
-                      {imageCredits}
-                    </Box>
+                    <Box className={classes.imageCredits}>{imageCredits}</Box>
                   )}
                 </Grid>
               ))}

@@ -1,6 +1,7 @@
 import { DOCUMENTATION_HEADERS } from './ProjectDetails.Documentation.types';
 
-export const VIEW_DOCUMENT = 'View Document';
+export const VIEW = 'View';
+export const DOCUMENT = 'Document';
 
 export const DOCUMENTATION_MAPPING: Record<
   DOCUMENTATION_HEADERS,

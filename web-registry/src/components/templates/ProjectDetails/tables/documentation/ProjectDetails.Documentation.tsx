@@ -1,3 +1,5 @@
+import { Box } from '@mui/material';
+
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import CertifiedDocumentIcon from 'web-components/lib/components/icons/CertifiedDocumentIcon';
 import {
@@ -10,7 +12,7 @@ import { Document } from 'generated/graphql';
 import { UseStateSetter } from 'types/react/use-state';
 
 import { DOCUMENTATION_ROW } from './ProjectDetails.Documentation.config';
-import { VIEW_DOCUMENT } from './ProjectDetails.Documentation.constants';
+import { DOCUMENT, VIEW } from './ProjectDetails.Documentation.constants';
 import getDocumentationTableRow from './ProjectDetails.Documentation.Row';
 
 type Props = {
@@ -32,7 +34,10 @@ export const ProjectDetailsDocumentationTable = ({
       sortCallbacks={sortCallbacks}
       renderActionButtons={(i: number) => (
         <OutlinedButton startIcon={<CertifiedDocumentIcon />} size="small">
-          {VIEW_DOCUMENT}
+          <Box>{VIEW}</Box>
+          <Box
+            sx={{ ml: 1, display: { xs: 'none', sm: 'block' } }}
+          >{`${DOCUMENT}`}</Box>
         </OutlinedButton>
       )}
       onTableChange={onTableChange}

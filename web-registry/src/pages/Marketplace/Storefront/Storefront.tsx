@@ -294,7 +294,7 @@ export const Storefront = (): JSX.Element => {
         </Box>
       </Section>
       <BuyCreditsModal
-        open={isBuyModalOpen}
+        open={isBuyModalOpen && selectedSellOrder !== null}
         onClose={() => {
           setSelectedSellOrder(null);
           setIsBuyModalOpen(false);

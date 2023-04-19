@@ -153,7 +153,7 @@ export const Storefront = (): JSX.Element => {
     project: projectData,
     signAndBroadcast,
     setCardItems,
-    setSelectedSellOrder,
+    onBroadcast: () => setSelectedSellOrder(null),
     setTxButtonTitle,
     setTxModalHeader,
     setTxModalTitle,

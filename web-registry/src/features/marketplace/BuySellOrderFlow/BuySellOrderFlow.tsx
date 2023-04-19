@@ -193,6 +193,7 @@ export const BuySellOrderFlow = ({
     setTxButtonTitle,
     setTxModalHeader,
     setTxModalTitle,
+    onBroadcast: () => setIsBuyModalOpen(false),
     buttonTitle: VIEW_ECOCREDITS,
     refetchSellOrders,
     onSubmitCallback,

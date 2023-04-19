@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { Box, Skeleton, useTheme } from '@mui/material';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
@@ -22,6 +22,7 @@ import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-ser
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
 import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
+import { useTracker } from 'lib/tracker/useTracker';
 import { getDisplayParty } from 'lib/transform';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -63,6 +64,8 @@ function ProjectDetails(): JSX.Element {
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
   const { wallet } = useWallet();
   const graphqlClient = useApolloClient();
+  const { track } = useTracker();
+  const location = useLocation();
 
   const { data: sanityProjectPageData } = useQuery(
     getAllProjectPageQuery({ sanityClient, enabled: !!sanityClient }),
@@ -358,6 +361,8 @@ function ProjectDetails(): JSX.Element {
             ? [projectsWithOrderData[0]]
             : undefined
         }
+        track={track}
+        location={location}
       />
       <CreateSellOrderFlow
         isFlowStarted={isSellFlowStarted}

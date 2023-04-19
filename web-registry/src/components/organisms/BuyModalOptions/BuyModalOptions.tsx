@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Location } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { useSetAtom } from 'jotai';
 
@@ -9,11 +10,18 @@ import { Title } from 'web-components/lib/components/typography';
 import { AllBuyModalOptionsQuery } from 'generated/sanity-graphql';
 import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
 import { onBtnClick } from 'lib/button';
+import { Track } from 'lib/tracker/types';
+import { useBuyModalOptionsTracker } from 'lib/tracker/useBuyModalOptionsTracker';
 import { useWallet } from 'lib/wallet/wallet';
+
+import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 
 interface Props extends RegenModalProps {
   content?: AllBuyModalOptionsQuery['allBuyModalOptions'][0];
   openModal?: (link: string) => void;
+  selectedProject?: ProjectWithOrderData;
+  track?: Track;
+  location?: Location;
 }
 
 export const BuyModalOptions = ({
@@ -21,11 +29,15 @@ export const BuyModalOptions = ({
   content,
   onClose,
   openModal = () => null,
+  selectedProject,
+  track,
+  location,
 }: Props) => {
   const cards = content?.cards ?? [];
   const setConnectWalletModalAtom = useSetAtom(connectWalletModalAtom);
   const { loaded, wallet } = useWallet();
   const connected = wallet?.address;
+  const { trackBuyScheduleCall, trackBuyKeplr } = useBuyModalOptionsTracker();
 
   useEffect(() => {
     if (loaded && connected) onClose();
@@ -54,11 +66,20 @@ export const BuyModalOptions = ({
               button={{
                 text: card?.button?.buttonText ?? '',
                 onClick: card?.button?.buttonLink
-                  ? () => onBtnClick(openModal, card?.button)
-                  : () =>
+                  ? () => {
+                      trackBuyScheduleCall({
+                        track,
+                        location,
+                        selectedProject,
+                      });
+                      onBtnClick(openModal, card?.button);
+                    }
+                  : () => {
+                      trackBuyKeplr({ track, location, selectedProject });
                       setConnectWalletModalAtom(
                         atom => void (atom.open = true),
-                      ),
+                      );
+                    },
               }}
               note={card?.noteRaw ?? ''}
               sx={{ mb: isLast ? 0 : 5 }}

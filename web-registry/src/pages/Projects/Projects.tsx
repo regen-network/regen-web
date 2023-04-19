@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Box, SelectChangeEvent, useMediaQuery, useTheme } from '@mui/material';
 import { spacing } from 'styles/spacing';
 
@@ -39,6 +39,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { track } = useTracker();
+  const location = useLocation();
 
   // Page index starts at 1 for route
   // Page index starts at 0 for logic
@@ -181,6 +182,8 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
           isFlowStarted={isBuyFlowStarted}
           setIsFlowStarted={setIsBuyFlowStarted}
           projects={selectedProject && [selectedProject]}
+          track={track}
+          location={location}
         />
       </Flex>
       {gettingStartedResourcesSection && (

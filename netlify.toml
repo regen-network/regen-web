@@ -43,6 +43,7 @@
   REACT_APP_BRIDGE_CREDIT_CLASS_ID = "C56"
   REACT_APP_BRIDGE="true"
   REACT_APP_SKIPPED_CLASS_ID="C01"
+  REACT_APP_ANALYTICS_ENABLED="true"
 
 [build.environment]
   NODE_OPTIONS = "--max-old-space-size=10216"

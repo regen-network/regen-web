@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Location, useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { useQuery } from '@tanstack/react-query';
 import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
@@ -16,6 +16,7 @@ import { UseStateSetter } from 'types/react/use-state';
 import { getHashUrl } from 'lib/block-explorer';
 import { client } from 'lib/clients/sanity';
 import { getBuyModalOptionsQuery } from 'lib/queries/react-query/sanity/getBuyModalOptionsQuery/getBuyModalOptionsQuery';
+import { Track } from 'lib/tracker/types';
 
 import useBuySellOrderSubmit from 'pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit';
 import { useCheckSellOrderAvailabilty } from 'pages/Marketplace/Storefront/hooks/useCheckSellOrderAvailabilty';
@@ -35,12 +36,16 @@ type Props = {
   isFlowStarted: boolean;
   setIsFlowStarted: UseStateSetter<boolean>;
   projects?: ProjectWithOrderData[] | null | undefined;
+  track?: Track;
+  location?: Location;
 };
 
 export const BuySellOrderFlow = ({
   projects,
   isFlowStarted,
   setIsFlowStarted,
+  track,
+  location,
 }: Props): JSX.Element => {
   /**
    * ui management
@@ -229,6 +234,9 @@ export const BuySellOrderFlow = ({
           setIsFlowStarted(false);
           setIsBuyModalOptionsOpen(false);
         }}
+        selectedProject={selectedProject}
+        track={track}
+        location={location}
       />
       <ProcessingModal
         open={isProcessingModalOpen}

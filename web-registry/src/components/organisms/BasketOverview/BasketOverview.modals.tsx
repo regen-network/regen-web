@@ -80,7 +80,7 @@ export const BasketOverviewModals = ({
 
   const onError = (error?: Error): void => {
     setErrorCodeAtom(ERRORS.DEFAULT);
-    setErrorModalAtom(atom => (atom.description = String(error)));
+    setErrorModalAtom(atom => void (atom.description = String(error)));
     setProcessingModalAtom(atom => void (atom.open = false));
   };
 

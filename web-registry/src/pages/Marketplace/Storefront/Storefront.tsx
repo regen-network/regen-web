@@ -153,7 +153,7 @@ export const Storefront = (): JSX.Element => {
     project: projectData,
     signAndBroadcast,
     setCardItems,
-    setSelectedSellOrder,
+    onBroadcast: () => setSelectedSellOrder(null),
     setTxButtonTitle,
     setTxModalHeader,
     setTxModalTitle,
@@ -294,7 +294,7 @@ export const Storefront = (): JSX.Element => {
         </Box>
       </Section>
       <BuyCreditsModal
-        open={isBuyModalOpen}
+        open={isBuyModalOpen && selectedSellOrder !== null}
         onClose={() => {
           setSelectedSellOrder(null);
           setIsBuyModalOpen(false);

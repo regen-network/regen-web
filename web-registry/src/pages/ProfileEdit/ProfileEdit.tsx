@@ -14,6 +14,7 @@ import { Title } from 'web-components/lib/components/typography';
 
 import { useUpdatePartyByIdMutation } from 'generated/graphql';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
+import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -43,14 +44,15 @@ export const ProfileEdit = () => {
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const reactQueryClient = useQueryClient();
 
+  const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
   const partyByAddrQuery = useMemo(
     () =>
       getPartyByAddrQuery({
         client: graphqlClient,
         addr: wallet?.address ?? '',
-        enabled: isConnected && !!graphqlClient,
+        enabled: isConnected && !!graphqlClient && !!csrfData,
       }),
-    [graphqlClient, wallet?.address, isConnected],
+    [graphqlClient, wallet?.address, isConnected, csrfData],
   );
   const { data: partyByAddr, isFetching } = useQuery(partyByAddrQuery);
   const { party, defaultAvatar } = usePartyInfos({ partyByAddr });

@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.4](https://github.com/regen-network/regen-web/compare/v1.4.3...v1.4.4) (2023-04-20)
+
+### Bug Fixes
+
+- close buy modal on tx rejection ([e4bd62f](https://github.com/regen-network/regen-web/commit/e4bd62f1f8cee141392ad1e38685d31abe80ee61))
+- close buy modal on tx rejection for BuySellOrderFlow ([81f3def](https://github.com/regen-network/regen-web/commit/81f3def8ea6c45e1cdbb8c3996423fae659e6976))
+- csrf party requests ([f329d92](https://github.com/regen-network/regen-web/commit/f329d9211c77625aabffae481faa15bcddbad688))
+- immer issue on tx rejection ([e711595](https://github.com/regen-network/regen-web/commit/e711595ddc40cc519c30709a5b9e98bb04f28c8d))
+
 ## [1.4.3](https://github.com/regen-network/regen-web/compare/v1.4.2...v1.4.3) (2023-04-14)
 
 **Note:** Version bump only for package regen-web

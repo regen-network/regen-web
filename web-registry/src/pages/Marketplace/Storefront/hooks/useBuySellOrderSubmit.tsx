@@ -43,7 +43,7 @@ type Props = {
   setTxModalTitle: UseStateSetter<string>;
   setTxModalHeader: UseStateSetter<string>;
   setTxButtonTitle: UseStateSetter<string>;
-  setSelectedSellOrder?: UseStateSetter<number | null>;
+  onBroadcast?: () => void;
   refetchSellOrders?: () => RefetchSellOrdersResponse;
   onSubmitCallback?: (values: BuyCreditsValues) => void;
 };
@@ -59,7 +59,7 @@ const useBuySellOrderSubmit = ({
   setCardItems,
   setTxModalTitle,
   setTxButtonTitle,
-  setSelectedSellOrder,
+  onBroadcast,
   refetchSellOrders,
   onSubmitCallback,
 }: Props): Params => {
@@ -155,7 +155,7 @@ const useBuySellOrderSubmit = ({
       };
       const error = await signAndBroadcast(
         tx,
-        () => setSelectedSellOrder && setSelectedSellOrder(null),
+        () => onBroadcast && onBroadcast(),
         { onError, onSuccess },
       );
 
@@ -217,7 +217,7 @@ const useBuySellOrderSubmit = ({
       signAndBroadcast,
       project,
       track,
-      setSelectedSellOrder,
+      onBroadcast,
       setCardItems,
       setTxModalHeader,
       setTxModalTitle,

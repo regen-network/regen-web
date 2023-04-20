@@ -6,7 +6,7 @@ import { useProjectEditContext } from '../../pages/ProjectEdit';
 import { EditProjectPageFooter } from './EditProjectPageFooter';
 
 interface Props {
-  onSave: () => void;
+  onSave?: () => void;
   onPrev?: () => void;
   onNext?: () => void;
   saveText?: string;
@@ -20,7 +20,7 @@ const ProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
   isValid = true,
   dirty = true,
   isSubmitting,
-  onSave,
+  onSave = () => void 0,
   ...props
 }) => {
   const { isEdit } = useProjectEditContext();

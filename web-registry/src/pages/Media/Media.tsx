@@ -1,13 +1,10 @@
-import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { MediaFormSchemaType } from 'components/organisms/MediaForm/MediaForm.schema';
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
-import {
-  MediaForm,
-  MediaValuesSimple,
-} from '../../components/organisms/MediaForm';
+import { MediaForm } from '../../components/organisms/MediaForm';
 import { useProjectEditContext } from '../ProjectEdit';
 
 const Media = (): JSX.Element => {
@@ -23,19 +20,10 @@ const Media = (): JSX.Element => {
     anchored: false,
   });
 
-  function getInitialFormValues(): MediaValuesSimple {
-    let values: MediaValuesSimple = {};
-    if (metadata) {
-      values = {
-        'regen:previewPhoto': metadata['regen:previewPhoto'],
-        'regen:galleryPhotos': metadata['regen:galleryPhotos'],
-        'regen:storyMedia': metadata['regen:storyMedia'],
-        'schema:creditText': metadata['schema:creditText'],
-      };
-    }
-
-    return values;
-  }
+  const initialValues: MediaFormSchemaType = {
+    'regen:previewPhoto': metadata?.['regen:previewPhoto'],
+    'regen:galleryPhotos': metadata?.['regen:galleryPhotos'],
+  };
 
   const saveAndExit = (): Promise<void> => {
     // TODO: functionality
@@ -58,7 +46,7 @@ const Media = (): JSX.Element => {
     >
       <MediaForm
         submit={metadataSubmit}
-        initialValues={getInitialFormValues()}
+        initialValues={initialValues}
         onNext={navigateNext}
         onPrev={navigatePrev}
         projectId={offChainProject?.id}

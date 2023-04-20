@@ -22,7 +22,7 @@ import {
   DescriptionFormValues,
   ProjectLocationFormValues,
 } from 'components/organisms';
-import { MediaFormValues } from 'components/organisms/MediaForm';
+import { MediaFormSchemaType } from 'components/organisms/MediaForm/MediaForm.schema';
 
 export type OffChainProject =
   | ProjectByIdQuery['projectById']
@@ -53,7 +53,7 @@ type Values =
   | BasicInfoFormValues
   | ProjectLocationFormValues
   | DescriptionFormValues
-  | MediaFormValues
+  | MediaFormSchemaType
   | Partial<ProjectMetadataLD>;
 
 export const useProjectWithMetadata = ({

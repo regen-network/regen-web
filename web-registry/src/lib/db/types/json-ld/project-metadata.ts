@@ -28,8 +28,14 @@ export interface ProjectPageMetadataLD {
   '@type': string; // regen:Project-Page
   '@id': string;
   'regen:creditClassId': string;
-  'regen:previewPhoto'?: string;
-  'regen:galleryPhotos'?: string[];
+  'regen:previewPhoto'?: {
+    'schema:url': string;
+    'schema:creditText': string;
+  };
+  'regen:galleryPhotos'?: {
+    'schema:url': string;
+    'schema:creditText': string;
+  }[];
   'schema:creditText'?: string;
   'schema:description'?: string;
 

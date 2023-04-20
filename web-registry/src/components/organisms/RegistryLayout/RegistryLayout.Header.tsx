@@ -14,6 +14,7 @@ import { UserMenuItem } from 'web-components/lib/components/header/components/Us
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { truncate } from 'web-components/lib/utils/truncate';
 
+import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -44,12 +45,12 @@ const RegistryLayoutHeader: React.FC = () => {
 
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
-
+  const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
   const { data: partyByAddr } = useQuery(
     getPartyByAddrQuery({
       client: graphqlClient,
       addr: wallet?.address ?? '',
-      enabled: isConnected && !!graphqlClient,
+      enabled: isConnected && !!graphqlClient && !!csrfData,
     }),
   );
   const { party, defaultAvatar } = usePartyInfos({ partyByAddr });

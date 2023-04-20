@@ -18,6 +18,7 @@ import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 import { truncate } from 'web-components/lib/utils/truncate';
 
 import { getAccountUrl } from 'lib/block-explorer';
+import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 
 import { getSocialsLinks } from 'pages/Dashboard/Dashboard.utils';
@@ -39,11 +40,12 @@ export const EcocreditsByAccount = (): JSX.Element => {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
+  const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
   const { data: partyByAddr } = useQuery(
     getPartyByAddrQuery({
       client: graphqlClient,
       addr: accountAddress ?? '',
-      enabled: !!accountAddress && !!graphqlClient,
+      enabled: !!accountAddress && !!graphqlClient && !!csrfData,
     }),
   );
   const { party, defaultAvatar } = usePartyInfos({ partyByAddr });

@@ -89,6 +89,8 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
           disabled={isSubmitting}
           multiline
           optional="(recommended)"
+          helperText={errors['schema:description']?.message}
+          error={!!errors['schema:description']}
           {...form.register('schema:description')}
         >
           <TextAreaFieldChartCounter value={description} />
@@ -103,6 +105,8 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
           disabled={isSubmitting}
           multiline
           optional="(recommended)"
+          helperText={errors['regen:story']?.message}
+          error={!!errors['regen:story']}
           {...form.register('regen:story')}
         >
           <TextAreaFieldChartCounter
@@ -118,6 +122,8 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
           disabled={isSubmitting}
           multiline
           optional="(required if you added a project story)"
+          helperText={errors['regen:storyTitle']?.message}
+          error={!!errors['regen:storyTitle']}
           {...form.register('regen:storyTitle')}
         >
           <TextAreaFieldChartCounter

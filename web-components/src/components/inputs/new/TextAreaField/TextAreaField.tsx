@@ -16,6 +16,8 @@ interface TextareaFieldProps extends InputProps, DefaultStyleProps {
   children?: React.ReactNode;
   onExampleClick?: () => void;
   sx?: SxProps<Theme>;
+  error?: boolean;
+  helperText?: string;
 }
 
 export const TextAreaField = forwardRef<HTMLInputElement, TextareaFieldProps>(
@@ -33,6 +35,8 @@ export const TextAreaField = forwardRef<HTMLInputElement, TextareaFieldProps>(
       defaultStyle = true,
       children,
       sx,
+      error,
+      helperText,
       ...inputProps
     }: TextareaFieldProps,
     ref,
@@ -46,6 +50,8 @@ export const TextAreaField = forwardRef<HTMLInputElement, TextareaFieldProps>(
       className={className}
       defaultStyle={defaultStyle}
       sx={sx}
+      error={error}
+      helperText={helperText}
     >
       <>
         <Input

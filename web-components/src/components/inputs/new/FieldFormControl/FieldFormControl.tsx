@@ -43,7 +43,6 @@ export default function FieldFormControl({
   error = false,
   helperText,
 }: Props): JSX.Element {
-  const hasError = false;
   const { classes: styles, cx } = useFieldFormControlStyles({
     disabled,
     description,
@@ -70,7 +69,7 @@ export default function FieldFormControl({
       )}
       {children}
 
-      {hasError && (
+      {error && (
         <FormHelperText className={styles.error}>{helperText}</FormHelperText>
       )}
     </FormControl>

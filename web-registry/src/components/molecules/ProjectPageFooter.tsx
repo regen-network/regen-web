@@ -6,7 +6,7 @@ import { useProjectEditContext } from '../../pages/ProjectEdit';
 import { EditProjectPageFooter } from './EditProjectPageFooter';
 
 interface Props {
-  onSave: () => void;
+  onSave?: () => void;
   onPrev?: () => void;
   onNext?: () => void;
   saveText?: string;

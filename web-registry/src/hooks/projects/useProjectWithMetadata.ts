@@ -19,9 +19,9 @@ import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-serve
 import { UseProjectEditSubmitParams } from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
 import {
   BasicInfoFormValues,
-  DescriptionFormValues,
   ProjectLocationFormValues,
 } from 'components/organisms';
+import { DescriptionSchemaType } from 'components/organisms/DescriptionForm/DescriptionForm.schema';
 import { MediaFormValues } from 'components/organisms/MediaForm';
 
 export type OffChainProject =
@@ -52,7 +52,7 @@ interface Res {
 type Values =
   | BasicInfoFormValues
   | ProjectLocationFormValues
-  | DescriptionFormValues
+  | DescriptionSchemaType
   | MediaFormValues
   | Partial<ProjectMetadataLD>;
 

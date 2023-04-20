@@ -4,10 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
-import {
-  DescriptionForm,
-  DescriptionFormValues,
-} from '../../components/organisms';
+import { DescriptionForm } from '../../components/organisms/DescriptionForm/DescriptionForm';
+import { DescriptionSchemaType } from '../../components/organisms/DescriptionForm/DescriptionForm.schema';
 import { useProjectEditContext } from '../ProjectEdit';
 
 const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
@@ -23,7 +21,7 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
     anchored: false,
   });
 
-  let initialFieldValues: DescriptionFormValues | undefined;
+  let initialFieldValues: DescriptionSchemaType | undefined;
   if (metadata) {
     initialFieldValues = {
       'schema:description': metadata['schema:description'],
@@ -50,7 +48,7 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
       saveAndExit={saveAndExit}
     >
       <DescriptionForm
-        submit={metadataSubmit}
+        onSubmit={metadataSubmit}
         onNext={navigateNext}
         onPrev={navigatePrev}
         initialValues={initialFieldValues}

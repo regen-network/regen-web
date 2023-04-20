@@ -1,14 +1,14 @@
 import React from 'react';
-import { Field, Form, useFormikContext } from 'formik';
+import { useForm } from 'react-hook-form';
 
 import {
   ImageUpload,
   ImageUploadProps,
-} from 'web-components/lib/components/inputs/ImageUpload';
+} from 'web-components/lib/components/inputs/new/ProjectImageUpload/ProjectImageUpload';
 
 import { apiUri } from '../../../lib/apiUri';
-import { cropAspect, MediaBaseErrors, MediaBaseValues } from './MediaForm';
-import { PHOTO_COUNT } from './MediaForm.constants';
+import { cropAspectMediaForm, PHOTO_COUNT } from './MediaForm.constants';
+import { MediaBaseErrors, MediaBaseValues } from './MediaForm.types';
 import { useMediaFormStyles } from './useMediaFormStyles';
 
 export interface MediaValuesSimple extends MediaBaseValues {
@@ -28,7 +28,7 @@ const MediaFormSimple = ({
   projectId?: string;
 }): JSX.Element => {
   const { classes } = useMediaFormStyles();
-  const { values } = useFormikContext<MediaValuesSimple>();
+  const form = useForm();
 
   const imgDefaultProps: Partial<ImageUploadProps> = {
     apiServerUrl: apiUri,
@@ -37,56 +37,48 @@ const MediaFormSimple = ({
     isDrop: true,
     classes: { main: classes.fullSizeMedia },
     buttonText: '+ Add Photo',
-    fixedCrop: cropAspect,
+    fixedCrop: cropAspectMediaForm,
   };
 
   const shouldRenderGalleryPhoto = (i: number): boolean => {
     // don't show option for gallery if there is no preview photo or first
-    if (!values['regen:previewPhoto']) return false;
+    // if (!values['regen:previewPhoto']) return false;
     // if there is a preview photo, render the first gallery photo
-    if (values['regen:previewPhoto'] && i === 0) return true;
+    // if (values['regen:previewPhoto'] && i === 0) return true;
     // otherwise, render based on the presence of last index
-    return Boolean(values['regen:galleryPhotos']?.[i - 1]);
+    // return Boolean(values['regen:galleryPhotos']?.[i - 1]);
+    return false;
+  };
+
+  /* Setter */
+
+  const setPreviewPhoto = (value: string): void => {
+    form.setValue('previewPhoto', value);
+  };
+  const setGalleryPhotos = (value: string): void => {
+    form.setValue('galleryPhotos', value);
   };
 
   return (
-    <Form translate="yes">
-      <Field
+    <>
+      <ImageUpload
         {...imgDefaultProps}
+        isDrop={false}
         name="regen:previewPhoto"
-        description="Choose the photos that will show up on the project page. The first photo will be your preview photo."
         label="Photos"
-        component={ImageUpload}
+        setValue={setPreviewPhoto}
       />
       {Array(PHOTO_COUNT)
         .fill(undefined)
-        .map((_photo, i) =>
-          shouldRenderGalleryPhoto(i) ? (
-            <Field
-              {...imgDefaultProps}
-              key={i}
-              name={`regen:galleryPhotos[${i}]`}
-              component={ImageUpload}
-            />
-          ) : (
-            <React.Fragment key={i} /> // Formik expects a react element - this avoids console bug
-          ),
-        )}
-      {/* Fields hidden for now
-      <Field
-        optional
-        component={ControlledTextField}
-        label="Photo Credit"
-        name="schema:creditText"
-      />
-      <Field
-        optional
-        component={VideoInput}
-        description="Copy and paste a video url from YouTube, Vimeo, or Facebook."
-        label="Video Url"
-        name="regen:videoURL.@value"
-      /> */}
-    </Form>
+        .map((_photo, i) => (
+          <ImageUpload
+            {...imgDefaultProps}
+            setValue={setGalleryPhotos}
+            key={i}
+            name={`regen:galleryPhotos[${i}]`}
+          />
+        ))}
+    </>
   );
 };
 

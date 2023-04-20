@@ -125,6 +125,7 @@ const SaveFooter: React.FC<React.PropsWithChildren<Props>> = ({
             className={classes.btn}
             onClick={props.onSave}
             disabled={props.saveDisabled}
+            type="submit"
           >
             {saveText}
           </ContainedButton>

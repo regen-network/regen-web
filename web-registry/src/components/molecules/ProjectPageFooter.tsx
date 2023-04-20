@@ -20,7 +20,7 @@ const ProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
   isValid = true,
   dirty = true,
   isSubmitting,
-  onSave,
+  onSave = () => void 0,
   ...props
 }) => {
   const { isEdit } = useProjectEditContext();

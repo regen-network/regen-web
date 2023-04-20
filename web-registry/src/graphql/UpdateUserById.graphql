@@ -1,7 +1,0 @@
-mutation UpdateUserById($input: UpdateUserByIdInput!) {
-  updateUserById(input: $input) {
-    user {
-      id
-    }
-  }
-}

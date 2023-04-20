@@ -5,7 +5,7 @@ fragment moreProjectFields on Project {
   creditClassByCreditClassId {
     uri
   }
-  partyByRegistryId {
+  partyByDeveloperId {
     name
     image
     type

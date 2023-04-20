@@ -1,5 +1,0 @@
-mutation TransferCredits($input: TransferCreditsInput!) {
-  transferCredits(input: $input) {
-    json
-  }
-}

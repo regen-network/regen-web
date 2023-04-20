@@ -3,21 +3,8 @@ query ProjectById($id: UUID!) {
     id
     metadata
     developerId
-    originatorId
-    landOwnerId
-    stewardId
-    addressId
     onChainId
     partyByDeveloperId {
-      ...partyFields
-    }
-    partyByStewardId {
-      ...partyFields
-    }
-    partyByLandOwnerId {
-      ...partyFields
-    }
-    partyByOriginatorId {
       ...partyFields
     }
     creditClassByCreditClassId {
@@ -26,7 +13,6 @@ query ProjectById($id: UUID!) {
       creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
         nodes {
           name
-          version
           metadata
         }
       }

@@ -1,0 +1,20 @@
+query AllCreditBatches {
+  allCreditBatches {
+    nodes {
+      id
+      createdAt
+      creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
+        id
+        name
+        createdAt
+      }
+      projectByProjectId {
+        metadata
+        developerId
+        partyByDeveloperId {
+          name
+        }
+      }
+    }
+  }
+}

@@ -1,25 +1,8 @@
 fragment projectFields on Project {
   id
   onChainId
-  eventsByProjectId(orderBy: DATE_ASC) {
-    nodes {
-      date
-      summary
-      description
-      creditVintageByEventId {
-        ...creditVintageFields
-      }
-    }
-  }
   metadata
-  partyByRegistryId {
-    name
-    organizationByPartyId {
-      website
-    }
-  }
   creditClassByCreditClassId {
-    standard
     onChainId
     creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
       nodes {
@@ -27,28 +10,8 @@ fragment projectFields on Project {
         metadata
       }
     }
-    methodologyByMethodologyId {
-      methodologyVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
-        nodes {
-          name
-          metadata
-        }
-      }
-    }
   }
   partyByDeveloperId {
-    ...partyFields
-  }
-  partyByStewardId {
-    ...partyFields
-  }
-  partyByLandOwnerId {
-    ...partyFields
-  }
-  partyByIssuerId {
-    ...partyFields
-  }
-  partyByResellerId {
     ...partyFields
   }
   documentsByProjectId {
@@ -57,14 +20,7 @@ fragment projectFields on Project {
       type
       date
       url
-      eventByEventId {
-        date
-        summary
-        description
-        creditVintageByEventId {
-          ...creditVintageFields
-        }
-      }
     }
   }
 }
+

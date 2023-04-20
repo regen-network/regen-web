@@ -1,5 +1,5 @@
 query batchDetails($batchDenom: String!) {
-  creditVintageByBatchDenom(batchDenom: $batchDenom) {
+  creditBatchByBatchDenom(batchDenom: $batchDenom) {
     projectByProjectId {
       handle
     }

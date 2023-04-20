@@ -7,23 +7,11 @@ query AllProjects {
       creditClassByCreditClassId {
         id
         onChainId
-        methodologyByMethodologyId {
-          id
-          methodologyVersionsById {
-            nodes {
-              id
-              createdAt
-              name
-              version
-            }
-          }
-        }
         creditClassVersionsById {
           nodes {
             id
             createdAt
             name
-            version
             metadata
           }
         }

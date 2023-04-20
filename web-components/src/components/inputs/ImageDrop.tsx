@@ -28,7 +28,7 @@ export interface ImageDropProps extends FieldProps {
   label?: string;
   optional?: boolean | string;
   buttonText?: string;
-  fixedCrop?: Partial<Crop>;
+  fixedCrop: Partial<Crop>;
   hideDragText?: boolean;
   onDelete?: (fileName: string) => Promise<void>;
   onUpload?: (imageFile: File) => Promise<string>;

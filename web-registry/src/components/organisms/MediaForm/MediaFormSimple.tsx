@@ -1,14 +1,20 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
+import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
 
-import {
-  ImageUpload,
-  ImageUploadProps,
-} from 'web-components/lib/components/inputs/new/ProjectImageUpload/ProjectImageUpload';
+import { ImageDrop } from 'web-components/lib/components/inputs/new/ImageDrop/ImageDrop';
+import { ImageField } from 'web-components/lib/components/inputs/new/ImageField/ImageField';
+import { ImageFieldBackground } from 'web-components/lib/components/inputs/new/ImageField/ImageField.Background';
+import { ImageUploadProps } from 'web-components/lib/components/inputs/new/ProjectImageUpload/ProjectImageUpload';
 
 import { apiUri } from '../../../lib/apiUri';
-import { cropAspectMediaForm, PHOTO_COUNT } from './MediaForm.constants';
-import { MediaBaseErrors, MediaBaseValues } from './MediaForm.types';
+import { cropAspectMediaForm } from './MediaForm.constants';
+import { MediaFormSchemaType } from './MediaForm.schema';
+import {
+  MediaBaseErrors,
+  MediaBaseValues,
+  MediaPhotoType,
+} from './MediaForm.types';
+import { gethandleDelete, getHandleUpload } from './MediaForm.utils';
 import { useMediaFormStyles } from './useMediaFormStyles';
 
 export interface MediaValuesSimple extends MediaBaseValues {
@@ -28,13 +34,12 @@ const MediaFormSimple = ({
   projectId?: string;
 }): JSX.Element => {
   const { classes } = useMediaFormStyles();
-  const form = useForm();
-
+  const ctx = useFormContext<MediaFormSchemaType>();
+  const { register, control, setValue } = ctx;
   const imgDefaultProps: Partial<ImageUploadProps> = {
     apiServerUrl: apiUri,
     projectId,
     optional: true,
-    isDrop: true,
     classes: { main: classes.fullSizeMedia },
     buttonText: '+ Add Photo',
     fixedCrop: cropAspectMediaForm,
@@ -50,34 +55,78 @@ const MediaFormSimple = ({
     return false;
   };
 
+  const { fields, append, prepend, remove } = useFieldArray({
+    name: 'regen:galleryPhotos',
+    control: control,
+  });
+
+  useEffect(() => {
+    if (fields.length === 0) {
+      append({
+        'schema:url': '',
+        'schema:caption': '',
+        'schema:creditText': '',
+      });
+    }
+  }, [append, fields]);
+
+  /* Watcher */
+
+  const previewPhoto = useWatch({ control, name: 'regen:previewPhoto' });
+
   /* Setter */
 
-  const setPreviewPhoto = (value: string): void => {
-    form.setValue('previewPhoto', value);
+  const setPreviewPhoto = (value: MediaPhotoType): void => {
+    setValue('regen:previewPhoto', value);
   };
-  const setGalleryPhotos = (value: string): void => {
-    form.setValue('galleryPhotos', value);
+  const setGalleryPhotos = (
+    value: MediaPhotoType,
+    fieldIndex: number,
+  ): void => {
+    setValue(`regen:galleryPhotos.${fieldIndex}`, value);
   };
+
+  /* Callbacks  */
+
+  const projectPath = `projects/${projectId}`;
+  const handleUpload = getHandleUpload({
+    apiServerUrl: apiUri,
+    projectPath,
+    prepend,
+  });
+  const getHandleDeleteWithIndex = (fieldIndex: number) =>
+    gethandleDelete({
+      apiServerUrl: apiUri,
+      projectId,
+      remove,
+      fieldIndex,
+    });
 
   return (
     <>
-      <ImageUpload
+      <ImageField
         {...imgDefaultProps}
-        isDrop={false}
-        name="regen:previewPhoto"
         label="Photos"
         setValue={setPreviewPhoto}
-      />
-      {Array(PHOTO_COUNT)
-        .fill(undefined)
-        .map((_photo, i) => (
-          <ImageUpload
-            {...imgDefaultProps}
-            setValue={setGalleryPhotos}
-            key={i}
-            name={`regen:galleryPhotos[${i}]`}
-          />
-        ))}
+        onUpload={handleUpload}
+        {...register('regen:previewPhoto')}
+        name="preview-photo"
+      >
+        <ImageFieldBackground value={previewPhoto?.['schema:url'] ?? ''} />
+      </ImageField>
+      {fields.map((field, index) => (
+        <ImageDrop
+          onDelete={getHandleDeleteWithIndex(index)}
+          onUpload={handleUpload}
+          setValue={setGalleryPhotos}
+          key={field.id}
+          fieldId={field.id}
+          fieldIndex={index}
+          {...register('regen:galleryPhotos')}
+          {...imgDefaultProps}
+          name="gallery-photos"
+        />
+      ))}
     </>
   );
 };

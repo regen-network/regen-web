@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useMediaQuery, useTheme } from '@mui/material';
 
@@ -18,62 +19,73 @@ type Props = {
   handleDrop: (files: File[]) => void;
 };
 
-export const ImageDropZone = ({
-  buttonText,
-  name,
-  hideDragText,
-  classes,
-  handleFileChange,
-  handleDrop,
-}: Props) => {
-  const { classes: styles, cx } = useImageDropStyles();
-  const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up('tablet'));
+export const ImageDropZone = forwardRef<HTMLInputElement, Props>(
+  (
+    {
+      buttonText,
+      name,
+      hideDragText,
+      classes,
+      handleFileChange,
+      handleDrop,
+      ...props
+    },
+    ref,
+  ) => {
+    const { classes: styles, cx } = useImageDropStyles();
+    const theme = useTheme();
+    const isDesktop = useMediaQuery(theme.breakpoints.up('tablet'));
 
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: 'image/*',
-    onDropAccepted: handleDrop,
-    onDropRejected: () => {},
-    noClick: true,
-    noKeyboard: true,
-  });
+    const { getRootProps, getInputProps } = useDropzone({
+      accept: 'image/*',
+      onDropAccepted: handleDrop,
+      onDropRejected: () => {},
+      noClick: true,
+      noKeyboard: true,
+    });
 
-  return (
-    <div className={cx('container', styles.main, classes?.main)}>
-      <div
-        {...getRootProps({
-          className: cx('dropzone', styles.drop),
-        })}
-      >
-        {isDesktop && !hideDragText && (
-          <>
-            <Label size="xs" mb={2}>
-              drag and drop
-            </Label>
-            <span className={styles.or}>or</span>
-          </>
-        )}
-        <input
-          {...getInputProps({
-            defaultValue: '',
-            contentEditable: false,
-            draggable: false,
-            spellCheck: false,
+    return (
+      <div className={cx('container', styles.main, classes?.main)}>
+        <div
+          {...getRootProps({
+            className: cx('dropzone', styles.drop),
           })}
-        />
-        <input
-          type="file"
-          hidden
-          onChange={handleFileChange}
-          accept="image/*"
-          id={`btn-file-input-${name}`}
-        />
-        <label htmlFor={`btn-file-input-${name}`}>
-          <OutlinedButton component="span" classes={{ root: classes?.button }}>
-            {buttonText || '+ add'}
-          </OutlinedButton>
-        </label>
+        >
+          {isDesktop && !hideDragText && (
+            <>
+              <Label size="xs" mb={2}>
+                drag and drop
+              </Label>
+              <span className={styles.or}>or</span>
+            </>
+          )}
+          <input
+            {...getInputProps({
+              defaultValue: '',
+              contentEditable: false,
+              draggable: false,
+              spellCheck: false,
+            })}
+          />
+          <input
+            type="file"
+            hidden
+            onChange={handleFileChange}
+            accept="image/*"
+            id={`btn-file-input-${name}`}
+            ref={ref}
+            {...props}
+          />
+          <label htmlFor={`btn-file-input-${name}`}>
+            <OutlinedButton
+              component="span"
+              classes={{ root: classes?.button }}
+            >
+              {buttonText || '+ add'}
+            </OutlinedButton>
+          </label>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  },
+);

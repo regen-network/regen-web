@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { IconButton, IconButtonProps, useTheme } from '@mui/material';
 
 import TrashIcon from 'src/components/icons/TrashIcon';
@@ -15,21 +16,23 @@ type Props = {
   };
 };
 
-export const ImageDropImage = ({ value, handleDelete, classes }: Props) => {
-  const { classes: styles, cx } = useImageDropStyles();
-  const theme = useTheme();
+export const ImageDropImage = forwardRef<HTMLInputElement, Props>(
+  ({ value, handleDelete, classes }, ref) => {
+    const { classes: styles, cx } = useImageDropStyles();
+    const theme = useTheme();
 
-  return (
-    <div className={cx(styles.preview, classes?.main)}>
-      <Image className={styles.previewImage} src={value} backgroundImage />
-      <IconButton
-        classes={{ root: styles.deleteButton }}
-        onClick={handleDelete}
-        aria-label="delete"
-        size="large"
-      >
-        <TrashIcon color={theme.palette.error.light} />
-      </IconButton>
-    </div>
-  );
-};
+    return (
+      <div className={cx(styles.preview, classes?.main)}>
+        <Image className={styles.previewImage} src={value} backgroundImage />
+        <IconButton
+          classes={{ root: styles.deleteButton }}
+          onClick={handleDelete}
+          aria-label="delete"
+          size="large"
+        >
+          <TrashIcon color={theme.palette.error.light} />
+        </IconButton>
+      </div>
+    );
+  },
+);

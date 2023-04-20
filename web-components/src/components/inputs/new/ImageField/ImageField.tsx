@@ -23,7 +23,7 @@ interface Props {
   circularCrop?: boolean;
   fixedCrop?: Partial<Crop>;
   children: ReactNode;
-  setValue: (value: string) => void;
+  setValue: (value: any) => void;
   onUpload?: (imageFile: File) => Promise<string>;
   sx?: {
     label?: SxProps<Theme>;

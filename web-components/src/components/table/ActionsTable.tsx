@@ -170,7 +170,7 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
             <TableHead>
               <TableRow>
                 {headerRows.map((headerRow, i) =>
-                  sortCallbacks[i] ? (
+                  sortCallbacks[i] && rows.length > 1 ? (
                     <SortableHead
                       key={i}
                       fieldIndex={i}

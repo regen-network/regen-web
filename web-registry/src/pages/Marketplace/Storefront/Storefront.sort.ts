@@ -1,3 +1,9 @@
+import {
+  createAscSortHandler,
+  createDescSortHandler,
+} from 'lib/sort/createSortHandler';
+import { transformToNum } from 'lib/sort/transforms';
+
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 export type SellOrdersSortType =
@@ -15,6 +21,9 @@ export type SellOrdersSortType =
   | 'batch-denom-asc'
   | 'batch-denom-desc';
 
+const asc = createAscSortHandler<SellOrderInfoExtented>();
+const desc = createDescSortHandler<SellOrderInfoExtented>();
+
 export const sortSellOrders = (
   sellOrders: SellOrderInfoExtented[],
   sort: SellOrdersSortType,
@@ -25,13 +34,13 @@ export const sortSellOrders = (
     case 'price-desc':
       return sellOrders.sort(desc('askUsdAmount'));
     case 'id-asc':
-      return sellOrders.sort(asc('id', toNum));
+      return sellOrders.sort(asc('id', transformToNum));
     case 'id-desc':
-      return sellOrders.sort(desc('id', toNum));
+      return sellOrders.sort(desc('id', transformToNum));
     case 'amount-asc':
-      return sellOrders.sort(asc('quantity', toNum));
+      return sellOrders.sort(asc('quantity', transformToNum));
     case 'amount-desc':
-      return sellOrders.sort(desc('quantity', toNum));
+      return sellOrders.sort(desc('quantity', transformToNum));
     case 'currency-denom-asc':
       return sellOrders.sort(asc('askBaseDenom'));
     case 'currency-denom-desc':
@@ -44,38 +53,3 @@ export const sortSellOrders = (
       return sellOrders;
   }
 };
-// transforms
-const toNum = (a: unknown): number => Number(a);
-
-// Generic sort
-type SortArgType = string | number;
-function isSortArgType(a: unknown): a is SortArgType {
-  return typeof a === 'string' || typeof a === 'number';
-}
-
-function createSortHandler<T>(
-  sortFn: (a: SortArgType, b: SortArgType) => number,
-) {
-  return (key: keyof T, transformFn?: (a: unknown) => SortArgType) => {
-    return (a: T, b: T): number => {
-      const aVal = transformFn ? transformFn(a[key]) : a[key];
-      const bVal = transformFn ? transformFn(b[key]) : b[key];
-      if (!isSortArgType(aVal) || !isSortArgType(bVal)) {
-        throw new Error(`Invalid sort argument type`);
-      }
-      return sortFn(aVal, bVal);
-    };
-  };
-}
-
-const asc = createSortHandler<SellOrderInfoExtented>((a, b) => {
-  if (a > b) return 1; // sort a after b
-  if (a < b) return -1; // sort a before b
-  return 0;
-});
-
-const desc = createSortHandler<SellOrderInfoExtented>((a, b) => {
-  if (a < b) return 1; // sort a before b
-  if (a > b) return -1; // sort a afer b
-  return 0;
-});

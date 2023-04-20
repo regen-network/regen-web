@@ -1,12 +1,12 @@
 import React from 'react';
 import { useTheme } from '@mui/material';
-import SvgIcon from '@mui/material/SvgIcon';
+import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 import { DefaultTheme as Theme } from '@mui/styles';
 
-type Props = {
+interface Props extends SvgIconProps {
   fileType?: string;
   className?: string;
-};
+}
 
 type Fill = {
   main: string;
@@ -34,7 +34,7 @@ const DocumentIcon: React.FC<
         };
       default:
         return {
-          main: theme.palette.secondary.main,
+          main: theme.palette.secondary.dark,
           accent: theme.palette.secondary.contrastText,
           shade: theme.palette.secondary.light,
         };

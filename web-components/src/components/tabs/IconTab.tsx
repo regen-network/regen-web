@@ -15,7 +15,10 @@ export interface IconTabProps extends RegenTab {
   size?: TextSize;
   href?: string;
   linkComponent?: LinkComponentProp;
-  sxInner?: SxProps<Theme>;
+  sxs?: {
+    innerContainer?: SxProps<Theme>;
+    inner?: SxProps<Theme>;
+  };
 }
 
 const StyledTab = styled(Tab, {
@@ -43,7 +46,7 @@ const IconTab = ({
   label,
   hidden,
   size = 'lg',
-  sxInner,
+  sxs,
   href,
   linkComponent,
   ...props
@@ -54,8 +57,9 @@ const IconTab = ({
       href={href}
       iconPosition="start"
       size={size}
+      sx={sxs?.innerContainer}
       label={
-        <Subtitle size={size} sx={{ ml: 1, ...sxInner }}>
+        <Subtitle size={size} sx={{ ml: 1, ...sxs?.inner }}>
           {label}
         </Subtitle>
       }

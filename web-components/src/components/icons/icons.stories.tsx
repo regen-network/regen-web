@@ -15,6 +15,7 @@ import BlockIcon from './BlockIcon';
 import BreadcrumbIcon from './BreadcrumbIcon';
 import { BrokenLinkIcon } from './BrokenLinkIcon';
 import CelebrateRegenIcon from './CelebrateRegenIcon';
+import CertifiedDocumentIcon from './CertifiedDocumentIcon';
 import CheckedIcon from './CheckedIcon';
 import CheckIcon from './CheckIcon';
 import CloseIcon from './CloseIcon';
@@ -75,7 +76,6 @@ import ShadedCreditsIcon from './ShadedCreditsIcon';
 import ShieldIcon from './ShieldIcon';
 import SmallArrowIcon from './SmallArrowIcon';
 import DiscordIcon from './social/DiscordIcon';
-import WebsiteLinkIcon from './social/WebsiteLinkIcon';
 import FacebookIcon from './social/FacebookIcon';
 import GithubIcon from './social/GithubIcon';
 import InstagramIcon from './social/InstagramIcon';
@@ -86,6 +86,7 @@ import TelegramIcon from './social/TelegramIcon';
 import TwitterBadgeIcon from './social/TwitterBadgeIcon';
 import TwitterIcon from './social/TwitterIcon';
 import TwitterIcon2 from './social/TwitterIcon2';
+import WebsiteLinkIcon from './social/WebsiteLinkIcon';
 import YoutubeIcon from './social/YoutubeIcon';
 import SoilSampleIcon from './SoilSampleIcon';
 import { Spinner } from './Spinner';
@@ -174,6 +175,10 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon
       icon={<CelebrateRegenIcon sx={{ fontSize: 64 }} />}
       label="CelebrateRegenIcon"
+    />
+    <LabeledIcon
+      icon={<CertifiedDocumentIcon sx={{ color: 'secondary.main' }} />}
+      label="CertifiedDocumentIcon"
     />
     <LabeledIcon icon={<CheckedIcon />} label="CheckedIcon" />
     <LabeledIcon icon={<CheckIcon />} label="CheckIcon" />

@@ -4,7 +4,7 @@ import { ProjectPageIcon } from '../icons/ProjectPageIcon';
 import {
   DocumentationTable,
   DocumentRowData,
-} from '../table/DocumentationTable';
+} from '../table/DocumentationTable/DocumentationTable';
 import Tabs, { RegenTab } from '.';
 import { IconTabProps } from './IconTab';
 import { IconTabs } from './IconTabs';

@@ -30,7 +30,6 @@ import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellO
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
-import { CreditBatchesSection } from 'components/organisms/CreditBatchesSection/CreditBatchesSection';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 import { ProjectStorySection } from 'components/organisms/ProjectStorySection/ProjectStorySection';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
@@ -45,9 +44,9 @@ import useGeojson from './hooks/useGeojson';
 import useImpact from './hooks/useImpact';
 import useIssuanceModal from './hooks/useIssuanceModal';
 import useSeo from './hooks/useSeo';
+import { useSortedDocuments } from './hooks/useSortedDocuments';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProjects';
-import { ProjectDocumentation } from './ProjectDetails.ProjectDocumentation';
 import { ProjectTimeline } from './ProjectDetails.ProjectTimeline';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
 import {
@@ -56,6 +55,7 @@ import {
   parseMedia,
   parseOffChainProject,
 } from './ProjectDetails.utils';
+import { ProjectDetailsTableTabs } from './tables/ProjectDetails.TableTabs';
 
 function ProjectDetails(): JSX.Element {
   const theme = useTheme();
@@ -156,6 +156,10 @@ function ProjectDetails(): JSX.Element {
     coBenefitsIris,
     primaryImpactIRI,
   } = parseOffChainProject(offChainProject as Maybe<Project>);
+
+  const { sortCallbacksDocuments, sortedDocuments } = useSortedDocuments({
+    projectDocs,
+  });
 
   // For legacy projects (that are not on-chain), all metadata is stored off-chain
   const projectMetadata = isOnChainId
@@ -306,23 +310,19 @@ function ProjectDetails(): JSX.Element {
         </div>
       )}
 
-      <CreditBatchesSection
-        offChainProject={offChainProject}
-        batchData={{
-          batches: batchesWithSupply,
-          totals: batchesTotal,
-        }}
-        paginationParams={paginationParams}
-        setPaginationParams={setPaginationParams}
-      />
-
-      {projectDocs && projectDocs.length > 0 && (
-        <ProjectDocumentation
-          docs={projectDocs}
-          txClient={txClient}
-          viewOnLedger={viewOnLedger}
+      <div className="topo-background-alternate">
+        <ProjectDetailsTableTabs
+          sortedDocuments={sortedDocuments}
+          sortCallbacksDocuments={sortCallbacksDocuments}
+          offChainProject={offChainProject}
+          batchData={{
+            batches: batchesWithSupply,
+            totals: batchesTotal,
+          }}
+          paginationParams={paginationParams}
+          setPaginationParams={setPaginationParams}
         />
-      )}
+      </div>
 
       {managementActions && <ManagementActions actions={managementActions} />}
 

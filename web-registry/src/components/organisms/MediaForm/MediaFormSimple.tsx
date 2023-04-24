@@ -2,12 +2,16 @@ import { useEffect } from 'react';
 import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
 
 import { ImageDrop } from 'web-components/lib/components/inputs/new/ImageDrop/ImageDrop';
-import { ImageField } from 'web-components/lib/components/inputs/new/ImageField/ImageField';
-import { ImageFieldBackground } from 'web-components/lib/components/inputs/new/ImageField/ImageField.Background';
 import { ImageUploadProps } from 'web-components/lib/components/inputs/new/ProjectImageUpload/ProjectImageUpload';
 
 import { apiUri } from '../../../lib/apiUri';
-import { cropAspectMediaForm } from './MediaForm.constants';
+import {
+  cropAspectMediaForm,
+  GALLERY_PHOTOS,
+  GALLERY_PHOTOS_DESCRIPTION,
+  MAIN_PHOTO,
+  MAIN_PHOTO_DESCRIPTION,
+} from './MediaForm.constants';
 import { MediaFormSchemaType } from './MediaForm.schema';
 import {
   MediaBaseErrors,
@@ -35,7 +39,8 @@ const MediaFormSimple = ({
 }): JSX.Element => {
   const { classes } = useMediaFormStyles();
   const ctx = useFormContext<MediaFormSchemaType>();
-  const { register, control, setValue } = ctx;
+  const { register, control, setValue, formState } = ctx;
+  const { errors } = formState;
   const imgDefaultProps: Partial<ImageUploadProps> = {
     apiServerUrl: apiUri,
     projectId,
@@ -55,7 +60,7 @@ const MediaFormSimple = ({
     return false;
   };
 
-  const { fields, append, prepend, remove } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     name: 'regen:galleryPhotos',
     control: control,
   });
@@ -73,6 +78,7 @@ const MediaFormSimple = ({
   /* Watcher */
 
   const previewPhoto = useWatch({ control, name: 'regen:previewPhoto' });
+  const galleryPhotos = useWatch({ control, name: 'regen:galleryPhotos' });
 
   /* Setter */
 
@@ -84,6 +90,11 @@ const MediaFormSimple = ({
     fieldIndex: number,
   ): void => {
     setValue(`regen:galleryPhotos.${fieldIndex}`, value);
+    append({
+      'schema:url': '',
+      'schema:caption': '',
+      'schema:creditText': '',
+    });
   };
 
   /* Callbacks  */
@@ -92,39 +103,50 @@ const MediaFormSimple = ({
   const handleUpload = getHandleUpload({
     apiServerUrl: apiUri,
     projectPath,
-    prepend,
+  });
+  const handleDelete = gethandleDelete({
+    apiServerUrl: apiUri,
+    projectId,
   });
   const getHandleDeleteWithIndex = (fieldIndex: number) =>
     gethandleDelete({
       apiServerUrl: apiUri,
       projectId,
-      remove,
-      fieldIndex,
+      callback: () => remove(fieldIndex),
     });
 
   return (
     <>
-      <ImageField
-        {...imgDefaultProps}
-        label="Photos"
+      <ImageDrop
+        label={MAIN_PHOTO}
+        description={MAIN_PHOTO_DESCRIPTION}
+        value={previewPhoto}
         setValue={setPreviewPhoto}
         onUpload={handleUpload}
+        onDelete={handleDelete}
+        dropZoneOption={{ maxFiles: 1 }}
+        error={!!errors['regen:previewPhoto']}
+        helperText={errors['regen:previewPhoto']?.message}
+        optional
+        {...imgDefaultProps}
         {...register('regen:previewPhoto')}
-        name="preview-photo"
-      >
-        <ImageFieldBackground value={previewPhoto?.['schema:url'] ?? ''} />
-      </ImageField>
+      />
       {fields.map((field, index) => (
         <ImageDrop
+          label={GALLERY_PHOTOS}
+          description={GALLERY_PHOTOS_DESCRIPTION}
           onDelete={getHandleDeleteWithIndex(index)}
           onUpload={handleUpload}
           setValue={setGalleryPhotos}
+          value={galleryPhotos?.[index]}
+          error={!!errors['regen:galleryPhotos']?.[index]}
+          helperText={errors['regen:galleryPhotos']?.[index]?.message}
           key={field.id}
-          fieldId={field.id}
           fieldIndex={index}
+          dropZoneOption={{ maxFiles: 1 }}
+          optional
           {...register('regen:galleryPhotos')}
           {...imgDefaultProps}
-          name="gallery-photos"
         />
       ))}
     </>

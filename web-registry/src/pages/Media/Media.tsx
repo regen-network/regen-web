@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
+import WithLoader from 'components/atoms/WithLoader';
 import { MediaFormSchemaType } from 'components/organisms/MediaForm/MediaForm.schema';
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
@@ -44,13 +45,15 @@ const Media = (): JSX.Element => {
       title="Media"
       saveAndExit={saveAndExit}
     >
-      <MediaForm
-        submit={metadataSubmit}
-        initialValues={initialValues}
-        onNext={navigateNext}
-        onPrev={navigatePrev}
-        projectId={offChainProject?.id}
-      />
+      <WithLoader isLoading={!metadata}>
+        <MediaForm
+          submit={metadataSubmit}
+          initialValues={initialValues}
+          onNext={navigateNext}
+          onPrev={navigatePrev}
+          projectId={offChainProject?.id}
+        />
+      </WithLoader>
     </ProjectFormTemplate>
   );
 };

@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+import { GALLERY_PHOTOS_MAX, GALLERY_PHOTOS_MIN } from './MediaForm.constants';
+
 export const mediaFormSchema = z.object({
   'regen:previewPhoto': z
     .object({
@@ -15,6 +17,8 @@ export const mediaFormSchema = z.object({
         'schema:caption': z.string().optional(),
       }),
     )
+    .min(GALLERY_PHOTOS_MIN)
+    .max(GALLERY_PHOTOS_MAX)
     .optional(),
 });
 

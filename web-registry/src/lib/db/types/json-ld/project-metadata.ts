@@ -30,11 +30,12 @@ export interface ProjectPageMetadataLD {
   'regen:creditClassId': string;
   'regen:previewPhoto'?: {
     'schema:url': string;
-    'schema:creditText': string;
+    'schema:creditText'?: string;
   };
   'regen:galleryPhotos'?: {
     'schema:url': string;
-    'schema:creditText': string;
+    'schema:caption'?: string;
+    'schema:creditText'?: string;
   }[];
   'schema:creditText'?: string;
   'schema:description'?: string;

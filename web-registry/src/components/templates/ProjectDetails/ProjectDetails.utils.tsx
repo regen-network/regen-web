@@ -105,7 +105,7 @@ export const parseMedia = ({
   const previewPhoto = metadata?.['regen:previewPhoto'];
 
   if (previewPhoto) {
-    assets.push({ src: previewPhoto, type: 'image' });
+    assets.push({ src: previewPhoto['schema:url'], type: 'image' });
   }
 
   if (geojson) {
@@ -129,7 +129,9 @@ export const getProjectGalleryPhotos = ({
 }: GetProjectGalleryPhotosProps) => {
   const photos: GalleryPhoto[] =
     offChainProjectMetadata?.['regen:galleryPhotos']?.map(photo => ({
-      href: photo,
+      href: photo['schema:url'],
+      caption: photo['schema:caption'],
+      credit: photo['schema:creditText'],
     })) ?? [];
 
   return photos;

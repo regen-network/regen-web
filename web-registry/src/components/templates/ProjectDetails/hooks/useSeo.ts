@@ -58,6 +58,6 @@ export default function useSeo({
     title: projectMetadata?.['schema:name'],
     imageUrl:
       projectPageMetadata?.['schema:image'] ||
-      projectPageMetadata?.['regen:previewPhoto'],
+      projectPageMetadata?.['regen:previewPhoto']?.['schema:url'],
   };
 }

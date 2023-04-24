@@ -54,7 +54,7 @@ export const normalizeProjectsWithCreditClass = ({
       id: project.id,
       name: metadata?.['schema:name'] ?? '',
       imgSrc:
-        projectPageMetadata?.['regen:previewPhoto'] ??
+        projectPageMetadata?.['regen:previewPhoto']?.['schema:url'] ??
         creditClassImage ??
         DefaultProject,
       place: metadata?.['schema:location']?.place_name ?? '',

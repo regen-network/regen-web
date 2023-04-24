@@ -38,24 +38,6 @@ export function buildIssuanceModalData(
         const projectDeveloper = getParty(project.partyByDeveloperId);
         if (projectDeveloper) issuees.push(projectDeveloper);
       }
-      if (
-        creditVintage.initialDistribution[
-          'https://schema.regen.network#landStewardDistribution'
-        ] > 0 &&
-        project.partyByStewardId
-      ) {
-        const landSteward = getParty(project.partyByStewardId);
-        if (landSteward) issuees.push(landSteward);
-      }
-      if (
-        creditVintage.initialDistribution[
-          'https://schema.regen.network#landOwnerDistribution'
-        ] > 0 &&
-        project.partyByLandOwnerId
-      ) {
-        const landOwner = getParty(project.partyByLandOwnerId);
-        if (landOwner) issuees.push(landOwner);
-      }
     }
 
     const creditClassVersion =
@@ -152,21 +134,14 @@ export function getParty(
   if (!party) {
     return undefined;
   }
-  const partyOrg = party.organizationByPartyId;
-  const partyUser =
-    partyOrg?.organizationMembersByOrganizationId?.nodes?.[0]?.userByMemberId;
-  const partyAddress = party.addressByAddressId?.feature?.place_name;
 
   return {
     name: party.name,
-    location: partyAddress || '',
     description: party.description,
     type: party.type,
     image: party.image,
     address: party.walletByWalletId?.addr || '',
-    link: partyOrg?.website,
-    role: partyUser?.partyByPartyId?.roles?.[0] || '',
-    individual: (partyUser && partyUser.partyByPartyId?.name) || '',
+    link: party?.websiteLink,
   };
 }
 
@@ -192,8 +167,6 @@ const getPartyFromMetadata = (
     image: metadataRole?.['schema:image'],
     location: metadataRole?.['schema:location']?.place_name || '',
     address: metadataRole?.['regen:adress'] || '',
-    individual: '',
-    role: '',
     link: metadataRole?.['schema:url'] || '',
   };
 };

@@ -4803,7 +4803,7 @@ export type PartyByIdQuery = (
 
 export type PartyFieldsFragment = (
   { __typename?: 'Party' }
-  & Pick<Party, 'id' | 'type' | 'name' | 'description' | 'image'>
+  & Pick<Party, 'id' | 'type' | 'name' | 'description' | 'image' | 'websiteLink' | 'twitterLink'>
   & { organizationByPartyId?: Maybe<(
     { __typename?: 'Organization' }
     & OrganizationFieldsFragment
@@ -5053,6 +5053,8 @@ export const PartyFieldsFragmentDoc = gql`
   name
   description
   image
+  websiteLink
+  twitterLink
   organizationByPartyId {
     ...organizationFields
   }

@@ -45,9 +45,7 @@ function OpenLedgerModal(): JSX.Element {
         link="https://devnet.regen.aneka.io/txs/C7F4DDC696BB64605D2ACB45D5999CF3E36F2F73783E6DB5066CFB282A6E7C42"
         issuer={{
           name: 'Regen Network Development, Inc.',
-          role: 'CTO',
           type: 'ORGANIZATION',
-          individual: 'Christian Shearer',
           address: 'regen:1p6syuqk3e5a8hwp8e20jyjwr8p7nj270x4spqm',
           location: 'Great Barrington, Massachussetts, United States',
           description:
@@ -56,9 +54,7 @@ function OpenLedgerModal(): JSX.Element {
         issuees={[
           {
             name: 'Wyelba Pty Ltd',
-            role: 'Director',
             type: 'ORGANIZATION',
-            individual: 'Eric Lawrence',
             address: 'regen:1wuufq6vkl4qmmgzs06mtgatklpxr5zr4qqnk4k',
             location: 'New South Wales, Australia',
             description: 'Lorem ipsum',

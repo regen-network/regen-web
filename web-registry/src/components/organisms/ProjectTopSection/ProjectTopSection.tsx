@@ -10,8 +10,6 @@ import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceIn
 import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
-import { getParty } from 'lib/transform';
-
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
@@ -202,13 +200,6 @@ function ProjectTopSection({
             projectDeveloper={projectDeveloper}
             landSteward={landSteward}
             landOwner={landOwner}
-            // TODO if no off-chain data, use on-chain project.issuer
-            issuer={getParty(offChainProject?.partyByIssuerId)}
-            reseller={
-              !onChainProject
-                ? getParty(offChainProject?.partyByResellerId)
-                : undefined
-            }
           />
         </Grid>
       </Grid>

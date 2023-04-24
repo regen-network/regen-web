@@ -47,7 +47,6 @@ import useSeo from './hooks/useSeo';
 import { useSortedDocuments } from './hooks/useSortedDocuments';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProjects';
-import { ProjectTimeline } from './ProjectDetails.ProjectTimeline';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
 import {
   getIsOnChainId,
@@ -150,7 +149,6 @@ function ProjectDetails(): JSX.Element {
   const {
     offChainProjectMetadata,
     managementActions,
-    projectEvents,
     projectDocs,
     creditClassName,
     coBenefitsIris,
@@ -171,16 +169,6 @@ function ProjectDetails(): JSX.Element {
     anchoredMetadata,
     offChainProject?.partyByDeveloperId,
   );
-  const landSteward = getDisplayParty(
-    'regen:landSteward',
-    anchoredMetadata,
-    offChainProject?.partyByStewardId,
-  );
-  const landOwner = getDisplayParty(
-    'regen:landOwner',
-    anchoredMetadata,
-    offChainProject?.partyByLandOwnerId,
-  );
 
   const { geojson, isGISFile } = useGeojson({
     projectMetadata,
@@ -191,8 +179,6 @@ function ProjectDetails(): JSX.Element {
     projectMetadata,
     projectPageMetadata: offChainProjectMetadata,
     projectDeveloper,
-    landSteward,
-    landOwner,
     creditClassName,
   });
 
@@ -201,12 +187,8 @@ function ProjectDetails(): JSX.Element {
 
   const loadingDb = loadingProjectByOnChainId || loadingProjectByHandle;
 
-  const {
-    issuanceModalData,
-    issuanceModalOpen,
-    setIssuanceModalOpen,
-    viewOnLedger,
-  } = useIssuanceModal(offChainProject);
+  const { issuanceModalData, issuanceModalOpen, setIssuanceModalOpen } =
+    useIssuanceModal(offChainProject);
 
   const { isBuyFlowDisabled, projectsWithOrderData } = useBuySellOrderData({
     projectId: onChainProjectId,
@@ -289,8 +271,6 @@ function ProjectDetails(): JSX.Element {
         isGISFile={isGISFile}
         onChainProjectId={onChainProjectId}
         projectDeveloper={projectDeveloper}
-        landOwner={landOwner}
-        landSteward={landSteward}
         loading={loadingDb || loadingAnchoredMetadata}
         soldOutProjectsIds={soldOutProjectsIds}
         projectWithOrderData={projectsWithOrderData[0]}
@@ -325,14 +305,6 @@ function ProjectDetails(): JSX.Element {
       </div>
 
       {managementActions && <ManagementActions actions={managementActions} />}
-
-      {projectEvents && projectEvents?.length > 0 && (
-        <ProjectTimeline
-          events={projectEvents}
-          txClient={txClient}
-          viewOnLedger={viewOnLedger}
-        />
-      )}
 
       <MoreProjects />
 

@@ -4,6 +4,8 @@ fragment partyFields on Party {
   name
   description
   image
+  websiteLink
+  twitterLink
   organizationByPartyId {
     ...organizationFields
   }

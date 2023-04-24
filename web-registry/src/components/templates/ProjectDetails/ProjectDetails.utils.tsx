@@ -2,7 +2,7 @@ import StaticMap from 'web-components/lib/components/map/StaticMap';
 import { GalleryPhoto } from 'web-components/lib/components/organisms/Gallery/Gallery.types';
 import { Asset } from 'web-components/lib/components/sliders/ProjectMedia';
 
-import { Document, Event, Maybe, Project } from 'generated/graphql';
+import { Document, Maybe, Project } from 'generated/graphql';
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import {
   AnchoredProjectMetadataBaseLD,
@@ -41,7 +41,6 @@ export const getIsOnChainId = (projectId?: string): boolean =>
 type ParseOffChainProjectReturn = {
   offChainProjectMetadata?: ProjectPageMetadataLD & LegacyProjectMetadataLD;
   managementActions?: NameImageDescription[];
-  projectEvents?: Maybe<Event>[];
   projectDocs?: Maybe<Document>[];
   creditClassVersion?: any;
   creditClassName?: string;
@@ -56,7 +55,6 @@ export const parseOffChainProject = (
   const managementActions =
     offChainProjectMetadata?.['regen:landManagementActions'];
 
-  const projectEvents = project?.eventsByProjectId?.nodes;
   const projectDocs = project?.documentsByProjectId?.nodes;
 
   const creditClassVersion =
@@ -72,7 +70,6 @@ export const parseOffChainProject = (
   return {
     offChainProjectMetadata,
     managementActions,
-    projectEvents,
     projectDocs,
     creditClassVersion,
     creditClassName,

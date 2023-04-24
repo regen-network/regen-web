@@ -20,8 +20,6 @@ import { User } from '../user/UserInfo';
 import Modal, { RegenModalProps } from './index';
 
 export interface Party extends User {
-  role: string;
-  individual: string;
   address: string;
 }
 
@@ -317,10 +315,6 @@ export default function LedgerModal({
             Entity Information
           </Title>
           <SummaryItem item={{ label: 'organization', value: party.name }} />
-          <SummaryItem
-            item={{ label: 'individual', value: party.individual }}
-          />
-          <SummaryItem item={{ label: 'role', value: party.role }} />
           <SummaryItem
             item={{ label: 'account address', value: party.address }}
           />

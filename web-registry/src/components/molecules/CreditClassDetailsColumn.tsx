@@ -3,7 +3,6 @@ import { Avatar } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import Card from 'web-components/lib/components/cards/Card';
 import { Title } from 'web-components/lib/components/typography';
 
@@ -96,8 +95,6 @@ function CreditClassDetailsColumn({
 }: CreditClassDetailsColumnProps): JSX.Element {
   const { classes: styles, cx } = useStyles();
   const creditClassVersion = dbClass?.creditClassVersionsById?.nodes[0];
-  const methodologyVersion =
-    dbClass?.methodologyByMethodologyId?.methodologyVersionsById?.nodes[0];
 
   return (
     <div className={cx(classes?.root, className)}>
@@ -138,15 +135,6 @@ function CreditClassDetailsColumn({
             data={<BlockContent content={nameRaw} />}
           />
         )}
-        {creditClassVersion?.version && (
-          <LineItem label="version" data={creditClassVersion?.version} />
-        )}
-        {dbClass?.partyByDesignerId?.name && (
-          <LineItem
-            label="credit designer"
-            data={dbClass?.partyByDesignerId?.name}
-          />
-        )}
         {creditClassVersion?.metadata?.[
           'https://schema.regen.network#ecosystemType'
         ] && (
@@ -170,27 +158,6 @@ function CreditClassDetailsColumn({
               ]?.[0]
             }
           />
-        )}
-        {methodologyVersion?.name && (
-          <LineItem
-            label="approved methodology"
-            data={methodologyVersion?.name}
-          />
-        )}
-        {methodologyVersion?.metadata?.['http://schema.org/url']?.[
-          '@value'
-        ] && (
-          <OutlinedButton
-            size="small"
-            sx={{ mt: 4, w: 232 }}
-            href={
-              methodologyVersion?.metadata?.['http://schema.org/url']?.[
-                '@value'
-              ]
-            }
-          >
-            view methodology»
-          </OutlinedButton>
         )}
       </Card>
     </div>

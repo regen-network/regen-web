@@ -27,18 +27,14 @@ import { projectsLoader } from 'pages/Projects/Projects.loader';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
 import { projectDetailsLoader } from 'components/templates/ProjectDetails/ProjectDetails.loader';
 
-import { KeplrRoute, ProtectedRoute } from './components/atoms';
+import { KeplrRoute } from './components/atoms';
 import { ProjectMetadata } from './pages/ProjectMetadata/ProjectMetadata';
 
 const Additionality = lazy(() => import('./pages/Additionality'));
-const Admin = lazy(() => import('./pages/Admin'));
 const BasicInfo = lazy(() => import('./pages/BasicInfo'));
 const BatchDetails = lazy(() => import('./pages/BatchDetails'));
 const BasketDetails = lazy(() => import('./pages/BasketDetails'));
-const BuyerCreate = lazy(() => import('./pages/BuyerCreate'));
-const BuyerCreditsTransfer = lazy(() => import('./pages/BuyerCreditsTransfer'));
 const BuyersPage = lazy(() => import('./pages/Buyers'));
-const CertificatePage = lazy(() => import('./pages/Certificate'));
 const ChooseCreditClassPage = lazy(() => import('./pages/ChooseCreditClass'));
 const CreateCreditClassInfo = lazy(
   () => import('./pages/CreateCreditClassInfo'),
@@ -46,12 +42,8 @@ const CreateCreditClassInfo = lazy(
 const CreateCreditClass = lazy(() => import('./pages/CreateCreditClass'));
 const CreateMethodology = lazy(() => import('./pages/CreateMethodology'));
 const CreditClassDetails = lazy(() => import('./pages/CreditClassDetails'));
-const CreditsIssue = lazy(() => import('./pages/CreditsIssue'));
-const CreditsRetire = lazy(() => import('./pages/CreditsRetire'));
-const CreditsTransfer = lazy(() => import('./pages/CreditsTransfer'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Description = lazy(() => import('./pages/Description'));
-const EntityDisplay = lazy(() => import('./pages/EntityDisplay'));
 const EcocreditBatches = lazy(() => import('./pages/EcocreditBatches'));
 const EcocreditsByAccount = lazy(() => import('./pages/EcocreditsByAccount'));
 const ErrorPage = lazy(() => import('./pages/ErrorPage'));
@@ -63,7 +55,6 @@ const MethodologyReviewProcess = lazy(
   () => import('./pages/MethodologyReviewProcess'),
 );
 const NotFoundPage = lazy(() => import('./pages/NotFound'));
-const OrganizationProfile = lazy(() => import('./pages/OrganizationProfile'));
 const PostPurchase = lazy(() => import('./pages/PostPurchase'));
 const Project = lazy(() => import('./pages/Project'));
 const Projects = lazy(() => import('./pages/Projects'));
@@ -73,9 +64,7 @@ const ProjectLocation = lazy(() => import('./pages/ProjectLocation'));
 const ProjectReview = lazy(() => import('./pages/ProjectReview'));
 const Roles = lazy(() => import('./pages/Roles'));
 const Seller = lazy(() => import('./pages/Seller'));
-const Signup = lazy(() => import('./pages/Signup'));
 const Story = lazy(() => import('./pages/Story'));
-const UserProfile = lazy(() => import('./pages/UserProfile'));
 const VerifyEmail = lazy(() => import('./pages/VerifyEmail'));
 const ProjectEdit = lazy(() => import('./pages/ProjectEdit'));
 const Activity = lazy(() => import('./pages/Activity'));
@@ -105,8 +94,6 @@ export const getRoutes = ({
         />
         <Route path="verify-email" element={<VerifyEmail />} />
         <Route path="add" element={<Additionality />} />
-        <Route path="signup" element={<Signup />} />
-        <Route path="certificate" element={<CertificatePage />} />
         <Route path="project/wilmot/admin" element={<Seller />} />
         <Route path="buyers" element={<BuyersPage />} />
         <Route path="create-methodology" element={<CreateMethodology />} />
@@ -182,14 +169,6 @@ export const getRoutes = ({
         />
         <Route path="baskets/:basketDenom" element={<BasketDetails />} />
         <Route path="credit-batches/:batchDenom" element={<BatchDetails />} />
-        <Route
-          path="user-profile"
-          element={<ProtectedRoute component={UserProfile} />}
-        />
-        <Route
-          path="organization-profile"
-          element={<ProtectedRoute component={OrganizationProfile} />}
-        />
         <Route path="project-pages">
           <Route path=":projectId" element={<ProjectCreate />}>
             <Route
@@ -215,10 +194,6 @@ export const getRoutes = ({
               element={<KeplrRoute component={ProjectMetadata} />}
             />
             <Route path="roles" element={<KeplrRoute component={Roles} />} />
-            <Route
-              path="entity-display"
-              element={<KeplrRoute component={EntityDisplay} />}
-            />
             <Route
               path="review"
               element={<KeplrRoute component={ProjectReview} />}
@@ -247,36 +222,8 @@ export const getRoutes = ({
                 path="metadata"
                 element={<KeplrRoute component={ProjectMetadata} />}
               />
-              <Route
-                path="entity-display"
-                element={<KeplrRoute component={EntityDisplay} />}
-              />
             </Route>
           </Route>
-        </Route>
-        <Route path="admin" element={<Admin />}>
-          <Route path="admin/credits">
-            <Route
-              path="create-and-transfer"
-              element={<ProtectedRoute component={BuyerCreditsTransfer} />}
-            />
-            <Route
-              path="issue"
-              element={<ProtectedRoute component={CreditsIssue} />}
-            />
-            <Route
-              path="transfer"
-              element={<ProtectedRoute component={CreditsTransfer} />}
-            />
-            <Route
-              path="retire"
-              element={<ProtectedRoute component={CreditsRetire} />}
-            />
-          </Route>
-          <Route
-            path="admin/buyer/create"
-            element={<ProtectedRoute component={BuyerCreate} />}
-          />
         </Route>
         <Route
           path="methodologies/:methodologyId"

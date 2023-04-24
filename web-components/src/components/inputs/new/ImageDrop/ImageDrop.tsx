@@ -1,16 +1,20 @@
 import React, { forwardRef, useState } from 'react';
+import { DropzoneOptions } from 'react-dropzone';
 import { Crop } from 'react-image-crop';
 import { IconButtonProps } from '@mui/material';
 
 import { getImageSrc } from '../../../image-crop/canvas-utils';
 import CropImageModal from '../../../modal/CropImageModal';
-import FieldFormControl from '../FieldFormControl/FieldFormControl';
+import FieldFormControl, {
+  FieldFormControlProps,
+} from '../FieldFormControl/FieldFormControl';
 import { ImageDropImage } from './ImageDrop.Image';
 import { useImageDropStyles } from './ImageDrop.styles';
+import { MediaPhotoType } from './ImageDrop.types';
 import { toBase64 } from './ImageDrop.utils';
 import { ImageDropZone } from './ImageDrop.Zone';
 
-export interface ImageDropProps {
+export interface ImageDropProps extends Partial<FieldFormControlProps> {
   className?: string;
   classes?: {
     root?: string;
@@ -18,16 +22,17 @@ export interface ImageDropProps {
     button?: string;
   };
   isSubmitting?: boolean;
-  value?: string;
+  value?: MediaPhotoType;
   label?: string;
   name: string;
+  description?: string;
   optional?: boolean | string;
   buttonText?: string;
   fixedCrop?: Partial<Crop>;
   hideDragText?: boolean;
-  fieldId: string;
-  fieldIndex: number;
-  setValue: (value: any, fieldIndex: number) => void;
+  fieldIndex?: number;
+  dropZoneOption?: DropzoneOptions;
+  setValue: (value: MediaPhotoType, fieldIndex: number) => void;
   onDelete?: (fileName: string) => Promise<void>;
   onUpload?: (imageFile: File) => Promise<string>;
 }
@@ -42,14 +47,14 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
       classes,
       label,
       name,
+      description,
       optional,
       buttonText,
       fixedCrop,
       hideDragText,
       value,
       isSubmitting,
-      fieldId,
-      fieldIndex,
+      fieldIndex = 0,
       setValue,
       onUpload,
       onDelete,
@@ -61,11 +66,12 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
     const [initialImage, setInitialImage] = useState('');
     const [fileName, setFileName] = useState('');
     const { classes: styles, cx } = useImageDropStyles();
+    const isFirstField = fieldIndex === 0;
 
     const handleDrop = (files: File[]): void => {
       if (files && files.length > 0) {
         const file = files[0];
-
+        setFileName(file.name);
         toBase64(file).then(base64String => {
           if (typeof base64String === 'string') {
             setCropModalOpen(true);
@@ -105,33 +111,35 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
       croppedImage: HTMLImageElement,
     ): Promise<void> => {
       const result = await getImageSrc(croppedImage, onUpload, fileName);
-      setValue(result, fieldIndex);
+      setValue(
+        { 'schema:url': result, 'schema:caption': '', 'schema:creditText': '' },
+        fieldIndex,
+      );
 
       if (result) {
         setCropModalOpen(false);
       }
     };
 
-    const handleDelete: IconButtonProps['onClick'] = e => {
-      if (value) {
-        setInitialImage('');
-        setFileName('');
+    const handleDelete = async (valueToDelete: MediaPhotoType) => {
+      setInitialImage('');
+      setFileName('');
+      if (onDelete) {
+        await onDelete(valueToDelete['schema:url'] ?? '');
       }
-      return async (imageUrl: string): Promise<void> => {
-        if (onDelete) await onDelete(imageUrl);
-      };
     };
 
     return (
       <>
         <FieldFormControl
           className={cx(styles.root, classes?.root, className)}
-          label={label}
+          label={isFirstField ? label : undefined}
+          description={isFirstField ? description : undefined}
           disabled={isSubmitting}
-          optional={optional}
+          optional={isFirstField ? optional : undefined}
           {...fieldProps}
         >
-          {value ? (
+          {value && value?.['schema:url'] !== '' ? (
             <ImageDropImage
               handleDelete={handleDelete}
               value={value}

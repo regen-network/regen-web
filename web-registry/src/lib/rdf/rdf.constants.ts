@@ -15,12 +15,8 @@ export const DEFAULT_PROJECT_CONTEXT: { [key: string]: string } = {
 export const UNANCHORED_PROJECT_CONTEXT = {
   regen: 'https://schema.regen.network#',
   schema: 'http://schema.org/',
-  'regen:previewPhoto': {
-    '@type': 'schema:URL',
-  },
   'regen:galleryPhotos': {
     '@container': '@list',
-    '@type': 'schema:URL',
   },
   'regen:videoURL': {
     '@type': 'schema:URL',

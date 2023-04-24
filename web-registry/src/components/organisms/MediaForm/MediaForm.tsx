@@ -39,6 +39,7 @@ export const MediaForm = ({
   const { isSubmitting, isDirty, isValid } = useFormState({
     control: form.control,
   });
+
   const { confirmSave, isEdit } = useProjectEditContext();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 

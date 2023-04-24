@@ -42,7 +42,7 @@ export const useImageDropStyles = makeStyles()((theme: Theme) => ({
     margin: theme.spacing(2),
     padding: theme.spacing(2),
     '&:hover': {
-      background: theme.palette.grey[100],
+      background: theme.palette.grey[50],
     },
   },
 }));

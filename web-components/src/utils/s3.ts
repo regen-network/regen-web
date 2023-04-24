@@ -8,7 +8,7 @@ export async function uploadImage(
   const formData = new FormData();
   formData.append('image', image);
   formData.append('filePath', filePath);
- 
+
   const resp = await axios.post(`${apiServerUrl}/files`, formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
     withCredentials: true,

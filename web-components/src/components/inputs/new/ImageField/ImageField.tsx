@@ -16,6 +16,7 @@ import { useImageFieldStyles } from './ImageField.styles';
 interface Props {
   name: string;
   label?: string;
+  description?: string;
   buttonText?: string;
   initialFileName?: string;
   disabled?: boolean;
@@ -36,6 +37,7 @@ export const ImageField = forwardRef<HTMLInputElement, Props>(
     {
       name,
       label,
+      description,
       optional,
       buttonText,
       initialFileName,
@@ -87,7 +89,12 @@ export const ImageField = forwardRef<HTMLInputElement, Props>(
 
     return (
       <>
-        <FieldFormControl label={label} disabled={disabled} optional={optional}>
+        <FieldFormControl
+          label={label}
+          description={description}
+          disabled={disabled}
+          optional={optional}
+        >
           <Box
             sx={{
               display: 'flex',

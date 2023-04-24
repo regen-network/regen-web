@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { useDropzone } from 'react-dropzone';
+import { DropzoneOptions, useDropzone } from 'react-dropzone';
 import { useMediaQuery, useTheme } from '@mui/material';
 
 import OutlinedButton from '../../../buttons/OutlinedButton';
@@ -10,6 +10,7 @@ type Props = {
   buttonText?: string;
   name?: string;
   hideDragText?: boolean;
+  dropZoneOption?: DropzoneOptions;
   classes?: {
     root?: string;
     main?: string;
@@ -25,6 +26,7 @@ export const ImageDropZone = forwardRef<HTMLInputElement, Props>(
       buttonText,
       name,
       hideDragText,
+      dropZoneOption = {},
       classes,
       handleFileChange,
       handleDrop,
@@ -42,6 +44,7 @@ export const ImageDropZone = forwardRef<HTMLInputElement, Props>(
       onDropRejected: () => {},
       noClick: true,
       noKeyboard: true,
+      ...dropZoneOption,
     });
 
     return (
@@ -59,22 +62,21 @@ export const ImageDropZone = forwardRef<HTMLInputElement, Props>(
               <span className={styles.or}>or</span>
             </>
           )}
+
           <input
+            type="file"
+            hidden
+            accept="image/*"
+            id={`btn-file-input-${name}`}
             {...getInputProps({
               defaultValue: '',
               contentEditable: false,
               draggable: false,
               spellCheck: false,
+              onChange: handleFileChange,
             })}
-          />
-          <input
-            type="file"
-            hidden
-            onChange={handleFileChange}
-            accept="image/*"
-            id={`btn-file-input-${name}`}
-            ref={ref}
             {...props}
+            ref={ref}
           />
           <label htmlFor={`btn-file-input-${name}`}>
             <OutlinedButton

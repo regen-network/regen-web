@@ -7,6 +7,8 @@ export const OMITTED_METADATA_KEYS = [
   'schema:location',
   'regen:projectDeveloper',
   'schema:description',
+  'regen:story',
+  'regen:storyTitle',
   'regen:previewPhoto',
   'regen:galleryPhotos',
   'schema:creditText',

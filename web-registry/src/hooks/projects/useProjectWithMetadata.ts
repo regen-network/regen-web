@@ -47,6 +47,7 @@ interface Res {
   metadata?: Partial<ProjectMetadataLD>;
   metadataReload: () => Promise<void>;
   metadataSubmit: (p: MetadataSubmitProps) => Promise<void>;
+  loading: boolean;
 }
 
 type Values =
@@ -73,13 +74,14 @@ export const useProjectWithMetadata = ({
   // In project creation mode, we query the off-chain project since there's no on-chain project yet.
   // In this case, the router param projectId is the off-chain project uuid.
   const create = !!projectId && !isEdit;
-  const { data: projectByOffChainIdRes } = useQuery(
-    getProjectByIdQuery({
-      client: graphqlClient,
-      enabled: create,
-      id: projectId,
-    }),
-  );
+  const { data: projectByOffChainIdRes, isFetching: isFetchingProjectById } =
+    useQuery(
+      getProjectByIdQuery({
+        client: graphqlClient,
+        enabled: create,
+        id: projectId,
+      }),
+    );
   const projectById = projectByOffChainIdRes?.data?.projectById;
   if (create && projectById) {
     offChainProject = projectById;
@@ -90,13 +92,16 @@ export const useProjectWithMetadata = ({
   // In this case, the router param projectId is the on-chain project id.
   const edit = !!projectId && isEdit;
   // Metadata
-  const { data: anchoredMetadata } = useQuery(
+  const { data: anchoredMetadata, isFetching: isFetchingMetadata } = useQuery(
     getMetadataQuery({
       iri: onChainProject?.metadata,
       enabled: !!onChainProject?.metadata && edit && anchored,
     }),
   );
-  const { data: projectByOnChainIdRes } = useQuery(
+  const {
+    data: projectByOnChainIdRes,
+    isFetching: isFetchingProjectByOnChainId,
+  } = useQuery(
     getProjectByOnChainIdQuery({
       client: graphqlClient,
       enabled: edit,
@@ -179,5 +184,9 @@ export const useProjectWithMetadata = ({
     metadata,
     metadataReload,
     metadataSubmit,
+    loading:
+      isFetchingProjectById ||
+      isFetchingMetadata ||
+      isFetchingProjectByOnChainId,
   };
 };

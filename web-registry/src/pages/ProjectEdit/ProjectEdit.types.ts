@@ -2,18 +2,18 @@ import { FormikProps } from 'formik';
 
 import {
   BasicInfoFormValues,
-  DescriptionFormValues,
   ProjectLocationFormValues,
   ProjectMetadataFormValues,
   RolesFormValues,
 } from 'components/organisms';
+import { DescriptionSchemaType } from 'components/organisms/DescriptionForm/DescriptionForm.schema';
 import { MediaFormValues } from 'components/organisms/MediaForm';
 
 export type Values =
   | BasicInfoFormValues
   | ProjectLocationFormValues
   | RolesFormValues
-  | DescriptionFormValues
+  | DescriptionSchemaType
   | MediaFormValues
   | ProjectMetadataFormValues;
 

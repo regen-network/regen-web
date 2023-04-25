@@ -34,7 +34,6 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
   onSubmit,
   onNext,
   onPrev,
-  // onSuccess,
 }) => {
   const form = useZodForm({
     schema: descriptionFormSchema,
@@ -67,19 +66,15 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
     <Form
       form={form}
       onSubmit={async values => {
-        const hasError = false;
-        if (!hasError) {
-          try {
-            await onSubmit({ values });
-            if (isEdit && confirmSave) confirmSave();
-            // onSuccess && onSuccess();
-          } catch (e) {
-            setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
-          }
+        try {
+          await onSubmit({ values });
+          if (isEdit && confirmSave) confirmSave();
+        } catch (e) {
+          setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
         }
       }}
     >
-      <OnBoardingCard sx={{ mb: [2.5] }}>
+      <OnBoardingCard sx={{ mb: [2.5], ...(isEdit && { mt: [0] }) }}>
         <TextAreaField
           type="text"
           label="Brief project summary"

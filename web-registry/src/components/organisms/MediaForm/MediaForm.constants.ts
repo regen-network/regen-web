@@ -8,3 +8,4 @@ export const GALLERY_PHOTOS_DESCRIPTION =
   'Choose 2-10 photos for the photo gallery.';
 export const GALLERY_PHOTOS_MIN = 2;
 export const GALLERY_PHOTOS_MAX = 10;
+export const CAPTION_CHART_LIMIT = 240;

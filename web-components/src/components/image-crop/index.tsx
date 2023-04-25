@@ -16,6 +16,7 @@ export interface ImageCropProps {
   onCropSubmit: (blob: HTMLImageElement) => Promise<void>;
   onCancel: () => void;
   fixedCrop: Partial<Crop>;
+  children?: React.ReactNode;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -61,6 +62,7 @@ export default function ImageCrop({
   onCropSubmit,
   onCancel,
   fixedCrop,
+  children,
 }: ImageCropProps): JSX.Element {
   const { classes } = useStyles();
   const imgRef = useRef<any>(null);
@@ -147,6 +149,7 @@ export default function ImageCrop({
           imageStyle={{ maxHeight: mobileMatches ? 380 : 500 }}
         />
       </div>
+      {children}
       <div className={classes.controls}>
         <Button onClick={onCancel} className={classes.cancelButton}>
           Cancel

@@ -58,11 +58,13 @@ export const ImageDropImage = ({
           <TrashIcon color={theme.palette.error.dark} />
         </IconButton>
       </Box>
-      <ImageDropBottomBar
-        caption={caption}
-        credit={credit}
-        sx={{ position: 'absolute', bottom: 0 }}
-      />
+      {(caption || credit) && (
+        <ImageDropBottomBar
+          caption={caption}
+          credit={credit}
+          sx={{ position: 'absolute', bottom: 0 }}
+        />
+      )}
     </div>
   );
 };

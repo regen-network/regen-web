@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 
+import { UseStateSetter } from 'types/react/use-state';
+
 import { Wallet } from '../wallet';
 import { AUTO_CONNECT_WALLET_KEY } from '../wallet.constants';
 import { WalletType } from '../walletsConfig/walletsConfig.types';
@@ -9,6 +11,7 @@ type Props = {
   wallet: Wallet;
   loaded: boolean;
   connectWallet: ConnectWalletType;
+  setKeplrMobileWeb: UseStateSetter<boolean>;
 };
 
 // This hooks handle the keplr native app integration connection
@@ -16,6 +19,7 @@ export const useDetectKeplrMobileBrowser = ({
   wallet,
   connectWallet,
   loaded,
+  setKeplrMobileWeb,
 }: Props): void => {
   useEffect(() => {
     if (typeof window === 'undefined' || !loaded || wallet.address !== '') {
@@ -28,9 +32,10 @@ export const useDetectKeplrMobileBrowser = ({
         if (keplr && keplr.mode === 'mobile-web') {
           // When used within Keplr mobile browser the connection type is the same
           // as with the desktop extension.
-          connectWallet({ walletType: WalletType.Keplr });
+          setKeplrMobileWeb(true);
+          connectWallet({ walletType: WalletType.Keplr, doLogin: false });
           localStorage.setItem(AUTO_CONNECT_WALLET_KEY, WalletType.Keplr);
         }
       });
-  }, [connectWallet, loaded, wallet]);
+  }, [connectWallet, loaded, wallet, setKeplrMobileWeb]);
 };

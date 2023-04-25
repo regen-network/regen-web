@@ -132,6 +132,7 @@ function ProjectEdit(): JSX.Element {
   };
 
   const formRef = useRef<FormikProps<FormikValues>>(null);
+
   if (isNotAdmin) {
     return (
       <ProjectEditDenied

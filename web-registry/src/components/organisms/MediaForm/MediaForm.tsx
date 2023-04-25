@@ -11,6 +11,7 @@ import { ProjectPageFooter } from 'components/molecules';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
+import { DEFAULT_URL } from './MediaForm.constants';
 import { mediaFormSchema, MediaFormSchemaType } from './MediaForm.schema';
 import { MediaFormSimple } from './MediaFormSimple';
 
@@ -51,7 +52,13 @@ export const MediaForm = ({
           const hasError = false;
           if (!hasError) {
             try {
-              await submit({ values: data });
+              const filteredData = {
+                'regen:previewPhoto': data['regen:previewPhoto'],
+                'regen:galleryPhotos': data['regen:galleryPhotos']?.filter(
+                  photo => photo['schema:url'] !== DEFAULT_URL,
+                ),
+              };
+              await submit({ values: filteredData });
               if (isEdit && confirmSave) confirmSave();
             } catch (e) {
               setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);

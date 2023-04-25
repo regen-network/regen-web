@@ -3,9 +3,13 @@ import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
 
 import { ImageDrop } from 'web-components/lib/components/inputs/new/ImageDrop/ImageDrop';
 import { ImageUploadProps } from 'web-components/lib/components/inputs/new/ProjectImageUpload/ProjectImageUpload';
+import { TextAreaField } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField';
+import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
+import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
 
 import { apiUri } from '../../../lib/apiUri';
 import {
+  CAPTION_CHART_LIMIT,
   cropAspectMediaForm,
   GALLERY_PHOTOS,
   GALLERY_PHOTOS_DESCRIPTION,
@@ -13,11 +17,7 @@ import {
   MAIN_PHOTO_DESCRIPTION,
 } from './MediaForm.constants';
 import { MediaFormSchemaType } from './MediaForm.schema';
-import {
-  MediaBaseErrors,
-  MediaBaseValues,
-  MediaPhotoType,
-} from './MediaForm.types';
+import { MediaBaseErrors, MediaBaseValues } from './MediaForm.types';
 import { gethandleDelete, getHandleUpload } from './MediaForm.utils';
 import { useMediaFormStyles } from './useMediaFormStyles';
 
@@ -82,14 +82,11 @@ const MediaFormSimple = ({
 
   /* Setter */
 
-  const setPreviewPhoto = (value: MediaPhotoType): void => {
-    setValue('regen:previewPhoto', value);
+  const setPreviewPhoto = (value: string): void => {
+    setValue('regen:previewPhoto.schema:url', value);
   };
-  const setGalleryPhotos = (
-    value: MediaPhotoType,
-    fieldIndex: number,
-  ): void => {
-    setValue(`regen:galleryPhotos.${fieldIndex}`, value);
+  const setGalleryPhotos = (value: string, fieldIndex: number): void => {
+    setValue(`regen:galleryPhotos.${fieldIndex}.schema:url`, value);
     append({
       'schema:url': '',
       'schema:caption': '',
@@ -120,7 +117,7 @@ const MediaFormSimple = ({
       <ImageDrop
         label={MAIN_PHOTO}
         description={MAIN_PHOTO_DESCRIPTION}
-        value={previewPhoto}
+        value={previewPhoto?.['schema:url']}
         setValue={setPreviewPhoto}
         onUpload={handleUpload}
         onDelete={handleDelete}
@@ -129,8 +126,19 @@ const MediaFormSimple = ({
         helperText={errors['regen:previewPhoto']?.message}
         optional
         {...imgDefaultProps}
-        {...register('regen:previewPhoto')}
-      />
+        {...register('regen:previewPhoto.schema:url')}
+      >
+        <TextField
+          type="text"
+          label="Caption"
+          {...register('regen:previewPhoto.schema:creditText')}
+          helperText={
+            errors['regen:previewPhoto']?.['schema:creditText']?.message
+          }
+          error={!!errors['regen:previewPhoto']?.['schema:creditText']}
+          optional
+        />
+      </ImageDrop>
       {fields.map((field, index) => (
         <ImageDrop
           label={GALLERY_PHOTOS}
@@ -138,16 +146,49 @@ const MediaFormSimple = ({
           onDelete={getHandleDeleteWithIndex(index)}
           onUpload={handleUpload}
           setValue={setGalleryPhotos}
-          value={galleryPhotos?.[index]}
+          value={galleryPhotos?.[index]?.['schema:url']}
           error={!!errors['regen:galleryPhotos']?.[index]}
           helperText={errors['regen:galleryPhotos']?.[index]?.message}
           key={field.id}
           fieldIndex={index}
           dropZoneOption={{ maxFiles: 1 }}
           optional
-          {...register('regen:galleryPhotos')}
+          {...register(`regen:galleryPhotos.${index}.schema:url`)}
           {...imgDefaultProps}
-        />
+        >
+          <TextField
+            type="text"
+            label="Caption"
+            helperText={
+              errors['regen:galleryPhotos']?.[index]?.['schema:creditText']
+                ?.message
+            }
+            error={
+              !!errors['regen:galleryPhotos']?.[index]?.['schema:creditText']
+            }
+            optional
+            {...register(`regen:galleryPhotos.${index}.schema:creditText`)}
+          />
+          <TextAreaField
+            type="text"
+            label="Caption"
+            rows={3}
+            minRows={3}
+            multiline
+            optional
+            helperText={
+              errors['regen:galleryPhotos']?.[index]?.['schema:caption']
+                ?.message
+            }
+            error={!!errors['regen:galleryPhotos']?.[index]?.['schema:caption']}
+            {...register(`regen:galleryPhotos.${index}.schema:caption`)}
+          >
+            <TextAreaFieldChartCounter
+              value={galleryPhotos?.[index]?.['schema:caption']}
+              charLimit={CAPTION_CHART_LIMIT}
+            />
+          </TextAreaField>
+        </ImageDrop>
       ))}
     </>
   );

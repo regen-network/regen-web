@@ -1,7 +1,6 @@
 import React, { forwardRef, useState } from 'react';
 import { DropzoneOptions } from 'react-dropzone';
 import { Crop } from 'react-image-crop';
-import { IconButtonProps } from '@mui/material';
 
 import { getImageSrc } from '../../../image-crop/canvas-utils';
 import CropImageModal from '../../../modal/CropImageModal';
@@ -10,7 +9,6 @@ import FieldFormControl, {
 } from '../FieldFormControl/FieldFormControl';
 import { ImageDropImage } from './ImageDrop.Image';
 import { useImageDropStyles } from './ImageDrop.styles';
-import { MediaPhotoType } from './ImageDrop.types';
 import { toBase64 } from './ImageDrop.utils';
 import { ImageDropZone } from './ImageDrop.Zone';
 
@@ -22,7 +20,7 @@ export interface ImageDropProps extends Partial<FieldFormControlProps> {
     button?: string;
   };
   isSubmitting?: boolean;
-  value?: MediaPhotoType;
+  value?: string;
   label?: string;
   name: string;
   description?: string;
@@ -31,8 +29,9 @@ export interface ImageDropProps extends Partial<FieldFormControlProps> {
   fixedCrop?: Partial<Crop>;
   hideDragText?: boolean;
   fieldIndex?: number;
+  children?: React.ReactNode;
   dropZoneOption?: DropzoneOptions;
-  setValue: (value: MediaPhotoType, fieldIndex: number) => void;
+  setValue: (value: string, fieldIndex: number) => void;
   onDelete?: (fileName: string) => Promise<void>;
   onUpload?: (imageFile: File) => Promise<string>;
 }
@@ -55,6 +54,7 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
       value,
       isSubmitting,
       fieldIndex = 0,
+      children,
       setValue,
       onUpload,
       onDelete,
@@ -111,21 +111,18 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
       croppedImage: HTMLImageElement,
     ): Promise<void> => {
       const result = await getImageSrc(croppedImage, onUpload, fileName);
-      setValue(
-        { 'schema:url': result, 'schema:caption': '', 'schema:creditText': '' },
-        fieldIndex,
-      );
+      setValue(result, fieldIndex);
 
       if (result) {
         setCropModalOpen(false);
       }
     };
 
-    const handleDelete = async (valueToDelete: MediaPhotoType) => {
+    const handleDelete = async (valueToDelete: string) => {
       setInitialImage('');
       setFileName('');
       if (onDelete) {
-        await onDelete(valueToDelete['schema:url'] ?? '');
+        await onDelete(valueToDelete ?? '');
       }
     };
 
@@ -139,12 +136,11 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
           optional={isFirstField ? optional : undefined}
           {...fieldProps}
         >
-          {value && value?.['schema:url'] !== '' ? (
+          {value ? (
             <ImageDropImage
               handleDelete={handleDelete}
               value={value}
               classes={classes}
-              ref={ref}
             />
           ) : (
             <ImageDropZone
@@ -164,7 +160,9 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
           onSubmit={onCropModalSubmit}
           initialImage={initialImage}
           fixedCrop={fixedCrop}
-        />
+        >
+          {children}
+        </CropImageModal>
       </>
     );
   },

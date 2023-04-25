@@ -14,6 +14,7 @@ export interface CropImageModalProps {
   circularCrop?: boolean;
   initialImage: string;
   fixedCrop?: Partial<Crop>;
+  children?: React.ReactNode;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -52,6 +53,7 @@ export default function CropImageModal({
   circularCrop,
   initialImage,
   fixedCrop = {},
+  children,
 }: CropImageModalProps): JSX.Element {
   const { classes } = useStyles();
 
@@ -67,7 +69,9 @@ export default function CropImageModal({
           onCancel={onClose}
           circularCrop={circularCrop}
           fixedCrop={fixedCrop}
-        />
+        >
+          {children}
+        </ImageCrop>
       </div>
     </Modal>
   );

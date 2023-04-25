@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
@@ -48,9 +49,6 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
     },
     mode: 'onBlur',
   });
-  const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
-  const { confirmSave, isEdit, formRef } = useProjectEditContext();
-
   const { isValid, isSubmitting, isDirty, errors } = useFormState({
     control: form.control,
   });
@@ -67,6 +65,13 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
     control: form.control,
     name: 'regen:storyTitle',
   });
+
+  const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+  const { confirmSave, isEdit, setDirty } = useProjectEditContext();
+
+  useEffect(() => {
+    setDirty(isDirty);
+  }, [setDirty, isDirty]);
 
   return (
     <Form

@@ -13,6 +13,7 @@ import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import { Label, Title } from 'web-components/lib/components/typography';
 import type { Theme } from 'web-components/lib/theme/muiTheme';
 
+import { UseStateSetter } from 'types/react/use-state';
 import { errorCodeAtom } from 'lib/atoms/error.atoms';
 import {
   errorModalAtom,
@@ -42,6 +43,7 @@ type ContextType = {
   onChainProject?: ProjectInfo;
   projectEditSubmit: UseProjectEditSubmitParams;
   formRef: FormRef<Values>;
+  setDirty: UseStateSetter<boolean>;
 };
 
 const ProjectEditContext = createContext<ContextType>({
@@ -49,6 +51,7 @@ const ProjectEditContext = createContext<ContextType>({
   projectEditSubmit: async () => {},
   isEdit: false,
   formRef: { current: null },
+  setDirty: () => {},
 });
 
 function ProjectEdit(): JSX.Element {
@@ -64,6 +67,7 @@ function ProjectEdit(): JSX.Element {
   const [isWarningModalOpen, setIsWarningModalOpen] = useState<
     string | undefined
   >(undefined);
+  const [dirty, setDirty] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
@@ -128,7 +132,6 @@ function ProjectEdit(): JSX.Element {
   };
 
   const formRef = useRef<FormikProps<FormikValues>>(null);
-
   if (isNotAdmin) {
     return (
       <ProjectEditDenied
@@ -143,7 +146,7 @@ function ProjectEdit(): JSX.Element {
       const path = isMobile
         ? `/project-pages/${projectId}/edit`
         : '/ecocredits/projects';
-      if (formRef.current?.dirty) {
+      if (formRef.current?.dirty || dirty) {
         setIsWarningModalOpen(path);
       } else {
         navigate(path);
@@ -158,7 +161,7 @@ function ProjectEdit(): JSX.Element {
       ' ',
       '-',
     )}`;
-    if (formRef.current?.dirty) {
+    if (formRef.current?.dirty || dirty) {
       setIsWarningModalOpen(path);
     } else {
       navigate(path);
@@ -173,6 +176,7 @@ function ProjectEdit(): JSX.Element {
         onChainProject,
         projectEditSubmit,
         formRef,
+        setDirty,
       }}
     >
       <WithLoader

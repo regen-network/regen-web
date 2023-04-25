@@ -51,16 +51,6 @@ const MediaFormSimple = ({
     fixedCrop: cropAspectMediaForm,
   };
 
-  const shouldRenderGalleryPhoto = (i: number): boolean => {
-    // don't show option for gallery if there is no preview photo or first
-    // if (!values['regen:previewPhoto']) return false;
-    // if there is a preview photo, render the first gallery photo
-    // if (values['regen:previewPhoto'] && i === 0) return true;
-    // otherwise, render based on the presence of last index
-    // return Boolean(values['regen:galleryPhotos']?.[i - 1]);
-    return false;
-  };
-
   const { fields, append, remove } = useFieldArray({
     name: 'regen:galleryPhotos',
     control: control,
@@ -91,11 +81,13 @@ const MediaFormSimple = ({
   };
   const setGalleryPhotos = (value: string, fieldIndex: number): void => {
     setValue(`regen:galleryPhotos.${fieldIndex}.schema:url`, value);
-    append({
-      'schema:url': DEFAULT_URL,
-      'schema:caption': '',
-      'schema:creditText': '',
-    });
+    if (fields.every(field => field['schema:url'] !== DEFAULT_URL)) {
+      append({
+        'schema:url': DEFAULT_URL,
+        'schema:caption': '',
+        'schema:creditText': '',
+      });
+    }
   };
 
   /* Callbacks  */

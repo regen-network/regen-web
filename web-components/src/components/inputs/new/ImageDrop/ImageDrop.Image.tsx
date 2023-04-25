@@ -10,6 +10,8 @@ type Props = {
   value: string;
   name: string;
   handleDelete: (value: string) => void;
+  caption?: string;
+  credit?: string;
   classes?: {
     root?: string;
     main?: string;
@@ -19,6 +21,8 @@ type Props = {
 
 export const ImageDropImage = ({
   value,
+  caption,
+  credit,
   name,
   handleDelete,
   classes,
@@ -55,8 +59,8 @@ export const ImageDropImage = ({
         </IconButton>
       </Box>
       <ImageDropBottomBar
-        caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-        credit="Sally Roony"
+        caption={caption}
+        credit={credit}
         sx={{ position: 'absolute', bottom: 0 }}
       />
     </div>

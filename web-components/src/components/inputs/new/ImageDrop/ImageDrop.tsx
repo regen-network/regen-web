@@ -21,6 +21,8 @@ export interface ImageDropProps extends Partial<FieldFormControlProps> {
   };
   isSubmitting?: boolean;
   value?: string;
+  caption?: string;
+  credit?: string;
   label?: string;
   name: string;
   description?: string;
@@ -52,6 +54,8 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
       fixedCrop,
       hideDragText,
       value,
+      caption,
+      credit,
       isSubmitting,
       fieldIndex = 0,
       children,
@@ -140,6 +144,8 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
             <ImageDropImage
               handleDelete={handleDelete}
               value={value}
+              caption={caption}
+              credit={credit}
               classes={classes}
               name={name}
             />

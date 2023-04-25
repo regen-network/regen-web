@@ -30,10 +30,15 @@ export const ImageDropBottomBar = ({ caption, credit, sx = [] }: Props) => (
   >
     {(caption || credit) && (
       <Box sx={{ display: 'inline-block', mr: 0.5 }}>
-        {caption}
+        {caption && (
+          <Box component="span" sx={{ mr: 1 }}>
+            {caption}
+          </Box>
+        )}
         {credit && (
           <Box
-            sx={{ display: 'inline-block', fontWeight: 300 }}
+            component="span"
+            sx={{ fontWeight: 300 }}
           >{`${PHOTO_CREDIT}: ${credit}`}</Box>
         )}
       </Box>

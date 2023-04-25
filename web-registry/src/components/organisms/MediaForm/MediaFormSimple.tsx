@@ -127,6 +127,7 @@ const MediaFormSimple = ({
         label={MAIN_PHOTO}
         description={MAIN_PHOTO_DESCRIPTION}
         value={previewPhoto?.['schema:url']}
+        credit={previewPhoto?.['schema:creditText']}
         setValue={setPreviewPhoto}
         onUpload={handleUpload}
         onDelete={handleDelete}
@@ -158,6 +159,8 @@ const MediaFormSimple = ({
             onUpload={handleUpload}
             setValue={setGalleryPhotos}
             value={url === DEFAULT_URL ? '' : url}
+            caption={galleryPhotos?.[index]?.['schema:caption']}
+            credit={galleryPhotos?.[index]?.['schema:creditText']}
             error={!!errors['regen:galleryPhotos']?.[index]}
             helperText={errors['regen:galleryPhotos']?.[index]?.message}
             key={field.id}

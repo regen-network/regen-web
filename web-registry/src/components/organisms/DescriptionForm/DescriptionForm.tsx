@@ -49,7 +49,6 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
   const { isValid, isSubmitting, isDirty, errors } = useFormState({
     control: form.control,
   });
-  console.log('errors', errors);
 
   const description = useWatch({
     control: form.control,
@@ -80,7 +79,7 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
         }
       }}
     >
-      <OnBoardingCard>
+      <OnBoardingCard sx={{ mb: [2.5] }}>
         <TextAreaField
           type="text"
           label="Brief project summary"
@@ -96,7 +95,7 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
           <TextAreaFieldChartCounter value={description} />
         </TextAreaField>
       </OnBoardingCard>
-      <OnBoardingCard>
+      <OnBoardingCard sx={{ mt: [0] }}>
         <TextAreaField
           type="text"
           label="Long-form project story"

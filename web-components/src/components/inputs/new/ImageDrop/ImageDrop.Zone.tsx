@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { DropzoneOptions, useDropzone } from 'react-dropzone';
-import { useMediaQuery, useTheme } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 
 import OutlinedButton from '../../../buttons/OutlinedButton';
 import { Label } from '../../../typography';
@@ -11,6 +11,7 @@ type Props = {
   name?: string;
   hideDragText?: boolean;
   dropZoneOption?: DropzoneOptions;
+  value?: string;
   classes?: {
     root?: string;
     main?: string;
@@ -27,6 +28,7 @@ export const ImageDropZone = forwardRef<HTMLInputElement, Props>(
       name,
       hideDragText,
       dropZoneOption = {},
+      value,
       classes,
       handleFileChange,
       handleDrop,
@@ -48,7 +50,10 @@ export const ImageDropZone = forwardRef<HTMLInputElement, Props>(
     });
 
     return (
-      <div className={cx('container', styles.main, classes?.main)}>
+      <Box
+        className={cx('container', styles.main, classes?.main)}
+        sx={{ display: !!value ? 'none' : 'block' }}
+      >
         <div
           {...getRootProps({
             className: cx('dropzone', styles.drop),
@@ -87,7 +92,7 @@ export const ImageDropZone = forwardRef<HTMLInputElement, Props>(
             </OutlinedButton>
           </label>
         </div>
-      </div>
+      </Box>
     );
   },
 );

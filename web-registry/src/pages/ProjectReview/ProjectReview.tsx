@@ -21,6 +21,12 @@ import {
   qudtUnit,
 } from 'lib/rdf';
 
+import {
+  STORY_LABEL,
+  STORY_TITLE_LABEL,
+  SUMMARY_LABEL,
+} from 'components/organisms/DescriptionForm/DescriptionForm.constants';
+
 import { Link } from '../../components/atoms';
 import { ProjectPageFooter } from '../../components/molecules';
 import { OnboardingFormTemplate } from '../../components/templates';
@@ -150,7 +156,15 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
         title="Description"
         onEditClick={() => navigate(`${editPath}/description`)}
       >
-        <ItemDisplay>{metadata?.['schema:description']}</ItemDisplay>
+        <ItemDisplay name={SUMMARY_LABEL}>
+          {metadata?.['schema:description']}
+        </ItemDisplay>
+        <ItemDisplay name={STORY_LABEL}>
+          {metadata?.['regen:story']}
+        </ItemDisplay>
+        <ItemDisplay name={STORY_TITLE_LABEL}>
+          {metadata?.['regen:storyTitle']}
+        </ItemDisplay>
       </ReviewCard>
       <ReviewCard
         title={'Media'}

@@ -15,7 +15,13 @@ import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import { ProjectPageFooter } from '../../molecules';
 import {
   STORY_CHAR_LIMIT,
+  STORY_DESCRIPTION,
+  STORY_LABEL,
   STORY_TITLE_CHAR_LIMIT,
+  STORY_TITLE_DESCRIPTION,
+  STORY_TITLE_LABEL,
+  SUMMARY_DESCRIPTION,
+  SUMMARY_LABEL,
 } from './DescriptionForm.constants';
 import {
   descriptionFormSchema,
@@ -77,8 +83,8 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
       <OnBoardingCard sx={{ mb: [2.5], ...(isEdit && { mt: [0] }) }}>
         <TextAreaField
           type="text"
-          label="Brief project summary"
-          description="A brief description of your ecological impact project and the property on which it is implemented. This is your elevator pitch to credit buyers."
+          label={SUMMARY_LABEL}
+          description={SUMMARY_DESCRIPTION}
           rows={3}
           disabled={isSubmitting}
           multiline
@@ -93,8 +99,8 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
       <OnBoardingCard sx={{ mt: [0] }}>
         <TextAreaField
           type="text"
-          label="Long-form project story"
-          description="Tell the deeper story of what makes this project special. Describe the land stewards and why they do this work, the ecological impacts (plants, animals, ecosystems), and social impacts (community, jobs, health)."
+          label={STORY_LABEL}
+          description={STORY_DESCRIPTION}
           rows={10}
           disabled={isSubmitting}
           multiline
@@ -110,8 +116,8 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
         </TextAreaField>
         <TextAreaField
           type="text"
-          label="Project story title"
-          description="In one sentence, summarize the story above."
+          label={STORY_TITLE_LABEL}
+          description={STORY_TITLE_DESCRIPTION}
           rows={2}
           disabled={isSubmitting}
           multiline

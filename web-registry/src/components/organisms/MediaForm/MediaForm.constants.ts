@@ -9,3 +9,4 @@ export const GALLERY_PHOTOS_DESCRIPTION =
 export const GALLERY_PHOTOS_MIN = 2;
 export const GALLERY_PHOTOS_MAX = 10;
 export const CAPTION_CHART_LIMIT = 240;
+export const DEFAULT_URL = 'default';

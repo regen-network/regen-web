@@ -11,6 +11,7 @@ import { apiUri } from '../../../lib/apiUri';
 import {
   CAPTION_CHART_LIMIT,
   cropAspectMediaForm,
+  DEFAULT_URL,
   GALLERY_PHOTOS,
   GALLERY_PHOTOS_DESCRIPTION,
   MAIN_PHOTO,
@@ -66,9 +67,12 @@ const MediaFormSimple = ({
   });
 
   useEffect(() => {
-    if (fields.length === 0) {
+    if (
+      fields.length === 0 ||
+      fields.every(field => field['schema:url'] !== DEFAULT_URL)
+    ) {
       append({
-        'schema:url': '',
+        'schema:url': DEFAULT_URL,
         'schema:caption': '',
         'schema:creditText': '',
       });
@@ -88,7 +92,7 @@ const MediaFormSimple = ({
   const setGalleryPhotos = (value: string, fieldIndex: number): void => {
     setValue(`regen:galleryPhotos.${fieldIndex}.schema:url`, value);
     append({
-      'schema:url': '',
+      'schema:url': DEFAULT_URL,
       'schema:caption': '',
       'schema:creditText': '',
     });
@@ -104,6 +108,11 @@ const MediaFormSimple = ({
   const handleDelete = gethandleDelete({
     apiServerUrl: apiUri,
     projectId,
+    callback: () =>
+      setValue('regen:previewPhoto', {
+        'schema:url': '',
+        'schema:creditText': '',
+      }),
   });
   const getHandleDeleteWithIndex = (fieldIndex: number) =>
     gethandleDelete({
@@ -130,7 +139,7 @@ const MediaFormSimple = ({
       >
         <TextField
           type="text"
-          label="Caption"
+          label="Photo credit"
           {...register('regen:previewPhoto.schema:creditText')}
           helperText={
             errors['regen:previewPhoto']?.['schema:creditText']?.message
@@ -139,57 +148,62 @@ const MediaFormSimple = ({
           optional
         />
       </ImageDrop>
-      {fields.map((field, index) => (
-        <ImageDrop
-          label={GALLERY_PHOTOS}
-          description={GALLERY_PHOTOS_DESCRIPTION}
-          onDelete={getHandleDeleteWithIndex(index)}
-          onUpload={handleUpload}
-          setValue={setGalleryPhotos}
-          value={galleryPhotos?.[index]?.['schema:url']}
-          error={!!errors['regen:galleryPhotos']?.[index]}
-          helperText={errors['regen:galleryPhotos']?.[index]?.message}
-          key={field.id}
-          fieldIndex={index}
-          dropZoneOption={{ maxFiles: 1 }}
-          optional
-          {...register(`regen:galleryPhotos.${index}.schema:url`)}
-          {...imgDefaultProps}
-        >
-          <TextField
-            type="text"
-            label="Caption"
-            helperText={
-              errors['regen:galleryPhotos']?.[index]?.['schema:creditText']
-                ?.message
-            }
-            error={
-              !!errors['regen:galleryPhotos']?.[index]?.['schema:creditText']
-            }
+      {fields.map((field, index) => {
+        const url = galleryPhotos?.[index]?.['schema:url'];
+        return (
+          <ImageDrop
+            label={GALLERY_PHOTOS}
+            description={GALLERY_PHOTOS_DESCRIPTION}
+            onDelete={getHandleDeleteWithIndex(index)}
+            onUpload={handleUpload}
+            setValue={setGalleryPhotos}
+            value={url === DEFAULT_URL ? '' : url}
+            error={!!errors['regen:galleryPhotos']?.[index]}
+            helperText={errors['regen:galleryPhotos']?.[index]?.message}
+            key={field.id}
+            fieldIndex={index}
+            dropZoneOption={{ maxFiles: 1 }}
             optional
-            {...register(`regen:galleryPhotos.${index}.schema:creditText`)}
-          />
-          <TextAreaField
-            type="text"
-            label="Caption"
-            rows={3}
-            minRows={3}
-            multiline
-            optional
-            helperText={
-              errors['regen:galleryPhotos']?.[index]?.['schema:caption']
-                ?.message
-            }
-            error={!!errors['regen:galleryPhotos']?.[index]?.['schema:caption']}
-            {...register(`regen:galleryPhotos.${index}.schema:caption`)}
+            {...register(`regen:galleryPhotos.${index}.schema:url`)}
+            {...imgDefaultProps}
           >
-            <TextAreaFieldChartCounter
-              value={galleryPhotos?.[index]?.['schema:caption']}
-              charLimit={CAPTION_CHART_LIMIT}
+            <TextAreaField
+              type="text"
+              label="Caption"
+              rows={3}
+              minRows={3}
+              multiline
+              optional
+              helperText={
+                errors['regen:galleryPhotos']?.[index]?.['schema:caption']
+                  ?.message
+              }
+              error={
+                !!errors['regen:galleryPhotos']?.[index]?.['schema:caption']
+              }
+              {...register(`regen:galleryPhotos.${index}.schema:caption`)}
+            >
+              <TextAreaFieldChartCounter
+                value={galleryPhotos?.[index]?.['schema:caption']}
+                charLimit={CAPTION_CHART_LIMIT}
+              />
+            </TextAreaField>
+            <TextField
+              type="text"
+              label="Photo credit"
+              helperText={
+                errors['regen:galleryPhotos']?.[index]?.['schema:creditText']
+                  ?.message
+              }
+              error={
+                !!errors['regen:galleryPhotos']?.[index]?.['schema:creditText']
+              }
+              optional
+              {...register(`regen:galleryPhotos.${index}.schema:creditText`)}
             />
-          </TextAreaField>
-        </ImageDrop>
-      ))}
+          </ImageDrop>
+        );
+      })}
     </>
   );
 };

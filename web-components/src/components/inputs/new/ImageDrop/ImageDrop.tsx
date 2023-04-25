@@ -136,23 +136,24 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
           optional={isFirstField ? optional : undefined}
           {...fieldProps}
         >
-          {value ? (
+          {value && (
             <ImageDropImage
               handleDelete={handleDelete}
               value={value}
               classes={classes}
-            />
-          ) : (
-            <ImageDropZone
-              handleDrop={handleDrop}
-              handleFileChange={handleFileChange}
-              buttonText={buttonText}
-              classes={classes}
-              hideDragText={hideDragText}
               name={name}
-              ref={ref}
             />
           )}
+          <ImageDropZone
+            handleDrop={handleDrop}
+            handleFileChange={handleFileChange}
+            buttonText={buttonText}
+            classes={classes}
+            hideDragText={hideDragText}
+            name={name}
+            value={value}
+            ref={ref}
+          />
         </FieldFormControl>
         <CropImageModal
           open={cropModalOpen}

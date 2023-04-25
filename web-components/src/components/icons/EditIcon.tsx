@@ -4,12 +4,17 @@ import SvgIcon from '@mui/material/SvgIcon';
 import { sxToArray } from '../../utils/mui/sxToArray';
 
 interface EditIconProps {
+  className?: string;
   sx?: SxProps<Theme>;
 }
 
-export default function EditIcon({ sx }: EditIconProps): JSX.Element {
+export default function EditIcon({
+  sx,
+  className,
+}: EditIconProps): JSX.Element {
   return (
     <SvgIcon
+      className={className}
       sx={[{ color: '#4FB573' }, ...sxToArray(sx)]}
       width="13"
       height="13"

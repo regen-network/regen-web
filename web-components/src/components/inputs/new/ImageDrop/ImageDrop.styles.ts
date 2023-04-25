@@ -34,13 +34,15 @@ export const useImageDropStyles = makeStyles()((theme: Theme) => ({
     marginBottom: theme.spacing(4),
     fontSize: theme.typography.pxToRem(12),
   },
-  deleteButton: {
-    background: theme.palette.primary.main,
+  buttons: {
     position: 'absolute',
     right: 0,
     top: 0,
     margin: theme.spacing(2),
     padding: theme.spacing(2),
+  },
+  button: {
+    background: theme.palette.primary.main,
     '&:hover': {
       background: theme.palette.grey[50],
     },

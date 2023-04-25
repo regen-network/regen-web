@@ -56,19 +56,6 @@ const MediaFormSimple = ({
     control: control,
   });
 
-  useEffect(() => {
-    if (
-      fields.length === 0 ||
-      fields.every(field => field['schema:url'] !== DEFAULT_URL)
-    ) {
-      append({
-        'schema:url': DEFAULT_URL,
-        'schema:caption': '',
-        'schema:creditText': '',
-      });
-    }
-  }, [append, fields]);
-
   /* Watcher */
 
   const previewPhoto = useWatch({ control, name: 'regen:previewPhoto' });
@@ -80,14 +67,14 @@ const MediaFormSimple = ({
     setValue('regen:previewPhoto.schema:url', value);
   };
   const setGalleryPhotos = (value: string, fieldIndex: number): void => {
-    setValue(`regen:galleryPhotos.${fieldIndex}.schema:url`, value);
-    if (fields.every(field => field['schema:url'] !== DEFAULT_URL)) {
+    if (galleryPhotos?.[fieldIndex]?.['schema:url'] === DEFAULT_URL) {
       append({
         'schema:url': DEFAULT_URL,
         'schema:caption': '',
         'schema:creditText': '',
       });
     }
+    setValue(`regen:galleryPhotos.${fieldIndex}.schema:url`, value);
   };
 
   /* Callbacks  */
@@ -112,6 +99,21 @@ const MediaFormSimple = ({
       projectId,
       callback: () => remove(fieldIndex),
     });
+
+  /* Effect */
+
+  useEffect(() => {
+    if (
+      fields?.length === 0 ||
+      fields?.every(field => field['schema:url'] !== DEFAULT_URL)
+    ) {
+      append({
+        'schema:url': DEFAULT_URL,
+        'schema:caption': '',
+        'schema:creditText': '',
+      });
+    }
+  }, [append, fields]);
 
   return (
     <>

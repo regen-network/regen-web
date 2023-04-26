@@ -21,6 +21,7 @@ import {
   STORY_TITLE_CHAR_LIMIT,
   STORY_TITLE_DESCRIPTION,
   STORY_TITLE_LABEL,
+  SUMMARY_CHAR_LIMIT,
   SUMMARY_DESCRIPTION,
   SUMMARY_LABEL,
 } from './DescriptionForm.constants';
@@ -98,7 +99,10 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
           error={!!errors['schema:description']}
           {...form.register('schema:description')}
         >
-          <TextAreaFieldChartCounter value={description} />
+          <TextAreaFieldChartCounter
+            value={description}
+            charLimit={SUMMARY_CHAR_LIMIT}
+          />
         </TextAreaField>
       </OnBoardingCard>
       <OnBoardingCard sx={{ mt: [0] }}>

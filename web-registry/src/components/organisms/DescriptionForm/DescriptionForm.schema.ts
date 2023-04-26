@@ -1,17 +1,16 @@
 import { z } from 'zod';
 
-import { DEFAULT_CHAR_LIMIT } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
-
 import {
   EMPTY_STORY_ERROR_MSG,
   EMPTY_STORY_TITLE_ERROR_MSG,
   STORY_CHAR_LIMIT,
   STORY_TITLE_CHAR_LIMIT,
+  SUMMARY_CHAR_LIMIT,
 } from './DescriptionForm.constants';
 
 export const descriptionFormSchema = z
   .object({
-    'schema:description': z.string().max(DEFAULT_CHAR_LIMIT).optional(),
+    'schema:description': z.string().max(SUMMARY_CHAR_LIMIT).optional(),
     'regen:story': z.string().max(STORY_CHAR_LIMIT).optional(),
     'regen:storyTitle': z.string().max(STORY_TITLE_CHAR_LIMIT).optional(),
   })

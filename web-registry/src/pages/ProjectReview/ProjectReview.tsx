@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { Box } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/ReviewCard';
@@ -14,6 +14,7 @@ import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
+import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
 import {
   getAnchoredProjectMetadata,
   getUnanchoredProjectMetadata,
@@ -48,6 +49,8 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { setDeliverTxResponse } = useCreateProjectContext();
   const graphqlClient = useApolloClient();
+  const reactQueryClient = useQueryClient();
+
   const { data, isLoading } = useQuery(
     getProjectByIdQuery({
       client: graphqlClient,
@@ -80,20 +83,27 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
     _deliverTxResponse: DeliverTxResponse,
   ): Promise<void> => {
     setDeliverTxResponse(_deliverTxResponse);
-    console.log(_deliverTxResponse);
     const projectOnChainId = getOnChainProjectId(_deliverTxResponse);
-    await updateProject({
-      variables: {
-        input: {
-          id: projectId,
-          projectPatch: {
-            onChainId: projectOnChainId,
-            metadata: getUnanchoredProjectMetadata(metadata, projectOnChainId),
+    if (projectId) {
+      await updateProject({
+        variables: {
+          input: {
+            id: projectId,
+            projectPatch: {
+              onChainId: projectOnChainId,
+              metadata: getUnanchoredProjectMetadata(
+                metadata,
+                projectOnChainId,
+              ),
+            },
           },
         },
-      },
-    });
-    navigate(`${editPath}/finished`);
+      });
+      await reactQueryClient.invalidateQueries({
+        queryKey: getProjectByIdKey(projectId),
+      });
+      navigate(`${editPath}/finished`);
+    }
   };
 
   const { signAndBroadcast, wallet, error, setError, deliverTxResponse } =

@@ -1,16 +1,11 @@
+import { UNANCHORED_PROJECT_KEYS } from 'lib/rdf/rdf.constants';
+
 export const OMITTED_METADATA_KEYS = [
   '@id',
   '@type',
-  'regen:creditClassId',
   'schema:name',
   'regen:projectSize',
   'schema:location',
   'regen:projectDeveloper',
-  'schema:description',
-  'regen:story',
-  'regen:storyTitle',
-  'regen:previewPhoto',
-  'regen:galleryPhotos',
-  'schema:creditText',
-  'regen:videoURL',
+  ...UNANCHORED_PROJECT_KEYS,
 ];

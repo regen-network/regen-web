@@ -80,6 +80,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
     _deliverTxResponse: DeliverTxResponse,
   ): Promise<void> => {
     setDeliverTxResponse(_deliverTxResponse);
+    console.log(_deliverTxResponse);
     const projectOnChainId = getOnChainProjectId(_deliverTxResponse);
     await updateProject({
       variables: {

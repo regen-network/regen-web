@@ -13,8 +13,8 @@ import {
   ANCHORED_PROJECT_CONTEXT,
   DEFAULT_PROJECT_CONTEXT,
   QUDT_UNIT_MAP,
-  UNACHORED_PROJECT_KEYS,
   UNANCHORED_PROJECT_CONTEXT,
+  UNANCHORED_PROJECT_KEYS,
 } from './rdf.constants';
 
 // loadDataset parses and loads the given JSON-LD string into
@@ -111,7 +111,7 @@ function getFilteredProjectMetadata(
 ): object {
   return Object.fromEntries(
     Object.entries(metadata).filter(([key]) => {
-      const unanchored = UNACHORED_PROJECT_KEYS.includes(key);
+      const unanchored = UNANCHORED_PROJECT_KEYS.includes(key);
       if (anchored) {
         return !unanchored;
       } else {

@@ -104,6 +104,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     setWallet,
     setWalletConnect,
     setWalletConnectUri,
+    setKeplrMobileWeb,
     walletConfigRef,
     track,
     login,

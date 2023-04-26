@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.6](https://github.com/regen-network/regen-web/compare/v1.4.5...v1.4.6) (2023-04-26)
+
+### Bug Fixes
+
+- set keplr mobile web on connectWallet for autoconnect ([149c347](https://github.com/regen-network/regen-web/commit/149c347cebb13620f58d0b007a4b525dcf49b812))
+
 ## [1.4.5](https://github.com/regen-network/regen-web/compare/v1.4.4...v1.4.5) (2023-04-26)
 
 ### Bug Fixes

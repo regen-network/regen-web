@@ -16,6 +16,7 @@ type Props = {
   onQrCloseCallbackRef: MutableRefObject<(() => void) | undefined>;
   walletConfigRef: MutableRefObject<WalletConfig | undefined>;
   setWallet: UseStateSetter<Wallet>;
+  setKeplrMobileWeb: UseStateSetter<boolean>;
   track?: (
     eventName: string,
     payload?: any,
@@ -37,6 +38,7 @@ export const useConnectWallet = ({
   walletConfigRef,
   setWallet,
   setWalletConnect,
+  setKeplrMobileWeb,
   track,
   login,
 }: Props): ConnectWalletType => {
@@ -78,6 +80,10 @@ export const useConnectWallet = ({
         await walletClient?.experimentalSuggestChain(chainInfo);
       }
 
+      if (isKeplr && walletClient?.mode === 'mobile-web') {
+        setKeplrMobileWeb(true);
+      }
+
       if ((isWalletConnectKeplr && walletConnect?.connected) || isKeplr) {
         await finalizeConnection({
           setWallet,
@@ -95,6 +101,7 @@ export const useConnectWallet = ({
       setWallet,
       setWalletConnect,
       setWalletConnectUri,
+      setKeplrMobileWeb,
       walletConfigRef,
       track,
       login,

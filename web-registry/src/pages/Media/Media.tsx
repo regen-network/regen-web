@@ -45,7 +45,10 @@ const Media = (): JSX.Element => {
       title="Media"
       saveAndExit={saveAndExit}
     >
-      <WithLoader isLoading={!metadata}>
+      <WithLoader
+        isLoading={!metadata}
+        sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}
+      >
         <MediaForm
           submit={metadataSubmit}
           initialValues={initialValues}

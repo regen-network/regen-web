@@ -15,6 +15,7 @@ export interface CropImageModalProps {
   initialImage: string;
   fixedCrop?: Partial<Crop>;
   isCropSubmitDisabled?: boolean;
+  isIgnoreCrop?: boolean;
   children?: React.ReactNode;
 }
 
@@ -55,6 +56,7 @@ export default function CropImageModal({
   initialImage,
   fixedCrop = {},
   isCropSubmitDisabled = false,
+  isIgnoreCrop = false,
   children,
 }: CropImageModalProps): JSX.Element {
   const { classes } = useStyles();
@@ -63,7 +65,9 @@ export default function CropImageModal({
     <Modal open={open} onClose={onClose} className={classes.modal}>
       <div className={classes.root}>
         <Title variant="h4" align="center" className={classes.title}>
-          Position and size your image
+          {isCropSubmitDisabled
+            ? 'Update image details'
+            : 'Position and size your image'}
         </Title>
         <ImageCrop
           image={initialImage}
@@ -72,6 +76,7 @@ export default function CropImageModal({
           circularCrop={circularCrop}
           fixedCrop={fixedCrop}
           isCropSubmitDisabled={isCropSubmitDisabled}
+          isIgnoreCrop={isIgnoreCrop}
         >
           {children}
         </ImageCrop>

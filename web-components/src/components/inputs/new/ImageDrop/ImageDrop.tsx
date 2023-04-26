@@ -132,6 +132,8 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
       }
     };
 
+    const handleEdit = () => setCropModalOpen(true);
+
     return (
       <>
         <FieldFormControl
@@ -145,11 +147,11 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
           {value && (
             <ImageDropImage
               handleDelete={handleDelete}
+              handleEdit={handleEdit}
               value={value}
               caption={caption}
               credit={credit}
               classes={classes}
-              name={name}
             />
           )}
           <ImageDropZone
@@ -170,6 +172,7 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
           initialImage={initialImage}
           fixedCrop={fixedCrop}
           isCropSubmitDisabled={isCropSubmitDisabled}
+          isIgnoreCrop={!!value}
         >
           {children}
         </CropImageModal>

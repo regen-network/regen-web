@@ -62,7 +62,7 @@ const useStyles = makeStyles<UseStylesParams>()(
       },
       backgroundColor: theme.palette.primary.main,
       img: {
-        objectFit: 'contain',
+        objectFit: 'cover',
       },
     },
   }),

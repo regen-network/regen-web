@@ -1,6 +1,12 @@
 import LazyLoad from 'react-lazyload';
 import { Link } from 'react-router-dom';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
 import { Box, Grid, Skeleton } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import CreditClassCard from 'web-components/lib/components/cards/CreditClassCard';
@@ -9,6 +15,9 @@ import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
 import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
+
+import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
+import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 
 import {
   API_URI,
@@ -51,6 +60,18 @@ function ProjectTopSection({
   batchData,
 }: ProjectTopSectionProps): JSX.Element {
   const { classes } = useProjectTopSectionStyles();
+
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
+
+  const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
+  const { data: partyByAddr } = useQuery(
+    getPartyByAddrQuery({
+      client: graphqlClient,
+      addr: onChainProject?.admin ?? '',
+      enabled: !!onChainProject?.admin && !!graphqlClient && !!csrfData,
+    }),
+  );
 
   const { creditClass, creditClassVersion, offsetGenerationMethod } =
     parseOffChainProject(offChainProject);
@@ -196,7 +217,7 @@ function ProjectTopSection({
         </Grid>
         <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
           <ProjectTopCard
-            projectAdmin={getDisplayAdmin(onChainProject?.admin)}
+            projectAdmin={getDisplayAdmin(onChainProject?.admin, partyByAddr)}
             projectDeveloper={projectDeveloper}
             landSteward={landSteward}
             landOwner={landOwner}

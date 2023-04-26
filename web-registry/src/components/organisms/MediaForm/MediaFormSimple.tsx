@@ -7,6 +7,8 @@ import { TextAreaField } from 'web-components/lib/components/inputs/new/TextArea
 import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
 
+import { useProjectEditContext } from 'pages';
+
 import { apiUri } from '../../../lib/apiUri';
 import {
   CAPTION_CHART_LIMIT,
@@ -42,7 +44,10 @@ const MediaFormSimple = ({
   const ctx = useFormContext<MediaFormSchemaType>();
   const { register, control, setValue, formState } = ctx;
   const { errors } = formState;
-  console.log('🚀 ~ file: MediaFormSimple.tsx:45 ~ errors:', errors);
+  // Since the form is getting modified by default, to add an empty input field for the gallery,
+  // we need to manually keep track of the dirty state.
+  // Update this ref whenever an action is performed in the form
+  const { isDirtyRef } = useProjectEditContext();
   const imgDefaultProps: Partial<ImageUploadProps> = {
     apiServerUrl: apiUri,
     projectId,
@@ -66,6 +71,7 @@ const MediaFormSimple = ({
 
   const setPreviewPhoto = (value: string): void => {
     setValue('regen:previewPhoto.schema:url', value);
+    isDirtyRef.current = true;
   };
   const setGalleryPhotos = (value: string, fieldIndex: number): void => {
     if (galleryPhotos?.[fieldIndex]?.['schema:url'] === DEFAULT_URL) {
@@ -76,6 +82,7 @@ const MediaFormSimple = ({
       });
     }
     setValue(`regen:galleryPhotos.${fieldIndex}.schema:url`, value);
+    isDirtyRef.current = true;
   };
 
   /* Callbacks  */
@@ -88,17 +95,22 @@ const MediaFormSimple = ({
   const handleDelete = gethandleDelete({
     apiServerUrl: apiUri,
     projectId,
-    callback: () =>
+    callback: () => {
       setValue('regen:previewPhoto', {
         'schema:url': '',
         'schema:creditText': '',
-      }),
+      });
+      isDirtyRef.current = true;
+    },
   });
   const getHandleDeleteWithIndex = (fieldIndex: number) =>
     gethandleDelete({
       apiServerUrl: apiUri,
       projectId,
-      callback: () => remove(fieldIndex),
+      callback: () => {
+        remove(fieldIndex);
+        isDirtyRef.current = true;
+      },
     });
 
   /* Effect */

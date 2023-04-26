@@ -14,6 +14,7 @@ export interface CropImageModalProps {
   circularCrop?: boolean;
   initialImage: string;
   fixedCrop?: Partial<Crop>;
+  isCropSubmitDisabled?: boolean;
   children?: React.ReactNode;
 }
 
@@ -53,6 +54,7 @@ export default function CropImageModal({
   circularCrop,
   initialImage,
   fixedCrop = {},
+  isCropSubmitDisabled = false,
   children,
 }: CropImageModalProps): JSX.Element {
   const { classes } = useStyles();
@@ -69,6 +71,7 @@ export default function CropImageModal({
           onCancel={onClose}
           circularCrop={circularCrop}
           fixedCrop={fixedCrop}
+          isCropSubmitDisabled={isCropSubmitDisabled}
         >
           {children}
         </ImageCrop>

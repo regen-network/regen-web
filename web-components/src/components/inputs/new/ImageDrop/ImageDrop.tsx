@@ -33,6 +33,7 @@ export interface ImageDropProps extends Partial<FieldFormControlProps> {
   fieldIndex?: number;
   children?: React.ReactNode;
   dropZoneOption?: DropzoneOptions;
+  isCropSubmitDisabled?: boolean;
   setValue: (value: string, fieldIndex: number) => void;
   onDelete?: (fileName: string) => Promise<void>;
   onUpload?: (imageFile: File) => Promise<string>;
@@ -58,6 +59,7 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
       credit,
       isSubmitting,
       fieldIndex = 0,
+      isCropSubmitDisabled = false,
       children,
       setValue,
       onUpload,
@@ -167,6 +169,7 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
           onSubmit={onCropModalSubmit}
           initialImage={initialImage}
           fixedCrop={fixedCrop}
+          isCropSubmitDisabled={isCropSubmitDisabled}
         >
           {children}
         </CropImageModal>

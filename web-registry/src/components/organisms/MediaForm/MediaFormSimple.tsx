@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
 
-import { ImageDrop } from 'web-components/lib/components/inputs/new/ImageDrop/ImageDrop';
-import { ImageUploadProps } from 'web-components/lib/components/inputs/new/ProjectImageUpload/ProjectImageUpload';
+import {
+  ImageDrop,
+  ImageDropProps,
+} from 'web-components/lib/components/inputs/new/ImageDrop/ImageDrop';
 import { TextAreaField } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField';
 import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
@@ -48,10 +50,7 @@ const MediaFormSimple = ({
   // we need to manually keep track of the dirty state.
   // Update this ref whenever an action is performed in the form
   const { isDirtyRef } = useProjectEditContext();
-  const imgDefaultProps: Partial<ImageUploadProps> = {
-    apiServerUrl: apiUri,
-    projectId,
-    optional: true,
+  const imageDropCommonProps: Partial<ImageDropProps> = {
     classes: { main: classes.fullSizeMedia },
     buttonText: '+ Add Photo',
     fixedCrop: cropAspectMediaForm,
@@ -142,7 +141,7 @@ const MediaFormSimple = ({
         error={!!errors['regen:previewPhoto']}
         helperText={errors['regen:previewPhoto']?.message}
         optional
-        {...imgDefaultProps}
+        {...imageDropCommonProps}
         {...register('regen:previewPhoto.schema:url')}
       >
         <TextField
@@ -185,7 +184,7 @@ const MediaFormSimple = ({
             defaultStyle={false}
             optional
             {...register(`regen:galleryPhotos.${index}.schema:url`)}
-            {...imgDefaultProps}
+            {...imageDropCommonProps}
           >
             <TextAreaField
               type="text"

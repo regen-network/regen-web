@@ -7,6 +7,7 @@ import { makeStyles } from 'tss-react/mui';
 
 import ContainedButton from '../buttons/ContainedButton';
 import { getCroppedImg } from './canvas-utils';
+import { APPLY, CANCEL, UPDATE } from './ImageCrop.constants';
 
 import 'react-image-crop/dist/ReactCrop.css';
 
@@ -17,6 +18,7 @@ export interface ImageCropProps {
   onCancel: () => void;
   fixedCrop: Partial<Crop>;
   isCropSubmitDisabled?: boolean;
+  isIgnoreCrop?: boolean;
   children?: React.ReactNode;
 }
 
@@ -64,6 +66,7 @@ export default function ImageCrop({
   onCancel,
   fixedCrop,
   isCropSubmitDisabled,
+  isIgnoreCrop = false,
   children,
 }: ImageCropProps): JSX.Element {
   const { classes } = useStyles();
@@ -153,15 +156,20 @@ export default function ImageCrop({
       </div>
       {children}
       <div className={classes.controls}>
-        <Button onClick={onCancel} className={classes.cancelButton}>
-          Cancel
-        </Button>
+        {!isIgnoreCrop && (
+          <Button onClick={onCancel} className={classes.cancelButton}>
+            {CANCEL}
+          </Button>
+        )}
         <ContainedButton
-          onClick={showCroppedImage}
+          onClick={isIgnoreCrop ? onCancel : showCroppedImage}
           className={classes.button}
-          disabled={!completedCrop || loading || isCropSubmitDisabled}
+          disabled={
+            ((!completedCrop || loading) && !isIgnoreCrop) ||
+            isCropSubmitDisabled
+          }
         >
-          Apply
+          {isIgnoreCrop ? UPDATE : APPLY}
         </ContainedButton>
       </div>
     </div>

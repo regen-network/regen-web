@@ -63,7 +63,9 @@ interface Values {
 const useStyles = makeStyles()((theme: Theme) => ({
   grid: {
     maxWidth: theme.spacing(163.75),
-    margin: '0 auto',
+    [theme.breakpoints.up('md')]: {
+      margin: '0 auto',
+    },
   },
   textField: {
     width: 'auto',

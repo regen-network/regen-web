@@ -83,6 +83,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const [walletConnect, setWalletConnect] = useState<
     WalletConnect | undefined
   >();
+  const [keplrMobileWeb, setKeplrMobileWeb] = useState<boolean>(false);
   const walletConfigRef = useRef<WalletConfig | undefined>();
   const [error, setError] = useState<unknown>(undefined);
   const [walletConnectUri, setWalletConnectUri] = useState<
@@ -122,7 +123,12 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
 
   useAutoConnect({ connectWallet, setError, setLoaded });
   useOnAccountChange({ connectWallet, wallet });
-  useDetectKeplrMobileBrowser({ connectWallet, loaded, wallet });
+  useDetectKeplrMobileBrowser({
+    connectWallet,
+    loaded,
+    wallet,
+    setKeplrMobileWeb,
+  });
   useWalletConnectCallback({ onQrCloseCallbackRef, walletConnectUri });
   useWalletConnectFinalize({
     setWallet,
@@ -156,7 +162,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
           !!wallet?.address &&
           // signArbitrary (used in login) not yet supported by @keplr-wallet/wc-client
           // https://github.com/chainapsis/keplr-wallet/issues/664
-          (!!walletConnect || !!accountId),
+          (keplrMobileWeb || !!walletConnect || !!accountId),
       }}
     >
       {children}

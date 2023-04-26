@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.5](https://github.com/regen-network/regen-web/compare/v1.4.4...v1.4.5) (2023-04-26)
+
+### Bug Fixes
+
+- login on keplr mobile ([5d73d4d](https://github.com/regen-network/regen-web/commit/5d73d4d3634e92d06442bb07587625d04a278a00))
+
 ## [1.4.4](https://github.com/regen-network/regen-web/compare/v1.4.3...v1.4.4) (2023-04-20)
 
 ### Bug Fixes

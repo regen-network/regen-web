@@ -41,6 +41,7 @@ export const MediaForm = ({
   const { isSubmitting, isDirty, isValid } = useFormState({
     control: form.control,
   });
+  const { isDirtyRef } = useProjectEditContext();
 
   const { confirmSave, isEdit } = useProjectEditContext();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
@@ -64,6 +65,7 @@ export const MediaForm = ({
               };
               await submit({ values: filteredData });
               if (isEdit && confirmSave) confirmSave();
+              isDirtyRef.current = false;
             } catch (e) {
               setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
             }

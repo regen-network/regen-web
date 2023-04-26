@@ -1,4 +1,10 @@
-import { createContext, useContext, useRef, useState } from 'react';
+import {
+  createContext,
+  MutableRefObject,
+  useContext,
+  useRef,
+  useState,
+} from 'react';
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
@@ -42,6 +48,7 @@ type ContextType = {
   onChainProject?: ProjectInfo;
   projectEditSubmit: UseProjectEditSubmitParams;
   formRef: FormRef<Values>;
+  isDirtyRef: MutableRefObject<boolean>;
 };
 
 const ProjectEditContext = createContext<ContextType>({
@@ -49,6 +56,7 @@ const ProjectEditContext = createContext<ContextType>({
   projectEditSubmit: async () => {},
   isEdit: false,
   formRef: { current: null },
+  isDirtyRef: { current: false },
 });
 
 function ProjectEdit(): JSX.Element {
@@ -127,8 +135,10 @@ function ProjectEdit(): JSX.Element {
     }, 5000);
   };
 
+  // For formik based forms
   const formRef = useRef<FormikProps<FormikValues>>(null);
-
+  // For react-hook-form based forms
+  const isDirtyRef = useRef<boolean>(false);
   if (isNotAdmin) {
     return (
       <ProjectEditDenied
@@ -139,11 +149,12 @@ function ProjectEdit(): JSX.Element {
   }
 
   const onBackClick = (): void => {
+    const isFormDirty = formRef.current?.dirty || isDirtyRef.current;
     if (section) {
       const path = isMobile
         ? `/project-pages/${projectId}/edit`
         : '/ecocredits/projects';
-      if (formRef.current?.dirty) {
+      if (isFormDirty) {
         setIsWarningModalOpen(path);
       } else {
         navigate(path);
@@ -154,11 +165,12 @@ function ProjectEdit(): JSX.Element {
   };
 
   const onNavClick = (sectionName: string): void => {
+    const isFormDirty = formRef.current?.dirty || isDirtyRef.current;
     const path = `/project-pages/${projectId}/edit/${sectionName.replace(
       ' ',
       '-',
     )}`;
-    if (formRef.current?.dirty) {
+    if (isFormDirty) {
       setIsWarningModalOpen(path);
     } else {
       navigate(path);
@@ -173,6 +185,7 @@ function ProjectEdit(): JSX.Element {
         onChainProject,
         projectEditSubmit,
         formRef,
+        isDirtyRef,
       }}
     >
       <WithLoader
@@ -220,6 +233,7 @@ function ProjectEdit(): JSX.Element {
             open={!!isWarningModalOpen}
             navigate={() => {
               if (isWarningModalOpen) navigate(isWarningModalOpen);
+              isDirtyRef.current = false;
             }}
             onClose={() => {
               setIsWarningModalOpen(undefined);

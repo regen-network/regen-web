@@ -3,11 +3,14 @@ import WalletConnect from '@walletconnect/client';
 import truncate from 'lodash/truncate';
 
 import { UseStateSetter } from 'types/react/use-state';
+import { apiUri } from 'lib/apiUri';
 import { LoginEvent, Track } from 'lib/tracker/types';
 
 import { chainInfo } from './chainInfo/chainInfo';
 import { LoginType, Wallet } from './wallet';
 import {
+  KEPLR_ADD_ADDR_DESCRIPTION,
+  KEPLR_LOGIN_DESCRIPTION,
   KEPLR_LOGIN_TITLE,
   WALLET_CONNECT_BRIDGE_URL,
   WALLET_CONNECT_SIGNING_METHODS,
@@ -107,10 +110,43 @@ export const finalizeConnection = async ({
   }
 };
 
-export const getArbitraryLoginData = (nonce: string) =>
+type GetArbitraryDataParams = {
+  nonce: string;
+  addAddr?: boolean;
+};
+
+export const getArbitraryData = ({
+  nonce,
+  addAddr = false,
+}: GetArbitraryDataParams) =>
   JSON.stringify({
     title: KEPLR_LOGIN_TITLE,
-    description:
-      'This is a transaction that allows Regen Network to authenticate you with our application.',
+    description: addAddr ? KEPLR_ADD_ADDR_DESCRIPTION : KEPLR_LOGIN_DESCRIPTION,
     nonce,
   });
+
+type GetNonceParams = {
+  userAddress: string;
+  token: string;
+};
+
+export const getNonce = async ({
+  userAddress,
+  token,
+}: GetNonceParams): Promise<string> => {
+  const nonceRes = await fetch(
+    `${apiUri}/web3auth/nonce?` +
+      new URLSearchParams({
+        userAddress: userAddress,
+      }),
+    {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'X-CSRF-TOKEN': token,
+      },
+    },
+  );
+  const { nonce } = await nonceRes.json();
+  return nonce || '';
+};

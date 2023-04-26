@@ -7,9 +7,14 @@ import { ConnectWalletType } from './useConnectWallet';
 type Props = {
   wallet: Wallet;
   connectWallet: ConnectWalletType;
+  accountId?: string;
 };
 
-export const useOnAccountChange = ({ wallet, connectWallet }: Props): void => {
+export const useOnAccountChange = ({
+  wallet,
+  connectWallet,
+  accountId,
+}: Props): void => {
   useEffect(() => {
     if (typeof window === 'undefined') {
       return;
@@ -17,7 +22,13 @@ export const useOnAccountChange = ({ wallet, connectWallet }: Props): void => {
 
     const listener = (): void => {
       if (wallet) {
-        connectWallet({ walletType: WalletType.Keplr, doLogin: false });
+        // If no accountId, just connect to the new address automatically.
+        // This is to keep support WC and Keplr mobile browser
+        // that do not support signArbitrary (used in addAddress)
+        if (!accountId) {
+          connectWallet({ walletType: WalletType.Keplr, doLogin: false });
+        } else {
+        }
       }
     };
 
@@ -26,5 +37,5 @@ export const useOnAccountChange = ({ wallet, connectWallet }: Props): void => {
     return () => {
       window.removeEventListener('keplr_keystorechange', listener);
     };
-  }, [wallet, connectWallet]);
+  }, [wallet, connectWallet, accountId]);
 };

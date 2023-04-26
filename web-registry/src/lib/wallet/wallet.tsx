@@ -42,6 +42,7 @@ export type LoginType = (loginParams: LoginParams) => Promise<void>;
 
 export interface SignArbitraryParams extends LoginParams {
   nonce: string;
+  addAddr?: boolean;
 }
 export type SignArbitraryType = (
   signArbitraryParams: SignArbitraryParams,
@@ -123,7 +124,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   });
 
   useAutoConnect({ connectWallet, setError, setLoaded });
-  useOnAccountChange({ connectWallet, wallet });
+  useOnAccountChange({ connectWallet, wallet, accountId });
   useDetectKeplrMobileBrowser({
     connectWallet,
     loaded,

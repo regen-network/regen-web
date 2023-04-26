@@ -81,7 +81,8 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
       sx={theme => ({ width: { xs: theme.spacing(73), md: '100%' } })}
       name={project.metadata?.['schema:name']}
       imgSrc={
-        project.metadata?.['regen:previewPhoto']?.['@value'] || DefaultProject
+        project.metadata?.['regen:previewPhoto']?.['schema:url'] ||
+        DefaultProject
       }
       imageStorageBaseUrl={imageStorageBaseUrl}
       apiServerUrl={apiServerUrl}

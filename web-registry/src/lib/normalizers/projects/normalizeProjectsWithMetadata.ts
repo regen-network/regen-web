@@ -38,7 +38,7 @@ export const normalizeProjectsWithMetadata = ({
         id: project.id,
         name: metadata?.['schema:name'] || project.name,
         imgSrc:
-          projectPageMetadata?.['regen:previewPhoto'] ??
+          projectPageMetadata?.['regen:previewPhoto']?.['schema:url'] ??
           creditClassImage ??
           DefaultProject,
         place: metadata?.['schema:location']?.place_name || project.place,

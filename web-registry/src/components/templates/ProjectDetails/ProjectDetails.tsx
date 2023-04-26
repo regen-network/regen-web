@@ -193,6 +193,7 @@ function ProjectDetails(): JSX.Element {
   });
 
   const mediaData = parseMedia({ metadata: offChainProjectMetadata, geojson });
+
   const impactData = useImpact({ coBenefitsIris, primaryImpactIRI });
 
   const loadingDb = loadingProjectByOnChainId || loadingProjectByHandle;

@@ -13,6 +13,7 @@ import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
 import { DEFAULT_URL } from './MediaForm.constants';
 import { mediaFormSchema, MediaFormSchemaType } from './MediaForm.schema';
+import { validateMediaFormForm } from './MediaForm.utils';
 import { MediaFormSimple } from './MediaFormSimple';
 
 interface MediaFormProps {
@@ -49,7 +50,10 @@ export const MediaForm = ({
       <Form
         form={form}
         onSubmit={async data => {
-          const hasError = false;
+          const hasError = validateMediaFormForm({
+            values: data,
+            setError: form.setError,
+          });
           if (!hasError) {
             try {
               const filteredData = {

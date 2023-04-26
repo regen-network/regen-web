@@ -43,7 +43,11 @@ export default function FieldFormControl({
   error = false,
   helperText,
 }: FieldFormControlProps): JSX.Element {
-  const { classes: styles, cx } = useFieldFormControlStyles();
+  const { classes: styles, cx } = useFieldFormControlStyles({
+    disabled,
+    description,
+    error,
+  });
   const defaultClasses = [styles.default, className];
   const rootClasses = defaultStyle
     ? forceDefaultStyle

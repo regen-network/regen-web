@@ -1,6 +1,5 @@
 import { UseFormReturn } from 'react-hook-form';
 
-import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 import { deleteImage, uploadImage } from 'web-components/lib/utils/s3';
 
 import {

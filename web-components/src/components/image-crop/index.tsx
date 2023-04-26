@@ -16,6 +16,7 @@ export interface ImageCropProps {
   onCropSubmit: (blob: HTMLImageElement) => Promise<void>;
   onCancel: () => void;
   fixedCrop: Partial<Crop>;
+  isCropSubmitDisabled?: boolean;
   children?: React.ReactNode;
 }
 
@@ -62,6 +63,7 @@ export default function ImageCrop({
   onCropSubmit,
   onCancel,
   fixedCrop,
+  isCropSubmitDisabled,
   children,
 }: ImageCropProps): JSX.Element {
   const { classes } = useStyles();
@@ -157,7 +159,7 @@ export default function ImageCrop({
         <ContainedButton
           onClick={showCroppedImage}
           className={classes.button}
-          disabled={!completedCrop || loading}
+          disabled={!completedCrop || loading || isCropSubmitDisabled}
         >
           Apply
         </ContainedButton>

@@ -159,6 +159,9 @@ const MediaFormSimple = ({
       {fields.map((field, index) => {
         const url = galleryPhotos?.[index]?.['schema:url'];
         const isLast = index === fields.length - 1;
+        const hasFieldError = !!errors['regen:galleryPhotos']?.[index];
+        const fieldErrorMessage =
+          errors['regen:galleryPhotos']?.[index]?.['schema:caption']?.message;
 
         return (
           <ImageDrop
@@ -170,11 +173,14 @@ const MediaFormSimple = ({
             value={url === DEFAULT_URL ? '' : url}
             caption={galleryPhotos?.[index]?.['schema:caption']}
             credit={galleryPhotos?.[index]?.['schema:creditText']}
-            error={!!errors['regen:galleryPhotos'] && isLast}
-            helperText={errors['regen:galleryPhotos']?.message}
+            error={(!!errors['regen:galleryPhotos'] && isLast) || hasFieldError}
+            helperText={
+              fieldErrorMessage ?? errors['regen:galleryPhotos']?.message
+            }
             key={field.id}
             fieldIndex={index}
             dropZoneOption={{ maxFiles: 1 }}
+            isCropSubmitDisabled={hasFieldError}
             optional
             {...register(`regen:galleryPhotos.${index}.schema:url`)}
             {...imgDefaultProps}

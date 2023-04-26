@@ -15,6 +15,7 @@ export const useImageDropStyles = makeStyles()((theme: Theme) => ({
   previewImage: {
     height: '100%',
     width: '100%',
+    borderRadius: 5,
   },
   main: {
     height: '100%',

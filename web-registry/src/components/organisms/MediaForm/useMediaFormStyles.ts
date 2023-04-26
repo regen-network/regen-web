@@ -14,4 +14,7 @@ export const useMediaFormStyles = makeStyles()(theme => ({
     fontSize: theme.typography.pxToRem(14),
     padding: theme.spacing(2, 3),
   },
+  galleryItem: {
+    marginTop: theme.typography.pxToRem(10),
+  },
 }));

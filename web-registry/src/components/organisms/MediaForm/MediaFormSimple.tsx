@@ -181,6 +181,8 @@ const MediaFormSimple = ({
             fieldIndex={index}
             dropZoneOption={{ maxFiles: 1 }}
             isCropSubmitDisabled={hasFieldError}
+            className={classes.galleryItem}
+            defaultStyle={false}
             optional
             {...register(`regen:galleryPhotos.${index}.schema:url`)}
             {...imgDefaultProps}

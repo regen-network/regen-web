@@ -108,7 +108,7 @@ export const parseMedia = ({
 
   const previewPhoto = metadata?.['regen:previewPhoto'];
 
-  if (previewPhoto) {
+  if (previewPhoto?.['schema:url']) {
     assets.push({ src: previewPhoto['schema:url'], type: 'image' });
   }
 
@@ -120,7 +120,7 @@ export const parseMedia = ({
     assets: assets ?? [],
     imageStorageBaseUrl: IMAGE_STORAGE_BASE_URL,
     apiServerUrl: API_URI,
-    imageCredits: metadata?.['schema:creditText'],
+    imageCredits: previewPhoto?.['schema:creditText'],
   };
 };
 

@@ -118,7 +118,7 @@ const getProjectDisplayData = async (
           creditClassId: project.classId,
           name: metadata?.['schema:name'] || project.id,
           imgSrc:
-            metadata?.['regen:previewPhoto']?.['@value'] || DefaultProject,
+            metadata?.['regen:previewPhoto']?.['schema:url'] || DefaultProject,
           place:
             metadata?.['schema:location']?.place_name || project.jurisdiction,
           area: metadata?.['regen:projectSize']?.['qudt:numericValue']?.[

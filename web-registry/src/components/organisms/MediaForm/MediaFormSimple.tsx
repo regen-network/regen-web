@@ -42,6 +42,7 @@ const MediaFormSimple = ({
   const ctx = useFormContext<MediaFormSchemaType>();
   const { register, control, setValue, formState } = ctx;
   const { errors } = formState;
+  console.log('🚀 ~ file: MediaFormSimple.tsx:45 ~ errors:', errors);
   const imgDefaultProps: Partial<ImageUploadProps> = {
     apiServerUrl: apiUri,
     projectId,
@@ -145,6 +146,8 @@ const MediaFormSimple = ({
       </ImageDrop>
       {fields.map((field, index) => {
         const url = galleryPhotos?.[index]?.['schema:url'];
+        const isLast = index === fields.length - 1;
+
         return (
           <ImageDrop
             label={GALLERY_PHOTOS}
@@ -155,8 +158,8 @@ const MediaFormSimple = ({
             value={url === DEFAULT_URL ? '' : url}
             caption={galleryPhotos?.[index]?.['schema:caption']}
             credit={galleryPhotos?.[index]?.['schema:creditText']}
-            error={!!errors['regen:galleryPhotos']?.[index]}
-            helperText={errors['regen:galleryPhotos']?.[index]?.message}
+            error={!!errors['regen:galleryPhotos'] && isLast}
+            helperText={errors['regen:galleryPhotos']?.message}
             key={field.id}
             fieldIndex={index}
             dropZoneOption={{ maxFiles: 1 }}

@@ -9,6 +9,8 @@ interface StyleProps {
 export const useFieldFormControlStyles = makeStyles<StyleProps>()(
   (theme, { error }) => ({
     error: {
+      marginLeft: 0,
+      marginRigth: 0,
       color: theme.palette.error.main,
       borderColor: theme.palette.error.main,
       marginTop: theme.spacing(1),

@@ -157,6 +157,7 @@ const MediaFormSimple = ({
       </ImageDrop>
       {fields.map((field, index) => {
         const url = galleryPhotos?.[index]?.['schema:url'];
+        const isFirst = index === 0;
         const isLast = index === fields.length - 1;
         const hasFieldError = !!errors['regen:galleryPhotos']?.[index];
         const fieldErrorMessage =
@@ -181,7 +182,7 @@ const MediaFormSimple = ({
             dropZoneOption={{ maxFiles: 1 }}
             isCropSubmitDisabled={hasFieldError}
             className={classes.galleryItem}
-            defaultStyle={false}
+            defaultStyle={isFirst ? true : false}
             optional
             {...register(`regen:galleryPhotos.${index}.schema:url`)}
             {...imageDropCommonProps}

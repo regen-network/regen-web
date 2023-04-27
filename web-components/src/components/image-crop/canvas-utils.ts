@@ -88,11 +88,13 @@ export async function getImageSrc(
   fileType?: string,
 ): Promise<string> {
   let result = croppedImage.src;
+  const timestamp = new Date().getTime();
+  const fileNameWithTimestamp = `${timestamp}-${fileName}`;
 
   if (onUpload && fileName) {
     const imageFile = await srcToFile(
       croppedImage.src,
-      fileName,
+      fileNameWithTimestamp,
       fileType ?? 'image/png',
     );
     result = await onUpload(imageFile);

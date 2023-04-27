@@ -77,7 +77,8 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
     const handleDrop = (files: File[]): void => {
       if (files && files.length > 0) {
         const file = files[0];
-        setFileName(file.name);
+        const timestamp = new Date().getTime();
+        setFileName(`${timestamp}-${file.name}`);
         toBase64(file).then(base64String => {
           if (typeof base64String === 'string') {
             setCropModalOpen(true);
@@ -97,7 +98,8 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
         event.target.files.length > 0
       ) {
         const file = event.target.files[0];
-        setFileName(file.name);
+        const timestamp = new Date().getTime();
+        setFileName(`${timestamp}-${file.name}`);
         toBase64(file).then(base64String => {
           if (typeof base64String === 'string') {
             setCropModalOpen(true);

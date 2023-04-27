@@ -1,6 +1,7 @@
+import { MutableRefObject } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 
-import { deleteImage, uploadImage } from 'web-components/lib/utils/s3';
+import { uploadImage } from 'web-components/lib/utils/s3';
 
 import {
   DEFAULT_URL,
@@ -28,18 +29,15 @@ export const getHandleUpload =
 /* handleDelete */
 
 export type getHandleDeleteParams = {
-  projectId?: string;
-  apiServerUrl: string;
+  fileNamesToDeleteRef: MutableRefObject<string[]>;
   callback?: () => void;
 };
 
 export const gethandleDelete =
-  ({ apiServerUrl, projectId, callback }: getHandleDeleteParams) =>
+  ({ fileNamesToDeleteRef, callback }: getHandleDeleteParams) =>
   async (fileName: string): Promise<void> => {
-    if (projectId) {
-      callback && callback();
-      await deleteImage(projectId, fileName, apiServerUrl);
-    }
+    fileNamesToDeleteRef.current.push(fileName);
+    callback && callback();
   };
 
 /* validateEditProfileForm */
@@ -59,7 +57,7 @@ export const validateMediaFormForm = ({
       item => item['schema:url'] !== DEFAULT_URL,
     ).length ?? 0;
 
-  if (galleryPhotosCount < GALLERY_PHOTOS_MIN) {
+  if (galleryPhotosCount > 0 && galleryPhotosCount < GALLERY_PHOTOS_MIN) {
     setError('regen:galleryPhotos', {
       type: 'min',
       message: MIN_PHOTOS_ERROR_MESSAGE,

@@ -1,10 +1,13 @@
+import { useRef } from 'react';
 import { useFormState } from 'react-hook-form';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
+import { deleteImage } from 'web-components/lib/utils/s3';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { apiServerUrl } from 'lib/env';
 
 import { useProjectEditContext } from 'pages/ProjectEdit';
 import { ProjectPageFooter } from 'components/molecules';
@@ -41,6 +44,7 @@ export const MediaForm = ({
   const { isSubmitting, isDirty, isValid } = useFormState({
     control: form.control,
   });
+  const fileNamesToDeleteRef = useRef<string[]>([]);
   const { isDirtyRef } = useProjectEditContext();
 
   const { confirmSave, isEdit } = useProjectEditContext();
@@ -57,14 +61,26 @@ export const MediaForm = ({
           });
           if (!hasError) {
             try {
+              // Remove the placeholder input
               const filteredData = {
                 'regen:previewPhoto': data['regen:previewPhoto'],
                 'regen:galleryPhotos': data['regen:galleryPhotos']?.filter(
                   photo => photo['schema:url'] !== DEFAULT_URL,
                 ),
               };
+              // Submit
               await submit({ values: filteredData });
+              // Delete any images that were removed on S3
+              await Promise.all(
+                fileNamesToDeleteRef?.current.map(
+                  async fileName =>
+                    await deleteImage(projectId ?? '', fileName, apiServerUrl),
+                ),
+              );
+              fileNamesToDeleteRef.current = [];
+              // Save callback
               if (isEdit && confirmSave) confirmSave();
+              // Reset dirty state
               isDirtyRef.current = false;
             } catch (e) {
               setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
@@ -72,7 +88,10 @@ export const MediaForm = ({
           }
         }}
       >
-        <MediaFormSimple projectId={projectId} />
+        <MediaFormSimple
+          projectId={projectId}
+          fileNamesToDeleteRef={fileNamesToDeleteRef}
+        />
         <ProjectPageFooter
           onNext={onNext}
           onPrev={onPrev}

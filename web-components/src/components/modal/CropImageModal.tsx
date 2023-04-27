@@ -65,7 +65,7 @@ export default function CropImageModal({
     <Modal open={open} onClose={onClose} className={classes.modal}>
       <div className={classes.root}>
         <Title variant="h4" align="center" className={classes.title}>
-          {isCropSubmitDisabled
+          {isIgnoreCrop
             ? 'Update image details'
             : 'Position and size your image'}
         </Title>

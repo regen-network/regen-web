@@ -11,10 +11,7 @@ export const TextAreaFieldChartCounter = ({
   value,
   charLimit = DEFAULT_CHAR_LIMIT,
 }: Props) => {
-  const charsLeft = Math.max(
-    0,
-    (charLimit || Infinity) - ((value && value.length) || 0),
-  );
+  const charsLeft = (charLimit || Infinity) - ((value && value.length) || 0);
 
   return (
     <Body size="sm" sx={{ color: 'info.main', mt: 1, mb: { xs: 3, sm: 4 } }}>

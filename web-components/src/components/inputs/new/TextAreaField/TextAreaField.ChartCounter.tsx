@@ -5,7 +5,7 @@ type Props = {
   charLimit?: number;
 };
 
-export const DEFAULT_CHAR_LIMIT = 160;
+const DEFAULT_CHAR_LIMIT = 160;
 
 export const TextAreaFieldChartCounter = ({
   value,

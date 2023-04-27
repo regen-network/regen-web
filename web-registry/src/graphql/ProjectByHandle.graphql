@@ -19,17 +19,6 @@ fragment organizationFields on Organization {
   id
 }
 
-fragment creditBatchFields on CreditBatch {
-  id
-  createdAt
-  units
-  batchDenom
-  creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
-    name
-    metadata
-  }
-}
-
 query ProjectByHandle($handle: String!) {
   projectByHandle(handle: $handle) {
     ...projectFields

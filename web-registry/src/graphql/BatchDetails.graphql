@@ -1,7 +1,0 @@
-query batchDetails($batchDenom: String!) {
-  creditBatchByBatchDenom(batchDenom: $batchDenom) {
-    projectByProjectId {
-      handle
-    }
-  }
-}

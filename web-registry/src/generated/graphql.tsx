@@ -4526,31 +4526,6 @@ export enum WalletsOrderBy {
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
 
-export type AllCreditBatchesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type AllCreditBatchesQuery = (
-  { __typename?: 'Query' }
-  & { allCreditBatches?: Maybe<(
-    { __typename?: 'CreditBatchesConnection' }
-    & { nodes: Array<Maybe<(
-      { __typename?: 'CreditBatch' }
-      & Pick<CreditBatch, 'id' | 'createdAt'>
-      & { creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt?: Maybe<(
-        { __typename?: 'CreditClassVersion' }
-        & Pick<CreditClassVersion, 'id' | 'name' | 'createdAt'>
-      )>, projectByProjectId?: Maybe<(
-        { __typename?: 'Project' }
-        & Pick<Project, 'metadata' | 'developerId'>
-        & { partyByDeveloperId?: Maybe<(
-          { __typename?: 'Party' }
-          & Pick<Party, 'name'>
-        )> }
-      )> }
-    )>> }
-  )> }
-);
-
 export type AllCreditClassesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -4608,22 +4583,6 @@ export type AllProjectsQuery = (
         ) }
       )> }
     )>> }
-  )> }
-);
-
-export type BatchDetailsQueryVariables = Exact<{
-  batchDenom: Scalars['String'];
-}>;
-
-
-export type BatchDetailsQuery = (
-  { __typename?: 'Query' }
-  & { creditBatchByBatchDenom?: Maybe<(
-    { __typename?: 'CreditBatch' }
-    & { projectByProjectId?: Maybe<(
-      { __typename?: 'Project' }
-      & Pick<Project, 'handle'>
-    )> }
   )> }
 );
 
@@ -4816,15 +4775,6 @@ export type PartyFieldsFragment = (
 export type OrganizationFieldsFragment = (
   { __typename?: 'Organization' }
   & Pick<Organization, 'id'>
-);
-
-export type CreditBatchFieldsFragment = (
-  { __typename?: 'CreditBatch' }
-  & Pick<CreditBatch, 'id' | 'createdAt' | 'units' | 'batchDenom'>
-  & { creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt?: Maybe<(
-    { __typename?: 'CreditClassVersion' }
-    & Pick<CreditClassVersion, 'name' | 'metadata'>
-  )> }
 );
 
 export type ProjectByHandleQueryVariables = Exact<{
@@ -5029,18 +4979,6 @@ export const MoreProjectFieldsFragmentDoc = gql`
   }
 }
     `;
-export const CreditBatchFieldsFragmentDoc = gql`
-    fragment creditBatchFields on CreditBatch {
-  id
-  createdAt
-  units
-  batchDenom
-  creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
-    name
-    metadata
-  }
-}
-    `;
 export const OrganizationFieldsFragmentDoc = gql`
     fragment organizationFields on Organization {
   id
@@ -5091,55 +5029,6 @@ export const ProjectFieldsFragmentDoc = gql`
   }
 }
     ${PartyFieldsFragmentDoc}`;
-export const AllCreditBatchesDocument = gql`
-    query AllCreditBatches {
-  allCreditBatches {
-    nodes {
-      id
-      createdAt
-      creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
-        id
-        name
-        createdAt
-      }
-      projectByProjectId {
-        metadata
-        developerId
-        partyByDeveloperId {
-          name
-        }
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __useAllCreditBatchesQuery__
- *
- * To run a query within a React component, call `useAllCreditBatchesQuery` and pass it any options that fit your needs.
- * When your component renders, `useAllCreditBatchesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAllCreditBatchesQuery({
- *   variables: {
- *   },
- * });
- */
-export function useAllCreditBatchesQuery(baseOptions?: Apollo.QueryHookOptions<AllCreditBatchesQuery, AllCreditBatchesQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AllCreditBatchesQuery, AllCreditBatchesQueryVariables>(AllCreditBatchesDocument, options);
-      }
-export function useAllCreditBatchesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllCreditBatchesQuery, AllCreditBatchesQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AllCreditBatchesQuery, AllCreditBatchesQueryVariables>(AllCreditBatchesDocument, options);
-        }
-export type AllCreditBatchesQueryHookResult = ReturnType<typeof useAllCreditBatchesQuery>;
-export type AllCreditBatchesLazyQueryHookResult = ReturnType<typeof useAllCreditBatchesLazyQuery>;
-export type AllCreditBatchesQueryResult = Apollo.QueryResult<AllCreditBatchesQuery, AllCreditBatchesQueryVariables>;
 export const AllCreditClassesDocument = gql`
     query AllCreditClasses {
   allCreditClasses {
@@ -5272,43 +5161,6 @@ export function useAllProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type AllProjectsQueryHookResult = ReturnType<typeof useAllProjectsQuery>;
 export type AllProjectsLazyQueryHookResult = ReturnType<typeof useAllProjectsLazyQuery>;
 export type AllProjectsQueryResult = Apollo.QueryResult<AllProjectsQuery, AllProjectsQueryVariables>;
-export const BatchDetailsDocument = gql`
-    query batchDetails($batchDenom: String!) {
-  creditBatchByBatchDenom(batchDenom: $batchDenom) {
-    projectByProjectId {
-      handle
-    }
-  }
-}
-    `;
-
-/**
- * __useBatchDetailsQuery__
- *
- * To run a query within a React component, call `useBatchDetailsQuery` and pass it any options that fit your needs.
- * When your component renders, `useBatchDetailsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useBatchDetailsQuery({
- *   variables: {
- *      batchDenom: // value for 'batchDenom'
- *   },
- * });
- */
-export function useBatchDetailsQuery(baseOptions: Apollo.QueryHookOptions<BatchDetailsQuery, BatchDetailsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<BatchDetailsQuery, BatchDetailsQueryVariables>(BatchDetailsDocument, options);
-      }
-export function useBatchDetailsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<BatchDetailsQuery, BatchDetailsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<BatchDetailsQuery, BatchDetailsQueryVariables>(BatchDetailsDocument, options);
-        }
-export type BatchDetailsQueryHookResult = ReturnType<typeof useBatchDetailsQuery>;
-export type BatchDetailsLazyQueryHookResult = ReturnType<typeof useBatchDetailsLazyQuery>;
-export type BatchDetailsQueryResult = Apollo.QueryResult<BatchDetailsQuery, BatchDetailsQueryVariables>;
 export const CreatePartyDocument = gql`
     mutation CreateParty($input: CreatePartyInput!) {
   createParty(input: $input) {

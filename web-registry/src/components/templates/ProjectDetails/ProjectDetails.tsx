@@ -2,11 +2,9 @@ import { useMemo, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { Box, Skeleton, useTheme } from '@mui/material';
-import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
-import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import { Gallery } from 'web-components/lib/components/organisms/Gallery/Gallery';
 import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
@@ -42,7 +40,6 @@ import { GettingStartedResourcesSection } from '../../molecules';
 import { ProjectImpactSection, ProjectTopSection } from '../../organisms';
 import useGeojson from './hooks/useGeojson';
 import useImpact from './hooks/useImpact';
-import useIssuanceModal from './hooks/useIssuanceModal';
 import useSeo from './hooks/useSeo';
 import { useSortedDocuments } from './hooks/useSortedDocuments';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
@@ -87,13 +84,6 @@ function ProjectDetails(): JSX.Element {
 
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
-
-  // Tx client
-  const { api } = useLedger();
-  let txClient: ServiceClientImpl | undefined;
-  if (api) {
-    txClient = new ServiceClientImpl(api.queryClient);
-  }
 
   // first, check if projectId is an off-chain project handle (for legacy projects like "wilmot")
   // or an chain project id
@@ -186,9 +176,6 @@ function ProjectDetails(): JSX.Element {
   const impactData = useImpact({ coBenefitsIris, primaryImpactIRI });
 
   const loadingDb = loadingProjectByOnChainId || loadingProjectByHandle;
-
-  const { issuanceModalData, issuanceModalOpen, setIssuanceModalOpen } =
-    useIssuanceModal(offChainProject);
 
   const { isBuyFlowDisabled, projectsWithOrderData } = useBuySellOrderData({
     projectId: onChainProjectId,
@@ -314,15 +301,6 @@ function ProjectDetails(): JSX.Element {
             section={gettingStartedResourcesSection}
           />
         </div>
-      )}
-
-      {issuanceModalData && (
-        <IssuanceModal
-          txClient={txClient}
-          open={issuanceModalOpen}
-          onClose={() => setIssuanceModalOpen(false)}
-          {...issuanceModalData}
-        />
       )}
 
       <BuySellOrderFlow

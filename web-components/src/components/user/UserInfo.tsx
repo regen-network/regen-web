@@ -18,6 +18,10 @@ export interface User {
   link?: string | null;
 }
 
+export interface Party extends User {
+  address: string;
+}
+
 interface UserInfoProps {
   user: User;
   size?: TextSize;

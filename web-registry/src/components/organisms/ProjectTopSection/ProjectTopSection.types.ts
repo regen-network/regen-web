@@ -1,6 +1,6 @@
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import { Party } from 'web-components/lib/components/modal/LedgerModal';
+import { Party } from 'web-components/lib/components/user/UserInfo';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import { AllCreditClassQuery, SdgByIriQuery } from 'generated/sanity-graphql';

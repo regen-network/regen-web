@@ -68,11 +68,11 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
   });
 
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
-  const { confirmSave, isEdit, setDirty } = useProjectEditContext();
+  const { confirmSave, isEdit, isDirtyRef } = useProjectEditContext();
 
   useEffect(() => {
-    setDirty(isDirty);
-  }, [setDirty, isDirty]);
+    isDirtyRef.current = isDirty;
+  }, [isDirtyRef, isDirty]);
 
   return (
     <Form

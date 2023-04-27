@@ -13,7 +13,6 @@ import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import { Label, Title } from 'web-components/lib/components/typography';
 import type { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { UseStateSetter } from 'types/react/use-state';
 import { errorCodeAtom } from 'lib/atoms/error.atoms';
 import {
   errorModalAtom,
@@ -43,7 +42,7 @@ type ContextType = {
   onChainProject?: ProjectInfo;
   projectEditSubmit: UseProjectEditSubmitParams;
   formRef: FormRef<Values>;
-  setDirty: UseStateSetter<boolean>;
+  isDirtyRef: { current: boolean };
 };
 
 const ProjectEditContext = createContext<ContextType>({
@@ -51,7 +50,7 @@ const ProjectEditContext = createContext<ContextType>({
   projectEditSubmit: async () => {},
   isEdit: false,
   formRef: { current: null },
-  setDirty: () => {},
+  isDirtyRef: { current: false },
 });
 
 function ProjectEdit(): JSX.Element {
@@ -67,7 +66,6 @@ function ProjectEdit(): JSX.Element {
   const [isWarningModalOpen, setIsWarningModalOpen] = useState<
     string | undefined
   >(undefined);
-  const [dirty, setDirty] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
@@ -131,8 +129,11 @@ function ProjectEdit(): JSX.Element {
     }, 5000);
   };
 
+  // For formik based forms
   const formRef = useRef<FormikProps<FormikValues>>(null);
 
+  // For react-hook-form based forms
+  const isDirtyRef = useRef<boolean>(false);
   if (isNotAdmin) {
     return (
       <ProjectEditDenied
@@ -143,11 +144,12 @@ function ProjectEdit(): JSX.Element {
   }
 
   const onBackClick = (): void => {
+    const isFormDirty = formRef.current?.dirty || isDirtyRef.current;
     if (section) {
       const path = isMobile
         ? `/project-pages/${projectId}/edit`
         : '/ecocredits/projects';
-      if (formRef.current?.dirty || dirty) {
+      if (isFormDirty) {
         setIsWarningModalOpen(path);
       } else {
         navigate(path);
@@ -158,11 +160,12 @@ function ProjectEdit(): JSX.Element {
   };
 
   const onNavClick = (sectionName: string): void => {
+    const isFormDirty = formRef.current?.dirty || isDirtyRef.current;
     const path = `/project-pages/${projectId}/edit/${sectionName.replace(
       ' ',
       '-',
     )}`;
-    if (formRef.current?.dirty || dirty) {
+    if (isFormDirty) {
       setIsWarningModalOpen(path);
     } else {
       navigate(path);
@@ -177,7 +180,7 @@ function ProjectEdit(): JSX.Element {
         onChainProject,
         projectEditSubmit,
         formRef,
-        setDirty,
+        isDirtyRef,
       }}
     >
       <WithLoader
@@ -225,6 +228,7 @@ function ProjectEdit(): JSX.Element {
             open={!!isWarningModalOpen}
             navigate={() => {
               if (isWarningModalOpen) navigate(isWarningModalOpen);
+              isDirtyRef.current = false;
             }}
             onClose={() => {
               setIsWarningModalOpen(undefined);

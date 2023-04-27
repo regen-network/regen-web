@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { MutableRefObject, useEffect } from 'react';
 import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
 
 import {
@@ -35,13 +35,17 @@ export interface MediaErrorsSimple extends MediaBaseErrors {
   'regen:galleryPhotos'?: Array<string>;
 }
 
+type Props = {
+  projectId?: string;
+  fileNamesToDeleteRef: MutableRefObject<string[]>;
+};
+
 /** Simplified media form content for new project-page flow */
 
 const MediaFormSimple = ({
   projectId,
-}: {
-  projectId?: string;
-}): JSX.Element => {
+  fileNamesToDeleteRef,
+}: Props): JSX.Element => {
   const { classes } = useMediaFormStyles();
   const ctx = useFormContext<MediaFormSchemaType>();
   const { register, control, setValue, formState } = ctx;
@@ -92,8 +96,7 @@ const MediaFormSimple = ({
     projectPath,
   });
   const handleDelete = gethandleDelete({
-    apiServerUrl: apiUri,
-    projectId,
+    fileNamesToDeleteRef,
     callback: () => {
       setValue('regen:previewPhoto', {
         'schema:url': '',
@@ -104,8 +107,7 @@ const MediaFormSimple = ({
   });
   const getHandleDeleteWithIndex = (fieldIndex: number) =>
     gethandleDelete({
-      apiServerUrl: apiUri,
-      projectId,
+      fileNamesToDeleteRef,
       callback: () => {
         remove(fieldIndex);
         isDirtyRef.current = true;

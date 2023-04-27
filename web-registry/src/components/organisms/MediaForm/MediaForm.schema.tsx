@@ -4,7 +4,6 @@ import {
   CAPTION_CHART_LIMIT,
   CAPTION_LIMIT_ERROR_MESSAGE,
   GALLERY_PHOTOS_MAX,
-  GALLERY_PHOTOS_MIN,
   MAX_PHOTOS_ERROR_MESSAGE,
   MIN_PHOTOS_ERROR_MESSAGE,
 } from './MediaForm.constants';
@@ -27,9 +26,11 @@ export const mediaFormSchema = z.object({
           .optional(),
       }),
     )
-    .min(GALLERY_PHOTOS_MIN, MIN_PHOTOS_ERROR_MESSAGE)
     .max(GALLERY_PHOTOS_MAX, MAX_PHOTOS_ERROR_MESSAGE)
-    .optional(),
+    .optional()
+    .refine(galleryPhotos => galleryPhotos?.length !== 2, {
+      message: MIN_PHOTOS_ERROR_MESSAGE,
+    }),
 });
 
 export type MediaFormSchemaType = z.infer<typeof mediaFormSchema>;

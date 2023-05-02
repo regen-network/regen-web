@@ -16,7 +16,6 @@ import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
 import { DEFAULT_URL } from './MediaForm.constants';
 import { mediaFormSchema, MediaFormSchemaType } from './MediaForm.schema';
-import { validateMediaFormForm } from './MediaForm.utils';
 import { MediaFormSimple } from './MediaFormSimple';
 
 interface MediaFormProps {
@@ -55,36 +54,30 @@ export const MediaForm = ({
       <Form
         form={form}
         onSubmit={async data => {
-          const hasError = validateMediaFormForm({
-            values: data,
-            setError: form.setError,
-          });
-          if (!hasError) {
-            try {
-              // Remove the placeholder input
-              const filteredData = {
-                'regen:previewPhoto': data['regen:previewPhoto'],
-                'regen:galleryPhotos': data['regen:galleryPhotos']?.filter(
-                  photo => photo['schema:url'] !== DEFAULT_URL,
-                ),
-              };
-              // Submit
-              await submit({ values: filteredData });
-              // Delete any images that were removed on S3
-              await Promise.all(
-                fileNamesToDeleteRef?.current.map(
-                  async fileName =>
-                    await deleteImage(projectId ?? '', fileName, apiServerUrl),
-                ),
-              );
-              fileNamesToDeleteRef.current = [];
-              // Save callback
-              if (isEdit && confirmSave) confirmSave();
-              // Reset dirty state
-              isDirtyRef.current = false;
-            } catch (e) {
-              setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
-            }
+          try {
+            // Remove the placeholder input
+            const filteredData = {
+              'regen:previewPhoto': data['regen:previewPhoto'],
+              'regen:galleryPhotos': data['regen:galleryPhotos']?.filter(
+                photo => photo['schema:url'] !== DEFAULT_URL,
+              ),
+            };
+            // Submit
+            await submit({ values: filteredData });
+            // Delete any images that were removed on S3
+            await Promise.all(
+              fileNamesToDeleteRef?.current.map(
+                async fileName =>
+                  await deleteImage(projectId ?? '', fileName, apiServerUrl),
+              ),
+            );
+            fileNamesToDeleteRef.current = [];
+            // Save callback
+            if (isEdit && confirmSave) confirmSave();
+            // Reset dirty state
+            isDirtyRef.current = false;
+          } catch (e) {
+            setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
           }
         }}
       >

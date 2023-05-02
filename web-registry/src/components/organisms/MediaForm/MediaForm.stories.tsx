@@ -7,7 +7,7 @@ export default {
 };
 
 const initialValues: MediaFormSchemaType = {
-  'regen:previewPhoto': { 'schema:url': '', 'schema:creditText': '' },
+  'regen:previewPhoto': undefined,
   'regen:galleryPhotos': [],
 };
 

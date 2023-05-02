@@ -21,7 +21,6 @@ import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllC
 import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
 import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
 import { useTracker } from 'lib/tracker/useTracker';
-import { getDisplayParty } from 'lib/transform';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
@@ -46,6 +45,7 @@ import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProjects';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
 import {
+  getDisplayParty,
   getIsOnChainId,
   getProjectGalleryPhotos,
   parseMedia,

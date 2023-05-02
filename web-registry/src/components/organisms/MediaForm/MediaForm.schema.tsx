@@ -26,8 +26,13 @@ export const mediaFormSchema = z.object({
           .optional(),
       }),
     )
-    .max(GALLERY_PHOTOS_MAX, MAX_PHOTOS_ERROR_MESSAGE)
     .optional()
+    .refine(
+      galleryPhotos => (galleryPhotos?.length ?? 0) <= GALLERY_PHOTOS_MAX + 1,
+      {
+        message: MAX_PHOTOS_ERROR_MESSAGE,
+      },
+    )
     .refine(galleryPhotos => galleryPhotos?.length !== 2, {
       message: MIN_PHOTOS_ERROR_MESSAGE,
     }),

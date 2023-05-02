@@ -23,4 +23,5 @@ Default.args = {
   labelOptionalText: RADIO_PREFERABLE,
   value: 'video',
   helperText: 'Copy and paste an embeddable video url.',
+  selectedValue: 'video',
 };

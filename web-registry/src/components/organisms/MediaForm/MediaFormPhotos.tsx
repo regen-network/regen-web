@@ -42,7 +42,7 @@ type Props = {
 
 /** Simplified media form content for new project-page flow */
 
-const MediaFormSimple = ({
+export const MediaFormPhotos = ({
   projectId,
   fileNamesToDeleteRef,
 }: Props): JSX.Element => {
@@ -229,5 +229,3 @@ const MediaFormSimple = ({
     </>
   );
 };
-
-export { MediaFormSimple };

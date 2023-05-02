@@ -3,6 +3,7 @@ export const cropAspectMediaForm = { aspect: 322 / 211 }; // px values pulled fr
 export const MAIN_PHOTO = 'Main photo';
 export const MAIN_PHOTO_DESCRIPTION =
   'Choose the photo that will show at the top of the project page and in project preview cards.';
+export const STORY_PHOTO = 'Story photo';
 export const GALLERY_PHOTOS = 'Gallery photos';
 export const GALLERY_PHOTOS_DESCRIPTION =
   'Choose 2-10 photos for the photo gallery.';

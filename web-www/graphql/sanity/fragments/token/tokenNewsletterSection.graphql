@@ -1,0 +1,7 @@
+fragment tokenNewsletterSectionFields on TokenPage {
+  newsletterSection {
+    header
+    buttonText
+    inputText
+  }
+}

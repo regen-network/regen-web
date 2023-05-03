@@ -1,0 +1,9 @@
+fragment tokenBlockExplorerSectionFields on TokenPage {
+  blockExplorerSection {
+    title
+    bodyRaw
+    button {
+      ...buttonFields
+    }
+  }
+}

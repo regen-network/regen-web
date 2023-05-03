@@ -1055,6 +1055,44 @@ export type CaseStudyPageSorting = {
   bottomSection?: Maybe<CaseStudyBottomSectionSorting>;
 };
 
+export type Claim = Document & {
+  __typename?: 'Claim';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+};
+
+export type ClaimFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  description?: Maybe<StringFilter>;
+};
+
+export type ClaimSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  description?: Maybe<SortOrder>;
+};
+
 export type ClimateSection = {
   __typename?: 'ClimateSection';
   _key?: Maybe<Scalars['String']>;
@@ -1499,6 +1537,49 @@ export type CreateMethodologyStepCardSectionSorting = {
   bottomTitle?: Maybe<SortOrder>;
 };
 
+export type CredibilityCard = Document & {
+  __typename?: 'CredibilityCard';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+  icon?: Maybe<Image>;
+  claims?: Maybe<Array<Maybe<Claim>>>;
+};
+
+export type CredibilityCardFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  icon?: Maybe<ImageFilter>;
+};
+
+export type CredibilityCardSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  icon?: Maybe<ImageSorting>;
+};
+
 export type CreditClass = Document & {
   __typename?: 'CreditClass';
   /** Document ID */
@@ -1652,6 +1733,34 @@ export type CreditTypeSorting = {
   _key?: Maybe<SortOrder>;
   name?: Maybe<SortOrder>;
   image?: Maybe<ImageSorting>;
+};
+
+export type CrossDatasetReference = {
+  __typename?: 'CrossDatasetReference';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  _ref?: Maybe<Scalars['String']>;
+  _weak?: Maybe<Scalars['Boolean']>;
+  _dataset?: Maybe<Scalars['String']>;
+  _projectId?: Maybe<Scalars['String']>;
+};
+
+export type CrossDatasetReferenceFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  _ref?: Maybe<StringFilter>;
+  _weak?: Maybe<BooleanFilter>;
+  _dataset?: Maybe<StringFilter>;
+  _projectId?: Maybe<StringFilter>;
+};
+
+export type CrossDatasetReferenceSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _ref?: Maybe<SortOrder>;
+  _weak?: Maybe<SortOrder>;
+  _dataset?: Maybe<SortOrder>;
+  _projectId?: Maybe<SortOrder>;
 };
 
 export type CustomImage = {
@@ -4322,6 +4431,7 @@ export type Project = Document & {
   projectName?: Maybe<Scalars['String']>;
   /** on-chain project id */
   projectId?: Maybe<Scalars['String']>;
+  credibilityCards?: Maybe<Array<Maybe<CredibilityCard>>>;
 };
 
 export type ProjectActivity = Document & {
@@ -4365,6 +4475,29 @@ export type ProjectActivitySorting = {
   icon?: Maybe<ImageSorting>;
 };
 
+export type ProjectDetailsSection = {
+  __typename?: 'ProjectDetailsSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+};
+
+export type ProjectDetailsSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  label?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+};
+
+export type ProjectDetailsSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  label?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+};
+
 export type ProjectFilter = {
   /** Apply filters on document level */
   _?: Maybe<Sanity_DocumentFilter>;
@@ -4393,6 +4526,7 @@ export type ProjectPage = Document & {
   _key?: Maybe<Scalars['String']>;
   /** This content will appear on all project pages */
   gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSection>;
+  projectDetailsSection?: Maybe<ProjectDetailsSection>;
 };
 
 export type ProjectPageFilter = {
@@ -4405,6 +4539,7 @@ export type ProjectPageFilter = {
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
   gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSectionFilter>;
+  projectDetailsSection?: Maybe<ProjectDetailsSectionFilter>;
 };
 
 export type ProjectPageSorting = {
@@ -4414,6 +4549,7 @@ export type ProjectPageSorting = {
   _updatedAt?: Maybe<SortOrder>;
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
+  projectDetailsSection?: Maybe<ProjectDetailsSectionSorting>;
 };
 
 export type ProjectSorting = {
@@ -4771,6 +4907,8 @@ export type RootQuery = {
   BuyersPage?: Maybe<BuyersPage>;
   CaseStudiesPage?: Maybe<CaseStudiesPage>;
   CaseStudyPage?: Maybe<CaseStudyPage>;
+  Claim?: Maybe<Claim>;
+  CredibilityCard?: Maybe<CredibilityCard>;
   CommunityPage?: Maybe<CommunityPage>;
   ContactPage?: Maybe<ContactPage>;
   CreateCreditClassPage?: Maybe<CreateCreditClassPage>;
@@ -4830,6 +4968,8 @@ export type RootQuery = {
   allBuyersPage: Array<BuyersPage>;
   allCaseStudiesPage: Array<CaseStudiesPage>;
   allCaseStudyPage: Array<CaseStudyPage>;
+  allClaim: Array<Claim>;
+  allCredibilityCard: Array<CredibilityCard>;
   allCommunityPage: Array<CommunityPage>;
   allContactPage: Array<ContactPage>;
   allCreateCreditClassPage: Array<CreateCreditClassPage>;
@@ -4916,6 +5056,16 @@ export type RootQueryCaseStudiesPageArgs = {
 
 
 export type RootQueryCaseStudyPageArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryClaimArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryCredibilityCardArgs = {
   id: Scalars['ID'];
 };
 
@@ -5231,6 +5381,22 @@ export type RootQueryAllCaseStudiesPageArgs = {
 export type RootQueryAllCaseStudyPageArgs = {
   where?: Maybe<CaseStudyPageFilter>;
   sort?: Maybe<Array<CaseStudyPageSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllClaimArgs = {
+  where?: Maybe<ClaimFilter>;
+  sort?: Maybe<Array<ClaimSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllCredibilityCardArgs = {
+  where?: Maybe<CredibilityCardFilter>;
+  sort?: Maybe<Array<CredibilityCardSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -6302,18 +6468,21 @@ export type Slug = {
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
   current?: Maybe<Scalars['String']>;
+  source?: Maybe<Scalars['String']>;
 };
 
 export type SlugFilter = {
   _key?: Maybe<StringFilter>;
   _type?: Maybe<StringFilter>;
   current?: Maybe<StringFilter>;
+  source?: Maybe<StringFilter>;
 };
 
 export type SlugSorting = {
   _key?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
   current?: Maybe<SortOrder>;
+  source?: Maybe<SortOrder>;
 };
 
 export type SoldOutProjects = Document & {
@@ -7234,6 +7403,15 @@ export type ImageFieldsFragment = (
   )> }
 );
 
+export type MediaFieldsFragment = (
+  { __typename?: 'Media' }
+  & Pick<Media, 'title' | 'author' | 'date' | 'href' | 'type'>
+  & { image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )> }
+);
+
 export type ButtonFieldsFragment = (
   { __typename?: 'Button' }
   & Pick<Button, 'buttonText' | 'buttonModal' | 'buttonBlankTarget'>
@@ -7385,6 +7563,102 @@ export type LinkFieldsFragment = (
   )> }
 );
 
+export type SharedNewsletterSectionFieldsFragment = (
+  { __typename?: 'SharedSections' }
+  & { newsletter?: Maybe<(
+    { __typename?: 'TitleCustomBody' }
+    & Pick<TitleCustomBody, 'title' | 'bodyRaw'>
+  )> }
+);
+
+export type TokenBlockExplorerSectionFieldsFragment = (
+  { __typename?: 'TokenPage' }
+  & { blockExplorerSection?: Maybe<(
+    { __typename?: 'TitleBodyButton' }
+    & Pick<TitleBodyButton, 'title' | 'bodyRaw'>
+    & { button?: Maybe<(
+      { __typename?: 'Button' }
+      & ButtonFieldsFragment
+    )> }
+  )> }
+);
+
+export type TokenConnectSectionFieldsFragment = (
+  { __typename?: 'TokenPage' }
+  & Pick<TokenPage, 'connectSectionHeader'>
+);
+
+export type TokenEconomicsSectionFieldsFragment = (
+  { __typename?: 'TokenPage' }
+  & { tokenEconomics?: Maybe<(
+    { __typename?: 'TitleCustomBody' }
+    & Pick<TitleCustomBody, 'title' | 'bodyRaw'>
+  )> }
+);
+
+export type TokenInfoSectionFieldsFragment = (
+  { __typename?: 'TokenPage' }
+  & { infoSection?: Maybe<(
+    { __typename?: 'TokenInfoSection' }
+    & Pick<TokenInfoSection, 'title' | 'subtitle' | 'bodyRaw'>
+    & { image?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
+    )> }
+  )> }
+);
+
+export type TokenMediaSectionFieldsFragment = (
+  { __typename?: 'TokenPage' }
+  & { mediaCards?: Maybe<Array<Maybe<(
+    { __typename?: 'Media' }
+    & MediaFieldsFragment
+  )>>> }
+);
+
+export type TokenNewsletterSectionFieldsFragment = (
+  { __typename?: 'TokenPage' }
+  & { newsletterSection?: Maybe<(
+    { __typename?: 'TokenNewsletterSection' }
+    & Pick<TokenNewsletterSection, 'header' | 'buttonText' | 'inputText'>
+  )> }
+);
+
+export type TokenPoolSectionFieldsFragment = (
+  { __typename?: 'TokenPage' }
+  & { poolSection?: Maybe<(
+    { __typename?: 'TokenPoolSection' }
+    & Pick<TokenPoolSection, 'title' | 'subtitle'>
+    & { image?: Maybe<(
+      { __typename?: 'Image' }
+      & ImageFieldsFragment
+    )>, mobileImage?: Maybe<(
+      { __typename?: 'Image' }
+      & ImageFieldsFragment
+    )> }
+  )> }
+);
+
+export type TokenStackingSectionFieldsFragment = (
+  { __typename?: 'TokenPage' }
+  & { stakingSection?: Maybe<(
+    { __typename?: 'TitleBodyButton' }
+    & Pick<TitleBodyButton, 'title' | 'bodyRaw'>
+    & { button?: Maybe<(
+      { __typename?: 'Button' }
+      & ButtonFieldsFragment
+    )> }
+  )> }
+);
+
+export type TokenTopSectionFieldsFragment = (
+  { __typename?: 'TokenPage' }
+  & { topSection?: Maybe<(
+    { __typename?: 'TitleBody' }
+    & Pick<TitleBody, 'title' | 'body'>
+  )> }
+);
+
 export type HomePageWebQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -7422,6 +7696,36 @@ export type PartnersSectionQuery = (
         )> }
       )>>> }
     )> }
+  )> }
+);
+
+export type SharedSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SharedSectionQuery = (
+  { __typename?: 'RootQuery' }
+  & { allSharedSections: Array<(
+    { __typename?: 'SharedSections' }
+    & SharedNewsletterSectionFieldsFragment
+  )> }
+);
+
+export type TokenPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TokenPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allTokenPage: Array<(
+    { __typename?: 'TokenPage' }
+    & TokenTopSectionFieldsFragment
+    & TokenNewsletterSectionFieldsFragment
+    & TokenEconomicsSectionFieldsFragment
+    & TokenInfoSectionFieldsFragment
+    & TokenPoolSectionFieldsFragment
+    & TokenBlockExplorerSectionFieldsFragment
+    & TokenStackingSectionFieldsFragment
+    & TokenConnectSectionFieldsFragment
+    & TokenMediaSectionFieldsFragment
   )> }
 );
 
@@ -7623,6 +7927,111 @@ export const ValuesSectionFieldsFragmentDoc = gql`
   }
 }
     ${ImageFieldsFragmentDoc}`;
+export const SharedNewsletterSectionFieldsFragmentDoc = gql`
+    fragment sharedNewsletterSectionFields on SharedSections {
+  newsletter {
+    title
+    bodyRaw
+  }
+}
+    `;
+export const TokenBlockExplorerSectionFieldsFragmentDoc = gql`
+    fragment tokenBlockExplorerSectionFields on TokenPage {
+  blockExplorerSection {
+    title
+    bodyRaw
+    button {
+      ...buttonFields
+    }
+  }
+}
+    ${ButtonFieldsFragmentDoc}`;
+export const TokenConnectSectionFieldsFragmentDoc = gql`
+    fragment tokenConnectSectionFields on TokenPage {
+  connectSectionHeader
+}
+    `;
+export const TokenEconomicsSectionFieldsFragmentDoc = gql`
+    fragment tokenEconomicsSectionFields on TokenPage {
+  tokenEconomics {
+    title
+    bodyRaw
+  }
+}
+    `;
+export const TokenInfoSectionFieldsFragmentDoc = gql`
+    fragment tokenInfoSectionFields on TokenPage {
+  infoSection {
+    title
+    subtitle
+    bodyRaw
+    image {
+      ...customImageFields
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+export const MediaFieldsFragmentDoc = gql`
+    fragment mediaFields on Media {
+  title
+  author
+  date
+  image {
+    ...customImageFields
+  }
+  href
+  type
+}
+    ${CustomImageFieldsFragmentDoc}`;
+export const TokenMediaSectionFieldsFragmentDoc = gql`
+    fragment tokenMediaSectionFields on TokenPage {
+  mediaCards {
+    ...mediaFields
+  }
+}
+    ${MediaFieldsFragmentDoc}`;
+export const TokenNewsletterSectionFieldsFragmentDoc = gql`
+    fragment tokenNewsletterSectionFields on TokenPage {
+  newsletterSection {
+    header
+    buttonText
+    inputText
+  }
+}
+    `;
+export const TokenPoolSectionFieldsFragmentDoc = gql`
+    fragment tokenPoolSectionFields on TokenPage {
+  poolSection {
+    title
+    subtitle
+    image {
+      ...imageFields
+    }
+    mobileImage {
+      ...imageFields
+    }
+  }
+}
+    ${ImageFieldsFragmentDoc}`;
+export const TokenStackingSectionFieldsFragmentDoc = gql`
+    fragment tokenStackingSectionFields on TokenPage {
+  stakingSection {
+    title
+    bodyRaw
+    button {
+      ...buttonFields
+    }
+  }
+}
+    ${ButtonFieldsFragmentDoc}`;
+export const TokenTopSectionFieldsFragmentDoc = gql`
+    fragment tokenTopSectionFields on TokenPage {
+  topSection {
+    title
+    body
+  }
+}
+    `;
 export const BlogSectionDocument = gql`
     query blogSection {
   allSharedSections {
@@ -7757,3 +8166,87 @@ export function usePartnersSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type PartnersSectionQueryHookResult = ReturnType<typeof usePartnersSectionQuery>;
 export type PartnersSectionLazyQueryHookResult = ReturnType<typeof usePartnersSectionLazyQuery>;
 export type PartnersSectionQueryResult = Apollo.QueryResult<PartnersSectionQuery, PartnersSectionQueryVariables>;
+export const SharedSectionDocument = gql`
+    query sharedSection {
+  allSharedSections {
+    ...sharedNewsletterSectionFields
+  }
+}
+    ${SharedNewsletterSectionFieldsFragmentDoc}`;
+
+/**
+ * __useSharedSectionQuery__
+ *
+ * To run a query within a React component, call `useSharedSectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSharedSectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSharedSectionQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSharedSectionQuery(baseOptions?: Apollo.QueryHookOptions<SharedSectionQuery, SharedSectionQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SharedSectionQuery, SharedSectionQueryVariables>(SharedSectionDocument, options);
+      }
+export function useSharedSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SharedSectionQuery, SharedSectionQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SharedSectionQuery, SharedSectionQueryVariables>(SharedSectionDocument, options);
+        }
+export type SharedSectionQueryHookResult = ReturnType<typeof useSharedSectionQuery>;
+export type SharedSectionLazyQueryHookResult = ReturnType<typeof useSharedSectionLazyQuery>;
+export type SharedSectionQueryResult = Apollo.QueryResult<SharedSectionQuery, SharedSectionQueryVariables>;
+export const TokenPageDocument = gql`
+    query tokenPage {
+  allTokenPage {
+    ...tokenTopSectionFields
+    ...tokenNewsletterSectionFields
+    ...tokenEconomicsSectionFields
+    ...tokenInfoSectionFields
+    ...tokenPoolSectionFields
+    ...tokenBlockExplorerSectionFields
+    ...tokenStackingSectionFields
+    ...tokenConnectSectionFields
+    ...tokenMediaSectionFields
+  }
+}
+    ${TokenTopSectionFieldsFragmentDoc}
+${TokenNewsletterSectionFieldsFragmentDoc}
+${TokenEconomicsSectionFieldsFragmentDoc}
+${TokenInfoSectionFieldsFragmentDoc}
+${TokenPoolSectionFieldsFragmentDoc}
+${TokenBlockExplorerSectionFieldsFragmentDoc}
+${TokenStackingSectionFieldsFragmentDoc}
+${TokenConnectSectionFieldsFragmentDoc}
+${TokenMediaSectionFieldsFragmentDoc}`;
+
+/**
+ * __useTokenPageQuery__
+ *
+ * To run a query within a React component, call `useTokenPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTokenPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTokenPageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useTokenPageQuery(baseOptions?: Apollo.QueryHookOptions<TokenPageQuery, TokenPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TokenPageQuery, TokenPageQueryVariables>(TokenPageDocument, options);
+      }
+export function useTokenPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TokenPageQuery, TokenPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TokenPageQuery, TokenPageQueryVariables>(TokenPageDocument, options);
+        }
+export type TokenPageQueryHookResult = ReturnType<typeof useTokenPageQuery>;
+export type TokenPageLazyQueryHookResult = ReturnType<typeof useTokenPageLazyQuery>;
+export type TokenPageQueryResult = Apollo.QueryResult<TokenPageQuery, TokenPageQueryVariables>;

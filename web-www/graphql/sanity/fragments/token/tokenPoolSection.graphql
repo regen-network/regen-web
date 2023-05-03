@@ -1,0 +1,12 @@
+fragment tokenPoolSectionFields on TokenPage {
+  poolSection {
+    title
+    subtitle
+    image {
+      ...imageFields
+    }
+    mobileImage {
+      ...imageFields
+    }
+  }
+}

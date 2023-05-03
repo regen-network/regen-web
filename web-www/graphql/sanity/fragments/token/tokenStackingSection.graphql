@@ -1,0 +1,9 @@
+fragment tokenStackingSectionFields on TokenPage {
+  stakingSection {
+    title
+    bodyRaw
+    button {
+      ...buttonFields
+    }
+  }
+}

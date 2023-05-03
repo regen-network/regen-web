@@ -1,0 +1,5 @@
+fragment tokenMediaSectionFields on TokenPage {
+  mediaCards {
+    ...mediaFields
+  }
+}

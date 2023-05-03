@@ -1,0 +1,6 @@
+fragment sharedNewsletterSectionFields on SharedSections {
+  newsletter {
+    title
+    bodyRaw
+  }
+}

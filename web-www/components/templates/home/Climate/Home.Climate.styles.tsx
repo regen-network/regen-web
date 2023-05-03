@@ -35,7 +35,7 @@ export const useClimateStyles = makeStyles()(theme => ({
     borderTop: `1px solid ${theme.palette.grey[100]}`,
   },
   problemLine: {
-    zIndex: -1,
+    zIndex: 0,
     [theme.breakpoints.up('md')]: {
       transform: 'rotate(78.11deg)',
       width: theme.spacing(115),

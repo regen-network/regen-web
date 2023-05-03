@@ -19,6 +19,7 @@ import { Body, Label, Title } from 'web-components/lib/components/typography';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 
+import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
@@ -72,6 +73,7 @@ function ProjectTopSection({
       enabled: !!onChainProject?.admin && !!graphqlClient && !!csrfData,
     }),
   );
+  const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
 
   const { creditClass, creditClassVersion, offsetGenerationMethod } =
     parseOffChainProject(offChainProject);
@@ -217,7 +219,11 @@ function ProjectTopSection({
         </Grid>
         <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
           <ProjectTopCard
-            projectAdmin={getDisplayAdmin(onChainProject?.admin, partyByAddr)}
+            projectAdmin={getDisplayAdmin(
+              onChainProject?.admin,
+              party,
+              defaultAvatar,
+            )}
             projectDeveloper={projectDeveloper}
             landSteward={landSteward}
             landOwner={landOwner}

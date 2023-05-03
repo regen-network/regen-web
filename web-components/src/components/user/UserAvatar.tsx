@@ -81,7 +81,7 @@ export default function UserAvatar({
   const { classes } = useStyles({ spacing, border });
   const avatar =
     !src || icon ? (
-      <Avatar className={classes.root} alt={alt}>
+      <Avatar className={classes.root} alt={alt} src={icon}>
         {icon}
       </Avatar>
     ) : (

@@ -2,7 +2,6 @@ import { Link } from '@mui/material';
 import Grid, { GridDirection } from '@mui/material/Grid';
 
 import { BlockContent } from '../block-content';
-import OrganizationIcon from '../icons/OrganizationIcon';
 import { Body, Subtitle, Title } from '../typography';
 import { getMobileSize, getSizeVariant, TextSize } from '../typography/sizing';
 import UserAvatar from './UserAvatar';
@@ -28,7 +27,6 @@ interface UserInfoProps {
   direction?: GridDirection;
   titleComponent?: 'title' | 'subtitle';
   border?: boolean;
-  icon?: any;
 }
 export default function UserInfo({
   user,
@@ -36,7 +34,6 @@ export default function UserInfo({
   direction,
   border = true,
   titleComponent = 'title',
-  icon,
 }: UserInfoProps): JSX.Element {
   const sizeVariant = getSizeVariant(size);
   const mobileSizeVariant = getSizeVariant(getMobileSize(size));
@@ -68,13 +65,7 @@ export default function UserInfo({
           href={user.link}
           size={size}
           border={border}
-          icon={
-            !user.image && user.type === 'ORGANIZATION' ? (
-              <OrganizationIcon />
-            ) : (
-              icon
-            )
-          }
+          icon={user.image}
         />
       </Grid>
       <Grid
@@ -86,11 +77,7 @@ export default function UserInfo({
         }}
       >
         {user.link ? (
-          <Link
-            sx={{ color: 'primary.contrastText' }}
-            href={user.link}
-            target="_blank"
-          >
+          <Link sx={{ color: 'primary.contrastText' }} href={user.link}>
             {name}
           </Link>
         ) : (

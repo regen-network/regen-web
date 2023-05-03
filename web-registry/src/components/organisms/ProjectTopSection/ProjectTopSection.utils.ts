@@ -1,11 +1,7 @@
 import { User } from 'web-components/lib/components/user/UserInfo';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import {
-  Maybe,
-  PartyByAddrQuery,
-  ProjectFieldsFragment,
-} from 'generated/graphql';
+import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import {
   AnchoredProjectMetadataBaseLD,
   AnchoredProjectMetadataLD,
@@ -15,28 +11,27 @@ import {
 } from 'lib/db/types/json-ld';
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
-// TODO
-// This is a temporary hack to show Regen as a Project Admin when applicable
-
 export const getDisplayAdmin = (
   address?: string,
-  party?: PartyByAddrQuery | null,
+  party?: any, // TODO: figure out how to type this...
+  defaultAvatar?: string,
 ): User | undefined => {
   if (!address) return;
   if (!!party) {
-    const name = party.walletByAddr?.partyByWalletId?.name;
-    const type = party.walletByAddr?.partyByWalletId?.type;
+    const name = party.name;
+    const type = party.type;
     return {
       name: name ? name : truncate(address),
-      type: type ? type : 'ORGANIZATION',
-      image: party.walletByAddr?.partyByWalletId?.image,
-      description: party.walletByAddr?.partyByWalletId?.description,
+      type: type ? type : 'USER',
+      image: party.image ? party.image : defaultAvatar,
+      description: party.description,
       link: `/ecocredits/accounts/${address}`,
     };
   }
   return {
     name: truncate(address),
-    type: 'ORGANIZATION',
+    type: 'USER',
+    image: defaultAvatar,
     link: `/ecocredits/accounts/${address}`,
   };
 };

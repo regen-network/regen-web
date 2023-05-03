@@ -9,7 +9,6 @@ interface Props {
   title: string;
   border?: boolean;
   size?: TextSize;
-  icon?: any;
 }
 
 export default function UserInfoWithTitle({
@@ -17,7 +16,6 @@ export default function UserInfoWithTitle({
   title,
   border = true,
   size = 'lg',
-  icon,
 }: Props): JSX.Element {
   return (
     <div>
@@ -28,7 +26,6 @@ export default function UserInfoWithTitle({
         user={user}
         size={size}
         border={border}
-        icon={icon}
         titleComponent="subtitle"
       />
     </div>

@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import ReactCrop, { Crop } from 'react-image-crop';
+import ReactCrop, { Crop, makeAspectCrop } from 'react-image-crop';
 import { Button } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { DefaultTheme as Theme } from '@mui/styles';
@@ -110,6 +110,7 @@ export default function ImageCrop({
       const height = isLandscape ? 90 : (imgWidth / aspect / imgHeight) * 90;
       const y = (100 - height) / 2;
       const x = (100 - width) / 2;
+
       const percentCrop: Crop = {
         aspect,
         unit: '%',
@@ -121,8 +122,8 @@ export default function ImageCrop({
 
       setCrop(percentCrop);
 
-      const pxWidth = isPortrait ? imgWidth * 0.9 : imgHeight * 0.9;
-      const pxHeight = isPortrait ? imgHeight * 0.9 : imgWidth * 0.9;
+      const pxWidth = imgWidth * (width / 100);
+      const pxHeight = imgHeight * (height / 100);
       const pxX = (imgWidth - pxWidth) / 2;
       const pxY = (imgHeight - pxHeight) / 2;
       const pxCrop: Crop = {

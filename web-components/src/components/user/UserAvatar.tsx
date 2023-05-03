@@ -21,6 +21,9 @@ interface Sizes {
 function getSize(size?: string): Sizes {
   let spacing: Sizes;
   switch (size) {
+    case 'xxl':
+      spacing = { xs: 16, sm: 18.75 };
+      break;
     case 'xl':
       spacing = { xs: 12.5, sm: 16 };
       break;

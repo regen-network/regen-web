@@ -15,3 +15,4 @@ export const MIN_PHOTOS_ERROR_MESSAGE = `You must add at least ${GALLERY_PHOTOS_
 export const MAX_PHOTOS_ERROR_MESSAGE = `You must add at most ${GALLERY_PHOTOS_MAX} photos to the photo gallery.`;
 export const CAPTION_LIMIT_ERROR_MESSAGE = `The caption message must be under ${CAPTION_CHART_LIMIT} characters.`;
 export const STORY_LABEL = 'Story video or photo';
+export const IMAGE_UPLOAD_BUTTON_LABEL = '+ Add Photo';

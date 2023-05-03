@@ -16,7 +16,11 @@ import { IMAGE_STORAGE_BASE_URL } from 'lib/env';
 
 import { useProjectEditContext } from 'pages';
 
-import { cropAspectMediaForm, STORY_LABEL } from './MediaForm.constants';
+import {
+  cropAspectMediaForm,
+  IMAGE_UPLOAD_BUTTON_LABEL,
+  STORY_LABEL,
+} from './MediaForm.constants';
 import { MediaFormSchemaType } from './MediaForm.schema';
 import { gethandleDelete, getHandleUpload } from './MediaForm.utils';
 import { useMediaFormStyles } from './useMediaFormStyles';
@@ -34,7 +38,7 @@ export const MediaFormStory = ({ fileNamesToDeleteRef, projectId }: Props) => {
   const { errors } = formState;
   const imageDropCommonProps: Partial<ImageDropProps> = {
     classes: { main: classes.fullSizeMedia },
-    buttonText: '+ Add Photo',
+    buttonText: IMAGE_UPLOAD_BUTTON_LABEL,
     fixedCrop: cropAspectMediaForm,
   };
 

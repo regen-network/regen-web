@@ -104,7 +104,7 @@ export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
                     aria-label="delete"
                     size="large"
                   >
-                    <TrashIcon color={theme.palette.error.light} />
+                    <TrashIcon color={theme.palette.error.dark} />
                   </IconButton>
                 </Card>
               </Collapse>

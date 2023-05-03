@@ -12,10 +12,11 @@ import TextField from 'web-components/lib/components/inputs/new/TextField/TextFi
 import { VideoInput } from 'web-components/lib/components/inputs/new/VideoInput/VideoInput';
 
 import { apiUri } from 'lib/apiUri';
+import { IMAGE_STORAGE_BASE_URL } from 'lib/env';
 
 import { useProjectEditContext } from 'pages';
 
-import { cropAspectMediaForm } from './MediaForm.constants';
+import { cropAspectMediaForm, STORY_LABEL } from './MediaForm.constants';
 import { MediaFormSchemaType } from './MediaForm.schema';
 import { gethandleDelete, getHandleUpload } from './MediaForm.utils';
 import { useMediaFormStyles } from './useMediaFormStyles';
@@ -40,6 +41,10 @@ export const MediaFormStory = ({ fileNamesToDeleteRef, projectId }: Props) => {
   /* Watcher */
 
   const storyMedia = useWatch({ control, name: 'regen:storyMedia' });
+  const isVideo = storyMedia?.['@type'] === 'schema:VideoObject';
+  const isImage = storyMedia?.['@type'] === 'schema:ImageObject';
+  const url = storyMedia?.['schema:url'];
+  const isImageUrl = url?.includes(IMAGE_STORAGE_BASE_URL);
 
   /* Setter */
 
@@ -58,7 +63,8 @@ export const MediaFormStory = ({ fileNamesToDeleteRef, projectId }: Props) => {
   const handleDelete = gethandleDelete({
     fileNamesToDeleteRef,
     callback: () => {
-      setValue('regen:previewPhoto', {
+      setValue('regen:storyMedia', {
+        '@type': '',
         'schema:url': '',
         'schema:creditText': '',
       });
@@ -67,7 +73,7 @@ export const MediaFormStory = ({ fileNamesToDeleteRef, projectId }: Props) => {
   });
 
   return (
-    <RadioGroup>
+    <RadioGroup label={STORY_LABEL} optional>
       <>
         <Radio
           label={'Add a video'}
@@ -78,11 +84,13 @@ export const MediaFormStory = ({ fileNamesToDeleteRef, projectId }: Props) => {
           sx={{ mt: 5.25 }}
           {...register(`regen:storyMedia.@type`)}
         >
-          <VideoInput
-            value={storyMedia?.['schema:url']}
-            setValue={setStoryMediaUrl}
-            {...register(`regen:storyMedia.schema:url`)}
-          />
+          {isVideo && (
+            <VideoInput
+              value={url && !isImageUrl ? url : ''}
+              setValue={setStoryMediaUrl}
+              {...register(`regen:storyMedia.schema:url`)}
+            />
+          )}
         </Radio>
         <Radio
           label={'Add a photo'}
@@ -94,30 +102,32 @@ export const MediaFormStory = ({ fileNamesToDeleteRef, projectId }: Props) => {
           sx={{ mt: 2.5 }}
           {...register(`regen:storyMedia.@type`)}
         >
-          <ImageDrop
-            value={storyMedia?.['schema:url']}
-            credit={storyMedia?.['schema:creditText']}
-            setValue={setStoryMediaUrl}
-            onUpload={handleUpload}
-            onDelete={handleDelete}
-            dropZoneOption={{ maxFiles: 1 }}
-            error={!!errors['regen:storyMedia']}
-            helperText={errors['regen:storyMedia']?.message}
-            optional
-            {...imageDropCommonProps}
-            {...register('regen:storyMedia.schema:url')}
-          >
-            <TextField
-              type="text"
-              label="Photo credit"
-              {...register('regen:storyMedia.schema:creditText')}
-              helperText={
-                errors['regen:storyMedia']?.['schema:creditText']?.message
-              }
-              error={!!errors['regen:storyMedia']?.['schema:creditText']}
+          {isImage && (
+            <ImageDrop
+              value={url && isImageUrl ? url : ''}
+              credit={storyMedia?.['schema:creditText']}
+              setValue={setStoryMediaUrl}
+              onUpload={handleUpload}
+              onDelete={handleDelete}
+              dropZoneOption={{ maxFiles: 1 }}
+              error={!!errors['regen:storyMedia']}
+              helperText={errors['regen:storyMedia']?.message}
               optional
-            />
-          </ImageDrop>
+              {...imageDropCommonProps}
+              {...register('regen:storyMedia.schema:url')}
+            >
+              <TextField
+                type="text"
+                label="Photo credit"
+                {...register('regen:storyMedia.schema:creditText')}
+                helperText={
+                  errors['regen:storyMedia']?.['schema:creditText']?.message
+                }
+                error={!!errors['regen:storyMedia']?.['schema:creditText']}
+                optional
+              />
+            </ImageDrop>
+          )}
         </Radio>
       </>
     </RadioGroup>

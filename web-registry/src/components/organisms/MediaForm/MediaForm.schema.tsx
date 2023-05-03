@@ -41,7 +41,7 @@ export const mediaFormSchema = z.object({
   'regen:storyMedia': z
     .object({
       '@type': z.custom<ProjectStoryMediaType>(),
-      'schema:url': z.string(),
+      'schema:url': z.union([z.literal(''), z.string().trim().url()]),
       'schema:creditText': z.string().optional(),
     })
     .optional(),

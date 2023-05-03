@@ -24,6 +24,11 @@ const Media = (): JSX.Element => {
   const initialValues: MediaFormSchemaType = {
     'regen:previewPhoto': metadata?.['regen:previewPhoto'],
     'regen:galleryPhotos': metadata?.['regen:galleryPhotos'],
+    'regen:storyMedia': metadata?.['regen:storyMedia'] ?? {
+      '@type': 'schema:VideoObject',
+      'schema:url': '',
+      'schema:creditText': '',
+    },
   };
 
   const saveAndExit = (): Promise<void> => {

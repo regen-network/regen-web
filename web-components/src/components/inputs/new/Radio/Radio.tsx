@@ -8,10 +8,9 @@ import {
   SxProps,
 } from '@mui/material';
 
-import { sxToArray } from 'src/utils/mui/sxToArray';
-
 import { Body } from '../../../../components/typography';
 import { Theme } from '../../../../theme/muiTheme';
+import { sxToArray } from '../../../../utils/mui/sxToArray';
 import { useRadioStyles } from './Radio.styles';
 import { RadiotVariant } from './Radio.types';
 

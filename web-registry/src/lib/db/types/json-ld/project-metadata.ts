@@ -52,7 +52,10 @@ export interface ProjectPageMetadataLD {
   'regen:landManagementActions'?: NameImageDescription[];
 }
 
-export type ProjectStoryMediaType = 'schema:ImageObject' | 'schema:VideoObject';
+export type ProjectStoryMediaType =
+  | 'schema:ImageObject'
+  | 'schema:VideoObject'
+  | '';
 
 export type ProjectStoryMedia = {
   '@type': ProjectStoryMediaType;

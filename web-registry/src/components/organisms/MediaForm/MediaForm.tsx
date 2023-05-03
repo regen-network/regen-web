@@ -61,6 +61,7 @@ export const MediaForm = ({
             'regen:galleryPhotos': data['regen:galleryPhotos']?.filter(
               photo => photo['schema:url'] !== DEFAULT_URL,
             ),
+            'regen:storyMedia': data?.['regen:storyMedia'],
           };
           // Submit
           await submit({ values: filteredData });

@@ -52,6 +52,37 @@ export const getWalletConnectInstance = async ({
   return walletConnect;
 };
 
+/* getWallet */
+
+type GetWalletParams = {
+  walletClient?: WalletClient;
+  walletConfig?: WalletConfig;
+};
+
+export const getWallet = async ({
+  walletClient,
+  walletConfig,
+}: GetWalletParams): Promise<Wallet | undefined> => {
+  let offlineSigner;
+
+  if (walletClient) {
+    offlineSigner = await walletConfig?.getOfflineSignerFunction(walletClient)(
+      chainInfo.chainId,
+    );
+  }
+
+  const key = await walletClient?.getKey(chainInfo.chainId);
+  if (key && key.bech32Address && offlineSigner) {
+    return {
+      offlineSigner,
+      address: key.bech32Address,
+      shortAddress: truncate(key.bech32Address),
+    };
+  }
+
+  return undefined;
+};
+
 /* finalizeConnection */
 
 type FinalizeConnectionParams = {
@@ -73,8 +104,6 @@ export const finalizeConnection = async ({
   login,
   doLogin = true,
 }: FinalizeConnectionParams): Promise<void> => {
-  let offlineSigner;
-
   try {
     await walletClient?.enable(chainInfo.chainId);
   } catch (e) {
@@ -82,19 +111,8 @@ export const finalizeConnection = async ({
     console.error(e);
   }
 
-  if (walletClient) {
-    offlineSigner = await walletConfig?.getOfflineSignerFunction(walletClient)(
-      chainInfo.chainId,
-    );
-  }
-
-  const key = await walletClient?.getKey(chainInfo.chainId);
-  if (key && key.bech32Address && offlineSigner) {
-    const wallet = {
-      offlineSigner,
-      address: key.bech32Address,
-      shortAddress: truncate(key.bech32Address),
-    };
+  const wallet = await getWallet({ walletClient, walletConfig });
+  if (wallet) {
     if (track) {
       track<'login', LoginEvent>('login', {
         date: new Date().toUTCString(),
@@ -110,6 +128,8 @@ export const finalizeConnection = async ({
   }
 };
 
+/* getArbitraryData */
+
 type GetArbitraryDataParams = {
   nonce: string;
   addAddr?: boolean;
@@ -124,6 +144,8 @@ export const getArbitraryData = ({
     description: addAddr ? KEPLR_ADD_ADDR_DESCRIPTION : KEPLR_LOGIN_DESCRIPTION,
     nonce,
   });
+
+/* getNonce */
 
 type GetNonceParams = {
   userAddress: string;

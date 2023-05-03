@@ -1,21 +1,13 @@
 import React, { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
-import {
-  ApolloClient,
-  NormalizedCacheObject,
-  useApolloClient,
-} from '@apollo/client';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
-import { useQuery } from '@tanstack/react-query';
 
 import Header from 'web-components/lib/components/header';
 import { UserMenuItem } from 'web-components/lib/components/header/components/UserMenuItem';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
@@ -33,7 +25,7 @@ import { fullWidthRegExp } from './RegistryLayout.constants';
 
 const RegistryLayoutHeader: React.FC = () => {
   const { pathname } = useLocation();
-  const { wallet, loaded, disconnect, isConnected } = useWallet();
+  const { wallet, loaded, disconnect, isConnected, partyByAddr } = useWallet();
   const theme = useTheme<Theme>();
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
   const isTransparent = useMemo(() => getIsTransparent(pathname), [pathname]);
@@ -43,16 +35,6 @@ const RegistryLayoutHeader: React.FC = () => {
     [pathname, theme],
   );
 
-  const graphqlClient =
-    useApolloClient() as ApolloClient<NormalizedCacheObject>;
-  const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
-  const { data: partyByAddr } = useQuery(
-    getPartyByAddrQuery({
-      client: graphqlClient,
-      addr: wallet?.address ?? '',
-      enabled: isConnected && !!graphqlClient && !!csrfData,
-    }),
-  );
   const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
 
   const color = headerColors[pathname]

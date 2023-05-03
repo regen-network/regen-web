@@ -1,13 +1,7 @@
 import { useMemo } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import {
-  ApolloClient,
-  NormalizedCacheObject,
-  useApolloClient,
-} from '@apollo/client';
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/styles';
-import { useQuery } from '@tanstack/react-query';
 
 import { Flex } from 'web-components/lib/components/box';
 import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
@@ -24,8 +18,6 @@ import { truncate } from 'web-components/lib/utils/truncate';
 
 import { getAccountUrl } from 'lib/block-explorer';
 import { isBridgeEnabled } from 'lib/ledger';
-import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
@@ -51,19 +43,9 @@ const Dashboard = (): JSX.Element => {
   const isProjectAdmin = useQueryIfProjectAdmin();
   const showProjectTab = isIssuer || isProjectAdmin;
   const showCreditClassTab = isCreditClassCreator || isCreditClassAdmin;
-  const { wallet, accountId, isConnected } = useWallet();
+  const { wallet, accountId, partyByAddr } = useWallet();
   const location = useLocation();
-  const graphqlClient =
-    useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
-  const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
-  const { data: partyByAddr } = useQuery(
-    getPartyByAddrQuery({
-      client: graphqlClient,
-      addr: wallet?.address ?? '',
-      enabled: isConnected && !!graphqlClient && !!csrfData,
-    }),
-  );
   const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
 
   const socialsLinks: SocialLink[] = useMemo(

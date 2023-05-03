@@ -1,0 +1,16 @@
+fragment customImageFields on CustomImage {
+  imageAlt
+  imageHref
+  image {
+    asset {
+      altText
+      url
+      metadata {
+        dimensions {
+          height
+          width
+        }
+      }
+    }
+  }
+}

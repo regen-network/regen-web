@@ -6,7 +6,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { DefaultTheme as Theme } from '@mui/styles';
 import { makeStyles, withStyles } from 'tss-react/mui';
 
-export interface RegenTab extends TabProps {
+export interface RegenTab extends Omit<TabProps, 'content'> {
   content?: JSX.Element;
   label: string;
 }

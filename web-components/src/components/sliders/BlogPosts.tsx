@@ -9,6 +9,9 @@ import BlogPost, { BlogPostProps } from '../blog-post';
 
 export interface BlogPostsProps {
   posts: BlogPostProps[];
+  classes?: {
+    item?: string;
+  };
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -31,6 +34,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     },
     '& .slick-track': {
       display: 'flex',
+      justifyContent: 'center',
       '& .slick-slide': {
         [theme.breakpoints.down('sm')]: {
           paddingRight: theme.spacing(4.75),
@@ -46,19 +50,27 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
   item: {
     height: '100%',
+    width: '100%',
     verticalAlign: 'top',
+    [theme.breakpoints.down('sm')]: {
+      maxWidth: 308,
+    },
     [theme.breakpoints.up('sm')]: {
+      maxWidth: 366,
       paddingRight: theme.spacing(2.5),
       paddingLeft: theme.spacing(2.5),
     },
   },
 }));
 
-export default function BlogPosts({ posts }: BlogPostsProps): JSX.Element {
-  const { classes } = useStyles();
+export default function BlogPosts({
+  posts,
+  classes,
+}: BlogPostsProps): JSX.Element {
+  const { classes: styles, cx } = useStyles();
   const theme = useTheme();
-  const desktop = useMediaQuery(theme.breakpoints.up('md'));
-  const mobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const desktop = useMediaQuery(theme.breakpoints.up('xl'));
+  const mobile = useMediaQuery(theme.breakpoints.down('md'));
   const slides: number = desktop ? 3 : mobile ? 1 : 2;
 
   const settings = {
@@ -66,14 +78,14 @@ export default function BlogPosts({ posts }: BlogPostsProps): JSX.Element {
     speed: 500,
     initialSlide: 0,
     arrows: false,
-    rows: 1,
-    slidesPerRow: slides,
+    slidesToShow: slides,
+    slidesToScroll: 1,
   };
   return (
-    <div className={classes.root}>
-      <Slider {...settings} className={classes.slider}>
+    <div className={styles.root}>
+      <Slider {...settings} className={styles.slider} variableWidth>
         {posts.map((post, index) => (
-          <div key={index} className={classes.item}>
+          <div key={index} className={cx(styles.item, classes?.item)}>
             <BlogPost {...post} />
           </div>
         ))}

@@ -38,18 +38,16 @@ const useStyles = makeStyles()((theme: Theme) => ({
     },
   },
   button: {
-    fontSize: theme.spacing(3.5),
-    height: theme.spacing(12.5),
-    padding: theme.spacing(2.5),
+    height: '100%',
   },
   community: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       textAlign: 'center',
       marginTop: theme.spacing(16.25),
     },
   },
   footerItem: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       marginBottom: theme.spacing(11.25),
     },
   },
@@ -60,7 +58,7 @@ const sxs = {
     color: 'primary.main',
     mb: {
       xs: 4.5,
-      sm: 3.75,
+      md: 3.75,
     },
   } as SxProps,
 };
@@ -75,7 +73,12 @@ const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
       <List sx={{ p: 0 }}>
         {items.map((item, index) => (
           <ListItem
-            sx={{ py: 0.75, px: 0, ':first-of-type': { pt: 0 } }}
+            sx={{
+              lineHeight: { xs: '24px', sm: '27px' },
+              py: 0.75,
+              px: 0,
+              ':first-of-type': { pt: 0 },
+            }}
             key={index}
           >
             <Link
@@ -117,31 +120,31 @@ export default function Footer({
     >
       <Section>
         <Grid container>
-          <Grid item xs={12} sm={2}>
+          <Grid item xs={12} md={2}>
             <FooterItem
               title={footerItems[0].title}
               items={footerItems[0].items}
             />
           </Grid>
-          <Grid item xs={12} sm={2}>
+          <Grid item xs={12} md={2}>
             <FooterItem
               title={footerItems[1].title}
               items={footerItems[1].items}
             />
           </Grid>
-          <Grid item xs={12} sm={2}>
+          <Grid item xs={12} md={2}>
             <FooterItem
               title={footerItems[2].title}
               items={footerItems[2].items}
             />
           </Grid>
-          <Grid item xs={12} sm={2}>
+          <Grid item xs={12} md={2}>
             <FooterItem
               title={footerItems[3].title}
               items={footerItems[3].items}
             />
           </Grid>
-          <Grid item xs={12} sm={4} className={classes.footerItem}>
+          <Grid item xs={12} md={4} className={classes.footerItem}>
             <Label size="lg" sx={sxs.text}>
               subscribe
             </Label>
@@ -165,14 +168,14 @@ export default function Footer({
           sx={{
             borderTop: 1,
             borderColor: 'grey.50',
-            mt: { xs: 10, sm: 19.75 },
+            mt: { xs: 10, md: 19.75 },
           }}
         />
         <Grid
           container
           sx={{
-            mt: { xs: 6, sm: 8.25 },
-            mb: { xs: 9, sm: 8.25 },
+            mt: { xs: 6, md: 8.25 },
+            mb: { xs: 9, md: 8.25 },
           }}
           justifyContent="space-between"
         >
@@ -186,7 +189,10 @@ export default function Footer({
             </Link>
           </Grid>
           <Grid item>
-            <Body size="sm">© 2021 Regen Network Development, Inc</Body>
+            <Body
+              sx={{ color: 'primary.main' }}
+              size="sm"
+            >{`© ${new Date().getUTCFullYear()} Regen Network Development, Inc`}</Body>
           </Grid>
         </Grid>
       </Section>

@@ -1,0 +1,9 @@
+fragment homeFoldSectionFields on HomePageWeb {
+  homeFoldSection {
+    title
+    body
+    image {
+      ...customImageFields
+    }
+  }
+}

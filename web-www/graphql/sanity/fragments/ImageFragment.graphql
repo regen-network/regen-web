@@ -1,0 +1,12 @@
+fragment imageFields on Image {
+  asset {
+    altText
+    url
+    metadata {
+      dimensions {
+        height
+        width
+      }
+    }
+  }
+}

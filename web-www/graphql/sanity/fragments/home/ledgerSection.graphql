@@ -1,0 +1,3 @@
+fragment ledgerSectionFields on HomePageWeb {
+  ledgerDescription
+}

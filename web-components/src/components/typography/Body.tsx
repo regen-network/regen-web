@@ -31,10 +31,10 @@ export const Body = styled(Typography, {
       fontWeight: 400,
       whiteSpace: 'pre-wrap',
       [breakpoints.up('sm')]: {
-        fontSize: typography[variant].fontSize,
+        fontSize: typography[variant]?.fontSize,
       },
       [breakpoints.down('sm')]: {
-        fontSize: typography[mobileVariant].fontSize,
+        fontSize: typography[mobileVariant]?.fontSize,
       },
       ...(styleLinks && {
         '& a, .MuiLink-root': {

@@ -1,0 +1,12 @@
+fragment valuesSectionFields on HomePageWeb {
+  valuesSection {
+    header
+    imageItems {
+      title
+      description
+      image {
+        ...imageFields
+      }
+    }
+  }
+}

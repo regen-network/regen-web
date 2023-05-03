@@ -1,0 +1,12 @@
+query homePageWeb {
+  allHomePageWeb {
+    ...carbonPlusSectionFields
+    ...climateSectionFields
+    ...ecologicalCreditCardsSectionFields
+    ...homeFoldSectionFields
+    ...ledgerSectionFields
+    ...marketplaceSectionFields
+    ...statsSectionFields
+    ...valuesSectionFields
+  }
+}

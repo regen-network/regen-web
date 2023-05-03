@@ -39,6 +39,10 @@ module.exports = {
     config.resolve.alias = {
       ...config.resolve.alias,
       '@ledgerhq/devices/hid-framing': '@ledgerhq/devices/lib/hid-framing',
+      '@ledgerhq/cryptoassets/data/evm/index':
+        '@ledgerhq/cryptoassets/lib/data/evm/index',
+      '@ledgerhq/cryptoassets/data/eip712':
+        '@ledgerhq/cryptoassets/lib/data/eip712',
     };
     config.module.rules.push({
       test: /\.mjs$/,

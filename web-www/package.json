@@ -1,0 +1,44 @@
+{
+  "name": "web-www",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "graphql:codegen-sanity": "graphql-codegen --config sanity-codegen.yml",
+    "eslint": "eslint .  -c .eslintrc.js --max-warnings 0 --ext .ts,.tsx",
+    "eslint-fix": "eslint . --fix -c .eslintrc.js --ext .ts,.tsx",
+    "format": "prettier --write --loglevel warn './src/**/*.{ts,tsx,json,md,css}'",
+    "format-and-fix": "yarn format && yarn eslint-fix"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.7.11",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@emotion/server": "^11.10.0",
+    "@mui/material": "^5.10.10",
+    "@mui/styles": "^5.10.10",
+    "@types/node": "18.15.11",
+    "@types/react": "18.0.33",
+    "@types/react-dom": "18.0.11",
+    "clsx": "^1.2.1",
+    "eslint": "8.37.0",
+    "eslint-config-next": "13.2.4",
+    "next": "13.2.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "tss-react": "^4.8.2",
+    "typescript": "5.0.3",
+    "web-components": "^1.2.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "1.21.4",
+    "@graphql-codegen/introspection": "1.18.2",
+    "@graphql-codegen/typescript": "1.22.0",
+    "@graphql-codegen/typescript-graphql-files-modules": "1.18.1",
+    "@graphql-codegen/typescript-operations": "^1.18.0",
+    "@graphql-codegen/typescript-react-apollo": "2.2.4"
+  }
+}

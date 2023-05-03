@@ -18,13 +18,6 @@ import { getAreaUnit, qudtUnit } from 'lib/rdf';
 // TODO
 // This is a temporary hack to show Regen as a Project Admin when applicable
 
-// TODO: delete this after the profile info is updated where needed..
-// const addressesMap = [
-//   'regen123a7e9gvgm53zvswc6daq7c85xtzt8263lgasm', // Mainnet - Credit classes
-//   'regen1v2ncquer9r2ytlkxh2djmmsq3e8we6rjc9snfn', // Mainnet - Projects
-//   'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46', // Redwood - Shared dev account
-// ];
-
 export const getDisplayAdmin = (
   address?: string,
   party?: PartyByAddrQuery | null,

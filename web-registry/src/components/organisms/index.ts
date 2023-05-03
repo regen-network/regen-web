@@ -17,7 +17,6 @@ export * from './CreditClassConnectSection';
 export * from './CreditClassOverviewSection';
 export * from './CreditsPurchaseForm';
 export * from './CreditTotals';
-export * from './DescriptionForm/DescriptionForm';
 export * from './Documentation';
 export * from './EcocreditsTable';
 export * from './EntityDisplayForm';

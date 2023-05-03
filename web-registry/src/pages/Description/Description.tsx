@@ -1,20 +1,18 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { useProjectEditContext } from 'pages/ProjectEdit';
+import WithLoader from 'components/atoms/WithLoader';
+import { DescriptionForm } from 'components/organisms/DescriptionForm/DescriptionForm';
+import { DescriptionSchemaType } from 'components/organisms/DescriptionForm/DescriptionForm.schema';
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
-
-import {
-  DescriptionForm,
-  DescriptionFormValues,
-} from '../../components/organisms';
-import { useProjectEditContext } from '../ProjectEdit';
 
 const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
-  const { metadata, metadataSubmit } = useProjectWithMetadata({
+  const { metadata, metadataSubmit, loading } = useProjectWithMetadata({
     projectId,
     isEdit,
     projectEditSubmit,
@@ -23,12 +21,14 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
     anchored: false,
   });
 
-  let initialFieldValues: DescriptionFormValues | undefined;
-  if (metadata) {
-    initialFieldValues = {
-      'schema:description': metadata['schema:description'],
-    };
-  }
+  const initialValues: DescriptionSchemaType = useMemo(
+    () => ({
+      'schema:description': metadata?.['schema:description'],
+      'regen:story': metadata?.['regen:story'],
+      'regen:storyTitle': metadata?.['regen:storyTitle'],
+    }),
+    [metadata],
+  );
 
   const saveAndExit = (): Promise<void> => {
     // TODO: functionality
@@ -49,12 +49,17 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
       title="Description"
       saveAndExit={saveAndExit}
     >
-      <DescriptionForm
-        submit={metadataSubmit}
-        onNext={navigateNext}
-        onPrev={navigatePrev}
-        initialValues={initialFieldValues}
-      />
+      <WithLoader
+        isLoading={loading}
+        sx={{ textAlign: 'center', mt: { xs: 6.5, sm: 9 } }}
+      >
+        <DescriptionForm
+          onSubmit={metadataSubmit}
+          onNext={navigateNext}
+          onPrev={navigatePrev}
+          initialValues={initialValues}
+        />
+      </WithLoader>
     </ProjectFormTemplate>
   );
 };

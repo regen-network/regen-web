@@ -8,7 +8,7 @@ import { SaveIcon } from 'web-components/lib/components/icons/SaveIcon';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 interface Props {
-  onSave: () => void;
+  onSave?: () => void;
   saveDisabled: boolean;
   saveText?: string;
 }
@@ -55,6 +55,7 @@ const EditProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
       <Grid container className={styles.root}>
         <Grid item>
           <ContainedButton
+            type="submit"
             className={styles.btn}
             onClick={onSave}
             disabled={saveDisabled}

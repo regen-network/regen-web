@@ -1,92 +1,154 @@
-import React from 'react';
-import { Field, Form, Formik, FormikHelpers } from 'formik';
-import * as Yup from 'yup';
+import { useEffect } from 'react';
+import { useFormState, useWatch } from 'react-hook-form';
+import { ERRORS, errorsMapping } from 'config/errors';
+import { useSetAtom } from 'jotai';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
+import { TextAreaField } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField';
+import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 
-import { FormRef } from 'pages/ProjectEdit/ProjectEdit.types';
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
-import { useProjectEditContext } from '../../../pages/ProjectEdit';
+import { useProjectEditContext } from 'pages/ProjectEdit';
+import Form from 'components/molecules/Form/Form';
+import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
+
 import { ProjectPageFooter } from '../../molecules';
-import { DESCRIPTION_MAX_LENGTH } from './DescriptionForm.constants';
+import {
+  STORY_CHAR_LIMIT,
+  STORY_DESCRIPTION,
+  STORY_LABEL,
+  STORY_TITLE_CHAR_LIMIT,
+  STORY_TITLE_DESCRIPTION,
+  STORY_TITLE_LABEL,
+  SUMMARY_CHAR_LIMIT,
+  SUMMARY_DESCRIPTION,
+  SUMMARY_LABEL,
+} from './DescriptionForm.constants';
+import {
+  descriptionFormSchema,
+  DescriptionSchemaType,
+} from './DescriptionForm.schema';
 
 interface DescriptionFormProps {
-  submit: ({ values }: { values: DescriptionFormValues }) => Promise<void>;
+  onSubmit: ({ values }: { values: DescriptionSchemaType }) => Promise<void>;
   onNext?: () => void;
   onPrev?: () => void;
-  initialValues?: DescriptionFormValues;
+  initialValues?: DescriptionSchemaType;
 }
 
-export interface DescriptionFormValues {
-  'schema:description'?: string;
-}
-
-const DescriptionFormSchema = Yup.object().shape({
-  'schema:description': Yup.string().max(DESCRIPTION_MAX_LENGTH),
-});
-
-const DescriptionForm = ({
-  submit,
+const DescriptionForm: React.FC<DescriptionFormProps> = ({
   initialValues,
-  ...props
-}: DescriptionFormProps): JSX.Element => {
-  const { confirmSave, isEdit, formRef } = useProjectEditContext();
+  onSubmit,
+  onNext,
+  onPrev,
+}) => {
+  const form = useZodForm({
+    schema: descriptionFormSchema,
+    defaultValues: {
+      ...initialValues,
+    },
+    mode: 'onBlur',
+  });
+  const { isValid, isSubmitting, isDirty, errors } = useFormState({
+    control: form.control,
+  });
 
-  const onSubmit = async (
-    values: DescriptionFormValues,
-    { setSubmitting, setTouched }: FormikHelpers<DescriptionFormValues>,
-  ): Promise<void> => {
-    try {
-      await submit({ values });
-      setTouched({}); // reset to untouched
-      if (isEdit && confirmSave) confirmSave();
-    } catch (e) {
-      setSubmitting(false);
-    }
-  };
+  const description = useWatch({
+    control: form.control,
+    name: 'schema:description',
+  });
+  const story = useWatch({
+    control: form.control,
+    name: 'regen:story',
+  });
+  const storyTitle = useWatch({
+    control: form.control,
+    name: 'regen:storyTitle',
+  });
+
+  const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+  const { confirmSave, isEdit, isDirtyRef } = useProjectEditContext();
+
+  useEffect(() => {
+    isDirtyRef.current = isDirty;
+  }, [isDirtyRef, isDirty]);
 
   return (
-    <Formik
-      innerRef={formRef as FormRef<DescriptionFormValues>}
-      enableReinitialize
-      validateOnMount
-      initialValues={
-        initialValues || {
-          'schema:description':
-            initialValues?.['schema:description'] || undefined,
+    <Form
+      form={form}
+      onSubmit={async values => {
+        try {
+          await onSubmit({ values });
+          if (isEdit && confirmSave) confirmSave();
+        } catch (e) {
+          setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
         }
-      }
-      validationSchema={DescriptionFormSchema}
-      onSubmit={onSubmit}
-    >
-      {({ submitForm, isValid, isSubmitting, dirty }) => {
-        return (
-          <Form translate="yes">
-            <OnBoardingCard>
-              <Field
-                charLimit={DESCRIPTION_MAX_LENGTH}
-                component={ControlledTextField}
-                label="Project description"
-                description="Describe the story of this property."
-                name="schema:description"
-                rows={5}
-                multiline
-                optional
-              />
-            </OnBoardingCard>
-            <ProjectPageFooter
-              onSave={submitForm}
-              onNext={props.onNext}
-              onPrev={props.onPrev}
-              isValid={isValid}
-              isSubmitting={isSubmitting}
-              dirty={dirty}
-            />
-          </Form>
-        );
       }}
-    </Formik>
+    >
+      <OnBoardingCard sx={{ mb: [2.5], ...(isEdit && { mt: [0] }) }}>
+        <TextAreaField
+          type="text"
+          label={SUMMARY_LABEL}
+          description={SUMMARY_DESCRIPTION}
+          rows={3}
+          disabled={isSubmitting}
+          multiline
+          optional="(recommended)"
+          helperText={errors['schema:description']?.message}
+          error={!!errors['schema:description']}
+          {...form.register('schema:description')}
+        >
+          <TextAreaFieldChartCounter
+            value={description}
+            charLimit={SUMMARY_CHAR_LIMIT}
+          />
+        </TextAreaField>
+      </OnBoardingCard>
+      <OnBoardingCard sx={{ mt: [0] }}>
+        <TextAreaField
+          type="text"
+          label={STORY_LABEL}
+          description={STORY_DESCRIPTION}
+          rows={10}
+          disabled={isSubmitting}
+          multiline
+          optional="(recommended)"
+          helperText={errors['regen:story']?.message}
+          error={!!errors['regen:story']}
+          {...form.register('regen:story')}
+        >
+          <TextAreaFieldChartCounter
+            value={story}
+            charLimit={STORY_CHAR_LIMIT}
+          />
+        </TextAreaField>
+        <TextAreaField
+          type="text"
+          label={STORY_TITLE_LABEL}
+          description={STORY_TITLE_DESCRIPTION}
+          rows={2}
+          disabled={isSubmitting}
+          multiline
+          optional="(required if you added a project story)"
+          helperText={errors['regen:storyTitle']?.message}
+          error={!!errors['regen:storyTitle']}
+          {...form.register('regen:storyTitle')}
+        >
+          <TextAreaFieldChartCounter
+            value={storyTitle}
+            charLimit={STORY_TITLE_CHAR_LIMIT}
+          />
+        </TextAreaField>
+      </OnBoardingCard>
+      <ProjectPageFooter
+        onNext={onNext}
+        onPrev={onPrev}
+        isValid={isValid}
+        isSubmitting={isSubmitting}
+        dirty={isDirty}
+      />
+    </Form>
   );
 };
 

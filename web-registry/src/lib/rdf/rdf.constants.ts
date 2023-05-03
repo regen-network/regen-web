@@ -55,9 +55,11 @@ export const ANCHORED_PROJECT_CONTEXT = {
   },
 };
 
-export const UNACHORED_PROJECT_KEYS = [
+export const UNANCHORED_PROJECT_KEYS = [
   'regen:creditClassId',
   'schema:description',
+  'regen:story',
+  'regen:storyTitle',
   'regen:previewPhoto',
   'regen:galleryPhotos',
   'regen:videoURL',

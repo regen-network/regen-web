@@ -174,6 +174,8 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           disabled={isSubmitting}
           multiline
           optional
+          helperText={errors?.description?.message}
+          error={!!errors?.description}
           {...form.register('description')}
         >
           <TextAreaFieldChartCounter value={description} />

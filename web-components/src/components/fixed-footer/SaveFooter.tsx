@@ -36,7 +36,7 @@ const StyledLinearProgress = withStyles(LinearProgress, theme => ({
 interface Props {
   onPrev?: () => void;
   onNext?: () => void;
-  onSave: () => void;
+  onSave?: () => void;
   saveDisabled: boolean;
   saveText?: string;
   hideProgress?: boolean;
@@ -121,6 +121,7 @@ const SaveFooter: React.FC<React.PropsWithChildren<Props>> = ({
         </Grid>
         <Grid item>
           <ContainedButton
+            type="submit"
             className={classes.btn}
             onClick={props.onSave}
             disabled={props.saveDisabled}

@@ -14,7 +14,14 @@ export const TextAreaFieldChartCounter = ({
   const charsLeft = (charLimit || Infinity) - ((value && value.length) || 0);
 
   return (
-    <Body size="sm" sx={{ color: 'info.main', mt: 1, mb: { xs: 3, sm: 4 } }}>
+    <Body
+      size="sm"
+      sx={{
+        color: charsLeft < 0 ? 'error.main' : 'info.main',
+        mt: 1,
+        mb: { xs: 3, sm: 4 },
+      }}
+    >
       {`${charsLeft} character${charsLeft === 1 ? '' : 's'} remaining`}
     </Body>
   );

@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { createContext, useEffect, useRef, useState } from 'react';
 import {
   ApolloClient,
   NormalizedCacheObject,
@@ -139,7 +133,14 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     setError,
     setLoaded,
   });
-  useOnAccountChange({ connectWallet, wallet, keplrMobileWeb, walletConnect });
+  useOnAccountChange({
+    connectWallet,
+    wallet,
+    keplrMobileWeb,
+    walletConfigRef,
+    walletConnect,
+    accountId,
+  });
   useDetectKeplrMobileBrowser({
     connectWallet,
     loaded,

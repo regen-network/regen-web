@@ -63,6 +63,8 @@ export const useAddAddress = ({
 
             // Set wallet to new one
             setWallet(newWallet);
+
+            // TODO Invalidate the getPartyByAddrQuery for the new address
           }
         }
       } catch (e) {

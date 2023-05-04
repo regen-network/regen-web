@@ -3,10 +3,10 @@ import { SUBTITLE, TITLE } from './AddWalletModalConnect.constants';
 import { AddWalletModalTemplate } from './AddWalletModalTemplate';
 
 export interface AddWalletModalConnectProps extends RegenModalProps {
-  partyInfo: {
+  partyInfo?: {
     addr: string;
     name: string;
-    avatar: string;
+    profileImage: string;
   };
 }
 const AddWalletModalConnect: React.FC<

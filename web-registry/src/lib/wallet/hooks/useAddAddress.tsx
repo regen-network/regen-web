@@ -1,9 +1,10 @@
 import { useCallback } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { apiUri } from 'lib/apiUri';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
+import { getPartyByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery.utils';
 import { LoginParams, SignArbitraryType, Wallet } from 'lib/wallet/wallet';
 
 import { chainInfo } from '../chainInfo/chainInfo';
@@ -15,18 +16,25 @@ type Params = {
   setWallet: UseStateSetter<Wallet>;
 };
 
+export interface AddAddressParams extends LoginParams {
+  onSuccess?: () => void;
+}
+
 export const useAddAddress = ({
   signArbitrary,
   setError,
   setWallet,
 }: Params) => {
+  const reactQueryClient = useQueryClient();
   const { data: token } = useQuery(getCsrfTokenQuery({}));
+
   const addAddress = useCallback(
     async ({
       walletConfig,
       walletConnect,
       wallet,
-    }: LoginParams): Promise<void> => {
+      onSuccess,
+    }: AddAddressParams): Promise<void> => {
       try {
         if (wallet?.address && signArbitrary && token) {
           // Get nonce for the current authenticated user
@@ -64,15 +72,20 @@ export const useAddAddress = ({
             // Set wallet to new one
             setWallet(newWallet);
 
-            // TODO Invalidate the getPartyByAddrQuery for the new address
+            await reactQueryClient.invalidateQueries({
+              queryKey: getPartyByAddrQueryKey({
+                addr: newWallet.address,
+              }),
+            });
+
+            if (onSuccess) onSuccess();
           }
         }
       } catch (e) {
-        console.log(e);
         setError(e);
       }
     },
-    [signArbitrary, token, setWallet, setError],
+    [signArbitrary, token, setWallet, reactQueryClient, setError],
   );
 
   return addAddress;

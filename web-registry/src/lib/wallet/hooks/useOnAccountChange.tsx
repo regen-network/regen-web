@@ -6,13 +6,22 @@ import {
 } from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
 import WalletConnect from '@walletconnect/client';
+import { useSetAtom } from 'jotai';
 
+import {
+  addWalletModalConnectAtom,
+  addWalletModalRemoveAtom,
+} from 'lib/atoms/modals.atoms';
 import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
+
+import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
+import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 
 import { chainInfo } from '../chainInfo/chainInfo';
 import { Wallet } from '../wallet';
 import { getWallet } from '../wallet.utils';
 import { WalletConfig, WalletType } from '../walletsConfig/walletsConfig.types';
+import { AddAddressParams } from './useAddAddress';
 import { ConnectWalletType } from './useConnectWallet';
 
 type Props = {
@@ -22,6 +31,7 @@ type Props = {
   walletConfigRef: MutableRefObject<WalletConfig | undefined>;
   walletConnect?: WalletConnect;
   accountId?: string;
+  addAddress: (params: AddAddressParams) => Promise<void>;
 };
 
 export const useOnAccountChange = ({
@@ -31,6 +41,7 @@ export const useOnAccountChange = ({
   walletConfigRef,
   walletConnect,
   accountId,
+  addAddress,
 }: Props): void => {
   const [newWallet, setNewWallet] = useState<Wallet | undefined>();
   const graphqlClient =
@@ -42,6 +53,10 @@ export const useOnAccountChange = ({
       enabled: !!newWallet?.address && !!graphqlClient,
     }),
   );
+  const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
+
+  const setAddWalletModalConnectAtom = useSetAtom(addWalletModalConnectAtom);
+  const setAddWalletModalRemoveAtom = useSetAtom(addWalletModalRemoveAtom);
 
   useEffect(() => {
     if (typeof window === 'undefined') {
@@ -79,26 +94,62 @@ export const useOnAccountChange = ({
 
   useEffect(() => {
     const newAccountId = partyByAddr?.walletByAddr?.partyByWalletId?.accountId;
-    if (!!newWallet && !isFetching) {
+    if (!!newWallet && !isFetching && newWallet.address !== wallet?.address) {
+      const partyInfo = {
+        addr: newWallet.shortAddress,
+        name: party?.name ? party?.name : DEFAULT_NAME,
+        profileImage: party?.image ? party?.image : defaultAvatar,
+      };
+
       if (!!newAccountId) {
         if (newAccountId === accountId) {
           // the new address is part of the current user account => we just auto-connect
-          console.log('connect');
           connectWallet({ walletType: WalletType.Keplr, doLogin: false });
         } else {
           // part of another account => we display a popup so the user can choose to rm the address from the other account and add it to his/her account
-          console.log('part of another account');
+          setAddWalletModalRemoveAtom(atom => {
+            atom.open = true;
+            atom.partyInfo = partyInfo;
+            atom.onClick = () => {
+              addAddress({
+                walletConfig: walletConfigRef.current,
+                walletConnect,
+                wallet,
+                onSuccess: () =>
+                  setAddWalletModalRemoveAtom(atom => void (atom.open = false)),
+              });
+            };
+          });
         }
       } else {
         // not part of any account yet => we trigger the add address flow
-        console.log('add address');
+        setAddWalletModalConnectAtom(atom => {
+          atom.open = true;
+          atom.partyInfo = partyInfo;
+        });
+        addAddress({
+          walletConfig: walletConfigRef.current,
+          walletConnect,
+          wallet,
+          onSuccess: () =>
+            setAddWalletModalConnectAtom(atom => void (atom.open = false)),
+        });
       }
     }
   }, [
     accountId,
+    addAddress,
     connectWallet,
+    defaultAvatar,
     isFetching,
     newWallet,
+    party?.image,
+    party?.name,
     partyByAddr?.walletByAddr?.partyByWalletId?.accountId,
+    setAddWalletModalConnectAtom,
+    setAddWalletModalRemoveAtom,
+    wallet,
+    walletConfigRef,
+    walletConnect,
   ]);
 };

@@ -15,6 +15,7 @@ import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCs
 import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 
+import { useAddAddress } from './hooks/useAddAddress';
 import { useAutoConnect } from './hooks/useAutoConnect';
 import { useConnect } from './hooks/useConnect';
 import { useConnectWallet } from './hooks/useConnectWallet';
@@ -128,6 +129,8 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     logout,
   });
 
+  const addAddress = useAddAddress({ signArbitrary, setError, setWallet });
+
   useAutoConnect({
     connectWallet,
     setError,
@@ -140,6 +143,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     walletConfigRef,
     walletConnect,
     accountId,
+    addAddress,
   });
   useDetectKeplrMobileBrowser({
     connectWallet,

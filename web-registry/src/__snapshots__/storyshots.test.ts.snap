@@ -782,6 +782,40 @@ exports[`Storyshots Cards Project Card 1`] = `
 </MemoryRouter>
 `;
 
+exports[`Storyshots Cards Project Impact Card 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    >
+      <Route
+        index={true}
+      />
+    </Route>
+  </Routes>
+</MemoryRouter>
+`;
+
 exports[`Storyshots Cards Project Top Card 1`] = `
 <MemoryRouter
   initialEntries={
@@ -1463,40 +1497,6 @@ exports[`Storyshots Credits Credits Gauge 1`] = `
 `;
 
 exports[`Storyshots Document Document 1`] = `
-<MemoryRouter
-  initialEntries={
-    Array [
-      Object {
-        "pathname": "/",
-        "search": "",
-        "state": undefined,
-      },
-    ]
-  }
->
-  <Routes>
-    <Route
-      element={
-        <RouterLogger>
-          <RegenThemeProvider
-            injectFonts={true}
-          >
-            <CssBaseline />
-            <Unknown />
-          </RegenThemeProvider>
-        </RouterLogger>
-      }
-      path="/"
-    >
-      <Route
-        index={true}
-      />
-    </Route>
-  </Routes>
-</MemoryRouter>
-`;
-
-exports[`Storyshots Dummy Default 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
@@ -2924,6 +2924,108 @@ exports[`Storyshots Modal Tx Successful Modal 1`] = `
 </MemoryRouter>
 `;
 
+exports[`Storyshots Modal/AddWalletModalConnect Default 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    >
+      <Route
+        index={true}
+      />
+    </Route>
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Modal/AddWalletModalRemove Default 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    >
+      <Route
+        index={true}
+      />
+    </Route>
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Modal/AddWalletModalSwitch Default 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    >
+      <Route
+        index={true}
+      />
+    </Route>
+  </Routes>
+</MemoryRouter>
+`;
+
 exports[`Storyshots Modal/WalletModal Default 1`] = `
 <MemoryRouter
   initialEntries={
@@ -3435,6 +3537,40 @@ exports[`Storyshots Registry/Organisms/Credit Send Form Credit Send Form 1`] = `
 `;
 
 exports[`Storyshots Registry/Organisms/Credit Send Modal Credit Send Modal 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    >
+      <Route
+        index={true}
+      />
+    </Route>
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Registry/Organisms/EditProfileForm Default 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
@@ -4692,7 +4828,75 @@ exports[`Storyshots atoms/CardRibbon Default 1`] = `
 </MemoryRouter>
 `;
 
-exports[`Storyshots atoms/Dummy Default 1`] = `
+exports[`Storyshots atoms/RadioCard Default 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    >
+      <Route
+        index={true}
+      />
+    </Route>
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots molecules/ActionCard Default 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    >
+      <Route
+        index={true}
+      />
+    </Route>
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots molecules/ActionCard Default 2 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
@@ -4727,6 +4931,108 @@ exports[`Storyshots atoms/Dummy Default 1`] = `
 `;
 
 exports[`Storyshots molecules/EcologicalCreditCard Default 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    >
+      <Route
+        index={true}
+      />
+    </Route>
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots molecules/InfoCard Default 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    >
+      <Route
+        index={true}
+      />
+    </Route>
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots molecules/StatCard Default 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    >
+      <Route
+        index={true}
+      />
+    </Route>
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots organisms/CancelButtonFooter Default 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
@@ -4828,7 +5134,75 @@ exports[`Storyshots organisms/CarouselSection Default 1`] = `
 </MemoryRouter>
 `;
 
+exports[`Storyshots organisms/Gallery Default 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    >
+      <Route
+        index={true}
+      />
+    </Route>
+  </Routes>
+</MemoryRouter>
+`;
+
 exports[`Storyshots organisms/Section Default 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    >
+      <Route
+        index={true}
+      />
+    </Route>
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots organisms/StatCardsSection Default 1`] = `
 <MemoryRouter
   initialEntries={
     Array [

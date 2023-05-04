@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
+import { truncate } from '../../../../lib/utils/truncate';
 import { AddWalletModalRemove } from './AddWalletModalRemove';
 
 export default {
@@ -26,7 +27,7 @@ export const Default = Template.bind({});
 Default.args = {
   partyInfo: {
     name: 'unnamed',
-    addr: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
-    avatar: '/illustrations/frog.jpg',
+    addr: truncate('regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46'),
+    profileImage: '/illustrations/frog.jpg',
   },
 };

@@ -1,18 +1,13 @@
 import { Box, Grid } from '@mui/material';
 
 import Card from '../../cards/Card';
-import {
-  CancelButtonFooter,
-  Props as CancelButtonFooterProps,
-} from '../../organisms/CancelButtonFooter/CancelButtonFooter';
 import { Body, Title } from '../../typography';
 import UserAvatar from '../../user/UserAvatar';
-import Modal, { RegenModalProps } from '..';
+import Modal from '..';
 import { AddWalletModalConnectProps } from './AddWalletModalConnect';
 
 export interface AddWalletModalTemplateProps
-  extends RegenModalProps,
-    Partial<Pick<AddWalletModalConnectProps, 'partyInfo'>> {
+  extends AddWalletModalConnectProps {
   title: string;
   subtitle: string;
 }
@@ -34,7 +29,7 @@ const AddWalletModalTemplate: React.FC<
         <Card sx={{ mt: 6, p: 5 }}>
           <Grid container wrap="nowrap" alignItems="center">
             <Grid item pr={5}>
-              <UserAvatar src={partyInfo.avatar} size="xxl" />
+              <UserAvatar src={partyInfo.profileImage} size="xxl" />
             </Grid>
             <Grid item>
               <Body size="lg" color="primary.light" sx={{ fontWeight: 'bold' }}>

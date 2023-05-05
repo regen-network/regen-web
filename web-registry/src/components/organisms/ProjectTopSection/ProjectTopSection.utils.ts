@@ -1,7 +1,11 @@
 import { User } from 'web-components/lib/components/user/UserInfo';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
+import {
+  Maybe,
+  PartyFieldsFragment,
+  ProjectFieldsFragment,
+} from 'generated/graphql';
 import {
   AnchoredProjectMetadataBaseLD,
   AnchoredProjectMetadataLD,
@@ -13,7 +17,7 @@ import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
 export const getDisplayAdmin = (
   address?: string,
-  party?: any, // TODO: figure out how to type this...
+  party?: Maybe<PartyFieldsFragment>,
   defaultAvatar?: string,
 ): User | undefined => {
   if (!address) return;

@@ -1,7 +1,0 @@
-#import "./PurchasesConnectionFragment.graphql"
-
-query AllPurchasesByWalletId($buyerWalletId: UUID) {
-  allPurchases(first: 5, condition: { buyerWalletId: $buyerWalletId }) {
-    ...purchasesFields
-  }
-}

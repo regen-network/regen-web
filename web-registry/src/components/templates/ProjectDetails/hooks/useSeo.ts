@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 
-import { Party } from 'web-components/lib/components/modal/LedgerModal';
+import { Party } from 'web-components/lib/components/user/UserInfo';
 
 import {
   AnchoredProjectMetadataBaseLD,

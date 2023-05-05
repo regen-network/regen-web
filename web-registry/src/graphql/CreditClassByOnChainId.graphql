@@ -1,15 +1,11 @@
 query CreditClassByOnChainId($onChainId: String!) {
   creditClassByOnChainId(onChainId: $onChainId) {
     id
-    standard
     uri
     projectsByCreditClassId {
       nodes {
         ...moreProjectFields
       }
-    }
-    partyByDesignerId {
-      name
     }
   }
 }

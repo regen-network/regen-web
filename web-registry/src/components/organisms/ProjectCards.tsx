@@ -98,7 +98,6 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
           ] as qudtUnit
         ]
       }
-      registry={project.partyByRegistryId}
       track={track}
     />
   );

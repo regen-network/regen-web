@@ -15,7 +15,6 @@ export * from './CreditBatches/CreditBatches';
 export * from './CreditClassCards';
 export * from './CreditClassConnectSection';
 export * from './CreditClassOverviewSection';
-export * from './CreditsPurchaseForm';
 export * from './CreditTotals';
 export * from './Documentation';
 export * from './EcocreditsTable';

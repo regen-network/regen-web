@@ -4,15 +4,10 @@ fragment partyFields on Party {
   name
   description
   image
+  websiteLink
+  twitterLink
   organizationByPartyId {
     ...organizationFields
-  }
-  userByPartyId {
-    id
-  }
-  addressByAddressId {
-    id
-    feature
   }
   walletByWalletId {
     id
@@ -22,50 +17,6 @@ fragment partyFields on Party {
 
 fragment organizationFields on Organization {
   id
-  website
-  organizationMembersByOrganizationId(condition: { isOwner: true }) {
-    nodes {
-      userByMemberId {
-        id
-        partyId
-        partyByPartyId {
-          name
-          roles
-        }
-      }
-    }
-  }
-}
-
-fragment creditVintageFields on CreditVintage {
-  id
-  createdAt
-  startDate
-  endDate
-  initialDistribution
-  units
-  certificateLink
-  txHash
-  batchDenom
-  creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
-    name
-    version
-    metadata
-    documentId
-  }
-  methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt {
-    name
-    version
-    documentId
-  }
-  walletByTokenizerId {
-    addr
-    partiesByWalletId(first: 1) {
-      nodes {
-        ...partyFields
-      }
-    }
-  }
 }
 
 query ProjectByHandle($handle: String!) {

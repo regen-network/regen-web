@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { truncate } from '../../../../lib/utils/truncate';
+import { truncate } from '../../../utils/truncate';
 import { AddWalletModalConnect } from './AddWalletModalConnect';
 
 export default {

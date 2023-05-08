@@ -1,7 +1,8 @@
 import React from 'react';
-import { MenuItem } from '@mui/material';
+import { MenuItem, SxProps } from '@mui/material';
 import cx from 'clsx';
 
+import { Theme } from '../../../../theme/muiTheme';
 import { MenuTitle } from '../../../menu-hover';
 import { HeaderDropdownItemProps } from '../HeaderDropdownItems';
 import { NavLinkProps } from '../NavLink';
@@ -18,9 +19,11 @@ export interface HeaderMenuItem extends MenuTitle {
 export interface HeaderMenuHoverBase {
   pathname: string;
   linkComponent: React.FC<NavLinkProps>;
+  className?: string;
+  sx?: SxProps<Theme>;
 }
 
-interface HeaderMenuHoverProps extends HeaderMenuHoverBase {
+export interface HeaderMenuHoverProps extends HeaderMenuHoverBase {
   item: HeaderMenuItem;
 }
 
@@ -28,15 +31,19 @@ const HeaderMenuHover: React.FC<HeaderMenuHoverProps> = ({
   item,
   pathname,
   linkComponent,
+  className,
+  sx,
 }) => {
   const { classes: styles } = useHeaderMenuHoverStyles();
 
   return (
     <MenuItem
       className={cx(
+        className,
         styles.menuItem,
         pathname === item.href && styles.currentMenuItem,
       )}
+      sx={sx}
     >
       <HeaderMenuHoverContent
         item={item}

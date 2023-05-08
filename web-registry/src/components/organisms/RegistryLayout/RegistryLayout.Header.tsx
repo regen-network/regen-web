@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
 
 import Header from 'web-components/lib/components/header';
-import { UserMenuItem } from 'web-components/lib/components/header/components/UserMenuItem';
+import { UserMenuItems } from 'web-components/lib/components/header/components/UserMenuItems';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { truncate } from 'web-components/lib/utils/truncate';
 
@@ -57,7 +57,7 @@ const RegistryLayoutHeader: React.FC = () => {
         extras={
           <Box display="flex" justifyContent="center" alignItems="center">
             {chainId && loaded && isConnected && disconnect && (
-              <UserMenuItem
+              <UserMenuItems
                 address={truncate(wallet?.address)}
                 avatar={party?.image ? party?.image : defaultAvatar}
                 disconnect={disconnect}

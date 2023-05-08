@@ -90,7 +90,7 @@ export default function UserAvatar({
 
   if (href) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer">
+      <a href={href} rel="noopener noreferrer">
         {avatar}
       </a>
     );

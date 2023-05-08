@@ -62,7 +62,7 @@ const useStyles = makeStyles<UseStylesParams>()(
       },
       backgroundColor: theme.palette.primary.main,
       img: {
-        objectFit: 'contain',
+        objectFit: 'cover',
       },
     },
   }),
@@ -81,7 +81,7 @@ export default function UserAvatar({
   const { classes } = useStyles({ spacing, border });
   const avatar =
     !src || icon ? (
-      <Avatar className={classes.root} alt={alt}>
+      <Avatar className={classes.root} alt={alt} src={icon}>
         {icon}
       </Avatar>
     ) : (
@@ -90,7 +90,7 @@ export default function UserAvatar({
 
   if (href) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer">
+      <a href={href} rel="noopener noreferrer">
         {avatar}
       </a>
     );

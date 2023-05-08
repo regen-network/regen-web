@@ -1,7 +1,11 @@
 import { User } from 'web-components/lib/components/user/UserInfo';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
+import {
+  Maybe,
+  PartyFieldsFragment,
+  ProjectFieldsFragment,
+} from 'generated/graphql';
 import {
   AnchoredProjectMetadataBaseLD,
   AnchoredProjectMetadataLD,
@@ -11,29 +15,27 @@ import {
 } from 'lib/db/types/json-ld';
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
-// TODO
-// This is a temporary hack to show Regen as a Project Admin when applicable
-
-const addressesMap = [
-  'regen123a7e9gvgm53zvswc6daq7c85xtzt8263lgasm', // Mainnet - Credit classes
-  'regen1v2ncquer9r2ytlkxh2djmmsq3e8we6rjc9snfn', // Mainnet - Projects
-  'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46', // Redwood - Shared dev account
-];
-
-export const getDisplayAdmin = (address?: string): User | undefined => {
+export const getDisplayAdmin = (
+  address?: string,
+  party?: Maybe<PartyFieldsFragment>,
+  defaultAvatar?: string,
+): User | undefined => {
   if (!address) return;
-  if (addressesMap.includes(address)) {
+  if (!!party) {
+    const name = party.name;
+    const type = party.type;
     return {
-      name: 'Regen Network Development, Inc',
-      type: 'ORGANIZATION',
-      image: 'https://regen-registry.s3.amazonaws.com/regen-logo-green.svg',
-      description:
-        'Regen Network realigns the agricultural economy with ecological health by creating the global marketplace for planetary stewardship.',
+      name: name ? name : truncate(address),
+      type: type ? type : 'USER',
+      image: party.image ? party.image : defaultAvatar,
+      description: party.description,
+      link: `/ecocredits/accounts/${address}`,
     };
   }
   return {
     name: truncate(address),
-    type: 'ORGANIZATION',
+    type: 'USER',
+    image: defaultAvatar,
     link: `/ecocredits/accounts/${address}`,
   };
 };

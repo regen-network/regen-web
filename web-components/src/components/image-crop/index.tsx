@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import ReactCrop, { Crop, makeAspectCrop } from 'react-image-crop';
+import ReactCrop, { Crop } from 'react-image-crop';
 import { Button } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { DefaultTheme as Theme } from '@mui/styles';
@@ -72,12 +72,10 @@ export default function ImageCrop({
   const { classes } = useStyles();
   const imgRef = useRef<any>(null);
   const [crop, setCrop] = useState<Partial<Crop>>(fixedCrop);
-  console.log('🚀 ~ file: index.tsx:75 ~ crop:', crop);
   const [loading, setLoading] = useState<boolean>(false);
   const [completedCrop, setCompletedCrop] = useState<Crop | undefined>(
     undefined,
   );
-  console.log('🚀 ~ file: index.tsx:80 ~ completedCrop:', completedCrop);
   const mobileMatches = useMediaQuery('(max-width:834px)');
 
   const showCroppedImage = useCallback(async () => {

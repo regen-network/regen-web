@@ -81,7 +81,7 @@ export const MediaFormStory = ({ fileNamesToDeleteRef, projectId }: Props) => {
       <>
         <Radio
           label={'Add a video'}
-          labelOptionalText={RADIO_PREFERABLE}
+          optional={RADIO_PREFERABLE}
           value={'schema:VideoObject'}
           helperText={'Copy and paste an embeddable video url.'}
           selectedValue={storyMedia?.['@type']}

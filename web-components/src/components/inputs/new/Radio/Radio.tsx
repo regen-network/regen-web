@@ -11,6 +11,7 @@ import {
 import { Body } from '../../../../components/typography';
 import { Theme } from '../../../../theme/muiTheme';
 import { sxToArray } from '../../../../utils/mui/sxToArray';
+import { RADIO_DEFAULT_OPTIONAL } from './Radio.constants';
 import { useRadioStyles } from './Radio.styles';
 import { RadiotVariant } from './Radio.types';
 
@@ -19,7 +20,7 @@ export interface RadioProps extends RadioPropsMui {
   label?: string;
   selectedValue?: string;
   variant?: RadiotVariant;
-  labelOptionalText?: string;
+  optional?: string | boolean;
   helperText?: string;
   children?: React.ReactNode;
   sx?: SxProps<Theme>;
@@ -32,7 +33,7 @@ export const Radio = forwardRef<HTMLButtonElement, RadioProps>(
       label,
       selectedValue = '',
       variant = 'default',
-      labelOptionalText,
+      optional,
       helperText,
       children,
       sx = [],
@@ -43,6 +44,8 @@ export const Radio = forwardRef<HTMLButtonElement, RadioProps>(
     const isSelected = selectedValue === value;
     const { classes, cx } = useRadioStyles({ isSelected });
     const isDefaultVariant = variant === 'default';
+    const optionalText =
+      typeof optional === 'string' ? optional : RADIO_DEFAULT_OPTIONAL;
 
     return (
       <Box
@@ -70,7 +73,7 @@ export const Radio = forwardRef<HTMLButtonElement, RadioProps>(
             sx={{ ml: 0, mr: 1 }}
             className={classes.radioLabel}
           />
-          {labelOptionalText && <Body size="md">{labelOptionalText}</Body>}
+          {optional && <Body size="md">{optionalText}</Body>}
         </Box>
         {helperText && (
           <FormHelperText sx={{ ml: 8.75 }}>{helperText}</FormHelperText>

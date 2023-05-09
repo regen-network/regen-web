@@ -19,7 +19,7 @@ const Template: ComponentStory<typeof RadioGroup> = args => {
         <Radio
           name={'radio-story'}
           label={'Add a video'}
-          labelOptionalText={RADIO_PREFERABLE}
+          optional={RADIO_PREFERABLE}
           value={'video'}
           helperText={'Copy and paste an embeddable video url.'}
           selectedValue={selectedValue}

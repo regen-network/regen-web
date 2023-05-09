@@ -55,7 +55,6 @@ const MethodologyReviewProcess = lazy(
   () => import('./pages/MethodologyReviewProcess'),
 );
 const NotFoundPage = lazy(() => import('./pages/NotFound'));
-const PostPurchase = lazy(() => import('./pages/PostPurchase'));
 const Project = lazy(() => import('./pages/Project'));
 const Projects = lazy(() => import('./pages/Projects'));
 const ProjectCreate = lazy(() => import('./pages/ProjectCreate'));
@@ -63,7 +62,6 @@ const ProjectFinished = lazy(() => import('./pages/ProjectFinished'));
 const ProjectLocation = lazy(() => import('./pages/ProjectLocation'));
 const ProjectReview = lazy(() => import('./pages/ProjectReview'));
 const Roles = lazy(() => import('./pages/Roles'));
-const Seller = lazy(() => import('./pages/Seller'));
 const Story = lazy(() => import('./pages/Story'));
 const VerifyEmail = lazy(() => import('./pages/VerifyEmail'));
 const ProjectEdit = lazy(() => import('./pages/ProjectEdit'));
@@ -94,7 +92,6 @@ export const getRoutes = ({
         />
         <Route path="verify-email" element={<VerifyEmail />} />
         <Route path="add" element={<Additionality />} />
-        <Route path="project/wilmot/admin" element={<Seller />} />
         <Route path="buyers" element={<BuyersPage />} />
         <Route path="create-methodology" element={<CreateMethodology />} />
         <Route
@@ -121,10 +118,6 @@ export const getRoutes = ({
             queryClient: reactQueryClient,
             apolloClientFactory,
           })}
-        />
-        <Route
-          path="post-purchase/:projectId/:walletId/:name"
-          element={<PostPurchase />}
         />
         <Route path="ecocredits" element={<KeplrRoute component={Dashboard} />}>
           <Route

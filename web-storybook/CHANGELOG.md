@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/regen-network/regen-web/compare/v1.4.6...v1.5.0) (2023-05-09)
+
+### Features
+
+- add gallery project pages ([#1840](https://github.com/regen-network/regen-web/issues/1840)) ([5766cb7](https://github.com/regen-network/regen-web/commit/5766cb7e2b1d91eb8193e5373adc611eda5f8b5e))
+- add SDGs to impact cards ([#1846](https://github.com/regen-network/regen-web/issues/1846)) ([36cab24](https://github.com/regen-network/regen-web/commit/36cab2426c2b2653a090a1758ab684c6a70ae8fe))
+
+### Performance Improvements
+
+- NextJS POC ([#1867](https://github.com/regen-network/regen-web/issues/1867)) ([9a46fad](https://github.com/regen-network/regen-web/commit/9a46fadaf56d5afaceca3f7b89f41c955f4a3475))
+
 # [1.3.0](https://github.com/regen-network/regen-web/compare/v1.2.3...v1.3.0) (2023-04-05)
 
 ### Features

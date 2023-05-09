@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/regen-network/regen-web/compare/v1.4.6...v1.5.0) (2023-05-09)
+
+### Features
+
+- add gallery project pages ([#1840](https://github.com/regen-network/regen-web/issues/1840)) ([5766cb7](https://github.com/regen-network/regen-web/commit/5766cb7e2b1d91eb8193e5373adc611eda5f8b5e))
+- add SDGs to impact cards ([#1846](https://github.com/regen-network/regen-web/issues/1846)) ([36cab24](https://github.com/regen-network/regen-web/commit/36cab2426c2b2653a090a1758ab684c6a70ae8fe))
+- add story section to project pages ([#1869](https://github.com/regen-network/regen-web/issues/1869)) ([1f59b4a](https://github.com/regen-network/regen-web/commit/1f59b4ad8898ff9feeaa68eddf0c840290a7ef1d))
+- documentation table project page ([#1875](https://github.com/regen-network/regen-web/issues/1875)) ([f30ac9d](https://github.com/regen-network/regen-web/commit/f30ac9d83d6e0b70a91fb050b46f697533a42647))
+- hide old gallery photos ([#1870](https://github.com/regen-network/regen-web/issues/1870)) ([084516d](https://github.com/regen-network/regen-web/commit/084516d556ffbc46af6831c5a141385d189ec8a5))
+- link project page admin to profile ([#1886](https://github.com/regen-network/regen-web/issues/1886)) ([7c5bb92](https://github.com/regen-network/regen-web/commit/7c5bb92e1e4b6c620a974f3eafece77c55d81584))
+- Update description form to include story fields ([#1880](https://github.com/regen-network/regen-web/issues/1880)) ([81ec839](https://github.com/regen-network/regen-web/commit/81ec83991bc59fd84e2860208c3ae73c64a5324a))
+- update media form for gallery photos ([#1884](https://github.com/regen-network/regen-web/issues/1884)) ([4f99beb](https://github.com/regen-network/regen-web/commit/4f99beb6c1776e98518cb85f6ad861c0fda66f1e)), closes [#1888](https://github.com/regen-network/regen-web/issues/1888)
+
+### Performance Improvements
+
+- NextJS POC ([#1867](https://github.com/regen-network/regen-web/issues/1867)) ([9a46fad](https://github.com/regen-network/regen-web/commit/9a46fadaf56d5afaceca3f7b89f41c955f4a3475))
+
 # [1.3.0](https://github.com/regen-network/regen-web/compare/v1.2.3...v1.3.0) (2023-04-05)
 
 ### Bug Fixes

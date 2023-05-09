@@ -4,7 +4,6 @@ import Slider from 'react-slick';
 import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { makeStyles } from 'tss-react/mui';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
@@ -15,6 +14,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { EcologicalImpact } from '../../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../../lib/imgSrc';
 import { PROJECT_STANDARD_DEFAULT_VALUE } from './ProjectImpactSection.constants';
+import { useProjectImpactSectionStyles } from './ProjectImpactSection.styles';
 import { getSdgsImages } from './ProjectImpactSection.utils';
 
 interface ProjectImpactProps {
@@ -25,79 +25,12 @@ interface ProjectImpactProps {
   };
 }
 
-const useStyles = makeStyles()((theme: Theme) => ({
-  root: {
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(21.5),
-      paddingBottom: theme.spacing(27.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(17.5),
-      paddingBottom: theme.spacing(20),
-    },
-  },
-  title: {
-    paddingBottom: theme.spacing(7.5),
-  },
-  slider: {
-    margin: theme.spacing(0, -1.75),
-    '& .slick-track': {
-      display: 'flex',
-    },
-    '& .slick-slide': {
-      height: 'inherit',
-      marginRight: 20,
-      '& > div': {
-        height: '100%',
-      },
-    },
-  },
-  swipe: {
-    display: 'flex',
-    marginLeft: theme.spacing(-4),
-    marginRight: theme.spacing(-4),
-    overflowX: 'auto',
-    '&::-webkit-scrollbar': {
-      display: 'none',
-    },
-  },
-  item: {
-    minWidth: theme.spacing(73),
-    [theme.breakpoints.up('sm')]: {
-      margin: theme.spacing(0, 1.875),
-    },
-    [theme.breakpoints.down('sm')]: {
-      margin: theme.spacing(0, 1.875),
-      '& > div': {
-        height: '100%',
-      },
-      '&:first-child': {
-        marginLeft: theme.spacing(4),
-      },
-      '&:last-child': {
-        marginRight: theme.spacing(4),
-      },
-    },
-  },
-  buttons: {
-    paddingTop: theme.spacing(0.25),
-    width: '50%',
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(3.75),
-      paddingBottom: theme.spacing(10),
-    },
-    '& div': {
-      marginLeft: theme.spacing(2.5),
-    },
-  },
-}));
-
 function ProjectImpactSection({
   impact,
   title,
   classes,
 }: ProjectImpactProps): JSX.Element {
-  const { classes: styles, cx } = useStyles();
+  const { classes: styles, cx } = useProjectImpactSectionStyles();
   const theme: Theme = useTheme();
   const isMobile: boolean = useMediaQuery(theme.breakpoints.down('sm'));
   const hasButtons = useMediaQuery(theme.breakpoints.between('sm', 'lg'));
@@ -147,6 +80,7 @@ function ProjectImpactSection({
 
   return (
     <Section
+      visibleOverflow
       classes={{
         root: cx(styles.root, classes?.root),
         title: styles.title,

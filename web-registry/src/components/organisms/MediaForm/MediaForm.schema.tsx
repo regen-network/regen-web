@@ -35,7 +35,7 @@ export const mediaFormSchema = z.object({
         message: MAX_PHOTOS_ERROR_MESSAGE,
       },
     )
-    .refine(galleryPhotos => galleryPhotos?.length !== 2, {
+    .refine(galleryPhotos => (galleryPhotos?.length ?? 0) !== 2, {
       message: MIN_PHOTOS_ERROR_MESSAGE,
     }),
   'regen:storyMedia': z

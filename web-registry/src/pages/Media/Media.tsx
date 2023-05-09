@@ -22,7 +22,10 @@ const Media = (): JSX.Element => {
   });
 
   const initialValues: MediaFormSchemaType = {
-    'regen:previewPhoto': metadata?.['regen:previewPhoto'],
+    'regen:previewPhoto': metadata?.['regen:previewPhoto'] ?? {
+      'schema:url': '',
+      'schema:creditText': '',
+    },
     'regen:galleryPhotos': metadata?.['regen:galleryPhotos'],
     'regen:storyMedia': metadata?.['regen:storyMedia'] ?? {
       '@type': 'schema:VideoObject',

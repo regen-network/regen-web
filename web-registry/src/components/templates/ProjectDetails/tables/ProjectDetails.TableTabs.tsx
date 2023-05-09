@@ -15,7 +15,7 @@ export const ProjectDetailsTableTabs = (
   const tabs = getProjectDetailsTabs(props);
   const theme = useTheme();
 
-  return (
+  return tabs.length > 0 ? (
     <Box
       sx={{
         ...containerStyles,
@@ -47,5 +47,5 @@ export const ProjectDetailsTableTabs = (
         }}
       />
     </Box>
-  );
+  ) : null;
 };

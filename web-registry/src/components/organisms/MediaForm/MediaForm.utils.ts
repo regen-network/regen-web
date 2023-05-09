@@ -23,7 +23,7 @@ export type getHandleDeleteParams = {
   callback?: () => void;
 };
 
-export const gethandleDelete =
+export const getHandleDelete =
   ({ fileNamesToDeleteRef, callback }: getHandleDeleteParams) =>
   async (fileName: string): Promise<void> => {
     fileNamesToDeleteRef.current.push(fileName);

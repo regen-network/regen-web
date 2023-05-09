@@ -22,7 +22,7 @@ import {
   STORY_LABEL,
 } from './MediaForm.constants';
 import { MediaFormSchemaType } from './MediaForm.schema';
-import { gethandleDelete, getHandleUpload } from './MediaForm.utils';
+import { getHandleDelete, getHandleUpload } from './MediaForm.utils';
 import { useMediaFormStyles } from './useMediaFormStyles';
 
 type Props = {
@@ -64,7 +64,7 @@ export const MediaFormStory = ({ fileNamesToDeleteRef, projectId }: Props) => {
     apiServerUrl: apiUri,
     projectPath,
   });
-  const handleDelete = gethandleDelete({
+  const handleDelete = getHandleDelete({
     fileNamesToDeleteRef,
     callback: () => {
       setValue('regen:storyMedia', {

@@ -24,7 +24,7 @@ import {
 } from './MediaForm.constants';
 import { MediaFormSchemaType } from './MediaForm.schema';
 import { MediaBaseErrors, MediaBaseValues } from './MediaForm.types';
-import { gethandleDelete, getHandleUpload } from './MediaForm.utils';
+import { getHandleDelete, getHandleUpload } from './MediaForm.utils';
 import { useMediaFormStyles } from './useMediaFormStyles';
 
 export interface MediaValuesSimple extends MediaBaseValues {
@@ -96,7 +96,7 @@ export const MediaFormPhotos = ({
     apiServerUrl: apiUri,
     projectPath,
   });
-  const handleDelete = gethandleDelete({
+  const handleDelete = getHandleDelete({
     fileNamesToDeleteRef,
     callback: () => {
       setValue('regen:previewPhoto', {
@@ -107,7 +107,7 @@ export const MediaFormPhotos = ({
     },
   });
   const getHandleDeleteWithIndex = (fieldIndex: number) =>
-    gethandleDelete({
+    getHandleDelete({
       fileNamesToDeleteRef,
       callback: () => {
         remove(fieldIndex);

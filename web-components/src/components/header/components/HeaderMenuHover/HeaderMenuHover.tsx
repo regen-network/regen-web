@@ -19,7 +19,10 @@ export interface HeaderMenuItem extends MenuTitle {
 export interface HeaderMenuHoverBase {
   pathname: string;
   linkComponent: React.FC<NavLinkProps>;
-  className?: string;
+  classes?: {
+    root?: string;
+    paper?: string;
+  };
   sx?: SxProps<Theme>;
 }
 
@@ -31,7 +34,7 @@ const HeaderMenuHover: React.FC<HeaderMenuHoverProps> = ({
   item,
   pathname,
   linkComponent,
-  className,
+  classes,
   sx,
 }) => {
   const { classes: styles } = useHeaderMenuHoverStyles();
@@ -39,7 +42,7 @@ const HeaderMenuHover: React.FC<HeaderMenuHoverProps> = ({
   return (
     <MenuItem
       className={cx(
-        className,
+        classes?.root,
         styles.menuItem,
         pathname === item.href && styles.currentMenuItem,
       )}
@@ -49,6 +52,7 @@ const HeaderMenuHover: React.FC<HeaderMenuHoverProps> = ({
         item={item}
         linkComponent={linkComponent}
         pathname={pathname}
+        classes={{ paper: classes?.paper }}
       />
     </MenuItem>
   );

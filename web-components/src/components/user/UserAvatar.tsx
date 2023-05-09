@@ -34,10 +34,10 @@ function getSize(size?: string): Sizes {
       spacing = { xs: 10, sm: 12 };
       break;
     case 'medium':
-      spacing = { xs: 7, sm: 10 };
+      spacing = { xs: 7.5, sm: 7.5 };
       break;
     case 'small':
-      spacing = { xs: 6, sm: 6 };
+      spacing = { xs: 6.5, sm: 6.5 };
       break;
     case 'project':
       spacing = { xs: 8.75, sm: 8.75 };

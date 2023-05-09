@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { MenuList, Paper, Popover } from '@mui/material';
+import cx from 'clsx';
 
 import DropdownIcon from '../icons/DropdownIcon';
 import { useMenuHoverStyles } from './MenuHover.Styles';
@@ -12,6 +13,7 @@ export interface MenuTitle {
 interface Props extends MenuTitle {
   classes?: {
     title?: string;
+    paper?: string;
   };
   children: React.ReactNode;
   textColor?: string;
@@ -65,7 +67,7 @@ const MenuHover = ({
         )}
         {renderTitle && renderTitle()}
       </span>
-      {popoverAnchor.current !== null && (
+      {true && (
         <Popover
           disableRestoreFocus
           id="mouse-over-popover"
@@ -73,7 +75,7 @@ const MenuHover = ({
           classes={{
             paper: styles.popoverContent,
           }}
-          open={openedPopover}
+          open={true}
           anchorEl={popoverAnchor.current}
           anchorOrigin={{
             vertical: 'bottom',
@@ -90,9 +92,10 @@ const MenuHover = ({
           disableScrollLock={true}
           sx={{ position: 'absolute' }}
         >
-          <Paper className={styles.paper} elevation={5}>
+          <Paper className={cx(classes?.paper, styles.paper)} elevation={5}>
             <MenuList
               classes={{ root: styles.text, padding: styles.noOutline }}
+              disablePadding
             >
               {children}
             </MenuList>

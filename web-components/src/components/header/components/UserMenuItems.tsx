@@ -1,19 +1,26 @@
 import React from 'react';
-import { styled, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 
+import OutlinedButton from '../../buttons/OutlinedButton';
 import UserMenuIcon from '../../icons/UserMenuIcon';
-import { Body } from '../../typography';
+import { Subtitle } from '../../typography';
 import UserAvatar from '../../user/UserAvatar';
 import { HeaderDropdownItemProps } from './HeaderDropdownItems';
 import { HeaderMenuHoverBase } from './HeaderMenuHover/HeaderMenuHover';
 import { UserMenuItem } from './UserMenuItem';
+import {
+  UserMenuItemProfile,
+  UserMenuItemProfileProps,
+} from './UserMenuItem.Profile';
+import { useUserMenuItemsStyles } from './UserMenuItems.styles';
 
 interface UserMenuItemsProps extends HeaderMenuHoverBase {
   address: string;
   avatar: string;
   userMenuItems: HeaderDropdownItemProps[];
   disconnect: () => void;
+  profiles: UserMenuItemProfileProps[];
+  addAddress?: () => Promise<void>;
 }
 
 const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
@@ -23,11 +30,16 @@ const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
   pathname,
   linkComponent,
   userMenuItems,
+  profiles,
+  addAddress,
 }) => {
+  const styles = useUserMenuItemsStyles();
+
   return (
     <>
       <UserMenuItem
         sx={{ mr: 2.5 }}
+        classes={{ paper: styles.paper }}
         pathname={pathname}
         linkComponent={linkComponent}
         item={{
@@ -44,12 +56,27 @@ const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
               {address}
             </Box>
           ),
-          // dropdownItems: userMenuItems,
           extras: (
-            <Box sx={{ mx: -3.5 }}>
-              <Body size="xs" onClick={disconnect} sx={{ cursor: 'pointer' }}>
+            <Box>
+              {profiles.map(p => (
+                <UserMenuItemProfile {...p} />
+              ))}
+              {addAddress && (
+                <OutlinedButton
+                  onClick={addAddress}
+                  sx={{ py: 12, px: { xs: 6.25, sm: 15 }, mb: 2.5 }}
+                >
+                  + add address
+                </OutlinedButton>
+              )}
+              <Subtitle
+                size="sm"
+                color="info.dark"
+                onClick={disconnect}
+                sx={{ cursor: 'pointer' }}
+              >
                 Log out
-              </Body>
+              </Subtitle>
             </Box>
           ),
         }}

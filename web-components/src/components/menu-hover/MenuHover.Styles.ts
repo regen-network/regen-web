@@ -32,7 +32,7 @@ export const useMenuHoverStyles = makeStyles()((theme: Theme) => ({
   paper: {
     borderRadius: '2px',
     border: `1px solid ${theme.palette.grey[400]}`,
-    padding: theme.spacing(5, 9),
+    padding: theme.spacing(6.25),
   },
   icon: {
     marginLeft: theme.spacing(1),

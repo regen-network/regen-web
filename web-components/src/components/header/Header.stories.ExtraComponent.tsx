@@ -26,6 +26,20 @@ export const ExtraComponent = (): JSX.Element => {
           pathname={''}
           linkComponent={NavLink}
           userMenuItems={userMenuItems}
+          addAddress={async () => {}}
+          profiles={[
+            {
+              name: 'Mary Smith',
+              address: 'regen189df...dklads',
+              avatar: '/illustrations/frog.jpg',
+              selected: true,
+            },
+            {
+              name: 'Unnamed',
+              address: 'regen91kd01...120d',
+              avatar: '/illustrations/frog.jpg',
+            },
+          ]}
         />
       )}
       {!address && (
@@ -33,7 +47,7 @@ export const ExtraComponent = (): JSX.Element => {
           size="small"
           onClick={() => setAddress(REGEN_TEST_ADDRESS)}
         >
-          {'Connect'}
+          {'login'}
         </ContainedButton>
       )}
     </Box>

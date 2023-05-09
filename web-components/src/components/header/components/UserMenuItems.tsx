@@ -1,15 +1,12 @@
 import React from 'react';
 import { styled, Typography } from '@mui/material';
-import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 
 import UserMenuIcon from '../../icons/UserMenuIcon';
 import { Body } from '../../typography';
+import UserAvatar from '../../user/UserAvatar';
 import { HeaderDropdownItemProps } from './HeaderDropdownItems';
-import {
-  HeaderMenuHover,
-  HeaderMenuHoverBase,
-} from './HeaderMenuHover/HeaderMenuHover';
+import { HeaderMenuHoverBase } from './HeaderMenuHover/HeaderMenuHover';
 import { UserMenuItem } from './UserMenuItem';
 
 interface UserMenuItemsProps extends HeaderMenuHoverBase {
@@ -36,12 +33,10 @@ const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
         item={{
           renderTitle: () => (
             <Box display="flex" alignItems="center" sx={{ fontSize: 14 }}>
-              <Avatar
+              <UserAvatar
+                size="small"
                 sx={{
-                  height: 24,
-                  width: 24,
                   mr: 2.75,
-                  border: theme => `1px solid ${theme.palette.grey[100]}`,
                 }}
                 alt="default avatar"
                 src={avatar}

@@ -1,3 +1,3 @@
-export type { MediaFormValues } from './MediaForm';
 export { MediaForm } from './MediaForm';
-export type { MediaValuesSimple } from './MediaFormSimple';
+export type { MediaFormValues } from './MediaForm.types';
+export type { MediaValuesSimple } from './MediaFormPhotos';

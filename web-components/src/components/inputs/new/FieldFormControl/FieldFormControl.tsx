@@ -13,7 +13,7 @@ export interface DefaultStyleProps {
   forceDefaultStyle?: boolean;
 }
 
-interface Props extends DefaultStyleProps {
+export interface FieldFormControlProps extends DefaultStyleProps {
   children: ReactNode;
   className?: string;
   sx?: SxProps<Theme>;
@@ -42,8 +42,12 @@ export default function FieldFormControl({
   forceDefaultStyle = false,
   error = false,
   helperText,
-}: Props): JSX.Element {
-  const { classes: styles, cx } = useFieldFormControlStyles();
+}: FieldFormControlProps): JSX.Element {
+  const { classes: styles, cx } = useFieldFormControlStyles({
+    disabled,
+    description,
+    error,
+  });
   const defaultClasses = [styles.default, className];
   const rootClasses = defaultStyle
     ? forceDefaultStyle

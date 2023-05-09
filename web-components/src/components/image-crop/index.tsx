@@ -7,6 +7,7 @@ import { makeStyles } from 'tss-react/mui';
 
 import ContainedButton from '../buttons/ContainedButton';
 import { getCroppedImg } from './canvas-utils';
+import { APPLY, CANCEL, UPDATE } from './ImageCrop.constants';
 
 import 'react-image-crop/dist/ReactCrop.css';
 
@@ -16,6 +17,9 @@ export interface ImageCropProps {
   onCropSubmit: (blob: HTMLImageElement) => Promise<void>;
   onCancel: () => void;
   fixedCrop: Partial<Crop>;
+  isCropSubmitDisabled?: boolean;
+  isIgnoreCrop?: boolean;
+  children?: React.ReactNode;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -61,6 +65,9 @@ export default function ImageCrop({
   onCropSubmit,
   onCancel,
   fixedCrop,
+  isCropSubmitDisabled,
+  isIgnoreCrop = false,
+  children,
 }: ImageCropProps): JSX.Element {
   const { classes } = useStyles();
   const imgRef = useRef<any>(null);
@@ -103,6 +110,7 @@ export default function ImageCrop({
       const height = isLandscape ? 90 : (imgWidth / aspect / imgHeight) * 90;
       const y = (100 - height) / 2;
       const x = (100 - width) / 2;
+
       const percentCrop: Crop = {
         aspect,
         unit: '%',
@@ -114,8 +122,8 @@ export default function ImageCrop({
 
       setCrop(percentCrop);
 
-      const pxWidth = isPortrait ? imgWidth * 0.9 : imgHeight * 0.9;
-      const pxHeight = isPortrait ? imgHeight * 0.9 : imgWidth * 0.9;
+      const pxWidth = imgWidth * (width / 100);
+      const pxHeight = imgHeight * (height / 100);
       const pxX = (imgWidth - pxWidth) / 2;
       const pxY = (imgHeight - pxHeight) / 2;
       const pxCrop: Crop = {
@@ -147,16 +155,22 @@ export default function ImageCrop({
           imageStyle={{ maxHeight: mobileMatches ? 380 : 500 }}
         />
       </div>
+      {children}
       <div className={classes.controls}>
-        <Button onClick={onCancel} className={classes.cancelButton}>
-          Cancel
-        </Button>
+        {!isIgnoreCrop && (
+          <Button onClick={onCancel} className={classes.cancelButton}>
+            {CANCEL}
+          </Button>
+        )}
         <ContainedButton
-          onClick={showCroppedImage}
+          onClick={isIgnoreCrop ? onCancel : showCroppedImage}
           className={classes.button}
-          disabled={!completedCrop || loading}
+          disabled={
+            ((!completedCrop || loading) && !isIgnoreCrop) ||
+            isCropSubmitDisabled
+          }
         >
-          Apply
+          {isIgnoreCrop ? UPDATE : APPLY}
         </ContainedButton>
       </div>
     </div>

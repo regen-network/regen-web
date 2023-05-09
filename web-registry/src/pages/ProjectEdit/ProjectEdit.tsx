@@ -1,4 +1,10 @@
-import { createContext, useContext, useRef, useState } from 'react';
+import {
+  createContext,
+  MutableRefObject,
+  useContext,
+  useRef,
+  useState,
+} from 'react';
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
@@ -42,7 +48,7 @@ type ContextType = {
   onChainProject?: ProjectInfo;
   projectEditSubmit: UseProjectEditSubmitParams;
   formRef: FormRef<Values>;
-  isDirtyRef: { current: boolean };
+  isDirtyRef: MutableRefObject<boolean>;
 };
 
 const ProjectEditContext = createContext<ContextType>({
@@ -131,7 +137,6 @@ function ProjectEdit(): JSX.Element {
 
   // For formik based forms
   const formRef = useRef<FormikProps<FormikValues>>(null);
-
   // For react-hook-form based forms
   const isDirtyRef = useRef<boolean>(false);
   if (isNotAdmin) {

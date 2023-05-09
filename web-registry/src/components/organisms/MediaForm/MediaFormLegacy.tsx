@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import {
   Box,
@@ -20,7 +19,8 @@ import { VideoInput } from 'web-components/lib/components/inputs/VideoInput';
 import { UrlType } from 'lib/rdf/types';
 
 import { apiUri } from '../../../lib/apiUri';
-import { cropAspect, MediaBaseErrors, MediaBaseValues } from './MediaForm';
+import { cropAspectMediaForm } from './MediaForm.constants';
+import { MediaBaseErrors, MediaBaseValues } from './MediaForm.types';
 import { useMediaFormStyles } from './useMediaFormStyles';
 
 export interface MediaValuesLegacy extends MediaBaseValues {
@@ -55,7 +55,7 @@ const MediaFormLegacy = (): JSX.Element => {
   const imgFieldProps: Partial<ImageUploadProps> = {
     isDrop: true,
     apiServerUrl: apiUri,
-    fixedCrop: cropAspect,
+    fixedCrop: cropAspectMediaForm,
     projectId: projectId,
   };
 

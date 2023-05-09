@@ -13,7 +13,7 @@ export function ProjectStorySection({
   const { storyMedia, storyTitle, story } =
     parseProjectPageMetadata(projectPageMetadata);
 
-  return storyMedia || (storyTitle && story) ? (
+  return storyMedia?.['schema:url'] || (storyTitle && story) ? (
     <Section
       sx={{
         root: {

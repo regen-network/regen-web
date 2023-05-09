@@ -182,10 +182,10 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
         onEditClick={() => navigate(`${editPath}/media`)}
       >
         {metadata?.['regen:previewPhoto'] && (
-          <Photo src={metadata?.['regen:previewPhoto']} />
+          <Photo src={metadata?.['regen:previewPhoto']['schema:url']} />
         )}
         {metadata?.['regen:galleryPhotos']?.map(
-          photo => photo && <Photo src={photo} />,
+          photo => photo && <Photo src={photo['schema:url']} />,
         )}
         {/* TODO: display story image or video https://github.com/regen-network/regen-registry/issues/1615 */}
         {/* {metadata?.['regen:storyMedia'] && (

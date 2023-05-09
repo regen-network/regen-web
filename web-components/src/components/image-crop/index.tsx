@@ -72,10 +72,12 @@ export default function ImageCrop({
   const { classes } = useStyles();
   const imgRef = useRef<any>(null);
   const [crop, setCrop] = useState<Partial<Crop>>(fixedCrop);
+  console.log('🚀 ~ file: index.tsx:75 ~ crop:', crop);
   const [loading, setLoading] = useState<boolean>(false);
   const [completedCrop, setCompletedCrop] = useState<Crop | undefined>(
     undefined,
   );
+  console.log('🚀 ~ file: index.tsx:80 ~ completedCrop:', completedCrop);
   const mobileMatches = useMediaQuery('(max-width:834px)');
 
   const showCroppedImage = useCallback(async () => {

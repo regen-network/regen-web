@@ -58,6 +58,7 @@ export const UNANCHORED_PROJECT_KEYS = [
   'regen:storyTitle',
   'regen:previewPhoto',
   'regen:galleryPhotos',
+  'regen:storyMedia',
   'regen:videoURL',
   'schema:creditText',
 ];

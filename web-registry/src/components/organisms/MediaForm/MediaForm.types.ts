@@ -1,6 +1,6 @@
 import { ProjectStoryMedia } from 'lib/db/types/json-ld';
 
-import { MediaErrorsSimple, MediaValuesSimple } from './MediaFormSimple';
+import { MediaErrorsSimple, MediaValuesSimple } from './MediaFormPhotos';
 
 export interface MediaBaseValues {
   'regen:previewPhoto'?: string;

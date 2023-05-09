@@ -16,7 +16,8 @@ import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
 import { DEFAULT_URL } from './MediaForm.constants';
 import { mediaFormSchema, MediaFormSchemaType } from './MediaForm.schema';
-import { MediaFormSimple } from './MediaFormSimple';
+import { MediaFormPhotos } from './MediaFormPhotos';
+import { MediaFormStory } from './MediaFormStory';
 
 interface MediaFormProps {
   submit: ({ values }: { values: MediaFormSchemaType }) => Promise<void>;
@@ -50,49 +51,56 @@ export const MediaForm = ({
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
   return (
-    <OnBoardingCard>
-      <Form
-        form={form}
-        onSubmit={async data => {
-          try {
-            // Remove the placeholder input
-            const filteredData = {
-              'regen:previewPhoto': data['regen:previewPhoto'],
-              'regen:galleryPhotos': data['regen:galleryPhotos']?.filter(
-                photo => photo['schema:url'] !== DEFAULT_URL,
-              ),
-            };
-            // Submit
-            await submit({ values: filteredData });
-            // Delete any images that were removed on S3
-            await Promise.all(
-              fileNamesToDeleteRef?.current.map(
-                async fileName =>
-                  await deleteImage(projectId ?? '', fileName, apiServerUrl),
-              ),
-            );
-            fileNamesToDeleteRef.current = [];
-            // Save callback
-            if (isEdit && confirmSave) confirmSave();
-            // Reset dirty state
-            isDirtyRef.current = false;
-          } catch (e) {
-            setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
-          }
-        }}
-      >
-        <MediaFormSimple
+    <Form
+      form={form}
+      onSubmit={async data => {
+        try {
+          // Remove the placeholder input
+          const filteredData = {
+            'regen:previewPhoto': data['regen:previewPhoto'],
+            'regen:galleryPhotos': data['regen:galleryPhotos']?.filter(
+              photo => photo['schema:url'] !== DEFAULT_URL,
+            ),
+            'regen:storyMedia': data?.['regen:storyMedia'],
+          };
+          // Submit
+          await submit({ values: filteredData });
+          // Delete any images that were removed on S3
+          await Promise.all(
+            fileNamesToDeleteRef?.current.map(
+              async fileName =>
+                await deleteImage(projectId ?? '', fileName, apiServerUrl),
+            ),
+          );
+          fileNamesToDeleteRef.current = [];
+          // Save callback
+          if (isEdit && confirmSave) confirmSave();
+          // Reset dirty state
+          isDirtyRef.current = false;
+        } catch (e) {
+          setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
+        }
+      }}
+    >
+      <OnBoardingCard>
+        <MediaFormPhotos
           projectId={projectId}
           fileNamesToDeleteRef={fileNamesToDeleteRef}
         />
-        <ProjectPageFooter
-          onNext={onNext}
-          onPrev={onPrev}
-          isValid={isValid}
-          isSubmitting={isSubmitting}
-          dirty={isDirty}
+      </OnBoardingCard>
+      <OnBoardingCard>
+        <MediaFormStory
+          projectId={projectId}
+          fileNamesToDeleteRef={fileNamesToDeleteRef}
         />
-      </Form>
-    </OnBoardingCard>
+      </OnBoardingCard>
+      <ProjectPageFooter
+        onNext={onNext}
+        onPrev={onPrev}
+        isValid={isValid}
+        isSubmitting={isSubmitting}
+        dirty={isDirty}
+      />
+    </Form>
   );
 };

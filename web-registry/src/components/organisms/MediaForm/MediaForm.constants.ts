@@ -3,6 +3,7 @@ export const cropAspectMediaForm = { aspect: 322 / 211 }; // px values pulled fr
 export const MAIN_PHOTO = 'Main photo';
 export const MAIN_PHOTO_DESCRIPTION =
   'Choose the photo that will show at the top of the project page and in project preview cards.';
+export const STORY_PHOTO = 'Story photo';
 export const GALLERY_PHOTOS = 'Gallery photos';
 export const GALLERY_PHOTOS_DESCRIPTION =
   'Choose 2-10 photos for the photo gallery.';
@@ -13,3 +14,5 @@ export const DEFAULT_URL = 'default';
 export const MIN_PHOTOS_ERROR_MESSAGE = `You must add at least ${GALLERY_PHOTOS_MIN} photos to the photo gallery.`;
 export const MAX_PHOTOS_ERROR_MESSAGE = `You must add at most ${GALLERY_PHOTOS_MAX} photos to the photo gallery.`;
 export const CAPTION_LIMIT_ERROR_MESSAGE = `The caption message must be under ${CAPTION_CHART_LIMIT} characters.`;
+export const STORY_LABEL = 'Story video or photo';
+export const IMAGE_UPLOAD_BUTTON_LABEL = '+ Add Photo';

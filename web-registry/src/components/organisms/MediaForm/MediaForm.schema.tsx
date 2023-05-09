@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+import { ProjectStoryMediaType } from 'lib/db/types/json-ld';
+
 import {
   CAPTION_CHART_LIMIT,
   CAPTION_LIMIT_ERROR_MESSAGE,
@@ -36,6 +38,13 @@ export const mediaFormSchema = z.object({
     .refine(galleryPhotos => galleryPhotos?.length !== 2, {
       message: MIN_PHOTOS_ERROR_MESSAGE,
     }),
+  'regen:storyMedia': z
+    .object({
+      '@type': z.custom<ProjectStoryMediaType>(),
+      'schema:url': z.union([z.literal(''), z.string().trim().url()]),
+      'schema:creditText': z.string().optional(),
+    })
+    .optional(),
 });
 
 export type MediaFormSchemaType = z.infer<typeof mediaFormSchema>;

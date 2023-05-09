@@ -18,6 +18,7 @@ import {
   DEFAULT_URL,
   GALLERY_PHOTOS,
   GALLERY_PHOTOS_DESCRIPTION,
+  IMAGE_UPLOAD_BUTTON_LABEL,
   MAIN_PHOTO,
   MAIN_PHOTO_DESCRIPTION,
 } from './MediaForm.constants';
@@ -42,7 +43,7 @@ type Props = {
 
 /** Simplified media form content for new project-page flow */
 
-const MediaFormSimple = ({
+export const MediaFormPhotos = ({
   projectId,
   fileNamesToDeleteRef,
 }: Props): JSX.Element => {
@@ -56,7 +57,7 @@ const MediaFormSimple = ({
   const { isDirtyRef } = useProjectEditContext();
   const imageDropCommonProps: Partial<ImageDropProps> = {
     classes: { main: classes.fullSizeMedia },
-    buttonText: '+ Add Photo',
+    buttonText: IMAGE_UPLOAD_BUTTON_LABEL,
     fixedCrop: cropAspectMediaForm,
   };
 
@@ -229,5 +230,3 @@ const MediaFormSimple = ({
     </>
   );
 };
-
-export { MediaFormSimple };

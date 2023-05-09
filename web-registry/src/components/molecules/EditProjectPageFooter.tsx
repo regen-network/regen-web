@@ -59,7 +59,6 @@ const EditProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
             className={styles.btn}
             onClick={onSave}
             disabled={saveDisabled}
-            type="submit"
           >
             <SaveIcon className={styles.saveIcon} />
             {saveText}

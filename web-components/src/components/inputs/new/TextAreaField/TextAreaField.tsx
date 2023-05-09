@@ -18,8 +18,6 @@ interface TextareaFieldProps extends InputProps, DefaultStyleProps {
   error?: boolean;
   helperText?: string;
   sx?: SxProps<Theme>;
-  error?: boolean;
-  helperText?: string;
 }
 
 export const TextAreaField = forwardRef<HTMLInputElement, TextareaFieldProps>(
@@ -54,8 +52,6 @@ export const TextAreaField = forwardRef<HTMLInputElement, TextareaFieldProps>(
       error={error}
       helperText={helperText}
       sx={sx}
-      error={error}
-      helperText={helperText}
     >
       <>
         <Input

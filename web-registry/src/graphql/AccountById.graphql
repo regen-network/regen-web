@@ -1,4 +1,4 @@
-query accountById($id: UUID!){
+query partiesByAccountId($id: UUID!){
   accountById(id: $id) {
     partiesByAccountId {
       nodes {

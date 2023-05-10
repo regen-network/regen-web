@@ -4570,12 +4570,12 @@ export enum WalletsOrderBy {
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
 
-export type AccountByIdQueryVariables = Exact<{
+export type PartiesByAccountIdQueryVariables = Exact<{
   id: Scalars['UUID'];
 }>;
 
 
-export type AccountByIdQuery = (
+export type PartiesByAccountIdQuery = (
   { __typename?: 'Query' }
   & { accountById?: Maybe<(
     { __typename?: 'Account' }
@@ -5096,8 +5096,8 @@ export const ProjectFieldsFragmentDoc = gql`
   }
 }
     ${PartyFieldsFragmentDoc}`;
-export const AccountByIdDocument = gql`
-    query accountById($id: UUID!) {
+export const PartiesByAccountIdDocument = gql`
+    query partiesByAccountId($id: UUID!) {
   accountById(id: $id) {
     partiesByAccountId {
       nodes {
@@ -5114,32 +5114,32 @@ export const AccountByIdDocument = gql`
     `;
 
 /**
- * __useAccountByIdQuery__
+ * __usePartiesByAccountIdQuery__
  *
- * To run a query within a React component, call `useAccountByIdQuery` and pass it any options that fit your needs.
- * When your component renders, `useAccountByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `usePartiesByAccountIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePartiesByAccountIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useAccountByIdQuery({
+ * const { data, loading, error } = usePartiesByAccountIdQuery({
  *   variables: {
  *      id: // value for 'id'
  *   },
  * });
  */
-export function useAccountByIdQuery(baseOptions: Apollo.QueryHookOptions<AccountByIdQuery, AccountByIdQueryVariables>) {
+export function usePartiesByAccountIdQuery(baseOptions: Apollo.QueryHookOptions<PartiesByAccountIdQuery, PartiesByAccountIdQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AccountByIdQuery, AccountByIdQueryVariables>(AccountByIdDocument, options);
+        return Apollo.useQuery<PartiesByAccountIdQuery, PartiesByAccountIdQueryVariables>(PartiesByAccountIdDocument, options);
       }
-export function useAccountByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AccountByIdQuery, AccountByIdQueryVariables>) {
+export function usePartiesByAccountIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PartiesByAccountIdQuery, PartiesByAccountIdQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AccountByIdQuery, AccountByIdQueryVariables>(AccountByIdDocument, options);
+          return Apollo.useLazyQuery<PartiesByAccountIdQuery, PartiesByAccountIdQueryVariables>(PartiesByAccountIdDocument, options);
         }
-export type AccountByIdQueryHookResult = ReturnType<typeof useAccountByIdQuery>;
-export type AccountByIdLazyQueryHookResult = ReturnType<typeof useAccountByIdLazyQuery>;
-export type AccountByIdQueryResult = Apollo.QueryResult<AccountByIdQuery, AccountByIdQueryVariables>;
+export type PartiesByAccountIdQueryHookResult = ReturnType<typeof usePartiesByAccountIdQuery>;
+export type PartiesByAccountIdLazyQueryHookResult = ReturnType<typeof usePartiesByAccountIdLazyQuery>;
+export type PartiesByAccountIdQueryResult = Apollo.QueryResult<PartiesByAccountIdQuery, PartiesByAccountIdQueryVariables>;
 export const AllCreditClassesDocument = gql`
     query AllCreditClasses {
   allCreditClasses {

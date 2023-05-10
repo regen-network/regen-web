@@ -6,14 +6,14 @@ import { Body, Subtitle } from '../../typography';
 import UserAvatar from '../../user/UserAvatar';
 
 export type UserMenuItemProfileProps = {
-  avatar: string;
+  profileImage: string;
   name: string;
   address: string;
   selected?: boolean;
 };
 
 const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
-  avatar,
+  profileImage,
   name,
   address,
   selected = false,
@@ -29,7 +29,7 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
     >
       <Grid container>
         <Grid item mr={3} position="relative">
-          <UserAvatar size="medium" src={avatar} />
+          <UserAvatar size="medium" src={profileImage} />
           {selected && (
             <Box
               sx={{

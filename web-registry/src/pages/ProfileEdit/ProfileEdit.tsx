@@ -15,6 +15,7 @@ import { Title } from 'web-components/lib/components/typography';
 import { useUpdatePartyByIdMutation } from 'generated/graphql';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
+import { getPartiesByAccountIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getPartiesByAccountIdById/getPartiesByAccountIdQuery.utils';
 import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -38,7 +39,7 @@ import {
 
 export const ProfileEdit = () => {
   const setBannerTextAtom = useSetAtom(bannerTextAtom);
-  const { wallet, isConnected } = useWallet();
+  const { wallet, isConnected, accountId } = useWallet();
   const [updatePartyById] = useUpdatePartyByIdMutation();
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -106,13 +107,14 @@ export const ProfileEdit = () => {
     [party, updatePartyById],
   );
 
-  const refreshProfileData = useCallback(
-    () =>
-      reactQueryClient.invalidateQueries({
-        queryKey: partyByAddrQuery.queryKey,
-      }),
-    [partyByAddrQuery, reactQueryClient],
-  );
+  const refreshProfileData = useCallback(async () => {
+    await reactQueryClient.invalidateQueries({
+      queryKey: partyByAddrQuery.queryKey,
+    });
+    await reactQueryClient.invalidateQueries({
+      queryKey: getPartiesByAccountIdQueryKey({ id: accountId }),
+    });
+  }, [accountId, partyByAddrQuery.queryKey, reactQueryClient]);
 
   const onSuccess = useCallback(() => {
     setBannerTextAtom(PROFILE_SAVED);

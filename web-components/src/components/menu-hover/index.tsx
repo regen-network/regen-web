@@ -67,7 +67,7 @@ const MenuHover = ({
         )}
         {renderTitle && renderTitle()}
       </span>
-      {true && (
+      {popoverAnchor.current && (
         <Popover
           disableRestoreFocus
           id="mouse-over-popover"
@@ -75,7 +75,7 @@ const MenuHover = ({
           classes={{
             paper: styles.popoverContent,
           }}
-          open={true}
+          open={openedPopover}
           anchorEl={popoverAnchor.current}
           anchorOrigin={{
             vertical: 'bottom',

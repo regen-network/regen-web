@@ -24,6 +24,7 @@ import { useDisconnect } from './hooks/useDisconnect';
 import { useLogin } from './hooks/useLogin';
 import { useLogout } from './hooks/useLogout';
 import { useOnAccountChange } from './hooks/useOnAccountChange';
+import { useOnAddAddress } from './hooks/useOnAddAddress';
 import { useSignArbitrary } from './hooks/useSignArbitrary';
 import { useWalletConnectCallback } from './hooks/useWalletConnectCallback';
 import { useWalletConnectFinalize } from './hooks/useWalletConnectFinalize';
@@ -62,6 +63,7 @@ export type WalletContextType = {
   loaded: boolean;
   connect?: (params: ConnectParams) => Promise<void>;
   disconnect?: () => void;
+  onAddAddress?: () => Promise<void>;
   connectionType?: string;
   error?: unknown;
   walletConnectUri?: string;
@@ -130,6 +132,15 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   });
 
   const addAddress = useAddAddress({ signArbitrary, setError, setWallet });
+  const onAddAddress = useOnAddAddress({
+    connectWallet,
+    wallet,
+    keplrMobileWeb,
+    walletConfigRef,
+    walletConnect,
+    accountId,
+    addAddress,
+  });
 
   useAutoConnect({
     connectWallet,
@@ -182,6 +193,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         loaded: loaded && !isFetching,
         connect,
         disconnect,
+        onAddAddress,
         connectionType,
         error,
         walletConnectUri,

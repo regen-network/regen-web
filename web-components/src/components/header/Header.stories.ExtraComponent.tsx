@@ -31,13 +31,13 @@ export const ExtraComponent = (): JSX.Element => {
             {
               name: 'Mary Smith',
               address: 'regen189df...dklads',
-              avatar: '/illustrations/frog.jpg',
+              profileImage: '/illustrations/frog.jpg',
               selected: true,
             },
             {
               name: 'Unnamed',
               address: 'regen91kd01...120d',
-              avatar: '/illustrations/frog.jpg',
+              profileImage: '/illustrations/frog.jpg',
             },
           ]}
         />

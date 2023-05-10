@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.1](https://github.com/regen-network/regen-web/compare/v1.5.0...v1.5.1) (2023-05-10)
+
+### Bug Fixes
+
+- missing images on EcologicalCreditCard ([94e58ab](https://github.com/regen-network/regen-web/commit/94e58ab5502898846bd96e4d8e5936aab3baf1e6))
+
 # [1.5.0](https://github.com/regen-network/regen-web/compare/v1.4.6...v1.5.0) (2023-05-09)
 
 ### Bug Fixes

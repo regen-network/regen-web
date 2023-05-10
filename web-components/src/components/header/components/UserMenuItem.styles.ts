@@ -6,6 +6,8 @@ export const useUserMenuItemStyles = makeStyles(theme => ({
     borderRadius: '2px',
     border: `1px solid ${theme.palette.grey[100]}`,
     position: 'relative',
+    backgroundColor: `${theme.palette.primary.main} !important`,
+    color: `${theme.palette.primary.contrastText} !important`,
     '&:hover': {
       '&:after': {
         background: theme.palette.secondary.main,

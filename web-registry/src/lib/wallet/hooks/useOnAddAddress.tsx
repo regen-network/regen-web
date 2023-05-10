@@ -23,11 +23,9 @@ import { Wallet } from '../wallet';
 import { getWallet } from '../wallet.utils';
 import { WalletConfig } from '../walletsConfig/walletsConfig.types';
 import { AddAddressParams } from './useAddAddress';
-import { ConnectWalletType } from './useConnectWallet';
 
 type Props = {
   wallet: Wallet;
-  connectWallet: ConnectWalletType;
   walletConfigRef: MutableRefObject<WalletConfig | undefined>;
   walletConnect?: WalletConnect;
   accountId?: string;
@@ -39,7 +37,6 @@ type OnAddAddressType = () => Promise<void>;
 // This hook returns a callback meant to be called by the UI (ie: add address button)
 export const useOnAddAddress = ({
   wallet,
-  connectWallet,
   walletConfigRef,
   walletConnect,
   accountId,
@@ -96,6 +93,7 @@ export const useOnAddAddress = ({
                   walletConfig: walletConfigRef.current,
                   walletConnect,
                   wallet,
+                  accountId,
                   onSuccess: () =>
                     setAddWalletModalRemoveAtom(
                       atom => void (atom.open = false),
@@ -114,6 +112,7 @@ export const useOnAddAddress = ({
             walletConfig: walletConfigRef.current,
             walletConnect,
             wallet,
+            accountId,
             onSuccess: () =>
               setAddWalletModalConnectAtom(atom => void (atom.open = false)),
           });

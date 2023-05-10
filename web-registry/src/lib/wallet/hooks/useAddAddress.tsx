@@ -4,6 +4,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { UseStateSetter } from 'types/react/use-state';
 import { apiUri } from 'lib/apiUri';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
+import { getPartiesByAccountIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getPartiesByAccountIdById/getPartiesByAccountIdQuery.utils';
 import { getPartyByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery.utils';
 import { LoginParams, SignArbitraryType, Wallet } from 'lib/wallet/wallet';
 
@@ -17,6 +18,7 @@ type Params = {
 };
 
 export interface AddAddressParams extends LoginParams {
+  accountId?: string;
   onSuccess?: () => void;
 }
 
@@ -33,6 +35,7 @@ export const useAddAddress = ({
       walletConfig,
       walletConnect,
       wallet,
+      accountId,
       onSuccess,
     }: AddAddressParams): Promise<void> => {
       try {
@@ -76,6 +79,9 @@ export const useAddAddress = ({
               queryKey: getPartyByAddrQueryKey({
                 addr: newWallet.address,
               }),
+            });
+            await reactQueryClient.invalidateQueries({
+              queryKey: getPartiesByAccountIdQueryKey({ id: accountId }),
             });
 
             if (onSuccess) onSuccess();

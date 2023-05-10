@@ -8,6 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import WalletConnect from '@walletconnect/client';
 import { useSetAtom } from 'jotai';
 
+import { UseStateSetter } from 'types/react/use-state';
 import {
   addWalletModalConnectAtom,
   addWalletModalRemoveAtom,
@@ -32,6 +33,7 @@ type Props = {
   walletConnect?: WalletConnect;
   accountId?: string;
   addAddress: (params: AddAddressParams) => Promise<void>;
+  setAccountChanging: UseStateSetter<boolean>;
 };
 
 export const useOnAccountChange = ({
@@ -42,6 +44,7 @@ export const useOnAccountChange = ({
   walletConnect,
   accountId,
   addAddress,
+  setAccountChanging,
 }: Props): void => {
   const [newWallet, setNewWallet] = useState<Wallet | undefined>();
   const graphqlClient =
@@ -71,6 +74,7 @@ export const useOnAccountChange = ({
         if (keplrMobileWeb) {
           connectWallet({ walletType: WalletType.Keplr, doLogin: false });
         } else {
+          setAccountChanging(true);
           const walletClient = await walletConfigRef.current?.getClient({
             chainInfo,
             walletConnect,
@@ -90,52 +94,76 @@ export const useOnAccountChange = ({
     return () => {
       window.removeEventListener('keplr_keystorechange', listener);
     };
-  }, [wallet, connectWallet, keplrMobileWeb, walletConfigRef, walletConnect]);
+  }, [
+    wallet,
+    connectWallet,
+    keplrMobileWeb,
+    walletConfigRef,
+    walletConnect,
+    setAccountChanging,
+  ]);
 
   useEffect(() => {
-    const newAccountId = partyByAddr?.walletByAddr?.partyByWalletId?.accountId;
-    if (!!newWallet && !isFetching && newWallet.address !== wallet?.address) {
-      const partyInfo = {
-        addr: newWallet.shortAddress,
-        name: party?.name ? party?.name : DEFAULT_NAME,
-        profileImage: party?.image ? party?.image : defaultAvatar,
-      };
+    const onAccountChange = async (): Promise<void> => {
+      const newAccountId =
+        partyByAddr?.walletByAddr?.partyByWalletId?.accountId;
+      if (!!newWallet && !isFetching && newWallet.address !== wallet?.address) {
+        const partyInfo = {
+          addr: newWallet.shortAddress,
+          name: party?.name ? party?.name : DEFAULT_NAME,
+          profileImage: party?.image ? party?.image : defaultAvatar,
+        };
 
-      if (!!newAccountId) {
-        if (newAccountId === accountId) {
-          // the new address is part of the current user account => we just auto-connect
-          connectWallet({ walletType: WalletType.Keplr, doLogin: false });
+        if (!!newAccountId) {
+          if (newAccountId === accountId) {
+            // the new address is part of the current user account => we just auto-connect
+            await connectWallet({
+              walletType: WalletType.Keplr,
+              doLogin: false,
+            });
+            setAccountChanging(false);
+          } else {
+            // part of another account => we display a popup so the user can choose to rm the address from the other account and add it to his/her account
+            setAddWalletModalRemoveAtom(atom => {
+              atom.open = true;
+              atom.partyInfo = partyInfo;
+              atom.onClick = () => {
+                addAddress({
+                  walletConfig: walletConfigRef.current,
+                  walletConnect,
+                  wallet,
+                  accountId,
+                  onSuccess: () => {
+                    setAddWalletModalRemoveAtom(
+                      atom => void (atom.open = false),
+                    );
+                    setAccountChanging(false);
+                  },
+                });
+              };
+            });
+          }
         } else {
-          // part of another account => we display a popup so the user can choose to rm the address from the other account and add it to his/her account
-          setAddWalletModalRemoveAtom(atom => {
+          // not part of any account yet => we trigger the add address flow
+          setAddWalletModalConnectAtom(atom => {
             atom.open = true;
             atom.partyInfo = partyInfo;
-            atom.onClick = () => {
-              addAddress({
-                walletConfig: walletConfigRef.current,
-                walletConnect,
-                wallet,
-                onSuccess: () =>
-                  setAddWalletModalRemoveAtom(atom => void (atom.open = false)),
-              });
-            };
+          });
+          await addAddress({
+            walletConfig: walletConfigRef.current,
+            walletConnect,
+            wallet,
+            accountId,
+            onSuccess: () => {
+              setAddWalletModalConnectAtom(atom => void (atom.open = false));
+              setAccountChanging(false);
+            },
           });
         }
-      } else {
-        // not part of any account yet => we trigger the add address flow
-        setAddWalletModalConnectAtom(atom => {
-          atom.open = true;
-          atom.partyInfo = partyInfo;
-        });
-        addAddress({
-          walletConfig: walletConfigRef.current,
-          walletConnect,
-          wallet,
-          onSuccess: () =>
-            setAddWalletModalConnectAtom(atom => void (atom.open = false)),
-        });
       }
-    }
+    };
+
+    onAccountChange();
   }, [
     accountId,
     addAddress,
@@ -146,6 +174,7 @@ export const useOnAccountChange = ({
     party?.image,
     party?.name,
     partyByAddr?.walletByAddr?.partyByWalletId?.accountId,
+    setAccountChanging,
     setAddWalletModalConnectAtom,
     setAddWalletModalRemoveAtom,
     wallet,

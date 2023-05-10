@@ -1,10 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import {
-  ApolloClient,
-  NormalizedCacheObject,
-  useApolloClient,
-} from '@apollo/client';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
 import { Flex } from 'web-components/lib/components/box';
@@ -14,9 +9,8 @@ import { Title } from 'web-components/lib/components/typography';
 
 import { useUpdatePartyByIdMutation } from 'generated/graphql';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
-import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getPartiesByAccountIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getPartiesByAccountIdById/getPartiesByAccountIdQuery.utils';
-import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
+import { getPartyByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { Link } from 'components/atoms';
@@ -39,23 +33,11 @@ import {
 
 export const ProfileEdit = () => {
   const setBannerTextAtom = useSetAtom(bannerTextAtom);
-  const { wallet, isConnected, accountId } = useWallet();
+  const { wallet, accountId, partyByAddr, loaded, accountChanging } =
+    useWallet();
   const [updatePartyById] = useUpdatePartyByIdMutation();
-  const graphqlClient =
-    useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const reactQueryClient = useQueryClient();
 
-  const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
-  const partyByAddrQuery = useMemo(
-    () =>
-      getPartyByAddrQuery({
-        client: graphqlClient,
-        addr: wallet?.address ?? '',
-        enabled: isConnected && !!graphqlClient && !!csrfData,
-      }),
-    [graphqlClient, wallet?.address, isConnected, csrfData],
-  );
-  const { data: partyByAddr, isFetching } = useQuery(partyByAddrQuery);
   const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
 
   const initialValues: EditProfileFormSchemaType = useMemo(
@@ -108,13 +90,15 @@ export const ProfileEdit = () => {
   );
 
   const refreshProfileData = useCallback(async () => {
-    await reactQueryClient.invalidateQueries({
-      queryKey: partyByAddrQuery.queryKey,
-    });
-    await reactQueryClient.invalidateQueries({
-      queryKey: getPartiesByAccountIdQueryKey({ id: accountId }),
-    });
-  }, [accountId, partyByAddrQuery.queryKey, reactQueryClient]);
+    if (wallet?.address) {
+      await reactQueryClient.invalidateQueries({
+        queryKey: getPartyByAddrQueryKey({ addr: wallet?.address }),
+      });
+      await reactQueryClient.invalidateQueries({
+        queryKey: getPartiesByAccountIdQueryKey({ id: accountId }),
+      });
+    }
+  }, [accountId, reactQueryClient, wallet?.address]);
 
   const onSuccess = useCallback(() => {
     setBannerTextAtom(PROFILE_SAVED);
@@ -149,7 +133,7 @@ export const ProfileEdit = () => {
             {VIEW_PROFILE}
           </OutlinedButton>
         </Flex>
-        <WithLoader isLoading={isFetching} sx={{ mx: 'auto' }}>
+        <WithLoader isLoading={!loaded || accountChanging} sx={{ mx: 'auto' }}>
           <EditProfileForm
             onSubmit={onSubmit}
             onSuccess={onSuccess}

@@ -71,10 +71,12 @@ export type WalletContextType = {
   accountId?: string;
   isConnected: boolean;
   partyByAddr?: PartyByAddrQuery | null;
+  accountChanging: boolean;
 };
 const WalletContext = createContext<WalletContextType>({
   loaded: false,
   isConnected: false,
+  accountChanging: false,
 });
 
 export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
@@ -85,6 +87,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   // only once we know what's the actual wallet connection status.
   const [loaded, setLoaded] = useState<boolean>(false);
   const [wallet, setWallet] = useState<Wallet>(emptySender);
+  const [accountChanging, setAccountChanging] = useState<boolean>(false);
   const [accountId, setAccountId] = useState<string | undefined>(undefined);
   const [connectionType, setConnectionType] = useState<string | undefined>(
     undefined,
@@ -133,7 +136,6 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
 
   const addAddress = useAddAddress({ signArbitrary, setError, setWallet });
   const onAddAddress = useOnAddAddress({
-    connectWallet,
     wallet,
     walletConfigRef,
     walletConnect,
@@ -154,6 +156,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     walletConnect,
     accountId,
     addAddress,
+    setAccountChanging,
   });
   useDetectKeplrMobileBrowser({
     connectWallet,
@@ -184,7 +187,6 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
       enabled: !!wallet?.address && !!graphqlClient && !!csrfData,
     }),
   );
-
   const loginDisabled = keplrMobileWeb || !!walletConnect;
 
   return (
@@ -201,6 +203,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         signArbitrary,
         accountId,
         partyByAddr,
+        accountChanging,
         isConnected:
           !!wallet?.address &&
           // signArbitrary (used in login) not yet supported by @keplr-wallet/wc-client

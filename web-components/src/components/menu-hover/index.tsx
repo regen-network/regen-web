@@ -67,7 +67,7 @@ const MenuHover = ({
         )}
         {renderTitle && renderTitle()}
       </span>
-      {popoverAnchor.current && (
+      {popoverAnchor.current !== null && (
         <Popover
           disableRestoreFocus
           id="mouse-over-popover"

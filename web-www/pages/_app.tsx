@@ -1,3 +1,4 @@
+import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import type { AppProps } from 'next/app';
 import { DefaultSeo } from 'next-seo';
@@ -22,6 +23,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         description="Regen Network provides tools to create standards and market for sustainable companies to buy carbon credits and nature-based solutions to reduce carbon footprint "
       />
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <Layout>
           <Component {...pageProps} />
         </Layout>

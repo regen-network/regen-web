@@ -31,12 +31,12 @@ const MarketingNav = ({ location }: Props) => {
         transparent={transparent}
         absolute={
           location.pathname === '/' ||
-          headerNoBorderBottomPages.test(location.pathname)
+          headerNoBorderBottomPages.includes(location.pathname)
         }
         color={desktopColor}
         borderBottom={
           location.pathname !== '/' &&
-          !headerNoBorderBottomPages.test(location.pathname)
+          !headerNoBorderBottomPages.includes(location.pathname)
         }
         pathname={location.pathname}
         websiteExtras={

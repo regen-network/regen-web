@@ -1553,7 +1553,6 @@ export type CredibilityCard = Document & {
   title?: Maybe<Scalars['String']>;
   descriptionRaw?: Maybe<Scalars['JSON']>;
   icon?: Maybe<Image>;
-  claims?: Maybe<Array<Maybe<Claim>>>;
 };
 
 export type CredibilityCardFilter = {
@@ -4431,7 +4430,7 @@ export type Project = Document & {
   projectName?: Maybe<Scalars['String']>;
   /** on-chain project id */
   projectId?: Maybe<Scalars['String']>;
-  credibilityCards?: Maybe<Array<Maybe<CredibilityCard>>>;
+  credibilityCards?: Maybe<Array<Maybe<ProjectDetailsCard>>>;
 };
 
 export type ProjectActivity = Document & {
@@ -4473,6 +4472,25 @@ export type ProjectActivitySorting = {
   _key?: Maybe<SortOrder>;
   name?: Maybe<SortOrder>;
   icon?: Maybe<ImageSorting>;
+};
+
+export type ProjectDetailsCard = {
+  __typename?: 'ProjectDetailsCard';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  credibilityCard?: Maybe<CredibilityCard>;
+  claims?: Maybe<Array<Maybe<Claim>>>;
+};
+
+export type ProjectDetailsCardFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  credibilityCard?: Maybe<CredibilityCardFilter>;
+};
+
+export type ProjectDetailsCardSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
 };
 
 export type ProjectDetailsSection = {
@@ -7360,6 +7378,24 @@ export type BlogSectionQuery = (
   )> }
 );
 
+export type FaqPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FaqPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allFaqPage: Array<(
+    { __typename?: 'FaqPage' }
+    & { categories?: Maybe<Array<Maybe<(
+      { __typename?: 'FaqCategory' }
+      & Pick<FaqCategory, 'header'>
+      & { questions?: Maybe<Array<Maybe<(
+        { __typename?: 'Faq' }
+        & Pick<Faq, 'question' | 'answerRaw'>
+      )>>> }
+    )>>> }
+  )> }
+);
+
 export type CallToActionFieldsFragment = (
   { __typename?: 'CallToAction' }
   & Pick<CallToAction, 'caption' | 'header' | 'description' | 'linkText' | 'linkUrl'>
@@ -8076,6 +8112,46 @@ export function useBlogSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type BlogSectionQueryHookResult = ReturnType<typeof useBlogSectionQuery>;
 export type BlogSectionLazyQueryHookResult = ReturnType<typeof useBlogSectionLazyQuery>;
 export type BlogSectionQueryResult = Apollo.QueryResult<BlogSectionQuery, BlogSectionQueryVariables>;
+export const FaqPageDocument = gql`
+    query faqPage {
+  allFaqPage {
+    categories {
+      header
+      questions {
+        question
+        answerRaw
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useFaqPageQuery__
+ *
+ * To run a query within a React component, call `useFaqPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFaqPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFaqPageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useFaqPageQuery(baseOptions?: Apollo.QueryHookOptions<FaqPageQuery, FaqPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FaqPageQuery, FaqPageQueryVariables>(FaqPageDocument, options);
+      }
+export function useFaqPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FaqPageQuery, FaqPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FaqPageQuery, FaqPageQueryVariables>(FaqPageDocument, options);
+        }
+export type FaqPageQueryHookResult = ReturnType<typeof useFaqPageQuery>;
+export type FaqPageLazyQueryHookResult = ReturnType<typeof useFaqPageLazyQuery>;
+export type FaqPageQueryResult = Apollo.QueryResult<FaqPageQuery, FaqPageQueryVariables>;
 export const HomePageWebDocument = gql`
     query homePageWeb {
   allHomePageWeb {

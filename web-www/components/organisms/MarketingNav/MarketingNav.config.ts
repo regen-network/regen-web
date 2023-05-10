@@ -22,14 +22,30 @@ export const getHeaderColors = (theme: Theme): HeaderColors => ({
 });
 
 export const headerTransparent: BoolProps = {
-  '/faq': false,
+  '/faq/[header]': false,
 };
 
 // Links in rest of the site must use the trailing '/'
 // in order for these to work appropriately
-export const headerNoBorderBottomPages: RegExp = new RegExp(
-  '/|/partners|/contact|/validators|/resources|/media|/team|/developers|/science|/case-studies|/press-kit|/community|/wallet-address-registration|/mainnet|/token|/fund|/case-studies/[a-z-]+',
-);
+export const headerNoBorderBottomPages = [
+  '/',
+  '/partners',
+  '/contact',
+  '/validators',
+  '/resources',
+  '/media',
+  '/team',
+  '/developers',
+  '/science',
+  '/case-studies',
+  '/press-kit',
+  '/community',
+  '/wallet-address-registration',
+  '/mainnet',
+  '/token',
+  '/fund',
+  '/case-studies',
+];
 
 export const menuItems: HeaderMenuItem[] = [
   {

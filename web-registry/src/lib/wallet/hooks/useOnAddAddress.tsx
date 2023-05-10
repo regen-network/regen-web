@@ -28,7 +28,6 @@ import { ConnectWalletType } from './useConnectWallet';
 type Props = {
   wallet: Wallet;
   connectWallet: ConnectWalletType;
-  keplrMobileWeb: boolean;
   walletConfigRef: MutableRefObject<WalletConfig | undefined>;
   walletConnect?: WalletConnect;
   accountId?: string;
@@ -41,7 +40,6 @@ type OnAddAddressType = () => Promise<void>;
 export const useOnAddAddress = ({
   wallet,
   connectWallet,
-  keplrMobileWeb,
   walletConfigRef,
   walletConnect,
   accountId,

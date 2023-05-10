@@ -135,7 +135,6 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const onAddAddress = useOnAddAddress({
     connectWallet,
     wallet,
-    keplrMobileWeb,
     walletConfigRef,
     walletConnect,
     accountId,
@@ -186,6 +185,8 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     }),
   );
 
+  const loginDisabled = keplrMobileWeb || !!walletConnect;
+
   return (
     <WalletContext.Provider
       value={{
@@ -193,7 +194,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         loaded: loaded && !isFetching,
         connect,
         disconnect,
-        onAddAddress,
+        onAddAddress: loginDisabled ? undefined : onAddAddress,
         connectionType,
         error,
         walletConnectUri,
@@ -204,8 +205,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
           !!wallet?.address &&
           // signArbitrary (used in login) not yet supported by @keplr-wallet/wc-client
           // https://github.com/chainapsis/keplr-wallet/issues/664
-          (keplrMobileWeb ||
-            !!walletConnect ||
+          (loginDisabled ||
             (!!accountId &&
               partyByAddr?.walletByAddr?.partyByWalletId?.accountId ===
                 accountId)),

@@ -3,6 +3,7 @@ import { MenuItem, SxProps } from '@mui/material';
 import cx from 'clsx';
 
 import { Theme } from '../../../../theme/muiTheme';
+import { sxToArray } from '../../../../utils/mui/sxToArray';
 import { MenuTitle } from '../../../menu-hover';
 import { HeaderDropdownItemProps } from '../HeaderDropdownItems';
 import { NavLinkProps } from '../NavLink';
@@ -46,7 +47,7 @@ const HeaderMenuHover: React.FC<HeaderMenuHoverProps> = ({
         styles.menuItem,
         pathname === item.href && styles.currentMenuItem,
       )}
-      sx={sx}
+      sx={[...sxToArray(sx)]}
     >
       <HeaderMenuHoverContent
         item={item}

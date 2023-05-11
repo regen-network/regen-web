@@ -61,6 +61,7 @@ export const useOnAccountChange = ({
   const setAddWalletModalConnectAtom = useSetAtom(addWalletModalConnectAtom);
   const setAddWalletModalRemoveAtom = useSetAtom(addWalletModalRemoveAtom);
 
+  // Set new wallet or directly connect it for Keplr mobile browser
   useEffect(() => {
     if (typeof window === 'undefined') {
       return;
@@ -103,6 +104,10 @@ export const useOnAccountChange = ({
     setAccountChanging,
   ]);
 
+  // Perform one of the following actions given the new wallet adress:
+  //  - Automatically connect if address already part of current account
+  //  - Ask the user to move the address to his/her account if part of another account
+  //  - Prompt the user to add the new address not linked to any account
   useEffect(() => {
     const onAccountChange = async (): Promise<void> => {
       const newAccountId =

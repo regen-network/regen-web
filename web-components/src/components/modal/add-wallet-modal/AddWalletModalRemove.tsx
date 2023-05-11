@@ -19,12 +19,7 @@ export interface AddWalletModalRemoveProps
 const AddWalletModalRemove: React.FC<
   React.PropsWithChildren<AddWalletModalRemoveProps>
 > = ({ onClick, onCancel, ...props }) => (
-  <AddWalletModalTemplate
-    title={TITLE}
-    subtitle={SUBTITLE}
-    // buttonFooter={{ label: BUTTON_LABEL, ...buttonFooter }}
-    {...props}
-  >
+  <AddWalletModalTemplate title={TITLE} subtitle={SUBTITLE} {...props}>
     <Box sx={{ mt: 12.75 }}>
       <CancelButtonFooter
         label={BUTTON_LABEL}

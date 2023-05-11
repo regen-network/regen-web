@@ -87,7 +87,7 @@ const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
         item={{
           renderTitle: () => (
             <Box display="flex" alignItems="center">
-              <UserMenuIcon />
+              <UserMenuIcon sx={{ color: 'info.dark' }} />
             </Box>
           ),
           dropdownItems: userMenuItems,

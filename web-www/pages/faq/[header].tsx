@@ -10,8 +10,10 @@ import { normalizeFaqCategories } from '@/lib/utils/normalizers/normalizeFaqCate
 export default function FaqPage({
   faqPageData,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const faqPage = faqPageData.data.allFaqPage[0];
-  const categories = normalizeFaqCategories({ categories: faqPage.categories });
+  const faqPage = faqPageData?.data.allFaqPage[0];
+  const categories = normalizeFaqCategories({
+    categories: faqPage?.categories,
+  });
   const router = useRouter();
   const navigate = (path: string) => router.push(path);
 

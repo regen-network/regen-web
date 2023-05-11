@@ -18,6 +18,8 @@ import {
   ProjectStakeholder,
 } from 'lib/db/types/json-ld';
 
+import { DEFAULT_PROFILE_COMPANY_AVATAR } from 'pages/ProfileEdit/ProfileEdit.constants';
+
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
@@ -152,7 +154,7 @@ export function getParty(
     name: party.name,
     description: party.description,
     type: party.type,
-    image: party.image,
+    image: party.image || DEFAULT_PROFILE_COMPANY_AVATAR,
     address: party.walletByWalletId?.addr || '',
     link: party?.websiteLink,
   };
@@ -177,10 +179,10 @@ const getPartyFromMetadata = (
     type: metadataRole?.['@type'].includes('regen:Organization') // covers Organization or OrganizationDisplay
       ? 'ORGANIZATION' // to provide default image
       : 'USER',
-    image: metadataRole?.['schema:image'],
+    image: metadataRole?.['schema:image'] || DEFAULT_PROFILE_COMPANY_AVATAR,
     location: metadataRole?.['schema:location']?.place_name || '',
     address: metadataRole?.['regen:adress'] || '',
-    link: metadataRole?.['schema:url'] || '',
+    link: metadataRole?.['schema:url'],
   };
 };
 

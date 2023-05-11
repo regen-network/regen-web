@@ -7713,6 +7713,21 @@ export type HomePageWebQuery = (
   )> }
 );
 
+export type MediaPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MediaPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allMedia: Array<(
+    { __typename?: 'Media' }
+    & Pick<Media, 'title' | 'author' | 'date' | 'type' | 'href'>
+    & { image?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
+    )> }
+  )> }
+);
+
 export type PartnersSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -8200,6 +8215,48 @@ export function useHomePageWebLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type HomePageWebQueryHookResult = ReturnType<typeof useHomePageWebQuery>;
 export type HomePageWebLazyQueryHookResult = ReturnType<typeof useHomePageWebLazyQuery>;
 export type HomePageWebQueryResult = Apollo.QueryResult<HomePageWebQuery, HomePageWebQueryVariables>;
+export const MediaPageDocument = gql`
+    query mediaPage {
+  allMedia(sort: {date: DESC}) {
+    title
+    author
+    date
+    type
+    href
+    author
+    image {
+      ...customImageFields
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+
+/**
+ * __useMediaPageQuery__
+ *
+ * To run a query within a React component, call `useMediaPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMediaPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMediaPageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMediaPageQuery(baseOptions?: Apollo.QueryHookOptions<MediaPageQuery, MediaPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MediaPageQuery, MediaPageQueryVariables>(MediaPageDocument, options);
+      }
+export function useMediaPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MediaPageQuery, MediaPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MediaPageQuery, MediaPageQueryVariables>(MediaPageDocument, options);
+        }
+export type MediaPageQueryHookResult = ReturnType<typeof useMediaPageQuery>;
+export type MediaPageLazyQueryHookResult = ReturnType<typeof useMediaPageLazyQuery>;
+export type MediaPageQueryResult = Apollo.QueryResult<MediaPageQuery, MediaPageQueryVariables>;
 export const PartnersSectionDocument = gql`
     query partnersSection {
   allHomePageWeb {

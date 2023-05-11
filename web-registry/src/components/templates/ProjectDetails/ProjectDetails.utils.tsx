@@ -18,7 +18,10 @@ import {
   ProjectStakeholder,
 } from 'lib/db/types/json-ld';
 
-import { DEFAULT_PROFILE_COMPANY_AVATAR } from 'pages/ProfileEdit/ProfileEdit.constants';
+import {
+  DEFAULT_PROFILE_COMPANY_AVATAR,
+  DEFAULT_PROFILE_USER_AVATAR,
+} from 'pages/ProfileEdit/ProfileEdit.constants';
 
 import {
   API_URI,
@@ -149,12 +152,20 @@ export function getParty(
   if (!party) {
     return undefined;
   }
+  let image: string;
+  if (!!party.image) {
+    image = party.image;
+  } else if (!party.image && party.type === 'USER') {
+    image = DEFAULT_PROFILE_USER_AVATAR;
+  } else {
+    image = DEFAULT_PROFILE_COMPANY_AVATAR;
+  }
 
   return {
     name: party.name,
     description: party.description,
     type: party.type,
-    image: party.image || DEFAULT_PROFILE_COMPANY_AVATAR,
+    image: image,
     address: party.walletByWalletId?.addr || '',
     link: party?.websiteLink,
   };

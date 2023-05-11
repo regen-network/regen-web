@@ -29,14 +29,14 @@ export const getDisplayAdmin = (
       type: type ? type : 'USER',
       image: party.image ? party.image : defaultAvatar,
       description: party.description,
-      link: `/ecocredits/accounts/${address}`,
+      link: `/ecocredits/accounts/${address}/portfolio`,
     };
   }
   return {
     name: truncate(address),
     type: 'USER',
     image: defaultAvatar,
-    link: `/ecocredits/accounts/${address}`,
+    link: `/ecocredits/accounts/${address}/portfolio`,
   };
 };
 

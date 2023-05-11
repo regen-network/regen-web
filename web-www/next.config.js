@@ -11,15 +11,6 @@ const nextConfig = {
       },
     ],
   },
-  async redirects() {
-    return [
-      {
-        source: '/faq',
-        destination: '/faq/concept',
-        permanent: true,
-      },
-    ];
-  },
 };
 
 module.exports = nextConfig;

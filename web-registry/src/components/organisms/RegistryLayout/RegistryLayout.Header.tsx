@@ -41,7 +41,7 @@ const RegistryLayoutHeader: React.FC = () => {
     isConnected,
     partyByAddr,
     accountId,
-    onAddAddress,
+    handleAddAddress,
   } = useWallet();
   const theme = useTheme<Theme>();
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
@@ -104,7 +104,7 @@ const RegistryLayoutHeader: React.FC = () => {
                     }),
                   ) || []
                 }
-                addAddress={onAddAddress}
+                addAddress={handleAddAddress}
               />
             )}
             <WalletButton />

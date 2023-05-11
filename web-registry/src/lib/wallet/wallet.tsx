@@ -21,10 +21,10 @@ import { useConnect } from './hooks/useConnect';
 import { useConnectWallet } from './hooks/useConnectWallet';
 import { useDetectKeplrMobileBrowser } from './hooks/useDetectKeplrMobileBrowser';
 import { useDisconnect } from './hooks/useDisconnect';
+import { useHandleAddAddress } from './hooks/useHandleAddAddress';
 import { useLogin } from './hooks/useLogin';
 import { useLogout } from './hooks/useLogout';
 import { useOnAccountChange } from './hooks/useOnAccountChange';
-import { useOnAddAddress } from './hooks/useOnAddAddress';
 import { useSignArbitrary } from './hooks/useSignArbitrary';
 import { useWalletConnectCallback } from './hooks/useWalletConnectCallback';
 import { useWalletConnectFinalize } from './hooks/useWalletConnectFinalize';
@@ -63,7 +63,7 @@ export type WalletContextType = {
   loaded: boolean;
   connect?: (params: ConnectParams) => Promise<void>;
   disconnect?: () => void;
-  onAddAddress?: () => Promise<void>;
+  handleAddAddress?: () => Promise<void>;
   connectionType?: string;
   error?: unknown;
   walletConnectUri?: string;
@@ -135,7 +135,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   });
 
   const addAddress = useAddAddress({ signArbitrary, setError, setWallet });
-  const onAddAddress = useOnAddAddress({
+  const handleAddAddress = useHandleAddAddress({
     wallet,
     walletConfigRef,
     walletConnect,
@@ -196,7 +196,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         loaded: loaded && !isFetching,
         connect,
         disconnect,
-        onAddAddress: loginDisabled ? undefined : onAddAddress,
+        handleAddAddress: loginDisabled ? undefined : handleAddAddress,
         connectionType,
         error,
         walletConnectUri,

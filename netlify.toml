@@ -12,6 +12,12 @@
   REACT_APP_TOUCAN_LINK="https://toucan.earth/overview?chainId=137"
   REACT_APP_SKIPPED_CLASS_ID="C01"
 
+  # Next.js environment variables
+  NEXT_PUBLIC_SANITY_DATASET = "production"
+  NEXT_PUBLIC_API_URI = "https://api.registry.regen.network"
+  NEXT_PUBLIC_RECAPTCHA_SITE_KEY = "6LeqBFIaAAAAAPfLave4lUtLBKF2WYXinbaLNFqB"
+  NEXT_PUBLIC_INTERCOM_APP_ID = "kn5di10s"
+
 [context.dev.environment]
   REACT_APP_SANITY_TAG = "default"
   REACT_APP_SANITY_DATASET = "staging"
@@ -27,6 +33,12 @@
   REACT_APP_BRIDGE_CREDIT_CLASS_ID = "C56"
   REACT_APP_BRIDGE="true"
   REACT_APP_SKIPPED_CLASS_ID="C01"
+
+  # Next.js environment variables
+  NEXT_PUBLIC_SANITY_DATASET = "staging"
+  NEXT_PUBLIC_API_URI = "https://api-staging.registry.regen.network"
+  NEXT_PUBLIC_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"
+  NEXT_PUBLIC_INTERCOM_APP_ID = "kn5di10s"
 
 [context.deploy-preview.environment]
   REACT_APP_SANITY_TAG = "default"
@@ -44,6 +56,12 @@
   REACT_APP_BRIDGE="true"
   REACT_APP_SKIPPED_CLASS_ID="C01"
   REACT_APP_ANALYTICS_ENABLED="true"
+
+  # Next.js environment variables
+  NEXT_PUBLIC_SANITY_DATASET = "staging"
+  NEXT_PUBLIC_API_URI = "https://api-staging.registry.regen.network"
+  NEXT_PUBLIC_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"
+  NEXT_PUBLIC_INTERCOM_APP_ID = "kn5di10s"
 
 [build.environment]
   NODE_OPTIONS = "--max-old-space-size=10216"

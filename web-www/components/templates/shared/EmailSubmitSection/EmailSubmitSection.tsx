@@ -54,7 +54,7 @@ const EmailSubmitSection = ({ altContent, sharedNewsletterData }: Props) => {
           )}
         </Label>
         <NewsletterForm
-          apiUri={process.env.GATSBY_API_URI}
+          apiUri={process.env.NEXT_PUBLIC_API_URI}
           submitLabel={altContent?.buttonText}
           inputPlaceholder={altContent?.inputText}
           buttonSize="large"

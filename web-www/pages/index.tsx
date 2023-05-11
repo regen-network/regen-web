@@ -40,7 +40,7 @@ export default function Home({
 
   return (
     <>
-      <Box component="main" sx={{ overflow: 'hidden' }}>
+      <Box sx={{ overflow: 'hidden' }}>
         <HomeFoldSection homeFoldData={homeFoldData} />
         <CarbonplusSection carbonPlusData={carbonPlusData} />
         <ClimateSection climateData={climateData} />

@@ -1,7 +1,10 @@
 import { makeStyles } from 'tss-react/mui';
 
+import { pxToRem } from '@/../web-components/lib/theme/muiTheme';
+
 export const useEmailSubmitSectionStyles = makeStyles()(theme => ({
   root: {
+    overflow: 'hidden',
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(50)} ${theme.spacing(46.25)}`,
     },
@@ -15,6 +18,12 @@ export const useEmailSubmitSectionStyles = makeStyles()(theme => ({
   title: {
     color: theme.palette.primary.main,
     textAlign: 'center',
+  },
+  button: {
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      fontSize: pxToRem(10),
+    },
   },
   description: {
     color: theme.palette.primary.main,

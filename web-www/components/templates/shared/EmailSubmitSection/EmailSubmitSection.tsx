@@ -58,6 +58,7 @@ const EmailSubmitSection = ({ altContent, sharedNewsletterData }: Props) => {
           submitLabel={altContent?.buttonText}
           inputPlaceholder={altContent?.inputText}
           buttonSize="large"
+          buttonClassName={styles.button}
         />
       </div>
     </BackgroundImage>

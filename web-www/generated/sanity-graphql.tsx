@@ -7599,11 +7599,135 @@ export type LinkFieldsFragment = (
   )> }
 );
 
+export type PressKitAwardsSectionFieldsFragment = (
+  { __typename?: 'PresskitPage' }
+  & { awardsSection?: Maybe<(
+    { __typename?: 'PresskitAwardsSection' }
+    & Pick<PresskitAwardsSection, 'header'>
+    & { items?: Maybe<Array<Maybe<(
+      { __typename?: 'TitleImageLink' }
+      & Pick<TitleImageLink, 'title' | 'link'>
+      & { image?: Maybe<(
+        { __typename?: 'Image' }
+        & ImageFieldsFragment
+      )> }
+    )>>> }
+  )> }
+);
+
+export type PressKitConnectSectionFieldsFragment = (
+  { __typename?: 'PresskitPage' }
+  & Pick<PresskitPage, 'connectSectionHeader'>
+);
+
+export type PressKitEnableSectionFieldsFragment = (
+  { __typename?: 'PresskitPage' }
+  & { enableSection?: Maybe<(
+    { __typename?: 'TitleImageCustomBody' }
+    & Pick<TitleImageCustomBody, 'title' | 'bodyRaw'>
+    & { image?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
+    )> }
+  )> }
+);
+
+export type PressKitFeaturedSectionFieldsFragment = (
+  { __typename?: 'PresskitPage' }
+  & { featuredSection?: Maybe<(
+    { __typename?: 'PresskitFeaturedSection' }
+    & Pick<PresskitFeaturedSection, 'header'>
+    & { articles?: Maybe<Array<Maybe<(
+      { __typename?: 'Media' }
+      & Pick<Media, 'title' | 'author' | 'date' | 'href' | 'type'>
+      & { image?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )> }
+    )>>> }
+  )> }
+);
+
+export type PressKitLogosSectionFieldsFragment = (
+  { __typename?: 'PresskitPage' }
+  & { logosSection?: Maybe<(
+    { __typename?: 'PresskitLogosSection' }
+    & Pick<PresskitLogosSection, 'header' | 'buttonText' | 'buttonLink'>
+  )> }
+);
+
+export type PressKitPhotosSectionFieldsFragment = (
+  { __typename?: 'PresskitPage' }
+  & { photosSection?: Maybe<(
+    { __typename?: 'PresskitPhotosSection' }
+    & Pick<PresskitPhotosSection, 'header'>
+    & { photos?: Maybe<Array<Maybe<(
+      { __typename?: 'Image' }
+      & { asset?: Maybe<(
+        { __typename?: 'SanityImageAsset' }
+        & Pick<SanityImageAsset, 'url'>
+      )> }
+    )>>> }
+  )> }
+);
+
+export type PressKitTeamSectionFieldsFragment = (
+  { __typename?: 'PresskitPage' }
+  & { teamSection?: Maybe<(
+    { __typename?: 'PresskitTeamSection' }
+    & Pick<PresskitTeamSection, 'header' | 'buttonText'>
+    & { members?: Maybe<Array<Maybe<(
+      { __typename?: 'RegenTeamMember' }
+      & TeamMemberFieldsFragment
+    )>>> }
+  )> }
+);
+
+export type PressKitTimelineSectionFieldsFragment = (
+  { __typename?: 'PresskitPage' }
+  & { timelineSection?: Maybe<(
+    { __typename?: 'PresskitTimelineSection' }
+    & Pick<PresskitTimelineSection, 'header' | 'description' | 'completedItemIndex'>
+    & { items?: Maybe<Array<Maybe<(
+      { __typename?: 'PresskitTimelineItem' }
+      & Pick<PresskitTimelineItem, 'date' | 'summary' | 'description'>
+    )>>> }
+  )> }
+);
+
+export type PressKitTitleDescriptionSectionFieldsFragment = (
+  { __typename?: 'PresskitPage' }
+  & { titleDescriptionSection?: Maybe<(
+    { __typename?: 'TitleCustomBody' }
+    & Pick<TitleCustomBody, 'title' | 'bodyRaw'>
+  )> }
+);
+
+export type PressKitTopSectionFieldsFragment = (
+  { __typename?: 'PresskitPage' }
+  & { topSection?: Maybe<(
+    { __typename?: 'TitleBody' }
+    & Pick<TitleBody, 'title' | 'body'>
+  )> }
+);
+
 export type SharedNewsletterSectionFieldsFragment = (
   { __typename?: 'SharedSections' }
   & { newsletter?: Maybe<(
     { __typename?: 'TitleCustomBody' }
     & Pick<TitleCustomBody, 'title' | 'bodyRaw'>
+  )> }
+);
+
+export type TeamMemberFieldsFragment = (
+  { __typename?: 'RegenTeamMember' }
+  & Pick<RegenTeamMember, 'name' | 'title' | 'linkedinUrl' | 'twitterUrl' | 'githubUrl'>
+  & { image?: Maybe<(
+    { __typename?: 'Image' }
+    & { asset?: Maybe<(
+      { __typename?: 'SanityImageAsset' }
+      & Pick<SanityImageAsset, 'url'>
+    )> }
   )> }
 );
 
@@ -7747,6 +7871,26 @@ export type PartnersSectionQuery = (
         )> }
       )>>> }
     )> }
+  )> }
+);
+
+export type PressKitPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PressKitPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allPresskitPage: Array<(
+    { __typename?: 'PresskitPage' }
+    & PressKitTopSectionFieldsFragment
+    & PressKitTitleDescriptionSectionFieldsFragment
+    & PressKitEnableSectionFieldsFragment
+    & PressKitTimelineSectionFieldsFragment
+    & PressKitTeamSectionFieldsFragment
+    & PressKitFeaturedSectionFieldsFragment
+    & PressKitAwardsSectionFieldsFragment
+    & PressKitLogosSectionFieldsFragment
+    & PressKitConnectSectionFieldsFragment
+    & PressKitPhotosSectionFieldsFragment
   )> }
 );
 
@@ -7978,6 +8122,129 @@ export const ValuesSectionFieldsFragmentDoc = gql`
   }
 }
     ${ImageFieldsFragmentDoc}`;
+export const PressKitAwardsSectionFieldsFragmentDoc = gql`
+    fragment pressKitAwardsSectionFields on PresskitPage {
+  awardsSection {
+    header
+    items {
+      title
+      link
+      image {
+        ...imageFields
+      }
+    }
+  }
+}
+    ${ImageFieldsFragmentDoc}`;
+export const PressKitConnectSectionFieldsFragmentDoc = gql`
+    fragment pressKitConnectSectionFields on PresskitPage {
+  connectSectionHeader
+}
+    `;
+export const PressKitEnableSectionFieldsFragmentDoc = gql`
+    fragment pressKitEnableSectionFields on PresskitPage {
+  enableSection {
+    title
+    bodyRaw
+    image {
+      ...customImageFields
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+export const PressKitFeaturedSectionFieldsFragmentDoc = gql`
+    fragment pressKitFeaturedSectionFields on PresskitPage {
+  featuredSection {
+    header
+    articles {
+      title
+      author
+      date
+      href
+      type
+      image {
+        ...customImageFields
+      }
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+export const PressKitLogosSectionFieldsFragmentDoc = gql`
+    fragment pressKitLogosSectionFields on PresskitPage {
+  logosSection {
+    header
+    buttonText
+    buttonLink
+  }
+}
+    `;
+export const PressKitPhotosSectionFieldsFragmentDoc = gql`
+    fragment pressKitPhotosSectionFields on PresskitPage {
+  photosSection {
+    header
+    photos {
+      asset {
+        url
+      }
+    }
+  }
+}
+    `;
+export const TeamMemberFieldsFragmentDoc = gql`
+    fragment teamMemberFields on RegenTeamMember {
+  name
+  title
+  image {
+    asset {
+      url
+    }
+  }
+  linkedinUrl
+  twitterUrl
+  githubUrl
+}
+    `;
+export const PressKitTeamSectionFieldsFragmentDoc = gql`
+    fragment pressKitTeamSectionFields on PresskitPage {
+  teamSection {
+    header
+    buttonText
+    members {
+      ...teamMemberFields
+    }
+  }
+}
+    ${TeamMemberFieldsFragmentDoc}`;
+export const PressKitTimelineSectionFieldsFragmentDoc = gql`
+    fragment pressKitTimelineSectionFields on PresskitPage {
+  timelineSection {
+    header
+    description
+    completedItemIndex
+    items {
+      date
+      summary
+      description
+    }
+  }
+}
+    `;
+export const PressKitTitleDescriptionSectionFieldsFragmentDoc = gql`
+    fragment pressKitTitleDescriptionSectionFields on PresskitPage {
+  titleDescriptionSection {
+    title
+    bodyRaw
+  }
+}
+    `;
+export const PressKitTopSectionFieldsFragmentDoc = gql`
+    fragment pressKitTopSectionFields on PresskitPage {
+  topSection {
+    title
+    body
+  }
+}
+    `;
 export const SharedNewsletterSectionFieldsFragmentDoc = gql`
     fragment sharedNewsletterSectionFields on SharedSections {
   newsletter {
@@ -8299,6 +8566,58 @@ export function usePartnersSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type PartnersSectionQueryHookResult = ReturnType<typeof usePartnersSectionQuery>;
 export type PartnersSectionLazyQueryHookResult = ReturnType<typeof usePartnersSectionLazyQuery>;
 export type PartnersSectionQueryResult = Apollo.QueryResult<PartnersSectionQuery, PartnersSectionQueryVariables>;
+export const PressKitPageDocument = gql`
+    query pressKitPage {
+  allPresskitPage {
+    ...pressKitTopSectionFields
+    ...pressKitTitleDescriptionSectionFields
+    ...pressKitEnableSectionFields
+    ...pressKitTimelineSectionFields
+    ...pressKitTeamSectionFields
+    ...pressKitFeaturedSectionFields
+    ...pressKitAwardsSectionFields
+    ...pressKitLogosSectionFields
+    ...pressKitConnectSectionFields
+    ...pressKitPhotosSectionFields
+  }
+}
+    ${PressKitTopSectionFieldsFragmentDoc}
+${PressKitTitleDescriptionSectionFieldsFragmentDoc}
+${PressKitEnableSectionFieldsFragmentDoc}
+${PressKitTimelineSectionFieldsFragmentDoc}
+${PressKitTeamSectionFieldsFragmentDoc}
+${PressKitFeaturedSectionFieldsFragmentDoc}
+${PressKitAwardsSectionFieldsFragmentDoc}
+${PressKitLogosSectionFieldsFragmentDoc}
+${PressKitConnectSectionFieldsFragmentDoc}
+${PressKitPhotosSectionFieldsFragmentDoc}`;
+
+/**
+ * __usePressKitPageQuery__
+ *
+ * To run a query within a React component, call `usePressKitPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePressKitPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePressKitPageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function usePressKitPageQuery(baseOptions?: Apollo.QueryHookOptions<PressKitPageQuery, PressKitPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PressKitPageQuery, PressKitPageQueryVariables>(PressKitPageDocument, options);
+      }
+export function usePressKitPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PressKitPageQuery, PressKitPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PressKitPageQuery, PressKitPageQueryVariables>(PressKitPageDocument, options);
+        }
+export type PressKitPageQueryHookResult = ReturnType<typeof usePressKitPageQuery>;
+export type PressKitPageLazyQueryHookResult = ReturnType<typeof usePressKitPageLazyQuery>;
+export type PressKitPageQueryResult = Apollo.QueryResult<PressKitPageQuery, PressKitPageQueryVariables>;
 export const SharedSectionDocument = gql`
     query sharedSection {
   allSharedSections {

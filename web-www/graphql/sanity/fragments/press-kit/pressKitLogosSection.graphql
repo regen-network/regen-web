@@ -1,0 +1,7 @@
+fragment pressKitLogosSectionFields on PresskitPage {
+  logosSection {
+    header
+    buttonText
+    buttonLink
+  }
+}

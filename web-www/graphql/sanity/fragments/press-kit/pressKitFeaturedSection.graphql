@@ -1,0 +1,15 @@
+fragment pressKitFeaturedSectionFields on PresskitPage {
+  featuredSection {
+    header
+    articles {
+      title
+      author
+      date
+      href
+      type
+      image {
+        ...customImageFields
+      }
+    }
+  }
+}

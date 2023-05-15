@@ -1,0 +1,12 @@
+fragment teamMemberFields on RegenTeamMember {
+  name
+  title
+  image {
+    asset {
+      url
+    }
+  }
+  linkedinUrl
+  twitterUrl
+  githubUrl
+}

@@ -1,0 +1,9 @@
+fragment pressKitTeamSectionFields on PresskitPage {
+  teamSection {
+    header
+    buttonText
+    members {
+      ...teamMemberFields
+    }
+  }
+}

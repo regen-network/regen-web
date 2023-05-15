@@ -152,6 +152,7 @@ export function getParty(
   if (!party) {
     return undefined;
   }
+  // TODO: make use of getDefaultAvatar from ProfileEdit.utils.ts
   let image: string;
   if (!!party.image) {
     image = party.image;
@@ -183,14 +184,21 @@ const getPartyFromMetadata = (
 ): Party | undefined => {
   const metadataRole: ProjectStakeholder | undefined = metadata[role];
   if (!metadataRole) return undefined;
+  const type = metadataRole?.['@type'].includes('regen:Organization')
+    ? 'ORGANIZATION'
+    : 'USER';
+  let defaultImage: string;
+  if (type === 'USER') {
+    defaultImage = DEFAULT_PROFILE_USER_AVATAR;
+  } else {
+    defaultImage = DEFAULT_PROFILE_COMPANY_AVATAR;
+  }
 
   return {
     name: metadataRole?.['schema:name'] || '',
     description: metadataRole?.['schema:description'] || '',
-    type: metadataRole?.['@type'].includes('regen:Organization') // covers Organization or OrganizationDisplay
-      ? 'ORGANIZATION' // to provide default image
-      : 'USER',
-    image: metadataRole?.['schema:image'] || DEFAULT_PROFILE_COMPANY_AVATAR,
+    type: type,
+    image: metadataRole?.['schema:image'] || defaultImage,
     location: metadataRole?.['schema:location']?.place_name || '',
     address: metadataRole?.['regen:adress'] || '',
     link: metadataRole?.['schema:url'],

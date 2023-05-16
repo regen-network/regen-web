@@ -2,7 +2,10 @@ import Image from 'next/image';
 
 import { Title } from 'web-components/lib/components/typography';
 
-import { useTopSectionStyles } from './TopSection.styles';
+import {
+  tokenTopSectionGradient,
+  useTopSectionStyles,
+} from './TopSection.styles';
 
 import BackgroundSection from '@/components/organisms/BackgroundSection/BackgroundSection';
 import { TokenTopSectionFieldsFragment } from '@/generated/sanity-graphql';
@@ -14,12 +17,11 @@ type Props = {
 const TopSection = ({ topSectionData }: Props): JSX.Element => {
   const { classes: styles } = useTopSectionStyles();
   const data = topSectionData;
-  // background = aurora
 
   return (
     <BackgroundSection
       className={styles.section}
-      linearGradient="linear-gradient(180deg, #000000 6.73%, rgba(0, 0, 0, 0) 30.65%), linear-gradient(209.83deg, rgba(250, 235, 209, 0.8) 11.05%, rgba(125, 201, 191, 0.8) 43.17%, rgba(81, 93, 137, 0.8) 75.29%)"
+      linearGradient={tokenTopSectionGradient}
       header={
         <div className={styles.header}>
           <Image
@@ -36,7 +38,7 @@ const TopSection = ({ topSectionData }: Props): JSX.Element => {
         </div>
       }
       body={data?.body}
-      imageSrc={'/images/token/token-aurora.png'}
+      imageSrc={'/images/token/token-aurora.jpg'}
     />
   );
 };

@@ -38,6 +38,11 @@ export default function TokenPage({
       <NextSeo
         description={topSection?.body ?? ''}
         title={topSection?.title ?? ''}
+        openGraph={{
+          images: [
+            { url: '/images/token/token-aurora.jpg', width: 1140, height: 629 },
+          ],
+        }}
       />
       <TopSection topSectionData={topSection} />
       <TokenEconomics tokenEconomicsData={tokenEconomics} />

@@ -20,6 +20,11 @@ export default function ResourcesPage({
       <NextSeo
         description="We are developers, ecologists, scientists, and designers from all over the world, bound by our common purpose of planetary regeneration. Feel free to connect with us."
         title="Team"
+        openGraph={{
+          images: [
+            { url: '/images/team/team-seo.jpg', width: 1000, height: 750 },
+          ],
+        }}
       />
       <TeamTopSection topSectionData={topSection} />
       <CoreTeamSection coreSectionData={coreSection} />

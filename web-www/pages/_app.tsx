@@ -21,6 +21,15 @@ const App = ({ Component, pageProps }: AppProps) => {
       <DefaultSeo
         title="Regen Network / Invest in high-integrity carbon credits"
         description="Regen Network provides tools to create standards and market for sustainable companies to buy carbon credits and nature-based solutions to reduce carbon footprint "
+        openGraph={{
+          images: [
+            {
+              url: 'images/home/science.jpg',
+              width: 1440,
+              height: 640,
+            },
+          ],
+        }}
       />
       <ThemeProvider theme={theme}>
         <CssBaseline />

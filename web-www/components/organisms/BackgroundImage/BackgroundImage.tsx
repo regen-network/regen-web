@@ -1,6 +1,8 @@
 import { Box, BoxProps, SxProps } from '@mui/material';
 import Image from 'next/image';
 
+import { useBackgroundImageStyles } from './BackgroundImage.styles';
+
 import { Theme } from '@/../web-components/lib/theme/muiTheme';
 import { sxToArray } from '@/../web-components/lib/utils/mui/sxToArray';
 
@@ -20,19 +22,24 @@ export const BackgroundImage = ({
   component,
   sx = [],
   children,
-}: Props) => (
-  <Box
-    component={component ?? 'div'}
-    className={className}
-    sx={[{ position: 'relative' }, ...sxToArray(sx)]}
-  >
+}: Props) => {
+  const { classes } = useBackgroundImageStyles();
+
+  return (
     <Box
-      component={Image}
-      src={src}
-      alt={alt ?? ''}
-      fill
-      sx={{ objectFit: 'cover', position: 'absolute' }}
-    />
-    <Box sx={{ zIndex: 1, position: 'relative' }}>{children}</Box>
-  </Box>
-);
+      component={component ?? 'div'}
+      className={className}
+      sx={[{ position: 'relative' }, ...sxToArray(sx)]}
+    >
+      <Image
+        src={src}
+        alt={alt ?? ''}
+        className={classes.image}
+        sizes="100vw"
+        priority
+        fill
+      />
+      <Box sx={{ zIndex: 1, position: 'relative' }}>{children}</Box>
+    </Box>
+  );
+};

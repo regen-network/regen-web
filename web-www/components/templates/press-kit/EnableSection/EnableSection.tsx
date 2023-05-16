@@ -31,6 +31,7 @@ const EnableSection = ({ enableSectionData }: Props): JSX.Element => {
               enableSectionData?.image?.image?.asset?.metadata?.dimensions
                 ?.height,
             )}
+            sizes="(max-width: 834px) 100vw, 50vw"
           />
           <div className={styles.imageBackground}>
             <Image src="/images/press-kit/image-topo-bg.jpg" alt="" fill />

@@ -1,0 +1,5 @@
+fragment teamAdvisorSectionFields on TeamPage {
+  advisorSection {
+    ...teamSectionFields
+  }
+}

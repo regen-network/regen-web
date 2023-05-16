@@ -1,0 +1,6 @@
+fragment teamTopSectionFields on TeamPage {
+  topSection {
+    title
+    body
+  }
+}

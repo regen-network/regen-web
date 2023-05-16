@@ -1,0 +1,6 @@
+fragment teamSectionFields on TeamSection {
+  title
+  members {
+    ...teamMemberFields
+  }
+}

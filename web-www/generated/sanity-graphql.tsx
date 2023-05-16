@@ -7743,6 +7743,59 @@ export type PressKitTopSectionFieldsFragment = (
   )> }
 );
 
+export type ResourcesLedgerSectionFieldsFragment = (
+  { __typename?: 'ResourcesPage' }
+  & { ledgerSection?: Maybe<(
+    { __typename?: 'ResourcesLedgerSection' }
+    & Pick<ResourcesLedgerSection, 'header'>
+    & { cards?: Maybe<Array<Maybe<(
+      { __typename?: 'Resource' }
+      & Pick<Resource, 'titleRaw' | 'descriptionRaw' | 'lastUpdated'>
+      & { button?: Maybe<(
+        { __typename?: 'Button' }
+        & ButtonFieldsFragment
+      )>, image?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )> }
+    )>>> }
+  )> }
+);
+
+export type ResourcesRegistrySectionFieldsFragment = (
+  { __typename?: 'ResourcesPage' }
+  & { registrySection?: Maybe<(
+    { __typename?: 'ResourcesRegistrySection' }
+    & Pick<ResourcesRegistrySection, 'header' | 'documentTableTitle'>
+    & { documents?: Maybe<Array<Maybe<(
+      { __typename?: 'Doc' }
+      & Pick<Doc, 'name' | 'type' | 'date' | 'href'>
+    )>>>, subsections?: Maybe<Array<Maybe<(
+      { __typename?: 'ResourcesRegistrySubSection' }
+      & Pick<ResourcesRegistrySubSection, 'title'>
+      & { cards?: Maybe<Array<Maybe<(
+        { __typename?: 'Resource' }
+        & Pick<Resource, 'titleRaw' | 'lastUpdated' | 'descriptionRaw'>
+        & { image?: Maybe<(
+          { __typename?: 'CustomImage' }
+          & CustomImageFieldsFragment
+        )>, button?: Maybe<(
+          { __typename?: 'Button' }
+          & ButtonFieldsFragment
+        )> }
+      )>>> }
+    )>>> }
+  )> }
+);
+
+export type ResourcesTopSectionFieldsFragment = (
+  { __typename?: 'ResourcesPage' }
+  & { topSection?: Maybe<(
+    { __typename?: 'TitleBody' }
+    & Pick<TitleBody, 'title' | 'body'>
+  )> }
+);
+
 export type SharedNewsletterSectionFieldsFragment = (
   { __typename?: 'SharedSections' }
   & { newsletter?: Maybe<(
@@ -7956,6 +8009,19 @@ export type PressKitPageQuery = (
     & PressKitLogosSectionFieldsFragment
     & PressKitConnectSectionFieldsFragment
     & PressKitPhotosSectionFieldsFragment
+  )> }
+);
+
+export type ResourcesPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ResourcesPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allResourcesPage: Array<(
+    { __typename?: 'ResourcesPage' }
+    & ResourcesTopSectionFieldsFragment
+    & ResourcesRegistrySectionFieldsFragment
+    & ResourcesLedgerSectionFieldsFragment
   )> }
 );
 
@@ -8317,6 +8383,62 @@ export const PressKitTitleDescriptionSectionFieldsFragmentDoc = gql`
     `;
 export const PressKitTopSectionFieldsFragmentDoc = gql`
     fragment pressKitTopSectionFields on PresskitPage {
+  topSection {
+    title
+    body
+  }
+}
+    `;
+export const ResourcesLedgerSectionFieldsFragmentDoc = gql`
+    fragment resourcesLedgerSectionFields on ResourcesPage {
+  ledgerSection {
+    header
+    cards {
+      titleRaw
+      descriptionRaw
+      lastUpdated
+      button {
+        ...buttonFields
+      }
+      image {
+        ...customImageFields
+      }
+    }
+  }
+}
+    ${ButtonFieldsFragmentDoc}
+${CustomImageFieldsFragmentDoc}`;
+export const ResourcesRegistrySectionFieldsFragmentDoc = gql`
+    fragment resourcesRegistrySectionFields on ResourcesPage {
+  registrySection {
+    header
+    documentTableTitle
+    documents {
+      name
+      type
+      date
+      href
+    }
+    subsections {
+      title
+      cards {
+        image {
+          ...customImageFields
+        }
+        titleRaw
+        lastUpdated
+        descriptionRaw
+        button {
+          ...buttonFields
+        }
+      }
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}
+${ButtonFieldsFragmentDoc}`;
+export const ResourcesTopSectionFieldsFragmentDoc = gql`
+    fragment resourcesTopSectionFields on ResourcesPage {
   topSection {
     title
     body
@@ -8783,6 +8905,44 @@ export function usePressKitPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type PressKitPageQueryHookResult = ReturnType<typeof usePressKitPageQuery>;
 export type PressKitPageLazyQueryHookResult = ReturnType<typeof usePressKitPageLazyQuery>;
 export type PressKitPageQueryResult = Apollo.QueryResult<PressKitPageQuery, PressKitPageQueryVariables>;
+export const ResourcesPageDocument = gql`
+    query resourcesPage {
+  allResourcesPage {
+    ...resourcesTopSectionFields
+    ...resourcesRegistrySectionFields
+    ...resourcesLedgerSectionFields
+  }
+}
+    ${ResourcesTopSectionFieldsFragmentDoc}
+${ResourcesRegistrySectionFieldsFragmentDoc}
+${ResourcesLedgerSectionFieldsFragmentDoc}`;
+
+/**
+ * __useResourcesPageQuery__
+ *
+ * To run a query within a React component, call `useResourcesPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useResourcesPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useResourcesPageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useResourcesPageQuery(baseOptions?: Apollo.QueryHookOptions<ResourcesPageQuery, ResourcesPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ResourcesPageQuery, ResourcesPageQueryVariables>(ResourcesPageDocument, options);
+      }
+export function useResourcesPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ResourcesPageQuery, ResourcesPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ResourcesPageQuery, ResourcesPageQueryVariables>(ResourcesPageDocument, options);
+        }
+export type ResourcesPageQueryHookResult = ReturnType<typeof useResourcesPageQuery>;
+export type ResourcesPageLazyQueryHookResult = ReturnType<typeof useResourcesPageLazyQuery>;
+export type ResourcesPageQueryResult = Apollo.QueryResult<ResourcesPageQuery, ResourcesPageQueryVariables>;
 export const SharedSectionDocument = gql`
     query sharedSection {
   allSharedSections {

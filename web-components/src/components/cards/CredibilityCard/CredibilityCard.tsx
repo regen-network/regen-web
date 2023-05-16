@@ -49,11 +49,6 @@ export const CredibilityCard: React.FC<CredibilityCardProps> = ({
             pb={4}
             display="flex"
             alignItems="center"
-            // sx={{
-            //   ':not(:first-child)': {
-            //     pt: 4,
-            //   },
-            // }}
           >
             <OutlinedCheckIcon sx={{ pr: 1.25 }} />
             {claim.description}

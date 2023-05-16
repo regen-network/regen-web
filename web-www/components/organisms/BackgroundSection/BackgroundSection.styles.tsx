@@ -8,7 +8,7 @@ interface StyleProps {
   titleVariant?: Variant;
 }
 
-export const useConnectSectionStyles = makeStyles<StyleProps>()(
+export const useBackgroundSectionStyles = makeStyles<StyleProps>()(
   (theme, props) => ({
     root: {
       overflow: 'hidden',

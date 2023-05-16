@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { Body, Title } from 'web-components/lib/components/typography';
 
 import { BackgroundImage } from '../BackgroundImage/BackgroundImage';
-import { useConnectSectionStyles } from './BackgroundSection.styles';
+import { useBackgroundSectionStyles } from './BackgroundSection.styles';
 
 interface Props {
   className?: string;
@@ -33,7 +33,7 @@ const BackgroundSection = ({
   children,
   topSection = true,
 }: Props): JSX.Element => {
-  const { classes } = useConnectSectionStyles({
+  const { classes } = useBackgroundSectionStyles({
     titleVariant,
     linearGradientMobile,
     linearGradient,

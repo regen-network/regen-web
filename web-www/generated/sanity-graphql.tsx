@@ -7378,6 +7378,38 @@ export type BlogSectionQuery = (
   )> }
 );
 
+export type ContactPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ContactPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allContactPage: Array<(
+    { __typename?: 'ContactPage' }
+    & Pick<ContactPage, 'header' | 'bodyRaw' | 'messageForPartnersRaw'>
+    & { formRequestTypes?: Maybe<Array<Maybe<(
+      { __typename?: 'RequestType' }
+      & Pick<RequestType, 'label' | 'value'>
+    )>>>, location?: Maybe<(
+      { __typename?: 'TitleImageCustomBody' }
+      & Pick<TitleImageCustomBody, 'title' | 'bodyRaw'>
+      & { image?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )> }
+    )>, email?: Maybe<(
+      { __typename?: 'TitleCustomBody' }
+      & Pick<TitleCustomBody, 'title' | 'bodyRaw'>
+    )>, faq?: Maybe<(
+      { __typename?: 'TitleImage' }
+      & Pick<TitleImage, 'title'>
+      & { image?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )> }
+    )> }
+  )> }
+);
+
 export type FaqPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -8470,6 +8502,63 @@ export function useBlogSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type BlogSectionQueryHookResult = ReturnType<typeof useBlogSectionQuery>;
 export type BlogSectionLazyQueryHookResult = ReturnType<typeof useBlogSectionLazyQuery>;
 export type BlogSectionQueryResult = Apollo.QueryResult<BlogSectionQuery, BlogSectionQueryVariables>;
+export const ContactPageDocument = gql`
+    query contactPage {
+  allContactPage {
+    header
+    bodyRaw
+    messageForPartnersRaw
+    formRequestTypes {
+      label
+      value
+    }
+    location {
+      title
+      bodyRaw
+      image {
+        ...customImageFields
+      }
+    }
+    email {
+      title
+      bodyRaw
+    }
+    faq {
+      title
+      image {
+        ...customImageFields
+      }
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+
+/**
+ * __useContactPageQuery__
+ *
+ * To run a query within a React component, call `useContactPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useContactPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useContactPageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useContactPageQuery(baseOptions?: Apollo.QueryHookOptions<ContactPageQuery, ContactPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ContactPageQuery, ContactPageQueryVariables>(ContactPageDocument, options);
+      }
+export function useContactPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ContactPageQuery, ContactPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ContactPageQuery, ContactPageQueryVariables>(ContactPageDocument, options);
+        }
+export type ContactPageQueryHookResult = ReturnType<typeof useContactPageQuery>;
+export type ContactPageLazyQueryHookResult = ReturnType<typeof useContactPageLazyQuery>;
+export type ContactPageQueryResult = Apollo.QueryResult<ContactPageQuery, ContactPageQueryVariables>;
 export const FaqPageDocument = gql`
     query faqPage {
   allFaqPage {

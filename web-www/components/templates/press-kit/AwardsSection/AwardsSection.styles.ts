@@ -18,6 +18,9 @@ export const useAwardsStyles = makeStyles()(theme => ({
         paddingRight: `${theme.spacing(4.125)} !important`,
       },
     },
+    '& .slick-track': {
+      margin: '0 auto',
+    },
     '& a': {
       textDecoration: 'none',
       '&:link, &:visited, &:hover, &:active': {

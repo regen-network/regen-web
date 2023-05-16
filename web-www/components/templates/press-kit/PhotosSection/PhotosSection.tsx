@@ -5,8 +5,6 @@ import ProjectMedia, {
 
 import { usePhotosSectionStyles } from './PhotosSection.styles';
 
-import 'slick-carousel/slick/slick-theme.css';
-import 'slick-carousel/slick/slick.css';
 import { PressKitPhotosSectionFieldsFragment } from '@/generated/sanity-graphql';
 
 type Props = {

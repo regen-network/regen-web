@@ -10,6 +10,7 @@ import {
   PressKitTeamSectionFieldsFragment,
   RegenTeamMember,
 } from '@/generated/sanity-graphql';
+import waterfallImage from '@/public/images/press-kit/waterfall-bg.png';
 
 type Props = {
   teamSectionData?: PressKitTeamSectionFieldsFragment['teamSection'];
@@ -20,7 +21,7 @@ const PressKitTeamSection = ({ teamSectionData }: Props): JSX.Element => {
   const content = teamSectionData;
   const members = !!content?.members ? content.members : [];
   return (
-    <BackgroundImage src="/images/press-kit/waterfall-bg.png">
+    <BackgroundImage src={waterfallImage}>
       <TeamSection
         gridMd={3}
         titleClassName={styles.title}

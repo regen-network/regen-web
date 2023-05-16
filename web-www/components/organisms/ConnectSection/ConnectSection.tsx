@@ -1,5 +1,6 @@
 import { Grid } from '@mui/material';
 import clsx from 'clsx';
+import { StaticImageData } from 'next/image';
 
 import { Center } from 'web-components/lib/components/box';
 import { Title } from 'web-components/lib/components/typography';
@@ -17,7 +18,7 @@ interface ConnectSectionProps {
   isCompact?: boolean;
   titleClassName?: string;
   className?: string;
-  backgroundImage: string;
+  backgroundImage: string | StaticImageData;
 }
 
 const ConnectSection = ({

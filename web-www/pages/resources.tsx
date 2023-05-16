@@ -26,7 +26,7 @@ export default function ResourcesPage({
         openGraph={{
           images: [
             {
-              url: '/images/resources/resources-ledger-whitepaper-image',
+              url: '/images/resources/resources-ledger-whitepaper-image.jpg',
               width: 548,
               height: 299,
             },

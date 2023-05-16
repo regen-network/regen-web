@@ -2,6 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import type { Variant } from '@mui/material/styles/createTypography';
 import clsx from 'clsx';
+import { StaticImageData } from 'next/image';
 
 import { Body, Title } from 'web-components/lib/components/typography';
 
@@ -17,7 +18,7 @@ interface Props {
   linearGradient?: string;
   linearGradientMobile?: string;
   children?: React.ReactNode;
-  imageSrc: string;
+  imageSrc: string | StaticImageData;
   topSection?: boolean;
 }
 

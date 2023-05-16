@@ -5,6 +5,7 @@ import { useConnectStyles } from './ConnectSection.styles';
 
 import ConnectSection from '@/components/organisms/ConnectSection/ConnectSection';
 import { PressKitConnectSectionFieldsFragment } from '@/generated/sanity-graphql';
+import pressKitConnectBg from '@/public/images/press-kit/press-kit-connect-bg.jpg';
 
 type Props = {
   connectSectionData?: PressKitConnectSectionFieldsFragment;
@@ -20,7 +21,7 @@ const PressKitConnectSection = ({ connectSectionData }: Props): JSX.Element => {
       isCompact
       itemClassName={styles.item}
       header={connectSectionData?.connectSectionHeader || ''}
-      backgroundImage="/images/press-kit/press-kit-connect-bg.jpg"
+      backgroundImage={pressKitConnectBg}
       icons={icons}
     />
   );

@@ -5,6 +5,7 @@ import { useConnectSectionStyles } from './TokenConnectSection.styles';
 
 import ConnectSection from '@/components/organisms/ConnectSection/ConnectSection';
 import { TokenConnectSectionFieldsFragment } from '@/generated/sanity-graphql';
+import birdsBg from '@/public/images/token/birds-background.png';
 
 type Props = {
   tokenConnectData?: TokenConnectSectionFieldsFragment;
@@ -19,7 +20,7 @@ const TokenConnectSection = ({ tokenConnectData }: Props): JSX.Element => {
     <ConnectSection
       className={styles.connect}
       header={tokenConnectData?.connectSectionHeader || ''}
-      backgroundImage={'/images/token/birds-background.png'}
+      backgroundImage={birdsBg}
       icons={icons}
     />
   );

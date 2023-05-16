@@ -18,6 +18,7 @@ import {
   PressKitPageQuery,
 } from '@/generated/sanity-graphql';
 import { sanityClient } from '@/lib/clients/sanityClient';
+import pressKitTopoBg from '@/public/images/press-kit/press-kit-topo-bg.jpg';
 
 export default function PressKitPage({
   pressKitData,
@@ -46,7 +47,7 @@ export default function PressKitPage({
       <EnableSection enableSectionData={enableSection} />
       <TimelineSection timelineSectionData={timelineSection} />
       <PressKitTeamSection teamSectionData={teamSection} />
-      <BackgroundImage src="/images/press-kit/press-kit-topo-bg.jpg">
+      <BackgroundImage src={pressKitTopoBg}>
         <FeaturedSection featuredSectionData={featuredSection} />
         <AwardsSection awardsSectionData={awardsSection} />
         <LogosSection logosSectionData={logosSection} />

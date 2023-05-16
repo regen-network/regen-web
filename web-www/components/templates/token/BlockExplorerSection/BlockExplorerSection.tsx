@@ -8,6 +8,7 @@ import { useBlockExplorerStyles } from './BlockExplorerSection.styles';
 
 import { BackgroundImage } from '@/components/organisms/BackgroundImage/BackgroundImage';
 import { TokenBlockExplorerSectionFieldsFragment } from '@/generated/sanity-graphql';
+import stonesBg from '@/public/images/token/stones-bg.png';
 
 type Props = {
   blockExplorerData?: TokenBlockExplorerSectionFieldsFragment['blockExplorerSection'];
@@ -17,7 +18,7 @@ const BlockExplorerSection = ({ blockExplorerData }: Props): JSX.Element => {
   const { classes: styles } = useBlockExplorerStyles();
 
   return (
-    <BackgroundImage src="/images/token/stones-bg.png">
+    <BackgroundImage src={stonesBg}>
       <Section classes={{ root: styles.root }}>
         <div className={styles.content}>
           <DecentralizeIcon />

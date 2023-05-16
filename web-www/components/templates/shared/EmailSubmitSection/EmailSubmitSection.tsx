@@ -8,6 +8,7 @@ import { useEmailSubmitSectionStyles } from './EmailSubmitSection.styles';
 
 import { BackgroundImage } from '@/components/organisms/BackgroundImage/BackgroundImage';
 import { SharedNewsletterSectionFieldsFragment } from '@/generated/sanity-graphql';
+import deerNewsletterBg from '@/public/images/token/deer-newsletter-bg.png';
 
 interface Content {
   header?: string;
@@ -26,7 +27,7 @@ const EmailSubmitSection = ({ altContent, sharedNewsletterData }: Props) => {
   const content = sharedNewsletterData;
   return (
     <BackgroundImage
-      src="/images/token/deer-newsletter-bg.png"
+      src={deerNewsletterBg}
       component="section"
       sx={{ background: '#040e18' }}
     >

@@ -9,6 +9,7 @@ import { useTokenPoolStyles } from './TokenPool.styles';
 
 import { BackgroundImage } from '@/components/organisms/BackgroundImage/BackgroundImage';
 import { TokenPoolSectionFieldsFragment } from '@/generated/sanity-graphql';
+import topoBgPortrait from '@/public/images/token/topo-bg-portrait.jpg';
 
 type Props = {
   tokenPoolData?: TokenPoolSectionFieldsFragment['poolSection'];
@@ -20,10 +21,7 @@ const TokenPool = ({ tokenPoolData }: Props): JSX.Element => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <BackgroundImage
-      src="/images/token/topo-bg-portrait.jpg"
-      className={styles.root}
-    >
+    <BackgroundImage src={topoBgPortrait} className={styles.root}>
       {isMobile ? (
         <div className={styles.container}>
           {/* eslint-disable-next-line @next/next/no-img-element */}

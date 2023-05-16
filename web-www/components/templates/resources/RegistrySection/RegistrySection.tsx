@@ -17,6 +17,7 @@ import {
   sanityDocsToDocuments,
   sanityResourcesToCardProps,
 } from '@/lib/utils/sanity/sanity-transforms';
+import imageGridBg from '@/public/images/resources/image-grid-bg.jpg';
 
 type Props = {
   registrySectionData?: ResourcesRegistrySectionFieldsFragment['registrySection'];
@@ -29,7 +30,7 @@ const RegistrySection = ({ registrySectionData }: Props): JSX.Element => {
     <BackgroundSection
       className={styles.section}
       linearGradient="unset"
-      imageSrc="/images/resources/image-grid-bg.jpg"
+      imageSrc={imageGridBg}
       topSection={false}
     >
       <Title variant="h3" align="left" sx={{ mb: [6.75, 8.5] }}>

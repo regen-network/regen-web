@@ -1,5 +1,5 @@
 import { Box, BoxProps, SxProps } from '@mui/material';
-import Image from 'next/image';
+import Image, { ImageProps, StaticImageData } from 'next/image';
 
 import { useBackgroundImageStyles } from './BackgroundImage.styles';
 
@@ -7,7 +7,7 @@ import { Theme } from '@/../web-components/lib/theme/muiTheme';
 import { sxToArray } from '@/../web-components/lib/utils/mui/sxToArray';
 
 type Props = {
-  src: string;
+  src: string | StaticImageData;
   alt?: string;
   children?: React.ReactNode;
   className?: string;
@@ -24,6 +24,8 @@ export const BackgroundImage = ({
   children,
 }: Props) => {
   const { classes } = useBackgroundImageStyles();
+  const placeholder: ImageProps['placeholder'] =
+    typeof src === 'string' ? 'empty' : 'blur';
 
   return (
     <Box
@@ -35,6 +37,7 @@ export const BackgroundImage = ({
         src={src}
         alt={alt ?? ''}
         className={classes.image}
+        placeholder={placeholder}
         sizes="100vw"
         priority
         fill

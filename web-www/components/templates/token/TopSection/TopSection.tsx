@@ -9,6 +9,7 @@ import {
 
 import BackgroundSection from '@/components/organisms/BackgroundSection/BackgroundSection';
 import { TokenTopSectionFieldsFragment } from '@/generated/sanity-graphql';
+import tokenAuroraImage from '@/public/images/token/token-aurora.jpg';
 
 type Props = {
   topSectionData?: TokenTopSectionFieldsFragment['topSection'];
@@ -38,7 +39,7 @@ const TopSection = ({ topSectionData }: Props): JSX.Element => {
         </div>
       }
       body={data?.body}
-      imageSrc={'/images/token/token-aurora.jpg'}
+      imageSrc={tokenAuroraImage}
     />
   );
 };

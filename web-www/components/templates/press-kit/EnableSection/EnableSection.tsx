@@ -7,6 +7,7 @@ import { useEnableStyles } from './EnableSection.styles';
 
 import { BlockContent } from '@/../web-components/lib/components/block-content';
 import { PressKitEnableSectionFieldsFragment } from '@/generated/sanity-graphql';
+import pressKitTopoBg from '@/public/images/press-kit/image-topo-bg.jpg';
 
 type Props = {
   enableSectionData?: PressKitEnableSectionFieldsFragment['enableSection'];
@@ -34,7 +35,13 @@ const EnableSection = ({ enableSectionData }: Props): JSX.Element => {
             sizes="(max-width: 834px) 100vw, 50vw"
           />
           <div className={styles.imageBackground}>
-            <Image src="/images/press-kit/image-topo-bg.jpg" alt="" fill />
+            <Image
+              src={pressKitTopoBg}
+              placeholder="blur"
+              sizes="100vw"
+              alt=""
+              fill
+            />
           </div>
         </Grid>
         <Grid xs={12} item className={styles.text}>

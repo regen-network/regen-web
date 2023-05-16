@@ -19,7 +19,7 @@ export const ProjectDetailsSection: React.FC<ProjectDetailsSectionProps> = ({
   const { classes } = useSectionStyles();
 
   return header && credibilityCards?.length ? (
-    <Section visibleOverflow>
+    <Section visibleOverflow sx={{ root: { pb: [0, 21.25] } }}>
       <Label size="sm" mobileSize="sm" color="info.main">
         {header.label}
       </Label>

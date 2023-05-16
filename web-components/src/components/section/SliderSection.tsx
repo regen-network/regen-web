@@ -72,7 +72,7 @@ function SliderSection({
           infinite={false}
           slidesToShow={slidesCount}
           padding={theme.spacing(2.5)}
-          itemWidth="100%"
+          mobileItemWidth="100%"
           items={items}
           renderTitle={() => (
             <Title variant="h2" mobileVariant="h3" align={'left'}>

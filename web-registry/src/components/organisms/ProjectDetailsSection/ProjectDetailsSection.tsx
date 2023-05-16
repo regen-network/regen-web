@@ -31,7 +31,8 @@ export const ProjectDetailsSection: React.FC<ProjectDetailsSectionProps> = ({
       </Body>
       <ResponsiveSlider
         visibleOverflow
-        itemWidth="90%"
+        mobileItemWidth="90%"
+        itemWidth="85%"
         infinite={false}
         slidesToShow={isMobile ? 1 : 2}
         classes={{ root: classes.root }}

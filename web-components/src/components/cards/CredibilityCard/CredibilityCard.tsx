@@ -15,7 +15,7 @@ export const CredibilityCard: React.FC<CredibilityCardProps> = ({
 }) => {
   const theme = useTheme();
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
-  const background = `${Math.min(100, 55 + index * (lg ? 15 : 10))}%`;
+  const background = `${Math.min(100, 55 + index * (lg ? 12 : 8))}%`;
   return (
     <Card
       borderColor="grey.100"

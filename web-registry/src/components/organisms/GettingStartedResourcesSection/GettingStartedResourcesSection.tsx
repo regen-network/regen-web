@@ -33,7 +33,7 @@ const GettingStartedResourcesSection: React.FC<
     >
       <ResponsiveSlider
         visibleOverflow
-        itemWidth="80%"
+        mobileItemWidth="80%"
         infinite={false}
         slidesToShow={isMobile ? 1 : 2}
         classes={{ root: classes.root }}

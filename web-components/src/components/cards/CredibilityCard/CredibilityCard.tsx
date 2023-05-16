@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 
 import { BlockContent } from '../../block-content';
 import OutlinedCheckIcon from '../../icons/OutlinedCheckIcon';
@@ -13,7 +13,9 @@ export const CredibilityCard: React.FC<CredibilityCardProps> = ({
   icon,
   claims,
 }) => {
-  const background = `${Math.min(100, 55 + index * 10)}%`;
+  const theme = useTheme();
+  const lg = useMediaQuery(theme.breakpoints.up('lg'));
+  const background = `${Math.min(100, 55 + index * (lg ? 15 : 10))}%`;
   return (
     <Card
       borderColor="grey.100"

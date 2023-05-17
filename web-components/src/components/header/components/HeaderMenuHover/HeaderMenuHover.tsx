@@ -25,6 +25,7 @@ export interface HeaderMenuHoverBase {
     paper?: string;
   };
   sx?: SxProps<Theme>;
+  component?: React.ElementType;
 }
 
 export interface HeaderMenuHoverProps extends HeaderMenuHoverBase {
@@ -37,6 +38,7 @@ const HeaderMenuHover: React.FC<HeaderMenuHoverProps> = ({
   linkComponent,
   classes,
   sx,
+  component = 'li',
 }) => {
   const { classes: styles } = useHeaderMenuHoverStyles();
 
@@ -48,6 +50,7 @@ const HeaderMenuHover: React.FC<HeaderMenuHoverProps> = ({
         pathname === item.href && styles.currentMenuItem,
       )}
       sx={[...sxToArray(sx)]}
+      component={component}
     >
       <HeaderMenuHoverContent
         item={item}

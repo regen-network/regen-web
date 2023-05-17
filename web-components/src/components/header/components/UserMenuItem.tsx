@@ -15,6 +15,7 @@ const UserMenuItem: React.FC<React.PropsWithChildren<UserMenuItemProps>> = ({
   return (
     <HeaderMenuHover
       classes={{ root: styles.userMenuItem, paper: classes?.paper }}
+      component="div"
       {...props}
     />
   );

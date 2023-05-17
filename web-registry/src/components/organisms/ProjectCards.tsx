@@ -87,16 +87,10 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
       imageStorageBaseUrl={imageStorageBaseUrl}
       apiServerUrl={apiServerUrl}
       place={project.metadata?.['schema:location']?.place_name}
-      area={
-        project.metadata?.['regen:projectSize']?.['qudt:numericValue']?.[
-          '@value'
-        ]
-      }
+      area={project.metadata?.['regen:projectSize']?.['qudt:numericValue']}
       areaUnit={
         QUDT_UNIT_MAP[
-          project.metadata?.['regen:projectSize']?.['qudt:unit']?.[
-            '@value'
-          ] as qudtUnit
+          project.metadata?.['regen:projectSize']?.['qudt:unit'] as qudtUnit
         ]
       }
       track={track}

@@ -244,18 +244,18 @@ export default function ContactPage({
                 </Body>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Image
-                  src={String(data?.location?.image?.image?.asset?.url)}
-                  alt={String(data?.location?.image?.image?.asset?.altText)}
-                  width={Number(
-                    data?.location?.image?.image?.asset?.metadata?.dimensions
-                      ?.width,
-                  )}
-                  height={Number(
-                    data?.location?.image?.image?.asset?.metadata?.dimensions
-                      ?.height,
-                  )}
-                />
+                <Box
+                  sx={{
+                    position: 'relative',
+                    aspectRatio: `${data?.location?.image?.image?.asset?.metadata?.dimensions?.width} / ${data?.location?.image?.image?.asset?.metadata?.dimensions?.width}`,
+                  }}
+                >
+                  <Image
+                    src={String(data?.location?.image?.image?.asset?.url)}
+                    alt={String(data?.location?.image?.image?.asset?.altText)}
+                    fill
+                  />
+                </Box>
               </Grid>
             </Grid>
           </Box>

@@ -64,4 +64,8 @@ export const useContactStyles = makeStyles()(theme => ({
       color: theme.palette.info.main,
     },
   },
+  map: {
+    width: '100%',
+    objectFit: 'contain',
+  },
 }));

@@ -26,8 +26,8 @@ const AwardsSection = ({ awardsSectionData }: Props): JSX.Element => {
           className={styles.image}
           src={String(item?.image?.asset?.url)}
           alt={String(item?.image?.asset?.altText)}
-          width={Number(item?.image?.asset?.metadata?.dimensions?.width)}
-          height={Number(item?.image?.asset?.metadata?.dimensions?.height)}
+          width={479}
+          height={319}
         />
       </div>
       <Title variant="h5" sx={{ pt: [4, 4.5] }} color="black">

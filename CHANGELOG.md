@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/regen-network/regen-web/compare/v1.5.2...v1.6.0) (2023-05-17)
+
+### Bug Fixes
+
+- default org icons not showing ([8fd1c98](https://github.com/regen-network/regen-web/commit/8fd1c98079ca2b0704a0d33ca2a57957e3e330ca))
+- handle case where party info comes from DB ([c4e264d](https://github.com/regen-network/regen-web/commit/c4e264d764543fc1bddabb174f13f95f432dd140))
+- link to portfolio for project admin ([4f45b19](https://github.com/regen-network/regen-web/commit/4f45b197ff48e6ec80eda434649add77a2e3df76))
+
+### Features
+
+- show proper default image from metadata depending on profile type ([a642054](https://github.com/regen-network/regen-web/commit/a642054c206de78efa09cc0485fe4fe4700539fc))
+
 ## [1.5.2](https://github.com/regen-network/regen-web/compare/v1.5.1...v1.5.2) (2023-05-17)
 
 ### Bug Fixes

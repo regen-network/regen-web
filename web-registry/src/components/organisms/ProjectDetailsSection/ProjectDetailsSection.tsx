@@ -1,4 +1,4 @@
-import { useMediaQuery, useTheme } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { CredibilityCard } from 'web-components/lib/components/cards/CredibilityCard/CredibilityCard';
@@ -19,23 +19,28 @@ export const ProjectDetailsSection: React.FC<ProjectDetailsSectionProps> = ({
   const { classes } = useSectionStyles();
 
   return header && credibilityCards?.length ? (
-    <Section visibleOverflow sx={{ root: { pb: [0, 21.25] } }}>
-      <Label size="sm" mobileSize="sm" color="info.main">
-        {header.label}
-      </Label>
-      <Title variant="h2" py={3}>
-        {header.title}
-      </Title>
-      <Body size="lg" mobileSize="md">
-        <BlockContent content={header.descriptionRaw} />
-      </Body>
+    <Section visibleOverflow sx={{ root: { pb: [20, 21.25] } }}>
       <ResponsiveSlider
+        renderTitle={() => (
+          <Box>
+            <Label size="sm" mobileSize="sm" color="info.main">
+              {header.label}
+            </Label>
+            <Title variant="h2" py={3}>
+              {header.title}
+            </Title>
+            <Body size="lg" mobileSize="md" maxWidth={718}>
+              <BlockContent content={header.descriptionRaw} />
+            </Body>
+          </Box>
+        )}
         visibleOverflow
+        arrows
         mobileItemWidth="90%"
         itemWidth="85%"
         infinite={false}
         slidesToShow={isMobile ? 1 : 2}
-        classes={{ root: classes.root }}
+        classes={{ headerWrap: classes.headerWrap }}
         padding={theme.spacing(2.5)}
         items={credibilityCards.map((card, index) => (
           <CredibilityCard

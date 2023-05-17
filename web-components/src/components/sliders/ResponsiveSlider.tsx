@@ -229,7 +229,7 @@ export default function ResponsiveSlider({
       <Grid
         container
         wrap="nowrap"
-        alignItems="center"
+        alignItems="flex-end"
         className={classes && classes.headerWrap}
       >
         {renderTitle ? (
@@ -246,8 +246,7 @@ export default function ResponsiveSlider({
         ) : null}
         {items.length > 1 && arrows && desktop && (
           <Grid
-            xs={12}
-            sm={4}
+            xs={renderTitle || title ? 4 : 12}
             container
             item
             justifyContent="flex-end"

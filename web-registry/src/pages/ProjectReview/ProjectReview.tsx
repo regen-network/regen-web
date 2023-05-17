@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import ReactPlayerLazy from 'react-player/lazy';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import { Box } from '@mui/material';
+import { Box, Card, CardMedia, useMediaQuery, useTheme } from '@mui/material';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
@@ -27,6 +28,11 @@ import {
   STORY_TITLE_LABEL,
   SUMMARY_LABEL,
 } from 'components/organisms/DescriptionForm/DescriptionForm.constants';
+import {
+  GALLERY_PHOTOS,
+  MAIN_PHOTO,
+  STORY_LABEL as STORY_LABEL_REVIEW,
+} from 'components/organisms/MediaForm/MediaForm.constants';
 
 import { Link } from '../../components/atoms';
 import { ProjectPageFooter } from '../../components/molecules';
@@ -116,10 +122,17 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   const creditClassId = metadata?.['regen:creditClassId'];
   const isVCS = isVCSCreditClass(creditClassId);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
   const referenceId = getProjectReferenceID(metadata, creditClassId);
+
+  const isVideo =
+    metadata?.['regen:storyMedia']?.['@type'] === 'schema:VideoObject';
+  const isImage =
+    metadata?.['regen:storyMedia']?.['@type'] === 'schema:ImageObject';
 
   const submit = async (): Promise<void> => {
     if (!jurisdiction) {
@@ -181,24 +194,43 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
         title={'Media'}
         onEditClick={() => navigate(`${editPath}/media`)}
       >
-        {metadata?.['regen:previewPhoto'] && (
-          <Photo src={metadata?.['regen:previewPhoto']['schema:url']} />
+        <ItemDisplay name={MAIN_PHOTO}>
+          {metadata?.['regen:previewPhoto'] && (
+            <Photo src={metadata?.['regen:previewPhoto']['schema:url']} />
+          )}
+        </ItemDisplay>
+        <ItemDisplay name={GALLERY_PHOTOS}>
+          {metadata?.['regen:galleryPhotos']?.map(
+            photo =>
+              photo && (
+                <Photo
+                  key={photo['schema:url']}
+                  src={photo['schema:url']}
+                  sx={{ mb: 2.5 }}
+                />
+              ),
+          )}
+        </ItemDisplay>
+        {metadata?.['regen:storyMedia'] && (
+          <ItemDisplay name={STORY_LABEL_REVIEW}>
+            <>
+              {isVideo && (
+                <Card>
+                  <CardMedia
+                    component={ReactPlayerLazy}
+                    url={metadata?.['regen:storyMedia']['schema:url']}
+                    fallback={<div>Loading video player...</div>}
+                    height={isMobile ? 216 : 293}
+                    width="100%"
+                  />
+                </Card>
+              )}
+              {isImage && (
+                <Photo src={metadata?.['regen:storyMedia']['schema:url']} />
+              )}
+            </>
+          </ItemDisplay>
         )}
-        {metadata?.['regen:galleryPhotos']?.map(
-          photo => photo && <Photo src={photo['schema:url']} />,
-        )}
-        {/* TODO: display story image or video https://github.com/regen-network/regen-registry/issues/1615 */}
-        {/* {metadata?.['regen:storyMedia'] && (
-          <Card>
-            <CardMedia
-              component={ReactPlayerLazy}
-              url={videoUrl}
-              fallback={<div>Loading video player...</div>}
-              height={isMobile ? 216 : 293}
-              width="100%"
-            />
-          </Card>
-        )} */}
       </ReviewCard>
       <ReviewCard
         title="Roles"

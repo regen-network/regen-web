@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.2](https://github.com/regen-network/regen-web/compare/v1.5.1...v1.5.2) (2023-05-17)
+
+### Bug Fixes
+
+- project card on credit class page ([3c20301](https://github.com/regen-network/regen-web/commit/3c20301535093f94d5e5d0d05a02a5abf24a9f3e))
+
 ## [1.5.1](https://github.com/regen-network/regen-web/compare/v1.5.0...v1.5.1) (2023-05-10)
 
 ### Bug Fixes

@@ -196,7 +196,10 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
       >
         <ItemDisplay name={MAIN_PHOTO}>
           {metadata?.['regen:previewPhoto'] && (
-            <Photo src={metadata?.['regen:previewPhoto']['schema:url']} />
+            <Photo
+              src={metadata?.['regen:previewPhoto']['schema:url']}
+              credit={metadata?.['regen:previewPhoto']['schema:creditText']}
+            />
           )}
         </ItemDisplay>
         <ItemDisplay name={GALLERY_PHOTOS}>
@@ -206,6 +209,8 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
                 <Photo
                   key={photo['schema:url']}
                   src={photo['schema:url']}
+                  caption={photo['schema:caption']}
+                  credit={photo['schema:creditText']}
                   sx={{ mb: 2.5 }}
                 />
               ),
@@ -226,7 +231,10 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
                 </Card>
               )}
               {isImage && (
-                <Photo src={metadata?.['regen:storyMedia']['schema:url']} />
+                <Photo
+                  src={metadata?.['regen:storyMedia']['schema:url']}
+                  credit={metadata?.['regen:storyMedia']['schema:creditText']}
+                />
               )}
             </>
           </ItemDisplay>

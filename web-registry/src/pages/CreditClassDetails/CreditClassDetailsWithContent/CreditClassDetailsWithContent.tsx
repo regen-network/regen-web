@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
+import { useQuery } from '@tanstack/react-query';
 import { makeStyles } from 'tss-react/mui';
 
 import Banner from 'web-components/lib/components/banner';
@@ -11,10 +17,11 @@ import Section from 'web-components/lib/components/section';
 import { Body } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { CreditClassByUriQuery, useMoreProjectsQuery } from 'generated/graphql';
+import { CreditClassByUriQuery } from 'generated/graphql';
 import { CreditClass } from 'generated/sanity-graphql';
 import { apiUri } from 'lib/apiUri';
 import { onBtnClick } from 'lib/button';
+import { getMoreProjectsQuery } from 'lib/queries/react-query/registry-server/graphql/getMoreProjectsQuery/getMoreProjectsQuery';
 
 import { HeroTitle } from 'components/molecules';
 import {
@@ -98,9 +105,15 @@ const CreditClassDetailsWithContent: React.FC<
   const [submitted, setSubmitted] = useState(false);
   const { classes: styles, cx } = useStyles();
   const navigate = useNavigate();
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
   const { creditClassId } = useParams();
-  const { data: projectsData } = useMoreProjectsQuery();
+  const { data: projectsData } = useQuery(
+    getMoreProjectsQuery({
+      client: graphqlClient,
+    }),
+  );
 
   const getFeaturedProjects = (): JSX.Element => {
     const featuredProjects = projectsData?.allProjects?.nodes?.filter(project =>
@@ -123,17 +136,17 @@ const CreditClassDetailsWithContent: React.FC<
   };
 
   const getAllProjects = (): JSX.Element => {
-    const projects = projectsData?.allProjects?.nodes?.filter(
+    const allProjects = projectsData?.allProjects?.nodes?.filter(
       project =>
         project?.creditClassByCreditClassId?.uri === content.iri?.current,
     );
 
-    return projects && projects.length > 0 ? (
+    return allProjects && allProjects.length > 0 ? (
       <div className="topo-background-alternate">
         <MoreProjectsSection
           classes={{ root: styles.sectionPadding, title: styles.title }}
           title={content.buyer?.projectsTitle || 'More Projects'}
-          projects={projects}
+          projects={allProjects}
         />
       </div>
     ) : (

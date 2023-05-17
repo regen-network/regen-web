@@ -21,6 +21,9 @@ export const UNANCHORED_PROJECT_CONTEXT = {
   'regen:videoURL': {
     '@type': 'schema:URL',
   },
+  'schema:url': {
+    '@type': 'schema:URL',
+  },
 };
 
 export const ANCHORED_PROJECT_CONTEXT = {

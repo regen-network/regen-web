@@ -1,6 +1,6 @@
 {
   "name": "web-registry",
-  "version": "1.5.2",
+  "version": "1.6.0",
   "private": true,
   "dependencies": {
     "@analytics/amplitude": "^0.1.3",

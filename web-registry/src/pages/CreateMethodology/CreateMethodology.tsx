@@ -135,7 +135,7 @@ const CreateMethodology: React.FC<React.PropsWithChildren<unknown>> = () => {
 
       <Section withSlider className={styles.outcomeSection}>
         <ResponsiveSlider
-          itemWidth="90%"
+          mobileItemWidth="90%"
           padding={theme.spacing(2.5)}
           title="Ecological outcomes"
           arrows={content?.outcomes ? content.outcomes.length > 3 : false}
@@ -148,7 +148,7 @@ const CreateMethodology: React.FC<React.PropsWithChildren<unknown>> = () => {
         <Section withSlider titleAlign="left">
           <ResponsiveSlider
             infinite={false}
-            itemWidth="90%"
+            mobileItemWidth="90%"
             classes={{
               title: styles.resourcesTitle,
               root: styles.resourcesRoot,

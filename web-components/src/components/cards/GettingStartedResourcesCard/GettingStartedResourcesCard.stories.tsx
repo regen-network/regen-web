@@ -4,7 +4,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { GettingStartedResourcesCard } from './GettingStartedResourcesCard';
 
 export default {
-  title: 'GettingStartedResourcesCard',
+  title: 'Cards/GettingStartedResourcesCard',
   component: GettingStartedResourcesCard,
 } as ComponentMeta<typeof GettingStartedResourcesCard>;
 

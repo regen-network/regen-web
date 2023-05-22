@@ -53,7 +53,7 @@ const EcologicalCreditCardsSection = ({ ecologicalCreditCardsData }: Props) => {
         slidesToShow={1}
         adaptiveHeight
         dots
-        itemWidth="100%"
+        mobileItemWidth="100%"
         classes={classes}
       />
     </Section>

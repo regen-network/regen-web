@@ -83,7 +83,7 @@ const PracticesOutcomesSection: React.FC<React.PropsWithChildren<Props>> = ({
         items={practiceItems}
       />
       <ResponsiveSlider
-        itemWidth="90%"
+        mobileItemWidth="90%"
         padding={theme.spacing(2.5)}
         className={cx(classes.outcomes, classes.slider)}
         title="Ecological Outcomes"

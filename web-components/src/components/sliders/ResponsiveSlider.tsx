@@ -9,7 +9,7 @@ import { makeStyles } from 'tss-react/mui';
 import PrevNextButton from '../buttons/PrevNextButton';
 import { Title } from '../typography';
 
-export interface ResponsiveSliderProps {
+interface ResponsiveSliderProps {
   items?: JSX.Element[];
   titleVariant?: Variant;
   arrows?: boolean;
@@ -229,7 +229,7 @@ export default function ResponsiveSlider({
       <Grid
         container
         wrap="nowrap"
-        alignItems="flex-end"
+        alignItems="center"
         className={classes && classes.headerWrap}
       >
         {renderTitle ? (

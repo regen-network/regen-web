@@ -42,8 +42,9 @@ export const CredibilityCard: React.FC<CredibilityCardProps> = ({
       <BlockContent content={descriptionRaw} />
     </Body>
     <Box>
-      {claims.map(claim => (
+      {claims.map((claim, index) => (
         <Body
+          key={index}
           size="md"
           mobileSize="xs"
           color="primary.light"

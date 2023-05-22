@@ -1,0 +1,26 @@
+fragment resourcesRegistrySectionFields on ResourcesPage {
+  registrySection {
+    header
+    documentTableTitle
+    documents {
+      name
+      type
+      date
+      href
+    }
+    subsections {
+      title
+      cards {
+        image {
+          ...customImageFields
+        }
+        titleRaw
+        lastUpdated
+        descriptionRaw
+        button {
+          ...buttonFields
+        }
+      }
+    }
+  }
+}

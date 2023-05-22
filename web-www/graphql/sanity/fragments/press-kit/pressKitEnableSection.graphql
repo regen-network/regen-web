@@ -1,0 +1,9 @@
+fragment pressKitEnableSectionFields on PresskitPage {
+  enableSection {
+    title
+    bodyRaw
+    image {
+      ...customImageFields
+    }
+  }
+}

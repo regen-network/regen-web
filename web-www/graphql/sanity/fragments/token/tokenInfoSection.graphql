@@ -1,0 +1,10 @@
+fragment tokenInfoSectionFields on TokenPage {
+  infoSection {
+    title
+    subtitle
+    bodyRaw
+    image {
+      ...customImageFields
+    }
+  }
+}

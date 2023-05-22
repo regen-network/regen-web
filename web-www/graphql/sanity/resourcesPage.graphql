@@ -1,0 +1,7 @@
+query resourcesPage {
+  allResourcesPage {
+    ...resourcesTopSectionFields
+    ...resourcesRegistrySectionFields
+    ...resourcesLedgerSectionFields
+  }
+}

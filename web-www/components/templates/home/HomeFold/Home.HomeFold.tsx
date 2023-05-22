@@ -25,7 +25,7 @@ export const HomeFoldSection = ({ className, homeFoldData }: Props) => {
           backgroundPosition: 'bottom center',
           backgroundSize: 'cover',
           paddingTop: { xs: 23.75, sm: 60 },
-          height: { xs: 550, sm: 624 },
+          height: { xs: 550, sm: 864 },
         },
       ]}
       className={clsx(classes.root, className)}

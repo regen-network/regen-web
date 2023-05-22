@@ -1,0 +1,6 @@
+fragment tokenTopSectionFields on TokenPage {
+  topSection {
+    title
+    body
+  }
+}

@@ -1,0 +1,6 @@
+fragment pressKitTitleDescriptionSectionFields on PresskitPage {
+  titleDescriptionSection {
+    title
+    bodyRaw
+  }
+}

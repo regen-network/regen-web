@@ -27,12 +27,8 @@ const BlogSection = ({ blogData }: Props): JSX.Element => {
             <Image
               src={String(post?.image?.image?.asset?.url)}
               alt={String(post?.image?.imageAlt)}
-              width={Number(
-                post?.image?.image?.asset?.metadata?.dimensions?.width,
-              )}
-              height={Number(
-                post?.image?.image?.asset?.metadata?.dimensions?.height,
-              )}
+              width={346}
+              height={252}
               className={styles.image}
             />
           ),

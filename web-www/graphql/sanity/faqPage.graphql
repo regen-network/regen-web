@@ -1,0 +1,11 @@
+query faqPage {
+  allFaqPage {
+    categories {
+      header
+      questions {
+        question
+        answerRaw
+      }
+    }
+  }
+}

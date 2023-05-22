@@ -1,0 +1,28 @@
+query contactPage {
+  allContactPage {
+    header
+    bodyRaw
+    messageForPartnersRaw
+    formRequestTypes {
+      label
+      value
+    }
+    location {
+      title
+      bodyRaw
+      image {
+        ...customImageFields
+      }
+    }
+    email {
+      title
+      bodyRaw
+    }
+    faq {
+      title
+      image {
+        ...customImageFields
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+query tokenPage {
+  allTokenPage {
+    ...tokenTopSectionFields
+    ...tokenNewsletterSectionFields
+    ...tokenEconomicsSectionFields
+    ...tokenInfoSectionFields
+    ...tokenPoolSectionFields
+    ...tokenBlockExplorerSectionFields
+    ...tokenStackingSectionFields
+    ...tokenConnectSectionFields
+    ...tokenMediaSectionFields
+  }
+}

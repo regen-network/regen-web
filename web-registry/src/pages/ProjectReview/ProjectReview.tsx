@@ -31,7 +31,6 @@ import {
 import {
   GALLERY_PHOTOS,
   MAIN_PHOTO,
-  STORY_LABEL as STORY_LABEL_REVIEW,
 } from 'components/organisms/MediaForm/MediaForm.constants';
 
 import { Link } from '../../components/atoms';
@@ -44,6 +43,7 @@ import { isVCSCreditClass } from '../../lib/ecocredit/api';
 import { useCreateProjectContext } from '../ProjectCreate';
 import { useGetJurisdiction } from './hooks/useGetJurisdiction';
 import { useProjectCreateSubmit } from './hooks/useProjectCreateSubmit';
+import { STORY_PHOTO, STORY_VIDEO } from './ProjectReview.constants';
 import {
   getOnChainProjectId,
   getProjectReferenceID,
@@ -195,7 +195,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
         title={'Media'}
         onEditClick={() => navigate(`${editPath}/media`)}
       >
-        {previewPhoto['schema:url'] && (
+        {previewPhoto?.['schema:url'] && (
           <ItemDisplay name={MAIN_PHOTO}>
             {previewPhoto && (
               <Photo
@@ -222,7 +222,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
           </ItemDisplay>
         )}
         {storyMedia?.['schema:url'] && (
-          <ItemDisplay name={STORY_LABEL_REVIEW}>
+          <ItemDisplay name={isVideo ? STORY_VIDEO : STORY_PHOTO}>
             <>
               {isVideo && (
                 <Card>

@@ -5,11 +5,6 @@ export const footerItems: [FooterItem, FooterItem, FooterItem, FooterItem] = [
     title: 'community',
     items: [
       {
-        title: 'Community Calendar',
-        href: 'https://calendar.google.com/calendar/u/0/embed?src=c_mldg58l0nb1g22sb7treh6s63s@group.calendar.google.com&ctz=America/Denver',
-        target: '_blank',
-      },
-      {
         title: 'Marketplace',
         href: 'https://app.regen.network',
       },
@@ -29,6 +24,11 @@ export const footerItems: [FooterItem, FooterItem, FooterItem, FooterItem] = [
       {
         title: 'Cerulean Ventures',
         href: 'https://cerulean.vc/',
+        target: '_blank',
+      },
+      {
+        title: 'Community Calendar',
+        href: 'https://calendar.google.com/calendar/u/0/embed?src=c_mldg58l0nb1g22sb7treh6s63s@group.calendar.google.com&ctz=America/Denver',
         target: '_blank',
       },
     ],

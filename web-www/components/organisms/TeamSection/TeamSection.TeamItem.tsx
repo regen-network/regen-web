@@ -1,5 +1,5 @@
-import LazyLoad from 'react-lazyload';
 import { Box, SxProps, useTheme } from '@mui/material';
+import Image from 'next/image';
 
 import GithubIcon from 'web-components/lib/components/icons/social/GithubIcon';
 import LinkedInIcon from 'web-components/lib/components/icons/social/LinkedInIcon';
@@ -7,7 +7,12 @@ import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon'
 import { Label, Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { Hex, Image, ImageWrap, Root } from './TeamSection.styles';
+import {
+  Hex,
+  ImageWrap,
+  Root,
+  useTeamSectionStyles,
+} from './TeamSection.styles';
 
 import { RegenTeamMember } from '@/generated/sanity-graphql';
 
@@ -23,20 +28,28 @@ export function TeamItem({
   sx = [],
 }: TeamItemProps): JSX.Element {
   const theme = useTheme();
+  const { classes } = useTeamSectionStyles();
+
   return (
     <Root sx={sx}>
       <ImageWrap>
         <Hex sx={{ zIndex: 1 }}>
-          <LazyLoad height={200} offset={100}>
-            <Image
-              sx={{ transform: 'scale(0.9)' }}
-              src={member.image?.asset?.url + `?w=200&q=75&auto=format`}
-              alt={member?.name || 'team member'}
-            />
-          </LazyLoad>
+          <Image
+            src={member.image?.asset?.url ?? ''}
+            alt={member?.name || 'team member'}
+            width={180}
+            height={180}
+            className={classes.image}
+          />
         </Hex>
         <Hex sx={{ zIndex: 0, top: 2, left: 14 }}>
-          <Image src={bgUrl} alt="background" />
+          <Image
+            src={bgUrl}
+            alt="background"
+            width={180}
+            height={180}
+            className={classes.image}
+          />
         </Hex>
       </ImageWrap>
 

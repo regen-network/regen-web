@@ -9,7 +9,6 @@ import { Body, Label, Title } from 'web-components/lib/components/typography';
 import { useCarbonPlusStyles } from './Home.CarbonPlus.styles';
 
 import { CarbonPlusSectionFieldsFragment } from '@/generated/sanity-graphql';
-import marketplacePreviewImage from '@/public/images/home/marketplace-preview.png';
 
 type Props = {
   carbonPlusData?: CarbonPlusSectionFieldsFragment['carbonPlusSection'];
@@ -48,11 +47,11 @@ const CarbonplusSection = ({ carbonPlusData }: Props): JSX.Element => {
         <Grid className={styles.imageContainer} item xs={12}>
           <Image
             className={styles.image}
-            src={marketplacePreviewImage}
-            alt="Regen marketplace preview"
-            placeholder="blur"
-            width={650}
-            height={646}
+            src={String(carbonPlusData?.image?.image?.asset?.url)}
+            alt={carbonPlusData?.image?.image?.asset?.altText ?? ''}
+            width={862}
+            height={742}
+            priority
           />
         </Grid>
       </Grid>

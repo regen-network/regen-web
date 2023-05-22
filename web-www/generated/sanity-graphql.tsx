@@ -546,6 +546,7 @@ export type CarbonPlusSection = {
   description?: Maybe<Scalars['String']>;
   linkText?: Maybe<Scalars['String']>;
   linkUrl?: Maybe<Scalars['String']>;
+  image?: Maybe<CustomImage>;
 };
 
 export type CarbonPlusSectionFilter = {
@@ -557,6 +558,7 @@ export type CarbonPlusSectionFilter = {
   description?: Maybe<StringFilter>;
   linkText?: Maybe<StringFilter>;
   linkUrl?: Maybe<StringFilter>;
+  image?: Maybe<CustomImageFilter>;
 };
 
 export type CarbonPlusSectionSorting = {
@@ -568,6 +570,7 @@ export type CarbonPlusSectionSorting = {
   description?: Maybe<SortOrder>;
   linkText?: Maybe<SortOrder>;
   linkUrl?: Maybe<SortOrder>;
+  image?: Maybe<CustomImageSorting>;
 };
 
 export type Card = {
@@ -7494,6 +7497,10 @@ export type CarbonPlusSectionFieldsFragment = (
   & { carbonPlusSection?: Maybe<(
     { __typename?: 'CarbonPlusSection' }
     & Pick<CarbonPlusSection, 'smallHeaderFeatured' | 'smallHeaderCreditName' | 'header' | 'description' | 'linkText' | 'linkUrl'>
+    & { image?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
+    )> }
   )> }
 );
 
@@ -8068,6 +8075,24 @@ export type TokenPageQuery = (
   )> }
 );
 
+export const CustomImageFieldsFragmentDoc = gql`
+    fragment customImageFields on CustomImage {
+  imageAlt
+  imageHref
+  image {
+    asset {
+      altText
+      url
+      metadata {
+        dimensions {
+          height
+          width
+        }
+      }
+    }
+  }
+}
+    `;
 export const CarbonPlusSectionFieldsFragmentDoc = gql`
     fragment carbonPlusSectionFields on HomePageWeb {
   carbonPlusSection {
@@ -8077,9 +8102,12 @@ export const CarbonPlusSectionFieldsFragmentDoc = gql`
     description
     linkText
     linkUrl
+    image {
+      ...customImageFields
+    }
   }
 }
-    `;
+    ${CustomImageFieldsFragmentDoc}`;
 export const ImageFieldsFragmentDoc = gql`
     fragment imageFields on Image {
   asset {
@@ -8113,24 +8141,6 @@ export const ClimateSectionFieldsFragmentDoc = gql`
   }
 }
     ${ImageFieldsFragmentDoc}`;
-export const CustomImageFieldsFragmentDoc = gql`
-    fragment customImageFields on CustomImage {
-  imageAlt
-  imageHref
-  image {
-    asset {
-      altText
-      url
-      metadata {
-        dimensions {
-          height
-          width
-        }
-      }
-    }
-  }
-}
-    `;
 export const LinkFieldsFragmentDoc = gql`
     fragment linkFields on Link {
   buttonHref

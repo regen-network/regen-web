@@ -129,10 +129,11 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const txHashUrl = getHashUrl(txHash);
   const referenceId = getProjectReferenceID(metadata, creditClassId);
 
-  const isVideo =
-    metadata?.['regen:storyMedia']?.['@type'] === 'schema:VideoObject';
-  const isImage =
-    metadata?.['regen:storyMedia']?.['@type'] === 'schema:ImageObject';
+  const previewPhoto = metadata?.['regen:previewPhoto'];
+  const galleryPhotos = metadata?.['regen:galleryPhotos'] ?? [];
+  const storyMedia = metadata?.['regen:storyMedia'];
+  const isVideo = storyMedia?.['@type'] === 'schema:VideoObject';
+  const isImage = storyMedia?.['@type'] === 'schema:ImageObject';
 
   const submit = async (): Promise<void> => {
     if (!jurisdiction) {
@@ -194,36 +195,40 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
         title={'Media'}
         onEditClick={() => navigate(`${editPath}/media`)}
       >
-        <ItemDisplay name={MAIN_PHOTO}>
-          {metadata?.['regen:previewPhoto'] && (
-            <Photo
-              src={metadata?.['regen:previewPhoto']['schema:url']}
-              credit={metadata?.['regen:previewPhoto']['schema:creditText']}
-            />
-          )}
-        </ItemDisplay>
-        <ItemDisplay name={GALLERY_PHOTOS}>
-          {metadata?.['regen:galleryPhotos']?.map(
-            photo =>
-              photo && (
-                <Photo
-                  key={photo['schema:url']}
-                  src={photo['schema:url']}
-                  caption={photo['schema:caption']}
-                  credit={photo['schema:creditText']}
-                  sx={{ mb: 2.5 }}
-                />
-              ),
-          )}
-        </ItemDisplay>
-        {metadata?.['regen:storyMedia'] && (
+        {previewPhoto['schema:url'] && (
+          <ItemDisplay name={MAIN_PHOTO}>
+            {previewPhoto && (
+              <Photo
+                src={previewPhoto['schema:url']}
+                credit={previewPhoto['schema:creditText']}
+              />
+            )}
+          </ItemDisplay>
+        )}
+        {galleryPhotos?.length > 0 && (
+          <ItemDisplay name={GALLERY_PHOTOS}>
+            {galleryPhotos?.map(
+              photo =>
+                photo && (
+                  <Photo
+                    key={photo['schema:url']}
+                    src={photo['schema:url']}
+                    caption={photo['schema:caption']}
+                    credit={photo['schema:creditText']}
+                    sx={{ mb: 2.5 }}
+                  />
+                ),
+            )}
+          </ItemDisplay>
+        )}
+        {storyMedia?.['schema:url'] && (
           <ItemDisplay name={STORY_LABEL_REVIEW}>
             <>
               {isVideo && (
                 <Card>
                   <CardMedia
                     component={ReactPlayerLazy}
-                    url={metadata?.['regen:storyMedia']['schema:url']}
+                    url={storyMedia['schema:url']}
                     fallback={<div>Loading video player...</div>}
                     height={isMobile ? 216 : 293}
                     width="100%"
@@ -232,8 +237,8 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
               )}
               {isImage && (
                 <Photo
-                  src={metadata?.['regen:storyMedia']['schema:url']}
-                  credit={metadata?.['regen:storyMedia']['schema:creditText']}
+                  src={storyMedia['schema:url']}
+                  credit={storyMedia['schema:creditText']}
                 />
               )}
             </>

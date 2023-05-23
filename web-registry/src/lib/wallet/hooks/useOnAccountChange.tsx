@@ -112,7 +112,12 @@ export const useOnAccountChange = ({
     const onAccountChange = async (): Promise<void> => {
       const newAccountId =
         partyByAddr?.walletByAddr?.partyByWalletId?.accountId;
-      if (!!newWallet && !isFetching && newWallet.address !== wallet?.address) {
+      if (
+        !!wallet?.address &&
+        !!newWallet &&
+        !isFetching &&
+        newWallet.address !== wallet?.address
+      ) {
         const partyInfo = {
           addr: newWallet.shortAddress,
           name: party?.name ? party?.name : DEFAULT_NAME,

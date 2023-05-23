@@ -1,5 +1,9 @@
 import React from 'react';
-import { Grid, TablePagination as MuiTablePagination } from '@mui/material';
+import {
+  Grid,
+  TablePagination as MuiTablePagination,
+  TablePaginationProps as MuiTablePaginationProps,
+} from '@mui/material';
 import { makeStyles, withStyles } from 'tss-react/mui';
 
 import { Theme } from '../../theme/muiTheme';
@@ -120,6 +124,7 @@ export interface TablePaginationProps {
   page: number;
   onPageChange: (event: unknown, newPage: number) => void;
   onChangeRowsPerPage: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  labelDisplayedRows?: MuiTablePaginationProps['labelDisplayedRows'];
 }
 
 export const TablePagination: React.FC<
@@ -133,6 +138,7 @@ export const TablePagination: React.FC<
       page={props.page}
       onPageChange={props.onPageChange}
       onRowsPerPageChange={props.onChangeRowsPerPage}
+      labelDisplayedRows={props.labelDisplayedRows}
       ActionsComponent={TablePaginationActions}
     />
   );

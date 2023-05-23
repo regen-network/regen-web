@@ -236,6 +236,11 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
                   onChangeRowsPerPage={onChangeRowsPerPage}
                   count={initialPaginationParams?.count ?? rows.length}
                   page={page}
+                  labelDisplayedRows={({ from, to, count }) => {
+                    return `${from}–${from + rows.length - 1} of ${
+                      count !== -1 ? count : `more than ${to}`
+                    }`;
+                  }}
                   onPageChange={onPageChange}
                 />
               </TableRow>

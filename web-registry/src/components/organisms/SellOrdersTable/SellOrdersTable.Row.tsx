@@ -60,7 +60,8 @@ const getSellOrdersTableRow = ({
       iconSx={{ fontSize: '30px' }}
     />
     <DenomLabel
-      denom={askDenom}
+      bankDenom={askDenom}
+      baseDenom={askBaseDenom}
       size="sm"
       sx={{
         fontSize: { xs: '1rem' },

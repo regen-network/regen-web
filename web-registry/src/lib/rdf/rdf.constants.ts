@@ -1,5 +1,3 @@
-import { omit } from 'lodash';
-
 export const QUDT_UNIT_MAP = {
   'unit:HA': 'hectares',
   'unit:AC': 'acres',
@@ -17,9 +15,6 @@ export const DEFAULT_PROJECT_CONTEXT: { [key: string]: string } = {
 export const UNANCHORED_PROJECT_CONTEXT = {
   regen: 'https://schema.regen.network#',
   schema: 'http://schema.org/',
-  'schema:url': {
-    '@type': 'schema:URL',
-  },
   'regen:galleryPhotos': {
     '@container': '@list',
   },
@@ -87,7 +82,7 @@ export const COMPACTED_CONTEXT = {
   'regen:cfcVintageYear': { '@type': 'xsd:gYear' },
 
   // Generic unanchored and anchored project metadata
-  ...omit(UNANCHORED_PROJECT_CONTEXT, 'schema:url'),
+  ...UNANCHORED_PROJECT_CONTEXT,
   ...ANCHORED_PROJECT_CONTEXT,
   'regen:projectStartDate': {
     '@type': 'xsd:date',

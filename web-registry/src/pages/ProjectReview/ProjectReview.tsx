@@ -13,6 +13,7 @@ import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingM
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
+import { PROJECTS_QUERY_KEY } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery.constants';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
 import {
@@ -134,6 +135,9 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
       metadata: getAnchoredProjectMetadata(metadata, creditClassId),
       jurisdiction: jurisdiction || '',
       referenceId,
+    });
+    await reactQueryClient.invalidateQueries({
+      queryKey: [PROJECTS_QUERY_KEY],
     });
   };
 

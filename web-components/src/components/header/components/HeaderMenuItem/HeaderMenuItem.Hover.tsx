@@ -97,7 +97,6 @@ const HeaderMenuItemHover = ({
               classes={{ root: styles.text, padding: styles.noOutline }}
               disablePadding
             >
-              ok
               {children}
             </MenuList>
           </Paper>

@@ -1,4 +1,4 @@
-import { useMediaQuery, useTheme } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import clsx from 'clsx';
 import Image from 'next/image';
 
@@ -16,12 +16,12 @@ type Props = {
 };
 
 const TokenPool = ({ tokenPoolData }: Props): JSX.Element => {
-  const { classes: styles } = useTokenPoolStyles();
+  const { classes: styles, cx } = useTokenPoolStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <BackgroundImage src={topoBgPortrait} className={styles.root}>
+    <Box className={cx(styles.root, 'topo-background')}>
       {isMobile ? (
         <div className={styles.container}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -67,7 +67,7 @@ const TokenPool = ({ tokenPoolData }: Props): JSX.Element => {
           />
         </Section>
       )}
-    </BackgroundImage>
+    </Box>
   );
 };
 export default TokenPool;

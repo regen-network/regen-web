@@ -1,4 +1,5 @@
 import React from 'react';
+import { Box } from '@mui/material';
 import { InferGetStaticPropsType } from 'next';
 import { NextSeo } from 'next-seo';
 
@@ -47,11 +48,11 @@ export default function PressKitPage({
       <EnableSection enableSectionData={enableSection} />
       <TimelineSection timelineSectionData={timelineSection} />
       <PressKitTeamSection teamSectionData={teamSection} />
-      <BackgroundImage src={pressKitTopoBg}>
+      <Box className="topo-background">
         <FeaturedSection featuredSectionData={featuredSection} />
         <AwardsSection awardsSectionData={awardsSection} />
         <LogosSection logosSectionData={logosSection} />
-      </BackgroundImage>
+      </Box>
       <PressKitConnectSection connectSectionData={pressKitPage} />
       <PhotosSection photosSectionData={photosSection} />
     </>

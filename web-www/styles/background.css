@@ -1,0 +1,23 @@
+.topo-background {
+  background-image: url(./assets/svgs/topographic-light.svg);
+  background-size: cover;
+  background-position: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  .topo-background {
+    background-image: url(./assets/svgs/topographic-dark.svg);
+  }
+}
+
+.topo-background-alternate:nth-of-type(odd) {
+  background-image: url(./assets/svgs/topographic-light.svg);
+  background-size: cover;
+  background-position: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  .topo-background-alternate:nth-of-type(odd) {
+    background-image: url(./assets/svgs/topographic-dark.svg);
+  }
+}

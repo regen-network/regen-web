@@ -17,20 +17,18 @@ import {
   sanityDocsToDocuments,
   sanityResourcesToCardProps,
 } from '@/lib/utils/sanity/sanity-transforms';
-import imageGridBg from '@/public/images/resources/image-grid-bg.jpg';
 
 type Props = {
   registrySectionData?: ResourcesRegistrySectionFieldsFragment['registrySection'];
 };
 
 const RegistrySection = ({ registrySectionData }: Props): JSX.Element => {
-  const { classes: styles } = useRegistryStyles();
+  const { classes: styles, cx } = useRegistryStyles();
 
   return (
     <BackgroundSection
-      className={styles.section}
+      className={cx(styles.section, 'topo-background')}
       linearGradient="unset"
-      imageSrc={imageGridBg}
       topSection={false}
     >
       <Title variant="h3" align="left" sx={{ mb: [6.75, 8.5] }}>

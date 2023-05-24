@@ -18,7 +18,7 @@ interface Props {
   linearGradient?: string;
   linearGradientMobile?: string;
   children?: React.ReactNode;
-  imageSrc: string | StaticImageData;
+  imageSrc?: string | StaticImageData;
   topSection?: boolean;
 }
 

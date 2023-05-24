@@ -7,7 +7,7 @@ import { Theme } from '@/../web-components/lib/theme/muiTheme';
 import { sxToArray } from '@/../web-components/lib/utils/mui/sxToArray';
 
 type Props = {
-  src: string | StaticImageData;
+  src?: string | StaticImageData;
   alt?: string;
   children?: React.ReactNode;
   className?: string;
@@ -33,15 +33,17 @@ export const BackgroundImage = ({
       className={className}
       sx={[{ position: 'relative' }, ...sxToArray(sx)]}
     >
-      <Image
-        src={src}
-        alt={alt ?? ''}
-        className={classes.image}
-        placeholder={placeholder}
-        sizes="100vw"
-        priority
-        fill
-      />
+      {src && (
+        <Image
+          src={src}
+          alt={alt ?? ''}
+          className={classes.image}
+          placeholder={placeholder}
+          sizes="100vw"
+          priority
+          fill
+        />
+      )}
       <Box sx={{ zIndex: 1, position: 'relative' }}>{children}</Box>
     </Box>
   );

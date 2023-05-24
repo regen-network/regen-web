@@ -67,6 +67,7 @@ export const useFetchProjectsByIdsWithOrders = ({
     sellOrders,
     geckoPrices: {
       regenPrice: simplePrice?.data?.regen?.usd,
+      evmosPrice: simplePrice?.data?.evmos?.usd,
       eeurPrice: simplePrice?.data?.[GECKO_EEUR_ID]?.usd,
       usdcPrice: simplePrice?.data?.[GECKO_USDC_ID]?.usd,
     },

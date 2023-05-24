@@ -22,6 +22,7 @@ import CloseIcon from './CloseIcon';
 import CoBenefitsIcon from './CoBenefitsIcon';
 import AxlUsdcIcon from './coins/AxlUsdcIcon';
 import EeurIcon from './coins/EeurIcon';
+import EvmosIcon from './coins/EvmosIcon';
 import GravUsdcIcon from './coins/GravUsdcIcon';
 import UsdcIcon from './coins/UsdcIcon';
 import CountingIcon from './CountingIcon';
@@ -220,6 +221,7 @@ export const allIcons = (): JSX.Element => (
     />
     <LabeledIcon icon={<ErrorIcon />} label="ErrorIcon" />
     <LabeledIcon icon={<EyeIcon />} label="EyeIcon" />
+    <LabeledIcon icon={<EvmosIcon />} label="EvmosIcon" />
     <LabeledIcon icon={<FacebookIcon color="blue" />} label="FacebookIcon" />
     <LabeledIcon icon={<FarmerIcon />} label="FarmerIcon" />
     <LabeledIcon icon={<GithubIcon color="grey" />} label="GithubIcon" />

@@ -366,7 +366,9 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                                 }}
                               >
                                 <DenomIcon
-                                  denom={selectedSellOrder?.askBaseDenom ?? ''}
+                                  baseDenom={
+                                    selectedSellOrder?.askBaseDenom ?? ''
+                                  }
                                   sx={{
                                     mr: 1.5,
                                     mt: 1,

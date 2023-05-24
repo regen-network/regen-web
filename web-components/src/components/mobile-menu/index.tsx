@@ -7,14 +7,14 @@ import MenuList from '@mui/material/MenuList';
 import ReactHtmlParser from 'html-react-parser';
 
 import { Center } from '../box';
-import { HeaderMenuItem } from '../header/components/HeaderMenuHover/HeaderMenuHover';
+import { Item } from '../header/components/HeaderMenuItem/HeaderMenuItem';
 import { NavLinkProps } from '../header/components/NavLink';
 import CloseIcon from '../icons/CloseIcon';
 import HamburgerIcon from '../icons/HamburgerIcon';
 import { useMobileMenuStyles } from './MobileMenu.styles';
 
 type Props = {
-  menuItems?: HeaderMenuItem[];
+  menuItems?: Item[];
   isRegistry?: boolean;
   pathname: string;
   extras?: JSX.Element;

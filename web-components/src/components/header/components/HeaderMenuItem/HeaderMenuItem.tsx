@@ -4,20 +4,20 @@ import cx from 'clsx';
 
 import { Theme } from '../../../../theme/muiTheme';
 import { sxToArray } from '../../../../utils/mui/sxToArray';
-import { MenuTitle } from '../../../menu-hover';
-import { HeaderDropdownItemProps } from '../HeaderDropdownItems';
+import { HeaderDropdownItemProps } from '../HeaderDropdown/HeaderDropdown.Item';
 import { NavLinkProps } from '../NavLink';
-import { HeaderMenuHoverContent } from './HeaderMenuHover.Content';
-import { useHeaderMenuHoverStyles } from './HeaderMenuHover.styles';
+import { HeaderMenuItemContent } from './HeaderMenuItem.Content';
+import { MenuTitle } from './HeaderMenuItem.Hover';
+import { useHeaderMenuHoverStyles } from './HeaderMenuItem.styles';
 
-export interface HeaderMenuItem extends MenuTitle {
+export interface Item extends MenuTitle {
   href?: string;
   renderDropdownItems?: () => JSX.Element;
   dropdownItems?: HeaderDropdownItemProps[];
   extras?: JSX.Element;
 }
 
-export interface HeaderMenuHoverBase {
+export interface HeaderMenuItemBase {
   pathname: string;
   linkComponent: React.FC<NavLinkProps>;
   classes?: {
@@ -28,11 +28,11 @@ export interface HeaderMenuHoverBase {
   component?: React.ElementType;
 }
 
-export interface HeaderMenuHoverProps extends HeaderMenuHoverBase {
-  item: HeaderMenuItem;
+export interface MenuItemProps extends HeaderMenuItemBase {
+  item: Item;
 }
 
-const HeaderMenuHover: React.FC<HeaderMenuHoverProps> = ({
+const HeaderMenuItem: React.FC<MenuItemProps> = ({
   item,
   pathname,
   linkComponent,
@@ -52,7 +52,7 @@ const HeaderMenuHover: React.FC<HeaderMenuHoverProps> = ({
       sx={[...sxToArray(sx)]}
       component={component}
     >
-      <HeaderMenuHoverContent
+      <HeaderMenuItemContent
         item={item}
         linkComponent={linkComponent}
         pathname={pathname}
@@ -62,4 +62,4 @@ const HeaderMenuHover: React.FC<HeaderMenuHoverProps> = ({
   );
 };
 
-export { HeaderMenuHover };
+export { HeaderMenuItem };

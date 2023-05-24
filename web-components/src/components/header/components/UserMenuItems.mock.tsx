@@ -2,7 +2,7 @@ import { Theme } from '@mui/material';
 
 import BridgeIcon from '../../icons/BridgeIcon';
 import CreditsIcon from '../../icons/CreditsIcon';
-import { HeaderDropdownItemProps } from './HeaderDropdownItems';
+import { HeaderDropdownItemProps } from './HeaderDropdown/HeaderDropdown.Item';
 import { NavLinkProps } from './NavLink';
 
 interface GetUserMenuItemsParams {

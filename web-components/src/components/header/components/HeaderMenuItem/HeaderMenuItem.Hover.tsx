@@ -2,8 +2,8 @@ import React, { useRef, useState } from 'react';
 import { MenuList, Paper, Popover } from '@mui/material';
 import cx from 'clsx';
 
-import DropdownIcon from '../icons/DropdownIcon';
-import { useMenuHoverStyles } from './MenuHover.Styles';
+import DropdownIcon from '../../../icons/DropdownIcon';
+import { useMenuHoverStyles } from './HeaderMenuItem.Hover.styles';
 
 export interface MenuTitle {
   title?: string;
@@ -24,7 +24,7 @@ interface Props extends MenuTitle {
  *
  * @param object contains text, color, children. Where text is the anchor text. Color is a string for link text color, and children are MenuItems typically with Links.
  */
-const MenuHover = ({
+const HeaderMenuItemHover = ({
   title,
   renderTitle,
   classes,
@@ -53,7 +53,7 @@ const MenuHover = ({
     <div>
       <span
         ref={popoverAnchor}
-        aria-owns="mouse-over-popover"
+        aria-owns={openedPopover ? 'mouse-over-popover' : undefined}
         aria-haspopup="true"
         onMouseEnter={popoverEnter}
         onMouseLeave={popoverLeave}
@@ -97,6 +97,7 @@ const MenuHover = ({
               classes={{ root: styles.text, padding: styles.noOutline }}
               disablePadding
             >
+              ok
               {children}
             </MenuList>
           </Paper>
@@ -106,4 +107,4 @@ const MenuHover = ({
   );
 };
 
-export default MenuHover;
+export default HeaderMenuItemHover;

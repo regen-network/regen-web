@@ -1,5 +1,5 @@
 import { HeaderColors } from 'web-components/lib/components/header';
-import { HeaderMenuItem } from 'web-components/lib/components/header/components/HeaderMenuHover/HeaderMenuHover';
+import { HeaderMenuItem } from 'web-components/lib/components/header/components/MenuItem/MenuItem';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 interface BoolProps {

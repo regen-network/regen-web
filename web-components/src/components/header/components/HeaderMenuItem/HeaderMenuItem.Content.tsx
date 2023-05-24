@@ -1,13 +1,13 @@
 import { useTheme } from '@mui/styles';
 
-import MenuHover from '../../../menu-hover';
-import { HeaderDropdownColumn } from '../HeaderDropdownItems';
+import { HeaderDropdown } from '../HeaderDropdown/HeaderDropdown';
 import { NavLinkProps } from '../NavLink';
-import { HeaderMenuItem } from './HeaderMenuHover';
-import { useHeaderMenuHoverStyles } from './HeaderMenuHover.styles';
+import { Item } from './HeaderMenuItem';
+import HeaderMenuItemHover from './HeaderMenuItem.Hover';
+import { useHeaderMenuHoverStyles } from './HeaderMenuItem.styles';
 
 type Props = {
-  item: HeaderMenuItem;
+  item: Item;
   linkComponent: React.FC<React.PropsWithChildren<NavLinkProps>>;
   pathname: string;
   classes?: {
@@ -15,7 +15,7 @@ type Props = {
   };
 };
 
-export const HeaderMenuHoverContent = ({
+export const HeaderMenuItemContent = ({
   item,
   linkComponent: LinkComponent,
   pathname,
@@ -36,7 +36,7 @@ export const HeaderMenuHoverContent = ({
     );
   }
   return (
-    <MenuHover
+    <HeaderMenuItemHover
       dropdownColor={theme.palette.secondary.contrastText}
       title={item.title}
       renderTitle={item.renderTitle}
@@ -44,13 +44,13 @@ export const HeaderMenuHoverContent = ({
     >
       {/* `render` overrides default dropdown */}
       {item.dropdownItems && !item.renderDropdownItems && (
-        <HeaderDropdownColumn
+        <HeaderDropdown
           items={item.dropdownItems}
           linkComponent={LinkComponent}
         />
       )}
       {item.renderDropdownItems && item.renderDropdownItems()}
       {item.extras}
-    </MenuHover>
+    </HeaderMenuItemHover>
   );
 };

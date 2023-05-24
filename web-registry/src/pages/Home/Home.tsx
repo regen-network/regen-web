@@ -31,7 +31,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [open, setOpen] = useState(false);
   const [modalLink, setModalLink] = useState<string>('');
 
-  const { classes } = useHomeStyles();
+  const { classes, cx } = useHomeStyles();
 
   const { data: allHomePageData, isFetching: isFetchingAllHomePage } = useQuery(
     getAllHomePageQuery({ sanityClient, enabled: !!sanityClient }),
@@ -66,7 +66,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   if (isFetchingAllHomePage) return <Loading sx={{ minHeight: '100vh' }} />;
 
   return (
-    <Box sx={{ backgroundColor: 'primary.main' }}>
+    <Box sx={{ backgroundColor: theme => theme.palette.background.default }}>
       <SEO
         title={seo?.title || ''}
         description={seo?.description || ''}
@@ -155,14 +155,13 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
 
       {creditClassesContent && (
         <BackgroundImgSection
-          img={'/svg/topology.svg'}
           sx={{
             display: 'flex',
             alignItems: 'center',
           }}
           title={creditClassesSection?.title || 'Credit Classes'}
           classes={{
-            root: classes.creditClassBackground,
+            root: cx(classes.creditClassBackground, 'topo-background'),
             title: classes.title,
           }}
           id="credit-classes"

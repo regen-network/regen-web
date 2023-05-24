@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, ThemeOptions } from '@mui/material/styles';
 
 const defaultTheme = createTheme({
   breakpoints: {
@@ -27,7 +27,7 @@ const headerDefaults = {
   fontFamily: headerFontFamily,
 };
 
-const regenTheme = createTheme({
+export const regenThemeOptions = {
   palette: {
     primary: {
       main: '#fff',
@@ -240,7 +240,9 @@ const regenTheme = createTheme({
       },
     },
   },
-});
+} as ThemeOptions;
+
+const regenTheme = createTheme(regenThemeOptions);
 
 declare module '@mui/material/styles' {
   interface TypographyVariants {

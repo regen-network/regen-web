@@ -7,7 +7,7 @@ import Section from 'web-components/lib/components/section';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 type Props = {
-  img: string;
+  img?: string;
   /** sets larger `minHeight` on mobile to match gatsby `BackgroundSection` */
   isBanner?: boolean;
   linearGradient?: string;

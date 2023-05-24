@@ -1,12 +1,14 @@
 import * as React from 'react';
+import { useMediaQuery } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import {
+  createTheme,
   StyledEngineProvider,
   Theme,
   ThemeProvider,
 } from '@mui/material/styles';
 
-import theme from './muiTheme';
+import { regenThemeOptions } from './muiTheme';
 
 import 'web-components/src/theme/index.css';
 
@@ -26,6 +28,21 @@ const RegenThemeProvider = ({
   injectStyles,
   children,
 }: Props): JSX.Element => {
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        ...regenThemeOptions,
+        //@ts-ignore
+        palette: {
+          ...regenThemeOptions.palette,
+          mode: prefersDarkMode ? 'dark' : 'light',
+        },
+      }),
+    [prefersDarkMode],
+  );
+
   if (injectStyles) {
     injectStyles();
   }

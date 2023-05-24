@@ -4504,6 +4504,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "image",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CustomImage",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -4612,6 +4624,18 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "image",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CustomImageFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -4714,6 +4738,18 @@
             "type": {
               "kind": "ENUM",
               "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "image",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CustomImageSorting",
               "ofType": null
             },
             "defaultValue": null,
@@ -25204,6 +25240,18 @@
             "deprecationReason": null
           },
           {
+            "name": "carbonPlusSection",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CarbonPlusSection",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "marketplaceSection",
             "description": null,
             "args": [],
@@ -25270,18 +25318,6 @@
             "type": {
               "kind": "OBJECT",
               "name": "ClimateSection",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "carbonPlusSection",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "CarbonPlusSection",
               "ofType": null
             },
             "isDeprecated": false,
@@ -25426,6 +25462,18 @@
             "deprecationReason": null
           },
           {
+            "name": "carbonPlusSection",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CarbonPlusSectionFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "marketplaceSection",
             "description": null,
             "type": {
@@ -25491,18 +25539,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "ClimateSectionFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "carbonPlusSection",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "CarbonPlusSectionFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -25629,6 +25665,18 @@
             "deprecationReason": null
           },
           {
+            "name": "carbonPlusSection",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CarbonPlusSectionSorting",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "marketplaceSection",
             "description": null,
             "type": {
@@ -25694,18 +25742,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "ClimateSectionSorting",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "carbonPlusSection",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "CarbonPlusSectionSorting",
               "ofType": null
             },
             "defaultValue": null,

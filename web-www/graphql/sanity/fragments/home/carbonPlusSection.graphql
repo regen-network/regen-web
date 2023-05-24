@@ -6,5 +6,8 @@ fragment carbonPlusSectionFields on HomePageWeb {
     description
     linkText
     linkUrl
+    image {
+      ...customImageFields
+    }
   }
 }

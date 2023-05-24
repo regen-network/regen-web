@@ -546,6 +546,7 @@ export type CarbonPlusSection = {
   description?: Maybe<Scalars['String']>;
   linkText?: Maybe<Scalars['String']>;
   linkUrl?: Maybe<Scalars['String']>;
+  image?: Maybe<CustomImage>;
 };
 
 export type CarbonPlusSectionFilter = {
@@ -557,6 +558,7 @@ export type CarbonPlusSectionFilter = {
   description?: Maybe<StringFilter>;
   linkText?: Maybe<StringFilter>;
   linkUrl?: Maybe<StringFilter>;
+  image?: Maybe<CustomImageFilter>;
 };
 
 export type CarbonPlusSectionSorting = {
@@ -568,6 +570,7 @@ export type CarbonPlusSectionSorting = {
   description?: Maybe<SortOrder>;
   linkText?: Maybe<SortOrder>;
   linkUrl?: Maybe<SortOrder>;
+  image?: Maybe<CustomImageSorting>;
 };
 
 export type Card = {
@@ -2896,13 +2899,13 @@ export type HomePageWeb = Document & {
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
   homeFoldSection?: Maybe<HomeFoldSection>;
+  carbonPlusSection?: Maybe<CarbonPlusSection>;
   marketplaceSection?: Maybe<MarketplaceSection>;
   homeWebPartnersSection?: Maybe<HomeWebPartnersSection>;
   homeWebEcologicalCreditCardsSection?: Maybe<HomeWebEcologicalCreditCardsSection>;
   homeWebStatsSection?: Maybe<HomeWebStatsSection>;
   bannerTextSection?: Maybe<TitleImageCustomBody>;
   climateSection?: Maybe<ClimateSection>;
-  carbonPlusSection?: Maybe<CarbonPlusSection>;
   ledgerDescription?: Maybe<Scalars['String']>;
   valuesSection?: Maybe<HomeValuesSection>;
 };
@@ -2917,13 +2920,13 @@ export type HomePageWebFilter = {
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
   homeFoldSection?: Maybe<HomeFoldSectionFilter>;
+  carbonPlusSection?: Maybe<CarbonPlusSectionFilter>;
   marketplaceSection?: Maybe<MarketplaceSectionFilter>;
   homeWebPartnersSection?: Maybe<HomeWebPartnersSectionFilter>;
   homeWebEcologicalCreditCardsSection?: Maybe<HomeWebEcologicalCreditCardsSectionFilter>;
   homeWebStatsSection?: Maybe<HomeWebStatsSectionFilter>;
   bannerTextSection?: Maybe<TitleImageCustomBodyFilter>;
   climateSection?: Maybe<ClimateSectionFilter>;
-  carbonPlusSection?: Maybe<CarbonPlusSectionFilter>;
   ledgerDescription?: Maybe<StringFilter>;
   valuesSection?: Maybe<HomeValuesSectionFilter>;
 };
@@ -2936,13 +2939,13 @@ export type HomePageWebSorting = {
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
   homeFoldSection?: Maybe<HomeFoldSectionSorting>;
+  carbonPlusSection?: Maybe<CarbonPlusSectionSorting>;
   marketplaceSection?: Maybe<MarketplaceSectionSorting>;
   homeWebPartnersSection?: Maybe<HomeWebPartnersSectionSorting>;
   homeWebEcologicalCreditCardsSection?: Maybe<HomeWebEcologicalCreditCardsSectionSorting>;
   homeWebStatsSection?: Maybe<HomeWebStatsSectionSorting>;
   bannerTextSection?: Maybe<TitleImageCustomBodySorting>;
   climateSection?: Maybe<ClimateSectionSorting>;
-  carbonPlusSection?: Maybe<CarbonPlusSectionSorting>;
   ledgerDescription?: Maybe<SortOrder>;
   valuesSection?: Maybe<HomeValuesSectionSorting>;
 };
@@ -7356,144 +7359,15 @@ export type WalletAddressRegistrationWalletSectionSorting = {
   walletFoundButtonText?: Maybe<SortOrder>;
 };
 
-export type BlogSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type BlogSectionQuery = (
-  { __typename?: 'RootQuery' }
-  & { allSharedSections: Array<(
-    { __typename?: 'SharedSections' }
-    & { blog?: Maybe<(
-      { __typename?: 'BlogSection' }
-      & Pick<BlogSection, 'header'>
-      & { posts?: Maybe<Array<Maybe<(
-        { __typename?: 'BlogPost' }
-        & Pick<BlogPost, 'header' | 'url' | 'descriptionRaw'>
-        & { image?: Maybe<(
-          { __typename?: 'CustomImage' }
-          & CustomImageFieldsFragment
-        )> }
-      )>>> }
-    )> }
-  )> }
-);
-
-export type ContactPageQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ContactPageQuery = (
-  { __typename?: 'RootQuery' }
-  & { allContactPage: Array<(
-    { __typename?: 'ContactPage' }
-    & Pick<ContactPage, 'header' | 'bodyRaw' | 'messageForPartnersRaw'>
-    & { formRequestTypes?: Maybe<Array<Maybe<(
-      { __typename?: 'RequestType' }
-      & Pick<RequestType, 'label' | 'value'>
-    )>>>, location?: Maybe<(
-      { __typename?: 'TitleImageCustomBody' }
-      & Pick<TitleImageCustomBody, 'title' | 'bodyRaw'>
-      & { image?: Maybe<(
-        { __typename?: 'CustomImage' }
-        & CustomImageFieldsFragment
-      )> }
-    )>, email?: Maybe<(
-      { __typename?: 'TitleCustomBody' }
-      & Pick<TitleCustomBody, 'title' | 'bodyRaw'>
-    )>, faq?: Maybe<(
-      { __typename?: 'TitleImage' }
-      & Pick<TitleImage, 'title'>
-      & { image?: Maybe<(
-        { __typename?: 'CustomImage' }
-        & CustomImageFieldsFragment
-      )> }
-    )> }
-  )> }
-);
-
-export type FaqPageQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type FaqPageQuery = (
-  { __typename?: 'RootQuery' }
-  & { allFaqPage: Array<(
-    { __typename?: 'FaqPage' }
-    & { categories?: Maybe<Array<Maybe<(
-      { __typename?: 'FaqCategory' }
-      & Pick<FaqCategory, 'header'>
-      & { questions?: Maybe<Array<Maybe<(
-        { __typename?: 'Faq' }
-        & Pick<Faq, 'question' | 'answerRaw'>
-      )>>> }
-    )>>> }
-  )> }
-);
-
-export type CallToActionFieldsFragment = (
-  { __typename?: 'CallToAction' }
-  & Pick<CallToAction, 'caption' | 'header' | 'description' | 'linkText' | 'linkUrl'>
-  & { image?: Maybe<(
-    { __typename?: 'Image' }
-    & ImageFieldsFragment
-  )> }
-);
-
-export type CustomImageFieldsFragment = (
-  { __typename?: 'CustomImage' }
-  & Pick<CustomImage, 'imageAlt' | 'imageHref'>
-  & { image?: Maybe<(
-    { __typename?: 'Image' }
-    & { asset?: Maybe<(
-      { __typename?: 'SanityImageAsset' }
-      & Pick<SanityImageAsset, 'altText' | 'url'>
-      & { metadata?: Maybe<(
-        { __typename?: 'SanityImageMetadata' }
-        & { dimensions?: Maybe<(
-          { __typename?: 'SanityImageDimensions' }
-          & Pick<SanityImageDimensions, 'height' | 'width'>
-        )> }
-      )> }
-    )> }
-  )> }
-);
-
-export type ImageFieldsFragment = (
-  { __typename?: 'Image' }
-  & { asset?: Maybe<(
-    { __typename?: 'SanityImageAsset' }
-    & Pick<SanityImageAsset, 'altText' | 'url'>
-    & { metadata?: Maybe<(
-      { __typename?: 'SanityImageMetadata' }
-      & { dimensions?: Maybe<(
-        { __typename?: 'SanityImageDimensions' }
-        & Pick<SanityImageDimensions, 'height' | 'width'>
-      )> }
-    )> }
-  )> }
-);
-
-export type MediaFieldsFragment = (
-  { __typename?: 'Media' }
-  & Pick<Media, 'title' | 'author' | 'date' | 'href' | 'type'>
-  & { image?: Maybe<(
-    { __typename?: 'CustomImage' }
-    & CustomImageFieldsFragment
-  )> }
-);
-
-export type ButtonFieldsFragment = (
-  { __typename?: 'Button' }
-  & Pick<Button, 'buttonText' | 'buttonModal' | 'buttonBlankTarget'>
-  & { buttonLink?: Maybe<(
-    { __typename?: 'Link' }
-    & LinkFieldsFragment
-  )> }
-);
-
 export type CarbonPlusSectionFieldsFragment = (
   { __typename?: 'HomePageWeb' }
   & { carbonPlusSection?: Maybe<(
     { __typename?: 'CarbonPlusSection' }
     & Pick<CarbonPlusSection, 'smallHeaderFeatured' | 'smallHeaderCreditName' | 'header' | 'description' | 'linkText' | 'linkUrl'>
+    & { image?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
+    )> }
   )> }
 );
 
@@ -7619,15 +7493,6 @@ export type ValuesSectionFieldsFragment = (
         & ImageFieldsFragment
       )> }
     )>>> }
-  )> }
-);
-
-export type LinkFieldsFragment = (
-  { __typename?: 'Link' }
-  & Pick<Link, 'buttonHref'>
-  & { buttonDoc?: Maybe<(
-    { __typename?: 'Doc' }
-    & Pick<Doc, 'href'>
   )> }
 );
 
@@ -7796,11 +7661,92 @@ export type ResourcesTopSectionFieldsFragment = (
   )> }
 );
 
+export type CallToActionFieldsFragment = (
+  { __typename?: 'CallToAction' }
+  & Pick<CallToAction, 'caption' | 'header' | 'description' | 'linkText' | 'linkUrl'>
+  & { image?: Maybe<(
+    { __typename?: 'Image' }
+    & ImageFieldsFragment
+  )> }
+);
+
+export type CustomImageFieldsFragment = (
+  { __typename?: 'CustomImage' }
+  & Pick<CustomImage, 'imageAlt' | 'imageHref'>
+  & { image?: Maybe<(
+    { __typename?: 'Image' }
+    & { asset?: Maybe<(
+      { __typename?: 'SanityImageAsset' }
+      & Pick<SanityImageAsset, 'altText' | 'url'>
+      & { metadata?: Maybe<(
+        { __typename?: 'SanityImageMetadata' }
+        & { dimensions?: Maybe<(
+          { __typename?: 'SanityImageDimensions' }
+          & Pick<SanityImageDimensions, 'height' | 'width'>
+        )> }
+      )> }
+    )> }
+  )> }
+);
+
+export type ImageFieldsFragment = (
+  { __typename?: 'Image' }
+  & { asset?: Maybe<(
+    { __typename?: 'SanityImageAsset' }
+    & Pick<SanityImageAsset, 'altText' | 'url'>
+    & { metadata?: Maybe<(
+      { __typename?: 'SanityImageMetadata' }
+      & { dimensions?: Maybe<(
+        { __typename?: 'SanityImageDimensions' }
+        & Pick<SanityImageDimensions, 'height' | 'width'>
+      )> }
+    )> }
+  )> }
+);
+
+export type MediaFieldsFragment = (
+  { __typename?: 'Media' }
+  & Pick<Media, 'title' | 'author' | 'date' | 'href' | 'type'>
+  & { image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )> }
+);
+
+export type ButtonFieldsFragment = (
+  { __typename?: 'Button' }
+  & Pick<Button, 'buttonText' | 'buttonModal' | 'buttonBlankTarget'>
+  & { buttonLink?: Maybe<(
+    { __typename?: 'Link' }
+    & LinkFieldsFragment
+  )> }
+);
+
+export type LinkFieldsFragment = (
+  { __typename?: 'Link' }
+  & Pick<Link, 'buttonHref'>
+  & { buttonDoc?: Maybe<(
+    { __typename?: 'Doc' }
+    & Pick<Doc, 'href'>
+  )> }
+);
+
 export type SharedNewsletterSectionFieldsFragment = (
   { __typename?: 'SharedSections' }
   & { newsletter?: Maybe<(
     { __typename?: 'TitleCustomBody' }
     & Pick<TitleCustomBody, 'title' | 'bodyRaw'>
+  )> }
+);
+
+export type SharedSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SharedSectionQuery = (
+  { __typename?: 'RootQuery' }
+  & { allSharedSections: Array<(
+    { __typename?: 'SharedSections' }
+    & SharedNewsletterSectionFieldsFragment
   )> }
 );
 
@@ -7937,6 +7883,78 @@ export type TokenTopSectionFieldsFragment = (
   )> }
 );
 
+export type BlogSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type BlogSectionQuery = (
+  { __typename?: 'RootQuery' }
+  & { allSharedSections: Array<(
+    { __typename?: 'SharedSections' }
+    & { blog?: Maybe<(
+      { __typename?: 'BlogSection' }
+      & Pick<BlogSection, 'header'>
+      & { posts?: Maybe<Array<Maybe<(
+        { __typename?: 'BlogPost' }
+        & Pick<BlogPost, 'header' | 'url' | 'descriptionRaw'>
+        & { image?: Maybe<(
+          { __typename?: 'CustomImage' }
+          & CustomImageFieldsFragment
+        )> }
+      )>>> }
+    )> }
+  )> }
+);
+
+export type ContactPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ContactPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allContactPage: Array<(
+    { __typename?: 'ContactPage' }
+    & Pick<ContactPage, 'header' | 'bodyRaw' | 'messageForPartnersRaw'>
+    & { formRequestTypes?: Maybe<Array<Maybe<(
+      { __typename?: 'RequestType' }
+      & Pick<RequestType, 'label' | 'value'>
+    )>>>, location?: Maybe<(
+      { __typename?: 'TitleImageCustomBody' }
+      & Pick<TitleImageCustomBody, 'title' | 'bodyRaw'>
+      & { image?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )> }
+    )>, email?: Maybe<(
+      { __typename?: 'TitleCustomBody' }
+      & Pick<TitleCustomBody, 'title' | 'bodyRaw'>
+    )>, faq?: Maybe<(
+      { __typename?: 'TitleImage' }
+      & Pick<TitleImage, 'title'>
+      & { image?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )> }
+    )> }
+  )> }
+);
+
+export type FaqPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FaqPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allFaqPage: Array<(
+    { __typename?: 'FaqPage' }
+    & { categories?: Maybe<Array<Maybe<(
+      { __typename?: 'FaqCategory' }
+      & Pick<FaqCategory, 'header'>
+      & { questions?: Maybe<Array<Maybe<(
+        { __typename?: 'Faq' }
+        & Pick<Faq, 'question' | 'answerRaw'>
+      )>>> }
+    )>>> }
+  )> }
+);
+
 export type HomePageWebQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -8025,17 +8043,6 @@ export type ResourcesPageQuery = (
   )> }
 );
 
-export type SharedSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type SharedSectionQuery = (
-  { __typename?: 'RootQuery' }
-  & { allSharedSections: Array<(
-    { __typename?: 'SharedSections' }
-    & SharedNewsletterSectionFieldsFragment
-  )> }
-);
-
 export type TeamPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -8068,6 +8075,24 @@ export type TokenPageQuery = (
   )> }
 );
 
+export const CustomImageFieldsFragmentDoc = gql`
+    fragment customImageFields on CustomImage {
+  imageAlt
+  imageHref
+  image {
+    asset {
+      altText
+      url
+      metadata {
+        dimensions {
+          height
+          width
+        }
+      }
+    }
+  }
+}
+    `;
 export const CarbonPlusSectionFieldsFragmentDoc = gql`
     fragment carbonPlusSectionFields on HomePageWeb {
   carbonPlusSection {
@@ -8077,9 +8102,12 @@ export const CarbonPlusSectionFieldsFragmentDoc = gql`
     description
     linkText
     linkUrl
+    image {
+      ...customImageFields
+    }
   }
 }
-    `;
+    ${CustomImageFieldsFragmentDoc}`;
 export const ImageFieldsFragmentDoc = gql`
     fragment imageFields on Image {
   asset {
@@ -8113,24 +8141,6 @@ export const ClimateSectionFieldsFragmentDoc = gql`
   }
 }
     ${ImageFieldsFragmentDoc}`;
-export const CustomImageFieldsFragmentDoc = gql`
-    fragment customImageFields on CustomImage {
-  imageAlt
-  imageHref
-  image {
-    asset {
-      altText
-      url
-      metadata {
-        dimensions {
-          height
-          width
-        }
-      }
-    }
-  }
-}
-    `;
 export const LinkFieldsFragmentDoc = gql`
     fragment linkFields on Link {
   buttonHref
@@ -8580,6 +8590,40 @@ export const TokenTopSectionFieldsFragmentDoc = gql`
   }
 }
     `;
+export const SharedSectionDocument = gql`
+    query sharedSection {
+  allSharedSections {
+    ...sharedNewsletterSectionFields
+  }
+}
+    ${SharedNewsletterSectionFieldsFragmentDoc}`;
+
+/**
+ * __useSharedSectionQuery__
+ *
+ * To run a query within a React component, call `useSharedSectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSharedSectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSharedSectionQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSharedSectionQuery(baseOptions?: Apollo.QueryHookOptions<SharedSectionQuery, SharedSectionQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SharedSectionQuery, SharedSectionQueryVariables>(SharedSectionDocument, options);
+      }
+export function useSharedSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SharedSectionQuery, SharedSectionQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SharedSectionQuery, SharedSectionQueryVariables>(SharedSectionDocument, options);
+        }
+export type SharedSectionQueryHookResult = ReturnType<typeof useSharedSectionQuery>;
+export type SharedSectionLazyQueryHookResult = ReturnType<typeof useSharedSectionLazyQuery>;
+export type SharedSectionQueryResult = Apollo.QueryResult<SharedSectionQuery, SharedSectionQueryVariables>;
 export const BlogSectionDocument = gql`
     query blogSection {
   allSharedSections {
@@ -8943,40 +8987,6 @@ export function useResourcesPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type ResourcesPageQueryHookResult = ReturnType<typeof useResourcesPageQuery>;
 export type ResourcesPageLazyQueryHookResult = ReturnType<typeof useResourcesPageLazyQuery>;
 export type ResourcesPageQueryResult = Apollo.QueryResult<ResourcesPageQuery, ResourcesPageQueryVariables>;
-export const SharedSectionDocument = gql`
-    query sharedSection {
-  allSharedSections {
-    ...sharedNewsletterSectionFields
-  }
-}
-    ${SharedNewsletterSectionFieldsFragmentDoc}`;
-
-/**
- * __useSharedSectionQuery__
- *
- * To run a query within a React component, call `useSharedSectionQuery` and pass it any options that fit your needs.
- * When your component renders, `useSharedSectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useSharedSectionQuery({
- *   variables: {
- *   },
- * });
- */
-export function useSharedSectionQuery(baseOptions?: Apollo.QueryHookOptions<SharedSectionQuery, SharedSectionQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<SharedSectionQuery, SharedSectionQueryVariables>(SharedSectionDocument, options);
-      }
-export function useSharedSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SharedSectionQuery, SharedSectionQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<SharedSectionQuery, SharedSectionQueryVariables>(SharedSectionDocument, options);
-        }
-export type SharedSectionQueryHookResult = ReturnType<typeof useSharedSectionQuery>;
-export type SharedSectionLazyQueryHookResult = ReturnType<typeof useSharedSectionLazyQuery>;
-export type SharedSectionQueryResult = Apollo.QueryResult<SharedSectionQuery, SharedSectionQueryVariables>;
 export const TeamPageDocument = gql`
     query teamPage {
   allTeamPage {

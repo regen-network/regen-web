@@ -171,6 +171,12 @@ function ProjectDetails(): JSX.Element {
     offChainProject?.partyByDeveloperId,
   );
 
+  const projectVerifier = getDisplayParty(
+    'regen:projectVerifier',
+    anchoredMetadata,
+    offChainProject?.partyByVerifierId,
+  );
+
   const { geojson, isGISFile } = useGeojson({
     projectMetadata,
     projectPageMetadata: offChainProjectMetadata,
@@ -270,6 +276,7 @@ function ProjectDetails(): JSX.Element {
         isGISFile={isGISFile}
         onChainProjectId={onChainProjectId}
         projectDeveloper={projectDeveloper}
+        projectVerifier={projectVerifier}
         loading={loadingDb || loadingAnchoredMetadata}
         soldOutProjectsIds={soldOutProjectsIds}
         projectWithOrderData={projectsWithOrderData[0]}

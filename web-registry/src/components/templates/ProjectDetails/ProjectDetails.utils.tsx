@@ -174,6 +174,7 @@ export function getParty(
 
 type StakeholderType =
   | 'regen:projectDeveloper'
+  | 'regen:projectVerifier'
   | 'regen:landSteward'
   | 'regen:landOwner'
   | 'regen:projectOriginator';
@@ -210,12 +211,9 @@ export function getDisplayParty(
   metadata?: AnchoredProjectMetadataBaseLD,
   party?: Maybe<PartyFieldsFragment>,
 ): Party | undefined {
-  const showOnProjectPage = metadata?.[role]?.['regen:showOnProjectPage'];
-  if (showOnProjectPage) {
-    const dbParty = getParty(party);
-    if (dbParty) return dbParty;
-    // If no party info available for this role, check the metadata
-    return getPartyFromMetadata(metadata, role);
-  }
+  const dbParty = getParty(party);
+  if (dbParty) return dbParty;
+  // If no party info available for this role, check the metadata
+  if (metadata) return getPartyFromMetadata(metadata, role);
   return undefined;
 }

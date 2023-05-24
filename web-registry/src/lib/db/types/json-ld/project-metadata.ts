@@ -17,6 +17,7 @@ export interface AnchoredProjectMetadataBaseLD {
   'regen:projectStartDate'?: string;
   'regen:projectEndDate'?: string;
   'regen:projectDeveloper'?: ProjectStakeholder;
+  'regen:projectVerifier'?: ProjectStakeholder;
   'regen:landSteward'?: ProjectStakeholder;
   'regen:landOwner'?: ProjectStakeholder;
   'regen:projectOriginator'?: ProjectStakeholder;

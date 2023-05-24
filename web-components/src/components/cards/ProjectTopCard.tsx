@@ -1,4 +1,3 @@
-import React from 'react';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from 'tss-react/mui';
 
@@ -19,6 +18,7 @@ interface ProjectTopCardProps {
   };
   projectAdmin?: User;
   projectDeveloper?: User;
+  projectVerifier?: User;
   landSteward?: User;
   landOwner?: User;
   issuer?: User;
@@ -112,6 +112,7 @@ export default function ProjectTopCard({
   classes,
   projectAdmin,
   projectDeveloper,
+  projectVerifier,
   landSteward,
   landOwner,
   issuer,
@@ -165,6 +166,11 @@ export default function ProjectTopCard({
             user={projectDeveloper}
             title="project developer"
           />
+        </div>
+      )}
+      {projectVerifier && (
+        <div className={cx(styles.userInfo, classes && classes.userInfo)}>
+          <UserInfoWithTitle user={projectVerifier} title="verifier" />
         </div>
       )}
       {landSteward && (

@@ -42,6 +42,10 @@ const intercomId = process.env.REACT_APP_INTERCOM_APP_ID || '';
 // you can set this flag in local environments if testing changes to sentry.
 // currently we only want this flag set for the production environment.
 if (process.env.REACT_APP_SENTRY_ENABLED) {
+  const defaultSampleRate = '0.2';
+  const tracesSampleRate = parseFloat(
+    process.env.REACT_APP_SENTRY_TRACES_SAMPLE_RATE || defaultSampleRate,
+  );
   Sentry.init({
     dsn: 'https://f5279ac3b8724af88ffb4cdfad92a2d4@o1377530.ingest.sentry.io/6688446',
     integrations: [
@@ -55,10 +59,7 @@ if (process.env.REACT_APP_SENTRY_ENABLED) {
         ),
       }),
     ],
-    // Set tracesSampleRate to 1.0 to capture 100%
-    // of transactions for performance monitoring.
-    // We recommend adjusting this value in production
-    tracesSampleRate: 1.0,
+    tracesSampleRate,
     environment: process.env.REACT_APP_SENTRY_ENVIRONMENT || 'development',
   });
 }

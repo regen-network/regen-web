@@ -1,7 +1,7 @@
 import { Theme } from '@mui/material';
 
 import { HeaderColors } from 'web-components/lib/components/header';
-import { HeaderDropdownItemProps } from 'web-components/lib/components/header/components/HeaderDropdownItems';
+import { HeaderDropdownItemProps } from 'web-components/lib/components/header/components/HeaderDropdown/HeaderDropdown.Item';
 import { Item } from 'web-components/lib/components/header/components/HeaderMenuItem/HeaderMenuItem';
 import { NavLinkProps } from 'web-components/lib/components/header/components/NavLink';
 import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';

@@ -2,7 +2,6 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import ReactHtmlParser from 'html-react-parser';
 
-import { Title } from '../../../typography';
 import { NavLinkProps } from '../NavLink';
 import { useStyles } from './HeaderDropdown.styles';
 

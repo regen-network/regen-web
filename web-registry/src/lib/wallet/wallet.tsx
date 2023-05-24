@@ -1,17 +1,27 @@
 import React, { createContext, useEffect, useRef, useState } from 'react';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
 import { StdSignature } from '@cosmjs/launchpad';
 import { OfflineSigner } from '@cosmjs/proto-signing';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
+import { useQuery } from '@tanstack/react-query';
 import WalletConnect from '@walletconnect/client';
 
-import { useGetCurrentAccountQuery } from 'generated/graphql';
+import { PartyByAddrQuery, useGetCurrentAccountQuery } from 'generated/graphql';
+import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
+import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 
+import { useAddAddress } from './hooks/useAddAddress';
 import { useAutoConnect } from './hooks/useAutoConnect';
 import { useConnect } from './hooks/useConnect';
 import { useConnectWallet } from './hooks/useConnectWallet';
 import { useDetectKeplrMobileBrowser } from './hooks/useDetectKeplrMobileBrowser';
 import { useDisconnect } from './hooks/useDisconnect';
+import { useHandleAddAddress } from './hooks/useHandleAddAddress';
 import { useLogin } from './hooks/useLogin';
 import { useLogout } from './hooks/useLogout';
 import { useOnAccountChange } from './hooks/useOnAccountChange';
@@ -42,6 +52,7 @@ export type LoginType = (loginParams: LoginParams) => Promise<void>;
 
 export interface SignArbitraryParams extends LoginParams {
   nonce: string;
+  addAddr?: boolean;
 }
 export type SignArbitraryType = (
   signArbitraryParams: SignArbitraryParams,
@@ -52,20 +63,20 @@ export type WalletContextType = {
   loaded: boolean;
   connect?: (params: ConnectParams) => Promise<void>;
   disconnect?: () => void;
+  handleAddAddress?: () => Promise<void>;
   connectionType?: string;
   error?: unknown;
   walletConnectUri?: string;
   signArbitrary?: SignArbitraryType;
-  login?: LoginType;
-  logout?: () => Promise<void>;
   accountId?: string;
-  walletConfig?: WalletConfig;
-  walletConnect?: WalletConnect;
   isConnected: boolean;
+  partyByAddr?: PartyByAddrQuery | null;
+  accountChanging: boolean;
 };
 const WalletContext = createContext<WalletContextType>({
   loaded: false,
   isConnected: false,
+  accountChanging: false,
 });
 
 export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
@@ -76,6 +87,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   // only once we know what's the actual wallet connection status.
   const [loaded, setLoaded] = useState<boolean>(false);
   const [wallet, setWallet] = useState<Wallet>(emptySender);
+  const [accountChanging, setAccountChanging] = useState<boolean>(false);
   const [accountId, setAccountId] = useState<string | undefined>(undefined);
   const [connectionType, setConnectionType] = useState<string | undefined>(
     undefined,
@@ -122,8 +134,30 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     logout,
   });
 
-  useAutoConnect({ connectWallet, setError, setLoaded });
-  useOnAccountChange({ connectWallet, wallet });
+  const addAddress = useAddAddress({ signArbitrary, setError, setWallet });
+  const handleAddAddress = useHandleAddAddress({
+    wallet,
+    walletConfigRef,
+    walletConnect,
+    accountId,
+    addAddress,
+  });
+
+  useAutoConnect({
+    connectWallet,
+    setError,
+    setLoaded,
+  });
+  useOnAccountChange({
+    connectWallet,
+    wallet,
+    keplrMobileWeb,
+    walletConfigRef,
+    walletConnect,
+    accountId,
+    addAddress,
+    setAccountChanging,
+  });
   useDetectKeplrMobileBrowser({
     connectWallet,
     loaded,
@@ -143,27 +177,41 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     if (data?.getCurrentAccount) setAccountId(data?.getCurrentAccount);
   }, [data?.getCurrentAccount]);
 
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
+  const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
+  const { data: partyByAddr, isFetching } = useQuery(
+    getPartyByAddrQuery({
+      client: graphqlClient,
+      addr: wallet?.address ?? '',
+      enabled: !!wallet?.address && !!graphqlClient && !!csrfData,
+    }),
+  );
+  const loginDisabled = keplrMobileWeb || !!walletConnect;
+
   return (
     <WalletContext.Provider
       value={{
         wallet,
-        loaded,
+        loaded: loaded && !isFetching,
         connect,
         disconnect,
+        handleAddAddress: loginDisabled ? undefined : handleAddAddress,
         connectionType,
         error,
         walletConnectUri,
         signArbitrary,
-        login,
-        logout,
         accountId,
-        walletConfig: walletConfigRef?.current,
-        walletConnect,
+        partyByAddr,
+        accountChanging,
         isConnected:
           !!wallet?.address &&
           // signArbitrary (used in login) not yet supported by @keplr-wallet/wc-client
           // https://github.com/chainapsis/keplr-wallet/issues/664
-          (keplrMobileWeb || !!walletConnect || !!accountId),
+          (loginDisabled ||
+            (!!accountId &&
+              partyByAddr?.walletByAddr?.partyByWalletId?.accountId ===
+                accountId)),
       }}
     >
       {children}

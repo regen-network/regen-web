@@ -1,6 +1,8 @@
 import { atomWithImmer } from 'jotai-immer';
 
 import { RegenModalProps } from 'web-components/lib/components/modal';
+import { AddWalletModalConnectProps } from 'web-components/lib/components/modal/add-wallet-modal/AddWalletModalConnect';
+import { AddWalletModalRemoveProps } from 'web-components/lib/components/modal/add-wallet-modal/AddWalletModalRemove';
 import { ProcessingModalProps } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModalProps } from 'web-components/lib/components/modal/TxErrorModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
@@ -30,3 +32,25 @@ export const processingModalAtom = atomWithImmer({
 export const connectWalletModalAtom = atomWithImmer({
   open: false,
 } as Partial<RegenModalProps>);
+
+export const addWalletModalSwitchAtom = atomWithImmer({
+  open: false,
+} as Partial<RegenModalProps>);
+
+export const addWalletModalConnectAtom = atomWithImmer({
+  open: false,
+  partyInfo: {
+    addr: '',
+    name: '',
+    profileImage: '',
+  },
+} as Partial<AddWalletModalConnectProps>);
+
+export const addWalletModalRemoveAtom = atomWithImmer({
+  open: false,
+  partyInfo: {
+    addr: '',
+    name: '',
+    profileImage: '',
+  },
+} as Partial<AddWalletModalRemoveProps>);

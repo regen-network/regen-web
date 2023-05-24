@@ -10,12 +10,16 @@ type Props = {
   item: HeaderMenuItem;
   linkComponent: React.FC<React.PropsWithChildren<NavLinkProps>>;
   pathname: string;
+  classes?: {
+    paper?: string;
+  };
 };
 
 export const HeaderMenuHoverContent = ({
   item,
   linkComponent: LinkComponent,
   pathname,
+  classes,
 }: Props): JSX.Element => {
   const theme = useTheme();
   const { classes: styles } = useHeaderMenuHoverStyles();
@@ -36,7 +40,7 @@ export const HeaderMenuHoverContent = ({
       dropdownColor={theme.palette.secondary.contrastText}
       title={item.title}
       renderTitle={item.renderTitle}
-      classes={{ title: styles.title }}
+      classes={{ title: styles.title, paper: classes?.paper }}
     >
       {/* `render` overrides default dropdown */}
       {item.dropdownItems && !item.renderDropdownItems && (

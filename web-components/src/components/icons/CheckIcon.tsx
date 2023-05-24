@@ -1,11 +1,15 @@
-import React from 'react';
-import SvgIcon from '@mui/material/SvgIcon';
+import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
-interface IconProps {
+import { sxToArray } from '../../utils/mui/sxToArray';
+
+interface IconProps extends SvgIconProps {
   className?: string;
 }
 
-export default function CheckIcon({ className }: IconProps): JSX.Element {
+export default function CheckIcon({
+  className,
+  sx = [],
+}: IconProps): JSX.Element {
   return (
     <SvgIcon
       className={className}
@@ -13,6 +17,7 @@ export default function CheckIcon({ className }: IconProps): JSX.Element {
       height="17"
       viewBox="0 0 18 17"
       fill="none"
+      sx={[{ fill: 'none' }, ...sxToArray(sx)]}
     >
       <mask
         id="path-1-outside-1"

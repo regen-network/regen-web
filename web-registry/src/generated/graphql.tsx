@@ -115,6 +115,29 @@ export enum AccountsOrderBy {
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
 
+/** All input for the `addAddrToAccount` mutation. */
+export type AddAddrToAccountInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  addr?: Maybe<Scalars['String']>;
+  vPartyType?: Maybe<PartyType>;
+};
+
+/** The output of our `addAddrToAccount` mutation. */
+export type AddAddrToAccountPayload = {
+  __typename?: 'AddAddrToAccountPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+};
+
 
 /** All input for the create `Account` mutation. */
 export type CreateAccountInput = {
@@ -661,6 +684,7 @@ export type CreditClass = Node & {
   id: Scalars['UUID'];
   createdAt: Scalars['Datetime'];
   updatedAt: Scalars['Datetime'];
+  methodologyId: Scalars['UUID'];
   uri: Scalars['String'];
   onChainId?: Maybe<Scalars['String']>;
   /** Reads and enables pagination through a set of `CreditClassVersion`. */
@@ -730,6 +754,8 @@ export type CreditClassCondition = {
   createdAt?: Maybe<Scalars['Datetime']>;
   /** Checks for equality with the object’s `updatedAt` field. */
   updatedAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `methodologyId` field. */
+  methodologyId?: Maybe<Scalars['UUID']>;
   /** Checks for equality with the object’s `uri` field. */
   uri?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `onChainId` field. */
@@ -741,6 +767,7 @@ export type CreditClassInput = {
   id?: Maybe<Scalars['UUID']>;
   createdAt?: Maybe<Scalars['Datetime']>;
   updatedAt?: Maybe<Scalars['Datetime']>;
+  methodologyId: Scalars['UUID'];
   uri?: Maybe<Scalars['String']>;
   onChainId?: Maybe<Scalars['String']>;
 };
@@ -787,6 +814,7 @@ export type CreditClassPatch = {
   id?: Maybe<Scalars['UUID']>;
   createdAt?: Maybe<Scalars['Datetime']>;
   updatedAt?: Maybe<Scalars['Datetime']>;
+  methodologyId?: Maybe<Scalars['UUID']>;
   uri?: Maybe<Scalars['String']>;
   onChainId?: Maybe<Scalars['String']>;
 };
@@ -965,6 +993,8 @@ export enum CreditClassesOrderBy {
   CreatedAtDesc = 'CREATED_AT_DESC',
   UpdatedAtAsc = 'UPDATED_AT_ASC',
   UpdatedAtDesc = 'UPDATED_AT_DESC',
+  MethodologyIdAsc = 'METHODOLOGY_ID_ASC',
+  MethodologyIdDesc = 'METHODOLOGY_ID_DESC',
   UriAsc = 'URI_ASC',
   UriDesc = 'URI_DESC',
   OnChainIdAsc = 'ON_CHAIN_ID_ASC',
@@ -2112,6 +2142,7 @@ export type Mutation = {
   deleteWalletById?: Maybe<DeleteWalletPayload>;
   /** Deletes a single `Wallet` using a unique key. */
   deleteWalletByAddr?: Maybe<DeleteWalletPayload>;
+  addAddrToAccount?: Maybe<AddAddrToAccountPayload>;
 };
 
 
@@ -2570,6 +2601,12 @@ export type MutationDeleteWalletByAddrArgs = {
   input: DeleteWalletByAddrInput;
 };
 
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationAddAddrToAccountArgs = {
+  input: AddAddrToAccountInput;
+};
+
 /** An object with a globally unique `ID`. */
 export type Node = {
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
@@ -2713,6 +2750,8 @@ export enum PartiesOrderBy {
   NameDesc = 'NAME_DESC',
   WalletIdAsc = 'WALLET_ID_ASC',
   WalletIdDesc = 'WALLET_ID_DESC',
+  AddressIdAsc = 'ADDRESS_ID_ASC',
+  AddressIdDesc = 'ADDRESS_ID_DESC',
   DescriptionAsc = 'DESCRIPTION_ASC',
   DescriptionDesc = 'DESCRIPTION_DESC',
   ImageAsc = 'IMAGE_ASC',
@@ -2739,6 +2778,7 @@ export type Party = Node & {
   type: PartyType;
   name: Scalars['String'];
   walletId?: Maybe<Scalars['UUID']>;
+  addressId?: Maybe<Scalars['UUID']>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   accountId?: Maybe<Scalars['UUID']>;
@@ -2823,6 +2863,8 @@ export type PartyCondition = {
   name?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `walletId` field. */
   walletId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `addressId` field. */
+  addressId?: Maybe<Scalars['UUID']>;
   /** Checks for equality with the object’s `description` field. */
   description?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `image` field. */
@@ -2882,6 +2924,7 @@ export type PartyInput = {
   type: PartyType;
   name?: Maybe<Scalars['String']>;
   walletId?: Maybe<Scalars['UUID']>;
+  addressId?: Maybe<Scalars['UUID']>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   accountId?: Maybe<Scalars['UUID']>;
@@ -2898,6 +2941,7 @@ export type PartyPatch = {
   type?: Maybe<PartyType>;
   name?: Maybe<Scalars['String']>;
   walletId?: Maybe<Scalars['UUID']>;
+  addressId?: Maybe<Scalars['UUID']>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   accountId?: Maybe<Scalars['UUID']>;
@@ -4526,6 +4570,29 @@ export enum WalletsOrderBy {
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
 
+export type PartiesByAccountIdQueryVariables = Exact<{
+  id: Scalars['UUID'];
+}>;
+
+
+export type PartiesByAccountIdQuery = (
+  { __typename?: 'Query' }
+  & { accountById?: Maybe<(
+    { __typename?: 'Account' }
+    & { partiesByAccountId: (
+      { __typename?: 'PartiesConnection' }
+      & { nodes: Array<Maybe<(
+        { __typename?: 'Party' }
+        & Pick<Party, 'name' | 'image' | 'type'>
+        & { walletByWalletId?: Maybe<(
+          { __typename?: 'Wallet' }
+          & Pick<Wallet, 'addr'>
+        )> }
+      )>> }
+    ) }
+  )> }
+);
+
 export type AllCreditClassesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -5029,6 +5096,50 @@ export const ProjectFieldsFragmentDoc = gql`
   }
 }
     ${PartyFieldsFragmentDoc}`;
+export const PartiesByAccountIdDocument = gql`
+    query partiesByAccountId($id: UUID!) {
+  accountById(id: $id) {
+    partiesByAccountId {
+      nodes {
+        name
+        image
+        type
+        walletByWalletId {
+          addr
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __usePartiesByAccountIdQuery__
+ *
+ * To run a query within a React component, call `usePartiesByAccountIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePartiesByAccountIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePartiesByAccountIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function usePartiesByAccountIdQuery(baseOptions: Apollo.QueryHookOptions<PartiesByAccountIdQuery, PartiesByAccountIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PartiesByAccountIdQuery, PartiesByAccountIdQueryVariables>(PartiesByAccountIdDocument, options);
+      }
+export function usePartiesByAccountIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PartiesByAccountIdQuery, PartiesByAccountIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PartiesByAccountIdQuery, PartiesByAccountIdQueryVariables>(PartiesByAccountIdDocument, options);
+        }
+export type PartiesByAccountIdQueryHookResult = ReturnType<typeof usePartiesByAccountIdQuery>;
+export type PartiesByAccountIdLazyQueryHookResult = ReturnType<typeof usePartiesByAccountIdLazyQuery>;
+export type PartiesByAccountIdQueryResult = Apollo.QueryResult<PartiesByAccountIdQuery, PartiesByAccountIdQueryVariables>;
 export const AllCreditClassesDocument = gql`
     query AllCreditClasses {
   allCreditClasses {

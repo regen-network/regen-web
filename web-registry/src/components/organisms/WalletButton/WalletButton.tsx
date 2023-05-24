@@ -29,17 +29,8 @@ type Props = {
 
 const WalletButton = ({ size = 'small' }: Props) => {
   const styles = useWalletButtonStyles();
-  const {
-    accountId,
-    wallet,
-    connect,
-    loaded,
-    walletConnectUri,
-    login,
-    walletConfig,
-    walletConnect,
-    isConnected,
-  } = useWallet();
+  const { wallet, connect, loaded, walletConnectUri, isConnected } =
+    useWallet();
 
   const { bankClient } = useLedger();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -59,14 +50,10 @@ const WalletButton = ({ size = 'small' }: Props) => {
     }),
   );
 
-  const onButtonClick = useCallback(async (): Promise<void> => {
-    if (!wallet?.address) {
-      setIsModalOpen(true);
-    } else if (!accountId && login) {
-      // this can happen in case the session cookie expired
-      await login({ walletConfig, walletConnect, wallet });
-    }
-  }, [accountId, login, wallet, walletConfig, walletConnect]);
+  const onButtonClick = useCallback(
+    (): void => setIsModalOpen(true),
+    [setIsModalOpen],
+  );
 
   const onModalClose = useCallback((): void => {
     setIsModalOpen(false);

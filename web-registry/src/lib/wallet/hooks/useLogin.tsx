@@ -1,9 +1,10 @@
 import { useCallback } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { apiUri } from 'lib/apiUri';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
+import { getPartyByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery.utils';
 import { LoginParams, SignArbitraryType } from 'lib/wallet/wallet';
 
 type Params = {
@@ -13,8 +14,11 @@ type Params = {
 };
 
 export const useLogin = ({ signArbitrary, setError, setAccountId }: Params) => {
+  const reactQueryClient = useQueryClient();
+
   // Step 1: Retrieve and save the CSRF tokens
   const { data: token } = useQuery(getCsrfTokenQuery({}));
+
   const login = useCallback(
     async ({
       walletConfig,
@@ -61,13 +65,20 @@ export const useLogin = ({ signArbitrary, setError, setAccountId }: Params) => {
           const { user } = await loginRes.json();
 
           const accountId = user?.id;
-          if (accountId) setAccountId(accountId);
+          if (accountId) {
+            setAccountId(accountId);
+            reactQueryClient.invalidateQueries({
+              queryKey: getPartyByAddrQueryKey({
+                addr: wallet.address,
+              }),
+            });
+          }
         }
       } catch (e) {
         setError(e);
       }
     },
-    [token, signArbitrary, setError, setAccountId],
+    [signArbitrary, token, setAccountId, reactQueryClient, setError],
   );
 
   return login;

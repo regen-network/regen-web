@@ -7,6 +7,9 @@ import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
 import { PageViewTracking } from 'components/molecules/PageViewTracking';
 
 import { ScrollToTop } from '../../atoms';
+import { RegistryLayoutAddWalletModalConnect } from './RegistryLayout.AddWalletModalConnect';
+import { RegistryLayoutAddWalletModalRemove } from './RegistryLayout.AddWalletModalRemove';
+import { RegistryLayoutAddWalletModalSwitch } from './RegistryLayout.AddWalletModalSwitch';
 import { RegistryLayoutBannerModal } from './RegistryLayout.Banner';
 import { RegistryLayoutConnectWalletModal } from './RegistryLayout.ConnectWalletModal';
 import { RegistryLayoutErrorBannerModal } from './RegistryLayout.ErrorBanner';
@@ -34,6 +37,9 @@ const RegistryLayout: React.FC = () => {
       <RegistryLayoutProcessingModal />
       <RegistryLayoutErrorBannerModal />
       <RegistryLayoutConnectWalletModal />
+      <RegistryLayoutAddWalletModalConnect />
+      <RegistryLayoutAddWalletModalRemove />
+      <RegistryLayoutAddWalletModalSwitch />
     </>
   );
 };

@@ -1,5 +1,7 @@
-import Avatar from '@mui/material/Avatar';
+import { Avatar, SxProps } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
+
+import { Theme } from '../../theme/muiTheme';
 
 interface UserAvatarProps {
   alt?: string;
@@ -8,6 +10,7 @@ interface UserAvatarProps {
   border?: boolean;
   href?: string | null;
   icon?: any;
+  sx?: SxProps<Theme>;
 }
 
 // TODO `Sizes` and `getSize` were moved from the prior /sizing helpers. This is
@@ -21,6 +24,9 @@ interface Sizes {
 function getSize(size?: string): Sizes {
   let spacing: Sizes;
   switch (size) {
+    case 'xxl':
+      spacing = { xs: 16, sm: 18.75 };
+      break;
     case 'xl':
       spacing = { xs: 12.5, sm: 16 };
       break;
@@ -28,10 +34,10 @@ function getSize(size?: string): Sizes {
       spacing = { xs: 10, sm: 12 };
       break;
     case 'medium':
-      spacing = { xs: 7, sm: 10 };
+      spacing = { xs: 7.5, sm: 7.5 };
       break;
     case 'small':
-      spacing = { xs: 7, sm: 7 };
+      spacing = { xs: 6.5, sm: 6.5 };
       break;
     case 'project':
       spacing = { xs: 8.75, sm: 8.75 };
@@ -75,17 +81,18 @@ export default function UserAvatar({
   border = true,
   href,
   icon,
+  sx,
 }: UserAvatarProps): JSX.Element {
   const spacing: Sizes = getSize(size);
   // TODO: is fallback icon when src not provided ok? what about the bg color?
   const { classes } = useStyles({ spacing, border });
   const avatar =
     !src || icon ? (
-      <Avatar className={classes.root} alt={alt} src={icon}>
+      <Avatar sx={sx} className={classes.root} alt={alt} src={icon}>
         {icon}
       </Avatar>
     ) : (
-      <Avatar className={classes.root} alt={alt} src={src} />
+      <Avatar sx={sx} className={classes.root} alt={alt} src={src} />
     );
 
   if (href) {

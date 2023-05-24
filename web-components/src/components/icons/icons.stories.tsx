@@ -98,6 +98,7 @@ import TradeableIcon from './TradeableIcon';
 import TrashIcon from './TrashIcon';
 import TrustDocumentIcon from './TrustDocumentIcon';
 import TrustIcon from './TrustIcon';
+import UserMenuIcon from './UserMenuIcon';
 import VerifiedIcon from './VerifiedIcon';
 import WalletErrorIcon from './WalletErrorIcon';
 import { WalletIcon } from './WalletIcon';
@@ -300,6 +301,7 @@ export const allIcons = (): JSX.Element => (
     />
     <LabeledIcon icon={<TwitterBadgeIcon />} label="TwitterBadgeIcon" />
     <LabeledIcon icon={<UsdcIcon />} label="UsdcIcon" />
+    <LabeledIcon icon={<UserMenuIcon />} label="UserMenuIcon" />
     <LabeledIcon icon={<VerifiedIcon color="#000" />} label="VerifiedIcon" />
     <LabeledIcon icon={<WalletIcon />} label="WalletIcon" />
     <LabeledIcon

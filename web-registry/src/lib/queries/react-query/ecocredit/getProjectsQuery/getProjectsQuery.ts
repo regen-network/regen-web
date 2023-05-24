@@ -1,5 +1,6 @@
 import { queryProjects } from 'lib/ecocredit/api';
 
+import { PROJECTS_QUERY_KEY } from './getProjectsQuery.constants';
 import {
   ReactQueryProjectsProps,
   ReactQueryProjectsResponse,
@@ -10,7 +11,7 @@ export const getProjectsQuery = ({
   request,
   ...params
 }: ReactQueryProjectsProps): ReactQueryProjectsResponse => ({
-  queryKey: ['projects'],
+  queryKey: [PROJECTS_QUERY_KEY],
   queryFn: async () => {
     if (!client) return;
 

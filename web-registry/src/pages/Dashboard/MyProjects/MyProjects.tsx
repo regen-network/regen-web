@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { Grid } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { CreateProjectCard } from 'web-components/lib/components/cards/CreateCards/CreateProjectCard';
@@ -27,6 +27,7 @@ const MyProjects = (): JSX.Element => {
   const navigate = useNavigate();
   const { isIssuer, isProjectAdmin } = useDashboardContext();
   const [createProject] = useCreateProjectMutation();
+  const reactQueryClient = useQueryClient();
   const { data: walletData } = useQuery(
     getWalletByAddrQuery({
       addr: wallet?.address ?? '',
@@ -67,6 +68,7 @@ const MyProjects = (): JSX.Element => {
                   setError,
                   navigate,
                   walletData,
+                  reactQueryClient,
                 })
               }
               sx={{ height: { xs: '100%' } }}

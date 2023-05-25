@@ -20,6 +20,7 @@ interface UserMenuItemsProps extends HeaderMenuHoverBase {
   userMenuItems: HeaderDropdownItemProps[];
   disconnect: () => void;
   profiles: UserMenuItemProfileProps[];
+  profileClick?: () => void;
   addAddress?: () => Promise<void>;
 }
 
@@ -32,6 +33,7 @@ const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
   userMenuItems,
   profiles,
   addAddress,
+  profileClick,
 }) => {
   const styles = useUserMenuItemsStyles();
 
@@ -59,7 +61,7 @@ const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
           extras: (
             <Box>
               {profiles.map(p => (
-                <UserMenuItemProfile {...p} />
+                <UserMenuItemProfile {...p} profileClick={profileClick} />
               ))}
               {addAddress && (
                 <OutlinedButton

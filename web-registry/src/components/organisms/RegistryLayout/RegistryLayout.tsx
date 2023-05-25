@@ -10,6 +10,7 @@ import { ScrollToTop } from '../../atoms';
 import { RegistryLayoutAddWalletModalConnect } from './RegistryLayout.AddWalletModalConnect';
 import { RegistryLayoutAddWalletModalRemove } from './RegistryLayout.AddWalletModalRemove';
 import { RegistryLayoutAddWalletModalSwitch } from './RegistryLayout.AddWalletModalSwitch';
+import { RegistryLayoutAddWalletModalSwitchWarning } from './RegistryLayout.AddWalletModalSwitchWarning';
 import { RegistryLayoutBannerModal } from './RegistryLayout.Banner';
 import { RegistryLayoutConnectWalletModal } from './RegistryLayout.ConnectWalletModal';
 import { RegistryLayoutErrorBannerModal } from './RegistryLayout.ErrorBanner';
@@ -40,6 +41,7 @@ const RegistryLayout: React.FC = () => {
       <RegistryLayoutAddWalletModalConnect />
       <RegistryLayoutAddWalletModalRemove />
       <RegistryLayoutAddWalletModalSwitch />
+      <RegistryLayoutAddWalletModalSwitchWarning />
     </>
   );
 };

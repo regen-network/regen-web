@@ -8,12 +8,14 @@ import {
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
 import { useQuery } from '@tanstack/react-query';
+import { useSetAtom } from 'jotai';
 
 import Header from 'web-components/lib/components/header';
 import { UserMenuItems } from 'web-components/lib/components/header/components/UserMenuItems';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { truncate } from 'web-components/lib/utils/truncate';
 
+import { addWalletModalSwitchWarningAtom } from 'lib/atoms/modals.atoms';
 import { getPartiesByAccountIdQuery } from 'lib/queries/react-query/registry-server/graphql/getPartiesByAccountIdById/getPartiesByAccountIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -51,6 +53,11 @@ const RegistryLayoutHeader: React.FC = () => {
     () => getUserMenuItems({ linkComponent: RegistryNavLink, pathname, theme }),
     [pathname, theme],
   );
+  const setAddWalletModalSwitchWarningAtom = useSetAtom(
+    addWalletModalSwitchWarningAtom,
+  );
+  const showSwitchWarning = () =>
+    setAddWalletModalSwitchWarningAtom(atom => void (atom.open = true));
 
   const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
 
@@ -105,6 +112,7 @@ const RegistryLayoutHeader: React.FC = () => {
                   ) || []
                 }
                 addAddress={handleAddAddress}
+                profileClick={showSwitchWarning}
               />
             )}
             <WalletButton />

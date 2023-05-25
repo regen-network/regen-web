@@ -10,6 +10,7 @@ export type UserMenuItemProfileProps = {
   name: string;
   address: string;
   selected?: boolean;
+  profileClick?: () => void;
 };
 
 const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
@@ -17,6 +18,7 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
   name,
   address,
   selected = false,
+  profileClick,
 }) => {
   return (
     <Card
@@ -25,7 +27,9 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
         p: 2.5,
         mb: 2.5,
         backgroundColor: selected ? 'grey.50' : 'primary.main',
+        cursor: selected ? 'default' : 'pointer',
       }}
+      onClick={() => !selected && profileClick && profileClick()}
     >
       <Grid container>
         <Grid item mr={3} position="relative">

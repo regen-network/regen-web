@@ -31,33 +31,30 @@ const HeaderMenuItemHover = ({
   dropdownColor,
   children,
 }: Props): JSX.Element => {
-  const [openedPopover, setOpenedPopover] = useState(false);
-
-  const popoverAnchor = useRef(null);
-
   const { classes: styles } = useMenuHoverStyles();
 
-  const popoverEnter = (): void => {
-    setOpenedPopover(true);
+  const popoverAnchor = useRef(null);
+  const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+
+  const handlePopoverOpen = () => {
+    setAnchorEl(popoverAnchor.current);
   };
 
-  const popoverLeave = (): void => {
-    setOpenedPopover(false);
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
   };
 
-  const togglePopover = (): void => {
-    setOpenedPopover(true);
-  };
+  const open = Boolean(anchorEl);
 
   return (
     <div>
       <span
         ref={popoverAnchor}
-        aria-owns={openedPopover ? 'mouse-over-popover' : undefined}
+        aria-owns={open ? 'mouse-over-popover' : undefined}
         aria-haspopup="true"
-        onMouseEnter={popoverEnter}
-        onMouseLeave={popoverLeave}
-        onClick={togglePopover}
+        onMouseEnter={handlePopoverOpen}
+        onMouseLeave={handlePopoverClose}
+        onClick={handlePopoverOpen}
       >
         {title && (
           <span className={classes?.title}>
@@ -74,8 +71,8 @@ const HeaderMenuItemHover = ({
         classes={{
           paper: styles.popoverContent,
         }}
-        open={openedPopover}
-        anchorEl={popoverAnchor.current}
+        open={open}
+        anchorEl={anchorEl}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'right',
@@ -85,9 +82,10 @@ const HeaderMenuItemHover = ({
           horizontal: 'right',
         }}
         PaperProps={{
-          onMouseEnter: popoverEnter,
-          onMouseLeave: popoverLeave,
+          onMouseEnter: handlePopoverOpen,
+          onMouseLeave: handlePopoverClose,
         }}
+        onClose={handlePopoverClose}
         disableScrollLock={true}
         sx={{ position: 'absolute' }}
       >

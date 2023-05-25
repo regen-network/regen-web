@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   ApolloClient,
   NormalizedCacheObject,
@@ -11,6 +11,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
 import Header from 'web-components/lib/components/header';
+import { OnProfileClickType } from 'web-components/lib/components/header/components/UserMenuItem.types';
 import { UserMenuItems } from 'web-components/lib/components/header/components/UserMenuItems';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { truncate } from 'web-components/lib/utils/truncate';
@@ -46,6 +47,7 @@ const RegistryLayoutHeader: React.FC = () => {
     handleAddAddress,
   } = useWallet();
   const theme = useTheme<Theme>();
+  const navigate = useNavigate();
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
   const isTransparent = useMemo(() => getIsTransparent(pathname), [pathname]);
   const menuItems = useMemo(() => getMenuItems(pathname), [pathname]);
@@ -56,8 +58,10 @@ const RegistryLayoutHeader: React.FC = () => {
   const setAddWalletModalSwitchWarningAtom = useSetAtom(
     addWalletModalSwitchWarningAtom,
   );
-  const showSwitchWarning = () =>
-    setAddWalletModalSwitchWarningAtom(atom => void (atom.open = true));
+  const onProfileClick: OnProfileClickType = (isSelected: boolean) =>
+    isSelected
+      ? navigate('/ecocredits/portfolio')
+      : setAddWalletModalSwitchWarningAtom(atom => void (atom.open = true));
 
   const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
 
@@ -112,7 +116,7 @@ const RegistryLayoutHeader: React.FC = () => {
                   ) || []
                 }
                 addAddress={handleAddAddress}
-                profileClick={showSwitchWarning}
+                onProfileClick={onProfileClick}
               />
             )}
             <WalletButton />

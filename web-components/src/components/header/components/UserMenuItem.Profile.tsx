@@ -4,13 +4,14 @@ import Card from '../../cards/Card';
 import CheckIcon from '../../icons/CheckIcon';
 import { Body, Subtitle } from '../../typography';
 import UserAvatar from '../../user/UserAvatar';
+import { OnProfileClickType } from './UserMenuItem.types';
 
 export type UserMenuItemProfileProps = {
   profileImage: string;
   name: string;
   address: string;
   selected?: boolean;
-  profileClick?: () => void;
+  onProfileClick?: OnProfileClickType;
 };
 
 const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
@@ -18,7 +19,7 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
   name,
   address,
   selected = false,
-  profileClick,
+  onProfileClick,
 }) => {
   return (
     <Card
@@ -27,9 +28,9 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
         p: 2.5,
         mb: 2.5,
         backgroundColor: selected ? 'grey.50' : 'primary.main',
-        cursor: selected ? 'default' : 'pointer',
+        cursor: 'pointer',
       }}
-      onClick={() => !selected && profileClick && profileClick()}
+      onClick={() => onProfileClick && onProfileClick(selected)}
     >
       <Grid container>
         <Grid item mr={3} position="relative">

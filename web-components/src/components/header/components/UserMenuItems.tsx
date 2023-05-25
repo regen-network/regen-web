@@ -12,6 +12,7 @@ import {
   UserMenuItemProfile,
   UserMenuItemProfileProps,
 } from './UserMenuItem.Profile';
+import { OnProfileClickType } from './UserMenuItem.types';
 import { useUserMenuItemsStyles } from './UserMenuItems.styles';
 
 interface UserMenuItemsProps extends HeaderMenuHoverBase {
@@ -20,8 +21,8 @@ interface UserMenuItemsProps extends HeaderMenuHoverBase {
   userMenuItems: HeaderDropdownItemProps[];
   disconnect: () => void;
   profiles: UserMenuItemProfileProps[];
-  profileClick?: () => void;
   addAddress?: () => Promise<void>;
+  onProfileClick?: OnProfileClickType;
 }
 
 const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
@@ -33,7 +34,7 @@ const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
   userMenuItems,
   profiles,
   addAddress,
-  profileClick,
+  onProfileClick,
 }) => {
   const styles = useUserMenuItemsStyles();
 
@@ -61,7 +62,7 @@ const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
           extras: (
             <Box>
               {profiles.map(p => (
-                <UserMenuItemProfile {...p} profileClick={profileClick} />
+                <UserMenuItemProfile {...p} onProfileClick={onProfileClick} />
               ))}
               {addAddress && (
                 <OutlinedButton

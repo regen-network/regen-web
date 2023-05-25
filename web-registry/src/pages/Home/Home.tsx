@@ -66,7 +66,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   if (isFetchingAllHomePage) return <Loading sx={{ minHeight: '100vh' }} />;
 
   return (
-    <Box sx={{ backgroundColor: theme => theme.palette.background.default }}>
+    <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO
         title={seo?.title || ''}
         description={seo?.description || ''}

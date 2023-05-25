@@ -24,10 +24,7 @@ export function FeaturedProjects({
     useState<ProjectWithOrderData | null>(null);
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
   return (
-    <Box
-      id="projects"
-      sx={{ backgroundColor: theme => theme.palette.background.default }}
-    >
+    <Box id="projects">
       <ProjectCardsSection
         title={title}
         body={body}

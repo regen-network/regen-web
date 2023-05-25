@@ -6,6 +6,8 @@ import { DefaultSeo } from 'next-seo';
 import { createEmotionSsrAdvancedApproach } from 'tss-react/next/pagesDir';
 
 import { regenThemeOptions } from 'web-components/lib/theme/muiTheme';
+import { darkPalette } from 'web-components/src/theme/palette/dark';
+import { lightPalette } from 'web-components/src/theme/palette/light';
 
 import '../styles/background.css';
 import '../styles/font.css';
@@ -19,6 +21,7 @@ export { augmentDocumentWithEmotionCache };
 
 const App = ({ Component, pageProps }: AppProps) => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const palette = prefersDarkMode ? darkPalette : lightPalette;
 
   const theme = useMemo(
     () =>
@@ -26,11 +29,11 @@ const App = ({ Component, pageProps }: AppProps) => {
         ...regenThemeOptions,
         //@ts-ignore
         palette: {
-          ...regenThemeOptions.palette,
+          ...palette,
           mode: prefersDarkMode ? 'dark' : 'light',
         },
       }),
-    [prefersDarkMode],
+    [prefersDarkMode, palette],
   );
 
   return (

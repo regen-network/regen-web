@@ -9,6 +9,8 @@ import {
 } from '@mui/material/styles';
 
 import { regenThemeOptions } from './muiTheme';
+import { darkPalette } from './palette/dark';
+import { lightPalette } from './palette/light';
 
 import 'web-components/src/theme/index.css';
 
@@ -29,6 +31,7 @@ const RegenThemeProvider = ({
   children,
 }: Props): JSX.Element => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const palette = prefersDarkMode ? darkPalette : lightPalette;
 
   const theme = React.useMemo(
     () =>
@@ -36,11 +39,11 @@ const RegenThemeProvider = ({
         ...regenThemeOptions,
         //@ts-ignore
         palette: {
-          ...regenThemeOptions.palette,
+          ...palette,
           mode: prefersDarkMode ? 'dark' : 'light',
         },
       }),
-    [prefersDarkMode],
+    [prefersDarkMode, palette],
   );
 
   if (injectStyles) {

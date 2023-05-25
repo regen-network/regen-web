@@ -6,7 +6,7 @@ export const GRAVITY_USDC_DENOM = isRedwood
 export const AXELAR_USDC_DENOM = isRedwood ? 'uausdc' : 'uusdc';
 export const EEUR_DENOM = 'eeur';
 export const REGEN_DENOM = 'uregen';
-export const EVMOS_DENOM = isRedwood ? 'atevmos' : 'evmos';
+export const EVMOS_DENOM = 'atevmos';
 
 export const USD_DENOMS = [GRAVITY_USDC_DENOM, AXELAR_USDC_DENOM];
 export const EUR_DENOMS = [EEUR_DENOM];

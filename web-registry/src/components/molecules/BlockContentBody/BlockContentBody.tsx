@@ -5,9 +5,10 @@ import { Scalars } from 'generated/sanity-graphql';
 
 export interface Props {
   body: Scalars['JSON'];
+  className?: string;
 }
 
-const BlockContentBody = ({ body }: Props): JSX.Element => (
+const BlockContentBody = ({ body, className }: Props): JSX.Element => (
   <Body
     size="xl"
     textAlign="center"
@@ -17,6 +18,7 @@ const BlockContentBody = ({ body }: Props): JSX.Element => (
       maxWidth: 800,
       pb: { xs: 7.5, sm: 12.5 },
     }}
+    className={className}
   >
     <BlockContent content={body} />
   </Body>

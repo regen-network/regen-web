@@ -49,6 +49,7 @@ type ContextType = {
   projectEditSubmit: UseProjectEditSubmitParams;
   formRef: FormRef<Values>;
   isDirtyRef: MutableRefObject<boolean>;
+  isLoading: boolean;
 };
 
 const ProjectEditContext = createContext<ContextType>({
@@ -57,6 +58,7 @@ const ProjectEditContext = createContext<ContextType>({
   isEdit: false,
   formRef: { current: null },
   isDirtyRef: { current: false },
+  isLoading: false,
 });
 
 function ProjectEdit(): JSX.Element {
@@ -186,6 +188,7 @@ function ProjectEdit(): JSX.Element {
         projectEditSubmit,
         formRef,
         isDirtyRef,
+        isLoading,
       }}
     >
       <WithLoader

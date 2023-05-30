@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { UseFormReturn } from 'react-hook-form';
 
 import { PartyType } from 'generated/graphql';
 
@@ -8,17 +7,18 @@ import {
   DEFAULT_PROFILE_COMPANY_AVATAR,
   DEFAULT_PROFILE_USER_AVATAR,
 } from 'pages/ProfileEdit/ProfileEdit.constants';
+import { ProfileModalSchemaType } from 'components/organisms/RolesForm/components/ProfileModal/ProfileModal.schema';
 
 import { EditProfileFormSchemaType } from '../EditProfileForm.schema';
 
 type Params = {
   profileType: PartyType;
   profileImage: string;
-  form: UseFormReturn<EditProfileFormSchemaType>;
+  setProfileImage: (value: string) => void;
 };
 
 export const useUpdateDefaultAvatar = ({
-  form,
+  setProfileImage,
   profileImage,
   profileType,
 }: Params) => {
@@ -31,7 +31,7 @@ export const useUpdateDefaultAvatar = ({
       DEFAULT_PROFILE_AVATARS.includes(profileImage) &&
       defaultAvatar !== profileImage
     ) {
-      form.setValue('profileImage', defaultAvatar);
+      setProfileImage(defaultAvatar);
     }
-  }, [form, profileType, profileImage]);
+  }, [setProfileImage, profileType, profileImage]);
 };

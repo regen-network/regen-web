@@ -28,10 +28,6 @@ interface Props {
   // onSaveProfile: (v: ProfileModalSchemaType) => Promise<void>;
 }
 
-const sxs = {
-  formLabel: { color: 'primary.contrastText', ml: 1 } as SxProps,
-};
-
 export const RoleField = forwardRef<HTMLInputElement, Props>(
   (
     {
@@ -108,7 +104,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
                   setProfileAdd(profileModalInitialValues);
                 }}
               >
-                <Label size="xs" sx={sxs.formLabel} color="secondary.main">
+                <Label size="xs" color="secondary.main">
                   + Add New Profile
                 </Label>
               </div>,

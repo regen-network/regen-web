@@ -4,7 +4,8 @@
 
 .topo-background {
   background-image: url(./assets/home/topographic-light.svg);
-  background-size: cover;
+  background-size: auto;
+  background-repeat: repeat;
   background-position: center;
   border-top: 1px solid #d2d5d9;
   border-bottom: 1px solid #d2d5d9;
@@ -24,7 +25,8 @@
 
 .topo-background-alternate:nth-of-type(odd) {
   background-image: url(./assets/home/topographic-light.svg);
-  background-size: cover;
+  background-size: auto;
+  background-repeat: repeat;
   background-position: center;
   border-top: 1px solid #d2d5d9;
   border-bottom: 1px solid #d2d5d9;

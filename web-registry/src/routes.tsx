@@ -7,6 +7,7 @@ import {
   RouteObject,
 } from 'react-router-dom';
 import { Router } from '@remix-run/router';
+import * as Sentry from '@sentry/react';
 import { QueryClient } from '@tanstack/react-query';
 
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
@@ -265,7 +266,13 @@ export const getRoutes = ({
 export const getRouter = ({
   reactQueryClient,
   apolloClientFactory,
-}: RouterParams): Router =>
-  createBrowserRouter(getRoutes({ reactQueryClient, apolloClientFactory }), {
-    basename: process.env.PUBLIC_URL,
-  });
+}: RouterParams): Router => {
+  const sentryCreateBrowserRouter =
+    Sentry.wrapCreateBrowserRouter(createBrowserRouter);
+  return sentryCreateBrowserRouter(
+    getRoutes({ reactQueryClient, apolloClientFactory }),
+    {
+      basename: process.env.PUBLIC_URL,
+    },
+  );
+};

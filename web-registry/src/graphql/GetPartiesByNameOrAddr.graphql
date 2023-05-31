@@ -1,0 +1,14 @@
+query GetPartiesByNameOrAddr($input: String) {
+  getPartiesByNameOrAddr(input: $input) {
+    nodes {
+      id
+      name
+      type
+      image
+      description
+      walletByWalletId {
+        addr
+      }
+    }
+  }
+}

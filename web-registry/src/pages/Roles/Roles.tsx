@@ -63,12 +63,7 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
             profileType: projectDeveloper.type,
             address: projectDeveloper.walletByWalletId?.addr,
           }
-        : {
-            id: '123',
-            name: 'John',
-            profileType: DEFAULT_PROFILE_TYPE,
-            profileImage: DEFAULT_PROFILE_USER_AVATAR,
-          },
+        : undefined,
     }),
     [isEdit, onChainProject?.admin, projectDeveloper, wallet?.address],
   );
@@ -100,7 +95,6 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
           onPrev={navigatePrev}
           initialValues={initialValues}
           projectId={offChainProject?.id}
-          // graphData={graphData}
         />
       </WithLoader>
     </ProjectFormTemplate>

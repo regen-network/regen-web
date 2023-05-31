@@ -1,17 +1,26 @@
-import { forwardRef, useState } from 'react';
-import { Autocomplete, SxProps, TextField } from '@mui/material';
+import { forwardRef, useEffect, useState } from 'react';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
+import { Autocomplete, TextField } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
 
 import FieldFormControl from 'web-components/lib/components/inputs/new/FieldFormControl/FieldFormControl';
 import { Label } from 'web-components/lib/components/typography';
+import { truncate } from 'web-components/lib/utils/truncate';
 
-import {
-  DEFAULT_PROFILE_TYPE,
-  DEFAULT_PROFILE_USER_AVATAR,
-} from 'pages/ProfileEdit/ProfileEdit.constants';
+import { PartyType } from 'generated/graphql';
+import { getPartiesByNameOrAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartiesByNameOrAddr/getPartiesByNameOrAddrQuery';
+
+import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
+import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 
 import { ProfileModal } from '../ProfileModal/ProfileModal';
 import { profileModalInitialValues } from '../ProfileModal/ProfileModal.constants';
 import { ProfileModalSchemaType } from '../ProfileModal/ProfileModal.schema';
+import { useDebounce } from './hook/useDebounce';
 import { useStyles } from './RoleField.styles';
 import { isProfile } from './RoleField.utils';
 
@@ -42,14 +51,53 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
     ref,
   ) => {
     const { classes: styles, cx } = useStyles();
-    const [options, setOptions] = useState<readonly ProfileModalSchemaType[]>([
-      {
-        id: '123',
-        name: 'John',
-        profileType: DEFAULT_PROFILE_TYPE,
-        profileImage: DEFAULT_PROFILE_USER_AVATAR,
-      },
-    ]);
+    const [inputValue, setInputValue] = useState('');
+    const [options, setOptions] = useState<readonly ProfileModalSchemaType[]>(
+      [],
+    );
+
+    const graphqlClient =
+      useApolloClient() as ApolloClient<NormalizedCacheObject>;
+    const debouncedInputValue = useDebounce(inputValue);
+    const { data: parties } = useQuery(
+      getPartiesByNameOrAddrQuery({
+        client: graphqlClient,
+        enabled: !!graphqlClient && !!debouncedInputValue,
+        input: debouncedInputValue,
+      }),
+    );
+
+    useEffect(() => {
+      if (inputValue === '') {
+        setOptions(value ? [value] : []);
+        return;
+      }
+      let newOptions: readonly ProfileModalSchemaType[] = [];
+
+      // if (value) {
+      //   newOptions = [value];
+      // }
+
+      if (parties) {
+        console.log('parties', parties);
+
+        newOptions = [
+          ...newOptions,
+          ...(parties.getPartiesByNameOrAddr?.nodes.map(party => ({
+            id: party?.id as string,
+            name: party?.name || DEFAULT_NAME,
+            profileType: party?.type as PartyType,
+            profileImage: party?.image || getDefaultAvatar(party),
+            description: party?.description || undefined,
+            address: party?.walletByWalletId?.addr || undefined,
+          })) || []),
+        ];
+      }
+      console.log('newOptions', newOptions);
+
+      setOptions(newOptions);
+    }, [value, inputValue, parties]);
+
     const [profileAdd, setProfileAdd] = useState<ProfileModalSchemaType | null>(
       null,
     );
@@ -57,7 +105,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
     const saveProfile = async (
       profile: ProfileModalSchemaType,
     ): Promise<void> => {
-      // TODO Save in db
+      // TODO Save in db and invalidate query
       // var savedProfile = await onSaveProfile(profile);
       setValue(profile);
       closeProfileModal();
@@ -80,6 +128,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
         >
           <Autocomplete
             id="role-field"
+            ref={ref}
             classes={{
               inputRoot: styles.input,
               paper: styles.paper,
@@ -91,9 +140,13 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
             }
             getOptionLabel={option => (isProfile(option) ? option.name : '')}
             renderOption={(props, option) => (
-              <li {...props}>{isProfile(option) ? option.name : option}</li>
+              <li {...props}>
+                {isProfile(option)
+                  ? `${option.name} (${truncate(option.address)})`
+                  : option}
+              </li>
             )}
-            // filterOptions={x => x}
+            filterOptions={x => x}
             options={[
               ...(options || []),
               <div
@@ -115,13 +168,14 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
             noOptionsText="No profile found with this name or wallet address"
             onChange={(event, newValue) => {
               if (newValue && isProfile(newValue)) {
-                // setOptions(newValue ? [newValue, ...options] : options);
+                setOptions(newValue ? [newValue, ...options] : options);
                 setValue(newValue);
               }
             }}
-            // onInputChange={(event, newInputValue) => {
-            //   setInputValue(newInputValue);
-            // }}
+            onInputChange={(event, newInputValue) => {
+              console.log(newInputValue);
+              setInputValue(newInputValue);
+            }}
             renderInput={params => (
               <TextField
                 {...params}

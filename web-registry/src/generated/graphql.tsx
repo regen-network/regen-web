@@ -115,29 +115,6 @@ export enum AccountsOrderBy {
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
 
-/** All input for the `addAddrToAccount` mutation. */
-export type AddAddrToAccountInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  addr?: Maybe<Scalars['String']>;
-  vPartyType?: Maybe<PartyType>;
-};
-
-/** The output of our `addAddrToAccount` mutation. */
-export type AddAddrToAccountPayload = {
-  __typename?: 'AddAddrToAccountPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-};
-
 
 /** All input for the create `Account` mutation. */
 export type CreateAccountInput = {
@@ -232,6 +209,8 @@ export type CreateCreditClassPayload = {
   creditClass?: Maybe<CreditClass>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query?: Maybe<Query>;
+  /** Reads a single `Party` that is related to this `CreditClass`. */
+  partyByRegistryId?: Maybe<Party>;
   /** An edge for our `CreditClass`. May be used by Relay 1. */
   creditClassEdge?: Maybe<CreditClassesEdge>;
 };
@@ -310,39 +289,6 @@ export type CreateDocumentPayload = {
 /** The output of our create `Document` mutation. */
 export type CreateDocumentPayloadDocumentEdgeArgs = {
   orderBy?: Maybe<Array<DocumentsOrderBy>>;
-};
-
-/** All input for the create `FlywaySchemaHistory` mutation. */
-export type CreateFlywaySchemaHistoryInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `FlywaySchemaHistory` to be created by this mutation. */
-  flywaySchemaHistory: FlywaySchemaHistoryInput;
-};
-
-/** The output of our create `FlywaySchemaHistory` mutation. */
-export type CreateFlywaySchemaHistoryPayload = {
-  __typename?: 'CreateFlywaySchemaHistoryPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `FlywaySchemaHistory` that was created by this mutation. */
-  flywaySchemaHistory?: Maybe<FlywaySchemaHistory>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** An edge for our `FlywaySchemaHistory`. May be used by Relay 1. */
-  flywaySchemaHistoryEdge?: Maybe<FlywaySchemaHistoriesEdge>;
-};
-
-
-/** The output of our create `FlywaySchemaHistory` mutation. */
-export type CreateFlywaySchemaHistoryPayloadFlywaySchemaHistoryEdgeArgs = {
-  orderBy?: Maybe<Array<FlywaySchemaHistoriesOrderBy>>;
 };
 
 /** All input for the create `MetadataGraph` mutation. */
@@ -479,6 +425,8 @@ export type CreateProjectPayload = {
   creditClassByCreditClassId?: Maybe<CreditClass>;
   /** Reads a single `Wallet` that is related to this `Project`. */
   walletByAdminWalletId?: Maybe<Wallet>;
+  /** Reads a single `Party` that is related to this `Project`. */
+  partyByVerifierId?: Maybe<Party>;
   /** An edge for our `Project`. May be used by Relay 1. */
   projectEdge?: Maybe<ProjectsEdge>;
 };
@@ -684,9 +632,11 @@ export type CreditClass = Node & {
   id: Scalars['UUID'];
   createdAt: Scalars['Datetime'];
   updatedAt: Scalars['Datetime'];
-  methodologyId: Scalars['UUID'];
   uri: Scalars['String'];
   onChainId?: Maybe<Scalars['String']>;
+  registryId?: Maybe<Scalars['UUID']>;
+  /** Reads a single `Party` that is related to this `CreditClass`. */
+  partyByRegistryId?: Maybe<Party>;
   /** Reads and enables pagination through a set of `CreditClassVersion`. */
   creditClassVersionsById: CreditClassVersionsConnection;
   /** Reads and enables pagination through a set of `Project`. */
@@ -695,6 +645,8 @@ export type CreditClass = Node & {
   partiesByProjectCreditClassIdAndDeveloperId: CreditClassPartiesByProjectCreditClassIdAndDeveloperIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Wallet`. */
   walletsByProjectCreditClassIdAndAdminWalletId: CreditClassWalletsByProjectCreditClassIdAndAdminWalletIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Party`. */
+  partiesByProjectCreditClassIdAndVerifierId: CreditClassPartiesByProjectCreditClassIdAndVerifierIdManyToManyConnection;
 };
 
 
@@ -743,6 +695,17 @@ export type CreditClassWalletsByProjectCreditClassIdAndAdminWalletIdArgs = {
   condition?: Maybe<WalletCondition>;
 };
 
+
+export type CreditClassPartiesByProjectCreditClassIdAndVerifierIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<PartiesOrderBy>>;
+  condition?: Maybe<PartyCondition>;
+};
+
 /**
  * A condition to be used against `CreditClass` object types. All fields are tested
  * for equality and combined with a logical ‘and.’
@@ -754,12 +717,12 @@ export type CreditClassCondition = {
   createdAt?: Maybe<Scalars['Datetime']>;
   /** Checks for equality with the object’s `updatedAt` field. */
   updatedAt?: Maybe<Scalars['Datetime']>;
-  /** Checks for equality with the object’s `methodologyId` field. */
-  methodologyId?: Maybe<Scalars['UUID']>;
   /** Checks for equality with the object’s `uri` field. */
   uri?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `onChainId` field. */
   onChainId?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `registryId` field. */
+  registryId?: Maybe<Scalars['UUID']>;
 };
 
 /** An input for mutations affecting `CreditClass` */
@@ -767,9 +730,9 @@ export type CreditClassInput = {
   id?: Maybe<Scalars['UUID']>;
   createdAt?: Maybe<Scalars['Datetime']>;
   updatedAt?: Maybe<Scalars['Datetime']>;
-  methodologyId: Scalars['UUID'];
   uri?: Maybe<Scalars['String']>;
   onChainId?: Maybe<Scalars['String']>;
+  registryId?: Maybe<Scalars['UUID']>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -809,14 +772,51 @@ export type CreditClassPartiesByProjectCreditClassIdAndDeveloperIdManyToManyEdge
   filter?: Maybe<ProjectFilter>;
 };
 
+/** A connection to a list of `Party` values, with data from `Project`. */
+export type CreditClassPartiesByProjectCreditClassIdAndVerifierIdManyToManyConnection = {
+  __typename?: 'CreditClassPartiesByProjectCreditClassIdAndVerifierIdManyToManyConnection';
+  /** A list of `Party` objects. */
+  nodes: Array<Maybe<Party>>;
+  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
+  edges: Array<CreditClassPartiesByProjectCreditClassIdAndVerifierIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Party` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type CreditClassPartiesByProjectCreditClassIdAndVerifierIdManyToManyEdge = {
+  __typename?: 'CreditClassPartiesByProjectCreditClassIdAndVerifierIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Party` at the end of the edge. */
+  node?: Maybe<Party>;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByVerifierId: ProjectsConnection;
+};
+
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type CreditClassPartiesByProjectCreditClassIdAndVerifierIdManyToManyEdgeProjectsByVerifierIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
+};
+
 /** Represents an update to a `CreditClass`. Fields that are set will be updated. */
 export type CreditClassPatch = {
   id?: Maybe<Scalars['UUID']>;
   createdAt?: Maybe<Scalars['Datetime']>;
   updatedAt?: Maybe<Scalars['Datetime']>;
-  methodologyId?: Maybe<Scalars['UUID']>;
   uri?: Maybe<Scalars['String']>;
   onChainId?: Maybe<Scalars['String']>;
+  registryId?: Maybe<Scalars['UUID']>;
 };
 
 export type CreditClassVersion = Node & {
@@ -993,12 +993,12 @@ export enum CreditClassesOrderBy {
   CreatedAtDesc = 'CREATED_AT_DESC',
   UpdatedAtAsc = 'UPDATED_AT_ASC',
   UpdatedAtDesc = 'UPDATED_AT_DESC',
-  MethodologyIdAsc = 'METHODOLOGY_ID_ASC',
-  MethodologyIdDesc = 'METHODOLOGY_ID_DESC',
   UriAsc = 'URI_ASC',
   UriDesc = 'URI_DESC',
   OnChainIdAsc = 'ON_CHAIN_ID_ASC',
   OnChainIdDesc = 'ON_CHAIN_ID_DESC',
+  RegistryIdAsc = 'REGISTRY_ID_ASC',
+  RegistryIdDesc = 'REGISTRY_ID_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -1161,6 +1161,8 @@ export type DeleteCreditClassPayload = {
   deletedCreditClassId?: Maybe<Scalars['ID']>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query?: Maybe<Query>;
+  /** Reads a single `Party` that is related to this `CreditClass`. */
+  partyByRegistryId?: Maybe<Party>;
   /** An edge for our `CreditClass`. May be used by Relay 1. */
   creditClassEdge?: Maybe<CreditClassesEdge>;
 };
@@ -1262,50 +1264,6 @@ export type DeleteDocumentPayload = {
 /** The output of our delete `Document` mutation. */
 export type DeleteDocumentPayloadDocumentEdgeArgs = {
   orderBy?: Maybe<Array<DocumentsOrderBy>>;
-};
-
-/** All input for the `deleteFlywaySchemaHistoryByInstalledRank` mutation. */
-export type DeleteFlywaySchemaHistoryByInstalledRankInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  installedRank: Scalars['Int'];
-};
-
-/** All input for the `deleteFlywaySchemaHistory` mutation. */
-export type DeleteFlywaySchemaHistoryInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The globally unique `ID` which will identify a single `FlywaySchemaHistory` to be deleted. */
-  nodeId: Scalars['ID'];
-};
-
-/** The output of our delete `FlywaySchemaHistory` mutation. */
-export type DeleteFlywaySchemaHistoryPayload = {
-  __typename?: 'DeleteFlywaySchemaHistoryPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `FlywaySchemaHistory` that was deleted by this mutation. */
-  flywaySchemaHistory?: Maybe<FlywaySchemaHistory>;
-  deletedFlywaySchemaHistoryId?: Maybe<Scalars['ID']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** An edge for our `FlywaySchemaHistory`. May be used by Relay 1. */
-  flywaySchemaHistoryEdge?: Maybe<FlywaySchemaHistoriesEdge>;
-};
-
-
-/** The output of our delete `FlywaySchemaHistory` mutation. */
-export type DeleteFlywaySchemaHistoryPayloadFlywaySchemaHistoryEdgeArgs = {
-  orderBy?: Maybe<Array<FlywaySchemaHistoriesOrderBy>>;
 };
 
 /** All input for the `deleteMetadataGraphByIri` mutation. */
@@ -1526,6 +1484,8 @@ export type DeleteProjectPayload = {
   creditClassByCreditClassId?: Maybe<CreditClass>;
   /** Reads a single `Wallet` that is related to this `Project`. */
   walletByAdminWalletId?: Maybe<Wallet>;
+  /** Reads a single `Party` that is related to this `Project`. */
+  partyByVerifierId?: Maybe<Party>;
   /** An edge for our `Project`. May be used by Relay 1. */
   projectEdge?: Maybe<ProjectsEdge>;
 };
@@ -1742,126 +1702,6 @@ export enum DocumentsOrderBy {
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
 
-/** A connection to a list of `FlywaySchemaHistory` values. */
-export type FlywaySchemaHistoriesConnection = {
-  __typename?: 'FlywaySchemaHistoriesConnection';
-  /** A list of `FlywaySchemaHistory` objects. */
-  nodes: Array<Maybe<FlywaySchemaHistory>>;
-  /** A list of edges which contains the `FlywaySchemaHistory` and cursor to aid in pagination. */
-  edges: Array<FlywaySchemaHistoriesEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `FlywaySchemaHistory` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `FlywaySchemaHistory` edge in the connection. */
-export type FlywaySchemaHistoriesEdge = {
-  __typename?: 'FlywaySchemaHistoriesEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `FlywaySchemaHistory` at the end of the edge. */
-  node?: Maybe<FlywaySchemaHistory>;
-};
-
-/** Methods to use when ordering `FlywaySchemaHistory`. */
-export enum FlywaySchemaHistoriesOrderBy {
-  Natural = 'NATURAL',
-  InstalledRankAsc = 'INSTALLED_RANK_ASC',
-  InstalledRankDesc = 'INSTALLED_RANK_DESC',
-  VersionAsc = 'VERSION_ASC',
-  VersionDesc = 'VERSION_DESC',
-  DescriptionAsc = 'DESCRIPTION_ASC',
-  DescriptionDesc = 'DESCRIPTION_DESC',
-  TypeAsc = 'TYPE_ASC',
-  TypeDesc = 'TYPE_DESC',
-  ScriptAsc = 'SCRIPT_ASC',
-  ScriptDesc = 'SCRIPT_DESC',
-  ChecksumAsc = 'CHECKSUM_ASC',
-  ChecksumDesc = 'CHECKSUM_DESC',
-  InstalledByAsc = 'INSTALLED_BY_ASC',
-  InstalledByDesc = 'INSTALLED_BY_DESC',
-  InstalledOnAsc = 'INSTALLED_ON_ASC',
-  InstalledOnDesc = 'INSTALLED_ON_DESC',
-  ExecutionTimeAsc = 'EXECUTION_TIME_ASC',
-  ExecutionTimeDesc = 'EXECUTION_TIME_DESC',
-  SuccessAsc = 'SUCCESS_ASC',
-  SuccessDesc = 'SUCCESS_DESC',
-  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
-  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
-}
-
-export type FlywaySchemaHistory = Node & {
-  __typename?: 'FlywaySchemaHistory';
-  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
-  nodeId: Scalars['ID'];
-  installedRank: Scalars['Int'];
-  version?: Maybe<Scalars['String']>;
-  description: Scalars['String'];
-  type: Scalars['String'];
-  script: Scalars['String'];
-  checksum?: Maybe<Scalars['Int']>;
-  installedBy: Scalars['String'];
-  installedOn: Scalars['Datetime'];
-  executionTime: Scalars['Int'];
-  success: Scalars['Boolean'];
-};
-
-/**
- * A condition to be used against `FlywaySchemaHistory` object types. All fields
- * are tested for equality and combined with a logical ‘and.’
- */
-export type FlywaySchemaHistoryCondition = {
-  /** Checks for equality with the object’s `installedRank` field. */
-  installedRank?: Maybe<Scalars['Int']>;
-  /** Checks for equality with the object’s `version` field. */
-  version?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `description` field. */
-  description?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `type` field. */
-  type?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `script` field. */
-  script?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `checksum` field. */
-  checksum?: Maybe<Scalars['Int']>;
-  /** Checks for equality with the object’s `installedBy` field. */
-  installedBy?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `installedOn` field. */
-  installedOn?: Maybe<Scalars['Datetime']>;
-  /** Checks for equality with the object’s `executionTime` field. */
-  executionTime?: Maybe<Scalars['Int']>;
-  /** Checks for equality with the object’s `success` field. */
-  success?: Maybe<Scalars['Boolean']>;
-};
-
-/** An input for mutations affecting `FlywaySchemaHistory` */
-export type FlywaySchemaHistoryInput = {
-  installedRank: Scalars['Int'];
-  version?: Maybe<Scalars['String']>;
-  description: Scalars['String'];
-  type: Scalars['String'];
-  script: Scalars['String'];
-  checksum?: Maybe<Scalars['Int']>;
-  installedBy: Scalars['String'];
-  installedOn?: Maybe<Scalars['Datetime']>;
-  executionTime: Scalars['Int'];
-  success: Scalars['Boolean'];
-};
-
-/** Represents an update to a `FlywaySchemaHistory`. Fields that are set will be updated. */
-export type FlywaySchemaHistoryPatch = {
-  installedRank?: Maybe<Scalars['Int']>;
-  version?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  type?: Maybe<Scalars['String']>;
-  script?: Maybe<Scalars['String']>;
-  checksum?: Maybe<Scalars['Int']>;
-  installedBy?: Maybe<Scalars['String']>;
-  installedOn?: Maybe<Scalars['Datetime']>;
-  executionTime?: Maybe<Scalars['Int']>;
-  success?: Maybe<Scalars['Boolean']>;
-};
-
 /** A `GetCurrentAddrsRecord` edge in the connection. */
 export type GetCurrentAddrEdge = {
   __typename?: 'GetCurrentAddrEdge';
@@ -2000,8 +1840,6 @@ export type Mutation = {
   createCreditClassVersion?: Maybe<CreateCreditClassVersionPayload>;
   /** Creates a single `Document`. */
   createDocument?: Maybe<CreateDocumentPayload>;
-  /** Creates a single `FlywaySchemaHistory`. */
-  createFlywaySchemaHistory?: Maybe<CreateFlywaySchemaHistoryPayload>;
   /** Creates a single `MetadataGraph`. */
   createMetadataGraph?: Maybe<CreateMetadataGraphPayload>;
   /** Creates a single `Organization`. */
@@ -2040,10 +1878,6 @@ export type Mutation = {
   updateDocument?: Maybe<UpdateDocumentPayload>;
   /** Updates a single `Document` using a unique key and a patch. */
   updateDocumentById?: Maybe<UpdateDocumentPayload>;
-  /** Updates a single `FlywaySchemaHistory` using its globally unique id and a patch. */
-  updateFlywaySchemaHistory?: Maybe<UpdateFlywaySchemaHistoryPayload>;
-  /** Updates a single `FlywaySchemaHistory` using a unique key and a patch. */
-  updateFlywaySchemaHistoryByInstalledRank?: Maybe<UpdateFlywaySchemaHistoryPayload>;
   /** Updates a single `MetadataGraph` using its globally unique id and a patch. */
   updateMetadataGraph?: Maybe<UpdateMetadataGraphPayload>;
   /** Updates a single `MetadataGraph` using a unique key and a patch. */
@@ -2104,10 +1938,6 @@ export type Mutation = {
   deleteDocument?: Maybe<DeleteDocumentPayload>;
   /** Deletes a single `Document` using a unique key. */
   deleteDocumentById?: Maybe<DeleteDocumentPayload>;
-  /** Deletes a single `FlywaySchemaHistory` using its globally unique id. */
-  deleteFlywaySchemaHistory?: Maybe<DeleteFlywaySchemaHistoryPayload>;
-  /** Deletes a single `FlywaySchemaHistory` using a unique key. */
-  deleteFlywaySchemaHistoryByInstalledRank?: Maybe<DeleteFlywaySchemaHistoryPayload>;
   /** Deletes a single `MetadataGraph` using its globally unique id. */
   deleteMetadataGraph?: Maybe<DeleteMetadataGraphPayload>;
   /** Deletes a single `MetadataGraph` using a unique key. */
@@ -2142,7 +1972,6 @@ export type Mutation = {
   deleteWalletById?: Maybe<DeleteWalletPayload>;
   /** Deletes a single `Wallet` using a unique key. */
   deleteWalletByAddr?: Maybe<DeleteWalletPayload>;
-  addAddrToAccount?: Maybe<AddAddrToAccountPayload>;
 };
 
 
@@ -2173,12 +2002,6 @@ export type MutationCreateCreditClassVersionArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateDocumentArgs = {
   input: CreateDocumentInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreateFlywaySchemaHistoryArgs = {
-  input: CreateFlywaySchemaHistoryInput;
 };
 
 
@@ -2293,18 +2116,6 @@ export type MutationUpdateDocumentArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateDocumentByIdArgs = {
   input: UpdateDocumentByIdInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateFlywaySchemaHistoryArgs = {
-  input: UpdateFlywaySchemaHistoryInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateFlywaySchemaHistoryByInstalledRankArgs = {
-  input: UpdateFlywaySchemaHistoryByInstalledRankInput;
 };
 
 
@@ -2489,18 +2300,6 @@ export type MutationDeleteDocumentByIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteFlywaySchemaHistoryArgs = {
-  input: DeleteFlywaySchemaHistoryInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteFlywaySchemaHistoryByInstalledRankArgs = {
-  input: DeleteFlywaySchemaHistoryByInstalledRankInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteMetadataGraphArgs = {
   input: DeleteMetadataGraphInput;
 };
@@ -2599,12 +2398,6 @@ export type MutationDeleteWalletByIdArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteWalletByAddrArgs = {
   input: DeleteWalletByAddrInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationAddAddrToAccountArgs = {
-  input: AddAddrToAccountInput;
 };
 
 /** An object with a globally unique `ID`. */
@@ -2750,8 +2543,6 @@ export enum PartiesOrderBy {
   NameDesc = 'NAME_DESC',
   WalletIdAsc = 'WALLET_ID_ASC',
   WalletIdDesc = 'WALLET_ID_DESC',
-  AddressIdAsc = 'ADDRESS_ID_ASC',
-  AddressIdDesc = 'ADDRESS_ID_DESC',
   DescriptionAsc = 'DESCRIPTION_ASC',
   DescriptionDesc = 'DESCRIPTION_DESC',
   ImageAsc = 'IMAGE_ASC',
@@ -2778,7 +2569,6 @@ export type Party = Node & {
   type: PartyType;
   name: Scalars['String'];
   walletId?: Maybe<Scalars['UUID']>;
-  addressId?: Maybe<Scalars['UUID']>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   accountId?: Maybe<Scalars['UUID']>;
@@ -2789,6 +2579,8 @@ export type Party = Node & {
   walletByWalletId?: Maybe<Wallet>;
   /** Reads a single `Account` that is related to this `Party`. */
   accountByAccountId?: Maybe<Account>;
+  /** Reads and enables pagination through a set of `CreditClass`. */
+  creditClassesByRegistryId: CreditClassesConnection;
   /** Reads a single `Organization` that is related to this `Party`. */
   organizationByPartyId?: Maybe<Organization>;
   /**
@@ -2798,10 +2590,31 @@ export type Party = Node & {
   organizationsByPartyId: OrganizationsConnection;
   /** Reads and enables pagination through a set of `Project`. */
   projectsByDeveloperId: ProjectsConnection;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByVerifierId: ProjectsConnection;
   /** Reads and enables pagination through a set of `CreditClass`. */
   creditClassesByProjectDeveloperIdAndCreditClassId: PartyCreditClassesByProjectDeveloperIdAndCreditClassIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Wallet`. */
   walletsByProjectDeveloperIdAndAdminWalletId: PartyWalletsByProjectDeveloperIdAndAdminWalletIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Party`. */
+  partiesByProjectDeveloperIdAndVerifierId: PartyPartiesByProjectDeveloperIdAndVerifierIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Party`. */
+  partiesByProjectVerifierIdAndDeveloperId: PartyPartiesByProjectVerifierIdAndDeveloperIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `CreditClass`. */
+  creditClassesByProjectVerifierIdAndCreditClassId: PartyCreditClassesByProjectVerifierIdAndCreditClassIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Wallet`. */
+  walletsByProjectVerifierIdAndAdminWalletId: PartyWalletsByProjectVerifierIdAndAdminWalletIdManyToManyConnection;
+};
+
+
+export type PartyCreditClassesByRegistryIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<CreditClassesOrderBy>>;
+  condition?: Maybe<CreditClassCondition>;
 };
 
 
@@ -2817,6 +2630,18 @@ export type PartyOrganizationsByPartyIdArgs = {
 
 
 export type PartyProjectsByDeveloperIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
+};
+
+
+export type PartyProjectsByVerifierIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -2849,6 +2674,50 @@ export type PartyWalletsByProjectDeveloperIdAndAdminWalletIdArgs = {
   condition?: Maybe<WalletCondition>;
 };
 
+
+export type PartyPartiesByProjectDeveloperIdAndVerifierIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<PartiesOrderBy>>;
+  condition?: Maybe<PartyCondition>;
+};
+
+
+export type PartyPartiesByProjectVerifierIdAndDeveloperIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<PartiesOrderBy>>;
+  condition?: Maybe<PartyCondition>;
+};
+
+
+export type PartyCreditClassesByProjectVerifierIdAndCreditClassIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<CreditClassesOrderBy>>;
+  condition?: Maybe<CreditClassCondition>;
+};
+
+
+export type PartyWalletsByProjectVerifierIdAndAdminWalletIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<WalletsOrderBy>>;
+  condition?: Maybe<WalletCondition>;
+};
+
 /** A condition to be used against `Party` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export type PartyCondition = {
   /** Checks for equality with the object’s `id` field. */
@@ -2863,8 +2732,6 @@ export type PartyCondition = {
   name?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `walletId` field. */
   walletId?: Maybe<Scalars['UUID']>;
-  /** Checks for equality with the object’s `addressId` field. */
-  addressId?: Maybe<Scalars['UUID']>;
   /** Checks for equality with the object’s `description` field. */
   description?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `image` field. */
@@ -2916,6 +2783,43 @@ export type PartyCreditClassesByProjectDeveloperIdAndCreditClassIdManyToManyEdge
   filter?: Maybe<ProjectFilter>;
 };
 
+/** A connection to a list of `CreditClass` values, with data from `Project`. */
+export type PartyCreditClassesByProjectVerifierIdAndCreditClassIdManyToManyConnection = {
+  __typename?: 'PartyCreditClassesByProjectVerifierIdAndCreditClassIdManyToManyConnection';
+  /** A list of `CreditClass` objects. */
+  nodes: Array<Maybe<CreditClass>>;
+  /** A list of edges which contains the `CreditClass`, info from the `Project`, and the cursor to aid in pagination. */
+  edges: Array<PartyCreditClassesByProjectVerifierIdAndCreditClassIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `CreditClass` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `CreditClass` edge in the connection, with data from `Project`. */
+export type PartyCreditClassesByProjectVerifierIdAndCreditClassIdManyToManyEdge = {
+  __typename?: 'PartyCreditClassesByProjectVerifierIdAndCreditClassIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `CreditClass` at the end of the edge. */
+  node?: Maybe<CreditClass>;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByCreditClassId: ProjectsConnection;
+};
+
+
+/** A `CreditClass` edge in the connection, with data from `Project`. */
+export type PartyCreditClassesByProjectVerifierIdAndCreditClassIdManyToManyEdgeProjectsByCreditClassIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
+};
+
 /** An input for mutations affecting `Party` */
 export type PartyInput = {
   id?: Maybe<Scalars['UUID']>;
@@ -2924,13 +2828,86 @@ export type PartyInput = {
   type: PartyType;
   name?: Maybe<Scalars['String']>;
   walletId?: Maybe<Scalars['UUID']>;
-  addressId?: Maybe<Scalars['UUID']>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   accountId?: Maybe<Scalars['UUID']>;
   bgImage?: Maybe<Scalars['String']>;
   twitterLink?: Maybe<Scalars['String']>;
   websiteLink?: Maybe<Scalars['String']>;
+};
+
+/** A connection to a list of `Party` values, with data from `Project`. */
+export type PartyPartiesByProjectDeveloperIdAndVerifierIdManyToManyConnection = {
+  __typename?: 'PartyPartiesByProjectDeveloperIdAndVerifierIdManyToManyConnection';
+  /** A list of `Party` objects. */
+  nodes: Array<Maybe<Party>>;
+  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
+  edges: Array<PartyPartiesByProjectDeveloperIdAndVerifierIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Party` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectDeveloperIdAndVerifierIdManyToManyEdge = {
+  __typename?: 'PartyPartiesByProjectDeveloperIdAndVerifierIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Party` at the end of the edge. */
+  node?: Maybe<Party>;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByVerifierId: ProjectsConnection;
+};
+
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectDeveloperIdAndVerifierIdManyToManyEdgeProjectsByVerifierIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
+};
+
+/** A connection to a list of `Party` values, with data from `Project`. */
+export type PartyPartiesByProjectVerifierIdAndDeveloperIdManyToManyConnection = {
+  __typename?: 'PartyPartiesByProjectVerifierIdAndDeveloperIdManyToManyConnection';
+  /** A list of `Party` objects. */
+  nodes: Array<Maybe<Party>>;
+  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
+  edges: Array<PartyPartiesByProjectVerifierIdAndDeveloperIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Party` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectVerifierIdAndDeveloperIdManyToManyEdge = {
+  __typename?: 'PartyPartiesByProjectVerifierIdAndDeveloperIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Party` at the end of the edge. */
+  node?: Maybe<Party>;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByDeveloperId: ProjectsConnection;
+};
+
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectVerifierIdAndDeveloperIdManyToManyEdgeProjectsByDeveloperIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** Represents an update to a `Party`. Fields that are set will be updated. */
@@ -2941,7 +2918,6 @@ export type PartyPatch = {
   type?: Maybe<PartyType>;
   name?: Maybe<Scalars['String']>;
   walletId?: Maybe<Scalars['UUID']>;
-  addressId?: Maybe<Scalars['UUID']>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   accountId?: Maybe<Scalars['UUID']>;
@@ -2992,6 +2968,43 @@ export type PartyWalletsByProjectDeveloperIdAndAdminWalletIdManyToManyEdgeProjec
   filter?: Maybe<ProjectFilter>;
 };
 
+/** A connection to a list of `Wallet` values, with data from `Project`. */
+export type PartyWalletsByProjectVerifierIdAndAdminWalletIdManyToManyConnection = {
+  __typename?: 'PartyWalletsByProjectVerifierIdAndAdminWalletIdManyToManyConnection';
+  /** A list of `Wallet` objects. */
+  nodes: Array<Maybe<Wallet>>;
+  /** A list of edges which contains the `Wallet`, info from the `Project`, and the cursor to aid in pagination. */
+  edges: Array<PartyWalletsByProjectVerifierIdAndAdminWalletIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Wallet` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Wallet` edge in the connection, with data from `Project`. */
+export type PartyWalletsByProjectVerifierIdAndAdminWalletIdManyToManyEdge = {
+  __typename?: 'PartyWalletsByProjectVerifierIdAndAdminWalletIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Wallet` at the end of the edge. */
+  node?: Maybe<Wallet>;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByAdminWalletId: ProjectsConnection;
+};
+
+
+/** A `Wallet` edge in the connection, with data from `Project`. */
+export type PartyWalletsByProjectVerifierIdAndAdminWalletIdManyToManyEdgeProjectsByAdminWalletIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
+};
+
 export type Project = Node & {
   __typename?: 'Project';
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
@@ -3005,12 +3018,15 @@ export type Project = Node & {
   handle?: Maybe<Scalars['String']>;
   onChainId?: Maybe<Scalars['String']>;
   adminWalletId?: Maybe<Scalars['UUID']>;
+  verifierId?: Maybe<Scalars['UUID']>;
   /** Reads a single `Party` that is related to this `Project`. */
   partyByDeveloperId?: Maybe<Party>;
   /** Reads a single `CreditClass` that is related to this `Project`. */
   creditClassByCreditClassId?: Maybe<CreditClass>;
   /** Reads a single `Wallet` that is related to this `Project`. */
   walletByAdminWalletId?: Maybe<Wallet>;
+  /** Reads a single `Party` that is related to this `Project`. */
+  partyByVerifierId?: Maybe<Party>;
   /** Reads and enables pagination through a set of `CreditBatch`. */
   creditBatchesByProjectId: CreditBatchesConnection;
   /** Reads and enables pagination through a set of `Document`. */
@@ -3060,6 +3076,8 @@ export type ProjectCondition = {
   onChainId?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `adminWalletId` field. */
   adminWalletId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `verifierId` field. */
+  verifierId?: Maybe<Scalars['UUID']>;
 };
 
 /** A filter to be used against `Project` object types. All fields are combined with a logical ‘and.’ */
@@ -3085,6 +3103,7 @@ export type ProjectInput = {
   handle?: Maybe<Scalars['String']>;
   onChainId?: Maybe<Scalars['String']>;
   adminWalletId?: Maybe<Scalars['UUID']>;
+  verifierId?: Maybe<Scalars['UUID']>;
 };
 
 /** Represents an update to a `Project`. Fields that are set will be updated. */
@@ -3098,6 +3117,7 @@ export type ProjectPatch = {
   handle?: Maybe<Scalars['String']>;
   onChainId?: Maybe<Scalars['String']>;
   adminWalletId?: Maybe<Scalars['UUID']>;
+  verifierId?: Maybe<Scalars['UUID']>;
 };
 
 /** A connection to a list of `Project` values. */
@@ -3143,6 +3163,8 @@ export enum ProjectsOrderBy {
   OnChainIdDesc = 'ON_CHAIN_ID_DESC',
   AdminWalletIdAsc = 'ADMIN_WALLET_ID_ASC',
   AdminWalletIdDesc = 'ADMIN_WALLET_ID_DESC',
+  VerifierIdAsc = 'VERIFIER_ID_ASC',
+  VerifierIdDesc = 'VERIFIER_ID_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -3169,8 +3191,6 @@ export type Query = Node & {
   allCreditClassVersions?: Maybe<CreditClassVersionsConnection>;
   /** Reads and enables pagination through a set of `Document`. */
   allDocuments?: Maybe<DocumentsConnection>;
-  /** Reads and enables pagination through a set of `FlywaySchemaHistory`. */
-  allFlywaySchemaHistories?: Maybe<FlywaySchemaHistoriesConnection>;
   /** Reads and enables pagination through a set of `MetadataGraph`. */
   allMetadataGraphs?: Maybe<MetadataGraphsConnection>;
   /** Reads and enables pagination through a set of `Organization`. */
@@ -3191,7 +3211,6 @@ export type Query = Node & {
   creditClassByOnChainId?: Maybe<CreditClass>;
   creditClassVersionByIdAndCreatedAt?: Maybe<CreditClassVersion>;
   documentById?: Maybe<Document>;
-  flywaySchemaHistoryByInstalledRank?: Maybe<FlywaySchemaHistory>;
   metadataGraphByIri?: Maybe<MetadataGraph>;
   organizationById?: Maybe<Organization>;
   organizationByPartyId?: Maybe<Organization>;
@@ -3217,8 +3236,6 @@ export type Query = Node & {
   creditClassVersion?: Maybe<CreditClassVersion>;
   /** Reads a single `Document` using its globally unique `ID`. */
   document?: Maybe<Document>;
-  /** Reads a single `FlywaySchemaHistory` using its globally unique `ID`. */
-  flywaySchemaHistory?: Maybe<FlywaySchemaHistory>;
   /** Reads a single `MetadataGraph` using its globally unique `ID`. */
   metadataGraph?: Maybe<MetadataGraph>;
   /** Reads a single `Organization` using its globally unique `ID`. */
@@ -3299,18 +3316,6 @@ export type QueryAllDocumentsArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<DocumentsOrderBy>>;
   condition?: Maybe<DocumentCondition>;
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryAllFlywaySchemaHistoriesArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<FlywaySchemaHistoriesOrderBy>>;
-  condition?: Maybe<FlywaySchemaHistoryCondition>;
 };
 
 
@@ -3439,12 +3444,6 @@ export type QueryDocumentByIdArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
-export type QueryFlywaySchemaHistoryByInstalledRankArgs = {
-  installedRank: Scalars['Int'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
 export type QueryMetadataGraphByIriArgs = {
   iri: Scalars['String'];
 };
@@ -3546,12 +3545,6 @@ export type QueryCreditClassVersionArgs = {
 
 /** The root query type which gives access points into the data universe. */
 export type QueryDocumentArgs = {
-  nodeId: Scalars['ID'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryFlywaySchemaHistoryArgs = {
   nodeId: Scalars['ID'];
 };
 
@@ -3853,6 +3846,8 @@ export type UpdateCreditClassPayload = {
   creditClass?: Maybe<CreditClass>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query?: Maybe<Query>;
+  /** Reads a single `Party` that is related to this `CreditClass`. */
+  partyByRegistryId?: Maybe<Party>;
   /** An edge for our `CreditClass`. May be used by Relay 1. */
   creditClassEdge?: Maybe<CreditClassesEdge>;
 };
@@ -3960,53 +3955,6 @@ export type UpdateDocumentPayload = {
 /** The output of our update `Document` mutation. */
 export type UpdateDocumentPayloadDocumentEdgeArgs = {
   orderBy?: Maybe<Array<DocumentsOrderBy>>;
-};
-
-/** All input for the `updateFlywaySchemaHistoryByInstalledRank` mutation. */
-export type UpdateFlywaySchemaHistoryByInstalledRankInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** An object where the defined keys will be set on the `FlywaySchemaHistory` being updated. */
-  flywaySchemaHistoryPatch: FlywaySchemaHistoryPatch;
-  installedRank: Scalars['Int'];
-};
-
-/** All input for the `updateFlywaySchemaHistory` mutation. */
-export type UpdateFlywaySchemaHistoryInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The globally unique `ID` which will identify a single `FlywaySchemaHistory` to be updated. */
-  nodeId: Scalars['ID'];
-  /** An object where the defined keys will be set on the `FlywaySchemaHistory` being updated. */
-  flywaySchemaHistoryPatch: FlywaySchemaHistoryPatch;
-};
-
-/** The output of our update `FlywaySchemaHistory` mutation. */
-export type UpdateFlywaySchemaHistoryPayload = {
-  __typename?: 'UpdateFlywaySchemaHistoryPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `FlywaySchemaHistory` that was updated by this mutation. */
-  flywaySchemaHistory?: Maybe<FlywaySchemaHistory>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** An edge for our `FlywaySchemaHistory`. May be used by Relay 1. */
-  flywaySchemaHistoryEdge?: Maybe<FlywaySchemaHistoriesEdge>;
-};
-
-
-/** The output of our update `FlywaySchemaHistory` mutation. */
-export type UpdateFlywaySchemaHistoryPayloadFlywaySchemaHistoryEdgeArgs = {
-  orderBy?: Maybe<Array<FlywaySchemaHistoriesOrderBy>>;
 };
 
 /** All input for the `updateMetadataGraphByIri` mutation. */
@@ -4247,6 +4195,8 @@ export type UpdateProjectPayload = {
   creditClassByCreditClassId?: Maybe<CreditClass>;
   /** Reads a single `Wallet` that is related to this `Project`. */
   walletByAdminWalletId?: Maybe<Wallet>;
+  /** Reads a single `Party` that is related to this `Project`. */
+  partyByVerifierId?: Maybe<Party>;
   /** An edge for our `Project`. May be used by Relay 1. */
   projectEdge?: Maybe<ProjectsEdge>;
 };
@@ -4384,6 +4334,8 @@ export type Wallet = Node & {
   partiesByProjectAdminWalletIdAndDeveloperId: WalletPartiesByProjectAdminWalletIdAndDeveloperIdManyToManyConnection;
   /** Reads and enables pagination through a set of `CreditClass`. */
   creditClassesByProjectAdminWalletIdAndCreditClassId: WalletCreditClassesByProjectAdminWalletIdAndCreditClassIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Party`. */
+  partiesByProjectAdminWalletIdAndVerifierId: WalletPartiesByProjectAdminWalletIdAndVerifierIdManyToManyConnection;
 };
 
 
@@ -4429,6 +4381,17 @@ export type WalletCreditClassesByProjectAdminWalletIdAndCreditClassIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditClassesOrderBy>>;
   condition?: Maybe<CreditClassCondition>;
+};
+
+
+export type WalletPartiesByProjectAdminWalletIdAndVerifierIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<PartiesOrderBy>>;
+  condition?: Maybe<PartyCondition>;
 };
 
 /** A condition to be used against `Wallet` object types. All fields are tested for equality and combined with a logical ‘and.’ */
@@ -4515,6 +4478,43 @@ export type WalletPartiesByProjectAdminWalletIdAndDeveloperIdManyToManyEdge = {
 
 /** A `Party` edge in the connection, with data from `Project`. */
 export type WalletPartiesByProjectAdminWalletIdAndDeveloperIdManyToManyEdgeProjectsByDeveloperIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
+};
+
+/** A connection to a list of `Party` values, with data from `Project`. */
+export type WalletPartiesByProjectAdminWalletIdAndVerifierIdManyToManyConnection = {
+  __typename?: 'WalletPartiesByProjectAdminWalletIdAndVerifierIdManyToManyConnection';
+  /** A list of `Party` objects. */
+  nodes: Array<Maybe<Party>>;
+  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
+  edges: Array<WalletPartiesByProjectAdminWalletIdAndVerifierIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Party` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type WalletPartiesByProjectAdminWalletIdAndVerifierIdManyToManyEdge = {
+  __typename?: 'WalletPartiesByProjectAdminWalletIdAndVerifierIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Party` at the end of the edge. */
+  node?: Maybe<Party>;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByVerifierId: ProjectsConnection;
+};
+
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type WalletPartiesByProjectAdminWalletIdAndVerifierIdManyToManyEdgeProjectsByVerifierIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -4913,6 +4913,9 @@ export type ProjectFieldsFragment = (
   )>, partyByDeveloperId?: Maybe<(
     { __typename?: 'Party' }
     & PartyFieldsFragment
+  )>, partyByVerifierId?: Maybe<(
+    { __typename?: 'Party' }
+    & PartyFieldsFragment
   )>, documentsByProjectId: (
     { __typename?: 'DocumentsConnection' }
     & { nodes: Array<Maybe<(
@@ -5084,6 +5087,9 @@ export const ProjectFieldsFragmentDoc = gql`
     }
   }
   partyByDeveloperId {
+    ...partyFields
+  }
+  partyByVerifierId {
     ...partyFields
   }
   documentsByProjectId {

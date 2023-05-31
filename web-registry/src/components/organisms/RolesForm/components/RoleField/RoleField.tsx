@@ -8,7 +8,6 @@ import { Autocomplete, Box, TextField } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 
 import FieldFormControl from 'web-components/lib/components/inputs/new/FieldFormControl/FieldFormControl';
-import { Label } from 'web-components/lib/components/typography';
 import { truncate } from 'web-components/lib/utils/truncate';
 
 import { PartyType } from 'generated/graphql';
@@ -19,9 +18,11 @@ import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 
 import { ProfileModal } from '../ProfileModal/ProfileModal';
-import { profileModalInitialValues } from '../ProfileModal/ProfileModal.constants';
 import { ProfileModalSchemaType } from '../ProfileModal/ProfileModal.schema';
 import { useDebounce } from './hook/useDebounce';
+import { AddNewProfile } from './RoleField.AddNewProfile';
+import { NoGroup } from './RoleField.NoGroup';
+import { ProfileGroup } from './RoleField.ProfileGroup';
 import { useStyles } from './RoleField.styles';
 import { group, isProfile } from './RoleField.utils';
 
@@ -165,47 +166,14 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
                   ...option,
                 }))
                 .sort((a, b) => -b.group.localeCompare(a.group)),
-              <Box
-                key="add-new-profile"
-                sx={{ py: 2 }}
-                onClick={e => {
-                  e.stopPropagation();
-                  setProfileAdd(profileModalInitialValues);
-                }}
-              >
-                <Label size="xs" color="secondary.main">
-                  + Add New Profile
-                </Label>
-              </Box>,
+              <AddNewProfile setProfileAdd={setProfileAdd} />,
             ]}
             groupBy={option => (isProfile(option) ? option.group : '')}
             renderGroup={params => {
               return params.group ? (
-                <li key={params.key}>
-                  <Label
-                    color="primary.dark"
-                    sx={{ fontSize: [11], pl: 4.5, pt: 3.5 }}
-                  >
-                    {params.group}
-                  </Label>
-                  <Box
-                    component="ul"
-                    sx={{ p: 0, color: 'primary.dark', fontSize: 14 }}
-                  >
-                    {params.children}
-                  </Box>
-                </li>
+                <ProfileGroup params={params} />
               ) : (
-                <>
-                  <Box
-                    component="hr"
-                    sx={{
-                      borderTop: '1px solid',
-                      borderTopColor: 'grey.100',
-                    }}
-                  />
-                  {params.children}
-                </>
+                <NoGroup params={params} />
               );
             }}
             autoComplete

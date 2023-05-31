@@ -89,7 +89,6 @@ export const getIsTransparent = (pathname: string): boolean =>
     '/create-methodology',
     '/methodology-review-process',
     '/create-credit-class',
-    '/certificate',
     '/project-developers',
   ].some(route => pathname.startsWith(route));
 

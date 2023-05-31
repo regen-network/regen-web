@@ -59,12 +59,13 @@ export default function Header({
 
   return (
     <>
-      <div
+      <Box
         className={cx(
           styles.borderBottom,
           absolute && styles.absolute,
           transparent ? styles.transparent : styles.background,
         )}
+        sx={{ displayPrint: 'none' }}
       >
         <Container
           disableGutters
@@ -109,7 +110,7 @@ export default function Header({
             </Box>
           </Box>
         </Container>
-      </div>
+      </Box>
     </>
   );
 }

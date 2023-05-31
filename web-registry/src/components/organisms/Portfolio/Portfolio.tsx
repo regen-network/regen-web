@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box, SxProps } from '@mui/material';
 import { tabsStyles } from 'styles/tabs';
 
@@ -46,6 +47,7 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
   initialPaginationParams,
   isIgnoreOffset = false,
 }) => {
+  const navigate = useNavigate();
   const tabs: IconTabProps[] = useMemo(
     () => [
       {
@@ -65,7 +67,13 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
         content: (
           <RetirementCertificatesTable
             credits={credits}
-            renderActionButtons={() => <ViewCertificateButton />}
+            renderActionButtons={index => (
+              <ViewCertificateButton
+                onClick={() =>
+                  navigate(`/certificate/${credits?.[index].projectId}`)
+                }
+              />
+            )}
             onTableChange={onTableChange}
             initialPaginationParams={initialPaginationParams}
             isIgnoreOffset={isIgnoreOffset}
@@ -79,6 +87,7 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
       onTableChange,
       initialPaginationParams,
       isIgnoreOffset,
+      navigate,
     ],
   );
 

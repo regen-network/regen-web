@@ -1,5 +1,4 @@
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
 import CertifiedDocumentIcon from 'web-components/lib/components/icons/CertifiedDocumentIcon';
 
 import { VIEW_CERTIFICATE } from './Portfolio.constants';

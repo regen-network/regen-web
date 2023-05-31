@@ -10,6 +10,7 @@ import {
 import { IntercomProvider } from 'react-use-intercom';
 import amplitudePlugin from '@analytics/amplitude';
 import googleAnalytics from '@analytics/google-analytics';
+import { Box } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import * as Sentry from '@sentry/react';
@@ -127,7 +128,9 @@ root.render(
           </AnalyticsProvider>
         </LocalizationProvider>
       </IntercomProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
+      <Box sx={{ displayPrint: 'none' }}>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </Box>
     </AuthApolloProvider>
   </QueryClientProvider>,
 );

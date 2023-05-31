@@ -9,7 +9,7 @@ import { AddWalletModalConnectProps } from './AddWalletModalConnect';
 export interface AddWalletModalTemplateProps
   extends AddWalletModalConnectProps {
   title: string;
-  subtitle: string;
+  subtitle?: string;
 }
 
 const AddWalletModalTemplate: React.FC<
@@ -18,12 +18,14 @@ const AddWalletModalTemplate: React.FC<
   return (
     <Modal open={open} onClose={onClose} isFullscreenMobile={false}>
       <Box sx={{ maxWidth: 460 }}>
-        <Title align="center" variant="h4" mt={1.75} mb={5}>
+        <Title align="center" variant="h4" mt={1.75}>
           {title}
         </Title>
-        <Body size="lg" align="center">
-          {subtitle}
-        </Body>
+        {subtitle && (
+          <Body size="lg" align="center" mt={5}>
+            {subtitle}
+          </Body>
+        )}
       </Box>
       {partyInfo && (
         <Card sx={{ mt: 6, p: 5 }}>

@@ -37,6 +37,10 @@ export const addWalletModalSwitchAtom = atomWithImmer({
   open: false,
 } as Partial<RegenModalProps>);
 
+export const addWalletModalSwitchWarningAtom = atomWithImmer({
+  open: false,
+} as Partial<RegenModalProps>);
+
 export const addWalletModalConnectAtom = atomWithImmer({
   open: false,
   partyInfo: {

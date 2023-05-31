@@ -33,6 +33,7 @@ const regenTheme = createTheme({
       main: '#fff',
       contrastText: '#000',
       light: '#202020',
+      dark: '#201F22',
     },
     secondary: {
       main: '#4FB573',

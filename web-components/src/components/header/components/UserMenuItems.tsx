@@ -61,8 +61,12 @@ const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
           ),
           extras: (
             <Box>
-              {profiles.map(p => (
-                <UserMenuItemProfile {...p} onProfileClick={onProfileClick} />
+              {profiles.map((p, i) => (
+                <UserMenuItemProfile
+                  key={i}
+                  {...p}
+                  onProfileClick={onProfileClick}
+                />
               ))}
               {addAddress && (
                 <OutlinedButton

@@ -2,6 +2,7 @@ query GetPartiesByNameOrAddr($input: String) {
   getPartiesByNameOrAddr(input: $input) {
     nodes {
       id
+      accountId
       name
       type
       image

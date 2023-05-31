@@ -4,7 +4,7 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
-import { Autocomplete, TextField } from '@mui/material';
+import { Autocomplete, Box, TextField } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 
 import FieldFormControl from 'web-components/lib/components/inputs/new/FieldFormControl/FieldFormControl';
@@ -13,6 +13,7 @@ import { truncate } from 'web-components/lib/utils/truncate';
 
 import { PartyType } from 'generated/graphql';
 import { getPartiesByNameOrAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartiesByNameOrAddr/getPartiesByNameOrAddrQuery';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
@@ -22,7 +23,7 @@ import { profileModalInitialValues } from '../ProfileModal/ProfileModal.constant
 import { ProfileModalSchemaType } from '../ProfileModal/ProfileModal.schema';
 import { useDebounce } from './hook/useDebounce';
 import { useStyles } from './RoleField.styles';
-import { isProfile } from './RoleField.utils';
+import { group, isProfile } from './RoleField.utils';
 
 interface Props {
   className?: string;
@@ -51,6 +52,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
     ref,
   ) => {
     const { classes: styles, cx } = useStyles();
+    const { accountId } = useWallet();
     const [inputValue, setInputValue] = useState('');
     const [options, setOptions] = useState<readonly ProfileModalSchemaType[]>(
       [],
@@ -72,30 +74,32 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
         setOptions(value ? [value] : []);
         return;
       }
-      let newOptions: readonly ProfileModalSchemaType[] = [];
+      // let newOptions: readonly ProfileModalSchemaType[] = [];
 
-      // if (value) {
-      //   newOptions = [value];
-      // }
+      // newOptions = [
+      //   ...newOptions,
+      //   ...(parties?.getPartiesByNameOrAddr?.nodes.map(party => ({
+      //     id: party?.id as string,
+      //     name: party?.name as string,
+      //     profileType: party?.type as PartyType,
+      //     profileImage: party?.image || getDefaultAvatar(party),
+      //     description: party?.description || undefined,
+      //     address: party?.walletByWalletId?.addr || undefined,
+      //   })) || []),
+      // ];
+      // console.log('newOptions', newOptions);
 
-      if (parties) {
-        console.log('parties', parties);
-
-        newOptions = [
-          ...newOptions,
-          ...(parties.getPartiesByNameOrAddr?.nodes.map(party => ({
-            id: party?.id as string,
-            name: party?.name || DEFAULT_NAME,
-            profileType: party?.type as PartyType,
-            profileImage: party?.image || getDefaultAvatar(party),
-            description: party?.description || undefined,
-            address: party?.walletByWalletId?.addr || undefined,
-          })) || []),
-        ];
-      }
-      console.log('newOptions', newOptions);
-
-      setOptions(newOptions);
+      setOptions(
+        parties?.getPartiesByNameOrAddr?.nodes.map(party => ({
+          accountId: party?.accountId as string,
+          id: party?.id as string,
+          name: party?.name || DEFAULT_NAME,
+          profileType: party?.type as PartyType,
+          profileImage: party?.image || getDefaultAvatar(party),
+          description: party?.description || undefined,
+          address: party?.walletByWalletId?.addr || undefined,
+        })) || [],
+      );
     }, [value, inputValue, parties]);
 
     const [profileAdd, setProfileAdd] = useState<ProfileModalSchemaType | null>(
@@ -134,13 +138,20 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
               paper: styles.paper,
               popupIndicator: styles.popupIndicator,
             }}
-            value={value}
+            value={
+              value
+                ? {
+                    group: group(value, accountId),
+                    ...value,
+                  }
+                : undefined
+            }
             isOptionEqualToValue={(option, value) =>
               isProfile(option) && isProfile(value) && option.id === value.id
             }
             getOptionLabel={option => (isProfile(option) ? option.name : '')}
-            renderOption={(props, option) => (
-              <li {...props}>
+            renderOption={(props, option, state) => (
+              <li {...props} key={state.index}>
                 {isProfile(option)
                   ? `${option.name} (${truncate(option.address)})`
                   : option}
@@ -148,10 +159,15 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
             )}
             filterOptions={x => x}
             options={[
-              ...(options || []),
-              <div
+              ...options
+                .map(option => ({
+                  group: group(option, accountId),
+                  ...option,
+                }))
+                .sort((a, b) => -b.group.localeCompare(a.group)),
+              <Box
                 key="add-new-profile"
-                className={styles.add}
+                sx={{ py: 2 }}
                 onClick={e => {
                   e.stopPropagation();
                   setProfileAdd(profileModalInitialValues);
@@ -160,12 +176,39 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
                 <Label size="xs" color="secondary.main">
                   + Add New Profile
                 </Label>
-              </div>,
+              </Box>,
             ]}
+            groupBy={option => (isProfile(option) ? option.group : '')}
+            renderGroup={params => {
+              return params.group ? (
+                <li key={params.key}>
+                  <Label
+                    color="primary.dark"
+                    sx={{ fontSize: [11], pl: 4.5, pt: 3.5 }}
+                  >
+                    {params.group}
+                  </Label>
+                  <Box
+                    component="ul"
+                    sx={{ p: 0, color: 'primary.dark', fontSize: 14 }}
+                  >
+                    {params.children}
+                  </Box>
+                </li>
+              ) : (
+                <>
+                  <Box
+                    component="hr"
+                    sx={{
+                      borderTop: '1px solid',
+                      borderTopColor: 'grey.100',
+                    }}
+                  />
+                  {params.children}
+                </>
+              );
+            }}
             autoComplete
-            // includeInputInList
-            // filterSelectedOptions
-            noOptionsText="No profile found with this name or wallet address"
             onChange={(event, newValue) => {
               if (newValue && isProfile(newValue)) {
                 setOptions(newValue ? [newValue, ...options] : options);
@@ -173,7 +216,6 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
               }
             }}
             onInputChange={(event, newInputValue) => {
-              console.log(newInputValue);
               setInputValue(newInputValue);
             }}
             renderInput={params => (

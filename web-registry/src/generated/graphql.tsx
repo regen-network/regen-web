@@ -4942,7 +4942,7 @@ export type GetPartiesByNameOrAddrQuery = (
     { __typename?: 'PartiesConnection' }
     & { nodes: Array<Maybe<(
       { __typename?: 'Party' }
-      & Pick<Party, 'id' | 'name' | 'type' | 'image' | 'description'>
+      & Pick<Party, 'id' | 'accountId' | 'name' | 'type' | 'image' | 'description'>
       & { walletByWalletId?: Maybe<(
         { __typename?: 'Wallet' }
         & Pick<Wallet, 'addr'>
@@ -5705,6 +5705,7 @@ export const GetPartiesByNameOrAddrDocument = gql`
   getPartiesByNameOrAddr(input: $input) {
     nodes {
       id
+      accountId
       name
       type
       image

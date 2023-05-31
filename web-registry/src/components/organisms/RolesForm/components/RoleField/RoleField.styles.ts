@@ -14,11 +14,6 @@ export const useStyles = makeStyles()(theme => ({
       marginTop: 0,
     },
   },
-  add: {
-    display: 'flex',
-    alignItems: 'center',
-    width: '100%',
-  },
   input: {
     borderRadius: 2,
     '&.MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input':

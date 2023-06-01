@@ -2,13 +2,20 @@ query partiesByAccountId($id: UUID!){
   accountById(id: $id) {
     partiesByAccountId {
       nodes {
-        name
-        image
-        type
-      	walletByWalletId {
-          addr
-        }
+        ...partyWithAccountFields
       }
     }
+  }
+}
+
+fragment partyWithAccountFields on Party {
+  id
+  accountId
+  name
+  type
+  image
+  description
+  walletByWalletId {
+    addr
   }
 }

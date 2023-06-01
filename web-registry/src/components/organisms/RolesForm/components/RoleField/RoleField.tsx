@@ -11,6 +11,7 @@ import FieldFormControl from 'web-components/lib/components/inputs/new/FieldForm
 import { truncate } from 'web-components/lib/utils/truncate';
 
 import { PartyType } from 'generated/graphql';
+import { getPartiesByAccountIdQuery } from 'lib/queries/react-query/registry-server/graphql/getPartiesByAccountIdById/getPartiesByAccountIdQuery';
 import { getPartiesByNameOrAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartiesByNameOrAddr/getPartiesByNameOrAddrQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -24,7 +25,7 @@ import { AddNewProfile } from './RoleField.AddNewProfile';
 import { NoGroup } from './RoleField.NoGroup';
 import { ProfileGroup } from './RoleField.ProfileGroup';
 import { useStyles } from './RoleField.styles';
-import { group, isProfile } from './RoleField.utils';
+import { getParties, group, isProfile } from './RoleField.utils';
 
 interface Props {
   className?: string;
@@ -58,6 +59,9 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
     const [options, setOptions] = useState<readonly ProfileModalSchemaType[]>(
       [],
     );
+    const [profileAdd, setProfileAdd] = useState<ProfileModalSchemaType | null>(
+      null,
+    );
 
     const graphqlClient =
       useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -69,43 +73,31 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
         input: debouncedInputValue,
       }),
     );
+    const { data: partiesByAccountId } = useQuery(
+      getPartiesByAccountIdQuery({
+        client: graphqlClient,
+        id: accountId,
+        enabled: !!accountId && !!graphqlClient,
+      }),
+    );
 
     useEffect(() => {
       if (inputValue === '') {
-        setOptions(value ? [value] : []);
+        const yourProfiles = getParties(
+          partiesByAccountId?.accountById?.partiesByAccountId?.nodes,
+        );
+        setOptions(value ? [...yourProfiles, value] : yourProfiles);
         return;
       }
-      // let newOptions: readonly ProfileModalSchemaType[] = [];
 
-      // newOptions = [
-      //   ...newOptions,
-      //   ...(parties?.getPartiesByNameOrAddr?.nodes.map(party => ({
-      //     id: party?.id as string,
-      //     name: party?.name as string,
-      //     profileType: party?.type as PartyType,
-      //     profileImage: party?.image || getDefaultAvatar(party),
-      //     description: party?.description || undefined,
-      //     address: party?.walletByWalletId?.addr || undefined,
-      //   })) || []),
-      // ];
-      // console.log('newOptions', newOptions);
-
-      setOptions(
-        parties?.getPartiesByNameOrAddr?.nodes.map(party => ({
-          accountId: party?.accountId as string,
-          id: party?.id as string,
-          name: party?.name || DEFAULT_NAME,
-          profileType: party?.type as PartyType,
-          profileImage: party?.image || getDefaultAvatar(party),
-          description: party?.description || undefined,
-          address: party?.walletByWalletId?.addr || undefined,
-        })) || [],
-      );
-    }, [value, inputValue, parties]);
-
-    const [profileAdd, setProfileAdd] = useState<ProfileModalSchemaType | null>(
-      null,
-    );
+      const searchProfiles = getParties(parties?.getPartiesByNameOrAddr?.nodes);
+      setOptions(searchProfiles);
+    }, [
+      value,
+      inputValue,
+      parties,
+      partiesByAccountId?.accountById?.partiesByAccountId?.nodes,
+    ]);
 
     const saveProfile = async (
       profile: ProfileModalSchemaType,

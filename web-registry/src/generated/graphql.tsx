@@ -4766,13 +4766,18 @@ export type PartiesByAccountIdQuery = (
       { __typename?: 'PartiesConnection' }
       & { nodes: Array<Maybe<(
         { __typename?: 'Party' }
-        & Pick<Party, 'name' | 'image' | 'type'>
-        & { walletByWalletId?: Maybe<(
-          { __typename?: 'Wallet' }
-          & Pick<Wallet, 'addr'>
-        )> }
+        & PartyWithAccountFieldsFragment
       )>> }
     ) }
+  )> }
+);
+
+export type PartyWithAccountFieldsFragment = (
+  { __typename?: 'Party' }
+  & Pick<Party, 'id' | 'accountId' | 'name' | 'type' | 'image' | 'description'>
+  & { walletByWalletId?: Maybe<(
+    { __typename?: 'Wallet' }
+    & Pick<Wallet, 'addr'>
   )> }
 );
 
@@ -4942,11 +4947,7 @@ export type GetPartiesByNameOrAddrQuery = (
     { __typename?: 'PartiesConnection' }
     & { nodes: Array<Maybe<(
       { __typename?: 'Party' }
-      & Pick<Party, 'id' | 'accountId' | 'name' | 'type' | 'image' | 'description'>
-      & { walletByWalletId?: Maybe<(
-        { __typename?: 'Wallet' }
-        & Pick<Wallet, 'addr'>
-      )> }
+      & PartyWithAccountFieldsFragment
     )>> }
   )> }
 );
@@ -5237,6 +5238,19 @@ export type UpdateWalletByIdMutation = (
   )> }
 );
 
+export const PartyWithAccountFieldsFragmentDoc = gql`
+    fragment partyWithAccountFields on Party {
+  id
+  accountId
+  name
+  type
+  image
+  description
+  walletByWalletId {
+    addr
+  }
+}
+    `;
 export const MoreProjectFieldsFragmentDoc = gql`
     fragment moreProjectFields on Project {
   handle
@@ -5310,17 +5324,12 @@ export const PartiesByAccountIdDocument = gql`
   accountById(id: $id) {
     partiesByAccountId {
       nodes {
-        name
-        image
-        type
-        walletByWalletId {
-          addr
-        }
+        ...partyWithAccountFields
       }
     }
   }
 }
-    `;
+    ${PartyWithAccountFieldsFragmentDoc}`;
 
 /**
  * __usePartiesByAccountIdQuery__
@@ -5704,19 +5713,11 @@ export const GetPartiesByNameOrAddrDocument = gql`
     query GetPartiesByNameOrAddr($input: String) {
   getPartiesByNameOrAddr(input: $input) {
     nodes {
-      id
-      accountId
-      name
-      type
-      image
-      description
-      walletByWalletId {
-        addr
-      }
+      ...partyWithAccountFields
     }
   }
 }
-    `;
+    ${PartyWithAccountFieldsFragmentDoc}`;
 
 /**
  * __useGetPartiesByNameOrAddrQuery__

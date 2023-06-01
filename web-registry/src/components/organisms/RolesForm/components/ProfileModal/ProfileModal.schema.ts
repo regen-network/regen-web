@@ -12,14 +12,16 @@ export const profileModalSchema = z.object({
   id: z.string().optional(),
   accountId: z.string().optional(),
   profileType: z.custom<PartyType>(),
-  name: z.string(),
+  name: z.string().min(1),
   profileImage: z.string(),
   description: z.string().max(160).optional(),
   address: z
     .string()
     .refine(
       value =>
-        isValidAddress(value, chainInfo.bech32Config.bech32PrefixAccAddr),
+        value
+          ? isValidAddress(value, chainInfo.bech32Config.bech32PrefixAccAddr)
+          : true,
       {
         message: invalidRegenAddress,
       },

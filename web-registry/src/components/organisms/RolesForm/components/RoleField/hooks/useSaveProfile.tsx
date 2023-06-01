@@ -22,8 +22,9 @@ export const useSaveProfile = ({ setValue, closeProfileModal }: Params) => {
       try {
         let walletId;
         const addr = profile.address;
+        console.log('saveProfile');
         if (addr) {
-          const res = await createWallet({
+          const walletRes = await createWallet({
             variables: {
               input: {
                 wallet: {
@@ -32,9 +33,9 @@ export const useSaveProfile = ({ setValue, closeProfileModal }: Params) => {
               },
             },
           });
-          walletId = res.data?.createWallet?.wallet?.id;
+          walletId = walletRes.data?.createWallet?.wallet?.id;
         }
-        const res = await createParty({
+        const partyRes = await createParty({
           variables: {
             input: {
               party: {
@@ -47,12 +48,13 @@ export const useSaveProfile = ({ setValue, closeProfileModal }: Params) => {
             },
           },
         });
-        const id = res.data?.createParty?.party?.id;
-        const accountId = res.data?.createParty?.party?.accountId;
+        const id = partyRes.data?.createParty?.party?.id;
+        const accountId = partyRes.data?.createParty?.party?.accountId;
 
         setValue({ id, accountId, ...profile });
         closeProfileModal();
       } catch (e) {
+        console.log(e);
         // TODO
         // setError(e);
       }

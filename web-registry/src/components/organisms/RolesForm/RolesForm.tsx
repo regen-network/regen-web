@@ -63,17 +63,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   };
 
   return (
-    <Form
-      form={form}
-      onSubmit={async data => {
-        try {
-          await submit(data);
-          if (isEdit && confirmSave) confirmSave();
-        } catch (e) {
-          setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
-        }
-      }}
-    >
+    <Form form={form}>
       <OnBoardingCard>
         <RoleField
           label="Project Developer"
@@ -91,6 +81,14 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
         />
       </OnBoardingCard>
       <ProjectPageFooter
+        onSave={form.handleSubmit(async data => {
+          try {
+            await submit(data);
+            if (isEdit && confirmSave) confirmSave();
+          } catch (e) {
+            setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
+          }
+        })}
         onPrev={onPrev}
         onNext={onNext}
         isValid={isValid}

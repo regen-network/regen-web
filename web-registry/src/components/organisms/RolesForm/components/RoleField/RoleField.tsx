@@ -98,7 +98,6 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
     const closeProfileModal = (): void => {
       setProfileAdd(null);
     };
-
     const saveProfile = useSaveProfile({ setValue, closeProfileModal });
 
     return (

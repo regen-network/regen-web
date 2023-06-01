@@ -16,7 +16,7 @@ import { IS_DEV } from 'lib/env';
 interface Props<T extends FieldValues>
   extends Omit<ComponentProps<'form'>, 'onSubmit'> {
   form: UseFormReturn<T>;
-  onSubmit: SubmitHandler<T>;
+  onSubmit?: SubmitHandler<T>;
   sx?: SxProps<Theme>;
 }
 
@@ -28,7 +28,7 @@ const Form = <T extends FieldValues>({
   ...props
 }: Props<T>): JSX.Element => (
   <FormProvider {...form}>
-    <form onSubmit={form.handleSubmit(onSubmit)} {...props}>
+    <form onSubmit={onSubmit && form.handleSubmit(onSubmit)} {...props}>
       {/* <fieldset> passes the form's 'disabled' state to all of its elements,
           allowing us to handle disabled style variants with just css */}
       <Box

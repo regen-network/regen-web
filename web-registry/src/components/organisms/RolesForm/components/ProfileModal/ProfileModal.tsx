@@ -1,4 +1,5 @@
 import { useFormState, useWatch } from 'react-hook-form';
+import { Box } from '@mui/material';
 
 import RadioCard from 'web-components/lib/components/atoms/RadioCard';
 import { ImageField } from 'web-components/lib/components/inputs/new/ImageField/ImageField';
@@ -24,6 +25,7 @@ import {
   profileModalSchema,
   ProfileModalSchemaType,
 } from './ProfileModal.schema';
+import { useStyles } from './ProfileModal.styles';
 
 interface ProfileModalProps {
   initialValues?: ProfileModalSchemaType;
@@ -38,6 +40,8 @@ function ProfileModal({
   onSubmit,
   onUpload,
 }: ProfileModalProps): JSX.Element {
+  const { classes: styles } = useStyles();
+
   const form = useZodForm({
     schema: profileModalSchema,
     defaultValues: {
@@ -80,23 +84,19 @@ function ProfileModal({
   });
 
   return (
-    <Modal open={!!initialValues} onClose={onClose}>
-      <div>
-        <Title
-          variant="h4"
-          align="center"
-          sx={{ px: [0, 7.5], pt: [8, 0], pb: [6, 7.5] }}
-        >
-          {`${initialValues?.id ? 'Edit' : 'Add'} Profile`}
-        </Title>
-        <Form
-          form={form}
-          onSubmit={onSubmit}
+    <Modal open={!!initialValues} onClose={onClose} className={styles.root}>
+      <Title variant="h4" align="center" sx={{ pb: [6, 12.5] }}>
+        {`${initialValues?.id ? 'Edit' : 'Add'} Profile`}
+      </Title>
+      <Form form={form}>
+        <Box
           sx={{
             border: theme => `1px solid ${theme.palette.info.light}`,
+            backgroundColor: 'primary.main',
             borderRadius: '5px',
             py: 10,
             px: { xs: 2.5, sm: 10 },
+            mb: 12.5,
           }}
         >
           <RadioCard
@@ -145,16 +145,17 @@ function ProfileModal({
             {...form.register('address')}
             helperText={errors.address?.message}
             error={!!errors.address}
+            optional
           />
-          <CancelButtonFooter
-            onCancel={onClose}
-            label="save"
-            sx={{ px: [10.75] }}
-            disabled={!isValid || isSubmitting}
-            type="submit"
-          />
-        </Form>
-      </div>
+        </Box>
+        <CancelButtonFooter
+          onClick={form.handleSubmit(onSubmit)}
+          onCancel={onClose}
+          label="save"
+          sx={{ px: [10.75] }}
+          disabled={!isValid || isSubmitting}
+        />
+      </Form>
     </Modal>
   );
 }

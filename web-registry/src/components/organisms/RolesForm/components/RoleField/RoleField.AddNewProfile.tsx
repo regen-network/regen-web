@@ -2,9 +2,11 @@ import { Box } from '@mui/material';
 
 import { Label } from 'web-components/lib/components/typography';
 
+import { PartyType } from 'generated/graphql';
 import { UseStateSetter } from 'types/react/use-state';
 
-import { profileModalInitialValues } from '../ProfileModal/ProfileModal.constants';
+import { DEFAULT_PROFILE_USER_AVATAR } from 'pages/ProfileEdit/ProfileEdit.constants';
+
 import { ProfileModalSchemaType } from '../ProfileModal/ProfileModal.schema';
 
 type AddNewProfileProps = {
@@ -16,10 +18,14 @@ export const AddNewProfile: React.FC<AddNewProfileProps> = ({
 }) => (
   <Box
     key="add-new-profile"
-    sx={{ py: 2 }}
+    sx={{ py: 2, width: '100%' }}
     onClick={e => {
       e.stopPropagation();
-      setProfileAdd(profileModalInitialValues);
+      setProfileAdd({
+        profileType: PartyType.User,
+        name: '',
+        profileImage: DEFAULT_PROFILE_USER_AVATAR,
+      });
     }}
   >
     <Label size="xs" color="secondary.main">

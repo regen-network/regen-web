@@ -1,9 +1,12 @@
 import { useCallback } from 'react';
+import { ERRORS, errorsMapping } from 'config/errors';
+import { useSetAtom } from 'jotai';
 
 import {
   useCreatePartyMutation,
   useCreateWalletMutation,
 } from 'generated/graphql';
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
 import { ProfileModalSchemaType } from '../../ProfileModal/ProfileModal.schema';
 
@@ -16,13 +19,13 @@ type Params = {
 export const useSaveProfile = ({ setValue, closeProfileModal }: Params) => {
   const [createWallet] = useCreateWalletMutation();
   const [createParty] = useCreatePartyMutation();
+  const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
   const saveProfile = useCallback(
     async (profile: ProfileModalSchemaType): Promise<void> => {
       try {
         let walletId;
         const addr = profile.address;
-        console.log('saveProfile');
         if (addr) {
           const walletRes = await createWallet({
             variables: {
@@ -49,17 +52,19 @@ export const useSaveProfile = ({ setValue, closeProfileModal }: Params) => {
           },
         });
         const id = partyRes.data?.createParty?.party?.id;
-        const accountId = partyRes.data?.createParty?.party?.accountId;
-
-        setValue({ id, accountId, ...profile });
         closeProfileModal();
+        setValue({ id, ...profile });
       } catch (e) {
-        console.log(e);
-        // TODO
-        // setError(e);
+        setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
       }
     },
-    [closeProfileModal, createParty, createWallet, setValue],
+    [
+      closeProfileModal,
+      createParty,
+      createWallet,
+      setErrorBannerTextAtom,
+      setValue,
+    ],
   );
 
   return saveProfile;

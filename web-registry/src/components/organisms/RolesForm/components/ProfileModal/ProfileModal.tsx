@@ -154,6 +154,7 @@ function ProfileModal({
           label="save"
           sx={{ px: [10.75] }}
           disabled={!isValid || isSubmitting}
+          type="submit"
         />
       </Form>
     </Modal>

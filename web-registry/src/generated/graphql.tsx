@@ -4852,7 +4852,7 @@ export type CreatePartyMutation = (
     { __typename?: 'CreatePartyPayload' }
     & { party?: Maybe<(
       { __typename?: 'Party' }
-      & Pick<Party, 'id'>
+      & Pick<Party, 'id' | 'accountId'>
     )> }
   )> }
 );
@@ -5495,6 +5495,7 @@ export const CreatePartyDocument = gql`
   createParty(input: $input) {
     party {
       id
+      accountId
     }
   }
 }

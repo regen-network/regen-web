@@ -1,5 +1,4 @@
 import { useFormState, useWatch } from 'react-hook-form';
-import { useTheme } from '@mui/material';
 
 import RadioCard from 'web-components/lib/components/atoms/RadioCard';
 import { ImageField } from 'web-components/lib/components/inputs/new/ImageField/ImageField';
@@ -35,12 +34,11 @@ interface ProfileModalProps {
 }
 
 function ProfileModal({
-  initialValues = profileModalInitialValues,
+  initialValues,
   onClose,
   onSubmit,
   onUpload,
 }: ProfileModalProps): JSX.Element {
-  const theme = useTheme();
   const form = useZodForm({
     schema: profileModalSchema,
     defaultValues: {

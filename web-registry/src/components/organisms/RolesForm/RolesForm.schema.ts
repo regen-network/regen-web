@@ -11,7 +11,7 @@ import { profileModalSchema } from './components/ProfileModal/ProfileModal.schem
 
 export const rolesFormSchema = z
   .object({
-    projectDeveloper: profileModalSchema.optional(),
+    projectDeveloper: profileModalSchema.nullable(),
     admin: z
       .string()
       .refine(

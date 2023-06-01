@@ -16,7 +16,8 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { ProfileModal } from '../ProfileModal/ProfileModal';
 import { ProfileModalSchemaType } from '../ProfileModal/ProfileModal.schema';
-import { useDebounce } from './hook/useDebounce';
+import { useDebounce } from './hooks/useDebounce';
+import { useSaveProfile } from './hooks/useSaveProfile';
 import { AddNewProfile } from './RoleField.AddNewProfile';
 import { NoGroup } from './RoleField.NoGroup';
 import { ProfileGroup } from './RoleField.ProfileGroup';
@@ -32,7 +33,7 @@ interface Props {
   label?: string;
   optional?: boolean | string;
   setValue: (value: ProfileModalSchemaType) => void;
-  value?: ProfileModalSchemaType;
+  value?: ProfileModalSchemaType | null;
   // onSaveProfile: (v: ProfileModalSchemaType) => Promise<void>;
 }
 
@@ -95,20 +96,11 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
       partiesByAccountId?.accountById?.partiesByAccountId?.nodes,
     ]);
 
-    const saveProfile = async (
-      profile: ProfileModalSchemaType,
-    ): Promise<void> => {
-      // TODO Save in db and invalidate query
-      // var savedProfile = await onSaveProfile(profile);
-      setValue(profile);
-      closeProfileModal();
-      // form.setFieldValue(field.name, savedProfile);
-      // form.setFieldTouched(field.name, true);
-    };
-
     const closeProfileModal = (): void => {
       setProfileAdd(null);
     };
+
+    const saveProfile = useSaveProfile({ setValue, closeProfileModal });
 
     return (
       <div className={cx(styles.root, classes && classes.root)}>
@@ -133,7 +125,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
                     group: group(value, accountId),
                     ...value,
                   }
-                : undefined
+                : null
             }
             isOptionEqualToValue={(option, value) =>
               isProfile(option) && isProfile(value) && option.id === value.id

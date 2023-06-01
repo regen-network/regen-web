@@ -1,14 +1,9 @@
 import { useCallback } from 'react';
-import isEmpty from 'lodash/isEmpty';
 
 import {
   PartyType,
   ProjectPatch,
-  useCreatePartyMutation,
-  useCreateWalletMutation,
-  useUpdatePartyByIdMutation,
   useUpdateProjectByIdMutation,
-  useUpdateWalletByIdMutation,
 } from 'generated/graphql';
 import { NestedPartial } from 'types/nested-partial';
 import {
@@ -46,99 +41,16 @@ const useRolesSubmit = ({
   navigateNext,
 }: Props): Return => {
   const [updateProject] = useUpdateProjectByIdMutation();
-  const [createWallet] = useCreateWalletMutation();
-  const [createParty] = useCreatePartyMutation();
-  const [updateWallet] = useUpdateWalletByIdMutation();
-  const [updateParty] = useUpdatePartyByIdMutation();
 
   const rolesSubmit = useCallback(
     async (values: RolesFormSchemaType): Promise<void> => {
       try {
+        let doUpdate = false;
         let projectPatch: ProjectPatch = {};
-        const developer = values['regen:projectDeveloper'];
-        const existingDeveloperParty = offChainProject?.partyByDeveloperId;
-        const existingDeveloperWallet =
-          existingDeveloperParty?.walletByWalletId;
-        let doUpdateMetadata = false;
-        if (!isEmpty(developer)) {
-          // 1. Handle wallet creation / update
-          // This will just fail if there's already a wallet existing with given addr
-          let walletId;
-          const addr = developer['regen:address'];
-          if (addr) {
-            // The project developer associated wallet hasn't been created yet
-            if (!existingDeveloperWallet) {
-              const res = await createWallet({
-                variables: {
-                  input: {
-                    wallet: {
-                      addr,
-                    },
-                  },
-                },
-              });
-              walletId = res.data?.createWallet?.wallet?.id;
-            } else if (
-              // New address is different from existing one
-              existingDeveloperWallet.addr !== addr
-            ) {
-              walletId = existingDeveloperWallet.id;
-              await updateWallet({
-                variables: {
-                  input: {
-                    id: walletId,
-                    walletPatch: {
-                      addr,
-                    },
-                  },
-                },
-              });
-            }
-          }
-
-          // 2. Handle party creation / update
-          // The project developer associated party hasn't been created yet
-          doUpdateMetadata =
-            developer['schema:name'] !== existingDeveloperParty?.name ||
-            developer['schema:description'] !==
-              existingDeveloperParty?.description ||
-            developer['schema:image'] !== existingDeveloperParty?.image ||
-            walletId;
-          if (!existingDeveloperParty) {
-            const res = await createParty({
-              variables: {
-                input: {
-                  party: {
-                    type:
-                      // TODO: extract reusable function and use constant
-                      developer['@type'] === 'regen:Individual'
-                        ? PartyType.User
-                        : PartyType.Organization,
-                    name: developer['schema:name'],
-                    description: developer['schema:description'],
-                    image: developer['schema:image'],
-                    walletId,
-                  },
-                },
-              },
-            });
-            const developerId = res.data?.createParty?.party?.id;
-            projectPatch = { developerId };
-          } else if (doUpdateMetadata) {
-            await updateParty({
-              variables: {
-                input: {
-                  id: developer.id,
-                  partyPatch: {
-                    name: developer['schema:name'],
-                    description: developer['schema:description'],
-                    image: developer['schema:image'],
-                    walletId,
-                  },
-                },
-              },
-            });
-          }
+        const developer = values.projectDeveloper;
+        if (offChainProject?.partyByDeveloperId !== developer?.id) {
+          doUpdate = true;
+          projectPatch.developerId = developer?.id;
         }
 
         const newMetadata = {
@@ -153,19 +65,22 @@ const useRolesSubmit = ({
           };
         // In creation or edit mode, we always store references to the project stakeholders in the project table
         // which should be in projectPatch if new or updated
-        await updateProject({
-          variables: {
-            input: {
-              id: offChainProject?.id,
-              projectPatch,
+        if (doUpdate) {
+          await updateProject({
+            variables: {
+              input: {
+                id: offChainProject?.id,
+                projectPatch,
+              },
             },
-          },
-        });
+          });
+        }
+
         if (!isEdit) {
           navigateNext();
         } else {
           // In edit mode, we need to update the project on-chain metadata if needed
-          if (doUpdateMetadata) {
+          if (doUpdate) {
             await projectEditSubmit(newMetadata);
           }
         }
@@ -183,10 +98,6 @@ const useRolesSubmit = ({
       isEdit,
       updateProject,
       metadataReload,
-      createWallet,
-      updateWallet,
-      createParty,
-      updateParty,
       navigateNext,
       projectEditSubmit,
     ],

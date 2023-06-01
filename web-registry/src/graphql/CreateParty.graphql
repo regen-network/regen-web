@@ -2,6 +2,7 @@ mutation CreateParty($input: CreatePartyInput!){
   createParty(input: $input) {
     party {
       id
+      accountId
     }
   }
 }

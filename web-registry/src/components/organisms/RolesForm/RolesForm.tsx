@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
 import { useSetAtom } from 'jotai';
 
@@ -16,7 +17,7 @@ import { RoleField } from './components/RoleField/RoleField';
 import { rolesFormSchema, RolesFormSchemaType } from './RolesForm.schema';
 
 interface RolesFormProps {
-  submit: ({ values }: { values: RolesFormSchemaType }) => Promise<void>;
+  submit: (values: RolesFormSchemaType) => Promise<void>;
   onNext?: () => void;
   onPrev?: () => void;
   initialValues?: RolesFormSchemaType;
@@ -38,8 +39,6 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   const { isSubmitting, isDirty, isValid, errors } = useFormState({
     control: form.control,
   });
-  console.log('isValid', isValid);
-  console.log('errors', errors);
   const { isDirtyRef } = useProjectEditContext();
 
   const { confirmSave, isEdit } = useProjectEditContext();

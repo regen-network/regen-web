@@ -59,7 +59,7 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
             profileType: projectDeveloper.type,
             address: projectDeveloper.walletByWalletId?.addr,
           }
-        : undefined,
+        : null,
     }),
     [isEdit, onChainProject?.admin, projectDeveloper, wallet?.address],
   );

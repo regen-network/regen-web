@@ -50,13 +50,14 @@ const useRolesSubmit = ({
         const developer = values.projectDeveloper;
         if (offChainProject?.partyByDeveloperId !== developer?.id) {
           doUpdate = true;
-          projectPatch.developerId = developer?.id;
+          projectPatch.developerId = developer?.id || null;
         }
 
         const newMetadata = {
           ...metadata,
           ...getProjectStakeholders(values),
         } as NestedPartial<ProjectMetadataLD>;
+
         // In creation mode, we store all metadata in the off-chain table project.metadata temporarily
         if (!isEdit)
           projectPatch = {
@@ -133,6 +134,8 @@ function getProjectStakeholders(
     metadata['regen:projectDeveloper'] = getProjectStakeholder(
       values.projectDeveloper,
     );
+  } else {
+    metadata['regen:projectDeveloper'] = undefined;
   }
   return metadata;
 }

@@ -35,10 +35,11 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     },
     mode: 'onBlur',
   });
-  const { isSubmitting, isDirty, isValid } = useFormState({
+  const { isSubmitting, isDirty, isValid, errors } = useFormState({
     control: form.control,
   });
-
+  console.log('isValid', isValid);
+  console.log('errors', errors);
   const { isDirtyRef } = useProjectEditContext();
 
   const { confirmSave, isEdit } = useProjectEditContext();
@@ -54,7 +55,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   /* Setter */
 
   const setProjectDeveloper = (value: ProfileModalSchemaType): void => {
-    form.setValue('projectDeveloper', value);
+    form.setValue('projectDeveloper', value, { shouldDirty: true });
   };
 
   const saveProfile = async (

@@ -1,10 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import {
-  DEFAULT_PROFILE_TYPE,
-  DEFAULT_PROFILE_USER_AVATAR,
-} from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 import WithLoader from 'components/atoms/WithLoader';
 import { RolesForm } from 'components/organisms/RolesForm/RolesForm';

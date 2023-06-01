@@ -1,8 +1,6 @@
 import { useCallback } from 'react';
 import isEmpty from 'lodash/isEmpty';
 
-import { ProfileFormValues } from 'web-components/lib/components/modal/ProfileModal';
-
 import {
   PartyType,
   ProjectPatch,
@@ -13,10 +11,17 @@ import {
   useUpdateWalletByIdMutation,
 } from 'generated/graphql';
 import { NestedPartial } from 'types/nested-partial';
-import { ProjectMetadataLD } from 'lib/db/types/json-ld';
+import {
+  AnchoredProjectMetadataBaseLD,
+  ProjectMetadataLD,
+  ProjectStakeholder,
+  REGEN_INDIVIDUAL,
+  REGEN_ORGANIZATION,
+} from 'lib/db/types/json-ld';
 
 import { UseProjectEditSubmitParams } from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
-import { RolesFormValues } from 'components/organisms';
+import { ProfileModalSchemaType } from 'components/organisms/RolesForm/components/ProfileModal/ProfileModal.schema';
+import { RolesFormSchemaType } from 'components/organisms/RolesForm/RolesForm.schema';
 import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';
 
 interface Props {
@@ -29,7 +34,7 @@ interface Props {
 }
 
 type Return = {
-  rolesSubmit: (values: RolesFormValues) => Promise<void>;
+  rolesSubmit: (values: RolesFormSchemaType) => Promise<void>;
 };
 
 const useRolesSubmit = ({
@@ -47,7 +52,7 @@ const useRolesSubmit = ({
   const [updateParty] = useUpdatePartyByIdMutation();
 
   const rolesSubmit = useCallback(
-    async (values: RolesFormValues): Promise<void> => {
+    async (values: RolesFormSchemaType): Promise<void> => {
       try {
         let projectPatch: ProjectPatch = {};
         const developer = values['regen:projectDeveloper'];
@@ -138,7 +143,7 @@ const useRolesSubmit = ({
 
         const newMetadata = {
           ...metadata,
-          ...stripIds(values),
+          ...getProjectStakeholders(values),
         } as NestedPartial<ProjectMetadataLD>;
         // In creation mode, we store all metadata in the off-chain table project.metadata temporarily
         if (!isEdit)
@@ -190,19 +195,35 @@ const useRolesSubmit = ({
   return { rolesSubmit };
 };
 
-function stripPartyIds(values: ProfileFormValues): ProfileFormValues {
-  delete values.id;
-
-  return values;
+function getProjectStakeholder(
+  values: ProfileModalSchemaType,
+): ProjectStakeholder {
+  return {
+    '@type':
+      values.profileType === PartyType.User
+        ? REGEN_INDIVIDUAL
+        : REGEN_ORGANIZATION,
+    'schema:name': values.name,
+    'schema:description': values.description,
+    'schema:image': values.profileImage,
+    'regen:adress': values.address,
+  };
 }
 
-function stripIds(values: RolesFormValues): RolesFormValues {
-  if (values['regen:projectDeveloper']) {
-    return {
-      'regen:projectDeveloper': stripPartyIds(values['regen:projectDeveloper']),
-    };
+type GetProjectStakeholdersReturn = Pick<
+  AnchoredProjectMetadataBaseLD,
+  'regen:projectDeveloper'
+>;
+function getProjectStakeholders(
+  values: RolesFormSchemaType,
+): GetProjectStakeholdersReturn {
+  const metadata: GetProjectStakeholdersReturn = {};
+  if (values.projectDeveloper) {
+    metadata['regen:projectDeveloper'] = getProjectStakeholder(
+      values.projectDeveloper,
+    );
   }
-  return values;
+  return metadata;
 }
 
 export { useRolesSubmit };

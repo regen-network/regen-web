@@ -7,9 +7,6 @@ import {
   DEFAULT_PROFILE_COMPANY_AVATAR,
   DEFAULT_PROFILE_USER_AVATAR,
 } from 'pages/ProfileEdit/ProfileEdit.constants';
-import { ProfileModalSchemaType } from 'components/organisms/RolesForm/components/ProfileModal/ProfileModal.schema';
-
-import { EditProfileFormSchemaType } from '../EditProfileForm.schema';
 
 type Params = {
   profileType: PartyType;

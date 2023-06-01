@@ -4,19 +4,15 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
-import { Autocomplete, Box, TextField } from '@mui/material';
+import { Autocomplete, TextField } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 
 import FieldFormControl from 'web-components/lib/components/inputs/new/FieldFormControl/FieldFormControl';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { PartyType } from 'generated/graphql';
 import { getPartiesByAccountIdQuery } from 'lib/queries/react-query/registry-server/graphql/getPartiesByAccountIdById/getPartiesByAccountIdQuery';
 import { getPartiesByNameOrAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartiesByNameOrAddr/getPartiesByNameOrAddrQuery';
 import { useWallet } from 'lib/wallet/wallet';
-
-import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
-import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 
 import { ProfileModal } from '../ProfileModal/ProfileModal';
 import { ProfileModalSchemaType } from '../ProfileModal/ProfileModal.schema';
@@ -163,9 +159,9 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
             groupBy={option => (isProfile(option) ? option.group : '')}
             renderGroup={params => {
               return params.group ? (
-                <ProfileGroup params={params} />
+                <ProfileGroup key={params.key} params={params} />
               ) : (
-                <NoGroup params={params} />
+                <NoGroup key={params.key} params={params} />
               );
             }}
             autoComplete

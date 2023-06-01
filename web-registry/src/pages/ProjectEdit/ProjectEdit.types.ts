@@ -4,15 +4,15 @@ import {
   BasicInfoFormValues,
   ProjectLocationFormValues,
   ProjectMetadataFormValues,
-  RolesFormValues,
 } from 'components/organisms';
 import { DescriptionSchemaType } from 'components/organisms/DescriptionForm/DescriptionForm.schema';
 import { MediaFormValues } from 'components/organisms/MediaForm';
+import { RolesFormSchemaType } from 'components/organisms/RolesForm/RolesForm.schema';
 
 export type Values =
   | BasicInfoFormValues
   | ProjectLocationFormValues
-  | RolesFormValues
+  | RolesFormSchemaType
   | DescriptionSchemaType
   | MediaFormValues
   | ProjectMetadataFormValues;

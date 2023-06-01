@@ -90,7 +90,6 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
           onNext={navigateNext}
           onPrev={navigatePrev}
           initialValues={initialValues}
-          projectId={offChainProject?.id}
         />
       </WithLoader>
     </ProjectFormTemplate>

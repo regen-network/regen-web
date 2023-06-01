@@ -32,9 +32,8 @@ interface Props {
   description?: string;
   label?: string;
   optional?: boolean | string;
-  setValue: (value: ProfileModalSchemaType) => void;
+  setValue: (value: ProfileModalSchemaType | null) => void;
   value?: ProfileModalSchemaType | null;
-  // onSaveProfile: (v: ProfileModalSchemaType) => Promise<void>;
 }
 
 export const RoleField = forwardRef<HTMLInputElement, Props>(
@@ -107,7 +106,6 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
         <FieldFormControl
           className={className}
           label={label}
-          // disabled={form.isSubmitting}
           optional={optional}
           description={description}
         >
@@ -157,10 +155,13 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
               );
             }}
             autoComplete
-            onChange={(event, newValue) => {
+            onChange={(event, newValue, reason) => {
               if (newValue && isProfile(newValue)) {
                 setOptions(newValue ? [newValue, ...options] : options);
                 setValue(newValue);
+              }
+              if (reason === 'clear') {
+                setValue(null);
               }
             }}
             onInputChange={(event, newInputValue) => {

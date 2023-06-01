@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
+import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -21,13 +22,13 @@ interface RolesFormProps {
   onNext?: () => void;
   onPrev?: () => void;
   initialValues?: RolesFormSchemaType;
-  projectId?: string;
 }
 
 const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   initialValues,
-  projectId,
-  ...props
+  submit,
+  onNext,
+  onPrev,
 }) => {
   const form = useZodForm({
     schema: rolesFormSchema,
@@ -36,13 +37,17 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     },
     mode: 'onBlur',
   });
-  const { isSubmitting, isDirty, isValid, errors } = useFormState({
+  const { isSubmitting, isDirty, isValid } = useFormState({
     control: form.control,
   });
   const { isDirtyRef } = useProjectEditContext();
 
   const { confirmSave, isEdit } = useProjectEditContext();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+
+  useEffect(() => {
+    isDirtyRef.current = isDirty;
+  }, [isDirtyRef, isDirty]);
 
   /* Fields watch */
 
@@ -53,24 +58,27 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
 
   /* Setter */
 
-  const setProjectDeveloper = (value: ProfileModalSchemaType): void => {
+  const setProjectDeveloper = (value: ProfileModalSchemaType | null): void => {
     form.setValue('projectDeveloper', value, { shouldDirty: true });
   };
 
-  const saveProfile = async (
-    updatedEntity: ProfileModalSchemaType,
-  ): Promise<void> => {
-    // TODO
-  };
-
   return (
-    <Form form={form} onSubmit={async data => {}}>
+    <Form
+      form={form}
+      onSubmit={async data => {
+        try {
+          await submit(data);
+          if (isEdit && confirmSave) confirmSave();
+        } catch (e) {
+          setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
+        }
+      }}
+    >
       <OnBoardingCard>
         <RoleField
           label="Project Developer"
           optional
           description="The individual or organization that is in charge of managing the project and will appear on the project page"
-          // onSaveProfile={saveProfile}
           setValue={setProjectDeveloper}
           value={projectDeveloper}
           {...form.register('projectDeveloper')}
@@ -83,8 +91,8 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
         />
       </OnBoardingCard>
       <ProjectPageFooter
-        onPrev={props.onPrev}
-        onNext={props.onNext}
+        onPrev={onPrev}
+        onNext={onNext}
         isValid={isValid}
         isSubmitting={isSubmitting}
         dirty={isDirty}

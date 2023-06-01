@@ -20,7 +20,6 @@ import {
 } from 'components/organisms/EditProfileForm/EditProfileForm.constants';
 import { useUpdateDefaultAvatar } from 'components/organisms/EditProfileForm/hooks/useUpdateDefaultAvatar';
 
-import { profileModalInitialValues } from './ProfileModal.constants';
 import {
   profileModalSchema,
   ProfileModalSchemaType,
@@ -47,7 +46,7 @@ function ProfileModal({
     mode: 'onBlur',
   });
 
-  const { isSubmitting, errors, submitCount, isValid } = useFormState({
+  const { isSubmitting, errors, isValid } = useFormState({
     control: form.control,
   });
 
@@ -92,13 +91,7 @@ function ProfileModal({
         </Title>
         <Form
           form={form}
-          onSubmit={async data => {
-            // const hasError = validateEditProfileForm({
-            //   setError: form.setError,
-            //   values: data,
-            // });
-            onSubmit(data);
-          }}
+          onSubmit={onSubmit}
           sx={{
             border: theme => `1px solid ${theme.palette.info.light}`,
             borderRadius: '5px',

@@ -55,11 +55,18 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     control: form.control,
     name: 'projectDeveloper',
   });
+  const verifier = useWatch({
+    control: form.control,
+    name: 'verifier',
+  });
 
   /* Setter */
 
   const setProjectDeveloper = (value: ProfileModalSchemaType | null): void => {
     form.setValue('projectDeveloper', value, { shouldDirty: true });
+  };
+  const setVerifier = (value: ProfileModalSchemaType | null): void => {
+    form.setValue('verifier', value, { shouldDirty: true });
   };
 
   return (
@@ -72,6 +79,14 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
           setValue={setProjectDeveloper}
           value={projectDeveloper}
           {...form.register('projectDeveloper')}
+        />
+        <RoleField
+          label="Verifier"
+          optional
+          description="A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
+          setValue={setVerifier}
+          value={verifier}
+          {...form.register('verifier')}
         />
         <TextField
           type="text"

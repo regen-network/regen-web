@@ -12,6 +12,7 @@ import { profileModalSchema } from './components/ProfileModal/ProfileModal.schem
 export const rolesFormSchema = z
   .object({
     projectDeveloper: profileModalSchema.nullable(),
+    verifier: profileModalSchema.nullable(),
     admin: z
       .string()
       .refine(

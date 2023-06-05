@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Box, SxProps } from '@mui/material';
 import { tabsStyles } from 'styles/tabs';
 
@@ -48,6 +48,7 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
   isIgnoreOffset = false,
 }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const tabs: IconTabProps[] = useMemo(
     () => [
       {
@@ -79,10 +80,12 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
             isIgnoreOffset={isIgnoreOffset}
           />
         ),
+        hidden: location.pathname !== '/ecocredits/portfolio',
       },
     ],
     [
       credits,
+      location,
       renderCreditActionButtons,
       onTableChange,
       initialPaginationParams,

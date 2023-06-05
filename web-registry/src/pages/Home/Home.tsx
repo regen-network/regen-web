@@ -12,6 +12,7 @@ import { Body, Title } from 'web-components/lib/components/typography';
 import { SKIPPED_CLASS_ID } from 'lib/env';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
+import { useWallet } from 'lib/wallet/wallet';
 
 import BlockContentBody from 'components/molecules/BlockContentBody';
 
@@ -30,6 +31,7 @@ import { useHomeStyles } from './Home.styles';
 const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [open, setOpen] = useState(false);
   const [modalLink, setModalLink] = useState<string>('');
+  const { isKeplrMobileWeb } = useWallet();
 
   const { classes, cx } = useHomeStyles();
 
@@ -161,16 +163,17 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
           }}
           title={creditClassesSection?.title || 'Credit Classes'}
           classes={{
-            root: cx(classes.creditClassBackground, 'topo-background'),
+            root: cx(
+              classes.creditClassBackground,
+              'topo-background',
+              isKeplrMobileWeb && 'dark',
+            ),
             title: classes.title,
           }}
           id="credit-classes"
         >
           {creditClassesSection?.bodyRaw && (
-            <BlockContentBody
-              body={creditClassesSection?.bodyRaw}
-              className="dark-body"
-            />
+            <BlockContentBody body={creditClassesSection?.bodyRaw} />
           )}
           <CreditClassCards
             btnText="Learn More"

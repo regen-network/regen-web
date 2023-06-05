@@ -151,7 +151,7 @@ const Section = ({
           <Title
             as="div"
             sx={sx?.title}
-            className={cx(styles.title, classes && classes.title, 'dark-title')}
+            className={cx(styles.title, classes && classes.title)}
             variant={titleVariant}
             align={titleAlign}
           >
@@ -166,7 +166,6 @@ const Section = ({
               pt={[3.25, 7.75]}
               textAlign="center"
               sx={sx?.description}
-              className="dark-body"
             >
               {typeof description === 'string' ? (
                 ReactHtmlParser(description)

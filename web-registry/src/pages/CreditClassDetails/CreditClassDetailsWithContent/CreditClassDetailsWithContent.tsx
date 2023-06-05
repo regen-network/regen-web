@@ -22,6 +22,7 @@ import { CreditClass } from 'generated/sanity-graphql';
 import { apiUri } from 'lib/apiUri';
 import { onBtnClick } from 'lib/button';
 import { getMoreProjectsQuery } from 'lib/queries/react-query/registry-server/graphql/getMoreProjectsQuery/getMoreProjectsQuery';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { HeroTitle } from 'components/molecules';
 import {
@@ -107,6 +108,7 @@ const CreditClassDetailsWithContent: React.FC<
   const navigate = useNavigate();
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
+  const { isKeplrMobileWeb } = useWallet();
 
   const { creditClassId } = useParams();
   const { data: projectsData } = useQuery(
@@ -123,9 +125,14 @@ const CreditClassDetailsWithContent: React.FC<
     );
 
     return featuredProjects && featuredProjects?.length > 0 ? (
-      <div className="topo-background-alternate">
+      <div
+        className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}
+      >
         <MoreProjectsSection
-          classes={{ root: styles.sectionPadding, title: styles.title }}
+          classes={{
+            root: styles.sectionPadding,
+            title: styles.title,
+          }}
           title={content.landSteward?.projectsTitle || 'Featured Projects'}
           projects={featuredProjects}
         />
@@ -142,7 +149,9 @@ const CreditClassDetailsWithContent: React.FC<
     );
 
     return allProjects && allProjects.length > 0 ? (
-      <div className="topo-background-alternate">
+      <div
+        className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}
+      >
         <MoreProjectsSection
           classes={{ root: styles.sectionPadding, title: styles.title }}
           title={content.buyer?.projectsTitle || 'More Projects'}
@@ -205,7 +214,9 @@ const CreditClassDetailsWithContent: React.FC<
           <BlockContent content={content.descriptionRaw} />
         </Body>
       </Section>
-      <div className="topo-background-alternate">
+      <div
+        className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}
+      >
         {content.ecologicalImpact && (
           <ImpactSection
             title="Ecological Impact"
@@ -225,7 +236,12 @@ const CreditClassDetailsWithContent: React.FC<
       {isLandSteward && (
         <>
           {getFeaturedProjects()}
-          <div className="topo-background-alternate">
+          <div
+            className={cx(
+              'topo-background-alternate',
+              isKeplrMobileWeb && 'dark',
+            )}
+          >
             <CreditClassOverviewSection
               dbClass={dbClass}
               nameRaw={content.nameRaw}
@@ -240,7 +256,11 @@ const CreditClassDetailsWithContent: React.FC<
         content.landSteward?.steps?.map(
           (stepSequence, index: React.Key | null | undefined) => (
             <div
-              className={cx('topo-background-alternate', styles.flex)}
+              className={cx(
+                'topo-background-alternate',
+                isKeplrMobileWeb && 'dark',
+                styles.flex,
+              )}
               key={index}
             >
               <StepsSection
@@ -253,7 +273,9 @@ const CreditClassDetailsWithContent: React.FC<
             </div>
           ),
         )}
-      <div className="topo-background-alternate">
+      <div
+        className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}
+      >
         <MediaSection
           header="Videos"
           items={
@@ -261,7 +283,9 @@ const CreditClassDetailsWithContent: React.FC<
           }
         />
       </div>
-      <div className="topo-background-alternate">
+      <div
+        className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}
+      >
         <ResourcesSection
           resources={
             isLandSteward

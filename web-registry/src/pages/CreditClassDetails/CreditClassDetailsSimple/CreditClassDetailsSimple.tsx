@@ -10,6 +10,7 @@ import { CreditClass } from 'generated/sanity-graphql';
 import { getAccountUrl } from 'lib/block-explorer';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { getSanityImgSrc } from 'lib/imgSrc';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { AccountLink } from 'components/atoms/AccountLink';
 import { EcocreditsSection } from 'components/molecules';
@@ -32,10 +33,11 @@ interface CreditDetailsProps {
 const CreditClassDetailsSimple: React.FC<
   React.PropsWithChildren<CreditDetailsProps>
 > = ({ dbClass, onChainClass, content, issuers, metadata }) => {
-  const { classes: styles } = useCreditClassDetailsSimpleStyles();
+  const { classes: styles, cx } = useCreditClassDetailsSimpleStyles();
   const displayName = useCreditClassDisplayName(onChainClass.id, metadata);
   const image = content?.image;
   const imageSrc = getSanityImgSrc(image);
+  const { isKeplrMobileWeb } = useWallet();
 
   return (
     <Box
@@ -128,7 +130,9 @@ const CreditClassDetailsSimple: React.FC<
         </Box>
       </EcocreditsSection>
       <Projects classId={onChainClass.id} />
-      <div className="topo-background-alternate">
+      <div
+        className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}
+      >
         <CreditBatches
           creditClassId={onChainClass.id}
           titleAlign="left"

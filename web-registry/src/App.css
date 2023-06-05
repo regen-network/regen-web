@@ -12,14 +12,8 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .topo-background {
+  .topo-background.dark {
     background-image: url(./assets/home/topographic-dark.jpg);
-  }
-  .topo-background .dark-title {
-    color: #ffffff;
-  }
-  .topo-background .dark-body {
-    color: #d2d5d9;
   }
 }
 
@@ -33,16 +27,8 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .topo-background-alternate:nth-of-type(odd) {
+  .topo-background-alternate.dark:nth-of-type(odd) {
     background-image: url(./assets/home/topographic-dark.jpg);
-  }
-
-  .topo-background-alternate .dark-title {
-    color: #ffffff;
-  }
-
-  .topo-background .dark-body {
-    color: #d2d5d9;
   }
 }
 

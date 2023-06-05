@@ -1,6 +1,8 @@
 import React from 'react';
+import cx from 'classnames';
 
 import { NameImageDescription } from 'lib/db/types/json-ld';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { LandManagementActions } from '../../organisms';
 
@@ -9,9 +11,12 @@ interface InputProps {
 }
 
 export function ManagementActions({ actions }: InputProps): JSX.Element {
+  const { isKeplrMobileWeb } = useWallet();
   return (
     <>
-      <div className="topo-background-alternate">
+      <div
+        className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}
+      >
         <LandManagementActions
           actions={actions.map((action: any) => ({
             name: action['schema:name'],

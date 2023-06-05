@@ -1,5 +1,8 @@
 import React from 'react-router';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import cx from 'classnames';
+
+import { useWallet } from 'lib/wallet/wallet';
 
 import { Documentation } from '../../organisms';
 
@@ -14,9 +17,12 @@ export function ProjectDocumentation({
   txClient,
   viewOnLedger,
 }: InputProps): JSX.Element {
+  const { isKeplrMobileWeb } = useWallet();
   return (
     <>
-      <div className="topo-background-alternate">
+      <div
+        className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}
+      >
         <Documentation
           txClient={txClient}
           onViewOnLedger={viewOnLedger}

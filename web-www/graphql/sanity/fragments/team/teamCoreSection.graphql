@@ -1,5 +1,0 @@
-fragment teamCoreSectionFields on TeamPage {
-  coreSection {
-    ...teamSectionFields
-  }
-}

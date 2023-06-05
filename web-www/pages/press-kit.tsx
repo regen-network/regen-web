@@ -1,4 +1,3 @@
-import React from 'react';
 import { InferGetStaticPropsType } from 'next';
 import { NextSeo } from 'next-seo';
 
@@ -9,7 +8,6 @@ import EnableSection from '@/components/templates/press-kit/EnableSection/Enable
 import FeaturedSection from '@/components/templates/press-kit/FeaturedSection/FeaturedSection';
 import LogosSection from '@/components/templates/press-kit/LogosSection/LogosSection';
 import PhotosSection from '@/components/templates/press-kit/PhotosSection/PhotosSection';
-import PressKitTeamSection from '@/components/templates/press-kit/PresskitTeamSection/PresskitTeamSection';
 import TimelineSection from '@/components/templates/press-kit/TimelineSection/TimelineSection';
 import TitleDescriptionSection from '@/components/templates/press-kit/TitleDescriptionSection/TitleDescriptionSection';
 import TopSection from '@/components/templates/press-kit/TopSection/TopSection';
@@ -28,7 +26,6 @@ export default function PressKitPage({
   const titleDescriptionSection = pressKitPage.titleDescriptionSection;
   const enableSection = pressKitPage.enableSection;
   const timelineSection = pressKitPage.timelineSection;
-  const teamSection = pressKitPage.teamSection;
   const featuredSection = pressKitPage.featuredSection;
   const awardsSection = pressKitPage.awardsSection;
   const logosSection = pressKitPage.logosSection;
@@ -46,7 +43,6 @@ export default function PressKitPage({
       />
       <EnableSection enableSectionData={enableSection} />
       <TimelineSection timelineSectionData={timelineSection} />
-      <PressKitTeamSection teamSectionData={teamSection} />
       <BackgroundImage src={pressKitTopoBg}>
         <FeaturedSection featuredSectionData={featuredSection} />
         <AwardsSection awardsSectionData={awardsSection} />

@@ -1,7 +1,9 @@
 import { styled, Typography, TypographyProps } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 
-function getDefaultMobileVariant(variant: Variant): Variant {
+type TitleVariant = Variant | 'textSmall';
+
+function getDefaultMobileVariant(variant: TitleVariant): TitleVariant {
   switch (variant) {
     case 'h1':
       return 'h3';
@@ -21,8 +23,8 @@ function getDefaultMobileVariant(variant: Variant): Variant {
 }
 
 export interface TitleProps extends TypographyProps {
-  variant?: Variant;
-  mobileVariant?: Variant;
+  variant?: TitleVariant;
+  mobileVariant?: TitleVariant;
 }
 
 export const Title = styled(Typography, {

@@ -118,7 +118,7 @@ function getProjectStakeholder(
     'schema:name': values.name,
     'schema:description': values.description,
     'schema:image': values.profileImage,
-    'regen:adress': values.address,
+    'regen:address': values.address,
   };
 }
 

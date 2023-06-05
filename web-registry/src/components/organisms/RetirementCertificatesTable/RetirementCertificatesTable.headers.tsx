@@ -5,6 +5,8 @@ import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoToolt
 
 import { BreakText } from 'components/atoms';
 
+import { ECOCREDIT_BATCH_ID_TOOLTIP } from './RetirementCertificatesTable.constants';
+
 export const retirementCertificateHeaders = [
   <BreakText>{'Retirement date'}</BreakText>,
   <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>{'Project'}</Box>,
@@ -19,9 +21,9 @@ export const retirementCertificateHeaders = [
       },
     }}
   >
-    <BreakText sx={{ maxWidth: 76 }}>{'Ecocredit batch id'}</BreakText>
+    <BreakText sx={{ maxWidth: 76 }}>{'Ecocredit batch ID'}</BreakText>
     <Box alignSelf="flex-end" ml={2}>
-      <InfoTooltipWithIcon outlined title={'Helper text'} />
+      <InfoTooltipWithIcon outlined title={ECOCREDIT_BATCH_ID_TOOLTIP} />
     </Box>
   </Box>,
   <Box>{'Credit Class'}</Box>,

@@ -15,19 +15,11 @@ import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 
-import { AccountLink, Link } from 'components/atoms';
+import { AccountLink, BreakText, GreyText, Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { NoCredits } from 'components/molecules';
 
-const GreyText = styled('span')(({ theme }) => ({
-  color: theme.palette.info.main,
-}));
-
-const BreakText = styled('div')({
-  whiteSpace: 'normal',
-  wordWrap: 'break-word',
-  textAlign: 'end',
-});
+import { ECOCREDIT_BATCH_ID_TOOLTIP } from './RetirementCertificatesTable/RetirementCertificatesTable.constants';
 
 type EcocreditsTableProps = {
   credits?: BatchInfoWithBalance[];
@@ -62,6 +54,8 @@ export const EcocreditsTable: React.FC<
         <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>{'Project'}</Box>,
         <Box
           sx={{
+            display: 'flex',
+            alignItems: 'center',
             minWidth: {
               xs: 'auto',
               sm: '11rem',
@@ -69,7 +63,10 @@ export const EcocreditsTable: React.FC<
             },
           }}
         >
-          Batch Denom
+          <BreakText sx={{ maxWidth: 76 }}>{'Ecocredit batch ID'}</BreakText>
+          <Box alignSelf="flex-end" ml={2}>
+            <InfoTooltipWithIcon outlined title={ECOCREDIT_BATCH_ID_TOOLTIP} />
+          </Box>
         </Box>,
         'Credit Class',
         <BreakText>Amount Tradable</BreakText>,

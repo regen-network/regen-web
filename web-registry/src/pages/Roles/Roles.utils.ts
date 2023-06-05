@@ -1,7 +1,7 @@
 import { PartyFieldsFragment } from '../../generated/graphql';
 import { getDefaultAvatar } from '../ProfileEdit/ProfileEdit.utils';
 
-export const getProjectStakholderInitialValues = (
+export const getProjectStakeholderInitialValues = (
   party: PartyFieldsFragment,
 ) => {
   return party

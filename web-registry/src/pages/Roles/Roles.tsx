@@ -10,7 +10,7 @@ import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 import { useWallet } from '../../lib/wallet/wallet';
 import { useProjectEditContext } from '../ProjectEdit';
 import { useRolesSubmit } from './hooks/useRolesSubmit';
-import { getProjectStakholderInitialValues } from './Roles.utils';
+import { getProjectStakeholderInitialValues } from './Roles.utils';
 
 const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
@@ -51,8 +51,8 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
       // In edit mode, use existing on chain project admin
       // In creation mode, use current wallet address
       admin: (isEdit ? onChainProject?.admin : wallet?.address) || '',
-      projectDeveloper: getProjectStakholderInitialValues(projectDeveloper),
-      verifier: getProjectStakholderInitialValues(verifier),
+      projectDeveloper: getProjectStakeholderInitialValues(projectDeveloper),
+      verifier: getProjectStakeholderInitialValues(verifier),
     }),
     [
       isEdit,

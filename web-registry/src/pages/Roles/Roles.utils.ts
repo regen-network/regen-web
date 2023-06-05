@@ -1,8 +1,8 @@
-import { PartyFieldsFragment } from '../../generated/graphql';
+import { Maybe, PartyFieldsFragment } from '../../generated/graphql';
 import { getDefaultAvatar } from '../ProfileEdit/ProfileEdit.utils';
 
 export const getProjectStakeholderInitialValues = (
-  party: PartyFieldsFragment,
+  party?: Maybe<PartyFieldsFragment>,
 ) => {
   return party
     ? {

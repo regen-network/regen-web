@@ -98,11 +98,12 @@ const useRolesSubmit = ({
     },
     [
       offChainProject?.partyByDeveloperId,
+      offChainProject?.partyByVerifierId,
       offChainProject?.id,
       metadata,
       isEdit,
-      updateProject,
       metadataReload,
+      updateProject,
       navigateNext,
       projectEditSubmit,
     ],

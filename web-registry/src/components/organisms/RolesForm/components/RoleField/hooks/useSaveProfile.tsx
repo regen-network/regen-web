@@ -12,7 +12,6 @@ import { ProfileModalSchemaType } from '../../ProfileModal/ProfileModal.schema';
 
 type Params = {
   setValue: (value: ProfileModalSchemaType) => void;
-  // setError: UseStateSetter<unknown>;
   closeProfileModal: () => void;
 };
 

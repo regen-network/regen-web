@@ -5074,6 +5074,9 @@ export type ProjectByIdQuery = (
     & { partyByDeveloperId?: Maybe<(
       { __typename?: 'Party' }
       & PartyFieldsFragment
+    )>, partyByVerifierId?: Maybe<(
+      { __typename?: 'Party' }
+      & PartyFieldsFragment
     )>, creditClassByCreditClassId?: Maybe<(
       { __typename?: 'CreditClass' }
       & Pick<CreditClass, 'id' | 'onChainId'>
@@ -5956,6 +5959,9 @@ export const ProjectByIdDocument = gql`
     developerId
     onChainId
     partyByDeveloperId {
+      ...partyFields
+    }
+    partyByVerifierId {
       ...partyFields
     }
     creditClassByCreditClassId {

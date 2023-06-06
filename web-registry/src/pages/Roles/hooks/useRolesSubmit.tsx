@@ -47,10 +47,14 @@ const useRolesSubmit = ({
       try {
         let doUpdate = false;
         let projectPatch: ProjectPatch = {};
-        const developer = values.projectDeveloper;
-        if (offChainProject?.partyByDeveloperId !== developer?.id) {
+        const { projectDeveloper, verifier } = values;
+        if (offChainProject?.partyByDeveloperId !== projectDeveloper?.id) {
           doUpdate = true;
-          projectPatch.developerId = developer?.id || null;
+          projectPatch.developerId = projectDeveloper?.id || null;
+        }
+        if (offChainProject?.partyByVerifierId !== verifier?.id) {
+          doUpdate = true;
+          projectPatch.verifierId = verifier?.id || null;
         }
 
         const newMetadata = {
@@ -94,11 +98,12 @@ const useRolesSubmit = ({
     },
     [
       offChainProject?.partyByDeveloperId,
+      offChainProject?.partyByVerifierId,
       offChainProject?.id,
       metadata,
       isEdit,
-      updateProject,
       metadataReload,
+      updateProject,
       navigateNext,
       projectEditSubmit,
     ],
@@ -124,19 +129,18 @@ function getProjectStakeholder(
 
 type GetProjectStakeholdersReturn = Pick<
   AnchoredProjectMetadataBaseLD,
-  'regen:projectDeveloper'
+  'regen:projectDeveloper' | 'regen:projectVerifier'
 >;
 function getProjectStakeholders(
   values: RolesFormSchemaType,
 ): GetProjectStakeholdersReturn {
   const metadata: GetProjectStakeholdersReturn = {};
-  if (values.projectDeveloper) {
-    metadata['regen:projectDeveloper'] = getProjectStakeholder(
-      values.projectDeveloper,
-    );
-  } else {
-    metadata['regen:projectDeveloper'] = undefined;
-  }
+  metadata['regen:projectDeveloper'] = values.projectDeveloper
+    ? getProjectStakeholder(values.projectDeveloper)
+    : undefined;
+  metadata['regen:projectVerifier'] = values.verifier
+    ? getProjectStakeholder(values.verifier)
+    : undefined;
   return metadata;
 }
 

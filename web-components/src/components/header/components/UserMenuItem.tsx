@@ -1,10 +1,7 @@
-import {
-  HeaderMenuHover,
-  HeaderMenuHoverProps,
-} from './HeaderMenuHover/HeaderMenuHover';
+import { HeaderMenuItem, MenuItemProps } from './HeaderMenuItem/HeaderMenuItem';
 import { useUserMenuItemStyles } from './UserMenuItem.styles';
 
-interface UserMenuItemProps extends HeaderMenuHoverProps {}
+interface UserMenuItemProps extends MenuItemProps {}
 
 const UserMenuItem: React.FC<React.PropsWithChildren<UserMenuItemProps>> = ({
   classes,
@@ -13,7 +10,7 @@ const UserMenuItem: React.FC<React.PropsWithChildren<UserMenuItemProps>> = ({
   const styles = useUserMenuItemStyles();
 
   return (
-    <HeaderMenuHover
+    <HeaderMenuItem
       classes={{ root: styles.userMenuItem, paper: classes?.paper }}
       component="div"
       {...props}

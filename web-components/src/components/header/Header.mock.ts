@@ -1,6 +1,6 @@
-import { HeaderMenuItem } from './components/HeaderMenuHover/HeaderMenuHover';
+import { Item } from './components/HeaderMenuItem/HeaderMenuItem';
 
-export const headerMenuItemsMock: HeaderMenuItem[] = [
+export const headerMenuItemsMock: Item[] = [
   {
     title: 'Projects',
     href: '/projects',

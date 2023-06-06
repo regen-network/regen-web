@@ -1,8 +1,8 @@
 import { Theme } from '@mui/material';
 
 import { HeaderColors } from 'web-components/lib/components/header';
-import { HeaderDropdownItemProps } from 'web-components/lib/components/header/components/HeaderDropdownItems';
-import { HeaderMenuItem } from 'web-components/lib/components/header/components/HeaderMenuHover/HeaderMenuHover';
+import { HeaderDropdownItemProps } from 'web-components/lib/components/header/components/HeaderDropdown/HeaderDropdown.Item';
+import { Item } from 'web-components/lib/components/header/components/HeaderMenuItem/HeaderMenuItem';
 import { NavLinkProps } from 'web-components/lib/components/header/components/NavLink';
 import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
@@ -11,7 +11,7 @@ import { isBridgeEnabled } from 'lib/ledger';
 
 import { Link } from 'components/atoms';
 
-export const getMenuItems = (pathname: string): HeaderMenuItem[] => [
+export const getMenuItems = (pathname: string): Item[] => [
   {
     title: 'NCT',
     href: '/baskets/eco.uC.NCT',

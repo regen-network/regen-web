@@ -5,8 +5,8 @@ import OutlinedButton from '../../buttons/OutlinedButton';
 import UserMenuIcon from '../../icons/UserMenuIcon';
 import { Subtitle } from '../../typography';
 import UserAvatar from '../../user/UserAvatar';
-import { HeaderDropdownItemProps } from './HeaderDropdownItems';
-import { HeaderMenuHoverBase } from './HeaderMenuHover/HeaderMenuHover';
+import { HeaderDropdownItemProps } from './HeaderDropdown/HeaderDropdown.Item';
+import { HeaderMenuItemBase } from './HeaderMenuItem/HeaderMenuItem';
 import { UserMenuItem } from './UserMenuItem';
 import {
   UserMenuItemProfile,
@@ -15,7 +15,7 @@ import {
 import { OnProfileClickType } from './UserMenuItem.types';
 import { useUserMenuItemsStyles } from './UserMenuItems.styles';
 
-interface UserMenuItemsProps extends HeaderMenuHoverBase {
+interface UserMenuItemsProps extends HeaderMenuItemBase {
   address: string;
   avatar: string;
   userMenuItems: HeaderDropdownItemProps[];

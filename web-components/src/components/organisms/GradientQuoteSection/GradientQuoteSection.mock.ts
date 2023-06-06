@@ -1,10 +1,10 @@
-import { Props } from './QuoteSection';
+import { Props } from './GradientQuoteSection';
 
 export const quoteSectionMockData: Partial<Props> = {
   backgroundImage: {
     src: '/illustrations/sheep-image-bg.jpg',
   },
-  partnerLogo: {
+  logo: {
     src: 'partners/microsoft-white.svg',
     alt: 'Microsoft Logo',
   },

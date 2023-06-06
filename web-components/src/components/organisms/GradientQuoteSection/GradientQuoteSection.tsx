@@ -1,16 +1,14 @@
 import { Box, SxProps } from '@mui/material';
 
-import { Title } from 'src/components/typography';
-
-import {
-  defaultFontFamily,
-  headerFontFamily,
-  Theme,
-} from '../../../theme/muiTheme';
+import { Title } from '../../../components/typography';
+import { headerFontFamily, Theme } from '../../../theme/muiTheme';
 import { ImageType } from '../../../types/shared/imageType';
 import { sxToArray } from '../../../utils/mui/sxToArray';
-import { greenGradientStyle, quotemarkStyle } from './QuoteSection.styles';
-import { Person } from './QuoteSection.types';
+import {
+  greenGradientStyle,
+  quotemarkStyle,
+} from './GradientQuoteSection.styles';
+import { Person } from './GradientQuoteSection.types';
 
 export interface Props {
   backgroundImage: ImageType;
@@ -18,13 +16,13 @@ export interface Props {
   quoteMiddlePart: string;
   quoteLastPart: string;
   person: Person;
-  partnerLogo: ImageType;
+  logo: ImageType;
   sx?: SxProps<Theme>;
 }
 
-const QuoteSection = ({
+const GradientQuoteSection = ({
   backgroundImage,
-  partnerLogo,
+  logo,
   person,
   quoteFirstPart,
   quoteMiddlePart,
@@ -63,7 +61,6 @@ const QuoteSection = ({
             sx={[
               quotemarkStyle,
               {
-                mr: 1,
                 position: 'absolute',
                 top: { xs: -30, md: -50 },
                 left: { xs: 0, md: -30 },
@@ -76,13 +73,13 @@ const QuoteSection = ({
             component="span"
             sx={[
               greenGradientStyle,
-              { mr: 1, zIndex: 1, position: 'relative' },
+              { mr: 2, zIndex: 1, position: 'relative' },
             ]}
           >
             {quoteFirstPart}
           </Box>
           <Box component="span">{quoteMiddlePart}</Box>
-          <Box component="span" sx={[greenGradientStyle, { mr: 1 }]}>
+          <Box component="span" sx={[greenGradientStyle, { mr: 2 }]}>
             {quoteLastPart}
           </Box>
           <Box
@@ -115,12 +112,12 @@ const QuoteSection = ({
       </Box>
       <Box
         component="img"
-        src={partnerLogo.src}
-        alt={partnerLogo.alt}
+        src={logo.src}
+        alt={logo.alt}
         sx={{ maxWidth: 236 }}
       />
     </Box>
   );
 };
 
-export { QuoteSection };
+export { GradientQuoteSection };

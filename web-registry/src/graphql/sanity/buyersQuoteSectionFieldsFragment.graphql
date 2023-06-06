@@ -1,0 +1,14 @@
+fragment buyersQuoteSectionFields on BuyersQuoteSection {
+  quoteFirstPart
+  quoteMiddlePart
+  quoteLastPart
+  person {
+    ...personFields
+  }
+  backgroundImage {
+    ...customImageFields
+  }
+  logo {
+    ...imageFields
+  }
+}

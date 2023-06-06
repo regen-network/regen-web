@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
+import { GradientQuoteSection } from 'web-components/lib/components/organisms/GradientQuoteSection/GradientQuoteSection';
 import SEO from 'web-components/lib/components/seo';
 
 import { getAllBuyersPageQuery } from 'lib/queries/react-query/sanity/getAllBuyersPageQuery/getAllBuyersPageQuery';
@@ -44,6 +45,8 @@ const BuyersPage = (): JSX.Element => {
     siteUrl: window.location.href,
     imageUrl: content?.metadata?.openGraphImage?.asset?.url || '',
   };
+
+  const quoteSectionData = content?.quoteSection;
 
   return (
     <>
@@ -117,13 +120,31 @@ const BuyersPage = (): JSX.Element => {
               }}
             />
           )}
+          {content?.quoteSection && (
+            <GradientQuoteSection
+              backgroundImage={{
+                src: String(
+                  quoteSectionData?.backgroundImage?.image?.asset?.url,
+                ),
+                alt: String(quoteSectionData?.backgroundImage?.imageAlt),
+              }}
+              logo={{ src: String(quoteSectionData?.logo?.asset?.url) }}
+              person={{
+                name: String(quoteSectionData?.person?.name),
+                role: String(quoteSectionData?.person?.role),
+              }}
+              quoteFirstPart={String(quoteSectionData?.quoteFirstPart)}
+              quoteMiddlePart={String(quoteSectionData?.quoteMiddlePart)}
+              quoteLastPart={String(quoteSectionData?.quoteLastPart)}
+            />
+          )}
           {content?.partnersSection && (
             <BuyersPartnersSection content={content?.partnersSection} />
           )}
           {content?.contactSection && (
             <HeroAction
               classes={{ section: styles.bottomHeroSection }}
-              isBanner
+              isBanner={false}
               img={content?.contactSection?.image?.image?.asset?.url || ''}
               bottomBanner={content?.contactSection}
               openModal={() => null}

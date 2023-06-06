@@ -1,8 +1,6 @@
 import { SystemStyleObject } from '@mui/system';
 
-import { headerFontFamily } from 'src/theme/muiTheme';
-
-import { Theme } from '../../../theme/muiTheme';
+import { headerFontFamily, Theme } from '../../../theme/muiTheme';
 
 export const quotemarkStyle: SystemStyleObject<Theme> = {
   fontFamily: headerFontFamily,

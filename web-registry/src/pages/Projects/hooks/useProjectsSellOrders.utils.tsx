@@ -1,6 +1,6 @@
 import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { EEUR_DENOM, REGEN_DENOM } from 'config/allowedBaseDenoms';
+import { EEUR_DENOM, EVMOS_DENOM, REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { QUANTITY_MAX_DECIMALS } from 'config/decimals';
 import { roundFloatNumber } from 'utils/number/format/format';
 
@@ -44,7 +44,7 @@ export const getPurchaseInfo = ({
       },
     };
   }
-  const { eeurPrice, regenPrice, usdcPrice } = geckoPrices;
+  const { eeurPrice, regenPrice, usdcPrice, evmosPrice } = geckoPrices;
 
   const creditsAvailable = ordersForThisProject
     .map(order => parseFloat(order.quantity))
@@ -65,6 +65,9 @@ export const getPurchaseInfo = ({
       }
       if (order.askBaseDenom === EEUR_DENOM) {
         denomPrice = eeurPrice ?? 0;
+      }
+      if (order.askBaseDenom === EVMOS_DENOM) {
+        denomPrice = evmosPrice ?? 0;
       }
 
       return amount * denomPrice;

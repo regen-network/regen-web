@@ -57,6 +57,7 @@ export const getSellOrdersExtendedQuery = ({
       });
 
     const regenPrice = simplePriceData?.regen?.usd;
+    const evmosPrice = simplePriceData?.evmos?.usd;
     const eeurPrice = simplePriceData?.[GECKO_EEUR_ID]?.usd;
     const usdcPrice = simplePriceData?.[GECKO_USDC_ID]?.usd;
 
@@ -77,6 +78,7 @@ export const getSellOrdersExtendedQuery = ({
         quantity,
         geckoPrices: {
           regenPrice,
+          evmosPrice,
           eeurPrice,
           usdcPrice,
         },

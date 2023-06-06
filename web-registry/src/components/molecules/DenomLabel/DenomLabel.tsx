@@ -14,11 +14,17 @@ import { findDisplayDenom } from './DenomLabel.utils';
 
 export interface Props {
   size: LabelSize;
-  denom: string;
+  bankDenom: string;
+  baseDenom?: string;
   sx?: SxProps<Theme>;
 }
 
-const DenomLabel = ({ denom, size, sx = [] }: Props): JSX.Element => {
+const DenomLabel = ({
+  bankDenom,
+  baseDenom,
+  size,
+  sx = [],
+}: Props): JSX.Element => {
   const { marketplaceClient } = useLedger();
   const { data: allowedDenomsData, isLoading: isLoadingAllowedDenoms } =
     useQuery(
@@ -30,7 +36,8 @@ const DenomLabel = ({ denom, size, sx = [] }: Props): JSX.Element => {
 
   const displayDenom = findDisplayDenom({
     allowedDenomsData,
-    denom,
+    bankDenom,
+    baseDenom,
   });
 
   return (

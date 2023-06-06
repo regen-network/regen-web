@@ -298,7 +298,8 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                             selectedSellOrder?.askAmount || '',
                           )} ${findDisplayDenom({
                             allowedDenomsData,
-                            denom: selectedSellOrder?.askDenom ?? '',
+                            bankDenom: selectedSellOrder?.askDenom ?? '',
+                            baseDenom: selectedSellOrder?.askBaseDenom,
                           })}/credit`}
                         </Body>
                         <Body
@@ -335,7 +336,8 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                                 askAmount: Number(selectedSellOrder?.askAmount),
                                 displayDenom: findDisplayDenom({
                                   allowedDenomsData,
-                                  denom: selectedSellOrder?.askDenom ?? '',
+                                  bankDenom: selectedSellOrder?.askDenom ?? '',
+                                  baseDenom: selectedSellOrder?.askBaseDenom,
                                 }),
                                 userBalance,
                               })}
@@ -364,7 +366,9 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                                 }}
                               >
                                 <DenomIcon
-                                  denom={selectedSellOrder?.askBaseDenom ?? ''}
+                                  baseDenom={
+                                    selectedSellOrder?.askBaseDenom ?? ''
+                                  }
                                   sx={{
                                     mr: 1.5,
                                     mt: 1,
@@ -379,12 +383,8 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                                   })}
                                 </Title>
                                 <DenomLabel
-                                  denom={
-                                    findDisplayDenom({
-                                      allowedDenomsData,
-                                      denom: selectedSellOrder?.askDenom ?? '',
-                                    }) ?? ''
-                                  }
+                                  bankDenom={selectedSellOrder?.askDenom ?? ''}
+                                  baseDenom={selectedSellOrder?.askBaseDenom}
                                   size="sm"
                                   sx={{ color: 'info.dark' }}
                                 />

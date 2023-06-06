@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/regen-network/regen-web/compare/v1.6.0...v1.7.0) (2023-06-06)
+
+### Features
+
+- handle EVMOS denom ([cd03f1e](https://github.com/regen-network/regen-web/commit/cd03f1ef7bd231c1c2cf0883869d4ffca7dcc5f6))
+
 # [1.5.0](https://github.com/regen-network/regen-web/compare/v1.4.6...v1.5.0) (2023-05-09)
 
 ### Features

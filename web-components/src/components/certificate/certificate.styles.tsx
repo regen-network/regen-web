@@ -17,6 +17,9 @@ export const useCertificateStyles = makeStyles<StyleProps>()(
       [theme.breakpoints.down('sm')]: {
         padding: theme.spacing(2.5),
       },
+      '@media print': {
+        padding: theme.spacing(2.5),
+      },
     },
     content: {
       backgroundColor: theme.palette.primary.main,
@@ -26,6 +29,9 @@ export const useCertificateStyles = makeStyles<StyleProps>()(
         paddingTop: theme.spacing(12.5),
       },
       [theme.breakpoints.down('sm')]: {
+        padding: `${theme.spacing(3.75)} ${theme.spacing(3.25)}`,
+      },
+      '@media print': {
         padding: `${theme.spacing(3.75)} ${theme.spacing(3.25)}`,
       },
     },
@@ -38,6 +44,11 @@ export const useCertificateStyles = makeStyles<StyleProps>()(
         bottom: theme.spacing(-5.5),
       },
       [theme.breakpoints.down('sm')]: {
+        width: theme.spacing(6),
+        height: theme.spacing(8),
+        bottom: theme.spacing(-2.12),
+      },
+      '@media print': {
         width: theme.spacing(6),
         height: theme.spacing(8),
         bottom: theme.spacing(-2.12),
@@ -59,6 +70,13 @@ export const useCertificateStyles = makeStyles<StyleProps>()(
           1.85,
         )}`,
       },
+      '@media print': {
+        position: 'absolute',
+        left: '-1px',
+        borderWidth: `${theme.spacing(4)} 0 ${theme.spacing(4)} ${theme.spacing(
+          1.85,
+        )}`,
+      },
       borderColor: `transparent transparent transparent ${theme.palette.primary.main}`,
     },
     greenTriangle: {
@@ -72,6 +90,9 @@ export const useCertificateStyles = makeStyles<StyleProps>()(
         borderWidth: `0 ${theme.spacing(5.5)} ${theme.spacing(5.5)} 0`,
       },
       [theme.breakpoints.down('sm')]: {
+        borderWidth: `0 ${theme.spacing(2)} ${theme.spacing(2)} 0`,
+      },
+      '@media print': {
         borderWidth: `0 ${theme.spacing(2)} ${theme.spacing(2)} 0`,
       },
       borderColor: `transparent ${theme.palette.secondary.contrastText} transparent transparent`,
@@ -93,6 +114,11 @@ export const useCertificateStyles = makeStyles<StyleProps>()(
         marginLeft: theme.spacing(3.65),
         marginRight: theme.spacing(3.65),
       },
+      '@media print': {
+        padding: `${theme.spacing(2)} ${theme.spacing(1.5)}`,
+        marginLeft: theme.spacing(3.65),
+        marginRight: theme.spacing(3.65),
+      },
       zIndex: 1,
       position: 'relative',
       textAlign: 'center',
@@ -108,6 +134,10 @@ export const useCertificateStyles = makeStyles<StyleProps>()(
         marginTop: theme.spacing(4),
         marginBottom: theme.spacing(1 + 2.12),
       },
+      '@media print': {
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(1),
+      },
     },
     icon: {
       float: 'right',
@@ -116,6 +146,10 @@ export const useCertificateStyles = makeStyles<StyleProps>()(
         height: theme.spacing(15.75),
       },
       [theme.breakpoints.down('sm')]: {
+        width: theme.spacing(17),
+        height: theme.spacing(7.5),
+      },
+      '@media print': {
         width: theme.spacing(17),
         height: theme.spacing(7.5),
       },

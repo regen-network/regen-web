@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, styled } from '@mui/material';
+import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
 

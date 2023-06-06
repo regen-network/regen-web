@@ -24,6 +24,11 @@ export const CertificateItem = ({ name, children, sx }: Props) => (
         fontWeight: 800,
         letterSpacing: '1px',
         color: 'info.dark',
+        '@media print': {
+          fontSize: pxToRem(8),
+          fontFamily: defaultFontFamily,
+          lineHeight: 0.4,
+        },
       }}
     >
       <Box component="span" sx={{ mr: 1 }}>{`${name}: `}</Box>

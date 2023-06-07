@@ -5,6 +5,8 @@ import { makeStyles } from 'tss-react/mui';
 import Section from 'web-components/lib/components/section';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
+import { useWallet } from 'lib/wallet/wallet';
+
 interface Props {
   classes?: {
     root?: string;
@@ -26,12 +28,14 @@ const useStyles = makeStyles()((theme: Theme) => ({
 
 const EcocreditsSection: React.FC<React.PropsWithChildren<Props>> = props => {
   const { classes: styles, cx } = useStyles();
+  const { isKeplrMobileWeb } = useWallet();
 
   return (
     <Box
       className={cx(
         styles.root,
         'topo-background-alternate',
+        isKeplrMobileWeb && 'dark',
         props?.classes?.root,
       )}
     >

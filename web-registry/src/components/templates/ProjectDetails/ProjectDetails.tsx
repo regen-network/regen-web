@@ -3,6 +3,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { Box, Skeleton, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
+import cx from 'classnames';
 import { useSetAtom } from 'jotai';
 
 import { Gallery } from 'web-components/lib/components/organisms/Gallery/Gallery';
@@ -64,6 +65,7 @@ function ProjectDetails(): JSX.Element {
   const graphqlClient = useApolloClient();
   const { track } = useTracker();
   const location = useLocation();
+  const { isKeplrMobileWeb } = useWallet();
 
   const { data: sanityProjectPageData } = useQuery(
     getAllProjectPageQuery({ sanityClient, enabled: !!sanityClient }),
@@ -296,12 +298,19 @@ function ProjectDetails(): JSX.Element {
       <ProjectStorySection projectPageMetadata={offChainProjectMetadata} />
 
       {impactData?.length > 0 && (
-        <div className="topo-background-alternate">
+        <div
+          className={cx(
+            'topo-background-alternate',
+            isKeplrMobileWeb && 'dark',
+          )}
+        >
           <ProjectImpactSection impact={impactData} />
         </div>
       )}
 
-      <div className="topo-background-alternate">
+      <div
+        className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}
+      >
         <ProjectDetailsTableTabs
           sortedDocuments={sortedDocuments}
           sortCallbacksDocuments={sortCallbacksDocuments}
@@ -320,7 +329,12 @@ function ProjectDetails(): JSX.Element {
       <MoreProjects />
 
       {gettingStartedResourcesSection && (
-        <div className="topo-background-alternate">
+        <div
+          className={cx(
+            'topo-background-alternate',
+            isKeplrMobileWeb && 'dark',
+          )}
+        >
           <GettingStartedResourcesSection
             section={gettingStartedResourcesSection}
           />

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
+import cx from 'classnames';
+
+import { useWallet } from 'lib/wallet/wallet';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
@@ -15,9 +18,13 @@ export function MoreProjects(): JSX.Element {
   const [selectedProject, setSelectedProject] =
     useState<ProjectWithOrderData | null>(null);
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
+  const { isKeplrMobileWeb } = useWallet();
 
   return (
-    <Box className="topo-background-alternate" sx={{ pb: 9 }}>
+    <Box
+      className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}
+      sx={{ pb: 9 }}
+    >
       <ProjectCardsSection
         title="More Projects"
         projects={projects}

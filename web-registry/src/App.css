@@ -3,19 +3,33 @@
 }
 
 .topo-background {
-  background-image: url(./assets/topo-background-large.jpeg);
-  background-size: cover;
+  background-image: url(./assets/home/topographic-light.svg);
+  background-size: auto;
+  background-repeat: repeat;
   background-position: center;
   border-top: 1px solid #d2d5d9;
   border-bottom: 1px solid #d2d5d9;
 }
 
+@media (prefers-color-scheme: dark) {
+  .topo-background.dark {
+    background-image: url(./assets/home/topographic-dark.jpg);
+  }
+}
+
 .topo-background-alternate:nth-of-type(odd) {
-  background-image: url(./assets/topo-background-large.jpeg);
-  background-size: cover;
+  background-image: url(./assets/home/topographic-light.svg);
+  background-size: auto;
+  background-repeat: repeat;
   background-position: center;
   border-top: 1px solid #d2d5d9;
   border-bottom: 1px solid #d2d5d9;
+}
+
+@media (prefers-color-scheme: dark) {
+  .topo-background-alternate.dark:nth-of-type(odd) {
+    background-image: url(./assets/home/topographic-dark.jpg);
+  }
 }
 
 @media print {

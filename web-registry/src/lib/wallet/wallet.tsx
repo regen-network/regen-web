@@ -72,11 +72,13 @@ export type WalletContextType = {
   isConnected: boolean;
   partyByAddr?: PartyByAddrQuery | null;
   accountChanging: boolean;
+  isKeplrMobileWeb: boolean;
 };
 const WalletContext = createContext<WalletContextType>({
   loaded: false,
   isConnected: false,
   accountChanging: false,
+  isKeplrMobileWeb: false,
 });
 
 export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
@@ -212,6 +214,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
             (!!accountId &&
               partyByAddr?.walletByAddr?.partyByWalletId?.accountId ===
                 accountId)),
+        isKeplrMobileWeb: keplrMobileWeb,
       }}
     >
       {children}

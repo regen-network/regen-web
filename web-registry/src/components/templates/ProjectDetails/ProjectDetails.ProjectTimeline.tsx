@@ -1,10 +1,13 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import cx from 'classnames';
 
 import Section from 'web-components/lib/components/section';
 import Timeline from 'web-components/lib/components/timeline';
 import { getFormattedDate } from 'web-components/lib/utils/format';
+
+import { useWallet } from 'lib/wallet/wallet';
 
 interface InputProps {
   events: any;
@@ -17,9 +20,10 @@ export function ProjectTimeline({
   txClient,
   viewOnLedger,
 }: InputProps): JSX.Element {
+  const { isKeplrMobileWeb } = useWallet();
   return (
     <Box
-      className="topo-background-alternate"
+      className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}
       sx={{ pb: { xs: 17, sm: 22.25 } }}
     >
       <Section titleVariant="h2" title="Timeline" titleAlign="left">

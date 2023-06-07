@@ -14,6 +14,7 @@ import { getPartiesByAccountIdQuery } from 'lib/queries/react-query/registry-ser
 import { getPartiesByNameOrAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartiesByNameOrAddr/getPartiesByNameOrAddrQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { DEFAULT_NAME } from '../../../../../pages/ProfileEdit/ProfileEdit.constants';
 import { ProfileModal } from '../ProfileModal/ProfileModal';
 import { ProfileModalSchemaType } from '../ProfileModal/ProfileModal.schema';
 import { useDebounce } from './hooks/useDebounce';
@@ -127,11 +128,15 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
             isOptionEqualToValue={(option, value) =>
               isProfile(option) && isProfile(value) && option.id === value.id
             }
-            getOptionLabel={option => (isProfile(option) ? option.name : '')}
+            getOptionLabel={option =>
+              isProfile(option) ? option.name || DEFAULT_NAME : ''
+            }
             renderOption={(props, option, state) => (
               <li {...props} key={state.index}>
                 {isProfile(option)
-                  ? `${option.name} (${truncate(option.address)})`
+                  ? `${option.name || DEFAULT_NAME} (${truncate(
+                      option.address,
+                    )})`
                   : option}
               </li>
             )}
@@ -169,7 +174,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
             renderInput={params => (
               <TextField
                 {...params}
-                placeholder="Start typing or choose entity"
+                placeholder="Choose from your profiles or search all profiles by name or address"
                 variant="outlined"
               />
             )}

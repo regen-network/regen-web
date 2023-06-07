@@ -12,7 +12,7 @@ export const profileModalSchema = z.object({
   id: z.string().optional(),
   accountId: z.string().optional(),
   profileType: z.custom<PartyType>(),
-  name: z.string().min(1),
+  name: z.string(),
   profileImage: z.string(),
   description: z.string().max(160).optional(),
   address: z

@@ -37,7 +37,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     },
     mode: 'onBlur',
   });
-  const { isSubmitting, isDirty, isValid } = useFormState({
+  const { isSubmitting, isDirty, isValid, errors } = useFormState({
     control: form.control,
   });
   const { isDirtyRef } = useProjectEditContext();
@@ -68,6 +68,11 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   const setVerifier = (value: ProfileModalSchemaType | null): void => {
     form.setValue('verifier', value, { shouldDirty: true });
   };
+
+  console.log('isValid', isValid);
+  console.log('errors', errors);
+  console.log('projectDeveloper', projectDeveloper);
+  console.log('verifier', verifier);
 
   return (
     <Form form={form}>

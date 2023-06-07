@@ -1,8 +1,7 @@
 import { InferGetStaticPropsType } from 'next';
 import { NextSeo } from 'next-seo';
 
-import LedgerSection from '@/components/templates/resources/LedgerSection/LedgerSection';
-import RegistrySection from '@/components/templates/resources/RegistrySection/RegistrySection';
+import ResourcesSection from '@/components/templates/resources/resourcesSection/resourcesSection';
 import TopSection from '@/components/templates/resources/TopSection/TopSection';
 import {
   ResourcesPageDocument,
@@ -14,8 +13,7 @@ export default function ResourcesPage({
   resourcesData,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const resources = resourcesData.data.allResourcesPage[0];
-  const ledgerSection = resources.ledgerSection;
-  const registrySection = resources.registrySection;
+  const resourcesSections = resources.resourcesSections;
   const topSection = resources.topSection;
 
   return (
@@ -34,8 +32,12 @@ export default function ResourcesPage({
         }}
       />
       <TopSection topSectionData={topSection} />
-      <RegistrySection registrySectionData={registrySection} />
-      <LedgerSection ledgerSectionData={ledgerSection} />
+      {resourcesSections?.map(resourcesSection => (
+        <ResourcesSection
+          key={resourcesSection?.header}
+          resourceSectionData={resourcesSection}
+        />
+      ))}
     </>
   );
 }

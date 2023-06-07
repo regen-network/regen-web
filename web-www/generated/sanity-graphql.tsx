@@ -438,6 +438,7 @@ export type BuyersPage = Document & {
   imageGridSection?: Maybe<ImageGridSection>;
   ecologicalCreditCardsSection?: Maybe<EcologicalCreditCardsSection>;
   featuredProjectCardsSection?: Maybe<BuyersFeaturedProjectCardsSection>;
+  quoteSection?: Maybe<BuyersQuoteSection>;
   partnersSection?: Maybe<BuyersPartnersSection>;
   contactSection?: Maybe<BottomBanner>;
   footerButtonText?: Maybe<Scalars['String']>;
@@ -458,6 +459,7 @@ export type BuyersPageFilter = {
   imageGridSection?: Maybe<ImageGridSectionFilter>;
   ecologicalCreditCardsSection?: Maybe<EcologicalCreditCardsSectionFilter>;
   featuredProjectCardsSection?: Maybe<BuyersFeaturedProjectCardsSectionFilter>;
+  quoteSection?: Maybe<BuyersQuoteSectionFilter>;
   partnersSection?: Maybe<BuyersPartnersSectionFilter>;
   contactSection?: Maybe<BottomBannerFilter>;
   footerButtonText?: Maybe<StringFilter>;
@@ -476,6 +478,7 @@ export type BuyersPageSorting = {
   imageGridSection?: Maybe<ImageGridSectionSorting>;
   ecologicalCreditCardsSection?: Maybe<EcologicalCreditCardsSectionSorting>;
   featuredProjectCardsSection?: Maybe<BuyersFeaturedProjectCardsSectionSorting>;
+  quoteSection?: Maybe<BuyersQuoteSectionSorting>;
   partnersSection?: Maybe<BuyersPartnersSectionSorting>;
   contactSection?: Maybe<BottomBannerSorting>;
   footerButtonText?: Maybe<SortOrder>;
@@ -500,6 +503,60 @@ export type BuyersPartnersSectionSorting = {
   _key?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
+};
+
+export type BuyersQuoteSection = {
+  __typename?: 'BuyersQuoteSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  backgroundImage?: Maybe<CustomImage>;
+  quoteText?: Maybe<BuyersQuoteText>;
+  person?: Maybe<Person>;
+  logo?: Maybe<Image>;
+};
+
+export type BuyersQuoteSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  backgroundImage?: Maybe<CustomImageFilter>;
+  quoteText?: Maybe<BuyersQuoteTextFilter>;
+  person?: Maybe<PersonFilter>;
+  logo?: Maybe<ImageFilter>;
+};
+
+export type BuyersQuoteSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  backgroundImage?: Maybe<CustomImageSorting>;
+  quoteText?: Maybe<BuyersQuoteTextSorting>;
+  logo?: Maybe<ImageSorting>;
+};
+
+export type BuyersQuoteText = {
+  __typename?: 'BuyersQuoteText';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  /** This part is highlighted in green */
+  quoteFirstPart?: Maybe<Scalars['String']>;
+  quoteMiddlePart?: Maybe<Scalars['String']>;
+  /** This part is highlighted in green */
+  quoteLastPart?: Maybe<Scalars['String']>;
+};
+
+export type BuyersQuoteTextFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  quoteFirstPart?: Maybe<StringFilter>;
+  quoteMiddlePart?: Maybe<StringFilter>;
+  quoteLastPart?: Maybe<StringFilter>;
+};
+
+export type BuyersQuoteTextSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  quoteFirstPart?: Maybe<SortOrder>;
+  quoteMiddlePart?: Maybe<SortOrder>;
+  quoteLastPart?: Maybe<SortOrder>;
 };
 
 export type CallToAction = {
@@ -4167,6 +4224,47 @@ export type PartnersPageSorting = {
   contactHeader?: Maybe<SortOrder>;
 };
 
+export type Person = Document & {
+  __typename?: 'Person';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  role?: Maybe<Scalars['String']>;
+};
+
+export type PersonFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  name?: Maybe<StringFilter>;
+  role?: Maybe<StringFilter>;
+};
+
+export type PersonSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  name?: Maybe<SortOrder>;
+  role?: Maybe<SortOrder>;
+};
+
 export type PracticesOutcomesSection = {
   __typename?: 'PracticesOutcomesSection';
   _key?: Maybe<Scalars['String']>;
@@ -4778,26 +4876,6 @@ export type ResourcesCardSorting = {
   buttonHref?: Maybe<SortOrder>;
 };
 
-export type ResourcesLedgerSection = {
-  __typename?: 'ResourcesLedgerSection';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  header?: Maybe<Scalars['String']>;
-  cards?: Maybe<Array<Maybe<Resource>>>;
-};
-
-export type ResourcesLedgerSectionFilter = {
-  _key?: Maybe<StringFilter>;
-  _type?: Maybe<StringFilter>;
-  header?: Maybe<StringFilter>;
-};
-
-export type ResourcesLedgerSectionSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  header?: Maybe<SortOrder>;
-};
-
 export type ResourcesPage = Document & {
   __typename?: 'ResourcesPage';
   /** Document ID */
@@ -4812,8 +4890,7 @@ export type ResourcesPage = Document & {
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
   topSection?: Maybe<TitleBody>;
-  registrySection?: Maybe<ResourcesRegistrySection>;
-  ledgerSection?: Maybe<ResourcesLedgerSection>;
+  resourcesSections?: Maybe<Array<Maybe<ResourcesSection>>>;
 };
 
 export type ResourcesPageFilter = {
@@ -4826,8 +4903,6 @@ export type ResourcesPageFilter = {
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
   topSection?: Maybe<TitleBodyFilter>;
-  registrySection?: Maybe<ResourcesRegistrySectionFilter>;
-  ledgerSection?: Maybe<ResourcesLedgerSectionFilter>;
 };
 
 export type ResourcesPageSorting = {
@@ -4838,52 +4913,26 @@ export type ResourcesPageSorting = {
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
   topSection?: Maybe<TitleBodySorting>;
-  registrySection?: Maybe<ResourcesRegistrySectionSorting>;
-  ledgerSection?: Maybe<ResourcesLedgerSectionSorting>;
 };
 
-export type ResourcesRegistrySection = {
-  __typename?: 'ResourcesRegistrySection';
+export type ResourcesSection = {
+  __typename?: 'ResourcesSection';
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
   header?: Maybe<Scalars['String']>;
-  documentTableTitle?: Maybe<Scalars['String']>;
-  documents?: Maybe<Array<Maybe<Doc>>>;
-  subsections?: Maybe<Array<Maybe<ResourcesRegistrySubSection>>>;
-};
-
-export type ResourcesRegistrySectionFilter = {
-  _key?: Maybe<StringFilter>;
-  _type?: Maybe<StringFilter>;
-  header?: Maybe<StringFilter>;
-  documentTableTitle?: Maybe<StringFilter>;
-};
-
-export type ResourcesRegistrySectionSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  header?: Maybe<SortOrder>;
-  documentTableTitle?: Maybe<SortOrder>;
-};
-
-export type ResourcesRegistrySubSection = {
-  __typename?: 'ResourcesRegistrySubSection';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
   cards?: Maybe<Array<Maybe<Resource>>>;
 };
 
-export type ResourcesRegistrySubSectionFilter = {
+export type ResourcesSectionFilter = {
   _key?: Maybe<StringFilter>;
   _type?: Maybe<StringFilter>;
-  title?: Maybe<StringFilter>;
+  header?: Maybe<StringFilter>;
 };
 
-export type ResourcesRegistrySubSectionSorting = {
+export type ResourcesSectionSorting = {
   _key?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
-  title?: Maybe<SortOrder>;
+  header?: Maybe<SortOrder>;
 };
 
 export type ReviewSection = {
@@ -4961,6 +5010,7 @@ export type RootQuery = {
   OffsetMethod?: Maybe<OffsetMethod>;
   Partner?: Maybe<Partner>;
   PartnersPage?: Maybe<PartnersPage>;
+  Person?: Maybe<Person>;
   PresskitPage?: Maybe<PresskitPage>;
   Project?: Maybe<Project>;
   ProjectActivity?: Maybe<ProjectActivity>;
@@ -5022,6 +5072,7 @@ export type RootQuery = {
   allOffsetMethod: Array<OffsetMethod>;
   allPartner: Array<Partner>;
   allPartnersPage: Array<PartnersPage>;
+  allPerson: Array<Person>;
   allPresskitPage: Array<PresskitPage>;
   allProject: Array<Project>;
   allProjectActivity: Array<ProjectActivity>;
@@ -5242,6 +5293,11 @@ export type RootQueryPartnerArgs = {
 
 
 export type RootQueryPartnersPageArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryPersonArgs = {
   id: Scalars['ID'];
 };
 
@@ -5666,6 +5722,14 @@ export type RootQueryAllPartnerArgs = {
 export type RootQueryAllPartnersPageArgs = {
   where?: Maybe<PartnersPageFilter>;
   sort?: Maybe<Array<PartnersPageSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllPersonArgs = {
+  where?: Maybe<PersonFilter>;
+  sort?: Maybe<Array<PersonSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -7608,49 +7672,12 @@ export type PressKitTopSectionFieldsFragment = (
   )> }
 );
 
-export type ResourcesLedgerSectionFieldsFragment = (
+export type ResourcesSectionsFieldsFragment = (
   { __typename?: 'ResourcesPage' }
-  & { ledgerSection?: Maybe<(
-    { __typename?: 'ResourcesLedgerSection' }
-    & Pick<ResourcesLedgerSection, 'header'>
-    & { cards?: Maybe<Array<Maybe<(
-      { __typename?: 'Resource' }
-      & Pick<Resource, 'titleRaw' | 'descriptionRaw' | 'lastUpdated'>
-      & { button?: Maybe<(
-        { __typename?: 'Button' }
-        & ButtonFieldsFragment
-      )>, image?: Maybe<(
-        { __typename?: 'CustomImage' }
-        & CustomImageFieldsFragment
-      )> }
-    )>>> }
-  )> }
-);
-
-export type ResourcesRegistrySectionFieldsFragment = (
-  { __typename?: 'ResourcesPage' }
-  & { registrySection?: Maybe<(
-    { __typename?: 'ResourcesRegistrySection' }
-    & Pick<ResourcesRegistrySection, 'header' | 'documentTableTitle'>
-    & { documents?: Maybe<Array<Maybe<(
-      { __typename?: 'Doc' }
-      & Pick<Doc, 'name' | 'type' | 'date' | 'href'>
-    )>>>, subsections?: Maybe<Array<Maybe<(
-      { __typename?: 'ResourcesRegistrySubSection' }
-      & Pick<ResourcesRegistrySubSection, 'title'>
-      & { cards?: Maybe<Array<Maybe<(
-        { __typename?: 'Resource' }
-        & Pick<Resource, 'titleRaw' | 'lastUpdated' | 'descriptionRaw'>
-        & { image?: Maybe<(
-          { __typename?: 'CustomImage' }
-          & CustomImageFieldsFragment
-        )>, button?: Maybe<(
-          { __typename?: 'Button' }
-          & ButtonFieldsFragment
-        )> }
-      )>>> }
-    )>>> }
-  )> }
+  & { resourcesSections?: Maybe<Array<Maybe<(
+    { __typename?: 'ResourcesSection' }
+    & ResourceFieldsFragment
+  )>>> }
 );
 
 export type ResourcesTopSectionFieldsFragment = (
@@ -7729,6 +7756,22 @@ export type LinkFieldsFragment = (
     { __typename?: 'Doc' }
     & Pick<Doc, 'href'>
   )> }
+);
+
+export type ResourceFieldsFragment = (
+  { __typename?: 'ResourcesSection' }
+  & Pick<ResourcesSection, 'header'>
+  & { cards?: Maybe<Array<Maybe<(
+    { __typename?: 'Resource' }
+    & Pick<Resource, 'titleRaw' | 'descriptionRaw' | 'lastUpdated'>
+    & { button?: Maybe<(
+      { __typename?: 'Button' }
+      & ButtonFieldsFragment
+    )>, image?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
+    )> }
+  )>>> }
 );
 
 export type SharedNewsletterSectionFieldsFragment = (
@@ -8038,8 +8081,7 @@ export type ResourcesPageQuery = (
   & { allResourcesPage: Array<(
     { __typename?: 'ResourcesPage' }
     & ResourcesTopSectionFieldsFragment
-    & ResourcesRegistrySectionFieldsFragment
-    & ResourcesLedgerSectionFieldsFragment
+    & ResourcesSectionsFieldsFragment
   )> }
 );
 
@@ -8399,54 +8441,30 @@ export const PressKitTopSectionFieldsFragmentDoc = gql`
   }
 }
     `;
-export const ResourcesLedgerSectionFieldsFragmentDoc = gql`
-    fragment resourcesLedgerSectionFields on ResourcesPage {
-  ledgerSection {
-    header
-    cards {
-      titleRaw
-      descriptionRaw
-      lastUpdated
-      button {
-        ...buttonFields
-      }
-      image {
-        ...customImageFields
-      }
+export const ResourceFieldsFragmentDoc = gql`
+    fragment resourceFields on ResourcesSection {
+  header
+  cards {
+    titleRaw
+    descriptionRaw
+    lastUpdated
+    button {
+      ...buttonFields
+    }
+    image {
+      ...customImageFields
     }
   }
 }
     ${ButtonFieldsFragmentDoc}
 ${CustomImageFieldsFragmentDoc}`;
-export const ResourcesRegistrySectionFieldsFragmentDoc = gql`
-    fragment resourcesRegistrySectionFields on ResourcesPage {
-  registrySection {
-    header
-    documentTableTitle
-    documents {
-      name
-      type
-      date
-      href
-    }
-    subsections {
-      title
-      cards {
-        image {
-          ...customImageFields
-        }
-        titleRaw
-        lastUpdated
-        descriptionRaw
-        button {
-          ...buttonFields
-        }
-      }
-    }
+export const ResourcesSectionsFieldsFragmentDoc = gql`
+    fragment resourcesSectionsFields on ResourcesPage {
+  resourcesSections {
+    ...resourceFields
   }
 }
-    ${CustomImageFieldsFragmentDoc}
-${ButtonFieldsFragmentDoc}`;
+    ${ResourceFieldsFragmentDoc}`;
 export const ResourcesTopSectionFieldsFragmentDoc = gql`
     fragment resourcesTopSectionFields on ResourcesPage {
   topSection {
@@ -8953,13 +8971,11 @@ export const ResourcesPageDocument = gql`
     query resourcesPage {
   allResourcesPage {
     ...resourcesTopSectionFields
-    ...resourcesRegistrySectionFields
-    ...resourcesLedgerSectionFields
+    ...resourcesSectionsFields
   }
 }
     ${ResourcesTopSectionFieldsFragmentDoc}
-${ResourcesRegistrySectionFieldsFragmentDoc}
-${ResourcesLedgerSectionFieldsFragmentDoc}`;
+${ResourcesSectionsFieldsFragmentDoc}`;
 
 /**
  * __useResourcesPageQuery__

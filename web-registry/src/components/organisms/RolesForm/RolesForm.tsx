@@ -69,11 +69,6 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     form.setValue('verifier', value, { shouldDirty: true });
   };
 
-  console.log('isValid', isValid);
-  console.log('errors', errors);
-  console.log('projectDeveloper', projectDeveloper);
-  console.log('verifier', verifier);
-
   return (
     <Form form={form}>
       <OnBoardingCard>

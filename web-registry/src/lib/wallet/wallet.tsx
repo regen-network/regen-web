@@ -214,7 +214,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
             (!!accountId &&
               partyByAddr?.walletByAddr?.partyByWalletId?.accountId ===
                 accountId)),
-        isKeplrMobileWeb: true,
+        isKeplrMobileWeb: keplrMobileWeb,
       }}
     >
       {children}

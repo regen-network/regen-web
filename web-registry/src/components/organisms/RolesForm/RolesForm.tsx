@@ -37,7 +37,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     },
     mode: 'onBlur',
   });
-  const { isSubmitting, isDirty, isValid, errors } = useFormState({
+  const { isSubmitting, isDirty, isValid } = useFormState({
     control: form.control,
   });
   const { isDirtyRef } = useProjectEditContext();

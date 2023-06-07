@@ -9,11 +9,12 @@ import { useQuery } from '@tanstack/react-query';
 
 import FieldFormControl from 'web-components/lib/components/inputs/new/FieldFormControl/FieldFormControl';
 import { truncate } from 'web-components/lib/utils/truncate';
+import { UseStateSetter } from 'web-components/src/types/react/useState';
 
-import { getPartiesByAccountIdQuery } from 'lib/queries/react-query/registry-server/graphql/getPartiesByAccountIdById/getPartiesByAccountIdQuery';
 import { getPartiesByNameOrAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartiesByNameOrAddr/getPartiesByNameOrAddrQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { PartiesByAccountIdQuery } from '../../../../../generated/graphql';
 import { DEFAULT_NAME } from '../../../../../pages/ProfileEdit/ProfileEdit.constants';
 import { ProfileModal } from '../ProfileModal/ProfileModal';
 import { ProfileModalSchemaType } from '../ProfileModal/ProfileModal.schema';
@@ -33,8 +34,12 @@ interface Props {
   description?: string;
   label?: string;
   optional?: boolean | string;
+  setInputValue: UseStateSetter<string>;
+  inputValue: string;
   setValue: (value: ProfileModalSchemaType | null) => void;
   value?: ProfileModalSchemaType | null;
+  partiesByAccountId?: PartiesByAccountIdQuery | null;
+  parties?: any;
 }
 
 export const RoleField = forwardRef<HTMLInputElement, Props>(
@@ -47,35 +52,20 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
       description,
       setValue,
       value,
+      setInputValue,
+      inputValue,
+      partiesByAccountId,
+      parties,
     }: Props,
     ref,
   ) => {
     const { classes: styles, cx } = useStyles();
     const { accountId } = useWallet();
-    const [inputValue, setInputValue] = useState('');
     const [options, setOptions] = useState<readonly ProfileModalSchemaType[]>(
       [],
     );
     const [profileAdd, setProfileAdd] = useState<ProfileModalSchemaType | null>(
       null,
-    );
-
-    const graphqlClient =
-      useApolloClient() as ApolloClient<NormalizedCacheObject>;
-    const debouncedInputValue = useDebounce(inputValue);
-    const { data: parties } = useQuery(
-      getPartiesByNameOrAddrQuery({
-        client: graphqlClient,
-        enabled: !!graphqlClient && !!debouncedInputValue,
-        input: debouncedInputValue,
-      }),
-    );
-    const { data: partiesByAccountId } = useQuery(
-      getPartiesByAccountIdQuery({
-        client: graphqlClient,
-        id: accountId,
-        enabled: !!accountId && !!graphqlClient,
-      }),
     );
 
     useEffect(() => {

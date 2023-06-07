@@ -1,5 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
+import { useQuery } from '@tanstack/react-query';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
@@ -11,9 +17,13 @@ import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
+import { getPartiesByAccountIdQuery } from '../../../lib/queries/react-query/registry-server/graphql/getPartiesByAccountIdById/getPartiesByAccountIdQuery';
+import { getPartiesByNameOrAddrQuery } from '../../../lib/queries/react-query/registry-server/graphql/getPartiesByNameOrAddr/getPartiesByNameOrAddrQuery';
+import { useWallet } from '../../../lib/wallet/wallet';
 import { useProjectEditContext } from '../../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../../molecules';
 import { ProfileModalSchemaType } from './components/ProfileModal/ProfileModal.schema';
+import { useDebounce } from './components/RoleField/hooks/useDebounce';
 import { RoleField } from './components/RoleField/RoleField';
 import { rolesFormSchema, RolesFormSchemaType } from './RolesForm.schema';
 
@@ -69,6 +79,38 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     form.setValue('verifier', value, { shouldDirty: true });
   };
 
+  const { accountId } = useWallet();
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
+  const { data: partiesByAccountId } = useQuery(
+    getPartiesByAccountIdQuery({
+      client: graphqlClient,
+      id: accountId,
+      enabled: !!accountId && !!graphqlClient,
+    }),
+  );
+
+  // TODO refactor
+  const [inputProjectDeveloper, setInputProjectDeveloper] = useState('');
+  const debouncedInputProjectDeveloper = useDebounce(inputProjectDeveloper);
+  const { data: partiesProjectDeveloper } = useQuery(
+    getPartiesByNameOrAddrQuery({
+      client: graphqlClient,
+      enabled: !!graphqlClient && !!debouncedInputProjectDeveloper,
+      input: debouncedInputProjectDeveloper,
+    }),
+  );
+
+  const [inputVerifier, setInputVerifier] = useState('');
+  const debouncedInputVerifier = useDebounce(inputVerifier);
+  const { data: partiesVerifier } = useQuery(
+    getPartiesByNameOrAddrQuery({
+      client: graphqlClient,
+      enabled: !!graphqlClient && !!debouncedInputVerifier,
+      input: debouncedInputVerifier,
+    }),
+  );
+
   return (
     <Form form={form}>
       <OnBoardingCard>
@@ -78,6 +120,10 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
           description="The individual or organization that is in charge of managing the project and will appear on the project page"
           setValue={setProjectDeveloper}
           value={projectDeveloper}
+          setInputValue={setInputProjectDeveloper}
+          inputValue={inputProjectDeveloper}
+          partiesByAccountId={partiesByAccountId}
+          parties={partiesProjectDeveloper}
           {...form.register('projectDeveloper')}
         />
         <RoleField
@@ -86,6 +132,10 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
           description="A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
           setValue={setVerifier}
           value={verifier}
+          setInputValue={setInputVerifier}
+          inputValue={inputVerifier}
+          partiesByAccountId={partiesByAccountId}
+          parties={partiesVerifier}
           {...form.register('verifier')}
         />
         <TextField

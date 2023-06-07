@@ -1,4 +1,4 @@
-import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Slider from 'react-slick';
 import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -235,7 +235,7 @@ export default function ProjectMedia({
     }
   }, [thumbnailsWrapper]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     window.addEventListener('resize', handleResize);
     handleResize();
     return () => window.removeEventListener('resize', handleResize);

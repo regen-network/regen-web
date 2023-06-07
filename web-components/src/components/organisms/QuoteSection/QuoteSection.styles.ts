@@ -11,10 +11,7 @@ export const quotemarkStyle: SystemStyleObject<Theme> = {
   color: theme => theme.palette.secondary.dark,
 };
 
-export const greenGradientStyle: SystemStyleObject<Theme> = {
-  background:
-    'linear-gradient(197.46deg, #7D9AA2 8.02%, #9AD3BE 43.42%, #D1E2C7 78.83%)',
-  backgroundClip: 'text',
-  textFillColor: 'transparent',
+export const quoteHighlightStyle: SystemStyleObject<Theme> = {
+  color: theme => theme.palette.secondary.contrastText,
   textShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
 };

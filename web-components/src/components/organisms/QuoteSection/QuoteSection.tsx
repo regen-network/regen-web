@@ -1,14 +1,11 @@
 import { Box, SxProps } from '@mui/material';
 
-import { Title } from '../../../components/typography';
 import { headerFontFamily, Theme } from '../../../theme/muiTheme';
 import { ImageType } from '../../../types/shared/imageType';
 import { sxToArray } from '../../../utils/mui/sxToArray';
-import {
-  greenGradientStyle,
-  quotemarkStyle,
-} from './GradientQuoteSection.styles';
-import { Person } from './GradientQuoteSection.types';
+import { Title } from '../../typography';
+import { quoteHighlightStyle, quotemarkStyle } from './QuoteSection.styles';
+import { Person } from './QuoteSection.types';
 
 export interface Props {
   backgroundImage: ImageType;
@@ -20,7 +17,7 @@ export interface Props {
   sx?: SxProps<Theme>;
 }
 
-const GradientQuoteSection = ({
+const QuoteSection = ({
   backgroundImage,
   logo,
   person,
@@ -72,14 +69,16 @@ const GradientQuoteSection = ({
           <Box
             component="span"
             sx={[
-              greenGradientStyle,
+              quoteHighlightStyle,
               { mr: 2, zIndex: 1, position: 'relative' },
             ]}
           >
             {quoteFirstPart}
           </Box>
-          <Box component="span">{quoteMiddlePart}</Box>
-          <Box component="span" sx={[greenGradientStyle, { mr: 2 }]}>
+          <Box component="span" sx={{ mr: 2 }}>
+            {quoteMiddlePart}
+          </Box>
+          <Box component="span" sx={[quoteHighlightStyle, { mr: 2 }]}>
             {quoteLastPart}
           </Box>
           <Box
@@ -120,4 +119,4 @@ const GradientQuoteSection = ({
   );
 };
 
-export { GradientQuoteSection };
+export { QuoteSection };

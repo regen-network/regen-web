@@ -1,7 +1,9 @@
 fragment buyersQuoteSectionFields on BuyersQuoteSection {
-  quoteFirstPart
-  quoteMiddlePart
-  quoteLastPart
+  quoteText {
+    quoteFirstPart
+    quoteMiddlePart
+    quoteLastPart
+  }
   person {
     ...personFields
   }

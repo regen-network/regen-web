@@ -1,4 +1,4 @@
-import { Props } from './GradientQuoteSection';
+import { Props } from './QuoteSection';
 
 export const quoteSectionMockData: Partial<Props> = {
   backgroundImage: {

@@ -1,7 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import { GradientQuoteSection } from 'web-components/lib/components/organisms/GradientQuoteSection/GradientQuoteSection';
 import SEO from 'web-components/lib/components/seo';
 
 import { getAllBuyersPageQuery } from 'lib/queries/react-query/sanity/getAllBuyersPageQuery/getAllBuyersPageQuery';
@@ -19,6 +18,7 @@ import { client as sanityClient } from '../../lib/clients/sanity';
 import { BuyersEcologicalCreditCardsSection } from './Buyers.EcologicalCreditCardsSection';
 import { BuyersFeaturedProjectsSection } from './Buyers.FeaturedProjectsSection';
 import { BuyersPartnersSection } from './Buyers.PartnersSection';
+import { BuyersQuoteSection } from './Buyers.QuoteSection';
 import { useBuyersStyles } from './Buyers.styles';
 import { useFetchProjectsByIds } from './hooks/useFetchProjectsByIds';
 
@@ -45,8 +45,6 @@ const BuyersPage = (): JSX.Element => {
     siteUrl: window.location.href,
     imageUrl: content?.metadata?.openGraphImage?.asset?.url || '',
   };
-
-  const quoteSectionData = content?.quoteSection;
 
   return (
     <>
@@ -121,22 +119,7 @@ const BuyersPage = (): JSX.Element => {
             />
           )}
           {content?.quoteSection && (
-            <GradientQuoteSection
-              backgroundImage={{
-                src: String(
-                  quoteSectionData?.backgroundImage?.image?.asset?.url,
-                ),
-                alt: String(quoteSectionData?.backgroundImage?.imageAlt),
-              }}
-              logo={{ src: String(quoteSectionData?.logo?.asset?.url) }}
-              person={{
-                name: String(quoteSectionData?.person?.name),
-                role: String(quoteSectionData?.person?.role),
-              }}
-              quoteFirstPart={String(quoteSectionData?.quoteFirstPart)}
-              quoteMiddlePart={String(quoteSectionData?.quoteMiddlePart)}
-              quoteLastPart={String(quoteSectionData?.quoteLastPart)}
-            />
+            <BuyersQuoteSection content={content?.quoteSection} />
           )}
           {content?.partnersSection && (
             <BuyersPartnersSection content={content?.partnersSection} />

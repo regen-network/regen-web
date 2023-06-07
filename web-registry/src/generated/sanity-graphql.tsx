@@ -510,11 +510,7 @@ export type BuyersQuoteSection = {
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
   backgroundImage?: Maybe<CustomImage>;
-  /** This part has a green gradient */
-  quoteFirstPart?: Maybe<Scalars['String']>;
-  quoteMiddlePart?: Maybe<Scalars['String']>;
-  /** This part has a green gradient */
-  quoteLastPart?: Maybe<Scalars['String']>;
+  quoteText?: Maybe<BuyersQuoteText>;
   person?: Maybe<Person>;
   logo?: Maybe<Image>;
 };
@@ -523,9 +519,7 @@ export type BuyersQuoteSectionFilter = {
   _key?: Maybe<StringFilter>;
   _type?: Maybe<StringFilter>;
   backgroundImage?: Maybe<CustomImageFilter>;
-  quoteFirstPart?: Maybe<StringFilter>;
-  quoteMiddlePart?: Maybe<StringFilter>;
-  quoteLastPart?: Maybe<StringFilter>;
+  quoteText?: Maybe<BuyersQuoteTextFilter>;
   person?: Maybe<PersonFilter>;
   logo?: Maybe<ImageFilter>;
 };
@@ -534,10 +528,35 @@ export type BuyersQuoteSectionSorting = {
   _key?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
   backgroundImage?: Maybe<CustomImageSorting>;
+  quoteText?: Maybe<BuyersQuoteTextSorting>;
+  logo?: Maybe<ImageSorting>;
+};
+
+export type BuyersQuoteText = {
+  __typename?: 'BuyersQuoteText';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  /** This part has a green gradient */
+  quoteFirstPart?: Maybe<Scalars['String']>;
+  quoteMiddlePart?: Maybe<Scalars['String']>;
+  /** This part has a green gradient */
+  quoteLastPart?: Maybe<Scalars['String']>;
+};
+
+export type BuyersQuoteTextFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  quoteFirstPart?: Maybe<StringFilter>;
+  quoteMiddlePart?: Maybe<StringFilter>;
+  quoteLastPart?: Maybe<StringFilter>;
+};
+
+export type BuyersQuoteTextSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
   quoteFirstPart?: Maybe<SortOrder>;
   quoteMiddlePart?: Maybe<SortOrder>;
   quoteLastPart?: Maybe<SortOrder>;
-  logo?: Maybe<ImageSorting>;
 };
 
 export type CallToAction = {
@@ -8446,8 +8465,10 @@ export type BuyersPartnersSectionFieldsFragment = (
 
 export type BuyersQuoteSectionFieldsFragment = (
   { __typename?: 'BuyersQuoteSection' }
-  & Pick<BuyersQuoteSection, 'quoteFirstPart' | 'quoteMiddlePart' | 'quoteLastPart'>
-  & { person?: Maybe<(
+  & { quoteText?: Maybe<(
+    { __typename?: 'BuyersQuoteText' }
+    & Pick<BuyersQuoteText, 'quoteFirstPart' | 'quoteMiddlePart' | 'quoteLastPart'>
+  )>, person?: Maybe<(
     { __typename?: 'Person' }
     & PersonFieldsFragment
   )>, backgroundImage?: Maybe<(
@@ -8901,9 +8922,11 @@ export const ImageFieldsFragmentDoc = gql`
     `;
 export const BuyersQuoteSectionFieldsFragmentDoc = gql`
     fragment buyersQuoteSectionFields on BuyersQuoteSection {
-  quoteFirstPart
-  quoteMiddlePart
-  quoteLastPart
+  quoteText {
+    quoteFirstPart
+    quoteMiddlePart
+    quoteLastPart
+  }
   person {
     ...personFields
   }

@@ -1,5 +1,6 @@
 import { Box, SxProps } from '@mui/material';
 
+import { containerStyles } from '../../../styles/container';
 import { headerFontFamily, Theme } from '../../../theme/muiTheme';
 import { ImageType } from '../../../types/shared/imageType';
 import { sxToArray } from '../../../utils/mui/sxToArray';
@@ -42,79 +43,81 @@ const QuoteSection = ({
         ...sxToArray(sx),
       ]}
     >
-      <Box>
-        <Title
-          variant="h2"
-          mobileVariant="h4"
-          sx={{
-            maxWidth: 781,
-            mb: 11.5,
-            color: 'primary.main',
-            position: 'relative',
-          }}
-        >
-          <Box
-            component="span"
-            sx={[
-              quotemarkStyle,
-              {
-                position: 'absolute',
-                top: { xs: -30, md: -50 },
-                left: { xs: 0, md: -30 },
-              },
-            ]}
+      <Box sx={[containerStyles, { width: '100%' }]}>
+        <Box>
+          <Title
+            variant="h2"
+            mobileVariant="h4"
+            sx={{
+              maxWidth: 781,
+              mb: 11.5,
+              color: 'primary.main',
+              position: 'relative',
+            }}
           >
-            {'“'}
-          </Box>
+            <Box
+              component="span"
+              sx={[
+                quotemarkStyle,
+                {
+                  position: 'absolute',
+                  top: { xs: -30, md: -50 },
+                  left: { xs: 0, md: -30 },
+                },
+              ]}
+            >
+              {'“'}
+            </Box>
+            <Box
+              component="span"
+              sx={[
+                quoteHighlightStyle,
+                { mr: 2, zIndex: 1, position: 'relative' },
+              ]}
+            >
+              {quoteFirstPart}
+            </Box>
+            <Box component="span" sx={{ mr: 2 }}>
+              {quoteMiddlePart}
+            </Box>
+            <Box component="span" sx={[quoteHighlightStyle, { mr: 2 }]}>
+              {quoteLastPart}
+            </Box>
+            <Box
+              component="span"
+              sx={[
+                quotemarkStyle,
+                { position: 'absolute', bottom: { xs: -40, md: -65 } },
+              ]}
+            >
+              {'”'}
+            </Box>
+          </Title>
+        </Box>
+        <Box sx={{ mb: 11.5, color: 'primary.main' }}>
           <Box
-            component="span"
-            sx={[
-              quoteHighlightStyle,
-              { mr: 2, zIndex: 1, position: 'relative' },
-            ]}
+            sx={{
+              fontFamily: headerFontFamily,
+              fontWeight: 800,
+              fontSize: 21,
+              lineHeight: '26px',
+              letterSpacing: 1,
+              textTransform: 'uppercase',
+            }}
           >
-            {quoteFirstPart}
+            {person.name}
           </Box>
-          <Box component="span" sx={{ mr: 2 }}>
-            {quoteMiddlePart}
+          <Box sx={{ fontWeight: 400, fontSize: 18, lineHeight: '150%' }}>
+            {person.role}
           </Box>
-          <Box component="span" sx={[quoteHighlightStyle, { mr: 2 }]}>
-            {quoteLastPart}
-          </Box>
-          <Box
-            component="span"
-            sx={[
-              quotemarkStyle,
-              { position: 'absolute', bottom: { xs: -40, md: -65 } },
-            ]}
-          >
-            {'”'}
-          </Box>
-        </Title>
-      </Box>
-      <Box sx={{ mb: 11.5, color: 'primary.main' }}>
+        </Box>
         <Box
-          sx={{
-            fontFamily: headerFontFamily,
-            fontWeight: 800,
-            fontSize: 21,
-            lineHeight: '26px',
-            letterSpacing: 1,
-            textTransform: 'uppercase',
-          }}
-        >
-          {person.name}
-        </Box>
-        <Box sx={{ fontWeight: 400, fontSize: 18, lineHeight: '150%' }}>
-          {person.role}
-        </Box>
+          component="img"
+          src={logo.src}
+          alt={logo.alt}
+          sx={{ maxWidth: 236 }}
+        />
       </Box>
-      <Box
-        component="img"
-        src={logo.src}
-        alt={logo.alt}
-        sx={{ maxWidth: 236 }}
-      />
     </Box>
   );
 };

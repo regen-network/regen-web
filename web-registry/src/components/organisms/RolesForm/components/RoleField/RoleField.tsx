@@ -67,7 +67,10 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
     const [inputValue, setInputValue] = useState<string>('');
     const debouncedValue = useDebounce(inputValue);
 
-    useEffect(() => setDebouncedValue(debouncedValue));
+    useEffect(
+      () => setDebouncedValue(debouncedValue),
+      [setDebouncedValue, debouncedValue],
+    );
 
     useEffect(() => {
       if (inputValue === '') {

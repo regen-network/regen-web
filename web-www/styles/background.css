@@ -1,0 +1,17 @@
+.topo-background {
+  background-image: url(./assets/svgs/shared/topographic-light.svg);
+  background-size: auto;
+  background-repeat: repeat;
+  background-position: center;
+  border-top: 1px solid #d2d5d9;
+  border-bottom: 1px solid #d2d5d9;
+}
+
+.topo-background-alternate:nth-of-type(even) {
+  background-image: url(./assets/svgs/shared/topographic-light.svg);
+  background-size: auto;
+  background-repeat: repeat;
+  background-position: center;
+  border-top: 1px solid #d2d5d9;
+  border-bottom: 1px solid #d2d5d9;
+}

@@ -1,0 +1,5 @@
+fragment resourcesSectionsFields on ResourcesPage {
+  resourcesSections {
+    ...resourceFields
+  }
+}

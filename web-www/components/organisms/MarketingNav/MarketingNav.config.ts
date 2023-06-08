@@ -1,5 +1,5 @@
 import { HeaderColors } from 'web-components/lib/components/header';
-import { HeaderMenuItem } from 'web-components/lib/components/header/components/MenuItem/MenuItem';
+import { Item } from 'web-components/lib/components/header/components/HeaderMenuItem/HeaderMenuItem';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 interface BoolProps {
@@ -47,7 +47,7 @@ export const headerNoBorderBottomPages = [
   '/case-studies',
 ];
 
-export const menuItems: HeaderMenuItem[] = [
+export const menuItems: Item[] = [
   {
     title: 'NCT',
     href: 'https://regennetwork.notion.site/A-Guide-to-Nature-Carbon-Ton-NCT-8204ea9d20d0436281f49b8fd1b3fbd2',

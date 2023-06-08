@@ -23,7 +23,6 @@ import { useWallet } from '../../../lib/wallet/wallet';
 import { useProjectEditContext } from '../../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../../molecules';
 import { ProfileModalSchemaType } from './components/ProfileModal/ProfileModal.schema';
-import { useDebounce } from './components/RoleField/hooks/useDebounce';
 import { RoleField } from './components/RoleField/RoleField';
 import { rolesFormSchema, RolesFormSchemaType } from './RolesForm.schema';
 
@@ -90,24 +89,21 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     }),
   );
 
-  // TODO refactor
-  const [inputProjectDeveloper, setInputProjectDeveloper] = useState('');
-  const debouncedInputProjectDeveloper = useDebounce(inputProjectDeveloper);
+  const [projectDeveloperValue, setProjectDeveloperValue] = useState('');
   const { data: partiesProjectDeveloper } = useQuery(
     getPartiesByNameOrAddrQuery({
       client: graphqlClient,
-      enabled: !!graphqlClient && !!debouncedInputProjectDeveloper,
-      input: debouncedInputProjectDeveloper,
+      enabled: !!graphqlClient && !!projectDeveloperValue,
+      input: projectDeveloperValue,
     }),
   );
 
-  const [inputVerifier, setInputVerifier] = useState('');
-  const debouncedInputVerifier = useDebounce(inputVerifier);
+  const [verifierValue, setVerifierValue] = useState('');
   const { data: partiesVerifier } = useQuery(
     getPartiesByNameOrAddrQuery({
       client: graphqlClient,
-      enabled: !!graphqlClient && !!debouncedInputVerifier,
-      input: debouncedInputVerifier,
+      enabled: !!graphqlClient && !!verifierValue,
+      input: verifierValue,
     }),
   );
 
@@ -120,8 +116,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
           description="The individual or organization that is in charge of managing the project and will appear on the project page"
           setValue={setProjectDeveloper}
           value={projectDeveloper}
-          setInputValue={setInputProjectDeveloper}
-          inputValue={inputProjectDeveloper}
+          setDebouncedValue={setProjectDeveloperValue}
           partiesByAccountId={partiesByAccountId}
           parties={partiesProjectDeveloper}
           {...form.register('projectDeveloper')}
@@ -132,8 +127,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
           description="A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
           setValue={setVerifier}
           value={verifier}
-          setInputValue={setInputVerifier}
-          inputValue={inputVerifier}
+          setDebouncedValue={setVerifierValue}
           partiesByAccountId={partiesByAccountId}
           parties={partiesVerifier}
           {...form.register('verifier')}

@@ -10,6 +10,7 @@ import { PartiesByAccountIdQuery } from '../../../../../generated/graphql';
 import { DEFAULT_PROFILE_TYPE } from '../../../../../pages/ProfileEdit/ProfileEdit.constants';
 import { ProfileModal } from '../ProfileModal/ProfileModal';
 import { ProfileModalSchemaType } from '../ProfileModal/ProfileModal.schema';
+import { useDebounce } from './hooks/useDebounce';
 import { useSaveProfile } from './hooks/useSaveProfile';
 import { PLACEHOLDER } from './RoleField.constants';
 import { RoleFieldGroup } from './RoleField.Group';
@@ -32,8 +33,7 @@ interface Props {
   description?: string;
   label?: string;
   optional?: boolean | string;
-  setInputValue: UseStateSetter<string>;
-  inputValue: string;
+  setDebouncedValue: UseStateSetter<string>;
   setValue: (value: ProfileModalSchemaType | null) => void;
   value?: ProfileModalSchemaType | null;
   partiesByAccountId?: PartiesByAccountIdQuery | null;
@@ -50,8 +50,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
       description,
       setValue,
       value,
-      setInputValue,
-      inputValue,
+      setDebouncedValue,
       partiesByAccountId,
       parties,
     }: Props,
@@ -65,6 +64,10 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
     const [profileAdd, setProfileAdd] = useState<ProfileModalSchemaType | null>(
       null,
     );
+    const [inputValue, setInputValue] = useState<string>('');
+    const debouncedValue = useDebounce(inputValue);
+
+    useEffect(() => setDebouncedValue(debouncedValue));
 
     useEffect(() => {
       if (inputValue === '') {

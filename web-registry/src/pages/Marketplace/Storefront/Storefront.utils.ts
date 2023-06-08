@@ -1,5 +1,10 @@
 import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
-import { EEUR_DENOM, REGEN_DENOM, USD_DENOMS } from 'config/allowedBaseDenoms';
+import {
+  EEUR_DENOM,
+  EVMOS_DENOM,
+  REGEN_DENOM,
+  USD_DENOMS,
+} from 'config/allowedBaseDenoms';
 
 import { Item } from 'web-components/lib/components/modal/ConfirmModal';
 
@@ -86,7 +91,7 @@ export const getAskUsdAmount = ({
   askBaseDenom,
   geckoPrices,
 }: GetAskUsdAmountParams): number => {
-  const { eeurPrice, regenPrice, usdcPrice } = geckoPrices ?? {};
+  const { eeurPrice, regenPrice, usdcPrice, evmosPrice } = geckoPrices ?? {};
   let denomPrice = 0;
 
   if (USD_DENOMS.includes(askBaseDenom)) {
@@ -99,6 +104,10 @@ export const getAskUsdAmount = ({
 
   if (eeurPrice && askBaseDenom === EEUR_DENOM) {
     denomPrice = eeurPrice;
+  }
+
+  if (evmosPrice && askBaseDenom === EVMOS_DENOM) {
+    denomPrice = evmosPrice;
   }
 
   return microToDenom(askAmount) * denomPrice;

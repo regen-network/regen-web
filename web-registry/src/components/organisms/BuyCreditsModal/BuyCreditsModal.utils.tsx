@@ -62,13 +62,14 @@ export const getSellOrderLabel = ({
   allowedDenomsData,
   setSelectedProjectById,
 }: GetSellOrderLabelParams): JSX.Element => {
-  const { id, askAmount, askDenom, quantity, batchDenom } = {
+  const { id, askAmount, askDenom, askBaseDenom, quantity, batchDenom } = {
     ...sellOrder,
   };
   const price = microToDenom(askAmount);
   const displayDenom = findDisplayDenom({
     allowedDenomsData,
-    denom: askDenom,
+    bankDenom: askDenom,
+    baseDenom: askBaseDenom,
   });
   const truncatedQuantity = floorFloatNumber(parseFloat(quantity));
 

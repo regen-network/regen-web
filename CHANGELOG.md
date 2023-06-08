@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/regen-network/regen-web/compare/v1.6.0...v1.7.0) (2023-06-06)
+
+### Bug Fixes
+
+- use base denom as fallback ([6b1fcfb](https://github.com/regen-network/regen-web/commit/6b1fcfb7b87c1b84c4a3a32e832b3cbcbf34e3a7))
+
+### Features
+
+- handle EVMOS denom ([cd03f1e](https://github.com/regen-network/regen-web/commit/cd03f1ef7bd231c1c2cf0883869d4ffca7dcc5f6))
+- update base denom ([2396be7](https://github.com/regen-network/regen-web/commit/2396be759eb77d16a59d6790ff0a02aad5c2f87d))
+
 # [1.6.0](https://github.com/regen-network/regen-web/compare/v1.5.2...v1.6.0) (2023-05-17)
 
 ### Bug Fixes

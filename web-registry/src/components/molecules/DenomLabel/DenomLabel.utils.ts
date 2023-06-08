@@ -2,22 +2,24 @@ import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/reg
 import { UPPERCASE_DENOM } from 'config/allowedBaseDenoms';
 
 type Params = {
-  denom: string;
+  bankDenom: string;
+  baseDenom?: string;
   allowedDenomsData?: QueryAllowedDenomsResponse;
 };
 
 export const findDisplayDenom = ({
   allowedDenomsData,
-  denom,
+  bankDenom,
+  baseDenom,
 }: Params): string => {
   const allowedDenom = allowedDenomsData?.allowedDenoms?.find(
-    allowedDenom => allowedDenom.bankDenom === denom,
+    allowedDenom => allowedDenom.bankDenom === bankDenom,
   );
-  const displayDenom = allowedDenom?.displayDenom;
+  const displayDenom = allowedDenom?.displayDenom ?? baseDenom;
   const result =
-    displayDenom && UPPERCASE_DENOM.includes(denom)
+    displayDenom && UPPERCASE_DENOM.includes(baseDenom ?? bankDenom)
       ? displayDenom.toUpperCase()
       : displayDenom;
 
-  return result ?? denom;
+  return result ?? bankDenom;
 };

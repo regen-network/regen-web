@@ -1,15 +1,21 @@
 import { Box, Card, CardContent, CardMedia, SxProps } from '@mui/material';
 
+import { CardRibbon } from '../../../components/atoms/CardRibbon/CardRibbon';
 import { Theme } from '../../../theme/muiTheme';
+import { LinkType } from '../../../types/shared/linkType';
 import { parseText } from '../../../utils/textParser';
 import { OptimizeImageProps } from '../../image';
 import { Body, Subtitle, Title } from '../../typography';
 import { useCreditClassCardStyles } from './CreditClassCard.styles';
+import { CreditClassCardItemType } from './CreditClassCard.types';
 
 export interface Props extends OptimizeImageProps {
+  type: CreditClassCardItemType;
   title: string | JSX.Element;
   description: string | JSX.Element;
   imgSrc: string;
+  generationMethod: CreditClassCardItemType;
+  methodology: LinkType;
   sx?: SxProps<Theme>;
 }
 
@@ -17,8 +23,7 @@ const CreditClassCard = ({
   title,
   description,
   imgSrc,
-  apiServerUrl,
-  imageStorageBaseUrl,
+  type,
   sx = [],
 }: Props): JSX.Element => {
   const { classes } = useCreditClassCardStyles();
@@ -33,13 +38,19 @@ const CreditClassCard = ({
       <Card
         elevation={1}
         sx={{
+          position: 'relative',
           display: 'flex',
-          flexDirection: ['column', 'row'],
+          flexDirection: { xs: 'column', sm: 'row' },
           border: '1px solid',
           borderColor: 'grey.100',
           borderRadius: '10px',
         }}
       >
+        <CardRibbon
+          icon={type.icon}
+          label={type.name}
+          sx={{ position: 'absolute', left: 0, top: 48 }}
+        />
         <CardMedia image={imgSrc || ''} className={classes.image} />
         <CardContent>
           <Subtitle

@@ -2,7 +2,9 @@ import { AutocompleteRenderGroupParams, Box } from '@mui/material';
 
 import { Label } from 'web-components/lib/components/typography';
 
-type ProfileGroupProps = { params: AutocompleteRenderGroupParams };
+type ProfileGroupProps = {
+  params: AutocompleteRenderGroupParams;
+};
 
 export const ProfileGroup: React.FC<ProfileGroupProps> = ({ params }) => (
   <li key={params.key}>

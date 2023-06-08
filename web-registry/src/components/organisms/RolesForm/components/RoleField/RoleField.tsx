@@ -1,30 +1,28 @@
 import { forwardRef, useEffect, useState } from 'react';
-import {
-  ApolloClient,
-  NormalizedCacheObject,
-  useApolloClient,
-} from '@apollo/client';
 import { Autocomplete, TextField } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
 
 import FieldFormControl from 'web-components/lib/components/inputs/new/FieldFormControl/FieldFormControl';
-import { truncate } from 'web-components/lib/utils/truncate';
-import { UseStateSetter } from 'web-components/src/types/react/useState';
+import { UseStateSetter } from 'web-components/lib/types/react/useState';
 
-import { getPartiesByNameOrAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartiesByNameOrAddr/getPartiesByNameOrAddrQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { PartiesByAccountIdQuery } from '../../../../../generated/graphql';
-import { DEFAULT_NAME } from '../../../../../pages/ProfileEdit/ProfileEdit.constants';
+import { DEFAULT_PROFILE_TYPE } from '../../../../../pages/ProfileEdit/ProfileEdit.constants';
 import { ProfileModal } from '../ProfileModal/ProfileModal';
 import { ProfileModalSchemaType } from '../ProfileModal/ProfileModal.schema';
-import { useDebounce } from './hooks/useDebounce';
 import { useSaveProfile } from './hooks/useSaveProfile';
-import { AddNewProfile } from './RoleField.AddNewProfile';
-import { NoGroup } from './RoleField.NoGroup';
-import { ProfileGroup } from './RoleField.ProfileGroup';
+import { PLACEHOLDER } from './RoleField.constants';
+import { RoleFieldGroup } from './RoleField.Group';
+import { RoleFieldOption } from './RoleField.Option';
 import { useStyles } from './RoleField.styles';
-import { getParties, group, isProfile } from './RoleField.utils';
+import {
+  getIsOptionEqualToValue,
+  getOptionLabel,
+  getOptions,
+  getParties,
+  getValue,
+  isProfile,
+} from './RoleField.utils';
 
 interface Props {
   className?: string;
@@ -73,17 +71,25 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
         const yourProfiles = getParties(
           partiesByAccountId?.accountById?.partiesByAccountId?.nodes,
         );
-        setOptions(value ? [...yourProfiles, value] : yourProfiles);
+        setOptions([
+          {
+            id: '',
+            profileType: DEFAULT_PROFILE_TYPE,
+            profileImage: '',
+            name: PLACEHOLDER,
+          },
+          ...yourProfiles,
+        ]);
         return;
       }
 
       const searchProfiles = getParties(parties?.getPartiesByNameOrAddr?.nodes);
       setOptions(searchProfiles);
     }, [
-      value,
       inputValue,
       parties,
       partiesByAccountId?.accountById?.partiesByAccountId?.nodes,
+      value,
     ]);
 
     const closeProfileModal = (): void => {
@@ -107,67 +113,36 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
               paper: styles.paper,
               popupIndicator: styles.popupIndicator,
             }}
-            value={
-              value
-                ? {
-                    group: group(value, accountId),
-                    ...value,
-                  }
-                : null
-            }
-            isOptionEqualToValue={(option, value) =>
-              isProfile(option) && isProfile(value) && option.id === value.id
-            }
-            getOptionLabel={option =>
-              isProfile(option) ? option.name || DEFAULT_NAME : ''
-            }
-            renderOption={(props, option, state) => (
-              <li {...props} key={state.index}>
-                {isProfile(option)
-                  ? `${option.name || DEFAULT_NAME} (${truncate(
-                      option.address,
-                    )})`
-                  : option}
-              </li>
-            )}
-            filterOptions={x => x}
-            options={[
-              ...options
-                .map(option => ({
-                  group: group(option, accountId),
-                  ...option,
-                }))
-                .sort((a, b) => -b.group.localeCompare(a.group)),
-              <AddNewProfile setProfileAdd={setProfileAdd} />,
-            ]}
-            groupBy={option => (isProfile(option) ? option.group : '')}
-            renderGroup={params => {
-              return params.group ? (
-                <ProfileGroup key={params.key} params={params} />
-              ) : (
-                <NoGroup key={params.key} params={params} />
-              );
-            }}
-            autoComplete
             onChange={(event, newValue, reason) => {
               if (newValue && isProfile(newValue)) {
-                setOptions(newValue ? [newValue, ...options] : options);
                 setValue(newValue);
+                setInputValue('');
               }
               if (reason === 'clear') {
                 setValue(null);
               }
             }}
             onInputChange={(event, newInputValue) => {
-              setInputValue(newInputValue);
+              if (event) setInputValue(newInputValue);
             }}
             renderInput={params => (
               <TextField
                 {...params}
-                placeholder="Choose from your profiles or search all profiles by name or address"
+                placeholder={PLACEHOLDER}
                 variant="outlined"
               />
             )}
+            value={getValue(value, accountId)}
+            isOptionEqualToValue={getIsOptionEqualToValue}
+            getOptionLabel={getOptionLabel}
+            renderOption={(props, option) => (
+              <RoleFieldOption props={props} option={option} />
+            )}
+            filterOptions={x => x}
+            options={getOptions(options, setProfileAdd, accountId)}
+            groupBy={option => (isProfile(option) ? option.group : '')}
+            renderGroup={params => <RoleFieldGroup params={params} />}
+            autoComplete
           />
         </FieldFormControl>
         {profileAdd && (

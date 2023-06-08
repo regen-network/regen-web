@@ -16,52 +16,52 @@ const nextConfig = {
       {
         source: '/fund/',
         destination: '/',
-        permanent: true,
+        permanent: false,
       },
       {
         source: '/partners/',
         destination: '/',
-        permanent: true,
+        permanent: false,
       },
       {
         source: '/developers/',
         destination: '/',
-        permanent: true,
+        permanent: false,
       },
       {
         source: '/validators/',
         destination: '/',
-        permanent: true,
+        permanent: false,
       },
       {
         source: '/mainnet/',
         destination: '/',
-        permanent: true,
+        permanent: false,
       },
       {
         source: '/community/',
         destination: '/',
-        permanent: true,
+        permanent: false,
       },
       {
         source: '/science/',
         destination: '/',
-        permanent: true,
+        permanent: false,
       },
       {
         source: '/case-studies/eco-cacao',
         destination: '/',
-        permanent: true,
+        permanent: false,
       },
       {
         source: '/case-studies/fibershed',
         destination: '/',
-        permanent: true,
+        permanent: false,
       },
       {
         source: '/case-studies/walkers-institute',
         destination: '/',
-        permanent: true,
+        permanent: false,
       },
     ];
   },

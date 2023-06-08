@@ -1,0 +1,5 @@
+fragment imageFields on Image {
+  asset {
+    url
+  }
+}

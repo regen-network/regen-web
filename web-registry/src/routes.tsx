@@ -2,6 +2,7 @@ import { lazy } from 'react';
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
   Outlet,
   Route,
   RouteObject,
@@ -41,7 +42,6 @@ const CreateCreditClassInfo = lazy(
   () => import('./pages/CreateCreditClassInfo'),
 );
 const CreateCreditClass = lazy(() => import('./pages/CreateCreditClass'));
-const CreateMethodology = lazy(() => import('./pages/CreateMethodology'));
 const CreditClassDetails = lazy(() => import('./pages/CreditClassDetails'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Description = lazy(() => import('./pages/Description'));
@@ -52,9 +52,6 @@ const Home = lazy(() => import('./pages/Home'));
 const LandStewards = lazy(() => import('./pages/LandStewards'));
 const Media = lazy(() => import('./pages/Media'));
 const MethodologyDetails = lazy(() => import('./pages/MethodologyDetails'));
-const MethodologyReviewProcess = lazy(
-  () => import('./pages/MethodologyReviewProcess'),
-);
 const NotFoundPage = lazy(() => import('./pages/NotFound'));
 const Project = lazy(() => import('./pages/Project'));
 const Projects = lazy(() => import('./pages/Projects'));
@@ -94,7 +91,10 @@ export const getRoutes = ({
         <Route path="verify-email" element={<VerifyEmail />} />
         <Route path="add" element={<Additionality />} />
         <Route path="buyers" element={<BuyersPage />} />
-        <Route path="create-methodology" element={<CreateMethodology />} />
+        <Route
+          path="create-methodology"
+          element={<Navigate to="/" replace />}
+        />
         <Route
           // TODO: thould this route be moved to /credit-classes?
           path="create-credit-class"
@@ -103,7 +103,7 @@ export const getRoutes = ({
         <Route path="project-developers" element={<LandStewards />} />
         <Route
           path="methodology-review-process"
-          element={<MethodologyReviewProcess />}
+          element={<Navigate to="/" replace />}
         />
         <Route
           path="projects/:page"
@@ -235,10 +235,7 @@ export const getRoutes = ({
               path="buyer"
               element={<CreditClassDetails isLandSteward={false} />}
             />
-            <Route
-              path="land-steward"
-              element={<CreditClassDetails isLandSteward={true} />}
-            />
+            <Route path="land-steward" element={<Navigate to="/" replace />} />
           </Route>
           <Route
             path="create"

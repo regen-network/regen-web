@@ -12,6 +12,7 @@ import { QueryClient } from '@tanstack/react-query';
 
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 
+import { CertificatePage } from 'pages/Certificate/Certificate';
 import MyBridge from 'pages/Dashboard/MyBridge';
 import { MyBridgableEcocreditsTable } from 'pages/Dashboard/MyBridge/MyBridge.BridgableEcocreditsTable';
 import { MyBridgedEcocreditsTable } from 'pages/Dashboard/MyBridge/MyBridge.BridgedEcocreditsTable';
@@ -252,6 +253,10 @@ export const getRoutes = ({
           loader={storefrontLoader({
             queryClient: reactQueryClient,
           })}
+        />
+        <Route
+          path="certificate/:certificateId"
+          element={<CertificatePage />}
         />
         <Route path="*" element={<NotFoundPage />} />
       </Route>

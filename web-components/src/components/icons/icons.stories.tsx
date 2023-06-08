@@ -14,6 +14,7 @@ import AvatarOutlineIcon from './AvatarOutlineIcon';
 import BlockIcon from './BlockIcon';
 import BreadcrumbIcon from './BreadcrumbIcon';
 import { BrokenLinkIcon } from './BrokenLinkIcon';
+import CarbonOffsetBadgeIcon from './CarbonOffsetBadgeIcon';
 import CelebrateRegenIcon from './CelebrateRegenIcon';
 import CertifiedDocumentIcon from './CertifiedDocumentIcon';
 import CheckedIcon from './CheckedIcon';
@@ -175,6 +176,10 @@ export const allIcons = (): JSX.Element => (
     />
 
     <LabeledIcon icon={<BrokenLinkIcon />} label="BrokenLinkIcon" />
+    <LabeledIcon
+      icon={<CarbonOffsetBadgeIcon />}
+      label="CarbonOffsetBadgeIcon"
+    />
     <LabeledIcon
       icon={<CelebrateRegenIcon sx={{ fontSize: 64 }} />}
       label="CelebrateRegenIcon"

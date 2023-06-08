@@ -1,316 +1,244 @@
-import Grid from '@mui/material/Grid';
+import { Box } from '@mui/material';
 import ReactHtmlParser from 'html-react-parser';
-import { makeStyles } from 'tss-react/mui';
 
+import { headerFontFamily, pxToRem } from '../../theme/muiTheme';
+import { LinkComponentType } from '../../types/shared/linkComponentType';
+import { LinkType } from '../../types/shared/linkType';
 import { pluralize } from '../../utils/pluralize';
+import CarbonOffsetBadgeIcon from '../icons/CarbonOffsetBadgeIcon';
 import RegenIcon from '../icons/RegenIcon';
-import { Title } from '../typography';
-
-export interface StakeholderInfo {
-  companyName: string;
-  personName: string;
-  personRole: string;
-  label: string;
-}
-
-interface StyleProps {
-  background?: string;
-}
+import { Body, Subtitle, Title } from '../typography';
+import { certificateFormater, certificateOptions } from './certificate.config';
+import {
+  EQUIVALENT_TO,
+  NUMBER_OF_CREDITS,
+  RETIREMENT_LOCATION,
+  RETIREMENT_REASON,
+  TONS_OF_CO2,
+  TX_HASH,
+} from './certificate.constants';
+import { CertificateItem } from './certificate.Item';
+import { useCertificateStyles } from './certificate.styles';
+import { ItemLink } from './certificate.types';
 
 interface CertificateProps {
-  background: string;
-  creditName: string;
-  certificateTitle: string;
-  creditUnitName?: string;
-  projectName: string;
-  creditsUnits: number;
-  equivalentTonsCO2: number;
-  buyerName: string;
   date: string | Date;
-  stakeholders: StakeholderInfo[];
-  retired?: boolean;
-}
-
-const useStyles = makeStyles<StyleProps>()((theme, { background }) => ({
-  root: {
-    backgroundImage: `url("${background}")`,
-    backgroundSize: 'cover',
-    [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(8),
-    },
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(3),
-    },
-  },
-  content: {
-    backgroundColor: theme.palette.primary.main,
-    border: `1px solid ${theme.palette.grey[100]}`,
-    [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(9.25)} ${theme.spacing(18.75)} ${theme.spacing(
-        12.5,
-      )}`,
-    },
-    [theme.breakpoints.down('sm')]: {
-      padding: `${theme.spacing(3.25)} ${theme.spacing(2.75)} ${theme.spacing(
-        7.25,
-      )}`,
-    },
-  },
-  bannerSide: {
-    backgroundColor: theme.palette.secondary.dark,
-    position: 'absolute',
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(16),
-      height: theme.spacing(21.75),
-      bottom: theme.spacing(-5.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      width: theme.spacing(6),
-      height: theme.spacing(8),
-      bottom: theme.spacing(-2.12),
-    },
-  },
-  whiteTriangle: {
-    width: 0,
-    height: 0,
-    borderStyle: 'solid',
-    [theme.breakpoints.up('sm')]: {
-      borderWidth: `${theme.spacing(10.875)} 0 ${theme.spacing(
-        10.875,
-      )} ${theme.spacing(5)}`,
-    },
-    [theme.breakpoints.down('sm')]: {
-      borderWidth: `${theme.spacing(4)} 0 ${theme.spacing(4)} ${theme.spacing(
-        1.85,
-      )}`,
-    },
-    borderColor: `transparent transparent transparent ${theme.palette.primary.main}`,
-  },
-  greenTriangle: {
-    width: 0,
-    height: 0,
-    position: 'absolute',
-    right: 0,
-    bottom: 0,
-    borderStyle: 'solid',
-    [theme.breakpoints.up('sm')]: {
-      borderWidth: `0 ${theme.spacing(5.5)} ${theme.spacing(5.5)} 0`,
-    },
-    [theme.breakpoints.down('sm')]: {
-      borderWidth: `0 ${theme.spacing(2)} ${theme.spacing(2)} 0`,
-    },
-    borderColor: `transparent ${theme.palette.secondary.contrastText} transparent transparent`,
-  },
-  bannerSideRight: {
-    transform: 'scale(-1, 1)',
-    right: 0,
-  },
-  bannerContent: {
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.primary.main,
-    lineHeight: '130%',
-    [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(4.5)} ${theme.spacing(7)}`,
-      marginLeft: theme.spacing(9.5),
-      marginRight: theme.spacing(9.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      // width: theme.spacing(59.5),
-      padding: `${theme.spacing(1.75)} ${theme.spacing(3.5)}`,
-      fontSize: theme.spacing(3.25),
-      marginLeft: theme.spacing(3.65),
-      marginRight: theme.spacing(3.65),
-    },
-    zIndex: 1,
-    position: 'relative',
-    textAlign: 'center',
-  },
-  banner: {
-    position: 'relative',
-    margin: '0 auto',
-    [theme.breakpoints.up('sm')]: {
-      maxWidth: theme.spacing(180),
-      marginTop: theme.spacing(31),
-      marginBottom: theme.spacing(2.5 + 5.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      maxWidth: theme.spacing(67),
-      marginTop: theme.spacing(11.5),
-      marginBottom: theme.spacing(1 + 2.12),
-    },
-  },
-  icon: {
-    float: 'right',
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(43.75),
-      height: theme.spacing(18.25),
-    },
-    [theme.breakpoints.down('sm')]: {
-      width: theme.spacing(15.5),
-      height: theme.spacing(7),
-    },
-  },
-  text: {
-    margin: '0 auto',
-    textAlign: 'center',
-    [theme.breakpoints.up('sm')]: {
-      maxWidth: theme.spacing(135.75),
-      fontSize: theme.spacing(5),
-      paddingBottom: theme.spacing(25),
-      lineHeight: '180%',
-    },
-    [theme.breakpoints.down('sm')]: {
-      maxWidth: theme.spacing(54.75),
-      fontSize: theme.spacing(2.9),
-      paddingBottom: theme.spacing(6),
-      lineHeight: '155%',
-    },
-  },
-  personName: {
-    color: theme.palette.info.dark,
-    fontFamily: '"FoxesInLove",-apple-system,sans-serif',
-    letterSpacing: '2px',
-    [theme.breakpoints.up('sm')]: {
-      lineHeight: '150%',
-      fontSize: theme.spacing(4),
-    },
-    [theme.breakpoints.down('sm')]: {
-      lineHeight: '140%',
-      fontSize: theme.spacing(1.75),
-    },
-  },
-  companyInfo: {
-    fontWeight: 700,
-    [theme.breakpoints.up('sm')]: {
-      lineHeight: '150%',
-      fontSize: theme.spacing(3.5),
-      paddingTop: theme.spacing(3.75),
-      paddingBottom: theme.spacing(1.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      lineHeight: '140%',
-      fontSize: theme.spacing(1.5),
-      paddingTop: theme.spacing(1),
-      paddingBottom: theme.spacing(0.75),
-    },
-  },
-  personInfo: {
-    color: theme.palette.info.main,
-    [theme.breakpoints.up('sm')]: {
-      lineHeight: '150%',
-      fontSize: theme.spacing(3),
-    },
-    [theme.breakpoints.down('sm')]: {
-      lineHeight: '140%',
-      fontSize: theme.spacing(1.5),
-    },
-  },
-  hr: {
-    [theme.breakpoints.up('sm')]: {
-      marginRight: theme.spacing(9.75),
-      border: `1px solid ${theme.palette.info.main}`,
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginRight: theme.spacing(3.5),
-      border: `0.5px solid ${theme.palette.info.main}`,
-    },
-  },
-}));
-
-const formater = new Intl.NumberFormat('en-US');
-const options: Intl.DateTimeFormatOptions = {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-};
-
-function Stakeholder({
-  info,
-  total,
-}: {
-  info: StakeholderInfo;
-  total: number;
-}): JSX.Element {
-  const { classes } = useStyles({});
-
-  return (
-    <Grid item xs={6}>
-      <div className={classes.personName}>{info.personName}</div>
-      <hr className={classes.hr} />
-      <div className={classes.companyInfo}>
-        {info.label}: {info.companyName}
-      </div>
-      <div className={classes.personInfo}>
-        {info.personName}, {info.personRole}
-      </div>
-    </Grid>
-  );
+  txHash: LinkType;
+  certificateTitle: string;
+  creditsUnits: number;
+  creditUnitName?: string;
+  equivalentTonsCO2: number;
+  itemLinks: ItemLink[];
+  retirementReason?: string;
+  retirementLocation?: string;
+  background: string;
+  linkComponent: LinkComponentType;
 }
 
 export default function Certificate({
-  background,
-  creditName,
-  certificateTitle,
-  creditUnitName,
-  projectName,
-  creditsUnits,
-  equivalentTonsCO2,
-  buyerName,
   date,
-  stakeholders,
-  retired = true,
+  txHash,
+  certificateTitle,
+  creditsUnits,
+  creditUnitName,
+  equivalentTonsCO2,
+  itemLinks,
+  retirementReason,
+  retirementLocation,
+  background,
+  linkComponent: LinkComponent,
 }: CertificateProps): JSX.Element {
-  const { classes, cx } = useStyles({ background });
+  const { classes, cx } = useCertificateStyles({ background });
 
   return (
-    <div className={classes.root}>
+    <Box className={classes.root}>
       <div className={classes.content}>
-        <RegenIcon className={classes.icon} />
-        <div className={classes.banner}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: { xs: 'flex-start', sm: 'center' },
+            justifyContent: 'space-between',
+            '@media print': { alignItems: 'flex-start' },
+          }}
+        >
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <Body
+              size="sm"
+              sx={{
+                mb: { xs: 0.5, sm: 2 },
+                color: { xs: 'info.main', sm: 'info.dark' },
+                '@media print': {
+                  mb: 0.5,
+                  color: 'info.main',
+                  fontSize: pxToRem(10),
+                },
+              }}
+            >
+              {new Date(date).toLocaleDateString('en-US', certificateOptions)}
+            </Body>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: { xs: 'column', sm: 'row' },
+                alignItems: { sm: 'center' },
+                '@media print': {
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                },
+              }}
+            >
+              <Box
+                sx={{
+                  textTransform: 'uppercase',
+                  fontWeight: '800',
+                  fontFamily: headerFontFamily,
+                  fontSize: pxToRem(10),
+                  letterSpacing: 1,
+                  color: { xs: 'info.main', sm: 'info.dark' },
+                  '@media print': {
+                    color: 'info.main',
+                    lineHeight: 0.4,
+                  },
+                  mr: 1,
+                }}
+              >
+                {`${TX_HASH}: `}
+              </Box>
+              <Body
+                size="sm"
+                sx={{
+                  textDecoration: 'underline',
+                  '& > a.MuiLink-root': {
+                    color: { xs: 'info.main', sm: 'info.dark' },
+                    '@media print': {
+                      color: 'info.main',
+                      fontSize: pxToRem(10),
+                      lineHeight: 0.4,
+                    },
+                    fontWeight: 400,
+                  },
+                }}
+              >
+                <LinkComponent href={txHash.href} sx={{}}>
+                  {txHash.text}
+                </LinkComponent>
+              </Body>
+            </Box>
+          </Box>
+          <RegenIcon className={classes.icon} />
+        </Box>
+        <Box className={classes.banner} sx={{ position: 'relative' }}>
           <div className={classes.bannerSide}>
-            <div className={classes.whiteTriangle} />
+            <Box className={classes.whiteTriangle} />
             <div className={classes.greenTriangle} />
           </div>
-          <Title variant="h3" className={classes.bannerContent}>
-            Certificate of {certificateTitle}
+          <Title
+            variant="h3"
+            mobileVariant="textSmall"
+            className={classes.bannerContent}
+            sx={{ '@media print': { fontSize: pxToRem(12) } }}
+          >
+            {certificateTitle}
           </Title>
+          <Box
+            sx={{
+              position: 'absolute',
+              top: { xs: -76, sm: -120 },
+              zIndex: 1,
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              '@media print': { top: -62 },
+            }}
+          >
+            <CarbonOffsetBadgeIcon
+              sx={{
+                fontSize: { xs: 91, sm: 145 },
+                '@media print': { fontSize: 75 },
+              }}
+            />
+          </Box>
           <div className={cx(classes.bannerSideRight, classes.bannerSide)}>
-            <div className={classes.whiteTriangle} />
+            <Box className={classes.whiteTriangle} />
             <div className={classes.greenTriangle} />
           </div>
-        </div>
+        </Box>
         <div className={classes.text}>
-          Credits:{' '}
-          <b>
-            {formater.format(creditsUnits)}{' '}
-            {ReactHtmlParser(
-              creditUnitName
-                ? pluralize(creditsUnits, creditUnitName)
-                : creditName,
-            )}
-          </b>
-          <br />
-          Equivalent to:{' '}
-          <b>{formater.format(equivalentTonsCO2)} tons of CO2e</b>
-          <br />
-          Project: <b>{projectName}</b>
-          <br />
-          Beneficiary: <b>{buyerName}</b>
-          <br />
-          {retired && (
-            <>
-              Retirement: <b>Voluntary</b>
-              <br />
-            </>
-          )}
-          Date: <b>{new Date(date).toLocaleDateString('en-US', options)}</b>
-        </div>
-        <Grid container>
-          {stakeholders.map((s, i) => (
-            <Stakeholder key={i} info={s} total={stakeholders.length} />
+          <CertificateItem
+            name={NUMBER_OF_CREDITS}
+            sx={{ mb: { xs: 1.25, sm: 2.5 }, '@media print': { mb: 0 } }}
+          >
+            <Subtitle
+              as="span"
+              size="lg"
+              mobileSize="md"
+              sx={{ '@media print': { fontSize: 9, lineHeight: 0.4 } }}
+            >
+              {certificateFormater.format(creditsUnits)}{' '}
+              {creditUnitName &&
+                ReactHtmlParser(pluralize(creditsUnits, creditUnitName))}
+            </Subtitle>
+          </CertificateItem>
+          <CertificateItem
+            name={EQUIVALENT_TO}
+            sx={{ mb: { xs: 1.25, sm: 2.5 }, '@media print': { mb: 0 } }}
+          >
+            <Subtitle
+              as="span"
+              size="lg"
+              mobileSize="md"
+              sx={{ '@media print': { fontSize: 9, lineHeight: 0.4 } }}
+            >
+              {certificateFormater.format(equivalentTonsCO2)} {TONS_OF_CO2}
+            </Subtitle>
+          </CertificateItem>
+          {itemLinks.map(itemLink => (
+            <CertificateItem
+              name={itemLink.name}
+              sx={{ mb: { xs: 1.25, sm: 2.5 }, '@media print': { mb: 0 } }}
+              key={itemLink.name}
+            >
+              <LinkComponent href={itemLink.link.href}>
+                <Subtitle
+                  as="span"
+                  size="lg"
+                  mobileSize="md"
+                  sx={{
+                    color: 'secondary.main',
+                    '@media print': { fontSize: 9, lineHeight: 0.4 },
+                  }}
+                >
+                  {itemLink.link.text}
+                </Subtitle>
+              </LinkComponent>
+            </CertificateItem>
           ))}
-        </Grid>
+          <CertificateItem
+            name={RETIREMENT_REASON}
+            sx={{ mb: 2.5, '@media print': { mb: 0 } }}
+          >
+            <Body
+              sx={{
+                '@media print': { fontSize: 9, lineHeight: 0.8 },
+              }}
+            >
+              {retirementReason}
+            </Body>
+          </CertificateItem>
+          <CertificateItem
+            name={RETIREMENT_LOCATION}
+            sx={{ mb: 2.5, '@media print': { mb: 0 } }}
+          >
+            <Body
+              sx={{
+                '@media print': { fontSize: 9, lineHeight: 0.8 },
+              }}
+            >
+              {retirementLocation}
+            </Body>
+          </CertificateItem>
+        </div>
       </div>
-    </div>
+    </Box>
   );
 }

@@ -103,6 +103,7 @@ const Footer: React.FC<
             color: 'info.contrastText',
           },
         },
+        displayPrint: 'none',
       }}
     >
       <Section>

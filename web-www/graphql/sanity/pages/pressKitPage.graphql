@@ -4,7 +4,6 @@ query pressKitPage {
     ...pressKitTitleDescriptionSectionFields
     ...pressKitEnableSectionFields
     ...pressKitTimelineSectionFields
-    ...pressKitTeamSectionFields
     ...pressKitFeaturedSectionFields
     ...pressKitAwardsSectionFields
     ...pressKitLogosSectionFields

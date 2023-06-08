@@ -45,7 +45,6 @@ const AwardsSection = ({ awardsSectionData }: Props): JSX.Element => {
       <ResponsiveSlider
         infinite={false}
         className={styles.slider}
-        itemWidth="90%"
         slidesToShow={4}
         items={items}
       />

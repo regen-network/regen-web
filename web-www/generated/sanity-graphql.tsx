@@ -7632,18 +7632,6 @@ export type PressKitPhotosSectionFieldsFragment = (
   )> }
 );
 
-export type PressKitTeamSectionFieldsFragment = (
-  { __typename?: 'PresskitPage' }
-  & { teamSection?: Maybe<(
-    { __typename?: 'PresskitTeamSection' }
-    & Pick<PresskitTeamSection, 'header' | 'buttonText'>
-    & { members?: Maybe<Array<Maybe<(
-      { __typename?: 'RegenTeamMember' }
-      & TeamMemberFieldsFragment
-    )>>> }
-  )> }
-);
-
 export type PressKitTimelineSectionFieldsFragment = (
   { __typename?: 'PresskitPage' }
   & { timelineSection?: Maybe<(
@@ -7790,51 +7778,6 @@ export type SharedSectionQuery = (
   & { allSharedSections: Array<(
     { __typename?: 'SharedSections' }
     & SharedNewsletterSectionFieldsFragment
-  )> }
-);
-
-export type TeamMemberFieldsFragment = (
-  { __typename?: 'RegenTeamMember' }
-  & Pick<RegenTeamMember, 'name' | 'title' | 'linkedinUrl' | 'twitterUrl' | 'githubUrl'>
-  & { image?: Maybe<(
-    { __typename?: 'Image' }
-    & { asset?: Maybe<(
-      { __typename?: 'SanityImageAsset' }
-      & Pick<SanityImageAsset, 'url'>
-    )> }
-  )> }
-);
-
-export type TeamSectionFieldsFragment = (
-  { __typename?: 'TeamSection' }
-  & Pick<TeamSection, 'title'>
-  & { members?: Maybe<Array<Maybe<(
-    { __typename?: 'RegenTeamMember' }
-    & TeamMemberFieldsFragment
-  )>>> }
-);
-
-export type TeamAdvisorSectionFieldsFragment = (
-  { __typename?: 'TeamPage' }
-  & { advisorSection?: Maybe<(
-    { __typename?: 'TeamSection' }
-    & TeamSectionFieldsFragment
-  )> }
-);
-
-export type TeamCoreSectionFieldsFragment = (
-  { __typename?: 'TeamPage' }
-  & { coreSection?: Maybe<(
-    { __typename?: 'TeamSection' }
-    & TeamSectionFieldsFragment
-  )> }
-);
-
-export type TeamTopSectionFieldsFragment = (
-  { __typename?: 'TeamPage' }
-  & { topSection?: Maybe<(
-    { __typename?: 'TitleBody' }
-    & Pick<TitleBody, 'title' | 'body'>
   )> }
 );
 
@@ -8064,7 +8007,6 @@ export type PressKitPageQuery = (
     & PressKitTitleDescriptionSectionFieldsFragment
     & PressKitEnableSectionFieldsFragment
     & PressKitTimelineSectionFieldsFragment
-    & PressKitTeamSectionFieldsFragment
     & PressKitFeaturedSectionFieldsFragment
     & PressKitAwardsSectionFieldsFragment
     & PressKitLogosSectionFieldsFragment
@@ -8082,19 +8024,6 @@ export type ResourcesPageQuery = (
     { __typename?: 'ResourcesPage' }
     & ResourcesTopSectionFieldsFragment
     & ResourcesSectionsFieldsFragment
-  )> }
-);
-
-export type TeamPageQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TeamPageQuery = (
-  { __typename?: 'RootQuery' }
-  & { allTeamPage: Array<(
-    { __typename?: 'TeamPage' }
-    & TeamTopSectionFieldsFragment
-    & TeamCoreSectionFieldsFragment
-    & TeamAdvisorSectionFieldsFragment
   )> }
 );
 
@@ -8386,31 +8315,6 @@ export const PressKitPhotosSectionFieldsFragmentDoc = gql`
   }
 }
     `;
-export const TeamMemberFieldsFragmentDoc = gql`
-    fragment teamMemberFields on RegenTeamMember {
-  name
-  title
-  image {
-    asset {
-      url
-    }
-  }
-  linkedinUrl
-  twitterUrl
-  githubUrl
-}
-    `;
-export const PressKitTeamSectionFieldsFragmentDoc = gql`
-    fragment pressKitTeamSectionFields on PresskitPage {
-  teamSection {
-    header
-    buttonText
-    members {
-      ...teamMemberFields
-    }
-  }
-}
-    ${TeamMemberFieldsFragmentDoc}`;
 export const PressKitTimelineSectionFieldsFragmentDoc = gql`
     fragment pressKitTimelineSectionFields on PresskitPage {
   timelineSection {
@@ -8478,36 +8382,6 @@ export const SharedNewsletterSectionFieldsFragmentDoc = gql`
   newsletter {
     title
     bodyRaw
-  }
-}
-    `;
-export const TeamSectionFieldsFragmentDoc = gql`
-    fragment teamSectionFields on TeamSection {
-  title
-  members {
-    ...teamMemberFields
-  }
-}
-    ${TeamMemberFieldsFragmentDoc}`;
-export const TeamAdvisorSectionFieldsFragmentDoc = gql`
-    fragment teamAdvisorSectionFields on TeamPage {
-  advisorSection {
-    ...teamSectionFields
-  }
-}
-    ${TeamSectionFieldsFragmentDoc}`;
-export const TeamCoreSectionFieldsFragmentDoc = gql`
-    fragment teamCoreSectionFields on TeamPage {
-  coreSection {
-    ...teamSectionFields
-  }
-}
-    ${TeamSectionFieldsFragmentDoc}`;
-export const TeamTopSectionFieldsFragmentDoc = gql`
-    fragment teamTopSectionFields on TeamPage {
-  topSection {
-    title
-    body
   }
 }
     `;
@@ -8922,7 +8796,6 @@ export const PressKitPageDocument = gql`
     ...pressKitTitleDescriptionSectionFields
     ...pressKitEnableSectionFields
     ...pressKitTimelineSectionFields
-    ...pressKitTeamSectionFields
     ...pressKitFeaturedSectionFields
     ...pressKitAwardsSectionFields
     ...pressKitLogosSectionFields
@@ -8934,7 +8807,6 @@ export const PressKitPageDocument = gql`
 ${PressKitTitleDescriptionSectionFieldsFragmentDoc}
 ${PressKitEnableSectionFieldsFragmentDoc}
 ${PressKitTimelineSectionFieldsFragmentDoc}
-${PressKitTeamSectionFieldsFragmentDoc}
 ${PressKitFeaturedSectionFieldsFragmentDoc}
 ${PressKitAwardsSectionFieldsFragmentDoc}
 ${PressKitLogosSectionFieldsFragmentDoc}
@@ -9003,44 +8875,6 @@ export function useResourcesPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type ResourcesPageQueryHookResult = ReturnType<typeof useResourcesPageQuery>;
 export type ResourcesPageLazyQueryHookResult = ReturnType<typeof useResourcesPageLazyQuery>;
 export type ResourcesPageQueryResult = Apollo.QueryResult<ResourcesPageQuery, ResourcesPageQueryVariables>;
-export const TeamPageDocument = gql`
-    query teamPage {
-  allTeamPage {
-    ...teamTopSectionFields
-    ...teamCoreSectionFields
-    ...teamAdvisorSectionFields
-  }
-}
-    ${TeamTopSectionFieldsFragmentDoc}
-${TeamCoreSectionFieldsFragmentDoc}
-${TeamAdvisorSectionFieldsFragmentDoc}`;
-
-/**
- * __useTeamPageQuery__
- *
- * To run a query within a React component, call `useTeamPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useTeamPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useTeamPageQuery({
- *   variables: {
- *   },
- * });
- */
-export function useTeamPageQuery(baseOptions?: Apollo.QueryHookOptions<TeamPageQuery, TeamPageQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<TeamPageQuery, TeamPageQueryVariables>(TeamPageDocument, options);
-      }
-export function useTeamPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TeamPageQuery, TeamPageQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<TeamPageQuery, TeamPageQueryVariables>(TeamPageDocument, options);
-        }
-export type TeamPageQueryHookResult = ReturnType<typeof useTeamPageQuery>;
-export type TeamPageLazyQueryHookResult = ReturnType<typeof useTeamPageLazyQuery>;
-export type TeamPageQueryResult = Apollo.QueryResult<TeamPageQuery, TeamPageQueryVariables>;
 export const TokenPageDocument = gql`
     query tokenPage {
   allTokenPage {

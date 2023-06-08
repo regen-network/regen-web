@@ -36,7 +36,6 @@ const FeaturedSection = ({ featuredSectionData }: Props): JSX.Element => {
       <ResponsiveSlider
         infinite={false}
         className={styles.slider}
-        itemWidth="90%"
         slidesToShow={3}
         items={items}
       />

@@ -1,7 +1,0 @@
-query teamPage {
-  allTeamPage {
-    ...teamTopSectionFields
-    ...teamCoreSectionFields
-    ...teamAdvisorSectionFields
-  }
-}

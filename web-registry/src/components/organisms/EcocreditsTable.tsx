@@ -19,8 +19,6 @@ import { AccountLink, BreakText, GreyText, Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { NoCredits } from 'components/molecules';
 
-import { ECOCREDIT_BATCH_ID_TOOLTIP } from './RetirementCertificatesTable/RetirementCertificatesTable.constants';
-
 type EcocreditsTableProps = {
   credits?: BatchInfoWithBalance[];
   renderActionButtons?: RenderActionButtonsFunc;
@@ -54,8 +52,6 @@ export const EcocreditsTable: React.FC<
         <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>{'Project'}</Box>,
         <Box
           sx={{
-            display: 'flex',
-            alignItems: 'center',
             minWidth: {
               xs: 'auto',
               sm: '11rem',
@@ -63,10 +59,7 @@ export const EcocreditsTable: React.FC<
             },
           }}
         >
-          <BreakText sx={{ maxWidth: 76 }}>{'Ecocredit batch ID'}</BreakText>
-          <Box alignSelf="flex-end" ml={2}>
-            <InfoTooltipWithIcon outlined title={ECOCREDIT_BATCH_ID_TOOLTIP} />
-          </Box>
+          {'Batch Denom'}
         </Box>,
         'Credit Class',
         <BreakText>Amount Tradable</BreakText>,

@@ -10,7 +10,7 @@ export const useCertificateStyles = makeStyles<{
   },
   background: {
     backgroundImage: `url("${pageBackground}") !important`,
-    backgroundSize: 'contain',
+    backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
   },
   certificate: {

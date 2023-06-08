@@ -80,7 +80,7 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
             isIgnoreOffset={isIgnoreOffset}
           />
         ),
-        hidden: location.pathname !== '/ecocredits/portfolio',
+        hidden: true || location.pathname !== '/ecocredits/portfolio',
       },
     ],
     [

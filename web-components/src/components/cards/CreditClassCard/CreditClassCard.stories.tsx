@@ -1,3 +1,4 @@
+import { Link } from '@mui/material';
 import { Box } from '@mui/system';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
@@ -17,9 +18,9 @@ const Template: ComponentStory<typeof CreditClassCard> = args => (
 export const Default = Template.bind({});
 Default.args = {
   type: {
-    name: 'Carbon removal',
+    name: 'Carbon',
     icon: {
-      src: '/icons/carbon.svg',
+      src: '/icons/carbon-white.svg',
       alt: 'carbon',
     },
   },
@@ -38,4 +39,5 @@ Default.args = {
     href: '#',
     text: 'Ruuts Protocol Soil Carbon Sequestration Methodology',
   },
+  linkComponent: Link,
 };

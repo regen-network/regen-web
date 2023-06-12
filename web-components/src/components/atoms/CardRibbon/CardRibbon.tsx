@@ -1,5 +1,8 @@
 import { Box, SxProps } from '@mui/material';
 
+import { LabelSize } from 'src/components/typography/sizing';
+import { sxToArray } from 'src/utils/mui/sxToArray';
+
 import { Theme } from '../../../theme/muiTheme';
 import { ImageType } from '../../../types/shared/imageType';
 import { Flex } from '../../box';
@@ -8,9 +11,19 @@ import { Label } from '../../typography';
 export interface Props {
   icon: ImageType;
   label: string;
+  labelSize?: LabelSize;
+  labelMobileSize?: LabelSize;
   sx?: SxProps<Theme>;
+  sxIcon?: SxProps<Theme>;
 }
-const CardRibbon = ({ icon, label, sx = [] }: Props): JSX.Element => {
+const CardRibbon = ({
+  icon,
+  label,
+  labelSize = 'sm',
+  labelMobileSize = 'xs',
+  sx = [],
+  sxIcon = [],
+}: Props): JSX.Element => {
   return (
     <Flex
       sx={[
@@ -31,10 +44,14 @@ const CardRibbon = ({ icon, label, sx = [] }: Props): JSX.Element => {
           component="img"
           src={icon?.src}
           alt={icon?.alt}
-          sx={{ mr: 2.5, width: 24, height: 24 }}
+          sx={[{ mr: 2.5, width: 24, height: 24 }, ...sxToArray(sxIcon)]}
         />
       )}
-      <Label size="sm" mobileSize="xs" sx={{ color: 'primary.main' }}>
+      <Label
+        size={labelSize}
+        mobileSize={labelMobileSize}
+        sx={{ color: 'primary.main' }}
+      >
         {label}
       </Label>
     </Flex>

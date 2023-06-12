@@ -31,7 +31,7 @@ const useStyles = makeStyles<StyleProps>()((theme, { rotate }) => ({
   },
 }));
 
-export default function ArrowDownIcon({
+export default function SmallArrowIcon({
   className,
   fontSize = 'inherit',
   direction = 'next',

@@ -1,10 +1,9 @@
 import { Box, SxProps } from '@mui/material';
 
-import { LabelSize } from 'src/components/typography/sizing';
-import { sxToArray } from 'src/utils/mui/sxToArray';
-
+import { LabelSize } from '../../../components/typography/sizing';
 import { Theme } from '../../../theme/muiTheme';
 import { ImageType } from '../../../types/shared/imageType';
+import { sxToArray } from '../../../utils/mui/sxToArray';
 import { Flex } from '../../box';
 import { Label } from '../../typography';
 

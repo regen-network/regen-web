@@ -1,8 +1,7 @@
 import { Box, Card, CardMedia, SxProps } from '@mui/material';
 
-import { Flex } from 'src/components/box';
-
 import { CardRibbon } from '../../../components/atoms/CardRibbon/CardRibbon';
+import { Flex } from '../../../components/box';
 import { Theme } from '../../../theme/muiTheme';
 import { LinkComponentType } from '../../../types/shared/linkComponentType';
 import { LinkType } from '../../../types/shared/linkType';
@@ -18,13 +17,13 @@ import { useCreditClassCardStyles } from './CreditClassCard.styles';
 import { CreditClassCardItemType } from './CreditClassCard.types';
 
 export interface Props extends OptimizeImageProps {
-  type: CreditClassCardItemType;
+  type?: CreditClassCardItemType;
   title: string | JSX.Element;
   description: string | JSX.Element;
   imgSrc: string;
-  generationMethod: CreditClassCardItemType;
-  methodology: LinkType;
-  linkComponent: LinkComponentType;
+  generationMethod?: CreditClassCardItemType;
+  methodology?: LinkType;
+  linkComponent?: LinkComponentType;
   sx?: SxProps<Theme>;
 }
 
@@ -58,20 +57,22 @@ const CreditClassCard = ({
           borderRadius: '10px',
         }}
       >
-        <CardRibbon
-          icon={type.icon}
-          label={type.name}
-          labelSize="xs"
-          labelMobileSize="xxs"
-          sx={{
-            position: 'absolute',
-            left: 0,
-            top: 30,
-            zIndex: 1,
-            py: { xs: 1, sm: 1.5 },
-          }}
-          sxIcon={{ with: 20, height: 20 }}
-        />
+        {type && (
+          <CardRibbon
+            icon={type.icon}
+            label={type.name}
+            labelSize="xs"
+            labelMobileSize="xxs"
+            sx={{
+              position: 'absolute',
+              left: 0,
+              top: 30,
+              zIndex: 1,
+              py: { xs: 1, sm: 1.5 },
+            }}
+            sxIcon={{ with: 20, height: 20 }}
+          />
+        )}
         <CardMedia image={imgSrc || ''} className={classes.image} />
         <Box sx={{ px: { xs: 3.875, sm: 5 }, py: { xs: 5, sm: 7.5 } }}>
           <Subtitle
@@ -88,17 +89,21 @@ const CreditClassCard = ({
             {parseText(description)}
           </Body>
           <Flex flexDirection={{ xs: 'column', sm: 'row' }}>
-            <CreditClassCardItem
-              label={CREDIT_GENERATION_METHOD}
-              item={generationMethod}
-              sx={{ maxWidth: { sm: 195 }, mr: 5, mb: { xs: 5, sm: 0 } }}
-            />
-            <CreditClassCardItem
-              label={METHODOLOGY}
-              link={methodology}
-              linkComponent={linkComponent}
-              sx={{ maxWidth: { sm: 195 } }}
-            />
+            {generationMethod && (
+              <CreditClassCardItem
+                label={CREDIT_GENERATION_METHOD}
+                item={generationMethod}
+                sx={{ maxWidth: { sm: 195 }, mr: 5, mb: { xs: 5, sm: 0 } }}
+              />
+            )}
+            {methodology && (
+              <CreditClassCardItem
+                label={METHODOLOGY}
+                link={methodology}
+                linkComponent={linkComponent}
+                sx={{ maxWidth: { sm: 195 } }}
+              />
+            )}
           </Flex>
         </Box>
       </Card>

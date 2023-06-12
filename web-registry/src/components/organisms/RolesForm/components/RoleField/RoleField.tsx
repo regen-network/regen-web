@@ -6,7 +6,10 @@ import { UseStateSetter } from 'web-components/lib/types/react/useState';
 
 import { useWallet } from 'lib/wallet/wallet';
 
-import { PartiesByAccountIdQuery } from '../../../../../generated/graphql';
+import {
+  GetPartiesByNameOrAddrQuery,
+  PartiesByAccountIdQuery,
+} from '../../../../../generated/graphql';
 import { DEFAULT_PROFILE_TYPE } from '../../../../../pages/ProfileEdit/ProfileEdit.constants';
 import { ProfileModal } from '../ProfileModal/ProfileModal';
 import { ProfileModalSchemaType } from '../ProfileModal/ProfileModal.schema';
@@ -37,7 +40,7 @@ interface Props {
   setValue: (value: ProfileModalSchemaType | null) => void;
   value?: ProfileModalSchemaType | null;
   partiesByAccountId?: PartiesByAccountIdQuery | null;
-  parties?: any;
+  parties?: GetPartiesByNameOrAddrQuery | null;
 }
 
 export const RoleField = forwardRef<HTMLInputElement, Props>(
@@ -69,7 +72,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
 
     useEffect(
       () => setDebouncedValue(debouncedValue),
-      [setDebouncedValue, debouncedValue],
+      [debouncedValue, setDebouncedValue],
     );
 
     useEffect(() => {

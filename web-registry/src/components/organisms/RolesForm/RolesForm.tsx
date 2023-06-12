@@ -113,7 +113,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
         <RoleField
           label="Project Developer"
           optional
-          description="The individual or organization that is in charge of managing the project and will appear on the project page"
+          description="The individual or organization that is in charge of managing the project and will appear on the project page."
           setValue={setProjectDeveloper}
           value={projectDeveloper}
           setDebouncedValue={setProjectDeveloperValue}

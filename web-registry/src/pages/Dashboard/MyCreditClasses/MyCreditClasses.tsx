@@ -8,7 +8,7 @@ import { useDashboardContext } from '../Dashboard.context';
 
 export const MyCreditClasses = (): JSX.Element => {
   const navigate = useNavigate();
-  const { isCreditClassCreator, isCreditClassAdmin } = useDashboardContext();
+  const { isCreditClassCreator } = useDashboardContext();
   const isFirstCreditClass = false;
   const error = '';
 
@@ -26,8 +26,7 @@ export const MyCreditClasses = (): JSX.Element => {
               onClick={handleCreate}
             />
           )}
-          {/* TODO: display user credits */}
-          {isCreditClassAdmin && <p>credit class admin credits todo...</p>}
+          g
         </Grid>
       </Grid>
       {error && <ErrorBanner text={error} />}

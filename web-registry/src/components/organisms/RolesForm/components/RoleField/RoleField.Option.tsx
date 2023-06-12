@@ -35,7 +35,7 @@ export const RoleFieldOption: React.FC<RoleFieldOptionProps> = ({
     <li {...props} key={props.id}>
       {isProfile(option)
         ? `${option.name || DEFAULT_NAME}${
-            option.address && ` (${truncate(option.address)})`
+            option.address ? ` (${truncate(option.address)})` : ''
           }`
         : option}
     </li>

@@ -4,17 +4,14 @@ import { Autocomplete, TextField } from '@mui/material';
 import FieldFormControl from 'web-components/lib/components/inputs/new/FieldFormControl/FieldFormControl';
 import { UseStateSetter } from 'web-components/lib/types/react/useState';
 
-import { useWallet } from 'lib/wallet/wallet';
-
 import {
   GetPartiesByNameOrAddrQuery,
   PartiesByAccountIdQuery,
 } from '../../../../../generated/graphql';
 import { DEFAULT_PROFILE_TYPE } from '../../../../../pages/ProfileEdit/ProfileEdit.constants';
+import { useDebounce } from '../../hooks/useDebounce';
 import { ProfileModal } from '../ProfileModal/ProfileModal';
 import { ProfileModalSchemaType } from '../ProfileModal/ProfileModal.schema';
-import { useDebounce } from './hooks/useDebounce';
-import { useSaveProfile } from './hooks/useSaveProfile';
 import { PLACEHOLDER } from './RoleField.constants';
 import { RoleFieldGroup } from './RoleField.Group';
 import { RoleFieldOption } from './RoleField.Option';
@@ -41,6 +38,8 @@ interface Props {
   value?: ProfileModalSchemaType | null;
   partiesByAccountId?: PartiesByAccountIdQuery | null;
   parties?: GetPartiesByNameOrAddrQuery | null;
+  saveProfile: (profile: ProfileModalSchemaType) => Promise<string | undefined>;
+  accountId?: string;
 }
 
 export const RoleField = forwardRef<HTMLInputElement, Props>(
@@ -56,11 +55,12 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
       setDebouncedValue,
       partiesByAccountId,
       parties,
+      saveProfile,
+      accountId,
     }: Props,
     ref,
   ) => {
     const { classes: styles, cx } = useStyles();
-    const { accountId } = useWallet();
     const [options, setOptions] = useState<readonly ProfileModalSchemaType[]>(
       [],
     );
@@ -100,11 +100,9 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
       partiesByAccountId?.accountById?.partiesByAccountId?.nodes,
       value,
     ]);
-
     const closeProfileModal = (): void => {
       setProfileAdd(null);
     };
-    const saveProfile = useSaveProfile({ setValue, closeProfileModal });
 
     return (
       <div className={cx(styles.root, classes && classes.root)}>
@@ -158,7 +156,13 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
           <ProfileModal
             initialValues={profileAdd}
             onClose={closeProfileModal}
-            onSubmit={saveProfile}
+            onSubmit={async profile => {
+              const id = await saveProfile(profile);
+              if (id) {
+                closeProfileModal();
+                setValue({ id, ...profile });
+              }
+            }}
           />
         )}
       </div>

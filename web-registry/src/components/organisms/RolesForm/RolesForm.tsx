@@ -24,6 +24,7 @@ import { useProjectEditContext } from '../../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../../molecules';
 import { ProfileModalSchemaType } from './components/ProfileModal/ProfileModal.schema';
 import { RoleField } from './components/RoleField/RoleField';
+import { useSaveProfile } from './hooks/useSaveProfile';
 import { rolesFormSchema, RolesFormSchemaType } from './RolesForm.schema';
 
 interface RolesFormProps {
@@ -107,6 +108,8 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     }),
   );
 
+  const saveProfile = useSaveProfile();
+
   return (
     <Form form={form}>
       <OnBoardingCard>
@@ -119,6 +122,8 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
           setDebouncedValue={setProjectDeveloperValue}
           partiesByAccountId={partiesByAccountId}
           parties={partiesProjectDeveloper}
+          saveProfile={saveProfile}
+          accountId={accountId}
           {...form.register('projectDeveloper')}
         />
         <RoleField
@@ -130,6 +135,8 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
           setDebouncedValue={setVerifierValue}
           partiesByAccountId={partiesByAccountId}
           parties={partiesVerifier}
+          saveProfile={saveProfile}
+          accountId={accountId}
           {...form.register('verifier')}
         />
         <TextField

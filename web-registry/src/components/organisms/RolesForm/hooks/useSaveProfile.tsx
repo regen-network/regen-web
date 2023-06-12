@@ -8,20 +8,15 @@ import {
 } from 'generated/graphql';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
-import { ProfileModalSchemaType } from '../../ProfileModal/ProfileModal.schema';
+import { ProfileModalSchemaType } from '../components/ProfileModal/ProfileModal.schema';
 
-type Params = {
-  setValue: (value: ProfileModalSchemaType) => void;
-  closeProfileModal: () => void;
-};
-
-export const useSaveProfile = ({ setValue, closeProfileModal }: Params) => {
+export const useSaveProfile = () => {
   const [createWallet] = useCreateWalletMutation();
   const [createParty] = useCreatePartyMutation();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
   const saveProfile = useCallback(
-    async (profile: ProfileModalSchemaType): Promise<void> => {
+    async (profile: ProfileModalSchemaType): Promise<string | undefined> => {
       try {
         let walletId;
         const addr = profile.address;
@@ -50,20 +45,13 @@ export const useSaveProfile = ({ setValue, closeProfileModal }: Params) => {
             },
           },
         });
-        const id = partyRes.data?.createParty?.party?.id;
-        closeProfileModal();
-        setValue({ id, ...profile });
+        return partyRes.data?.createParty?.party?.id;
       } catch (e) {
         setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
+        return undefined;
       }
     },
-    [
-      closeProfileModal,
-      createParty,
-      createWallet,
-      setErrorBannerTextAtom,
-      setValue,
-    ],
+    [createParty, createWallet, setErrorBannerTextAtom],
   );
 
   return saveProfile;

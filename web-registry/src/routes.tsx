@@ -235,7 +235,10 @@ export const getRoutes = ({
               path="buyer"
               element={<CreditClassDetails isLandSteward={false} />}
             />
-            <Route path="land-steward" element={<Navigate to="/" replace />} />
+            <Route
+              path="land-steward"
+              element={<CreditClassDetails isLandSteward={true} />}
+            />
           </Route>
           <Route
             path="create"

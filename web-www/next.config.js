@@ -14,37 +14,42 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/fund/',
+        source: '/fund',
         destination: '/',
         permanent: false,
       },
       {
-        source: '/partners/',
+        source: '/partners',
         destination: '/',
         permanent: false,
       },
       {
-        source: '/developers/',
+        source: '/developers',
         destination: '/',
         permanent: false,
       },
       {
-        source: '/validators/',
+        source: '/validators',
         destination: '/',
         permanent: false,
       },
       {
-        source: '/mainnet/',
+        source: '/mainnet',
         destination: '/',
         permanent: false,
       },
       {
-        source: '/community/',
+        source: '/community',
         destination: '/',
         permanent: false,
       },
       {
-        source: '/science/',
+        source: '/science',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/case-studies',
         destination: '/',
         permanent: false,
       },

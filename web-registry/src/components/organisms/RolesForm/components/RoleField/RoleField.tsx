@@ -169,7 +169,9 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
             filterOptions={x => x}
             options={getOptions(options, setProfileAdd)}
             groupBy={option => (isProfile(option) ? option.group : '')}
-            renderGroup={params => <RoleFieldGroup params={params} />}
+            renderGroup={params => (
+              <RoleFieldGroup key={params.group} params={params} />
+            )}
             autoComplete
           />
         </FieldFormControl>

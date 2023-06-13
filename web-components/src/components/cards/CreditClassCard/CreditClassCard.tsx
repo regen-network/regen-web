@@ -2,6 +2,7 @@ import { Box, Card, CardMedia, SxProps } from '@mui/material';
 
 import { CardRibbon } from '../../../components/atoms/CardRibbon/CardRibbon';
 import { Flex } from '../../../components/box';
+import InfoTooltipWithIcon from '../../../components/tooltip/InfoTooltipWithIcon';
 import { Theme } from '../../../theme/muiTheme';
 import { LinkComponentType } from '../../../types/shared/linkComponentType';
 import { LinkType } from '../../../types/shared/linkType';
@@ -9,6 +10,7 @@ import { parseText } from '../../../utils/textParser';
 import { OptimizeImageProps } from '../../image';
 import { Body, Subtitle, Title } from '../../typography';
 import {
+  CREDIT_CLASS_TOOLTIP,
   CREDIT_GENERATION_METHOD,
   METHODOLOGY,
 } from './CreditClassCard.constants';
@@ -78,9 +80,21 @@ const CreditClassCard = ({
           <Subtitle
             size="xs"
             color="info.main"
-            sx={{ fontWeight: 800, mb: 3, letterSpacing: '1px', mt: [0, 2.5] }}
+            sx={{
+              fontWeight: 800,
+              mb: 3,
+              letterSpacing: '1px',
+              mt: [0, 2.5],
+              display: 'flex',
+              alignItems: 'center',
+            }}
           >
             {'CREDIT CLASS'}
+            <InfoTooltipWithIcon
+              title={CREDIT_CLASS_TOOLTIP}
+              outlined
+              sx={{ ml: 1, fontSize: 16 }}
+            />
           </Subtitle>
           <Title variant="h5" mobileVariant="h6" as="div" sx={{ mb: 2 }}>
             {parseText(title)}

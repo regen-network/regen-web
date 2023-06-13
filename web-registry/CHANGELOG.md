@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/regen-network/regen-web/compare/v1.7.0...v1.8.0) (2023-06-13)
+
+### Bug Fixes
+
+- default org icons not showing ([099efc0](https://github.com/regen-network/regen-web/commit/099efc0fee629213f83d8233ef7a39cfb50a9d90))
+- handle case where party info comes from DB ([b010909](https://github.com/regen-network/regen-web/commit/b010909978ffa0513e43b4377895d8fe201e8f36))
+- link to portfolio for project admin ([9868635](https://github.com/regen-network/regen-web/commit/9868635b6dfba64ecabf68c435d3865f2e87a935))
+- menu dropdown that do not close properly ([#1912](https://github.com/regen-network/regen-web/issues/1912)) ([26492f2](https://github.com/regen-network/regen-web/commit/26492f29625cac4ec3e5e3069d5c0177d693e973))
+- show newly created projected directly ([#1909](https://github.com/regen-network/regen-web/issues/1909)) ([b8c9113](https://github.com/regen-network/regen-web/commit/b8c911309e895049aea4e453e3321f4bcf8f0eef))
+
+### Features
+
+- add address to account ([#1896](https://github.com/regen-network/regen-web/issues/1896)) ([8da6e3b](https://github.com/regen-network/regen-web/commit/8da6e3b5755f92be5941ed49b6d6a5897c8cbbd9))
+- add certificate table and page ([#1919](https://github.com/regen-network/regen-web/issues/1919)) ([02cf959](https://github.com/regen-network/regen-web/commit/02cf959cec1bb50501617e48795f985aa14303b6))
+- add profile switch warning modal ([#1916](https://github.com/regen-network/regen-web/issues/1916)) ([79bcae6](https://github.com/regen-network/regen-web/commit/79bcae6361e89cf556604c50df7011ce7a37e818))
+- add verifier to project page ([#1915](https://github.com/regen-network/regen-web/issues/1915)) ([a015e27](https://github.com/regen-network/regen-web/commit/a015e27916fb939a1b222539cc4a28d1a24dcd6b))
+- hide create credit class button ([#1927](https://github.com/regen-network/regen-web/issues/1927)) ([69d9fe8](https://github.com/regen-network/regen-web/commit/69d9fe888b5349be604470b83a3b5edf9416e5ea))
+- project details section ([#1901](https://github.com/regen-network/regen-web/issues/1901)) ([05d3aed](https://github.com/regen-network/regen-web/commit/05d3aedb7a998d175072818a9491865051d58334))
+- quote buyers page ([#1923](https://github.com/regen-network/regen-web/issues/1923)) ([6228e78](https://github.com/regen-network/regen-web/commit/6228e7836e7d020b24e8f188e2f3125f96796f7f))
+- show proper default image from metadata depending on profile type ([60b3243](https://github.com/regen-network/regen-web/commit/60b3243006d2310ee0c3f4c26741145f122ab791))
+- update project review ([#1905](https://github.com/regen-network/regen-web/issues/1905)) ([40ebacb](https://github.com/regen-network/regen-web/commit/40ebacb0adb94cbf10975038a08cc14bed82b6fc))
+- use dark topographic section ([#1917](https://github.com/regen-network/regen-web/issues/1917)) ([defc080](https://github.com/regen-network/regen-web/commit/defc0803f6ecef9471d768dcf44976807ba520e0))
+
 # [1.7.0](https://github.com/regen-network/regen-web/compare/v1.6.0...v1.7.0) (2023-06-06)
 
 ### Bug Fixes

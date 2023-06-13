@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/regen-network/regen-web/compare/v1.7.0...v1.8.0) (2023-06-13)
+
+### Bug Fixes
+
+- menu dropdown that do not close properly ([#1912](https://github.com/regen-network/regen-web/issues/1912)) ([26492f2](https://github.com/regen-network/regen-web/commit/26492f29625cac4ec3e5e3069d5c0177d693e973))
+- remove hidden rows from page count ([#1906](https://github.com/regen-network/regen-web/issues/1906)) ([46fa9c8](https://github.com/regen-network/regen-web/commit/46fa9c819eac99de5be0e43e7e6f9b7a76f5dac6))
+
+### Features
+
+- add address to account ([#1896](https://github.com/regen-network/regen-web/issues/1896)) ([8da6e3b](https://github.com/regen-network/regen-web/commit/8da6e3b5755f92be5941ed49b6d6a5897c8cbbd9))
+- add certificate table and page ([#1919](https://github.com/regen-network/regen-web/issues/1919)) ([02cf959](https://github.com/regen-network/regen-web/commit/02cf959cec1bb50501617e48795f985aa14303b6))
+- add profile switch warning modal ([#1916](https://github.com/regen-network/regen-web/issues/1916)) ([79bcae6](https://github.com/regen-network/regen-web/commit/79bcae6361e89cf556604c50df7011ce7a37e818))
+- add verifier to project page ([#1915](https://github.com/regen-network/regen-web/issues/1915)) ([a015e27](https://github.com/regen-network/regen-web/commit/a015e27916fb939a1b222539cc4a28d1a24dcd6b))
+- project details section ([#1901](https://github.com/regen-network/regen-web/issues/1901)) ([05d3aed](https://github.com/regen-network/regen-web/commit/05d3aedb7a998d175072818a9491865051d58334))
+- quote buyers page ([#1923](https://github.com/regen-network/regen-web/issues/1923)) ([6228e78](https://github.com/regen-network/regen-web/commit/6228e7836e7d020b24e8f188e2f3125f96796f7f))
+- update project review ([#1905](https://github.com/regen-network/regen-web/issues/1905)) ([40ebacb](https://github.com/regen-network/regen-web/commit/40ebacb0adb94cbf10975038a08cc14bed82b6fc))
+- use dark topographic section ([#1917](https://github.com/regen-network/regen-web/issues/1917)) ([defc080](https://github.com/regen-network/regen-web/commit/defc0803f6ecef9471d768dcf44976807ba520e0))
+- web-www NextJS migration ([#1889](https://github.com/regen-network/regen-web/issues/1889)) ([95cb95f](https://github.com/regen-network/regen-web/commit/95cb95f12fe48671717d355b5f423ab71ccc2b23))
+
 # [1.7.0](https://github.com/regen-network/regen-web/compare/v1.6.0...v1.7.0) (2023-06-06)
 
 ### Features

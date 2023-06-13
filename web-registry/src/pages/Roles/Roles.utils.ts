@@ -7,6 +7,7 @@ export const getProjectStakeholderInitialValues = (
   return party
     ? {
         id: party.id,
+        accountId: party.accountId,
         name: party.name,
         profileImage: party?.image || getDefaultAvatar(party),
         profileType: party.type,

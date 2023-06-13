@@ -68,7 +68,6 @@ const Template: ComponentStory<typeof RoleField> = args => {
         value={value}
         setValue={setValue}
         parties={parties}
-        partiesByAccountId={partiesByAccountId}
         saveProfile={saveProfile}
       />
     </Box>
@@ -81,6 +80,7 @@ Default.args = {
   label: 'Project Developer',
   description:
     'The individual or organization that is in charge of managing the project and will appear on the project page.',
+  partiesByAccountId,
 };
 
 Default.argTypes = {};

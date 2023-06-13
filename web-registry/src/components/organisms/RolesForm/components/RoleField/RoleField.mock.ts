@@ -21,7 +21,7 @@ export const partiesByAccountId = {
 
 export const allParties = [
   {
-    accountId: '35657164-0905-11ee-be56-0242ac120002',
+    accountId,
     id: '8f6972de-08fe-11ee-be56-0242ac120002',
     type: PartyType.User,
     name: 'John Doe',

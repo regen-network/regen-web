@@ -12,16 +12,18 @@ import { DEFAULT_PROFILE_TYPE } from '../../../../../pages/ProfileEdit/ProfileEd
 import { useDebounce } from '../../hooks/useDebounce';
 import { ProfileModal } from '../ProfileModal/ProfileModal';
 import { ProfileModalSchemaType } from '../ProfileModal/ProfileModal.schema';
-import { PLACEHOLDER } from './RoleField.constants';
+import { ALL_PROFILES, PLACEHOLDER } from './RoleField.constants';
 import { RoleFieldGroup } from './RoleField.Group';
 import { RoleFieldOption } from './RoleField.Option';
 import { useStyles } from './RoleField.styles';
+import { Option } from './RoleField.types';
 import {
   getIsOptionEqualToValue,
   getOptionLabel,
   getOptions,
   getParties,
   getValue,
+  groupOptions,
   isProfile,
 } from './RoleField.utils';
 
@@ -61,13 +63,11 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
     ref,
   ) => {
     const { classes: styles, cx } = useStyles();
-    const [options, setOptions] = useState<readonly ProfileModalSchemaType[]>(
-      [],
-    );
+    const [options, setOptions] = useState<Option[]>([]);
     const [profileAdd, setProfileAdd] = useState<ProfileModalSchemaType | null>(
       null,
     );
-    const [inputValue, setInputValue] = useState<string>('');
+    const [inputValue, setInputValue] = useState<string>(value?.name || '');
     const debouncedValue = useDebounce(inputValue);
 
     useEffect(
@@ -76,25 +76,37 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
     );
 
     useEffect(() => {
-      if (inputValue === '') {
-        const yourProfiles = getParties(
-          partiesByAccountId?.accountById?.partiesByAccountId?.nodes,
+      const yourProfiles = getParties(
+        partiesByAccountId?.accountById?.partiesByAccountId?.nodes,
+      );
+      const valueArr = value
+        ? yourProfiles.find(p => p.id === value.id)
+          ? []
+          : [value]
+        : [];
+      if (inputValue === '' || (value && value.name === inputValue)) {
+        setOptions(
+          groupOptions(
+            [
+              {
+                id: '',
+                profileType: DEFAULT_PROFILE_TYPE,
+                profileImage: '',
+                name: PLACEHOLDER,
+              },
+              ...yourProfiles,
+              ...valueArr,
+            ],
+            accountId,
+          ),
         );
-        setOptions([
-          {
-            id: '',
-            profileType: DEFAULT_PROFILE_TYPE,
-            profileImage: '',
-            name: PLACEHOLDER,
-          },
-          ...yourProfiles,
-        ]);
         return;
       }
 
       const searchProfiles = getParties(parties?.getPartiesByNameOrAddr?.nodes);
-      setOptions(searchProfiles);
+      setOptions(groupOptions([...searchProfiles, ...valueArr], accountId));
     }, [
+      accountId,
       inputValue,
       parties,
       partiesByAccountId?.accountById?.partiesByAccountId?.nodes,
@@ -103,6 +115,8 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
     const closeProfileModal = (): void => {
       setProfileAdd(null);
     };
+
+    const valueWithGroup = getValue(value, accountId);
 
     return (
       <div className={cx(styles.root, classes && classes.root)}>
@@ -123,14 +137,16 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
             onChange={(event, newValue, reason) => {
               if (newValue && isProfile(newValue)) {
                 setValue(newValue);
-                setInputValue('');
               }
               if (reason === 'clear') {
                 setValue(null);
               }
             }}
             onInputChange={(event, newInputValue) => {
-              if (event) setInputValue(newInputValue);
+              if (event) {
+                event.stopPropagation();
+                setInputValue(newInputValue);
+              }
             }}
             renderInput={params => (
               <TextField
@@ -139,14 +155,19 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
                 variant="outlined"
               />
             )}
-            value={getValue(value, accountId)}
+            inputValue={inputValue}
+            value={valueWithGroup}
             isOptionEqualToValue={getIsOptionEqualToValue}
             getOptionLabel={getOptionLabel}
-            renderOption={(props, option) => (
-              <RoleFieldOption props={props} option={option} />
-            )}
+            renderOption={(props, option) =>
+              valueWithGroup &&
+              getIsOptionEqualToValue(option, valueWithGroup) &&
+              valueWithGroup.group === ALL_PROFILES ? null : (
+                <RoleFieldOption props={props} option={option} />
+              )
+            }
             filterOptions={x => x}
-            options={getOptions(options, setProfileAdd, accountId)}
+            options={getOptions(options, setProfileAdd)}
             groupBy={option => (isProfile(option) ? option.group : '')}
             renderGroup={params => <RoleFieldGroup params={params} />}
             autoComplete
@@ -160,6 +181,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
               const id = await saveProfile(profile);
               if (id) {
                 closeProfileModal();
+                setInputValue(profile.name);
                 setValue({ id, ...profile });
               }
             }}

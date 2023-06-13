@@ -1,3 +1,7 @@
 import { ProfileModalSchemaType } from '../ProfileModal/ProfileModal.schema';
 
-export type OptionType = ProfileModalSchemaType | JSX.Element;
+export interface Option extends ProfileModalSchemaType {
+  group: string;
+}
+
+export type OptionType = Option | JSX.Element;

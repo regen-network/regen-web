@@ -26,7 +26,6 @@ export const MyCreditClasses = (): JSX.Element => {
               onClick={handleCreate}
             />
           )}
-          g
         </Grid>
       </Grid>
       {error && <ErrorBanner text={error} />}

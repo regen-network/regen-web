@@ -277,7 +277,7 @@ export const getRouter = ({
   return sentryCreateBrowserRouter(
     getRoutes({ reactQueryClient, apolloClientFactory }),
     {
-      basename: process.env.PUBLIC_URL,
+      basename: import.meta.env.PUBLIC_URL,
     },
   );
 };

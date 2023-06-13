@@ -126,7 +126,9 @@ const ConfirmationModal: React.FC<React.PropsWithChildren<Props>> = ({
             <Link
               color="secondary.main"
               fontWeight={700}
-              href={`${process.env.REACT_APP_BLOCK_EXPLORER}/txs/${transactionHash}`}
+              href={`${
+                import.meta.env.VITE_BLOCK_EXPLORER
+              }/txs/${transactionHash}`}
               target="_blank"
               rel="noopener noreferrer"
             >

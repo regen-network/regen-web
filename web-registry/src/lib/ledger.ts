@@ -1,7 +1,7 @@
 import { apiUri } from './apiUri';
 
-export const chainId = process.env.REACT_APP_LEDGER_CHAIN_ID;
-export const isBridgeEnabled = process.env.REACT_APP_BRIDGE === 'true';
+export const chainId = import.meta.env.VITE_LEDGER_CHAIN_ID;
+export const isBridgeEnabled = import.meta.env.VITE_BRIDGE === 'true';
 
 const uriBase = `${apiUri}/`;
 

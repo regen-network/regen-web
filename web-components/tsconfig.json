@@ -9,6 +9,7 @@
     "outDir": "lib",
     "rootDir": "src",
     "module": "esnext",
+    "moduleResolution": "Node",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "allowSyntheticDefaultImports": true,

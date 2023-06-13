@@ -1,13 +1,13 @@
+import { WebAuth } from 'auth0-js';
+import axios from 'axios';
+import React, { useCallback } from 'react';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import { makeStyles } from 'tss-react/mui';
 import LoginForm, {
   Values,
 } from 'web-components/lib/components/form/LoginForm';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { WebAuth } from 'auth0-js';
-import axios from 'axios';
-import React, { useCallback } from 'react';
-import { makeStyles } from 'tss-react/mui';
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 const searchParams = new URLSearchParams(window.location.search);
 const state = searchParams.get('state') || undefined;
@@ -20,7 +20,7 @@ const responseType = searchParams.get('response_type') || 'code';
 const responseMode = searchParams.get('response_mode') || undefined;
 
 const auth0 = new WebAuth({
-  domain: process.env.REACT_APP_AUTH0_DOMAIN || window.location.host,
+  domain: process.env.VITE_AUTH0_DOMAIN || window.location.host,
   clientID: clientID || 'rEuc1WLPAQVXZ7gJrWg4AL9EhWMHmLu8',
   audience: audience,
   redirectUri,
@@ -48,7 +48,7 @@ function App(): JSX.Element {
         try {
           const token = await executeRecaptcha?.('login_page');
           const apiUri: string =
-            process.env.REACT_APP_API_URI || 'http://localhost:5000';
+            process.env.VITE_API_URI || 'http://localhost:5000';
           const res = await axios({
             method: 'POST',
             url: `${apiUri}/recaptcha/v3/verify`,
@@ -97,7 +97,7 @@ function App(): JSX.Element {
       <OnBoardingSection formContainer title="Log in">
         <LoginForm
           signupFromLogin={
-            process.env.REACT_APP_SIGNUP_LINK ||
+            process.env.VITE_SIGNUP_LINK ||
             'https://www.regen.network/registry/signup'
           }
           submit={submit}

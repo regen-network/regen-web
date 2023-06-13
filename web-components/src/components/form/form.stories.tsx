@@ -29,7 +29,7 @@ export const userProfile = (): JSX.Element => (
 //   <OnBoardingSection title="Organization Profile">
 //     <OrganizationProfileForm
 //       apiUrl=""
-//       mapToken={process.env.STORYBOOK_MAPBOX_TOKEN || process.env.REACT_APP_MAPBOX_TOKEN}
+//       mapToken={process.env.STORYBOOK_MAPBOX_TOKEN || process.env.VITE_MAPBOX_TOKEN}
 //       submit={() => null}
 //       goBack={() => null}
 //       skip={() => null}

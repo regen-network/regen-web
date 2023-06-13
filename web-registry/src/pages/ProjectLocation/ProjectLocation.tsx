@@ -49,7 +49,7 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
       <ProjectLocationForm
         submit={metadataSubmit}
         saveAndExit={saveAndExit}
-        mapToken={process.env.REACT_APP_MAPBOX_TOKEN as string}
+        mapToken={import.meta.env.VITE_MAPBOX_TOKEN as string}
         initialValues={initialFieldValues}
         onPrev={navigatePrev}
         onNext={navigateNext}

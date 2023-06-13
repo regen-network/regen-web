@@ -21,7 +21,7 @@ const CardsGridContainer = ({
         ...sxToArray(sx),
         {
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 400px))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
           gridGap: ['1.75rem', '1.5rem', '1.125rem'],
           justifyContent: cardsCount > 1 ? 'center' : 'left',
         },

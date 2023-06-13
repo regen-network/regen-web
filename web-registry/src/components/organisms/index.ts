@@ -29,7 +29,7 @@ export * from './MethodologySteps';
 export * from './MethodologyTestSection';
 export * from './MethodologyTopSection';
 export * from './MoreProjectsSection';
-export * from './Portfolio';
+export * from './Portfolio/Portfolio';
 export * from './ProjectCards';
 export * from './ProjectImpactSection/ProjectImpactSection';
 export * from './ProjectLocationForm';

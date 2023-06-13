@@ -1,4 +1,5 @@
 import React from 'react';
+import { ButtonProps } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { DefaultTheme as Theme } from '@mui/styles';
 import axios from 'axios';
@@ -20,6 +21,7 @@ interface NewsletterFormProps {
   apiUri?: string;
   textFieldClassName?: string;
   buttonClassName?: string;
+  buttonSize?: ButtonProps['size'];
   gridXs?: {
     textField:
       | boolean
@@ -103,6 +105,7 @@ export default function NewsletterForm({
   inputPlaceholder = 'Your email',
   textFieldClassName,
   buttonClassName,
+  buttonSize = 'small',
   gridXs = { textField: 8, button: 4 },
 }: NewsletterFormProps): JSX.Element {
   const { classes, cx } = useStyles();
@@ -172,7 +175,7 @@ export default function NewsletterForm({
               </Grid>
               <Grid item xs={gridXs.button}>
                 <ContainedButton
-                  size="small"
+                  size={buttonSize}
                   className={buttonClassName}
                   disabled={(submitCount > 0 && !isValid) || isSubmitting}
                   onClick={submitForm}

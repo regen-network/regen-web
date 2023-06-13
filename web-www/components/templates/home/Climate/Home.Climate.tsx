@@ -71,6 +71,7 @@ const ClimateSection = ({ climateData }: Props): JSX.Element => {
           height={Number(
             climateData?.image?.asset?.metadata?.dimensions?.height,
           )}
+          sizes="(max-width: 1024px) 100vw, 60vw"
           alt="Map"
           className={styles.image}
         />

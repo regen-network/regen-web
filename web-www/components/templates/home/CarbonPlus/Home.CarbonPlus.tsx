@@ -47,10 +47,11 @@ const CarbonplusSection = ({ carbonPlusData }: Props): JSX.Element => {
         <Grid className={styles.imageContainer} item xs={12}>
           <Image
             className={styles.image}
-            src="/images/home/marketplace-preview.png"
-            alt="Regen marketplace preview"
-            width={650}
-            height={646}
+            src={String(carbonPlusData?.image?.image?.asset?.url)}
+            alt={carbonPlusData?.image?.image?.asset?.altText ?? ''}
+            width={862}
+            height={742}
+            priority
           />
         </Grid>
       </Grid>

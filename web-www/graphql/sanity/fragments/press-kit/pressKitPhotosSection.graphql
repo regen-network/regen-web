@@ -1,0 +1,10 @@
+fragment pressKitPhotosSectionFields on PresskitPage {
+  photosSection {
+    header
+    photos {
+      asset {
+        url
+      }
+    }
+  }
+}

@@ -9,7 +9,7 @@ import { makeStyles } from 'tss-react/mui';
 import PrevNextButton from '../buttons/PrevNextButton';
 import { Title } from '../typography';
 
-export interface ResponsiveSliderProps {
+interface ResponsiveSliderProps {
   items?: JSX.Element[];
   titleVariant?: Variant;
   arrows?: boolean;
@@ -24,6 +24,7 @@ export interface ResponsiveSliderProps {
     slider?: string;
   };
   padding?: string | number;
+  mobileItemWidth?: string;
   itemWidth?: string;
   infinite?: boolean;
   dots?: boolean;
@@ -36,12 +37,16 @@ interface StyleProps {
   gridView: boolean;
   padding?: string | number;
   title?: string;
+  mobileItemWidth?: string;
   itemWidth?: string;
   visibleOverflow: boolean;
 }
 
 const useStyles = makeStyles<StyleProps>()(
-  (theme, { gridView, itemWidth, padding, title, visibleOverflow }) => ({
+  (
+    theme,
+    { gridView, mobileItemWidth, itemWidth, padding, title, visibleOverflow },
+  ) => ({
     root: {
       [theme.breakpoints.down('sm')]: {
         paddingTop: theme.spacing(11.75),
@@ -52,10 +57,11 @@ const useStyles = makeStyles<StyleProps>()(
     },
     slider: {
       [theme.breakpoints.down('sm')]: {
-        width: itemWidth || '70%',
+        width: mobileItemWidth || '70%',
         paddingTop: title ? theme.spacing(4) : 0,
       },
       [theme.breakpoints.up('sm')]: {
+        width: itemWidth || '100%',
         marginLeft: padding ? `-${padding}` : 0,
         paddingTop: title ? theme.spacing(8) : 0,
       },
@@ -150,6 +156,7 @@ export default function ResponsiveSlider({
   className,
   classes,
   padding,
+  mobileItemWidth,
   itemWidth,
   infinite = true,
   dots = false,
@@ -178,6 +185,7 @@ export default function ResponsiveSlider({
     gridView,
     padding,
     title,
+    mobileItemWidth,
     itemWidth,
     visibleOverflow,
   });
@@ -238,8 +246,7 @@ export default function ResponsiveSlider({
         ) : null}
         {items.length > 1 && arrows && desktop && (
           <Grid
-            xs={12}
-            sm={4}
+            xs={renderTitle || title ? 4 : 12}
             container
             item
             justifyContent="flex-end"

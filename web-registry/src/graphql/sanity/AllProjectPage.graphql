@@ -3,5 +3,10 @@ query allProjectPage {
     gettingStartedResourcesSection {
       ...gettingStartedResourcesSectionFields
     }
+    projectDetailsSection {
+      label
+      title
+      descriptionRaw
+    }
   }
 }

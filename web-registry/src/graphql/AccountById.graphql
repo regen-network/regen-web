@@ -1,0 +1,14 @@
+query partiesByAccountId($id: UUID!){
+  accountById(id: $id) {
+    partiesByAccountId {
+      nodes {
+        name
+        image
+        type
+      	walletByWalletId {
+          addr
+        }
+      }
+    }
+  }
+}

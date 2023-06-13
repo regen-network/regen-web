@@ -6,9 +6,9 @@ import Container from '@mui/material/Container';
 import MobileMenu from '../mobile-menu';
 import { HeaderLogoLink } from './components/HeaderLogoLink';
 import {
-  HeaderMenuHover,
   HeaderMenuItem,
-} from './components/HeaderMenuHover/HeaderMenuHover';
+  Item,
+} from './components/HeaderMenuItem/HeaderMenuItem';
 import { NavLink, NavLinkProps } from './components/NavLink';
 import { useHeaderStyles } from './Header.styles';
 
@@ -25,7 +25,7 @@ interface HeaderProps {
   borderBottom?: boolean;
   color: string;
   fullWidth?: boolean;
-  menuItems?: HeaderMenuItem[];
+  menuItems?: Item[];
   linkComponent?: React.FC<React.PropsWithChildren<NavLinkProps>>;
   homeLink?: React.FC<React.PropsWithChildren<{ color: string }>>;
   isRegistry?: boolean;
@@ -59,12 +59,13 @@ export default function Header({
 
   return (
     <>
-      <div
+      <Box
         className={cx(
           styles.borderBottom,
           absolute && styles.absolute,
           transparent ? styles.transparent : styles.background,
         )}
+        sx={{ displayPrint: 'none' }}
       >
         <Container
           disableGutters
@@ -82,7 +83,7 @@ export default function Header({
               <MenuList className={styles.menuList}>
                 {menuItems?.map((item, index) => {
                   return (
-                    <HeaderMenuHover
+                    <HeaderMenuItem
                       key={index}
                       linkComponent={linkComponent}
                       item={item}
@@ -109,7 +110,7 @@ export default function Header({
             </Box>
           </Box>
         </Container>
-      </div>
+      </Box>
     </>
   );
 }

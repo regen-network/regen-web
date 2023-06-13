@@ -3,11 +3,14 @@ import WalletConnect from '@walletconnect/client';
 import truncate from 'lodash/truncate';
 
 import { UseStateSetter } from 'types/react/use-state';
+import { apiUri } from 'lib/apiUri';
 import { LoginEvent, Track } from 'lib/tracker/types';
 
 import { chainInfo } from './chainInfo/chainInfo';
 import { LoginType, Wallet } from './wallet';
 import {
+  KEPLR_ADD_ADDR_DESCRIPTION,
+  KEPLR_LOGIN_DESCRIPTION,
   KEPLR_LOGIN_TITLE,
   WALLET_CONNECT_BRIDGE_URL,
   WALLET_CONNECT_SIGNING_METHODS,
@@ -49,6 +52,37 @@ export const getWalletConnectInstance = async ({
   return walletConnect;
 };
 
+/* getWallet */
+
+type GetWalletParams = {
+  walletClient?: WalletClient;
+  walletConfig?: WalletConfig;
+};
+
+export const getWallet = async ({
+  walletClient,
+  walletConfig,
+}: GetWalletParams): Promise<Wallet | undefined> => {
+  let offlineSigner;
+
+  if (walletClient) {
+    offlineSigner = await walletConfig?.getOfflineSignerFunction(walletClient)(
+      chainInfo.chainId,
+    );
+  }
+
+  const key = await walletClient?.getKey(chainInfo.chainId);
+  if (key && key.bech32Address && offlineSigner) {
+    return {
+      offlineSigner,
+      address: key.bech32Address,
+      shortAddress: truncate(key.bech32Address),
+    };
+  }
+
+  return undefined;
+};
+
 /* finalizeConnection */
 
 type FinalizeConnectionParams = {
@@ -70,8 +104,6 @@ export const finalizeConnection = async ({
   login,
   doLogin = true,
 }: FinalizeConnectionParams): Promise<void> => {
-  let offlineSigner;
-
   try {
     await walletClient?.enable(chainInfo.chainId);
   } catch (e) {
@@ -79,19 +111,8 @@ export const finalizeConnection = async ({
     console.error(e);
   }
 
-  if (walletClient) {
-    offlineSigner = await walletConfig?.getOfflineSignerFunction(walletClient)(
-      chainInfo.chainId,
-    );
-  }
-
-  const key = await walletClient?.getKey(chainInfo.chainId);
-  if (key && key.bech32Address && offlineSigner) {
-    const wallet = {
-      offlineSigner,
-      address: key.bech32Address,
-      shortAddress: truncate(key.bech32Address),
-    };
+  const wallet = await getWallet({ walletClient, walletConfig });
+  if (wallet) {
     if (track) {
       track<'login', LoginEvent>('login', {
         date: new Date().toUTCString(),
@@ -107,10 +128,47 @@ export const finalizeConnection = async ({
   }
 };
 
-export const getArbitraryLoginData = (nonce: string) =>
+/* getArbitraryData */
+
+type GetArbitraryDataParams = {
+  nonce: string;
+  addAddr?: boolean;
+};
+
+export const getArbitraryData = ({
+  nonce,
+  addAddr = false,
+}: GetArbitraryDataParams) =>
   JSON.stringify({
     title: KEPLR_LOGIN_TITLE,
-    description:
-      'This is a transaction that allows Regen Network to authenticate you with our application.',
+    description: addAddr ? KEPLR_ADD_ADDR_DESCRIPTION : KEPLR_LOGIN_DESCRIPTION,
     nonce,
   });
+
+/* getNonce */
+
+type GetNonceParams = {
+  userAddress: string;
+  token: string;
+};
+
+export const getNonce = async ({
+  userAddress,
+  token,
+}: GetNonceParams): Promise<string> => {
+  const nonceRes = await fetch(
+    `${apiUri}/web3auth/nonce?` +
+      new URLSearchParams({
+        userAddress: userAddress,
+      }),
+    {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'X-CSRF-TOKEN': token,
+      },
+    },
+  );
+  const { nonce } = await nonceRes.json();
+  return nonce || '';
+};

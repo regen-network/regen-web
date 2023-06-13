@@ -1,0 +1,3 @@
+fragment pressKitConnectSectionFields on PresskitPage {
+  connectSectionHeader
+}

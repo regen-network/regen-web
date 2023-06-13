@@ -2,15 +2,18 @@ import { lazy } from 'react';
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
   Outlet,
   Route,
   RouteObject,
 } from 'react-router-dom';
 import { Router } from '@remix-run/router';
+import * as Sentry from '@sentry/react';
 import { QueryClient } from '@tanstack/react-query';
 
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 
+import { CertificatePage } from 'pages/Certificate/Certificate';
 import MyBridge from 'pages/Dashboard/MyBridge';
 import { MyBridgableEcocreditsTable } from 'pages/Dashboard/MyBridge/MyBridge.BridgableEcocreditsTable';
 import { MyBridgedEcocreditsTable } from 'pages/Dashboard/MyBridge/MyBridge.BridgedEcocreditsTable';
@@ -40,7 +43,6 @@ const CreateCreditClassInfo = lazy(
   () => import('./pages/CreateCreditClassInfo'),
 );
 const CreateCreditClass = lazy(() => import('./pages/CreateCreditClass'));
-const CreateMethodology = lazy(() => import('./pages/CreateMethodology'));
 const CreditClassDetails = lazy(() => import('./pages/CreditClassDetails'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Description = lazy(() => import('./pages/Description'));
@@ -51,9 +53,6 @@ const Home = lazy(() => import('./pages/Home'));
 const LandStewards = lazy(() => import('./pages/LandStewards'));
 const Media = lazy(() => import('./pages/Media'));
 const MethodologyDetails = lazy(() => import('./pages/MethodologyDetails'));
-const MethodologyReviewProcess = lazy(
-  () => import('./pages/MethodologyReviewProcess'),
-);
 const NotFoundPage = lazy(() => import('./pages/NotFound'));
 const Project = lazy(() => import('./pages/Project'));
 const Projects = lazy(() => import('./pages/Projects'));
@@ -93,7 +92,10 @@ export const getRoutes = ({
         <Route path="verify-email" element={<VerifyEmail />} />
         <Route path="add" element={<Additionality />} />
         <Route path="buyers" element={<BuyersPage />} />
-        <Route path="create-methodology" element={<CreateMethodology />} />
+        <Route
+          path="create-methodology"
+          element={<Navigate to="/" replace />}
+        />
         <Route
           // TODO: thould this route be moved to /credit-classes?
           path="create-credit-class"
@@ -102,7 +104,7 @@ export const getRoutes = ({
         <Route path="project-developers" element={<LandStewards />} />
         <Route
           path="methodology-review-process"
-          element={<MethodologyReviewProcess />}
+          element={<Navigate to="/" replace />}
         />
         <Route
           path="projects/:page"
@@ -252,6 +254,10 @@ export const getRoutes = ({
             queryClient: reactQueryClient,
           })}
         />
+        <Route
+          path="certificate/:certificateId"
+          element={<CertificatePage />}
+        />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
       <Route path="profile">
@@ -265,7 +271,13 @@ export const getRoutes = ({
 export const getRouter = ({
   reactQueryClient,
   apolloClientFactory,
-}: RouterParams): Router =>
-  createBrowserRouter(getRoutes({ reactQueryClient, apolloClientFactory }), {
-    basename: process.env.PUBLIC_URL,
-  });
+}: RouterParams): Router => {
+  const sentryCreateBrowserRouter =
+    Sentry.wrapCreateBrowserRouter(createBrowserRouter);
+  return sentryCreateBrowserRouter(
+    getRoutes({ reactQueryClient, apolloClientFactory }),
+    {
+      basename: process.env.PUBLIC_URL,
+    },
+  );
+};

@@ -1,0 +1,6 @@
+fragment pressKitTopSectionFields on PresskitPage {
+  topSection {
+    title
+    body
+  }
+}

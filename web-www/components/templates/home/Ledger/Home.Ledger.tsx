@@ -9,6 +9,7 @@ import { homeStyles } from '../common/Home.styles';
 import { useLedgerStyles } from './Home.Ledger.styles';
 
 import { LedgerSectionFieldsFragment } from '@/generated/sanity-graphql';
+import homeLedger from '@/public/images/home/ledger.png';
 
 type Props = {
   ledgerDescription?: LedgerSectionFieldsFragment['ledgerDescription'];
@@ -29,7 +30,8 @@ const HomeLedger = ({ ledgerDescription }: Props) => {
         <Grid className={styles.imgContainer} item xs={12}>
           <Image
             className={styles.img}
-            src="/images/home/ledger.png"
+            src={homeLedger}
+            placeholder="blur"
             width={539}
             height={206}
             alt="3 blocks connected"

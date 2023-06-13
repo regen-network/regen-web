@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import ReactPlayerLazy from 'react-player/lazy';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import { Box } from '@mui/material';
+import { Box, Card, CardMedia, useMediaQuery, useTheme } from '@mui/material';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
@@ -13,6 +14,7 @@ import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingM
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
+import { PROJECTS_QUERY_KEY } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery.constants';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
 import {
@@ -27,6 +29,10 @@ import {
   STORY_TITLE_LABEL,
   SUMMARY_LABEL,
 } from 'components/organisms/DescriptionForm/DescriptionForm.constants';
+import {
+  GALLERY_PHOTOS,
+  MAIN_PHOTO,
+} from 'components/organisms/MediaForm/MediaForm.constants';
 
 import { Link } from '../../components/atoms';
 import { ProjectPageFooter } from '../../components/molecules';
@@ -38,6 +44,7 @@ import { isVCSCreditClass } from '../../lib/ecocredit/api';
 import { useCreateProjectContext } from '../ProjectCreate';
 import { useGetJurisdiction } from './hooks/useGetJurisdiction';
 import { useProjectCreateSubmit } from './hooks/useProjectCreateSubmit';
+import { STORY_PHOTO, STORY_VIDEO } from './ProjectReview.constants';
 import {
   getOnChainProjectId,
   getProjectReferenceID,
@@ -116,10 +123,18 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   const creditClassId = metadata?.['regen:creditClassId'];
   const isVCS = isVCSCreditClass(creditClassId);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
   const referenceId = getProjectReferenceID(metadata, creditClassId);
+
+  const previewPhoto = metadata?.['regen:previewPhoto'];
+  const galleryPhotos = metadata?.['regen:galleryPhotos'] ?? [];
+  const storyMedia = metadata?.['regen:storyMedia'];
+  const isVideo = storyMedia?.['@type'] === 'schema:VideoObject';
+  const isImage = storyMedia?.['@type'] === 'schema:ImageObject';
 
   const submit = async (): Promise<void> => {
     if (!jurisdiction) {
@@ -134,6 +149,9 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
       metadata: getAnchoredProjectMetadata(metadata, creditClassId),
       jurisdiction: jurisdiction || '',
       referenceId,
+    });
+    await reactQueryClient.invalidateQueries({
+      queryKey: [PROJECTS_QUERY_KEY],
     });
   };
 
@@ -181,24 +199,55 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
         title={'Media'}
         onEditClick={() => navigate(`${editPath}/media`)}
       >
-        {metadata?.['regen:previewPhoto'] && (
-          <Photo src={metadata?.['regen:previewPhoto']['schema:url']} />
+        {previewPhoto?.['schema:url'] && (
+          <ItemDisplay name={MAIN_PHOTO}>
+            {previewPhoto && (
+              <Photo
+                src={previewPhoto['schema:url']}
+                credit={previewPhoto['schema:creditText']}
+              />
+            )}
+          </ItemDisplay>
         )}
-        {metadata?.['regen:galleryPhotos']?.map(
-          photo => photo && <Photo src={photo['schema:url']} />,
+        {galleryPhotos?.length > 0 && (
+          <ItemDisplay name={GALLERY_PHOTOS}>
+            {galleryPhotos?.map(
+              photo =>
+                photo && (
+                  <Photo
+                    key={photo['schema:url']}
+                    src={photo['schema:url']}
+                    caption={photo['schema:caption']}
+                    credit={photo['schema:creditText']}
+                    sx={{ mb: 2.5 }}
+                  />
+                ),
+            )}
+          </ItemDisplay>
         )}
-        {/* TODO: display story image or video https://github.com/regen-network/regen-registry/issues/1615 */}
-        {/* {metadata?.['regen:storyMedia'] && (
-          <Card>
-            <CardMedia
-              component={ReactPlayerLazy}
-              url={videoUrl}
-              fallback={<div>Loading video player...</div>}
-              height={isMobile ? 216 : 293}
-              width="100%"
-            />
-          </Card>
-        )} */}
+        {storyMedia?.['schema:url'] && (
+          <ItemDisplay name={isVideo ? STORY_VIDEO : STORY_PHOTO}>
+            <>
+              {isVideo && (
+                <Card>
+                  <CardMedia
+                    component={ReactPlayerLazy}
+                    url={storyMedia['schema:url']}
+                    fallback={<div>Loading video player...</div>}
+                    height={isMobile ? 216 : 293}
+                    width="100%"
+                  />
+                </Card>
+              )}
+              {isImage && (
+                <Photo
+                  src={storyMedia['schema:url']}
+                  credit={storyMedia['schema:creditText']}
+                />
+              )}
+            </>
+          </ItemDisplay>
+        )}
       </ReviewCard>
       <ReviewCard
         title="Roles"

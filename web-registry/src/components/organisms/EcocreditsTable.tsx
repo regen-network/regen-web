@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, styled } from '@mui/material';
+import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
 
@@ -15,19 +15,9 @@ import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 
-import { AccountLink, Link } from 'components/atoms';
+import { AccountLink, BreakText, GreyText, Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { NoCredits } from 'components/molecules';
-
-const GreyText = styled('span')(({ theme }) => ({
-  color: theme.palette.info.main,
-}));
-
-const BreakText = styled('div')({
-  whiteSpace: 'normal',
-  wordWrap: 'break-word',
-  textAlign: 'end',
-});
 
 type EcocreditsTableProps = {
   credits?: BatchInfoWithBalance[];
@@ -69,7 +59,7 @@ export const EcocreditsTable: React.FC<
             },
           }}
         >
-          Batch Denom
+          {'Batch Denom'}
         </Box>,
         'Credit Class',
         <BreakText>Amount Tradable</BreakText>,

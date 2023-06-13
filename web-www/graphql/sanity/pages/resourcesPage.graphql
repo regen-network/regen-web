@@ -1,0 +1,6 @@
+query resourcesPage {
+  allResourcesPage {
+    ...resourcesTopSectionFields
+    ...resourcesSectionsFields
+  }
+}

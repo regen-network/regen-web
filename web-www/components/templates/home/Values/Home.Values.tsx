@@ -24,8 +24,8 @@ const HomeValues = ({ valuesData }: Props) => {
           <Image
             src={String(item?.image?.asset?.url)}
             alt={item?.title || ''}
-            width={Number(item?.image?.asset?.metadata?.dimensions?.width)}
-            height={Number(item?.image?.asset?.metadata?.dimensions?.height)}
+            width={200}
+            height={200}
           />
         ),
       };

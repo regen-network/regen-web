@@ -1,13 +1,7 @@
 import { useMemo } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import {
-  ApolloClient,
-  NormalizedCacheObject,
-  useApolloClient,
-} from '@apollo/client';
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/styles';
-import { useQuery } from '@tanstack/react-query';
 
 import { Flex } from 'web-components/lib/components/box';
 import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
@@ -24,8 +18,6 @@ import { truncate } from 'web-components/lib/utils/truncate';
 
 import { getAccountUrl } from 'lib/block-explorer';
 import { isBridgeEnabled } from 'lib/ledger';
-import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
@@ -35,7 +27,6 @@ import {
   profileVariantMapping,
 } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { Link } from 'components/atoms';
-import { useQueryIfCreditClassAdmin } from 'hooks/useQueryIfCreditClassAdmin';
 import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator';
 import { useQueryIfIssuer } from 'hooks/useQueryIfIssuer';
 import { useQueryIfProjectAdmin } from 'hooks/useQueryIfProjectAdmin';
@@ -47,23 +38,11 @@ const Dashboard = (): JSX.Element => {
   const theme = useTheme();
   const isIssuer = useQueryIfIssuer();
   const isCreditClassCreator = useQueryIfCreditClassCreator();
-  const isCreditClassAdmin = useQueryIfCreditClassAdmin();
   const isProjectAdmin = useQueryIfProjectAdmin();
   const showProjectTab = isIssuer || isProjectAdmin;
-  const showCreditClassTab = isCreditClassCreator || isCreditClassAdmin;
-  const { wallet, accountId, isConnected } = useWallet();
+  const { wallet, accountId, partyByAddr } = useWallet();
   const location = useLocation();
-  const graphqlClient =
-    useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
-  const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
-  const { data: partyByAddr } = useQuery(
-    getPartyByAddrQuery({
-      client: graphqlClient,
-      addr: wallet?.address ?? '',
-      enabled: isConnected && !!graphqlClient && !!csrfData,
-    }),
-  );
   const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
 
   const socialsLinks: SocialLink[] = useMemo(
@@ -90,7 +69,7 @@ const Dashboard = (): JSX.Element => {
         label: 'Credit Classes',
         icon: <CreditClassIcon sx={{ opacity: '70%' }} />,
         href: '/ecocredits/credit-classes',
-        hidden: !showCreditClassTab,
+        hidden: true,
       },
       {
         label: 'Credit Batches',
@@ -107,12 +86,7 @@ const Dashboard = (): JSX.Element => {
         hidden: !isBridgeEnabled,
       },
     ],
-    [
-      isIssuer,
-      showCreditClassTab,
-      showProjectTab,
-      theme.palette.secondary.main,
-    ],
+    [isIssuer, showProjectTab, theme.palette.secondary.main],
   );
 
   const activeTab = Math.max(
@@ -154,7 +128,6 @@ const Dashboard = (): JSX.Element => {
               <Outlet
                 context={{
                   isCreditClassCreator,
-                  isCreditClassAdmin,
                   isProjectAdmin,
                   isIssuer,
                 }}

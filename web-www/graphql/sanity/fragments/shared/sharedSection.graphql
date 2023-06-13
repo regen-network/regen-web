@@ -1,0 +1,5 @@
+query sharedSection {
+  allSharedSections {
+    ...sharedNewsletterSectionFields
+  }
+}

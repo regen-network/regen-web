@@ -1,0 +1,19 @@
+query ProjectById($id: String!) {
+  allProject(where: { projectId: { eq: $id } }) {
+    credibilityCards {
+      credibilityCard {
+        title
+        descriptionRaw
+        icon {
+          asset {
+            altText
+            url
+          }
+        }
+      }
+      claims {
+        description
+      }
+    }
+  }
+}

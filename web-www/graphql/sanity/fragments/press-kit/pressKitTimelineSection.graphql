@@ -1,0 +1,12 @@
+fragment pressKitTimelineSectionFields on PresskitPage {
+  timelineSection {
+    header
+    description
+    completedItemIndex
+    items {
+      date
+      summary
+      description
+    }
+  }
+}

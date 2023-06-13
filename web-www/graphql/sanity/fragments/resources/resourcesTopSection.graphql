@@ -1,0 +1,6 @@
+fragment resourcesTopSectionFields on ResourcesPage {
+  topSection {
+    title
+    body
+  }
+}

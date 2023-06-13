@@ -1,0 +1,13 @@
+query pressKitPage {
+  allPresskitPage {
+    ...pressKitTopSectionFields
+    ...pressKitTitleDescriptionSectionFields
+    ...pressKitEnableSectionFields
+    ...pressKitTimelineSectionFields
+    ...pressKitFeaturedSectionFields
+    ...pressKitAwardsSectionFields
+    ...pressKitLogosSectionFields
+    ...pressKitConnectSectionFields
+    ...pressKitPhotosSectionFields
+  }
+}

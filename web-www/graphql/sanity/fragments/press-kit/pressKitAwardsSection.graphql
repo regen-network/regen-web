@@ -1,0 +1,12 @@
+fragment pressKitAwardsSectionFields on PresskitPage {
+  awardsSection {
+    header
+    items {
+      title
+      link
+      image {
+        ...imageFields
+      }
+    }
+  }
+}

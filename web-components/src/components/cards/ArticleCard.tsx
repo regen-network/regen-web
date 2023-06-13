@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import { DefaultTheme as Theme } from '@mui/styles';
 import { makeStyles } from 'tss-react/mui';
 
@@ -47,10 +47,6 @@ const useStyles = makeStyles()((theme: Theme) => ({
     justifyContent: 'center',
     filter: 'drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.25))',
   },
-  icon: {
-    width: theme.spacing(8.75),
-    height: theme.spacing(8.75),
-  },
 }));
 
 export default function ArticleCard({
@@ -64,6 +60,7 @@ export default function ArticleCard({
   play = false,
 }: ArticleCardProps): JSX.Element {
   const { classes: styles } = useStyles();
+  const theme = useTheme();
   return (
     <MediaCard
       className={className}
@@ -74,7 +71,7 @@ export default function ArticleCard({
     >
       {play && (
         <div className={styles.play}>
-          <PlayIcon className={styles.icon} />
+          <PlayIcon width={theme.spacing(8.75)} height={theme.spacing(8.75)} />
         </div>
       )}
       <Body size="sm" sx={{ flex: '1 0 auto', py: [2.5, 2], px: [4, 5] }}>

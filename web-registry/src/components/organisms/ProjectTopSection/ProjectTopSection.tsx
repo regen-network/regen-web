@@ -56,6 +56,7 @@ function ProjectTopSection({
   landOwner,
   landSteward,
   projectDeveloper,
+  projectVerifier,
   projectWithOrderData,
   soldOutProjectsIds,
   batchData,
@@ -225,6 +226,7 @@ function ProjectTopSection({
               defaultAvatar,
             )}
             projectDeveloper={projectDeveloper}
+            projectVerifier={projectVerifier}
             landSteward={landSteward}
             landOwner={landOwner}
           />

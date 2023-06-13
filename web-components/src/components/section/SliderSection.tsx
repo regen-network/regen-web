@@ -15,6 +15,7 @@ interface SliderSectionProps {
   slidesToShow?: number;
   classes?: {
     root?: string;
+    title?: string;
   };
 }
 
@@ -64,7 +65,10 @@ function SliderSection({
   const showArrows: boolean = (isTablet || isDesktop) && items?.length > 3;
 
   return (
-    <Section className={cx(styles.root, classes?.root)}>
+    <Section
+      className={cx(styles.root, classes?.root)}
+      classes={{ title: classes?.title }}
+    >
       <LazyLoad offset={300}>
         <ResponsiveSlider
           classes={{ root: styles.slider, headerWrap: styles.headerWrap }}
@@ -72,7 +76,7 @@ function SliderSection({
           infinite={false}
           slidesToShow={slidesCount}
           padding={theme.spacing(2.5)}
-          itemWidth="100%"
+          mobileItemWidth="100%"
           items={items}
           renderTitle={() => (
             <Title variant="h2" mobileVariant="h3" align={'left'}>

@@ -34,7 +34,7 @@ export default function GreenCard({
 
   return (
     <Card
-      className={cx(className, classes.root)}
+      className={cx(classes.root, className)}
       borderColor={theme.palette.grey[100]}
       borderRadius="10px"
       elevation={1}

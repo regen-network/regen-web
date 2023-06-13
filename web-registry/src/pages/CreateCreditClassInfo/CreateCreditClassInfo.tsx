@@ -150,7 +150,7 @@ const CreateCreditClassInfo: React.FC<React.PropsWithChildren<unknown>> =
             descriptionRaw={content?.outcomeSection?.descriptionRaw}
           />
           <ResponsiveSlider
-            itemWidth="90%"
+            mobileItemWidth="90%"
             padding={theme.spacing(2.5)}
             title="Ecological outcomes"
             arrows={content?.outcomes ? content.outcomes.length > 3 : false}
@@ -163,7 +163,7 @@ const CreateCreditClassInfo: React.FC<React.PropsWithChildren<unknown>> =
           <Section withSlider className={classes.padBottom}>
             <ResponsiveSlider
               infinite={false}
-              itemWidth="90%"
+              mobileItemWidth="90%"
               classes={{
                 title: classes.resourcesTitle,
                 root: classes.resourcesRoot,

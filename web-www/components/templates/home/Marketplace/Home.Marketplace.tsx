@@ -49,11 +49,8 @@ const MarketplaceSection = ({ marketplaceData }: Props) => {
                 <Image
                   src={String(cta.image?.asset?.url)}
                   alt={String(cta.caption)}
-                  width={Number(cta.image?.asset?.metadata?.dimensions?.width)}
-                  height={Number(
-                    cta.image?.asset?.metadata?.dimensions?.height,
-                  )}
-                  style={{ width: '159px', height: 'auto' }}
+                  width={159}
+                  height={159}
                 />
                 <Label size="md" sx={{ pt: 4 }}>
                   {cta.caption}

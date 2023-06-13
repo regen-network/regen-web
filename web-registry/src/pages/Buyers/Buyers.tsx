@@ -18,6 +18,7 @@ import { client as sanityClient } from '../../lib/clients/sanity';
 import { BuyersEcologicalCreditCardsSection } from './Buyers.EcologicalCreditCardsSection';
 import { BuyersFeaturedProjectsSection } from './Buyers.FeaturedProjectsSection';
 import { BuyersPartnersSection } from './Buyers.PartnersSection';
+import { BuyersQuoteSection } from './Buyers.QuoteSection';
 import { useBuyersStyles } from './Buyers.styles';
 import { useFetchProjectsByIds } from './hooks/useFetchProjectsByIds';
 
@@ -117,13 +118,16 @@ const BuyersPage = (): JSX.Element => {
               }}
             />
           )}
+          {content?.quoteSection && (
+            <BuyersQuoteSection content={content?.quoteSection} />
+          )}
           {content?.partnersSection && (
             <BuyersPartnersSection content={content?.partnersSection} />
           )}
           {content?.contactSection && (
             <HeroAction
               classes={{ section: styles.bottomHeroSection }}
-              isBanner
+              isBanner={false}
               img={content?.contactSection?.image?.image?.asset?.url || ''}
               bottomBanner={content?.contactSection}
               openModal={() => null}

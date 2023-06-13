@@ -438,6 +438,7 @@ export type BuyersPage = Document & {
   imageGridSection?: Maybe<ImageGridSection>;
   ecologicalCreditCardsSection?: Maybe<EcologicalCreditCardsSection>;
   featuredProjectCardsSection?: Maybe<BuyersFeaturedProjectCardsSection>;
+  quoteSection?: Maybe<BuyersQuoteSection>;
   partnersSection?: Maybe<BuyersPartnersSection>;
   contactSection?: Maybe<BottomBanner>;
   footerButtonText?: Maybe<Scalars['String']>;
@@ -458,6 +459,7 @@ export type BuyersPageFilter = {
   imageGridSection?: Maybe<ImageGridSectionFilter>;
   ecologicalCreditCardsSection?: Maybe<EcologicalCreditCardsSectionFilter>;
   featuredProjectCardsSection?: Maybe<BuyersFeaturedProjectCardsSectionFilter>;
+  quoteSection?: Maybe<BuyersQuoteSectionFilter>;
   partnersSection?: Maybe<BuyersPartnersSectionFilter>;
   contactSection?: Maybe<BottomBannerFilter>;
   footerButtonText?: Maybe<StringFilter>;
@@ -476,6 +478,7 @@ export type BuyersPageSorting = {
   imageGridSection?: Maybe<ImageGridSectionSorting>;
   ecologicalCreditCardsSection?: Maybe<EcologicalCreditCardsSectionSorting>;
   featuredProjectCardsSection?: Maybe<BuyersFeaturedProjectCardsSectionSorting>;
+  quoteSection?: Maybe<BuyersQuoteSectionSorting>;
   partnersSection?: Maybe<BuyersPartnersSectionSorting>;
   contactSection?: Maybe<BottomBannerSorting>;
   footerButtonText?: Maybe<SortOrder>;
@@ -500,6 +503,60 @@ export type BuyersPartnersSectionSorting = {
   _key?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
+};
+
+export type BuyersQuoteSection = {
+  __typename?: 'BuyersQuoteSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  backgroundImage?: Maybe<CustomImage>;
+  quoteText?: Maybe<BuyersQuoteText>;
+  person?: Maybe<Person>;
+  logo?: Maybe<Image>;
+};
+
+export type BuyersQuoteSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  backgroundImage?: Maybe<CustomImageFilter>;
+  quoteText?: Maybe<BuyersQuoteTextFilter>;
+  person?: Maybe<PersonFilter>;
+  logo?: Maybe<ImageFilter>;
+};
+
+export type BuyersQuoteSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  backgroundImage?: Maybe<CustomImageSorting>;
+  quoteText?: Maybe<BuyersQuoteTextSorting>;
+  logo?: Maybe<ImageSorting>;
+};
+
+export type BuyersQuoteText = {
+  __typename?: 'BuyersQuoteText';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  /** This part is highlighted in green */
+  quoteFirstPart?: Maybe<Scalars['String']>;
+  quoteMiddlePart?: Maybe<Scalars['String']>;
+  /** This part is highlighted in green */
+  quoteLastPart?: Maybe<Scalars['String']>;
+};
+
+export type BuyersQuoteTextFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  quoteFirstPart?: Maybe<StringFilter>;
+  quoteMiddlePart?: Maybe<StringFilter>;
+  quoteLastPart?: Maybe<StringFilter>;
+};
+
+export type BuyersQuoteTextSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  quoteFirstPart?: Maybe<SortOrder>;
+  quoteMiddlePart?: Maybe<SortOrder>;
+  quoteLastPart?: Maybe<SortOrder>;
 };
 
 export type CallToAction = {
@@ -546,6 +603,7 @@ export type CarbonPlusSection = {
   description?: Maybe<Scalars['String']>;
   linkText?: Maybe<Scalars['String']>;
   linkUrl?: Maybe<Scalars['String']>;
+  image?: Maybe<CustomImage>;
 };
 
 export type CarbonPlusSectionFilter = {
@@ -557,6 +615,7 @@ export type CarbonPlusSectionFilter = {
   description?: Maybe<StringFilter>;
   linkText?: Maybe<StringFilter>;
   linkUrl?: Maybe<StringFilter>;
+  image?: Maybe<CustomImageFilter>;
 };
 
 export type CarbonPlusSectionSorting = {
@@ -568,6 +627,7 @@ export type CarbonPlusSectionSorting = {
   description?: Maybe<SortOrder>;
   linkText?: Maybe<SortOrder>;
   linkUrl?: Maybe<SortOrder>;
+  image?: Maybe<CustomImageSorting>;
 };
 
 export type Card = {
@@ -1055,6 +1115,44 @@ export type CaseStudyPageSorting = {
   bottomSection?: Maybe<CaseStudyBottomSectionSorting>;
 };
 
+export type Claim = Document & {
+  __typename?: 'Claim';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+};
+
+export type ClaimFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  description?: Maybe<StringFilter>;
+};
+
+export type ClaimSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  description?: Maybe<SortOrder>;
+};
+
 export type ClimateSection = {
   __typename?: 'ClimateSection';
   _key?: Maybe<Scalars['String']>;
@@ -1499,6 +1597,48 @@ export type CreateMethodologyStepCardSectionSorting = {
   bottomTitle?: Maybe<SortOrder>;
 };
 
+export type CredibilityCard = Document & {
+  __typename?: 'CredibilityCard';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+  icon?: Maybe<Image>;
+};
+
+export type CredibilityCardFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  icon?: Maybe<ImageFilter>;
+};
+
+export type CredibilityCardSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  icon?: Maybe<ImageSorting>;
+};
+
 export type CreditClass = Document & {
   __typename?: 'CreditClass';
   /** Document ID */
@@ -1652,6 +1792,34 @@ export type CreditTypeSorting = {
   _key?: Maybe<SortOrder>;
   name?: Maybe<SortOrder>;
   image?: Maybe<ImageSorting>;
+};
+
+export type CrossDatasetReference = {
+  __typename?: 'CrossDatasetReference';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  _ref?: Maybe<Scalars['String']>;
+  _weak?: Maybe<Scalars['Boolean']>;
+  _dataset?: Maybe<Scalars['String']>;
+  _projectId?: Maybe<Scalars['String']>;
+};
+
+export type CrossDatasetReferenceFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  _ref?: Maybe<StringFilter>;
+  _weak?: Maybe<BooleanFilter>;
+  _dataset?: Maybe<StringFilter>;
+  _projectId?: Maybe<StringFilter>;
+};
+
+export type CrossDatasetReferenceSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _ref?: Maybe<SortOrder>;
+  _weak?: Maybe<SortOrder>;
+  _dataset?: Maybe<SortOrder>;
+  _projectId?: Maybe<SortOrder>;
 };
 
 export type CustomImage = {
@@ -2788,13 +2956,13 @@ export type HomePageWeb = Document & {
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
   homeFoldSection?: Maybe<HomeFoldSection>;
+  carbonPlusSection?: Maybe<CarbonPlusSection>;
   marketplaceSection?: Maybe<MarketplaceSection>;
   homeWebPartnersSection?: Maybe<HomeWebPartnersSection>;
   homeWebEcologicalCreditCardsSection?: Maybe<HomeWebEcologicalCreditCardsSection>;
   homeWebStatsSection?: Maybe<HomeWebStatsSection>;
   bannerTextSection?: Maybe<TitleImageCustomBody>;
   climateSection?: Maybe<ClimateSection>;
-  carbonPlusSection?: Maybe<CarbonPlusSection>;
   ledgerDescription?: Maybe<Scalars['String']>;
   valuesSection?: Maybe<HomeValuesSection>;
 };
@@ -2809,13 +2977,13 @@ export type HomePageWebFilter = {
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
   homeFoldSection?: Maybe<HomeFoldSectionFilter>;
+  carbonPlusSection?: Maybe<CarbonPlusSectionFilter>;
   marketplaceSection?: Maybe<MarketplaceSectionFilter>;
   homeWebPartnersSection?: Maybe<HomeWebPartnersSectionFilter>;
   homeWebEcologicalCreditCardsSection?: Maybe<HomeWebEcologicalCreditCardsSectionFilter>;
   homeWebStatsSection?: Maybe<HomeWebStatsSectionFilter>;
   bannerTextSection?: Maybe<TitleImageCustomBodyFilter>;
   climateSection?: Maybe<ClimateSectionFilter>;
-  carbonPlusSection?: Maybe<CarbonPlusSectionFilter>;
   ledgerDescription?: Maybe<StringFilter>;
   valuesSection?: Maybe<HomeValuesSectionFilter>;
 };
@@ -2828,13 +2996,13 @@ export type HomePageWebSorting = {
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
   homeFoldSection?: Maybe<HomeFoldSectionSorting>;
+  carbonPlusSection?: Maybe<CarbonPlusSectionSorting>;
   marketplaceSection?: Maybe<MarketplaceSectionSorting>;
   homeWebPartnersSection?: Maybe<HomeWebPartnersSectionSorting>;
   homeWebEcologicalCreditCardsSection?: Maybe<HomeWebEcologicalCreditCardsSectionSorting>;
   homeWebStatsSection?: Maybe<HomeWebStatsSectionSorting>;
   bannerTextSection?: Maybe<TitleImageCustomBodySorting>;
   climateSection?: Maybe<ClimateSectionSorting>;
-  carbonPlusSection?: Maybe<CarbonPlusSectionSorting>;
   ledgerDescription?: Maybe<SortOrder>;
   valuesSection?: Maybe<HomeValuesSectionSorting>;
 };
@@ -4056,6 +4224,47 @@ export type PartnersPageSorting = {
   contactHeader?: Maybe<SortOrder>;
 };
 
+export type Person = Document & {
+  __typename?: 'Person';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  role?: Maybe<Scalars['String']>;
+};
+
+export type PersonFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  name?: Maybe<StringFilter>;
+  role?: Maybe<StringFilter>;
+};
+
+export type PersonSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  name?: Maybe<SortOrder>;
+  role?: Maybe<SortOrder>;
+};
+
 export type PracticesOutcomesSection = {
   __typename?: 'PracticesOutcomesSection';
   _key?: Maybe<Scalars['String']>;
@@ -4322,6 +4531,7 @@ export type Project = Document & {
   projectName?: Maybe<Scalars['String']>;
   /** on-chain project id */
   projectId?: Maybe<Scalars['String']>;
+  credibilityCards?: Maybe<Array<Maybe<ProjectDetailsCard>>>;
 };
 
 export type ProjectActivity = Document & {
@@ -4365,6 +4575,48 @@ export type ProjectActivitySorting = {
   icon?: Maybe<ImageSorting>;
 };
 
+export type ProjectDetailsCard = {
+  __typename?: 'ProjectDetailsCard';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  credibilityCard?: Maybe<CredibilityCard>;
+  claims?: Maybe<Array<Maybe<Claim>>>;
+};
+
+export type ProjectDetailsCardFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  credibilityCard?: Maybe<CredibilityCardFilter>;
+};
+
+export type ProjectDetailsCardSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+};
+
+export type ProjectDetailsSection = {
+  __typename?: 'ProjectDetailsSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+};
+
+export type ProjectDetailsSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  label?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+};
+
+export type ProjectDetailsSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  label?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+};
+
 export type ProjectFilter = {
   /** Apply filters on document level */
   _?: Maybe<Sanity_DocumentFilter>;
@@ -4393,6 +4645,7 @@ export type ProjectPage = Document & {
   _key?: Maybe<Scalars['String']>;
   /** This content will appear on all project pages */
   gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSection>;
+  projectDetailsSection?: Maybe<ProjectDetailsSection>;
 };
 
 export type ProjectPageFilter = {
@@ -4405,6 +4658,7 @@ export type ProjectPageFilter = {
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
   gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSectionFilter>;
+  projectDetailsSection?: Maybe<ProjectDetailsSectionFilter>;
 };
 
 export type ProjectPageSorting = {
@@ -4414,6 +4668,7 @@ export type ProjectPageSorting = {
   _updatedAt?: Maybe<SortOrder>;
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
+  projectDetailsSection?: Maybe<ProjectDetailsSectionSorting>;
 };
 
 export type ProjectSorting = {
@@ -4621,26 +4876,6 @@ export type ResourcesCardSorting = {
   buttonHref?: Maybe<SortOrder>;
 };
 
-export type ResourcesLedgerSection = {
-  __typename?: 'ResourcesLedgerSection';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  header?: Maybe<Scalars['String']>;
-  cards?: Maybe<Array<Maybe<Resource>>>;
-};
-
-export type ResourcesLedgerSectionFilter = {
-  _key?: Maybe<StringFilter>;
-  _type?: Maybe<StringFilter>;
-  header?: Maybe<StringFilter>;
-};
-
-export type ResourcesLedgerSectionSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  header?: Maybe<SortOrder>;
-};
-
 export type ResourcesPage = Document & {
   __typename?: 'ResourcesPage';
   /** Document ID */
@@ -4655,8 +4890,7 @@ export type ResourcesPage = Document & {
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
   topSection?: Maybe<TitleBody>;
-  registrySection?: Maybe<ResourcesRegistrySection>;
-  ledgerSection?: Maybe<ResourcesLedgerSection>;
+  resourcesSections?: Maybe<Array<Maybe<ResourcesSection>>>;
 };
 
 export type ResourcesPageFilter = {
@@ -4669,8 +4903,6 @@ export type ResourcesPageFilter = {
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
   topSection?: Maybe<TitleBodyFilter>;
-  registrySection?: Maybe<ResourcesRegistrySectionFilter>;
-  ledgerSection?: Maybe<ResourcesLedgerSectionFilter>;
 };
 
 export type ResourcesPageSorting = {
@@ -4681,52 +4913,26 @@ export type ResourcesPageSorting = {
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
   topSection?: Maybe<TitleBodySorting>;
-  registrySection?: Maybe<ResourcesRegistrySectionSorting>;
-  ledgerSection?: Maybe<ResourcesLedgerSectionSorting>;
 };
 
-export type ResourcesRegistrySection = {
-  __typename?: 'ResourcesRegistrySection';
+export type ResourcesSection = {
+  __typename?: 'ResourcesSection';
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
   header?: Maybe<Scalars['String']>;
-  documentTableTitle?: Maybe<Scalars['String']>;
-  documents?: Maybe<Array<Maybe<Doc>>>;
-  subsections?: Maybe<Array<Maybe<ResourcesRegistrySubSection>>>;
-};
-
-export type ResourcesRegistrySectionFilter = {
-  _key?: Maybe<StringFilter>;
-  _type?: Maybe<StringFilter>;
-  header?: Maybe<StringFilter>;
-  documentTableTitle?: Maybe<StringFilter>;
-};
-
-export type ResourcesRegistrySectionSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  header?: Maybe<SortOrder>;
-  documentTableTitle?: Maybe<SortOrder>;
-};
-
-export type ResourcesRegistrySubSection = {
-  __typename?: 'ResourcesRegistrySubSection';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
   cards?: Maybe<Array<Maybe<Resource>>>;
 };
 
-export type ResourcesRegistrySubSectionFilter = {
+export type ResourcesSectionFilter = {
   _key?: Maybe<StringFilter>;
   _type?: Maybe<StringFilter>;
-  title?: Maybe<StringFilter>;
+  header?: Maybe<StringFilter>;
 };
 
-export type ResourcesRegistrySubSectionSorting = {
+export type ResourcesSectionSorting = {
   _key?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
-  title?: Maybe<SortOrder>;
+  header?: Maybe<SortOrder>;
 };
 
 export type ReviewSection = {
@@ -4771,6 +4977,8 @@ export type RootQuery = {
   BuyersPage?: Maybe<BuyersPage>;
   CaseStudiesPage?: Maybe<CaseStudiesPage>;
   CaseStudyPage?: Maybe<CaseStudyPage>;
+  Claim?: Maybe<Claim>;
+  CredibilityCard?: Maybe<CredibilityCard>;
   CommunityPage?: Maybe<CommunityPage>;
   ContactPage?: Maybe<ContactPage>;
   CreateCreditClassPage?: Maybe<CreateCreditClassPage>;
@@ -4802,6 +5010,7 @@ export type RootQuery = {
   OffsetMethod?: Maybe<OffsetMethod>;
   Partner?: Maybe<Partner>;
   PartnersPage?: Maybe<PartnersPage>;
+  Person?: Maybe<Person>;
   PresskitPage?: Maybe<PresskitPage>;
   Project?: Maybe<Project>;
   ProjectActivity?: Maybe<ProjectActivity>;
@@ -4830,6 +5039,8 @@ export type RootQuery = {
   allBuyersPage: Array<BuyersPage>;
   allCaseStudiesPage: Array<CaseStudiesPage>;
   allCaseStudyPage: Array<CaseStudyPage>;
+  allClaim: Array<Claim>;
+  allCredibilityCard: Array<CredibilityCard>;
   allCommunityPage: Array<CommunityPage>;
   allContactPage: Array<ContactPage>;
   allCreateCreditClassPage: Array<CreateCreditClassPage>;
@@ -4861,6 +5072,7 @@ export type RootQuery = {
   allOffsetMethod: Array<OffsetMethod>;
   allPartner: Array<Partner>;
   allPartnersPage: Array<PartnersPage>;
+  allPerson: Array<Person>;
   allPresskitPage: Array<PresskitPage>;
   allProject: Array<Project>;
   allProjectActivity: Array<ProjectActivity>;
@@ -4916,6 +5128,16 @@ export type RootQueryCaseStudiesPageArgs = {
 
 
 export type RootQueryCaseStudyPageArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryClaimArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryCredibilityCardArgs = {
   id: Scalars['ID'];
 };
 
@@ -5071,6 +5293,11 @@ export type RootQueryPartnerArgs = {
 
 
 export type RootQueryPartnersPageArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryPersonArgs = {
   id: Scalars['ID'];
 };
 
@@ -5231,6 +5458,22 @@ export type RootQueryAllCaseStudiesPageArgs = {
 export type RootQueryAllCaseStudyPageArgs = {
   where?: Maybe<CaseStudyPageFilter>;
   sort?: Maybe<Array<CaseStudyPageSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllClaimArgs = {
+  where?: Maybe<ClaimFilter>;
+  sort?: Maybe<Array<ClaimSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllCredibilityCardArgs = {
+  where?: Maybe<CredibilityCardFilter>;
+  sort?: Maybe<Array<CredibilityCardSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -5479,6 +5722,14 @@ export type RootQueryAllPartnerArgs = {
 export type RootQueryAllPartnersPageArgs = {
   where?: Maybe<PartnersPageFilter>;
   sort?: Maybe<Array<PartnersPageSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllPersonArgs = {
+  where?: Maybe<PersonFilter>;
+  sort?: Maybe<Array<PersonSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -6302,18 +6553,21 @@ export type Slug = {
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
   current?: Maybe<Scalars['String']>;
+  source?: Maybe<Scalars['String']>;
 };
 
 export type SlugFilter = {
   _key?: Maybe<StringFilter>;
   _type?: Maybe<StringFilter>;
   current?: Maybe<StringFilter>;
+  source?: Maybe<StringFilter>;
 };
 
 export type SlugSorting = {
   _key?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
   current?: Maybe<SortOrder>;
+  source?: Maybe<SortOrder>;
 };
 
 export type SoldOutProjects = Document & {
@@ -7169,85 +7423,15 @@ export type WalletAddressRegistrationWalletSectionSorting = {
   walletFoundButtonText?: Maybe<SortOrder>;
 };
 
-export type BlogSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type BlogSectionQuery = (
-  { __typename?: 'RootQuery' }
-  & { allSharedSections: Array<(
-    { __typename?: 'SharedSections' }
-    & { blog?: Maybe<(
-      { __typename?: 'BlogSection' }
-      & Pick<BlogSection, 'header'>
-      & { posts?: Maybe<Array<Maybe<(
-        { __typename?: 'BlogPost' }
-        & Pick<BlogPost, 'header' | 'url' | 'descriptionRaw'>
-        & { image?: Maybe<(
-          { __typename?: 'CustomImage' }
-          & CustomImageFieldsFragment
-        )> }
-      )>>> }
-    )> }
-  )> }
-);
-
-export type CallToActionFieldsFragment = (
-  { __typename?: 'CallToAction' }
-  & Pick<CallToAction, 'caption' | 'header' | 'description' | 'linkText' | 'linkUrl'>
-  & { image?: Maybe<(
-    { __typename?: 'Image' }
-    & ImageFieldsFragment
-  )> }
-);
-
-export type CustomImageFieldsFragment = (
-  { __typename?: 'CustomImage' }
-  & Pick<CustomImage, 'imageAlt' | 'imageHref'>
-  & { image?: Maybe<(
-    { __typename?: 'Image' }
-    & { asset?: Maybe<(
-      { __typename?: 'SanityImageAsset' }
-      & Pick<SanityImageAsset, 'altText' | 'url'>
-      & { metadata?: Maybe<(
-        { __typename?: 'SanityImageMetadata' }
-        & { dimensions?: Maybe<(
-          { __typename?: 'SanityImageDimensions' }
-          & Pick<SanityImageDimensions, 'height' | 'width'>
-        )> }
-      )> }
-    )> }
-  )> }
-);
-
-export type ImageFieldsFragment = (
-  { __typename?: 'Image' }
-  & { asset?: Maybe<(
-    { __typename?: 'SanityImageAsset' }
-    & Pick<SanityImageAsset, 'altText' | 'url'>
-    & { metadata?: Maybe<(
-      { __typename?: 'SanityImageMetadata' }
-      & { dimensions?: Maybe<(
-        { __typename?: 'SanityImageDimensions' }
-        & Pick<SanityImageDimensions, 'height' | 'width'>
-      )> }
-    )> }
-  )> }
-);
-
-export type ButtonFieldsFragment = (
-  { __typename?: 'Button' }
-  & Pick<Button, 'buttonText' | 'buttonModal' | 'buttonBlankTarget'>
-  & { buttonLink?: Maybe<(
-    { __typename?: 'Link' }
-    & LinkFieldsFragment
-  )> }
-);
-
 export type CarbonPlusSectionFieldsFragment = (
   { __typename?: 'HomePageWeb' }
   & { carbonPlusSection?: Maybe<(
     { __typename?: 'CarbonPlusSection' }
     & Pick<CarbonPlusSection, 'smallHeaderFeatured' | 'smallHeaderCreditName' | 'header' | 'description' | 'linkText' | 'linkUrl'>
+    & { image?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
+    )> }
   )> }
 );
 
@@ -7376,12 +7560,384 @@ export type ValuesSectionFieldsFragment = (
   )> }
 );
 
+export type PressKitAwardsSectionFieldsFragment = (
+  { __typename?: 'PresskitPage' }
+  & { awardsSection?: Maybe<(
+    { __typename?: 'PresskitAwardsSection' }
+    & Pick<PresskitAwardsSection, 'header'>
+    & { items?: Maybe<Array<Maybe<(
+      { __typename?: 'TitleImageLink' }
+      & Pick<TitleImageLink, 'title' | 'link'>
+      & { image?: Maybe<(
+        { __typename?: 'Image' }
+        & ImageFieldsFragment
+      )> }
+    )>>> }
+  )> }
+);
+
+export type PressKitConnectSectionFieldsFragment = (
+  { __typename?: 'PresskitPage' }
+  & Pick<PresskitPage, 'connectSectionHeader'>
+);
+
+export type PressKitEnableSectionFieldsFragment = (
+  { __typename?: 'PresskitPage' }
+  & { enableSection?: Maybe<(
+    { __typename?: 'TitleImageCustomBody' }
+    & Pick<TitleImageCustomBody, 'title' | 'bodyRaw'>
+    & { image?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
+    )> }
+  )> }
+);
+
+export type PressKitFeaturedSectionFieldsFragment = (
+  { __typename?: 'PresskitPage' }
+  & { featuredSection?: Maybe<(
+    { __typename?: 'PresskitFeaturedSection' }
+    & Pick<PresskitFeaturedSection, 'header'>
+    & { articles?: Maybe<Array<Maybe<(
+      { __typename?: 'Media' }
+      & Pick<Media, 'title' | 'author' | 'date' | 'href' | 'type'>
+      & { image?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )> }
+    )>>> }
+  )> }
+);
+
+export type PressKitLogosSectionFieldsFragment = (
+  { __typename?: 'PresskitPage' }
+  & { logosSection?: Maybe<(
+    { __typename?: 'PresskitLogosSection' }
+    & Pick<PresskitLogosSection, 'header' | 'buttonText' | 'buttonLink'>
+  )> }
+);
+
+export type PressKitPhotosSectionFieldsFragment = (
+  { __typename?: 'PresskitPage' }
+  & { photosSection?: Maybe<(
+    { __typename?: 'PresskitPhotosSection' }
+    & Pick<PresskitPhotosSection, 'header'>
+    & { photos?: Maybe<Array<Maybe<(
+      { __typename?: 'Image' }
+      & { asset?: Maybe<(
+        { __typename?: 'SanityImageAsset' }
+        & Pick<SanityImageAsset, 'url'>
+      )> }
+    )>>> }
+  )> }
+);
+
+export type PressKitTimelineSectionFieldsFragment = (
+  { __typename?: 'PresskitPage' }
+  & { timelineSection?: Maybe<(
+    { __typename?: 'PresskitTimelineSection' }
+    & Pick<PresskitTimelineSection, 'header' | 'description' | 'completedItemIndex'>
+    & { items?: Maybe<Array<Maybe<(
+      { __typename?: 'PresskitTimelineItem' }
+      & Pick<PresskitTimelineItem, 'date' | 'summary' | 'description'>
+    )>>> }
+  )> }
+);
+
+export type PressKitTitleDescriptionSectionFieldsFragment = (
+  { __typename?: 'PresskitPage' }
+  & { titleDescriptionSection?: Maybe<(
+    { __typename?: 'TitleCustomBody' }
+    & Pick<TitleCustomBody, 'title' | 'bodyRaw'>
+  )> }
+);
+
+export type PressKitTopSectionFieldsFragment = (
+  { __typename?: 'PresskitPage' }
+  & { topSection?: Maybe<(
+    { __typename?: 'TitleBody' }
+    & Pick<TitleBody, 'title' | 'body'>
+  )> }
+);
+
+export type ResourcesSectionsFieldsFragment = (
+  { __typename?: 'ResourcesPage' }
+  & { resourcesSections?: Maybe<Array<Maybe<(
+    { __typename?: 'ResourcesSection' }
+    & ResourceFieldsFragment
+  )>>> }
+);
+
+export type ResourcesTopSectionFieldsFragment = (
+  { __typename?: 'ResourcesPage' }
+  & { topSection?: Maybe<(
+    { __typename?: 'TitleBody' }
+    & Pick<TitleBody, 'title' | 'body'>
+  )> }
+);
+
+export type CallToActionFieldsFragment = (
+  { __typename?: 'CallToAction' }
+  & Pick<CallToAction, 'caption' | 'header' | 'description' | 'linkText' | 'linkUrl'>
+  & { image?: Maybe<(
+    { __typename?: 'Image' }
+    & ImageFieldsFragment
+  )> }
+);
+
+export type CustomImageFieldsFragment = (
+  { __typename?: 'CustomImage' }
+  & Pick<CustomImage, 'imageAlt' | 'imageHref'>
+  & { image?: Maybe<(
+    { __typename?: 'Image' }
+    & { asset?: Maybe<(
+      { __typename?: 'SanityImageAsset' }
+      & Pick<SanityImageAsset, 'altText' | 'url'>
+      & { metadata?: Maybe<(
+        { __typename?: 'SanityImageMetadata' }
+        & { dimensions?: Maybe<(
+          { __typename?: 'SanityImageDimensions' }
+          & Pick<SanityImageDimensions, 'height' | 'width'>
+        )> }
+      )> }
+    )> }
+  )> }
+);
+
+export type ImageFieldsFragment = (
+  { __typename?: 'Image' }
+  & { asset?: Maybe<(
+    { __typename?: 'SanityImageAsset' }
+    & Pick<SanityImageAsset, 'altText' | 'url'>
+    & { metadata?: Maybe<(
+      { __typename?: 'SanityImageMetadata' }
+      & { dimensions?: Maybe<(
+        { __typename?: 'SanityImageDimensions' }
+        & Pick<SanityImageDimensions, 'height' | 'width'>
+      )> }
+    )> }
+  )> }
+);
+
+export type MediaFieldsFragment = (
+  { __typename?: 'Media' }
+  & Pick<Media, 'title' | 'author' | 'date' | 'href' | 'type'>
+  & { image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )> }
+);
+
+export type ButtonFieldsFragment = (
+  { __typename?: 'Button' }
+  & Pick<Button, 'buttonText' | 'buttonModal' | 'buttonBlankTarget'>
+  & { buttonLink?: Maybe<(
+    { __typename?: 'Link' }
+    & LinkFieldsFragment
+  )> }
+);
+
 export type LinkFieldsFragment = (
   { __typename?: 'Link' }
   & Pick<Link, 'buttonHref'>
   & { buttonDoc?: Maybe<(
     { __typename?: 'Doc' }
     & Pick<Doc, 'href'>
+  )> }
+);
+
+export type ResourceFieldsFragment = (
+  { __typename?: 'ResourcesSection' }
+  & Pick<ResourcesSection, 'header'>
+  & { cards?: Maybe<Array<Maybe<(
+    { __typename?: 'Resource' }
+    & Pick<Resource, 'titleRaw' | 'descriptionRaw' | 'lastUpdated'>
+    & { button?: Maybe<(
+      { __typename?: 'Button' }
+      & ButtonFieldsFragment
+    )>, image?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
+    )> }
+  )>>> }
+);
+
+export type SharedNewsletterSectionFieldsFragment = (
+  { __typename?: 'SharedSections' }
+  & { newsletter?: Maybe<(
+    { __typename?: 'TitleCustomBody' }
+    & Pick<TitleCustomBody, 'title' | 'bodyRaw'>
+  )> }
+);
+
+export type SharedSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SharedSectionQuery = (
+  { __typename?: 'RootQuery' }
+  & { allSharedSections: Array<(
+    { __typename?: 'SharedSections' }
+    & SharedNewsletterSectionFieldsFragment
+  )> }
+);
+
+export type TokenBlockExplorerSectionFieldsFragment = (
+  { __typename?: 'TokenPage' }
+  & { blockExplorerSection?: Maybe<(
+    { __typename?: 'TitleBodyButton' }
+    & Pick<TitleBodyButton, 'title' | 'bodyRaw'>
+    & { button?: Maybe<(
+      { __typename?: 'Button' }
+      & ButtonFieldsFragment
+    )> }
+  )> }
+);
+
+export type TokenConnectSectionFieldsFragment = (
+  { __typename?: 'TokenPage' }
+  & Pick<TokenPage, 'connectSectionHeader'>
+);
+
+export type TokenEconomicsSectionFieldsFragment = (
+  { __typename?: 'TokenPage' }
+  & { tokenEconomics?: Maybe<(
+    { __typename?: 'TitleCustomBody' }
+    & Pick<TitleCustomBody, 'title' | 'bodyRaw'>
+  )> }
+);
+
+export type TokenInfoSectionFieldsFragment = (
+  { __typename?: 'TokenPage' }
+  & { infoSection?: Maybe<(
+    { __typename?: 'TokenInfoSection' }
+    & Pick<TokenInfoSection, 'title' | 'subtitle' | 'bodyRaw'>
+    & { image?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
+    )> }
+  )> }
+);
+
+export type TokenMediaSectionFieldsFragment = (
+  { __typename?: 'TokenPage' }
+  & { mediaCards?: Maybe<Array<Maybe<(
+    { __typename?: 'Media' }
+    & MediaFieldsFragment
+  )>>> }
+);
+
+export type TokenNewsletterSectionFieldsFragment = (
+  { __typename?: 'TokenPage' }
+  & { newsletterSection?: Maybe<(
+    { __typename?: 'TokenNewsletterSection' }
+    & Pick<TokenNewsletterSection, 'header' | 'buttonText' | 'inputText'>
+  )> }
+);
+
+export type TokenPoolSectionFieldsFragment = (
+  { __typename?: 'TokenPage' }
+  & { poolSection?: Maybe<(
+    { __typename?: 'TokenPoolSection' }
+    & Pick<TokenPoolSection, 'title' | 'subtitle'>
+    & { image?: Maybe<(
+      { __typename?: 'Image' }
+      & ImageFieldsFragment
+    )>, mobileImage?: Maybe<(
+      { __typename?: 'Image' }
+      & ImageFieldsFragment
+    )> }
+  )> }
+);
+
+export type TokenStackingSectionFieldsFragment = (
+  { __typename?: 'TokenPage' }
+  & { stakingSection?: Maybe<(
+    { __typename?: 'TitleBodyButton' }
+    & Pick<TitleBodyButton, 'title' | 'bodyRaw'>
+    & { button?: Maybe<(
+      { __typename?: 'Button' }
+      & ButtonFieldsFragment
+    )> }
+  )> }
+);
+
+export type TokenTopSectionFieldsFragment = (
+  { __typename?: 'TokenPage' }
+  & { topSection?: Maybe<(
+    { __typename?: 'TitleBody' }
+    & Pick<TitleBody, 'title' | 'body'>
+  )> }
+);
+
+export type BlogSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type BlogSectionQuery = (
+  { __typename?: 'RootQuery' }
+  & { allSharedSections: Array<(
+    { __typename?: 'SharedSections' }
+    & { blog?: Maybe<(
+      { __typename?: 'BlogSection' }
+      & Pick<BlogSection, 'header'>
+      & { posts?: Maybe<Array<Maybe<(
+        { __typename?: 'BlogPost' }
+        & Pick<BlogPost, 'header' | 'url' | 'descriptionRaw'>
+        & { image?: Maybe<(
+          { __typename?: 'CustomImage' }
+          & CustomImageFieldsFragment
+        )> }
+      )>>> }
+    )> }
+  )> }
+);
+
+export type ContactPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ContactPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allContactPage: Array<(
+    { __typename?: 'ContactPage' }
+    & Pick<ContactPage, 'header' | 'bodyRaw' | 'messageForPartnersRaw'>
+    & { formRequestTypes?: Maybe<Array<Maybe<(
+      { __typename?: 'RequestType' }
+      & Pick<RequestType, 'label' | 'value'>
+    )>>>, location?: Maybe<(
+      { __typename?: 'TitleImageCustomBody' }
+      & Pick<TitleImageCustomBody, 'title' | 'bodyRaw'>
+      & { image?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )> }
+    )>, email?: Maybe<(
+      { __typename?: 'TitleCustomBody' }
+      & Pick<TitleCustomBody, 'title' | 'bodyRaw'>
+    )>, faq?: Maybe<(
+      { __typename?: 'TitleImage' }
+      & Pick<TitleImage, 'title'>
+      & { image?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )> }
+    )> }
+  )> }
+);
+
+export type FaqPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FaqPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allFaqPage: Array<(
+    { __typename?: 'FaqPage' }
+    & { categories?: Maybe<Array<Maybe<(
+      { __typename?: 'FaqCategory' }
+      & Pick<FaqCategory, 'header'>
+      & { questions?: Maybe<Array<Maybe<(
+        { __typename?: 'Faq' }
+        & Pick<Faq, 'question' | 'answerRaw'>
+      )>>> }
+    )>>> }
   )> }
 );
 
@@ -7400,6 +7956,21 @@ export type HomePageWebQuery = (
     & MarketplaceSectionFieldsFragment
     & StatsSectionFieldsFragment
     & ValuesSectionFieldsFragment
+  )> }
+);
+
+export type MediaPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MediaPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allMedia: Array<(
+    { __typename?: 'Media' }
+    & Pick<Media, 'title' | 'author' | 'date' | 'type' | 'href'>
+    & { image?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
+    )> }
   )> }
 );
 
@@ -7425,6 +7996,74 @@ export type PartnersSectionQuery = (
   )> }
 );
 
+export type PressKitPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PressKitPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allPresskitPage: Array<(
+    { __typename?: 'PresskitPage' }
+    & PressKitTopSectionFieldsFragment
+    & PressKitTitleDescriptionSectionFieldsFragment
+    & PressKitEnableSectionFieldsFragment
+    & PressKitTimelineSectionFieldsFragment
+    & PressKitFeaturedSectionFieldsFragment
+    & PressKitAwardsSectionFieldsFragment
+    & PressKitLogosSectionFieldsFragment
+    & PressKitConnectSectionFieldsFragment
+    & PressKitPhotosSectionFieldsFragment
+  )> }
+);
+
+export type ResourcesPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ResourcesPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allResourcesPage: Array<(
+    { __typename?: 'ResourcesPage' }
+    & ResourcesTopSectionFieldsFragment
+    & ResourcesSectionsFieldsFragment
+  )> }
+);
+
+export type TokenPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TokenPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allTokenPage: Array<(
+    { __typename?: 'TokenPage' }
+    & TokenTopSectionFieldsFragment
+    & TokenNewsletterSectionFieldsFragment
+    & TokenEconomicsSectionFieldsFragment
+    & TokenInfoSectionFieldsFragment
+    & TokenPoolSectionFieldsFragment
+    & TokenBlockExplorerSectionFieldsFragment
+    & TokenStackingSectionFieldsFragment
+    & TokenConnectSectionFieldsFragment
+    & TokenMediaSectionFieldsFragment
+  )> }
+);
+
+export const CustomImageFieldsFragmentDoc = gql`
+    fragment customImageFields on CustomImage {
+  imageAlt
+  imageHref
+  image {
+    asset {
+      altText
+      url
+      metadata {
+        dimensions {
+          height
+          width
+        }
+      }
+    }
+  }
+}
+    `;
 export const CarbonPlusSectionFieldsFragmentDoc = gql`
     fragment carbonPlusSectionFields on HomePageWeb {
   carbonPlusSection {
@@ -7434,9 +8073,12 @@ export const CarbonPlusSectionFieldsFragmentDoc = gql`
     description
     linkText
     linkUrl
+    image {
+      ...customImageFields
+    }
   }
 }
-    `;
+    ${CustomImageFieldsFragmentDoc}`;
 export const ImageFieldsFragmentDoc = gql`
     fragment imageFields on Image {
   asset {
@@ -7470,24 +8112,6 @@ export const ClimateSectionFieldsFragmentDoc = gql`
   }
 }
     ${ImageFieldsFragmentDoc}`;
-export const CustomImageFieldsFragmentDoc = gql`
-    fragment customImageFields on CustomImage {
-  imageAlt
-  imageHref
-  image {
-    asset {
-      altText
-      url
-      metadata {
-        dimensions {
-          height
-          width
-        }
-      }
-    }
-  }
-}
-    `;
 export const LinkFieldsFragmentDoc = gql`
     fragment linkFields on Link {
   buttonHref
@@ -7623,6 +8247,275 @@ export const ValuesSectionFieldsFragmentDoc = gql`
   }
 }
     ${ImageFieldsFragmentDoc}`;
+export const PressKitAwardsSectionFieldsFragmentDoc = gql`
+    fragment pressKitAwardsSectionFields on PresskitPage {
+  awardsSection {
+    header
+    items {
+      title
+      link
+      image {
+        ...imageFields
+      }
+    }
+  }
+}
+    ${ImageFieldsFragmentDoc}`;
+export const PressKitConnectSectionFieldsFragmentDoc = gql`
+    fragment pressKitConnectSectionFields on PresskitPage {
+  connectSectionHeader
+}
+    `;
+export const PressKitEnableSectionFieldsFragmentDoc = gql`
+    fragment pressKitEnableSectionFields on PresskitPage {
+  enableSection {
+    title
+    bodyRaw
+    image {
+      ...customImageFields
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+export const PressKitFeaturedSectionFieldsFragmentDoc = gql`
+    fragment pressKitFeaturedSectionFields on PresskitPage {
+  featuredSection {
+    header
+    articles {
+      title
+      author
+      date
+      href
+      type
+      image {
+        ...customImageFields
+      }
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+export const PressKitLogosSectionFieldsFragmentDoc = gql`
+    fragment pressKitLogosSectionFields on PresskitPage {
+  logosSection {
+    header
+    buttonText
+    buttonLink
+  }
+}
+    `;
+export const PressKitPhotosSectionFieldsFragmentDoc = gql`
+    fragment pressKitPhotosSectionFields on PresskitPage {
+  photosSection {
+    header
+    photos {
+      asset {
+        url
+      }
+    }
+  }
+}
+    `;
+export const PressKitTimelineSectionFieldsFragmentDoc = gql`
+    fragment pressKitTimelineSectionFields on PresskitPage {
+  timelineSection {
+    header
+    description
+    completedItemIndex
+    items {
+      date
+      summary
+      description
+    }
+  }
+}
+    `;
+export const PressKitTitleDescriptionSectionFieldsFragmentDoc = gql`
+    fragment pressKitTitleDescriptionSectionFields on PresskitPage {
+  titleDescriptionSection {
+    title
+    bodyRaw
+  }
+}
+    `;
+export const PressKitTopSectionFieldsFragmentDoc = gql`
+    fragment pressKitTopSectionFields on PresskitPage {
+  topSection {
+    title
+    body
+  }
+}
+    `;
+export const ResourceFieldsFragmentDoc = gql`
+    fragment resourceFields on ResourcesSection {
+  header
+  cards {
+    titleRaw
+    descriptionRaw
+    lastUpdated
+    button {
+      ...buttonFields
+    }
+    image {
+      ...customImageFields
+    }
+  }
+}
+    ${ButtonFieldsFragmentDoc}
+${CustomImageFieldsFragmentDoc}`;
+export const ResourcesSectionsFieldsFragmentDoc = gql`
+    fragment resourcesSectionsFields on ResourcesPage {
+  resourcesSections {
+    ...resourceFields
+  }
+}
+    ${ResourceFieldsFragmentDoc}`;
+export const ResourcesTopSectionFieldsFragmentDoc = gql`
+    fragment resourcesTopSectionFields on ResourcesPage {
+  topSection {
+    title
+    body
+  }
+}
+    `;
+export const SharedNewsletterSectionFieldsFragmentDoc = gql`
+    fragment sharedNewsletterSectionFields on SharedSections {
+  newsletter {
+    title
+    bodyRaw
+  }
+}
+    `;
+export const TokenBlockExplorerSectionFieldsFragmentDoc = gql`
+    fragment tokenBlockExplorerSectionFields on TokenPage {
+  blockExplorerSection {
+    title
+    bodyRaw
+    button {
+      ...buttonFields
+    }
+  }
+}
+    ${ButtonFieldsFragmentDoc}`;
+export const TokenConnectSectionFieldsFragmentDoc = gql`
+    fragment tokenConnectSectionFields on TokenPage {
+  connectSectionHeader
+}
+    `;
+export const TokenEconomicsSectionFieldsFragmentDoc = gql`
+    fragment tokenEconomicsSectionFields on TokenPage {
+  tokenEconomics {
+    title
+    bodyRaw
+  }
+}
+    `;
+export const TokenInfoSectionFieldsFragmentDoc = gql`
+    fragment tokenInfoSectionFields on TokenPage {
+  infoSection {
+    title
+    subtitle
+    bodyRaw
+    image {
+      ...customImageFields
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+export const MediaFieldsFragmentDoc = gql`
+    fragment mediaFields on Media {
+  title
+  author
+  date
+  image {
+    ...customImageFields
+  }
+  href
+  type
+}
+    ${CustomImageFieldsFragmentDoc}`;
+export const TokenMediaSectionFieldsFragmentDoc = gql`
+    fragment tokenMediaSectionFields on TokenPage {
+  mediaCards {
+    ...mediaFields
+  }
+}
+    ${MediaFieldsFragmentDoc}`;
+export const TokenNewsletterSectionFieldsFragmentDoc = gql`
+    fragment tokenNewsletterSectionFields on TokenPage {
+  newsletterSection {
+    header
+    buttonText
+    inputText
+  }
+}
+    `;
+export const TokenPoolSectionFieldsFragmentDoc = gql`
+    fragment tokenPoolSectionFields on TokenPage {
+  poolSection {
+    title
+    subtitle
+    image {
+      ...imageFields
+    }
+    mobileImage {
+      ...imageFields
+    }
+  }
+}
+    ${ImageFieldsFragmentDoc}`;
+export const TokenStackingSectionFieldsFragmentDoc = gql`
+    fragment tokenStackingSectionFields on TokenPage {
+  stakingSection {
+    title
+    bodyRaw
+    button {
+      ...buttonFields
+    }
+  }
+}
+    ${ButtonFieldsFragmentDoc}`;
+export const TokenTopSectionFieldsFragmentDoc = gql`
+    fragment tokenTopSectionFields on TokenPage {
+  topSection {
+    title
+    body
+  }
+}
+    `;
+export const SharedSectionDocument = gql`
+    query sharedSection {
+  allSharedSections {
+    ...sharedNewsletterSectionFields
+  }
+}
+    ${SharedNewsletterSectionFieldsFragmentDoc}`;
+
+/**
+ * __useSharedSectionQuery__
+ *
+ * To run a query within a React component, call `useSharedSectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSharedSectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSharedSectionQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSharedSectionQuery(baseOptions?: Apollo.QueryHookOptions<SharedSectionQuery, SharedSectionQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SharedSectionQuery, SharedSectionQueryVariables>(SharedSectionDocument, options);
+      }
+export function useSharedSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SharedSectionQuery, SharedSectionQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SharedSectionQuery, SharedSectionQueryVariables>(SharedSectionDocument, options);
+        }
+export type SharedSectionQueryHookResult = ReturnType<typeof useSharedSectionQuery>;
+export type SharedSectionLazyQueryHookResult = ReturnType<typeof useSharedSectionLazyQuery>;
+export type SharedSectionQueryResult = Apollo.QueryResult<SharedSectionQuery, SharedSectionQueryVariables>;
 export const BlogSectionDocument = gql`
     query blogSection {
   allSharedSections {
@@ -7667,6 +8560,103 @@ export function useBlogSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type BlogSectionQueryHookResult = ReturnType<typeof useBlogSectionQuery>;
 export type BlogSectionLazyQueryHookResult = ReturnType<typeof useBlogSectionLazyQuery>;
 export type BlogSectionQueryResult = Apollo.QueryResult<BlogSectionQuery, BlogSectionQueryVariables>;
+export const ContactPageDocument = gql`
+    query contactPage {
+  allContactPage {
+    header
+    bodyRaw
+    messageForPartnersRaw
+    formRequestTypes {
+      label
+      value
+    }
+    location {
+      title
+      bodyRaw
+      image {
+        ...customImageFields
+      }
+    }
+    email {
+      title
+      bodyRaw
+    }
+    faq {
+      title
+      image {
+        ...customImageFields
+      }
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+
+/**
+ * __useContactPageQuery__
+ *
+ * To run a query within a React component, call `useContactPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useContactPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useContactPageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useContactPageQuery(baseOptions?: Apollo.QueryHookOptions<ContactPageQuery, ContactPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ContactPageQuery, ContactPageQueryVariables>(ContactPageDocument, options);
+      }
+export function useContactPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ContactPageQuery, ContactPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ContactPageQuery, ContactPageQueryVariables>(ContactPageDocument, options);
+        }
+export type ContactPageQueryHookResult = ReturnType<typeof useContactPageQuery>;
+export type ContactPageLazyQueryHookResult = ReturnType<typeof useContactPageLazyQuery>;
+export type ContactPageQueryResult = Apollo.QueryResult<ContactPageQuery, ContactPageQueryVariables>;
+export const FaqPageDocument = gql`
+    query faqPage {
+  allFaqPage {
+    categories {
+      header
+      questions {
+        question
+        answerRaw
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useFaqPageQuery__
+ *
+ * To run a query within a React component, call `useFaqPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFaqPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFaqPageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useFaqPageQuery(baseOptions?: Apollo.QueryHookOptions<FaqPageQuery, FaqPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FaqPageQuery, FaqPageQueryVariables>(FaqPageDocument, options);
+      }
+export function useFaqPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FaqPageQuery, FaqPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FaqPageQuery, FaqPageQueryVariables>(FaqPageDocument, options);
+        }
+export type FaqPageQueryHookResult = ReturnType<typeof useFaqPageQuery>;
+export type FaqPageLazyQueryHookResult = ReturnType<typeof useFaqPageLazyQuery>;
+export type FaqPageQueryResult = Apollo.QueryResult<FaqPageQuery, FaqPageQueryVariables>;
 export const HomePageWebDocument = gql`
     query homePageWeb {
   allHomePageWeb {
@@ -7715,6 +8705,48 @@ export function useHomePageWebLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type HomePageWebQueryHookResult = ReturnType<typeof useHomePageWebQuery>;
 export type HomePageWebLazyQueryHookResult = ReturnType<typeof useHomePageWebLazyQuery>;
 export type HomePageWebQueryResult = Apollo.QueryResult<HomePageWebQuery, HomePageWebQueryVariables>;
+export const MediaPageDocument = gql`
+    query mediaPage {
+  allMedia(sort: {date: DESC}) {
+    title
+    author
+    date
+    type
+    href
+    author
+    image {
+      ...customImageFields
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+
+/**
+ * __useMediaPageQuery__
+ *
+ * To run a query within a React component, call `useMediaPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMediaPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMediaPageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMediaPageQuery(baseOptions?: Apollo.QueryHookOptions<MediaPageQuery, MediaPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MediaPageQuery, MediaPageQueryVariables>(MediaPageDocument, options);
+      }
+export function useMediaPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MediaPageQuery, MediaPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MediaPageQuery, MediaPageQueryVariables>(MediaPageDocument, options);
+        }
+export type MediaPageQueryHookResult = ReturnType<typeof useMediaPageQuery>;
+export type MediaPageLazyQueryHookResult = ReturnType<typeof useMediaPageLazyQuery>;
+export type MediaPageQueryResult = Apollo.QueryResult<MediaPageQuery, MediaPageQueryVariables>;
 export const PartnersSectionDocument = gql`
     query partnersSection {
   allHomePageWeb {
@@ -7757,3 +8789,139 @@ export function usePartnersSectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type PartnersSectionQueryHookResult = ReturnType<typeof usePartnersSectionQuery>;
 export type PartnersSectionLazyQueryHookResult = ReturnType<typeof usePartnersSectionLazyQuery>;
 export type PartnersSectionQueryResult = Apollo.QueryResult<PartnersSectionQuery, PartnersSectionQueryVariables>;
+export const PressKitPageDocument = gql`
+    query pressKitPage {
+  allPresskitPage {
+    ...pressKitTopSectionFields
+    ...pressKitTitleDescriptionSectionFields
+    ...pressKitEnableSectionFields
+    ...pressKitTimelineSectionFields
+    ...pressKitFeaturedSectionFields
+    ...pressKitAwardsSectionFields
+    ...pressKitLogosSectionFields
+    ...pressKitConnectSectionFields
+    ...pressKitPhotosSectionFields
+  }
+}
+    ${PressKitTopSectionFieldsFragmentDoc}
+${PressKitTitleDescriptionSectionFieldsFragmentDoc}
+${PressKitEnableSectionFieldsFragmentDoc}
+${PressKitTimelineSectionFieldsFragmentDoc}
+${PressKitFeaturedSectionFieldsFragmentDoc}
+${PressKitAwardsSectionFieldsFragmentDoc}
+${PressKitLogosSectionFieldsFragmentDoc}
+${PressKitConnectSectionFieldsFragmentDoc}
+${PressKitPhotosSectionFieldsFragmentDoc}`;
+
+/**
+ * __usePressKitPageQuery__
+ *
+ * To run a query within a React component, call `usePressKitPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePressKitPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePressKitPageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function usePressKitPageQuery(baseOptions?: Apollo.QueryHookOptions<PressKitPageQuery, PressKitPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PressKitPageQuery, PressKitPageQueryVariables>(PressKitPageDocument, options);
+      }
+export function usePressKitPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PressKitPageQuery, PressKitPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PressKitPageQuery, PressKitPageQueryVariables>(PressKitPageDocument, options);
+        }
+export type PressKitPageQueryHookResult = ReturnType<typeof usePressKitPageQuery>;
+export type PressKitPageLazyQueryHookResult = ReturnType<typeof usePressKitPageLazyQuery>;
+export type PressKitPageQueryResult = Apollo.QueryResult<PressKitPageQuery, PressKitPageQueryVariables>;
+export const ResourcesPageDocument = gql`
+    query resourcesPage {
+  allResourcesPage {
+    ...resourcesTopSectionFields
+    ...resourcesSectionsFields
+  }
+}
+    ${ResourcesTopSectionFieldsFragmentDoc}
+${ResourcesSectionsFieldsFragmentDoc}`;
+
+/**
+ * __useResourcesPageQuery__
+ *
+ * To run a query within a React component, call `useResourcesPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useResourcesPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useResourcesPageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useResourcesPageQuery(baseOptions?: Apollo.QueryHookOptions<ResourcesPageQuery, ResourcesPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ResourcesPageQuery, ResourcesPageQueryVariables>(ResourcesPageDocument, options);
+      }
+export function useResourcesPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ResourcesPageQuery, ResourcesPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ResourcesPageQuery, ResourcesPageQueryVariables>(ResourcesPageDocument, options);
+        }
+export type ResourcesPageQueryHookResult = ReturnType<typeof useResourcesPageQuery>;
+export type ResourcesPageLazyQueryHookResult = ReturnType<typeof useResourcesPageLazyQuery>;
+export type ResourcesPageQueryResult = Apollo.QueryResult<ResourcesPageQuery, ResourcesPageQueryVariables>;
+export const TokenPageDocument = gql`
+    query tokenPage {
+  allTokenPage {
+    ...tokenTopSectionFields
+    ...tokenNewsletterSectionFields
+    ...tokenEconomicsSectionFields
+    ...tokenInfoSectionFields
+    ...tokenPoolSectionFields
+    ...tokenBlockExplorerSectionFields
+    ...tokenStackingSectionFields
+    ...tokenConnectSectionFields
+    ...tokenMediaSectionFields
+  }
+}
+    ${TokenTopSectionFieldsFragmentDoc}
+${TokenNewsletterSectionFieldsFragmentDoc}
+${TokenEconomicsSectionFieldsFragmentDoc}
+${TokenInfoSectionFieldsFragmentDoc}
+${TokenPoolSectionFieldsFragmentDoc}
+${TokenBlockExplorerSectionFieldsFragmentDoc}
+${TokenStackingSectionFieldsFragmentDoc}
+${TokenConnectSectionFieldsFragmentDoc}
+${TokenMediaSectionFieldsFragmentDoc}`;
+
+/**
+ * __useTokenPageQuery__
+ *
+ * To run a query within a React component, call `useTokenPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTokenPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTokenPageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useTokenPageQuery(baseOptions?: Apollo.QueryHookOptions<TokenPageQuery, TokenPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TokenPageQuery, TokenPageQueryVariables>(TokenPageDocument, options);
+      }
+export function useTokenPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TokenPageQuery, TokenPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TokenPageQuery, TokenPageQueryVariables>(TokenPageDocument, options);
+        }
+export type TokenPageQueryHookResult = ReturnType<typeof useTokenPageQuery>;
+export type TokenPageLazyQueryHookResult = ReturnType<typeof useTokenPageLazyQuery>;
+export type TokenPageQueryResult = Apollo.QueryResult<TokenPageQuery, TokenPageQueryVariables>;

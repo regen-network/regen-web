@@ -4,7 +4,7 @@ import { UseStateSetter } from 'types/react/use-state';
 
 import { chainInfo } from '../chainInfo/chainInfo';
 import { SignArbitraryParams } from '../wallet';
-import { getArbitraryLoginData } from '../wallet.utils';
+import { getArbitraryData } from '../wallet.utils';
 
 type Props = {
   setError: UseStateSetter<unknown>;
@@ -17,6 +17,7 @@ export const useSignArbitrary = ({ setError }: Props) => {
       walletConnect,
       wallet,
       nonce,
+      addAddr = false,
     }: SignArbitraryParams) => {
       try {
         if (wallet?.address) {
@@ -28,7 +29,7 @@ export const useSignArbitrary = ({ setError }: Props) => {
           const signature = await walletClient?.signArbitrary(
             chainInfo.chainId,
             wallet.address,
-            getArbitraryLoginData(nonce),
+            getArbitraryData({ nonce, addAddr }),
           );
           return signature;
         }

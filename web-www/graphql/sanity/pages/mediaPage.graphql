@@ -1,0 +1,13 @@
+query mediaPage {
+  allMedia(sort: { date: DESC }) {
+    title
+    author
+    date
+    type
+    href
+    author
+    image {
+      ...customImageFields
+    }
+  }
+}

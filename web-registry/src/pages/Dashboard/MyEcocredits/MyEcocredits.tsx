@@ -44,7 +44,7 @@ import {
   CREDIT_SEND_TITLE,
   CreditSendModal,
 } from 'components/organisms/Modals/CreditSendModal/CreditSendModal';
-import { Portfolio } from 'components/organisms/Portfolio';
+import { Portfolio } from 'components/organisms/Portfolio/Portfolio';
 import { useMsgClient } from 'hooks';
 import type { BasketTokens } from 'hooks/useBasketTokens';
 
@@ -287,14 +287,6 @@ export const MyEcocredits = (): JSX.Element => {
                     return undefined;
                   }
                   const buttons = [
-                    // Disabling for now until the marketplace is
-                    // released on regen-ledger
-                    // {
-                    //   icon: <Sell />,
-                    //   label: 'Sell',
-                    //   // eslint-disable-next-line no-console
-                    //   onClick: () => console.log(`TODO sell credit ${i}`),
-                    // },
                     {
                       icon: <AvailableCreditsIconAlt sx={sxs.arrow} />,
                       label: CREATE_SELL_ORDER_SHORT,
@@ -382,18 +374,6 @@ export const MyEcocredits = (): JSX.Element => {
                     openTakeModal(i);
                   },
                 },
-                // This will be handled from osmosis
-                // so hiding these for now
-                // {
-                //   icon: <WithdrawIBC />,
-                //   label: 'Withdraw (IBC)',
-                //   onClick: () => `TODO withdraw ${i}`,
-                // },
-                // {
-                //   icon: <DepositIBC />,
-                //   label: 'Deposit (IBC)',
-                //   onClick: () => `TODO deposit ${i}`,
-                // },
               ]}
             />
           )}

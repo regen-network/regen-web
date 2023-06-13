@@ -438,6 +438,7 @@ export type BuyersPage = Document & {
   imageGridSection?: Maybe<ImageGridSection>;
   ecologicalCreditCardsSection?: Maybe<EcologicalCreditCardsSection>;
   featuredProjectCardsSection?: Maybe<BuyersFeaturedProjectCardsSection>;
+  quoteSection?: Maybe<BuyersQuoteSection>;
   partnersSection?: Maybe<BuyersPartnersSection>;
   contactSection?: Maybe<BottomBanner>;
   footerButtonText?: Maybe<Scalars['String']>;
@@ -458,6 +459,7 @@ export type BuyersPageFilter = {
   imageGridSection?: Maybe<ImageGridSectionFilter>;
   ecologicalCreditCardsSection?: Maybe<EcologicalCreditCardsSectionFilter>;
   featuredProjectCardsSection?: Maybe<BuyersFeaturedProjectCardsSectionFilter>;
+  quoteSection?: Maybe<BuyersQuoteSectionFilter>;
   partnersSection?: Maybe<BuyersPartnersSectionFilter>;
   contactSection?: Maybe<BottomBannerFilter>;
   footerButtonText?: Maybe<StringFilter>;
@@ -476,6 +478,7 @@ export type BuyersPageSorting = {
   imageGridSection?: Maybe<ImageGridSectionSorting>;
   ecologicalCreditCardsSection?: Maybe<EcologicalCreditCardsSectionSorting>;
   featuredProjectCardsSection?: Maybe<BuyersFeaturedProjectCardsSectionSorting>;
+  quoteSection?: Maybe<BuyersQuoteSectionSorting>;
   partnersSection?: Maybe<BuyersPartnersSectionSorting>;
   contactSection?: Maybe<BottomBannerSorting>;
   footerButtonText?: Maybe<SortOrder>;
@@ -500,6 +503,60 @@ export type BuyersPartnersSectionSorting = {
   _key?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
+};
+
+export type BuyersQuoteSection = {
+  __typename?: 'BuyersQuoteSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  backgroundImage?: Maybe<CustomImage>;
+  quoteText?: Maybe<BuyersQuoteText>;
+  person?: Maybe<Person>;
+  logo?: Maybe<Image>;
+};
+
+export type BuyersQuoteSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  backgroundImage?: Maybe<CustomImageFilter>;
+  quoteText?: Maybe<BuyersQuoteTextFilter>;
+  person?: Maybe<PersonFilter>;
+  logo?: Maybe<ImageFilter>;
+};
+
+export type BuyersQuoteSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  backgroundImage?: Maybe<CustomImageSorting>;
+  quoteText?: Maybe<BuyersQuoteTextSorting>;
+  logo?: Maybe<ImageSorting>;
+};
+
+export type BuyersQuoteText = {
+  __typename?: 'BuyersQuoteText';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  /** This part has a green gradient */
+  quoteFirstPart?: Maybe<Scalars['String']>;
+  quoteMiddlePart?: Maybe<Scalars['String']>;
+  /** This part has a green gradient */
+  quoteLastPart?: Maybe<Scalars['String']>;
+};
+
+export type BuyersQuoteTextFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  quoteFirstPart?: Maybe<StringFilter>;
+  quoteMiddlePart?: Maybe<StringFilter>;
+  quoteLastPart?: Maybe<StringFilter>;
+};
+
+export type BuyersQuoteTextSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  quoteFirstPart?: Maybe<SortOrder>;
+  quoteMiddlePart?: Maybe<SortOrder>;
+  quoteLastPart?: Maybe<SortOrder>;
 };
 
 export type CallToAction = {
@@ -546,6 +603,7 @@ export type CarbonPlusSection = {
   description?: Maybe<Scalars['String']>;
   linkText?: Maybe<Scalars['String']>;
   linkUrl?: Maybe<Scalars['String']>;
+  image?: Maybe<CustomImage>;
 };
 
 export type CarbonPlusSectionFilter = {
@@ -557,6 +615,7 @@ export type CarbonPlusSectionFilter = {
   description?: Maybe<StringFilter>;
   linkText?: Maybe<StringFilter>;
   linkUrl?: Maybe<StringFilter>;
+  image?: Maybe<CustomImageFilter>;
 };
 
 export type CarbonPlusSectionSorting = {
@@ -568,6 +627,7 @@ export type CarbonPlusSectionSorting = {
   description?: Maybe<SortOrder>;
   linkText?: Maybe<SortOrder>;
   linkUrl?: Maybe<SortOrder>;
+  image?: Maybe<CustomImageSorting>;
 };
 
 export type Card = {
@@ -1055,6 +1115,44 @@ export type CaseStudyPageSorting = {
   bottomSection?: Maybe<CaseStudyBottomSectionSorting>;
 };
 
+export type Claim = Document & {
+  __typename?: 'Claim';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+};
+
+export type ClaimFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  description?: Maybe<StringFilter>;
+};
+
+export type ClaimSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  description?: Maybe<SortOrder>;
+};
+
 export type ClimateSection = {
   __typename?: 'ClimateSection';
   _key?: Maybe<Scalars['String']>;
@@ -1499,6 +1597,48 @@ export type CreateMethodologyStepCardSectionSorting = {
   bottomTitle?: Maybe<SortOrder>;
 };
 
+export type CredibilityCard = Document & {
+  __typename?: 'CredibilityCard';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+  icon?: Maybe<Image>;
+};
+
+export type CredibilityCardFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  icon?: Maybe<ImageFilter>;
+};
+
+export type CredibilityCardSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  icon?: Maybe<ImageSorting>;
+};
+
 export type CreditClass = Document & {
   __typename?: 'CreditClass';
   /** Document ID */
@@ -1652,6 +1792,34 @@ export type CreditTypeSorting = {
   _key?: Maybe<SortOrder>;
   name?: Maybe<SortOrder>;
   image?: Maybe<ImageSorting>;
+};
+
+export type CrossDatasetReference = {
+  __typename?: 'CrossDatasetReference';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  _ref?: Maybe<Scalars['String']>;
+  _weak?: Maybe<Scalars['Boolean']>;
+  _dataset?: Maybe<Scalars['String']>;
+  _projectId?: Maybe<Scalars['String']>;
+};
+
+export type CrossDatasetReferenceFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  _ref?: Maybe<StringFilter>;
+  _weak?: Maybe<BooleanFilter>;
+  _dataset?: Maybe<StringFilter>;
+  _projectId?: Maybe<StringFilter>;
+};
+
+export type CrossDatasetReferenceSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _ref?: Maybe<SortOrder>;
+  _weak?: Maybe<SortOrder>;
+  _dataset?: Maybe<SortOrder>;
+  _projectId?: Maybe<SortOrder>;
 };
 
 export type CustomImage = {
@@ -2788,13 +2956,13 @@ export type HomePageWeb = Document & {
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
   homeFoldSection?: Maybe<HomeFoldSection>;
+  carbonPlusSection?: Maybe<CarbonPlusSection>;
   marketplaceSection?: Maybe<MarketplaceSection>;
   homeWebPartnersSection?: Maybe<HomeWebPartnersSection>;
   homeWebEcologicalCreditCardsSection?: Maybe<HomeWebEcologicalCreditCardsSection>;
   homeWebStatsSection?: Maybe<HomeWebStatsSection>;
   bannerTextSection?: Maybe<TitleImageCustomBody>;
   climateSection?: Maybe<ClimateSection>;
-  carbonPlusSection?: Maybe<CarbonPlusSection>;
   ledgerDescription?: Maybe<Scalars['String']>;
   valuesSection?: Maybe<HomeValuesSection>;
 };
@@ -2809,13 +2977,13 @@ export type HomePageWebFilter = {
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
   homeFoldSection?: Maybe<HomeFoldSectionFilter>;
+  carbonPlusSection?: Maybe<CarbonPlusSectionFilter>;
   marketplaceSection?: Maybe<MarketplaceSectionFilter>;
   homeWebPartnersSection?: Maybe<HomeWebPartnersSectionFilter>;
   homeWebEcologicalCreditCardsSection?: Maybe<HomeWebEcologicalCreditCardsSectionFilter>;
   homeWebStatsSection?: Maybe<HomeWebStatsSectionFilter>;
   bannerTextSection?: Maybe<TitleImageCustomBodyFilter>;
   climateSection?: Maybe<ClimateSectionFilter>;
-  carbonPlusSection?: Maybe<CarbonPlusSectionFilter>;
   ledgerDescription?: Maybe<StringFilter>;
   valuesSection?: Maybe<HomeValuesSectionFilter>;
 };
@@ -2828,13 +2996,13 @@ export type HomePageWebSorting = {
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
   homeFoldSection?: Maybe<HomeFoldSectionSorting>;
+  carbonPlusSection?: Maybe<CarbonPlusSectionSorting>;
   marketplaceSection?: Maybe<MarketplaceSectionSorting>;
   homeWebPartnersSection?: Maybe<HomeWebPartnersSectionSorting>;
   homeWebEcologicalCreditCardsSection?: Maybe<HomeWebEcologicalCreditCardsSectionSorting>;
   homeWebStatsSection?: Maybe<HomeWebStatsSectionSorting>;
   bannerTextSection?: Maybe<TitleImageCustomBodySorting>;
   climateSection?: Maybe<ClimateSectionSorting>;
-  carbonPlusSection?: Maybe<CarbonPlusSectionSorting>;
   ledgerDescription?: Maybe<SortOrder>;
   valuesSection?: Maybe<HomeValuesSectionSorting>;
 };
@@ -4056,6 +4224,47 @@ export type PartnersPageSorting = {
   contactHeader?: Maybe<SortOrder>;
 };
 
+export type Person = Document & {
+  __typename?: 'Person';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  role?: Maybe<Scalars['String']>;
+};
+
+export type PersonFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  name?: Maybe<StringFilter>;
+  role?: Maybe<StringFilter>;
+};
+
+export type PersonSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  name?: Maybe<SortOrder>;
+  role?: Maybe<SortOrder>;
+};
+
 export type PracticesOutcomesSection = {
   __typename?: 'PracticesOutcomesSection';
   _key?: Maybe<Scalars['String']>;
@@ -4322,6 +4531,7 @@ export type Project = Document & {
   projectName?: Maybe<Scalars['String']>;
   /** on-chain project id */
   projectId?: Maybe<Scalars['String']>;
+  credibilityCards?: Maybe<Array<Maybe<ProjectDetailsCard>>>;
 };
 
 export type ProjectActivity = Document & {
@@ -4365,6 +4575,48 @@ export type ProjectActivitySorting = {
   icon?: Maybe<ImageSorting>;
 };
 
+export type ProjectDetailsCard = {
+  __typename?: 'ProjectDetailsCard';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  credibilityCard?: Maybe<CredibilityCard>;
+  claims?: Maybe<Array<Maybe<Claim>>>;
+};
+
+export type ProjectDetailsCardFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  credibilityCard?: Maybe<CredibilityCardFilter>;
+};
+
+export type ProjectDetailsCardSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+};
+
+export type ProjectDetailsSection = {
+  __typename?: 'ProjectDetailsSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+};
+
+export type ProjectDetailsSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  label?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+};
+
+export type ProjectDetailsSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  label?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+};
+
 export type ProjectFilter = {
   /** Apply filters on document level */
   _?: Maybe<Sanity_DocumentFilter>;
@@ -4393,6 +4645,7 @@ export type ProjectPage = Document & {
   _key?: Maybe<Scalars['String']>;
   /** This content will appear on all project pages */
   gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSection>;
+  projectDetailsSection?: Maybe<ProjectDetailsSection>;
 };
 
 export type ProjectPageFilter = {
@@ -4405,6 +4658,7 @@ export type ProjectPageFilter = {
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
   gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSectionFilter>;
+  projectDetailsSection?: Maybe<ProjectDetailsSectionFilter>;
 };
 
 export type ProjectPageSorting = {
@@ -4414,6 +4668,7 @@ export type ProjectPageSorting = {
   _updatedAt?: Maybe<SortOrder>;
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
+  projectDetailsSection?: Maybe<ProjectDetailsSectionSorting>;
 };
 
 export type ProjectSorting = {
@@ -4771,6 +5026,8 @@ export type RootQuery = {
   BuyersPage?: Maybe<BuyersPage>;
   CaseStudiesPage?: Maybe<CaseStudiesPage>;
   CaseStudyPage?: Maybe<CaseStudyPage>;
+  Claim?: Maybe<Claim>;
+  CredibilityCard?: Maybe<CredibilityCard>;
   CommunityPage?: Maybe<CommunityPage>;
   ContactPage?: Maybe<ContactPage>;
   CreateCreditClassPage?: Maybe<CreateCreditClassPage>;
@@ -4802,6 +5059,7 @@ export type RootQuery = {
   OffsetMethod?: Maybe<OffsetMethod>;
   Partner?: Maybe<Partner>;
   PartnersPage?: Maybe<PartnersPage>;
+  Person?: Maybe<Person>;
   PresskitPage?: Maybe<PresskitPage>;
   Project?: Maybe<Project>;
   ProjectActivity?: Maybe<ProjectActivity>;
@@ -4830,6 +5088,8 @@ export type RootQuery = {
   allBuyersPage: Array<BuyersPage>;
   allCaseStudiesPage: Array<CaseStudiesPage>;
   allCaseStudyPage: Array<CaseStudyPage>;
+  allClaim: Array<Claim>;
+  allCredibilityCard: Array<CredibilityCard>;
   allCommunityPage: Array<CommunityPage>;
   allContactPage: Array<ContactPage>;
   allCreateCreditClassPage: Array<CreateCreditClassPage>;
@@ -4861,6 +5121,7 @@ export type RootQuery = {
   allOffsetMethod: Array<OffsetMethod>;
   allPartner: Array<Partner>;
   allPartnersPage: Array<PartnersPage>;
+  allPerson: Array<Person>;
   allPresskitPage: Array<PresskitPage>;
   allProject: Array<Project>;
   allProjectActivity: Array<ProjectActivity>;
@@ -4916,6 +5177,16 @@ export type RootQueryCaseStudiesPageArgs = {
 
 
 export type RootQueryCaseStudyPageArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryClaimArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryCredibilityCardArgs = {
   id: Scalars['ID'];
 };
 
@@ -5071,6 +5342,11 @@ export type RootQueryPartnerArgs = {
 
 
 export type RootQueryPartnersPageArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryPersonArgs = {
   id: Scalars['ID'];
 };
 
@@ -5231,6 +5507,22 @@ export type RootQueryAllCaseStudiesPageArgs = {
 export type RootQueryAllCaseStudyPageArgs = {
   where?: Maybe<CaseStudyPageFilter>;
   sort?: Maybe<Array<CaseStudyPageSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllClaimArgs = {
+  where?: Maybe<ClaimFilter>;
+  sort?: Maybe<Array<ClaimSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllCredibilityCardArgs = {
+  where?: Maybe<CredibilityCardFilter>;
+  sort?: Maybe<Array<CredibilityCardSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -5479,6 +5771,14 @@ export type RootQueryAllPartnerArgs = {
 export type RootQueryAllPartnersPageArgs = {
   where?: Maybe<PartnersPageFilter>;
   sort?: Maybe<Array<PartnersPageSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllPersonArgs = {
+  where?: Maybe<PersonFilter>;
+  sort?: Maybe<Array<PersonSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -6302,18 +6602,21 @@ export type Slug = {
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
   current?: Maybe<Scalars['String']>;
+  source?: Maybe<Scalars['String']>;
 };
 
 export type SlugFilter = {
   _key?: Maybe<StringFilter>;
   _type?: Maybe<StringFilter>;
   current?: Maybe<StringFilter>;
+  source?: Maybe<StringFilter>;
 };
 
 export type SlugSorting = {
   _key?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
   current?: Maybe<SortOrder>;
+  source?: Maybe<SortOrder>;
 };
 
 export type SoldOutProjects = Document & {
@@ -7246,6 +7549,9 @@ export type AllBuyersPageQuery = (
     )>, featuredProjectCardsSection?: Maybe<(
       { __typename?: 'BuyersFeaturedProjectCardsSection' }
       & BuyersFeaturedCardsSectionFieldsFragment
+    )>, quoteSection?: Maybe<(
+      { __typename?: 'BuyersQuoteSection' }
+      & BuyersQuoteSectionFieldsFragment
     )>, partnersSection?: Maybe<(
       { __typename?: 'BuyersPartnersSection' }
       & BuyersPartnersSectionFieldsFragment
@@ -7620,6 +7926,9 @@ export type AllProjectPageQuery = (
     & { gettingStartedResourcesSection?: Maybe<(
       { __typename?: 'GettingStartedResourcesSection' }
       & GettingStartedResourcesSectionFieldsFragment
+    )>, projectDetailsSection?: Maybe<(
+      { __typename?: 'ProjectDetailsSection' }
+      & Pick<ProjectDetailsSection, 'label' | 'title' | 'descriptionRaw'>
     )> }
   )> }
 );
@@ -7857,6 +8166,14 @@ export type ImageBoldTextLabelFieldsFragment = (
   )> }
 );
 
+export type ImageFieldsFragment = (
+  { __typename?: 'Image' }
+  & { asset?: Maybe<(
+    { __typename?: 'SanityImageAsset' }
+    & Pick<SanityImageAsset, 'url'>
+  )> }
+);
+
 export type ImageGridItemFieldsFragment = (
   { __typename?: 'ImageGridItem' }
   & Pick<ImageGridItem, 'header' | 'descriptionRaw'>
@@ -7958,6 +8275,35 @@ export type PageMetadataFieldsFragment = (
       { __typename?: 'SanityImageAsset' }
       & Pick<SanityImageAsset, 'url'>
     )> }
+  )> }
+);
+
+export type ProjectByIdQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ProjectByIdQuery = (
+  { __typename?: 'RootQuery' }
+  & { allProject: Array<(
+    { __typename?: 'Project' }
+    & { credibilityCards?: Maybe<Array<Maybe<(
+      { __typename?: 'ProjectDetailsCard' }
+      & { credibilityCard?: Maybe<(
+        { __typename?: 'CredibilityCard' }
+        & Pick<CredibilityCard, 'title' | 'descriptionRaw'>
+        & { icon?: Maybe<(
+          { __typename?: 'Image' }
+          & { asset?: Maybe<(
+            { __typename?: 'SanityImageAsset' }
+            & Pick<SanityImageAsset, 'altText' | 'url'>
+          )> }
+        )> }
+      )>, claims?: Maybe<Array<Maybe<(
+        { __typename?: 'Claim' }
+        & Pick<Claim, 'description'>
+      )>>> }
+    )>>> }
   )> }
 );
 
@@ -8115,6 +8461,28 @@ export type BuyersPartnersSectionFieldsFragment = (
       )> }
     )> }
   )>>> }
+);
+
+export type BuyersQuoteSectionFieldsFragment = (
+  { __typename?: 'BuyersQuoteSection' }
+  & { quoteText?: Maybe<(
+    { __typename?: 'BuyersQuoteText' }
+    & Pick<BuyersQuoteText, 'quoteFirstPart' | 'quoteMiddlePart' | 'quoteLastPart'>
+  )>, person?: Maybe<(
+    { __typename?: 'Person' }
+    & PersonFieldsFragment
+  )>, backgroundImage?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )>, logo?: Maybe<(
+    { __typename?: 'Image' }
+    & ImageFieldsFragment
+  )> }
+);
+
+export type PersonFieldsFragment = (
+  { __typename?: 'Person' }
+  & Pick<Person, 'name' | 'role'>
 );
 
 export type TagFieldsFragment = (
@@ -8539,6 +8907,39 @@ export const BuyersPartnersSectionFieldsFragmentDoc = gql`
   }
 }
     `;
+export const PersonFieldsFragmentDoc = gql`
+    fragment personFields on Person {
+  name
+  role
+}
+    `;
+export const ImageFieldsFragmentDoc = gql`
+    fragment imageFields on Image {
+  asset {
+    url
+  }
+}
+    `;
+export const BuyersQuoteSectionFieldsFragmentDoc = gql`
+    fragment buyersQuoteSectionFields on BuyersQuoteSection {
+  quoteText {
+    quoteFirstPart
+    quoteMiddlePart
+    quoteLastPart
+  }
+  person {
+    ...personFields
+  }
+  backgroundImage {
+    ...customImageFields
+  }
+  logo {
+    ...imageFields
+  }
+}
+    ${PersonFieldsFragmentDoc}
+${CustomImageFieldsFragmentDoc}
+${ImageFieldsFragmentDoc}`;
 export const AllBasketDetailsPageDocument = gql`
     query allBasketDetailsPage {
   allBasketDetailsPage {
@@ -8679,6 +9080,9 @@ export const AllBuyersPageDocument = gql`
     featuredProjectCardsSection {
       ...buyersFeaturedCardsSectionFields
     }
+    quoteSection {
+      ...buyersQuoteSectionFields
+    }
     partnersSection {
       ...buyersPartnersSectionFields
     }
@@ -8696,6 +9100,7 @@ ${ImageItemsSectionFieldsFragmentDoc}
 ${ImageGridSectionFieldsFragmentDoc}
 ${EcologicalCreditCardsSectionFieldsFragmentDoc}
 ${BuyersFeaturedCardsSectionFieldsFragmentDoc}
+${BuyersQuoteSectionFieldsFragmentDoc}
 ${BuyersPartnersSectionFieldsFragmentDoc}
 ${BottomBannerFieldsFragmentDoc}
 ${PageMetadataFieldsFragmentDoc}`;
@@ -9266,6 +9671,11 @@ export const AllProjectPageDocument = gql`
     gettingStartedResourcesSection {
       ...gettingStartedResourcesSectionFields
     }
+    projectDetailsSection {
+      label
+      title
+      descriptionRaw
+    }
   }
 }
     ${GettingStartedResourcesSectionFieldsFragmentDoc}`;
@@ -9420,6 +9830,55 @@ export function useEcologicalImpactByIriLazyQuery(baseOptions?: Apollo.LazyQuery
 export type EcologicalImpactByIriQueryHookResult = ReturnType<typeof useEcologicalImpactByIriQuery>;
 export type EcologicalImpactByIriLazyQueryHookResult = ReturnType<typeof useEcologicalImpactByIriLazyQuery>;
 export type EcologicalImpactByIriQueryResult = Apollo.QueryResult<EcologicalImpactByIriQuery, EcologicalImpactByIriQueryVariables>;
+export const ProjectByIdDocument = gql`
+    query ProjectById($id: String!) {
+  allProject(where: {projectId: {eq: $id}}) {
+    credibilityCards {
+      credibilityCard {
+        title
+        descriptionRaw
+        icon {
+          asset {
+            altText
+            url
+          }
+        }
+      }
+      claims {
+        description
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useProjectByIdQuery__
+ *
+ * To run a query within a React component, call `useProjectByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProjectByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProjectByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useProjectByIdQuery(baseOptions: Apollo.QueryHookOptions<ProjectByIdQuery, ProjectByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProjectByIdQuery, ProjectByIdQueryVariables>(ProjectByIdDocument, options);
+      }
+export function useProjectByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProjectByIdQuery, ProjectByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProjectByIdQuery, ProjectByIdQueryVariables>(ProjectByIdDocument, options);
+        }
+export type ProjectByIdQueryHookResult = ReturnType<typeof useProjectByIdQuery>;
+export type ProjectByIdLazyQueryHookResult = ReturnType<typeof useProjectByIdLazyQuery>;
+export type ProjectByIdQueryResult = Apollo.QueryResult<ProjectByIdQuery, ProjectByIdQueryVariables>;
 export const SdgByIriDocument = gql`
     query SdgByIri($iris: [String!]) {
   allSdg(where: {iri: {current: {in: $iris}}}) {

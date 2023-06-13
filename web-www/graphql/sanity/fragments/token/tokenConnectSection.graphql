@@ -1,0 +1,3 @@
+fragment tokenConnectSectionFields on TokenPage {
+  connectSectionHeader
+}

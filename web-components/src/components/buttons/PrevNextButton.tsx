@@ -29,13 +29,12 @@ const getBorderColor = (
   disabled: boolean,
   dark: boolean,
 ): string => {
-  if (dark) {
-    return disabled ? theme.palette.grey[100] : theme.palette.secondary.main;
-  } else {
-    return disabled
-      ? theme.palette.grey[400]
-      : theme.palette.secondary.contrastText;
-  }
+  const disabledColor = dark
+    ? theme.palette.grey[100]
+    : theme.palette.grey[400];
+  return disabled
+    ? `linear-gradient(${disabledColor}, ${disabledColor})`
+    : 'linear-gradient(204.4deg, #527984 5.94%, #79C6AA 51.92%, #C4DAB5 97.89%)';
 };
 
 const getBackgroundColor = (
@@ -55,16 +54,21 @@ type UseStylesParams = {
   dark: boolean;
 };
 
-const useStyles = makeStyles<UseStylesParams>()(
-  (theme, { dark, disabled }) => ({
+const useStyles = makeStyles<UseStylesParams>()((theme, { dark, disabled }) => {
+  const backgroundColor = getBackgroundColor(theme, disabled, dark);
+  const borderColor = getBorderColor(theme, disabled, dark);
+  return {
     root: {
       borderRadius: '50%',
       fontSize: theme.spacing(6),
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      border: `2px solid ${getBorderColor(theme, disabled, dark)}`,
-      backgroundColor: getBackgroundColor(theme, disabled, dark),
+      border: '2px double transparent',
+      backgroundImage: `linear-gradient(${backgroundColor}, ${backgroundColor}), 
+      ${borderColor}`,
+      backgroundOrigin: 'border-box',
+      backgroundClip: 'content-box, border-box',
       boxSizing: 'border-box',
       boxShadow: 'none',
       opacity: disabled ? 0.4 : 1,
@@ -78,8 +82,8 @@ const useStyles = makeStyles<UseStylesParams>()(
         height: theme.spacing(10),
       },
     },
-  }),
-);
+  };
+});
 
 export default function PrevNextButton({
   direction,

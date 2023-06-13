@@ -3,6 +3,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { Box, Skeleton, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
+import cx from 'classnames';
 import { useSetAtom } from 'jotai';
 
 import { Gallery } from 'web-components/lib/components/organisms/Gallery/Gallery';
@@ -19,6 +20,7 @@ import { getProjectByHandleQuery } from 'lib/queries/react-query/registry-server
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
+import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery';
 import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
@@ -28,6 +30,7 @@ import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
+import { ProjectDetailsSection } from 'components/organisms/ProjectDetailsSection/ProjectDetailsSection';
 import { ProjectStorySection } from 'components/organisms/ProjectStorySection/ProjectStorySection';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { usePaginatedBatchesByProject } from 'hooks/batches/usePaginatedBatchesByProject';
@@ -62,13 +65,15 @@ function ProjectDetails(): JSX.Element {
   const graphqlClient = useApolloClient();
   const { track } = useTracker();
   const location = useLocation();
+  const { isKeplrMobileWeb } = useWallet();
 
   const { data: sanityProjectPageData } = useQuery(
     getAllProjectPageQuery({ sanityClient, enabled: !!sanityClient }),
   );
 
+  const sanityProjectPage = sanityProjectPageData?.allProjectPage?.[0];
   const gettingStartedResourcesSection =
-    sanityProjectPageData?.allProjectPage?.[0]?.gettingStartedResourcesSection;
+    sanityProjectPage?.gettingStartedResourcesSection;
 
   const { data: sanitySoldOutProjects } = useQuery(
     getSoldOutProjectsQuery({ sanityClient, enabled: !!sanityClient }),
@@ -88,6 +93,14 @@ function ProjectDetails(): JSX.Element {
   // first, check if projectId is an off-chain project handle (for legacy projects like "wilmot")
   // or an chain project id
   const isOnChainId = getIsOnChainId(projectId);
+
+  const { data: sanityProjectData } = useQuery(
+    getProjectByIdQuery({
+      id: projectId as string,
+      sanityClient,
+      enabled: !!sanityClient && isOnChainId && !!projectId,
+    }),
+  );
 
   // if projectId is handle, query project by handle
   const { data: projectByHandle, isInitialLoading: loadingProjectByHandle } =
@@ -158,6 +171,12 @@ function ProjectDetails(): JSX.Element {
     'regen:projectDeveloper',
     anchoredMetadata,
     offChainProject?.partyByDeveloperId,
+  );
+
+  const projectVerifier = getDisplayParty(
+    'regen:projectVerifier',
+    anchoredMetadata,
+    offChainProject?.partyByVerifierId,
   );
 
   const { geojson, isGISFile } = useGeojson({
@@ -259,6 +278,7 @@ function ProjectDetails(): JSX.Element {
         isGISFile={isGISFile}
         onChainProjectId={onChainProjectId}
         projectDeveloper={projectDeveloper}
+        projectVerifier={projectVerifier}
         loading={loadingDb || loadingAnchoredMetadata}
         soldOutProjectsIds={soldOutProjectsIds}
         projectWithOrderData={projectsWithOrderData[0]}
@@ -270,15 +290,27 @@ function ProjectDetails(): JSX.Element {
 
       {hasProjectPhotos && <Gallery photos={projectPhotos} />}
 
+      <ProjectDetailsSection
+        header={sanityProjectPage?.projectDetailsSection}
+        credibilityCards={sanityProjectData?.allProject?.[0]?.credibilityCards}
+      />
+
       <ProjectStorySection projectPageMetadata={offChainProjectMetadata} />
 
       {impactData?.length > 0 && (
-        <div className="topo-background-alternate">
+        <div
+          className={cx(
+            'topo-background-alternate',
+            isKeplrMobileWeb && 'dark',
+          )}
+        >
           <ProjectImpactSection impact={impactData} />
         </div>
       )}
 
-      <div className="topo-background-alternate">
+      <div
+        className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}
+      >
         <ProjectDetailsTableTabs
           sortedDocuments={sortedDocuments}
           sortCallbacksDocuments={sortCallbacksDocuments}
@@ -297,7 +329,12 @@ function ProjectDetails(): JSX.Element {
       <MoreProjects />
 
       {gettingStartedResourcesSection && (
-        <div className="topo-background-alternate">
+        <div
+          className={cx(
+            'topo-background-alternate',
+            isKeplrMobileWeb && 'dark',
+          )}
+        >
           <GettingStartedResourcesSection
             section={gettingStartedResourcesSection}
           />

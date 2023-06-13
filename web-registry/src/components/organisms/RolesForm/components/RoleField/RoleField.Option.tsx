@@ -7,14 +7,13 @@ import { DEFAULT_NAME } from '../../../../../pages/ProfileEdit/ProfileEdit.const
 import { OptionType } from './RoleField.types';
 import { isProfile } from './RoleField.utils';
 
-type RoleFieldOptionProps = {
-  props: HTMLAttributes<HTMLLIElement>;
+interface RoleFieldOptionProps extends HTMLAttributes<HTMLLIElement> {
   option: OptionType;
-};
+}
 
 export const RoleFieldOption: React.FC<RoleFieldOptionProps> = ({
-  props,
   option,
+  ...props
 }) => {
   if (isProfile(option) && option.id === '') {
     return (
@@ -32,7 +31,7 @@ export const RoleFieldOption: React.FC<RoleFieldOptionProps> = ({
     );
   }
   return (
-    <li {...props} key={props.id}>
+    <li {...props}>
       {isProfile(option)
         ? `${option.name || DEFAULT_NAME}${
             option.address ? ` (${truncate(option.address)})` : ''

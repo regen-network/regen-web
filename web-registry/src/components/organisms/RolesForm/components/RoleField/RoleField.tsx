@@ -163,7 +163,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
               valueWithGroup &&
               getIsOptionEqualToValue(option, valueWithGroup) &&
               valueWithGroup.group === ALL_PROFILES ? null : (
-                <RoleFieldOption props={props} option={option} />
+                <RoleFieldOption option={option} {...props} key={props.id} />
               )
             }
             filterOptions={x => x}

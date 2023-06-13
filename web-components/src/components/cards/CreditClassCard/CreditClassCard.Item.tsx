@@ -7,11 +7,12 @@ import { Theme } from '../../../theme/muiTheme';
 import { LinkComponentType } from '../../../types/shared/linkComponentType';
 import { LinkType } from '../../../types/shared/linkType';
 import { CreditClassCardItemType } from './CreditClassCard.types';
+import { isLinkItem, isTextItem } from './CreditClassCard.utils';
 
 type Props = {
   label: string;
   item?: CreditClassCardItemType;
-  link?: LinkType;
+  link?: Partial<LinkType>;
   linkComponent?: LinkComponentType;
   sx?: SxProps<Theme>;
 };
@@ -24,6 +25,7 @@ export const CreditClassCardItem = ({
   sx,
 }: Props) => {
   const { name, icon } = item ?? {};
+
   return (
     <Flex sx={[...(Array.isArray(sx) ? sx : [sx])]} flexDirection="column">
       <Label size="xs" sx={{ mb: 1.25 }}>
@@ -40,10 +42,10 @@ export const CreditClassCardItem = ({
             />
           )}
           {name && <Body>{name}</Body>}
-          {link && linkComponent && (
+          {isLinkItem(link) && linkComponent && (
             <Box
               component={linkComponent}
-              href={link.text}
+              href={link.href}
               sx={{ color: 'secondary.main', fontSize: 14, fontWeight: 700 }}
             >
               {link.text}
@@ -52,6 +54,7 @@ export const CreditClassCardItem = ({
               />
             </Box>
           )}
+          {isTextItem(link) && <Box sx={{ fontSize: 14 }}>{link.text}</Box>}
         </Flex>
       </Box>
     </Flex>

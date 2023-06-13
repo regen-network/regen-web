@@ -22,7 +22,7 @@ export interface Props extends OptimizeImageProps {
   description: string | JSX.Element;
   imgSrc: string;
   generationMethod?: CreditClassCardItemType;
-  methodology?: LinkType;
+  methodology?: Partial<LinkType>;
   linkComponent?: LinkComponentType;
   sx?: SxProps<Theme>;
 }

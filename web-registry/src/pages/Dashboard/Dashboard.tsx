@@ -27,7 +27,6 @@ import {
   profileVariantMapping,
 } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { Link } from 'components/atoms';
-import { useQueryIfCreditClassAdmin } from 'hooks/useQueryIfCreditClassAdmin';
 import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator';
 import { useQueryIfIssuer } from 'hooks/useQueryIfIssuer';
 import { useQueryIfProjectAdmin } from 'hooks/useQueryIfProjectAdmin';
@@ -39,10 +38,8 @@ const Dashboard = (): JSX.Element => {
   const theme = useTheme();
   const isIssuer = useQueryIfIssuer();
   const isCreditClassCreator = useQueryIfCreditClassCreator();
-  const isCreditClassAdmin = useQueryIfCreditClassAdmin();
   const isProjectAdmin = useQueryIfProjectAdmin();
   const showProjectTab = isIssuer || isProjectAdmin;
-  const showCreditClassTab = isCreditClassCreator || isCreditClassAdmin;
   const { wallet, accountId, partyByAddr } = useWallet();
   const location = useLocation();
 
@@ -72,7 +69,7 @@ const Dashboard = (): JSX.Element => {
         label: 'Credit Classes',
         icon: <CreditClassIcon sx={{ opacity: '70%' }} />,
         href: '/ecocredits/credit-classes',
-        hidden: !showCreditClassTab,
+        hidden: true,
       },
       {
         label: 'Credit Batches',
@@ -89,12 +86,7 @@ const Dashboard = (): JSX.Element => {
         hidden: !isBridgeEnabled,
       },
     ],
-    [
-      isIssuer,
-      showCreditClassTab,
-      showProjectTab,
-      theme.palette.secondary.main,
-    ],
+    [isIssuer, showProjectTab, theme.palette.secondary.main],
   );
 
   const activeTab = Math.max(
@@ -136,7 +128,6 @@ const Dashboard = (): JSX.Element => {
               <Outlet
                 context={{
                   isCreditClassCreator,
-                  isCreditClassAdmin,
                   isProjectAdmin,
                   isIssuer,
                 }}

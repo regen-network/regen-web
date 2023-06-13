@@ -65,3 +65,16 @@
 
 [build.environment]
   NODE_OPTIONS = "--max-old-space-size=10216"
+
+[[redirects]]
+  from = "https://app.regen.network/create-methodology"
+  to = "https://app.regen.network"
+  force = true
+  status = 302
+  
+
+[[redirects]]
+  from = "https://app.regen.network/create-methodology/methodology-review-process"
+  to = "https://app.regen.network"
+  force = true
+  status = 302

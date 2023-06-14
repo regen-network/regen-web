@@ -39,6 +39,7 @@ function CreditClassDetails({
   const [onChainClass, setOnChainClass] = useState<ClassInfo | undefined>(
     undefined,
   );
+
   const [metadata, setMetadata] = useState<any>(undefined);
   const [issuers, setIssuers] = useState<string[] | undefined>(undefined);
 

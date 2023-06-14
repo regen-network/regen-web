@@ -25,6 +25,7 @@ import { ledgerRESTUri } from 'lib/ledger';
 import { AccountLink, Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 
+import { useLedger } from '../../../ledger';
 import { useCreditBatchesStyles } from './CreditBatches.styles';
 
 interface CreditBatchProps {
@@ -94,19 +95,20 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
   const { classes } = useCreditBatchesStyles();
   const [batches, setBatches] = useState<BatchInfoWithSupply[]>([]);
   let columnsToShow = [...headCells];
+  const { dataClient } = useLedger();
 
   useEffect(() => {
     if (!ledgerRESTUri) return;
     if (creditBatches) {
       setBatches(creditBatches);
     } else if (creditClassId) {
-      getBatchesWithSupply({ creditClassId })
+      getBatchesWithSupply({ creditClassId, dataClient })
         .then(sortableBatches => {
           setBatches(sortableBatches.data);
         })
         .catch(console.error); // eslint-disable-line no-console
     }
-  }, [creditClassId, creditBatches]);
+  }, [creditClassId, creditBatches, dataClient]);
 
   // We hide the classId column if creditClassId provided (redundant)
   if (creditClassId) {

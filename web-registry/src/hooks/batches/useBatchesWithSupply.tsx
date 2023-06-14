@@ -7,6 +7,7 @@ import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { addDataToBatches } from 'lib/ecocredit/api';
 
+import { useLedger } from '../../ledger';
 import { client as sanityClient } from '../../lib/clients/sanity';
 
 type Props = {
@@ -21,6 +22,7 @@ export const useBatchesWithSupply = ({
   const [batchesWithSupply, setBatchesWithSupply] = useState<
     BatchInfoWithSupply[] | undefined
   >();
+  const { dataClient } = useLedger();
 
   const { data: sanityCreditClassData } = useAllCreditClassQuery({
     client: sanityClient,
@@ -61,6 +63,7 @@ export const useBatchesWithSupply = ({
           const newBatchesWithData = await addDataToBatches({
             batches: displayedBatches,
             sanityCreditClassData,
+            dataClient,
           });
           if (!ignore) {
             // merge new batches into state variable
@@ -80,7 +83,10 @@ export const useBatchesWithSupply = ({
       } else if (batches) {
         // Fetch all batches
         try {
-          const batchesWithSupply = await addDataToBatches({ batches });
+          const batchesWithSupply = await addDataToBatches({
+            batches,
+            dataClient,
+          });
           if (!ignore) {
             setBatchesWithSupply(batchesWithSupply);
           }
@@ -115,7 +121,13 @@ export const useBatchesWithSupply = ({
     return () => {
       ignore = true;
     };
-  }, [batches, batchesWithSupply, paginationParams, sanityCreditClassData]);
+  }, [
+    batches,
+    batchesWithSupply,
+    dataClient,
+    paginationParams,
+    sanityCreditClassData,
+  ]);
 
   return batchesWithSupply;
 };

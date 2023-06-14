@@ -48,7 +48,7 @@ export function useProjectsWithOrders({
   sort = '',
   projectId,
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
-  const { ecocreditClient, marketplaceClient } = useLedger();
+  const { ecocreditClient, marketplaceClient, dataClient } = useLedger();
 
   const graphqlClient = useApolloClient();
   const reactQueryClient = useQueryClient();
@@ -145,7 +145,11 @@ export function useProjectsWithOrders({
 
   const metadataResults = useQueries({
     queries: sortedProjects.map(project =>
-      getMetadataQuery({ iri: project.metadata }),
+      getMetadataQuery({
+        iri: project.metadata,
+        dataClient,
+        enabled: !!dataClient,
+      }),
     ),
   });
   const metadatas = metadataResults.map(queryResult => queryResult.data);

@@ -20,7 +20,7 @@ export const usePaginatedBatches = (): {
   setPaginationParams: UseStateSetter<TablePaginationParams>;
   paginationParams: TablePaginationParams;
 } => {
-  const { ecocreditClient } = useLedger();
+  const { ecocreditClient, dataClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const { page: routePage } = useParams();
   // Page index starts at 1 for route
@@ -62,6 +62,7 @@ export const usePaginatedBatches = (): {
       sanityCreditClassData: sanityCreditClassDataResult.data,
       enabled: !!sanityCreditClassDataResult.data,
       reactQueryClient,
+      dataClient,
     }),
   );
 

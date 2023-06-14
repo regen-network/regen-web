@@ -24,6 +24,8 @@ import {
 } from 'components/molecules';
 import { useEcocredits } from 'hooks';
 
+import { useLedger } from '../../ledger';
+
 export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { batchDenom } = useParams();
   const [ledgerLoading, setLedgerLoading] = useState(true);
@@ -31,6 +33,7 @@ export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [metadata, setMetadata] =
     useState<Partial<CreditBatchMetadataIntersectionLD>>();
   const walletContext = useWallet();
+  const { dataClient } = useLedger();
   const accountAddress = walletContext.wallet?.address;
   const { credits: userEcocredits } = useEcocredits({
     address: accountAddress,
@@ -44,7 +47,7 @@ export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
           const batch = await getBatchWithSupplyForDenom(batchDenom);
           setBatch(batch);
           if (batch.metadata) {
-            const data = await getMetadata(batch.metadata);
+            const data = await getMetadata(batch.metadata, dataClient);
             setMetadata(data);
           }
         } catch (err) {
@@ -57,7 +60,7 @@ export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
       }
     };
     fetch();
-  }, [batchDenom]);
+  }, [batchDenom, dataClient]);
 
   const onChainId = batch?.projectId || '';
   const {

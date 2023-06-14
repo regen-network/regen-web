@@ -9,6 +9,7 @@ export const getAddDataToBatchesQuery = ({
   batches,
   sanityCreditClassData,
   reactQueryClient,
+  dataClient,
   ...params
 }: ReactQueryAddDataToBatchesParams): ReactQueryAddDataToBatchesResponse => ({
   queryKey: ['addDataToBatches', batches?.map(batch => batch.denom).join(',')],
@@ -19,6 +20,7 @@ export const getAddDataToBatchesQuery = ({
       batches,
       sanityCreditClassData,
       reactQueryClient,
+      dataClient,
     });
 
     return batchesWithSupply;

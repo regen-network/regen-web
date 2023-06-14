@@ -12,6 +12,7 @@ import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { getEcocreditsForAccount } from 'lib/ecocredit/api';
 import { ledgerRESTUri } from 'lib/ledger';
 
+import { useLedger } from '../ledger';
 import { client as sanityClient } from '../lib/clients/sanity';
 import useEcocreditQuery from './useEcocreditQuery';
 import useQueryBalances from './useQueryBalances';
@@ -51,6 +52,7 @@ export default function useEcocredits({
   const [credits, setCredits] = useState<BatchInfoWithBalance[]>();
   const [isLoadingCredits, setIsLoadingCredits] = useState(true);
   const isFetchingRef = useRef(false);
+  const { dataClient } = useLedger();
 
   const batchesResponse = useEcocreditQuery<QueryBatchesResponse>({
     params: {},
@@ -120,6 +122,7 @@ export default function useEcocredits({
         ),
         batches: batchesResponse?.data?.batches,
         sanityCreditClassData,
+        dataClient,
       });
 
       if (newCredits) setCredits(newCredits);
@@ -133,9 +136,10 @@ export default function useEcocredits({
     paginationParams,
     credits,
     balancesResponse?.balances,
+    creditClassId,
     batchesResponse?.data?.batches,
     sanityCreditClassData,
-    creditClassId,
+    dataClient,
   ]);
 
   const reloadBalances = useCallback(async () => {

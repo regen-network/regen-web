@@ -23,7 +23,7 @@ export const usePaginatedBatchesByProject = ({
   setPaginationParams: UseStateSetter<TablePaginationParams>;
   paginationParams: TablePaginationParams;
 } => {
-  const { ecocreditClient } = useLedger();
+  const { ecocreditClient, dataClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
@@ -63,6 +63,7 @@ export const usePaginatedBatchesByProject = ({
       sanityCreditClassData: sanityCreditClassDataResult.data,
       enabled: !!sanityCreditClassDataResult.data,
       reactQueryClient,
+      dataClient,
     }),
   );
 

@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import { useEffect, useRef, useState } from 'react';
+import { QueryClientImpl as DataQueryClientImpl } from '@regen-network/api/lib/generated/regen/data/v1/query';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { getMetadata } from 'lib/db/api/metadata-graph';
@@ -7,6 +8,7 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
+import { useLedger } from '../../../ledger';
 import { ProjectWithOrderData } from '../Projects.types';
 import { GECKO_PRICES } from './useProjectsSellOrders.types';
 import {
@@ -42,6 +44,7 @@ export const useProjectsSellOrders = ({
   const [loading, setLoading] = useState<boolean>(true);
   const isFetchingRef = useRef(false);
   const { wallet } = useWallet();
+  const { dataClient } = useLedger();
 
   useEffect(() => {
     const normalize = async (): Promise<void> => {
@@ -57,6 +60,7 @@ export const useProjectsSellOrders = ({
             limit ?? projects.length,
             geckoPrices,
             wallet?.address,
+            dataClient,
           );
           if (_projectsWithOrders) {
             setProjectsWithOrderData(_projectsWithOrders);
@@ -77,6 +81,7 @@ export const useProjectsSellOrders = ({
     limit,
     projectsWithOrderData,
     wallet?.address,
+    dataClient,
   ]);
 
   return { projectsWithOrderData, loading };
@@ -88,6 +93,7 @@ const getProjectDisplayData = async (
   limit: number,
   geckoPrices?: GECKO_PRICES,
   userAddress?: string,
+  dataClient?: DataQueryClientImpl,
 ): Promise<ProjectWithOrderData[]> => {
   const projectsWithOrderData = await Promise.all(
     projects
@@ -106,7 +112,7 @@ const getProjectDisplayData = async (
         let metadata;
         if (project.metadata.length) {
           try {
-            metadata = await getMetadata(project.metadata);
+            metadata = await getMetadata(project.metadata, dataClient);
           } catch (error) {
             // eslint-disable-next-line
             console.error(error);

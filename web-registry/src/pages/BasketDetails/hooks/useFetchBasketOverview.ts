@@ -18,7 +18,7 @@ type Params = {
 export const useFetchBasketOverview = ({
   basketDenom,
 }: Params): BasketOverviewProps => {
-  const { basketClient, bankClient, ecocreditClient } = useLedger();
+  const { basketClient, bankClient, ecocreditClient, dataClient } = useLedger();
 
   // Basket
   const { data: basketData } = useQuery(
@@ -61,7 +61,11 @@ export const useFetchBasketOverview = ({
   // Metadatas
   const basketMetadatas = useQueries({
     queries: basketClassResults.map(basketClass =>
-      getMetadataQuery({ iri: basketClass.data?.class?.metadata }),
+      getMetadataQuery({
+        iri: basketClass.data?.class?.metadata,
+        dataClient,
+        enabled: !!dataClient,
+      }),
     ),
   });
 

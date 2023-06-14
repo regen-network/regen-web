@@ -6,12 +6,10 @@ import { jsonLdCompact } from 'lib/rdf';
 
 export const getMetadata = async (
   iri?: string,
-  context?: object,
   client?: QueryClientImpl,
+  context?: object,
 ): Promise<any> => {
   if (!iri) return null;
-
-  // First try to get metadata from registry-server
   let res;
   try {
     res = await fetch(`${apiUri}/metadata-graph/${iri}`);
@@ -24,24 +22,30 @@ export const getMetadata = async (
   }
 
   // Fallback to data module resolvers if metadata can't be found on registry-server
+  // (fetch API doesn't throw any error on 404)
   if (res.status === 404 && client) {
-    const resolversRes = await client.ResolversByIRI({ iri });
-    for (let i = 0; i < resolversRes.resolvers.length; i++) {
-      const resolverUrl = resolversRes.resolvers[i].url;
-      try {
-        const resolverRes = await fetch(`${resolverUrl}/${iri}`);
-        if (resolverRes.ok) {
-          const data = await resolverRes.json();
-          return await jsonLdCompact(data, context);
-        }
-      } catch (e) {
-        // We've tried with the last resolver so we can return
-        if (i === resolversRes.resolvers.length - 1) {
-          return null;
+    try {
+      const resolversRes = await client.ResolversByIRI({ iri });
+      const resolversLen = resolversRes.resolvers.length;
+      for (let i = 0; i < resolversLen; i++) {
+        const resolverUrl = resolversRes.resolvers[i].url;
+        try {
+          const resolverRes = await fetch(`${resolverUrl}/${iri}`);
+          if (resolverRes.ok) {
+            const data = await resolverRes.json();
+            return await jsonLdCompact(data, context);
+          }
+        } catch (fetchErr) {
+          // Error while fetching metadata with resolver,
+          // will keep looping through the remaining resolvers
+          // until successful or iterator exhausted and null will be returned.
         }
       }
+    } catch (clientErr) {
+      // No resolver found, null will be returned.
     }
   }
+
   return null;
 };
 

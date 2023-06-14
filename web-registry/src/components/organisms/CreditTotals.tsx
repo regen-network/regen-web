@@ -6,6 +6,7 @@ import { makeStyles } from 'tss-react/mui';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { formatNumber } from 'web-components/lib/utils/format';
 
+import { useLedger } from '../../ledger';
 import { getBatchesWithSupply } from '../../lib/ecocredit/api';
 import { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { Statistic } from '../molecules';
@@ -32,6 +33,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
 
 const CreditTotals: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { classes: styles } = useStyles();
+  const { dataClient } = useLedger();
   const [totals, setTotals] = useState<CreditTotalData>({
     tradeable: undefined,
     retired: undefined,
@@ -78,7 +80,10 @@ const CreditTotals: React.FC<React.PropsWithChildren<unknown>> = () => {
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       try {
-        const res = await getBatchesWithSupply({ withAllData: false });
+        const res = await getBatchesWithSupply({
+          withAllData: false,
+          dataClient,
+        });
         const data: BatchInfoWithSupply[] = res?.data;
 
         if (data) {
@@ -92,7 +97,7 @@ const CreditTotals: React.FC<React.PropsWithChildren<unknown>> = () => {
     };
 
     fetchData();
-  }, [sumBatchTotals]);
+  }, [dataClient, sumBatchTotals]);
 
   return (
     <Grid container spacing={6} className={styles.root}>

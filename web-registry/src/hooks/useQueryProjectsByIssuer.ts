@@ -3,6 +3,7 @@ import { QueryProjectsByAdminResponse } from '@regen-network/api/lib/generated/r
 
 import { getMetadata } from 'lib/db/api/metadata-graph';
 
+import { useLedger } from '../ledger';
 import type { ProjectWithMetadataObj as Project } from '../types/ledger/ecocredit';
 import useEcocreditQuery from './useEcocreditQuery';
 
@@ -14,6 +15,7 @@ export default function useQueryProjectsByIssuer(issuer: string): Project[] {
     });
 
   const [projects, setProjects] = useState<Project[]>([]);
+  const { dataClient } = useLedger();
 
   useEffect(() => {
     if (!projectsResponse?.projects) return;
@@ -27,7 +29,7 @@ export default function useQueryProjectsByIssuer(issuer: string): Project[] {
             let metadata;
             if (project.metadata.length) {
               try {
-                metadata = await getMetadata(project.metadata);
+                metadata = await getMetadata(project.metadata, dataClient);
               } catch (error) {
                 // eslint-disable-next-line
                 console.error(error);
@@ -52,7 +54,7 @@ export default function useQueryProjectsByIssuer(issuer: string): Project[] {
     return () => {
       ignore = true;
     };
-  }, [projectsResponse?.projects]);
+  }, [dataClient, projectsResponse?.projects]);
 
   return projects;
 }

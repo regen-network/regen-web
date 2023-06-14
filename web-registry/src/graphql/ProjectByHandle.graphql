@@ -1,5 +1,6 @@
 fragment partyFields on Party {
   id
+  accountId
   type
   name
   description

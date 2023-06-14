@@ -7,6 +7,9 @@ query ProjectById($id: UUID!) {
     partyByDeveloperId {
       ...partyFields
     }
+    partyByVerifierId {
+      ...partyFields
+    }
     creditClassByCreditClassId {
       id
       onChainId

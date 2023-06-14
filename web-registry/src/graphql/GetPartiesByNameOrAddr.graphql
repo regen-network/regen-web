@@ -1,0 +1,7 @@
+query GetPartiesByNameOrAddr($input: String) {
+  getPartiesByNameOrAddr(input: $input) {
+    nodes {
+      ...partyWithAccountFields
+    }
+  }
+}

@@ -98,7 +98,11 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
 
     /* Effect */
 
-    useUpdateDefaultAvatar({ form, profileType, profileImage });
+    useUpdateDefaultAvatar({
+      setProfileImage: value => form.setValue('profileImage', value),
+      profileType,
+      profileImage,
+    });
 
     return (
       <Form

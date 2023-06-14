@@ -123,7 +123,7 @@ export function validatePrice(
  * Checks if the given string is an ETH address
  *
  * @method isValidEthAddress
- * @param {String} address the given HEX adress
+ * @param {String} address the given HEX address
  * @return {Boolean}
  */
 const isValidEthAddress = (address: string): boolean => {

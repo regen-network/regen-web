@@ -201,7 +201,7 @@ const getPartyFromMetadata = (
     type: type,
     image: metadataRole?.['schema:image'] || defaultImage,
     location: metadataRole?.['schema:location']?.place_name || '',
-    address: metadataRole?.['regen:adress'] || '',
+    address: metadataRole?.['regen:address'] || '',
     link: metadataRole?.['schema:url'],
   };
 };

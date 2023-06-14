@@ -25,7 +25,7 @@ export const ProjectPageIconSmall = (props: SvgIconProps): JSX.Element => {
           height="15"
           rx="2"
           stroke="currentColor"
-          stroke-width="2"
+          strokeWidth="2"
         />
         <rect
           y="6"

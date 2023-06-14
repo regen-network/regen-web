@@ -1,20 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import WithLoader from 'components/atoms/WithLoader';
+import { RolesForm } from 'components/organisms/RolesForm/RolesForm';
+import { RolesFormSchemaType } from 'components/organisms/RolesForm/RolesForm.schema';
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
-import { RolesForm, RolesFormValues } from '../../components/organisms';
 import { useWallet } from '../../lib/wallet/wallet';
 import { useProjectEditContext } from '../ProjectEdit';
 import { useRolesSubmit } from './hooks/useRolesSubmit';
+import { getProjectStakeholderInitialValues } from './Roles.utils';
 
 const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
-  const { wallet } = useWallet();
-  const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
-  const { metadata, offChainProject, metadataReload } = useProjectWithMetadata({
+  const { wallet, loaded } = useWallet();
+  const {
+    isEdit,
+    onChainProject,
+    projectEditSubmit,
+    isLoading: editContextLoading,
+  } = useProjectEditContext();
+  const {
+    metadata,
+    offChainProject,
+    metadataReload,
+    loading: withMetadataLoading,
+  } = useProjectWithMetadata({
     projectId,
     isEdit,
     onChainProject,
@@ -29,35 +42,26 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
     metadataReload,
     navigateNext,
   });
-  const [initialValues, setInitialValues] = useState<RolesFormValues>();
 
-  useEffect(() => {
-    let values: RolesFormValues = {
+  const projectDeveloper = offChainProject?.partyByDeveloperId;
+  const verifier = offChainProject?.partyByVerifierId;
+
+  const initialValues: RolesFormSchemaType = useMemo(
+    () => ({
       // In edit mode, use existing on chain project admin
       // In creation mode, use current wallet address
-      admin: isEdit ? onChainProject?.admin : wallet?.address,
-    };
-    if (
-      metadata?.['regen:projectDeveloper'] &&
-      offChainProject?.partyByDeveloperId?.id
-    ) {
-      const projectDeveloper = {
-        ...metadata['regen:projectDeveloper'],
-        id: offChainProject.partyByDeveloperId.id,
-      };
-      values = {
-        ...values,
-        'regen:projectDeveloper': projectDeveloper,
-      };
-    }
-    setInitialValues(values);
-  }, [
-    isEdit,
-    metadata,
-    offChainProject?.partyByDeveloperId?.id,
-    onChainProject?.admin,
-    wallet?.address,
-  ]);
+      admin: (isEdit ? onChainProject?.admin : wallet?.address) || '',
+      projectDeveloper: getProjectStakeholderInitialValues(projectDeveloper),
+      verifier: getProjectStakeholderInitialValues(verifier),
+    }),
+    [
+      isEdit,
+      onChainProject?.admin,
+      projectDeveloper,
+      verifier,
+      wallet?.address,
+    ],
+  );
 
   async function saveAndExit(): Promise<void> {
     // TODO: functionality
@@ -77,14 +81,16 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
       title="Roles"
       saveAndExit={saveAndExit}
     >
-      <RolesForm
-        submit={rolesSubmit}
-        onNext={navigateNext}
-        onPrev={navigatePrev}
-        initialValues={initialValues}
-        projectId={offChainProject?.id}
-        // graphData={graphData}
-      />
+      <WithLoader
+        isLoading={!loaded || editContextLoading || withMetadataLoading}
+      >
+        <RolesForm
+          submit={rolesSubmit}
+          onNext={navigateNext}
+          onPrev={navigatePrev}
+          initialValues={initialValues}
+        />
+      </WithLoader>
     </ProjectFormTemplate>
   );
 };

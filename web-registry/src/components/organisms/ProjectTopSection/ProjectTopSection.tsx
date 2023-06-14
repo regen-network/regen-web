@@ -216,14 +216,14 @@ function ProjectTopSection({
                 type={{
                   name: creditTypeData?.creditType?.name ?? '',
                   icon: {
-                    src: creditClassSanity.creditTypeIcon?.asset?.url ?? '',
+                    src: creditClassSanity.creditType?.image?.asset?.url ?? '',
                   },
                 }}
                 generationMethod={{
                   name: generationMethod ?? '',
                   icon: {
                     src:
-                      creditClassSanity.creditGenerationMethodIcon?.asset
+                      creditClassSanity.creditGenerationMethod?.image?.asset
                         ?.url ?? '',
                   },
                 }}

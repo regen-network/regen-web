@@ -13,11 +13,17 @@ query allCreditClass {
     icon {
       ...imageFields
     }
-    creditTypeIcon {
-      ...imageFields
+    creditType {
+      name
+      image {
+        ...imageFields
+      }
     }
-    creditGenerationMethodIcon {
-      ...imageFields
+    creditGenerationMethod {
+      name
+      image {
+        ...imageFields
+      }
     }
     ecologicalImpact {
       ...ecologicalImpactRelationFields

@@ -1,5 +1,4 @@
 import LazyLoad from 'react-lazyload';
-import { Link } from 'react-router-dom';
 import {
   ApolloClient,
   NormalizedCacheObject,
@@ -17,7 +16,6 @@ import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
 import { useLedger } from 'ledger';
-import { getMetadata } from 'lib/db/api/metadata-graph';
 import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
@@ -25,6 +23,7 @@ import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMet
 import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 
 import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
+import { Link } from 'components/atoms';
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
@@ -138,6 +137,7 @@ function ProjectTopSection({
     methodologies: creditClassMetadata?.['regen:approvedMethodologies'],
   });
   const methodology = projectMethodology ?? creditClassMethodology;
+  const generationMethod = getOffsetGenerationMethod(creditClassMetadata);
 
   return (
     <Section classes={{ root: classes.section }}>
@@ -204,7 +204,7 @@ function ProjectTopSection({
             </Body>
           )}
           {creditClassSanity && (
-            <Link to={`/credit-classes/${creditClassSanity.path}`}>
+            <Link href={`/credit-classes/${creditClassSanity.path}`}>
               <CreditClassCard
                 title={<BlockContent content={creditClassSanity.nameRaw} />}
                 description={
@@ -216,13 +216,15 @@ function ProjectTopSection({
                 type={{
                   name: creditTypeData?.creditType?.name ?? '',
                   icon: {
-                    src: '',
+                    src: creditClassSanity.creditTypeIcon?.asset?.url ?? '',
                   },
                 }}
                 generationMethod={{
-                  name: getOffsetGenerationMethod(creditClassMetadata),
+                  name: generationMethod ?? '',
                   icon: {
-                    src: '',
+                    src:
+                      creditClassSanity.creditGenerationMethodIcon?.asset
+                        ?.url ?? '',
                   },
                 }}
                 methodology={{

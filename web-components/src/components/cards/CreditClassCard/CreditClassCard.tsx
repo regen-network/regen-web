@@ -4,7 +4,6 @@ import { CardRibbon } from '../../../components/atoms/CardRibbon/CardRibbon';
 import { Flex } from '../../../components/box';
 import InfoTooltipWithIcon from '../../../components/tooltip/InfoTooltipWithIcon';
 import { Theme } from '../../../theme/muiTheme';
-import { LinkComponentType } from '../../../types/shared/linkComponentType';
 import { LinkType } from '../../../types/shared/linkType';
 import { parseText } from '../../../utils/textParser';
 import { OptimizeImageProps } from '../../image';
@@ -25,7 +24,6 @@ export interface Props extends OptimizeImageProps {
   imgSrc: string;
   generationMethod?: CreditClassCardItemType;
   methodology?: Partial<LinkType>;
-  linkComponent?: LinkComponentType;
   sx?: SxProps<Theme>;
 }
 
@@ -36,7 +34,6 @@ const CreditClassCard = ({
   type,
   generationMethod,
   methodology,
-  linkComponent,
   sx = [],
 }: Props): JSX.Element => {
   const { classes } = useCreditClassCardStyles();
@@ -114,7 +111,6 @@ const CreditClassCard = ({
               <CreditClassCardItem
                 label={METHODOLOGY}
                 link={methodology}
-                linkComponent={linkComponent}
                 sx={{ maxWidth: { sm: 195 } }}
               />
             )}

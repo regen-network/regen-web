@@ -536,10 +536,10 @@ export type BuyersQuoteText = {
   __typename?: 'BuyersQuoteText';
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
-  /** This part has a green gradient */
+  /** This part is highlighted in green */
   quoteFirstPart?: Maybe<Scalars['String']>;
   quoteMiddlePart?: Maybe<Scalars['String']>;
-  /** This part has a green gradient */
+  /** This part is highlighted in green */
   quoteLastPart?: Maybe<Scalars['String']>;
 };
 
@@ -1665,6 +1665,8 @@ export type CreditClass = Document & {
   buyer?: Maybe<Buyer>;
   landSteward?: Maybe<LandSteward>;
   icon?: Maybe<Image>;
+  creditTypeIcon?: Maybe<Image>;
+  creditGenerationMethodIcon?: Maybe<Image>;
 };
 
 export type CreditClassFilter = {
@@ -1682,6 +1684,8 @@ export type CreditClassFilter = {
   buyer?: Maybe<BuyerFilter>;
   landSteward?: Maybe<LandStewardFilter>;
   icon?: Maybe<ImageFilter>;
+  creditTypeIcon?: Maybe<ImageFilter>;
+  creditGenerationMethodIcon?: Maybe<ImageFilter>;
 };
 
 export type CreditClassSorting = {
@@ -1697,6 +1701,8 @@ export type CreditClassSorting = {
   buyer?: Maybe<BuyerSorting>;
   landSteward?: Maybe<LandStewardSorting>;
   icon?: Maybe<ImageSorting>;
+  creditTypeIcon?: Maybe<ImageSorting>;
+  creditGenerationMethodIcon?: Maybe<ImageSorting>;
 };
 
 export type CreditInfos = {
@@ -4876,26 +4882,6 @@ export type ResourcesCardSorting = {
   buttonHref?: Maybe<SortOrder>;
 };
 
-export type ResourcesLedgerSection = {
-  __typename?: 'ResourcesLedgerSection';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  header?: Maybe<Scalars['String']>;
-  cards?: Maybe<Array<Maybe<Resource>>>;
-};
-
-export type ResourcesLedgerSectionFilter = {
-  _key?: Maybe<StringFilter>;
-  _type?: Maybe<StringFilter>;
-  header?: Maybe<StringFilter>;
-};
-
-export type ResourcesLedgerSectionSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  header?: Maybe<SortOrder>;
-};
-
 export type ResourcesPage = Document & {
   __typename?: 'ResourcesPage';
   /** Document ID */
@@ -4910,8 +4896,7 @@ export type ResourcesPage = Document & {
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
   topSection?: Maybe<TitleBody>;
-  registrySection?: Maybe<ResourcesRegistrySection>;
-  ledgerSection?: Maybe<ResourcesLedgerSection>;
+  resourcesSections?: Maybe<Array<Maybe<ResourcesSection>>>;
 };
 
 export type ResourcesPageFilter = {
@@ -4924,8 +4909,6 @@ export type ResourcesPageFilter = {
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
   topSection?: Maybe<TitleBodyFilter>;
-  registrySection?: Maybe<ResourcesRegistrySectionFilter>;
-  ledgerSection?: Maybe<ResourcesLedgerSectionFilter>;
 };
 
 export type ResourcesPageSorting = {
@@ -4936,52 +4919,26 @@ export type ResourcesPageSorting = {
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
   topSection?: Maybe<TitleBodySorting>;
-  registrySection?: Maybe<ResourcesRegistrySectionSorting>;
-  ledgerSection?: Maybe<ResourcesLedgerSectionSorting>;
 };
 
-export type ResourcesRegistrySection = {
-  __typename?: 'ResourcesRegistrySection';
+export type ResourcesSection = {
+  __typename?: 'ResourcesSection';
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
   header?: Maybe<Scalars['String']>;
-  documentTableTitle?: Maybe<Scalars['String']>;
-  documents?: Maybe<Array<Maybe<Doc>>>;
-  subsections?: Maybe<Array<Maybe<ResourcesRegistrySubSection>>>;
-};
-
-export type ResourcesRegistrySectionFilter = {
-  _key?: Maybe<StringFilter>;
-  _type?: Maybe<StringFilter>;
-  header?: Maybe<StringFilter>;
-  documentTableTitle?: Maybe<StringFilter>;
-};
-
-export type ResourcesRegistrySectionSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  header?: Maybe<SortOrder>;
-  documentTableTitle?: Maybe<SortOrder>;
-};
-
-export type ResourcesRegistrySubSection = {
-  __typename?: 'ResourcesRegistrySubSection';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
   cards?: Maybe<Array<Maybe<Resource>>>;
 };
 
-export type ResourcesRegistrySubSectionFilter = {
+export type ResourcesSectionFilter = {
   _key?: Maybe<StringFilter>;
   _type?: Maybe<StringFilter>;
-  title?: Maybe<StringFilter>;
+  header?: Maybe<StringFilter>;
 };
 
-export type ResourcesRegistrySubSectionSorting = {
+export type ResourcesSectionSorting = {
   _key?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
-  title?: Maybe<SortOrder>;
+  header?: Maybe<SortOrder>;
 };
 
 export type ReviewSection = {
@@ -7668,10 +7625,13 @@ export type AllCreditClassQuery = (
       & CustomImageFieldsFragment
     )>, icon?: Maybe<(
       { __typename?: 'Image' }
-      & { asset?: Maybe<(
-        { __typename?: 'SanityImageAsset' }
-        & Pick<SanityImageAsset, 'url'>
-      )> }
+      & ImageFieldsFragment
+    )>, creditTypeIcon?: Maybe<(
+      { __typename?: 'Image' }
+      & ImageFieldsFragment
+    )>, creditGenerationMethodIcon?: Maybe<(
+      { __typename?: 'Image' }
+      & ImageFieldsFragment
     )>, ecologicalImpact?: Maybe<Array<Maybe<(
       { __typename?: 'EcologicalImpactRelation' }
       & EcologicalImpactRelationFieldsFragment
@@ -9290,9 +9250,13 @@ export const AllCreditClassDocument = gql`
       ...customImageFields
     }
     icon {
-      asset {
-        url
-      }
+      ...imageFields
+    }
+    creditTypeIcon {
+      ...imageFields
+    }
+    creditGenerationMethodIcon {
+      ...imageFields
     }
     ecologicalImpact {
       ...ecologicalImpactRelationFields
@@ -9363,6 +9327,7 @@ export const AllCreditClassDocument = gql`
   }
 }
     ${CustomImageFieldsFragmentDoc}
+${ImageFieldsFragmentDoc}
 ${EcologicalImpactRelationFieldsFragmentDoc}
 ${CardFieldsFragmentDoc}
 ${HeroSectionFieldsFragmentDoc}

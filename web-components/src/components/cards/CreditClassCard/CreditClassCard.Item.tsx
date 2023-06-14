@@ -1,10 +1,10 @@
+import { Link } from '@mui/material';
 import { SxProps } from '@mui/system';
 
 import { Box, Flex } from '../../../components/box';
 import SmallArrowIcon from '../../../components/icons/SmallArrowIcon';
 import { Body, Label } from '../../../components/typography';
 import { Theme } from '../../../theme/muiTheme';
-import { LinkComponentType } from '../../../types/shared/linkComponentType';
 import { LinkType } from '../../../types/shared/linkType';
 import { CreditClassCardItemType } from './CreditClassCard.types';
 import { isLinkItem, isTextItem } from './CreditClassCard.utils';
@@ -13,17 +13,10 @@ type Props = {
   label: string;
   item?: CreditClassCardItemType;
   link?: Partial<LinkType>;
-  linkComponent?: LinkComponentType;
   sx?: SxProps<Theme>;
 };
 
-export const CreditClassCardItem = ({
-  label,
-  link,
-  item,
-  linkComponent,
-  sx,
-}: Props) => {
+export const CreditClassCardItem = ({ label, link, item, sx }: Props) => {
   const { name, icon } = item ?? {};
 
   return (
@@ -42,17 +35,18 @@ export const CreditClassCardItem = ({
             />
           )}
           {name && <Body>{name}</Body>}
-          {isLinkItem(link) && linkComponent && (
-            <Box
-              component={linkComponent}
+          {isLinkItem(link) && (
+            <Link
               href={link.href}
+              target="_blank"
+              onClick={e => e.stopPropagation()}
               sx={{ color: 'secondary.main', fontSize: 14, fontWeight: 700 }}
             >
               {link.text}
               <SmallArrowIcon
                 sx={{ verticalAlign: 'middle', ml: 1, height: 10 }}
               />
-            </Box>
+            </Link>
           )}
           {isTextItem(link) && <Box sx={{ fontSize: 14 }}>{link.text}</Box>}
         </Flex>

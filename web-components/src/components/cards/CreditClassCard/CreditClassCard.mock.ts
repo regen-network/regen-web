@@ -25,5 +25,4 @@ export const creditClassCardMock: Props = {
     href: '#',
     text: 'Ruuts Protocol Soil Carbon Sequestration Methodology',
   },
-  linkComponent: Link,
 };

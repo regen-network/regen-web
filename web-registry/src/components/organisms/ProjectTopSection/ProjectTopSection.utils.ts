@@ -8,9 +8,12 @@ import {
 } from 'generated/graphql';
 import {
   AnchoredProjectMetadataLD,
+  CFCProjectMetadataLD,
   LegacyProjectMetadataLD,
   ProjectPageMetadataLD,
   ProjectQuote,
+  ToucanProjectMetadataLD,
+  VCSProjectMetadataLD,
 } from 'lib/db/types/json-ld';
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
@@ -151,9 +154,24 @@ export const isAnchoredProjectMetadata = (
   return !!onChainProjectId;
 };
 
+export const isCFCProjectMetadata = (
+  projectMetadata?:
+    | VCSProjectMetadataLD
+    | CFCProjectMetadataLD
+    | ToucanProjectMetadataLD,
+): projectMetadata is CFCProjectMetadataLD => {
+  return (
+    !!projectMetadata &&
+    typeof projectMetadata?.['regen:offsetGenerationMethod'] !== 'string'
+  );
+};
+
 export const getOffsetGenerationMethod = (
   metadata?: AnchoredProjectMetadataLD,
-) =>
-  metadata?.['regen:offsetGenerationMethod']?.[0] ??
-  metadata?.['regen:offsetGenerationMethod'] ??
-  '';
+) => {
+  if (isCFCProjectMetadata(metadata)) {
+    return metadata?.['regen:offsetGenerationMethod']?.[0]['@value'];
+  }
+
+  return metadata?.['regen:offsetGenerationMethod']?.[0];
+};

@@ -6,6 +6,7 @@ import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCar
 
 import { useLedger } from 'ledger';
 import { client as sanityClient } from 'lib/clients/sanity';
+import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { normalizeProjectsWithCreditClass } from 'lib/normalizers/projects/normalizeProjectsWithCreditClass';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
@@ -78,7 +79,7 @@ export const useFetchProjectsByIds = ({ projectIds }: Props): Response => {
 
   // Normalization
   const normalizedProjects = normalizeProjectsWithCreditClass({
-    metadatas,
+    metadatas: metadatas as (AnchoredProjectMetadataLD | undefined)[],
     projectPageMetadatas,
     projects,
     sanityCreditClassData: creditClassData,

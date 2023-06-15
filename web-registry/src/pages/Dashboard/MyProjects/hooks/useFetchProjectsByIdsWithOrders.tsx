@@ -4,6 +4,7 @@ import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';
 import { GECKO_EEUR_ID, GECKO_USDC_ID } from 'lib/coingecko';
+import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { normalizeProjectsWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
@@ -105,7 +106,7 @@ export const useFetchProjectsByIdsWithOrders = ({
 
   const projectsWithMetadata = normalizeProjectsWithMetadata({
     projectsWithOrderData,
-    metadatas,
+    metadatas: metadatas as (AnchoredProjectMetadataLD | undefined)[],
     projectPageMetadatas,
   });
   return {

@@ -38,5 +38,6 @@ export function selectProjects({
 
   if (random) return shuffle(_projects).filter(hasMetadata);
   if (metadata) return _projects.filter(hasMetadata);
+
   return _projects;
 }

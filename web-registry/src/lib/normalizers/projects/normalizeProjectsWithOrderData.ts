@@ -1,11 +1,14 @@
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
+import { AllCreditClassQuery } from 'generated/sanity-graphql';
+
 import { GECKO_PRICES } from 'pages/Projects/hooks/useProjectsSellOrders.types';
 import {
   getPurchaseInfo,
   normalizeToUISellOrderInfo,
 } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
+import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 import DefaultProject from 'assets/default-project.jpg';
@@ -15,6 +18,7 @@ interface NormalizeProjectsWithOrderDataParams {
   sellOrders?: SellOrderInfoExtented[];
   geckoPrices?: GECKO_PRICES;
   userAddress?: string;
+  sanityCreditClassData?: AllCreditClassQuery;
 }
 
 export const normalizeProjectsWithOrderData = ({
@@ -22,6 +26,7 @@ export const normalizeProjectsWithOrderData = ({
   sellOrders = [],
   geckoPrices,
   userAddress,
+  sanityCreditClassData,
 }: NormalizeProjectsWithOrderDataParams): ProjectWithOrderData[] => {
   const projectsWithOrderData = projects?.map((project: ProjectInfo, index) => {
     const sellOrdersNormalized = sellOrders
@@ -32,6 +37,11 @@ export const normalizeProjectsWithOrderData = ({
       sellOrders,
       geckoPrices,
       userAddress,
+    });
+
+    const creditClass = findSanityCreditClass({
+      sanityCreditClassData,
+      creditClassIdOrUrl: project.classId ?? '',
     });
 
     return {
@@ -46,6 +56,7 @@ export const normalizeProjectsWithOrderData = ({
       sellOrders: sellOrdersNormalized,
       metadata: project.metadata,
       creditClassId: project.classId,
+      sanityCreditClassData: creditClass,
     } as ProjectWithOrderData;
   });
 

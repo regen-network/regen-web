@@ -124,6 +124,7 @@ export function useProjectsWithOrders({
     random,
     selectedProjects,
   });
+
   const projectsWithOrderData = normalizeProjectsWithOrderData({
     projects: lastRandomProjects ?? selectedProjects,
     sellOrders,
@@ -134,12 +135,18 @@ export function useProjectsWithOrders({
       usdcPrice: simplePrice?.data?.[GECKO_USDC_ID]?.usd,
     },
     userAddress: wallet?.address,
+    sanityCreditClassData: creditClassData,
   });
 
-  const sortedProjects = sortProjects(projectsWithOrderData, sort).slice(
-    offset,
-    limit ? offset + limit : undefined,
+  // Exclude community projects based on sanity credit class data
+  const projectsWithOrderDataFiltered = projectsWithOrderData.filter(
+    project => !!project.sanityCreditClassData,
   );
+
+  const sortedProjects = sortProjects(
+    projectsWithOrderDataFiltered,
+    sort,
+  ).slice(offset, limit ? offset + limit : undefined);
 
   /* Metadata queries */
 
@@ -168,7 +175,6 @@ export function useProjectsWithOrders({
     projectsWithOrderData: sortedProjects,
     metadatas,
     projectPageMetadatas,
-    sanityCreditClassData: creditClassData,
   });
 
   return {

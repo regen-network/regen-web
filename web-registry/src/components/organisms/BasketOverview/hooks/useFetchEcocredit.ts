@@ -24,7 +24,7 @@ interface Props {
 }
 
 export const useFetchEcocredit = ({ batchDenom }: Props): Response => {
-  const { ecocreditClient } = useLedger();
+  const { ecocreditClient, dataClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
 
@@ -58,6 +58,8 @@ export const useFetchEcocredit = ({ batchDenom }: Props): Response => {
   // Metadatas
   const metadata = getMetadataQuery({
     iri: projectData?.project?.metadata,
+    dataClient,
+    enabled: !!dataClient,
   });
 
   // AllCreditClasses

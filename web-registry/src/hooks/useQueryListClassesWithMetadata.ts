@@ -7,6 +7,7 @@ import {
 import { getMetadata } from 'lib/db/api/metadata-graph';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 
+import { useLedger } from '../ledger';
 import useQueryListClasses from './useQueryListClasses';
 
 interface ClassInfoWithMetadata extends ClassInfo {
@@ -15,6 +16,8 @@ interface ClassInfoWithMetadata extends ClassInfo {
 
 export default function useQueryListClassesWithMetadata(): ClassInfoWithMetadata[] {
   const creditClasses = useQueryListClasses();
+  const { dataClient } = useLedger();
+
   const [classList, setClassList] = useState<ClassInfoWithMetadata[]>([]);
 
   useEffect(() => {
@@ -29,7 +32,10 @@ export default function useQueryListClassesWithMetadata(): ClassInfoWithMetadata
           async (creditClass: ClassInfoWithMetadata) => {
             if (!creditClass?.metadata?.length) return creditClass;
             try {
-              const metadataJson = await getMetadata(creditClass.metadata);
+              const metadataJson = await getMetadata(
+                creditClass.metadata,
+                dataClient,
+              );
               return {
                 ...creditClass,
                 metadataJson,
@@ -50,7 +56,7 @@ export default function useQueryListClassesWithMetadata(): ClassInfoWithMetadata
     }
 
     fetchMetadata(creditClasses);
-  }, [creditClasses]);
+  }, [creditClasses, dataClient]);
 
   return classList;
 }

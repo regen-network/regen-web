@@ -3,6 +3,7 @@ import { OfflineSigner } from '@cosmjs/proto-signing';
 import { RegenApi } from '@regen-network/api';
 import { QueryClientImpl as BankQueryClientImpl } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 import { ServiceClientImpl as TxServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import { QueryClientImpl as DataQueryClientImpl } from '@regen-network/api/lib/generated/regen/data/v1/query';
 import { QueryClientImpl as BasketQueryClientImpl } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { QueryClientImpl as MarketplaceQueryClientImpl } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import { QueryClientImpl as EcocreditQueryClientImpl } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
@@ -20,6 +21,7 @@ interface ContextValue {
   ecocreditClient?: EcocreditQueryClient;
   marketplaceClient?: MarketplaceQueryClient;
   basketClient?: BasketQueryClientImpl;
+  dataClient?: DataQueryClientImpl;
   bankClient?: BankQueryClientImpl;
   txClient?: TxServiceClientImpl;
   error: unknown;
@@ -57,6 +59,7 @@ const LedgerContext = React.createContext<ContextValue>({
   ecocreditClient: undefined,
   marketplaceClient: undefined,
   basketClient: undefined,
+  dataClient: undefined,
   bankClient: undefined,
   txClient: undefined,
   error: undefined,
@@ -116,6 +119,11 @@ export const useLedger = (options?: ConnectParams): ContextValue => {
     api,
   });
 
+  const dataClient = useInitClient<DataQueryClientImpl>({
+    ClientImpl: DataQueryClientImpl,
+    api,
+  });
+
   const bankClient = useInitClient<BankQueryClientImpl>({
     ClientImpl: BankQueryClientImpl,
     api,
@@ -131,6 +139,7 @@ export const useLedger = (options?: ConnectParams): ContextValue => {
     ecocreditClient,
     marketplaceClient,
     basketClient,
+    dataClient,
     bankClient,
     txClient,
     loading: context.loading,

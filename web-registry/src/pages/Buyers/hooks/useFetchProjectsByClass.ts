@@ -21,7 +21,7 @@ interface Props {
 }
 
 export const useFetchProjectsByClass = ({ classId }: Props): Response => {
-  const { ecocreditClient } = useLedger();
+  const { ecocreditClient, dataClient } = useLedger();
   const graphqlClient = useApolloClient();
 
   // Projects by class
@@ -37,7 +37,11 @@ export const useFetchProjectsByClass = ({ classId }: Props): Response => {
   // Metadatas
   const metadatasResults = useQueries({
     queries: projects?.map(project =>
-      getMetadataQuery({ iri: project.metadata }),
+      getMetadataQuery({
+        iri: project.metadata,
+        dataClient,
+        enabled: !!dataClient,
+      }),
     ),
   });
 

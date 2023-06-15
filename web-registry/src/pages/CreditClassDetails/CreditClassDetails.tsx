@@ -21,6 +21,7 @@ import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/Cr
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 
+import { useLedger } from '../../ledger';
 import { getProjectNameFromProjectsData } from './CreditClassDetails.utils';
 import CreditClassDetailsSimple from './CreditClassDetailsSimple';
 import CreditClassDetailsWithContent from './CreditClassDetailsWithContent';
@@ -33,6 +34,7 @@ function CreditClassDetails({
   isLandSteward,
 }: CreditDetailsProps): JSX.Element {
   const { wallet } = useWallet();
+  const { dataClient } = useLedger();
   const { creditClassId } = useParams();
   const [onChainClass, setOnChainClass] = useState<ClassInfo | undefined>(
     undefined,
@@ -92,7 +94,7 @@ function CreditClassDetails({
           const classInfo = res?.class;
           if (classInfo) {
             setOnChainClass(classInfo);
-            const data = await getMetadata(classInfo.metadata);
+            const data = await getMetadata(classInfo.metadata, dataClient);
             setMetadata(data);
           }
         } catch (err) {
@@ -102,7 +104,7 @@ function CreditClassDetails({
       }
     };
     fetchData();
-  }, [creditClassId, isOnChainClassId]);
+  }, [creditClassId, dataClient, isOnChainClassId]);
 
   useEffect(() => {
     const fetch = async (): Promise<void> => {

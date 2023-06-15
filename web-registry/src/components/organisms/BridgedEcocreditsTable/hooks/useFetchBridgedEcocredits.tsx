@@ -45,7 +45,7 @@ interface Output {
 }
 
 export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
-  const { txClient, ecocreditClient } = useLedger();
+  const { txClient, ecocreditClient, dataClient } = useLedger();
   const statusToRefetchRef = useRef<boolean[]>([]);
 
   const [paginationParams, setPaginationParams] =
@@ -173,7 +173,11 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
   // Metadatas
   const metadatasResults = useQueries({
     queries: projects.map(project =>
-      getMetadataQuery({ iri: project?.project?.metadata }),
+      getMetadataQuery({
+        iri: project?.project?.metadata,
+        dataClient,
+        enabled: !!dataClient,
+      }),
     ),
   });
   const metadatas = metadatasResults.map(metadataResult => {

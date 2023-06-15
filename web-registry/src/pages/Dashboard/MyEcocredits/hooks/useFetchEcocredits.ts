@@ -37,7 +37,7 @@ export const useFetchEcocredits = ({
   creditClassId,
   isPaginatedQuery = true,
 }: Props): Response => {
-  const { ecocreditClient } = useLedger();
+  const { ecocreditClient, dataClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
   const [paginationParams, setPaginationParams] =
@@ -114,7 +114,11 @@ export const useFetchEcocredits = ({
   // Metadatas
   const metadatasResults = useQueries({
     queries: projects.map(project =>
-      getMetadataQuery({ iri: project?.project?.metadata }),
+      getMetadataQuery({
+        iri: project?.project?.metadata,
+        dataClient,
+        enabled: !!dataClient,
+      }),
     ),
   });
 

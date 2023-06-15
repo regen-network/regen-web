@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { Maybe } from '../../../../generated/graphql';
+import { useLedger } from '../../../../ledger';
 import {
   getBatchesByProjectWithSupply,
   getBatchesTotal,
@@ -19,13 +20,17 @@ export default function useBatches({ projectId }: InputProps): {
 } {
   const [batchData, setBatchData] = useState<BatchInfoWithSupply[]>([]);
   const [batchTotals, setBatchTotals] = useState<BatchTotalsForProject>();
+  const { dataClient } = useLedger();
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       try {
         let batches: BatchInfoWithSupply[] = [];
         if (projectId) {
-          const { data } = await getBatchesByProjectWithSupply(projectId);
+          const { data } = await getBatchesByProjectWithSupply(
+            projectId,
+            dataClient,
+          );
           batches = data;
         }
 

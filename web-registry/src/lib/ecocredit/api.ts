@@ -5,6 +5,7 @@ import {
   OrderBy,
   ServiceClientImpl,
 } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import { QueryClientImpl as DataQueryClientImpl } from '@regen-network/api/lib/generated/regen/data/v1/query';
 import {
   BatchBalanceInfo,
   BatchInfo,
@@ -109,12 +110,14 @@ type GetCreditsWithDataParams = {
   balances: BatchBalanceInfo[];
   batches: BatchInfo[];
   sanityCreditClassData?: AllCreditClassQuery;
+  dataClient?: DataQueryClientImpl;
 };
 
 const getCreditsWithData = async ({
   balances,
   batches,
   sanityCreditClassData,
+  dataClient,
 }: GetCreditsWithDataParams): Promise<BatchInfoWithBalance[]> => {
   const credits: (BatchInfoWithBalance | undefined)[] = await Promise.all(
     balances.map(async balance => {
@@ -124,6 +127,7 @@ const getCreditsWithData = async ({
       const classProjectInfo = await getClassProjectForBatch(
         batch,
         sanityCreditClassData,
+        dataClient,
       );
 
       return {
@@ -146,6 +150,7 @@ type GetEcocreditsForAccountParams = {
   balances?: BatchBalanceInfo[];
   batches?: BatchInfo[];
   sanityCreditClassData?: AllCreditClassQuery;
+  dataClient?: DataQueryClientImpl;
 };
 
 export const getEcocreditsForAccount = async ({
@@ -155,6 +160,7 @@ export const getEcocreditsForAccount = async ({
   loadedCredits,
   paginationParams,
   sanityCreditClassData,
+  dataClient,
 }: GetEcocreditsForAccountParams): Promise<BatchInfoWithBalance[]> => {
   try {
     if (paginationParams) {
@@ -164,6 +170,7 @@ export const getEcocreditsForAccount = async ({
         balances: displayedBalances,
         batches,
         sanityCreditClassData,
+        dataClient,
       });
       return [
         ...loadedCredits.slice(0, offset),
@@ -175,6 +182,7 @@ export const getEcocreditsForAccount = async ({
         balances,
         batches,
         sanityCreditClassData,
+        dataClient,
       });
     }
   } catch (err) {
@@ -211,23 +219,29 @@ type GetBatchesWithSupplyParams = {
   creditClassId?: string | null;
   params?: URLSearchParams;
   withAllData?: boolean;
+  dataClient?: DataQueryClientImpl;
 };
 
 export const getBatchesWithSupply = async ({
   creditClassId,
   params,
   withAllData = true,
+  dataClient,
 }: GetBatchesWithSupplyParams): Promise<{
   data: BatchInfoWithSupply[];
 }> => {
   const batches = await queryEcoBatches(creditClassId, params);
-  const batchesWithData = await addDataToBatches({ batches, withAllData });
+  const batchesWithData = await addDataToBatches({
+    batches,
+    withAllData,
+    dataClient,
+  });
   return { data: batchesWithData };
 };
 
 export const getBatchesByProjectWithSupply = async (
   projectId?: string | null,
-  params?: URLSearchParams,
+  dataClient?: DataQueryClientImpl,
 ): Promise<{
   data: BatchInfoWithSupply[];
 }> => {
@@ -244,6 +258,7 @@ export const getBatchesByProjectWithSupply = async (
 const getClassProjectForBatch = async (
   batch: BatchInfo,
   sanityCreditClassData?: AllCreditClassQuery,
+  dataClient?: DataQueryClientImpl,
   reactQueryClient?: QueryClient,
 ): Promise<ClassProjectInfo> => {
   let metadata, projectData;
@@ -265,13 +280,17 @@ const getClassProjectForBatch = async (
     try {
       if (reactQueryClient) {
         metadata = await getFromCacheOrFetch({
-          query: getMetadataQuery({ iri: project.metadata }),
+          query: getMetadataQuery({
+            iri: project.metadata,
+            dataClient,
+            enabled: !!dataClient,
+          }),
           reactQueryClient,
         });
       } else {
         // TODO Keeping the old path for retro-compatibility of the function.
         // Once all paths use the react-query one we will be able to remove it.
-        metadata = await getMetadata(project.metadata);
+        metadata = await getMetadata(project.metadata, dataClient);
       }
     } catch (error) {}
   }
@@ -295,6 +314,7 @@ export type AddDataToBatchesParams = {
   batches: BatchInfo[];
   sanityCreditClassData?: AllCreditClassQuery;
   withAllData?: boolean;
+  dataClient?: DataQueryClientImpl;
   reactQueryClient?: QueryClient;
 };
 
@@ -303,6 +323,7 @@ export const addDataToBatches = async ({
   batches,
   sanityCreditClassData,
   withAllData = true,
+  dataClient,
   reactQueryClient,
 }: AddDataToBatchesParams): Promise<BatchInfoWithSupply[]> => {
   try {
@@ -345,6 +366,7 @@ export const addDataToBatches = async ({
           classProjectInfo = await getClassProjectForBatch(
             batch,
             sanityCreditClassData,
+            dataClient,
             reactQueryClient,
           );
         }

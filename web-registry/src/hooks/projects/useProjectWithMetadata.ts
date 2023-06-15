@@ -24,6 +24,8 @@ import {
 import { DescriptionSchemaType } from 'components/organisms/DescriptionForm/DescriptionForm.schema';
 import { MediaFormSchemaType } from 'components/organisms/MediaForm/MediaForm.schema';
 
+import { useLedger } from '../../ledger';
+
 export type OffChainProject =
   | ProjectByIdQuery['projectById']
   | ProjectByOnChainIdQuery['projectByOnChainId'];
@@ -70,6 +72,7 @@ export const useProjectWithMetadata = ({
   const graphqlClient = useApolloClient();
   const reactQueryClient = useQueryClient();
   const [updateProject] = useUpdateProjectByIdMutation();
+  const { dataClient } = useLedger();
 
   // In project creation mode, we query the off-chain project since there's no on-chain project yet.
   // In this case, the router param projectId is the off-chain project uuid.
@@ -95,7 +98,8 @@ export const useProjectWithMetadata = ({
   const { data: anchoredMetadata, isFetching: isFetchingMetadata } = useQuery(
     getMetadataQuery({
       iri: onChainProject?.metadata,
-      enabled: !!onChainProject?.metadata && edit && anchored,
+      enabled: !!onChainProject?.metadata && edit && anchored && !!dataClient,
+      dataClient,
     }),
   );
   const {

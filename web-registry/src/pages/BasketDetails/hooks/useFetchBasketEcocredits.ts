@@ -33,7 +33,7 @@ export interface FetchBasketEcocreditsType {
 export const useFetchBasketEcocredits = ({
   basketDenom,
 }: Params): FetchBasketEcocreditsType => {
-  const { ecocreditClient, basketClient } = useLedger();
+  const { ecocreditClient, basketClient, dataClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
@@ -101,7 +101,11 @@ export const useFetchBasketEcocredits = ({
   // Metadatas
   const metadatasResults = useQueries({
     queries: projects.map(project =>
-      getMetadataQuery({ iri: project?.project?.metadata }),
+      getMetadataQuery({
+        iri: project?.project?.metadata,
+        dataClient,
+        enabled: !!dataClient,
+      }),
     ),
   });
 

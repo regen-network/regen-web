@@ -59,7 +59,7 @@ import { ProjectDetailsTableTabs } from './tables/ProjectDetails.TableTabs';
 function ProjectDetails(): JSX.Element {
   const theme = useTheme();
   const { projectId } = useParams();
-  const { ecocreditClient } = useLedger();
+  const { ecocreditClient, dataClient } = useLedger();
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
   const { wallet } = useWallet();
   const graphqlClient = useApolloClient();
@@ -143,7 +143,13 @@ function ProjectDetails(): JSX.Element {
 
   /** Anchored project metadata comes from IRI resolver. */
   const { data: anchoredMetadata, isInitialLoading: loadingAnchoredMetadata } =
-    useQuery(getMetadataQuery({ iri: onChainProject?.metadata }));
+    useQuery(
+      getMetadataQuery({
+        iri: onChainProject?.metadata,
+        dataClient,
+        enabled: !!dataClient,
+      }),
+    );
 
   const { batchesWithSupply, setPaginationParams, paginationParams } =
     usePaginatedBatchesByProject({ projectId: String(onChainProjectId) });

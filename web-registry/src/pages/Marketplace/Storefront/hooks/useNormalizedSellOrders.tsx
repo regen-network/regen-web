@@ -46,7 +46,7 @@ type ResponseType = {
 
 export const useNormalizedSellOrders = (): ResponseType => {
   const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
-  const { ecocreditClient } = useLedger();
+  const { ecocreditClient, dataClient } = useLedger();
 
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
@@ -126,7 +126,9 @@ export const useNormalizedSellOrders = (): ResponseType => {
   );
   const metadataResults = useQueries({
     queries:
-      projects?.map(({ metadata: iri }) => getMetadataQuery({ iri })) ?? [],
+      projects?.map(({ metadata: iri }) =>
+        getMetadataQuery({ iri, dataClient, enabled: !!dataClient }),
+      ) ?? [],
   });
   const metadata = metadataResults.map(queryResult => queryResult.data);
   const projectsWithMetadata = useMemo(

@@ -8,13 +8,12 @@ import {
 } from 'generated/graphql';
 import {
   AnchoredProjectMetadataLD,
-  CFCProjectMetadataLD,
+  CreditClassMetadataLD,
   LegacyProjectMetadataLD,
   ProjectPageMetadataLD,
   ProjectQuote,
-  ToucanProjectMetadataLD,
-  VCSProjectMetadataLD,
 } from 'lib/db/types/json-ld';
+import { CFCCreditClassMetadataLD } from 'lib/db/types/json-ld/cfc-credit-class-metadata';
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
 import { SEE_ALL_METHODOLOGIES } from './ProjectTopSection.constants';
@@ -154,21 +153,16 @@ export const isAnchoredProjectMetadata = (
   return !!onChainProjectId;
 };
 
-export const isCFCProjectMetadata = (
-  projectMetadata?:
-    | VCSProjectMetadataLD
-    | CFCProjectMetadataLD
-    | ToucanProjectMetadataLD,
-): projectMetadata is CFCProjectMetadataLD => {
+const isCFCProjectMetadata = (
+  projectMetadata?: CreditClassMetadataLD | CFCCreditClassMetadataLD,
+): projectMetadata is CFCCreditClassMetadataLD => {
   return (
     !!projectMetadata &&
-    typeof projectMetadata?.['regen:offsetGenerationMethod'] !== 'string'
+    typeof projectMetadata?.['regen:offsetGenerationMethod']?.[0] !== 'string'
   );
 };
 
-export const getOffsetGenerationMethod = (
-  metadata?: AnchoredProjectMetadataLD,
-) => {
+export const getOffsetGenerationMethod = (metadata?: CreditClassMetadataLD) => {
   if (isCFCProjectMetadata(metadata)) {
     return metadata?.['regen:offsetGenerationMethod']?.[0]['@value'];
   }

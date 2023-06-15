@@ -16,6 +16,7 @@ import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
 import { useLedger } from 'ledger';
+import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
@@ -137,7 +138,9 @@ function ProjectTopSection({
     methodologies: creditClassMetadata?.['regen:approvedMethodologies'],
   });
   const methodology = projectMethodology ?? creditClassMethodology;
-  const generationMethod = getOffsetGenerationMethod(creditClassMetadata);
+  const generationMethod = getOffsetGenerationMethod(
+    creditClassMetadata as CreditClassMetadataLD,
+  );
 
   return (
     <Section classes={{ root: classes.section }}>

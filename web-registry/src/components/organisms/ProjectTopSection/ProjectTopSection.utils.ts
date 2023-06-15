@@ -14,6 +14,7 @@ import {
   ProjectQuote,
 } from 'lib/db/types/json-ld';
 import { CFCCreditClassMetadataLD } from 'lib/db/types/json-ld/cfc-credit-class-metadata';
+import { ApprovedMethodologies } from 'lib/db/types/json-ld/methodology';
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
 import { SEE_ALL_METHODOLOGIES } from './ProjectTopSection.constants';
@@ -46,7 +47,7 @@ export const getDisplayAdmin = (
 /* parseMethodologies */
 
 type ParseMethodologiesParams = {
-  methodologies?: AnchoredProjectMetadataLD['regen:approvedMethodologies'];
+  methodologies?: ApprovedMethodologies;
 };
 
 export const parseMethodologies = ({
@@ -72,10 +73,12 @@ type ParseProjectMetadataReturn = {
   area?: number;
   areaUnit?: string;
   placeName?: string;
-  projectMethodology?: {
-    'schema:name': string;
-    'schema:url'?: string;
-  };
+  projectMethodology?: ProjectMethodology;
+};
+
+export type ProjectMethodology = {
+  'schema:name': string;
+  'schema:url'?: string;
 };
 
 export const parseProjectMetadata = (

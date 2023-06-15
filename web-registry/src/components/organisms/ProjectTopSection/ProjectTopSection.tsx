@@ -7,8 +7,6 @@ import {
 import { Box, Grid, Skeleton } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import CreditClassCard from 'web-components/lib/components/cards/CreditClassCard';
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
@@ -24,16 +22,15 @@ import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMet
 import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 
 import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
-import { Link } from 'components/atoms';
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
   MAPBOX_TOKEN,
 } from 'components/templates/ProjectDetails/ProjectDetails.config';
 
-import { getSanityImgSrc } from '../../../lib/imgSrc';
 import { ProjectTopLink } from '../../atoms';
 import { ProjectBatchTotals, ProjectPageMetadata } from '../../molecules';
+import { ProjectTopSectionCreditClassCard } from './ProjectTopSection.CreditClassCard';
 import {
   ProjectTopSectionQuoteMark,
   useProjectTopSectionStyles,
@@ -197,38 +194,14 @@ function ProjectTopSection({
               {primaryDescription}
             </Body>
           )}
-          {creditClassSanity && (
-            <Link href={`/credit-classes/${creditClassSanity.path}`}>
-              <CreditClassCard
-                title={<BlockContent content={creditClassSanity.nameRaw} />}
-                description={
-                  <BlockContent
-                    content={creditClassSanity.shortDescriptionRaw}
-                  />
-                }
-                imgSrc={getSanityImgSrc(creditClassSanity.image)}
-                type={{
-                  name: creditTypeData?.creditType?.name ?? '',
-                  icon: {
-                    src: creditClassSanity.creditType?.image?.asset?.url ?? '',
-                  },
-                }}
-                generationMethod={{
-                  name: generationMethod ?? '',
-                  icon: {
-                    src:
-                      creditClassSanity.creditGenerationMethod?.image?.asset
-                        ?.url ?? '',
-                  },
-                }}
-                methodology={{
-                  text: methodology?.['schema:name'],
-                  href: methodology?.['schema:url'],
-                }}
-                sx={{ mt: [2, 4], py: [2, 6] }}
-              />
-            </Link>
-          )}
+          <ProjectTopSectionCreditClassCard
+            creditClassSanity={creditClassSanity}
+            creditClassMetadata={creditClassMetadata as CreditClassMetadataLD}
+            onChainCreditClassId={onChainCreditClassId}
+            creditTypeName={creditTypeData?.creditType?.name}
+            generationMethod={generationMethod}
+            methodology={methodology}
+          />
           <Box>
             {batchData?.totals && (
               <ProjectBatchTotals

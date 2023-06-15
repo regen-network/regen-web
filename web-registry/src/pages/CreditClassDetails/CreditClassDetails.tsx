@@ -51,6 +51,7 @@ function CreditClassDetails({
   const content = contentData?.allCreditClass?.find(
     creditClass => creditClass.path === creditClassId,
   );
+  const isCommunityCredit = !content;
 
   const isOnChainClassId =
     creditClassId && onChainClassRegExp.test(creditClassId);
@@ -158,6 +159,7 @@ function CreditClassDetails({
       />
       <BuySellOrderFlow
         isFlowStarted={isBuyFlowStarted}
+        isCommunityCredit={isCommunityCredit}
         setIsFlowStarted={setIsBuyFlowStarted}
         projects={projectsWithOrderData}
       />

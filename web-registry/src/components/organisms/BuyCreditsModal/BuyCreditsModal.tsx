@@ -83,6 +83,7 @@ interface BuyCreditsModalProps extends RegenModalProps {
   setSelectedProjectById?: (projectId: string) => void;
   apiServerUrl?: string;
   imageStorageBaseUrl?: string;
+  isCommunityCredit?: boolean;
 }
 
 export interface BuyCreditsProject {
@@ -119,6 +120,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
     setSelectedProjectById, // if several projects involved, handler to select the project when sell order is selected
     apiServerUrl,
     imageStorageBaseUrl,
+    isCommunityCredit = false,
   }) => {
     const { classes, cx } = useBuyCreditsModalStyles();
     const theme = useTheme();
@@ -184,7 +186,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
           >
             {'Buy Ecocredits'}
           </Title>
-          {buyModalContent && (
+          {buyModalContent && !isCommunityCredit && (
             <BuyCreditsModalInfoCard
               content={buyModalContent.allBuyModal[0]}
               sx={{ mb: 12.5 }}

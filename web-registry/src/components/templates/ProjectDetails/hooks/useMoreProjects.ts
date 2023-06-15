@@ -10,6 +10,7 @@ export default function useMoreProjects(
     limit: PROJECTS_LIMIT,
     random: true,
     skippedProjectId: projectId,
+    useCommunityProject: false,
   });
 
   return projectsWithOrderData;

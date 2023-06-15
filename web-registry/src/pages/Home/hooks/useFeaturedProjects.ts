@@ -12,7 +12,6 @@ export function useFeaturedProjects(): {
     limit: FEATURE_PROJECTS_COUNT,
     metadata: true, // to discard projects without metadata prop
     sort: PROJECTS_SORT,
-    useCommunityProject: false,
   });
 
   return {

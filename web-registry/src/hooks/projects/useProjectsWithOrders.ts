@@ -29,7 +29,7 @@ export interface ProjectsWithOrdersProps {
   offset?: number;
   metadata?: boolean; // to discard projects without metadata prop
   random?: boolean; // to shuffle the projects (along with limit allows a random subselection)
-  useCommunityProject?: boolean; // to filter community projects
+  useCommunityProjects?: boolean; // to show community projects
   projectId?: string; // to filter by project
   skippedProjectId?: string; // to discard a specific project
   classId?: string; // to filter by class
@@ -44,7 +44,7 @@ export function useProjectsWithOrders({
   offset = 0,
   metadata = false,
   random = false,
-  useCommunityProject = true,
+  useCommunityProjects = false,
   skippedProjectId,
   classId,
   sort = '',
@@ -142,7 +142,7 @@ export function useProjectsWithOrders({
 
   // Exclude community projects based on sanity credit class data
   const projectsWithOrderDataFiltered = projectsWithOrderData.filter(
-    project => !!project.sanityCreditClassData || useCommunityProject,
+    project => !!project.sanityCreditClassData || useCommunityProjects,
   );
 
   const sortedProjects = sortProjects(
@@ -181,7 +181,7 @@ export function useProjectsWithOrders({
 
   return {
     projectsWithOrderData: projectsWithMetadata,
-    projectsCount: selectedProjects?.length,
+    projectsCount: projectsWithOrderDataFiltered?.length,
     loading: isLoadingProjects || isLoadingProjectsByClass || isLoadingProject,
   };
 }

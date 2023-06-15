@@ -23,6 +23,7 @@ import { GettingStartedResourcesSection } from 'components/molecules';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 
 import { useProjects } from './hooks/useProjects';
+import { CommunityFilter } from './Projects.CommunityFilter';
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
@@ -40,6 +41,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { track } = useTracker();
   const location = useLocation();
+  const [useCommunityProjects, setUseCommunityProjects] = useState(false);
 
   // Page index starts at 1 for route
   // Page index starts at 0 for logic
@@ -66,6 +68,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { projects, projectsCount, pagesCount, loading } = useProjects({
     sort,
     offset: page * PROJECTS_PER_PAGE,
+    useCommunityProjects,
   });
 
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
@@ -118,13 +121,19 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
                 alignItems="center"
                 sx={{ width: { xs: '60%', md: 'auto' } }}
               >
+                <CommunityFilter
+                  setUseCommunityProjects={setUseCommunityProjects}
+                  sx={{ mr: 7.5 }}
+                />
                 <Box
                   sx={{
                     width: [0, 0, 63],
                     visibility: { xs: 'hidden', md: 'visible' },
                   }}
                 >
-                  <Body size="xs">Sort by:</Body>
+                  <Body size="xs" sx={{ whiteSpace: 'nowrap', mr: 2 }}>
+                    Sort by:
+                  </Body>
                 </Box>
                 <SelectTextFieldBase
                   options={sortOptions}

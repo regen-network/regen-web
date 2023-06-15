@@ -13,15 +13,21 @@ type Params = {
 type Props = {
   sort: string;
   offset?: number;
+  useCommunityProjects?: boolean;
 };
 
-export const useProjects = ({ offset = 0, sort }: Props): Params => {
+export const useProjects = ({
+  offset = 0,
+  sort,
+  useCommunityProjects = false,
+}: Props): Params => {
   // get normalized projects with sell order data
   const { projectsWithOrderData, projectsCount, loading } =
     useProjectsWithOrders({
       limit: PROJECTS_PER_PAGE,
       offset,
       sort,
+      useCommunityProjects,
     });
 
   const pagesCount = Math.ceil((projectsCount ?? 0) / PROJECTS_PER_PAGE);

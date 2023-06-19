@@ -71,7 +71,7 @@ const CustomBlockContent: React.FC<
         ]}
       >
         {typeof content === 'string' ? (
-          <div className={className}>{content}</div>
+          <p className={className}>{content}</p>
         ) : (
           <BlockContent
             className={className}

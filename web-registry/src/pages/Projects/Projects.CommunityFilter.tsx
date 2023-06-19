@@ -36,7 +36,7 @@ export const CommunityFilter = ({
             <Link
               href="https://regennetwork.notion.site/Welcome-to-Regen-Registry-0d55aab2a2d64f27aee2a468df172990"
               target="_blank"
-              sx={{ color: 'secondary.main', fontWeight: 700 }}
+              sx={{ color: 'secondary.main', fontWeight: 700, mr: 1 }}
             >
               Regen Registry program
             </Link>

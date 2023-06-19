@@ -65,11 +65,12 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [selectedProject, setSelectedProject] =
     useState<ProjectWithOrderData | null>(null);
 
-  const { projects, projectsCount, pagesCount, loading } = useProjects({
-    sort,
-    offset: page * PROJECTS_PER_PAGE,
-    useCommunityProjects,
-  });
+  const { projects, projectsCount, pagesCount, loading, hasCommunityProjects } =
+    useProjects({
+      sort,
+      offset: page * PROJECTS_PER_PAGE,
+      useCommunityProjects,
+    });
 
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
 
@@ -121,17 +122,27 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
                 alignItems="center"
                 sx={{ width: { xs: '60%', md: 'auto' } }}
               >
-                <CommunityFilter
-                  setUseCommunityProjects={setUseCommunityProjects}
-                  sx={{ mr: 7.5 }}
-                />
+                {hasCommunityProjects && (
+                  <CommunityFilter
+                    setUseCommunityProjects={setUseCommunityProjects}
+                    sx={{ mr: 7.5 }}
+                  />
+                )}
                 <Box
                   sx={{
                     width: [0, 0, 63],
                     visibility: { xs: 'hidden', md: 'visible' },
                   }}
                 >
-                  <Body size="xs" sx={{ whiteSpace: 'nowrap', mr: 2 }}>
+                  <Body
+                    size="xs"
+                    sx={{
+                      whiteSpace: 'nowrap',
+                      mr: 2,
+                      color: 'info.dark',
+                      fontWeight: 700,
+                    }}
+                  >
                     Sort by:
                   </Body>
                 </Box>

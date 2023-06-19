@@ -3,11 +3,12 @@ import { useProjectsWithOrders } from 'hooks/projects/useProjectsWithOrders';
 import { PROJECTS_PER_PAGE } from '../Projects.config';
 import { ProjectWithOrderData } from '../Projects.types';
 
-type Params = {
+type ResponseType = {
   projects: ProjectWithOrderData[];
   projectsCount?: number;
   pagesCount: number;
   loading: boolean;
+  hasCommunityProjects: boolean;
 };
 
 type Props = {
@@ -20,15 +21,19 @@ export const useProjects = ({
   offset = 0,
   sort,
   useCommunityProjects = false,
-}: Props): Params => {
+}: Props): ResponseType => {
   // get normalized projects with sell order data
-  const { projectsWithOrderData, projectsCount, loading } =
-    useProjectsWithOrders({
-      limit: PROJECTS_PER_PAGE,
-      offset,
-      sort,
-      useCommunityProjects,
-    });
+  const {
+    projectsWithOrderData,
+    projectsCount,
+    loading,
+    hasCommunityProjects,
+  } = useProjectsWithOrders({
+    limit: PROJECTS_PER_PAGE,
+    offset,
+    sort,
+    useCommunityProjects,
+  });
 
   const pagesCount = Math.ceil((projectsCount ?? 0) / PROJECTS_PER_PAGE);
 
@@ -37,5 +42,6 @@ export const useProjects = ({
     projectsCount,
     pagesCount,
     loading,
+    hasCommunityProjects,
   };
 };

@@ -19,7 +19,7 @@ import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-ser
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { ProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders';
+import { ProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders.types';
 import { sortProjects } from 'pages/Projects/utils/sortProjects';
 import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 
@@ -147,6 +147,10 @@ export function useProjectsWithOrders({
     project => !!project.sanityCreditClassData || useCommunityProjects,
   );
 
+  const hasCommunityProjects = projectsWithOrderData.some(
+    project => !project.sanityCreditClassData,
+  );
+
   const sortedProjects = sortProjects(
     projectsWithOrderDataFiltered,
     sort,
@@ -201,5 +205,6 @@ export function useProjectsWithOrders({
     projectsWithOrderData: projectsWithMetadata,
     projectsCount: projectsWithOrderDataFiltered?.length,
     loading: isLoadingProjects || isLoadingProjectsByClass || isLoadingProject,
+    hasCommunityProjects,
   };
 }

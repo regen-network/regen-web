@@ -114,53 +114,49 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
               flex={1}
               sx={{
                 pb: 5,
-                flexDirection: { xs: 'column', md: 'row' },
-                alignItems: { xs: 'start', md: 'center' },
+                flexWrap: { xs: 'wrap', md: 'nowrap' },
               }}
             >
-              <Flex>
+              <Flex order={0} flexGrow={1}>
                 <Subtitle size="lg">Projects</Subtitle>
                 <Body size="lg"> ({projectsCount})</Body>
               </Flex>
+
+              {hasCommunityProjects && (
+                <CommunityFilter
+                  setUseCommunityProjects={setUseCommunityProjects}
+                  sx={{
+                    mt: { xs: 6.25, md: 0 },
+                    mr: { xs: 0, md: 7.5 },
+                    width: { xs: '100%', md: 'auto' },
+                    order: { xs: 2, md: 1 },
+                  }}
+                />
+              )}
               <Flex
-                alignItems="center"
                 sx={{
-                  flexDirection: { xs: 'column', md: 'row' },
-                  alignItems: { xs: 'start', md: 'center' },
+                  order: { xs: 1, md: 2 },
+                  alignItems: 'center',
                 }}
               >
-                {hasCommunityProjects && (
-                  <CommunityFilter
-                    setUseCommunityProjects={setUseCommunityProjects}
-                    sx={{
-                      mt: { xs: 3, md: 0 },
-                      mr: { xs: 0, md: 7.5 },
-                      width: { xs: '100%', md: 'auto' },
-                    }}
-                  />
-                )}
-                <Box
+                <Body
+                  size="xs"
                   sx={{
-                    width: [0, 0, 63],
+                    width: [0, 0, 0, 43],
                     visibility: { xs: 'hidden', md: 'visible' },
+                    whiteSpace: 'nowrap',
+                    mr: 2,
+                    color: 'info.dark',
+                    fontWeight: 700,
                   }}
                 >
-                  <Body
-                    size="xs"
-                    sx={{
-                      whiteSpace: 'nowrap',
-                      mr: 2,
-                      color: 'info.dark',
-                      fontWeight: 700,
-                    }}
-                  >
-                    Sort by:
-                  </Body>
-                </Box>
+                  Sort by:
+                </Body>
                 <SelectTextFieldBase
                   options={sortOptions}
                   defaultStyle={false}
                   onChange={handleSort}
+                  sx={{ width: 'fit-content' }}
                 />
               </Flex>
             </Flex>

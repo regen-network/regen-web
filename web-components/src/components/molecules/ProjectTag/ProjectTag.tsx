@@ -1,16 +1,17 @@
 import { Box, SxProps } from '@mui/material';
 
 import { Theme } from '../../../theme/muiTheme';
-import { ImageType } from '../../../types/shared/imageType';
 import { sxToArray } from '../../../utils/mui/sxToArray';
+import { TagType } from './ProjectTag.types';
 
 export interface Props {
-  icon: ImageType;
-  label: string;
+  tag: TagType;
   sx?: SxProps<Theme>;
 }
 
-const Tag = ({ icon, label, sx = [] }: Props): JSX.Element => {
+const ProjectTag = ({ tag, sx = [] }: Props): JSX.Element => {
+  const { icon, name } = tag;
+
   return (
     <Box
       sx={[
@@ -21,6 +22,7 @@ const Tag = ({ icon, label, sx = [] }: Props): JSX.Element => {
           alignItems: 'center',
           padding: '5px 15px 5px 10px',
           width: 'fit-content',
+          maxWidth: 180,
         },
         ...sxToArray(sx),
       ]}
@@ -31,9 +33,9 @@ const Tag = ({ icon, label, sx = [] }: Props): JSX.Element => {
         alt={icon.alt}
         sx={{ width: { xs: 30, sm: 40 }, height: { xs: 30, sm: 40 }, mr: 2.5 }}
       />
-      <Box sx={{ fontWeight: 700, fontSize: { xs: 12, sm: 14 } }}>{label}</Box>
+      <Box sx={{ fontWeight: 700, fontSize: { xs: 12, sm: 14 } }}>{name}</Box>
     </Box>
   );
 };
 
-export { Tag };
+export { ProjectTag };

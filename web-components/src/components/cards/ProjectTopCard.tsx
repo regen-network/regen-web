@@ -160,7 +160,6 @@ export default function ProjectTopCard({
           activities={activities}
           ecosystems={ecosystems}
           sx={{
-            padding: '20px 0px',
             mb: 5,
           }}
         />

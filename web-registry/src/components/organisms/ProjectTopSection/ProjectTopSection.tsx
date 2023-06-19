@@ -14,7 +14,12 @@ import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceIn
 import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
+import {
+  useAllProjectActivityQuery,
+  useAllProjectEcosystemQuery,
+} from 'generated/sanity-graphql';
 import { useLedger } from 'ledger';
+import { client as sanityClient } from 'lib/clients/sanity';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
@@ -40,6 +45,8 @@ import { ProjectTopSectionProps } from './ProjectTopSection.types';
 import {
   getDisplayAdmin,
   getOffsetGenerationMethod,
+  getProjectActivityIconsMapping,
+  getProjectEcosystemIconsMapping,
   isAnchoredProjectMetadata,
   parseMethodologies,
   parseOffChainProject,
@@ -128,6 +135,18 @@ function ProjectTopSection({
     creditType =>
       creditType.name?.toLowerCase() === creditTypeData?.creditType?.name,
   );
+  const { data: allProjectActivityData } = useAllProjectActivityQuery({
+    client: sanityClient,
+  });
+  const { data: allProjectEcosystemData } = useAllProjectEcosystemQuery({
+    client: sanityClient,
+  });
+  const projectActivityIconsMapping = getProjectActivityIconsMapping({
+    allProjectActivityData,
+  });
+  const projectEcosystemIconsMapping = getProjectEcosystemIconsMapping({
+    allProjectEcosystemData,
+  });
 
   const displayName =
     projectName ?? (onChainProjectId && `Project ${onChainProjectId}`) ?? '';
@@ -144,7 +163,7 @@ function ProjectTopSection({
         {
           name: projectActivity,
           icon: {
-            src: '',
+            src: projectActivityIconsMapping?.[projectActivity] ?? '',
           },
         },
       ]
@@ -155,7 +174,7 @@ function ProjectTopSection({
   ]?.map(ecosystem => ({
     name: ecosystem,
     icon: {
-      src: '',
+      src: projectEcosystemIconsMapping?.[ecosystem] ?? '',
     },
   }));
 

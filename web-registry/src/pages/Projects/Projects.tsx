@@ -112,7 +112,11 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
               justifyContent="space-between"
               alignItems="center"
               flex={1}
-              sx={{ pb: 5 }}
+              sx={{
+                pb: 5,
+                flexDirection: { xs: 'column', md: 'row' },
+                alignItems: { xs: 'start', md: 'center' },
+              }}
             >
               <Flex>
                 <Subtitle size="lg">Projects</Subtitle>
@@ -120,12 +124,19 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
               </Flex>
               <Flex
                 alignItems="center"
-                sx={{ width: { xs: '60%', md: 'auto' } }}
+                sx={{
+                  flexDirection: { xs: 'column', md: 'row' },
+                  alignItems: { xs: 'start', md: 'center' },
+                }}
               >
                 {hasCommunityProjects && (
                   <CommunityFilter
                     setUseCommunityProjects={setUseCommunityProjects}
-                    sx={{ mr: 7.5 }}
+                    sx={{
+                      mt: { xs: 3, md: 0 },
+                      mr: { xs: 0, md: 7.5 },
+                      width: { xs: '100%', md: 'auto' },
+                    }}
                   />
                 )}
                 <Box

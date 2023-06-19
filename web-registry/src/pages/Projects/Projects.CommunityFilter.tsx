@@ -27,7 +27,7 @@ export const CommunityFilter = ({
           />
         }
         label={COMMUNITY_FILTER}
-        sx={{ whiteSpace: 'nowrap', mr: 1, fontSize: 14 }}
+        sx={{ whiteSpace: 'nowrap', mr: 1, ml: 0, fontSize: 14 }}
       />
       <InfoTooltipWithIcon
         title={

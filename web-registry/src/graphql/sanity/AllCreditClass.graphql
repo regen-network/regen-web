@@ -11,8 +11,18 @@ query allCreditClass {
       ...customImageFields
     }
     icon {
-      asset {
-        url
+      ...imageFields
+    }
+    creditType {
+      name
+      image {
+        ...imageFields
+      }
+    }
+    creditGenerationMethod {
+      name
+      image {
+        ...imageFields
       }
     }
     ecologicalImpact {

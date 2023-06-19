@@ -2,6 +2,7 @@ import { Box } from '@mui/system';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { CreditClassCard } from './CreditClassCard';
+import { creditClassCardMock } from './CreditClassCard.mock';
 
 export default {
   title: 'Cards/CreditClassCard',
@@ -9,15 +10,20 @@ export default {
 } as ComponentMeta<typeof CreditClassCard>;
 
 const Template: ComponentStory<typeof CreditClassCard> = args => (
-  <Box sx={{ maxWidth: 250 }}>
+  <Box>
     <CreditClassCard {...args} />
   </Box>
 );
 
 export const Default = Template.bind({});
 Default.args = {
-  title: 'Verified Carbon Standard (C01)',
-  description:
-    'This credit class provides a vehicle for nature based Verified Carbon Units (VCUs) to enter the blockchain space via issuance on Regen Ledger. ',
-  imgSrc: '/coorong.png',
+  ...creditClassCardMock,
+};
+
+export const TextItem = Template.bind({});
+TextItem.args = {
+  ...creditClassCardMock,
+  methodology: {
+    text: creditClassCardMock.methodology?.text,
+  },
 };

@@ -7,13 +7,16 @@ import {
   ProjectFieldsFragment,
 } from 'generated/graphql';
 import {
-  AnchoredProjectMetadataBaseLD,
   AnchoredProjectMetadataLD,
+  CreditClassMetadataLD,
   LegacyProjectMetadataLD,
   ProjectPageMetadataLD,
   ProjectQuote,
 } from 'lib/db/types/json-ld';
+import { CFCCreditClassMetadataLD } from 'lib/db/types/json-ld/cfc-credit-class-metadata';
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
+
+import { SEE_ALL_METHODOLOGIES } from './ProjectTopSection.constants';
 
 export const getDisplayAdmin = (
   address?: string,
@@ -40,15 +43,43 @@ export const getDisplayAdmin = (
   };
 };
 
+/* parseMethodologies */
+
+type ParseMethodologiesParams = {
+  methodologies?: AnchoredProjectMetadataLD['regen:approvedMethodologies'];
+};
+
+export const parseMethodologies = ({
+  methodologies,
+}: ParseMethodologiesParams) => {
+  if (
+    methodologies?.['schema:url'] &&
+    methodologies?.['schema:itemListElement'].length > 1
+  ) {
+    return {
+      'schema:name': SEE_ALL_METHODOLOGIES,
+      'schema:url': methodologies?.['schema:url'],
+    };
+  }
+
+  return methodologies?.['schema:itemListElement'][0];
+};
+
+/* parseProjectMetadata */
+
 type ParseProjectMetadataReturn = {
   projectName?: string;
   area?: number;
   areaUnit?: string;
   placeName?: string;
+  projectMethodology?: {
+    'schema:name': string;
+    'schema:url'?: string;
+  };
 };
 
 export const parseProjectMetadata = (
-  projectMetadata?: Partial<AnchoredProjectMetadataBaseLD>,
+  projectMetadata?: AnchoredProjectMetadataLD | LegacyProjectMetadataLD,
 ): ParseProjectMetadataReturn => {
   const projectName = projectMetadata?.['schema:name'];
   const projectSize = projectMetadata?.['regen:projectSize'];
@@ -56,10 +87,21 @@ export const parseProjectMetadata = (
   const unit = projectSize?.['qudt:unit'];
   const areaUnit = getAreaUnit(unit as qudtUnit);
   const placeName = projectMetadata?.['schema:location']?.['place_name'];
+  let projectMethodology;
+  if (isAnchoredProjectMetadata(projectMetadata)) {
+    projectMethodology =
+      projectMetadata?.['regen:vcsMethodology'] ??
+      projectMetadata?.['regen:offsetProtocol'] ??
+      parseMethodologies({
+        methodologies: projectMetadata['regen:approvedMethodologies'],
+      });
+  }
   // projectMetadata?.['schema:location']?.['geojson:place_name'];
 
-  return { projectName, area, areaUnit, placeName };
+  return { projectName, area, areaUnit, placeName, projectMethodology };
 };
+
+/* parseProjectPageMetadata */
 
 type ParseProjectPageMetadataReturn = {
   glanceText?: string[];
@@ -82,6 +124,8 @@ export const parseProjectPageMetadata = (
     quote,
   };
 };
+
+/* parseOffChainProject  */
 
 export const parseOffChainProject = (
   project?: Maybe<ProjectFieldsFragment>,
@@ -107,4 +151,22 @@ export const isAnchoredProjectMetadata = (
   onChainProjectId?: string,
 ): projectMetadata is AnchoredProjectMetadataLD => {
   return !!onChainProjectId;
+};
+
+const isCFCCreditClassMetadata = (
+  creditClassMetadata?: CreditClassMetadataLD | CFCCreditClassMetadataLD,
+): creditClassMetadata is CFCCreditClassMetadataLD => {
+  return (
+    !!creditClassMetadata &&
+    typeof creditClassMetadata?.['regen:offsetGenerationMethod']?.[0] !==
+      'string'
+  );
+};
+
+export const getOffsetGenerationMethod = (metadata?: CreditClassMetadataLD) => {
+  if (isCFCCreditClassMetadata(metadata)) {
+    return metadata?.['regen:offsetGenerationMethod']?.[0]['@value'];
+  }
+
+  return metadata?.['regen:offsetGenerationMethod']?.[0];
 };

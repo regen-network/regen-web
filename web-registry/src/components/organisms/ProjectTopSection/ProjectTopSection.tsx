@@ -1,5 +1,4 @@
 import LazyLoad from 'react-lazyload';
-import { Link } from 'react-router-dom';
 import {
   ApolloClient,
   NormalizedCacheObject,
@@ -16,10 +15,16 @@ import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceIn
 import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
+import { useLedger } from 'ledger';
+import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
+import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
+import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
+import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 
 import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
+import { Link } from 'components/atoms';
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
@@ -37,7 +42,9 @@ import {
 import { ProjectTopSectionProps } from './ProjectTopSection.types';
 import {
   getDisplayAdmin,
+  getOffsetGenerationMethod,
   isAnchoredProjectMetadata,
+  parseMethodologies,
   parseOffChainProject,
   parseProjectMetadata,
   parseProjectPageMetadata,
@@ -62,6 +69,7 @@ function ProjectTopSection({
   batchData,
 }: ProjectTopSectionProps): JSX.Element {
   const { classes } = useProjectTopSectionStyles();
+  const { ecocreditClient } = useLedger();
 
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -79,11 +87,42 @@ function ProjectTopSection({
   const { creditClass, creditClassVersion, offsetGenerationMethod } =
     parseOffChainProject(offChainProject);
 
-  const { projectName, area, areaUnit, placeName } =
+  const { projectName, area, areaUnit, placeName, projectMethodology } =
     parseProjectMetadata(projectMetadata);
 
   const { glanceText, primaryDescription, quote } =
     parseProjectPageMetadata(projectPageMetadata);
+
+  /* Credit class info */
+
+  const onChainCreditClassId =
+    creditClass?.onChainId ?? onChainProjectId?.split('-')?.[0];
+  const { data: creditClassOnChain } = useQuery(
+    getClassQuery({
+      client: ecocreditClient,
+      request: {
+        classId: onChainCreditClassId ?? '',
+      },
+      enabled: !!ecocreditClient && !!onChainCreditClassId,
+    }),
+  );
+  const { data: creditClassMetadata } = useQuery(
+    getMetadataQuery({
+      iri: creditClassOnChain?.class?.metadata,
+      enabled: !!creditClassOnChain?.class?.metadata,
+    }),
+  );
+
+  const { data: creditTypeData } = useQuery(
+    getCreditTypeQuery({
+      client: ecocreditClient,
+      request: {
+        abbreviation: creditClassOnChain?.class?.creditTypeAbbrev,
+      },
+      enabled:
+        !!ecocreditClient && !!creditClassOnChain?.class?.creditTypeAbbrev,
+    }),
+  );
 
   const creditClassSanity = findSanityCreditClass({
     sanityCreditClassData,
@@ -95,6 +134,13 @@ function ProjectTopSection({
 
   const displayName =
     projectName ?? (onChainProjectId && `Project ${onChainProjectId}`) ?? '';
+  const creditClassMethodology = parseMethodologies({
+    methodologies: creditClassMetadata?.['regen:approvedMethodologies'],
+  });
+  const methodology = projectMethodology ?? creditClassMethodology;
+  const generationMethod = getOffsetGenerationMethod(
+    creditClassMetadata as CreditClassMetadataLD,
+  );
 
   return (
     <Section classes={{ root: classes.section }}>
@@ -161,7 +207,7 @@ function ProjectTopSection({
             </Body>
           )}
           {creditClassSanity && (
-            <Link to={`/credit-classes/${creditClassSanity.path}`}>
+            <Link href={`/credit-classes/${creditClassSanity.path}`}>
               <CreditClassCard
                 title={<BlockContent content={creditClassSanity.nameRaw} />}
                 description={
@@ -170,6 +216,24 @@ function ProjectTopSection({
                   />
                 }
                 imgSrc={getSanityImgSrc(creditClassSanity.image)}
+                type={{
+                  name: creditTypeData?.creditType?.name ?? '',
+                  icon: {
+                    src: creditClassSanity.creditType?.image?.asset?.url ?? '',
+                  },
+                }}
+                generationMethod={{
+                  name: generationMethod ?? '',
+                  icon: {
+                    src:
+                      creditClassSanity.creditGenerationMethod?.image?.asset
+                        ?.url ?? '',
+                  },
+                }}
+                methodology={{
+                  text: methodology?.['schema:name'],
+                  href: methodology?.['schema:url'],
+                }}
                 sx={{ mt: [2, 4], py: [2, 6] }}
               />
             </Link>

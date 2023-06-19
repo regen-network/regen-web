@@ -13,6 +13,7 @@ import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 import { Project } from 'generated/graphql';
 import { Maybe } from 'graphql/jsutils/Maybe';
 import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
+import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
@@ -142,14 +143,14 @@ function ProjectDetails(): JSX.Element {
     : projectByHandle?.data.projectByHandle;
 
   /** Anchored project metadata comes from IRI resolver. */
-  const { data: anchoredMetadata, isInitialLoading: loadingAnchoredMetadata } =
-    useQuery(
-      getMetadataQuery({
-        iri: onChainProject?.metadata,
-        dataClient,
-        enabled: !!dataClient,
-      }),
-    );
+  const { data, isInitialLoading: loadingAnchoredMetadata } = useQuery(
+    getMetadataQuery({
+      iri: onChainProject?.metadata,
+      dataClient,
+      enabled: !!dataClient,
+    }),
+  );
+  const anchoredMetadata = data as AnchoredProjectMetadataLD | undefined;
 
   const { batchesWithSupply, setPaginationParams, paginationParams } =
     usePaginatedBatchesByProject({ projectId: String(onChainProjectId) });

@@ -5,6 +5,7 @@ import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useLedger } from 'ledger';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { GECKO_EEUR_ID, GECKO_USDC_ID } from 'lib/coingecko';
+import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { SKIPPED_CLASS_ID } from 'lib/env';
 import { normalizeProjectsWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
@@ -170,7 +171,7 @@ export function useProjectsWithOrders({
 
   const projectsWithMetadata = normalizeProjectsWithMetadata({
     projectsWithOrderData: sortedProjects,
-    metadatas,
+    metadatas: metadatas as (AnchoredProjectMetadataLD | undefined)[],
     projectPageMetadatas,
     sanityCreditClassData: creditClassData,
   });

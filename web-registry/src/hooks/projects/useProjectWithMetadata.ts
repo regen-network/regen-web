@@ -8,7 +8,10 @@ import {
   ProjectByOnChainIdQuery,
   useUpdateProjectByIdMutation,
 } from 'generated/graphql';
-import { ProjectMetadataLD } from 'lib/db/types/json-ld';
+import {
+  AnchoredProjectMetadataLD,
+  ProjectMetadataLD,
+} from 'lib/db/types/json-ld';
 import { getProjectKey } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery.constants';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
@@ -116,7 +119,7 @@ export const useProjectWithMetadata = ({
   if (edit) {
     offChainProject = projectByOnChainIdRes?.data?.projectByOnChainId;
     if (anchored) {
-      metadata = anchoredMetadata;
+      metadata = anchoredMetadata as AnchoredProjectMetadataLD | undefined;
     } else {
       metadata = offChainProject?.metadata;
     }

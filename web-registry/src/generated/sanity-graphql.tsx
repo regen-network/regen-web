@@ -8009,6 +8009,36 @@ export type AllMethodologyReviewProcessPageQuery = (
   )> }
 );
 
+export type AllProjectActivityQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllProjectActivityQuery = (
+  { __typename?: 'RootQuery' }
+  & { allProjectActivity: Array<(
+    { __typename?: 'ProjectActivity' }
+    & Pick<ProjectActivity, 'name'>
+    & { icon?: Maybe<(
+      { __typename?: 'Image' }
+      & ImageFieldsFragment
+    )> }
+  )> }
+);
+
+export type AllProjectEcosystemQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllProjectEcosystemQuery = (
+  { __typename?: 'RootQuery' }
+  & { allProjectEcosystem: Array<(
+    { __typename?: 'ProjectEcosystem' }
+    & Pick<ProjectEcosystem, 'name'>
+    & { icon?: Maybe<(
+      { __typename?: 'Image' }
+      & ImageFieldsFragment
+    )> }
+  )> }
+);
+
 export type AllProjectPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -9806,6 +9836,80 @@ export function useAllMethodologyReviewProcessPageLazyQuery(baseOptions?: Apollo
 export type AllMethodologyReviewProcessPageQueryHookResult = ReturnType<typeof useAllMethodologyReviewProcessPageQuery>;
 export type AllMethodologyReviewProcessPageLazyQueryHookResult = ReturnType<typeof useAllMethodologyReviewProcessPageLazyQuery>;
 export type AllMethodologyReviewProcessPageQueryResult = Apollo.QueryResult<AllMethodologyReviewProcessPageQuery, AllMethodologyReviewProcessPageQueryVariables>;
+export const AllProjectActivityDocument = gql`
+    query allProjectActivity {
+  allProjectActivity {
+    name
+    icon {
+      ...imageFields
+    }
+  }
+}
+    ${ImageFieldsFragmentDoc}`;
+
+/**
+ * __useAllProjectActivityQuery__
+ *
+ * To run a query within a React component, call `useAllProjectActivityQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllProjectActivityQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllProjectActivityQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllProjectActivityQuery(baseOptions?: Apollo.QueryHookOptions<AllProjectActivityQuery, AllProjectActivityQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllProjectActivityQuery, AllProjectActivityQueryVariables>(AllProjectActivityDocument, options);
+      }
+export function useAllProjectActivityLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllProjectActivityQuery, AllProjectActivityQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllProjectActivityQuery, AllProjectActivityQueryVariables>(AllProjectActivityDocument, options);
+        }
+export type AllProjectActivityQueryHookResult = ReturnType<typeof useAllProjectActivityQuery>;
+export type AllProjectActivityLazyQueryHookResult = ReturnType<typeof useAllProjectActivityLazyQuery>;
+export type AllProjectActivityQueryResult = Apollo.QueryResult<AllProjectActivityQuery, AllProjectActivityQueryVariables>;
+export const AllProjectEcosystemDocument = gql`
+    query allProjectEcosystem {
+  allProjectEcosystem {
+    name
+    icon {
+      ...imageFields
+    }
+  }
+}
+    ${ImageFieldsFragmentDoc}`;
+
+/**
+ * __useAllProjectEcosystemQuery__
+ *
+ * To run a query within a React component, call `useAllProjectEcosystemQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllProjectEcosystemQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllProjectEcosystemQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllProjectEcosystemQuery(baseOptions?: Apollo.QueryHookOptions<AllProjectEcosystemQuery, AllProjectEcosystemQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllProjectEcosystemQuery, AllProjectEcosystemQueryVariables>(AllProjectEcosystemDocument, options);
+      }
+export function useAllProjectEcosystemLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllProjectEcosystemQuery, AllProjectEcosystemQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllProjectEcosystemQuery, AllProjectEcosystemQueryVariables>(AllProjectEcosystemDocument, options);
+        }
+export type AllProjectEcosystemQueryHookResult = ReturnType<typeof useAllProjectEcosystemQuery>;
+export type AllProjectEcosystemLazyQueryHookResult = ReturnType<typeof useAllProjectEcosystemLazyQuery>;
+export type AllProjectEcosystemQueryResult = Apollo.QueryResult<AllProjectEcosystemQuery, AllProjectEcosystemQueryVariables>;
 export const AllProjectPageDocument = gql`
     query allProjectPage {
   allProjectPage {

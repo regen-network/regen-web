@@ -1,0 +1,8 @@
+query allProjectEcosystem {
+  allProjectEcosystem {
+    name
+    icon {
+      ...imageFields
+    }
+  }
+}

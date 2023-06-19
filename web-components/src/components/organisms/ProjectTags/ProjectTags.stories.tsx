@@ -14,12 +14,28 @@ const Template: ComponentStory<typeof ProjectTags> = args => (
 export const Default = Template.bind({});
 
 Default.args = {
-  activity: {
-    name: 'Planned holistic sheep grazing',
-    icon: { src: '/tag/forest.svg' },
-  },
-  ecosystem: {
-    name: 'Grasslands',
-    icon: { src: '/tag/forest.svg' },
-  },
+  activities: [
+    {
+      name: 'Planned holistic sheep grazing 1',
+      icon: { src: '/tag/forest.svg' },
+    },
+    {
+      name: 'Planned holistic sheep grazing 2',
+      icon: { src: '/tag/forest.svg' },
+    },
+  ],
+  ecosystems: [
+    {
+      name: 'Grasslands 1',
+      icon: { src: '/tag/forest.svg' },
+    },
+    {
+      name: 'Grasslands 2',
+      icon: { src: '/tag/forest.svg' },
+    },
+    {
+      name: 'Grasslands 3',
+      icon: { src: '/tag/forest.svg' },
+    },
+  ],
 };

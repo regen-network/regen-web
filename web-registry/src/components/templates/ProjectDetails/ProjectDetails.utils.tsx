@@ -189,7 +189,7 @@ const getPartyFromMetadata = (
 ): Party | undefined => {
   const metadataRole: ProjectStakeholder | undefined = metadata[role];
   if (!metadataRole) return undefined;
-  const type = metadataRole?.['@type'].includes('regen:Organization')
+  const type = metadataRole?.['@type']?.includes('regen:Organization')
     ? 'ORGANIZATION'
     : 'USER';
   let defaultImage: string;

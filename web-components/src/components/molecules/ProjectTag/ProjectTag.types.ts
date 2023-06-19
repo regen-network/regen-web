@@ -1,6 +1,6 @@
 import { ImageType } from '../../../types/shared/imageType';
 
-export type TagType = {
+export type ProjectTagType = {
   icon: ImageType;
   name: string;
 };

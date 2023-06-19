@@ -1,6 +1,8 @@
 import Grid from '@mui/material/Grid';
 import { makeStyles } from 'tss-react/mui';
 
+import { ProjectTagType } from '../molecules/ProjectTag/ProjectTag.types';
+import { ProjectTags } from '../organisms/ProjectTags/ProjectTags';
 import { Title } from '../typography';
 import { User } from '../user/UserInfo';
 import UserInfoWithTitle from '../user/UserInfoWithTitle';
@@ -24,6 +26,8 @@ interface ProjectTopCardProps {
   issuer?: User;
   reseller?: User;
   sdgs?: SDG[];
+  activities?: ProjectTagType[];
+  ecosystems?: ProjectTagType[];
 }
 
 const useStyles = makeStyles()(theme => ({
@@ -118,6 +122,8 @@ export default function ProjectTopCard({
   issuer,
   reseller,
   sdgs,
+  activities,
+  ecosystems,
 }: ProjectTopCardProps): JSX.Element {
   const { classes: styles, cx } = useStyles();
   return (
@@ -148,6 +154,16 @@ export default function ProjectTopCard({
             ))}
           </Grid>
         </div>
+      )}
+      {(activities || ecosystems) && (
+        <ProjectTags
+          activities={activities}
+          ecosystems={ecosystems}
+          sx={{
+            padding: '20px 0px',
+            mb: 5,
+          }}
+        />
       )}
       {projectAdmin && (
         <div

@@ -9,6 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
+import { ProjectTagType } from 'web-components/lib/components/molecules/ProjectTag/ProjectTag.types';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
 import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
@@ -103,13 +104,14 @@ function ProjectTopSection({
       enabled: !!ecocreditClient && !!onChainCreditClassId,
     }),
   );
-  const { data: creditClassMetadata } = useQuery(
+  const { data: creditClassMetadataData } = useQuery(
     getMetadataQuery({
       iri: creditClassOnChain?.class?.metadata,
       enabled: !!dataClient && !!creditClassOnChain?.class?.metadata,
       dataClient,
     }),
   );
+  const creditClassMetadata = creditClassMetadataData as CreditClassMetadataLD;
 
   const { data: creditTypeData } = useQuery(
     getCreditTypeQuery({
@@ -133,9 +135,29 @@ function ProjectTopSection({
     methodologies: creditClassMetadata?.['regen:approvedMethodologies'],
   });
   const methodology = projectMethodology ?? creditClassMethodology;
-  const generationMethod = getOffsetGenerationMethod(
-    creditClassMetadata as CreditClassMetadataLD,
-  );
+  const generationMethod = getOffsetGenerationMethod(creditClassMetadata);
+
+  const projectActivity =
+    projectMetadata?.['regen:projectActivity']?.['schema:name'];
+  const activityTags: ProjectTagType[] | undefined = projectActivity
+    ? [
+        {
+          name: projectActivity,
+          icon: {
+            src: '',
+          },
+        },
+      ]
+    : undefined;
+
+  const ecosystemTags: ProjectTagType[] | undefined = creditClassMetadata?.[
+    'regen:ecosystemType'
+  ]?.map(ecosystem => ({
+    name: ecosystem,
+    icon: {
+      src: '',
+    },
+  }));
 
   return (
     <Section classes={{ root: classes.section }}>
@@ -265,6 +287,8 @@ function ProjectTopSection({
             projectVerifier={projectVerifier}
             landSteward={landSteward}
             landOwner={landOwner}
+            activities={activityTags}
+            ecosystems={ecosystemTags}
           />
         </Grid>
       </Grid>

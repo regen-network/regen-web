@@ -1,23 +1,29 @@
 import { Box, SxProps } from '@mui/material';
 
-import { Label } from 'src/components/typography';
-
 import { ProjectTag } from '../../../components/molecules/ProjectTag/ProjectTag';
+import { Label } from '../../../components/typography';
 import { Theme } from '../../../theme/muiTheme';
 import { sxToArray } from '../../../utils/mui/sxToArray';
-import { TagType } from '../../molecules/ProjectTag/ProjectTag.types';
+import { ProjectTagType } from '../../molecules/ProjectTag/ProjectTag.types';
 import {
   ECOSYSTEM_LABEL,
   PROJECT_ACTIVITY_LABEL,
 } from './ProjectTags.constants';
 
 export interface Props {
-  activity: TagType;
-  ecosystem: TagType;
+  activities?: ProjectTagType[];
+  ecosystems?: ProjectTagType[];
   sx?: SxProps<Theme>;
 }
 
-const ProjectTags = ({ activity, ecosystem, sx = [] }: Props): JSX.Element => {
+const ProjectTags = ({
+  activities = [],
+  ecosystems = [],
+  sx = [],
+}: Props): JSX.Element => {
+  const hasActivities = activities.length > 0;
+  const hasEcosystems = ecosystems.length > 0;
+
   return (
     <Box
       sx={[
@@ -28,21 +34,55 @@ const ProjectTags = ({ activity, ecosystem, sx = [] }: Props): JSX.Element => {
         ...sxToArray(sx),
       ]}
     >
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          mr: { sm: 3.25 },
-          mb: { xs: 10, sm: 0 },
-        }}
-      >
-        <Label sx={{ fontSize: 11, mb: 2 }}>{PROJECT_ACTIVITY_LABEL}</Label>
-        <ProjectTag tag={activity} />
-      </Box>
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <Label sx={{ fontSize: 11, mb: 2 }}>{ECOSYSTEM_LABEL}</Label>
-        <ProjectTag tag={ecosystem} />
-      </Box>
+      {hasActivities && (
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            mr: { sm: 3.25 },
+            mb: { xs: 10, sm: 0 },
+          }}
+        >
+          <Label sx={{ fontSize: { xs: 11 }, mb: 2 }}>
+            {PROJECT_ACTIVITY_LABEL}
+          </Label>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: { xs: 'row', sm: 'column' },
+              flexWrap: 'wrap',
+            }}
+          >
+            {activities.map(activity => (
+              <ProjectTag
+                tag={activity}
+                key={activity?.name}
+                sx={{ mb: 2, mr: { xs: 2, sm: 0 } }}
+              />
+            ))}
+          </Box>
+        </Box>
+      )}
+      {hasEcosystems && (
+        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+          <Label sx={{ fontSize: { xs: 11 }, mb: 2 }}>{ECOSYSTEM_LABEL}</Label>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: { xs: 'row', sm: 'column' },
+              flexWrap: 'wrap',
+            }}
+          >
+            {ecosystems.map(ecosystem => (
+              <ProjectTag
+                tag={ecosystem}
+                key={ecosystem.name}
+                sx={{ mb: 2, mr: { xs: 2, sm: 0 } }}
+              />
+            ))}
+          </Box>
+        </Box>
+      )}
     </Box>
   );
 };

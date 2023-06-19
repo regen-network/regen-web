@@ -153,17 +153,18 @@ export const isAnchoredProjectMetadata = (
   return !!onChainProjectId;
 };
 
-const isCFCProjectMetadata = (
-  projectMetadata?: CreditClassMetadataLD | CFCCreditClassMetadataLD,
-): projectMetadata is CFCCreditClassMetadataLD => {
+const isCFCCreditClassMetadata = (
+  creditClassMetadata?: CreditClassMetadataLD | CFCCreditClassMetadataLD,
+): creditClassMetadata is CFCCreditClassMetadataLD => {
   return (
-    !!projectMetadata &&
-    typeof projectMetadata?.['regen:offsetGenerationMethod']?.[0] !== 'string'
+    !!creditClassMetadata &&
+    typeof creditClassMetadata?.['regen:offsetGenerationMethod']?.[0] !==
+      'string'
   );
 };
 
 export const getOffsetGenerationMethod = (metadata?: CreditClassMetadataLD) => {
-  if (isCFCProjectMetadata(metadata)) {
+  if (isCFCCreditClassMetadata(metadata)) {
     return metadata?.['regen:offsetGenerationMethod']?.[0]['@value'];
   }
 

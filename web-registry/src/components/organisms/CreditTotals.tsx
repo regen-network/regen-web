@@ -33,7 +33,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
 
 const CreditTotals: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { classes: styles } = useStyles();
-  const { dataClient } = useLedger();
+  const { dataClient, ecocreditClient } = useLedger();
   const [totals, setTotals] = useState<CreditTotalData>({
     tradeable: undefined,
     retired: undefined,
@@ -83,6 +83,7 @@ const CreditTotals: React.FC<React.PropsWithChildren<unknown>> = () => {
         const res = await getBatchesWithSupply({
           withAllData: false,
           dataClient,
+          ecocreditClient,
         });
         const data: BatchInfoWithSupply[] = res?.data;
 
@@ -97,7 +98,7 @@ const CreditTotals: React.FC<React.PropsWithChildren<unknown>> = () => {
     };
 
     fetchData();
-  }, [dataClient, sumBatchTotals]);
+  }, [dataClient, sumBatchTotals, ecocreditClient]);
 
   return (
     <Grid container spacing={6} className={styles.root}>

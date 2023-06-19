@@ -6,6 +6,7 @@ import {
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { ClassProjectInfo } from 'types/ledger/ecocredit';
+import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { normalizeClassProjectForBatch } from 'lib/normalizers/classProjectForBatch/normalizeClassProjectForBatch';
 import { EMPTY_CLASS_PROJECT_INFO } from 'lib/normalizers/classProjectForBatch/normalizeClassProjectForBatch.constants';
 import { EMPTY_BATCH_INFO } from 'lib/normalizers/ecocredits/normalizeEcocredits.constants';
@@ -13,7 +14,8 @@ import { EMPTY_BATCH_INFO } from 'lib/normalizers/ecocredits/normalizeEcocredits
 interface Params {
   balance?: BasketBalanceInfo;
   project?: ProjectInfo | null;
-  metadata?: any | null;
+  projectMetadata?: any | null;
+  creditClassMetadata?: CreditClassMetadataLD;
   sanityCreditClassData?: AllCreditClassQuery;
   batch?: BatchInfo | null;
 }
@@ -27,22 +29,25 @@ export interface BasketBatchInfoWithBalance
 export const normalizeBasketEcocredits = ({
   balance,
   batch,
-  metadata,
+  projectMetadata,
   project,
   sanityCreditClassData,
+  creditClassMetadata,
 }: Params): BasketBatchInfoWithBalance => {
   const hasAllClassInfos =
-    batch !== undefined &&
-    metadata !== undefined &&
-    project !== undefined &&
-    !!sanityCreditClassData;
+    (batch !== undefined &&
+      projectMetadata !== undefined &&
+      project !== undefined &&
+      !!sanityCreditClassData) ||
+    creditClassMetadata !== undefined;
 
   const classProjectInfo = hasAllClassInfos
     ? normalizeClassProjectForBatch({
         batch,
         sanityCreditClassData,
-        metadata,
+        projectMetadata,
         project,
+        creditClassMetadata,
       })
     : EMPTY_CLASS_PROJECT_INFO;
 

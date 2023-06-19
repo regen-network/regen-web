@@ -1,4 +1,3 @@
-import { QueryClientImpl as DataQueryClientImpl } from '@regen-network/api/lib/generated/regen/data/v1/query';
 import { QueryClient, QueryObserverOptions } from '@tanstack/react-query';
 
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
@@ -16,5 +15,4 @@ export type ReactQueryAddDataToBatchesParams = Omit<
 > & {
   batches?: AddDataToBatchesParams['batches'];
   reactQueryClient?: QueryClient;
-  dataClient?: DataQueryClientImpl;
 } & ReactQueryBuilderResponse<ReactQueryAddDataToBatchesResponse>;

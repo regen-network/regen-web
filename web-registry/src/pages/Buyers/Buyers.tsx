@@ -32,7 +32,7 @@ const BuyersPage = (): JSX.Element => {
   const featuredProjectIds = content?.featuredProjectCardsSection?.cards?.map(
     card => card?.project?.projectId ?? '',
   );
-  const { projects, isLoadingProjects } = useFetchProjectsByIds({
+  const { projects, isProjectsLoading } = useFetchProjectsByIds({
     projectIds: featuredProjectIds,
   });
 
@@ -106,7 +106,7 @@ const BuyersPage = (): JSX.Element => {
               content={content?.ecologicalCreditCardsSection}
             />
           )}
-          {content?.featuredProjectCardsSection && !isLoadingProjects && (
+          {content?.featuredProjectCardsSection && !isProjectsLoading && (
             <BuyersFeaturedProjectsSection
               projects={projects}
               content={content?.featuredProjectCardsSection}

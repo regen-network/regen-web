@@ -14,10 +14,9 @@ import { messageActionEquals } from 'lib/ecocredit/constants';
 import { normalizeBridgedEcocredits } from 'lib/normalizers/bridge/normalizeBridgedEcocredits';
 import { getBridgeTxStatusQuery } from 'lib/queries/react-query/bridge/getBridgeTxStatusQuery/getBridgeTxStatusQuery';
 import { getGetTxsEventQuery } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery';
-import { getBatchQuery } from 'lib/queries/react-query/ecocredit/getBatchQuery/getBatchQuery';
-import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
-import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
+
+import { useBatchesWithMetadata } from 'hooks/batches/useBatchesWithMetadata';
 
 import {
   BRIDGED_STATUSES,
@@ -45,7 +44,7 @@ interface Output {
 }
 
 export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
-  const { txClient, ecocreditClient, dataClient } = useLedger();
+  const { txClient } = useLedger();
   const statusToRefetchRef = useRef<boolean[]>([]);
 
   const [paginationParams, setPaginationParams] =
@@ -140,52 +139,16 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
     )
     .flat(1);
 
-  // Batches
-  const batchesResult = useQueries({
-    queries: credits.map(credit =>
-      getBatchQuery({
-        client: ecocreditClient,
-        request: { batchDenom: credit.batchDenom },
-      }),
-    ),
-  });
-  const batches = batchesResult?.map(batchResult => batchResult.data) ?? [];
-  const isBatchesLoading = batchesResult.some(
-    batchResult => batchResult.isLoading,
-  );
-
-  // Projects
-  const projectsResults = useQueries({
-    queries: batches.map(batch =>
-      getProjectQuery({
-        request: {
-          projectId: batch?.batch?.projectId,
-        },
-        client: ecocreditClient,
-      }),
-    ),
-  });
-  const projects = projectsResults.map(projectResult => projectResult.data);
-  const isProjectsLoading = projectsResults.some(
-    projectResult => projectResult.isLoading,
-  );
-
-  // Metadatas
-  const metadatasResults = useQueries({
-    queries: projects.map(project =>
-      getMetadataQuery({
-        iri: project?.project?.metadata,
-        dataClient,
-        enabled: !!dataClient,
-      }),
-    ),
-  });
-  const metadatas = metadatasResults.map(metadataResult => {
-    return metadataResult.data;
-  });
-  const isMetadatasLoading = metadatasResults.some(
-    metadataResult => metadataResult.isLoading,
-  );
+  const {
+    batches,
+    isBatchesLoading,
+    projects,
+    isProjectsLoading,
+    projectsMetadata,
+    isProjectsMetadataLoading,
+    classesMetadata,
+    isClassesMetadataLoading,
+  } = useBatchesWithMetadata(credits);
 
   // Normalization
   // isLoading -> undefined: return empty strings in normalizer to trigger skeleton
@@ -193,9 +156,14 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
   const bridgedCredits = credits.map((credit, index) =>
     normalizeBridgedEcocredits({
       batch: isBatchesLoading ? undefined : batches[index]?.batch,
-      metadata: isMetadatasLoading ? undefined : metadatas[index],
+      projectMetadata: isProjectsMetadataLoading
+        ? undefined
+        : projectsMetadata[index],
       project: isProjectsLoading ? undefined : projects[index]?.project,
       sanityCreditClassData: creditClassData,
+      creditClassMetadata: isClassesMetadataLoading
+        ? undefined
+        : classesMetadata[index],
       credit,
       txStatus: txsStatusResult[credit.txIndex]?.data,
       txResponse: txsWithResponse[credit.txIndex].txResponse,

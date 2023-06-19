@@ -4,21 +4,19 @@ import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';
 import { GECKO_EEUR_ID, GECKO_USDC_ID } from 'lib/coingecko';
-import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { normalizeProjectsWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
-import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
-import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
+import { useProjectsWithMetadata } from 'hooks/projects/useProjectsWithMetadata';
 
 interface Response {
   projects: ProjectWithOrderData[];
-  isLoadingProjects: boolean;
+  isProjectsLoading: boolean;
 }
 
 interface Props {
@@ -28,29 +26,13 @@ interface Props {
 export const useFetchProjectsByIdsWithOrders = ({
   projectIds,
 }: Props): Response => {
-  const { ecocreditClient, marketplaceClient, dataClient } = useLedger();
+  const { marketplaceClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const graphqlClient = useApolloClient();
   const { wallet } = useWallet();
 
-  // Projects
-  const projectsResults = useQueries({
-    queries:
-      projectIds?.map(projectId =>
-        getProjectQuery({
-          request: {
-            projectId,
-          },
-          client: ecocreditClient,
-        }),
-      ) ?? [],
-  });
-  const projects = projectsResults
-    .map(projectResult => projectResult.data?.project)
-    .filter(project => project !== undefined) as ProjectInfo[];
-  const isLoadingProjects = projectsResults.some(
-    projectResult => projectResult.isLoading,
-  );
+  const { projects, isProjectsLoading, projectsMetadata, classesMetadata } =
+    useProjectsWithMetadata(projectIds);
 
   // Sell Orders
   const simplePrice = useQuery(getSimplePriceQuery({}));
@@ -64,7 +46,9 @@ export const useFetchProjectsByIdsWithOrders = ({
   );
 
   const projectsWithOrderData = normalizeProjectsWithOrderData({
-    projects,
+    projects: projects
+      .map(project => project?.project)
+      .filter(project => project !== undefined) as ProjectInfo[],
     sellOrders,
     geckoPrices: {
       regenPrice: simplePrice?.data?.regen?.usd,
@@ -75,30 +59,16 @@ export const useFetchProjectsByIdsWithOrders = ({
     userAddress: wallet?.address,
   });
 
-  // Metadatas
-  const metadatasResults = useQueries({
-    queries: projects?.map(project =>
-      getMetadataQuery({
-        iri: project?.metadata,
-        dataClient,
-        enabled: !!dataClient,
-      }),
-    ),
-  });
-
-  const metadatas = metadatasResults.map(metadataResult => {
-    return metadataResult.data;
-  });
-
   const offChainProjectResults = useQueries({
     queries: projects.map(project =>
       getProjectByOnChainIdQuery({
         client: graphqlClient,
-        onChainId: project.id,
+        onChainId: project?.project?.id ?? '',
+        enabled: !!project?.project?.id,
       }),
     ),
   });
-  const projectPageMetadatas = offChainProjectResults.map(
+  const projectPagesMetadata = offChainProjectResults.map(
     queryResult => queryResult.data?.data.projectByOnChainId?.metadata,
   );
 
@@ -106,11 +76,12 @@ export const useFetchProjectsByIdsWithOrders = ({
 
   const projectsWithMetadata = normalizeProjectsWithMetadata({
     projectsWithOrderData,
-    metadatas: metadatas as (AnchoredProjectMetadataLD | undefined)[],
-    projectPageMetadatas,
+    projectsMetadata,
+    projectPagesMetadata,
+    classesMetadata,
   });
   return {
     projects: projectsWithMetadata,
-    isLoadingProjects,
+    isProjectsLoading,
   };
 };

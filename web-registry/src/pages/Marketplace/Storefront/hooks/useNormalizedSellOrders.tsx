@@ -24,6 +24,7 @@ import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllC
 import { useFetchSellOrders } from 'features/marketplace/BuySellOrderFlow/hooks/useFetchSellOrders';
 import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { UISellOrderInfo } from 'pages/Projects/Projects.types';
+import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 import {
@@ -140,14 +141,24 @@ export const useNormalizedSellOrders = (): ResponseType => {
     [projects, metadata],
   );
 
+  const { classesMetadata } = useClassesWithMetadata(
+    projects?.map(project => project.classId),
+  );
+
   const projectsInfosByHandleMap = useMemo(
     () =>
       normalizeProjectsInfosByHandleMap({
         offChainProjects: offChainProjectData?.allProjects,
         onChainProjects: projectsWithMetadata,
         sanityCreditClassData,
+        classesMetadata,
       }),
-    [offChainProjectData, projectsWithMetadata, sanityCreditClassData],
+    [
+      classesMetadata,
+      offChainProjectData?.allProjects,
+      projectsWithMetadata,
+      sanityCreditClassData,
+    ],
   );
 
   const normalizedSellOrders = useMemo(

@@ -20,7 +20,7 @@ export default function useBatches({ projectId }: InputProps): {
 } {
   const [batchData, setBatchData] = useState<BatchInfoWithSupply[]>([]);
   const [batchTotals, setBatchTotals] = useState<BatchTotalsForProject>();
-  const { dataClient } = useLedger();
+  const { dataClient, ecocreditClient } = useLedger();
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
@@ -30,6 +30,7 @@ export default function useBatches({ projectId }: InputProps): {
           const { data } = await getBatchesByProjectWithSupply(
             projectId,
             dataClient,
+            ecocreditClient,
           );
           batches = data;
         }
@@ -42,7 +43,7 @@ export default function useBatches({ projectId }: InputProps): {
       }
     };
     fetchData();
-  }, [projectId]);
+  }, [dataClient, ecocreditClient, projectId]);
 
   return { batchData, batchTotals };
 }

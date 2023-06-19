@@ -63,6 +63,7 @@ export const usePaginatedBatches = (): {
       enabled: !!sanityCreditClassDataResult.data,
       reactQueryClient,
       dataClient,
+      ecocreditClient,
     }),
   );
 

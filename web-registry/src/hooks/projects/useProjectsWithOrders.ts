@@ -21,6 +21,7 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { ProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders';
 import { sortProjects } from 'pages/Projects/utils/sortProjects';
+import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 
 import { useLastRandomProjects } from './useLastRandomProjects';
 import { selectProjects } from './useProjectsWithOrders.utils';
@@ -153,7 +154,7 @@ export function useProjectsWithOrders({
 
   /* Metadata queries */
 
-  const metadataResults = useQueries({
+  const projectsMetadatasResults = useQueries({
     queries: sortedProjects.map(project =>
       getMetadataQuery({
         iri: project.metadata,
@@ -162,7 +163,9 @@ export function useProjectsWithOrders({
       }),
     ),
   });
-  const metadatas = metadataResults.map(queryResult => queryResult.data);
+  const projectsMetadata = projectsMetadatasResults.map(
+    queryResult => queryResult.data,
+  );
 
   const offChainProjectResults = useQueries({
     queries: sortedProjects.map(project =>
@@ -172,16 +175,26 @@ export function useProjectsWithOrders({
       }),
     ),
   });
-  const projectPageMetadatas = offChainProjectResults.map(
+  const projectPagesMetadata = offChainProjectResults.map(
     queryResult => queryResult.data?.data.projectByOnChainId?.metadata,
+  );
+
+  // Credit Classes and their metadata
+  const { classesMetadata } = useClassesWithMetadata(
+    sortedProjects.map(project => project?.creditClassId),
   );
 
   /* Final Normalization */
 
   const projectsWithMetadata = normalizeProjectsWithMetadata({
     projectsWithOrderData: sortedProjects,
-    metadatas: metadatas as (AnchoredProjectMetadataLD | undefined)[],
-    projectPageMetadatas,
+    projectsMetadata: projectsMetadata as (
+      | AnchoredProjectMetadataLD
+      | undefined
+    )[],
+    projectPagesMetadata,
+    sanityCreditClassData: creditClassData,
+    classesMetadata,
   });
 
   return {

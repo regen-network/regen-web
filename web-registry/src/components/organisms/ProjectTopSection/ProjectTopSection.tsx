@@ -65,7 +65,7 @@ function ProjectTopSection({
   batchData,
 }: ProjectTopSectionProps): JSX.Element {
   const { classes } = useProjectTopSectionStyles();
-  const { ecocreditClient } = useLedger();
+  const { ecocreditClient, dataClient } = useLedger();
 
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -89,7 +89,7 @@ function ProjectTopSection({
   const { glanceText, primaryDescription, quote } =
     parseProjectPageMetadata(projectPageMetadata);
 
-  /* Credit class info */
+  /* Credit class info from on chain metadata or Sanity */
 
   const onChainCreditClassId =
     creditClass?.onChainId ?? onChainProjectId?.split('-')?.[0];
@@ -105,7 +105,8 @@ function ProjectTopSection({
   const { data: creditClassMetadata } = useQuery(
     getMetadataQuery({
       iri: creditClassOnChain?.class?.metadata,
-      enabled: !!creditClassOnChain?.class?.metadata,
+      enabled: !!dataClient && !!creditClassOnChain?.class?.metadata,
+      dataClient,
     }),
   );
 

@@ -4,10 +4,12 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { useLedger } from 'ledger';
 import { client as sanityClient } from 'lib/clients/sanity';
+import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { normalizeEcocredits } from 'lib/normalizers/ecocredits/normalizeEcocredits';
 import { getBalanceQuery } from 'lib/queries/react-query/ecocredit/getBalanceQuery/getBalanceQuery';
 import { getBalanceQueryKey } from 'lib/queries/react-query/ecocredit/getBalanceQuery/getBalanceQuery.config';
 import { getBatchQuery } from 'lib/queries/react-query/ecocredit/getBatchQuery/getBatchQuery';
+import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
@@ -40,7 +42,7 @@ export const useFetchEcocredit = ({ batchDenom }: Props): Response => {
     }),
   );
 
-  // Batche
+  // Batch
   const { data: batchData } = useQuery(
     getBatchQuery({
       client: ecocreditClient,
@@ -48,32 +50,55 @@ export const useFetchEcocredit = ({ batchDenom }: Props): Response => {
     }),
   );
 
-  // Projects
+  // Project
   const { data: projectData } = useQuery(
     getProjectQuery({
       request: { projectId: batchData?.batch?.projectId },
     }),
   );
 
-  // Metadatas
-  const metadata = getMetadataQuery({
+  // Project Metadata
+  const projectMetadata = getMetadataQuery({
     iri: projectData?.project?.metadata,
     dataClient,
     enabled: !!dataClient,
   });
 
   // AllCreditClasses
-  const { data: creditClassData } = useQuery(
+  const { data: creditClassesData } = useQuery(
     getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+  );
+
+  // Credit Class
+  const classId = projectData?.project?.classId;
+  const { data: creditClassData } = useQuery(
+    getClassQuery({
+      client: ecocreditClient,
+      request: {
+        classId,
+      },
+      enabled: !!ecocreditClient && !!classId,
+    }),
+  );
+
+  // Credit Class Metadata
+  const { data: creditClassMetadata } = useQuery(
+    getMetadataQuery({
+      iri: creditClassData?.class?.metadata,
+      enabled: !!creditClassData?.class?.metadata,
+    }),
   );
 
   // Normalization
   const credit = normalizeEcocredits({
     balance: balanceData?.balance,
     batch: batchData?.batch,
-    metadata: metadata,
+    projectMetadata,
+    creditClassMetadata: creditClassMetadata as
+      | CreditClassMetadataLD
+      | undefined,
     project: projectData?.project,
-    sanityCreditClassData: creditClassData,
+    sanityCreditClassData: creditClassesData,
   });
 
   // Reload callback

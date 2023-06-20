@@ -194,6 +194,12 @@ function ProjectDetails(): JSX.Element {
     offChainProject?.partyByVerifierId,
   );
 
+  // const program = getDisplayParty(
+  //   'regen:sourceRegistry',
+  //   anchoredMetadata,
+  //   offChainProject?.creditClassByCreditClassId?.partyByRegistryId,
+  // );
+
   const { geojson, isGISFile } = useGeojson({
     projectMetadata,
     projectPageMetadata: offChainProjectMetadata,

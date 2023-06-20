@@ -2,17 +2,18 @@ import { Grid } from '@mui/material';
 
 import UserInfoWithTitle from 'web-components/lib/components/user/UserInfoWithTitle';
 
-import { useSectionStyles } from './ProjectDetailsSection.styles';
 import { ProjectDetailsSectionStakeholdersProps } from './ProjectDetailsSection.types';
 
 export const ProjectDetailsSectionStakeholders: React.FC<ProjectDetailsSectionStakeholdersProps> =
   ({ program, projectAdmin, projectDeveloper, projectVerifier }) => {
-    const { classes } = useSectionStyles();
-    const sm =
+    const sm = Math.max(
       12 /
-      [program, projectAdmin, projectDeveloper, projectVerifier].filter(u =>
-        Boolean(u),
-      ).length;
+        [program, projectAdmin, projectDeveloper, projectVerifier].filter(u =>
+          Boolean(u),
+        ).length,
+      2,
+    );
+
     return (
       <Grid container>
         {program && (

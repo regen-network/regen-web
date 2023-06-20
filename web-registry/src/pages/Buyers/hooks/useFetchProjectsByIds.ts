@@ -1,4 +1,5 @@
 import { useApolloClient } from '@apollo/client';
+import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQueries, useQuery } from '@tanstack/react-query';
 
 import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCard';
@@ -44,6 +45,9 @@ export const useFetchProjectsByIds = ({ projectIds }: Props): Response => {
 
   // Normalization
   const normalizedProjects = normalizeProjectsWithCreditClass({
+    projects: projects
+      .map(project => project?.project)
+      .filter(project => project !== undefined) as ProjectInfo[],
     projectsMetadata,
     projectPagesMetadata,
     classesMetadata,

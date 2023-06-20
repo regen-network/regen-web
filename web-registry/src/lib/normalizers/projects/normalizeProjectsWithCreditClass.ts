@@ -76,7 +76,7 @@ export const normalizeProjectsWithCreditClass = ({
             classProjectInfo?.className) ??
           '',
         type: 'USER',
-        image: classProjectInfo?.icon,
+        image: '/svg/class-default.svg',
       },
     };
   }) ?? [];

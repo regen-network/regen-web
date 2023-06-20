@@ -1,7 +1,10 @@
+import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import {
   AnchoredProjectMetadataBaseLD,
+  CreditClassMetadataLD,
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
+import { getSanityImgSrc } from 'lib/imgSrc';
 
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 
@@ -9,34 +12,40 @@ import DefaultProject from 'assets/default-project.jpg';
 
 interface NormalizeProjectsWithOrderDataParams {
   projectsWithOrderData?: ProjectWithOrderData[];
-  metadatas?: (AnchoredProjectMetadataBaseLD | undefined)[];
-  projectPageMetadatas?: ProjectPageMetadataLD[];
+  projectsMetadata?: (AnchoredProjectMetadataBaseLD | undefined)[];
+  projectPagesMetadata?: ProjectPageMetadataLD[];
+  sanityCreditClassData?: AllCreditClassQuery;
+  classesMetadata?: (CreditClassMetadataLD | undefined)[];
 }
 
 export const normalizeProjectsWithMetadata = ({
   projectsWithOrderData,
-  metadatas,
-  projectPageMetadatas,
+  projectsMetadata,
+  projectPagesMetadata,
+  classesMetadata,
 }: NormalizeProjectsWithOrderDataParams): ProjectWithOrderData[] => {
   const projectsWithMetadata = projectsWithOrderData?.map(
     (project: ProjectWithOrderData, index) => {
-      const metadata = metadatas?.[index];
-      const projectPageMetadata = projectPageMetadatas?.[index];
+      const projectMetadata = projectsMetadata?.[index];
+      const classMetadata = classesMetadata?.[index];
+      const projectPageMetadata = projectPagesMetadata?.[index];
       const creditClass = project.sanityCreditClassData;
+
       const creditClassImage =
-        creditClass?.image?.image?.asset?.url ?? creditClass?.image?.imageHref;
+        classMetadata?.['schema:image'] || getSanityImgSrc(creditClass?.image);
 
       return {
         ...project,
         id: project.id,
-        name: metadata?.['schema:name'] || project.name,
+        name: projectMetadata?.['schema:name'] || project.name,
         imgSrc:
           projectPageMetadata?.['regen:previewPhoto']?.['schema:url'] ??
           creditClassImage ??
           DefaultProject,
-        place: metadata?.['schema:location']?.place_name || project.place,
-        area: metadata?.['regen:projectSize']?.['qudt:numericValue'],
-        areaUnit: metadata?.['regen:projectSize']?.['qudt:unit'] || '',
+        place:
+          projectMetadata?.['schema:location']?.place_name || project.place,
+        area: projectMetadata?.['regen:projectSize']?.['qudt:numericValue'],
+        areaUnit: projectMetadata?.['regen:projectSize']?.['qudt:unit'] || '',
       } as ProjectWithOrderData;
     },
   );

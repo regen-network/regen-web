@@ -52,7 +52,7 @@ export default function useEcocredits({
   const [credits, setCredits] = useState<BatchInfoWithBalance[]>();
   const [isLoadingCredits, setIsLoadingCredits] = useState(true);
   const isFetchingRef = useRef(false);
-  const { dataClient } = useLedger();
+  const { dataClient, ecocreditClient } = useLedger();
 
   const batchesResponse = useEcocreditQuery<QueryBatchesResponse>({
     params: {},
@@ -123,6 +123,7 @@ export default function useEcocredits({
         batches: batchesResponse?.data?.batches,
         sanityCreditClassData,
         dataClient,
+        ecocreditClient,
       });
 
       if (newCredits) setCredits(newCredits);
@@ -140,6 +141,7 @@ export default function useEcocredits({
     batchesResponse?.data?.batches,
     sanityCreditClassData,
     dataClient,
+    ecocreditClient,
   ]);
 
   const reloadBalances = useCallback(async () => {

@@ -10,6 +10,7 @@ export interface CreditClassMetadataLD {
   'schema:url': string;
   'schema:name': string;
   'schema:description': string;
+  'schema:image': string;
   'regen:sectoralScope': string[];
   'regen:sourceRegistry': CompactedNameUrl;
   'regen:verificationMethod': string;
@@ -17,8 +18,8 @@ export interface CreditClassMetadataLD {
   'regen:offsetGenerationMethod': string[];
   'regen:ecosystemType': string[];
   'regen:projectActivities': string[];
-  'regen:carbonOffsetStandard': CompactedNameUrl;
-  'regen:tokenizationSource': string;
+  'regen:carbonOffsetStandard'?: CompactedNameUrl;
+  'regen:tokenizationSource'?: string;
 }
 
 interface Context {

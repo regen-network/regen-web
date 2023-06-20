@@ -7,6 +7,7 @@ import {
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { BridgedEcocredits } from 'types/ledger/ecocredit';
 import { GetBridgeTxStatusResponse } from 'lib/bridge';
+import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 
 import { TxCredits } from 'components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.types';
 
@@ -16,8 +17,9 @@ import { EMPTY_BATCH_INFO } from '../ecocredits/normalizeEcocredits.constants';
 
 interface Params {
   project?: ProjectInfo | null;
-  metadata?: any | null;
+  projectMetadata?: any | null;
   sanityCreditClassData?: AllCreditClassQuery;
+  creditClassMetadata?: CreditClassMetadataLD;
   batch?: BatchInfo | null;
   txStatus?: GetBridgeTxStatusResponse | null;
   txResponse?: TxResponse;
@@ -26,24 +28,27 @@ interface Params {
 
 export const normalizeBridgedEcocredits = ({
   batch,
-  metadata,
+  projectMetadata,
   project,
   sanityCreditClassData,
+  creditClassMetadata,
   credit,
   txResponse,
   txStatus,
 }: Params): BridgedEcocredits => {
   const hasAllClassInfos =
-    batch !== undefined &&
-    metadata !== undefined &&
-    project !== undefined &&
-    !!sanityCreditClassData;
+    (batch !== undefined &&
+      projectMetadata !== undefined &&
+      project !== undefined &&
+      !!sanityCreditClassData) ||
+    creditClassMetadata !== undefined;
 
   const classProjectInfo = hasAllClassInfos
     ? normalizeClassProjectForBatch({
         batch,
         sanityCreditClassData,
-        metadata,
+        creditClassMetadata,
+        projectMetadata,
         project,
       })
     : EMPTY_CLASS_PROJECT_INFO;

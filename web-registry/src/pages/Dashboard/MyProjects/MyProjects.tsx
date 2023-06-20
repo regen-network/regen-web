@@ -50,7 +50,7 @@ const MyProjects = (): JSX.Element => {
         return typeof id === 'string';
       }) ?? [];
 
-  const { projects: projectsWithOrders, isLoadingProjects } =
+  const { projects: projectsWithOrders, isProjectsLoading } =
     useFetchProjectsByIdsWithOrders({
       projectIds: onChainIds,
     });
@@ -87,7 +87,7 @@ const MyProjects = (): JSX.Element => {
               project?.id;
             return (
               <Grid key={i} item xs={12} md={6} lg={4}>
-                <WithLoader isLoading={isLoadingProjects} variant="skeleton">
+                <WithLoader isLoading={isProjectsLoading} variant="skeleton">
                   <ProjectCard
                     {...DEFAULT_PROJECT}
                     {...(currentProject ?? {})}

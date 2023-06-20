@@ -5,21 +5,24 @@ import {
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { ClassProjectInfo } from 'types/ledger/ecocredit';
+import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 interface Params {
-  project: ProjectInfo | null;
-  metadata: any;
+  project?: ProjectInfo | null;
+  projectMetadata: any;
   sanityCreditClassData?: AllCreditClassQuery;
-  batch: BatchInfo | null;
+  batch?: BatchInfo | null;
+  creditClassMetadata?: CreditClassMetadataLD;
 }
 
 export const normalizeClassProjectForBatch = ({
   batch,
-  metadata,
+  projectMetadata,
   project,
   sanityCreditClassData,
+  creditClassMetadata,
 }: Params): ClassProjectInfo => {
   const creditClassSanity = findSanityCreditClass({
     sanityCreditClassData,
@@ -28,8 +31,9 @@ export const normalizeClassProjectForBatch = ({
 
   return {
     classId: project?.classId,
-    className: creditClassSanity?.nameRaw,
-    projectName: metadata?.['schema:name'] ?? batch?.projectId,
+    className:
+      creditClassMetadata?.['schema:name'] || creditClassSanity?.nameRaw,
+    projectName: projectMetadata?.['schema:name'] ?? batch?.projectId,
     projectLocation: project?.jurisdiction,
     icon: creditClassSanity?.icon?.asset?.url ?? '',
   };

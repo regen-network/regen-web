@@ -20,7 +20,7 @@ import { AdditionalInfo } from '../CreditClassDetails.AdditionalInfo';
 import { MemoizedProjects as Projects } from '../CreditClassDetails.Projects';
 import { SideBarBox } from '../CreditClassDetails.SidebarBox';
 import { useCreditClassDetailsSimpleStyles } from './CreditClassDetailsSimple.styles';
-import { useCreditClassDisplayName } from './hooks/useCreditClassDisplayName';
+import { getCreditClassDisplayName } from './CreditClassDetailsSimple.utils';
 
 interface CreditDetailsProps {
   dbClass?: CreditClassByOnChainIdQuery['creditClassByOnChainId'];
@@ -34,9 +34,10 @@ const CreditClassDetailsSimple: React.FC<
   React.PropsWithChildren<CreditDetailsProps>
 > = ({ dbClass, onChainClass, content, issuers, metadata }) => {
   const { classes: styles, cx } = useCreditClassDetailsSimpleStyles();
-  const displayName = useCreditClassDisplayName(onChainClass.id, metadata);
+  const displayName = getCreditClassDisplayName(onChainClass.id, metadata);
   const image = content?.image;
-  const imageSrc = getSanityImgSrc(image);
+  const imageSrc = metadata?.['schema:image'] || getSanityImgSrc(image);
+
   const { isKeplrMobileWeb } = useWallet();
 
   return (
@@ -62,7 +63,7 @@ const CreditClassDetailsSimple: React.FC<
             }}
           >
             <Box sx={{ mb: 6 }}>
-              {image && (
+              {imageSrc && (
                 <Box
                   sx={{
                     mb: { sm: 12.5 },
@@ -71,7 +72,7 @@ const CreditClassDetailsSimple: React.FC<
                 >
                   <img
                     className={styles.image}
-                    alt={image.imageAlt || imageSrc}
+                    alt={image?.imageAlt || imageSrc || displayName}
                     src={imageSrc}
                   />
                 </Box>

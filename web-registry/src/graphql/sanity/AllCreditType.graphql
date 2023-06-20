@@ -1,0 +1,8 @@
+query allCreditType {
+  allCreditType {
+    name
+    image {
+      ...imageFields
+    }
+  }
+}

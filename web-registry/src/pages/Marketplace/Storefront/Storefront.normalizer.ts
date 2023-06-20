@@ -1,6 +1,7 @@
 import { BatchInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
+import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 
 import { GECKO_PRICES } from 'pages/Projects/hooks/useProjectsSellOrders.types';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
@@ -17,6 +18,7 @@ type NormalizeprojectsInfosByHandleMapProps = {
   offChainProjects: AllProjectsQuery['allProjects'];
   onChainProjects?: ProjectInfoWithMetadata[];
   sanityCreditClassData?: AllCreditClassQuery;
+  classesMetadata?: (CreditClassMetadataLD | undefined)[];
 };
 
 // eslint-disable-next-line
@@ -24,6 +26,7 @@ export const normalizeProjectsInfosByHandleMap = ({
   offChainProjects,
   onChainProjects = [],
   sanityCreditClassData,
+  classesMetadata,
 }: NormalizeprojectsInfosByHandleMapProps) => {
   const projectsMap = new Map<
     string,
@@ -52,15 +55,18 @@ export const normalizeProjectsInfosByHandleMap = ({
     }
   });
 
-  onChainProjects.forEach(project => {
+  onChainProjects.forEach((project, index) => {
     const creditClassSanity = findSanityCreditClass({
       sanityCreditClassData,
       creditClassIdOrUrl: project?.classId,
     });
+    const classMetadata = classesMetadata?.[index];
 
     projectsMap.set(project?.id, {
       name: project.metadata?.['schema:name'] || project.id,
-      classIdOrName: creditClassSanity?.nameRaw ?? project?.classId,
+      classIdOrName:
+        (classMetadata?.['schema:name'] || creditClassSanity?.nameRaw) ??
+        project?.classId,
       classId: project?.classId,
     });
   });

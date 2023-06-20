@@ -22,7 +22,7 @@ export const useBatchesWithSupply = ({
   const [batchesWithSupply, setBatchesWithSupply] = useState<
     BatchInfoWithSupply[] | undefined
   >();
-  const { dataClient } = useLedger();
+  const { dataClient, ecocreditClient } = useLedger();
 
   const { data: sanityCreditClassData } = useAllCreditClassQuery({
     client: sanityClient,
@@ -64,6 +64,7 @@ export const useBatchesWithSupply = ({
             batches: displayedBatches,
             sanityCreditClassData,
             dataClient,
+            ecocreditClient,
           });
           if (!ignore) {
             // merge new batches into state variable
@@ -86,6 +87,7 @@ export const useBatchesWithSupply = ({
           const batchesWithSupply = await addDataToBatches({
             batches,
             dataClient,
+            ecocreditClient,
           });
           if (!ignore) {
             setBatchesWithSupply(batchesWithSupply);
@@ -125,6 +127,7 @@ export const useBatchesWithSupply = ({
     batches,
     batchesWithSupply,
     dataClient,
+    ecocreditClient,
     paginationParams,
     sanityCreditClassData,
   ]);

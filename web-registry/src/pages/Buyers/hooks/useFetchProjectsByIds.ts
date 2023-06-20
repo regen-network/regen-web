@@ -4,18 +4,16 @@ import { useQueries, useQuery } from '@tanstack/react-query';
 
 import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCard';
 
-import { useLedger } from 'ledger';
 import { client as sanityClient } from 'lib/clients/sanity';
-import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { normalizeProjectsWithCreditClass } from 'lib/normalizers/projects/normalizeProjectsWithCreditClass';
-import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
-import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
+import { useProjectsWithMetadata } from 'hooks/projects/useProjectsWithMetadata';
+
 interface Response {
   projects: ProjectCardProps[];
-  isLoadingProjects: boolean;
+  isProjectsLoading: boolean;
 }
 
 interface Props {
@@ -23,70 +21,41 @@ interface Props {
 }
 
 export const useFetchProjectsByIds = ({ projectIds }: Props): Response => {
-  const { ecocreditClient, dataClient } = useLedger();
   const graphqlClient = useApolloClient();
 
-  // Projects
-  const projectsResults = useQueries({
-    queries:
-      projectIds?.map(projectId =>
-        getProjectQuery({
-          request: {
-            projectId,
-          },
-          client: ecocreditClient,
-        }),
-      ) ?? [],
-  });
-  const projects = projectsResults
-    .map(projectResult => projectResult.data?.project)
-    .filter(project => project !== undefined) as ProjectInfo[];
-  const isLoadingProjects = projectsResults.some(
-    projectResult => projectResult.isLoading,
+  const { data: creditClassData } = useQuery(
+    getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
   );
 
-  // Metadatas
-  const metadatasResults = useQueries({
-    queries: projects?.map(project =>
-      getMetadataQuery({
-        iri: project?.metadata,
-        dataClient,
-        enabled: !!dataClient,
-      }),
-    ),
-  });
-
-  const metadatas = metadatasResults.map(metadataResult => {
-    return metadataResult.data;
-  });
+  const { projects, isProjectsLoading, projectsMetadata, classesMetadata } =
+    useProjectsWithMetadata(projectIds);
 
   const offChainProjectResults = useQueries({
     queries: projects.map(project =>
       getProjectByOnChainIdQuery({
         client: graphqlClient,
-        onChainId: project.id,
+        onChainId: project?.project?.id ?? '',
+        enabled: !!project?.project?.id,
       }),
     ),
   });
-  const projectPageMetadatas = offChainProjectResults.map(
+  const projectPagesMetadata = offChainProjectResults.map(
     queryResult => queryResult.data?.data.projectByOnChainId?.metadata,
-  );
-
-  // AllCreditClasses
-  const { data: creditClassData } = useQuery(
-    getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
   );
 
   // Normalization
   const normalizedProjects = normalizeProjectsWithCreditClass({
-    metadatas: metadatas as (AnchoredProjectMetadataLD | undefined)[],
-    projectPageMetadatas,
-    projects,
+    projects: projects
+      .map(project => project?.project)
+      .filter(project => project !== undefined) as ProjectInfo[],
+    projectsMetadata,
+    projectPagesMetadata,
+    classesMetadata,
     sanityCreditClassData: creditClassData,
   });
 
   return {
     projects: normalizedProjects,
-    isLoadingProjects,
+    isProjectsLoading,
   };
 };

@@ -29,6 +29,7 @@ import {
   QueryClassIssuersResponse,
   QueryClassRequest,
   QueryClassResponse,
+  QueryClientImpl as EcocreditQueryClientImpl,
   QueryClientImpl,
   QueryCreditTypesRequest,
   QueryCreditTypesResponse,
@@ -52,6 +53,7 @@ import { TablePaginationParams } from 'web-components/lib/components/table/Actio
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { getMetadata } from 'lib/db/api/metadata-graph';
+import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getSupplyQuery } from 'lib/queries/react-query/ecocredit/getSupplyQuery/getSupplyQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
@@ -111,6 +113,7 @@ type GetCreditsWithDataParams = {
   batches: BatchInfo[];
   sanityCreditClassData?: AllCreditClassQuery;
   dataClient?: DataQueryClientImpl;
+  ecocreditClient?: EcocreditQueryClientImpl;
 };
 
 const getCreditsWithData = async ({
@@ -118,6 +121,7 @@ const getCreditsWithData = async ({
   batches,
   sanityCreditClassData,
   dataClient,
+  ecocreditClient,
 }: GetCreditsWithDataParams): Promise<BatchInfoWithBalance[]> => {
   const credits: (BatchInfoWithBalance | undefined)[] = await Promise.all(
     balances.map(async balance => {
@@ -128,6 +132,7 @@ const getCreditsWithData = async ({
         batch,
         sanityCreditClassData,
         dataClient,
+        ecocreditClient,
       );
 
       return {
@@ -151,6 +156,7 @@ type GetEcocreditsForAccountParams = {
   batches?: BatchInfo[];
   sanityCreditClassData?: AllCreditClassQuery;
   dataClient?: DataQueryClientImpl;
+  ecocreditClient?: EcocreditQueryClientImpl;
 };
 
 export const getEcocreditsForAccount = async ({
@@ -161,6 +167,7 @@ export const getEcocreditsForAccount = async ({
   paginationParams,
   sanityCreditClassData,
   dataClient,
+  ecocreditClient,
 }: GetEcocreditsForAccountParams): Promise<BatchInfoWithBalance[]> => {
   try {
     if (paginationParams) {
@@ -171,6 +178,7 @@ export const getEcocreditsForAccount = async ({
         batches,
         sanityCreditClassData,
         dataClient,
+        ecocreditClient,
       });
       return [
         ...loadedCredits.slice(0, offset),
@@ -183,6 +191,7 @@ export const getEcocreditsForAccount = async ({
         batches,
         sanityCreditClassData,
         dataClient,
+        ecocreditClient,
       });
     }
   } catch (err) {
@@ -220,6 +229,7 @@ type GetBatchesWithSupplyParams = {
   params?: URLSearchParams;
   withAllData?: boolean;
   dataClient?: DataQueryClientImpl;
+  ecocreditClient?: EcocreditQueryClientImpl;
 };
 
 export const getBatchesWithSupply = async ({
@@ -227,6 +237,7 @@ export const getBatchesWithSupply = async ({
   params,
   withAllData = true,
   dataClient,
+  ecocreditClient,
 }: GetBatchesWithSupplyParams): Promise<{
   data: BatchInfoWithSupply[];
 }> => {
@@ -235,6 +246,7 @@ export const getBatchesWithSupply = async ({
     batches,
     withAllData,
     dataClient,
+    ecocreditClient,
   });
   return { data: batchesWithData };
 };
@@ -242,6 +254,7 @@ export const getBatchesWithSupply = async ({
 export const getBatchesByProjectWithSupply = async (
   projectId?: string | null,
   dataClient?: DataQueryClientImpl,
+  ecocreditClient?: EcocreditQueryClientImpl,
 ): Promise<{
   data: BatchInfoWithSupply[];
 }> => {
@@ -251,7 +264,11 @@ export const getBatchesByProjectWithSupply = async (
     client,
     request: { projectId },
   });
-  const batchesWithData = await addDataToBatches({ batches: batches?.batches });
+  const batchesWithData = await addDataToBatches({
+    batches: batches?.batches,
+    dataClient,
+    ecocreditClient,
+  });
   return { data: batchesWithData };
 };
 
@@ -259,27 +276,30 @@ const getClassProjectForBatch = async (
   batch: BatchInfo,
   sanityCreditClassData?: AllCreditClassQuery,
   dataClient?: DataQueryClientImpl,
+  ecocreditClient?: EcocreditQueryClientImpl,
   reactQueryClient?: QueryClient,
 ): Promise<ClassProjectInfo> => {
-  let metadata, projectData;
+  let projectMetadata, projectData, classData, classMetadata;
   const { projectId } = batch;
   if (reactQueryClient) {
     projectData = await getFromCacheOrFetch({
       query: getProjectQuery({
         request: { projectId },
+        client: ecocreditClient,
+        enabled: !!ecocreditClient,
       }),
       reactQueryClient,
     });
   } else {
     // TODO Keeping the old path for retro-compatibility of the function.
     // Once all paths use the react-query one we will be able to remove it.
-    projectData = await getProject(projectId);
+    projectData = await getProject(projectId, ecocreditClient);
   }
   const project = projectData?.project;
   if (project?.metadata.length) {
     try {
       if (reactQueryClient) {
-        metadata = await getFromCacheOrFetch({
+        projectMetadata = await getFromCacheOrFetch({
           query: getMetadataQuery({
             iri: project.metadata,
             dataClient,
@@ -290,22 +310,54 @@ const getClassProjectForBatch = async (
       } else {
         // TODO Keeping the old path for retro-compatibility of the function.
         // Once all paths use the react-query one we will be able to remove it.
-        metadata = await getMetadata(project.metadata, dataClient);
+        projectMetadata = await getMetadata(project.metadata, dataClient);
       }
     } catch (error) {}
   }
 
-  // TODO should we use credit class metadata instead of Sanity eventually?
-  // https://github.com/regen-network/regen-registry/issues/1428
   const creditClassSanity = findSanityCreditClass({
     sanityCreditClassData,
     creditClassIdOrUrl: project?.classId ?? '',
   });
 
+  const classId = project?.classId;
+  if (reactQueryClient) {
+    classData = await getFromCacheOrFetch({
+      query: getClassQuery({
+        request: { classId },
+        client: ecocreditClient,
+      }),
+      reactQueryClient,
+    });
+  } else {
+    // TODO Keeping the old path for retro-compatibility of the function.
+    // Once all paths use the react-query one we will be able to remove it.
+    classData = await ecocreditClient?.Class({ classId });
+  }
+  const creditClass = classData?.class;
+  if (creditClass?.metadata.length) {
+    try {
+      if (reactQueryClient) {
+        classMetadata = await getFromCacheOrFetch({
+          query: getMetadataQuery({
+            iri: creditClass.metadata,
+            dataClient,
+            enabled: !!dataClient,
+          }),
+          reactQueryClient,
+        });
+      } else {
+        // TODO Keeping the old path for retro-compatibility of the function.
+        // Once all paths use the react-query one we will be able to remove it.
+        classMetadata = await getMetadata(creditClass.metadata, dataClient);
+      }
+    } catch (error) {}
+  }
+
   return {
     classId: project?.classId,
-    className: creditClassSanity?.nameRaw,
-    projectName: metadata?.['schema:name'] ?? batch.projectId,
+    className: classMetadata?.['schema:name'] ?? creditClassSanity?.nameRaw,
+    projectName: projectMetadata?.['schema:name'] ?? batch.projectId,
     projectLocation: project?.jurisdiction,
   };
 };
@@ -315,6 +367,7 @@ export type AddDataToBatchesParams = {
   sanityCreditClassData?: AllCreditClassQuery;
   withAllData?: boolean;
   dataClient?: DataQueryClientImpl;
+  ecocreditClient?: EcocreditQueryClientImpl;
   reactQueryClient?: QueryClient;
 };
 
@@ -324,6 +377,7 @@ export const addDataToBatches = async ({
   sanityCreditClassData,
   withAllData = true,
   dataClient,
+  ecocreditClient,
   reactQueryClient,
 }: AddDataToBatchesParams): Promise<BatchInfoWithSupply[]> => {
   try {
@@ -367,6 +421,7 @@ export const addDataToBatches = async ({
             batch,
             sanityCreditClassData,
             dataClient,
+            ecocreditClient,
             reactQueryClient,
           );
         }
@@ -528,8 +583,9 @@ export const queryProjectsByClass = async ({
 
 export const getProject = async (
   projectId: string,
+  ecocreditClient?: EcocreditQueryClientImpl,
 ): Promise<QueryProjectResponse> => {
-  const client = await getQueryClient();
+  const client = ecocreditClient ?? (await getQueryClient());
   try {
     return client.Project({ projectId });
   } catch (err) {

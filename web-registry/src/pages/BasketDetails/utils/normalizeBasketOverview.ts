@@ -17,7 +17,7 @@ type Params = {
   basketDenomMetadata?: QueryDenomMetadataResponse | null;
   basketBalancesData?: QueryBasketBalancesResponse | null;
   basketClassResults?: UseQueryResult<QueryClassResponse | null>[];
-  basketMetadatas?: UseQueryResult<any>[];
+  basketsMetadata?: UseQueryResult<any>[];
 };
 
 export const normalizeBasketOverview = ({
@@ -25,11 +25,11 @@ export const normalizeBasketOverview = ({
   basketClassResults,
   basketData,
   basketDenomMetadata,
-  basketMetadatas,
+  basketsMetadata,
 }: Params): BasketOverviewProps => {
   const allowedCreditClasses = normalizeAllowedCreditClasses({
     basketClassResults,
-    basketMetadatas,
+    basketsMetadata,
   });
 
   const totalAmount = basketBalancesData?.balancesInfo.reduce(

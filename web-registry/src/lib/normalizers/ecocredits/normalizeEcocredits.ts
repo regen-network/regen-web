@@ -6,6 +6,7 @@ import {
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
+import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 
 import { normalizeClassProjectForBatch } from '../classProjectForBatch/normalizeClassProjectForBatch';
 import { EMPTY_CLASS_PROJECT_INFO } from '../classProjectForBatch/normalizeClassProjectForBatch.constants';
@@ -17,29 +18,33 @@ import {
 interface Params {
   balance?: BatchBalanceInfo;
   project?: ProjectInfo | null;
-  metadata?: any | null;
+  projectMetadata?: any | null;
   sanityCreditClassData?: AllCreditClassQuery;
+  creditClassMetadata?: CreditClassMetadataLD;
   batch?: BatchInfo | null;
 }
 
 export const normalizeEcocredits = ({
   balance,
   batch,
-  metadata,
+  projectMetadata,
+  creditClassMetadata,
   project,
   sanityCreditClassData,
 }: Params): BatchInfoWithBalance => {
   const hasAllClassInfos =
-    batch !== undefined &&
-    metadata !== undefined &&
-    project !== undefined &&
-    !!sanityCreditClassData;
+    (batch !== undefined &&
+      projectMetadata !== undefined &&
+      project !== undefined &&
+      !!sanityCreditClassData) ||
+    creditClassMetadata !== undefined;
 
   const classProjectInfo = hasAllClassInfos
     ? normalizeClassProjectForBatch({
         batch,
         sanityCreditClassData,
-        metadata,
+        creditClassMetadata,
+        projectMetadata,
         project,
       })
     : EMPTY_CLASS_PROJECT_INFO;

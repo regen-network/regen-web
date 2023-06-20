@@ -59,7 +59,7 @@ export const useFetchBasketOverview = ({
   });
 
   // Metadatas
-  const basketMetadatas = useQueries({
+  const basketsMetadata = useQueries({
     queries: basketClassResults.map(basketClass =>
       getMetadataQuery({
         iri: basketClass.data?.class?.metadata,
@@ -75,7 +75,7 @@ export const useFetchBasketOverview = ({
     basketClassResults,
     basketData,
     basketDenomMetadata,
-    basketMetadatas,
+    basketsMetadata,
   });
 
   return basketOverviewData;

@@ -5,8 +5,10 @@ import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCar
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import {
   AnchoredProjectMetadataBaseLD,
+  CreditClassMetadataLD,
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
+import { getSanityImgSrc } from 'lib/imgSrc';
 
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
@@ -17,27 +19,33 @@ import DefaultProject from 'assets/default-project.jpg';
 
 interface Params {
   projects?: ProjectInfo[] | null;
-  metadatas?: (AnchoredProjectMetadataBaseLD | undefined)[];
-  projectPageMetadatas?: ProjectPageMetadataLD[];
+  projectsMetadata?: (AnchoredProjectMetadataBaseLD | undefined)[];
+  projectPagesMetadata?: ProjectPageMetadataLD[];
+  classesMetadata?: (CreditClassMetadataLD | undefined)[];
   sanityCreditClassData?: AllCreditClassQuery;
 }
 
 export const normalizeProjectsWithCreditClass = ({
-  metadatas,
-  projectPageMetadatas,
+  projectsMetadata,
+  projectPagesMetadata,
+  classesMetadata,
   projects,
   sanityCreditClassData,
 }: Params): ProjectCardProps[] =>
   projects?.map((project, index) => {
-    const metadata = metadatas?.[index];
-    const projectPageMetadata = projectPageMetadatas?.[index];
-    const hasAllClassInfos = metadata !== undefined && !!sanityCreditClassData;
+    const projectMetadata = projectsMetadata?.[index];
+    const creditClassMetadata = classesMetadata?.[index];
+    const projectPageMetadata = projectPagesMetadata?.[index];
+    const hasAllClassInfos =
+      (projectMetadata !== undefined && !!sanityCreditClassData) ||
+      creditClassMetadata !== undefined;
 
     const classProjectInfo = hasAllClassInfos
       ? normalizeClassProjectForBatch({
           batch: null,
           sanityCreditClassData,
-          metadata,
+          projectMetadata,
+          creditClassMetadata,
           project,
         })
       : EMPTY_CLASS_PROJECT_INFO;
@@ -47,24 +55,28 @@ export const normalizeProjectsWithCreditClass = ({
       creditClassIdOrUrl: project?.classId ?? '',
     });
     const creditClassImage =
-      creditClass?.image?.image?.asset?.url ?? creditClass?.image?.imageHref;
+      creditClassMetadata?.['schema:image'] ||
+      getSanityImgSrc(creditClass?.image);
 
     return {
       ...project,
       id: project.id,
-      name: metadata?.['schema:name'] ?? '',
+      name: projectMetadata?.['schema:name'] ?? '',
       imgSrc:
         projectPageMetadata?.['regen:previewPhoto']?.['schema:url'] ??
         creditClassImage ??
         DefaultProject,
-      place: metadata?.['schema:location']?.place_name ?? '',
-      area: metadata?.['regen:projectSize']?.['qudt:numericValue'] ?? 0,
-      areaUnit: metadata?.['regen:projectSize']?.['qudt:unit'] || '',
+      place: projectMetadata?.['schema:location']?.place_name ?? '',
+      area: projectMetadata?.['regen:projectSize']?.['qudt:numericValue'] ?? 0,
+      areaUnit: projectMetadata?.['regen:projectSize']?.['qudt:unit'] || '',
       registry: {
         name: '',
-        nameRaw: classProjectInfo?.className ?? '',
+        nameRaw:
+          (creditClassMetadata?.['schema:name'] ||
+            classProjectInfo?.className) ??
+          '',
         type: 'USER',
-        image: classProjectInfo?.icon,
+        image: '/svg/class-default.svg',
       },
     };
   }) ?? [];

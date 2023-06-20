@@ -10,6 +10,7 @@ export const getAddDataToBatchesQuery = ({
   sanityCreditClassData,
   reactQueryClient,
   dataClient,
+  ecocreditClient,
   ...params
 }: ReactQueryAddDataToBatchesParams): ReactQueryAddDataToBatchesResponse => ({
   queryKey: ['addDataToBatches', batches?.map(batch => batch.denom).join(',')],
@@ -21,6 +22,7 @@ export const getAddDataToBatchesQuery = ({
       sanityCreditClassData,
       reactQueryClient,
       dataClient,
+      ecocreditClient,
     });
 
     return batchesWithSupply;

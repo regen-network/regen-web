@@ -1,7 +1,7 @@
 import { BlockContent } from 'web-components/lib/components/block-content';
 import CreditClassCard from 'web-components/lib/components/cards/CreditClassCard';
 
-import { AllCreditClassQuery, CreditType } from 'generated/sanity-graphql';
+import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { getSanityImgSrc } from 'lib/imgSrc';
 

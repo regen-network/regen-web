@@ -52,6 +52,7 @@ function ProjectTopSection({
   projectMetadata,
   projectPageMetadata,
   creditClassSanity,
+  sanityCreditTypeData,
   geojson,
   isGISFile,
   onChainProjectId,
@@ -119,6 +120,11 @@ function ProjectTopSection({
       enabled:
         !!ecocreditClient && !!creditClassOnChain?.class?.creditTypeAbbrev,
     }),
+  );
+
+  const creditTypeSanity = sanityCreditTypeData?.allCreditType?.find(
+    creditType =>
+      creditType.name?.toLowerCase() === creditTypeData?.creditType?.name,
   );
 
   const displayName =
@@ -200,6 +206,7 @@ function ProjectTopSection({
             creditClassMetadata={creditClassMetadata as CreditClassMetadataLD}
             onChainCreditClassId={onChainCreditClassId}
             creditTypeName={creditTypeData?.creditType?.name}
+            creditTypeImage={creditTypeSanity?.image?.asset?.url}
             generationMethod={generationMethod}
             methodology={methodology}
           />

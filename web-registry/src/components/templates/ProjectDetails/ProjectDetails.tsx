@@ -20,6 +20,7 @@ import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMet
 import { getProjectByHandleQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByHandleQuery/getProjectByHandleQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
+import { getAllCreditTypeQuery } from 'lib/queries/react-query/sanity/getAllCreditTypeQuery/getAllCreditTypeQuery';
 import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery';
 import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
@@ -87,6 +88,9 @@ function ProjectDetails(): JSX.Element {
 
   const { data: sanityCreditClassData } = useQuery(
     getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+  );
+  const { data: sanityCreditTypeData } = useQuery(
+    getAllCreditTypeQuery({ sanityClient, enabled: !!sanityClient }),
   );
 
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
@@ -293,6 +297,7 @@ function ProjectDetails(): JSX.Element {
         projectMetadata={projectMetadata}
         projectPageMetadata={offChainProjectMetadata}
         creditClassSanity={creditClassSanity}
+        sanityCreditTypeData={sanityCreditTypeData}
         geojson={geojson}
         isGISFile={isGISFile}
         onChainProjectId={onChainProjectId}

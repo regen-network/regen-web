@@ -44,7 +44,7 @@ export const CommunityFilter = ({
             <br />
             To create your own credits,{' '}
             <Link
-              href="https://library.regen.network/v/regen-registry-program-guide/"
+              href="https://docs.regen.network/tutorials/"
               target="_blank"
               sx={{ color: 'secondary.main', fontWeight: 700 }}
             >

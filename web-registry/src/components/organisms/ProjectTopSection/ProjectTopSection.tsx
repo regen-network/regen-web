@@ -1,9 +1,4 @@
 import LazyLoad from 'react-lazyload';
-import {
-  ApolloClient,
-  NormalizedCacheObject,
-  useApolloClient,
-} from '@apollo/client';
 import { Box, Grid, Skeleton } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 
@@ -24,11 +19,8 @@ import { client as sanityClient } from 'lib/clients/sanity';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
-import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
-import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 
-import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
@@ -43,7 +35,6 @@ import {
 } from './ProjectTopSection.styles';
 import { ProjectTopSectionProps } from './ProjectTopSection.types';
 import {
-  getDisplayAdmin,
   getOffsetGenerationMethod,
   getProjectActivityIconsMapping,
   getProjectEcosystemIconsMapping,
@@ -64,10 +55,6 @@ function ProjectTopSection({
   isGISFile,
   onChainProjectId,
   loading,
-  landOwner,
-  landSteward,
-  projectDeveloper,
-  projectVerifier,
   projectWithOrderData,
   soldOutProjectsIds,
   batchData,
@@ -76,20 +63,8 @@ function ProjectTopSection({
   const { classes } = useProjectTopSectionStyles();
   const { ecocreditClient, dataClient } = useLedger();
 
-  const graphqlClient =
-    useApolloClient() as ApolloClient<NormalizedCacheObject>;
-
-  const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
-  const { data: partyByAddr } = useQuery(
-    getPartyByAddrQuery({
-      client: graphqlClient,
-      addr: onChainProject?.admin ?? '',
-      enabled: !!onChainProject?.admin && !!graphqlClient && !!csrfData,
-    }),
-  );
-  const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
-
-  const { creditClass } = parseOffChainProject(offChainProject);
+  const { creditClass, offsetGenerationMethod } =
+    parseOffChainProject(offChainProject);
 
   const { projectName, area, areaUnit, placeName, projectMethodology } =
     parseProjectMetadata(projectMetadata);
@@ -273,15 +248,6 @@ function ProjectTopSection({
         </Grid>
         <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
           <ProjectTopCard
-            projectAdmin={getDisplayAdmin(
-              onChainProject?.admin,
-              party,
-              defaultAvatar,
-            )}
-            projectDeveloper={projectDeveloper}
-            projectVerifier={projectVerifier}
-            landSteward={landSteward}
-            landOwner={landOwner}
             activities={activityTags}
             ecosystems={ecosystemTags}
           />

@@ -4,8 +4,6 @@ import { makeStyles } from 'tss-react/mui';
 import { ProjectTagType } from '../molecules/ProjectTag/ProjectTag.types';
 import { ProjectTags } from '../organisms/ProjectTags/ProjectTags';
 import { Title } from '../typography';
-import { User } from '../user/UserInfo';
-import UserInfoWithTitle from '../user/UserInfoWithTitle';
 import Card from './Card';
 
 export interface SDG {
@@ -16,15 +14,7 @@ export interface SDG {
 interface ProjectTopCardProps {
   classes?: {
     root?: string;
-    userInfo?: string;
   };
-  projectAdmin?: User;
-  projectDeveloper?: User;
-  projectVerifier?: User;
-  landSteward?: User;
-  landOwner?: User;
-  issuer?: User;
-  reseller?: User;
   sdgs?: SDG[];
   activities?: ProjectTagType[];
   ecosystems?: ProjectTagType[];
@@ -45,11 +35,6 @@ const useStyles = makeStyles()(theme => ({
       marginBottom: 0,
     },
   },
-  separator: {
-    border: `1px solid ${theme.palette.grey[100]}`,
-    marginTop: theme.spacing(7),
-    marginBottom: theme.spacing(7),
-  },
   image: {
     borderRadius: '2px',
     width: '100%',
@@ -60,14 +45,6 @@ const useStyles = makeStyles()(theme => ({
     },
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(21.25),
-    },
-  },
-  userInfo: {
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(12),
-    },
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(15),
     },
   },
   sdgGridItem: {
@@ -104,23 +81,10 @@ const useStyles = makeStyles()(theme => ({
       },
     },
   },
-  issuer: {
-    '& img': {
-      width: '100%',
-      height: '100%',
-    },
-  },
 }));
 
 export default function ProjectTopCard({
   classes,
-  projectAdmin,
-  projectDeveloper,
-  projectVerifier,
-  landSteward,
-  landOwner,
-  issuer,
-  reseller,
   sdgs,
   activities,
   ecosystems,
@@ -163,52 +127,6 @@ export default function ProjectTopCard({
             mb: 5,
           }}
         />
-      )}
-      {projectAdmin && (
-        <div
-          className={cx(
-            styles.issuer,
-            styles.userInfo,
-            classes && classes.userInfo,
-          )}
-        >
-          <UserInfoWithTitle user={projectAdmin} title="admin" />
-        </div>
-      )}
-      {projectDeveloper && (
-        <div className={cx(styles.userInfo, classes && classes.userInfo)}>
-          <UserInfoWithTitle
-            user={projectDeveloper}
-            title="project developer"
-          />
-        </div>
-      )}
-      {projectVerifier && (
-        <div className={cx(styles.userInfo, classes && classes.userInfo)}>
-          <UserInfoWithTitle user={projectVerifier} title="verifier" />
-        </div>
-      )}
-      {landSteward && (
-        <div className={cx(styles.userInfo, classes && classes.userInfo)}>
-          {/* <hr className={styles.separator} /> */}
-          <UserInfoWithTitle user={landSteward} title="land steward" />
-        </div>
-      )}
-      {landOwner && (
-        <div className={cx(styles.userInfo, classes && classes.userInfo)}>
-          {/* <hr className={styles.separator} /> */}
-          <UserInfoWithTitle user={landOwner} title="land owner" />
-        </div>
-      )}
-      {issuer && (
-        <div className={styles.issuer}>
-          <UserInfoWithTitle user={issuer} title="issuer" />
-        </div>
-      )}
-      {reseller && (
-        <div className={styles.issuer}>
-          <UserInfoWithTitle user={reseller} title="reseller" />
-        </div>
       )}
     </Card>
   );

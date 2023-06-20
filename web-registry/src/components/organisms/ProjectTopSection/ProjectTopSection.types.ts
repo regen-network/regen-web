@@ -31,10 +31,6 @@ export type ProjectTopSectionProps = {
   geojson?: any;
   isGISFile?: boolean;
   onChainProjectId?: string;
-  landSteward?: Party;
-  landOwner?: Party;
-  projectDeveloper?: Party;
-  projectVerifier?: Party;
   loading?: boolean;
   soldOutProjectsIds: string[];
   projectWithOrderData: ProjectWithOrderData;

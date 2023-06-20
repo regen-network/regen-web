@@ -1,11 +1,4 @@
-import { User } from 'web-components/lib/components/user/UserInfo';
-import { truncate } from 'web-components/lib/utils/truncate';
-
-import {
-  Maybe,
-  PartyFieldsFragment,
-  ProjectFieldsFragment,
-} from 'generated/graphql';
+import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import {
   AllProjectActivityQuery,
   AllProjectEcosystemQuery,
@@ -22,31 +15,6 @@ import { ApprovedMethodologies } from 'lib/db/types/json-ld/methodology';
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
 import { SEE_ALL_METHODOLOGIES } from './ProjectTopSection.constants';
-
-export const getDisplayAdmin = (
-  address?: string,
-  party?: Maybe<PartyFieldsFragment>,
-  defaultAvatar?: string,
-): User | undefined => {
-  if (!address) return;
-  if (!!party) {
-    const name = party.name;
-    const type = party.type;
-    return {
-      name: name ? name : truncate(address),
-      type: type ? type : 'USER',
-      image: party.image ? party.image : defaultAvatar,
-      description: party.description,
-      link: `/ecocredits/accounts/${address}/portfolio`,
-    };
-  }
-  return {
-    name: truncate(address),
-    type: 'USER',
-    image: defaultAvatar,
-    link: `/ecocredits/accounts/${address}/portfolio`,
-  };
-};
 
 /* parseMethodologies */
 

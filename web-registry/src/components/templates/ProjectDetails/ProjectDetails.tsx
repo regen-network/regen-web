@@ -309,8 +309,6 @@ function ProjectDetails(): JSX.Element {
         geojson={geojson}
         isGISFile={isGISFile}
         onChainProjectId={onChainProjectId}
-        projectDeveloper={projectDeveloper}
-        projectVerifier={projectVerifier}
         loading={loadingDb || loadingAnchoredMetadata}
         soldOutProjectsIds={soldOutProjectsIds}
         projectWithOrderData={projectsWithOrderData[0]}
@@ -326,6 +324,9 @@ function ProjectDetails(): JSX.Element {
       <ProjectDetailsSection
         header={sanityProjectPage?.projectDetailsSection}
         credibilityCards={sanityProjectData?.allProject?.[0]?.credibilityCards}
+        projectDeveloper={projectDeveloper}
+        projectVerifier={projectVerifier}
+        adminAddr={onChainProject?.admin}
       />
 
       <ProjectStorySection projectPageMetadata={offChainProjectMetadata} />

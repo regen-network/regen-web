@@ -33,31 +33,7 @@ export default {
   component: Card,
 };
 
-const projectDeveloper: User = {
-  name: 'Odonata',
-  type: 'USER',
-  location: 'South Melbourne',
-  image:
-    'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
-  description:
-    'Odonata is a not-for-profit entity supporting biodiversity impact solutions.',
-};
-
-const landSteward: User = {
-  name: 'Ngarrindjeri Tribe',
-  type: 'USER',
-  location: 'Southern Australia',
-  image: '/tribe.png',
-  description:
-    'The Ngarrindjeri culture is centered around the lower lakes of the Murray River.',
-};
-
-export const projectTopCard = (): JSX.Element => (
-  <ProjectTopCard
-    projectDeveloper={projectDeveloper}
-    landSteward={landSteward}
-  />
-);
+export const projectTopCard = (): JSX.Element => <ProjectTopCard />;
 
 export const impactCard = (): JSX.Element => (
   <ImpactCard

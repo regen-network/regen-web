@@ -1,11 +1,9 @@
-import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import {
   AnchoredProjectMetadataBaseLD,
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
 
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
-import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import DefaultProject from 'assets/default-project.jpg';
 
@@ -13,23 +11,18 @@ interface NormalizeProjectsWithOrderDataParams {
   projectsWithOrderData?: ProjectWithOrderData[];
   metadatas?: (AnchoredProjectMetadataBaseLD | undefined)[];
   projectPageMetadatas?: ProjectPageMetadataLD[];
-  sanityCreditClassData?: AllCreditClassQuery;
 }
 
 export const normalizeProjectsWithMetadata = ({
   projectsWithOrderData,
   metadatas,
   projectPageMetadatas,
-  sanityCreditClassData,
 }: NormalizeProjectsWithOrderDataParams): ProjectWithOrderData[] => {
   const projectsWithMetadata = projectsWithOrderData?.map(
     (project: ProjectWithOrderData, index) => {
       const metadata = metadatas?.[index];
       const projectPageMetadata = projectPageMetadatas?.[index];
-      const creditClass = findSanityCreditClass({
-        sanityCreditClassData,
-        creditClassIdOrUrl: project.creditClassId ?? '',
-      });
+      const creditClass = project.sanityCreditClassData;
       const creditClassImage =
         creditClass?.image?.image?.asset?.url ?? creditClass?.image?.imageHref;
 

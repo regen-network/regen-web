@@ -30,6 +30,7 @@ export interface ProjectsWithOrdersProps {
   offset?: number;
   metadata?: boolean; // to discard projects without metadata prop
   random?: boolean; // to shuffle the projects (along with limit allows a random subselection)
+  useCommunityProjects?: boolean; // to show community projects
   projectId?: string; // to filter by project
   skippedProjectId?: string; // to discard a specific project
   classId?: string; // to filter by class
@@ -44,6 +45,7 @@ export function useProjectsWithOrders({
   offset = 0,
   metadata = false,
   random = false,
+  useCommunityProjects = false,
   skippedProjectId,
   classId,
   sort = '',
@@ -125,6 +127,7 @@ export function useProjectsWithOrders({
     random,
     selectedProjects,
   });
+
   const projectsWithOrderData = normalizeProjectsWithOrderData({
     projects: lastRandomProjects ?? selectedProjects,
     sellOrders,
@@ -135,12 +138,18 @@ export function useProjectsWithOrders({
       usdcPrice: simplePrice?.data?.[GECKO_USDC_ID]?.usd,
     },
     userAddress: wallet?.address,
+    sanityCreditClassData: creditClassData,
   });
 
-  const sortedProjects = sortProjects(projectsWithOrderData, sort).slice(
-    offset,
-    limit ? offset + limit : undefined,
+  // Exclude community projects based on sanity credit class data
+  const projectsWithOrderDataFiltered = projectsWithOrderData.filter(
+    project => !!project.sanityCreditClassData || useCommunityProjects,
   );
+
+  const sortedProjects = sortProjects(
+    projectsWithOrderDataFiltered,
+    sort,
+  ).slice(offset, limit ? offset + limit : undefined);
 
   /* Metadata queries */
 
@@ -173,12 +182,11 @@ export function useProjectsWithOrders({
     projectsWithOrderData: sortedProjects,
     metadatas: metadatas as (AnchoredProjectMetadataLD | undefined)[],
     projectPageMetadatas,
-    sanityCreditClassData: creditClassData,
   });
 
   return {
     projectsWithOrderData: projectsWithMetadata,
-    projectsCount: selectedProjects?.length,
+    projectsCount: projectsWithOrderDataFiltered?.length,
     loading: isLoadingProjects || isLoadingProjectsByClass || isLoadingProject,
   };
 }

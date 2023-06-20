@@ -23,6 +23,7 @@ import { GettingStartedResourcesSection } from 'components/molecules';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 
 import { useProjects } from './hooks/useProjects';
+import { CommunityFilter } from './Projects.CommunityFilter';
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
@@ -40,6 +41,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { track } = useTracker();
   const location = useLocation();
+  const [useCommunityProjects, setUseCommunityProjects] = useState(false);
 
   // Page index starts at 1 for route
   // Page index starts at 0 for logic
@@ -63,10 +65,12 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [selectedProject, setSelectedProject] =
     useState<ProjectWithOrderData | null>(null);
 
-  const { projects, projectsCount, pagesCount, loading } = useProjects({
-    sort,
-    offset: page * PROJECTS_PER_PAGE,
-  });
+  const { projects, projectsCount, pagesCount, loading, hasCommunityProjects } =
+    useProjects({
+      sort,
+      offset: page * PROJECTS_PER_PAGE,
+      useCommunityProjects,
+    });
 
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
 
@@ -108,28 +112,51 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
               justifyContent="space-between"
               alignItems="center"
               flex={1}
-              sx={{ pb: 5 }}
+              sx={{
+                pb: 5,
+                flexWrap: { xs: 'wrap', md: 'nowrap' },
+              }}
             >
-              <Flex>
+              <Flex order={0} flexGrow={1}>
                 <Subtitle size="lg">Projects</Subtitle>
                 <Body size="lg"> ({projectsCount})</Body>
               </Flex>
-              <Flex
-                alignItems="center"
-                sx={{ width: { xs: '60%', md: 'auto' } }}
-              >
-                <Box
+
+              {hasCommunityProjects && (
+                <CommunityFilter
+                  setUseCommunityProjects={setUseCommunityProjects}
                   sx={{
-                    width: [0, 0, 63],
+                    mt: { xs: 6.25, md: 0 },
+                    mr: { xs: 0, md: 7.5 },
+                    width: { xs: '100%', md: 'auto' },
+                    order: { xs: 2, md: 1 },
+                  }}
+                />
+              )}
+              <Flex
+                sx={{
+                  order: { xs: 1, md: 2 },
+                  alignItems: 'center',
+                }}
+              >
+                <Body
+                  size="xs"
+                  sx={{
+                    width: [0, 0, 0, 43],
                     visibility: { xs: 'hidden', md: 'visible' },
+                    whiteSpace: 'nowrap',
+                    mr: 2,
+                    color: 'info.dark',
+                    fontWeight: 700,
                   }}
                 >
-                  <Body size="xs">Sort by:</Body>
-                </Box>
+                  Sort by:
+                </Body>
                 <SelectTextFieldBase
                   options={sortOptions}
                   defaultStyle={false}
                   onChange={handleSort}
+                  sx={{ width: 'fit-content' }}
                 />
               </Flex>
             </Flex>

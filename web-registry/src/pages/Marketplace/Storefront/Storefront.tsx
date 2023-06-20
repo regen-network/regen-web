@@ -186,6 +186,8 @@ export const Storefront = (): JSX.Element => {
     disableAutoRetire,
   } = normalizedSellOrders[selectedSellOrder ?? 0] ?? {};
 
+  const isCommunityCredit = project?.classId === project?.classIdOrName;
+
   const initialValues = useMemo(
     () => ({
       creditCount: 1,
@@ -316,6 +318,7 @@ export const Storefront = (): JSX.Element => {
           id: project?.id ?? '',
         }}
         initialValues={initialValues}
+        isCommunityCredit={isCommunityCredit}
       />
       <ProcessingModal
         open={isProcessingModalOpen}

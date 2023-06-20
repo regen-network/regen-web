@@ -37,6 +37,7 @@ const CreditClassDetailsSimple: React.FC<
   const displayName = getCreditClassDisplayName(onChainClass.id, metadata);
   const image = content?.image;
   const imageSrc = metadata?.['schema:image'] || getSanityImgSrc(image);
+
   const { isKeplrMobileWeb } = useWallet();
 
   return (
@@ -62,7 +63,7 @@ const CreditClassDetailsSimple: React.FC<
             }}
           >
             <Box sx={{ mb: 6 }}>
-              {image && (
+              {imageSrc && (
                 <Box
                   sx={{
                     mb: { sm: 12.5 },
@@ -71,7 +72,7 @@ const CreditClassDetailsSimple: React.FC<
                 >
                   <img
                     className={styles.image}
-                    alt={image.imageAlt || imageSrc}
+                    alt={image?.imageAlt || imageSrc || displayName}
                     src={imageSrc}
                   />
                 </Box>

@@ -1,6 +1,8 @@
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 
+import { ProjectPageMetadata } from 'components/molecules';
 import { CreditBatches } from 'components/organisms';
+import { isAnchoredProjectMetadata } from 'components/organisms/ProjectTopSection/ProjectTopSection.utils';
 
 import { ProjectDetailsDocumentationTable } from './documentation/ProjectDetails.Documentation';
 import { ProjectDetailsTableTabsProps } from './ProjectDetails.TableTabs.types';
@@ -12,6 +14,8 @@ export const getProjectDetailsTabs = ({
   setPaginationParams,
   offChainProject,
   batchData,
+  onChainProjectId,
+  projectMetadata,
 }: ProjectDetailsTableTabsProps): IconTabProps[] =>
   [
     {
@@ -38,5 +42,19 @@ export const getProjectDetailsTabs = ({
         />
       ),
       hidden: (batchData?.batches?.length ?? 0) === 0,
+    },
+    {
+      label: 'Additional info',
+      content: (
+        <>
+          {isAnchoredProjectMetadata(projectMetadata, onChainProjectId) && (
+            <ProjectPageMetadata
+              metadata={projectMetadata}
+              onChainProjectId={onChainProjectId}
+            />
+          )}
+        </>
+      ),
+      hidden: !isAnchoredProjectMetadata(projectMetadata, onChainProjectId),
     },
   ].filter(tab => tab.hidden !== true);

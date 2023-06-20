@@ -35,8 +35,7 @@ import {
   MAPBOX_TOKEN,
 } from 'components/templates/ProjectDetails/ProjectDetails.config';
 
-import { ProjectTopLink } from '../../atoms';
-import { ProjectBatchTotals, ProjectPageMetadata } from '../../molecules';
+import { ProjectBatchTotals } from '../../molecules';
 import { ProjectTopSectionCreditClassCard } from './ProjectTopSection.CreditClassCard';
 import {
   ProjectTopSectionQuoteMark,
@@ -48,7 +47,6 @@ import {
   getOffsetGenerationMethod,
   getProjectActivityIconsMapping,
   getProjectEcosystemIconsMapping,
-  isAnchoredProjectMetadata,
   parseMethodologies,
   parseOffChainProject,
   parseProjectMetadata,
@@ -91,8 +89,7 @@ function ProjectTopSection({
   );
   const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
 
-  const { creditClass, offsetGenerationMethod } =
-    parseOffChainProject(offChainProject);
+  const { creditClass } = parseOffChainProject(offChainProject);
 
   const { projectName, area, areaUnit, placeName, projectMethodology } =
     parseProjectMetadata(projectMetadata);
@@ -197,26 +194,6 @@ function ProjectTopSection({
               area={Number(area)}
               areaUnit={areaUnit}
             />
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                mt: 2.5,
-              }}
-            >
-              {onChainProjectId ? (
-                projectName && (
-                  <Label sx={{ pt: 1.75 }} size="xs" color="info.main">
-                    project id: {onChainProjectId}
-                  </Label>
-                )
-              ) : (
-                <ProjectTopLink
-                  label="offset generation method"
-                  name={offsetGenerationMethod?.[0]}
-                />
-              )}
-            </Box>
           </Box>
           {/* Used to prevent layout shift */}
           {(!offChainProject ||
@@ -266,9 +243,6 @@ function ProjectTopSection({
               />
             )}
           </Box>
-          {isAnchoredProjectMetadata(projectMetadata, onChainProjectId) && (
-            <ProjectPageMetadata metadata={projectMetadata} />
-          )}
           {quote && (
             <div>
               <Title

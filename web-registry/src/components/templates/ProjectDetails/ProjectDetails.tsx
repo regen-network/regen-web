@@ -348,6 +348,8 @@ function ProjectDetails(): JSX.Element {
           sortedDocuments={sortedDocuments}
           sortCallbacksDocuments={sortCallbacksDocuments}
           offChainProject={offChainProject}
+          projectMetadata={projectMetadata}
+          onChainProjectId={onChainProjectId}
           batchData={{
             batches: batchesWithSupply,
             totals: batchesTotal,

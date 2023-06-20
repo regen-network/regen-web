@@ -22,14 +22,17 @@ const ProjectTags = ({
   sx = [],
 }: Props): JSX.Element => {
   const hasActivities = activities.length > 0;
+  const hasManyActivities = activities.length > 1;
   const hasEcosystems = ecosystems.length > 0;
+  const hasManyEcosystems = ecosystems.length > 1;
+  const hasManyTags = hasManyActivities || hasManyEcosystems;
 
   return (
     <Box
       sx={[
         {
           display: 'flex',
-          flexDirection: { xs: 'column', sm: 'row' },
+          flexDirection: { xs: 'column', sm: hasManyTags ? 'column' : 'row' },
         },
         ...sxToArray(sx),
       ]}
@@ -40,7 +43,7 @@ const ProjectTags = ({
             display: 'flex',
             flexDirection: 'column',
             mr: { sm: 3.25 },
-            mb: { xs: 10, sm: 0 },
+            mb: { xs: 10, sm: hasManyTags ? 10 : 0 },
           }}
         >
           <Label sx={{ fontSize: { xs: 11 }, mb: 2 }}>
@@ -49,7 +52,10 @@ const ProjectTags = ({
           <Box
             sx={{
               display: 'flex',
-              flexDirection: { xs: 'row', sm: 'column' },
+              flexDirection: {
+                xs: 'row',
+                sm: hasManyActivities ? 'row' : 'column',
+              },
               flexWrap: 'wrap',
             }}
           >
@@ -57,7 +63,7 @@ const ProjectTags = ({
               <ProjectTag
                 tag={activity}
                 key={activity?.name}
-                sx={{ mb: 2, mr: { xs: 2, sm: 0 } }}
+                sx={{ mb: 2, mr: { xs: 2, sm: hasManyActivities ? 2 : 0 } }}
               />
             ))}
           </Box>
@@ -69,7 +75,10 @@ const ProjectTags = ({
           <Box
             sx={{
               display: 'flex',
-              flexDirection: { xs: 'row', sm: 'column' },
+              flexDirection: {
+                xs: 'row',
+                sm: hasManyEcosystems ? 'row' : 'column',
+              },
               flexWrap: 'wrap',
             }}
           >
@@ -77,7 +86,7 @@ const ProjectTags = ({
               <ProjectTag
                 tag={ecosystem}
                 key={ecosystem.name}
-                sx={{ mb: 2, mr: { xs: 2, sm: 0 } }}
+                sx={{ mb: 2, mr: { xs: 2, sm: hasManyEcosystems ? 2 : 0 } }}
               />
             ))}
           </Box>

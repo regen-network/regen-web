@@ -49,6 +49,7 @@ import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProjects';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
 import {
+  findSanityCreditClass,
   getDisplayParty,
   getIsOnChainId,
   getProjectGalleryPhotos,
@@ -160,7 +161,9 @@ function ProjectDetails(): JSX.Element {
     offChainProjectMetadata,
     managementActions,
     projectDocs,
+    creditClass,
     creditClassName,
+    creditClassVersion,
     coBenefitsIris,
     primaryImpactIRI,
   } = parseOffChainProject(offChainProject as Maybe<Project>);
@@ -211,6 +214,15 @@ function ProjectDetails(): JSX.Element {
   const { credits, isSellFlowDisabled } = useCreateSellOrderData({
     projectId: projectsWithOrderData[0]?.id,
   });
+
+  const creditClassSanity = findSanityCreditClass({
+    sanityCreditClassData,
+    creditClassIdOrUrl:
+      creditClass?.onChainId ??
+      creditClassVersion?.metadata?.['schema:url'] ??
+      onChainProjectId?.split('-')?.[0], // if no offChain credit class
+  });
+  const isCommunityCredit = !creditClassSanity;
 
   const creditsWithProjectName = useMemo(() => {
     if (!credits || credits.length === 0 || !projectsWithOrderData[0]) return;
@@ -280,7 +292,7 @@ function ProjectDetails(): JSX.Element {
         onChainProject={onChainProject}
         projectMetadata={projectMetadata}
         projectPageMetadata={offChainProjectMetadata}
-        sanityCreditClassData={sanityCreditClassData}
+        creditClassSanity={creditClassSanity}
         geojson={geojson}
         isGISFile={isGISFile}
         onChainProjectId={onChainProjectId}
@@ -350,6 +362,7 @@ function ProjectDetails(): JSX.Element {
 
       <BuySellOrderFlow
         isFlowStarted={isBuyFlowStarted}
+        isCommunityCredit={isCommunityCredit}
         setIsFlowStarted={setIsBuyFlowStarted}
         projects={
           projectsWithOrderData?.length > 0

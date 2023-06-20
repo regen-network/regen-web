@@ -186,6 +186,11 @@ export const Storefront = (): JSX.Element => {
     disableAutoRetire,
   } = normalizedSellOrders[selectedSellOrder ?? 0] ?? {};
 
+  // Community credits are identified by the presence of a credit class in sanity.
+  // If the field classIdOrName is the same as the on chain classId then it means that there is no associated credit class in sanity.
+  // In that case we assume that the credit is a community credit.
+  const isCommunityCredit = project?.classId === project?.classIdOrName;
+
   const initialValues = useMemo(
     () => ({
       creditCount: 1,
@@ -316,6 +321,7 @@ export const Storefront = (): JSX.Element => {
           id: project?.id ?? '',
         }}
         initialValues={initialValues}
+        isCommunityCredit={isCommunityCredit}
       />
       <ProcessingModal
         open={isProcessingModalOpen}

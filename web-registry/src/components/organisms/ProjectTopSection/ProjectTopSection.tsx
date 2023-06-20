@@ -30,7 +30,6 @@ import {
   IMAGE_STORAGE_BASE_URL,
   MAPBOX_TOKEN,
 } from 'components/templates/ProjectDetails/ProjectDetails.config';
-import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { getSanityImgSrc } from '../../../lib/imgSrc';
 import { ProjectTopLink } from '../../atoms';
@@ -55,7 +54,7 @@ function ProjectTopSection({
   onChainProject,
   projectMetadata,
   projectPageMetadata,
-  sanityCreditClassData,
+  creditClassSanity,
   geojson,
   isGISFile,
   onChainProjectId,
@@ -84,7 +83,7 @@ function ProjectTopSection({
   );
   const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
 
-  const { creditClass, creditClassVersion, offsetGenerationMethod } =
+  const { creditClass, offsetGenerationMethod } =
     parseOffChainProject(offChainProject);
 
   const { projectName, area, areaUnit, placeName, projectMethodology } =
@@ -123,14 +122,6 @@ function ProjectTopSection({
         !!ecocreditClient && !!creditClassOnChain?.class?.creditTypeAbbrev,
     }),
   );
-
-  const creditClassSanity = findSanityCreditClass({
-    sanityCreditClassData,
-    creditClassIdOrUrl:
-      creditClass?.onChainId ??
-      creditClassVersion?.metadata?.['schema:url'] ??
-      onChainProjectId?.split('-')?.[0], // if no offChain credit class
-  });
 
   const displayName =
     projectName ?? (onChainProjectId && `Project ${onChainProjectId}`) ?? '';

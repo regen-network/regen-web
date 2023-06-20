@@ -21,7 +21,7 @@ export type ProjectTopSectionProps = {
   onChainProject?: ProjectInfo;
   projectMetadata?: AnchoredProjectMetadataLD | LegacyProjectMetadataLD;
   projectPageMetadata?: ProjectPageMetadataLD;
-  sanityCreditClassData?: AllCreditClassQuery;
+  creditClassSanity?: AllCreditClassQuery['allCreditClass'][0];
   geojson?: any;
   isGISFile?: boolean;
   onChainProjectId?: string;

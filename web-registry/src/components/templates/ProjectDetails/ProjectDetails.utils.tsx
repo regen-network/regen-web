@@ -4,6 +4,7 @@ import { Asset } from 'web-components/lib/components/sliders/ProjectMedia';
 import { Party } from 'web-components/lib/components/user/UserInfo';
 
 import {
+  CreditClass,
   Document,
   Maybe,
   PartyFieldsFragment,
@@ -54,6 +55,7 @@ type ParseOffChainProjectReturn = {
   offChainProjectMetadata?: ProjectPageMetadataLD & LegacyProjectMetadataLD;
   managementActions?: NameImageDescription[];
   projectDocs?: Maybe<Document>[];
+  creditClass?: Maybe<CreditClass>;
   creditClassVersion?: any;
   creditClassName?: string;
   coBenefitsIris?: string[];
@@ -69,6 +71,7 @@ export const parseOffChainProject = (
 
   const projectDocs = project?.documentsByProjectId?.nodes;
 
+  const creditClass = project?.creditClassByCreditClassId;
   const creditClassVersion =
     project?.creditClassByCreditClassId?.creditClassVersionsById?.nodes?.[0];
 
@@ -83,6 +86,7 @@ export const parseOffChainProject = (
     offChainProjectMetadata,
     managementActions,
     projectDocs,
+    creditClass,
     creditClassVersion,
     creditClassName,
     coBenefitsIris,

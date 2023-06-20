@@ -34,6 +34,7 @@ import { useSelectedProject } from './hooks/useSelectedProject';
 
 type Props = {
   isFlowStarted: boolean;
+  isCommunityCredit?: boolean;
   setIsFlowStarted: UseStateSetter<boolean>;
   projects?: ProjectWithOrderData[] | null | undefined;
   track?: Track;
@@ -43,6 +44,7 @@ type Props = {
 export const BuySellOrderFlow = ({
   projects,
   isFlowStarted,
+  isCommunityCredit = false,
   setIsFlowStarted,
   track,
   location,
@@ -68,6 +70,13 @@ export const BuySellOrderFlow = ({
   const { data: buyModalOptionsContent } = useQuery(
     getBuyModalOptionsQuery({ sanityClient: client }),
   );
+  const buyModalOptions = buyModalOptionsContent?.allBuyModalOptions[0];
+  const buyModalOptionsFiltered = isCommunityCredit
+    ? {
+        ...buyModalOptions,
+        cards: buyModalOptions?.cards?.slice(1, buyModalOptions?.cards?.length),
+      }
+    : buyModalOptions;
 
   const closeBuyModal = (): void => {
     setIsBuyModalOpen(false);
@@ -227,9 +236,10 @@ export const BuySellOrderFlow = ({
         setSelectedProjectById={
           projects && projects?.length > 1 ? setSelectedProjectById : undefined
         }
+        isCommunityCredit={isCommunityCredit}
       />
       <BuyModalOptions
-        content={buyModalOptionsContent?.allBuyModalOptions[0]}
+        content={buyModalOptionsFiltered}
         open={isBuyModalOptionsOpen}
         onClose={() => {
           setIsFlowStarted(false);

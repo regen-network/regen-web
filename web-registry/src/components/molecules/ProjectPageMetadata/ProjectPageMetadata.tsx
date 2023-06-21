@@ -4,7 +4,6 @@ import { Box, Grid } from '@mui/material';
 import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
 import { Body, Label } from 'web-components/lib/components/typography';
 import { formatDate } from 'web-components/lib/utils/format';
-import { pluralize } from 'web-components/lib/utils/pluralize';
 
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 
@@ -29,9 +28,6 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
   // Common
   const startDate = metadata?.['regen:projectStartDate'];
   const endDate = metadata?.['regen:projectEndDate'];
-  const offsetGenerationMethods = metadata?.['regen:offsetGenerationMethod'];
-  const methodsCount = offsetGenerationMethods?.length;
-  const projectActivity = metadata?.['regen:projectActivity'];
   const projectType = metadata?.['regen:projectType'];
 
   // VCS
@@ -81,31 +77,6 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
                 <ArrowLink
                   label={methodology?.['schema:name']}
                   href={methodology?.['schema:url'] || ''}
-                />
-              }
-            />
-          )}
-          {offsetGenerationMethods && methodsCount && methodsCount > 0 && (
-            <MetaDetail
-              label={pluralize(methodsCount, 'offset generation method')}
-              data={
-                <>
-                  {offsetGenerationMethods.map((method, i) => (
-                    <Body key={i} size="xl">
-                      {method}
-                    </Body>
-                  ))}
-                </>
-              }
-            />
-          )}
-          {projectActivity?.['schema:name'] && (
-            <MetaDetail
-              label="project activity"
-              data={
-                <ArrowLink
-                  href={projectActivity?.['schema:url'] || ''}
-                  label={projectActivity?.['schema:name']}
                 />
               }
             />

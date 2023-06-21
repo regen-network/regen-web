@@ -89,7 +89,7 @@ export default function UserInfo({
           </Body>
         )}
         {user.description && (
-          <Body size="md" pt={2.8}>
+          <Body size="xs" pt={2.8}>
             {user.description}
           </Body>
         )}

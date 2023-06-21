@@ -59,40 +59,20 @@ function ProjectTopSection({
   soldOutProjectsIds,
   batchData,
   otcCard,
+  creditClassOnChain,
+  creditClassMetadata,
+  onChainCreditClassId,
 }: ProjectTopSectionProps): JSX.Element {
   const { classes } = useProjectTopSectionStyles();
-  const { ecocreditClient, dataClient } = useLedger();
+  const { ecocreditClient } = useLedger();
 
-  const { creditClass, offsetGenerationMethod } =
-    parseOffChainProject(offChainProject);
+  const { offsetGenerationMethod } = parseOffChainProject(offChainProject);
 
   const { projectName, area, areaUnit, placeName, projectMethodology } =
     parseProjectMetadata(projectMetadata);
 
   const { glanceText, primaryDescription, quote } =
     parseProjectPageMetadata(projectPageMetadata);
-
-  /* Credit class info from on chain metadata or Sanity */
-
-  const onChainCreditClassId =
-    creditClass?.onChainId ?? onChainProjectId?.split('-')?.[0];
-  const { data: creditClassOnChain } = useQuery(
-    getClassQuery({
-      client: ecocreditClient,
-      request: {
-        classId: onChainCreditClassId ?? '',
-      },
-      enabled: !!ecocreditClient && !!onChainCreditClassId,
-    }),
-  );
-  const { data: creditClassMetadataData } = useQuery(
-    getMetadataQuery({
-      iri: creditClassOnChain?.class?.metadata,
-      enabled: !!dataClient && !!creditClassOnChain?.class?.metadata,
-      dataClient,
-    }),
-  );
-  const creditClassMetadata = creditClassMetadataData as CreditClassMetadataLD;
 
   const { data: creditTypeData } = useQuery(
     getCreditTypeQuery({

@@ -114,7 +114,6 @@ export const parseOffChainProject = (
     creditClassVersion?.metadata?.['regen:offsetGenerationMethod'];
 
   return {
-    creditClass,
     creditClassVersion,
     sdgIris,
     offsetGenerationMethod,

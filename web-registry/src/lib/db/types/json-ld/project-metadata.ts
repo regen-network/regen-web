@@ -79,7 +79,7 @@ export const REGEN_INDIVIDUAL = 'regen:Individual';
 export const REGEN_ORGANIZATION = 'regen:Organization';
 
 export interface ProjectStakeholder {
-  '@type': typeof REGEN_INDIVIDUAL | typeof REGEN_ORGANIZATION;
+  '@type'?: typeof REGEN_INDIVIDUAL | typeof REGEN_ORGANIZATION;
   'schema:name': string;
   'schema:description'?: string;
   'schema:image'?: string;

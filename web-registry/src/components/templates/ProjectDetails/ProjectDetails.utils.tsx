@@ -22,6 +22,7 @@ import { UseStateSetter } from 'types/react/use-state';
 import { onBtnClick } from 'lib/button';
 import {
   AnchoredProjectMetadataBaseLD,
+  CreditClassMetadataLD,
   LegacyProjectMetadataLD,
   NameImageDescription,
   ProjectPageMetadataLD,
@@ -187,19 +188,9 @@ export function getParty(
   };
 }
 
-type StakeholderType =
-  | 'regen:projectDeveloper'
-  | 'regen:projectVerifier'
-  | 'regen:landSteward'
-  | 'regen:landOwner'
-  | 'regen:projectOriginator';
-
 const getPartyFromMetadata = (
-  metadata: AnchoredProjectMetadataBaseLD,
-  role: StakeholderType,
+  metadataRole: ProjectStakeholder,
 ): Party | undefined => {
-  const metadataRole: ProjectStakeholder | undefined = metadata[role];
-  if (!metadataRole) return undefined;
   const type = metadataRole?.['@type']?.includes('regen:Organization')
     ? 'ORGANIZATION'
     : 'USER';
@@ -213,7 +204,7 @@ const getPartyFromMetadata = (
   return {
     name: metadataRole?.['schema:name'] || '',
     description: metadataRole?.['schema:description'] || '',
-    type: type,
+    type,
     image: metadataRole?.['schema:image'] || defaultImage,
     location: metadataRole?.['schema:location']?.place_name || '',
     address: metadataRole?.['regen:address'] || '',
@@ -222,14 +213,13 @@ const getPartyFromMetadata = (
 };
 
 export function getDisplayParty(
-  role: StakeholderType,
-  metadata?: AnchoredProjectMetadataBaseLD,
+  metadataRole?: ProjectStakeholder,
   party?: Maybe<PartyFieldsFragment>,
 ): Party | undefined {
   const dbParty = getParty(party);
   if (dbParty) return dbParty;
   // If no party info available for this role, check the metadata
-  if (metadata) return getPartyFromMetadata(metadata, role);
+  if (metadataRole) return getPartyFromMetadata(metadataRole);
   return undefined;
 }
 

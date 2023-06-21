@@ -1,5 +1,6 @@
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
+import { Props as ActionCardProps } from 'web-components/lib/components/molecules/ActionCard/ActionCard';
 import { Party } from 'web-components/lib/components/user/UserInfo';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
@@ -19,8 +20,6 @@ import {
 } from 'lib/db/types/json-ld';
 
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
-
-import { Props as ActionCardProps } from '../molecules/ActionCard/ActionCard';
 
 export type ProjectTopSectionProps = {
   offChainProject?: Maybe<ProjectFieldsFragment>;

@@ -228,7 +228,7 @@ export default function ProjectTopCard({
       )}
       {otcCard && (
         <Box sx={{ mt: 5 }}>
-          <ActionCard {...otcCard} />
+          <ActionCard {...otcCard} variant="column" />
         </Box>
       )}
     </Card>

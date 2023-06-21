@@ -7,6 +7,7 @@ import { Body, Subtitle } from '../../../components/typography';
 import { Theme } from '../../../theme/muiTheme';
 import { ButtonType } from '../../../types/shared/buttonType';
 import { ImageType } from '../../../types/shared/imageType';
+import { ActionCardVariant } from './ActionCard.types';
 
 export interface Props {
   title: string;
@@ -17,6 +18,7 @@ export interface Props {
     text: string | JSX.Element;
     onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   };
+  variant?: ActionCardVariant;
   sx?: SxProps<Theme>;
 }
 
@@ -26,8 +28,11 @@ const ActionCard = ({
   image,
   button,
   note,
+  variant = 'default',
   sx = [],
 }: Props): JSX.Element => {
+  const isColumn = variant === 'column';
+
   return (
     <Box
       sx={[
@@ -44,12 +49,12 @@ const ActionCard = ({
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
     >
-      <Box sx={{ p: 7.5 }}>
+      <Box sx={{ p: 7.5, pb: isColumn ? 18 : 7.5 }}>
         <Box sx={{ maxWidth: 275 }}>
-          <Subtitle size="xl" sx={{ mb: 2 }}>
+          <Subtitle size={isColumn ? 'lg' : 'xl'} sx={{ mb: 2 }}>
             {title}
           </Subtitle>
-          <Body as="div" sx={{ mb: 5 }}>
+          <Body as="div" size={isColumn ? 'sm' : 'md'} sx={{ mb: 5 }}>
             <BlockContent content={description} />
           </Body>
           <ContainedButton
@@ -60,7 +65,12 @@ const ActionCard = ({
             {button.text}
           </ContainedButton>
           {note && (
-            <Body as="div" sx={{ mt: 2.5 }} onClick={note.onClick}>
+            <Body
+              as="div"
+              size={isColumn ? 'xs' : 'md'}
+              sx={{ mt: 2.5, textTransform: isColumn ? 'uppercase' : 'none' }}
+              onClick={note.onClick}
+            >
               <BlockContent content={note.text} />
             </Body>
           )}

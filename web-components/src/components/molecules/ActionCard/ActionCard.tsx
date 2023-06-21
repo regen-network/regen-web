@@ -52,7 +52,11 @@ const ActionCard = ({
           <Body as="div" sx={{ mb: 5 }}>
             <BlockContent content={description} />
           </Body>
-          <ContainedButton size="small" onClick={button.onClick}>
+          <ContainedButton
+            size="small"
+            onClick={button.onClick}
+            startIcon={button.startIcon}
+          >
             {button.text}
           </ContainedButton>
           {note && (

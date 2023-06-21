@@ -1,5 +1,6 @@
 import { MouseEvent } from 'react';
 
+import PhoneIcon from 'web-components/lib/components/icons/PhoneIcon';
 import StaticMap from 'web-components/lib/components/map/StaticMap';
 import { Props as ActionCardProps } from 'web-components/lib/components/molecules/ActionCard/ActionCard';
 import { GalleryPhoto } from 'web-components/lib/components/organisms/Gallery/Gallery.types';
@@ -265,6 +266,7 @@ export const formatOtcCardData = ({
         description: data?.descriptionRaw ?? '',
         button: {
           text: data?.button?.buttonText ?? '',
+          startIcon: <PhoneIcon sx={{ color: 'primary.main' }} />,
         },
         image: {
           src: getSanityImgSrc(data?.image),

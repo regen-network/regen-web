@@ -8,5 +8,16 @@ query allProjectPage {
       title
       descriptionRaw
     }
+    otcCard {
+      title
+      descriptionRaw
+      button {
+        ...buttonFields
+      }
+      noteRaw
+      image {
+        ...customImageFields
+      }
+    }
   }
 }

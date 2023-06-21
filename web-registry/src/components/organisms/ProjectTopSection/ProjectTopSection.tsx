@@ -72,6 +72,7 @@ function ProjectTopSection({
   projectWithOrderData,
   soldOutProjectsIds,
   batchData,
+  otcCard,
 }: ProjectTopSectionProps): JSX.Element {
   const { classes } = useProjectTopSectionStyles();
   const { ecocreditClient, dataClient } = useLedger();
@@ -308,6 +309,7 @@ function ProjectTopSection({
             landOwner={landOwner}
             activities={activityTags}
             ecosystems={ecosystemTags}
+            otcCard={otcCard}
           />
         </Grid>
       </Grid>

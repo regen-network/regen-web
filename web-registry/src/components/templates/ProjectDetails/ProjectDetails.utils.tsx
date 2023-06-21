@@ -1,4 +1,7 @@
+import { MouseEvent } from 'react';
+
 import StaticMap from 'web-components/lib/components/map/StaticMap';
+import { Props as ActionCardProps } from 'web-components/lib/components/molecules/ActionCard/ActionCard';
 import { GalleryPhoto } from 'web-components/lib/components/organisms/Gallery/Gallery.types';
 import { Asset } from 'web-components/lib/components/sliders/ProjectMedia';
 import { Party } from 'web-components/lib/components/user/UserInfo';
@@ -10,7 +13,11 @@ import {
   PartyFieldsFragment,
   Project,
 } from 'generated/graphql';
-import { AllCreditClassQuery } from 'generated/sanity-graphql';
+import {
+  AllCreditClassQuery,
+  AllProjectPageQuery,
+} from 'generated/sanity-graphql';
+import { UseStateSetter } from 'types/react/use-state';
 import {
   AnchoredProjectMetadataBaseLD,
   LegacyProjectMetadataLD,
@@ -18,11 +25,16 @@ import {
   ProjectPageMetadataLD,
   ProjectStakeholder,
 } from 'lib/db/types/json-ld';
+import { getSanityImgSrc } from 'lib/imgSrc';
 
 import {
   DEFAULT_PROFILE_COMPANY_AVATAR,
   DEFAULT_PROFILE_USER_AVATAR,
 } from 'pages/ProfileEdit/ProfileEdit.constants';
+import {
+  ProjectWithOrderData,
+  UISellOrderInfo,
+} from 'pages/Projects/Projects.types';
 
 import {
   API_URI,
@@ -221,3 +233,46 @@ export function getDisplayParty(
   if (metadata) return getPartyFromMetadata(metadata, role);
   return undefined;
 }
+
+/* formatOtcCardData */
+
+type FormatOtcCardDataParams = {
+  data: AllProjectPageQuery['allProjectPage'][0]['otcCard'];
+  isConnected: boolean;
+  orders?: UISellOrderInfo[];
+  isCommunityCredit?: boolean;
+  setIsBuyFlowStarted: UseStateSetter<boolean>;
+};
+
+export const formatOtcCardData = ({
+  data,
+  isConnected,
+  orders = [],
+  isCommunityCredit,
+  setIsBuyFlowStarted,
+}: FormatOtcCardDataParams): ActionCardProps | undefined => {
+  const isNoteVisible = !isConnected || orders?.length > 0;
+  const noteOnClick = (e: MouseEvent<HTMLButtonElement>) => {
+    if (isConnected && orders?.length > 0) {
+      e.preventDefault();
+      setIsBuyFlowStarted(true);
+    }
+  };
+  return isCommunityCredit
+    ? undefined
+    : {
+        title: data?.title ?? '',
+        description: data?.descriptionRaw ?? '',
+        button: {
+          text: data?.button?.buttonText ?? '',
+        },
+        image: {
+          src: getSanityImgSrc(data?.image),
+          alt: data?.image?.imageAlt ?? '',
+        },
+        note: {
+          text: isNoteVisible ? data?.noteRaw ?? '' : '',
+          onClick: noteOnClick,
+        },
+      };
+};

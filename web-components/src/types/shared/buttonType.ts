@@ -1,8 +1,8 @@
-import { ReactNode } from 'react';
+import { MouseEvent, ReactNode } from 'react';
 
 export type ButtonType = {
   text: string;
   startIcon?: ReactNode;
   disabled?: boolean;
-  onClick?: () => void;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 };

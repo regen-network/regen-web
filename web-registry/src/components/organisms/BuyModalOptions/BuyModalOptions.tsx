@@ -81,7 +81,7 @@ export const BuyModalOptions = ({
                       );
                     },
               }}
-              note={card?.noteRaw ?? ''}
+              note={{ text: card?.noteRaw ?? '' }}
               sx={{ mb: isLast ? 0 : 5 }}
             />
           );

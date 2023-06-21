@@ -1,3 +1,4 @@
+import { MouseEvent } from 'react';
 import { Box, SxProps } from '@mui/material';
 
 import { BlockContent } from '../../../components/block-content';
@@ -12,7 +13,10 @@ export interface Props {
   description: string | JSX.Element;
   image?: ImageType;
   button: ButtonType;
-  note?: string | JSX.Element;
+  note?: {
+    text: string | JSX.Element;
+    onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+  };
   sx?: SxProps<Theme>;
 }
 
@@ -52,8 +56,8 @@ const ActionCard = ({
             {button.text}
           </ContainedButton>
           {note && (
-            <Body as="div" sx={{ mt: 2.5 }}>
-              <BlockContent content={note} />
+            <Body as="div" sx={{ mt: 2.5 }} onClick={note.onClick}>
+              <BlockContent content={note.text} />
             </Body>
           )}
         </Box>

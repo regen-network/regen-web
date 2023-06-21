@@ -21,7 +21,7 @@ Default.args = {
   image: {
     src: '/illustrations/concierge.svg',
   },
-  note: 'Or, contact sales@regen.network',
+  note: { text: 'Or, contact sales@regen.network' },
 };
 
 export const Default2 = Template.bind({});

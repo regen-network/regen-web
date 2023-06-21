@@ -20,6 +20,8 @@ import {
 
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 
+import { Props as ActionCardProps } from '../molecules/ActionCard/ActionCard';
+
 export type ProjectTopSectionProps = {
   offChainProject?: Maybe<ProjectFieldsFragment>;
   onChainProject?: ProjectInfo;
@@ -41,6 +43,7 @@ export type ProjectTopSectionProps = {
     batches?: BatchInfoWithSupply[];
     totals?: BatchTotalsForProject;
   };
+  otcCard?: ActionCardProps;
 };
 
 export type SdgType = SdgByIriQuery['allSdg'][0];

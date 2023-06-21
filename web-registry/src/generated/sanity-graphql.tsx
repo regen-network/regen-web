@@ -4662,47 +4662,6 @@ export type ProjectDetailsSectionSorting = {
   title?: Maybe<SortOrder>;
 };
 
-export type ProjectEcosystem = Document & {
-  __typename?: 'ProjectEcosystem';
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']>;
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']>;
-  _key?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  icon?: Maybe<Image>;
-};
-
-export type ProjectEcosystemFilter = {
-  /** Apply filters on document level */
-  _?: Maybe<Sanity_DocumentFilter>;
-  _id?: Maybe<IdFilter>;
-  _type?: Maybe<StringFilter>;
-  _createdAt?: Maybe<DatetimeFilter>;
-  _updatedAt?: Maybe<DatetimeFilter>;
-  _rev?: Maybe<StringFilter>;
-  _key?: Maybe<StringFilter>;
-  name?: Maybe<StringFilter>;
-  icon?: Maybe<ImageFilter>;
-};
-
-export type ProjectEcosystemSorting = {
-  _id?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  _createdAt?: Maybe<SortOrder>;
-  _updatedAt?: Maybe<SortOrder>;
-  _rev?: Maybe<SortOrder>;
-  _key?: Maybe<SortOrder>;
-  name?: Maybe<SortOrder>;
-  icon?: Maybe<ImageSorting>;
-};
-
 export type ProjectFilter = {
   /** Apply filters on document level */
   _?: Maybe<Sanity_DocumentFilter>;
@@ -4732,6 +4691,7 @@ export type ProjectPage = Document & {
   /** This content will appear on all project pages */
   gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSection>;
   projectDetailsSection?: Maybe<ProjectDetailsSection>;
+  otcCard?: Maybe<ActionCard>;
 };
 
 export type ProjectPageFilter = {
@@ -4745,6 +4705,7 @@ export type ProjectPageFilter = {
   _key?: Maybe<StringFilter>;
   gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSectionFilter>;
   projectDetailsSection?: Maybe<ProjectDetailsSectionFilter>;
+  otcCard?: Maybe<ActionCardFilter>;
 };
 
 export type ProjectPageSorting = {
@@ -4755,6 +4716,7 @@ export type ProjectPageSorting = {
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
   projectDetailsSection?: Maybe<ProjectDetailsSectionSorting>;
+  otcCard?: Maybe<ActionCardSorting>;
 };
 
 export type ProjectSorting = {
@@ -5101,7 +5063,6 @@ export type RootQuery = {
   PresskitPage?: Maybe<PresskitPage>;
   Project?: Maybe<Project>;
   ProjectActivity?: Maybe<ProjectActivity>;
-  ProjectEcosystem?: Maybe<ProjectEcosystem>;
   ProjectPage?: Maybe<ProjectPage>;
   ProjectsPage?: Maybe<ProjectsPage>;
   RegenTeamMember?: Maybe<RegenTeamMember>;
@@ -5165,7 +5126,6 @@ export type RootQuery = {
   allPresskitPage: Array<PresskitPage>;
   allProject: Array<Project>;
   allProjectActivity: Array<ProjectActivity>;
-  allProjectEcosystem: Array<ProjectEcosystem>;
   allProjectPage: Array<ProjectPage>;
   allProjectsPage: Array<ProjectsPage>;
   allRegenTeamMember: Array<RegenTeamMember>;
@@ -5408,11 +5368,6 @@ export type RootQueryProjectArgs = {
 
 
 export type RootQueryProjectActivityArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type RootQueryProjectEcosystemArgs = {
   id: Scalars['ID'];
 };
 
@@ -5862,14 +5817,6 @@ export type RootQueryAllProjectArgs = {
 export type RootQueryAllProjectActivityArgs = {
   where?: Maybe<ProjectActivityFilter>;
   sort?: Maybe<Array<ProjectActivitySorting>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-};
-
-
-export type RootQueryAllProjectEcosystemArgs = {
-  where?: Maybe<ProjectEcosystemFilter>;
-  sort?: Maybe<Array<ProjectEcosystemSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -8052,6 +7999,16 @@ export type AllProjectPageQuery = (
     )>, projectDetailsSection?: Maybe<(
       { __typename?: 'ProjectDetailsSection' }
       & Pick<ProjectDetailsSection, 'label' | 'title' | 'descriptionRaw'>
+    )>, otcCard?: Maybe<(
+      { __typename?: 'ActionCard' }
+      & Pick<ActionCard, 'title' | 'descriptionRaw' | 'noteRaw'>
+      & { button?: Maybe<(
+        { __typename?: 'Button' }
+        & ButtonFieldsFragment
+      )>, image?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )> }
     )> }
   )> }
 );
@@ -9921,9 +9878,22 @@ export const AllProjectPageDocument = gql`
       title
       descriptionRaw
     }
+    otcCard {
+      title
+      descriptionRaw
+      button {
+        ...buttonFields
+      }
+      noteRaw
+      image {
+        ...customImageFields
+      }
+    }
   }
 }
-    ${GettingStartedResourcesSectionFieldsFragmentDoc}`;
+    ${GettingStartedResourcesSectionFieldsFragmentDoc}
+${ButtonFieldsFragmentDoc}
+${CustomImageFieldsFragmentDoc}`;
 
 /**
  * __useAllProjectPageQuery__

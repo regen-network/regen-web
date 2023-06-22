@@ -1,16 +1,8 @@
-import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from 'tss-react/mui';
 
-<<<<<<< HEAD
 import { ProjectTagType } from '../molecules/ProjectTag/ProjectTag.types';
 import { ProjectTags } from '../organisms/ProjectTags/ProjectTags';
-=======
-import {
-  ActionCard,
-  Props as ActionCardProps,
-} from '../molecules/ActionCard/ActionCard';
->>>>>>> f05af9b3 (feat: add OTC card to project details)
 import { Title } from '../typography';
 import { User } from '../user/UserInfo';
 import UserInfoWithTitle from '../user/UserInfoWithTitle';
@@ -34,12 +26,8 @@ interface ProjectTopCardProps {
   issuer?: User;
   reseller?: User;
   sdgs?: SDG[];
-<<<<<<< HEAD
   activities?: ProjectTagType[];
   ecosystems?: ProjectTagType[];
-=======
-  otcCard?: ActionCardProps;
->>>>>>> f05af9b3 (feat: add OTC card to project details)
 }
 
 const useStyles = makeStyles()(theme => ({
@@ -134,12 +122,8 @@ export default function ProjectTopCard({
   issuer,
   reseller,
   sdgs,
-<<<<<<< HEAD
   activities,
   ecosystems,
-=======
-  otcCard,
->>>>>>> f05af9b3 (feat: add OTC card to project details)
 }: ProjectTopCardProps): JSX.Element {
   const { classes: styles, cx } = useStyles();
   return (
@@ -225,11 +209,6 @@ export default function ProjectTopCard({
         <div className={styles.issuer}>
           <UserInfoWithTitle user={reseller} title="reseller" />
         </div>
-      )}
-      {otcCard && (
-        <Box sx={{ mt: 5 }}>
-          <ActionCard {...otcCard} variant="column" />
-        </Box>
       )}
     </Card>
   );

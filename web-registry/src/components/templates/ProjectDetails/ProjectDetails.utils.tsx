@@ -19,6 +19,7 @@ import {
   AllProjectPageQuery,
 } from 'generated/sanity-graphql';
 import { UseStateSetter } from 'types/react/use-state';
+import { onBtnClick } from 'lib/button';
 import {
   AnchoredProjectMetadataBaseLD,
   LegacyProjectMetadataLD,
@@ -264,6 +265,7 @@ export const formatOtcCardData = ({
         button: {
           text: data?.button?.buttonText ?? '',
           startIcon: <PhoneIcon sx={{ color: 'primary.main' }} />,
+          onClick: () => onBtnClick(() => void 0, data?.button),
         },
         image: {
           src: getSanityImgSrc(data?.image),

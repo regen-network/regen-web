@@ -9,6 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
+import { ActionCard } from 'web-components/lib/components/molecules/ActionCard/ActionCard';
 import { ProjectTagType } from 'web-components/lib/components/molecules/ProjectTag/ProjectTag.types';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
 import Section from 'web-components/lib/components/section';
@@ -309,8 +310,12 @@ function ProjectTopSection({
             landOwner={landOwner}
             activities={activityTags}
             ecosystems={ecosystemTags}
-            otcCard={otcCard}
           />
+          {otcCard && (
+            <Box sx={{ mt: 5 }}>
+              <ActionCard {...otcCard} variant="column" />
+            </Box>
+          )}
         </Grid>
       </Grid>
     </Section>

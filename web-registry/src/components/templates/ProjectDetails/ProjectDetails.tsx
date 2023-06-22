@@ -39,6 +39,7 @@ import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSecti
 import { ProjectDetailsSection } from 'components/organisms/ProjectDetailsSection/ProjectDetailsSection';
 import { ProjectStorySection } from 'components/organisms/ProjectStorySection/ProjectStorySection';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
+import { AVG_PRICE_TOOLTIP_PROJECT } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants';
 import { usePaginatedBatchesByProject } from 'hooks/batches/usePaginatedBatchesByProject';
 
 import { useLedger } from '../../../ledger';
@@ -324,6 +325,10 @@ function ProjectDetails(): JSX.Element {
         onChainProjectId={onChainProjectId}
         projectName={anchoredMetadata?.['schema:name']}
         onChainCreditClassId={onChainProject?.classId}
+        avgPricePerTonLabel={
+          projectsWithOrderData[0]?.purchaseInfo?.sellInfo?.avgPricePerTonLabel
+        }
+        avgPricePerTonTooltip={AVG_PRICE_TOOLTIP_PROJECT}
       />
 
       <ProjectTopSection

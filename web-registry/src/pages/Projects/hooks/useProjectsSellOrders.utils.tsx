@@ -3,6 +3,7 @@ import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1
 import { EEUR_DENOM, EVMOS_DENOM, REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { QUANTITY_MAX_DECIMALS } from 'config/decimals';
 import { roundFloatNumber } from 'utils/number/format/format';
+import { computeMedianPrice } from 'utils/price/computeMedianPrice';
 
 import { PurchaseInfo } from 'web-components/lib/components/cards/ProjectCard/ProjectCard.types';
 import { formatNumber } from 'web-components/lib/utils/format';
@@ -14,10 +15,23 @@ import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 import { UISellOrderInfo } from '../Projects.types';
 import { GECKO_PRICES } from './useProjectsSellOrders.types';
 
-const getPriceToDisplay = (min: string, max: string): string => {
-  if (min === max) return `$${min}`;
-  return `$${min}-${max}`;
+/* getPriceToDisplay */
+
+type GetPriceToDisplayParams = {
+  price?: number;
 };
+
+export const getPriceToDisplay = ({
+  price,
+}: GetPriceToDisplayParams): string => {
+  return `$${formatNumber({
+    num: price,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`;
+};
+
+/* getPurchaseInfo */
 
 type GetPurchaseInfoParams = {
   projectId: string;
@@ -38,7 +52,7 @@ export const getPurchaseInfo = ({
   if (!ordersForThisProject.length) {
     return {
       sellInfo: {
-        pricePerTon: `-`,
+        avgPricePerTonLabel: `-`,
         creditsAvailable: 0,
         creditsAvailableForUser: 0,
       },
@@ -74,31 +88,12 @@ export const getPurchaseInfo = ({
     })
     .sort((a, b) => a - b);
 
-  const priceMin = prices?.[0];
-  const priceMax = prices?.[prices.length - 1];
-  const priceMinDisplayed =
-    priceMin > 0
-      ? formatNumber({
-          num: priceMin,
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })
-      : '';
-  const priceMaxDisplayed =
-    priceMax > 0
-      ? formatNumber({
-          num: priceMax,
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })
-      : '';
-  const hasPrice = priceMinDisplayed !== '' && priceMaxDisplayed !== '';
+  const medianPrice = computeMedianPrice({ prices });
 
   return {
     sellInfo: {
-      pricePerTon: hasPrice
-        ? getPriceToDisplay(priceMinDisplayed, priceMaxDisplayed)
-        : '',
+      avgPricePerTon: medianPrice,
+      avgPricePerTonLabel: getPriceToDisplay({ price: medianPrice }),
       creditsAvailable: roundFloatNumber(creditsAvailable, {
         decimals: QUANTITY_MAX_DECIMALS,
       }),
@@ -108,6 +103,8 @@ export const getPurchaseInfo = ({
     },
   };
 };
+
+/* sortProjectsBySellOrdersAvailability */
 
 // This comparison function prioritizes (it puts first) the projects that have sell orders.
 export const sortProjectsBySellOrdersAvailability =
@@ -124,6 +121,8 @@ export const sortProjectsBySellOrdersAvailability =
     if (!ordersForProjectA && ordersForProjectB) return 1;
     return 0;
   };
+
+/* normalizeToUISellOrderInfo */
 
 export const normalizeToUISellOrderInfo = (
   sellOrder: SellOrderInfoExtented,

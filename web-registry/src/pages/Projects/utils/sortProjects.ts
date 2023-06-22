@@ -97,7 +97,8 @@ function getExtreme(
   project: ProjectWithOrderData,
   highOrLow: 'high' | 'low',
 ): number {
-  const prices = project.purchaseInfo?.sellInfo?.pricePerTon?.split('-');
+  const prices =
+    project.purchaseInfo?.sellInfo?.avgPricePerTonLabel?.split('-');
   const index = highOrLow === 'high' ? 1 : 0;
   const extreme = prices?.[index]
     ? Number(prices[index]?.replace(/[^0-9.-]+/g, '')) // remove non-digit or dot characters

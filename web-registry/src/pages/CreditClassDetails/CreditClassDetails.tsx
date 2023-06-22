@@ -20,9 +20,13 @@ import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
+import { AVG_PRICE_TOOLTIP_CREDIT_CLASS } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants';
 
 import { useLedger } from '../../ledger';
-import { getProjectNameFromProjectsData } from './CreditClassDetails.utils';
+import {
+  getCreditClassAvgPricePerTonLabel,
+  getProjectNameFromProjectsData,
+} from './CreditClassDetails.utils';
 import CreditClassDetailsSimple from './CreditClassDetailsSimple';
 import CreditClassDetailsWithContent from './CreditClassDetailsWithContent';
 
@@ -87,6 +91,10 @@ function CreditClassDetails({
         ) ?? undefined,
     }));
   }, [credits, projectsWithOrderData]);
+
+  const avgPricePerTonLabel = getCreditClassAvgPricePerTonLabel({
+    projectsWithOrderData,
+  });
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
@@ -156,6 +164,8 @@ function CreditClassDetails({
         }
         onChainCreditClassId={onChainClass?.id}
         creditClassName={metadata?.['schema:name']}
+        avgPricePerTonLabel={avgPricePerTonLabel}
+        avgPricePerTonTooltip={AVG_PRICE_TOOLTIP_CREDIT_CLASS}
       />
       <BuySellOrderFlow
         isFlowStarted={isBuyFlowStarted}

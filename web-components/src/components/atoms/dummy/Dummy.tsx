@@ -1,8 +1,7 @@
 import { Box, SxProps } from '@mui/material';
 
-import { sxToArray } from 'src/utils/mui/sxToArray';
-
 import { Theme } from '../../../theme/muiTheme';
+import { sxToArray } from '../../../utils/mui/sxToArray';
 
 export interface Props {
   label: string;

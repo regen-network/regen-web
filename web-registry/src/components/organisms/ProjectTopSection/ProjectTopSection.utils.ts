@@ -7,6 +7,10 @@ import {
   ProjectFieldsFragment,
 } from 'generated/graphql';
 import {
+  AllProjectActivityQuery,
+  AllProjectEcosystemQuery,
+} from 'generated/sanity-graphql';
+import {
   AnchoredProjectMetadataLD,
   CreditClassMetadataLD,
   LegacyProjectMetadataLD,
@@ -172,4 +176,37 @@ export const getOffsetGenerationMethod = (metadata?: CreditClassMetadataLD) => {
   }
 
   return metadata?.['regen:offsetGenerationMethod']?.[0];
+};
+
+/* getProjectActivityIconsMapping */
+
+type GetProjectActivityIconsMappingParams = {
+  allProjectActivityData?: AllProjectActivityQuery;
+};
+
+export const getProjectActivityIconsMapping = ({
+  allProjectActivityData,
+}: GetProjectActivityIconsMappingParams) => {
+  return allProjectActivityData?.allProjectActivity.reduce((acc, activity) => {
+    acc[String(activity.name)] = String(activity.icon?.asset?.url);
+    return acc;
+  }, {} as Record<string, string | undefined>);
+};
+
+/* getProjectEcosystemIconsMapping */
+
+type GetProjectEcosystemIconsMappingParams = {
+  allProjectEcosystemData?: AllProjectEcosystemQuery;
+};
+
+export const getProjectEcosystemIconsMapping = ({
+  allProjectEcosystemData,
+}: GetProjectEcosystemIconsMappingParams) => {
+  return allProjectEcosystemData?.allProjectEcosystem.reduce(
+    (acc, ecosystem) => {
+      acc[String(ecosystem.name)] = String(ecosystem.icon?.asset?.url);
+      return acc;
+    },
+    {} as Record<string, string | undefined>,
+  );
 };

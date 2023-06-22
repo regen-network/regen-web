@@ -33,7 +33,24 @@ export default {
   component: Card,
 };
 
-export const projectTopCard = (): JSX.Element => <ProjectTopCard />;
+export const projectTopCard = (): JSX.Element => (
+  <ProjectTopCard
+    impact={[
+      {
+        name: 'Reforestation',
+        imgSrc: '/illustrations/reforestation.png',
+        sdgs: [
+          { src: '/sdgs/sdg3.svg', alt: 'sdg3' },
+          { src: '/sdgs/sdg4.svg', alt: 'sdg4' },
+          { src: '/sdgs/sdg8.svg', alt: 'sdg8' },
+        ],
+        standard:
+          'https://regen-registry.s3.amazonaws.com/projects/kasigau/VCS.png',
+        monitored: true,
+      },
+    ]}
+  />
+);
 
 export const impactCard = (): JSX.Element => (
   <ImpactCard

@@ -87,12 +87,7 @@ export const parseOffChainProject = (
     project?.creditClassByCreditClassId?.creditClassVersionsById?.nodes?.[0];
 
   const creditClassName = creditClassVersion?.name;
-  const coBenefitsIris =
-    creditClassVersion?.metadata?.['regen:coBenefits']?.map(
-      (impact: { '@id': string }) => impact['@id'],
-    ) || [];
-  const primaryImpactIRI =
-    creditClassVersion?.metadata?.['regen:indicator']?.['@id'];
+
   return {
     offChainProjectMetadata,
     managementActions,
@@ -100,8 +95,6 @@ export const parseOffChainProject = (
     creditClass,
     creditClassVersion,
     creditClassName,
-    coBenefitsIris,
-    primaryImpactIRI,
   };
 };
 

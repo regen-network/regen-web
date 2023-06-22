@@ -45,9 +45,8 @@ import { useLedger } from '../../../ledger';
 import { client as sanityClient } from '../../../lib/clients/sanity';
 import { NotFoundPage } from '../../../pages/NotFound/NotFound';
 import { GettingStartedResourcesSection } from '../../molecules';
-import { ProjectImpactSection, ProjectTopSection } from '../../organisms';
+import { ProjectTopSection } from '../../organisms';
 import useGeojson from './hooks/useGeojson';
-import useImpact from './hooks/useImpact';
 import useSeo from './hooks/useSeo';
 import { useSortedDocuments } from './hooks/useSortedDocuments';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
@@ -198,8 +197,6 @@ function ProjectDetails(): JSX.Element {
     creditClass,
     creditClassName,
     creditClassVersion,
-    coBenefitsIris,
-    primaryImpactIRI,
   } = parseOffChainProject(offChainProject as Maybe<Project>);
 
   const { sortCallbacksDocuments, sortedDocuments } = useSortedDocuments({
@@ -239,8 +236,6 @@ function ProjectDetails(): JSX.Element {
   });
 
   const mediaData = parseMedia({ metadata: offChainProjectMetadata, geojson });
-
-  const impactData = useImpact({ coBenefitsIris, primaryImpactIRI });
 
   const loadingDb = loadingProjectByOnChainId || loadingProjectByHandle;
 
@@ -366,17 +361,6 @@ function ProjectDetails(): JSX.Element {
       />
 
       <ProjectStorySection projectPageMetadata={offChainProjectMetadata} />
-
-      {impactData?.length > 0 && (
-        <div
-          className={cx(
-            'topo-background-alternate',
-            isKeplrMobileWeb && 'dark',
-          )}
-        >
-          <ProjectImpactSection impact={impactData} />
-        </div>
-      )}
 
       <div
         className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}

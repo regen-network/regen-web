@@ -30,7 +30,6 @@ export * from './MethodologyTopSection';
 export * from './MoreProjectsSection';
 export * from './Portfolio/Portfolio';
 export * from './ProjectCards';
-export * from './ProjectImpactSection/ProjectImpactSection';
 export * from './ProjectLocationForm';
 export * from './ProjectMetadataForm/ProjectMetadataForm';
 export * from './ProjectTopSection/ProjectTopSection';

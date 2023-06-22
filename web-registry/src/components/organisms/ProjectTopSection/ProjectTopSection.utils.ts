@@ -1,4 +1,8 @@
+/* parseMethodologies */
+import { ImageType } from 'web-components/lib/types/shared/imageType';
+
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
+import { Sdg } from 'generated/sanity-graphql';
 import {
   AllProjectActivityQuery,
   AllProjectEcosystemQuery,
@@ -12,12 +16,24 @@ import {
 } from 'lib/db/types/json-ld';
 import { CFCCreditClassMetadataLD } from 'lib/db/types/json-ld/cfc-credit-class-metadata';
 import { ApprovedMethodologies } from 'lib/db/types/json-ld/methodology';
+import { getSanityImgSrc } from 'lib/imgSrc';
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
 import { SEE_ALL_METHODOLOGIES } from './ProjectTopSection.constants';
 
-/* parseMethodologies */
+type GetSdgsImagesParams = {
+  sdgs?: Maybe<Maybe<Sdg>[]>;
+};
 
+export const getSdgsImages = ({ sdgs }: GetSdgsImagesParams) => {
+  const sdgsImages: ImageType[] =
+    sdgs?.map(sdg => ({
+      src: getSanityImgSrc(sdg?.image),
+      alt: String(sdg?.title ?? ''),
+    })) ?? [];
+
+  return sdgsImages;
+};
 type ParseMethodologiesParams = {
   methodologies?: ApprovedMethodologies;
 };
@@ -112,11 +128,19 @@ export const parseOffChainProject = (
   );
   const offsetGenerationMethod =
     creditClassVersion?.metadata?.['regen:offsetGenerationMethod'];
+  const coBenefitsIRIs =
+    creditClassVersion?.metadata?.['regen:coBenefits']?.map(
+      (impact: { '@id': string }) => impact['@id'],
+    ) || [];
+  const primaryImpactIRI =
+    creditClassVersion?.metadata?.['regen:indicator']?.['@id'];
 
   return {
     creditClassVersion,
     sdgIris,
     offsetGenerationMethod,
+    primaryImpactIRI,
+    coBenefitsIRIs,
   };
 };
 

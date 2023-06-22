@@ -17,6 +17,7 @@ import {
 import { useLedger } from 'ledger';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
+import { getSanityImgSrc } from 'lib/imgSrc';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 
 import {
@@ -25,7 +26,10 @@ import {
   MAPBOX_TOKEN,
 } from 'components/templates/ProjectDetails/ProjectDetails.config';
 
-import { ProjectBatchTotals } from '../../molecules';
+import { ProjectTopLink } from '../../atoms';
+import { ProjectBatchTotals, ProjectPageMetadata } from '../../molecules';
+import useImpact from './hooks/useImpact';
+import { PROJECT_STANDARD_DEFAULT_VALUE } from './ProjectTopSection.constants';
 import { ProjectTopSectionCreditClassCard } from './ProjectTopSection.CreditClassCard';
 import {
   ProjectTopSectionQuoteMark,
@@ -36,6 +40,8 @@ import {
   getOffsetGenerationMethod,
   getProjectActivityIconsMapping,
   getProjectEcosystemIconsMapping,
+  getSdgsImages,
+  isAnchoredProjectMetadata,
   parseMethodologies,
   parseOffChainProject,
   parseProjectMetadata,
@@ -64,7 +70,8 @@ function ProjectTopSection({
   const { classes } = useProjectTopSectionStyles();
   const { ecocreditClient } = useLedger();
 
-  const { offsetGenerationMethod } = parseOffChainProject(offChainProject);
+  const { offsetGenerationMethod, primaryImpactIRI, coBenefitsIRIs } =
+    parseOffChainProject(offChainProject);
 
   const { projectName, area, areaUnit, placeName, projectMethodology } =
     parseProjectMetadata(projectMetadata);
@@ -129,6 +136,12 @@ function ProjectTopSection({
       src: projectEcosystemIconsMapping?.[ecosystem] ?? '',
     },
   }));
+
+  const impact = useImpact({ coBenefitsIRIs, primaryImpactIRI });
+  const hasStandardLogo = impact.some(item => !!item.standard);
+  const standardDefaultValue = hasStandardLogo
+    ? PROJECT_STANDARD_DEFAULT_VALUE
+    : undefined;
 
   return (
     <Section classes={{ root: classes.section }}>
@@ -228,6 +241,15 @@ function ProjectTopSection({
           <ProjectTopCard
             activities={activityTags}
             ecosystems={ecosystemTags}
+            impact={impact.map(
+              ({ name, image, standard, sdgs }, index: number) => ({
+                name,
+                imgSrc: getSanityImgSrc(image),
+                sdgs: getSdgsImages({ sdgs }),
+                standard: getSanityImgSrc(standard, standardDefaultValue),
+                monitored: index === 0,
+              }),
+            )}
           />
           {otcCard && (
             <Box sx={{ mt: 5 }}>

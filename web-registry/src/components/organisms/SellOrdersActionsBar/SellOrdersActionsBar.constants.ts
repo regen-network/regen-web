@@ -5,4 +5,4 @@ export const BUY_DISABLED_TOOLTIP =
 export const AVG_PRICE_TOOLTIP_PROJECT =
   'This is the median average price of all open sell orders for this project.';
 export const AVG_PRICE_TOOLTIP_CREDIT_CLASS =
-  'This is the median average price for all projects of this credit class.';
+  'This is the median average price for all open sell orders in this credit class.';

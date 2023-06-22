@@ -34,7 +34,6 @@ export const ProjectDetailsSection: React.FC<ProjectDetailsSectionProps> = ({
   const theme = useTheme<Theme>();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { classes } = useSectionStyles();
-  const hasCredibilityCards = header && credibilityCards?.length;
 
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;

@@ -106,23 +106,17 @@ function ProjectImpactSection({
       <LazyLoad offset={300}>
         {isMobile ? (
           <div className={styles.swipe}>
-            {impact.map(
-              (
-                { name, descriptionRaw, image, sdgs, standard },
-                index: number,
-              ) => (
-                <div className={styles.item} key={index}>
-                  <ProjectImpactCard
-                    name={name}
-                    description={<BlockContent content={descriptionRaw} />}
-                    imgSrc={getSanityImgSrc(image)}
-                    sdgs={getSdgsImages({ sdgs })}
-                    standard={getSanityImgSrc(standard, standardDefaultValue)}
-                    monitored={index === 0}
-                  />
-                </div>
-              ),
-            )}
+            {impact.map(({ name, image, sdgs, standard }, index: number) => (
+              <div className={styles.item} key={index}>
+                <ProjectImpactCard
+                  name={name}
+                  imgSrc={getSanityImgSrc(image)}
+                  sdgs={getSdgsImages({ sdgs })}
+                  standard={getSanityImgSrc(standard, standardDefaultValue)}
+                  monitored={index === 0}
+                />
+              </div>
+            ))}
           </div>
         ) : (
           <Slider
@@ -131,23 +125,17 @@ function ProjectImpactSection({
             ref={slider}
             className={styles.slider}
           >
-            {impact.map(
-              (
-                { name, descriptionRaw, image, standard, sdgs },
-                index: number,
-              ) => (
-                <ProjectImpactCard
-                  key={index}
-                  className={styles.item}
-                  name={name}
-                  description={<BlockContent content={descriptionRaw} />}
-                  imgSrc={getSanityImgSrc(image)}
-                  sdgs={getSdgsImages({ sdgs })}
-                  standard={getSanityImgSrc(standard, standardDefaultValue)}
-                  monitored={index === 0}
-                />
-              ),
-            )}
+            {impact.map(({ name, image, standard, sdgs }, index: number) => (
+              <ProjectImpactCard
+                key={index}
+                className={styles.item}
+                name={name}
+                imgSrc={getSanityImgSrc(image)}
+                sdgs={getSdgsImages({ sdgs })}
+                standard={getSanityImgSrc(standard, standardDefaultValue)}
+                monitored={index === 0}
+              />
+            ))}
           </Slider>
         )}
       </LazyLoad>

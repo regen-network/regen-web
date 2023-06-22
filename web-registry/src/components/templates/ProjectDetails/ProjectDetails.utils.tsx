@@ -22,7 +22,6 @@ import { UseStateSetter } from 'types/react/use-state';
 import { onBtnClick } from 'lib/button';
 import {
   AnchoredProjectMetadataBaseLD,
-  CreditClassMetadataLD,
   LegacyProjectMetadataLD,
   NameImageDescription,
   ProjectPageMetadataLD,

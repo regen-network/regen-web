@@ -55,7 +55,6 @@ export const monitoredImpactCard = (): JSX.Element => (
 export const projectImpactCard = (): JSX.Element => (
   <ProjectImpactCard
     name="Reforestation"
-    description="Preservation, afforestation (where trees were not previously) and reforestation (where trees were previously) of urban forests."
     imgSrc="/illustrations/reforestation.png"
     sdgs={[
       { src: '/sdgs/sdg3.svg', alt: 'sdg3' },

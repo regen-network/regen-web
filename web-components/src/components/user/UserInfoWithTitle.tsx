@@ -1,5 +1,4 @@
-import React from 'react';
-
+import QuestionMarkTooltip from '../tooltip/QuestionMarkTooltip';
 import { Label } from '../typography';
 import type { TextSize } from '../typography/sizing';
 import UserInfo, { User } from '../user/UserInfo';
@@ -9,6 +8,7 @@ interface Props {
   title: string;
   border?: boolean;
   size?: TextSize;
+  tooltip?: string;
 }
 
 export default function UserInfoWithTitle({
@@ -16,11 +16,19 @@ export default function UserInfoWithTitle({
   title,
   border = true,
   size = 'lg',
+  tooltip,
 }: Props): JSX.Element {
   return (
     <div>
-      <Label size="xs" color="info.main" sx={{ mb: [4, 5.2] }}>
+      <Label
+        component="div"
+        display="flex"
+        size="xs"
+        color="info.main"
+        sx={{ mb: [4, 5.2] }}
+      >
         {title}
+        {tooltip && <QuestionMarkTooltip sx={{ ml: 1.25 }} title={tooltip} />}
       </Label>
       <UserInfo
         user={user}

@@ -1,4 +1,4 @@
-import { styled, Typography, TypographyProps } from '@mui/material';
+import { BoxProps, styled, Typography, TypographyProps } from '@mui/material';
 
 import { getMobileSize, LabelSize } from './sizing';
 
@@ -25,6 +25,7 @@ const LINE_HEIGHTS = {
 export interface LabelProps extends TypographyProps {
   size?: LabelSize;
   mobileSize?: LabelSize;
+  component?: BoxProps['component'];
 }
 
 export const Label = styled(Typography, {

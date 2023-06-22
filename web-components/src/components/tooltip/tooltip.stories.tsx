@@ -1,6 +1,7 @@
 import Tooltip from './';
 import InfoTooltip from './InfoTooltip';
 import InfoTooltipWithIcon from './InfoTooltipWithIcon';
+import QuestionMarkTooltip from './QuestionMarkTooltip';
 
 export default {
   title: 'Tooltip',
@@ -27,4 +28,8 @@ export const infoWithIcon = (): JSX.Element => (
     <InfoTooltipWithIcon title={'tooltip content'} />
     <InfoTooltipWithIcon title={'tooltip content'} outlined />
   </div>
+);
+
+export const questionMarkToolTip = (): JSX.Element => (
+  <QuestionMarkTooltip title={'tooltip content'} />
 );

@@ -45,5 +45,9 @@ export const columnUserInfo = (): JSX.Element => (
 );
 
 export const withTitle = (): JSX.Element => (
-  <UserInfoWithTitle user={user} title={'project developer'} />
+  <UserInfoWithTitle
+    user={user}
+    title={'project developer'}
+    tooltip={'some tooltip about project developer'}
+  />
 );

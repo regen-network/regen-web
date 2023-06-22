@@ -1,5 +1,5 @@
 import React from 'react';
-import { MenuItem, SxProps } from '@mui/material';
+import { BoxProps, MenuItem, SxProps } from '@mui/material';
 import cx from 'clsx';
 
 import { Theme } from '../../../../theme/muiTheme';
@@ -25,7 +25,7 @@ export interface HeaderMenuItemBase {
     paper?: string;
   };
   sx?: SxProps<Theme>;
-  component?: React.ElementType;
+  component?: BoxProps['component'];
 }
 
 export interface MenuItemProps extends HeaderMenuItemBase {

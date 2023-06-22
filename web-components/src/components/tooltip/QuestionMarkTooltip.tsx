@@ -27,6 +27,7 @@ export default function QuestionMarkTooltip({ title, sx }: Props): JSX.Element {
       >
         <Label
           sx={{
+            cursor: 'default',
             lineHeight: [1],
             textAlign: 'center',
             color: 'secondary.main',

@@ -1,3 +1,5 @@
+import { TooltipProps } from '@mui/material';
+
 import QuestionMarkTooltip from '../tooltip/QuestionMarkTooltip';
 import { Label } from '../typography';
 import type { TextSize } from '../typography/sizing';
@@ -8,7 +10,7 @@ interface Props {
   title: string;
   border?: boolean;
   size?: TextSize;
-  tooltip?: string;
+  tooltip?: TooltipProps['title'];
 }
 
 export default function UserInfoWithTitle({

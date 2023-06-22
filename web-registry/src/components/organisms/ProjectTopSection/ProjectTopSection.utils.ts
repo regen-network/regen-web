@@ -2,10 +2,10 @@
 import { ImageType } from 'web-components/lib/types/shared/imageType';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
-import { Sdg } from 'generated/sanity-graphql';
 import {
   AllProjectActivityQuery,
   AllProjectEcosystemQuery,
+  Sdg,
 } from 'generated/sanity-graphql';
 import {
   AnchoredProjectMetadataLD,

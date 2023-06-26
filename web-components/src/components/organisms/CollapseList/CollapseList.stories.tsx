@@ -17,5 +17,5 @@ const Template: ComponentStory<typeof CollapseList> = args => (
 export const Default = Template.bind({});
 
 Default.args = {
-  items: [...Array(10).keys()].map(k => <div>{k} </div>),
+  items: [...Array(10).keys()].map(k => <div key={k}>{k} </div>),
 };

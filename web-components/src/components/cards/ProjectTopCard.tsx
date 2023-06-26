@@ -42,8 +42,8 @@ export default function ProjectTopCard({
       <CollapseList
         sx={{ pb: [7.5, 10] }}
         items={impact.map(imp => (
-          <Box sx={{ pb: [2.5, 4.25] }}>
-            <ProjectImpactCard key={imp.name} {...imp} />
+          <Box key={imp.name} sx={{ pb: [2.5, 4.25] }}>
+            <ProjectImpactCard {...imp} />
           </Box>
         ))}
       />

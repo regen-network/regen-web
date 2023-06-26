@@ -39,8 +39,8 @@ export default function ProjectImpactCard({
       borderRadius="10px"
       borderColor="grey.100"
       sx={{
-        p: [2, 2.5],
-        pr: [3.75, 5],
+        p: { xs: 2, sm: 2.5 },
+        pr: { xs: 3.75, sm: 5 },
       }}
     >
       <Grid container wrap="nowrap">

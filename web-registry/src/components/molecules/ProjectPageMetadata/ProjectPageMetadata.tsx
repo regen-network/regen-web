@@ -40,9 +40,6 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
 
   // Toucan
   const toucanProjectTokenId = metadata?.['regen:toucanProjectTokenId'];
-  const approvedMethodologies =
-    metadata?.['regen:approvedMethodologies']?.['schema:itemListElement'];
-  const methodologyCount = approvedMethodologies?.length;
 
   return (
     <Box
@@ -77,21 +74,6 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
                   label={methodology?.['schema:name']}
                   href={methodology?.['schema:url'] || ''}
                 />
-              }
-            />
-          )}
-          {approvedMethodologies && methodologyCount && methodologyCount > 0 && (
-            <MetaDetail
-              label={`methodolog${methodologyCount > 1 ? 'ies' : 'y'}`}
-              data={
-                <>
-                  {approvedMethodologies.map(methodology => (
-                    <ArrowLink
-                      label={methodology?.['schema:name']}
-                      href={methodology?.['schema:url'] || ''}
-                    />
-                  ))}
-                </>
               }
             />
           )}

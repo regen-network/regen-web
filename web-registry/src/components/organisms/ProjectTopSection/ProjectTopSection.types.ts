@@ -1,5 +1,6 @@
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
+import { Props as ActionCardProps } from 'web-components/lib/components/molecules/ActionCard/ActionCard';
 import { Party } from 'web-components/lib/components/user/UserInfo';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
@@ -41,6 +42,7 @@ export type ProjectTopSectionProps = {
     batches?: BatchInfoWithSupply[];
     totals?: BatchTotalsForProject;
   };
+  otcCard?: ActionCardProps;
 };
 
 export type SdgType = SdgByIriQuery['allSdg'][0];

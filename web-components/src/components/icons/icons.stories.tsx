@@ -246,7 +246,10 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<OrganizationIcon />} label="OrganizationIcon" />
     <LabeledIcon icon={<OutlinedCheckIcon />} label="OutlinedCheckIcon" />
     <LabeledIcon icon={<PendingIcon />} label="PendingIcon" />
-    <LabeledIcon icon={<PhoneIcon />} label="PhoneIcon" />
+    <LabeledIcon
+      icon={<PhoneIcon sx={{ color: 'secondary.main' }} />}
+      label="PhoneIcon"
+    />
     <LabeledIcon icon={<PinIcon fontSize="small" />} label="PinIcon" />
     <LabeledIcon icon={<PlayIcon height={'20px'} />} label="PlayIcon" />
     <LabeledIcon icon={<PlusIcon />} label="PlusIcon" />

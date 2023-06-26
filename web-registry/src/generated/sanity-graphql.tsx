@@ -4732,6 +4732,7 @@ export type ProjectPage = Document & {
   /** This content will appear on all project pages */
   gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSection>;
   projectDetailsSection?: Maybe<ProjectDetailsSection>;
+  otcCard?: Maybe<ActionCard>;
 };
 
 export type ProjectPageFilter = {
@@ -4745,6 +4746,7 @@ export type ProjectPageFilter = {
   _key?: Maybe<StringFilter>;
   gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSectionFilter>;
   projectDetailsSection?: Maybe<ProjectDetailsSectionFilter>;
+  otcCard?: Maybe<ActionCardFilter>;
 };
 
 export type ProjectPageSorting = {
@@ -4755,6 +4757,7 @@ export type ProjectPageSorting = {
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
   projectDetailsSection?: Maybe<ProjectDetailsSectionSorting>;
+  otcCard?: Maybe<ActionCardSorting>;
 };
 
 export type ProjectSorting = {
@@ -8052,6 +8055,16 @@ export type AllProjectPageQuery = (
     )>, projectDetailsSection?: Maybe<(
       { __typename?: 'ProjectDetailsSection' }
       & Pick<ProjectDetailsSection, 'label' | 'title' | 'descriptionRaw'>
+    )>, otcCard?: Maybe<(
+      { __typename?: 'ActionCard' }
+      & Pick<ActionCard, 'title' | 'descriptionRaw' | 'noteRaw'>
+      & { button?: Maybe<(
+        { __typename?: 'Button' }
+        & ButtonFieldsFragment
+      )>, image?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )> }
     )> }
   )> }
 );
@@ -9921,9 +9934,22 @@ export const AllProjectPageDocument = gql`
       title
       descriptionRaw
     }
+    otcCard {
+      title
+      descriptionRaw
+      button {
+        ...buttonFields
+      }
+      noteRaw
+      image {
+        ...customImageFields
+      }
+    }
   }
 }
-    ${GettingStartedResourcesSectionFieldsFragmentDoc}`;
+    ${GettingStartedResourcesSectionFieldsFragmentDoc}
+${ButtonFieldsFragmentDoc}
+${CustomImageFieldsFragmentDoc}`;
 
 /**
  * __useAllProjectPageQuery__

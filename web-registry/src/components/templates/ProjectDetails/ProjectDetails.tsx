@@ -51,6 +51,7 @@ import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProje
 import { getMediaBoxStyles } from './ProjectDetails.styles';
 import {
   findSanityCreditClass,
+  formatOtcCardData,
   getDisplayParty,
   getIsOnChainId,
   getProjectGalleryPhotos,
@@ -64,7 +65,7 @@ function ProjectDetails(): JSX.Element {
   const { projectId } = useParams();
   const { ecocreditClient, dataClient } = useLedger();
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
-  const { wallet } = useWallet();
+  const { wallet, isConnected } = useWallet();
   const graphqlClient = useApolloClient();
   const { track } = useTracker();
   const location = useLocation();
@@ -246,6 +247,13 @@ function ProjectDetails(): JSX.Element {
 
   const projectPhotos = getProjectGalleryPhotos({ offChainProjectMetadata });
   const hasProjectPhotos = projectPhotos.length > 0;
+  const otcCard = formatOtcCardData({
+    data: sanityProjectPage?.otcCard,
+    isConnected,
+    orders: projectsWithOrderData[0]?.sellOrders,
+    isCommunityCredit,
+    setIsBuyFlowStarted,
+  });
 
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
@@ -310,6 +318,7 @@ function ProjectDetails(): JSX.Element {
           batches: batchesWithSupply,
           totals: batchesTotal,
         }}
+        otcCard={otcCard}
       />
 
       {hasProjectPhotos && <Gallery photos={projectPhotos} />}

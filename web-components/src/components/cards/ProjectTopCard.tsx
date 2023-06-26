@@ -4,7 +4,6 @@ import { makeStyles } from 'tss-react/mui';
 import { ProjectTagType } from '../molecules/ProjectTag/ProjectTag.types';
 import { CollapseList } from '../organisms/CollapseList/CollapseList';
 import { ProjectTags } from '../organisms/ProjectTags/ProjectTags';
-import { Title } from '../typography';
 import Card from './Card';
 import ProjectImpactCard, {
   ProjectImpactCardProps,
@@ -22,13 +21,8 @@ interface ProjectTopCardProps {
 const useStyles = makeStyles()(theme => ({
   root: {
     border: 'none',
-    [theme.breakpoints.down('sm')]: {
-      padding: `${theme.spacing(8)} ${theme.spacing(7.5)} ${theme.spacing(9)}`,
-    },
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(10.9)} ${theme.spacing(5)} ${theme.spacing(
-        12.5,
-      )}`,
+      paddingTop: theme.spacing(5),
     },
     '& :only-child, & :last-child': {
       marginBottom: 0,

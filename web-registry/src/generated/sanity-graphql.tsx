@@ -1639,6 +1639,47 @@ export type CredibilityCardSorting = {
   icon?: Maybe<ImageSorting>;
 };
 
+export type CreditCertification = Document & {
+  __typename?: 'CreditCertification';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  icon?: Maybe<Image>;
+};
+
+export type CreditCertificationFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  name?: Maybe<StringFilter>;
+  icon?: Maybe<ImageFilter>;
+};
+
+export type CreditCertificationSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  name?: Maybe<SortOrder>;
+  icon?: Maybe<ImageSorting>;
+};
+
 export type CreditClass = Document & {
   __typename?: 'CreditClass';
   /** Document ID */
@@ -4760,6 +4801,47 @@ export type ProjectPageSorting = {
   otcCard?: Maybe<ActionCardSorting>;
 };
 
+export type ProjectRating = Document & {
+  __typename?: 'ProjectRating';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  icon?: Maybe<Image>;
+};
+
+export type ProjectRatingFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  name?: Maybe<StringFilter>;
+  icon?: Maybe<ImageFilter>;
+};
+
+export type ProjectRatingSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  name?: Maybe<SortOrder>;
+  icon?: Maybe<ImageSorting>;
+};
+
 export type ProjectSorting = {
   _id?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
@@ -5072,6 +5154,7 @@ export type RootQuery = {
   ContactPage?: Maybe<ContactPage>;
   CreateCreditClassPage?: Maybe<CreateCreditClassPage>;
   CreateMethodologyPage?: Maybe<CreateMethodologyPage>;
+  CreditCertification?: Maybe<CreditCertification>;
   CreditClass?: Maybe<CreditClass>;
   CreditType?: Maybe<CreditType>;
   CreditGenerationMethod?: Maybe<CreditGenerationMethod>;
@@ -5106,6 +5189,7 @@ export type RootQuery = {
   ProjectActivity?: Maybe<ProjectActivity>;
   ProjectEcosystem?: Maybe<ProjectEcosystem>;
   ProjectPage?: Maybe<ProjectPage>;
+  ProjectRating?: Maybe<ProjectRating>;
   ProjectsPage?: Maybe<ProjectsPage>;
   RegenTeamMember?: Maybe<RegenTeamMember>;
   Resource?: Maybe<Resource>;
@@ -5136,6 +5220,7 @@ export type RootQuery = {
   allContactPage: Array<ContactPage>;
   allCreateCreditClassPage: Array<CreateCreditClassPage>;
   allCreateMethodologyPage: Array<CreateMethodologyPage>;
+  allCreditCertification: Array<CreditCertification>;
   allCreditClass: Array<CreditClass>;
   allCreditType: Array<CreditType>;
   allCreditGenerationMethod: Array<CreditGenerationMethod>;
@@ -5170,6 +5255,7 @@ export type RootQuery = {
   allProjectActivity: Array<ProjectActivity>;
   allProjectEcosystem: Array<ProjectEcosystem>;
   allProjectPage: Array<ProjectPage>;
+  allProjectRating: Array<ProjectRating>;
   allProjectsPage: Array<ProjectsPage>;
   allRegenTeamMember: Array<RegenTeamMember>;
   allResource: Array<Resource>;
@@ -5251,6 +5337,11 @@ export type RootQueryCreateCreditClassPageArgs = {
 
 
 export type RootQueryCreateMethodologyPageArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryCreditCertificationArgs = {
   id: Scalars['ID'];
 };
 
@@ -5421,6 +5512,11 @@ export type RootQueryProjectEcosystemArgs = {
 
 
 export type RootQueryProjectPageArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryProjectRatingArgs = {
   id: Scalars['ID'];
 };
 
@@ -5609,6 +5705,14 @@ export type RootQueryAllCreateCreditClassPageArgs = {
 export type RootQueryAllCreateMethodologyPageArgs = {
   where?: Maybe<CreateMethodologyPageFilter>;
   sort?: Maybe<Array<CreateMethodologyPageSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllCreditCertificationArgs = {
+  where?: Maybe<CreditCertificationFilter>;
+  sort?: Maybe<Array<CreditCertificationSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -5881,6 +5985,14 @@ export type RootQueryAllProjectEcosystemArgs = {
 export type RootQueryAllProjectPageArgs = {
   where?: Maybe<ProjectPageFilter>;
   sort?: Maybe<Array<ProjectPageSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllProjectRatingArgs = {
+  where?: Maybe<ProjectRatingFilter>;
+  sort?: Maybe<Array<ProjectRatingSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -7722,6 +7834,21 @@ export type AllCreateMethodologyPageQuery = (
   )> }
 );
 
+export type AllCreditCertificationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllCreditCertificationQuery = (
+  { __typename?: 'RootQuery' }
+  & { allCreditCertification: Array<(
+    { __typename?: 'CreditCertification' }
+    & Pick<CreditCertification, 'name'>
+    & { icon?: Maybe<(
+      { __typename?: 'Image' }
+      & ImageFieldsFragment
+    )> }
+  )> }
+);
+
 export type AllCreditClassQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -8065,6 +8192,21 @@ export type AllProjectPageQuery = (
         { __typename?: 'CustomImage' }
         & CustomImageFieldsFragment
       )> }
+    )> }
+  )> }
+);
+
+export type AllProjectRatingQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllProjectRatingQuery = (
+  { __typename?: 'RootQuery' }
+  & { allProjectRating: Array<(
+    { __typename?: 'ProjectRating' }
+    & Pick<ProjectRating, 'name'>
+    & { icon?: Maybe<(
+      { __typename?: 'Image' }
+      & ImageFieldsFragment
     )> }
   )> }
 );
@@ -9412,6 +9554,43 @@ export function useAllCreateMethodologyPageLazyQuery(baseOptions?: Apollo.LazyQu
 export type AllCreateMethodologyPageQueryHookResult = ReturnType<typeof useAllCreateMethodologyPageQuery>;
 export type AllCreateMethodologyPageLazyQueryHookResult = ReturnType<typeof useAllCreateMethodologyPageLazyQuery>;
 export type AllCreateMethodologyPageQueryResult = Apollo.QueryResult<AllCreateMethodologyPageQuery, AllCreateMethodologyPageQueryVariables>;
+export const AllCreditCertificationDocument = gql`
+    query allCreditCertification {
+  allCreditCertification {
+    name
+    icon {
+      ...imageFields
+    }
+  }
+}
+    ${ImageFieldsFragmentDoc}`;
+
+/**
+ * __useAllCreditCertificationQuery__
+ *
+ * To run a query within a React component, call `useAllCreditCertificationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllCreditCertificationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllCreditCertificationQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllCreditCertificationQuery(baseOptions?: Apollo.QueryHookOptions<AllCreditCertificationQuery, AllCreditCertificationQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllCreditCertificationQuery, AllCreditCertificationQueryVariables>(AllCreditCertificationDocument, options);
+      }
+export function useAllCreditCertificationLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllCreditCertificationQuery, AllCreditCertificationQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllCreditCertificationQuery, AllCreditCertificationQueryVariables>(AllCreditCertificationDocument, options);
+        }
+export type AllCreditCertificationQueryHookResult = ReturnType<typeof useAllCreditCertificationQuery>;
+export type AllCreditCertificationLazyQueryHookResult = ReturnType<typeof useAllCreditCertificationLazyQuery>;
+export type AllCreditCertificationQueryResult = Apollo.QueryResult<AllCreditCertificationQuery, AllCreditCertificationQueryVariables>;
 export const AllCreditClassDocument = gql`
     query allCreditClass {
   allCreditClass {
@@ -9977,6 +10156,43 @@ export function useAllProjectPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type AllProjectPageQueryHookResult = ReturnType<typeof useAllProjectPageQuery>;
 export type AllProjectPageLazyQueryHookResult = ReturnType<typeof useAllProjectPageLazyQuery>;
 export type AllProjectPageQueryResult = Apollo.QueryResult<AllProjectPageQuery, AllProjectPageQueryVariables>;
+export const AllProjectRatingDocument = gql`
+    query allProjectRating {
+  allProjectRating {
+    name
+    icon {
+      ...imageFields
+    }
+  }
+}
+    ${ImageFieldsFragmentDoc}`;
+
+/**
+ * __useAllProjectRatingQuery__
+ *
+ * To run a query within a React component, call `useAllProjectRatingQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllProjectRatingQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllProjectRatingQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllProjectRatingQuery(baseOptions?: Apollo.QueryHookOptions<AllProjectRatingQuery, AllProjectRatingQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllProjectRatingQuery, AllProjectRatingQueryVariables>(AllProjectRatingDocument, options);
+      }
+export function useAllProjectRatingLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllProjectRatingQuery, AllProjectRatingQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllProjectRatingQuery, AllProjectRatingQueryVariables>(AllProjectRatingDocument, options);
+        }
+export type AllProjectRatingQueryHookResult = ReturnType<typeof useAllProjectRatingQuery>;
+export type AllProjectRatingLazyQueryHookResult = ReturnType<typeof useAllProjectRatingLazyQuery>;
+export type AllProjectRatingQueryResult = Apollo.QueryResult<AllProjectRatingQuery, AllProjectRatingQueryVariables>;
 export const AllProjectsPageDocument = gql`
     query allProjectsPage {
   allProjectsPage {

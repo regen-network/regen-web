@@ -8,7 +8,7 @@ import {
   ReactQueryAllActivityQueryResponse,
 } from './getAllActivityQuery.types';
 
-export const getAllBasketDetailsPageQuery = ({
+export const getAllActivityQuery = ({
   sanityClient,
   ...params
 }: ReactQueryAllActivityQueryParams): ReactQueryAllActivityQueryResponse => ({

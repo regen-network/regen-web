@@ -1,17 +1,14 @@
 import { Box, SxProps } from '@mui/material';
 
-import { RoundLogo } from 'src/components/atoms/RoundLogo/RoundLogo';
-import { Label, Subtitle } from 'src/components/typography';
-
+import { RoundLogo } from '../../../components/atoms/RoundLogo/RoundLogo';
+import { Label, Subtitle } from '../../../components/typography';
 import { Theme } from '../../../theme/muiTheme';
 import { sxToArray } from '../../../utils/mui/sxToArray';
-import { RoundLogosItemType } from './RoundLogosItemsList.types';
+import { RoundLogoItemsListType } from './RoundLogoItemsList.types';
 
-export interface Props {
-  title: string;
-  items: RoundLogosItemType[];
+export type Props = RoundLogoItemsListType & {
   sx?: SxProps<Theme>;
-}
+};
 
 const RoundLogoItemsList = ({ title, items, sx = [] }: Props): JSX.Element => {
   return (

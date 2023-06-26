@@ -2,6 +2,8 @@ import { Box } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
 import { ProjectTagType } from '../molecules/ProjectTag/ProjectTag.types';
+import { RoundLogoItemsList } from '../molecules/RoundLogoItemsList/RoundLogoItemsList';
+import { RoundLogoItemsListType } from '../molecules/RoundLogoItemsList/RoundLogoItemsList.types';
 import { CollapseList } from '../organisms/CollapseList/CollapseList';
 import { ProjectTags } from '../organisms/ProjectTags/ProjectTags';
 import Card from './Card';
@@ -16,6 +18,7 @@ interface ProjectTopCardProps {
   activities?: ProjectTagType[];
   ecosystems?: ProjectTagType[];
   impact: ProjectImpactCardProps[];
+  certificationsAndRating?: RoundLogoItemsListType;
 }
 
 const useStyles = makeStyles()(theme => ({
@@ -35,6 +38,7 @@ export default function ProjectTopCard({
   activities,
   ecosystems,
   impact,
+  certificationsAndRating,
 }: ProjectTopCardProps): JSX.Element {
   const { classes: styles, cx } = useStyles();
   return (
@@ -55,6 +59,9 @@ export default function ProjectTopCard({
             mb: 5,
           }}
         />
+      )}
+      {certificationsAndRating && (
+        <RoundLogoItemsList {...certificationsAndRating} sx={{ mb: 5 }} />
       )}
     </Card>
   );

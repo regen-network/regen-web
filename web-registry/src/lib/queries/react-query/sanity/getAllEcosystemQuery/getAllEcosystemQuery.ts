@@ -8,7 +8,7 @@ import {
   ReactQueryAllEcosystemQueryResponse,
 } from './getAllEcosystemQuery.types';
 
-export const getAllBasketDetailsPageQuery = ({
+export const getAllEcosystemQuery = ({
   sanityClient,
   ...params
 }: ReactQueryAllEcosystemQueryParams): ReactQueryAllEcosystemQueryResponse => ({

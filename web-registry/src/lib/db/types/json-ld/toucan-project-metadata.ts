@@ -1,6 +1,8 @@
 import { CompactedNameUrl } from 'lib/rdf/types';
 
+import { Certification } from './certification';
 import { ApprovedMethodologies } from './methodology';
+import { BeZeroRating } from './rating';
 import { VCSProjectMetadataLD } from './vcs-project-metadata';
 
 export interface ToucanProjectMetadataLD
@@ -15,6 +17,8 @@ export interface ToucanProjectMetadataLD
   'regen:approvedMethodologies': ApprovedMethodologies;
   'regen:toucanProjectTokenId': number;
   'regen:toucanURI': string;
+  'regen:rating': BeZeroRating;
+  'regen:certification': Certification;
 
   // optional in C03:
   'regen:projectStartDate'?: string;

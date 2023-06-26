@@ -1,12 +1,12 @@
 /* parseMethodologies */
+import {
+  RoundLogoItemsListType,
+  RoundLogoItemType,
+} from 'web-components/lib/components/molecules/RoundLogoItemsList/RoundLogoItemsList.types';
 import { ImageType } from 'web-components/lib/types/shared/imageType';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
-import {
-  AllProjectActivityQuery,
-  AllProjectEcosystemQuery,
-  Sdg,
-} from 'generated/sanity-graphql';
+import { ImageFieldsFragment, Sdg } from 'generated/sanity-graphql';
 import {
   AnchoredProjectMetadataLD,
   CreditClassMetadataLD,
@@ -19,7 +19,12 @@ import { ApprovedMethodologies } from 'lib/db/types/json-ld/methodology';
 import { getSanityImgSrc } from 'lib/imgSrc';
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
-import { SEE_ALL_METHODOLOGIES } from './ProjectTopSection.constants';
+import {
+  CERTIFICATIONS,
+  RATINGS,
+  SEE_ALL_METHODOLOGIES,
+} from './ProjectTopSection.constants';
+import { CreditCertification, ProjectRating } from './ProjectTopSection.types';
 
 type GetSdgsImagesParams = {
   sdgs?: Maybe<Maybe<Sdg>[]>;
@@ -62,6 +67,8 @@ type ParseProjectMetadataReturn = {
   areaUnit?: string;
   placeName?: string;
   projectMethodology?: ProjectMethodology;
+  rating?: ProjectRating;
+  certification?: CreditCertification;
 };
 
 export type ProjectMethodology = {
@@ -71,6 +78,7 @@ export type ProjectMethodology = {
 
 export const parseProjectMetadata = (
   projectMetadata?: AnchoredProjectMetadataLD | LegacyProjectMetadataLD,
+  onChainProjectId?: string,
 ): ParseProjectMetadataReturn => {
   const projectName = projectMetadata?.['schema:name'];
   const projectSize = projectMetadata?.['regen:projectSize'];
@@ -79,17 +87,35 @@ export const parseProjectMetadata = (
   const areaUnit = getAreaUnit(unit as qudtUnit);
   const placeName = projectMetadata?.['schema:location']?.['place_name'];
   let projectMethodology;
-  if (isAnchoredProjectMetadata(projectMetadata)) {
+  let rating;
+  let certification;
+
+  if (isAnchoredProjectMetadata(projectMetadata, onChainProjectId)) {
+    // Methodology
     projectMethodology =
       projectMetadata?.['regen:vcsMethodology'] ??
       projectMetadata?.['regen:offsetProtocol'] ??
       parseMethodologies({
-        methodologies: projectMetadata['regen:approvedMethodologies'],
+        methodologies: projectMetadata?.['regen:approvedMethodologies'],
       });
+
+    // Rating
+    rating = projectMetadata?.['regen:rating'];
+
+    // Certification
+    certification = projectMetadata?.['regen:certification'];
   }
   // projectMetadata?.['schema:location']?.['geojson:place_name'];
 
-  return { projectName, area, areaUnit, placeName, projectMethodology };
+  return {
+    projectName,
+    area,
+    areaUnit,
+    placeName,
+    projectMethodology,
+    rating,
+    certification,
+  };
 };
 
 /* parseProjectPageMetadata */
@@ -169,35 +195,69 @@ export const getOffsetGenerationMethod = (metadata?: CreditClassMetadataLD) => {
   return metadata?.['regen:offsetGenerationMethod']?.[0];
 };
 
-/* getProjectActivityIconsMapping */
+/* getIconsMapping */
 
-type GetProjectActivityIconsMappingParams = {
-  allProjectActivityData?: AllProjectActivityQuery;
+type SanityItemType = {
+  name?: Maybe<string>;
+  icon?: ImageFieldsFragment | null;
 };
 
-export const getProjectActivityIconsMapping = ({
-  allProjectActivityData,
-}: GetProjectActivityIconsMappingParams) => {
-  return allProjectActivityData?.allProjectActivity.reduce((acc, activity) => {
-    acc[String(activity.name)] = String(activity.icon?.asset?.url);
+type GetIconsMappingParams = {
+  data?: SanityItemType[];
+};
+
+export const getIconsMapping = ({ data }: GetIconsMappingParams) => {
+  return data?.reduce((acc, item) => {
+    acc[item?.name ?? ''] = String(item?.icon?.asset?.url);
     return acc;
   }, {} as Record<string, string | undefined>);
 };
 
-/* getProjectEcosystemIconsMapping */
+/* getRatingAndCertificationsData */
 
-type GetProjectEcosystemIconsMappingParams = {
-  allProjectEcosystemData?: AllProjectEcosystemQuery;
+type GetRatingAndCertificationsDataParams = {
+  rating?: ProjectRating;
+  ratingIcons?: Record<string, string | undefined>;
+  certification?: CreditCertification;
+  certificationIcons?: Record<string, string | undefined>;
 };
 
-export const getProjectEcosystemIconsMapping = ({
-  allProjectEcosystemData,
-}: GetProjectEcosystemIconsMappingParams) => {
-  return allProjectEcosystemData?.allProjectEcosystem.reduce(
-    (acc, ecosystem) => {
-      acc[String(ecosystem.name)] = String(ecosystem.icon?.asset?.url);
-      return acc;
-    },
-    {} as Record<string, string | undefined>,
-  );
+export const getRatingAndCertificationsData = ({
+  rating,
+  ratingIcons,
+  certification,
+  certificationIcons,
+}: GetRatingAndCertificationsDataParams): RoundLogoItemsListType => {
+  let items: RoundLogoItemType[] = [];
+  let title = '';
+
+  if (certification && certification['schema:name']) {
+    const certificationName = certification['schema:name'] ?? '';
+    items = [
+      {
+        image: {
+          src:
+            certificationIcons?.[certificationName] ?? '/svg/certification.svg',
+        },
+        name: certificationName,
+      },
+    ];
+    title = `${CERTIFICATIONS}`;
+  }
+
+  if (rating && rating['schema:name']) {
+    const ratingName = rating['schema:name'];
+    items = [
+      ...items,
+      {
+        image: {
+          src: ratingIcons?.[ratingName] ?? '/svg/rating.svg',
+        },
+        name: ratingName,
+      },
+    ];
+    title = title ? `${title} & ${RATINGS}` : RATINGS;
+  }
+
+  return { title, items };
 };

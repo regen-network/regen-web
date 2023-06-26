@@ -19,7 +19,7 @@ const RoundLogo = ({ image, sx = [] }: Props): JSX.Element => {
         {
           borderRadius: '58px',
           border: theme => `1px solid ${theme.palette.grey[100]}`,
-          background: 'primary.main',
+          backgroundColor: 'primary.main',
           width: 58,
           height: 58,
           p: 1,

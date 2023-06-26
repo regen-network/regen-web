@@ -6,12 +6,12 @@ import { ProjectDetailsSectionStakeholdersProps } from './ProjectDetailsSection.
 
 export const ProjectDetailsSectionStakeholders: React.FC<ProjectDetailsSectionStakeholdersProps> =
   ({ program, projectAdmin, projectDeveloper, projectVerifier }) => {
-    const sm = Math.max(
+    const sm = Math.min(
       12 /
         [program, projectAdmin, projectDeveloper, projectVerifier].filter(u =>
           Boolean(u),
         ).length,
-      2,
+      4,
     );
 
     return (

@@ -37,7 +37,6 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
   // CFC
   const cfcProjectId = metadata?.['regen:cfcProjectId'];
   const projectDesignDocument = metadata?.['regen:projectDesignDocument'];
-  const offsetProtocol = metadata?.['regen:offsetProtocol'];
 
   // Toucan
   const toucanProjectTokenId = metadata?.['regen:toucanProjectTokenId'];

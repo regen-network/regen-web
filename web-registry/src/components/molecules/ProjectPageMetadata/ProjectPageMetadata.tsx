@@ -146,17 +146,6 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
               }
             />
           )}
-          {offsetProtocol && (
-            <MetaDetail
-              label="offset protocol"
-              data={
-                <ArrowLink
-                  label={offsetProtocol?.['schema:name']}
-                  href={offsetProtocol?.['schema:url'] || ''}
-                />
-              }
-            />
-          )}
           {startDate && (
             <MetaDetail
               label="project start date"

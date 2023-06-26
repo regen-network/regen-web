@@ -41,7 +41,7 @@ export const CollapseList = ({
         onClick={() => setExpanded(!expanded)}
         sx={{
           px: [0],
-          ':hover': { bgcolor: 'transparent !important' },
+          ':hover': { bgcolor: 'transparent' },
         }}
       >
         {expanded ? SEE_LESS : SEE_MORE}

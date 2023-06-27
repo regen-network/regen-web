@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { Buy1Event } from 'web-registry/src/lib/tracker/types';
 import { useTracker } from 'web-registry/src/lib/tracker/useTracker';
 
@@ -44,11 +44,26 @@ export const SellOrdersActionsBar = ({
 }: Params): JSX.Element => {
   const location = useLocation();
   const { track } = useTracker();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   return (
     <StickyBar>
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          width: '100%',
+        }}
+      >
         {avgPricePerTonLabel && (
-          <Box sx={{ display: 'flex', flexDirection: 'column', mr: 5 }}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              mr: { xs: 2, sm: 5 },
+            }}
+          >
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Label size="xs" sx={{ color: 'info.main', mr: 1 }}>
                 {AVG_PRICE_LABEL}
@@ -63,11 +78,13 @@ export const SellOrdersActionsBar = ({
           </Box>
         )}
         {!isCommunityCredit && (
-          <span>
-            <OutlinedButton onClick={onBookCallButtonClick} sx={{ mr: 5 }}>
-              {BOOK_CALL}
-            </OutlinedButton>
-          </span>
+          <OutlinedButton
+            onClick={onBookCallButtonClick}
+            size={isMobile ? 'small' : 'medium'}
+            sx={{ mr: { xs: 2, sm: 5 } }}
+          >
+            {BOOK_CALL}
+          </OutlinedButton>
         )}
         <InfoTooltip
           title={isBuyButtonDisabled ? BUY_DISABLED_TOOLTIP : ''}
@@ -89,8 +106,9 @@ export const SellOrdersActionsBar = ({
                 onBuyButtonClick();
               }}
               disabled={isBuyButtonDisabled}
+              sx={{ height: '100%' }}
             >
-              {'BUY CREDITS'}
+              {isMobile ? 'BUY' : 'BUY CREDITS'}
             </ContainedButton>
           </span>
         </InfoTooltip>

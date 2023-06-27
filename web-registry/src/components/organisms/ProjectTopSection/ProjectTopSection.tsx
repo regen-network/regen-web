@@ -1,6 +1,7 @@
 import LazyLoad from 'react-lazyload';
 import { Box, Grid, Skeleton } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
+import { TRANSPARENT_PIXEL } from 'utils/image/transparentPixel';
 
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
@@ -29,7 +30,6 @@ import {
 import { ProjectTopLink } from '../../atoms';
 import { ProjectBatchTotals, ProjectPageMetadata } from '../../molecules';
 import useImpact from './hooks/useImpact';
-import { PROJECT_STANDARD_DEFAULT_VALUE } from './ProjectTopSection.constants';
 import { ProjectTopSectionCreditClassCard } from './ProjectTopSection.CreditClassCard';
 import {
   ProjectTopSectionQuoteMark,
@@ -139,9 +139,7 @@ function ProjectTopSection({
 
   const impact = useImpact({ coBenefitsIRIs, primaryImpactIRI });
   const hasStandardLogo = impact.some(item => !!item.standard);
-  const standardDefaultValue = hasStandardLogo
-    ? PROJECT_STANDARD_DEFAULT_VALUE
-    : undefined;
+  const standardDefaultValue = hasStandardLogo ? TRANSPARENT_PIXEL : undefined;
 
   return (
     <Section classes={{ root: classes.section }}>

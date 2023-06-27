@@ -21,7 +21,7 @@ export interface CreditClassMetadataLD {
   'regen:projectActivities': string[];
   'regen:carbonOffsetStandard'?: CompactedNameUrl;
   'regen:tokenizationSource'?: string;
-  'regen:certification'?: Certification;
+  'regen:certification'?: Certification[];
 }
 
 interface Context {
@@ -31,6 +31,7 @@ interface Context {
   'regen:sectoralScope': ContainerList;
   'schema:itemListElement': ContainerList;
   'regen:offsetGenerationMethod': ContainerList;
+  'regen:certification'?: ContainerList;
 }
 
 interface ContainerList {

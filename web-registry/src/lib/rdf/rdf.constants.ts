@@ -80,6 +80,7 @@ export const COMPACTED_CONTEXT = {
   'schema:itemListElement': { '@container': '@list' },
   'regen:additionalCertifications': { '@container': '@list' },
   'regen:cfcVintageYear': { '@type': 'xsd:gYear' },
+  'regen:rating': { '@container': '@list' },
 
   // Generic unanchored and anchored project metadata
   ...UNANCHORED_PROJECT_CONTEXT,

@@ -67,7 +67,7 @@ type ParseProjectMetadataReturn = {
   areaUnit?: string;
   placeName?: string;
   projectMethodology?: ProjectMethodology;
-  rating?: ProjectRating;
+  rating?: ProjectRating[];
 };
 
 export type ProjectMethodology = {
@@ -210,27 +210,32 @@ export const getIconsMapping = ({ data }: GetIconsMappingParams) => {
 /* getRatingAndCertificationsData */
 
 type GetRatingAndCertificationsDataParams = {
-  rating?: ProjectRating;
+  ratings?: ProjectRating[];
   ratingIcons?: Record<string, string | undefined>;
-  certification?: CreditCertification;
+  certifications?: CreditCertification[];
   certificationIcons?: Record<string, string | undefined>;
 };
 
 export const getRatingAndCertificationsData = ({
-  rating,
+  ratings,
   ratingIcons,
-  certification,
+  certifications,
   certificationIcons,
 }: GetRatingAndCertificationsDataParams): RoundLogoItemsListType => {
-  let items: RoundLogoItemType[] = [];
-  let title = '';
+  const hasCertification = certifications && certifications.length > 0;
+  const hasRating = ratings && ratings.length > 0;
+  const certificationTitle = hasCertification ? CERTIFICATIONS : '';
+  const ratingTitle = hasRating ? RATINGS : '';
+  const title = certificationTitle
+    ? `${certificationTitle} & ${ratingTitle}`
+    : ratingTitle;
 
-  if (certification && certification['schema:name']) {
-    const certificationName = certification['schema:name'] ?? '';
-    const certificationLink = certification['schema:url'] ?? '#';
+  const certificationItems =
+    certifications?.map(certification => {
+      const certificationName = certification['schema:name'] ?? '';
+      const certificationLink = certification['schema:url'] ?? '';
 
-    items = [
-      {
+      return {
         image: {
           src:
             certificationIcons?.[certificationName] ?? '/svg/certification.svg',
@@ -239,18 +244,15 @@ export const getRatingAndCertificationsData = ({
           text: certificationName,
           href: certificationLink,
         },
-      },
-    ];
-    title = `${CERTIFICATIONS}`;
-  }
+      };
+    }) ?? [];
 
-  if (rating && rating['schema:name']) {
-    const ratingName = rating['schema:name'] ?? '';
-    const ratingLink = rating['schema:url'] ?? '';
+  const ratingItems =
+    ratings?.map(rating => {
+      const ratingName = rating['schema:name'] ?? '';
+      const ratingLink = rating['schema:url'] ?? '';
 
-    items = [
-      ...items,
-      {
+      return {
         image: {
           src: ratingIcons?.[ratingName] ?? '/svg/rating.svg',
         },
@@ -258,10 +260,10 @@ export const getRatingAndCertificationsData = ({
           text: ratingName,
           href: ratingLink,
         },
-      },
-    ];
-    title = title ? `${title} & ${RATINGS}` : RATINGS;
-  }
+      };
+    }) ?? [];
+
+  const items: RoundLogoItemType[] = [...certificationItems, ...ratingItems];
 
   return { title, items };
 };

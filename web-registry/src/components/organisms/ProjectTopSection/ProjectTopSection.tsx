@@ -27,8 +27,7 @@ import {
   MAPBOX_TOKEN,
 } from 'components/templates/ProjectDetails/ProjectDetails.config';
 
-import { ProjectTopLink } from '../../atoms';
-import { ProjectBatchTotals, ProjectPageMetadata } from '../../molecules';
+import { ProjectBatchTotals } from '../../molecules';
 import useImpact from './hooks/useImpact';
 import { ProjectTopSectionCreditClassCard } from './ProjectTopSection.CreditClassCard';
 import {
@@ -41,7 +40,6 @@ import {
   getProjectActivityIconsMapping,
   getProjectEcosystemIconsMapping,
   getSdgsImages,
-  isAnchoredProjectMetadata,
   parseMethodologies,
   parseOffChainProject,
   parseProjectMetadata,
@@ -70,7 +68,7 @@ function ProjectTopSection({
   const { classes } = useProjectTopSectionStyles();
   const { ecocreditClient } = useLedger();
 
-  const { offsetGenerationMethod, primaryImpactIRI, coBenefitsIRIs } =
+  const { primaryImpactIRI, coBenefitsIRIs } =
     parseOffChainProject(offChainProject);
 
   const { projectName, area, areaUnit, placeName, projectMethodology } =

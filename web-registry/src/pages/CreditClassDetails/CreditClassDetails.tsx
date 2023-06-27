@@ -78,7 +78,7 @@ function CreditClassDetails({
     classId: creditClassId,
   });
 
-  const { isSellFlowDisabled, credits } = useCreateSellOrderData({
+  const { credits } = useCreateSellOrderData({
     projectId: projectsWithOrderData[0]?.id,
   });
 

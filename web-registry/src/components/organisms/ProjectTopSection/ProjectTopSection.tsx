@@ -277,7 +277,6 @@ function ProjectTopSection({
                 monitored: index === 0,
               }),
             )}
-            certificationsAndRating={ratingAndCertificationData}
           />
           {ratingAndCertificationData && (
             <RoundLogoItemsList

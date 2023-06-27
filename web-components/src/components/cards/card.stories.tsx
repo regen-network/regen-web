@@ -33,29 +33,22 @@ export default {
   component: Card,
 };
 
-const projectDeveloper: User = {
-  name: 'Odonata',
-  type: 'USER',
-  location: 'South Melbourne',
-  image:
-    'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
-  description:
-    'Odonata is a not-for-profit entity supporting biodiversity impact solutions.',
-};
-
-const landSteward: User = {
-  name: 'Ngarrindjeri Tribe',
-  type: 'USER',
-  location: 'Southern Australia',
-  image: '/tribe.png',
-  description:
-    'The Ngarrindjeri culture is centered around the lower lakes of the Murray River.',
-};
-
 export const projectTopCard = (): JSX.Element => (
   <ProjectTopCard
-    projectDeveloper={projectDeveloper}
-    landSteward={landSteward}
+    impact={[
+      {
+        name: 'Reforestation',
+        imgSrc: '/illustrations/reforestation.png',
+        sdgs: [
+          { src: '/sdgs/sdg3.svg', alt: 'sdg3' },
+          { src: '/sdgs/sdg4.svg', alt: 'sdg4' },
+          { src: '/sdgs/sdg8.svg', alt: 'sdg8' },
+        ],
+        standard:
+          'https://regen-registry.s3.amazonaws.com/projects/kasigau/VCS.png',
+        monitored: true,
+      },
+    ]}
   />
 );
 
@@ -79,7 +72,6 @@ export const monitoredImpactCard = (): JSX.Element => (
 export const projectImpactCard = (): JSX.Element => (
   <ProjectImpactCard
     name="Reforestation"
-    description="Preservation, afforestation (where trees were not previously) and reforestation (where trees were previously) of urban forests."
     imgSrc="/illustrations/reforestation.png"
     sdgs={[
       { src: '/sdgs/sdg3.svg', alt: 'sdg3' },

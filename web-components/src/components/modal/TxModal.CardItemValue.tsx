@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Collapse } from '@mui/material';
 
 import { TextButton } from '../buttons/TextButton';
+import { CollapseList } from '../organisms/CollapseList/CollapseList';
 import { Subtitle } from '../typography';
 import { ItemValue, LinkComponentProp } from './TxModal';
 
@@ -48,43 +49,13 @@ interface CardItemValueListProps {
 export const CardItemValueList = (
   props: CardItemValueListProps,
 ): JSX.Element => {
-  const [expanded, setExpanded] = useState<boolean>(false);
-
-  if (props.value.length <= 2) {
-    return (
-      <>
-        {props.value.map(row => (
-          <CardItemValue {...props} value={row} key={row.name} />
-        ))}
-      </>
-    );
-  }
-
-  const alwaysVisible = props.value.slice(0, 2);
-  const underCollapse = props.value.slice(2);
-
   return (
-    <>
-      {alwaysVisible.map(row => (
+    <CollapseList
+      buttonTextSize="xxs"
+      max={2}
+      items={props.value.map(row => (
         <CardItemValue {...props} value={row} key={row.name} />
       ))}
-
-      <TextButton
-        textSize="xxs"
-        onClick={() => setExpanded(!expanded)}
-        sx={{
-          px: [0],
-          ':hover': { bgcolor: 'transparent !important' },
-        }}
-      >
-        {expanded ? '- see less' : '+ see more'}
-      </TextButton>
-
-      <Collapse in={expanded}>
-        {underCollapse.map(row => (
-          <CardItemValue {...props} value={row} key={row.name} />
-        ))}
-      </Collapse>
-    </>
+    />
   );
 };

@@ -1,11 +1,7 @@
 import LazyLoad from 'react-lazyload';
-import {
-  ApolloClient,
-  NormalizedCacheObject,
-  useApolloClient,
-} from '@apollo/client';
 import { Box, Grid, Skeleton } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
+import { TRANSPARENT_PIXEL } from 'utils/image/transparentPixel';
 
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
@@ -22,13 +18,9 @@ import {
 import { useLedger } from 'ledger';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
-import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
+import { getSanityImgSrc } from 'lib/imgSrc';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
-import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
-import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 
-import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
@@ -36,6 +28,7 @@ import {
 } from 'components/templates/ProjectDetails/ProjectDetails.config';
 
 import { ProjectBatchTotals } from '../../molecules';
+import useImpact from './hooks/useImpact';
 import { ProjectTopSectionCreditClassCard } from './ProjectTopSection.CreditClassCard';
 import {
   ProjectTopSectionQuoteMark,
@@ -43,10 +36,10 @@ import {
 } from './ProjectTopSection.styles';
 import { ProjectTopSectionProps } from './ProjectTopSection.types';
 import {
-  getDisplayAdmin,
   getOffsetGenerationMethod,
   getProjectActivityIconsMapping,
   getProjectEcosystemIconsMapping,
+  getSdgsImages,
   parseMethodologies,
   parseOffChainProject,
   parseProjectMetadata,
@@ -64,60 +57,25 @@ function ProjectTopSection({
   isGISFile,
   onChainProjectId,
   loading,
-  landOwner,
-  landSteward,
-  projectDeveloper,
-  projectVerifier,
   projectWithOrderData,
   soldOutProjectsIds,
   batchData,
   otcCard,
+  creditClassOnChain,
+  creditClassMetadata,
+  onChainCreditClassId,
 }: ProjectTopSectionProps): JSX.Element {
   const { classes } = useProjectTopSectionStyles();
-  const { ecocreditClient, dataClient } = useLedger();
+  const { ecocreditClient } = useLedger();
 
-  const graphqlClient =
-    useApolloClient() as ApolloClient<NormalizedCacheObject>;
-
-  const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
-  const { data: partyByAddr } = useQuery(
-    getPartyByAddrQuery({
-      client: graphqlClient,
-      addr: onChainProject?.admin ?? '',
-      enabled: !!onChainProject?.admin && !!graphqlClient && !!csrfData,
-    }),
-  );
-  const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
-
-  const { creditClass } = parseOffChainProject(offChainProject);
+  const { primaryImpactIRI, coBenefitsIRIs } =
+    parseOffChainProject(offChainProject);
 
   const { projectName, area, areaUnit, placeName, projectMethodology } =
     parseProjectMetadata(projectMetadata);
 
   const { glanceText, primaryDescription, quote } =
     parseProjectPageMetadata(projectPageMetadata);
-
-  /* Credit class info from on chain metadata or Sanity */
-
-  const onChainCreditClassId =
-    creditClass?.onChainId ?? onChainProjectId?.split('-')?.[0];
-  const { data: creditClassOnChain } = useQuery(
-    getClassQuery({
-      client: ecocreditClient,
-      request: {
-        classId: onChainCreditClassId ?? '',
-      },
-      enabled: !!ecocreditClient && !!onChainCreditClassId,
-    }),
-  );
-  const { data: creditClassMetadataData } = useQuery(
-    getMetadataQuery({
-      iri: creditClassOnChain?.class?.metadata,
-      enabled: !!dataClient && !!creditClassOnChain?.class?.metadata,
-      dataClient,
-    }),
-  );
-  const creditClassMetadata = creditClassMetadataData as CreditClassMetadataLD;
 
   const { data: creditTypeData } = useQuery(
     getCreditTypeQuery({
@@ -176,6 +134,10 @@ function ProjectTopSection({
       src: projectEcosystemIconsMapping?.[ecosystem] ?? '',
     },
   }));
+
+  const impact = useImpact({ coBenefitsIRIs, primaryImpactIRI });
+  const hasStandardLogo = impact.some(item => !!item.standard);
+  const standardDefaultValue = hasStandardLogo ? TRANSPARENT_PIXEL : undefined;
 
   return (
     <Section classes={{ root: classes.section }}>
@@ -273,17 +235,17 @@ function ProjectTopSection({
         </Grid>
         <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
           <ProjectTopCard
-            projectAdmin={getDisplayAdmin(
-              onChainProject?.admin,
-              party,
-              defaultAvatar,
-            )}
-            projectDeveloper={projectDeveloper}
-            projectVerifier={projectVerifier}
-            landSteward={landSteward}
-            landOwner={landOwner}
             activities={activityTags}
             ecosystems={ecosystemTags}
+            impact={impact.map(
+              ({ name, image, standard, sdgs }, index: number) => ({
+                name,
+                imgSrc: getSanityImgSrc(image),
+                sdgs: getSdgsImages({ sdgs }),
+                standard: getSanityImgSrc(standard, standardDefaultValue),
+                monitored: index === 0,
+              }),
+            )}
           />
           {otcCard && (
             <Box sx={{ mt: 5 }}>

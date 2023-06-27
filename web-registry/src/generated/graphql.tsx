@@ -5110,7 +5110,10 @@ export type ProjectFieldsFragment = (
   & { creditClassByCreditClassId?: Maybe<(
     { __typename?: 'CreditClass' }
     & Pick<CreditClass, 'onChainId'>
-    & { creditClassVersionsById: (
+    & { partyByRegistryId?: Maybe<(
+      { __typename?: 'Party' }
+      & PartyFieldsFragment
+    )>, creditClassVersionsById: (
       { __typename?: 'CreditClassVersionsConnection' }
       & { nodes: Array<Maybe<(
         { __typename?: 'CreditClassVersion' }
@@ -5300,6 +5303,9 @@ export const ProjectFieldsFragmentDoc = gql`
   metadata
   creditClassByCreditClassId {
     onChainId
+    partyByRegistryId {
+      ...partyFields
+    }
     creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
       nodes {
         name

@@ -1,7 +1,9 @@
-import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import {
+  ProjectInfo,
+  QueryClassResponse,
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { Props as ActionCardProps } from 'web-components/lib/components/molecules/ActionCard/ActionCard';
-import { Party } from 'web-components/lib/components/user/UserInfo';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import {
@@ -15,6 +17,7 @@ import {
 } from 'types/ledger/ecocredit';
 import {
   AnchoredProjectMetadataLD,
+  CreditClassMetadataLD,
   LegacyProjectMetadataLD,
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
@@ -31,10 +34,6 @@ export type ProjectTopSectionProps = {
   geojson?: any;
   isGISFile?: boolean;
   onChainProjectId?: string;
-  landSteward?: Party;
-  landOwner?: Party;
-  projectDeveloper?: Party;
-  projectVerifier?: Party;
   loading?: boolean;
   soldOutProjectsIds: string[];
   projectWithOrderData: ProjectWithOrderData;
@@ -43,6 +42,9 @@ export type ProjectTopSectionProps = {
     totals?: BatchTotalsForProject;
   };
   otcCard?: ActionCardProps;
+  creditClassMetadata?: CreditClassMetadataLD;
+  creditClassOnChain?: QueryClassResponse | null;
+  onChainCreditClassId?: string;
 };
 
 export type SdgType = SdgByIriQuery['allSdg'][0];

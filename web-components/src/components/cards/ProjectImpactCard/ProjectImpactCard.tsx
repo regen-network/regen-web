@@ -10,7 +10,7 @@ import { useProjectImpactCardStyles } from './ProjectImpactCard.styles';
 export interface ProjectImpactCardProps {
   className?: string;
   name?: string | null;
-  description: JSX.Element | string;
+  description?: JSX.Element | string;
   imgSrc: string;
   sdgs?: ImageType[];
   monitored?: boolean;
@@ -39,104 +39,97 @@ export default function ProjectImpactCard({
       borderRadius="10px"
       borderColor="grey.100"
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        width: { xs: 291, sm: 367 },
+        p: { xs: 2, sm: 2.5 },
+        pr: { xs: 3.75, sm: 5 },
       }}
     >
-      <Box
-        sx={theme => ({
-          display: 'flex',
-          backgroundImage: `url(${imgSrc})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          textAlign: 'left',
-          position: 'relative',
-          [theme.breakpoints.up('sm')]: {
-            height: theme.spacing(59),
-          },
-          [theme.breakpoints.down('sm')]: {
-            height: theme.spacing(50),
-          },
-        })}
-      >
-        <Label
-          size="sm"
-          sx={theme => ({
-            position: 'absolute',
-            top: theme.spacing(7.5),
-            left: 0,
-            backgroundColor: 'secondary.main',
-            color: 'primary.main',
-            borderRadius: '0px 2px 2px 0px',
-            p: 3,
-          })}
-        >
-          {monitored ? 'primary impact' : 'co-benefit'}
-        </Label>
-        <Title
-          variant="h4"
-          sx={{
-            color: 'primary.main',
-            alignSelf: 'flex-end',
-            p: [4, 5],
-          }}
-        >
-          {name}
-        </Title>
-      </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          flexGrow: 1,
-          p: [4, 5],
-        }}
-      >
-        <Body as="div" size="sm" mobileSize="sm" sx={{ pb: 4 }}>
-          {description}
-        </Body>
-        <Box>
-          {hasSdgs && (
-            <Grid container spacing={5.625} sx={{ mb: 3.125, mt: -5 }}>
-              {sdgs.map(sdg => (
-                <Grid key={sdg.src} item>
-                  <Box
-                    component="img"
-                    sx={{
-                      width: { xs: 68, sm: 92 },
-                      height: { xs: 68, sm: 92 },
-                    }}
-                    src={sdg.src}
-                    alt={sdg.alt}
-                  />
-                </Grid>
-              ))}
-            </Grid>
-          )}
-          {standard && (
-            <Box
+      <Grid container wrap="nowrap">
+        <Grid item>
+          <Box
+            sx={{
+              backgroundImage: `url(${imgSrc})`,
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              textAlign: 'left',
+              position: 'relative',
+              height: [120, 149],
+              width: [120, 149],
+              borderRadius: '8px',
+            }}
+          >
+            <Label
+              size="xxs"
+              mobileSize="xxs"
               sx={{
-                my: [2],
-                height: 42,
-                display: 'flex',
-                alignItems: 'center',
+                position: 'absolute',
+                top: [15, 25],
+                left: 0,
+                backgroundColor: 'secondary.main',
+                color: 'primary.main',
+                borderRadius: '0px 2px 2px 0px',
+                p: 2,
+                pl: 2.5,
               }}
             >
-              <Image
-                src={standard}
-                alt={standard}
-                imageStorageBaseUrl={imageStorageBaseUrl}
-                apiServerUrl={apiServerUrl}
-                width={158}
-                className={classes.image}
-              />
-            </Box>
+              {monitored ? 'primary impact' : 'co-benefit'}
+            </Label>
+          </Box>
+        </Grid>
+        <Grid item pl={[3.75, 5]}>
+          <Title
+            variant="h6"
+            mobileVariant="textSmall"
+            pt={[1, 1.25]}
+            pb={[2, 2.5]}
+          >
+            {name}
+          </Title>
+          {description && (
+            <Body as="div" size="sm" mobileSize="sm" sx={{ pb: 4 }}>
+              {description}
+            </Body>
           )}
-        </Box>
-      </Box>
+          <Box>
+            {hasSdgs && (
+              <Grid container spacing={2.5} sx={{ mb: 3.125, mt: -2.5 }}>
+                {sdgs.map(sdg => (
+                  <Grid key={sdg.src} item>
+                    <Box
+                      component="img"
+                      sx={{
+                        width: { xs: 50, sm: 60 },
+                        height: { xs: 50, sm: 60 },
+                      }}
+                      src={sdg.src}
+                      alt={sdg.alt}
+                    />
+                  </Grid>
+                ))}
+              </Grid>
+            )}
+            {standard && (
+              <Box
+                sx={{
+                  my: [2],
+                  height: 42,
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <Image
+                  src={standard}
+                  alt={standard}
+                  imageStorageBaseUrl={imageStorageBaseUrl}
+                  apiServerUrl={apiServerUrl}
+                  width={158}
+                  className={classes.image}
+                />
+              </Box>
+            )}
+          </Box>
+        </Grid>
+      </Grid>
     </Card>
   );
 }

@@ -13,8 +13,12 @@ import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 import { Project } from 'generated/graphql';
 import { Maybe } from 'graphql/jsutils/Maybe';
 import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
-import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
+import {
+  AnchoredProjectMetadataLD,
+  CreditClassMetadataLD,
+} from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
+import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getProjectByHandleQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByHandleQuery/getProjectByHandleQuery';
@@ -41,9 +45,8 @@ import { useLedger } from '../../../ledger';
 import { client as sanityClient } from '../../../lib/clients/sanity';
 import { NotFoundPage } from '../../../pages/NotFound/NotFound';
 import { GettingStartedResourcesSection } from '../../molecules';
-import { ProjectImpactSection, ProjectTopSection } from '../../organisms';
+import { ProjectTopSection } from '../../organisms';
 import useGeojson from './hooks/useGeojson';
-import useImpact from './hooks/useImpact';
 import useSeo from './hooks/useSeo';
 import { useSortedDocuments } from './hooks/useSortedDocuments';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
@@ -148,6 +151,31 @@ function ProjectDetails(): JSX.Element {
     ? projectByOnChainId?.data.projectByOnChainId
     : projectByHandle?.data.projectByHandle;
 
+  /* Credit class */
+
+  const onChainCreditClassId =
+    offChainProject?.creditClassByCreditClassId?.onChainId ??
+    onChainProjectId?.split('-')?.[0];
+  const { data: creditClassOnChain } = useQuery(
+    getClassQuery({
+      client: ecocreditClient,
+      request: {
+        classId: onChainCreditClassId ?? '',
+      },
+      enabled: !!ecocreditClient && !!onChainCreditClassId,
+    }),
+  );
+  const creditClassMetadataRes = useQuery(
+    getMetadataQuery({
+      iri: creditClassOnChain?.class?.metadata,
+      enabled: !!dataClient && !!creditClassOnChain?.class?.metadata,
+      dataClient,
+    }),
+  );
+  const creditClassMetadata = creditClassMetadataRes?.data as
+    | CreditClassMetadataLD
+    | undefined;
+
   /** Anchored project metadata comes from IRI resolver. */
   const { data, isInitialLoading: loadingAnchoredMetadata } = useQuery(
     getMetadataQuery({
@@ -169,8 +197,6 @@ function ProjectDetails(): JSX.Element {
     creditClass,
     creditClassName,
     creditClassVersion,
-    coBenefitsIris,
-    primaryImpactIRI,
   } = parseOffChainProject(offChainProject as Maybe<Project>);
 
   const { sortCallbacksDocuments, sortedDocuments } = useSortedDocuments({
@@ -183,15 +209,18 @@ function ProjectDetails(): JSX.Element {
     : offChainProjectMetadata;
 
   const projectDeveloper = getDisplayParty(
-    'regen:projectDeveloper',
-    anchoredMetadata,
+    anchoredMetadata?.['regen:projectDeveloper'],
     offChainProject?.partyByDeveloperId,
   );
 
   const projectVerifier = getDisplayParty(
-    'regen:projectVerifier',
-    anchoredMetadata,
+    anchoredMetadata?.['regen:projectVerifier'],
     offChainProject?.partyByVerifierId,
+  );
+
+  const program = getDisplayParty(
+    creditClassMetadata?.['regen:sourceRegistry'],
+    offChainProject?.creditClassByCreditClassId?.partyByRegistryId,
   );
 
   const { geojson, isGISFile } = useGeojson({
@@ -207,8 +236,6 @@ function ProjectDetails(): JSX.Element {
   });
 
   const mediaData = parseMedia({ metadata: offChainProjectMetadata, geojson });
-
-  const impactData = useImpact({ coBenefitsIris, primaryImpactIRI });
 
   const loadingDb = loadingProjectByOnChainId || loadingProjectByHandle;
 
@@ -309,8 +336,6 @@ function ProjectDetails(): JSX.Element {
         geojson={geojson}
         isGISFile={isGISFile}
         onChainProjectId={onChainProjectId}
-        projectDeveloper={projectDeveloper}
-        projectVerifier={projectVerifier}
         loading={loadingDb || loadingAnchoredMetadata}
         soldOutProjectsIds={soldOutProjectsIds}
         projectWithOrderData={projectsWithOrderData[0]}
@@ -319,6 +344,9 @@ function ProjectDetails(): JSX.Element {
           totals: batchesTotal,
         }}
         otcCard={otcCard}
+        creditClassOnChain={creditClassOnChain}
+        creditClassMetadata={creditClassMetadata}
+        onChainCreditClassId={onChainCreditClassId}
       />
 
       {hasProjectPhotos && <Gallery photos={projectPhotos} />}
@@ -326,20 +354,13 @@ function ProjectDetails(): JSX.Element {
       <ProjectDetailsSection
         header={sanityProjectPage?.projectDetailsSection}
         credibilityCards={sanityProjectData?.allProject?.[0]?.credibilityCards}
+        projectDeveloper={projectDeveloper}
+        projectVerifier={projectVerifier}
+        program={program}
+        adminAddr={onChainProject?.admin}
       />
 
       <ProjectStorySection projectPageMetadata={offChainProjectMetadata} />
-
-      {impactData?.length > 0 && (
-        <div
-          className={cx(
-            'topo-background-alternate',
-            isKeplrMobileWeb && 'dark',
-          )}
-        >
-          <ProjectImpactSection impact={impactData} />
-        </div>
-      )}
 
       <div
         className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}

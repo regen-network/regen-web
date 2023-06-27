@@ -4,6 +4,9 @@ fragment projectFields on Project {
   metadata
   creditClassByCreditClassId {
     onChainId
+    partyByRegistryId {
+      ...partyFields
+    }
     creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
       nodes {
         name

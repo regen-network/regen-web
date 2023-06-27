@@ -1,14 +1,11 @@
-import { User } from 'web-components/lib/components/user/UserInfo';
-import { truncate } from 'web-components/lib/utils/truncate';
+/* parseMethodologies */
+import { ImageType } from 'web-components/lib/types/shared/imageType';
 
-import {
-  Maybe,
-  PartyFieldsFragment,
-  ProjectFieldsFragment,
-} from 'generated/graphql';
+import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import {
   AllProjectActivityQuery,
   AllProjectEcosystemQuery,
+  Sdg,
 } from 'generated/sanity-graphql';
 import {
   AnchoredProjectMetadataLD,
@@ -19,37 +16,24 @@ import {
 } from 'lib/db/types/json-ld';
 import { CFCCreditClassMetadataLD } from 'lib/db/types/json-ld/cfc-credit-class-metadata';
 import { ApprovedMethodologies } from 'lib/db/types/json-ld/methodology';
+import { getSanityImgSrc } from 'lib/imgSrc';
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
 import { SEE_ALL_METHODOLOGIES } from './ProjectTopSection.constants';
 
-export const getDisplayAdmin = (
-  address?: string,
-  party?: Maybe<PartyFieldsFragment>,
-  defaultAvatar?: string,
-): User | undefined => {
-  if (!address) return;
-  if (!!party) {
-    const name = party.name;
-    const type = party.type;
-    return {
-      name: name ? name : truncate(address),
-      type: type ? type : 'USER',
-      image: party.image ? party.image : defaultAvatar,
-      description: party.description,
-      link: `/ecocredits/accounts/${address}/portfolio`,
-    };
-  }
-  return {
-    name: truncate(address),
-    type: 'USER',
-    image: defaultAvatar,
-    link: `/ecocredits/accounts/${address}/portfolio`,
-  };
+type GetSdgsImagesParams = {
+  sdgs?: Maybe<Maybe<Sdg>[]>;
 };
 
-/* parseMethodologies */
+export const getSdgsImages = ({ sdgs }: GetSdgsImagesParams) => {
+  const sdgsImages: ImageType[] =
+    sdgs?.map(sdg => ({
+      src: getSanityImgSrc(sdg?.image),
+      alt: String(sdg?.title ?? ''),
+    })) ?? [];
 
+  return sdgsImages;
+};
 type ParseMethodologiesParams = {
   methodologies?: ApprovedMethodologies;
 };
@@ -144,12 +128,19 @@ export const parseOffChainProject = (
   );
   const offsetGenerationMethod =
     creditClassVersion?.metadata?.['regen:offsetGenerationMethod'];
+  const coBenefitsIRIs =
+    creditClassVersion?.metadata?.['regen:coBenefits']?.map(
+      (impact: { '@id': string }) => impact['@id'],
+    ) || [];
+  const primaryImpactIRI =
+    creditClassVersion?.metadata?.['regen:indicator']?.['@id'];
 
   return {
-    creditClass,
     creditClassVersion,
     sdgIris,
     offsetGenerationMethod,
+    primaryImpactIRI,
+    coBenefitsIRIs,
   };
 };
 

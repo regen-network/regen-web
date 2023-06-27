@@ -8,12 +8,12 @@ import { EcologicalImpact } from '../../../../generated/sanity-graphql';
 import { client } from '../../../../lib/clients/sanity';
 
 interface InputProps {
-  coBenefitsIris: Maybe<string | string[]> | undefined;
+  coBenefitsIRIs: Maybe<string | string[]> | undefined;
   primaryImpactIRI?: string;
 }
 
 export default function useImpact({
-  coBenefitsIris,
+  coBenefitsIRIs,
   primaryImpactIRI,
 }: InputProps): EcologicalImpact[] {
   const { data: primaryImpactData } = useQuery(
@@ -26,9 +26,9 @@ export default function useImpact({
 
   const { data: coBenefitData } = useQuery(
     getEcologicalImpactByIriQuery({
-      iris: coBenefitsIris,
+      iris: coBenefitsIRIs,
       sanityClient: client,
-      enabled: !!coBenefitsIris,
+      enabled: !!coBenefitsIRIs,
     }),
   );
 
@@ -36,7 +36,7 @@ export default function useImpact({
 
   const sortedImpact = useSortResultWithIris<EcologicalImpact>({
     dataWithIris: coBenefitData?.allEcologicalImpact ?? [],
-    iris: coBenefitsIris,
+    iris: coBenefitsIRIs,
   });
 
   if (primaryImpactData && primaryImpactData.allEcologicalImpact?.length) {

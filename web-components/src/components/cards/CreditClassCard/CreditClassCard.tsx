@@ -96,7 +96,17 @@ const CreditClassCard = ({
           <Title variant="h5" mobileVariant="h6" as="div" sx={{ mb: 2 }}>
             {parseText(title)}
           </Title>
-          <Body size="sm" mobileSize="xs" sx={{ mb: 5 }}>
+          <Body
+            size="sm"
+            mobileSize="xs"
+            sx={{
+              mb: 5,
+              display: '-webkit-box',
+              '-webkit-line-clamp': '3',
+              '-webkit-box-orient': 'vertical',
+              overflow: 'hidden',
+            }}
+          >
             {parseText(description)}
           </Body>
           <Flex flexDirection={{ xs: 'column', sm: 'row' }}>

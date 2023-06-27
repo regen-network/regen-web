@@ -9,6 +9,7 @@ import {
 } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
+import { openLink } from 'lib/button';
 import { client } from 'lib/clients/sanity';
 import { getMetadata } from 'lib/db/api/metadata-graph';
 import { queryClassIssuers, queryEcoClassInfo } from 'lib/ecocredit/api';
@@ -23,6 +24,7 @@ import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/
 import { AVG_PRICE_TOOLTIP_CREDIT_CLASS } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants';
 
 import { useLedger } from '../../ledger';
+import { BOOK_CALL_LINK } from './CreditClassDetails.constants';
 import {
   getCreditClassAvgPricePerTonLabel,
   getProjectNameFromProjectsData,
@@ -96,6 +98,8 @@ function CreditClassDetails({
     projectsWithOrderData,
   });
 
+  const onBookCallButtonClick = () => openLink(BOOK_CALL_LINK, true);
+
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       if (creditClassId && isOnChainClassId) {
@@ -150,13 +154,9 @@ function CreditClassDetails({
         />
       )}
       <SellOrdersActionsBar
-        isSellButtonDisabled={isSellFlowDisabled && Boolean(wallet?.address)}
         isBuyButtonDisabled={isBuyFlowDisabled && Boolean(wallet?.address)}
-        onSellButtonClick={() =>
-          isSellFlowDisabled
-            ? setConnectWalletModal(atom => void (atom.open = true))
-            : setIsSellFlowStarted(true)
-        }
+        isCommunityCredit={isCommunityCredit}
+        onBookCallButtonClick={onBookCallButtonClick}
         onBuyButtonClick={() =>
           isBuyFlowDisabled
             ? setConnectWalletModal(atom => void (atom.open = true))

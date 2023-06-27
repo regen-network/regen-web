@@ -13,6 +13,7 @@ import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 import { Project } from 'generated/graphql';
 import { Maybe } from 'graphql/jsutils/Maybe';
 import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
+import { onBtnClick } from 'lib/button';
 import {
   AnchoredProjectMetadataLD,
   CreditClassMetadataLD,
@@ -244,7 +245,7 @@ function ProjectDetails(): JSX.Element {
     projectId: onChainProjectId,
   });
 
-  const { credits, isSellFlowDisabled } = useCreateSellOrderData({
+  const { credits } = useCreateSellOrderData({
     projectId: projectsWithOrderData[0]?.id,
   });
 
@@ -275,6 +276,8 @@ function ProjectDetails(): JSX.Element {
 
   const projectPhotos = getProjectGalleryPhotos({ offChainProjectMetadata });
   const hasProjectPhotos = projectPhotos.length > 0;
+  const onBookCallButtonClick = () =>
+    onBtnClick(() => void 0, sanityProjectPage?.otcCard?.button);
   const otcCard = formatOtcCardData({
     data: sanityProjectPage?.otcCard,
     isConnected,
@@ -310,13 +313,9 @@ function ProjectDetails(): JSX.Element {
       )}
 
       <SellOrdersActionsBar
-        isSellButtonDisabled={isSellFlowDisabled && Boolean(wallet?.address)}
         isBuyButtonDisabled={isBuyFlowDisabled && Boolean(wallet?.address)}
-        onSellButtonClick={() =>
-          isSellFlowDisabled
-            ? setConnectWalletModal(atom => void (atom.open = true))
-            : setIsSellFlowStarted(true)
-        }
+        isCommunityCredit={isCommunityCredit}
+        onBookCallButtonClick={onBookCallButtonClick}
         onBuyButtonClick={() =>
           isBuyFlowDisabled
             ? setConnectWalletModal(atom => void (atom.open = true))

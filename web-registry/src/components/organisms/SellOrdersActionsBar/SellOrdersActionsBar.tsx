@@ -13,14 +13,14 @@ import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoToolt
 import { Label, Subtitle } from 'web-components/lib/components/typography';
 
 import {
+  BOOK_CALL,
   BUY_DISABLED_TOOLTIP,
-  SELL_DISABLED_TOOLTIP,
 } from './SellOrdersActionsBar.constants';
 
 type Params = {
-  isSellButtonDisabled: boolean;
   isBuyButtonDisabled: boolean;
-  onSellButtonClick: () => void;
+  isCommunityCredit: boolean;
+  onBookCallButtonClick: () => void;
   onBuyButtonClick: () => void;
   onChainProjectId?: string | null;
   projectName?: string;
@@ -31,9 +31,9 @@ type Params = {
 };
 
 export const SellOrdersActionsBar = ({
-  isSellButtonDisabled,
   isBuyButtonDisabled,
-  onSellButtonClick,
+  isCommunityCredit,
+  onBookCallButtonClick,
   onBuyButtonClick,
   onChainProjectId,
   projectName,
@@ -62,21 +62,13 @@ export const SellOrdersActionsBar = ({
             <Subtitle>{avgPricePerTonLabel}</Subtitle>
           </Box>
         )}
-        <InfoTooltip
-          title={isSellButtonDisabled ? SELL_DISABLED_TOOLTIP : ''}
-          arrow
-          placement="top"
-        >
+        {!isCommunityCredit && (
           <span>
-            <OutlinedButton
-              onClick={onSellButtonClick}
-              disabled={isSellButtonDisabled}
-              sx={{ mr: 5 }}
-            >
-              {'SELL'}
+            <OutlinedButton onClick={onBookCallButtonClick} sx={{ mr: 5 }}>
+              {BOOK_CALL}
             </OutlinedButton>
           </span>
-        </InfoTooltip>
+        )}
         <InfoTooltip
           title={isBuyButtonDisabled ? BUY_DISABLED_TOOLTIP : ''}
           arrow

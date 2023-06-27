@@ -227,27 +227,37 @@ export const getRatingAndCertificationsData = ({
 
   if (certification && certification['schema:name']) {
     const certificationName = certification['schema:name'] ?? '';
+    const certificationLink = certification['schema:url'] ?? '#';
+
     items = [
       {
         image: {
           src:
             certificationIcons?.[certificationName] ?? '/svg/certification.svg',
         },
-        name: certificationName,
+        link: {
+          text: certificationName,
+          href: certificationLink,
+        },
       },
     ];
     title = `${CERTIFICATIONS}`;
   }
 
   if (rating && rating['schema:name']) {
-    const ratingName = rating['schema:name'];
+    const ratingName = rating['schema:name'] ?? '';
+    const ratingLink = rating['schema:url'] ?? '';
+
     items = [
       ...items,
       {
         image: {
           src: ratingIcons?.[ratingName] ?? '/svg/rating.svg',
         },
-        name: ratingName,
+        link: {
+          text: ratingName,
+          href: ratingLink,
+        },
       },
     ];
     title = title ? `${title} & ${RATINGS}` : RATINGS;

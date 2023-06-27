@@ -4,6 +4,7 @@ import { RoundLogo } from '../../../components/atoms/RoundLogo/RoundLogo';
 import { Label, Subtitle } from '../../../components/typography';
 import { Theme } from '../../../theme/muiTheme';
 import { sxToArray } from '../../../utils/mui/sxToArray';
+import { LinkWrapper } from './RoundLogoItemsList.LinkWrapper';
 import { RoundLogoItemsListType } from './RoundLogoItemsList.types';
 
 export type Props = RoundLogoItemsListType & {
@@ -17,14 +18,16 @@ const RoundLogoItemsList = ({ title, items, sx = [] }: Props): JSX.Element => {
         {title}
       </Label>
       <Box component="ul" sx={{ listStyleType: 'none', paddingInlineStart: 0 }}>
-        {items.map(item => (
+        {items.map(({ image, link }) => (
           <Box
             component="li"
-            key={item.name}
-            sx={{ display: 'flex', alignItems: 'center', mb: 3.75 }}
+            key={link.text}
+            sx={{ mb: 3.75, display: 'flex', alignItems: 'center' }}
           >
-            <RoundLogo image={item.image} sx={{ mr: 2.5 }} />
-            <Subtitle size="lg">{item.name}</Subtitle>
+            <LinkWrapper link={link}>
+              <RoundLogo image={image} sx={{ mr: 2.5 }} />
+              <Subtitle size="lg">{link.text}</Subtitle>
+            </LinkWrapper>
           </Box>
         ))}
       </Box>

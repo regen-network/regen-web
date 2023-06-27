@@ -19,11 +19,17 @@ Default.args = {
   title: 'certifications & ratings',
   items: [
     {
-      name: 'ICROA approved',
       image: RoundLogoMock,
+      link: {
+        text: 'ICROA approved',
+        href: 'https://www.icroa.org/',
+      },
     },
     {
-      name: 'BeZero carbon rating: AAA-',
+      link: {
+        text: 'BeZero carbon rating: AAA-',
+        href: 'https://bezero.org/',
+      },
       image: RoundLogoMock,
     },
   ],

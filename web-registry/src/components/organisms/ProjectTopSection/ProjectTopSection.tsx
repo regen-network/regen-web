@@ -7,6 +7,7 @@ import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import { ActionCard } from 'web-components/lib/components/molecules/ActionCard/ActionCard';
 import { ProjectTagType } from 'web-components/lib/components/molecules/ProjectTag/ProjectTag.types';
+import { RoundLogoItemsList } from 'web-components/lib/components/molecules/RoundLogoItemsList/RoundLogoItemsList';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
 import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
@@ -278,6 +279,12 @@ function ProjectTopSection({
             )}
             certificationsAndRating={ratingAndCertificationData}
           />
+          {ratingAndCertificationData && (
+            <RoundLogoItemsList
+              {...ratingAndCertificationData}
+              sx={{ mt: 5 }}
+            />
+          )}
           {otcCard && (
             <Box sx={{ mt: 5 }}>
               <ActionCard {...otcCard} variant="column" />

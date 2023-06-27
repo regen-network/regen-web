@@ -68,7 +68,6 @@ type ParseProjectMetadataReturn = {
   placeName?: string;
   projectMethodology?: ProjectMethodology;
   rating?: ProjectRating;
-  certification?: CreditCertification;
 };
 
 export type ProjectMethodology = {
@@ -88,7 +87,6 @@ export const parseProjectMetadata = (
   const placeName = projectMetadata?.['schema:location']?.['place_name'];
   let projectMethodology;
   let rating;
-  let certification;
 
   if (isAnchoredProjectMetadata(projectMetadata, onChainProjectId)) {
     // Methodology
@@ -101,9 +99,6 @@ export const parseProjectMetadata = (
 
     // Rating
     rating = projectMetadata?.['regen:rating'];
-
-    // Certification
-    certification = projectMetadata?.['regen:certification'];
   }
   // projectMetadata?.['schema:location']?.['geojson:place_name'];
 
@@ -114,7 +109,6 @@ export const parseProjectMetadata = (
     placeName,
     projectMethodology,
     rating,
-    certification,
   };
 };
 

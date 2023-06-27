@@ -71,15 +71,8 @@ function ProjectTopSection({
   const { primaryImpactIRI, coBenefitsIRIs } =
     parseOffChainProject(offChainProject);
 
-  const {
-    projectName,
-    area,
-    areaUnit,
-    placeName,
-    projectMethodology,
-    rating,
-    certification,
-  } = parseProjectMetadata(projectMetadata, onChainProjectId);
+  const { projectName, area, areaUnit, placeName, projectMethodology, rating } =
+    parseProjectMetadata(projectMetadata, onChainProjectId);
 
   const { glanceText, primaryDescription, quote } =
     parseProjectPageMetadata(projectPageMetadata);
@@ -132,6 +125,8 @@ function ProjectTopSection({
   const creditCertificationIconsMapping = getIconsMapping({
     data: allCreditCertification?.allCreditCertification,
   });
+
+  const certification = creditClassMetadata?.['regen:certification'];
 
   const ratingAndCertificationData = getRatingAndCertificationsData({
     rating,

@@ -1,5 +1,6 @@
 import { CompactedNameUrl } from 'lib/rdf/types';
 
+import { Certification } from './certification';
 import { ApprovedMethodologies } from './methodology';
 
 // type generated from https://github.com/regen-network/regen-registry-standards/blob/main/jsonld/credit-classes/C01-verified-carbon-standard-class.json
@@ -20,6 +21,7 @@ export interface CreditClassMetadataLD {
   'regen:projectActivities': string[];
   'regen:carbonOffsetStandard'?: CompactedNameUrl;
   'regen:tokenizationSource'?: string;
+  'regen:certification'?: Certification;
 }
 
 interface Context {

@@ -1,6 +1,7 @@
-import { Link } from '@mui/material';
+import { Link, SxProps } from '@mui/material';
 import Grid, { GridDirection } from '@mui/material/Grid';
 
+import { Theme } from '../../theme/muiTheme';
 import { BlockContent } from '../block-content';
 import { Body, Subtitle, Title } from '../typography';
 import { getMobileSize, getSizeVariant, TextSize } from '../typography/sizing';
@@ -27,6 +28,7 @@ interface UserInfoProps {
   direction?: GridDirection;
   titleComponent?: 'title' | 'subtitle';
   border?: boolean;
+  sx?: SxProps<Theme>;
 }
 export default function UserInfo({
   user,
@@ -34,6 +36,7 @@ export default function UserInfo({
   direction,
   border = true,
   titleComponent = 'title',
+  sx = [],
 }: UserInfoProps): JSX.Element {
   const sizeVariant = getSizeVariant(size);
   const mobileSizeVariant = getSizeVariant(getMobileSize(size));
@@ -57,7 +60,7 @@ export default function UserInfo({
   );
 
   return (
-    <Grid container direction={direction} wrap="nowrap">
+    <Grid container direction={direction} wrap="nowrap" sx={sx}>
       <Grid item>
         <UserAvatar
           alt={userName}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Grid } from '@mui/material';
 import Box from '@mui/material/Box';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
@@ -7,22 +8,22 @@ import ProjectImpactCard, {
 } from 'web-components/lib/components/cards/ProjectImpactCard/ProjectImpactCard';
 import { CollapseList } from 'web-components/lib/components/organisms/CollapseList/CollapseList';
 import ReadMore from 'web-components/lib/components/read-more';
+import Section from 'web-components/lib/components/section';
 import { Label, Title } from 'web-components/lib/components/typography';
+import UserInfo, { Party } from 'web-components/lib/components/user/UserInfo';
+import UserInfoWithTitle from 'web-components/lib/components/user/UserInfoWithTitle';
 
 import { CreditClassByOnChainIdQuery } from 'generated/graphql';
 import { CreditClass } from 'generated/sanity-graphql';
-import { getAccountUrl } from 'lib/block-explorer';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { getSanityImgSrc } from 'lib/imgSrc';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { AccountLink } from 'components/atoms/AccountLink';
 import { EcocreditsSection } from 'components/molecules';
 import { CreditBatches } from 'components/organisms';
 
 import { AdditionalInfo } from '../CreditClassDetails.AdditionalInfo';
 import { MemoizedProjects as Projects } from '../CreditClassDetails.Projects';
-import { SideBarBox } from '../CreditClassDetails.SidebarBox';
 import { useCreditClassDetailsSimpleStyles } from './CreditClassDetailsSimple.styles';
 import { getCreditClassDisplayName } from './CreditClassDetailsSimple.utils';
 
@@ -30,14 +31,15 @@ interface CreditDetailsProps {
   dbClass?: CreditClassByOnChainIdQuery['creditClassByOnChainId'];
   onChainClass: ClassInfo;
   content?: CreditClass;
-  issuers?: string[];
+  admin?: Party;
+  issuers?: Party[];
   metadata?: Partial<CreditClassMetadataLD>;
   impactCards: ProjectImpactCardProps[];
 }
 
 const CreditClassDetailsSimple: React.FC<
   React.PropsWithChildren<CreditDetailsProps>
-> = ({ impactCards, onChainClass, content, issuers, metadata }) => {
+> = ({ impactCards, onChainClass, content, admin, issuers, metadata }) => {
   const { classes: styles, cx } = useCreditClassDetailsSimpleStyles();
   const displayName = getCreditClassDisplayName(onChainClass.id, metadata);
   const image = content?.image;
@@ -107,42 +109,57 @@ const CreditClassDetailsSimple: React.FC<
             }}
           >
             <CollapseList
-              sx={{ pb: [7.5, 10] }}
+              sx={{ pb: [7.5, 10], maxWidth: 367 }}
               items={impactCards.map(card => (
                 <Box key={card.name} sx={{ pb: [2.5, 4.25] }}>
                   <ProjectImpactCard {...card} />
                 </Box>
               ))}
             />
-            <SideBarBox>
-              <div className={styles.sidebarItemMargin}>
-                <Label size="xs" color="primary.contrastText" mb={3}>
-                  admin
-                </Label>
-                <AccountLink
-                  className={styles.link}
-                  address={onChainClass.admin}
-                />
-              </div>
-              <div className={styles.sidebarItemMargin}>
-                <Label size="xs" color="primary.contrastText" mb={3}>
-                  issuers
-                </Label>
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                  {issuers?.map((issuer: string) => (
-                    <AccountLink
-                      key={issuer}
-                      address={issuer}
-                      className={styles.link}
-                      href={getAccountUrl(issuer)}
-                    />
-                  ))}
-                </Box>
-              </div>
-            </SideBarBox>
           </Box>
         </Box>
       </EcocreditsSection>
+      <div
+        className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}
+      >
+        <Section sx={{ root: { pb: [20, 21.25] } }}>
+          <Grid container>
+            {admin && (
+              <Grid item xs={12} sm={6}>
+                <UserInfoWithTitle
+                  user={admin}
+                  title="admin"
+                  tooltip={
+                    <>
+                      <b>Credit class admin</b>: the entity who can update a
+                      given credit class.
+                    </>
+                  }
+                />
+              </Grid>
+            )}
+            {issuers && issuers?.length > 0 && (
+              <Grid item xs={12} sm={6}>
+                <UserInfoWithTitle
+                  user={issuers[0]}
+                  title="issuers"
+                  tooltip={
+                    <>
+                      <b>Credit class issuer</b>: the entity who can issue
+                      credit batches under the given credit class.
+                    </>
+                  }
+                  sx={{ mb: 2 }}
+                />
+                {issuers.slice(1, issuers.length).map(issuer => (
+                  <UserInfo user={issuer} key={issuer.name} sx={{ mb: 2 }} />
+                ))}
+              </Grid>
+            )}
+          </Grid>
+        </Section>
+      </div>
+
       <Projects classId={onChainClass.id} />
       <div
         className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}

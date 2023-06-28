@@ -1,9 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useApolloClient } from '@apollo/client';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { useQuery } from '@tanstack/react-query';
+import { useQueries, useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
+
+import { Party } from 'web-components/lib/components/user/UserInfo';
 
 import { useCreditClassByUriQuery } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
@@ -13,7 +19,9 @@ import { client } from 'lib/clients/sanity';
 import { getMetadata } from 'lib/db/api/metadata-graph';
 import { queryClassIssuers, queryEcoClassInfo } from 'lib/ecocredit/api';
 import { onChainClassRegExp } from 'lib/ledger';
+import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getCreditClassByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getCreditClassByOnChainIdQuery/getCreditClassByOnChainIdQuery';
+import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
@@ -23,6 +31,7 @@ import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow
 import useImpact from 'components/organisms/ProjectTopSection/hooks/useImpact';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { AVG_PRICE_TOOLTIP_CREDIT_CLASS } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants';
+import { getParty } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { useLedger } from '../../ledger';
 import { BOOK_CALL_LINK } from './CreditClassDetails.constants';
@@ -45,7 +54,8 @@ function CreditClassDetails({
   const { wallet } = useWallet();
   const { dataClient } = useLedger();
   const { creditClassId } = useParams();
-  const graphqlClient = useApolloClient();
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
   const [onChainClass, setOnChainClass] = useState<ClassInfo | undefined>(
     undefined,
@@ -118,6 +128,38 @@ function CreditClassDetails({
   const impact = useImpact({ coBenefitsIRIs, primaryImpactIRI });
   const impactCards = normalizeProjectImpactCards(impact);
 
+  const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
+  const { data: adminPartyByAddrData } = useQuery(
+    getPartyByAddrQuery({
+      client: graphqlClient,
+      addr: onChainClass?.admin ?? '',
+      enabled: !!onChainClass?.admin && !!graphqlClient && !!csrfData,
+    }),
+  );
+  const creditClassIssuersResults = useQueries({
+    queries:
+      issuers?.map(issuer =>
+        getPartyByAddrQuery({
+          client: graphqlClient,
+          addr: issuer ?? '',
+          enabled: !!graphqlClient && !!csrfData,
+        }),
+      ) ?? [],
+  });
+
+  const creditClassAdminParty = getParty(
+    adminPartyByAddrData?.walletByAddr?.partyByWalletId,
+  );
+  const creditClassIssuersData = creditClassIssuersResults.map(
+    creditClassIssuer => creditClassIssuer.data,
+  );
+  const creditClassIssuers = creditClassIssuersData
+    .map(issuer => getParty(issuer?.walletByAddr?.partyByWalletId))
+    .filter(
+      (party: Party | undefined): party is Party =>
+        !!party && party.name !== '',
+    );
+
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       if (creditClassId && isOnChainClassId) {
@@ -168,7 +210,8 @@ function CreditClassDetails({
           content={content}
           onChainClass={onChainClass}
           metadata={metadata}
-          issuers={issuers}
+          admin={creditClassAdminParty}
+          issuers={creditClassIssuers}
           impactCards={impactCards}
         />
       )}

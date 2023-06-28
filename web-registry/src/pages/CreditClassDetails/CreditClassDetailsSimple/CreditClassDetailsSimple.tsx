@@ -2,6 +2,10 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
+import ProjectImpactCard, {
+  ProjectImpactCardProps,
+} from 'web-components/lib/components/cards/ProjectImpactCard/ProjectImpactCard';
+import { CollapseList } from 'web-components/lib/components/organisms/CollapseList/CollapseList';
 import ReadMore from 'web-components/lib/components/read-more';
 import { Label, Title } from 'web-components/lib/components/typography';
 
@@ -28,11 +32,12 @@ interface CreditDetailsProps {
   content?: CreditClass;
   issuers?: string[];
   metadata?: Partial<CreditClassMetadataLD>;
+  impactCards: ProjectImpactCardProps[];
 }
 
 const CreditClassDetailsSimple: React.FC<
   React.PropsWithChildren<CreditDetailsProps>
-> = ({ dbClass, onChainClass, content, issuers, metadata }) => {
+> = ({ impactCards, onChainClass, content, issuers, metadata }) => {
   const { classes: styles, cx } = useCreditClassDetailsSimpleStyles();
   const displayName = getCreditClassDisplayName(onChainClass.id, metadata);
   const image = content?.image;
@@ -101,6 +106,14 @@ const CreditClassDetailsSimple: React.FC<
               flexDirection: 'column',
             }}
           >
+            <CollapseList
+              sx={{ pb: [7.5, 10] }}
+              items={impactCards.map(card => (
+                <Box key={card.name} sx={{ pb: [2.5, 4.25] }}>
+                  <ProjectImpactCard {...card} />
+                </Box>
+              ))}
+            />
             <SideBarBox>
               <div className={styles.sidebarItemMargin}>
                 <Label size="xs" color="primary.contrastText" mb={3}>

@@ -1,12 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useApolloClient } from '@apollo/client';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
-import {
-  useCreditClassByOnChainIdQuery,
-  useCreditClassByUriQuery,
-} from 'generated/graphql';
+import { useCreditClassByUriQuery } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
 import { openLink } from 'lib/button';
@@ -14,12 +13,14 @@ import { client } from 'lib/clients/sanity';
 import { getMetadata } from 'lib/db/api/metadata-graph';
 import { queryClassIssuers, queryEcoClassInfo } from 'lib/ecocredit/api';
 import { onChainClassRegExp } from 'lib/ledger';
+import { getCreditClassByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getCreditClassByOnChainIdQuery/getCreditClassByOnChainIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
+import useImpact from 'components/organisms/ProjectTopSection/hooks/useImpact';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { AVG_PRICE_TOOLTIP_CREDIT_CLASS } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants';
 
@@ -28,6 +29,8 @@ import { BOOK_CALL_LINK } from './CreditClassDetails.constants';
 import {
   getCreditClassAvgPricePerTonLabel,
   getProjectNameFromProjectsData,
+  normalizeProjectImpactCards,
+  parseCreditClassVersion,
 } from './CreditClassDetails.utils';
 import CreditClassDetailsSimple from './CreditClassDetailsSimple';
 import CreditClassDetailsWithContent from './CreditClassDetailsWithContent';
@@ -42,13 +45,13 @@ function CreditClassDetails({
   const { wallet } = useWallet();
   const { dataClient } = useLedger();
   const { creditClassId } = useParams();
+  const graphqlClient = useApolloClient();
+
   const [onChainClass, setOnChainClass] = useState<ClassInfo | undefined>(
     undefined,
   );
-
   const [metadata, setMetadata] = useState<any>(undefined);
   const [issuers, setIssuers] = useState<string[] | undefined>(undefined);
-
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
@@ -57,15 +60,28 @@ function CreditClassDetails({
   const content = contentData?.allCreditClass?.find(
     creditClass => creditClass.path === creditClassId,
   );
+
   const isCommunityCredit = !content;
 
   const isOnChainClassId =
     creditClassId && onChainClassRegExp.test(creditClassId);
+
   const iri = content?.iri?.current;
-  const { data: dbDataByOnChainId } = useCreditClassByOnChainIdQuery({
-    variables: { onChainId: creditClassId as string },
-    skip: !isOnChainClassId,
-  });
+
+  const { data: dbDataByOnChainIdData } = useQuery(
+    getCreditClassByOnChainIdQuery({
+      client: graphqlClient,
+      onChainId: creditClassId as string,
+      enabled: !!isOnChainClassId && !!client,
+    }),
+  );
+
+  const dbDataByOnChainId = dbDataByOnChainIdData?.data;
+
+  const { coBenefitsIRIs, primaryImpactIRI } = parseCreditClassVersion(
+    dbDataByOnChainId?.creditClassByOnChainId,
+  );
+
   const { data: dbDataByUri } = useCreditClassByUriQuery({
     variables: { uri: iri as string },
     skip: !iri || !!isOnChainClassId,
@@ -99,6 +115,8 @@ function CreditClassDetails({
   });
 
   const onBookCallButtonClick = () => openLink(BOOK_CALL_LINK, true);
+  const impact = useImpact({ coBenefitsIRIs, primaryImpactIRI });
+  const impactCards = normalizeProjectImpactCards(impact);
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
@@ -151,6 +169,7 @@ function CreditClassDetails({
           onChainClass={onChainClass}
           metadata={metadata}
           issuers={issuers}
+          impactCards={impactCards}
         />
       )}
       <SellOrdersActionsBar

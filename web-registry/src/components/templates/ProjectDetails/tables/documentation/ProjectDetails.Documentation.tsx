@@ -35,7 +35,7 @@ export const ProjectDetailsDocumentationTable = ({
       renderActionButtons={(i: number) => (
         <OutlinedButton
           LinkComponent={Link}
-          href={documents[i].url}
+          href={documents[i]?.url}
           target="_blank"
           startIcon={<CertifiedDocumentIcon />}
           size="small"

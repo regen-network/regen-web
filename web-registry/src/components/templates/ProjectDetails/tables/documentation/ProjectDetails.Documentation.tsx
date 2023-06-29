@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Link } from '@mui/material';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import CertifiedDocumentIcon from 'web-components/lib/components/icons/CertifiedDocumentIcon';
@@ -33,7 +33,13 @@ export const ProjectDetailsDocumentationTable = ({
       rows={documents.map(document => getDocumentationTableRow({ document }))}
       sortCallbacks={sortCallbacks}
       renderActionButtons={(i: number) => (
-        <OutlinedButton startIcon={<CertifiedDocumentIcon />} size="small">
+        <OutlinedButton
+          LinkComponent={Link}
+          href={documents[i].url}
+          target="_blank"
+          startIcon={<CertifiedDocumentIcon />}
+          size="small"
+        >
           <Box>{VIEW}</Box>
           <Box
             sx={{ ml: 1, display: { xs: 'none', sm: 'block' } }}

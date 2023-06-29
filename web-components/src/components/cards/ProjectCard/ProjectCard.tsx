@@ -80,7 +80,7 @@ export function ProjectCard({
   const theme = useTheme();
   const { classes } = useProjectCardStyles();
   const location = useLocation();
-  const { text: buttontext, startIcon: buttonStartIcon } = button;
+  const { text: buttonText, startIcon: buttonStartIcon } = button;
   const isButtonDisabled =
     button?.disabled !== undefined
       ? button?.disabled
@@ -300,7 +300,7 @@ export function ProjectCard({
                   disabled={isButtonDisabled}
                   sx={{ width: '100%' }}
                 >
-                  {buttontext}
+                  {buttonText}
                 </OutlinedButton>
               </>
             </div>

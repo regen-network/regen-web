@@ -34,8 +34,8 @@ export const getCreditClassAvgPricePerTonLabel = ({
   const prices = projectsWithOrderData
     .map(project => project.purchaseInfo?.sellInfo?.avgPricePerTon)
     .filter((price): price is number => typeof price === 'number');
-  const meanPrice = computeMedianPrice({ prices });
-  const avgPricePerTonLabel = getPriceToDisplay({ price: meanPrice });
+  const medianPrice = computeMedianPrice({ prices });
+  const avgPricePerTonLabel = getPriceToDisplay({ price: medianPrice });
 
   return avgPricePerTonLabel;
 };

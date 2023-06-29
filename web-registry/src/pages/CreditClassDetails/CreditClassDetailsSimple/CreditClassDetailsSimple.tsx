@@ -118,10 +118,7 @@ const CreditClassDetailsSimple: React.FC<
             <CollapseList
               sx={{ pb: [7.5, 10], maxWidth: 367 }}
               items={impactCards.map(card => (
-                <Box
-                  key={card.name}
-                  sx={{ pb: [2.5, 4.25], width: 'fit-content' }}
-                >
+                <Box key={card.name} sx={{ pb: [2.5, 4.25] }}>
                   <ProjectImpactCard {...card} />
                 </Box>
               ))}

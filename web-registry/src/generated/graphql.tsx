@@ -4741,7 +4741,10 @@ export type CreditClassByOnChainIdQuery = (
         { __typename?: 'CreditClassVersion' }
         & Pick<CreditClassVersion, 'name' | 'metadata'>
       )>> }
-    ) }
+    ), partyByRegistryId?: Maybe<(
+      { __typename?: 'Party' }
+      & PartyFieldsFragment
+    )> }
   )> }
 );
 
@@ -5458,9 +5461,13 @@ export const CreditClassByOnChainIdDocument = gql`
         metadata
       }
     }
+    partyByRegistryId {
+      ...partyFields
+    }
   }
 }
-    ${MoreProjectFieldsFragmentDoc}`;
+    ${MoreProjectFieldsFragmentDoc}
+${PartyFieldsFragmentDoc}`;
 
 /**
  * __useCreditClassByOnChainIdQuery__

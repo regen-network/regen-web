@@ -1,5 +1,4 @@
 import React from 'react';
-import { Grid } from '@mui/material';
 import Box from '@mui/material/Box';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
@@ -8,11 +7,8 @@ import ProjectImpactCard, {
 } from 'web-components/lib/components/cards/ProjectImpactCard/ProjectImpactCard';
 import { CollapseList } from 'web-components/lib/components/organisms/CollapseList/CollapseList';
 import ReadMore from 'web-components/lib/components/read-more';
-import Section from 'web-components/lib/components/section';
 import { Label, Title } from 'web-components/lib/components/typography';
-import UserInfo, { Party } from 'web-components/lib/components/user/UserInfo';
-import UserInfoWithTitle from 'web-components/lib/components/user/UserInfoWithTitle';
-import { defaultFontFamily } from 'web-components/lib/theme/muiTheme';
+import { Party } from 'web-components/lib/components/user/UserInfo';
 
 import { CreditClassByOnChainIdQuery } from 'generated/graphql';
 import { CreditClass } from 'generated/sanity-graphql';
@@ -24,8 +20,8 @@ import { EcocreditsSection } from 'components/molecules';
 import { CreditBatches } from 'components/organisms';
 
 import { AdditionalInfo } from '../CreditClassDetails.AdditionalInfo';
-import { SEE_MORE_ADDITIONAL_TEXT } from '../CreditClassDetails.constants';
 import { MemoizedProjects as Projects } from '../CreditClassDetails.Projects';
+import { CreditClassDetailsStakeholders } from './CreditClassDetailsSimple.Stakeholders';
 import { useCreditClassDetailsSimpleStyles } from './CreditClassDetailsSimple.styles';
 import { getCreditClassDisplayName } from './CreditClassDetailsSimple.utils';
 
@@ -33,6 +29,7 @@ interface CreditDetailsProps {
   dbClass?: CreditClassByOnChainIdQuery['creditClassByOnChainId'];
   onChainClass: ClassInfo;
   content?: CreditClass;
+  program?: Party;
   admin?: Party;
   issuers?: Party[];
   metadata?: Partial<CreditClassMetadataLD>;
@@ -41,7 +38,15 @@ interface CreditDetailsProps {
 
 const CreditClassDetailsSimple: React.FC<
   React.PropsWithChildren<CreditDetailsProps>
-> = ({ impactCards, onChainClass, content, admin, issuers, metadata }) => {
+> = ({
+  impactCards,
+  onChainClass,
+  content,
+  program,
+  admin,
+  issuers,
+  metadata,
+}) => {
   const { classes: styles, cx } = useCreditClassDetailsSimpleStyles();
   const displayName = getCreditClassDisplayName(onChainClass.id, metadata);
   const image = content?.image;
@@ -113,7 +118,10 @@ const CreditClassDetailsSimple: React.FC<
             <CollapseList
               sx={{ pb: [7.5, 10], maxWidth: 367 }}
               items={impactCards.map(card => (
-                <Box key={card.name} sx={{ pb: [2.5, 4.25] }}>
+                <Box
+                  key={card.name}
+                  sx={{ pb: [2.5, 4.25], width: 'fit-content' }}
+                >
                   <ProjectImpactCard {...card} />
                 </Box>
               ))}
@@ -121,57 +129,12 @@ const CreditClassDetailsSimple: React.FC<
           </Box>
         </Box>
       </EcocreditsSection>
-      <div
-        className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}
-      >
-        <Section sx={{ root: { pb: [20, 21.25] } }}>
-          <Grid container>
-            {admin && (
-              <Grid item xs={12} sm={6} sx={{ mb: { xs: 8.25, sm: 0 } }}>
-                <UserInfoWithTitle
-                  user={admin}
-                  title="admin"
-                  tooltip={
-                    <>
-                      <b>Credit class admin</b>: the entity who can update a
-                      given credit class.
-                    </>
-                  }
-                  fontFamily={defaultFontFamily}
-                />
-              </Grid>
-            )}
-            {issuers && issuers?.length > 0 && (
-              <Grid item xs={12} sm={6}>
-                <UserInfoWithTitle
-                  user={issuers[0]}
-                  title="issuers"
-                  tooltip={
-                    <>
-                      <b>Credit class issuer</b>: the entity who can issue
-                      credit batches under the given credit class.
-                    </>
-                  }
-                  fontFamily={defaultFontFamily}
-                  sx={{ mb: 2 }}
-                />
-                <CollapseList
-                  max={2}
-                  items={issuers.slice(1, issuers.length).map(issuer => (
-                    <UserInfo
-                      user={issuer}
-                      key={issuer.name}
-                      fontFamily={defaultFontFamily}
-                      sx={{ mb: 2 }}
-                    />
-                  ))}
-                  buttonAdditionalText={SEE_MORE_ADDITIONAL_TEXT}
-                />
-              </Grid>
-            )}
-          </Grid>
-        </Section>
-      </div>
+
+      <CreditClassDetailsStakeholders
+        admin={admin}
+        issuers={issuers}
+        program={program}
+      />
 
       <Projects classId={onChainClass.id} />
       <div

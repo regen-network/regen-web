@@ -13,5 +13,8 @@ query CreditClassByOnChainId($onChainId: String!) {
         metadata
       }
     }
+    partyByRegistryId {
+      ...partyFields
+    }
   }
 }

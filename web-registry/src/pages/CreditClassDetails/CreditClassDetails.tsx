@@ -17,6 +17,7 @@ import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
 import { openLink } from 'lib/button';
 import { client } from 'lib/clients/sanity';
 import { getMetadata } from 'lib/db/api/metadata-graph';
+import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { queryClassIssuers, queryEcoClassInfo } from 'lib/ecocredit/api';
 import { onChainClassRegExp } from 'lib/ledger';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
@@ -31,7 +32,10 @@ import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow
 import useImpact from 'components/organisms/ProjectTopSection/hooks/useImpact';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { AVG_PRICE_TOOLTIP_CREDIT_CLASS } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants';
-import { getParty } from 'components/templates/ProjectDetails/ProjectDetails.utils';
+import {
+  getDisplayParty,
+  getParty,
+} from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { useLedger } from '../../ledger';
 import { BOOK_CALL_LINK } from './CreditClassDetails.constants';
@@ -60,7 +64,9 @@ function CreditClassDetails({
   const [onChainClass, setOnChainClass] = useState<ClassInfo | undefined>(
     undefined,
   );
-  const [metadata, setMetadata] = useState<any>(undefined);
+  const [metadata, setMetadata] = useState<CreditClassMetadataLD | undefined>(
+    undefined,
+  );
   const [issuers, setIssuers] = useState<string[] | undefined>(undefined);
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
@@ -150,6 +156,11 @@ function CreditClassDetails({
   const creditClassAdminParty = getParty(
     adminPartyByAddrData?.walletByAddr?.partyByWalletId,
   );
+  const creditClassProgramParty = getDisplayParty(
+    metadata?.['regen:sourceRegistry'],
+    dbCreditClassByOnChainId?.partyByRegistryId,
+  );
+
   const creditClassIssuersData = creditClassIssuersResults.map(
     creditClassIssuer => creditClassIssuer.data,
   );
@@ -210,6 +221,7 @@ function CreditClassDetails({
           content={content}
           onChainClass={onChainClass}
           metadata={metadata}
+          program={creditClassProgramParty}
           admin={creditClassAdminParty}
           issuers={creditClassIssuers}
           impactCards={impactCards}

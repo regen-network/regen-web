@@ -12,6 +12,7 @@ import Section from 'web-components/lib/components/section';
 import { Label, Title } from 'web-components/lib/components/typography';
 import UserInfo, { Party } from 'web-components/lib/components/user/UserInfo';
 import UserInfoWithTitle from 'web-components/lib/components/user/UserInfoWithTitle';
+import { defaultFontFamily } from 'web-components/lib/theme/muiTheme';
 
 import { CreditClassByOnChainIdQuery } from 'generated/graphql';
 import { CreditClass } from 'generated/sanity-graphql';
@@ -23,6 +24,7 @@ import { EcocreditsSection } from 'components/molecules';
 import { CreditBatches } from 'components/organisms';
 
 import { AdditionalInfo } from '../CreditClassDetails.AdditionalInfo';
+import { SEE_MORE_ADDITIONAL_TEXT } from '../CreditClassDetails.constants';
 import { MemoizedProjects as Projects } from '../CreditClassDetails.Projects';
 import { useCreditClassDetailsSimpleStyles } from './CreditClassDetailsSimple.styles';
 import { getCreditClassDisplayName } from './CreditClassDetailsSimple.utils';
@@ -125,7 +127,7 @@ const CreditClassDetailsSimple: React.FC<
         <Section sx={{ root: { pb: [20, 21.25] } }}>
           <Grid container>
             {admin && (
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={6} sx={{ mb: { xs: 8.25, sm: 0 } }}>
                 <UserInfoWithTitle
                   user={admin}
                   title="admin"
@@ -135,6 +137,7 @@ const CreditClassDetailsSimple: React.FC<
                       given credit class.
                     </>
                   }
+                  fontFamily={defaultFontFamily}
                 />
               </Grid>
             )}
@@ -149,11 +152,21 @@ const CreditClassDetailsSimple: React.FC<
                       credit batches under the given credit class.
                     </>
                   }
+                  fontFamily={defaultFontFamily}
                   sx={{ mb: 2 }}
                 />
-                {issuers.slice(1, issuers.length).map(issuer => (
-                  <UserInfo user={issuer} key={issuer.name} sx={{ mb: 2 }} />
-                ))}
+                <CollapseList
+                  max={2}
+                  items={issuers.slice(1, issuers.length).map(issuer => (
+                    <UserInfo
+                      user={issuer}
+                      key={issuer.name}
+                      fontFamily={defaultFontFamily}
+                      sx={{ mb: 2 }}
+                    />
+                  ))}
+                  buttonAdditionalText={SEE_MORE_ADDITIONAL_TEXT}
+                />
               </Grid>
             )}
           </Grid>

@@ -11,6 +11,7 @@ type Props = {
   items: JSX.Element[];
   max?: number;
   buttonTextSize?: LabelSize;
+  buttonAdditionalText?: string;
   sx?: SxProps<Theme>;
 };
 
@@ -18,9 +19,11 @@ export const CollapseList = ({
   items,
   max = 3,
   buttonTextSize = 'xs',
+  buttonAdditionalText = '',
   sx,
 }: Props): JSX.Element | null => {
   const [expanded, setExpanded] = useState<boolean>(false);
+  const additionalText = buttonAdditionalText ? ` ${buttonAdditionalText}` : '';
 
   if (items.length === 0) {
     return null;
@@ -44,7 +47,9 @@ export const CollapseList = ({
           ':hover': { bgcolor: 'transparent' },
         }}
       >
-        {expanded ? SEE_LESS : SEE_MORE}
+        {expanded
+          ? `${SEE_LESS}${additionalText}`
+          : `${SEE_MORE}${additionalText}`}
       </TextButton>
     </Box>
   );

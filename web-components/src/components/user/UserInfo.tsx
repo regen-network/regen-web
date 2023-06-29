@@ -1,7 +1,7 @@
 import { Link, SxProps } from '@mui/material';
 import Grid, { GridDirection } from '@mui/material/Grid';
 
-import { Theme } from '../../theme/muiTheme';
+import { headerFontFamily, Theme } from '../../theme/muiTheme';
 import { BlockContent } from '../block-content';
 import { Body, Subtitle, Title } from '../typography';
 import { getMobileSize, getSizeVariant, TextSize } from '../typography/sizing';
@@ -25,6 +25,7 @@ export interface Party extends User {
 interface UserInfoProps {
   user: User;
   size?: TextSize;
+  fontFamily?: string;
   direction?: GridDirection;
   titleComponent?: 'title' | 'subtitle';
   border?: boolean;
@@ -33,6 +34,7 @@ interface UserInfoProps {
 export default function UserInfo({
   user,
   size = 'lg',
+  fontFamily = headerFontFamily,
   direction,
   border = true,
   titleComponent = 'title',
@@ -48,6 +50,7 @@ export default function UserInfo({
     <TitleComponent
       sx={({ typography }) => {
         return {
+          fontFamily,
           fontSize: [
             typography[mobileSizeVariant].fontSize,
             typography[sizeVariant].fontSize,

@@ -15,6 +15,8 @@ import { Body, Subtitle } from '../../typography';
 import UserInfo, { User } from '../../user/UserInfo';
 import MediaCard, { MediaCardProps } from '../MediaCard';
 import {
+  AVG_PRICE_LABEL,
+  AVG_PRICE_TOOLTIP,
   DEFAULT_BUY_BUTTON,
   ERROR_CARD_PRICE,
   SOLD_OUT,
@@ -78,7 +80,7 @@ export function ProjectCard({
   const theme = useTheme();
   const { classes } = useProjectCardStyles();
   const location = useLocation();
-  const { text: buttontext, startIcon: buttonStartIcon } = button;
+  const { text: buttonText, startIcon: buttonStartIcon } = button;
   const isButtonDisabled =
     button?.disabled !== undefined
       ? button?.disabled
@@ -88,12 +90,14 @@ export function ProjectCard({
   const [open, setOpen] = useState<boolean>(true);
 
   const serialNumber: string | undefined =
-    purchaseInfo?.vintageMetadata?.['https://schema.regen.network#serialNumber'];
+    purchaseInfo?.vintageMetadata?.[
+      'https://schema.regen.network#serialNumber'
+    ];
   const additionalCertifications: string[] | undefined =
     purchaseInfo?.vintageMetadata?.[
       'https://schema.regen.network#additionalCertifications'
     ]?.['@list'];
-  const pricePerTon = purchaseInfo?.sellInfo?.pricePerTon;
+  const avgPricePerTonLabel = purchaseInfo?.sellInfo?.avgPricePerTonLabel;
 
   return (
     <MediaCard
@@ -206,14 +210,23 @@ export function ProjectCard({
                     }}
                   >
                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                      <Subtitle
-                        size="xs"
-                        mobileSize="xxs"
-                        color="info.main"
-                        sx={{ mb: 1, fontWeight: 800 }}
+                      <Box
+                        sx={{ display: 'flex', alignItems: 'center', mb: 1 }}
                       >
-                        {'PRICE PER TON'}
-                      </Subtitle>
+                        <Subtitle
+                          size="xs"
+                          mobileSize="xxs"
+                          color="info.main"
+                          sx={{ mr: 1, fontWeight: 800 }}
+                        >
+                          {AVG_PRICE_LABEL}
+                        </Subtitle>
+                        <InfoTooltipWithIcon
+                          title={AVG_PRICE_TOOLTIP}
+                          sx={{ width: 20, height: 20 }}
+                          outlined
+                        />
+                      </Box>
                       <Box sx={{ display: 'flex' }}>
                         {purchaseInfo?.sellInfo.denomLogo}
                         <Body
@@ -222,12 +235,14 @@ export function ProjectCard({
                           sx={{
                             fontWeight: 700,
                             ml: purchaseInfo?.sellInfo.denomLogo ? 2 : 0,
-                            color: pricePerTon
+                            color: avgPricePerTonLabel
                               ? 'primary.contrastText'
                               : 'error.dark',
                           }}
                         >
-                          {pricePerTon ? pricePerTon : ERROR_CARD_PRICE}
+                          {avgPricePerTonLabel
+                            ? avgPricePerTonLabel
+                            : ERROR_CARD_PRICE}
                         </Body>
                       </Box>
                     </Box>
@@ -258,7 +273,7 @@ export function ProjectCard({
                         {creditsTooltip && (
                           <InfoTooltipWithIcon
                             title={creditsTooltip}
-                            sx={{ ml: 1 }}
+                            sx={{ ml: 1, width: 20, height: 20 }}
                             outlined
                           />
                         )}
@@ -285,7 +300,7 @@ export function ProjectCard({
                   disabled={isButtonDisabled}
                   sx={{ width: '100%' }}
                 >
-                  {buttontext}
+                  {buttonText}
                 </OutlinedButton>
               </>
             </div>

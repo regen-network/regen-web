@@ -101,7 +101,7 @@ export const projectCard = (): JSX.Element => (
         sellInfo: {
           creditsAvailable: 0,
           creditsAvailableForUser: 1190,
-          pricePerTon: '17.20-24.20',
+          avgPricePerTonLabel: '$17.20',
         },
       }}
       creditsTooltip="These credits are sold out and will not be available in the future."
@@ -122,7 +122,7 @@ export const projectCard = (): JSX.Element => (
         sellInfo: {
           creditsAvailable: 1200,
           creditsAvailableForUser: 1190,
-          pricePerTon: '17.20-24.20',
+          avgPricePerTonLabel: '$17.20',
         },
       }}
       sx={{ maxWidth: 338, mr: 10, mb: 10 }}

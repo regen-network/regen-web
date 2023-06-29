@@ -25,10 +25,11 @@ function comparePriceAscending(
   a: ProjectWithOrderData,
   b: ProjectWithOrderData,
 ): number {
-  const { lowA, lowB } = getPriceExtremes(a, b);
+  const priceA = a.purchaseInfo?.sellInfo?.avgPricePerTon ?? 0;
+  const priceB = b.purchaseInfo?.sellInfo?.avgPricePerTon ?? 0;
 
-  if (lowA > lowB) return 1; // sort a after b
-  if (lowA < lowB) return -1; // sort a before b
+  if (priceA > priceB) return 1; // sort a after b
+  if (priceA < priceB) return -1; // sort a before b
   return 0;
 }
 
@@ -37,10 +38,11 @@ function comparePriceDescending(
   a: ProjectWithOrderData,
   b: ProjectWithOrderData,
 ): number {
-  const { highA, highB } = getPriceExtremes(a, b);
+  const priceA = a.purchaseInfo?.sellInfo?.avgPricePerTon ?? 0;
+  const priceB = b.purchaseInfo?.sellInfo?.avgPricePerTon ?? 0;
 
-  if (highA < highB) return 1; // sort a after b
-  if (highA > highB) return -1; // sort a before b
+  if (priceA < priceB) return 1; // sort a after b
+  if (priceA > priceB) return -1; // sort a before b
   return 0;
 }
 
@@ -74,35 +76,6 @@ function compareQuantityDescending(
     return -1; // sort a before b
   }
   return 0;
-}
-
-function getPriceExtremes(
-  a: ProjectWithOrderData,
-  b: ProjectWithOrderData,
-): {
-  highA: number;
-  lowA: number;
-  highB: number;
-  lowB: number;
-} {
-  const lowA = getExtreme(a, 'low');
-  const highA = getExtreme(a, 'high');
-  const lowB = getExtreme(b, 'low');
-  const highB = getExtreme(b, 'high');
-
-  return { highA, lowA, highB, lowB };
-}
-
-function getExtreme(
-  project: ProjectWithOrderData,
-  highOrLow: 'high' | 'low',
-): number {
-  const prices = project.purchaseInfo?.sellInfo?.pricePerTon?.split('-');
-  const index = highOrLow === 'high' ? 1 : 0;
-  const extreme = prices?.[index]
-    ? Number(prices[index]?.replace(/[^0-9.-]+/g, '')) // remove non-digit or dot characters
-    : 0;
-  return extreme;
 }
 
 function getQuantities(

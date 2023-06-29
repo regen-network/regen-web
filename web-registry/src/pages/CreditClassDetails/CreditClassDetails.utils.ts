@@ -1,3 +1,6 @@
+import { computeMedianPrice } from 'utils/price/computeMedianPrice';
+
+import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 
 export const getProjectNameFromProjectsData = (
@@ -19,4 +22,20 @@ export const getValue = (val: any): string => {
       .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' '),
   );
+};
+
+type GetCreditClassAvgPricePerTonLabelPArams = {
+  projectsWithOrderData: ProjectWithOrderData[];
+};
+
+export const getCreditClassAvgPricePerTonLabel = ({
+  projectsWithOrderData,
+}: GetCreditClassAvgPricePerTonLabelPArams) => {
+  const prices = projectsWithOrderData
+    .map(project => project.purchaseInfo?.sellInfo?.avgPricePerTon)
+    .filter((price): price is number => typeof price === 'number');
+  const medianPrice = computeMedianPrice({ prices });
+  const avgPricePerTonLabel = getPriceToDisplay({ price: medianPrice });
+
+  return avgPricePerTonLabel;
 };

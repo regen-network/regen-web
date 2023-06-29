@@ -17,7 +17,8 @@ export interface PurchaseInfo {
   methodology?: Info;
   projectType?: string;
   sellInfo?: {
-    pricePerTon: string;
+    avgPricePerTon?: number;
+    avgPricePerTonLabel: string;
     creditsAvailable: number;
     creditsAvailableForUser: number;
     denomLogo?: JSX.Element;

@@ -9,6 +9,7 @@ import {
 } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
+import { openLink } from 'lib/button';
 import { client } from 'lib/clients/sanity';
 import { getMetadata } from 'lib/db/api/metadata-graph';
 import { queryClassIssuers, queryEcoClassInfo } from 'lib/ecocredit/api';
@@ -20,9 +21,14 @@ import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
+import { AVG_PRICE_TOOLTIP_CREDIT_CLASS } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants';
 
 import { useLedger } from '../../ledger';
-import { getProjectNameFromProjectsData } from './CreditClassDetails.utils';
+import { BOOK_CALL_LINK } from './CreditClassDetails.constants';
+import {
+  getCreditClassAvgPricePerTonLabel,
+  getProjectNameFromProjectsData,
+} from './CreditClassDetails.utils';
 import CreditClassDetailsSimple from './CreditClassDetailsSimple';
 import CreditClassDetailsWithContent from './CreditClassDetailsWithContent';
 
@@ -72,7 +78,7 @@ function CreditClassDetails({
     classId: creditClassId,
   });
 
-  const { isSellFlowDisabled, credits } = useCreateSellOrderData({
+  const { credits } = useCreateSellOrderData({
     projectId: projectsWithOrderData[0]?.id,
   });
 
@@ -87,6 +93,12 @@ function CreditClassDetails({
         ) ?? undefined,
     }));
   }, [credits, projectsWithOrderData]);
+
+  const avgPricePerTonLabel = getCreditClassAvgPricePerTonLabel({
+    projectsWithOrderData,
+  });
+
+  const onBookCallButtonClick = () => openLink(BOOK_CALL_LINK, true);
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
@@ -142,13 +154,9 @@ function CreditClassDetails({
         />
       )}
       <SellOrdersActionsBar
-        isSellButtonDisabled={isSellFlowDisabled && Boolean(wallet?.address)}
         isBuyButtonDisabled={isBuyFlowDisabled && Boolean(wallet?.address)}
-        onSellButtonClick={() =>
-          isSellFlowDisabled
-            ? setConnectWalletModal(atom => void (atom.open = true))
-            : setIsSellFlowStarted(true)
-        }
+        isCommunityCredit={isCommunityCredit}
+        onBookCallButtonClick={onBookCallButtonClick}
         onBuyButtonClick={() =>
           isBuyFlowDisabled
             ? setConnectWalletModal(atom => void (atom.open = true))
@@ -156,6 +164,8 @@ function CreditClassDetails({
         }
         onChainCreditClassId={onChainClass?.id}
         creditClassName={metadata?.['schema:name']}
+        avgPricePerTonLabel={avgPricePerTonLabel}
+        avgPricePerTonTooltip={AVG_PRICE_TOOLTIP_CREDIT_CLASS}
       />
       <BuySellOrderFlow
         isFlowStarted={isBuyFlowStarted}

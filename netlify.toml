@@ -32,7 +32,7 @@
   REACT_APP_BRIDGE_API_URI="https://toucan-bridge-staging.herokuapp.com"
   REACT_APP_BRIDGE_CREDIT_CLASS_ID = "C56"
   REACT_APP_BRIDGE="true"
-  REACT_APP_SKIPPED_CLASS_ID="C01"
+  REACT_APP_SKIPPED_CLASS_ID=""
 
   # Next.js environment variables
   NEXT_PUBLIC_SANITY_DATASET = "staging"
@@ -54,7 +54,7 @@
   REACT_APP_BRIDGE_API_URI="https://toucan-bridge-staging.herokuapp.com"
   REACT_APP_BRIDGE_CREDIT_CLASS_ID = "C56"
   REACT_APP_BRIDGE="true"
-  REACT_APP_SKIPPED_CLASS_ID="C01"
+  REACT_APP_SKIPPED_CLASS_ID=""
   REACT_APP_ANALYTICS_ENABLED="true"
 
   # Next.js environment variables

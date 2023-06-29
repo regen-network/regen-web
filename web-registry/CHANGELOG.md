@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.1](https://github.com/regen-network/regen-web/compare/v1.8.0...v1.8.1) (2023-06-29)
+
+### Bug Fixes
+
+- add missing document link ([4916ca1](https://github.com/regen-network/regen-web/commit/4916ca1858b197828f5ba46910dacff263887b01))
+- use optinal chaining for url ([3f8e28a](https://github.com/regen-network/regen-web/commit/3f8e28aee3882b56be1da7ddceaeae5fa4f765b7))
+
 # [1.8.0](https://github.com/regen-network/regen-web/compare/v1.7.0...v1.8.0) (2023-06-13)
 
 ### Bug Fixes

@@ -14,6 +14,7 @@ import { Label } from 'web-components/lib/components/typography';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
+import { NormalizedRetirement } from 'lib/normalizers/retirements/normalizeRetirement';
 
 import { BasketTokens } from 'hooks/useBasketTokens';
 
@@ -23,6 +24,7 @@ import { ViewCertificateButton } from './Portfolio.ViewCertificateButton';
 
 export interface PortfolioProps {
   credits?: BatchInfoWithBalance[];
+  retirements?: NormalizedRetirement[];
   basketTokens: BasketTokens[];
   renderCreditActionButtons?: RenderActionButtonsFunc;
   renderBasketActionButtons?: RenderActionButtonsFunc;
@@ -40,6 +42,7 @@ const sxs = {
 
 export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
   credits,
+  retirements,
   basketTokens,
   renderCreditActionButtons,
   renderBasketActionButtons,
@@ -67,11 +70,11 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
         label: 'Retirement Certificates',
         content: (
           <RetirementCertificatesTable
-            credits={credits}
+            retirements={retirements}
             renderActionButtons={index => (
               <ViewCertificateButton
                 onClick={() =>
-                  navigate(`/certificate/${credits?.[index].projectId}`)
+                  navigate(`/certificate/${retirements?.[index].projectId}`)
                 }
               />
             )}
@@ -84,7 +87,7 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
       },
     ],
     [
-      credits,
+      retirements,
       location,
       renderCreditActionButtons,
       onTableChange,

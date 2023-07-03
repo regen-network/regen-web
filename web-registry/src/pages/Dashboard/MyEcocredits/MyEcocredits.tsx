@@ -183,7 +183,7 @@ export const MyEcocredits = (): JSX.Element => {
     reloadBasketsBalance,
   } = useFetchBaskets({ credits });
 
-  useFetchRetirements();
+  const { retirements } = useFetchRetirements();
 
   const { data: allowedDenomsData } = useQuery(
     getAllowedDenomQuery({
@@ -278,6 +278,7 @@ export const MyEcocredits = (): JSX.Element => {
       >
         <Portfolio
           credits={credits}
+          retirements={retirements}
           basketTokens={basketTokens}
           onTableChange={setPaginationParams}
           initialPaginationParams={paginationParams}

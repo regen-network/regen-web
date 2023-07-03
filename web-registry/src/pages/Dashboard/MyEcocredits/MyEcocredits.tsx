@@ -55,6 +55,7 @@ import useCreditRetireSubmit from './hooks/useCreditRetireSubmit';
 import useCreditSendSubmit from './hooks/useCreditSendSubmit';
 import { useFetchBaskets } from './hooks/useFetchBaskets';
 import { useFetchEcocredits } from './hooks/useFetchEcocredits';
+import { useFetchRetirements } from './hooks/useFetchRetirements';
 import useOpenTakeModal from './hooks/useOpenTakeModal';
 import { useUpdateCardItemsTakeBasket } from './hooks/useUpdateCardItemsTakeBasket';
 import { useUpdateTxModalTitle } from './hooks/useUpdateTxModalTitle';
@@ -181,6 +182,8 @@ export const MyEcocredits = (): JSX.Element => {
     creditBaskets,
     reloadBasketsBalance,
   } = useFetchBaskets({ credits });
+
+  useFetchRetirements();
 
   const { data: allowedDenomsData } = useQuery(
     getAllowedDenomQuery({

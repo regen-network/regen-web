@@ -2933,12 +2933,12 @@ export type UpdateTxPayloadTxEdgeArgs = {
   orderBy?: Maybe<Array<TxesOrderBy>>;
 };
 
-export type AllRetirementsByOwnerQueryVariables = Exact<{
+export type IndexerAllRetirementsByOwnerQueryVariables = Exact<{
   owner: Scalars['String'];
 }>;
 
 
-export type AllRetirementsByOwnerQuery = (
+export type IndexerAllRetirementsByOwnerQuery = (
   { __typename?: 'Query' }
   & { allRetirements?: Maybe<(
     { __typename?: 'RetirementsConnection' }
@@ -2950,8 +2950,8 @@ export type AllRetirementsByOwnerQuery = (
 );
 
 
-export const AllRetirementsByOwnerDocument = gql`
-    query AllRetirementsByOwner($owner: String!) {
+export const IndexerAllRetirementsByOwnerDocument = gql`
+    query IndexerAllRetirementsByOwner($owner: String!) {
   allRetirements(condition: {owner: $owner}) {
     nodes {
       owner
@@ -2967,29 +2967,29 @@ export const AllRetirementsByOwnerDocument = gql`
     `;
 
 /**
- * __useAllRetirementsByOwnerQuery__
+ * __useIndexerAllRetirementsByOwnerQuery__
  *
- * To run a query within a React component, call `useAllRetirementsByOwnerQuery` and pass it any options that fit your needs.
- * When your component renders, `useAllRetirementsByOwnerQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useIndexerAllRetirementsByOwnerQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIndexerAllRetirementsByOwnerQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useAllRetirementsByOwnerQuery({
+ * const { data, loading, error } = useIndexerAllRetirementsByOwnerQuery({
  *   variables: {
  *      owner: // value for 'owner'
  *   },
  * });
  */
-export function useAllRetirementsByOwnerQuery(baseOptions: Apollo.QueryHookOptions<AllRetirementsByOwnerQuery, AllRetirementsByOwnerQueryVariables>) {
+export function useIndexerAllRetirementsByOwnerQuery(baseOptions: Apollo.QueryHookOptions<IndexerAllRetirementsByOwnerQuery, IndexerAllRetirementsByOwnerQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AllRetirementsByOwnerQuery, AllRetirementsByOwnerQueryVariables>(AllRetirementsByOwnerDocument, options);
+        return Apollo.useQuery<IndexerAllRetirementsByOwnerQuery, IndexerAllRetirementsByOwnerQueryVariables>(IndexerAllRetirementsByOwnerDocument, options);
       }
-export function useAllRetirementsByOwnerLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllRetirementsByOwnerQuery, AllRetirementsByOwnerQueryVariables>) {
+export function useIndexerAllRetirementsByOwnerLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IndexerAllRetirementsByOwnerQuery, IndexerAllRetirementsByOwnerQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AllRetirementsByOwnerQuery, AllRetirementsByOwnerQueryVariables>(AllRetirementsByOwnerDocument, options);
+          return Apollo.useLazyQuery<IndexerAllRetirementsByOwnerQuery, IndexerAllRetirementsByOwnerQueryVariables>(IndexerAllRetirementsByOwnerDocument, options);
         }
-export type AllRetirementsByOwnerQueryHookResult = ReturnType<typeof useAllRetirementsByOwnerQuery>;
-export type AllRetirementsByOwnerLazyQueryHookResult = ReturnType<typeof useAllRetirementsByOwnerLazyQuery>;
-export type AllRetirementsByOwnerQueryResult = Apollo.QueryResult<AllRetirementsByOwnerQuery, AllRetirementsByOwnerQueryVariables>;
+export type IndexerAllRetirementsByOwnerQueryHookResult = ReturnType<typeof useIndexerAllRetirementsByOwnerQuery>;
+export type IndexerAllRetirementsByOwnerLazyQueryHookResult = ReturnType<typeof useIndexerAllRetirementsByOwnerLazyQuery>;
+export type IndexerAllRetirementsByOwnerQueryResult = Apollo.QueryResult<IndexerAllRetirementsByOwnerQuery, IndexerAllRetirementsByOwnerQueryVariables>;

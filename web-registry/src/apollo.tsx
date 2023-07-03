@@ -1,16 +1,19 @@
 import {
+  ApolloLink,
   ApolloProvider,
   createHttpLink,
   DefaultOptions,
   InMemoryCache,
+  split,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { getMainDefinition } from '@apollo/client/utilities';
 import { useQuery } from '@tanstack/react-query';
 
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 
-import { apiUri } from './lib/apiUri';
+import { apiUri, indexerApiUri } from './lib/apiUri';
 
 interface AuthApolloProviderProps {
   apolloClientFactory: ApolloClientFactory;
@@ -28,6 +31,11 @@ export const AuthApolloProvider = ({
     uri: `${apiUri}/graphql`,
     credentials: 'include',
   });
+
+  const indexerHttpLink = createHttpLink({
+    uri: `${indexerApiUri}/graphql`,
+  });
+
   // https://www.apollographql.com/docs/react/api/link/apollo-link-context/#overview
   const authLink = setContext((_, { headers }) => ({
     headers: {
@@ -47,10 +55,19 @@ export const AuthApolloProvider = ({
     },
   };
 
-  const link = authLink.concat(httpLink);
+  const mainLink = authLink.concat(httpLink);
+
+  const splitLink = split(
+    ({ operationName }) => {
+      return operationName.startsWith('Indexer');
+    },
+    indexerHttpLink,
+    ApolloLink.from([mainLink]),
+  );
+
   apolloClientFactory.prepare({
     cache: new InMemoryCache(),
-    link,
+    link: splitLink,
     defaultOptions,
   });
 

@@ -1,0 +1,13 @@
+query AllRetirementsByOwner($owner: String!) {
+  allRetirements(condition: { owner: $owner }) {
+    nodes {
+      owner
+      amount
+      reason
+      batchDenom
+      jurisdiction
+      timestamp
+      reason
+    }
+  }
+}

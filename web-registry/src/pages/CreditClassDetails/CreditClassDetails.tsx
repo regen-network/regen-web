@@ -76,6 +76,7 @@ function CreditClassDetails({
   const content = contentData?.allCreditClass?.find(
     creditClass => creditClass.path === creditClassId,
   );
+  const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
 
   const isCommunityCredit = !content;
 
@@ -88,7 +89,7 @@ function CreditClassDetails({
     getCreditClassByOnChainIdQuery({
       client: graphqlClient,
       onChainId: creditClassId as string,
-      enabled: !!isOnChainClassId && !!client,
+      enabled: !!isOnChainClassId && !!graphqlClient && !!csrfData,
     }),
   );
 
@@ -134,7 +135,6 @@ function CreditClassDetails({
   const impact = useImpact({ coBenefitsIRIs, primaryImpactIRI });
   const impactCards = normalizeProjectImpactCards(impact);
 
-  const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
   const { data: adminPartyByAddrData } = useQuery(
     getPartyByAddrQuery({
       client: graphqlClient,

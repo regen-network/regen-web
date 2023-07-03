@@ -21,7 +21,7 @@ export interface AnchoredProjectMetadataBaseLD {
   'regen:landSteward'?: ProjectStakeholder;
   'regen:landOwner'?: ProjectStakeholder;
   'regen:projectOriginator'?: ProjectStakeholder;
-  'regen:rating'?: Rating[];
+  'regen:ratings'?: Rating[];
 }
 
 /** Un-anchored metadata from our DB. This is editable without a Ledger TX. */

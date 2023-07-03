@@ -127,7 +127,7 @@ function ProjectTopSection({
     data: allCreditCertification?.allCreditCertification,
   });
 
-  const certification = creditClassMetadata?.['regen:certification'];
+  const certification = creditClassMetadata?.['regen:certifications'];
 
   const ratingAndCertificationData = getRatingAndCertificationsData({
     ratings: rating,

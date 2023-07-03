@@ -21,7 +21,7 @@ export interface CreditClassMetadataLD {
   'regen:projectActivities': string[];
   'regen:carbonOffsetStandard'?: CompactedNameUrl;
   'regen:tokenizationSource'?: string;
-  'regen:certification'?: Certification[];
+  'regen:certifications'?: Certification[];
 }
 
 interface Context {

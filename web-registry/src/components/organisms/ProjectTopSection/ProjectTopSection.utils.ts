@@ -98,7 +98,7 @@ export const parseProjectMetadata = (
       });
 
     // Rating
-    rating = projectMetadata?.['regen:rating'];
+    rating = projectMetadata?.['regen:ratings'];
   }
   // projectMetadata?.['schema:location']?.['geojson:place_name'];
 

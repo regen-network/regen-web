@@ -3,12 +3,14 @@ import { truncate } from 'web-components/lib/utils/truncate';
 
 import { Maybe, PartyFieldsFragment } from 'generated/graphql';
 
-export const getDisplayAdmin = (
+import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
+
+export const getDisplayPartyOrAddress = (
   address?: string,
   party?: Maybe<PartyFieldsFragment>,
-  defaultAvatar?: string,
 ): Party | undefined => {
   if (!address) return;
+  const defaultAvatar = getDefaultAvatar(party);
   if (!!party) {
     const name = party.name;
     const type = party.type;

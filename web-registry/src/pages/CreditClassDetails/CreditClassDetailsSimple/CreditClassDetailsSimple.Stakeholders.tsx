@@ -85,7 +85,7 @@ export const CreditClassDetailsStakeholders = ({
                   items={issuers.slice(1, issuers.length).map(issuer => (
                     <UserInfo
                       user={issuer}
-                      key={issuer.name}
+                      key={issuer?.name}
                       fontFamily={defaultFontFamily}
                       sx={{ mb: 2 }}
                     />

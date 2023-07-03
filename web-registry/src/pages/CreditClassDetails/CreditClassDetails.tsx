@@ -29,6 +29,7 @@ import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellO
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
+import { getDisplayPartyOrAddress } from 'components/organisms/ProjectDetailsSection/ProjectDetailsSection.utils';
 import useImpact from 'components/organisms/ProjectTopSection/hooks/useImpact';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { AVG_PRICE_TOOLTIP_CREDIT_CLASS } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants';
@@ -165,11 +166,13 @@ function CreditClassDetails({
     creditClassIssuer => creditClassIssuer.data,
   );
   const creditClassIssuers = creditClassIssuersData
-    .map(issuer => getParty(issuer?.walletByAddr?.partyByWalletId))
-    .filter(
-      (party: Party | undefined): party is Party =>
-        !!party && party.name !== '',
-    );
+    .map((issuer, index) =>
+      getDisplayPartyOrAddress(
+        issuers?.[index],
+        issuer?.walletByAddr?.partyByWalletId,
+      ),
+    )
+    .filter((party: Party | undefined): party is Party => !!party);
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {

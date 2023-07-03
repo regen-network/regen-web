@@ -79,18 +79,20 @@ export const CreditClassDetailsStakeholders = ({
                 fontFamily={defaultFontFamily}
                 sx={{ mb: 2 }}
               />
-              <CollapseList
-                max={2}
-                items={issuers.slice(1, issuers.length).map(issuer => (
-                  <UserInfo
-                    user={issuer}
-                    key={issuer.name}
-                    fontFamily={defaultFontFamily}
-                    sx={{ mb: 2 }}
-                  />
-                ))}
-                buttonAdditionalText={SEE_MORE_ADDITIONAL_TEXT}
-              />
+              {issuers?.length > 1 && (
+                <CollapseList
+                  max={0}
+                  items={issuers.slice(1, issuers.length).map(issuer => (
+                    <UserInfo
+                      user={issuer}
+                      key={issuer.name}
+                      fontFamily={defaultFontFamily}
+                      sx={{ mb: 2 }}
+                    />
+                  ))}
+                  buttonAdditionalText={SEE_MORE_ADDITIONAL_TEXT}
+                />
+              )}
             </Grid>
           )}
         </Grid>

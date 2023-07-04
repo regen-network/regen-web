@@ -14,8 +14,10 @@ import {
   ProjectPageMetadataLD,
   ProjectQuote,
 } from 'lib/db/types/json-ld';
+import { Certification } from 'lib/db/types/json-ld/certification';
 import { CFCCreditClassMetadataLD } from 'lib/db/types/json-ld/cfc-credit-class-metadata';
 import { ApprovedMethodologies } from 'lib/db/types/json-ld/methodology';
+import { Rating } from 'lib/db/types/json-ld/rating';
 import { getSanityImgSrc } from 'lib/imgSrc';
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
@@ -24,7 +26,6 @@ import {
   RATINGS,
   SEE_ALL_METHODOLOGIES,
 } from './ProjectTopSection.constants';
-import { CreditCertification, ProjectRating } from './ProjectTopSection.types';
 
 type GetSdgsImagesParams = {
   sdgs?: Maybe<Maybe<Sdg>[]>;
@@ -67,7 +68,7 @@ type ParseProjectMetadataReturn = {
   areaUnit?: string;
   placeName?: string;
   projectMethodology?: ProjectMethodology;
-  rating?: ProjectRating[];
+  ratings?: Rating[];
 };
 
 export type ProjectMethodology = {
@@ -86,7 +87,7 @@ export const parseProjectMetadata = (
   const areaUnit = getAreaUnit(unit as qudtUnit);
   const placeName = projectMetadata?.['schema:location']?.['place_name'];
   let projectMethodology;
-  let rating;
+  let ratings;
 
   if (isAnchoredProjectMetadata(projectMetadata, onChainProjectId)) {
     // Methodology
@@ -98,7 +99,7 @@ export const parseProjectMetadata = (
       });
 
     // Rating
-    rating = projectMetadata?.['regen:ratings'];
+    ratings = projectMetadata?.['regen:ratings'];
   }
   // projectMetadata?.['schema:location']?.['geojson:place_name'];
 
@@ -108,7 +109,7 @@ export const parseProjectMetadata = (
     areaUnit,
     placeName,
     projectMethodology,
-    rating,
+    ratings,
   };
 };
 
@@ -210,13 +211,13 @@ export const getIconsMapping = ({ data }: GetIconsMappingParams) => {
 /* getRatingAndCertificationsData */
 
 type GetRatingAndCertificationsDataParams = {
-  ratings?: ProjectRating[];
+  ratings?: Rating[];
   ratingIcons?: Record<string, string | undefined>;
-  certifications?: CreditCertification[];
+  certifications?: Certification[];
   certificationIcons?: Record<string, string | undefined>;
 };
 
-export const getRatingAndCertificationsData = ({
+export const getRatingsAndCertificationsData = ({
   ratings,
   ratingIcons,
   certifications,

@@ -39,7 +39,7 @@ import { ProjectTopSectionProps } from './ProjectTopSection.types';
 import {
   getIconsMapping,
   getOffsetGenerationMethod,
-  getRatingAndCertificationsData,
+  getRatingsAndCertificationsData,
   getSdgsImages,
   parseMethodologies,
   parseOffChainProject,
@@ -72,8 +72,14 @@ function ProjectTopSection({
   const { primaryImpactIRI, coBenefitsIRIs } =
     parseOffChainProject(offChainProject);
 
-  const { projectName, area, areaUnit, placeName, projectMethodology, rating } =
-    parseProjectMetadata(projectMetadata, onChainProjectId);
+  const {
+    projectName,
+    area,
+    areaUnit,
+    placeName,
+    projectMethodology,
+    ratings,
+  } = parseProjectMetadata(projectMetadata, onChainProjectId);
 
   const { glanceText, primaryDescription, quote } =
     parseProjectPageMetadata(projectPageMetadata);
@@ -127,12 +133,12 @@ function ProjectTopSection({
     data: allCreditCertification?.allCreditCertification,
   });
 
-  const certification = creditClassMetadata?.['regen:certifications'];
+  const certifications = creditClassMetadata?.['regen:certifications'];
 
-  const ratingAndCertificationData = getRatingAndCertificationsData({
-    ratings: rating,
+  const ratingsAndCertificationsData = getRatingsAndCertificationsData({
+    ratings,
     ratingIcons: projectRatingIconsMapping,
-    certifications: certification,
+    certifications,
     certificationIcons: creditCertificationIconsMapping,
   });
 
@@ -278,9 +284,9 @@ function ProjectTopSection({
               }),
             )}
           />
-          {ratingAndCertificationData && (
+          {ratingsAndCertificationsData && (
             <RoundLogoItemsList
-              {...ratingAndCertificationData}
+              {...ratingsAndCertificationsData}
               sx={{ mt: 5 }}
             />
           )}

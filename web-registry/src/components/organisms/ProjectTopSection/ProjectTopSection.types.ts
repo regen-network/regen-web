@@ -48,14 +48,3 @@ export type ProjectTopSectionProps = {
 };
 
 export type SdgType = SdgByIriQuery['allSdg'][0];
-
-export type ProjectRating = {
-  'schema:name'?: string;
-  'schema:ratingValue'?: string;
-  'schema:url'?: string;
-};
-
-export type CreditCertification = {
-  'schema:name'?: string;
-  'schema:url'?: string;
-};

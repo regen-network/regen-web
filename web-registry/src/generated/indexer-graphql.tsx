@@ -262,39 +262,6 @@ export type CreateChainPayloadChainEdgeArgs = {
   orderBy?: Maybe<Array<ChainsOrderBy>>;
 };
 
-/** All input for the create `FlywaySchemaHistory` mutation. */
-export type CreateFlywaySchemaHistoryInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `FlywaySchemaHistory` to be created by this mutation. */
-  flywaySchemaHistory: FlywaySchemaHistoryInput;
-};
-
-/** The output of our create `FlywaySchemaHistory` mutation. */
-export type CreateFlywaySchemaHistoryPayload = {
-  __typename?: 'CreateFlywaySchemaHistoryPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `FlywaySchemaHistory` that was created by this mutation. */
-  flywaySchemaHistory?: Maybe<FlywaySchemaHistory>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** An edge for our `FlywaySchemaHistory`. May be used by Relay 1. */
-  flywaySchemaHistoryEdge?: Maybe<FlywaySchemaHistoriesEdge>;
-};
-
-
-/** The output of our create `FlywaySchemaHistory` mutation. */
-export type CreateFlywaySchemaHistoryPayloadFlywaySchemaHistoryEdgeArgs = {
-  orderBy?: Maybe<Array<FlywaySchemaHistoriesOrderBy>>;
-};
-
 /** All input for the create `MsgEventAttr` mutation. */
 export type CreateMsgEventAttrInput = {
   /**
@@ -573,50 +540,6 @@ export type DeleteChainPayloadChainEdgeArgs = {
   orderBy?: Maybe<Array<ChainsOrderBy>>;
 };
 
-/** All input for the `deleteFlywaySchemaHistoryByInstalledRank` mutation. */
-export type DeleteFlywaySchemaHistoryByInstalledRankInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  installedRank: Scalars['Int'];
-};
-
-/** All input for the `deleteFlywaySchemaHistory` mutation. */
-export type DeleteFlywaySchemaHistoryInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The globally unique `ID` which will identify a single `FlywaySchemaHistory` to be deleted. */
-  nodeId: Scalars['ID'];
-};
-
-/** The output of our delete `FlywaySchemaHistory` mutation. */
-export type DeleteFlywaySchemaHistoryPayload = {
-  __typename?: 'DeleteFlywaySchemaHistoryPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `FlywaySchemaHistory` that was deleted by this mutation. */
-  flywaySchemaHistory?: Maybe<FlywaySchemaHistory>;
-  deletedFlywaySchemaHistoryId?: Maybe<Scalars['ID']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** An edge for our `FlywaySchemaHistory`. May be used by Relay 1. */
-  flywaySchemaHistoryEdge?: Maybe<FlywaySchemaHistoriesEdge>;
-};
-
-
-/** The output of our delete `FlywaySchemaHistory` mutation. */
-export type DeleteFlywaySchemaHistoryPayloadFlywaySchemaHistoryEdgeArgs = {
-  orderBy?: Maybe<Array<FlywaySchemaHistoriesOrderBy>>;
-};
-
 /** All input for the `deleteMsgByChainNumAndBlockHeightAndTxIdxAndMsgIdx` mutation. */
 export type DeleteMsgByChainNumAndBlockHeightAndTxIdxAndMsgIdxInput = {
   /**
@@ -873,385 +796,6 @@ export type DeleteTxPayload = {
 /** The output of our delete `Tx` mutation. */
 export type DeleteTxPayloadTxEdgeArgs = {
   orderBy?: Maybe<Array<TxesOrderBy>>;
-};
-
-export type EventRetire = {
-  __typename?: 'EventRetire';
-  chainNum?: Maybe<Scalars['Int']>;
-  blockHeight?: Maybe<Scalars['BigInt']>;
-  txIdx?: Maybe<Scalars['Int']>;
-  msgIdx?: Maybe<Scalars['Int']>;
-  owner?: Maybe<Scalars['String']>;
-  batchDenom?: Maybe<Scalars['String']>;
-  amount?: Maybe<Scalars['String']>;
-  jurisdiction?: Maybe<Scalars['String']>;
-  reason?: Maybe<Scalars['String']>;
-  hasDuplicates?: Maybe<Scalars['Boolean']>;
-};
-
-/**
- * A condition to be used against `EventRetire` object types. All fields are tested
- * for equality and combined with a logical ‘and.’
- */
-export type EventRetireCondition = {
-  /** Checks for equality with the object’s `chainNum` field. */
-  chainNum?: Maybe<Scalars['Int']>;
-  /** Checks for equality with the object’s `blockHeight` field. */
-  blockHeight?: Maybe<Scalars['BigInt']>;
-  /** Checks for equality with the object’s `txIdx` field. */
-  txIdx?: Maybe<Scalars['Int']>;
-  /** Checks for equality with the object’s `msgIdx` field. */
-  msgIdx?: Maybe<Scalars['Int']>;
-  /** Checks for equality with the object’s `owner` field. */
-  owner?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `batchDenom` field. */
-  batchDenom?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `amount` field. */
-  amount?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `jurisdiction` field. */
-  jurisdiction?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `reason` field. */
-  reason?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `hasDuplicates` field. */
-  hasDuplicates?: Maybe<Scalars['Boolean']>;
-};
-
-export type EventRetireV1 = {
-  __typename?: 'EventRetireV1';
-  chainNum?: Maybe<Scalars['Int']>;
-  blockHeight?: Maybe<Scalars['BigInt']>;
-  txIdx?: Maybe<Scalars['Int']>;
-  msgIdx?: Maybe<Scalars['Int']>;
-  owner?: Maybe<Scalars['String']>;
-  batchDenom?: Maybe<Scalars['String']>;
-  amount?: Maybe<Scalars['String']>;
-  jurisdiction?: Maybe<Scalars['String']>;
-  reason?: Maybe<Scalars['String']>;
-  hasDuplicates?: Maybe<Scalars['Boolean']>;
-};
-
-export type EventRetireV1Alpha1 = {
-  __typename?: 'EventRetireV1Alpha1';
-  chainNum?: Maybe<Scalars['Int']>;
-  blockHeight?: Maybe<Scalars['BigInt']>;
-  txIdx?: Maybe<Scalars['Int']>;
-  msgIdx?: Maybe<Scalars['Int']>;
-  retirer?: Maybe<Scalars['String']>;
-  batchDenom?: Maybe<Scalars['String']>;
-  amount?: Maybe<Scalars['String']>;
-  location?: Maybe<Scalars['String']>;
-  hasDuplicates?: Maybe<Scalars['Boolean']>;
-};
-
-/**
- * A condition to be used against `EventRetireV1Alpha1` object types. All fields
- * are tested for equality and combined with a logical ‘and.’
- */
-export type EventRetireV1Alpha1Condition = {
-  /** Checks for equality with the object’s `chainNum` field. */
-  chainNum?: Maybe<Scalars['Int']>;
-  /** Checks for equality with the object’s `blockHeight` field. */
-  blockHeight?: Maybe<Scalars['BigInt']>;
-  /** Checks for equality with the object’s `txIdx` field. */
-  txIdx?: Maybe<Scalars['Int']>;
-  /** Checks for equality with the object’s `msgIdx` field. */
-  msgIdx?: Maybe<Scalars['Int']>;
-  /** Checks for equality with the object’s `retirer` field. */
-  retirer?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `batchDenom` field. */
-  batchDenom?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `amount` field. */
-  amount?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `location` field. */
-  location?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `hasDuplicates` field. */
-  hasDuplicates?: Maybe<Scalars['Boolean']>;
-};
-
-/** A connection to a list of `EventRetireV1Alpha1` values. */
-export type EventRetireV1Alpha1SConnection = {
-  __typename?: 'EventRetireV1Alpha1SConnection';
-  /** A list of `EventRetireV1Alpha1` objects. */
-  nodes: Array<Maybe<EventRetireV1Alpha1>>;
-  /** A list of edges which contains the `EventRetireV1Alpha1` and cursor to aid in pagination. */
-  edges: Array<EventRetireV1Alpha1SEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `EventRetireV1Alpha1` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `EventRetireV1Alpha1` edge in the connection. */
-export type EventRetireV1Alpha1SEdge = {
-  __typename?: 'EventRetireV1Alpha1SEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `EventRetireV1Alpha1` at the end of the edge. */
-  node?: Maybe<EventRetireV1Alpha1>;
-};
-
-/** Methods to use when ordering `EventRetireV1Alpha1`. */
-export enum EventRetireV1Alpha1SOrderBy {
-  Natural = 'NATURAL',
-  ChainNumAsc = 'CHAIN_NUM_ASC',
-  ChainNumDesc = 'CHAIN_NUM_DESC',
-  BlockHeightAsc = 'BLOCK_HEIGHT_ASC',
-  BlockHeightDesc = 'BLOCK_HEIGHT_DESC',
-  TxIdxAsc = 'TX_IDX_ASC',
-  TxIdxDesc = 'TX_IDX_DESC',
-  MsgIdxAsc = 'MSG_IDX_ASC',
-  MsgIdxDesc = 'MSG_IDX_DESC',
-  RetirerAsc = 'RETIRER_ASC',
-  RetirerDesc = 'RETIRER_DESC',
-  BatchDenomAsc = 'BATCH_DENOM_ASC',
-  BatchDenomDesc = 'BATCH_DENOM_DESC',
-  AmountAsc = 'AMOUNT_ASC',
-  AmountDesc = 'AMOUNT_DESC',
-  LocationAsc = 'LOCATION_ASC',
-  LocationDesc = 'LOCATION_DESC',
-  HasDuplicatesAsc = 'HAS_DUPLICATES_ASC',
-  HasDuplicatesDesc = 'HAS_DUPLICATES_DESC'
-}
-
-/**
- * A condition to be used against `EventRetireV1` object types. All fields are
- * tested for equality and combined with a logical ‘and.’
- */
-export type EventRetireV1Condition = {
-  /** Checks for equality with the object’s `chainNum` field. */
-  chainNum?: Maybe<Scalars['Int']>;
-  /** Checks for equality with the object’s `blockHeight` field. */
-  blockHeight?: Maybe<Scalars['BigInt']>;
-  /** Checks for equality with the object’s `txIdx` field. */
-  txIdx?: Maybe<Scalars['Int']>;
-  /** Checks for equality with the object’s `msgIdx` field. */
-  msgIdx?: Maybe<Scalars['Int']>;
-  /** Checks for equality with the object’s `owner` field. */
-  owner?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `batchDenom` field. */
-  batchDenom?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `amount` field. */
-  amount?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `jurisdiction` field. */
-  jurisdiction?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `reason` field. */
-  reason?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `hasDuplicates` field. */
-  hasDuplicates?: Maybe<Scalars['Boolean']>;
-};
-
-/** A connection to a list of `EventRetireV1` values. */
-export type EventRetireV1SConnection = {
-  __typename?: 'EventRetireV1SConnection';
-  /** A list of `EventRetireV1` objects. */
-  nodes: Array<Maybe<EventRetireV1>>;
-  /** A list of edges which contains the `EventRetireV1` and cursor to aid in pagination. */
-  edges: Array<EventRetireV1SEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `EventRetireV1` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `EventRetireV1` edge in the connection. */
-export type EventRetireV1SEdge = {
-  __typename?: 'EventRetireV1SEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `EventRetireV1` at the end of the edge. */
-  node?: Maybe<EventRetireV1>;
-};
-
-/** Methods to use when ordering `EventRetireV1`. */
-export enum EventRetireV1SOrderBy {
-  Natural = 'NATURAL',
-  ChainNumAsc = 'CHAIN_NUM_ASC',
-  ChainNumDesc = 'CHAIN_NUM_DESC',
-  BlockHeightAsc = 'BLOCK_HEIGHT_ASC',
-  BlockHeightDesc = 'BLOCK_HEIGHT_DESC',
-  TxIdxAsc = 'TX_IDX_ASC',
-  TxIdxDesc = 'TX_IDX_DESC',
-  MsgIdxAsc = 'MSG_IDX_ASC',
-  MsgIdxDesc = 'MSG_IDX_DESC',
-  OwnerAsc = 'OWNER_ASC',
-  OwnerDesc = 'OWNER_DESC',
-  BatchDenomAsc = 'BATCH_DENOM_ASC',
-  BatchDenomDesc = 'BATCH_DENOM_DESC',
-  AmountAsc = 'AMOUNT_ASC',
-  AmountDesc = 'AMOUNT_DESC',
-  JurisdictionAsc = 'JURISDICTION_ASC',
-  JurisdictionDesc = 'JURISDICTION_DESC',
-  ReasonAsc = 'REASON_ASC',
-  ReasonDesc = 'REASON_DESC',
-  HasDuplicatesAsc = 'HAS_DUPLICATES_ASC',
-  HasDuplicatesDesc = 'HAS_DUPLICATES_DESC'
-}
-
-/** A connection to a list of `EventRetire` values. */
-export type EventRetiresConnection = {
-  __typename?: 'EventRetiresConnection';
-  /** A list of `EventRetire` objects. */
-  nodes: Array<Maybe<EventRetire>>;
-  /** A list of edges which contains the `EventRetire` and cursor to aid in pagination. */
-  edges: Array<EventRetiresEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `EventRetire` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `EventRetire` edge in the connection. */
-export type EventRetiresEdge = {
-  __typename?: 'EventRetiresEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `EventRetire` at the end of the edge. */
-  node?: Maybe<EventRetire>;
-};
-
-/** Methods to use when ordering `EventRetire`. */
-export enum EventRetiresOrderBy {
-  Natural = 'NATURAL',
-  ChainNumAsc = 'CHAIN_NUM_ASC',
-  ChainNumDesc = 'CHAIN_NUM_DESC',
-  BlockHeightAsc = 'BLOCK_HEIGHT_ASC',
-  BlockHeightDesc = 'BLOCK_HEIGHT_DESC',
-  TxIdxAsc = 'TX_IDX_ASC',
-  TxIdxDesc = 'TX_IDX_DESC',
-  MsgIdxAsc = 'MSG_IDX_ASC',
-  MsgIdxDesc = 'MSG_IDX_DESC',
-  OwnerAsc = 'OWNER_ASC',
-  OwnerDesc = 'OWNER_DESC',
-  BatchDenomAsc = 'BATCH_DENOM_ASC',
-  BatchDenomDesc = 'BATCH_DENOM_DESC',
-  AmountAsc = 'AMOUNT_ASC',
-  AmountDesc = 'AMOUNT_DESC',
-  JurisdictionAsc = 'JURISDICTION_ASC',
-  JurisdictionDesc = 'JURISDICTION_DESC',
-  ReasonAsc = 'REASON_ASC',
-  ReasonDesc = 'REASON_DESC',
-  HasDuplicatesAsc = 'HAS_DUPLICATES_ASC',
-  HasDuplicatesDesc = 'HAS_DUPLICATES_DESC'
-}
-
-/** A connection to a list of `FlywaySchemaHistory` values. */
-export type FlywaySchemaHistoriesConnection = {
-  __typename?: 'FlywaySchemaHistoriesConnection';
-  /** A list of `FlywaySchemaHistory` objects. */
-  nodes: Array<Maybe<FlywaySchemaHistory>>;
-  /** A list of edges which contains the `FlywaySchemaHistory` and cursor to aid in pagination. */
-  edges: Array<FlywaySchemaHistoriesEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `FlywaySchemaHistory` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `FlywaySchemaHistory` edge in the connection. */
-export type FlywaySchemaHistoriesEdge = {
-  __typename?: 'FlywaySchemaHistoriesEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `FlywaySchemaHistory` at the end of the edge. */
-  node?: Maybe<FlywaySchemaHistory>;
-};
-
-/** Methods to use when ordering `FlywaySchemaHistory`. */
-export enum FlywaySchemaHistoriesOrderBy {
-  Natural = 'NATURAL',
-  InstalledRankAsc = 'INSTALLED_RANK_ASC',
-  InstalledRankDesc = 'INSTALLED_RANK_DESC',
-  VersionAsc = 'VERSION_ASC',
-  VersionDesc = 'VERSION_DESC',
-  DescriptionAsc = 'DESCRIPTION_ASC',
-  DescriptionDesc = 'DESCRIPTION_DESC',
-  TypeAsc = 'TYPE_ASC',
-  TypeDesc = 'TYPE_DESC',
-  ScriptAsc = 'SCRIPT_ASC',
-  ScriptDesc = 'SCRIPT_DESC',
-  ChecksumAsc = 'CHECKSUM_ASC',
-  ChecksumDesc = 'CHECKSUM_DESC',
-  InstalledByAsc = 'INSTALLED_BY_ASC',
-  InstalledByDesc = 'INSTALLED_BY_DESC',
-  InstalledOnAsc = 'INSTALLED_ON_ASC',
-  InstalledOnDesc = 'INSTALLED_ON_DESC',
-  ExecutionTimeAsc = 'EXECUTION_TIME_ASC',
-  ExecutionTimeDesc = 'EXECUTION_TIME_DESC',
-  SuccessAsc = 'SUCCESS_ASC',
-  SuccessDesc = 'SUCCESS_DESC',
-  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
-  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
-}
-
-export type FlywaySchemaHistory = Node & {
-  __typename?: 'FlywaySchemaHistory';
-  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
-  nodeId: Scalars['ID'];
-  installedRank: Scalars['Int'];
-  version?: Maybe<Scalars['String']>;
-  description: Scalars['String'];
-  type: Scalars['String'];
-  script: Scalars['String'];
-  checksum?: Maybe<Scalars['Int']>;
-  installedBy: Scalars['String'];
-  installedOn: Scalars['Datetime'];
-  executionTime: Scalars['Int'];
-  success: Scalars['Boolean'];
-};
-
-/**
- * A condition to be used against `FlywaySchemaHistory` object types. All fields
- * are tested for equality and combined with a logical ‘and.’
- */
-export type FlywaySchemaHistoryCondition = {
-  /** Checks for equality with the object’s `installedRank` field. */
-  installedRank?: Maybe<Scalars['Int']>;
-  /** Checks for equality with the object’s `version` field. */
-  version?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `description` field. */
-  description?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `type` field. */
-  type?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `script` field. */
-  script?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `checksum` field. */
-  checksum?: Maybe<Scalars['Int']>;
-  /** Checks for equality with the object’s `installedBy` field. */
-  installedBy?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `installedOn` field. */
-  installedOn?: Maybe<Scalars['Datetime']>;
-  /** Checks for equality with the object’s `executionTime` field. */
-  executionTime?: Maybe<Scalars['Int']>;
-  /** Checks for equality with the object’s `success` field. */
-  success?: Maybe<Scalars['Boolean']>;
-};
-
-/** An input for mutations affecting `FlywaySchemaHistory` */
-export type FlywaySchemaHistoryInput = {
-  installedRank: Scalars['Int'];
-  version?: Maybe<Scalars['String']>;
-  description: Scalars['String'];
-  type: Scalars['String'];
-  script: Scalars['String'];
-  checksum?: Maybe<Scalars['Int']>;
-  installedBy: Scalars['String'];
-  installedOn?: Maybe<Scalars['Datetime']>;
-  executionTime: Scalars['Int'];
-  success: Scalars['Boolean'];
-};
-
-/** Represents an update to a `FlywaySchemaHistory`. Fields that are set will be updated. */
-export type FlywaySchemaHistoryPatch = {
-  installedRank?: Maybe<Scalars['Int']>;
-  version?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  type?: Maybe<Scalars['String']>;
-  script?: Maybe<Scalars['String']>;
-  checksum?: Maybe<Scalars['Int']>;
-  installedBy?: Maybe<Scalars['String']>;
-  installedOn?: Maybe<Scalars['Datetime']>;
-  executionTime?: Maybe<Scalars['Int']>;
-  success?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -1580,8 +1124,6 @@ export type Mutation = {
   createBlock?: Maybe<CreateBlockPayload>;
   /** Creates a single `Chain`. */
   createChain?: Maybe<CreateChainPayload>;
-  /** Creates a single `FlywaySchemaHistory`. */
-  createFlywaySchemaHistory?: Maybe<CreateFlywaySchemaHistoryPayload>;
   /** Creates a single `Msg`. */
   createMsg?: Maybe<CreateMsgPayload>;
   /** Creates a single `MsgEvent`. */
@@ -1602,10 +1144,6 @@ export type Mutation = {
   updateChainByNum?: Maybe<UpdateChainPayload>;
   /** Updates a single `Chain` using a unique key and a patch. */
   updateChainByChainId?: Maybe<UpdateChainPayload>;
-  /** Updates a single `FlywaySchemaHistory` using its globally unique id and a patch. */
-  updateFlywaySchemaHistory?: Maybe<UpdateFlywaySchemaHistoryPayload>;
-  /** Updates a single `FlywaySchemaHistory` using a unique key and a patch. */
-  updateFlywaySchemaHistoryByInstalledRank?: Maybe<UpdateFlywaySchemaHistoryPayload>;
   /** Updates a single `Msg` using its globally unique id and a patch. */
   updateMsg?: Maybe<UpdateMsgPayload>;
   /** Updates a single `Msg` using a unique key and a patch. */
@@ -1638,10 +1176,6 @@ export type Mutation = {
   deleteChainByNum?: Maybe<DeleteChainPayload>;
   /** Deletes a single `Chain` using a unique key. */
   deleteChainByChainId?: Maybe<DeleteChainPayload>;
-  /** Deletes a single `FlywaySchemaHistory` using its globally unique id. */
-  deleteFlywaySchemaHistory?: Maybe<DeleteFlywaySchemaHistoryPayload>;
-  /** Deletes a single `FlywaySchemaHistory` using a unique key. */
-  deleteFlywaySchemaHistoryByInstalledRank?: Maybe<DeleteFlywaySchemaHistoryPayload>;
   /** Deletes a single `Msg` using its globally unique id. */
   deleteMsg?: Maybe<DeleteMsgPayload>;
   /** Deletes a single `Msg` using a unique key. */
@@ -1676,12 +1210,6 @@ export type MutationCreateBlockArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateChainArgs = {
   input: CreateChainInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreateFlywaySchemaHistoryArgs = {
-  input: CreateFlywaySchemaHistoryInput;
 };
 
 
@@ -1742,18 +1270,6 @@ export type MutationUpdateChainByNumArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateChainByChainIdArgs = {
   input: UpdateChainByChainIdInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateFlywaySchemaHistoryArgs = {
-  input: UpdateFlywaySchemaHistoryInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateFlywaySchemaHistoryByInstalledRankArgs = {
-  input: UpdateFlywaySchemaHistoryByInstalledRankInput;
 };
 
 
@@ -1850,18 +1366,6 @@ export type MutationDeleteChainByNumArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteChainByChainIdArgs = {
   input: DeleteChainByChainIdInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteFlywaySchemaHistoryArgs = {
-  input: DeleteFlywaySchemaHistoryInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteFlywaySchemaHistoryByInstalledRankArgs = {
-  input: DeleteFlywaySchemaHistoryByInstalledRankInput;
 };
 
 
@@ -1965,14 +1469,6 @@ export type Query = Node & {
   allBlocks?: Maybe<BlocksConnection>;
   /** Reads and enables pagination through a set of `Chain`. */
   allChains?: Maybe<ChainsConnection>;
-  /** Reads and enables pagination through a set of `EventRetire`. */
-  allEventRetires?: Maybe<EventRetiresConnection>;
-  /** Reads and enables pagination through a set of `EventRetireV1`. */
-  allEventRetireV1S?: Maybe<EventRetireV1SConnection>;
-  /** Reads and enables pagination through a set of `EventRetireV1Alpha1`. */
-  allEventRetireV1Alpha1S?: Maybe<EventRetireV1Alpha1SConnection>;
-  /** Reads and enables pagination through a set of `FlywaySchemaHistory`. */
-  allFlywaySchemaHistories?: Maybe<FlywaySchemaHistoriesConnection>;
   /** Reads and enables pagination through a set of `Msg`. */
   allMsgs?: Maybe<MsgsConnection>;
   /** Reads and enables pagination through a set of `MsgEvent`. */
@@ -1986,7 +1482,6 @@ export type Query = Node & {
   blockByChainNumAndHeight?: Maybe<Block>;
   chainByNum?: Maybe<Chain>;
   chainByChainId?: Maybe<Chain>;
-  flywaySchemaHistoryByInstalledRank?: Maybe<FlywaySchemaHistory>;
   msgByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<Msg>;
   msgEventByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType?: Maybe<MsgEvent>;
   msgEventAttrByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAndKeyAndValueHash?: Maybe<MsgEventAttr>;
@@ -1997,8 +1492,6 @@ export type Query = Node & {
   block?: Maybe<Block>;
   /** Reads a single `Chain` using its globally unique `ID`. */
   chain?: Maybe<Chain>;
-  /** Reads a single `FlywaySchemaHistory` using its globally unique `ID`. */
-  flywaySchemaHistory?: Maybe<FlywaySchemaHistory>;
   /** Reads a single `Msg` using its globally unique `ID`. */
   msg?: Maybe<Msg>;
   /** Reads a single `MsgEvent` using its globally unique `ID`. */
@@ -2039,54 +1532,6 @@ export type QueryAllChainsArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ChainsOrderBy>>;
   condition?: Maybe<ChainCondition>;
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryAllEventRetiresArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<EventRetiresOrderBy>>;
-  condition?: Maybe<EventRetireCondition>;
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryAllEventRetireV1SArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<EventRetireV1SOrderBy>>;
-  condition?: Maybe<EventRetireV1Condition>;
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryAllEventRetireV1Alpha1SArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<EventRetireV1Alpha1SOrderBy>>;
-  condition?: Maybe<EventRetireV1Alpha1Condition>;
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryAllFlywaySchemaHistoriesArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<FlywaySchemaHistoriesOrderBy>>;
-  condition?: Maybe<FlywaySchemaHistoryCondition>;
 };
 
 
@@ -2170,12 +1615,6 @@ export type QueryChainByChainIdArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
-export type QueryFlywaySchemaHistoryByInstalledRankArgs = {
-  installedRank: Scalars['Int'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
 export type QueryMsgByChainNumAndBlockHeightAndTxIdxAndMsgIdxArgs = {
   chainNum: Scalars['Int'];
   blockHeight: Scalars['BigInt'];
@@ -2237,12 +1676,6 @@ export type QueryBlockArgs = {
 
 /** The root query type which gives access points into the data universe. */
 export type QueryChainArgs = {
-  nodeId: Scalars['ID'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryFlywaySchemaHistoryArgs = {
   nodeId: Scalars['ID'];
 };
 
@@ -2611,53 +2044,6 @@ export type UpdateChainPayloadChainEdgeArgs = {
   orderBy?: Maybe<Array<ChainsOrderBy>>;
 };
 
-/** All input for the `updateFlywaySchemaHistoryByInstalledRank` mutation. */
-export type UpdateFlywaySchemaHistoryByInstalledRankInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** An object where the defined keys will be set on the `FlywaySchemaHistory` being updated. */
-  flywaySchemaHistoryPatch: FlywaySchemaHistoryPatch;
-  installedRank: Scalars['Int'];
-};
-
-/** All input for the `updateFlywaySchemaHistory` mutation. */
-export type UpdateFlywaySchemaHistoryInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The globally unique `ID` which will identify a single `FlywaySchemaHistory` to be updated. */
-  nodeId: Scalars['ID'];
-  /** An object where the defined keys will be set on the `FlywaySchemaHistory` being updated. */
-  flywaySchemaHistoryPatch: FlywaySchemaHistoryPatch;
-};
-
-/** The output of our update `FlywaySchemaHistory` mutation. */
-export type UpdateFlywaySchemaHistoryPayload = {
-  __typename?: 'UpdateFlywaySchemaHistoryPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `FlywaySchemaHistory` that was updated by this mutation. */
-  flywaySchemaHistory?: Maybe<FlywaySchemaHistory>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** An edge for our `FlywaySchemaHistory`. May be used by Relay 1. */
-  flywaySchemaHistoryEdge?: Maybe<FlywaySchemaHistoriesEdge>;
-};
-
-
-/** The output of our update `FlywaySchemaHistory` mutation. */
-export type UpdateFlywaySchemaHistoryPayloadFlywaySchemaHistoryEdgeArgs = {
-  orderBy?: Maybe<Array<FlywaySchemaHistoriesOrderBy>>;
-};
-
 /** All input for the `updateMsgByChainNumAndBlockHeightAndTxIdxAndMsgIdx` mutation. */
 export type UpdateMsgByChainNumAndBlockHeightAndTxIdxAndMsgIdxInput = {
   /**
@@ -2944,8 +2330,21 @@ export type IndexerAllRetirementsByOwnerQuery = (
     { __typename?: 'RetirementsConnection' }
     & { nodes: Array<Maybe<(
       { __typename?: 'Retirement' }
-      & Pick<Retirement, 'owner' | 'amount' | 'reason' | 'batchDenom' | 'jurisdiction' | 'timestamp'>
+      & Pick<Retirement, 'nodeId' | 'owner' | 'amount' | 'reason' | 'batchDenom' | 'jurisdiction' | 'timestamp'>
     )>> }
+  )> }
+);
+
+export type IndexerRetirementByNodeIdQueryVariables = Exact<{
+  nodeId: Scalars['ID'];
+}>;
+
+
+export type IndexerRetirementByNodeIdQuery = (
+  { __typename?: 'Query' }
+  & { retirement?: Maybe<(
+    { __typename?: 'Retirement' }
+    & Pick<Retirement, 'nodeId' | 'owner' | 'amount' | 'reason' | 'batchDenom' | 'jurisdiction' | 'timestamp'>
   )> }
 );
 
@@ -2954,6 +2353,7 @@ export const IndexerAllRetirementsByOwnerDocument = gql`
     query IndexerAllRetirementsByOwner($owner: String!) {
   allRetirements(condition: {owner: $owner}) {
     nodes {
+      nodeId
       owner
       amount
       reason
@@ -2993,3 +2393,45 @@ export function useIndexerAllRetirementsByOwnerLazyQuery(baseOptions?: Apollo.La
 export type IndexerAllRetirementsByOwnerQueryHookResult = ReturnType<typeof useIndexerAllRetirementsByOwnerQuery>;
 export type IndexerAllRetirementsByOwnerLazyQueryHookResult = ReturnType<typeof useIndexerAllRetirementsByOwnerLazyQuery>;
 export type IndexerAllRetirementsByOwnerQueryResult = Apollo.QueryResult<IndexerAllRetirementsByOwnerQuery, IndexerAllRetirementsByOwnerQueryVariables>;
+export const IndexerRetirementByNodeIdDocument = gql`
+    query IndexerRetirementByNodeId($nodeId: ID!) {
+  retirement(nodeId: $nodeId) {
+    nodeId
+    owner
+    amount
+    reason
+    batchDenom
+    jurisdiction
+    timestamp
+    reason
+  }
+}
+    `;
+
+/**
+ * __useIndexerRetirementByNodeIdQuery__
+ *
+ * To run a query within a React component, call `useIndexerRetirementByNodeIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIndexerRetirementByNodeIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useIndexerRetirementByNodeIdQuery({
+ *   variables: {
+ *      nodeId: // value for 'nodeId'
+ *   },
+ * });
+ */
+export function useIndexerRetirementByNodeIdQuery(baseOptions: Apollo.QueryHookOptions<IndexerRetirementByNodeIdQuery, IndexerRetirementByNodeIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<IndexerRetirementByNodeIdQuery, IndexerRetirementByNodeIdQueryVariables>(IndexerRetirementByNodeIdDocument, options);
+      }
+export function useIndexerRetirementByNodeIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IndexerRetirementByNodeIdQuery, IndexerRetirementByNodeIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<IndexerRetirementByNodeIdQuery, IndexerRetirementByNodeIdQueryVariables>(IndexerRetirementByNodeIdDocument, options);
+        }
+export type IndexerRetirementByNodeIdQueryHookResult = ReturnType<typeof useIndexerRetirementByNodeIdQuery>;
+export type IndexerRetirementByNodeIdLazyQueryHookResult = ReturnType<typeof useIndexerRetirementByNodeIdLazyQuery>;
+export type IndexerRetirementByNodeIdQueryResult = Apollo.QueryResult<IndexerRetirementByNodeIdQuery, IndexerRetirementByNodeIdQueryVariables>;

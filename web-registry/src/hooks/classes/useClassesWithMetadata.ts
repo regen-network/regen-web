@@ -24,6 +24,9 @@ export const useClassesWithMetadata = (classIds?: (string | undefined)[]) => {
   const classes = classResults.map(classResult => {
     return classResult.data;
   });
+  const classesInfo = classes.map(creditClass => {
+    return creditClass?.class;
+  });
 
   // Credit Classes Metadata
   const classesMetadataResults = useQueries({
@@ -43,6 +46,7 @@ export const useClassesWithMetadata = (classIds?: (string | undefined)[]) => {
   );
 
   return {
+    classes: classesInfo,
     classesMetadata: classesMetadata as (CreditClassMetadataLD | undefined)[],
     isClassesMetadataLoading,
   };

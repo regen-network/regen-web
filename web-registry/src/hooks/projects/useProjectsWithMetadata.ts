@@ -47,9 +47,8 @@ export const useProjectsWithMetadata = (
   );
 
   // Credit Classes and their metadata
-  const { classesMetadata, isClassesMetadataLoading } = useClassesWithMetadata(
-    projects.map(project => project?.project?.classId),
-  );
+  const { classes, classesMetadata, isClassesMetadataLoading } =
+    useClassesWithMetadata(projects.map(project => project?.project?.classId));
 
   return {
     projects,
@@ -59,6 +58,7 @@ export const useProjectsWithMetadata = (
       | undefined
     )[],
     isProjectsMetadataLoading,
+    classes,
     classesMetadata,
     isClassesMetadataLoading,
   };

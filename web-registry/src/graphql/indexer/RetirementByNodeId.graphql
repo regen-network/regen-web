@@ -1,0 +1,12 @@
+query IndexerRetirementByNodeId($nodeId: ID!) {
+  retirement(nodeId: $nodeId) {
+    nodeId
+    owner
+    amount
+    reason
+    batchDenom
+    jurisdiction
+    timestamp
+    reason
+  }
+}

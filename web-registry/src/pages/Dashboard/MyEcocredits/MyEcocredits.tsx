@@ -183,7 +183,7 @@ export const MyEcocredits = (): JSX.Element => {
     reloadBasketsBalance,
   } = useFetchBaskets({ credits });
 
-  const { retirements } = useFetchRetirements();
+  const { retirements, retirementsPaginationParams } = useFetchRetirements();
 
   const { data: allowedDenomsData } = useQuery(
     getAllowedDenomQuery({
@@ -282,6 +282,7 @@ export const MyEcocredits = (): JSX.Element => {
           basketTokens={basketTokens}
           onTableChange={setPaginationParams}
           initialPaginationParams={paginationParams}
+          retirementsPaginationParams={retirementsPaginationParams}
           isIgnoreOffset
           renderCreditActionButtons={
             credits.findIndex(c => Number(c.balance?.tradableAmount) > 0) > -1

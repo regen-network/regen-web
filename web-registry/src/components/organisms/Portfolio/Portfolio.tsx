@@ -30,6 +30,7 @@ export interface PortfolioProps {
   renderBasketActionButtons?: RenderActionButtonsFunc;
   onTableChange?: UseStateSetter<TablePaginationParams>;
   initialPaginationParams?: TablePaginationParams;
+  retirementsPaginationParams?: TablePaginationParams;
   isIgnoreOffset?: boolean;
 }
 
@@ -48,6 +49,7 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
   renderBasketActionButtons,
   onTableChange,
   initialPaginationParams,
+  retirementsPaginationParams,
   isIgnoreOffset = false,
 }) => {
   const navigate = useNavigate();
@@ -74,12 +76,12 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
             renderActionButtons={index => (
               <ViewCertificateButton
                 onClick={() =>
-                  navigate(`/certificate/${retirements?.[index].projectId}`)
+                  navigate(`/certificate/${retirements?.[index].nodeId}`)
                 }
               />
             )}
             onTableChange={onTableChange}
-            initialPaginationParams={initialPaginationParams}
+            initialPaginationParams={retirementsPaginationParams}
             isIgnoreOffset={isIgnoreOffset}
           />
         ),
@@ -87,11 +89,13 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
       },
     ],
     [
+      credits,
       retirements,
       location,
       renderCreditActionButtons,
       onTableChange,
       initialPaginationParams,
+      retirementsPaginationParams,
       isIgnoreOffset,
       navigate,
     ],

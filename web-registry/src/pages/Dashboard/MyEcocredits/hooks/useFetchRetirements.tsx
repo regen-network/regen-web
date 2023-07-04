@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import {
   ApolloClient,
   NormalizedCacheObject,
@@ -5,15 +6,14 @@ import {
 } from '@apollo/client';
 import { useQueries, useQuery } from '@tanstack/react-query';
 
+import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 import { Party } from 'web-components/lib/components/user/UserInfo';
+import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/Table.constants';
 
 import { useLedger } from 'ledger';
-import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { normalizeRetirement } from 'lib/normalizers/retirements/normalizeRetirement';
 import { getClassIssuersQuery } from 'lib/queries/react-query/ecocredit/getClassIssuersQuery/getClassIssuersQuery';
-import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 import { getAllRetirementsByOwnerQuery } from 'lib/queries/react-query/registry-server/graphql/indexer/getAllRetirementsByOwner/getAllRetirementsByOwner';
 import { useWallet } from 'lib/wallet/wallet';
@@ -21,11 +21,8 @@ import { useWallet } from 'lib/wallet/wallet';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 import { getDisplayAdmin } from 'components/organisms/ProjectDetailsSection/ProjectDetailsSection.utils';
 import { useProjectsWithMetadata } from 'hooks/projects/useProjectsWithMetadata';
-import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
 import { getDataFromBatchDenomId } from '../MyEcocredits.utils';
-
-const MOCK_ADDRESS = 'regen1eclxh3p4hkt576g002quv9pd3l0kh6wur65yh2';
 
 export const useFetchRetirements = () => {
   const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -37,7 +34,7 @@ export const useFetchRetirements = () => {
   const { data } = useQuery(
     getAllRetirementsByOwnerQuery({
       client: apolloClient,
-      owner: MOCK_ADDRESS ?? '',
+      owner: wallet?.address ?? '',
       enabled: !!apolloClient && !!wallet?.address,
     }),
   );
@@ -110,8 +107,19 @@ export const useFetchRetirements = () => {
       issuer: creditClassesIssuer?.[index],
       project: projects?.[index],
       projectMetadata: projectsMetadata?.[index],
+      creditClassMetadata: classesMetadata?.[index],
     }),
   );
 
-  return { retirements: normalizedRetirements };
+  const retirementsPaginationParams: TablePaginationParams = useMemo(
+    () => ({
+      offset: 0,
+      page: 0,
+      rowsPerPage: DEFAULT_ROWS_PER_PAGE,
+      count: normalizedRetirements?.length,
+    }),
+    [normalizedRetirements?.length],
+  );
+
+  return { retirements: normalizedRetirements, retirementsPaginationParams };
 };

@@ -1,4 +1,7 @@
-import { QueryProjectResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import {
+  ClassInfo,
+  QueryProjectResponse,
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { Party } from 'web-components/lib/components/user/UserInfo';
 
@@ -12,15 +15,18 @@ import { getDataFromBatchDenomId } from 'pages/Dashboard/MyEcocredits/MyEcocredi
 import { RetirementType } from './normalizeRetirement.types';
 
 type Props = {
-  retirement: RetirementType;
+  retirement?: RetirementType;
   retirementData?: ReturnType<typeof getDataFromBatchDenomId>;
   project?: QueryProjectResponse | null;
   projectMetadata?: AnchoredProjectMetadataLD;
+  creditClass?: ClassInfo;
   creditClassMetadata?: CreditClassMetadataLD;
   issuer?: Party;
+  owner?: Party;
 };
 
 export type NormalizedRetirement = {
+  nodeId?: string;
   amountRetired?: string;
   batchStartDate?: string;
   batchEndDate?: string;
@@ -28,7 +34,9 @@ export type NormalizedRetirement = {
   retirementDate: string;
   creditClassId?: string;
   creditClassName?: string;
+  creditClassType?: string;
   issuer?: Party;
+  owner?: Party;
   projectId: string;
   projectName: string;
   projectLocation?: string;
@@ -42,8 +50,10 @@ export const normalizeRetirement = ({
   projectMetadata,
   retirement,
   retirementData,
+  creditClass,
   creditClassMetadata,
   issuer,
+  owner,
 }: Props): NormalizedRetirement => ({
   amountRetired: retirement?.amount,
   batchStartDate: retirementData?.batchStartDate,
@@ -52,7 +62,10 @@ export const normalizeRetirement = ({
   creditClassId: retirementData?.classId,
   creditClassName:
     creditClassMetadata?.['schema:name'] ?? retirementData?.classId,
+  creditClassType: creditClass?.creditTypeAbbrev,
   issuer,
+  owner,
+  nodeId: retirement?.nodeId,
   projectId: retirementData?.projectId ?? '',
   projectName:
     projectMetadata?.['schema:name'] ?? retirementData?.projectId ?? '',

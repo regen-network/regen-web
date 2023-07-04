@@ -1,6 +1,7 @@
 query IndexerAllRetirementsByOwner($owner: String!) {
   allRetirements(condition: { owner: $owner }) {
     nodes {
+      nodeId
       owner
       amount
       reason

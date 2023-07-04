@@ -7,19 +7,20 @@ import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import { ActionCard } from 'web-components/lib/components/molecules/ActionCard/ActionCard';
 import { ProjectTagType } from 'web-components/lib/components/molecules/ProjectTag/ProjectTag.types';
+import { RoundLogoItemsList } from 'web-components/lib/components/molecules/RoundLogoItemsList/RoundLogoItemsList';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
 import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
-import {
-  useAllProjectActivityQuery,
-  useAllProjectEcosystemQuery,
-} from 'generated/sanity-graphql';
 import { useLedger } from 'ledger';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { getSanityImgSrc } from 'lib/imgSrc';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
+import { getAllActivityQuery } from 'lib/queries/react-query/sanity/getAllActivityQuery/getAllActivityQuery';
+import { getAllCreditCertificationQuery } from 'lib/queries/react-query/sanity/getAllCreditCertificationQuery/getAllCreditCertificationQuery';
+import { getAllEcosystemQuery } from 'lib/queries/react-query/sanity/getAllEcosystemQuery/getAllEcosystemQuery';
+import { getAllProjectRatingQuery } from 'lib/queries/react-query/sanity/getAllProjectRatingQuery/getAllProjectRatingQuery';
 
 import {
   API_URI,
@@ -36,9 +37,9 @@ import {
 } from './ProjectTopSection.styles';
 import { ProjectTopSectionProps } from './ProjectTopSection.types';
 import {
+  getIconsMapping,
   getOffsetGenerationMethod,
-  getProjectActivityIconsMapping,
-  getProjectEcosystemIconsMapping,
+  getRatingsAndCertificationsData,
   getSdgsImages,
   parseMethodologies,
   parseOffChainProject,
@@ -71,8 +72,14 @@ function ProjectTopSection({
   const { primaryImpactIRI, coBenefitsIRIs } =
     parseOffChainProject(offChainProject);
 
-  const { projectName, area, areaUnit, placeName, projectMethodology } =
-    parseProjectMetadata(projectMetadata);
+  const {
+    projectName,
+    area,
+    areaUnit,
+    placeName,
+    projectMethodology,
+    ratings,
+  } = parseProjectMetadata(projectMetadata, onChainProjectId);
 
   const { glanceText, primaryDescription, quote } =
     parseProjectPageMetadata(projectPageMetadata);
@@ -92,17 +99,47 @@ function ProjectTopSection({
     creditType =>
       creditType.name?.toLowerCase() === creditTypeData?.creditType?.name,
   );
-  const { data: allProjectActivityData } = useAllProjectActivityQuery({
-    client: sanityClient,
+  const { data: allProjectActivityData } = useQuery(
+    getAllActivityQuery({
+      sanityClient,
+    }),
+  );
+  const { data: allProjectEcosystemData } = useQuery(
+    getAllEcosystemQuery({
+      sanityClient,
+    }),
+  );
+  const { data: allProjectRatingData } = useQuery(
+    getAllProjectRatingQuery({
+      sanityClient,
+    }),
+  );
+  const { data: allCreditCertification } = useQuery(
+    getAllCreditCertificationQuery({
+      sanityClient,
+    }),
+  );
+
+  const projectActivityIconsMapping = getIconsMapping({
+    data: allProjectActivityData?.allProjectActivity,
   });
-  const { data: allProjectEcosystemData } = useAllProjectEcosystemQuery({
-    client: sanityClient,
+  const projectEcosystemIconsMapping = getIconsMapping({
+    data: allProjectEcosystemData?.allProjectEcosystem,
   });
-  const projectActivityIconsMapping = getProjectActivityIconsMapping({
-    allProjectActivityData,
+  const projectRatingIconsMapping = getIconsMapping({
+    data: allProjectRatingData?.allProjectRating,
   });
-  const projectEcosystemIconsMapping = getProjectEcosystemIconsMapping({
-    allProjectEcosystemData,
+  const creditCertificationIconsMapping = getIconsMapping({
+    data: allCreditCertification?.allCreditCertification,
+  });
+
+  const certifications = creditClassMetadata?.['regen:certifications'];
+
+  const ratingsAndCertificationsData = getRatingsAndCertificationsData({
+    ratings,
+    ratingIcons: projectRatingIconsMapping,
+    certifications,
+    certificationIcons: creditCertificationIconsMapping,
   });
 
   const displayName =
@@ -247,6 +284,12 @@ function ProjectTopSection({
               }),
             )}
           />
+          {ratingsAndCertificationsData && (
+            <RoundLogoItemsList
+              {...ratingsAndCertificationsData}
+              sx={{ mt: 5 }}
+            />
+          )}
           {otcCard && (
             <Box sx={{ mt: 5 }}>
               <ActionCard {...otcCard} variant="column" />

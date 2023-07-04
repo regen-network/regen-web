@@ -2,6 +2,8 @@ import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 
 import { CompactedNameUrl } from 'lib/rdf/types';
 
+import { Rating } from './rating';
+
 /** Anchored metadata AKA "Additional Info" - Editable only with a signed Ledger TX. */
 export interface AnchoredProjectMetadataBaseLD {
   '@context': Context;
@@ -19,6 +21,7 @@ export interface AnchoredProjectMetadataBaseLD {
   'regen:landSteward'?: ProjectStakeholder;
   'regen:landOwner'?: ProjectStakeholder;
   'regen:projectOriginator'?: ProjectStakeholder;
+  'regen:ratings'?: Rating[];
 }
 
 /** Un-anchored metadata from our DB. This is editable without a Ledger TX. */

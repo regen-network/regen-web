@@ -1,0 +1,8 @@
+query allCreditCertification {
+  allCreditCertification {
+    name
+    icon {
+      ...imageFields
+    }
+  }
+}

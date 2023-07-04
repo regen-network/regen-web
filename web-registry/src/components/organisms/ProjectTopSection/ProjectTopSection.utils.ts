@@ -1,12 +1,12 @@
 /* parseMethodologies */
+import {
+  RoundLogoItemsListType,
+  RoundLogoItemType,
+} from 'web-components/lib/components/molecules/RoundLogoItemsList/RoundLogoItemsList.types';
 import { ImageType } from 'web-components/lib/types/shared/imageType';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
-import {
-  AllProjectActivityQuery,
-  AllProjectEcosystemQuery,
-  Sdg,
-} from 'generated/sanity-graphql';
+import { ImageFieldsFragment, Sdg } from 'generated/sanity-graphql';
 import {
   AnchoredProjectMetadataLD,
   CreditClassMetadataLD,
@@ -14,12 +14,18 @@ import {
   ProjectPageMetadataLD,
   ProjectQuote,
 } from 'lib/db/types/json-ld';
+import { Certification } from 'lib/db/types/json-ld/certification';
 import { CFCCreditClassMetadataLD } from 'lib/db/types/json-ld/cfc-credit-class-metadata';
 import { ApprovedMethodologies } from 'lib/db/types/json-ld/methodology';
+import { Rating } from 'lib/db/types/json-ld/rating';
 import { getSanityImgSrc } from 'lib/imgSrc';
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
-import { SEE_ALL_METHODOLOGIES } from './ProjectTopSection.constants';
+import {
+  CERTIFICATIONS,
+  RATINGS,
+  SEE_ALL_METHODOLOGIES,
+} from './ProjectTopSection.constants';
 
 type GetSdgsImagesParams = {
   sdgs?: Maybe<Maybe<Sdg>[]>;
@@ -62,6 +68,7 @@ type ParseProjectMetadataReturn = {
   areaUnit?: string;
   placeName?: string;
   projectMethodology?: ProjectMethodology;
+  ratings?: Rating[];
 };
 
 export type ProjectMethodology = {
@@ -71,6 +78,7 @@ export type ProjectMethodology = {
 
 export const parseProjectMetadata = (
   projectMetadata?: AnchoredProjectMetadataLD | LegacyProjectMetadataLD,
+  onChainProjectId?: string,
 ): ParseProjectMetadataReturn => {
   const projectName = projectMetadata?.['schema:name'];
   const projectSize = projectMetadata?.['regen:projectSize'];
@@ -79,17 +87,30 @@ export const parseProjectMetadata = (
   const areaUnit = getAreaUnit(unit as qudtUnit);
   const placeName = projectMetadata?.['schema:location']?.['place_name'];
   let projectMethodology;
-  if (isAnchoredProjectMetadata(projectMetadata)) {
+  let ratings;
+
+  if (isAnchoredProjectMetadata(projectMetadata, onChainProjectId)) {
+    // Methodology
     projectMethodology =
       projectMetadata?.['regen:vcsMethodology'] ??
       projectMetadata?.['regen:offsetProtocol'] ??
       parseMethodologies({
-        methodologies: projectMetadata['regen:approvedMethodologies'],
+        methodologies: projectMetadata?.['regen:approvedMethodologies'],
       });
+
+    // Rating
+    ratings = projectMetadata?.['regen:ratings'];
   }
   // projectMetadata?.['schema:location']?.['geojson:place_name'];
 
-  return { projectName, area, areaUnit, placeName, projectMethodology };
+  return {
+    projectName,
+    area,
+    areaUnit,
+    placeName,
+    projectMethodology,
+    ratings,
+  };
 };
 
 /* parseProjectPageMetadata */
@@ -169,35 +190,81 @@ export const getOffsetGenerationMethod = (metadata?: CreditClassMetadataLD) => {
   return metadata?.['regen:offsetGenerationMethod']?.[0];
 };
 
-/* getProjectActivityIconsMapping */
+/* getIconsMapping */
 
-type GetProjectActivityIconsMappingParams = {
-  allProjectActivityData?: AllProjectActivityQuery;
+type SanityItemType = {
+  name?: Maybe<string>;
+  icon?: ImageFieldsFragment | null;
 };
 
-export const getProjectActivityIconsMapping = ({
-  allProjectActivityData,
-}: GetProjectActivityIconsMappingParams) => {
-  return allProjectActivityData?.allProjectActivity.reduce((acc, activity) => {
-    acc[String(activity.name)] = String(activity.icon?.asset?.url);
+type GetIconsMappingParams = {
+  data?: SanityItemType[];
+};
+
+export const getIconsMapping = ({ data }: GetIconsMappingParams) => {
+  return data?.reduce((acc, item) => {
+    acc[item?.name ?? ''] = String(item?.icon?.asset?.url);
     return acc;
   }, {} as Record<string, string | undefined>);
 };
 
-/* getProjectEcosystemIconsMapping */
+/* getRatingAndCertificationsData */
 
-type GetProjectEcosystemIconsMappingParams = {
-  allProjectEcosystemData?: AllProjectEcosystemQuery;
+type GetRatingAndCertificationsDataParams = {
+  ratings?: Rating[];
+  ratingIcons?: Record<string, string | undefined>;
+  certifications?: Certification[];
+  certificationIcons?: Record<string, string | undefined>;
 };
 
-export const getProjectEcosystemIconsMapping = ({
-  allProjectEcosystemData,
-}: GetProjectEcosystemIconsMappingParams) => {
-  return allProjectEcosystemData?.allProjectEcosystem.reduce(
-    (acc, ecosystem) => {
-      acc[String(ecosystem.name)] = String(ecosystem.icon?.asset?.url);
-      return acc;
-    },
-    {} as Record<string, string | undefined>,
-  );
+export const getRatingsAndCertificationsData = ({
+  ratings,
+  ratingIcons,
+  certifications,
+  certificationIcons,
+}: GetRatingAndCertificationsDataParams): RoundLogoItemsListType => {
+  const hasCertification = certifications && certifications.length > 0;
+  const hasRating = ratings && ratings.length > 0;
+  const certificationTitle = hasCertification ? CERTIFICATIONS : '';
+  const ratingTitle = hasRating ? RATINGS : '';
+  const title = certificationTitle
+    ? `${certificationTitle} & ${ratingTitle}`
+    : ratingTitle;
+
+  const certificationItems =
+    certifications?.map(certification => {
+      const certificationName = certification['schema:name'] ?? '';
+      const certificationLink = certification['schema:url'] ?? '';
+
+      return {
+        image: {
+          src:
+            certificationIcons?.[certificationName] ?? '/svg/certification.svg',
+        },
+        link: {
+          text: certificationName,
+          href: certificationLink,
+        },
+      };
+    }) ?? [];
+
+  const ratingItems =
+    ratings?.map(rating => {
+      const ratingName = rating['schema:name'] ?? '';
+      const ratingLink = rating['schema:url'] ?? '';
+
+      return {
+        image: {
+          src: ratingIcons?.[ratingName] ?? '/svg/rating.svg',
+        },
+        link: {
+          text: ratingName,
+          href: ratingLink,
+        },
+      };
+    }) ?? [];
+
+  const items: RoundLogoItemType[] = [...certificationItems, ...ratingItems];
+
+  return { title, items };
 };

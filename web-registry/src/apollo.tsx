@@ -58,6 +58,8 @@ export const AuthApolloProvider = ({
 
   const splitLink = split(
     ({ operationName }) => {
+      // All graphql queries for the indexer must start with `Indexer` prefix
+      // in order for the apollo client to pick up the good endpoint
       return operationName.startsWith('Indexer');
     },
     indexerHttpLink,

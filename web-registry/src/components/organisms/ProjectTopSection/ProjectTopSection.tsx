@@ -27,8 +27,8 @@ import {
   MAPBOX_TOKEN,
 } from 'components/templates/ProjectDetails/ProjectDetails.config';
 
-import { ProjectBatchTotals } from '../../molecules';
 import useImpact from '../../../pages/CreditClassDetails/hooks/useImpact';
+import { ProjectBatchTotals } from '../../molecules';
 import { ProjectTopSectionCreditClassCard } from './ProjectTopSection.CreditClassCard';
 import {
   ProjectTopSectionQuoteMark,

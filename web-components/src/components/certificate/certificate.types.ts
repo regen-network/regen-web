@@ -11,3 +11,15 @@ export type ItemLink = {
   name: string;
   link: LinkType;
 };
+
+export type CertificateType = {
+  date: string | Date;
+  txHash: LinkType;
+  certificateTitle: string;
+  creditsUnits: number;
+  creditUnitName?: string;
+  equivalentTonsCO2?: number;
+  itemLinks: ItemLink[];
+  retirementReason?: string;
+  retirementLocation?: string;
+};

@@ -7,7 +7,6 @@ import {
   split,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { getMainDefinition } from '@apollo/client/utilities';
 import { useQuery } from '@tanstack/react-query';
 
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';

@@ -78,7 +78,7 @@ export const isOfCreditClass =
 
 export const getDataFromBatchDenomId = (batchDenomId?: string) => {
   const regex = /^([A-Z]+\d+(?:-\d+)?)-(\d{8})-(\d{8})/;
-  const [_, projectId, startDate, endDate] = batchDenomId?.match(regex) ?? [];
+  const [, projectId, startDate, endDate] = batchDenomId?.match(regex) ?? [];
   return {
     classId: projectId?.split('-')[0],
     projectId: projectId,

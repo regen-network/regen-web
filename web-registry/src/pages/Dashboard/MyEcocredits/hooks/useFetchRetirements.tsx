@@ -27,7 +27,7 @@ import { getDataFromBatchDenomId } from '../MyEcocredits.utils';
 export const useFetchRetirements = () => {
   const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { wallet } = useWallet();
-  const { ecocreditClient, dataClient } = useLedger();
+  const { ecocreditClient } = useLedger();
   const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
 
   // All retirements

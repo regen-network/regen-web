@@ -2,7 +2,6 @@
   REACT_APP_SANITY_TAG = "default"
   REACT_APP_SANITY_DATASET = "production"
   REACT_APP_API_URI = "https://api.registry.regen.network"
-  REACT_APP_INDEXER_API_URI='https://regen-analytics.herokuapp.com'
   REACT_APP_BLOCK_EXPLORER="https://www.mintscan.io"
   REACT_APP_LEDGER_CHAIN_ID = "regen-1"
   REACT_APP_SENTRY_ENABLED="true"
@@ -24,7 +23,6 @@
   REACT_APP_SANITY_DATASET = "staging"
   REACT_APP_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"
   REACT_APP_API_URI = "https://api-staging.registry.regen.network"
-  REACT_APP_INDEXER_API_URI='https://regen-analytics-staging-851c10b4db33.herokuapp.com'
   REACT_APP_INTERCOM_APP_ID = "kn5di10s"
   REACT_APP_LEDGER_CHAIN_ID = "regen-redwood-1"
   REACT_APP_LEDGER_CHAIN_NAME = "Regen - Redwood Testnet"
@@ -47,7 +45,6 @@
   REACT_APP_SANITY_DATASET = "staging"
   REACT_APP_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"
   REACT_APP_API_URI = "https://api-staging.registry.regen.network"
-  REACT_APP_INDEXER_API_URI='https://regen-analytics-staging-851c10b4db33.herokuapp.com'
   REACT_APP_INTERCOM_APP_ID = "kn5di10s"
   REACT_APP_LEDGER_CHAIN_ID = "regen-redwood-1"
   REACT_APP_LEDGER_CHAIN_NAME = "Regen - Redwood Testnet"

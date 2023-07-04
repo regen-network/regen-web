@@ -79,7 +79,7 @@ export default function UserInfo({
         sx={{
           ml: size === 'xs' ? 3.5 : 4.8,
           textAlign: direction === 'column' ? 'center' : 'left',
-          alignSelf: 'center',
+          pt: 2,
         }}
       >
         {user.link ? (

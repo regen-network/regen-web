@@ -3,9 +3,9 @@ import { useSortResultWithIris } from 'utils/sanity/useSortResultWithIris';
 
 import { getEcologicalImpactByIriQuery } from 'lib/queries/react-query/sanity/getEcologicalImpactByIriQuery/getEcologicalImpactByIriQuery';
 
-import { Maybe } from '../../../../generated/graphql';
-import { EcologicalImpact } from '../../../../generated/sanity-graphql';
-import { client } from '../../../../lib/clients/sanity';
+import { Maybe } from '../../../generated/graphql';
+import { EcologicalImpact } from '../../../generated/sanity-graphql';
+import { client } from '../../../lib/clients/sanity';
 
 interface InputProps {
   coBenefitsIRIs: Maybe<string | string[]> | undefined;

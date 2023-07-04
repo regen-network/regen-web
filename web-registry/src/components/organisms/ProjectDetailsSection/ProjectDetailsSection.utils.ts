@@ -18,7 +18,7 @@ export const getDisplayPartyOrAddress = (
       name: name ? name : truncate(address),
       type: type ? type : 'USER',
       image: party.image ? party.image : defaultAvatar,
-      description: party.description,
+      description: party.description?.trim(),
       link: `/ecocredits/accounts/${address}/portfolio`,
       address,
     };

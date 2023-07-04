@@ -9,8 +9,6 @@ import { defaultFontFamily } from 'web-components/lib/theme/muiTheme';
 
 import { useWallet } from 'lib/wallet/wallet';
 
-import { SEE_MORE_ADDITIONAL_TEXT } from '../CreditClassDetails.constants';
-
 interface Props {
   program?: Party;
   admin?: Party;
@@ -77,7 +75,7 @@ export const CreditClassDetailsStakeholders = ({
                   </>
                 }
                 fontFamily={defaultFontFamily}
-                sx={{ mb: 2 }}
+                sx={{ mb: 7.5 }}
               />
               {issuers?.length > 1 && (
                 <CollapseList
@@ -87,10 +85,9 @@ export const CreditClassDetailsStakeholders = ({
                       user={issuer}
                       key={issuer?.name}
                       fontFamily={defaultFontFamily}
-                      sx={{ mb: 2 }}
+                      sx={{ mb: 7.5 }}
                     />
                   ))}
-                  buttonAdditionalText={SEE_MORE_ADDITIONAL_TEXT}
                 />
               )}
             </Grid>

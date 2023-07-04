@@ -28,7 +28,7 @@ import {
 } from 'components/templates/ProjectDetails/ProjectDetails.config';
 
 import { ProjectBatchTotals } from '../../molecules';
-import useImpact from './hooks/useImpact';
+import useImpact from '../../../pages/CreditClassDetails/hooks/useImpact';
 import { ProjectTopSectionCreditClassCard } from './ProjectTopSection.CreditClassCard';
 import {
   ProjectTopSectionQuoteMark,

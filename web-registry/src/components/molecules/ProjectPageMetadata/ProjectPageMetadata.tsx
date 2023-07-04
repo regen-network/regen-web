@@ -32,7 +32,6 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
 
   // VCS
   const vcsProjectId = metadata?.['regen:vcsProjectId'];
-  const methodology = metadata?.['regen:vcsMethodology'];
 
   // CFC
   const cfcProjectId = metadata?.['regen:cfcProjectId'];
@@ -66,17 +65,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
             </Box>
             <Body size="xl">{onChainProjectId}</Body>
           </Grid>
-          {methodology && (
-            <MetaDetail
-              label="methodology"
-              data={
-                <ArrowLink
-                  label={methodology?.['schema:name']}
-                  href={methodology?.['schema:url'] || ''}
-                />
-              }
-            />
-          )}
+
           {toucanProjectTokenId && (
             <MetaDetail
               label="toucan project token id"

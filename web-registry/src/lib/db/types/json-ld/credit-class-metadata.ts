@@ -4,7 +4,6 @@ import { Certification } from './certification';
 import { ApprovedMethodologies } from './methodology';
 
 // type generated from https://github.com/regen-network/regen-registry-standards/blob/main/jsonld/credit-classes/C01-verified-carbon-standard-class.json
-
 export interface CreditClassMetadataLD {
   '@type': string;
   '@context': Context;

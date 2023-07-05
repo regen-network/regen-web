@@ -1,9 +1,8 @@
-import { ExpandedTermDefinition } from 'jsonld';
-
 import { CreditBatchMetadataIntersectionLD } from 'lib/db/types/json-ld';
 import {
   getBatchUnknownFields,
   getFieldLabel,
+  getFieldType,
 } from 'lib/rdf/rdf.unknown-fields';
 
 import { BatchMetadataMetaDetail } from './BatchMetadata.MetaDetail';
@@ -16,6 +15,8 @@ export const BatchMetadataAdditionalInfo = <
   data?: T;
 }): JSX.Element | null => {
   if (!data) return null;
+
+  const context = data?.['@context'];
 
   // VCS
   const vcsRetirementSerialNumber = data['regen:vcsRetirementSerialNumber'];
@@ -82,13 +83,7 @@ export const BatchMetadataAdditionalInfo = <
           key={fieldName}
           label={getFieldLabel(fieldName)}
           value={value}
-          rdfType={
-            (
-              data?.['@context']?.[fieldName] as
-                | ExpandedTermDefinition
-                | undefined
-            )?.['@type']
-          }
+          rdfType={getFieldType(fieldName, context)}
         />
       ))}
     </>

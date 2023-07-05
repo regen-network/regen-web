@@ -1,12 +1,11 @@
 import { Box, Grid } from '@mui/material';
-import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { ExpandedTermDefinition } from 'jsonld';
 import { capitalizeWord } from 'utils/string/capitalizeWord';
 
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import {
   getClassUnknownFields,
   getFieldLabel,
+  getFieldType,
 } from 'lib/rdf/rdf.unknown-fields';
 
 import { MetaDetail } from 'components/molecules';
@@ -46,7 +45,7 @@ const AdditionalInfo: React.FC<React.PropsWithChildren<AdditionalInfoProps>> =
             value={carbonOffsetStandard}
           />
           <ApprovedMethodologiesList
-            methodologyList={metadata?.['regen:approvedMethodologies']}
+            methodologyList={metadata['regen:approvedMethodologies']}
           />
           <MetaDetail
             label="offset generation methods"
@@ -62,13 +61,7 @@ const AdditionalInfo: React.FC<React.PropsWithChildren<AdditionalInfoProps>> =
               key={fieldName}
               label={getFieldLabel(fieldName)}
               value={value}
-              rdfType={
-                (
-                  metadata?.['@context']?.[fieldName] as
-                    | ExpandedTermDefinition
-                    | undefined
-                )?.['@type']
-              }
+              rdfType={getFieldType(fieldName, metadata['@context'])}
             />
           ))}
         </Grid>

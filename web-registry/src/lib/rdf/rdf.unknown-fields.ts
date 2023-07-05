@@ -1,3 +1,5 @@
+import { ContextDefinition, ExpandedTermDefinition } from 'jsonld';
+
 import {
   AnchoredProjectMetadataLD,
   CreditBatchMetadataIntersectionLD,
@@ -84,4 +86,10 @@ export function getBatchUnknownFields<
 
 export function getFieldLabel(fieldName: string) {
   return fieldName.split(':')[1].replace(/([A-Z])/g, ' $1');
+}
+
+export function getFieldType(fieldName: string, context?: ContextDefinition) {
+  return (context?.[fieldName] as ExpandedTermDefinition | undefined)?.[
+    '@type'
+  ];
 }

@@ -4,8 +4,6 @@ import { SxProps } from '@mui/system';
 import { sxToArray } from 'utils/mui/sxToArray';
 
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
-import { Body } from 'web-components/lib/components/typography';
-import { TextSize } from 'web-components/lib/components/typography/sizing';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { parseText } from 'web-components/lib/utils/textParser';
 

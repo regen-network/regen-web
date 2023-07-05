@@ -34,6 +34,7 @@ export default defineConfig(({ mode }) => {
     build:
       mode === 'production'
         ? {
+            outDir: 'build',
             rollupOptions: {
               plugins: [inject({ Buffer: ['buffer', 'Buffer'] })],
             },

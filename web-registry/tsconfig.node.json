@@ -4,7 +4,8 @@
     "composite": true,
     "module": "ESNext",
     "moduleResolution": "Node",
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./src"
   },
   "include": ["vite.config.ts"]
 }

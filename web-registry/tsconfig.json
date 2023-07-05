@@ -15,9 +15,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "./src"
   },
-  "baseUrl": "./src",
   "include": [
     "src",
     "types/url-search-params-polyfill.d.ts",

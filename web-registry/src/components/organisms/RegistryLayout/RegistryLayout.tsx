@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { URL_REGISTRY_TERMS_SERVICE, URL_WEB_PRIVACY } from 'config/globals';
 
-import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
+import CookiesTopBanner from 'web-components/lib/components/banner/CookiesTopBanner';
 
 import { PageViewTracking } from 'components/molecules/PageViewTracking';
 
@@ -28,7 +28,7 @@ const RegistryLayout: React.FC = () => {
       <RegistryLayoutFooter />
       <PageViewTracking />
       <ScrollToTop />
-      <CookiesBanner
+      <CookiesTopBanner
         privacyUrl={URL_WEB_PRIVACY}
         TOSUrl={URL_REGISTRY_TERMS_SERVICE}
       />

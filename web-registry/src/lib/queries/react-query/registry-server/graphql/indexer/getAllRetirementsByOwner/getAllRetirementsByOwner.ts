@@ -13,6 +13,7 @@ import {
 export const getAllRetirementsByOwnerQuery = ({
   client,
   owner,
+  orderBy,
   ...params
 }: ReactQueryAllRetirementsByOwnerProps): ReactQueryAllRetirementsByOwnerResponse => ({
   queryKey: getAllRetirementsByOwnerQueryKey(owner),
@@ -25,6 +26,7 @@ export const getAllRetirementsByOwnerQuery = ({
         query: IndexerAllRetirementsByOwnerDocument,
         variables: {
           owner,
+          orderBy,
         },
       });
 

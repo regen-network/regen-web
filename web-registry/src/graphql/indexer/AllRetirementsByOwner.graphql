@@ -1,5 +1,8 @@
-query IndexerAllRetirementsByOwner($owner: String!) {
-  allRetirements(condition: { owner: $owner }) {
+query IndexerAllRetirementsByOwner(
+  $owner: String!
+  $orderBy: RetirementsOrderBy!
+) {
+  allRetirements(condition: { owner: $owner }, orderBy: [$orderBy]) {
     nodes {
       nodeId
       owner

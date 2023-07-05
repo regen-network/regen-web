@@ -10,6 +10,7 @@ import { TablePaginationParams } from 'web-components/lib/components/table/Actio
 import { Party } from 'web-components/lib/components/user/UserInfo';
 import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/Table.constants';
 
+import { RetirementsOrderBy } from 'generated/indexer-graphql';
 import { useLedger } from 'ledger';
 import { normalizeRetirement } from 'lib/normalizers/retirements/normalizeRetirement';
 import { getClassIssuersQuery } from 'lib/queries/react-query/ecocredit/getClassIssuersQuery/getClassIssuersQuery';
@@ -48,6 +49,7 @@ export const useFetchRetirements = ({ address }: Props) => {
     getAllRetirementsByOwnerQuery({
       client: apolloClient,
       owner: address ?? wallet?.address ?? '',
+      orderBy: RetirementsOrderBy.TimestampDesc,
       enabled: !!apolloClient && !!wallet?.address,
     }),
   );

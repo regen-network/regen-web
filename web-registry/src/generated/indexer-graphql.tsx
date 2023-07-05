@@ -2321,6 +2321,7 @@ export type UpdateTxPayloadTxEdgeArgs = {
 
 export type IndexerAllRetirementsByOwnerQueryVariables = Exact<{
   owner: Scalars['String'];
+  orderBy: RetirementsOrderBy;
 }>;
 
 
@@ -2350,8 +2351,8 @@ export type IndexerRetirementByNodeIdQuery = (
 
 
 export const IndexerAllRetirementsByOwnerDocument = gql`
-    query IndexerAllRetirementsByOwner($owner: String!) {
-  allRetirements(condition: {owner: $owner}) {
+    query IndexerAllRetirementsByOwner($owner: String!, $orderBy: RetirementsOrderBy!) {
+  allRetirements(condition: {owner: $owner}, orderBy: [$orderBy]) {
     nodes {
       nodeId
       owner
@@ -2379,6 +2380,7 @@ export const IndexerAllRetirementsByOwnerDocument = gql`
  * const { data, loading, error } = useIndexerAllRetirementsByOwnerQuery({
  *   variables: {
  *      owner: // value for 'owner'
+ *      orderBy: // value for 'orderBy'
  *   },
  * });
  */

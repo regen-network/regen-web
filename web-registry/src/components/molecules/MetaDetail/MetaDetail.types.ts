@@ -15,13 +15,3 @@ export function isCompactedNameUrlOrOptionalUrl(
 ): baseValue is CompactedNameUrl | CompactedNameOptionalUrl {
   return typeof baseValue === 'object' && !!baseValue['schema:name'];
 }
-
-// export function isCompactedNameUrl(
-//   baseValue: BaseValue,
-// ): baseValue is CompactedNameUrl {
-//   return (
-//     typeof baseValue === 'object' &&
-//     !!baseValue['schema:name'] &&
-//     !baseValue['schema:url']
-//   );
-// }

@@ -9,6 +9,8 @@ import svgrPlugin from 'vite-plugin-svgr';
 import viteTsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig(({ mode }) => {
+  const isDev = mode === 'development';
+
   return {
     server: {
       port: 3000,
@@ -44,6 +46,7 @@ export default defineConfig(({ mode }) => {
       vitePluginRequire(),
       visualizer(),
     ],
+    define: isDev ? { global: {} } : {},
     optimizeDeps: {
       esbuildOptions: {
         plugins:

@@ -17,7 +17,7 @@ import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import Analytics from 'analytics/lib/analytics.browser.es.js';
+import Analytics from 'analytics';
 import doNotTrack from 'analytics-plugin-do-not-track';
 import { getRouter } from 'routes';
 import { AnalyticsProvider } from 'use-analytics';

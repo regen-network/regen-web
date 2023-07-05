@@ -10,8 +10,8 @@ import { OptimizeImageProps } from '../../image';
 import { Body, Subtitle, Title } from '../../typography';
 import {
   CREDIT_CLASS_TOOLTIP,
-  CREDIT_GENERATION_METHOD,
   METHODOLOGY,
+  OFFSET_GENERATION_METHOD,
 } from './CreditClassCard.constants';
 import { CreditClassCardItem } from './CreditClassCard.Item';
 import { useCreditClassCardStyles } from './CreditClassCard.styles';
@@ -112,7 +112,7 @@ const CreditClassCard = ({
           <Flex flexDirection={{ xs: 'column', sm: 'row' }}>
             {generationMethod && (
               <CreditClassCardItem
-                label={CREDIT_GENERATION_METHOD}
+                label={OFFSET_GENERATION_METHOD}
                 item={generationMethod}
                 sx={{ maxWidth: { sm: 195 }, mr: 5, mb: { xs: 5, sm: 0 } }}
               />

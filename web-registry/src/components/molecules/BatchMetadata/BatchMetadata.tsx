@@ -10,7 +10,7 @@ import { BatchMetadataAdditionalInfo } from './BatchMetadata.AdditionalInfo';
 export const BatchMetadata = ({
   data,
 }: {
-  data?: Partial<CreditBatchMetadataIntersectionLD>;
+  data?: CreditBatchMetadataIntersectionLD;
 }): JSX.Element => {
   return (
     <Box

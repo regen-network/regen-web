@@ -1,4 +1,5 @@
 import Parser from '@rdfjs/parser-jsonld';
+import { ContextDefinition } from 'jsonld';
 import factory from 'rdf-ext';
 import DatasetExt from 'rdf-ext/lib/Dataset';
 import { Readable } from 'stream';

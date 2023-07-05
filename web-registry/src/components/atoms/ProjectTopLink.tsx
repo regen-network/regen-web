@@ -44,16 +44,12 @@ const ProjectTopLink: React.FC<React.PropsWithChildren<Props>> = ({
         {label + ':'}
       </Label>
       <Box component="span" sx={{ fontSize: { xs: '14px', sm: '16px' } }}>
-        {url ? (
-          <LinkWithArrow
-            sx={{ position: 'relative' }}
-            href={url}
-            label={text}
-            target={target}
-          />
-        ) : (
-          <>{text}</>
-        )}
+        <LinkWithArrow
+          sx={{ position: 'relative' }}
+          href={url}
+          label={text}
+          target={target}
+        />
       </Box>
     </Box>
   );

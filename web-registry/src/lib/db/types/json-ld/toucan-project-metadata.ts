@@ -1,4 +1,4 @@
-import { CompactedNameUrl } from 'lib/rdf/types';
+import { CompactedNameOptionalUrl } from 'lib/rdf/types';
 
 import { ApprovedMethodologies } from './methodology';
 import { VCSProjectMetadataLD } from './vcs-project-metadata';
@@ -20,6 +20,6 @@ export interface ToucanProjectMetadataLD
   'regen:projectStartDate'?: string;
   'regen:projectEndDate'?: string;
   'regen:projectType'?: string;
-  'regen:projectActivity'?: CompactedNameUrl;
+  'regen:projectActivity'?: CompactedNameOptionalUrl;
   'regen:offsetGenerationMethod'?: string;
 }

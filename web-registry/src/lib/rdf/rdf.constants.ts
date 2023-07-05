@@ -1,3 +1,5 @@
+import { ContextDefinition } from 'jsonld';
+
 export const QUDT_UNIT_MAP = {
   'unit:HA': 'hectares',
   'unit:AC': 'acres',
@@ -12,7 +14,7 @@ export const DEFAULT_PROJECT_CONTEXT: { [key: string]: string } = {
   geojson: 'https://purl.org/geojson/vocab#',
 };
 
-export const UNANCHORED_PROJECT_CONTEXT = {
+export const UNANCHORED_PROJECT_CONTEXT: ContextDefinition = {
   regen: 'https://schema.regen.network#',
   schema: 'http://schema.org/',
   'regen:galleryPhotos': {
@@ -26,7 +28,7 @@ export const UNANCHORED_PROJECT_CONTEXT = {
   },
 };
 
-export const ANCHORED_PROJECT_CONTEXT = {
+export const ANCHORED_PROJECT_CONTEXT: ContextDefinition = {
   regen: 'https://schema.regen.network#',
   schema: 'http://schema.org/',
   xsd: 'http://www.w3.org/2001/XMLSchema#',

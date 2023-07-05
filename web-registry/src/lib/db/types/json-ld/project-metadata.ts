@@ -1,17 +1,18 @@
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import { ContextDefinition } from 'jsonld';
 
-import { CompactedNameUrl } from 'lib/rdf/types';
+import { CompactedNameOptionalUrl } from 'lib/rdf/types';
 
 import { Rating } from './rating';
 
 /** Anchored metadata AKA "Additional Info" - Editable only with a signed Ledger TX. */
 export interface AnchoredProjectMetadataBaseLD {
-  '@context': Context;
+  '@context': ContextDefinition;
   '@type': string; // ex: regen:C01-Project
   'schema:name': string;
   'schema:location': GeocodeFeature;
   'regen:projectType': string;
-  'regen:projectActivity': CompactedNameUrl;
+  'regen:projectActivity': CompactedNameOptionalUrl;
   'regen:offsetGenerationMethod'?: string[];
   'regen:projectSize': ProjectSize;
   'regen:projectStartDate'?: string;
@@ -26,7 +27,7 @@ export interface AnchoredProjectMetadataBaseLD {
 
 /** Un-anchored metadata from our DB. This is editable without a Ledger TX. */
 export interface ProjectPageMetadataLD {
-  '@context': Context;
+  '@context': ContextDefinition;
   '@type': string; // regen:Project-Page
   '@id': string;
   'regen:creditClassId': string;
@@ -64,14 +65,6 @@ export type ProjectStoryMedia = {
   'schema:url': string;
   'schema:creditText'?: string;
 };
-
-interface Context {
-  schema: string;
-  regen: string;
-  qudt?: string;
-  unit?: string;
-  xsd?: string;
-}
 
 interface ProjectSize {
   'qudt:unit': string;

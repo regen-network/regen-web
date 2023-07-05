@@ -81,7 +81,3 @@ export function getBatchUnknownFields<
 export function getFieldLabel(fieldName: string) {
   return fieldName.split(':')[1].replace(/([A-Z])/g, ' $1');
 }
-
-export function renderField(fieldName, value) {
-  
-}

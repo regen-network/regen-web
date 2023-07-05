@@ -1,9 +1,6 @@
-export interface BatchMetadataLD {
-  '@context'?: Context;
-  '@type'?: string;
-}
+import { ContextDefinition } from 'jsonld';
 
-interface Context {
-  schema: string;
-  regen: string;
+export interface BatchMetadataLD {
+  '@context'?: ContextDefinition;
+  '@type'?: string;
 }

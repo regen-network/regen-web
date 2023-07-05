@@ -8,7 +8,7 @@ import { formatDate } from 'web-components/lib/utils/format';
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 
 import { ArrowLink } from '../../atoms/MetadataArrowLink';
-import { MetaDetail } from '../MetaDetail';
+import { MetaDetail } from '../MetaDetail/MetaDetail';
 import {
   PROJECT_PAGE_METADATA_HELPER_TEXT,
   PROJECT_PAGE_METADATA_ID_TOOLTIP,
@@ -53,7 +53,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
       <Body size="lg">{PROJECT_PAGE_METADATA_HELPER_TEXT}</Body>
       <Box sx={{ pt: 7 }}>
         <Grid container spacing={8}>
-          <Grid item xs={12} sm={6} sx={{ flexDirection: 'column' }}>
+          <Grid item xs={12} tablet={4} sm={6} sx={{ flexDirection: 'column' }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Label size="xs" sx={{ mr: 1 }}>
                 project id:

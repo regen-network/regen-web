@@ -1,5 +1,6 @@
 import { Box, Grid } from '@mui/material';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { capitalizeWord } from 'utils/string/capitalizeWord';
 
 import { Body } from 'web-components/lib/components/typography';
 
@@ -14,10 +15,11 @@ import { getValue } from './CreditClassDetails.utils';
 interface AdditionalInfoProps {
   onChainClass: ClassInfo;
   metadata?: Partial<CreditClassMetadataLD>;
+  creditTypeName?: string;
 }
 
 const AdditionalInfo: React.FC<React.PropsWithChildren<AdditionalInfoProps>> =
-  ({ onChainClass, metadata }) => {
+  ({ onChainClass, metadata, creditTypeName }) => {
     const offsetGenerationMethods = metadata?.['regen:offsetGenerationMethod'];
     const sectoralScopes = metadata?.['regen:sectoralScope'];
     const verificationMethod = metadata?.['regen:verificationMethod'];
@@ -27,16 +29,6 @@ const AdditionalInfo: React.FC<React.PropsWithChildren<AdditionalInfoProps>> =
     const carbonOffsetStandard = metadata?.['regen:carbonOffsetStandard'];
     const tokenizationSource = metadata?.['regen:tokenizationSource'];
 
-    const getCreditType = (creditTypeAbbrev: string): string => {
-      // TODO: add credit types as they come online, or fetch from ledger somehow
-      return (
-        {
-          // eslint-disable-next-line prettier/prettier
-          C: 'Carbon',
-        }[creditTypeAbbrev] || creditTypeAbbrev
-      );
-    };
-
     return (
       <Box sx={{ py: 8 }}>
         <Grid container spacing={8}>
@@ -44,7 +36,7 @@ const AdditionalInfo: React.FC<React.PropsWithChildren<AdditionalInfoProps>> =
             label="credit type"
             data={
               <Body size="xl" sx={{ mr: 1 }}>
-                {getCreditType(onChainClass.creditTypeAbbrev)}
+                {capitalizeWord(creditTypeName)}
               </Body>
             }
           />

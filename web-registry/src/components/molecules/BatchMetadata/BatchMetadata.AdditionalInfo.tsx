@@ -1,3 +1,5 @@
+import { ExpandedTermDefinition } from 'jsonld';
+
 import { CreditBatchMetadataIntersectionLD } from 'lib/db/types/json-ld';
 import {
   getBatchUnknownFields,
@@ -53,24 +55,25 @@ export const BatchMetadataAdditionalInfo = <
         label="cfc vintage year"
         value={cfcVintageYear}
       />
-
       <BatchMetadataMetaDetail
         label="verification reports"
         value={
           reports?.map(report => ({
             'schema:name': 'Verification report',
             ...report,
-          })) || []
+          })) ?? []
         }
       />
 
       {/* Toucan */}
       <BatchMetadataMetaDetail
         label="Toucan Vintage Token Id"
-        value={{
-          'schema:name': toucanVintageTokenId,
-          'schema:url': toucanURI,
-        }}
+        value={
+          toucanVintageTokenId && {
+            'schema:name': toucanVintageTokenId,
+            'schema:url': toucanURI,
+          }
+        }
       />
 
       {/* Unknown fields */}
@@ -79,6 +82,13 @@ export const BatchMetadataAdditionalInfo = <
           key={fieldName}
           label={getFieldLabel(fieldName)}
           value={value}
+          rdfType={
+            (
+              data?.['@context']?.[fieldName] as
+                | ExpandedTermDefinition
+                | undefined
+            )?.['@type']
+          }
         />
       ))}
     </>

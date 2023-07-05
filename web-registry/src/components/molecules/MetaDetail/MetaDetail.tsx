@@ -12,7 +12,7 @@ import { Value } from './MetaDetail.types';
 export type Props = {
   sx?: SxProps<Theme>;
   label: string;
-  data?: string | JSX.Element | number;
+  customContent?: JSX.Element;
   value?: Value;
   rdfType?: ExpandedTermDefinition['@type'];
   labelColor?: string;
@@ -22,14 +22,16 @@ export type Props = {
 const MetaDetail: React.FC<Props> = ({
   sx,
   label,
-  data,
+  customContent,
   value,
   rdfType,
   labelColor = 'primary.contrastText',
   bodySize = 'xl',
 }) => {
   const isArray = Array.isArray(value);
-  if (!value || (isArray && value.length === 0)) return null;
+  if ((!value || (isArray && value.length === 0)) && !customContent)
+    return null;
+
   return (
     <Grid item xs={12} tablet={4} sm={6}>
       <Box sx={[...(Array.isArray(sx) ? sx : [sx])]}>
@@ -43,7 +45,9 @@ const MetaDetail: React.FC<Props> = ({
         >
           {label}
         </Label>
-        {isArray ? (
+        {customContent ? (
+          <>{customContent}</>
+        ) : isArray ? (
           value.map((v, i) => (
             <MetaDetailBaseValue
               key={i}

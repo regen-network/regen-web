@@ -22,20 +22,6 @@ export const getProjectNameFromProjectsData = (
   return project.name;
 };
 
-/* getValue */
-
-// This can be deleted if all class metadata is updated to latest standard
-export const getValue = (val: any): string => {
-  let value = val;
-  if (val?.['@value']) value = val['@value'];
-  return value.replace(/\w+/g, (str: string) =>
-    str
-      .split(' ')
-      .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' '),
-  );
-};
-
 type GetCreditClassAvgPricePerTonLabelPArams = {
   projectsWithOrderData: ProjectWithOrderData[];
 };

@@ -35,7 +35,7 @@ interface CreditDetailsProps {
   program?: Party;
   admin?: Party;
   issuers?: Party[];
-  metadata?: Partial<CreditClassMetadataLD>;
+  metadata?: CreditClassMetadataLD;
   impactCards: ProjectImpactCardProps[];
 }
 
@@ -121,7 +121,6 @@ const CreditClassDetailsSimple: React.FC<
               </ReadMore>
             )}
             <AdditionalInfo
-              onChainClass={onChainClass}
               metadata={metadata}
               creditTypeName={creditTypeData?.creditType?.name}
             />

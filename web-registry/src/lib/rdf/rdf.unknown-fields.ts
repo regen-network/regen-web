@@ -27,7 +27,9 @@ const knownClassFields = [
   'regen:certifications',
 ];
 
-function getClassUnknownFields<T extends CreditClassMetadataLD>(data: T) {
+export function getClassUnknownFields<T extends CreditClassMetadataLD>(
+  data: T,
+) {
   return getUnknowFields(data, knownClassFields);
 }
 
@@ -57,7 +59,9 @@ const knownProjectFields = [
   'regen:projectDesignDocument',
 ];
 
-function getProjectUnknownFields<T extends AnchoredProjectMetadataLD>(data: T) {
+export function getProjectUnknownFields<T extends AnchoredProjectMetadataLD>(
+  data: T,
+) {
   return getUnknowFields(data, knownProjectFields);
 }
 

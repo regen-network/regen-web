@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 
 import { useFetchBaskets } from 'pages/Dashboard/MyEcocredits/hooks/useFetchBaskets';
 import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
+import { useFetchRetirements } from 'pages/Dashboard/MyEcocredits/hooks/useFetchRetirements';
 import { Portfolio } from 'components/organisms';
 
 export const PortfolioTab = (): JSX.Element => {
@@ -9,6 +10,12 @@ export const PortfolioTab = (): JSX.Element => {
   const { credits, paginationParams, setPaginationParams } = useFetchEcocredits(
     { address: accountAddress },
   );
+  const {
+    retirements,
+    retirementsSetPaginationParams,
+    retirementsPaginationParams,
+  } = useFetchRetirements({ address: accountAddress });
+
   const { basketTokens } = useFetchBaskets({
     address: accountAddress,
     credits,
@@ -19,6 +26,9 @@ export const PortfolioTab = (): JSX.Element => {
       credits={credits}
       basketTokens={basketTokens}
       onTableChange={setPaginationParams}
+      retirements={retirements}
+      retirementsPaginationParams={retirementsPaginationParams}
+      onRetirementTableChange={retirementsSetPaginationParams}
       initialPaginationParams={paginationParams}
       isIgnoreOffset
     />

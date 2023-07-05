@@ -15,7 +15,7 @@ export const getAllRetirementsByOwnerQuery = ({
   owner,
   ...params
 }: ReactQueryAllRetirementsByOwnerProps): ReactQueryAllRetirementsByOwnerResponse => ({
-  queryKey: getAllRetirementsByOwnerQueryKey(),
+  queryKey: getAllRetirementsByOwnerQueryKey(owner),
   queryFn: async () => {
     try {
       const data = await client.query<

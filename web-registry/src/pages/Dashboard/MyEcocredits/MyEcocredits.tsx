@@ -1,7 +1,8 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SxProps, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
+import { set } from 'lodash';
 import { getSocialItems } from 'utils/components/ShareSection/getSocialItems';
 import { REGEN_APP_PROJECT_URL } from 'utils/components/ShareSection/getSocialItems.constants';
 
@@ -64,6 +65,7 @@ import {
   CREATE_SELL_ORDER_SHORT,
   CREATE_SELL_ORDER_TITLE,
   ERROR_BUTTON,
+  RETIRE_SUCCESS_BUTTON,
   SOCIAL_TWITTER_TEXT_MAPPING,
 } from './MyEcocredits.constants';
 import { OnTxSuccessfulProps } from './MyEcocredits.types';
@@ -96,10 +98,18 @@ export const MyEcocredits = (): JSX.Element => {
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
   const [txButtonTitle, setTxButtonTitle] = useState<string | undefined>();
   const lastRetiredProjectIdRef = useRef('');
+  const [activePortfolioTab, setActivePortfolioTab] = useState(0);
 
   const navigate = useNavigate();
   const { track } = useTracker();
   const { marketplaceClient } = useLedger();
+
+  const {
+    retirements,
+    retirementsSetPaginationParams,
+    retirementsPaginationParams,
+    reloadRetirements,
+  } = useFetchRetirements({});
 
   const onCloseBasketPutModal = (): void => setBasketPutOpen(-1);
   const onTxSuccessful = ({
@@ -131,6 +141,11 @@ export const MyEcocredits = (): JSX.Element => {
     handleTxModalClose();
     if (txButtonTitle === CREATE_SELL_ORDER_BUTTON && !error) {
       navigate('/storefront');
+    }
+    if (txButtonTitle === RETIRE_SUCCESS_BUTTON && !error) {
+      setActivePortfolioTab(1);
+      reloadRetirements();
+      setTimeout(() => reloadRetirements(), 5000);
     }
   };
 
@@ -182,8 +197,6 @@ export const MyEcocredits = (): JSX.Element => {
     creditBaskets,
     reloadBasketsBalance,
   } = useFetchBaskets({ credits });
-
-  const { retirements, retirementsPaginationParams } = useFetchRetirements();
 
   const { data: allowedDenomsData } = useQuery(
     getAllowedDenomQuery({
@@ -244,6 +257,7 @@ export const MyEcocredits = (): JSX.Element => {
     setCreditRetireOpen,
     setTxModalHeader,
     setTxModalTitle,
+    setTxButtonTitle,
     signAndBroadcast,
   });
 
@@ -281,8 +295,10 @@ export const MyEcocredits = (): JSX.Element => {
           retirements={retirements}
           basketTokens={basketTokens}
           onTableChange={setPaginationParams}
+          onRetirementTableChange={retirementsSetPaginationParams}
           initialPaginationParams={paginationParams}
           retirementsPaginationParams={retirementsPaginationParams}
+          activePortfolioTab={activePortfolioTab}
           isIgnoreOffset
           renderCreditActionButtons={
             credits.findIndex(c => Number(c.balance?.tradableAmount) > 0) > -1

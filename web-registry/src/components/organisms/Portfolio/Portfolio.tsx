@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Box, SxProps } from '@mui/material';
 import { tabsStyles } from 'styles/tabs';
 
@@ -29,8 +29,10 @@ export interface PortfolioProps {
   renderCreditActionButtons?: RenderActionButtonsFunc;
   renderBasketActionButtons?: RenderActionButtonsFunc;
   onTableChange?: UseStateSetter<TablePaginationParams>;
+  onRetirementTableChange?: UseStateSetter<TablePaginationParams>;
   initialPaginationParams?: TablePaginationParams;
   retirementsPaginationParams?: TablePaginationParams;
+  activePortfolioTab?: number;
   isIgnoreOffset?: boolean;
 }
 
@@ -48,12 +50,13 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
   renderCreditActionButtons,
   renderBasketActionButtons,
   onTableChange,
+  onRetirementTableChange,
   initialPaginationParams,
   retirementsPaginationParams,
+  activePortfolioTab = 0,
   isIgnoreOffset = false,
 }) => {
   const navigate = useNavigate();
-  const location = useLocation();
   const tabs: IconTabProps[] = useMemo(
     () => [
       {
@@ -80,20 +83,18 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
                 }
               />
             )}
-            onTableChange={onTableChange}
+            onTableChange={onRetirementTableChange}
             initialPaginationParams={retirementsPaginationParams}
-            isIgnoreOffset={isIgnoreOffset}
           />
         ),
-        hidden: location.pathname !== '/ecocredits/portfolio',
       },
     ],
     [
       credits,
       retirements,
-      location,
       renderCreditActionButtons,
       onTableChange,
+      onRetirementTableChange,
       initialPaginationParams,
       retirementsPaginationParams,
       isIgnoreOffset,
@@ -104,7 +105,12 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
   return (
     <Box>
       <Card>
-        <IconTabs tabs={tabs} size={'xl'} sxs={tabsStyles.tabsInsideCard} />
+        <IconTabs
+          tabs={tabs}
+          size={'xl'}
+          sxs={tabsStyles.tabsInsideCard}
+          activeTab={activePortfolioTab}
+        />
       </Card>
       <Box sx={{ pt: { xs: 9.25, sm: 8.5 } }}>
         <Label sx={sxs.title}>basket tokens</Label>

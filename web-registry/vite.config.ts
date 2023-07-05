@@ -44,9 +44,6 @@ export default defineConfig(({ mode }) => {
       vitePluginRequire(),
       visualizer(),
     ],
-    define: {
-      global: {},
-    },
     optimizeDeps: {
       esbuildOptions: {
         plugins:

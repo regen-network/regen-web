@@ -21,7 +21,7 @@ import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
 import { ProjectDetailsSectionStakeholders } from './ProjectDetailsSection.Stakeholders';
 import { useSectionStyles } from './ProjectDetailsSection.styles';
 import { ProjectDetailsSectionProps } from './ProjectDetailsSection.types';
-import { getDisplayAdmin } from './ProjectDetailsSection.utils';
+import { getDisplayPartyOrAddress } from './ProjectDetailsSection.utils';
 
 export const ProjectDetailsSection: React.FC<ProjectDetailsSectionProps> = ({
   header,
@@ -46,9 +46,9 @@ export const ProjectDetailsSection: React.FC<ProjectDetailsSectionProps> = ({
       enabled: !!adminAddr && !!graphqlClient && !!csrfData,
     }),
   );
-  const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
+  const { party } = usePartyInfos({ partyByAddr });
 
-  const projectAdmin = getDisplayAdmin(adminAddr, party, defaultAvatar);
+  const projectAdmin = getDisplayPartyOrAddress(adminAddr, party);
 
   return (
     <Section visibleOverflow sx={{ root: { pb: [20, 21.25] } }}>

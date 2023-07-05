@@ -44,7 +44,7 @@ export const CollapseList = ({
           ':hover': { bgcolor: 'transparent' },
         }}
       >
-        {expanded ? SEE_LESS : SEE_MORE}
+        {expanded ? `${SEE_LESS}` : `${SEE_MORE}`}
       </TextButton>
     </Box>
   );

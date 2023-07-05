@@ -2,23 +2,26 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
+import ProjectImpactCard, {
+  ProjectImpactCardProps,
+} from 'web-components/lib/components/cards/ProjectImpactCard/ProjectImpactCard';
+import { CollapseList } from 'web-components/lib/components/organisms/CollapseList/CollapseList';
 import ReadMore from 'web-components/lib/components/read-more';
 import { Label, Title } from 'web-components/lib/components/typography';
+import { Party } from 'web-components/lib/components/user/UserInfo';
 
 import { CreditClassByOnChainIdQuery } from 'generated/graphql';
 import { CreditClass } from 'generated/sanity-graphql';
-import { getAccountUrl } from 'lib/block-explorer';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { getSanityImgSrc } from 'lib/imgSrc';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { AccountLink } from 'components/atoms/AccountLink';
 import { EcocreditsSection } from 'components/molecules';
 import { CreditBatches } from 'components/organisms';
 
 import { AdditionalInfo } from '../CreditClassDetails.AdditionalInfo';
 import { MemoizedProjects as Projects } from '../CreditClassDetails.Projects';
-import { SideBarBox } from '../CreditClassDetails.SidebarBox';
+import { CreditClassDetailsStakeholders } from './CreditClassDetailsSimple.Stakeholders';
 import { useCreditClassDetailsSimpleStyles } from './CreditClassDetailsSimple.styles';
 import { getCreditClassDisplayName } from './CreditClassDetailsSimple.utils';
 
@@ -26,13 +29,24 @@ interface CreditDetailsProps {
   dbClass?: CreditClassByOnChainIdQuery['creditClassByOnChainId'];
   onChainClass: ClassInfo;
   content?: CreditClass;
-  issuers?: string[];
+  program?: Party;
+  admin?: Party;
+  issuers?: Party[];
   metadata?: Partial<CreditClassMetadataLD>;
+  impactCards: ProjectImpactCardProps[];
 }
 
 const CreditClassDetailsSimple: React.FC<
   React.PropsWithChildren<CreditDetailsProps>
-> = ({ dbClass, onChainClass, content, issuers, metadata }) => {
+> = ({
+  impactCards,
+  onChainClass,
+  content,
+  program,
+  admin,
+  issuers,
+  metadata,
+}) => {
   const { classes: styles, cx } = useCreditClassDetailsSimpleStyles();
   const displayName = getCreditClassDisplayName(onChainClass.id, metadata);
   const image = content?.image;
@@ -101,35 +115,24 @@ const CreditClassDetailsSimple: React.FC<
               flexDirection: 'column',
             }}
           >
-            <SideBarBox>
-              <div className={styles.sidebarItemMargin}>
-                <Label size="xs" color="primary.contrastText" mb={3}>
-                  admin
-                </Label>
-                <AccountLink
-                  className={styles.link}
-                  address={onChainClass.admin}
-                />
-              </div>
-              <div className={styles.sidebarItemMargin}>
-                <Label size="xs" color="primary.contrastText" mb={3}>
-                  issuers
-                </Label>
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                  {issuers?.map((issuer: string) => (
-                    <AccountLink
-                      key={issuer}
-                      address={issuer}
-                      className={styles.link}
-                      href={getAccountUrl(issuer)}
-                    />
-                  ))}
+            <CollapseList
+              sx={{ pb: [7.5, 10], maxWidth: 367 }}
+              items={impactCards.map(card => (
+                <Box key={card.name} sx={{ pb: [2.5, 4.25] }}>
+                  <ProjectImpactCard {...card} />
                 </Box>
-              </div>
-            </SideBarBox>
+              ))}
+            />
           </Box>
         </Box>
       </EcocreditsSection>
+
+      <CreditClassDetailsStakeholders
+        admin={admin}
+        issuers={issuers}
+        program={program}
+      />
+
       <Projects classId={onChainClass.id} />
       <div
         className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}

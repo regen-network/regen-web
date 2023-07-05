@@ -1,33 +1,50 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { useQueries, useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
-import {
-  useCreditClassByOnChainIdQuery,
-  useCreditClassByUriQuery,
-} from 'generated/graphql';
+import { Party } from 'web-components/lib/components/user/UserInfo';
+
+import { useCreditClassByUriQuery } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
 import { openLink } from 'lib/button';
 import { client } from 'lib/clients/sanity';
 import { getMetadata } from 'lib/db/api/metadata-graph';
+import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { queryClassIssuers, queryEcoClassInfo } from 'lib/ecocredit/api';
 import { onChainClassRegExp } from 'lib/ledger';
+import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
+import { getCreditClassByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getCreditClassByOnChainIdQuery/getCreditClassByOnChainIdQuery';
+import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
+import useImpact from 'pages/CreditClassDetails/hooks/useImpact';
+import { getDisplayPartyOrAddress } from 'components/organisms/ProjectDetailsSection/ProjectDetailsSection.utils';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { AVG_PRICE_TOOLTIP_CREDIT_CLASS } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants';
+import {
+  getDisplayParty,
+  getParty,
+} from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { useLedger } from '../../ledger';
 import { BOOK_CALL_LINK } from './CreditClassDetails.constants';
 import {
   getCreditClassAvgPricePerTonLabel,
   getProjectNameFromProjectsData,
+  normalizeProjectImpactCards,
+  parseCreditClassVersion,
 } from './CreditClassDetails.utils';
 import CreditClassDetailsSimple from './CreditClassDetailsSimple';
 import CreditClassDetailsWithContent from './CreditClassDetailsWithContent';
@@ -42,13 +59,16 @@ function CreditClassDetails({
   const { wallet } = useWallet();
   const { dataClient } = useLedger();
   const { creditClassId } = useParams();
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
+
   const [onChainClass, setOnChainClass] = useState<ClassInfo | undefined>(
     undefined,
   );
-
-  const [metadata, setMetadata] = useState<any>(undefined);
+  const [metadata, setMetadata] = useState<CreditClassMetadataLD | undefined>(
+    undefined,
+  );
   const [issuers, setIssuers] = useState<string[] | undefined>(undefined);
-
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
@@ -57,15 +77,29 @@ function CreditClassDetails({
   const content = contentData?.allCreditClass?.find(
     creditClass => creditClass.path === creditClassId,
   );
+  const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
+
   const isCommunityCredit = !content;
 
   const isOnChainClassId =
     creditClassId && onChainClassRegExp.test(creditClassId);
+
   const iri = content?.iri?.current;
-  const { data: dbDataByOnChainId } = useCreditClassByOnChainIdQuery({
-    variables: { onChainId: creditClassId as string },
-    skip: !isOnChainClassId,
-  });
+
+  const { data: dbDataByOnChainIdData } = useQuery(
+    getCreditClassByOnChainIdQuery({
+      client: graphqlClient,
+      onChainId: creditClassId as string,
+      enabled: !!isOnChainClassId && !!graphqlClient && !!csrfData,
+    }),
+  );
+
+  const dbDataByOnChainId = dbDataByOnChainIdData?.data;
+
+  const { coBenefitsIRIs, primaryImpactIRI } = parseCreditClassVersion(
+    dbDataByOnChainId?.creditClassByOnChainId,
+  );
+
   const { data: dbDataByUri } = useCreditClassByUriQuery({
     variables: { uri: iri as string },
     skip: !iri || !!isOnChainClassId,
@@ -99,6 +133,46 @@ function CreditClassDetails({
   });
 
   const onBookCallButtonClick = () => openLink(BOOK_CALL_LINK, true);
+  const impact = useImpact({ coBenefitsIRIs, primaryImpactIRI });
+  const impactCards = normalizeProjectImpactCards(impact);
+
+  const { data: adminPartyByAddrData } = useQuery(
+    getPartyByAddrQuery({
+      client: graphqlClient,
+      addr: onChainClass?.admin ?? '',
+      enabled: !!onChainClass?.admin && !!graphqlClient && !!csrfData,
+    }),
+  );
+  const creditClassIssuersResults = useQueries({
+    queries:
+      issuers?.map(issuer =>
+        getPartyByAddrQuery({
+          client: graphqlClient,
+          addr: issuer ?? '',
+          enabled: !!graphqlClient && !!csrfData,
+        }),
+      ) ?? [],
+  });
+
+  const creditClassAdminParty = getParty(
+    adminPartyByAddrData?.walletByAddr?.partyByWalletId,
+  );
+  const creditClassProgramParty = getDisplayParty(
+    metadata?.['regen:sourceRegistry'],
+    dbCreditClassByOnChainId?.partyByRegistryId,
+  );
+
+  const creditClassIssuersData = creditClassIssuersResults.map(
+    creditClassIssuer => creditClassIssuer.data,
+  );
+  const creditClassIssuers = creditClassIssuersData
+    .map((issuer, index) =>
+      getDisplayPartyOrAddress(
+        issuers?.[index],
+        issuer?.walletByAddr?.partyByWalletId,
+      ),
+    )
+    .filter((party: Party | undefined): party is Party => !!party);
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
@@ -150,7 +224,10 @@ function CreditClassDetails({
           content={content}
           onChainClass={onChainClass}
           metadata={metadata}
-          issuers={issuers}
+          program={creditClassProgramParty}
+          admin={creditClassAdminParty}
+          issuers={creditClassIssuers}
+          impactCards={impactCards}
         />
       )}
       <SellOrdersActionsBar

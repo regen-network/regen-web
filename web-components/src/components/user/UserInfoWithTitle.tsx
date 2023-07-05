@@ -1,5 +1,6 @@
-import { TooltipProps } from '@mui/material';
+import { Box, SxProps, TooltipProps } from '@mui/material';
 
+import { headerFontFamily, Theme } from '../../theme/muiTheme';
 import QuestionMarkTooltip from '../tooltip/QuestionMarkTooltip';
 import { Label } from '../typography';
 import type { TextSize } from '../typography/sizing';
@@ -11,17 +12,21 @@ interface Props {
   border?: boolean;
   size?: TextSize;
   tooltip?: TooltipProps['title'];
+  fontFamily?: string;
+  sx?: SxProps<Theme>;
 }
 
 export default function UserInfoWithTitle({
   user,
   title,
   border = true,
+  fontFamily = headerFontFamily,
   size = 'lg',
   tooltip,
+  sx = [],
 }: Props): JSX.Element {
   return (
-    <div>
+    <Box sx={sx}>
       <Label
         component="div"
         display="flex"
@@ -35,9 +40,10 @@ export default function UserInfoWithTitle({
       <UserInfo
         user={user}
         size={size}
+        fontFamily={fontFamily}
         border={border}
         titleComponent="subtitle"
       />
-    </div>
+    </Box>
   );
 }

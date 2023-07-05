@@ -7,5 +7,14 @@ query CreditClassByOnChainId($onChainId: String!) {
         ...moreProjectFields
       }
     }
+    creditClassVersionsById {
+      nodes {
+        name
+        metadata
+      }
+    }
+    partyByRegistryId {
+      ...partyFields
+    }
   }
 }

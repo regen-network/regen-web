@@ -53,7 +53,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
       <Body size="lg">{PROJECT_PAGE_METADATA_HELPER_TEXT}</Body>
       <Box sx={{ pt: 7 }}>
         <Grid container spacing={8}>
-          <Grid item xs={12} tablet={4} sm={6} sx={{ flexDirection: 'column' }}>
+          <Grid item xs={12} sm={6} sx={{ flexDirection: 'column' }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Label size="xs" sx={{ mr: 1 }}>
                 project id:

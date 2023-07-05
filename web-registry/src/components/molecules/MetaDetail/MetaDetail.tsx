@@ -2,6 +2,7 @@ import { Grid, Theme } from '@mui/material';
 import Box from '@mui/material/Box';
 import { SxProps } from '@mui/system';
 import { ExpandedTermDefinition } from 'jsonld';
+import { sxToArray } from 'utils/mui/sxToArray';
 
 import { Label } from 'web-components/lib/components/typography';
 import { TextSize } from 'web-components/lib/components/typography/sizing';
@@ -33,16 +34,9 @@ const MetaDetail: React.FC<Props> = ({
     return null;
 
   return (
-    <Grid item xs={12} tablet={4} sm={6}>
-      <Box sx={[...(Array.isArray(sx) ? sx : [sx])]}>
-        <Label
-          size="xs"
-          sx={{
-            fontSize: { xs: '12px' },
-            color: labelColor,
-            mb: 3,
-          }}
-        >
+    <Grid item xs={12} sm={6}>
+      <Box sx={sxToArray(sx)}>
+        <Label color={labelColor} size="xs" mobileSize="xs" mb={3}>
           {label}
         </Label>
         {customContent ? (

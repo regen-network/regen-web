@@ -28,10 +28,12 @@ const MetaDetailBaseValue: React.FC<Props> = ({ value, rdfType, bodySize }) => {
         </Body>
       )}
       {isCompactedNameUrlOrOptionalUrl(value) && (
-        <LinkWithArrow
-          href={value['schema:url']}
-          label={value['schema:name']}
-        />
+        <Body size={bodySize} styleLinks={false}>
+          <LinkWithArrow
+            href={value['schema:url']}
+            label={value['schema:name']}
+          />
+        </Body>
       )}
     </>
   );

@@ -21,7 +21,6 @@
   "include": [
     "src",
     "types/url-search-params-polyfill.d.ts",
-    "lib/rdf/types/rdf-validate-shacl/index.d.ts",
-    "../web-components/src/components/form/Form"
+    "lib/rdf/types/rdf-validate-shacl/index.d.ts"
   ]
 }

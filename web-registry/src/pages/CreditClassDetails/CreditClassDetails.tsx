@@ -47,7 +47,7 @@ import {
   parseCreditClassVersion,
 } from './CreditClassDetails.utils';
 import CreditClassDetailsSimple from './CreditClassDetailsSimple';
-import CreditClassDetailsWithContent from './CreditClassDetailsWithContent';
+import { CreditClassDetailsWithContent } from './CreditClassDetailsWithContent/CreditClassDetailsWithContent';
 
 interface CreditDetailsProps {
   isLandSteward?: boolean;

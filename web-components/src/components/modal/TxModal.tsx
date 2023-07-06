@@ -4,8 +4,7 @@ import { SxProps } from '@mui/system';
 import ReactHtmlParser from 'html-react-parser';
 import { makeStyles } from 'tss-react/mui';
 
-import { Theme } from 'src/theme/muiTheme';
-
+import { Theme } from '../../theme/muiTheme';
 import { truncate } from '../../utils/truncate';
 import OutlinedButton from '../buttons/OutlinedButton';
 import Card from '../cards/Card';

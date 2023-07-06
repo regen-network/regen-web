@@ -1,9 +1,8 @@
 import { Link } from '@mui/material';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import TwitterIcon2 from 'src/components/icons/social/TwitterIcon2';
-import WebsiteLinkIcon from 'src/components/icons/social/WebsiteLinkIcon';
-
+import TwitterIcon2 from '../../../components/icons/social/TwitterIcon2';
+import WebsiteLinkIcon from '../../../components/icons/social/WebsiteLinkIcon';
 import { ProfileHeader } from './ProfileHeader';
 import { ProfileVariant } from './ProfileHeader.types';
 

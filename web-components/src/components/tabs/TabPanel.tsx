@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, SxProps } from '@mui/material';
 
-import type { Theme } from 'src/theme/muiTheme';
+import type { Theme } from '../../theme/muiTheme';
 
 interface TabPanelProps {
   children: React.ReactNode;

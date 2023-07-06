@@ -1,12 +1,11 @@
 import { Avatar, Box, SxProps, useTheme } from '@mui/material';
 
-import { LinkComponentType } from 'src/types/shared/linkComponentType';
-
 import { Flex } from '../../../components/box';
 import EditIcon from '../../../components/icons/EditIcon';
 import { Label, Title } from '../../../components/typography';
 import { containerStyles } from '../../../styles/container';
 import { Theme } from '../../../theme/muiTheme';
+import { LinkComponentType } from '../../../types/shared/linkComponentType';
 import {
   EDIT_PROFILE,
   PROFILE_AVATAR_MARGIN_TOP_DESKTOP,

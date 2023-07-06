@@ -1,8 +1,7 @@
 import React from 'react';
 import { SxProps } from '@mui/material';
 
-import type { Theme } from 'src/theme/muiTheme';
-
+import type { Theme } from '../../theme/muiTheme';
 import { Flex } from '../box';
 import InfoTooltipWithIcon from '../tooltip/InfoTooltipWithIcon';
 import { Label } from '../typography';

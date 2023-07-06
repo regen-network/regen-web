@@ -1,7 +1,6 @@
 import { SxProps } from '@mui/material';
 
-import { Theme } from 'src/theme/muiTheme';
-
+import { Theme } from '../../../theme/muiTheme';
 import OutlinedButton from '../../buttons/OutlinedButton';
 import { Title } from '../../typography';
 import Card from '../Card';

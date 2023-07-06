@@ -3,8 +3,7 @@ import { CardMedia, SxProps } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 import { makeStyles } from 'tss-react/mui';
 
-import type { Theme } from 'src/theme/muiTheme';
-
+import type { Theme } from '../../theme/muiTheme';
 import { parseText } from '../../utils/textParser';
 import { OptimizeImageProps } from '../image';
 import { Title } from '../typography';

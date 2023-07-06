@@ -1,5 +1,4 @@
-import { Theme } from 'src/theme/muiTheme';
-
+import { Theme } from '../../theme/muiTheme';
 import { InfoLabelVariant } from './InfoLabel.types';
 
 type GetInfoLabelColorParams = {

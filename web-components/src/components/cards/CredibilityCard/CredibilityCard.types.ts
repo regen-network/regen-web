@@ -1,4 +1,4 @@
-import { SanityBlockContent } from 'src/components/block-content';
+import { SanityBlockContent } from '../../../components/block-content';
 
 export type CredibilityCardProps = {
   index?: number;

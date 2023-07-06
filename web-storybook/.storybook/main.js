@@ -5,7 +5,7 @@ const path = require('path');
 module.exports = {
   stories: [
     '../../web-components/src/components/**/*.stories.tsx',
-    '../../web-registry/src/**/*.stories.tsx',
+    //'../../web-registry/src/**/*.stories.tsx',
   ],
   addons: [
     '@storybook/addon-actions',
@@ -40,8 +40,8 @@ module.exports = {
           tsconfigPaths({
             root: path.resolve(__dirname, '.'),
             projects: [
-              path.resolve(__dirname, '../../web-registry/tsconfig.json'),
               path.resolve(__dirname, '../../web-components/tsconfig.json'),
+              //path.resolve(__dirname, '../../web-registry/tsconfig.json'),
             ],
           }),
         ],

@@ -2,8 +2,7 @@ import React from 'react';
 import { styled, SxProps } from '@mui/material';
 import Tab, { TabProps } from '@mui/material/Tab';
 
-import type { Theme } from 'src/theme/muiTheme';
-
+import type { Theme } from '../../theme/muiTheme';
 import { TextSize } from '../typography/sizing';
 import { Subtitle } from '../typography/Subtitle';
 import { RegenTab } from './';

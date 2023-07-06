@@ -6,8 +6,7 @@ import FormControlLabel, {
 } from '@mui/material/FormControlLabel';
 import FormHelperText from '@mui/material/FormHelperText';
 
-import { Theme } from 'src/theme/muiTheme';
-
+import { Theme } from '../../../../theme/muiTheme';
 import { Subtitle } from '../../../typography';
 import Checkbox from '../CheckBox/Checkbox';
 

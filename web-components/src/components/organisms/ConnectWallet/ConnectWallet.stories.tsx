@@ -1,8 +1,7 @@
 import { Box } from '@mui/material';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import OutlinedButton from 'src/components/buttons/OutlinedButton';
-
+import OutlinedButton from '../../../components/buttons/OutlinedButton';
 import { ConnectWallet } from './ConnectWallet';
 
 export default {

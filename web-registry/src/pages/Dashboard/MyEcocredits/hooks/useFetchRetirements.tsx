@@ -21,7 +21,7 @@ import { getAllRetirementsByOwnerQueryKey } from 'lib/queries/react-query/regist
 import { useWallet } from 'lib/wallet/wallet';
 
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
-import { getDisplayAdmin } from 'components/organisms/ProjectDetailsSection/ProjectDetailsSection.utils';
+import { getDisplayPartyOrAddress } from 'components/organisms/ProjectDetailsSection/ProjectDetailsSection.utils';
 import { useProjectsWithMetadata } from 'hooks/projects/useProjectsWithMetadata';
 
 import { getDataFromBatchDenomId } from '../MyEcocredits.utils';
@@ -106,11 +106,7 @@ export const useFetchRetirements = ({ address }: Props) => {
   const creditClassesIssuer = creditClassesIssuerData
     .map((issuer, index) => {
       const party = issuer?.walletByAddr?.partyByWalletId;
-      return getDisplayAdmin(
-        classesIssuers[index]?.issuers[0],
-        party,
-        getDefaultAvatar(party),
-      );
+      return getDisplayPartyOrAddress(classesIssuers[index]?.issuers[0], party);
     })
     .filter((party: Party | undefined): party is Party => !!party);
 

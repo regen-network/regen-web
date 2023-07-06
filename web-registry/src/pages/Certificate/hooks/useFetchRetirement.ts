@@ -12,8 +12,7 @@ import { getRetirementByNodeId } from 'lib/queries/react-query/registry-server/g
 import { useWallet } from 'lib/wallet/wallet';
 
 import { getDataFromBatchDenomId } from 'pages/Dashboard/MyEcocredits/MyEcocredits.utils';
-import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
-import { getDisplayAdmin } from 'components/organisms/ProjectDetailsSection/ProjectDetailsSection.utils';
+import { getDisplayPartyOrAddress } from 'components/organisms/ProjectDetailsSection/ProjectDetailsSection.utils';
 import { useProjectsWithMetadata } from 'hooks/projects/useProjectsWithMetadata';
 
 type Params = {
@@ -53,11 +52,7 @@ export const useFetchRetirement = ({ retirementNodeId }: Params) => {
   const ownerParty = ownerPartyData?.data?.walletByAddr?.partyByWalletId;
 
   // Format the party data
-  const owner = getDisplayAdmin(
-    retirement?.owner,
-    ownerParty,
-    getDefaultAvatar(ownerParty),
-  );
+  const owner = getDisplayPartyOrAddress(retirement?.owner, ownerParty);
 
   // Normalize retirement
   const normalizedRetirement = normalizeRetirement({

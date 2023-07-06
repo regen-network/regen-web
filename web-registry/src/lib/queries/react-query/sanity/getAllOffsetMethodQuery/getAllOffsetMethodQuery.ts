@@ -1,6 +1,6 @@
 import {
-  AllProjectOffsetMethodDocument,
-  AllProjectOffsetMethodQuery,
+  AllOffsetMethodDocument,
+  AllOffsetMethodQuery,
 } from 'generated/sanity-graphql';
 
 import {
@@ -14,8 +14,8 @@ export const getAllOffsetMethodQuery = ({
 }: ReactQueryAllOffsetMethodQueryParams): ReactQueryAllOffsetMethodQueryResponse => ({
   queryKey: ['allOffsetMethodQuery'],
   queryFn: async () => {
-    const { data } = await sanityClient.query<AllProjectOffsetMethodQuery>({
-      query: AllProjectOffsetMethodDocument,
+    const { data } = await sanityClient.query<AllOffsetMethodQuery>({
+      query: AllOffsetMethodDocument,
     });
 
     return data;

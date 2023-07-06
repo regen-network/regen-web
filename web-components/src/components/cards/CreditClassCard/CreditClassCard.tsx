@@ -113,7 +113,7 @@ const CreditClassCard = ({
             {generationMethods && (
               <CreditClassCardItem
                 label={OFFSET_GENERATION_METHOD}
-                item={generationMethod}
+                items={generationMethods}
                 sx={{ maxWidth: { sm: 195 }, mr: 5, mb: { xs: 5, sm: 0 } }}
               />
             )}

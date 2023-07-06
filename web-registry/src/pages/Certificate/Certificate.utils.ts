@@ -19,7 +19,10 @@ export const getCertificateData = ({
     certificateTitle: CERTIFICATE_TITLE,
     creditsUnits: Number(retirement.amountRetired),
     creditUnitName: retirement.creditClassName,
-    equivalentTonsCO2: Number(retirement.amountRetired),
+    equivalentTonsCO2:
+      retirement.creditClassType === 'C'
+        ? Number(retirement.amountRetired)
+        : undefined,
     itemLinks: [
       {
         name: 'Project',

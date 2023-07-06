@@ -49,7 +49,7 @@ export const useFetchRetirements = ({ address }: Props) => {
       client: apolloClient,
       owner: address ?? wallet?.address ?? '',
       orderBy: RetirementsOrderBy.TimestampDesc,
-      enabled: !!apolloClient && !!wallet?.address,
+      enabled: !!apolloClient && (!!wallet?.address || !!address),
     }),
   );
   const allRetirements = data?.data.allRetirements;

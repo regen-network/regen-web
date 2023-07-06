@@ -6,10 +6,8 @@ import {
 import { useQuery } from '@tanstack/react-query';
 
 import { normalizeRetirement } from 'lib/normalizers/retirements/normalizeRetirement';
-import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 import { getRetirementByNodeId } from 'lib/queries/react-query/registry-server/graphql/indexer/getRetirementByNodeId/getRetirementByNodeId';
-import { useWallet } from 'lib/wallet/wallet';
 
 import { getDataFromBatchDenomId } from 'pages/Dashboard/MyEcocredits/MyEcocredits.utils';
 import { getDisplayPartyOrAddress } from 'components/organisms/ProjectDetailsSection/ProjectDetailsSection.utils';
@@ -21,15 +19,13 @@ type Params = {
 
 export const useFetchRetirement = ({ retirementNodeId }: Params) => {
   const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
-  const { wallet } = useWallet();
-  const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
 
   // Get retirement
   const { data, isLoading } = useQuery(
     getRetirementByNodeId({
       client: apolloClient,
       nodeId: retirementNodeId,
-      enabled: !!apolloClient && !!wallet?.address,
+      enabled: !!apolloClient,
     }),
   );
   const retirement = data?.data.retirement;
@@ -46,7 +42,7 @@ export const useFetchRetirement = ({ retirementNodeId }: Params) => {
     getPartyByAddrQuery({
       client: apolloClient,
       addr: retirement?.owner ?? '',
-      enabled: !!apolloClient && !!csrfData && !!retirement?.owner,
+      enabled: !!apolloClient && !!retirement?.owner,
     }),
   );
   const ownerParty = ownerPartyData?.data?.walletByAddr?.partyByWalletId;

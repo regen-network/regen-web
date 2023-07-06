@@ -22,7 +22,7 @@ export interface Props extends OptimizeImageProps {
   title: string | JSX.Element;
   description: string | JSX.Element;
   imgSrc: string;
-  generationMethod?: CreditClassCardItemType;
+  generationMethods?: CreditClassCardItemType[];
   methodology?: Partial<LinkType>;
   sx?: SxProps<Theme>;
 }
@@ -32,7 +32,7 @@ const CreditClassCard = ({
   description,
   imgSrc,
   type,
-  generationMethod,
+  generationMethods,
   methodology,
   sx = [],
 }: Props): JSX.Element => {
@@ -110,7 +110,7 @@ const CreditClassCard = ({
             {parseText(description)}
           </Body>
           <Flex flexDirection={{ xs: 'column', sm: 'row' }}>
-            {generationMethod && (
+            {generationMethods && (
               <CreditClassCardItem
                 label={OFFSET_GENERATION_METHOD}
                 item={generationMethod}

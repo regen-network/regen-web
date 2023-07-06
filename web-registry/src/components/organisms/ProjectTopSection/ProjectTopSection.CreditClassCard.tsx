@@ -56,7 +56,7 @@ export const ProjectTopSectionCreditClassCard: React.FC<Props> = ({
           },
         }}
         generationMethod={{
-          name: generationMethod ?? '',
+          name: creditClassMetadata?.['regen:offsetGenerationMethod'] ?? '',
           icon: {
             src:
               creditClassSanity?.creditGenerationMethod?.image?.asset?.url ??

@@ -19,6 +19,7 @@ import { getSanityImgSrc } from 'lib/imgSrc';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllActivityQuery } from 'lib/queries/react-query/sanity/getAllActivityQuery/getAllActivityQuery';
 import { getAllCreditCertificationQuery } from 'lib/queries/react-query/sanity/getAllCreditCertificationQuery/getAllCreditCertificationQuery';
+import { getAllCreditTypeQuery } from 'lib/queries/react-query/sanity/getAllCreditTypeQuery/getAllCreditTypeQuery';
 import { getAllEcosystemQuery } from 'lib/queries/react-query/sanity/getAllEcosystemQuery/getAllEcosystemQuery';
 import { getAllProjectRatingQuery } from 'lib/queries/react-query/sanity/getAllProjectRatingQuery/getAllProjectRatingQuery';
 
@@ -53,7 +54,6 @@ function ProjectTopSection({
   projectMetadata,
   projectPageMetadata,
   creditClassSanity,
-  sanityCreditTypeData,
   geojson,
   isGISFile,
   onChainProjectId,
@@ -95,10 +95,14 @@ function ProjectTopSection({
     }),
   );
 
+  const { data: sanityCreditTypeData } = useQuery(
+    getAllCreditTypeQuery({ sanityClient, enabled: !!sanityClient }),
+  );
   const creditTypeSanity = sanityCreditTypeData?.allCreditType?.find(
     creditType =>
       creditType.name?.toLowerCase() === creditTypeData?.creditType?.name,
   );
+
   const { data: allProjectActivityData } = useQuery(
     getAllActivityQuery({
       sanityClient,

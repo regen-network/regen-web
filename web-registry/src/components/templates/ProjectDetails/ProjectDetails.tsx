@@ -95,9 +95,6 @@ function ProjectDetails(): JSX.Element {
   const { data: sanityCreditClassData } = useQuery(
     getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
   );
-  const { data: sanityCreditTypeData } = useQuery(
-    getAllCreditTypeQuery({ sanityClient, enabled: !!sanityClient }),
-  );
 
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
@@ -336,7 +333,6 @@ function ProjectDetails(): JSX.Element {
         projectMetadata={projectMetadata}
         projectPageMetadata={offChainProjectMetadata}
         creditClassSanity={creditClassSanity}
-        sanityCreditTypeData={sanityCreditTypeData}
         geojson={geojson}
         isGISFile={isGISFile}
         onChainProjectId={onChainProjectId}

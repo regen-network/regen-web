@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.2](https://github.com/regen-network/regen-web/compare/v1.8.1...v1.8.2) (2023-07-06)
+
+### Bug Fixes
+
+- use quotes in image background url ([530d33a](https://github.com/regen-network/regen-web/commit/530d33ace58fe399b8a1bc8f9aabfbaa565815f0))
+
 # [1.8.0](https://github.com/regen-network/regen-web/compare/v1.7.0...v1.8.0) (2023-06-13)
 
 ### Bug Fixes

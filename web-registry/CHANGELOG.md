@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.2](https://github.com/regen-network/regen-web/compare/v1.8.1...v1.8.2) (2023-07-06)
+
+### Bug Fixes
+
+- encode project media uris ([5081e62](https://github.com/regen-network/regen-web/commit/5081e62a9126b05c36c3772b78b3ffe63c0c972c))
+- only show project story media if url ([96c2e37](https://github.com/regen-network/regen-web/commit/96c2e374857dcb46f8412a2c21a019a6ea9fcad7))
+
 ## [1.8.1](https://github.com/regen-network/regen-web/compare/v1.8.0...v1.8.1) (2023-06-29)
 
 ### Bug Fixes

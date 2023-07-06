@@ -110,7 +110,7 @@ root.render(
           <AnalyticsProvider instance={analytics}>
             <WalletProvider>
               <LedgerProvider>
-                <ThemeProvider injectFonts>
+                <ThemeProvider>
                   <Suspense fallback={<PageLoader />}>
                     <RouterProvider
                       router={getRouter({

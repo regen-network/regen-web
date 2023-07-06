@@ -130,7 +130,9 @@ const Image: React.FC<React.PropsWithChildren<ImageProps>> = ({
           backgroundImage ? (
             <div
               className={cx(className, classes.background)}
-              style={{ backgroundImage: `url(${optimizedSrc}), url(${src})` }}
+              style={{
+                backgroundImage: `url("${optimizedSrc}"), url("${src}")`,
+              }}
             >
               {children}
             </div>

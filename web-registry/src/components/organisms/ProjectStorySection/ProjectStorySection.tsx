@@ -31,7 +31,7 @@ export function ProjectStorySection({
             hasMedia={!!storyMedia}
           />
         )}
-        {storyMedia && (
+        {storyMedia?.['schema:url'] && (
           <StoryMedia
             storyMedia={storyMedia}
             hasText={!!storyTitle && !!story}

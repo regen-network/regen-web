@@ -74,7 +74,7 @@ export const MediaFormPhotos = ({
   /* Setter */
 
   const setPreviewPhoto = (value: string): void => {
-    setValue('regen:previewPhoto.schema:url', value);
+    setValue('regen:previewPhoto.schema:url', encodeURI(value));
     isDirtyRef.current = true;
   };
   const setGalleryPhotos = (value: string, fieldIndex: number): void => {
@@ -85,7 +85,7 @@ export const MediaFormPhotos = ({
         'schema:creditText': '',
       });
     }
-    setValue(`regen:galleryPhotos.${fieldIndex}.schema:url`, value);
+    setValue(`regen:galleryPhotos.${fieldIndex}.schema:url`, encodeURI(value));
     isDirtyRef.current = true;
   };
 

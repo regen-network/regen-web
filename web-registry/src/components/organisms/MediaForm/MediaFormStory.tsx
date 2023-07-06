@@ -53,7 +53,9 @@ export const MediaFormStory = ({ fileNamesToDeleteRef, projectId }: Props) => {
   /* Setter */
 
   const setStoryMediaUrl = (value: string): void => {
-    setValue('regen:storyMedia.schema:url', value, { shouldDirty: true });
+    setValue('regen:storyMedia.schema:url', encodeURI(value), {
+      shouldDirty: true,
+    });
     isDirtyRef.current = true;
   };
 

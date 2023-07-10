@@ -1,6 +1,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { useQuery } from '@tanstack/react-query';
 
 import ProjectImpactCard, {
   ProjectImpactCardProps,
@@ -12,8 +13,10 @@ import { Party } from 'web-components/lib/components/user/UserInfo';
 
 import { CreditClassByOnChainIdQuery } from 'generated/graphql';
 import { CreditClass } from 'generated/sanity-graphql';
+import { useLedger } from 'ledger';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { getSanityImgSrc } from 'lib/imgSrc';
+import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { EcocreditsSection } from 'components/molecules';
@@ -32,7 +35,7 @@ interface CreditDetailsProps {
   program?: Party;
   admin?: Party;
   issuers?: Party[];
-  metadata?: Partial<CreditClassMetadataLD>;
+  metadata?: CreditClassMetadataLD;
   impactCards: ProjectImpactCardProps[];
 }
 
@@ -53,6 +56,16 @@ const CreditClassDetailsSimple: React.FC<
   const imageSrc = metadata?.['schema:image'] || getSanityImgSrc(image);
 
   const { isKeplrMobileWeb } = useWallet();
+  const { ecocreditClient } = useLedger();
+  const { data: creditTypeData } = useQuery(
+    getCreditTypeQuery({
+      client: ecocreditClient,
+      request: {
+        abbreviation: onChainClass.creditTypeAbbrev,
+      },
+      enabled: !!ecocreditClient && !!onChainClass.creditTypeAbbrev,
+    }),
+  );
 
   return (
     <Box
@@ -107,7 +120,10 @@ const CreditClassDetailsSimple: React.FC<
                 {metadata?.['schema:description']}
               </ReadMore>
             )}
-            <AdditionalInfo onChainClass={onChainClass} metadata={metadata} />
+            <AdditionalInfo
+              metadata={metadata}
+              creditTypeName={creditTypeData?.creditType?.name}
+            />
           </Box>
           <Box
             sx={{

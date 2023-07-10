@@ -26,3 +26,8 @@ export interface CompactedNameUrl {
   'schema:name': string;
   'schema:url': string;
 }
+
+export interface CompactedNameOptionalUrl {
+  'schema:name': string;
+  'schema:url'?: string;
+}

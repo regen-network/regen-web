@@ -3,12 +3,15 @@ import { Box, Grid } from '@mui/material';
 
 import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
 import { Body, Label } from 'web-components/lib/components/typography';
-import { formatDate } from 'web-components/lib/utils/format';
 
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
+import {
+  getFieldLabel,
+  getFieldType,
+  getProjectUnknownFields,
+} from 'lib/rdf/rdf.unknown-fields';
 
-import { ArrowLink } from '../../atoms/MetadataArrowLink';
-import { MetaDetail } from '../MetaDetail';
+import { MetaDetail } from '../MetaDetail/MetaDetail';
 import {
   PROJECT_PAGE_METADATA_HELPER_TEXT,
   PROJECT_PAGE_METADATA_ID_TOOLTIP,
@@ -26,20 +29,21 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
   if (!metadata) return null;
 
   // Common
-  const startDate = metadata?.['regen:projectStartDate'];
-  const endDate = metadata?.['regen:projectEndDate'];
-  const projectType = metadata?.['regen:projectType'];
+  const startDate = metadata['regen:projectStartDate'];
+  const endDate = metadata['regen:projectEndDate'];
+  const projectType = metadata['regen:projectType'];
 
   // VCS
-  const vcsProjectId = metadata?.['regen:vcsProjectId'];
-  const methodology = metadata?.['regen:vcsMethodology'];
+  const vcsProjectId = metadata['regen:vcsProjectId'];
 
   // CFC
-  const cfcProjectId = metadata?.['regen:cfcProjectId'];
-  const projectDesignDocument = metadata?.['regen:projectDesignDocument'];
+  const cfcProjectId = metadata['regen:cfcProjectId'];
+  const projectDesignDocument = metadata['regen:projectDesignDocument'];
 
   // Toucan
-  const toucanProjectTokenId = metadata?.['regen:toucanProjectTokenId'];
+  const toucanProjectTokenId = metadata['regen:toucanProjectTokenId'];
+
+  const unknownFields = getProjectUnknownFields(metadata);
 
   return (
     <Box
@@ -66,76 +70,68 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
             </Box>
             <Body size="xl">{onChainProjectId}</Body>
           </Grid>
-          {methodology && (
-            <MetaDetail
-              label="methodology"
-              data={
-                <ArrowLink
-                  label={methodology?.['schema:name']}
-                  href={methodology?.['schema:url'] || ''}
-                />
+
+          <MetaDetail
+            label="toucan project token id"
+            value={
+              toucanProjectTokenId && {
+                'schema:name': toucanProjectTokenId.toString(),
+                'schema:url': metadata?.['regen:toucanURI'],
               }
-            />
-          )}
-          {toucanProjectTokenId && (
-            <MetaDetail
-              label="toucan project token id"
-              data={
-                <ArrowLink
-                  label={toucanProjectTokenId.toString()}
-                  href={metadata?.['regen:toucanURI'] || ''}
-                />
+            }
+          />
+          <MetaDetail
+            label="vcs project id"
+            value={
+              vcsProjectId && {
+                'schema:name': vcsProjectId.toString(),
+                'schema:url': metadata?.['regen:vcsProjectPage'],
               }
-            />
-          )}
-          {vcsProjectId && (
-            <MetaDetail
-              label="vcs project id"
-              data={
-                <ArrowLink
-                  label={vcsProjectId.toString()}
-                  href={metadata?.['regen:vcsProjectPage'] || ''}
-                />
+            }
+          />
+          <MetaDetail
+            label={`${vcsProjectId ? 'vcs ' : ''}project type`}
+            value={projectType}
+          />
+          <MetaDetail
+            label="documents"
+            value={
+              projectDesignDocument && {
+                'schema:name': 'Project Design Document',
+                'schema:url': projectDesignDocument,
               }
-            />
-          )}
-          {projectType && (
-            <MetaDetail
-              label={`${vcsProjectId ? 'vcs ' : ''}project type`}
-              data={projectType}
-            />
-          )}
-          {projectDesignDocument && (
-            <MetaDetail
-              label="documents"
-              data={
-                <ArrowLink
-                  label="Project Design Document"
-                  href={projectDesignDocument}
-                />
+            }
+          />
+          <MetaDetail
+            label="reference id (cfc project id)"
+            value={
+              cfcProjectId && {
+                'schema:name': cfcProjectId,
+                'schema:url': metadata?.['regen:cfcProjectPage'],
               }
-            />
-          )}
-          {cfcProjectId && (
+            }
+          />
+          <MetaDetail
+            label="project start date"
+            value={startDate}
+            rdfType={getFieldType(
+              'regen:projectStartDate',
+              metadata['@context'],
+            )}
+          />
+          <MetaDetail
+            label="project end date"
+            value={endDate}
+            rdfType={getFieldType('regen:projectEndDate', metadata['@context'])}
+          />
+          {unknownFields.map(([fieldName, value]) => (
             <MetaDetail
-              label="reference id (cfc project id)"
-              data={
-                <ArrowLink
-                  label={cfcProjectId}
-                  href={metadata?.['regen:cfcProjectPage'] || ''}
-                />
-              }
+              key={fieldName}
+              label={getFieldLabel(fieldName)}
+              value={value}
+              rdfType={getFieldType(fieldName, metadata['@context'])}
             />
-          )}
-          {startDate && (
-            <MetaDetail
-              label="project start date"
-              data={formatDate(startDate)}
-            />
-          )}
-          {endDate && (
-            <MetaDetail label="project end date" data={formatDate(endDate)} />
-          )}
+          ))}
         </Grid>
       </Box>
     </Box>

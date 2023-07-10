@@ -24,7 +24,7 @@ const ApprovedMethodologiesList: React.FC<
   return (
     <MetaDetail
       label="approved methodologies"
-      data={
+      customContent={
         <Flex flexDirection="column">
           {methodologies.slice(0, MAX_METHODOLOGIE_LINKS).map(methodologie => {
             return (

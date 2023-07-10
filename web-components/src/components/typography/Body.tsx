@@ -43,6 +43,11 @@ export const Body = styled(Typography, {
           cursor: 'pointer',
         },
       }),
+      ...(!styleLinks && {
+        '& a, .MuiLink-root': {
+          color: 'inherit',
+        },
+      }),
       ...(styleLists && {
         '& ul, ol': {
           listStyle: 'none',

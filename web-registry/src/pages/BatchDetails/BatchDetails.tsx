@@ -30,8 +30,7 @@ export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { batchDenom } = useParams();
   const [ledgerLoading, setLedgerLoading] = useState(true);
   const [batch, setBatch] = useState<BatchInfoWithSupply>();
-  const [metadata, setMetadata] =
-    useState<Partial<CreditBatchMetadataIntersectionLD>>();
+  const [metadata, setMetadata] = useState<CreditBatchMetadataIntersectionLD>();
   const walletContext = useWallet();
   const { dataClient } = useLedger();
   const accountAddress = walletContext.wallet?.address;

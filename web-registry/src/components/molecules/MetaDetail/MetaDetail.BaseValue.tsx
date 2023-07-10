@@ -16,17 +16,23 @@ export type Props = {
 
 const MetaDetailBaseValue: React.FC<Props> = ({ value, rdfType, bodySize }) => {
   if (!value) return null;
+
+  let formattedValue: string | undefined;
+  const isNumber = typeof value === 'number';
+  const isString = typeof value === 'string';
+  if (isString || isNumber) {
+    if (isNumber) {
+      formattedValue = formatNumber({ num: value });
+    } else if (rdfType === 'xsd:date') {
+      formattedValue = formatDate(value);
+    } else {
+      formattedValue = value;
+    }
+  }
+
   return (
     <>
-      {(typeof value === 'string' || typeof value === 'number') && (
-        <Body size={bodySize}>
-          {typeof value === 'number'
-            ? formatNumber({ num: value })
-            : rdfType === 'xsd:date'
-            ? formatDate(value)
-            : value}
-        </Body>
-      )}
+      {formattedValue && <Body size={bodySize}>{formattedValue}</Body>}
       {isCompactedNameUrlOrOptionalUrl(value) && (
         <Body size={bodySize} styleLinks={false}>
           <LinkWithArrow

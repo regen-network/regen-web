@@ -12,7 +12,8 @@ function getUnknowFields(data: object, knownFields: string[]) {
   );
 }
 
-const knownClassFields = [
+type KnownClassFields = keyof CreditClassMetadataLD;
+const knownClassFields: KnownClassFields[] = [
   'schema:url',
   'schema:name',
   'schema:description',
@@ -35,7 +36,8 @@ export function getClassUnknownFields<T extends CreditClassMetadataLD>(
   return getUnknowFields(data, knownClassFields);
 }
 
-const knownProjectFields = [
+type KnownProjectFields = keyof AnchoredProjectMetadataLD;
+const knownProjectFields: KnownProjectFields[] = [
   'schema:name',
   'schema:location',
   'regen:projectType',
@@ -67,7 +69,8 @@ export function getProjectUnknownFields<T extends AnchoredProjectMetadataLD>(
   return getUnknowFields(data, knownProjectFields);
 }
 
-const knownBatchFields = [
+type KnownBatchFields = keyof CreditBatchMetadataIntersectionLD;
+const knownBatchFields: KnownBatchFields[] = [
   'regen:vcsProjectId',
   'regen:vcsRetirementSerialNumber',
   'regen:additionalCertifications',

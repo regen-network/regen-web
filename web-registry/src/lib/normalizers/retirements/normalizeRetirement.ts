@@ -5,6 +5,8 @@ import {
 
 import { Party } from 'web-components/lib/components/user/UserInfo';
 
+import { Maybe } from 'generated/graphql';
+import { RetirementFieldsFragment } from 'generated/indexer-graphql';
 import {
   AnchoredProjectMetadataLD,
   CreditClassMetadataLD,
@@ -12,10 +14,8 @@ import {
 
 import { getDataFromBatchDenomId } from 'pages/Dashboard/MyEcocredits/MyEcocredits.utils';
 
-import { RetirementType } from './normalizeRetirement.types';
-
 type Props = {
-  retirement?: RetirementType;
+  retirement?: Maybe<RetirementFieldsFragment>;
   retirementData?: ReturnType<typeof getDataFromBatchDenomId>;
   project?: QueryProjectResponse | null;
   projectMetadata?: AnchoredProjectMetadataLD;

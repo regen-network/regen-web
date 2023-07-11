@@ -3,11 +3,8 @@ import Box from '@mui/material/Box';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';
 
-import ProjectImpactCard, {
-  ProjectImpactCardProps,
-} from 'web-components/lib/components/cards/ProjectImpactCard/ProjectImpactCard';
-import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
-import { CollapseList } from 'web-components/lib/components/organisms/CollapseList/CollapseList';
+import { ProjectImpactCardProps } from 'web-components/lib/components/cards/ProjectImpactCard/ProjectImpactCard';
+import { ImpactTags } from 'web-components/lib/components/organisms/ImpactTags/ImpactTags';
 import ReadMore from 'web-components/lib/components/read-more';
 import { Label, Title } from 'web-components/lib/components/typography';
 import { Party } from 'web-components/lib/components/user/UserInfo';
@@ -26,6 +23,7 @@ import { useTags } from 'hooks/useTags';
 
 import { AdditionalInfo } from '../CreditClassDetails.AdditionalInfo';
 import { MemoizedProjects as Projects } from '../CreditClassDetails.Projects';
+import { ELIGIBLE_ACTIVITIES } from './CreditClassDetailsSimple.constants';
 import { CreditClassDetailsStakeholders } from './CreditClassDetailsSimple.Stakeholders';
 import { useCreditClassDetailsSimpleStyles } from './CreditClassDetailsSimple.styles';
 import { getCreditClassDisplayName } from './CreditClassDetailsSimple.utils';
@@ -138,10 +136,11 @@ const CreditClassDetailsSimple: React.FC<
               creditTypeName={creditTypeData?.creditType?.name}
             />
           </Box>
-          <ProjectTopCard
+          <ImpactTags
             impact={impactCards}
             activities={activityTags}
             ecosystems={ecosystemTags}
+            activitiesLabel={ELIGIBLE_ACTIVITIES}
           />
         </Box>
       </EcocreditsSection>

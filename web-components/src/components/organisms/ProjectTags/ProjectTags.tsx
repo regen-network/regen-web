@@ -14,12 +14,14 @@ export interface Props {
   activities?: ProjectTagType[];
   ecosystems?: ProjectTagType[];
   sx?: SxProps<Theme>;
+  activitiesLabel?: string;
 }
 
 const ProjectTags = ({
   activities = [],
   ecosystems = [],
   sx = [],
+  activitiesLabel = PROJECT_ACTIVITY_LABEL,
 }: Props): JSX.Element => {
   const hasActivities = activities.length > 0;
   const hasManyActivities = activities.length > 1;
@@ -46,9 +48,7 @@ const ProjectTags = ({
             mb: { xs: 10, sm: hasManyTags ? 10 : 0 },
           }}
         >
-          <Label sx={{ fontSize: { xs: 11 }, mb: 2 }}>
-            {PROJECT_ACTIVITY_LABEL}
-          </Label>
+          <Label sx={{ fontSize: { xs: 11 }, mb: 2 }}>{activitiesLabel}</Label>
           <Box
             sx={{
               display: 'flex',

@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/regen-network/regen-web/compare/v1.8.2...v1.9.0) (2023-07-11)
+
+### Bug Fixes
+
+- rename "credit generation method" to "offset generation method" ([#1959](https://github.com/regen-network/regen-web/issues/1959)) ([b4fe55a](https://github.com/regen-network/regen-web/commit/b4fe55aabcb8550c49c8b467b219f3dcac76f71e))
+
+### Features
+
+- ecosystem activity tags project page ([#1936](https://github.com/regen-network/regen-web/issues/1936)) ([f3ea811](https://github.com/regen-network/regen-web/commit/f3ea811c0241c9c820de8bf321ae6ae5a99aacd5))
+- add avg median price on project and credit class pages ([#1939](https://github.com/regen-network/regen-web/issues/1939)) ([88b31d1](https://github.com/regen-network/regen-web/commit/88b31d1eeca46bb79a60d81a8205d5402ef8e999))
+- add certifications and ratings ([#1942](https://github.com/regen-network/regen-web/issues/1942)) ([5914dd2](https://github.com/regen-network/regen-web/commit/5914dd21b4be3b1d991b9e08d91f2ff370696306))
+- add community projects filter ([#1934](https://github.com/regen-network/regen-web/issues/1934)) ([cb8cf72](https://github.com/regen-network/regen-web/commit/cb8cf724079911587067be354bc6ee630829c2cc))
+- add infos credit class card ([#1928](https://github.com/regen-network/regen-web/issues/1928)) ([188158a](https://github.com/regen-network/regen-web/commit/188158a005863102ef4ff89236e5d3ae51de1f0a))
+- add support for unknown metadata fields ([#1954](https://github.com/regen-network/regen-web/issues/1954)) ([fd51fcd](https://github.com/regen-network/regen-web/commit/fd51fcda4e97c1b3c7fb916225b2b6f1fa244005))
+- credit class page impact entities ([#1945](https://github.com/regen-network/regen-web/issues/1945)) ([efce8ae](https://github.com/regen-network/regen-web/commit/efce8aea67a6ad6de87c9b241ffd3af20bb20b4d))
+- disable OTC flow for community credits ([#1932](https://github.com/regen-network/regen-web/issues/1932)) ([24640c5](https://github.com/regen-network/regen-web/commit/24640c570807863c3a352e2ac45abe241c2d5440))
+- Fallback to data module resolvers from regen-ledger for fetching metadata ([#1931](https://github.com/regen-network/regen-web/issues/1931)) ([4c6164d](https://github.com/regen-network/regen-web/commit/4c6164d59d832aa0c7ef5a1e55986d98fd42527f))
+- filter community projects ([#1933](https://github.com/regen-network/regen-web/issues/1933)) ([e9443bb](https://github.com/regen-network/regen-web/commit/e9443bb754736388901129fb6801bab7f0069a82))
+- move additional info section to table ([#1937](https://github.com/regen-network/regen-web/issues/1937)) ([d7647f0](https://github.com/regen-network/regen-web/commit/d7647f0506675d27b808f625bff6dedd87430005))
+- move impact cards to top right and entities down to the project details section on project pages ([#1940](https://github.com/regen-network/regen-web/issues/1940)) ([616f02e](https://github.com/regen-network/regen-web/commit/616f02ebf839cf590c22c6811bcb5f51c638bc5e))
+- OTC module on project page ([#1938](https://github.com/regen-network/regen-web/issues/1938)) ([971e353](https://github.com/regen-network/regen-web/commit/971e353bf6663c9d4a3d65980f60716a2c0cf045))
+- update project roles form to use profiles ([#1918](https://github.com/regen-network/regen-web/issues/1918)) ([f919e8b](https://github.com/regen-network/regen-web/commit/f919e8b88ac6bdca77f0c4ab47c30659f9be7890)), closes [#1920](https://github.com/regen-network/regen-web/issues/1920)
+- use credit class metadata in addition to sanity credit class data ([#1935](https://github.com/regen-network/regen-web/issues/1935)) ([23970bd](https://github.com/regen-network/regen-web/commit/23970bd551d361ee1397fb69badb3774efe2921b))
+- wire certificate table and page ([#1953](https://github.com/regen-network/regen-web/issues/1953)) ([afdc939](https://github.com/regen-network/regen-web/commit/afdc939f0288a53f39f8ebe8fe5e2cf659de170d))
+
 ## [1.8.2](https://github.com/regen-network/regen-web/compare/v1.8.1...v1.8.2) (2023-07-06)
 
 ### Bug Fixes

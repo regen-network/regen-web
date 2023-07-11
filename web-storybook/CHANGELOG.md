@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/regen-network/regen-web/compare/v1.8.2...v1.9.0) (2023-07-11)
+
+### Features
+
+- ecosystem activity tags project page ([#1936](https://github.com/regen-network/regen-web/issues/1936)) ([f3ea811](https://github.com/regen-network/regen-web/commit/f3ea811c0241c9c820de8bf321ae6ae5a99aacd5))
+- add certifications and ratings ([#1942](https://github.com/regen-network/regen-web/issues/1942)) ([5914dd2](https://github.com/regen-network/regen-web/commit/5914dd21b4be3b1d991b9e08d91f2ff370696306))
+- add infos credit class card ([#1928](https://github.com/regen-network/regen-web/issues/1928)) ([188158a](https://github.com/regen-network/regen-web/commit/188158a005863102ef4ff89236e5d3ae51de1f0a))
+
 # [1.8.0](https://github.com/regen-network/regen-web/compare/v1.7.0...v1.8.0) (2023-06-13)
 
 ### Features

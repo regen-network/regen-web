@@ -1,0 +1,10 @@
+query IndexerAllRetirementsByOwner(
+  $owner: String!
+  $orderBy: RetirementsOrderBy!
+) {
+  allRetirements(condition: { owner: $owner }, orderBy: [$orderBy]) {
+    nodes {
+      ...retirementFields
+    }
+  }
+}

@@ -11,17 +11,17 @@ import {
 } from 'web-components/lib/components/table/ActionsTable';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 
-import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
+import { NormalizedRetirement } from 'lib/normalizers/retirements/normalizeRetirement';
 
-import { AccountLink, GreyText, Link } from 'components/atoms';
+import { GreyText, Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { NoCredits } from 'components/molecules';
 
 import { retirementCertificateHeaders } from './RetirementCertificatesTable.headers';
 
 type RetirementCertificatesTableProps = {
-  credits?: BatchInfoWithBalance[];
+  retirements?: NormalizedRetirement[];
   renderActionButtons?: RenderActionButtonsFunc;
   onTableChange?: UseStateSetter<TablePaginationParams>;
   initialPaginationParams?: TablePaginationParams;
@@ -31,14 +31,14 @@ type RetirementCertificatesTableProps = {
 export const RetirementCertificatesTable: React.FC<
   React.PropsWithChildren<RetirementCertificatesTableProps>
 > = ({
-  credits,
+  retirements,
   renderActionButtons,
   onTableChange,
   initialPaginationParams,
   isIgnoreOffset = false,
 }) => {
-  if (!credits?.length) {
-    return <NoCredits title="No ecocredits to display" />;
+  if (!retirements?.length) {
+    return <NoCredits title="No retirements to display" />;
   }
 
   return (
@@ -50,10 +50,10 @@ export const RetirementCertificatesTable: React.FC<
       isIgnoreOffset={isIgnoreOffset}
       /* eslint-disable react/jsx-key */
       headerRows={retirementCertificateHeaders}
-      rows={credits.map((row, i) => {
+      rows={retirements.map((row, i) => {
         return [
-          <GreyText>{formatDate(row.endDate)}</GreyText>,
-          <WithLoader isLoading={row.projectName === ''} variant="skeleton">
+          <GreyText>{formatDate(row.retirementDate)}</GreyText>,
+          <WithLoader isLoading={row.projectId === ''} variant="skeleton">
             <Link
               href={`/project/${row?.projectId}`}
               sx={tableStyles.ellipsisColumn}
@@ -61,28 +61,33 @@ export const RetirementCertificatesTable: React.FC<
               {row?.projectName}
             </Link>
           </WithLoader>,
-          <WithLoader isLoading={!row.denom} variant="skeleton">
-            <Link href={`/credit-batches/${row.denom}`}>{row.denom}</Link>
+          <WithLoader isLoading={!row.batchId} variant="skeleton">
+            <Link href={`/credit-batches/${row.batchId}`}>{row.batchId}</Link>
           </WithLoader>,
-          <WithLoader isLoading={row.classId === ''} variant="skeleton">
+          <WithLoader isLoading={row.creditClassId === ''} variant="skeleton">
             <Link
-              href={`/credit-classes/${row.classId}`}
+              href={`/credit-classes/${row.creditClassId}`}
               sx={tableStyles.ellipsisContentColumn}
             >
-              {row?.className && <BlockContent content={row?.className} />}
+              {row?.creditClassName && (
+                <BlockContent content={row?.creditClassName} />
+              )}
             </Link>
           </WithLoader>,
           formatNumber({
-            num: row.balance?.retiredAmount,
+            num: row.amountRetired,
             ...quantityFormatNumberOptions,
           }),
           <WithLoader isLoading={!row.issuer} variant="skeleton">
-            <AccountLink address={row.issuer} />
+            <Link href={row.issuer?.link ?? ''}>{row.issuer?.name}</Link>
           </WithLoader>,
-          <GreyText>{formatDate(row.startDate)}</GreyText>,
-          <GreyText>{formatDate(row.endDate)}</GreyText>,
-          <WithLoader isLoading={row.projectLocation === ''} variant="skeleton">
-            <Box>{row.projectLocation}</Box>
+          <GreyText>{formatDate(row.batchStartDate)}</GreyText>,
+          <GreyText>{formatDate(row.batchEndDate)}</GreyText>,
+          <WithLoader
+            isLoading={row.retirementLocation === ''}
+            variant="skeleton"
+          >
+            <Box>{row.retirementLocation}</Box>
           </WithLoader>,
           <WithLoader isLoading={row.projectLocation === ''} variant="skeleton">
             <Box>{row.projectLocation}</Box>

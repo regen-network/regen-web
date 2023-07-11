@@ -1,36 +1,26 @@
 import { Box } from '@mui/material';
-import ReactHtmlParser from 'html-react-parser';
 
 import { headerFontFamily, pxToRem } from '../../theme/muiTheme';
 import { LinkComponentType } from '../../types/shared/linkComponentType';
-import { LinkType } from '../../types/shared/linkType';
 import { pluralize } from '../../utils/pluralize';
 import CarbonOffsetBadgeIcon from '../icons/CarbonOffsetBadgeIcon';
 import RegenIcon from '../icons/RegenIcon';
 import { Body, Subtitle, Title } from '../typography';
 import { certificateFormater, certificateOptions } from './certificate.config';
 import {
+  CREDIT_UNIT,
+  CREDIT_UNIT_SUFFIX,
   EQUIVALENT_TO,
   NUMBER_OF_CREDITS,
   RETIREMENT_LOCATION,
   RETIREMENT_REASON,
-  TONS_OF_CO2,
   TX_HASH,
 } from './certificate.constants';
 import { CertificateItem } from './certificate.Item';
 import { useCertificateStyles } from './certificate.styles';
-import { ItemLink } from './certificate.types';
+import { CertificateType } from './certificate.types';
 
-interface CertificateProps {
-  date: string | Date;
-  txHash: LinkType;
-  certificateTitle: string;
-  creditsUnits: number;
-  creditUnitName?: string;
-  equivalentTonsCO2: number;
-  itemLinks: ItemLink[];
-  retirementReason?: string;
-  retirementLocation?: string;
+interface CertificateProps extends CertificateType {
   background: string;
   linkComponent: LinkComponentType;
 }
@@ -40,7 +30,6 @@ export default function Certificate({
   txHash,
   certificateTitle,
   creditsUnits,
-  creditUnitName,
   equivalentTonsCO2,
   itemLinks,
   retirementReason,
@@ -117,11 +106,10 @@ export default function Certificate({
                     },
                     fontWeight: 400,
                   },
+                  zIndex: 5,
                 }}
               >
-                <LinkComponent href={txHash.href} sx={{}}>
-                  {txHash.text}
-                </LinkComponent>
+                <LinkComponent href={txHash.href}>{txHash.text}</LinkComponent>
               </Body>
             </Box>
           </Box>
@@ -164,6 +152,25 @@ export default function Certificate({
           </div>
         </Box>
         <div className={classes.text}>
+          {equivalentTonsCO2 && (
+            <CertificateItem
+              name={EQUIVALENT_TO}
+              sx={{ mb: { xs: 1.25, sm: 2.5 }, '@media print': { mb: 0 } }}
+            >
+              <Subtitle
+                as="span"
+                size="lg"
+                mobileSize="md"
+                sx={{ '@media print': { fontSize: 9, lineHeight: 0.4 } }}
+              >
+                {certificateFormater.format(equivalentTonsCO2)}{' '}
+                {`${pluralize(
+                  equivalentTonsCO2,
+                  CREDIT_UNIT,
+                )} ${CREDIT_UNIT_SUFFIX}`}
+              </Subtitle>
+            </CertificateItem>
+          )}
           <CertificateItem
             name={NUMBER_OF_CREDITS}
             sx={{ mb: { xs: 1.25, sm: 2.5 }, '@media print': { mb: 0 } }}
@@ -175,21 +182,6 @@ export default function Certificate({
               sx={{ '@media print': { fontSize: 9, lineHeight: 0.4 } }}
             >
               {certificateFormater.format(creditsUnits)}{' '}
-              {creditUnitName &&
-                ReactHtmlParser(pluralize(creditsUnits, creditUnitName))}
-            </Subtitle>
-          </CertificateItem>
-          <CertificateItem
-            name={EQUIVALENT_TO}
-            sx={{ mb: { xs: 1.25, sm: 2.5 }, '@media print': { mb: 0 } }}
-          >
-            <Subtitle
-              as="span"
-              size="lg"
-              mobileSize="md"
-              sx={{ '@media print': { fontSize: 9, lineHeight: 0.4 } }}
-            >
-              {certificateFormater.format(equivalentTonsCO2)} {TONS_OF_CO2}
             </Subtitle>
           </CertificateItem>
           {itemLinks.map(itemLink => (

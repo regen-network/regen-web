@@ -1,0 +1,15 @@
+overwrite: true
+schema: 'http://localhost:5000/indexer/graphql'
+documents:
+  - 'src/graphql/indexer/**/*.graphql'
+generates:
+  src/generated/indexer-graphql.tsx:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+    config:
+      withHooks: true
+  ./indexer-graphql.schema.json:
+    plugins:
+      - 'introspection'

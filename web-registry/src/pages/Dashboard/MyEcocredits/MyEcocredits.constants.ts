@@ -6,6 +6,7 @@ export const TAKE_HEADER = 'Your take action was successful!';
 export const CREATE_SELL_ORDER_TITLE = 'Create Sell Order';
 export const CREATE_SELL_ORDER_SHORT = 'Sell';
 export const CREATE_SELL_ORDER_BUTTON = 'VIEW ALL SELL ORDERS';
+export const RETIRE_SUCCESS_BUTTON = 'view retirement certificates';
 export const ERROR_BUTTON = 'VIEW YOUR PORTFOLIO';
 
 export const RETIRE_TWITTER_TEXT =

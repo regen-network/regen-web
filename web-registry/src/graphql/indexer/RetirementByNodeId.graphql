@@ -1,0 +1,5 @@
+query IndexerRetirementByNodeId($nodeId: ID!) {
+  retirement(nodeId: $nodeId) {
+    ...retirementFields
+  }
+}

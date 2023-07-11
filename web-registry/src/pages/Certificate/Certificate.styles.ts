@@ -97,7 +97,6 @@ export const useCertificateStyles = makeStyles<{
       height: theme.spacing(14.75),
       paddingLeft: theme.spacing(7.5),
       paddingRight: theme.spacing(7.5),
-      float: 'right',
     },
     [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.5),

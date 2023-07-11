@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useParams } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 
@@ -9,9 +10,11 @@ import ShareIcons from 'web-components/lib/components/icons/ShareIcons';
 import { Title } from 'web-components/lib/components/typography';
 
 import { Link } from 'components/atoms';
+import WithLoader from 'components/atoms/WithLoader';
 
 import { useCertificateStyles } from './Certificate.styles';
-import { useFetchCertificate } from './hooks/useFetchCertificate';
+import { getCertificateData } from './Certificate.utils';
+import { useFetchRetirement } from './hooks/useFetchRetirement';
 
 function CertificatePage(): JSX.Element {
   const { classes } = useCertificateStyles({
@@ -19,7 +22,11 @@ function CertificatePage(): JSX.Element {
   });
   const theme = useTheme();
   const ref = useRef<HTMLDivElement>(null);
-  const certificateData = useFetchCertificate({ certificateId: '1' });
+  const { certificateId } = useParams();
+  const { retirement, isLoadingRetirement } = useFetchRetirement({
+    retirementNodeId: certificateId ?? '',
+  });
+  const certificateData = getCertificateData({ retirement });
 
   return (
     <div className={classes.root}>
@@ -28,11 +35,21 @@ function CertificatePage(): JSX.Element {
         sx={{ '@media print': { backgroundImage: 'none !important' } }}
       >
         <div className={classes.certificate} ref={ref}>
-          <Certificate
-            {...certificateData}
-            background="/svg/topology.svg"
-            linkComponent={Link}
-          />
+          <WithLoader
+            isLoading={isLoadingRetirement}
+            sx={{
+              minHeight: 600,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Certificate
+              {...certificateData}
+              background="/svg/topology.svg"
+              linkComponent={Link}
+            />
+          </WithLoader>
         </div>
       </Box>
       <Grid
@@ -41,7 +58,7 @@ function CertificatePage(): JSX.Element {
         alignItems="flex-end"
         sx={{ displayPrint: 'none' }}
       >
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} md={6} sx={{ mb: { xs: 0, sm: 2 } }}>
           <Title
             variant="h4"
             sx={{ pb: 3.75, textAlign: { xs: 'center', sm: 'inherit' } }}
@@ -53,7 +70,7 @@ function CertificatePage(): JSX.Element {
             url={`${window.location.origin}/buyers`}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} md={6}>
           <OutlinedButton
             className={classes.printButton}
             onClick={() => window.print()}

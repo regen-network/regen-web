@@ -15,7 +15,10 @@ import { useTracker } from 'lib/tracker/useTracker';
 import { CreditRetireFormSchemaType } from 'components/organisms/CreditRetireForm/CreditRetireForm.schema';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
-import { RETIRE_HEADER } from '../MyEcocredits.constants';
+import {
+  RETIRE_HEADER,
+  RETIRE_SUCCESS_BUTTON,
+} from '../MyEcocredits.constants';
 
 type Props = {
   accountAddress?: string;
@@ -27,6 +30,7 @@ type Props = {
   setCardItems: UseStateSetter<Item[] | undefined>;
   setTxModalHeader: UseStateSetter<string | undefined>;
   setTxModalTitle: UseStateSetter<string | undefined>;
+  setTxButtonTitle: UseStateSetter<string | undefined>;
 };
 
 type Params = (values: CreditRetireFormSchemaType) => Promise<void>;
@@ -41,6 +45,7 @@ const useCreditRetireSubmit = ({
   setCardItems,
   setTxModalHeader,
   setTxModalTitle,
+  setTxButtonTitle,
 }: Props): Params => {
   const { track } = useTracker();
   const creditRetireSubmit = useCallback(
@@ -121,6 +126,7 @@ const useCreditRetireSubmit = ({
         ]);
         setTxModalHeader(RETIRE_HEADER);
         setTxModalTitle(creditRetireTitle);
+        setTxButtonTitle(RETIRE_SUCCESS_BUTTON);
       }
     },
     [
@@ -132,6 +138,7 @@ const useCreditRetireSubmit = ({
       setCreditRetireOpen,
       setTxModalHeader,
       setTxModalTitle,
+      setTxButtonTitle,
       signAndBroadcast,
       track,
     ],

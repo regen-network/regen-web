@@ -55,6 +55,7 @@ import useCreditRetireSubmit from './hooks/useCreditRetireSubmit';
 import useCreditSendSubmit from './hooks/useCreditSendSubmit';
 import { useFetchBaskets } from './hooks/useFetchBaskets';
 import { useFetchEcocredits } from './hooks/useFetchEcocredits';
+import { useFetchRetirements } from './hooks/useFetchRetirements';
 import useOpenTakeModal from './hooks/useOpenTakeModal';
 import { useUpdateCardItemsTakeBasket } from './hooks/useUpdateCardItemsTakeBasket';
 import { useUpdateTxModalTitle } from './hooks/useUpdateTxModalTitle';
@@ -63,6 +64,7 @@ import {
   CREATE_SELL_ORDER_SHORT,
   CREATE_SELL_ORDER_TITLE,
   ERROR_BUTTON,
+  RETIRE_SUCCESS_BUTTON,
   SOCIAL_TWITTER_TEXT_MAPPING,
 } from './MyEcocredits.constants';
 import { OnTxSuccessfulProps } from './MyEcocredits.types';
@@ -95,10 +97,18 @@ export const MyEcocredits = (): JSX.Element => {
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
   const [txButtonTitle, setTxButtonTitle] = useState<string | undefined>();
   const lastRetiredProjectIdRef = useRef('');
+  const [activePortfolioTab, setActivePortfolioTab] = useState(0);
 
   const navigate = useNavigate();
   const { track } = useTracker();
   const { marketplaceClient } = useLedger();
+
+  const {
+    retirements,
+    retirementsSetPaginationParams,
+    retirementsPaginationParams,
+    reloadRetirements,
+  } = useFetchRetirements({});
 
   const onCloseBasketPutModal = (): void => setBasketPutOpen(-1);
   const onTxSuccessful = ({
@@ -130,6 +140,11 @@ export const MyEcocredits = (): JSX.Element => {
     handleTxModalClose();
     if (txButtonTitle === CREATE_SELL_ORDER_BUTTON && !error) {
       navigate('/storefront');
+    }
+    if (txButtonTitle === RETIRE_SUCCESS_BUTTON && !error) {
+      setActivePortfolioTab(1);
+      reloadRetirements();
+      setTimeout(() => reloadRetirements(), 5000);
     }
   };
 
@@ -241,6 +256,7 @@ export const MyEcocredits = (): JSX.Element => {
     setCreditRetireOpen,
     setTxModalHeader,
     setTxModalTitle,
+    setTxButtonTitle,
     signAndBroadcast,
   });
 
@@ -275,9 +291,13 @@ export const MyEcocredits = (): JSX.Element => {
       >
         <Portfolio
           credits={credits}
+          retirements={retirements}
           basketTokens={basketTokens}
           onTableChange={setPaginationParams}
+          onRetirementTableChange={retirementsSetPaginationParams}
           initialPaginationParams={paginationParams}
+          retirementsPaginationParams={retirementsPaginationParams}
+          activePortfolioTab={activePortfolioTab}
           isIgnoreOffset
           renderCreditActionButtons={
             credits.findIndex(c => Number(c.balance?.tradableAmount) > 0) > -1

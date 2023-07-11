@@ -11,5 +11,6 @@ export type RetirementType = Maybe<
     | 'batchDenom'
     | 'jurisdiction'
     | 'timestamp'
+    | 'txHash'
   >
 >;

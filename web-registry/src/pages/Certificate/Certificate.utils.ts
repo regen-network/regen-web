@@ -49,12 +49,8 @@ export const getCertificateData = ({
     retirementLocation: retirement.retirementLocation,
     retirementReason: retirement.retirementReason,
     txHash: {
-      text: truncate(
-        '98B49B325D8D6F38362619D99CB4698551E7D4213CFF268C5DEE3F777132635B',
-      ),
-      href: getHashUrl(
-        '98B49B325D8D6F38362619D99CB4698551E7D4213CFF268C5DEE3F777132635B',
-      ),
+      text: truncate(retirement.txHash),
+      href: getHashUrl(retirement.txHash),
     },
     date: retirement.retirementDate,
   };

@@ -1,0 +1,11 @@
+fragment retirementFields on Retirement {
+  nodeId
+  owner
+  amount
+  reason
+  batchDenom
+  jurisdiction
+  timestamp
+  reason
+  txHash
+}

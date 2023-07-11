@@ -1,7 +1,7 @@
 overwrite: true
 schema: 'http://localhost:5000/indexer/graphql'
 documents:
-  - 'src/graphql/indexer/*.graphql'
+  - 'src/graphql/indexer/**/*.graphql'
 generates:
   src/generated/indexer-graphql.tsx:
     plugins:

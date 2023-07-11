@@ -1724,6 +1724,7 @@ export type Retirement = Node & {
   chainNum: Scalars['Int'];
   txIdx: Scalars['Int'];
   msgIdx: Scalars['Int'];
+  txHash: Scalars['String'];
   /** Reads a single `MsgEvent` that is related to this `Retirement`. */
   msgEventByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType?: Maybe<MsgEvent>;
 };
@@ -1755,6 +1756,8 @@ export type RetirementCondition = {
   txIdx?: Maybe<Scalars['Int']>;
   /** Checks for equality with the object’s `msgIdx` field. */
   msgIdx?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `txHash` field. */
+  txHash?: Maybe<Scalars['String']>;
 };
 
 /** An input for mutations affecting `Retirement` */
@@ -1770,6 +1773,7 @@ export type RetirementInput = {
   chainNum: Scalars['Int'];
   txIdx: Scalars['Int'];
   msgIdx: Scalars['Int'];
+  txHash: Scalars['String'];
 };
 
 /** Represents an update to a `Retirement`. Fields that are set will be updated. */
@@ -1785,6 +1789,7 @@ export type RetirementPatch = {
   chainNum?: Maybe<Scalars['Int']>;
   txIdx?: Maybe<Scalars['Int']>;
   msgIdx?: Maybe<Scalars['Int']>;
+  txHash?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `Retirement` values. */
@@ -1834,6 +1839,8 @@ export enum RetirementsOrderBy {
   TxIdxDesc = 'TX_IDX_DESC',
   MsgIdxAsc = 'MSG_IDX_ASC',
   MsgIdxDesc = 'MSG_IDX_DESC',
+  TxHashAsc = 'TX_HASH_ASC',
+  TxHashDesc = 'TX_HASH_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -2331,7 +2338,7 @@ export type IndexerAllRetirementsByOwnerQuery = (
     { __typename?: 'RetirementsConnection' }
     & { nodes: Array<Maybe<(
       { __typename?: 'Retirement' }
-      & Pick<Retirement, 'nodeId' | 'owner' | 'amount' | 'reason' | 'batchDenom' | 'jurisdiction' | 'timestamp'>
+      & RetirementFieldsFragment
     )>> }
   )> }
 );
@@ -2345,27 +2352,37 @@ export type IndexerRetirementByNodeIdQuery = (
   { __typename?: 'Query' }
   & { retirement?: Maybe<(
     { __typename?: 'Retirement' }
-    & Pick<Retirement, 'nodeId' | 'owner' | 'amount' | 'reason' | 'batchDenom' | 'jurisdiction' | 'timestamp'>
+    & RetirementFieldsFragment
   )> }
 );
 
+export type RetirementFieldsFragment = (
+  { __typename?: 'Retirement' }
+  & Pick<Retirement, 'nodeId' | 'owner' | 'amount' | 'reason' | 'batchDenom' | 'jurisdiction' | 'timestamp' | 'txHash'>
+);
 
+export const RetirementFieldsFragmentDoc = gql`
+    fragment retirementFields on Retirement {
+  nodeId
+  owner
+  amount
+  reason
+  batchDenom
+  jurisdiction
+  timestamp
+  reason
+  txHash
+}
+    `;
 export const IndexerAllRetirementsByOwnerDocument = gql`
     query IndexerAllRetirementsByOwner($owner: String!, $orderBy: RetirementsOrderBy!) {
   allRetirements(condition: {owner: $owner}, orderBy: [$orderBy]) {
     nodes {
-      nodeId
-      owner
-      amount
-      reason
-      batchDenom
-      jurisdiction
-      timestamp
-      reason
+      ...retirementFields
     }
   }
 }
-    `;
+    ${RetirementFieldsFragmentDoc}`;
 
 /**
  * __useIndexerAllRetirementsByOwnerQuery__
@@ -2398,17 +2415,10 @@ export type IndexerAllRetirementsByOwnerQueryResult = Apollo.QueryResult<Indexer
 export const IndexerRetirementByNodeIdDocument = gql`
     query IndexerRetirementByNodeId($nodeId: ID!) {
   retirement(nodeId: $nodeId) {
-    nodeId
-    owner
-    amount
-    reason
-    batchDenom
-    jurisdiction
-    timestamp
-    reason
+    ...retirementFields
   }
 }
-    `;
+    ${RetirementFieldsFragmentDoc}`;
 
 /**
  * __useIndexerRetirementByNodeIdQuery__

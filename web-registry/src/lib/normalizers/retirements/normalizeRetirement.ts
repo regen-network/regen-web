@@ -43,6 +43,7 @@ export type NormalizedRetirement = {
   retirementLocation?: string;
   retirementReason?: string;
   retiredBy?: string;
+  txHash?: string;
 };
 
 export const normalizeRetirement = ({
@@ -74,4 +75,5 @@ export const normalizeRetirement = ({
   retirementLocation: retirement?.jurisdiction,
   retirementReason: retirement?.reason,
   retiredBy: retirement?.owner,
+  txHash: retirement?.txHash,
 });

@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import ProjectImpactCard, {
   ProjectImpactCardProps,
 } from 'web-components/lib/components/cards/ProjectImpactCard/ProjectImpactCard';
+import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import { CollapseList } from 'web-components/lib/components/organisms/CollapseList/CollapseList';
 import ReadMore from 'web-components/lib/components/read-more';
 import { Label, Title } from 'web-components/lib/components/typography';
@@ -137,21 +138,11 @@ const CreditClassDetailsSimple: React.FC<
               creditTypeName={creditTypeData?.creditType?.name}
             />
           </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-          >
-            <CollapseList
-              sx={{ pb: [7.5, 10], maxWidth: 367 }}
-              items={impactCards.map(card => (
-                <Box key={card.name} sx={{ pb: [2.5, 4.25] }}>
-                  <ProjectImpactCard {...card} />
-                </Box>
-              ))}
-            />
-          </Box>
+          <ProjectTopCard
+            impact={impactCards}
+            activities={activityTags}
+            ecosystems={ecosystemTags}
+          />
         </Box>
       </EcocreditsSection>
 

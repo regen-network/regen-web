@@ -1,10 +1,10 @@
-import { Box } from '@mui/material';
-import { makeStyles } from 'tss-react/mui';
-import { ProjectTagType } from 'web-components/lib/components/molecules/ProjectTag/ProjectTag.types';
-import { CollapseList } from 'web-components/lib/components/organisms/CollapseList/CollapseList';
-import { ProjectTags } from 'web-components/lib/components/organisms/ProjectTags/ProjectTags';
+import { Box, SxProps } from '@mui/material';
 
-import Card from './Card';
+import { Theme } from '../../theme/muiTheme';
+import { sxToArray } from '../../utils/mui/sxToArray';
+import { ProjectTagType } from '../molecules/ProjectTag/ProjectTag.types';
+import { CollapseList } from '../organisms/CollapseList/CollapseList';
+import { ProjectTags } from '../organisms/ProjectTags/ProjectTags';
 import ProjectImpactCard, {
   ProjectImpactCardProps,
 } from './ProjectImpactCard/ProjectImpactCard';
@@ -16,29 +16,26 @@ interface ProjectTopCardProps {
   activities?: ProjectTagType[];
   ecosystems?: ProjectTagType[];
   impact: ProjectImpactCardProps[];
+  sx?: SxProps<Theme>;
 }
 
-const useStyles = makeStyles()(theme => ({
-  root: {
-    border: 'none',
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(5),
-    },
-    '& :only-child, & :last-child': {
-      marginBottom: 0,
-    },
-  },
-}));
-
 export default function ProjectTopCard({
-  classes,
   activities,
   ecosystems,
   impact,
+  sx,
 }: ProjectTopCardProps): JSX.Element {
-  const { classes: styles, cx } = useStyles();
   return (
-    <Card className={cx(styles.root, classes && classes.root)}>
+    <Box
+      sx={[
+        {
+          display: 'flex',
+          flexDirection: 'column',
+          maxWidth: 367,
+        },
+        ...sxToArray(sx),
+      ]}
+    >
       <CollapseList
         sx={{ pb: [7.5, 10] }}
         items={impact.map(imp => (
@@ -56,6 +53,6 @@ export default function ProjectTopCard({
           }}
         />
       )}
-    </Card>
+    </Box>
   );
 }

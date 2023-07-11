@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { ProjectTagType } from 'web-components/lib/components/molecules/ProjectTag/ProjectTag.types';
-import { ProjectTags } from 'web-components/lib/components/organisms/ProjectTags/ProjectTags';
 
 import { client as sanityClient } from 'lib/clients/sanity';
 import { getAllActivityQuery } from 'lib/queries/react-query/sanity/getAllActivityQuery/getAllActivityQuery';

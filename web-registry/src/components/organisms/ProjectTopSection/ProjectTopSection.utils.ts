@@ -9,13 +9,11 @@ import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import { ImageFieldsFragment, Sdg } from 'generated/sanity-graphql';
 import {
   AnchoredProjectMetadataLD,
-  CreditClassMetadataLD,
   LegacyProjectMetadataLD,
   ProjectPageMetadataLD,
   ProjectQuote,
 } from 'lib/db/types/json-ld';
 import { Certification } from 'lib/db/types/json-ld/certification';
-import { CFCCreditClassMetadataLD } from 'lib/db/types/json-ld/cfc-credit-class-metadata';
 import { ApprovedMethodologies } from 'lib/db/types/json-ld/methodology';
 import { Rating } from 'lib/db/types/json-ld/rating';
 import { getSanityImgSrc } from 'lib/imgSrc';
@@ -170,24 +168,6 @@ export const isAnchoredProjectMetadata = (
   onChainProjectId?: string,
 ): projectMetadata is AnchoredProjectMetadataLD => {
   return !!onChainProjectId;
-};
-
-const isCFCCreditClassMetadata = (
-  creditClassMetadata?: CreditClassMetadataLD | CFCCreditClassMetadataLD,
-): creditClassMetadata is CFCCreditClassMetadataLD => {
-  return (
-    !!creditClassMetadata &&
-    typeof creditClassMetadata?.['regen:offsetGenerationMethod']?.[0] !==
-      'string'
-  );
-};
-
-export const getOffsetGenerationMethod = (metadata?: CreditClassMetadataLD) => {
-  if (isCFCCreditClassMetadata(metadata)) {
-    return metadata?.['regen:offsetGenerationMethod']?.[0]['@value'];
-  }
-
-  return metadata?.['regen:offsetGenerationMethod']?.[0];
 };
 
 /* getIconsMapping */

@@ -14,13 +14,15 @@ export const creditClassCardMock: Props = {
   description:
     'This credit class provides a vehicle for nature based Verified Carbon Units (VCUs) to enter the blockchain space via issuance on Regen Ledger. ',
   imgSrc: '/coorong.png',
-  generationMethod: {
-    name: 'Carbon removal',
-    icon: {
-      src: '/icons/carbon.svg',
-      alt: 'carbon',
+  generationMethods: [
+    {
+      name: 'Carbon removal',
+      icon: {
+        src: '/icons/carbon.svg',
+        alt: 'carbon',
+      },
     },
-  },
+  ],
   methodology: {
     href: '#',
     text: 'Ruuts Protocol Soil Carbon Sequestration Methodology',

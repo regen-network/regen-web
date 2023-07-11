@@ -10,8 +10,8 @@ import { OptimizeImageProps } from '../../image';
 import { Body, Subtitle, Title } from '../../typography';
 import {
   CREDIT_CLASS_TOOLTIP,
-  CREDIT_GENERATION_METHOD,
   METHODOLOGY,
+  OFFSET_GENERATION_METHOD,
 } from './CreditClassCard.constants';
 import { CreditClassCardItem } from './CreditClassCard.Item';
 import { useCreditClassCardStyles } from './CreditClassCard.styles';
@@ -22,7 +22,7 @@ export interface Props extends OptimizeImageProps {
   title: string | JSX.Element;
   description: string | JSX.Element;
   imgSrc: string;
-  generationMethod?: CreditClassCardItemType;
+  generationMethods?: CreditClassCardItemType[];
   methodology?: Partial<LinkType>;
   sx?: SxProps<Theme>;
 }
@@ -32,7 +32,7 @@ const CreditClassCard = ({
   description,
   imgSrc,
   type,
-  generationMethod,
+  generationMethods,
   methodology,
   sx = [],
 }: Props): JSX.Element => {
@@ -110,10 +110,10 @@ const CreditClassCard = ({
             {parseText(description)}
           </Body>
           <Flex flexDirection={{ xs: 'column', sm: 'row' }}>
-            {generationMethod && (
+            {generationMethods && (
               <CreditClassCardItem
-                label={CREDIT_GENERATION_METHOD}
-                item={generationMethod}
+                label={OFFSET_GENERATION_METHOD}
+                items={generationMethods}
                 sx={{ maxWidth: { sm: 195 }, mr: 5, mb: { xs: 5, sm: 0 } }}
               />
             )}

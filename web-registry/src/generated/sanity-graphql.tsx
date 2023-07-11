@@ -1706,8 +1706,6 @@ export type CreditClass = Document & {
   buyer?: Maybe<Buyer>;
   landSteward?: Maybe<LandSteward>;
   icon?: Maybe<Image>;
-  creditType?: Maybe<CreditType>;
-  creditGenerationMethod?: Maybe<CreditGenerationMethod>;
 };
 
 export type CreditClassFilter = {
@@ -1725,8 +1723,6 @@ export type CreditClassFilter = {
   buyer?: Maybe<BuyerFilter>;
   landSteward?: Maybe<LandStewardFilter>;
   icon?: Maybe<ImageFilter>;
-  creditType?: Maybe<CreditTypeFilter>;
-  creditGenerationMethod?: Maybe<CreditGenerationMethodFilter>;
 };
 
 export type CreditClassSorting = {
@@ -1742,47 +1738,6 @@ export type CreditClassSorting = {
   buyer?: Maybe<BuyerSorting>;
   landSteward?: Maybe<LandStewardSorting>;
   icon?: Maybe<ImageSorting>;
-};
-
-export type CreditGenerationMethod = Document & {
-  __typename?: 'CreditGenerationMethod';
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']>;
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']>;
-  _key?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  image?: Maybe<Image>;
-};
-
-export type CreditGenerationMethodFilter = {
-  /** Apply filters on document level */
-  _?: Maybe<Sanity_DocumentFilter>;
-  _id?: Maybe<IdFilter>;
-  _type?: Maybe<StringFilter>;
-  _createdAt?: Maybe<DatetimeFilter>;
-  _updatedAt?: Maybe<DatetimeFilter>;
-  _rev?: Maybe<StringFilter>;
-  _key?: Maybe<StringFilter>;
-  name?: Maybe<StringFilter>;
-  image?: Maybe<ImageFilter>;
-};
-
-export type CreditGenerationMethodSorting = {
-  _id?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  _createdAt?: Maybe<SortOrder>;
-  _updatedAt?: Maybe<SortOrder>;
-  _rev?: Maybe<SortOrder>;
-  _key?: Maybe<SortOrder>;
-  name?: Maybe<SortOrder>;
-  image?: Maybe<ImageSorting>;
 };
 
 export type CreditInfos = {
@@ -5157,7 +5112,6 @@ export type RootQuery = {
   CreditCertification?: Maybe<CreditCertification>;
   CreditClass?: Maybe<CreditClass>;
   CreditType?: Maybe<CreditType>;
-  CreditGenerationMethod?: Maybe<CreditGenerationMethod>;
   DevelopersPage?: Maybe<DevelopersPage>;
   Doc?: Maybe<Doc>;
   EcologicalImpact?: Maybe<EcologicalImpact>;
@@ -5223,7 +5177,6 @@ export type RootQuery = {
   allCreditCertification: Array<CreditCertification>;
   allCreditClass: Array<CreditClass>;
   allCreditType: Array<CreditType>;
-  allCreditGenerationMethod: Array<CreditGenerationMethod>;
   allDevelopersPage: Array<DevelopersPage>;
   allDoc: Array<Doc>;
   allEcologicalImpact: Array<EcologicalImpact>;
@@ -5352,11 +5305,6 @@ export type RootQueryCreditClassArgs = {
 
 
 export type RootQueryCreditTypeArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type RootQueryCreditGenerationMethodArgs = {
   id: Scalars['ID'];
 };
 
@@ -5729,14 +5677,6 @@ export type RootQueryAllCreditClassArgs = {
 export type RootQueryAllCreditTypeArgs = {
   where?: Maybe<CreditTypeFilter>;
   sort?: Maybe<Array<CreditTypeSorting>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-};
-
-
-export type RootQueryAllCreditGenerationMethodArgs = {
-  where?: Maybe<CreditGenerationMethodFilter>;
-  sort?: Maybe<Array<CreditGenerationMethodSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -7866,20 +7806,6 @@ export type AllCreditClassQuery = (
     )>, icon?: Maybe<(
       { __typename?: 'Image' }
       & ImageFieldsFragment
-    )>, creditType?: Maybe<(
-      { __typename?: 'CreditType' }
-      & Pick<CreditType, 'name'>
-      & { image?: Maybe<(
-        { __typename?: 'Image' }
-        & ImageFieldsFragment
-      )> }
-    )>, creditGenerationMethod?: Maybe<(
-      { __typename?: 'CreditGenerationMethod' }
-      & Pick<CreditGenerationMethod, 'name'>
-      & { image?: Maybe<(
-        { __typename?: 'Image' }
-        & ImageFieldsFragment
-      )> }
     )>, ecologicalImpact?: Maybe<Array<Maybe<(
       { __typename?: 'EcologicalImpactRelation' }
       & EcologicalImpactRelationFieldsFragment
@@ -8135,6 +8061,21 @@ export type AllMethodologyReviewProcessPageQuery = (
     )>, metadata?: Maybe<(
       { __typename?: 'PageMetadata' }
       & PageMetadataFieldsFragment
+    )> }
+  )> }
+);
+
+export type AllOffsetMethodQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllOffsetMethodQuery = (
+  { __typename?: 'RootQuery' }
+  & { allOffsetMethod: Array<(
+    { __typename?: 'OffsetMethod' }
+    & Pick<OffsetMethod, 'name'>
+    & { icon?: Maybe<(
+      { __typename?: 'Image' }
+      & ImageFieldsFragment
     )> }
   )> }
 );
@@ -9607,18 +9548,6 @@ export const AllCreditClassDocument = gql`
     icon {
       ...imageFields
     }
-    creditType {
-      name
-      image {
-        ...imageFields
-      }
-    }
-    creditGenerationMethod {
-      name
-      image {
-        ...imageFields
-      }
-    }
     ecologicalImpact {
       ...ecologicalImpactRelationFields
     }
@@ -10028,6 +9957,43 @@ export function useAllMethodologyReviewProcessPageLazyQuery(baseOptions?: Apollo
 export type AllMethodologyReviewProcessPageQueryHookResult = ReturnType<typeof useAllMethodologyReviewProcessPageQuery>;
 export type AllMethodologyReviewProcessPageLazyQueryHookResult = ReturnType<typeof useAllMethodologyReviewProcessPageLazyQuery>;
 export type AllMethodologyReviewProcessPageQueryResult = Apollo.QueryResult<AllMethodologyReviewProcessPageQuery, AllMethodologyReviewProcessPageQueryVariables>;
+export const AllOffsetMethodDocument = gql`
+    query allOffsetMethod {
+  allOffsetMethod {
+    name
+    icon {
+      ...imageFields
+    }
+  }
+}
+    ${ImageFieldsFragmentDoc}`;
+
+/**
+ * __useAllOffsetMethodQuery__
+ *
+ * To run a query within a React component, call `useAllOffsetMethodQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllOffsetMethodQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllOffsetMethodQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllOffsetMethodQuery(baseOptions?: Apollo.QueryHookOptions<AllOffsetMethodQuery, AllOffsetMethodQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllOffsetMethodQuery, AllOffsetMethodQueryVariables>(AllOffsetMethodDocument, options);
+      }
+export function useAllOffsetMethodLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllOffsetMethodQuery, AllOffsetMethodQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllOffsetMethodQuery, AllOffsetMethodQueryVariables>(AllOffsetMethodDocument, options);
+        }
+export type AllOffsetMethodQueryHookResult = ReturnType<typeof useAllOffsetMethodQuery>;
+export type AllOffsetMethodLazyQueryHookResult = ReturnType<typeof useAllOffsetMethodLazyQuery>;
+export type AllOffsetMethodQueryResult = Apollo.QueryResult<AllOffsetMethodQuery, AllOffsetMethodQueryVariables>;
 export const AllProjectActivityDocument = gql`
     query allProjectActivity {
   allProjectActivity {

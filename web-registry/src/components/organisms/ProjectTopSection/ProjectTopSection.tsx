@@ -19,7 +19,9 @@ import { getSanityImgSrc } from 'lib/imgSrc';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllActivityQuery } from 'lib/queries/react-query/sanity/getAllActivityQuery/getAllActivityQuery';
 import { getAllCreditCertificationQuery } from 'lib/queries/react-query/sanity/getAllCreditCertificationQuery/getAllCreditCertificationQuery';
+import { getAllCreditTypeQuery } from 'lib/queries/react-query/sanity/getAllCreditTypeQuery/getAllCreditTypeQuery';
 import { getAllEcosystemQuery } from 'lib/queries/react-query/sanity/getAllEcosystemQuery/getAllEcosystemQuery';
+import { getAllOffsetMethodQuery } from 'lib/queries/react-query/sanity/getAllOffsetMethodQuery/getAllOffsetMethodQuery';
 import { getAllProjectRatingQuery } from 'lib/queries/react-query/sanity/getAllProjectRatingQuery/getAllProjectRatingQuery';
 
 import {
@@ -38,7 +40,6 @@ import {
 import { ProjectTopSectionProps } from './ProjectTopSection.types';
 import {
   getIconsMapping,
-  getOffsetGenerationMethod,
   getRatingsAndCertificationsData,
   getSdgsImages,
   parseMethodologies,
@@ -53,7 +54,6 @@ function ProjectTopSection({
   projectMetadata,
   projectPageMetadata,
   creditClassSanity,
-  sanityCreditTypeData,
   geojson,
   isGISFile,
   onChainProjectId,
@@ -95,10 +95,18 @@ function ProjectTopSection({
     }),
   );
 
+  const { data: sanityCreditTypeData } = useQuery(
+    getAllCreditTypeQuery({ sanityClient, enabled: !!sanityClient }),
+  );
   const creditTypeSanity = sanityCreditTypeData?.allCreditType?.find(
     creditType =>
       creditType.name?.toLowerCase() === creditTypeData?.creditType?.name,
   );
+
+  const { data: sanityOffsetMethodData } = useQuery(
+    getAllOffsetMethodQuery({ sanityClient, enabled: !!sanityClient }),
+  );
+
   const { data: allProjectActivityData } = useQuery(
     getAllActivityQuery({
       sanityClient,
@@ -132,6 +140,9 @@ function ProjectTopSection({
   const creditCertificationIconsMapping = getIconsMapping({
     data: allCreditCertification?.allCreditCertification,
   });
+  const offsetMethodIconsMapping = getIconsMapping({
+    data: sanityOffsetMethodData?.allOffsetMethod,
+  });
 
   const certifications = creditClassMetadata?.['regen:certifications'];
 
@@ -148,7 +159,12 @@ function ProjectTopSection({
     methodologies: creditClassMetadata?.['regen:approvedMethodologies'],
   });
   const methodology = projectMethodology ?? creditClassMethodology;
-  const generationMethod = getOffsetGenerationMethod(creditClassMetadata);
+  const generationMethods = creditClassMetadata?.[
+    'regen:offsetGenerationMethod'
+  ]?.map(method => ({
+    name: method,
+    icon: { src: offsetMethodIconsMapping?.[method] ?? '' },
+  }));
 
   const projectActivity =
     projectMetadata?.['regen:projectActivity']?.['schema:name'];
@@ -226,7 +242,7 @@ function ProjectTopSection({
             onChainCreditClassId={onChainCreditClassId}
             creditTypeName={creditTypeData?.creditType?.name}
             creditTypeImage={creditTypeSanity?.image?.asset?.url}
-            generationMethod={generationMethod}
+            generationMethods={generationMethods}
             methodology={methodology}
           />
           <Box>

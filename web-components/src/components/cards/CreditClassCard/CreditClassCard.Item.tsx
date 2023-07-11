@@ -11,30 +11,32 @@ import { isLinkItem, isTextItem } from './CreditClassCard.utils';
 
 type Props = {
   label: string;
-  item?: CreditClassCardItemType;
+  items?: CreditClassCardItemType[];
   link?: Partial<LinkType>;
   sx?: SxProps<Theme>;
 };
 
-export const CreditClassCardItem = ({ label, link, item, sx }: Props) => {
-  const { name, icon } = item ?? {};
-
+export const CreditClassCardItem = ({ label, link, items, sx }: Props) => {
   return (
     <Flex sx={[...(Array.isArray(sx) ? sx : [sx])]} flexDirection="column">
       <Label size="xs" sx={{ mb: 1.25 }}>
         {label}
       </Label>
       <Box component="ul" sx={{ pl: 0, my: 0 }}>
-        <Flex component="li" key={name} alignItems="center">
-          {icon && icon.src && (
-            <Box
-              component="img"
-              src={icon?.src}
-              alt={icon?.alt}
-              sx={{ mr: 2.5, width: 24, height: 24 }}
-            />
-          )}
-          {name && <Body>{name}</Body>}
+        <Flex component="li" alignItems="center">
+          {items?.map(({ name, icon }) => (
+            <Flex key={name}>
+              {icon && icon.src && (
+                <Box
+                  component="img"
+                  src={icon?.src}
+                  alt={icon?.alt}
+                  sx={{ mr: 2.5, width: 24, height: 24 }}
+                />
+              )}
+              {name && <Body>{name}</Body>}
+            </Flex>
+          ))}
           {isLinkItem(link) && (
             <Link
               href={link.href}

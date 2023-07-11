@@ -21,6 +21,7 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { EcocreditsSection } from 'components/molecules';
 import { CreditBatches } from 'components/organisms';
+import { useTags } from 'hooks/useTags';
 
 import { AdditionalInfo } from '../CreditClassDetails.AdditionalInfo';
 import { MemoizedProjects as Projects } from '../CreditClassDetails.Projects';
@@ -51,6 +52,7 @@ const CreditClassDetailsSimple: React.FC<
   metadata,
 }) => {
   const { classes: styles, cx } = useCreditClassDetailsSimpleStyles();
+
   const displayName = getCreditClassDisplayName(onChainClass.id, metadata);
   const image = content?.image;
   const imageSrc = metadata?.['schema:image'] || getSanityImgSrc(image);
@@ -66,6 +68,16 @@ const CreditClassDetailsSimple: React.FC<
       enabled: !!ecocreditClient && !!onChainClass.creditTypeAbbrev,
     }),
   );
+
+  const activities =
+    metadata?.['regen:projectActivities'] ||
+    metadata?.['regen:eligibleActivities'];
+  const ecosystemTypes = metadata?.['regen:ecosystemType'];
+
+  const { activityTags, ecosystemTags } = useTags({
+    activities,
+    ecosystemTypes,
+  });
 
   return (
     <Box

@@ -1,9 +1,9 @@
 import { Box } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
+import { ProjectTagType } from 'web-components/lib/components/molecules/ProjectTag/ProjectTag.types';
+import { CollapseList } from 'web-components/lib/components/organisms/CollapseList/CollapseList';
+import { ProjectTags } from 'web-components/lib/components/organisms/ProjectTags/ProjectTags';
 
-import { ProjectTagType } from '../molecules/ProjectTag/ProjectTag.types';
-import { CollapseList } from '../organisms/CollapseList/CollapseList';
-import { ProjectTags } from '../organisms/ProjectTags/ProjectTags';
 import Card from './Card';
 import ProjectImpactCard, {
   ProjectImpactCardProps,

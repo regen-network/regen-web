@@ -49,30 +49,31 @@ export const ProjectDetailsSection: React.FC<ProjectDetailsSectionProps> = ({
   const { party } = usePartyInfos({ partyByAddr });
 
   const projectAdmin = getDisplayPartyOrAddress(adminAddr, party);
+  const hasCredibilityCards = header && credibilityCards?.length;
 
   return (
     <Section visibleOverflow sx={{ root: { pb: [20, 21.25] } }}>
+      {hasCredibilityCards && (
+        <Box sx={{ pb: { xs: 7.5, sm: 12.5 } }}>
+          <Label size="sm" mobileSize="sm" color="info.main">
+            {header.label}
+          </Label>
+          <Title variant="h2" py={3}>
+            {header.title}
+          </Title>
+          <Body size="lg" mobileSize="md" maxWidth={718}>
+            <BlockContent content={header.descriptionRaw} />
+          </Body>
+        </Box>
+      )}
       <ProjectDetailsSectionStakeholders
         program={program}
         projectAdmin={projectAdmin}
         projectDeveloper={projectDeveloper}
         projectVerifier={projectVerifier}
       />
-      {header && credibilityCards?.length && (
+      {hasCredibilityCards && (
         <ResponsiveSlider
-          renderTitle={() => (
-            <Box>
-              <Label size="sm" mobileSize="sm" color="info.main">
-                {header.label}
-              </Label>
-              <Title variant="h2" py={3}>
-                {header.title}
-              </Title>
-              <Body size="lg" mobileSize="md" maxWidth={718}>
-                <BlockContent content={header.descriptionRaw} />
-              </Body>
-            </Box>
-          )}
           visibleOverflow
           arrows
           mobileItemWidth="90%"

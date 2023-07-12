@@ -1700,6 +1700,7 @@ export type CreditClass = Document & {
   image?: Maybe<CustomImage>;
   descriptionRaw?: Maybe<Scalars['JSON']>;
   shortDescriptionRaw?: Maybe<Scalars['JSON']>;
+  credibilityCards?: Maybe<Array<Maybe<DetailsCard>>>;
   ecologicalImpact?: Maybe<Array<Maybe<EcologicalImpactRelation>>>;
   overviewCards?: Maybe<Array<Maybe<Card>>>;
   sdgs?: Maybe<Array<Maybe<Sdg>>>;
@@ -1959,6 +1960,25 @@ export type DatetimeFilter = {
   lt?: Maybe<Scalars['DateTime']>;
   /** Checks if the value is lesser than or equal to the given input. */
   lte?: Maybe<Scalars['DateTime']>;
+};
+
+export type DetailsCard = {
+  __typename?: 'DetailsCard';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  credibilityCard?: Maybe<CredibilityCard>;
+  claims?: Maybe<Array<Maybe<Claim>>>;
+};
+
+export type DetailsCardFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  credibilityCard?: Maybe<CredibilityCardFilter>;
+};
+
+export type DetailsCardSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
 };
 
 export type DetailsSection = {
@@ -4636,7 +4656,7 @@ export type Project = Document & {
   projectName?: Maybe<Scalars['String']>;
   /** on-chain project id */
   projectId?: Maybe<Scalars['String']>;
-  credibilityCards?: Maybe<Array<Maybe<ProjectDetailsCard>>>;
+  credibilityCards?: Maybe<Array<Maybe<DetailsCard>>>;
 };
 
 export type ProjectActivity = Document & {
@@ -4678,25 +4698,6 @@ export type ProjectActivitySorting = {
   _key?: Maybe<SortOrder>;
   name?: Maybe<SortOrder>;
   icon?: Maybe<ImageSorting>;
-};
-
-export type ProjectDetailsCard = {
-  __typename?: 'ProjectDetailsCard';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  credibilityCard?: Maybe<CredibilityCard>;
-  claims?: Maybe<Array<Maybe<Claim>>>;
-};
-
-export type ProjectDetailsCardFilter = {
-  _key?: Maybe<StringFilter>;
-  _type?: Maybe<StringFilter>;
-  credibilityCard?: Maybe<CredibilityCardFilter>;
-};
-
-export type ProjectDetailsCardSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
 };
 
 export type ProjectEcosystem = Document & {
@@ -7862,7 +7863,10 @@ export type AllCreditClassQuery = (
     )>, icon?: Maybe<(
       { __typename?: 'Image' }
       & ImageFieldsFragment
-    )>, ecologicalImpact?: Maybe<Array<Maybe<(
+    )>, credibilityCards?: Maybe<Array<Maybe<(
+      { __typename?: 'DetailsCard' }
+      & DetailsCardFieldsFragment
+    )>>>, ecologicalImpact?: Maybe<Array<Maybe<(
       { __typename?: 'EcologicalImpactRelation' }
       & EcologicalImpactRelationFieldsFragment
     )>>>, overviewCards?: Maybe<Array<Maybe<(
@@ -7931,6 +7935,20 @@ export type AllCreditClassQuery = (
           )> }
         )>>> }
       )> }
+    )> }
+  )> }
+);
+
+export type AllCreditClassPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllCreditClassPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allCreditClassPage: Array<(
+    { __typename?: 'CreditClassPage' }
+    & { creditClassDetailsSection?: Maybe<(
+      { __typename?: 'DetailsSection' }
+      & Pick<DetailsSection, 'label' | 'title' | 'descriptionRaw'>
     )> }
   )> }
 );
@@ -8563,21 +8581,8 @@ export type ProjectByIdQuery = (
   & { allProject: Array<(
     { __typename?: 'Project' }
     & { credibilityCards?: Maybe<Array<Maybe<(
-      { __typename?: 'ProjectDetailsCard' }
-      & { credibilityCard?: Maybe<(
-        { __typename?: 'CredibilityCard' }
-        & Pick<CredibilityCard, 'title' | 'descriptionRaw'>
-        & { icon?: Maybe<(
-          { __typename?: 'Image' }
-          & { asset?: Maybe<(
-            { __typename?: 'SanityImageAsset' }
-            & Pick<SanityImageAsset, 'altText' | 'url'>
-          )> }
-        )> }
-      )>, claims?: Maybe<Array<Maybe<(
-        { __typename?: 'Claim' }
-        & Pick<Claim, 'description'>
-      )>>> }
+      { __typename?: 'DetailsCard' }
+      & DetailsCardFieldsFragment
     )>>> }
   )> }
 );
@@ -8753,6 +8758,24 @@ export type BuyersQuoteSectionFieldsFragment = (
     { __typename?: 'Image' }
     & ImageFieldsFragment
   )> }
+);
+
+export type DetailsCardFieldsFragment = (
+  { __typename?: 'DetailsCard' }
+  & { credibilityCard?: Maybe<(
+    { __typename?: 'CredibilityCard' }
+    & Pick<CredibilityCard, 'title' | 'descriptionRaw'>
+    & { icon?: Maybe<(
+      { __typename?: 'Image' }
+      & { asset?: Maybe<(
+        { __typename?: 'SanityImageAsset' }
+        & Pick<SanityImageAsset, 'altText' | 'url'>
+      )> }
+    )> }
+  )>, claims?: Maybe<Array<Maybe<(
+    { __typename?: 'Claim' }
+    & Pick<Claim, 'description'>
+  )>>> }
 );
 
 export type PersonFieldsFragment = (
@@ -9215,6 +9238,23 @@ export const BuyersQuoteSectionFieldsFragmentDoc = gql`
     ${PersonFieldsFragmentDoc}
 ${CustomImageFieldsFragmentDoc}
 ${ImageFieldsFragmentDoc}`;
+export const DetailsCardFieldsFragmentDoc = gql`
+    fragment detailsCardFields on DetailsCard {
+  credibilityCard {
+    title
+    descriptionRaw
+    icon {
+      asset {
+        altText
+        url
+      }
+    }
+  }
+  claims {
+    description
+  }
+}
+    `;
 export const AllBasketDetailsPageDocument = gql`
     query allBasketDetailsPage {
   allBasketDetailsPage {
@@ -9604,6 +9644,9 @@ export const AllCreditClassDocument = gql`
     icon {
       ...imageFields
     }
+    credibilityCards {
+      ...detailsCardFields
+    }
     ecologicalImpact {
       ...ecologicalImpactRelationFields
     }
@@ -9674,6 +9717,7 @@ export const AllCreditClassDocument = gql`
 }
     ${CustomImageFieldsFragmentDoc}
 ${ImageFieldsFragmentDoc}
+${DetailsCardFieldsFragmentDoc}
 ${EcologicalImpactRelationFieldsFragmentDoc}
 ${CardFieldsFragmentDoc}
 ${HeroSectionFieldsFragmentDoc}
@@ -9709,6 +9753,44 @@ export function useAllCreditClassLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type AllCreditClassQueryHookResult = ReturnType<typeof useAllCreditClassQuery>;
 export type AllCreditClassLazyQueryHookResult = ReturnType<typeof useAllCreditClassLazyQuery>;
 export type AllCreditClassQueryResult = Apollo.QueryResult<AllCreditClassQuery, AllCreditClassQueryVariables>;
+export const AllCreditClassPageDocument = gql`
+    query allCreditClassPage {
+  allCreditClassPage {
+    creditClassDetailsSection {
+      label
+      title
+      descriptionRaw
+    }
+  }
+}
+    `;
+
+/**
+ * __useAllCreditClassPageQuery__
+ *
+ * To run a query within a React component, call `useAllCreditClassPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllCreditClassPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllCreditClassPageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllCreditClassPageQuery(baseOptions?: Apollo.QueryHookOptions<AllCreditClassPageQuery, AllCreditClassPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllCreditClassPageQuery, AllCreditClassPageQueryVariables>(AllCreditClassPageDocument, options);
+      }
+export function useAllCreditClassPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllCreditClassPageQuery, AllCreditClassPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllCreditClassPageQuery, AllCreditClassPageQueryVariables>(AllCreditClassPageDocument, options);
+        }
+export type AllCreditClassPageQueryHookResult = ReturnType<typeof useAllCreditClassPageQuery>;
+export type AllCreditClassPageLazyQueryHookResult = ReturnType<typeof useAllCreditClassPageLazyQuery>;
+export type AllCreditClassPageQueryResult = Apollo.QueryResult<AllCreditClassPageQuery, AllCreditClassPageQueryVariables>;
 export const AllCreditTypeDocument = gql`
     query allCreditType {
   allCreditType {
@@ -10343,23 +10425,11 @@ export const ProjectByIdDocument = gql`
     query ProjectById($id: String!) {
   allProject(where: {projectId: {eq: $id}}) {
     credibilityCards {
-      credibilityCard {
-        title
-        descriptionRaw
-        icon {
-          asset {
-            altText
-            url
-          }
-        }
-      }
-      claims {
-        description
-      }
+      ...detailsCardFields
     }
   }
 }
-    `;
+    ${DetailsCardFieldsFragmentDoc}`;
 
 /**
  * __useProjectByIdQuery__

@@ -1,10 +1,9 @@
-import {
-  DetailsSection,
-  Maybe,
-  ProjectDetailsCard,
-} from 'generated/sanity-graphql';
+import { DetailsCard, DetailsSection, Maybe } from 'generated/sanity-graphql';
+import { CompactedNameUrl } from 'lib/rdf/types';
 
 export interface DetailsSectionProps {
   header?: Maybe<DetailsSection>;
-  credibilityCards?: Maybe<Array<Maybe<ProjectDetailsCard>>>;
+  credibilityCards?: Maybe<Array<Maybe<DetailsCard>>>;
+  methodology?: CompactedNameUrl;
+  creditClassDoc?: CompactedNameUrl;
 }

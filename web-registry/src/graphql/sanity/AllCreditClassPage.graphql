@@ -1,0 +1,9 @@
+query allCreditClassPage {
+  allCreditClassPage {
+    creditClassDetailsSection {
+      label
+      title
+      descriptionRaw
+    }
+  }
+}

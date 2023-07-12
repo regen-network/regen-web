@@ -20,8 +20,11 @@ import { useWallet } from 'lib/wallet/wallet';
 import { OFFSET_GENERATION_METHOD } from 'pages/Buyers/Buyers.constants';
 import { EcocreditsSection } from 'components/molecules';
 import { CreditBatches } from 'components/organisms';
+import { DetailsSection } from 'components/organisms/DetailsSection/DetailsSection';
+import { parseMethodologies } from 'components/organisms/ProjectTopSection/ProjectTopSection.utils';
 import { useTags } from 'hooks/useTags';
 
+import { client as sanityClient } from '../../../lib/clients/sanity';
 import { AdditionalInfo } from '../CreditClassDetails.AdditionalInfo';
 import { MemoizedProjects as Projects } from '../CreditClassDetails.Projects';
 import {
@@ -73,6 +76,16 @@ const CreditClassDetailsSimple: React.FC<
   const { activityTags, ecosystemTags } = useTags({
     activities,
     ecosystemTypes,
+  });
+
+  const { data: sanityCreditClassPageData } = useQuery(
+    getAllCreditClassPageQuery({ sanityClient, enabled: !!sanityClient }),
+  );
+  const sanityCreditClassPage =
+    sanityCreditClassPageData?.allCreditClassPage?.[0];
+
+  const methodology = parseMethodologies({
+    methodologies: metadata?.['regen:approvedMethodologies'],
   });
 
   return (
@@ -188,12 +201,17 @@ const CreditClassDetailsSimple: React.FC<
           />
         </Box>
       </EcocreditsSection>
-
-      <CreditClassDetailsStakeholders
-        admin={admin}
-        issuers={issuers}
-        program={program}
-      />
+      <DetailsSection
+        header={sanityCreditClassPage?.creditClassDetailsSection}
+        credibilityCards={content?.credibilityCards}
+        methodology={methodology}
+      >
+        <CreditClassDetailsStakeholders
+          admin={admin}
+          issuers={issuers}
+          program={program}
+        />
+      </DetailsSection>
 
       <Projects classId={onChainClass.id} />
       <div

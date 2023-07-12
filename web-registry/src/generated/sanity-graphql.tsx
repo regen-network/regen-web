@@ -1725,6 +1725,44 @@ export type CreditClassFilter = {
   icon?: Maybe<ImageFilter>;
 };
 
+export type CreditClassPage = Document & {
+  __typename?: 'CreditClassPage';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  creditClassDetailsSection?: Maybe<DetailsSection>;
+};
+
+export type CreditClassPageFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  creditClassDetailsSection?: Maybe<DetailsSectionFilter>;
+};
+
+export type CreditClassPageSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  creditClassDetailsSection?: Maybe<DetailsSectionSorting>;
+};
+
 export type CreditClassSorting = {
   _id?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
@@ -1780,6 +1818,7 @@ export type CreditType = Document & {
   _key?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   image?: Maybe<Image>;
+  largeImage?: Maybe<Image>;
 };
 
 export type CreditTypeFilter = {
@@ -1793,6 +1832,7 @@ export type CreditTypeFilter = {
   _key?: Maybe<StringFilter>;
   name?: Maybe<StringFilter>;
   image?: Maybe<ImageFilter>;
+  largeImage?: Maybe<ImageFilter>;
 };
 
 export type CreditTypeSection = {
@@ -1833,6 +1873,7 @@ export type CreditTypeSorting = {
   _key?: Maybe<SortOrder>;
   name?: Maybe<SortOrder>;
   image?: Maybe<ImageSorting>;
+  largeImage?: Maybe<ImageSorting>;
 };
 
 export type CrossDatasetReference = {
@@ -1918,6 +1959,29 @@ export type DatetimeFilter = {
   lt?: Maybe<Scalars['DateTime']>;
   /** Checks if the value is lesser than or equal to the given input. */
   lte?: Maybe<Scalars['DateTime']>;
+};
+
+export type DetailsSection = {
+  __typename?: 'DetailsSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+};
+
+export type DetailsSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  label?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+};
+
+export type DetailsSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  label?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
 };
 
 export type DevApproachSection = {
@@ -4635,29 +4699,6 @@ export type ProjectDetailsCardSorting = {
   _type?: Maybe<SortOrder>;
 };
 
-export type ProjectDetailsSection = {
-  __typename?: 'ProjectDetailsSection';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  label?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  descriptionRaw?: Maybe<Scalars['JSON']>;
-};
-
-export type ProjectDetailsSectionFilter = {
-  _key?: Maybe<StringFilter>;
-  _type?: Maybe<StringFilter>;
-  label?: Maybe<StringFilter>;
-  title?: Maybe<StringFilter>;
-};
-
-export type ProjectDetailsSectionSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  label?: Maybe<SortOrder>;
-  title?: Maybe<SortOrder>;
-};
-
 export type ProjectEcosystem = Document & {
   __typename?: 'ProjectEcosystem';
   /** Document ID */
@@ -4727,7 +4768,7 @@ export type ProjectPage = Document & {
   _key?: Maybe<Scalars['String']>;
   /** This content will appear on all project pages */
   gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSection>;
-  projectDetailsSection?: Maybe<ProjectDetailsSection>;
+  projectDetailsSection?: Maybe<DetailsSection>;
   otcCard?: Maybe<ActionCard>;
 };
 
@@ -4741,7 +4782,7 @@ export type ProjectPageFilter = {
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
   gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSectionFilter>;
-  projectDetailsSection?: Maybe<ProjectDetailsSectionFilter>;
+  projectDetailsSection?: Maybe<DetailsSectionFilter>;
   otcCard?: Maybe<ActionCardFilter>;
 };
 
@@ -4752,7 +4793,7 @@ export type ProjectPageSorting = {
   _updatedAt?: Maybe<SortOrder>;
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
-  projectDetailsSection?: Maybe<ProjectDetailsSectionSorting>;
+  projectDetailsSection?: Maybe<DetailsSectionSorting>;
   otcCard?: Maybe<ActionCardSorting>;
 };
 
@@ -5111,6 +5152,7 @@ export type RootQuery = {
   CreateMethodologyPage?: Maybe<CreateMethodologyPage>;
   CreditCertification?: Maybe<CreditCertification>;
   CreditClass?: Maybe<CreditClass>;
+  CreditClassPage?: Maybe<CreditClassPage>;
   CreditType?: Maybe<CreditType>;
   DevelopersPage?: Maybe<DevelopersPage>;
   Doc?: Maybe<Doc>;
@@ -5176,6 +5218,7 @@ export type RootQuery = {
   allCreateMethodologyPage: Array<CreateMethodologyPage>;
   allCreditCertification: Array<CreditCertification>;
   allCreditClass: Array<CreditClass>;
+  allCreditClassPage: Array<CreditClassPage>;
   allCreditType: Array<CreditType>;
   allDevelopersPage: Array<DevelopersPage>;
   allDoc: Array<Doc>;
@@ -5300,6 +5343,11 @@ export type RootQueryCreditCertificationArgs = {
 
 
 export type RootQueryCreditClassArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryCreditClassPageArgs = {
   id: Scalars['ID'];
 };
 
@@ -5669,6 +5717,14 @@ export type RootQueryAllCreditCertificationArgs = {
 export type RootQueryAllCreditClassArgs = {
   where?: Maybe<CreditClassFilter>;
   sort?: Maybe<Array<CreditClassSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllCreditClassPageArgs = {
+  where?: Maybe<CreditClassPageFilter>;
+  sort?: Maybe<Array<CreditClassPageSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -8121,8 +8177,8 @@ export type AllProjectPageQuery = (
       { __typename?: 'GettingStartedResourcesSection' }
       & GettingStartedResourcesSectionFieldsFragment
     )>, projectDetailsSection?: Maybe<(
-      { __typename?: 'ProjectDetailsSection' }
-      & Pick<ProjectDetailsSection, 'label' | 'title' | 'descriptionRaw'>
+      { __typename?: 'DetailsSection' }
+      & Pick<DetailsSection, 'label' | 'title' | 'descriptionRaw'>
     )>, otcCard?: Maybe<(
       { __typename?: 'ActionCard' }
       & Pick<ActionCard, 'title' | 'descriptionRaw' | 'noteRaw'>

@@ -46,10 +46,15 @@ export const useCreditClassDetails = ({ onChainClass, metadata }: Params) => {
     data: sanityOffsetMethodData?.allOffsetMethod,
   });
   const generationMethods = metadata?.['regen:offsetGenerationMethod']?.map(
-    method => ({
-      name: method,
-      icon: { src: offsetMethodIconsMapping?.[method] ?? '' },
-    }),
+    method => {
+      const parsedMethod =
+        typeof method === 'string' ? method : method['@value'];
+
+      return {
+        name: parsedMethod,
+        icon: { src: offsetMethodIconsMapping?.[parsedMethod] ?? '' },
+      };
+    },
   );
 
   return { creditTypeData, creditTypeSanity, generationMethods };

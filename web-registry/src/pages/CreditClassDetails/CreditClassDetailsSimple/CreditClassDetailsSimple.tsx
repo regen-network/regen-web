@@ -3,10 +3,8 @@ import Box from '@mui/material/Box';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';
 
-import ProjectImpactCard, {
-  ProjectImpactCardProps,
-} from 'web-components/lib/components/cards/ProjectImpactCard/ProjectImpactCard';
-import { CollapseList } from 'web-components/lib/components/organisms/CollapseList/CollapseList';
+import { ProjectImpactCardProps } from 'web-components/lib/components/cards/ProjectImpactCard/ProjectImpactCard';
+import { ImpactTags } from 'web-components/lib/components/organisms/ImpactTags/ImpactTags';
 import ReadMore from 'web-components/lib/components/read-more';
 import { Label, Title } from 'web-components/lib/components/typography';
 import { Party } from 'web-components/lib/components/user/UserInfo';
@@ -21,9 +19,11 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { EcocreditsSection } from 'components/molecules';
 import { CreditBatches } from 'components/organisms';
+import { useTags } from 'hooks/useTags';
 
 import { AdditionalInfo } from '../CreditClassDetails.AdditionalInfo';
 import { MemoizedProjects as Projects } from '../CreditClassDetails.Projects';
+import { ELIGIBLE_ACTIVITIES } from './CreditClassDetailsSimple.constants';
 import { CreditClassDetailsStakeholders } from './CreditClassDetailsSimple.Stakeholders';
 import { useCreditClassDetailsSimpleStyles } from './CreditClassDetailsSimple.styles';
 import { getCreditClassDisplayName } from './CreditClassDetailsSimple.utils';
@@ -51,6 +51,7 @@ const CreditClassDetailsSimple: React.FC<
   metadata,
 }) => {
   const { classes: styles, cx } = useCreditClassDetailsSimpleStyles();
+
   const displayName = getCreditClassDisplayName(onChainClass.id, metadata);
   const image = content?.image;
   const imageSrc = metadata?.['schema:image'] || getSanityImgSrc(image);
@@ -66,6 +67,16 @@ const CreditClassDetailsSimple: React.FC<
       enabled: !!ecocreditClient && !!onChainClass.creditTypeAbbrev,
     }),
   );
+
+  const activities =
+    metadata?.['regen:projectActivities'] ||
+    metadata?.['regen:eligibleActivities'];
+  const ecosystemTypes = metadata?.['regen:ecosystemType'];
+
+  const { activityTags, ecosystemTags } = useTags({
+    activities,
+    ecosystemTypes,
+  });
 
   return (
     <Box
@@ -125,21 +136,12 @@ const CreditClassDetailsSimple: React.FC<
               creditTypeName={creditTypeData?.creditType?.name}
             />
           </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-          >
-            <CollapseList
-              sx={{ pb: [7.5, 10], maxWidth: 367 }}
-              items={impactCards.map(card => (
-                <Box key={card.name} sx={{ pb: [2.5, 4.25] }}>
-                  <ProjectImpactCard {...card} />
-                </Box>
-              ))}
-            />
-          </Box>
+          <ImpactTags
+            impact={impactCards}
+            activities={activityTags}
+            ecosystems={ecosystemTags}
+            activitiesLabel={ELIGIBLE_ACTIVITIES}
+          />
         </Box>
       </EcocreditsSection>
 

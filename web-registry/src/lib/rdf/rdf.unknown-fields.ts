@@ -25,6 +25,7 @@ const knownClassFields: KnownClassFields[] = [
   'regen:offsetGenerationMethod',
   'regen:ecosystemType',
   'regen:projectActivities',
+  'regen:eligibleActivities',
   'regen:carbonOffsetStandard',
   'regen:tokenizationSource',
   'regen:certifications',

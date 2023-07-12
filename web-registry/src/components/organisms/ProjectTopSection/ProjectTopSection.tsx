@@ -4,10 +4,9 @@ import { useQuery } from '@tanstack/react-query';
 import { TRANSPARENT_PIXEL } from 'utils/image/transparentPixel';
 
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
-import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import { ActionCard } from 'web-components/lib/components/molecules/ActionCard/ActionCard';
-import { ProjectTagType } from 'web-components/lib/components/molecules/ProjectTag/ProjectTag.types';
 import { RoundLogoItemsList } from 'web-components/lib/components/molecules/RoundLogoItemsList/RoundLogoItemsList';
+import { ImpactTags } from 'web-components/lib/components/organisms/ImpactTags/ImpactTags';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
 import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
@@ -17,10 +16,8 @@ import { client as sanityClient } from 'lib/clients/sanity';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { getSanityImgSrc } from 'lib/imgSrc';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
-import { getAllActivityQuery } from 'lib/queries/react-query/sanity/getAllActivityQuery/getAllActivityQuery';
 import { getAllCreditCertificationQuery } from 'lib/queries/react-query/sanity/getAllCreditCertificationQuery/getAllCreditCertificationQuery';
 import { getAllCreditTypeQuery } from 'lib/queries/react-query/sanity/getAllCreditTypeQuery/getAllCreditTypeQuery';
-import { getAllEcosystemQuery } from 'lib/queries/react-query/sanity/getAllEcosystemQuery/getAllEcosystemQuery';
 import { getAllOffsetMethodQuery } from 'lib/queries/react-query/sanity/getAllOffsetMethodQuery/getAllOffsetMethodQuery';
 import { getAllProjectRatingQuery } from 'lib/queries/react-query/sanity/getAllProjectRatingQuery/getAllProjectRatingQuery';
 
@@ -29,6 +26,7 @@ import {
   IMAGE_STORAGE_BASE_URL,
   MAPBOX_TOKEN,
 } from 'components/templates/ProjectDetails/ProjectDetails.config';
+import { useTags } from 'hooks/useTags';
 
 import useImpact from '../../../pages/CreditClassDetails/hooks/useImpact';
 import { ProjectBatchTotals } from '../../molecules';
@@ -102,21 +100,10 @@ function ProjectTopSection({
     creditType =>
       creditType.name?.toLowerCase() === creditTypeData?.creditType?.name,
   );
-
   const { data: sanityOffsetMethodData } = useQuery(
     getAllOffsetMethodQuery({ sanityClient, enabled: !!sanityClient }),
   );
 
-  const { data: allProjectActivityData } = useQuery(
-    getAllActivityQuery({
-      sanityClient,
-    }),
-  );
-  const { data: allProjectEcosystemData } = useQuery(
-    getAllEcosystemQuery({
-      sanityClient,
-    }),
-  );
   const { data: allProjectRatingData } = useQuery(
     getAllProjectRatingQuery({
       sanityClient,
@@ -128,12 +115,6 @@ function ProjectTopSection({
     }),
   );
 
-  const projectActivityIconsMapping = getIconsMapping({
-    data: allProjectActivityData?.allProjectActivity,
-  });
-  const projectEcosystemIconsMapping = getIconsMapping({
-    data: allProjectEcosystemData?.allProjectEcosystem,
-  });
   const projectRatingIconsMapping = getIconsMapping({
     data: allProjectRatingData?.allProjectRating,
   });
@@ -168,25 +149,11 @@ function ProjectTopSection({
 
   const projectActivity =
     projectMetadata?.['regen:projectActivity']?.['schema:name'];
-  const activityTags: ProjectTagType[] | undefined = projectActivity
-    ? [
-        {
-          name: projectActivity,
-          icon: {
-            src: projectActivityIconsMapping?.[projectActivity] ?? '',
-          },
-        },
-      ]
-    : undefined;
-
-  const ecosystemTags: ProjectTagType[] | undefined = creditClassMetadata?.[
-    'regen:ecosystemType'
-  ]?.map(ecosystem => ({
-    name: ecosystem,
-    icon: {
-      src: projectEcosystemIconsMapping?.[ecosystem] ?? '',
-    },
-  }));
+  const ecosystemTypes = creditClassMetadata?.['regen:ecosystemType'];
+  const { activityTags, ecosystemTags } = useTags({
+    activities: projectActivity ? [projectActivity] : undefined,
+    ecosystemTypes,
+  });
 
   const impact = useImpact({ coBenefitsIRIs, primaryImpactIRI });
   const hasStandardLogo = impact.some(item => !!item.standard);
@@ -286,8 +253,8 @@ function ProjectTopSection({
             </div>
           )}
         </Grid>
-        <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
-          <ProjectTopCard
+        <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 5 } }}>
+          <ImpactTags
             activities={activityTags}
             ecosystems={ecosystemTags}
             impact={impact.map(

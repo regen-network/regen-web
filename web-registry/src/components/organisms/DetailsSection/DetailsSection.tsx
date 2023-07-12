@@ -1,10 +1,4 @@
-import {
-  ApolloClient,
-  NormalizedCacheObject,
-  useApolloClient,
-} from '@apollo/client';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { CredibilityCard } from 'web-components/lib/components/cards/CredibilityCard/CredibilityCard';
@@ -13,42 +7,16 @@ import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSl
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
+import { useSectionStyles } from './DetailsSection.styles';
+import { DetailsSectionProps } from './DetailsSection.types';
 
-import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
-
-import { ProjectDetailsSectionStakeholders } from './ProjectDetailsSection.Stakeholders';
-import { useSectionStyles } from './ProjectDetailsSection.styles';
-import { ProjectDetailsSectionProps } from './ProjectDetailsSection.types';
-import { getDisplayPartyOrAddress } from './ProjectDetailsSection.utils';
-
-export const ProjectDetailsSection: React.FC<ProjectDetailsSectionProps> = ({
-  header,
-  credibilityCards,
-  program,
-  projectDeveloper,
-  projectVerifier,
-  adminAddr,
-}) => {
+export const DetailsSection: React.FC<
+  React.PropsWithChildren<DetailsSectionProps>
+> = ({ header, credibilityCards, children }) => {
   const theme = useTheme<Theme>();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { classes } = useSectionStyles();
 
-  const graphqlClient =
-    useApolloClient() as ApolloClient<NormalizedCacheObject>;
-
-  const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
-  const { data: partyByAddr } = useQuery(
-    getPartyByAddrQuery({
-      client: graphqlClient,
-      addr: adminAddr ?? '',
-      enabled: !!adminAddr && !!graphqlClient && !!csrfData,
-    }),
-  );
-  const { party } = usePartyInfos({ partyByAddr });
-
-  const projectAdmin = getDisplayPartyOrAddress(adminAddr, party);
   const hasCredibilityCards = header && credibilityCards?.length;
 
   return (
@@ -66,12 +34,7 @@ export const ProjectDetailsSection: React.FC<ProjectDetailsSectionProps> = ({
           </Body>
         </Box>
       )}
-      <ProjectDetailsSectionStakeholders
-        program={program}
-        projectAdmin={projectAdmin}
-        projectDeveloper={projectDeveloper}
-        projectVerifier={projectVerifier}
-      />
+      {children}
       {hasCredibilityCards && (
         <ResponsiveSlider
           visibleOverflow

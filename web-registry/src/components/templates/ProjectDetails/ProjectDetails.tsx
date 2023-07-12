@@ -35,8 +35,8 @@ import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellO
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
+import { DetailsSection } from 'components/organisms/DetailsSection/DetailsSection';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
-import { ProjectDetailsSection } from 'components/organisms/ProjectDetailsSection/ProjectDetailsSection';
 import { ProjectStorySection } from 'components/organisms/ProjectStorySection/ProjectStorySection';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { AVG_PRICE_TOOLTIP_PROJECT } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants';
@@ -50,13 +50,14 @@ import { ProjectTopSection } from '../../organisms';
 import useGeojson from './hooks/useGeojson';
 import useSeo from './hooks/useSeo';
 import { useSortedDocuments } from './hooks/useSortedDocuments';
+import { useStakeholders } from './hooks/useStakeholders';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProjects';
+import { ProjectDetailsStakeholders } from './ProjectDetails.Stakeholders';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
 import {
   findSanityCreditClass,
   formatOtcCardData,
-  getDisplayParty,
   getIsOnChainId,
   getProjectGalleryPhotos,
   parseMedia,
@@ -206,21 +207,14 @@ function ProjectDetails(): JSX.Element {
     ? anchoredMetadata
     : offChainProjectMetadata;
 
-  const projectDeveloper = getDisplayParty(
-    anchoredMetadata?.['regen:projectDeveloper'],
-    offChainProject?.partyByDeveloperId,
+  const { projectDeveloper, projectVerifier, program, admin } = useStakeholders(
+    {
+      anchoredMetadata,
+      offChainProject,
+      onChainProject,
+      creditClassMetadata,
+    },
   );
-
-  const projectVerifier = getDisplayParty(
-    anchoredMetadata?.['regen:projectVerifier'],
-    offChainProject?.partyByVerifierId,
-  );
-
-  const program = getDisplayParty(
-    creditClassMetadata?.['regen:sourceRegistry'],
-    offChainProject?.creditClassByCreditClassId?.partyByRegistryId,
-  );
-
   const { geojson, isGISFile } = useGeojson({
     projectMetadata,
     projectPageMetadata: offChainProjectMetadata,
@@ -350,14 +344,17 @@ function ProjectDetails(): JSX.Element {
 
       {hasProjectPhotos && <Gallery photos={projectPhotos} />}
 
-      <ProjectDetailsSection
+      <DetailsSection
         header={sanityProjectPage?.projectDetailsSection}
         credibilityCards={sanityProjectData?.allProject?.[0]?.credibilityCards}
-        projectDeveloper={projectDeveloper}
-        projectVerifier={projectVerifier}
-        program={program}
-        adminAddr={onChainProject?.admin}
-      />
+      >
+        <ProjectDetailsStakeholders
+          projectDeveloper={projectDeveloper}
+          projectVerifier={projectVerifier}
+          program={program}
+          admin={admin}
+        />
+      </DetailsSection>
 
       <ProjectStorySection projectPageMetadata={offChainProjectMetadata} />
 

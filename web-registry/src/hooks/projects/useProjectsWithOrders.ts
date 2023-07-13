@@ -36,6 +36,7 @@ export interface ProjectsWithOrdersProps {
   skippedProjectId?: string; // to discard a specific project
   classId?: string; // to filter by class
   sort?: string;
+  creditClassFilter?: Record<string, boolean>;
 }
 
 /**
@@ -51,6 +52,7 @@ export function useProjectsWithOrders({
   classId,
   sort = '',
   projectId,
+  creditClassFilter = {},
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
   const { ecocreditClient, marketplaceClient, dataClient } = useLedger();
 
@@ -151,8 +153,19 @@ export function useProjectsWithOrders({
     project => !project.sanityCreditClassData,
   );
 
+  // Filter projects by class ID
+  const creditClassSelected = Object.keys(creditClassFilter).filter(
+    creditClassId => creditClassFilter[creditClassId],
+  );
+  const projectsFilteredByCreditClass = projectsWithOrderDataFiltered.filter(
+    project =>
+      creditClassSelected.length === 0
+        ? true
+        : creditClassSelected.includes(project.creditClassId ?? ''),
+  );
+
   const sortedProjects = sortProjects(
-    projectsWithOrderDataFiltered,
+    projectsFilteredByCreditClass,
     sort,
   ).slice(offset, limit ? offset + limit : undefined);
 

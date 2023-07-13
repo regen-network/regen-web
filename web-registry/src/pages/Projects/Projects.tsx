@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Box, SelectChangeEvent, useMediaQuery, useTheme } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
 import { spacing } from 'styles/spacing';
 
 import { Flex } from 'web-components/lib/components/box';
@@ -10,12 +11,14 @@ import { Loading } from 'web-components/lib/components/loading';
 import { Pagination } from 'web-components/lib/components/pagination/Pagination';
 import { Body, Subtitle } from 'web-components/lib/components/typography';
 import { pxToRem } from 'web-components/lib/theme/muiTheme';
+import { parseText } from 'web-components/lib/utils/textParser';
 
 import {
   useAllProjectsPageQuery,
   useAllSoldOutProjectsQuery,
 } from 'generated/sanity-graphql';
 import { client as sanityClient } from 'lib/clients/sanity';
+import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
@@ -30,6 +33,7 @@ import {
   PROJECTS_PER_PAGE,
   sortOptions,
 } from './Projects.config';
+import { ProjectsSideFilter } from './Projects.SideFilter';
 import { ProjectWithOrderData } from './Projects.types';
 import { getCreditsTooltip } from './utils/getCreditsTooltip';
 import { getIsSoldOut } from './utils/getIsSoldOut';
@@ -42,14 +46,20 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { track } = useTracker();
   const location = useLocation();
   const [useCommunityProjects, setUseCommunityProjects] = useState(false);
+  const [creditClassFilter, setCreditClassFilter] = useState({});
 
   // Page index starts at 1 for route
   // Page index starts at 0 for logic
   const page = Number(routePage) - 1;
 
+  const { data: creditClassesData } = useQuery(
+    getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+  );
+
   const { data: sanityProjectsPageData } = useAllProjectsPageQuery({
     client: sanityClient,
   });
+
   const gettingStartedResourcesSection =
     sanityProjectsPageData?.allProjectsPage?.[0]
       ?.gettingStartedResourcesSection;
@@ -70,6 +80,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
       sort,
       offset: page * PROJECTS_PER_PAGE,
       useCommunityProjects,
+      creditClassFilter,
     });
 
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
@@ -114,28 +125,46 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
               flex={1}
               sx={{
                 pb: 5,
-                flexWrap: { xs: 'wrap', md: 'nowrap' },
+                flexWrap: { xs: 'wrap', lg: 'nowrap' },
               }}
             >
-              <Flex order={0} flexGrow={1}>
+              <Flex
+                order={0}
+                flexGrow={1}
+                alignItems="center"
+                sx={{ mr: { md: 4 } }}
+              >
                 <Subtitle size="lg">Projects</Subtitle>
-                <Body size="lg"> ({projectsCount})</Body>
+                <Body size="lg" sx={{ whiteSpace: 'initial' }}>
+                  {' '}
+                  ({projectsCount})
+                </Body>
               </Flex>
-
+              <ProjectsSideFilter
+                creditClassesData={creditClassesData}
+                creditClassFilter={creditClassFilter}
+                setCreditClassFilter={setCreditClassFilter}
+                sx={{
+                  mt: { xs: 6.25, lg: 0 },
+                  mr: { xs: 0, lg: 7.5 },
+                  width: { xs: '100%', lg: 'auto' },
+                  order: { xs: 2, lg: 1 },
+                }}
+              />
               {hasCommunityProjects && (
                 <CommunityFilter
                   setUseCommunityProjects={setUseCommunityProjects}
                   sx={{
-                    mt: { xs: 6.25, md: 0 },
-                    mr: { xs: 0, md: 7.5 },
-                    width: { xs: '100%', md: 'auto' },
-                    order: { xs: 2, md: 1 },
+                    mt: { xs: 6.25, lg: 0 },
+                    mr: { xs: 0, lg: 7.5 },
+                    width: { xs: '100%', lg: 'auto' },
+                    order: { xs: 2, lg: 1 },
                   }}
                 />
               )}
               <Flex
                 sx={{
-                  order: { xs: 1, md: 2 },
+                  order: { xs: 1, lg: 2 },
                   alignItems: 'center',
                 }}
               >
@@ -143,7 +172,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
                   size="xs"
                   sx={{
                     width: [0, 0, 0, 43],
-                    visibility: { xs: 'hidden', md: 'visible' },
+                    visibility: { xs: 'hidden', lg: 'visible' },
                     whiteSpace: 'nowrap',
                     mr: 2,
                     color: 'info.dark',

@@ -3,3 +3,4 @@ export const SOLD_OUT_TOOLTIP =
 export const NO_CREDITS_TOOLTIP =
   'There are currently no open sell orders for this project.';
 export const COMMUNITY_FILTER = 'Show community credits';
+export const SIDE_FILTERS_BUTTON = 'Add filters';

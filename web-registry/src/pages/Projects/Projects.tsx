@@ -11,7 +11,6 @@ import { Loading } from 'web-components/lib/components/loading';
 import { Pagination } from 'web-components/lib/components/pagination/Pagination';
 import { Body, Subtitle } from 'web-components/lib/components/typography';
 import { pxToRem } from 'web-components/lib/theme/muiTheme';
-import { parseText } from 'web-components/lib/utils/textParser';
 
 import {
   useAllProjectsPageQuery,

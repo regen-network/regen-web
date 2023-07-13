@@ -1740,6 +1740,7 @@ export type CreditClassPage = Document & {
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
   creditClassDetailsSection?: Maybe<DetailsSection>;
+  creditImage?: Maybe<Image>;
 };
 
 export type CreditClassPageFilter = {
@@ -1752,6 +1753,7 @@ export type CreditClassPageFilter = {
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
   creditClassDetailsSection?: Maybe<DetailsSectionFilter>;
+  creditImage?: Maybe<ImageFilter>;
 };
 
 export type CreditClassPageSorting = {
@@ -1762,6 +1764,7 @@ export type CreditClassPageSorting = {
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
   creditClassDetailsSection?: Maybe<DetailsSectionSorting>;
+  creditImage?: Maybe<ImageSorting>;
 };
 
 export type CreditClassSorting = {
@@ -7949,6 +7952,9 @@ export type AllCreditClassPageQuery = (
     & { creditClassDetailsSection?: Maybe<(
       { __typename?: 'DetailsSection' }
       & Pick<DetailsSection, 'label' | 'title' | 'descriptionRaw'>
+    )>, creditImage?: Maybe<(
+      { __typename?: 'Image' }
+      & ImageFieldsFragment
     )> }
   )> }
 );
@@ -7962,6 +7968,9 @@ export type AllCreditTypeQuery = (
     { __typename?: 'CreditType' }
     & Pick<CreditType, 'name'>
     & { image?: Maybe<(
+      { __typename?: 'Image' }
+      & ImageFieldsFragment
+    )>, largeImage?: Maybe<(
       { __typename?: 'Image' }
       & ImageFieldsFragment
     )> }
@@ -9761,9 +9770,12 @@ export const AllCreditClassPageDocument = gql`
       title
       descriptionRaw
     }
+    creditImage {
+      ...imageFields
+    }
   }
 }
-    `;
+    ${ImageFieldsFragmentDoc}`;
 
 /**
  * __useAllCreditClassPageQuery__
@@ -9796,6 +9808,9 @@ export const AllCreditTypeDocument = gql`
   allCreditType {
     name
     image {
+      ...imageFields
+    }
+    largeImage {
       ...imageFields
     }
   }

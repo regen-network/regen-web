@@ -6,4 +6,9 @@ export interface DetailsSectionProps {
   credibilityCards?: Maybe<Array<Maybe<DetailsCard>>>;
   methodology?: CompactedNameUrl;
   creditClassDoc?: CompactedNameUrl;
+  credit?: {
+    creditImage?: string | null;
+    creditTypeUnit?: string;
+    creditTypeImage?: string | null;
+  };
 }

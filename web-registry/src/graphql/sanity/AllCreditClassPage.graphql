@@ -5,5 +5,8 @@ query allCreditClassPage {
       title
       descriptionRaw
     }
+    creditImage {
+      ...imageFields
+    }
   }
 }

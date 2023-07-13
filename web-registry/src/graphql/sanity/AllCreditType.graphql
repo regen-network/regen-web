@@ -4,5 +4,8 @@ query allCreditType {
     image {
       ...imageFields
     }
+    largeImage {
+      ...imageFields
+    }
   }
 }

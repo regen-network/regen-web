@@ -5,7 +5,6 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
-import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
@@ -16,11 +15,12 @@ import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
 import { openLink } from 'lib/button';
 import { client } from 'lib/clients/sanity';
-import { getMetadata } from 'lib/db/api/metadata-graph';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
-import { queryClassIssuers, queryEcoClassInfo } from 'lib/ecocredit/api';
+import { queryClassIssuers } from 'lib/ecocredit/api';
 import { onChainClassRegExp } from 'lib/ledger';
+import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
+import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getCreditClassByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getCreditClassByOnChainIdQuery/getCreditClassByOnChainIdQuery';
 import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 import { useWallet } from 'lib/wallet/wallet';
@@ -57,17 +57,10 @@ function CreditClassDetails({
   isLandSteward,
 }: CreditDetailsProps): JSX.Element {
   const { wallet } = useWallet();
-  const { dataClient } = useLedger();
+  const { dataClient, ecocreditClient } = useLedger();
   const { creditClassId } = useParams();
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
-
-  const [onChainClass, setOnChainClass] = useState<ClassInfo | undefined>(
-    undefined,
-  );
-  const [metadata, setMetadata] = useState<CreditClassMetadataLD | undefined>(
-    undefined,
-  );
   const [issuers, setIssuers] = useState<string[] | undefined>(undefined);
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
@@ -78,6 +71,28 @@ function CreditClassDetails({
     creditClass => creditClass.path === creditClassId,
   );
   const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
+
+  const { data: creditClassOnChain } = useQuery(
+    getClassQuery({
+      client: ecocreditClient,
+      request: {
+        classId: creditClassId ?? '',
+      },
+      enabled: !!ecocreditClient && !!creditClassId,
+    }),
+  );
+  const onChainClass = creditClassOnChain?.class;
+
+  const creditClassMetadataRes = useQuery(
+    getMetadataQuery({
+      iri: onChainClass?.metadata,
+      enabled: !!dataClient && !!onChainClass?.metadata,
+      dataClient,
+    }),
+  );
+  const metadata = creditClassMetadataRes?.data as
+    | CreditClassMetadataLD
+    | undefined;
 
   const isCommunityCredit = !content;
 
@@ -173,26 +188,6 @@ function CreditClassDetails({
       ),
     )
     .filter((party: Party | undefined): party is Party => !!party);
-
-  useEffect(() => {
-    const fetchData = async (): Promise<void> => {
-      if (creditClassId && isOnChainClassId) {
-        try {
-          const res = await queryEcoClassInfo(creditClassId);
-          const classInfo = res?.class;
-          if (classInfo) {
-            setOnChainClass(classInfo);
-            const data = await getMetadata(classInfo.metadata, dataClient);
-            setMetadata(data);
-          }
-        } catch (err) {
-          // eslint-disable-next-line
-          console.error(err);
-        }
-      }
-    };
-    fetchData();
-  }, [creditClassId, dataClient, isOnChainClassId]);
 
   useEffect(() => {
     const fetch = async (): Promise<void> => {

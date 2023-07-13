@@ -1,32 +1,37 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { useQuery } from '@tanstack/react-query';
 
+import { CardRibbon } from 'web-components/lib/components/atoms/CardRibbon/CardRibbon';
+import { CreditClassCardItem } from 'web-components/lib/components/cards/CreditClassCard/CreditClassCard.Item';
 import { ProjectImpactCardProps } from 'web-components/lib/components/cards/ProjectImpactCard/ProjectImpactCard';
 import { ImpactTags } from 'web-components/lib/components/organisms/ImpactTags/ImpactTags';
 import ReadMore from 'web-components/lib/components/read-more';
+import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
 import { Label, Title } from 'web-components/lib/components/typography';
 import { Party } from 'web-components/lib/components/user/UserInfo';
 
 import { CreditClassByOnChainIdQuery } from 'generated/graphql';
 import { CreditClass } from 'generated/sanity-graphql';
-import { useLedger } from 'ledger';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { getSanityImgSrc } from 'lib/imgSrc';
-import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { OFFSET_GENERATION_METHOD } from 'pages/Buyers/Buyers.constants';
 import { EcocreditsSection } from 'components/molecules';
 import { CreditBatches } from 'components/organisms';
 import { useTags } from 'hooks/useTags';
 
 import { AdditionalInfo } from '../CreditClassDetails.AdditionalInfo';
 import { MemoizedProjects as Projects } from '../CreditClassDetails.Projects';
-import { ELIGIBLE_ACTIVITIES } from './CreditClassDetailsSimple.constants';
+import {
+  CREDIT_CLASS_TOOLTIP,
+  ELIGIBLE_ACTIVITIES,
+} from './CreditClassDetailsSimple.constants';
 import { CreditClassDetailsStakeholders } from './CreditClassDetailsSimple.Stakeholders';
 import { useCreditClassDetailsSimpleStyles } from './CreditClassDetailsSimple.styles';
 import { getCreditClassDisplayName } from './CreditClassDetailsSimple.utils';
+import { useCreditClassDetails } from './hooks/useCreditClassDetails';
 
 interface CreditDetailsProps {
   dbClass?: CreditClassByOnChainIdQuery['creditClassByOnChainId'];
@@ -57,16 +62,8 @@ const CreditClassDetailsSimple: React.FC<
   const imageSrc = metadata?.['schema:image'] || getSanityImgSrc(image);
 
   const { isKeplrMobileWeb } = useWallet();
-  const { ecocreditClient } = useLedger();
-  const { data: creditTypeData } = useQuery(
-    getCreditTypeQuery({
-      client: ecocreditClient,
-      request: {
-        abbreviation: onChainClass.creditTypeAbbrev,
-      },
-      enabled: !!ecocreditClient && !!onChainClass.creditTypeAbbrev,
-    }),
-  );
+  const { creditTypeData, creditTypeSanity, generationMethods } =
+    useCreditClassDetails({ onChainClass, metadata });
 
   const activities =
     metadata?.['regen:projectActivities'] ||
@@ -104,10 +101,25 @@ const CreditClassDetailsSimple: React.FC<
               {imageSrc && (
                 <Box
                   sx={{
+                    position: 'relative',
                     mb: { sm: 12.5 },
                     mx: { xs: -4, sm: 0 },
                   }}
                 >
+                  <CardRibbon
+                    icon={{ src: creditTypeSanity?.image?.asset?.url ?? '' }}
+                    label={creditTypeSanity?.name ?? ''}
+                    labelSize="xs"
+                    labelMobileSize="xxs"
+                    sx={{
+                      position: 'absolute',
+                      left: 0,
+                      top: 30,
+                      zIndex: 1,
+                      py: { xs: 1, sm: 1.5 },
+                    }}
+                    sxIcon={{ with: 20, height: 20 }}
+                  />
                   <img
                     className={styles.image}
                     alt={image?.imageAlt || imageSrc || displayName}
@@ -115,10 +127,42 @@ const CreditClassDetailsSimple: React.FC<
                   />
                 </Box>
               )}
-              <Label size="sm" color="info.dark" mb={4} mt={{ xs: 9, sm: 0 }}>
-                credit class
+              <Label
+                size="sm"
+                color="info.dark"
+                mb={4}
+                mt={{ xs: 9, sm: 0 }}
+                sx={{ display: 'flex', alignItems: 'center' }}
+              >
+                credit class{' '}
+                <InfoTooltipWithIcon
+                  title={
+                    <p>
+                      <Box component="span" sx={{ fontWeight: 700 }}>
+                        Credit class:
+                      </Box>
+                      {` ${CREDIT_CLASS_TOOLTIP}`}
+                    </p>
+                  }
+                  outlined
+                  sx={{ ml: 1 }}
+                />
               </Label>
               <Title variant="h1">{displayName}</Title>
+              {generationMethods && (
+                <CreditClassCardItem
+                  items={generationMethods}
+                  label={OFFSET_GENERATION_METHOD}
+                  sx={{ my: 5 }}
+                  sxListContainer={{
+                    flexDirection: 'column',
+                    alignItems: 'start',
+                  }}
+                  sxListItem={{
+                    mb: 1,
+                  }}
+                />
+              )}
             </Box>
             {metadata?.['schema:description'] && (
               <ReadMore

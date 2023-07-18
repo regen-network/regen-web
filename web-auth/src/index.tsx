@@ -10,7 +10,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <GoogleReCaptchaProvider reCaptchaKey={process.env.VITE_RECAPTCHAV3_SITE_KEY}>
+  <GoogleReCaptchaProvider reCaptchaKey={process.env.REACT_APP_RECAPTCHAV3_SITE_KEY}>
     <ThemeProvider injectFonts>
       <CssBaseline />
       <App />

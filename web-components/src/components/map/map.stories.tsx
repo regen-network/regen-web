@@ -106,13 +106,13 @@ const geojson = {
 };
 
 export const map = (): JSX.Element => (
-  <Map geojson={geojson} mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN} />
+  <Map geojson={geojson} mapboxToken={import.meta.env.STORYBOOK_MAPBOX_TOKEN} />
 );
 
 // export const geocoder = (): JSX.Element => {
 //   return (
 //     <Geocoder
-//       mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN || ''}
+//       mapboxToken={import.meta.env.STORYBOOK_MAPBOX_TOKEN || ''}
 //       fullWidth
 //       setFeature={() => {}}
 //       label="Address"

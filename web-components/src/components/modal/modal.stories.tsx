@@ -200,7 +200,7 @@ export const basketTakeModal = (): JSX.Element => (
       exponent: 6,
     }}
     balance={9999}
-    mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN || ''}
+    mapboxToken={import.meta.env.STORYBOOK_MAPBOX_TOKEN || ''}
     onClose={() => null}
     onSubmit={() => alert('submit')}
   />

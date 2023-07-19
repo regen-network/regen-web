@@ -56,7 +56,7 @@ const assets: Asset[] = [
     type: 'image',
   },
   <StaticMap
-    mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
+    mapboxToken={import.meta.env.STORYBOOK_MAPBOX_TOKEN}
     geojson={{
       type: 'FeatureCollection',
       features: [

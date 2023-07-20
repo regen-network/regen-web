@@ -14,7 +14,6 @@ export const useSignArbitrary = ({ setError }: Props) => {
   const signArbitrary = useCallback(
     async ({
       walletConfig,
-      walletConnect,
       wallet,
       nonce,
       addAddr = false,
@@ -23,7 +22,6 @@ export const useSignArbitrary = ({ setError }: Props) => {
         if (wallet?.address) {
           const walletClient = await walletConfig?.getClient({
             chainInfo,
-            walletConnect,
           });
 
           const signature = await walletClient?.signArbitrary(

@@ -1,5 +1,5 @@
 import { MutableRefObject, useCallback } from 'react';
-import WalletConnect from '@walletconnect/client';
+import { useWallet } from '@cosmos-kit/react-lite';
 
 import { UseStateSetter } from 'types/react/use-state';
 
@@ -7,17 +7,16 @@ import { Wallet } from '../wallet';
 import {
   AUTO_CONNECT_WALLET_KEY,
   emptySender,
+  KEPLR_MOBILE,
   WALLET_CONNECT_KEY,
 } from '../wallet.constants';
 import { WalletConfig } from '../walletsConfig/walletsConfig.types';
 
 type Props = {
-  walletConnect?: WalletConnect;
+  walletConnect?: boolean;
   setWallet: UseStateSetter<Wallet>;
   setConnectionType: UseStateSetter<string | undefined>;
-  setWalletConnectUri: UseStateSetter<string | undefined>;
   walletConfigRef: MutableRefObject<WalletConfig | undefined>;
-  setWalletConnect: UseStateSetter<WalletConnect | undefined>;
   logout?: () => Promise<void>;
 };
 
@@ -27,25 +26,18 @@ export const useDisconnect = ({
   walletConnect,
   setConnectionType,
   setWallet,
-  setWalletConnectUri,
-  setWalletConnect,
   walletConfigRef,
   logout,
 }: Props): DisconnectType => {
+  const { mainWallet } = useWallet(KEPLR_MOBILE);
+
   const disconnect = useCallback(async (): Promise<void> => {
-    if (walletConnect) {
-      try {
-        await walletConnect.killSession();
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(e);
-      }
+    if (walletConnect && mainWallet) {
+      await mainWallet.disconnect(true);
     }
 
     setWallet(emptySender);
     setConnectionType(undefined);
-    setWalletConnect(undefined);
-    setWalletConnectUri(undefined);
     walletConfigRef.current = undefined;
     localStorage.removeItem(AUTO_CONNECT_WALLET_KEY);
     localStorage.removeItem(WALLET_CONNECT_KEY);
@@ -54,13 +46,12 @@ export const useDisconnect = ({
     // https://github.com/chainapsis/keplr-wallet/issues/664
     if (!walletConnect && logout) await logout();
   }, [
-    setConnectionType,
-    setWallet,
-    setWalletConnect,
-    setWalletConnectUri,
-    walletConfigRef,
     walletConnect,
+    setWallet,
+    setConnectionType,
+    walletConfigRef,
     logout,
+    mainWallet,
   ]);
 
   return disconnect;

@@ -1,4 +1,6 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { State, WalletStatus } from '@cosmos-kit/core';
+import { useManager } from '@cosmos-kit/react-lite';
 import { useQuery } from '@tanstack/react-query';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { useAtom } from 'jotai';
@@ -32,6 +34,20 @@ const WalletButton = ({ size = 'small' }: Props) => {
   const { wallet, connect, loaded, walletConnectUri, isConnected } =
     useWallet();
 
+  const { walletRepos } = useManager();
+  const [qrState, setQRState] = useState<State>(State.Init); // state of QRCode
+
+  const current = walletRepos[0]?.current;
+  (current?.client as any)?.setActions?.({
+    qrUrl: {
+      state: setQRState,
+    },
+  });
+
+  const walletStatus = current?.walletStatus;
+  const message = current?.message;
+  const qrUrl = current?.qrUrl;
+
   const { bankClient } = useLedger();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isWaitingForSigning, setIsWaitingForSigningAtom] = useAtom(
@@ -39,7 +55,18 @@ const WalletButton = ({ size = 'small' }: Props) => {
   );
   const [modalState, setModalState] =
     useState<WalletModalState>('wallet-select');
+  const [connecting, setConnecting] = useState<boolean>(false);
+  const [qrCodeUri, setQrCodeUri] = useState<string | undefined>();
   const isConnectedLoaded = loaded ? isConnected : null;
+
+  useEffect(() => {
+    if (isModalOpen) {
+      setConnecting(
+        walletStatus === WalletStatus.Connecting && qrState === State.Init,
+      );
+      setQrCodeUri(qrUrl?.data);
+    }
+  }, [isModalOpen, qrState, walletStatus, qrUrl?.data, message]);
 
   // Populate cache with user balance once connected
   useQuery(
@@ -64,10 +91,14 @@ const WalletButton = ({ size = 'small' }: Props) => {
     onModalClose,
     setModalState,
     connect,
+    connectWalletConnect: walletRepos[0]?.connect, // only one walletRepos for regen
   });
 
   const walletsUiConfig = useMemo(
-    () => getWalletsUiConfig({ connectToWallet }),
+    () =>
+      getWalletsUiConfig({
+        connectToWallet,
+      }),
     [connectToWallet],
   );
   const mobileConnectUrl = useMemo(
@@ -99,8 +130,8 @@ const WalletButton = ({ size = 'small' }: Props) => {
         onClose={onModalClose}
         wallets={walletsUiConfig}
         state={modalState}
-        qrCodeUri={walletConnectUri}
-        mobileConnectUrl={mobileConnectUrl}
+        qrCodeUri={qrCodeUri}
+        connecting={connecting}
       />
       <MobileSigningModal
         isOpen={isWaitingForSigning && !!walletConnectUri}

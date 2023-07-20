@@ -1,10 +1,8 @@
 export const AUTO_CONNECT_WALLET_KEY = 'auto_connect_wallet';
 export const WALLET_CONNECT_KEY = 'walletconnect';
-export const WALLET_CONNECT_BRIDGE_URL = 'https://bridge.walletconnect.org';
-export const WALLET_CONNECT_SIGNING_METHODS = [
-  'keplr_enable_wallet_connect_v1',
-  'keplr_sign_amino_wallet_connect_v1',
-];
+export const WALLET_CONNECT_RELAY_URL = 'wss://relay.walletconnect.org';
+export const KEPLR_MOBILE = 'keplr-mobile';
+
 export const KEPLR_LOGIN_TITLE = 'Regen Network Login';
 export const KEPLR_LOGIN_DESCRIPTION =
   'This is a transaction that allows Regen Network to authenticate you with our application.';

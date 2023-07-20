@@ -20,11 +20,7 @@ export const useLogin = ({ signArbitrary, setError, setAccountId }: Params) => {
   const { data: token } = useQuery(getCsrfTokenQuery({}));
 
   const login = useCallback(
-    async ({
-      walletConfig,
-      walletConnect,
-      wallet,
-    }: LoginParams): Promise<void> => {
+    async ({ walletConfig, wallet }: LoginParams): Promise<void> => {
       try {
         if (wallet?.address && signArbitrary && token) {
           // Step 2: Retrieve a nonce for the user
@@ -46,7 +42,6 @@ export const useLogin = ({ signArbitrary, setError, setAccountId }: Params) => {
           // Step 3: Generate the signature for the login request
           const signature = await signArbitrary({
             walletConfig,
-            walletConnect,
             wallet,
             nonce: nonce || '',
           });

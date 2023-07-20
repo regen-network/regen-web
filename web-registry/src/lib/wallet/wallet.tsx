@@ -6,9 +6,14 @@ import {
 } from '@apollo/client';
 import { StdSignature } from '@cosmjs/launchpad';
 import { OfflineSigner } from '@cosmjs/proto-signing';
+import { State } from '@cosmos-kit/core';
+import {
+  useWallet as useCosmosKitWallet,
+  useWalletClient,
+} from '@cosmos-kit/react-lite';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 import { useQuery } from '@tanstack/react-query';
-import WalletConnect from '@walletconnect/client';
+import truncate from 'lodash/truncate';
 
 import { PartyByAddrQuery, useGetCurrentAccountQuery } from 'generated/graphql';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
@@ -26,9 +31,7 @@ import { useLogin } from './hooks/useLogin';
 import { useLogout } from './hooks/useLogout';
 import { useOnAccountChange } from './hooks/useOnAccountChange';
 import { useSignArbitrary } from './hooks/useSignArbitrary';
-import { useWalletConnectCallback } from './hooks/useWalletConnectCallback';
-import { useWalletConnectFinalize } from './hooks/useWalletConnectFinalize';
-import { emptySender } from './wallet.constants';
+import { emptySender, KEPLR_MOBILE } from './wallet.constants';
 import { ConnectParams } from './wallet.types';
 import { WalletConfig } from './walletsConfig/walletsConfig.types';
 
@@ -45,7 +48,6 @@ declare global {
 
 export type LoginParams = {
   walletConfig?: WalletConfig;
-  walletConnect?: WalletConnect;
   wallet?: Wallet;
 };
 export type LoginType = (loginParams: LoginParams) => Promise<void>;
@@ -94,18 +96,31 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const [connectionType, setConnectionType] = useState<string | undefined>(
     undefined,
   );
-  const [walletConnect, setWalletConnect] = useState<
-    WalletConnect | undefined
-  >();
   const [keplrMobileWeb, setKeplrMobileWeb] = useState<boolean>(false);
   const walletConfigRef = useRef<WalletConfig | undefined>();
   const [error, setError] = useState<unknown>(undefined);
-  const [walletConnectUri, setWalletConnectUri] = useState<
-    string | undefined
-  >();
   const { track } = useTracker();
 
-  const onQrCloseCallbackRef = useRef<() => void>();
+  // Connecting via Wallet Connect is handled entirely using @cosmos-kit
+  const [walletConnect, setWalletConnect] = useState<boolean>(false);
+  const { status, client: walletConnectClient } = useWalletClient(KEPLR_MOBILE);
+  const { mainWallet } = useCosmosKitWallet(KEPLR_MOBILE);
+  const address = mainWallet?.getChainWallet('regen')?.address;
+
+  useEffect(() => {
+    if (status === State.Done) {
+      const offlineSigner =
+        walletConnectClient?.getOfflineSignerAmino?.('regen-1');
+      if (offlineSigner && address) {
+        setWallet({
+          offlineSigner,
+          address,
+          shortAddress: truncate(address),
+        });
+        setWalletConnect(true);
+      }
+    }
+  }, [address, status, walletConnectClient]);
 
   const signArbitrary = useSignArbitrary({
     setError,
@@ -114,10 +129,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const logout = useLogout({ setError, setAccountId });
 
   const connectWallet = useConnectWallet({
-    onQrCloseCallbackRef,
     setWallet,
-    setWalletConnect,
-    setWalletConnectUri,
     setKeplrMobileWeb,
     walletConfigRef,
     track,
@@ -129,18 +141,15 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const disconnect = useDisconnect({
     setConnectionType,
     setWallet,
-    setWalletConnect,
-    setWalletConnectUri,
     walletConfigRef,
-    walletConnect,
     logout,
+    walletConnect,
   });
 
   const addAddress = useAddAddress({ signArbitrary, setError, setWallet });
   const handleAddAddress = useHandleAddAddress({
     wallet,
     walletConfigRef,
-    walletConnect,
     accountId,
     addAddress,
   });
@@ -155,7 +164,6 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     wallet,
     keplrMobileWeb,
     walletConfigRef,
-    walletConnect,
     accountId,
     addAddress,
     setAccountChanging,
@@ -165,13 +173,6 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     loaded,
     wallet,
     setKeplrMobileWeb,
-  });
-  useWalletConnectCallback({ onQrCloseCallbackRef, walletConnectUri });
-  useWalletConnectFinalize({
-    setWallet,
-    walletConfigRef,
-    walletConnect,
-    login,
   });
 
   const { data } = useGetCurrentAccountQuery();
@@ -201,7 +202,6 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         handleAddAddress: loginDisabled ? undefined : handleAddAddress,
         connectionType,
         error,
-        walletConnectUri,
         signArbitrary,
         accountId,
         partyByAddr,

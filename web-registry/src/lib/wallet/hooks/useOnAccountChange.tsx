@@ -5,7 +5,6 @@ import {
   useApolloClient,
 } from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
-import WalletConnect from '@walletconnect/client';
 import { useSetAtom } from 'jotai';
 
 import { UseStateSetter } from 'types/react/use-state';
@@ -30,7 +29,6 @@ type Props = {
   connectWallet: ConnectWalletType;
   keplrMobileWeb: boolean;
   walletConfigRef: MutableRefObject<WalletConfig | undefined>;
-  walletConnect?: WalletConnect;
   accountId?: string;
   addAddress: (params: AddAddressParams) => Promise<void>;
   setAccountChanging: UseStateSetter<boolean>;
@@ -41,7 +39,6 @@ export const useOnAccountChange = ({
   connectWallet,
   keplrMobileWeb,
   walletConfigRef,
-  walletConnect,
   accountId,
   addAddress,
   setAccountChanging,
@@ -78,7 +75,6 @@ export const useOnAccountChange = ({
           setAccountChanging(true);
           const walletClient = await walletConfigRef.current?.getClient({
             chainInfo,
-            walletConnect,
           });
           const _newWallet = await getWallet({
             walletClient,
@@ -100,7 +96,6 @@ export const useOnAccountChange = ({
     connectWallet,
     keplrMobileWeb,
     walletConfigRef,
-    walletConnect,
     setAccountChanging,
   ]);
 
@@ -140,7 +135,6 @@ export const useOnAccountChange = ({
               atom.onClick = () => {
                 addAddress({
                   walletConfig: walletConfigRef.current,
-                  walletConnect,
                   wallet,
                   accountId,
                   onSuccess: () => {
@@ -161,7 +155,6 @@ export const useOnAccountChange = ({
           });
           await addAddress({
             walletConfig: walletConfigRef.current,
-            walletConnect,
             wallet,
             accountId,
             onSuccess: () => {
@@ -189,6 +182,5 @@ export const useOnAccountChange = ({
     setAddWalletModalRemoveAtom,
     wallet,
     walletConfigRef,
-    walletConnect,
   ]);
 };

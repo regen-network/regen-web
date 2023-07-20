@@ -126,7 +126,6 @@ root.render(
                   metadata: walletConnectClientMeta,
                 },
               }}
-              logLevel="TRACE"
             >
               <WalletProvider>
                 <LedgerProvider>

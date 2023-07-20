@@ -1,4 +1,5 @@
 import { MutableRefObject, useCallback } from 'react';
+import { useWallet } from '@cosmos-kit/react-lite';
 
 import { UseStateSetter } from 'types/react/use-state';
 
@@ -6,6 +7,7 @@ import { Wallet } from '../wallet';
 import {
   AUTO_CONNECT_WALLET_KEY,
   emptySender,
+  KEPLR_MOBILE,
   WALLET_CONNECT_KEY,
 } from '../wallet.constants';
 import { WalletConfig } from '../walletsConfig/walletsConfig.types';
@@ -27,9 +29,11 @@ export const useDisconnect = ({
   walletConfigRef,
   logout,
 }: Props): DisconnectType => {
+  const { mainWallet } = useWallet(KEPLR_MOBILE);
+
   const disconnect = useCallback(async (): Promise<void> => {
-    // TODO
-    if (walletConnect) {
+    if (walletConnect && mainWallet) {
+      await mainWallet.disconnect(true);
     }
 
     setWallet(emptySender);
@@ -41,7 +45,14 @@ export const useDisconnect = ({
     // signArbitrary (used in login) not yet supported by @keplr-wallet/wc-client
     // https://github.com/chainapsis/keplr-wallet/issues/664
     if (!walletConnect && logout) await logout();
-  }, [setConnectionType, setWallet, walletConfigRef, walletConnect, logout]);
+  }, [
+    walletConnect,
+    setWallet,
+    setConnectionType,
+    walletConfigRef,
+    logout,
+    mainWallet,
+  ]);
 
   return disconnect;
 };

@@ -7,7 +7,10 @@ import {
 import { StdSignature } from '@cosmjs/launchpad';
 import { OfflineSigner } from '@cosmjs/proto-signing';
 import { State } from '@cosmos-kit/core';
-import { useChainWallet, useWalletClient } from '@cosmos-kit/react-lite';
+import {
+  useWallet as useCosmosKitWallet,
+  useWalletClient,
+} from '@cosmos-kit/react-lite';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 import { useQuery } from '@tanstack/react-query';
 import truncate from 'lodash/truncate';
@@ -28,7 +31,7 @@ import { useLogin } from './hooks/useLogin';
 import { useLogout } from './hooks/useLogout';
 import { useOnAccountChange } from './hooks/useOnAccountChange';
 import { useSignArbitrary } from './hooks/useSignArbitrary';
-import { emptySender } from './wallet.constants';
+import { emptySender, KEPLR_MOBILE } from './wallet.constants';
 import { ConnectParams } from './wallet.types';
 import { WalletConfig } from './walletsConfig/walletsConfig.types';
 
@@ -98,30 +101,25 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const [error, setError] = useState<unknown>(undefined);
   const { track } = useTracker();
 
+  // Connecting via Wallet Connect is handled entirely using @cosmos-kit
   const [walletConnect, setWalletConnect] = useState<boolean>(false);
-
-  
-  const { status, client: walletConnectClient } =
-    useWalletClient('keplr-mobile');
-  const { address } = useChainWallet('regen', 'keplr-mobile');
+  const { status, client: walletConnectClient } = useWalletClient(KEPLR_MOBILE);
+  const { mainWallet } = useCosmosKitWallet(KEPLR_MOBILE);
+  const address = mainWallet?.getChainWallet('regen')?.address;
 
   useEffect(() => {
-    const getWalletFromWalletConnect = async () => {
-      if (status === State.Done) {
-        const offlineSigner =
-          walletConnectClient?.getOfflineSignerAmino?.('regen-1');
-        if (offlineSigner && address) {
-          setWallet({
-            offlineSigner,
-            address,
-            shortAddress: truncate(address),
-          });
-          setWalletConnect(true);
-        }
+    if (status === State.Done) {
+      const offlineSigner =
+        walletConnectClient?.getOfflineSignerAmino?.('regen-1');
+      if (offlineSigner && address) {
+        setWallet({
+          offlineSigner,
+          address,
+          shortAddress: truncate(address),
+        });
+        setWalletConnect(true);
       }
-    };
-
-    getWalletFromWalletConnect();
+    }
   }, [address, status, walletConnectClient]);
 
   const signArbitrary = useSignArbitrary({
@@ -145,6 +143,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     setWallet,
     walletConfigRef,
     logout,
+    walletConnect,
   });
 
   const addAddress = useAddAddress({ signArbitrary, setError, setWallet });

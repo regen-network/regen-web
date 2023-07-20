@@ -1,5 +1,3 @@
-import { Link } from '@mui/material';
-
 import { Props } from './CreditClassCard';
 
 export const creditClassCardMock: Props = {

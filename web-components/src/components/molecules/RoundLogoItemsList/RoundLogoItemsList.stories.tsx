@@ -1,7 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { RoundLogoMock } from 'src/components/atoms/RoundLogo/RoundLogo.mock';
-
+import { RoundLogoMock } from '../../../components/atoms/RoundLogo/RoundLogo.mock';
 import { RoundLogoItemsList } from './RoundLogoItemsList';
 
 export default {

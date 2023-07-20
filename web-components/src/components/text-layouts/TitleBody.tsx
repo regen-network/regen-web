@@ -2,8 +2,7 @@ import React from 'react';
 import { Box, SxProps } from '@mui/material';
 import ReactHtmlParser from 'html-react-parser';
 
-import type { Theme } from 'src/theme/muiTheme';
-
+import type { Theme } from '../../theme/muiTheme';
 import { BlockContent, SanityBlockOr } from '../block-content';
 import { Body, Title } from '../typography';
 import { TextSize } from '../typography/sizing';

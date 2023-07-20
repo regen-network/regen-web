@@ -1,5 +1,4 @@
-import { LinkType } from 'src/types/shared/linkType';
-
+import { LinkType } from '../../../types/shared/linkType';
 import { TextItem } from './CreditClassCard.types';
 
 export function isLinkItem(item?: Partial<LinkType>): item is LinkType {

@@ -10,7 +10,7 @@ export default {
   component: LoginForm,
 };
 
-const MAPBOX_TOKEN = process.env.STORYBOOK_MAPBOX_TOKEN || '';
+const MAPBOX_TOKEN = import.meta.env.STORYBOOK_MAPBOX_TOKEN || '';
 
 const submit = async (): Promise<void> => {
   return new Promise((resolve, reject) => {
@@ -24,18 +24,6 @@ export const userProfile = (): JSX.Element => (
     initialValues={{ name: 'Name', roleTitle: 'Role title' }}
   />
 );
-
-// export const organizationProfile = (): JSX.Element => (
-//   <OnBoardingSection title="Organization Profile">
-//     <OrganizationProfileForm
-//       apiUrl=""
-//       mapToken={process.env.STORYBOOK_MAPBOX_TOKEN || process.env.REACT_APP_MAPBOX_TOKEN}
-//       submit={() => null}
-//       goBack={() => null}
-//       skip={() => null}
-//     />
-//   </OnBoardingSection>
-// );
 
 export const signUpForm = (): JSX.Element => (
   <LoginForm

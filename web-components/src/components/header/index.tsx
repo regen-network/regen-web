@@ -20,7 +20,7 @@ export interface HeaderColors {
   [key: string]: string;
 }
 
-interface HeaderProps {
+export interface HeaderProps {
   absolute?: boolean;
   borderBottom?: boolean;
   color: string;

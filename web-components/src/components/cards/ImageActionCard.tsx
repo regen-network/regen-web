@@ -2,8 +2,7 @@ import React from 'react';
 import { CardContent, useTheme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
-import { Theme } from 'src/theme/muiTheme';
-
+import { Theme } from '../../theme/muiTheme';
 import { parseText } from '../../utils/textParser';
 import OutlinedButton from '../buttons/OutlinedButton';
 import MediaCard from '../cards/MediaCard';

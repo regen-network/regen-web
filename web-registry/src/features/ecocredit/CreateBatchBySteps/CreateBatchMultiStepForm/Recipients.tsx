@@ -20,7 +20,7 @@ export default function Recipients(): React.ReactElement {
   return (
     <>
       <RecipientsFieldArray
-        mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN || ''}
+        mapboxToken={import.meta.env.VITE_MAPBOX_TOKEN || ''}
       />
     </>
   );

@@ -14,7 +14,7 @@ import {
 } from 'lib/db/types/json-ld';
 import { isCFCCreditClass, isVCSCreditClass } from 'lib/ecocredit/api';
 
-const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN;
+const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN;
 
 export const getOnChainProjectId = (
   deliverTxResponse?: DeliverTxResponse,

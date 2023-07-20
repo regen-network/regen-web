@@ -3,8 +3,7 @@ import { Box, Button } from '@mui/material';
 import { SxProps } from '@mui/system';
 import { makeStyles } from 'tss-react/mui';
 
-import { Theme } from 'src/theme/muiTheme';
-
+import { Theme } from '../../theme/muiTheme';
 import ContainedButton from '../buttons/ContainedButton';
 import Card from '../cards/Card';
 import { LinkItem } from '../footer/footer-new';

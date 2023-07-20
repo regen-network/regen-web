@@ -43,7 +43,7 @@ export const BasketOverviewModals = ({
   const setTxSuccessfulModalAtom = useSetAtom(txSuccessfulModalAtom);
   const { wallet } = useWallet();
   const accountAddress = wallet?.address ?? '';
-  const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN || '';
+  const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN || '';
 
   // Modals callbacks
   const onClosePutModal = (): void =>

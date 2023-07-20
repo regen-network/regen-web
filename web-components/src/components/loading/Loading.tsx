@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, CircularProgress, SxProps } from '@mui/material';
 
-import { Theme } from 'src/theme/muiTheme';
+import { Theme } from '../../theme/muiTheme';
 
 /** simpler loader with a minimum height of 150 px
  * @param sx - additional styles for container

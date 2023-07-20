@@ -49,6 +49,8 @@ export const projectMedia = (): JSX.Element => (
   </div>
 );
 
+const MAPBOX_TOKEN = import.meta.env.STORYBOOK_MAPBOX_TOKEN || '';
+
 const assets: Asset[] = [
   {
     src: './andover.jpg',
@@ -56,7 +58,7 @@ const assets: Asset[] = [
     type: 'image',
   },
   <StaticMap
-    mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
+    mapboxToken={MAPBOX_TOKEN}
     geojson={{
       type: 'FeatureCollection',
       features: [

@@ -1,4 +1,4 @@
-export const explorer = process.env.REACT_APP_BLOCK_EXPLORER;
+export const explorer = import.meta.env.VITE_BLOCK_EXPLORER;
 
 const isMintscan = explorer?.includes('mintscan');
 const isAneka = explorer?.includes('aneka');

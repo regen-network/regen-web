@@ -13,7 +13,7 @@ export type GetBridgeTxStatusResponse =
 export const getBridgeTxStatus = async (
   hash: string,
 ): Promise<GetBridgeTxStatusResponse> => {
-  const apiUri = process.env.REACT_APP_BRIDGE_API_URI;
+  const apiUri = import.meta.env.VITE_BRIDGE_API_URI;
   if (!apiUri) {
     return;
   }

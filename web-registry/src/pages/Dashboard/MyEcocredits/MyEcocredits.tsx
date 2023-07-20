@@ -179,7 +179,7 @@ export const MyEcocredits = (): JSX.Element => {
   const theme = useTheme();
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
-  const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN || '';
+  const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN || '';
   const accountAddress = wallet?.address;
   const {
     credits,

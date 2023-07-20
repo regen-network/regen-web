@@ -6,7 +6,7 @@ const NotFoundPage = (): JSX.Element => {
   return (
     <NotFound
       img={<img alt="home" src={RotationalGrazing} />}
-      home={process.env.REACT_APP_WEBSITE_URL}
+      home={import.meta.env.VITE_WEBSITE_URL}
     />
   );
 };

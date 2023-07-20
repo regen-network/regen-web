@@ -1,10 +1,9 @@
 import { Box, SxProps } from '@mui/system';
 
-import { LinkComponentType } from 'src/types/shared/linkComponentType';
-
 import { Flex } from '../../../components/box';
 import { Body } from '../../../components/typography';
 import { Theme } from '../../../theme/muiTheme';
+import { LinkComponentType } from '../../../types/shared/linkComponentType';
 import { sxToArray } from '../../../utils/mui/sxToArray';
 import { ProfileVariantIconMapping } from './ProfileHeader.constants';
 import { ProfileInfos, ProfileVariant } from './ProfileHeader.types';

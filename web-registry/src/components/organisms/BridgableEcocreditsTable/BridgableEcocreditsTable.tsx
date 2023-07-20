@@ -54,7 +54,7 @@ export const BridgableEcocreditsTable = ({
 
   const { credits: bridgableCredits, isLoadingCredits } = useFetchEcocredits({
     address: accountAddress,
-    creditClassId: process.env.REACT_APP_BRIDGE_CREDIT_CLASS_ID,
+    creditClassId: import.meta.env.VITE_BRIDGE_CREDIT_CLASS_ID,
     isPaginatedQuery: false,
   });
 

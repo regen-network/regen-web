@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 
-import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
+import CookiesTopBanner from 'web-components/lib/components/banner/CookiesTopBanner';
 import Footer from 'web-components/lib/components/footer';
 
 import { footerItems } from './Layout.config';
@@ -24,7 +24,7 @@ const Layout = ({ children }: Props) => {
       <div>
         <main className={styles.root}>{children}</main>
       </div>
-      <CookiesFooter privacyUrl="/privacy-policy/" TOSUrl="" />
+      <CookiesTopBanner privacyUrl="/privacy-policy/" TOSUrl="" />
       <footer>
         <Footer
           footerItems={footerItems}

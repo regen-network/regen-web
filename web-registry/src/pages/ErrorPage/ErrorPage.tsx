@@ -10,7 +10,7 @@ const ErrorPage = (): JSX.Element => {
   return (
     <ErrorView
       img={<img alt="error" src={UnhappyBee} />}
-      home={process.env.REACT_APP_WEBSITE_URL}
+      home={import.meta.env.VITE_WEBSITE_URL}
       msg={error.message || JSON.stringify(error)}
     />
   );

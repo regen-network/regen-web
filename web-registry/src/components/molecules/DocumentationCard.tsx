@@ -4,8 +4,8 @@ import { Box } from '@mui/material';
 import { ImageLeftCard } from 'web-components/lib/components/cards/ImageLeftCard';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
-const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
-const apiServerUrl = process.env.REACT_APP_API_URI;
+const imageStorageBaseUrl = import.meta.env.VITE_IMAGE_STORAGE_BASE_URL;
+const apiServerUrl = import.meta.env.VITE_API_URI;
 
 interface DocumentationCardProps {
   mainTitle: string;

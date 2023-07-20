@@ -36,16 +36,16 @@ import * as serviceWorker from './serviceWorker';
 
 import './App.css';
 
-const intercomId = process.env.REACT_APP_INTERCOM_APP_ID || '';
+const intercomId = import.meta.env.VITE_INTERCOM_APP_ID || '';
 
 // by default do not enable sentry unless the flag is set.
 // this reduces our monthly usage which can quickly run out if this is not set.
 // you can set this flag in local environments if testing changes to sentry.
 // currently we only want this flag set for the production environment.
-if (process.env.REACT_APP_SENTRY_ENABLED) {
+if (import.meta.env.VITE_SENTRY_ENABLED) {
   const defaultSampleRate = '0.2';
   const tracesSampleRate = parseFloat(
-    process.env.REACT_APP_SENTRY_TRACES_SAMPLE_RATE || defaultSampleRate,
+    import.meta.env.VITE_SENTRY_TRACES_SAMPLE_RATE || defaultSampleRate,
   );
   Sentry.init({
     dsn: 'https://f5279ac3b8724af88ffb4cdfad92a2d4@o1377530.ingest.sentry.io/6688446',
@@ -61,7 +61,7 @@ if (process.env.REACT_APP_SENTRY_ENABLED) {
       }),
     ],
     tracesSampleRate,
-    environment: process.env.REACT_APP_SENTRY_ENVIRONMENT || 'development',
+    environment: import.meta.env.VITE_SENTRY_ENVIRONMENT || 'development',
   });
 }
 
@@ -72,7 +72,7 @@ if (process.env.REACT_APP_SENTRY_ENABLED) {
 // be careful not to use the production API key or measurement id in a non-prod environment.
 // but you can safely use the development API key and measurement id in non-prod environments.
 // these values are safe to hardcode because they are public.
-// also see the REACT_APP_ANALYTICS_ENABLED environment variable.
+// also see the VITE_ANALYTICS_ENABLED environment variable.
 const DEVELOPMENT_AMPLITUDE_API_KEY = 'ef9a9d58cf90476430f62a634d72cd5c';
 const DEVELOPMENT_GA_MEASUREMENT_ID = 'G-9ENS4JTCWY';
 const analytics = Analytics({
@@ -80,15 +80,13 @@ const analytics = Analytics({
     doNotTrack(),
     amplitudePlugin({
       apiKey:
-        process.env.REACT_APP_AMPLITUDE_API_KEY ||
-        DEVELOPMENT_AMPLITUDE_API_KEY,
+        import.meta.env.VITE_AMPLITUDE_API_KEY || DEVELOPMENT_AMPLITUDE_API_KEY,
       // by default we will not track users, they must opt-in.
       enabled: false,
     }),
     googleAnalytics({
       measurementIds: [
-        process.env.REACT_APP_GA_MEASUREMENT_ID ||
-          DEVELOPMENT_GA_MEASUREMENT_ID,
+        import.meta.env.VITE_GA_MEASUREMENT_ID || DEVELOPMENT_GA_MEASUREMENT_ID,
       ],
       enabled: false,
       gtagConfig: {
@@ -98,7 +96,7 @@ const analytics = Analytics({
   ],
   // see here for debugging tools:
   // https://getanalytics.io/debugging/
-  debug: process.env.NODE_ENV === 'development',
+  debug: import.meta.env.NODE_ENV === 'development',
 });
 
 const container = document.getElementById('root') as HTMLElement;
@@ -112,7 +110,7 @@ root.render(
           <AnalyticsProvider instance={analytics}>
             <WalletProvider>
               <LedgerProvider>
-                <ThemeProvider injectFonts>
+                <ThemeProvider>
                   <Suspense fallback={<PageLoader />}>
                     <RouterProvider
                       router={getRouter({

@@ -1,18 +1,16 @@
 import './index.css';
 
 import CssBaseline from '@mui/material/CssBaseline';
-import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
+import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <GoogleReCaptchaProvider
-    reCaptchaKey={process.env.REACT_APP_RECAPTCHAV3_SITE_KEY}
-  >
+  <GoogleReCaptchaProvider reCaptchaKey={process.env.REACT_APP_RECAPTCHAV3_SITE_KEY}>
     <ThemeProvider injectFonts>
       <CssBaseline />
       <App />

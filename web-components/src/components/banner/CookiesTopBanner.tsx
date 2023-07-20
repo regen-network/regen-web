@@ -5,11 +5,10 @@ import Link from '@mui/material/Link';
 import Cookies from 'js-cookie';
 
 // TODO use Section component
-// import Section from '../section';
 import ContainedButton from '../buttons/ContainedButton';
 import { Body } from '../typography';
 
-interface CookiesBannerProps {
+interface CookiesTopBannerProps {
   privacyUrl: string;
   TOSUrl: string;
 }
@@ -44,10 +43,10 @@ function setCookie(name: string, cookieValue: string): void {
   Cookies.set(name, cookieValue, { expires: 730 });
 }
 
-export default function CookiesBanner({
+export default function CookiesTopBanner({
   privacyUrl,
   TOSUrl,
-}: CookiesBannerProps): JSX.Element | null {
+}: CookiesTopBannerProps): JSX.Element | null {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {

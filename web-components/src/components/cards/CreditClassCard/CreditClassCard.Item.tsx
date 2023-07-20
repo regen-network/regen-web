@@ -54,12 +54,12 @@ export const CreditClassCardItem = ({
         ))}
         {isLinkItem(link) && (
           <Link
-            href={link.href}
+            href={link?.href}
             target="_blank"
             onClick={e => e.stopPropagation()}
             sx={{ color: 'secondary.main', fontSize: 14, fontWeight: 700 }}
           >
-            {link.text}
+            {link?.text}
             <SmallArrowIcon
               sx={{ verticalAlign: 'middle', ml: 1, height: 10 }}
             />

@@ -17,8 +17,7 @@ import {
   TableRow,
 } from '@mui/material';
 
-import type { Theme } from 'src/theme/muiTheme';
-
+import type { Theme } from '../../theme/muiTheme';
 import {
   getTablePaginationPadding,
   StyledTableCell,

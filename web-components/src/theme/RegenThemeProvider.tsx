@@ -9,6 +9,7 @@ import {
 import theme from './muiTheme';
 
 import 'web-components/src/theme/index.css';
+import 'web-components/src/theme/fonts.css';
 
 declare module '@mui/styles/defaultTheme' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -21,17 +22,9 @@ interface Props {
   readonly children: React.ReactNode;
 }
 
-const RegenThemeProvider = ({
-  injectFonts = false,
-  injectStyles,
-  children,
-}: Props): JSX.Element => {
+const RegenThemeProvider = ({ injectStyles, children }: Props): JSX.Element => {
   if (injectStyles) {
     injectStyles();
-  }
-
-  if (injectFonts) {
-    require('web-components/src/theme/fonts.css');
   }
 
   return (

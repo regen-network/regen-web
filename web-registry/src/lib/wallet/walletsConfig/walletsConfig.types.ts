@@ -1,8 +1,7 @@
 import { OfflineSigner } from '@cosmjs/proto-signing';
 import { ChainInfo, Keplr } from '@keplr-wallet/types';
-import { KeplrWalletConnectV1 } from '@keplr-wallet/wc-client';
 
-export type WalletClient = Keplr | KeplrWalletConnectV1;
+export type WalletClient = Keplr;
 
 export enum WalletType {
   Keplr = 'keplr',

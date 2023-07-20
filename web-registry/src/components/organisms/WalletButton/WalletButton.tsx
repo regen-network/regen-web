@@ -87,7 +87,7 @@ const WalletButton = ({ size = 'small' }: Props) => {
     setModalState('wallet-select');
   }, [setIsModalOpen, setModalState]);
 
-  const connectToWallet = useConnectToWallet({
+  const connectToWallet = useCongnectToWallet({
     onModalClose,
     setModalState,
     connect,

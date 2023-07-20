@@ -22,13 +22,14 @@ RUN echo "AUTH0_CLIENT_ID=test" >> .env # cannot be empty
 RUN echo "AUTH0_CLIENT_SECRET=test" >> .env # cannot be empty
 RUN echo "MAILERLITE_API_KEY=test" >> .env # cannot be empty
 RUN echo "DATABASE_URL=postgres://postgres:password@localhost:5432/server" >> .env
-RUN echo "SHADOW_DATABASE_URL=postgres://postgres:password@localhost:5432/server_shadow" >> .env
-RUN echo "ROOT_DATABASE_URL=postgres://postgres:password@localhost:5432/postgres" >> .env
 RUN echo "LEDGER_TENDERMINT_RPC=http://localhost:26657" >> .env
 RUN echo "LEDGER_REST_ENDPOINT=http://localhost:1317" >> .env
 
 # Build server
 RUN yarn build
+
+# Set working directory
+WORKDIR /home/server
 
 # Copy server start script
 COPY docker/scripts/server_start.sh /home/server/scripts/

@@ -1,13 +1,16 @@
 FROM golang:1.19
 
+# Set version and chain
 ENV GIT_CHECKOUT='v5.1.2'
 ENV REGEN_CHAIN_ID='regen-local'
 
-RUN apt-get update
-
 # Clone regen ledger
-RUN git clone https://github.com/regen-network/regen-ledger/ /home/regen-ledger
-WORKDIR /home/regen-ledger
+RUN git clone https://github.com/regen-network/regen-ledger/ /home/regen
+
+# Set working directory
+WORKDIR /home/regen
+
+# Use provided version
 RUN git checkout $GIT_CHECKOUT
 
 # Build regen binary
@@ -44,3 +47,9 @@ RUN sed -i "s/minimum-gas-prices = \"\"/minimum-gas-prices = \"0uregen\"/" /root
 
 # Set cors allow all origins
 RUN sed -i "s/cors_allowed_origins = \[\]/cors_allowed_origins = [\"*\"]/" /root/.regen/config/config.toml
+
+# Copy regen start script
+COPY docker/scripts/regen_start.sh /home/regen/scripts/
+
+# Make start script executable
+RUN ["chmod", "+x", "/home/regen/scripts/regen_start.sh"]

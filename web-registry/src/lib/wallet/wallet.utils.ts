@@ -1,5 +1,3 @@
-import { MutableRefObject } from 'react';
-import WalletConnect from '@walletconnect/client';
 import truncate from 'lodash/truncate';
 
 import { UseStateSetter } from 'types/react/use-state';

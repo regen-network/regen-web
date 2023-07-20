@@ -5,7 +5,6 @@ import {
   useApolloClient,
 } from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
-import WalletConnect from '@walletconnect/client';
 import { useSetAtom } from 'jotai';
 
 import {
@@ -27,7 +26,6 @@ import { AddAddressParams } from './useAddAddress';
 type Props = {
   wallet: Wallet;
   walletConfigRef: MutableRefObject<WalletConfig | undefined>;
-  walletConnect?: WalletConnect;
   accountId?: string;
   addAddress: (params: AddAddressParams) => Promise<void>;
 };
@@ -38,7 +36,6 @@ type HandleAddAddressType = () => Promise<void>;
 export const useHandleAddAddress = ({
   wallet,
   walletConfigRef,
-  walletConnect,
   accountId,
   addAddress,
 }: Props): HandleAddAddressType => {
@@ -60,7 +57,6 @@ export const useHandleAddAddress = ({
   const handleAddAddress = useCallback(async () => {
     const walletClient = await walletConfigRef.current?.getClient({
       chainInfo,
-      walletConnect,
     });
     const _newWallet = await getWallet({
       walletClient,
@@ -91,7 +87,6 @@ export const useHandleAddAddress = ({
               atom.onClick = () => {
                 addAddress({
                   walletConfig: walletConfigRef.current,
-                  walletConnect,
                   wallet,
                   accountId,
                   onSuccess: () =>
@@ -110,7 +105,6 @@ export const useHandleAddAddress = ({
           });
           addAddress({
             walletConfig: walletConfigRef.current,
-            walletConnect,
             wallet,
             accountId,
             onSuccess: () =>
@@ -128,7 +122,6 @@ export const useHandleAddAddress = ({
     setAddWalletModalSwitchAtom,
     wallet,
     walletConfigRef,
-    walletConnect,
   ]);
 
   return handleAddAddress;

@@ -15,8 +15,7 @@ type GetClientParams = {
 
 export interface WalletConfig {
   type: WalletType;
-  // A function that returns an instantiated wallet client, with
-  // `walletConnect` passed if `type === WalletType.WalletConnectKeplr`.
+  // A function that returns an instantiated wallet client.
   getClient: ({
     chainInfo,
   }: GetClientParams) => Promise<WalletClient | undefined>;

@@ -91,7 +91,7 @@ const WalletButton = ({ size = 'small' }: Props) => {
     onModalClose,
     setModalState,
     connect,
-    connectWalletConnect: walletRepos[0]?.wallets[0]?.connect,
+    connectWalletConnect: walletRepos[0]?.connect, // only one walletRepos for regen
   });
 
   const walletsUiConfig = useMemo(

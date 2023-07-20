@@ -9,7 +9,7 @@ export interface Props extends RegenModalProps {
   state?: WalletModalState;
   wallets: Wallet[];
   qrCodeUri?: string;
-  mobileConnectUrl?: string;
+  connecting: boolean;
 }
 
 const WalletModal = ({
@@ -18,7 +18,7 @@ const WalletModal = ({
   state = 'wallet-select',
   wallets,
   qrCodeUri,
-  mobileConnectUrl,
+  connecting,
 }: Props): JSX.Element => {
   const isSelectState = state === 'wallet-select';
   const isMobileState = state === 'wallet-mobile';
@@ -27,10 +27,7 @@ const WalletModal = ({
       <Box>
         {isSelectState && <WalletModalSelect wallets={wallets} />}
         {isMobileState && (
-          <WalletModalMobile
-            qrCodeUri={qrCodeUri}
-            mobileConnectUrl={mobileConnectUrl}
-          />
+          <WalletModalMobile qrCodeUri={qrCodeUri} connecting={connecting} />
         )}
       </Box>
     </Modal>

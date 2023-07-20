@@ -3,7 +3,7 @@ import { Wallet } from 'web-components/lib/components/modal/wallet-modal/WalletM
 import { ConnectParams } from 'lib/wallet/wallet.types';
 import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
 
-type GetWalletsUiConfigParams = {
+export type GetWalletsUiConfigParams = {
   connectToWallet: (params: ConnectParams) => Promise<void>;
 };
 

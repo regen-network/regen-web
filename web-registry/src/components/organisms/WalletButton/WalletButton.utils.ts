@@ -5,16 +5,13 @@ import {
 
 import { Wallet } from 'web-components/lib/components/modal/wallet-modal/WalletModal.types';
 
-import { ConnectParams } from 'lib/wallet/wallet.types';
-
-import { getAllWalletsUiConfig } from './WalletButton.config';
+import {
+  getAllWalletsUiConfig,
+  GetWalletsUiConfigParams,
+} from './WalletButton.config';
 import { mobileWalletsName } from './WalletButton.constants';
 
 /* getWalletsUiConfig */
-
-type GetWalletsUiConfigParams = {
-  connectToWallet: (params: ConnectParams) => Promise<void>;
-};
 
 export const getWalletsUiConfig = ({
   connectToWallet,

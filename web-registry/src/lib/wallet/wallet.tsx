@@ -45,7 +45,6 @@ declare global {
 
 export type LoginParams = {
   walletConfig?: WalletConfig;
-  walletConnect?: WalletConnect;
   wallet?: Wallet;
 };
 export type LoginType = (loginParams: LoginParams) => Promise<void>;
@@ -94,9 +93,6 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const [connectionType, setConnectionType] = useState<string | undefined>(
     undefined,
   );
-  const [walletConnect, setWalletConnect] = useState<
-    WalletConnect | undefined
-  >();
   const [keplrMobileWeb, setKeplrMobileWeb] = useState<boolean>(false);
   const walletConfigRef = useRef<WalletConfig | undefined>();
   const [error, setError] = useState<unknown>(undefined);
@@ -114,9 +110,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const logout = useLogout({ setError, setAccountId });
 
   const connectWallet = useConnectWallet({
-    onQrCloseCallbackRef,
     setWallet,
-    setWalletConnect,
     setWalletConnectUri,
     setKeplrMobileWeb,
     walletConfigRef,

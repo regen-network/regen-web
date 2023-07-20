@@ -9,6 +9,7 @@ import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
 
 type Props = {
   connect?: WalletContextType['connect'];
+  connectWalletConnect?: (sync: boolean) => Promise<void>;
   setModalState: UseStateSetter<WalletModalState>;
   onModalClose: () => void;
 };
@@ -17,22 +18,25 @@ type Response = ({ walletType }: ConnectParams) => Promise<void>;
 
 export const useConnectToWallet = ({
   connect,
+  connectWalletConnect,
   onModalClose,
   setModalState,
 }: Props): Response => {
   const connectToWallet = useCallback(
     async ({ walletType }: ConnectParams): Promise<void> => {
-      if (connect) {
+      if (connect && walletType === WalletType.Keplr) {
         await connect({ walletType });
-        if (walletType === WalletType.Keplr) {
-          onModalClose();
-        }
-        if (walletType === WalletType.WalletConnectKeplr) {
-          setModalState('wallet-mobile');
-        }
+        onModalClose();
+      }
+      if (
+        connectWalletConnect &&
+        walletType === WalletType.WalletConnectKeplr
+      ) {
+        setModalState('wallet-mobile');
+        await connectWalletConnect(true);
       }
     },
-    [connect, setModalState, onModalClose],
+    [connect, connectWalletConnect, onModalClose, setModalState],
   );
 
   return connectToWallet;

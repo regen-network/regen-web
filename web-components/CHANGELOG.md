@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/regen-network/regen-web/compare/v1.9.0...v1.10.0) (2023-07-20)
+
+### Bug Fixes
+
+- upgrade to wallet connect v2 using [@cosmos-kit](https://github.com/cosmos-kit) ([#1976](https://github.com/regen-network/regen-web/issues/1976)) ([168875e](https://github.com/regen-network/regen-web/commit/168875ebc8bbacba872a99b7e183dff9f3f48516))
+
+### Features
+
+- add ecosystem and eligible activity tags to credit class page ([#1965](https://github.com/regen-network/regen-web/issues/1965)) ([2ab0796](https://github.com/regen-network/regen-web/commit/2ab07967479977f60feb82b2468f8a5e6de6552b))
+- update credit class page ([#1968](https://github.com/regen-network/regen-web/issues/1968)) ([012a4b1](https://github.com/regen-network/regen-web/commit/012a4b1749612e2b86619e882c25990af8b72f5a))
+
 # [1.9.0](https://github.com/regen-network/regen-web/compare/v1.8.2...v1.9.0) (2023-07-11)
 
 ### Bug Fixes

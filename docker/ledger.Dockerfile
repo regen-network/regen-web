@@ -5,10 +5,10 @@ ENV GIT_CHECKOUT='v5.1.2'
 ENV REGEN_CHAIN_ID='regen-local'
 
 # Clone regen ledger
-RUN git clone https://github.com/regen-network/regen-ledger/ /home/regen
+RUN git clone https://github.com/regen-network/regen-ledger/ /home/ledger
 
 # Set working directory
-WORKDIR /home/regen
+WORKDIR /home/ledger
 
 # Use provided version
 RUN git checkout $GIT_CHECKOUT
@@ -49,7 +49,7 @@ RUN sed -i "s/minimum-gas-prices = \"\"/minimum-gas-prices = \"0uregen\"/" /root
 RUN sed -i "s/cors_allowed_origins = \[\]/cors_allowed_origins = [\"*\"]/" /root/.regen/config/config.toml
 
 # Copy regen start script
-COPY docker/scripts/regen_start.sh /home/regen/scripts/
+COPY docker/scripts/ledger_start.sh /home/ledger/scripts/
 
 # Make start script executable
-RUN ["chmod", "+x", "/home/regen/scripts/regen_start.sh"]
+RUN ["chmod", "+x", "/home/ledger/scripts/ledger_start.sh"]

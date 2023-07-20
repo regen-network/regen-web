@@ -20,12 +20,12 @@ services:
       timeout: 10s
       retries: 100
 
-  regen:
+  ledger:
     build:
       context: .
-      dockerfile: docker/regen.Dockerfile
-    container_name: regen_container
-    entrypoint: ["/bin/sh", "-c", "./scripts/regen_start.sh"]
+      dockerfile: docker/ledger.Dockerfile
+    container_name: ledger_container
+    entrypoint: ["/bin/sh", "-c", "./scripts/ledger_start.sh"]
     network_mode: host
     expose:
       - 1317
@@ -52,7 +52,7 @@ services:
     depends_on:
       db:
         condition: service_healthy
-      regen:
+      ledger:
         condition: service_healthy
     healthcheck:
       test: ["CMD-SHELL", "curl --fail http://localhost:5000/graphiql || exit 1"]

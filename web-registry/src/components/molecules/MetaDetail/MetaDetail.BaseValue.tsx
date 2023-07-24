@@ -15,8 +15,6 @@ export type Props = {
 };
 
 const MetaDetailBaseValue: React.FC<Props> = ({ value, rdfType, bodySize }) => {
-  if (!value) return null;
-
   let formattedValue: string | undefined;
   const isNumber = typeof value === 'number';
   const isString = typeof value === 'string';
@@ -37,7 +35,7 @@ const MetaDetailBaseValue: React.FC<Props> = ({ value, rdfType, bodySize }) => {
   return (
     <>
       {formattedValue && <Body size={bodySize}>{formattedValue}</Body>}
-      {isCompactedNameUrlOrOptionalUrl(value) && (
+      {value && isCompactedNameUrlOrOptionalUrl(value) && (
         <Body size={bodySize} styleLinks={false}>
           <LinkWithArrow
             href={value['schema:url']}

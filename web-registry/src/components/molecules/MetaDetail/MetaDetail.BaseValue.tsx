@@ -20,6 +20,7 @@ const MetaDetailBaseValue: React.FC<Props> = ({ value, rdfType, bodySize }) => {
   let formattedValue: string | undefined;
   const isNumber = typeof value === 'number';
   const isString = typeof value === 'string';
+  const isBoolean = typeof value === 'boolean';
   if (isString || isNumber) {
     if (isNumber) {
       formattedValue = formatNumber({ num: value });
@@ -28,6 +29,9 @@ const MetaDetailBaseValue: React.FC<Props> = ({ value, rdfType, bodySize }) => {
     } else {
       formattedValue = value;
     }
+  } else if (isBoolean) {
+    const toString = (value as boolean).toString();
+    formattedValue = toString.charAt(0).toUpperCase() + toString.slice(1);
   }
 
   return (

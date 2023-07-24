@@ -24,4 +24,6 @@ export interface CreditClassMetadataLD {
   'regen:carbonOffsetStandard'?: CompactedNameUrl;
   'regen:tokenizationSource'?: string;
   'regen:certifications'?: Certification[];
+  'regen:coBenefits'?: string[];
+  'regen:measuredGHGs': string[];
 }

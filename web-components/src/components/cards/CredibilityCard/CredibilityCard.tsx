@@ -51,7 +51,7 @@ export const CredibilityCard: React.FC<CredibilityCardProps> = ({
           fontWeight={[700]}
           pb={4}
           display="flex"
-          alignItems="center"
+          alignItems="flex-start"
         >
           <OutlinedCheckIcon sx={{ pr: 1.25 }} />
           {claim.description}

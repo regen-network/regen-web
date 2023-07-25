@@ -7,6 +7,7 @@ import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { LinkWithArrow } from 'components/atoms';
 
 import { BaseValue, isCompactedNameUrlOrOptionalUrl } from './MetaDetail.types';
+import { fromISO8601 } from './MetaDetail.utils';
 
 export type Props = {
   value?: BaseValue;
@@ -25,7 +26,7 @@ const MetaDetailBaseValue: React.FC<Props> = ({ value, rdfType, bodySize }) => {
     } else if (rdfType === 'xsd:date') {
       formattedValue = formatDate(value);
     } else {
-      formattedValue = value;
+      formattedValue = fromISO8601(value) || value;
     }
   } else if (isBoolean) {
     const toString = (value as boolean).toString();

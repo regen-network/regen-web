@@ -25,8 +25,10 @@ const MetaDetailBaseValue: React.FC<Props> = ({ value, rdfType, bodySize }) => {
       formattedValue = formatNumber({ num: value });
     } else if (rdfType === 'xsd:date') {
       formattedValue = formatDate(value);
-    } else {
+    } else if (rdfType?.includes('Duration')) {
       formattedValue = fromISO8601(value) || value;
+    } else {
+      formattedValue = value;
     }
   } else if (isBoolean) {
     const toString = (value as boolean).toString();

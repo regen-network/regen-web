@@ -285,7 +285,7 @@ echo '{
   "start_date": "2019-01-01T15:21:15Z",
   "end_date": "2019-12-31T15:21:25Z"
 }' > tmp/C01-002-005.json
-regen tx ecocredit create-batch tmp/C01-002-006.json --from local --yes
+regen tx ecocredit create-batch tmp/C01-002-005.json --from local --yes
 sleep 6
 echo '{
   "project_id": "C01-001",
@@ -314,7 +314,7 @@ echo '{
   "metadata": "regen:13toVh3NyL4uDzLFcrf6rUFMQnV8af87tBdSzh1Dvsc8zgEx193Y7hr.rdf",
   "start_date": "2019-01-01T15:36:47Z",
   "end_date": "2019-12-31T15:37:03Z"
-}' > tmp/C01-002-005.json
+}' > tmp/C01-002-006.json
 regen tx ecocredit create-batch tmp/C01-002-006.json --from local --yes
 sleep 6
 echo '{

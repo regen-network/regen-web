@@ -1,4 +1,6 @@
+import { SxProps, Theme } from '@mui/material';
 import { ExpandedTermDefinition } from 'jsonld';
+import { sxToArray } from 'utils/mui/sxToArray';
 
 import { Body } from 'web-components/lib/components/typography';
 import { TextSize } from 'web-components/lib/components/typography/sizing';
@@ -13,9 +15,15 @@ export type Props = {
   value?: BaseValue;
   rdfType?: ExpandedTermDefinition['@type'];
   bodySize?: TextSize;
+  sx?: SxProps<Theme>;
 };
 
-const MetaDetailBaseValue: React.FC<Props> = ({ value, rdfType, bodySize }) => {
+const MetaDetailBaseValue: React.FC<Props> = ({
+  value,
+  rdfType,
+  bodySize,
+  sx,
+}) => {
   let formattedValue: string | undefined;
   const isNumber = typeof value === 'number';
   const isString = typeof value === 'string';
@@ -37,9 +45,13 @@ const MetaDetailBaseValue: React.FC<Props> = ({ value, rdfType, bodySize }) => {
 
   return (
     <>
-      {formattedValue && <Body size={bodySize}>{formattedValue}</Body>}
+      {formattedValue && (
+        <Body size={bodySize} sx={sxToArray(sx)}>
+          {formattedValue}
+        </Body>
+      )}
       {value && isCompactedNameUrlOrOptionalUrl(value) && (
-        <Body size={bodySize} styleLinks={false}>
+        <Body size={bodySize} styleLinks={false} sx={sxToArray(sx)}>
           <LinkWithArrow
             href={value['schema:url']}
             label={value['schema:name']}

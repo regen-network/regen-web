@@ -1,10 +1,9 @@
 import { Flex } from 'web-components/lib/components/box';
-import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import { Body, Label } from 'web-components/lib/components/typography';
 
 import { ApprovedMethodologies } from 'lib/db/types/json-ld/methodology';
 
-import { Link } from 'components/atoms';
+import { Link, LinkWithArrow } from 'components/atoms';
 import { MetaDetail } from 'components/molecules';
 
 import { MAX_METHODOLOGIE_LINKS } from './CreditClassDetails.constants';
@@ -28,27 +27,16 @@ const ApprovedMethodologiesList: React.FC<
         <Flex flexDirection="column">
           {methodologies.slice(0, MAX_METHODOLOGIE_LINKS).map(methodologie => {
             return (
-              <Link
-                sx={{
-                  display: 'flex',
-                  color: 'secondary.main',
-                }}
-                href={methodologie?.['schema:url']}
-                target="_blank"
+              <Body
+                key={methodologie?.['schema:name']}
+                size="xl"
+                styleLinks={false}
               >
-                <Body size="xl" key={methodologie?.['schema:name']}>
-                  {methodologie?.['schema:name']}
-                  <SmallArrowIcon
-                    sx={{
-                      mb: 0.3,
-                      height: 9,
-                      width: 13,
-                      ml: 2,
-                      display: 'inline',
-                    }}
-                  />
-                </Body>
-              </Link>
+                <LinkWithArrow
+                  href={methodologie?.['schema:url']}
+                  label={methodologie?.['schema:name']}
+                />
+              </Body>
             );
           })}
           {count > MAX_METHODOLOGIE_LINKS && methodologyList?.['schema:url'] && (

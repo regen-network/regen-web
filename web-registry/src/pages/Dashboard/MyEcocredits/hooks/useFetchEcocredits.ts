@@ -81,9 +81,9 @@ export const useFetchEcocredits = ({
 
   const filteredBalances = balances.filter(
     balance =>
-      balance.escrowedAmount !== '0' ||
-      balance.retiredAmount !== '0' ||
-      balance.tradableAmount !== '0',
+      Number(balance.escrowedAmount) !== 0 ||
+      Number(balance.retiredAmount) !== 0 ||
+      Number(balance.tradableAmount) !== 0,
   );
   const {
     batches,

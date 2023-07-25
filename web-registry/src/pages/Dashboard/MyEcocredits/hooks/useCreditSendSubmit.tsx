@@ -132,7 +132,7 @@ const useCreditSendSubmit = ({
               label: 'recipient',
               value: { name: recipient, url: getAccountUrl(recipient) },
             },
-          ].filter(item => item.value.name !== '0'),
+          ].filter(item => Number(item.value.name) !== 0),
         );
         setTxModalHeader(SEND_HEADER);
         setTxModalTitle(creditSendTitle);

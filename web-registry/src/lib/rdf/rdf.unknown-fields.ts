@@ -31,6 +31,7 @@ const knownClassFields: KnownClassFields[] = [
   'regen:certifications',
   'regen:coBenefits',
   'regen:measuredGHGs',
+  'regen:bufferPoolAccounts',
 ];
 
 export function getClassUnknownFields<T extends CreditClassMetadataLD>(

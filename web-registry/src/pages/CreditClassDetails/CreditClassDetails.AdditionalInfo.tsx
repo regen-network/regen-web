@@ -11,6 +11,7 @@ import {
 import { MetaDetail } from 'components/molecules';
 
 import { ApprovedMethodologiesList } from './CreditClassDetails.ApprovedMethodologies';
+import { BufferPoolAccounts } from './CreditClassDetails.BufferPoolAccounts';
 
 interface AdditionalInfoProps<T extends CreditClassMetadataLD> {
   metadata?: T;
@@ -32,6 +33,7 @@ const AdditionalInfo = <T extends CreditClassMetadataLD>({
   const tokenizationSource = metadata?.['regen:tokenizationSource'];
   const coBenefits = metadata?.['regen:coBenefits'];
   const measuredGHGs = metadata?.['regen:measuredGHGs'];
+  const bufferPoolAccounts = metadata?.['regen:bufferPoolAccounts'];
 
   const unknownFields = getClassUnknownFields(metadata);
 
@@ -57,6 +59,9 @@ const AdditionalInfo = <T extends CreditClassMetadataLD>({
         <MetaDetail label="verification method" value={verificationMethod} />
         <MetaDetail label="co-benefits" value={coBenefits} />
         <MetaDetail label="measured GHGs" value={measuredGHGs} />
+        <BufferPoolAccounts
+          bufferPoolAccounts={bufferPoolAccounts?.['schema:itemListElement']}
+        />
         {unknownFields.map(([fieldName, value]) => (
           <MetaDetail
             key={fieldName}

@@ -23,7 +23,6 @@ const AdditionalInfo = <T extends CreditClassMetadataLD>({
 }: AdditionalInfoProps<T>): JSX.Element | null => {
   if (!metadata) return null;
 
-  const offsetGenerationMethods = metadata?.['regen:offsetGenerationMethod'];
   const sectoralScopes = metadata?.['regen:sectoralScope'];
   const verificationMethod = metadata?.['regen:verificationMethod'];
   const sourceRegistry = metadata?.['regen:sourceRegistry'];
@@ -50,10 +49,6 @@ const AdditionalInfo = <T extends CreditClassMetadataLD>({
         />
         <ApprovedMethodologiesList
           methodologyList={metadata['regen:approvedMethodologies']}
-        />
-        <MetaDetail
-          label="offset generation methods"
-          value={offsetGenerationMethods}
         />
         <MetaDetail label="project activities" value={projectActivities} />
         <MetaDetail label="sectoral scopes" value={sectoralScopes} />

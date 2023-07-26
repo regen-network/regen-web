@@ -17,7 +17,13 @@ export const getCreditClassDetailsTabs = ({
     },
     {
       label: 'Additional Info',
-      content: <AdditionalInfo metadata={creditClassMetadata} />,
+      content: (
+        <AdditionalInfo
+          classId={onChainCreditClassId}
+          creditTypeName="" // TODO
+          metadata={creditClassMetadata}
+        />
+      ),
       hidden: !creditClassMetadata,
     },
   ].filter(tab => tab.hidden !== true);

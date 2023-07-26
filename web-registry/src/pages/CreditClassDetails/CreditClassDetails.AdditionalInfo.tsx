@@ -33,7 +33,15 @@ const AdditionalInfo: React.FC<React.PropsWithChildren<AdditionalInfoProps>> =
     const unknownFields = getClassUnknownFields(metadata);
 
     return (
-      <Box sx={{ py: 8 }}>
+      <Box
+        sx={{
+          p: 8,
+          backgroundColor: 'primary.main',
+          border: '1px solid',
+          borderColor: 'info.light',
+          borderRadius: '0 0 8px 8px',
+        }}
+      >
         <Grid container spacing={8}>
           <MetaDetail
             label="credit type"

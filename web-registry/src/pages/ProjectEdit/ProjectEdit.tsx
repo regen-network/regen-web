@@ -33,11 +33,11 @@ import NotFoundPage from 'pages/NotFound';
 import WithLoader from 'components/atoms/WithLoader';
 import { useMsgClient } from 'hooks';
 
+import { ProjectDenied } from '../../components/templates/ProjectFormTemplate/Project.Denied';
 import useProjectEditSubmit, {
   UseProjectEditSubmitParams,
 } from './hooks/useProjectEditSubmit';
 import { EDIT_PROJECT } from './ProjectEdit.constants';
-import { ProjectEditDenied } from './ProjectEdit.Denied';
 import { ProjectEditNav } from './ProjectEdit.Nav';
 import { useProjectEditStyles } from './ProjectEdit.styles';
 import { FormRef, Values } from './ProjectEdit.types';
@@ -145,7 +145,8 @@ function ProjectEdit(): JSX.Element {
 
   if (isNotAdmin) {
     return (
-      <ProjectEditDenied
+      <ProjectDenied
+        isEdit
         address={onChainProject?.admin}
         projectId={projectId}
       />

@@ -92,7 +92,8 @@ export const useFetchBaskets = ({ credits, address }: Params): Response => {
     }))
     .filter(
       basketToken =>
-        basketToken.balance && basketToken.balance?.balance?.amount !== '0',
+        basketToken.balance &&
+        Number(basketToken.balance.balance?.amount) !== 0,
     );
 
   const creditBaskets = normalizeCreditBaskets({

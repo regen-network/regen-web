@@ -19,9 +19,9 @@ import useQueryBalances from './useQueryBalances';
 
 const hasBatchBalance = (batchWithBalance: BatchInfoWithBalance): boolean => {
   return (
-    batchWithBalance?.balance?.tradableAmount !== '0' ||
-    batchWithBalance.balance.retiredAmount !== '0' ||
-    batchWithBalance.balance.escrowedAmount !== '0'
+    Number(batchWithBalance?.balance?.tradableAmount) !== 0 ||
+    Number(batchWithBalance?.balance?.retiredAmount) !== 0 ||
+    Number(batchWithBalance?.balance?.escrowedAmount) !== 0
   );
 };
 

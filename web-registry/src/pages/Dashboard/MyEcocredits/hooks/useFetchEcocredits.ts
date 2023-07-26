@@ -79,6 +79,12 @@ export const useFetchEcocredits = ({
   const balancesPagination = balancesData?.pagination;
   const allBalancesCount = Number(balancesPagination?.total ?? 0);
 
+  const filteredBalances = balances.filter(
+    balance =>
+      Number(balance.escrowedAmount) !== 0 ||
+      Number(balance.retiredAmount) !== 0 ||
+      Number(balance.tradableAmount) !== 0,
+  );
   const {
     batches,
     isBatchesLoading,
@@ -88,7 +94,7 @@ export const useFetchEcocredits = ({
     isProjectsMetadataLoading,
     classesMetadata,
     isClassesMetadataLoading,
-  } = useBatchesWithMetadata(balances);
+  } = useBatchesWithMetadata(filteredBalances);
 
   // AllCreditClasses
   const { data: creditClassData } = useQuery(
@@ -98,27 +104,20 @@ export const useFetchEcocredits = ({
   // Normalization
   // isLoading -> undefined: return empty strings in normalizer to trigger skeleton
   // !isLoading -> null/result: return results with field value different from empty strings and stop displaying the skeletons
-  const credits = balances
-    .filter(
-      balance =>
-        balance.escrowedAmount !== '0' ||
-        balance.retiredAmount !== '0' ||
-        balance.tradableAmount !== '0',
-    )
-    .map((balance, index) =>
-      normalizeEcocredits({
-        balance,
-        batch: isBatchesLoading ? undefined : batches[index]?.batch,
-        projectMetadata: isProjectsMetadataLoading
-          ? undefined
-          : projectsMetadata[index],
-        project: isProjectsLoading ? undefined : projects[index]?.project,
-        sanityCreditClassData: creditClassData,
-        creditClassMetadata: isClassesMetadataLoading
-          ? undefined
-          : classesMetadata[index],
-      }),
-    );
+  const credits = filteredBalances.map((balance, index) =>
+    normalizeEcocredits({
+      balance,
+      batch: isBatchesLoading ? undefined : batches[index]?.batch,
+      projectMetadata: isProjectsMetadataLoading
+        ? undefined
+        : projectsMetadata[index],
+      project: isProjectsLoading ? undefined : projects[index]?.project,
+      sanityCreditClassData: creditClassData,
+      creditClassMetadata: isClassesMetadataLoading
+        ? undefined
+        : classesMetadata[index],
+    }),
+  );
 
   const paginationParamsWithCount = useMemo(
     () => ({ ...paginationParams, count: allBalancesCount }),

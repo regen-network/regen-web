@@ -45,7 +45,7 @@ export default function useBasketTokens(
     );
 
     const withPositiveBalance = (basket: BasketTokens): boolean =>
-      basket.balance?.balance?.amount !== '0';
+      Number(basket.balance?.balance?.amount) !== 0;
 
     setBasketTokens(_basketTokens.filter(withPositiveBalance));
     isFetchingRef.current = false;

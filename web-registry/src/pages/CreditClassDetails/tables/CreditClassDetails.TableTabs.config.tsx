@@ -6,8 +6,9 @@ import { AdditionalInfo } from '../CreditClassDetails.AdditionalInfo';
 import { CreditClassDetailsTableTabsProps } from './CreditClassDetails.TableTabs.types';
 
 export const getCreditClassDetailsTabs = ({
-  onChainCreditClassId,
   creditClassMetadata,
+  creditTypeName,
+  onChainCreditClassId,
 }: CreditClassDetailsTableTabsProps): IconTabProps[] =>
   [
     {
@@ -20,7 +21,7 @@ export const getCreditClassDetailsTabs = ({
       content: (
         <AdditionalInfo
           classId={onChainCreditClassId}
-          creditTypeName="" // TODO
+          creditTypeName={creditTypeName}
           metadata={creditClassMetadata}
         />
       ),

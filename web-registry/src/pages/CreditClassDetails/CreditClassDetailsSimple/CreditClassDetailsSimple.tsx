@@ -195,6 +195,7 @@ const CreditClassDetailsSimple: React.FC<
         className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}
       >
         <CreditClassDetailsTableTabs
+          creditTypeName={creditTypeData?.creditType?.name}
           creditClassMetadata={metadata}
           onChainCreditClassId={onChainClass.id}
         />

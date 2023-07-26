@@ -80,6 +80,8 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
       isEdit={isEdit}
       title="Roles"
       saveAndExit={saveAndExit}
+      project={offChainProject}
+      loading={withMetadataLoading}
     >
       <WithLoader
         isLoading={!loaded || editContextLoading || withMetadataLoading}

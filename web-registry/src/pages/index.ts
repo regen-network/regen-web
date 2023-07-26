@@ -24,5 +24,4 @@ export * from './Project';
 export * from './ProjectEdit';
 export * from './ProjectLocation';
 export * from './Roles';
-export * from './Story';
 export * from './VerifyEmail';

@@ -11,13 +11,14 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
-  const { metadata, metadataSubmit } = useProjectWithMetadata({
-    projectId,
-    isEdit,
-    projectEditSubmit,
-    navigateNext,
-    onChainProject,
-  });
+  const { metadata, metadataSubmit, offChainProject, loading } =
+    useProjectWithMetadata({
+      projectId,
+      isEdit,
+      projectEditSubmit,
+      navigateNext,
+      onChainProject,
+    });
 
   let initialFieldValues: BasicInfoFormValues | undefined;
   if (metadata) {
@@ -39,6 +40,8 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
       isEdit={isEdit}
       title="Basic Info"
       saveAndExit={saveAndExit}
+      project={offChainProject}
+      loading={loading}
     >
       <BasicInfoForm
         submit={metadataSubmit}

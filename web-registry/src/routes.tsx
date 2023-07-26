@@ -61,7 +61,6 @@ const ProjectFinished = lazy(() => import('./pages/ProjectFinished'));
 const ProjectLocation = lazy(() => import('./pages/ProjectLocation'));
 const ProjectReview = lazy(() => import('./pages/ProjectReview'));
 const Roles = lazy(() => import('./pages/Roles'));
-const Story = lazy(() => import('./pages/Story'));
 const VerifyEmail = lazy(() => import('./pages/VerifyEmail'));
 const ProjectEdit = lazy(() => import('./pages/ProjectEdit'));
 const Activity = lazy(() => import('./pages/Activity'));
@@ -178,7 +177,6 @@ export const getRoutes = ({
               path="location"
               element={<KeplrRoute component={ProjectLocation} />}
             />
-            <Route path="story" element={<KeplrRoute component={Story} />} />
             <Route
               path="description"
               element={<KeplrRoute component={Description} />}
@@ -206,7 +204,6 @@ export const getRoutes = ({
                 path="location"
                 element={<KeplrRoute component={ProjectLocation} />}
               />
-              <Route path="story" element={<KeplrRoute component={Story} />} />
               <Route
                 path="description"
                 element={<KeplrRoute component={Description} />}

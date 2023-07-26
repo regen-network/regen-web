@@ -19,11 +19,10 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { OFFSET_GENERATION_METHOD } from 'pages/Buyers/Buyers.constants';
 import { EcocreditsSection } from 'components/molecules';
-import { CreditBatches } from 'components/organisms';
 import { useTags } from 'hooks/useTags';
 
-import { AdditionalInfo } from '../CreditClassDetails.AdditionalInfo';
 import { MemoizedProjects as Projects } from '../CreditClassDetails.Projects';
+import { CreditClassDetailsTableTabs } from '../tables/CreditClassDetails.TableTabs';
 import {
   CREDIT_CLASS_TOOLTIP,
   ELIGIBLE_ACTIVITIES,
@@ -175,10 +174,6 @@ const CreditClassDetailsSimple: React.FC<
                 {metadata?.['schema:description']}
               </ReadMore>
             )}
-            <AdditionalInfo
-              metadata={metadata}
-              creditTypeName={creditTypeData?.creditType?.name}
-            />
           </Box>
           <ImpactTags
             impact={impactCards}
@@ -199,10 +194,9 @@ const CreditClassDetailsSimple: React.FC<
       <div
         className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}
       >
-        <CreditBatches
-          creditClassId={onChainClass.id}
-          titleAlign="left"
-          withSection
+        <CreditClassDetailsTableTabs
+          creditClassMetadata={metadata}
+          onChainCreditClassId={onChainClass.id}
         />
       </div>
     </Box>

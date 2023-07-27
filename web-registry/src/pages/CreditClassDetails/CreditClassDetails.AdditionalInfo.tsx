@@ -15,8 +15,8 @@ import { MetaDetail } from 'components/molecules';
 
 import {
   CREDIT_CLASS_DETAILS_ADDITIONAL_INFO_CLASS_ID_TOOLTIP,
-  CREDIT_CLASS_DETAILS_ADDITIONAL_INFO_HELPER_TEXT
-} from "./CreditClassDetails.AdditionalInfo.constants";
+  CREDIT_CLASS_DETAILS_ADDITIONAL_INFO_HELPER_TEXT,
+} from './CreditClassDetails.constants';
 import { ApprovedMethodologiesList } from './CreditClassDetails.ApprovedMethodologies';
 import { BufferPoolAccounts } from './CreditClassDetails.BufferPoolAccounts';
 
@@ -62,7 +62,7 @@ const AdditionalInfo = <T extends CreditClassMetadataLD>({
           <Grid item xs={12} sm={6} sx={{ flexDirection: 'column' }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Label size="xs" sx={{ mr: 1 }}>
-                class id:
+                class id
               </Label>
               <InfoTooltipWithIcon
                 title={CREDIT_CLASS_DETAILS_ADDITIONAL_INFO_CLASS_ID_TOOLTIP}

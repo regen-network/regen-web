@@ -6,7 +6,7 @@ import { ApprovedMethodologies } from 'lib/db/types/json-ld/methodology';
 import { Link, LinkWithArrow } from 'components/atoms';
 import { MetaDetail } from 'components/molecules';
 
-import { MAX_METHODOLOGIE_LINKS } from './CreditClassDetails.constants';
+import { MAX_METHODOLOGIES_LINKS } from './CreditClassDetails.constants';
 
 const ApprovedMethodologiesList: React.FC<
   React.PropsWithChildren<{
@@ -25,7 +25,7 @@ const ApprovedMethodologiesList: React.FC<
       label="approved methodologies"
       customContent={
         <Flex flexDirection="column">
-          {methodologies.slice(0, MAX_METHODOLOGIE_LINKS).map(methodologie => {
+          {methodologies.slice(0, MAX_METHODOLOGIES_LINKS).map(methodologie => {
             return (
               <Body
                 key={methodologie?.['schema:name']}
@@ -39,7 +39,7 @@ const ApprovedMethodologiesList: React.FC<
               </Body>
             );
           })}
-          {count > MAX_METHODOLOGIE_LINKS && methodologyList?.['schema:url'] && (
+          {count > MAX_METHODOLOGIES_LINKS && methodologyList?.['schema:url'] && (
             <Link
               sx={{
                 display: 'flex',
@@ -50,7 +50,7 @@ const ApprovedMethodologiesList: React.FC<
               target="_blank"
             >
               <Label sx={{ fontSize: [16], mt: 2 }}>{`+ ${
-                count - MAX_METHODOLOGIE_LINKS
+                count - MAX_METHODOLOGIES_LINKS
               } more`}</Label>
             </Link>
           )}

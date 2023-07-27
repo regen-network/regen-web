@@ -5,5 +5,5 @@ export const getCreditClassDisplayName = (
   metadata?: Partial<CreditClassMetadataLD>,
 ) => {
   const name = metadata?.['schema:name'];
-  return name ? `${name} (${creditClassId})` : creditClassId;
+  return name ? name : creditClassId;
 };

@@ -324,6 +324,39 @@ export type CreateMetadataGraphPayloadMetadataGraphEdgeArgs = {
   orderBy?: Maybe<Array<MetadataGraphsOrderBy>>;
 };
 
+/** All input for the create `Myproject` mutation. */
+export type CreateMyprojectInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Myproject` to be created by this mutation. */
+  myproject: MyprojectInput;
+};
+
+/** The output of our create `Myproject` mutation. */
+export type CreateMyprojectPayload = {
+  __typename?: 'CreateMyprojectPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Myproject` that was created by this mutation. */
+  myproject?: Maybe<Myproject>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** An edge for our `Myproject`. May be used by Relay 1. */
+  myprojectEdge?: Maybe<MyprojectsEdge>;
+};
+
+
+/** The output of our create `Myproject` mutation. */
+export type CreateMyprojectPayloadMyprojectEdgeArgs = {
+  orderBy?: Maybe<Array<MyprojectsOrderBy>>;
+};
+
 /** All input for the create `Organization` mutation. */
 export type CreateOrganizationInput = {
   /**
@@ -1842,6 +1875,8 @@ export type Mutation = {
   createDocument?: Maybe<CreateDocumentPayload>;
   /** Creates a single `MetadataGraph`. */
   createMetadataGraph?: Maybe<CreateMetadataGraphPayload>;
+  /** Creates a single `Myproject`. */
+  createMyproject?: Maybe<CreateMyprojectPayload>;
   /** Creates a single `Organization`. */
   createOrganization?: Maybe<CreateOrganizationPayload>;
   /** Creates a single `Party`. */
@@ -2008,6 +2043,12 @@ export type MutationCreateDocumentArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateMetadataGraphArgs = {
   input: CreateMetadataGraphInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateMyprojectArgs = {
+  input: CreateMyprojectInput;
 };
 
 
@@ -2399,6 +2440,120 @@ export type MutationDeleteWalletByIdArgs = {
 export type MutationDeleteWalletByAddrArgs = {
   input: DeleteWalletByAddrInput;
 };
+
+export type Myproject = {
+  __typename?: 'Myproject';
+  id?: Maybe<Scalars['UUID']>;
+  createdAt?: Maybe<Scalars['Datetime']>;
+  updatedAt?: Maybe<Scalars['Datetime']>;
+  developerId?: Maybe<Scalars['UUID']>;
+  creditClassId?: Maybe<Scalars['UUID']>;
+  metadata?: Maybe<Scalars['JSON']>;
+  handle?: Maybe<Scalars['String']>;
+  onChainId?: Maybe<Scalars['String']>;
+  adminWalletId?: Maybe<Scalars['UUID']>;
+  verifierId?: Maybe<Scalars['UUID']>;
+};
+
+/**
+ * A condition to be used against `Myproject` object types. All fields are tested
+ * for equality and combined with a logical ‘and.’
+ */
+export type MyprojectCondition = {
+  /** Checks for equality with the object’s `id` field. */
+  id?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `createdAt` field. */
+  createdAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `updatedAt` field. */
+  updatedAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `developerId` field. */
+  developerId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `creditClassId` field. */
+  creditClassId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `metadata` field. */
+  metadata?: Maybe<Scalars['JSON']>;
+  /** Checks for equality with the object’s `handle` field. */
+  handle?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `onChainId` field. */
+  onChainId?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `adminWalletId` field. */
+  adminWalletId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `verifierId` field. */
+  verifierId?: Maybe<Scalars['UUID']>;
+};
+
+/** A filter to be used against `Myproject` object types. All fields are combined with a logical ‘and.’ */
+export type MyprojectFilter = {
+  /** Filter by the object’s `metadata` field. */
+  metadata?: Maybe<JsonFilter>;
+  /** Checks for all expressions in this list. */
+  and?: Maybe<Array<MyprojectFilter>>;
+  /** Checks for any expressions in this list. */
+  or?: Maybe<Array<MyprojectFilter>>;
+  /** Negates the expression. */
+  not?: Maybe<MyprojectFilter>;
+};
+
+/** An input for mutations affecting `Myproject` */
+export type MyprojectInput = {
+  id?: Maybe<Scalars['UUID']>;
+  createdAt?: Maybe<Scalars['Datetime']>;
+  updatedAt?: Maybe<Scalars['Datetime']>;
+  developerId?: Maybe<Scalars['UUID']>;
+  creditClassId?: Maybe<Scalars['UUID']>;
+  metadata?: Maybe<Scalars['JSON']>;
+  handle?: Maybe<Scalars['String']>;
+  onChainId?: Maybe<Scalars['String']>;
+  adminWalletId?: Maybe<Scalars['UUID']>;
+  verifierId?: Maybe<Scalars['UUID']>;
+};
+
+/** A connection to a list of `Myproject` values. */
+export type MyprojectsConnection = {
+  __typename?: 'MyprojectsConnection';
+  /** A list of `Myproject` objects. */
+  nodes: Array<Maybe<Myproject>>;
+  /** A list of edges which contains the `Myproject` and cursor to aid in pagination. */
+  edges: Array<MyprojectsEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Myproject` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Myproject` edge in the connection. */
+export type MyprojectsEdge = {
+  __typename?: 'MyprojectsEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Myproject` at the end of the edge. */
+  node?: Maybe<Myproject>;
+};
+
+/** Methods to use when ordering `Myproject`. */
+export enum MyprojectsOrderBy {
+  Natural = 'NATURAL',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  CreatedAtAsc = 'CREATED_AT_ASC',
+  CreatedAtDesc = 'CREATED_AT_DESC',
+  UpdatedAtAsc = 'UPDATED_AT_ASC',
+  UpdatedAtDesc = 'UPDATED_AT_DESC',
+  DeveloperIdAsc = 'DEVELOPER_ID_ASC',
+  DeveloperIdDesc = 'DEVELOPER_ID_DESC',
+  CreditClassIdAsc = 'CREDIT_CLASS_ID_ASC',
+  CreditClassIdDesc = 'CREDIT_CLASS_ID_DESC',
+  MetadataAsc = 'METADATA_ASC',
+  MetadataDesc = 'METADATA_DESC',
+  HandleAsc = 'HANDLE_ASC',
+  HandleDesc = 'HANDLE_DESC',
+  OnChainIdAsc = 'ON_CHAIN_ID_ASC',
+  OnChainIdDesc = 'ON_CHAIN_ID_DESC',
+  AdminWalletIdAsc = 'ADMIN_WALLET_ID_ASC',
+  AdminWalletIdDesc = 'ADMIN_WALLET_ID_DESC',
+  VerifierIdAsc = 'VERIFIER_ID_ASC',
+  VerifierIdDesc = 'VERIFIER_ID_DESC'
+}
 
 /** An object with a globally unique `ID`. */
 export type Node = {
@@ -3019,6 +3174,7 @@ export type Project = Node & {
   onChainId?: Maybe<Scalars['String']>;
   adminWalletId?: Maybe<Scalars['UUID']>;
   verifierId?: Maybe<Scalars['UUID']>;
+  test?: Maybe<Array<Maybe<Scalars['String']>>>;
   /** Reads a single `Party` that is related to this `Project`. */
   partyByDeveloperId?: Maybe<Party>;
   /** Reads a single `CreditClass` that is related to this `Project`. */
@@ -3078,6 +3234,8 @@ export type ProjectCondition = {
   adminWalletId?: Maybe<Scalars['UUID']>;
   /** Checks for equality with the object’s `verifierId` field. */
   verifierId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `test` field. */
+  test?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 /** A filter to be used against `Project` object types. All fields are combined with a logical ‘and.’ */
@@ -3104,6 +3262,7 @@ export type ProjectInput = {
   onChainId?: Maybe<Scalars['String']>;
   adminWalletId?: Maybe<Scalars['UUID']>;
   verifierId?: Maybe<Scalars['UUID']>;
+  test?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 /** Represents an update to a `Project`. Fields that are set will be updated. */
@@ -3118,6 +3277,7 @@ export type ProjectPatch = {
   onChainId?: Maybe<Scalars['String']>;
   adminWalletId?: Maybe<Scalars['UUID']>;
   verifierId?: Maybe<Scalars['UUID']>;
+  test?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 /** A connection to a list of `Project` values. */
@@ -3165,6 +3325,8 @@ export enum ProjectsOrderBy {
   AdminWalletIdDesc = 'ADMIN_WALLET_ID_DESC',
   VerifierIdAsc = 'VERIFIER_ID_ASC',
   VerifierIdDesc = 'VERIFIER_ID_DESC',
+  TestAsc = 'TEST_ASC',
+  TestDesc = 'TEST_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -3193,6 +3355,8 @@ export type Query = Node & {
   allDocuments?: Maybe<DocumentsConnection>;
   /** Reads and enables pagination through a set of `MetadataGraph`. */
   allMetadataGraphs?: Maybe<MetadataGraphsConnection>;
+  /** Reads and enables pagination through a set of `Myproject`. */
+  allMyprojects?: Maybe<MyprojectsConnection>;
   /** Reads and enables pagination through a set of `Organization`. */
   allOrganizations?: Maybe<OrganizationsConnection>;
   /** Reads and enables pagination through a set of `Party`. */
@@ -3331,6 +3495,19 @@ export type QueryAllMetadataGraphsArgs = {
   orderBy?: Maybe<Array<MetadataGraphsOrderBy>>;
   condition?: Maybe<MetadataGraphCondition>;
   filter?: Maybe<MetadataGraphFilter>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllMyprojectsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<MyprojectsOrderBy>>;
+  condition?: Maybe<MyprojectCondition>;
+  filter?: Maybe<MyprojectFilter>;
 };
 
 
@@ -4910,7 +5087,10 @@ export type ProjectByIdQuery = (
   & { projectById?: Maybe<(
     { __typename?: 'Project' }
     & Pick<Project, 'id' | 'metadata' | 'developerId' | 'onChainId'>
-    & { partyByDeveloperId?: Maybe<(
+    & { walletByAdminWalletId?: Maybe<(
+      { __typename?: 'Wallet' }
+      & Pick<Wallet, 'addr'>
+    )>, partyByDeveloperId?: Maybe<(
       { __typename?: 'Party' }
       & PartyFieldsFragment
     )>, partyByVerifierId?: Maybe<(
@@ -4946,7 +5126,10 @@ export type ProjectByOnChainIdQuery = (
 export type ProjectFieldsFragment = (
   { __typename?: 'Project' }
   & Pick<Project, 'id' | 'onChainId' | 'metadata'>
-  & { creditClassByCreditClassId?: Maybe<(
+  & { walletByAdminWalletId?: Maybe<(
+    { __typename?: 'Wallet' }
+    & Pick<Wallet, 'addr'>
+  )>, creditClassByCreditClassId?: Maybe<(
     { __typename?: 'CreditClass' }
     & Pick<CreditClass, 'onChainId'>
     & { partyByRegistryId?: Maybe<(
@@ -5138,6 +5321,9 @@ export const PartyFieldsFragmentDoc = gql`
 export const ProjectFieldsFragmentDoc = gql`
     fragment projectFields on Project {
   id
+  walletByAdminWalletId {
+    addr
+  }
   onChainId
   metadata
   creditClassByCreditClassId {
@@ -5811,6 +5997,9 @@ export const ProjectByIdDocument = gql`
     query ProjectById($id: UUID!) {
   projectById(id: $id) {
     id
+    walletByAdminWalletId {
+      addr
+    }
     metadata
     developerId
     onChainId

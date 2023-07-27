@@ -29,14 +29,15 @@ import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQue
 import { useWallet } from 'lib/wallet/wallet';
 
 import { OnTxSuccessfulProps } from 'pages/Dashboard/MyEcocredits/MyEcocredits.types';
+import NotFoundPage from 'pages/NotFound';
 import WithLoader from 'components/atoms/WithLoader';
 import { useMsgClient } from 'hooks';
 
+import { ProjectDenied } from '../../components/organisms/ProjectDenied/ProjectDenied';
 import useProjectEditSubmit, {
   UseProjectEditSubmitParams,
 } from './hooks/useProjectEditSubmit';
 import { EDIT_PROJECT } from './ProjectEdit.constants';
-import { ProjectEditDenied } from './ProjectEdit.Denied';
 import { ProjectEditNav } from './ProjectEdit.Nav';
 import { useProjectEditStyles } from './ProjectEdit.styles';
 import { FormRef, Values } from './ProjectEdit.types';
@@ -141,13 +142,18 @@ function ProjectEdit(): JSX.Element {
   const formRef = useRef<FormikProps<FormikValues>>(null);
   // For react-hook-form based forms
   const isDirtyRef = useRef<boolean>(false);
+
   if (isNotAdmin) {
     return (
-      <ProjectEditDenied
+      <ProjectDenied
+        isEdit
         address={onChainProject?.admin}
         projectId={projectId}
       />
     );
+  }
+  if (!isLoading && !onChainProject) {
+    return <NotFoundPage />;
   }
 
   const onBackClick = (): void => {

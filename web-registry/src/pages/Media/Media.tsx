@@ -12,14 +12,15 @@ const Media = (): JSX.Element => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
-  const { offChainProject, metadata, metadataSubmit } = useProjectWithMetadata({
-    projectId,
-    isEdit,
-    projectEditSubmit,
-    navigateNext,
-    onChainProject,
-    anchored: false,
-  });
+  const { offChainProject, metadata, metadataSubmit, loading } =
+    useProjectWithMetadata({
+      projectId,
+      isEdit,
+      projectEditSubmit,
+      navigateNext,
+      onChainProject,
+      anchored: false,
+    });
 
   const initialValues: MediaFormSchemaType = {
     'regen:previewPhoto': metadata?.['regen:previewPhoto'] ?? {
@@ -52,6 +53,8 @@ const Media = (): JSX.Element => {
       isEdit={isEdit}
       title="Media"
       saveAndExit={saveAndExit}
+      project={offChainProject}
+      loading={loading}
     >
       <WithLoader
         isLoading={!metadata}

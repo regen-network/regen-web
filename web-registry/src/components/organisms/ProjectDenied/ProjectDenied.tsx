@@ -11,9 +11,10 @@ import { Link } from 'components/atoms';
 type Props = {
   address?: string;
   projectId?: string;
+  isEdit?: boolean;
 };
 
-export const ProjectEditDenied = ({ address, projectId }: Props) => {
+export const ProjectDenied = ({ address, projectId, isEdit }: Props) => {
   return (
     <Flex
       alignItems="center"
@@ -31,7 +32,7 @@ export const ProjectEditDenied = ({ address, projectId }: Props) => {
       }}
     >
       <Title as="h1" variant="h3" sx={{ mb: { xs: 10, sm: 7.5 } }}>
-        {'Edit Project - Access Denied'}
+        {`${isEdit ? 'Edit' : 'Create'} Project - Access Denied`}
       </Title>
       <Subtitle
         size="sm"
@@ -45,7 +46,7 @@ export const ProjectEditDenied = ({ address, projectId }: Props) => {
           textAlign: 'center',
         }}
       >
-        {'To edit you must have access to the following address: '}
+        {'You must have access to the following address: '}
       </Subtitle>
       <Link
         href={`/ecocredits/accounts/${address}/portfolio`}
@@ -58,26 +59,28 @@ export const ProjectEditDenied = ({ address, projectId }: Props) => {
         {address}
       </Link>
       <Body size="lg" sx={{ mb: 10, textAlign: 'center' }}>
-        {
-          'Please logout, select this address in keplr, and log in again in order to access this page.'
-        }
+        {'Please select this address in keplr in order to access this page.'}
       </Body>
-      <Subtitle
-        size="sm"
-        sx={{
-          mb: { xs: 4, sm: 3.375 },
-          textTransform: 'uppercase',
-          color: 'info.dark',
-          fontWeight: 800,
-          fontFamily: headerFontFamily,
-          letterSpacing: 1,
-        }}
-      >
-        {'The project can still be viewed at:'}
-      </Subtitle>
-      <Link
-        href={`/project/${projectId}`}
-      >{`app.regen.network/project/${projectId}`}</Link>
+      {isEdit && (
+        <>
+          <Subtitle
+            size="sm"
+            sx={{
+              mb: { xs: 4, sm: 3.375 },
+              textTransform: 'uppercase',
+              color: 'info.dark',
+              fontWeight: 800,
+              fontFamily: headerFontFamily,
+              letterSpacing: 1,
+            }}
+          >
+            {'The project can still be viewed at:'}
+          </Subtitle>
+          <Link
+            href={`/project/${projectId}`}
+          >{`app.regen.network/project/${projectId}`}</Link>
+        </>
+      )}
     </Flex>
   );
 };

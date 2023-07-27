@@ -5,7 +5,7 @@ import { useWallet } from 'lib/wallet/wallet';
 import { NotFoundPage } from 'pages/NotFound/NotFound';
 import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';
 
-import { ProjectDenied } from './Project.Denied';
+import { ProjectDenied } from '../../organisms/ProjectDenied/ProjectDenied';
 
 type Props = {
   adminAddr?: string;

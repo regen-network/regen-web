@@ -33,7 +33,7 @@ import NotFoundPage from 'pages/NotFound';
 import WithLoader from 'components/atoms/WithLoader';
 import { useMsgClient } from 'hooks';
 
-import { ProjectDenied } from '../../components/templates/ProjectFormTemplate/Project.Denied';
+import { ProjectDenied } from '../../components/organisms/ProjectDenied/ProjectDenied';
 import useProjectEditSubmit, {
   UseProjectEditSubmitParams,
 } from './hooks/useProjectEditSubmit';

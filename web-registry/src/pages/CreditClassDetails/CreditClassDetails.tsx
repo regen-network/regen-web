@@ -33,10 +33,7 @@ import useImpact from 'pages/CreditClassDetails/hooks/useImpact';
 import { getDisplayPartyOrAddress } from 'components/organisms/ProjectDetailsSection/ProjectDetailsSection.utils';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { AVG_PRICE_TOOLTIP_CREDIT_CLASS } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants';
-import {
-  getDisplayParty,
-  getParty,
-} from 'components/templates/ProjectDetails/ProjectDetails.utils';
+import { getDisplayParty } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { useLedger } from '../../ledger';
 import { BOOK_CALL_LINK } from './CreditClassDetails.constants';
@@ -169,7 +166,8 @@ function CreditClassDetails({
       ) ?? [],
   });
 
-  const creditClassAdminParty = getParty(
+  const creditClassAdminParty = getDisplayPartyOrAddress(
+    onChainClass?.admin,
     adminPartyByAddrData?.walletByAddr?.partyByWalletId,
   );
   const creditClassProgramParty = getDisplayParty(

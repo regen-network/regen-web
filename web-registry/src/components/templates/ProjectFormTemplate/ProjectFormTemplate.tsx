@@ -23,7 +23,6 @@ const ProjectFormTemplate: React.FC<React.PropsWithChildren<Props>> = ({
   children,
 }) => {
   const adminAddr = project?.walletByAdminWalletId?.addr;
-  console.log(project);
   return (
     <ProjectFormAccessTemplate
       loading={loading}

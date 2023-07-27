@@ -1,9 +1,7 @@
 import { Box, useTheme } from '@mui/material';
 
-import {
-  IconTabProps,
-  IconTabs,
-} from 'web-components/lib/components/tabs/IconTabs';
+import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
+import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 import {
   containerPaddingX,
   containerStyles,

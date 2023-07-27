@@ -60,13 +60,15 @@ function useGetCreditClassOptions(): {
         const title = name
           ? `${name} (${creditClassOnChainId})`
           : creditClassOnChainId;
-
         const { issuers } = await queryClassIssuers(onChainClass.id);
         if (issuers?.includes(wallet.address)) {
           ccOptions.push({
             id: offChainMatch?.id || '',
             onChainId: creditClassOnChainId || '',
-            imageSrc: contentMatch?.image?.image?.asset?.url || '',
+            imageSrc:
+              contentMatch?.image?.image?.asset?.url ||
+              metadata?.['schema:image'] ||
+              '',
             title: title || '',
             description: metadata?.['schema:description'],
           });

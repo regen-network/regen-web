@@ -10,7 +10,6 @@ interface ClassOptionProps {
   title: string;
   imgSrc?: string;
   description?: string;
-  disabled?: boolean;
   onClick: () => void;
 }
 
@@ -19,7 +18,7 @@ interface ClassOptionProps {
 */
 const ChooseCreditClassItem: React.FC<
   React.PropsWithChildren<ClassOptionProps>
-> = ({ title, imgSrc, description, disabled, onClick }) => (
+> = ({ title, imgSrc, description, onClick }) => (
   <Grid item xs={12} sm={6}>
     <ImageActionCard
       btnText="Choose credit class"
@@ -27,7 +26,6 @@ const ChooseCreditClassItem: React.FC<
       imgSrc={imgSrc || DefaultCreditClassImage}
       description={description || ''}
       onClick={onClick}
-      disabled={disabled}
       startIcon={<CreditClassIcon sx={{ mt: '-2px' }} />}
     />
   </Grid>

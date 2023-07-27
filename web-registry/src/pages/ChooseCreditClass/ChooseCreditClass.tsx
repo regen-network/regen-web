@@ -85,7 +85,6 @@ const ChooseCreditClass: React.FC<React.PropsWithChildren<unknown>> = () => {
               title={creditClassOption.title}
               imgSrc={creditClassOption.imageSrc}
               description={creditClassOption.description}
-              disabled={creditClassOption?.disabled}
               onClick={() =>
                 handleSelection(
                   creditClassOption.id,

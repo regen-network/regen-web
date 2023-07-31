@@ -7,5 +7,5 @@ export const ProjectDetailsTableTabs = (
   props: ProjectDetailsTableTabsProps,
 ) => {
   const tabs = getProjectDetailsTabs(props);
-  return tabs.length > 0 ? <TableTabs tabs={tabs} /> : null;
+  return <TableTabs tabs={tabs} />;
 };

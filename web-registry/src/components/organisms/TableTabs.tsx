@@ -9,6 +9,9 @@ import {
 
 export const TableTabs = ({ tabs }: { tabs: IconTabProps[] }) => {
   const theme = useTheme();
+  if (tabs.length === 0) {
+    return null;
+  }
   return (
     <Box
       sx={{

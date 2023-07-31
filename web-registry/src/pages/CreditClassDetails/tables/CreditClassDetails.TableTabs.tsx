@@ -7,5 +7,5 @@ export const CreditClassDetailsTableTabs = (
   props: CreditClassDetailsTableTabsProps,
 ) => {
   const tabs = getCreditClassDetailsTabs(props);
-  return tabs.length > 0 ? <TableTabs tabs={tabs} /> : null;
+  return <TableTabs tabs={tabs} />;
 };

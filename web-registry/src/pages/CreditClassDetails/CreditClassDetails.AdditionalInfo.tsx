@@ -31,8 +31,6 @@ const AdditionalInfo = <T extends CreditClassMetadataLD>({
   metadata,
   creditTypeName,
 }: AdditionalInfoProps<T>): JSX.Element | null => {
-  if (!metadata) return null;
-
   const sectoralScopes = metadata?.['regen:sectoralScope'];
   const verificationMethod = metadata?.['regen:verificationMethod'];
   const sourceRegistry = metadata?.['regen:sourceRegistry'];

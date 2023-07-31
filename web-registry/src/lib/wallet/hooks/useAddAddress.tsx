@@ -33,7 +33,6 @@ export const useAddAddress = ({
   const addAddress = useCallback(
     async ({
       walletConfig,
-      walletConnect,
       wallet,
       accountId,
       onSuccess,
@@ -46,7 +45,6 @@ export const useAddAddress = ({
           // Get new user wallet
           const walletClient = await walletConfig?.getClient({
             chainInfo,
-            walletConnect,
           });
           const newWallet = await getWallet({ walletClient, walletConfig });
 
@@ -54,7 +52,6 @@ export const useAddAddress = ({
             // Generate the signature for the addresses request
             const signature = await signArbitrary({
               walletConfig,
-              walletConnect,
               wallet: newWallet,
               nonce,
               addAddr: true,

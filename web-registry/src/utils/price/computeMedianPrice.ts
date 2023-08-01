@@ -8,7 +8,11 @@ export const calculateMedianPrice = (orders: Order[]): number => {
   const prices: number[] = [];
   for (const order of orders) {
     // NOTE: the following assumes a maximum precision of 6
-    for (let i = 0; i < order.quantity; i += 0.000001) {
+    // for (let i = 0; i < order.quantity; i += 0.000001) {
+    //   prices.push(order.usdPrice);
+    // }
+    // NOTE: the following assumes a maximum precision of 2
+    for (let i = 0; i < order.quantity; i += 0.01) {
       prices.push(order.usdPrice);
     }
   }

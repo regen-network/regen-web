@@ -207,9 +207,17 @@ export const getRatingsAndCertificationsData = ({
   const hasRating = ratings && ratings.length > 0;
   const certificationTitle = hasCertification ? CERTIFICATIONS : '';
   const ratingTitle = hasRating ? RATINGS : '';
-  const title = certificationTitle
-    ? `${certificationTitle} & ${ratingTitle}`
-    : ratingTitle;
+
+  let title: string;
+  if (hasCertification && hasRating) {
+    title = `${certificationTitle} & ${ratingTitle}`;
+  } else if (hasCertification && !hasRating) {
+    title = certificationTitle;
+  } else if (!hasCertification && hasRating) {
+    title = ratingTitle;
+  } else {
+    title = '';
+  }
 
   const certificationItems =
     certifications?.map(certification => {

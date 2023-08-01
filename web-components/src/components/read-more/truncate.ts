@@ -22,18 +22,15 @@ export function truncate(
       rest: '',
     };
   }
-  let truncated: string = '';
+  let truncated = '',
+    tmpTruncated = '';
   let restLength = str.length;
-
   if (sentences) {
     for (var i: number = 0; i < sentences.length; i++) {
-      if (
-        restLength > restMinLength
-          ? truncated.length < maxLength
-          : truncated.length >= maxLength
-      ) {
-        truncated += sentences[i];
-        restLength -= sentences[i].length;
+      restLength -= sentences[i].length;
+      tmpTruncated += sentences[i];
+      if (tmpTruncated.length < maxLength && restLength > restMinLength) {
+        truncated = tmpTruncated;
       } else {
         break;
       }

@@ -53,7 +53,7 @@ export const getCreditClassAvgPricePerTonLabel = ({
         denomPrice = evmosPrice ?? 0;
       }
       orders.push({
-        quantity: Number(order.quantity),
+        quantity: order.quantity ? Number(order.quantity) : 0,
         usdPrice: amount * denomPrice,
       });
     };

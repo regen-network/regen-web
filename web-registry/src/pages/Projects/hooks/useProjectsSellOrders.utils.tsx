@@ -63,7 +63,7 @@ export const getPurchaseInfo = ({
 
   // create array of orders with credit quantity and ask price (USD amount)
   const orders = ordersForThisProject.map(order => ({
-    quantity: Number(order.quantity),
+    quantity: order.quantity ? Number(order.quantity) : 0,
     usdPrice: order.askUsdAmount,
   }));
   const medianPrice = calculateMedianPrice(orders);

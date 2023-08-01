@@ -1,6 +1,6 @@
 import { SxProps, Theme } from '@mui/material';
 
-import { ProjectPageIcon } from '../../icons/ProjectPageIcon';
+import { NoProjectIcon } from '../../icons/NoProjectIcon';
 import { CreateCard } from './CreateCard';
 
 interface Props {
@@ -15,13 +15,12 @@ function getCardData(isFirstProject?: boolean): {
 } {
   let title, icon;
   if (isFirstProject) {
-    title = 'Create your first project';
+    title = 'You have not created any projects yet';
     icon = (
-      <ProjectPageIcon
+      <NoProjectIcon
         sx={theme => ({
-          color: 'info.main',
-          height: theme.spacing(14.75),
-          width: theme.spacing(18.25),
+          height: theme.spacing(25.25),
+          width: theme.spacing(25.25),
         })}
       />
     );

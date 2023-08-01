@@ -13,6 +13,9 @@ query allCreditClass {
     icon {
       ...imageFields
     }
+    credibilityCards {
+      ...detailsCardFields
+    }
     ecologicalImpact {
       ...ecologicalImpactRelationFields
     }

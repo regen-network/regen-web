@@ -49,6 +49,7 @@ import InfoIconOutlined from './InfoIconOutlined';
 import InterfaceIcon from './InterfaceIcon';
 import LinkIcon from './LinkIcon';
 import MinusIcon from './MinusIcon';
+import { NoProjectIcon } from './NoProjectIcon';
 import OrganizationIcon from './OrganizationIcon';
 import OutlinedCheckIcon from './OutlinedCheckIcon';
 import PendingIcon from './PendingIcon';
@@ -243,6 +244,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<LinkIcon />} label="LinkIcon" />
     <LabeledIcon icon={<MediumIcon color="grey" />} label="MediumIcon" />
     <LabeledIcon icon={<MinusIcon />} label="MinusIcon" />
+    <LabeledIcon icon={<NoProjectIcon />} label="NoProjectIcon" />
     <LabeledIcon icon={<OrganizationIcon />} label="OrganizationIcon" />
     <LabeledIcon icon={<OutlinedCheckIcon />} label="OutlinedCheckIcon" />
     <LabeledIcon icon={<PendingIcon />} label="PendingIcon" />

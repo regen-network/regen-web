@@ -12,14 +12,15 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
-  const { metadata, metadataSubmit, loading } = useProjectWithMetadata({
-    projectId,
-    isEdit,
-    projectEditSubmit,
-    navigateNext,
-    onChainProject,
-    anchored: false,
-  });
+  const { metadata, metadataSubmit, offChainProject, loading } =
+    useProjectWithMetadata({
+      projectId,
+      isEdit,
+      projectEditSubmit,
+      navigateNext,
+      onChainProject,
+      anchored: false,
+    });
 
   const initialValues: DescriptionSchemaType = useMemo(
     () => ({
@@ -48,6 +49,8 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
       isEdit={isEdit}
       title="Description"
       saveAndExit={saveAndExit}
+      project={offChainProject}
+      loading={loading}
     >
       <WithLoader
         isLoading={loading}

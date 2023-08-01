@@ -1,6 +1,9 @@
 query ProjectById($id: UUID!) {
   projectById(id: $id) {
     id
+    walletByAdminWalletId {
+      addr
+    }
     metadata
     developerId
     onChainId

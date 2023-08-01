@@ -1,5 +1,8 @@
 fragment projectFields on Project {
   id
+  walletByAdminWalletId {
+    addr
+  }
   onChainId
   metadata
   creditClassByCreditClassId {

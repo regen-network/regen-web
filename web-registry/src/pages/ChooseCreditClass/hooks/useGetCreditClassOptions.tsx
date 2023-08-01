@@ -46,33 +46,34 @@ function useGetCreditClassOptions(): {
 
       const creditClassesContent = creditClassContentData?.allCreditClass;
 
-      const ccOptions = await Promise.all(
-        onChainClasses?.map(async onChainClass => {
-          const creditClassOnChainId = onChainClass?.id;
-          const contentMatch = creditClassesContent?.find(
-            content => content.path === creditClassOnChainId,
-          );
-          const offChainMatch = offChainClasses.find(
-            offChainClass => offChainClass?.onChainId === creditClassOnChainId,
-          );
-          const metadata = onChainClass?.metadataJson || {};
-          const name = metadata?.['schema:name'];
-          const title = name
-            ? `${name} (${creditClassOnChainId})`
-            : creditClassOnChainId;
-          const { issuers } = await queryClassIssuers(onChainClass.id);
-          const isIssuer = issuers?.includes(wallet.address);
-
-          return {
+      let ccOptions: CreditClassOption[] = [];
+      for (const onChainClass of onChainClasses) {
+        const creditClassOnChainId = onChainClass?.id;
+        const contentMatch = creditClassesContent?.find(
+          content => content.path === creditClassOnChainId,
+        );
+        const offChainMatch = offChainClasses.find(
+          offChainClass => offChainClass?.onChainId === creditClassOnChainId,
+        );
+        const metadata = onChainClass?.metadataJson || {};
+        const name = metadata?.['schema:name'];
+        const title = name
+          ? `${name} (${creditClassOnChainId})`
+          : creditClassOnChainId;
+        const { issuers } = await queryClassIssuers(onChainClass.id);
+        if (issuers?.includes(wallet.address)) {
+          ccOptions.push({
             id: offChainMatch?.id || '',
             onChainId: creditClassOnChainId || '',
-            imageSrc: contentMatch?.image?.image?.asset?.url || '',
+            imageSrc:
+              contentMatch?.image?.image?.asset?.url ||
+              metadata?.['schema:image'] ||
+              '',
             title: title || '',
             description: metadata?.['schema:description'],
-            disabled: !isIssuer,
-          };
-        }) || [],
-      );
+          });
+        }
+      }
 
       setCreditClassOptions(ccOptions);
       setLoading(false);

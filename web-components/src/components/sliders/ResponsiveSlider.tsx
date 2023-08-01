@@ -224,47 +224,52 @@ export default function ResponsiveSlider({
   const prevDisabled = currSlide === 0 && !infinite;
   const nextDisabled = currSlide >= items.length - slides && !infinite;
 
+  const hasHeader =
+    renderTitle || title || (items.length > 1 && arrows && desktop);
+
   return (
     <div className={cx(styles.root, className || (classes && classes.root))}>
-      <Grid
-        container
-        wrap="nowrap"
-        alignItems="center"
-        className={classes && classes.headerWrap}
-      >
-        {renderTitle ? (
-          renderTitle()
-        ) : title ? (
-          <Grid xs={12} sm={8} item>
-            <Title
-              variant={titleVariant}
-              className={cx(styles.title, classes && classes.title)}
+      {hasHeader && (
+        <Grid
+          container
+          wrap="nowrap"
+          alignItems="center"
+          className={classes && classes.headerWrap}
+        >
+          {renderTitle ? (
+            renderTitle()
+          ) : title ? (
+            <Grid xs={12} sm={8} item>
+              <Title
+                variant={titleVariant}
+                className={cx(styles.title, classes && classes.title)}
+              >
+                {title}
+              </Title>
+            </Grid>
+          ) : null}
+          {items.length > 1 && arrows && desktop && (
+            <Grid
+              xs={renderTitle || title ? 4 : 12}
+              container
+              item
+              justifyContent="flex-end"
+              className={styles.buttons}
             >
-              {title}
-            </Title>
-          </Grid>
-        ) : null}
-        {items.length > 1 && arrows && desktop && (
-          <Grid
-            xs={renderTitle || title ? 4 : 12}
-            container
-            item
-            justifyContent="flex-end"
-            className={styles.buttons}
-          >
-            <PrevNextButton
-              direction="prev"
-              onClick={slickPrev}
-              disabled={prevDisabled}
-            />
-            <PrevNextButton
-              direction="next"
-              onClick={slickNext}
-              disabled={nextDisabled}
-            />
-          </Grid>
-        )}
-      </Grid>
+              <PrevNextButton
+                direction="prev"
+                onClick={slickPrev}
+                disabled={prevDisabled}
+              />
+              <PrevNextButton
+                direction="next"
+                onClick={slickNext}
+                disabled={nextDisabled}
+              />
+            </Grid>
+          )}
+        </Grid>
+      )}
 
       <Slider
         {...settings}

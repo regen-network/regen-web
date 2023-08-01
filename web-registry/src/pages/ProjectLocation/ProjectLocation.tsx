@@ -11,13 +11,14 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
-  const { metadata, metadataSubmit } = useProjectWithMetadata({
-    projectId,
-    isEdit,
-    projectEditSubmit,
-    navigateNext,
-    onChainProject,
-  });
+  const { metadata, metadataSubmit, offChainProject, loading } =
+    useProjectWithMetadata({
+      projectId,
+      isEdit,
+      projectEditSubmit,
+      navigateNext,
+      onChainProject,
+    });
 
   let initialFieldValues: any | undefined;
   if (metadata) {
@@ -45,6 +46,8 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
       isEdit={isEdit}
       title="Location"
       saveAndExit={saveAndExit}
+      project={offChainProject}
+      loading={loading}
     >
       <ProjectLocationForm
         submit={metadataSubmit}

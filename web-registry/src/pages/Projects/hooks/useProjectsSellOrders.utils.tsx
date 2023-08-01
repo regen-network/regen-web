@@ -3,7 +3,10 @@ import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1
 import { EEUR_DENOM, EVMOS_DENOM, REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { QUANTITY_MAX_DECIMALS } from 'config/decimals';
 import { roundFloatNumber } from 'utils/number/format/format';
-import { computeMedianPrice } from 'utils/price/computeMedianPrice';
+import {
+  calculateMedian,
+  computeMedianPrice,
+} from 'utils/price/computeMedianPrice';
 
 import { PurchaseInfo } from 'web-components/lib/components/cards/ProjectCard/ProjectCard.types';
 import { formatNumber } from 'web-components/lib/utils/format';
@@ -89,6 +92,13 @@ export const getPurchaseInfo = ({
     .sort((a, b) => a - b);
 
   const medianPrice = computeMedianPrice({ prices });
+
+  const orders = ordersForThisProject.map(order => ({
+    quantity: Number(order.quantity),
+    price: order.askUsdAmount,
+  }));
+  const median = calculateMedian(orders);
+  console.log(`median: ${median.toFixed(2)}`);
 
   return {
     sellInfo: {

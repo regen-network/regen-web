@@ -1,4 +1,4 @@
-import { SxProps } from '@mui/material';
+import { Box, SxProps } from '@mui/material';
 
 import { Theme } from '../../../theme/muiTheme';
 import OutlinedButton from '../../buttons/OutlinedButton';
@@ -38,9 +38,9 @@ export const CreateCard = ({
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
     >
-      {!!icon && icon}
+      {!!icon && <Box pb={2.5}>{icon}</Box>}
       {!!title && (
-        <Title variant="h4" align="center">
+        <Title variant="h4" align="center" pb={6.25}>
           {title}
         </Title>
       )}

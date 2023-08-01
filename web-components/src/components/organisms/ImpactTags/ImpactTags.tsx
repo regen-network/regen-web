@@ -32,6 +32,7 @@ const ImpactTags = ({
       {
         display: 'flex',
         flexDirection: 'column',
+        maxWidth: 500,
       },
       ...sxToArray(sx),
     ]}

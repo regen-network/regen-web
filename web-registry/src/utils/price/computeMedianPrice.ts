@@ -1,47 +1,28 @@
-type Params = {
-  prices: number[];
-};
-
-export const computeMedianPrice = ({ prices }: Params) => {
-  const sortedPrices = prices.sort((a, b) => a - b);
-  const middleIndex = Math.floor(sortedPrices.length / 2);
-  if (sortedPrices.length === 0) {
-    return undefined;
-  } else if (sortedPrices.length % 2 === 0) {
-    return (sortedPrices[middleIndex - 1] + sortedPrices[middleIndex]) / 2;
-  } else {
-    return sortedPrices[middleIndex];
-  }
-};
-
-interface SellOrder {
+export interface Order {
   quantity: number;
-  price: number;
+  usdPrice: number;
 }
 
-export const calculateMedian = (sellOrders: SellOrder[]): number => {
-  // calculate the cumulative quantities and prices
-  let cumulativeQuantity = 0;
-  const cumulativePrices: number[] = [];
-
-  for (const order of sellOrders) {
-    cumulativeQuantity += order.quantity;
-    cumulativePrices.push(cumulativeQuantity * order.price);
+export const calculateMedianPrice = (orders: Order[]): number => {
+  // flatten sell orders into an array of individual prices
+  const prices: number[] = [];
+  for (const order of orders) {
+    // NOTE: the following assumes a maximum precision of 6
+    for (let i = 0; i < order.quantity; i += 0.000001) {
+      prices.push(order.usdPrice);
+    }
   }
 
+  // sort prices in ascending order
+  prices.sort((a, b) => a - b);
+
   // find the middle index
-  const totalQuantity = cumulativeQuantity;
-  const middleIndex = cumulativePrices.findIndex(
-    price => price >= totalQuantity / 2,
-  );
+  const middleIndex = Math.floor(prices.length / 2);
 
   // calculate the median
-  if (totalQuantity % 2 === 1) {
-    return cumulativePrices[middleIndex] / totalQuantity;
+  if (prices.length % 2 === 1) {
+    return prices[middleIndex];
   } else {
-    return (
-      (cumulativePrices[middleIndex - 1] + cumulativePrices[middleIndex]) /
-      (2 * totalQuantity)
-    );
+    return (prices[middleIndex - 1] + prices[middleIndex]) / 2;
   }
 };

@@ -141,6 +141,7 @@ function CreditClassDetails({
   }, [credits, projectsWithOrderData]);
 
   const avgPricePerTonLabel = getCreditClassAvgPricePerTonLabel({
+    // geckoPrices, // TODO
     projectsWithOrderData,
   });
 

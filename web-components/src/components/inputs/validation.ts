@@ -111,6 +111,9 @@ export function validatePrice(
   if (!price) {
     return requiredMessage;
   }
+  if (Math.sign(price) !== 1) {
+    return invalidAmount;
+  }
   const priceDecimalPlaces = decimalCount(price);
   maximumFractionDigits = maximumFractionDigits || MAX_FRACTION_DIGITS;
   if (!!priceDecimalPlaces && priceDecimalPlaces > maximumFractionDigits) {

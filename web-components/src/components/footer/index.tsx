@@ -192,7 +192,7 @@ export default function Footer({
             <Body
               sx={{ color: 'primary.main' }}
               size="sm"
-            >{`© ${new Date().getUTCFullYear()} Regen Network Development, Inc`}</Body>
+            >{`© ${new Date().getUTCFullYear()} Regen Network Development, PBC`}</Body>
           </Grid>
         </Grid>
       </Section>

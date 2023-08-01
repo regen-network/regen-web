@@ -125,7 +125,7 @@ const Footer: React.FC<
                     sx={{ color: 'secondary.main' }}
                   >
                     Regen Network
-                    <br /> Development, Inc.
+                    <br /> Development, PBC
                   </Link>
                 </Body>
               </Box>

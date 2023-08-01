@@ -41,7 +41,7 @@ const BuyersPage = (): JSX.Element => {
     description:
       content?.metadata?.description ||
       'Buy carbon credits and other ecosystem system service credits to meet your climate commitments and sustainability goals.',
-    author: 'Regen Network Development, Inc.',
+    author: 'Regen Network Development, PBC',
     siteUrl: window.location.href,
     imageUrl: content?.metadata?.openGraphImage?.asset?.url || '',
   };

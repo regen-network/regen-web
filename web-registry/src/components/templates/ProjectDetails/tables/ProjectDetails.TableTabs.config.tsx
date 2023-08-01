@@ -29,7 +29,7 @@ export const getProjectDetailsTabs = ({
       hidden: (sortedDocuments.length ?? 0) === 0,
     },
     {
-      label: 'Credit issuance',
+      label: 'Credit Issuance',
       content: (
         <CreditBatches
           creditClassId={offChainProject?.creditClassByCreditClassId?.onChainId}
@@ -44,7 +44,7 @@ export const getProjectDetailsTabs = ({
       hidden: (batchData?.batches?.length ?? 0) === 0,
     },
     {
-      label: 'Additional info',
+      label: 'Additional Info',
       content: (
         <>
           {isAnchoredProjectMetadata(projectMetadata, onChainProjectId) && (

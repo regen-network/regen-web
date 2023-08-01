@@ -29,6 +29,7 @@ import { useTags } from 'hooks/useTags';
 import { client as sanityClient } from '../../../lib/clients/sanity';
 import { AdditionalInfo } from '../CreditClassDetails.AdditionalInfo';
 import { MemoizedProjects as Projects } from '../CreditClassDetails.Projects';
+import { CreditClassDetailsTableTabs } from '../tables/CreditClassDetails.TableTabs';
 import {
   CREDIT_CLASS_TOOLTIP,
   ELIGIBLE_ACTIVITIES,
@@ -190,10 +191,6 @@ const CreditClassDetailsSimple: React.FC<
                 {metadata?.['schema:description']}
               </ReadMore>
             )}
-            <AdditionalInfo
-              metadata={metadata}
-              creditTypeName={creditTypeData?.creditType?.name}
-            />
           </Box>
           <ImpactTags
             impact={impactCards}
@@ -224,10 +221,10 @@ const CreditClassDetailsSimple: React.FC<
       <div
         className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}
       >
-        <CreditBatches
-          creditClassId={onChainClass.id}
-          titleAlign="left"
-          withSection
+        <CreditClassDetailsTableTabs
+          creditTypeName={creditTypeData?.creditType?.name}
+          creditClassMetadata={metadata}
+          onChainCreditClassId={onChainClass.id}
         />
       </div>
     </Box>

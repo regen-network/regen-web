@@ -61,7 +61,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
           <Grid item xs={12} sm={6} sx={{ flexDirection: 'column' }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Label size="xs" sx={{ mr: 1 }}>
-                project id:
+                project id
               </Label>
               <InfoTooltipWithIcon
                 title={PROJECT_PAGE_METADATA_ID_TOOLTIP}

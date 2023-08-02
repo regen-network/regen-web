@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
-import { useTheme } from '@mui/styles';
 
 import { Flex } from 'web-components/lib/components/box';
 import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
@@ -35,7 +34,6 @@ import { dashBoardStyles } from './Dashboard.styles';
 import { getSocialsLinks } from './Dashboard.utils';
 
 const Dashboard = (): JSX.Element => {
-  const theme = useTheme();
   const isIssuer = useQueryIfIssuer();
   const isCreditClassCreator = useQueryIfCreditClassCreator();
   const isProjectAdmin = useQueryIfProjectAdmin();
@@ -82,7 +80,7 @@ const Dashboard = (): JSX.Element => {
         hidden: !isBridgeEnabled,
       },
     ],
-    [isIssuer, showProjectTab, theme.palette.secondary.dark],
+    [isIssuer, showProjectTab],
   );
 
   const activeTab = Math.max(

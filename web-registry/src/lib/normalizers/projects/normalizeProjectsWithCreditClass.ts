@@ -1,4 +1,5 @@
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { getClassImage } from 'utils/image/classImage';
 
 import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCard';
 
@@ -54,9 +55,7 @@ export const normalizeProjectsWithCreditClass = ({
       sanityCreditClassData,
       creditClassIdOrUrl: project?.classId ?? '',
     });
-    const creditClassImage =
-      creditClassMetadata?.['schema:image'] ||
-      getSanityImgSrc(creditClass?.image);
+    const creditClassImage = getClassImage(creditClassMetadata, creditClass);
 
     return {
       ...project,

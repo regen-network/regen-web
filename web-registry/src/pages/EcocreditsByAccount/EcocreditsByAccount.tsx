@@ -5,7 +5,7 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
-import { Box, useTheme } from '@mui/material';
+import { Box } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 
 import { Flex } from 'web-components/lib/components/box';
@@ -34,7 +34,6 @@ import { ecocreditsByAccountStyles } from './EcocreditsByAccount.styles';
 
 export const EcocreditsByAccount = (): JSX.Element => {
   const { accountAddress } = useParams<{ accountAddress: string }>();
-  const theme = useTheme();
   const location = useLocation();
 
   const graphqlClient =
@@ -59,9 +58,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
     () => [
       {
         label: 'Portfolio',
-        icon: (
-          <CreditsIcon color={theme.palette.secondary.main} fontSize="small" />
-        ),
+        icon: <CreditsIcon fontSize="small" />,
         href: `/ecocredits/accounts/${accountAddress}/portfolio`,
       },
       {
@@ -71,7 +68,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
         hidden: import.meta.env.VITE_LEDGER_CHAIN_ID === 'regen-1', // TODO: Hides in PROD - remove when Bridge is ready
       },
     ],
-    [accountAddress, theme.palette.secondary.main],
+    [accountAddress],
   );
 
   const activeTab = Math.max(

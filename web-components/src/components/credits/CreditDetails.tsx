@@ -1,4 +1,4 @@
-import { Box, useTheme } from '@mui/material';
+import { Box } from '@mui/material';
 import ReactHtmlParser from 'html-react-parser';
 import { makeStyles } from 'tss-react/mui';
 
@@ -101,7 +101,6 @@ export default function CreditInfo({
   title,
 }: CreditInfoProps): JSX.Element {
   const { classes } = useStyles({ background });
-  const theme = useTheme();
 
   return (
     <div className={classes.root}>
@@ -109,7 +108,7 @@ export default function CreditInfo({
         <div className={classes.descriptionTitle}>
           <Title variant="h3">
             <span className={classes.icon}>
-              <CreditsIcon color={theme.palette.secondary.main} />
+              <CreditsIcon />
             </span>
             {creditClass.name}
           </Title>

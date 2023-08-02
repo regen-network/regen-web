@@ -203,7 +203,7 @@ export const allIcons = (): JSX.Element => (
       label="CreditBatchLightIcon"
     />
     <LabeledIcon
-      icon={<CreditsIcon color="green" sx={{ height: 25 }} />}
+      icon={<CreditsIcon sx={{ height: 25 }} />}
       label="CreditsIcon"
     />
     <LabeledIcon

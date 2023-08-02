@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Box, useTheme } from '@mui/material';
+import { Box } from '@mui/material';
 import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
 import { useSetAtom } from 'jotai';
 import { getSocialItems } from 'utils/components/ShareSection/getSocialItems';
@@ -47,7 +47,6 @@ export const Storefront = (): JSX.Element => {
   const [selectedSellOrder, setSelectedSellOrder] = useState<number | null>(
     null,
   );
-  const theme = useTheme();
   const [txModalTitle, setTxModalTitle] = useState<string>('');
   const [txButtonTitle, setTxButtonTitle] = useState<string>('');
   const [txModalHeader, setTxModalHeader] = useState<string>('');
@@ -261,9 +260,7 @@ export const Storefront = (): JSX.Element => {
                     )}
                     {!isOwnSellOrder && (
                       <OutlinedButton
-                        startIcon={
-                          <CreditsIcon color={theme.palette.secondary.main} />
-                        }
+                        startIcon={<CreditsIcon />}
                         size="small"
                         onClick={async () => {
                           track<'buy1', Buy1Event>('buy1', {

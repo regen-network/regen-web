@@ -54,9 +54,7 @@ const Dashboard = (): JSX.Element => {
     () => [
       {
         label: 'Portfolio',
-        icon: (
-          <CreditsIcon color={theme.palette.secondary.main} fontSize="small" />
-        ),
+        icon: <CreditsIcon fontSize="small" />,
         href: '/ecocredits/portfolio',
       },
       {
@@ -67,15 +65,13 @@ const Dashboard = (): JSX.Element => {
       },
       {
         label: 'Credit Classes',
-        icon: <CreditClassIcon sx={{ opacity: '70%' }} />,
+        icon: <CreditClassIcon />,
         href: '/ecocredits/credit-classes',
         hidden: true,
       },
       {
         label: 'Credit Batches',
-        icon: (
-          <CreditBatchIcon sx={{ color: 'secondary.dark', opacity: '70%' }} />
-        ),
+        icon: <CreditBatchIcon />,
         href: '/ecocredits/credit-batches',
         hidden: !isIssuer,
       },
@@ -86,7 +82,7 @@ const Dashboard = (): JSX.Element => {
         hidden: !isBridgeEnabled,
       },
     ],
-    [isIssuer, showProjectTab, theme.palette.secondary.main],
+    [isIssuer, showProjectTab, theme.palette.secondary.dark],
   );
 
   const activeTab = Math.max(

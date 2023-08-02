@@ -2,8 +2,6 @@ import { CreditClass, Maybe } from 'generated/sanity-graphql';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { getSanityImgSrc } from 'lib/imgSrc';
 
-import DefaultProject from 'assets/default-project.png';
-
 type Params = {
   metadata?: CreditClassMetadataLD;
   sanityClass?: Maybe<Pick<CreditClass, 'image'>>;
@@ -19,4 +17,4 @@ export const getClassImageWithGreyDefault = (params: Params) =>
   getClassImage(params) || '/png/default-credit-class-grey.png';
 
 export const getClassImageWithProjectDefault = (params: Params) =>
-  getClassImage(params) || DefaultProject;
+  getClassImage(params) || '/png/default-project.png';

@@ -63,7 +63,10 @@ const CreditClassDetailsSimple: React.FC<
 
   const displayName = getCreditClassDisplayName(onChainClass.id, metadata);
   const image = content?.image;
-  const imageSrc = getClassImageWithGreyDefault(metadata, content);
+  const imageSrc = getClassImageWithGreyDefault({
+    metadata,
+    sanityClass: content,
+  });
 
   const { isKeplrMobileWeb } = useWallet();
   const { creditTypeData, creditTypeSanity, generationMethods } =

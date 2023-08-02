@@ -48,10 +48,10 @@ export const ProjectTopSectionCreditClassCard: React.FC<Props> = ({
             <BlockContent content={creditClassSanity?.shortDescriptionRaw} />
           )
         }
-        imgSrc={getClassImageWithGreyDefault(
-          creditClassMetadata,
-          creditClassSanity,
-        )}
+        imgSrc={getClassImageWithGreyDefault({
+          metadata: creditClassMetadata,
+          sanityClass: creditClassSanity,
+        })}
         type={{
           name: creditTypeName ?? '',
           icon: {

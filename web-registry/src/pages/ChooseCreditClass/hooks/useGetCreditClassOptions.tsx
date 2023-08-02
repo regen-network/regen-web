@@ -66,7 +66,10 @@ function useGetCreditClassOptions(): {
           ccOptions.push({
             id: offChainMatch?.id || '',
             onChainId: creditClassOnChainId || '',
-            imageSrc: getClassImageWithGreenDefault(metadata, contentMatch),
+            imageSrc: getClassImageWithGreenDefault({
+              metadata,
+              sanityClass: contentMatch,
+            }),
             title: title || '',
             description: metadata?.['schema:description'],
           });

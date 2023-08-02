@@ -49,6 +49,8 @@ import InfoIconOutlined from './InfoIconOutlined';
 import InterfaceIcon from './InterfaceIcon';
 import LinkIcon from './LinkIcon';
 import MinusIcon from './MinusIcon';
+import NoBasketTokens from './NoBasketTokens';
+import NoEcocredits from './NoEcocredits';
 import { NoProjectIcon } from './NoProjectIcon';
 import OrganizationIcon from './OrganizationIcon';
 import OutlinedCheckIcon from './OutlinedCheckIcon';
@@ -246,6 +248,8 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<LinkIcon />} label="LinkIcon" />
     <LabeledIcon icon={<MediumIcon color="grey" />} label="MediumIcon" />
     <LabeledIcon icon={<MinusIcon />} label="MinusIcon" />
+    <LabeledIcon icon={<NoBasketTokens />} label="NoBasketTokens" />
+    <LabeledIcon icon={<NoEcocredits />} label="NoEcocredits" />
     <LabeledIcon icon={<NoProjectIcon />} label="NoProjectIcon" />
     <LabeledIcon icon={<OrganizationIcon />} label="OrganizationIcon" />
     <LabeledIcon icon={<OutlinedCheckIcon />} label="OutlinedCheckIcon" />

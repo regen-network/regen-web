@@ -17,4 +17,4 @@ export const getClassImageWithGreyDefault = (params: Params) =>
   getClassImage(params) || '/png/default-credit-class-grey.png';
 
 export const getClassImageWithProjectDefault = (params: Params) =>
-  getClassImage(params) || '/png/default-project.png';
+  getClassImage(params) || '/jpg/default-project.jpg';

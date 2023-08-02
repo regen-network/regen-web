@@ -45,7 +45,7 @@ export const normalizeProjectsWithOrderData = ({
     return {
       id: project.id,
       name: project.id,
-      imgSrc: '/png/default-project.png',
+      imgSrc: '/jpg/default-project.jpg',
       place: project.jurisdiction,
       area: 0,
       areaUnit: '',

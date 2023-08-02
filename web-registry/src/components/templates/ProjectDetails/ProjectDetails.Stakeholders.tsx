@@ -2,6 +2,7 @@ import { Grid } from '@mui/material';
 
 import { Party } from 'web-components/lib/components/user/UserInfo';
 import UserInfoWithTitle from 'web-components/lib/components/user/UserInfoWithTitle';
+import { defaultFontFamily } from 'web-components/lib/theme/muiTheme';
 
 type Props = {
   admin?: Party;
@@ -38,6 +39,7 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
                 ownership tracking.
               </>
             }
+            fontFamily={defaultFontFamily}
           />
         </Grid>
       )}
@@ -52,6 +54,7 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
                 on the blockchain.
               </>
             }
+            fontFamily={defaultFontFamily}
           />
         </Grid>
       )}
@@ -67,6 +70,7 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
                 owner, land steward, or a third party.
               </>
             }
+            fontFamily={defaultFontFamily}
           />
         </Grid>
       )}
@@ -82,6 +86,7 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
                 is not the monitor).
               </>
             }
+            fontFamily={defaultFontFamily}
           />
         </Grid>
       )}

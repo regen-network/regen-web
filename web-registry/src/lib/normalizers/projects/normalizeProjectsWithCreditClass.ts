@@ -1,4 +1,5 @@
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { getClassImageWithProjectDefault } from 'utils/image/classImage';
 
 import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCard';
 
@@ -8,14 +9,11 @@ import {
   CreditClassMetadataLD,
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
-import { getSanityImgSrc } from 'lib/imgSrc';
 
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { normalizeClassProjectForBatch } from '../classProjectForBatch/normalizeClassProjectForBatch';
 import { EMPTY_CLASS_PROJECT_INFO } from '../classProjectForBatch/normalizeClassProjectForBatch.constants';
-
-import DefaultProject from 'assets/default-project.jpg';
 
 interface Params {
   projects?: ProjectInfo[] | null;
@@ -54,9 +52,10 @@ export const normalizeProjectsWithCreditClass = ({
       sanityCreditClassData,
       creditClassIdOrUrl: project?.classId ?? '',
     });
-    const creditClassImage =
-      creditClassMetadata?.['schema:image'] ||
-      getSanityImgSrc(creditClass?.image);
+    const creditClassImage = getClassImageWithProjectDefault({
+      metadata: creditClassMetadata,
+      sanityClass: creditClass,
+    });
 
     return {
       ...project,
@@ -64,8 +63,7 @@ export const normalizeProjectsWithCreditClass = ({
       name: projectMetadata?.['schema:name'] ?? '',
       imgSrc:
         projectPageMetadata?.['regen:previewPhoto']?.['schema:url'] ??
-        creditClassImage ??
-        DefaultProject,
+        creditClassImage,
       place: projectMetadata?.['schema:location']?.place_name ?? '',
       area: projectMetadata?.['regen:projectSize']?.['qudt:numericValue'] ?? 0,
       areaUnit: projectMetadata?.['regen:projectSize']?.['qudt:unit'] || '',

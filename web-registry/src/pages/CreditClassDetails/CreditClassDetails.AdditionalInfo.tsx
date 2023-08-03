@@ -1,5 +1,4 @@
 import { Box, Grid } from '@mui/material';
-import { capitalizeWord } from 'utils/string/capitalizeWord';
 
 import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
 import { Body, Label } from 'web-components/lib/components/typography';
@@ -13,23 +12,21 @@ import {
 
 import { MetaDetail } from 'components/molecules';
 
+import { ApprovedMethodologiesList } from './CreditClassDetails.ApprovedMethodologies';
+import { BufferPoolAccounts } from './CreditClassDetails.BufferPoolAccounts';
 import {
   CREDIT_CLASS_DETAILS_ADDITIONAL_INFO_CLASS_ID_TOOLTIP,
   CREDIT_CLASS_DETAILS_ADDITIONAL_INFO_HELPER_TEXT,
 } from './CreditClassDetails.constants';
-import { ApprovedMethodologiesList } from './CreditClassDetails.ApprovedMethodologies';
-import { BufferPoolAccounts } from './CreditClassDetails.BufferPoolAccounts';
 
 interface AdditionalInfoProps<T extends CreditClassMetadataLD> {
   classId?: string;
   metadata?: T;
-  creditTypeName?: string;
 }
 
 const AdditionalInfo = <T extends CreditClassMetadataLD>({
   classId,
   metadata,
-  creditTypeName,
 }: AdditionalInfoProps<T>): JSX.Element | null => {
   const sectoralScopes = metadata?.['regen:sectoralScope'];
   const verificationMethod = metadata?.['regen:verificationMethod'];
@@ -42,7 +39,7 @@ const AdditionalInfo = <T extends CreditClassMetadataLD>({
   const measuredGHGs = metadata?.['regen:measuredGHGs'];
   const bufferPoolAccounts = metadata?.['regen:bufferPoolAccounts'];
 
-  const unknownFields = getClassUnknownFields(metadata);
+  const unknownFields = metadata ? getClassUnknownFields(metadata) : [];
 
   return (
     <Box
@@ -69,17 +66,13 @@ const AdditionalInfo = <T extends CreditClassMetadataLD>({
             </Box>
             <Body size="xl">{classId}</Body>
           </Grid>
-          <MetaDetail
-            label="credit type"
-            value={capitalizeWord(creditTypeName)}
-          />
           <MetaDetail label="registry" value={sourceRegistry} />
           <MetaDetail
             label="carbon offset standard"
             value={carbonOffsetStandard}
           />
           <ApprovedMethodologiesList
-            methodologyList={metadata['regen:approvedMethodologies']}
+            methodologyList={metadata?.['regen:approvedMethodologies']}
           />
           <MetaDetail label="project activities" value={projectActivities} />
           <MetaDetail label="sectoral scopes" value={sectoralScopes} />
@@ -96,7 +89,7 @@ const AdditionalInfo = <T extends CreditClassMetadataLD>({
               key={fieldName}
               label={getFieldLabel(fieldName)}
               value={value}
-              rdfType={getFieldType(fieldName, metadata['@context'])}
+              rdfType={getFieldType(fieldName, metadata?.['@context'])}
             />
           ))}
         </Grid>

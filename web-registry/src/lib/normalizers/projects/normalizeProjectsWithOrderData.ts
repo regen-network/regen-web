@@ -11,8 +11,6 @@ import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
-import DefaultProject from 'assets/default-project.jpg';
-
 interface NormalizeProjectsWithOrderDataParams {
   projects?: ProjectInfo[];
   sellOrders?: SellOrderInfoExtented[];
@@ -47,7 +45,7 @@ export const normalizeProjectsWithOrderData = ({
     return {
       id: project.id,
       name: project.id,
-      imgSrc: DefaultProject,
+      imgSrc: '/jpg/default-project.jpg',
       place: project.jurisdiction,
       area: 0,
       areaUnit: '',

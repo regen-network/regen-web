@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { getClassImageWithGreenDefault } from 'utils/image/classImage';
 
 import { useAllCreditClassesQuery } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
@@ -11,7 +12,7 @@ import useQueryListClassesWithMetadata from 'hooks/useQueryListClassesWithMetada
 interface CreditClassOption {
   id: string;
   onChainId: string;
-  imageSrc?: string;
+  imageSrc: string;
   title: string;
   description?: string;
   disabled?: boolean;
@@ -55,7 +56,7 @@ function useGetCreditClassOptions(): {
         const offChainMatch = offChainClasses.find(
           offChainClass => offChainClass?.onChainId === creditClassOnChainId,
         );
-        const metadata = onChainClass?.metadataJson || {};
+        const metadata = onChainClass?.metadataJson;
         const name = metadata?.['schema:name'];
         const title = name
           ? `${name} (${creditClassOnChainId})`
@@ -65,10 +66,10 @@ function useGetCreditClassOptions(): {
           ccOptions.push({
             id: offChainMatch?.id || '',
             onChainId: creditClassOnChainId || '',
-            imageSrc:
-              contentMatch?.image?.image?.asset?.url ||
-              metadata?.['schema:image'] ||
-              '',
+            imageSrc: getClassImageWithGreenDefault({
+              metadata,
+              sanityClass: contentMatch,
+            }),
             title: title || '',
             description: metadata?.['schema:description'],
           });

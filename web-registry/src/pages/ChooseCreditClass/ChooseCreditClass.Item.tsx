@@ -4,11 +4,9 @@ import Grid from '@mui/material/Grid';
 import { ImageActionCard } from 'web-components/lib/components/cards/ImageActionCard';
 import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClassIcon';
 
-import DefaultCreditClassImage from '../../assets/default-credit-class.png';
-
 interface ClassOptionProps {
   title: string;
-  imgSrc?: string;
+  imgSrc: string;
   description?: string;
   onClick: () => void;
 }
@@ -23,7 +21,7 @@ const ChooseCreditClassItem: React.FC<
     <ImageActionCard
       btnText="Choose credit class"
       title={title}
-      imgSrc={imgSrc || DefaultCreditClassImage}
+      imgSrc={imgSrc}
       description={description || ''}
       onClick={onClick}
       startIcon={<CreditClassIcon sx={{ mt: '-2px' }} />}

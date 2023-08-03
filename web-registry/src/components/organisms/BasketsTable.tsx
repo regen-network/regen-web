@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Grid } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 
+import NoBasketTokensIcon from 'web-components/lib/components/icons/NoBasketTokensIcon';
 import {
   ActionsTable,
   RenderActionButtonsFunc,
@@ -20,7 +21,12 @@ type BasketTableProps = {
 export const BasketsTable: React.FC<React.PropsWithChildren<BasketTableProps>> =
   ({ basketTokens, renderActionButtons }) => {
     if (!basketTokens?.length) {
-      return <NoCredits title="No basket tokens to display" />;
+      return (
+        <NoCredits
+          title="No basket tokens to display"
+          icon={<NoBasketTokensIcon sx={{ width: 100, height: 100 }} />}
+        />
+      );
     }
 
     return (

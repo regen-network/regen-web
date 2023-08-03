@@ -8,6 +8,8 @@ import { REGEN_APP_PROJECT_URL } from 'utils/components/ShareSection/getSocialIt
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import AvailableCreditsIconAlt from 'web-components/lib/components/icons/AvailableCreditsIconAlt';
+import PutInBasketIcon from 'web-components/lib/components/icons/PutInBasketIcon';
+import TakeFromBasketIcon from 'web-components/lib/components/icons/TakeFromBasketIcon';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import {
   BASKET_PUT_TITLE,
@@ -73,12 +75,6 @@ import {
   getDenomAllowedOptions,
   getOtherSellOrderBatchDenomOptions,
 } from './MyEcocredits.utils';
-
-// import { ReactComponent as WithdrawIBC } from 'assets/svgs/withdraw-ibc.svg';
-// import { ReactComponent as DepositIBC } from 'assets/svgs/deposit-ibc.svg';
-// import { ReactComponent as Sell } from 'assets/svgs/sell.svg';
-import { ReactComponent as PutInBasket } from 'assets/svgs/put-in-basket.svg';
-import { ReactComponent as TakeFromBasket } from 'assets/svgs/take-from-basket.svg';
 
 // address prefix `regen` used to narrow address validation for recipients
 const addressPrefix = chainInfo.bech32Config.bech32PrefixAccAddr;
@@ -323,7 +319,7 @@ export const MyEcocredits = (): JSX.Element => {
                       icon: (
                         <ArrowDownIcon
                           sx={sxs.arrow}
-                          color={theme.palette.secondary.main}
+                          color={theme.palette.secondary.dark}
                           direction="next"
                         />
                       ),
@@ -342,7 +338,7 @@ export const MyEcocredits = (): JSX.Element => {
                       icon: (
                         <ArrowDownIcon
                           sx={sxs.arrow}
-                          color={theme.palette.secondary.main}
+                          color={theme.palette.secondary.dark}
                           direction="down"
                         />
                       ),
@@ -364,7 +360,7 @@ export const MyEcocredits = (): JSX.Element => {
                   if (creditBaskets[i] && creditBaskets[i].length > 0) {
                     buttons.splice(1, 0, {
                       // buttons.splice(2, 0, { TODO: Replace once we had 'Sell'
-                      icon: <PutInBasket />,
+                      icon: <PutInBasketIcon />,
                       label: BASKET_PUT_TITLE,
                       onClick: () => {
                         track<'putInBasket1', PutInBasket1Event>(
@@ -388,7 +384,7 @@ export const MyEcocredits = (): JSX.Element => {
             <TableActionButtons
               buttons={[
                 {
-                  icon: <TakeFromBasket />,
+                  icon: <TakeFromBasketIcon />,
                   label: BASKET_TAKE_TITLE,
                   onClick: () => {
                     openTakeModal(i);

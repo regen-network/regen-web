@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
-import { useTheme } from '@mui/styles';
 
 import { Flex } from 'web-components/lib/components/box';
 import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
@@ -35,7 +34,6 @@ import { dashBoardStyles } from './Dashboard.styles';
 import { getSocialsLinks } from './Dashboard.utils';
 
 const Dashboard = (): JSX.Element => {
-  const theme = useTheme();
   const isIssuer = useQueryIfIssuer();
   const isCreditClassCreator = useQueryIfCreditClassCreator();
   const isProjectAdmin = useQueryIfProjectAdmin();
@@ -54,9 +52,7 @@ const Dashboard = (): JSX.Element => {
     () => [
       {
         label: 'Portfolio',
-        icon: (
-          <CreditsIcon color={theme.palette.secondary.main} fontSize="small" />
-        ),
+        icon: <CreditsIcon fontSize="small" />,
         href: '/ecocredits/portfolio',
       },
       {
@@ -67,15 +63,13 @@ const Dashboard = (): JSX.Element => {
       },
       {
         label: 'Credit Classes',
-        icon: <CreditClassIcon sx={{ opacity: '70%' }} />,
+        icon: <CreditClassIcon />,
         href: '/ecocredits/credit-classes',
         hidden: true,
       },
       {
         label: 'Credit Batches',
-        icon: (
-          <CreditBatchIcon sx={{ color: 'secondary.dark', opacity: '70%' }} />
-        ),
+        icon: <CreditBatchIcon />,
         href: '/ecocredits/credit-batches',
         hidden: !isIssuer,
       },
@@ -86,7 +80,7 @@ const Dashboard = (): JSX.Element => {
         hidden: !isBridgeEnabled,
       },
     ],
-    [isIssuer, showProjectTab, theme.palette.secondary.main],
+    [isIssuer, showProjectTab],
   );
 
   const activeTab = Math.max(

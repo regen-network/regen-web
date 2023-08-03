@@ -1,12 +1,15 @@
+import { EEUR_DENOM, EVMOS_DENOM, REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { TRANSPARENT_PIXEL } from 'utils/image/transparentPixel';
-import { computeMedianPrice } from 'utils/price/computeMedianPrice';
+import { computeMedianPrice, Order } from 'utils/price/computeMedianPrice';
 
 import { ProjectImpactCardProps } from 'web-components/lib/components/cards/ProjectImpactCard/ProjectImpactCard';
 
 import { CreditClassByOnChainIdQuery, Maybe } from 'generated/graphql';
 import { EcologicalImpact } from 'generated/sanity-graphql';
+import { microToDenom } from 'lib/denom.utils';
 import { getSanityImgSrc } from 'lib/imgSrc';
 
+import { GECKO_PRICES } from 'pages/Projects/hooks/useProjectsSellOrders.types';
 import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 import { getSdgsImages } from 'components/organisms/ProjectTopSection/ProjectTopSection.utils';
@@ -22,17 +25,41 @@ export const getProjectNameFromProjectsData = (
   return project.name;
 };
 
-type GetCreditClassAvgPricePerTonLabelPArams = {
+type GetCreditClassAvgPricePerTonLabelParams = {
+  geckoPrices?: GECKO_PRICES;
   projectsWithOrderData: ProjectWithOrderData[];
 };
 
 export const getCreditClassAvgPricePerTonLabel = ({
+  geckoPrices = {},
   projectsWithOrderData,
-}: GetCreditClassAvgPricePerTonLabelPArams) => {
-  const prices = projectsWithOrderData
-    .map(project => project.purchaseInfo?.sellInfo?.avgPricePerTon)
-    .filter((price): price is number => typeof price === 'number');
-  const medianPrice = computeMedianPrice({ prices });
+}: GetCreditClassAvgPricePerTonLabelParams) => {
+  const { eeurPrice, regenPrice, usdcPrice, evmosPrice } = geckoPrices;
+
+  // create array of orders with credit quantity and ask price (USD amount)
+  const orders: Order[] = [];
+  for (const project of projectsWithOrderData) {
+    for (const order of project.sellOrders) {
+      const amount = microToDenom(order.askAmount);
+      let denomPrice = usdcPrice ?? 1;
+
+      if (order.askBaseDenom === REGEN_DENOM) {
+        denomPrice = regenPrice ?? 0;
+      }
+      if (order.askBaseDenom === EEUR_DENOM) {
+        denomPrice = eeurPrice ?? 0;
+      }
+      if (order.askBaseDenom === EVMOS_DENOM) {
+        denomPrice = evmosPrice ?? 0;
+      }
+      orders.push({
+        quantity: order.quantity ? Number(order.quantity) : 0,
+        usdPrice: amount * denomPrice,
+      });
+    }
+  }
+
+  const medianPrice = computeMedianPrice(orders);
   const avgPricePerTonLabel = getPriceToDisplay({ price: medianPrice });
 
   return avgPricePerTonLabel;

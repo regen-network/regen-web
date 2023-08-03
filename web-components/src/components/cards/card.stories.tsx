@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Box, Theme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
-import { Track } from 'web-registry/src/lib/tracker/types';
+import { Track } from 'web-marketplace/src/lib/tracker/types';
 
 import { QuestionItem } from '../faq/Question';
 import CurrentCreditsIcon from '../icons/CurrentCreditsIcon';

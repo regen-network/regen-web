@@ -3,7 +3,7 @@
   "npmClient": "yarn",
   "useWorkspaces": true,
   "packages": [
-    "web-registry",
+    "web-marketplace",
     "web-components",
     "web-storybook",
     "web-auth",

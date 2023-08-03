@@ -5,8 +5,8 @@ import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
 import { useSetAtom } from 'jotai';
 import { getSocialItems } from 'utils/components/ShareSection/getSocialItems';
 import { REGEN_APP_PROJECT_URL } from 'utils/components/ShareSection/getSocialItems.constants';
-import { Buy1Event } from 'web-registry/src/lib/tracker/types';
-import { useTracker } from 'web-registry/src/lib/tracker/useTracker';
+import { Buy1Event } from 'web-marketplace/src/lib/tracker/types';
+import { useTracker } from 'web-marketplace/src/lib/tracker/useTracker';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';

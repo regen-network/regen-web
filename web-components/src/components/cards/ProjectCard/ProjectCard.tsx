@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Box, SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
-import { Buy1Event, Track } from 'web-registry/src/lib/tracker/types';
+import { Buy1Event, Track } from 'web-marketplace/src/lib/tracker/types';
 
 import { ButtonType } from '../../../types/shared/buttonType';
 import { formatStandardInfo } from '../../../utils/format';

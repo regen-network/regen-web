@@ -29,7 +29,7 @@ The website for the [Regen Network](https://regen.network) decentralized infrast
 
 This project uses [lerna](https://github.com/lerna/lerna) with [yarn workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) to manage multiple packages:
 
-- `web-registry`: Registry React application
+- `web-marketplace`: Registry React application
 - `web-components`: React components and [material-ui](https://material-ui.com/) custom theme
 - `web-storybook`: [Storybook](https://storybook.js.org/) config
 - `web-auth`: React application used for Auth0 Custom Universal Login
@@ -63,7 +63,7 @@ yarn build
 
 ## Environment variables
 
-Set variables in `.env` files in `web-registry/` and `web-storybook/` folders based on provided `.env.example` files.
+Set variables in `.env` files in `web-marketplace/` and `web-storybook/` folders based on provided `.env.example` files.
 
 For `web-auth`, follow these [setup instructions](web-auth/README.md#setup).
 
@@ -99,7 +99,7 @@ yarn start-auth
 
 ### Registry
 
-Compile `web-components` and `web-registry` to `web-components/lib` and `web-registry/build` respectively:
+Compile `web-components` and `web-marketplace` to `web-components/lib` and `web-marketplace/build` respectively:
 
 ```sh
 yarn build
@@ -109,12 +109,12 @@ yarn build
 
 To generate Type definitions from our GraphQL Schema, as well as custom react hooks, make sure the [graphQL server is running locally](https://github.com/regen-network/registry-server/blob/5adc07f89c0d4ee74d65779cfad591025c8bebc2/README.md#starting-a-development-server), `cd` into the appropriate sub-folder and run (per repo):
 
-For `/web-registry` there are two commands for the separate sources:
+For `/web-marketplace` there are two commands for the separate sources:
 
 1. `yarn graphql:codegen` - for registry server graphql types
 2. `yarn graphql:codegen-sanity` - for sanity CMS graphql types
 
-which generates types for any **_named_** GraphQL queries and mutations in `web-registry/src/graphql/*.graphql` (note - it does not generate types for unnamed queries)
+which generates types for any **_named_** GraphQL queries and mutations in `web-marketplace/src/graphql/*.graphql` (note - it does not generate types for unnamed queries)
 
 ```sh
 yarn graphql:codegen
@@ -129,7 +129,7 @@ If you try to use a filter that is not allowed yet, you'll get the following err
 `GraphQLDocumentError: Field "${fieldName}" is not defined by type "${TableName}Filter".`
 In this case, you might want to submit a PR on https://github.com/regen-network/registry-server first to allow more filtering options.
 
-Similarly, types can be generated for Sanity GraphQL Schema (from `web-registry/src/graphql/sanity/*.graphql`) using:
+Similarly, types can be generated for Sanity GraphQL Schema (from `web-marketplace/src/graphql/sanity/*.graphql`) using:
 
 ```sh
 yarn graphql:codegen-sanity

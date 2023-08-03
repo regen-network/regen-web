@@ -179,7 +179,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [1.4.3](https://github.com/regen-network/regen-web/compare/v1.4.2...v1.4.3) (2023-04-14)
 
-**Note:** Version bump only for package web-registry
+**Note:** Version bump only for package web-marketplace
 
 ## [1.4.2](https://github.com/regen-network/regen-web/compare/v1.4.1...v1.4.2) (2023-04-11)
 

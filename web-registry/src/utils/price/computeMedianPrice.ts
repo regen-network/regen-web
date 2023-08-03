@@ -3,7 +3,7 @@ export interface Order {
   usdPrice: number;
 }
 
-export const calculateMedianPrice = (orders: Order[]): number => {
+export const computeMedianPrice = (orders: Order[]): number => {
   // flatten sell orders into an array of individual prices
   const prices: number[] = [];
   for (const order of orders) {

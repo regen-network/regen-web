@@ -2,7 +2,7 @@ import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { QUANTITY_MAX_DECIMALS } from 'config/decimals';
 import { roundFloatNumber } from 'utils/number/format/format';
-import { calculateMedianPrice } from 'utils/price/computeMedianPrice';
+import { computeMedianPrice } from 'utils/price/computeMedianPrice';
 
 import { PurchaseInfo } from 'web-components/lib/components/cards/ProjectCard/ProjectCard.types';
 import { formatNumber } from 'web-components/lib/utils/format';
@@ -66,7 +66,7 @@ export const getPurchaseInfo = ({
     quantity: order.quantity ? Number(order.quantity) : 0,
     usdPrice: order.askUsdAmount,
   }));
-  const medianPrice = calculateMedianPrice(orders);
+  const medianPrice = computeMedianPrice(orders);
 
   return {
     sellInfo: {

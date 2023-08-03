@@ -1,6 +1,6 @@
 import { EEUR_DENOM, EVMOS_DENOM, REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { TRANSPARENT_PIXEL } from 'utils/image/transparentPixel';
-import { calculateMedianPrice, Order } from 'utils/price/computeMedianPrice';
+import { computeMedianPrice, Order } from 'utils/price/computeMedianPrice';
 
 import { ProjectImpactCardProps } from 'web-components/lib/components/cards/ProjectImpactCard/ProjectImpactCard';
 
@@ -56,10 +56,10 @@ export const getCreditClassAvgPricePerTonLabel = ({
         quantity: order.quantity ? Number(order.quantity) : 0,
         usdPrice: amount * denomPrice,
       });
-    };
+    }
   }
 
-  const medianPrice = calculateMedianPrice(orders);
+  const medianPrice = computeMedianPrice(orders);
   const avgPricePerTonLabel = getPriceToDisplay({ price: medianPrice });
 
   return avgPricePerTonLabel;

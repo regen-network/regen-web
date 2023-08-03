@@ -139,8 +139,6 @@ const CreateSellOrderForm: React.FC<React.PropsWithChildren<FormProps>> = ({
                 component={NumberTextField}
                 name="price"
                 label="Price"
-                increment={0.1}
-                min={0.0}
                 arrows={false}
                 errors={errors}
               />

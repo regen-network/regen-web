@@ -49,9 +49,10 @@ import InfoIconOutlined from './InfoIconOutlined';
 import InterfaceIcon from './InterfaceIcon';
 import LinkIcon from './LinkIcon';
 import MinusIcon from './MinusIcon';
-import NoBasketTokens from './NoBasketTokens';
-import NoEcocredits from './NoEcocredits';
+import NoBasketTokensIcon from './NoBasketTokensIcon';
+import NoEcocreditsIcon from './NoEcocreditsIcon';
 import { NoProjectIcon } from './NoProjectIcon';
+import NoRetirementCertificatesIcon from './NoRetirementCertificatesIcon';
 import OrganizationIcon from './OrganizationIcon';
 import OutlinedCheckIcon from './OutlinedCheckIcon';
 import PendingIcon from './PendingIcon';
@@ -63,7 +64,7 @@ import PointerIcon from './PointerIcon';
 import PrintIcon from './PrintIcon';
 import { ProjectPageIcon } from './ProjectPageIcon';
 import { ProjectPageIconSmall } from './ProjectPageIconSmall';
-import PutInBasket from './PutInBasket';
+import PutInBasketIcon from './PutInBasketIcon';
 import QuestionIcon from './QuestionIcon';
 import QuestionIconOutlined from './QuestionIconOutlined';
 import RegenIcon from './RegenIcon';
@@ -98,7 +99,7 @@ import YoutubeIcon from './social/YoutubeIcon';
 import SoilSampleIcon from './SoilSampleIcon';
 import { Spinner } from './Spinner';
 import SuccessIcon from './SuccessIcon';
-import TakeFromBasket from './TakeFromBasket';
+import TakeFromBasketIcon from './TakeFromBasketIcon';
 import TotalCreditsIcon from './TotalCreditsIcon';
 import ToucanIcon from './ToucanIcon';
 import TradeableIcon from './TradeableIcon';
@@ -248,9 +249,13 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<LinkIcon />} label="LinkIcon" />
     <LabeledIcon icon={<MediumIcon color="grey" />} label="MediumIcon" />
     <LabeledIcon icon={<MinusIcon />} label="MinusIcon" />
-    <LabeledIcon icon={<NoBasketTokens />} label="NoBasketTokens" />
-    <LabeledIcon icon={<NoEcocredits />} label="NoEcocredits" />
+    <LabeledIcon icon={<NoBasketTokensIcon />} label="NoBasketTokensIcon" />
+    <LabeledIcon icon={<NoEcocreditsIcon />} label="NoEcocreditsIcon" />
     <LabeledIcon icon={<NoProjectIcon />} label="NoProjectIcon" />
+    <LabeledIcon
+      icon={<NoRetirementCertificatesIcon />}
+      label="NoRetirementCertificatesIcon"
+    />
     <LabeledIcon icon={<OrganizationIcon />} label="OrganizationIcon" />
     <LabeledIcon icon={<OutlinedCheckIcon />} label="OutlinedCheckIcon" />
     <LabeledIcon icon={<PendingIcon />} label="PendingIcon" />
@@ -265,7 +270,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<PrintIcon />} label="PrintIcon" />
     <LabeledIcon icon={<ProjectPageIcon />} label="ProjectPageIcon" />
     <LabeledIcon icon={<ProjectPageIconSmall />} label="ProjectPageIconSmall" />
-    <LabeledIcon icon={<PutInBasket />} label="PutInBasket" />
+    <LabeledIcon icon={<PutInBasketIcon />} label="PutInBasketIcon" />
     <LabeledIcon icon={<QuestionIcon />} label="QuestionIcon" />
     <LabeledIcon
       icon={<QuestionIconOutlined sx={{ color: 'secondary.main' }} />}
@@ -303,7 +308,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<SoilSampleIcon />} label="SoilSampleIcon" />
     <LabeledIcon icon={<Spinner />} label="Spinner" />
     <LabeledIcon icon={<SuccessIcon />} label="SuccessIcon" />
-    <LabeledIcon icon={<TakeFromBasket />} label="TakeFromBasket" />
+    <LabeledIcon icon={<TakeFromBasketIcon />} label="TakeFromBasketIcon" />
     <LabeledIcon icon={<TelegramIcon color="blue" />} label="TelegramIcon" />
     <LabeledIcon icon={<TotalCreditsIcon />} label="TotalCreditsIcon" />
     <LabeledIcon icon={<ToucanIcon />} label="ToucanIcon" />

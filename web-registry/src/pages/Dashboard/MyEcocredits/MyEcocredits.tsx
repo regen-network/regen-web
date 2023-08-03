@@ -8,8 +8,8 @@ import { REGEN_APP_PROJECT_URL } from 'utils/components/ShareSection/getSocialIt
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import AvailableCreditsIconAlt from 'web-components/lib/components/icons/AvailableCreditsIconAlt';
-import PutInBasket from 'web-components/lib/components/icons/PutInBasket';
-import TakeFromBasket from 'web-components/lib/components/icons/TakeFromBasket';
+import PutInBasketIcon from 'web-components/lib/components/icons/PutInBasketIcon';
+import TakeFromBasketIcon from 'web-components/lib/components/icons/TakeFromBasketIcon';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import {
   BASKET_PUT_TITLE,
@@ -360,7 +360,7 @@ export const MyEcocredits = (): JSX.Element => {
                   if (creditBaskets[i] && creditBaskets[i].length > 0) {
                     buttons.splice(1, 0, {
                       // buttons.splice(2, 0, { TODO: Replace once we had 'Sell'
-                      icon: <PutInBasket />,
+                      icon: <PutInBasketIcon />,
                       label: BASKET_PUT_TITLE,
                       onClick: () => {
                         track<'putInBasket1', PutInBasket1Event>(
@@ -384,7 +384,7 @@ export const MyEcocredits = (): JSX.Element => {
             <TableActionButtons
               buttons={[
                 {
-                  icon: <TakeFromBasket />,
+                  icon: <TakeFromBasketIcon />,
                   label: BASKET_TAKE_TITLE,
                   onClick: () => {
                     openTakeModal(i);

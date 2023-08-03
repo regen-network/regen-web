@@ -4,7 +4,7 @@ import { sxToArray } from '../../utils/mui/sxToArray';
 
 interface IconProps extends SvgIconProps {}
 
-export default function NoEcocredits({
+export default function NoEcocreditsIcon({
   sx = [],
   ...props
 }: IconProps): JSX.Element {

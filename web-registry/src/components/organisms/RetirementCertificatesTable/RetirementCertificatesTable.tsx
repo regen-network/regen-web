@@ -4,6 +4,7 @@ import { quantityFormatNumberOptions } from 'config/decimals';
 import { tableStyles } from 'styles/table';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
+import NoRetirementCertificatesIcon from 'web-components/lib/components/icons/NoRetirementCertificatesIcon';
 import {
   ActionsTable,
   RenderActionButtonsFunc,
@@ -38,7 +39,12 @@ export const RetirementCertificatesTable: React.FC<
   isIgnoreOffset = false,
 }) => {
   if (!retirements?.length) {
-    return <NoCredits title="No retirements to display" />;
+    return (
+      <NoCredits
+        title="No retirements to display"
+        icon={<NoRetirementCertificatesIcon sx={{ height: 100, width: 105 }} />}
+      />
+    );
   }
 
   return (

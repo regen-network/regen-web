@@ -4,7 +4,7 @@ import { sxToArray } from '../../utils/mui/sxToArray';
 
 interface IconProps extends SvgIconProps {}
 
-export default function NoBasketTokens({
+export default function NoBasketTokensIcon({
   sx = [],
   ...props
 }: IconProps): JSX.Element {

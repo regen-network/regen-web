@@ -4,7 +4,7 @@ import { sxToArray } from '../../utils/mui/sxToArray';
 
 interface IconProps extends SvgIconProps {}
 
-export default function PutInBasket({
+export default function PutInBasketIcon({
   sx = [],
   ...props
 }: IconProps): JSX.Element {

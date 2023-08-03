@@ -4,7 +4,7 @@ import { Box } from '@mui/system';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import EmptyState from 'web-components/lib/components/empty-state';
-import { CreditBatchLightIcon } from 'web-components/lib/components/icons/CreditBatchLightIcon';
+import NoEcocreditsIcon from 'web-components/lib/components/icons/NoEcocreditsIcon';
 import PlusIcon from 'web-components/lib/components/icons/PlusIcon';
 import { Label } from 'web-components/lib/components/typography';
 
@@ -69,9 +69,7 @@ export const MyCreditBatches = (): JSX.Element => {
       {hasNoBatches && (
         <EmptyState
           message={NO_CREDIT_BATCHES_MESSAGE}
-          icon={
-            <CreditBatchLightIcon sx={{ color: 'info.main', fontSize: 84 }} />
-          }
+          icon={<NoEcocreditsIcon sx={{ width: 100, height: 100 }} />}
           sx={{ backgroundColor: 'info.light' }}
         >
           <OutlinedButton

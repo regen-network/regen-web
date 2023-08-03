@@ -4,7 +4,7 @@ import { quantityFormatNumberOptions } from 'config/decimals';
 import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
-import NoEcocredits from 'web-components/lib/components/icons/NoEcocredits';
+import NoEcocreditsIcon from 'web-components/lib/components/icons/NoEcocreditsIcon';
 import {
   ActionsTable,
   RenderActionButtonsFunc,
@@ -41,7 +41,7 @@ export const EcocreditsTable: React.FC<
     return (
       <NoCredits
         title="No ecocredits to display"
-        icon={<NoEcocredits sx={{ width: 100, height: 100 }} />}
+        icon={<NoEcocreditsIcon sx={{ width: 100, height: 100 }} />}
       />
     );
   }

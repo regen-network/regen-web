@@ -9,11 +9,13 @@ import { UseStateSetter } from 'types/react/use-state';
 import { COMMUNITY_FILTER } from './Projects.constants';
 
 type CommunityFilterProps = {
-  setUseCommunityProjects: UseStateSetter<boolean>;
+  useCommunityProjects?: boolean;
+  setUseCommunityProjects: UseStateSetter<boolean | undefined>;
   sx?: SxProps<Theme>;
 };
 
 export const CommunityFilter = ({
+  useCommunityProjects = false,
   setUseCommunityProjects,
   sx,
 }: CommunityFilterProps) => {
@@ -23,6 +25,7 @@ export const CommunityFilter = ({
         control={
           <Checkbox
             sx={{ p: 0, mr: 3 }}
+            checked={useCommunityProjects}
             onChange={event => setUseCommunityProjects(event.target.checked)}
           />
         }

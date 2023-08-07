@@ -25,7 +25,6 @@ import { GettingStartedResourcesSection } from 'components/molecules';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 
 import { useProjects } from './hooks/useProjects';
-import { CommunityFilter } from './Projects.CommunityFilter';
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
@@ -44,7 +43,9 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { track } = useTracker();
   const location = useLocation();
-  const [useCommunityProjects, setUseCommunityProjects] = useState(false);
+  const [useCommunityProjects, setUseCommunityProjects] = useState<
+    boolean | undefined
+  >(undefined);
   const [creditClassFilter, setCreditClassFilter] = useState({});
 
   // Page index starts at 1 for route
@@ -142,7 +143,10 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
               <ProjectsSideFilter
                 creditClassesData={creditClassesData}
                 creditClassFilter={creditClassFilter}
+                hasCommunityProjects={hasCommunityProjects}
+                useCommunityProjects={useCommunityProjects}
                 setCreditClassFilter={setCreditClassFilter}
+                setUseCommunityProjects={setUseCommunityProjects}
                 sx={{
                   mt: { xs: 6.25, lg: 0 },
                   mr: { xs: 0, lg: 7.5 },
@@ -150,17 +154,6 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
                   order: { xs: 2, lg: 1 },
                 }}
               />
-              {hasCommunityProjects && (
-                <CommunityFilter
-                  setUseCommunityProjects={setUseCommunityProjects}
-                  sx={{
-                    mt: { xs: 6.25, lg: 0 },
-                    mr: { xs: 0, lg: 7.5 },
-                    width: { xs: '100%', lg: 'auto' },
-                    order: { xs: 2, lg: 1 },
-                  }}
-                />
-              )}
               <Flex
                 sx={{
                   order: { xs: 1, lg: 2 },

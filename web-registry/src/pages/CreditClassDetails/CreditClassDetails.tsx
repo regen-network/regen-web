@@ -15,9 +15,11 @@ import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
 import { openLink } from 'lib/button';
 import { client } from 'lib/clients/sanity';
+import { GECKO_EEUR_ID, GECKO_USDC_ID } from 'lib/coingecko';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { queryClassIssuers } from 'lib/ecocredit/api';
 import { onChainClassRegExp } from 'lib/ledger';
+import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
@@ -30,13 +32,10 @@ import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import useImpact from 'pages/CreditClassDetails/hooks/useImpact';
-import { getDisplayPartyOrAddress } from 'components/organisms/ProjectDetailsSection/ProjectDetailsSection.utils';
+import { getDisplayPartyOrAddress } from 'components/organisms/DetailsSection/DetailsSection.utils';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { AVG_PRICE_TOOLTIP_CREDIT_CLASS } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants';
-import {
-  getDisplayParty,
-  getParty,
-} from 'components/templates/ProjectDetails/ProjectDetails.utils';
+import { getDisplayParty } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { useLedger } from '../../ledger';
 import { BOOK_CALL_LINK } from './CreditClassDetails.constants';
@@ -143,7 +142,15 @@ function CreditClassDetails({
     }));
   }, [credits, projectsWithOrderData]);
 
+  const simplePrice = useQuery(getSimplePriceQuery({}));
+
   const avgPricePerTonLabel = getCreditClassAvgPricePerTonLabel({
+    geckoPrices: {
+      regenPrice: simplePrice?.data?.regen?.usd,
+      evmosPrice: simplePrice?.data?.evmos?.usd,
+      eeurPrice: simplePrice?.data?.[GECKO_EEUR_ID]?.usd,
+      usdcPrice: simplePrice?.data?.[GECKO_USDC_ID]?.usd,
+    },
     projectsWithOrderData,
   });
 
@@ -169,7 +176,8 @@ function CreditClassDetails({
       ) ?? [],
   });
 
-  const creditClassAdminParty = getParty(
+  const creditClassAdminParty = getDisplayPartyOrAddress(
+    onChainClass?.admin,
     adminPartyByAddrData?.walletByAddr?.partyByWalletId,
   );
   const creditClassProgramParty = getDisplayParty(

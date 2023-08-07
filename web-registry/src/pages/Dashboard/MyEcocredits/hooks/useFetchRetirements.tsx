@@ -20,7 +20,7 @@ import { getAllRetirementsByOwnerQuery } from 'lib/queries/react-query/registry-
 import { getAllRetirementsByOwnerQueryKey } from 'lib/queries/react-query/registry-server/graphql/indexer/getAllRetirementsByOwner/getAllRetirementsByOwner.constants';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { getDisplayPartyOrAddress } from 'components/organisms/ProjectDetailsSection/ProjectDetailsSection.utils';
+import { getDisplayPartyOrAddress } from 'components/organisms/DetailsSection/DetailsSection.utils';
 import { useProjectsWithMetadata } from 'hooks/projects/useProjectsWithMetadata';
 
 import { getDataFromBatchDenomId } from '../MyEcocredits.utils';

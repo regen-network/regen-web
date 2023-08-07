@@ -47,16 +47,8 @@ export const headerNoBorderBottomPages = [
 
 export const menuItems: Item[] = [
   {
-    title: 'NCT',
-    href: 'https://regennetwork.notion.site/A-Guide-to-Nature-Carbon-Ton-NCT-8204ea9d20d0436281f49b8fd1b3fbd2',
-  },
-  {
     title: 'Corporate buying',
     href: 'https://app.regen.network/buyers/',
-  },
-  {
-    title: 'Project developers',
-    href: 'https://app.regen.network/land-stewards/',
   },
   {
     title: 'Registry',

@@ -62,11 +62,7 @@ export const BridgableEcocreditsTable = ({
     return (
       <NoCredits
         title={NO_BRIDGABLE_CREDITS}
-        icon={
-          <EmptyCartIcon
-            sx={{ width: '100px', height: '100px', color: 'info.main' }}
-          />
-        }
+        icon={<EmptyCartIcon sx={{ width: '100px', height: '100px' }} />}
       />
     );
   }

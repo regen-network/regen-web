@@ -48,6 +48,7 @@ const MetaDetail: React.FC<Props> = ({
               value={v}
               rdfType={rdfType}
               bodySize={bodySize}
+              sx={{ pb: value.length > 1 ? 2 : 0 }}
             />
           ))
         ) : (

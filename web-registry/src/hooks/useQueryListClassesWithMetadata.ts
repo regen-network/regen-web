@@ -11,7 +11,7 @@ import { useLedger } from '../ledger';
 import useQueryListClasses from './useQueryListClasses';
 
 interface ClassInfoWithMetadata extends ClassInfo {
-  metadataJson?: Partial<CreditClassMetadataLD>;
+  metadataJson?: CreditClassMetadataLD;
 }
 
 export default function useQueryListClassesWithMetadata(): ClassInfoWithMetadata[] {

@@ -1,6 +1,8 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { useQuery } from '@tanstack/react-query';
+import { getClassImageWithGreyDefault } from 'utils/image/classImage';
 
 import { CardRibbon } from 'web-components/lib/components/atoms/CardRibbon/CardRibbon';
 import { CreditClassCardItem } from 'web-components/lib/components/cards/CreditClassCard/CreditClassCard.Item';
@@ -14,16 +16,18 @@ import { Party } from 'web-components/lib/components/user/UserInfo';
 import { CreditClassByOnChainIdQuery } from 'generated/graphql';
 import { CreditClass } from 'generated/sanity-graphql';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
-import { getSanityImgSrc } from 'lib/imgSrc';
+import { getAllCreditClassPageQuery } from 'lib/queries/react-query/sanity/getAllCreditClassPageQuery/getAllCreditClassPageQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { OFFSET_GENERATION_METHOD } from 'pages/Buyers/Buyers.constants';
 import { EcocreditsSection } from 'components/molecules';
-import { CreditBatches } from 'components/organisms';
+import { DetailsSection } from 'components/organisms/DetailsSection/DetailsSection';
+import { parseMethodologies } from 'components/organisms/ProjectTopSection/ProjectTopSection.utils';
 import { useTags } from 'hooks/useTags';
 
-import { AdditionalInfo } from '../CreditClassDetails.AdditionalInfo';
+import { client as sanityClient } from '../../../lib/clients/sanity';
 import { MemoizedProjects as Projects } from '../CreditClassDetails.Projects';
+import { CreditClassDetailsTableTabs } from '../tables/CreditClassDetails.TableTabs';
 import {
   CREDIT_CLASS_TOOLTIP,
   ELIGIBLE_ACTIVITIES,
@@ -59,7 +63,10 @@ const CreditClassDetailsSimple: React.FC<
 
   const displayName = getCreditClassDisplayName(onChainClass.id, metadata);
   const image = content?.image;
-  const imageSrc = metadata?.['schema:image'] || getSanityImgSrc(image);
+  const imageSrc = getClassImageWithGreyDefault({
+    metadata,
+    sanityClass: content,
+  });
 
   const { isKeplrMobileWeb } = useWallet();
   const { creditTypeData, creditTypeSanity, generationMethods } =
@@ -73,6 +80,16 @@ const CreditClassDetailsSimple: React.FC<
   const { activityTags, ecosystemTags } = useTags({
     activities,
     ecosystemTypes,
+  });
+
+  const { data: sanityCreditClassPageData } = useQuery(
+    getAllCreditClassPageQuery({ sanityClient, enabled: !!sanityClient }),
+  );
+  const sanityCreditClassPage =
+    sanityCreditClassPageData?.allCreditClassPage?.[0];
+
+  const methodology = parseMethodologies({
+    methodologies: metadata?.['regen:approvedMethodologies'],
   });
 
   return (
@@ -175,10 +192,6 @@ const CreditClassDetailsSimple: React.FC<
                 {metadata?.['schema:description']}
               </ReadMore>
             )}
-            <AdditionalInfo
-              metadata={metadata}
-              creditTypeName={creditTypeData?.creditType?.name}
-            />
           </Box>
           <ImpactTags
             impact={impactCards}
@@ -188,21 +201,30 @@ const CreditClassDetailsSimple: React.FC<
           />
         </Box>
       </EcocreditsSection>
-
-      <CreditClassDetailsStakeholders
-        admin={admin}
-        issuers={issuers}
-        program={program}
-      />
+      <DetailsSection
+        header={sanityCreditClassPage?.creditClassDetailsSection}
+        credibilityCards={content?.credibilityCards}
+        methodology={methodology}
+        credit={{
+          creditImage: sanityCreditClassPage?.creditImage?.asset?.url,
+          creditTypeUnit: creditTypeData?.creditType?.unit,
+          creditTypeImage: creditTypeSanity?.largeImage?.asset?.url,
+        }}
+      >
+        <CreditClassDetailsStakeholders
+          admin={admin}
+          issuers={issuers}
+          program={program}
+        />
+      </DetailsSection>
 
       <Projects classId={onChainClass.id} />
       <div
         className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}
       >
-        <CreditBatches
-          creditClassId={onChainClass.id}
-          titleAlign="left"
-          withSection
+        <CreditClassDetailsTableTabs
+          creditClassMetadata={metadata}
+          onChainCreditClassId={onChainClass.id}
         />
       </div>
     </Box>

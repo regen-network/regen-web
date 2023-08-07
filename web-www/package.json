@@ -10,7 +10,7 @@
     "graphql:codegen-sanity": "graphql-codegen --config sanity-codegen.yml",
     "eslint": "eslint .  -c .eslintrc.js --max-warnings 0 --ext .ts,.tsx",
     "eslint-fix": "eslint . --fix -c .eslintrc.js --ext .ts,.tsx",
-    "format": "prettier --write --loglevel warn './src/**/*.{ts,tsx,json,md,css}'",
+    "format": "prettier --write --loglevel warn --ignore-path=../.prettierignore './**/*.{ts,tsx,json,md,css}'",
     "format-and-fix": "yarn format && yarn eslint-fix"
   },
   "dependencies": {

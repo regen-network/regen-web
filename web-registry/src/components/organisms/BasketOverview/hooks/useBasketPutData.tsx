@@ -55,7 +55,7 @@ export const useBasketPutData = (): BasketPutData => {
         balance.batchDenom.startsWith(projectClass),
       ),
     )
-    .filter(credit => credit.tradableAmount !== '0');
+    .filter(credit => Number(credit.tradableAmount) !== 0);
 
   const creditBatchDenoms = creditsPutable?.map(credit => credit.batchDenom);
   const isLoadingPutData = isLoadingBalances || isLoadingBasket;

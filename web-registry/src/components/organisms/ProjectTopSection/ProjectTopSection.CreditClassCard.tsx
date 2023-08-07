@@ -1,3 +1,5 @@
+import { getClassImageWithGreyDefault } from 'utils/image/classImage';
+
 import { BlockContent } from 'web-components/lib/components/block-content';
 import CreditClassCard, {
   CreditClassCardItemType,
@@ -5,7 +7,6 @@ import CreditClassCard, {
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
-import { getSanityImgSrc } from 'lib/imgSrc';
 
 import { Link } from 'components/atoms';
 
@@ -47,10 +48,10 @@ export const ProjectTopSectionCreditClassCard: React.FC<Props> = ({
             <BlockContent content={creditClassSanity?.shortDescriptionRaw} />
           )
         }
-        imgSrc={
-          creditClassMetadata?.['schema:image'] ||
-          getSanityImgSrc(creditClassSanity?.image)
-        }
+        imgSrc={getClassImageWithGreyDefault({
+          metadata: creditClassMetadata,
+          sanityClass: creditClassSanity,
+        })}
         type={{
           name: creditTypeName ?? '',
           icon: {

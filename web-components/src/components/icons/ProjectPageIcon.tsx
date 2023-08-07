@@ -6,94 +6,40 @@ export const ProjectPageIcon: React.FC<React.PropsWithChildren<SvgIconProps>> =
     return (
       <SvgIcon
         {...props}
-        width="73"
-        height="59"
-        viewBox="0 0 73 59"
+        viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <svg
-          width="73"
-          height="59"
-          viewBox="0 0 73 59"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <mask id="path-1-inside-1_396_30679" fill="white">
-            <rect width="73" height="59" rx="3" />
-          </mask>
-          <rect
-            width="73"
-            height="59"
-            rx="3"
-            fill="white"
-            stroke="currentColor"
-            strokeWidth="8"
-            mask="url(#path-1-inside-1_396_30679)"
-          />
-          <rect
-            y="16.6667"
-            width="3.66666"
-            height="73"
-            rx="0.25"
-            transform="rotate(-90 0 16.6667)"
-            fill="currentColor"
-          />
-          <rect
-            x="40.1499"
-            y="27"
-            width="4"
-            height="21.9"
-            rx="0.25"
-            transform="rotate(-90 40.1499 27)"
-            fill="currentColor"
-          />
-          <rect
-            x="40.1499"
-            y="35"
-            width="4"
-            height="18.25"
-            rx="0.25"
-            transform="rotate(-90 40.1499 35)"
-            fill="currentColor"
-          />
-          <rect
-            x="40.1499"
-            y="43"
-            width="4"
-            height="14.6"
-            rx="0.25"
-            transform="rotate(-90 40.1499 43)"
-            fill="currentColor"
-          />
-          <mask id="path-6-inside-2_396_30679" fill="white">
-            <rect x="9" y="23" width="25.55" height="25.6667" rx="1" />
-          </mask>
-          <rect
-            x="9"
-            y="23"
-            width="25.55"
-            height="25.6667"
-            rx="1"
-            stroke="currentColor"
-            strokeWidth="4"
-            mask="url(#path-6-inside-2_396_30679)"
-          />
-          <path
-            d="M17.3 41.8333V34.5387L21.775 31.2421L26.25 34.5387V41.8333H17.3Z"
-            stroke="currentColor"
-            strokeWidth="2"
-          />
-          <circle cx="8" cy="8" r="2" fill="currentColor" />
-          <circle cx="14" cy="8" r="2" fill="currentColor" />
-          <circle cx="20" cy="8" r="2" fill="currentColor" />
-          <path
-            d="M15.5835 42C13.4112 42 11.6501 43.761 11.6501 45.9333C11.6501 46.8906 12.4262 47.6667 13.3835 47.6667H30.1668C31.1241 47.6667 31.9001 46.8906 31.9001 45.9333C31.9001 43.761 30.1391 42 27.9668 42H15.5835Z"
-            fill="white"
-            stroke="currentColor"
-            strokeWidth="2"
-          />
-        </svg>
+        <path
+          fill="#7BC796"
+          d="M20,4H4C2.3,4,1,5.3,1,7v2.2v0.5V18c0,1.7,1.3,3,3,3h16c1.7,0,3-1.3,3-3V7C23,5.3,21.7,4,20,4z M4,6h16
+		c0.6,0,1,0.4,1,1v2H3V7C3,6.4,3.4,6,4,6z M20,19H4c-0.6,0-1-0.4-1-1v-8h18v8C21,18.6,20.6,19,20,19z"
+        />
+        <path
+          fill="#7BC796"
+          d="M19.8,12h-7.5c-0.1,0-0.2,0.1-0.2,0.2v0.5c0,0.1,0.1,0.2,0.2,0.2h7.5c0.1,0,0.2-0.1,0.2-0.2v-0.5
+		C20,12.1,19.9,12,19.8,12z"
+        />
+        <path
+          fill="#7BC796"
+          d="M18.8,14h-6.5c-0.1,0-0.2,0.1-0.2,0.2v0.5c0,0.1,0.1,0.2,0.2,0.2h6.5c0.1,0,0.2-0.1,0.2-0.2v-0.5
+		C19,14.1,18.9,14,18.8,14z"
+        />
+        <path
+          fill="#7BC796"
+          d="M15.8,16h-3.5c-0.1,0-0.2,0.1-0.2,0.2v0.5c0,0.1,0.1,0.2,0.2,0.2h3.5c0.1,0,0.2-0.1,0.2-0.2v-0.5
+		C16,16.1,15.9,16,15.8,16z"
+        />
+        <path
+          fill="#7BC796"
+          d="M10,11H5c-0.6,0-1,0.4-1,1v5c0,0.6,0.4,1,1,1h0.2h4.6H10c0.6,0,1-0.4,1-1v-5C11,11.4,10.6,11,10,11z M5,11.5
+		V12h5v3.2C9.8,15.1,9.5,15,9.2,15H9v-1.4l-1.5-1.1L6,13.6V15H5.8c-0.3,0-0.6,0.1-0.8,0.2V12c0,0,0,0,0,0L5,11.5z M8,15H7v-0.9
+		l0.5-0.4L8,14.1V15z M5.2,17C5.1,17,5,16.9,5,16.8C5,16.4,5.4,16,5.8,16H6h3h0.2c0.4,0,0.8,0.4,0.8,0.8c0,0.1-0.1,0.2-0.2,0.2H5.2z
+		"
+        />
+        <circle fill="#7BC796" cx="4.5" cy="7.5" r="0.5" />
+        <circle fill="#7BC796" cx="6.5" cy="7.5" r="0.5" />
+        <circle fill="#7BC796" cx="8.5" cy="7.5" r="0.5" />
       </SvgIcon>
     );
   };

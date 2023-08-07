@@ -10,7 +10,7 @@
     "build": "yarn remove-previous-files && tsc && yarn copy-assets",
     "lint": "eslint ./src  -c .eslintrc.js --max-warnings 0 --ext .ts,.tsx",
     "lint-fix": "eslint ./src --fix -c .eslintrc.js --ext .ts,.tsx",
-    "format": "prettier --write --loglevel warn './src/**/*.{ts,tsx,json,md,css}'",
+    "format": "prettier --write --loglevel warn --ignore-path=../.prettierignore './src/**/*.{ts,tsx,json,md,css}'",
     "format-and-fix": "yarn format && yarn lint-fix",
     "test": "jest"
   },

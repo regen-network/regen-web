@@ -24,7 +24,7 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
     const graphqlClient = useApolloClient();
     const { isEdit, onChainProject, projectEditSubmit } =
       useProjectEditContext();
-    const { metadata, metadataSubmit, offChainProject } =
+    const { metadata, metadataSubmit, offChainProject, loading } =
       useProjectWithMetadata({
         projectId,
         isEdit,
@@ -59,7 +59,12 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
     }
 
     return (
-      <ProjectFormTemplate isEdit={isEdit} title="Metadata">
+      <ProjectFormTemplate
+        isEdit={isEdit}
+        title="Metadata"
+        project={offChainProject}
+        loading={loading}
+      >
         <ProjectMetadataSelectedForm
           submit={projectMetadataSubmit}
           metadata={customMetadata}

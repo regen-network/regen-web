@@ -11,7 +11,6 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { QUDT_UNIT_MAP, qudtUnit } from 'lib/rdf';
 import { useTracker } from 'lib/tracker/useTracker';
 
-import DefaultProject from '../../assets/default-project.jpg';
 import { Maybe, MoreProjectFieldsFragment } from '../../generated/graphql';
 
 type Props = {
@@ -82,7 +81,7 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
       name={project.metadata?.['schema:name']}
       imgSrc={
         project.metadata?.['regen:previewPhoto']?.['schema:url'] ||
-        DefaultProject
+        '/jpg/default-project.jpg'
       }
       imageStorageBaseUrl={imageStorageBaseUrl}
       apiServerUrl={apiServerUrl}

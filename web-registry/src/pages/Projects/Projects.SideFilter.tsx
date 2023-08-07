@@ -32,8 +32,10 @@ type Props = {
   creditClassFilter: Record<string, boolean>;
   hasCommunityProjects: boolean;
   useCommunityProjects?: boolean;
+  showFiltersReset: boolean;
   setCreditClassFilter: UseStateSetter<Record<string, boolean>>;
   setUseCommunityProjects: UseStateSetter<boolean | undefined>;
+  resetFilter: () => void;
   sx?: SxProps<Theme>;
 };
 
@@ -42,20 +44,15 @@ export const ProjectsSideFilter = ({
   creditClassFilter,
   hasCommunityProjects,
   useCommunityProjects,
+  showFiltersReset,
   setCreditClassFilter,
   setUseCommunityProjects,
+  resetFilter,
   sx = [],
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const creditClassesMapping = getCreditClassesMapping({ creditClassesData });
   const creditClassesPaths = Object.keys(creditClassesMapping ?? {});
-  const showFiltersReset =
-    useCommunityProjects !== undefined ||
-    Object.keys(creditClassFilter).length > 0;
-  const resetFilter = () => {
-    setCreditClassFilter({});
-    setUseCommunityProjects(undefined);
-  };
 
   return (
     <>

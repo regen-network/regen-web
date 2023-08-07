@@ -6,6 +6,8 @@ import { spacing } from 'styles/spacing';
 
 import { Flex } from 'web-components/lib/components/box';
 import { ProjectCard } from 'web-components/lib/components/cards/ProjectCard';
+import { EmptyState } from 'web-components/lib/components/empty-state/EmptyState';
+import { NoProjectIcon } from 'web-components/lib/components/icons/NoProjectIcon';
 import SelectTextFieldBase from 'web-components/lib/components/inputs/SelectTextFieldBase';
 import { Loading } from 'web-components/lib/components/loading';
 import { Pagination } from 'web-components/lib/components/pagination/Pagination';
@@ -31,6 +33,10 @@ import {
   PROJECTS_PER_PAGE,
   sortOptions,
 } from './Projects.config';
+import {
+  EMPTY_PROJECTS_LABEL,
+  RESET_FILTERS_LABEL,
+} from './Projects.constants';
 import { ProjectsSideFilter } from './Projects.SideFilter';
 import { ProjectWithOrderData } from './Projects.types';
 import { getCreditsTooltip } from './utils/getCreditsTooltip';
@@ -89,6 +95,15 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
     setSort(event.target.value as string);
   };
 
+  const showFiltersReset =
+    useCommunityProjects !== undefined ||
+    Object.keys(creditClassFilter).length > 0;
+
+  const resetFilter = () => {
+    setCreditClassFilter({});
+    setUseCommunityProjects(undefined);
+  };
+
   if (loading) return <Loading />;
 
   return (
@@ -145,8 +160,10 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
                 creditClassFilter={creditClassFilter}
                 hasCommunityProjects={hasCommunityProjects}
                 useCommunityProjects={useCommunityProjects}
+                showFiltersReset={showFiltersReset}
                 setCreditClassFilter={setCreditClassFilter}
                 setUseCommunityProjects={setUseCommunityProjects}
+                resetFilter={resetFilter}
                 sx={{
                   mt: { xs: 6.25, lg: 0 },
                   mr: { xs: 0, lg: 7.5 },
@@ -211,6 +228,29 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
               </Box>
             );
           })}
+          {projectsCount === 0 && (
+            <EmptyState
+              message={EMPTY_PROJECTS_LABEL}
+              icon={<NoProjectIcon sx={{ fontSize: 100 }} />}
+              sx={{ gridColumn: '1 / -1', backgroundColor: 'info.light' }}
+            >
+              <>
+                {showFiltersReset && (
+                  <Box
+                    onClick={resetFilter}
+                    sx={{
+                      color: 'secondary.main',
+                      cursor: 'pointer',
+                      fontWeight: 700,
+                      fontSize: 18,
+                    }}
+                  >
+                    {RESET_FILTERS_LABEL}
+                  </Box>
+                )}
+              </>
+            </EmptyState>
+          )}
           <Flex
             sx={{
               gridColumn: '1/-1',

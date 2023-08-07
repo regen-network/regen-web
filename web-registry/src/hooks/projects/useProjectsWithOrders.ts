@@ -4,12 +4,10 @@ import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';
 import { client as sanityClient } from 'lib/clients/sanity';
-import { GECKO_EEUR_ID, GECKO_USDC_ID } from 'lib/coingecko';
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { SKIPPED_CLASS_ID } from 'lib/env';
 import { normalizeProjectsWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
-import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getProjectsByClassQuery } from 'lib/queries/react-query/ecocredit/getProjectsByClass/getProjectsByClassQuery';
 import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
@@ -90,7 +88,6 @@ export function useProjectsWithOrders({
       }),
     );
 
-  const simplePrice = useQuery(getSimplePriceQuery({}));
   const { data: sellOrders } = useQuery(
     getSellOrdersExtendedQuery({
       enabled: !!marketplaceClient,
@@ -134,12 +131,6 @@ export function useProjectsWithOrders({
   const projectsWithOrderData = normalizeProjectsWithOrderData({
     projects: lastRandomProjects ?? selectedProjects,
     sellOrders,
-    geckoPrices: {
-      regenPrice: simplePrice?.data?.regen?.usd,
-      evmosPrice: simplePrice?.data?.evmos?.usd,
-      eeurPrice: simplePrice?.data?.[GECKO_EEUR_ID]?.usd,
-      usdcPrice: simplePrice?.data?.[GECKO_USDC_ID]?.usd,
-    },
     userAddress: wallet?.address,
     sanityCreditClassData: creditClassData,
   });

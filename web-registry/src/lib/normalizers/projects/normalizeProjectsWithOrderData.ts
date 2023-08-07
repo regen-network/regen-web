@@ -2,7 +2,6 @@ import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 
-import { GECKO_PRICES } from 'pages/Projects/hooks/useProjectsSellOrders.types';
 import {
   getPurchaseInfo,
   normalizeToUISellOrderInfo,
@@ -14,7 +13,6 @@ import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 interface NormalizeProjectsWithOrderDataParams {
   projects?: ProjectInfo[];
   sellOrders?: SellOrderInfoExtented[];
-  geckoPrices?: GECKO_PRICES;
   userAddress?: string;
   sanityCreditClassData?: AllCreditClassQuery;
 }
@@ -22,7 +20,6 @@ interface NormalizeProjectsWithOrderDataParams {
 export const normalizeProjectsWithOrderData = ({
   projects,
   sellOrders = [],
-  geckoPrices,
   userAddress,
   sanityCreditClassData,
 }: NormalizeProjectsWithOrderDataParams): ProjectWithOrderData[] => {
@@ -33,7 +30,6 @@ export const normalizeProjectsWithOrderData = ({
     const purchaseInfo = getPurchaseInfo({
       projectId: project.id,
       sellOrders,
-      geckoPrices,
       userAddress,
     });
 

@@ -63,12 +63,7 @@ export const getUserMenuItems = ({
       linkComponent,
       title: 'My Portfolio',
       href: '/ecocredits/portfolio',
-      icon: (
-        <CreditsIcon
-          sx={{ height: 18, width: 20 }}
-          color={theme.palette.secondary.main}
-        />
-      ),
+      icon: <CreditsIcon sx={{ height: 18, width: 20 }} />,
       importCallback: (): Promise<any> => import('../../../pages/Dashboard'),
     },
     isBridgeEnabled

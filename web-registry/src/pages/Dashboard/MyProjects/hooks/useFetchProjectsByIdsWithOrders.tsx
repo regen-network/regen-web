@@ -3,10 +3,8 @@ import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1
 import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';
-import { GECKO_EEUR_ID, GECKO_USDC_ID } from 'lib/coingecko';
 import { normalizeProjectsWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
-import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
@@ -35,7 +33,6 @@ export const useFetchProjectsByIdsWithOrders = ({
     useProjectsWithMetadata(projectIds);
 
   // Sell Orders
-  const simplePrice = useQuery(getSimplePriceQuery({}));
   const { data: sellOrders } = useQuery(
     getSellOrdersExtendedQuery({
       enabled: !!marketplaceClient,
@@ -50,12 +47,6 @@ export const useFetchProjectsByIdsWithOrders = ({
       .map(project => project?.project)
       .filter(project => project !== undefined) as ProjectInfo[],
     sellOrders,
-    geckoPrices: {
-      regenPrice: simplePrice?.data?.regen?.usd,
-      evmosPrice: simplePrice?.data?.evmos?.usd,
-      eeurPrice: simplePrice?.data?.[GECKO_EEUR_ID]?.usd,
-      usdcPrice: simplePrice?.data?.[GECKO_USDC_ID]?.usd,
-    },
     userAddress: wallet?.address,
   });
 

@@ -54,8 +54,20 @@ services:
         condition: service_healthy
       ledger:
         condition: service_healthy
-    healthcheck:
-      test: ["CMD-SHELL", "curl --fail http://localhost:5000/graphiql || exit 1"]
-      interval: 1s
-      timeout: 10s
-      retries: 100
+
+  indexer:
+    build:
+      context: .
+      dockerfile: docker/indexer.Dockerfile
+    container_name: indexer_container
+    environment:
+      DATABASE_URL: postgres://postgres:password@localhost:5432/indexer
+      REGEN_API: http://localhost:1317
+      REGEN_RPC: http://localhost:26657
+    entrypoint: ["/bin/sh", "-c", "./scripts/indexer_start.sh"]
+    network_mode: host
+    depends_on:
+      db:
+        condition: service_healthy
+      ledger:
+        condition: service_healthy

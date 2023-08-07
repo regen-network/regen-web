@@ -1,7 +1,7 @@
 FROM node:16
 
 # Set version
-ENV GIT_CHECKOUT='b20be3fad1aafef58c473c5380c5ff8fe9dc1d81'
+ENV GIT_CHECKOUT='d258432e35ae773e06cff61a6718e0b757a23b90'
 
 # Clone repository
 RUN git clone https://github.com/regen-network/registry-server/ /home/server
@@ -24,6 +24,7 @@ RUN echo "MAILERLITE_API_KEY=test" >> .env # cannot be empty
 RUN echo "DATABASE_URL=postgres://postgres:password@localhost:5432/server" >> .env
 RUN echo "LEDGER_TENDERMINT_RPC=http://localhost:26657" >> .env
 RUN echo "LEDGER_REST_ENDPOINT=http://localhost:1317" >> .env
+RUN echo "INDEXER_DATABASE_URL=postgres://postgres:password@localhost:5432/indexer" >> .env
 
 # Build server
 RUN yarn build

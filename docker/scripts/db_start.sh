@@ -17,9 +17,7 @@ wait_postgresql
 
 # create databases
 psql postgres://postgres:password@localhost:5432 -c 'CREATE DATABASE server;'
-psql postgres://postgres:password@localhost:5432 -c 'CREATE DATABASE server_shadow;'
 psql postgres://postgres:password@localhost:5432 -c 'CREATE DATABASE indexer;'
-psql postgres://postgres:password@localhost:5432 -c 'CREATE DATABASE indexer_shadow;'
 
 # add database roles
 psql postgres://postgres:password@localhost:5432 -c 'CREATE ROLE app_user;'

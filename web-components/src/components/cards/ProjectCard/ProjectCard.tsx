@@ -4,6 +4,7 @@ import { Box, SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
 import { Buy1Event, Track } from 'web-marketplace/src/lib/tracker/types';
 
+import UserInfoCard from '../../../components/user/UserInfoCard';
 import { ButtonType } from '../../../types/shared/buttonType';
 import { formatStandardInfo } from '../../../utils/format';
 import OutlinedButton from '../../buttons/OutlinedButton';
@@ -12,7 +13,7 @@ import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
 import ProjectPlaceInfo from '../../place/ProjectPlaceInfo';
 import InfoTooltipWithIcon from '../../tooltip/InfoTooltipWithIcon';
 import { Body, Subtitle } from '../../typography';
-import UserInfo, { User } from '../../user/UserInfo';
+import UserInfo, { Party, User } from '../../user/UserInfo';
 import MediaCard, { MediaCardProps } from '../MediaCard';
 import {
   AVG_PRICE_LABEL,
@@ -50,6 +51,7 @@ export interface ProjectCardProps extends MediaCardProps {
   creditsTooltip?: string;
   button?: ButtonType;
   disabled?: boolean;
+  program?: Party;
 }
 
 export function ProjectCard({
@@ -75,6 +77,7 @@ export function ProjectCard({
   isSoldOut = false,
   creditsTooltip,
   button = DEFAULT_BUY_BUTTON,
+  program,
   ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
@@ -113,6 +116,19 @@ export function ProjectCard({
       imageStorageBaseUrl={imageStorageBaseUrl}
       apiServerUrl={apiServerUrl}
       sx={{ ...sx, height: '100%' }}
+      imageChildren={
+        program && (
+          <Box
+            sx={{
+              position: 'absolute',
+              bottom: theme.spacing(3.75),
+              left: theme.spacing(5),
+            }}
+          >
+            <UserInfoCard user={program} />
+          </Box>
+        )
+      }
       {...mediaCardProps}
     >
       <div className={classes.placeInfo}>

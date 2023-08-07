@@ -85,6 +85,7 @@ export function ProjectCardsSection({
                   track={track}
                   isSoldOut={isSoldOut}
                   creditsTooltip={getCreditsTooltip({ isSoldOut, project })}
+                  program={project.program}
                 />
               </Box>
             );

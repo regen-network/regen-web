@@ -20,7 +20,7 @@ jobs:
       - name: build-app
         run: yarn build
         env:
-          NODE_OPTIONS: '--openssl-legacy-provider --max-old-space-size=32768'
+          NODE_OPTIONS: '--openssl-legacy-provider --max-old-space-size=10216'
 
     # Displaying for now, see https://github.com/regen-network/regen-web/pull/1796 for explanations
     # TODO re-enable as part of https://github.com/regen-network/regen-registry/issues/1316

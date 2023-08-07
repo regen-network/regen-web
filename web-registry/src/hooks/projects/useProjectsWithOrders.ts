@@ -216,7 +216,7 @@ export function useProjectsWithOrders({
 
   return {
     projectsWithOrderData: projectsWithMetadata,
-    projectsCount: projectsWithOrderDataFiltered?.length,
+    projectsCount: projectsFilteredByCreditClass?.length,
     loading: isLoadingProjects || isLoadingProjectsByClass || isLoadingProject,
     hasCommunityProjects,
   };

@@ -12,7 +12,7 @@ import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
 import ProjectPlaceInfo from '../../place/ProjectPlaceInfo';
 import InfoTooltipWithIcon from '../../tooltip/InfoTooltipWithIcon';
 import { Body, Subtitle } from '../../typography';
-import UserInfo, { Party, User } from '../../user/UserInfo';
+import { Party } from '../../user/UserInfo';
 import MediaCard, { MediaCardProps } from '../MediaCard';
 import {
   AVG_PRICE_LABEL,
@@ -35,7 +35,6 @@ export interface ProjectCardProps extends MediaCardProps {
   place: string;
   area: number;
   areaUnit: string;
-  registry?: User | null;
   tag?: string;
   onClick?: () => void;
   onButtonClick?: () => void;
@@ -62,7 +61,6 @@ export function ProjectCard({
   place,
   area,
   areaUnit,
-  registry,
   onClick,
   onButtonClick,
   tag,
@@ -132,12 +130,6 @@ export function ProjectCard({
       {comingSoon && (
         <div className={classes.comingSoon}>
           <span className={classes.comingSoonText}>coming soon</span>
-        </div>
-      )}
-      {registry && <div className={classes.separator} />}
-      {registry && (
-        <div className={classes.userInfo}>
-          <UserInfo user={registry} size="sm" titleComponent="subtitle" />
         </div>
       )}
       {purchaseInfo && <div className={classes.separator} />}

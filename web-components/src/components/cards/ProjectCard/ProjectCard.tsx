@@ -4,7 +4,6 @@ import { Box, SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
 import { Buy1Event, Track } from 'web-marketplace/src/lib/tracker/types';
 
-import UserInfoCard from '../../../components/user/UserInfoCard';
 import { ButtonType } from '../../../types/shared/buttonType';
 import { formatStandardInfo } from '../../../utils/format';
 import OutlinedButton from '../../buttons/OutlinedButton';
@@ -22,6 +21,7 @@ import {
   ERROR_CARD_PRICE,
   SOLD_OUT,
 } from './ProjectCard.constants';
+import { ProgramImageChildren } from './ProjectCard.ImageChildren';
 import { PurchaseDetails } from './ProjectCard.PurchaseDetails';
 import { useProjectCardStyles } from './ProjectCard.styles';
 import { PurchaseInfo } from './ProjectCard.types';
@@ -116,19 +116,7 @@ export function ProjectCard({
       imageStorageBaseUrl={imageStorageBaseUrl}
       apiServerUrl={apiServerUrl}
       sx={{ ...sx, height: '100%' }}
-      imageChildren={
-        program && (
-          <Box
-            sx={{
-              position: 'absolute',
-              bottom: theme.spacing(3.75),
-              left: theme.spacing(5),
-            }}
-          >
-            <UserInfoCard user={program} />
-          </Box>
-        )
-      }
+      imageChildren={<ProgramImageChildren program={program} />}
       {...mediaCardProps}
     >
       <div className={classes.placeInfo}>

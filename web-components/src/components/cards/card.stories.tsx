@@ -116,7 +116,6 @@ export const projectCard = (): JSX.Element => (
       imgSrc="/coorong.png"
       tag="biodiversity"
       onClick={onClick}
-      registry={{ name: 'registry', type: 'USER' }}
       sx={{ maxWidth: 338 }}
     />
   </Box>

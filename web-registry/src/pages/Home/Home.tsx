@@ -76,7 +76,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
         siteMetadata={{
           title: seo?.title || '',
           description: seo?.description || '',
-          author: 'Regen Network Development, Inc.',
+          author: 'Regen Network Development, PBC',
           siteUrl: window.location.href,
         }}
       />

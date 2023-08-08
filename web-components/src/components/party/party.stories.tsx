@@ -8,7 +8,7 @@ export default {
 export const partyAddress = (): JSX.Element => (
   <PartyAddress
     onClick={() => {}}
-    name="Regen Network Development, Inc."
+    name="Regen Network Development, PBC"
     address="regen:1p6syuqk3e5a8hwp8e20jyjwr8p7nj270x4spqm"
   />
 );

@@ -97,7 +97,7 @@ const LandStewards = (): JSX.Element => {
     description:
       content?.metadata?.description ||
       'Issue and sell ecosystem service credits to buyers around the world - get paid for your ecological stewardship.',
-    author: 'Regen Network Development, Inc.',
+    author: 'Regen Network Development, PBC',
     siteUrl: window.location.href,
     imageUrl: content?.metadata?.openGraphImage?.asset?.url || '',
   };

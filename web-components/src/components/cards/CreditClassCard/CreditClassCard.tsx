@@ -1,5 +1,7 @@
 import { Box, Card, CardMedia, SxProps } from '@mui/material';
 
+import { Party } from 'src/components/user/UserInfoCard';
+
 import { CardRibbon } from '../../../components/atoms/CardRibbon/CardRibbon';
 import { Flex } from '../../../components/box';
 import InfoTooltipWithIcon from '../../../components/tooltip/InfoTooltipWithIcon';
@@ -8,6 +10,7 @@ import { LinkType } from '../../../types/shared/linkType';
 import { parseText } from '../../../utils/textParser';
 import { OptimizeImageProps } from '../../image';
 import { Body, Subtitle, Title } from '../../typography';
+import { ProgramImageChildren } from '../ProjectCard/ProjectCard.ImageChildren';
 import {
   CREDIT_CLASS_TOOLTIP,
   METHODOLOGY,
@@ -24,6 +27,7 @@ export interface Props extends OptimizeImageProps {
   imgSrc: string;
   generationMethods?: CreditClassCardItemType[];
   methodology?: Partial<LinkType>;
+  program?: Party;
   sx?: SxProps<Theme>;
 }
 
@@ -34,6 +38,7 @@ const CreditClassCard = ({
   type,
   generationMethods,
   methodology,
+  program,
   sx = [],
 }: Props): JSX.Element => {
   const { classes } = useCreditClassCardStyles();
@@ -72,7 +77,13 @@ const CreditClassCard = ({
             sxIcon={{ with: 20, height: 20 }}
           />
         )}
-        <CardMedia image={imgSrc || ''} className={classes.image} />
+        <Box className={classes.image}>
+          <CardMedia
+            image={imgSrc || ''}
+            sx={{ with: '100%', height: '100%' }}
+          />
+          <ProgramImageChildren program={program} />
+        </Box>
         <Box sx={{ px: { xs: 3.875, sm: 5 }, py: { xs: 5, sm: 7.5 } }}>
           <Subtitle
             size="xs"

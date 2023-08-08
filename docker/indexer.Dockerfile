@@ -1,5 +1,9 @@
 FROM python:3.9
 
+# Install dependencies
+RUN apt-get update
+RUN apt-get install libpq-dev postgresql-client -y
+
 # Set version and chain
 ENV GIT_CHECKOUT='b1b0cb4c8b95b072398612cac4fa813c177d00b4'
 
@@ -11,10 +15,6 @@ WORKDIR /home/indexer
 
 # Use provided version
 RUN git checkout $GIT_CHECKOUT
-
-# Install dependencies
-RUN apt-get update
-RUN apt-get install libpq-dev postgresql-client -y
 
 # Install python dependencies
 RUN pip install poetry

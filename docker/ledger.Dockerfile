@@ -1,5 +1,9 @@
 FROM golang:1.19
 
+# Install dependencies
+RUN apt-get update
+RUN apt-get install jq -y
+
 # Set version and chain
 ENV GIT_CHECKOUT='v5.1.2'
 ENV REGEN_CHAIN_ID='regen-local'
@@ -47,6 +51,15 @@ RUN sed -i "s/minimum-gas-prices = \"\"/minimum-gas-prices = \"0uregen\"/" /root
 
 # Set cors allow all origins
 RUN sed -i "s/cors_allowed_origins = \[\]/cors_allowed_origins = [\"*\"]/" /root/.regen/config/config.toml
+
+# Copy ecocredit state file
+COPY docker/data/ecocredit.json /home/ledger/data/
+
+# Add ecocredit state to genesis
+RUN jq '.app_state.ecocredit |= . + input' /root/.regen/config/genesis.json /home/ledger/data/ecocredit.json > genesis-tmp.json
+
+# Overwrite genesis file with updated genesis file
+RUN mv -f genesis-tmp.json /root/.regen/config/genesis.json
 
 # Copy regen start script
 COPY docker/scripts/ledger_start.sh /home/ledger/scripts/

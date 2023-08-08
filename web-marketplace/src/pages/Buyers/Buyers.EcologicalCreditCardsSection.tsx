@@ -1,10 +1,13 @@
-import { CardMedia } from '@mui/material';
+import { Box, CardMedia } from '@mui/material';
 
+import { ProgramImageChildren } from 'web-components/lib/components/cards/ProjectCard/ProjectCard.ImageChildren';
 import EcologicalCreditCard from 'web-components/lib/components/molecules/EcologicalCreditCard';
 import Section from 'web-components/lib/components/organisms/Section';
 
 import { AllBuyersPageQuery } from 'generated/sanity-graphql';
+import { SKIPPED_CLASS_ID } from 'lib/env';
 
+import { useCreditClasses } from 'pages/Home/hooks/useCreditClasses';
 import { Link } from 'components/atoms';
 
 import { normalizeEcologicalCreditCards } from './normalizers/normalizeEcologicalCreditCards';
@@ -16,7 +19,14 @@ interface Props {
 const BuyersEcologicalCreditCardsSection: React.FC<
   React.PropsWithChildren<Props>
 > = ({ content }) => {
-  const cards = normalizeEcologicalCreditCards({ content });
+  const { creditClasses, creditClassesPrograms } = useCreditClasses({
+    skippedClassId: SKIPPED_CLASS_ID,
+  });
+  const cards = normalizeEcologicalCreditCards({
+    content,
+    creditClasses,
+    creditClassesPrograms,
+  });
 
   return (
     <Section title={content?.title ?? ''} description={content?.descriptionRaw}>
@@ -27,15 +37,24 @@ const BuyersEcologicalCreditCardsSection: React.FC<
           sx={{ mb: { xs: 5, sm: 7.5 } }}
           {...card}
         >
-          <CardMedia
-            src={card.image.src}
-            component="img"
-            alt={card.image.alt}
+          <Box
             sx={{
+              position: 'relative',
               height: { xs: 216, md: '100%' },
               width: { xs: '100%', md: 400 },
             }}
-          />
+          >
+            <CardMedia
+              src={card.image.src}
+              component="img"
+              alt={card.image.alt}
+              sx={{
+                height: '100%',
+                width: '100%',
+              }}
+            />
+            <ProgramImageChildren program={card.program} />
+          </Box>
         </EcologicalCreditCard>
       ))}
     </Section>

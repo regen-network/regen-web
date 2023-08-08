@@ -2342,6 +2342,7 @@ export type EcologicalCreditCard = Document & {
   description?: Maybe<Scalars['String']>;
   image?: Maybe<CustomImage>;
   type?: Maybe<CreditType>;
+  creditClass?: Maybe<CreditClass>;
   creditInfos?: Maybe<CreditInfos>;
   offsetMethods?: Maybe<Array<Maybe<OffsetMethod>>>;
   projectActivities?: Maybe<Array<Maybe<ProjectActivity>>>;
@@ -2361,6 +2362,7 @@ export type EcologicalCreditCardFilter = {
   description?: Maybe<StringFilter>;
   image?: Maybe<CustomImageFilter>;
   type?: Maybe<CreditTypeFilter>;
+  creditClass?: Maybe<CreditClassFilter>;
   creditInfos?: Maybe<CreditInfosFilter>;
   button?: Maybe<ButtonFilter>;
 };
@@ -8343,6 +8345,9 @@ export type EcologicalCreditCardFieldsFragment = (
         & Pick<SanityImageAsset, 'url'>
       )> }
     )> }
+  )>, creditClass?: Maybe<(
+    { __typename?: 'CreditClass' }
+    & Pick<CreditClass, 'path'>
   )>, creditInfos?: Maybe<(
     { __typename?: 'CreditInfos' }
     & Pick<CreditInfos, 'country' | 'price' | 'count'>
@@ -8912,6 +8917,9 @@ export const EcologicalCreditCardFieldsFragmentDoc = gql`
         url
       }
     }
+  }
+  creditClass {
+    path
   }
   creditInfos {
     country

@@ -20535,6 +20535,18 @@
             "deprecationReason": null
           },
           {
+            "name": "creditClass",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CreditClass",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "creditInfos",
             "description": null,
             "args": [],
@@ -20734,6 +20746,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "CreditTypeFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "creditClass",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CreditClassFilter",
               "ofType": null
             },
             "defaultValue": null,

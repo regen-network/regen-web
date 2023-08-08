@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # run migrations
-yarn run graphile-migrate migrate
+yarn migrate
 
 # start server
 yarn serve

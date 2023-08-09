@@ -54,11 +54,11 @@ const RegistryLayoutFooter: React.FC<React.PropsWithChildren<unknown>> = () => {
       items: [
         {
           title: 'Program Guide',
-          href: 'https://library.regen.network/v/regen-registry-program-guide/',
+          href: 'https://registry.regen.network/v/regen-registry-program-guide/',
         },
         {
           title: 'How-to Articles',
-          href: 'https://guides.regen.network/',
+          href: 'https://guides.regen.network/guides/regen-marketplace/',
         },
         {
           title: 'How-to Videos',

@@ -34,19 +34,19 @@ export const footerItems: [FooterItem, FooterItem, FooterItem, FooterItem] = [
     items: [
       {
         title: 'Program Guide',
-        href: 'https://library.regen.network/v/regen-registry-program-guide/',
+        href: 'https://registry.regen.network/v/regen-registry-handbook/regen-registry-overview/program-rules-and-requirements/',
       },
       {
         title: 'Create Methodology',
-        href: 'https://library.regen.network/v/regen-registry-program-guide/methodology-development/methodology-development-overview',
+        href: 'https://registry.regen.network/v/regen-registry-handbook/methodology-development/methodology-development-overview',
       },
       {
         title: 'Metholodology Review',
-        href: 'https://library.regen.network/v/regen-registry-program-guide/methodology-development/methodology-review-process',
+        href: 'https://registry.regen.network/v/regen-registry-handbook/methodology-development/methodology-review-process',
       },
       {
         title: 'Metholodology Library',
-        href: 'https://library.regen.network/v/methodology-library/',
+        href: 'https://registry.regen.network/v/methodology-library/',
       },
     ],
   },

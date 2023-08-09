@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/regen-network/regen-web/compare/v1.10.0...v1.11.0) (2023-08-09)
+
+### Bug Fixes
+
+- first project card spacing, title and icon ([#1991](https://github.com/regen-network/regen-web/issues/1991)) ([08267fc](https://github.com/regen-network/regen-web/commit/08267fc89bab8bc24ea9dcf2ab5a1ce1b92b60dc))
+- ImpactTags width on project page ([#1993](https://github.com/regen-network/regen-web/issues/1993)) ([27ad43d](https://github.com/regen-network/regen-web/commit/27ad43d4ecdde978fa812212aec7f2852e9d4e09))
+- remove input props and add validation ([#1996](https://github.com/regen-network/regen-web/issues/1996)) ([ff40539](https://github.com/regen-network/regen-web/commit/ff40539bc364c0b816970a0dcb8e48575c6caa05))
+- Swap out icons on profile tabs, in user "..." menus, and "not found" icons ([#2005](https://github.com/regen-network/regen-web/issues/2005)) ([e9c9017](https://github.com/regen-network/regen-web/commit/e9c901700b8d47f349f6f6a66606292aa18641ab))
+- truncate function ([#1994](https://github.com/regen-network/regen-web/issues/1994)) ([72a2eb5](https://github.com/regen-network/regen-web/commit/72a2eb57237d33239fa204bfe39f1a01e6633284))
+- yarn format-and-fix to ignore generated code ([#2011](https://github.com/regen-network/regen-web/issues/2011)) ([1610102](https://github.com/regen-network/regen-web/commit/1610102e162172d91608952ff4e54be06878cd73))
+
+### Features
+
+- add credit class details section with credibility cards ([#1970](https://github.com/regen-network/regen-web/issues/1970)) ([188564a](https://github.com/regen-network/regen-web/commit/188564a3afdeb051f0e214a50758e961dd2e49f9))
+- Change project titles on project cards so that they have two lines ([#2014](https://github.com/regen-network/regen-web/issues/2014)) ([7a15d93](https://github.com/regen-network/regen-web/commit/7a15d9302d04786f9ee83229fd58ad2befd1c591))
+
 # [1.10.0](https://github.com/regen-network/regen-web/compare/v1.9.0...v1.10.0) (2023-07-20)
 
 ### Bug Fixes

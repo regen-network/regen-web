@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/regen-network/regen-web/compare/v1.10.0...v1.11.0) (2023-08-09)
+
+### Bug Fixes
+
+- batch balances which didn't always correspond to batches on portfolio ecocredits table ([#1979](https://github.com/regen-network/regen-web/issues/1979)) ([1e4319f](https://github.com/regen-network/regen-web/commit/1e4319f0492134c2c873c016211258519868499e))
+- calculate median using cumulative quantity ([#1998](https://github.com/regen-network/regen-web/issues/1998)) ([5b5fba5](https://github.com/regen-network/regen-web/commit/5b5fba5e78100fab760786da6f214d6922d4eb13))
+- credit class admin link on credit class page ([#1986](https://github.com/regen-network/regen-web/issues/1986)) ([2e237bf](https://github.com/regen-network/regen-web/commit/2e237bfde85048f2c260ce24582453e35bbc024b))
+- Do not display project forms if trying to access them for a project that does not exist or not admin of ([#1984](https://github.com/regen-network/regen-web/issues/1984)) ([6ad1bbe](https://github.com/regen-network/regen-web/commit/6ad1bbe9cf7cf4a687e8567bd79b38ecd4a1eda5))
+- fix registry and guide links ([#2017](https://github.com/regen-network/regen-web/issues/2017)) ([e11c5b4](https://github.com/regen-network/regen-web/commit/e11c5b4c9e92fa81a4ddca3e95755df9e7c6eb41))
+- incorrect font for project stakeholders ([#2001](https://github.com/regen-network/regen-web/issues/2001)) ([a722a4e](https://github.com/regen-network/regen-web/commit/a722a4ea27a629e6da9fbf0644449e46dfa772ba))
+- only display classes that the user is an issuer for on ChooseCreditClass ([#1987](https://github.com/regen-network/regen-web/issues/1987)) ([5dc1d69](https://github.com/regen-network/regen-web/commit/5dc1d6982d90242c797b61413f60687c843eec05))
+- project certification and ratings title ([#1999](https://github.com/regen-network/regen-web/issues/1999)) ([39157ad](https://github.com/regen-network/regen-web/commit/39157ad72e4dedb53e2ff0e5924e46c7c1d83e44))
+- remove walletConnect from params in useAddAddress ([#1990](https://github.com/regen-network/regen-web/issues/1990)) ([6dd3a7c](https://github.com/regen-network/regen-web/commit/6dd3a7c85c15eaa03822479e03d13c678665c6a0))
+- Swap out icons on profile tabs, in user "..." menus, and "not found" icons ([#2005](https://github.com/regen-network/regen-web/issues/2005)) ([e9c9017](https://github.com/regen-network/regen-web/commit/e9c901700b8d47f349f6f6a66606292aa18641ab))
+- yarn format-and-fix to ignore generated code ([#2011](https://github.com/regen-network/regen-web/issues/2011)) ([1610102](https://github.com/regen-network/regen-web/commit/1610102e162172d91608952ff4e54be06878cd73))
+
+### Features
+
+- add credit class details section with credibility cards ([#1970](https://github.com/regen-network/regen-web/issues/1970)) ([188564a](https://github.com/regen-network/regen-web/commit/188564a3afdeb051f0e214a50758e961dd2e49f9))
+- credit class issuance and info table ([#1985](https://github.com/regen-network/regen-web/issues/1985)) ([6b16b3d](https://github.com/regen-network/regen-web/commit/6b16b3d6aef0d8736229fd14771353a5377b6943))
+- Credit Class Page "Additional Info" improvements ([#1980](https://github.com/regen-network/regen-web/issues/1980)) ([26ccc7c](https://github.com/regen-network/regen-web/commit/26ccc7c6a72aff92a8b89a25bd9614b3955b74bf))
+- use default class image ([#2004](https://github.com/regen-network/regen-web/issues/2004)) ([056c215](https://github.com/regen-network/regen-web/commit/056c21555559b9eedc8d4acfa85e4db56cc57e3a))
+
 # [1.10.0](https://github.com/regen-network/regen-web/compare/v1.9.0...v1.10.0) (2023-07-20)
 
 ### Bug Fixes

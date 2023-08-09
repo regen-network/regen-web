@@ -10,5 +10,8 @@ export function getOptimizedImageSrc(
     return imgSrc;
   }
 
-  return imgSrc?.replace(imageStorageBaseUrl, `${apiServerUri}/image/`);
+  return imgSrc?.replace(
+    imageStorageBaseUrl,
+    `${apiServerUri}/marketplace/v1/image/`,
+  );
 }

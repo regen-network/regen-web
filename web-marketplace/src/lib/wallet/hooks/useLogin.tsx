@@ -25,7 +25,7 @@ export const useLogin = ({ signArbitrary, setError, setAccountId }: Params) => {
         if (wallet?.address && signArbitrary && token) {
           // Step 2: Retrieve a nonce for the user
           const nonceRes = await fetch(
-            `${apiUri}/web3auth/nonce?` +
+            `${apiUri}/marketplace/v1/web3auth/nonce?` +
               new URLSearchParams({
                 userAddress: wallet.address,
               }),
@@ -47,16 +47,19 @@ export const useLogin = ({ signArbitrary, setError, setAccountId }: Params) => {
           });
 
           // Step 4: Submit the signature to the login endpoint
-          const loginRes = await fetch(`${apiUri}/web3auth/login`, {
-            body: JSON.stringify({ signature }),
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-              'X-CSRF-TOKEN': token,
+          const loginRes = await fetch(
+            `${apiUri}/marketplace/v1/web3auth/login`,
+            {
+              body: JSON.stringify({ signature }),
+              method: 'POST',
+              credentials: 'include',
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': token,
+              },
             },
-          });
+          );
           const { user } = await loginRes.json();
 
           const accountId = user?.id;

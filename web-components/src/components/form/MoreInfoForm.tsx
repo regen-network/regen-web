@@ -99,7 +99,7 @@ export default function MoreInfoForm({
           setSubmitting(true);
           const apiUri: string = apiUrl;
           axios
-            .post(`${apiUri}/buyers-info`, {
+            .post(`${apiUri}/marketplace/v1/buyers-info`, {
               budget,
               email,
               name,

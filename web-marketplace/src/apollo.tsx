@@ -27,7 +27,7 @@ export const AuthApolloProvider = ({
 
   // https://www.apollographql.com/docs/react/networking/authentication
   const httpLink = createHttpLink({
-    uri: `${apiUri}/graphql`,
+    uri: `${apiUri}/marketplace/v1/graphql`,
     credentials: 'include',
   });
 

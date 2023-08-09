@@ -20,7 +20,7 @@ function VerifyEmail(): JSX.Element {
   const resendEmail = useCallback(() => {
     setSubmitting(true);
     axios
-      .post(`${apiUri}/auth/verification-email`, {
+      .post(`${apiUri}/marketplace/v1/auth/verification-email`, {
         email,
       })
       .then(resp => {

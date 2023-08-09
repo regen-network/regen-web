@@ -15,7 +15,7 @@ export const useLogout = ({ setError, setAccountId }: Params) => {
   const logout = useCallback(async (): Promise<void> => {
     try {
       if (token) {
-        await fetch(`${apiUri}/web3auth/logout`, {
+        await fetch(`${apiUri}/marketplace/v1/web3auth/logout`, {
           method: 'POST',
           credentials: 'include',
           headers: {

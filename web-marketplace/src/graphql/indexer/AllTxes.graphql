@@ -1,0 +1,10 @@
+query IndexerAllTxes($first: Int, $offset: Int, $orderBy: [TxesOrderBy!]) {
+  allTxes(first: $first, offset: $offset, orderBy: $orderBy) {
+    nodes {
+      txIdx
+      hash
+      blockHeight
+      data
+    }
+  }
+}

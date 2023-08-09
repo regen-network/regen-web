@@ -32,7 +32,6 @@ import { formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';
 
 import { getAllTxes } from 'lib/queries/react-query/registry-server/graphql/indexer/getAllTxes/getAllTxes';
-import { getAllTxesCount } from 'lib/queries/react-query/registry-server/graphql/indexer/getAllTxesCount/getAllTxesCount';
 
 import { getHashUrl } from '../../../lib/block-explorer';
 import { ledgerRESTUri } from '../../../lib/ledger';
@@ -88,22 +87,15 @@ const CreditActivityTable: React.FC<React.PropsWithChildren<unknown>> = () => {
     }),
   );
 
-  const { data: allTxesCountData } = useQuery(
-    getAllTxesCount({
-      client: graphqlClient,
-      enabled: !!graphqlClient,
-    }),
-  );
-
   const txs = normalizeAllTxes({ allTxesData: allTxesData?.data });
 
   useEffect(() => {
-    const txesCount = allTxesCountData?.data?.allTxes?.nodes?.length;
+    const txesCount = allTxesData?.data.allTxes?.totalCount;
 
     if (txesCount) {
       setCountTotal(txesCount);
     }
-  }, [allTxesCountData, setCountTotal]);
+  }, [allTxesData, setCountTotal]);
 
   const createSortHandler =
     (property: keyof TxRowData) => (event: React.MouseEvent<unknown>) => {

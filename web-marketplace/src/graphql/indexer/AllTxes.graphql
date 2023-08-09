@@ -6,5 +6,6 @@ query IndexerAllTxes($first: Int, $offset: Int, $orderBy: [TxesOrderBy!]) {
       blockHeight
       data
     }
+    totalCount
   }
 }

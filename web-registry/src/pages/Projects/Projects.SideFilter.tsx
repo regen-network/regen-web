@@ -10,6 +10,7 @@ import {
 import { sxToArray } from 'utils/mui/sxToArray';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import FilterIcon from 'web-components/lib/components/icons/FilterIcon';
 import Checkbox from 'web-components/lib/components/inputs/new/CheckBox/Checkbox';
 import { CollapseList } from 'web-components/lib/components/organisms/CollapseList/CollapseList';
 import { Subtitle } from 'web-components/lib/components/typography';
@@ -59,6 +60,9 @@ export const ProjectsSideFilter = ({
       <OutlinedButton
         size="small"
         onClick={() => setIsOpen(true)}
+        startIcon={
+          <FilterIcon sx={{ color: 'secondary.dark', width: 25, height: 24 }} />
+        }
         sx={[{ mr: 4 }, ...sxToArray(sx)]}
       >
         {SIDE_FILTERS_BUTTON}

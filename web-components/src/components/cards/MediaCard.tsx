@@ -131,9 +131,15 @@ export default function MediaCard({
               borderTop: `1px solid ${theme.palette.grey[100]}`,
             }),
             !!truncateTitle && {
-              whiteSpace: 'nowrap',
+              height: {
+                xs: 'inherit',
+                sm: titleVariant === 'h4' ? '94px' : 'inherit',
+              },
               overflow: 'hidden',
               textOverflow: 'ellipsis',
+              display: '-webkit-box',
+              '-webkit-line-clamp': '2',
+              '-webkit-box-orient': 'vertical',
             },
           ]}
         >

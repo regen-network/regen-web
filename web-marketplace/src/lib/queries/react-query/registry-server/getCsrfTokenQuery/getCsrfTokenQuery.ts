@@ -10,7 +10,7 @@ export const getCsrfTokenQuery = ({
 }: ReactQueryCsrfTokenProps): ReactQueryCsrfTokenResponse => ({
   queryKey: ['csrfToken'],
   queryFn: async () => {
-    const resp = await fetch(`${apiUri}/csrfToken`, {
+    const resp = await fetch(`${apiUri}/marketplace/v1/csrfToken`, {
       method: 'GET',
       credentials: 'include',
     });

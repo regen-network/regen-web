@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
-import { Buy1Event } from 'web-registry/src/lib/tracker/types';
-import { useTracker } from 'web-registry/src/lib/tracker/useTracker';
+import { Buy1Event } from 'web-marketplace/src/lib/tracker/types';
+import { useTracker } from 'web-marketplace/src/lib/tracker/useTracker';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';

@@ -9,10 +9,14 @@ export async function uploadImage(
   formData.append('image', image);
   formData.append('filePath', filePath);
 
-  const resp = await axios.post(`${apiServerUrl}/files`, formData, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-    withCredentials: true,
-  });
+  const resp = await axios.post(
+    `${apiServerUrl}/marketplace/v1/files`,
+    formData,
+    {
+      headers: { 'Content-Type': 'multipart/form-data' },
+      withCredentials: true,
+    },
+  );
 
   const respOK = resp && resp.status === 200;
   if (respOK) {
@@ -30,5 +34,7 @@ export async function deleteImage(
   apiServerUrl: string | undefined,
 ): Promise<void> {
   const fileName = imageUrl.split(`${projectId}/`)[1];
-  return axios.delete(`${apiServerUrl}/files/${projectId}/${fileName}`);
+  return axios.delete(
+    `${apiServerUrl}/marketplace/v1/files/${projectId}/${fileName}`,
+  );
 }

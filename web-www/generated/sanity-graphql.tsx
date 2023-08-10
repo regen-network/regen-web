@@ -7767,38 +7767,7 @@ export type HomeEcologicalCreditCardsSectionFieldsFragment = (
     & Pick<HomeWebEcologicalCreditCardsSection, 'title'>
     & { cards?: Maybe<Array<Maybe<(
       { __typename?: 'EcologicalCreditCard' }
-      & Pick<EcologicalCreditCard, 'title' | 'description'>
-      & { image?: Maybe<(
-        { __typename?: 'CustomImage' }
-        & CustomImageFieldsFragment
-      )>, type?: Maybe<(
-        { __typename?: 'CreditType' }
-        & Pick<CreditType, 'name'>
-        & { image?: Maybe<(
-          { __typename?: 'Image' }
-          & ImageFieldsFragment
-        )> }
-      )>, creditInfos?: Maybe<(
-        { __typename?: 'CreditInfos' }
-        & Pick<CreditInfos, 'country' | 'price' | 'count'>
-      )>, offsetMethods?: Maybe<Array<Maybe<(
-        { __typename?: 'OffsetMethod' }
-        & Pick<OffsetMethod, 'name'>
-        & { icon?: Maybe<(
-          { __typename?: 'Image' }
-          & ImageFieldsFragment
-        )> }
-      )>>>, projectActivities?: Maybe<Array<Maybe<(
-        { __typename?: 'ProjectActivity' }
-        & Pick<ProjectActivity, 'name'>
-        & { icon?: Maybe<(
-          { __typename?: 'Image' }
-          & ImageFieldsFragment
-        )> }
-      )>>>, button?: Maybe<(
-        { __typename?: 'Button' }
-        & ButtonFieldsFragment
-      )> }
+      & EcologicalCreditCardFieldsFragment
     )>>> }
   )> }
 );
@@ -8684,66 +8653,66 @@ export const ClimateSectionFieldsFragmentDoc = gql`
   }
 }
     ${ImageFieldsFragmentDoc}`;
-export const LinkFieldsFragmentDoc = gql`
-    fragment linkFields on Link {
-  buttonHref
-  buttonDoc {
-    href
+export const EcologicalCreditCardFieldsFragmentDoc = gql`
+    fragment ecologicalCreditCardFields on EcologicalCreditCard {
+  title
+  description
+  image {
+    imageHref
+    imageAlt
+    image {
+      asset {
+        url
+      }
+    }
+  }
+  type {
+    name
+    image {
+      asset {
+        url
+      }
+    }
+  }
+  creditInfos {
+    country
+    price
+    count
+  }
+  offsetMethods {
+    name
+    icon {
+      asset {
+        url
+      }
+    }
+  }
+  projectActivities {
+    name
+    icon {
+      asset {
+        url
+      }
+    }
+  }
+  button {
+    buttonText
+    buttonLink {
+      buttonHref
+    }
   }
 }
     `;
-export const ButtonFieldsFragmentDoc = gql`
-    fragment buttonFields on Button {
-  buttonText
-  buttonLink {
-    ...linkFields
-  }
-  buttonModal
-  buttonBlankTarget
-}
-    ${LinkFieldsFragmentDoc}`;
 export const HomeEcologicalCreditCardsSectionFieldsFragmentDoc = gql`
     fragment homeEcologicalCreditCardsSectionFields on HomePageWeb {
   homeWebEcologicalCreditCardsSection {
     title
     cards {
-      title
-      description
-      image {
-        ...customImageFields
-      }
-      type {
-        name
-        image {
-          ...imageFields
-        }
-      }
-      creditInfos {
-        country
-        price
-        count
-      }
-      offsetMethods {
-        name
-        icon {
-          ...imageFields
-        }
-      }
-      projectActivities {
-        name
-        icon {
-          ...imageFields
-        }
-      }
-      button {
-        ...buttonFields
-      }
+      ...ecologicalCreditCardFields
     }
   }
 }
-    ${CustomImageFieldsFragmentDoc}
-${ImageFieldsFragmentDoc}
-${ButtonFieldsFragmentDoc}`;
+    ${EcologicalCreditCardFieldsFragmentDoc}`;
 export const HomeFoldSectionFieldsFragmentDoc = gql`
     fragment homeFoldSectionFields on HomePageWeb {
   homeFoldSection {
@@ -8917,6 +8886,24 @@ export const PressKitTopSectionFieldsFragmentDoc = gql`
   }
 }
     `;
+export const LinkFieldsFragmentDoc = gql`
+    fragment linkFields on Link {
+  buttonHref
+  buttonDoc {
+    href
+  }
+}
+    `;
+export const ButtonFieldsFragmentDoc = gql`
+    fragment buttonFields on Button {
+  buttonText
+  buttonLink {
+    ...linkFields
+  }
+  buttonModal
+  buttonBlankTarget
+}
+    ${LinkFieldsFragmentDoc}`;
 export const ResourceFieldsFragmentDoc = gql`
     fragment resourceFields on ResourcesSection {
   header
@@ -8965,56 +8952,6 @@ export const BottomBannerFieldsFragmentDoc = gql`
 }
     ${ButtonFieldsFragmentDoc}
 ${CustomImageFieldsFragmentDoc}`;
-export const EcologicalCreditCardFieldsFragmentDoc = gql`
-    fragment ecologicalCreditCardFields on EcologicalCreditCard {
-  title
-  description
-  image {
-    imageHref
-    imageAlt
-    image {
-      asset {
-        url
-      }
-    }
-  }
-  type {
-    name
-    image {
-      asset {
-        url
-      }
-    }
-  }
-  creditInfos {
-    country
-    price
-    count
-  }
-  offsetMethods {
-    name
-    icon {
-      asset {
-        url
-      }
-    }
-  }
-  projectActivities {
-    name
-    icon {
-      asset {
-        url
-      }
-    }
-  }
-  button {
-    buttonText
-    buttonLink {
-      buttonHref
-    }
-  }
-}
-    `;
 export const EcologicalCreditCardsSectionFieldsFragmentDoc = gql`
     fragment ecologicalCreditCardsSectionFields on EcologicalCreditCardsSection {
   title

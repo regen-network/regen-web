@@ -1,6 +1,6 @@
 import { QuoteSection } from 'web-components/lib/components/organisms/QuoteSection/QuoteSection';
 
-import { AllBuyersPageQuery } from 'generated/sanity-graphql';
+import { AllBuyersPageQuery } from '@/generated/sanity-graphql';
 
 type Props = {
   content: AllBuyersPageQuery['allBuyersPage'][0]['quoteSection'];

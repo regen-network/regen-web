@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, CardMedia, SxProps } from '@mui/material';
+import Link from 'next/link';
 import { makeStyles } from 'tss-react/mui';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
@@ -8,9 +9,7 @@ import { Image } from 'web-components/lib/components/image';
 import ImageGrid from 'web-components/lib/components/image-grid';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { Link } from 'components/atoms';
-
-import { ImageGridSection as ImageGridSectionProps } from '../../generated/sanity-graphql';
+import { ImageGridSection as ImageGridSectionProps } from '@/generated/sanity-graphql';
 
 const useStyles = makeStyles()(theme => ({
   card: {

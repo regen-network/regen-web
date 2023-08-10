@@ -1,13 +1,11 @@
 import { CardMedia } from '@mui/material';
+import Link from 'next/link';
 
 import EcologicalCreditCard from 'web-components/lib/components/molecules/EcologicalCreditCard';
 import Section from 'web-components/lib/components/organisms/Section';
 
-import { AllBuyersPageQuery } from 'generated/sanity-graphql';
-
-import { Link } from 'components/atoms';
-
-import { normalizeEcologicalCreditCards } from './normalizers/normalizeEcologicalCreditCards';
+import { AllBuyersPageQuery } from '@/generated/sanity-graphql';
+import { normalizeEcologicalCreditCards } from '@/lib/utils/normalizers/normalizeEcologicalCreditCards';
 
 interface Props {
   content: AllBuyersPageQuery['allBuyersPage'][0]['ecologicalCreditCardsSection'];
@@ -16,7 +14,9 @@ interface Props {
 const BuyersEcologicalCreditCardsSection: React.FC<
   React.PropsWithChildren<Props>
 > = ({ content }) => {
-  const cards = normalizeEcologicalCreditCards({ content });
+  const cards = normalizeEcologicalCreditCards({
+    ecologicalCreditCardsData: content?.cards,
+  });
 
   return (
     <Section title={content?.title ?? ''} description={content?.descriptionRaw}>

@@ -6,17 +6,14 @@ import { HeroTitle } from '@/components/molecules/HeroTitle/HeroTitle';
 import { ImageGridSection } from '@/components/molecules/ImageGridSection/ImageGridSection';
 import { ImageItemsSection } from '@/components/molecules/ImageItemsSection/ImageItemsSection';
 import { BuyersEcologicalCreditCardsSection } from '@/components/templates/buyers/Buyers.EcologicalCreditCardsSection';
-import { BuyersFeaturedProjectsSection } from '@/components/templates/buyers/Buyers.FeaturedProjectsSection';
 import { BuyersPartnersSection } from '@/components/templates/buyers/Buyers.PartnersSection';
 import { BuyersQuoteSection } from '@/components/templates/buyers/Buyers.QuoteSection';
 import { useBuyersStyles } from '@/components/templates/buyers/Buyers.styles';
-import { useFetchProjectsByIds } from '@/components/templates/buyers/hook/useFetchProjectsByIds';
 import {
   AllBuyersPageDocument,
   AllBuyersPageQuery,
 } from '@/generated/sanity-graphql';
 import { sanityClient } from '@/lib/clients/sanityClient';
-import buyersHero from '@/public/images/buyers/buyers-top.jpg';
 
 const BuyersPage = ({
   buyersPageData,
@@ -24,13 +21,6 @@ const BuyersPage = ({
   const { classes: styles } = useBuyersStyles();
 
   const content = buyersPageData.data.allBuyersPage?.[0];
-
-  const featuredProjectIds = content?.featuredProjectCardsSection?.cards?.map(
-    card => card?.project?.projectId ?? '',
-  );
-  const { projects, isProjectsLoading } = useFetchProjectsByIds({
-    projectIds: featuredProjectIds,
-  });
 
   const siteMetadata = {
     title: 'For Buyers',
@@ -67,7 +57,7 @@ const BuyersPage = ({
           img={
             content?.heroSection?.backgroundImage?.image?.asset?.url ||
             content?.heroSection?.backgroundImage?.imageHref ||
-            buyersHero
+            '/images/buyers/buyers-top.jpg'
           }
           linearGradient="linear-gradient(209.5deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%)"
         />
@@ -97,18 +87,6 @@ const BuyersPage = ({
         {content?.ecologicalCreditCardsSection && (
           <BuyersEcologicalCreditCardsSection
             content={content?.ecologicalCreditCardsSection}
-          />
-        )}
-        {content?.featuredProjectCardsSection && !isProjectsLoading && (
-          <BuyersFeaturedProjectsSection
-            projects={projects}
-            content={content?.featuredProjectCardsSection}
-            sx={{
-              container: {
-                borderTop: theme => `1px solid ${theme.palette.grey[100]}`,
-                borderBottom: theme => `1px solid ${theme.palette.grey[100]}`,
-              },
-            }}
           />
         )}
         {content?.quoteSection && (

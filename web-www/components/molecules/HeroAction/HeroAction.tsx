@@ -7,12 +7,8 @@ import ContainedButton from 'web-components/lib/components/buttons/ContainedButt
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { Body, Title } from 'web-components/lib/components/typography';
 
-import {
-  BottomBannerFieldsFragment,
-  Maybe,
-} from '../../generated/sanity-graphql';
-import { onBtnClick } from '../../lib/button';
-import { BackgroundImgSection } from './BackgroundImgSection';
+import { BottomBannerFieldsFragment, Maybe } from '@/generated/sanity-graphql';
+import { onBtnClick } from '@/lib/utils/sanity/button';
 
 type Props = {
   openModal: (link: string) => void;

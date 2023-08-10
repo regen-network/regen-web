@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 
 import CarouselSection from 'web-components/lib/components/organisms/CarouselSection';
 
-import { AllBuyersPageQuery } from 'generated/sanity-graphql';
+import { AllBuyersPageQuery } from '@/generated/sanity-graphql';
 
 interface Props {
   content: AllBuyersPageQuery['allBuyersPage'][0]['partnersSection'];

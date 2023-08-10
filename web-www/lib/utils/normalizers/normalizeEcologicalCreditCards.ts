@@ -1,19 +1,24 @@
 import { EcologicalCreditCardType } from 'web-components/lib/components/molecules/EcologicalCreditCard/EcologicalCreditCard.types';
 
-import { EcologicalCreditCardsSectionFieldsFragment } from '@/generated/sanity-graphql';
+import {
+  EcologicalCreditCardFieldsFragment,
+  Maybe,
+} from '@/generated/sanity-graphql';
 
 export const OFFSET_GENERATION_METHOD = 'offset generation method';
 export const PROJECT_ACTIVITIES = 'project activities';
 
 type Params = {
-  ecologicalCreditCardsData?: EcologicalCreditCardsSectionFieldsFragment['homeWebEcologicalCreditCardsSection'];
+  ecologicalCreditCardsData?:
+    | Maybe<EcologicalCreditCardFieldsFragment>[]
+    | null;
 };
 
 export const normalizeEcologicalCreditCards = ({
   ecologicalCreditCardsData,
 }: Params): EcologicalCreditCardType[] => {
   return (
-    ecologicalCreditCardsData?.cards?.map(card => ({
+    ecologicalCreditCardsData?.map(card => ({
       title: card?.title ?? '',
       description: card?.description ?? '',
       image: {

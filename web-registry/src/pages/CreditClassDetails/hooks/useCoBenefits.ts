@@ -14,6 +14,7 @@ interface InputProps {
 export default function useCoBenefits({
   coBenefitsIRIs,
 }: InputProps): EcologicalImpact[] {
+  console.log(coBenefitsIRIs);
   const { data: coBenefitData } = useQuery(
     getEcologicalImpactByIriQuery({
       iris: coBenefitsIRIs,

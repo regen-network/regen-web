@@ -14,6 +14,7 @@ export const getSdgByIriQuery = ({
   queryFn: async () => {
     const { data } = await sanityClient.query<SdgByIriQuery>({
       query: SdgByIriDocument,
+      variables: { iris },
     });
 
     return data;

@@ -2,7 +2,7 @@ import { EEUR_DENOM, EVMOS_DENOM, REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { computeMedianPrice, Order } from 'utils/price/computeMedianPrice';
 
 import { CreditClassByOnChainIdQuery, Maybe } from 'generated/graphql';
-import { EcologicalImpact } from 'generated/sanity-graphql';
+import { EcologicalImpact, Sdg } from 'generated/sanity-graphql';
 import { Impact, MEASURED_CO_BENEFIT_IRI } from 'lib/db/types/json-ld';
 import { microToDenom } from 'lib/denom.utils';
 import { getSanityImgSrc } from 'lib/imgSrc';
@@ -96,13 +96,17 @@ export const parseCreditClassVersion = (
 type NormalizeImpactInput = {
   impact?: Impact;
   sanityImpact?: EcologicalImpact;
+  sdgs?: Maybe<Maybe<Sdg>[]>;
 };
 
-const normalizeImpact = ({ impact, sanityImpact }: NormalizeImpactInput) => ({
+const normalizeImpact = ({
+  impact,
+  sanityImpact,
+  sdgs,
+}: NormalizeImpactInput) => ({
   name: impact?.['schema:name'] || sanityImpact?.name,
   imgSrc: getSanityImgSrc(sanityImpact?.image),
-  // TODO get sdgs from impact?.['regen:SDGs']
-  sdgs: getSdgsImages({ sdgs: sanityImpact?.sdgs }),
+  sdgs: getSdgsImages({ sdgs: sanityImpact?.sdgs || sdgs }),
   standard: getSanityImgSrc(sanityImpact?.standard),
 });
 

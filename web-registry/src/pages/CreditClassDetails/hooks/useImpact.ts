@@ -1,6 +1,10 @@
+import { useQuery } from '@tanstack/react-query';
+
 import { ProjectImpactCardProps } from 'web-components/lib/components/cards/ProjectImpactCard/ProjectImpactCard';
 
+import { client as sanityClient } from 'lib/clients/sanity';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
+import { getSdgByIriQuery } from 'lib/queries/react-query/sanity/getSdgByIriQuery/getSdgByIriQuery';
 
 import { Maybe } from '../../../generated/graphql';
 import {
@@ -23,6 +27,30 @@ export default function useImpact({
 }: InputProps) {
   const primaryImpact = creditClassMetadata?.['regen:primaryImpact'];
   const coBenefits = creditClassMetadata?.['regen:coBenefits'];
+
+  const primaryImpactSdgIris =
+    primaryImpact?.['regen:SDGs']?.map(sdg => sdg['@id']) || [];
+  const sdgIris: string[] = [...primaryImpactSdgIris];
+  let coBenefitsSdgIris: string[][] = [];
+  for (const coBenefit of coBenefits || []) {
+    // The case where coBenefit is a string can be removed as part of C04 metadata fixes (#1983).
+    if (typeof coBenefit === 'string') {
+      continue;
+    } else {
+      const sdgs = coBenefit['regen:SDGs']?.map(sdg => sdg['@id']) || [];
+      coBenefitsSdgIris.push(sdgs);
+      sdgIris.push(...sdgs);
+    }
+  }
+  const { data } = useQuery(
+    getSdgByIriQuery({
+      iris: sdgIris,
+      sanityClient,
+      enabled: !!sanityClient && sdgIris.length > 0,
+    }),
+  );
+  const sdgs = data?.allSdg;
+
   const sanityPrimaryImpact = usePrimaryImpact({
     primaryImpactIRI: primaryImpact?.['@id'] || offChainPrimaryImpactIRI,
   });
@@ -40,6 +68,10 @@ export default function useImpact({
       normalizePrimaryImpact({
         impact: primaryImpact,
         sanityImpact: sanityPrimaryImpact,
+        sdgs: sdgs?.filter(
+          sdg =>
+            sdg?.iri?.current && primaryImpactSdgIris.includes(sdg.iri.current),
+        ),
       }) as ProjectImpactCardProps,
     );
   }
@@ -52,7 +84,15 @@ export default function useImpact({
           typeof coBenefit === 'string'
             ? { '@id': coBenefit, 'schema:name': coBenefit }
             : coBenefit,
-        sanityImpact: sanityCoBenefits[i],
+        sanityImpact: sanityCoBenefits.find(sanityCoBenefit =>
+          typeof coBenefit === 'string'
+            ? sanityCoBenefit.iri?.current === coBenefit
+            : sanityCoBenefit.iri?.current === coBenefit['@id'],
+        ),
+        sdgs: sdgs?.filter(
+          sdg =>
+            sdg?.iri?.current && coBenefitsSdgIris[i].includes(sdg.iri.current),
+        ),
       }),
     ) as ProjectImpactCardProps[];
   } else if (sanityCoBenefits.length > 0) {
@@ -62,6 +102,6 @@ export default function useImpact({
       normalizeCoBenefit({ sanityImpact: coBenefit }),
     ) as ProjectImpactCardProps[];
   }
-  console.log(normalizedCoBenefits);
+
   return [...impact, ...normalizedCoBenefits];
 }

@@ -58,7 +58,7 @@ export const useAddAddress = ({
             });
 
             // Submit the signature to the addresses endpoint
-            await fetch(`${apiUri}/web3auth/addresses`, {
+            await fetch(`${apiUri}/marketplace/v1/web3auth/addresses`, {
               body: JSON.stringify({ signature }),
               method: 'POST',
               credentials: 'include',

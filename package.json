@@ -12,7 +12,7 @@
   },
   "workspaces": {
     "packages": [
-      "web-registry",
+      "web-marketplace",
       "web-components",
       "web-storybook",
       "web-auth",
@@ -21,7 +21,7 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "build": "yarn build-components && lerna run --scope web-registry build --stream",
+    "build": "yarn build-components && lerna run --scope web-marketplace build --stream",
     "build-www": "yarn build-components && lerna run --scope web-www build --stream",
     "build-components": "lerna run --scope web-components build --stream",
     "build-storybook": "yarn build-components && lerna run build-storybook --stream",
@@ -31,12 +31,12 @@
     "lint": "lerna run lint",
     "format-and-fix": "lerna run format-and-fix",
     "storybook": "lerna run --scope web-storybook storybook --stream",
-    "test": "lerna run --scope web-registry test-no-watch --stream",
+    "test": "lerna run --scope web-marketplace test-no-watch --stream",
     "test-components": "lerna run --scope web-components test --stream",
-    "start": "lerna run --scope web-registry start --stream",
+    "start": "lerna run --scope web-marketplace start --stream",
     "start-auth": "lerna run --scope web-auth start --stream",
     "watch": "lerna run watch --stream",
-    "test-update-snapshot": "lerna run --scope web-registry test-update-snapshot --stream",
+    "test-update-snapshot": "lerna run --scope web-marketplace test-update-snapshot --stream",
     "bump": "lerna version --conventional-commits"
   },
   "devDependencies": {

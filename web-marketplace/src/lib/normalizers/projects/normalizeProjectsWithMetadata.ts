@@ -15,7 +15,7 @@ interface NormalizeProjectsWithOrderDataParams {
   projectsWithOrderData?: ProjectWithOrderData[];
   projectsMetadata?: (AnchoredProjectMetadataBaseLD | undefined)[];
   projectPagesMetadata?: ProjectPageMetadataLD[];
-  projectParties?: Maybe<PartyFieldsFragment | undefined>[];
+  programParties?: Maybe<PartyFieldsFragment | undefined>[];
   sanityCreditClassData?: AllCreditClassQuery;
   classesMetadata?: (CreditClassMetadataLD | undefined)[];
 }
@@ -24,7 +24,7 @@ export const normalizeProjectsWithMetadata = ({
   projectsWithOrderData,
   projectsMetadata,
   projectPagesMetadata,
-  projectParties,
+  programParties,
   classesMetadata,
 }: NormalizeProjectsWithOrderDataParams): ProjectWithOrderData[] => {
   const projectsWithMetadata = projectsWithOrderData?.map(
@@ -32,7 +32,7 @@ export const normalizeProjectsWithMetadata = ({
       const projectMetadata = projectsMetadata?.[index];
       const classMetadata = classesMetadata?.[index];
       const projectPageMetadata = projectPagesMetadata?.[index];
-      const projectParty = projectParties?.[index];
+      const projectParty = programParties?.[index];
       const sanityClass = project.sanityCreditClassData;
 
       const creditClassImage = getClassImageWithProjectDefault({

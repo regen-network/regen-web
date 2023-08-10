@@ -64,7 +64,7 @@ export const useFetchProjectsByIdsWithOrders = ({
     queryResult => queryResult.data?.data.projectByOnChainId?.metadata,
   );
 
-  const projectParties = offChainProjectResults.map(
+  const programParties = offChainProjectResults.map(
     queryResult =>
       queryResult.data?.data.projectByOnChainId?.creditClassByCreditClassId
         ?.partyByRegistryId,
@@ -76,7 +76,7 @@ export const useFetchProjectsByIdsWithOrders = ({
     projectsWithOrderData,
     projectsMetadata,
     projectPagesMetadata,
-    projectParties,
+    programParties,
     classesMetadata,
   });
   return {

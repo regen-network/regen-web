@@ -23,7 +23,7 @@ interface Params {
   projects?: ProjectInfo[] | null;
   projectsMetadata?: (AnchoredProjectMetadataBaseLD | undefined)[];
   projectPagesMetadata?: ProjectPageMetadataLD[];
-  projectParties?: Maybe<PartyFieldsFragment | undefined>[];
+  programParties?: Maybe<PartyFieldsFragment | undefined>[];
   classesMetadata?: (CreditClassMetadataLD | undefined)[];
   sanityCreditClassData?: AllCreditClassQuery;
 }
@@ -31,7 +31,7 @@ interface Params {
 export const normalizeProjectsWithCreditClass = ({
   projectsMetadata,
   projectPagesMetadata,
-  projectParties,
+  programParties,
   classesMetadata,
   projects,
   sanityCreditClassData,
@@ -40,7 +40,7 @@ export const normalizeProjectsWithCreditClass = ({
     const projectMetadata = projectsMetadata?.[index];
     const creditClassMetadata = classesMetadata?.[index];
     const projectPageMetadata = projectPagesMetadata?.[index];
-    const projectParty = projectParties?.[index];
+    const projectParty = programParties?.[index];
     const hasAllClassInfos =
       (projectMetadata !== undefined && !!sanityCreditClassData) ||
       creditClassMetadata !== undefined;

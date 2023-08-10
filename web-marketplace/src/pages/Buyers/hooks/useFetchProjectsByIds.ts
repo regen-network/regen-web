@@ -43,7 +43,7 @@ export const useFetchProjectsByIds = ({ projectIds }: Props): Response => {
     queryResult => queryResult.data?.data.projectByOnChainId?.metadata,
   );
 
-  const projectParties = offChainProjectResults.map(
+  const programParties = offChainProjectResults.map(
     queryResult =>
       queryResult.data?.data.projectByOnChainId?.creditClassByCreditClassId
         ?.partyByRegistryId,
@@ -56,7 +56,7 @@ export const useFetchProjectsByIds = ({ projectIds }: Props): Response => {
       .filter(project => project !== undefined) as ProjectInfo[],
     projectsMetadata,
     projectPagesMetadata,
-    projectParties,
+    programParties,
     classesMetadata,
     sanityCreditClassData: creditClassData,
   });

@@ -188,7 +188,7 @@ export function useProjectsWithOrders({
     queryResult => queryResult.data?.data.projectByOnChainId?.metadata,
   );
 
-  const projectParties = offChainProjectResults.map(
+  const programParties = offChainProjectResults.map(
     queryResult =>
       queryResult.data?.data.projectByOnChainId?.creditClassByCreditClassId
         ?.partyByRegistryId,
@@ -208,7 +208,7 @@ export function useProjectsWithOrders({
       | undefined
     )[],
     projectPagesMetadata,
-    projectParties,
+    programParties,
     sanityCreditClassData: creditClassData,
     classesMetadata,
   });

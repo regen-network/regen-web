@@ -13,7 +13,7 @@ export interface ProjectImpactCardProps {
   description?: JSX.Element | string;
   imgSrc: string;
   sdgs?: ImageType[];
-  monitored?: boolean;
+  label: string;
   standard?: string;
   apiServerUrl?: string;
   imageStorageBaseUrl?: string;
@@ -24,7 +24,7 @@ export default function ProjectImpactCard({
   description,
   imgSrc,
   sdgs = [],
-  monitored = false,
+  label,
   className,
   standard,
   imageStorageBaseUrl,
@@ -72,7 +72,7 @@ export default function ProjectImpactCard({
                 pl: 2.5,
               }}
             >
-              {monitored ? 'primary impact' : 'co-benefit'}
+              {label}
             </Label>
           </Box>
         </Grid>

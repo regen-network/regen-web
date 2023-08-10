@@ -1,17 +1,21 @@
 import { EEUR_DENOM, EVMOS_DENOM, REGEN_DENOM } from 'config/allowedBaseDenoms';
-import { TRANSPARENT_PIXEL } from 'utils/image/transparentPixel';
 import { computeMedianPrice, Order } from 'utils/price/computeMedianPrice';
-
-import { ProjectImpactCardProps } from 'web-components/lib/components/cards/ProjectImpactCard/ProjectImpactCard';
 
 import { CreditClassByOnChainIdQuery, Maybe } from 'generated/graphql';
 import { EcologicalImpact } from 'generated/sanity-graphql';
+import { Impact, MEASURED_CO_BENEFIT_IRI } from 'lib/db/types/json-ld';
 import { microToDenom } from 'lib/denom.utils';
 import { getSanityImgSrc } from 'lib/imgSrc';
 
 import { GECKO_PRICES } from 'pages/Projects/hooks/useProjectsSellOrders.types';
 import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
+import {
+  CO_BENEFIT,
+  MEASURED_CO_BENEFIT,
+  PRIMARY_IMPACT,
+  PROJECT_CO_BENEFIT,
+} from 'components/organisms/ProjectTopSection/ProjectTopSection.constants';
 import { getSdgsImages } from 'components/organisms/ProjectTopSection/ProjectTopSection.utils';
 
 /* getProjectNameFromProjectsData */
@@ -74,32 +78,50 @@ export const parseCreditClassVersion = (
 ) => {
   const creditClassVersion =
     creditClassByOnChainId?.creditClassVersionsById.nodes?.[0];
-  const coBenefitsIRIs =
+  const offChainCoBenefitsIRIs =
     creditClassVersion?.metadata?.['regen:coBenefits']?.map(
       (impact: { '@id': string }) => impact['@id'],
     ) || [];
-  const primaryImpactIRI =
+  const offChainPrimaryImpactIRI =
     creditClassVersion?.metadata?.['regen:indicator']?.['@id'];
 
   return {
-    primaryImpactIRI,
-    coBenefitsIRIs,
+    offChainPrimaryImpactIRI,
+    offChainCoBenefitsIRIs,
   };
 };
 
-/* normalizeProjectImpactCard */
+/* normalizeImpact */
 
-export const normalizeProjectImpactCards = (
-  impact: EcologicalImpact[],
-): ProjectImpactCardProps[] => {
-  const hasStandardLogo = impact.some(item => !!item.standard);
-  const standardDefaultValue = hasStandardLogo ? TRANSPARENT_PIXEL : undefined;
-
-  return impact.map(({ name, image, standard, sdgs }, index: number) => ({
-    name,
-    imgSrc: getSanityImgSrc(image),
-    sdgs: getSdgsImages({ sdgs }),
-    standard: getSanityImgSrc(standard, standardDefaultValue),
-    monitored: index === 0,
-  }));
+type NormalizeImpactInput = {
+  impact?: Impact;
+  sanityImpact?: EcologicalImpact;
 };
+
+const normalizeImpact = ({ impact, sanityImpact }: NormalizeImpactInput) => ({
+  name: impact?.['schema:name'] || sanityImpact?.name,
+  imgSrc: getSanityImgSrc(sanityImpact?.image),
+  // TODO get sdgs from impact?.['regen:SDGs']
+  sdgs: getSdgsImages({ sdgs: sanityImpact?.sdgs }),
+  standard: getSanityImgSrc(sanityImpact?.standard),
+});
+
+/* normalizePrimaryImpact */
+
+export const normalizePrimaryImpact = (input: NormalizeImpactInput) =>
+  (input?.impact || input?.sanityImpact) && {
+    ...normalizeImpact(input),
+    label: PRIMARY_IMPACT,
+  };
+
+/* normalizeCoBenefit */
+
+export const normalizeCoBenefit = (input: NormalizeImpactInput) =>
+  (input?.impact || input?.sanityImpact) && {
+    ...normalizeImpact(input),
+    label: !!input?.impact?.['@type']
+      ? input.impact['@type'] === MEASURED_CO_BENEFIT_IRI
+        ? MEASURED_CO_BENEFIT
+        : PROJECT_CO_BENEFIT
+      : CO_BENEFIT,
+  };

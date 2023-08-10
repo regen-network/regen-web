@@ -1,0 +1,73 @@
+services:
+  db:
+    build:
+      context: .
+      dockerfile: docker/db.Dockerfile
+    container_name: db_container
+    entrypoint: ["/bin/sh", "-c", "./scripts/db_start.sh"]
+    environment:
+      POSTGRES_DB: server
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - ./docker/scripts/:/scripts/
+    network_mode: host
+    expose:
+      - 5432
+    healthcheck:
+      test: ["CMD-SHELL", "/scripts/db_healthcheck.sh"]
+      interval: 1s
+      timeout: 10s
+      retries: 100
+
+  ledger:
+    build:
+      context: .
+      dockerfile: docker/ledger.Dockerfile
+    container_name: ledger_container
+    entrypoint: ["/bin/sh", "-c", "./scripts/ledger_start.sh"]
+    network_mode: host
+    expose:
+      - 1317
+      - 26657
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://127.0.0.1:26657 || exit 1"]
+      interval: 1s
+      timeout: 10s
+      retries: 100
+
+  server:
+    build:
+      context: .
+      dockerfile: docker/server.Dockerfile
+    container_name: server_container
+    environment:
+      CSRF_SECRET: secret
+      CSRF_COOKIE_NAME: cookie
+      DATABASE_URL: postgres://postgres:password@localhost:5432/server
+    entrypoint: ["/bin/sh", "-c", "./scripts/server_start.sh"]
+    network_mode: host
+    expose:
+      - 5000
+    depends_on:
+      db:
+        condition: service_healthy
+      ledger:
+        condition: service_healthy
+
+  indexer:
+    build:
+      context: .
+      dockerfile: docker/indexer.Dockerfile
+    container_name: indexer_container
+    environment:
+      DATABASE_URL: postgres://postgres:password@localhost:5432/indexer
+      REGEN_API: http://localhost:1317
+      REGEN_RPC: http://localhost:26657
+    entrypoint: ["/bin/sh", "-c", "./scripts/indexer_start.sh"]
+    network_mode: host
+    depends_on:
+      db:
+        condition: service_healthy
+      ledger:
+        condition: service_healthy

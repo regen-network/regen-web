@@ -15,12 +15,14 @@ type Props = {
   sort: string;
   offset?: number;
   useCommunityProjects?: boolean;
+  creditClassFilter?: Record<string, boolean>;
 };
 
 export const useProjects = ({
   offset = 0,
   sort,
   useCommunityProjects = false,
+  creditClassFilter = {},
 }: Props): ResponseType => {
   // get normalized projects with sell order data
   const {
@@ -33,6 +35,7 @@ export const useProjects = ({
     offset,
     sort,
     useCommunityProjects,
+    creditClassFilter,
   });
 
   const pagesCount = Math.ceil((projectsCount ?? 0) / PROJECTS_PER_PAGE);

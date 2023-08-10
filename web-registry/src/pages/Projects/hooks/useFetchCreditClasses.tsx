@@ -1,12 +1,24 @@
+import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQueries, useQuery } from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';
-import { client as sanityClient } from 'lib/clients/sanity';
+import {
+  AnchoredProjectMetadataLD,
+  CreditClassMetadataLD,
+} from 'lib/db/types/json-ld';
 import { getClassesQuery } from 'lib/queries/react-query/ecocredit/getClassesQuery/getClassesQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
-import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
-export const useFetchCreditClasses = () => {
+export type CreditClassWithMedata = {
+  creditClass: ClassInfo;
+  metadata?: AnchoredProjectMetadataLD | CreditClassMetadataLD;
+};
+
+type UseFetchCreditClassesResponse = {
+  creditClassesWithMetadata?: CreditClassWithMedata[];
+};
+
+export const useFetchCreditClasses = (): UseFetchCreditClassesResponse => {
   const { ecocreditClient, dataClient } = useLedger();
   const { data: creditClassesdata } = useQuery(
     getClassesQuery({
@@ -15,10 +27,6 @@ export const useFetchCreditClasses = () => {
     }),
   );
   const creditClasses = creditClassesdata?.classes;
-
-  const { data: creditClassesData } = useQuery(
-    getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
-  );
 
   const creditClassesMetadataResults = useQueries({
     queries:
@@ -30,4 +38,18 @@ export const useFetchCreditClasses = () => {
         }),
       ) ?? [],
   });
+
+  const creditClassesWithMetadata = creditClasses?.map(
+    (creditClass, index) => ({
+      creditClass,
+      metadata: creditClassesMetadataResults[index].data,
+    }),
+  );
+
+  return {
+    creditClassesWithMetadata,
+  };
+
+  // Return creditClasses with metadata
+  // Create normalizer in useProjects to return {name: string, path: string, isCommunity: boolean}
 };

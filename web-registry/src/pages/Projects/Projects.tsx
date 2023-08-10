@@ -26,6 +26,7 @@ import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellO
 import { GettingStartedResourcesSection } from 'components/molecules';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 
+import { useFetchCreditClasses } from './hooks/useFetchCreditClasses';
 import { useProjects } from './hooks/useProjects';
 import {
   API_URI,
@@ -37,6 +38,7 @@ import {
   EMPTY_PROJECTS_LABEL,
   RESET_FILTERS_LABEL,
 } from './Projects.constants';
+import { normalizeCreditClassFilters } from './Projects.normalizers';
 import { ProjectsSideFilter } from './Projects.SideFilter';
 import { ProjectWithOrderData } from './Projects.types';
 import { getCreditsTooltip } from './utils/getCreditsTooltip';
@@ -52,15 +54,24 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [useCommunityProjects, setUseCommunityProjects] = useState<
     boolean | undefined
   >(undefined);
-  const [creditClassFilter, setCreditClassFilter] = useState({});
+  const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useState(
+    {},
+  );
 
   // Page index starts at 1 for route
   // Page index starts at 0 for logic
   const page = Number(routePage) - 1;
 
-  const { data: creditClassesData } = useQuery(
+  const { creditClassesWithMetadata } = useFetchCreditClasses();
+
+  const { data: sanityCreditClassesData } = useQuery(
     getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
   );
+
+  const { creditClassFilters } = normalizeCreditClassFilters({
+    creditClassesWithMetadata,
+    sanityCreditClassesData,
+  });
 
   const { data: sanityProjectsPageData } = useAllProjectsPageQuery({
     client: sanityClient,
@@ -86,7 +97,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
       sort,
       offset: page * PROJECTS_PER_PAGE,
       useCommunityProjects,
-      creditClassFilter,
+      creditClassFilter: creditClassSelectedFilters,
     });
 
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
@@ -97,10 +108,10 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   const showFiltersReset =
     useCommunityProjects !== undefined ||
-    Object.keys(creditClassFilter).length > 0;
+    Object.keys(creditClassSelectedFilters).length > 0;
 
   const resetFilter = () => {
-    setCreditClassFilter({});
+    setCreditClassSelectedFilters({});
     setUseCommunityProjects(undefined);
   };
 
@@ -156,12 +167,12 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
                 </Body>
               </Flex>
               <ProjectsSideFilter
-                creditClassesData={creditClassesData}
-                creditClassFilter={creditClassFilter}
+                creditClassSelectedFilters={creditClassSelectedFilters}
+                creditClassFilters={creditClassFilters}
                 hasCommunityProjects={hasCommunityProjects}
                 useCommunityProjects={useCommunityProjects}
                 showFiltersReset={showFiltersReset}
-                setCreditClassFilter={setCreditClassFilter}
+                setCreditClassFilter={setCreditClassSelectedFilters}
                 setUseCommunityProjects={setUseCommunityProjects}
                 resetFilter={resetFilter}
                 sx={{

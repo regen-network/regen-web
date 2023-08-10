@@ -15,7 +15,6 @@ import Checkbox from 'web-components/lib/components/inputs/new/CheckBox/Checkbox
 import { CollapseList } from 'web-components/lib/components/organisms/CollapseList/CollapseList';
 import { Subtitle } from 'web-components/lib/components/typography';
 
-import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { UseStateSetter } from 'types/react/use-state';
 
 import { CommunityFilter } from './Projects.CommunityFilter';
@@ -26,11 +25,11 @@ import {
   RESET_FILTERS_LABEL,
   SIDE_FILTERS_BUTTON,
 } from './Projects.constants';
-import { getCreditClassesMapping } from './Projects.utils';
+import { CreditClassFilter } from './Projects.normalizers';
 
 type Props = {
-  creditClassesData?: AllCreditClassQuery;
-  creditClassFilter: Record<string, boolean>;
+  creditClassFilters?: CreditClassFilter[];
+  creditClassSelectedFilters: Record<string, boolean>;
   hasCommunityProjects: boolean;
   useCommunityProjects?: boolean;
   showFiltersReset: boolean;
@@ -41,8 +40,8 @@ type Props = {
 };
 
 export const ProjectsSideFilter = ({
-  creditClassesData,
-  creditClassFilter,
+  creditClassFilters = [],
+  creditClassSelectedFilters,
   hasCommunityProjects,
   useCommunityProjects,
   showFiltersReset,
@@ -52,8 +51,10 @@ export const ProjectsSideFilter = ({
   sx = [],
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const creditClassesMapping = getCreditClassesMapping({ creditClassesData });
-  const creditClassesPaths = Object.keys(creditClassesMapping ?? {});
+  const filteredCreditClassFilters = creditClassFilters.filter(
+    ({ isCommunity }) =>
+      useCommunityProjects || (!useCommunityProjects && !isCommunity),
+  );
 
   return (
     <>
@@ -61,7 +62,7 @@ export const ProjectsSideFilter = ({
         size="small"
         onClick={() => setIsOpen(true)}
         startIcon={
-          <FilterIcon sx={{ color: 'secondary.dark', width: 25, height: 24 }} />
+          <FilterIcon sx={{ color: 'secondary.dark', with: 25, height: 24 }} />
         }
         sx={[{ mr: 4 }, ...sxToArray(sx)]}
       >
@@ -103,31 +104,38 @@ export const ProjectsSideFilter = ({
             </Subtitle>
             <CollapseList
               max={3}
-              items={creditClassesPaths.map(creditClass => (
-                <Grid
-                  container
-                  direction={'column'}
-                  wrap="nowrap"
-                  key={creditClass}
-                >
+              items={filteredCreditClassFilters.map(({ name, path }) => (
+                <Grid container direction={'column'} wrap="nowrap" key={path}>
                   <Grid item>
                     <FormControlLabel
                       control={
                         <Box>
                           <Checkbox
                             sx={{ p: 0, mr: 3 }}
-                            checked={creditClassFilter?.[creditClass] ?? false}
+                            checked={
+                              creditClassSelectedFilters?.[path] ?? false
+                            }
                             onChange={event =>
                               setCreditClassFilter({
-                                ...creditClassFilter,
-                                [creditClass]: event.target.checked,
+                                ...creditClassSelectedFilters,
+                                [path]: event.target.checked,
                               })
                             }
                           />
                         </Box>
                       }
-                      label={creditClassesMapping?.[creditClass]}
-                      sx={{ whiteSpace: 'nowrap', mb: 2, ml: 0, fontSize: 14 }}
+                      label={name}
+                      sx={{
+                        mb: 2,
+                        ml: 0,
+                        fontSize: 14,
+                        '& > span': {
+                          whiteSpace: 'nowrap',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          width: 250,
+                        },
+                      }}
                     />
                   </Grid>
                 </Grid>

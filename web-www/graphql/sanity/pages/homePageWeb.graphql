@@ -2,7 +2,7 @@ query homePageWeb {
   allHomePageWeb {
     ...carbonPlusSectionFields
     ...climateSectionFields
-    ...ecologicalCreditCardsSectionFields
+    ...homeEcologicalCreditCardsSectionFields
     ...homeFoldSectionFields
     ...ledgerSectionFields
     ...marketplaceSectionFields

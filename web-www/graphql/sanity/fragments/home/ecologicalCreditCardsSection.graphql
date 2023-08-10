@@ -1,4 +1,4 @@
-fragment ecologicalCreditCardsSectionFields on HomePageWeb {
+fragment homeEcologicalCreditCardsSectionFields on HomePageWeb {
   homeWebEcologicalCreditCardsSection {
     title
     cards {

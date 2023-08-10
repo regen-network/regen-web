@@ -48,7 +48,7 @@ export const headerNoBorderBottomPages = [
 export const menuItems: Item[] = [
   {
     title: 'Corporate buying',
-    href: 'https://app.regen.network/buyers/',
+    href: '/buyers',
   },
   {
     title: 'Registry',

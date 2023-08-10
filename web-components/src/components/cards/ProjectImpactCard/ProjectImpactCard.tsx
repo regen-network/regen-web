@@ -1,7 +1,7 @@
-import React from 'react';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, SxProps, Theme } from '@mui/material';
 
 import { ImageType } from '../../../types/shared/imageType';
+import { sxToArray } from '../../../utils/mui/sxToArray';
 import { Image } from '../../image';
 import { Body, Label, Title } from '../../typography';
 import Card from '../Card';
@@ -17,6 +17,7 @@ export interface ProjectImpactCardProps {
   standard?: string;
   apiServerUrl?: string;
   imageStorageBaseUrl?: string;
+  labelSx?: SxProps<Theme>;
 }
 
 export default function ProjectImpactCard({
@@ -29,10 +30,10 @@ export default function ProjectImpactCard({
   standard,
   imageStorageBaseUrl,
   apiServerUrl,
+  labelSx,
 }: ProjectImpactCardProps): JSX.Element {
   const hasSdgs = sdgs.length > 0;
   const { classes } = useProjectImpactCardStyles();
-
   return (
     <Card
       className={className}
@@ -61,16 +62,20 @@ export default function ProjectImpactCard({
             <Label
               size="xxs"
               mobileSize="xxs"
-              sx={{
-                position: 'absolute',
-                top: [15, 25],
-                left: 0,
-                backgroundColor: 'secondary.main',
-                color: 'primary.main',
-                borderRadius: '0px 2px 2px 0px',
-                p: 2,
-                pl: 2.5,
-              }}
+              sx={[
+                {
+                  position: 'absolute',
+                  top: [15, 25],
+                  left: 0,
+                  width: 'fit-content',
+                  backgroundColor: 'secondary.main',
+                  color: 'primary.main',
+                  borderRadius: '0px 2px 2px 0px',
+                  p: 1.25,
+                  pl: 2.5,
+                },
+                ...sxToArray(labelSx),
+              ]}
             >
               {label}
             </Label>

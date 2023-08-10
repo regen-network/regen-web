@@ -128,4 +128,8 @@ export const normalizeCoBenefit = (input: NormalizeImpactInput) =>
         ? MEASURED_CO_BENEFIT
         : PROJECT_BENEFIT
       : CO_BENEFIT,
+    labelSx:
+      input?.impact?.['@type'] === MEASURED_CO_BENEFIT_IRI
+        ? { maxWidth: { xs: '72%', sm: '58%' } }
+        : undefined,
   };

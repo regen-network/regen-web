@@ -102,6 +102,5 @@ export default function useImpact({
       normalizeCoBenefit({ sanityImpact: coBenefit }),
     ) as ProjectImpactCardProps[];
   }
-
   return [...impact, ...normalizedCoBenefits];
 }

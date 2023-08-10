@@ -49,8 +49,8 @@ export interface Impact {
   '@id': string;
   'schema:name'?: string;
   'regen:SDGs'?: { '@id': string }[];
-  '@type'?: typeof MEASURED_CO_BENEFIT_IRI | typeof PROJECT_CO_BENEFIT_IRI;
+  '@type'?: typeof MEASURED_CO_BENEFIT_IRI | typeof PROJECT_BENEFIT_IRI;
 }
 
 export const MEASURED_CO_BENEFIT_IRI = 'regen:MeasuredCoBenefit';
-export const PROJECT_CO_BENEFIT_IRI = 'regen:ProjectCoBenefit';
+export const PROJECT_BENEFIT_IRI = 'regen:ProjectBenefit';

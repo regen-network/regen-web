@@ -14,7 +14,7 @@ import {
   CO_BENEFIT,
   MEASURED_CO_BENEFIT,
   PRIMARY_IMPACT,
-  PROJECT_CO_BENEFIT,
+  PROJECT_BENEFIT,
 } from 'components/organisms/ProjectTopSection/ProjectTopSection.constants';
 import { getSdgsImages } from 'components/organisms/ProjectTopSection/ProjectTopSection.utils';
 
@@ -126,6 +126,6 @@ export const normalizeCoBenefit = (input: NormalizeImpactInput) =>
     label: !!input?.impact?.['@type']
       ? input.impact['@type'] === MEASURED_CO_BENEFIT_IRI
         ? MEASURED_CO_BENEFIT
-        : PROJECT_CO_BENEFIT
+        : PROJECT_BENEFIT
       : CO_BENEFIT,
   };

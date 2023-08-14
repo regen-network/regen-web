@@ -6,8 +6,7 @@ import { BlockContent } from 'web-components/lib/components/block-content';
 import { Body, Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { BackgroundImgSection } from './BackgroundImgSection';
-
+import { BackgroundImageSection } from '@/components/organisms/BackgroundImageSection/BackgroundImageSection';
 import { Maybe, Scalars } from '@/generated/sanity-graphql';
 
 type Props = {
@@ -46,7 +45,7 @@ const HeroTitle: React.FC<React.PropsWithChildren<Props>> = ({
   const { classes: styles, cx } = useStyles();
 
   return (
-    <BackgroundImgSection
+    <BackgroundImageSection
       isBanner={props.isBanner}
       img={props.img}
       linearGradient={props?.linearGradient}
@@ -78,7 +77,7 @@ const HeroTitle: React.FC<React.PropsWithChildren<Props>> = ({
           />
         </Body>
       )}
-    </BackgroundImgSection>
+    </BackgroundImageSection>
   );
 };
 

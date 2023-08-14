@@ -8,7 +8,7 @@ import { CardsGridContainer } from 'web-components/lib/components/organisms/Card
 import Section from 'web-components/lib/components/organisms/Section';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { AllBuyersPageQuery } from 'generated/sanity-graphql';
+import { AllBuyersPageQuery } from '@/generated/sanity-graphql';
 
 interface Props {
   projects: ProjectCardProps[];

@@ -7,6 +7,7 @@ import ContainedButton from 'web-components/lib/components/buttons/ContainedButt
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { Body, Title } from 'web-components/lib/components/typography';
 
+import { BackgroundImageSection } from '@/components/organisms/BackgroundImageSection/BackgroundImageSection';
 import { BottomBannerFieldsFragment, Maybe } from '@/generated/sanity-graphql';
 import { onBtnClick } from '@/lib/utils/sanity/button';
 
@@ -69,7 +70,7 @@ const HeroAction: React.FC<React.PropsWithChildren<Props>> = ({
   const secondButton = props.bottomBanner?.secondButton;
 
   return (
-    <BackgroundImgSection
+    <BackgroundImageSection
       img={props.img || ''}
       classes={{
         main: cx(styles.main, classes?.main),
@@ -125,7 +126,7 @@ const HeroAction: React.FC<React.PropsWithChildren<Props>> = ({
           </Grid>
         </Box>
       </Grid>
-    </BackgroundImgSection>
+    </BackgroundImageSection>
   );
 };
 

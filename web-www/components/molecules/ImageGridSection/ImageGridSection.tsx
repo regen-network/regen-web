@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, CardMedia, SxProps } from '@mui/material';
-import Link from 'next/link';
 import { makeStyles } from 'tss-react/mui';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
@@ -9,6 +8,7 @@ import { Image } from 'web-components/lib/components/image';
 import ImageGrid from 'web-components/lib/components/image-grid';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
+import { LinkComponent } from '@/components/atoms/LinkComponent/LinkComponent';
 import { ImageGridSection as ImageGridSectionProps } from '@/generated/sanity-graphql';
 
 const useStyles = makeStyles()(theme => ({
@@ -47,6 +47,7 @@ const ImageGridSection: React.FC<React.PropsWithChildren<Props>> = ({
           backgroundImage
           src={backgroundImage || ''}
           key={item?.header || index}
+          alt=""
         >
           <ImageGrid
             img={
@@ -64,7 +65,7 @@ const ImageGridSection: React.FC<React.PropsWithChildren<Props>> = ({
               text: item?.button?.buttonText ?? '',
               href: item?.button?.buttonLink?.buttonHref ?? '',
             }}
-            linkComponent={Link}
+            linkComponent={LinkComponent}
           />
         </Image>
       ))}

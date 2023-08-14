@@ -1,9 +1,9 @@
 import { CardMedia } from '@mui/material';
-import Link from 'next/link';
 
 import EcologicalCreditCard from 'web-components/lib/components/molecules/EcologicalCreditCard';
 import Section from 'web-components/lib/components/organisms/Section';
 
+import { LinkComponent } from '@/components/atoms/LinkComponent/LinkComponent';
 import { AllBuyersPageQuery } from '@/generated/sanity-graphql';
 import { normalizeEcologicalCreditCards } from '@/lib/utils/normalizers/normalizeEcologicalCreditCards';
 
@@ -23,7 +23,7 @@ const BuyersEcologicalCreditCardsSection: React.FC<
       {cards.map(card => (
         <EcologicalCreditCard
           key={card.title}
-          linkComponent={Link}
+          linkComponent={LinkComponent}
           sx={{ mb: { xs: 5, sm: 7.5 } }}
           {...card}
         >

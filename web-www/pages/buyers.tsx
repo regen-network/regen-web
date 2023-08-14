@@ -15,9 +15,9 @@ import {
 } from '@/generated/sanity-graphql';
 import { sanityClient } from '@/lib/clients/sanityClient';
 
-const BuyersPage = ({
+export default function BuyersPage({
   buyersPageData,
-}: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element => {
+}: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
   const { classes: styles } = useBuyersStyles();
 
   const content = buyersPageData.data.allBuyersPage?.[0];
@@ -28,7 +28,6 @@ const BuyersPage = ({
       content?.metadata?.description ||
       'Buy carbon credits and other ecosystem system service credits to meet your climate commitments and sustainability goals.',
     author: 'Regen Network Development, PBC',
-    siteUrl: window.location.href,
     imageUrl: content?.metadata?.openGraphImage?.asset?.url || '',
   };
 
@@ -107,7 +106,7 @@ const BuyersPage = ({
       </>
     </>
   );
-};
+}
 
 export { BuyersPage };
 

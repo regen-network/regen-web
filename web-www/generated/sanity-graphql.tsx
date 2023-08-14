@@ -1707,6 +1707,7 @@ export type CreditClass = Document & {
   buyer?: Maybe<Buyer>;
   landSteward?: Maybe<LandSteward>;
   icon?: Maybe<Image>;
+  program?: Maybe<Program>;
 };
 
 export type CreditClassFilter = {
@@ -1724,6 +1725,7 @@ export type CreditClassFilter = {
   buyer?: Maybe<BuyerFilter>;
   landSteward?: Maybe<LandStewardFilter>;
   icon?: Maybe<ImageFilter>;
+  program?: Maybe<ProgramFilter>;
 };
 
 export type CreditClassPage = Document & {
@@ -2623,7 +2625,6 @@ export type FeaturedProjectCard = Document & {
   /** Current document revision */
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
   project?: Maybe<Project>;
   creditClass?: Maybe<CreditClass>;
 };
@@ -2637,7 +2638,6 @@ export type FeaturedProjectCardFilter = {
   _updatedAt?: Maybe<DatetimeFilter>;
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
-  name?: Maybe<StringFilter>;
   project?: Maybe<ProjectFilter>;
   creditClass?: Maybe<CreditClassFilter>;
 };
@@ -2649,7 +2649,6 @@ export type FeaturedProjectCardSorting = {
   _updatedAt?: Maybe<SortOrder>;
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
-  name?: Maybe<SortOrder>;
 };
 
 export type FeaturedSection = Document & {
@@ -4644,6 +4643,50 @@ export type PresskitTimelineSectionSorting = {
   completedItemIndex?: Maybe<SortOrder>;
 };
 
+export type Program = Document & {
+  __typename?: 'Program';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  link?: Maybe<Scalars['String']>;
+  image?: Maybe<Image>;
+};
+
+export type ProgramFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  name?: Maybe<StringFilter>;
+  link?: Maybe<StringFilter>;
+  image?: Maybe<ImageFilter>;
+};
+
+export type ProgramSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  name?: Maybe<SortOrder>;
+  link?: Maybe<SortOrder>;
+  image?: Maybe<ImageSorting>;
+};
+
 export type Project = Document & {
   __typename?: 'Project';
   /** Document ID */
@@ -4657,10 +4700,13 @@ export type Project = Document & {
   /** Current document revision */
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
-  /** optional project name to make it easier to track projects already added to the list */
   projectName?: Maybe<Scalars['String']>;
   /** on-chain project id */
   projectId?: Maybe<Scalars['String']>;
+  image?: Maybe<CustomImage>;
+  location?: Maybe<Scalars['String']>;
+  area?: Maybe<Scalars['Float']>;
+  areaUnit?: Maybe<Scalars['String']>;
   credibilityCards?: Maybe<Array<Maybe<DetailsCard>>>;
 };
 
@@ -4757,6 +4803,10 @@ export type ProjectFilter = {
   _key?: Maybe<StringFilter>;
   projectName?: Maybe<StringFilter>;
   projectId?: Maybe<StringFilter>;
+  image?: Maybe<CustomImageFilter>;
+  location?: Maybe<StringFilter>;
+  area?: Maybe<FloatFilter>;
+  areaUnit?: Maybe<StringFilter>;
 };
 
 export type ProjectPage = Document & {
@@ -4853,6 +4903,10 @@ export type ProjectSorting = {
   _key?: Maybe<SortOrder>;
   projectName?: Maybe<SortOrder>;
   projectId?: Maybe<SortOrder>;
+  image?: Maybe<CustomImageSorting>;
+  location?: Maybe<SortOrder>;
+  area?: Maybe<SortOrder>;
+  areaUnit?: Maybe<SortOrder>;
 };
 
 export type ProjectsPage = Document & {
@@ -5186,6 +5240,7 @@ export type RootQuery = {
   Partner?: Maybe<Partner>;
   PartnersPage?: Maybe<PartnersPage>;
   Person?: Maybe<Person>;
+  Program?: Maybe<Program>;
   PresskitPage?: Maybe<PresskitPage>;
   Project?: Maybe<Project>;
   ProjectActivity?: Maybe<ProjectActivity>;
@@ -5252,6 +5307,7 @@ export type RootQuery = {
   allPartner: Array<Partner>;
   allPartnersPage: Array<PartnersPage>;
   allPerson: Array<Person>;
+  allProgram: Array<Program>;
   allPresskitPage: Array<PresskitPage>;
   allProject: Array<Project>;
   allProjectActivity: Array<ProjectActivity>;
@@ -5489,6 +5545,11 @@ export type RootQueryPartnersPageArgs = {
 
 
 export type RootQueryPersonArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryProgramArgs = {
   id: Scalars['ID'];
 };
 
@@ -5947,6 +6008,14 @@ export type RootQueryAllPartnersPageArgs = {
 export type RootQueryAllPersonArgs = {
   where?: Maybe<PersonFilter>;
   sort?: Maybe<Array<PersonSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllProgramArgs = {
+  where?: Maybe<ProgramFilter>;
+  sort?: Maybe<Array<ProgramSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -7679,20 +7748,24 @@ export type BuyersFeaturedProjectCardFragment = (
   { __typename?: 'FeaturedProjectCard' }
   & { project?: Maybe<(
     { __typename?: 'Project' }
-    & Pick<Project, 'projectId'>
+    & Pick<Project, 'projectName' | 'projectId' | 'location' | 'area' | 'areaUnit'>
+    & { image?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
+    )> }
   )>, creditClass?: Maybe<(
     { __typename?: 'CreditClass' }
     & Pick<CreditClass, 'path'>
-    & { image?: Maybe<(
-      { __typename?: 'CustomImage' }
-      & Pick<CustomImage, 'imageHref' | 'imageAlt'>
+    & { program?: Maybe<(
+      { __typename?: 'Program' }
+      & Pick<Program, 'name' | 'link'>
       & { image?: Maybe<(
         { __typename?: 'Image' }
-        & { asset?: Maybe<(
-          { __typename?: 'SanityImageAsset' }
-          & Pick<SanityImageAsset, 'url'>
-        )> }
+        & ImageFieldsFragment
       )> }
+    )>, image?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
     )> }
   )> }
 );
@@ -8511,25 +8584,66 @@ export type TokenPageQuery = (
   )> }
 );
 
-export const BuyersFeaturedProjectCardFragmentDoc = gql`
-    fragment buyersFeaturedProjectCard on FeaturedProjectCard {
-  project {
-    projectId
-  }
-  creditClass {
-    path
-    image {
-      imageHref
-      imageAlt
-      image {
-        asset {
-          url
+export const CustomImageFieldsFragmentDoc = gql`
+    fragment customImageFields on CustomImage {
+  imageAlt
+  imageHref
+  image {
+    asset {
+      altText
+      url
+      metadata {
+        dimensions {
+          height
+          width
         }
       }
     }
   }
 }
     `;
+export const ImageFieldsFragmentDoc = gql`
+    fragment imageFields on Image {
+  asset {
+    altText
+    url
+    metadata {
+      dimensions {
+        height
+        width
+      }
+    }
+  }
+}
+    `;
+export const BuyersFeaturedProjectCardFragmentDoc = gql`
+    fragment buyersFeaturedProjectCard on FeaturedProjectCard {
+  project {
+    projectName
+    projectId
+    image {
+      ...customImageFields
+    }
+    location
+    area
+    areaUnit
+  }
+  creditClass {
+    path
+    program {
+      name
+      link
+      image {
+        ...imageFields
+      }
+    }
+    image {
+      ...customImageFields
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}
+${ImageFieldsFragmentDoc}`;
 export const BuyersFeaturedCardsSectionFieldsFragmentDoc = gql`
     fragment buyersFeaturedCardsSectionFields on BuyersFeaturedProjectCardsSection {
   title
@@ -8565,38 +8679,6 @@ export const PersonFieldsFragmentDoc = gql`
     fragment personFields on Person {
   name
   role
-}
-    `;
-export const CustomImageFieldsFragmentDoc = gql`
-    fragment customImageFields on CustomImage {
-  imageAlt
-  imageHref
-  image {
-    asset {
-      altText
-      url
-      metadata {
-        dimensions {
-          height
-          width
-        }
-      }
-    }
-  }
-}
-    `;
-export const ImageFieldsFragmentDoc = gql`
-    fragment imageFields on Image {
-  asset {
-    altText
-    url
-    metadata {
-      dimensions {
-        height
-        width
-      }
-    }
-  }
 }
     `;
 export const BuyersQuoteSectionFieldsFragmentDoc = gql`

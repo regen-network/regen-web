@@ -1,17 +1,17 @@
-import { useNavigate } from 'react-router-dom';
 import { SxProps } from '@mui/material';
+import { useRouter } from 'next/router';
 
-import ProjectCard, {
-  ProjectCardProps,
-} from 'web-components/lib/components/cards/ProjectCard';
+import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import { CardsGridContainer } from 'web-components/lib/components/organisms/CardsGridContainer/CardsGridContainer';
 import Section from 'web-components/lib/components/organisms/Section';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { AllBuyersPageQuery } from '@/generated/sanity-graphql';
+import {
+  AllBuyersPageQuery,
+  FeaturedProjectCard,
+} from '@/generated/sanity-graphql';
 
 interface Props {
-  projects: ProjectCardProps[];
   content: AllBuyersPageQuery['allBuyersPage'][0]['featuredProjectCardsSection'];
   sx?: {
     container?: SxProps<Theme>;
@@ -19,14 +19,9 @@ interface Props {
   };
 }
 
-const BuyersFeaturedProjectsSection = ({ projects, content, sx }: Props) => {
-  const navigate = useNavigate();
-  const featuredProjects = content?.cards?.map(
-    card => card?.project?.projectId,
-  );
-  const filteredProjects = projects?.filter(project =>
-    featuredProjects?.includes(project.id),
-  );
+const BuyersFeaturedProjectsSection = ({ content, sx }: Props) => {
+  const router = useRouter();
+  const projects = content?.cards;
 
   return (
     <Section
@@ -39,14 +34,22 @@ const BuyersFeaturedProjectsSection = ({ projects, content, sx }: Props) => {
       }
       sx={sx}
     >
-      <CardsGridContainer cardsCount={filteredProjects.length}>
-        {filteredProjects.map(project => (
-          <ProjectCard
-            key={project.id}
-            onClick={() => navigate(`/project/${project.id}`)}
-            {...project}
-          />
-        ))}
+      <CardsGridContainer cardsCount={projects?.length ?? 0}>
+        {projects?.map(projectCard => {
+          const { project } = projectCard as FeaturedProjectCard;
+
+          return (
+            <ProjectCard
+              key={project?.projectId}
+              onClick={() => router.push(`/project/${project?.projectId}`)}
+              imgSrc={project?.image?.imageHref ?? ''}
+              name={project?.projectName ?? ''}
+              place={project?.location ?? ''}
+              area={project?.area ?? undefined}
+              areaUnit={project?.areaUnit ?? undefined}
+            />
+          );
+        })}
       </CardsGridContainer>
     </Section>
   );

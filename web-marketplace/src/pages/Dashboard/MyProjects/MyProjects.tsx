@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { Grid } from '@mui/material';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
@@ -25,6 +25,7 @@ const MyProjects = (): JSX.Element => {
   const graphqlClient = useApolloClient();
   const { wallet, accountId } = useWallet();
   const navigate = useNavigate();
+  const location = useLocation();
   const { isIssuer, isProjectAdmin } = useDashboardContext();
   const [createProject] = useCreateProjectMutation();
   const reactQueryClient = useQueryClient();
@@ -104,6 +105,7 @@ const MyProjects = (): JSX.Element => {
                       }
                     }}
                     track={track}
+                    pathname={location.pathname}
                   />
                 </WithLoader>
               </Grid>

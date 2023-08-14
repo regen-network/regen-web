@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { Box, SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
 import { Buy1Event, Track } from 'web-marketplace/src/lib/tracker/types';
@@ -12,7 +11,7 @@ import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
 import ProjectPlaceInfo from '../../place/ProjectPlaceInfo';
 import InfoTooltipWithIcon from '../../tooltip/InfoTooltipWithIcon';
 import { Body, Subtitle } from '../../typography';
-import { Party } from '../../user/UserInfo';
+import { Party, User } from '../../user/UserInfo';
 import MediaCard, { MediaCardProps } from '../MediaCard';
 import {
   AVG_PRICE_LABEL,
@@ -33,8 +32,9 @@ export interface ProjectCardProps extends MediaCardProps {
   creditClassId?: string;
   imgSrc: string;
   place: string;
-  area: number;
-  areaUnit: string;
+  area?: number;
+  areaUnit?: string;
+  registry?: User | null;
   tag?: string;
   onClick?: () => void;
   onButtonClick?: () => void;
@@ -46,6 +46,7 @@ export interface ProjectCardProps extends MediaCardProps {
   apiServerUrl?: string;
   sx?: SxProps<Theme>;
   track?: Track;
+  pathname?: string;
   isSoldOut?: boolean;
   creditsTooltip?: string;
   button?: ButtonType;
@@ -74,13 +75,13 @@ export function ProjectCard({
   track,
   isSoldOut = false,
   creditsTooltip,
+  pathname,
   button = DEFAULT_BUY_BUTTON,
   program,
   ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
   const { classes } = useProjectCardStyles();
-  const location = useLocation();
   const { text: buttonText, startIcon: buttonStartIcon } = button;
   const isButtonDisabled =
     button?.disabled !== undefined
@@ -121,7 +122,7 @@ export function ProjectCard({
         <ProjectPlaceInfo
           place={place}
           area={area}
-          areaUnit={getAbbreviation(areaUnit)}
+          areaUnit={areaUnit ? getAbbreviation(areaUnit) : undefined}
           smFontSize="0.8125rem"
           fontSize="0.75rem"
           color={theme.palette.primary.light}
@@ -286,7 +287,7 @@ export function ProjectCard({
                     event.stopPropagation();
                     track &&
                       track<'buy1', Buy1Event>('buy1', {
-                        url: location.pathname,
+                        url: pathname ?? '',
                         cardType: 'project',
                         buttonLocation: 'projectCard',
                         projectName: name,

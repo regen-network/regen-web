@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
@@ -70,6 +71,7 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
   const imageStorageBaseUrl = import.meta.env.VITE_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = import.meta.env.VITE_API_URI;
   const { track } = useTracker();
+  const location = useLocation();
 
   const LinkedProject: React.FC<
     React.PropsWithChildren<{
@@ -93,6 +95,7 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
         ]
       }
       track={track}
+      pathname={location.pathname}
     />
   );
 

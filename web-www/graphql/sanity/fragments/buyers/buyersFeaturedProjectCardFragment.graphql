@@ -1,17 +1,25 @@
 fragment buyersFeaturedProjectCard on FeaturedProjectCard {
   project {
+    projectName
     projectId
+    image {
+      ...customImageFields
+    }
+    location
+    area
+    areaUnit
   }
   creditClass {
     path
-    image {
-      imageHref
-      imageAlt
+    program {
+      name
+      link
       image {
-        asset {
-          url
-        }
+        ...imageFields
       }
+    }
+    image {
+      ...customImageFields
     }
   }
 }

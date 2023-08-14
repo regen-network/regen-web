@@ -6,6 +6,7 @@ import { HeroTitle } from '@/components/molecules/HeroTitle/HeroTitle';
 import { ImageGridSection } from '@/components/molecules/ImageGridSection/ImageGridSection';
 import { ImageItemsSection } from '@/components/molecules/ImageItemsSection/ImageItemsSection';
 import { BuyersEcologicalCreditCardsSection } from '@/components/templates/buyers/Buyers.EcologicalCreditCardsSection';
+import { BuyersFeaturedProjectsSection } from '@/components/templates/buyers/Buyers.FeaturedProjectsSection';
 import { BuyersPartnersSection } from '@/components/templates/buyers/Buyers.PartnersSection';
 import { BuyersQuoteSection } from '@/components/templates/buyers/Buyers.QuoteSection';
 import { useBuyersStyles } from '@/components/templates/buyers/Buyers.styles';
@@ -86,6 +87,11 @@ export default function BuyersPage({
         {content?.ecologicalCreditCardsSection && (
           <BuyersEcologicalCreditCardsSection
             content={content?.ecologicalCreditCardsSection}
+          />
+        )}
+        {content?.featuredProjectCardsSection && (
+          <BuyersFeaturedProjectsSection
+            content={content?.featuredProjectCardsSection}
           />
         )}
         {content?.quoteSection && (

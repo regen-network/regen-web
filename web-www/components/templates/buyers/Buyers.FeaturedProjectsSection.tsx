@@ -42,7 +42,11 @@ const BuyersFeaturedProjectsSection = ({ content, sx }: Props) => {
             <ProjectCard
               key={project?.projectId}
               onClick={() => router.push(`/project/${project?.projectId}`)}
-              imgSrc={project?.image?.imageHref ?? ''}
+              imgSrc={
+                project?.image?.image?.asset?.url ??
+                project?.image?.imageHref ??
+                ''
+              }
               name={project?.projectName ?? ''}
               place={project?.location ?? ''}
               area={project?.area ?? undefined}

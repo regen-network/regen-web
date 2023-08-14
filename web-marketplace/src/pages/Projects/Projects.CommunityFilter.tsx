@@ -37,7 +37,7 @@ export const CommunityFilter = ({
           <Box sx={{ textAlign: 'start' }}>
             Community credits are credits that have not been through the{' '}
             <Link
-              href="https://regennetwork.notion.site/Welcome-to-Regen-Registry-0d55aab2a2d64f27aee2a468df172990"
+              href="https://registry.regen.network/"
               target="_blank"
               sx={{ color: 'secondary.main', fontWeight: 700, mr: 1 }}
             >

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/regen-network/regen-web/compare/v1.10.0...v1.11.0) (2023-08-09)
+
+### Bug Fixes
+
+- add redirect for /team to homepage ([#2012](https://github.com/regen-network/regen-web/issues/2012)) ([7d0d9ca](https://github.com/regen-network/regen-web/commit/7d0d9cae7a7a93d0bcc6cc76276b44574836ae53))
+- fix registry and guide links ([#2017](https://github.com/regen-network/regen-web/issues/2017)) ([e11c5b4](https://github.com/regen-network/regen-web/commit/e11c5b4c9e92fa81a4ddca3e95755df9e7c6eb41))
+- yarn format-and-fix to ignore generated code ([#2011](https://github.com/regen-network/regen-web/issues/2011)) ([1610102](https://github.com/regen-network/regen-web/commit/1610102e162172d91608952ff4e54be06878cd73))
+
+### Features
+
+- add new website GA4 tag ([#2006](https://github.com/regen-network/regen-web/issues/2006)) ([900219c](https://github.com/regen-network/regen-web/commit/900219ccb3e48575756eaf6d7befdc1c58a298d3))
+
 # [1.10.0](https://github.com/regen-network/regen-web/compare/v1.9.0...v1.10.0) (2023-07-20)
 
 **Note:** Version bump only for package web-www

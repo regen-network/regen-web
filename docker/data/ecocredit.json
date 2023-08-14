@@ -1,0 +1,1195 @@
+{
+  "regen.ecocredit.basket.v1.Basket": [
+    1,
+    {
+      "basket_denom": "eco.uC.NCT",
+      "credit_type_abbrev": "C",
+      "curator": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "date_criteria": {
+        "min_start_date": "2012-01-01T00:00:00Z"
+      },
+      "exponent": 6,
+      "id": "1",
+      "name": "NCT"
+    }
+  ],
+  "regen.ecocredit.basket.v1.BasketBalance": [],
+  "regen.ecocredit.basket.v1.BasketClass": [
+    {
+      "basket_id": "1",
+      "class_id": "C03"
+    }
+  ],
+  "regen.ecocredit.basket.v1.BasketFee": {
+    "fee": {
+      "amount": "20000000",
+      "denom": "uregen"
+    }
+  },
+  "regen.ecocredit.marketplace.v1.AllowedDenom": [
+    {
+      "bank_denom": "uregen",
+      "display_denom": "uregen",
+      "exponent": 6
+    }
+  ],
+  "regen.ecocredit.marketplace.v1.Market": [],
+  "regen.ecocredit.marketplace.v1.SellOrder": [],
+  "regen.ecocredit.v1.AllowedBridgeChain": [],
+  "regen.ecocredit.v1.AllowedClassCreator": [],
+  "regen.ecocredit.v1.Batch": [
+    34,
+    {
+      "denom": "C01-001-20150101-20151231-001",
+      "end_date": "2015-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:03:03.533946122Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "1",
+      "metadata": "regen:13toVg38ZRvFxPA2TBNnxGhabgogpJnv4LDm7YPgSuzuETiXz8GbnTF.rdf",
+      "project_key": "1",
+      "start_date": "2015-01-01T00:00:00Z"
+    },
+    {
+      "denom": "C01-001-20150101-20151231-002",
+      "end_date": "2015-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:03:13.562505209Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "2",
+      "metadata": "regen:13toVhTFtGtXxoHw7yy3QQVDGEpSQoVy4VARhtTWeuNQa5V25WUhagq.rdf",
+      "project_key": "1",
+      "start_date": "2015-01-01T00:00:00Z"
+    },
+    {
+      "denom": "C01-001-20150101-20151231-003",
+      "end_date": "2015-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:03:18.586037103Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "3",
+      "metadata": "regen:13toVghYySmmX9gm76MuwiPCC9AJy6Psb7wj6uj9JiBk4NvACGkpJDw.rdf",
+      "project_key": "1",
+      "start_date": "2015-01-01T00:00:00Z"
+    },
+    {
+      "denom": "C01-001-20150101-20151231-004",
+      "end_date": "2015-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:03:23.600271780Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "4",
+      "metadata": "regen:13toVgGhCxGuNrqKKugLY9thKAdLTgXHGxhbVutz2QLgtFmdZzPAKUB.rdf",
+      "project_key": "1",
+      "start_date": "2015-01-01T00:00:00Z"
+    },
+    {
+      "denom": "C01-001-20150101-20151231-005",
+      "end_date": "2015-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:03:28.616185287Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "5",
+      "metadata": "regen:13toVhaDUK1CHmqdZfKr6ZdF1L1ekTvUgjbEiGxWYqDWVZ937GUviFr.rdf",
+      "project_key": "1",
+      "start_date": "2015-01-01T00:00:00Z"
+    },
+    {
+      "denom": "C01-002-20190101-20191231-001",
+      "end_date": "2019-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:03:38.653386715Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "6",
+      "metadata": "regen:13toVgu5VbjKdfDKuwPfUoMeo2isi1ApbsCsaTCoyNknKnN9FE6j1hW.rdf",
+      "project_key": "2",
+      "start_date": "2019-01-01T00:00:00Z"
+    },
+    {
+      "denom": "C01-002-20190101-20191231-002",
+      "end_date": "2019-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:03:43.676323550Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "7",
+      "metadata": "regen:13toVgxDAxBev51DadD1he6gdkF6UPAoe25Y2xsSn3uDpzmHG3qGqRh.rdf",
+      "project_key": "2",
+      "start_date": "2019-01-01T00:00:00Z"
+    },
+    {
+      "denom": "C01-002-20190101-20191231-003",
+      "end_date": "2019-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:03:48.699611331Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "8",
+      "metadata": "regen:13toVgsTujvEeCS4hG9MXZii8eF9LBkrgzaw8mh2q54KfFtGFtH5DLi.rdf",
+      "project_key": "2",
+      "start_date": "2019-01-01T00:00:00Z"
+    },
+    {
+      "denom": "C01-002-20190101-20191231-004",
+      "end_date": "2019-12-31T16:33:47Z",
+      "issuance_date": "2023-08-08T20:03:53.709257902Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "9",
+      "metadata": "regen:13toVhKuR8NndSGZdciYTtCJf11hjYGwNvsWdjSPBmXNAqk8oL7u7XW.rdf",
+      "project_key": "2",
+      "start_date": "2019-01-01T16:33:40Z"
+    },
+    {
+      "denom": "C01-003-20150701-20160630-001",
+      "end_date": "2016-06-30T15:32:23Z",
+      "issuance_date": "2023-08-08T20:03:58.721731421Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "10",
+      "metadata": "regen:13toVhMT8c7hFZePMqa8raLBgCuLFo4MWbJ7QJRheFRC5dfPcmFZ4hk.rdf",
+      "project_key": "3",
+      "start_date": "2015-07-01T15:31:54Z"
+    },
+    {
+      "denom": "C02-001-20180101-20181231-001",
+      "end_date": "2018-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:04:08.767987045Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "11",
+      "metadata": "regen:13toVgpAwAm6fzYUUkD8UmioCYCP3GMbA3pdNkTM4wKeWc5UxmmCZW8.rdf",
+      "project_key": "4",
+      "start_date": "2018-01-01T00:00:00Z"
+    },
+    {
+      "denom": "C02-003-20200630-20220629-001",
+      "end_date": "2022-06-29T23:26:38Z",
+      "issuance_date": "2023-08-08T20:04:13.777376281Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "12",
+      "metadata": "regen:13toVh5g1AhGAWcTQCBXra1YfD2XJUbH35dvSLuEPAR8mQHJDY5ovVe.rdf",
+      "project_key": "6",
+      "start_date": "2020-06-30T23:22:15Z"
+    },
+    {
+      "denom": "C02-002-20211012-20241013-001",
+      "end_date": "2024-10-13T00:00:00Z",
+      "issuance_date": "2023-08-08T20:04:18.799226718Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "13",
+      "metadata": "regen:13toVhAukPXsjX5gMTADfUQzJQBjehJJoPwSavuU6GjyH5DtxZ5oVYS.rdf",
+      "project_key": "5",
+      "start_date": "2021-10-12T00:00:00Z"
+    },
+    {
+      "denom": "C02-004-20210102-20211207-001",
+      "end_date": "2021-12-07T04:18:39Z",
+      "issuance_date": "2023-08-08T20:04:23.813877794Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "14",
+      "metadata": "regen:13toVh1EoPoJJs1VSvmeQB3HHpXDgFBA19KqiP1tg4NByjWsFLJdjuq.rdf",
+      "project_key": "7",
+      "start_date": "2021-01-02T04:16:33Z"
+    },
+    {
+      "denom": "C01-002-20190101-20191231-005",
+      "end_date": "2019-12-31T15:21:25Z",
+      "issuance_date": "2023-08-08T20:04:28.836634478Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "15",
+      "metadata": "regen:13toVgwjqzxx3b9cRiRXBxrsUQB6D1WC4Kk8zZuXUfwnZ8WYtxRy4r5.rdf",
+      "project_key": "2",
+      "start_date": "2019-01-01T15:21:15Z"
+    },
+    {
+      "denom": "C01-001-20150101-20151231-006",
+      "end_date": "2015-12-31T15:32:58Z",
+      "issuance_date": "2023-08-08T20:04:38.871865052Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "16",
+      "metadata": "regen:13toVhaPG4MzeWcmoriPhQ5jRGx6ohhdzBPREoarrdqTRVCP8Xj7scM.rdf",
+      "project_key": "1",
+      "start_date": "2015-01-01T15:32:50Z"
+    },
+    {
+      "denom": "C01-002-20190101-20191231-006",
+      "end_date": "2019-12-31T15:37:03Z",
+      "issuance_date": "2023-08-08T20:04:43.886565185Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "17",
+      "metadata": "regen:13toVh3NyL4uDzLFcrf6rUFMQnV8af87tBdSzh1Dvsc8zgEx193Y7hr.rdf",
+      "project_key": "2",
+      "start_date": "2019-01-01T15:36:47Z"
+    },
+    {
+      "denom": "C03-001-20140701-20141231-001",
+      "end_date": "2014-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:04:48.910267107Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "18",
+      "metadata": "regen:13toVhaeKYNeRJtbzhBu5CXdgpC7tCHPUWGeEuc8RR731fLyXa9te1E.rdf",
+      "project_key": "10",
+      "start_date": "2014-07-01T00:00:00Z"
+    },
+    {
+      "denom": "C03-002-20190101-20191231-001",
+      "end_date": "2019-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:04:53.933267988Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "19",
+      "metadata": "regen:13toVhKjzKc97mFcCufJMaXPhKMEHaoKRsVEwewLr5Xut7YBNhivxrX.rdf",
+      "project_key": "11",
+      "start_date": "2019-01-01T00:00:00Z"
+    },
+    {
+      "denom": "C03-003-20150101-20151231-001",
+      "end_date": "2015-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:05:03.981182075Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "20",
+      "metadata": "regen:13toVgB7VGTEKNWn97qHBumx2zqZmtMwCBaJshYHFevVfRuW4SWGX5M.rdf",
+      "project_key": "12",
+      "start_date": "2015-01-01T00:00:00Z"
+    },
+    {
+      "denom": "C03-004-20190101-20191231-001",
+      "end_date": "2019-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:05:09.008149403Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "21",
+      "metadata": "regen:13toVh6p9tbULyXtPYTZX9DoA1g6iSasYbWBuK7UKDiffZYGmrANbmh.rdf",
+      "project_key": "13",
+      "start_date": "2019-01-01T00:00:00Z"
+    },
+    {
+      "denom": "C03-005-20160101-20161231-001",
+      "end_date": "2016-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:05:14.023356169Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "22",
+      "metadata": "regen:13toVfxdiCS6h8R6NDHn4LtuQRXG8c3D6Vw63czwiYris8KFYJvvg2c.rdf",
+      "project_key": "14",
+      "start_date": "2016-01-01T00:00:00Z"
+    },
+    {
+      "denom": "C03-006-20150101-20151231-001",
+      "end_date": "2015-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:05:19.037944207Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "23",
+      "metadata": "regen:13toVg7Xt9EvR9pqmtTT1awnNSasZJejoRXXKUbCTCE9VLd4nBVsYWH.rdf",
+      "project_key": "15",
+      "start_date": "2015-01-01T00:00:00Z"
+    },
+    {
+      "denom": "C03-007-20170101-20171231-001",
+      "end_date": "2017-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:05:24.061095423Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "24",
+      "metadata": "regen:13toVg41if27HxHNBZhf5kbUP3kN4DX9LNJPDXzknN9RpK5yLWNm3h5.rdf",
+      "project_key": "16",
+      "start_date": "2017-01-01T00:00:00Z"
+    },
+    {
+      "denom": "C03-008-20120101-20121231-001",
+      "end_date": "2012-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:05:34.091688766Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "25",
+      "metadata": "regen:13toVg7Z2YrvMRRoCxtScKAXbNEBYpVELsnASYymUU78LvxW1nSzFu6.rdf",
+      "project_key": "17",
+      "start_date": "2012-01-01T00:00:00Z"
+    },
+    {
+      "denom": "C03-009-20150101-20151231-001",
+      "end_date": "2015-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:05:39.113296836Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "26",
+      "metadata": "regen:13toVhiYkr78peQaKvrjoP2yVa3z3qpm2yRgxDCnMYuLLrVtyiPEneS.rdf",
+      "project_key": "18",
+      "start_date": "2015-01-01T00:00:00Z"
+    },
+    {
+      "denom": "C03-010-20150101-20151231-001",
+      "end_date": "2015-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:05:44.127821410Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "27",
+      "metadata": "regen:13toVgaYVotRebWVEM4TjfbFng78ASWp7GYsaTcKgBrE12HrLRk2B6P.rdf",
+      "project_key": "19",
+      "start_date": "2015-01-01T00:00:00Z"
+    },
+    {
+      "denom": "C03-005-20150101-20151231-002",
+      "end_date": "2015-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:05:49.147111737Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "28",
+      "metadata": "regen:13toVgHitVB5oq2yJ8d4Goz5uhTDpXceco1eVFuAzzP2p9a1h5wQo3b.rdf",
+      "project_key": "14",
+      "start_date": "2015-01-01T00:00:00Z"
+    },
+    {
+      "denom": "C03-010-20140101-20141231-002",
+      "end_date": "2014-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:05:59.184010649Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "29",
+      "metadata": "regen:13toVh9WtiTnPdTHfHZtcPnAs5p15116mpt3NkKEnryvF1PBmMMGcSd.rdf",
+      "project_key": "19",
+      "start_date": "2014-01-01T00:00:00Z"
+    },
+    {
+      "denom": "C03-011-20150101-20151231-001",
+      "end_date": "2015-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:06:04.208385009Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "30",
+      "metadata": "regen:13toVh2XQTWXoRSyBy88L6NDDPJzkhutzqM2GWHaYGxkE5PiR92qNim.rdf",
+      "project_key": "20",
+      "start_date": "2015-01-01T00:00:00Z"
+    },
+    {
+      "denom": "C03-012-20120101-20121231-001",
+      "end_date": "2012-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:06:09.222690847Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "31",
+      "metadata": "regen:13toVgeGj4Zh2MvT2MwaKyTqpvSQX6kvNYAqKB251icz1AEKbC8kxk2.rdf",
+      "project_key": "21",
+      "start_date": "2012-01-01T00:00:00Z"
+    },
+    {
+      "denom": "C03-005-20130101-20131231-003",
+      "end_date": "2013-12-31T00:00:00Z",
+      "issuance_date": "2023-08-08T20:06:14.245207906Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "32",
+      "metadata": "regen:13toVh2aMmZNJXKFJEfgvzBBVjxA6jcRZw2XMyP7mhLZTPids2HwG4p.rdf",
+      "project_key": "14",
+      "start_date": "2013-01-01T00:00:00Z"
+    },
+    {
+      "denom": "C02-005-20191106-20200225-001",
+      "end_date": "2020-02-25T22:51:58Z",
+      "issuance_date": "2023-08-08T20:06:19.269016962Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "33",
+      "metadata": "regen:13toVgfzANbkMLNjs5CrRtfmWZj2fXKXgRahkSp1onoTrrM1MSaaGJK.rdf",
+      "project_key": "8",
+      "start_date": "2019-11-06T22:51:55Z"
+    },
+    {
+      "denom": "C02-006-20210216-20220215-001",
+      "end_date": "2022-02-15T07:00:00Z",
+      "issuance_date": "2023-08-08T20:06:29.304239899Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "34",
+      "metadata": "regen:13toVfwkfM96d5tRd7SDg27ueCtURq43o1Gxe1yXVSDsSVpFCmLGoVk.rdf",
+      "project_key": "9",
+      "start_date": "2021-02-16T07:00:00Z"
+    }
+  ],
+  "regen.ecocredit.v1.BatchBalance": [
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "1",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "2",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "3",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "4",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "5",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "6",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "7",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "8",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "9",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "10",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "11",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "12",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "13",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "14",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "15",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "16",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "17",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "18",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "19",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "20",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "21",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "22",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "23",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "24",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "25",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "26",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "27",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "28",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "29",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "30",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "31",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "32",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "33",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "34",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    }
+  ],
+  "regen.ecocredit.v1.BatchContract": [],
+  "regen.ecocredit.v1.BatchSequence": [
+    {
+      "next_sequence": "7",
+      "project_key": "1"
+    },
+    {
+      "next_sequence": "7",
+      "project_key": "2"
+    },
+    {
+      "next_sequence": "2",
+      "project_key": "3"
+    },
+    {
+      "next_sequence": "2",
+      "project_key": "4"
+    },
+    {
+      "next_sequence": "2",
+      "project_key": "5"
+    },
+    {
+      "next_sequence": "2",
+      "project_key": "6"
+    },
+    {
+      "next_sequence": "2",
+      "project_key": "7"
+    },
+    {
+      "next_sequence": "2",
+      "project_key": "8"
+    },
+    {
+      "next_sequence": "2",
+      "project_key": "9"
+    },
+    {
+      "next_sequence": "2",
+      "project_key": "10"
+    },
+    {
+      "next_sequence": "2",
+      "project_key": "11"
+    },
+    {
+      "next_sequence": "2",
+      "project_key": "12"
+    },
+    {
+      "next_sequence": "2",
+      "project_key": "13"
+    },
+    {
+      "next_sequence": "4",
+      "project_key": "14"
+    },
+    {
+      "next_sequence": "2",
+      "project_key": "15"
+    },
+    {
+      "next_sequence": "2",
+      "project_key": "16"
+    },
+    {
+      "next_sequence": "2",
+      "project_key": "17"
+    },
+    {
+      "next_sequence": "2",
+      "project_key": "18"
+    },
+    {
+      "next_sequence": "3",
+      "project_key": "19"
+    },
+    {
+      "next_sequence": "2",
+      "project_key": "20"
+    },
+    {
+      "next_sequence": "2",
+      "project_key": "21"
+    }
+  ],
+  "regen.ecocredit.v1.BatchSupply": [
+    {
+      "batch_key": "1",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "2",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "3",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "4",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "5",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "6",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "7",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "8",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "9",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "10",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "11",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "12",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "13",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "14",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "15",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "16",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "17",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "18",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "19",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "20",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "21",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "22",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "23",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "24",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "25",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "26",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "27",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "28",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "29",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "30",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "31",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "32",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "33",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    },
+    {
+      "batch_key": "34",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
+    }
+  ],
+  "regen.ecocredit.v1.Class": [
+    4,
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "credit_type_abbrev": "C",
+      "id": "C01",
+      "key": "1",
+      "metadata": "regen:13toVgXF5JhEC5AxpRPiBckgKpVuxah9MgTSzuTbUmyKiLZvJgU3tee.rdf"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "credit_type_abbrev": "C",
+      "id": "C02",
+      "key": "2",
+      "metadata": "regen:13toVh7ATQB24tvEHgZPYhMutzAoYF4MgPq19Cjr6TnWBxmNeBeARj2.rdf"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "credit_type_abbrev": "C",
+      "id": "C03",
+      "key": "3",
+      "metadata": "regen:13toVgLqqFAjByA2kZkDFq7PZB2HUyD3u8qFDiBidYjpdYBLeJvAzxB.rdf"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "credit_type_abbrev": "C",
+      "id": "C04",
+      "key": "4",
+      "metadata": "regen:13toVgBisQqEmauHntQsW6mwpz71RSTwsjzhn9gxCQ16tdRjHPHTRoK.rdf"
+    }
+  ],
+  "regen.ecocredit.v1.ClassCreatorAllowlist": {
+    "enabled": false
+  },
+  "regen.ecocredit.v1.ClassFee": {
+    "fee": {
+      "amount": "20000000",
+      "denom": "uregen"
+    }
+  },
+  "regen.ecocredit.v1.ClassIssuer": [
+    {
+      "class_key": "1",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM="
+    },
+    {
+      "class_key": "2",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM="
+    },
+    {
+      "class_key": "3",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM="
+    },
+    {
+      "class_key": "4",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM="
+    }
+  ],
+  "regen.ecocredit.v1.ClassSequence": [
+    {
+      "credit_type_abbrev": "C",
+      "next_sequence": "5"
+    }
+  ],
+  "regen.ecocredit.v1.CreditType": [
+    {
+      "abbreviation": "C",
+      "name": "carbon",
+      "precision": 6,
+      "unit": "metric ton CO2 equivalent"
+    }
+  ],
+  "regen.ecocredit.v1.OriginTxIndex": [],
+  "regen.ecocredit.v1.Project": [
+    21,
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "class_key": "1",
+      "id": "C01-001",
+      "jurisdiction": "CD-MN",
+      "key": "1",
+      "metadata": "regen:13toVgGCN3gvRbWFkvYxfZUHrsFsribCKiGfFxW4mchJWsjEYdFaYd4.rdf",
+      "reference_id": "VCS-934"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "class_key": "1",
+      "id": "C01-002",
+      "jurisdiction": "KE",
+      "key": "2",
+      "metadata": "regen:13toVgoZxism9hBjsmFGuAXxj6uv5WrXHPRUTR33G3Eewp9567K5PU7.rdf",
+      "reference_id": "VCS-612"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "class_key": "1",
+      "id": "C01-003",
+      "jurisdiction": "PE-MDD",
+      "key": "3",
+      "metadata": "regen:13toVggnVfBxDbJ47V5ZUdwB3gWd6avSGVQGKk4rDx4o9kbjvKj6G13.rdf",
+      "reference_id": "VCS-1218"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "class_key": "2",
+      "id": "C02-001",
+      "jurisdiction": "US-WA",
+      "key": "4",
+      "metadata": "regen:13toVhmNbuUMgxxzAenxV1rkQHPrhXyuN3PyaQxsfCrxCn2i9G9niWM.rdf",
+      "reference_id": "CFC-1.2018"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "class_key": "2",
+      "id": "C02-002",
+      "jurisdiction": "US-OH",
+      "key": "5",
+      "metadata": "regen:13toVgCCjzpdUF8ubQeodLJd9vkPQaxnC7XnV1Ztert2Lv9hxCUKUGW.rdf",
+      "reference_id": "CFC-18"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "class_key": "2",
+      "id": "C02-003",
+      "jurisdiction": "US-PA",
+      "key": "6",
+      "metadata": "regen:13toVgd55rcm3R1ptRfA8Tqa3y12VhwapbuHt645b3zFnjEDNUPyz2E.rdf",
+      "reference_id": "CFC-9"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "class_key": "2",
+      "id": "C02-004",
+      "jurisdiction": "US-WA 98029",
+      "key": "7",
+      "metadata": "regen:13toVhpRRova7M4o54S9dq51sVFvnJCxKT79UMPopSQzReP2PuxNdAP.rdf",
+      "reference_id": "CFC-15"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "class_key": "2",
+      "id": "C02-005",
+      "jurisdiction": "US-VA 23223",
+      "key": "8",
+      "metadata": "regen:13toVgRKSPwrP6Z7rx9sXXo51XYqDewrabDjaqoXQMudXuRYJqdEHxp.rdf",
+      "reference_id": "CFC-006"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "class_key": "2",
+      "id": "C02-006",
+      "jurisdiction": "US-TN 37409",
+      "key": "9",
+      "metadata": "regen:13toVh8FBw5G7FNPRkFuBM3GNXDB5MAAPBbeBdYQ5KuRodH7XBTgSak.rdf",
+      "reference_id": "CFC-012"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "class_key": "3",
+      "id": "C03-001",
+      "jurisdiction": "ID",
+      "key": "10",
+      "metadata": "regen:13toVgJE2eUkVhmnohXpzKvvWiapcPmBsaY8hyMBHLDeGJRcksSXe9N.rdf",
+      "reference_id": "VCS-674"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "class_key": "3",
+      "id": "C03-002",
+      "jurisdiction": "CO",
+      "key": "11",
+      "metadata": "regen:13toVhFcZXHD1rmZeza4iC8g6ZLdV1hdtczEyHBWYFqVjxV1BMXWQkb.rdf",
+      "reference_id": "VCS-1566"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "class_key": "3",
+      "id": "C03-003",
+      "jurisdiction": "KH",
+      "key": "12",
+      "metadata": "regen:13toVgNuHj5Z7VobRehvrVhnGZdRUeEww9Tcic9zxFBkzkKzrACNLp8.rdf",
+      "reference_id": "VCS-1650"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "class_key": "3",
+      "id": "C03-004",
+      "jurisdiction": "KE",
+      "key": "13",
+      "metadata": "regen:13toVhNhUt21HvNWqR1gSSmeuiewvuSwx5z1zvs6aKL2owKF7NAP1Du.rdf",
+      "reference_id": "VCS-612"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "class_key": "3",
+      "id": "C03-005",
+      "jurisdiction": "BR",
+      "key": "14",
+      "metadata": "regen:13toVgerWTuzKZAW3a4DokEjYSuxhzv3mG9k2eq3dsws7U1GLFx6HnW.rdf",
+      "reference_id": "VCS-875"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "class_key": "3",
+      "id": "C03-006",
+      "jurisdiction": "CD",
+      "key": "15",
+      "metadata": "regen:13toVgAY2ZQv6dAxqBSfXBnBKxpSaRfnu9LkL25vqqXzLSrF9pRJD8s.rdf",
+      "reference_id": "VCS-934"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "class_key": "3",
+      "id": "C03-007",
+      "jurisdiction": "BR",
+      "key": "16",
+      "metadata": "regen:13toVhKaTEK5CzzQHsMKWqTua7Rmc7AUzo8stVfJTE3kCy5VCMAsvxf.rdf",
+      "reference_id": "VCS-981"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "class_key": "3",
+      "id": "C03-008",
+      "jurisdiction": "CN",
+      "key": "17",
+      "metadata": "regen:13toVgEhxth8bvyVnpCqn5QjV7PapbhMpSz21jjP2yUwGN53LTKd4GL.rdf",
+      "reference_id": "VCS-1529"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "class_key": "3",
+      "id": "C03-009",
+      "jurisdiction": "CN",
+      "key": "18",
+      "metadata": "regen:13toVhC7QXTsA4NPUPMk8nfiSse9HpfnkqimfZ9o9bL4fgWsnnYuPeN.rdf",
+      "reference_id": "VCS-1577"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "class_key": "3",
+      "id": "C03-010",
+      "jurisdiction": "CN",
+      "key": "19",
+      "metadata": "regen:13toVg2h9es7WEBLQJGrpCYgLKNFFfZXn9Nh6qQA71595pGTXrrRNEM.rdf",
+      "reference_id": "VCS-1542"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "class_key": "3",
+      "id": "C03-011",
+      "jurisdiction": "CN",
+      "key": "20",
+      "metadata": "regen:13toVgQAoXqnrWVVn9s1HEFcaHXzZDdvPSPuF4eN6Nv7AHn6DXudSQF.rdf",
+      "reference_id": "VCS-1162"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "class_key": "3",
+      "id": "C03-012",
+      "jurisdiction": "CG",
+      "key": "21",
+      "metadata": "regen:13toVhrafJcnz74vhsQoCwThKsnEoF12tNkUGhR6dqb9L77QoorUmhV.rdf",
+      "reference_id": "VCS-1052"
+    }
+  ],
+  "regen.ecocredit.v1.ProjectSequence": [
+    {
+      "class_key": "1",
+      "next_sequence": "4"
+    },
+    {
+      "class_key": "2",
+      "next_sequence": "7"
+    },
+    {
+      "class_key": "3",
+      "next_sequence": "13"
+    }
+  ]
+}

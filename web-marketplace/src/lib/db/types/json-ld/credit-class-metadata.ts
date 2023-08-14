@@ -24,11 +24,12 @@ export interface CreditClassMetadataLD {
   'regen:carbonOffsetStandard'?: CompactedNameUrl;
   'regen:tokenizationSource'?: string;
   'regen:certifications'?: Certification[];
-  'regen:coBenefits'?: string[];
+  'regen:primaryImpact': Impact;
+  'regen:coBenefits'?: (Impact | string)[]; // Keeping support for string[] for now until C04 metadata is fixed (#1983).
   'regen:measuredGHGs': string[];
   'regen:bufferPoolAccounts': {
     // We probably want to simplify this to be just a @list instead,
-    // but keeping as is, until C04 class metadata is updated accordingly.
+    // but keeping as is, until C04 class metadata is updated accordingly (#1983).
     '@type': 'schema:ItemList';
     'schema:itemListElement': BufferPoolAccount[];
   };
@@ -38,8 +39,18 @@ export type BufferPoolAccount = {
   'schema:name': string;
   // Keeping both regen:walletAddress and regen:address for now,
   // until C04 class metadata gets fixed.
-  // But ultimately, we should just use regen:address.
+  // But ultimately, we should just use regen:address (#1983).
   'regen:walletAddress'?: string;
   'regen:address'?: string;
   'regen:poolAllocation': string;
 };
+
+export interface Impact {
+  '@id': string;
+  'schema:name'?: string;
+  'regen:SDGs'?: { '@id': string }[];
+  '@type'?: typeof MEASURED_CO_BENEFIT_IRI | typeof PROJECT_BENEFIT_IRI;
+}
+
+export const MEASURED_CO_BENEFIT_IRI = 'regen:MeasuredCoBenefit';
+export const PROJECT_BENEFIT_IRI = 'regen:ProjectBenefit';

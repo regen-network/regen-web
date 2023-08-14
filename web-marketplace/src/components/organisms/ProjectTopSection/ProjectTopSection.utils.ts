@@ -142,24 +142,16 @@ export const parseOffChainProject = (
 ) => {
   const creditClass = project?.creditClassByCreditClassId;
   const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
-  const sdgIris = creditClassVersion?.metadata?.['regen:SDGs']?.map(
-    (sdg: { '@id': string }) => sdg['@id'],
-  );
-  const offsetGenerationMethod =
-    creditClassVersion?.metadata?.['regen:offsetGenerationMethod'];
-  const coBenefitsIRIs =
+  const offChainCoBenefitsIRIs =
     creditClassVersion?.metadata?.['regen:coBenefits']?.map(
       (impact: { '@id': string }) => impact['@id'],
     ) || [];
-  const primaryImpactIRI =
+  const offChainPrimaryImpactIRI =
     creditClassVersion?.metadata?.['regen:indicator']?.['@id'];
 
   return {
-    creditClassVersion,
-    sdgIris,
-    offsetGenerationMethod,
-    primaryImpactIRI,
-    coBenefitsIRIs,
+    offChainPrimaryImpactIRI,
+    offChainCoBenefitsIRIs,
   };
 };
 

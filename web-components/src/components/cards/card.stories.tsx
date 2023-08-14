@@ -57,7 +57,7 @@ export const projectImpactCard = (): JSX.Element => (
       { src: '/sdgs/sdg8.svg', alt: 'sdg8' },
     ]}
     standard="https://regen-registry.s3.amazonaws.com/projects/kasigau/VCS.png"
-    monitored
+    label="primary impact"
   />
 );
 

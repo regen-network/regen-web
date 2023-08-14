@@ -9,6 +9,10 @@ import {
   Maybe,
 } from '../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../lib/imgSrc';
+import {
+  CO_BENEFIT,
+  PRIMARY_IMPACT,
+} from './ProjectTopSection/ProjectTopSection.constants';
 
 interface ProjectImpactProps {
   impacts?: Maybe<Array<Maybe<EcologicalImpactRelation>>>;
@@ -38,7 +42,7 @@ function ImpactSection({
               />
             }
             imgSrc={getSanityImgSrc(impact?.ecologicalImpact?.image)}
-            monitored={impact?.primary ? true : false}
+            label={impact?.primary ? PRIMARY_IMPACT : CO_BENEFIT}
           />
         )) || []
       }

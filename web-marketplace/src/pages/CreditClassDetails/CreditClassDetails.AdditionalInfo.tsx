@@ -35,7 +35,6 @@ const AdditionalInfo = <T extends CreditClassMetadataLD>({
   const projectActivities = metadata?.['regen:projectActivities'];
   const carbonOffsetStandard = metadata?.['regen:carbonOffsetStandard'];
   const tokenizationSource = metadata?.['regen:tokenizationSource'];
-  const coBenefits = metadata?.['regen:coBenefits'];
   const measuredGHGs = metadata?.['regen:measuredGHGs'];
   const bufferPoolAccounts = metadata?.['regen:bufferPoolAccounts'];
 
@@ -79,7 +78,6 @@ const AdditionalInfo = <T extends CreditClassMetadataLD>({
           <MetaDetail label="Tokenization Source" value={tokenizationSource} />
           <MetaDetail label="ecosystem type" value={ecosystemTypes} />
           <MetaDetail label="verification method" value={verificationMethod} />
-          <MetaDetail label="co-benefits" value={coBenefits} />
           <MetaDetail label="measured GHGs" value={measuredGHGs} />
           <BufferPoolAccounts
             bufferPoolAccounts={bufferPoolAccounts?.['schema:itemListElement']}

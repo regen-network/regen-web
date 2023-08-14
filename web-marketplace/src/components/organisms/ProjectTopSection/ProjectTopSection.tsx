@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { TRANSPARENT_PIXEL } from 'utils/image/transparentPixel';
 
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
+import { ProjectImpactCardProps } from 'web-components/lib/components/cards/ProjectImpactCard/ProjectImpactCard';
 import { ActionCard } from 'web-components/lib/components/molecules/ActionCard/ActionCard';
 import { RoundLogoItemsList } from 'web-components/lib/components/molecules/RoundLogoItemsList/RoundLogoItemsList';
 import { ImpactTags } from 'web-components/lib/components/organisms/ImpactTags/ImpactTags';
@@ -22,14 +23,21 @@ import { getAllOffsetMethodQuery } from 'lib/queries/react-query/sanity/getAllOf
 import { getAllProjectRatingQuery } from 'lib/queries/react-query/sanity/getAllProjectRatingQuery/getAllProjectRatingQuery';
 
 import {
+  normalizeCoBenefit,
+  normalizePrimaryImpact,
+} from 'pages/CreditClassDetails/CreditClassDetails.utils';
+import useCoBenefits from 'pages/CreditClassDetails/hooks/useCoBenefits';
+import useImpact from 'pages/CreditClassDetails/hooks/useImpact';
+import usePrimaryImpact from 'pages/CreditClassDetails/hooks/usePrimaryImpact';
+import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
   MAPBOX_TOKEN,
 } from 'components/templates/ProjectDetails/ProjectDetails.config';
 import { useTags } from 'hooks/useTags';
 
-import useImpact from '../../../pages/CreditClassDetails/hooks/useImpact';
 import { ProjectBatchTotals } from '../../molecules';
+import { PRIMARY_IMPACT } from './ProjectTopSection.constants';
 import { ProjectTopSectionCreditClassCard } from './ProjectTopSection.CreditClassCard';
 import {
   ProjectTopSectionQuoteMark,
@@ -66,9 +74,6 @@ function ProjectTopSection({
 }: ProjectTopSectionProps): JSX.Element {
   const { classes } = useProjectTopSectionStyles();
   const { ecocreditClient } = useLedger();
-
-  const { primaryImpactIRI, coBenefitsIRIs } =
-    parseOffChainProject(offChainProject);
 
   const {
     projectName,
@@ -155,9 +160,13 @@ function ProjectTopSection({
     ecosystemTypes,
   });
 
-  const impact = useImpact({ coBenefitsIRIs, primaryImpactIRI });
-  const hasStandardLogo = impact.some(item => !!item.standard);
-  const standardDefaultValue = hasStandardLogo ? TRANSPARENT_PIXEL : undefined;
+  const { offChainPrimaryImpactIRI, offChainCoBenefitsIRIs } =
+    parseOffChainProject(offChainProject);
+  const impact = useImpact({
+    offChainPrimaryImpactIRI,
+    offChainCoBenefitsIRIs,
+    creditClassMetadata,
+  });
 
   return (
     <Section classes={{ root: classes.section }}>
@@ -257,15 +266,7 @@ function ProjectTopSection({
           <ImpactTags
             activities={activityTags}
             ecosystems={ecosystemTags}
-            impact={impact.map(
-              ({ name, image, standard, sdgs }, index: number) => ({
-                name,
-                imgSrc: getSanityImgSrc(image),
-                sdgs: getSdgsImages({ sdgs }),
-                standard: getSanityImgSrc(standard, standardDefaultValue),
-                monitored: index === 0,
-              }),
-            )}
+            impact={impact}
           />
           {ratingsAndCertificationsData && (
             <RoundLogoItemsList

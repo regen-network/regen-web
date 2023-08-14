@@ -25,7 +25,7 @@ Default.args = {
       ],
       standard:
         'https://regen-registry.s3.amazonaws.com/projects/kasigau/VCS.png',
-      monitored: true,
+      label: 'measured co-benefit',
     },
   ],
   ecosystems: [

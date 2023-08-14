@@ -42,7 +42,6 @@ import { BOOK_CALL_LINK } from './CreditClassDetails.constants';
 import {
   getCreditClassAvgPricePerTonLabel,
   getProjectNameFromProjectsData,
-  normalizeProjectImpactCards,
   parseCreditClassVersion,
 } from './CreditClassDetails.utils';
 import CreditClassDetailsSimple from './CreditClassDetailsSimple';
@@ -110,9 +109,8 @@ function CreditClassDetails({
 
   const dbDataByOnChainId = dbDataByOnChainIdData?.data;
 
-  const { coBenefitsIRIs, primaryImpactIRI } = parseCreditClassVersion(
-    dbDataByOnChainId?.creditClassByOnChainId,
-  );
+  const { offChainCoBenefitsIRIs, offChainPrimaryImpactIRI } =
+    parseCreditClassVersion(dbDataByOnChainId?.creditClassByOnChainId);
 
   const { data: dbDataByUri } = useCreditClassByUriQuery({
     variables: { uri: iri as string },
@@ -155,8 +153,11 @@ function CreditClassDetails({
   });
 
   const onBookCallButtonClick = () => openLink(BOOK_CALL_LINK, true);
-  const impact = useImpact({ coBenefitsIRIs, primaryImpactIRI });
-  const impactCards = normalizeProjectImpactCards(impact);
+  const impact = useImpact({
+    offChainCoBenefitsIRIs,
+    offChainPrimaryImpactIRI,
+    creditClassMetadata: metadata,
+  });
 
   const { data: adminPartyByAddrData } = useQuery(
     getPartyByAddrQuery({
@@ -230,7 +231,7 @@ function CreditClassDetails({
           program={creditClassProgramParty}
           admin={creditClassAdminParty}
           issuers={creditClassIssuers}
-          impactCards={impactCards}
+          impactCards={impact}
         />
       )}
       <SellOrdersActionsBar

@@ -52,6 +52,6 @@ export const menuItems: Item[] = [
   },
   {
     title: 'Registry',
-    href: 'https://regennetwork.notion.site/Welcome-to-Regen-Registry-0d55aab2a2d64f27aee2a468df172990',
+    href: 'https://registry.regen.network/',
   },
 ];

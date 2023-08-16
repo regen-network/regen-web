@@ -4,6 +4,7 @@ import { BlockContent } from 'web-components/lib/components/block-content';
 import CreditClassCard, {
   CreditClassCardItemType,
 } from 'web-components/lib/components/cards/CreditClassCard';
+import { Party } from 'web-components/lib/components/user/UserInfoCard';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
@@ -20,6 +21,7 @@ type Props = {
   creditTypeName?: string;
   creditTypeImage?: string | null;
   methodology?: ProjectMethodology;
+  program?: Party;
 };
 
 export const ProjectTopSectionCreditClassCard: React.FC<Props> = ({
@@ -30,6 +32,7 @@ export const ProjectTopSectionCreditClassCard: React.FC<Props> = ({
   creditTypeImage,
   generationMethods,
   methodology,
+  program,
 }) =>
   creditClassSanity || creditClassMetadata ? (
     <Link
@@ -63,6 +66,7 @@ export const ProjectTopSectionCreditClassCard: React.FC<Props> = ({
           text: methodology?.['schema:name'],
           href: methodology?.['schema:url'],
         }}
+        program={program}
         sx={{ mt: [2, 4], py: [2, 6] }}
       />
     </Link>

@@ -71,6 +71,7 @@ function ProjectTopSection({
   creditClassOnChain,
   creditClassMetadata,
   onChainCreditClassId,
+  program,
 }: ProjectTopSectionProps): JSX.Element {
   const { classes } = useProjectTopSectionStyles();
   const { ecocreditClient } = useLedger();
@@ -220,6 +221,7 @@ function ProjectTopSection({
             creditTypeImage={creditTypeSanity?.image?.asset?.url}
             generationMethods={generationMethods}
             methodology={methodology}
+            program={program}
           />
           <Box>
             {batchData?.totals && (

@@ -10,6 +10,8 @@ import {
   blocksToText,
 } from 'web-components/lib/components/block-content';
 import { ImageActionCard } from 'web-components/lib/components/cards/ImageActionCard';
+import { ProgramImageChildren } from 'web-components/lib/components/cards/ProjectCard/ProjectCard.ImageChildren';
+import { Party } from 'web-components/lib/components/user/UserInfo';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { AllCreditClassQuery } from '../../generated/sanity-graphql';
@@ -19,6 +21,7 @@ import { onChainClassRegExp } from '../../lib/ledger';
 type Props = {
   btnText: string;
   creditClassesContent?: AllCreditClassQuery['allCreditClass'];
+  creditClassesProgram?: (Party | undefined)[];
   justifyContent?: GridProps['justifyContent'];
   classes?: {
     root?: string;
@@ -40,8 +43,11 @@ const useStyles = makeStyles()((theme: Theme) => ({
 }));
 
 const CreditClassCards: React.FC<React.PropsWithChildren<Props>> = ({
+  creditClassesContent,
+  creditClassesProgram,
   justifyContent = 'center',
-  ...props
+  btnText,
+  classes,
 }) => {
   const navigate = useNavigate();
   const { classes: styles, cx } = useStyles();
@@ -52,10 +58,10 @@ const CreditClassCards: React.FC<React.PropsWithChildren<Props>> = ({
     <Grid
       container
       justifyContent={justifyContent}
-      className={cx(styles.root, props.classes && props.classes.root)}
+      className={cx(styles.root, classes && classes.root)}
       spacing={isMobile ? 0 : 5}
     >
-      {props.creditClassesContent?.map((c, i) => {
+      {creditClassesContent?.map((c, i) => {
         const isOnChainClass = c.path && onChainClassRegExp.test(c.path);
         const title = isOnChainClass ? (
           `${blocksToText(c?.nameRaw)} (${c.path})`
@@ -69,11 +75,11 @@ const CreditClassCards: React.FC<React.PropsWithChildren<Props>> = ({
             sm={6}
             md={4}
             key={i}
-            className={cx(styles.card, props.classes && props.classes.card)}
+            className={cx(styles.card, classes && classes.card)}
           >
             <ImageActionCard
               key={i}
-              btnText={props.btnText}
+              btnText={btnText}
               description={<BlockContent content={c?.shortDescriptionRaw} />}
               imgSrc={getSanityImgSrc(c?.image)}
               onClick={() => {
@@ -83,6 +89,9 @@ const CreditClassCards: React.FC<React.PropsWithChildren<Props>> = ({
                 }
               }}
               title={title}
+              imageChildren={
+                <ProgramImageChildren program={creditClassesProgram?.[i]} />
+              }
             />
           </Grid>
         );

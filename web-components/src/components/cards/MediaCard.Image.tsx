@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { ClassNameMap, styled } from '@mui/material';
 import cx from 'clsx';
 
@@ -12,6 +13,7 @@ type Props = {
   apiServerUrl?: string;
   backgroundGradient: boolean;
   tag?: string;
+  children?: ReactNode;
 };
 
 const BackgroundGradient = styled('div')({
@@ -33,6 +35,7 @@ export const MediaCardImage = ({
   imageStorageBaseUrl,
   imgSrc,
   tag,
+  children,
 }: Props): JSX.Element => (
   <Image
     className={cx(imageClassName, classes.image)}
@@ -60,5 +63,6 @@ export const MediaCardImage = ({
         {tag}
       </Label>
     )}
+    {children}
   </Image>
 );

@@ -59,8 +59,15 @@ export const useFetchProjectsByIdsWithOrders = ({
       }),
     ),
   });
+
   const projectPagesMetadata = offChainProjectResults.map(
     queryResult => queryResult.data?.data.projectByOnChainId?.metadata,
+  );
+
+  const programParties = offChainProjectResults.map(
+    queryResult =>
+      queryResult.data?.data.projectByOnChainId?.creditClassByCreditClassId
+        ?.partyByRegistryId,
   );
 
   /* Final Normalization */
@@ -69,6 +76,7 @@ export const useFetchProjectsByIdsWithOrders = ({
     projectsWithOrderData,
     projectsMetadata,
     projectPagesMetadata,
+    programParties,
     classesMetadata,
   });
   return {

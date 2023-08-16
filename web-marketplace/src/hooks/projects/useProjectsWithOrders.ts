@@ -183,8 +183,15 @@ export function useProjectsWithOrders({
       }),
     ),
   });
+
   const projectPagesMetadata = offChainProjectResults.map(
     queryResult => queryResult.data?.data.projectByOnChainId?.metadata,
+  );
+
+  const programParties = offChainProjectResults.map(
+    queryResult =>
+      queryResult.data?.data.projectByOnChainId?.creditClassByCreditClassId
+        ?.partyByRegistryId,
   );
 
   // Credit Classes and their metadata
@@ -201,6 +208,7 @@ export function useProjectsWithOrders({
       | undefined
     )[],
     projectPagesMetadata,
+    programParties,
     sanityCreditClassData: creditClassData,
     classesMetadata,
   });

@@ -235,6 +235,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
                   track={track}
                   isSoldOut={isSoldOut}
                   creditsTooltip={getCreditsTooltip({ isSoldOut, project })}
+                  program={project.program}
                 />
               </Box>
             );

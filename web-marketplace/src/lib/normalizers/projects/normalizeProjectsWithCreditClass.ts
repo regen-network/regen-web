@@ -3,6 +3,7 @@ import { getClassImageWithProjectDefault } from 'utils/image/classImage';
 
 import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCard';
 
+import { Maybe, PartyFieldsFragment } from 'generated/graphql';
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import {
   AnchoredProjectMetadataBaseLD,
@@ -10,7 +11,10 @@ import {
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
 
-import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
+import {
+  findSanityCreditClass,
+  getDisplayParty,
+} from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { normalizeClassProjectForBatch } from '../classProjectForBatch/normalizeClassProjectForBatch';
 import { EMPTY_CLASS_PROJECT_INFO } from '../classProjectForBatch/normalizeClassProjectForBatch.constants';
@@ -19,6 +23,7 @@ interface Params {
   projects?: ProjectInfo[] | null;
   projectsMetadata?: (AnchoredProjectMetadataBaseLD | undefined)[];
   projectPagesMetadata?: ProjectPageMetadataLD[];
+  programParties?: Maybe<PartyFieldsFragment | undefined>[];
   classesMetadata?: (CreditClassMetadataLD | undefined)[];
   sanityCreditClassData?: AllCreditClassQuery;
 }
@@ -26,6 +31,7 @@ interface Params {
 export const normalizeProjectsWithCreditClass = ({
   projectsMetadata,
   projectPagesMetadata,
+  programParties,
   classesMetadata,
   projects,
   sanityCreditClassData,
@@ -34,6 +40,7 @@ export const normalizeProjectsWithCreditClass = ({
     const projectMetadata = projectsMetadata?.[index];
     const creditClassMetadata = classesMetadata?.[index];
     const projectPageMetadata = projectPagesMetadata?.[index];
+    const projectParty = programParties?.[index];
     const hasAllClassInfos =
       (projectMetadata !== undefined && !!sanityCreditClassData) ||
       creditClassMetadata !== undefined;
@@ -56,6 +63,10 @@ export const normalizeProjectsWithCreditClass = ({
       metadata: creditClassMetadata,
       sanityClass: creditClass,
     });
+    const program = getDisplayParty(
+      creditClassMetadata?.['regen:sourceRegistry'],
+      projectParty,
+    );
 
     return {
       ...project,
@@ -76,5 +87,6 @@ export const normalizeProjectsWithCreditClass = ({
         type: 'USER',
         image: '/svg/class-default.svg',
       },
+      program,
     };
   }) ?? [];

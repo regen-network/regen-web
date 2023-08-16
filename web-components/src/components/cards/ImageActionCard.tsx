@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { CardContent, useTheme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
@@ -23,7 +23,8 @@ type Props = {
   btnText: string;
   className?: string;
   disabled?: boolean;
-  startIcon?: React.ReactNode;
+  startIcon?: ReactNode;
+  imageChildren?: ReactNode;
 };
 
 const ImageActionCard: React.FC<React.PropsWithChildren<Props>> = props => {
@@ -36,6 +37,7 @@ const ImageActionCard: React.FC<React.PropsWithChildren<Props>> = props => {
       elevation={1}
       borderRadius="10px"
       borderColor={theme.palette.grey[100]}
+      imageChildren={props.imageChildren}
     >
       <CardContent
         sx={{

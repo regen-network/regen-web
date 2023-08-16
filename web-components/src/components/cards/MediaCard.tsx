@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { ReactNode, useCallback } from 'react';
 import { CardMedia, SxProps } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 import { makeStyles } from 'tss-react/mui';
@@ -28,6 +28,7 @@ export interface MediaCardProps extends OptimizeImageProps {
   imageClassName?: string;
   titleOverwrite?: boolean;
   truncateTitle?: boolean;
+  imageChildren?: ReactNode;
   sx?: SxProps<Theme>;
 }
 
@@ -58,6 +59,7 @@ export default function MediaCard({
   truncateTitle,
   imageStorageBaseUrl,
   apiServerUrl,
+  imageChildren,
   sx = [],
 }: MediaCardProps): JSX.Element {
   const { classes, cx } = useStyles();
@@ -71,6 +73,7 @@ export default function MediaCard({
         imageStorageBaseUrl={imageStorageBaseUrl}
         imgSrc={imgSrc}
         tag={tag}
+        children={imageChildren}
       />
     ),
     [
@@ -81,6 +84,7 @@ export default function MediaCard({
       imageStorageBaseUrl,
       imgSrc,
       tag,
+      imageChildren,
     ],
   );
 

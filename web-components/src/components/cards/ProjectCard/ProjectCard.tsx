@@ -12,7 +12,7 @@ import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
 import ProjectPlaceInfo from '../../place/ProjectPlaceInfo';
 import InfoTooltipWithIcon from '../../tooltip/InfoTooltipWithIcon';
 import { Body, Subtitle } from '../../typography';
-import UserInfo, { User } from '../../user/UserInfo';
+import { Party } from '../../user/UserInfo';
 import MediaCard, { MediaCardProps } from '../MediaCard';
 import {
   AVG_PRICE_LABEL,
@@ -21,6 +21,7 @@ import {
   ERROR_CARD_PRICE,
   SOLD_OUT,
 } from './ProjectCard.constants';
+import { ProgramImageChildren } from './ProjectCard.ImageChildren';
 import { PurchaseDetails } from './ProjectCard.PurchaseDetails';
 import { useProjectCardStyles } from './ProjectCard.styles';
 import { PurchaseInfo } from './ProjectCard.types';
@@ -34,7 +35,6 @@ export interface ProjectCardProps extends MediaCardProps {
   place: string;
   area: number;
   areaUnit: string;
-  registry?: User | null;
   tag?: string;
   onClick?: () => void;
   onButtonClick?: () => void;
@@ -50,6 +50,7 @@ export interface ProjectCardProps extends MediaCardProps {
   creditsTooltip?: string;
   button?: ButtonType;
   disabled?: boolean;
+  program?: Party;
 }
 
 export function ProjectCard({
@@ -60,7 +61,6 @@ export function ProjectCard({
   place,
   area,
   areaUnit,
-  registry,
   onClick,
   onButtonClick,
   tag,
@@ -75,6 +75,7 @@ export function ProjectCard({
   isSoldOut = false,
   creditsTooltip,
   button = DEFAULT_BUY_BUTTON,
+  program,
   ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
@@ -113,6 +114,7 @@ export function ProjectCard({
       imageStorageBaseUrl={imageStorageBaseUrl}
       apiServerUrl={apiServerUrl}
       sx={{ ...sx, height: '100%' }}
+      imageChildren={<ProgramImageChildren program={program} />}
       {...mediaCardProps}
     >
       <div className={classes.placeInfo}>
@@ -128,12 +130,6 @@ export function ProjectCard({
       {comingSoon && (
         <div className={classes.comingSoon}>
           <span className={classes.comingSoonText}>coming soon</span>
-        </div>
-      )}
-      {registry && <div className={classes.separator} />}
-      {registry && (
-        <div className={classes.userInfo}>
-          <UserInfo user={registry} size="sm" titleComponent="subtitle" />
         </div>
       )}
       {purchaseInfo && <div className={classes.separator} />}

@@ -10,7 +10,6 @@ import SEO from 'web-components/lib/components/seo';
 import { Body, Title } from 'web-components/lib/components/typography';
 
 import { SKIPPED_CLASS_ID } from 'lib/env';
-import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -27,6 +26,7 @@ import { CreditClassCards } from '../../components/organisms';
 import { client as sanityClient } from '../../lib/clients/sanity';
 import { FeaturedProjects } from './Home.FeaturedProjects';
 import { useHomeStyles } from './Home.styles';
+import { useCreditClasses } from './hooks/useCreditClasses';
 
 const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [open, setOpen] = useState(false);
@@ -38,9 +38,10 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { data: allHomePageData, isFetching: isFetchingAllHomePage } = useQuery(
     getAllHomePageQuery({ sanityClient, enabled: !!sanityClient }),
   );
-  const { data: creditClassData } = useQuery(
-    getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
-  );
+
+  const { creditClasses, creditClassesPrograms } = useCreditClasses({
+    skippedClassId: SKIPPED_CLASS_ID,
+  });
 
   const content = allHomePageData?.allHomePage?.[0];
 
@@ -50,10 +51,6 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const seo = content?.seo;
   const gettingStartedResourcesSection =
     content?.gettingStartedResourcesSection;
-
-  const creditClassesContent = creditClassData?.allCreditClass?.filter(
-    c => c.path !== SKIPPED_CLASS_ID,
-  );
 
   useEffect(() => {
     const anchor = window.location.hash.slice(1);
@@ -155,7 +152,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
         body={projectsSection?.bodyRaw}
       />
 
-      {creditClassesContent && (
+      {creditClasses && (
         <BackgroundImgSection
           sx={{
             display: 'flex',
@@ -178,7 +175,8 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
           <CreditClassCards
             btnText="Learn More"
             justifyContent={['center', 'center', 'flex-start']}
-            creditClassesContent={creditClassesContent} // CMS data
+            creditClassesContent={creditClasses} // CMS data
+            creditClassesProgram={creditClassesPrograms}
           />
         </BackgroundImgSection>
       )}

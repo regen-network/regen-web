@@ -5,7 +5,11 @@ import { Theme } from '../../../theme/muiTheme';
 import { sxToArray } from '../../../utils/mui/sxToArray';
 import { TextButton } from '../../buttons/TextButton';
 import { LabelSize } from '../../typography/sizing';
-import { SEE_LESS, SEE_MORE } from './CollapseList.constants';
+import {
+  DEFAULT_COLLAPSED_ITEMS,
+  SEE_LESS,
+  SEE_MORE,
+} from './CollapseList.constants';
 
 type Props = {
   items: JSX.Element[];
@@ -16,7 +20,7 @@ type Props = {
 
 export const CollapseList = ({
   items,
-  max = 3,
+  max = DEFAULT_COLLAPSED_ITEMS,
   buttonTextSize = 'xs',
   sx,
 }: Props): JSX.Element | null => {

@@ -262,11 +262,11 @@ function ProjectTopSection({
           {ratingsAndCertificationsData && (
             <RoundLogoItemsList
               {...ratingsAndCertificationsData}
-              sx={{ mt: 5 }}
+              sx={{ mb: 5 }}
             />
           )}
           {otcCard && (
-            <Box sx={{ mt: 5 }}>
+            <Box>
               <ActionCard {...otcCard} variant="column" />
             </Box>
           )}

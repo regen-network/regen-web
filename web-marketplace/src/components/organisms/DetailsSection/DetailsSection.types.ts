@@ -1,3 +1,7 @@
+import { SxProps } from '@mui/material';
+
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import { DetailsCard, DetailsSection, Maybe } from 'generated/sanity-graphql';
 import { CompactedNameUrl } from 'lib/rdf/types';
 
@@ -11,4 +15,5 @@ export interface DetailsSectionProps {
     creditTypeUnit?: string;
     creditTypeImage?: string | null;
   };
+  sx?: SxProps<Theme>;
 }

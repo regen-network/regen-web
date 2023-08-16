@@ -7,7 +7,7 @@ export const useProjectTopSectionStyles = makeStyles()((theme: Theme) => ({
   section: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(20),
-      paddingBottom: theme.spacing(27.5),
+      paddingBottom: theme.spacing(25),
     },
     [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(6.5),

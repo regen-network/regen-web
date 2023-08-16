@@ -220,7 +220,7 @@ function ProjectTopSection({
                 totals={batchData.totals}
                 sx={{
                   mt: { xs: 10, sm: 12, md: 16 },
-                  mb: { xs: 10, sm: 12, md: 25 },
+                  mb: quote ? { xs: 10, sm: 12, md: 25 } : {},
                 }}
               />
             )}

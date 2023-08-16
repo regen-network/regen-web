@@ -361,6 +361,8 @@ function ProjectDetails(): JSX.Element {
 
       {hasProjectPhotos && <Gallery photos={projectPhotos} />}
 
+      <ProjectStorySection projectPageMetadata={offChainProjectMetadata} />
+
       <DetailsSection
         header={sanityProjectPage?.projectDetailsSection}
         credibilityCards={sanityProjectData?.allProject?.[0]?.credibilityCards}
@@ -372,8 +374,6 @@ function ProjectDetails(): JSX.Element {
           admin={admin}
         />
       </DetailsSection>
-
-      <ProjectStorySection projectPageMetadata={offChainProjectMetadata} />
 
       <div
         className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}

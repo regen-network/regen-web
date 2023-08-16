@@ -2768,6 +2768,20 @@ export type IndexerAllTxesQuery = (
   )> }
 );
 
+export type IndexerAllTxesCountQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type IndexerAllTxesCountQuery = (
+  { __typename?: 'Query' }
+  & { allTxes?: Maybe<(
+    { __typename?: 'TxesConnection' }
+    & { nodes: Array<Maybe<(
+      { __typename?: 'Tx' }
+      & Pick<Tx, 'txIdx'>
+    )>> }
+  )> }
+);
+
 export type IndexerRetirementByNodeIdQueryVariables = Exact<{
   nodeId: Scalars['ID'];
 }>;
@@ -2880,6 +2894,42 @@ export function useIndexerAllTxesLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type IndexerAllTxesQueryHookResult = ReturnType<typeof useIndexerAllTxesQuery>;
 export type IndexerAllTxesLazyQueryHookResult = ReturnType<typeof useIndexerAllTxesLazyQuery>;
 export type IndexerAllTxesQueryResult = Apollo.QueryResult<IndexerAllTxesQuery, IndexerAllTxesQueryVariables>;
+export const IndexerAllTxesCountDocument = gql`
+    query IndexerAllTxesCount {
+  allTxes {
+    nodes {
+      txIdx
+    }
+  }
+}
+    `;
+
+/**
+ * __useIndexerAllTxesCountQuery__
+ *
+ * To run a query within a React component, call `useIndexerAllTxesCountQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIndexerAllTxesCountQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useIndexerAllTxesCountQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useIndexerAllTxesCountQuery(baseOptions?: Apollo.QueryHookOptions<IndexerAllTxesCountQuery, IndexerAllTxesCountQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<IndexerAllTxesCountQuery, IndexerAllTxesCountQueryVariables>(IndexerAllTxesCountDocument, options);
+      }
+export function useIndexerAllTxesCountLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IndexerAllTxesCountQuery, IndexerAllTxesCountQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<IndexerAllTxesCountQuery, IndexerAllTxesCountQueryVariables>(IndexerAllTxesCountDocument, options);
+        }
+export type IndexerAllTxesCountQueryHookResult = ReturnType<typeof useIndexerAllTxesCountQuery>;
+export type IndexerAllTxesCountLazyQueryHookResult = ReturnType<typeof useIndexerAllTxesCountLazyQuery>;
+export type IndexerAllTxesCountQueryResult = Apollo.QueryResult<IndexerAllTxesCountQuery, IndexerAllTxesCountQueryVariables>;
 export const IndexerRetirementByNodeIdDocument = gql`
     query IndexerRetirementByNodeId($nodeId: ID!) {
   retirement(nodeId: $nodeId) {

@@ -19,7 +19,7 @@ export const useCreditClassDetailsSimpleStyles = makeStyles()(
         paddingBottom: theme.spacing(12),
       },
       [theme.breakpoints.down('sm')]: {
-        paddingBottom: theme.spacing(20),
+        paddingBottom: theme.spacing(10),
       },
     },
     label: {
@@ -44,7 +44,7 @@ export const useCreditClassDetailsSimpleStyles = makeStyles()(
         marginBottom: theme.spacing(12),
       },
       [theme.breakpoints.down('sm')]: {
-        marginBottom: theme.spacing(10),
+        marginBottom: theme.spacing(5),
       },
     },
     sidebarItemMargin: {

@@ -126,6 +126,11 @@ const CreditClassCard = ({
                 label={OFFSET_GENERATION_METHOD}
                 items={generationMethods}
                 sx={{ maxWidth: { sm: 195 }, mr: 5, mb: { xs: 5, sm: 0 } }}
+                sxListContainer={{
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                }}
+                sxListItem={{ mb: 1 }}
               />
             )}
             {methodology && (

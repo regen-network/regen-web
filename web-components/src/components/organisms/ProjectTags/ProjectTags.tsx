@@ -45,7 +45,7 @@ const ProjectTags = ({
             display: 'flex',
             flexDirection: 'column',
             mr: { sm: 3.25 },
-            mb: { xs: 10, sm: hasManyTags ? 10 : 0 },
+            mb: hasEcosystems ? 10 : 0,
           }}
         >
           <Label sx={{ fontSize: { xs: 11 }, mb: 2 }}>{activitiesLabel}</Label>

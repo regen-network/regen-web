@@ -41,10 +41,10 @@ export const useCreditClassDetailsSimpleStyles = makeStyles()(
     },
     marginBottom: {
       [theme.breakpoints.up('sm')]: {
-        marginBottom: theme.spacing(12),
+        marginBottom: theme.spacing(10),
       },
       [theme.breakpoints.down('sm')]: {
-        marginBottom: theme.spacing(5),
+        marginBottom: theme.spacing(7.5),
       },
     },
     sidebarItemMargin: {

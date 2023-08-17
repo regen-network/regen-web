@@ -133,7 +133,19 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
     return (
       <NoCredits
         title="No credits issued"
-        icon={<NoEcocreditsIcon sx={{ width: 100, height: 100 }} />}
+        icon={
+          <NoEcocreditsIcon
+            sx={{
+              width: 100,
+              height: 100,
+            }}
+          />
+        }
+        sx={{
+          border: theme => `1px solid ${theme.palette.info.light}`,
+          borderTop: 0,
+          borderRadius: '0 0 10px 10px',
+        }}
       />
     );
   }

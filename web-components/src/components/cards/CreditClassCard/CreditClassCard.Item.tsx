@@ -49,7 +49,7 @@ export const CreditClassCardItem = ({
                 sx={{ mr: 2.5, width: 24, height: 24 }}
               />
             )}
-            {name && <Body>{name}</Body>}
+            {name && typeof name == 'string' && <Body>{name}</Body>}
           </Flex>
         ))}
         {isLinkItem(link) && (

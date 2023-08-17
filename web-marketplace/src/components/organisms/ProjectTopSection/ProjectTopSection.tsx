@@ -1,10 +1,8 @@
 import LazyLoad from 'react-lazyload';
 import { Box, Grid, Skeleton } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
-import { TRANSPARENT_PIXEL } from 'utils/image/transparentPixel';
 
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
-import { ProjectImpactCardProps } from 'web-components/lib/components/cards/ProjectImpactCard/ProjectImpactCard';
 import { ActionCard } from 'web-components/lib/components/molecules/ActionCard/ActionCard';
 import { RoundLogoItemsList } from 'web-components/lib/components/molecules/RoundLogoItemsList/RoundLogoItemsList';
 import { ImpactTags } from 'web-components/lib/components/organisms/ImpactTags/ImpactTags';
@@ -15,20 +13,13 @@ import { Body, Label, Title } from 'web-components/lib/components/typography';
 import { useLedger } from 'ledger';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
-import { getSanityImgSrc } from 'lib/imgSrc';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllCreditCertificationQuery } from 'lib/queries/react-query/sanity/getAllCreditCertificationQuery/getAllCreditCertificationQuery';
 import { getAllCreditTypeQuery } from 'lib/queries/react-query/sanity/getAllCreditTypeQuery/getAllCreditTypeQuery';
 import { getAllOffsetMethodQuery } from 'lib/queries/react-query/sanity/getAllOffsetMethodQuery/getAllOffsetMethodQuery';
 import { getAllProjectRatingQuery } from 'lib/queries/react-query/sanity/getAllProjectRatingQuery/getAllProjectRatingQuery';
 
-import {
-  normalizeCoBenefit,
-  normalizePrimaryImpact,
-} from 'pages/CreditClassDetails/CreditClassDetails.utils';
-import useCoBenefits from 'pages/CreditClassDetails/hooks/useCoBenefits';
 import useImpact from 'pages/CreditClassDetails/hooks/useImpact';
-import usePrimaryImpact from 'pages/CreditClassDetails/hooks/usePrimaryImpact';
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
@@ -37,7 +28,6 @@ import {
 import { useTags } from 'hooks/useTags';
 
 import { ProjectBatchTotals } from '../../molecules';
-import { PRIMARY_IMPACT } from './ProjectTopSection.constants';
 import { ProjectTopSectionCreditClassCard } from './ProjectTopSection.CreditClassCard';
 import {
   ProjectTopSectionQuoteMark,
@@ -47,7 +37,6 @@ import { ProjectTopSectionProps } from './ProjectTopSection.types';
 import {
   getIconsMapping,
   getRatingsAndCertificationsData,
-  getSdgsImages,
   parseMethodologies,
   parseOffChainProject,
   parseProjectMetadata,

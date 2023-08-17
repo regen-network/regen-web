@@ -12,7 +12,11 @@ export const getMetadataQuery = ({
 }: ReactQueryMetadataProps): ReactQueryMetadataResponse => ({
   queryKey: ['metadata', iri ?? ''],
   queryFn: async () => {
-    return await getMetadata(iri, dataClient);
+    try {
+      return await getMetadata(iri, dataClient);
+    } catch {
+      return null;
+    }
   },
   ...params,
 });

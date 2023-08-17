@@ -55,7 +55,7 @@ export const parseMethodologies = ({
     };
   }
 
-  return methodologies?.['schema:itemListElement'][0];
+  return methodologies?.['schema:itemListElement']?.[0];
 };
 
 /* parseProjectMetadata */

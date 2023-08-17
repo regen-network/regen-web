@@ -213,7 +213,11 @@ export function ProjectCard({
                           size="xs"
                           mobileSize="xxs"
                           color="info.main"
-                          sx={{ mr: 1, fontWeight: 800 }}
+                          sx={{
+                            mr: 1,
+                            fontWeight: 800,
+                            textTransform: 'uppercase',
+                          }}
                         >
                           {AVG_PRICE_LABEL}
                         </Subtitle>

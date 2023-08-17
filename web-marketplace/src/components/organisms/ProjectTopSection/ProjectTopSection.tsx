@@ -262,7 +262,7 @@ function ProjectTopSection({
           {ratingsAndCertificationsData && (
             <RoundLogoItemsList
               {...ratingsAndCertificationsData}
-              sx={{ mb: 5 }}
+              sx={{ mb: { xs: 7.5, sm: 10 } }}
             />
           )}
           {otcCard && (

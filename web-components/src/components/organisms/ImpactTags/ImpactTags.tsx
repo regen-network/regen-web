@@ -40,15 +40,15 @@ const ImpactTags = ({
         ...sxToArray(sx),
       ]}
     >
-      <Box sx={{ mb: isImpactCollapsed ? 5 : 0 }}>
+      <Box sx={{ mb: isImpactCollapsed ? { xs: 7.5, sm: 10 } : 0 }}>
         <CollapseList
           items={impact.map(imp => (
             <Box
               key={imp.name}
               sx={{
-                pb: [2.5, 4.25],
+                pb: [2.5, 3.75],
                 ':last-child': {
-                  pb: isImpactCollapsed ? 0 : 5,
+                  pb: isImpactCollapsed ? 0 : { xs: 7.5, sm: 10 },
                 },
               }}
             >
@@ -62,7 +62,7 @@ const ImpactTags = ({
           activities={activities}
           ecosystems={ecosystems}
           sx={{
-            mb: 5,
+            mb: { xs: 7.5, sm: 10 },
           }}
           activitiesLabel={activitiesLabel}
         />

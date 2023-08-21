@@ -1,15 +1,17 @@
-import { IndexerAllTxesQuery } from 'generated/indexer-graphql';
+import { IndexerAllEcocreditTxesQuery } from 'generated/indexer-graphql';
 import { getHashUrl } from 'lib/block-explorer';
 import { getReadableMessages } from 'lib/ecocredit/api';
 
 import { TxRowData } from './CreditActivityTable.types';
 
 type NormalizeAllTxesParams = {
-  allTxesData?: IndexerAllTxesQuery;
+  allEcocreditTxesData?: IndexerAllEcocreditTxesQuery;
 };
 
-export const normalizeAllTxes = ({ allTxesData }: NormalizeAllTxesParams) => {
-  const allTxes = allTxesData?.allTxes?.nodes;
+export const normalizeAllTxes = ({
+  allEcocreditTxesData,
+}: NormalizeAllTxesParams) => {
+  const allTxes = allEcocreditTxesData?.allEcocreditTxes?.nodes;
   const txRows: TxRowData[] =
     allTxes?.map(tx => {
       return {

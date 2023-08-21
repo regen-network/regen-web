@@ -1,7 +1,0 @@
-query IndexerAllTxesCount {
-  allTxes {
-    nodes {
-      txIdx
-    }
-  }
-}

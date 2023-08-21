@@ -1,0 +1,11 @@
+query IndexerAllEcocreditTxes($first: Int, $offset: Int) {
+  allEcocreditTxes(first: $first, offset: $offset) {
+    nodes {
+      txIdx
+      hash
+      blockHeight
+      data
+    }
+    totalCount
+  }
+}

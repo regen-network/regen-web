@@ -31,7 +31,7 @@ import { Label } from 'web-components/lib/components/typography';
 import { formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { getAllTxes } from 'lib/queries/react-query/registry-server/graphql/indexer/getAllTxes/getAllTxes';
+import { getAllEcocreditTxesQuery } from 'lib/queries/react-query/registry-server/graphql/indexer/getAllEcocreditTxes/getAllEcocreditTxes';
 
 import { getHashUrl } from '../../../lib/block-explorer';
 import { ledgerRESTUri } from '../../../lib/ledger';
@@ -78,8 +78,8 @@ const CreditActivityTable: React.FC<React.PropsWithChildren<unknown>> = () => {
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
-  const { data: allTxesData, isLoading } = useQuery(
-    getAllTxes({
+  const { data: allEcocreditTxesData, isLoading } = useQuery(
+    getAllEcocreditTxesQuery({
       client: graphqlClient,
       first: rowsPerPage,
       offset: rowsPerPage * page,
@@ -87,15 +87,17 @@ const CreditActivityTable: React.FC<React.PropsWithChildren<unknown>> = () => {
     }),
   );
 
-  const txs = normalizeAllTxes({ allTxesData: allTxesData?.data });
+  const txs = normalizeAllTxes({
+    allEcocreditTxesData: allEcocreditTxesData?.data,
+  });
 
   useEffect(() => {
-    const txesCount = allTxesData?.data.allTxes?.totalCount;
+    const txesCount = allEcocreditTxesData?.data.allEcocreditTxes?.totalCount;
 
     if (txesCount) {
       setCountTotal(txesCount);
     }
-  }, [allTxesData, setCountTotal]);
+  }, [allEcocreditTxesData, setCountTotal]);
 
   const createSortHandler =
     (property: keyof TxRowData) => (event: React.MouseEvent<unknown>) => {

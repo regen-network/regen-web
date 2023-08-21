@@ -1813,6 +1813,8 @@ export type Query = Node & {
   retirementByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<Retirement>;
   txByChainNumAndBlockHeightAndTxIdx?: Maybe<Tx>;
   txByHash?: Maybe<Tx>;
+  /** Reads and enables pagination through a set of `Tx`. */
+  allEcocreditTxes?: Maybe<TxesConnection>;
   /** Reads a single `Block` using its globally unique `ID`. */
   block?: Maybe<Block>;
   /** Reads a single `Chain` using its globally unique `ID`. */
@@ -2013,6 +2015,16 @@ export type QueryTxByChainNumAndBlockHeightAndTxIdxArgs = {
 /** The root query type which gives access points into the data universe. */
 export type QueryTxByHashArgs = {
   hash: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllEcocreditTxesArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
 };
 
 
@@ -2732,6 +2744,24 @@ export type UpdateTxPayloadTxEdgeArgs = {
   orderBy?: Maybe<Array<TxesOrderBy>>;
 };
 
+export type IndexerAllEcocreditTxesQueryVariables = Exact<{
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type IndexerAllEcocreditTxesQuery = (
+  { __typename?: 'Query' }
+  & { allEcocreditTxes?: Maybe<(
+    { __typename?: 'TxesConnection' }
+    & Pick<TxesConnection, 'totalCount'>
+    & { nodes: Array<Maybe<(
+      { __typename?: 'Tx' }
+      & Pick<Tx, 'txIdx' | 'hash' | 'blockHeight' | 'data'>
+    )>> }
+  )> }
+);
+
 export type IndexerAllRetirementsByOwnerQueryVariables = Exact<{
   owner: Scalars['String'];
   orderBy: RetirementsOrderBy;
@@ -2768,20 +2798,6 @@ export type IndexerAllTxesQuery = (
   )> }
 );
 
-export type IndexerAllTxesCountQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type IndexerAllTxesCountQuery = (
-  { __typename?: 'Query' }
-  & { allTxes?: Maybe<(
-    { __typename?: 'TxesConnection' }
-    & { nodes: Array<Maybe<(
-      { __typename?: 'Tx' }
-      & Pick<Tx, 'txIdx'>
-    )>> }
-  )> }
-);
-
 export type IndexerRetirementByNodeIdQueryVariables = Exact<{
   nodeId: Scalars['ID'];
 }>;
@@ -2813,6 +2829,48 @@ export const RetirementFieldsFragmentDoc = gql`
   txHash
 }
     `;
+export const IndexerAllEcocreditTxesDocument = gql`
+    query IndexerAllEcocreditTxes($first: Int, $offset: Int) {
+  allEcocreditTxes(first: $first, offset: $offset) {
+    nodes {
+      txIdx
+      hash
+      blockHeight
+      data
+    }
+    totalCount
+  }
+}
+    `;
+
+/**
+ * __useIndexerAllEcocreditTxesQuery__
+ *
+ * To run a query within a React component, call `useIndexerAllEcocreditTxesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIndexerAllEcocreditTxesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useIndexerAllEcocreditTxesQuery({
+ *   variables: {
+ *      first: // value for 'first'
+ *      offset: // value for 'offset'
+ *   },
+ * });
+ */
+export function useIndexerAllEcocreditTxesQuery(baseOptions?: Apollo.QueryHookOptions<IndexerAllEcocreditTxesQuery, IndexerAllEcocreditTxesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<IndexerAllEcocreditTxesQuery, IndexerAllEcocreditTxesQueryVariables>(IndexerAllEcocreditTxesDocument, options);
+      }
+export function useIndexerAllEcocreditTxesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IndexerAllEcocreditTxesQuery, IndexerAllEcocreditTxesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<IndexerAllEcocreditTxesQuery, IndexerAllEcocreditTxesQueryVariables>(IndexerAllEcocreditTxesDocument, options);
+        }
+export type IndexerAllEcocreditTxesQueryHookResult = ReturnType<typeof useIndexerAllEcocreditTxesQuery>;
+export type IndexerAllEcocreditTxesLazyQueryHookResult = ReturnType<typeof useIndexerAllEcocreditTxesLazyQuery>;
+export type IndexerAllEcocreditTxesQueryResult = Apollo.QueryResult<IndexerAllEcocreditTxesQuery, IndexerAllEcocreditTxesQueryVariables>;
 export const IndexerAllRetirementsByOwnerDocument = gql`
     query IndexerAllRetirementsByOwner($owner: String!, $orderBy: RetirementsOrderBy!) {
   allRetirements(condition: {owner: $owner}, orderBy: [$orderBy]) {
@@ -2894,42 +2952,6 @@ export function useIndexerAllTxesLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type IndexerAllTxesQueryHookResult = ReturnType<typeof useIndexerAllTxesQuery>;
 export type IndexerAllTxesLazyQueryHookResult = ReturnType<typeof useIndexerAllTxesLazyQuery>;
 export type IndexerAllTxesQueryResult = Apollo.QueryResult<IndexerAllTxesQuery, IndexerAllTxesQueryVariables>;
-export const IndexerAllTxesCountDocument = gql`
-    query IndexerAllTxesCount {
-  allTxes {
-    nodes {
-      txIdx
-    }
-  }
-}
-    `;
-
-/**
- * __useIndexerAllTxesCountQuery__
- *
- * To run a query within a React component, call `useIndexerAllTxesCountQuery` and pass it any options that fit your needs.
- * When your component renders, `useIndexerAllTxesCountQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useIndexerAllTxesCountQuery({
- *   variables: {
- *   },
- * });
- */
-export function useIndexerAllTxesCountQuery(baseOptions?: Apollo.QueryHookOptions<IndexerAllTxesCountQuery, IndexerAllTxesCountQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<IndexerAllTxesCountQuery, IndexerAllTxesCountQueryVariables>(IndexerAllTxesCountDocument, options);
-      }
-export function useIndexerAllTxesCountLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IndexerAllTxesCountQuery, IndexerAllTxesCountQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<IndexerAllTxesCountQuery, IndexerAllTxesCountQueryVariables>(IndexerAllTxesCountDocument, options);
-        }
-export type IndexerAllTxesCountQueryHookResult = ReturnType<typeof useIndexerAllTxesCountQuery>;
-export type IndexerAllTxesCountLazyQueryHookResult = ReturnType<typeof useIndexerAllTxesCountLazyQuery>;
-export type IndexerAllTxesCountQueryResult = Apollo.QueryResult<IndexerAllTxesCountQuery, IndexerAllTxesCountQueryVariables>;
 export const IndexerRetirementByNodeIdDocument = gql`
     query IndexerRetirementByNodeId($nodeId: ID!) {
   retirement(nodeId: $nodeId) {

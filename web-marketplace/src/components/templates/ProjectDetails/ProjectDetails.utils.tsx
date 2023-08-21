@@ -1,4 +1,6 @@
 import { MouseEvent } from 'react';
+import { MapiResponse } from '@mapbox/mapbox-sdk/lib/classes/mapi-response';
+import { GeocodeResponse } from '@mapbox/mapbox-sdk/services/geocoding';
 
 import PhoneIcon from 'web-components/lib/components/icons/PhoneIcon';
 import StaticMap from 'web-components/lib/components/map/StaticMap';
@@ -104,6 +106,7 @@ type ParseMediaParams = {
     'regen:galleryPhotos' | 'regen:previewPhoto' | 'schema:creditText'
   >;
   geojson: any;
+  geocodingJurisdictionData?: MapiResponse<GeocodeResponse> | null;
 };
 
 type ParseMediaReturn = {
@@ -116,6 +119,7 @@ type ParseMediaReturn = {
 export const parseMedia = ({
   metadata,
   geojson,
+  geocodingJurisdictionData,
 }: ParseMediaParams): ParseMediaReturn => {
   let assets: Asset[] = [];
 
@@ -126,7 +130,13 @@ export const parseMedia = ({
   }
 
   if (geojson) {
-    assets.push(<StaticMap geojson={geojson} mapboxToken={MAPBOX_TOKEN} />);
+    const jurisdictionFallback = geocodingJurisdictionData?.body.features?.[0];
+    assets.push(
+      <StaticMap
+        geojson={geojson ?? jurisdictionFallback}
+        mapboxToken={MAPBOX_TOKEN}
+      />,
+    );
   }
 
   return {

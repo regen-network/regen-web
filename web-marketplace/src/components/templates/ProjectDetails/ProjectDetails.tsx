@@ -21,6 +21,7 @@ import {
 import { getBatchesTotal } from 'lib/ecocredit/api';
 import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
+import { getGeocodingQuery } from 'lib/queries/react-query/mapbox/getGeocodingQuery/getGeocodingQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getProjectByHandleQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByHandleQuery/getProjectByHandleQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
@@ -146,6 +147,13 @@ function ProjectDetails(): JSX.Element {
 
   const onChainProject = projectResponse?.project;
 
+  const { data: geocodingJurisdictionData } = useQuery(
+    getGeocodingQuery({
+      request: { search: onChainProject?.jurisdiction },
+      enabled: !!onChainProject?.jurisdiction,
+    }),
+  );
+
   const offChainProject = isOnChainId
     ? projectByOnChainId?.data.projectByOnChainId
     : projectByHandle?.data.projectByHandle;
@@ -227,7 +235,11 @@ function ProjectDetails(): JSX.Element {
     creditClassName,
   });
 
-  const mediaData = parseMedia({ metadata: offChainProjectMetadata, geojson });
+  const mediaData = parseMedia({
+    metadata: offChainProjectMetadata,
+    geojson,
+    geocodingJurisdictionData,
+  });
 
   const loadingDb = loadingProjectByOnChainId || loadingProjectByHandle;
 

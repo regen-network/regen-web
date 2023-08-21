@@ -124,13 +124,13 @@ export const parseMedia = ({
   let assets: Asset[] = [];
 
   const previewPhoto = metadata?.['regen:previewPhoto'];
+  const jurisdictionFallback = geocodingJurisdictionData?.body.features?.[0];
 
   if (previewPhoto?.['schema:url']) {
     assets.push({ src: previewPhoto['schema:url'], type: 'image' });
   }
 
-  if (geojson) {
-    const jurisdictionFallback = geocodingJurisdictionData?.body.features?.[0];
+  if (geojson || jurisdictionFallback) {
     assets.push(
       <StaticMap
         geojson={geojson ?? jurisdictionFallback}

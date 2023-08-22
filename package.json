@@ -46,13 +46,13 @@
     "@graphql-codegen/typescript-graphql-files-modules": "1.18.1",
     "@graphql-codegen/typescript-operations": "^1.18.0",
     "@graphql-codegen/typescript-react-apollo": "2.2.4",
-    "@storybook/addon-actions": "^7.0.26",
-    "@storybook/addon-essentials": "^7.0.26",
-    "@storybook/addon-interactions": "^7.0.26",
-    "@storybook/addon-links": "^7.0.26",
-    "@storybook/react": "^7.0.26",
-    "@storybook/react-vite": "^7.0.26",
-    "storybook": "^7.0.26",
+    "@storybook/addon-actions": "^7.3.2",
+    "@storybook/addon-essentials": "^7.3.2",
+    "@storybook/addon-interactions": "^7.3.2",
+    "@storybook/addon-links": "^7.3.2",
+    "@storybook/react": "^7.3.2",
+    "@storybook/react-vite": "^7.3.2",
+    "storybook": "^7.3.2",
     "@types/css-mediaquery": "^0.1.1",
     "@types/jest": "27.0.3",
     "@types/node": "13.1.1",
@@ -60,6 +60,7 @@
     "css-mediaquery": "0.1.2",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "fsevents": "2.3.3",
     "husky": "^3.1.0",
     "lerna": "^6.4.1",
     "prettier": "2.4.1",
@@ -72,7 +73,8 @@
     "**/@typescript-eslint/parser": "^4.5.0",
     "webpack": "4.44.2",
     "react-error-overlay": "6.0.9",
-    "@emotion/react": "11.10.6"
+    "@emotion/react": "11.10.6",
+    "fsevents": "2.3.3"
   },
   "husky": {
     "hooks": {}

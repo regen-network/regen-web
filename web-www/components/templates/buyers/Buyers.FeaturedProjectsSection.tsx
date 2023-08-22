@@ -36,7 +36,8 @@ const BuyersFeaturedProjectsSection = ({ content, sx }: Props) => {
     >
       <CardsGridContainer cardsCount={projects?.length ?? 0}>
         {projects?.map(projectCard => {
-          const { project } = projectCard as FeaturedProjectCard;
+          const { project, creditClass } = projectCard as FeaturedProjectCard;
+          const { image, link, name } = creditClass?.program ?? {};
 
           return (
             <ProjectCard
@@ -51,6 +52,13 @@ const BuyersFeaturedProjectsSection = ({ content, sx }: Props) => {
               place={project?.location ?? ''}
               area={project?.area ?? undefined}
               areaUnit={project?.areaUnit ?? undefined}
+              program={{
+                name: name ?? '',
+                address: '',
+                type: 'ORGANIZATION',
+                link,
+                image: image?.asset?.url,
+              }}
             />
           );
         })}

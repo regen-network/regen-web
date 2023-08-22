@@ -52,6 +52,7 @@ import useGeojson from './hooks/useGeojson';
 import useSeo from './hooks/useSeo';
 import { useSortedDocuments } from './hooks/useSortedDocuments';
 import { useStakeholders } from './hooks/useStakeholders';
+import { JURISDICTION_REGEX } from './ProjectDetails.constant';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProjects';
 import { ProjectDetailsStakeholders } from './ProjectDetails.Stakeholders';
@@ -146,11 +147,14 @@ function ProjectDetails(): JSX.Element {
   );
 
   const onChainProject = projectResponse?.project;
+  const jurisdiction = onChainProject?.jurisdiction;
+  const countryCodeMatch = jurisdiction?.match(JURISDICTION_REGEX);
+  const countryCode = countryCodeMatch?.[3] || countryCodeMatch?.[1];
 
   const { data: geocodingJurisdictionData } = useQuery(
     getGeocodingQuery({
-      request: { search: onChainProject?.jurisdiction },
-      enabled: !!onChainProject?.jurisdiction,
+      request: { search: countryCode },
+      enabled: !!countryCode,
     }),
   );
 

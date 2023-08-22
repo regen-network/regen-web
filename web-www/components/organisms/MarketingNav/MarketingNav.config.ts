@@ -18,6 +18,7 @@ export const getHeaderColors = (theme: Theme): HeaderColors => ({
   '/wallet-address-registration': theme.palette.primary.light,
   '/mainnet': theme.palette.primary.light,
   '/token': theme.palette.primary.main,
+  '/buyers': theme.palette.primary.light,
 });
 
 export const headerTransparent: BoolProps = {
@@ -43,12 +44,13 @@ export const headerNoBorderBottomPages = [
   '/token',
   '/fund',
   '/case-studies',
+  '/buyers',
 ];
 
 export const menuItems: Item[] = [
   {
     title: 'Corporate buying',
-    href: 'https://app.regen.network/buyers/',
+    href: '/buyers',
   },
   {
     title: 'Registry',

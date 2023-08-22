@@ -1,38 +1,8 @@
-fragment ecologicalCreditCardsSectionFields on HomePageWeb {
+fragment homeEcologicalCreditCardsSectionFields on HomePageWeb {
   homeWebEcologicalCreditCardsSection {
     title
     cards {
-      title
-      description
-      image {
-        ...customImageFields
-      }
-      type {
-        name
-        image {
-          ...imageFields
-        }
-      }
-      creditInfos {
-        country
-        price
-        count
-      }
-      offsetMethods {
-        name
-        icon {
-          ...imageFields
-        }
-      }
-      projectActivities {
-        name
-        icon {
-          ...imageFields
-        }
-      }
-      button {
-        ...buttonFields
-      }
+      ...ecologicalCreditCardFields
     }
   }
 }

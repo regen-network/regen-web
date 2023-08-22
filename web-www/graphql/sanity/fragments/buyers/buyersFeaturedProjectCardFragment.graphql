@@ -1,0 +1,25 @@
+fragment buyersFeaturedProjectCard on FeaturedProjectCard {
+  project {
+    projectName
+    projectId
+    image {
+      ...customImageFields
+    }
+    location
+    area
+    areaUnit
+  }
+  creditClass {
+    path
+    program {
+      name
+      link
+      image {
+        ...imageFields
+      }
+    }
+    image {
+      ...customImageFields
+    }
+  }
+}

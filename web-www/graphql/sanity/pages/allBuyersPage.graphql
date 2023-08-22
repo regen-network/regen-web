@@ -1,0 +1,32 @@
+query allBuyersPage {
+  allBuyersPage {
+    heroSection {
+      ...heroSectionFields
+    }
+    ecologicalCreditsSection {
+      ...imageItemsSectionFields
+    }
+    imageGridSection {
+      ...imageGridSectionFields
+    }
+    ecologicalCreditCardsSection {
+      ...ecologicalCreditCardsSectionFields
+    }
+    featuredProjectCardsSection {
+      ...buyersFeaturedCardsSectionFields
+    }
+    quoteSection {
+      ...buyersQuoteSectionFields
+    }
+    partnersSection {
+      ...buyersPartnersSectionFields
+    }
+    contactSection {
+      ...bottomBannerFields
+    }
+    footerButtonText
+    metadata {
+      ...pageMetadataFields
+    }
+  }
+}

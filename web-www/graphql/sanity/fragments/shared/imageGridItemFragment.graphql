@@ -1,0 +1,10 @@
+fragment imageGridItemFields on ImageGridItem {
+  header
+  descriptionRaw
+  image {
+    ...customImageFields
+  }
+  button {
+    ...buttonFields
+  }
+}

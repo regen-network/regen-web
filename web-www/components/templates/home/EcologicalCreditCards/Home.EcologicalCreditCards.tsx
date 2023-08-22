@@ -7,16 +7,16 @@ import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSl
 import { useEcologicalCreditCardsStyles } from './Home.ecologicalCreditCards.styles';
 
 import ForwardedLink from '@/components/atoms/ForwardedLink/ForwardedLink';
-import { EcologicalCreditCardsSectionFieldsFragment } from '@/generated/sanity-graphql';
+import { HomeEcologicalCreditCardsSectionFieldsFragment } from '@/generated/sanity-graphql';
 import { normalizeEcologicalCreditCards } from '@/lib/utils/normalizers/normalizeEcologicalCreditCards';
 
 type Props = {
-  ecologicalCreditCardsData?: EcologicalCreditCardsSectionFieldsFragment['homeWebEcologicalCreditCardsSection'];
+  ecologicalCreditCardsData?: HomeEcologicalCreditCardsSectionFieldsFragment['homeWebEcologicalCreditCardsSection'];
 };
 
 const EcologicalCreditCardsSection = ({ ecologicalCreditCardsData }: Props) => {
   const cards = normalizeEcologicalCreditCards({
-    ecologicalCreditCardsData,
+    ecologicalCreditCardsData: ecologicalCreditCardsData?.cards,
   });
   const { classes } = useEcologicalCreditCardsStyles();
 

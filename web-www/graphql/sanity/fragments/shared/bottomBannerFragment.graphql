@@ -1,0 +1,13 @@
+fragment bottomBannerFields on BottomBanner {
+  title
+  descriptionRaw
+  button {
+    ...buttonFields
+  }
+  secondButton {
+    ...buttonFields
+  }
+  image {
+    ...customImageFields
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { PropsWithChildren, useEffect, useState } from 'react';
 import { Box, styled, SxProps } from '@mui/material';
 import Tabs, { TabsProps } from '@mui/material/Tabs';
 
@@ -9,7 +9,7 @@ import { a11yProps } from './';
 import { IconTab, IconTabProps } from './IconTab';
 import { TabPanel } from './TabPanel';
 
-interface LinkProps extends LinkItem {
+export interface LinkProps extends LinkItem, PropsWithChildren {
   sx?: SxProps<Theme>;
 }
 

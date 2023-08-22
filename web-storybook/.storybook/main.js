@@ -1,5 +1,8 @@
 const tsconfigPaths = require('vite-tsconfig-paths').default;
 const { mergeConfig } = require('vite');
+const {
+  NodeGlobalsPolyfillPlugin,
+} = require('@esbuild-plugins/node-globals-polyfill');
 const path = require('path');
 
 module.exports = {
@@ -32,7 +35,7 @@ module.exports = {
   core: {
     builder: '@storybook/builder-vite',
   },
-  async viteFinal(config) {
+  async viteFinal(config, { configType }) {
     // Merge custom configuration into the default config
     return mergeConfig(config, {
       resolve: {
@@ -45,6 +48,19 @@ module.exports = {
             ],
           }),
         ],
+      },
+      optimizeDeps: {
+        esbuildOptions: {
+          plugins:
+            configType === 'DEVELOPMENT'
+              ? [
+                  NodeGlobalsPolyfillPlugin({
+                    buffer: true,
+                    process: true,
+                  }),
+                ]
+              : undefined,
+        },
       },
     });
   },

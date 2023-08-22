@@ -28,7 +28,7 @@ const ImpactTags = ({
   sx,
   activitiesLabel,
 }: Props) => {
-  const isImpactCollapsed = impact.length > DEFAULT_COLLAPSED_ITEMS;
+  const isImpactCollapsed = true ?? impact.length > DEFAULT_COLLAPSED_ITEMS;
   return (
     <Box
       sx={[
@@ -42,6 +42,7 @@ const ImpactTags = ({
     >
       <Box sx={{ mb: isImpactCollapsed ? { xs: 7.5, sm: 10 } : 0 }}>
         <CollapseList
+          max={2}
           items={impact.map(imp => (
             <Box
               key={imp.name}

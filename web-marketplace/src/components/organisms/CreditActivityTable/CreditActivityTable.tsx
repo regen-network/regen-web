@@ -31,10 +31,10 @@ import { Label } from 'web-components/lib/components/typography';
 import { formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';
 
+import { getHashUrl } from 'lib/block-explorer';
+import { ledgerRESTUri } from 'lib/ledger';
 import { getAllEcocreditTxesQuery } from 'lib/queries/react-query/registry-server/graphql/indexer/getAllEcocreditTxes/getAllEcocreditTxes';
 
-import { getHashUrl } from '../../../lib/block-explorer';
-import { ledgerRESTUri } from '../../../lib/ledger';
 import { normalizeAllTxes } from './CreditActivityTable.normalizers';
 
 dayjs.extend(relativeTime);

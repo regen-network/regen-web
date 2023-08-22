@@ -32,6 +32,7 @@ export const getAllEcocreditTxesQuery = ({
 
       return data;
     } catch (e) {
+      console.error(e);
       return null;
     }
   },

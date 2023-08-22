@@ -90,7 +90,6 @@ export const getRoutes = ({
         />
         <Route path="verify-email" element={<VerifyEmail />} />
         <Route path="add" element={<Additionality />} />
-        <Route path="buyers" element={<BuyersPage />} />
         <Route
           path="create-methodology"
           element={<Navigate to="/" replace />}

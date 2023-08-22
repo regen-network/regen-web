@@ -78,3 +78,9 @@
   to = "https://app.regen.network"
   force = true
   status = 302
+
+[[redirects]]
+  from = "https://app.regen.network/buyers/"
+  to = "https://www.regen.network/buyers"
+  force = true
+  status = 302

@@ -1,46 +1,31 @@
-import { useEffect, useRef, useState } from 'react';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
+import { useQuery } from '@tanstack/react-query';
 
-import { asyncSome } from 'lib/asyncSome';
+import { getClassesByIssuerQuery } from 'lib/queries/react-query/registry-server/graphql/indexer/getClassesByIssuer/getClassesByIssuer';
+import { useWallet } from 'lib/wallet/wallet';
 
-import { queryClassIssuers } from '../lib/ecocredit/api';
-import { useWallet } from '../lib/wallet/wallet';
-import useQueryListClasses from './useQueryListClasses';
-
-/**
- * Simply returns if user's wallet address was found in an on-chain credit class issuer list
- *  */
-function useQueryIfIssuer(): boolean {
-  const [isIssuer, setIsIssuer] = useState(false);
+function useQueryIsIssuer(): boolean {
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { wallet } = useWallet();
-  const onChainClasses = useQueryListClasses();
-  const isFetchingRef = useRef(false);
+  const address = wallet?.address;
 
-  useEffect(() => {
-    const queryIfIssuer = async (): Promise<void> => {
-      if (!wallet?.address || !onChainClasses?.classes?.length) {
-        setIsIssuer(false);
-        return;
-      }
+  const { data: classesByIssuerData } = useQuery(
+    getClassesByIssuerQuery({
+      enabled: !!address && !!graphqlClient,
+      client: graphqlClient,
+      issuer: address,
+    }),
+  );
 
-      isFetchingRef.current = true;
+  const isIssuer =
+    (classesByIssuerData?.data.allClassIssuers?.nodes?.length ?? 0) > 0;
 
-      const foundOne = await asyncSome(
-        onChainClasses?.classes,
-        async creditClass => {
-          const { issuers } = await queryClassIssuers(creditClass.id);
-          return issuers?.includes(wallet.address);
-        },
-      );
-
-      setIsIssuer(foundOne);
-      isFetchingRef.current = false;
-    };
-
-    if (!isFetchingRef.current) {
-      queryIfIssuer();
-    }
-  }, [onChainClasses?.classes, wallet?.address]);
   return isIssuer;
 }
 
-export { useQueryIfIssuer };
+export { useQueryIsIssuer };

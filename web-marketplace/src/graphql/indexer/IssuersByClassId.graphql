@@ -1,0 +1,9 @@
+query IndexerIssuersByClassId($classId: String) {
+  allClassIssuers(condition: { latest: true, classId: $classId }) {
+    nodes {
+      blockHeight
+      classId
+      issuer
+    }
+  }
+}

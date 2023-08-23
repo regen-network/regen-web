@@ -194,6 +194,128 @@ export enum ChainsOrderBy {
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
 
+export type ClassIssuer = Node & {
+  __typename?: 'ClassIssuer';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
+  type: Scalars['String'];
+  blockHeight: Scalars['BigInt'];
+  txIdx: Scalars['Int'];
+  msgIdx: Scalars['Int'];
+  chainNum: Scalars['Int'];
+  timestamp?: Maybe<Scalars['Datetime']>;
+  txHash: Scalars['String'];
+  classId: Scalars['String'];
+  issuer: Scalars['String'];
+  latest: Scalars['Boolean'];
+  /** Reads a single `MsgEvent` that is related to this `ClassIssuer`. */
+  msgEventByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType?: Maybe<MsgEvent>;
+};
+
+/**
+ * A condition to be used against `ClassIssuer` object types. All fields are tested
+ * for equality and combined with a logical ‘and.’
+ */
+export type ClassIssuerCondition = {
+  /** Checks for equality with the object’s `type` field. */
+  type?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `blockHeight` field. */
+  blockHeight?: Maybe<Scalars['BigInt']>;
+  /** Checks for equality with the object’s `txIdx` field. */
+  txIdx?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `msgIdx` field. */
+  msgIdx?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `chainNum` field. */
+  chainNum?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `timestamp` field. */
+  timestamp?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `txHash` field. */
+  txHash?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `classId` field. */
+  classId?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `issuer` field. */
+  issuer?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `latest` field. */
+  latest?: Maybe<Scalars['Boolean']>;
+};
+
+/** An input for mutations affecting `ClassIssuer` */
+export type ClassIssuerInput = {
+  type: Scalars['String'];
+  blockHeight: Scalars['BigInt'];
+  txIdx: Scalars['Int'];
+  msgIdx: Scalars['Int'];
+  chainNum: Scalars['Int'];
+  timestamp?: Maybe<Scalars['Datetime']>;
+  txHash: Scalars['String'];
+  classId: Scalars['String'];
+  issuer: Scalars['String'];
+  latest?: Maybe<Scalars['Boolean']>;
+};
+
+/** Represents an update to a `ClassIssuer`. Fields that are set will be updated. */
+export type ClassIssuerPatch = {
+  type?: Maybe<Scalars['String']>;
+  blockHeight?: Maybe<Scalars['BigInt']>;
+  txIdx?: Maybe<Scalars['Int']>;
+  msgIdx?: Maybe<Scalars['Int']>;
+  chainNum?: Maybe<Scalars['Int']>;
+  timestamp?: Maybe<Scalars['Datetime']>;
+  txHash?: Maybe<Scalars['String']>;
+  classId?: Maybe<Scalars['String']>;
+  issuer?: Maybe<Scalars['String']>;
+  latest?: Maybe<Scalars['Boolean']>;
+};
+
+/** A connection to a list of `ClassIssuer` values. */
+export type ClassIssuersConnection = {
+  __typename?: 'ClassIssuersConnection';
+  /** A list of `ClassIssuer` objects. */
+  nodes: Array<Maybe<ClassIssuer>>;
+  /** A list of edges which contains the `ClassIssuer` and cursor to aid in pagination. */
+  edges: Array<ClassIssuersEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `ClassIssuer` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `ClassIssuer` edge in the connection. */
+export type ClassIssuersEdge = {
+  __typename?: 'ClassIssuersEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `ClassIssuer` at the end of the edge. */
+  node?: Maybe<ClassIssuer>;
+};
+
+/** Methods to use when ordering `ClassIssuer`. */
+export enum ClassIssuersOrderBy {
+  Natural = 'NATURAL',
+  TypeAsc = 'TYPE_ASC',
+  TypeDesc = 'TYPE_DESC',
+  BlockHeightAsc = 'BLOCK_HEIGHT_ASC',
+  BlockHeightDesc = 'BLOCK_HEIGHT_DESC',
+  TxIdxAsc = 'TX_IDX_ASC',
+  TxIdxDesc = 'TX_IDX_DESC',
+  MsgIdxAsc = 'MSG_IDX_ASC',
+  MsgIdxDesc = 'MSG_IDX_DESC',
+  ChainNumAsc = 'CHAIN_NUM_ASC',
+  ChainNumDesc = 'CHAIN_NUM_DESC',
+  TimestampAsc = 'TIMESTAMP_ASC',
+  TimestampDesc = 'TIMESTAMP_DESC',
+  TxHashAsc = 'TX_HASH_ASC',
+  TxHashDesc = 'TX_HASH_DESC',
+  ClassIdAsc = 'CLASS_ID_ASC',
+  ClassIdDesc = 'CLASS_ID_DESC',
+  IssuerAsc = 'ISSUER_ASC',
+  IssuerDesc = 'ISSUER_DESC',
+  LatestAsc = 'LATEST_ASC',
+  LatestDesc = 'LATEST_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
+
 /** All input for the create `Block` mutation. */
 export type CreateBlockInput = {
   /**
@@ -260,6 +382,41 @@ export type CreateChainPayload = {
 /** The output of our create `Chain` mutation. */
 export type CreateChainPayloadChainEdgeArgs = {
   orderBy?: Maybe<Array<ChainsOrderBy>>;
+};
+
+/** All input for the create `ClassIssuer` mutation. */
+export type CreateClassIssuerInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `ClassIssuer` to be created by this mutation. */
+  classIssuer: ClassIssuerInput;
+};
+
+/** The output of our create `ClassIssuer` mutation. */
+export type CreateClassIssuerPayload = {
+  __typename?: 'CreateClassIssuerPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `ClassIssuer` that was created by this mutation. */
+  classIssuer?: Maybe<ClassIssuer>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `MsgEvent` that is related to this `ClassIssuer`. */
+  msgEventByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType?: Maybe<MsgEvent>;
+  /** An edge for our `ClassIssuer`. May be used by Relay 1. */
+  classIssuerEdge?: Maybe<ClassIssuersEdge>;
+};
+
+
+/** The output of our create `ClassIssuer` mutation. */
+export type CreateClassIssuerPayloadClassIssuerEdgeArgs = {
+  orderBy?: Maybe<Array<ClassIssuersOrderBy>>;
 };
 
 /** All input for the create `MsgEventAttr` mutation. */
@@ -573,6 +730,57 @@ export type DeleteChainPayload = {
 /** The output of our delete `Chain` mutation. */
 export type DeleteChainPayloadChainEdgeArgs = {
   orderBy?: Maybe<Array<ChainsOrderBy>>;
+};
+
+/** All input for the `deleteClassIssuerByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndClassIdAndIssuer` mutation. */
+export type DeleteClassIssuerByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndClassIdAndIssuerInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  chainNum: Scalars['Int'];
+  blockHeight: Scalars['BigInt'];
+  txIdx: Scalars['Int'];
+  msgIdx: Scalars['Int'];
+  classId: Scalars['String'];
+  issuer: Scalars['String'];
+};
+
+/** All input for the `deleteClassIssuer` mutation. */
+export type DeleteClassIssuerInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `ClassIssuer` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `ClassIssuer` mutation. */
+export type DeleteClassIssuerPayload = {
+  __typename?: 'DeleteClassIssuerPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `ClassIssuer` that was deleted by this mutation. */
+  classIssuer?: Maybe<ClassIssuer>;
+  deletedClassIssuerId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `MsgEvent` that is related to this `ClassIssuer`. */
+  msgEventByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType?: Maybe<MsgEvent>;
+  /** An edge for our `ClassIssuer`. May be used by Relay 1. */
+  classIssuerEdge?: Maybe<ClassIssuersEdge>;
+};
+
+
+/** The output of our delete `ClassIssuer` mutation. */
+export type DeleteClassIssuerPayloadClassIssuerEdgeArgs = {
+  orderBy?: Maybe<Array<ClassIssuersOrderBy>>;
 };
 
 /** All input for the `deleteMsgByChainNumAndBlockHeightAndTxIdxAndMsgIdx` mutation. */
@@ -951,6 +1159,8 @@ export type MsgEvent = Node & {
   retirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType: RetirementsConnection;
   /** Reads and enables pagination through a set of `Proposal`. */
   proposalsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType: ProposalsConnection;
+  /** Reads and enables pagination through a set of `ClassIssuer`. */
+  classIssuersByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType: ClassIssuersConnection;
 };
 
 
@@ -973,6 +1183,17 @@ export type MsgEventProposalsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeArg
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProposalsOrderBy>>;
   condition?: Maybe<ProposalCondition>;
+};
+
+
+export type MsgEventClassIssuersByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ClassIssuersOrderBy>>;
+  condition?: Maybe<ClassIssuerCondition>;
 };
 
 export type MsgEventAttr = Node & {
@@ -1221,6 +1442,8 @@ export type Mutation = {
   createBlock?: Maybe<CreateBlockPayload>;
   /** Creates a single `Chain`. */
   createChain?: Maybe<CreateChainPayload>;
+  /** Creates a single `ClassIssuer`. */
+  createClassIssuer?: Maybe<CreateClassIssuerPayload>;
   /** Creates a single `Msg`. */
   createMsg?: Maybe<CreateMsgPayload>;
   /** Creates a single `MsgEvent`. */
@@ -1243,6 +1466,10 @@ export type Mutation = {
   updateChainByNum?: Maybe<UpdateChainPayload>;
   /** Updates a single `Chain` using a unique key and a patch. */
   updateChainByChainId?: Maybe<UpdateChainPayload>;
+  /** Updates a single `ClassIssuer` using its globally unique id and a patch. */
+  updateClassIssuer?: Maybe<UpdateClassIssuerPayload>;
+  /** Updates a single `ClassIssuer` using a unique key and a patch. */
+  updateClassIssuerByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndClassIdAndIssuer?: Maybe<UpdateClassIssuerPayload>;
   /** Updates a single `Msg` using its globally unique id and a patch. */
   updateMsg?: Maybe<UpdateMsgPayload>;
   /** Updates a single `Msg` using a unique key and a patch. */
@@ -1279,6 +1506,10 @@ export type Mutation = {
   deleteChainByNum?: Maybe<DeleteChainPayload>;
   /** Deletes a single `Chain` using a unique key. */
   deleteChainByChainId?: Maybe<DeleteChainPayload>;
+  /** Deletes a single `ClassIssuer` using its globally unique id. */
+  deleteClassIssuer?: Maybe<DeleteClassIssuerPayload>;
+  /** Deletes a single `ClassIssuer` using a unique key. */
+  deleteClassIssuerByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndClassIdAndIssuer?: Maybe<DeleteClassIssuerPayload>;
   /** Deletes a single `Msg` using its globally unique id. */
   deleteMsg?: Maybe<DeleteMsgPayload>;
   /** Deletes a single `Msg` using a unique key. */
@@ -1317,6 +1548,12 @@ export type MutationCreateBlockArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateChainArgs = {
   input: CreateChainInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateClassIssuerArgs = {
+  input: CreateClassIssuerInput;
 };
 
 
@@ -1383,6 +1620,18 @@ export type MutationUpdateChainByNumArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateChainByChainIdArgs = {
   input: UpdateChainByChainIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateClassIssuerArgs = {
+  input: UpdateClassIssuerInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateClassIssuerByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndClassIdAndIssuerArgs = {
+  input: UpdateClassIssuerByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndClassIdAndIssuerInput;
 };
 
 
@@ -1491,6 +1740,18 @@ export type MutationDeleteChainByNumArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteChainByChainIdArgs = {
   input: DeleteChainByChainIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteClassIssuerArgs = {
+  input: DeleteClassIssuerInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteClassIssuerByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndClassIdAndIssuerArgs = {
+  input: DeleteClassIssuerByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndClassIdAndIssuerInput;
 };
 
 
@@ -1791,6 +2052,8 @@ export type Query = Node & {
   allBlocks?: Maybe<BlocksConnection>;
   /** Reads and enables pagination through a set of `Chain`. */
   allChains?: Maybe<ChainsConnection>;
+  /** Reads and enables pagination through a set of `ClassIssuer`. */
+  allClassIssuers?: Maybe<ClassIssuersConnection>;
   /** Reads and enables pagination through a set of `Msg`. */
   allMsgs?: Maybe<MsgsConnection>;
   /** Reads and enables pagination through a set of `MsgEvent`. */
@@ -1806,6 +2069,7 @@ export type Query = Node & {
   blockByChainNumAndHeight?: Maybe<Block>;
   chainByNum?: Maybe<Chain>;
   chainByChainId?: Maybe<Chain>;
+  classIssuerByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndClassIdAndIssuer?: Maybe<ClassIssuer>;
   msgByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<Msg>;
   msgEventByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType?: Maybe<MsgEvent>;
   msgEventAttrByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAndKeyAndValueHash?: Maybe<MsgEventAttr>;
@@ -1819,6 +2083,8 @@ export type Query = Node & {
   block?: Maybe<Block>;
   /** Reads a single `Chain` using its globally unique `ID`. */
   chain?: Maybe<Chain>;
+  /** Reads a single `ClassIssuer` using its globally unique `ID`. */
+  classIssuer?: Maybe<ClassIssuer>;
   /** Reads a single `Msg` using its globally unique `ID`. */
   msg?: Maybe<Msg>;
   /** Reads a single `MsgEvent` using its globally unique `ID`. */
@@ -1861,6 +2127,18 @@ export type QueryAllChainsArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ChainsOrderBy>>;
   condition?: Maybe<ChainCondition>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllClassIssuersArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ClassIssuersOrderBy>>;
+  condition?: Maybe<ClassIssuerCondition>;
 };
 
 
@@ -1956,6 +2234,17 @@ export type QueryChainByChainIdArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryClassIssuerByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndClassIdAndIssuerArgs = {
+  chainNum: Scalars['Int'];
+  blockHeight: Scalars['BigInt'];
+  txIdx: Scalars['Int'];
+  msgIdx: Scalars['Int'];
+  classId: Scalars['String'];
+  issuer: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryMsgByChainNumAndBlockHeightAndTxIdxAndMsgIdxArgs = {
   chainNum: Scalars['Int'];
   blockHeight: Scalars['BigInt'];
@@ -2036,6 +2325,12 @@ export type QueryBlockArgs = {
 
 /** The root query type which gives access points into the data universe. */
 export type QueryChainArgs = {
+  nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryClassIssuerArgs = {
   nodeId: Scalars['ID'];
 };
 
@@ -2415,6 +2710,60 @@ export type UpdateChainPayload = {
 /** The output of our update `Chain` mutation. */
 export type UpdateChainPayloadChainEdgeArgs = {
   orderBy?: Maybe<Array<ChainsOrderBy>>;
+};
+
+/** All input for the `updateClassIssuerByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndClassIdAndIssuer` mutation. */
+export type UpdateClassIssuerByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndClassIdAndIssuerInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `ClassIssuer` being updated. */
+  classIssuerPatch: ClassIssuerPatch;
+  chainNum: Scalars['Int'];
+  blockHeight: Scalars['BigInt'];
+  txIdx: Scalars['Int'];
+  msgIdx: Scalars['Int'];
+  classId: Scalars['String'];
+  issuer: Scalars['String'];
+};
+
+/** All input for the `updateClassIssuer` mutation. */
+export type UpdateClassIssuerInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `ClassIssuer` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `ClassIssuer` being updated. */
+  classIssuerPatch: ClassIssuerPatch;
+};
+
+/** The output of our update `ClassIssuer` mutation. */
+export type UpdateClassIssuerPayload = {
+  __typename?: 'UpdateClassIssuerPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `ClassIssuer` that was updated by this mutation. */
+  classIssuer?: Maybe<ClassIssuer>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `MsgEvent` that is related to this `ClassIssuer`. */
+  msgEventByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType?: Maybe<MsgEvent>;
+  /** An edge for our `ClassIssuer`. May be used by Relay 1. */
+  classIssuerEdge?: Maybe<ClassIssuersEdge>;
+};
+
+
+/** The output of our update `ClassIssuer` mutation. */
+export type UpdateClassIssuerPayloadClassIssuerEdgeArgs = {
+  orderBy?: Maybe<Array<ClassIssuersOrderBy>>;
 };
 
 /** All input for the `updateMsgByChainNumAndBlockHeightAndTxIdxAndMsgIdx` mutation. */
@@ -2798,6 +3147,38 @@ export type IndexerAllTxesQuery = (
   )> }
 );
 
+export type IndexerClassesByIssuerQueryVariables = Exact<{
+  issuer?: Maybe<Scalars['String']>;
+}>;
+
+
+export type IndexerClassesByIssuerQuery = (
+  { __typename?: 'Query' }
+  & { allClassIssuers?: Maybe<(
+    { __typename?: 'ClassIssuersConnection' }
+    & { nodes: Array<Maybe<(
+      { __typename?: 'ClassIssuer' }
+      & Pick<ClassIssuer, 'blockHeight' | 'classId' | 'issuer'>
+    )>> }
+  )> }
+);
+
+export type IndexerIssuersByClassIdQueryVariables = Exact<{
+  classId?: Maybe<Scalars['String']>;
+}>;
+
+
+export type IndexerIssuersByClassIdQuery = (
+  { __typename?: 'Query' }
+  & { allClassIssuers?: Maybe<(
+    { __typename?: 'ClassIssuersConnection' }
+    & { nodes: Array<Maybe<(
+      { __typename?: 'ClassIssuer' }
+      & Pick<ClassIssuer, 'blockHeight' | 'classId' | 'issuer'>
+    )>> }
+  )> }
+);
+
 export type IndexerRetirementByNodeIdQueryVariables = Exact<{
   nodeId: Scalars['ID'];
 }>;
@@ -2952,6 +3333,84 @@ export function useIndexerAllTxesLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type IndexerAllTxesQueryHookResult = ReturnType<typeof useIndexerAllTxesQuery>;
 export type IndexerAllTxesLazyQueryHookResult = ReturnType<typeof useIndexerAllTxesLazyQuery>;
 export type IndexerAllTxesQueryResult = Apollo.QueryResult<IndexerAllTxesQuery, IndexerAllTxesQueryVariables>;
+export const IndexerClassesByIssuerDocument = gql`
+    query IndexerClassesByIssuer($issuer: String) {
+  allClassIssuers(condition: {latest: true, issuer: $issuer}) {
+    nodes {
+      blockHeight
+      classId
+      issuer
+    }
+  }
+}
+    `;
+
+/**
+ * __useIndexerClassesByIssuerQuery__
+ *
+ * To run a query within a React component, call `useIndexerClassesByIssuerQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIndexerClassesByIssuerQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useIndexerClassesByIssuerQuery({
+ *   variables: {
+ *      issuer: // value for 'issuer'
+ *   },
+ * });
+ */
+export function useIndexerClassesByIssuerQuery(baseOptions?: Apollo.QueryHookOptions<IndexerClassesByIssuerQuery, IndexerClassesByIssuerQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<IndexerClassesByIssuerQuery, IndexerClassesByIssuerQueryVariables>(IndexerClassesByIssuerDocument, options);
+      }
+export function useIndexerClassesByIssuerLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IndexerClassesByIssuerQuery, IndexerClassesByIssuerQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<IndexerClassesByIssuerQuery, IndexerClassesByIssuerQueryVariables>(IndexerClassesByIssuerDocument, options);
+        }
+export type IndexerClassesByIssuerQueryHookResult = ReturnType<typeof useIndexerClassesByIssuerQuery>;
+export type IndexerClassesByIssuerLazyQueryHookResult = ReturnType<typeof useIndexerClassesByIssuerLazyQuery>;
+export type IndexerClassesByIssuerQueryResult = Apollo.QueryResult<IndexerClassesByIssuerQuery, IndexerClassesByIssuerQueryVariables>;
+export const IndexerIssuersByClassIdDocument = gql`
+    query IndexerIssuersByClassId($classId: String) {
+  allClassIssuers(condition: {latest: true, classId: $classId}) {
+    nodes {
+      blockHeight
+      classId
+      issuer
+    }
+  }
+}
+    `;
+
+/**
+ * __useIndexerIssuersByClassIdQuery__
+ *
+ * To run a query within a React component, call `useIndexerIssuersByClassIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIndexerIssuersByClassIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useIndexerIssuersByClassIdQuery({
+ *   variables: {
+ *      classId: // value for 'classId'
+ *   },
+ * });
+ */
+export function useIndexerIssuersByClassIdQuery(baseOptions?: Apollo.QueryHookOptions<IndexerIssuersByClassIdQuery, IndexerIssuersByClassIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<IndexerIssuersByClassIdQuery, IndexerIssuersByClassIdQueryVariables>(IndexerIssuersByClassIdDocument, options);
+      }
+export function useIndexerIssuersByClassIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IndexerIssuersByClassIdQuery, IndexerIssuersByClassIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<IndexerIssuersByClassIdQuery, IndexerIssuersByClassIdQueryVariables>(IndexerIssuersByClassIdDocument, options);
+        }
+export type IndexerIssuersByClassIdQueryHookResult = ReturnType<typeof useIndexerIssuersByClassIdQuery>;
+export type IndexerIssuersByClassIdLazyQueryHookResult = ReturnType<typeof useIndexerIssuersByClassIdLazyQuery>;
+export type IndexerIssuersByClassIdQueryResult = Apollo.QueryResult<IndexerIssuersByClassIdQuery, IndexerIssuersByClassIdQueryVariables>;
 export const IndexerRetirementByNodeIdDocument = gql`
     query IndexerRetirementByNodeId($nodeId: ID!) {
   retirement(nodeId: $nodeId) {

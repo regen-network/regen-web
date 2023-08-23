@@ -27,14 +27,14 @@ import {
 } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { Link } from 'components/atoms';
 import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator';
-import { useQueryIfIssuer } from 'hooks/useQueryIfIssuer';
+import { useQueryIsIssuer } from 'hooks/useQueryIfIssuer';
 import { useQueryIfProjectAdmin } from 'hooks/useQueryIfProjectAdmin';
 
 import { dashBoardStyles } from './Dashboard.styles';
 import { getSocialsLinks } from './Dashboard.utils';
 
 const Dashboard = (): JSX.Element => {
-  const isIssuer = useQueryIfIssuer();
+  const isIssuer = useQueryIsIssuer();
   const isCreditClassCreator = useQueryIfCreditClassCreator();
   const isProjectAdmin = useQueryIfProjectAdmin();
   const showProjectTab = isIssuer || isProjectAdmin;

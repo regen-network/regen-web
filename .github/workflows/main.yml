@@ -15,6 +15,7 @@ jobs:
       - name: install
         run: |
           yarn install
+          yarn bootstrap
 
       - name: build-app
         run: yarn build

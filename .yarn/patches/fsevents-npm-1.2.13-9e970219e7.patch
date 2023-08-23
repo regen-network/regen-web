@@ -1,0 +1,12 @@
+diff --git a/fsevents.js b/fsevents.js
+index 939cc7e3d177dd2d4f889f8e97a5b7d3c59fc68f..e469059ac6defb501e860e549faefc306ec12bac 100644
+--- a/fsevents.js
++++ b/fsevents.js
+@@ -73,6 +73,7 @@ function proxies(ctor, target) {
+ function getFileType(flags) {
+   if (Native.Constants.kFSEventStreamEventFlagItemIsFile & flags) return 'file';
+   if (Native.Constants.kFSEventStreamEventFlagItemIsDir & flags) return 'directory';
++  if (Native.Constants.kFSEventStreamEventFlagMustScanSubDirs & flags) return 'directory';
+   if (Native.Constants.kFSEventStreamEventFlagItemIsSymlink & flags) return 'symlink';
+ }
+ 

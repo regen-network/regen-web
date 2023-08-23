@@ -8,6 +8,7 @@ import ProjectImpactCard, {
 import { ProjectTagType } from '../../molecules/ProjectTag/ProjectTag.types';
 import { CollapseList } from '../../organisms/CollapseList/CollapseList';
 import { ProjectTags } from '../../organisms/ProjectTags/ProjectTags';
+import { DEFAULT_COLLAPSED_ITEMS } from '../CollapseList/CollapseList.constants';
 
 export interface Props {
   classes?: {
@@ -26,36 +27,48 @@ const ImpactTags = ({
   impact,
   sx,
   activitiesLabel,
-}: Props) => (
-  <Box
-    sx={[
-      {
-        display: 'flex',
-        flexDirection: 'column',
-        maxWidth: 500,
-      },
-      ...sxToArray(sx),
-    ]}
-  >
-    <CollapseList
-      sx={{ pb: [7.5, 10] }}
-      items={impact.map(imp => (
-        <Box key={imp.name} sx={{ pb: [2.5, 4.25] }}>
-          <ProjectImpactCard {...imp} />
-        </Box>
-      ))}
-    />
-    {(activities || ecosystems) && (
-      <ProjectTags
-        activities={activities}
-        ecosystems={ecosystems}
-        sx={{
-          mb: 5,
-        }}
-        activitiesLabel={activitiesLabel}
-      />
-    )}
-  </Box>
-);
+}: Props) => {
+  const isImpactCollapsed = impact.length > DEFAULT_COLLAPSED_ITEMS;
+  return (
+    <Box
+      sx={[
+        {
+          display: 'flex',
+          flexDirection: 'column',
+          maxWidth: 500,
+        },
+        ...sxToArray(sx),
+      ]}
+    >
+      <Box sx={{ mb: isImpactCollapsed ? { xs: 7.5, sm: 10 } : 0 }}>
+        <CollapseList
+          items={impact.map(imp => (
+            <Box
+              key={imp.name}
+              sx={{
+                pb: [2.5, 3.75],
+                ':last-child': {
+                  pb: isImpactCollapsed ? 0 : { xs: 7.5, sm: 10 },
+                },
+              }}
+            >
+              <ProjectImpactCard {...imp} />
+            </Box>
+          ))}
+        />
+      </Box>
+      {(activities || ecosystems) && (
+        <ProjectTags
+          activities={activities}
+          ecosystems={ecosystems}
+          sx={{
+            mb: { xs: 7.5, sm: 10 },
+          }}
+          activitiesLabel={activitiesLabel}
+        />
+      )}
+    </Box>
+  );
+};
 
 export { ImpactTags };

@@ -1,7 +1,12 @@
+import { SxProps } from '@mui/material';
+
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import { ProjectPageMetadataLD, ProjectStoryMedia } from 'lib/db/types/json-ld';
 
 export type ProjectStorySectionProps = {
   projectPageMetadata?: ProjectPageMetadataLD;
+  sx?: SxProps<Theme>;
 };
 
 export type StoryTextProps = {

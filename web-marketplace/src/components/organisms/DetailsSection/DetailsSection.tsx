@@ -1,4 +1,5 @@
 import { Grid, useMediaQuery, useTheme } from '@mui/material';
+import { sxToArray } from 'utils/mui/sxToArray';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { CredibilityCard } from 'web-components/lib/components/cards/CredibilityCard/CredibilityCard';
@@ -26,6 +27,7 @@ export const DetailsSection: React.FC<
   creditClassDoc,
   credit,
   children,
+  sx = [],
 }) => {
   const theme = useTheme<Theme>();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -36,7 +38,10 @@ export const DetailsSection: React.FC<
 
   return (
     <div>
-      <Section visibleOverflow sx={{ root: { pb: [20, 21.25] } }}>
+      <Section
+        visibleOverflow
+        sx={{ root: [{ pb: [20, 25] }, ...sxToArray(sx)] }}
+      >
         {(hasCredibilityCards || hasClassInfo) && (
           <Grid
             container

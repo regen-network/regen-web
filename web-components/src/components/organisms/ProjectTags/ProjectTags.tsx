@@ -45,7 +45,7 @@ const ProjectTags = ({
             display: 'flex',
             flexDirection: 'column',
             mr: { sm: 3.25 },
-            mb: { xs: 10, sm: hasManyTags ? 10 : 0 },
+            mb: hasManyTags ? { xs: 7.5, sm: 10 } : { xs: 7.5, sm: 0 },
           }}
         >
           <Label sx={{ fontSize: { xs: 11 }, mb: 2 }}>{activitiesLabel}</Label>
@@ -63,7 +63,10 @@ const ProjectTags = ({
               <ProjectTag
                 tag={activity}
                 key={activity?.name}
-                sx={{ mb: 2, mr: { xs: 2, sm: hasManyActivities ? 2 : 0 } }}
+                sx={{
+                  mb: hasManyActivities ? { xs: 2.5, sm: 3.75 } : 0,
+                  mr: { xs: 2, sm: hasManyActivities ? 2 : 0 },
+                }}
               />
             ))}
           </Box>
@@ -86,7 +89,10 @@ const ProjectTags = ({
               <ProjectTag
                 tag={ecosystem}
                 key={ecosystem.name}
-                sx={{ mb: 2, mr: { xs: 2, sm: hasManyEcosystems ? 2 : 0 } }}
+                sx={{
+                  mb: hasManyActivities ? { xs: 2.5, sm: 3.75 } : 0,
+                  mr: { xs: 2, sm: hasManyEcosystems ? 2 : 0 },
+                }}
               />
             ))}
           </Box>

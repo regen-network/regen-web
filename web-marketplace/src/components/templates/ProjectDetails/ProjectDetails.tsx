@@ -359,11 +359,17 @@ function ProjectDetails(): JSX.Element {
         program={program}
       />
 
-      {hasProjectPhotos && <Gallery photos={projectPhotos} />}
+      {hasProjectPhotos && <Gallery photos={projectPhotos} sx={{ mb: 25 }} />}
+
+      <ProjectStorySection
+        projectPageMetadata={offChainProjectMetadata}
+        sx={{ pt: { xs: 0 } }}
+      />
 
       <DetailsSection
         header={sanityProjectPage?.projectDetailsSection}
         credibilityCards={sanityProjectData?.allProject?.[0]?.credibilityCards}
+        sx={{ pt: { xs: 0 } }}
       >
         <ProjectDetailsStakeholders
           projectDeveloper={projectDeveloper}
@@ -373,10 +379,9 @@ function ProjectDetails(): JSX.Element {
         />
       </DetailsSection>
 
-      <ProjectStorySection projectPageMetadata={offChainProjectMetadata} />
-
-      <div
+      <Box
         className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}
+        sx={{ ':nth-of-type(odd)': { pt: { xs: 25 } } }}
       >
         <ProjectDetailsTableTabs
           sortedDocuments={sortedDocuments}
@@ -390,8 +395,9 @@ function ProjectDetails(): JSX.Element {
           }}
           paginationParams={paginationParams}
           setPaginationParams={setPaginationParams}
+          sx={{ pt: { xs: 0 } }}
         />
-      </div>
+      </Box>
 
       {managementActions && <ManagementActions actions={managementActions} />}
 

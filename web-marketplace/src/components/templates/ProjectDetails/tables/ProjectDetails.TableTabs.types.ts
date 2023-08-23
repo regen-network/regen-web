@@ -1,4 +1,7 @@
+import { SxProps } from '@mui/material';
+
 import { SortCallbacksType } from 'web-components/lib/components/table/ActionsTable';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { Document } from 'generated/graphql';
 import {
@@ -13,4 +16,5 @@ export type ProjectDetailsTableTabsProps = {
   sortCallbacksDocuments?: SortCallbacksType;
   projectMetadata?: AnchoredProjectMetadataLD | LegacyProjectMetadataLD;
   onChainProjectId?: string;
+  sx?: SxProps<Theme>;
 } & ProjectMiddleSectionProps;

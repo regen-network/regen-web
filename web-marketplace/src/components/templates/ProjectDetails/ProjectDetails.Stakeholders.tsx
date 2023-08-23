@@ -28,7 +28,7 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
   return (
     <Grid container>
       {program && (
-        <Grid item xs={12} sm={sm}>
+        <Grid item xs={12} sm={sm} sx={{ mb: { xs: 8.25, sm: 0 } }}>
           <UserInfoWithTitle
             user={program}
             title="program"
@@ -44,7 +44,7 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
         </Grid>
       )}
       {admin && (
-        <Grid item xs={12} sm={sm}>
+        <Grid item xs={12} sm={sm} sx={{ mb: { xs: 8.25, sm: 0 } }}>
           <UserInfoWithTitle
             user={admin}
             title="admin"

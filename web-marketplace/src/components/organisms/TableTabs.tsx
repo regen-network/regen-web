@@ -1,4 +1,5 @@
-import { Box, useTheme } from '@mui/material';
+import { Box, SxProps, useTheme } from '@mui/material';
+import { sxToArray } from 'utils/mui/sxToArray';
 
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
@@ -6,20 +7,27 @@ import {
   containerPaddingX,
   containerStyles,
 } from 'web-components/lib/styles/container';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
-export const TableTabs = ({ tabs }: { tabs: IconTabProps[] }) => {
+type Props = {
+  sx?: SxProps<Theme>;
+  tabs: IconTabProps[];
+};
+
+export const TableTabs = ({ tabs, sx = [] }: Props) => {
   const theme = useTheme();
   if (tabs.length === 0) {
     return null;
   }
   return (
     <Box
-      sx={{
-        ...containerStyles,
-        ...containerPaddingX,
-        paddingTop: { xs: 20, sm: 27.5 },
-        paddingBottom: { xs: 20, sm: 25 },
-      }}
+      sx={[
+        { ...containerStyles },
+        { ...containerPaddingX },
+        { paddingTop: { xs: 20, sm: 27.5 } },
+        { paddingBottom: { xs: 20, sm: 25 } },
+        ...sxToArray(sx),
+      ]}
     >
       <IconTabs
         tabs={tabs}

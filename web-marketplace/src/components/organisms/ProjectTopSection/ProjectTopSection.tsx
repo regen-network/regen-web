@@ -220,7 +220,7 @@ function ProjectTopSection({
                 totals={batchData.totals}
                 sx={{
                   mt: { xs: 10, sm: 12, md: 16 },
-                  mb: { xs: 10, sm: 12, md: 25 },
+                  mb: quote ? { xs: 10, sm: 12, md: 25 } : {},
                 }}
               />
             )}
@@ -257,16 +257,16 @@ function ProjectTopSection({
           <ImpactTags
             activities={activityTags}
             ecosystems={ecosystemTags}
-            impact={impact}
+            impact={[...impact]}
           />
           {ratingsAndCertificationsData && (
             <RoundLogoItemsList
               {...ratingsAndCertificationsData}
-              sx={{ mt: 5 }}
+              sx={{ mb: { xs: 7.5, sm: 10 } }}
             />
           )}
           {otcCard && (
-            <Box sx={{ mt: 5 }}>
+            <Box>
               <ActionCard {...otcCard} variant="column" />
             </Box>
           )}

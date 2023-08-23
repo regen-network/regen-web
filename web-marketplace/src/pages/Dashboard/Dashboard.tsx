@@ -27,8 +27,8 @@ import {
 } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { Link } from 'components/atoms';
 import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator';
-import { useQueryIsIssuer } from 'hooks/useQueryIfIssuer';
-import { useQueryIfProjectAdmin } from 'hooks/useQueryIfProjectAdmin';
+import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
+import { useQueryIsProjectAdmin } from 'hooks/useQueryIsProjectAdmin';
 
 import { dashBoardStyles } from './Dashboard.styles';
 import { getSocialsLinks } from './Dashboard.utils';
@@ -36,7 +36,7 @@ import { getSocialsLinks } from './Dashboard.utils';
 const Dashboard = (): JSX.Element => {
   const isIssuer = useQueryIsIssuer();
   const isCreditClassCreator = useQueryIfCreditClassCreator();
-  const isProjectAdmin = useQueryIfProjectAdmin();
+  const isProjectAdmin = useQueryIsProjectAdmin();
   const showProjectTab = isIssuer || isProjectAdmin;
   const { wallet, accountId, partyByAddr } = useWallet();
   const location = useLocation();

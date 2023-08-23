@@ -64,6 +64,7 @@ services:
       DATABASE_URL: postgres://postgres:password@localhost:5432/indexer
       REGEN_API: http://localhost:1317
       REGEN_RPC: http://localhost:26657
+      START_BLOCK_OVERRIDE: 1
     entrypoint: ["/bin/sh", "-c", "./scripts/indexer_start.sh"]
     network_mode: host
     depends_on:

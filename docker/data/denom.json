@@ -1,0 +1,23 @@
+[
+  {
+    "base": "eco.uC.NCT",
+    "denom_units": [
+      {
+        "aliases": [],
+        "denom": "eco.uC.NCT",
+        "exponent": 0
+      },
+      {
+        "aliases": [],
+        "denom": "eco.C.NCT",
+        "exponent": 6
+      }
+    ],
+    "description": "Nature Carbon Ton (NCT) is a carbon token standard backed 1:1 by carbon credits issued by Verra, a global leader in the voluntary carbon market. NCT credits on Regen Network have been tokenized by Toucan.earth. More info here: https://regen.network/nct",
+    "display": "eco.C.NCT",
+    "name": "NCT",
+    "symbol": "NCT",
+    "uri": "",
+    "uri_hash": ""
+  }
+]

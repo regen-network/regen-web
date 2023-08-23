@@ -257,7 +257,7 @@ function ProjectTopSection({
           <ImpactTags
             activities={activityTags}
             ecosystems={ecosystemTags}
-            impact={impact}
+            impact={[...impact]}
           />
           {ratingsAndCertificationsData && (
             <RoundLogoItemsList

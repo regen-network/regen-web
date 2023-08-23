@@ -29,8 +29,6 @@ export default defineConfig(({ mode }) => {
         assets: path.resolve(__dirname, 'src/assets'),
         config: path.resolve(__dirname, 'src/config'),
         ledger: path.resolve(__dirname, 'src/ledger'),
-        stream: 'stream-browserify',
-        https: 'agent-base',
       },
     },
     build:

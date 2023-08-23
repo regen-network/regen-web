@@ -21,6 +21,7 @@ import {
 import { getBatchesTotal } from 'lib/ecocredit/api';
 import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
+import { getGeocodingQuery } from 'lib/queries/react-query/mapbox/getGeocodingQuery/getGeocodingQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getProjectByHandleQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByHandleQuery/getProjectByHandleQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
@@ -51,6 +52,7 @@ import useGeojson from './hooks/useGeojson';
 import useSeo from './hooks/useSeo';
 import { useSortedDocuments } from './hooks/useSortedDocuments';
 import { useStakeholders } from './hooks/useStakeholders';
+import { JURISDICTION_REGEX } from './ProjectDetails.constant';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProjects';
 import { ProjectDetailsStakeholders } from './ProjectDetails.Stakeholders';
@@ -145,6 +147,16 @@ function ProjectDetails(): JSX.Element {
   );
 
   const onChainProject = projectResponse?.project;
+  const jurisdiction = onChainProject?.jurisdiction;
+  const countryCodeMatch = jurisdiction?.match(JURISDICTION_REGEX);
+  const countryCode = countryCodeMatch?.[3] || countryCodeMatch?.[1];
+
+  const { data: geocodingJurisdictionData } = useQuery(
+    getGeocodingQuery({
+      request: { search: countryCode },
+      enabled: !!countryCode,
+    }),
+  );
 
   const offChainProject = isOnChainId
     ? projectByOnChainId?.data.projectByOnChainId
@@ -227,7 +239,11 @@ function ProjectDetails(): JSX.Element {
     creditClassName,
   });
 
-  const mediaData = parseMedia({ metadata: offChainProjectMetadata, geojson });
+  const mediaData = parseMedia({
+    metadata: offChainProjectMetadata,
+    geojson,
+    geocodingJurisdictionData,
+  });
 
   const loadingDb = loadingProjectByOnChainId || loadingProjectByHandle;
 

@@ -1,3 +1,5 @@
+import { MsgSend as MsgSendCosmos } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/tx';
+import { MsgUpdateClient } from '@regen-network/api/lib/generated/ibc/core/client/v1/tx';
 import {
   MsgCreate,
   MsgPut,
@@ -59,6 +61,10 @@ export const ECOCREDIT_MESSAGE_TYPES = {
     message: `/${MsgSend.$type}`,
     readable: 'send',
   },
+  SEND_COSMOS: {
+    message: `/${MsgSendCosmos.$type}`,
+    readable: 'send',
+  },
   UPDATE_CLASS_ADMIN: {
     message: `/${MsgUpdateClassAdmin.$type}`,
     readable: 'update class admin',
@@ -102,6 +108,10 @@ export const ECOCREDIT_MESSAGE_TYPES = {
   UPDATE_CLASS_META_ALPHA: {
     message: `/${MsgUpdateClassMetadataAlpha.$type}`,
     readable: 'update class metadata',
+  },
+  UPDATE_CLIENT: {
+    message: `/${MsgUpdateClient.$type}`,
+    readable: 'update client',
   },
   CREATE_BASKET: {
     message: `/${MsgCreate.$type}`,

@@ -10,7 +10,7 @@ export * from './BridgedEcocreditsTable/BridgedEcocreditsTable';
 export * from './BridgeModal/BridgeModal';
 export * from './BuyCreditsModal/BuyCreditsModal';
 export * from './ConfirmationModal';
-export * from './CreditActivityTable';
+export * from './CreditActivityTable/CreditActivityTable';
 export * from './CreditBatches/CreditBatches';
 export * from './CreditClassCards';
 export * from './CreditClassConnectSection';

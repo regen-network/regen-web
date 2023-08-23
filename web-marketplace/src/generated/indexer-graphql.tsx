@@ -367,6 +367,41 @@ export type CreateMsgPayloadMsgEdgeArgs = {
   orderBy?: Maybe<Array<MsgsOrderBy>>;
 };
 
+/** All input for the create `Proposal` mutation. */
+export type CreateProposalInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Proposal` to be created by this mutation. */
+  proposal: ProposalInput;
+};
+
+/** The output of our create `Proposal` mutation. */
+export type CreateProposalPayload = {
+  __typename?: 'CreateProposalPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Proposal` that was created by this mutation. */
+  proposal?: Maybe<Proposal>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `MsgEvent` that is related to this `Proposal`. */
+  msgEventByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType?: Maybe<MsgEvent>;
+  /** An edge for our `Proposal`. May be used by Relay 1. */
+  proposalEdge?: Maybe<ProposalsEdge>;
+};
+
+
+/** The output of our create `Proposal` mutation. */
+export type CreateProposalPayloadProposalEdgeArgs = {
+  orderBy?: Maybe<Array<ProposalsOrderBy>>;
+};
+
 /** All input for the create `Retirement` mutation. */
 export type CreateRetirementInput = {
   /**
@@ -691,6 +726,55 @@ export type DeleteMsgPayloadMsgEdgeArgs = {
   orderBy?: Maybe<Array<MsgsOrderBy>>;
 };
 
+/** All input for the `deleteProposalByChainNumAndBlockHeightAndTxIdxAndMsgIdx` mutation. */
+export type DeleteProposalByChainNumAndBlockHeightAndTxIdxAndMsgIdxInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  chainNum: Scalars['Int'];
+  blockHeight: Scalars['BigInt'];
+  txIdx: Scalars['Int'];
+  msgIdx: Scalars['Int'];
+};
+
+/** All input for the `deleteProposal` mutation. */
+export type DeleteProposalInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `Proposal` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `Proposal` mutation. */
+export type DeleteProposalPayload = {
+  __typename?: 'DeleteProposalPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Proposal` that was deleted by this mutation. */
+  proposal?: Maybe<Proposal>;
+  deletedProposalId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `MsgEvent` that is related to this `Proposal`. */
+  msgEventByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType?: Maybe<MsgEvent>;
+  /** An edge for our `Proposal`. May be used by Relay 1. */
+  proposalEdge?: Maybe<ProposalsEdge>;
+};
+
+
+/** The output of our delete `Proposal` mutation. */
+export type DeleteProposalPayloadProposalEdgeArgs = {
+  orderBy?: Maybe<Array<ProposalsOrderBy>>;
+};
+
 /** All input for the `deleteRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdx` mutation. */
 export type DeleteRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdxInput = {
   /**
@@ -865,6 +949,8 @@ export type MsgEvent = Node & {
   msgByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<Msg>;
   /** Reads and enables pagination through a set of `Retirement`. */
   retirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType: RetirementsConnection;
+  /** Reads and enables pagination through a set of `Proposal`. */
+  proposalsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType: ProposalsConnection;
 };
 
 
@@ -876,6 +962,17 @@ export type MsgEventRetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeA
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<RetirementsOrderBy>>;
   condition?: Maybe<RetirementCondition>;
+};
+
+
+export type MsgEventProposalsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProposalsOrderBy>>;
+  condition?: Maybe<ProposalCondition>;
 };
 
 export type MsgEventAttr = Node & {
@@ -1130,6 +1227,8 @@ export type Mutation = {
   createMsgEvent?: Maybe<CreateMsgEventPayload>;
   /** Creates a single `MsgEventAttr`. */
   createMsgEventAttr?: Maybe<CreateMsgEventAttrPayload>;
+  /** Creates a single `Proposal`. */
+  createProposal?: Maybe<CreateProposalPayload>;
   /** Creates a single `Retirement`. */
   createRetirement?: Maybe<CreateRetirementPayload>;
   /** Creates a single `Tx`. */
@@ -1156,6 +1255,10 @@ export type Mutation = {
   updateMsgEventAttr?: Maybe<UpdateMsgEventAttrPayload>;
   /** Updates a single `MsgEventAttr` using a unique key and a patch. */
   updateMsgEventAttrByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAndKeyAndValueHash?: Maybe<UpdateMsgEventAttrPayload>;
+  /** Updates a single `Proposal` using its globally unique id and a patch. */
+  updateProposal?: Maybe<UpdateProposalPayload>;
+  /** Updates a single `Proposal` using a unique key and a patch. */
+  updateProposalByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<UpdateProposalPayload>;
   /** Updates a single `Retirement` using its globally unique id and a patch. */
   updateRetirement?: Maybe<UpdateRetirementPayload>;
   /** Updates a single `Retirement` using a unique key and a patch. */
@@ -1188,6 +1291,10 @@ export type Mutation = {
   deleteMsgEventAttr?: Maybe<DeleteMsgEventAttrPayload>;
   /** Deletes a single `MsgEventAttr` using a unique key. */
   deleteMsgEventAttrByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAndKeyAndValueHash?: Maybe<DeleteMsgEventAttrPayload>;
+  /** Deletes a single `Proposal` using its globally unique id. */
+  deleteProposal?: Maybe<DeleteProposalPayload>;
+  /** Deletes a single `Proposal` using a unique key. */
+  deleteProposalByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<DeleteProposalPayload>;
   /** Deletes a single `Retirement` using its globally unique id. */
   deleteRetirement?: Maybe<DeleteRetirementPayload>;
   /** Deletes a single `Retirement` using a unique key. */
@@ -1228,6 +1335,12 @@ export type MutationCreateMsgEventArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateMsgEventAttrArgs = {
   input: CreateMsgEventAttrInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateProposalArgs = {
+  input: CreateProposalInput;
 };
 
 
@@ -1306,6 +1419,18 @@ export type MutationUpdateMsgEventAttrArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateMsgEventAttrByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAndKeyAndValueHashArgs = {
   input: UpdateMsgEventAttrByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAndKeyAndValueHashInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateProposalArgs = {
+  input: UpdateProposalInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateProposalByChainNumAndBlockHeightAndTxIdxAndMsgIdxArgs = {
+  input: UpdateProposalByChainNumAndBlockHeightAndTxIdxAndMsgIdxInput;
 };
 
 
@@ -1406,6 +1531,18 @@ export type MutationDeleteMsgEventAttrByChainNumAndBlockHeightAndTxIdxAndMsgIdxA
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteProposalArgs = {
+  input: DeleteProposalInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteProposalByChainNumAndBlockHeightAndTxIdxAndMsgIdxArgs = {
+  input: DeleteProposalByChainNumAndBlockHeightAndTxIdxAndMsgIdxInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteRetirementArgs = {
   input: DeleteRetirementInput;
 };
@@ -1453,6 +1590,191 @@ export type PageInfo = {
   endCursor?: Maybe<Scalars['Cursor']>;
 };
 
+export type Proposal = Node & {
+  __typename?: 'Proposal';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
+  type: Scalars['String'];
+  blockHeight: Scalars['BigInt'];
+  txIdx: Scalars['Int'];
+  msgIdx: Scalars['Int'];
+  chainNum: Scalars['Int'];
+  timestamp?: Maybe<Scalars['Datetime']>;
+  txHash: Scalars['String'];
+  proposalId: Scalars['BigInt'];
+  status: Scalars['String'];
+  groupPolicyAddress: Scalars['String'];
+  metadata: Scalars['String'];
+  proposers: Array<Maybe<Scalars['String']>>;
+  submitTime?: Maybe<Scalars['Datetime']>;
+  groupVersion: Scalars['BigInt'];
+  groupPolicyVersion: Scalars['BigInt'];
+  finalTallyResult: Scalars['JSON'];
+  votingPeriodEnd: Scalars['Datetime'];
+  executorResult: Scalars['String'];
+  messages: Scalars['JSON'];
+  /** Reads a single `MsgEvent` that is related to this `Proposal`. */
+  msgEventByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType?: Maybe<MsgEvent>;
+};
+
+/**
+ * A condition to be used against `Proposal` object types. All fields are tested
+ * for equality and combined with a logical ‘and.’
+ */
+export type ProposalCondition = {
+  /** Checks for equality with the object’s `type` field. */
+  type?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `blockHeight` field. */
+  blockHeight?: Maybe<Scalars['BigInt']>;
+  /** Checks for equality with the object’s `txIdx` field. */
+  txIdx?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `msgIdx` field. */
+  msgIdx?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `chainNum` field. */
+  chainNum?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `timestamp` field. */
+  timestamp?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `txHash` field. */
+  txHash?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `proposalId` field. */
+  proposalId?: Maybe<Scalars['BigInt']>;
+  /** Checks for equality with the object’s `status` field. */
+  status?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `groupPolicyAddress` field. */
+  groupPolicyAddress?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `metadata` field. */
+  metadata?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `proposers` field. */
+  proposers?: Maybe<Array<Maybe<Scalars['String']>>>;
+  /** Checks for equality with the object’s `submitTime` field. */
+  submitTime?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `groupVersion` field. */
+  groupVersion?: Maybe<Scalars['BigInt']>;
+  /** Checks for equality with the object’s `groupPolicyVersion` field. */
+  groupPolicyVersion?: Maybe<Scalars['BigInt']>;
+  /** Checks for equality with the object’s `finalTallyResult` field. */
+  finalTallyResult?: Maybe<Scalars['JSON']>;
+  /** Checks for equality with the object’s `votingPeriodEnd` field. */
+  votingPeriodEnd?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `executorResult` field. */
+  executorResult?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `messages` field. */
+  messages?: Maybe<Scalars['JSON']>;
+};
+
+/** An input for mutations affecting `Proposal` */
+export type ProposalInput = {
+  type: Scalars['String'];
+  blockHeight: Scalars['BigInt'];
+  txIdx: Scalars['Int'];
+  msgIdx: Scalars['Int'];
+  chainNum: Scalars['Int'];
+  timestamp?: Maybe<Scalars['Datetime']>;
+  txHash: Scalars['String'];
+  proposalId: Scalars['BigInt'];
+  status: Scalars['String'];
+  groupPolicyAddress: Scalars['String'];
+  metadata: Scalars['String'];
+  proposers: Array<Maybe<Scalars['String']>>;
+  submitTime?: Maybe<Scalars['Datetime']>;
+  groupVersion: Scalars['BigInt'];
+  groupPolicyVersion: Scalars['BigInt'];
+  finalTallyResult: Scalars['JSON'];
+  votingPeriodEnd: Scalars['Datetime'];
+  executorResult: Scalars['String'];
+  messages: Scalars['JSON'];
+};
+
+/** Represents an update to a `Proposal`. Fields that are set will be updated. */
+export type ProposalPatch = {
+  type?: Maybe<Scalars['String']>;
+  blockHeight?: Maybe<Scalars['BigInt']>;
+  txIdx?: Maybe<Scalars['Int']>;
+  msgIdx?: Maybe<Scalars['Int']>;
+  chainNum?: Maybe<Scalars['Int']>;
+  timestamp?: Maybe<Scalars['Datetime']>;
+  txHash?: Maybe<Scalars['String']>;
+  proposalId?: Maybe<Scalars['BigInt']>;
+  status?: Maybe<Scalars['String']>;
+  groupPolicyAddress?: Maybe<Scalars['String']>;
+  metadata?: Maybe<Scalars['String']>;
+  proposers?: Maybe<Array<Maybe<Scalars['String']>>>;
+  submitTime?: Maybe<Scalars['Datetime']>;
+  groupVersion?: Maybe<Scalars['BigInt']>;
+  groupPolicyVersion?: Maybe<Scalars['BigInt']>;
+  finalTallyResult?: Maybe<Scalars['JSON']>;
+  votingPeriodEnd?: Maybe<Scalars['Datetime']>;
+  executorResult?: Maybe<Scalars['String']>;
+  messages?: Maybe<Scalars['JSON']>;
+};
+
+/** A connection to a list of `Proposal` values. */
+export type ProposalsConnection = {
+  __typename?: 'ProposalsConnection';
+  /** A list of `Proposal` objects. */
+  nodes: Array<Maybe<Proposal>>;
+  /** A list of edges which contains the `Proposal` and cursor to aid in pagination. */
+  edges: Array<ProposalsEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Proposal` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Proposal` edge in the connection. */
+export type ProposalsEdge = {
+  __typename?: 'ProposalsEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Proposal` at the end of the edge. */
+  node?: Maybe<Proposal>;
+};
+
+/** Methods to use when ordering `Proposal`. */
+export enum ProposalsOrderBy {
+  Natural = 'NATURAL',
+  TypeAsc = 'TYPE_ASC',
+  TypeDesc = 'TYPE_DESC',
+  BlockHeightAsc = 'BLOCK_HEIGHT_ASC',
+  BlockHeightDesc = 'BLOCK_HEIGHT_DESC',
+  TxIdxAsc = 'TX_IDX_ASC',
+  TxIdxDesc = 'TX_IDX_DESC',
+  MsgIdxAsc = 'MSG_IDX_ASC',
+  MsgIdxDesc = 'MSG_IDX_DESC',
+  ChainNumAsc = 'CHAIN_NUM_ASC',
+  ChainNumDesc = 'CHAIN_NUM_DESC',
+  TimestampAsc = 'TIMESTAMP_ASC',
+  TimestampDesc = 'TIMESTAMP_DESC',
+  TxHashAsc = 'TX_HASH_ASC',
+  TxHashDesc = 'TX_HASH_DESC',
+  ProposalIdAsc = 'PROPOSAL_ID_ASC',
+  ProposalIdDesc = 'PROPOSAL_ID_DESC',
+  StatusAsc = 'STATUS_ASC',
+  StatusDesc = 'STATUS_DESC',
+  GroupPolicyAddressAsc = 'GROUP_POLICY_ADDRESS_ASC',
+  GroupPolicyAddressDesc = 'GROUP_POLICY_ADDRESS_DESC',
+  MetadataAsc = 'METADATA_ASC',
+  MetadataDesc = 'METADATA_DESC',
+  ProposersAsc = 'PROPOSERS_ASC',
+  ProposersDesc = 'PROPOSERS_DESC',
+  SubmitTimeAsc = 'SUBMIT_TIME_ASC',
+  SubmitTimeDesc = 'SUBMIT_TIME_DESC',
+  GroupVersionAsc = 'GROUP_VERSION_ASC',
+  GroupVersionDesc = 'GROUP_VERSION_DESC',
+  GroupPolicyVersionAsc = 'GROUP_POLICY_VERSION_ASC',
+  GroupPolicyVersionDesc = 'GROUP_POLICY_VERSION_DESC',
+  FinalTallyResultAsc = 'FINAL_TALLY_RESULT_ASC',
+  FinalTallyResultDesc = 'FINAL_TALLY_RESULT_DESC',
+  VotingPeriodEndAsc = 'VOTING_PERIOD_END_ASC',
+  VotingPeriodEndDesc = 'VOTING_PERIOD_END_DESC',
+  ExecutorResultAsc = 'EXECUTOR_RESULT_ASC',
+  ExecutorResultDesc = 'EXECUTOR_RESULT_DESC',
+  MessagesAsc = 'MESSAGES_ASC',
+  MessagesDesc = 'MESSAGES_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
+
 /** The root query type which gives access points into the data universe. */
 export type Query = Node & {
   __typename?: 'Query';
@@ -1475,6 +1797,8 @@ export type Query = Node & {
   allMsgEvents?: Maybe<MsgEventsConnection>;
   /** Reads and enables pagination through a set of `MsgEventAttr`. */
   allMsgEventAttrs?: Maybe<MsgEventAttrsConnection>;
+  /** Reads and enables pagination through a set of `Proposal`. */
+  allProposals?: Maybe<ProposalsConnection>;
   /** Reads and enables pagination through a set of `Retirement`. */
   allRetirements?: Maybe<RetirementsConnection>;
   /** Reads and enables pagination through a set of `Tx`. */
@@ -1485,9 +1809,12 @@ export type Query = Node & {
   msgByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<Msg>;
   msgEventByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType?: Maybe<MsgEvent>;
   msgEventAttrByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAndKeyAndValueHash?: Maybe<MsgEventAttr>;
+  proposalByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<Proposal>;
   retirementByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<Retirement>;
   txByChainNumAndBlockHeightAndTxIdx?: Maybe<Tx>;
   txByHash?: Maybe<Tx>;
+  /** Reads and enables pagination through a set of `Tx`. */
+  allEcocreditTxes?: Maybe<TxesConnection>;
   /** Reads a single `Block` using its globally unique `ID`. */
   block?: Maybe<Block>;
   /** Reads a single `Chain` using its globally unique `ID`. */
@@ -1498,6 +1825,8 @@ export type Query = Node & {
   msgEvent?: Maybe<MsgEvent>;
   /** Reads a single `MsgEventAttr` using its globally unique `ID`. */
   msgEventAttr?: Maybe<MsgEventAttr>;
+  /** Reads a single `Proposal` using its globally unique `ID`. */
+  proposal?: Maybe<Proposal>;
   /** Reads a single `Retirement` using its globally unique `ID`. */
   retirement?: Maybe<Retirement>;
   /** Reads a single `Tx` using its globally unique `ID`. */
@@ -1568,6 +1897,18 @@ export type QueryAllMsgEventAttrsArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<MsgEventAttrsOrderBy>>;
   condition?: Maybe<MsgEventAttrCondition>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllProposalsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProposalsOrderBy>>;
+  condition?: Maybe<ProposalCondition>;
 };
 
 
@@ -1646,6 +1987,15 @@ export type QueryMsgEventAttrByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAnd
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryProposalByChainNumAndBlockHeightAndTxIdxAndMsgIdxArgs = {
+  chainNum: Scalars['Int'];
+  blockHeight: Scalars['BigInt'];
+  txIdx: Scalars['Int'];
+  msgIdx: Scalars['Int'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdxArgs = {
   chainNum: Scalars['Int'];
   blockHeight: Scalars['BigInt'];
@@ -1665,6 +2015,16 @@ export type QueryTxByChainNumAndBlockHeightAndTxIdxArgs = {
 /** The root query type which gives access points into the data universe. */
 export type QueryTxByHashArgs = {
   hash: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllEcocreditTxesArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
 };
 
 
@@ -1694,6 +2054,12 @@ export type QueryMsgEventArgs = {
 
 /** The root query type which gives access points into the data universe. */
 export type QueryMsgEventAttrArgs = {
+  nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryProposalArgs = {
   nodeId: Scalars['ID'];
 };
 
@@ -2211,6 +2577,58 @@ export type UpdateMsgPayloadMsgEdgeArgs = {
   orderBy?: Maybe<Array<MsgsOrderBy>>;
 };
 
+/** All input for the `updateProposalByChainNumAndBlockHeightAndTxIdxAndMsgIdx` mutation. */
+export type UpdateProposalByChainNumAndBlockHeightAndTxIdxAndMsgIdxInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `Proposal` being updated. */
+  proposalPatch: ProposalPatch;
+  chainNum: Scalars['Int'];
+  blockHeight: Scalars['BigInt'];
+  txIdx: Scalars['Int'];
+  msgIdx: Scalars['Int'];
+};
+
+/** All input for the `updateProposal` mutation. */
+export type UpdateProposalInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `Proposal` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `Proposal` being updated. */
+  proposalPatch: ProposalPatch;
+};
+
+/** The output of our update `Proposal` mutation. */
+export type UpdateProposalPayload = {
+  __typename?: 'UpdateProposalPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Proposal` that was updated by this mutation. */
+  proposal?: Maybe<Proposal>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `MsgEvent` that is related to this `Proposal`. */
+  msgEventByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType?: Maybe<MsgEvent>;
+  /** An edge for our `Proposal`. May be used by Relay 1. */
+  proposalEdge?: Maybe<ProposalsEdge>;
+};
+
+
+/** The output of our update `Proposal` mutation. */
+export type UpdateProposalPayloadProposalEdgeArgs = {
+  orderBy?: Maybe<Array<ProposalsOrderBy>>;
+};
+
 /** All input for the `updateRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdx` mutation. */
 export type UpdateRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdxInput = {
   /**
@@ -2326,6 +2744,24 @@ export type UpdateTxPayloadTxEdgeArgs = {
   orderBy?: Maybe<Array<TxesOrderBy>>;
 };
 
+export type IndexerAllEcocreditTxesQueryVariables = Exact<{
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type IndexerAllEcocreditTxesQuery = (
+  { __typename?: 'Query' }
+  & { allEcocreditTxes?: Maybe<(
+    { __typename?: 'TxesConnection' }
+    & Pick<TxesConnection, 'totalCount'>
+    & { nodes: Array<Maybe<(
+      { __typename?: 'Tx' }
+      & Pick<Tx, 'txIdx' | 'hash' | 'blockHeight' | 'data'>
+    )>> }
+  )> }
+);
+
 export type IndexerAllRetirementsByOwnerQueryVariables = Exact<{
   owner: Scalars['String'];
   orderBy: RetirementsOrderBy;
@@ -2339,6 +2775,25 @@ export type IndexerAllRetirementsByOwnerQuery = (
     & { nodes: Array<Maybe<(
       { __typename?: 'Retirement' }
       & RetirementFieldsFragment
+    )>> }
+  )> }
+);
+
+export type IndexerAllTxesQueryVariables = Exact<{
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<TxesOrderBy> | TxesOrderBy>;
+}>;
+
+
+export type IndexerAllTxesQuery = (
+  { __typename?: 'Query' }
+  & { allTxes?: Maybe<(
+    { __typename?: 'TxesConnection' }
+    & Pick<TxesConnection, 'totalCount'>
+    & { nodes: Array<Maybe<(
+      { __typename?: 'Tx' }
+      & Pick<Tx, 'txIdx' | 'hash' | 'blockHeight' | 'data'>
     )>> }
   )> }
 );
@@ -2374,6 +2829,48 @@ export const RetirementFieldsFragmentDoc = gql`
   txHash
 }
     `;
+export const IndexerAllEcocreditTxesDocument = gql`
+    query IndexerAllEcocreditTxes($first: Int, $offset: Int) {
+  allEcocreditTxes(first: $first, offset: $offset) {
+    nodes {
+      txIdx
+      hash
+      blockHeight
+      data
+    }
+    totalCount
+  }
+}
+    `;
+
+/**
+ * __useIndexerAllEcocreditTxesQuery__
+ *
+ * To run a query within a React component, call `useIndexerAllEcocreditTxesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIndexerAllEcocreditTxesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useIndexerAllEcocreditTxesQuery({
+ *   variables: {
+ *      first: // value for 'first'
+ *      offset: // value for 'offset'
+ *   },
+ * });
+ */
+export function useIndexerAllEcocreditTxesQuery(baseOptions?: Apollo.QueryHookOptions<IndexerAllEcocreditTxesQuery, IndexerAllEcocreditTxesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<IndexerAllEcocreditTxesQuery, IndexerAllEcocreditTxesQueryVariables>(IndexerAllEcocreditTxesDocument, options);
+      }
+export function useIndexerAllEcocreditTxesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IndexerAllEcocreditTxesQuery, IndexerAllEcocreditTxesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<IndexerAllEcocreditTxesQuery, IndexerAllEcocreditTxesQueryVariables>(IndexerAllEcocreditTxesDocument, options);
+        }
+export type IndexerAllEcocreditTxesQueryHookResult = ReturnType<typeof useIndexerAllEcocreditTxesQuery>;
+export type IndexerAllEcocreditTxesLazyQueryHookResult = ReturnType<typeof useIndexerAllEcocreditTxesLazyQuery>;
+export type IndexerAllEcocreditTxesQueryResult = Apollo.QueryResult<IndexerAllEcocreditTxesQuery, IndexerAllEcocreditTxesQueryVariables>;
 export const IndexerAllRetirementsByOwnerDocument = gql`
     query IndexerAllRetirementsByOwner($owner: String!, $orderBy: RetirementsOrderBy!) {
   allRetirements(condition: {owner: $owner}, orderBy: [$orderBy]) {
@@ -2412,6 +2909,49 @@ export function useIndexerAllRetirementsByOwnerLazyQuery(baseOptions?: Apollo.La
 export type IndexerAllRetirementsByOwnerQueryHookResult = ReturnType<typeof useIndexerAllRetirementsByOwnerQuery>;
 export type IndexerAllRetirementsByOwnerLazyQueryHookResult = ReturnType<typeof useIndexerAllRetirementsByOwnerLazyQuery>;
 export type IndexerAllRetirementsByOwnerQueryResult = Apollo.QueryResult<IndexerAllRetirementsByOwnerQuery, IndexerAllRetirementsByOwnerQueryVariables>;
+export const IndexerAllTxesDocument = gql`
+    query IndexerAllTxes($first: Int, $offset: Int, $orderBy: [TxesOrderBy!]) {
+  allTxes(first: $first, offset: $offset, orderBy: $orderBy) {
+    nodes {
+      txIdx
+      hash
+      blockHeight
+      data
+    }
+    totalCount
+  }
+}
+    `;
+
+/**
+ * __useIndexerAllTxesQuery__
+ *
+ * To run a query within a React component, call `useIndexerAllTxesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIndexerAllTxesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useIndexerAllTxesQuery({
+ *   variables: {
+ *      first: // value for 'first'
+ *      offset: // value for 'offset'
+ *      orderBy: // value for 'orderBy'
+ *   },
+ * });
+ */
+export function useIndexerAllTxesQuery(baseOptions?: Apollo.QueryHookOptions<IndexerAllTxesQuery, IndexerAllTxesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<IndexerAllTxesQuery, IndexerAllTxesQueryVariables>(IndexerAllTxesDocument, options);
+      }
+export function useIndexerAllTxesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IndexerAllTxesQuery, IndexerAllTxesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<IndexerAllTxesQuery, IndexerAllTxesQueryVariables>(IndexerAllTxesDocument, options);
+        }
+export type IndexerAllTxesQueryHookResult = ReturnType<typeof useIndexerAllTxesQuery>;
+export type IndexerAllTxesLazyQueryHookResult = ReturnType<typeof useIndexerAllTxesLazyQuery>;
+export type IndexerAllTxesQueryResult = Apollo.QueryResult<IndexerAllTxesQuery, IndexerAllTxesQueryVariables>;
 export const IndexerRetirementByNodeIdDocument = gql`
     query IndexerRetirementByNodeId($nodeId: ID!) {
   retirement(nodeId: $nodeId) {

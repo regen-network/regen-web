@@ -1,10 +1,16 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableFooter from '@mui/material/TableFooter';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
@@ -25,9 +31,11 @@ import { Label } from 'web-components/lib/components/typography';
 import { formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { getHashUrl } from '../../lib/block-explorer';
-import { getEcocreditTxs, getReadableMessages } from '../../lib/ecocredit/api';
-import { ledgerRESTUri } from '../../lib/ledger';
+import { getHashUrl } from 'lib/block-explorer';
+import { ledgerRESTUri } from 'lib/ledger';
+import { getAllEcocreditTxesQuery } from 'lib/queries/react-query/registry-server/graphql/indexer/getAllEcocreditTxes/getAllEcocreditTxes';
+
+import { normalizeAllTxes } from './CreditActivityTable.normalizers';
 
 dayjs.extend(relativeTime);
 
@@ -57,7 +65,8 @@ const headCells: HeadCell[] = [
 const ROWS_PER_PAGE_OPTIONS = { options: [5, 10, 20, 50], default: 10 };
 
 const CreditActivityTable: React.FC<React.PropsWithChildren<unknown>> = () => {
-  const [txs, setTxs] = useState<TxRowData[]>([]);
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const [order, setOrder] = useState<Order>('desc');
   const [orderBy, setOrderBy] = useState<string>('date');
   const { TablePagination, setCountTotal, paginationProps } =
@@ -69,32 +78,26 @@ const CreditActivityTable: React.FC<React.PropsWithChildren<unknown>> = () => {
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
-  const fetchData = useCallback(
-    async (setCountTotal: (count: number) => void): Promise<void> => {
-      try {
-        const txResponses = await getEcocreditTxs();
-        const txRows: TxRowData[] = txResponses.map(txResponse => {
-          return {
-            date: txResponse.timestamp,
-            txhash: txResponse.txhash,
-            messages: getReadableMessages(txResponse),
-            height: txResponse.height.getLowBits(),
-            txUrl: getHashUrl(txResponse.txhash),
-          } as TxRowData;
-        });
-
-        setTxs(txRows);
-        const countTotal = txResponses.length;
-        if (countTotal) {
-          setCountTotal(countTotal);
-        }
-      } catch (err) {
-        // eslint-disable-next-line
-        console.error(err);
-      }
-    },
-    [],
+  const { data: allEcocreditTxesData, isLoading } = useQuery(
+    getAllEcocreditTxesQuery({
+      client: graphqlClient,
+      first: rowsPerPage,
+      offset: rowsPerPage * page,
+      enabled: !!graphqlClient,
+    }),
   );
+
+  const txs = normalizeAllTxes({
+    allEcocreditTxesData: allEcocreditTxesData?.data,
+  });
+
+  useEffect(() => {
+    const txesCount = allEcocreditTxesData?.data.allEcocreditTxes?.totalCount;
+
+    if (txesCount) {
+      setCountTotal(txesCount);
+    }
+  }, [allEcocreditTxesData, setCountTotal]);
 
   const createSortHandler =
     (property: keyof TxRowData) => (event: React.MouseEvent<unknown>) => {
@@ -117,11 +120,6 @@ const CreditActivityTable: React.FC<React.PropsWithChildren<unknown>> = () => {
   ): number => {
     return countTotal <= rowsPerPage ? 0 : rowsPerPage - countPage;
   };
-
-  useEffect(() => {
-    if (!ledgerRESTUri) return;
-    fetchData(setCountTotal);
-  }, [fetchData, setCountTotal]);
 
   return (
     <StyledTableContainer
@@ -164,10 +162,9 @@ const CreditActivityTable: React.FC<React.PropsWithChildren<unknown>> = () => {
             </TableRow>
           </TableHead>
           <TableBody sx={{ bgcolor: 'primary.main' }}>
-            {ledgerRESTUri && txs.length > 0 ? (
-              stableSort(txs as any, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((tx: any) => {
+            {ledgerRESTUri && !isLoading ? (
+              stableSort(txs as any, getComparator(order, orderBy)).map(
+                (tx: any) => {
                   return (
                     <StyledTableRow
                       sx={{ whiteSpace: 'nowrap', cursor: 'pointer' }}
@@ -200,7 +197,8 @@ const CreditActivityTable: React.FC<React.PropsWithChildren<unknown>> = () => {
                       </StyledTableCell>
                     </StyledTableRow>
                   );
-                })
+                },
+              )
             ) : (
               <StyledTableRow
                 sx={{
@@ -208,7 +206,13 @@ const CreditActivityTable: React.FC<React.PropsWithChildren<unknown>> = () => {
                   bgcolor: 'transparent',
                 }}
               >
-                <StyledTableCell>Loading...</StyledTableCell>
+                <StyledTableCell
+                  sx={{
+                    width: '100%',
+                  }}
+                >
+                  Loading...
+                </StyledTableCell>
               </StyledTableRow>
             )}
           </TableBody>

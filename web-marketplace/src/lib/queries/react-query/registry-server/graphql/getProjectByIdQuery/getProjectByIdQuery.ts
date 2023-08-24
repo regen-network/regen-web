@@ -29,13 +29,22 @@ export const getProjectByIdQuery = ({
       });
 
       if (projectById.data?.projectById?.metadata) {
-        projectById.data.projectById.metadata = await jsonLdCompact(
-          projectById.data.projectById.metadata,
-        );
+        projectById.data.projectById.metadata = await jsonLdCompact({
+          // NOTE: We set the context here with "schema" and "regen" to prevent
+          // a prefix confusion error when no context is provided and field values
+          // with either prefix are present within the project metadata.
+          '@context': {
+            schema: 'http://schema.org/',
+            regen: 'https://schema.regen.network#',
+          },
+          ...projectById.data.projectById.metadata,
+        });
       }
 
       return projectById;
     } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e);
       return null;
     }
   },

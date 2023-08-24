@@ -37,7 +37,8 @@
     "start-auth": "lerna run --scope web-auth start --stream",
     "watch": "lerna run watch --stream",
     "test-update-snapshot": "lerna run --scope web-marketplace test-update-snapshot --stream",
-    "bump": "lerna version --conventional-commits"
+    "bump": "lerna version --conventional-commits",
+    "postinstall": "patch-package"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.21.4",
@@ -69,6 +70,8 @@
   },
   "resolutions": {
     "babel-eslint": "^10.1.0",
+    "**/@typescript-eslint/eslint-plugin": "^4.5.0",
+    "**/@typescript-eslint/parser": "^4.5.0",
     "webpack": "4.44.2",
     "react-error-overlay": "6.0.9",
     "@emotion/react": "11.10.6"

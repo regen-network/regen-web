@@ -21,10 +21,6 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-.yarn/*
-!.yarn/patches
-!.yarn/releases
-
 # Created by https://www.gitignore.io/api/vim,emacs,visualstudiocode
 
 ### Emacs ###

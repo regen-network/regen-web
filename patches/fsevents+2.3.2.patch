@@ -1,0 +1,12 @@
+diff --git a/node_modules/fsevents/fsevents.js b/node_modules/fsevents/fsevents.js
+index f1b31c9..a75636e 100644
+--- a/node_modules/fsevents/fsevents.js
++++ b/node_modules/fsevents/fsevents.js
+@@ -50,6 +50,7 @@ function getInfo(path, flags) {
+ function getFileType(flags) {
+   if (events.ItemIsFile & flags) return "file";
+   if (events.ItemIsDir & flags) return "directory";
++  if (events.MustScanSubDirs & flags) return "directory";
+   if (events.ItemIsSymlink & flags) return "symlink";
+ }
+ function anyIsTrue(obj) {

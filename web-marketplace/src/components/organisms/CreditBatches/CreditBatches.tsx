@@ -6,6 +6,7 @@ import { quantityFormatNumberOptions } from 'config/decimals';
 import { tableStyles } from 'styles/table';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
+import NoEcocreditsIcon from 'web-components/lib/components/icons/NoEcocreditsIcon';
 import Section from 'web-components/lib/components/section';
 import {
   ActionsTable,
@@ -24,6 +25,7 @@ import { ledgerRESTUri } from 'lib/ledger';
 
 import { AccountLink, Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
+import { NoCredits } from 'components/molecules';
 
 import { useLedger } from '../../../ledger';
 import { useCreditBatchesStyles } from './CreditBatches.styles';
@@ -125,6 +127,27 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
 
   if (!someTx) {
     columnsToShow = columnsToShow.filter(column => column.id !== 'txhash');
+  }
+
+  if (!batches?.length) {
+    return (
+      <NoCredits
+        title="No credits issued"
+        icon={
+          <NoEcocreditsIcon
+            sx={{
+              width: 100,
+              height: 100,
+            }}
+          />
+        }
+        sx={{
+          border: theme => `1px solid ${theme.palette.info.light}`,
+          borderTop: 0,
+          borderRadius: '0 0 10px 10px',
+        }}
+      />
+    );
   }
 
   const table = (

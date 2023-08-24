@@ -63,31 +63,30 @@ export function ProjectCardsSection({
           {projects?.map(project => {
             const isSoldOut = getIsSoldOut({ project, soldOutProjectsIds });
             return (
-              <Box key={project.id}>
-                <ProjectCard
-                  id={project.id}
-                  name={project.name}
-                  creditClassId={project.creditClassId}
-                  imgSrc={project.imgSrc}
-                  place={project.place}
-                  area={project.area}
-                  areaUnit={project.areaUnit}
-                  onButtonClick={
-                    onButtonClick && (() => onButtonClick({ project }))
-                  }
-                  purchaseInfo={project.purchaseInfo}
-                  href={`/project/${project.id}`}
-                  target={'_self'}
-                  imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
-                  apiServerUrl={API_URI}
-                  truncateTitle={true}
-                  sx={{ width: 400, height: 479 }}
-                  track={track}
-                  isSoldOut={isSoldOut}
-                  creditsTooltip={getCreditsTooltip({ isSoldOut, project })}
-                  program={project.program}
-                />
-              </Box>
+              <ProjectCard
+                key={project.id}
+                id={project.id}
+                name={project.name}
+                creditClassId={project.creditClassId}
+                imgSrc={project.imgSrc}
+                place={project.place}
+                area={project.area}
+                areaUnit={project.areaUnit}
+                onButtonClick={
+                  onButtonClick && (() => onButtonClick({ project }))
+                }
+                purchaseInfo={project.purchaseInfo}
+                href={`/project/${project.id}`}
+                target={'_self'}
+                imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
+                apiServerUrl={API_URI}
+                truncateTitle={true}
+                sx={{ width: 400, height: 479 }}
+                track={track}
+                isSoldOut={isSoldOut}
+                creditsTooltip={getCreditsTooltip({ isSoldOut, project })}
+                program={project.program}
+              />
             );
           })}
         </CardsGridContainer>

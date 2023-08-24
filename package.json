@@ -77,8 +77,5 @@
   "husky": {
     "hooks": {}
   },
-  "version": "1.1.0",
-  "dependencies": {
-    "postinstall-postinstall": "^2.1.0"
-  }
+  "version": "1.1.0"
 }

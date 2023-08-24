@@ -16,6 +16,7 @@ interface Props {
 function ProjectsSection({ classId }: Props): JSX.Element {
   const { projectsWithOrderData, loading } = useProjectsWithOrders({
     classId,
+    useCommunityProjects: true,
   });
 
   const [selectedProject, setSelectedProject] =

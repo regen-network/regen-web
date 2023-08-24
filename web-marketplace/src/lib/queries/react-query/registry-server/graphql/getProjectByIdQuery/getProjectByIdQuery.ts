@@ -30,12 +30,15 @@ export const getProjectByIdQuery = ({
 
       if (projectById.data?.projectById?.metadata) {
         projectById.data.projectById.metadata = await jsonLdCompact({
-          // NOTE: We set the context here with "schema" and "regen" to prevent
-          // a prefix confusion error when no context is provided and field values
-          // with either prefix are present within the project metadata.
+          // NOTE: We set the context here to prevent a prefix confusion
+          // error when no context is provided and field values with the
+          // prefixes are present within the project metadata.
           '@context': {
             schema: 'http://schema.org/',
             regen: 'https://schema.regen.network#',
+            qudt: 'http://qudt.org/schema/qudt/',
+            unit: 'http://qudt.org/vocab/unit/',
+            xsd: 'http://www.w3.org/2001/XMLSchema#',
           },
           ...projectById.data.projectById.metadata,
         });

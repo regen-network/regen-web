@@ -1,5 +1,9 @@
 FROM node:16
 
+# Install dependencies
+RUN apt-get update
+RUN apt-get install libpq-dev postgresql-client -y
+
 # Set version
 ENV GIT_CHECKOUT='d258432e35ae773e06cff61a6718e0b757a23b90'
 
@@ -33,8 +37,14 @@ RUN yarn build
 # Set working directory
 WORKDIR /home/server
 
+# Copy server init script
+COPY docker/scripts/server_init.sh /home/server/scripts/
+
 # Copy server start script
 COPY docker/scripts/server_start.sh /home/server/scripts/
+
+# Make init script executable
+RUN ["chmod", "+x", "/home/server/scripts/server_init.sh"]
 
 # Make start script executable
 RUN ["chmod", "+x", "/home/server/scripts/server_start.sh"]

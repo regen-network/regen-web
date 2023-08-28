@@ -12,7 +12,7 @@ import { adminModalSchema, AdminModalSchemaType } from './AdminModal.schema';
 interface AdminModalProps {
   initialValues?: AdminModalSchemaType;
   onClose: () => void;
-  onSubmit: (profile: AdminModalSchemaType) => void;
+  onSubmit: (data: AdminModalSchemaType) => void;
 }
 
 function AdminModal({

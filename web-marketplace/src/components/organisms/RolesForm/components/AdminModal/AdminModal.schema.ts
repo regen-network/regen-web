@@ -12,10 +12,7 @@ import { DIFFERENT_ADDRESSES_ERROR_MSG } from './AdminModal.constants';
 export const addressSchema = z
   .string()
   .refine(
-    value =>
-      value
-        ? isValidAddress(value, chainInfo.bech32Config.bech32PrefixAccAddr)
-        : true,
+    value => isValidAddress(value, chainInfo.bech32Config.bech32PrefixAccAddr),
     {
       message: invalidRegenAddress,
     },
@@ -26,7 +23,7 @@ export const adminModalSchema = z
     currentAddress: addressSchema,
     newAddress: addressSchema,
   })
-  .refine(schema => schema.currentAddress === schema.newAddress, {
+  .refine(schema => schema.currentAddress !== schema.newAddress, {
     message: DIFFERENT_ADDRESSES_ERROR_MSG,
     path: ['newAddress'],
   });

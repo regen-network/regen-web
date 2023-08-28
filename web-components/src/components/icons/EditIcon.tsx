@@ -1,25 +1,18 @@
-import { SxProps, Theme } from '@mui/material';
-import SvgIcon from '@mui/material/SvgIcon';
+import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
 import { sxToArray } from '../../utils/mui/sxToArray';
 
-interface EditIconProps {
-  className?: string;
-  sx?: SxProps<Theme>;
-}
+interface EditIconProps extends SvgIconProps {}
 
-export default function EditIcon({
-  sx,
-  className,
-}: EditIconProps): JSX.Element {
+export default function EditIcon({ sx, ...props }: EditIconProps): JSX.Element {
   return (
     <SvgIcon
-      className={className}
       sx={[{ color: '#4FB573' }, ...sxToArray(sx)]}
       width="13"
       height="13"
       viewBox="0 0 13 13"
       xmlns="http://www.w3.org/2000/svg"
+      {...props}
     >
       <svg fill="none">
         <path

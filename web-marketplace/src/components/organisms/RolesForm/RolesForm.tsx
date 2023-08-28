@@ -9,7 +9,9 @@ import { useQuery } from '@tanstack/react-query';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
+import { Flex } from 'web-components/lib/components/box';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
+import EditIcon from 'web-components/lib/components/icons/EditIcon';
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
@@ -22,6 +24,7 @@ import { getPartiesByNameOrAddrQuery } from '../../../lib/queries/react-query/re
 import { useWallet } from '../../../lib/wallet/wallet';
 import { useProjectEditContext } from '../../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../../molecules';
+import { AdminModal } from './components/AdminModal/AdminModal';
 import { ProfileModalSchemaType } from './components/ProfileModal/ProfileModal.schema';
 import { RoleField } from './components/RoleField/RoleField';
 import { useSaveProfile } from './hooks/useSaveProfile';
@@ -54,6 +57,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
 
   const { confirmSave, isEdit } = useProjectEditContext();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+  const [adminModalOpen, setAdminModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     isDirtyRef.current = isDirty;
@@ -69,6 +73,10 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     control: form.control,
     name: 'verifier',
   });
+  const admin = useWatch({
+    control: form.control,
+    name: 'admin',
+  });
 
   /* Setter */
 
@@ -77,6 +85,9 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   };
   const setVerifier = (value: ProfileModalSchemaType | null): void => {
     form.setValue('verifier', value, { shouldDirty: true });
+  };
+  const setAdmin = (value: string): void => {
+    form.setValue('admin', value, { shouldDirty: true });
   };
 
   const { accountId } = useWallet();
@@ -109,7 +120,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   );
 
   const saveProfile = useSaveProfile();
-
+  console.log(adminModalOpen);
   return (
     <Form form={form}>
       <OnBoardingCard>
@@ -139,12 +150,37 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
           accountId={accountId}
           {...form.register('verifier')}
         />
-        <TextField
-          type="text"
-          label="Admin"
-          disabled
-          {...form.register('admin')}
-        />
+        <Flex alignItems="flex-end" sx={{ mt: { xs: 8.25, sm: 10 } }}>
+          <TextField
+            type="text"
+            label="Admin"
+            disabled
+            {...form.register('admin')}
+          />
+          <EditIcon
+            onClick={() => setAdminModalOpen(true)}
+            sx={{
+              width: 24,
+              height: 24,
+              cursor: 'pointer',
+              ml: 4.25,
+              mb: 4.25,
+            }}
+          />
+          {adminModalOpen && (
+            <AdminModal
+              initialValues={{
+                currentAddress: initialValues?.admin || '',
+                newAddress: initialValues?.admin === admin ? '' : admin,
+              }}
+              onClose={() => setAdminModalOpen(false)}
+              onSubmit={value => {
+                setAdmin(value.newAddress);
+                setAdminModalOpen(false);
+              }}
+            />
+          )}
+        </Flex>
       </OnBoardingCard>
       <ProjectPageFooter
         onSave={form.handleSubmit(async data => {

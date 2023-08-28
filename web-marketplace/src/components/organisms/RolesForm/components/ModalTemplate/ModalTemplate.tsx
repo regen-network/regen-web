@@ -34,7 +34,11 @@ const ModalTemplate = <T extends FieldValues>({
 
   return (
     <Modal open={open} onClose={onClose} className={styles.root}>
-      <Title variant="h4" align="center" sx={{ pb: [6, 12.5] }}>
+      <Title
+        variant="h4"
+        align="center"
+        sx={{ pb: [6, 12.5], maxWidth: 425, margin: '0 auto' }}
+      >
         {title}
       </Title>
       <Form form={form}>

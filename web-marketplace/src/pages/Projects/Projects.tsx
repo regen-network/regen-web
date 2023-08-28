@@ -122,9 +122,6 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
       <Flex
         sx={{
           bgcolor: 'grey.50',
-          borderTop: 1,
-          borderBottom: 1,
-          borderColor: 'grey.100',
           pt: { xs: 6, md: 8.75 },
           pb: { xs: 20, md: 25 },
           justifyContent: 'center',

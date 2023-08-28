@@ -15,7 +15,7 @@ const OnBoardingCard: React.FC<React.PropsWithChildren<Props>> = ({
 }) => {
   return (
     <Card
-      borderColor="info.light"
+      borderColor="grey.100"
       className={className}
       sx={[
         {

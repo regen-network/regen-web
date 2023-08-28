@@ -8,7 +8,7 @@ import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { getBasketBalancesQuery } from 'lib/queries/react-query/ecocredit/basket/getBasketBalances/getBasketBalancesQuery';
-import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
+import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
 import { useBatchesWithMetadata } from 'hooks/batches/useBatchesWithMetadata';
 
@@ -80,7 +80,7 @@ export const useFetchBasketEcocredits = ({
 
   // AllCreditClasses
   const { data: creditClassData } = useQuery(
-    getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
   );
 
   // Normalization

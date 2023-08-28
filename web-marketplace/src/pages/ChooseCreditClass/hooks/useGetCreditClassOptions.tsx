@@ -7,8 +7,9 @@ import { useQuery } from '@tanstack/react-query';
 
 import { client as sanityClient } from 'lib/clients/sanity';
 import { normalizeCreditClassOptions } from 'lib/normalizers/creditClass/normalizeCreditClassOption';
+import { getAllCreditClassesQuery } from 'lib/queries/react-query/registry-server/graphql/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getClassesByIssuerQuery } from 'lib/queries/react-query/registry-server/graphql/indexer/getClassesByIssuer/getClassesByIssuer';
-import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
+import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
@@ -39,8 +40,15 @@ function useGetCreditClassOptions(): {
     }),
   );
 
+  const { data: offChainCreditClasses } = useQuery(
+    getAllCreditClassesQuery({
+      client: graphqlClient,
+      enabled: !!graphqlClient,
+    }),
+  );
+
   const { data: sanityCreditClasses } = useQuery(
-    getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
   );
 
   const classIds = classesByIssuerData?.data.allClassIssuers?.nodes.map(
@@ -53,6 +61,7 @@ function useGetCreditClassOptions(): {
     classesByIssuer: classesByIssuerData?.data,
     classesMetadata,
     sanityCreditClasses,
+    offChainCreditClasses,
   });
 
   return { creditClassOptions, loading: isLoading };

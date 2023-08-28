@@ -25,7 +25,7 @@ import { getGeocodingQuery } from 'lib/queries/react-query/mapbox/getGeocodingQu
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getProjectByHandleQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByHandleQuery/getProjectByHandleQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
-import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
+import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery';
 import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
@@ -95,7 +95,7 @@ function ProjectDetails(): JSX.Element {
   });
 
   const { data: sanityCreditClassData } = useQuery(
-    getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
   );
 
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);

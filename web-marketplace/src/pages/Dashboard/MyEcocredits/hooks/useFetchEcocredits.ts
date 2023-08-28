@@ -9,7 +9,7 @@ import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
 import { normalizeEcocredits } from 'lib/normalizers/ecocredits/normalizeEcocredits';
 import { getBalancesQuery } from 'lib/queries/react-query/ecocredit/getBalancesQuery/getBalancesQuery';
-import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
+import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useBatchesWithMetadata } from '../../../../hooks/batches/useBatchesWithMetadata';
@@ -98,7 +98,7 @@ export const useFetchEcocredits = ({
 
   // AllCreditClasses
   const { data: creditClassData } = useQuery(
-    getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
   );
 
   // Normalization

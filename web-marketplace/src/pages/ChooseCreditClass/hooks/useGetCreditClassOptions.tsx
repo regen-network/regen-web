@@ -1,13 +1,17 @@
-import { useEffect, useState } from 'react';
-import { getClassImageWithGreenDefault } from 'utils/image/classImage';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
+import { useQuery } from '@tanstack/react-query';
 
-import { useAllCreditClassesQuery } from 'generated/graphql';
-import { useAllCreditClassQuery } from 'generated/sanity-graphql';
-import { client } from 'lib/clients/sanity';
-import { queryClassIssuers } from 'lib/ecocredit/api';
+import { client as sanityClient } from 'lib/clients/sanity';
+import { normalizeCreditClassOptions } from 'lib/normalizers/creditClass/normalizeCreditClassOption';
+import { getClassesByIssuerQuery } from 'lib/queries/react-query/registry-server/graphql/indexer/getClassesByIssuer/getClassesByIssuer';
+import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import useQueryListClassesWithMetadata from 'hooks/useQueryListClassesWithMetadata';
+import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 
 interface CreditClassOption {
   id: string;
@@ -22,68 +26,36 @@ function useGetCreditClassOptions(): {
   creditClassOptions: CreditClassOption[];
   loading: boolean;
 } {
-  const [loading, setLoading] = useState(true);
-  const [creditClassOptions, setCreditClassOptions] = useState<
-    CreditClassOption[]
-  >([]);
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { wallet } = useWallet();
-  const onChainClasses = useQueryListClassesWithMetadata();
-  const { data: offChainCreditClasses } = useAllCreditClassesQuery();
-  const { data: creditClassContentData } = useAllCreditClassQuery({ client });
+  const address = wallet?.address;
 
-  useEffect(() => {
-    // eslint-disable-next-line
-    const setupOptions = async () => {
-      if (!wallet?.address || onChainClasses?.length < 1) return;
+  const { data: classesByIssuerData, isLoading } = useQuery(
+    getClassesByIssuerQuery({
+      enabled: !!address && !!graphqlClient,
+      client: graphqlClient,
+      issuer: address,
+    }),
+  );
 
-      const offChainClasses =
-        offChainCreditClasses?.allCreditClasses?.nodes?.filter(
-          offChain =>
-            offChain?.onChainId &&
-            onChainClasses?.findIndex(
-              onChain => onChain.id === offChain.onChainId,
-            ) > -1,
-        ) || [];
+  const { data: sanityCreditClasses } = useQuery(
+    getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+  );
 
-      const creditClassesContent = creditClassContentData?.allCreditClass;
+  const classIds = classesByIssuerData?.data.allClassIssuers?.nodes.map(
+    creditClass => creditClass?.classId,
+  );
 
-      let ccOptions: CreditClassOption[] = [];
-      for (const onChainClass of onChainClasses) {
-        const creditClassOnChainId = onChainClass?.id;
-        const contentMatch = creditClassesContent?.find(
-          content => content.path === creditClassOnChainId,
-        );
-        const offChainMatch = offChainClasses.find(
-          offChainClass => offChainClass?.onChainId === creditClassOnChainId,
-        );
-        const metadata = onChainClass?.metadataJson;
-        const name = metadata?.['schema:name'];
-        const title = name
-          ? `${name} (${creditClassOnChainId})`
-          : creditClassOnChainId;
-        const { issuers } = await queryClassIssuers(onChainClass.id);
-        if (issuers?.includes(wallet.address)) {
-          ccOptions.push({
-            id: offChainMatch?.id || '',
-            onChainId: creditClassOnChainId || '',
-            imageSrc: getClassImageWithGreenDefault({
-              metadata,
-              sanityClass: contentMatch,
-            }),
-            title: title || '',
-            description: metadata?.['schema:description'],
-          });
-        }
-      }
+  const { classesMetadata } = useClassesWithMetadata(classIds);
 
-      setCreditClassOptions(ccOptions);
-      setLoading(false);
-    };
+  const creditClassOptions = normalizeCreditClassOptions({
+    classesByIssuer: classesByIssuerData?.data,
+    classesMetadata,
+    sanityCreditClasses,
+  });
 
-    setupOptions();
-  }, [onChainClasses, creditClassContentData, offChainCreditClasses, wallet]);
-
-  return { creditClassOptions, loading };
+  return { creditClassOptions, loading: isLoading };
 }
 
 export { useGetCreditClassOptions };

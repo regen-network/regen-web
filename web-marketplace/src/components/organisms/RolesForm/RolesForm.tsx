@@ -50,11 +50,12 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     },
     mode: 'onBlur',
   });
-  const { isSubmitting, isDirty, isValid } = useFormState({
+  const { isSubmitting, isDirty, errors, isValid } = useFormState({
     control: form.control,
   });
   const { isDirtyRef } = useProjectEditContext();
-
+  console.log('isValid', isValid);
+  console.log('errors', errors);
   const { confirmSave, isEdit } = useProjectEditContext();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const [adminModalOpen, setAdminModalOpen] = useState<boolean>(false);
@@ -120,7 +121,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   );
 
   const saveProfile = useSaveProfile();
-  console.log(adminModalOpen);
+
   return (
     <Form form={form}>
       <OnBoardingCard>

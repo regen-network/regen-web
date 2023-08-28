@@ -26,6 +26,7 @@ interface Props {
   isEdit?: boolean;
   metadataReload: () => Promise<void>;
   navigateNext: () => void;
+  admin?: string;
 }
 
 type Return = {
@@ -39,22 +40,29 @@ const useRolesSubmit = ({
   isEdit,
   metadataReload,
   navigateNext,
+  admin,
 }: Props): Return => {
   const [updateProject] = useUpdateProjectByIdMutation();
 
   const rolesSubmit = useCallback(
     async (values: RolesFormSchemaType): Promise<void> => {
       try {
-        let doUpdate = false;
+        let doUpdateMetadata = false;
+        let doUpdateAdmin = false;
         let projectPatch: ProjectPatch = {};
         const { projectDeveloper, verifier } = values;
         if (offChainProject?.partyByDeveloperId !== projectDeveloper?.id) {
-          doUpdate = true;
+          doUpdateMetadata = true;
           projectPatch.developerId = projectDeveloper?.id || null;
         }
         if (offChainProject?.partyByVerifierId !== verifier?.id) {
-          doUpdate = true;
+          doUpdateMetadata = true;
           projectPatch.verifierId = verifier?.id || null;
+        }
+        if (values.admin && admin !== values.admin) {
+          doUpdateAdmin = true;
+          // TODO fetch if there's a wallet id with admin addr
+          // projectPatch.adminWalletId = adminWalletId;
         }
 
         const newMetadata = {
@@ -70,7 +78,7 @@ const useRolesSubmit = ({
           };
         // In creation or edit mode, we always store references to the project stakeholders in the project table
         // which should be in projectPatch if new or updated
-        if (doUpdate) {
+        if (doUpdateMetadata || doUpdateAdmin) {
           await updateProject({
             variables: {
               input: {
@@ -84,9 +92,14 @@ const useRolesSubmit = ({
         if (!isEdit) {
           navigateNext();
         } else {
-          // In edit mode, we need to update the project on-chain metadata if needed
-          if (doUpdate) {
-            await projectEditSubmit(newMetadata);
+          // In edit mode, we need to update the project on-chain metadata and/or admin if needed
+          if (doUpdateMetadata || doUpdateAdmin) {
+            await projectEditSubmit(
+              newMetadata,
+              values.admin,
+              doUpdateMetadata,
+              doUpdateAdmin,
+            );
           }
         }
         await metadataReload();
@@ -100,6 +113,7 @@ const useRolesSubmit = ({
       offChainProject?.partyByDeveloperId,
       offChainProject?.partyByVerifierId,
       offChainProject?.id,
+      admin,
       metadata,
       isEdit,
       metadataReload,

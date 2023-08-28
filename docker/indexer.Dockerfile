@@ -5,7 +5,7 @@ RUN apt-get update
 RUN apt-get install libpq-dev postgresql-client -y
 
 # Set version and chain
-ENV GIT_CHECKOUT='71e772a47bf3ffbdeb5eb3e1b5af8ec6e7c2272a'
+ENV GIT_CHECKOUT='8d3635aa33d4d49db903f947bb357c938d168f8d'
 
 # Clone regen ledger
 RUN git clone https://github.com/regen-network/indexer/ /home/indexer

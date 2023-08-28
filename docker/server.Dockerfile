@@ -5,7 +5,7 @@ RUN apt-get update
 RUN apt-get install libpq-dev postgresql-client -y
 
 # Set version
-ENV GIT_CHECKOUT='d258432e35ae773e06cff61a6718e0b757a23b90'
+ENV GIT_CHECKOUT='a18df8663d6e25495a3bfeaf86e985855fff15a6'
 
 # Clone repository
 RUN git clone https://github.com/regen-network/registry-server/ /home/server

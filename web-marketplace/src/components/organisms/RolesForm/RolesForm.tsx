@@ -15,7 +15,9 @@ import EditIcon from 'web-components/lib/components/icons/EditIcon';
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { getWalletByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getWalletByAddrQuery/getWalletByAddrQuery';
 
+import { Return } from 'pages/Roles/hooks/useRolesSubmit';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
@@ -31,7 +33,7 @@ import { useSaveProfile } from './hooks/useSaveProfile';
 import { rolesFormSchema, RolesFormSchemaType } from './RolesForm.schema';
 
 interface RolesFormProps {
-  submit: (values: RolesFormSchemaType) => Promise<void>;
+  submit: Return['rolesSubmit'];
   onNext?: () => void;
   onPrev?: () => void;
   initialValues?: RolesFormSchemaType;
@@ -97,6 +99,13 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
       client: graphqlClient,
       id: accountId,
       enabled: !!accountId && !!graphqlClient,
+    }),
+  );
+  const { data: adminWalletData } = useQuery(
+    getWalletByAddrQuery({
+      addr: admin,
+      client: graphqlClient,
+      enabled: admin !== initialValues?.admin && !!graphqlClient,
     }),
   );
 
@@ -184,7 +193,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
       <ProjectPageFooter
         onSave={form.handleSubmit(async data => {
           try {
-            await submit(data);
+            await submit(data, adminWalletData?.walletByAddr?.id);
             if (isEdit && confirmSave) confirmSave();
           } catch (e) {
             setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);

@@ -29,8 +29,11 @@ interface Props {
   admin?: string;
 }
 
-type Return = {
-  rolesSubmit: (values: RolesFormSchemaType) => Promise<void>;
+export type Return = {
+  rolesSubmit: (
+    values: RolesFormSchemaType,
+    adminWalletId?: string,
+  ) => Promise<void>;
 };
 
 const useRolesSubmit = ({
@@ -45,13 +48,19 @@ const useRolesSubmit = ({
   const [updateProject] = useUpdateProjectByIdMutation();
 
   const rolesSubmit = useCallback(
-    async (values: RolesFormSchemaType): Promise<void> => {
+    async (
+      values: RolesFormSchemaType,
+      adminWalletId?: string,
+    ): Promise<void> => {
       try {
         let doUpdateMetadata = false;
         let doUpdateAdmin = false;
         let projectPatch: ProjectPatch = {};
         const { projectDeveloper, verifier } = values;
 
+        // Compared values below can be undefined and null but in this case,
+        // this means there was no project developer/verifier and this hasn't changed,
+        // so we don't want to update the metadata.
         if (
           (offChainProject?.partyByDeveloperId || null) !==
           (projectDeveloper?.id || null)
@@ -68,8 +77,9 @@ const useRolesSubmit = ({
         }
         if (values.admin && admin !== values.admin) {
           doUpdateAdmin = true;
-          // TODO fetch if there's a wallet id with admin addr
-          // projectPatch.adminWalletId = adminWalletId;
+          if (adminWalletId) {
+            projectPatch.adminWalletId = adminWalletId;
+          }
         }
 
         const newMetadata = {

@@ -51,11 +51,18 @@ const useRolesSubmit = ({
         let doUpdateAdmin = false;
         let projectPatch: ProjectPatch = {};
         const { projectDeveloper, verifier } = values;
-        if (offChainProject?.partyByDeveloperId !== projectDeveloper?.id) {
+
+        if (
+          (offChainProject?.partyByDeveloperId || null) !==
+          (projectDeveloper?.id || null)
+        ) {
           doUpdateMetadata = true;
           projectPatch.developerId = projectDeveloper?.id || null;
         }
-        if (offChainProject?.partyByVerifierId !== verifier?.id) {
+        if (
+          (offChainProject?.partyByVerifierId || null) !==
+          (verifier?.id || null)
+        ) {
           doUpdateMetadata = true;
           projectPatch.verifierId = verifier?.id || null;
         }

@@ -31,7 +31,7 @@ type Props = {
 
 export type UseProjectEditSubmitParams = (
   metadata: NestedPartial<ProjectMetadataLD>,
-  newAdmin: string,
+  newAdmin?: string,
   doUpdateMetadata?: boolean,
   doUpdateAdmin?: boolean,
 ) => Promise<void>;
@@ -47,7 +47,7 @@ const useProjectEditSubmit = ({
   const projectEditSubmit = useCallback(
     async (
       metadata: NestedPartial<ProjectMetadataLD>,
-      newAdmin: string,
+      newAdmin?: string,
       doUpdateMetadata: boolean = true,
       doUpdateAdmin: boolean = false,
     ): Promise<void> => {
@@ -64,7 +64,7 @@ const useProjectEditSubmit = ({
           }),
         );
 
-      if (doUpdateAdmin)
+      if (doUpdateAdmin && newAdmin)
         msgs.push(
           MsgUpdateProjectAdmin.fromPartial({
             projectId,
@@ -72,7 +72,7 @@ const useProjectEditSubmit = ({
             newAdmin,
           }),
         );
-      console.log(msgs);
+
       const onError = (err?: Error): void => {
         onErrorCallback && onErrorCallback(err);
       };

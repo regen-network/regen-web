@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useProjectEditContext } from 'pages/ProjectEdit';
 import WithLoader from 'components/atoms/WithLoader';
 import { BasicInfoForm } from 'components/organisms';
-import { BasicInfoSchemaType } from 'components/organisms/BasicInfoForm/BasicInfoForm.schema';
+import { BasicInfoFormSchemaType } from 'components/organisms/BasicInfoForm/BasicInfoForm.schema';
 import { DescriptionForm } from 'components/organisms/DescriptionForm/DescriptionForm';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
@@ -23,7 +23,7 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
       onChainProject,
     });
 
-  const initialValues: BasicInfoSchemaType = useMemo(
+  const initialValues: BasicInfoFormSchemaType = useMemo(
     () => ({
       'schema:name': metadata?.['schema:name'] ?? '',
       'regen:projectSize': metadata?.['regen:projectSize'] ?? {

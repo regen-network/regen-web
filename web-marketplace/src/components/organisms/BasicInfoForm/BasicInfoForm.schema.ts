@@ -17,4 +17,4 @@ export const basicInfoFormSchema = z.object({
   }),
 });
 
-export type BasicInfoSchemaType = z.infer<typeof basicInfoFormSchema>;
+export type BasicInfoFormSchemaType = z.infer<typeof basicInfoFormSchema>;

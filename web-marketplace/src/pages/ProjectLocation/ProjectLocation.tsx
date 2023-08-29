@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useProjectEditContext } from 'pages/ProjectEdit';
+import { LocationFormSchemaType } from 'components/organisms/LocationForm/LocationForm.schema';
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
-import { ProjectLocationForm } from '../../components/organisms';
+import { LocationForm } from '../../components/organisms/LocationForm/LocationForm';
 
 const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
@@ -20,12 +21,12 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
       onChainProject,
     });
 
-  let initialFieldValues: any | undefined;
-  if (metadata) {
-    initialFieldValues = {
-      'schema:location': metadata['schema:location'] || {},
-    };
-  }
+  const initialValues: LocationFormSchemaType = useMemo(
+    () => ({
+      'schema:location': metadata?.['schema:location'] ?? '',
+    }),
+    [metadata],
+  );
 
   async function saveAndExit(): Promise<void> {
     // TODO functionality - might need to save form state in this file to pass
@@ -49,11 +50,10 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
       project={offChainProject}
       loading={loading}
     >
-      <ProjectLocationForm
-        submit={metadataSubmit}
-        saveAndExit={saveAndExit}
+      <LocationForm
+        onSubmit={metadataSubmit}
         mapToken={import.meta.env.VITE_MAPBOX_TOKEN as string}
-        initialValues={initialFieldValues}
+        initialValues={initialValues}
         onPrev={navigatePrev}
         onNext={navigateNext}
       />

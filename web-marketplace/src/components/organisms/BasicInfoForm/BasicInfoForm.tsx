@@ -24,15 +24,15 @@ import {
 } from './BasicInfoForm.constants';
 import {
   basicInfoFormSchema,
-  BasicInfoSchemaType,
+  BasicInfoFormSchemaType,
 } from './BasicInfoForm.schema';
 import { useBasicInfoStyles } from './BasicInfoForm.styles';
 
 interface BasicInfoFormProps {
-  onSubmit: ({ values }: { values: BasicInfoSchemaType }) => Promise<void>;
+  onSubmit: ({ values }: { values: BasicInfoFormSchemaType }) => Promise<void>;
   onNext?: () => void;
   onPrev?: () => void;
-  initialValues?: BasicInfoSchemaType;
+  initialValues?: BasicInfoFormSchemaType;
 }
 
 const BasicInfoForm: React.FC<BasicInfoFormProps> = ({

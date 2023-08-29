@@ -93,9 +93,19 @@ const useRolesSubmit = ({
             metadata: newMetadata,
             ...projectPatch,
           };
+
         // In creation or edit mode, we always store references to the project stakeholders in the project table
         // which should be in projectPatch if new or updated
         if (doUpdateMetadata || doUpdateAdmin) {
+          // In edit mode, we need to update the project on-chain metadata and/or admin if needed
+          if (isEdit) {
+            await projectEditSubmit(
+              newMetadata,
+              values.admin,
+              doUpdateMetadata,
+              doUpdateAdmin,
+            );
+          }
           await updateProject({
             variables: {
               input: {
@@ -104,22 +114,12 @@ const useRolesSubmit = ({
               },
             },
           });
+          await metadataReload();
         }
 
         if (!isEdit) {
           navigateNext();
-        } else {
-          // In edit mode, we need to update the project on-chain metadata and/or admin if needed
-          if (doUpdateMetadata || doUpdateAdmin) {
-            await projectEditSubmit(
-              newMetadata,
-              values.admin,
-              doUpdateMetadata,
-              doUpdateAdmin,
-            );
-          }
         }
-        await metadataReload();
       } catch (e) {
         // TODO: Should we display the error banner here?
         // https://github.com/regen-network/regen-registry/issues/554

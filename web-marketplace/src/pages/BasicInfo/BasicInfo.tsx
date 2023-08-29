@@ -2,10 +2,8 @@ import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useProjectEditContext } from 'pages/ProjectEdit';
-import WithLoader from 'components/atoms/WithLoader';
 import { BasicInfoForm } from 'components/organisms';
 import { BasicInfoFormSchemaType } from 'components/organisms/BasicInfoForm/BasicInfoForm.schema';
-import { DescriptionForm } from 'components/organisms/DescriptionForm/DescriptionForm';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
 import { ProjectFormTemplate } from '../../components/templates/ProjectFormTemplate';

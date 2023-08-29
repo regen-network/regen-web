@@ -1,6 +1,6 @@
 import { makeStyles } from 'tss-react/mui';
 
-export const useStyles = makeStyles()(theme => ({
+export const useMetadataFormStyles = makeStyles()(theme => ({
   field: {
     '& .MuiInputBase-root': {
       padding: 0,

@@ -4,9 +4,9 @@ import { merge, pick } from 'lodash';
 import { NestedPartial } from 'types/nested-partial';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 
+import { MetadataFormSchemaType } from 'components/organisms/MetadataForm/MetadataForm.schema';
 import { MetadataSubmitProps } from 'hooks/projects/useProjectWithMetadata';
 
-import { ProjectMetadataFormValues } from '../../../components/organisms';
 import { OMITTED_METADATA_KEYS } from '../ProjectMetadata.config';
 
 type Params = {
@@ -14,16 +14,20 @@ type Params = {
   metadataSubmit: (p: MetadataSubmitProps) => Promise<void>;
 };
 
-export type UseProjectMetadataSubmitReturn = (
-  values: ProjectMetadataFormValues,
-) => Promise<void>;
+type SubmitParams = {
+  values: MetadataFormSchemaType;
+};
+
+export type UseProjectMetadataSubmitReturn = ({
+  values,
+}: SubmitParams) => Promise<void>;
 
 export const useProjectMetadataSubmit = ({
   metadata,
   metadataSubmit,
 }: Params): UseProjectMetadataSubmitReturn => {
   const projectMetadataSubmit = useCallback(
-    async (values: ProjectMetadataFormValues): Promise<void> => {
+    async ({ values }: SubmitParams): Promise<void> => {
       const parsedMetaData = JSON.parse(values.metadata);
       const baseMetadata = pick(metadata, OMITTED_METADATA_KEYS);
       merge(baseMetadata, parsedMetaData);

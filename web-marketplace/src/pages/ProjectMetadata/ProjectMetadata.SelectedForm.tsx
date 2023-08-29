@@ -25,6 +25,7 @@ export const ProjectMetadataSelectedForm = ({
   onPrev,
   creditClassId,
 }: Props): JSX.Element => (
+  // const isVCS = !!creditClassId && isVCSCreditClass(creditClassId);
   // isVCS ? (
   //   // TODO https://github.com/regen-network/regen-registry/issues/908
   //   // Temporarily using ProjectMetadataForm for all cases

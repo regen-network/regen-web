@@ -18,14 +18,18 @@ export interface SelectTextFieldProps extends DefaultStyleProps {
   native?: boolean;
   value?: string;
   disabled?: boolean;
-  label: string;
+  label?: string;
   error?: boolean;
   helperText?: string;
+  className?: string;
 }
 
 const SelectTextField = forwardRef<HTMLDivElement, SelectTextFieldProps>(
-  ({ options, native = true, value, disabled, label, ...props }, ref) => {
-    const { classes: styles } = useSelectTextFieldStyles({
+  (
+    { options, native = true, value, disabled, label, className, ...props },
+    ref,
+  ) => {
+    const { classes: styles, cx } = useSelectTextFieldStyles({
       defaultStyle: !value,
     });
     const theme = useTheme();
@@ -37,7 +41,7 @@ const SelectTextField = forwardRef<HTMLDivElement, SelectTextFieldProps>(
         ref={ref}
         label={label}
         disabled={disabled}
-        className={styles.root}
+        className={cx(styles.root, className)}
         select
         SelectProps={{
           native,

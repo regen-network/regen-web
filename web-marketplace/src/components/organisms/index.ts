@@ -1,6 +1,6 @@
 export * from './AdditionalityForm';
 export * from './AdminNav';
-export * from './BasicInfoForm';
+export * from './BasicInfoForm/BasicInfoForm';
 export * from './BasketEcocreditsTable';
 export * from './BasketOverview';
 export * from './BasketsTable';

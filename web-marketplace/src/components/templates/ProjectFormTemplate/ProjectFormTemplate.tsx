@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';
 
 import { EditFormTemplate } from './EditFormTemplate';
 import { OnboardingFormTemplate } from './OnboardingFormTemplate';
 import { ProjectFormAccessTemplate } from './ProjectFormAccessTemplate';
+import { CREATE_PROJECT_URL_REGEX } from './ProjectFormTemplate.constants';
 
 type Props = {
   isEdit?: boolean;
@@ -23,6 +25,22 @@ const ProjectFormTemplate: React.FC<React.PropsWithChildren<Props>> = ({
   children,
 }) => {
   const adminAddr = project?.walletByAdminWalletId?.addr;
+  const location = useLocation();
+  const { pathname } = location;
+  const navigate = useNavigate();
+  const { onChainId } = project ?? {};
+
+  useEffect(() => {
+    if (pathname.match(CREATE_PROJECT_URL_REGEX) && !!onChainId) {
+      const newUrl = pathname.replace(
+        CREATE_PROJECT_URL_REGEX,
+        `/project-pages/${onChainId}/edit/$2`,
+      );
+
+      navigate(newUrl);
+    }
+  }, [project, pathname, onChainId, navigate]);
+
   return (
     <ProjectFormAccessTemplate
       loading={loading}

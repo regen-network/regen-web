@@ -14,14 +14,14 @@ import { useUpdateProjectByIdMutation } from '../../generated/graphql';
 import { ChooseCreditClassGrid } from './ChooseCreditClass.Grid';
 import { ChooseCreditClassItem } from './ChooseCreditClass.Item';
 import { useErrorTimeout } from './hooks/useErrorTimeout';
-import { useGetCreditClassOptions } from './hooks/useGetCreditClassOptions';
+import { useGetCreditClassItems } from './hooks/useGetCreditClassOptions';
 
 const ChooseCreditClass: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const graphqlClient = useApolloClient();
   const [error, setError] = useErrorTimeout();
   const { projectId } = useParams();
-  const { creditClassOptions, loading } = useGetCreditClassOptions();
+  const { creditClassItems, loading } = useGetCreditClassItems();
   const { setCreditClassId } = useCreateProjectContext();
   const [updateProject] = useUpdateProjectByIdMutation();
   const { data, isFetching } = useQuery(
@@ -72,24 +72,19 @@ const ChooseCreditClass: React.FC<React.PropsWithChildren<unknown>> = () => {
       adminAddr={adminAddr}
     >
       <ChooseCreditClassGrid
-        justifyContent={
-          creditClassOptions?.length > 1 ? 'flex-start' : 'center'
-        }
+        justifyContent={creditClassItems?.length > 1 ? 'flex-start' : 'center'}
         loading={loading}
         error={error}
       >
-        {creditClassOptions?.length > 0 ? (
-          creditClassOptions?.map(creditClassOption => (
+        {creditClassItems?.length > 0 ? (
+          creditClassItems?.map(creditClassItem => (
             <ChooseCreditClassItem
-              key={creditClassOption.onChainId}
-              title={creditClassOption.title}
-              imgSrc={creditClassOption.imageSrc}
-              description={creditClassOption.description}
+              key={creditClassItem.onChainId}
+              title={creditClassItem.title}
+              imgSrc={creditClassItem.imageSrc}
+              description={creditClassItem.description}
               onClick={() =>
-                handleSelection(
-                  creditClassOption.id,
-                  creditClassOption.onChainId,
-                )
+                handleSelection(creditClassItem.id, creditClassItem.onChainId)
               }
             />
           ))

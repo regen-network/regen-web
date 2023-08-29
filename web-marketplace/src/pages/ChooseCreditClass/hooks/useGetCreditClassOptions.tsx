@@ -1,15 +1,20 @@
-import { useEffect, useState } from 'react';
-import { getClassImageWithGreenDefault } from 'utils/image/classImage';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
+import { useQuery } from '@tanstack/react-query';
 
-import { useAllCreditClassesQuery } from 'generated/graphql';
-import { useAllCreditClassQuery } from 'generated/sanity-graphql';
-import { client } from 'lib/clients/sanity';
-import { queryClassIssuers } from 'lib/ecocredit/api';
+import { client as sanityClient } from 'lib/clients/sanity';
+import { normalizeCreditClassItems } from 'lib/normalizers/creditClass/normalizeCreditClassItems';
+import { getAllCreditClassesQuery } from 'lib/queries/react-query/registry-server/graphql/getAllCreditClassesQuery/getAllCreditClassesQuery';
+import { getClassesByIssuerQuery } from 'lib/queries/react-query/registry-server/graphql/indexer/getClassesByIssuer/getClassesByIssuer';
+import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import useQueryListClassesWithMetadata from 'hooks/useQueryListClassesWithMetadata';
+import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 
-interface CreditClassOption {
+interface CreditClassItem {
   id: string;
   onChainId: string;
   imageSrc: string;
@@ -18,72 +23,48 @@ interface CreditClassOption {
   disabled?: boolean;
 }
 
-function useGetCreditClassOptions(): {
-  creditClassOptions: CreditClassOption[];
+function useGetCreditClassItems(): {
+  creditClassItems: CreditClassItem[];
   loading: boolean;
 } {
-  const [loading, setLoading] = useState(true);
-  const [creditClassOptions, setCreditClassOptions] = useState<
-    CreditClassOption[]
-  >([]);
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { wallet } = useWallet();
-  const onChainClasses = useQueryListClassesWithMetadata();
-  const { data: offChainCreditClasses } = useAllCreditClassesQuery();
-  const { data: creditClassContentData } = useAllCreditClassQuery({ client });
+  const address = wallet?.address;
 
-  useEffect(() => {
-    // eslint-disable-next-line
-    const setupOptions = async () => {
-      if (!wallet?.address || onChainClasses?.length < 1) return;
+  const { data: classesByIssuerData, isLoading } = useQuery(
+    getClassesByIssuerQuery({
+      enabled: !!address && !!graphqlClient,
+      client: graphqlClient,
+      issuer: address,
+    }),
+  );
 
-      const offChainClasses =
-        offChainCreditClasses?.allCreditClasses?.nodes?.filter(
-          offChain =>
-            offChain?.onChainId &&
-            onChainClasses?.findIndex(
-              onChain => onChain.id === offChain.onChainId,
-            ) > -1,
-        ) || [];
+  const { data: offChainCreditClasses } = useQuery(
+    getAllCreditClassesQuery({
+      client: graphqlClient,
+      enabled: !!graphqlClient,
+    }),
+  );
 
-      const creditClassesContent = creditClassContentData?.allCreditClass;
+  const { data: sanityCreditClasses } = useQuery(
+    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+  );
 
-      let ccOptions: CreditClassOption[] = [];
-      for (const onChainClass of onChainClasses) {
-        const creditClassOnChainId = onChainClass?.id;
-        const contentMatch = creditClassesContent?.find(
-          content => content.path === creditClassOnChainId,
-        );
-        const offChainMatch = offChainClasses.find(
-          offChainClass => offChainClass?.onChainId === creditClassOnChainId,
-        );
-        const metadata = onChainClass?.metadataJson;
-        const name = metadata?.['schema:name'];
-        const title = name
-          ? `${name} (${creditClassOnChainId})`
-          : creditClassOnChainId;
-        const { issuers } = await queryClassIssuers(onChainClass.id);
-        if (issuers?.includes(wallet.address)) {
-          ccOptions.push({
-            id: offChainMatch?.id || '',
-            onChainId: creditClassOnChainId || '',
-            imageSrc: getClassImageWithGreenDefault({
-              metadata,
-              sanityClass: contentMatch,
-            }),
-            title: title || '',
-            description: metadata?.['schema:description'],
-          });
-        }
-      }
+  const classIds = classesByIssuerData?.data.allClassIssuers?.nodes.map(
+    creditClass => creditClass?.classId,
+  );
 
-      setCreditClassOptions(ccOptions);
-      setLoading(false);
-    };
+  const { classesMetadata } = useClassesWithMetadata(classIds);
 
-    setupOptions();
-  }, [onChainClasses, creditClassContentData, offChainCreditClasses, wallet]);
+  const creditClassItems = normalizeCreditClassItems({
+    classesByIssuer: classesByIssuerData?.data,
+    classesMetadata,
+    sanityCreditClasses,
+    offChainCreditClasses,
+  });
 
-  return { creditClassOptions, loading };
+  return { creditClassItems, loading: isLoading };
 }
 
-export { useGetCreditClassOptions };
+export { useGetCreditClassItems };

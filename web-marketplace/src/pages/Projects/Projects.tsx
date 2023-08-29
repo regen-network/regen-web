@@ -19,7 +19,7 @@ import {
   useAllSoldOutProjectsQuery,
 } from 'generated/sanity-graphql';
 import { client as sanityClient } from 'lib/clients/sanity';
-import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
+import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
@@ -65,7 +65,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { creditClassesWithMetadata } = useFetchCreditClasses();
 
   const { data: sanityCreditClassesData } = useQuery(
-    getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
   );
 
   const { creditClassFilters } = normalizeCreditClassFilters({

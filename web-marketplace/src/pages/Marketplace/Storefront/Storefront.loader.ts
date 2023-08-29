@@ -6,7 +6,7 @@ import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePri
 import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
-import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
+import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 
 import { client as sanityClient } from '../../../lib/clients/sanity';
@@ -28,7 +28,9 @@ export const storefrontLoader =
       reactQueryClient: queryClient,
       request: {},
     });
-    const allCreditClassesQuery = getAllCreditClassesQuery({ sanityClient });
+    const allCreditClassesQuery = getAllSanityCreditClassesQuery({
+      sanityClient,
+    });
     const projectsQuery = getProjectsQuery({
       client: ecocreditClient,
       request: {},

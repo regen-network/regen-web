@@ -7,7 +7,7 @@ import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCar
 import { client as sanityClient } from 'lib/clients/sanity';
 import { normalizeProjectsWithCreditClass } from 'lib/normalizers/projects/normalizeProjectsWithCreditClass';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
-import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
+import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
 import { useProjectsWithMetadata } from 'hooks/projects/useProjectsWithMetadata';
 
@@ -24,7 +24,7 @@ export const useFetchProjectsByIds = ({ projectIds }: Props): Response => {
   const graphqlClient = useApolloClient();
 
   const { data: creditClassData } = useQuery(
-    getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
   );
 
   const { projects, isProjectsLoading, projectsMetadata, classesMetadata } =

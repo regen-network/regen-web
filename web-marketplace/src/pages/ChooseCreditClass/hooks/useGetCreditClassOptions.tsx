@@ -6,7 +6,7 @@ import {
 import { useQuery } from '@tanstack/react-query';
 
 import { client as sanityClient } from 'lib/clients/sanity';
-import { normalizeCreditClassOptions } from 'lib/normalizers/creditClass/normalizeCreditClassOption';
+import { normalizeCreditClassItems } from 'lib/normalizers/creditClass/normalizeCreditClassItems';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/registry-server/graphql/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getClassesByIssuerQuery } from 'lib/queries/react-query/registry-server/graphql/indexer/getClassesByIssuer/getClassesByIssuer';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
@@ -14,7 +14,7 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 
-interface CreditClassOption {
+interface CreditClassItem {
   id: string;
   onChainId: string;
   imageSrc: string;
@@ -23,8 +23,8 @@ interface CreditClassOption {
   disabled?: boolean;
 }
 
-function useGetCreditClassOptions(): {
-  creditClassOptions: CreditClassOption[];
+function useGetCreditClassItems(): {
+  creditClassItems: CreditClassItem[];
   loading: boolean;
 } {
   const graphqlClient =
@@ -57,14 +57,14 @@ function useGetCreditClassOptions(): {
 
   const { classesMetadata } = useClassesWithMetadata(classIds);
 
-  const creditClassOptions = normalizeCreditClassOptions({
+  const creditClassItems = normalizeCreditClassItems({
     classesByIssuer: classesByIssuerData?.data,
     classesMetadata,
     sanityCreditClasses,
     offChainCreditClasses,
   });
 
-  return { creditClassOptions, loading: isLoading };
+  return { creditClassItems, loading: isLoading };
 }
 
-export { useGetCreditClassOptions };
+export { useGetCreditClassItems };

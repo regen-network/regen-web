@@ -1,4 +1,4 @@
-export interface CreditClassOption {
+export interface CreditClassItem {
   id: string;
   onChainId: string;
   imageSrc: string;

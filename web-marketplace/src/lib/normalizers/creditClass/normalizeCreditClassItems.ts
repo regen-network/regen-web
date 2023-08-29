@@ -5,7 +5,7 @@ import { IndexerClassesByIssuerQuery, Maybe } from 'generated/indexer-graphql';
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 
-import { CreditClassOption } from './normalizeCreditClassOptions.types';
+import { CreditClassItem } from './normalizeCreditClassItems.types';
 
 type Params = {
   classesByIssuer?: Maybe<IndexerClassesByIssuerQuery>;
@@ -14,12 +14,12 @@ type Params = {
   offChainCreditClasses?: AllCreditClassesQuery;
 };
 
-export const normalizeCreditClassOptions = ({
+export const normalizeCreditClassItems = ({
   classesByIssuer,
   classesMetadata,
   sanityCreditClasses,
   offChainCreditClasses,
-}: Params): CreditClassOption[] => {
+}: Params): CreditClassItem[] => {
   return (
     classesByIssuer?.allClassIssuers?.nodes.map((creditClass, index) => {
       const metadata = classesMetadata?.[index];

@@ -90,13 +90,13 @@ const MyProjects = (): JSX.Element => {
         sanityClass: findSanityCreditClass({
           sanityCreditClassData,
           creditClassIdOrUrl:
-            project?.creditClassByCreditClassId?.onChainId ?? '',
+            project?.creditClassByCreditClassId?.onChainId ??
+            project?.metadata?.['regen:creditClassId'] ??
+            '',
         }),
       }),
     })) ?? [];
-  console.log(
-    onlyOffChainProjectsWithData.find(p => p.name === 'Test with some image'),
-  );
+
   const projects: Project[] = [
     ...onChainProjectsWithData,
     ...onlyOffChainProjectsWithData,

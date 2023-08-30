@@ -10,7 +10,6 @@ import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';
 import { ERRORS } from 'config/errors';
-import { FormikProps, FormikValues } from 'formik';
 import { useSetAtom } from 'jotai';
 import { startCase } from 'lodash';
 
@@ -40,7 +39,6 @@ import useProjectEditSubmit, {
 import { EDIT_PROJECT } from './ProjectEdit.constants';
 import { ProjectEditNav } from './ProjectEdit.Nav';
 import { useProjectEditStyles } from './ProjectEdit.styles';
-import { FormRef, Values } from './ProjectEdit.types';
 import { WarningModal } from './ProjectEdit.WarningModal';
 
 type ContextType = {
@@ -48,7 +46,6 @@ type ContextType = {
   isEdit?: boolean;
   onChainProject?: ProjectInfo;
   projectEditSubmit: UseProjectEditSubmitParams;
-  formRef: FormRef<Values>;
   isDirtyRef: MutableRefObject<boolean>;
   isLoading: boolean;
 };
@@ -57,7 +54,6 @@ const ProjectEditContext = createContext<ContextType>({
   confirmSave: () => {},
   projectEditSubmit: async () => {},
   isEdit: false,
-  formRef: { current: null },
   isDirtyRef: { current: false },
   isLoading: false,
 });
@@ -138,8 +134,6 @@ function ProjectEdit(): JSX.Element {
     }, 5000);
   };
 
-  // For formik based forms
-  const formRef = useRef<FormikProps<FormikValues>>(null);
   // For react-hook-form based forms
   const isDirtyRef = useRef<boolean>(false);
 
@@ -157,7 +151,7 @@ function ProjectEdit(): JSX.Element {
   }
 
   const onBackClick = (): void => {
-    const isFormDirty = formRef.current?.dirty || isDirtyRef.current;
+    const isFormDirty = isDirtyRef.current;
     if (section) {
       const path = isMobile
         ? `/project-pages/${projectId}/edit`
@@ -173,7 +167,7 @@ function ProjectEdit(): JSX.Element {
   };
 
   const onNavClick = (sectionName: string): void => {
-    const isFormDirty = formRef.current?.dirty || isDirtyRef.current;
+    const isFormDirty = isDirtyRef.current;
     const path = `/project-pages/${projectId}/edit/${sectionName.replace(
       ' ',
       '-',
@@ -192,7 +186,6 @@ function ProjectEdit(): JSX.Element {
         isEdit: true,
         onChainProject,
         projectEditSubmit,
-        formRef,
         isDirtyRef,
         isLoading,
       }}

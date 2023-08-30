@@ -1,15 +1,12 @@
-import React from 'react';
+import { MetadataForm } from 'components/organisms/MetadataForm/MetadataForm';
 
-import { ProjectMetadataLD } from 'lib/db/types/json-ld';
-
-import { ProjectMetadataForm } from '../../components/organisms/ProjectMetadataForm/ProjectMetadataForm';
 import { ShaclGraphByUriQuery } from '../../generated/graphql';
 import { UseProjectMetadataSubmitReturn } from './hooks/useProjectMetadataSubmit';
 
 type Props = {
   isVCS: boolean;
   submit: UseProjectMetadataSubmitReturn;
-  metadata?: Partial<ProjectMetadataLD>;
+  metadata?: string;
   graphData?: ShaclGraphByUriQuery;
   onNext?: () => void;
   onPrev?: () => void;
@@ -33,9 +30,9 @@ export const ProjectMetadataSelectedForm = ({
   //     {'VCS metadata form not implemented yet'}
   //   </Box>
   // ) : (
-  <ProjectMetadataForm
-    submit={submit}
-    initialValues={metadata}
+  <MetadataForm
+    onSubmit={submit}
+    initialValues={{ metadata: metadata ?? '' }}
     graphData={graphData}
     creditClassId={creditClassId}
     onNext={onNext}

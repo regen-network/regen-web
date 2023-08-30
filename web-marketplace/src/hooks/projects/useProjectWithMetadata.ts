@@ -22,7 +22,7 @@ import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-serve
 import { UseProjectEditSubmitParams } from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
 import { BasicInfoFormSchemaType } from 'components/organisms/BasicInfoForm/BasicInfoForm.schema';
 import { DescriptionSchemaType } from 'components/organisms/DescriptionForm/DescriptionForm.schema';
-import { LocationFormSchemaType } from 'components/organisms/LocationForm/LocationForm.schema';
+import { SimplifiedLocationFormSchemaType } from 'components/organisms/LocationForm/LocationForm.schema';
 import { MediaFormSchemaType } from 'components/organisms/MediaForm/MediaForm.schema';
 
 import { useLedger } from '../../ledger';
@@ -55,7 +55,7 @@ interface Res {
 
 type Values =
   | BasicInfoFormSchemaType
-  | LocationFormSchemaType
+  | SimplifiedLocationFormSchemaType
   | DescriptionSchemaType
   | MediaFormSchemaType
   | Partial<ProjectMetadataLD>;

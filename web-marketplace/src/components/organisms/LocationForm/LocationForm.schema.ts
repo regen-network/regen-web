@@ -12,3 +12,7 @@ export const locationFormSchema = z.object({
 });
 
 export type LocationFormSchemaType = z.infer<typeof locationFormSchema>;
+
+export type SimplifiedLocationFormSchemaType = {
+  'schema:location': GeocodeFeature;
+};

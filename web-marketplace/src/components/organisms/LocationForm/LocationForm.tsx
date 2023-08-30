@@ -5,6 +5,7 @@ import { useSetAtom } from 'jotai';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import LocationField from 'web-components/lib/components/inputs/new/LocationField/LocationField';
+import { isGeocodingFeature } from 'web-components/lib/components/inputs/new/LocationField/LocationField.types';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
@@ -17,11 +18,16 @@ import { LOCATION_LABEL, LOCATION_PLACEHOLDER } from './LocationForm.constants';
 import {
   locationFormSchema,
   LocationFormSchemaType,
+  SimplifiedLocationFormSchemaType,
 } from './LocationForm.schema';
 
 interface LocationFormProps {
   mapToken: string;
-  onSubmit: ({ values }: { values: LocationFormSchemaType }) => Promise<void>;
+  onSubmit: ({
+    values,
+  }: {
+    values: SimplifiedLocationFormSchemaType;
+  }) => Promise<void>;
   onNext?: () => void;
   onPrev?: () => void;
   initialValues?: LocationFormSchemaType;
@@ -63,7 +69,10 @@ const LocationForm: React.FC<LocationFormProps> = ({
       form={form}
       onSubmit={async values => {
         try {
-          await onSubmit({ values });
+          const location = values['schema:location'];
+          if (isGeocodingFeature(location)) {
+            await onSubmit({ values: { 'schema:location': location } });
+          }
           if (isEdit && confirmSave) confirmSave();
         } catch (e) {
           setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);

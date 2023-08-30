@@ -100,7 +100,7 @@ export const footerItems: [FooterItem, FooterItem, FooterItem, FooterItem] = [
       },
       {
         title: 'Community Calendar',
-        href: 'https://calendar.google.com/calendar/u/0/embed?src=c_mldg58l0nb1g22sb7treh6s63s@group.calendar.google.com&ctz=America/Denver',
+        href: 'https://calendar.google.com/calendar/u/0/embed?src=c_1250640b0093c1453ac648937f168c97e48175e7862fb02d38f45e0639df2b25@group.calendar.google.com',
         target: '_blank',
       },
     ],

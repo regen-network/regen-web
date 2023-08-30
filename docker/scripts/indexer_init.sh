@@ -3,7 +3,7 @@
 # run migrations
 (cd sql && ./run_all_migrations.sh)
 
-# workaround for indexer starting on block 0
+# seed database with class issuers from ledger genesis file
 psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO chain (
   num,
   chain_id
@@ -22,8 +22,6 @@ psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO block (
   '{}',
   now()
 )"
-
-# seed indexer database with class issuers from regen ledger genesis file
 psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO tx (
   chain_num,
   block_height,

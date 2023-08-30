@@ -45,6 +45,8 @@ services:
       CSRF_SECRET: secret
       CSRF_COOKIE_NAME: cookie
       DATABASE_URL: postgres://postgres:password@localhost:5432/server
+      SHADOW_DATABASE_URL: postgres://postgres:postgres@localhost:5432/server_shadow
+      ROOT_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
     entrypoint: ["/bin/sh", "-c", "./scripts/server_start.sh"]
     network_mode: host
     expose:

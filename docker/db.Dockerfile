@@ -12,9 +12,6 @@ RUN chown -R postgres:postgres ${PGDATA} /tmp /var/log/postgresql
 # Change working directory
 WORKDIR /home/db
 
-# Copy database dumps
-COPY dump-server-production /home/db/
-
 # Copy init script
 COPY docker/scripts/db_init.sh /home/db/scripts/
 

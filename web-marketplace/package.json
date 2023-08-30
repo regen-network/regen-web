@@ -82,7 +82,7 @@
     "lint-fix": "eslint ./src --fix -c .eslintrc.js --ext .ts,.tsx",
     "format": "prettier --write --loglevel warn --ignore-path=../.prettierignore './src/**/*.{ts,tsx,json,md,css}'",
     "format-and-fix": "yarn format && yarn lint-fix",
-    "start": "vite --host",
+    "start": "vite --host --force",
     "build": "vite build",
     "serve": "vite preview",
     "graphql:codegen": "graphql-codegen --config codegen.yml",

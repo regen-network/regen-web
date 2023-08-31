@@ -88,6 +88,25 @@ const useProjectEditSubmit = ({
             },
           ];
 
+          if (doUpdateAdmin && admin && newAdmin) {
+            cardItems.push(
+              {
+                label: 'new project admin',
+                value: {
+                  name: newAdmin,
+                  url: `/ecocredits/accounts/${newAdmin}/portfolio`,
+                },
+              },
+              {
+                label: 'old project admin',
+                value: {
+                  name: admin,
+                  url: `/ecocredits/accounts/${admin}/portfolio`,
+                },
+              },
+            );
+          }
+
           onTxSuccessful({
             cardItems,
             title: PROJECT_UPDATED_METADATA_HEADER,

@@ -1,5 +1,8 @@
 import { useCallback } from 'react';
-import { MsgUpdateProjectMetadata } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
+import {
+  MsgUpdateProjectAdmin,
+  MsgUpdateProjectMetadata,
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 
 import { NestedPartial } from 'types/nested-partial';
 import { generateIri } from 'lib/db/api/metadata-graph';
@@ -28,6 +31,9 @@ type Props = {
 
 export type UseProjectEditSubmitParams = (
   metadata: NestedPartial<ProjectMetadataLD>,
+  newAdmin?: string,
+  doUpdateMetadata?: boolean,
+  doUpdateAdmin?: boolean,
 ) => Promise<void>;
 
 const useProjectEditSubmit = ({
@@ -39,14 +45,33 @@ const useProjectEditSubmit = ({
   onErrorCallback,
 }: Props): UseProjectEditSubmitParams => {
   const projectEditSubmit = useCallback(
-    async (metadata: any): Promise<void> => {
+    async (
+      metadata: NestedPartial<ProjectMetadataLD>,
+      newAdmin?: string,
+      doUpdateMetadata: boolean = true,
+      doUpdateAdmin: boolean = false,
+    ): Promise<void> => {
       const iriResponse = await generateIri(metadata);
       if (!iriResponse) return;
-      const metadataMsg = MsgUpdateProjectMetadata.fromPartial({
-        projectId,
-        admin,
-        newMetadata: iriResponse.iri,
-      });
+      const msgs: Array<MsgUpdateProjectMetadata | MsgUpdateProjectAdmin> = [];
+
+      if (doUpdateMetadata)
+        msgs.push(
+          MsgUpdateProjectMetadata.fromPartial({
+            projectId,
+            admin,
+            newMetadata: iriResponse.iri,
+          }),
+        );
+
+      if (doUpdateAdmin && newAdmin)
+        msgs.push(
+          MsgUpdateProjectAdmin.fromPartial({
+            projectId,
+            admin,
+            newAdmin,
+          }),
+        );
 
       const onError = (err?: Error): void => {
         onErrorCallback && onErrorCallback(err);
@@ -57,11 +82,30 @@ const useProjectEditSubmit = ({
             {
               label: 'project',
               value: {
-                name: metadata['schema:name'],
+                name: metadata['schema:name'] || '',
                 url: `/project/${projectId}`,
               },
             },
           ];
+
+          if (doUpdateAdmin && admin && newAdmin) {
+            cardItems.push(
+              {
+                label: 'new project admin',
+                value: {
+                  name: newAdmin,
+                  url: `/ecocredits/accounts/${newAdmin}/portfolio`,
+                },
+              },
+              {
+                label: 'old project admin',
+                value: {
+                  name: admin,
+                  url: `/ecocredits/accounts/${admin}/portfolio`,
+                },
+              },
+            );
+          }
 
           onTxSuccessful({
             cardItems,
@@ -70,8 +114,8 @@ const useProjectEditSubmit = ({
           });
         }
       };
-      // TODO submit MsgUpdateProjectAdmin as part of the same tx if needed: regen-registry/issues/1500
-      await signAndBroadcast({ msgs: [metadataMsg] }, () => onBroadcast(), {
+
+      await signAndBroadcast({ msgs }, () => onBroadcast(), {
         onError,
         onSuccess,
       });

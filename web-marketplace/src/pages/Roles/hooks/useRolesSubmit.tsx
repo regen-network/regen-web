@@ -26,10 +26,14 @@ interface Props {
   isEdit?: boolean;
   metadataReload: () => Promise<void>;
   navigateNext: () => void;
+  admin?: string;
 }
 
-type Return = {
-  rolesSubmit: (values: RolesFormSchemaType) => Promise<void>;
+export type Return = {
+  rolesSubmit: (
+    values: RolesFormSchemaType,
+    adminWalletId?: string,
+  ) => Promise<void>;
 };
 
 const useRolesSubmit = ({
@@ -39,22 +43,43 @@ const useRolesSubmit = ({
   isEdit,
   metadataReload,
   navigateNext,
+  admin,
 }: Props): Return => {
   const [updateProject] = useUpdateProjectByIdMutation();
 
   const rolesSubmit = useCallback(
-    async (values: RolesFormSchemaType): Promise<void> => {
+    async (
+      values: RolesFormSchemaType,
+      adminWalletId?: string,
+    ): Promise<void> => {
       try {
-        let doUpdate = false;
+        let doUpdateMetadata = false;
+        let doUpdateAdmin = false;
         let projectPatch: ProjectPatch = {};
         const { projectDeveloper, verifier } = values;
-        if (offChainProject?.partyByDeveloperId !== projectDeveloper?.id) {
-          doUpdate = true;
+
+        // Compared values below can be undefined and null but in this case,
+        // this means there was no project developer/verifier and this hasn't changed,
+        // so we don't want to update the metadata.
+        if (
+          (offChainProject?.partyByDeveloperId || null) !==
+          (projectDeveloper?.id || null)
+        ) {
+          doUpdateMetadata = true;
           projectPatch.developerId = projectDeveloper?.id || null;
         }
-        if (offChainProject?.partyByVerifierId !== verifier?.id) {
-          doUpdate = true;
+        if (
+          (offChainProject?.partyByVerifierId || null) !==
+          (verifier?.id || null)
+        ) {
+          doUpdateMetadata = true;
           projectPatch.verifierId = verifier?.id || null;
+        }
+        if (values.admin && admin !== values.admin) {
+          doUpdateAdmin = true;
+          if (adminWalletId) {
+            projectPatch.adminWalletId = adminWalletId;
+          }
         }
 
         const newMetadata = {
@@ -68,9 +93,19 @@ const useRolesSubmit = ({
             metadata: newMetadata,
             ...projectPatch,
           };
+
         // In creation or edit mode, we always store references to the project stakeholders in the project table
         // which should be in projectPatch if new or updated
-        if (doUpdate) {
+        if (doUpdateMetadata || doUpdateAdmin) {
+          // In edit mode, we need to update the project on-chain metadata and/or admin if needed
+          if (isEdit) {
+            await projectEditSubmit(
+              newMetadata,
+              values.admin,
+              doUpdateMetadata,
+              doUpdateAdmin,
+            );
+          }
           await updateProject({
             variables: {
               input: {
@@ -79,17 +114,12 @@ const useRolesSubmit = ({
               },
             },
           });
+          await metadataReload();
         }
 
         if (!isEdit) {
           navigateNext();
-        } else {
-          // In edit mode, we need to update the project on-chain metadata if needed
-          if (doUpdate) {
-            await projectEditSubmit(newMetadata);
-          }
         }
-        await metadataReload();
       } catch (e) {
         // TODO: Should we display the error banner here?
         // https://github.com/regen-network/regen-registry/issues/554
@@ -100,6 +130,7 @@ const useRolesSubmit = ({
       offChainProject?.partyByDeveloperId,
       offChainProject?.partyByVerifierId,
       offChainProject?.id,
+      admin,
       metadata,
       isEdit,
       metadataReload,

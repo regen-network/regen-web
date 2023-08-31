@@ -41,6 +41,7 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
     isEdit,
     metadataReload,
     navigateNext,
+    admin: onChainProject?.admin,
   });
 
   const projectDeveloper = offChainProject?.partyByDeveloperId;

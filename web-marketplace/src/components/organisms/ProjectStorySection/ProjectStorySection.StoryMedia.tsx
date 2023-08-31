@@ -1,4 +1,4 @@
-import ReactPlayerLazy from 'react-player/lazy';
+import ReactPlayer from 'react-player/es6';
 import { Box, Grid } from '@mui/material';
 import cx from 'clsx';
 
@@ -15,7 +15,7 @@ export function StoryMedia({
     <Grid item xs={12} md={hasText ? 6 : 12}>
       {storyMedia['@type'] === 'schema:VideoObject' ? (
         <Box className={cx(classes.mediaContainer, classes.videoContainer)}>
-          <ReactPlayerLazy
+          <ReactPlayer
             className={classes.video}
             url={storyMedia['schema:url']}
             width="100%"

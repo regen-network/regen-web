@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ReactPlayerLazy from 'react-player/lazy';
+import ReactPlayer from 'react-player/es6';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { DeliverTxResponse } from '@cosmjs/stargate';
@@ -231,7 +231,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
               {isVideo && (
                 <Card>
                   <CardMedia
-                    component={ReactPlayerLazy}
+                    component={ReactPlayer}
                     url={storyMedia['schema:url']}
                     fallback={<div>Loading video player...</div>}
                     height={isMobile ? 216 : 293}

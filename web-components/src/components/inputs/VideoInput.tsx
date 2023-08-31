@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ReactPlayerLazy from 'react-player/lazy';
+import ReactPlayer from 'react-player/es6';
 import {
   CardMedia,
   Collapse,
@@ -121,7 +121,7 @@ function VideoInput({
                   <CardMedia
                     sx={{ width: '100%', borderRadius: 5, height: [210, 318] }}
                     // note: the following props are passed to ReactPlayer
-                    component={ReactPlayerLazy}
+                    component={ReactPlayer}
                     url={field.value}
                     onReady={() => setVideoLoaded(true)}
                     height={isMobile ? 210 : 318}

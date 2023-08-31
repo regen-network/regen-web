@@ -95,3 +95,6 @@ export const getHeaderColors = (theme: Theme): HeaderColors => ({
   '/project-developers': theme.palette.primary.main,
   '/methodology-review-process': theme.palette.primary.main,
 });
+
+export const getBorderBottom = (pathname: string): boolean =>
+  ['/project-pages', '/projects'].some(route => pathname.startsWith(route));

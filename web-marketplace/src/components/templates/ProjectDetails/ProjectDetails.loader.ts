@@ -8,7 +8,7 @@ import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketpl
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { getProjectByHandleQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByHandleQuery/getProjectByHandleQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
-import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
+import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 
@@ -32,7 +32,9 @@ export const projectDetailsLoader =
 
     // Queries
     const allProjectPageQuery = getAllProjectPageQuery({ sanityClient });
-    const allCreditClassesQuery = getAllCreditClassesQuery({ sanityClient });
+    const allCreditClassesQuery = getAllSanityCreditClassesQuery({
+      sanityClient,
+    });
     const projectQuery = getProjectQuery({
       request: { projectId },
       client: ecocreditClient,

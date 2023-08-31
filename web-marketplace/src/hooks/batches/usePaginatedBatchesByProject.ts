@@ -8,7 +8,7 @@ import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
 import { getAddDataToBatchesQuery } from 'lib/queries/react-query/ecocredit/getAddDataToBatchesQuery/getAddDataToBatchesQuery';
 import { getBatchesByProjectQuery } from 'lib/queries/react-query/ecocredit/getBatchesByProjectQuery/getBatchesByProjectQuery';
-import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
+import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
 import { client as sanityClient } from '../../lib/clients/sanity';
 
@@ -34,7 +34,7 @@ export const usePaginatedBatchesByProject = ({
   const { rowsPerPage, page } = paginationParams;
 
   const sanityCreditClassDataResult = useQuery(
-    getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
   );
 
   /* Fetch current page batches */

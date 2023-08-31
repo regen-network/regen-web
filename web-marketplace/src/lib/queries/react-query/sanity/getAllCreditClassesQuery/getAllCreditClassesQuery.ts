@@ -8,7 +8,7 @@ import {
   ReactQueryGetAllCreditClassesResponse,
 } from './getAllCreditClassesQuery.types';
 
-export const getAllCreditClassesQuery = ({
+export const getAllSanityCreditClassesQuery = ({
   sanityClient,
   ...params
 }: ReactQueryGetAllCreditClassesParams): ReactQueryGetAllCreditClassesResponse => ({

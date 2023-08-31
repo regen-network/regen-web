@@ -9,11 +9,15 @@ import { useQuery } from '@tanstack/react-query';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
+import { Flex } from 'web-components/lib/components/box';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
+import EditIcon from 'web-components/lib/components/icons/EditIcon';
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { getWalletByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getWalletByAddrQuery/getWalletByAddrQuery';
 
+import { Return } from 'pages/Roles/hooks/useRolesSubmit';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
@@ -22,13 +26,14 @@ import { getPartiesByNameOrAddrQuery } from '../../../lib/queries/react-query/re
 import { useWallet } from '../../../lib/wallet/wallet';
 import { useProjectEditContext } from '../../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../../molecules';
+import { AdminModal } from './components/AdminModal/AdminModal';
 import { ProfileModalSchemaType } from './components/ProfileModal/ProfileModal.schema';
 import { RoleField } from './components/RoleField/RoleField';
 import { useSaveProfile } from './hooks/useSaveProfile';
 import { rolesFormSchema, RolesFormSchemaType } from './RolesForm.schema';
 
 interface RolesFormProps {
-  submit: (values: RolesFormSchemaType) => Promise<void>;
+  submit: Return['rolesSubmit'];
   onNext?: () => void;
   onPrev?: () => void;
   initialValues?: RolesFormSchemaType;
@@ -51,9 +56,9 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     control: form.control,
   });
   const { isDirtyRef } = useProjectEditContext();
-
   const { confirmSave, isEdit } = useProjectEditContext();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+  const [adminModalOpen, setAdminModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     isDirtyRef.current = isDirty;
@@ -69,6 +74,10 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     control: form.control,
     name: 'verifier',
   });
+  const admin = useWatch({
+    control: form.control,
+    name: 'admin',
+  });
 
   /* Setter */
 
@@ -77,6 +86,9 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   };
   const setVerifier = (value: ProfileModalSchemaType | null): void => {
     form.setValue('verifier', value, { shouldDirty: true });
+  };
+  const setAdmin = (value: string): void => {
+    form.setValue('admin', value, { shouldDirty: true });
   };
 
   const { accountId } = useWallet();
@@ -87,6 +99,13 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
       client: graphqlClient,
       id: accountId,
       enabled: !!accountId && !!graphqlClient,
+    }),
+  );
+  const { data: adminWalletData } = useQuery(
+    getWalletByAddrQuery({
+      addr: admin,
+      client: graphqlClient,
+      enabled: admin !== initialValues?.admin && !!graphqlClient,
     }),
   );
 
@@ -139,17 +158,42 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
           accountId={accountId}
           {...form.register('verifier')}
         />
-        <TextField
-          type="text"
-          label="Admin"
-          disabled
-          {...form.register('admin')}
-        />
+        <Flex alignItems="flex-end" sx={{ mt: { xs: 8.25, sm: 10 } }}>
+          <TextField
+            type="text"
+            label="Admin"
+            disabled
+            {...form.register('admin')}
+          />
+          <EditIcon
+            onClick={() => setAdminModalOpen(true)}
+            sx={{
+              width: 24,
+              height: 24,
+              cursor: 'pointer',
+              ml: { xs: 2, sm: 4.25 },
+              mb: { xs: 2.5, sm: 4.25 },
+            }}
+          />
+          {adminModalOpen && (
+            <AdminModal
+              initialValues={{
+                currentAddress: initialValues?.admin || '',
+                newAddress: initialValues?.admin === admin ? '' : admin,
+              }}
+              onClose={() => setAdminModalOpen(false)}
+              onSubmit={value => {
+                setAdmin(value.newAddress);
+                setAdminModalOpen(false);
+              }}
+            />
+          )}
+        </Flex>
       </OnBoardingCard>
       <ProjectPageFooter
         onSave={form.handleSubmit(async data => {
           try {
-            await submit(data);
+            await submit(data, adminWalletData?.walletByAddr?.id);
             if (isEdit && confirmSave) confirmSave();
           } catch (e) {
             setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);

@@ -49,7 +49,4 @@ export const useFetchCreditClasses = (): UseFetchCreditClassesResponse => {
   return {
     creditClassesWithMetadata,
   };
-
-  // Return creditClasses with metadata
-  // Create normalizer in useProjects to return {name: string, path: string, isCommunity: boolean}
 };

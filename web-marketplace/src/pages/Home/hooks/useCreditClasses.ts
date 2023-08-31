@@ -7,7 +7,7 @@ import { useQueries, useQuery } from '@tanstack/react-query';
 
 import { client as sanityClient } from 'lib/clients/sanity';
 import { getCreditClassByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getCreditClassByOnChainIdQuery/getCreditClassByOnChainIdQuery';
-import { getAllCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
+import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
 import { getDisplayParty } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
@@ -22,7 +22,7 @@ export const useCreditClasses = ({ skippedClassId }: Props) => {
 
   // All credit class from sanity
   const { data: creditClassData } = useQuery(
-    getAllCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
   );
 
   // Filtered based on env variable

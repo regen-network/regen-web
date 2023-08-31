@@ -6,6 +6,7 @@ export const useProjectEditStyles = makeStyles()((theme: Theme) => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
+    backgroundColor: theme.palette.grey[50],
     [theme.breakpoints.up('sm')]: {
       justifyContent: 'space-evenly',
       padding: theme.spacing(8.75),

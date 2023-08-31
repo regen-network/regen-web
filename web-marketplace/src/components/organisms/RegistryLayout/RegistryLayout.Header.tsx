@@ -28,6 +28,7 @@ import { chainId } from '../../../lib/ledger';
 import { RegistryIconLink, RegistryNavLink } from '../../atoms';
 import { WalletButton } from '../WalletButton/WalletButton';
 import {
+  getBorderBottom,
   getHeaderColors,
   getIsTransparent,
   getMenuItems,
@@ -50,6 +51,8 @@ const RegistryLayoutHeader: React.FC = () => {
   const navigate = useNavigate();
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
   const isTransparent = useMemo(() => getIsTransparent(pathname), [pathname]);
+  const borderBottom = useMemo(() => getBorderBottom(pathname), [pathname]);
+
   const menuItems = useMemo(() => getMenuItems(pathname), [pathname]);
   const userMenuItems = useMemo(
     () => getUserMenuItems({ linkComponent: RegistryNavLink, pathname, theme }),
@@ -89,7 +92,7 @@ const RegistryLayoutHeader: React.FC = () => {
         color={color}
         transparent={isTransparent}
         absolute={isTransparent}
-        borderBottom={false} // TODO: there's some bug where this won't change on routes - hardcoded for now
+        borderBottom={borderBottom}
         fullWidth={fullWidthRegExp.test(pathname)}
         pathname={pathname}
         extras={

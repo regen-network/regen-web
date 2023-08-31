@@ -12,8 +12,8 @@ RUN chown -R postgres:postgres ${PGDATA} /tmp /var/log/postgresql
 # Change working directory
 WORKDIR /home/db
 
-# Copy database dumps
-COPY dump-server-production /home/db/
+# Copy init script
+COPY docker/scripts/db_init.sh /home/db/scripts/
 
 # Copy start script
 COPY docker/scripts/db_start.sh /home/db/scripts/
@@ -21,5 +21,8 @@ COPY docker/scripts/db_start.sh /home/db/scripts/
 # Make start script executable
 RUN ["chmod", "+x", "/home/db/scripts/db_start.sh"]
 
-# Set the user to run the container
+# Set user to run init script and db container
 USER postgres
+
+# Run init script
+RUN /home/db/scripts/db_init.sh

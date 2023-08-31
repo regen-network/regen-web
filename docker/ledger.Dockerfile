@@ -52,8 +52,14 @@ RUN sed -i "s/minimum-gas-prices = \"\"/minimum-gas-prices = \"0uregen\"/" /root
 # Set cors allow all origins
 RUN sed -i "s/cors_allowed_origins = \[\]/cors_allowed_origins = [\"*\"]/" /root/.regen/config/config.toml
 
+# Copy bank denom state file
+COPY docker/data/bank_denom_metadata.json /home/ledger/data/
+
 # Copy ecocredit state file
 COPY docker/data/ecocredit.json /home/ledger/data/
+
+# Add bank denom state to genesis
+RUN jq '.app_state.bank.denom_metadata |= . + input' /root/.regen/config/genesis.json /home/ledger/data/bank_denom_metadata.json > genesis-tmp.json
 
 # Add ecocredit state to genesis
 RUN jq '.app_state.ecocredit |= . + input' /root/.regen/config/genesis.json /home/ledger/data/ecocredit.json > genesis-tmp.json

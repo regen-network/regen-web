@@ -1,5 +1,18 @@
-# Run migrations
-(cd sql && ./run_all_migrations.sh)
+#!/bin/bash
 
-# Start indexer
+INDEXER_INITIALIZED="INDEXER_INITIALIZED"
+
+# initialize indexer if not yet initialized
+if [ ! -e $INDEXER_INITIALIZED ]; then
+
+  # set indexer initialized
+  touch $INDEXER_INITIALIZED
+
+  echo "First start, running init script..."
+
+  # run indexer init script
+  /home/indexer/scripts/indexer_init.sh
+fi
+
+# start indexer
 python main.py

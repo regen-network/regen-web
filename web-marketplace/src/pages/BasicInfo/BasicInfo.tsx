@@ -41,7 +41,8 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
       isEdit={isEdit}
       title="Basic Info"
       saveAndExit={saveAndExit}
-      project={offChainProject}
+      offChainProject={offChainProject}
+      onChainProject={onChainProject}
       loading={loading}
     >
       <BasicInfoForm

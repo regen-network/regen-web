@@ -62,7 +62,8 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
       <ProjectFormTemplate
         isEdit={isEdit}
         title="Metadata"
-        project={offChainProject}
+        offChainProject={offChainProject}
+        onChainProject={onChainProject}
         loading={loading}
       >
         <MetadataForm

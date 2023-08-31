@@ -51,7 +51,8 @@ const Media = (): JSX.Element => {
       isEdit={isEdit}
       title="Media"
       saveAndExit={saveAndExit}
-      project={offChainProject}
+      offChainProject={offChainProject}
+      onChainProject={onChainProject}
       loading={loading}
     >
       <WithLoader

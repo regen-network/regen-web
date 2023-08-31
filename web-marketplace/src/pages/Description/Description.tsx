@@ -48,7 +48,8 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
       isEdit={isEdit}
       title="Description"
       saveAndExit={saveAndExit}
-      project={offChainProject}
+      offChainProject={offChainProject}
+      onChainProject={onChainProject}
       loading={loading}
     >
       <WithLoader

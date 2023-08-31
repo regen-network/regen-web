@@ -5583,14 +5583,14 @@
     react-qr-reader "^2.2.1"
     rxjs "^6.6.3"
 
-"@ledgerhq/cryptoassets@^9.2.0":
+"@ledgerhq/cryptoassets@9.2.0", "@ledgerhq/cryptoassets@^9.2.0":
   version "9.2.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/cryptoassets/-/cryptoassets-9.2.0.tgz#c269ccf55d2e70e6a7a7578867be5a9e9198876b"
   integrity sha512-mqoyiPXOnhSTm/djoN0e01NpzcW2u5AokToFACQgVxzE+DKAEkC4nXCGegBEjjnYxa7yXc3Kykpt9qEi0/d/oA==
   dependencies:
     invariant "2"
 
-"@ledgerhq/devices@^8.0.1":
+"@ledgerhq/devices@8.0.1", "@ledgerhq/devices@^8.0.1":
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/@ledgerhq/devices/-/devices-8.0.1.tgz#4c475f6ae249daf00ef08f5098924206233f3179"
   integrity sha512-8uuyR8DGowYBLatur+MyJtRJ8RYDWSFFqGnNmgBBdlRG6VPf9vjhrFZlmYqukWesPwkZNZstP475W4TS+j6EFw==
@@ -5600,7 +5600,7 @@
     rxjs "6"
     semver "^7.3.5"
 
-"@ledgerhq/errors@^6.12.4":
+"@ledgerhq/errors@6.12.4", "@ledgerhq/errors@^6.12.4":
   version "6.12.4"
   resolved "https://registry.yarnpkg.com/@ledgerhq/errors/-/errors-6.12.4.tgz#1c2f75dc3dee91b069f3446be484fa28676d1b45"
   integrity sha512-qi5poMrcIuFuivdzRjjQsNp7rRwUA5v3eo6D4yEy+l+w8wT4d4JtQ5u1TbrlGfFHfgLq7Lv6dsvh2ooLyWTyfg==
@@ -5621,7 +5621,7 @@
     bignumber.js "^9.1.0"
     crypto-js "^4.1.1"
 
-"@ledgerhq/hw-transport-mocker@^6.27.13":
+"@ledgerhq/hw-transport-mocker@6.27.13", "@ledgerhq/hw-transport-mocker@^6.27.13":
   version "6.27.13"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-mocker/-/hw-transport-mocker-6.27.13.tgz#4bbb0ce1d039adbf6bb05fe2fe038decd7ece356"
   integrity sha512-GYik5D45/U8SIkVUeaio6KV6xkIf73v+i6gegMbUFO712x+TgkG/EH1fpF6+sTwLmNxqjaTyi8LYqYeZNW0GMg==
@@ -5649,7 +5649,7 @@
     "@ledgerhq/hw-transport" "^6.28.2"
     "@ledgerhq/logs" "^6.10.1"
 
-"@ledgerhq/hw-transport@^6.20.0", "@ledgerhq/hw-transport@^6.28.2":
+"@ledgerhq/hw-transport@6.28.2", "@ledgerhq/hw-transport@^6.20.0", "@ledgerhq/hw-transport@^6.28.2":
   version "6.28.2"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-6.28.2.tgz#483f9a39403ee63b03d452e30bfe8189dcca5785"
   integrity sha512-2LxQdZnhSzu394brKuUZIWfuT2YAyNI3glRMf8+yHx3wUFqi10v8NzII99SHDyT8tN3Ovzmq+hbGHvrR2PqYRA==

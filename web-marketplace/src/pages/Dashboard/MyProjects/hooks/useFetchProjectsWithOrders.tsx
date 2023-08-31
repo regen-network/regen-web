@@ -1,8 +1,7 @@
-import { useApolloClient } from '@apollo/client';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { Maybe, Project, ProjectFieldsFragment } from 'generated/graphql';
+import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { useLedger } from 'ledger';
 import { normalizeProjectsWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';

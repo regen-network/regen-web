@@ -2,9 +2,10 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { Grid } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
+import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
 import { getProjectCreateBaseData } from 'lib/rdf';
 
 import { useCreateProjectContext } from 'pages/ProjectCreate';
@@ -19,6 +20,7 @@ import { useGetCreditClassItems } from './hooks/useGetCreditClassOptions';
 const ChooseCreditClass: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const graphqlClient = useApolloClient();
+  const reactQueryClient = useQueryClient();
   const [error, setError] = useErrorTimeout();
   const { projectId } = useParams();
   const { creditClassItems, loading } = useGetCreditClassItems();
@@ -56,6 +58,11 @@ const ChooseCreditClass: React.FC<React.PropsWithChildren<unknown>> = () => {
             },
           },
         });
+        if (!!projectId) {
+          await reactQueryClient.invalidateQueries({
+            queryKey: getProjectByIdKey(projectId),
+          });
+        }
         navigate(`/project-pages/${projectId}/basic-info`);
       } catch (e) {
         setError(`There was a problem updating this project: ${e}`);

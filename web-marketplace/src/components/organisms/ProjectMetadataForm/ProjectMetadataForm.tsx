@@ -99,7 +99,7 @@ export const ProjectMetadataForm = ({
               <ControlledFormLabel>{'Project metadata'}</ControlledFormLabel>
               <Body size="sm" mt={1} mb={3}>
                 {
-                  'Attach arbitrary JSON-LD metadata to the credit batch below. '
+                  'Attach arbitrary JSON-LD metadata to the project metadata below. '
                 }
               </Body>
               <Field

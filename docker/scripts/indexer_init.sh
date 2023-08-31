@@ -3,15 +3,15 @@
 # run migrations
 (cd sql && ./run_all_migrations.sh)
 
-# seed database with class issuers from ledger genesis file
-psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO chain (
+# workaround for indexer starting with new chain
+psql "$DATABASE_URL" -c "INSERT INTO chain (
   num,
   chain_id
 ) VALUES (
   1,
   'regen-local'
 )"
-psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO block (
+psql "$DATABASE_URL" -c "INSERT INTO block (
   chain_num,
   height,
   data,
@@ -22,7 +22,9 @@ psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO block (
   '{}',
   now()
 )"
-psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO tx (
+
+# seed database with class issuers from ledger genesis file
+psql "$DATABASE_URL" -c "INSERT INTO tx (
   chain_num,
   block_height,
   tx_idx,
@@ -35,7 +37,7 @@ psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO tx (
   convert_to('', 'LATIN1'),
   '{}'
 )"
-psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO msg (
+psql "$DATABASE_URL" -c "INSERT INTO msg (
   chain_num,
   block_height,
   tx_idx,
@@ -48,7 +50,7 @@ psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO msg (
   0,
   '{}'
 )"
-psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO msg_event (
+psql "$DATABASE_URL" -c "INSERT INTO msg_event (
   chain_num,
   block_height,
   tx_idx,
@@ -61,7 +63,7 @@ psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO msg_eve
   0,
   'regen.ecocredit.v1.EventCreateClass'
 )"
-psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO class_issuers (
+psql "$DATABASE_URL" -c "INSERT INTO class_issuers (
   type,
   block_height,
   tx_idx,
@@ -82,7 +84,7 @@ psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO class_i
   'C01',
   'regen1l2pwmzk96ftmmt5egpjulyqtneygmmzndf7csk'
 )"
-psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO msg (
+psql "$DATABASE_URL" -c "INSERT INTO msg (
   chain_num,
   block_height,
   tx_idx,
@@ -95,7 +97,7 @@ psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO msg (
   1,
   '{}'
 )"
-psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO msg_event (
+psql "$DATABASE_URL" -c "INSERT INTO msg_event (
   chain_num,
   block_height,
   tx_idx,
@@ -108,7 +110,7 @@ psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO msg_eve
   1,
   'regen.ecocredit.v1.EventCreateClass'
 )"
-psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO class_issuers (
+psql "$DATABASE_URL" -c "INSERT INTO class_issuers (
   type,
   block_height,
   tx_idx,
@@ -129,7 +131,7 @@ psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO class_i
   'C02',
   'regen1l2pwmzk96ftmmt5egpjulyqtneygmmzndf7csk'
 )"
-psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO msg (
+psql "$DATABASE_URL" -c "INSERT INTO msg (
   chain_num,
   block_height,
   tx_idx,
@@ -142,7 +144,7 @@ psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO msg (
   2,
   '{}'
 )"
-psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO msg_event (
+psql "$DATABASE_URL" -c "INSERT INTO msg_event (
   chain_num,
   block_height,
   tx_idx,
@@ -155,7 +157,7 @@ psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO msg_eve
   2,
   'regen.ecocredit.v1.EventCreateClass'
 )"
-psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO class_issuers (
+psql "$DATABASE_URL" -c "INSERT INTO class_issuers (
   type,
   block_height,
   tx_idx,
@@ -176,7 +178,7 @@ psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO class_i
   'C03',
   'regen1l2pwmzk96ftmmt5egpjulyqtneygmmzndf7csk'
 )"
-psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO msg (
+psql "$DATABASE_URL" -c "INSERT INTO msg (
   chain_num,
   block_height,
   tx_idx,
@@ -189,7 +191,7 @@ psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO msg (
   3,
   '{}'
 )"
-psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO msg_event (
+psql "$DATABASE_URL" -c "INSERT INTO msg_event (
   chain_num,
   block_height,
   tx_idx,
@@ -202,7 +204,7 @@ psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO msg_eve
   3,
   'regen.ecocredit.v1.EventCreateClass'
 )"
-psql postgres://postgres:password@localhost:5432/indexer -c "INSERT INTO class_issuers (
+psql "$DATABASE_URL" -c "INSERT INTO class_issuers (
   type,
   block_height,
   tx_idx,

@@ -14,6 +14,13 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/nct',
+        destination:
+          'https://www.notion.so/regennetwork/A-Guide-to-Nature-Carbon-Ton-NCT-8204ea9d20d0436281f49b8fd1b3fbd2',
+        permanent: false,
+        basePath: false,
+      },
+      {
         source: '/team',
         destination: '/',
         permanent: false,

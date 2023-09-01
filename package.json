@@ -72,12 +72,7 @@
     "**/@typescript-eslint/parser": "^4.5.0",
     "webpack": "4.44.2",
     "react-error-overlay": "6.0.9",
-    "@emotion/react": "11.10.6",
-    "@ledgerhq/cryptoassets": "9.2.0",
-    "@ledgerhq/devices": "8.0.1",
-    "@ledgerhq/errors": "6.12.4",
-    "@ledgerhq/hw-transport": "6.28.2",
-    "@ledgerhq/hw-transport-mocker": "6.27.13"
+    "@emotion/react": "11.10.6"
   },
   "husky": {
     "hooks": {}

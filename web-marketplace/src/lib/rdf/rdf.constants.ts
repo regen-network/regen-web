@@ -126,5 +126,4 @@ export const COMPACTED_CONTEXT = {
 
   // Credit class version metadata
   'regen:SDGs': { '@container': '@list' },
-  'regen:coBenefits': { '@container': '@list' },
 };

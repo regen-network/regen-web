@@ -1,5 +1,6 @@
 import { Box, Grid, SxProps, Theme } from '@mui/material';
 
+import { BlockContent } from '../../../components/block-content';
 import { ImageType } from '../../../types/shared/imageType';
 import { sxToArray } from '../../../utils/mui/sxToArray';
 import { Image } from '../../image';
@@ -92,7 +93,11 @@ export default function ProjectImpactCard({
           </Title>
           {description && (
             <Body as="div" size="sm" mobileSize="sm" sx={{ pb: 4 }}>
-              {description}
+              {typeof description === 'string' ? (
+                description
+              ) : (
+                <BlockContent content={description} />
+              )}
             </Body>
           )}
           <Box>

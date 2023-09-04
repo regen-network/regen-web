@@ -127,11 +127,10 @@ export function getAnchoredProjectMetadata(
   creditClassId?: string,
 ): AnchoredProjectMetadataLD {
   const filtered = getFilteredProjectMetadata(metadata) as ProjectMetadataLD;
-  return {
-    ...filtered,
-    '@context': { ...ANCHORED_PROJECT_CONTEXT, ...metadata?.['@context'] },
-    '@type': `regen:${creditClassId}-Project`,
-  };
+  return getAnchoredProjectBaseMetadata(
+    filtered,
+    creditClassId,
+  ) as AnchoredProjectMetadataLD;
 }
 
 export function getAnchoredProjectBaseMetadata(
@@ -153,8 +152,18 @@ export function getUnanchoredProjectMetadata(
     metadata,
     false,
   ) as ProjectMetadataLD;
+  return getUnanchoredProjectBaseMetadata(
+    filtered,
+    onChainId,
+  ) as ProjectPageMetadataLD;
+}
+
+export function getUnanchoredProjectBaseMetadata(
+  metadata: NestedPartial<ProjectMetadataLD>,
+  onChainId: string,
+): NestedPartial<ProjectPageMetadataLD> {
   return {
-    ...filtered,
+    ...metadata,
     '@context': UNANCHORED_PROJECT_CONTEXT,
     '@type': 'regen:Project-Page',
     '@id': `${window.location.origin}/project/${onChainId}`,

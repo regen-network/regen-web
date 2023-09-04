@@ -11,7 +11,10 @@ import {
 import { getCreditClassByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getCreditClassByOnChainIdQuery/getCreditClassByOnChainIdQuery';
 import { getWalletByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getWalletByAddrQuery/getWalletByAddrQuery';
 import { getWalletByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getWalletByAddrQuery/getWalletByAddrQuery.utils';
-import { getProjectCreateBaseData } from 'lib/rdf';
+import {
+  getProjectCreateBaseData,
+  getUnanchoredProjectBaseMetadata,
+} from 'lib/rdf';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { OffChainProject } from './useProjectWithMetadata';
@@ -63,9 +66,11 @@ export const useCreateOrUpdateProject = ({ onChainProject }: Props) => {
           },
         });
       } else if (isEdit && onChainProject) {
-        const baseMetadata = getProjectCreateBaseData(onChainProject.classId);
         if (projectPatch.metadata) {
-          projectPatch.metadata = { ...baseMetadata, ...projectPatch.metadata };
+          projectPatch.metadata = getUnanchoredProjectBaseMetadata(
+            projectPatch.metadata,
+            onChainProject.id,
+          );
         }
         const createRes = await createProject({
           variables: {

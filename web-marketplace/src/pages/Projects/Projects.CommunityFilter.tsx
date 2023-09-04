@@ -9,6 +9,7 @@ import { useTracker } from 'lib/tracker/useTracker';
 
 import { COMMUNITY_FILTER } from './Projects.constants';
 import { FilterCommunityCreditsEvent } from './Projects.types';
+import { getFilterSelected } from './Projects.utils';
 
 type CommunityFilterProps = {
   useCommunityProjects?: boolean;
@@ -35,7 +36,7 @@ export const CommunityFilter = ({
               track<'filterPermissionlessCredits', FilterCommunityCreditsEvent>(
                 'filterPermissionlessCredits',
                 {
-                  show: event.target.checked,
+                  selected: getFilterSelected(event.target.checked),
                 },
               );
             }}

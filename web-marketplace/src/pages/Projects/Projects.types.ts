@@ -17,9 +17,10 @@ export interface ProjectWithOrderData extends ProjectCardProps {
 }
 
 export type FilterCommunityCreditsEvent = {
-  show: boolean;
+  selected: string;
 };
 
 export type FilterCreditClassEvent = {
   creditClassId: string;
+  selected: string;
 };

@@ -28,6 +28,7 @@ import {
 } from './Projects.constants';
 import { CreditClassFilter } from './Projects.normalizers';
 import { FilterCreditClassEvent } from './Projects.types';
+import { getFilterSelected } from './Projects.utils';
 
 type Props = {
   creditClassFilters?: CreditClassFilter[];
@@ -128,6 +129,9 @@ export const ProjectsSideFilter = ({
                                 FilterCreditClassEvent
                               >('filterCreditClass', {
                                 creditClassId: path,
+                                selected: getFilterSelected(
+                                  event.target.checked,
+                                ),
                               });
                             }}
                           />

@@ -15,3 +15,11 @@ export interface ProjectWithOrderData extends ProjectCardProps {
   metadata?: string;
   sanityCreditClassData?: AllCreditClassQuery['allCreditClass'][0];
 }
+
+export type FilterCommunityCreditsEvent = {
+  show: boolean;
+};
+
+export type FilterCreditClassEvent = {
+  creditClassId: string;
+};

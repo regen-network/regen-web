@@ -3,6 +3,7 @@ import factory from 'rdf-ext';
 import DatasetExt from 'rdf-ext/lib/Dataset';
 import { Readable } from 'stream';
 
+import { NestedPartial } from 'types/nested-partial';
 import {
   AnchoredProjectMetadataLD,
   ProjectMetadataLD,
@@ -128,7 +129,18 @@ export function getAnchoredProjectMetadata(
   const filtered = getFilteredProjectMetadata(metadata) as ProjectMetadataLD;
   return {
     ...filtered,
-    '@context': ANCHORED_PROJECT_CONTEXT,
+    '@context': { ...ANCHORED_PROJECT_CONTEXT, ...metadata?.['@context'] },
+    '@type': `regen:${creditClassId}-Project`,
+  };
+}
+
+export function getAnchoredProjectBaseMetadata(
+  metadata: NestedPartial<ProjectMetadataLD>,
+  creditClassId?: string,
+) {
+  return {
+    ...metadata,
+    '@context': { ...ANCHORED_PROJECT_CONTEXT, ...metadata?.['@context'] },
     '@type': `regen:${creditClassId}-Project`,
   };
 }

@@ -121,6 +121,7 @@ function ProjectEdit(): JSX.Element {
   const projectEditSubmit = useProjectEditSubmit({
     projectId,
     admin: onChainProject?.admin,
+    creditClassId: onChainProject?.classId,
     signAndBroadcast,
     onBroadcast,
     onErrorCallback,

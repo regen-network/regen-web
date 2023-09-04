@@ -37,6 +37,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "^4.0.0",
     "@walletconnect/utils": "^1.8.0",
+    "agentkeepalive": "^4.5.0",
     "analytics": "^0.8.1",
     "analytics-plugin-do-not-track": "^0.1.5",
     "auth0-js": "^9.18.0",

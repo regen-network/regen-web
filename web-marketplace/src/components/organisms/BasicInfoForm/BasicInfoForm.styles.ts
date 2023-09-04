@@ -18,8 +18,10 @@ export const useBasicInfoStyles = makeStyles()((theme: Theme) => ({
   parcelUnit: {
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(2.5),
+      marginTop: theme.spacing(4),
     },
     [theme.breakpoints.down('sm')]: {
+      marginTop: theme.spacing(4),
       marginLeft: theme.spacing(1.25),
       width: '43%',
     },

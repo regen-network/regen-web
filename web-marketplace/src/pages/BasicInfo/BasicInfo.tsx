@@ -25,7 +25,7 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
     () => ({
       'schema:name': metadata?.['schema:name'] ?? '',
       'regen:projectSize': metadata?.['regen:projectSize'] ?? {
-        'qudt:numericValue': 0,
+        'qudt:numericValue': undefined,
         'qudt:unit': 'unit:HA',
       },
     }),

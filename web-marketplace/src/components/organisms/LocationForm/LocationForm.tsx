@@ -14,7 +14,11 @@ import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
 import { ProjectPageFooter } from '../../molecules';
-import { LOCATION_LABEL, LOCATION_PLACEHOLDER } from './LocationForm.constants';
+import {
+  LOCATION_DESCRIPTION,
+  LOCATION_LABEL,
+  LOCATION_PLACEHOLDER,
+} from './LocationForm.constants';
 import {
   locationFormSchema,
   LocationFormSchemaType,
@@ -82,7 +86,7 @@ const LocationForm: React.FC<LocationFormProps> = ({
       <OnBoardingCard>
         <LocationField
           label={LOCATION_LABEL}
-          description={LOCATION_PLACEHOLDER}
+          description={LOCATION_DESCRIPTION}
           placeholder={LOCATION_PLACEHOLDER}
           token={mapToken}
           error={!!errors['schema:location']}

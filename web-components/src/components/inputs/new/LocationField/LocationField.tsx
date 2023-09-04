@@ -4,6 +4,7 @@ import mbxGeocoder, {
   GeocodeFeature,
   GeocodeQueryType,
 } from '@mapbox/mapbox-sdk/services/geocoding';
+
 import FieldFormControl from '../FieldFormControl/FieldFormControl';
 import Input from '../Input/Input';
 import { useLocationStyles } from './LocationField.styles';
@@ -34,6 +35,7 @@ const LocationField = forwardRef<HTMLInputElement, Props>(
     {
       className,
       label,
+      description,
       optional,
       placeholder,
       disabled,
@@ -68,6 +70,7 @@ const LocationField = forwardRef<HTMLInputElement, Props>(
       <FieldFormControl
         className={className}
         label={label}
+        description={description}
         disabled={disabled}
         optional={optional}
       >

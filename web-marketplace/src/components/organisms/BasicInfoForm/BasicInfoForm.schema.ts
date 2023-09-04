@@ -12,7 +12,8 @@ export const basicInfoFormSchema = z.object({
       .number({
         invalid_type_error: requiredMessage,
       })
-      .positive(positiveNumber),
+      .positive(positiveNumber)
+      .optional(),
     'qudt:unit': z.string(),
   }),
 });

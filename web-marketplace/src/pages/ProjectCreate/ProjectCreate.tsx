@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { MutableRefObject, useRef, useState } from 'react';
 import { Outlet, useOutletContext } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 
@@ -7,6 +7,10 @@ type ContextType = {
   setDeliverTxResponse: (deliverTxResponse?: DeliverTxResponse) => void;
   creditClassId?: string;
   setCreditClassId: (creditClassId?: string) => void;
+  formRef: MutableRefObject<
+    { submitForm: () => void; isFormValid: () => boolean } | undefined
+  >;
+  shouldNavigateRef: MutableRefObject<boolean>;
 };
 
 export const ProjectCreate = (): JSX.Element => {
@@ -14,6 +18,8 @@ export const ProjectCreate = (): JSX.Element => {
   const [deliverTxResponse, setDeliverTxResponse] =
     useState<DeliverTxResponse>();
   const [creditClassId, setCreditClassId] = useState<string>('');
+  const formRef = useRef();
+  const shouldNavigateRef = useRef(true);
 
   return (
     <Outlet
@@ -22,6 +28,8 @@ export const ProjectCreate = (): JSX.Element => {
         setDeliverTxResponse,
         creditClassId,
         setCreditClassId,
+        formRef,
+        shouldNavigateRef,
       }}
     />
   );

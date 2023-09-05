@@ -41,6 +41,7 @@ interface Props {
 export interface MetadataSubmitProps {
   values: Values;
   overwrite?: boolean;
+  shouldNavigate?: boolean;
 }
 
 interface Res {
@@ -145,6 +146,7 @@ export const useProjectWithMetadata = ({
     async ({
       values,
       overwrite = false,
+      shouldNavigate = true,
     }: MetadataSubmitProps): Promise<void> => {
       let newMetadata = values;
       if (!overwrite) {
@@ -159,7 +161,7 @@ export const useProjectWithMetadata = ({
             projectPatch: { metadata: newMetadata },
           });
 
-          !isEdit && navigateNext();
+          !isEdit && shouldNavigate && navigateNext();
         }
         await metadataReload();
       } catch (e) {

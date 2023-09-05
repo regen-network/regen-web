@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { useCreateProjectContext } from 'pages/ProjectCreate';
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
 import WithLoader from 'components/atoms/WithLoader';
 import { MediaFormSchemaType } from 'components/organisms/MediaForm/MediaForm.schema';
@@ -14,6 +15,7 @@ const Media = (): JSX.Element => {
   const { projectId } = useParams();
   const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
   const { navigateNext } = useNavigateNext({ step: 'metadata', projectId });
+  const { formRef, shouldNavigateRef } = useCreateProjectContext();
   const { offChainProject, metadata, metadataSubmit, loading } =
     useProjectWithMetadata({
       projectId,
@@ -23,6 +25,7 @@ const Media = (): JSX.Element => {
       onChainProject,
       anchored: false,
     });
+  const isFormValid = formRef?.current?.isFormValid();
 
   const initialValues: MediaFormSchemaType = {
     'regen:previewPhoto': metadata?.['regen:previewPhoto'] ?? {
@@ -37,9 +40,11 @@ const Media = (): JSX.Element => {
     },
   };
 
-  const saveAndExit = (): Promise<void> => {
-    // TODO: functionality
-    return Promise.resolve();
+  const saveAndExit = async (): Promise<void> => {
+    shouldNavigateRef.current = false;
+    await formRef.current?.submitForm();
+    shouldNavigateRef.current = true;
+    navigate('/ecocredits/projects');
   };
 
   function navigatePrev(): void {

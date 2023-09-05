@@ -43,6 +43,7 @@ export default function TokenPage({
             { url: '/images/token/token-aurora.jpg', width: 1140, height: 629 },
           ],
         }}
+        noindex
       />
       <TopSection topSectionData={topSection} />
       <TokenEconomics tokenEconomicsData={tokenEconomics} />

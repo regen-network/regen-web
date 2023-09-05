@@ -174,6 +174,9 @@ export function useProjectsWithOrders({
   const projectsMetadata = projectsMetadatasResults.map(
     queryResult => queryResult.data,
   );
+  const projectsMetadataLoading = projectsMetadatasResults.some(
+    res => res.isLoading,
+  );
 
   const offChainProjectResults = useQueries({
     queries: sortedProjects.map(project =>
@@ -187,6 +190,9 @@ export function useProjectsWithOrders({
   const projectPagesMetadata = offChainProjectResults.map(
     queryResult => queryResult.data?.data.projectByOnChainId?.metadata,
   );
+  const offChainProjectLoading = offChainProjectResults.some(
+    res => res.isLoading,
+  );
 
   const programParties = offChainProjectResults.map(
     queryResult =>
@@ -195,7 +201,7 @@ export function useProjectsWithOrders({
   );
 
   // Credit Classes and their metadata
-  const { classesMetadata } = useClassesWithMetadata(
+  const { classesMetadata, isClassesMetadataLoading } = useClassesWithMetadata(
     sortedProjects.map(project => project?.creditClassId),
   );
 
@@ -216,7 +222,13 @@ export function useProjectsWithOrders({
   return {
     projectsWithOrderData: projectsWithMetadata,
     projectsCount: projectsFilteredByCreditClass?.length,
-    loading: isLoadingProjects || isLoadingProjectsByClass || isLoadingProject,
+    loading:
+      isLoadingProjects ||
+      isLoadingProjectsByClass ||
+      isLoadingProject ||
+      isClassesMetadataLoading ||
+      projectsMetadataLoading ||
+      offChainProjectLoading,
     hasCommunityProjects,
   };
 }

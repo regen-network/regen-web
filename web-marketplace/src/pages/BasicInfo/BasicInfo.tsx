@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useProjectEditContext } from 'pages/ProjectEdit';
+import { BasicInfoForm } from 'components/organisms';
+import { BasicInfoFormSchemaType } from 'components/organisms/BasicInfoForm/BasicInfoForm.schema';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
-import { BasicInfoForm, BasicInfoFormValues } from '../../components/organisms';
 import { ProjectFormTemplate } from '../../components/templates/ProjectFormTemplate';
 
 const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
@@ -20,13 +21,16 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
       onChainProject,
     });
 
-  let initialFieldValues: BasicInfoFormValues | undefined;
-  if (metadata) {
-    initialFieldValues = {
-      'schema:name': metadata['schema:name'],
-      'regen:projectSize': metadata['regen:projectSize'],
-    };
-  }
+  const initialValues: BasicInfoFormSchemaType = useMemo(
+    () => ({
+      'schema:name': metadata?.['schema:name'] ?? '',
+      'regen:projectSize': metadata?.['regen:projectSize'] ?? {
+        'qudt:numericValue': undefined,
+        'qudt:unit': 'unit:HA',
+      },
+    }),
+    [metadata],
+  );
 
   async function saveAndExit(): Promise<void> {
     // TODO: functionality
@@ -44,9 +48,9 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
       loading={loading}
     >
       <BasicInfoForm
-        submit={metadataSubmit}
-        initialValues={initialFieldValues}
+        onSubmit={metadataSubmit}
         onNext={navigateNext}
+        initialValues={initialValues}
       />
     </ProjectFormTemplate>
   );

@@ -8,14 +8,13 @@ import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getShaclGraphByUriQuery } from 'lib/queries/react-query/registry-server/graphql/getShaclGraphByUriQuery/getShaclGraphByUriQuery';
 import { getProjectShapeIri } from 'lib/rdf';
 
+import { MetadataForm } from 'components/organisms/MetadataForm/MetadataForm';
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
-import { isVCSCreditClass } from '../../lib/ecocredit/api';
 import { useProjectEditContext } from '../ProjectEdit';
 import { useProjectMetadataSubmit } from './hooks/useProjectMetadataSubmit';
 import { OMITTED_METADATA_KEYS } from './ProjectMetadata.config';
-import { ProjectMetadataSelectedForm } from './ProjectMetadata.SelectedForm';
 
 export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
   () => {
@@ -38,7 +37,6 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
       metadataSubmit,
     });
     const creditClassId = offChainProject?.metadata?.['regen:creditClassId'];
-    const isVCS = !!creditClassId && isVCSCreditClass(creditClassId);
 
     const uri = creditClassId ? getProjectShapeIri(creditClassId) : '';
     const { data } = useQuery(
@@ -53,6 +51,9 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
     if (metadata) {
       customMetadata = omit(metadata, OMITTED_METADATA_KEYS);
     }
+    const initialValues = {
+      metadata: customMetadata ? JSON.stringify(customMetadata, null, 2) : '',
+    };
 
     function navigateNext(): void {
       navigate(`/project-pages/${projectId}/review`);
@@ -65,12 +66,11 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
         project={offChainProject}
         loading={loading}
       >
-        <ProjectMetadataSelectedForm
-          submit={projectMetadataSubmit}
-          metadata={customMetadata}
+        <MetadataForm
+          onSubmit={projectMetadataSubmit}
+          initialValues={initialValues}
           graphData={data?.data}
           creditClassId={creditClassId}
-          isVCS={isVCS}
           onNext={navigateNext}
           onPrev={() => navigate(`/project-pages/${projectId}/media`)}
         />

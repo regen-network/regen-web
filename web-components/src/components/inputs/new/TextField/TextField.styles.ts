@@ -70,6 +70,19 @@ export const useTextFieldStyles = makeStyles<UseStylesParams>()(
           fontSize: theme.spacing(4),
           height: theme.spacing(12.5), // 8.75
         },
+        '& .MuiSvgIcon-root': {
+          width: theme.spacing(3.25),
+          height: theme.spacing(2.5),
+          top: 'calc(50% - 5px)',
+          [theme.breakpoints.up('sm')]: {
+            right: theme.spacing(3.75),
+          },
+          [theme.breakpoints.down('sm')]: {
+            right: theme.spacing(3.25),
+          },
+          position: 'absolute',
+          pointerEvents: 'none',
+        },
         '& .MuiInputAdornment-root p': {
           color: theme.palette.info.main,
         },

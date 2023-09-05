@@ -1,6 +1,6 @@
 export * from './AdditionalityForm';
 export * from './AdminNav';
-export * from './BasicInfoForm';
+export * from './BasicInfoForm/BasicInfoForm';
 export * from './BasketEcocreditsTable';
 export * from './BasketOverview';
 export * from './BasketsTable';
@@ -30,8 +30,6 @@ export * from './MethodologyTopSection';
 export * from './MoreProjectsSection';
 export * from './Portfolio/Portfolio';
 export * from './ProjectCards';
-export * from './ProjectLocationForm';
-export * from './ProjectMetadataForm/ProjectMetadataForm';
 export * from './ProjectTopSection/ProjectTopSection';
 export * from './RegistryLayout/RegistryLayout';
 export * from './ResourcesSection';

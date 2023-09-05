@@ -9,7 +9,7 @@ export interface RegenTextFieldProps extends StandardTextFieldProps {
   step?: number | string;
   customInputProps?: { min?: number; max?: number; step?: string | number };
   description?: string | ReactNode;
-  label: ReactNode;
+  label?: ReactNode;
   className?: string;
   name?: string;
 }

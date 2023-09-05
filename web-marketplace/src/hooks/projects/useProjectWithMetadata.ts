@@ -20,11 +20,9 @@ import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-ser
 import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery.constants';
 
 import { UseProjectEditSubmitParams } from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
-import {
-  BasicInfoFormValues,
-  ProjectLocationFormValues,
-} from 'components/organisms';
+import { BasicInfoFormSchemaType } from 'components/organisms/BasicInfoForm/BasicInfoForm.schema';
 import { DescriptionSchemaType } from 'components/organisms/DescriptionForm/DescriptionForm.schema';
+import { SimplifiedLocationFormSchemaType } from 'components/organisms/LocationForm/LocationForm.schema';
 import { MediaFormSchemaType } from 'components/organisms/MediaForm/MediaForm.schema';
 
 import { useLedger } from '../../ledger';
@@ -56,8 +54,8 @@ interface Res {
 }
 
 type Values =
-  | BasicInfoFormValues
-  | ProjectLocationFormValues
+  | BasicInfoFormSchemaType
+  | SimplifiedLocationFormSchemaType
   | DescriptionSchemaType
   | MediaFormSchemaType
   | Partial<ProjectMetadataLD>;

@@ -1,4 +1,4 @@
-export const IS_DEV = import.meta.env.NODE_ENV === 'development';
+export const IS_DEV = import.meta.env.DEV;
 export const apiServerUrl = import.meta.env.VITE_API_URI;
 export const SKIPPED_CLASS_ID = import.meta.env.VITE_SKIPPED_CLASS_ID;
 export const IMAGE_STORAGE_BASE_URL =

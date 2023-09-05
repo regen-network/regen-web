@@ -1,4 +1,3 @@
-import { Box } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';

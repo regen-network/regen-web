@@ -24,10 +24,20 @@ const Media = (): JSX.Element => {
       anchored: false,
     });
 
+  // Handle old metadata schema
+  const previewPhoto = metadata?.['regen:previewPhoto'];
+  const isPreviewPhotoString = typeof previewPhoto === 'string';
+  const previewPhotoUrl = isPreviewPhotoString
+    ? previewPhoto
+    : previewPhoto?.['schema:url'] ?? '';
+  const previewPhotoCredit = isPreviewPhotoString
+    ? ''
+    : previewPhoto?.['schema:creditText'] ?? '';
+
   const initialValues: MediaFormSchemaType = {
-    'regen:previewPhoto': metadata?.['regen:previewPhoto'] ?? {
-      'schema:url': '',
-      'schema:creditText': '',
+    'regen:previewPhoto': {
+      'schema:url': previewPhotoUrl,
+      'schema:creditText': previewPhotoCredit,
     },
     'regen:galleryPhotos': metadata?.['regen:galleryPhotos'],
     'regen:storyMedia': metadata?.['regen:storyMedia'] ?? {

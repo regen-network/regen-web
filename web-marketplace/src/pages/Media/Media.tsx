@@ -25,7 +25,6 @@ const Media = (): JSX.Element => {
       onChainProject,
       anchored: false,
     });
-  const isFormValid = formRef?.current?.isFormValid();
 
   const initialValues: MediaFormSchemaType = {
     'regen:previewPhoto': metadata?.['regen:previewPhoto'] ?? {
@@ -44,7 +43,9 @@ const Media = (): JSX.Element => {
     shouldNavigateRef.current = false;
     await formRef.current?.submitForm();
     shouldNavigateRef.current = true;
-    navigate('/ecocredits/projects');
+    if (formRef.current?.isFormValid) {
+      navigate('/ecocredits/projects');
+    }
   };
 
   function navigatePrev(): void {

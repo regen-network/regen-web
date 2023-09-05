@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import { Link } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
 import { Body } from '../typography';
@@ -57,9 +58,6 @@ const useStyles = makeStyles()(theme => ({
     fontFamily: theme.typography.fontFamily,
     fontWeight: 'bold',
     cursor: 'pointer',
-    '&.disabled': {
-      color: theme.palette.grey[50],
-    },
     '&:hover': {
       textDecoration: 'none',
     },
@@ -94,18 +92,14 @@ const OnBoardingSection: React.FC<
         titleWrap: cx(titleWrap, !!classes && classes.titleWrap),
       }}
       title={p.title}
-      titleAlign={!!linkText ? 'left' : 'center'}
+      titleAlign={onLinkClick ? 'left' : 'center'}
       titleVariant="h3"
       topRight={
-        !!linkText ? (
-          <div
-            role="button"
-            className={cx(styles.link, !onLinkClick && 'disabled')}
-            onClick={onLinkClick}
-          >
+        onLinkClick && (
+          <Link className={styles.link} onClick={onLinkClick}>
             {linkText}
-          </div>
-        ) : undefined
+          </Link>
+        )
       }
     >
       <div

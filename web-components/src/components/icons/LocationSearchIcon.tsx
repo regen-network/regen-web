@@ -10,7 +10,7 @@ export default function LocationSearchIcon({
 }: LocationSearchIconProps): JSX.Element {
   return (
     <SvgIcon
-      sx={...sxToArray(sx)}
+      sx={[...sxToArray(sx)]}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}

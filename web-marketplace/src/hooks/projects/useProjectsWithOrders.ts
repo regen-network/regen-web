@@ -88,7 +88,7 @@ export function useProjectsWithOrders({
       }),
     );
 
-  const { data: sellOrders } = useQuery(
+  const { data: sellOrders, isFetching: isLoadingSellOrders } = useQuery(
     getSellOrdersExtendedQuery({
       enabled: !!marketplaceClient,
       client: marketplaceClient,
@@ -98,9 +98,10 @@ export function useProjectsWithOrders({
   );
 
   // AllCreditClasses
-  const { data: creditClassData } = useQuery(
-    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
-  );
+  const { data: creditClassData, isFetching: isLoadingSanityCreditClasses } =
+    useQuery(
+      getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    );
 
   /* Normalization/Filtering/Sorting */
 
@@ -175,7 +176,7 @@ export function useProjectsWithOrders({
     queryResult => queryResult.data,
   );
   const projectsMetadataLoading = projectsMetadatasResults.some(
-    res => res.isLoading,
+    res => res.isFetching,
   );
 
   const offChainProjectResults = useQueries({
@@ -191,7 +192,7 @@ export function useProjectsWithOrders({
     queryResult => queryResult.data?.data.projectByOnChainId?.metadata,
   );
   const offChainProjectLoading = offChainProjectResults.some(
-    res => res.isLoading,
+    res => res.isFetching,
   );
 
   const programParties = offChainProjectResults.map(
@@ -225,6 +226,8 @@ export function useProjectsWithOrders({
     loading:
       isLoadingProjects ||
       isLoadingProjectsByClass ||
+      isLoadingSellOrders ||
+      isLoadingSanityCreditClasses ||
       isLoadingProject ||
       isClassesMetadataLoading ||
       projectsMetadataLoading ||

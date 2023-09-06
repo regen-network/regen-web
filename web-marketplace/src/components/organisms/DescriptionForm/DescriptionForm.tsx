@@ -9,9 +9,11 @@ import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
+import { useCreateProjectContext } from 'pages/ProjectCreate';
 import { useProjectEditContext } from 'pages/ProjectEdit';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
+import { MetadataSubmitProps } from 'hooks/projects/useProjectWithMetadata';
 
 import { ProjectPageFooter } from '../../molecules';
 import {
@@ -31,7 +33,7 @@ import {
 } from './DescriptionForm.schema';
 
 interface DescriptionFormProps {
-  onSubmit: ({ values }: { values: DescriptionSchemaType }) => Promise<void>;
+  onSubmit: (props: MetadataSubmitProps) => Promise<void>;
   onNext?: () => void;
   onPrev?: () => void;
   initialValues?: DescriptionSchemaType;
@@ -53,7 +55,7 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
   const { isValid, isSubmitting, isDirty, errors } = useFormState({
     control: form.control,
   });
-
+  const { formRef, shouldNavigateRef } = useCreateProjectContext();
   const description = useWatch({
     control: form.control,
     name: 'schema:description',
@@ -77,9 +79,10 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
   return (
     <Form
       form={form}
+      formRef={formRef}
       onSubmit={async values => {
         try {
-          await onSubmit({ values });
+          await onSubmit({ values, shouldNavigate: shouldNavigateRef.current });
           if (isEdit && confirmSave) confirmSave();
         } catch (e) {
           setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);

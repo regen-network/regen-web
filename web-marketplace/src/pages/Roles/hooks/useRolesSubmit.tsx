@@ -28,11 +28,14 @@ interface Props {
   admin?: string;
 }
 
+export type RoleSubmitProps = {
+  values: RolesFormSchemaType;
+  adminWalletId?: string;
+  shouldNavigate?: boolean;
+};
+
 export type Return = {
-  rolesSubmit: (
-    values: RolesFormSchemaType,
-    adminWalletId?: string,
-  ) => Promise<void>;
+  rolesSubmit: (props: RoleSubmitProps) => Promise<void>;
 };
 
 const useRolesSubmit = ({
@@ -48,10 +51,11 @@ const useRolesSubmit = ({
   const { createOrUpdateProject } = useCreateOrUpdateProject();
 
   const rolesSubmit = useCallback(
-    async (
-      values: RolesFormSchemaType,
-      adminWalletId?: string,
-    ): Promise<void> => {
+    async ({
+      values,
+      adminWalletId,
+      shouldNavigate = true,
+    }: RoleSubmitProps): Promise<void> => {
       try {
         let doUpdateMetadata = false;
         let doUpdateAdmin = false;
@@ -113,7 +117,7 @@ const useRolesSubmit = ({
           await metadataReload();
         }
 
-        if (!isEdit) {
+        if (!isEdit && shouldNavigate) {
           navigateNext();
         }
       } catch (e) {

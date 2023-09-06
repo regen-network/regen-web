@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
+import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import { useProjectEditContext } from 'pages/ProjectEdit';
 import { LocationFormSchemaType } from 'components/organisms/LocationForm/LocationForm.schema';
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
@@ -31,11 +32,7 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
     [metadata],
   );
 
-  async function saveAndExit(): Promise<void> {
-    // TODO functionality - might need to save form state in this file to pass
-    // to `OnboardingFormTemplate`, or wrap this whole page in the Formik Form
-    // so it can access values: https://github.com/regen-network/regen-registry/issues/561
-  }
+  const saveAndExit = useProjectSaveAndExit();
 
   function navigatePrev(): void {
     navigate(`/project-pages/${projectId}/basic-info`);

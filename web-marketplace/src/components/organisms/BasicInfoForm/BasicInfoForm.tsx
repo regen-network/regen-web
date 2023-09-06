@@ -12,8 +12,10 @@ import TextField from 'web-components/lib/components/inputs/new/TextField/TextFi
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
 import { useProjectEditContext } from 'pages';
+import { useCreateProjectContext } from 'pages/ProjectCreate';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
+import { MetadataSubmitProps } from 'hooks/projects/useProjectWithMetadata';
 
 import { ProjectPageFooter } from '../../molecules';
 import {
@@ -29,7 +31,7 @@ import {
 import { useBasicInfoStyles } from './BasicInfoForm.styles';
 
 interface BasicInfoFormProps {
-  onSubmit: ({ values }: { values: BasicInfoFormSchemaType }) => Promise<void>;
+  onSubmit: (props: MetadataSubmitProps) => Promise<void>;
   onNext?: () => void;
   onPrev?: () => void;
   initialValues?: BasicInfoFormSchemaType;
@@ -54,6 +56,7 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
   });
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const { confirmSave, isEdit, isDirtyRef } = useProjectEditContext();
+  const { formRef, shouldNavigateRef } = useCreateProjectContext();
 
   useEffect(() => {
     isDirtyRef.current = isDirty;
@@ -62,9 +65,10 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
   return (
     <Form
       form={form}
+      formRef={formRef}
       onSubmit={async values => {
         try {
-          await onSubmit({ values });
+          await onSubmit({ values, shouldNavigate: shouldNavigateRef.current });
           if (isEdit && confirmSave) confirmSave();
         } catch (e) {
           setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);

@@ -79,7 +79,11 @@ const LocationField = forwardRef<HTMLInputElement, Props>(
           <Input
             {...props}
             placeholder={placeholder}
-            endAdornment={<LocationSearchIcon sx={{ width: 20, height: 22 }} />}
+            endAdornment={
+              <LocationSearchIcon
+                sx={{ color: 'grey[100]', width: 20, height: 22 }}
+              />
+            }
             value={isGeocodingFeature(value) ? value.place_name : value}
             onBlur={e => {
               onBlur(e);

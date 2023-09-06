@@ -13,7 +13,9 @@ import useMoreProjects from './hooks/useMoreProjects';
 
 export function MoreProjects(): JSX.Element {
   const { projectId } = useParams();
-  const projects = useMoreProjects(projectId as string);
+  const { projectsWithOrderData, loading } = useMoreProjects(
+    projectId as string,
+  );
 
   const [selectedProject, setSelectedProject] =
     useState<ProjectWithOrderData | null>(null);
@@ -27,7 +29,8 @@ export function MoreProjects(): JSX.Element {
     >
       <ProjectCardsSection
         title="More Projects"
-        projects={projects}
+        projects={projectsWithOrderData}
+        loading={loading}
         onButtonClick={({ project }) => {
           setSelectedProject(project);
           setIsBuyFlowStarted(true);

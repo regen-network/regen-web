@@ -37,7 +37,8 @@
     "start-auth": "lerna run --scope web-auth start --stream",
     "watch": "lerna run watch --stream",
     "test-update-snapshot": "lerna run --scope web-marketplace test-update-snapshot --stream",
-    "bump": "lerna version --conventional-commits"
+    "bump": "lerna version --conventional-commits",
+    "postinstall": "patch-package"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.21.4",
@@ -46,13 +47,12 @@
     "@graphql-codegen/typescript-graphql-files-modules": "1.18.1",
     "@graphql-codegen/typescript-operations": "^1.18.0",
     "@graphql-codegen/typescript-react-apollo": "2.2.4",
-    "@storybook/addon-actions": "^7.0.26",
-    "@storybook/addon-essentials": "^7.0.26",
-    "@storybook/addon-interactions": "^7.0.26",
-    "@storybook/addon-links": "^7.0.26",
-    "@storybook/react": "^7.0.26",
-    "@storybook/react-vite": "^7.0.26",
-    "storybook": "^7.0.26",
+    "@storybook/addon-actions": "^7.3.2",
+    "@storybook/addon-essentials": "^7.3.2",
+    "@storybook/addon-interactions": "^7.3.2",
+    "@storybook/addon-links": "^7.3.2",
+    "@storybook/react": "^7.3.2",
+    "@storybook/react-vite": "^7.3.2",
     "@types/css-mediaquery": "^0.1.1",
     "@types/jest": "27.0.3",
     "@types/node": "13.1.1",
@@ -62,8 +62,10 @@
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^3.1.0",
     "lerna": "^6.4.1",
+    "patch-package": "^8.0.0",
     "prettier": "2.4.1",
     "shx": "^0.3.2",
+    "storybook": "^7.3.2",
     "typescript": "^4.4.4"
   },
   "resolutions": {

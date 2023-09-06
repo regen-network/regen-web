@@ -129,7 +129,7 @@
     "rollup-plugin-visualizer": "^5.9.2",
     "source-map-explorer": "^2.5.2",
     "storybook-addon-react-router-v6": "^0.1.10",
-    "vite": "^4.4.1",
+    "vite": "^4.4.9",
     "vite-plugin-checker": "^0.6.0",
     "vite-plugin-svgr": "^3.2.0",
     "vite-tsconfig-paths": "^4.2.0"

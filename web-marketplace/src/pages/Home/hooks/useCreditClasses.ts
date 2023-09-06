@@ -21,9 +21,10 @@ export const useCreditClasses = ({ skippedClassId }: Props) => {
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
   // All credit class from sanity
-  const { data: creditClassData } = useQuery(
-    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
-  );
+  const { data: creditClassData, isFetching: isSanityCreditClassLoading } =
+    useQuery(
+      getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    );
 
   // Filtered based on env variable
   const creditClassesFiltered = creditClassData?.allCreditClass?.filter(
@@ -31,7 +32,7 @@ export const useCreditClasses = ({ skippedClassId }: Props) => {
   );
 
   // Credit Classes metadata
-  const { classesMetadata } = useClassesWithMetadata(
+  const { classesMetadata, isClassesMetadataLoading } = useClassesWithMetadata(
     creditClassesFiltered?.map(creditClass =>
       creditClass.path === null ? undefined : creditClass.path,
     ),
@@ -48,6 +49,9 @@ export const useCreditClasses = ({ skippedClassId }: Props) => {
         }),
       ) ?? [],
   });
+  const isDbDataByOnChainIdLoading = dbDataByOnChainIdDataResults.some(
+    res => res.isFetching,
+  );
 
   // Credit classes program
   const creditClassesPrograms = creditClassesFiltered?.map((_, index) =>
@@ -61,5 +65,9 @@ export const useCreditClasses = ({ skippedClassId }: Props) => {
   return {
     creditClasses: creditClassesFiltered,
     creditClassesPrograms,
+    loading:
+      isDbDataByOnChainIdLoading ||
+      isClassesMetadataLoading ||
+      isSanityCreditClassLoading,
   };
 };

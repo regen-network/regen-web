@@ -76,7 +76,7 @@ const LocationForm: React.FC<LocationFormProps> = ({
           if (isGeocodingFeature(location)) {
             await onSubmit({
               values: { 'schema:location': location },
-              shouldNavigate: shouldNavigateRef.current,
+              shouldNavigate: shouldNavigateRef?.current,
             });
           }
           if (isEdit && confirmSave) confirmSave();

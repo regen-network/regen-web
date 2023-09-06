@@ -140,7 +140,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
           await submit({
             values,
             adminWalletId: adminWalletData?.walletByAddr?.id,
-            shouldNavigate: shouldNavigateRef.current,
+            shouldNavigate: shouldNavigateRef?.current,
           });
           if (isEdit && confirmSave) confirmSave();
         } catch (e) {

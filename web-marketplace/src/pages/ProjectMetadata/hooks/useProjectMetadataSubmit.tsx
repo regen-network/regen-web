@@ -37,7 +37,7 @@ export const useProjectMetadataSubmit = ({
         await metadataSubmit({
           values: baseMetadata,
           overwrite: true,
-          shouldNavigate: shouldNavigateRef.current,
+          shouldNavigate: shouldNavigateRef?.current,
         });
       }
     },

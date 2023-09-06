@@ -68,7 +68,10 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
       formRef={formRef}
       onSubmit={async values => {
         try {
-          await onSubmit({ values, shouldNavigate: shouldNavigateRef.current });
+          await onSubmit({
+            values,
+            shouldNavigate: shouldNavigateRef?.current,
+          });
           if (isEdit && confirmSave) confirmSave();
         } catch (e) {
           setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);

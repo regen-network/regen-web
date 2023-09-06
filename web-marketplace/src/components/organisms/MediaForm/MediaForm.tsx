@@ -71,7 +71,7 @@ export const MediaForm = ({
           // Submit
           await submit({
             values: filteredData,
-            shouldNavigate: shouldNavigateRef.current,
+            shouldNavigate: shouldNavigateRef?.current,
           });
           // Delete any images that were removed on S3
           await Promise.all(

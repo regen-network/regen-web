@@ -7,10 +7,12 @@ export const useProjectSaveAndExit = () => {
   const navigate = useNavigate();
 
   const saveAndExit = async (): Promise<void> => {
-    shouldNavigateRef.current = false;
-    await formRef.current?.submitForm();
-    shouldNavigateRef.current = true;
-    if (formRef.current?.isFormValid()) {
+    if (shouldNavigateRef) {
+      shouldNavigateRef.current = false;
+      await formRef?.current?.submitForm();
+      shouldNavigateRef.current = true;
+    }
+    if (formRef?.current?.isFormValid()) {
       navigate('/ecocredits/projects');
     }
   };

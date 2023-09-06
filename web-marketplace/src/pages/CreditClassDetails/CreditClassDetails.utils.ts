@@ -111,8 +111,7 @@ const normalizeImpact = ({
   sdgs,
 }: NormalizeImpactInput) => ({
   name: impact?.['schema:name'] || sanityImpact?.name,
-  description:
-    projectImpact?.['schema:description'] || sanityImpact?.descriptionRaw,
+  description: projectImpact?.['schema:description'],
   imgSrc: getSanityImgSrc(sanityImpact?.image) || '/svg/default-impact.svg',
   sdgs: getSdgsImages({ sdgs: sanityImpact?.sdgs || sdgs }),
   standard: getSanityImgSrc(sanityImpact?.standard),

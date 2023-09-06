@@ -93,11 +93,7 @@ export default function ProjectImpactCard({
           </Title>
           {description && (
             <Body as="div" size="sm" mobileSize="sm" sx={{ pb: 4 }}>
-              {typeof description === 'string' ? (
-                description
-              ) : (
-                <BlockContent content={description} />
-              )}
+              {description}
             </Body>
           )}
           <Box>

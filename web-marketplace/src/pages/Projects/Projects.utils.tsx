@@ -31,3 +31,6 @@ export const getCreditClassesMapping = ({
 
   return creditClassesMapping;
 };
+
+export const getFilterSelected = (checked: boolean) =>
+  checked ? 'selected' : 'unselected';

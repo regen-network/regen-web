@@ -16,6 +16,7 @@ import { CollapseList } from 'web-components/lib/components/organisms/CollapseLi
 import { Subtitle } from 'web-components/lib/components/typography';
 
 import { UseStateSetter } from 'types/react/use-state';
+import { useTracker } from 'lib/tracker/useTracker';
 
 import { CommunityFilter } from './Projects.CommunityFilter';
 import {
@@ -26,6 +27,8 @@ import {
   SIDE_FILTERS_BUTTON,
 } from './Projects.constants';
 import { CreditClassFilter } from './Projects.normalizers';
+import { FilterCreditClassEvent } from './Projects.types';
+import { getFilterSelected } from './Projects.utils';
 
 type Props = {
   creditClassFilters?: CreditClassFilter[];
@@ -55,6 +58,7 @@ export const ProjectsSideFilter = ({
     ({ isCommunity }) =>
       useCommunityProjects || (!useCommunityProjects && !isCommunity),
   );
+  const { track } = useTracker();
 
   return (
     <>
@@ -115,12 +119,21 @@ export const ProjectsSideFilter = ({
                             checked={
                               creditClassSelectedFilters?.[path] ?? false
                             }
-                            onChange={event =>
+                            onChange={event => {
                               setCreditClassFilter({
                                 ...creditClassSelectedFilters,
                                 [path]: event.target.checked,
-                              })
-                            }
+                              });
+                              track<
+                                'filterCreditClass',
+                                FilterCreditClassEvent
+                              >('filterCreditClass', {
+                                creditClassId: path,
+                                selected: getFilterSelected(
+                                  event.target.checked,
+                                ),
+                              });
+                            }}
                           />
                         </Box>
                       }

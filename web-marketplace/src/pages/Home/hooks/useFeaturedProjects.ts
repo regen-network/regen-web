@@ -13,7 +13,6 @@ export function useFeaturedProjects(): {
     metadata: true, // to discard projects without metadata prop
     sort: PROJECTS_SORT,
   });
-
   return {
     featuredProjects: projectsWithOrderData,
     loading,

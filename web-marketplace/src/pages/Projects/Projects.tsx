@@ -62,9 +62,15 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   // Page index starts at 0 for logic
   const page = Number(routePage) - 1;
 
-  const { creditClassesWithMetadata } = useFetchCreditClasses();
+  const {
+    creditClassesWithMetadata,
+    isLoading: isCreditClassesWithMetadataLoading,
+  } = useFetchCreditClasses();
 
-  const { data: sanityCreditClassesData } = useQuery(
+  const {
+    data: sanityCreditClassesData,
+    isLoading: isSanityCreditClassesLoading,
+  } = useQuery(
     getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
   );
 
@@ -115,7 +121,12 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
     setUseCommunityProjects(undefined);
   };
 
-  if (loading) return <Loading />;
+  if (
+    loading ||
+    isSanityCreditClassesLoading ||
+    isCreditClassesWithMetadataLoading
+  )
+    return <Loading />;
 
   return (
     <>

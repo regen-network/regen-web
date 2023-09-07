@@ -88,7 +88,7 @@ export function useProjectsWithOrders({
       }),
     );
 
-  const { data: sellOrders } = useQuery(
+  const { data: sellOrders, isFetching: isLoadingSellOrders } = useQuery(
     getSellOrdersExtendedQuery({
       enabled: !!marketplaceClient,
       client: marketplaceClient,
@@ -98,9 +98,10 @@ export function useProjectsWithOrders({
   );
 
   // AllCreditClasses
-  const { data: creditClassData } = useQuery(
-    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
-  );
+  const { data: creditClassData, isFetching: isLoadingSanityCreditClasses } =
+    useQuery(
+      getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    );
 
   /* Normalization/Filtering/Sorting */
 
@@ -174,6 +175,9 @@ export function useProjectsWithOrders({
   const projectsMetadata = projectsMetadatasResults.map(
     queryResult => queryResult.data,
   );
+  const projectsMetadataLoading = projectsMetadatasResults.some(
+    res => res.isFetching,
+  );
 
   const offChainProjectResults = useQueries({
     queries: sortedProjects.map(project =>
@@ -187,6 +191,9 @@ export function useProjectsWithOrders({
   const projectPagesMetadata = offChainProjectResults.map(
     queryResult => queryResult.data?.data.projectByOnChainId?.metadata,
   );
+  const offChainProjectLoading = offChainProjectResults.some(
+    res => res.isFetching,
+  );
 
   const programParties = offChainProjectResults.map(
     queryResult =>
@@ -195,7 +202,7 @@ export function useProjectsWithOrders({
   );
 
   // Credit Classes and their metadata
-  const { classesMetadata } = useClassesWithMetadata(
+  const { classesMetadata, isClassesMetadataLoading } = useClassesWithMetadata(
     sortedProjects.map(project => project?.creditClassId),
   );
 
@@ -216,7 +223,15 @@ export function useProjectsWithOrders({
   return {
     projectsWithOrderData: projectsWithMetadata,
     projectsCount: projectsFilteredByCreditClass?.length,
-    loading: isLoadingProjects || isLoadingProjectsByClass || isLoadingProject,
+    loading:
+      isLoadingProjects ||
+      isLoadingProjectsByClass ||
+      isLoadingSellOrders ||
+      isLoadingSanityCreditClasses ||
+      isLoadingProject ||
+      isClassesMetadataLoading ||
+      projectsMetadataLoading ||
+      offChainProjectLoading,
     hasCommunityProjects,
   };
 }

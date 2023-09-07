@@ -16,17 +16,18 @@ export type CreditClassWithMedata = {
 
 type UseFetchCreditClassesResponse = {
   creditClassesWithMetadata?: CreditClassWithMedata[];
+  isLoading: boolean;
 };
 
 export const useFetchCreditClasses = (): UseFetchCreditClassesResponse => {
   const { ecocreditClient, dataClient } = useLedger();
-  const { data: creditClassesdata } = useQuery(
+  const { data: creditClassesData, isLoading } = useQuery(
     getClassesQuery({
       client: ecocreditClient,
       enabled: !!ecocreditClient,
     }),
   );
-  const creditClasses = creditClassesdata?.classes;
+  const creditClasses = creditClassesData?.classes;
 
   const creditClassesMetadataResults = useQueries({
     queries:
@@ -48,5 +49,7 @@ export const useFetchCreditClasses = (): UseFetchCreditClassesResponse => {
 
   return {
     creditClassesWithMetadata,
+    isLoading:
+      isLoading || creditClassesMetadataResults.some(res => res.isLoading),
   };
 };

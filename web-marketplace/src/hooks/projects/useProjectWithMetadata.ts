@@ -9,6 +9,7 @@ import {
   ProjectMetadataLD,
 } from 'lib/db/types/json-ld';
 import { getProjectKey } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery.constants';
+import { getProjectsByAdminKey } from 'lib/queries/react-query/ecocredit/getProjectsByAdmin/getProjectsByAdmin.constants';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
@@ -134,8 +135,11 @@ export const useProjectWithMetadata = ({
       await reactQueryClient.invalidateQueries({
         queryKey: getProjectByOnChainIdKey(projectId),
       });
+      await reactQueryClient.invalidateQueries({
+        queryKey: getProjectsByAdminKey({ admin: onChainProject?.admin }),
+      });
     }
-  }, [create, edit, reactQueryClient, projectId]);
+  }, [create, edit, reactQueryClient, projectId, onChainProject?.admin]);
 
   const metadataSubmit = useCallback(
     async ({

@@ -38,7 +38,7 @@ const MyProjects = (): JSX.Element => {
   const { isIssuer, isProjectAdmin } = useDashboardContext();
   const [createProject] = useCreateProjectMutation();
   const reactQueryClient = useQueryClient();
-  const { data: walletData, isLoading: isWalletLoading } = useQuery(
+  const { data: walletData, isFetching: isWalletLoading } = useQuery(
     getWalletByAddrQuery({
       addr: wallet?.address ?? '',
       client: graphqlClient,
@@ -49,7 +49,7 @@ const MyProjects = (): JSX.Element => {
   const [projectsCurrentStep] = useAtom(projectsCurrentStepAtom);
 
   const { ecocreditClient } = useLedger();
-  const { data: projectsData, isLoading: isOnChainProjectsLoading } = useQuery(
+  const { data: projectsData, isFetching: isOnChainProjectsLoading } = useQuery(
     getProjectsByAdminQuery({
       enabled: !!wallet?.address && !!ecocreditClient,
       client: ecocreditClient,

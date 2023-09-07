@@ -4867,6 +4867,10 @@ export type PartyByIdQuery = (
   & { partyById?: Maybe<(
     { __typename?: 'Party' }
     & Pick<Party, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'accountId' | 'websiteLink' | 'twitterLink'>
+    & { walletByWalletId?: Maybe<(
+      { __typename?: 'Wallet' }
+      & Pick<Wallet, 'addr'>
+    )> }
   )> }
 );
 
@@ -5752,6 +5756,9 @@ export const PartyByIdDocument = gql`
     accountId
     websiteLink
     twitterLink
+    walletByWalletId {
+      addr
+    }
   }
 }
     `;

@@ -61,6 +61,9 @@ export const EcocreditsByAccount = (): JSX.Element => {
   const party =
     partyByAddr?.walletByAddr?.partyByWalletId ?? partyById?.partyById;
   const defaultAvatar = getDefaultAvatar(party);
+  const address = isValidRegenAddress
+    ? accountAddressOrId
+    : partyById?.partyById?.walletByWalletId?.addr;
 
   const socialsLinks = useMemo(
     () => getSocialsLinks({ partyByAddr }),
@@ -100,10 +103,10 @@ export const EcocreditsByAccount = (): JSX.Element => {
         avatar={party?.image ? party?.image : defaultAvatar}
         infos={{
           addressLink: {
-            href: isValidRegenAddress
+            href: address
               ? getAccountUrl(accountAddressOrId, true)
               : `/profiles/${accountAddressOrId}/portfolio`,
-            text: isValidRegenAddress
+            text: address
               ? truncate(accountAddressOrId)
               : accountAddressOrId ?? '',
           },

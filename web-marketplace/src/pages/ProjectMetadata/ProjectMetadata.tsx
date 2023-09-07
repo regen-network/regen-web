@@ -8,6 +8,7 @@ import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getShaclGraphByUriQuery } from 'lib/queries/react-query/registry-server/graphql/getShaclGraphByUriQuery/getShaclGraphByUriQuery';
 import { getProjectShapeIri } from 'lib/rdf';
 
+import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
 import { MetadataForm } from 'components/organisms/MetadataForm/MetadataForm';
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
@@ -23,6 +24,8 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
     const graphqlClient = useApolloClient();
     const { isEdit, onChainProject, projectEditSubmit } =
       useProjectEditContext();
+    const { navigateNext } = useNavigateNext({ step: 'review', projectId });
+
     const { metadata, metadataSubmit, offChainProject, loading } =
       useProjectWithMetadata({
         projectId,
@@ -54,10 +57,6 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
     const initialValues = {
       metadata: customMetadata ? JSON.stringify(customMetadata, null, 2) : '',
     };
-
-    function navigateNext(): void {
-      navigate(`/project-pages/${projectId}/review`);
-    }
 
     return (
       <ProjectFormTemplate

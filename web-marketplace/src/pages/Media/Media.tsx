@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
 import WithLoader from 'components/atoms/WithLoader';
 import { MediaFormSchemaType } from 'components/organisms/MediaForm/MediaForm.schema';
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
@@ -12,6 +13,7 @@ const Media = (): JSX.Element => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
+  const { navigateNext } = useNavigateNext({ step: 'metadata', projectId });
   const { offChainProject, metadata, metadataSubmit, loading } =
     useProjectWithMetadata({
       projectId,
@@ -39,10 +41,6 @@ const Media = (): JSX.Element => {
     // TODO: functionality
     return Promise.resolve();
   };
-
-  function navigateNext(): void {
-    navigate(`/project-pages/${projectId}/metadata`);
-  }
 
   function navigatePrev(): void {
     navigate(`/project-pages/${projectId}/description`);

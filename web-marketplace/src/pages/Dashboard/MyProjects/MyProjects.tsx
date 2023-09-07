@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { Grid } from '@mui/material';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { CreateProjectCard } from 'web-components/lib/components/cards/CreateCards/CreateProjectCard';
@@ -13,6 +14,7 @@ import { getWalletByAddrQuery } from 'lib/queries/react-query/registry-server/gr
 import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { projectsCurrentStepAtom } from 'pages/ProjectCreate/ProjectCreate.store';
 import WithLoader from 'components/atoms/WithLoader';
 
 import { useDashboardContext } from '../Dashboard.context';
@@ -38,6 +40,7 @@ const MyProjects = (): JSX.Element => {
   );
 
   const { track } = useTracker();
+  const [projectsCurrentStep] = useAtom(projectsCurrentStepAtom);
 
   const projects =
     accountId === walletData?.walletByAddr?.partyByWalletId?.accountId
@@ -99,9 +102,12 @@ const MyProjects = (): JSX.Element => {
                           `/project-pages/${project?.onChainId}/edit/basic-info`,
                         );
                       } else {
-                        // TODO: update to navigate to the step the user left off the flow instead of /basic-info
-                        // https://github.com/regen-network/regen-registry/issues/1574
-                        navigate(`/project-pages/${project?.id}/basic-info`);
+                        const currentStep = projectsCurrentStep[project?.id];
+                        navigate(
+                          `/project-pages/${project?.id}/${
+                            currentStep || 'basic-info'
+                          }`,
+                        );
                       }
                     }}
                     track={track}

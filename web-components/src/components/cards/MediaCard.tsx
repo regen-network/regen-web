@@ -76,6 +76,7 @@ export default function MediaCard({
         children={imageChildren}
       />
     ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [
       apiServerUrl,
       backgroundGradient,
@@ -84,7 +85,8 @@ export default function MediaCard({
       imageStorageBaseUrl,
       imgSrc,
       tag,
-      imageChildren,
+      // do not add imageChildren here
+      // this would make the card image blinking
     ],
   );
 

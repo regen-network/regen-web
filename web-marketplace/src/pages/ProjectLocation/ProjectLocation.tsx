@@ -56,6 +56,7 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
         initialValues={initialValues}
         onPrev={navigatePrev}
         onNext={navigateNext}
+        jurisdiction={onChainProject?.jurisdiction}
       />
     </ProjectFormTemplate>
   );

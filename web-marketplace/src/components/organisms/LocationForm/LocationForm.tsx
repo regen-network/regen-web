@@ -35,6 +35,7 @@ interface LocationFormProps {
   onNext?: () => void;
   onPrev?: () => void;
   initialValues?: LocationFormSchemaType;
+  jurisdiction?: string;
 }
 
 const LocationForm: React.FC<LocationFormProps> = ({
@@ -43,6 +44,7 @@ const LocationForm: React.FC<LocationFormProps> = ({
   onSubmit,
   onNext,
   onPrev,
+  jurisdiction,
 }) => {
   const form = useZodForm({
     schema: locationFormSchema,
@@ -54,7 +56,7 @@ const LocationForm: React.FC<LocationFormProps> = ({
   const { isValid, isSubmitting, isDirty, errors } = useFormState({
     control: form.control,
   });
-  const { setValue } = form;
+  const { setValue, setError } = form;
 
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const { confirmSave, isEdit, isDirtyRef } = useProjectEditContext();
@@ -75,6 +77,21 @@ const LocationForm: React.FC<LocationFormProps> = ({
         try {
           const location = values['schema:location'];
           if (isGeocodingFeature(location)) {
+            // If a jurisdiction is provided (i.e. the project exists on chain),
+            // we require the location input to match the jurisdiction.
+            if (
+              jurisdiction &&
+              location.properties.short_code !== jurisdiction
+            ) {
+              // TODO: how to make this a field error rather than a banner error
+              setErrorBannerTextAtom(
+                `This location must match the on chain jurisdiction (${jurisdiction})`,
+              );
+              // setError('schema:location', {
+              //   message: `This location must match the on chain jurisdiction (${jurisdiction})`,
+              // });
+              return; // exit if location does not match jurisdiction
+            }
             await onSubmit({ values: { 'schema:location': location } });
           }
           if (isEdit && confirmSave) confirmSave();

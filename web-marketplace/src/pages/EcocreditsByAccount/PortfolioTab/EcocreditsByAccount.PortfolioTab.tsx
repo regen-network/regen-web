@@ -1,5 +1,7 @@
 import { useParams } from 'react-router-dom';
 
+import { isValidAddress } from 'web-components/lib/components/inputs/validation';
+
 import { useFetchBaskets } from 'pages/Dashboard/MyEcocredits/hooks/useFetchBaskets';
 import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 import { useFetchRetirements } from 'pages/Dashboard/MyEcocredits/hooks/useFetchRetirements';
@@ -10,14 +12,17 @@ export const PortfolioTab = (): JSX.Element => {
   const { credits, paginationParams, setPaginationParams } = useFetchEcocredits(
     { address: accountAddressOrId },
   );
+  const isValidRegenAddress = isValidAddress(accountAddressOrId ?? '', 'regen');
+  const address = isValidRegenAddress ? accountAddressOrId : '';
+
   const {
     retirements,
     retirementsSetPaginationParams,
     retirementsPaginationParams,
-  } = useFetchRetirements({ address: accountAddressOrId });
+  } = useFetchRetirements({ address });
 
   const { basketTokens } = useFetchBaskets({
-    address: accountAddressOrId,
+    address,
     credits,
   });
 

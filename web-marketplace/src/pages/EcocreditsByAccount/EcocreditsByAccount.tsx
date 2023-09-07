@@ -57,6 +57,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
       enabled: !isValidRegenAddress && !!graphqlClient && !!csrfData,
     }),
   );
+
   const party =
     partyByAddr?.walletByAddr?.partyByWalletId ?? partyById?.partyById;
   const defaultAvatar = getDefaultAvatar(party);

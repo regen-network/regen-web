@@ -9,7 +9,7 @@ export const getAccountUrl = (
 ): string => {
   if (!address) return '';
   if (address.startsWith('regen') && !useExplorer) {
-    return `/ecocredits/accounts/${address}/portfolio`;
+    return `/profiles/${address}/portfolio`;
   }
   if (isAneka) {
     return `${explorer}/accounts/${address}`;

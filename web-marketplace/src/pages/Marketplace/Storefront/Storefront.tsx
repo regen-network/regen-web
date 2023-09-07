@@ -103,7 +103,7 @@ export const Storefront = (): JSX.Element => {
 
   const onButtonClick = (): void => {
     if (txModalTitle === BUY_SELL_ORDER_TITLE) {
-      navigate('/ecocredits/portfolio');
+      navigate('/profile/portfolio');
     } else {
       handleTxModalClose();
     }

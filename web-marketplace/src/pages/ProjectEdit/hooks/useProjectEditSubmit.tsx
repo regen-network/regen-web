@@ -99,14 +99,14 @@ const useProjectEditSubmit = ({
                 label: 'new project admin',
                 value: {
                   name: newAdmin,
-                  url: `/ecocredits/accounts/${newAdmin}/portfolio`,
+                  url: `/profiles/${newAdmin}/portfolio`,
                 },
               },
               {
                 label: 'old project admin',
                 value: {
                   name: admin,
-                  url: `/ecocredits/accounts/${admin}/portfolio`,
+                  url: `/profiles/${admin}/portfolio`,
                 },
               },
             );

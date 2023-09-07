@@ -62,7 +62,7 @@ export const getUserMenuItems = ({
       pathname,
       linkComponent,
       title: 'My Portfolio',
-      href: '/ecocredits/portfolio',
+      href: '/profile/portfolio',
       icon: <CreditsIcon sx={{ height: 18, width: 20 }} />,
       importCallback: (): Promise<any> => import('../../../pages/Dashboard'),
     },
@@ -72,7 +72,7 @@ export const getUserMenuItems = ({
           linkComponent,
           title: 'Bridge',
           icon: <BridgeIcon />,
-          href: '/ecocredits/bridge',
+          href: '/profile/bridge',
         }
       : undefined,
   ].filter(Boolean) as HeaderDropdownItemProps[];

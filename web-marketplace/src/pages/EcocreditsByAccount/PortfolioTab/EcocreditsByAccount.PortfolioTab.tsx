@@ -6,18 +6,18 @@ import { useFetchRetirements } from 'pages/Dashboard/MyEcocredits/hooks/useFetch
 import { Portfolio } from 'components/organisms';
 
 export const PortfolioTab = (): JSX.Element => {
-  const { accountAddress } = useParams<{ accountAddress: string }>();
+  const { accountAddressOrId } = useParams<{ accountAddressOrId: string }>();
   const { credits, paginationParams, setPaginationParams } = useFetchEcocredits(
-    { address: accountAddress },
+    { address: accountAddressOrId },
   );
   const {
     retirements,
     retirementsSetPaginationParams,
     retirementsPaginationParams,
-  } = useFetchRetirements({ address: accountAddress });
+  } = useFetchRetirements({ address: accountAddressOrId });
 
   const { basketTokens } = useFetchBaskets({
-    address: accountAddress,
+    address: accountAddressOrId,
     credits,
   });
 

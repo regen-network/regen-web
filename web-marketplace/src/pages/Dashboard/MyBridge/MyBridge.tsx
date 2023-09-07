@@ -23,12 +23,12 @@ export const MyBridge = (): JSX.Element => {
     () => [
       {
         label: 'Bridgable ecocredits',
-        href: '/ecocredits/bridge/bridgable',
+        href: '/profile/bridge/bridgable',
         content: <MyBridgeOutlet />,
       },
       {
         label: 'Bridged ecocredits',
-        href: '/ecocredits/bridge/bridged',
+        href: '/profile/bridge/bridged',
         content: <MyBridgeOutlet />,
       },
     ],

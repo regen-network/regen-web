@@ -45,9 +45,7 @@ const useRolesSubmit = ({
   navigateNext,
   admin,
 }: Props): Return => {
-  const { createOrUpdateProject } = useCreateOrUpdateProject({
-    onChainProject,
-  });
+  const { createOrUpdateProject } = useCreateOrUpdateProject();
 
   const rolesSubmit = useCallback(
     async (
@@ -109,9 +107,8 @@ const useRolesSubmit = ({
             );
           }
           await createOrUpdateProject({
-            offChainProject,
+            offChainProjectId: offChainProject?.id,
             projectPatch,
-            isEdit,
           });
           await metadataReload();
         }

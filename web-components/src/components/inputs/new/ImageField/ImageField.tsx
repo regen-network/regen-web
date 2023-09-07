@@ -77,8 +77,10 @@ export const ImageField = forwardRef<HTMLInputElement, Props>(
         fileType,
       );
 
-      setInitialImage('');
-      setValue(result);
+      if (result) {
+        setInitialImage('');
+        setValue(result);
+      }
     };
 
     const handleCropModalClose = (): void => {

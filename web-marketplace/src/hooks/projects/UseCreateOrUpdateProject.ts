@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
 import { useApolloClient } from '@apollo/client';
-import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import {
@@ -9,30 +8,24 @@ import {
   useUpdateProjectByIdMutation,
 } from 'generated/graphql';
 import { getCreditClassByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getCreditClassByOnChainIdQuery/getCreditClassByOnChainIdQuery';
+import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery.constants';
 import { getWalletByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getWalletByAddrQuery/getWalletByAddrQuery';
 import { getWalletByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getWalletByAddrQuery/getWalletByAddrQuery.utils';
-import {
-  getProjectCreateBaseData,
-  getUnanchoredProjectBaseMetadata,
-} from 'lib/rdf';
+import { getUnanchoredProjectBaseMetadata } from 'lib/rdf';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { OffChainProject } from './useProjectWithMetadata';
-
-type Props = {
-  onChainProject?: ProjectInfo;
-};
+import { useProjectEditContext } from 'pages/ProjectEdit';
 
 type CreateOrUpdateProjectParams = {
-  offChainProject?: OffChainProject;
+  offChainProjectId?: string;
   projectPatch: ProjectPatch;
-  isEdit?: boolean;
 };
 
-export const useCreateOrUpdateProject = ({ onChainProject }: Props) => {
+export const useCreateOrUpdateProject = () => {
   const graphqlClient = useApolloClient();
   const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
+  const { isEdit, onChainProject } = useProjectEditContext();
   const [updateProject] = useUpdateProjectByIdMutation();
   const [createProject] = useCreateProjectMutation();
   const { data: walletData } = useQuery(
@@ -52,15 +45,14 @@ export const useCreateOrUpdateProject = ({ onChainProject }: Props) => {
 
   const createOrUpdateProject = useCallback(
     async ({
-      offChainProject,
+      offChainProjectId,
       projectPatch,
-      isEdit,
-    }: CreateOrUpdateProjectParams) => {
-      if (offChainProject?.id) {
+    }: CreateOrUpdateProjectParams): Promise<string | undefined> => {
+      if (offChainProjectId) {
         await updateProject({
           variables: {
             input: {
-              id: offChainProject.id,
+              id: offChainProjectId,
               projectPatch,
             },
           },
@@ -92,12 +84,17 @@ export const useCreateOrUpdateProject = ({ onChainProject }: Props) => {
               walletData?.walletByAddr?.addr ?? '',
             ),
           });
+          // await reactQueryClient.invalidateQueries({
+          //   queryKey: getProjectByOnChainIdKey(onChainProject.id),
+          // });
+          return projectId;
         }
       }
     },
     [
       classData?.data?.creditClassByOnChainId?.id,
       createProject,
+      isEdit,
       onChainProject,
       reactQueryClient,
       updateProject,

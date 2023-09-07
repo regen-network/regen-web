@@ -71,9 +71,7 @@ export const useProjectWithMetadata = ({
   const reactQueryClient = useQueryClient();
   const { dataClient } = useLedger();
 
-  const { createOrUpdateProject } = useCreateOrUpdateProject({
-    onChainProject,
-  });
+  const { createOrUpdateProject } = useCreateOrUpdateProject();
 
   // In project creation mode, we query the off-chain project since there's no on-chain project yet.
   // In this case, the router param projectId is the off-chain project uuid.
@@ -153,9 +151,8 @@ export const useProjectWithMetadata = ({
           await projectEditSubmit(newMetadata);
         } else {
           await createOrUpdateProject({
-            offChainProject,
+            offChainProjectId: offChainProject?.id,
             projectPatch: { metadata: newMetadata },
-            isEdit,
           });
 
           !isEdit && navigateNext();

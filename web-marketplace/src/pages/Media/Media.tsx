@@ -56,7 +56,7 @@ const Media = (): JSX.Element => {
       loading={loading}
     >
       <WithLoader
-        isLoading={!metadata}
+        isLoading={loading}
         sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}
       >
         <MediaForm

@@ -36,7 +36,7 @@ export interface ImageDropProps extends Partial<FieldFormControlProps> {
   isCropSubmitDisabled?: boolean;
   setValue: (value: string, fieldIndex: number) => void;
   onDelete?: (fileName: string) => Promise<void>;
-  onUpload?: (imageFile: File) => Promise<string>;
+  onUpload?: (imageFile: File) => Promise<string | undefined>;
 }
 
 /**
@@ -117,9 +117,9 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
       croppedImage: HTMLImageElement,
     ): Promise<void> => {
       const result = await getImageSrc(croppedImage, onUpload, fileName);
-      setValue(result, fieldIndex);
 
       if (result) {
+        setValue(result, fieldIndex);
         setCropModalOpen(false);
       }
     };

@@ -49,6 +49,7 @@ import InfoIcon from './InfoIcon';
 import InfoIconOutlined from './InfoIconOutlined';
 import InterfaceIcon from './InterfaceIcon';
 import LinkIcon from './LinkIcon';
+import LocationSearchIcon from './LocationSearchIcon';
 import MinusIcon from './MinusIcon';
 import NoBasketTokensIcon from './NoBasketTokensIcon';
 import NoEcocreditsIcon from './NoEcocreditsIcon';
@@ -112,6 +113,7 @@ import VerifiedIcon from './VerifiedIcon';
 import WalletErrorIcon from './WalletErrorIcon';
 import { WalletIcon } from './WalletIcon';
 import WhitepaperIcon from './WhitepaperIcon';
+import ZoomIcon from './ZoomIcon';
 
 export default {
   title: 'Icons',
@@ -252,6 +254,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<LinkedInIcon color="blue" />} label="LinkedInIcon" />
     <LabeledIcon icon={<LinkedInBadgeIcon />} label="LinkedInBadgeIcon" />
     <LabeledIcon icon={<LinkIcon />} label="LinkIcon" />
+    <LabeledIcon icon={<LocationSearchIcon />} label="LocationSearchIcon" />
     <LabeledIcon icon={<MediumIcon color="grey" />} label="MediumIcon" />
     <LabeledIcon icon={<MinusIcon />} label="MinusIcon" />
     <LabeledIcon icon={<NoBasketTokensIcon />} label="NoBasketTokensIcon" />
@@ -343,5 +346,6 @@ export const allIcons = (): JSX.Element => (
       label="WhitepaperIcon"
     />
     <LabeledIcon icon={<YoutubeIcon color="red" />} label="YoutubeIcon" />
+    <LabeledIcon icon={<ZoomIcon />} label="ZoomIcon" />
   </Grid>
 );

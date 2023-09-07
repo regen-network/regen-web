@@ -1,10 +1,11 @@
-import React, { forwardRef, useEffect, useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import MapboxClient from '@mapbox/mapbox-sdk';
 import mbxGeocoder, {
   GeocodeFeature,
   GeocodeQueryType,
 } from '@mapbox/mapbox-sdk/services/geocoding';
 
+import LocationSearchIcon from '../../../icons/LocationSearchIcon';
 import FieldFormControl from '../FieldFormControl/FieldFormControl';
 import Input from '../Input/Input';
 import { useLocationStyles } from './LocationField.styles';
@@ -78,6 +79,11 @@ const LocationField = forwardRef<HTMLInputElement, Props>(
           <Input
             {...props}
             placeholder={placeholder}
+            endAdornment={
+              <LocationSearchIcon
+                sx={{ color: 'grey.100', width: 20, height: 22 }}
+              />
+            }
             value={isGeocodingFeature(value) ? value.place_name : value}
             onBlur={e => {
               onBlur(e);

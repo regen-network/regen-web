@@ -3,7 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import { ProjectImpactCardProps } from 'web-components/lib/components/cards/ProjectImpactCard/ProjectImpactCard';
 
 import { client as sanityClient } from 'lib/clients/sanity';
-import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
+import {
+  AnchoredProjectMetadataLD,
+  CreditClassMetadataLD,
+  LegacyProjectMetadataLD,
+} from 'lib/db/types/json-ld';
 import { getSdgByIriQuery } from 'lib/queries/react-query/sanity/getSdgByIriQuery/getSdgByIriQuery';
 
 import { Maybe } from '../../../generated/graphql';
@@ -18,15 +22,19 @@ interface InputProps {
   offChainCoBenefitsIRIs: Maybe<string | string[]> | undefined;
   offChainPrimaryImpactIRI?: string;
   creditClassMetadata?: CreditClassMetadataLD;
+  projectMetadata?: AnchoredProjectMetadataLD | LegacyProjectMetadataLD;
 }
 
 export default function useImpact({
   offChainCoBenefitsIRIs,
   offChainPrimaryImpactIRI,
   creditClassMetadata,
+  projectMetadata,
 }: InputProps) {
   const primaryImpact = creditClassMetadata?.['regen:primaryImpact'];
+  const projectImpact = projectMetadata?.['regen:primaryImpact'];
   const coBenefits = creditClassMetadata?.['regen:coBenefits'];
+  const projectCoBenefits = projectMetadata?.['regen:coBenefits'];
 
   const primaryImpactSdgIris =
     primaryImpact?.['regen:SDGs']?.map(sdg => sdg['@id']) || [];
@@ -67,6 +75,7 @@ export default function useImpact({
     impact.push(
       normalizePrimaryImpact({
         impact: primaryImpact,
+        projectImpact,
         sanityImpact: sanityPrimaryImpact,
         sdgs: sdgs?.filter(
           sdg =>
@@ -84,6 +93,11 @@ export default function useImpact({
           typeof coBenefit === 'string'
             ? { '@id': coBenefit, 'schema:name': coBenefit }
             : coBenefit,
+        projectImpact: projectCoBenefits?.find(
+          projectCoBenefit =>
+            projectCoBenefit['@id'] ===
+            (typeof coBenefit === 'string' ? coBenefit : coBenefit['@id']),
+        ),
         sanityImpact: sanityCoBenefits.find(sanityCoBenefit =>
           typeof coBenefit === 'string'
             ? sanityCoBenefit.iri?.current === coBenefit

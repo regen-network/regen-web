@@ -76,6 +76,7 @@ export const COMPACTED_CONTEXT = {
   'regen:ecosystemType': { '@container': '@list' },
   'regen:projectActivities': { '@container': '@list' },
   'regen:offsetGenerationMethod': { '@container': '@list' },
+  'regen:coBenefits': { '@container': '@list' },
   'regen:sectoralScope': { '@container': '@list' },
   'regen:verificationReports': { '@container': '@list' },
   'regen:cfcCreditSerialNumbers': { '@container': '@list' },
@@ -125,5 +126,4 @@ export const COMPACTED_CONTEXT = {
 
   // Credit class version metadata
   'regen:SDGs': { '@container': '@list' },
-  'regen:coBenefits': { '@container': '@list' },
 };

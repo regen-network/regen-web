@@ -76,18 +76,16 @@ export const EcocreditsByAccount = (): JSX.Element => {
         label: 'Portfolio',
         icon: <CreditsIcon fontSize="small" />,
         href: `/profiles/${accountAddressOrId}/portfolio`,
-        hidden: !isValidRegenAddress,
+        hidden: !party,
       },
       {
         label: 'Bridge',
         icon: <BridgeIcon />,
         href: `/profiles/${accountAddressOrId}/bridge`,
-        hidden:
-          !isValidRegenAddress ||
-          import.meta.env.VITE_LEDGER_CHAIN_ID === 'regen-1', // TODO: Hides in PROD - remove when Bridge is ready
+        hidden: !party || import.meta.env.VITE_LEDGER_CHAIN_ID === 'regen-1', // TODO: Hides in PROD - remove when Bridge is ready
       },
     ],
-    [accountAddressOrId, isValidRegenAddress],
+    [accountAddressOrId, party],
   );
 
   const activeTab = Math.max(

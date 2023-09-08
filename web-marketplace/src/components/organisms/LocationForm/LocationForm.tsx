@@ -77,21 +77,6 @@ const LocationForm: React.FC<LocationFormProps> = ({
         try {
           const location = values['schema:location'];
           if (isGeocodingFeature(location)) {
-            // If a jurisdiction is provided (i.e. the project exists on chain),
-            // we require the location input to match the jurisdiction.
-            if (
-              jurisdiction &&
-              location.properties.short_code !== jurisdiction
-            ) {
-              // TODO: how to make this a field error rather than a banner error
-              setErrorBannerTextAtom(
-                `This location must match the on chain jurisdiction (${jurisdiction})`,
-              );
-              // setError('schema:location', {
-              //   message: `This location must match the on chain jurisdiction (${jurisdiction})`,
-              // });
-              return; // exit if location does not match jurisdiction
-            }
             await onSubmit({ values: { 'schema:location': location } });
           }
           if (isEdit && confirmSave) confirmSave();
@@ -109,12 +94,27 @@ const LocationForm: React.FC<LocationFormProps> = ({
           error={!!errors['schema:location']}
           helperText={errors['schema:location']?.message}
           value={location}
-          handleChange={value =>
+          handleChange={value => {
             setValue('schema:location', value, {
               shouldDirty: true,
               shouldTouch: true,
-            })
-          }
+            });
+            // If a jurisdiction is provided (i.e. the project exists on chain),
+            // we require the location input to match the jurisdiction.
+            if (jurisdiction) {
+              let valid: boolean;
+              if (isGeocodingFeature(location)) {
+                valid = location.properties.short_code === jurisdiction;
+              } else {
+                valid = location === jurisdiction;
+              }
+              if (!valid) {
+                setError('schema:location', {
+                  message: `This location must match the on chain jurisdiction (${jurisdiction})`,
+                });
+              }
+            }
+          }}
           {...form.register('schema:location')}
         />
       </OnBoardingCard>

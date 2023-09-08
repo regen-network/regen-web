@@ -55,6 +55,8 @@ const LocationField = forwardRef<HTMLInputElement, Props>(
       value,
       handleChange,
       onBlur,
+      error,
+      helperText,
       ...props
     },
     ref,
@@ -73,6 +75,8 @@ const LocationField = forwardRef<HTMLInputElement, Props>(
         description={description}
         disabled={disabled}
         optional={optional}
+        error={error}
+        helperText={helperText}
       >
         <>
           <Input

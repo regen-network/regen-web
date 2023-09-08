@@ -3,10 +3,10 @@ import { Avatar, Button, Card, CardMedia, Link } from '@mui/material';
 
 import { SocialItemsMock } from '../share-section/ShareSection.mock';
 import Modal from '.';
-// import { BasketPutModal } from './BasketPutModal';
-// import { BasketTakeModal } from './BasketTakeModal';
+import { BasketPutModal } from './BasketPutModal';
+import { BasketTakeModal } from './BasketTakeModal';
 import { ConfirmModal } from './ConfirmModal';
-// import { CreateSellOrderModal } from './CreateSellOrderModal';
+import { CreateSellOrderModal } from './CreateSellOrderModal';
 import CropImageModal from './CropImageModal';
 import { ProcessingModal } from './ProcessingModal';
 import { TxErrorModal } from './TxErrorModal';
@@ -174,58 +174,54 @@ export const txErrorModal = (): JSX.Element => (
   />
 );
 
-// Temporarily removing those stories since they cause some Buffer not defined error,
-// because they use @keplr-wallet/cosmos under the hood.
-// That should be fixed in the storybook vite config.
+export const basketPutModal = (): JSX.Element => (
+  <BasketPutModal
+    basketOptions={[{ label: 'NCT', value: 'eco.uC.NCT' }]}
+    availableTradableAmount={1000}
+    batchDenoms={['C01-20190101-20201010-02']}
+    open={true}
+    onClose={() => null}
+    onSubmit={async () => alert('submit')}
+  />
+);
 
-// export const basketPutModal = (): JSX.Element => (
-//   <BasketPutModal
-//     basketOptions={[{ label: 'NCT', value: 'eco.uC.NCT' }]}
-//     availableTradableAmount={1000}
-//     batchDenoms={['C01-20190101-20201010-02']}
-//     open={true}
-//     onClose={() => null}
-//     onSubmit={async () => alert('submit')}
-//   />
-// );
+const MAPBOX_TOKEN = import.meta.env.STORYBOOK_MAPBOX_TOKEN || '';
 
-// const MAPBOX_TOKEN = import.meta.env.STORYBOOK_MAPBOX_TOKEN || '';
+export const basketTakeModal = (): JSX.Element => (
+  <BasketTakeModal
+    open={true}
+    accountAddress="123xyz"
+    basketDisplayDenom="eco.C.rNCT"
+    basket={{
+      curator: 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4',
+      $type: 'regen.ecocredit.basket.v1.BasketInfo',
+      name: 'rNCT',
+      basketDenom: 'eco.uC.rNCT',
+      creditTypeAbbrev: 'C',
+      disableAutoRetire: false,
+      exponent: 6,
+    }}
+    balance={9999}
+    mapboxToken={MAPBOX_TOKEN}
+    onClose={() => null}
+    onSubmit={() => alert('submit')}
+  />
+);
 
-// export const basketTakeModal = (): JSX.Element => (
-//   <BasketTakeModal
-//     open={true}
-//     accountAddress="123xyz"
-//     basketDisplayDenom="eco.C.rNCT"
-//     basket={{
-//       curator: 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4',
-//       $type: 'regen.ecocredit.basket.v1.BasketInfo',
-//       name: 'rNCT',
-//       basketDenom: 'eco.uC.rNCT',
-//       creditTypeAbbrev: 'C',
-//       disableAutoRetire: false,
-//       exponent: 6,
-//     }}
-//     balance={9999}
-//     mapboxToken={MAPBOX_TOKEN}
-//     onClose={() => null}
-//     onSubmit={() => alert('submit')}
-//   />
-// );
-
-// export const createSellOrderModal = (): JSX.Element => (
-//   <CreateSellOrderModal
-//     batchDenoms={[
-//       {
-//         label: 'C01-20190101-20201010-003',
-//         value: 'C01-20190101-20201010-003',
-//       },
-//     ]}
-//     allowedDenoms={[{ label: 'REGEN', value: 'uregen' }]}
-//     title={'Create Sell Order'}
-//     availableAmountByBatch={{}}
-//     sellDenom={'REGEN'}
-//     open={true}
-//     onClose={() => null}
-//     onSubmit={async () => alert('submit')}
-//   />
-// );
+export const createSellOrderModal = (): JSX.Element => (
+  <CreateSellOrderModal
+    batchDenoms={[
+      {
+        label: 'C01-20190101-20201010-003',
+        value: 'C01-20190101-20201010-003',
+      },
+    ]}
+    allowedDenoms={[{ label: 'REGEN', value: 'uregen' }]}
+    title={'Create Sell Order'}
+    availableAmountByBatch={{}}
+    sellDenom={'REGEN'}
+    open={true}
+    onClose={() => null}
+    onSubmit={async () => alert('submit')}
+  />
+);

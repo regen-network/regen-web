@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
 import { useProjectEditContext } from 'pages/ProjectEdit';
 import WithLoader from 'components/atoms/WithLoader';
 import { DescriptionForm } from 'components/organisms/DescriptionForm/DescriptionForm';
@@ -12,6 +13,8 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
+  const { navigateNext } = useNavigateNext({ step: 'media', projectId });
+
   const { metadata, metadataSubmit, offChainProject, loading } =
     useProjectWithMetadata({
       projectId,
@@ -35,10 +38,6 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
     // TODO: functionality
     return Promise.resolve();
   };
-
-  function navigateNext(): void {
-    navigate(`/project-pages/${projectId}/media`);
-  }
 
   function navigatePrev(): void {
     navigate(`/project-pages/${projectId}/roles`);

@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
 import WithLoader from 'components/atoms/WithLoader';
 import { RolesForm } from 'components/organisms/RolesForm/RolesForm';
 import { RolesFormSchemaType } from 'components/organisms/RolesForm/RolesForm.schema';
@@ -16,6 +17,8 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { wallet, loaded } = useWallet();
+  const { navigateNext } = useNavigateNext({ step: 'description', projectId });
+
   const {
     isEdit,
     onChainProject,
@@ -66,10 +69,6 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   async function saveAndExit(): Promise<void> {
     // TODO: functionality
-  }
-
-  function navigateNext(): void {
-    navigate(`/project-pages/${projectId}/description`);
   }
 
   function navigatePrev(): void {

@@ -74,7 +74,9 @@ export const MediaFormPhotos = ({
   /* Setter */
 
   const setPreviewPhoto = (value: string): void => {
-    setValue('regen:previewPhoto.schema:url', encodeURI(value));
+    setValue('regen:previewPhoto.schema:url', encodeURI(value), {
+      shouldDirty: true,
+    });
     isDirtyRef.current = true;
   };
   const setGalleryPhotos = (value: string, fieldIndex: number): void => {

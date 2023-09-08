@@ -5,8 +5,11 @@ import Checkbox from 'web-components/lib/components/inputs/new/CheckBox/Checkbox
 import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
 
 import { UseStateSetter } from 'types/react/use-state';
+import { useTracker } from 'lib/tracker/useTracker';
 
 import { COMMUNITY_FILTER } from './Projects.constants';
+import { FilterCommunityCreditsEvent } from './Projects.types';
+import { getFilterSelected } from './Projects.utils';
 
 type CommunityFilterProps = {
   useCommunityProjects?: boolean;
@@ -19,6 +22,8 @@ export const CommunityFilter = ({
   setUseCommunityProjects,
   sx,
 }: CommunityFilterProps) => {
+  const { track } = useTracker();
+
   return (
     <Flex sx={sx}>
       <FormControlLabel
@@ -26,7 +31,15 @@ export const CommunityFilter = ({
           <Checkbox
             sx={{ p: 0, mr: 3 }}
             checked={useCommunityProjects}
-            onChange={event => setUseCommunityProjects(event.target.checked)}
+            onChange={event => {
+              setUseCommunityProjects(event.target.checked);
+              track<'filterPermissionlessCredits', FilterCommunityCreditsEvent>(
+                'filterPermissionlessCredits',
+                {
+                  selected: getFilterSelected(event.target.checked),
+                },
+              );
+            }}
           />
         }
         label={COMMUNITY_FILTER}

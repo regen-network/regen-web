@@ -11,6 +11,7 @@ export interface AnchoredProjectMetadataBaseLD {
   '@type': string; // ex: regen:C01-Project
   'schema:name': string;
   'schema:location': GeocodeFeature;
+  'regen:coBenefits': ProjectImpact[];
   'regen:projectType': string;
   'regen:projectActivity': CompactedNameOptionalUrl;
   'regen:offsetGenerationMethod'?: string[];
@@ -21,6 +22,7 @@ export interface AnchoredProjectMetadataBaseLD {
   'regen:projectVerifier'?: ProjectStakeholder;
   'regen:landSteward'?: ProjectStakeholder;
   'regen:landOwner'?: ProjectStakeholder;
+  'regen:primaryImpact': ProjectImpact;
   'regen:projectOriginator'?: ProjectStakeholder;
   'regen:ratings'?: Rating[];
 }
@@ -69,6 +71,11 @@ export type ProjectStoryMedia = {
 interface ProjectSize {
   'qudt:unit': string;
   'qudt:numericValue': number;
+}
+
+export interface ProjectImpact {
+  '@id': '';
+  'schema:description': '';
 }
 
 export const REGEN_INDIVIDUAL = 'regen:Individual';

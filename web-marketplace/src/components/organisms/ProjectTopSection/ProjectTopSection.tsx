@@ -156,6 +156,7 @@ function ProjectTopSection({
     offChainPrimaryImpactIRI,
     offChainCoBenefitsIRIs,
     creditClassMetadata,
+    projectMetadata,
   });
 
   return (

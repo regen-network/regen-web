@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
+import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
 import { useProjectEditContext } from 'pages/ProjectEdit';
 import { BasicInfoForm } from 'components/organisms';
 import { BasicInfoFormSchemaType } from 'components/organisms/BasicInfoForm/BasicInfoForm.schema';
@@ -9,9 +10,9 @@ import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 import { ProjectFormTemplate } from '../../components/templates/ProjectFormTemplate';
 
 const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
-  const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
+  const { navigateNext } = useNavigateNext({ step: 'location', projectId });
   const { metadata, metadataSubmit, offChainProject, loading } =
     useProjectWithMetadata({
       projectId,
@@ -20,7 +21,6 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
       navigateNext,
       onChainProject,
     });
-
   const initialValues: BasicInfoFormSchemaType = useMemo(
     () => ({
       'schema:name': metadata?.['schema:name'] ?? '',
@@ -36,9 +36,6 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
     // TODO: functionality
   }
 
-  function navigateNext(): void {
-    navigate(`/project-pages/${projectId}/location`);
-  }
   return (
     <ProjectFormTemplate
       isEdit={isEdit}

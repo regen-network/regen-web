@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
 import { useProjectEditContext } from 'pages/ProjectEdit';
 import { LocationFormSchemaType } from 'components/organisms/LocationForm/LocationForm.schema';
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
@@ -12,6 +13,8 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
+  const { navigateNext } = useNavigateNext({ step: 'roles', projectId });
+
   const { metadata, metadataSubmit, offChainProject, loading } =
     useProjectWithMetadata({
       projectId,
@@ -36,10 +39,6 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   function navigatePrev(): void {
     navigate(`/project-pages/${projectId}/basic-info`);
-  }
-
-  function navigateNext(): void {
-    navigate(`/project-pages/${projectId}/roles`);
   }
 
   return (

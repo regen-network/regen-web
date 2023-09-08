@@ -13,6 +13,7 @@ import { SKIPPED_CLASS_ID } from 'lib/env';
 import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
+import WithLoader from 'components/atoms/WithLoader';
 import BlockContentBody from 'components/molecules/BlockContentBody';
 
 import horsesImg from '../../assets/horses-grazing.png';
@@ -39,7 +40,11 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
     getAllHomePageQuery({ sanityClient, enabled: !!sanityClient }),
   );
 
-  const { creditClasses, creditClassesPrograms } = useCreditClasses({
+  const {
+    creditClasses,
+    creditClassesPrograms,
+    loading: creditClassesLoading,
+  } = useCreditClasses({
     skippedClassId: SKIPPED_CLASS_ID,
   });
 
@@ -172,12 +177,17 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
           {creditClassesSection?.bodyRaw && (
             <BlockContentBody body={creditClassesSection?.bodyRaw} />
           )}
-          <CreditClassCards
-            btnText="Learn More"
-            justifyContent={['center', 'center', 'flex-start']}
-            creditClassesContent={creditClasses} // CMS data
-            creditClassesProgram={creditClassesPrograms}
-          />
+          <WithLoader
+            isLoading={creditClassesLoading}
+            sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+          >
+            <CreditClassCards
+              btnText="Learn More"
+              justifyContent={['center', 'center', 'flex-start']}
+              creditClassesContent={creditClasses} // CMS data
+              creditClassesProgram={creditClassesPrograms}
+            />
+          </WithLoader>
         </BackgroundImgSection>
       )}
 

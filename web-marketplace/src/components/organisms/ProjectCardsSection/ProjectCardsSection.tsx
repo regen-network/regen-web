@@ -39,7 +39,7 @@ export function ProjectCardsSection({
 }: Props): JSX.Element {
   const { classes } = useSectionStyles();
   const { track } = useTracker();
-  const { data: sanitySoldOutProjects } = useQuery(
+  const { data: sanitySoldOutProjects, isFetching } = useQuery(
     getSoldOutProjectsQuery({ sanityClient, enabled: !!sanityClient }),
   );
   const soldOutProjectsIds = useAllSoldOutProjectsIds({
@@ -55,7 +55,7 @@ export function ProjectCardsSection({
       {body && <BlockContentBody body={body} />}
 
       <WithLoader
-        isLoading={!!loading}
+        isLoading={!!loading || isFetching}
         sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
       >
         <CardsGridContainer cardsCount={projects.length}>

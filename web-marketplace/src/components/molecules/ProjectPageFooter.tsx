@@ -1,6 +1,9 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
+
+import { getProjectCreationPercentage } from 'pages/ProjectCreate/ProjectCreate.utils';
 
 import { useProjectEditContext } from '../../pages/ProjectEdit';
 import { EditProjectPageFooter } from './EditProjectPageFooter';
@@ -25,6 +28,9 @@ const ProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
 }) => {
   const { isEdit } = useProjectEditContext();
   const saveDisabled = !isValid || isSubmitting;
+  const { pathname } = useLocation();
+  const currentStep = pathname.substring(pathname.lastIndexOf('/') + 1);
+  const percentage = getProjectCreationPercentage({ currentStep });
 
   return isEdit ? (
     <EditProjectPageFooter
@@ -40,7 +46,7 @@ const ProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
       onNext={props.onNext}
       hideProgress={false} // TODO
       saveDisabled={saveDisabled}
-      percentComplete={0} // TODO
+      percentComplete={percentage}
     />
   );
 };

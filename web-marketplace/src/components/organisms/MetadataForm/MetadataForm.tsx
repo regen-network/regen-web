@@ -66,7 +66,10 @@ const MetadataForm: React.FC<MetadataFormFormProps> = ({
       onSubmit={async values => {
         try {
           await onSubmit({ values });
-          if (isEdit && confirmSave) confirmSave();
+          if (isEdit && confirmSave) {
+            confirmSave();
+            form.reset({}, { keepValues: true });
+          }
         } catch (e) {
           setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
         }

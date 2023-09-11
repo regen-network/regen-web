@@ -72,7 +72,10 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
             values,
             shouldNavigate: shouldNavigateRef?.current,
           });
-          if (isEdit && confirmSave) confirmSave();
+          if (isEdit && confirmSave) {
+            confirmSave();
+            form.reset({}, { keepValues: true });
+          }
         } catch (e) {
           setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
         }

@@ -86,7 +86,10 @@ export const MediaForm = ({
           );
           fileNamesToDeleteRef.current = [];
           // Save callback
-          if (isEdit && confirmSave) confirmSave();
+          if (isEdit && confirmSave) {
+            confirmSave();
+            form.reset({}, { keepValues: true });
+          }
           // Reset dirty state
           isDirtyRef.current = false;
         } catch (e) {

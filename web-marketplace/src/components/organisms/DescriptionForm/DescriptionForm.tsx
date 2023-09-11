@@ -52,6 +52,7 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
     },
     mode: 'onBlur',
   });
+
   const { isValid, isSubmitting, isDirty, errors } = useFormState({
     control: form.control,
   });
@@ -86,7 +87,10 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
             values,
             shouldNavigate: shouldNavigateRef?.current,
           });
-          if (isEdit && confirmSave) confirmSave();
+          if (isEdit && confirmSave) {
+            confirmSave();
+            form.reset({}, { keepValues: true });
+          }
         } catch (e) {
           setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
         }

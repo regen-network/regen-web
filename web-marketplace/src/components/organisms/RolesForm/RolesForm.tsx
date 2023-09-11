@@ -142,7 +142,10 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
             adminWalletId: adminWalletData?.walletByAddr?.id,
             shouldNavigate: shouldNavigateRef?.current,
           });
-          if (isEdit && confirmSave) confirmSave();
+          if (isEdit && confirmSave) {
+            confirmSave();
+            form.reset({}, { keepValues: true });
+          }
         } catch (e) {
           setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
         }

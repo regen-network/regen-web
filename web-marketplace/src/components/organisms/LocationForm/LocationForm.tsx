@@ -10,8 +10,10 @@ import { isGeocodingFeature } from 'web-components/lib/components/inputs/new/Loc
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
 import { useProjectEditContext } from 'pages';
+import { useCreateProjectContext } from 'pages/ProjectCreate';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
+import { MetadataSubmitProps } from 'hooks/projects/useProjectWithMetadata';
 
 import { ProjectPageFooter } from '../../molecules';
 import {
@@ -22,16 +24,11 @@ import {
 import {
   locationFormSchema,
   LocationFormSchemaType,
-  SimplifiedLocationFormSchemaType,
 } from './LocationForm.schema';
 
 interface LocationFormProps {
   mapToken: string;
-  onSubmit: ({
-    values,
-  }: {
-    values: SimplifiedLocationFormSchemaType;
-  }) => Promise<void>;
+  onSubmit: (props: MetadataSubmitProps) => Promise<void>;
   onNext?: () => void;
   onPrev?: () => void;
   initialValues?: LocationFormSchemaType;
@@ -58,6 +55,7 @@ const LocationForm: React.FC<LocationFormProps> = ({
 
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const { confirmSave, isEdit, isDirtyRef } = useProjectEditContext();
+  const { formRef, shouldNavigateRef } = useCreateProjectContext();
 
   const location = useWatch({
     control: form.control,
@@ -71,13 +69,20 @@ const LocationForm: React.FC<LocationFormProps> = ({
   return (
     <Form
       form={form}
+      formRef={formRef}
       onSubmit={async values => {
         try {
           const location = values['schema:location'];
           if (isGeocodingFeature(location)) {
-            await onSubmit({ values: { 'schema:location': location } });
+            await onSubmit({
+              values: { 'schema:location': location },
+              shouldNavigate: shouldNavigateRef?.current,
+            });
           }
-          if (isEdit && confirmSave) confirmSave();
+          if (isEdit && confirmSave) {
+            confirmSave();
+            form.reset({}, { keepValues: true });
+          }
         } catch (e) {
           setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
         }

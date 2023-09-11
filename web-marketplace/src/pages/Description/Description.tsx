@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
+import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import { useProjectEditContext } from 'pages/ProjectEdit';
 import WithLoader from 'components/atoms/WithLoader';
 import { DescriptionForm } from 'components/organisms/DescriptionForm/DescriptionForm';
@@ -12,7 +13,8 @@ import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
-  const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
+  const { isEdit, onChainProject, projectEditSubmit, isLoading } =
+    useProjectEditContext();
   const { navigateNext } = useNavigateNext({ step: 'media', projectId });
 
   const { metadata, metadataSubmit, offChainProject, loading } =
@@ -34,10 +36,7 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
     [metadata],
   );
 
-  const saveAndExit = (): Promise<void> => {
-    // TODO: functionality
-    return Promise.resolve();
-  };
+  const saveAndExit = useProjectSaveAndExit();
 
   function navigatePrev(): void {
     navigate(`/project-pages/${projectId}/roles`);
@@ -53,7 +52,7 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
       loading={loading}
     >
       <WithLoader
-        isLoading={loading}
+        isLoading={isLoading}
         sx={{ textAlign: 'center', mt: { xs: 6.5, sm: 9 } }}
       >
         <DescriptionForm

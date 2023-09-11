@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
+import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import WithLoader from 'components/atoms/WithLoader';
 import { MediaFormSchemaType } from 'components/organisms/MediaForm/MediaForm.schema';
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
@@ -37,10 +38,7 @@ const Media = (): JSX.Element => {
     },
   };
 
-  const saveAndExit = (): Promise<void> => {
-    // TODO: functionality
-    return Promise.resolve();
-  };
+  const saveAndExit = useProjectSaveAndExit();
 
   function navigatePrev(): void {
     navigate(`/project-pages/${projectId}/description`);

@@ -40,6 +40,7 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { rolesSubmit } = useRolesSubmit({
     projectEditSubmit,
     offChainProject,
+    onChainProject,
     metadata,
     isEdit,
     metadataReload,
@@ -80,7 +81,8 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
       isEdit={isEdit}
       title="Roles"
       saveAndExit={saveAndExit}
-      project={offChainProject}
+      offChainProject={offChainProject}
+      onChainProject={onChainProject}
       loading={withMetadataLoading}
     >
       <WithLoader

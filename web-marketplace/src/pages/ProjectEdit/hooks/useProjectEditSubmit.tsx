@@ -7,6 +7,7 @@ import {
 import { NestedPartial } from 'types/nested-partial';
 import { generateIri } from 'lib/db/api/metadata-graph';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
+import { getAnchoredProjectBaseMetadata } from 'lib/rdf';
 
 import { OnTxSuccessfulProps } from 'pages/Dashboard/MyEcocredits/MyEcocredits.types';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
@@ -19,6 +20,7 @@ import {
 type Props = {
   projectId?: string;
   admin?: string;
+  creditClassId?: string;
   signAndBroadcast: SignAndBroadcastType;
   onBroadcast: () => void;
   onErrorCallback?: (error?: Error) => void;
@@ -39,6 +41,7 @@ export type UseProjectEditSubmitParams = (
 const useProjectEditSubmit = ({
   projectId,
   admin,
+  creditClassId,
   signAndBroadcast,
   onBroadcast,
   onTxSuccessful,
@@ -51,7 +54,9 @@ const useProjectEditSubmit = ({
       doUpdateMetadata: boolean = true,
       doUpdateAdmin: boolean = false,
     ): Promise<void> => {
-      const iriResponse = await generateIri(metadata);
+      const iriResponse = await generateIri(
+        getAnchoredProjectBaseMetadata(metadata, creditClassId),
+      );
       if (!iriResponse) return;
       const msgs: Array<MsgUpdateProjectMetadata | MsgUpdateProjectAdmin> = [];
 

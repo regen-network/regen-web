@@ -51,11 +51,12 @@ const Media = (): JSX.Element => {
       isEdit={isEdit}
       title="Media"
       saveAndExit={saveAndExit}
-      project={offChainProject}
+      offChainProject={offChainProject}
+      onChainProject={onChainProject}
       loading={loading}
     >
       <WithLoader
-        isLoading={!metadata}
+        isLoading={loading}
         sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}
       >
         <MediaForm

@@ -71,7 +71,6 @@ const ChooseCreditClass: React.FC<React.PropsWithChildren<unknown>> = () => {
       setError(`There was a problem validating this credit class: ${e}`);
     }
   }
-
   return (
     <ProjectFormAccessTemplate
       loading={isFetching}

@@ -46,7 +46,8 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
       isEdit={isEdit}
       title="Location"
       saveAndExit={saveAndExit}
-      project={offChainProject}
+      offChainProject={offChainProject}
+      onChainProject={onChainProject}
       loading={loading}
     >
       <LocationForm

@@ -10,16 +10,23 @@ import { CreateProjectCard } from 'web-components/lib/components/cards/CreateCar
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 
 import { useCreateProjectMutation } from 'generated/graphql';
+import { useLedger } from 'ledger';
+import { client as sanityClient } from 'lib/clients/sanity';
+import { normalizeProjectWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
+import { getProjectsByAdminQuery } from 'lib/queries/react-query/ecocredit/getProjectsByAdmin/getProjectsByAdmin';
 import { getWalletByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getWalletByAddrQuery/getWalletByAddrQuery';
+import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { projectsCurrentStepAtom } from 'pages/ProjectCreate/ProjectCreate.store';
 import WithLoader from 'components/atoms/WithLoader';
+import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { useDashboardContext } from '../Dashboard.context';
-import { useFetchProjectsByIdsWithOrders } from './hooks/useFetchProjectsByIdsWithOrders';
+import { useFetchProjectsWithOrders } from './hooks/useFetchProjectsWithOrders';
 import { DEFAULT_PROJECT } from './MyProjects.constants';
+import { Project } from './MyProjects.types';
 import { submitCreateProject } from './MyProjects.utils';
 
 const MyProjects = (): JSX.Element => {
@@ -31,33 +38,70 @@ const MyProjects = (): JSX.Element => {
   const { isIssuer, isProjectAdmin } = useDashboardContext();
   const [createProject] = useCreateProjectMutation();
   const reactQueryClient = useQueryClient();
-  const { data: walletData } = useQuery(
+  const { data: walletData, isFetching: isWalletLoading } = useQuery(
     getWalletByAddrQuery({
       addr: wallet?.address ?? '',
       client: graphqlClient,
       enabled: wallet?.address !== undefined,
     }),
   );
-
   const { track } = useTracker();
   const [projectsCurrentStep] = useAtom(projectsCurrentStepAtom);
 
-  const projects =
-    accountId === walletData?.walletByAddr?.partyByWalletId?.accountId
-      ? walletData?.walletByAddr?.projectsByAdminWalletId?.nodes
-      : undefined;
-  const isFirstProject = !projects || projects?.length < 1;
-  const onChainIds =
-    projects
-      ?.map(project => project?.onChainId)
-      .filter((id): id is string => {
-        return typeof id === 'string';
-      }) ?? [];
+  const { ecocreditClient } = useLedger();
+  const { data: projectsData, isFetching: isOnChainProjectsLoading } = useQuery(
+    getProjectsByAdminQuery({
+      enabled: !!wallet?.address && !!ecocreditClient,
+      client: ecocreditClient,
+      request: { admin: wallet?.address },
+    }),
+  );
+  const offChainProjects =
+    walletData?.walletByAddr?.projectsByAdminWalletId?.nodes;
+  const { data: sanityCreditClassData } = useQuery(
+    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+  );
 
-  const { projects: projectsWithOrders, isProjectsLoading } =
-    useFetchProjectsByIdsWithOrders({
-      projectIds: onChainIds,
-    });
+  // Get data for on chain projects
+  const {
+    projects: onChainProjectsWithData,
+    isProjectsMetadataLoading,
+    isClassesMetadataLoading,
+  } = useFetchProjectsWithOrders({
+    projects: projectsData?.projects,
+    offChainProjects,
+    sanityCreditClassData,
+  });
+
+  // Get data for projects that are only off chain
+  const onlyOffChainProjects =
+    accountId === walletData?.walletByAddr?.partyByWalletId?.accountId
+      ? offChainProjects?.filter(project => !project?.onChainId)
+      : undefined;
+
+  const onlyOffChainProjectsWithData =
+    onlyOffChainProjects?.map(project => ({
+      offChain: true,
+      ...normalizeProjectWithMetadata({
+        offChainProject: project,
+        projectMetadata: project?.metadata,
+        projectPageMetadata: project?.metadata,
+        programParty: project?.creditClassByCreditClassId?.partyByRegistryId,
+        sanityClass: findSanityCreditClass({
+          sanityCreditClassData,
+          creditClassIdOrUrl:
+            project?.creditClassByCreditClassId?.onChainId ??
+            project?.metadata?.['regen:creditClassId'] ??
+            '',
+        }),
+      }),
+    })) ?? [];
+
+  const projects: Project[] = [
+    ...onChainProjectsWithData,
+    ...onlyOffChainProjectsWithData,
+  ];
+  const isFirstProject = !projects || projects?.length < 1;
 
   return (
     <>
@@ -81,25 +125,24 @@ const MyProjects = (): JSX.Element => {
         )}
         {isProjectAdmin &&
           projects?.map((project, i) => {
-            const currentProject = projectsWithOrders.find(
-              projectsWithOrder => projectsWithOrder.id === project?.onChainId,
-            );
-            const name =
-              currentProject?.name ??
-              project?.metadata?.['schema:name'] ??
-              project?.handle ??
-              project?.id;
             return (
               <Grid key={i} item xs={12} md={6} lg={4}>
-                <WithLoader isLoading={isProjectsLoading} variant="skeleton">
+                <WithLoader
+                  isLoading={
+                    isWalletLoading ||
+                    isOnChainProjectsLoading ||
+                    isProjectsMetadataLoading ||
+                    isClassesMetadataLoading
+                  }
+                  variant="skeleton"
+                >
                   <ProjectCard
                     {...DEFAULT_PROJECT}
-                    {...(currentProject ?? {})}
-                    name={name}
+                    {...project}
                     onButtonClick={() => {
-                      if (project?.onChainId) {
+                      if (!project.offChain) {
                         navigate(
-                          `/project-pages/${project?.onChainId}/edit/basic-info`,
+                          `/project-pages/${project.id}/edit/basic-info`,
                         );
                       } else {
                         const currentStep = projectsCurrentStep[project?.id];

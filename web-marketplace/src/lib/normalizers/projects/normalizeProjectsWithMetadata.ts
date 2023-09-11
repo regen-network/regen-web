@@ -1,7 +1,7 @@
 import { getClassImageWithProjectDefault } from 'utils/image/classImage';
 
-import { Maybe, PartyFieldsFragment } from 'generated/graphql';
-import { AllCreditClassQuery } from 'generated/sanity-graphql';
+import { Maybe, PartyFieldsFragment, Project } from 'generated/graphql';
+import { AllCreditClassQuery, CreditClass } from 'generated/sanity-graphql';
 import {
   AnchoredProjectMetadataBaseLD,
   CreditClassMetadataLD,
@@ -28,37 +28,72 @@ export const normalizeProjectsWithMetadata = ({
   classesMetadata,
 }: NormalizeProjectsWithOrderDataParams): ProjectWithOrderData[] => {
   const projectsWithMetadata = projectsWithOrderData?.map(
-    (project: ProjectWithOrderData, index) => {
+    (projectWithOrderData: ProjectWithOrderData, index) => {
       const projectMetadata = projectsMetadata?.[index];
       const classMetadata = classesMetadata?.[index];
       const projectPageMetadata = projectPagesMetadata?.[index];
-      const projectParty = programParties?.[index];
-      const sanityClass = project.sanityCreditClassData;
+      const programParty = programParties?.[index];
+      const sanityClass = projectWithOrderData.sanityCreditClassData;
 
-      const creditClassImage = getClassImageWithProjectDefault({
-        metadata: classMetadata,
+      return normalizeProjectWithMetadata({
+        projectWithOrderData,
+        projectMetadata,
+        projectPageMetadata,
+        programParty,
+        classMetadata,
         sanityClass,
       });
-      const program = getDisplayParty(
-        classMetadata?.['regen:sourceRegistry'],
-        projectParty,
-      );
-
-      return {
-        ...project,
-        id: project.id,
-        name: projectMetadata?.['schema:name'] || project.name,
-        imgSrc:
-          projectPageMetadata?.['regen:previewPhoto']?.['schema:url'] ??
-          creditClassImage,
-        place:
-          projectMetadata?.['schema:location']?.place_name || project.place,
-        program,
-        area: projectMetadata?.['regen:projectSize']?.['qudt:numericValue'],
-        areaUnit: projectMetadata?.['regen:projectSize']?.['qudt:unit'] || '',
-      } as ProjectWithOrderData;
     },
   );
 
   return projectsWithMetadata ?? [];
+};
+
+interface NormalizeProjectWithMetadataParams {
+  offChainProject?: Maybe<Pick<Project, 'id' | 'handle'>>;
+  projectWithOrderData?: ProjectWithOrderData;
+  projectMetadata?: AnchoredProjectMetadataBaseLD | undefined;
+  projectPageMetadata?: ProjectPageMetadataLD;
+  programParty?: Maybe<PartyFieldsFragment | undefined>;
+  classMetadata?: CreditClassMetadataLD | undefined;
+  sanityClass?: CreditClass;
+}
+
+export const normalizeProjectWithMetadata = ({
+  offChainProject,
+  projectWithOrderData,
+  projectMetadata,
+  projectPageMetadata,
+  programParty,
+  classMetadata,
+  sanityClass,
+}: NormalizeProjectWithMetadataParams) => {
+  const creditClassImage = getClassImageWithProjectDefault({
+    metadata: classMetadata,
+    sanityClass,
+  });
+  const program = getDisplayParty(
+    classMetadata?.['regen:sourceRegistry'],
+    programParty,
+  );
+
+  return {
+    ...projectWithOrderData,
+    id: projectWithOrderData?.id || offChainProject?.id,
+    name:
+      projectMetadata?.['schema:name'] ||
+      projectWithOrderData?.name ||
+      offChainProject?.handle ||
+      offChainProject?.id ||
+      projectWithOrderData?.id,
+    imgSrc:
+      projectPageMetadata?.['regen:previewPhoto']?.['schema:url'] ??
+      creditClassImage,
+    place:
+      projectMetadata?.['schema:location']?.place_name ||
+      projectWithOrderData?.place,
+    program,
+    area: projectMetadata?.['regen:projectSize']?.['qudt:numericValue'],
+    areaUnit: projectMetadata?.['regen:projectSize']?.['qudt:unit'] || '',
+  } as ProjectWithOrderData;
 };

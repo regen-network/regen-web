@@ -4808,7 +4808,7 @@ export type WalletByAddrQuery = (
       { __typename?: 'ProjectsConnection' }
       & { nodes: Array<Maybe<(
         { __typename?: 'Project' }
-        & Pick<Project, 'id' | 'onChainId' | 'handle' | 'metadata'>
+        & ProjectFieldsFragment
       )>> }
     ) }
   )> }
@@ -5624,15 +5624,12 @@ export const WalletByAddrDocument = gql`
     }
     projectsByAdminWalletId {
       nodes {
-        id
-        onChainId
-        handle
-        metadata
+        ...projectFields
       }
     }
   }
 }
-    `;
+    ${ProjectFieldsFragmentDoc}`;
 
 /**
  * __useWalletByAddrQuery__

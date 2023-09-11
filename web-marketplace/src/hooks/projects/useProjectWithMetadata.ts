@@ -3,16 +3,13 @@ import { useApolloClient } from '@apollo/client';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
-import {
-  ProjectByIdQuery,
-  ProjectByOnChainIdQuery,
-  useUpdateProjectByIdMutation,
-} from 'generated/graphql';
+import { ProjectByIdQuery, ProjectByOnChainIdQuery } from 'generated/graphql';
 import {
   AnchoredProjectMetadataLD,
   ProjectMetadataLD,
 } from 'lib/db/types/json-ld';
 import { getProjectKey } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery.constants';
+import { getProjectsByAdminKey } from 'lib/queries/react-query/ecocredit/getProjectsByAdmin/getProjectsByAdmin.constants';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
@@ -26,6 +23,7 @@ import { SimplifiedLocationFormSchemaType } from 'components/organisms/LocationF
 import { MediaFormSchemaType } from 'components/organisms/MediaForm/MediaForm.schema';
 
 import { useLedger } from '../../ledger';
+import { useCreateOrUpdateProject } from './UseCreateOrUpdateProject';
 
 export type OffChainProject =
   | ProjectByIdQuery['projectById']
@@ -72,8 +70,9 @@ export const useProjectWithMetadata = ({
   let offChainProject: OffChainProject | undefined;
   const graphqlClient = useApolloClient();
   const reactQueryClient = useQueryClient();
-  const [updateProject] = useUpdateProjectByIdMutation();
   const { dataClient } = useLedger();
+
+  const { createOrUpdateProject } = useCreateOrUpdateProject();
 
   // In project creation mode, we query the off-chain project since there's no on-chain project yet.
   // In this case, the router param projectId is the off-chain project uuid.
@@ -136,8 +135,11 @@ export const useProjectWithMetadata = ({
       await reactQueryClient.invalidateQueries({
         queryKey: getProjectByOnChainIdKey(projectId),
       });
+      await reactQueryClient.invalidateQueries({
+        queryKey: getProjectsByAdminKey({ admin: onChainProject?.admin }),
+      });
     }
-  }, [create, edit, reactQueryClient, projectId]);
+  }, [create, edit, reactQueryClient, projectId, onChainProject?.admin]);
 
   const metadataSubmit = useCallback(
     async ({
@@ -152,16 +154,11 @@ export const useProjectWithMetadata = ({
         if (isEdit && anchored) {
           await projectEditSubmit(newMetadata);
         } else {
-          await updateProject({
-            variables: {
-              input: {
-                id: offChainProject?.id,
-                projectPatch: {
-                  metadata: newMetadata,
-                },
-              },
-            },
+          await createOrUpdateProject({
+            offChainProjectId: offChainProject?.id,
+            projectPatch: { metadata: newMetadata },
           });
+
           !isEdit && navigateNext();
         }
         await metadataReload();
@@ -178,8 +175,8 @@ export const useProjectWithMetadata = ({
       anchored,
       metadataReload,
       projectEditSubmit,
-      updateProject,
-      offChainProject?.id,
+      createOrUpdateProject,
+      offChainProject,
       navigateNext,
     ],
   );

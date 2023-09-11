@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useFormState } from 'react-hook-form';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
@@ -49,6 +49,7 @@ export const MediaForm = ({
 
   const { confirmSave, isEdit } = useProjectEditContext();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+  const [offChainProjectId, setOffChainProjectId] = useState(projectId);
 
   return (
     <Form
@@ -69,7 +70,11 @@ export const MediaForm = ({
           await Promise.all(
             fileNamesToDeleteRef?.current.map(
               async fileName =>
-                await deleteImage(projectId ?? '', fileName, apiServerUrl),
+                await deleteImage(
+                  offChainProjectId ?? '',
+                  fileName,
+                  apiServerUrl,
+                ),
             ),
           );
           fileNamesToDeleteRef.current = [];
@@ -84,14 +89,16 @@ export const MediaForm = ({
     >
       <OnBoardingCard>
         <MediaFormPhotos
-          projectId={projectId}
+          offChainProjectId={offChainProjectId}
           fileNamesToDeleteRef={fileNamesToDeleteRef}
+          setOffChainProjectId={setOffChainProjectId}
         />
       </OnBoardingCard>
       <OnBoardingCard>
         <MediaFormStory
-          projectId={projectId}
+          offChainProjectId={offChainProjectId}
           fileNamesToDeleteRef={fileNamesToDeleteRef}
+          setOffChainProjectId={setOffChainProjectId}
         />
       </OnBoardingCard>
       <ProjectPageFooter

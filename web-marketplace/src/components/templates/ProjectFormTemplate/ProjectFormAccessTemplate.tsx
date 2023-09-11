@@ -26,7 +26,6 @@ const ProjectFormAccessTemplate: React.FC<React.PropsWithChildren<Props>> = ({
 }) => {
   const { wallet } = useWallet();
   const isAdmin = adminAddr && adminAddr === wallet?.address;
-  console.log(offChainProject);
   const hasProject = !!onChainProject || !!offChainProject;
   return (
     <>

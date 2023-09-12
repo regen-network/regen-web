@@ -127,7 +127,7 @@ export const ProfileEdit = () => {
           <Title variant="h3">{PROFILE}</Title>
           <OutlinedButton
             LinkComponent={Link}
-            href="/ecocredits/portfolio"
+            href="/profile/portfolio"
             startIcon={<EyeIcon />}
           >
             {VIEW_PROFILE}

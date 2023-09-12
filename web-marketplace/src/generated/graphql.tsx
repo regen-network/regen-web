@@ -4866,7 +4866,11 @@ export type PartyByIdQuery = (
   { __typename?: 'Query' }
   & { partyById?: Maybe<(
     { __typename?: 'Party' }
-    & Pick<Party, 'name' | 'type' | 'image' | 'description'>
+    & Pick<Party, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'accountId' | 'websiteLink' | 'twitterLink'>
+    & { walletByWalletId?: Maybe<(
+      { __typename?: 'Wallet' }
+      & Pick<Wallet, 'addr'>
+    )> }
   )> }
 );
 
@@ -5743,10 +5747,18 @@ export type PartyByAddrQueryResult = Apollo.QueryResult<PartyByAddrQuery, PartyB
 export const PartyByIdDocument = gql`
     query partyById($id: UUID!) {
   partyById(id: $id) {
+    id
     name
     type
     image
+    bgImage
     description
+    accountId
+    websiteLink
+    twitterLink
+    walletByWalletId {
+      addr
+    }
   }
 }
     `;

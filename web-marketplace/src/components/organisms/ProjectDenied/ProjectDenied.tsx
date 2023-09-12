@@ -49,7 +49,7 @@ export const ProjectDenied = ({ address, projectId, isEdit }: Props) => {
         {'You must have access to the following address: '}
       </Subtitle>
       <Link
-        href={`/ecocredits/accounts/${address}/portfolio`}
+        href={`/profiles/${address}/portfolio`}
         sx={{
           mb: { xs: 4, sm: 4.375 },
           wordBreak: 'break-word',

@@ -74,7 +74,7 @@ export const BasketOverviewModals = ({
       atom.title = title;
       atom.cardTitle = cardTitle;
       atom.buttonTitle = VIEW_PORTFOLIO;
-      atom.buttonLink = '/ecocredits/portfolio';
+      atom.buttonLink = '/profile/portfolio';
     });
   };
 

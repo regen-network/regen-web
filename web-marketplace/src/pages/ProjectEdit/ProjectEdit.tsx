@@ -156,14 +156,14 @@ function ProjectEdit(): JSX.Element {
     if (section) {
       const path = isMobile
         ? `/project-pages/${projectId}/edit`
-        : '/ecocredits/projects';
+        : '/profile/projects';
       if (isFormDirty) {
         setIsWarningModalOpen(path);
       } else {
         navigate(path);
       }
     } else {
-      navigate('/ecocredits/projects');
+      navigate('/profile/projects');
     }
   };
 

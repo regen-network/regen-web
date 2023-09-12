@@ -95,7 +95,7 @@ export const BuySellOrderFlow = ({
   };
   const onTxSuccessButtonClick = (): void => {
     handleTxModalClose();
-    navigate('/ecocredits/portfolio');
+    navigate('/profile/portfolio');
   };
 
   /**

@@ -7,10 +7,7 @@ query walletByAddr($addr: String!) {
     }
     projectsByAdminWalletId {
       nodes {
-        id
-        onChainId
-        handle
-        metadata
+        ...projectFields
       }
     }
   }

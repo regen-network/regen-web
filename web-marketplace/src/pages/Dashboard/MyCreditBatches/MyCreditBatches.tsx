@@ -55,7 +55,7 @@ export const MyCreditBatches = (): JSX.Element => {
             <OutlinedButton
               startIcon={<PlusIcon color={theme.palette.secondary.main} />}
               component={Link}
-              to="/ecocredits/create-batch"
+              to="/profile/create-batch"
             >
               create credit batch
             </OutlinedButton>
@@ -75,7 +75,7 @@ export const MyCreditBatches = (): JSX.Element => {
           <OutlinedButton
             startIcon={<PlusIcon color={theme.palette.secondary.main} />}
             component={Link}
-            to="/ecocredits/create-batch"
+            to="/profile/create-batch"
           >
             create credit batch
           </OutlinedButton>

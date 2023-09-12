@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
+import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import WithLoader from 'components/atoms/WithLoader';
 import { RolesForm } from 'components/organisms/RolesForm/RolesForm';
 import { RolesFormSchemaType } from 'components/organisms/RolesForm/RolesForm.schema';
@@ -40,6 +41,7 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { rolesSubmit } = useRolesSubmit({
     projectEditSubmit,
     offChainProject,
+    onChainProject,
     metadata,
     isEdit,
     metadataReload,
@@ -67,9 +69,7 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
     ],
   );
 
-  async function saveAndExit(): Promise<void> {
-    // TODO: functionality
-  }
+  const saveAndExit = useProjectSaveAndExit();
 
   function navigatePrev(): void {
     navigate(`/project-pages/${projectId}/location`);
@@ -80,12 +80,11 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
       isEdit={isEdit}
       title="Roles"
       saveAndExit={saveAndExit}
-      project={offChainProject}
+      offChainProject={offChainProject}
+      onChainProject={onChainProject}
       loading={withMetadataLoading}
     >
-      <WithLoader
-        isLoading={!loaded || editContextLoading || withMetadataLoading}
-      >
+      <WithLoader isLoading={!loaded || editContextLoading}>
         <RolesForm
           submit={rolesSubmit}
           onNext={navigateNext}

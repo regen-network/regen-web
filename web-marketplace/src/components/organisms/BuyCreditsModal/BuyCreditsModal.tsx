@@ -416,7 +416,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                               'These credits will be retired upon purchase and will not be tradable. Retirement is permanent and non-reversible.'
                             }
                             <DynamicLink
-                              href="https://guides.regen.network/guides/regen-marketplace/ecocredits/buy-ecocredits/by-project#5.-select-credit-retirement-options"
+                              href="https://guides.regen.network/guides/regen-marketplace/profile/buy-ecocredits/by-project#5.-select-credit-retirement-options"
                               sx={{ ml: 1 }}
                             >
                               Learn more»
@@ -436,7 +436,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                               'These credits will be a tradable asset. They can be retired later via Regen Marketplace.'
                             }
                             <DynamicLink
-                              href="https://guides.regen.network/guides/regen-marketplace/ecocredits/buy-ecocredits/by-project#5.-select-credit-retirement-options"
+                              href="https://guides.regen.network/guides/regen-marketplace/profile/buy-ecocredits/by-project#5.-select-credit-retirement-options"
                               sx={[
                                 {
                                   ml: 1,
@@ -459,7 +459,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                                 'The seller of these credits has chosen to only allow for immediate retiring of credits. These credits cannot be purchased as a tradable asset.'
                               }
                               <DynamicLink
-                                href="https://guides.regen.network/guides/regen-marketplace/ecocredits/buy-ecocredits/by-project#5.-select-credit-retirement-options"
+                                href="https://guides.regen.network/guides/regen-marketplace/profile/buy-ecocredits/by-project#5.-select-credit-retirement-options"
                                 sx={{
                                   ml: 1,
                                   display: 'inline',

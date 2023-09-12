@@ -19,7 +19,7 @@ export const getDisplayPartyOrAddress = (
       type: type ? type : 'USER',
       image: party.image ? party.image : defaultAvatar,
       description: party.description?.trim(),
-      link: `/ecocredits/accounts/${address}/portfolio`,
+      link: `/profiles/${address}/portfolio`,
       address,
     };
   }
@@ -27,7 +27,7 @@ export const getDisplayPartyOrAddress = (
     name: truncate(address),
     type: 'USER',
     image: defaultAvatar,
-    link: `/ecocredits/accounts/${address}/portfolio`,
+    link: `/profiles/${address}/portfolio`,
     address,
   };
 };

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';
 
@@ -13,7 +14,8 @@ type Props = {
   title: string;
   saveAndExit?: () => Promise<void>;
   loading: boolean;
-  project?: OffChainProject;
+  offChainProject?: OffChainProject;
+  onChainProject?: ProjectInfo;
 };
 
 const ProjectFormTemplate: React.FC<React.PropsWithChildren<Props>> = ({
@@ -21,14 +23,16 @@ const ProjectFormTemplate: React.FC<React.PropsWithChildren<Props>> = ({
   title,
   saveAndExit,
   loading,
-  project,
+  offChainProject,
+  onChainProject,
   children,
 }) => {
-  const adminAddr = project?.walletByAdminWalletId?.addr;
+  const adminAddr =
+    onChainProject?.admin || offChainProject?.walletByAdminWalletId?.addr;
   const location = useLocation();
   const { pathname } = location;
   const navigate = useNavigate();
-  const { onChainId } = project ?? {};
+  const onChainId = onChainProject?.id || offChainProject?.onChainId;
 
   useEffect(() => {
     if (pathname.match(CREATE_PROJECT_URL_REGEX) && !!onChainId) {
@@ -39,16 +43,20 @@ const ProjectFormTemplate: React.FC<React.PropsWithChildren<Props>> = ({
 
       navigate(newUrl);
     }
-  }, [project, pathname, onChainId, navigate]);
+  }, [pathname, onChainId, navigate]);
 
   return (
     <ProjectFormAccessTemplate
+      isEdit={isEdit}
       loading={loading}
-      project={project}
+      onChainProject={onChainProject}
+      offChainProject={offChainProject}
       adminAddr={adminAddr}
     >
-      {!!project && isEdit && <EditFormTemplate>{children}</EditFormTemplate>}
-      {!!project && !isEdit && (
+      {!!onChainProject && isEdit && (
+        <EditFormTemplate>{children}</EditFormTemplate>
+      )}
+      {!!offChainProject && !isEdit && (
         <OnboardingFormTemplate
           activeStep={0}
           title={title}

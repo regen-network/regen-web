@@ -1,36 +1,44 @@
-import { useApolloClient } from '@apollo/client';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
+import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
+import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { useLedger } from 'ledger';
 import { normalizeProjectsWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
-import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
-import { useProjectsWithMetadata } from 'hooks/projects/useProjectsWithMetadata';
+import { useProjectsMetadata } from 'hooks/projects/useProjectsMetadata';
 
 interface Response {
   projects: ProjectWithOrderData[];
-  isProjectsLoading: boolean;
+  isProjectsMetadataLoading: boolean;
+  isClassesMetadataLoading: boolean;
 }
 
 interface Props {
-  projectIds?: string[];
+  projects?: ProjectInfo[];
+  offChainProjects?: Maybe<ProjectFieldsFragment>[];
+  sanityCreditClassData?: AllCreditClassQuery;
 }
 
-export const useFetchProjectsByIdsWithOrders = ({
-  projectIds,
+export const useFetchProjectsWithOrders = ({
+  projects,
+  offChainProjects,
+  sanityCreditClassData,
 }: Props): Response => {
   const { marketplaceClient } = useLedger();
   const reactQueryClient = useQueryClient();
-  const graphqlClient = useApolloClient();
   const { wallet } = useWallet();
 
-  const { projects, isProjectsLoading, projectsMetadata, classesMetadata } =
-    useProjectsWithMetadata(projectIds);
+  const {
+    isProjectsMetadataLoading,
+    isClassesMetadataLoading,
+    projectsMetadata,
+    classesMetadata,
+  } = useProjectsMetadata(projects);
 
   // Sell Orders
   const { data: sellOrders } = useQuery(
@@ -43,31 +51,26 @@ export const useFetchProjectsByIdsWithOrders = ({
   );
 
   const projectsWithOrderData = normalizeProjectsWithOrderData({
-    projects: projects
-      .map(project => project?.project)
-      .filter(project => project !== undefined) as ProjectInfo[],
+    projects: projects?.filter(
+      project => project !== undefined,
+    ) as ProjectInfo[],
     sellOrders,
     userAddress: wallet?.address,
+    sanityCreditClassData,
   });
 
-  const offChainProjectResults = useQueries({
-    queries: projects.map(project =>
-      getProjectByOnChainIdQuery({
-        client: graphqlClient,
-        onChainId: project?.project?.id ?? '',
-        enabled: !!project?.project?.id,
-      }),
+  const orderedOffChainProjects = projectsWithOrderData.map(project =>
+    offChainProjects?.find(
+      offchainProject => offchainProject?.onChainId === project.id,
     ),
-  });
-
-  const projectPagesMetadata = offChainProjectResults.map(
-    queryResult => queryResult.data?.data.projectByOnChainId?.metadata,
   );
 
-  const programParties = offChainProjectResults.map(
-    queryResult =>
-      queryResult.data?.data.projectByOnChainId?.creditClassByCreditClassId
-        ?.partyByRegistryId,
+  const projectPagesMetadata = orderedOffChainProjects.map(
+    project => project?.metadata,
+  );
+
+  const programParties = orderedOffChainProjects.map(
+    project => project?.creditClassByCreditClassId?.partyByRegistryId,
   );
 
   /* Final Normalization */
@@ -81,6 +84,7 @@ export const useFetchProjectsByIdsWithOrders = ({
   });
   return {
     projects: projectsWithMetadata,
-    isProjectsLoading,
+    isProjectsMetadataLoading,
+    isClassesMetadataLoading,
   };
 };

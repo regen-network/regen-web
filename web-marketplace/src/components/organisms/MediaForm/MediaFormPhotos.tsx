@@ -8,10 +8,12 @@ import {
 import { TextAreaField } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField';
 import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
+import { UseStateSetter } from 'web-components/lib/types/react/useState';
 
 import { useProjectEditContext } from 'pages';
 
 import { apiUri } from '../../../lib/apiUri';
+import { useHandleUpload } from './hooks/useHandleUpload';
 import {
   CAPTION_CHART_LIMIT,
   cropAspectMediaForm,
@@ -24,7 +26,7 @@ import {
 } from './MediaForm.constants';
 import { MediaFormSchemaType } from './MediaForm.schema';
 import { MediaBaseErrors, MediaBaseValues } from './MediaForm.types';
-import { getHandleDelete, getHandleUpload } from './MediaForm.utils';
+import { getHandleDelete } from './MediaForm.utils';
 import { useMediaFormStyles } from './useMediaFormStyles';
 
 export interface MediaValuesSimple extends MediaBaseValues {
@@ -37,15 +39,17 @@ export interface MediaErrorsSimple extends MediaBaseErrors {
 }
 
 type Props = {
-  projectId?: string;
+  offChainProjectId?: string;
   fileNamesToDeleteRef: MutableRefObject<string[]>;
+  setOffChainProjectId: UseStateSetter<string | undefined>;
 };
 
 /** Simplified media form content for new project-page flow */
 
 export const MediaFormPhotos = ({
-  projectId,
+  offChainProjectId,
   fileNamesToDeleteRef,
+  setOffChainProjectId,
 }: Props): JSX.Element => {
   const { classes } = useMediaFormStyles();
   const ctx = useFormContext<MediaFormSchemaType>();
@@ -93,10 +97,10 @@ export const MediaFormPhotos = ({
 
   /* Callbacks  */
 
-  const projectPath = `projects/${projectId}`;
-  const handleUpload = getHandleUpload({
+  const { handleUpload } = useHandleUpload({
+    offChainProjectId,
     apiServerUrl: apiUri,
-    projectPath,
+    setOffChainProjectId,
   });
   const handleDelete = getHandleDelete({
     fileNamesToDeleteRef,

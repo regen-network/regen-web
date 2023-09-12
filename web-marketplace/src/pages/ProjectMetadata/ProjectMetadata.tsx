@@ -9,6 +9,7 @@ import { getShaclGraphByUriQuery } from 'lib/queries/react-query/registry-server
 import { getProjectShapeIri } from 'lib/rdf';
 
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
+import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import { MetadataForm } from 'components/organisms/MetadataForm/MetadataForm';
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
@@ -58,12 +59,16 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
       metadata: customMetadata ? JSON.stringify(customMetadata, null, 2) : '',
     };
 
+    const saveAndExit = useProjectSaveAndExit();
+
     return (
       <ProjectFormTemplate
         isEdit={isEdit}
         title="Metadata"
-        project={offChainProject}
+        offChainProject={offChainProject}
+        onChainProject={onChainProject}
         loading={loading}
+        saveAndExit={saveAndExit}
       >
         <MetadataForm
           onSubmit={projectMetadataSubmit}

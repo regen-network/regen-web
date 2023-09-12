@@ -17,7 +17,8 @@ import TextField from 'web-components/lib/components/inputs/new/TextField/TextFi
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { getWalletByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getWalletByAddrQuery/getWalletByAddrQuery';
 
-import { Return } from 'pages/Roles/hooks/useRolesSubmit';
+import { useCreateProjectContext } from 'pages/ProjectCreate';
+import { RoleSubmitProps } from 'pages/Roles/hooks/useRolesSubmit';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
@@ -33,7 +34,7 @@ import { useSaveProfile } from './hooks/useSaveProfile';
 import { rolesFormSchema, RolesFormSchemaType } from './RolesForm.schema';
 
 interface RolesFormProps {
-  submit: Return['rolesSubmit'];
+  submit: (props: RoleSubmitProps) => Promise<void>;
   onNext?: () => void;
   onPrev?: () => void;
   initialValues?: RolesFormSchemaType;
@@ -57,6 +58,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   });
   const { isDirtyRef } = useProjectEditContext();
   const { confirmSave, isEdit } = useProjectEditContext();
+  const { formRef, shouldNavigateRef } = useCreateProjectContext();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const [adminModalOpen, setAdminModalOpen] = useState<boolean>(false);
 
@@ -130,7 +132,25 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   const saveProfile = useSaveProfile();
 
   return (
-    <Form form={form}>
+    <Form
+      form={form}
+      formRef={formRef}
+      onSubmit={async values => {
+        try {
+          await submit({
+            values,
+            adminWalletId: adminWalletData?.walletByAddr?.id,
+            shouldNavigate: shouldNavigateRef?.current,
+          });
+          if (isEdit && confirmSave) {
+            confirmSave();
+            form.reset({}, { keepValues: true });
+          }
+        } catch (e) {
+          setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
+        }
+      }}
+    >
       <OnBoardingCard>
         <RoleField
           label="Project Developer"
@@ -191,14 +211,6 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
         </Flex>
       </OnBoardingCard>
       <ProjectPageFooter
-        onSave={form.handleSubmit(async data => {
-          try {
-            await submit(data, adminWalletData?.walletByAddr?.id);
-            if (isEdit && confirmSave) confirmSave();
-          } catch (e) {
-            setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
-          }
-        })}
         onPrev={onPrev}
         onNext={onNext}
         isValid={isValid}

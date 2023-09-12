@@ -10,27 +10,34 @@ import { RADIO_PREFERABLE } from 'web-components/lib/components/inputs/new/Radio
 import { RadioGroup } from 'web-components/lib/components/inputs/new/RadioGroup/RadioGroup';
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
 import { VideoInput } from 'web-components/lib/components/inputs/new/VideoInput/VideoInput';
+import { UseStateSetter } from 'web-components/lib/types/react/useState';
 
 import { apiUri } from 'lib/apiUri';
 import { IMAGE_STORAGE_BASE_URL } from 'lib/env';
 
 import { useProjectEditContext } from 'pages';
 
+import { useHandleUpload } from './hooks/useHandleUpload';
 import {
   cropAspectMediaForm,
   IMAGE_UPLOAD_BUTTON_LABEL,
   STORY_LABEL,
 } from './MediaForm.constants';
 import { MediaFormSchemaType } from './MediaForm.schema';
-import { getHandleDelete, getHandleUpload } from './MediaForm.utils';
+import { getHandleDelete } from './MediaForm.utils';
 import { useMediaFormStyles } from './useMediaFormStyles';
 
 type Props = {
-  projectId?: string;
+  offChainProjectId?: string;
   fileNamesToDeleteRef: MutableRefObject<string[]>;
+  setOffChainProjectId: UseStateSetter<string | undefined>;
 };
 
-export const MediaFormStory = ({ fileNamesToDeleteRef, projectId }: Props) => {
+export const MediaFormStory = ({
+  fileNamesToDeleteRef,
+  offChainProjectId,
+  setOffChainProjectId,
+}: Props) => {
   const { classes } = useMediaFormStyles();
   const ctx = useFormContext<MediaFormSchemaType>();
   const { isDirtyRef } = useProjectEditContext();
@@ -61,10 +68,10 @@ export const MediaFormStory = ({ fileNamesToDeleteRef, projectId }: Props) => {
 
   /* Callbacks  */
 
-  const projectPath = `projects/${projectId}`;
-  const handleUpload = getHandleUpload({
+  const { handleUpload } = useHandleUpload({
+    offChainProjectId,
     apiServerUrl: apiUri,
-    projectPath,
+    setOffChainProjectId,
   });
   const handleDelete = getHandleDelete({
     fileNamesToDeleteRef,

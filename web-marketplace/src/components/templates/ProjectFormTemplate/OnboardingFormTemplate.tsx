@@ -21,11 +21,8 @@ const OnboardingFormTemplate: React.FC<React.PropsWithChildren<Props>> =
         <OnBoardingSection
           title={props.title}
           formContainer
-          // Only commenting this for now if at some point,
-          // we want to add back the "save & exit" feature
-          // https://github.com/regen-network/regen-registry/issues/553
-          // linkText="Save & Exit"
-          // onLinkClick={props.saveAndExit}
+          linkText="Save & Exit"
+          onLinkClick={props.saveAndExit}
           // exampleProjectUrl="/project/wilmot"
         >
           {props.loading ? (

@@ -63,7 +63,7 @@ const RegistryLayoutHeader: React.FC = () => {
   );
   const onProfileClick: OnProfileClickType = (isSelected: boolean) =>
     isSelected
-      ? navigate('/ecocredits/portfolio')
+      ? navigate('/profile/portfolio')
       : setAddWalletModalSwitchWarningAtom(atom => void (atom.open = true));
 
   const { party, defaultAvatar } = usePartyInfos({ partyByAddr });

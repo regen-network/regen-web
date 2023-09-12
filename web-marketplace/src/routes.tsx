@@ -119,7 +119,7 @@ export const getRoutes = ({
             apolloClientFactory,
           })}
         />
-        <Route path="ecocredits" element={<KeplrRoute component={Dashboard} />}>
+        <Route path="profile" element={<KeplrRoute component={Dashboard} />}>
           <Route
             path="portfolio"
             element={<KeplrRoute component={MyEcocredits} />}
@@ -143,7 +143,7 @@ export const getRoutes = ({
           </Route>
         </Route>
         <Route
-          path="ecocredits/accounts/:accountAddress"
+          path="profiles/:accountAddressOrId"
           element={<EcocreditsByAccount />}
         >
           <Route path="portfolio" element={<PortfolioTab />} />

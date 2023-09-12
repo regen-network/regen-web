@@ -164,12 +164,12 @@ const CreditActivityTable: React.FC<React.PropsWithChildren<unknown>> = () => {
           <TableBody sx={{ bgcolor: 'primary.main' }}>
             {ledgerRESTUri && !isLoading ? (
               stableSort(txs as any, getComparator(order, orderBy)).map(
-                (tx: any) => {
+                (tx: any, index) => {
                   return (
                     <StyledTableRow
                       sx={{ whiteSpace: 'nowrap', cursor: 'pointer' }}
                       tabIndex={-1}
-                      key={tx.txhash}
+                      key={index}
                       onClick={() => handleClickNavigate(tx.txhash)}
                     >
                       <StyledTableCell sx={{ color: 'info.main' }}>

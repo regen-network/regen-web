@@ -201,7 +201,7 @@ const ErrorResult = ({ error }: ErrorResultProps): React.ReactElement => {
         />
       </OnBoardingCard>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <OutlinedButton href="/ecocredits/portfolio" component={Link}>
+        <OutlinedButton href="/profile/portfolio" component={Link}>
           SEE ALL CREDIT BATCHES
         </OutlinedButton>
       </Box>

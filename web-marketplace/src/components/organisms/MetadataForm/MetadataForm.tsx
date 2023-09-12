@@ -12,6 +12,7 @@ import { ShaclGraphByUriQuery } from 'generated/graphql';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
 import { useProjectEditContext } from 'pages';
+import { useCreateProjectContext } from 'pages/ProjectCreate';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
@@ -52,6 +53,7 @@ const MetadataForm: React.FC<MetadataFormFormProps> = ({
   });
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const { confirmSave, isEdit, isDirtyRef } = useProjectEditContext();
+  const { formRef } = useCreateProjectContext();
 
   useEffect(() => {
     isDirtyRef.current = isDirty;
@@ -60,10 +62,14 @@ const MetadataForm: React.FC<MetadataFormFormProps> = ({
   return (
     <Form
       form={form}
+      formRef={formRef}
       onSubmit={async values => {
         try {
           await onSubmit({ values });
-          if (isEdit && confirmSave) confirmSave();
+          if (isEdit && confirmSave) {
+            confirmSave();
+            form.reset({}, { keepValues: true });
+          }
         } catch (e) {
           setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
         }

@@ -1,10 +1,7 @@
 import { useCallback } from 'react';
+import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import {
-  PartyType,
-  ProjectPatch,
-  useUpdateProjectByIdMutation,
-} from 'generated/graphql';
+import { PartyType, ProjectPatch } from 'generated/graphql';
 import { NestedPartial } from 'types/nested-partial';
 import {
   AnchoredProjectMetadataBaseLD,
@@ -17,10 +14,12 @@ import {
 import { UseProjectEditSubmitParams } from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
 import { ProfileModalSchemaType } from 'components/organisms/RolesForm/components/ProfileModal/ProfileModal.schema';
 import { RolesFormSchemaType } from 'components/organisms/RolesForm/RolesForm.schema';
+import { useCreateOrUpdateProject } from 'hooks/projects/UseCreateOrUpdateProject';
 import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';
 
 interface Props {
   offChainProject?: OffChainProject;
+  onChainProject?: ProjectInfo;
   metadata?: NestedPartial<ProjectMetadataLD>;
   projectEditSubmit: UseProjectEditSubmitParams;
   isEdit?: boolean;
@@ -29,29 +28,34 @@ interface Props {
   admin?: string;
 }
 
+export type RoleSubmitProps = {
+  values: RolesFormSchemaType;
+  adminWalletId?: string;
+  shouldNavigate?: boolean;
+};
+
 export type Return = {
-  rolesSubmit: (
-    values: RolesFormSchemaType,
-    adminWalletId?: string,
-  ) => Promise<void>;
+  rolesSubmit: (props: RoleSubmitProps) => Promise<void>;
 };
 
 const useRolesSubmit = ({
   projectEditSubmit,
   offChainProject,
+  onChainProject,
   metadata,
   isEdit,
   metadataReload,
   navigateNext,
   admin,
 }: Props): Return => {
-  const [updateProject] = useUpdateProjectByIdMutation();
+  const { createOrUpdateProject } = useCreateOrUpdateProject();
 
   const rolesSubmit = useCallback(
-    async (
-      values: RolesFormSchemaType,
-      adminWalletId?: string,
-    ): Promise<void> => {
+    async ({
+      values,
+      adminWalletId,
+      shouldNavigate = true,
+    }: RoleSubmitProps): Promise<void> => {
       try {
         let doUpdateMetadata = false;
         let doUpdateAdmin = false;
@@ -106,18 +110,14 @@ const useRolesSubmit = ({
               doUpdateAdmin,
             );
           }
-          await updateProject({
-            variables: {
-              input: {
-                id: offChainProject?.id,
-                projectPatch,
-              },
-            },
+          await createOrUpdateProject({
+            offChainProjectId: offChainProject?.id,
+            projectPatch,
           });
           await metadataReload();
         }
 
-        if (!isEdit) {
+        if (!isEdit && shouldNavigate) {
           navigateNext();
         }
       } catch (e) {
@@ -127,16 +127,14 @@ const useRolesSubmit = ({
       }
     },
     [
-      offChainProject?.partyByDeveloperId,
-      offChainProject?.partyByVerifierId,
-      offChainProject?.id,
+      offChainProject,
       admin,
       metadata,
       isEdit,
+      createOrUpdateProject,
       metadataReload,
-      updateProject,
-      navigateNext,
       projectEditSubmit,
+      navigateNext,
     ],
   );
 

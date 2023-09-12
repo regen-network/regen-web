@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
+import { validateLocation } from 'utils/location/validate';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import LocationField from 'web-components/lib/components/inputs/new/LocationField/LocationField';
@@ -66,9 +67,19 @@ const LocationForm: React.FC<LocationFormProps> = ({
     name: 'schema:location',
   });
 
+  const [jurisdictionError, setJurisdictionError] = useState<
+    string | undefined
+  >(undefined);
+
   useEffect(() => {
     isDirtyRef.current = isDirty;
   }, [isDirtyRef, isDirty]);
+
+  useEffect(() => {
+    // If a jurisdiction is provided (i.e. the project exists on chain),
+    // we require the location input to match the jurisdiction.
+    setJurisdictionError(validateLocation(jurisdiction, location));
+  }, [jurisdiction, location]);
 
   return (
     <Form
@@ -91,8 +102,8 @@ const LocationForm: React.FC<LocationFormProps> = ({
           description={LOCATION_DESCRIPTION}
           placeholder={LOCATION_PLACEHOLDER}
           token={mapToken}
-          error={!!errors['schema:location']}
-          helperText={errors['schema:location']?.message}
+          error={!!errors['schema:location'] || !!jurisdictionError}
+          helperText={errors['schema:location']?.message || jurisdictionError}
           value={location}
           handleChange={value => {
             setValue('schema:location', value, {
@@ -101,19 +112,7 @@ const LocationForm: React.FC<LocationFormProps> = ({
             });
             // If a jurisdiction is provided (i.e. the project exists on chain),
             // we require the location input to match the jurisdiction.
-            if (jurisdiction) {
-              let valid: boolean;
-              if (isGeocodingFeature(location)) {
-                valid = location.properties.short_code === jurisdiction;
-              } else {
-                valid = location === jurisdiction;
-              }
-              if (!valid) {
-                setError('schema:location', {
-                  message: `This location must match the on chain jurisdiction (${jurisdiction})`,
-                });
-              }
-            }
+            setJurisdictionError(validateLocation(jurisdiction, value));
           }}
           {...form.register('schema:location')}
         />
@@ -121,7 +120,7 @@ const LocationForm: React.FC<LocationFormProps> = ({
       <ProjectPageFooter
         onNext={onNext}
         onPrev={onPrev}
-        isValid={isValid}
+        isValid={isValid && !jurisdictionError}
         isSubmitting={isSubmitting}
         dirty={isDirty}
       />

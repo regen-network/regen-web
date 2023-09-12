@@ -57,7 +57,7 @@ const LocationForm: React.FC<LocationFormProps> = ({
   const { isValid, isSubmitting, isDirty, errors } = useFormState({
     control: form.control,
   });
-  const { setValue, setError } = form;
+  const { setValue } = form;
 
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const { confirmSave, isEdit, isDirtyRef } = useProjectEditContext();

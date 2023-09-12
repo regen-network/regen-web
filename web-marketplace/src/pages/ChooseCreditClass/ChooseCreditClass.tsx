@@ -74,7 +74,7 @@ const ChooseCreditClass: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <ProjectFormAccessTemplate
       loading={isFetching}
-      project={project}
+      offChainProject={project}
       adminAddr={adminAddr}
     >
       <ChooseCreditClassGrid

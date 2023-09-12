@@ -2,17 +2,26 @@ import TwitterIcon2 from 'web-components/lib/components/icons/social/TwitterIcon
 import WebsiteLinkIcon from 'web-components/lib/components/icons/social/WebsiteLinkIcon';
 import { SocialLink } from 'web-components/lib/components/organisms/ProfileHeader/ProfileHeader.types';
 
-import { PartyByAddrQuery } from 'generated/graphql';
+import { Party } from 'generated/graphql';
 
 type GetSocialsLinksParams = {
-  partyByAddr?: PartyByAddrQuery | null;
+  party?: Pick<
+    Party,
+    | 'id'
+    | 'name'
+    | 'type'
+    | 'image'
+    | 'bgImage'
+    | 'description'
+    | 'accountId'
+    | 'websiteLink'
+    | 'twitterLink'
+  > | null;
 };
 
 export const getSocialsLinks = ({
-  partyByAddr,
+  party,
 }: GetSocialsLinksParams): SocialLink[] => {
-  const party = partyByAddr?.walletByAddr?.partyByWalletId;
-
   return [
     {
       href: party?.twitterLink,

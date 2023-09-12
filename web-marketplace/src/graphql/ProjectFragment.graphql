@@ -5,6 +5,7 @@ fragment projectFields on Project {
   }
   onChainId
   metadata
+  approved
   creditClassByCreditClassId {
     onChainId
     partyByRegistryId {
@@ -32,4 +33,3 @@ fragment projectFields on Project {
     }
   }
 }
-

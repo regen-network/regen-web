@@ -24,6 +24,7 @@ import MyProjects from 'pages/Dashboard/MyProjects';
 import { ecocreditBatchesLoader } from 'pages/EcocreditBatches/EcocreditBatches.loader';
 import { BridgeTab } from 'pages/EcocreditsByAccount/BridgeTab/BridgeTab';
 import { PortfolioTab } from 'pages/EcocreditsByAccount/PortfolioTab/EcocreditsByAccount.PortfolioTab';
+import ProjectsTab from 'pages/EcocreditsByAccount/ProjectsTab';
 import Faucet from 'pages/Faucet';
 import { homeLoader } from 'pages/Home/Home.loader';
 import { storefrontLoader } from 'pages/Marketplace/Storefront/Storefront.loader';
@@ -147,6 +148,7 @@ export const getRoutes = ({
           element={<EcocreditsByAccount />}
         >
           <Route path="portfolio" element={<PortfolioTab />} />
+          <Route path="projects" element={<ProjectsTab />} />
           <Route path="bridge" element={<BridgeTab />} />
         </Route>
         <Route

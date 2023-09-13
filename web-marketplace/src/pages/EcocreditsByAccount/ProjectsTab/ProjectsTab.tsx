@@ -1,11 +1,9 @@
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { Grid } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
-import { useAtom } from 'jotai';
 
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
-import { isValidAddress } from 'web-components/lib/components/inputs/validation';
 
 import { useLedger } from 'ledger';
 import { client as sanityClient } from 'lib/clients/sanity';
@@ -15,22 +13,19 @@ import { getWalletByAddrQuery } from 'lib/queries/react-query/registry-server/gr
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 
-import { projectsCurrentStepAtom } from 'pages/ProjectCreate/ProjectCreate.store';
 import WithLoader from 'components/atoms/WithLoader';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { useProfileData } from '../hooks/useProfileData';
-import { DEFAULT_PROJECT } from './ ProjectsTab.constants';
 import { useFetchProjectsWithOrders } from './hooks/useFetchProjectsWithOrders';
+import { DEFAULT_PROJECT } from './ProjectsTab.constants';
 import { Project } from './ProjectsTab.types';
 
 const ProjectsTab = (): JSX.Element => {
   const graphqlClient = useApolloClient();
-  const navigate = useNavigate();
   const location = useLocation();
   const { track } = useTracker();
   const { ecocreditClient } = useLedger();
-  const [projectsCurrentStep] = useAtom(projectsCurrentStepAtom);
   const { address, party } = useProfileData();
 
   const { data: walletData, isFetching: isWalletLoading } = useQuery(
@@ -72,7 +67,7 @@ const ProjectsTab = (): JSX.Element => {
     party?.accountId === walletData?.walletByAddr?.partyByWalletId?.accountId
       ? offChainProjects
           ?.filter(project => !project?.onChainId)
-          .filter(project => !project?.approved)
+          .filter(project => project?.approved)
       : undefined;
 
   const onlyOffChainProjectsWithData =
@@ -116,18 +111,6 @@ const ProjectsTab = (): JSX.Element => {
                 <ProjectCard
                   {...DEFAULT_PROJECT}
                   {...project}
-                  onButtonClick={() => {
-                    if (!project.offChain) {
-                      navigate(`/project-pages/${project.id}/edit/basic-info`);
-                    } else {
-                      const currentStep = projectsCurrentStep[project?.id];
-                      navigate(
-                        `/project-pages/${project?.id}/${
-                          currentStep || 'basic-info'
-                        }`,
-                      );
-                    }
-                  }}
                   track={track}
                   pathname={location.pathname}
                 />

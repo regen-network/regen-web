@@ -282,27 +282,29 @@ export function ProjectCard({
                     </Box>
                   </Box>
                 )}
-                <OutlinedButton
-                  onClick={event => {
-                    event.stopPropagation();
-                    track &&
-                      track<'buy1', Buy1Event>('buy1', {
-                        url: pathname ?? '',
-                        cardType: 'project',
-                        buttonLocation: 'projectCard',
-                        projectName: name,
-                        projectId: id,
-                        creditClassId,
-                      });
-                    onButtonClick && onButtonClick();
-                  }}
-                  size="small"
-                  startIcon={buttonStartIcon}
-                  disabled={isButtonDisabled}
-                  sx={{ width: '100%' }}
-                >
-                  {buttonText}
-                </OutlinedButton>
+                {onButtonClick && (
+                  <OutlinedButton
+                    onClick={event => {
+                      event.stopPropagation();
+                      track &&
+                        track<'buy1', Buy1Event>('buy1', {
+                          url: pathname ?? '',
+                          cardType: 'project',
+                          buttonLocation: 'projectCard',
+                          projectName: name,
+                          projectId: id,
+                          creditClassId,
+                        });
+                      onButtonClick && onButtonClick();
+                    }}
+                    size="small"
+                    startIcon={buttonStartIcon}
+                    disabled={isButtonDisabled}
+                    sx={{ width: '100%' }}
+                  >
+                    {buttonText}
+                  </OutlinedButton>
+                )}
               </>
             </div>
           )}

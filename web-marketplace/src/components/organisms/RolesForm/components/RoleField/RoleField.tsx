@@ -2,6 +2,7 @@ import { forwardRef, useEffect, useState } from 'react';
 import { Autocomplete, TextField } from '@mui/material';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import EditIcon from 'web-components/lib/components/icons/EditIcon';
 import FieldFormControl from 'web-components/lib/components/inputs/new/FieldFormControl/FieldFormControl';
 import { UseStateSetter } from 'web-components/lib/types/react/useState';
 
@@ -44,7 +45,7 @@ interface Props {
   parties?: GetPartiesByNameOrAddrQuery | null;
   saveProfile: (
     profile: ProfileModalSchemaType,
-    initialValue?: ProfileModalSchemaType,
+    initialValue?: ProfileModalSchemaType | null,
   ) => Promise<string | undefined>;
   accountId?: string;
 }
@@ -184,10 +185,23 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
         </FieldFormControl>
         {value && value.id && value.creatorId === accountId && (
           <OutlinedButton
-            className={styles.edit}
+            size="small"
+            sx={{
+              p: [0],
+              border: 'none',
+              alignSelf: 'flex-end',
+              marginTop: 2.5,
+            }}
             onClick={() => setProfileAdd(value)}
           >
-            edit entity
+            <EditIcon
+              sx={{
+                width: 18,
+                height: 18,
+                pr: 1.25,
+              }}
+            />
+            edit profile
           </OutlinedButton>
         )}
         {profileAdd && (

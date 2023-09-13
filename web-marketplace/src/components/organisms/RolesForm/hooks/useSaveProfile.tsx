@@ -22,7 +22,7 @@ export const useSaveProfile = () => {
   const saveProfile = useCallback(
     async (
       profile: ProfileModalSchemaType,
-      initialValue?: ProfileModalSchemaType,
+      initialValue?: ProfileModalSchemaType | null,
     ): Promise<string | undefined> => {
       const edit =
         !!profile.creatorId && profile.creatorId === accountId && !!profile.id;

@@ -11,6 +11,7 @@ query partiesByAccountId($id: UUID!){
 fragment partyWithAccountFields on Party {
   id
   accountId
+  creatorId
   name
   type
   image

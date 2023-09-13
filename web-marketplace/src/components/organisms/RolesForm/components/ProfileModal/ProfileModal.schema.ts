@@ -10,7 +10,8 @@ import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
 export const profileModalSchema = z.object({
   id: z.string().optional(),
-  accountId: z.string().optional(),
+  accountId: z.string().nullable().optional(),
+  creatorId: z.string().nullable().optional(),
   profileType: z.custom<PartyType>(),
   name: z.string(),
   profileImage: z.string(),

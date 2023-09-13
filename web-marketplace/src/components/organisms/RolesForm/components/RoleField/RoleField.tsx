@@ -1,6 +1,7 @@
 import { forwardRef, useEffect, useState } from 'react';
 import { Autocomplete, TextField } from '@mui/material';
 
+import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import FieldFormControl from 'web-components/lib/components/inputs/new/FieldFormControl/FieldFormControl';
 import { UseStateSetter } from 'web-components/lib/types/react/useState';
 
@@ -38,9 +39,13 @@ interface Props {
   setDebouncedValue: UseStateSetter<string>;
   setValue: (value: ProfileModalSchemaType | null) => void;
   value?: ProfileModalSchemaType | null;
+  initialValue?: ProfileModalSchemaType | null;
   partiesByAccountId?: PartiesByAccountIdQuery | null;
   parties?: GetPartiesByNameOrAddrQuery | null;
-  saveProfile: (profile: ProfileModalSchemaType) => Promise<string | undefined>;
+  saveProfile: (
+    profile: ProfileModalSchemaType,
+    initialValue?: ProfileModalSchemaType,
+  ) => Promise<string | undefined>;
   accountId?: string;
 }
 
@@ -54,6 +59,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
       description,
       setValue,
       value,
+      initialValue,
       setDebouncedValue,
       partiesByAccountId,
       parties,
@@ -112,6 +118,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
       partiesByAccountId?.accountById?.partiesByAccountId?.nodes,
       value,
     ]);
+
     const closeProfileModal = (): void => {
       setProfileAdd(null);
     };
@@ -175,12 +182,20 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
             autoComplete
           />
         </FieldFormControl>
+        {value && value.id && value.creatorId === accountId && (
+          <OutlinedButton
+            className={styles.edit}
+            onClick={() => setProfileAdd(value)}
+          >
+            edit entity
+          </OutlinedButton>
+        )}
         {profileAdd && (
           <ProfileModal
             initialValues={profileAdd}
             onClose={closeProfileModal}
             onSubmit={async profile => {
-              const id = await saveProfile(profile);
+              const id = await saveProfile(profile, initialValue);
               if (id) {
                 closeProfileModal();
                 setInputValue(profile.name);

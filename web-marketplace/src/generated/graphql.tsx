@@ -3144,6 +3144,7 @@ export type Project = Node & {
   adminWalletId?: Maybe<Scalars['UUID']>;
   verifierId?: Maybe<Scalars['UUID']>;
   approved?: Maybe<Scalars['Boolean']>;
+  published?: Maybe<Scalars['Boolean']>;
   /** Reads a single `Party` that is related to this `Project`. */
   partyByDeveloperId?: Maybe<Party>;
   /** Reads a single `CreditClass` that is related to this `Project`. */
@@ -3205,6 +3206,8 @@ export type ProjectCondition = {
   verifierId?: Maybe<Scalars['UUID']>;
   /** Checks for equality with the object’s `approved` field. */
   approved?: Maybe<Scalars['Boolean']>;
+  /** Checks for equality with the object’s `published` field. */
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 /** A filter to be used against `Project` object types. All fields are combined with a logical ‘and.’ */
@@ -3232,6 +3235,7 @@ export type ProjectInput = {
   adminWalletId?: Maybe<Scalars['UUID']>;
   verifierId?: Maybe<Scalars['UUID']>;
   approved?: Maybe<Scalars['Boolean']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 /** Represents an update to a `Project`. Fields that are set will be updated. */
@@ -3247,6 +3251,7 @@ export type ProjectPatch = {
   adminWalletId?: Maybe<Scalars['UUID']>;
   verifierId?: Maybe<Scalars['UUID']>;
   approved?: Maybe<Scalars['Boolean']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 /** A connection to a list of `Project` values. */
@@ -3296,6 +3301,8 @@ export enum ProjectsOrderBy {
   VerifierIdDesc = 'VERIFIER_ID_DESC',
   ApprovedAsc = 'APPROVED_ASC',
   ApprovedDesc = 'APPROVED_DESC',
+  PublishedAsc = 'PUBLISHED_ASC',
+  PublishedDesc = 'PUBLISHED_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -4788,11 +4795,14 @@ export type AllProjectsQuery = (
     { __typename?: 'ProjectsConnection' }
     & { nodes: Array<Maybe<(
       { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'slug' | 'metadata'>
+      & Pick<Project, 'id' | 'slug' | 'metadata' | 'onChainId'>
       & { creditClassByCreditClassId?: Maybe<(
         { __typename?: 'CreditClass' }
         & Pick<CreditClass, 'id' | 'onChainId'>
-        & { creditClassVersionsById: (
+        & { partyByRegistryId?: Maybe<(
+          { __typename?: 'Party' }
+          & PartyFieldsFragment
+        )>, creditClassVersionsById: (
           { __typename?: 'CreditClassVersionsConnection' }
           & { nodes: Array<Maybe<(
             { __typename?: 'CreditClassVersion' }
@@ -5445,9 +5455,13 @@ export const AllProjectsDocument = gql`
       id
       slug
       metadata
+      onChainId
       creditClassByCreditClassId {
         id
         onChainId
+        partyByRegistryId {
+          ...partyFields
+        }
         creditClassVersionsById {
           nodes {
             id
@@ -5460,7 +5474,7 @@ export const AllProjectsDocument = gql`
     }
   }
 }
-    `;
+    ${PartyFieldsFragmentDoc}`;
 
 /**
  * __useAllProjectsQuery__

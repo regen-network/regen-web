@@ -125,7 +125,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
     };
 
     const valueWithGroup = getValue(value, accountId);
-    console.log('value', value);
+
     return (
       <div className={cx(styles.root, classes && classes.root)}>
         <FieldFormControl

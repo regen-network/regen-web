@@ -12,13 +12,16 @@ export const useRequestFunds = () => {
   const requestFunds = async (address: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch('https://redwood.regen.network:8000', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        'https://redwood.regen.network:8000/faucet',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ address }),
         },
-        body: JSON.stringify({ address }),
-      });
+      );
 
       if (!response.ok) {
         setErrorBannerTextAtom('Failed to request funds');

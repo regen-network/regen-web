@@ -73,7 +73,6 @@ export const EcocreditsByAccount = (): JSX.Element => {
           party?.bgImage
             ? getResizedImageUrl({
                 url: party?.bgImage,
-                startPattern: '/profiles',
                 width: 1400,
               })
             : DEFAULT_PROFILE_BG
@@ -82,7 +81,6 @@ export const EcocreditsByAccount = (): JSX.Element => {
           party?.image
             ? getResizedImageUrl({
                 url: party?.image,
-                startPattern: '/profiles',
                 width: 140,
               })
             : defaultAvatar

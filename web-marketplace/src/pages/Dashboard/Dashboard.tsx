@@ -100,7 +100,6 @@ const Dashboard = (): JSX.Element => {
           party?.bgImage
             ? getResizedImageUrl({
                 url: party?.bgImage,
-                startPattern: '/profiles',
                 width: 1400,
               })
             : DEFAULT_PROFILE_BG
@@ -109,7 +108,6 @@ const Dashboard = (): JSX.Element => {
           party?.image
             ? getResizedImageUrl({
                 url: party?.image,
-                startPattern: '/profiles',
                 width: 140,
               })
             : defaultAvatar

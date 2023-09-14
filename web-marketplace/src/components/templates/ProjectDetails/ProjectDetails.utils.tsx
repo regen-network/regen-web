@@ -159,7 +159,6 @@ export const getProjectGalleryPhotos = ({
     offChainProjectMetadata?.['regen:galleryPhotos']?.map(photo => ({
       href: getResizedImageUrl({
         url: photo['schema:url'],
-        startPattern: '/projects',
         width: 1400,
       }),
       caption: photo['schema:caption'],

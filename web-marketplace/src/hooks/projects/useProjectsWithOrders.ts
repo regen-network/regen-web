@@ -88,7 +88,7 @@ export function useProjectsWithOrders({
       }),
     );
 
-  const { data: sellOrders, isFetching: isLoadingSellOrders } = useQuery(
+  const { data: sellOrders, isLoading: isLoadingSellOrders } = useQuery(
     getSellOrdersExtendedQuery({
       enabled: !!marketplaceClient,
       client: marketplaceClient,

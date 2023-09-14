@@ -91,6 +91,13 @@ const Dashboard = (): JSX.Element => {
     0,
   );
 
+  let profileLink: string = '';
+  if (!!wallet?.address) {
+    profileLink = `${window.location.origin}/profiles/${wallet.address}`;
+  } else if (!!party?.id) {
+    profileLink = `${window.location.origin}/profiles/${party.id}`;
+  }
+
   return (
     <>
       <ProfileHeader
@@ -106,6 +113,7 @@ const Dashboard = (): JSX.Element => {
           socialsLinks,
         }}
         editLink={accountId ? '/profile/edit' : ''}
+        profileLink={profileLink}
         variant={party?.type ? profileVariantMapping[party.type] : 'individual'}
         LinkComponent={Link}
       />

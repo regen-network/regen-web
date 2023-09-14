@@ -37,7 +37,8 @@
     "start-auth": "lerna run --scope web-auth start --stream",
     "watch": "lerna run watch --stream",
     "test-update-snapshot": "lerna run --scope web-marketplace test-update-snapshot --stream",
-    "bump": "lerna version --conventional-commits",
+    "bump": "lerna version --no-push --conventional-commits",
+    "bump-and-push": "lerna version --conventional-commits",
     "postinstall": "patch-package"
   },
   "devDependencies": {

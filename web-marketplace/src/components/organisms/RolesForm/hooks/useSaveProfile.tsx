@@ -23,7 +23,7 @@ export const useSaveProfile = () => {
     async (
       profile: ProfileModalSchemaType,
       initialValue?: ProfileModalSchemaType | null,
-    ): Promise<string | undefined> => {
+    ): Promise<{ id: string; creatorId: string } | undefined> => {
       const edit =
         !!profile.creatorId && profile.creatorId === accountId && !!profile.id;
       try {
@@ -57,7 +57,7 @@ export const useSaveProfile = () => {
               },
             },
           });
-          return profile.id;
+          return { id: profile.id, creatorId: accountId };
         } else {
           const partyRes = await createParty({
             variables: {
@@ -73,7 +73,10 @@ export const useSaveProfile = () => {
               },
             },
           });
-          return partyRes.data?.createParty?.party?.id;
+          return {
+            id: partyRes.data?.createParty?.party?.id,
+            creatorId: accountId,
+          };
         }
       } catch (e) {
         setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);

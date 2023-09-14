@@ -46,7 +46,7 @@ interface Props {
   saveProfile: (
     profile: ProfileModalSchemaType,
     initialValue?: ProfileModalSchemaType | null,
-  ) => Promise<string | undefined>;
+  ) => Promise<{ id: string; creatorId: string } | undefined>;
   accountId?: string;
 }
 
@@ -125,7 +125,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
     };
 
     const valueWithGroup = getValue(value, accountId);
-
+    console.log('value', value);
     return (
       <div className={cx(styles.root, classes && classes.root)}>
         <FieldFormControl
@@ -209,11 +209,13 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
             initialValues={profileAdd}
             onClose={closeProfileModal}
             onSubmit={async profile => {
-              const id = await saveProfile(profile, initialValue);
-              if (id) {
+              const party = await saveProfile(profile, initialValue);
+              const id = party?.id;
+              const creatorId = party?.creatorId;
+              if (id && creatorId) {
                 closeProfileModal();
                 setInputValue(profile.name);
-                setValue({ id, ...profile });
+                setValue({ id, creatorId, ...profile });
               }
             }}
           />

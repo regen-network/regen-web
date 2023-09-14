@@ -36,6 +36,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
   const { address, party, isLoading } = useProfileData();
   const { avatarImage, backgroundImage } = getUserImages({ party });
   const isProfileNotFound = !address && !party;
+  const profileLink = `${window.location.origin}/profiles/${accountAddressOrId}`;
 
   const socialsLinks = useMemo(() => getSocialsLinks({ party }), [party]);
 
@@ -97,6 +98,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
                 socialsLinks,
               }}
               editLink=""
+              profileLink={profileLink}
               variant={
                 party?.type ? profileVariantMapping[party.type] : 'individual'
               }

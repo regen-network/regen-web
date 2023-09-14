@@ -95,7 +95,7 @@ const LocationForm: React.FC<LocationFormProps> = ({
           placeholder={LOCATION_PLACEHOLDER}
           token={mapToken}
           error={!!errors['schema:location']}
-          helperText={errors['schema:location']?.message}
+          helperText={errors['schema:location']?.message?.toString()}
           value={location}
           handleChange={value =>
             setValue('schema:location', value, {

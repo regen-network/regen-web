@@ -7,7 +7,7 @@ import type { TextSize } from '../typography/sizing';
 import UserInfo, { User } from '../user/UserInfo';
 
 interface Props {
-  user: User;
+  user?: User;
   title: string;
   border?: boolean;
   size?: TextSize;
@@ -37,13 +37,15 @@ export default function UserInfoWithTitle({
         {title}
         {tooltip && <QuestionMarkTooltip sx={{ ml: 1.25 }} title={tooltip} />}
       </Label>
-      <UserInfo
-        user={user}
-        size={size}
-        fontFamily={fontFamily}
-        border={border}
-        titleComponent="subtitle"
-      />
+      {user && (
+        <UserInfo
+          user={user}
+          size={size}
+          fontFamily={fontFamily}
+          border={border}
+          titleComponent="subtitle"
+        />
+      )}
     </Box>
   );
 }

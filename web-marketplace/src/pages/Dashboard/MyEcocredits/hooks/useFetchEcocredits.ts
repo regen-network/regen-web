@@ -111,7 +111,7 @@ export const useFetchEcocredits = ({
       projectMetadata: isProjectsMetadataLoading
         ? undefined
         : projectsMetadata[index],
-      project: isProjectsLoading ? undefined : projects[index]?.project,
+      project: isProjectsLoading ? undefined : projects[index],
       sanityCreditClassData: creditClassData,
       creditClassMetadata: isClassesMetadataLoading
         ? undefined

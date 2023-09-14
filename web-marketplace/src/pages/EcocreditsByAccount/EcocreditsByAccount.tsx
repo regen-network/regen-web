@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
+import { getResizedImageUrl } from 'utils/image/getResizedImageUrl';
 
 import { Flex } from 'web-components/lib/components/box';
 import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
@@ -68,8 +69,24 @@ export const EcocreditsByAccount = (): JSX.Element => {
     <>
       <ProfileHeader
         name={party?.name ? party?.name : DEFAULT_NAME}
-        backgroundImage={party?.bgImage ? party?.bgImage : DEFAULT_PROFILE_BG}
-        avatar={party?.image ? party?.image : defaultAvatar}
+        backgroundImage={
+          party?.bgImage
+            ? getResizedImageUrl({
+                url: party?.bgImage,
+                startPattern: '/profiles',
+                width: 1400,
+              })
+            : DEFAULT_PROFILE_BG
+        }
+        avatar={
+          party?.image
+            ? getResizedImageUrl({
+                url: party?.image,
+                startPattern: '/profiles',
+                width: 140,
+              })
+            : defaultAvatar
+        }
         infos={{
           addressLink: {
             href: address

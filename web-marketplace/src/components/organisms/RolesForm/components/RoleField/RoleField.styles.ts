@@ -45,11 +45,4 @@ export const useStyles = makeStyles()(theme => ({
   popupIndicator: {
     color: theme.palette.secondary.main,
   },
-  edit: {
-    alignSelf: 'flex-end',
-    border: 'none',
-    fontSize: theme.typography.pxToRem(12),
-    marginTop: theme.spacing(2),
-    padding: theme.spacing(1, 2),
-  },
 }));

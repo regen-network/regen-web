@@ -24,7 +24,8 @@ export const group = (value: ProfileModalSchemaType, accountId?: string) =>
 
 export const getParties = (parties?: Maybe<PartyWithAccountFieldsFragment>[]) =>
   parties?.map(party => ({
-    accountId: party?.accountId as string,
+    accountId: party?.accountId,
+    creatorId: party?.creatorId,
     id: party?.id as string,
     name: party?.name || DEFAULT_NAME,
     profileType: party?.type as PartyType,

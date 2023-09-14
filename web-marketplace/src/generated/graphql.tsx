@@ -37,10 +37,121 @@ export type Account = Node & {
   nonce: Scalars['String'];
   /** Reads and enables pagination through a set of `Party`. */
   partiesByAccountId: PartiesConnection;
+  /** Reads and enables pagination through a set of `Party`. */
+  partiesByCreatorId: PartiesConnection;
+  /** Reads and enables pagination through a set of `Account`. */
+  accountsByPartyAccountIdAndCreatorId: AccountAccountsByPartyAccountIdAndCreatorIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Account`. */
+  accountsByPartyCreatorIdAndAccountId: AccountAccountsByPartyCreatorIdAndAccountIdManyToManyConnection;
 };
 
 
 export type AccountPartiesByAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<PartiesOrderBy>>;
+  condition?: Maybe<PartyCondition>;
+};
+
+
+export type AccountPartiesByCreatorIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<PartiesOrderBy>>;
+  condition?: Maybe<PartyCondition>;
+};
+
+
+export type AccountAccountsByPartyAccountIdAndCreatorIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AccountsOrderBy>>;
+  condition?: Maybe<AccountCondition>;
+};
+
+
+export type AccountAccountsByPartyCreatorIdAndAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AccountsOrderBy>>;
+  condition?: Maybe<AccountCondition>;
+};
+
+/** A connection to a list of `Account` values, with data from `Party`. */
+export type AccountAccountsByPartyAccountIdAndCreatorIdManyToManyConnection = {
+  __typename?: 'AccountAccountsByPartyAccountIdAndCreatorIdManyToManyConnection';
+  /** A list of `Account` objects. */
+  nodes: Array<Maybe<Account>>;
+  /** A list of edges which contains the `Account`, info from the `Party`, and the cursor to aid in pagination. */
+  edges: Array<AccountAccountsByPartyAccountIdAndCreatorIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Account` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Account` edge in the connection, with data from `Party`. */
+export type AccountAccountsByPartyAccountIdAndCreatorIdManyToManyEdge = {
+  __typename?: 'AccountAccountsByPartyAccountIdAndCreatorIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Account` at the end of the edge. */
+  node?: Maybe<Account>;
+  /** Reads and enables pagination through a set of `Party`. */
+  partiesByCreatorId: PartiesConnection;
+};
+
+
+/** A `Account` edge in the connection, with data from `Party`. */
+export type AccountAccountsByPartyAccountIdAndCreatorIdManyToManyEdgePartiesByCreatorIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<PartiesOrderBy>>;
+  condition?: Maybe<PartyCondition>;
+};
+
+/** A connection to a list of `Account` values, with data from `Party`. */
+export type AccountAccountsByPartyCreatorIdAndAccountIdManyToManyConnection = {
+  __typename?: 'AccountAccountsByPartyCreatorIdAndAccountIdManyToManyConnection';
+  /** A list of `Account` objects. */
+  nodes: Array<Maybe<Account>>;
+  /** A list of edges which contains the `Account`, info from the `Party`, and the cursor to aid in pagination. */
+  edges: Array<AccountAccountsByPartyCreatorIdAndAccountIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Account` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Account` edge in the connection, with data from `Party`. */
+export type AccountAccountsByPartyCreatorIdAndAccountIdManyToManyEdge = {
+  __typename?: 'AccountAccountsByPartyCreatorIdAndAccountIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Account` at the end of the edge. */
+  node?: Maybe<Account>;
+  /** Reads and enables pagination through a set of `Party`. */
+  partiesByAccountId: PartiesConnection;
+};
+
+
+/** A `Account` edge in the connection, with data from `Party`. */
+export type AccountAccountsByPartyCreatorIdAndAccountIdManyToManyEdgePartiesByAccountIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -386,6 +497,8 @@ export type CreatePartyPayload = {
   walletByWalletId?: Maybe<Wallet>;
   /** Reads a single `Account` that is related to this `Party`. */
   accountByAccountId?: Maybe<Account>;
+  /** Reads a single `Account` that is related to this `Party`. */
+  accountByCreatorId?: Maybe<Account>;
   /** An edge for our `Party`. May be used by Relay 1. */
   partyEdge?: Maybe<PartiesEdge>;
 };
@@ -1414,6 +1527,8 @@ export type DeletePartyPayload = {
   walletByWalletId?: Maybe<Wallet>;
   /** Reads a single `Account` that is related to this `Party`. */
   accountByAccountId?: Maybe<Account>;
+  /** Reads a single `Account` that is related to this `Party`. */
+  accountByCreatorId?: Maybe<Account>;
   /** An edge for our `Party`. May be used by Relay 1. */
   partyEdge?: Maybe<PartiesEdge>;
 };
@@ -2555,6 +2670,8 @@ export enum PartiesOrderBy {
   TwitterLinkDesc = 'TWITTER_LINK_DESC',
   WebsiteLinkAsc = 'WEBSITE_LINK_ASC',
   WebsiteLinkDesc = 'WEBSITE_LINK_DESC',
+  CreatorIdAsc = 'CREATOR_ID_ASC',
+  CreatorIdDesc = 'CREATOR_ID_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -2575,10 +2692,13 @@ export type Party = Node & {
   bgImage?: Maybe<Scalars['String']>;
   twitterLink?: Maybe<Scalars['String']>;
   websiteLink?: Maybe<Scalars['String']>;
+  creatorId?: Maybe<Scalars['UUID']>;
   /** Reads a single `Wallet` that is related to this `Party`. */
   walletByWalletId?: Maybe<Wallet>;
   /** Reads a single `Account` that is related to this `Party`. */
   accountByAccountId?: Maybe<Account>;
+  /** Reads a single `Account` that is related to this `Party`. */
+  accountByCreatorId?: Maybe<Account>;
   /** Reads and enables pagination through a set of `CreditClass`. */
   creditClassesByRegistryId: CreditClassesConnection;
   /** Reads a single `Organization` that is related to this `Party`. */
@@ -2744,6 +2864,8 @@ export type PartyCondition = {
   twitterLink?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `websiteLink` field. */
   websiteLink?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `creatorId` field. */
+  creatorId?: Maybe<Scalars['UUID']>;
 };
 
 /** A connection to a list of `CreditClass` values, with data from `Project`. */
@@ -2834,6 +2956,7 @@ export type PartyInput = {
   bgImage?: Maybe<Scalars['String']>;
   twitterLink?: Maybe<Scalars['String']>;
   websiteLink?: Maybe<Scalars['String']>;
+  creatorId?: Maybe<Scalars['UUID']>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -2924,6 +3047,7 @@ export type PartyPatch = {
   bgImage?: Maybe<Scalars['String']>;
   twitterLink?: Maybe<Scalars['String']>;
   websiteLink?: Maybe<Scalars['String']>;
+  creatorId?: Maybe<Scalars['UUID']>;
 };
 
 export enum PartyType {
@@ -3019,6 +3143,7 @@ export type Project = Node & {
   onChainId?: Maybe<Scalars['String']>;
   adminWalletId?: Maybe<Scalars['UUID']>;
   verifierId?: Maybe<Scalars['UUID']>;
+  approved?: Maybe<Scalars['Boolean']>;
   /** Reads a single `Party` that is related to this `Project`. */
   partyByDeveloperId?: Maybe<Party>;
   /** Reads a single `CreditClass` that is related to this `Project`. */
@@ -3078,6 +3203,8 @@ export type ProjectCondition = {
   adminWalletId?: Maybe<Scalars['UUID']>;
   /** Checks for equality with the object’s `verifierId` field. */
   verifierId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `approved` field. */
+  approved?: Maybe<Scalars['Boolean']>;
 };
 
 /** A filter to be used against `Project` object types. All fields are combined with a logical ‘and.’ */
@@ -3104,6 +3231,7 @@ export type ProjectInput = {
   onChainId?: Maybe<Scalars['String']>;
   adminWalletId?: Maybe<Scalars['UUID']>;
   verifierId?: Maybe<Scalars['UUID']>;
+  approved?: Maybe<Scalars['Boolean']>;
 };
 
 /** Represents an update to a `Project`. Fields that are set will be updated. */
@@ -3118,6 +3246,7 @@ export type ProjectPatch = {
   onChainId?: Maybe<Scalars['String']>;
   adminWalletId?: Maybe<Scalars['UUID']>;
   verifierId?: Maybe<Scalars['UUID']>;
+  approved?: Maybe<Scalars['Boolean']>;
 };
 
 /** A connection to a list of `Project` values. */
@@ -3165,6 +3294,8 @@ export enum ProjectsOrderBy {
   AdminWalletIdDesc = 'ADMIN_WALLET_ID_DESC',
   VerifierIdAsc = 'VERIFIER_ID_ASC',
   VerifierIdDesc = 'VERIFIER_ID_DESC',
+  ApprovedAsc = 'APPROVED_ASC',
+  ApprovedDesc = 'APPROVED_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -4131,6 +4262,8 @@ export type UpdatePartyPayload = {
   walletByWalletId?: Maybe<Wallet>;
   /** Reads a single `Account` that is related to this `Party`. */
   accountByAccountId?: Maybe<Account>;
+  /** Reads a single `Account` that is related to this `Party`. */
+  accountByCreatorId?: Maybe<Account>;
   /** An edge for our `Party`. May be used by Relay 1. */
   partyEdge?: Maybe<PartiesEdge>;
 };
@@ -4604,7 +4737,7 @@ export type PartiesByAccountIdQuery = (
 
 export type PartyWithAccountFieldsFragment = (
   { __typename?: 'Party' }
-  & Pick<Party, 'id' | 'accountId' | 'name' | 'type' | 'image' | 'description'>
+  & Pick<Party, 'id' | 'accountId' | 'creatorId' | 'name' | 'type' | 'image' | 'description'>
   & { walletByWalletId?: Maybe<(
     { __typename?: 'Wallet' }
     & Pick<Wallet, 'addr'>
@@ -4876,7 +5009,7 @@ export type PartyByIdQuery = (
 
 export type PartyFieldsFragment = (
   { __typename?: 'Party' }
-  & Pick<Party, 'id' | 'accountId' | 'type' | 'name' | 'description' | 'image' | 'websiteLink' | 'twitterLink'>
+  & Pick<Party, 'id' | 'accountId' | 'creatorId' | 'type' | 'name' | 'description' | 'image' | 'websiteLink' | 'twitterLink'>
   & { organizationByPartyId?: Maybe<(
     { __typename?: 'Organization' }
     & OrganizationFieldsFragment
@@ -5097,6 +5230,7 @@ export const PartyWithAccountFieldsFragmentDoc = gql`
     fragment partyWithAccountFields on Party {
   id
   accountId
+  creatorId
   name
   type
   image
@@ -5130,6 +5264,7 @@ export const PartyFieldsFragmentDoc = gql`
     fragment partyFields on Party {
   id
   accountId
+  creatorId
   type
   name
   description

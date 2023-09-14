@@ -1,6 +1,8 @@
 import { forwardRef, useEffect, useState } from 'react';
 import { Autocomplete, TextField } from '@mui/material';
 
+import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import EditIcon from 'web-components/lib/components/icons/EditIcon';
 import FieldFormControl from 'web-components/lib/components/inputs/new/FieldFormControl/FieldFormControl';
 import { UseStateSetter } from 'web-components/lib/types/react/useState';
 
@@ -38,9 +40,13 @@ interface Props {
   setDebouncedValue: UseStateSetter<string>;
   setValue: (value: ProfileModalSchemaType | null) => void;
   value?: ProfileModalSchemaType | null;
+  initialValue?: ProfileModalSchemaType | null;
   partiesByAccountId?: PartiesByAccountIdQuery | null;
   parties?: GetPartiesByNameOrAddrQuery | null;
-  saveProfile: (profile: ProfileModalSchemaType) => Promise<string | undefined>;
+  saveProfile: (
+    profile: ProfileModalSchemaType,
+    initialValue?: ProfileModalSchemaType | null,
+  ) => Promise<{ id: string; creatorId: string } | undefined>;
   accountId?: string;
 }
 
@@ -54,6 +60,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
       description,
       setValue,
       value,
+      initialValue,
       setDebouncedValue,
       partiesByAccountId,
       parties,
@@ -112,6 +119,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
       partiesByAccountId?.accountById?.partiesByAccountId?.nodes,
       value,
     ]);
+
     const closeProfileModal = (): void => {
       setProfileAdd(null);
     };
@@ -175,16 +183,39 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
             autoComplete
           />
         </FieldFormControl>
+        {value && value.id && value.creatorId === accountId && (
+          <OutlinedButton
+            size="small"
+            sx={{
+              p: [0],
+              border: 'none',
+              alignSelf: 'flex-end',
+              marginTop: 2.5,
+            }}
+            onClick={() => setProfileAdd(value)}
+          >
+            <EditIcon
+              sx={{
+                width: 18,
+                height: 18,
+                pr: 1.25,
+              }}
+            />
+            edit profile
+          </OutlinedButton>
+        )}
         {profileAdd && (
           <ProfileModal
             initialValues={profileAdd}
             onClose={closeProfileModal}
             onSubmit={async profile => {
-              const id = await saveProfile(profile);
-              if (id) {
+              const party = await saveProfile(profile, initialValue);
+              const id = party?.id;
+              const creatorId = party?.creatorId;
+              if (id && creatorId) {
                 closeProfileModal();
                 setInputValue(profile.name);
-                setValue({ id, ...profile });
+                setValue({ id, creatorId, ...profile });
               }
             }}
           />

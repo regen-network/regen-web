@@ -85,7 +85,6 @@ const useRolesSubmit = ({
             projectPatch.adminWalletId = adminWalletId;
           }
         }
-
         const newMetadata = {
           ...metadata,
           ...getProjectStakeholders(values),

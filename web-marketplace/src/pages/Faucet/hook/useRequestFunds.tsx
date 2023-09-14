@@ -13,7 +13,7 @@ export const useRequestFunds = () => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        'https://redwood.regen.network:8000/faucet/',
+        'https://redwood.regen.network/faucet/',
         {
           method: 'POST',
           headers: {

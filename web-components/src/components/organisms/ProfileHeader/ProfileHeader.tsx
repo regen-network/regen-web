@@ -145,7 +145,7 @@ const ProfileHeader = ({
                 mb: { xs: 1.375, sm: 2 },
                 zIndex: 1,
                 minHeight: { xs: 'auto', sm: 44.7 },
-                flex: 2,
+                flex: { sm: 2 },
               }}
             >
               {name}

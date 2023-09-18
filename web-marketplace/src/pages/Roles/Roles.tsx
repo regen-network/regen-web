@@ -41,7 +41,6 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { rolesSubmit } = useRolesSubmit({
     projectEditSubmit,
     offChainProject,
-    onChainProject,
     metadata,
     isEdit,
     metadataReload,

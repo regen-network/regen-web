@@ -96,7 +96,7 @@ export const useFetchBasketEcocredits = ({
       creditClassMetadata: isClassesMetadataLoading
         ? undefined
         : classesMetadata[index],
-      project: isProjectsLoading ? undefined : projects[index]?.project,
+      project: isProjectsLoading ? undefined : projects[index],
       sanityCreditClassData: creditClassData,
     }),
   );

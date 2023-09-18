@@ -1,5 +1,6 @@
 import {
   ClassInfo,
+  ProjectInfo,
   QueryProjectResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
@@ -17,7 +18,7 @@ import { getDataFromBatchDenomId } from 'pages/Dashboard/MyEcocredits/MyEcocredi
 type Props = {
   retirement?: Maybe<RetirementFieldsFragment>;
   retirementData?: ReturnType<typeof getDataFromBatchDenomId>;
-  project?: QueryProjectResponse | null;
+  project?: ProjectInfo;
   projectMetadata?: AnchoredProjectMetadataLD;
   creditClass?: ClassInfo;
   creditClassMetadata?: CreditClassMetadataLD;
@@ -70,7 +71,7 @@ export const normalizeRetirement = ({
   projectId: retirementData?.projectId ?? '',
   projectName:
     projectMetadata?.['schema:name'] ?? retirementData?.projectId ?? '',
-  projectLocation: project?.project?.jurisdiction,
+  projectLocation: project?.jurisdiction,
   retirementDate: retirement?.timestamp,
   retirementLocation: retirement?.jurisdiction,
   retirementReason: retirement?.reason,

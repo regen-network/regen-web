@@ -34,8 +34,8 @@ export const useFetchProjectsByIds = ({ projectIds }: Props): Response => {
     queries: projects.map(project =>
       getProjectByOnChainIdQuery({
         client: graphqlClient,
-        onChainId: project?.project?.id ?? '',
-        enabled: !!project?.project?.id,
+        onChainId: project?.id ?? '',
+        enabled: !!project?.id,
       }),
     ),
   });
@@ -52,7 +52,7 @@ export const useFetchProjectsByIds = ({ projectIds }: Props): Response => {
   // Normalization
   const normalizedProjects = normalizeProjectsWithCreditClass({
     projects: projects
-      .map(project => project?.project)
+      .map(project => project)
       .filter(project => project !== undefined) as ProjectInfo[],
     projectsMetadata,
     projectPagesMetadata,

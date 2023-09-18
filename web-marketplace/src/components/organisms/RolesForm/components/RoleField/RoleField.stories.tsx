@@ -43,7 +43,7 @@ const Template: ComponentStory<typeof RoleField> = args => {
       },
     ];
     setAllParties([...newParty, ...allParties]);
-    return newProfile.id;
+    return { id: newProfile.id, creatorId: accountId ?? '' };
   };
 
   useEffect(() => {

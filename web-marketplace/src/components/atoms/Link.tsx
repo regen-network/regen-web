@@ -14,6 +14,7 @@ interface LinkProps extends MuiLinkProps, PropsWithChildren {
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
   ({ href, children, target, ...linkProps }, ref) => {
     if (!href || typeof href !== 'string') {
+      // @ts-expect-error
       return <Box {...linkProps}>{children}</Box>;
     }
 

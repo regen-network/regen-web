@@ -57,7 +57,7 @@ export const useSaveProfile = () => {
               },
             },
           });
-          return { id: profile.id, creatorId: accountId };
+          return { id: profile.id ?? '', creatorId: accountId };
         } else {
           const partyRes = await createParty({
             variables: {
@@ -75,7 +75,7 @@ export const useSaveProfile = () => {
           });
           return {
             id: partyRes.data?.createParty?.party?.id,
-            creatorId: accountId,
+            creatorId: accountId ?? '',
           };
         }
       } catch (e) {

@@ -108,7 +108,7 @@ const Dashboard = (): JSX.Element => {
           party?.image
             ? getResizedImageUrl({
                 url: party?.image,
-                width: 140,
+                width: 190,
               })
             : defaultAvatar
         }

@@ -830,7 +830,7 @@ export const queryBatches = async ({
 
 // BatchesByClass
 
-interface QueryBatchesByClassProps extends EcocreditQueryClientProps {
+export interface QueryBatchesByClassProps extends EcocreditQueryClientProps {
   request: DeepPartial<QueryBatchesByClassRequest>;
 }
 

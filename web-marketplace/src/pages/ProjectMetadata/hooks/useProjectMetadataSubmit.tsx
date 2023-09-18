@@ -31,8 +31,12 @@ export const useProjectMetadataSubmit = ({
   const projectMetadataSubmit = useCallback(
     async ({ values }: SubmitParams): Promise<void> => {
       const parsedMetaData = JSON.parse(values.metadata);
-      const baseMetadata = pick(metadata, OMITTED_METADATA_KEYS);
+      const baseMetadata = pick(metadata, [
+        '@context',
+        ...OMITTED_METADATA_KEYS,
+      ]);
       merge(baseMetadata, parsedMetaData);
+
       if (baseMetadata) {
         await metadataSubmit({
           values: baseMetadata,

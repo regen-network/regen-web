@@ -173,7 +173,6 @@ export const ProjectsSideFilter = ({
                   useCommunityProjects={useCommunityProjects}
                   setUseCommunityProjects={setUseCommunityProjects}
                   sx={{
-                    mt: { xs: 6.25, lg: 0 },
                     mr: { xs: 0, lg: 7.5 },
                     width: { xs: '100%', lg: 'auto' },
                     order: { xs: 2, lg: 1 },
@@ -193,7 +192,6 @@ export const ProjectsSideFilter = ({
                 useOffChainProjects={useOffChainProjects}
                 setUseOffChainProjects={setUseOffChainProjects}
                 sx={{
-                  mt: { xs: 6.25, lg: 0 },
                   mr: { xs: 0, lg: 7.5 },
                   width: { xs: '100%', lg: 'auto' },
                   order: { xs: 2, lg: 1 },

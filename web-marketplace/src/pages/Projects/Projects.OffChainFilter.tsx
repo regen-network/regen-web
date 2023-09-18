@@ -6,7 +6,7 @@ import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoToolt
 
 import { UseStateSetter } from 'types/react/use-state';
 
-import { OFFCHAIN_FILTER } from './Projects.constants';
+import { OFFCHAIN_FILTER, OFFCHAIN_FILTER_Tooltip } from './Projects.constants';
 
 type CommunityFilterProps = {
   useOffChainProjects?: boolean;
@@ -35,12 +35,7 @@ export const OffChainFilter = ({
         sx={{ whiteSpace: 'nowrap', mr: 1, ml: 0, fontSize: 14 }}
       />
       <InfoTooltipWithIcon
-        title={
-          <Box sx={{ textAlign: 'start' }}>
-            Off-chain projects are being worked on and not yet submitted
-            on-chain.
-          </Box>
-        }
+        title={<Box sx={{ textAlign: 'start' }}>{OFFCHAIN_FILTER_Tooltip}</Box>}
         outlined
       />
     </Flex>

@@ -15,7 +15,6 @@ import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
 import { openLink } from 'lib/button';
 import { client } from 'lib/clients/sanity';
-import { GECKO_EEUR_ID, GECKO_USDC_ID } from 'lib/coingecko';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { queryClassIssuers } from 'lib/ecocredit/api';
 import { onChainClassRegExp } from 'lib/ledger';
@@ -143,12 +142,7 @@ function CreditClassDetails({
   const simplePrice = useQuery(getSimplePriceQuery({}));
 
   const avgPricePerTonLabel = getCreditClassAvgPricePerTonLabel({
-    geckoPrices: {
-      regenPrice: simplePrice?.data?.regen?.usd,
-      evmosPrice: simplePrice?.data?.evmos?.usd,
-      eeurPrice: simplePrice?.data?.[GECKO_EEUR_ID]?.usd,
-      usdcPrice: simplePrice?.data?.[GECKO_USDC_ID]?.usd,
-    },
+    geckoPrices: simplePrice.data,
     projectsWithOrderData,
   });
 

@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
-import { getResizedImageUrl } from 'utils/image/getResizedImageUrl';
 
 import { Flex } from 'web-components/lib/components/box';
 import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
@@ -23,7 +22,6 @@ import { useWallet } from 'lib/wallet/wallet';
 import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
 import {
   DEFAULT_NAME,
-  DEFAULT_PROFILE_BG,
   profileVariantMapping,
 } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { Link } from 'components/atoms';
@@ -32,7 +30,7 @@ import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
 import { useQueryIsProjectAdmin } from 'hooks/useQueryIsProjectAdmin';
 
 import { dashBoardStyles } from './Dashboard.styles';
-import { getSocialsLinks } from './Dashboard.utils';
+import { getSocialsLinks, getUserImages } from './Dashboard.utils';
 
 const Dashboard = (): JSX.Element => {
   const isIssuer = useQueryIsIssuer();
@@ -42,7 +40,8 @@ const Dashboard = (): JSX.Element => {
   const { wallet, accountId, partyByAddr } = useWallet();
   const location = useLocation();
 
-  const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
+  const { party } = usePartyInfos({ partyByAddr });
+  const { avatarImage, backgroundImage } = getUserImages({ party });
 
   const socialsLinks: SocialLink[] = useMemo(
     () =>
@@ -96,22 +95,8 @@ const Dashboard = (): JSX.Element => {
     <>
       <ProfileHeader
         name={party?.name ? party.name : DEFAULT_NAME}
-        backgroundImage={
-          party?.bgImage
-            ? getResizedImageUrl({
-                url: party?.bgImage,
-                width: 1400,
-              })
-            : DEFAULT_PROFILE_BG
-        }
-        avatar={
-          party?.image
-            ? getResizedImageUrl({
-                url: party?.image,
-                width: 190,
-              })
-            : defaultAvatar
-        }
+        backgroundImage={backgroundImage}
+        avatar={avatarImage}
         infos={{
           addressLink: {
             href: getAccountUrl(wallet?.address, true),

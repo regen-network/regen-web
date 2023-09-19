@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
-import { getResizedImageUrl } from 'utils/image/getResizedImageUrl';
 
 import { Flex } from 'web-components/lib/components/box';
 import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
@@ -15,13 +14,14 @@ import { truncate } from 'web-components/lib/utils/truncate';
 
 import { getAccountUrl } from 'lib/block-explorer';
 
-import { getSocialsLinks } from 'pages/Dashboard/Dashboard.utils';
+import {
+  getSocialsLinks,
+  getUserImages,
+} from 'pages/Dashboard/Dashboard.utils';
 import {
   DEFAULT_NAME,
-  DEFAULT_PROFILE_BG,
   profileVariantMapping,
 } from 'pages/ProfileEdit/ProfileEdit.constants';
-import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 import { Link } from 'components/atoms';
 
 import { ecocreditsByAccountStyles } from './EcocreditsByAccount.styles';
@@ -32,7 +32,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
   const location = useLocation();
 
   const { address, party } = useProfileData();
-  const defaultAvatar = getDefaultAvatar(party);
+  const { avatarImage, backgroundImage } = getUserImages({ party });
 
   const socialsLinks = useMemo(() => getSocialsLinks({ party }), [party]);
 
@@ -69,22 +69,8 @@ export const EcocreditsByAccount = (): JSX.Element => {
     <>
       <ProfileHeader
         name={party?.name ? party?.name : DEFAULT_NAME}
-        backgroundImage={
-          party?.bgImage
-            ? getResizedImageUrl({
-                url: party?.bgImage,
-                width: 1400,
-              })
-            : DEFAULT_PROFILE_BG
-        }
-        avatar={
-          party?.image
-            ? getResizedImageUrl({
-                url: party?.image,
-                width: 190,
-              })
-            : defaultAvatar
-        }
+        backgroundImage={backgroundImage}
+        avatar={avatarImage}
         infos={{
           addressLink: {
             href: address

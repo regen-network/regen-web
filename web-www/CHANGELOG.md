@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/regen-network/regen-web/compare/v1.11.0...v1.12.0) (2023-09-19)
+
+### Bug Fixes
+
+- add missing not found page ([#2032](https://github.com/regen-network/regen-web/issues/2032)) ([7899354](https://github.com/regen-network/regen-web/commit/78993546c22b633e787b4902d548e156ee2e8557))
+- privacy and terms pages ([#2096](https://github.com/regen-network/regen-web/issues/2096)) ([fb4a4e7](https://github.com/regen-network/regen-web/commit/fb4a4e7765eef2fd878da3c6bf511bde082c6737))
+- redirect for nct page ([#2063](https://github.com/regen-network/regen-web/issues/2063)) ([760cf2b](https://github.com/regen-network/regen-web/commit/760cf2b702fd3b90be114f7b0a3ff5c9a4ffe787))
+
+### Features
+
+- change footer community link ([#2051](https://github.com/regen-network/regen-web/issues/2051)) ([a741f90](https://github.com/regen-network/regen-web/commit/a741f9059bdcf3f8bf72c3eca16355937108fbb1))
+- move buyers page www ([#2026](https://github.com/regen-network/regen-web/issues/2026)) ([b77d538](https://github.com/regen-network/regen-web/commit/b77d538425338125c7e9fac31341ffe974de500a))
+
 # [1.11.0](https://github.com/regen-network/regen-web/compare/v1.10.0...v1.11.0) (2023-08-09)
 
 ### Bug Fixes

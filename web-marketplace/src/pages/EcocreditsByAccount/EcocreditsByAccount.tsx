@@ -14,13 +14,14 @@ import { truncate } from 'web-components/lib/utils/truncate';
 
 import { getAccountUrl } from 'lib/block-explorer';
 
-import { getSocialsLinks } from 'pages/Dashboard/Dashboard.utils';
+import {
+  getSocialsLinks,
+  getUserImages,
+} from 'pages/Dashboard/Dashboard.utils';
 import {
   DEFAULT_NAME,
-  DEFAULT_PROFILE_BG,
   profileVariantMapping,
 } from 'pages/ProfileEdit/ProfileEdit.constants';
-import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 import { Link } from 'components/atoms';
 
 import { ecocreditsByAccountStyles } from './EcocreditsByAccount.styles';
@@ -31,7 +32,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
   const location = useLocation();
 
   const { address, party } = useProfileData();
-  const defaultAvatar = getDefaultAvatar(party);
+  const { avatarImage, backgroundImage } = getUserImages({ party });
 
   const socialsLinks = useMemo(() => getSocialsLinks({ party }), [party]);
 
@@ -68,8 +69,8 @@ export const EcocreditsByAccount = (): JSX.Element => {
     <>
       <ProfileHeader
         name={party?.name ? party?.name : DEFAULT_NAME}
-        backgroundImage={party?.bgImage ? party?.bgImage : DEFAULT_PROFILE_BG}
-        avatar={party?.image ? party?.image : defaultAvatar}
+        backgroundImage={backgroundImage}
+        avatar={avatarImage}
         infos={{
           addressLink: {
             href: address

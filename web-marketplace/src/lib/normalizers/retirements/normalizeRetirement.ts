@@ -1,7 +1,6 @@
 import {
   ClassInfo,
   ProjectInfo,
-  QueryProjectResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { Party } from 'web-components/lib/components/user/UserInfo';

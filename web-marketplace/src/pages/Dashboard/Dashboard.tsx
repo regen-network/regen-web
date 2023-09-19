@@ -22,7 +22,6 @@ import { useWallet } from 'lib/wallet/wallet';
 import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
 import {
   DEFAULT_NAME,
-  DEFAULT_PROFILE_BG,
   profileVariantMapping,
 } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { Link } from 'components/atoms';
@@ -31,7 +30,7 @@ import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
 import { useQueryIsProjectAdmin } from 'hooks/useQueryIsProjectAdmin';
 
 import { dashBoardStyles } from './Dashboard.styles';
-import { getSocialsLinks } from './Dashboard.utils';
+import { getSocialsLinks, getUserImages } from './Dashboard.utils';
 
 const Dashboard = (): JSX.Element => {
   const isIssuer = useQueryIsIssuer();
@@ -41,7 +40,8 @@ const Dashboard = (): JSX.Element => {
   const { wallet, accountId, partyByAddr } = useWallet();
   const location = useLocation();
 
-  const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
+  const { party } = usePartyInfos({ partyByAddr });
+  const { avatarImage, backgroundImage } = getUserImages({ party });
 
   const socialsLinks: SocialLink[] = useMemo(
     () =>
@@ -94,9 +94,9 @@ const Dashboard = (): JSX.Element => {
   return (
     <>
       <ProfileHeader
-        name={party?.name ? party?.name : DEFAULT_NAME}
-        backgroundImage={party?.bgImage ? party?.bgImage : DEFAULT_PROFILE_BG}
-        avatar={party?.image ? party?.image : defaultAvatar}
+        name={party?.name ? party.name : DEFAULT_NAME}
+        backgroundImage={backgroundImage}
+        avatar={avatarImage}
         infos={{
           addressLink: {
             href: getAccountUrl(wallet?.address, true),

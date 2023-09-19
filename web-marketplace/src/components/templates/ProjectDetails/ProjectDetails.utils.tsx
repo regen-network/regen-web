@@ -1,6 +1,7 @@
 import { MouseEvent } from 'react';
 import { MapiResponse } from '@mapbox/mapbox-sdk/lib/classes/mapi-response';
 import { GeocodeResponse } from '@mapbox/mapbox-sdk/services/geocoding';
+import { getResizedImageUrl } from 'utils/image/getResizedImageUrl';
 
 import PhoneIcon from 'web-components/lib/components/icons/PhoneIcon';
 import StaticMap from 'web-components/lib/components/map/StaticMap';
@@ -156,7 +157,10 @@ export const getProjectGalleryPhotos = ({
 }: GetProjectGalleryPhotosProps) => {
   const photos: GalleryPhoto[] =
     offChainProjectMetadata?.['regen:galleryPhotos']?.map(photo => ({
-      href: photo['schema:url'],
+      href: getResizedImageUrl({
+        url: photo['schema:url'],
+        width: 1400,
+      }),
       caption: photo['schema:caption'],
       credit: photo['schema:creditText'],
     })) ?? [];

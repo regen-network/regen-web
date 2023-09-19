@@ -4,7 +4,7 @@ import TwitterIcon2 from 'web-components/lib/components/icons/social/TwitterIcon
 import WebsiteLinkIcon from 'web-components/lib/components/icons/social/WebsiteLinkIcon';
 import { SocialLink } from 'web-components/lib/components/organisms/ProfileHeader/ProfileHeader.types';
 
-import { Party } from 'generated/graphql';
+import { Maybe, Party } from 'generated/graphql';
 
 import { DEFAULT_PROFILE_BG } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
@@ -46,7 +46,7 @@ export const getSocialsLinks = ({
 /* getSocialsLinks */
 
 type GetUserImagesParams = {
-  party?: Partial<Party> | null;
+  party?: Pick<Party, 'type' | 'image' | 'bgImage'> | null;
 };
 
 export const getUserImages = ({ party }: GetUserImagesParams) => {

@@ -1,17 +1,11 @@
 import { useMemo } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
-import {
-  ApolloClient,
-  NormalizedCacheObject,
-  useApolloClient,
-} from '@apollo/client';
 import { Box } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
 
 import { Flex } from 'web-components/lib/components/box';
 import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
-import { isValidAddress } from 'web-components/lib/components/inputs/validation';
+import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
 import { ProfileHeader } from 'web-components/lib/components/organisms/ProfileHeader/ProfileHeader';
 import Section from 'web-components/lib/components/section';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
@@ -19,9 +13,6 @@ import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 import { truncate } from 'web-components/lib/utils/truncate';
 
 import { getAccountUrl } from 'lib/block-explorer';
-import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
-import { getPartyByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByIdQuery/getPartyByIdQuery';
 
 import { getSocialsLinks } from 'pages/Dashboard/Dashboard.utils';
 import {
@@ -33,42 +24,16 @@ import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 import { Link } from 'components/atoms';
 
 import { ecocreditsByAccountStyles } from './EcocreditsByAccount.styles';
+import { useProfileData } from './hooks/useProfileData';
 
 export const EcocreditsByAccount = (): JSX.Element => {
   const { accountAddressOrId } = useParams<{ accountAddressOrId: string }>();
-  const isValidRegenAddress = isValidAddress(accountAddressOrId ?? '', 'regen');
   const location = useLocation();
 
-  const graphqlClient =
-    useApolloClient() as ApolloClient<NormalizedCacheObject>;
-
-  const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
-  const { data: partyByAddr } = useQuery(
-    getPartyByAddrQuery({
-      client: graphqlClient,
-      addr: accountAddressOrId ?? '',
-      enabled: isValidRegenAddress && !!graphqlClient && !!csrfData,
-    }),
-  );
-  const { data: partyById } = useQuery(
-    getPartyByIdQuery({
-      client: graphqlClient,
-      id: accountAddressOrId ?? '',
-      enabled: !isValidRegenAddress && !!graphqlClient && !!csrfData,
-    }),
-  );
-
-  const party =
-    partyByAddr?.walletByAddr?.partyByWalletId ?? partyById?.partyById;
+  const { address, party } = useProfileData();
   const defaultAvatar = getDefaultAvatar(party);
-  const address = isValidRegenAddress
-    ? accountAddressOrId
-    : partyById?.partyById?.walletByWalletId?.addr;
 
-  const socialsLinks = useMemo(
-    () => getSocialsLinks({ partyByAddr }),
-    [partyByAddr],
-  );
+  const socialsLinks = useMemo(() => getSocialsLinks({ party }), [party]);
 
   const tabs: IconTabProps[] = useMemo(
     () => [
@@ -76,6 +41,12 @@ export const EcocreditsByAccount = (): JSX.Element => {
         label: 'Portfolio',
         icon: <CreditsIcon fontSize="small" />,
         href: `/profiles/${accountAddressOrId}/portfolio`,
+        hidden: !party,
+      },
+      {
+        label: 'Projects',
+        icon: <ProjectPageIcon />,
+        href: `/profiles/${accountAddressOrId}/projects`,
         hidden: !party,
       },
       {

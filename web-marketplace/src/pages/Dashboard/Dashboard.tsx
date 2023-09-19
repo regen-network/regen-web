@@ -44,7 +44,8 @@ const Dashboard = (): JSX.Element => {
   const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
 
   const socialsLinks: SocialLink[] = useMemo(
-    () => getSocialsLinks({ partyByAddr }),
+    () =>
+      getSocialsLinks({ party: partyByAddr?.walletByAddr?.partyByWalletId }),
     [partyByAddr],
   );
 

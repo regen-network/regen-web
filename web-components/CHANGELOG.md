@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/regen-network/regen-web/compare/v1.11.0...v1.12.0) (2023-09-19)
+
+### Bug Fixes
+
+- A user should be able to add/update a project created outside the app ([#2060](https://github.com/regen-network/regen-web/issues/2060)) ([cb97a1e](https://github.com/regen-network/regen-web/commit/cb97a1e0ac45d6ca27916178d0b2614475372779))
+- handle projects with invalide medata ([#2031](https://github.com/regen-network/regen-web/issues/2031)) ([58c5a92](https://github.com/regen-network/regen-web/commit/58c5a92d346f3c156550a9977630b900242d10df))
+- project card blinking ([#2088](https://github.com/regen-network/regen-web/issues/2088)) ([f6666ad](https://github.com/regen-network/regen-web/commit/f6666ad77dbc8ed3eef09df1c74caf4f0d2377a6))
+- project edit bg color and form border color and registry header borderBottom ([#2048](https://github.com/regen-network/regen-web/issues/2048)) ([e23f66c](https://github.com/regen-network/regen-web/commit/e23f66ce19b4f32c1300e1e27e5dd8125b44654d))
+- react-player issue ([#2056](https://github.com/regen-network/regen-web/issues/2056)) ([49611f6](https://github.com/regen-network/regen-web/commit/49611f61939cfc5ad3a405ffa3dffe547f4042a3))
+- storybook local environment ([#2038](https://github.com/regen-network/regen-web/issues/2038)) ([7d46d23](https://github.com/regen-network/regen-web/commit/7d46d232d0b80e4c2dd04f53c65f77272df574b5))
+- use uppercase for avg price label ([#2030](https://github.com/regen-network/regen-web/issues/2030)) ([95560a4](https://github.com/regen-network/regen-web/commit/95560a4ef1b538c754f0d4ff8db8713ea0281e51))
+
+### Features
+
+- add credit class filter ([#1971](https://github.com/regen-network/regen-web/issues/1971)) ([b855844](https://github.com/regen-network/regen-web/commit/b85584497551f63f5ad4f2d91913136dbedcddda))
+- add program registry to cards ([#2015](https://github.com/regen-network/regen-web/issues/2015)) ([25aca9d](https://github.com/regen-network/regen-web/commit/25aca9dd3a0c03b92fe5b1bad50a1da43b796364))
+- add project impact description ([#2067](https://github.com/regen-network/regen-web/issues/2067)) ([71ec31b](https://github.com/regen-network/regen-web/commit/71ec31bf0c0c353e76f340e9f3b49e8ebf16206b))
+- Add support for measured/project co-benefits and use default impact image ([#2022](https://github.com/regen-network/regen-web/issues/2022)) ([ba6a057](https://github.com/regen-network/regen-web/commit/ba6a057be382f30212c60f78bb173e93e47a22f4))
+- adjust spacing project page ([#2027](https://github.com/regen-network/regen-web/issues/2027)) ([bfc4b8a](https://github.com/regen-network/regen-web/commit/bfc4b8a446eb26ea6f01af4cdf5505d5411f967d))
+- complete project form migration ([#2055](https://github.com/regen-network/regen-web/issues/2055)) ([75cebea](https://github.com/regen-network/regen-web/commit/75cebea5684d6ab6b2ac0ce311e1cbe70bfdd472))
+- display community projects on credit class page ([#2044](https://github.com/regen-network/regen-web/issues/2044)) ([0c604d1](https://github.com/regen-network/regen-web/commit/0c604d1ba95c26e18e6c87c17ac4e04293675ce3))
+- Edit project admin from the Roles edit form ([#2054](https://github.com/regen-network/regen-web/issues/2054)) ([aabf541](https://github.com/regen-network/regen-web/commit/aabf5412a826ad49a1ff4f428b5dcf8f9594cee1))
+- handle profile without address ([#2086](https://github.com/regen-network/regen-web/issues/2086)) ([10582f3](https://github.com/regen-network/regen-web/commit/10582f37319d4df8dae98cb6cd3372e0a4589413))
+- move buyers page www ([#2026](https://github.com/regen-network/regen-web/issues/2026)) ([b77d538](https://github.com/regen-network/regen-web/commit/b77d538425338125c7e9fac31341ffe974de500a))
+- stack credit class card items ([#2029](https://github.com/regen-network/regen-web/issues/2029)) ([00c8590](https://github.com/regen-network/regen-web/commit/00c859059648f54214f1784e61bdcb15515c4082))
+
 # [1.11.0](https://github.com/regen-network/regen-web/compare/v1.10.0...v1.11.0) (2023-08-09)
 
 ### Bug Fixes

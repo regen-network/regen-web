@@ -50,7 +50,7 @@ export const normalizeProjectsWithMetadata = ({
 };
 
 interface NormalizeProjectWithMetadataParams {
-  offChainProject?: Maybe<Pick<Project, 'id' | 'handle'>>;
+  offChainProject?: Maybe<Pick<Project, 'id' | 'slug'>>;
   projectWithOrderData?: ProjectWithOrderData;
   projectMetadata?: AnchoredProjectMetadataBaseLD | undefined;
   projectPageMetadata?: ProjectPageMetadataLD;
@@ -83,7 +83,7 @@ export const normalizeProjectWithMetadata = ({
     name:
       projectMetadata?.['schema:name'] ||
       projectWithOrderData?.name ||
-      offChainProject?.handle ||
+      offChainProject?.slug ||
       offChainProject?.id ||
       projectWithOrderData?.id,
     imgSrc:

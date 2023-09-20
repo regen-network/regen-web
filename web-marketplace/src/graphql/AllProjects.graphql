@@ -2,7 +2,7 @@ query AllProjects {
   allProjects {
     nodes {
       id
-      handle
+      slug
       metadata
       creditClassByCreditClassId {
         id

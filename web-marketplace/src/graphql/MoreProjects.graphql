@@ -1,5 +1,5 @@
 fragment moreProjectFields on Project {
-  handle
+  slug
   onChainId
   metadata
   creditClassByCreditClassId {

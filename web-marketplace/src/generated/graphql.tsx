@@ -1539,16 +1539,6 @@ export type DeletePartyPayloadPartyEdgeArgs = {
   orderBy?: Maybe<Array<PartiesOrderBy>>;
 };
 
-/** All input for the `deleteProjectByHandle` mutation. */
-export type DeleteProjectByHandleInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  handle: Scalars['String'];
-};
-
 /** All input for the `deleteProjectById` mutation. */
 export type DeleteProjectByIdInput = {
   /**
@@ -1567,6 +1557,16 @@ export type DeleteProjectByOnChainIdInput = {
    */
   clientMutationId?: Maybe<Scalars['String']>;
   onChainId: Scalars['String'];
+};
+
+/** All input for the `deleteProjectBySlug` mutation. */
+export type DeleteProjectBySlugInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  slug: Scalars['String'];
 };
 
 /** All input for the `deleteProject` mutation. */
@@ -2014,7 +2014,7 @@ export type Mutation = {
   /** Updates a single `Project` using a unique key and a patch. */
   updateProjectById?: Maybe<UpdateProjectPayload>;
   /** Updates a single `Project` using a unique key and a patch. */
-  updateProjectByHandle?: Maybe<UpdateProjectPayload>;
+  updateProjectBySlug?: Maybe<UpdateProjectPayload>;
   /** Updates a single `Project` using a unique key and a patch. */
   updateProjectByOnChainId?: Maybe<UpdateProjectPayload>;
   /** Updates a single `ShaclGraph` using its globally unique id and a patch. */
@@ -2074,7 +2074,7 @@ export type Mutation = {
   /** Deletes a single `Project` using a unique key. */
   deleteProjectById?: Maybe<DeleteProjectPayload>;
   /** Deletes a single `Project` using a unique key. */
-  deleteProjectByHandle?: Maybe<DeleteProjectPayload>;
+  deleteProjectBySlug?: Maybe<DeleteProjectPayload>;
   /** Deletes a single `Project` using a unique key. */
   deleteProjectByOnChainId?: Maybe<DeleteProjectPayload>;
   /** Deletes a single `ShaclGraph` using its globally unique id. */
@@ -2295,8 +2295,8 @@ export type MutationUpdateProjectByIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateProjectByHandleArgs = {
-  input: UpdateProjectByHandleInput;
+export type MutationUpdateProjectBySlugArgs = {
+  input: UpdateProjectBySlugInput;
 };
 
 
@@ -2475,8 +2475,8 @@ export type MutationDeleteProjectByIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteProjectByHandleArgs = {
-  input: DeleteProjectByHandleInput;
+export type MutationDeleteProjectBySlugArgs = {
+  input: DeleteProjectBySlugInput;
 };
 
 
@@ -3139,7 +3139,7 @@ export type Project = Node & {
   developerId?: Maybe<Scalars['UUID']>;
   creditClassId?: Maybe<Scalars['UUID']>;
   metadata?: Maybe<Scalars['JSON']>;
-  handle?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
   onChainId?: Maybe<Scalars['String']>;
   adminWalletId?: Maybe<Scalars['UUID']>;
   verifierId?: Maybe<Scalars['UUID']>;
@@ -3195,8 +3195,8 @@ export type ProjectCondition = {
   creditClassId?: Maybe<Scalars['UUID']>;
   /** Checks for equality with the object’s `metadata` field. */
   metadata?: Maybe<Scalars['JSON']>;
-  /** Checks for equality with the object’s `handle` field. */
-  handle?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `slug` field. */
+  slug?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `onChainId` field. */
   onChainId?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `adminWalletId` field. */
@@ -3227,7 +3227,7 @@ export type ProjectInput = {
   developerId?: Maybe<Scalars['UUID']>;
   creditClassId?: Maybe<Scalars['UUID']>;
   metadata?: Maybe<Scalars['JSON']>;
-  handle?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
   onChainId?: Maybe<Scalars['String']>;
   adminWalletId?: Maybe<Scalars['UUID']>;
   verifierId?: Maybe<Scalars['UUID']>;
@@ -3242,7 +3242,7 @@ export type ProjectPatch = {
   developerId?: Maybe<Scalars['UUID']>;
   creditClassId?: Maybe<Scalars['UUID']>;
   metadata?: Maybe<Scalars['JSON']>;
-  handle?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
   onChainId?: Maybe<Scalars['String']>;
   adminWalletId?: Maybe<Scalars['UUID']>;
   verifierId?: Maybe<Scalars['UUID']>;
@@ -3286,8 +3286,8 @@ export enum ProjectsOrderBy {
   CreditClassIdDesc = 'CREDIT_CLASS_ID_DESC',
   MetadataAsc = 'METADATA_ASC',
   MetadataDesc = 'METADATA_DESC',
-  HandleAsc = 'HANDLE_ASC',
-  HandleDesc = 'HANDLE_DESC',
+  SlugAsc = 'SLUG_ASC',
+  SlugDesc = 'SLUG_DESC',
   OnChainIdAsc = 'ON_CHAIN_ID_ASC',
   OnChainIdDesc = 'ON_CHAIN_ID_DESC',
   AdminWalletIdAsc = 'ADMIN_WALLET_ID_ASC',
@@ -3348,7 +3348,7 @@ export type Query = Node & {
   partyById?: Maybe<Party>;
   partyByWalletId?: Maybe<Party>;
   projectById?: Maybe<Project>;
-  projectByHandle?: Maybe<Project>;
+  projectBySlug?: Maybe<Project>;
   projectByOnChainId?: Maybe<Project>;
   shaclGraphByUri?: Maybe<ShaclGraph>;
   walletById?: Maybe<Wallet>;
@@ -3613,8 +3613,8 @@ export type QueryProjectByIdArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
-export type QueryProjectByHandleArgs = {
-  handle: Scalars['String'];
+export type QueryProjectBySlugArgs = {
+  slug: Scalars['String'];
 };
 
 
@@ -4274,18 +4274,6 @@ export type UpdatePartyPayloadPartyEdgeArgs = {
   orderBy?: Maybe<Array<PartiesOrderBy>>;
 };
 
-/** All input for the `updateProjectByHandle` mutation. */
-export type UpdateProjectByHandleInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** An object where the defined keys will be set on the `Project` being updated. */
-  projectPatch: ProjectPatch;
-  handle: Scalars['String'];
-};
-
 /** All input for the `updateProjectById` mutation. */
 export type UpdateProjectByIdInput = {
   /**
@@ -4308,6 +4296,18 @@ export type UpdateProjectByOnChainIdInput = {
   /** An object where the defined keys will be set on the `Project` being updated. */
   projectPatch: ProjectPatch;
   onChainId: Scalars['String'];
+};
+
+/** All input for the `updateProjectBySlug` mutation. */
+export type UpdateProjectBySlugInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `Project` being updated. */
+  projectPatch: ProjectPatch;
+  slug: Scalars['String'];
 };
 
 /** All input for the `updateProject` mutation. */
@@ -4788,7 +4788,7 @@ export type AllProjectsQuery = (
     { __typename?: 'ProjectsConnection' }
     & { nodes: Array<Maybe<(
       { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'handle' | 'metadata'>
+      & Pick<Project, 'id' | 'slug' | 'metadata'>
       & { creditClassByCreditClassId?: Maybe<(
         { __typename?: 'CreditClass' }
         & Pick<CreditClass, 'id' | 'onChainId'>
@@ -4949,7 +4949,7 @@ export type WalletByAddrQuery = (
 
 export type MoreProjectFieldsFragment = (
   { __typename?: 'Project' }
-  & Pick<Project, 'handle' | 'onChainId' | 'metadata'>
+  & Pick<Project, 'slug' | 'onChainId' | 'metadata'>
   & { creditClassByCreditClassId?: Maybe<(
     { __typename?: 'CreditClass' }
     & Pick<CreditClass, 'uri'>
@@ -5007,36 +5007,6 @@ export type PartyByIdQuery = (
   )> }
 );
 
-export type PartyFieldsFragment = (
-  { __typename?: 'Party' }
-  & Pick<Party, 'id' | 'accountId' | 'creatorId' | 'type' | 'name' | 'description' | 'image' | 'websiteLink' | 'twitterLink'>
-  & { organizationByPartyId?: Maybe<(
-    { __typename?: 'Organization' }
-    & OrganizationFieldsFragment
-  )>, walletByWalletId?: Maybe<(
-    { __typename?: 'Wallet' }
-    & Pick<Wallet, 'id' | 'addr'>
-  )> }
-);
-
-export type OrganizationFieldsFragment = (
-  { __typename?: 'Organization' }
-  & Pick<Organization, 'id'>
-);
-
-export type ProjectByHandleQueryVariables = Exact<{
-  handle: Scalars['String'];
-}>;
-
-
-export type ProjectByHandleQuery = (
-  { __typename?: 'Query' }
-  & { projectByHandle?: Maybe<(
-    { __typename?: 'Project' }
-    & ProjectFieldsFragment
-  )> }
-);
-
 export type ProjectByIdQueryVariables = Exact<{
   id: Scalars['UUID'];
 }>;
@@ -5078,6 +5048,36 @@ export type ProjectByOnChainIdQueryVariables = Exact<{
 export type ProjectByOnChainIdQuery = (
   { __typename?: 'Query' }
   & { projectByOnChainId?: Maybe<(
+    { __typename?: 'Project' }
+    & ProjectFieldsFragment
+  )> }
+);
+
+export type PartyFieldsFragment = (
+  { __typename?: 'Party' }
+  & Pick<Party, 'id' | 'accountId' | 'creatorId' | 'type' | 'name' | 'description' | 'image' | 'websiteLink' | 'twitterLink'>
+  & { organizationByPartyId?: Maybe<(
+    { __typename?: 'Organization' }
+    & OrganizationFieldsFragment
+  )>, walletByWalletId?: Maybe<(
+    { __typename?: 'Wallet' }
+    & Pick<Wallet, 'id' | 'addr'>
+  )> }
+);
+
+export type OrganizationFieldsFragment = (
+  { __typename?: 'Organization' }
+  & Pick<Organization, 'id'>
+);
+
+export type ProjectBySlugQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+export type ProjectBySlugQuery = (
+  { __typename?: 'Query' }
+  & { projectBySlug?: Maybe<(
     { __typename?: 'Project' }
     & ProjectFieldsFragment
   )> }
@@ -5128,7 +5128,7 @@ export type ProjectsByMetadataQuery = (
     { __typename?: 'ProjectsConnection' }
     & { nodes: Array<Maybe<(
       { __typename?: 'Project' }
-      & Pick<Project, 'handle' | 'metadata'>
+      & Pick<Project, 'slug' | 'metadata'>
     )>> }
   )> }
 );
@@ -5242,7 +5242,7 @@ export const PartyWithAccountFieldsFragmentDoc = gql`
     `;
 export const MoreProjectFieldsFragmentDoc = gql`
     fragment moreProjectFields on Project {
-  handle
+  slug
   onChainId
   metadata
   creditClassByCreditClassId {
@@ -5443,7 +5443,7 @@ export const AllProjectsDocument = gql`
   allProjects {
     nodes {
       id
-      handle
+      slug
       metadata
       creditClassByCreditClassId {
         id
@@ -5926,41 +5926,6 @@ export function usePartyByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<
 export type PartyByIdQueryHookResult = ReturnType<typeof usePartyByIdQuery>;
 export type PartyByIdLazyQueryHookResult = ReturnType<typeof usePartyByIdLazyQuery>;
 export type PartyByIdQueryResult = Apollo.QueryResult<PartyByIdQuery, PartyByIdQueryVariables>;
-export const ProjectByHandleDocument = gql`
-    query ProjectByHandle($handle: String!) {
-  projectByHandle(handle: $handle) {
-    ...projectFields
-  }
-}
-    ${ProjectFieldsFragmentDoc}`;
-
-/**
- * __useProjectByHandleQuery__
- *
- * To run a query within a React component, call `useProjectByHandleQuery` and pass it any options that fit your needs.
- * When your component renders, `useProjectByHandleQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useProjectByHandleQuery({
- *   variables: {
- *      handle: // value for 'handle'
- *   },
- * });
- */
-export function useProjectByHandleQuery(baseOptions: Apollo.QueryHookOptions<ProjectByHandleQuery, ProjectByHandleQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ProjectByHandleQuery, ProjectByHandleQueryVariables>(ProjectByHandleDocument, options);
-      }
-export function useProjectByHandleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProjectByHandleQuery, ProjectByHandleQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ProjectByHandleQuery, ProjectByHandleQueryVariables>(ProjectByHandleDocument, options);
-        }
-export type ProjectByHandleQueryHookResult = ReturnType<typeof useProjectByHandleQuery>;
-export type ProjectByHandleLazyQueryHookResult = ReturnType<typeof useProjectByHandleLazyQuery>;
-export type ProjectByHandleQueryResult = Apollo.QueryResult<ProjectByHandleQuery, ProjectByHandleQueryVariables>;
 export const ProjectByIdDocument = gql`
     query ProjectById($id: UUID!) {
   projectById(id: $id) {
@@ -6053,11 +6018,46 @@ export function useProjectByOnChainIdLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type ProjectByOnChainIdQueryHookResult = ReturnType<typeof useProjectByOnChainIdQuery>;
 export type ProjectByOnChainIdLazyQueryHookResult = ReturnType<typeof useProjectByOnChainIdLazyQuery>;
 export type ProjectByOnChainIdQueryResult = Apollo.QueryResult<ProjectByOnChainIdQuery, ProjectByOnChainIdQueryVariables>;
+export const ProjectBySlugDocument = gql`
+    query ProjectBySlug($slug: String!) {
+  projectBySlug(slug: $slug) {
+    ...projectFields
+  }
+}
+    ${ProjectFieldsFragmentDoc}`;
+
+/**
+ * __useProjectBySlugQuery__
+ *
+ * To run a query within a React component, call `useProjectBySlugQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProjectBySlugQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProjectBySlugQuery({
+ *   variables: {
+ *      slug: // value for 'slug'
+ *   },
+ * });
+ */
+export function useProjectBySlugQuery(baseOptions: Apollo.QueryHookOptions<ProjectBySlugQuery, ProjectBySlugQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProjectBySlugQuery, ProjectBySlugQueryVariables>(ProjectBySlugDocument, options);
+      }
+export function useProjectBySlugLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProjectBySlugQuery, ProjectBySlugQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProjectBySlugQuery, ProjectBySlugQueryVariables>(ProjectBySlugDocument, options);
+        }
+export type ProjectBySlugQueryHookResult = ReturnType<typeof useProjectBySlugQuery>;
+export type ProjectBySlugLazyQueryHookResult = ReturnType<typeof useProjectBySlugLazyQuery>;
+export type ProjectBySlugQueryResult = Apollo.QueryResult<ProjectBySlugQuery, ProjectBySlugQueryVariables>;
 export const ProjectsByMetadataDocument = gql`
     query ProjectsByMetadata($metadata: JSON) {
   allProjects(filter: {metadata: {contains: $metadata}}) {
     nodes {
-      handle
+      slug
       metadata
     }
   }

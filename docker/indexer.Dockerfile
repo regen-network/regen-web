@@ -1,8 +1,8 @@
-FROM python:3.9
+FROM python:3.9-slim
 
 # Install dependencies
 RUN apt-get update
-RUN apt-get install libpq-dev postgresql-client -y
+RUN apt-get install git libpq-dev gcc postgresql-client -y
 
 # Set version and chain
 ENV GIT_CHECKOUT='8d3635aa33d4d49db903f947bb357c938d168f8d'

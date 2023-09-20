@@ -36,8 +36,8 @@ RUN echo "AUTH0_CLIENT_SECRET=test" >> .env # cannot be empty
 RUN echo "MAILERLITE_API_KEY=test" >> .env # cannot be empty
 RUN echo "DATABASE_URL=postgres://postgres:password@localhost:5432/server" >> .env
 RUN echo "INDEXER_DATABASE_URL=postgres://postgres:password@localhost:5432/indexer" >> .env
-RUN echo "LEDGER_TENDERMINT_RPC=http://localhost:26657" >> .env
-RUN echo "LEDGER_REST_ENDPOINT=http://localhost:1317" >> .env
+RUN echo "LEDGER_TENDERMINT_RPC=http://127.0.0.1:26657" >> .env
+RUN echo "LEDGER_REST_ENDPOINT=http://127.0.0.1:1317" >> .env
 RUN echo "GRAPHIQL_ENABLED=true" >> .env
 
 # Build server

@@ -22,7 +22,7 @@ import {
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 
 export type ProjectTopSectionProps = {
-  offChainProject?: Maybe<ProjectFieldsFragment>;
+  offChainProject?: Maybe<Partial<ProjectFieldsFragment>>;
   onChainProject?: ProjectInfo;
   projectMetadata?: AnchoredProjectMetadataLD | LegacyProjectMetadataLD;
   projectPageMetadata?: ProjectPageMetadataLD;

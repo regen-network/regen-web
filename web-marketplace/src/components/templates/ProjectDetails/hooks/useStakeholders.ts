@@ -21,7 +21,7 @@ import { getDisplayParty } from '../ProjectDetails.utils';
 
 type Params = {
   anchoredMetadata?: AnchoredProjectMetadataLD;
-  offChainProject?: Maybe<ProjectFieldsFragment>;
+  offChainProject?: Maybe<Partial<ProjectFieldsFragment>>;
   onChainProject?: ProjectInfo;
   creditClassMetadata?: CreditClassMetadataLD;
 };

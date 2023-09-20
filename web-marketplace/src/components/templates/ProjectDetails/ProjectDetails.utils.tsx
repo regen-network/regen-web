@@ -65,6 +65,12 @@ export const findSanityCreditClass = ({
 export const getIsOnChainId = (projectId?: string): boolean =>
   !!projectId && /([A-Z]{1}[\d]+)([-])([\d{3,}])\w+/.test(projectId);
 
+export const getIsOffChainUuid = (projectId?: string): boolean =>
+  !!projectId &&
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+    projectId,
+  );
+
 type ParseOffChainProjectReturn = {
   offChainProjectMetadata?: ProjectPageMetadataLD & LegacyProjectMetadataLD;
   managementActions?: NameImageDescription[];

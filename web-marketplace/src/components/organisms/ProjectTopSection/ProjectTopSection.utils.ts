@@ -138,7 +138,7 @@ export const parseProjectPageMetadata = (
 /* parseOffChainProject  */
 
 export const parseOffChainProject = (
-  project?: Maybe<ProjectFieldsFragment>,
+  project?: Maybe<Partial<ProjectFieldsFragment>>,
 ) => {
   const creditClass = project?.creditClassByCreditClassId;
   const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];

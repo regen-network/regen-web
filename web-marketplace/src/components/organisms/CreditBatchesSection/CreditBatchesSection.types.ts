@@ -9,7 +9,7 @@ import {
 import { UseStateSetter } from 'types/react/use-state';
 
 export type ProjectMiddleSectionProps = {
-  offChainProject?: Maybe<ProjectFieldsFragment>;
+  offChainProject?: Maybe<Partial<ProjectFieldsFragment>>;
   batchData?: {
     batches?: BatchInfoWithSupply[];
     totals?: BatchTotalsForProject;

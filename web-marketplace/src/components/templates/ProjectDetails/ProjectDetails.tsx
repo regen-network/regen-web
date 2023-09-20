@@ -23,6 +23,7 @@ import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/g
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getGeocodingQuery } from 'lib/queries/react-query/mapbox/getGeocodingQuery/getGeocodingQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
+import { getProjectByIdQuery as getOffChainProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getProjectBySlugQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectBySlugQuery/getProjectBySlugQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
@@ -60,6 +61,7 @@ import { getMediaBoxStyles } from './ProjectDetails.styles';
 import {
   findSanityCreditClass,
   formatOtcCardData,
+  getIsOffChainUuid,
   getIsOnChainId,
   getProjectGalleryPhotos,
   parseMedia,
@@ -103,7 +105,9 @@ function ProjectDetails(): JSX.Element {
 
   // first, check if projectId is an off-chain project handle (for legacy projects like "wilmot")
   // or an chain project id
+  // or and off-chain project with an UUID
   const isOnChainId = getIsOnChainId(projectId);
+  const isOffChainUuid = getIsOffChainUuid(projectId);
 
   const { data: sanityProjectData } = useQuery(
     getProjectByIdQuery({
@@ -118,8 +122,8 @@ function ProjectDetails(): JSX.Element {
     useQuery(
       getProjectBySlugQuery({
         client: graphqlClient,
-        enabled: !!projectId && !isOnChainId,
         slug: projectId as string,
+        enabled: !!projectId && !isOnChainId && !isOffChainUuid,
       }),
     );
 
@@ -135,6 +139,18 @@ function ProjectDetails(): JSX.Element {
       client: graphqlClient,
       enabled: !!onChainProjectId,
       onChainId: onChainProjectId as string,
+    }),
+  );
+
+  // else fetch project by uuid
+  const {
+    data: offchainProjectById,
+    isInitialLoading: loadingOffchainProjectById,
+  } = useQuery(
+    getOffChainProjectByIdQuery({
+      client: graphqlClient,
+      enabled: !!isOffChainUuid,
+      id: projectId,
     }),
   );
 
@@ -160,7 +176,8 @@ function ProjectDetails(): JSX.Element {
 
   const offChainProject = isOnChainId
     ? projectByOnChainId?.data.projectByOnChainId
-    : ProjectBySlug?.data.projectBySlug;
+    : offchainProjectById?.data.projectById ??
+      ProjectBySlug?.data.projectBySlug;
 
   /* Credit class */
 
@@ -245,7 +262,10 @@ function ProjectDetails(): JSX.Element {
     geocodingJurisdictionData,
   });
 
-  const loadingDb = loadingProjectByOnChainId || loadingProjectBySlug;
+  const loadingDb =
+    loadingProjectByOnChainId ||
+    loadingProjectBySlug ||
+    loadingOffchainProjectById;
 
   const { isBuyFlowDisabled, projectsWithOrderData } = useBuySellOrderData({
     projectId: onChainProjectId,

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.1](https://github.com/regen-network/regen-web/compare/v1.12.0...v1.12.1) (2023-09-20)
+
+### Bug Fixes
+
+- featured projetcs card link ([b1a4359](https://github.com/regen-network/regen-web/commit/b1a4359aa62743c2d81009770673d7e4b41492ab))
+
 # [1.12.0](https://github.com/regen-network/regen-web/compare/v1.11.0...v1.12.0) (2023-09-19)
 
 ### Bug Fixes

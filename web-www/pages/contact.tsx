@@ -101,9 +101,9 @@ export default function ContactPage({
                 ) => {
                   setSubmitting(true);
                   const apiUri: string =
-                    process.env.GATSBY_API_URI || 'http://localhost:5000';
+                    process.env.NEXT_API_URI || 'http://localhost:5000';
                   axios
-                    .post(`${apiUri}/contact`, {
+                    .post(`${apiUri}/website/v1/contact`, {
                       email,
                       name,
                       orgName,

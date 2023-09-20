@@ -5,6 +5,7 @@ import { useApolloClient } from '@apollo/client';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { Box, Card, CardMedia, useMediaQuery, useTheme } from '@mui/material';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { omit } from 'lodash';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/ReviewCard';
@@ -24,6 +25,7 @@ import {
   qudtUnit,
 } from 'lib/rdf';
 
+import { OMITTED_METADATA_KEYS } from 'pages/ProjectMetadata/ProjectMetadata.config';
 import {
   STORY_LABEL,
   STORY_TITLE_LABEL,
@@ -283,7 +285,10 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
               overflowY: 'scroll',
             })}
           >
-            <pre>{!!metadata && JSON.stringify(metadata, null, 2)}</pre>
+            <pre>
+              {!!metadata &&
+                JSON.stringify(omit(metadata, OMITTED_METADATA_KEYS), null, 2)}
+            </pre>
           </Box>
         )}
       </ReviewCard>

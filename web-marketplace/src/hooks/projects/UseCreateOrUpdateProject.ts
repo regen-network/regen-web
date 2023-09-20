@@ -52,7 +52,10 @@ export const useCreateOrUpdateProject = () => {
           variables: {
             input: {
               id: offChainProjectId,
-              projectPatch,
+              projectPatch: {
+                adminWalletId: walletData?.walletByAddr?.id,
+                ...projectPatch,
+              },
             },
           },
         });

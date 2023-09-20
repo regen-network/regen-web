@@ -1,7 +1,10 @@
 import { useCallback } from 'react';
-import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import { PartyType, ProjectPatch } from 'generated/graphql';
+import {
+  PartyType,
+  ProjectPatch,
+  useCreateWalletMutation,
+} from 'generated/graphql';
 import { NestedPartial } from 'types/nested-partial';
 import {
   AnchoredProjectMetadataBaseLD,
@@ -19,7 +22,6 @@ import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';
 
 interface Props {
   offChainProject?: OffChainProject;
-  onChainProject?: ProjectInfo;
   metadata?: NestedPartial<ProjectMetadataLD>;
   projectEditSubmit: UseProjectEditSubmitParams;
   isEdit?: boolean;
@@ -41,7 +43,6 @@ export type Return = {
 const useRolesSubmit = ({
   projectEditSubmit,
   offChainProject,
-  onChainProject,
   metadata,
   isEdit,
   metadataReload,
@@ -49,6 +50,7 @@ const useRolesSubmit = ({
   admin,
 }: Props): Return => {
   const { createOrUpdateProject } = useCreateOrUpdateProject();
+  const [createWallet] = useCreateWalletMutation();
 
   const rolesSubmit = useCallback(
     async ({
@@ -83,6 +85,21 @@ const useRolesSubmit = ({
           doUpdateAdmin = true;
           if (adminWalletId) {
             projectPatch.adminWalletId = adminWalletId;
+          } else {
+            // Create wallet
+            const walletRes = await createWallet({
+              variables: {
+                input: {
+                  wallet: {
+                    addr: values.admin,
+                  },
+                },
+              },
+            });
+            const newAdminWalletId = walletRes.data?.createWallet?.wallet?.id;
+            if (newAdminWalletId) {
+              projectPatch.adminWalletId = newAdminWalletId;
+            }
           }
         }
         const newMetadata = {

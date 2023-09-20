@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/regen-network/regen-web/compare/v1.11.0...v1.12.0) (2023-09-19)
+
+### Bug Fixes
+
+- A user should be able to add/update a project created outside the app ([#2060](https://github.com/regen-network/regen-web/issues/2060)) ([cb97a1e](https://github.com/regen-network/regen-web/commit/cb97a1e0ac45d6ca27916178d0b2614475372779))
+- clear cache for getProjectById after select credit class step ([#2062](https://github.com/regen-network/regen-web/issues/2062)) ([140409f](https://github.com/regen-network/regen-web/commit/140409f282601652ff9b0754182ac860ec867926))
+- entities spacing and refactor with Stakeholders component ([#2070](https://github.com/regen-network/regen-web/issues/2070)) ([ac52d2f](https://github.com/regen-network/regen-web/commit/ac52d2f5b86f3ead0c2e9ece50ffbf3c6851f9f9))
+- handle projects with invalide medata ([#2031](https://github.com/regen-network/regen-web/issues/2031)) ([58c5a92](https://github.com/regen-network/regen-web/commit/58c5a92d346f3c156550a9977630b900242d10df))
+- handle save and exit in creation form ([#2078](https://github.com/regen-network/regen-web/issues/2078)) ([1e4a966](https://github.com/regen-network/regen-web/commit/1e4a966061a6cbbca5d0cbe040edfda7d0932451))
+- key in activity table ([#2095](https://github.com/regen-network/regen-web/issues/2095)) ([b53941f](https://github.com/regen-network/regen-web/commit/b53941f27cd6c94cfb4d25adc60bb9abf9039d64))
+- project cards loading ([#2079](https://github.com/regen-network/regen-web/issues/2079)) ([57ff309](https://github.com/regen-network/regen-web/commit/57ff309267f772659687e41286b53bd988bfc075))
+- Project creation metadata wording ([#2059](https://github.com/regen-network/regen-web/issues/2059)) ([64c2936](https://github.com/regen-network/regen-web/commit/64c2936b339cb2e89ce6bd03e3a3c96b395ad0dc))
+- project edit bg color and form border color and registry header borderBottom ([#2048](https://github.com/regen-network/regen-web/issues/2048)) ([e23f66c](https://github.com/regen-network/regen-web/commit/e23f66ce19b4f32c1300e1e27e5dd8125b44654d))
+- react-player issue ([#2056](https://github.com/regen-network/regen-web/issues/2056)) ([49611f6](https://github.com/regen-network/regen-web/commit/49611f61939cfc5ad3a405ffa3dffe547f4042a3))
+- redirect onchain project to edit flow ([#2050](https://github.com/regen-network/regen-web/issues/2050)) ([fe5d213](https://github.com/regen-network/regen-web/commit/fe5d213e6a9fd1eaa4d37bf7b1e310316cb772b6))
+- spacing credit class + handle empty sections ([#2028](https://github.com/regen-network/regen-web/issues/2028)) ([bac0a0c](https://github.com/regen-network/regen-web/commit/bac0a0c003a0b55c7afa76647fe77e4d33a0d779))
+- storybook local environment ([#2038](https://github.com/regen-network/regen-web/issues/2038)) ([7d46d23](https://github.com/regen-network/regen-web/commit/7d46d232d0b80e4c2dd04f53c65f77272df574b5))
+- trigger form validation on preview photo upload ([#2069](https://github.com/regen-network/regen-web/issues/2069)) ([bb2faff](https://github.com/regen-network/regen-web/commit/bb2faff59bcefb3e9c8c63505b836c413edbd6cb))
+- unable to load project with initial metadata ([#2043](https://github.com/regen-network/regen-web/issues/2043)) ([2ff7495](https://github.com/regen-network/regen-web/commit/2ff749506db314c910e7732a75f80e142568dafc))
+- unhandled https require ([#2066](https://github.com/regen-network/regen-web/issues/2066)) ([b63b52d](https://github.com/regen-network/regen-web/commit/b63b52dba1de1242c17d86094151d45795e18aca))
+- update offchainProject props in ChooseCreditClass ([#2091](https://github.com/regen-network/regen-web/issues/2091)) ([424be8d](https://github.com/regen-network/regen-web/commit/424be8d6605db3284622f59e65eb9aeef65f605a))
+
+### Features
+
+- add jurisdiction fallback ([#2033](https://github.com/regen-network/regen-web/issues/2033)) ([7b5e232](https://github.com/regen-network/regen-web/commit/7b5e232a1868f74d81e3db3f094f45746059d697))
+- add percentage on project creation ([#2082](https://github.com/regen-network/regen-web/issues/2082)) ([4d78142](https://github.com/regen-network/regen-web/commit/4d78142ee4725a61bd1335165a591441ed2678dc))
+- add program registry to cards ([#2015](https://github.com/regen-network/regen-web/issues/2015)) ([25aca9d](https://github.com/regen-network/regen-web/commit/25aca9dd3a0c03b92fe5b1bad50a1da43b796364))
+- add project impact description ([#2067](https://github.com/regen-network/regen-web/issues/2067)) ([71ec31b](https://github.com/regen-network/regen-web/commit/71ec31bf0c0c353e76f340e9f3b49e8ebf16206b))
+- Add support for measured/project co-benefits and use default impact image ([#2022](https://github.com/regen-network/regen-web/issues/2022)) ([ba6a057](https://github.com/regen-network/regen-web/commit/ba6a057be382f30212c60f78bb173e93e47a22f4))
+- add tracking events for filterPermissionlessCredits and filterCreditClass ([#2065](https://github.com/regen-network/regen-web/issues/2065)) ([17807da](https://github.com/regen-network/regen-web/commit/17807da1045b4f40ce993a2559cc4b9a219f9033))
+- adjust spacing project page ([#2027](https://github.com/regen-network/regen-web/issues/2027)) ([bfc4b8a](https://github.com/regen-network/regen-web/commit/bfc4b8a446eb26ea6f01af4cdf5505d5411f967d))
+- complete project form migration ([#2055](https://github.com/regen-network/regen-web/issues/2055)) ([75cebea](https://github.com/regen-network/regen-web/commit/75cebea5684d6ab6b2ac0ce311e1cbe70bfdd472))
+- credit classes issuers perf ([#2049](https://github.com/regen-network/regen-web/issues/2049)) ([76e8842](https://github.com/regen-network/regen-web/commit/76e8842bbb59196c054383c1a08c35f82aee3a16))
+- display community projects on credit class page ([#2044](https://github.com/regen-network/regen-web/issues/2044)) ([0c604d1](https://github.com/regen-network/regen-web/commit/0c604d1ba95c26e18e6c87c17ac4e04293675ce3))
+- Edit project admin from the Roles edit form ([#2054](https://github.com/regen-network/regen-web/issues/2054)) ([aabf541](https://github.com/regen-network/regen-web/commit/aabf5412a826ad49a1ff4f428b5dcf8f9594cee1))
+- handle profile without address ([#2086](https://github.com/regen-network/regen-web/issues/2086)) ([10582f3](https://github.com/regen-network/regen-web/commit/10582f37319d4df8dae98cb6cd3372e0a4589413))
+- move buyers page www ([#2026](https://github.com/regen-network/regen-web/issues/2026)) ([b77d538](https://github.com/regen-network/regen-web/commit/b77d538425338125c7e9fac31341ffe974de500a))
+- project credit batches perf ([#2041](https://github.com/regen-network/regen-web/issues/2041)) ([d62f8a9](https://github.com/regen-network/regen-web/commit/d62f8a956fc91543b89b6eef3e3cc5d405ea31c2))
+- save project creation current step in local storage ([#2080](https://github.com/regen-network/regen-web/issues/2080)) ([458d80d](https://github.com/regen-network/regen-web/commit/458d80d5e3c6c0896e3d5f3b9b561ce0fed7dfb8))
+- use indexer for activity page ([#2018](https://github.com/regen-network/regen-web/issues/2018)) ([6c49ed8](https://github.com/regen-network/regen-web/commit/6c49ed81b181a5c8a0f1bf71f4537c8e87f5016a))
+
 # [1.11.0](https://github.com/regen-network/regen-web/compare/v1.10.0...v1.11.0) (2023-08-09)
 
 ### Bug Fixes

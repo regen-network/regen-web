@@ -17,6 +17,7 @@ import { getHashUrl } from 'lib/block-explorer';
 import { client } from 'lib/clients/sanity';
 import { getBuyModalOptionsQuery } from 'lib/queries/react-query/sanity/getBuyModalOptionsQuery/getBuyModalOptionsQuery';
 import { Track } from 'lib/tracker/types';
+import { useWallet } from 'lib/wallet/wallet';
 
 import useBuySellOrderSubmit from 'pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit';
 import { useCheckSellOrderAvailabilty } from 'pages/Marketplace/Storefront/hooks/useCheckSellOrderAvailabilty';
@@ -67,6 +68,7 @@ export const BuySellOrderFlow = ({
   const [txModalHeader, setTxModalHeader] = useState<string>('');
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const { sellOrders, refetchSellOrders } = useFetchSellOrders();
+  const { isConnected, wallet } = useWallet();
   const { data: buyModalOptionsContent } = useQuery(
     getBuyModalOptionsQuery({ sanityClient: client }),
   );
@@ -119,7 +121,6 @@ export const BuySellOrderFlow = ({
   const {
     signAndBroadcast,
     setDeliverTxResponse,
-    wallet,
     deliverTxResponse,
     error,
     setError,
@@ -217,13 +218,13 @@ export const BuySellOrderFlow = ({
    * ui update effect
    */
   useEffect(() => {
-    if (isFlowStarted && accountAddress) {
+    if (isFlowStarted && isConnected) {
       refetchSellOrders();
       setIsBuyModalOpen(true);
-    } else if (isFlowStarted && !accountAddress) {
+    } else if (isFlowStarted && !isConnected) {
       setIsBuyModalOptionsOpen(true);
     }
-  }, [isFlowStarted, accountAddress, refetchSellOrders]);
+  }, [isFlowStarted, isConnected, refetchSellOrders]);
 
   return (
     <>

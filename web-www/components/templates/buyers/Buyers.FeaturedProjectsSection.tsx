@@ -42,7 +42,11 @@ const BuyersFeaturedProjectsSection = ({ content, sx }: Props) => {
           return (
             <ProjectCard
               key={project?.projectId}
-              onClick={() => router.push(`/project/${project?.projectId}`)}
+              onClick={() =>
+                router.push(
+                  `https://app.regen.network/project/${project?.projectId}`,
+                )
+              }
               imgSrc={
                 project?.image?.image?.asset?.url ??
                 project?.image?.imageHref ??

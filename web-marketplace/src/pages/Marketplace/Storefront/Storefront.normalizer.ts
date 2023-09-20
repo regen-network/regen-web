@@ -3,7 +3,6 @@ import { BatchInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/q
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 
-import { GECKO_PRICES } from 'pages/Projects/hooks/useProjectsSellOrders.types';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
@@ -83,7 +82,6 @@ type NormalizedSellOrderProps = {
     string,
     { name: string; classIdOrName: string; classId: string }
   >;
-  geckoPrices?: GECKO_PRICES;
 };
 
 export const normalizeSellOrders = ({

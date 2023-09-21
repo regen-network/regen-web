@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { NextSeo } from 'next-seo';
 
 import Banner from 'web-components/lib/components/banner';
+import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { BlockContent } from 'web-components/lib/components/block-content';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Card from 'web-components/lib/components/cards/Card';
@@ -97,7 +98,7 @@ export default function ContactPage({
                 }}
                 onSubmit={(
                   { requestType, email, name, orgName, message },
-                  { setSubmitting, resetForm },
+                  { setSubmitting, resetForm, setStatus },
                 ) => {
                   setSubmitting(true);
                   const apiUri: string =
@@ -111,10 +112,12 @@ export default function ContactPage({
                       message,
                     })
                     .then(resp => {
+                      setStatus(null);
                       setSubmitting(false);
                       setTimeout(resetForm, bannerDuration);
                     })
                     .catch(e => {
+                      setStatus({ serverError: e });
                       setSubmitting(false);
                     });
                 }}
@@ -125,6 +128,7 @@ export default function ContactPage({
                   submitForm,
                   isSubmitting,
                   submitCount,
+                  status,
                 }) => {
                   return (
                     <div>
@@ -219,12 +223,24 @@ export default function ContactPage({
                           send
                         </ContainedButton>
                       </Form>
-                      {submitCount > 0 && !isSubmitting && (
-                        <Banner
-                          duration={bannerDuration}
-                          text="Your message was sent to the Regen team!"
-                        />
-                      )}
+                      {submitCount > 0 &&
+                        !isSubmitting &&
+                        !status?.serverError && (
+                          <Banner
+                            duration={bannerDuration}
+                            text="Your message was sent to the Regen team!"
+                          />
+                        )}
+                      {submitCount > 0 &&
+                        !isSubmitting &&
+                        !!status?.serverError && (
+                          <ErrorBanner
+                            text={
+                              status.serverError.message ||
+                              'Sorry, something went wrong!'
+                            }
+                          />
+                        )}
                     </div>
                   );
                 }}

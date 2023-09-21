@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.2](https://github.com/regen-network/regen-web/compare/v1.12.1...v1.12.2) (2023-09-21)
+
+### Bug Fixes
+
+- display error banner ([2b60580](https://github.com/regen-network/regen-web/commit/2b60580226b412cea478b563be383d2c60115034))
+- use existing env ([4513a07](https://github.com/regen-network/regen-web/commit/4513a0725d142eab384a4528f54e0aeafad6bb07))
+- website contact form ([649528b](https://github.com/regen-network/regen-web/commit/649528b89d0c25047c8c5424b9c78d7f0132950e))
+
 ## [1.12.1](https://github.com/regen-network/regen-web/compare/v1.12.0...v1.12.1) (2023-09-20)
 
 ### Bug Fixes

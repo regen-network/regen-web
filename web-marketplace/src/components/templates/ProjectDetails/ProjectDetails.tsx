@@ -130,6 +130,7 @@ function ProjectDetails(): JSX.Element {
   const ProjectBySlugOnChainId =
     ProjectBySlug?.data.projectBySlug?.onChainId ?? undefined;
   const onChainProjectId = isOnChainId ? projectId : ProjectBySlugOnChainId;
+
   // else fetch project by onChainId
   const {
     data: projectByOnChainId,
@@ -144,7 +145,7 @@ function ProjectDetails(): JSX.Element {
 
   // else fetch project by uuid
   const {
-    data: offchainProjectById,
+    data: offchainProjectByIdData,
     isInitialLoading: loadingOffchainProjectById,
   } = useQuery(
     getOffChainProjectByIdQuery({
@@ -174,10 +175,14 @@ function ProjectDetails(): JSX.Element {
     }),
   );
 
+  const offChainProjectById = offchainProjectByIdData?.data.projectById;
+  const publishedOffchainProjectById = offChainProjectById?.published
+    ? offChainProjectById
+    : undefined;
+
   const offChainProject = isOnChainId
     ? projectByOnChainId?.data.projectByOnChainId
-    : offchainProjectById?.data.projectById ??
-      ProjectBySlug?.data.projectBySlug;
+    : publishedOffchainProjectById ?? ProjectBySlug?.data.projectBySlug;
 
   /* Credit class */
 

@@ -6,6 +6,7 @@ fragment projectFields on Project {
   onChainId
   metadata
   approved
+  published
   creditClassByCreditClassId {
     onChainId
     partyByRegistryId {

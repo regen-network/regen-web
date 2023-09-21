@@ -5026,7 +5026,7 @@ export type ProjectByIdQuery = (
   { __typename?: 'Query' }
   & { projectById?: Maybe<(
     { __typename?: 'Project' }
-    & Pick<Project, 'id' | 'metadata' | 'developerId' | 'onChainId'>
+    & Pick<Project, 'id' | 'metadata' | 'developerId' | 'onChainId' | 'published'>
     & { walletByAdminWalletId?: Maybe<(
       { __typename?: 'Wallet' }
       & Pick<Wallet, 'addr'>
@@ -5095,7 +5095,7 @@ export type ProjectBySlugQuery = (
 
 export type ProjectFieldsFragment = (
   { __typename?: 'Project' }
-  & Pick<Project, 'id' | 'onChainId' | 'metadata' | 'approved'>
+  & Pick<Project, 'id' | 'onChainId' | 'metadata' | 'approved' | 'published'>
   & { walletByAdminWalletId?: Maybe<(
     { __typename?: 'Wallet' }
     & Pick<Wallet, 'addr'>
@@ -5299,6 +5299,7 @@ export const ProjectFieldsFragmentDoc = gql`
   onChainId
   metadata
   approved
+  published
   creditClassByCreditClassId {
     onChainId
     partyByRegistryId {
@@ -5950,6 +5951,7 @@ export const ProjectByIdDocument = gql`
     metadata
     developerId
     onChainId
+    published
     partyByDeveloperId {
       ...partyFields
     }

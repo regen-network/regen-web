@@ -23,8 +23,8 @@ import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/g
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getGeocodingQuery } from 'lib/queries/react-query/mapbox/getGeocodingQuery/getGeocodingQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
-import { getProjectByHandleQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByHandleQuery/getProjectByHandleQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
+import { getProjectBySlugQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectBySlugQuery/getProjectBySlugQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery';
@@ -113,19 +113,19 @@ function ProjectDetails(): JSX.Element {
     }),
   );
 
-  // if projectId is handle, query project by handle
-  const { data: projectByHandle, isInitialLoading: loadingProjectByHandle } =
+  // if projectId is slug, query project by slug
+  const { data: ProjectBySlug, isInitialLoading: loadingProjectBySlug } =
     useQuery(
-      getProjectByHandleQuery({
+      getProjectBySlugQuery({
         client: graphqlClient,
         enabled: !!projectId && !isOnChainId,
-        handle: projectId as string,
+        slug: projectId as string,
       }),
     );
 
-  const projectByHandleOnChainId =
-    projectByHandle?.data.projectByHandle?.onChainId ?? undefined;
-  const onChainProjectId = isOnChainId ? projectId : projectByHandleOnChainId;
+  const ProjectBySlugOnChainId =
+    ProjectBySlug?.data.projectBySlug?.onChainId ?? undefined;
+  const onChainProjectId = isOnChainId ? projectId : ProjectBySlugOnChainId;
   // else fetch project by onChainId
   const {
     data: projectByOnChainId,
@@ -160,7 +160,7 @@ function ProjectDetails(): JSX.Element {
 
   const offChainProject = isOnChainId
     ? projectByOnChainId?.data.projectByOnChainId
-    : projectByHandle?.data.projectByHandle;
+    : ProjectBySlug?.data.projectBySlug;
 
   /* Credit class */
 
@@ -245,7 +245,7 @@ function ProjectDetails(): JSX.Element {
     geocodingJurisdictionData,
   });
 
-  const loadingDb = loadingProjectByOnChainId || loadingProjectByHandle;
+  const loadingDb = loadingProjectByOnChainId || loadingProjectBySlug;
 
   const { isBuyFlowDisabled, projectsWithOrderData } = useBuySellOrderData({
     projectId: onChainProjectId,

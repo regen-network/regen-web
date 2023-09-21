@@ -21,8 +21,8 @@ fragment organizationFields on Organization {
   id
 }
 
-query ProjectByHandle($handle: String!) {
-  projectByHandle(handle: $handle) {
+query ProjectBySlug($slug: String!) {
+  projectBySlug(slug: $slug) {
     ...projectFields
   }
 }

@@ -37,15 +37,15 @@ export const normalizeProjectsInfosByHandleMap = ({
     const creditClass = project?.creditClassByCreditClassId;
     const creditClassVersion = creditClass?.creditClassVersionsById?.nodes[0];
 
-    if (project?.handle) {
+    if (project?.slug) {
       const creditClassSanity = findSanityCreditClass({
         sanityCreditClassData,
         creditClassIdOrUrl:
           creditClassVersion?.metadata?.['http://schema.org/url']?.['@value'],
       });
 
-      projectsMap.set(project?.handle, {
-        name: project?.handle,
+      projectsMap.set(project?.slug, {
+        name: project?.slug,
         classIdOrName: creditClassSanity?.nameRaw ?? '',
         classId: isVCSProject
           ? creditClass?.onChainId

@@ -102,7 +102,7 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
   return isMobile ? (
     <div className={styles.swipe}>
       {props.projects.map((project, i) => {
-        const projectId = project?.onChainId || project?.handle;
+        const projectId = project?.onChainId || project?.slug;
         return (
           project && (
             <Link
@@ -123,7 +123,7 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
       spacing={5}
     >
       {props.projects.map((project, i) => {
-        const projectId = project?.onChainId || project?.handle;
+        const projectId = project?.onChainId || project?.slug;
         return (
           project && (
             <Grid

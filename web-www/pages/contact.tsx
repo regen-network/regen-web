@@ -130,6 +130,7 @@ export default function ContactPage({
                   submitCount,
                   status,
                 }) => {
+                  const hasBeenSubmitted = submitCount > 0 && !isSubmitting;
                   return (
                     <div>
                       <Form translate="yes">
@@ -223,24 +224,20 @@ export default function ContactPage({
                           send
                         </ContainedButton>
                       </Form>
-                      {submitCount > 0 &&
-                        !isSubmitting &&
-                        !status?.serverError && (
-                          <Banner
-                            duration={bannerDuration}
-                            text="Your message was sent to the Regen team!"
-                          />
-                        )}
-                      {submitCount > 0 &&
-                        !isSubmitting &&
-                        !!status?.serverError && (
-                          <ErrorBanner
-                            text={
-                              status.serverError.message ||
-                              'Sorry, something went wrong!'
-                            }
-                          />
-                        )}
+                      {hasBeenSubmitted && !status?.serverError && (
+                        <Banner
+                          duration={bannerDuration}
+                          text="Your message was sent to the Regen team!"
+                        />
+                      )}
+                      {hasBeenSubmitted && !!status?.serverError && (
+                        <ErrorBanner
+                          text={
+                            status.serverError.message ||
+                            'Sorry, something went wrong!'
+                          }
+                        />
+                      )}
                     </div>
                   );
                 }}

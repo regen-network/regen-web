@@ -224,33 +224,6 @@ export const getEcocreditTxs = async (): Promise<TxResponse[]> => {
   });
 };
 
-type GetBatchesWithSupplyParams = {
-  creditClassId?: string | null;
-  params?: URLSearchParams;
-  withAllData?: boolean;
-  dataClient?: DataQueryClientImpl;
-  ecocreditClient?: EcocreditQueryClientImpl;
-};
-
-export const getBatchesWithSupply = async ({
-  creditClassId,
-  params,
-  withAllData = true,
-  dataClient,
-  ecocreditClient,
-}: GetBatchesWithSupplyParams): Promise<{
-  data: BatchInfoWithSupply[];
-}> => {
-  const batches = await queryEcoBatches(creditClassId, params);
-  const batchesWithData = await addDataToBatches({
-    batches,
-    withAllData,
-    dataClient,
-    ecocreditClient,
-  });
-  return { data: batchesWithData };
-};
-
 export const getBatchesByProjectWithSupply = async (
   projectId?: string | null,
   dataClient?: DataQueryClientImpl,
@@ -830,7 +803,7 @@ export const queryBatches = async ({
 
 // BatchesByClass
 
-interface QueryBatchesByClassProps extends EcocreditQueryClientProps {
+export interface QueryBatchesByClassProps extends EcocreditQueryClientProps {
   request: DeepPartial<QueryBatchesByClassRequest>;
 }
 
@@ -1024,51 +997,6 @@ export const queryParams = async ({
     throw new Error(
       `Error in the Params query of the ledger ecocredit module: ${err}`,
     );
-  }
-};
-
-/**
- *
- * Backwards compatibility, will be removed
- *
- */
-
-// queryEcoBatches consumes Regen REST endpoints - will be replaced with regen-js
-export const queryEcoBatches = async (
-  creditClassId?: string | null,
-  params?: URLSearchParams,
-): Promise<BatchInfo[]> => {
-  const client = await getQueryClient();
-  try {
-    // With regen-ledger v4.0, we first have to query all classes and then batches per class.
-    // The url pagination params are just ignored here since they can't really be used.
-    // Indeed we cannot know in advance how many credit classes should be queried initially
-    // to get the desired number of credit batches.
-    let batchInfos: BatchInfo[] = [];
-    if (!creditClassId) {
-      const { classes } = await queryEcoClasses();
-      const arr = await Promise.all(
-        classes.map(async creditClass => {
-          const { batches } = await queryBatchesByClass({
-            client,
-            request: { classId: creditClass.id },
-          });
-          return batches;
-        }),
-      );
-
-      batchInfos = arr.flat();
-    } else {
-      const { batches } = await queryBatchesByClass({
-        client,
-        request: { classId: creditClassId },
-      });
-      return batches;
-    }
-
-    return batchInfos;
-  } catch (err) {
-    throw new Error(`Error fetching batches: ${err}`);
   }
 };
 

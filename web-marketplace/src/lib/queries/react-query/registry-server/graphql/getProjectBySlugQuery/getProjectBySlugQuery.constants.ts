@@ -1,5 +1,5 @@
-export const getProjectBySlugKey = (handle: string): string[] => [
+export const getProjectBySlugKey = (slug: string): string[] => [
   'graphql',
   'ProjectBySlug',
-  handle,
+  slug,
 ];

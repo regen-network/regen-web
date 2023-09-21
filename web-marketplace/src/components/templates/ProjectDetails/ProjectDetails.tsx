@@ -113,7 +113,7 @@ function ProjectDetails(): JSX.Element {
     }),
   );
 
-  // if projectId is handle, query project by handle
+  // if projectId is slug, query project by slug
   const { data: ProjectBySlug, isInitialLoading: loadingProjectBySlug } =
     useQuery(
       getProjectBySlugQuery({

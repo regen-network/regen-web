@@ -23,7 +23,9 @@ import {
   profileVariantMapping,
 } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { Link } from 'components/atoms';
+import WithLoader from 'components/atoms/WithLoader';
 
+import { ProfileNotFound } from './EcocreditsByAccount.NotFound';
 import { ecocreditsByAccountStyles } from './EcocreditsByAccount.styles';
 import { useProfileData } from './hooks/useProfileData';
 
@@ -31,8 +33,9 @@ export const EcocreditsByAccount = (): JSX.Element => {
   const { accountAddressOrId } = useParams<{ accountAddressOrId: string }>();
   const location = useLocation();
 
-  const { address, party } = useProfileData();
+  const { address, party, isLoading } = useProfileData();
   const { avatarImage, backgroundImage } = getUserImages({ party });
+  const isProfileNotFound = !address && !party;
 
   const socialsLinks = useMemo(() => getSocialsLinks({ party }), [party]);
 
@@ -66,41 +69,58 @@ export const EcocreditsByAccount = (): JSX.Element => {
   );
 
   return (
-    <>
-      <ProfileHeader
-        name={party?.name ? party?.name : DEFAULT_NAME}
-        backgroundImage={backgroundImage}
-        avatar={avatarImage}
-        infos={{
-          addressLink: {
-            href: address
-              ? getAccountUrl(accountAddressOrId, true)
-              : `/profiles/${accountAddressOrId}/portfolio`,
-            text: address ? truncate(accountAddressOrId) : '',
-          },
-          description: party?.description?.trimEnd() ?? '',
-          socialsLinks,
-        }}
-        editLink=""
-        variant={party?.type ? profileVariantMapping[party.type] : 'individual'}
-        LinkComponent={Link}
-      />
-      <Box sx={{ backgroundColor: 'grey.50' }}>
-        <Section sx={{ root: { pt: { xs: 15 } } }}>
-          <IconTabs
-            aria-label="public profile tabs"
-            tabs={tabs}
-            linkComponent={Link}
-            activeTab={activeTab}
-            mobileFullWidth
-          />
-          <Flex sx={{ ...ecocreditsByAccountStyles.padding }}>
-            <Box sx={{ width: '100%' }}>
-              <Outlet />
+    <WithLoader
+      isLoading={isLoading}
+      sx={{
+        py: 10,
+        display: 'flex',
+        justifyContent: 'center',
+        height: '100vh',
+      }}
+    >
+      <>
+        {isProfileNotFound && <ProfileNotFound sx={{ mt: 22.5, mb: 27.25 }} />}
+        {!isProfileNotFound && (
+          <>
+            <ProfileHeader
+              name={party?.name ? party?.name : DEFAULT_NAME}
+              backgroundImage={backgroundImage}
+              avatar={avatarImage}
+              infos={{
+                addressLink: {
+                  href: address
+                    ? getAccountUrl(accountAddressOrId, true)
+                    : `/profiles/${accountAddressOrId}/portfolio`,
+                  text: address ? truncate(accountAddressOrId) : '',
+                },
+                description: party?.description?.trimEnd() ?? '',
+                socialsLinks,
+              }}
+              editLink=""
+              variant={
+                party?.type ? profileVariantMapping[party.type] : 'individual'
+              }
+              LinkComponent={Link}
+            />
+            <Box sx={{ backgroundColor: 'grey.50' }}>
+              <Section sx={{ root: { pt: { xs: 15 } } }}>
+                <IconTabs
+                  aria-label="public profile tabs"
+                  tabs={tabs}
+                  linkComponent={Link}
+                  activeTab={activeTab}
+                  mobileFullWidth
+                />
+                <Flex sx={{ ...ecocreditsByAccountStyles.padding }}>
+                  <Box sx={{ width: '100%' }}>
+                    <Outlet />
+                  </Box>
+                </Flex>
+              </Section>
             </Box>
-          </Flex>
-        </Section>
-      </Box>
-    </>
+          </>
+        )}
+      </>
+    </WithLoader>
   );
 };

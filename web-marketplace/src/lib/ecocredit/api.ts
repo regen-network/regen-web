@@ -2,7 +2,6 @@ import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1
 import {
   GetTxsEventRequest,
   GetTxsEventResponse,
-  OrderBy,
   ServiceClientImpl,
 } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import { QueryClientImpl as DataQueryClientImpl } from '@regen-network/api/lib/generated/regen/data/v1/query';
@@ -197,31 +196,6 @@ export const getEcocreditsForAccount = async ({
   } catch (err) {
     throw new Error(`Could not get ecocredits for account ${address}, ${err}`);
   }
-};
-
-export const getEcocreditTxs = async (): Promise<TxResponse[]> => {
-  let allTxs: TxResponse[] = [];
-  // TODO: until ledger API supports "message.module='ecocredit'",
-  // we must send separate requests for each message action type:
-  return Promise.all(
-    Object.values(ECOCREDIT_MESSAGE_TYPES).map(async msgType => {
-      try {
-        const response = await getTxsByEvent({
-          events: [`${messageActionEquals}'${msgType.message}'`],
-          orderBy: OrderBy.ORDER_BY_DESC,
-        });
-
-        if (response?.txResponses) {
-          allTxs = [...allTxs, ...response.txResponses];
-        }
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.error(err);
-      }
-    }),
-  ).then(() => {
-    return allTxs;
-  });
 };
 
 export const getBatchesByProjectWithSupply = async (
@@ -514,17 +488,6 @@ export const getTxsByEvent = async (
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
     return Promise.reject();
-  }
-};
-
-export const queryEcoClassInfo = async (
-  classId: string,
-): Promise<QueryClassResponse> => {
-  const client = await getQueryClient();
-  try {
-    return client.Class({ classId });
-  } catch (err) {
-    throw new Error(`Error fetching class info: ${err}`);
   }
 };
 

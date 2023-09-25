@@ -19,7 +19,9 @@ export const useProfileData = () => {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
-  const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
+  const { data: csrfData, isFetching: isLoadingCsrfToken } = useQuery(
+    getCsrfTokenQuery({}),
+  );
   const { data: partyByAddr, isFetching: isLoadingPartyByAddr } = useQuery(
     getPartyByAddrQuery({
       client: graphqlClient,
@@ -45,6 +47,6 @@ export const useProfileData = () => {
   return {
     address,
     party,
-    isLoading: isLoadingPartyByAddr || isLoadingPartyById,
+    isLoading: isLoadingCsrfToken || isLoadingPartyByAddr || isLoadingPartyById,
   };
 };

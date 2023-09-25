@@ -4,7 +4,6 @@ import { MsgSell } from '@regen-network/api/lib/generated/regen/ecocredit/market
 import { useQueryClient } from '@tanstack/react-query';
 import { getDenomtrace } from 'utils/ibc/getDenomTrace';
 
-import { FormValues as CreateSellOrderFormValues } from 'web-components/lib/components/form/CreateSellOrderForm';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { getFormattedNumber } from 'web-components/lib/utils/format';
 
@@ -16,6 +15,7 @@ import { SellFailureEvent, SellSuccessEvent } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import DenomIcon from 'components/molecules/DenomIcon';
+import { CreateSellOrderFormSchemaType } from 'components/organisms/CreateSellOrderForm/CreateSellOrderForm.schema';
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import {
@@ -33,7 +33,7 @@ type Props = {
   onTxBroadcast: () => void;
 };
 
-type Return = (values: CreateSellOrderFormValues) => Promise<void>;
+type Return = (values: CreateSellOrderFormSchemaType) => Promise<void>;
 
 const useCreateSellOrderSubmit = ({
   accountAddress,
@@ -47,7 +47,7 @@ const useCreateSellOrderSubmit = ({
   const { track } = useTracker();
   const reactQueryClient = useQueryClient();
   const createSellOrderSubmit = useCallback(
-    async (values: CreateSellOrderFormValues): Promise<void> => {
+    async (values: CreateSellOrderFormSchemaType): Promise<void> => {
       if (!accountAddress) return Promise.reject();
       const { amount, batchDenom, price, enableAutoRetire, askDenom } = values;
 

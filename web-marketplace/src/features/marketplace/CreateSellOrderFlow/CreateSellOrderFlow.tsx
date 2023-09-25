@@ -6,7 +6,6 @@ import { useSetAtom } from 'jotai';
 
 import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
-import { CreateSellOrderModal } from 'web-components/lib/components/modal/CreateSellOrderModal';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
@@ -26,6 +25,7 @@ import {
   getDenomAllowedOptions,
 } from 'pages/Dashboard/MyEcocredits/MyEcocredits.utils';
 import { Link } from 'components/atoms';
+import { CreateSellOrderModal } from 'components/organisms/CreateSellOrderModal/CreateSellOrderModal';
 import { useMsgClient } from 'hooks';
 
 type Props = {

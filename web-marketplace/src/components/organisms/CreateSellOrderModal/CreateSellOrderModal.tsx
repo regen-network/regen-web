@@ -1,11 +1,12 @@
-import React from 'react';
+import { PropsWithChildren } from 'react';
+
+import { RegenModalProps } from 'web-components/lib/components/modal';
+import { FormModalTemplate } from 'web-components/lib/components/modal/FormModalTemplate';
 
 import {
   CreateSellOrderForm,
-  CreateSellOrderProps,
-} from '../form/CreateSellOrderForm';
-import { RegenModalProps } from '.';
-import { FormModalTemplate } from './FormModalTemplate';
+  Props as CreateSellOrderProps,
+} from '../CreateSellOrderForm/CreateSellOrderForm';
 
 interface CreateSellOrderModalProps
   extends RegenModalProps,
@@ -13,9 +14,7 @@ interface CreateSellOrderModalProps
   title: string;
 }
 
-const CreateSellOrderModal: React.FC<
-  React.PropsWithChildren<CreateSellOrderModalProps>
-> = ({
+const CreateSellOrderModal = ({
   batchDenoms,
   allowedDenoms,
   sellDenom,
@@ -24,7 +23,7 @@ const CreateSellOrderModal: React.FC<
   title,
   onClose,
   onSubmit,
-}) => (
+}: PropsWithChildren<CreateSellOrderModalProps>) => (
   <FormModalTemplate title={title} open={open} onClose={onClose}>
     <CreateSellOrderForm
       batchDenoms={batchDenoms}

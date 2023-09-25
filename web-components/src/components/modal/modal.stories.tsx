@@ -6,7 +6,6 @@ import Modal from '.';
 import { BasketPutModal } from './BasketPutModal';
 import { BasketTakeModal } from './BasketTakeModal';
 import { ConfirmModal } from './ConfirmModal';
-import { CreateSellOrderModal } from './CreateSellOrderModal';
 import CropImageModal from './CropImageModal';
 import { ProcessingModal } from './ProcessingModal';
 import { TxErrorModal } from './TxErrorModal';
@@ -205,23 +204,5 @@ export const basketTakeModal = (): JSX.Element => (
     mapboxToken={MAPBOX_TOKEN}
     onClose={() => null}
     onSubmit={() => alert('submit')}
-  />
-);
-
-export const createSellOrderModal = (): JSX.Element => (
-  <CreateSellOrderModal
-    batchDenoms={[
-      {
-        label: 'C01-20190101-20201010-003',
-        value: 'C01-20190101-20201010-003',
-      },
-    ]}
-    allowedDenoms={[{ label: 'REGEN', value: 'uregen' }]}
-    title={'Create Sell Order'}
-    availableAmountByBatch={{}}
-    sellDenom={'REGEN'}
-    open={true}
-    onClose={() => null}
-    onSubmit={async () => alert('submit')}
   />
 );

@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
-import { Box, MenuItem, useTheme } from '@mui/material';
+import { Box, MenuItem, SxProps, useTheme } from '@mui/material';
 
+import { Theme } from '../../../../theme/muiTheme';
 import DropdownIcon from '../../../icons/DropdownIcon';
 import { DefaultStyleProps } from '../FieldFormControl/FieldFormControl';
 import TextField from '../TextField/TextField';
@@ -22,6 +23,7 @@ export interface SelectTextFieldProps extends DefaultStyleProps {
   error?: boolean;
   helperText?: string;
   className?: string;
+  sx?: SxProps<Theme>;
 }
 
 const SelectTextField = forwardRef<HTMLDivElement, SelectTextFieldProps>(

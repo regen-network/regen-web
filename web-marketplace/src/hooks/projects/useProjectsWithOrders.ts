@@ -146,13 +146,8 @@ export function useProjectsWithOrders({
     sanityCreditClassData: creditClassData,
   });
 
-  // Merge on-chain and off-chain projects
-  const allProjectsWithOrderData = useOffChainProjects
-    ? [...projectsWithOrderData, ...allOffChainProjects]
-    : projectsWithOrderData;
-
   // Exclude community projects based on sanity credit class data
-  const projectsWithOrderDataFiltered = allProjectsWithOrderData.filter(
+  const projectsWithOrderDataFiltered = projectsWithOrderData.filter(
     project => !!project.sanityCreditClassData || useCommunityProjects,
   );
 
@@ -160,15 +155,19 @@ export function useProjectsWithOrders({
     project => !project.sanityCreditClassData,
   );
 
+  // Merge on-chain and off-chain projects
+  const allProject = useOffChainProjects
+    ? [...projectsWithOrderDataFiltered, ...allOffChainProjects]
+    : projectsWithOrderDataFiltered;
+
   // Filter projects by class ID
   const creditClassSelected = Object.keys(creditClassFilter).filter(
     creditClassId => creditClassFilter[creditClassId],
   );
-  const projectsFilteredByCreditClass = projectsWithOrderDataFiltered.filter(
-    project =>
-      creditClassSelected.length === 0
-        ? true
-        : creditClassSelected.includes(project.creditClassId ?? ''),
+  const projectsFilteredByCreditClass = allProject.filter(project =>
+    creditClassSelected.length === 0
+      ? true
+      : creditClassSelected.includes(project.creditClassId ?? ''),
   );
 
   const sortedProjects = sortProjects(

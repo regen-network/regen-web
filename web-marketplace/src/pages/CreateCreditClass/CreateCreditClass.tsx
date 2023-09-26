@@ -13,7 +13,7 @@ import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator
 
 export const CreateCreditClass = (): JSX.Element => {
   const { wallet } = useWallet();
-  const isCreditClassCreator = useQueryIfCreditClassCreator();
+  const isCreditClassCreator = useQueryIfCreditClassCreator({});
   const formValues: CreditClassValues = {
     ...creditClassBaseValues,
     admin: wallet?.address || '',

@@ -4,9 +4,9 @@ import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
 import { useQueryIsProjectAdmin } from 'hooks/useQueryIsProjectAdmin';
 
 export const useProfileItems = () => {
-  const isIssuer = useQueryIsIssuer();
-  const isCreditClassCreator = useQueryIfCreditClassCreator();
-  const isProjectAdmin = useQueryIsProjectAdmin();
+  const isIssuer = useQueryIsIssuer({});
+  const isCreditClassCreator = useQueryIfCreditClassCreator({});
+  const isProjectAdmin = useQueryIsProjectAdmin({});
   const isCreditClassAdmin = useQueryIsClassAdmin();
 
   const showProjects = isIssuer || isProjectAdmin;

@@ -35,6 +35,8 @@ import { projectDetailsLoader } from 'components/templates/ProjectDetails/Projec
 
 import { KeplrRoute } from './components/atoms';
 import { ProjectMetadata } from './pages/ProjectMetadata/ProjectMetadata';
+import { CreditClassTab } from 'pages/EcocreditsByAccount/CreditClassTab/CreditClassTab';
+import { CreditBatchesTab } from 'pages/EcocreditsByAccount/CreditBatchesTab/CreditBatchesTab';
 
 const Additionality = lazy(() => import('./pages/Additionality'));
 const BasicInfo = lazy(() => import('./pages/BasicInfo'));
@@ -152,6 +154,8 @@ export const getRoutes = ({
           <Route index element={<Navigate to="portfolio" />} />
           <Route path="portfolio" element={<PortfolioTab />} />
           <Route path="projects" element={<ProjectsTab />} />
+          <Route path="credit-classes" element={<CreditClassTab />} />
+          <Route path="credit-batches" element={<CreditBatchesTab />} />
           <Route path="bridge" element={<BridgeTab />} />
         </Route>
         <Route

@@ -64,7 +64,7 @@ import PlayIcon from './PlayIcon';
 import PlusIcon from './PlusIcon';
 import PointerIcon from './PointerIcon';
 import PrintIcon from './PrintIcon';
-import ProfileIcon from './ProfileIcon';
+import ShareIcon from './ShareIcon';
 import { ProjectPageIcon } from './ProjectPageIcon';
 import { ProjectPageIconSmall } from './ProjectPageIconSmall';
 import PutInBasketIcon from './PutInBasketIcon';
@@ -279,7 +279,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<PrintIcon />} label="PrintIcon" />
     <LabeledIcon icon={<ProjectPageIcon />} label="ProjectPageIcon" />
     <LabeledIcon icon={<ProjectPageIconSmall />} label="ProjectPageIconSmall" />
-    <LabeledIcon icon={<ProfileIcon />} label="ProfileIcon" />
+    <LabeledIcon icon={<ShareIcon />} label="ShareIcon" />
     <LabeledIcon icon={<PutInBasketIcon />} label="PutInBasketIcon" />
     <LabeledIcon icon={<QuestionIcon />} label="QuestionIcon" />
     <LabeledIcon

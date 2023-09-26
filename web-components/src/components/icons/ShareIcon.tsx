@@ -2,12 +2,12 @@ import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
 import { sxToArray } from '../../utils/mui/sxToArray';
 
-interface ProfileIconProps extends SvgIconProps {}
+interface ShareIconProps extends SvgIconProps {}
 
-export default function ProfileIcon({
+export default function ShareIcon({
   sx,
   ...props
-}: ProfileIconProps): JSX.Element {
+}: ShareIconProps): JSX.Element {
   const defaultColor = '#4FB573';
   return (
     <SvgIcon
@@ -18,8 +18,8 @@ export default function ProfileIcon({
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <g clip-path="url(#profileIconClipPath)">
-        <g filter="url(#profileIconFilter)">
+      <g clip-path="url(#shareIconClipPath)">
+        <g filter="url(#shareIconFilter)">
           <path
             fill-rule="evenodd"
             clip-rule="evenodd"
@@ -30,7 +30,7 @@ export default function ProfileIcon({
       </g>
       <defs>
         <filter
-          id="profileIconFilter"
+          id="shareIconFilter"
           x="-18"
           y="-19"
           width="59"
@@ -63,7 +63,7 @@ export default function ProfileIcon({
             result="shape"
           />
         </filter>
-        <clipPath id="profileIconClipPath">
+        <clipPath id="shareIconClipPath">
           <rect width="24" height="24" fill="white" />
         </clipPath>
       </defs>

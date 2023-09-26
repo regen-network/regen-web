@@ -3,7 +3,7 @@ import { Avatar, Box, Link, SxProps, useTheme } from '@mui/material';
 import Banner from '../../../components/banner';
 import { Flex } from '../../../components/box';
 import EditIcon from '../../../components/icons/EditIcon';
-import ProfileIcon from '../../../components/icons/ProfileIcon';
+import ShareIcon from '../../../components/icons/ShareIcon';
 import InfoTooltip from '../../../components/tooltip/InfoTooltip';
 import { Label, Title } from '../../../components/typography';
 import { containerStyles } from '../../../styles/container';
@@ -206,7 +206,7 @@ const ProfileHeader = ({
                     setShowProfileLinkSuccessBanner(true);
                   }}
                 >
-                  <ProfileIcon sx={{ ml: 2, cursor: 'pointer' }} />
+                  <ShareIcon sx={{ ml: 2, cursor: 'pointer' }} />
                 </Link>
               </InfoTooltip>
             )}

@@ -206,9 +206,7 @@ const ProfileHeader = ({
                     setShowProfileLinkSuccessBanner(true);
                   }}
                 >
-                  <ProfileIcon
-                    sx={{ ml: 2, cursor: 'pointer', color: '#4FB573' }}
-                  />
+                  <ProfileIcon sx={{ ml: 2, cursor: 'pointer' }} />
                 </Link>
               </InfoTooltip>
             )}

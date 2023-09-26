@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Avatar, Box, Link, SxProps, useTheme } from '@mui/material';
 
 import Banner from '../../../components/banner';
@@ -8,8 +9,8 @@ import InfoTooltip from '../../../components/tooltip/InfoTooltip';
 import { Label, Title } from '../../../components/typography';
 import { containerStyles } from '../../../styles/container';
 import { Theme } from '../../../theme/muiTheme';
-import copyTextToClipboard from '../../../utils/copy';
 import { LinkComponentType } from '../../../types/shared/linkComponentType';
+import copyTextToClipboard from '../../../utils/copy';
 import {
   COPY_PROFILE,
   COPY_SUCCESS,
@@ -25,7 +26,6 @@ import {
 } from './ProfileHeader.constants';
 import { ProfileHeaderInfos } from './ProfileHeader.Infos';
 import { ProfileInfos, ProfileVariant } from './ProfileHeader.types';
-import { useState } from 'react';
 
 export interface Props {
   name: string;

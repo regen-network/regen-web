@@ -17,6 +17,7 @@ import { truncate } from 'web-components/lib/utils/truncate';
 
 import { getAccountUrl } from 'lib/block-explorer';
 import { isBridgeEnabled } from 'lib/ledger';
+import { getProfileLink } from 'lib/profileLink';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
@@ -31,7 +32,6 @@ import { useQueryIsProjectAdmin } from 'hooks/useQueryIsProjectAdmin';
 
 import { dashBoardStyles } from './Dashboard.styles';
 import { getSocialsLinks, getUserImages } from './Dashboard.utils';
-import { getProfileLink } from 'lib/profileLink';
 
 const Dashboard = (): JSX.Element => {
   const isIssuer = useQueryIsIssuer();

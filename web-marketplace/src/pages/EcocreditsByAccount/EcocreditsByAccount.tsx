@@ -13,6 +13,7 @@ import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 import { truncate } from 'web-components/lib/utils/truncate';
 
 import { getAccountUrl } from 'lib/block-explorer';
+import { getProfileLink } from 'lib/profileLink';
 
 import {
   getSocialsLinks,
@@ -28,7 +29,6 @@ import WithLoader from 'components/atoms/WithLoader';
 import { ProfileNotFound } from './EcocreditsByAccount.NotFound';
 import { ecocreditsByAccountStyles } from './EcocreditsByAccount.styles';
 import { useProfileData } from './hooks/useProfileData';
-import { getProfileLink } from 'lib/profileLink';
 
 export const EcocreditsByAccount = (): JSX.Element => {
   const { accountAddressOrId } = useParams<{ accountAddressOrId: string }>();

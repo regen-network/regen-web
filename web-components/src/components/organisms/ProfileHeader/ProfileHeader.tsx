@@ -1,5 +1,6 @@
 import { Avatar, Box, Link, SxProps, useTheme } from '@mui/material';
 
+import Banner from '../../../components/banner';
 import { Flex } from '../../../components/box';
 import EditIcon from '../../../components/icons/EditIcon';
 import ProfileIcon from '../../../components/icons/ProfileIcon';
@@ -7,9 +8,11 @@ import InfoTooltip from '../../../components/tooltip/InfoTooltip';
 import { Label, Title } from '../../../components/typography';
 import { containerStyles } from '../../../styles/container';
 import { Theme } from '../../../theme/muiTheme';
+import copyTextToClipboard from '../../../utils/copy';
 import { LinkComponentType } from '../../../types/shared/linkComponentType';
 import {
   COPY_PROFILE,
+  COPY_SUCCESS,
   EDIT_PROFILE,
   PROFILE_AVATAR_MARGIN_TOP_DESKTOP,
   PROFILE_AVATAR_MARGIN_TOP_MOBILE,
@@ -22,6 +25,7 @@ import {
 } from './ProfileHeader.constants';
 import { ProfileHeaderInfos } from './ProfileHeader.Infos';
 import { ProfileInfos, ProfileVariant } from './ProfileHeader.types';
+import { useState } from 'react';
 
 export interface Props {
   name: string;
@@ -47,6 +51,8 @@ const ProfileHeader = ({
   sx = [],
 }: Props): JSX.Element => {
   const theme = useTheme();
+  const [showProfileLinkSuccessBanner, setShowProfileLinkSuccessBanner] =
+    useState(false);
 
   return (
     <Box
@@ -58,6 +64,14 @@ const ProfileHeader = ({
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
     >
+      {showProfileLinkSuccessBanner && (
+        <Banner
+          text={COPY_SUCCESS}
+          onClose={() => {
+            setShowProfileLinkSuccessBanner(false);
+          }}
+        />
+      )}
       <Box
         sx={{
           position: 'absolute',
@@ -188,12 +202,13 @@ const ProfileHeader = ({
                     mb: 4.5,
                   }}
                   onClick={() => {
-                    navigator.clipboard.writeText(profileLink);
+                    copyTextToClipboard(profileLink);
+                    setShowProfileLinkSuccessBanner(true);
                   }}
                 >
-                  <Label>
-                    <ProfileIcon sx={{ ml: 2 }} />
-                  </Label>
+                  <ProfileIcon
+                    sx={{ ml: 2, cursor: 'pointer', color: '#4FB573' }}
+                  />
                 </Link>
               </InfoTooltip>
             )}

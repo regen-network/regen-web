@@ -16,6 +16,7 @@ export const PROFILE_AVATAR_MARGIN_TOP_DESKTOP =
 
 export const EDIT_PROFILE = 'Edit Profile';
 export const COPY_PROFILE = 'Copy link to profile';
+export const COPY_SUCCESS = 'Link Copied!';
 
 export const ProfileVariantIconMapping: {
   [key in ProfileVariant]: JSX.Element;

@@ -28,6 +28,7 @@ import WithLoader from 'components/atoms/WithLoader';
 import { ProfileNotFound } from './EcocreditsByAccount.NotFound';
 import { ecocreditsByAccountStyles } from './EcocreditsByAccount.styles';
 import { useProfileData } from './hooks/useProfileData';
+import { getProfileLink } from 'lib/profileLink';
 
 export const EcocreditsByAccount = (): JSX.Element => {
   const { accountAddressOrId } = useParams<{ accountAddressOrId: string }>();
@@ -36,7 +37,9 @@ export const EcocreditsByAccount = (): JSX.Element => {
   const { address, party, isLoading } = useProfileData();
   const { avatarImage, backgroundImage } = getUserImages({ party });
   const isProfileNotFound = !address && !party;
-  const profileLink = `${window.location.origin}/profiles/${accountAddressOrId}`;
+  const profileLink = accountAddressOrId
+    ? getProfileLink(accountAddressOrId)
+    : '';
 
   const socialsLinks = useMemo(() => getSocialsLinks({ party }), [party]);
 

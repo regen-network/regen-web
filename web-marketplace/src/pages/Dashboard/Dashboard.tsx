@@ -31,6 +31,7 @@ import { useQueryIsProjectAdmin } from 'hooks/useQueryIsProjectAdmin';
 
 import { dashBoardStyles } from './Dashboard.styles';
 import { getSocialsLinks, getUserImages } from './Dashboard.utils';
+import { getProfileLink } from 'lib/profileLink';
 
 const Dashboard = (): JSX.Element => {
   const isIssuer = useQueryIsIssuer();
@@ -91,12 +92,7 @@ const Dashboard = (): JSX.Element => {
     0,
   );
 
-  let profileLink: string = '';
-  if (!!wallet?.address) {
-    profileLink = `${window.location.origin}/profiles/${wallet.address}`;
-  } else if (!!party?.id) {
-    profileLink = `${window.location.origin}/profiles/${party.id}`;
-  }
+  const profileLink = getProfileLink(wallet?.address || party?.id);
 
   return (
     <>

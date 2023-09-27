@@ -20,7 +20,7 @@ export const MyCreditClasses = (): JSX.Element => {
     <>
       <Grid container spacing={8}>
         <Grid item xs={12} md={6} lg={4}>
-          {false && isCreditClassCreator && (
+          {isCreditClassCreator && (
             <CreateCreditClassCard
               isFirstCreditClass={isFirstCreditClass}
               onClick={handleCreate}

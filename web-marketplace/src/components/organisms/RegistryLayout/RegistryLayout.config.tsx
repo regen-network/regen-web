@@ -4,12 +4,16 @@ import { HeaderColors } from 'web-components/lib/components/header';
 import { HeaderDropdownItemProps } from 'web-components/lib/components/header/components/HeaderDropdown/HeaderDropdown.Item';
 import { Item } from 'web-components/lib/components/header/components/HeaderMenuItem/HeaderMenuItem';
 import { NavLinkProps } from 'web-components/lib/components/header/components/NavLink';
-import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
-import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 
 import { isBridgeEnabled } from 'lib/ledger';
 
-import { BRIDGE, PORTFOLIO } from 'pages/Dashboard/Dashboard.constants';
+import {
+  BRIDGE,
+  CREDIT_BATCHES,
+  CREDIT_CLASSES,
+  PORTFOLIO,
+  PROJECTS,
+} from 'pages/Dashboard/Dashboard.constants';
 import { Link } from 'components/atoms';
 
 export const getMenuItems = (pathname: string): Item[] => [
@@ -51,29 +55,46 @@ interface GetUserMenuItemsParams {
   pathname: string;
   linkComponent: React.FC<NavLinkProps>;
   theme: Theme;
+  showProjects?: boolean;
+  showCreditClasses?: boolean;
+  isIssuer?: boolean;
 }
 
 export const getUserMenuItems = ({
   linkComponent,
   pathname,
   theme,
+  showProjects,
+  showCreditClasses,
+  isIssuer,
 }: GetUserMenuItemsParams): HeaderDropdownItemProps[] =>
   [
     {
       pathname,
       linkComponent,
-      icon: <CreditsIcon sx={{ height: 18, width: 20 }} />,
       importCallback: (): Promise<any> => import('../../../pages/Dashboard'),
       ...PORTFOLIO,
     },
-    isBridgeEnabled
-      ? {
-          pathname,
-          linkComponent,
-          icon: <BridgeIcon />,
-          ...BRIDGE,
-        }
-      : undefined,
+    showProjects && {
+      pathname,
+      linkComponent,
+      ...PROJECTS,
+    },
+    showCreditClasses && {
+      pathname,
+      linkComponent,
+      ...CREDIT_CLASSES,
+    },
+    isIssuer && {
+      pathname,
+      linkComponent,
+      ...CREDIT_BATCHES,
+    },
+    isBridgeEnabled && {
+      pathname,
+      linkComponent,
+      ...BRIDGE,
+    },
   ].filter(Boolean) as HeaderDropdownItemProps[];
 
 export const getIsTransparent = (pathname: string): boolean =>

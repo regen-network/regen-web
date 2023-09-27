@@ -13,6 +13,7 @@ import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 import { truncate } from 'web-components/lib/utils/truncate';
 
 import { getAccountUrl } from 'lib/block-explorer';
+import { getProfileLink } from 'lib/profileLink';
 
 import {
   getSocialsLinks,
@@ -36,6 +37,9 @@ export const EcocreditsByAccount = (): JSX.Element => {
   const { address, party, isLoading } = useProfileData();
   const { avatarImage, backgroundImage } = getUserImages({ party });
   const isProfileNotFound = !address && !party;
+  const profileLink = accountAddressOrId
+    ? getProfileLink(accountAddressOrId)
+    : '';
 
   const socialsLinks = useMemo(() => getSocialsLinks({ party }), [party]);
 
@@ -97,6 +101,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
                 socialsLinks,
               }}
               editLink=""
+              profileLink={profileLink}
               variant={
                 party?.type ? profileVariantMapping[party.type] : 'individual'
               }

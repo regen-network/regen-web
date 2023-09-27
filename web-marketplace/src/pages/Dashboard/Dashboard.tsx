@@ -17,6 +17,7 @@ import { truncate } from 'web-components/lib/utils/truncate';
 
 import { getAccountUrl } from 'lib/block-explorer';
 import { isBridgeEnabled } from 'lib/ledger';
+import { getProfileLink } from 'lib/profileLink';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
@@ -91,6 +92,8 @@ const Dashboard = (): JSX.Element => {
     0,
   );
 
+  const profileLink = getProfileLink(wallet?.address || party?.id);
+
   return (
     <>
       <ProfileHeader
@@ -106,6 +109,7 @@ const Dashboard = (): JSX.Element => {
           socialsLinks,
         }}
         editLink={accountId ? '/profile/edit' : ''}
+        profileLink={profileLink}
         variant={party?.type ? profileVariantMapping[party.type] : 'individual'}
         LinkComponent={Link}
       />

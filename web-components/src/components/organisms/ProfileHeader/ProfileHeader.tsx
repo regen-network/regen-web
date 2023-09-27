@@ -1,12 +1,19 @@
-import { Avatar, Box, SxProps, useTheme } from '@mui/material';
+import { useState } from 'react';
+import { Avatar, Box, Link, SxProps, useTheme } from '@mui/material';
 
+import Banner from '../../../components/banner';
 import { Flex } from '../../../components/box';
 import EditIcon from '../../../components/icons/EditIcon';
+import ShareIcon from '../../../components/icons/ShareIcon';
+import InfoTooltip from '../../../components/tooltip/InfoTooltip';
 import { Label, Title } from '../../../components/typography';
 import { containerStyles } from '../../../styles/container';
 import { Theme } from '../../../theme/muiTheme';
 import { LinkComponentType } from '../../../types/shared/linkComponentType';
+import copyTextToClipboard from '../../../utils/copy';
 import {
+  COPY_PROFILE,
+  COPY_SUCCESS,
   EDIT_PROFILE,
   PROFILE_AVATAR_MARGIN_TOP_DESKTOP,
   PROFILE_AVATAR_MARGIN_TOP_MOBILE,
@@ -27,6 +34,7 @@ export interface Props {
   variant: ProfileVariant;
   infos: ProfileInfos;
   editLink: string;
+  profileLink: string;
   LinkComponent: LinkComponentType;
   sx?: SxProps<Theme>;
 }
@@ -38,10 +46,13 @@ const ProfileHeader = ({
   infos,
   variant,
   editLink,
+  profileLink,
   LinkComponent,
   sx = [],
 }: Props): JSX.Element => {
   const theme = useTheme();
+  const [showProfileLinkSuccessBanner, setShowProfileLinkSuccessBanner] =
+    useState(false);
 
   return (
     <Box
@@ -53,6 +64,14 @@ const ProfileHeader = ({
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
     >
+      {showProfileLinkSuccessBanner && (
+        <Banner
+          text={COPY_SUCCESS}
+          onClose={() => {
+            setShowProfileLinkSuccessBanner(false);
+          }}
+        />
+      )}
       <Box
         sx={{
           position: 'absolute',
@@ -140,6 +159,7 @@ const ProfileHeader = ({
                 mb: { xs: 1.375, sm: 2 },
                 zIndex: 1,
                 minHeight: { xs: 'auto', sm: 44.7 },
+                flex: { sm: 2 },
               }}
             >
               {name}
@@ -157,6 +177,8 @@ const ProfileHeader = ({
                     right: { right: 17, sm: 'auto' },
                     height: 18,
                     mb: 4.5,
+                    mr: { xs: 10 },
+                    ml: { sm: 3 },
                   }}
                 >
                   <EditIcon
@@ -165,6 +187,28 @@ const ProfileHeader = ({
                   {EDIT_PROFILE}
                 </Label>
               </LinkComponent>
+            )}
+            {profileLink !== '' && (
+              <InfoTooltip arrow placement="top" title={COPY_PROFILE}>
+                <Link
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    color: 'primary.main',
+                    position: { xs: 'absolute', sm: 'relative' },
+                    top: { xs: 24, sm: 'auto' },
+                    right: { right: 17, sm: 'auto' },
+                    height: 18,
+                    mb: 4.5,
+                  }}
+                  onClick={() => {
+                    copyTextToClipboard(profileLink);
+                    setShowProfileLinkSuccessBanner(true);
+                  }}
+                >
+                  <ShareIcon sx={{ ml: 2, cursor: 'pointer' }} />
+                </Link>
+              </InfoTooltip>
             )}
           </Flex>
           <ProfileHeaderInfos

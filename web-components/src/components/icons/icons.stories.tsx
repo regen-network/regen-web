@@ -83,6 +83,7 @@ import SatelliteIcon from './SatelliteIcon';
 import { SaveIcon } from './SaveIcon';
 import SellOrderNotFoundIcon from './SellOrderNotFoundIcon';
 import ShadedCreditsIcon from './ShadedCreditsIcon';
+import ShareIcon from './ShareIcon';
 import ShieldIcon from './ShieldIcon';
 import SmallArrowIcon from './SmallArrowIcon';
 import DiscordIcon from './social/DiscordIcon';
@@ -278,6 +279,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<PrintIcon />} label="PrintIcon" />
     <LabeledIcon icon={<ProjectPageIcon />} label="ProjectPageIcon" />
     <LabeledIcon icon={<ProjectPageIconSmall />} label="ProjectPageIconSmall" />
+    <LabeledIcon icon={<ShareIcon />} label="ShareIcon" />
     <LabeledIcon icon={<PutInBasketIcon />} label="PutInBasketIcon" />
     <LabeledIcon icon={<QuestionIcon />} label="QuestionIcon" />
     <LabeledIcon

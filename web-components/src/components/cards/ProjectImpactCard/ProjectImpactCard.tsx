@@ -1,6 +1,5 @@
 import { Box, Grid, SxProps, Theme } from '@mui/material';
 
-import { BlockContent } from '../../../components/block-content';
 import { ImageType } from '../../../types/shared/imageType';
 import { sxToArray } from '../../../utils/mui/sxToArray';
 import { Image } from '../../image';

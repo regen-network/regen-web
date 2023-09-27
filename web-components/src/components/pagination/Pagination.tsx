@@ -5,7 +5,7 @@ import {
   useTheme,
 } from '@mui/material';
 
-import { pxToRem, Theme } from '../../theme/muiTheme';
+import { Theme } from '../../theme/muiTheme';
 import ArrowLeftIcon from '../icons/ArrowLeft';
 import ArrowRightIcon from '../icons/ArrowRight';
 import ArrowSkipLeftIcon from '../icons/ArrowSkipLeft';

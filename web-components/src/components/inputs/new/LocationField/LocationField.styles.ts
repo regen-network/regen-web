@@ -1,5 +1,6 @@
-import { Theme } from '../../../../theme/muiTheme';
 import { makeStyles } from 'tss-react/mui';
+
+import { Theme } from '../../../../theme/muiTheme';
 
 export const useLocationStyles = makeStyles()((theme: Theme) => ({
   result: {

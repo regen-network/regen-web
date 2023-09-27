@@ -62,7 +62,6 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
     creditBatches,
     creditClassId,
   });
-
   let columnsToShow = [...creditBatchesHeadCells];
 
   // We hide the classId column if creditClassId provided (redundant)

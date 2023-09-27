@@ -49,7 +49,11 @@ export const normalizeBatchesWithData = ({
         v1Alpha1BatchDenomMapping[batch.denom],
       );
 
-    const supplyData = batchesSupplyResult?.[index] ?? {};
+    const supplyData = batchesSupplyResult?.[index].data ?? {
+      cancelledAmount: '',
+      retiredAmount: '',
+      tradableAmount: '',
+    };
     const project = batchesProjectDataResult?.[index].data?.project;
     const classMetadata = batchesClassMetadataResult?.[index];
     const projectMetadata = batchesProjectMetadataResult?.[index];

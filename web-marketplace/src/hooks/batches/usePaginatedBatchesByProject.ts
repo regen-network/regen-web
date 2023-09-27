@@ -6,11 +6,11 @@ import { TablePaginationParams } from 'web-components/lib/components/table/Actio
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
-import { getAddDataToBatchesQuery } from 'lib/queries/react-query/ecocredit/getAddDataToBatchesQuery/getAddDataToBatchesQuery';
 import { getBatchesByProjectQuery } from 'lib/queries/react-query/ecocredit/getBatchesByProjectQuery/getBatchesByProjectQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
 import { client as sanityClient } from '../../lib/clients/sanity';
+import { useAddDataToBatches } from './useAddDataToBatches';
 
 export const PAGINATED_BATCHES_BY_PROJECT_ROWS_PER_PAGE = 5;
 
@@ -56,17 +56,16 @@ export const usePaginatedBatchesByProject = ({
 
   /* Fetch current page batches supplies */
 
-  const batches = batchesByProjectResult.data?.batches;
-  const batchesWithSupplyResult = useQuery(
-    getAddDataToBatchesQuery({
-      batches,
-      sanityCreditClassData: sanityCreditClassDataResult.data,
-      enabled: !!sanityCreditClassDataResult.data,
-      reactQueryClient,
-      dataClient,
-      ecocreditClient,
-    }),
-  );
+  const batches = batchesByProjectResult.data?.batches ?? [];
+
+  const { batchesWithData: batchesWithSupply } = useAddDataToBatches({
+    batches,
+    sanityCreditClassData: sanityCreditClassDataResult.data,
+    reactQueryClient,
+    dataClient,
+    ecocreditClient,
+    withAllData: true,
+  });
 
   /* Format hook returned variables */
 
@@ -79,7 +78,6 @@ export const usePaginatedBatchesByProject = ({
       retiredAmount: '',
       tradableAmount: '',
     }));
-  const batchesWithSupply = batchesWithSupplyResult.data;
 
   return {
     batchesWithSupply: batchesWithSupply ?? batchesWithDefaultSupply,

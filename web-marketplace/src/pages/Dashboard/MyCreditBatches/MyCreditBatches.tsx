@@ -19,7 +19,7 @@ import { NO_CREDIT_BATCHES_MESSAGE } from './MyCreditBatches.constants';
 export const MyCreditBatches = (): JSX.Element => {
   const theme = useTheme();
   const { wallet } = useWallet();
-  const { batchesWithSupply, setPaginationParams } =
+  const { batchesWithSupply, setPaginationParams, paginationParams } =
     usePaginatedBatchesByIssuer({ address: wallet?.address });
   const hasNoBatches = batchesWithSupply && batchesWithSupply?.length === 0;
 
@@ -63,6 +63,8 @@ export const MyCreditBatches = (): JSX.Element => {
           <CreditBatches
             creditBatches={batchesWithSupply}
             onTableChange={setPaginationParams}
+            initialPaginationParams={paginationParams}
+            isIgnoreOffset
           />
         </>
       </WithLoader>

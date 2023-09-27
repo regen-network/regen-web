@@ -198,27 +198,6 @@ export const getEcocreditsForAccount = async ({
   }
 };
 
-export const getBatchesByProjectWithSupply = async (
-  projectId?: string | null,
-  dataClient?: DataQueryClientImpl,
-  ecocreditClient?: EcocreditQueryClientImpl,
-): Promise<{
-  data: BatchInfoWithSupply[];
-}> => {
-  if (!projectId) return Promise.resolve({ data: [] });
-  const client = await getQueryClient();
-  const batches = await queryBatchesByProject({
-    client,
-    request: { projectId },
-  });
-  const batchesWithData = await addDataToBatches({
-    batches: batches?.batches,
-    dataClient,
-    ecocreditClient,
-  });
-  return { data: batchesWithData };
-};
-
 const getClassProjectForBatch = async (
   batch: BatchInfo,
   sanityCreditClassData?: AllCreditClassQuery,
@@ -317,74 +296,6 @@ export type AddDataToBatchesParams = {
   ecocreditClient?: EcocreditQueryClientImpl;
   txClient?: ServiceClientImpl;
   reactQueryClient?: QueryClient;
-};
-
-/* addDataToBatches adds Tx Hash and supply info to batch for use in tables */
-export const addDataToBatches = async ({
-  batches,
-  sanityCreditClassData,
-  withAllData = true,
-  dataClient,
-  ecocreditClient,
-  reactQueryClient,
-}: AddDataToBatchesParams): Promise<BatchInfoWithSupply[]> => {
-  try {
-    /* TODO: this is limited to 100 results. We need to find a better way */
-    const [createBatchTxs, createBatchAlphaTxs] = await Promise.all([
-      getTxsByEvent({
-        events: [
-          `${messageActionEquals}'${ECOCREDIT_MESSAGE_TYPES.CREATE_BATCH.message}'`,
-        ],
-      }),
-      getTxsByEvent({
-        events: [
-          `${messageActionEquals}'${ECOCREDIT_MESSAGE_TYPES.CREATE_BATCH_ALPHA.message}'`,
-        ],
-      }),
-    ]);
-
-    return Promise.all(
-      batches.map(async batch => {
-        let txhash, supplyData, classProjectInfo;
-
-        if (reactQueryClient) {
-          supplyData = (await getFromCacheOrFetch({
-            query: getSupplyQuery({
-              request: { batchDenom: batch.denom },
-            }),
-            reactQueryClient,
-          })) as QuerySupplyResponse;
-        } else {
-          supplyData = await queryEcoBatchSupply(batch.denom);
-        }
-
-        if (withAllData) {
-          txhash =
-            getTxHashForBatch(createBatchTxs.txResponses, batch.denom) ??
-            getTxHashForBatch(
-              createBatchAlphaTxs.txResponses,
-              v1Alpha1BatchDenomMapping[batch.denom],
-            );
-          classProjectInfo = await getClassProjectForBatch(
-            batch,
-            sanityCreditClassData,
-            dataClient,
-            ecocreditClient,
-            reactQueryClient,
-          );
-        }
-
-        return {
-          ...batch,
-          ...classProjectInfo,
-          ...supplyData,
-          txhash,
-        };
-      }),
-    );
-  } catch (err) {
-    throw new Error(`Could not add data to batches batches: ${err}`);
-  }
 };
 
 export const getTxHashForBatch = (
@@ -788,7 +699,7 @@ export const queryBatchesByClass = async ({
 
 // BatchesByIssuer
 
-interface QueryBatchesByIssuerProps extends EcocreditQueryClientProps {
+export interface QueryBatchesByIssuerProps extends EcocreditQueryClientProps {
   request: DeepPartial<QueryBatchesByIssuerRequest>;
 }
 
@@ -799,6 +710,7 @@ export const queryBatchesByIssuer = async ({
   try {
     return await client.BatchesByIssuer({
       issuer: request.issuer,
+      pagination: request.pagination,
     });
   } catch (err) {
     throw new Error(

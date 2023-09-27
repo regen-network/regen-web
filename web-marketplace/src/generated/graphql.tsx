@@ -5026,27 +5026,7 @@ export type ProjectByIdQuery = (
   { __typename?: 'Query' }
   & { projectById?: Maybe<(
     { __typename?: 'Project' }
-    & Pick<Project, 'id' | 'metadata' | 'developerId' | 'onChainId'>
-    & { walletByAdminWalletId?: Maybe<(
-      { __typename?: 'Wallet' }
-      & Pick<Wallet, 'addr'>
-    )>, partyByDeveloperId?: Maybe<(
-      { __typename?: 'Party' }
-      & PartyFieldsFragment
-    )>, partyByVerifierId?: Maybe<(
-      { __typename?: 'Party' }
-      & PartyFieldsFragment
-    )>, creditClassByCreditClassId?: Maybe<(
-      { __typename?: 'CreditClass' }
-      & Pick<CreditClass, 'id' | 'onChainId'>
-      & { creditClassVersionsById: (
-        { __typename?: 'CreditClassVersionsConnection' }
-        & { nodes: Array<Maybe<(
-          { __typename?: 'CreditClassVersion' }
-          & Pick<CreditClassVersion, 'name' | 'metadata'>
-        )>> }
-      ) }
-    )> }
+    & ProjectFieldsFragment
   )> }
 );
 
@@ -5095,7 +5075,7 @@ export type ProjectBySlugQuery = (
 
 export type ProjectFieldsFragment = (
   { __typename?: 'Project' }
-  & Pick<Project, 'id' | 'onChainId' | 'metadata' | 'approved'>
+  & Pick<Project, 'id' | 'onChainId' | 'metadata' | 'approved' | 'published'>
   & { walletByAdminWalletId?: Maybe<(
     { __typename?: 'Wallet' }
     & Pick<Wallet, 'addr'>
@@ -5299,6 +5279,7 @@ export const ProjectFieldsFragmentDoc = gql`
   onChainId
   metadata
   approved
+  published
   creditClassByCreditClassId {
     onChainId
     partyByRegistryId {
@@ -5943,32 +5924,10 @@ export type PartyByIdQueryResult = Apollo.QueryResult<PartyByIdQuery, PartyByIdQ
 export const ProjectByIdDocument = gql`
     query ProjectById($id: UUID!) {
   projectById(id: $id) {
-    id
-    walletByAdminWalletId {
-      addr
-    }
-    metadata
-    developerId
-    onChainId
-    partyByDeveloperId {
-      ...partyFields
-    }
-    partyByVerifierId {
-      ...partyFields
-    }
-    creditClassByCreditClassId {
-      id
-      onChainId
-      creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
-        nodes {
-          name
-          metadata
-        }
-      }
-    }
+    ...projectFields
   }
 }
-    ${PartyFieldsFragmentDoc}`;
+    ${ProjectFieldsFragmentDoc}`;
 
 /**
  * __useProjectByIdQuery__

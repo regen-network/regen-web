@@ -6,6 +6,13 @@
     "jsx": "react-jsx",
     "noEmitOnError": true,
     "types": ["node", "jest", "vite/client"],
+    "typeRoots": [
+      "./node_modules/@types/",
+      "./types",
+      "./node_modules",
+      "../node_modules/@types/",
+      "../node_modules"
+    ],
     "outDir": "lib",
     "rootDir": "src",
     "module": "esnext",

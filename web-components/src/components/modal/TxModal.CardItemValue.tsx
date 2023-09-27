@@ -1,7 +1,3 @@
-import { useState } from 'react';
-import { Collapse } from '@mui/material';
-
-import { TextButton } from '../buttons/TextButton';
 import { CollapseList } from '../organisms/CollapseList/CollapseList';
 import { Subtitle } from '../typography';
 import { ItemValue, LinkComponentProp } from './TxModal';

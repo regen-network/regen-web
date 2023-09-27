@@ -54,6 +54,9 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [useCommunityProjects, setUseCommunityProjects] = useState<
     boolean | undefined
   >(undefined);
+  const [useOffChainProjects, setUseOffChainProjects] = useState<
+    boolean | undefined
+  >(undefined);
   const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useState(
     {},
   );
@@ -103,6 +106,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
       sort,
       offset: page * PROJECTS_PER_PAGE,
       useCommunityProjects,
+      useOffChainProjects,
       creditClassFilter: creditClassSelectedFilters,
     });
 
@@ -119,6 +123,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const resetFilter = () => {
     setCreditClassSelectedFilters({});
     setUseCommunityProjects(undefined);
+    setUseOffChainProjects(undefined);
   };
 
   if (
@@ -179,9 +184,11 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
                 creditClassFilters={creditClassFilters}
                 hasCommunityProjects={hasCommunityProjects}
                 useCommunityProjects={useCommunityProjects}
+                useOffChainProjects={useOffChainProjects}
                 showFiltersReset={showFiltersReset}
                 setCreditClassFilter={setCreditClassSelectedFilters}
                 setUseCommunityProjects={setUseCommunityProjects}
+                setUseOffChainProjects={setUseOffChainProjects}
                 resetFilter={resetFilter}
                 sx={{
                   mt: { xs: 6.25, lg: 0 },

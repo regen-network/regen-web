@@ -23,10 +23,12 @@ import {
   COMMUNITY_FILTER_LABEL,
   CREDIT_CLASS_FILTER_LABEL,
   FILTERS_LABEL,
+  OFFCHAIN_FILTER_LABEL,
   RESET_FILTERS_LABEL,
   SIDE_FILTERS_BUTTON,
 } from './Projects.constants';
 import { CreditClassFilter } from './Projects.normalizers';
+import { OffChainFilter } from './Projects.OffChainFilter';
 import { FilterCreditClassEvent } from './Projects.types';
 import { getFilterSelected } from './Projects.utils';
 
@@ -35,9 +37,11 @@ type Props = {
   creditClassSelectedFilters: Record<string, boolean>;
   hasCommunityProjects: boolean;
   useCommunityProjects?: boolean;
+  useOffChainProjects?: boolean;
   showFiltersReset: boolean;
   setCreditClassFilter: UseStateSetter<Record<string, boolean>>;
   setUseCommunityProjects: UseStateSetter<boolean | undefined>;
+  setUseOffChainProjects: UseStateSetter<boolean | undefined>;
   resetFilter: () => void;
   sx?: SxProps<Theme>;
 };
@@ -47,9 +51,11 @@ export const ProjectsSideFilter = ({
   creditClassSelectedFilters,
   hasCommunityProjects,
   useCommunityProjects,
+  useOffChainProjects,
   showFiltersReset,
   setCreditClassFilter,
   setUseCommunityProjects,
+  setUseOffChainProjects,
   resetFilter,
   sx = [],
 }: Props) => {
@@ -167,7 +173,6 @@ export const ProjectsSideFilter = ({
                   useCommunityProjects={useCommunityProjects}
                   setUseCommunityProjects={setUseCommunityProjects}
                   sx={{
-                    mt: { xs: 6.25, lg: 0 },
                     mr: { xs: 0, lg: 7.5 },
                     width: { xs: '100%', lg: 'auto' },
                     order: { xs: 2, lg: 1 },
@@ -176,6 +181,24 @@ export const ProjectsSideFilter = ({
               </Box>
             </>
           )}
+          <>
+            <Box sx={{ height: '1px', bgcolor: 'info.light', my: 7.5 }} />
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+              <Subtitle size="md" sx={{ mb: 3.75 }}>
+                {OFFCHAIN_FILTER_LABEL}
+              </Subtitle>
+
+              <OffChainFilter
+                useOffChainProjects={useOffChainProjects}
+                setUseOffChainProjects={setUseOffChainProjects}
+                sx={{
+                  mr: { xs: 0, lg: 7.5 },
+                  width: { xs: '100%', lg: 'auto' },
+                  order: { xs: 2, lg: 1 },
+                }}
+              />
+            </Box>
+          </>
         </Box>
       </SwipeableDrawer>
     </>

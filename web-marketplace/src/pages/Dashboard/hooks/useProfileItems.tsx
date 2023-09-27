@@ -14,7 +14,7 @@ export const useProfileItems = () => {
 
   return {
     showProjects,
-    // Explictly set to false until we enable the class creation flow
+    // Explicitly set to false until we enable the class creation flow
     showCreditClasses: false && showCreditClasses,
     isCreditClassCreator: false && isCreditClassCreator,
     isProjectAdmin,

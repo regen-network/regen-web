@@ -10,6 +10,7 @@ export const getAddDataToBatchesQuery = ({
   sanityCreditClassData,
   reactQueryClient,
   dataClient,
+  txClient,
   ecocreditClient,
   ...params
 }: ReactQueryAddDataToBatchesParams): ReactQueryAddDataToBatchesResponse => ({

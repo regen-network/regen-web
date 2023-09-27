@@ -315,6 +315,7 @@ export type AddDataToBatchesParams = {
   withAllData?: boolean;
   dataClient?: DataQueryClientImpl;
   ecocreditClient?: EcocreditQueryClientImpl;
+  txClient?: ServiceClientImpl;
   reactQueryClient?: QueryClient;
 };
 
@@ -386,7 +387,7 @@ export const addDataToBatches = async ({
   }
 };
 
-const getTxHashForBatch = (
+export const getTxHashForBatch = (
   txResponses: TxResponse[],
   log: string,
 ): string | undefined => {

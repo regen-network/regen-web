@@ -6,7 +6,7 @@ import { NavLinkProps } from '../NavLink';
 import { useStyles } from './HeaderDropdown.styles';
 
 export type HeaderDropdownItemProps = {
-  title: string;
+  label: string;
   href: string;
   pathname: string;
   linkComponent: React.FC<React.PropsWithChildren<NavLinkProps>>;
@@ -45,7 +45,7 @@ export const HeaderDropdownItem: React.FC<
       )}
       {icon && <Box mr={3}>{icon}</Box>}
       <LinkComponent pathname={props.pathname} href={props.href}>
-        {ReactHtmlParser(props.title)}
+        {ReactHtmlParser(props.label)}
       </LinkComponent>
       {props.right && <Box ml={3}>{props.right()}</Box>}
     </Box>

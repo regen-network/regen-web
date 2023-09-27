@@ -30,6 +30,13 @@ import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator
 import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
 import { useQueryIsProjectAdmin } from 'hooks/useQueryIsProjectAdmin';
 
+import {
+  BRIDGE,
+  CREDIT_BATCHES,
+  CREDIT_CLASSES,
+  PORTFOLIO,
+  PROJECTS,
+} from './Dashboard.constants';
 import { dashBoardStyles } from './Dashboard.styles';
 import { getSocialsLinks, getUserImages } from './Dashboard.utils';
 
@@ -53,33 +60,28 @@ const Dashboard = (): JSX.Element => {
   const tabs: IconTabProps[] = useMemo(
     () => [
       {
-        label: 'Portfolio',
         icon: <CreditsIcon fontSize="small" />,
-        href: '/profile/portfolio',
+        ...PORTFOLIO,
       },
       {
-        label: 'Projects',
         icon: <ProjectPageIcon />,
-        href: '/profile/projects',
         hidden: !showProjectTab,
+        ...PROJECTS,
       },
       {
-        label: 'Credit Classes',
         icon: <CreditClassIcon />,
-        href: '/profile/credit-classes',
         hidden: true,
+        ...CREDIT_CLASSES,
       },
       {
-        label: 'Credit Batches',
         icon: <CreditBatchIcon />,
-        href: '/profile/credit-batches',
         hidden: !isIssuer,
+        ...CREDIT_BATCHES,
       },
       {
-        label: 'Bridge',
         icon: <BridgeIcon />,
-        href: '/profile/bridge',
         hidden: !isBridgeEnabled,
+        ...BRIDGE,
       },
     ],
     [isIssuer, showProjectTab],

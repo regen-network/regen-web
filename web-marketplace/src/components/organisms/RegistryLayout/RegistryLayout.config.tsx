@@ -9,6 +9,7 @@ import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 
 import { isBridgeEnabled } from 'lib/ledger';
 
+import { BRIDGE, PORTFOLIO } from 'pages/Dashboard/Dashboard.constants';
 import { Link } from 'components/atoms';
 
 export const getMenuItems = (pathname: string): Item[] => [
@@ -30,14 +31,14 @@ export const getMenuItems = (pathname: string): Item[] => [
       {
         pathname,
         href: '/stats/activity',
-        title: 'Activity',
+        label: 'Activity',
         linkComponent: Link,
         importCallback: (): Promise<any> => import('../../../pages/Activity'),
       },
       {
         pathname,
         href: '/ecocredit-batches/1',
-        title: 'Ecocredit batches',
+        label: 'Ecocredit batches',
         linkComponent: Link,
         importCallback: (): Promise<any> =>
           import('../../../pages/EcocreditBatches'),
@@ -61,18 +62,16 @@ export const getUserMenuItems = ({
     {
       pathname,
       linkComponent,
-      title: 'My Portfolio',
-      href: '/profile/portfolio',
       icon: <CreditsIcon sx={{ height: 18, width: 20 }} />,
       importCallback: (): Promise<any> => import('../../../pages/Dashboard'),
+      ...PORTFOLIO,
     },
     isBridgeEnabled
       ? {
           pathname,
           linkComponent,
-          title: 'Bridge',
           icon: <BridgeIcon />,
-          href: '/profile/bridge',
+          ...BRIDGE,
         }
       : undefined,
   ].filter(Boolean) as HeaderDropdownItemProps[];

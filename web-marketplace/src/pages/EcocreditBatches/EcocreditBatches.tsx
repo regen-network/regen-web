@@ -12,7 +12,7 @@ export const EcocreditBatches = (): JSX.Element => {
   const navigate = useNavigate();
   const { page: routePage } = useParams();
   const { batchesWithSupply, setPaginationParams, paginationParams } =
-    usePaginatedBatches();
+    usePaginatedBatches({});
   const { page } = paginationParams;
 
   useEffect(() => {

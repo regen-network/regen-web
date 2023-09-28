@@ -7,6 +7,8 @@ import { TablePaginationParams } from 'web-components/lib/components/table/Actio
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
+import { getBatchesByIssuerQuery } from 'lib/queries/react-query/ecocredit/getBatchesByIssuerQuery/getBatchesByIssuerQuery';
+import { getBatchesByProjectQuery } from 'lib/queries/react-query/ecocredit/getBatchesByProjectQuery/getBatchesByProjectQuery';
 import { getBatchesQuery } from 'lib/queries/react-query/ecocredit/getBatchesQuery/getBatchesQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
@@ -15,7 +17,12 @@ import { useAddDataToBatches } from './useAddDataToBatches';
 
 export const PAGINATED_BATCHES_ROWS_PER_PAGE = 10;
 
-export const usePaginatedBatches = (): {
+type Props = { address?: string; projectId?: string };
+
+export const usePaginatedBatches = ({
+  projectId,
+  address,
+}: Props): {
   batchesWithSupply: BatchInfoWithSupply[] | undefined;
   setPaginationParams: UseStateSetter<TablePaginationParams>;
   paginationParams: TablePaginationParams;
@@ -33,29 +40,61 @@ export const usePaginatedBatches = (): {
       offset: 0,
     });
   const { rowsPerPage } = paginationParams;
+  const paginationRequest = {
+    offset: page * rowsPerPage,
+    limit: rowsPerPage,
+    countTotal: true,
+  };
 
   const sanityCreditClassDataResult = useQuery(
     getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
   );
 
-  /* Fetch current page batches */
+  /* Default batches fetch */
   const batchesResult = useQuery(
     getBatchesQuery({
       client: ecocreditClient,
       request: {
-        pagination: {
-          offset: page * rowsPerPage,
-          limit: rowsPerPage,
-          countTotal: true,
-        },
+        pagination: paginationRequest,
       },
-      enabled: !!ecocreditClient,
+      keepPreviousData: true,
+      enabled: !!ecocreditClient && !projectId && !address,
     }),
   );
 
-  /* Fetch current page batches supplies */
+  /* By Issuer batches fetch */
+  const batchesByIssuerResult = useQuery(
+    getBatchesByIssuerQuery({
+      client: ecocreditClient,
+      request: {
+        pagination: paginationRequest,
+        issuer: address,
+      },
+      keepPreviousData: true,
+      enabled: !!ecocreditClient && !!address,
+    }),
+  );
 
-  const batches = batchesResult.data?.batches ?? [];
+  /* By Project batches fetch */
+  const batchesByProjectResult = useQuery(
+    getBatchesByProjectQuery({
+      client: ecocreditClient,
+      request: {
+        pagination: paginationRequest,
+        projectId,
+      },
+      keepPreviousData: true,
+      enabled: !!ecocreditClient && !!projectId,
+    }),
+  );
+
+  const batchesData =
+    batchesResult.data ??
+    batchesByIssuerResult.data ??
+    batchesByProjectResult.data;
+
+  const batches = batchesData?.batches ?? [];
+
   const { batchesWithData: batchesWithSupply } = useAddDataToBatches({
     batches,
     sanityCreditClassData: sanityCreditClassDataResult.data,
@@ -67,7 +106,7 @@ export const usePaginatedBatches = (): {
 
   /* Format hook returned variables */
 
-  const batchesPagination = batchesResult.data?.pagination;
+  const batchesPagination = batchesData?.pagination;
   const allBatchesCount = Number(batchesPagination?.total ?? 0);
   const batchesWithDefaultSupply: BatchInfoWithSupply[] | undefined =
     batches?.map(batch => ({

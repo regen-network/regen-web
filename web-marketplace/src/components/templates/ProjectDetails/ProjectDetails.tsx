@@ -42,7 +42,7 @@ import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSecti
 import { ProjectStorySection } from 'components/organisms/ProjectStorySection/ProjectStorySection';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { AVG_PRICE_TOOLTIP_PROJECT } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants';
-import { usePaginatedBatchesByProject } from 'hooks/batches/usePaginatedBatchesByProject';
+import { usePaginatedBatches } from 'hooks/batches/usePaginatedBatches';
 
 import { useLedger } from '../../../ledger';
 import { client as sanityClient } from '../../../lib/clients/sanity';
@@ -224,7 +224,7 @@ function ProjectDetails(): JSX.Element {
   const anchoredMetadata = data as AnchoredProjectMetadataLD | undefined;
 
   const { batchesWithSupply, setPaginationParams, paginationParams } =
-    usePaginatedBatchesByProject({ projectId: String(onChainProjectId) });
+    usePaginatedBatches({ projectId: String(onChainProjectId) });
   const { totals: batchesTotal } = getBatchesTotal(batchesWithSupply ?? []);
 
   const {

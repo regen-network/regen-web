@@ -35,7 +35,7 @@ export const useFetchPaginatedBatches = ({
   setPaginationParams: UseStateSetter<TablePaginationParams>;
   paginationParams: TablePaginationParams;
 } => {
-  const { ecocreditClient, dataClient } = useLedger();
+  const { ecocreditClient, dataClient, txClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const { page: routePage } = useParams();
   // Page index starts at 1 for route
@@ -123,6 +123,7 @@ export const useFetchPaginatedBatches = ({
     reactQueryClient,
     dataClient,
     ecocreditClient,
+    txClient,
     withAllData,
   });
 

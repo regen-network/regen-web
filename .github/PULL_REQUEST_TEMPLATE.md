@@ -21,7 +21,7 @@ I have...
 
 ### How to test
 
-<!-- This should include steps on how to test the fix or new feature within the marketplace app or the website.
+<!-- This should include steps on how to test the fixes or features within the marketplace app and/or the website.
 If applicable, this should also include links to the created/updated components on storybook. -->
 
 1.

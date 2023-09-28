@@ -5127,7 +5127,7 @@ export type ProjectBySlugQuery = (
 
 export type ProjectFieldsFragment = (
   { __typename?: 'Project' }
-  & Pick<Project, 'id' | 'onChainId' | 'metadata' | 'approved' | 'published'>
+  & Pick<Project, 'id' | 'onChainId' | 'metadata' | 'approved' | 'published' | 'slug'>
   & { walletByAdminWalletId?: Maybe<(
     { __typename?: 'Wallet' }
     & Pick<Wallet, 'addr'>
@@ -5332,6 +5332,7 @@ export const ProjectFieldsFragmentDoc = gql`
   metadata
   approved
   published
+  slug
   creditClassByCreditClassId {
     onChainId
     partyByRegistryId {

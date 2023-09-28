@@ -7,6 +7,7 @@ fragment projectFields on Project {
   metadata
   approved
   published
+  slug
   creditClassByCreditClassId {
     onChainId
     partyByRegistryId {

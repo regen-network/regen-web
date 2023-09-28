@@ -408,25 +408,20 @@ function ProjectDetails(): JSX.Element {
         />
       </DetailsSection>
 
-      <Box
-        className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}
-        sx={{ ':nth-of-type(odd)': { pt: { xs: 25 } } }}
-      >
-        <ProjectDetailsTableTabs
-          sortedDocuments={sortedDocuments}
-          sortCallbacksDocuments={sortCallbacksDocuments}
-          offChainProject={offChainProject}
-          projectMetadata={projectMetadata}
-          onChainProjectId={onChainProjectId}
-          batchData={{
-            batches: batchesWithSupply,
-            totals: batchesTotal,
-          }}
-          paginationParams={paginationParams}
-          setPaginationParams={setPaginationParams}
-          sx={{ pt: { xs: 0 } }}
-        />
-      </Box>
+      <ProjectDetailsTableTabs
+        sortedDocuments={sortedDocuments}
+        sortCallbacksDocuments={sortCallbacksDocuments}
+        offChainProject={offChainProject}
+        projectMetadata={projectMetadata}
+        onChainProjectId={onChainProjectId}
+        batchData={{
+          batches: batchesWithSupply,
+          totals: batchesTotal,
+        }}
+        paginationParams={paginationParams}
+        setPaginationParams={setPaginationParams}
+        sx={{ pt: { xs: 0 } }}
+      />
 
       {managementActions && <ManagementActions actions={managementActions} />}
 

@@ -241,7 +241,7 @@ type FormatOtcCardDataParams = {
   data: AllProjectPageQuery['allProjectPage'][0]['otcCard'];
   isConnected: boolean;
   orders?: UISellOrderInfo[];
-  isCommunityCredit?: boolean;
+  hideOtcCard?: boolean;
   setIsBuyFlowStarted: UseStateSetter<boolean>;
 };
 
@@ -249,7 +249,7 @@ export const formatOtcCardData = ({
   data,
   isConnected,
   orders = [],
-  isCommunityCredit,
+  hideOtcCard,
   setIsBuyFlowStarted,
 }: FormatOtcCardDataParams): ActionCardProps | undefined => {
   const isNoteVisible = !isConnected || orders?.length > 0;
@@ -259,7 +259,8 @@ export const formatOtcCardData = ({
       setIsBuyFlowStarted(true);
     }
   };
-  return isCommunityCredit
+
+  return hideOtcCard
     ? undefined
     : {
         title: data?.title ?? '',

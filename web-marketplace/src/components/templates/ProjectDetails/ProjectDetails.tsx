@@ -240,8 +240,8 @@ function ProjectDetails(): JSX.Element {
     projectDocs,
   });
 
-  // For legacy projects (that are not on-chain), all metadata is stored off-chain
-  const projectMetadata = isOnChainId
+  // For legacy/open projects (that are not on-chain), all metadata is stored off-chain
+  const projectMetadata = !!onChainProjectId
     ? anchoredMetadata
     : offChainProjectMetadata;
 
@@ -317,7 +317,7 @@ function ProjectDetails(): JSX.Element {
     data: sanityProjectPage?.otcCard,
     isConnected,
     orders: projectsWithOrderData[0]?.sellOrders,
-    isCommunityCredit,
+    hideOtcCard: isCommunityCredit || !onChainProjectId,
     setIsBuyFlowStarted,
   });
 

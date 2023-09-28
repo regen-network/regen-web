@@ -17,6 +17,7 @@ export const getCreditClassDetailsTabs = ({
       label: 'Credit Issuance',
       content: (
         <CreditBatches
+          creditClassId={onChainCreditClassId}
           creditBatches={creditBatches}
           initialPaginationParams={initialPaginationParams}
           onTableChange={onTableChange}

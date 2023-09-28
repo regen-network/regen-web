@@ -689,6 +689,7 @@ export const queryBatchesByClass = async ({
   try {
     return await client.BatchesByClass({
       classId: request.classId,
+      pagination: request.pagination,
     });
   } catch (err) {
     throw new Error(

@@ -5,6 +5,7 @@ query AllProjects {
       slug
       metadata
       onChainId
+      approved
       creditClassByCreditClassId {
         id
         onChainId

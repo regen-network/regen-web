@@ -22,7 +22,7 @@ type Props = {
   createBatchTxs?: GetTxsEventResponse | null;
   createBatchAlphaTxs?: GetTxsEventResponse | null;
   batchesSupplyResult?: UseQueryResult<QuerySupplyResponse>[];
-  batchesProjectDataResult?: UseQueryResult<QueryProjectResponse | null>[];
+  batchesProjectResult?: UseQueryResult<QueryProjectResponse | null>[];
   batchesProjectMetadataResult?: UseQueryResult<
     AnchoredProjectMetadataLD | CreditClassMetadataLD
   >[];
@@ -34,7 +34,7 @@ type Props = {
 export const normalizeBatchesWithData = ({
   batches,
   batchesClassMetadataResult,
-  batchesProjectDataResult,
+  batchesProjectResult,
   batchesProjectMetadataResult,
   batchesSupplyResult,
   createBatchAlphaTxs,
@@ -49,12 +49,12 @@ export const normalizeBatchesWithData = ({
         v1Alpha1BatchDenomMapping[batch.denom],
       );
 
-    const supplyData = batchesSupplyResult?.[index].data ?? {
+    const supplyData = batchesSupplyResult?.[index]?.data ?? {
       cancelledAmount: '',
       retiredAmount: '',
       tradableAmount: '',
     };
-    const project = batchesProjectDataResult?.[index].data?.project;
+    const project = batchesProjectResult?.[index]?.data?.project;
     const classMetadata = batchesClassMetadataResult?.[index];
     const projectMetadata = batchesProjectMetadataResult?.[index];
 

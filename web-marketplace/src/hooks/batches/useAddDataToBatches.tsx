@@ -64,8 +64,11 @@ export const useAddDataToBatches = ({
       }),
     ),
   });
+  const isBatchesSupplyLoading = batchesSupplyResult.some(
+    batchSupplyQuery => batchSupplyQuery.isFetching,
+  );
 
-  const batchesProjectDataResult = useQueries({
+  const batchesProjectResult = useQueries({
     queries: batches.map(batch =>
       getProjectQuery({
         request: { projectId: batch.projectId },
@@ -74,10 +77,13 @@ export const useAddDataToBatches = ({
       }),
     ),
   });
+  const isBatchesProjectLoading = batchesProjectResult.some(
+    batchProjectQuery => batchProjectQuery.isFetching,
+  );
 
   const batchesProjectMetadataResult = useQueries({
     queries: batches.map((batch, index) => {
-      const project = batchesProjectDataResult?.[index].data?.project;
+      const project = batchesProjectResult?.[index].data?.project;
       return getMetadataQuery({
         iri: project?.metadata,
         dataClient,
@@ -85,10 +91,13 @@ export const useAddDataToBatches = ({
       });
     }),
   });
+  const isBatchesProjectMetadataLoading = batchesProjectMetadataResult.some(
+    batchProjectMetadataQuery => batchProjectMetadataQuery.isFetching,
+  );
 
   const batchesClassResult = useQueries({
     queries: batches.map((batch, index) => {
-      const project = batchesProjectDataResult?.[index].data?.project;
+      const project = batchesProjectResult?.[index].data?.project;
       return getClassQuery({
         request: { classId: project?.classId },
         client: ecocreditClient,
@@ -108,13 +117,20 @@ export const useAddDataToBatches = ({
       });
     }),
   });
+  const isBatchesClassMetadataLoading = batchesClassMetadataResult.some(
+    batchClassMetadataQuery => batchClassMetadataQuery.isFetching,
+  );
 
   const batchesWithData = normalizeBatchesWithData({
     batches,
-    batchesClassMetadataResult,
-    batchesProjectDataResult,
-    batchesProjectMetadataResult,
-    batchesSupplyResult,
+    batchesClassMetadataResult: isBatchesClassMetadataLoading
+      ? []
+      : batchesClassMetadataResult,
+    batchesProjectResult: isBatchesProjectLoading ? [] : batchesProjectResult,
+    batchesProjectMetadataResult: isBatchesProjectMetadataLoading
+      ? []
+      : batchesProjectMetadataResult,
+    batchesSupplyResult: isBatchesSupplyLoading ? [] : batchesSupplyResult,
     createBatchAlphaTxs,
     createBatchTxs,
     sanityCreditClassData,

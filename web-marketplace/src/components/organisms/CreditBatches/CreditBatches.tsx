@@ -30,7 +30,6 @@ import {
   creditBatchesHeadCells,
 } from './CreditBatches.config';
 import { useCreditBatchesStyles } from './CreditBatches.styles';
-import { useFetchCreditBatches } from './hooks/useFetchCreditBatches';
 
 interface CreditBatchProps {
   creditClassId?: string | null;
@@ -58,10 +57,7 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
   sx,
 }) => {
   const { classes } = useCreditBatchesStyles();
-  const { batchesWithSupply } = useFetchCreditBatches({
-    creditBatches,
-    creditClassId,
-  });
+
   let columnsToShow = [...creditBatchesHeadCells];
 
   // We hide the classId column if creditClassId provided (redundant)
@@ -77,13 +73,13 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
     );
   }
 
-  const someTx = batchesWithSupply?.some(batch => batch.txhash);
+  const someTx = creditBatches?.some(batch => batch.txhash);
 
   if (!someTx) {
     columnsToShow = columnsToShow.filter(column => column.id !== 'txhash');
   }
 
-  if (!batchesWithSupply?.length) {
+  if (!creditBatches?.length) {
     return (
       <NoCredits
         title="No credits issued"
@@ -125,7 +121,7 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
       initialPaginationParams={initialPaginationParams}
       isIgnoreOffset={isIgnoreOffset}
       sx={sx}
-      rows={batchesWithSupply.map(batch => {
+      rows={creditBatches.map(batch => {
         /* eslint-disable react/jsx-key */
         let result = [];
         if (someTx) {
@@ -214,7 +210,7 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
     />
   );
 
-  return batchesWithSupply.length > 0 ? (
+  return creditBatches.length > 0 ? (
     withSection ? (
       <Section
         classes={{ root: classes.section, title: classes.title }}

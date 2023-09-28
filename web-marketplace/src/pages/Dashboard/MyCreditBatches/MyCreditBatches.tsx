@@ -12,7 +12,7 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import WithLoader from 'components/atoms/WithLoader';
 import { CreditBatches } from 'components/organisms';
-import { usePaginatedBatches } from 'hooks/batches/usePaginatedBatches';
+import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
 
 import { NO_CREDIT_BATCHES_MESSAGE } from './MyCreditBatches.constants';
 
@@ -20,7 +20,7 @@ export const MyCreditBatches = (): JSX.Element => {
   const theme = useTheme();
   const { wallet } = useWallet();
   const { batchesWithSupply, setPaginationParams, paginationParams } =
-    usePaginatedBatches({ address: wallet?.address });
+    useFetchPaginatedBatches({ address: wallet?.address });
   const hasNoBatches = batchesWithSupply && batchesWithSupply?.length === 0;
 
   return (

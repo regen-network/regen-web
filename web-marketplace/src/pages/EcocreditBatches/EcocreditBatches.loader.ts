@@ -5,7 +5,7 @@ import { getEcocreditQueryClient } from 'lib/clients/regen/ecocredit/ecocreditQu
 import { getBatchesQuery } from 'lib/queries/react-query/ecocredit/getBatchesQuery/getBatchesQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 
-import { PAGINATED_BATCHES_ROWS_PER_PAGE } from 'hooks/batches/usePaginatedBatches';
+import { PAGINATED_BATCHES_ROWS_PER_PAGE } from 'hooks/batches/useFetchPaginatedBatches';
 
 type LoaderType = {
   queryClient: QueryClient;

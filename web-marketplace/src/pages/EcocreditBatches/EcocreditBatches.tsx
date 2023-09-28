@@ -6,13 +6,13 @@ import Section from 'web-components/lib/components/section';
 import { Title } from 'web-components/lib/components/typography';
 
 import { CreditBatches } from 'components/organisms';
-import { usePaginatedBatches } from 'hooks/batches/usePaginatedBatches';
+import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
 
 export const EcocreditBatches = (): JSX.Element => {
   const navigate = useNavigate();
   const { page: routePage } = useParams();
   const { batchesWithSupply, setPaginationParams, paginationParams } =
-    usePaginatedBatches({});
+    useFetchPaginatedBatches({});
   const { page } = paginationParams;
 
   useEffect(() => {

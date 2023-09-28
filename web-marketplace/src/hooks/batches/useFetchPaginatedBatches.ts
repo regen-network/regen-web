@@ -7,6 +7,7 @@ import { TablePaginationParams } from 'web-components/lib/components/table/Actio
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
+import { getBatchesByClassQuery } from 'lib/queries/react-query/ecocredit/getBatchesByClass/getBatchesByClass';
 import { getBatchesByIssuerQuery } from 'lib/queries/react-query/ecocredit/getBatchesByIssuerQuery/getBatchesByIssuerQuery';
 import { getBatchesByProjectQuery } from 'lib/queries/react-query/ecocredit/getBatchesByProjectQuery/getBatchesByProjectQuery';
 import { getBatchesQuery } from 'lib/queries/react-query/ecocredit/getBatchesQuery/getBatchesQuery';
@@ -17,11 +18,18 @@ import { useAddDataToBatches } from './useAddDataToBatches';
 
 export const PAGINATED_BATCHES_ROWS_PER_PAGE = 10;
 
-type Props = { address?: string; projectId?: string };
+type Props = {
+  address?: string;
+  projectId?: string;
+  withAllData?: boolean;
+  creditClassId?: string | null;
+};
 
-export const usePaginatedBatches = ({
+export const useFetchPaginatedBatches = ({
   projectId,
   address,
+  creditClassId,
+  withAllData = true,
 }: Props): {
   batchesWithSupply: BatchInfoWithSupply[] | undefined;
   setPaginationParams: UseStateSetter<TablePaginationParams>;
@@ -32,14 +40,14 @@ export const usePaginatedBatches = ({
   const { page: routePage } = useParams();
   // Page index starts at 1 for route
   // Page index starts at 0 for MUI Table
-  const page = Number(routePage) - 1;
+  const initialPage = routePage ? Number(routePage) - 1 : 0;
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
-      page,
+      page: initialPage,
       rowsPerPage: PAGINATED_BATCHES_ROWS_PER_PAGE,
       offset: 0,
     });
-  const { rowsPerPage } = paginationParams;
+  const { rowsPerPage, page } = paginationParams;
   const paginationRequest = {
     offset: page * rowsPerPage,
     limit: rowsPerPage,
@@ -58,7 +66,7 @@ export const usePaginatedBatches = ({
         pagination: paginationRequest,
       },
       keepPreviousData: true,
-      enabled: !!ecocreditClient && !projectId && !address,
+      enabled: !!ecocreditClient && !projectId && !address && !creditClassId,
     }),
   );
 
@@ -88,10 +96,24 @@ export const usePaginatedBatches = ({
     }),
   );
 
+  /* By Class batches fetch */
+  const batchesByClassResult = useQuery(
+    getBatchesByClassQuery({
+      client: ecocreditClient,
+      request: {
+        pagination: paginationRequest,
+        classId: creditClassId ?? undefined,
+      },
+      keepPreviousData: true,
+      enabled: !!ecocreditClient && !!creditClassId,
+    }),
+  );
+
   const batchesData =
     batchesResult.data ??
     batchesByIssuerResult.data ??
-    batchesByProjectResult.data;
+    batchesByProjectResult.data ??
+    batchesByClassResult.data;
 
   const batches = batchesData?.batches ?? [];
 
@@ -101,7 +123,7 @@ export const usePaginatedBatches = ({
     reactQueryClient,
     dataClient,
     ecocreditClient,
-    withAllData: true,
+    withAllData,
   });
 
   /* Format hook returned variables */

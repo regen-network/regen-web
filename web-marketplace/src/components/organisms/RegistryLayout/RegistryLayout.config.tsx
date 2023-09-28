@@ -4,6 +4,7 @@ import { HeaderColors } from 'web-components/lib/components/header';
 import { HeaderDropdownItemProps } from 'web-components/lib/components/header/components/HeaderDropdown/HeaderDropdown.Item';
 import { Item } from 'web-components/lib/components/header/components/HeaderMenuItem/HeaderMenuItem';
 import { NavLinkProps } from 'web-components/lib/components/header/components/NavLink';
+import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 
 import { isBridgeEnabled } from 'lib/ledger';
 
@@ -74,6 +75,7 @@ export const getUserMenuItems = ({
       linkComponent,
       importCallback: (): Promise<any> => import('../../../pages/Dashboard'),
       ...PORTFOLIO,
+      icon: <CreditsIcon sx={{ width: 24, height: 20 }} />,
     },
     showProjects && {
       pathname,

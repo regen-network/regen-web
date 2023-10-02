@@ -148,6 +148,7 @@ export const getRoutes = ({
           path="profiles/:accountAddressOrId"
           element={<EcocreditsByAccount />}
         >
+          <Route index element={<Navigate to="portfolio" />} />
           <Route path="portfolio" element={<PortfolioTab />} />
           <Route path="projects" element={<ProjectsTab />} />
           <Route path="bridge" element={<BridgeTab />} />

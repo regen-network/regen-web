@@ -137,10 +137,7 @@ export default function MediaCard({
               borderTop: `1px solid ${theme.palette.grey[100]}`,
             }),
             !!truncateTitle && {
-              height: {
-                xs: 'inherit',
-                sm: titleVariant === 'h4' ? '94px' : 'inherit',
-              },
+              height: 'inherit',
               overflow: 'hidden',
               textOverflow: 'ellipsis',
               display: '-webkit-box',

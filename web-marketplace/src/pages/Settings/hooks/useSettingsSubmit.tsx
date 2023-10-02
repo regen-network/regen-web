@@ -31,9 +31,7 @@ export const useSettingsSubmit = ({ offChainProject }: Props): Return => {
           projectPatch,
         });
       } catch (e) {
-        // TODO: Should we display the error banner here?
-        // https://github.com/regen-network/regen-registry/issues/554
-        // console.log(e);
+        console.log(e);
       }
     },
     [createOrUpdateProject, offChainProject?.id],

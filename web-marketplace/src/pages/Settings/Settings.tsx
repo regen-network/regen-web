@@ -52,7 +52,14 @@ const Settings: React.FC<React.PropsWithChildren<unknown>> = () => {
       loading={!offChainProject}
     >
       <WithLoader isLoading={editContextLoading}>
-        <SettingsForm submit={settingsSubmit} initialValues={initialValues} />
+        <>
+          {offChainProject && (
+            <SettingsForm
+              submit={settingsSubmit}
+              initialValues={initialValues}
+            />
+          )}
+        </>
       </WithLoader>
     </ProjectFormTemplate>
   );

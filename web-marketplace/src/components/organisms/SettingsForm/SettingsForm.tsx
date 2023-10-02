@@ -1,21 +1,29 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
+import { useQuery } from '@tanstack/react-query';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
-import { Flex } from 'web-components/lib/components/box';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { appUrl } from 'lib/env';
+import { getProjectBySlugQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectBySlugQuery/getProjectBySlugQuery';
 
 import { useCreateProjectContext } from 'pages/ProjectCreate';
 import { SettingsSubmitProps } from 'pages/Settings/hooks/useSettingsSubmit';
+import { DebouncedField } from 'components/molecules/Form/fields/DebouncedField';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
 import { useProjectEditContext } from '../../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../../molecules';
+import { SLUG_DESCRIPTION, SLUG_TAKEN_ERROR } from './SettingsForm.constants';
 import {
   settingsFormSchema,
   SettingsFormSchemaType,
@@ -38,12 +46,14 @@ export const SettingsForm: React.FC<
     },
     mode: 'onBlur',
   });
-  const { isSubmitting, isDirty, isValid } = useFormState({
+  const { isSubmitting, isDirty, isValid, errors } = useFormState({
     control: form.control,
   });
   const { isDirtyRef } = useProjectEditContext();
   const { confirmSave, isEdit } = useProjectEditContext();
-  const { formRef, shouldNavigateRef } = useCreateProjectContext();
+  const { formRef } = useCreateProjectContext();
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
   useEffect(() => {
@@ -63,6 +73,18 @@ export const SettingsForm: React.FC<
     form.setValue('slug', value, { shouldDirty: true });
   };
 
+  const [slugValue, setSlugValue] = useState('');
+  const { data: projectBySlugData } = useQuery(
+    getProjectBySlugQuery({
+      client: graphqlClient,
+      enabled: !!graphqlClient && !!slugValue,
+      slug: slugValue,
+    }),
+  );
+  const isNewSlug = initialValues?.slug !== slugValue;
+  const projectBySlug = projectBySlugData?.data.projectBySlug;
+  const slugTakenError = projectBySlug && isNewSlug ? SLUG_TAKEN_ERROR : '';
+
   return (
     <Form
       form={form}
@@ -80,18 +102,23 @@ export const SettingsForm: React.FC<
       }}
     >
       <OnBoardingCard>
-        <Flex alignItems="flex-end" sx={{ mt: { xs: 8.25, sm: 10 } }}>
-          <TextField
-            type="text"
-            label="Custom url"
-            {...form.register('slug')}
-          />
-        </Flex>
+        <DebouncedField
+          type="text"
+          label="Custom url"
+          description={SLUG_DESCRIPTION}
+          value={slug}
+          setValue={setSlug}
+          setDebouncedValue={setSlugValue}
+          error={!!errors['slug'] || !!slugTakenError}
+          helperText={errors['slug']?.message?.toString() ?? slugTakenError}
+          startAdornment={`${appUrl}/project/`}
+          {...form.register('slug')}
+        />
       </OnBoardingCard>
       <ProjectPageFooter
         onPrev={onPrev}
         onNext={onNext}
-        isValid={isValid}
+        isValid={isValid && !slugTakenError}
         isSubmitting={isSubmitting}
         dirty={isDirty}
       />

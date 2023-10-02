@@ -9,7 +9,7 @@ export const useProfileItems = () => {
   const isProjectAdmin = useQueryIsProjectAdmin({});
   const isCreditClassAdmin = useQueryIsClassAdmin();
 
-  const showProjects = isIssuer || isProjectAdmin;
+  const showProjects = isIssuer.isIssuer || isProjectAdmin.isProjectAdmin;
   const showCreditClasses = isCreditClassCreator || isCreditClassAdmin;
 
   return {
@@ -17,7 +17,7 @@ export const useProfileItems = () => {
     // Explicitly set to false until we enable the class creation flow
     showCreditClasses: false && showCreditClasses,
     isCreditClassCreator: false && isCreditClassCreator,
-    isProjectAdmin,
-    isIssuer,
+    isProjectAdmin: isProjectAdmin.isProjectAdmin,
+    isIssuer: isIssuer.isIssuer,
   };
 };

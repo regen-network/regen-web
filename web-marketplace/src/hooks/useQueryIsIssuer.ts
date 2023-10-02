@@ -17,12 +17,13 @@ function useQueryIsIssuer({ address }: Props) {
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { wallet } = useWallet();
   const walletAddress = wallet?.address;
+  const activeAddress = address ?? walletAddress;
 
   const { data: classesByIssuerData, isFetching } = useQuery(
     getClassesByIssuerQuery({
-      enabled: !!address && !!graphqlClient,
+      enabled: !!activeAddress && !!graphqlClient,
       client: graphqlClient,
-      issuer: address ?? walletAddress,
+      issuer: activeAddress,
     }),
   );
 

@@ -19,12 +19,7 @@ export const getAllProjectsQuery = ({
     await Promise.all(
       data?.allProjects?.nodes?.map(async project => {
         if (project?.metadata) {
-          try {
-            project.metadata = await jsonLdCompact(project.metadata);
-          } catch (e) {
-            // eslint-disable-next-line no-console
-            console.log(e);
-          }
+          project.metadata = await jsonLdCompact(project.metadata);
         }
         return project;
       }) || [],

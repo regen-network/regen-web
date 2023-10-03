@@ -11,7 +11,6 @@ import { CardItem } from 'web-components/lib/components/modal/TxModal';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 import { truncateHash } from 'web-components/lib/utils/truncate';
 
-import { appUrl } from 'lib/env';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 
 import { Link } from '../../components/atoms';
@@ -35,7 +34,7 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
   const projectOnChainId = data?.data?.projectById?.onChainId || '';
   const projectOffChainId = data?.data?.projectById?.id || '';
   const currentProjectId = projectOnChainId ?? projectOffChainId;
-  const projectUrl = `${appUrl}/project/${currentProjectId}`;
+  const projectUrl = `${window.location.origin}/project/${currentProjectId}`;
 
   return (
     <OnboardingFormTemplate
@@ -75,7 +74,7 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
               children: (
                 <Box>
                   <Link
-                    href={`${appUrl}/project-pages/${currentProjectId}/edit/settings`}
+                    href={`${window.location.origin}/project-pages/${currentProjectId}/edit/settings`}
                     sx={{
                       display: 'inline-flex',
                       alignItems: 'center',

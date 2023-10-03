@@ -12,7 +12,6 @@ import { useSetAtom } from 'jotai';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
-import { appUrl } from 'lib/env';
 import { getProjectBySlugQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectBySlugQuery/getProjectBySlugQuery';
 
 import { useCreateProjectContext } from 'pages/ProjectCreate';
@@ -111,7 +110,7 @@ export const SettingsForm: React.FC<
           setDebouncedValue={setSlugValue}
           error={!!errors['slug'] || !!slugTakenError}
           helperText={errors['slug']?.message?.toString() ?? slugTakenError}
-          startAdornment={`${appUrl}/project/`}
+          startAdornment={`${window.location.origin}/project/`}
           {...form.register('slug')}
         />
       </OnBoardingCard>

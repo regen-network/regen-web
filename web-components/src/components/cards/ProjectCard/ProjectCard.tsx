@@ -86,7 +86,7 @@ export function ProjectCard({
   const isButtonDisabled =
     button?.disabled !== undefined
       ? button?.disabled
-      : purchaseInfo?.sellInfo?.creditsAvailableForUser === 0;
+      : !purchaseInfo?.sellInfo?.creditsAvailableForUser;
   const hasButton = !!onButtonClick;
 
   const [open, setOpen] = useState<boolean>(true);

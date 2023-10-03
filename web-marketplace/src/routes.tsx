@@ -23,6 +23,8 @@ import MyEcocredits from 'pages/Dashboard/MyEcocredits';
 import MyProjects from 'pages/Dashboard/MyProjects';
 import { ecocreditBatchesLoader } from 'pages/EcocreditBatches/EcocreditBatches.loader';
 import { BridgeTab } from 'pages/EcocreditsByAccount/BridgeTab/BridgeTab';
+import { CreditBatchesTab } from 'pages/EcocreditsByAccount/CreditBatchesTab/CreditBatchesTab';
+import { CreditClassTab } from 'pages/EcocreditsByAccount/CreditClassTab/CreditClassTab';
 import { PortfolioTab } from 'pages/EcocreditsByAccount/PortfolioTab/EcocreditsByAccount.PortfolioTab';
 import ProjectsTab from 'pages/EcocreditsByAccount/ProjectsTab';
 import Faucet from 'pages/Faucet';
@@ -35,8 +37,6 @@ import { projectDetailsLoader } from 'components/templates/ProjectDetails/Projec
 
 import { KeplrRoute } from './components/atoms';
 import { ProjectMetadata } from './pages/ProjectMetadata/ProjectMetadata';
-import { CreditClassTab } from 'pages/EcocreditsByAccount/CreditClassTab/CreditClassTab';
-import { CreditBatchesTab } from 'pages/EcocreditsByAccount/CreditBatchesTab/CreditBatchesTab';
 
 const Additionality = lazy(() => import('./pages/Additionality'));
 const BasicInfo = lazy(() => import('./pages/BasicInfo'));

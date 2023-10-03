@@ -23,7 +23,7 @@ const Settings: React.FC<React.PropsWithChildren<unknown>> = () => {
     isLoading: editContextLoading,
   } = useProjectEditContext();
 
-  const { offChainProject } = useProjectWithMetadata({
+  const { offChainProject, loading } = useProjectWithMetadata({
     projectId,
     isEdit,
     onChainProject,
@@ -51,15 +51,8 @@ const Settings: React.FC<React.PropsWithChildren<unknown>> = () => {
       onChainProject={onChainProject}
       loading={!offChainProject}
     >
-      <WithLoader isLoading={editContextLoading}>
-        <>
-          {offChainProject && (
-            <SettingsForm
-              submit={settingsSubmit}
-              initialValues={initialValues}
-            />
-          )}
-        </>
+      <WithLoader isLoading={editContextLoading || loading}>
+        <SettingsForm submit={settingsSubmit} initialValues={initialValues} />
       </WithLoader>
     </ProjectFormTemplate>
   );

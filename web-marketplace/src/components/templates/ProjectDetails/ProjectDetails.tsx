@@ -118,7 +118,7 @@ function ProjectDetails(): JSX.Element {
   );
 
   // if projectId is slug, query project by slug
-  const { data: ProjectBySlug, isInitialLoading: loadingProjectBySlug } =
+  const { data: projectBySlug, isInitialLoading: loadingProjectBySlug } =
     useQuery(
       getProjectBySlugQuery({
         client: graphqlClient,
@@ -127,10 +127,6 @@ function ProjectDetails(): JSX.Element {
       }),
     );
 
-  const ProjectBySlugOnChainId =
-    ProjectBySlug?.data.projectBySlug?.onChainId ?? undefined;
-  const onChainProjectId = isOnChainId ? projectId : ProjectBySlugOnChainId;
-
   // else fetch project by onChainId
   const {
     data: projectByOnChainId,
@@ -138,8 +134,8 @@ function ProjectDetails(): JSX.Element {
   } = useQuery(
     getProjectByOnChainIdQuery({
       client: graphqlClient,
-      enabled: !!onChainProjectId,
-      onChainId: onChainProjectId as string,
+      enabled: !!projectId && !!isOnChainId,
+      onChainId: projectId as string,
     }),
   );
 
@@ -150,16 +146,24 @@ function ProjectDetails(): JSX.Element {
   } = useQuery(
     getOffChainProjectByIdQuery({
       client: graphqlClient,
-      enabled: !!isOffChainUuid,
+      enabled: !!projectId && !!isOffChainUuid,
       id: projectId,
     }),
   );
 
+  const projectBySlugOnChainId =
+    projectBySlug?.data.projectBySlug?.onChainId ?? undefined;
+  const projectByUuidOnChainId =
+    offchainProjectByIdData?.data.projectById?.onChainId ?? undefined;
+  const onChainProjectId = isOnChainId
+    ? projectId
+    : projectBySlugOnChainId ?? projectByUuidOnChainId;
+
   const { data: projectResponse } = useQuery(
     getProjectQuery({
-      request: { projectId },
+      request: { projectId: onChainProjectId },
       client: ecocreditClient,
-      enabled: !!ecocreditClient && !!projectId,
+      enabled: !!ecocreditClient && !!onChainProjectId,
     }),
   );
 
@@ -182,7 +186,7 @@ function ProjectDetails(): JSX.Element {
 
   const offChainProject = isOnChainId
     ? projectByOnChainId?.data.projectByOnChainId
-    : publishedOffchainProjectById ?? ProjectBySlug?.data.projectBySlug;
+    : publishedOffchainProjectById ?? projectBySlug?.data.projectBySlug;
 
   /* Credit class */
 
@@ -236,8 +240,8 @@ function ProjectDetails(): JSX.Element {
     projectDocs,
   });
 
-  // For legacy projects (that are not on-chain), all metadata is stored off-chain
-  const projectMetadata = isOnChainId
+  // For legacy/open projects (that are not on-chain), all metadata is stored off-chain
+  const projectMetadata = !!onChainProjectId
     ? anchoredMetadata
     : offChainProjectMetadata;
 
@@ -313,7 +317,7 @@ function ProjectDetails(): JSX.Element {
     data: sanityProjectPage?.otcCard,
     isConnected,
     orders: projectsWithOrderData[0]?.sellOrders,
-    isCommunityCredit,
+    hideOtcCard: isCommunityCredit || !onChainProjectId,
     setIsBuyFlowStarted,
   });
 
@@ -404,25 +408,20 @@ function ProjectDetails(): JSX.Element {
         />
       </DetailsSection>
 
-      <Box
-        className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}
-        sx={{ ':nth-of-type(odd)': { pt: { xs: 25 } } }}
-      >
-        <ProjectDetailsTableTabs
-          sortedDocuments={sortedDocuments}
-          sortCallbacksDocuments={sortCallbacksDocuments}
-          offChainProject={offChainProject}
-          projectMetadata={projectMetadata}
-          onChainProjectId={onChainProjectId}
-          batchData={{
-            batches: batchesWithSupply,
-            totals: batchesTotal,
-          }}
-          paginationParams={paginationParams}
-          setPaginationParams={setPaginationParams}
-          sx={{ pt: { xs: 0 } }}
-        />
-      </Box>
+      <ProjectDetailsTableTabs
+        sortedDocuments={sortedDocuments}
+        sortCallbacksDocuments={sortCallbacksDocuments}
+        offChainProject={offChainProject}
+        projectMetadata={projectMetadata}
+        onChainProjectId={onChainProjectId}
+        batchData={{
+          batches: batchesWithSupply,
+          totals: batchesTotal,
+        }}
+        paginationParams={paginationParams}
+        setPaginationParams={setPaginationParams}
+        sx={{ pt: { xs: 0 } }}
+      />
 
       {managementActions && <ManagementActions actions={managementActions} />}
 

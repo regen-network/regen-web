@@ -10,7 +10,7 @@ import { client as sanityClient } from 'lib/clients/sanity';
 import { getBasketBalancesQuery } from 'lib/queries/react-query/ecocredit/basket/getBasketBalances/getBasketBalancesQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
-import { useFetchBatchesWithMetadata } from 'hooks/batches/useBatchesWithMetadata';
+import { useFetchBatchesWithMetadata } from 'hooks/batches/useFetchBatchesWithMetadata';
 
 import {
   BasketBatchInfoWithBalance,

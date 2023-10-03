@@ -16,7 +16,7 @@ import { getBridgeTxStatusQuery } from 'lib/queries/react-query/bridge/getBridge
 import { getGetTxsEventQuery } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
-import { useFetchBatchesWithMetadata } from 'hooks/batches/useBatchesWithMetadata';
+import { useFetchBatchesWithMetadata } from 'hooks/batches/useFetchBatchesWithMetadata';
 
 import {
   BRIDGED_STATUSES,

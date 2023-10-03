@@ -1,1 +1,1 @@
-export const CERTIFICATE_TITLE = 'Carbon Offset Retirement Certificate';
+export const CERTIFICATE_TITLE = 'Retirement Certificate';

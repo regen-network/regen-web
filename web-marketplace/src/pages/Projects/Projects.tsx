@@ -241,7 +241,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
                     setSelectedProject(project);
                     setIsBuyFlowStarted(true);
                   }}
-                  purchaseInfo={project.purchaseInfo}
+                  purchaseInfo={project.purchaseInfo || {}}
                   onClick={() => navigate(`/project/${project.id}`)}
                   imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
                   apiServerUrl={API_URI}

@@ -4,12 +4,12 @@ import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
 import { useQueryIsProjectAdmin } from 'hooks/useQueryIsProjectAdmin';
 
 export const useProfileItems = () => {
-  const isIssuer = useQueryIsIssuer({});
+  const { isIssuer } = useQueryIsIssuer({});
   const isCreditClassCreator = useQueryIfCreditClassCreator({});
   const isProjectAdmin = useQueryIsProjectAdmin({});
   const isCreditClassAdmin = useQueryIsClassAdmin();
 
-  const showProjects = isIssuer.isIssuer || isProjectAdmin.isProjectAdmin;
+  const showProjects = isIssuer || isProjectAdmin.isProjectAdmin;
   const showCreditClasses = isCreditClassCreator || isCreditClassAdmin;
 
   return {
@@ -18,6 +18,6 @@ export const useProfileItems = () => {
     showCreditClasses: false && showCreditClasses,
     isCreditClassCreator: false && isCreditClassCreator,
     isProjectAdmin: isProjectAdmin.isProjectAdmin,
-    isIssuer: isIssuer.isIssuer,
+    isIssuer: isIssuer,
   };
 };

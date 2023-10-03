@@ -11,13 +11,14 @@ type Props = {
 export function useQueryIsProjectAdmin({ address }: Props) {
   const { ecocreditClient } = useLedger();
   const { wallet } = useWallet();
-  const currentAddress = wallet?.address;
+  const walletAddress = wallet?.address;
+  const activeAddress = address ?? walletAddress;
 
   const { data: projectsByAdmin, isFetching } = useQuery(
     getProjectsByAdminQuery({
       enabled: !!address && !!ecocreditClient,
       client: ecocreditClient,
-      request: { admin: address ?? currentAddress },
+      request: { admin: address ?? activeAddress },
     }),
   );
 

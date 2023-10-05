@@ -4,38 +4,35 @@ import TextField from 'web-components/lib/components/inputs/new/TextField/TextFi
 
 export const UserAccountSettings = () => {
   return (
-    <div className="flex flex-col gap-12 px-10 py-12">
-      <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-50 px-50 py-50 bg-white">
+      <div className="flex flex-col gap-5">
         <Subtitle size="lg">Login Email</Subtitle>
-        <TextField value="joemcnab@gmail.com" />
+        {/*<input className="h-60 px-15" value="joemcnab@gmail.com" />*/}
+        <TextField value="joemcnab@gmail.com" disabled={true} />
       </div>
-      <div className="flex flex-col gap-8">
-        <div className="flex flex-col gap-2.5">
+      <div className="flex flex-col gap-30">
+        <div className="flex flex-col gap-10">
           <Subtitle size="lg">Social Accounts</Subtitle>
-          <Body size="sm">
-            Use your social account to log in to Regen Marketplace.{' '}
-            <a>Learn more</a>
+          <Body size="sm" color="info.dark-grey">
+            {/*Maybe use TextButton for "Learn more" link?*/}
+            Use your social account to log in to Regen Marketplace.{' '} <a>Learn more</a>
           </Body>
         </div>
         <ConnectField provider="Google" connected={false} />
       </div>
-      <div className="flex flex-col gap-8">
-        <div className="flex flex-col gap-2.5">
+      <div className="flex flex-col gap-30">
+        <div className="flex flex-col gap-10">
           <Subtitle>Wallet integration</Subtitle>
-          <div>
+          <Body size="sm" color="info.dark-grey">
             Connect a wallet address to be able to perform on chain tasks such
             as buying and selling credits, and creating projects on Regen
             Ledger. <a>Learn more</a>
-          </div>
+          </Body>
         </div>
         <ConnectField provider="Keplr or Wallet Connect" connected={false} />
       </div>
     </div>
   );
-  // typography
-  // contained button
-  // text button
-  // components/new/TextField
 };
 
 interface ConnectFieldProps {
@@ -46,8 +43,8 @@ interface ConnectFieldProps {
 const ConnectField = ({ provider, connected }: ConnectFieldProps) => {
   return (
     <div className="flex flex-row justify-between">
-      <div className="flex flex-col gap-1">
-        <Body size="md">{provider}</Body>
+      <div className="flex flex-col gap-5">
+        <Body size="md" color="info.dark-grey">{provider}</Body>
         <Body size="sm">{connected ? 'Connected' : 'Not connected'}</Body>
       </div>
       <ContainedButton>Connect</ContainedButton>

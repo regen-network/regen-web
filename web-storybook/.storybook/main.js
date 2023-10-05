@@ -19,7 +19,6 @@ module.exports = {
     '@storybook/addon-controls',
     'storybook-addon-react-router-v6',
   ],
-  docs: {autodocs: true},
   features: { emotionAlias: false }, // https://github.com/mui-org/material-ui/issues/24282#issuecomment-1000619912
   typescript: {
     check: false,

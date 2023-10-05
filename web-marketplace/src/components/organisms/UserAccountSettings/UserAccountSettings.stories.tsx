@@ -1,49 +1,45 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 
-import { UserAccountSettings, UserAccountSettingsProps } from "./UserAccountSettings";
+import { UserAccountSettings } from './UserAccountSettings';
 import { Title } from 'web-components/lib/components/typography';
 
 const meta: Meta<typeof UserAccountSettings> = {
   title: 'Registry/Organisms/UserAccountSettings',
   component: UserAccountSettings,
+  args: {
+    email: 'joemcnab@gmail.com',
+    socialProviders: [
+      {
+        providerName: 'Google',
+        connected: false,
+        connect: action('connect google'),
+      },
+      {
+        providerName: 'LinkedIn',
+        connected: true,
+        connect: action('connect linkedin'),
+      },
+    ],
+    walletProvider: {
+      connected: false,
+      connect: action('connect wallet'),
+    },
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof UserAccountSettings>;
 
-const defaultProps: UserAccountSettingsProps = {
-  email: 'joemcnab@gmail.com',
-  socialProviders: [
-    {
-      providerName: 'Google',
-      connected: false,
-      connect: () => {},
-    },
-    {
-      providerName: 'LinkedIn',
-      connected: false,
-      connect: () => {},
-    }
-  ],
-  walletProvider: {
-    connected: false,
-    connect: () => {},
-  }
-}
-
-export const Primary: Story = {
-  render: () => (
-    <UserAccountSettings {...defaultProps} />
-  ),
-};
+export const Primary: Story = {};
 
 export const Width560: Story = {
-  render: () => (
+  render: args => (
     <div className="bg-grey-50 p-50">
       <div className="flex flex-col gap-[24px] w-[560px]">
         <Title variant="h3">Settings</Title>
         <div className="border border-grey-100 border-solid">
-          <UserAccountSettings {...defaultProps} />
+          <UserAccountSettings {...args} />
         </div>
       </div>
     </div>

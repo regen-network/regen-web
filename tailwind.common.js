@@ -3,13 +3,14 @@
 module.exports = {
   theme: {
     colors: {
-      // Make sure these guidelines are followed: https://tailwindcss.com/docs/customizing-colors#using-css-variables
-      // Color should be added to tailwind.css
+      // Make sure these guidelines are followed when adding new colors: https://tailwindcss.com/docs/customizing-colors#using-css-variables
+      // Color variables should be added to tailwind.css.
       'primary-main': 'rgb(var(--primary-main) / <alpha-value>)',
       'grey':{
         '50': 'rgb(var(--grey-50) / <alpha-value>)',
         '100': 'rgb(var(--grey-100) / <alpha-value>)',
-      }
+      },
+      'lines-grey': '#D2D5D9'
     },
     spacing: {
       // this spacing scale is based on the actual pixel values converted to REM

@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { UserAccountSettings } from './UserAccountSettings';
+import { UserAccountSettings, UserAccountSettingsProps } from "./UserAccountSettings";
 import { Title } from 'web-components/lib/components/typography';
 
 const meta: Meta<typeof UserAccountSettings> = {
+  tags: ['autodocs'],
   title: 'Registry/Organisms/UserAccountSettings',
   component: UserAccountSettings,
 };
@@ -11,7 +12,31 @@ const meta: Meta<typeof UserAccountSettings> = {
 export default meta;
 type Story = StoryObj<typeof UserAccountSettings>;
 
-export const Primary: Story = {};
+const defaultProps: UserAccountSettingsProps = {
+  email: 'joemcnab@gmail.com',
+  socialProviders: [
+    {
+      providerName: 'Google',
+      connected: false,
+      connect: () => {},
+    },
+    {
+      providerName: 'LinkedIn',
+      connected: false,
+      connect: () => {},
+    }
+  ],
+  walletProvider: {
+    connected: false,
+    connect: () => {},
+  }
+}
+
+export const Primary: Story = {
+  render: () => (
+    <UserAccountSettings {...defaultProps} />
+  ),
+};
 
 export const Width560: Story = {
   render: () => (
@@ -19,7 +44,7 @@ export const Width560: Story = {
       <div className="flex flex-col gap-[24px] w-[560px]">
         <Title variant="h3">Settings</Title>
         <div className="border border-light-grey border-solid">
-          <UserAccountSettings />
+          <UserAccountSettings {...defaultProps} />
         </div>
       </div>
     </div>

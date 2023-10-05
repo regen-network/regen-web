@@ -48,12 +48,6 @@
     "@graphql-codegen/typescript-graphql-files-modules": "1.18.1",
     "@graphql-codegen/typescript-operations": "^1.18.0",
     "@graphql-codegen/typescript-react-apollo": "2.2.4",
-    "@storybook/addon-actions": "^7.3.2",
-    "@storybook/addon-essentials": "^7.3.2",
-    "@storybook/addon-interactions": "^7.3.2",
-    "@storybook/addon-links": "^7.3.2",
-    "@storybook/react": "^7.3.2",
-    "@storybook/react-vite": "^7.3.2",
     "@types/css-mediaquery": "^0.1.1",
     "@types/jest": "27.0.3",
     "@types/node": "13.1.1",
@@ -66,7 +60,6 @@
     "patch-package": "^8.0.0",
     "prettier": "2.4.1",
     "shx": "^0.3.2",
-    "storybook": "^7.3.2",
     "typescript": "^5.2.2"
   },
   "resolutions": {

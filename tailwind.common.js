@@ -6,6 +6,8 @@ module.exports = {
       'light-grey': '#EFEFEF'
     },
     spacing: {
+      // this spacing scale is based on the actual pixel values converted to REM
+      // actual pixel values
       '0': '0',
       '3': '0.1875rem', // 3px
       '5': '0.3125rem', // 5px

@@ -1,3 +1,4 @@
+import { dirname, join } from "path";
 const { mergeConfig } = require('vite');
 const tsconfigPaths = require('vite-tsconfig-paths').default;
 const svgrPlugin = require('vite-plugin-svgr').default;
@@ -12,14 +13,22 @@ module.exports = {
     '../../web-components/src/components/**/*.stories.tsx',
     '../../web-marketplace/src/**/*.stories.tsx',
   ],
+
   addons: [
-    '@storybook/addon-actions',
-    '@storybook/addon-links',
-    '@storybook/addon-viewport',
-    '@storybook/addon-controls',
-    'storybook-addon-react-router-v6',
+    getAbsolutePath("@storybook/addon-actions"),
+    getAbsolutePath("@storybook/addon-links"),
+    getAbsolutePath("@storybook/addon-viewport"),
+    getAbsolutePath("@storybook/addon-controls"),
+    getAbsolutePath("storybook-addon-react-router-v6"),
   ],
-  features: { emotionAlias: false }, // https://github.com/mui-org/material-ui/issues/24282#issuecomment-1000619912
+
+  docs:{
+    autodocs: true,
+  },
+
+  // https://github.com/mui-org/material-ui/issues/24282#issuecomment-1000619912
+  features: { emotionAlias: false },
+
   typescript: {
     check: false,
     checkOptions: {},
@@ -30,13 +39,12 @@ module.exports = {
         prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
     },
   },
+
   framework: {
-    name: '@storybook/react-vite',
+    name: getAbsolutePath("@storybook/react-vite"),
     options: {},
   },
-  core: {
-    builder: '@storybook/builder-vite',
-  },
+
   async viteFinal(config, { configType }) {
     // Merge custom configuration into the default config
     return mergeConfig(config, {
@@ -94,5 +102,9 @@ module.exports = {
         },
       },
     });
-  },
+  }
 };
+
+function getAbsolutePath(value) {
+  return dirname(require.resolve(join(value, "package.json")));
+}

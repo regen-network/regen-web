@@ -32,7 +32,10 @@ module.exports = {
   },
   plugins: [],
   corePlugins: {
-    // this is needed to avoid problems with MUI component styles
+    // Preflight needs to be disabled to avoid problems with MUI component styles.
+    // This has the side effect that some tailwind styles don't work as expected
+    // by default. For instance, in order for borders to show up at all,
+    // border-solid is needed whereas it would normally be set by default.
     preflight: false,
   }
 }

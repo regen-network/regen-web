@@ -13,8 +13,9 @@ module.exports = {
       'lines-grey': '#D2D5D9'
     },
     spacing: {
-      // this spacing scale is based on the actual pixel values converted to REM
-      // actual pixel values
+      // This spacing scale is based on the actual pixel values converted to REM values.
+      // This diverges from tailwind's standard pattern of defining its own spacing numbers
+      // but should be easier for developers trying to match spacing to designs in Figma.
       '0': '0',
       '3': '0.1875rem', // 3px
       '5': '0.3125rem', // 5px

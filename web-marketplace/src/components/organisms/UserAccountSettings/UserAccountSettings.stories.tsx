@@ -31,9 +31,10 @@ const meta: Meta<typeof UserAccountSettings> = {
 export default meta;
 type Story = StoryObj<typeof UserAccountSettings>;
 
-export const Primary: Story = {};
+export const Default: Story = {};
 
 export const Width560: Story = {
+  name: "Wrapped in a 560px container",
   render: args => (
     <div className="bg-grey-50 p-50">
       <div className="flex flex-col gap-[24px] w-[560px]">

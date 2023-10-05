@@ -49,6 +49,9 @@ export interface SocialProviderInfo extends ProviderConnectionInfo {
 
 /** UserAccountSettings is a component for displaying and managing a user's
  * account settings.
+ *
+ * The component doesn't specify its own width, so it should be wrapped in a
+ * container that specifies the width.
  */
 export const UserAccountSettings = ({
   email,

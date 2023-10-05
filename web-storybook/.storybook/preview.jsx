@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 import 'web-components/src/theme/fonts.css';
-import './tailwind.css';
+import '../../tailwind.css';
 
 export const decorators = [
   Story => (

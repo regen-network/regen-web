@@ -1,7 +1,6 @@
 import { Subtitle, Body } from 'web-components/lib/components/typography';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
-import { TextButton } from "web-components/lib/components/buttons/TextButton";
 
 export interface ProviderInfo {
   connected: boolean;
@@ -20,7 +19,7 @@ export interface UserAccountSettingsProps {
 
 export const UserAccountSettings = ({email, socialProviders, walletProvider}: UserAccountSettingsProps) => {
   return (
-    <div className="flex flex-col gap-50 px-50 py-50 bg-white">
+    <div className="flex flex-col gap-50 px-50 py-50 bg-primary-main">
       <TextField label="Login Email" value={email} disabled={true} />
       <div className="flex flex-col gap-30">
         <div className="flex flex-col gap-10">

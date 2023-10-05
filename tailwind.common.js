@@ -1,9 +1,15 @@
+// This file defines the common tailwind configuration to be used as the basis
+// of each project's tailwind.config.js file.
 module.exports = {
   theme: {
     colors: {
-      'white': '#FFFFFF',
-      'background': '#FAFAFA',
-      'light-grey': '#EFEFEF'
+      // Make sure these guidelines are followed: https://tailwindcss.com/docs/customizing-colors#using-css-variables
+      // Color should be added to tailwind.css
+      'primary-main': 'rgb(var(--primary-main) / <alpha-value>)',
+      'grey':{
+        '50': 'rgb(var(--grey-50) / <alpha-value>)',
+        '100': 'rgb(var(--grey-100) / <alpha-value>)',
+      }
     },
     spacing: {
       // this spacing scale is based on the actual pixel values converted to REM

@@ -1,0 +1,18 @@
+/* This file defines the common tailwind CSS file to be imported by each project. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /*
+      Make sure these guidelines are followed: https://tailwindcss.com/docs/customizing-colors#using-css-variables
+      when adding new variables. Spaces must be used.
+
+      Colors are based off of https://www.figma.com/file/Md1Cl2B9eJi4NMzQgpbdMF/Dark-Mode?type=design&node-id=112-9885&mode=design&t=YKxx8fYvslM2TeLp-0.
+    */
+    --primary-main: 255 255 255;
+    --grey-50: 250 250 250;
+    --grey-100: 239 239 239;
+  }
+}

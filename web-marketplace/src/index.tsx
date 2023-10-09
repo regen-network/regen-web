@@ -42,6 +42,7 @@ import { WalletProvider } from './lib/wallet/wallet';
 import * as serviceWorker from './serviceWorker';
 
 import './App.css';
+import '../../tailwind.css';
 
 const intercomId = import.meta.env.VITE_INTERCOM_APP_ID || '';
 

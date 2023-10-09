@@ -8,7 +8,7 @@ export const CHOOSE_CREDIT_CLASS_HREF =
 export const CREATE_OFFCHAIN_PROJECT_TITLE =
   'Create a project without a credit class';
 export const CREATE_OFFCHAIN_PROJECT_DESCRIPTION =
-  'You will not be able to issue credits with this option unless you later unless you later register this project with a credit class.';
+  'You will not be able to issue credits with this option unless you later register this project with a credit class.';
 export const CREATE_OFFCHAIN_PROJECT_LINK = 'Learn more»';
 export const CREATE_OFFCHAIN_PROJECT_HREF =
   'https://docs.regen.network/tutorials/user/credit-class-project-batch-management.html#create-credit-class';

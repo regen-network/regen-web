@@ -20,10 +20,11 @@ interface TemplateProps {
   justifyContent?: GridProps['justifyContent'];
   error: string;
   loading?: boolean;
+  isIssuer?: boolean;
 }
 
 const ChooseCreditClassGrid: React.FC<React.PropsWithChildren<TemplateProps>> =
-  ({ justifyContent = 'flex-start', error, loading, children }) => {
+  ({ justifyContent = 'flex-start', error, loading, isIssuer, children }) => {
     return (
       <Box
         sx={theme => ({
@@ -34,12 +35,14 @@ const ChooseCreditClassGrid: React.FC<React.PropsWithChildren<TemplateProps>> =
         <OnBoardingSection
           title="Choose a credit class"
           headerChildren={
-            <Body size="lg" as="p" pt={5} textAlign="center">
-              {CHOOSE_CREDIT_CLASS_DESCRIPTION}{' '}
-              <Link href={CHOOSE_CREDIT_CLASS_HREF}>
-                {CHOOSE_CREDIT_CLASS_LINK}
-              </Link>
-            </Body>
+            isIssuer ? (
+              <Body size="lg" as="p" pt={5} textAlign="center">
+                {CHOOSE_CREDIT_CLASS_DESCRIPTION}{' '}
+                <Link href={CHOOSE_CREDIT_CLASS_HREF}>
+                  {CHOOSE_CREDIT_CLASS_LINK}
+                </Link>
+              </Body>
+            ) : undefined
           }
         >
           <Grid

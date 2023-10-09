@@ -14,6 +14,7 @@ import { ProjectFormAccessTemplate } from 'components/templates/ProjectFormTempl
 import { useUpdateProjectByIdMutation } from '../../generated/graphql';
 import { ChooseCreditClassGrid } from './ChooseCreditClass.Grid';
 import { ChooseCreditClassItem } from './ChooseCreditClass.Item';
+import { CreateOffchainProjectCard } from './ChooseCreditClass.OffchainCard';
 import { useErrorTimeout } from './hooks/useErrorTimeout';
 import { useGetCreditClassItems } from './hooks/useGetCreditClassOptions';
 
@@ -38,14 +39,16 @@ const ChooseCreditClass: React.FC<React.PropsWithChildren<unknown>> = () => {
   const adminAddr = project?.walletByAdminWalletId?.addr;
 
   async function handleSelection(
-    creditClassId: string,
-    creditClassOnChainId: string,
+    creditClassId?: string,
+    creditClassOnChainId?: string,
   ): Promise<void> {
     const metadata = getProjectCreateBaseData(creditClassOnChainId);
-    setCreditClassId(creditClassOnChainId);
+
+    if (creditClassOnChainId) {
+      setCreditClassId(creditClassOnChainId);
+    }
 
     try {
-      if (!creditClassOnChainId) return;
       try {
         await updateProject({
           variables: {
@@ -82,23 +85,26 @@ const ChooseCreditClass: React.FC<React.PropsWithChildren<unknown>> = () => {
         loading={loading}
         error={error}
       >
-        {creditClassItems?.length > 0 ? (
-          creditClassItems?.map(creditClassItem => (
-            <ChooseCreditClassItem
-              key={creditClassItem.onChainId}
-              title={creditClassItem.title}
-              imgSrc={creditClassItem.imageSrc}
-              description={creditClassItem.description}
-              onClick={() =>
-                handleSelection(creditClassItem.id, creditClassItem.onChainId)
-              }
-            />
-          ))
-        ) : (
-          <Grid item xs={12} sm={6}>
-            You are not yet listed as an issuer on any credit classes
-          </Grid>
-        )}
+        <>
+          <CreateOffchainProjectCard onClick={() => handleSelection()} />
+          {creditClassItems?.length > 0 ? (
+            creditClassItems?.map(creditClassItem => (
+              <ChooseCreditClassItem
+                key={creditClassItem.onChainId}
+                title={creditClassItem.title}
+                imgSrc={creditClassItem.imageSrc}
+                description={creditClassItem.description}
+                onClick={() =>
+                  handleSelection(creditClassItem.id, creditClassItem.onChainId)
+                }
+              />
+            ))
+          ) : (
+            <Grid item xs={12} sm={6}>
+              You are not yet listed as an issuer on any credit classes
+            </Grid>
+          )}
+        </>
       </ChooseCreditClassGrid>
     </ProjectFormAccessTemplate>
   );

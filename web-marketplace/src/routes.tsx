@@ -29,6 +29,7 @@ import Faucet from 'pages/Faucet';
 import { homeLoader } from 'pages/Home/Home.loader';
 import { storefrontLoader } from 'pages/Marketplace/Storefront/Storefront.loader';
 import { projectsLoader } from 'pages/Projects/Projects.loader';
+import Settings from 'pages/Settings';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
 import { projectDetailsLoader } from 'components/templates/ProjectDetails/ProjectDetails.loader';
 
@@ -216,6 +217,10 @@ export const getRoutes = ({
               <Route
                 path="metadata"
                 element={<KeplrRoute component={ProjectMetadata} />}
+              />
+              <Route
+                path="settings"
+                element={<KeplrRoute component={Settings} />}
               />
             </Route>
           </Route>

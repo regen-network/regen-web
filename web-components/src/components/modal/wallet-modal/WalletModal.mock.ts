@@ -1,4 +1,4 @@
-import { Wallet } from './WalletModal.types';
+import { LoginProvider } from './WalletModal.types';
 
 type GetWalletsMockParams = {
   onWalletConnectClick: () => void;
@@ -6,7 +6,7 @@ type GetWalletsMockParams = {
 
 export const getWalletsMock = ({
   onWalletConnectClick,
-}: GetWalletsMockParams): Wallet[] => [
+}: GetWalletsMockParams): LoginProvider[] => [
   {
     name: 'Keplr Wallet',
     description: 'Keplr Chrome Extension',
@@ -19,6 +19,14 @@ export const getWalletsMock = ({
     description: 'Keplr Mobile',
     imageUrl: '/wallets/walletconnect-keplr.png',
     onClick: onWalletConnectClick,
+  },
+];
+
+export const socialProvidersMock: LoginProvider[] = [
+  {
+    name: 'Google',
+    imageUrl: 'google.png',
+    onClick: () => void 0,
   },
 ];
 

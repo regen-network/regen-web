@@ -2,7 +2,11 @@ import { useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { WalletModal } from './WalletModal';
-import { getWalletsMock, uriMock } from './WalletModal.mock';
+import {
+  getWalletsMock,
+  socialProvidersMock,
+  uriMock,
+} from './WalletModal.mock';
 import { WalletModalState } from './WalletModal.types';
 
 export default {
@@ -28,6 +32,7 @@ const Template: ComponentStory<typeof WalletModal> = args => {
     <WalletModal
       {...args}
       wallets={walletsConfig}
+      socialProviders={socialProvidersMock}
       state={modalState}
       open={open}
       onClose={onClose}

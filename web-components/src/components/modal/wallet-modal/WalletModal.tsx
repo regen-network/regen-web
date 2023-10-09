@@ -3,11 +3,12 @@ import { Box } from '@mui/system';
 import Modal, { RegenModalProps } from '..';
 import { WalletModalMobile } from './components/WalletModal.Mobile';
 import { WalletModalSelect } from './components/WalletModal.Select';
-import { Wallet, WalletModalState } from './WalletModal.types';
+import { LoginProvider, WalletModalState } from './WalletModal.types';
 
 export interface Props extends RegenModalProps {
   state?: WalletModalState;
-  wallets: Wallet[];
+  wallets: LoginProvider[];
+  socialProviders: LoginProvider[];
   qrCodeUri?: string;
   connecting: boolean;
 }
@@ -17,6 +18,7 @@ const WalletModal = ({
   onClose,
   state = 'wallet-select',
   wallets,
+  socialProviders,
   qrCodeUri,
   connecting,
 }: Props): JSX.Element => {
@@ -25,7 +27,12 @@ const WalletModal = ({
   return (
     <Modal open={open} onClose={onClose}>
       <Box>
-        {isSelectState && <WalletModalSelect wallets={wallets} />}
+        {isSelectState && (
+          <WalletModalSelect
+            wallets={wallets}
+            socialProviders={socialProviders}
+          />
+        )}
         {isMobileState && (
           <WalletModalMobile qrCodeUri={qrCodeUri} connecting={connecting} />
         )}

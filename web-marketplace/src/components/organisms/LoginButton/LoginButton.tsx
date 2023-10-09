@@ -8,8 +8,10 @@ import { useAtom } from 'jotai';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 
 import { useLedger } from 'ledger';
+import { apiUri } from 'lib/apiUri';
 import { isWaitingForSigningAtom } from 'lib/atoms/tx.atoms';
 import { getBalanceQuery } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery';
+import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 
 import { chainId } from '../../../lib/ledger';
 import { useWallet } from '../../../lib/wallet/wallet';
@@ -113,6 +115,8 @@ const LoginButton = ({ size = 'small' }: Props) => {
   });
   useResetModalOnConnect({ setIsModalOpen, setModalState, wallet });
 
+  const { data: token } = useQuery(getCsrfTokenQuery({}));
+
   return chainId ? (
     <>
       <div className={styles.root}>
@@ -130,7 +134,21 @@ const LoginButton = ({ size = 'small' }: Props) => {
         onClose={onModalClose}
         wallets={walletsUiConfig}
         socialProviders={socialProviders}
-        onEmailSubmit={async values => {}} // TODO
+        onEmailSubmit={async values => {
+          if (token && values.email) {
+            await fetch(`${apiUri}/marketplace/v1/auth/magiclogin`, {
+              method: `POST`,
+              body: JSON.stringify({
+                destination: values.email,
+              }),
+              credentials: 'include',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': token,
+              },
+            });
+          }
+        }}
         state={modalState}
         qrCodeUri={qrCodeUri}
         connecting={connecting}

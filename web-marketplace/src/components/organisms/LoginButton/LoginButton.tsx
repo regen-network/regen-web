@@ -18,11 +18,11 @@ import { LoginModalState } from '../LoginModal/LoginModal.types';
 import { useConnectToWallet } from './hooks/useConnectToWallet';
 import { useNavigateToMobileUrl } from './hooks/useNavigateToMobileUrl';
 import { useResetModalOnConnect } from './hooks/useResetModalOnConnect';
-import { socialProviders } from './WalletButton.constants';
-import { MobileSigningModal } from './WalletButton.SigningModal';
-import { useWalletButtonStyles } from './WalletButton.styles';
-import { ButtonSize } from './WalletButton.types';
-import { getMobileConnectUrl, getWalletsUiConfig } from './WalletButton.utils';
+import { socialProviders } from './LoginButton.constants';
+import { MobileSigningModal } from './LoginButton.SigningModal';
+import { useLoginButtonStyles } from './LoginButton.styles';
+import { ButtonSize } from './LoginButton.types';
+import { getMobileConnectUrl, getWalletsUiConfig } from './LoginButton.utils';
 
 import Keplr from 'assets/keplr.png';
 
@@ -30,8 +30,8 @@ type Props = {
   size?: ButtonSize;
 };
 
-const WalletButton = ({ size = 'small' }: Props) => {
-  const styles = useWalletButtonStyles();
+const LoginButton = ({ size = 'small' }: Props) => {
+  const styles = useLoginButtonStyles();
   const { wallet, connect, loaded, walletConnectUri, isConnected } =
     useWallet();
 
@@ -145,4 +145,4 @@ const WalletButton = ({ size = 'small' }: Props) => {
   );
 };
 
-export { WalletButton };
+export { LoginButton };

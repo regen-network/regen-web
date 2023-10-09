@@ -2,7 +2,7 @@ import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-export const useWalletButtonStyles = makeStyles((theme: Theme) => ({
+export const useLoginButtonStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',

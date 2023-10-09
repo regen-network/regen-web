@@ -7,8 +7,8 @@ import { LoginProvider } from '../LoginModal/LoginModal.types';
 import {
   getAllWalletsUiConfig,
   GetWalletsUiConfigParams,
-} from './WalletButton.config';
-import { mobileWalletsName } from './WalletButton.constants';
+} from './LoginButton.config';
+import { mobileWalletsName } from './LoginButton.constants';
 
 /* getWalletsUiConfig */
 

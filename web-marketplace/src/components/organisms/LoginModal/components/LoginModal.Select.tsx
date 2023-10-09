@@ -31,10 +31,9 @@ const LoginModalSelect = ({
     },
     mode: 'onBlur',
   });
-  const { isSubmitting, errors, isValid } = useFormState({
+  const { errors } = useFormState({
     control: form.control,
   });
-  console.log(isValid, errors);
 
   return (
     <Box textAlign="center">

@@ -143,6 +143,7 @@ const LoginButton = ({ size = 'small' }: Props) => {
               }),
               credentials: 'include',
               headers: {
+                Accept: 'application/json',
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': token,
               },

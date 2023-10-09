@@ -87,7 +87,10 @@ const LoginModalSelect = ({
             />
           </Grid>
           <Grid item xs={4}>
-            <ContainedButton sx={{ height: 60, width: '100%' }} type="submit">
+            <ContainedButton
+              sx={{ height: { xs: 50, sx: 60 }, width: '100%' }}
+              type="submit"
+            >
               log in
             </ContainedButton>
           </Grid>

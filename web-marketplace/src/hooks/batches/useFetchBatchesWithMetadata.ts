@@ -5,7 +5,7 @@ import { getBatchQuery } from 'lib/queries/react-query/ecocredit/getBatchQuery/g
 
 import { useProjectsWithMetadata } from 'hooks/projects/useProjectsWithMetadata';
 
-export const useBatchesWithMetadata = (
+export const useFetchBatchesWithMetadata = (
   credits: {
     batchDenom: string;
   }[],

@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import Grid from '@mui/material/Grid';
 
+import { useFetchCreditBatches } from '../../../hooks/batches/useFetchCreditBatches';
 import { Statistic } from '../../molecules';
-import { useFetchCreditBatches } from '../CreditBatches/hooks/useFetchCreditBatches';
 import { useCreditTotalsStyles } from './CreditTotals.styles';
 import { sumBatchTotals } from './CreditTotals.utils';
 

@@ -74,7 +74,7 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
               children: (
                 <Box>
                   <Link
-                    href={`${window.location.origin}/project-pages/${currentProjectId}/edit/settings`}
+                    href={`/project-pages/${currentProjectId}/edit/settings`}
                     sx={{
                       display: 'inline-flex',
                       alignItems: 'center',

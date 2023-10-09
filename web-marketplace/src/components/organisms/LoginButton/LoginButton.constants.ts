@@ -6,7 +6,8 @@ export const socialProviders = [
   {
     name: 'Google',
     imageUrl: '/png/google.png',
-    onClick: () =>
-      (window.location.href = `${apiUri}/marketplace/v1/auth/google`),
+    onClick: () => {
+      window.location.href = `${apiUri}/marketplace/v1/auth/google`;
+    },
   },
 ];

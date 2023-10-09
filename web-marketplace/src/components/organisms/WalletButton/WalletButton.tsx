@@ -6,8 +6,6 @@ import { REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { useAtom } from 'jotai';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import WalletModal from 'web-components/lib/components/modal/wallet-modal';
-import { WalletModalState } from 'web-components/lib/components/modal/wallet-modal/WalletModal.types';
 
 import { useLedger } from 'ledger';
 import { isWaitingForSigningAtom } from 'lib/atoms/tx.atoms';
@@ -15,9 +13,12 @@ import { getBalanceQuery } from 'lib/queries/react-query/cosmos/bank/getBalanceQ
 
 import { chainId } from '../../../lib/ledger';
 import { useWallet } from '../../../lib/wallet/wallet';
+import { LoginModal } from '../LoginModal/LoginModal';
+import { LoginModalState } from '../LoginModal/LoginModal.types';
 import { useConnectToWallet } from './hooks/useConnectToWallet';
 import { useNavigateToMobileUrl } from './hooks/useNavigateToMobileUrl';
 import { useResetModalOnConnect } from './hooks/useResetModalOnConnect';
+import { socialProviders } from './WalletButton.constants';
 import { MobileSigningModal } from './WalletButton.SigningModal';
 import { useWalletButtonStyles } from './WalletButton.styles';
 import { ButtonSize } from './WalletButton.types';
@@ -53,8 +54,7 @@ const WalletButton = ({ size = 'small' }: Props) => {
   const [isWaitingForSigning, setIsWaitingForSigningAtom] = useAtom(
     isWaitingForSigningAtom,
   );
-  const [modalState, setModalState] =
-    useState<WalletModalState>('wallet-select');
+  const [modalState, setModalState] = useState<LoginModalState>('select');
   const [connecting, setConnecting] = useState<boolean>(false);
   const [qrCodeUri, setQrCodeUri] = useState<string | undefined>();
   const isConnectedLoaded = loaded ? isConnected : null;
@@ -84,7 +84,7 @@ const WalletButton = ({ size = 'small' }: Props) => {
 
   const onModalClose = useCallback((): void => {
     setIsModalOpen(false);
-    setModalState('wallet-select');
+    setModalState('select');
   }, [setIsModalOpen, setModalState]);
 
   const connectToWallet = useConnectToWallet({
@@ -125,10 +125,12 @@ const WalletButton = ({ size = 'small' }: Props) => {
           )}
         </>
       </div>
-      <WalletModal
+      <LoginModal
         open={isModalOpen}
         onClose={onModalClose}
         wallets={walletsUiConfig}
+        socialProviders={socialProviders}
+        onEmailSubmit={async values => {}} // TODO
         state={modalState}
         qrCodeUri={qrCodeUri}
         connecting={connecting}

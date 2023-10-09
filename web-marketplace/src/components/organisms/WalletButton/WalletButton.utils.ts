@@ -3,8 +3,7 @@ import {
   isMobile as checkIsMobile,
 } from '@walletconnect/browser-utils';
 
-import { Wallet } from 'web-components/lib/components/modal/wallet-modal/WalletModal.types';
-
+import { LoginProvider } from '../LoginModal/LoginModal.types';
 import {
   getAllWalletsUiConfig,
   GetWalletsUiConfigParams,
@@ -15,7 +14,7 @@ import { mobileWalletsName } from './WalletButton.constants';
 
 export const getWalletsUiConfig = ({
   connectToWallet,
-}: GetWalletsUiConfigParams): Wallet[] => {
+}: GetWalletsUiConfigParams): LoginProvider[] => {
   const walletsUiConfig = getAllWalletsUiConfig({
     connectToWallet,
   });

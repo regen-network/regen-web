@@ -1,4 +1,4 @@
-export type WalletModalState = 'wallet-select' | 'wallet-mobile';
+export type LoginModalState = 'select' | 'wallet-mobile';
 
 export type LoginProvider = {
   name: string;

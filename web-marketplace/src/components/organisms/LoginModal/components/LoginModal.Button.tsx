@@ -1,7 +1,8 @@
 import { Box } from '@mui/system';
 
-import { Title } from '../../../typography';
-import { LoginProvider } from '../WalletModal.types';
+import { Title } from 'web-components/src/components/typography';
+
+import { LoginProvider } from '../LoginModal.types';
 
 export interface Props {
   provider: LoginProvider;

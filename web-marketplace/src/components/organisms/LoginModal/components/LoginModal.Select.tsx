@@ -1,23 +1,41 @@
+import { useFormState } from 'react-hook-form';
 import { Grid } from '@mui/material';
 import { Box } from '@mui/system';
 
-import ContainedButton from 'src/components/buttons/ContainedButton';
-import TextField from 'src/components/inputs/new/TextField/TextField';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
 
-import { Body, Label, Title } from '../../../../components/typography';
-import { LoginProvider } from '../WalletModal.types';
-import { LoginModalButton } from './LoginModal.Button';
+import Form from 'components/molecules/Form/Form';
+import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
+
+import { emailFormSchema, EmailFormSchemaType } from '../LoginModal.schema';
+import { LoginProvider } from '../LoginModal.types';
 import { LoginModalProviders } from './LoginModal.Providers';
 
 export interface Props {
   wallets: LoginProvider[];
   socialProviders: LoginProvider[];
+  onEmailSubmit: (values: EmailFormSchemaType) => Promise<void>;
 }
 
-const WalletModalSelect = ({
+const LoginModalSelect = ({
   wallets,
   socialProviders,
+  onEmailSubmit,
 }: Props): JSX.Element => {
+  const form = useZodForm({
+    schema: emailFormSchema,
+    defaultValues: {
+      email: undefined,
+    },
+    mode: 'onBlur',
+  });
+  const { isSubmitting, errors, isValid } = useFormState({
+    control: form.control,
+  });
+  console.log(isValid, errors);
+
   return (
     <Box textAlign="center">
       <Title variant="h4" mb={5}>
@@ -59,16 +77,27 @@ const WalletModalSelect = ({
         NOTE: Only project page creation and user profile creation available
         with email / social log in.
       </Body>
-      <Grid container columnSpacing={2} alignItems="flex-end" pb={7.5}>
-        <Grid item xs={8}>
-          <TextField label="Email" />
+      <Form form={form} onSubmit={onEmailSubmit}>
+        <Grid container columnSpacing={2} alignItems="flex-end" pb={7.5}>
+          <Grid item xs={8}>
+            <TextField
+              label="Email"
+              {...form.register('email')}
+              error={!!errors['email']}
+              helperText={errors['email']?.message}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <ContainedButton
+              onClick={onEmailSubmit}
+              sx={{ height: 60, width: '100%' }}
+              type="submit"
+            >
+              log in
+            </ContainedButton>
+          </Grid>
         </Grid>
-        <Grid item xs={4}>
-          <ContainedButton sx={{ height: 60, width: '100%' }}>
-            log in
-          </ContainedButton>
-        </Grid>
-      </Grid>
+      </Form>
       <LoginModalProviders providers={socialProviders} />
       <Body
         size="sm"
@@ -98,4 +127,4 @@ const WalletModalSelect = ({
   );
 };
 
-export { WalletModalSelect };
+export { LoginModalSelect };

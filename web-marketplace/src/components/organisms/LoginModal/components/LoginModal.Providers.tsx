@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material';
 
-import { LoginProvider } from '../WalletModal.types';
+import { LoginProvider } from '../LoginModal.types';
 import { LoginModalButton } from './LoginModal.Button';
 
 export interface Props {

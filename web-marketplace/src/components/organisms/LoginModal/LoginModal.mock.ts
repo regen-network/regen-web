@@ -1,4 +1,4 @@
-import { LoginProvider } from './WalletModal.types';
+import { LoginProvider } from './LoginModal.types';
 
 type GetWalletsMockParams = {
   onWalletConnectClick: () => void;

@@ -16,6 +16,7 @@ import { CreditBatches } from 'components/organisms';
 type Props = {
   hasNoBatches?: boolean;
   batchesWithSupply?: BatchInfoWithSupply[];
+  paginationParams: TablePaginationParams;
   setPaginationParams: UseStateSetter<TablePaginationParams>;
   useCreate?: boolean;
 };
@@ -23,6 +24,7 @@ type Props = {
 export const MyCreditBatchesTable = ({
   hasNoBatches,
   batchesWithSupply,
+  paginationParams,
   setPaginationParams,
   useCreate,
 }: Props) => {
@@ -73,6 +75,8 @@ export const MyCreditBatchesTable = ({
         <CreditBatches
           creditBatches={batchesWithSupply}
           onTableChange={setPaginationParams}
+          initialPaginationParams={paginationParams}
+          isIgnoreOffset
           sx={{ root: { borderTop: 0 } }}
         />
       </>

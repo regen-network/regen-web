@@ -9,10 +9,7 @@ import PlusIcon from 'web-components/lib/components/icons/PlusIcon';
 
 import { useWallet } from 'lib/wallet/wallet';
 
-import WithLoader from 'components/atoms/WithLoader';
-import { CreditBatches } from 'components/organisms';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
-import { usePaginatedBatchesByIssuer } from 'hooks/batches/usePaginatedBatchesByIssuer';
 
 import { NO_CREDIT_BATCHES_MESSAGE } from './MyCreditBatches.constants';
 import { MyCreditBatchesTable } from './MyCreditBatches.Table';
@@ -21,13 +18,16 @@ export const MyCreditBatches = (): JSX.Element => {
   const theme = useTheme();
   const { wallet } = useWallet();
   const { batchesWithSupply, setPaginationParams, paginationParams } =
-    useFetchPaginatedBatches({ address: wallet?.address });
+    useFetchPaginatedBatches({
+      address: wallet?.address,
+    });
   const hasNoBatches = batchesWithSupply && batchesWithSupply?.length === 0;
 
   return (
     <Box sx={{ width: '100%' }}>
       <MyCreditBatchesTable
         hasNoBatches={hasNoBatches}
+        paginationParams={paginationParams}
         setPaginationParams={setPaginationParams}
         batchesWithSupply={batchesWithSupply}
         useCreate

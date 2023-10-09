@@ -37,6 +37,7 @@ const ChooseCreditClass: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   const project = data?.data?.projectById;
   const adminAddr = project?.walletByAdminWalletId?.addr;
+  const creditClassLength = creditClassItems?.length;
 
   async function handleSelection(
     creditClassId?: string,
@@ -81,13 +82,14 @@ const ChooseCreditClass: React.FC<React.PropsWithChildren<unknown>> = () => {
       adminAddr={adminAddr}
     >
       <ChooseCreditClassGrid
-        justifyContent={creditClassItems?.length > 1 ? 'flex-start' : 'center'}
+        justifyContent={creditClassLength > 1 ? 'flex-start' : 'center'}
         loading={loading}
         error={error}
+        isIssuer={creditClassLength > 0}
       >
         <>
           <CreateOffchainProjectCard onClick={() => handleSelection()} />
-          {creditClassItems?.length > 0 ? (
+          {creditClassLength > 0 ? (
             creditClassItems?.map(creditClassItem => (
               <ChooseCreditClassItem
                 key={creditClassItem.onChainId}

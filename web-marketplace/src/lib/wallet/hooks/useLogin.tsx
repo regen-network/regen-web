@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { postData } from 'utils/fetch/postData';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { apiUri } from 'lib/apiUri';
@@ -47,21 +48,11 @@ export const useLogin = ({ signArbitrary, setError, setAccountId }: Params) => {
           });
 
           // Step 4: Submit the signature to the login endpoint
-          const loginRes = await fetch(
-            `${apiUri}/marketplace/v1/web3auth/login`,
-            {
-              body: JSON.stringify({ signature }),
-              method: 'POST',
-              credentials: 'include',
-              headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': token,
-              },
-            },
-          );
-          const { user } = await loginRes.json();
-
+          const { user } = await postData({
+            url: `${apiUri}/marketplace/v1/web3auth/login`,
+            data: { signature },
+            token,
+          });
           const accountId = user?.id;
           if (accountId) {
             setAccountId(accountId);

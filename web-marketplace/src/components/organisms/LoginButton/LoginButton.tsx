@@ -3,12 +3,14 @@ import { State, WalletStatus } from '@cosmos-kit/core';
 import { useManager } from '@cosmos-kit/react-lite';
 import { useQuery } from '@tanstack/react-query';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
+import { postData } from 'utils/fetch/postData';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 
 import { useLedger } from 'ledger';
 import { apiUri } from 'lib/apiUri';
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { isWaitingForSigningAtom } from 'lib/atoms/tx.atoms';
 import { getBalanceQuery } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
@@ -116,6 +118,7 @@ const LoginButton = ({ size = 'small' }: Props) => {
   useResetModalOnConnect({ setIsModalOpen, setModalState, wallet });
 
   const { data: token } = useQuery(getCsrfTokenQuery({}));
+  const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
   return chainId ? (
     <>
@@ -136,18 +139,17 @@ const LoginButton = ({ size = 'small' }: Props) => {
         socialProviders={socialProviders}
         onEmailSubmit={async values => {
           if (token && values.email) {
-            await fetch(`${apiUri}/marketplace/v1/auth/magiclogin`, {
-              method: `POST`,
-              body: JSON.stringify({
-                destination: values.email,
-              }),
-              credentials: 'include',
-              headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': token,
-              },
-            });
+            try {
+              await postData({
+                url: `${apiUri}/marketplace/v1/auth/magiclogin`,
+                data: {
+                  destination: values.email,
+                },
+                token,
+              });
+            } catch (e) {
+              setErrorBannerTextAtom(String(e));
+            }
           }
         }}
         state={modalState}

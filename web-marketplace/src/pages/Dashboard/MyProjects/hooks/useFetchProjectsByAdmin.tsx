@@ -10,7 +10,6 @@ import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/g
 
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
-import { Project } from '../MyProjects.types';
 import { useFetchProjectsWithOrders } from './useFetchProjectsWithOrders';
 
 type Params = {
@@ -87,7 +86,7 @@ export const useFetchProjectByAdmin = ({
       }),
     })) ?? [];
 
-  const projects: Project[] = [
+  const projects = [
     ...onChainProjectsWithData,
     ...onlyOffChainProjectsWithData,
   ];

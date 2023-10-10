@@ -4847,7 +4847,7 @@ export type AllProjectsQuery = (
     { __typename?: 'ProjectsConnection' }
     & { nodes: Array<Maybe<(
       { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'slug' | 'metadata' | 'onChainId' | 'approved'>
+      & Pick<Project, 'id' | 'slug' | 'metadata' | 'onChainId' | 'approved' | 'published'>
       & { creditClassByCreditClassId?: Maybe<(
         { __typename?: 'CreditClass' }
         & Pick<CreditClass, 'id' | 'onChainId'>
@@ -5491,6 +5491,7 @@ export const AllProjectsDocument = gql`
       metadata
       onChainId
       approved
+      published
       creditClassByCreditClassId {
         id
         onChainId

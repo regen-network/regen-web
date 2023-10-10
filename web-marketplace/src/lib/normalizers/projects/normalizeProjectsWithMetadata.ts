@@ -90,13 +90,19 @@ export const normalizeProjectWithMetadata = ({
       projectWithOrderData?.id,
     href: projectId ? `/project/${projectId}` : undefined,
     imgSrc:
-      projectPageMetadata?.['regen:previewPhoto']?.['schema:url'] ??
+      projectPageMetadata?.['regen:previewPhoto']?.['schema:url'] ||
+      projectWithOrderData?.imgSrc ||
       creditClassImage,
     place:
       projectMetadata?.['schema:location']?.place_name ||
       projectWithOrderData?.place,
     program,
-    area: projectMetadata?.['regen:projectSize']?.['qudt:numericValue'],
-    areaUnit: projectMetadata?.['regen:projectSize']?.['qudt:unit'] || '',
+    area:
+      projectMetadata?.['regen:projectSize']?.['qudt:numericValue'] ||
+      projectWithOrderData?.area,
+    areaUnit:
+      projectMetadata?.['regen:projectSize']?.['qudt:unit'] ||
+      projectWithOrderData?.areaUnit ||
+      '',
   } as ProjectWithOrderData;
 };

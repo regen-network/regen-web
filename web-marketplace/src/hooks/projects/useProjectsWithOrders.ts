@@ -198,6 +198,7 @@ export function useProjectsWithOrders({
       getProjectByOnChainIdQuery({
         client: graphqlClient,
         onChainId: project.id,
+        enabled: !!project.id && !project.offChain,
       }),
     ),
   });

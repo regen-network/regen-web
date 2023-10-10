@@ -6,6 +6,7 @@ query AllProjects {
       metadata
       onChainId
       approved
+      published
       creditClassByCreditClassId {
         id
         onChainId

@@ -1,4 +1,5 @@
 import { AllProjectsDocument, AllProjectsQuery } from 'generated/graphql';
+import { jsonLdCompact } from 'lib/rdf';
 
 import {
   ReactQueryGetAllProjectsParams,
@@ -14,6 +15,15 @@ export const getAllProjectsQuery = ({
     const { data } = await client.query<AllProjectsQuery>({
       query: AllProjectsDocument,
     });
+
+    await Promise.all(
+      data?.allProjects?.nodes?.map(async project => {
+        if (project?.metadata) {
+          project.metadata = await jsonLdCompact(project.metadata);
+        }
+        return project;
+      }) || [],
+    );
 
     return data;
   },

@@ -6,6 +6,7 @@ import ContainedButton from 'web-components/lib/components/buttons/ContainedButt
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
+import { Link } from 'components/atoms/Link';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
@@ -42,13 +43,9 @@ const LoginModalSelect = ({
       </Title>
       <Body pb={7.5}>
         Learn more about wallets in our{' '}
-        <a
-          href="https://guides.regen.network/guides/wallets"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <Link href="https://guides.regen.network/guides/wallets">
           user guide.
-        </a>
+        </Link>
       </Body>
       <LoginModalProviders providers={wallets} />
       <Grid container alignItems="center" pb={7.5} spacing={7.5} pt={5}>
@@ -88,7 +85,7 @@ const LoginModalSelect = ({
           </Grid>
           <Grid item xs={4}>
             <ContainedButton
-              sx={{ height: { xs: 50, sx: 60 }, width: '100%' }}
+              sx={{ height: { xs: 50, sm: 60 }, width: '100%' }}
               type="submit"
             >
               log in
@@ -105,21 +102,13 @@ const LoginModalSelect = ({
         }}
       >
         By connecting to Regen Marketplace, you agree to our{' '}
-        <a
-          href="https://regennetwork.notion.site/Platform-Terms-of-Service-b77faf978cd04e2e8d3c58f76841bad1"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <Link href="https://regennetwork.notion.site/Platform-Terms-of-Service-b77faf978cd04e2e8d3c58f76841bad1">
           Terms of Service
-        </a>{' '}
+        </Link>{' '}
         and{' '}
-        <a
-          href="https://www.regen.network/privacy-policy"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <Link href="https://www.regen.network/privacy-policy">
           Privacy Policy
-        </a>
+        </Link>
       </Body>
     </Box>
   );

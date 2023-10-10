@@ -10,7 +10,7 @@ export interface Props {
 const LoginModalProviders = ({ providers }: Props) => (
   <Grid container columnSpacing={5} pb={7.5}>
     {providers.map(provider => (
-      <Grid item xs={12 / providers.length}>
+      <Grid item xs={12 / providers.length} key={provider.name}>
         <LoginModalButton provider={provider} />
       </Grid>
     ))}

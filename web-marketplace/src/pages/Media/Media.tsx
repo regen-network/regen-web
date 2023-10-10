@@ -1,5 +1,14 @@
 import { useNavigate, useParams } from 'react-router-dom';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
+import { useQuery } from '@tanstack/react-query';
 
+import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
+
+import { useCreateProjectContext } from 'pages/ProjectCreate';
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
 import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import WithLoader from 'components/atoms/WithLoader';
@@ -14,7 +23,21 @@ const Media = (): JSX.Element => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
-  const { navigateNext } = useNavigateNext({ step: 'metadata', projectId });
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
+  const { data } = useQuery(
+    getProjectByIdQuery({
+      client: graphqlClient,
+      enabled: !isEdit,
+      id: projectId,
+    }),
+  );
+  const creditClassId =
+    data?.data?.projectById?.metadata?.['regen:creditClassId'];
+  const { navigateNext } = useNavigateNext({
+    step: creditClassId ? 'metadata' : 'review',
+    projectId,
+  });
   const { offChainProject, metadata, metadataSubmit, loading } =
     useProjectWithMetadata({
       projectId,

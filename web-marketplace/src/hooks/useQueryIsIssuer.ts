@@ -8,24 +8,29 @@ import { useQuery } from '@tanstack/react-query';
 import { getClassesByIssuerQuery } from 'lib/queries/react-query/registry-server/graphql/indexer/getClassesByIssuer/getClassesByIssuer';
 import { useWallet } from 'lib/wallet/wallet';
 
-function useQueryIsIssuer(): boolean {
+type Props = {
+  address?: string;
+};
+
+function useQueryIsIssuer({ address }: Props) {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { wallet } = useWallet();
-  const address = wallet?.address;
+  const walletAddress = wallet?.address;
+  const activeAddress = address ?? walletAddress;
 
-  const { data: classesByIssuerData } = useQuery(
+  const { data: classesByIssuerData, isFetching } = useQuery(
     getClassesByIssuerQuery({
-      enabled: !!address && !!graphqlClient,
+      enabled: !!activeAddress && !!graphqlClient,
       client: graphqlClient,
-      issuer: address,
+      issuer: activeAddress,
     }),
   );
 
   const isIssuer =
     (classesByIssuerData?.data.allClassIssuers?.nodes?.length ?? 0) > 0;
 
-  return isIssuer;
+  return { isIssuer, isLoadingIsIssuer: isFetching };
 }
 
 export { useQueryIsIssuer };

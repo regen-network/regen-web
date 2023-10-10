@@ -23,6 +23,8 @@ import MyEcocredits from 'pages/Dashboard/MyEcocredits';
 import MyProjects from 'pages/Dashboard/MyProjects';
 import { ecocreditBatchesLoader } from 'pages/EcocreditBatches/EcocreditBatches.loader';
 import { BridgeTab } from 'pages/EcocreditsByAccount/BridgeTab/BridgeTab';
+import { CreditBatchesTab } from 'pages/EcocreditsByAccount/CreditBatchesTab/CreditBatchesTab';
+import { CreditClassTab } from 'pages/EcocreditsByAccount/CreditClassTab/CreditClassTab';
 import { PortfolioTab } from 'pages/EcocreditsByAccount/PortfolioTab/EcocreditsByAccount.PortfolioTab';
 import ProjectsTab from 'pages/EcocreditsByAccount/ProjectsTab';
 import Faucet from 'pages/Faucet';
@@ -152,6 +154,8 @@ export const getRoutes = ({
           <Route index element={<Navigate to="portfolio" />} />
           <Route path="portfolio" element={<PortfolioTab />} />
           <Route path="projects" element={<ProjectsTab />} />
+          <Route path="credit-classes" element={<CreditClassTab />} />
+          <Route path="credit-batches" element={<CreditBatchesTab />} />
           <Route path="bridge" element={<BridgeTab />} />
         </Route>
         <Route

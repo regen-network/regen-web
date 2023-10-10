@@ -1,0 +1,74 @@
+import { Box, Card, CardMedia, SxProps } from '@mui/material';
+
+import { CreditPrice } from 'src/components/cards/ProjectCard/ProjectCard.CreditPrice';
+import { truncateTwoLines } from 'src/utils/mui/truncate';
+
+import { PurchaseInfo } from '../../../components/cards/ProjectCard/ProjectCard.types';
+import { Title } from '../../../components/typography';
+import { Theme } from '../../../theme/muiTheme';
+import { ButtonType } from '../../../types/shared/buttonType';
+import { LinkComponentType } from '../../../types/shared/linkComponentType';
+import { sxToArray } from '../../../utils/mui/sxToArray';
+import OutlinedButton from '../../buttons/OutlinedButton';
+
+export interface Props {
+  name: string;
+  imgSrc: string;
+  purchaseInfo?: PurchaseInfo;
+  button: ButtonType;
+  href?: string;
+  className?: string;
+  LinkComponent?: LinkComponentType;
+  sx?: SxProps<Theme>;
+}
+
+export const CreditClassCardGrid = ({
+  button,
+  imgSrc,
+  href,
+  name,
+  purchaseInfo,
+  className,
+  LinkComponent = ({ children }) => <>{children}</>,
+  sx = [],
+}: Props): JSX.Element => {
+  const { text, disabled, startIcon, onClick } = button;
+
+  return (
+    <Card
+      elevation={1}
+      sx={[
+        {
+          maxWidth: 365,
+          border: '1px solid',
+          borderColor: 'grey.100',
+          borderRadius: '10px',
+        },
+        ...sxToArray(sx),
+      ]}
+      className={className}
+    >
+      <LinkComponent href={href ?? ''}>
+        <CardMedia
+          image={imgSrc ?? ''}
+          sx={{ with: '100%', height: '176px' }}
+        />
+      </LinkComponent>
+      <Box sx={{ p: 5, pb: 6.25 }}>
+        <Title variant="h4" sx={[truncateTwoLines, { mb: 5, height: '57px' }]}>
+          {name}
+        </Title>
+        <CreditPrice purchaseInfo={purchaseInfo} sx={{ mb: 5 }} />
+        <OutlinedButton
+          onClick={onClick}
+          size="small"
+          startIcon={startIcon}
+          disabled={disabled}
+          sx={{ width: '100%' }}
+        >
+          {text}
+        </OutlinedButton>
+      </Box>
+    </Card>
+  );
+};

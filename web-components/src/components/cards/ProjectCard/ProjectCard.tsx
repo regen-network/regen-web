@@ -6,20 +6,12 @@ import { Buy1Event, Track } from 'web-marketplace/src/lib/tracker/types';
 import { ButtonType } from '../../../types/shared/buttonType';
 import { formatStandardInfo } from '../../../utils/format';
 import OutlinedButton from '../../buttons/OutlinedButton';
-import GradientBadge from '../../gradient-badge';
 import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
 import ProjectPlaceInfo from '../../place/ProjectPlaceInfo';
-import InfoTooltipWithIcon from '../../tooltip/InfoTooltipWithIcon';
-import { Body, Subtitle } from '../../typography';
 import { Party, User } from '../../user/UserInfo';
 import MediaCard, { MediaCardProps } from '../MediaCard';
-import {
-  AVG_PRICE_LABEL,
-  AVG_PRICE_TOOLTIP,
-  DEFAULT_BUY_BUTTON,
-  ERROR_CARD_PRICE,
-  SOLD_OUT,
-} from './ProjectCard.constants';
+import { AVG_PRICE_TOOLTIP, DEFAULT_BUY_BUTTON } from './ProjectCard.constants';
+import { CreditPrice } from './ProjectCard.CreditPrice';
 import { ProgramImageChildren } from './ProjectCard.ImageChildren';
 import { PurchaseDetails } from './ProjectCard.PurchaseDetails';
 import { useProjectCardStyles } from './ProjectCard.styles';
@@ -99,7 +91,6 @@ export function ProjectCard({
     purchaseInfo?.vintageMetadata?.[
       'https://schema.regen.network#additionalCertifications'
     ]?.['@list'];
-  const avgPricePerTonLabel = purchaseInfo?.sellInfo?.avgPricePerTonLabel;
 
   return (
     <MediaCard
@@ -198,87 +189,13 @@ export function ProjectCard({
                 />
               )}
               <>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    mb: 5,
-                  }}
-                >
-                  <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                      <Subtitle
-                        size="xs"
-                        mobileSize="xxs"
-                        color="info.main"
-                        sx={{
-                          mr: 1,
-                          fontWeight: 800,
-                          textTransform: 'uppercase',
-                        }}
-                      >
-                        {AVG_PRICE_LABEL}
-                      </Subtitle>
-                      <InfoTooltipWithIcon
-                        title={AVG_PRICE_TOOLTIP}
-                        sx={{ width: 20, height: 20 }}
-                        outlined
-                      />
-                    </Box>
-                    <Box sx={{ display: 'flex' }}>
-                      {purchaseInfo?.sellInfo?.denomLogo}
-                      <Body
-                        size="md"
-                        mobileSize="sm"
-                        sx={{
-                          fontWeight: 700,
-                          ml: purchaseInfo?.sellInfo?.denomLogo ? 2 : 0,
-                          color:
-                            purchaseInfo?.sellInfo && !avgPricePerTonLabel
-                              ? 'error.dark'
-                              : 'primary.contrastText',
-                        }}
-                      >
-                        {purchaseInfo?.sellInfo
-                          ? avgPricePerTonLabel ?? ERROR_CARD_PRICE
-                          : '-'}
-                      </Body>
-                    </Box>
-                  </Box>
-                  <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <Subtitle
-                      size="xs"
-                      mobileSize="xxs"
-                      color="info.main"
-                      sx={{ mb: 1, fontWeight: 800 }}
-                    >
-                      {'CREDITS AVAILABLE'}
-                    </Subtitle>
-                    <Body
-                      size="md"
-                      mobileSize="sm"
-                      sx={{
-                        fontWeight: 700,
-                        color: 'primary.contrastText',
-                        display: 'flex',
-                        alignItems: 'center',
-                      }}
-                    >
-                      {isSoldOut ? (
-                        <GradientBadge label={SOLD_OUT} />
-                      ) : (
-                        purchaseInfo?.sellInfo?.creditsAvailable ?? '0'
-                      )}
-                      {creditsTooltip && (
-                        <InfoTooltipWithIcon
-                          title={creditsTooltip}
-                          sx={{ ml: 1, width: 20, height: 20 }}
-                          outlined
-                        />
-                      )}
-                    </Body>
-                  </Box>
-                </Box>
+                <CreditPrice
+                  priceTooltip={AVG_PRICE_TOOLTIP}
+                  creditsTooltip={creditsTooltip}
+                  isSoldOut={isSoldOut}
+                  purchaseInfo={purchaseInfo}
+                  sx={{ mb: 5 }}
+                />
                 {onButtonClick && (
                   <OutlinedButton
                     onClick={event => {

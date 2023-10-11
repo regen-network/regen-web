@@ -45,7 +45,7 @@ export const UserAccountSettings = ({
           <Body size="sm" color="info.dark-grey">
             Connect a wallet address to be able to perform on chain tasks such
             as buying and selling credits, and creating projects on Regen
-            Ledger.
+            Ledger.{' '}
             {/* TODO: add link or button to learn more when we have the content ready */}
             <a>Learn more</a>
           </Body>

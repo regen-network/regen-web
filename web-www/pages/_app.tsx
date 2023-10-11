@@ -9,6 +9,7 @@ import theme from 'web-components/lib/theme/muiTheme';
 import '../styles/font.css';
 import '../styles/web-components.css';
 import '../styles/background.css';
+import '../../tailwind.css';
 import Layout from '@/components/templates/Layout/Layout';
 
 const { augmentDocumentWithEmotionCache, withAppEmotionCache } =

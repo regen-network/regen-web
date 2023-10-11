@@ -14,6 +14,7 @@ export interface ProjectWithOrderData extends ProjectCardProps {
   sellOrders: UISellOrderInfo[];
   metadata?: string;
   sanityCreditClassData?: AllCreditClassQuery['allCreditClass'][0];
+  offChain?: boolean;
 }
 
 export type FilterCommunityCreditsEvent = {

@@ -8,11 +8,22 @@ import { CreditClassDetailsTableTabsProps } from './CreditClassDetails.TableTabs
 export const getCreditClassDetailsTabs = ({
   creditClassMetadata,
   onChainCreditClassId,
+  creditBatches,
+  initialPaginationParams,
+  onTableChange,
 }: CreditClassDetailsTableTabsProps): IconTabProps[] =>
   [
     {
       label: 'Credit Issuance',
-      content: <CreditBatches creditClassId={onChainCreditClassId} />,
+      content: (
+        <CreditBatches
+          creditClassId={onChainCreditClassId}
+          creditBatches={creditBatches}
+          initialPaginationParams={initialPaginationParams}
+          onTableChange={onTableChange}
+          isIgnoreOffset
+        />
+      ),
       hidden: !onChainCreditClassId,
     },
     {

@@ -71,14 +71,16 @@ export function getCompactedPath(expandedPath: string): string | undefined {
  * - and `regen:CXX-Project` (for anchored data)
  */
 export function getProjectCreateBaseData(
-  creditClassId: string,
+  creditClassId?: string,
 ): Partial<Omit<ProjectMetadataLD, '@type'>> & { '@type': string[] } {
   return {
     '@context': {
       ...ANCHORED_PROJECT_CONTEXT,
       ...UNANCHORED_PROJECT_CONTEXT,
     },
-    '@type': [`regen:${creditClassId}-Project`, 'regen:Project-Page'],
+    '@type': creditClassId
+      ? [`regen:${creditClassId}-Project`, 'regen:Project-Page']
+      : ['regen:Project-Page'],
     'regen:creditClassId': creditClassId,
   };
 }

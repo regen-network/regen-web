@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Box } from '@mui/material';
 import { SxProps } from '@mui/system';
 import ReactHtmlParser from 'html-react-parser';
@@ -32,7 +32,8 @@ const useStyles = makeStyles()(theme => ({
 export interface ItemValue {
   name: string | number;
   url?: string;
-  icon?: React.ReactNode;
+  icon?: ReactNode;
+  children?: ReactNode;
 }
 
 export interface Item {

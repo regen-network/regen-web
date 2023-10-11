@@ -28,7 +28,7 @@ export const useFetchAllOffChainProjects = ({
   );
 
   const offChainProjects = allProjectsData?.allProjects?.nodes.filter(
-    project => !project?.onChainId && project?.approved,
+    project => !project?.onChainId && project?.approved && project?.published,
   );
 
   const onlyOffChainProjectsWithData =

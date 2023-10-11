@@ -16,6 +16,7 @@ export type CertificateType = {
   date: string | Date;
   txHash: LinkType;
   certificateTitle: string;
+  certificateIcon?: string;
   creditsUnits: number;
   creditUnitName?: string;
   equivalentTonsCO2?: number;

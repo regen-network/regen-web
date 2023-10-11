@@ -4,9 +4,9 @@ import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
 import { useQueryIsProjectAdmin } from 'hooks/useQueryIsProjectAdmin';
 
 export const useProfileItems = () => {
-  const isIssuer = useQueryIsIssuer();
-  const isCreditClassCreator = useQueryIfCreditClassCreator();
-  const isProjectAdmin = useQueryIsProjectAdmin();
+  const { isIssuer } = useQueryIsIssuer({});
+  const isCreditClassCreator = useQueryIfCreditClassCreator({});
+  const { isProjectAdmin } = useQueryIsProjectAdmin({});
   const isCreditClassAdmin = useQueryIsClassAdmin();
 
   const showProjects = isIssuer || isProjectAdmin;
@@ -17,7 +17,7 @@ export const useProfileItems = () => {
     // Explicitly set to false until we enable the class creation flow
     showCreditClasses: false && showCreditClasses,
     isCreditClassCreator: false && isCreditClassCreator,
-    isProjectAdmin,
-    isIssuer,
+    isProjectAdmin: isProjectAdmin,
+    isIssuer: isIssuer,
   };
 };

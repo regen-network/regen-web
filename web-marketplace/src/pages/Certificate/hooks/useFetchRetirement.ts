@@ -8,10 +8,13 @@ import { useQuery } from '@tanstack/react-query';
 import { normalizeRetirement } from 'lib/normalizers/retirements/normalizeRetirement';
 import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
 import { getRetirementByNodeId } from 'lib/queries/react-query/registry-server/graphql/indexer/getRetirementByNodeId/getRetirementByNodeId';
+import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
 import { getDataFromBatchDenomId } from 'pages/Dashboard/MyEcocredits/MyEcocredits.utils';
 import { getDisplayPartyOrAddress } from 'components/organisms/DetailsSection/DetailsSection.utils';
 import { useProjectsWithMetadata } from 'hooks/projects/useProjectsWithMetadata';
+
+import { client as sanityClient } from '../../../lib/clients/sanity';
 
 type Params = {
   retirementNodeId: string;
@@ -19,6 +22,14 @@ type Params = {
 
 export const useFetchRetirement = ({ retirementNodeId }: Params) => {
   const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
+
+  // Sanity credit classes
+  const {
+    data: allSanityCreditClasses,
+    isFetching: isLoadingCreditClassesSanity,
+  } = useQuery(
+    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+  );
 
   // Get retirement
   const { data, isLoading } = useQuery(
@@ -50,6 +61,11 @@ export const useFetchRetirement = ({ retirementNodeId }: Params) => {
   // Format the party data
   const owner = getDisplayPartyOrAddress(retirement?.owner, ownerParty);
 
+  // Sanity credit class
+  const sanityCreditClass = allSanityCreditClasses?.allCreditClass.find(
+    sanityCreditClass => sanityCreditClass.path === classes[0]?.id,
+  );
+
   // Normalize retirement
   const normalizedRetirement = normalizeRetirement({
     retirement,
@@ -58,8 +74,12 @@ export const useFetchRetirement = ({ retirementNodeId }: Params) => {
     project: projects[0],
     projectMetadata: projectsMetadata[0],
     creditClass: classes[0],
+    sanityCreditClass,
     creditClassMetadata: classesMetadata[0],
   });
 
-  return { retirement: normalizedRetirement, isLoadingRetirement: isLoading };
+  return {
+    retirement: normalizedRetirement,
+    isLoadingRetirement: isLoading || isLoadingCreditClassesSanity,
+  };
 };

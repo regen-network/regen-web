@@ -7,6 +7,7 @@ import { Party } from 'web-components/lib/components/user/UserInfo';
 
 import { Maybe } from 'generated/graphql';
 import { RetirementFieldsFragment } from 'generated/indexer-graphql';
+import { CreditClass } from 'generated/sanity-graphql';
 import {
   AnchoredProjectMetadataLD,
   CreditClassMetadataLD,
@@ -20,6 +21,7 @@ type Props = {
   project?: ProjectInfo;
   projectMetadata?: AnchoredProjectMetadataLD;
   creditClass?: ClassInfo;
+  sanityCreditClass?: CreditClass;
   creditClassMetadata?: CreditClassMetadataLD;
   issuer?: Party;
   owner?: Party;
@@ -40,6 +42,8 @@ export type NormalizedRetirement = {
   projectId: string;
   projectName: string;
   projectLocation?: string;
+  retirementLabel?: string;
+  retirementIcon?: string;
   retirementLocation?: string;
   retirementReason?: string;
   retiredBy?: string;
@@ -52,6 +56,7 @@ export const normalizeRetirement = ({
   retirement,
   retirementData,
   creditClass,
+  sanityCreditClass,
   creditClassMetadata,
   issuer,
   owner,
@@ -72,6 +77,8 @@ export const normalizeRetirement = ({
     projectMetadata?.['schema:name'] ?? retirementData?.projectId ?? '',
   projectLocation: project?.jurisdiction,
   retirementDate: retirement?.timestamp,
+  retirementLabel: sanityCreditClass?.retirementLabel ?? '',
+  retirementIcon: sanityCreditClass?.retirementIcon?.asset?.url ?? '',
   retirementLocation: retirement?.jurisdiction,
   retirementReason: retirement?.reason,
   retiredBy: retirement?.owner,

@@ -18,25 +18,33 @@ export const parseNumber = (value: any): number => {
 export const sumBatchTotals = (
   batches: BatchInfoWithSupply[],
 ): CreditTotalData => {
-  let tradeable = 0;
-  let retired = 0;
-  let created = 0;
+  let tradeable: number | undefined = undefined;
+  let retired: number | undefined = undefined;
+  let created: number | undefined = undefined;
 
-  batches.forEach(batch => {
-    const batchTradable = parseNumber(batch.tradableAmount);
-    const batchRetired = parseNumber(batch.retiredAmount);
-    const batchCancelled = parseNumber(batch.cancelledAmount);
-    tradeable += batchTradable;
-    retired += batchRetired;
-    created += batchTradable + batchRetired + batchCancelled;
-  });
+  if (batches.length > 0) {
+    batches.forEach(batch => {
+      const batchTradable = parseNumber(batch.tradableAmount);
+      const batchRetired = parseNumber(batch.retiredAmount);
+      const batchCancelled = parseNumber(batch.cancelledAmount);
+      tradeable = (tradeable ?? 0) + batchTradable;
+      retired = (retired ?? 0) + batchRetired;
+      created = (created ?? 0) + batchTradable + batchRetired + batchCancelled;
+    });
+  }
 
   return {
-    tradeable: formatNumber({
-      num: tradeable,
-      ...quantityFormatNumberOptions,
-    }),
-    retired: formatNumber({ num: retired, ...quantityFormatNumberOptions }),
-    created: formatNumber({ num: created, ...quantityFormatNumberOptions }),
+    tradeable: tradeable
+      ? formatNumber({
+          num: tradeable,
+          ...quantityFormatNumberOptions,
+        })
+      : undefined,
+    retired: retired
+      ? formatNumber({ num: retired, ...quantityFormatNumberOptions })
+      : undefined,
+    created: created
+      ? formatNumber({ num: created, ...quantityFormatNumberOptions })
+      : undefined,
   };
 };

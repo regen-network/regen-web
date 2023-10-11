@@ -8,8 +8,8 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 /** UserAccountSettings is a component for displaying and managing a user's
  * account settings.
  *
- * The component doesn't specify its own width, so it should be wrapped in a
- * container that specifies the width.
+ * The component doesn't specify its own width, background color or padding, so
+ * it should be wrapped in a container that provides those styles.
  */
 export const UserAccountSettings = ({
   email,
@@ -17,15 +17,15 @@ export const UserAccountSettings = ({
   walletProvider,
 }: UserAccountSettingsProps) => {
   return (
-    <div className="flex flex-col gap-50 px-50 py-50 bg-primary-main">
+    <div className="flex flex-col gap-50">
       <TextField label="Login Email" value={email} disabled={true} />
       <div className="flex flex-col gap-30">
         <div className="flex flex-col gap-10">
           <Subtitle size="lg">Social Accounts</Subtitle>
           <Body size="sm" color="info.dark-grey">
-            Use your social account to log in to Regen Marketplace.{' '}
+            Use your social account to log in to Regen Marketplace.&nbsp;
             {/* TODO: add link or button to learn more when we have the content ready */}
-            <a>Learn more</a>
+            <a>Learn more»</a>
           </Body>
         </div>
         <div className="flex flex-col">
@@ -45,9 +45,9 @@ export const UserAccountSettings = ({
           <Body size="sm" color="info.dark-grey">
             Connect a wallet address to be able to perform on chain tasks such
             as buying and selling credits, and creating projects on Regen
-            Ledger.{' '}
+            Ledger.&nbsp;
             {/* TODO: add link or button to learn more when we have the content ready */}
-            <a>Learn more</a>
+            <a>Learn more»</a>
           </Body>
         </div>
         <ConnectField

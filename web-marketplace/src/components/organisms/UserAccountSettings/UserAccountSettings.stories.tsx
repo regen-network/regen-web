@@ -20,8 +20,9 @@ const meta: Meta<typeof UserAccountSettings> = {
       },
     ],
     walletProvider: {
-      connect: action('connect wallet'),
-    },
+      address: 'regenfoobar3792723djghsdg',
+      disconnect: action('disconnect wallet'),
+    }
   },
 };
 
@@ -29,16 +30,6 @@ export default meta;
 type Story = StoryObj<typeof UserAccountSettings>;
 
 export const Default: Story = {};
-
-export const WalletConnected: Story = {
-  args: {
-    ...meta.args,
-    walletProvider: {
-      address: 'regenfoobar3792723djghsdg',
-      disconnect: action('disconnect wallet'),
-    }
-  }
-};
 
 export const Width375: Story = {
   name: "Wrapped in a 375px mobile container",

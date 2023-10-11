@@ -10,8 +10,9 @@ module.exports = {
       grey: {
         50: 'rgb(var(--grey-50) / <alpha-value>)',
         100: 'rgb(var(--grey-100) / <alpha-value>)',
+        200: 'rgb(var(--grey-200) / <alpha-value>)',
+        300: 'rgb(var(--grey-300) / <alpha-value>)',
       },
-      'lines-grey': '#D2D5D9',
     },
     spacing: {
       // This spacing scale is based on the actual pixel values converted to REM values.

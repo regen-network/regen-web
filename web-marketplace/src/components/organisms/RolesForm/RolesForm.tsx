@@ -38,6 +38,7 @@ interface RolesFormProps {
   onNext?: () => void;
   onPrev?: () => void;
   initialValues?: RolesFormSchemaType;
+  isOnChain: boolean;
 }
 
 const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
@@ -45,9 +46,10 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   submit,
   onNext,
   onPrev,
+  isOnChain,
 }) => {
   const form = useZodForm({
-    schema: rolesFormSchema,
+    schema: rolesFormSchema(isOnChain),
     defaultValues: {
       ...initialValues,
     },
@@ -178,37 +180,39 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
           accountId={accountId}
           {...form.register('verifier')}
         />
-        <Flex alignItems="flex-end" sx={{ mt: { xs: 8.25, sm: 10 } }}>
-          <TextField
-            type="text"
-            label="Admin"
-            disabled
-            {...form.register('admin')}
-          />
-          <EditIcon
-            onClick={() => setAdminModalOpen(true)}
-            sx={{
-              width: 24,
-              height: 24,
-              cursor: 'pointer',
-              ml: { xs: 2, sm: 4.25 },
-              mb: { xs: 2.5, sm: 4.25 },
-            }}
-          />
-          {adminModalOpen && (
-            <AdminModal
-              initialValues={{
-                currentAddress: initialValues?.admin || '',
-                newAddress: initialValues?.admin === admin ? '' : admin,
-              }}
-              onClose={() => setAdminModalOpen(false)}
-              onSubmit={value => {
-                setAdmin(value.newAddress);
-                setAdminModalOpen(false);
+        {isOnChain && (
+          <Flex alignItems="flex-end" sx={{ mt: { xs: 8.25, sm: 10 } }}>
+            <TextField
+              type="text"
+              label="Admin"
+              disabled
+              {...form.register('admin')}
+            />
+            <EditIcon
+              onClick={() => setAdminModalOpen(true)}
+              sx={{
+                width: 24,
+                height: 24,
+                cursor: 'pointer',
+                ml: { xs: 2, sm: 4.25 },
+                mb: { xs: 2.5, sm: 4.25 },
               }}
             />
-          )}
-        </Flex>
+            {adminModalOpen && (
+              <AdminModal
+                initialValues={{
+                  currentAddress: initialValues?.admin || '',
+                  newAddress: initialValues?.admin === admin ? '' : admin,
+                }}
+                onClose={() => setAdminModalOpen(false)}
+                onSubmit={value => {
+                  setAdmin(value.newAddress);
+                  setAdminModalOpen(false);
+                }}
+              />
+            )}
+          </Flex>
+        )}
       </OnBoardingCard>
       <ProjectPageFooter
         onPrev={onPrev}

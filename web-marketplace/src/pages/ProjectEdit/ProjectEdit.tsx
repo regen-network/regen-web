@@ -131,7 +131,6 @@ function ProjectEdit(): JSX.Element {
       }),
     );
   const offChainProject = projectByOffChainIdRes?.data?.projectById;
-  console.log(offChainProject);
   const isLoading = isFetchingProject || isFetchingProjectById;
 
   const isNotAdmin =

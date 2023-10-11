@@ -140,13 +140,13 @@ export const useProjectWithMetadata = ({
     }
     if (editOnChain) {
       await reactQueryClient.invalidateQueries({
-        queryKey: getProjectKey(projectId),
-      });
-      await reactQueryClient.invalidateQueries({
         queryKey: getProjectByOnChainIdKey(projectId),
       });
       await reactQueryClient.invalidateQueries({
         queryKey: getProjectsByAdminKey({ admin: onChainProject?.admin }),
+      });
+      await reactQueryClient.invalidateQueries({
+        queryKey: getProjectKey(projectId),
       });
     }
   }, [
@@ -198,7 +198,6 @@ export const useProjectWithMetadata = ({
       navigateNext,
     ],
   );
-
   return {
     offChainProject,
     metadata,

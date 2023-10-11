@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import {
   PartyType,
@@ -22,6 +23,7 @@ import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';
 
 interface Props {
   offChainProject?: OffChainProject;
+  onChainProject?: ProjectInfo;
   metadata?: NestedPartial<ProjectMetadataLD>;
   projectEditSubmit: UseProjectEditSubmitParams;
   isEdit?: boolean;
@@ -43,6 +45,7 @@ export type Return = {
 const useRolesSubmit = ({
   projectEditSubmit,
   offChainProject,
+  onChainProject,
   metadata,
   isEdit,
   metadataReload,
@@ -107,8 +110,11 @@ const useRolesSubmit = ({
           ...getProjectStakeholders(values),
         } as NestedPartial<ProjectMetadataLD>;
 
-        // In creation mode, we store all metadata in the off-chain table project.metadata temporarily
-        if (!isEdit)
+        // In creation mode or off-chain project edit mode,
+        // we store all metadata in the off-chain table project.metadata
+        const createOrEditOffChain =
+          !isEdit || (isEdit && !onChainProject && !!offChainProject);
+        if (createOrEditOffChain)
           projectPatch = {
             metadata: newMetadata,
             ...projectPatch,
@@ -117,8 +123,10 @@ const useRolesSubmit = ({
         // In creation or edit mode, we always store references to the project stakeholders in the project table
         // which should be in projectPatch if new or updated
         if (doUpdateMetadata || doUpdateAdmin) {
-          // In edit mode, we need to update the project on-chain metadata and/or admin if needed
-          if (isEdit) {
+          console.log(onChainProject);
+
+          // In on-chain edit mode, we need to update the project on-chain metadata and/or admin if needed
+          if (isEdit && !!onChainProject) {
             await projectEditSubmit(
               newMetadata,
               values.admin,

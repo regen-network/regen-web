@@ -1,12 +1,8 @@
 import { z } from 'zod';
 
-import {
-  invalidRegenAddress,
-  isValidAddress,
-} from 'web-components/lib/components/inputs/validation';
-
 import { PartyType } from 'generated/graphql';
-import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
+
+import { optionalAddressSchema } from '../AdminModal/AdminModal.schema';
 
 export const profileModalSchema = z.object({
   id: z.string().optional(),
@@ -16,18 +12,7 @@ export const profileModalSchema = z.object({
   name: z.string(),
   profileImage: z.string(),
   description: z.string().max(160).optional(),
-  address: z
-    .string()
-    .refine(
-      value =>
-        value
-          ? isValidAddress(value, chainInfo.bech32Config.bech32PrefixAccAddr)
-          : true,
-      {
-        message: invalidRegenAddress,
-      },
-    )
-    .optional(),
+  address: optionalAddressSchema,
 });
 
 export type ProfileModalSchemaType = z.infer<typeof profileModalSchema>;

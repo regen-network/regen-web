@@ -5,6 +5,7 @@ import { UserAccountSettingsProps } from './UserAccountSettings.types';
 import React from 'react';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import InfoTooltip from 'web-components/lib/components/tooltip/InfoTooltip';
+import * as Toast from '@radix-ui/react-toast';
 
 /** UserAccountSettings is a component for displaying and managing a user's
  * account settings.
@@ -72,7 +73,7 @@ const ConnectField = ({
   address?: string;
 }) => {
   return (
-    <div className="flex flex-row justify-between">
+    <div className="flex flex-row justify-between flex-wrap gap-y-10">
       <div className="flex flex-col gap-5">
         <Body size="md" color="info.dark-grey">
           {providerName}
@@ -109,14 +110,36 @@ const AddressWidget = ({ address }: { address: string }) => (
   </div>
 );
 
-const CopyButton = ({content, tooltip}: {content: string, tooltip: string}) =>
-  <InfoTooltip title={tooltip} arrow placement="top">
-    <svg width="24" height="24" fill="none"
-         onClick={() => {
-           navigator.clipboard.writeText(content);
-         }}
-         className="cursor-pointer hover:stroke-grey-300"
+const CopyButton = ({content, tooltip}: {content: string, tooltip: string}) => {
+  const [open, setOpen] = React.useState(false);
+  const timerRef = React.useRef(0);
+
+  React.useEffect(() => {
+    return () => clearTimeout(timerRef.current);
+  }, []);
+
+  return <Toast.Provider duration={1000}>
+    <InfoTooltip title={tooltip} arrow placement="top">
+      <svg width="24" height="24" fill="none"
+           onClick={() => {
+             navigator.clipboard.writeText(content);
+             setOpen(false);
+             window.clearTimeout(timerRef.current);
+             timerRef.current = window.setTimeout(() => {
+               setOpen(true);
+             }, 100);
+           }}
+           className="cursor-pointer hover:stroke-grey-300"
+      >
+        <path fill="#000" fillRule="evenodd" d="M19 8v9H9.25a.25.25 0 0 1-.25-.25V3h5v4.25c0 .414.336.75.75.75H19Zm-4-4.586L18.287 7H15V3.414ZM3.25 5H7V1.25A.25.25 0 0 1 7.25 1h8.14c.07 0 .137.03.184.081l5.36 5.847a.25.25 0 0 1 .066.17V18.75a.25.25 0 0 1-.25.25H17v3.75a.25.25 0 0 1-.25.25H3.25a.25.25 0 0 1-.25-.25V5.25A.25.25 0 0 1 3.25 5ZM7 16.75V7H5v14h10v-2H7.25a.25.25 0 0 1-.25-.25v-2Z" clipRule="evenodd"/>
+      </svg>
+    </InfoTooltip>
+    <Toast.Root open={open} onOpenChange={setOpen}
+                className="fixed top-0 left-0 bg-secondary-dark w-screen h-[70px]
+      flex items-center justify-center"
     >
-      <path fill="#000" fillRule="evenodd" d="M19 8v9H9.25a.25.25 0 0 1-.25-.25V3h5v4.25c0 .414.336.75.75.75H19Zm-4-4.586L18.287 7H15V3.414ZM3.25 5H7V1.25A.25.25 0 0 1 7.25 1h8.14c.07 0 .137.03.184.081l5.36 5.847a.25.25 0 0 1 .066.17V18.75a.25.25 0 0 1-.25.25H17v3.75a.25.25 0 0 1-.25.25H3.25a.25.25 0 0 1-.25-.25V5.25A.25.25 0 0 1 3.25 5ZM7 16.75V7H5v14h10v-2H7.25a.25.25 0 0 1-.25-.25v-2Z" clipRule="evenodd"/>
-    </svg>
-  </InfoTooltip>
+      <Toast.Title className="text-primary-main">Address copied!</Toast.Title>
+    </Toast.Root>
+    <Toast.Viewport />
+  </Toast.Provider>
+}

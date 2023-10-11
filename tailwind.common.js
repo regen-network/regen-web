@@ -6,6 +6,7 @@ module.exports = {
       // Make sure these guidelines are followed when adding new colors: https://tailwindcss.com/docs/customizing-colors#using-css-variables
       // Color variables should be added to tailwind.css.
       'primary-main': 'rgb(var(--primary-main) / <alpha-value>)',
+      'secondary-main': 'rgb(var(--secondary-main) / <alpha-value>)',
       grey: {
         50: 'rgb(var(--grey-50) / <alpha-value>)',
         100: 'rgb(var(--grey-100) / <alpha-value>)',

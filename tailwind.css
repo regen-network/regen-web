@@ -12,6 +12,7 @@
       Colors are based off of https://www.figma.com/file/Md1Cl2B9eJi4NMzQgpbdMF/Dark-Mode?type=design&node-id=112-9885&mode=design&t=YKxx8fYvslM2TeLp-0.
     */
     --primary-main: 255 255 255;
+    --secondary-main: 79 181 115;
     --grey-50: 250 250 250;
     --grey-100: 239 239 239;
   }

@@ -5,9 +5,10 @@ import { useProjectEditStyles } from './ProjectEdit.styles';
 type Props = {
   section?: string;
   onNavClick: (sectionName: string) => void;
+  isOnChain: boolean;
 };
 
-export const ProjectEditNav = ({ section, onNavClick }: Props) => {
+export const ProjectEditNav = ({ section, onNavClick, isOnChain }: Props) => {
   const { classes: styles } = useProjectEditStyles();
   return (
     <Navigation
@@ -18,9 +19,9 @@ export const ProjectEditNav = ({ section, onNavClick }: Props) => {
         'roles',
         'description',
         'media',
-        'metadata',
+        isOnChain ? 'metadata' : undefined,
         'settings',
-      ]}
+      ].filter(category => Boolean(category))}
       category={section?.replace('-', ' ')}
       onClick={onNavClick}
       showIcon

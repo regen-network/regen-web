@@ -21,6 +21,10 @@ import { BasicInfoFormSchemaType } from 'components/organisms/BasicInfoForm/Basi
 import { DescriptionSchemaType } from 'components/organisms/DescriptionForm/DescriptionForm.schema';
 import { SimplifiedLocationFormSchemaType } from 'components/organisms/LocationForm/LocationForm.schema';
 import { MediaFormSchemaType } from 'components/organisms/MediaForm/MediaForm.schema';
+import {
+  getIsOffChainUuid,
+  getIsOnChainId,
+} from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { useLedger } from '../../ledger';
 import { useCreateOrUpdateProject } from './UseCreateOrUpdateProject';
@@ -74,32 +78,37 @@ export const useProjectWithMetadata = ({
   const { dataClient } = useLedger();
 
   const { createOrUpdateProject } = useCreateOrUpdateProject();
+  const isOnChainId = getIsOnChainId(projectId);
+  const isOffChainUuid = getIsOffChainUuid(projectId);
 
-  // In project creation mode, we query the off-chain project since there's no on-chain project yet.
+  // In project creation mode or off-chain project edit mode,
+  // we query the off-chain project since there's no on-chain project yet.
   // In this case, the router param projectId is the off-chain project uuid.
-  const create = !!projectId && !isEdit;
+  const createOrEditOffChain =
+    !!projectId && (!isEdit || (isEdit && isOffChainUuid));
   const { data: projectByOffChainIdRes, isFetching: isFetchingProjectById } =
     useQuery(
       getProjectByIdQuery({
         client: graphqlClient,
-        enabled: create,
+        enabled: createOrEditOffChain,
         id: projectId,
       }),
     );
   const projectById = projectByOffChainIdRes?.data?.projectById;
-  if (create && projectById) {
+  if (createOrEditOffChain && projectById) {
     offChainProject = projectById;
     metadata = projectById.metadata;
   }
 
-  // In project edit mode, we can query the on-chain (anchored) project metadata.
+  // In on-chain project edit mode, we can query the on-chain (anchored) project metadata.
   // In this case, the router param projectId is the on-chain project id.
-  const edit = !!projectId && isEdit;
+  const editOnChain = !!projectId && isEdit && isOnChainId;
   // Metadata
   const { data: anchoredMetadata, isFetching: isFetchingMetadata } = useQuery(
     getMetadataQuery({
       iri: onChainProject?.metadata,
-      enabled: !!onChainProject?.metadata && edit && anchored && !!dataClient,
+      enabled:
+        !!onChainProject?.metadata && editOnChain && anchored && !!dataClient,
       dataClient,
     }),
   );
@@ -109,12 +118,12 @@ export const useProjectWithMetadata = ({
   } = useQuery(
     getProjectByOnChainIdQuery({
       client: graphqlClient,
-      enabled: edit,
+      enabled: editOnChain,
       onChainId: projectId as string,
     }),
   );
   // Select metadata
-  if (edit) {
+  if (editOnChain) {
     offChainProject = projectByOnChainIdRes?.data?.projectByOnChainId;
     if (anchored) {
       metadata = anchoredMetadata as AnchoredProjectMetadataLD | undefined;
@@ -124,12 +133,12 @@ export const useProjectWithMetadata = ({
   }
   // Create Reload and Submit callbacks
   const metadataReload = useCallback(async (): Promise<void> => {
-    if (create) {
+    if (createOrEditOffChain) {
       await reactQueryClient.invalidateQueries({
         queryKey: getProjectByIdKey(projectId),
       });
     }
-    if (edit) {
+    if (editOnChain) {
       await reactQueryClient.invalidateQueries({
         queryKey: getProjectKey(projectId),
       });
@@ -140,7 +149,13 @@ export const useProjectWithMetadata = ({
         queryKey: getProjectsByAdminKey({ admin: onChainProject?.admin }),
       });
     }
-  }, [create, edit, reactQueryClient, projectId, onChainProject?.admin]);
+  }, [
+    createOrEditOffChain,
+    editOnChain,
+    reactQueryClient,
+    projectId,
+    onChainProject?.admin,
+  ]);
 
   const metadataSubmit = useCallback(
     async ({
@@ -153,7 +168,7 @@ export const useProjectWithMetadata = ({
         newMetadata = { ...metadata, ...values };
       }
       try {
-        if (isEdit && anchored) {
+        if (isEdit && anchored && !!onChainProject) {
           await projectEditSubmit(newMetadata);
         } else {
           await createOrUpdateProject({
@@ -175,10 +190,11 @@ export const useProjectWithMetadata = ({
       metadata,
       isEdit,
       anchored,
+      onChainProject,
       metadataReload,
       projectEditSubmit,
       createOrUpdateProject,
-      offChainProject,
+      offChainProject?.id,
       navigateNext,
     ],
   );

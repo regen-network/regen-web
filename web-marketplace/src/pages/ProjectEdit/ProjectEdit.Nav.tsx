@@ -13,15 +13,17 @@ export const ProjectEditNav = ({ section, onNavClick, isOnChain }: Props) => {
   return (
     <Navigation
       classes={{ root: styles.nav, listItem: styles.navItem }}
-      categories={[
-        'basic info',
-        'location',
-        'roles',
-        'description',
-        'media',
-        isOnChain ? 'metadata' : undefined,
-        'settings',
-      ].filter(category => Boolean(category))}
+      categories={
+        [
+          'basic info',
+          'location',
+          'roles',
+          'description',
+          'media',
+          isOnChain ? 'metadata' : undefined,
+          'settings',
+        ].filter(category => Boolean(category)) as string[]
+      }
       category={section?.replace('-', ' ')}
       onClick={onNavClick}
       showIcon

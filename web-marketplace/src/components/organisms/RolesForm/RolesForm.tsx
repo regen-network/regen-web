@@ -107,9 +107,9 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   );
   const { data: adminWalletData } = useQuery(
     getWalletByAddrQuery({
-      addr: admin,
+      addr: admin as string,
       client: graphqlClient,
-      enabled: admin !== initialValues?.admin && !!graphqlClient,
+      enabled: !!admin && admin !== initialValues?.admin && !!graphqlClient,
     }),
   );
 
@@ -180,7 +180,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
           accountId={accountId}
           {...form.register('verifier')}
         />
-        {isOnChain && (
+        {isOnChain && admin && (
           <Flex alignItems="flex-end" sx={{ mt: { xs: 8.25, sm: 10 } }}>
             <TextField
               type="text"

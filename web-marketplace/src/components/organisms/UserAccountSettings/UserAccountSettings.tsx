@@ -138,7 +138,9 @@ const CopyButton = ({content, tooltip}: {content: string, tooltip: string}) => {
                 className="fixed top-0 left-0 bg-secondary-dark w-screen h-[70px]
       flex items-center justify-center"
     >
-      <Toast.Title className="text-primary-main">Address copied!</Toast.Title>
+      <Toast.Title>
+        <Subtitle className="text-primary-main">Address copied!</Subtitle>
+      </Toast.Title>
     </Toast.Root>
     <Toast.Viewport />
   </Toast.Provider>

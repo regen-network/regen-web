@@ -12,17 +12,14 @@ const meta: Meta<typeof UserAccountSettings> = {
     socialProviders: [
       {
         providerName: 'Google',
-        connected: false,
         connect: action('connect google'),
       },
       {
         providerName: 'LinkedIn',
-        connected: true,
-        connect: action('connect linkedin'),
+        disconnect: action('disconnect linkedin'),
       },
     ],
     walletProvider: {
-      connected: false,
       connect: action('connect wallet'),
     },
   },
@@ -32,6 +29,16 @@ export default meta;
 type Story = StoryObj<typeof UserAccountSettings>;
 
 export const Default: Story = {};
+
+export const WalletConnected: Story = {
+  args: {
+    ...meta.args,
+    walletProvider: {
+      address: 'regenfoobar3792723djghsdg',
+      disconnect: action('disconnect wallet'),
+    }
+  }
+};
 
 export const Width560: Story = {
   name: "Wrapped in a 560px container",

@@ -9,6 +9,7 @@ import OutlinedButton from './OutlinedButton';
 import PrevNextButton from './PrevNextButton';
 import { TableActionButtons } from './TableActionButtons';
 import { TextButton } from './TextButton';
+import { CopyButton } from "./CopyButton";
 
 export default {
   title: 'Buttons',
@@ -83,3 +84,7 @@ export const textButton = (): JSX.Element => (
 );
 
 export const editButton = () => <EditButton onClick={() => {}} />;
+
+export const copyButton = {
+  render: () => <CopyButton content="foo" tooltipText="Copy it" toastText="Copied!" />
+}

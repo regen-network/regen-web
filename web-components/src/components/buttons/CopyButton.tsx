@@ -31,9 +31,7 @@ export const CopyButton = ({
       <InfoTooltip title={tooltipText} arrow placement="top">
         <CopyIcon
           onClick={() => {
-            console.log('copying')
             copyTextToClipboard(content).then(() => {
-              console.log('opening')
               setCopied(true);
             });
           }}

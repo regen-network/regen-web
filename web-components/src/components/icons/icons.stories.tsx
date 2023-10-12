@@ -114,6 +114,7 @@ import WalletErrorIcon from './WalletErrorIcon';
 import { WalletIcon } from './WalletIcon';
 import WhitepaperIcon from './WhitepaperIcon';
 import ZoomIcon from './ZoomIcon';
+import { CopyIcon } from "./CopyIcon";
 
 export default {
   title: 'Icons',
@@ -197,6 +198,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<CheckIcon />} label="CheckIcon" />
     <LabeledIcon icon={<CloseIcon />} label="CloseIcon" />
     <LabeledIcon icon={<CoBenefitsIcon />} label="CoBenefitsIcon" />
+    <LabeledIcon icon={<CopyIcon />} label="CopyIcon" />
     <LabeledIcon icon={<CountingIcon />} label="CountingIcon" />
     <LabeledIcon
       icon={<CreditBatchIcon sx={{ color: '#4FB573' }} />}

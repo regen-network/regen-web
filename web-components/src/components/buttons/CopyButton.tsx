@@ -38,7 +38,7 @@ export const CopyButton = ({
           className="cursor-pointer hover:stroke-grey-300"
         />
       </InfoTooltip>
-      {copied && <Banner text={toastText} duration={1000} />}
+      {copied && <Banner text={toastText} duration={1000} onClose={() => setCopied(false)} />}
     </div>
   );
 };

@@ -22,7 +22,6 @@
     "@mui/lab": "^5.0.0-alpha.54",
     "@mui/material": "^5.10.11",
     "@mui/styles": "^5.10.10",
-    "@radix-ui/react-toast": "^1.1.5",
     "@rdfjs/parser-jsonld": "^2.1.0",
     "@regen-network/api": "0.6.0",
     "@sentry/react": "^7.53.0",

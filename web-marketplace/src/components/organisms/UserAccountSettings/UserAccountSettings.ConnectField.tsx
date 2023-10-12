@@ -1,7 +1,7 @@
-import { Body } from "web-components/lib/components/typography";
-import ContainedButton from "web-components/lib/components/buttons/ContainedButton";
-import OutlinedButton from "web-components/lib/components/buttons/OutlinedButton";
-import { CopyButton } from "web-components/lib/components/buttons/CopyButton";
+import { Body } from "web-components/src/components/typography";
+import ContainedButton from "web-components/src/components/buttons/ContainedButton";
+import OutlinedButton from "web-components/src/components/buttons/OutlinedButton";
+import { CopyButton } from "web-components/src/components/buttons/CopyButton";
 import React from "react";
 
 /** ConnectField is used internally by the UserAccountSettings component to

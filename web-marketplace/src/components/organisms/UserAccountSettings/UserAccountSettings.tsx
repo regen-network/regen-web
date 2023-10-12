@@ -1,5 +1,5 @@
-import { Subtitle, Body } from 'web-components/lib/components/typography';
-import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
+import { Subtitle, Body } from 'web-components/src/components/typography';
+import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 import { UserAccountSettingsProps } from './UserAccountSettings.types';
 import React from 'react';
 import { ConnectField } from "./UserAccountSettings.ConnectField";
@@ -30,6 +30,7 @@ export const UserAccountSettings = ({
         <div className="flex flex-col">
           {socialProviders.map(provider => (
             <div
+              key={provider.providerName}
               className="border-0 border-b border-solid border-grey-200 py-20
             first:pt-0 last:pb-0 last:border-b-0"
             >

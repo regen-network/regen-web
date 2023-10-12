@@ -35,7 +35,11 @@ const Settings: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   const initialValues: SettingsFormSchemaType = useMemo(
     () => ({
-      slug: offChainProject?.slug ?? onChainProject?.id ?? '',
+      slug:
+        offChainProject?.slug ??
+        onChainProject?.id ??
+        offChainProject?.id ??
+        '',
     }),
     [offChainProject, onChainProject],
   );

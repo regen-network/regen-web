@@ -34,7 +34,7 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
   );
 
   const saveAndExit = useProjectSaveAndExit();
-  console.log('offChainProject', offChainProject);
+
   return (
     <ProjectFormTemplate
       isEdit={isEdit}

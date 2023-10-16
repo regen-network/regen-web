@@ -1,14 +1,13 @@
 import { Box, Card, CardMedia, SxProps } from '@mui/material';
 
-import { CreditPrice } from 'src/components/cards/ProjectCard/ProjectCard.CreditPrice';
-import { truncateTwoLines } from 'src/utils/mui/truncate';
-
+import { CreditPrice } from '../../../components/cards/ProjectCard/ProjectCard.CreditPrice';
 import { PurchaseInfo } from '../../../components/cards/ProjectCard/ProjectCard.types';
 import { Title } from '../../../components/typography';
 import { Theme } from '../../../theme/muiTheme';
 import { ButtonType } from '../../../types/shared/buttonType';
 import { LinkComponentType } from '../../../types/shared/linkComponentType';
 import { sxToArray } from '../../../utils/mui/sxToArray';
+import { truncateTwoLines } from '../../../utils/mui/truncate';
 import OutlinedButton from '../../buttons/OutlinedButton';
 
 export interface Props {

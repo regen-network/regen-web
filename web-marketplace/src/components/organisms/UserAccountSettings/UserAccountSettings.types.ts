@@ -24,7 +24,7 @@ type DisconnectedState = {
    * connected.
    */
   connect: () => void;
-}
+};
 
 type ConnectedState = {
   /**
@@ -32,7 +32,7 @@ type ConnectedState = {
    * connected.
    */
   disconnect: () => void;
-}
+};
 
 type ConnectionState = DisconnectedState | ConnectedState;
 
@@ -42,14 +42,13 @@ type ConnectionState = DisconnectedState | ConnectedState;
 export type SocialProviderInfo = {
   /** The name of the social provider. */
   providerName: string;
-} & ConnectionState
+} & ConnectionState;
 
 type WalletConnectedState = {
   /** The on-chain address of the wallet. Address will be undefined if the
    * there is no wallet connected.
    */
   address: string;
-} & ConnectedState
+} & ConnectedState;
 
 export type WalletProviderInfo = WalletConnectedState | DisconnectedState;
-

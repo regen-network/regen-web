@@ -1,8 +1,10 @@
-import { Subtitle, Body } from 'web-components/src/components/typography';
-import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
-import { UserAccountSettingsProps } from './UserAccountSettings.types';
 import React from 'react';
-import { ConnectField } from "./UserAccountSettings.ConnectField";
+
+import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+import { Body, Subtitle } from 'web-components/src/components/typography';
+
+import { ConnectField } from './UserAccountSettings.ConnectField';
+import { UserAccountSettingsProps } from './UserAccountSettings.types';
 
 /** UserAccountSettings is a component for displaying and managing a user's
  * account settings.
@@ -58,4 +60,3 @@ export const UserAccountSettings = ({
     </div>
   );
 };
-

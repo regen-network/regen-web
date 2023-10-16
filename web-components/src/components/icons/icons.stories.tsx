@@ -25,6 +25,7 @@ import EeurIcon from './coins/EeurIcon';
 import EvmosIcon from './coins/EvmosIcon';
 import GravUsdcIcon from './coins/GravUsdcIcon';
 import UsdcIcon from './coins/UsdcIcon';
+import { CopyIcon } from './CopyIcon';
 import CountingIcon from './CountingIcon';
 import { CreditBatchIcon } from './CreditBatchIcon';
 import { CreditBatchLightIcon } from './CreditBatchLightIcon';
@@ -114,7 +115,6 @@ import WalletErrorIcon from './WalletErrorIcon';
 import { WalletIcon } from './WalletIcon';
 import WhitepaperIcon from './WhitepaperIcon';
 import ZoomIcon from './ZoomIcon';
-import { CopyIcon } from "./CopyIcon";
 
 export default {
   title: 'Icons',

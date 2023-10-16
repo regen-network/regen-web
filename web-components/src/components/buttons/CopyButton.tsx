@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import InfoTooltip from '../tooltip/InfoTooltip';
+
 import copyTextToClipboard from '../../utils/copy';
-import { CopyIcon } from '../icons/CopyIcon';
 import Banner from '../banner';
+import { CopyIcon } from '../icons/CopyIcon';
+import InfoTooltip from '../tooltip/InfoTooltip';
 
 /** The props for the CopyButton component */
 export interface CopyButtonProps {
@@ -38,7 +39,13 @@ export const CopyButton = ({
           className="cursor-pointer hover:stroke-grey-300"
         />
       </InfoTooltip>
-      {copied && <Banner text={toastText} duration={1000} onClose={() => setCopied(false)} />}
+      {copied && (
+        <Banner
+          text={toastText}
+          duration={1000}
+          onClose={() => setCopied(false)}
+        />
+      )}
     </div>
   );
 };

@@ -40,7 +40,7 @@ const Dashboard = (): JSX.Element => {
     isCreditClassCreator,
     isProjectAdmin,
     isIssuer,
-  } = useProfileItems();
+  } = useProfileItems({});
   const { wallet, accountId, partyByAddr } = useWallet();
   const location = useLocation();
 

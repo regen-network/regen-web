@@ -6,7 +6,7 @@ import {
 import { useQuery } from '@tanstack/react-query';
 
 import { client as sanityClient } from 'lib/clients/sanity';
-import { normalizeCreditClassItems } from 'lib/normalizers/creditClass/normalizeCreditClassItems';
+import { normalizeCreditClassItems } from 'lib/normalizers/creditClass/normalizeCreditClassItems/normalizeCreditClassItems';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/registry-server/graphql/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getClassesByIssuerQuery } from 'lib/queries/react-query/registry-server/graphql/indexer/getClassesByIssuer/getClassesByIssuer';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';

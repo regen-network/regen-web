@@ -4,16 +4,20 @@ import { useLedger } from 'ledger';
 import { getClassesByAdminQuery } from 'lib/queries/react-query/ecocredit/getClassesByAdminQuery/getClassesByAdminQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-export function useQueryIsClassAdmin(): boolean {
+type Props = {
+  address?: string;
+};
+
+export function useQueryIsClassAdmin({ address }: Props): boolean {
   const { ecocreditClient } = useLedger();
   const { wallet } = useWallet();
-  const address = wallet?.address;
+  const activeAddress = wallet?.address ?? address;
 
   const { data: classesByAdmin } = useQuery(
     getClassesByAdminQuery({
-      enabled: !!address && !!ecocreditClient,
+      enabled: !!activeAddress && !!ecocreditClient,
       client: ecocreditClient,
-      request: { admin: address },
+      request: { admin: activeAddress },
     }),
   );
 

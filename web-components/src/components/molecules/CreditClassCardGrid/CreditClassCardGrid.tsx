@@ -55,7 +55,7 @@ export const CreditClassCardGrid = ({
         />
       </LinkComponent>
       <Box sx={{ p: 5, pb: 6.25 }}>
-        <Title variant="h4" sx={[truncateTwoLines, { mb: 5, height: '57px' }]}>
+        <Title variant="h5" sx={[truncateTwoLines, { mb: 5, height: '57px' }]}>
           {name}
         </Title>
         <CreditPrice purchaseInfo={purchaseInfo} sx={{ mb: 5 }} />

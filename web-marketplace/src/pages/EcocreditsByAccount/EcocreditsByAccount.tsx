@@ -22,14 +22,13 @@ import {
   getSocialsLinks,
   getUserImages,
 } from 'pages/Dashboard/Dashboard.utils';
+import { useProfileItems } from 'pages/Dashboard/hooks/useProfileItems';
 import {
   DEFAULT_NAME,
   profileVariantMapping,
 } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
-import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
-import { useQueryIsProjectAdmin } from 'hooks/useQueryIsProjectAdmin';
 
 import { ProfileNotFound } from './EcocreditsByAccount.NotFound';
 import { ecocreditsByAccountStyles } from './EcocreditsByAccount.styles';
@@ -46,8 +45,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
     ? getProfileLink(accountAddressOrId)
     : '';
 
-  const { isIssuer, isLoadingIsIssuer } = useQueryIsIssuer({ address });
-  const { isProjectAdmin, isLoadingIsProjectAdmin } = useQueryIsProjectAdmin({
+  const { isIssuer, isProjectAdmin, showCreditClasses } = useProfileItems({
     address,
   });
 
@@ -70,7 +68,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
         label: 'Credit Classes',
         icon: <CreditClassIcon />,
         href: `/profiles/${accountAddressOrId}/credit-classes`,
-        hidden: true,
+        hidden: !showCreditClasses,
       },
       {
         label: 'Credit Batches',
@@ -85,7 +83,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
         hidden: !isBridgeEnabled,
       },
     ],
-    [accountAddressOrId, isIssuer, isProjectAdmin],
+    [accountAddressOrId, isIssuer, isProjectAdmin, showCreditClasses],
   );
 
   const activeTab = Math.max(
@@ -97,7 +95,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
 
   return (
     <WithLoader
-      isLoading={isLoading || isLoadingIsIssuer || isLoadingIsProjectAdmin}
+      isLoading={isLoading}
       sx={{
         py: 10,
         display: 'flex',

@@ -15,6 +15,8 @@ import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/gra
 import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery.constants';
+import { getWalletByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getWalletByAddrQuery/getWalletByAddrQuery.utils';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { UseProjectEditSubmitParams } from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
 import { BasicInfoFormSchemaType } from 'components/organisms/BasicInfoForm/BasicInfoForm.schema';
@@ -76,6 +78,7 @@ export const useProjectWithMetadata = ({
   const graphqlClient = useApolloClient();
   const reactQueryClient = useQueryClient();
   const { dataClient } = useLedger();
+  const { wallet } = useWallet();
 
   const { createOrUpdateProject } = useCreateOrUpdateProject();
   const isOnChainId = getIsOnChainId(projectId);
@@ -133,6 +136,9 @@ export const useProjectWithMetadata = ({
   }
   // Create Reload and Submit callbacks
   const metadataReload = useCallback(async (): Promise<void> => {
+    await reactQueryClient.invalidateQueries({
+      queryKey: getWalletByAddrQueryKey(wallet?.address ?? ''),
+    });
     if (createOrEditOffChain) {
       await reactQueryClient.invalidateQueries({
         queryKey: getProjectByIdKey(projectId),

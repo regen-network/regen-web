@@ -1,7 +1,7 @@
 import React from 'react';
 
-import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
-import { Body, Subtitle } from 'web-components/src/components/typography';
+import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
+import { Body, Subtitle } from 'web-components/lib/components/typography';
 
 import { ConnectField } from './UserAccountSettings.ConnectField';
 import { UserAccountSettingsProps } from './UserAccountSettings.types';

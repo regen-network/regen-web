@@ -1,8 +1,8 @@
+import { useCallback, useMemo, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
-import { useCallback, useMemo, useRef, useState } from 'react';
 
-import { useNavigate } from 'react-router-dom';
 import { Flex } from 'web-components/lib/components/box';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import EyeIcon from 'web-components/lib/components/icons/EyeIcon';
@@ -14,13 +14,13 @@ import { getPartiesByAccountIdQueryKey } from 'lib/queries/react-query/registry-
 import { getPartyByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { WarningModal } from 'pages/ProjectEdit/ProjectEdit.WarningModal';
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfileForm';
 import { EditProfileFormActionBar } from 'components/organisms/EditProfileForm/EditProfileForm.ActionBar';
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
 
-import { WarningModal } from 'pages/ProjectEdit/ProjectEdit.WarningModal';
 import { useOnUploadCallback } from './hooks/useOnUploadCallback';
 import { usePartyInfos } from './hooks/usePartyInfos';
 import {

@@ -43,6 +43,9 @@
     "@graphql-codegen/typescript": "1.22.0",
     "@graphql-codegen/typescript-graphql-files-modules": "1.18.1",
     "@graphql-codegen/typescript-operations": "^1.18.0",
-    "@graphql-codegen/typescript-react-apollo": "2.2.4"
+    "@graphql-codegen/typescript-react-apollo": "2.2.4",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.3"
   }
 }

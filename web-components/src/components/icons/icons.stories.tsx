@@ -25,6 +25,7 @@ import EeurIcon from './coins/EeurIcon';
 import EvmosIcon from './coins/EvmosIcon';
 import GravUsdcIcon from './coins/GravUsdcIcon';
 import UsdcIcon from './coins/UsdcIcon';
+import { CopyIcon } from './CopyIcon';
 import CountingIcon from './CountingIcon';
 import { CreditBatchIcon } from './CreditBatchIcon';
 import { CreditBatchLightIcon } from './CreditBatchLightIcon';
@@ -197,6 +198,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<CheckIcon />} label="CheckIcon" />
     <LabeledIcon icon={<CloseIcon />} label="CloseIcon" />
     <LabeledIcon icon={<CoBenefitsIcon />} label="CoBenefitsIcon" />
+    <LabeledIcon icon={<CopyIcon />} label="CopyIcon" />
     <LabeledIcon icon={<CountingIcon />} label="CountingIcon" />
     <LabeledIcon
       icon={<CreditBatchIcon sx={{ color: '#4FB573' }} />}

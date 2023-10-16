@@ -9,8 +9,8 @@ const path = require('path');
 
 module.exports = {
   stories: [
-    '../../web-components/src/components/**/*.stories.tsx',
-    '../../web-marketplace/src/**/*.stories.tsx',
+    '../../web-components/src/**/*.@(mdx|stories.@(mdx|js|jsx|mjs|ts|tsx))',
+    '../../web-marketplace/src/**/*.@(mdx|stories.@(mdx|js|jsx|mjs|ts|tsx))',
   ],
   addons: [
     '@storybook/addon-actions',

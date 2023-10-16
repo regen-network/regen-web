@@ -66,4 +66,5 @@ module.exports = {
     // border-solid is needed whereas it would normally be set by default.
     preflight: false,
   },
+  darkMode: 'class',
 };

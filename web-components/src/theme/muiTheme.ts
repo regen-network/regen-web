@@ -53,7 +53,6 @@ const regenTheme = createTheme({
       light: '#EFEFEF',
       contrastText: '#b0ddc0',
     },
-    //@ts-expect-error
     orange: {
       contrastText: '#FBDBB6',
     },

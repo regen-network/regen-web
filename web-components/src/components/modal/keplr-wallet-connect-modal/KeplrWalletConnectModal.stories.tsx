@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, Link } from '@mui/material';
 import { Meta, StoryObj } from '@storybook/react';
 
 import OutlinedButton from '../../../components/buttons/OutlinedButton';
@@ -29,7 +29,10 @@ export const Basic: Story = {
         onClose={onClose}
         open={open}
         helpLink={
-          <Body sx={{ mt: 2 }}>{'Learn how to set up a Keplr wallet →'}</Body>
+          <Body sx={{ mt: 2 }}>
+            {'Learn how to '}
+            <Link>{'set up a Keplr wallet →'}</Link>
+          </Body>
         }
         button={
           <OutlinedButton

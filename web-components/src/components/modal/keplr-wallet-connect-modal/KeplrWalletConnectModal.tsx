@@ -1,7 +1,5 @@
-import { PropsWithChildren } from 'react';
 import { Box } from '@mui/material';
 
-import OutlinedButton from 'src/components/buttons/OutlinedButton';
 import WalletErrorIcon from 'src/components/icons/WalletErrorIcon';
 
 import { Body, Title } from '../../typography';

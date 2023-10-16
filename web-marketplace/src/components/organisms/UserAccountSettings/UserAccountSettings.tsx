@@ -33,7 +33,7 @@ export const UserAccountSettings = ({
           {socialProviders.map(provider => (
             <div
               key={provider.providerName}
-              className="border-0 border-b border-solid border-grey-200 py-20
+              className="border-0 border-b border-solid border-grey-300 py-20
             first:pt-0 last:pb-0 last:border-b-0"
             >
               <ConnectField {...provider} />

@@ -4,6 +4,7 @@ import ContainedButton from 'web-components/src/components/buttons/ContainedButt
 import { CopyButton } from 'web-components/src/components/buttons/CopyButton';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import { Body } from 'web-components/src/components/typography';
+import CloseIcon from "web-components/lib/components/icons/CloseIcon";
 
 /** ConnectField is used internally by the UserAccountSettings component to
  * display a single social or wallet connection.
@@ -37,30 +38,7 @@ export const ConnectField = ({
         ) : (
           <OutlinedButton onClick={disconnect}>
             <div className="flex flex-row gap-10 items-center">
-              {/* the SVG source for this icon is included inline so that styling with tailwind works */}
-              <svg
-                className="stroke-secondary-main"
-                width="24"
-                height="24"
-                fill="none"
-              >
-                <rect
-                  width="2"
-                  height="17.958"
-                  x="6.414"
-                  y="19.113"
-                  fill="#545555"
-                  rx=".25"
-                  transform="rotate(-135 6.414 19.113)"
-                />
-                <rect
-                  width="2"
-                  height="17.958"
-                  fill="#545555"
-                  rx=".25"
-                  transform="scale(1 -1) rotate(45 32.021 11.83)"
-                />
-              </svg>
+              <CloseIcon className="stroke-brand-400 w-[26px] h-[26px]" />
               <div>DISCONNECT</div>
             </div>
           </OutlinedButton>

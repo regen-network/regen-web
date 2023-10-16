@@ -36,7 +36,7 @@ export const CopyButton = ({
               setCopied(true);
             });
           }}
-          className="cursor-pointer hover:stroke-grey-300"
+          className="cursor-pointer hover:stroke-grey-400"
         />
       </InfoTooltip>
       {copied && (

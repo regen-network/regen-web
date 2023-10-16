@@ -19,7 +19,10 @@ export const MyCreditClasses = (): JSX.Element => {
     });
 
   return (
-    <WithLoader isLoading={isLoadingCreditClasses}>
+    <WithLoader
+      isLoading={isLoadingCreditClasses}
+      sx={{ display: 'flex', justifyContent: 'center' }}
+    >
       <Grid container spacing={8}>
         {creditClasses.map(creditClass => (
           <Grid item xs={12} md={6} lg={4}>

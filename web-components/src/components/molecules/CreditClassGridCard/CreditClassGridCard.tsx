@@ -1,14 +1,14 @@
 import { Box, Card, CardMedia, SxProps } from '@mui/material';
 
-import { CreditPrice } from '../../../components/cards/ProjectCard/ProjectCard.CreditPrice';
-import { PurchaseInfo } from '../../../components/cards/ProjectCard/ProjectCard.types';
-import { Title } from '../../../components/typography';
 import { Theme } from '../../../theme/muiTheme';
 import { ButtonType } from '../../../types/shared/buttonType';
 import { LinkComponentType } from '../../../types/shared/linkComponentType';
 import { sxToArray } from '../../../utils/mui/sxToArray';
 import { truncateTwoLines } from '../../../utils/mui/truncate';
 import OutlinedButton from '../../buttons/OutlinedButton';
+import { CreditPrice } from '../../cards/ProjectCard/ProjectCard.CreditPrice';
+import { PurchaseInfo } from '../../cards/ProjectCard/ProjectCard.types';
+import { Title } from '../../typography';
 
 export interface Props {
   name: string;
@@ -21,7 +21,7 @@ export interface Props {
   sx?: SxProps<Theme>;
 }
 
-export const CreditClassCardGrid = ({
+export const CreditClassGridCard = ({
   button,
   imgSrc,
   href,

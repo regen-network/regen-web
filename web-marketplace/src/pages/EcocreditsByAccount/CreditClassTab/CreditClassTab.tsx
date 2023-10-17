@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Grid } from '@mui/material';
 
 import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';
-import { CreditClassCardGrid } from 'web-components/src/components/molecules/CreditClassCardGrid/CreditClassCardGrid';
+import { CreditClassGridCard } from 'web-components/src/components/molecules/CreditClassGridCard/CreditClassGridCard';
 
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -38,7 +38,7 @@ export const CreditClassTab = () => {
         <Grid container spacing={8}>
           {creditClasses.map(creditClass => (
             <Grid item xs={12} md={6} lg={4}>
-              <CreditClassCardGrid
+              <CreditClassGridCard
                 {...creditClass}
                 button={{
                   text: ACCOUNT_CREDIT_CLASS_BUTTON,

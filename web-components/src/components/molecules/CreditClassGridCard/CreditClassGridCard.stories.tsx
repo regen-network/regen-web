@@ -1,17 +1,17 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import EditIcon from '../../../components/icons/EditIcon';
-import { CreditClassCardGrid } from './CreditClassCardGrid';
+import EditIcon from '../../icons/EditIcon';
+import { CreditClassGridCard } from './CreditClassGridCard';
 
 export default {
-  title: 'molecules/CreditClassCardGrid',
-  component: CreditClassCardGrid,
-} as Meta<typeof CreditClassCardGrid>;
+  title: 'molecules/CreditClassGridCard',
+  component: CreditClassGridCard,
+} as Meta<typeof CreditClassGridCard>;
 
-type Story = StoryObj<typeof CreditClassCardGrid>;
+type Story = StoryObj<typeof CreditClassGridCard>;
 
 export const Basic: Story = {
-  render: args => <CreditClassCardGrid {...args} sx={{ maxWidth: 365 }} />,
+  render: args => <CreditClassGridCard {...args} sx={{ maxWidth: 365 }} />,
 };
 
 Basic.args = {

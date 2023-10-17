@@ -18,7 +18,6 @@ export const useProfileItems = ({ address }: Props) => {
 
   return {
     showProjects,
-    // Explicitly set to false until we enable the class creation flow
     showCreditClasses: showCreditClasses,
     isCreditClassCreator: false && isCreditClassCreator,
     isProjectAdmin: isProjectAdmin,

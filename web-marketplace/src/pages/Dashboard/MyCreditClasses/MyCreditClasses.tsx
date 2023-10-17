@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
 
 import EditIcon from 'web-components/lib/components/icons/EditIcon';
-import { CreditClassCardGrid } from 'web-components/src/components/molecules/CreditClassCardGrid/CreditClassCardGrid';
+import { CreditClassGridCard } from 'web-components/src/components/molecules/CreditClassGridCard/CreditClassGridCard';
 
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -26,7 +26,7 @@ export const MyCreditClasses = (): JSX.Element => {
       <Grid container spacing={8}>
         {creditClasses.map(creditClass => (
           <Grid item xs={12} md={6} lg={4}>
-            <CreditClassCardGrid
+            <CreditClassGridCard
               {...creditClass}
               button={{
                 text: MY_CREDIT_CLASS_BUTTON,

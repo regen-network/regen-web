@@ -17,6 +17,7 @@ import { truncate } from 'web-components/lib/utils/truncate';
 import { getAccountUrl } from 'lib/block-explorer';
 import { isBridgeEnabled } from 'lib/ledger';
 import { getProfileLink } from 'lib/profileLink';
+import { useWallet } from 'lib/wallet/wallet';
 
 import {
   getSocialsLinks,
@@ -29,6 +30,7 @@ import {
 } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
+import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
 
 import { ProfileNotFound } from './EcocreditsByAccount.NotFound';
 import { ecocreditsByAccountStyles } from './EcocreditsByAccount.styles';
@@ -36,6 +38,7 @@ import { useProfileData } from './hooks/useProfileData';
 
 export const EcocreditsByAccount = (): JSX.Element => {
   const { accountAddressOrId } = useParams<{ accountAddressOrId: string }>();
+  const { wallet } = useWallet();
   const location = useLocation();
 
   const { address, party, isLoading } = useProfileData();
@@ -44,6 +47,10 @@ export const EcocreditsByAccount = (): JSX.Element => {
   const profileLink = accountAddressOrId
     ? getProfileLink(accountAddressOrId)
     : '';
+  const { creditClasses } = useFetchCreditClassesWithOrder({
+    admin: address,
+    userAddress: wallet?.address,
+  });
 
   const { isIssuer, isProjectAdmin, showCreditClasses } = useProfileItems({
     address,
@@ -68,7 +75,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
         label: 'Credit Classes',
         icon: <CreditClassIcon />,
         href: `/profiles/${accountAddressOrId}/credit-classes`,
-        hidden: !showCreditClasses,
+        hidden: !showCreditClasses || creditClasses.length === 0,
       },
       {
         label: 'Credit Batches',
@@ -83,7 +90,13 @@ export const EcocreditsByAccount = (): JSX.Element => {
         hidden: !isBridgeEnabled,
       },
     ],
-    [accountAddressOrId, isIssuer, isProjectAdmin, showCreditClasses],
+    [
+      accountAddressOrId,
+      creditClasses.length,
+      isIssuer,
+      isProjectAdmin,
+      showCreditClasses,
+    ],
   );
 
   const activeTab = Math.max(

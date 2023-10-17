@@ -69,6 +69,7 @@ const CreateSellOrderForm: React.FC<Props> = ({
     control: form.control,
   });
   const batchDenom = useWatch({ control: form.control, name: 'batchDenom' });
+  const availableAmount = availableAmountByBatch[batchDenom ?? ''];
   const { setValue } = form;
   const onMaxClick = () =>
     setValue('amount', availableAmountByBatch[batchDenom ?? ''], {
@@ -144,13 +145,13 @@ const CreateSellOrderForm: React.FC<Props> = ({
       </Box>
       <AmountField
         label="Amount to sell"
-        availableAmount={availableAmountByBatch[batchDenom ?? '']}
+        availableAmount={availableAmount}
         error={!!errors['amount']}
         helperText={errors['amount']?.message}
         denom={batchDenom ?? ''}
         customInputProps={{
           step: 'any',
-          max: availableAmountByBatch[batchDenom ?? ''],
+          max: availableAmount,
         }}
         onMaxClick={onMaxClick}
         {...form.register('amount')}

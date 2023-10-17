@@ -41,7 +41,7 @@ export const useFetchEcocredits = ({
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
       page: 0,
-      rowsPerPage: DEFAULT_ROWS_PER_PAGE,
+      rowsPerPage: 10,
       offset: 0,
     });
   const { page, rowsPerPage } = paginationParams;

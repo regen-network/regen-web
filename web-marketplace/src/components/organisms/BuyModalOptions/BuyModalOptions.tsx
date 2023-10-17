@@ -35,13 +35,12 @@ export const BuyModalOptions = ({
 }: Props) => {
   const cards = content?.cards ?? [];
   const setConnectWalletModalAtom = useSetAtom(connectWalletModalAtom);
-  const { loaded, wallet } = useWallet();
-  const connected = wallet?.address;
+  const { loaded, isConnected } = useWallet();
   const { trackBuyScheduleCall, trackBuyKeplr } = useBuyModalOptionsTracker();
 
   useEffect(() => {
-    if (loaded && connected) onClose();
-  }, [connected, loaded, onClose]);
+    if (loaded && isConnected) onClose();
+  }, [isConnected, loaded, onClose]);
 
   return (
     <Modal open={open} onClose={onClose}>

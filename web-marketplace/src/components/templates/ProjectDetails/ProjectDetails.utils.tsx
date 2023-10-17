@@ -1,6 +1,7 @@
 import { MouseEvent } from 'react';
 import { MapiResponse } from '@mapbox/mapbox-sdk/lib/classes/mapi-response';
 import { GeocodeResponse } from '@mapbox/mapbox-sdk/services/geocoding';
+import { getResizedImageUrl } from 'utils/image/getResizedImageUrl';
 
 import PhoneIcon from 'web-components/lib/components/icons/PhoneIcon';
 import StaticMap from 'web-components/lib/components/map/StaticMap';
@@ -63,6 +64,12 @@ export const findSanityCreditClass = ({
 
 export const getIsOnChainId = (projectId?: string): boolean =>
   !!projectId && /([A-Z]{1}[\d]+)([-])([\d{3,}])\w+/.test(projectId);
+
+export const getIsOffChainUuid = (projectId?: string): boolean =>
+  !!projectId &&
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+    projectId,
+  );
 
 type ParseOffChainProjectReturn = {
   offChainProjectMetadata?: ProjectPageMetadataLD & LegacyProjectMetadataLD;
@@ -156,7 +163,10 @@ export const getProjectGalleryPhotos = ({
 }: GetProjectGalleryPhotosProps) => {
   const photos: GalleryPhoto[] =
     offChainProjectMetadata?.['regen:galleryPhotos']?.map(photo => ({
-      href: photo['schema:url'],
+      href: getResizedImageUrl({
+        url: photo['schema:url'],
+        width: 1400,
+      }),
       caption: photo['schema:caption'],
       credit: photo['schema:creditText'],
     })) ?? [];
@@ -231,7 +241,7 @@ type FormatOtcCardDataParams = {
   data: AllProjectPageQuery['allProjectPage'][0]['otcCard'];
   isConnected: boolean;
   orders?: UISellOrderInfo[];
-  isCommunityCredit?: boolean;
+  hideOtcCard?: boolean;
   setIsBuyFlowStarted: UseStateSetter<boolean>;
 };
 
@@ -239,7 +249,7 @@ export const formatOtcCardData = ({
   data,
   isConnected,
   orders = [],
-  isCommunityCredit,
+  hideOtcCard,
   setIsBuyFlowStarted,
 }: FormatOtcCardDataParams): ActionCardProps | undefined => {
   const isNoteVisible = !isConnected || orders?.length > 0;
@@ -249,7 +259,8 @@ export const formatOtcCardData = ({
       setIsBuyFlowStarted(true);
     }
   };
-  return isCommunityCredit
+
+  return hideOtcCard
     ? undefined
     : {
         title: data?.title ?? '',

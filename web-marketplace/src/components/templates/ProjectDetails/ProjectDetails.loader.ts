@@ -6,8 +6,8 @@ import { getMarketplaceQueryClient } from 'lib/clients/regen/ecocredit/marketpla
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
-import { getProjectByHandleQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByHandleQuery/getProjectByHandleQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
+import { getProjectBySlugQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectBySlugQuery/getProjectBySlugQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
@@ -44,10 +44,10 @@ export const projectDetailsLoader =
       enabled: !!projectId && isOnChainId,
       onChainId: projectId ?? '',
     });
-    const projectByHandleQuery = getProjectByHandleQuery({
+    const ProjectBySlugQuery = getProjectBySlugQuery({
       client: apolloClientFactory.getClient(),
       enabled: !!projectId && !isOnChainId,
-      handle: projectId as string,
+      slug: projectId as string,
     });
 
     const sellOrdersQuery = getSellOrdersExtendedQuery({
@@ -71,7 +71,7 @@ export const projectDetailsLoader =
       reactQueryClient: queryClient,
     });
     await getFromCacheOrFetch({
-      query: projectByHandleQuery,
+      query: ProjectBySlugQuery,
       reactQueryClient: queryClient,
     });
 

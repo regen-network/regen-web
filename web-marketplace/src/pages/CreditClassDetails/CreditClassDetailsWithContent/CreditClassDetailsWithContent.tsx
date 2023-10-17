@@ -120,7 +120,7 @@ const CreditClassDetailsWithContent: React.FC<
   const getFeaturedProjects = (): JSX.Element => {
     const featuredProjects = projectsData?.allProjects?.nodes?.filter(project =>
       content.landSteward?.featuredProjectIds?.some(
-        projectId => projectId === project?.handle,
+        projectId => projectId === project?.slug,
       ),
     );
 

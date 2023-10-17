@@ -3,11 +3,6 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
 
 import { Flex } from 'web-components/lib/components/box';
-import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
-import { CreditBatchIcon } from 'web-components/lib/components/icons/CreditBatchIcon';
-import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClassIcon';
-import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
-import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
 import { ProfileHeader } from 'web-components/lib/components/organisms/ProfileHeader/ProfileHeader';
 import { SocialLink } from 'web-components/lib/components/organisms/ProfileHeader/ProfileHeader.types';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
@@ -17,70 +12,68 @@ import { truncate } from 'web-components/lib/utils/truncate';
 
 import { getAccountUrl } from 'lib/block-explorer';
 import { isBridgeEnabled } from 'lib/ledger';
+import { getProfileLink } from 'lib/profileLink';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
 import {
   DEFAULT_NAME,
-  DEFAULT_PROFILE_BG,
   profileVariantMapping,
 } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { Link } from 'components/atoms';
-import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator';
-import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
-import { useQueryIsProjectAdmin } from 'hooks/useQueryIsProjectAdmin';
 
+import {
+  BRIDGE,
+  CREDIT_BATCHES,
+  CREDIT_CLASSES,
+  PORTFOLIO,
+  PROJECTS,
+} from './Dashboard.constants';
 import { dashBoardStyles } from './Dashboard.styles';
-import { getSocialsLinks } from './Dashboard.utils';
+import { getSocialsLinks, getUserImages } from './Dashboard.utils';
+import { useProfileItems } from './hooks/useProfileItems';
 
 const Dashboard = (): JSX.Element => {
-  const isIssuer = useQueryIsIssuer();
-  const isCreditClassCreator = useQueryIfCreditClassCreator();
-  const isProjectAdmin = useQueryIsProjectAdmin();
-  const showProjectTab = isIssuer || isProjectAdmin;
+  const {
+    showProjects,
+    showCreditClasses,
+    isCreditClassCreator,
+    isProjectAdmin,
+    isIssuer,
+  } = useProfileItems();
   const { wallet, accountId, partyByAddr } = useWallet();
   const location = useLocation();
 
-  const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
+  const { party } = usePartyInfos({ partyByAddr });
+  const { avatarImage, backgroundImage } = getUserImages({ party });
 
   const socialsLinks: SocialLink[] = useMemo(
-    () => getSocialsLinks({ partyByAddr }),
+    () =>
+      getSocialsLinks({ party: partyByAddr?.walletByAddr?.partyByWalletId }),
     [partyByAddr],
   );
 
   const tabs: IconTabProps[] = useMemo(
     () => [
+      PORTFOLIO,
       {
-        label: 'Portfolio',
-        icon: <CreditsIcon fontSize="small" />,
-        href: '/profile/portfolio',
+        hidden: !showProjects,
+        ...PROJECTS,
       },
       {
-        label: 'Projects',
-        icon: <ProjectPageIcon />,
-        href: '/profile/projects',
-        hidden: !showProjectTab,
+        hidden: !showCreditClasses,
+        ...CREDIT_CLASSES,
       },
       {
-        label: 'Credit Classes',
-        icon: <CreditClassIcon />,
-        href: '/profile/credit-classes',
-        hidden: true,
-      },
-      {
-        label: 'Credit Batches',
-        icon: <CreditBatchIcon />,
-        href: '/profile/credit-batches',
         hidden: !isIssuer,
+        ...CREDIT_BATCHES,
       },
       {
-        label: 'Bridge',
-        icon: <BridgeIcon />,
-        href: '/profile/bridge',
         hidden: !isBridgeEnabled,
+        ...BRIDGE,
       },
     ],
-    [isIssuer, showProjectTab],
+    [isIssuer, showCreditClasses, showProjects],
   );
 
   const activeTab = Math.max(
@@ -90,12 +83,14 @@ const Dashboard = (): JSX.Element => {
     0,
   );
 
+  const profileLink = getProfileLink(wallet?.address || party?.id);
+
   return (
     <>
       <ProfileHeader
-        name={party?.name ? party?.name : DEFAULT_NAME}
-        backgroundImage={party?.bgImage ? party?.bgImage : DEFAULT_PROFILE_BG}
-        avatar={party?.image ? party?.image : defaultAvatar}
+        name={party?.name ? party.name : DEFAULT_NAME}
+        backgroundImage={backgroundImage}
+        avatar={avatarImage}
         infos={{
           addressLink: {
             href: getAccountUrl(wallet?.address, true),
@@ -105,6 +100,7 @@ const Dashboard = (): JSX.Element => {
           socialsLinks,
         }}
         editLink={accountId ? '/profile/edit' : ''}
+        profileLink={profileLink}
         variant={party?.type ? profileVariantMapping[party.type] : 'individual'}
         LinkComponent={Link}
       />

@@ -10,18 +10,17 @@ export const RegistryLayoutConnectWalletModal = (): JSX.Element => {
   const [connectWalletModal, setConnectWalletModal] = useAtom(
     connectWalletModalAtom,
   );
-  const { loaded, wallet } = useWallet();
-  const connected = wallet?.address;
+  const { loaded, isConnected } = useWallet();
   const { open, onClose } = connectWalletModal;
 
   const onCloseModal = useCallback(() => {
     setConnectWalletModal(atom => void (atom.open = false));
-    if (onClose && !connected) onClose();
-  }, [setConnectWalletModal, onClose, connected]);
+    if (onClose && !isConnected) onClose();
+  }, [setConnectWalletModal, onClose, isConnected]);
 
   useEffect(() => {
-    if (loaded && connected) onCloseModal();
-  }, [connected, loaded, onCloseModal]);
+    if (loaded && isConnected) onCloseModal();
+  }, [isConnected, loaded, onCloseModal]);
 
   return (
     <>

@@ -20,6 +20,7 @@ import { addWalletModalSwitchWarningAtom } from 'lib/atoms/modals.atoms';
 import { getPartiesByAccountIdQuery } from 'lib/queries/react-query/registry-server/graphql/getPartiesByAccountIdById/getPartiesByAccountIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { useProfileItems } from 'pages/Dashboard/hooks/useProfileItems';
 import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
@@ -53,10 +54,19 @@ const RegistryLayoutHeader: React.FC = () => {
   const isTransparent = useMemo(() => getIsTransparent(pathname), [pathname]);
   const borderBottom = useMemo(() => getBorderBottom(pathname), [pathname]);
 
+  const { showProjects, showCreditClasses, isIssuer } = useProfileItems();
   const menuItems = useMemo(() => getMenuItems(pathname), [pathname]);
   const userMenuItems = useMemo(
-    () => getUserMenuItems({ linkComponent: RegistryNavLink, pathname, theme }),
-    [pathname, theme],
+    () =>
+      getUserMenuItems({
+        linkComponent: RegistryNavLink,
+        pathname,
+        theme,
+        showProjects,
+        showCreditClasses,
+        isIssuer,
+      }),
+    [isIssuer, pathname, showCreditClasses, showProjects, theme],
   );
   const setAddWalletModalSwitchWarningAtom = useSetAtom(
     addWalletModalSwitchWarningAtom,

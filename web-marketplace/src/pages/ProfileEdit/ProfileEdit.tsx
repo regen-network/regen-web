@@ -1,4 +1,5 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
@@ -13,6 +14,7 @@ import { getPartiesByAccountIdQueryKey } from 'lib/queries/react-query/registry-
 import { getPartyByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { WarningModal } from 'pages/ProjectEdit/ProjectEdit.WarningModal';
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfileForm';
@@ -37,6 +39,11 @@ export const ProfileEdit = () => {
     useWallet();
   const [updatePartyById] = useUpdatePartyByIdMutation();
   const reactQueryClient = useQueryClient();
+  const [isWarningModalOpen, setIsWarningModalOpen] = useState<
+    string | undefined
+  >(undefined);
+  const isDirtyRef = useRef<boolean>(false);
+  const navigate = useNavigate();
 
   const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
 
@@ -112,38 +119,59 @@ export const ProfileEdit = () => {
   });
 
   return (
-    <Flex justifyContent="center" sx={{ width: '100%' }}>
-      <Flex
-        flexDirection="column"
-        sx={{
-          width: '100%',
-          maxWidth: 560,
-          mt: { xs: 6, sm: 12.5 },
-          mb: { xs: 25, sm: 12.5 },
-          mx: { xs: 2.5, sm: 0 },
-        }}
-      >
-        <Flex justifyContent="space-between" sx={{ mb: 12.5 }}>
-          <Title variant="h3">{PROFILE}</Title>
-          <OutlinedButton
-            LinkComponent={Link}
-            href="/profile/portfolio"
-            startIcon={<EyeIcon />}
+    <>
+      <Flex justifyContent="center" sx={{ width: '100%' }}>
+        <Flex
+          flexDirection="column"
+          sx={{
+            width: '100%',
+            maxWidth: 560,
+            mt: { xs: 6, sm: 12.5 },
+            mb: { xs: 25, sm: 12.5 },
+            mx: { xs: 2.5, sm: 0 },
+          }}
+        >
+          <Flex justifyContent="space-between" sx={{ mb: 12.5 }}>
+            <Title variant="h3">{PROFILE}</Title>
+            <OutlinedButton
+              onClick={() => {
+                if (isDirtyRef.current) {
+                  setIsWarningModalOpen('/profile/portfolio');
+                } else {
+                  navigate('/profile/portfolio');
+                }
+              }}
+              startIcon={<EyeIcon />}
+            >
+              {VIEW_PROFILE}
+            </OutlinedButton>
+          </Flex>
+          <WithLoader
+            isLoading={!loaded || accountChanging}
+            sx={{ mx: 'auto' }}
           >
-            {VIEW_PROFILE}
-          </OutlinedButton>
+            <EditProfileForm
+              onSubmit={onSubmit}
+              onSuccess={onSuccess}
+              onUpload={onUpload}
+              initialValues={initialValues}
+              isDirtyRef={isDirtyRef}
+            >
+              <EditProfileFormActionBar />
+            </EditProfileForm>
+          </WithLoader>
         </Flex>
-        <WithLoader isLoading={!loaded || accountChanging} sx={{ mx: 'auto' }}>
-          <EditProfileForm
-            onSubmit={onSubmit}
-            onSuccess={onSuccess}
-            onUpload={onUpload}
-            initialValues={initialValues}
-          >
-            <EditProfileFormActionBar />
-          </EditProfileForm>
-        </WithLoader>
       </Flex>
-    </Flex>
+      <WarningModal
+        open={!!isWarningModalOpen}
+        navigate={() => {
+          if (isWarningModalOpen) navigate(isWarningModalOpen);
+          isDirtyRef.current = false;
+        }}
+        onClose={() => {
+          setIsWarningModalOpen(undefined);
+        }}
+      />
+    </>
   );
 };

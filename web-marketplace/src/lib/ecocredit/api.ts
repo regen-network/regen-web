@@ -2,7 +2,6 @@ import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1
 import {
   GetTxsEventRequest,
   GetTxsEventResponse,
-  OrderBy,
   ServiceClientImpl,
 } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import { QueryClientImpl as DataQueryClientImpl } from '@regen-network/api/lib/generated/regen/data/v1/query';
@@ -199,79 +198,6 @@ export const getEcocreditsForAccount = async ({
   }
 };
 
-export const getEcocreditTxs = async (): Promise<TxResponse[]> => {
-  let allTxs: TxResponse[] = [];
-  // TODO: until ledger API supports "message.module='ecocredit'",
-  // we must send separate requests for each message action type:
-  return Promise.all(
-    Object.values(ECOCREDIT_MESSAGE_TYPES).map(async msgType => {
-      try {
-        const response = await getTxsByEvent({
-          events: [`${messageActionEquals}'${msgType.message}'`],
-          orderBy: OrderBy.ORDER_BY_DESC,
-        });
-
-        if (response?.txResponses) {
-          allTxs = [...allTxs, ...response.txResponses];
-        }
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.error(err);
-      }
-    }),
-  ).then(() => {
-    return allTxs;
-  });
-};
-
-type GetBatchesWithSupplyParams = {
-  creditClassId?: string | null;
-  params?: URLSearchParams;
-  withAllData?: boolean;
-  dataClient?: DataQueryClientImpl;
-  ecocreditClient?: EcocreditQueryClientImpl;
-};
-
-export const getBatchesWithSupply = async ({
-  creditClassId,
-  params,
-  withAllData = true,
-  dataClient,
-  ecocreditClient,
-}: GetBatchesWithSupplyParams): Promise<{
-  data: BatchInfoWithSupply[];
-}> => {
-  const batches = await queryEcoBatches(creditClassId, params);
-  const batchesWithData = await addDataToBatches({
-    batches,
-    withAllData,
-    dataClient,
-    ecocreditClient,
-  });
-  return { data: batchesWithData };
-};
-
-export const getBatchesByProjectWithSupply = async (
-  projectId?: string | null,
-  dataClient?: DataQueryClientImpl,
-  ecocreditClient?: EcocreditQueryClientImpl,
-): Promise<{
-  data: BatchInfoWithSupply[];
-}> => {
-  if (!projectId) return Promise.resolve({ data: [] });
-  const client = await getQueryClient();
-  const batches = await queryBatchesByProject({
-    client,
-    request: { projectId },
-  });
-  const batchesWithData = await addDataToBatches({
-    batches: batches?.batches,
-    dataClient,
-    ecocreditClient,
-  });
-  return { data: batchesWithData };
-};
-
 const getClassProjectForBatch = async (
   batch: BatchInfo,
   sanityCreditClassData?: AllCreditClassQuery,
@@ -368,78 +294,11 @@ export type AddDataToBatchesParams = {
   withAllData?: boolean;
   dataClient?: DataQueryClientImpl;
   ecocreditClient?: EcocreditQueryClientImpl;
+  txClient?: ServiceClientImpl;
   reactQueryClient?: QueryClient;
 };
 
-/* addDataToBatches adds Tx Hash and supply info to batch for use in tables */
-export const addDataToBatches = async ({
-  batches,
-  sanityCreditClassData,
-  withAllData = true,
-  dataClient,
-  ecocreditClient,
-  reactQueryClient,
-}: AddDataToBatchesParams): Promise<BatchInfoWithSupply[]> => {
-  try {
-    /* TODO: this is limited to 100 results. We need to find a better way */
-    const [createBatchTxs, createBatchAlphaTxs] = await Promise.all([
-      getTxsByEvent({
-        events: [
-          `${messageActionEquals}'${ECOCREDIT_MESSAGE_TYPES.CREATE_BATCH.message}'`,
-        ],
-      }),
-      getTxsByEvent({
-        events: [
-          `${messageActionEquals}'${ECOCREDIT_MESSAGE_TYPES.CREATE_BATCH_ALPHA.message}'`,
-        ],
-      }),
-    ]);
-
-    return Promise.all(
-      batches.map(async batch => {
-        let txhash, supplyData, classProjectInfo;
-
-        if (reactQueryClient) {
-          supplyData = (await getFromCacheOrFetch({
-            query: getSupplyQuery({
-              request: { batchDenom: batch.denom },
-            }),
-            reactQueryClient,
-          })) as QuerySupplyResponse;
-        } else {
-          supplyData = await queryEcoBatchSupply(batch.denom);
-        }
-
-        if (withAllData) {
-          txhash =
-            getTxHashForBatch(createBatchTxs.txResponses, batch.denom) ??
-            getTxHashForBatch(
-              createBatchAlphaTxs.txResponses,
-              v1Alpha1BatchDenomMapping[batch.denom],
-            );
-          classProjectInfo = await getClassProjectForBatch(
-            batch,
-            sanityCreditClassData,
-            dataClient,
-            ecocreditClient,
-            reactQueryClient,
-          );
-        }
-
-        return {
-          ...batch,
-          ...classProjectInfo,
-          ...supplyData,
-          txhash,
-        };
-      }),
-    );
-  } catch (err) {
-    throw new Error(`Could not add data to batches batches: ${err}`);
-  }
-};
-
-const getTxHashForBatch = (
+export const getTxHashForBatch = (
   txResponses: TxResponse[],
   log: string,
 ): string | undefined => {
@@ -541,17 +400,6 @@ export const getTxsByEvent = async (
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
     return Promise.reject();
-  }
-};
-
-export const queryEcoClassInfo = async (
-  classId: string,
-): Promise<QueryClassResponse> => {
-  const client = await getQueryClient();
-  try {
-    return client.Class({ classId });
-  } catch (err) {
-    throw new Error(`Error fetching class info: ${err}`);
   }
 };
 
@@ -830,7 +678,7 @@ export const queryBatches = async ({
 
 // BatchesByClass
 
-interface QueryBatchesByClassProps extends EcocreditQueryClientProps {
+export interface QueryBatchesByClassProps extends EcocreditQueryClientProps {
   request: DeepPartial<QueryBatchesByClassRequest>;
 }
 
@@ -841,6 +689,7 @@ export const queryBatchesByClass = async ({
   try {
     return await client.BatchesByClass({
       classId: request.classId,
+      pagination: request.pagination,
     });
   } catch (err) {
     throw new Error(
@@ -851,7 +700,7 @@ export const queryBatchesByClass = async ({
 
 // BatchesByIssuer
 
-interface QueryBatchesByIssuerProps extends EcocreditQueryClientProps {
+export interface QueryBatchesByIssuerProps extends EcocreditQueryClientProps {
   request: DeepPartial<QueryBatchesByIssuerRequest>;
 }
 
@@ -862,6 +711,7 @@ export const queryBatchesByIssuer = async ({
   try {
     return await client.BatchesByIssuer({
       issuer: request.issuer,
+      pagination: request.pagination,
     });
   } catch (err) {
     throw new Error(
@@ -1024,51 +874,6 @@ export const queryParams = async ({
     throw new Error(
       `Error in the Params query of the ledger ecocredit module: ${err}`,
     );
-  }
-};
-
-/**
- *
- * Backwards compatibility, will be removed
- *
- */
-
-// queryEcoBatches consumes Regen REST endpoints - will be replaced with regen-js
-export const queryEcoBatches = async (
-  creditClassId?: string | null,
-  params?: URLSearchParams,
-): Promise<BatchInfo[]> => {
-  const client = await getQueryClient();
-  try {
-    // With regen-ledger v4.0, we first have to query all classes and then batches per class.
-    // The url pagination params are just ignored here since they can't really be used.
-    // Indeed we cannot know in advance how many credit classes should be queried initially
-    // to get the desired number of credit batches.
-    let batchInfos: BatchInfo[] = [];
-    if (!creditClassId) {
-      const { classes } = await queryEcoClasses();
-      const arr = await Promise.all(
-        classes.map(async creditClass => {
-          const { batches } = await queryBatchesByClass({
-            client,
-            request: { classId: creditClass.id },
-          });
-          return batches;
-        }),
-      );
-
-      batchInfos = arr.flat();
-    } else {
-      const { batches } = await queryBatchesByClass({
-        client,
-        request: { classId: creditClassId },
-      });
-      return batches;
-    }
-
-    return batchInfos;
-  } catch (err) {
-    throw new Error(`Error fetching batches: ${err}`);
   }
 };
 

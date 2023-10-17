@@ -23,6 +23,7 @@ import { OFFSET_GENERATION_METHOD } from 'pages/Buyers/Buyers.constants';
 import { EcocreditsSection } from 'components/molecules';
 import { DetailsSection } from 'components/organisms/DetailsSection/DetailsSection';
 import { parseMethodologies } from 'components/organisms/ProjectTopSection/ProjectTopSection.utils';
+import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
 import { useTags } from 'hooks/useTags';
 
 import { client as sanityClient } from '../../../lib/clients/sanity';
@@ -81,6 +82,9 @@ const CreditClassDetailsSimple: React.FC<
     activities,
     ecosystemTypes,
   });
+
+  const { batchesWithSupply, setPaginationParams, paginationParams } =
+    useFetchPaginatedBatches({ creditClassId: onChainClass.id });
 
   const { data: sanityCreditClassPageData } = useQuery(
     getAllCreditClassPageQuery({ sanityClient, enabled: !!sanityClient }),
@@ -225,6 +229,9 @@ const CreditClassDetailsSimple: React.FC<
         <CreditClassDetailsTableTabs
           creditClassMetadata={metadata}
           onChainCreditClassId={onChainClass.id}
+          creditBatches={batchesWithSupply}
+          initialPaginationParams={paginationParams}
+          onTableChange={setPaginationParams}
         />
       </div>
     </Box>

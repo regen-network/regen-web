@@ -9,7 +9,7 @@ const path = require('path');
 
 module.exports = {
   stories: [
-    '../../web-components/src/components/**/*.stories.tsx',
+    '../../web-components/src/**/*.stories.tsx',
     '../../web-marketplace/src/**/*.stories.tsx',
   ],
   addons: [

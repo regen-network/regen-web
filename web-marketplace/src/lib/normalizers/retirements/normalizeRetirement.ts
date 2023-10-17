@@ -1,12 +1,13 @@
 import {
   ClassInfo,
-  QueryProjectResponse,
+  ProjectInfo,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { Party } from 'web-components/lib/components/user/UserInfo';
 
 import { Maybe } from 'generated/graphql';
 import { RetirementFieldsFragment } from 'generated/indexer-graphql';
+import { CreditClass } from 'generated/sanity-graphql';
 import {
   AnchoredProjectMetadataLD,
   CreditClassMetadataLD,
@@ -17,9 +18,10 @@ import { getDataFromBatchDenomId } from 'pages/Dashboard/MyEcocredits/MyEcocredi
 type Props = {
   retirement?: Maybe<RetirementFieldsFragment>;
   retirementData?: ReturnType<typeof getDataFromBatchDenomId>;
-  project?: QueryProjectResponse | null;
+  project?: ProjectInfo;
   projectMetadata?: AnchoredProjectMetadataLD;
   creditClass?: ClassInfo;
+  sanityCreditClass?: CreditClass;
   creditClassMetadata?: CreditClassMetadataLD;
   issuer?: Party;
   owner?: Party;
@@ -40,6 +42,8 @@ export type NormalizedRetirement = {
   projectId: string;
   projectName: string;
   projectLocation?: string;
+  retirementLabel?: string;
+  retirementIcon?: string;
   retirementLocation?: string;
   retirementReason?: string;
   retiredBy?: string;
@@ -52,6 +56,7 @@ export const normalizeRetirement = ({
   retirement,
   retirementData,
   creditClass,
+  sanityCreditClass,
   creditClassMetadata,
   issuer,
   owner,
@@ -70,8 +75,10 @@ export const normalizeRetirement = ({
   projectId: retirementData?.projectId ?? '',
   projectName:
     projectMetadata?.['schema:name'] ?? retirementData?.projectId ?? '',
-  projectLocation: project?.project?.jurisdiction,
+  projectLocation: project?.jurisdiction,
   retirementDate: retirement?.timestamp,
+  retirementLabel: sanityCreditClass?.retirementLabel ?? '',
+  retirementIcon: sanityCreditClass?.retirementIcon?.asset?.url ?? '',
   retirementLocation: retirement?.jurisdiction,
   retirementReason: retirement?.reason,
   retiredBy: retirement?.owner,

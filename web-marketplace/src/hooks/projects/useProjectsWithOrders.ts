@@ -17,6 +17,7 @@ import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-ser
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { useFetchAllOffChainProjects } from 'pages/Projects/hooks/useOffChainProjects';
 import { ProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders.types';
 import { sortProjects } from 'pages/Projects/utils/sortProjects';
 import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
@@ -30,6 +31,7 @@ export interface ProjectsWithOrdersProps {
   metadata?: boolean; // to discard projects without metadata prop
   random?: boolean; // to shuffle the projects (along with limit allows a random subselection)
   useCommunityProjects?: boolean; // to show community projects
+  useOffChainProjects?: boolean; // to show approved off-chain projects;
   projectId?: string; // to filter by project
   skippedProjectId?: string; // to discard a specific project
   classId?: string; // to filter by class
@@ -46,6 +48,7 @@ export function useProjectsWithOrders({
   metadata = false,
   random = false,
   useCommunityProjects = false,
+  useOffChainProjects = false,
   skippedProjectId,
   classId,
   sort = '',
@@ -88,7 +91,7 @@ export function useProjectsWithOrders({
       }),
     );
 
-  const { data: sellOrders, isFetching: isLoadingSellOrders } = useQuery(
+  const { data: sellOrders, isLoading: isLoadingSellOrders } = useQuery(
     getSellOrdersExtendedQuery({
       enabled: !!marketplaceClient,
       client: marketplaceClient,
@@ -102,6 +105,13 @@ export function useProjectsWithOrders({
     useQuery(
       getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
     );
+
+  // OffChainProjects
+  const { allOffChainProjects, isAllOffChainProjectsLoading } =
+    useFetchAllOffChainProjects({
+      sanityCreditClassesData: creditClassData,
+      enabled: useOffChainProjects,
+    });
 
   /* Normalization/Filtering/Sorting */
 
@@ -145,15 +155,19 @@ export function useProjectsWithOrders({
     project => !project.sanityCreditClassData,
   );
 
+  // Merge on-chain and off-chain projects
+  const allProject = useOffChainProjects
+    ? [...projectsWithOrderDataFiltered, ...allOffChainProjects]
+    : projectsWithOrderDataFiltered;
+
   // Filter projects by class ID
   const creditClassSelected = Object.keys(creditClassFilter).filter(
     creditClassId => creditClassFilter[creditClassId],
   );
-  const projectsFilteredByCreditClass = projectsWithOrderDataFiltered.filter(
-    project =>
-      creditClassSelected.length === 0
-        ? true
-        : creditClassSelected.includes(project.creditClassId ?? ''),
+  const projectsFilteredByCreditClass = allProject.filter(project =>
+    creditClassSelected.length === 0
+      ? true
+      : creditClassSelected.includes(project.creditClassId ?? ''),
   );
 
   const sortedProjects = sortProjects(
@@ -184,6 +198,7 @@ export function useProjectsWithOrders({
       getProjectByOnChainIdQuery({
         client: graphqlClient,
         onChainId: project.id,
+        enabled: !!project.id && !project.offChain,
       }),
     ),
   });
@@ -231,6 +246,7 @@ export function useProjectsWithOrders({
       isLoadingProject ||
       isClassesMetadataLoading ||
       projectsMetadataLoading ||
+      isAllOffChainProjectsLoading ||
       offChainProjectLoading,
     hasCommunityProjects,
   };

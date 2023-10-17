@@ -22,6 +22,7 @@ import { Title } from 'web-components/lib/components/typography';
 
 import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
 import { getHashUrl } from 'lib/block-explorer';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
@@ -117,10 +118,10 @@ export const Storefront = (): JSX.Element => {
     submittedQuantityRef.current = creditCount;
   };
 
+  const { isConnected, wallet } = useWallet();
   const {
     signAndBroadcast,
     setDeliverTxResponse,
-    wallet,
     deliverTxResponse,
     error,
     setError,
@@ -218,10 +219,10 @@ export const Storefront = (): JSX.Element => {
   });
 
   useEffect(() => {
-    if (isReadyToBuy && !isBuyModalOpen && accountAddress) {
+    if (isReadyToBuy && !isBuyModalOpen && isConnected) {
       setIsBuyModalOpen(true);
     }
-  }, [isReadyToBuy, isBuyModalOpen, accountAddress]);
+  }, [isReadyToBuy, isBuyModalOpen, isConnected]);
 
   return (
     <Box sx={{ backgroundColor: 'grey.50' }}>
@@ -241,10 +242,9 @@ export const Storefront = (): JSX.Element => {
               renderActionButtonsFunc={(i: number) => {
                 const isOwnSellOrder =
                   normalizedSellOrders[i]?.seller === accountAddress;
-
                 return (
                   <>
-                    {isOwnSellOrder && (
+                    {isConnected && isOwnSellOrder && (
                       <TableActionButtons
                         buttons={[
                           {
@@ -278,7 +278,7 @@ export const Storefront = (): JSX.Element => {
                           refetchSellOrders();
                           setSelectedAction('buy');
                           setSelectedSellOrder(i);
-                          if (!accountAddress) {
+                          if (!isConnected) {
                             setConnectWalletModalAtom(
                               atom => void (atom.open = true),
                             );

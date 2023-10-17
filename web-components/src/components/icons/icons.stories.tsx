@@ -14,7 +14,6 @@ import AvatarOutlineIcon from './AvatarOutlineIcon';
 import BlockIcon from './BlockIcon';
 import BreadcrumbIcon from './BreadcrumbIcon';
 import { BrokenLinkIcon } from './BrokenLinkIcon';
-import CarbonOffsetBadgeIcon from './CarbonOffsetBadgeIcon';
 import CelebrateRegenIcon from './CelebrateRegenIcon';
 import CertifiedDocumentIcon from './CertifiedDocumentIcon';
 import CheckedIcon from './CheckedIcon';
@@ -26,6 +25,7 @@ import EeurIcon from './coins/EeurIcon';
 import EvmosIcon from './coins/EvmosIcon';
 import GravUsdcIcon from './coins/GravUsdcIcon';
 import UsdcIcon from './coins/UsdcIcon';
+import { CopyIcon } from './CopyIcon';
 import CountingIcon from './CountingIcon';
 import { CreditBatchIcon } from './CreditBatchIcon';
 import { CreditBatchLightIcon } from './CreditBatchLightIcon';
@@ -83,6 +83,7 @@ import SatelliteIcon from './SatelliteIcon';
 import { SaveIcon } from './SaveIcon';
 import SellOrderNotFoundIcon from './SellOrderNotFoundIcon';
 import ShadedCreditsIcon from './ShadedCreditsIcon';
+import ShareIcon from './ShareIcon';
 import ShieldIcon from './ShieldIcon';
 import SmallArrowIcon from './SmallArrowIcon';
 import DiscordIcon from './social/DiscordIcon';
@@ -186,10 +187,6 @@ export const allIcons = (): JSX.Element => (
 
     <LabeledIcon icon={<BrokenLinkIcon />} label="BrokenLinkIcon" />
     <LabeledIcon
-      icon={<CarbonOffsetBadgeIcon />}
-      label="CarbonOffsetBadgeIcon"
-    />
-    <LabeledIcon
       icon={<CelebrateRegenIcon sx={{ fontSize: 64 }} />}
       label="CelebrateRegenIcon"
     />
@@ -201,6 +198,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<CheckIcon />} label="CheckIcon" />
     <LabeledIcon icon={<CloseIcon />} label="CloseIcon" />
     <LabeledIcon icon={<CoBenefitsIcon />} label="CoBenefitsIcon" />
+    <LabeledIcon icon={<CopyIcon />} label="CopyIcon" />
     <LabeledIcon icon={<CountingIcon />} label="CountingIcon" />
     <LabeledIcon
       icon={<CreditBatchIcon sx={{ color: '#4FB573' }} />}
@@ -278,6 +276,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<PrintIcon />} label="PrintIcon" />
     <LabeledIcon icon={<ProjectPageIcon />} label="ProjectPageIcon" />
     <LabeledIcon icon={<ProjectPageIconSmall />} label="ProjectPageIconSmall" />
+    <LabeledIcon icon={<ShareIcon />} label="ShareIcon" />
     <LabeledIcon icon={<PutInBasketIcon />} label="PutInBasketIcon" />
     <LabeledIcon icon={<QuestionIcon />} label="QuestionIcon" />
     <LabeledIcon

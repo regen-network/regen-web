@@ -1,6 +1,6 @@
 ## Description
 
-Closes: regen-network/regen-registry#XXXX
+Closes: #XXXX or regen-network/rnd-dev-team#XXXX
 
 <!-- Add a description of the changes that this PR introduces and the files that
 are the most critical to review. -->
@@ -20,6 +20,9 @@ I have...
 - [ ] confirmed all CI checks have passed
 
 ### How to test
+
+<!-- This should include steps on how to test the fixes or features within the marketplace app and/or the website.
+If applicable, this should also include links to the created/updated components on storybook. -->
 
 1.
 

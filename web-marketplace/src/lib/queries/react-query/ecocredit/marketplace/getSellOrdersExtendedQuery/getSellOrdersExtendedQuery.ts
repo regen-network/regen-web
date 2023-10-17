@@ -1,10 +1,6 @@
 import uniq from 'lodash/uniq';
 
-import {
-  FetchSimplePriceResponse,
-  GECKO_EEUR_ID,
-  GECKO_USDC_ID,
-} from 'lib/coingecko';
+import { FetchSimplePriceResponse } from 'lib/coingecko';
 import { DenomTraceWithHash } from 'lib/ibc/transfer/api';
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 
@@ -56,11 +52,6 @@ export const getSellOrdersExtendedQuery = ({
         reactQueryClient,
       });
 
-    const regenPrice = simplePriceData?.regen?.usd;
-    const evmosPrice = simplePriceData?.evmos?.usd;
-    const eeurPrice = simplePriceData?.[GECKO_EEUR_ID]?.usd;
-    const usdcPrice = simplePriceData?.[GECKO_USDC_ID]?.usd;
-
     // Update sell orders by replacing ibc denoms with base denom from DenomTrace if needed
     const sellOrdersWithBaseDenom = sellOrders.map(sellOrder => {
       const denomTrace = denomTraces?.find(denomTrace =>
@@ -76,12 +67,7 @@ export const getSellOrdersExtendedQuery = ({
         askAmount,
         askBaseDenom,
         quantity,
-        geckoPrices: {
-          regenPrice,
-          evmosPrice,
-          eeurPrice,
-          usdcPrice,
-        },
+        geckoPrices: simplePriceData,
       });
 
       return {

@@ -16,7 +16,7 @@ import { getBridgeTxStatusQuery } from 'lib/queries/react-query/bridge/getBridge
 import { getGetTxsEventQuery } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
-import { useBatchesWithMetadata } from 'hooks/batches/useBatchesWithMetadata';
+import { useFetchBatchesWithMetadata } from 'hooks/batches/useFetchBatchesWithMetadata';
 
 import {
   BRIDGED_STATUSES,
@@ -148,7 +148,7 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
     isProjectsMetadataLoading,
     classesMetadata,
     isClassesMetadataLoading,
-  } = useBatchesWithMetadata(credits);
+  } = useFetchBatchesWithMetadata(credits);
 
   // Normalization
   // isLoading -> undefined: return empty strings in normalizer to trigger skeleton
@@ -159,7 +159,7 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
       projectMetadata: isProjectsMetadataLoading
         ? undefined
         : projectsMetadata[index],
-      project: isProjectsLoading ? undefined : projects[index]?.project,
+      project: isProjectsLoading ? undefined : projects[index],
       sanityCreditClassData: creditClassData,
       creditClassMetadata: isClassesMetadataLoading
         ? undefined

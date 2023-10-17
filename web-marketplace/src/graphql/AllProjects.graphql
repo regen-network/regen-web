@@ -2,11 +2,17 @@ query AllProjects {
   allProjects {
     nodes {
       id
-      handle
+      slug
       metadata
+      onChainId
+      approved
+      published
       creditClassByCreditClassId {
         id
         onChainId
+        partyByRegistryId {
+          ...partyFields
+        }
         creditClassVersionsById {
           nodes {
             id

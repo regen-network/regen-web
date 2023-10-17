@@ -19,6 +19,7 @@ export const ProjectEditNav = ({ section, onNavClick }: Props) => {
         'description',
         'media',
         'metadata',
+        'settings',
       ]}
       category={section?.replace('-', ' ')}
       onClick={onNavClick}

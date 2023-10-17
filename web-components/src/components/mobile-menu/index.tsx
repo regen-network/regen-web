@@ -104,7 +104,7 @@ const MobileMenu: React.FC<React.PropsWithChildren<Props>> = ({
                               overrideClassname=""
                               pathname={pathname}
                             >
-                              {ReactHtmlParser(dropdownItem.title)}
+                              {ReactHtmlParser(dropdownItem.label)}
                             </Link>
                           </MenuItem>
                         );

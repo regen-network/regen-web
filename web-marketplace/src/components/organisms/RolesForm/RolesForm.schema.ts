@@ -5,8 +5,8 @@ import { profileModalSchema } from './components/ProfileModal/ProfileModal.schem
 
 export const rolesFormSchema = z
   .object({
-    projectDeveloper: profileModalSchema.nullable(),
-    verifier: profileModalSchema.nullable(),
+    projectDeveloper: profileModalSchema.nullable().optional(),
+    verifier: profileModalSchema.nullable().optional(),
     admin: addressSchema,
   })
   .required({ admin: true });

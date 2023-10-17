@@ -16,7 +16,9 @@ export const getCertificateData = ({
   retirement,
 }: GetCertificateDataParams): CertificateType => {
   return {
-    certificateTitle: CERTIFICATE_TITLE,
+    certificateTitle:
+      `${retirement.retirementLabel} ${CERTIFICATE_TITLE}`.trim(),
+    certificateIcon: retirement.retirementIcon,
     creditsUnits: Number(retirement.amountRetired),
     creditUnitName: retirement.creditClassName,
     equivalentTonsCO2:

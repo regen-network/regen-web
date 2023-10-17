@@ -1,0 +1,28 @@
+fragment partyFields on Party {
+  id
+  accountId
+  creatorId
+  type
+  name
+  description
+  image
+  websiteLink
+  twitterLink
+  organizationByPartyId {
+    ...organizationFields
+  }
+  walletByWalletId {
+    id
+    addr
+  }
+}
+
+fragment organizationFields on Organization {
+  id
+}
+
+query ProjectBySlug($slug: String!) {
+  projectBySlug(slug: $slug) {
+    ...projectFields
+  }
+}

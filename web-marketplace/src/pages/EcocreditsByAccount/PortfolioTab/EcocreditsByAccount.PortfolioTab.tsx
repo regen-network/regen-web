@@ -1,39 +1,12 @@
-import { useParams } from 'react-router-dom';
-import {
-  ApolloClient,
-  NormalizedCacheObject,
-  useApolloClient,
-} from '@apollo/client';
-import { useQuery } from '@tanstack/react-query';
-
-import { isValidAddress } from 'web-components/lib/components/inputs/validation';
-
-import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-import { getPartyByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByIdQuery/getPartyByIdQuery';
-
 import { useFetchBaskets } from 'pages/Dashboard/MyEcocredits/hooks/useFetchBaskets';
 import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 import { useFetchRetirements } from 'pages/Dashboard/MyEcocredits/hooks/useFetchRetirements';
 import { Portfolio } from 'components/organisms';
 
+import { useProfileData } from '../hooks/useProfileData';
+
 export const PortfolioTab = (): JSX.Element => {
-  const { accountAddressOrId } = useParams<{ accountAddressOrId: string }>();
-  const isValidRegenAddress = isValidAddress(accountAddressOrId ?? '', 'regen');
-
-  const graphqlClient =
-    useApolloClient() as ApolloClient<NormalizedCacheObject>;
-  const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
-  const { data: partyById } = useQuery(
-    getPartyByIdQuery({
-      client: graphqlClient,
-      id: accountAddressOrId ?? '',
-      enabled: !isValidRegenAddress && !!graphqlClient && !!csrfData,
-    }),
-  );
-
-  const address = isValidRegenAddress
-    ? accountAddressOrId
-    : partyById?.partyById?.walletByWalletId?.addr ?? '';
+  const { address } = useProfileData();
 
   // Ecocredits
   const { credits, paginationParams, setPaginationParams } = useFetchEcocredits(

@@ -1,16 +1,13 @@
 import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
-import {
-  EEUR_DENOM,
-  EVMOS_DENOM,
-  REGEN_DENOM,
-  USD_DENOMS,
-} from 'config/allowedBaseDenoms';
 
 import { Item } from 'web-components/lib/components/modal/ConfirmModal';
 
+import {
+  DENOM_COINGECKO_ID_MAPPING,
+  FetchSimplePriceResponse,
+} from 'lib/coingecko';
 import { microToDenom } from 'lib/denom.utils';
 
-import { GECKO_PRICES } from 'pages/Projects/hooks/useProjectsSellOrders.types';
 import { UISellOrderInfo } from 'pages/Projects/Projects.types';
 
 import { NormalizedSellOrder } from './Storefront.types';
@@ -83,7 +80,7 @@ type GetAskUsdAmountParams = {
   askAmount: string;
   askBaseDenom: string;
   quantity: string;
-  geckoPrices?: GECKO_PRICES;
+  geckoPrices: FetchSimplePriceResponse | null | void;
 };
 
 export const getAskUsdAmount = ({
@@ -91,24 +88,8 @@ export const getAskUsdAmount = ({
   askBaseDenom,
   geckoPrices,
 }: GetAskUsdAmountParams): number => {
-  const { eeurPrice, regenPrice, usdcPrice, evmosPrice } = geckoPrices ?? {};
-  let denomPrice = 0;
-
-  if (USD_DENOMS.includes(askBaseDenom)) {
-    denomPrice = usdcPrice ?? 1;
-  }
-
-  if (regenPrice && askBaseDenom === REGEN_DENOM) {
-    denomPrice = regenPrice;
-  }
-
-  if (eeurPrice && askBaseDenom === EEUR_DENOM) {
-    denomPrice = eeurPrice;
-  }
-
-  if (evmosPrice && askBaseDenom === EVMOS_DENOM) {
-    denomPrice = evmosPrice;
-  }
+  const coingeckoId = DENOM_COINGECKO_ID_MAPPING[askBaseDenom];
+  const denomPrice = geckoPrices?.[coingeckoId]?.usd ?? 0;
 
   return microToDenom(askAmount) * denomPrice;
 };

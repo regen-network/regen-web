@@ -4,20 +4,25 @@ import { useLedger } from 'ledger';
 import { getProjectsByAdminQuery } from 'lib/queries/react-query/ecocredit/getProjectsByAdmin/getProjectsByAdmin';
 import { useWallet } from 'lib/wallet/wallet';
 
-export function useQueryIsProjectAdmin(): boolean {
+type Props = {
+  address?: string;
+};
+
+export function useQueryIsProjectAdmin({ address }: Props) {
   const { ecocreditClient } = useLedger();
   const { wallet } = useWallet();
-  const address = wallet?.address;
+  const walletAddress = wallet?.address;
+  const activeAddress = address ?? walletAddress;
 
-  const { data: projectsByAdmin } = useQuery(
+  const { data: projectsByAdmin, isFetching } = useQuery(
     getProjectsByAdminQuery({
       enabled: !!address && !!ecocreditClient,
       client: ecocreditClient,
-      request: { admin: address },
+      request: { admin: address ?? activeAddress },
     }),
   );
 
   const isProjectAdmin = (projectsByAdmin?.projects?.length ?? 0) > 0;
 
-  return isProjectAdmin;
+  return { isProjectAdmin, isLoadingIsProjectAdmin: isFetching };
 }

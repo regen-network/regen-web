@@ -12,7 +12,7 @@ import { getBalancesQuery } from 'lib/queries/react-query/ecocredit/getBalancesQ
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { useBatchesWithMetadata } from '../../../../hooks/batches/useBatchesWithMetadata';
+import { useFetchBatchesWithMetadata } from '../../../../hooks/batches/useFetchBatchesWithMetadata';
 import { client as sanityClient } from '../../../../lib/clients/sanity';
 import { isOfCreditClass } from '../MyEcocredits.utils';
 
@@ -41,7 +41,7 @@ export const useFetchEcocredits = ({
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
       page: 0,
-      rowsPerPage: DEFAULT_ROWS_PER_PAGE,
+      rowsPerPage: 10,
       offset: 0,
     });
   const { page, rowsPerPage } = paginationParams;
@@ -94,7 +94,7 @@ export const useFetchEcocredits = ({
     isProjectsMetadataLoading,
     classesMetadata,
     isClassesMetadataLoading,
-  } = useBatchesWithMetadata(filteredBalances);
+  } = useFetchBatchesWithMetadata(filteredBalances);
 
   // AllCreditClasses
   const { data: creditClassData } = useQuery(
@@ -111,7 +111,7 @@ export const useFetchEcocredits = ({
       projectMetadata: isProjectsMetadataLoading
         ? undefined
         : projectsMetadata[index],
-      project: isProjectsLoading ? undefined : projects[index]?.project,
+      project: isProjectsLoading ? undefined : projects[index],
       sanityCreditClassData: creditClassData,
       creditClassMetadata: isClassesMetadataLoading
         ? undefined

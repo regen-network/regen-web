@@ -1,17 +1,13 @@
 import { useMemo } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
-import {
-  ApolloClient,
-  NormalizedCacheObject,
-  useApolloClient,
-} from '@apollo/client';
 import { Box } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
 
 import { Flex } from 'web-components/lib/components/box';
 import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
+import { CreditBatchIcon } from 'web-components/lib/components/icons/CreditBatchIcon';
+import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClassIcon';
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
-import { isValidAddress } from 'web-components/lib/components/inputs/validation';
+import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
 import { ProfileHeader } from 'web-components/lib/components/organisms/ProfileHeader/ProfileHeader';
 import Section from 'web-components/lib/components/section';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
@@ -19,56 +15,43 @@ import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 import { truncate } from 'web-components/lib/utils/truncate';
 
 import { getAccountUrl } from 'lib/block-explorer';
-import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
-import { getPartyByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByIdQuery/getPartyByIdQuery';
+import { isBridgeEnabled } from 'lib/ledger';
+import { getProfileLink } from 'lib/profileLink';
 
-import { getSocialsLinks } from 'pages/Dashboard/Dashboard.utils';
+import {
+  getSocialsLinks,
+  getUserImages,
+} from 'pages/Dashboard/Dashboard.utils';
 import {
   DEFAULT_NAME,
-  DEFAULT_PROFILE_BG,
   profileVariantMapping,
 } from 'pages/ProfileEdit/ProfileEdit.constants';
-import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 import { Link } from 'components/atoms';
+import WithLoader from 'components/atoms/WithLoader';
+import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
+import { useQueryIsProjectAdmin } from 'hooks/useQueryIsProjectAdmin';
 
+import { ProfileNotFound } from './EcocreditsByAccount.NotFound';
 import { ecocreditsByAccountStyles } from './EcocreditsByAccount.styles';
+import { useProfileData } from './hooks/useProfileData';
 
 export const EcocreditsByAccount = (): JSX.Element => {
   const { accountAddressOrId } = useParams<{ accountAddressOrId: string }>();
-  const isValidRegenAddress = isValidAddress(accountAddressOrId ?? '', 'regen');
   const location = useLocation();
 
-  const graphqlClient =
-    useApolloClient() as ApolloClient<NormalizedCacheObject>;
+  const { address, party, isLoading } = useProfileData();
+  const { avatarImage, backgroundImage } = getUserImages({ party });
+  const isProfileNotFound = !address && !party;
+  const profileLink = accountAddressOrId
+    ? getProfileLink(accountAddressOrId)
+    : '';
 
-  const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
-  const { data: partyByAddr } = useQuery(
-    getPartyByAddrQuery({
-      client: graphqlClient,
-      addr: accountAddressOrId ?? '',
-      enabled: isValidRegenAddress && !!graphqlClient && !!csrfData,
-    }),
-  );
-  const { data: partyById } = useQuery(
-    getPartyByIdQuery({
-      client: graphqlClient,
-      id: accountAddressOrId ?? '',
-      enabled: !isValidRegenAddress && !!graphqlClient && !!csrfData,
-    }),
-  );
+  const { isIssuer, isLoadingIsIssuer } = useQueryIsIssuer({ address });
+  const { isProjectAdmin, isLoadingIsProjectAdmin } = useQueryIsProjectAdmin({
+    address,
+  });
 
-  const party =
-    partyByAddr?.walletByAddr?.partyByWalletId ?? partyById?.partyById;
-  const defaultAvatar = getDefaultAvatar(party);
-  const address = isValidRegenAddress
-    ? accountAddressOrId
-    : partyById?.partyById?.walletByWalletId?.addr;
-
-  const socialsLinks = useMemo(
-    () => getSocialsLinks({ partyByAddr }),
-    [partyByAddr],
-  );
+  const socialsLinks = useMemo(() => getSocialsLinks({ party }), [party]);
 
   const tabs: IconTabProps[] = useMemo(
     () => [
@@ -76,59 +59,96 @@ export const EcocreditsByAccount = (): JSX.Element => {
         label: 'Portfolio',
         icon: <CreditsIcon fontSize="small" />,
         href: `/profiles/${accountAddressOrId}/portfolio`,
-        hidden: !party,
+      },
+      {
+        label: 'Projects',
+        icon: <ProjectPageIcon />,
+        href: `/profiles/${accountAddressOrId}/projects`,
+        hidden: !isProjectAdmin,
+      },
+      {
+        label: 'Credit Classes',
+        icon: <CreditClassIcon />,
+        href: `/profiles/${accountAddressOrId}/credit-classes`,
+        hidden: true,
+      },
+      {
+        label: 'Credit Batches',
+        icon: <CreditBatchIcon />,
+        href: `/profiles/${accountAddressOrId}/credit-batches`,
+        hidden: !isIssuer,
       },
       {
         label: 'Bridge',
         icon: <BridgeIcon />,
         href: `/profiles/${accountAddressOrId}/bridge`,
-        hidden: !party || import.meta.env.VITE_LEDGER_CHAIN_ID === 'regen-1', // TODO: Hides in PROD - remove when Bridge is ready
+        hidden: !isBridgeEnabled,
       },
     ],
-    [accountAddressOrId, party],
+    [accountAddressOrId, isIssuer, isProjectAdmin],
   );
 
   const activeTab = Math.max(
-    tabs.findIndex(tab => location.pathname.includes(tab.href ?? '')),
+    tabs
+      .filter(tab => !tab.hidden)
+      .findIndex(tab => location.pathname.includes(tab.href ?? '')),
     0,
   );
 
   return (
-    <>
-      <ProfileHeader
-        name={party?.name ? party?.name : DEFAULT_NAME}
-        backgroundImage={party?.bgImage ? party?.bgImage : DEFAULT_PROFILE_BG}
-        avatar={party?.image ? party?.image : defaultAvatar}
-        infos={{
-          addressLink: {
-            href: address
-              ? getAccountUrl(accountAddressOrId, true)
-              : `/profiles/${accountAddressOrId}/portfolio`,
-            text: address ? truncate(accountAddressOrId) : '',
-          },
-          description: party?.description?.trimEnd() ?? '',
-          socialsLinks,
-        }}
-        editLink=""
-        variant={party?.type ? profileVariantMapping[party.type] : 'individual'}
-        LinkComponent={Link}
-      />
-      <Box sx={{ backgroundColor: 'grey.50' }}>
-        <Section sx={{ root: { pt: { xs: 15 } } }}>
-          <IconTabs
-            aria-label="public profile tabs"
-            tabs={tabs}
-            linkComponent={Link}
-            activeTab={activeTab}
-            mobileFullWidth
-          />
-          <Flex sx={{ ...ecocreditsByAccountStyles.padding }}>
-            <Box sx={{ width: '100%' }}>
-              <Outlet />
+    <WithLoader
+      isLoading={isLoading || isLoadingIsIssuer || isLoadingIsProjectAdmin}
+      sx={{
+        py: 10,
+        display: 'flex',
+        justifyContent: 'center',
+        height: '100vh',
+      }}
+    >
+      <>
+        {isProfileNotFound && <ProfileNotFound sx={{ mt: 22.5, mb: 27.25 }} />}
+        {!isProfileNotFound && (
+          <>
+            <ProfileHeader
+              name={party?.name ? party?.name : DEFAULT_NAME}
+              backgroundImage={backgroundImage}
+              avatar={avatarImage}
+              infos={{
+                addressLink: {
+                  href: address
+                    ? getAccountUrl(accountAddressOrId, true)
+                    : `/profiles/${accountAddressOrId}/portfolio`,
+                  text: address ? truncate(accountAddressOrId) : '',
+                },
+                description: party?.description?.trimEnd() ?? '',
+                socialsLinks,
+              }}
+              editLink=""
+              profileLink={profileLink}
+              variant={
+                party?.type ? profileVariantMapping[party.type] : 'individual'
+              }
+              LinkComponent={Link}
+            />
+            <Box sx={{ backgroundColor: 'grey.50' }}>
+              <Section sx={{ root: { pt: { xs: 15 } } }}>
+                <IconTabs
+                  aria-label="public profile tabs"
+                  tabs={tabs}
+                  linkComponent={Link}
+                  activeTab={activeTab}
+                  mobileFullWidth
+                />
+                <Flex sx={{ ...ecocreditsByAccountStyles.padding }}>
+                  <Box sx={{ width: '100%' }}>
+                    <Outlet />
+                  </Box>
+                </Flex>
+              </Section>
             </Box>
-          </Flex>
-        </Section>
-      </Box>
-    </>
+          </>
+        )}
+      </>
+    </WithLoader>
   );
 };

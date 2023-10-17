@@ -56,7 +56,7 @@ export const SellOrdersActionsBar = ({
           width: '100%',
         }}
       >
-        {avgPricePerTonLabel && (
+        {avgPricePerTonLabel && !!onChainProjectId && (
           <Box
             sx={{
               display: 'flex',
@@ -77,7 +77,7 @@ export const SellOrdersActionsBar = ({
             <Subtitle>{avgPricePerTonLabel}</Subtitle>
           </Box>
         )}
-        {!isCommunityCredit && (
+        {(!isCommunityCredit || !onChainProjectId) && (
           <OutlinedButton
             onClick={onBookCallButtonClick}
             size={isMobile ? 'small' : 'medium'}
@@ -86,32 +86,34 @@ export const SellOrdersActionsBar = ({
             {BOOK_CALL}
           </OutlinedButton>
         )}
-        <InfoTooltip
-          title={isBuyButtonDisabled ? BUY_DISABLED_TOOLTIP : ''}
-          arrow
-          placement="top"
-        >
-          <span>
-            <ContainedButton
-              startIcon={<CurrentCreditsIcon height="18px" width="18px" />}
-              onClick={() => {
-                track<'buy1', Buy1Event>('buy1', {
-                  url: location.pathname,
-                  buttonLocation: 'stickyNav',
-                  projectName,
-                  projectId: onChainProjectId,
-                  creditClassId: onChainCreditClassId,
-                  creditClassName,
-                });
-                onBuyButtonClick();
-              }}
-              disabled={isBuyButtonDisabled}
-              sx={{ height: '100%' }}
-            >
-              {isMobile ? 'BUY' : 'BUY CREDITS'}
-            </ContainedButton>
-          </span>
-        </InfoTooltip>
+        {!!onChainProjectId && (
+          <InfoTooltip
+            title={isBuyButtonDisabled ? BUY_DISABLED_TOOLTIP : ''}
+            arrow
+            placement="top"
+          >
+            <span>
+              <ContainedButton
+                startIcon={<CurrentCreditsIcon height="18px" width="18px" />}
+                onClick={() => {
+                  track<'buy1', Buy1Event>('buy1', {
+                    url: location.pathname,
+                    buttonLocation: 'stickyNav',
+                    projectName,
+                    projectId: onChainProjectId,
+                    creditClassId: onChainCreditClassId,
+                    creditClassName,
+                  });
+                  onBuyButtonClick();
+                }}
+                disabled={isBuyButtonDisabled}
+                sx={{ height: '100%' }}
+              >
+                {isMobile ? 'BUY' : 'BUY CREDITS'}
+              </ContainedButton>
+            </span>
+          </InfoTooltip>
+        )}
       </Box>
     </StickyBar>
   );

@@ -5,17 +5,26 @@ import Grid, { GridProps } from '@mui/material/Grid';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { Loading } from 'web-components/lib/components/loading';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
+import { Body } from 'web-components/lib/components/typography';
 
-import { ERROR_TIMEOUT } from './ChooseCreditClass.config';
+import { Link } from 'components/atoms';
+
+import {
+  CHOOSE_CREDIT_CLASS_DESCRIPTION,
+  CHOOSE_CREDIT_CLASS_HREF,
+  CHOOSE_CREDIT_CLASS_LINK,
+  ERROR_TIMEOUT,
+} from './ChooseCreditClass.config';
 
 interface TemplateProps {
   justifyContent?: GridProps['justifyContent'];
   error: string;
   loading?: boolean;
+  isIssuer?: boolean;
 }
 
 const ChooseCreditClassGrid: React.FC<React.PropsWithChildren<TemplateProps>> =
-  ({ justifyContent = 'flex-start', error, loading, children }) => {
+  ({ justifyContent = 'flex-start', error, loading, isIssuer, children }) => {
     return (
       <Box
         sx={theme => ({
@@ -23,7 +32,19 @@ const ChooseCreditClassGrid: React.FC<React.PropsWithChildren<TemplateProps>> =
           borderTop: `1px ${theme.palette.grey[100]} solid`,
         })}
       >
-        <OnBoardingSection title="Choose a credit class">
+        <OnBoardingSection
+          title="Choose a credit class"
+          headerChildren={
+            isIssuer ? (
+              <Body size="lg" as="p" pt={5} textAlign="center">
+                {CHOOSE_CREDIT_CLASS_DESCRIPTION}{' '}
+                <Link href={CHOOSE_CREDIT_CLASS_HREF}>
+                  {CHOOSE_CREDIT_CLASS_LINK}
+                </Link>
+              </Body>
+            ) : undefined
+          }
+        >
           <Grid
             container
             spacing={4}

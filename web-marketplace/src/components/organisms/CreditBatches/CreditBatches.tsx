@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { SxProps } from '@mui/material';
 import Box from '@mui/material/Box';
 import cx from 'clsx';
@@ -20,14 +20,15 @@ import { truncateHash } from 'web-components/lib/utils/truncate';
 import type { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { getHashUrl } from 'lib/block-explorer';
-import { getBatchesWithSupply } from 'lib/ecocredit/api';
-import { ledgerRESTUri } from 'lib/ledger';
 
 import { AccountLink, Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { NoCredits } from 'components/molecules';
 
-import { useLedger } from '../../../ledger';
+import {
+  CreditBatchesHeadCell,
+  creditBatchesHeadCells,
+} from './CreditBatches.config';
 import { useCreditBatchesStyles } from './CreditBatches.styles';
 
 interface CreditBatchProps {
@@ -44,45 +45,6 @@ interface CreditBatchProps {
   };
 }
 
-interface HeadCell {
-  id: keyof BatchInfoWithSupply;
-  label: string;
-  numeric: boolean;
-  wrap?: boolean;
-  tooltip?: string; // the content for the info tooltip
-}
-
-const headCells: HeadCell[] = [
-  { id: 'txhash', numeric: false, label: 'tx hash' },
-  { id: 'projectName', numeric: false, label: 'project' },
-  { id: 'classId', numeric: false, label: 'credit class' },
-  { id: 'denom', numeric: false, label: 'batch denom' },
-  { id: 'issuer', numeric: false, label: 'issuer' },
-  {
-    id: 'tradableAmount',
-    numeric: true,
-    label: 'total amount tradable',
-    wrap: true,
-  },
-  {
-    id: 'retiredAmount',
-    numeric: true,
-    label: 'total amount retired',
-    wrap: true,
-  },
-  {
-    id: 'cancelledAmount',
-    numeric: true,
-    label: 'total amount cancelled',
-    wrap: true,
-    tooltip:
-      "Cancelled credits have been removed from from the credit batch's tradable supply. Cancelling credits is permanent and implies the credits have been moved to another chain or registry.",
-  },
-  { id: 'startDate', numeric: true, label: 'start date' },
-  { id: 'endDate', numeric: true, label: 'end date' },
-  { id: 'projectLocation', numeric: false, label: 'project location' },
-];
-
 const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
   creditClassId,
   filteredColumns,
@@ -95,41 +57,29 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
   sx,
 }) => {
   const { classes } = useCreditBatchesStyles();
-  const [batches, setBatches] = useState<BatchInfoWithSupply[]>([]);
-  let columnsToShow = [...headCells];
-  const { dataClient, ecocreditClient } = useLedger();
 
-  useEffect(() => {
-    if (!ledgerRESTUri) return;
-    if (creditBatches) {
-      setBatches(creditBatches);
-    } else if (creditClassId) {
-      getBatchesWithSupply({ creditClassId, dataClient, ecocreditClient })
-        .then(sortableBatches => {
-          setBatches(sortableBatches.data);
-        })
-        .catch(console.error); // eslint-disable-line no-console
-    }
-  }, [creditClassId, creditBatches, dataClient, ecocreditClient]);
+  let columnsToShow = [...creditBatchesHeadCells];
 
   // We hide the classId column if creditClassId provided (redundant)
   if (creditClassId) {
-    columnsToShow = headCells.filter((hc: HeadCell) => hc.id !== 'classId');
+    columnsToShow = creditBatchesHeadCells.filter(
+      (hc: CreditBatchesHeadCell) => hc.id !== 'classId',
+    );
   }
   // Ditto for project location on project page
   if (filteredColumns) {
     columnsToShow = columnsToShow.filter(
-      (hc: HeadCell) => !filteredColumns.includes(hc.id),
+      (hc: CreditBatchesHeadCell) => !filteredColumns.includes(hc.id),
     );
   }
 
-  const someTx = batches.some(batch => batch.txhash);
+  const someTx = creditBatches?.some(batch => batch.txhash);
 
   if (!someTx) {
     columnsToShow = columnsToShow.filter(column => column.id !== 'txhash');
   }
 
-  if (!batches?.length) {
+  if (!creditBatches?.length) {
     return (
       <NoCredits
         title="No credits issued"
@@ -171,7 +121,7 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
       initialPaginationParams={initialPaginationParams}
       isIgnoreOffset={isIgnoreOffset}
       sx={sx}
-      rows={batches.map(batch => {
+      rows={creditBatches.map(batch => {
         /* eslint-disable react/jsx-key */
         let result = [];
         if (someTx) {
@@ -260,7 +210,7 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
     />
   );
 
-  return ledgerRESTUri && batches.length > 0 ? (
+  return creditBatches.length > 0 ? (
     withSection ? (
       <Section
         classes={{ root: classes.section, title: classes.title }}

@@ -8,6 +8,7 @@ import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 
 import { LinkWithArrow } from 'components/atoms';
 
+import { RAW_NUMBER_RDF_TYPES } from './MetaDetail.constants';
 import { BaseValue, isCompactedNameUrlOrOptionalUrl } from './MetaDetail.types';
 import { fromISO8601 } from './MetaDetail.utils';
 
@@ -28,10 +29,15 @@ const MetaDetailBaseValue: React.FC<Props> = ({
   const isNumber = typeof value === 'number';
   const isString = typeof value === 'string';
   const isBoolean = typeof value === 'boolean';
-  if (isString || isNumber) {
-    if (isNumber) {
+
+  if (isNumber) {
+    if (!RAW_NUMBER_RDF_TYPES.includes(rdfType ?? '')) {
       formattedValue = formatNumber({ num: value });
-    } else if (rdfType === 'xsd:date') {
+    } else {
+      formattedValue = String(value);
+    }
+  } else if (isString) {
+    if (rdfType === 'xsd:date') {
       formattedValue = formatDate(value);
     } else if (rdfType?.includes('Duration')) {
       formattedValue = fromISO8601(value) || value;

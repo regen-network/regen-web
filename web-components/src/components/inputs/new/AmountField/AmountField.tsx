@@ -34,7 +34,10 @@ const AmountField = forwardRef<HTMLDivElement, AmountFieldProps>(
     return (
       <>
         <AmountTextField
-          {...props}
+          customInputProps={{
+            step: 'any',
+            max: availableAmount,
+          }}
           ref={ref}
           name={name}
           type="number"
@@ -49,6 +52,7 @@ const AmountField = forwardRef<HTMLDivElement, AmountFieldProps>(
               denom={denom}
             />
           }
+          {...props}
         />
         <AuxiliaryLabel
           availableAmount={availableAmount}

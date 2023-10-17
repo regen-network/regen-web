@@ -55,6 +55,7 @@ export const BatchMetadataAdditionalInfo = <
       <BatchMetadataMetaDetail
         label="cfc vintage year"
         value={cfcVintageYear}
+        rdfType={getFieldType('regen:cfcVintageYear', context)}
       />
       <BatchMetadataMetaDetail
         label="verification reports"

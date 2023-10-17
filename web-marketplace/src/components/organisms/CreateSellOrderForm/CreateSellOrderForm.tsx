@@ -72,7 +72,7 @@ const CreateSellOrderForm: React.FC<Props> = ({
   const availableAmount = availableAmountByBatch[batchDenom ?? ''];
   const { setValue } = form;
   const onMaxClick = () =>
-    setValue('amount', availableAmountByBatch[batchDenom ?? ''], {
+    setValue('amount', availableAmount, {
       shouldDirty: true,
     });
 
@@ -149,10 +149,6 @@ const CreateSellOrderForm: React.FC<Props> = ({
         error={!!errors['amount']}
         helperText={errors['amount']?.message}
         denom={batchDenom ?? ''}
-        customInputProps={{
-          step: 'any',
-          max: availableAmount,
-        }}
         onMaxClick={onMaxClick}
         {...form.register('amount')}
       />

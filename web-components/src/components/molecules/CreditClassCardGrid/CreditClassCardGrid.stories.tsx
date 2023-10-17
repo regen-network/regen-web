@@ -11,7 +11,7 @@ export default {
 type Story = StoryObj<typeof CreditClassCardGrid>;
 
 export const Basic: Story = {
-  render: args => <CreditClassCardGrid {...args} />,
+  render: args => <CreditClassCardGrid {...args} sx={{ maxWidth: 365 }} />,
 };
 
 Basic.args = {

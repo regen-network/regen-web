@@ -38,7 +38,6 @@ export const CreditClassCardGrid = ({
       elevation={1}
       sx={[
         {
-          maxWidth: 365,
           border: '1px solid',
           borderColor: 'grey.100',
           borderRadius: '10px',

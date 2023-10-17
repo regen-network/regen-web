@@ -1,9 +1,9 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useState } from 'react';
-import { Box, Link } from '@mui/material';
+import { Box } from '@mui/material';
+import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
-import OutlinedButton from '../../../components/buttons/OutlinedButton';
-import { Body } from '../../../components/typography';
 import { KeplrWalletConnectModal } from './KeplrWalletConnectModal';
 
 export default {
@@ -17,40 +17,30 @@ export default {
 type Story = StoryObj<typeof KeplrWalletConnectModal>;
 
 export const Basic: Story = {
+  args: {
+    helpLink: {
+      href: '#',
+      text: 'set up a Keplr wallet →',
+    },
+    button: {
+      text: 'connect wallet',
+      onClick: action('connect wallet'),
+      startIcon: (
+        <Box
+          component="img"
+          src={'/wallets/keplr-wallet-extension.png'}
+          alt="keplr"
+          sx={{ width: 21, mr: 2 }}
+        />
+      ),
+    },
+  },
   render: args => {
     const [open, setOpen] = useState(true);
     const onClose = () => {
       setOpen(false);
     };
 
-    return (
-      <KeplrWalletConnectModal
-        {...args}
-        onClose={onClose}
-        open={open}
-        helpLink={
-          <Body sx={{ mt: 2 }}>
-            {'Learn how to '}
-            <Link>{'set up a Keplr wallet →'}</Link>
-          </Body>
-        }
-        button={
-          <OutlinedButton
-            startIcon={
-              <Box
-                component="img"
-                src={'/wallets/keplr-wallet-extension.png'}
-                alt="keplr"
-                sx={{ width: 21, mr: 2 }}
-              />
-            }
-            sx={{ mt: 12.5 }}
-            size="large"
-          >
-            connect wallet
-          </OutlinedButton>
-        }
-      />
-    );
+    return <KeplrWalletConnectModal {...args} onClose={onClose} open={open} />;
   },
 };

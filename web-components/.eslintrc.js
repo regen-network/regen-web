@@ -7,7 +7,6 @@ module.exports = {
     {
       files: ['*.tsx', '*.ts'],
       rules: {
-        'react-hooks/rules-of-hooks': 'off',
         'simple-import-sort/imports': [
           'error',
           {

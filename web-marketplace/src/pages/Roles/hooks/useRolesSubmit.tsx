@@ -123,8 +123,6 @@ const useRolesSubmit = ({
         // In creation or edit mode, we always store references to the project stakeholders in the project table
         // which should be in projectPatch if new or updated
         if (doUpdateMetadata || doUpdateAdmin) {
-          console.log(onChainProject);
-
           // In on-chain edit mode, we need to update the project on-chain metadata and/or admin if needed
           if (isEdit && !!onChainProject) {
             await projectEditSubmit(

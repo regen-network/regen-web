@@ -1,6 +1,7 @@
 import { Head, Html, Main, NextScript } from "next/document";
 
 import { augmentDocumentWithEmotionCache } from "./_app";
+import Script from 'next/script';
 
 const Document = () => {
   return (
@@ -21,7 +22,7 @@ const Document = () => {
       <body>
       <Main />
       <NextScript />
-      <script src="/regenie.js" />
+      <Script src="/regenie.js" />
       </body>
     </Html>
   );

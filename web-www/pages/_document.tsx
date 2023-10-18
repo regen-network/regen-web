@@ -18,11 +18,11 @@ const Document = () => {
           type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
         />
+        <Script src="/regenie.js" />
       </Head>
       <body>
         <Main />
         <NextScript />
-        <Script src="/regenie.js" />
       </body>
     </Html>
   );

@@ -1,7 +1,7 @@
-import { Head, Html, Main, NextScript } from "next/document";
-
-import { augmentDocumentWithEmotionCache } from "./_app";
+import { Head, Html, Main, NextScript } from 'next/document';
 import Script from 'next/script';
+
+import { augmentDocumentWithEmotionCache } from './_app';
 
 const Document = () => {
   return (
@@ -20,9 +20,9 @@ const Document = () => {
         />
       </Head>
       <body>
-      <Main />
-      <NextScript />
-      <Script src="/regenie.js" />
+        <Main />
+        <NextScript />
+        <Script src="/regenie.js" />
       </body>
     </Html>
   );

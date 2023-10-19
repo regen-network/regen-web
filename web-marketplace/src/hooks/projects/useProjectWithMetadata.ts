@@ -156,9 +156,10 @@ export const useProjectWithMetadata = ({
       });
     }
   }, [
+    reactQueryClient,
+    wallet?.address,
     createOrEditOffChain,
     editOnChain,
-    reactQueryClient,
     projectId,
     onChainProject?.admin,
   ]);

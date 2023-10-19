@@ -1,4 +1,5 @@
 import { Head, Html, Main, NextScript } from 'next/document';
+import Script from 'next/script';
 
 import { augmentDocumentWithEmotionCache } from './_app';
 
@@ -21,6 +22,7 @@ const Document = () => {
       <body>
         <Main />
         <NextScript />
+        <script src="/regenie.js" async />
       </body>
     </Html>
   );

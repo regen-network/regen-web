@@ -137,13 +137,13 @@ const LoginButton = ({ size = 'small' }: Props) => {
         onClose={onModalClose}
         wallets={walletsUiConfig}
         socialProviders={socialProviders}
-        onEmailSubmit={async values => {
-          if (token && values.email) {
+        onEmailSubmit={async ({ email }) => {
+          if (token) {
             try {
               await postData({
-                url: `${apiUri}/marketplace/v1/auth/magiclogin`,
+                url: `${apiUri}/marketplace/v1/auth/passcode`,
                 data: {
-                  destination: values.email,
+                  email,
                 },
                 token,
               });

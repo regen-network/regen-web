@@ -12,7 +12,7 @@ import {
   addWalletModalConnectAtom,
   addWalletModalRemoveAtom,
 } from 'lib/atoms/modals.atoms';
-import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
+import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 
 import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';

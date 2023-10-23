@@ -22,8 +22,8 @@ import { RoleSubmitProps } from 'pages/Roles/hooks/useRolesSubmit';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
-import { getPartiesByAccountIdQuery } from '../../../lib/queries/react-query/registry-server/graphql/getPartiesByAccountIdById/getPartiesByAccountIdQuery';
-import { getPartiesByNameOrAddrQuery } from '../../../lib/queries/react-query/registry-server/graphql/getPartiesByNameOrAddr/getPartiesByNameOrAddrQuery';
+import { getPartiesByAccountIdQuery } from '../../../lib/queries/react-query/registry-server/getAccounts/getAccountsQuery';
+import { getPartiesByNameOrAddrQuery } from '../../../lib/queries/react-query/registry-server/graphql/getAccountsByNameOrAddr/getAccountsByNameOrAddrQuery';
 import { useWallet } from '../../../lib/wallet/wallet';
 import { useProjectEditContext } from '../../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../../molecules';

@@ -1,0 +1,11 @@
+query AccountProjectsByAddr($addr: String!) {
+  accountByAddr(addr: $addr) {
+    id
+    addr
+    projectsByAdminAccountId {
+      nodes {
+        ...projectFields
+      }
+    }
+  }
+}

@@ -10,8 +10,8 @@ query AllProjects {
       creditClassByCreditClassId {
         id
         onChainId
-        partyByRegistryId {
-          ...partyFields
+        accountByRegistryId {
+          ...accountFields
         }
         creditClassVersionsById {
           nodes {

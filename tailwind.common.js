@@ -2,6 +2,9 @@
 // of each project's tailwind.config.js file.
 module.exports = {
   theme: {
+    fontFamily: {
+      lato: ['"Lato"', '-apple-system', 'sans-serif'],
+    },
     colors: {
       // Make sure these guidelines are followed when adding new colors: https://tailwindcss.com/docs/customizing-colors#using-css-variables
       // Color variables should be added to tailwind.css.
@@ -38,7 +41,7 @@ module.exports = {
         300: 'rgb(var(--blue-300) / <alpha-value>)',
         200: 'rgb(var(--blue-200) / <alpha-value>)',
         100: 'rgb(var(--blue-100) / <alpha-value>)',
-      }
+      },
     },
     spacing: {
       // This spacing scale is based on the actual pixel values converted to REM values.

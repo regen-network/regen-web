@@ -28,10 +28,25 @@ type Story = StoryObj<typeof EmailConfirmationModal>;
 
 export const Basic: Story = {
   args: {
-    resendTimer: 59,
+    resendText: 'Don’t see anything?',
+    resendButtonLink: { text: 'Resend email', onClick: action('resend') },
+    mailLink: { text: 'joemcnab@gmail.com', href: '' },
+    error: '',
   },
   render: args => {
     const [open, setOpen] = useState(true);
+    const [, setResult] = useState<undefined | string>();
+    const [error, setError] = useState<undefined | string>();
+
+    const handleOnChange = (code: string) => {
+      setResult(code);
+      if (code.length === 6) {
+        setError('Incorrect code! Double-check the code and try again.');
+      } else {
+        setError(undefined);
+      }
+    };
+
     const onClose = () => {
       setOpen(false);
     };
@@ -41,8 +56,8 @@ export const Basic: Story = {
         {...args}
         onClose={onClose}
         open={open}
-        mailLinkChildren={<Link>{'joemcnab@gmail.com'}</Link>}
-        resendLinkChildren={<Link>{'Resend email'}</Link>}
+        error={error ?? args.error}
+        onCodeChange={handleOnChange}
       />
     );
   },

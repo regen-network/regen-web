@@ -1,9 +1,14 @@
-import { ReactNode } from 'react';
-import { Box } from '@mui/material';
+import { ReactNode, useRef } from 'react';
+import { Box, Link } from '@mui/material';
 
 import ContainedButton from 'src/components/buttons/ContainedButton';
 import { TextButton } from 'src/components/buttons/TextButton';
+import {
+  ConfirmationCode,
+  ConfirmationCodeRef,
+} from 'src/components/inputs/new/ConfirmationCode/ConfirmationCode';
 import { ButtonType } from 'src/types/shared/buttonType';
+import { LinkType } from 'src/types/shared/linkType';
 
 import { Body, Title } from '../../typography';
 import Modal, { RegenModalProps } from '..';
@@ -14,26 +19,35 @@ import {
 } from './EmailConfirmationModal.constants';
 
 export interface EmailConfirmationModalProps extends RegenModalProps {
-  mailLinkChildren: JSX.Element;
-  resendLinkChildren: JSX.Element;
-  codeInputs?: ReactNode;
-  resendTimer?: number;
+  mailLink: LinkType;
+  resendText?: string;
+  error?: ReactNode;
+  resendButtonLink?: ButtonType;
   cancelButton: ButtonType;
   signInButton: ButtonType;
+  onCodeChange: (code: string) => void;
 }
 
 export const EmailConfirmationModal = ({
   open,
-  mailLinkChildren,
-  resendLinkChildren,
-  codeInputs,
-  resendTimer,
+  mailLink,
+  resendText,
+  resendButtonLink,
+  error,
   cancelButton,
   signInButton,
   onClose,
+  onCodeChange,
 }: EmailConfirmationModalProps) => {
+  const codeInputRef = useRef<ConfirmationCodeRef>(null);
+
   return (
-    <Modal open={open} onClose={onClose} isFullscreenMobile={false}>
+    <Modal
+      open={open}
+      onClose={onClose}
+      isFullscreenMobile={false}
+      className="font-lato"
+    >
       <Box
         sx={{
           maxWidth: 460,
@@ -46,18 +60,39 @@ export const EmailConfirmationModal = ({
           {EMAIL_CONFIRMATION_TITLE}
         </Title>
         <Body size="lg" align="center" mb={5}>
-          {EMAIL_CONFIRMATION_DESCRIPTION} {mailLinkChildren}
+          {EMAIL_CONFIRMATION_DESCRIPTION}{' '}
+          <Link href={mailLink.href}>{mailLink.text}</Link>
           {'.'}
         </Body>
-        <Body size="lg" align="center" mb={5}>
+        <Body size="lg" align="center" mb={5} sx={{ fontWeight: 700 }}>
           {EMAIL_CONFIRMATION_CODE_HELPER}
         </Body>
-        <hr className="h-1 w-full bg-grey-300 mb-40 border-0" />
-        {resendTimer && (
-          <Body
-            sx={{ mb: 13.5, width: '100%' }}
-          >{`Resend after ${resendTimer} seconds`}</Body>
+        <ConfirmationCode
+          onChange={onCodeChange}
+          ref={codeInputRef}
+          className="mb-20"
+        />
+        {error && (
+          <p className="text-error-400 font-bold text-center text-lg">
+            {error}
+          </p>
         )}
+        <hr className="h-1 w-full bg-grey-300  mb-40 border-0 mt-50" />
+        <div className="flex justify-start items-center w-full mb-50 text-lg">
+          {resendText && (
+            <p className="italic text-grey-500 mr-5">{resendText}</p>
+          )}
+          {resendButtonLink && (
+            <div
+              role="button"
+              onClick={resendButtonLink.onClick}
+              className="inline-block font-bold text-brand-400 whitespace-nowrap cursor-pointer"
+            >
+              {resendButtonLink.text}
+            </div>
+          )}
+          {'.'}
+        </div>
         <Box sx={{ display: 'flex', justifyContent: 'end', width: '100%' }}>
           <TextButton
             className="mr-40"

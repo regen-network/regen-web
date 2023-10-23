@@ -17,7 +17,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { truncate } from 'web-components/lib/utils/truncate';
 
 import { addWalletModalSwitchWarningAtom } from 'lib/atoms/modals.atoms';
-import { getPartiesByAccountIdQuery } from 'lib/queries/react-query/registry-server/graphql/getPartiesByAccountIdById/getPartiesByAccountIdQuery';
+import { getPartiesByAccountIdQuery } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useProfileItems } from 'pages/Dashboard/hooks/useProfileItems';

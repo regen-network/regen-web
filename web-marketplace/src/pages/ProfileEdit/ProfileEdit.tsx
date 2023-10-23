@@ -10,8 +10,8 @@ import { Title } from 'web-components/lib/components/typography';
 
 import { useUpdatePartyByIdMutation } from 'generated/graphql';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
-import { getPartiesByAccountIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getPartiesByAccountIdById/getPartiesByAccountIdQuery.utils';
-import { getPartyByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery.utils';
+import { getPartiesByAccountIdQueryKey } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.utils';
+import { getPartyByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { WarningModal } from 'pages/ProjectEdit/ProjectEdit.WarningModal';

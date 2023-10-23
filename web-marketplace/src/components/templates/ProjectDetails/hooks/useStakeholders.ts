@@ -12,7 +12,7 @@ import {
   CreditClassMetadataLD,
 } from 'lib/db/types/json-ld';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
+import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 
 import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
 import { getDisplayPartyOrAddress } from 'components/organisms/DetailsSection/DetailsSection.utils';

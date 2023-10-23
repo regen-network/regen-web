@@ -17,7 +17,7 @@ import truncate from 'lodash/truncate';
 
 import { PartyByAddrQuery, useGetCurrentAccountQuery } from 'generated/graphql';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
+import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { useAddAddress } from './hooks/useAddAddress';

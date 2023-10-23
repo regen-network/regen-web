@@ -67,7 +67,7 @@ export const useOnAccountChange = ({
     const listener = async (): Promise<void> => {
       if (wallet) {
         // If using Keplr mobile browser, just connect to the new address automatically.
-        // This is because Keplr mobile browser or WalletConnect do not support signArbitrary (used in login/addAddress).
+        // This is because Keplr mobile browser or WalletConnect do not support signArbitrary (used in login).
         // We are unable to listen on the event with WalletConnect so it's not checked here.
         if (keplrMobileWeb) {
           connectWallet({ walletType: WalletType.Keplr, doLogin: false });

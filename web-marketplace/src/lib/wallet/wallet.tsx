@@ -146,14 +146,6 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     walletConnect,
   });
 
-  const addAddress = useAddAddress({ signArbitrary, setError, setWallet });
-  const handleAddAddress = useHandleAddAddress({
-    wallet,
-    walletConfigRef,
-    accountId,
-    addAddress,
-  });
-
   useAutoConnect({
     connectWallet,
     setError,
@@ -199,7 +191,6 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         loaded: loaded && !isFetching,
         connect,
         disconnect,
-        handleAddAddress: loginDisabled ? undefined : handleAddAddress,
         connectionType,
         error,
         signArbitrary,

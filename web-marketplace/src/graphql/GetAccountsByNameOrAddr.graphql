@@ -1,0 +1,13 @@
+query GetAccountsByNameOrAddr($input: String) {
+  getAccountsByNameOrAddr(input: $input) {
+    nodes {
+      id
+      creatorId
+      name
+      type
+      image
+      description
+      addr
+    }
+  }
+}

@@ -1,7 +1,0 @@
-mutation UpdateWalletById($input: UpdateWalletByIdInput!) {
-  updateWalletById(input: $input) {
-    wallet {
-      id
-    }
-  }
-}

@@ -1,5 +1,5 @@
-query AccountById($id: UUID!) {
-  accountById(id: $id) {
+query AccountByAddr($addr: String!) {
+  accountByAddr(addr: $addr) {
     id
     name
     type
@@ -8,6 +8,5 @@ query AccountById($id: UUID!) {
     description
     websiteLink
     twitterLink
-    addr
   }
 }

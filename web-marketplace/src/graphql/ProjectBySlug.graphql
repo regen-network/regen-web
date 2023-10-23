@@ -1,6 +1,5 @@
-fragment partyFields on Party {
+fragment accountFields on Account {
   id
-  accountId
   creatorId
   type
   name
@@ -8,13 +7,10 @@ fragment partyFields on Party {
   image
   websiteLink
   twitterLink
-  organizationByPartyId {
+  organizationByAccountId {
     ...organizationFields
   }
-  walletByWalletId {
-    id
-    addr
-  }
+  addr
 }
 
 fragment organizationFields on Organization {

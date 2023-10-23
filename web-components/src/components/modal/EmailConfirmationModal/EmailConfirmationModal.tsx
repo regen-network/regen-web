@@ -3,10 +3,8 @@ import { Box, Link } from '@mui/material';
 
 import ContainedButton from 'src/components/buttons/ContainedButton';
 import { TextButton } from 'src/components/buttons/TextButton';
-import {
-  ConfirmationCode,
-  ConfirmationCodeRef,
-} from 'src/components/inputs/new/ConfirmationCode/ConfirmationCode';
+import { ConfirmationCode } from 'src/components/inputs/new/ConfirmationCode/ConfirmationCode';
+import { ConfirmationCodeRef } from 'src/components/inputs/new/ConfirmationCode/ConfirmationCode.types';
 import { ButtonType } from 'src/types/shared/buttonType';
 import { LinkType } from 'src/types/shared/linkType';
 

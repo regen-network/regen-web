@@ -6,6 +6,8 @@ import React, {
 } from 'react';
 
 import { cn } from '../../../../utils/styles/cn';
+import { propsMap } from './ConfirmationCode.mapping';
+import { ConfirmationCodeRef } from './ConfirmationCode.types';
 
 const allowedCharactersValues = ['alpha', 'numeric', 'alphanumeric'] as const;
 
@@ -20,45 +22,6 @@ export type ConfirmationCodeProps = {
   length?: number;
   placeholder?: string;
   onChange: (res: string) => void;
-};
-
-type InputMode = 'text' | 'numeric';
-
-type InputType = 'text' | 'tel' | 'password';
-
-type InputProps = {
-  type: InputType;
-  inputMode: InputMode;
-  pattern: string;
-  min?: string;
-  max?: string;
-};
-
-export type ConfirmationCodeRef = {
-  focus: () => void;
-  clear: () => void;
-};
-
-const propsMap: { [key: string]: InputProps } = {
-  alpha: {
-    type: 'text',
-    inputMode: 'text',
-    pattern: '[a-zA-Z]{1}',
-  },
-
-  alphanumeric: {
-    type: 'text',
-    inputMode: 'text',
-    pattern: '[a-zA-Z0-9]{1}',
-  },
-
-  numeric: {
-    type: 'tel',
-    inputMode: 'numeric',
-    pattern: '[0-9]{1}',
-    min: '0',
-    max: '9',
-  },
 };
 
 export const ConfirmationCode = forwardRef<

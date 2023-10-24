@@ -78,6 +78,29 @@ function compareQuantityDescending(
   return 0;
 }
 
+// Sort pinned project at the beginning
+export function sortPinnedProject(
+  a: ProjectWithOrderData,
+  b: ProjectWithOrderData,
+  pinnedIds?: string[],
+): number {
+  if (!pinnedIds) return 0;
+
+  const aIdIndex = pinnedIds?.indexOf(a.id);
+  const aIndex = aIdIndex > 0 ? aIdIndex : pinnedIds?.indexOf(a.name);
+
+  const bIdIndex = pinnedIds?.indexOf(b.id);
+  const bIndex = bIdIndex > 0 ? bIdIndex : pinnedIds?.indexOf(b.name);
+
+  if (aIndex >= 0 && bIndex === -1) return -1;
+  if (aIndex === -1 && bIndex >= 0) return 1;
+  if (aIndex >= 0 && bIndex >= 0) {
+    return aIndex < bIndex ? -1 : 1;
+  }
+
+  return 0;
+}
+
 function getQuantities(
   a: ProjectWithOrderData,
   b: ProjectWithOrderData,

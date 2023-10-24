@@ -20,7 +20,12 @@ query allHomePage {
       ...gettingStartedResourcesSectionFields
     }
     projectsSection {
-      ...titleCustomBodyFields
+      titleCustomBody {
+        ...titleCustomBodyFields
+      }
+      projects {
+        projectId
+      }
     }
     creditClassesSection {
       ...titleCustomBodyFields

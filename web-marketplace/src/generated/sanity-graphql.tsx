@@ -22,6 +22,7 @@ export type Scalars = {
 
 
 
+
 export type ActionCard = {
   __typename?: 'ActionCard';
   _key?: Maybe<Scalars['String']>;
@@ -3011,7 +3012,7 @@ export type HomePage = Document & {
   _key?: Maybe<Scalars['String']>;
   seo?: Maybe<Seo>;
   heroSection?: Maybe<HomePageTopSection>;
-  projectsSection?: Maybe<TitleCustomBody>;
+  projectsSection?: Maybe<HomePageProjectsSection>;
   creditClassesSection?: Maybe<TitleCustomBody>;
   gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSection>;
   bottomBanner?: Maybe<BottomBanner>;
@@ -3028,10 +3029,30 @@ export type HomePageFilter = {
   _key?: Maybe<StringFilter>;
   seo?: Maybe<SeoFilter>;
   heroSection?: Maybe<HomePageTopSectionFilter>;
-  projectsSection?: Maybe<TitleCustomBodyFilter>;
+  projectsSection?: Maybe<HomePageProjectsSectionFilter>;
   creditClassesSection?: Maybe<TitleCustomBodyFilter>;
   gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSectionFilter>;
   bottomBanner?: Maybe<BottomBannerFilter>;
+};
+
+export type HomePageProjectsSection = {
+  __typename?: 'HomePageProjectsSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  titleCustomBody?: Maybe<TitleCustomBody>;
+  projects?: Maybe<Array<Maybe<Project>>>;
+};
+
+export type HomePageProjectsSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  titleCustomBody?: Maybe<TitleCustomBodyFilter>;
+};
+
+export type HomePageProjectsSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  titleCustomBody?: Maybe<TitleCustomBodySorting>;
 };
 
 export type HomePageSorting = {
@@ -3043,7 +3064,7 @@ export type HomePageSorting = {
   _key?: Maybe<SortOrder>;
   seo?: Maybe<SeoSorting>;
   heroSection?: Maybe<HomePageTopSectionSorting>;
-  projectsSection?: Maybe<TitleCustomBodySorting>;
+  projectsSection?: Maybe<HomePageProjectsSectionSorting>;
   creditClassesSection?: Maybe<TitleCustomBodySorting>;
   bottomBanner?: Maybe<BottomBannerSorting>;
 };
@@ -4707,7 +4728,7 @@ export type Project = Document & {
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
   projectName?: Maybe<Scalars['String']>;
-  /** on-chain project id */
+  /** on-chain project id, off-chain uuid or slug */
   projectId?: Maybe<Scalars['String']>;
   image?: Maybe<CustomImage>;
   location?: Maybe<Scalars['String']>;
@@ -8084,8 +8105,14 @@ export type AllHomePageQuery = (
       { __typename?: 'GettingStartedResourcesSection' }
       & GettingStartedResourcesSectionFieldsFragment
     )>, projectsSection?: Maybe<(
-      { __typename?: 'TitleCustomBody' }
-      & TitleCustomBodyFieldsFragment
+      { __typename?: 'HomePageProjectsSection' }
+      & { titleCustomBody?: Maybe<(
+        { __typename?: 'TitleCustomBody' }
+        & TitleCustomBodyFieldsFragment
+      )>, projects?: Maybe<Array<Maybe<(
+        { __typename?: 'Project' }
+        & Pick<Project, 'projectId'>
+      )>>> }
     )>, creditClassesSection?: Maybe<(
       { __typename?: 'TitleCustomBody' }
       & TitleCustomBodyFieldsFragment
@@ -9956,7 +9983,12 @@ export const AllHomePageDocument = gql`
       ...gettingStartedResourcesSectionFields
     }
     projectsSection {
-      ...titleCustomBodyFields
+      titleCustomBody {
+        ...titleCustomBodyFields
+      }
+      projects {
+        projectId
+      }
     }
     creditClassesSection {
       ...titleCustomBodyFields

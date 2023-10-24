@@ -3,7 +3,11 @@ import { useProjectsWithOrders } from 'hooks/projects/useProjectsWithOrders';
 
 import { FEATURE_PROJECTS_COUNT, PROJECTS_SORT } from '../Home.constants';
 
-export function useFeaturedProjects(): {
+type Props = {
+  pinnedIds?: string[];
+};
+
+export function useFeaturedProjects({ pinnedIds }: Props): {
   featuredProjects: ProjectWithOrderData[];
   loading: boolean;
 } {
@@ -12,6 +16,8 @@ export function useFeaturedProjects(): {
     limit: FEATURE_PROJECTS_COUNT,
     metadata: true, // to discard projects without metadata prop
     sort: PROJECTS_SORT,
+    pinnedIds,
+    useOffChainProjects: true,
   });
   return {
     featuredProjects: projectsWithOrderData,

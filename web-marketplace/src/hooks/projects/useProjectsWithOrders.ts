@@ -19,7 +19,10 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { useFetchAllOffChainProjects } from 'pages/Projects/hooks/useOffChainProjects';
 import { ProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders.types';
-import { sortProjects } from 'pages/Projects/utils/sortProjects';
+import {
+  sortPinnedProject,
+  sortProjects,
+} from 'pages/Projects/utils/sortProjects';
 import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 
 import { useLastRandomProjects } from './useLastRandomProjects';
@@ -35,6 +38,7 @@ export interface ProjectsWithOrdersProps {
   projectId?: string; // to filter by project
   skippedProjectId?: string; // to discard a specific project
   classId?: string; // to filter by class
+  pinnedIds?: string[]; // list of on-chain id, uuid or slug to pinned at the top
   sort?: string;
   creditClassFilter?: Record<string, boolean>;
 }
@@ -51,6 +55,7 @@ export function useProjectsWithOrders({
   useOffChainProjects = false,
   skippedProjectId,
   classId,
+  pinnedIds,
   sort = '',
   projectId,
   creditClassFilter = {},
@@ -164,16 +169,16 @@ export function useProjectsWithOrders({
   const creditClassSelected = Object.keys(creditClassFilter).filter(
     creditClassId => creditClassFilter[creditClassId],
   );
+
   const projectsFilteredByCreditClass = allProject.filter(project =>
     creditClassSelected.length === 0
       ? true
       : creditClassSelected.includes(project.creditClassId ?? ''),
   );
 
-  const sortedProjects = sortProjects(
-    projectsFilteredByCreditClass,
-    sort,
-  ).slice(offset, limit ? offset + limit : undefined);
+  const sortedProjects = sortProjects(projectsFilteredByCreditClass, sort)
+    .sort((a, b) => sortPinnedProject(a, b, pinnedIds))
+    .slice(offset, limit ? offset + limit : undefined);
 
   /* Metadata queries */
 

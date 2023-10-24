@@ -15,7 +15,7 @@ import { isBridgeEnabled } from 'lib/ledger';
 import { getProfileLink } from 'lib/profileLink';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
+import { useAccountInfo } from 'pages/ProfileEdit/hooks/useAccountInfo';
 import {
   DEFAULT_NAME,
   profileVariantMapping,
@@ -44,7 +44,8 @@ const Dashboard = (): JSX.Element => {
   } = useProfileItems({});
   const { wallet, accountId, partyByAddr } = useWallet();
   const location = useLocation();
-  const { party } = usePartyInfos({ partyByAddr });
+
+  const { party } = useAccountInfo({ partyByAddr });
   const { avatarImage, backgroundImage } = getUserImages({ party });
   const { creditClasses } = useFetchCreditClassesWithOrder({
     admin: wallet?.address,

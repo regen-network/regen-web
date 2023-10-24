@@ -14,7 +14,7 @@ import {
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 
-import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
+import { useAccountInfo } from 'pages/ProfileEdit/hooks/useAccountInfo';
 import { getDisplayPartyOrAddress } from 'components/organisms/DetailsSection/DetailsSection.utils';
 
 import { getDisplayParty } from '../ProjectDetails.utils';
@@ -59,7 +59,7 @@ export const useStakeholders = ({
       enabled: !!adminAddr && !!graphqlClient && !!csrfData,
     }),
   );
-  const { party } = usePartyInfos({ partyByAddr });
+  const { party } = useAccountInfo({ partyByAddr });
   const admin = getDisplayPartyOrAddress(adminAddr, party);
 
   return {

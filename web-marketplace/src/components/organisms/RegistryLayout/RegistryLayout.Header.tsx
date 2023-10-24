@@ -21,7 +21,7 @@ import { getPartiesByAccountIdQuery } from 'lib/queries/react-query/registry-ser
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useProfileItems } from 'pages/Dashboard/hooks/useProfileItems';
-import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
+import { useAccountInfo } from 'pages/ProfileEdit/hooks/useAccountInfo';
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 
@@ -76,7 +76,7 @@ const RegistryLayoutHeader: React.FC = () => {
       ? navigate('/profile/portfolio')
       : setAddWalletModalSwitchWarningAtom(atom => void (atom.open = true));
 
-  const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
+  const { party, defaultAvatar } = useAccountInfo({ partyByAddr });
 
   const color = headerColors[pathname]
     ? headerColors[pathname]

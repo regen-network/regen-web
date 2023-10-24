@@ -1,5 +1,6 @@
 import { apiUri } from 'lib/apiUri';
 
+import { GET_CSRF_QUERY_KEY } from './getCsrfTokenQuery.constants';
 import {
   ReactQueryCsrfTokenProps,
   ReactQueryCsrfTokenResponse,
@@ -8,7 +9,7 @@ import {
 export const getCsrfTokenQuery = ({
   ...params
 }: ReactQueryCsrfTokenProps): ReactQueryCsrfTokenResponse => ({
-  queryKey: ['csrfToken'],
+  queryKey: [GET_CSRF_QUERY_KEY],
   queryFn: async () => {
     const resp = await fetch(`${apiUri}/marketplace/v1/csrfToken`, {
       method: 'GET',

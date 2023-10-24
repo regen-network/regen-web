@@ -156,8 +156,8 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     wallet,
     keplrMobileWeb,
     walletConfigRef,
-    accountId,
-    addAddress,
+    // activeAccountId,
+    // authenticatedAccountIds,
     setAccountChanging,
   });
   useDetectKeplrMobileBrowser({

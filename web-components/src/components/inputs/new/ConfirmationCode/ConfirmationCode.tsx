@@ -169,7 +169,7 @@ export const ConfirmationCode = forwardRef<
           }}
           maxLength={1}
           className={cn(
-            'w-[45px] h-[60px] bg-grey-0 border-grey-300 border mr-20 text-lg text-center p-0 font-lato focus:outline-0 rounded-sm border-solid',
+            'w-[45px] h-[60px] bg-grey-0 border-grey-300 border mr-5 sm:mr-20 text-lg text-center p-0 font-lato focus:outline-0 rounded-sm border-solid',
             inputClassName,
           )}
           autoComplete={i === 0 ? 'one-time-code' : 'off'}

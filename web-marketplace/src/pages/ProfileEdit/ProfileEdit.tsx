@@ -22,7 +22,7 @@ import { EditProfileFormActionBar } from 'components/organisms/EditProfileForm/E
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
 
 import { useOnUploadCallback } from './hooks/useOnUploadCallback';
-import { usePartyInfos } from './hooks/usePartyInfos';
+import { useAccountInfo } from './hooks/useAccountInfo';
 import {
   DEFAULT_NAME,
   DEFAULT_PROFILE_AVATARS,
@@ -45,7 +45,7 @@ export const ProfileEdit = () => {
   const isDirtyRef = useRef<boolean>(false);
   const navigate = useNavigate();
 
-  const { party, defaultAvatar } = usePartyInfos({ partyByAddr });
+  const { party, defaultAvatar } = useAccountInfo({ partyByAddr });
 
   const initialValues: EditProfileFormSchemaType = useMemo(
     () => ({

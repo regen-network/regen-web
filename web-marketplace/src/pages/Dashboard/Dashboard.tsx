@@ -21,6 +21,7 @@ import {
   profileVariantMapping,
 } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { Link } from 'components/atoms';
+import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
 
 import {
   BRIDGE,
@@ -40,12 +41,14 @@ const Dashboard = (): JSX.Element => {
     isCreditClassCreator,
     isProjectAdmin,
     isIssuer,
-  } = useProfileItems();
+  } = useProfileItems({});
   const { wallet, accountId, partyByAddr } = useWallet();
   const location = useLocation();
-
   const { party } = usePartyInfos({ partyByAddr });
   const { avatarImage, backgroundImage } = getUserImages({ party });
+  const { creditClasses } = useFetchCreditClassesWithOrder({
+    admin: wallet?.address,
+  });
 
   const socialsLinks: SocialLink[] = useMemo(
     () =>
@@ -61,7 +64,7 @@ const Dashboard = (): JSX.Element => {
         ...PROJECTS,
       },
       {
-        hidden: !showCreditClasses,
+        hidden: !showCreditClasses || creditClasses.length === 0,
         ...CREDIT_CLASSES,
       },
       {
@@ -73,7 +76,7 @@ const Dashboard = (): JSX.Element => {
         ...BRIDGE,
       },
     ],
-    [isIssuer, showCreditClasses, showProjects],
+    [isIssuer, showCreditClasses, showProjects, creditClasses.length],
   );
 
   const activeTab = Math.max(

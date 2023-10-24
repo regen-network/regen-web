@@ -17,19 +17,20 @@ import { truncate } from 'web-components/lib/utils/truncate';
 import { getAccountUrl } from 'lib/block-explorer';
 import { isBridgeEnabled } from 'lib/ledger';
 import { getProfileLink } from 'lib/profileLink';
+import { useWallet } from 'lib/wallet/wallet';
 
 import {
   getSocialsLinks,
   getUserImages,
 } from 'pages/Dashboard/Dashboard.utils';
+import { useProfileItems } from 'pages/Dashboard/hooks/useProfileItems';
 import {
   DEFAULT_NAME,
   profileVariantMapping,
 } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
-import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
-import { useQueryIsProjectAdmin } from 'hooks/useQueryIsProjectAdmin';
+import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
 
 import { ProfileNotFound } from './EcocreditsByAccount.NotFound';
 import { ecocreditsByAccountStyles } from './EcocreditsByAccount.styles';
@@ -37,6 +38,7 @@ import { useProfileData } from './hooks/useProfileData';
 
 export const EcocreditsByAccount = (): JSX.Element => {
   const { accountAddressOrId } = useParams<{ accountAddressOrId: string }>();
+  const { wallet } = useWallet();
   const location = useLocation();
 
   const { address, party, isLoading } = useProfileData();
@@ -45,9 +47,12 @@ export const EcocreditsByAccount = (): JSX.Element => {
   const profileLink = accountAddressOrId
     ? getProfileLink(accountAddressOrId)
     : '';
+  const { creditClasses } = useFetchCreditClassesWithOrder({
+    admin: address,
+    userAddress: wallet?.address,
+  });
 
-  const { isIssuer, isLoadingIsIssuer } = useQueryIsIssuer({ address });
-  const { isProjectAdmin, isLoadingIsProjectAdmin } = useQueryIsProjectAdmin({
+  const { isIssuer, isProjectAdmin, showCreditClasses } = useProfileItems({
     address,
   });
 
@@ -70,7 +75,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
         label: 'Credit Classes',
         icon: <CreditClassIcon />,
         href: `/profiles/${accountAddressOrId}/credit-classes`,
-        hidden: true,
+        hidden: !showCreditClasses || creditClasses.length === 0,
       },
       {
         label: 'Credit Batches',
@@ -85,7 +90,13 @@ export const EcocreditsByAccount = (): JSX.Element => {
         hidden: !isBridgeEnabled,
       },
     ],
-    [accountAddressOrId, isIssuer, isProjectAdmin],
+    [
+      accountAddressOrId,
+      creditClasses.length,
+      isIssuer,
+      isProjectAdmin,
+      showCreditClasses,
+    ],
   );
 
   const activeTab = Math.max(
@@ -97,7 +108,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
 
   return (
     <WithLoader
-      isLoading={isLoading || isLoadingIsIssuer || isLoadingIsProjectAdmin}
+      isLoading={isLoading}
       sx={{
         py: 10,
         display: 'flex',

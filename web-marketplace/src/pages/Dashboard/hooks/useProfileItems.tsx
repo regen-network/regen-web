@@ -3,19 +3,22 @@ import { useQueryIsClassAdmin } from 'hooks/useQueryIsClassAdmin';
 import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
 import { useQueryIsProjectAdmin } from 'hooks/useQueryIsProjectAdmin';
 
-export const useProfileItems = () => {
-  const { isIssuer } = useQueryIsIssuer({});
-  const isCreditClassCreator = useQueryIfCreditClassCreator({});
-  const { isProjectAdmin } = useQueryIsProjectAdmin({});
-  const isCreditClassAdmin = useQueryIsClassAdmin();
+type Props = {
+  address?: string;
+};
+
+export const useProfileItems = ({ address }: Props) => {
+  const { isIssuer } = useQueryIsIssuer({ address });
+  const isCreditClassCreator = useQueryIfCreditClassCreator({ address });
+  const { isProjectAdmin } = useQueryIsProjectAdmin({ address });
+  const isCreditClassAdmin = useQueryIsClassAdmin({ address });
 
   const showProjects = isIssuer || isProjectAdmin;
   const showCreditClasses = isCreditClassCreator || isCreditClassAdmin;
 
   return {
     showProjects,
-    // Explicitly set to false until we enable the class creation flow
-    showCreditClasses: false && showCreditClasses,
+    showCreditClasses: showCreditClasses,
     isCreditClassCreator: false && isCreditClassCreator,
     isProjectAdmin: isProjectAdmin,
     isIssuer: isIssuer,

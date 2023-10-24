@@ -1,16 +1,16 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { Dummy } from './Dummy';
 
 export default {
   title: 'atoms/Dummy',
   component: Dummy,
-} as ComponentMeta<typeof Dummy>;
+} as Meta<typeof Dummy>;
 
-const Template: ComponentStory<typeof Dummy> = args => <Dummy {...args} />;
+type Story = StoryObj<typeof Dummy>;
 
-export const Default = Template.bind({});
+export const Basic: Story = { render: args => <Dummy {...args} /> };
 
-Default.args = {
+Basic.args = {
   label: 'Dummy',
 };

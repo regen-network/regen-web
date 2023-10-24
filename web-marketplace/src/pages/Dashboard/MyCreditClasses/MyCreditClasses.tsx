@@ -1,34 +1,44 @@
-import { useNavigate } from 'react-router-dom';
 import { Grid } from '@mui/material';
 
-import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
-import { CreateCreditClassCard } from 'web-components/lib/components/cards/CreateCards';
+import EditIcon from 'web-components/lib/components/icons/EditIcon';
+import { CreditClassGridCard } from 'web-components/src/components/molecules/CreditClassGridCard/CreditClassGridCard';
 
-import { useDashboardContext } from '../Dashboard.context';
+import { useWallet } from 'lib/wallet/wallet';
+
+import { Link } from 'components/atoms';
+import WithLoader from 'components/atoms/WithLoader';
+import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
+
+import { MY_CREDIT_CLASS_BUTTON } from './MyCreditClasses.constants';
 
 export const MyCreditClasses = (): JSX.Element => {
-  const navigate = useNavigate();
-  const { isCreditClassCreator } = useDashboardContext();
-  const isFirstCreditClass = false;
-  const error = '';
-
-  function handleCreate(): void {
-    navigate('/credit-classes/create');
-  }
+  const { wallet } = useWallet();
+  const { creditClasses, isLoadingCreditClasses } =
+    useFetchCreditClassesWithOrder({
+      admin: wallet?.address,
+    });
 
   return (
-    <>
+    <WithLoader
+      isLoading={isLoadingCreditClasses}
+      sx={{ display: 'flex', justifyContent: 'center' }}
+    >
       <Grid container spacing={8}>
-        <Grid item xs={12} md={6} lg={4}>
-          {isCreditClassCreator && (
-            <CreateCreditClassCard
-              isFirstCreditClass={isFirstCreditClass}
-              onClick={handleCreate}
+        {creditClasses.map(creditClass => (
+          <Grid item xs={12} md={6} lg={4}>
+            <CreditClassGridCard
+              {...creditClass}
+              button={{
+                text: MY_CREDIT_CLASS_BUTTON,
+                startIcon: <EditIcon sx={{ color: 'grey.100' }} />,
+                disabled: true,
+              }}
+              href={`/credit-classes/${creditClass.id}`}
+              LinkComponent={Link}
             />
-          )}
-        </Grid>
+          </Grid>
+        ))}
       </Grid>
-      {error && <ErrorBanner text={error} />}
-    </>
+    </WithLoader>
   );
 };

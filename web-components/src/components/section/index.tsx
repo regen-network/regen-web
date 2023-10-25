@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { Box, styled, SxProps } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 import ReactHtmlParser from 'html-react-parser';
@@ -10,6 +11,7 @@ import { Body, Title } from '../typography';
 
 export interface SectionProps {
   children?: any;
+  headerChildren?: ReactNode;
   className?: string;
   id?: string;
   classes?: {
@@ -109,6 +111,7 @@ const useStyles = makeStyles<StyleProps>()(
 
 const Section = ({
   children,
+  headerChildren,
   classes,
   className,
   id,
@@ -174,6 +177,7 @@ const Section = ({
               )}
             </Body>
           )}
+          {headerChildren && headerChildren}
         </div>
       )}
       {children}

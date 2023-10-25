@@ -4,9 +4,15 @@ query AllProjects {
       id
       slug
       metadata
+      onChainId
+      approved
+      published
       creditClassByCreditClassId {
         id
         onChainId
+        partyByRegistryId {
+          ...partyFields
+        }
         creditClassVersionsById {
           nodes {
             id

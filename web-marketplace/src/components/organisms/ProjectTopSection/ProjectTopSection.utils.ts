@@ -194,7 +194,9 @@ export const getRatingsAndCertificationsData = ({
   ratingIcons,
   certifications,
   certificationIcons,
-}: GetRatingAndCertificationsDataParams): RoundLogoItemsListType => {
+}: GetRatingAndCertificationsDataParams):
+  | RoundLogoItemsListType
+  | undefined => {
   const hasCertification = certifications && certifications.length > 0;
   const hasRating = ratings && ratings.length > 0;
   const certificationTitle = hasCertification ? CERTIFICATIONS : '';
@@ -246,5 +248,5 @@ export const getRatingsAndCertificationsData = ({
 
   const items: RoundLogoItemType[] = [...certificationItems, ...ratingItems];
 
-  return { title, items };
+  return items.length > 0 ? { title, items } : undefined;
 };

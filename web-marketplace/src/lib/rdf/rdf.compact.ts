@@ -7,12 +7,12 @@ export const jsonLdCompact = async (
   data: JsonLdDocument,
   context?: object,
 ): Promise<NodeObject> => {
-  const incomingContext = hasContext(data) ? data['@context'] : {};
+  const dataHasContext = hasContext(data);
+  const incomingContext = dataHasContext ? data['@context'] : {};
+  const fullContext = { ...COMPACTED_CONTEXT, ...context, ...incomingContext };
   return await jsonld.compact(
-    data,
-    JSON.parse(
-      JSON.stringify({ ...COMPACTED_CONTEXT, ...context, ...incomingContext }),
-    ),
+    { '@context': fullContext as ContextDefinition, ...data },
+    JSON.parse(JSON.stringify(fullContext)),
   );
 };
 

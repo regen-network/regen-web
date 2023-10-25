@@ -159,10 +159,25 @@ function ProjectTopSection({
     projectMetadata,
   });
 
+  const columnLayout =
+    (activityTags && activityTags.length > 0) ||
+    (ecosystemTags && ecosystemTags.length > 0) ||
+    impact.length > 0 ||
+    !!ratingsAndCertificationsData ||
+    !!otcCard;
+
   return (
     <Section classes={{ root: classes.section }}>
-      <Grid container>
-        <Grid item xs={12} md={8} sx={{ pr: { md: 19 } }}>
+      <Grid
+        container
+        sx={!columnLayout ? { maxWidth: 700, margin: '0 auto' } : undefined}
+      >
+        <Grid
+          item
+          xs={12}
+          md={columnLayout ? 8 : 12}
+          sx={columnLayout ? { pr: { md: 19 } } : undefined}
+        >
           {loading ? (
             <Skeleton height={124} />
           ) : (
@@ -214,7 +229,7 @@ function ProjectTopSection({
             program={program}
           />
           <Box>
-            {batchData?.totals && (
+            {onChainProjectId && batchData?.totals && (
               <ProjectBatchTotals
                 projectWithOrderData={projectWithOrderData}
                 soldOutProjectsIds={soldOutProjectsIds}
@@ -254,24 +269,26 @@ function ProjectTopSection({
             </div>
           )}
         </Grid>
-        <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 5 } }}>
-          <ImpactTags
-            activities={activityTags}
-            ecosystems={ecosystemTags}
-            impact={[...impact]}
-          />
-          {ratingsAndCertificationsData && (
-            <RoundLogoItemsList
-              {...ratingsAndCertificationsData}
-              sx={{ mb: { xs: 7.5, sm: 10 } }}
+        {columnLayout && (
+          <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 5 } }}>
+            <ImpactTags
+              activities={activityTags}
+              ecosystems={ecosystemTags}
+              impact={[...impact]}
             />
-          )}
-          {otcCard && (
-            <Box>
-              <ActionCard {...otcCard} variant="column" />
-            </Box>
-          )}
-        </Grid>
+            {ratingsAndCertificationsData && (
+              <RoundLogoItemsList
+                {...ratingsAndCertificationsData}
+                sx={{ mb: { xs: 7.5, sm: 10 } }}
+              />
+            )}
+            {otcCard && (
+              <Box>
+                <ActionCard {...otcCard} variant="column" />
+              </Box>
+            )}
+          </Grid>
+        )}
       </Grid>
     </Section>
   );

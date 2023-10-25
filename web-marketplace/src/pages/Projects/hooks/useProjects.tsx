@@ -15,6 +15,7 @@ type Props = {
   sort: string;
   offset?: number;
   useCommunityProjects?: boolean;
+  useOffChainProjects?: boolean;
   creditClassFilter?: Record<string, boolean>;
 };
 
@@ -22,6 +23,7 @@ export const useProjects = ({
   offset = 0,
   sort,
   useCommunityProjects = false,
+  useOffChainProjects = false,
   creditClassFilter = {},
 }: Props): ResponseType => {
   // get normalized projects with sell order data
@@ -35,6 +37,7 @@ export const useProjects = ({
     offset,
     sort,
     useCommunityProjects,
+    useOffChainProjects,
     creditClassFilter,
   });
 

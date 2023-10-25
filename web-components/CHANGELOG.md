@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.13.0](https://github.com/regen-network/regen-web/compare/v1.12.2...v1.13.0) (2023-09-27)
+
+### Bug Fixes
+
+- run tsc at build time and fix ts errors ([#2104](https://github.com/regen-network/regen-web/issues/2104)) ([4cbad70](https://github.com/regen-network/regen-web/commit/4cbad701bbf070e8f226ddc51682856bd1a47ef7))
+
+### Features
+
+- display user projects on public profile ([#2099](https://github.com/regen-network/regen-web/issues/2099)) ([d27746b](https://github.com/regen-network/regen-web/commit/d27746b66c3bf3f01062fb7fbb47a1f22f4b5669))
+- handle not found profile ([#2136](https://github.com/regen-network/regen-web/issues/2136)) ([dcc9565](https://github.com/regen-network/regen-web/commit/dcc9565480f9f6e4ce0eb2a5b8feccae9d37ce0d))
+- migrate CreateSellOrderForm to react-hook-form ([#2132](https://github.com/regen-network/regen-web/issues/2132)) ([95ac829](https://github.com/regen-network/regen-web/commit/95ac829804b3ac65b634f865bd5d3b41b5c7bbd9))
+- share profile link ([#2108](https://github.com/regen-network/regen-web/issues/2108)) ([61b0d11](https://github.com/regen-network/regen-web/commit/61b0d11db561d6181654b0fccecd457564f85b23))
+
 # [1.12.0](https://github.com/regen-network/regen-web/compare/v1.11.0...v1.12.0) (2023-09-19)
 
 ### Bug Fixes

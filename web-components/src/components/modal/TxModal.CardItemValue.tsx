@@ -1,7 +1,5 @@
-import { useState } from 'react';
-import { Collapse } from '@mui/material';
+import { Box } from '@mui/material';
 
-import { TextButton } from '../buttons/TextButton';
 import { CollapseList } from '../organisms/CollapseList/CollapseList';
 import { Subtitle } from '../typography';
 import { ItemValue, LinkComponentProp } from './TxModal';
@@ -23,11 +21,17 @@ export const CardItemValue = ({
       size="lg"
       mobileSize="sm"
       color={color || 'info.dark'}
+      sx={{
+        display: 'flex',
+        alignItems: 'flex-end',
+      }}
     >
       {value.icon && value.icon}
       {value.url ? (
         <LinkComponent
-          sx={{ color: 'secondary.main' }}
+          sx={{
+            color: 'secondary.main',
+          }}
           href={value.url}
           target={value.url.startsWith('/') ? '_self' : '_blank'}
         >
@@ -36,6 +40,7 @@ export const CardItemValue = ({
       ) : (
         <>{value.name}</>
       )}
+      {value.children && value.children}
     </Subtitle>
   );
 };

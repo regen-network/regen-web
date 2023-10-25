@@ -1479,6 +1479,16 @@ export type DeleteOrganizationPayloadOrganizationEdgeArgs = {
   orderBy?: Maybe<Array<OrganizationsOrderBy>>;
 };
 
+/** All input for the `deletePartyByEmail` mutation. */
+export type DeletePartyByEmailInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  email: Scalars['String'];
+};
+
 /** All input for the `deletePartyById` mutation. */
 export type DeletePartyByIdInput = {
   /**
@@ -2009,6 +2019,8 @@ export type Mutation = {
   updatePartyById?: Maybe<UpdatePartyPayload>;
   /** Updates a single `Party` using a unique key and a patch. */
   updatePartyByWalletId?: Maybe<UpdatePartyPayload>;
+  /** Updates a single `Party` using a unique key and a patch. */
+  updatePartyByEmail?: Maybe<UpdatePartyPayload>;
   /** Updates a single `Project` using its globally unique id and a patch. */
   updateProject?: Maybe<UpdateProjectPayload>;
   /** Updates a single `Project` using a unique key and a patch. */
@@ -2069,6 +2081,8 @@ export type Mutation = {
   deletePartyById?: Maybe<DeletePartyPayload>;
   /** Deletes a single `Party` using a unique key. */
   deletePartyByWalletId?: Maybe<DeletePartyPayload>;
+  /** Deletes a single `Party` using a unique key. */
+  deletePartyByEmail?: Maybe<DeletePartyPayload>;
   /** Deletes a single `Project` using its globally unique id. */
   deleteProject?: Maybe<DeleteProjectPayload>;
   /** Deletes a single `Project` using a unique key. */
@@ -2283,6 +2297,12 @@ export type MutationUpdatePartyByWalletIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdatePartyByEmailArgs = {
+  input: UpdatePartyByEmailInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateProjectArgs = {
   input: UpdateProjectInput;
 };
@@ -2459,6 +2479,12 @@ export type MutationDeletePartyByIdArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeletePartyByWalletIdArgs = {
   input: DeletePartyByWalletIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeletePartyByEmailArgs = {
+  input: DeletePartyByEmailInput;
 };
 
 
@@ -2672,6 +2698,8 @@ export enum PartiesOrderBy {
   WebsiteLinkDesc = 'WEBSITE_LINK_DESC',
   CreatorIdAsc = 'CREATOR_ID_ASC',
   CreatorIdDesc = 'CREATOR_ID_DESC',
+  EmailAsc = 'EMAIL_ASC',
+  EmailDesc = 'EMAIL_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -2693,6 +2721,7 @@ export type Party = Node & {
   twitterLink?: Maybe<Scalars['String']>;
   websiteLink?: Maybe<Scalars['String']>;
   creatorId?: Maybe<Scalars['UUID']>;
+  email?: Maybe<Scalars['String']>;
   /** Reads a single `Wallet` that is related to this `Party`. */
   walletByWalletId?: Maybe<Wallet>;
   /** Reads a single `Account` that is related to this `Party`. */
@@ -2866,6 +2895,8 @@ export type PartyCondition = {
   websiteLink?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `creatorId` field. */
   creatorId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `email` field. */
+  email?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `CreditClass` values, with data from `Project`. */
@@ -2957,6 +2988,7 @@ export type PartyInput = {
   twitterLink?: Maybe<Scalars['String']>;
   websiteLink?: Maybe<Scalars['String']>;
   creatorId?: Maybe<Scalars['UUID']>;
+  email?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -3048,6 +3080,7 @@ export type PartyPatch = {
   twitterLink?: Maybe<Scalars['String']>;
   websiteLink?: Maybe<Scalars['String']>;
   creatorId?: Maybe<Scalars['UUID']>;
+  email?: Maybe<Scalars['String']>;
 };
 
 export enum PartyType {
@@ -3144,6 +3177,7 @@ export type Project = Node & {
   adminWalletId?: Maybe<Scalars['UUID']>;
   verifierId?: Maybe<Scalars['UUID']>;
   approved?: Maybe<Scalars['Boolean']>;
+  published?: Maybe<Scalars['Boolean']>;
   /** Reads a single `Party` that is related to this `Project`. */
   partyByDeveloperId?: Maybe<Party>;
   /** Reads a single `CreditClass` that is related to this `Project`. */
@@ -3205,6 +3239,8 @@ export type ProjectCondition = {
   verifierId?: Maybe<Scalars['UUID']>;
   /** Checks for equality with the object’s `approved` field. */
   approved?: Maybe<Scalars['Boolean']>;
+  /** Checks for equality with the object’s `published` field. */
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 /** A filter to be used against `Project` object types. All fields are combined with a logical ‘and.’ */
@@ -3232,6 +3268,7 @@ export type ProjectInput = {
   adminWalletId?: Maybe<Scalars['UUID']>;
   verifierId?: Maybe<Scalars['UUID']>;
   approved?: Maybe<Scalars['Boolean']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 /** Represents an update to a `Project`. Fields that are set will be updated. */
@@ -3247,6 +3284,7 @@ export type ProjectPatch = {
   adminWalletId?: Maybe<Scalars['UUID']>;
   verifierId?: Maybe<Scalars['UUID']>;
   approved?: Maybe<Scalars['Boolean']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 /** A connection to a list of `Project` values. */
@@ -3296,6 +3334,8 @@ export enum ProjectsOrderBy {
   VerifierIdDesc = 'VERIFIER_ID_DESC',
   ApprovedAsc = 'APPROVED_ASC',
   ApprovedDesc = 'APPROVED_DESC',
+  PublishedAsc = 'PUBLISHED_ASC',
+  PublishedDesc = 'PUBLISHED_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -3347,6 +3387,7 @@ export type Query = Node & {
   organizationByPartyId?: Maybe<Organization>;
   partyById?: Maybe<Party>;
   partyByWalletId?: Maybe<Party>;
+  partyByEmail?: Maybe<Party>;
   projectById?: Maybe<Project>;
   projectBySlug?: Maybe<Project>;
   projectByOnChainId?: Maybe<Project>;
@@ -3603,6 +3644,12 @@ export type QueryPartyByIdArgs = {
 /** The root query type which gives access points into the data universe. */
 export type QueryPartyByWalletIdArgs = {
   walletId: Scalars['UUID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryPartyByEmailArgs = {
+  email: Scalars['String'];
 };
 
 
@@ -4209,6 +4256,18 @@ export type UpdateOrganizationPayloadOrganizationEdgeArgs = {
   orderBy?: Maybe<Array<OrganizationsOrderBy>>;
 };
 
+/** All input for the `updatePartyByEmail` mutation. */
+export type UpdatePartyByEmailInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `Party` being updated. */
+  partyPatch: PartyPatch;
+  email: Scalars['String'];
+};
+
 /** All input for the `updatePartyById` mutation. */
 export type UpdatePartyByIdInput = {
   /**
@@ -4788,11 +4847,14 @@ export type AllProjectsQuery = (
     { __typename?: 'ProjectsConnection' }
     & { nodes: Array<Maybe<(
       { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'slug' | 'metadata'>
+      & Pick<Project, 'id' | 'slug' | 'metadata' | 'onChainId' | 'approved' | 'published'>
       & { creditClassByCreditClassId?: Maybe<(
         { __typename?: 'CreditClass' }
         & Pick<CreditClass, 'id' | 'onChainId'>
-        & { creditClassVersionsById: (
+        & { partyByRegistryId?: Maybe<(
+          { __typename?: 'Party' }
+          & PartyFieldsFragment
+        )>, creditClassVersionsById: (
           { __typename?: 'CreditClassVersionsConnection' }
           & { nodes: Array<Maybe<(
             { __typename?: 'CreditClassVersion' }
@@ -5016,27 +5078,7 @@ export type ProjectByIdQuery = (
   { __typename?: 'Query' }
   & { projectById?: Maybe<(
     { __typename?: 'Project' }
-    & Pick<Project, 'id' | 'metadata' | 'developerId' | 'onChainId'>
-    & { walletByAdminWalletId?: Maybe<(
-      { __typename?: 'Wallet' }
-      & Pick<Wallet, 'addr'>
-    )>, partyByDeveloperId?: Maybe<(
-      { __typename?: 'Party' }
-      & PartyFieldsFragment
-    )>, partyByVerifierId?: Maybe<(
-      { __typename?: 'Party' }
-      & PartyFieldsFragment
-    )>, creditClassByCreditClassId?: Maybe<(
-      { __typename?: 'CreditClass' }
-      & Pick<CreditClass, 'id' | 'onChainId'>
-      & { creditClassVersionsById: (
-        { __typename?: 'CreditClassVersionsConnection' }
-        & { nodes: Array<Maybe<(
-          { __typename?: 'CreditClassVersion' }
-          & Pick<CreditClassVersion, 'name' | 'metadata'>
-        )>> }
-      ) }
-    )> }
+    & ProjectFieldsFragment
   )> }
 );
 
@@ -5085,7 +5127,7 @@ export type ProjectBySlugQuery = (
 
 export type ProjectFieldsFragment = (
   { __typename?: 'Project' }
-  & Pick<Project, 'id' | 'onChainId' | 'metadata' | 'approved'>
+  & Pick<Project, 'id' | 'onChainId' | 'metadata' | 'approved' | 'published' | 'slug'>
   & { walletByAdminWalletId?: Maybe<(
     { __typename?: 'Wallet' }
     & Pick<Wallet, 'addr'>
@@ -5289,6 +5331,8 @@ export const ProjectFieldsFragmentDoc = gql`
   onChainId
   metadata
   approved
+  published
+  slug
   creditClassByCreditClassId {
     onChainId
     partyByRegistryId {
@@ -5445,9 +5489,15 @@ export const AllProjectsDocument = gql`
       id
       slug
       metadata
+      onChainId
+      approved
+      published
       creditClassByCreditClassId {
         id
         onChainId
+        partyByRegistryId {
+          ...partyFields
+        }
         creditClassVersionsById {
           nodes {
             id
@@ -5460,7 +5510,7 @@ export const AllProjectsDocument = gql`
     }
   }
 }
-    `;
+    ${PartyFieldsFragmentDoc}`;
 
 /**
  * __useAllProjectsQuery__
@@ -5929,32 +5979,10 @@ export type PartyByIdQueryResult = Apollo.QueryResult<PartyByIdQuery, PartyByIdQ
 export const ProjectByIdDocument = gql`
     query ProjectById($id: UUID!) {
   projectById(id: $id) {
-    id
-    walletByAdminWalletId {
-      addr
-    }
-    metadata
-    developerId
-    onChainId
-    partyByDeveloperId {
-      ...partyFields
-    }
-    partyByVerifierId {
-      ...partyFields
-    }
-    creditClassByCreditClassId {
-      id
-      onChainId
-      creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
-        nodes {
-          name
-          metadata
-        }
-      }
-    }
+    ...projectFields
   }
 }
-    ${PartyFieldsFragmentDoc}`;
+    ${ProjectFieldsFragmentDoc}`;
 
 /**
  * __useProjectByIdQuery__

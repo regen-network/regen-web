@@ -30,7 +30,7 @@ export const getPriceToDisplay = ({
 /* getPurchaseInfo */
 
 type GetPurchaseInfoParams = {
-  projectId: string;
+  projectId?: string;
   sellOrders: SellOrderInfoExtented[];
   userAddress?: string;
 };
@@ -40,9 +40,10 @@ export const getPurchaseInfo = ({
   sellOrders,
   userAddress,
 }: GetPurchaseInfoParams): PurchaseInfo => {
-  const ordersForThisProject = sellOrders.filter(order =>
-    order.batchDenom.startsWith(projectId),
-  );
+  const ordersForThisProject = projectId
+    ? sellOrders.filter(order => order.batchDenom.startsWith(projectId))
+    : sellOrders;
+
   if (!ordersForThisProject.length) {
     return {
       sellInfo: {

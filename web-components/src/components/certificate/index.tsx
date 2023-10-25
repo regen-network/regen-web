@@ -3,7 +3,6 @@ import { Box } from '@mui/material';
 import { headerFontFamily, pxToRem } from '../../theme/muiTheme';
 import { LinkComponentType } from '../../types/shared/linkComponentType';
 import { pluralize } from '../../utils/pluralize';
-import CarbonOffsetBadgeIcon from '../icons/CarbonOffsetBadgeIcon';
 import RegenIcon from '../icons/RegenIcon';
 import { Body, Subtitle, Title } from '../typography';
 import { certificateFormater, certificateOptions } from './certificate.config';
@@ -29,6 +28,7 @@ export default function Certificate({
   date,
   txHash,
   certificateTitle,
+  certificateIcon,
   creditsUnits,
   equivalentTonsCO2,
   itemLinks,
@@ -139,12 +139,17 @@ export default function Certificate({
               '@media print': { top: -62 },
             }}
           >
-            <CarbonOffsetBadgeIcon
-              sx={{
-                fontSize: { xs: 91, sm: 145 },
-                '@media print': { fontSize: 75 },
-              }}
-            />
+            {certificateIcon && (
+              <Box
+                component="img"
+                src={certificateIcon}
+                sx={{
+                  width: { xs: 91, sm: 145 },
+                  height: { xs: 91, sm: 145 },
+                  '@media print': { with: 75, height: 75 },
+                }}
+              />
+            )}
           </Box>
           <div className={cx(classes.bannerSideRight, classes.bannerSide)}>
             <Box className={classes.whiteTriangle} />

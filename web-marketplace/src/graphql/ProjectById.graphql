@@ -1,27 +1,5 @@
 query ProjectById($id: UUID!) {
   projectById(id: $id) {
-    id
-    walletByAdminWalletId {
-      addr
-    }
-    metadata
-    developerId
-    onChainId
-    partyByDeveloperId {
-      ...partyFields
-    }
-    partyByVerifierId {
-      ...partyFields
-    }
-    creditClassByCreditClassId {
-      id
-      onChainId
-      creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
-        nodes {
-          name
-          metadata
-        }
-      }
-    }
+    ...projectFields
   }
 }

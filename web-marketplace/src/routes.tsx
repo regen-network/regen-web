@@ -23,12 +23,15 @@ import MyEcocredits from 'pages/Dashboard/MyEcocredits';
 import MyProjects from 'pages/Dashboard/MyProjects';
 import { ecocreditBatchesLoader } from 'pages/EcocreditBatches/EcocreditBatches.loader';
 import { BridgeTab } from 'pages/EcocreditsByAccount/BridgeTab/BridgeTab';
+import { CreditBatchesTab } from 'pages/EcocreditsByAccount/CreditBatchesTab/CreditBatchesTab';
+import { CreditClassTab } from 'pages/EcocreditsByAccount/CreditClassTab/CreditClassTab';
 import { PortfolioTab } from 'pages/EcocreditsByAccount/PortfolioTab/EcocreditsByAccount.PortfolioTab';
 import ProjectsTab from 'pages/EcocreditsByAccount/ProjectsTab';
 import Faucet from 'pages/Faucet';
 import { homeLoader } from 'pages/Home/Home.loader';
 import { storefrontLoader } from 'pages/Marketplace/Storefront/Storefront.loader';
 import { projectsLoader } from 'pages/Projects/Projects.loader';
+import Settings from 'pages/Settings';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
 import { projectDetailsLoader } from 'components/templates/ProjectDetails/ProjectDetails.loader';
 
@@ -121,6 +124,7 @@ export const getRoutes = ({
           })}
         />
         <Route path="profile" element={<KeplrRoute component={Dashboard} />}>
+          <Route index element={<Navigate to="portfolio" />} />
           <Route
             path="portfolio"
             element={<KeplrRoute component={MyEcocredits} />}
@@ -147,8 +151,11 @@ export const getRoutes = ({
           path="profiles/:accountAddressOrId"
           element={<EcocreditsByAccount />}
         >
+          <Route index element={<Navigate to="portfolio" />} />
           <Route path="portfolio" element={<PortfolioTab />} />
           <Route path="projects" element={<ProjectsTab />} />
+          <Route path="credit-classes" element={<CreditClassTab />} />
+          <Route path="credit-batches" element={<CreditBatchesTab />} />
           <Route path="bridge" element={<BridgeTab />} />
         </Route>
         <Route
@@ -214,6 +221,10 @@ export const getRoutes = ({
               <Route
                 path="metadata"
                 element={<KeplrRoute component={ProjectMetadata} />}
+              />
+              <Route
+                path="settings"
+                element={<KeplrRoute component={Settings} />}
               />
             </Route>
           </Route>

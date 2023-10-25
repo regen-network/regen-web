@@ -4,6 +4,8 @@ import { Box } from '@mui/material';
 
 import { Flex } from 'web-components/lib/components/box';
 import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
+import { CreditBatchIcon } from 'web-components/lib/components/icons/CreditBatchIcon';
+import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClassIcon';
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
 import { ProfileHeader } from 'web-components/lib/components/organisms/ProfileHeader/ProfileHeader';
@@ -13,17 +15,22 @@ import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 import { truncate } from 'web-components/lib/utils/truncate';
 
 import { getAccountUrl } from 'lib/block-explorer';
+import { isBridgeEnabled } from 'lib/ledger';
+import { getProfileLink } from 'lib/profileLink';
+import { useWallet } from 'lib/wallet/wallet';
 
 import {
   getSocialsLinks,
   getUserImages,
 } from 'pages/Dashboard/Dashboard.utils';
+import { useProfileItems } from 'pages/Dashboard/hooks/useProfileItems';
 import {
   DEFAULT_NAME,
   profileVariantMapping,
 } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
+import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
 
 import { ProfileNotFound } from './EcocreditsByAccount.NotFound';
 import { ecocreditsByAccountStyles } from './EcocreditsByAccount.styles';
@@ -31,11 +38,23 @@ import { useProfileData } from './hooks/useProfileData';
 
 export const EcocreditsByAccount = (): JSX.Element => {
   const { accountAddressOrId } = useParams<{ accountAddressOrId: string }>();
+  const { wallet } = useWallet();
   const location = useLocation();
 
   const { address, party, isLoading } = useProfileData();
   const { avatarImage, backgroundImage } = getUserImages({ party });
   const isProfileNotFound = !address && !party;
+  const profileLink = accountAddressOrId
+    ? getProfileLink(accountAddressOrId)
+    : '';
+  const { creditClasses } = useFetchCreditClassesWithOrder({
+    admin: address,
+    userAddress: wallet?.address,
+  });
+
+  const { isIssuer, isProjectAdmin, showCreditClasses } = useProfileItems({
+    address,
+  });
 
   const socialsLinks = useMemo(() => getSocialsLinks({ party }), [party]);
 
@@ -45,26 +64,45 @@ export const EcocreditsByAccount = (): JSX.Element => {
         label: 'Portfolio',
         icon: <CreditsIcon fontSize="small" />,
         href: `/profiles/${accountAddressOrId}/portfolio`,
-        hidden: !party,
       },
       {
         label: 'Projects',
         icon: <ProjectPageIcon />,
         href: `/profiles/${accountAddressOrId}/projects`,
-        hidden: !party,
+        hidden: !isProjectAdmin,
+      },
+      {
+        label: 'Credit Classes',
+        icon: <CreditClassIcon />,
+        href: `/profiles/${accountAddressOrId}/credit-classes`,
+        hidden: !showCreditClasses || creditClasses.length === 0,
+      },
+      {
+        label: 'Credit Batches',
+        icon: <CreditBatchIcon />,
+        href: `/profiles/${accountAddressOrId}/credit-batches`,
+        hidden: !isIssuer,
       },
       {
         label: 'Bridge',
         icon: <BridgeIcon />,
         href: `/profiles/${accountAddressOrId}/bridge`,
-        hidden: !party || import.meta.env.VITE_LEDGER_CHAIN_ID === 'regen-1', // TODO: Hides in PROD - remove when Bridge is ready
+        hidden: !isBridgeEnabled,
       },
     ],
-    [accountAddressOrId, party],
+    [
+      accountAddressOrId,
+      creditClasses.length,
+      isIssuer,
+      isProjectAdmin,
+      showCreditClasses,
+    ],
   );
 
   const activeTab = Math.max(
-    tabs.findIndex(tab => location.pathname.includes(tab.href ?? '')),
+    tabs
+      .filter(tab => !tab.hidden)
+      .findIndex(tab => location.pathname.includes(tab.href ?? '')),
     0,
   );
 
@@ -97,6 +135,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
                 socialsLinks,
               }}
               editLink=""
+              profileLink={profileLink}
               variant={
                 party?.type ? profileVariantMapping[party.type] : 'individual'
               }

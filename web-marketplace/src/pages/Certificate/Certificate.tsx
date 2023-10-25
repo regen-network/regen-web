@@ -26,6 +26,7 @@ function CertificatePage(): JSX.Element {
   const { retirement, isLoadingRetirement } = useFetchRetirement({
     retirementNodeId: certificateId ?? '',
   });
+
   const certificateData = getCertificateData({ retirement });
 
   return (

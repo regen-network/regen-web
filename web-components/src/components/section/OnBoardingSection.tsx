@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Link } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
@@ -8,6 +8,8 @@ import Section from './index';
 
 interface OnBoardingSectionProps {
   title: string;
+  description?: string | JSX.Element;
+  headerChildren?: ReactNode;
   formContainer?: boolean; // set max width and center
   linkText?: string;
   exampleProjectUrl?: string;
@@ -79,21 +81,25 @@ const OnBoardingSection: React.FC<
   onLinkClick,
   exampleProjectUrl,
   classes,
-  ...p
+  title,
+  description,
+  children,
+  headerChildren,
 }) => {
   const { classes: styles, cx } = useStyles();
-  const { root, title, titleWrap } = styles;
+  const { root, title: titleStyles, titleWrap } = styles;
 
   return (
     <Section
       classes={{
         root: cx(root, !!classes && classes.root),
-        title: cx(title, !!classes && classes.title),
+        title: cx(titleStyles, !!classes && classes.title),
         titleWrap: cx(titleWrap, !!classes && classes.titleWrap),
       }}
-      title={p.title}
+      title={title}
       titleAlign={onLinkClick ? 'left' : 'center'}
       titleVariant="h3"
+      description={description}
       topRight={
         onLinkClick && (
           <Link className={styles.link} onClick={onLinkClick}>
@@ -101,6 +107,7 @@ const OnBoardingSection: React.FC<
           </Link>
         )
       }
+      headerChildren={headerChildren}
     >
       <div
         className={cx(
@@ -116,7 +123,7 @@ const OnBoardingSection: React.FC<
             </RouterLink>
           </Body>
         )}
-        {p.children}
+        {children}
       </div>
     </Section>
   );

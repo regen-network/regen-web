@@ -48,12 +48,6 @@
     "@graphql-codegen/typescript-graphql-files-modules": "1.18.1",
     "@graphql-codegen/typescript-operations": "^1.18.0",
     "@graphql-codegen/typescript-react-apollo": "2.2.4",
-    "@storybook/addon-actions": "^7.3.2",
-    "@storybook/addon-essentials": "^7.3.2",
-    "@storybook/addon-interactions": "^7.3.2",
-    "@storybook/addon-links": "^7.3.2",
-    "@storybook/react": "^7.3.2",
-    "@storybook/react-vite": "^7.3.2",
     "@types/css-mediaquery": "^0.1.1",
     "@types/jest": "27.0.3",
     "@types/node": "13.1.1",
@@ -66,13 +60,12 @@
     "patch-package": "^8.0.0",
     "prettier": "2.4.1",
     "shx": "^0.3.2",
-    "storybook": "^7.3.2",
-    "typescript": "^4.4.4"
+    "typescript": "^5.2.2"
   },
   "resolutions": {
     "babel-eslint": "^10.1.0",
-    "**/@typescript-eslint/eslint-plugin": "^4.5.0",
-    "**/@typescript-eslint/parser": "^4.5.0",
+    "**/@typescript-eslint/eslint-plugin": "^6.7.3",
+    "**/@typescript-eslint/parser": "^6.7.3",
     "webpack": "4.44.2",
     "react-error-overlay": "6.0.9",
     "@emotion/react": "11.10.6"

@@ -37,7 +37,10 @@ export const EcocreditsTable: React.FC<
   initialPaginationParams,
   isIgnoreOffset = false,
 }) => {
-  if (!credits?.length) {
+  const hasMorePages =
+    (initialPaginationParams?.count ?? 0) >
+    (initialPaginationParams?.rowsPerPage ?? 0);
+  if (!credits || (!credits?.length && !hasMorePages)) {
     return (
       <NoCredits
         title="No ecocredits to display"

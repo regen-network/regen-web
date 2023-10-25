@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 
 import { Flex } from '../box';
 import ContainedButton from './ContainedButton';
+import { CopyButton } from './CopyButton';
 import { EditButton } from './EditButton';
 import { ExpandButton } from './ExpandButton';
 import OutlinedButton from './OutlinedButton';
@@ -83,3 +84,9 @@ export const textButton = (): JSX.Element => (
 );
 
 export const editButton = () => <EditButton onClick={() => {}} />;
+
+export const copyButton = {
+  render: () => (
+    <CopyButton content="foo" tooltipText="Copy it" toastText="Copied!" />
+  ),
+};

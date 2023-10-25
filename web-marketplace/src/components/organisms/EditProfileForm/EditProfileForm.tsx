@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MutableRefObject, useEffect } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
 import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';
@@ -42,6 +42,7 @@ import { useUpdateDefaultAvatar } from './hooks/useUpdateDefaultAvatar';
 export interface EditProfileFormProps {
   initialValues?: EditProfileFormSchemaType;
   children?: React.ReactNode;
+  isDirtyRef: MutableRefObject<boolean>;
   onSubmit: (values: EditProfileFormSchemaType) => Promise<void>;
   onSuccess?: () => void;
   onUpload?: (imageFile: File) => Promise<string>;
@@ -51,6 +52,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
   ({
     children,
     initialValues = editProfileFormInitialValues,
+    isDirtyRef,
     onSubmit,
     onSuccess,
     onUpload,
@@ -64,7 +66,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
     });
     const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
-    const { isSubmitting, errors } = useFormState({
+    const { isSubmitting, errors, isDirty } = useFormState({
       control: form.control,
     });
 
@@ -103,6 +105,10 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
       profileType,
       profileImage,
     });
+
+    useEffect(() => {
+      isDirtyRef.current = isDirty;
+    }, [isDirtyRef, isDirty]);
 
     return (
       <Form

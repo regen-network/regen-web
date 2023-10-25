@@ -29,7 +29,7 @@ export const AuthApolloProvider = ({
   children,
 }: AuthApolloProviderProps): any => {
   const reactQueryClient = useQueryClient();
-  const query = useQuery(getCsrfTokenQuery({}));
+  useQuery(getCsrfTokenQuery({}));
 
   // https://www.apollographql.com/docs/react/networking/authentication
   const httpLink = createHttpLink({
@@ -42,13 +42,16 @@ export const AuthApolloProvider = ({
   });
 
   // https://www.apollographql.com/docs/react/api/link/apollo-link-context/#overview
-  const authLink = setContext((_, { headers }) => {
-    const localCsrfToken = localStorage.getItem('regen-csrf') || '';
+  const authLink = setContext(async (_, { headers }) => {
+    const csrfToken = await getFromCacheOrFetch({
+      query: getCsrfTokenQuery({}),
+      reactQueryClient: reactQueryClient,
+    });
 
     return {
       headers: {
         ...headers,
-        'X-CSRF-TOKEN': localCsrfToken !== '' ? localCsrfToken : query.data,
+        'X-CSRF-TOKEN': csrfToken,
       },
     };
   });
@@ -64,48 +67,42 @@ export const AuthApolloProvider = ({
     },
   };
 
-  const errorLink = onError(
-    ({ response, operation, graphQLErrors, networkError, forward }) => {
-      if (
-        networkError &&
-        networkError.message.includes('403') &&
-        operation.operationName !== 'GetCurrentAccount'
-      ) {
-        const observable = new Observable<FetchResult<Record<string, any>>>(
-          observer => {
-            // used an annonymous function for using an async function
-            (async () => {
-              try {
-                await reactQueryClient.invalidateQueries({
-                  queryKey: [GET_CSRF_QUERY_KEY],
-                });
-                const newCsrfToken = await getFromCacheOrFetch({
-                  query: getCsrfTokenQuery({}),
-                  reactQueryClient: reactQueryClient,
-                });
+  const errorLink = onError(({ operation, networkError, forward }) => {
+    if (
+      networkError &&
+      networkError.message.includes('403') &&
+      operation.operationName !== 'GetCurrentAccount'
+    ) {
+      const observable = new Observable<FetchResult<Record<string, any>>>(
+        observer => {
+          (async () => {
+            try {
+              await reactQueryClient.invalidateQueries({
+                queryKey: [GET_CSRF_QUERY_KEY],
+              });
+              await getFromCacheOrFetch({
+                query: getCsrfTokenQuery({}),
+                reactQueryClient: reactQueryClient,
+              });
 
-                localStorage.setItem('regen-csrf', newCsrfToken || '');
+              const subscriber = {
+                next: observer.next.bind(observer),
+                error: observer.error.bind(observer),
+                complete: observer.complete.bind(observer),
+              };
 
-                // Retry the failed request
-                const subscriber = {
-                  next: observer.next.bind(observer),
-                  error: observer.error.bind(observer),
-                  complete: observer.complete.bind(observer),
-                };
+              forward(operation).subscribe(subscriber);
+            } catch (err) {
+              localStorage.setItem('regen-csrf', '');
+              observer.error(err);
+            }
+          })();
+        },
+      );
 
-                forward(operation).subscribe(subscriber);
-              } catch (err) {
-                localStorage.setItem('regen-csrf', '');
-                observer.error(err);
-              }
-            })();
-          },
-        );
-
-        return observable;
-      }
-    },
-  );
+      return observable;
+    }
+  });
 
   const mainLink = authLink.concat(httpLink);
 

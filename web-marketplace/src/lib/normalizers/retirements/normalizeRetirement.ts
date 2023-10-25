@@ -3,7 +3,7 @@ import {
   ProjectInfo,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import { Party } from 'web-components/lib/components/user/UserInfo';
+import { Account } from 'web-components/lib/components/user/UserInfo';
 
 import { Maybe } from 'generated/graphql';
 import { RetirementFieldsFragment } from 'generated/indexer-graphql';
@@ -23,8 +23,8 @@ type Props = {
   creditClass?: ClassInfo;
   sanityCreditClass?: CreditClass;
   creditClassMetadata?: CreditClassMetadataLD;
-  issuer?: Party;
-  owner?: Party;
+  issuer?: Account;
+  owner?: Account;
 };
 
 export type NormalizedRetirement = {
@@ -37,8 +37,8 @@ export type NormalizedRetirement = {
   creditClassId?: string;
   creditClassName?: string;
   creditClassType?: string;
-  issuer?: Party;
-  owner?: Party;
+  issuer?: Account;
+  owner?: Account;
   projectId: string;
   projectName: string;
   projectLocation?: string;

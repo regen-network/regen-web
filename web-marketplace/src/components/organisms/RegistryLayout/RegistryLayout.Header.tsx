@@ -1,13 +1,7 @@
 import React, { useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import {
-  ApolloClient,
-  NormalizedCacheObject,
-  useApolloClient,
-} from '@apollo/client';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
-import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
 import Header from 'web-components/lib/components/header';
@@ -17,11 +11,10 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { truncate } from 'web-components/lib/utils/truncate';
 
 import { addWalletModalSwitchWarningAtom } from 'lib/atoms/modals.atoms';
-import { getPartiesByAccountIdQuery } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery';
+import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useProfileItems } from 'pages/Dashboard/hooks/useProfileItems';
-import { useAccountInfo } from 'pages/ProfileEdit/hooks/useAccountInfo';
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 
@@ -39,15 +32,8 @@ import { fullWidthRegExp } from './RegistryLayout.constants';
 
 const RegistryLayoutHeader: React.FC = () => {
   const { pathname } = useLocation();
-  const {
-    wallet,
-    loaded,
-    disconnect,
-    isConnected,
-    partyByAddr,
-    accountId,
-    handleAddAddress,
-  } = useWallet();
+  const { authenticatedAccounts, activeAccount } = useAuth();
+  const { wallet, loaded, disconnect, isConnected } = useWallet();
   const theme = useTheme<Theme>();
   const navigate = useNavigate();
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
@@ -76,21 +62,11 @@ const RegistryLayoutHeader: React.FC = () => {
       ? navigate('/profile/portfolio')
       : setAddWalletModalSwitchWarningAtom(atom => void (atom.open = true));
 
-  const { party, defaultAvatar } = useAccountInfo({ partyByAddr });
+  const defaultAvatar = getDefaultAvatar(activeAccount);
 
   const color = headerColors[pathname]
     ? headerColors[pathname]
     : theme.palette.primary.light;
-
-  const graphqlClient =
-    useApolloClient() as ApolloClient<NormalizedCacheObject>;
-  const { data: partiesByAccountId } = useQuery(
-    getPartiesByAccountIdQuery({
-      client: graphqlClient,
-      id: accountId,
-      enabled: !!accountId && !!graphqlClient,
-    }),
-  );
 
   return (
     <>
@@ -110,25 +86,24 @@ const RegistryLayoutHeader: React.FC = () => {
             {chainId && loaded && isConnected && disconnect && (
               <UserMenuItems
                 address={truncate(wallet?.address)}
-                avatar={party?.image ? party?.image : defaultAvatar}
+                avatar={
+                  activeAccount?.image ? activeAccount?.image : defaultAvatar
+                }
                 disconnect={disconnect}
                 pathname={pathname}
                 linkComponent={RegistryNavLink}
                 userMenuItems={userMenuItems}
                 profiles={
-                  partiesByAccountId?.accountById?.partiesByAccountId?.nodes?.map(
-                    party => ({
-                      name: party?.name ? party?.name : DEFAULT_NAME,
-                      profileImage: party?.image
-                        ? party?.image
-                        : getDefaultAvatar(party),
-                      address: truncate(party?.walletByWalletId?.addr),
-                      selected:
-                        wallet?.address === party?.walletByWalletId?.addr,
-                    }),
-                  ) || []
+                  authenticatedAccounts?.map(account => ({
+                    name: account?.name ? account?.name : DEFAULT_NAME,
+                    profileImage: account?.image
+                      ? account?.image
+                      : getDefaultAvatar(account),
+                    address: truncate(account?.addr),
+                    selected:
+                      activeAccount?.id && activeAccount?.id === account?.id,
+                  })) || []
                 }
-                addAddress={handleAddAddress}
                 onProfileClick={onProfileClick}
               />
             )}

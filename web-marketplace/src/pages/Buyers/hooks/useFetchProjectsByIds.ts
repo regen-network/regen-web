@@ -46,7 +46,7 @@ export const useFetchProjectsByIds = ({ projectIds }: Props): Response => {
   const programParties = offChainProjectResults.map(
     queryResult =>
       queryResult.data?.data.projectByOnChainId?.creditClassByCreditClassId
-        ?.partyByRegistryId,
+        ?.accountByRegistryId,
   );
 
   // Normalization

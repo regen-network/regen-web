@@ -5,7 +5,6 @@ import {
   useApolloClient,
 } from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
-import { useSetAtom } from 'jotai';
 import { postData } from 'utils/fetch/postData';
 
 import { UseStateSetter } from 'types/react/use-state';
@@ -25,7 +24,7 @@ type Props = {
   keplrMobileWeb: boolean;
   walletConfigRef: MutableRefObject<WalletConfig | undefined>;
   activeAccountId?: string;
-  authAccountIds?: string[];
+  authenticatedAccountIds?: string[];
   setAccountChanging: UseStateSetter<boolean>;
 };
 
@@ -35,7 +34,7 @@ export const useOnAccountChange = ({
   keplrMobileWeb,
   walletConfigRef,
   activeAccountId,
-  authAccountIds,
+  authenticatedAccountIds,
   setAccountChanging,
 }: Props): void => {
   const [newWallet, setNewWallet] = useState<Wallet | undefined>();
@@ -104,7 +103,7 @@ export const useOnAccountChange = ({
         newWallet.address !== wallet?.address
       ) {
         if (newAccountId !== activeAccountId && token) {
-          if (authAccountIds?.includes(newAccountId)) {
+          if (authenticatedAccountIds?.includes(newAccountId)) {
             // the new address is part of the authenticated accounts ids, we auto-connect...
             await connectWallet({
               walletType: WalletType.Keplr,
@@ -139,8 +138,8 @@ export const useOnAccountChange = ({
     wallet,
     walletConfigRef,
     activeAccountId,
-    authAccountIds,
     accountByAddr?.accountByAddr?.id,
     token,
+    authenticatedAccountIds,
   ]);
 };

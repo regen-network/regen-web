@@ -1,11 +1,7 @@
 import { useCallback } from 'react';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import {
-  PartyType,
-  ProjectPatch,
-  useCreateWalletMutation,
-} from 'generated/graphql';
+import { AccountType, ProjectPatch } from 'generated/graphql';
 import { NestedPartial } from 'types/nested-partial';
 import {
   AnchoredProjectMetadataBaseLD,
@@ -34,7 +30,7 @@ interface Props {
 
 export type RoleSubmitProps = {
   values: RolesFormSchemaType;
-  adminWalletId?: string;
+  adminAccountId?: string;
   shouldNavigate?: boolean;
 };
 
@@ -53,12 +49,11 @@ const useRolesSubmit = ({
   admin,
 }: Props): Return => {
   const { createOrUpdateProject } = useCreateOrUpdateProject();
-  const [createWallet] = useCreateWalletMutation();
 
   const rolesSubmit = useCallback(
     async ({
       values,
-      adminWalletId,
+      adminAccountId,
       shouldNavigate = true,
     }: RoleSubmitProps): Promise<void> => {
       try {
@@ -71,14 +66,14 @@ const useRolesSubmit = ({
         // this means there was no project developer/verifier and this hasn't changed,
         // so we don't want to update the metadata.
         if (
-          (offChainProject?.partyByDeveloperId || null) !==
+          (offChainProject?.accountByDeveloperId || null) !==
           (projectDeveloper?.id || null)
         ) {
           doUpdateMetadata = true;
           projectPatch.developerId = projectDeveloper?.id || null;
         }
         if (
-          (offChainProject?.partyByVerifierId || null) !==
+          (offChainProject?.accountByVerifierId || null) !==
           (verifier?.id || null)
         ) {
           doUpdateMetadata = true;
@@ -86,24 +81,7 @@ const useRolesSubmit = ({
         }
         if (values.admin && admin !== values.admin) {
           doUpdateAdmin = true;
-          if (adminWalletId) {
-            projectPatch.adminWalletId = adminWalletId;
-          } else {
-            // Create wallet
-            const walletRes = await createWallet({
-              variables: {
-                input: {
-                  wallet: {
-                    addr: values.admin,
-                  },
-                },
-              },
-            });
-            const newAdminWalletId = walletRes.data?.createWallet?.wallet?.id;
-            if (newAdminWalletId) {
-              projectPatch.adminWalletId = newAdminWalletId;
-            }
-          }
+          projectPatch.adminAccountId = adminAccountId;
         }
         const newMetadata = {
           ...metadata,
@@ -168,7 +146,7 @@ function getProjectStakeholder(
 ): ProjectStakeholder {
   return {
     '@type':
-      values.profileType === PartyType.User
+      values.profileType === AccountType.User
         ? REGEN_INDIVIDUAL
         : REGEN_ORGANIZATION,
     'schema:name': values.name,

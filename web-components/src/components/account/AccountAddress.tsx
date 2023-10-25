@@ -4,7 +4,7 @@ import { makeStyles } from 'tss-react/mui';
 
 import DropdownIcon from '../icons/DropdownIcon';
 
-interface PartyAddressProps {
+interface AccountAddressProps {
   name: string;
   address: string;
   onClick: () => void;
@@ -34,11 +34,11 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
 }));
 
-export default function PartyAddress({
+export default function AccountAddress({
   onClick,
   name,
   address,
-}: PartyAddressProps): JSX.Element {
+}: AccountAddressProps): JSX.Element {
   const { classes } = useStyles();
   const [showAddress, setShowAddress] = useState<boolean>(false);
 

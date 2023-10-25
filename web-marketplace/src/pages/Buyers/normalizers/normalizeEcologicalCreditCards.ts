@@ -1,5 +1,5 @@
 import { EcologicalCreditCardType } from 'web-components/lib/components/molecules/EcologicalCreditCard/EcologicalCreditCard.types';
-import { Party } from 'web-components/lib/components/user/UserInfoCard';
+import { Account } from 'web-components/lib/components/user/UserInfoCard';
 
 import {
   AllBuyersPageQuery,
@@ -14,7 +14,7 @@ import {
 type Params = {
   content: AllBuyersPageQuery['allBuyersPage'][0]['ecologicalCreditCardsSection'];
   creditClasses?: AllCreditClassQuery['allCreditClass'];
-  creditClassesPrograms?: (Party | undefined)[];
+  creditClassesPrograms?: (Account | undefined)[];
 };
 
 export const normalizeEcologicalCreditCards = ({

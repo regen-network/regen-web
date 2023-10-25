@@ -4,17 +4,16 @@ import { postData } from 'utils/fetch/postData';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { apiUri } from 'lib/apiUri';
+import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-import { getPartyByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery.utils';
 import { LoginParams, SignArbitraryType } from 'lib/wallet/wallet';
 
 type Params = {
   signArbitrary?: SignArbitraryType;
   setError: UseStateSetter<unknown>;
-  setAccountId: UseStateSetter<string | undefined>;
 };
 
-export const useLogin = ({ signArbitrary, setError, setAccountId }: Params) => {
+export const useLogin = ({ signArbitrary, setError }: Params) => {
   const reactQueryClient = useQueryClient();
 
   // Step 1: Retrieve and save the CSRF tokens
@@ -55,11 +54,8 @@ export const useLogin = ({ signArbitrary, setError, setAccountId }: Params) => {
           });
           const accountId = user?.id;
           if (accountId) {
-            setAccountId(accountId);
             reactQueryClient.invalidateQueries({
-              queryKey: getPartyByAddrQueryKey({
-                addr: wallet.address,
-              }),
+              queryKey: [GET_ACCOUNTS_QUERY_KEY],
             });
           }
         }
@@ -67,7 +63,7 @@ export const useLogin = ({ signArbitrary, setError, setAccountId }: Params) => {
         setError(e);
       }
     },
-    [signArbitrary, token, setAccountId, reactQueryClient, setError],
+    [signArbitrary, token, reactQueryClient, setError],
   );
 
   return login;

@@ -9,7 +9,7 @@ import { getClassesByIssuerQuery } from 'lib/queries/react-query/registry-server
 import { useWallet } from 'lib/wallet/wallet';
 
 type Props = {
-  address?: string;
+  address?: string | null;
 };
 
 function useQueryIsIssuer({ address }: Props) {

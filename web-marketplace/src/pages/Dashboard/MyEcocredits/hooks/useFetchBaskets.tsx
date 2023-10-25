@@ -19,7 +19,7 @@ import { BasketTokens } from 'hooks/useBasketTokens';
 
 interface Params {
   credits: BatchInfoWithBalance[];
-  address?: string;
+  address?: string | null;
 }
 
 interface Response {

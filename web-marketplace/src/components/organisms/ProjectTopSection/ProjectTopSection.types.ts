@@ -4,7 +4,7 @@ import {
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { Props as ActionCardProps } from 'web-components/lib/components/molecules/ActionCard/ActionCard';
-import { Party } from 'web-components/lib/components/user/UserInfoCard';
+import { Account } from 'web-components/lib/components/user/UserInfoCard';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import { AllCreditClassQuery, SdgByIriQuery } from 'generated/sanity-graphql';
@@ -41,7 +41,7 @@ export type ProjectTopSectionProps = {
   creditClassMetadata?: CreditClassMetadataLD;
   creditClassOnChain?: QueryClassResponse | null;
   onChainCreditClassId?: string;
-  program?: Party;
+  program?: Account;
 };
 
 export type SdgType = SdgByIriQuery['allSdg'][0];

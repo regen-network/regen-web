@@ -9,8 +9,8 @@ import { useQuery } from '@tanstack/react-query';
 import { isValidAddress } from 'web-components/lib/components/inputs/validation';
 
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
-import { getPartyByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
+import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
+import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 
 export const useProfileData = () => {
   const { accountAddressOrId } = useParams<{ accountAddressOrId: string }>();
@@ -22,31 +22,31 @@ export const useProfileData = () => {
   const { data: csrfData, isFetching: isLoadingCsrfToken } = useQuery(
     getCsrfTokenQuery({}),
   );
-  const { data: partyByAddr, isFetching: isLoadingPartyByAddr } = useQuery(
-    getPartyByAddrQuery({
+  const { data: accountByAddr, isFetching: isLoadingAccountByAddr } = useQuery(
+    getAccountByAddrQuery({
       client: graphqlClient,
       addr: accountAddressOrId ?? '',
       enabled: isValidRegenAddress && !!graphqlClient && !!csrfData,
     }),
   );
-  const { data: partyById, isFetching: isLoadingPartyById } = useQuery(
-    getPartyByIdQuery({
+  const { data: accountById, isFetching: isLoadingAccountById } = useQuery(
+    getAccountByIdQuery({
       client: graphqlClient,
       id: accountAddressOrId ?? '',
       enabled: !isValidRegenAddress && !!graphqlClient && !!csrfData,
     }),
   );
 
-  const party =
-    partyByAddr?.walletByAddr?.partyByWalletId ?? partyById?.partyById;
+  const account = accountByAddr?.accountByAddr ?? accountById?.accountById;
 
   const address = isValidRegenAddress
     ? accountAddressOrId
-    : partyById?.partyById?.walletByWalletId?.addr;
+    : accountById?.accountById?.addr;
 
   return {
     address,
-    party,
-    isLoading: isLoadingCsrfToken || isLoadingPartyByAddr || isLoadingPartyById,
+    account,
+    isLoading:
+      isLoadingCsrfToken || isLoadingAccountByAddr || isLoadingAccountById,
   };
 };

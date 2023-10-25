@@ -12,12 +12,12 @@ import {
   CreditClassMetadataLD,
 } from 'lib/db/types/json-ld';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
+import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 
 import { useAccountInfo } from 'pages/ProfileEdit/hooks/useAccountInfo';
-import { getDisplayPartyOrAddress } from 'components/organisms/DetailsSection/DetailsSection.utils';
+import { getDisplayAccountOrAddress } from 'components/organisms/DetailsSection/DetailsSection.utils';
 
-import { getDisplayParty } from '../ProjectDetails.utils';
+import { getDisplayAccount } from '../ProjectDetails.utils';
 
 type Params = {
   anchoredMetadata?: AnchoredProjectMetadataLD;
@@ -35,32 +35,32 @@ export const useStakeholders = ({
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
-  const projectDeveloper = getDisplayParty(
+  const projectDeveloper = getDisplayAccount(
     anchoredMetadata?.['regen:projectDeveloper'],
-    offChainProject?.partyByDeveloperId,
+    offChainProject?.accountByDeveloperId,
   );
 
-  const projectVerifier = getDisplayParty(
+  const projectVerifier = getDisplayAccount(
     anchoredMetadata?.['regen:projectVerifier'],
-    offChainProject?.partyByVerifierId,
+    offChainProject?.accountByVerifierId,
   );
 
-  const program = getDisplayParty(
+  const program = getDisplayAccount(
     creditClassMetadata?.['regen:sourceRegistry'],
-    offChainProject?.creditClassByCreditClassId?.partyByRegistryId,
+    offChainProject?.creditClassByCreditClassId?.accountByRegistryId,
   );
 
   const adminAddr = onChainProject?.admin;
   const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
-  const { data: partyByAddr } = useQuery(
-    getPartyByAddrQuery({
+  const { data: accountByAddr } = useQuery(
+    getAccountByAddrQuery({
       client: graphqlClient,
       addr: adminAddr ?? '',
       enabled: !!adminAddr && !!graphqlClient && !!csrfData,
     }),
   );
-  const { party } = useAccountInfo({ partyByAddr });
-  const admin = getDisplayPartyOrAddress(adminAddr, party);
+  const { account } = useAccountInfo({ accountByAddr });
+  const admin = getDisplayAccountOrAddress(adminAddr, account);
 
   return {
     projectDeveloper,

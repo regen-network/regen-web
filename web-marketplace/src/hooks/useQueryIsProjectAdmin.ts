@@ -5,7 +5,7 @@ import { getProjectsByAdminQuery } from 'lib/queries/react-query/ecocredit/getPr
 import { useWallet } from 'lib/wallet/wallet';
 
 type Props = {
-  address?: string;
+  address?: string | null;
 };
 
 export function useQueryIsProjectAdmin({ address }: Props) {

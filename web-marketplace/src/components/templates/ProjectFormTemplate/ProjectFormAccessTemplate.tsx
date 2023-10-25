@@ -9,7 +9,7 @@ import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';
 import { ProjectDenied } from '../../organisms/ProjectDenied/ProjectDenied';
 
 type Props = {
-  adminAddr?: string;
+  adminAddr?: string | null;
   loading: boolean;
   offChainProject?: OffChainProject;
   onChainProject?: ProjectInfo;

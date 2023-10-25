@@ -8,21 +8,20 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import EyeIcon from 'web-components/lib/components/icons/EyeIcon';
 import { Title } from 'web-components/lib/components/typography';
 
-import { useUpdatePartyByIdMutation } from 'generated/graphql';
+import { useUpdateAccountByIdMutation } from 'generated/graphql';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
-import { getPartiesByAccountIdQueryKey } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.utils';
-import { getPartyByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery.utils';
+import { useAuth } from 'lib/auth/auth';
+import { getAccountByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery.utils';
+import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { WarningModal } from 'pages/ProjectEdit/ProjectEdit.WarningModal';
-import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfileForm';
 import { EditProfileFormActionBar } from 'components/organisms/EditProfileForm/EditProfileForm.ActionBar';
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
 
 import { useOnUploadCallback } from './hooks/useOnUploadCallback';
-import { useAccountInfo } from './hooks/useAccountInfo';
 import {
   DEFAULT_NAME,
   DEFAULT_PROFILE_AVATARS,
@@ -32,12 +31,13 @@ import {
   PROFILE_SAVED,
   VIEW_PROFILE,
 } from './ProfileEdit.constants';
+import { getDefaultAvatar } from './ProfileEdit.utils';
 
 export const ProfileEdit = () => {
   const setBannerTextAtom = useSetAtom(bannerTextAtom);
-  const { wallet, accountId, partyByAddr, loaded, accountChanging } =
-    useWallet();
-  const [updatePartyById] = useUpdatePartyByIdMutation();
+  const { wallet, accountId, loaded, accountChanging } = useWallet();
+  const { activeAccount } = useAuth();
+  const [updateAccountById] = useUpdateAccountByIdMutation();
   const reactQueryClient = useQueryClient();
   const [isWarningModalOpen, setIsWarningModalOpen] = useState<
     string | undefined
@@ -45,21 +45,23 @@ export const ProfileEdit = () => {
   const isDirtyRef = useRef<boolean>(false);
   const navigate = useNavigate();
 
-  const { party, defaultAvatar } = useAccountInfo({ partyByAddr });
+  const defaultAvatar = getDefaultAvatar(activeAccount);
 
   const initialValues: EditProfileFormSchemaType = useMemo(
     () => ({
-      name: String(party?.name ? party?.name : DEFAULT_NAME),
-      description: String(party?.description?.trimEnd() ?? ''),
-      profileImage: String(party?.image ? party?.image : defaultAvatar),
-      backgroundImage: String(
-        party?.bgImage ? party?.bgImage : DEFAULT_PROFILE_BG,
+      name: String(activeAccount?.name ? activeAccount?.name : DEFAULT_NAME),
+      description: String(activeAccount?.description?.trimEnd() ?? ''),
+      profileImage: String(
+        activeAccount?.image ? activeAccount?.image : defaultAvatar,
       ),
-      profileType: party?.type ?? DEFAULT_PROFILE_TYPE,
-      twitterLink: String(party?.twitterLink ?? ''),
-      websiteLink: String(party?.websiteLink ?? ''),
+      backgroundImage: String(
+        activeAccount?.bgImage ? activeAccount?.bgImage : DEFAULT_PROFILE_BG,
+      ),
+      profileType: activeAccount?.type ?? DEFAULT_PROFILE_TYPE,
+      twitterLink: String(activeAccount?.twitterLink ?? ''),
+      websiteLink: String(activeAccount?.websiteLink ?? ''),
     }),
-    [party, defaultAvatar],
+    [activeAccount, defaultAvatar],
   );
 
   /* callbacks */
@@ -76,11 +78,11 @@ export const ProfileEdit = () => {
       } = values;
       const isDefaultAvatar = DEFAULT_PROFILE_AVATARS.includes(profileImage);
       const isDefaultBg = DEFAULT_PROFILE_BG === backgroundImage;
-      await updatePartyById({
+      await updateAccountById({
         variables: {
           input: {
-            id: party?.id,
-            partyPatch: {
+            id: activeAccount?.id,
+            accountPatch: {
               name,
               description,
               image: isDefaultAvatar ? undefined : profileImage,
@@ -93,16 +95,16 @@ export const ProfileEdit = () => {
         },
       });
     },
-    [party, updatePartyById],
+    [activeAccount, updateAccountById],
   );
 
   const refreshProfileData = useCallback(async () => {
     if (wallet?.address) {
       await reactQueryClient.invalidateQueries({
-        queryKey: getPartyByAddrQueryKey({ addr: wallet?.address }),
+        queryKey: getAccountByAddrQueryKey({ addr: wallet?.address }),
       });
       await reactQueryClient.invalidateQueries({
-        queryKey: getPartiesByAccountIdQueryKey({ id: accountId }),
+        queryKey: getAccountByIdQueryKey({ id: accountId }),
       });
     }
   }, [accountId, reactQueryClient, wallet?.address]);
@@ -113,8 +115,7 @@ export const ProfileEdit = () => {
   }, [setBannerTextAtom, refreshProfileData]);
 
   const onUpload = useOnUploadCallback({
-    partyByAddr,
-    updatePartyById,
+    updateAccountById,
     refreshProfileData,
   });
 

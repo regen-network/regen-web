@@ -7,8 +7,8 @@ import FieldFormControl from 'web-components/lib/components/inputs/new/FieldForm
 import { UseStateSetter } from 'web-components/lib/types/react/useState';
 
 import {
-  GetPartiesByNameOrAddrQuery,
-  PartiesByAccountIdQuery,
+  AccountByIdQuery,
+  GetAccountsByNameOrAddrQuery,
 } from '../../../../../generated/graphql';
 import { DEFAULT_PROFILE_TYPE } from '../../../../../pages/ProfileEdit/ProfileEdit.constants';
 import { useDebounce } from '../../hooks/useDebounce';
@@ -20,10 +20,10 @@ import { RoleFieldOption } from './RoleField.Option';
 import { useStyles } from './RoleField.styles';
 import { Option } from './RoleField.types';
 import {
+  getAccounts,
   getIsOptionEqualToValue,
   getOptionLabel,
   getOptions,
-  getParties,
   getValue,
   groupOptions,
   isProfile,
@@ -40,14 +40,14 @@ interface Props {
   setDebouncedValue: UseStateSetter<string>;
   setValue: (value: ProfileModalSchemaType | null) => void;
   value?: ProfileModalSchemaType | null;
-  initialValue?: ProfileModalSchemaType | null;
-  partiesByAccountId?: PartiesByAccountIdQuery | null;
-  parties?: GetPartiesByNameOrAddrQuery | null;
+  activeAccountId?: string;
+  authenticatedAccounts?: Array<AccountByIdQuery['accountById']>;
+  authenticatedAccountIds?: string[];
+  accounts?: GetAccountsByNameOrAddrQuery | null;
   saveProfile: (
     profile: ProfileModalSchemaType,
     initialValue?: ProfileModalSchemaType | null,
   ) => Promise<{ id: string; creatorId: string } | undefined>;
-  accountId?: string;
 }
 
 export const RoleField = forwardRef<HTMLInputElement, Props>(
@@ -60,12 +60,12 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
       description,
       setValue,
       value,
-      initialValue,
       setDebouncedValue,
-      partiesByAccountId,
-      parties,
+      authenticatedAccountIds,
+      authenticatedAccounts,
+      accounts,
       saveProfile,
-      accountId,
+      activeAccountId,
     }: Props,
     ref,
   ) => {
@@ -83,9 +83,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
     );
 
     useEffect(() => {
-      const yourProfiles = getParties(
-        partiesByAccountId?.accountById?.partiesByAccountId?.nodes,
-      );
+      const yourProfiles = getAccounts(authenticatedAccounts);
       const valueArr = value
         ? yourProfiles.find(p => p.id === value.id)
           ? []
@@ -104,27 +102,31 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
               ...yourProfiles,
               ...valueArr,
             ],
-            accountId,
+            authenticatedAccountIds,
           ),
         );
         return;
       }
 
-      const searchProfiles = getParties(parties?.getPartiesByNameOrAddr?.nodes);
-      setOptions(groupOptions([...searchProfiles, ...valueArr], accountId));
+      const searchProfiles = getAccounts(
+        accounts?.getAccountsByNameOrAddr?.nodes,
+      );
+      setOptions(
+        groupOptions([...searchProfiles, ...valueArr], authenticatedAccountIds),
+      );
     }, [
-      accountId,
       inputValue,
-      parties,
-      partiesByAccountId?.accountById?.partiesByAccountId?.nodes,
+      accounts,
       value,
+      authenticatedAccounts,
+      authenticatedAccountIds,
     ]);
 
     const closeProfileModal = (): void => {
       setProfileAdd(null);
     };
 
-    const valueWithGroup = getValue(value, accountId);
+    const valueWithGroup = getValue(value, authenticatedAccountIds);
 
     return (
       <div className={cx(styles.root, classes && classes.root)}>
@@ -183,7 +185,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
             autoComplete
           />
         </FieldFormControl>
-        {value && value.id && value.creatorId === accountId && (
+        {value && value.id && value.creatorId === activeAccountId && (
           <OutlinedButton
             size="small"
             sx={{
@@ -209,9 +211,9 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
             initialValues={profileAdd}
             onClose={closeProfileModal}
             onSubmit={async profile => {
-              const party = await saveProfile(profile, initialValue);
-              const id = party?.id;
-              const creatorId = party?.creatorId;
+              const account = await saveProfile(profile);
+              const id = account?.id;
+              const creatorId = account?.creatorId;
               if (id && creatorId) {
                 closeProfileModal();
                 setInputValue(profile.name);

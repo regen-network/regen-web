@@ -215,10 +215,10 @@ export function useProjectsWithOrders({
     res => res.isFetching,
   );
 
-  const programParties = offChainProjectResults.map(
+  const programAccounts = offChainProjectResults.map(
     queryResult =>
       queryResult.data?.data.projectByOnChainId?.creditClassByCreditClassId
-        ?.partyByRegistryId,
+        ?.accountByRegistryId,
   );
 
   // Credit Classes and their metadata
@@ -235,7 +235,7 @@ export function useProjectsWithOrders({
       | undefined
     )[],
     projectPagesMetadata,
-    programParties,
+    programAccounts,
     sanityCreditClassData: creditClassData,
     classesMetadata,
   });

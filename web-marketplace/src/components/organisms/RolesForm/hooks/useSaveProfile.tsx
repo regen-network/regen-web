@@ -3,79 +3,58 @@ import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
 import {
-  useCreatePartyMutation,
-  useCreateWalletMutation,
-  useUpdatePartyByIdMutation,
+  useCreateAccountMutation,
+  useUpdateAccountByIdMutation,
 } from 'generated/graphql';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
-import { useWallet } from 'lib/wallet/wallet';
+import { useAuth } from 'lib/auth/auth';
 
 import { ProfileModalSchemaType } from '../components/ProfileModal/ProfileModal.schema';
 
 export const useSaveProfile = () => {
-  const [createWallet] = useCreateWalletMutation();
-  const [createParty] = useCreatePartyMutation();
-  const [updateParty] = useUpdatePartyByIdMutation();
+  const [createAccount] = useCreateAccountMutation();
+  const [updateAccount] = useUpdateAccountByIdMutation();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
-  const { accountId } = useWallet();
+  const { activeAccountId } = useAuth();
 
   const saveProfile = useCallback(
     async (
       profile: ProfileModalSchemaType,
-      initialValue?: ProfileModalSchemaType | null,
     ): Promise<{ id: string; creatorId: string } | undefined> => {
       const edit =
-        !!profile.creatorId && profile.creatorId === accountId && !!profile.id;
+        !!profile.creatorId &&
+        profile.creatorId === activeAccountId &&
+        !!profile.id;
       try {
-        let walletId;
-        const addr = profile.address;
-        if (!!addr && addr !== initialValue?.address) {
-          const walletRes = await createWallet({
-            variables: {
-              input: {
-                wallet: {
-                  addr,
-                },
-              },
-            },
-          });
-          walletId = walletRes.data?.createWallet?.wallet?.id;
-        }
+        const account = {
+          type: profile.profileType,
+          name: profile.name,
+          description: profile.description,
+          image: profile.profileImage,
+          addr: profile.address,
+          creatorId: activeAccountId,
+        };
         if (edit) {
-          await updateParty({
+          await updateAccount({
             variables: {
               input: {
                 id: profile.id,
-                partyPatch: {
-                  type: profile.profileType,
-                  name: profile.name,
-                  description: profile.description,
-                  image: profile.profileImage,
-                  walletId,
-                  creatorId: accountId,
-                },
+                accountPatch: account,
               },
             },
           });
-          return { id: profile.id ?? '', creatorId: accountId };
+          return { id: profile.id ?? '', creatorId: activeAccountId };
         } else {
-          const partyRes = await createParty({
+          const accountRes = await createAccount({
             variables: {
               input: {
-                party: {
-                  type: profile.profileType,
-                  name: profile.name,
-                  description: profile.description,
-                  image: profile.profileImage,
-                  walletId,
-                  creatorId: accountId,
-                },
+                account,
               },
             },
           });
           return {
-            id: partyRes.data?.createParty?.party?.id,
-            creatorId: accountId ?? '',
+            id: accountRes.data?.createAccount?.account?.id,
+            creatorId: activeAccountId ?? '',
           };
         }
       } catch (e) {
@@ -83,7 +62,7 @@ export const useSaveProfile = () => {
         return undefined;
       }
     },
-    [accountId, createParty, createWallet, setErrorBannerTextAtom, updateParty],
+    [activeAccountId, createAccount, setErrorBannerTextAtom, updateAccount],
   );
 
   return saveProfile;

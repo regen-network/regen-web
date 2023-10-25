@@ -4,7 +4,7 @@ import { BlockContent } from 'web-components/lib/components/block-content';
 import CreditClassCard, {
   CreditClassCardItemType,
 } from 'web-components/lib/components/cards/CreditClassCard';
-import { Party } from 'web-components/lib/components/user/UserInfoCard';
+import { Account } from 'web-components/lib/components/user/UserInfoCard';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
@@ -21,7 +21,7 @@ type Props = {
   creditTypeName?: string;
   creditTypeImage?: string | null;
   methodology?: ProjectMethodology;
-  program?: Party;
+  program?: Account;
 };
 
 export const ProjectTopSectionCreditClassCard: React.FC<Props> = ({

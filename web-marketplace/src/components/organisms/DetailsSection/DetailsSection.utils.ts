@@ -1,24 +1,24 @@
-import { Party } from 'web-components/lib/components/user/UserInfo';
+import { Account } from 'web-components/lib/components/user/UserInfo';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { Maybe, PartyFieldsFragment } from 'generated/graphql';
+import { AccountFieldsFragment, Maybe } from 'generated/graphql';
 
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 
-export const getDisplayPartyOrAddress = (
+export const getDisplayAccountOrAddress = (
   address?: string,
-  party?: Maybe<PartyFieldsFragment>,
-): Party | undefined => {
+  account?: Maybe<AccountFieldsFragment>,
+): Account | undefined => {
   if (!address) return;
-  const defaultAvatar = getDefaultAvatar(party);
-  if (!!party) {
-    const name = party.name;
-    const type = party.type;
+  const defaultAvatar = getDefaultAvatar(account);
+  if (!!account) {
+    const name = account.name;
+    const type = account.type;
     return {
       name: name ? name : truncate(address),
       type: type ? type : 'USER',
-      image: party.image ? party.image : defaultAvatar,
-      description: party.description?.trim(),
+      image: account.image ? account.image : defaultAvatar,
+      description: account.description?.trim(),
       link: `/profiles/${address}/portfolio`,
       address,
     };

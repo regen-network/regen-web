@@ -11,7 +11,7 @@ import {
 } from 'web-components/lib/components/block-content';
 import { ImageActionCard } from 'web-components/lib/components/cards/ImageActionCard';
 import { ProgramImageChildren } from 'web-components/lib/components/cards/ProjectCard/ProjectCard.ImageChildren';
-import { Party } from 'web-components/lib/components/user/UserInfo';
+import { Account } from 'web-components/lib/components/user/UserInfo';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { AllCreditClassQuery } from '../../generated/sanity-graphql';
@@ -21,7 +21,7 @@ import { onChainClassRegExp } from '../../lib/ledger';
 type Props = {
   btnText: string;
   creditClassesContent?: AllCreditClassQuery['allCreditClass'];
-  creditClassesProgram?: (Party | undefined)[];
+  creditClassesProgram?: (Account | undefined)[];
   justifyContent?: GridProps['justifyContent'];
   classes?: {
     root?: string;

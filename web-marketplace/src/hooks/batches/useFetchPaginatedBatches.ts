@@ -19,7 +19,7 @@ import { useAddDataToBatches } from './useAddDataToBatches';
 export const PAGINATED_BATCHES_ROWS_PER_PAGE = 10;
 
 type Props = {
-  address?: string;
+  address?: string | null;
   projectId?: string;
   withAllData?: boolean;
   creditClassId?: string | null;
@@ -76,7 +76,7 @@ export const useFetchPaginatedBatches = ({
       client: ecocreditClient,
       request: {
         pagination: paginationRequest,
-        issuer: address,
+        issuer: address as string,
       },
       keepPreviousData: true,
       enabled: !!ecocreditClient && !!address,

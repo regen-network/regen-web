@@ -50,8 +50,8 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
     admin: onChainProject?.admin,
   });
 
-  const projectDeveloper = offChainProject?.partyByDeveloperId;
-  const verifier = offChainProject?.partyByVerifierId;
+  const projectDeveloper = offChainProject?.accountByDeveloperId;
+  const verifier = offChainProject?.accountByVerifierId;
 
   const initialValues: RolesFormSchemaType = useMemo(
     () => ({

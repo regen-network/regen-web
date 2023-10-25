@@ -29,7 +29,8 @@ export const optionalAddressSchema = z
       message: invalidRegenAddress,
     },
   )
-  .optional();
+  .optional()
+  .nullable();
 
 export const adminModalSchema = z
   .object({

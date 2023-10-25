@@ -1,6 +1,6 @@
 import { Box, Card, CardMedia, SxProps } from '@mui/material';
 
-import { Party } from 'src/components/user/UserInfoCard';
+import { Account } from 'src/components/user/UserInfoCard';
 
 import { CardRibbon } from '../../../components/atoms/CardRibbon/CardRibbon';
 import { Flex } from '../../../components/box';
@@ -27,7 +27,7 @@ export interface Props extends OptimizeImageProps {
   imgSrc: string;
   generationMethods?: CreditClassCardItemType[];
   methodology?: Partial<LinkType>;
-  program?: Party;
+  program?: Account;
   sx?: SxProps<Theme>;
 }
 

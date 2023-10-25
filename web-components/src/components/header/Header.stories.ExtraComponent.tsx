@@ -24,7 +24,7 @@ export const ExtraComponent = (): JSX.Element => {
           pathname={''}
           linkComponent={NavLink}
           userMenuItems={userMenuItems}
-          addAddress={async () => {}}
+          addAccount={async () => {}}
           profiles={[
             {
               name: 'Mary Smith',

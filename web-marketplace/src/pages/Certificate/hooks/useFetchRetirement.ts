@@ -6,12 +6,12 @@ import {
 import { useQuery } from '@tanstack/react-query';
 
 import { normalizeRetirement } from 'lib/normalizers/retirements/normalizeRetirement';
-import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
+import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 import { getRetirementByNodeId } from 'lib/queries/react-query/registry-server/graphql/indexer/getRetirementByNodeId/getRetirementByNodeId';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
 import { getDataFromBatchDenomId } from 'pages/Dashboard/MyEcocredits/MyEcocredits.utils';
-import { getDisplayPartyOrAddress } from 'components/organisms/DetailsSection/DetailsSection.utils';
+import { getDisplayAccountOrAddress } from 'components/organisms/DetailsSection/DetailsSection.utils';
 import { useProjectsWithMetadata } from 'hooks/projects/useProjectsWithMetadata';
 
 import { client as sanityClient } from '../../../lib/clients/sanity';
@@ -49,17 +49,17 @@ export const useFetchRetirement = ({ retirementNodeId }: Params) => {
     useProjectsWithMetadata([retirementData?.projectId]);
 
   // Retrieve the party for the owner
-  const ownerPartyData = useQuery(
-    getPartyByAddrQuery({
+  const { data: ownerAccountData } = useQuery(
+    getAccountByAddrQuery({
       client: apolloClient,
       addr: retirement?.owner ?? '',
       enabled: !!apolloClient && !!retirement?.owner,
     }),
   );
-  const ownerParty = ownerPartyData?.data?.walletByAddr?.partyByWalletId;
+  const ownerAccount = ownerAccountData?.accountByAddr;
 
   // Format the party data
-  const owner = getDisplayPartyOrAddress(retirement?.owner, ownerParty);
+  const owner = getDisplayAccountOrAddress(retirement?.owner, ownerAccount);
 
   // Sanity credit class
   const sanityCreditClass = allSanityCreditClasses?.allCreditClass.find(

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, SxProps, Theme, useTheme } from '@mui/material';
+import { SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
 import { Buy1Event, Track } from 'web-marketplace/src/lib/tracker/types';
 
@@ -8,7 +8,7 @@ import { formatStandardInfo } from '../../../utils/format';
 import OutlinedButton from '../../buttons/OutlinedButton';
 import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
 import ProjectPlaceInfo from '../../place/ProjectPlaceInfo';
-import { Party, User } from '../../user/UserInfo';
+import { Account, User } from '../../user/UserInfo';
 import MediaCard, { MediaCardProps } from '../MediaCard';
 import { AVG_PRICE_TOOLTIP, DEFAULT_BUY_BUTTON } from './ProjectCard.constants';
 import { CreditPrice } from './ProjectCard.CreditPrice';
@@ -43,7 +43,7 @@ export interface ProjectCardProps extends MediaCardProps {
   creditsTooltip?: string;
   button?: ButtonType;
   disabled?: boolean;
-  program?: Party;
+  program?: Account;
 }
 
 export function ProjectCard({

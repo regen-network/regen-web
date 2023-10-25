@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 
 import { Label } from 'web-components/lib/components/typography';
 
-import { PartyType } from 'generated/graphql';
+import { AccountType } from 'generated/graphql';
 import { UseStateSetter } from 'types/react/use-state';
 
 import { DEFAULT_PROFILE_USER_AVATAR } from 'pages/ProfileEdit/ProfileEdit.constants';
@@ -22,7 +22,7 @@ export const AddNewProfile: React.FC<AddNewProfileProps> = ({
     onClick={e => {
       e.stopPropagation();
       setProfileAdd({
-        profileType: PartyType.User,
+        profileType: AccountType.User,
         name: '',
         profileImage: DEFAULT_PROFILE_USER_AVATAR,
       });

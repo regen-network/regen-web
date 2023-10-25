@@ -3,15 +3,16 @@ import { Box } from '@mui/material';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import {
-  GetPartiesByNameOrAddrQuery,
-  PartyWithAccountFieldsFragment,
+  AccountFieldsFragment,
+  GetAccountsByNameOrAddrQuery,
 } from '../../../../../generated/graphql';
 import { ProfileModalSchemaType } from '../ProfileModal/ProfileModal.schema';
 import { RoleField } from './RoleField';
 import {
-  accountId,
-  allParties as initialAllParties,
-  partiesByAccountId,
+  activeAccountId,
+  allAccounts as initialAllAccounts,
+  authenticatedAccountIds,
+  authenticatedAccounts,
 } from './RoleField.mock';
 
 export default {
@@ -22,17 +23,17 @@ export default {
 const Template: ComponentStory<typeof RoleField> = args => {
   const [value, setValue] = useState<ProfileModalSchemaType | null>(null);
   const [debouncedValue, setDebouncedValue] = useState('');
-  const [allParties, setAllParties] =
-    useState<PartyWithAccountFieldsFragment[]>(initialAllParties);
-  const [parties, setParties] = useState<
-    GetPartiesByNameOrAddrQuery | null | undefined
+  const [allAccounts, setAllAccounts] =
+    useState<AccountFieldsFragment[]>(initialAllAccounts);
+  const [accounts, setAccounts] = useState<
+    GetAccountsByNameOrAddrQuery | null | undefined
   >();
 
   const saveProfile = async (profile: ProfileModalSchemaType) => {
     const newProfile = { id: 'new', accountId: 'new', ...profile };
     const { id, accountId, profileType, profileImage, name, address } =
       newProfile;
-    const newParty = [
+    const newAccount = [
       {
         id,
         accountId,
@@ -42,32 +43,29 @@ const Template: ComponentStory<typeof RoleField> = args => {
         walletByWalletId: address ? { addr: address } : undefined,
       },
     ];
-    setAllParties([...newParty, ...allParties]);
+    setAllAccounts([...newAccount, ...allAccounts]);
     return { id: newProfile.id, creatorId: accountId ?? '' };
   };
 
   useEffect(() => {
-    const filteredParties = allParties.filter(
+    const filteredAccounts = allAccounts.filter(
       p =>
         debouncedValue &&
         (p.name.toLowerCase().indexOf(debouncedValue.toLowerCase()) > -1 ||
-          (p.walletByWalletId?.addr &&
-            p.walletByWalletId?.addr
-              .toLowerCase()
-              .indexOf(debouncedValue.toLowerCase()) > -1)),
+          (p.addr &&
+            p.addr.toLowerCase().indexOf(debouncedValue.toLowerCase()) > -1)),
     );
-    setParties({ getPartiesByNameOrAddr: { nodes: filteredParties } });
-  }, [allParties, debouncedValue]);
+    setAccounts({ getAccountsByNameOrAddr: { nodes: filteredAccounts } });
+  }, [allAccounts, debouncedValue]);
 
   return (
     <Box p={10}>
       <RoleField
         {...args}
-        accountId={accountId}
         setDebouncedValue={setDebouncedValue}
         value={value}
         setValue={setValue}
-        parties={parties}
+        accounts={accounts}
         saveProfile={saveProfile}
       />
     </Box>
@@ -80,7 +78,9 @@ Default.args = {
   label: 'Project Developer',
   description:
     'The individual or organization that is in charge of managing the project and will appear on the project page.',
-  partiesByAccountId,
+  authenticatedAccounts,
+  authenticatedAccountIds,
+  activeAccountId,
 };
 
 Default.argTypes = {};

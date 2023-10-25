@@ -8,13 +8,13 @@ import StaticMap from 'web-components/lib/components/map/StaticMap';
 import { Props as ActionCardProps } from 'web-components/lib/components/molecules/ActionCard/ActionCard';
 import { GalleryPhoto } from 'web-components/lib/components/organisms/Gallery/Gallery.types';
 import { Asset } from 'web-components/lib/components/sliders/ProjectMedia';
-import { Party } from 'web-components/lib/components/user/UserInfo';
+import { Account } from 'web-components/lib/components/user/UserInfo';
 
 import {
+  AccountFieldsFragment,
   CreditClass,
   Document,
   Maybe,
-  PartyFieldsFragment,
   Project,
 } from 'generated/graphql';
 import {
@@ -174,9 +174,9 @@ export const getProjectGalleryPhotos = ({
   return photos;
 };
 
-export function getParty(
-  party?: Maybe<PartyFieldsFragment>,
-): Party | undefined {
+export function getAccount(
+  party?: Maybe<AccountFieldsFragment>,
+): Account | undefined {
   if (!party) {
     return undefined;
   }
@@ -195,14 +195,14 @@ export function getParty(
     description: party.description,
     type: party.type,
     image: image,
-    address: party.walletByWalletId?.addr || '',
+    address: party.addr || '',
     link: party?.websiteLink,
   };
 }
 
-const getPartyFromMetadata = (
+const getAccountFromMetadata = (
   metadataRole: ProjectStakeholder,
-): Party | undefined => {
+): Account | undefined => {
   const type = metadataRole?.['@type']?.includes('regen:Organization')
     ? 'ORGANIZATION'
     : 'USER';
@@ -224,14 +224,14 @@ const getPartyFromMetadata = (
   };
 };
 
-export function getDisplayParty(
+export function getDisplayAccount(
   metadataRole?: ProjectStakeholder,
-  party?: Maybe<PartyFieldsFragment>,
-): Party | undefined {
-  const dbParty = getParty(party);
-  if (dbParty) return dbParty;
+  party?: Maybe<AccountFieldsFragment>,
+): Account | undefined {
+  const dbAccount = getAccount(party);
+  if (dbAccount) return dbAccount;
   // If no party info available for this role, check the metadata
-  if (metadataRole) return getPartyFromMetadata(metadataRole);
+  if (metadataRole) return getAccountFromMetadata(metadataRole);
   return undefined;
 }
 

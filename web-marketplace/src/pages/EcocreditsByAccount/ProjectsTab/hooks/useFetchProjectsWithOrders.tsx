@@ -69,8 +69,8 @@ export const useFetchProjectsWithOrders = ({
     project => project?.metadata,
   );
 
-  const programParties = orderedOffChainProjects.map(
-    project => project?.creditClassByCreditClassId?.partyByRegistryId,
+  const programAccounts = orderedOffChainProjects.map(
+    project => project?.creditClassByCreditClassId?.accountByRegistryId,
   );
 
   /* Final Normalization */
@@ -79,7 +79,7 @@ export const useFetchProjectsWithOrders = ({
     projectsWithOrderData,
     projectsMetadata,
     projectPagesMetadata,
-    programParties,
+    programAccounts,
     classesMetadata,
   });
   return {

@@ -5,12 +5,12 @@ import { ReactQueryBuilderResponse } from '../../types/react-query.types';
 
 type Accounts = {
   activeAccountId: string;
-  activeAccountIds: string[];
+  authenticatedAccountIds: string[];
 };
 
 export type ReactQueryGetAccountsQueryResponse =
   QueryObserverOptions<Accounts | null>;
 
-export type ReactQueryGetPartyByIdQueryParams = {
+export type ReactQueryGetAccountByIdQueryParams = {
   client: ApolloClient<NormalizedCacheObject>;
 } & ReactQueryBuilderResponse<ReactQueryGetAccountsQueryResponse>;

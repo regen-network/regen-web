@@ -1,9 +1,9 @@
 import { Box, useTheme } from '@mui/material';
 
-import UserInfoCard, { Party } from '../../../components/user/UserInfoCard';
+import UserInfoCard, { Account } from '../../../components/user/UserInfoCard';
 
 type Props = {
-  program?: Party;
+  program?: Account;
 };
 
 export const ProgramImageChildren = ({ program }: Props) => {

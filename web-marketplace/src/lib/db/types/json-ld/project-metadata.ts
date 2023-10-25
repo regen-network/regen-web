@@ -86,7 +86,7 @@ export interface ProjectStakeholder {
   'schema:name': string;
   'schema:description'?: string;
   'schema:image'?: string;
-  'regen:address'?: string;
+  'regen:address'?: string | null;
   'schema:url'?: string;
   'schema:location'?: GeocodeFeature;
 }

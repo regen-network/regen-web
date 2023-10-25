@@ -1,17 +1,19 @@
 import { useCallback } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { apiUri } from 'lib/apiUri';
+import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 
 type Params = {
   setError: UseStateSetter<unknown>;
-  setAccountId: UseStateSetter<string | undefined>;
 };
 
-export const useLogout = ({ setError, setAccountId }: Params) => {
+export const useLogout = ({ setError }: Params) => {
   const { data: token } = useQuery(getCsrfTokenQuery({}));
+  const reactQueryClient = useQueryClient();
+
   const logout = useCallback(async (): Promise<void> => {
     try {
       if (token) {
@@ -22,12 +24,14 @@ export const useLogout = ({ setError, setAccountId }: Params) => {
             'X-CSRF-TOKEN': token,
           },
         });
-        setAccountId(undefined);
+        reactQueryClient.invalidateQueries({
+          queryKey: [GET_ACCOUNTS_QUERY_KEY],
+        });
       }
     } catch (e) {
       setError(e);
     }
-  }, [token, setError, setAccountId]);
+  }, [token, reactQueryClient, setError]);
 
   return logout;
 };

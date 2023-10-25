@@ -1,4 +1,4 @@
-import { Party } from 'src/components/user/UserInfoCard';
+import { Account } from 'src/components/user/UserInfoCard';
 
 import { ImageType } from '../../../types/shared/imageType';
 
@@ -31,7 +31,7 @@ export type EcologicalCreditCardType = {
   description: string;
   offsetMethodList: EcologicalCreditCardItemListType;
   projectActivitesList: EcologicalCreditCardItemListType;
-  program?: Party;
+  program?: Account;
   button: {
     text: string;
     href: string;

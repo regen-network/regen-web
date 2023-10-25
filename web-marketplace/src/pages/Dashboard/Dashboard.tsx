@@ -10,12 +10,12 @@ import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 import { containerStyles } from 'web-components/lib/styles/container';
 import { truncate } from 'web-components/lib/utils/truncate';
 
+import { useAuth } from 'lib/auth/auth';
 import { getAccountUrl } from 'lib/block-explorer';
 import { isBridgeEnabled } from 'lib/ledger';
 import { getProfileLink } from 'lib/profileLink';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { useAccountInfo } from 'pages/ProfileEdit/hooks/useAccountInfo';
 import {
   DEFAULT_NAME,
   profileVariantMapping,
@@ -42,19 +42,20 @@ const Dashboard = (): JSX.Element => {
     isProjectAdmin,
     isIssuer,
   } = useProfileItems({});
-  const { wallet, accountId, partyByAddr } = useWallet();
+  const { activeAccount } = useAuth();
+  const { wallet, accountId } = useWallet();
   const location = useLocation();
 
-  const { party } = useAccountInfo({ partyByAddr });
-  const { avatarImage, backgroundImage } = getUserImages({ party });
+  const { avatarImage, backgroundImage } = getUserImages({
+    account: activeAccount,
+  });
   const { creditClasses } = useFetchCreditClassesWithOrder({
     admin: wallet?.address,
   });
 
   const socialsLinks: SocialLink[] = useMemo(
-    () =>
-      getSocialsLinks({ party: partyByAddr?.walletByAddr?.partyByWalletId }),
-    [partyByAddr],
+    () => getSocialsLinks({ account: activeAccount }),
+    [activeAccount],
   );
 
   const tabs: IconTabProps[] = useMemo(
@@ -87,12 +88,12 @@ const Dashboard = (): JSX.Element => {
     0,
   );
 
-  const profileLink = getProfileLink(wallet?.address || party?.id);
+  const profileLink = getProfileLink(wallet?.address || activeAccount?.id);
 
   return (
     <>
       <ProfileHeader
-        name={party?.name ? party.name : DEFAULT_NAME}
+        name={activeAccount?.name ? activeAccount.name : DEFAULT_NAME}
         backgroundImage={backgroundImage}
         avatar={avatarImage}
         infos={{
@@ -100,12 +101,16 @@ const Dashboard = (): JSX.Element => {
             href: getAccountUrl(wallet?.address, true),
             text: truncate(wallet?.address),
           },
-          description: party?.description?.trimEnd() ?? '',
+          description: activeAccount?.description?.trimEnd() ?? '',
           socialsLinks,
         }}
         editLink={accountId ? '/profile/edit' : ''}
         profileLink={profileLink}
-        variant={party?.type ? profileVariantMapping[party.type] : 'individual'}
+        variant={
+          activeAccount?.type
+            ? profileVariantMapping[activeAccount.type]
+            : 'individual'
+        }
         LinkComponent={Link}
       />
       <Box sx={{ bgcolor: 'grey.50' }}>

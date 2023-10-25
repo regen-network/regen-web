@@ -3094,7 +3094,7 @@ exports[`Storyshots Pagination Default 1`] = `
 </MemoryRouter>
 `;
 
-exports[`Storyshots Party Party Address 1`] = `
+exports[`Storyshots Account Account Address 1`] = `
 <MemoryRouter
   initialEntries={
     Array [

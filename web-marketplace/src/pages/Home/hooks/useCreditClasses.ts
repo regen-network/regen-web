@@ -9,7 +9,7 @@ import { client as sanityClient } from 'lib/clients/sanity';
 import { getCreditClassByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getCreditClassByOnChainIdQuery/getCreditClassByOnChainIdQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
-import { getDisplayParty } from 'components/templates/ProjectDetails/ProjectDetails.utils';
+import { getDisplayAccount } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 
 type Props = {
@@ -55,10 +55,10 @@ export const useCreditClasses = ({ skippedClassId }: Props) => {
 
   // Credit classes program
   const creditClassesPrograms = creditClassesFiltered?.map((_, index) =>
-    getDisplayParty(
+    getDisplayAccount(
       classesMetadata?.[index]?.['regen:sourceRegistry'],
       dbDataByOnChainIdDataResults?.[index]?.data?.data?.creditClassByOnChainId
-        ?.partyByRegistryId,
+        ?.accountByRegistryId,
     ),
   );
 

@@ -18,7 +18,7 @@ export interface User {
   link?: string | null;
 }
 
-export interface Party extends User {
+export interface Account extends User {
   address: string;
 }
 

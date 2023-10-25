@@ -2,11 +2,7 @@ import { isValidElement } from 'react';
 
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
-import {
-  Maybe,
-  PartyType,
-  PartyWithAccountFieldsFragment,
-} from 'generated/graphql';
+import { AccountFieldsFragment, AccountType, Maybe } from 'generated/graphql';
 
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
@@ -19,28 +15,34 @@ import { Option, OptionType } from './RoleField.types';
 export const isProfile = (option: OptionType): option is Option =>
   !isValidElement(option);
 
-export const group = (value: ProfileModalSchemaType, accountId?: string) =>
-  value.accountId === accountId ? YOUR_PROFILES : ALL_PROFILES;
+export const group = (
+  value: ProfileModalSchemaType,
+  authenticatedAccountIds?: string[],
+) =>
+  value.id && authenticatedAccountIds?.includes(value.id)
+    ? YOUR_PROFILES
+    : ALL_PROFILES;
 
-export const getParties = (parties?: Maybe<PartyWithAccountFieldsFragment>[]) =>
-  parties?.map(party => ({
-    accountId: party?.accountId,
-    creatorId: party?.creatorId,
-    id: party?.id as string,
-    name: party?.name || DEFAULT_NAME,
-    profileType: party?.type as PartyType,
-    profileImage: party?.image || getDefaultAvatar(party),
-    description: party?.description || undefined,
-    address: party?.walletByWalletId?.addr || undefined,
+export const getAccounts = (
+  accounts?: Maybe<AccountFieldsFragment | undefined>[],
+) =>
+  accounts?.map(account => ({
+    creatorId: account?.creatorId,
+    id: account?.id as string,
+    name: account?.name || DEFAULT_NAME,
+    profileType: account?.type as AccountType,
+    profileImage: account?.image || getDefaultAvatar(account),
+    description: account?.description || undefined,
+    address: account?.addr || undefined,
   })) || [];
 
 export const getValue = (
   value?: ProfileModalSchemaType | null,
-  accountId?: string,
+  authenticatedAccountIds?: string[],
 ) =>
   value
     ? {
-        group: group(value, accountId),
+        group: group(value, authenticatedAccountIds),
         ...value,
       }
     : null;
@@ -63,9 +65,9 @@ export const getOptionLabel = (option: OptionType) =>
 
 export const groupOptions = (
   options: ProfileModalSchemaType[],
-  accountId?: string,
+  authenticatedAccountIds?: string[],
 ) =>
   options.map(option => ({
-    group: group(option, accountId),
+    group: group(option, authenticatedAccountIds),
     ...option,
   }));

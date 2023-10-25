@@ -15,18 +15,16 @@ import { Window as KeplrWindow } from '@keplr-wallet/types';
 import { useQuery } from '@tanstack/react-query';
 import truncate from 'lodash/truncate';
 
-import { PartyByAddrQuery, useGetCurrentAccountQuery } from 'generated/graphql';
+import { useAuth } from 'lib/auth/auth';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
+import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 
-import { useAddAddress } from './hooks/useAddAddress';
 import { useAutoConnect } from './hooks/useAutoConnect';
 import { useConnect } from './hooks/useConnect';
 import { useConnectWallet } from './hooks/useConnectWallet';
 import { useDetectKeplrMobileBrowser } from './hooks/useDetectKeplrMobileBrowser';
 import { useDisconnect } from './hooks/useDisconnect';
-import { useHandleAddAddress } from './hooks/useHandleAddAddress';
 import { useLogin } from './hooks/useLogin';
 import { useLogout } from './hooks/useLogout';
 import { useOnAccountChange } from './hooks/useOnAccountChange';
@@ -72,7 +70,6 @@ export type WalletContextType = {
   signArbitrary?: SignArbitraryType;
   accountId?: string;
   isConnected: boolean;
-  partyByAddr?: PartyByAddrQuery | null;
   accountChanging: boolean;
   isKeplrMobileWeb: boolean;
 };
@@ -92,7 +89,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const [loaded, setLoaded] = useState<boolean>(false);
   const [wallet, setWallet] = useState<Wallet>(emptySender);
   const [accountChanging, setAccountChanging] = useState<boolean>(false);
-  const [accountId, setAccountId] = useState<string | undefined>(undefined);
+  const { activeAccountId, authenticatedAccountIds } = useAuth();
   const [connectionType, setConnectionType] = useState<string | undefined>(
     undefined,
   );
@@ -125,8 +122,8 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const signArbitrary = useSignArbitrary({
     setError,
   });
-  const login = useLogin({ signArbitrary, setError, setAccountId });
-  const logout = useLogout({ setError, setAccountId });
+  const login = useLogin({ signArbitrary, setError });
+  const logout = useLogout({ setError });
 
   const connectWallet = useConnectWallet({
     setWallet,
@@ -156,8 +153,8 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     wallet,
     keplrMobileWeb,
     walletConfigRef,
-    // activeAccountId,
-    // authenticatedAccountIds,
+    activeAccountId,
+    authenticatedAccountIds,
     setAccountChanging,
   });
   useDetectKeplrMobileBrowser({
@@ -167,16 +164,11 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     setKeplrMobileWeb,
   });
 
-  const { data } = useGetCurrentAccountQuery();
-  useEffect(() => {
-    if (data?.getCurrentAccount) setAccountId(data?.getCurrentAccount);
-  }, [data?.getCurrentAccount]);
-
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
-  const { data: partyByAddr, isFetching } = useQuery(
-    getPartyByAddrQuery({
+  const { data: accountByAddr, isFetching } = useQuery(
+    getAccountByAddrQuery({
       client: graphqlClient,
       addr: wallet?.address ?? '',
       enabled: !!wallet?.address && !!graphqlClient && !!csrfData,
@@ -194,17 +186,14 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         connectionType,
         error,
         signArbitrary,
-        accountId,
-        partyByAddr,
         accountChanging,
         isConnected:
           !!wallet?.address &&
           // signArbitrary (used in login) not yet supported by @keplr-wallet/wc-client
           // https://github.com/chainapsis/keplr-wallet/issues/664
           (loginDisabled ||
-            (!!accountId &&
-              partyByAddr?.walletByAddr?.partyByWalletId?.accountId ===
-                accountId)),
+            (!!activeAccountId &&
+              accountByAddr?.accountByAddr?.id === activeAccountId)),
         isKeplrMobileWeb: keplrMobileWeb,
       }}
     >

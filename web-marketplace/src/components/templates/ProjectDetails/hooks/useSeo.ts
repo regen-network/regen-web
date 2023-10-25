@@ -1,22 +1,24 @@
 import { useLocation } from 'react-router-dom';
 
-import { Party } from 'web-components/lib/components/user/UserInfo';
+import { Account } from 'web-components/lib/components/user/UserInfo';
 
 import {
   AnchoredProjectMetadataBaseLD,
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
 
-function getVisiblePartyName(party?: Party | undefined): string | undefined {
-  return party?.name;
+function getVisibleAccountName(
+  account?: Account | undefined,
+): string | undefined {
+  return account?.name;
 }
 
 interface UseSeoParams {
   projectMetadata?: AnchoredProjectMetadataBaseLD;
   projectPageMetadata?: ProjectPageMetadataLD;
-  landSteward?: Party;
-  projectDeveloper?: Party;
-  landOwner?: Party;
+  landSteward?: Account;
+  projectDeveloper?: Account;
+  landOwner?: Account;
   creditClassName: string | undefined;
 }
 
@@ -34,10 +36,10 @@ export default function useSeo({
   // nicely in twitter/google.
   const location = useLocation();
 
-  const partyName =
-    getVisiblePartyName(landSteward) ||
-    getVisiblePartyName(projectDeveloper) ||
-    getVisiblePartyName(landOwner);
+  const accountName =
+    getVisibleAccountName(landSteward) ||
+    getVisibleAccountName(projectDeveloper) ||
+    getVisibleAccountName(landOwner);
 
   const metadataLocation = projectMetadata?.['schema:location'];
   const projectAddress = metadataLocation?.['place_name'];
@@ -45,8 +47,8 @@ export default function useSeo({
   const siteMetadata = {
     title: `Regen Marketplace`,
     description:
-      creditClassName && partyName && projectAddress
-        ? `Learn about ${creditClassName} credits sourced from ${partyName} in ${projectAddress}.`
+      creditClassName && accountName && projectAddress
+        ? `Learn about ${creditClassName} credits sourced from ${accountName} in ${projectAddress}.`
         : '',
     author: `Regen Network`,
     siteUrl: `${window.location.origin}`,

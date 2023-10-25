@@ -38,7 +38,8 @@ export const useFetchAllOffChainProjects = ({
         offChainProject: project,
         projectMetadata: project?.metadata,
         projectPageMetadata: project?.metadata,
-        programParty: project?.creditClassByCreditClassId?.partyByRegistryId,
+        programAccount:
+          project?.creditClassByCreditClassId?.accountByRegistryId,
         sanityClass: findSanityCreditClass({
           sanityCreditClassData: sanityCreditClassesData,
           creditClassIdOrUrl:

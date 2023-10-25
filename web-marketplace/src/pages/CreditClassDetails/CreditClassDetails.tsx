@@ -8,7 +8,7 @@ import {
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
-import { Party } from 'web-components/lib/components/user/UserInfo';
+import { Account } from 'web-components/lib/components/user/UserInfo';
 
 import { useCreditClassByUriQuery } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
@@ -32,10 +32,10 @@ import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import useImpact from 'pages/CreditClassDetails/hooks/useImpact';
-import { getDisplayPartyOrAddress } from 'components/organisms/DetailsSection/DetailsSection.utils';
+import { getDisplayAccountOrAddress } from 'components/organisms/DetailsSection/DetailsSection.utils';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { AVG_PRICE_TOOLTIP_CREDIT_CLASS } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants';
-import { getDisplayParty } from 'components/templates/ProjectDetails/ProjectDetails.utils';
+import { getDisplayAccount } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { useLedger } from '../../ledger';
 import {
@@ -161,8 +161,8 @@ function CreditClassDetails({
     creditClassMetadata: metadata,
   });
 
-  const { data: adminPartyByAddrData } = useQuery(
-    getPartyByAddrQuery({
+  const { data: adminAccountByAddrData } = useQuery(
+    getAccountByAddrQuery({
       client: graphqlClient,
       addr: onChainClass?.admin ?? '',
       enabled: !!onChainClass?.admin && !!graphqlClient && !!csrfData,
@@ -171,7 +171,7 @@ function CreditClassDetails({
   const creditClassIssuersResults = useQueries({
     queries:
       issuers?.map(issuer =>
-        getPartyByAddrQuery({
+        getAccountByAddrQuery({
           client: graphqlClient,
           addr: issuer ?? '',
           enabled: !!graphqlClient && !!csrfData,
@@ -179,13 +179,13 @@ function CreditClassDetails({
       ) ?? [],
   });
 
-  const creditClassAdminParty = getDisplayPartyOrAddress(
+  const creditClassAdminAccount = getDisplayAccountOrAddress(
     onChainClass?.admin,
-    adminPartyByAddrData?.walletByAddr?.partyByWalletId,
+    adminAccountByAddrData?.accountByAddr,
   );
-  const creditClassProgramParty = getDisplayParty(
+  const creditClassProgramAccount = getDisplayAccount(
     metadata?.['regen:sourceRegistry'],
-    dbCreditClassByOnChainId?.partyByRegistryId,
+    dbCreditClassByOnChainId?.accountByRegistryId,
   );
 
   const creditClassIssuersData = creditClassIssuersResults.map(
@@ -193,12 +193,9 @@ function CreditClassDetails({
   );
   const creditClassIssuers = creditClassIssuersData
     .map((issuer, index) =>
-      getDisplayPartyOrAddress(
-        issuers?.[index],
-        issuer?.walletByAddr?.partyByWalletId,
-      ),
+      getDisplayAccountOrAddress(issuers?.[index], issuer?.accountByAddr),
     )
-    .filter((party: Party | undefined): party is Party => !!party);
+    .filter((party: Account | undefined): party is Account => !!party);
 
   useEffect(() => {
     const fetch = async (): Promise<void> => {
@@ -230,8 +227,8 @@ function CreditClassDetails({
           content={content}
           onChainClass={onChainClass}
           metadata={metadata}
-          program={creditClassProgramParty}
-          admin={creditClassAdminParty}
+          program={creditClassProgramAccount}
+          admin={creditClassAdminAccount}
           issuers={creditClassIssuers}
           impactCards={impact}
         />

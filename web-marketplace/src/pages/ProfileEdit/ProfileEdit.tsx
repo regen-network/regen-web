@@ -36,7 +36,7 @@ import { getDefaultAvatar } from './ProfileEdit.utils';
 export const ProfileEdit = () => {
   const setBannerTextAtom = useSetAtom(bannerTextAtom);
   const { wallet, loaded, accountChanging } = useWallet();
-  const { activeAccount } = useAuth();
+  const { activeAccount, loading } = useAuth();
   const [updateAccountById] = useUpdateAccountByIdMutation();
   const reactQueryClient = useQueryClient();
   const [isWarningModalOpen, setIsWarningModalOpen] = useState<
@@ -103,11 +103,13 @@ export const ProfileEdit = () => {
       await reactQueryClient.invalidateQueries({
         queryKey: getAccountByAddrQueryKey({ addr: wallet?.address }),
       });
+    }
+    if (activeAccount) {
       await reactQueryClient.invalidateQueries({
-        queryKey: getAccountByIdQueryKey({ id: activeAccount?.id }),
+        queryKey: getAccountByIdQueryKey({ id: activeAccount.id }),
       });
     }
-  }, [activeAccount?.id, reactQueryClient, wallet?.address]);
+  }, [activeAccount, reactQueryClient, wallet?.address]);
 
   const onSuccess = useCallback(() => {
     setBannerTextAtom(PROFILE_SAVED);
@@ -148,7 +150,7 @@ export const ProfileEdit = () => {
             </OutlinedButton>
           </Flex>
           <WithLoader
-            isLoading={!loaded || accountChanging}
+            isLoading={!loaded || accountChanging || loading}
             sx={{ mx: 'auto' }}
           >
             <EditProfileForm

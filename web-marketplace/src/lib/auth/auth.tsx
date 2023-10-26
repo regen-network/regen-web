@@ -34,7 +34,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   );
   const activeAccountId = data?.activeAccountId;
   const authenticatedAccountIds = data?.authenticatedAccountIds;
-
+  console.log('data', data);
   const authenticatedAccountsResult = useQueries({
     queries:
       authenticatedAccountIds?.map(id =>
@@ -58,7 +58,9 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   return (
     <AuthContext.Provider
       value={{
+        activeAccountId,
         activeAccount,
+        authenticatedAccountIds,
         authenticatedAccounts,
         loading: isFetching || isAuthenticatedAccountsFetching,
       }}

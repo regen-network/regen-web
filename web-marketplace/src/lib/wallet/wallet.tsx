@@ -68,7 +68,6 @@ export type WalletContextType = {
   error?: unknown;
   walletConnectUri?: string;
   signArbitrary?: SignArbitraryType;
-  accountId?: string;
   isConnected: boolean;
   accountChanging: boolean;
   isKeplrMobileWeb: boolean;

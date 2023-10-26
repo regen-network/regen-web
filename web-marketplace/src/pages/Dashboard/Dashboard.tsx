@@ -43,7 +43,7 @@ const Dashboard = (): JSX.Element => {
     isIssuer,
   } = useProfileItems({});
   const { activeAccount } = useAuth();
-  const { wallet, accountId } = useWallet();
+  const { wallet } = useWallet();
   const location = useLocation();
 
   const { avatarImage, backgroundImage } = getUserImages({
@@ -104,7 +104,7 @@ const Dashboard = (): JSX.Element => {
           description: activeAccount?.description?.trimEnd() ?? '',
           socialsLinks,
         }}
-        editLink={accountId ? '/profile/edit' : ''}
+        editLink={activeAccount?.id ? '/profile/edit' : ''}
         profileLink={profileLink}
         variant={
           activeAccount?.type

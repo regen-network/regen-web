@@ -30,21 +30,19 @@ const Template: ComponentStory<typeof RoleField> = args => {
   >();
 
   const saveProfile = async (profile: ProfileModalSchemaType) => {
-    const newProfile = { id: 'new', accountId: 'new', ...profile };
-    const { id, accountId, profileType, profileImage, name, address } =
-      newProfile;
+    const newProfile = { id: 'new', ...profile };
+    const { id, profileType, profileImage, name, address } = newProfile;
     const newAccount = [
       {
         id,
-        accountId,
         type: profileType,
         image: profileImage,
         name,
-        walletByWalletId: address ? { addr: address } : undefined,
+        addr: address,
       },
     ];
     setAllAccounts([...newAccount, ...allAccounts]);
-    return { id: newProfile.id, creatorId: accountId ?? '' };
+    return { id: newProfile.id, creatorId: activeAccountId ?? '' };
   };
 
   useEffect(() => {

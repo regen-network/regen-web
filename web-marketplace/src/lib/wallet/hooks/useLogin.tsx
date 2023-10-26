@@ -54,7 +54,7 @@ export const useLogin = ({ signArbitrary, setError }: Params) => {
           });
           const accountId = user?.id;
           if (accountId) {
-            reactQueryClient.invalidateQueries({
+            await reactQueryClient.invalidateQueries({
               queryKey: [GET_ACCOUNTS_QUERY_KEY],
             });
           }

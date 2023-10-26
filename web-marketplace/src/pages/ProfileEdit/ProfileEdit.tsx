@@ -35,7 +35,7 @@ import { getDefaultAvatar } from './ProfileEdit.utils';
 
 export const ProfileEdit = () => {
   const setBannerTextAtom = useSetAtom(bannerTextAtom);
-  const { wallet, accountId, loaded, accountChanging } = useWallet();
+  const { wallet, loaded, accountChanging } = useWallet();
   const { activeAccount } = useAuth();
   const [updateAccountById] = useUpdateAccountByIdMutation();
   const reactQueryClient = useQueryClient();
@@ -104,10 +104,10 @@ export const ProfileEdit = () => {
         queryKey: getAccountByAddrQueryKey({ addr: wallet?.address }),
       });
       await reactQueryClient.invalidateQueries({
-        queryKey: getAccountByIdQueryKey({ id: accountId }),
+        queryKey: getAccountByIdQueryKey({ id: activeAccount?.id }),
       });
     }
-  }, [accountId, reactQueryClient, wallet?.address]);
+  }, [activeAccount?.id, reactQueryClient, wallet?.address]);
 
   const onSuccess = useCallback(() => {
     setBannerTextAtom(PROFILE_SAVED);

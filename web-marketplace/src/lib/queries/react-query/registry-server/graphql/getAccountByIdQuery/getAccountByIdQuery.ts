@@ -10,7 +10,7 @@ export const getAccountByIdQuery = ({
   client,
   ...params
 }: ReactQueryGetAccountByIdQueryParams): ReactQueryGetAccountByIdQueryResponse => ({
-  queryKey: getAccountByIdQueryKey(params.id),
+  queryKey: getAccountByIdQueryKey({ id: params.id }),
   queryFn: async () => {
     const { data } = await client.query<AccountByIdQuery>({
       query: AccountByIdDocument,

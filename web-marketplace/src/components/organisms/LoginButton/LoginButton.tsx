@@ -28,8 +28,6 @@ import { useLoginButtonStyles } from './LoginButton.styles';
 import { ButtonSize } from './LoginButton.types';
 import { getMobileConnectUrl, getWalletsUiConfig } from './LoginButton.utils';
 
-import Keplr from 'assets/keplr.png';
-
 type Props = {
   size?: ButtonSize;
 };
@@ -126,8 +124,7 @@ const LoginButton = ({ size = 'small' }: Props) => {
         <>
           {!isConnected && loaded && (
             <OutlinedButton onClick={onButtonClick} size={size}>
-              <img className={styles.icon} src={Keplr} alt="keplr" />
-              login
+              log in
             </OutlinedButton>
           )}
         </>

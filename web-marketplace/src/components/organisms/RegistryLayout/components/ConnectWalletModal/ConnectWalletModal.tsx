@@ -2,7 +2,7 @@ import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import ConnectWallet from 'web-components/lib/components/organisms/ConnectWallet';
 
 import { Link } from 'components/atoms';
-import { WalletButton } from 'components/organisms/WalletButton/WalletButton';
+import { LoginButton } from 'components/organisms/LoginButton/LoginButton';
 
 import {
   CONNECT_WALLET_MODAL_DESCRIPTION,
@@ -28,7 +28,7 @@ export const ConnectWalletModal = ({ open, onClose }: Props) => (
           </Link>
         </>
       }
-      button={<WalletButton size="large" />}
+      button={<LoginButton size="large" />}
       variant="modal"
     />
   </Modal>

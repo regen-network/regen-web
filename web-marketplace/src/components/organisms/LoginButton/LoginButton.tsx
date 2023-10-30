@@ -3,25 +3,30 @@ import { State, WalletStatus } from '@cosmos-kit/core';
 import { useManager } from '@cosmos-kit/react-lite';
 import { useQuery } from '@tanstack/react-query';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
+import { postData } from 'utils/fetch/postData';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import WalletModal from 'web-components/lib/components/modal/wallet-modal';
-import { WalletModalState } from 'web-components/lib/components/modal/wallet-modal/WalletModal.types';
 
 import { useLedger } from 'ledger';
+import { apiUri } from 'lib/apiUri';
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { isWaitingForSigningAtom } from 'lib/atoms/tx.atoms';
 import { getBalanceQuery } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery';
+import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 
 import { chainId } from '../../../lib/ledger';
 import { useWallet } from '../../../lib/wallet/wallet';
+import { LoginModal } from '../LoginModal/LoginModal';
+import { LoginModalState } from '../LoginModal/LoginModal.types';
 import { useConnectToWallet } from './hooks/useConnectToWallet';
 import { useNavigateToMobileUrl } from './hooks/useNavigateToMobileUrl';
 import { useResetModalOnConnect } from './hooks/useResetModalOnConnect';
-import { MobileSigningModal } from './WalletButton.SigningModal';
-import { useWalletButtonStyles } from './WalletButton.styles';
-import { ButtonSize } from './WalletButton.types';
-import { getMobileConnectUrl, getWalletsUiConfig } from './WalletButton.utils';
+import { socialProviders } from './LoginButton.constants';
+import { MobileSigningModal } from './LoginButton.SigningModal';
+import { useLoginButtonStyles } from './LoginButton.styles';
+import { ButtonSize } from './LoginButton.types';
+import { getMobileConnectUrl, getWalletsUiConfig } from './LoginButton.utils';
 
 import Keplr from 'assets/keplr.png';
 
@@ -29,8 +34,8 @@ type Props = {
   size?: ButtonSize;
 };
 
-const WalletButton = ({ size = 'small' }: Props) => {
-  const styles = useWalletButtonStyles();
+const LoginButton = ({ size = 'small' }: Props) => {
+  const styles = useLoginButtonStyles();
   const { wallet, connect, loaded, walletConnectUri, isConnected } =
     useWallet();
 
@@ -53,8 +58,7 @@ const WalletButton = ({ size = 'small' }: Props) => {
   const [isWaitingForSigning, setIsWaitingForSigningAtom] = useAtom(
     isWaitingForSigningAtom,
   );
-  const [modalState, setModalState] =
-    useState<WalletModalState>('wallet-select');
+  const [modalState, setModalState] = useState<LoginModalState>('select');
   const [connecting, setConnecting] = useState<boolean>(false);
   const [qrCodeUri, setQrCodeUri] = useState<string | undefined>();
   const isConnectedLoaded = loaded ? isConnected : null;
@@ -84,7 +88,7 @@ const WalletButton = ({ size = 'small' }: Props) => {
 
   const onModalClose = useCallback((): void => {
     setIsModalOpen(false);
-    setModalState('wallet-select');
+    setModalState('select');
   }, [setIsModalOpen, setModalState]);
 
   const connectToWallet = useConnectToWallet({
@@ -113,6 +117,9 @@ const WalletButton = ({ size = 'small' }: Props) => {
   });
   useResetModalOnConnect({ setIsModalOpen, setModalState, wallet });
 
+  const { data: token } = useQuery(getCsrfTokenQuery({}));
+  const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+
   return chainId ? (
     <>
       <div className={styles.root}>
@@ -125,10 +132,26 @@ const WalletButton = ({ size = 'small' }: Props) => {
           )}
         </>
       </div>
-      <WalletModal
+      <LoginModal
         open={isModalOpen}
         onClose={onModalClose}
         wallets={walletsUiConfig}
+        socialProviders={socialProviders}
+        onEmailSubmit={async ({ email }) => {
+          if (token) {
+            try {
+              await postData({
+                url: `${apiUri}/marketplace/v1/auth/passcode`,
+                data: {
+                  email,
+                },
+                token,
+              });
+            } catch (e) {
+              setErrorBannerTextAtom(String(e));
+            }
+          }
+        }}
         state={modalState}
         qrCodeUri={qrCodeUri}
         connecting={connecting}
@@ -143,4 +166,4 @@ const WalletButton = ({ size = 'small' }: Props) => {
   );
 };
 
-export { WalletButton };
+export { LoginButton };

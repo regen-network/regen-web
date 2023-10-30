@@ -6,7 +6,7 @@ import ConnectWallet from 'web-components/lib/components/organisms/ConnectWallet
 
 import { useWallet } from 'lib/wallet/wallet';
 
-import { WalletButton } from 'components/organisms/WalletButton/WalletButton';
+import { LoginButton } from 'components/organisms/LoginButton/LoginButton';
 
 import { CONNECT_WALLET_PAGE_TITLE } from './ConnectWalletPage.contants';
 
@@ -22,7 +22,7 @@ export const ConnectWalletPage = () => {
     <Flex justifyContent="center" pt={17} pb={27.5}>
       <ConnectWallet
         title={CONNECT_WALLET_PAGE_TITLE}
-        button={<WalletButton size="large" />}
+        button={<LoginButton size="large" />}
         variant="page"
       />
     </Flex>

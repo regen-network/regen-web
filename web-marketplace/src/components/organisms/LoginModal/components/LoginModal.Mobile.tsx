@@ -1,20 +1,18 @@
 import { Box } from '@mui/material';
 import QRCode from 'qrcode.react';
 
-import { Center } from '../../../../components/box';
-import { Loading } from '../../../../components/loading';
-import { Title } from '../../../../components/typography';
-import {
-  CONNECTING_LABEL,
-  QR_CODE_LABEL,
-} from './WalletModal.Mobile.constants';
+import { Center } from 'web-components/lib/components/box';
+import { Loading } from 'web-components/lib/components/loading';
+import { Title } from 'web-components/lib/components/typography';
+
+import { CONNECTING_LABEL, QR_CODE_LABEL } from './LoginModal.Mobile.constants';
 
 export interface Props {
   qrCodeUri?: string;
   connecting: boolean;
 }
 
-const WalletModalMobile = ({ qrCodeUri, connecting }: Props): JSX.Element => {
+const LoginModalMobile = ({ qrCodeUri, connecting }: Props): JSX.Element => {
   return (
     <Box sx={{ minHeight: 400 }}>
       <Title variant="h5" sx={{ mb: 7.5, textAlign: 'center' }}>
@@ -29,4 +27,4 @@ const WalletModalMobile = ({ qrCodeUri, connecting }: Props): JSX.Element => {
   );
 };
 
-export { WalletModalMobile };
+export { LoginModalMobile };

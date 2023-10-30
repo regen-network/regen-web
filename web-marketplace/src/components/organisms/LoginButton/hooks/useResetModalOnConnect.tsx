@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 
-import { WalletModalState } from 'web-components/lib/components/modal/wallet-modal/WalletModal.types';
-
 import { UseStateSetter } from 'types/react/use-state';
 import { Wallet } from 'lib/wallet/wallet';
 
+import { LoginModalState } from 'components/organisms/LoginModal/LoginModal.types';
+
 type Props = {
   wallet?: Wallet;
-  setModalState: UseStateSetter<WalletModalState>;
+  setModalState: UseStateSetter<LoginModalState>;
   setIsModalOpen: UseStateSetter<boolean>;
 };
 
@@ -18,7 +18,7 @@ export const useResetModalOnConnect = ({
 }: Props): void => {
   useEffect(() => {
     if (wallet?.address) {
-      setModalState('wallet-select');
+      setModalState('select');
       setIsModalOpen(false);
     }
   }, [wallet?.address, setIsModalOpen, setModalState]);

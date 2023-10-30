@@ -3,19 +3,18 @@ import {
   isMobile as checkIsMobile,
 } from '@walletconnect/browser-utils';
 
-import { Wallet } from 'web-components/lib/components/modal/wallet-modal/WalletModal.types';
-
+import { LoginProvider } from '../LoginModal/LoginModal.types';
 import {
   getAllWalletsUiConfig,
   GetWalletsUiConfigParams,
-} from './WalletButton.config';
-import { mobileWalletsName } from './WalletButton.constants';
+} from './LoginButton.config';
+import { mobileWalletsName } from './LoginButton.constants';
 
 /* getWalletsUiConfig */
 
 export const getWalletsUiConfig = ({
   connectToWallet,
-}: GetWalletsUiConfigParams): Wallet[] => {
+}: GetWalletsUiConfigParams): LoginProvider[] => {
   const walletsUiConfig = getAllWalletsUiConfig({
     connectToWallet,
   });

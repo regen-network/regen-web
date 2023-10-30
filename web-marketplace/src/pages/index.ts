@@ -16,6 +16,7 @@ export * from './Eligibility';
 export * from './GettingStarted';
 export * from './Home';
 export * from './LandStewards';
+export * from './Login';
 export * from './Media';
 export * from './MethodologiesList';
 export * from './MethodologyDetails';

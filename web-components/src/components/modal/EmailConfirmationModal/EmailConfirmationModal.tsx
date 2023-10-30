@@ -40,12 +40,7 @@ export const EmailConfirmationModal = ({
   const codeInputRef = useRef<ConfirmationCodeRef>(null);
 
   return (
-    <Modal
-      open={open}
-      onClose={onClose}
-      isFullscreenMobile={false}
-      className="font-lato"
-    >
+    <Modal open={open} onClose={onClose} isFullscreenMobile={false}>
       <Box
         sx={{
           maxWidth: 460,

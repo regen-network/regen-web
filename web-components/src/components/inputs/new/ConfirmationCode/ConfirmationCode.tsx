@@ -6,31 +6,21 @@ import React, {
 } from 'react';
 
 import { cn } from '../../../../utils/styles/cn';
-import { propsMap } from './ConfirmationCode.mapping';
-import { ConfirmationCodeRef } from './ConfirmationCode.types';
+import {
+  ConfirmationCodeProps,
+  ConfirmationCodeRef,
+  InputProps,
+} from './ConfirmationCode.types';
 
-const allowedCharactersValues = ['alpha', 'numeric', 'alphanumeric'] as const;
-
-export type ConfirmationCodeProps = {
-  allowedCharacters?: typeof allowedCharactersValues[number];
-  ariaLabel?: string;
-  autoFocus?: boolean;
-  className?: string;
-  disabled?: boolean;
-  inputClassName?: string;
-  isPassword?: boolean;
-  length?: number;
-  placeholder?: string;
-  onChange: (res: string) => void;
-};
-
+/**
+ * A component that displays a confirmation code input field.
+ */
 export const ConfirmationCode = forwardRef<
   ConfirmationCodeRef,
   ConfirmationCodeProps
 >(
   (
     {
-      allowedCharacters = 'numeric',
       ariaLabel,
       autoFocus = true,
       className,
@@ -47,14 +37,14 @@ export const ConfirmationCode = forwardRef<
       throw new Error('Length should be a number and greater than 0');
     }
 
-    if (!allowedCharactersValues.some(value => value === allowedCharacters)) {
-      throw new Error(
-        'Invalid value for allowedCharacters. Use alpha, numeric, or alphanumeric',
-      );
-    }
-
     const inputsRef = useRef<Array<HTMLInputElement>>([]);
-    const inputProps = propsMap[allowedCharacters];
+    const inputProps: InputProps = {
+      type: 'tel',
+      inputMode: 'numeric',
+      pattern: '[0-9]{1}',
+      min: '0',
+      max: '9',
+    };
 
     useImperativeHandle(ref, () => ({
       focus: () => {
@@ -169,7 +159,7 @@ export const ConfirmationCode = forwardRef<
           }}
           maxLength={1}
           className={cn(
-            'w-[45px] h-[60px] bg-grey-0 border-grey-300 border mr-5 sm:mr-20 text-lg text-center p-0 font-lato focus:outline-0 rounded-sm border-solid',
+            'w-45 h-60 bg-grey-0 border-grey-300 border mr-5 sm:mr-20 text-lg text-center p-0 focus:outline-0 rounded-sm border-solid',
             inputClassName,
           )}
           autoComplete={i === 0 ? 'one-time-code' : 'off'}

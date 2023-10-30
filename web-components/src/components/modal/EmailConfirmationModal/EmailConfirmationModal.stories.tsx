@@ -39,8 +39,10 @@ export const Basic: Story = {
 
     const handleOnChange = (code: string) => {
       setResult(code);
-      if (code.length === 6) {
-        setError('Incorrect code! Double-check the code and try again.');
+      if (code.length === 6 && code !== '000000') {
+        setError(
+          'Incorrect code! Double-check the code and try again. (try 000000)',
+        );
       } else {
         setError(undefined);
       }

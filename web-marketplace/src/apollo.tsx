@@ -70,7 +70,7 @@ export const AuthApolloProvider = ({
   const errorLink = onError(({ operation, networkError, forward }) => {
     if (
       networkError &&
-      networkError.message.includes('403') &&
+      networkError.message.includes('status code 403') &&
       operation.operationName !== 'GetCurrentAccount'
     ) {
       const observable = new Observable<FetchResult<Record<string, any>>>(
@@ -93,7 +93,6 @@ export const AuthApolloProvider = ({
 
               forward(operation).subscribe(subscriber);
             } catch (err) {
-              localStorage.setItem('regen-csrf', '');
               observer.error(err);
             }
           })();

@@ -105,6 +105,7 @@ const RegistryLayoutHeader: React.FC = () => {
                   })) || []
                 }
                 onProfileClick={onProfileClick}
+                // TODO (#2193): add account functionality
               />
             )}
             <LoginButton />

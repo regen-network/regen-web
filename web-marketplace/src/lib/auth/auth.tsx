@@ -34,7 +34,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   );
   const activeAccountId = data?.activeAccountId;
   const authenticatedAccountIds = data?.authenticatedAccountIds;
-  console.log('data', data);
+  console.log('authenticatedAccountIds', authenticatedAccountIds);
   const authenticatedAccountsResult = useQueries({
     queries:
       authenticatedAccountIds?.map(id =>

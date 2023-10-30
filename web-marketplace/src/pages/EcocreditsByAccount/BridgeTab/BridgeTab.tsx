@@ -2,23 +2,23 @@ import { useMemo } from 'react';
 
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 
-import { useLedger } from 'ledger';
-
 import { Bridge, BridgedEcocreditsTable } from 'components/organisms';
 
+import { useProfileData } from '../hooks/useProfileData';
+
 export const BridgeTab = (): JSX.Element => {
-  const { wallet } = useLedger();
+  const { address } = useProfileData();
 
   const tabs: IconTabProps[] = useMemo(() => {
     const tabs = [
       {
         label: 'Bridged ecocredits',
-        content: <BridgedEcocreditsTable accountAddress={wallet?.address} />,
+        content: <BridgedEcocreditsTable accountAddress={address} />,
       },
     ];
 
     return tabs;
-  }, [wallet?.address]);
+  }, [address]);
 
   return <Bridge tabs={tabs} hideTabIndicator />;
 };

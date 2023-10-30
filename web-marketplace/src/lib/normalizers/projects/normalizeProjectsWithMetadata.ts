@@ -82,6 +82,7 @@ export const normalizeProjectWithMetadata = ({
   return {
     ...projectWithOrderData,
     id: projectId,
+    offChainId: offChainProject?.id,
     name:
       projectMetadata?.['schema:name'] ||
       projectWithOrderData?.name ||

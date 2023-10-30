@@ -87,10 +87,28 @@ export function sortPinnedProject(
   if (!pinnedIds) return 0;
 
   const aIdIndex = pinnedIds?.indexOf(a.id);
-  const aIndex = aIdIndex > 0 ? aIdIndex : pinnedIds?.indexOf(a.name);
+  const aOffChainIdIndex = pinnedIds?.indexOf(a.offChainId ?? '');
+  const aNameIndex = pinnedIds?.indexOf(a.name);
+  let aIndex = -1;
+  if (aIdIndex > 0) {
+    aIndex = aIdIndex;
+  } else if (aOffChainIdIndex > 0) {
+    aIndex = aOffChainIdIndex;
+  } else if (aNameIndex > 0) {
+    aIndex = aNameIndex;
+  }
 
   const bIdIndex = pinnedIds?.indexOf(b.id);
-  const bIndex = bIdIndex > 0 ? bIdIndex : pinnedIds?.indexOf(b.name);
+  const bOffChainIdIndex = pinnedIds?.indexOf(b.offChainId ?? '');
+  const bNameIndex = pinnedIds?.indexOf(b.name);
+  let bIndex = -1;
+  if (bIdIndex > 0) {
+    bIndex = bIdIndex;
+  } else if (bOffChainIdIndex > 0) {
+    bIndex = bOffChainIdIndex;
+  } else if (bNameIndex > 0) {
+    bIndex = bNameIndex;
+  }
 
   if (aIndex >= 0 && bIndex === -1) return -1;
   if (aIndex === -1 && bIndex >= 0) return 1;

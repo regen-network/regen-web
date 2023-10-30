@@ -9,7 +9,7 @@ import { OnProfileClickType } from './UserMenuItem.types';
 export type UserMenuItemProfileProps = {
   profileImage: string;
   name: string;
-  address: string;
+  address?: string | null;
   selected?: boolean;
   onProfileClick?: OnProfileClickType;
 };

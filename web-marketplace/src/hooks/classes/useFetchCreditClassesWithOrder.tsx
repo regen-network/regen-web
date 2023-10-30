@@ -13,11 +13,13 @@ import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/g
 type Props = {
   admin?: string | null;
   userAddress?: string;
+  fetchAll?: boolean;
 };
 
 export const useFetchCreditClassesWithOrder = ({
   admin,
   userAddress,
+  fetchAll = false,
 }: Props) => {
   const { ecocreditClient, dataClient, marketplaceClient } = useLedger();
   const reactQueryClient = useQueryClient();
@@ -25,7 +27,7 @@ export const useFetchCreditClassesWithOrder = ({
     useQuery(
       getClassesQuery({
         client: ecocreditClient,
-        enabled: !!ecocreditClient && !admin,
+        enabled: !!ecocreditClient && !admin && fetchAll,
       }),
     );
   const allCreditClasses = creditClassesData?.classes;

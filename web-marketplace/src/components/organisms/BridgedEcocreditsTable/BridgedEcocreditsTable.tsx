@@ -41,7 +41,7 @@ import { Note } from './BridgedEcocreditsTable.Note';
 import { useFetchBridgedEcocredits } from './hooks/useFetchBridgedEcocredits';
 
 interface Props {
-  accountAddress: string | undefined;
+  accountAddress: string | undefined | null;
   privateAccess?: boolean;
 }
 

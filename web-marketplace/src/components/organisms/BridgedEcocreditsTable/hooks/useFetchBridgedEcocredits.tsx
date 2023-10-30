@@ -32,7 +32,7 @@ import {
 } from '../BridgedEcocreditsTable.utils';
 
 interface Props {
-  address?: string;
+  address?: string | null;
 }
 
 interface Output {

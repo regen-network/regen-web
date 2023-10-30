@@ -16,7 +16,7 @@ import { OnProfileClickType } from './UserMenuItem.types';
 import { useUserMenuItemsStyles } from './UserMenuItems.styles';
 
 interface UserMenuItemsProps extends HeaderMenuItemBase {
-  address: string;
+  address?: string | null;
   avatar: string;
   userMenuItems: HeaderDropdownItemProps[];
   disconnect: () => void;

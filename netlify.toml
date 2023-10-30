@@ -63,6 +63,9 @@
   NEXT_PUBLIC_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"
   NEXT_PUBLIC_INTERCOM_APP_ID = "kn5di10s"
 
+[build]
+  command = "bun run build"
+
 [build.environment]
   NODE_OPTIONS = "--max-old-space-size=10216"
 

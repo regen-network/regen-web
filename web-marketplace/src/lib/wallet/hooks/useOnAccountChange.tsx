@@ -4,11 +4,12 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { postData } from 'utils/fetch/postData';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { apiUri } from 'lib/apiUri';
+import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 
@@ -48,6 +49,7 @@ export const useOnAccountChange = ({
     }),
   );
   const { data: token } = useQuery(getCsrfTokenQuery({}));
+  const reactQueryClient = useQueryClient();
 
   // Set new wallet or directly connect it for Keplr mobile browser
   useEffect(() => {
@@ -116,6 +118,9 @@ export const useOnAccountChange = ({
                 accountId: newAccountId,
               },
               token,
+            });
+            await reactQueryClient.invalidateQueries({
+              queryKey: [GET_ACCOUNTS_QUERY_KEY],
             });
             setAccountChanging(false);
           } else {

@@ -88,7 +88,11 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const [loaded, setLoaded] = useState<boolean>(false);
   const [wallet, setWallet] = useState<Wallet>(emptySender);
   const [accountChanging, setAccountChanging] = useState<boolean>(false);
-  const { activeAccountId, authenticatedAccountIds } = useAuth();
+  const {
+    activeAccountId,
+    authenticatedAccountIds,
+    loading: authLoading,
+  } = useAuth();
   const [connectionType, setConnectionType] = useState<string | undefined>(
     undefined,
   );
@@ -174,12 +178,12 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     }),
   );
   const loginDisabled = keplrMobileWeb || !!walletConnect;
-
+  console.log(authLoading);
   return (
     <WalletContext.Provider
       value={{
         wallet,
-        loaded: loaded && !isFetching,
+        loaded: loaded && !isFetching && (loginDisabled || !authLoading),
         connect,
         disconnect,
         connectionType,

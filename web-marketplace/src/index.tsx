@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client';
 import {
   createRoutesFromChildren,
   matchRoutes,
-  RouterProvider,
   useLocation,
   useNavigationType,
 } from 'react-router-dom';
@@ -22,7 +21,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Analytics from 'analytics';
 import doNotTrack from 'analytics-plugin-do-not-track';
 import { assets, chains } from 'chain-registry';
-import { getRouter } from 'routes';
+import { Routes } from 'routes';
 import { AnalyticsProvider } from 'use-analytics';
 
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
@@ -136,12 +135,9 @@ root.render(
                   <LedgerProvider>
                     <ThemeProvider>
                       <Suspense fallback={<PageLoader />}>
-                        <RouterProvider
-                          router={getRouter({
-                            reactQueryClient,
-                            apolloClientFactory,
-                          })}
-                          fallbackElement={<PageLoader />}
+                        <Routes
+                          reactQueryClient={reactQueryClient}
+                          apolloClientFactory={apolloClientFactory}
                         />
                       </Suspense>
                     </ThemeProvider>

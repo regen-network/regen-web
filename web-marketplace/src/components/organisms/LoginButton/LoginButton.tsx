@@ -12,6 +12,7 @@ import { useLedger } from 'ledger';
 import { apiUri } from 'lib/apiUri';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { isWaitingForSigningAtom } from 'lib/atoms/tx.atoms';
+import { useAuth } from 'lib/auth/auth';
 import { getBalanceQuery } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 
@@ -34,8 +35,14 @@ type Props = {
 
 const LoginButton = ({ size = 'small' }: Props) => {
   const styles = useLoginButtonStyles();
-  const { wallet, connect, loaded, walletConnectUri, isConnected } =
-    useWallet();
+  const { loading: authLoading, activeAccountId } = useAuth();
+  const {
+    wallet,
+    connect,
+    loaded: walletLoaded,
+    walletConnectUri,
+    isConnected,
+  } = useWallet();
 
   const { walletRepos } = useManager();
   const [qrState, setQRState] = useState<State>(State.Init); // state of QRCode
@@ -59,7 +66,7 @@ const LoginButton = ({ size = 'small' }: Props) => {
   const [modalState, setModalState] = useState<LoginModalState>('select');
   const [connecting, setConnecting] = useState<boolean>(false);
   const [qrCodeUri, setQrCodeUri] = useState<string | undefined>();
-  const isConnectedLoaded = loaded ? isConnected : null;
+  const isConnectedLoaded = walletLoaded ? isConnected : null;
 
   useEffect(() => {
     if (isModalOpen) {
@@ -122,7 +129,7 @@ const LoginButton = ({ size = 'small' }: Props) => {
     <>
       <div className={styles.root}>
         <>
-          {!isConnected && loaded && (
+          {!activeAccountId && !authLoading && walletLoaded && (
             <OutlinedButton onClick={onButtonClick} size={size}>
               log in
             </OutlinedButton>

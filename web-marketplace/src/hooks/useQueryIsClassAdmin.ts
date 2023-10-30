@@ -5,7 +5,7 @@ import { getClassesByAdminQuery } from 'lib/queries/react-query/ecocredit/getCla
 import { useWallet } from 'lib/wallet/wallet';
 
 type Props = {
-  address?: string;
+  address?: string | null;
 };
 
 export function useQueryIsClassAdmin({ address }: Props): boolean {
@@ -17,7 +17,7 @@ export function useQueryIsClassAdmin({ address }: Props): boolean {
     getClassesByAdminQuery({
       enabled: !!activeAddress && !!ecocreditClient,
       client: ecocreditClient,
-      request: { admin: activeAddress },
+      request: { admin: activeAddress as string },
     }),
   );
 

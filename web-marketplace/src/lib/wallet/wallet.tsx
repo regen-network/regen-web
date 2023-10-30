@@ -178,7 +178,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     }),
   );
   const loginDisabled = keplrMobileWeb || !!walletConnect;
-  console.log(authLoading);
+
   return (
     <WalletContext.Provider
       value={{

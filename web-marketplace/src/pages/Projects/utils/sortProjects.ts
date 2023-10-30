@@ -88,26 +88,28 @@ export function sortPinnedProject(
 
   const aIdIndex = pinnedIds?.indexOf(a.id);
   const aOffChainIdIndex = pinnedIds?.indexOf(a.offChainId ?? '');
-  const aNameIndex = pinnedIds?.indexOf(a.name);
+  const aSlugIndex = pinnedIds?.indexOf(a.slug ?? '');
+
   let aIndex = -1;
-  if (aIdIndex > 0) {
+  if (aIdIndex >= 0) {
     aIndex = aIdIndex;
-  } else if (aOffChainIdIndex > 0) {
+  } else if (aOffChainIdIndex >= 0) {
     aIndex = aOffChainIdIndex;
-  } else if (aNameIndex > 0) {
-    aIndex = aNameIndex;
+  } else if (aSlugIndex >= 0) {
+    aIndex = aSlugIndex;
   }
 
   const bIdIndex = pinnedIds?.indexOf(b.id);
   const bOffChainIdIndex = pinnedIds?.indexOf(b.offChainId ?? '');
-  const bNameIndex = pinnedIds?.indexOf(b.name);
+  const bSlugIndex = pinnedIds?.indexOf(b.slug ?? '');
+
   let bIndex = -1;
-  if (bIdIndex > 0) {
+  if (bIdIndex >= 0) {
     bIndex = bIdIndex;
-  } else if (bOffChainIdIndex > 0) {
+  } else if (bOffChainIdIndex >= 0) {
     bIndex = bOffChainIdIndex;
-  } else if (bNameIndex > 0) {
-    bIndex = bNameIndex;
+  } else if (bSlugIndex >= 0) {
+    bIndex = bSlugIndex;
   }
 
   if (aIndex >= 0 && bIndex === -1) return -1;

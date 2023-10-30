@@ -6,12 +6,14 @@ import {
   Outlet,
   Route,
   RouteObject,
+  RouterProvider,
 } from 'react-router-dom';
 import { Router } from '@remix-run/router';
 import * as Sentry from '@sentry/react';
 import { QueryClient } from '@tanstack/react-query';
 
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { CertificatePage } from 'pages/Certificate/Certificate';
 import MyBridge from 'pages/Dashboard/MyBridge';
@@ -33,6 +35,7 @@ import { storefrontLoader } from 'pages/Marketplace/Storefront/Storefront.loader
 import { projectsLoader } from 'pages/Projects/Projects.loader';
 import Settings from 'pages/Settings';
 import { AuthRoute } from 'components/atoms/AuthRoute';
+import PageLoader from 'components/atoms/PageLoader';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
 import { projectDetailsLoader } from 'components/templates/ProjectDetails/ProjectDetails.loader';
 
@@ -75,14 +78,38 @@ const Storefront = lazy(() => import('./pages/Marketplace/Storefront'));
 const ConnectWalletPage = lazy(() => import('./pages/ConnectWalletPage'));
 const ProfileEdit = lazy(() => import('./pages/ProfileEdit'));
 
+type RouterProps = {
+  reactQueryClient: QueryClient;
+  apolloClientFactory: ApolloClientFactory;
+};
+
+export const Routes = ({
+  reactQueryClient,
+  apolloClientFactory,
+}: RouterProps) => {
+  const { wallet } = useWallet();
+  return (
+    <RouterProvider
+      router={getRouter({
+        reactQueryClient,
+        apolloClientFactory,
+        address: wallet?.address,
+      })}
+      fallbackElement={<PageLoader />}
+    />
+  );
+};
+
 type RouterParams = {
   reactQueryClient: QueryClient;
   apolloClientFactory: ApolloClientFactory;
+  address?: string;
 };
 
 export const getRoutes = ({
   reactQueryClient,
   apolloClientFactory,
+  address,
 }: RouterParams): RouteObject[] => {
   return createRoutesFromElements(
     <Route element={<RegistryLayout />}>
@@ -126,7 +153,10 @@ export const getRoutes = ({
           })}
         />
         <Route path="profile" element={<AuthRoute component={Dashboard} />}>
-          <Route index element={<Navigate to="portfolio" />} />
+          <Route
+            index
+            element={<Navigate to={address ? 'portfolio' : 'projects'} />}
+          />
           <Route
             path="portfolio"
             element={<KeplrRoute component={MyEcocredits} />}

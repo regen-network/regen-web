@@ -11,7 +11,7 @@ import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMet
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
 type Props = {
-  admin?: string;
+  admin?: string | null;
   userAddress?: string;
 };
 
@@ -37,7 +37,7 @@ export const useFetchCreditClassesWithOrder = ({
     getClassesByAdminQuery({
       client: ecocreditClient,
       enabled: !!ecocreditClient && !!admin,
-      request: { admin },
+      request: { admin: admin as string },
     }),
   );
   const creditClassesByAdmin = creditClassesByAdminData?.classes;

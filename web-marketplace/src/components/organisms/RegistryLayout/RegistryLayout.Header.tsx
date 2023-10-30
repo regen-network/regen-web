@@ -8,7 +8,6 @@ import Header from 'web-components/lib/components/header';
 import { OnProfileClickType } from 'web-components/lib/components/header/components/UserMenuItem.types';
 import { UserMenuItems } from 'web-components/lib/components/header/components/UserMenuItems';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { truncate } from 'web-components/lib/utils/truncate';
 
 import { addWalletModalSwitchWarningAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
@@ -29,11 +28,16 @@ import {
   getUserMenuItems,
 } from './RegistryLayout.config';
 import { fullWidthRegExp } from './RegistryLayout.constants';
+import { getAddress } from './RegistryLayout.utils';
 
 const RegistryLayoutHeader: React.FC = () => {
   const { pathname } = useLocation();
-  const { authenticatedAccounts, activeAccount } = useAuth();
-  const { wallet, loaded, disconnect, isConnected } = useWallet();
+  const {
+    authenticatedAccounts,
+    activeAccount,
+    loading: authLoading,
+  } = useAuth();
+  const { wallet, loaded: walletLoaded, disconnect } = useWallet();
   const theme = useTheme<Theme>();
   const navigate = useNavigate();
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
@@ -59,7 +63,7 @@ const RegistryLayoutHeader: React.FC = () => {
   );
   const onProfileClick: OnProfileClickType = (isSelected: boolean) =>
     isSelected
-      ? navigate('/profile/portfolio')
+      ? navigate('/profile')
       : setAddWalletModalSwitchWarningAtom(atom => void (atom.open = true));
 
   const defaultAvatar = getDefaultAvatar(activeAccount);
@@ -83,31 +87,41 @@ const RegistryLayoutHeader: React.FC = () => {
         pathname={pathname}
         extras={
           <Box display="flex" justifyContent="center" alignItems="center">
-            {chainId && loaded && isConnected && disconnect && (
-              <UserMenuItems
-                address={truncate(wallet?.address)}
-                avatar={
-                  activeAccount?.image ? activeAccount?.image : defaultAvatar
-                }
-                disconnect={disconnect}
-                pathname={pathname}
-                linkComponent={RegistryNavLink}
-                userMenuItems={userMenuItems}
-                profiles={
-                  authenticatedAccounts?.map(account => ({
-                    name: account?.name ? account?.name : DEFAULT_NAME,
-                    profileImage: account?.image
-                      ? account?.image
-                      : getDefaultAvatar(account),
-                    address: truncate(account?.addr),
-                    selected:
-                      activeAccount?.id && activeAccount?.id === account?.id,
-                  })) || []
-                }
-                onProfileClick={onProfileClick}
-                // TODO (#2193): add account functionality
-              />
-            )}
+            {chainId &&
+              walletLoaded &&
+              !authLoading &&
+              !!activeAccount &&
+              disconnect && (
+                <UserMenuItems
+                  address={getAddress({
+                    walletAddress: wallet?.address,
+                    email: activeAccount?.email,
+                  })}
+                  avatar={
+                    activeAccount?.image ? activeAccount?.image : defaultAvatar
+                  }
+                  disconnect={disconnect}
+                  pathname={pathname}
+                  linkComponent={RegistryNavLink}
+                  userMenuItems={userMenuItems}
+                  profiles={
+                    authenticatedAccounts?.map(account => ({
+                      name: account?.name ? account?.name : DEFAULT_NAME,
+                      profileImage: account?.image
+                        ? account?.image
+                        : getDefaultAvatar(account),
+                      address: getAddress({
+                        walletAddress: account?.addr,
+                        email: account?.email,
+                      }),
+                      selected:
+                        activeAccount?.id && activeAccount?.id === account?.id,
+                    })) || []
+                  }
+                  onProfileClick={onProfileClick}
+                  // TODO (#2193): add account functionality
+                />
+              )}
             <LoginButton />
           </Box>
         }

@@ -99,7 +99,7 @@ const Dashboard = (): JSX.Element => {
         infos={{
           addressLink: {
             href: getAccountUrl(wallet?.address, true),
-            text: truncate(wallet?.address),
+            text: wallet?.address ? truncate(wallet?.address) : '',
           },
           description: activeAccount?.description?.trimEnd() ?? '',
           socialsLinks,

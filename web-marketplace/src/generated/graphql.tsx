@@ -4117,7 +4117,7 @@ export type AccountByIdQuery = (
   { __typename?: 'Query' }
   & { accountById?: Maybe<(
     { __typename?: 'Account' }
-    & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink' | 'addr'>
+    & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink' | 'addr' | 'email'>
   )> }
 );
 
@@ -4621,6 +4621,7 @@ export const AccountByIdDocument = gql`
     websiteLink
     twitterLink
     addr
+    email
   }
 }
     `;

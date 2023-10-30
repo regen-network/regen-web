@@ -4,7 +4,7 @@ import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
 import { useQueryIsProjectAdmin } from 'hooks/useQueryIsProjectAdmin';
 
 type Props = {
-  address?: string;
+  address?: string | null;
 };
 
 export const useProfileItems = ({ address }: Props) => {

@@ -5,7 +5,7 @@ import { queryParams } from 'lib/ecocredit/api';
 import { useWallet } from '../lib/wallet/wallet';
 
 type Props = {
-  address?: string;
+  address?: string | null;
 };
 
 export function useQueryIfCreditClassCreator({ address }: Props): boolean {

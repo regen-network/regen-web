@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.14.0](https://github.com/regen-network/regen-web/compare/v1.13.0...v1.14.0) (2023-10-23)
+
+### Bug Fixes
+
+- ecocredit table with ghost credits on first page ([#2176](https://github.com/regen-network/regen-web/issues/2176)) ([ae97495](https://github.com/regen-network/regen-web/commit/ae97495c5ed5d93e55110ce29aae734f70668b80))
+- formatting for xsd:gYear rdf type ([#2185](https://github.com/regen-network/regen-web/issues/2185)) ([72492cc](https://github.com/regen-network/regen-web/commit/72492ccf8e05df7bb137013c62aeb8b1e8cea646))
+- max button for create sell order ([#2184](https://github.com/regen-network/regen-web/issues/2184)) ([d8ab4f9](https://github.com/regen-network/regen-web/commit/d8ab4f9630a74f9e6c80b64e47677e7a574b218e))
+- offchain project cards on /projects page ([#2165](https://github.com/regen-network/regen-web/issues/2165)) ([bba7669](https://github.com/regen-network/regen-web/commit/bba7669497dadadef8352d069e30b27de66e8b1a))
+- project card title height ([#2163](https://github.com/regen-network/regen-web/issues/2163)) ([fb4db1e](https://github.com/regen-network/regen-web/commit/fb4db1e524c3ae2294fb8544e959b874a0e43870))
+- refactor batches fetching ([#2152](https://github.com/regen-network/regen-web/issues/2152)) ([0d8b3de](https://github.com/regen-network/regen-web/commit/0d8b3defebe268b048268b94214db4af2a5a9d50))
+- show only approved off chain projects on projects page ([#2150](https://github.com/regen-network/regen-web/issues/2150)) ([3908c61](https://github.com/regen-network/regen-web/commit/3908c61679dbbafc16de4a660fbeffcc4f80ddc8))
+- use portfolio as profile index route ([#2162](https://github.com/regen-network/regen-web/issues/2162)) ([9eb3984](https://github.com/regen-network/regen-web/commit/9eb398433d708ff57263ffac198da7a76b99abd8))
+
+### Features
+
+- add complete tailwind color palette ([#2183](https://github.com/regen-network/regen-web/issues/2183)) ([8eac9b2](https://github.com/regen-network/regen-web/commit/8eac9b2fc52c09bcc1047534c0646ce4ff5256d6))
+- add create project without credit class option ([#2170](https://github.com/regen-network/regen-web/issues/2170)) ([8799232](https://github.com/regen-network/regen-web/commit/87992323367b3ff8581c2924445e3b23d3eb0942))
+- add dynamic certificate label and icon ([#2166](https://github.com/regen-network/regen-web/issues/2166)) ([eeb6a0b](https://github.com/regen-network/regen-web/commit/eeb6a0be61996e0031943a308348ed171a4720a6))
+- add projects and batches to user account dropdown ([#2146](https://github.com/regen-network/regen-web/issues/2146)) ([b2ad8c9](https://github.com/regen-network/regen-web/commit/b2ad8c9a932eb6d3a7b0d1e4fdb0afd66c8f396c))
+- add regenie chat bot ([#2186](https://github.com/regen-network/regen-web/issues/2186)) ([30cadd0](https://github.com/regen-network/regen-web/commit/30cadd019d76b94395d5aa2f4cc276c0a5a007e7))
+- add user account settings page ([#2167](https://github.com/regen-network/regen-web/issues/2167)) ([f1a1d77](https://github.com/regen-network/regen-web/commit/f1a1d77055f3d63f79919badca3a09744feed943))
+- add warning modal on profile edit ([#2144](https://github.com/regen-network/regen-web/issues/2144)) ([d4231d1](https://github.com/regen-network/regen-web/commit/d4231d1a5634cf042a202cb8e51ba38fcd8b9b16))
+- display all tabs on public profile ([#2141](https://github.com/regen-network/regen-web/issues/2141)) ([cc03e5c](https://github.com/regen-network/regen-web/commit/cc03e5c5b79814953faec710cf65b925f357d70c))
+- edit project slug ([#2164](https://github.com/regen-network/regen-web/issues/2164)) ([3f15421](https://github.com/regen-network/regen-web/commit/3f154210f2fa5c4f1b6f7a3544f3cdc8e138b377))
+- update project page for off-chain projects ([#2153](https://github.com/regen-network/regen-web/issues/2153)) ([68421c8](https://github.com/regen-network/regen-web/commit/68421c8b7360079dcf15112b75e2c601baed3d15))
+
 # [1.13.0](https://github.com/regen-network/regen-web/compare/v1.12.2...v1.13.0) (2023-09-27)
 
 ### Bug Fixes

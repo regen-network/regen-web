@@ -6,6 +6,7 @@ import {
   useState,
 } from 'react';
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useApolloClient } from '@apollo/client';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';
@@ -25,11 +26,16 @@ import {
   txSuccessfulModalAtom,
 } from 'lib/atoms/modals.atoms';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
+import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { OnTxSuccessfulProps } from 'pages/Dashboard/MyEcocredits/MyEcocredits.types';
 import NotFoundPage from 'pages/NotFound';
 import WithLoader from 'components/atoms/WithLoader';
+import {
+  getIsOffChainUuid,
+  getIsOnChainId,
+} from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { useMsgClient } from 'hooks';
 
 import { ProjectDenied } from '../../components/organisms/ProjectDenied/ProjectDenied';
@@ -72,6 +78,7 @@ function ProjectEdit(): JSX.Element {
     string | undefined
   >(undefined);
   const navigate = useNavigate();
+  const graphqlClient = useApolloClient();
 
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const setErrorCodeAtom = useSetAtom(errorCodeAtom);
@@ -104,19 +111,35 @@ function ProjectEdit(): JSX.Element {
   };
 
   const { signAndBroadcast } = useMsgClient();
-  const { data: projectRes, isLoading } = useQuery(
+  const isOnChainId = getIsOnChainId(projectId);
+  const isOffChainUUid = getIsOffChainUuid(projectId);
+  const { data: projectRes, isFetching: isFetchingProject } = useQuery(
     getProjectQuery({
       request: {
         projectId,
       },
-      enabled: !!projectId,
+      enabled: !!projectId && isOnChainId,
     }),
   );
   const onChainProject = projectRes?.project;
+  const { data: projectByOffChainIdRes, isFetching: isFetchingProjectById } =
+    useQuery(
+      getProjectByIdQuery({
+        client: graphqlClient,
+        enabled: !!projectId && isOffChainUUid,
+        id: projectId,
+      }),
+    );
+  const offChainProject = projectByOffChainIdRes?.data?.projectById;
+  const isLoading = isFetchingProject || isFetchingProjectById;
+
   const isNotAdmin =
-    onChainProject?.admin &&
-    wallet?.address !== onChainProject.admin &&
+    ((onChainProject?.admin && wallet?.address !== onChainProject.admin) ||
+      (offChainProject?.walletByAdminWalletId?.addr &&
+        wallet?.address !== offChainProject?.walletByAdminWalletId?.addr)) &&
     !isLoading;
+  const hasProject = !!onChainProject || !!offChainProject;
+  const isOnChain = !isLoading && !!onChainProject;
 
   const projectEditSubmit = useProjectEditSubmit({
     projectId,
@@ -147,7 +170,7 @@ function ProjectEdit(): JSX.Element {
       />
     );
   }
-  if (!isLoading && !onChainProject) {
+  if (!isLoading && !hasProject) {
     return <NotFoundPage />;
   }
 
@@ -213,7 +236,11 @@ function ProjectEdit(): JSX.Element {
               </Box>
             </div>
             {!isMobile && (
-              <ProjectEditNav section={section} onNavClick={onNavClick} />
+              <ProjectEditNav
+                isOnChain={isOnChain}
+                section={section}
+                onNavClick={onNavClick}
+              />
             )}
           </div>
           <div className={styles.right}>
@@ -225,7 +252,11 @@ function ProjectEdit(): JSX.Element {
                   </Title>
                 </div>
                 {isMobile && !section && (
-                  <ProjectEditNav section={section} onNavClick={onNavClick} />
+                  <ProjectEditNav
+                    isOnChain={isOnChain}
+                    section={section}
+                    onNavClick={onNavClick}
+                  />
                 )}
                 <Outlet />
               </div>

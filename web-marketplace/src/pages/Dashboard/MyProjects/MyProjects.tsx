@@ -71,7 +71,10 @@ const MyProjects = (): JSX.Element => {
                     {...DEFAULT_PROJECT}
                     {...project}
                     onButtonClick={() => {
-                      if (!project.offChain) {
+                      if (
+                        !project.offChain ||
+                        (project.offChain && project.published)
+                      ) {
                         navigate(
                           `/project-pages/${project.id}/edit/basic-info`,
                         );

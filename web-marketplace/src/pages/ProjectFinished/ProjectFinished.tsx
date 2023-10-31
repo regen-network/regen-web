@@ -31,8 +31,8 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
     }),
   );
 
-  const projectOnChainId = data?.data?.projectById?.onChainId || '';
-  const projectOffChainId = data?.data?.projectById?.id || '';
+  const projectOnChainId = data?.data?.projectById?.onChainId;
+  const projectOffChainId = data?.data?.projectById?.id;
   const currentProjectId = projectOnChainId ?? projectOffChainId;
   const projectUrl = `${window.location.origin}/project/${currentProjectId}`;
 
@@ -51,21 +51,33 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
       >
         <OnBoardingCard>
           <Title variant="h5">Create Project</Title>
-          <CardItem
-            label="project id"
-            value={{
-              name: projectOnChainId,
-            }}
-            linkComponent={Link}
-          />
-          <CardItem
-            label="hash"
-            value={{
-              name: truncateHash(deliverTxResponse?.transactionHash) || '',
-              url: getHashUrl(deliverTxResponse?.transactionHash),
-            }}
-            linkComponent={Link}
-          />
+          {projectOnChainId ? (
+            <CardItem
+              label="project id"
+              value={{
+                name: projectOnChainId,
+              }}
+              linkComponent={Link}
+            />
+          ) : (
+            <CardItem
+              label="project name"
+              value={{
+                name: data?.data?.projectById?.metadata?.['schema:name'],
+              }}
+              linkComponent={Link}
+            />
+          )}
+          {!!deliverTxResponse?.transactionHash && (
+            <CardItem
+              label="hash"
+              value={{
+                name: truncateHash(deliverTxResponse?.transactionHash) || '',
+                url: getHashUrl(deliverTxResponse?.transactionHash),
+              }}
+              linkComponent={Link}
+            />
+          )}
           <CardItem
             label="url"
             value={{

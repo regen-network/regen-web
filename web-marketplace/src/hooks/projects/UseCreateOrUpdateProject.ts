@@ -9,7 +9,6 @@ import {
 } from 'generated/graphql';
 import { getCreditClassByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getCreditClassByOnChainIdQuery/getCreditClassByOnChainIdQuery';
 import { getWalletByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getWalletByAddrQuery/getWalletByAddrQuery';
-import { getWalletByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getWalletByAddrQuery/getWalletByAddrQuery.utils';
 import { getUnanchoredProjectBaseMetadata } from 'lib/rdf';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -22,7 +21,6 @@ type CreateOrUpdateProjectParams = {
 
 export const useCreateOrUpdateProject = () => {
   const graphqlClient = useApolloClient();
-  const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
   const { isEdit, onChainProject } = useProjectEditContext();
   const [updateProject] = useUpdateProjectByIdMutation();
@@ -81,14 +79,6 @@ export const useCreateOrUpdateProject = () => {
         });
         const projectId = createRes?.data?.createProject?.project?.id;
         if (projectId) {
-          await reactQueryClient.invalidateQueries({
-            queryKey: getWalletByAddrQueryKey(
-              walletData?.walletByAddr?.addr ?? '',
-            ),
-          });
-          // await reactQueryClient.invalidateQueries({
-          //   queryKey: getProjectByOnChainIdKey(onChainProject.id),
-          // });
           return projectId;
         }
       }
@@ -98,9 +88,7 @@ export const useCreateOrUpdateProject = () => {
       createProject,
       isEdit,
       onChainProject,
-      reactQueryClient,
       updateProject,
-      walletData?.walletByAddr?.addr,
       walletData?.walletByAddr?.id,
     ],
   );

@@ -27,7 +27,7 @@ import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 
 import { chainId } from '../../../lib/ledger';
 import { RegistryIconLink, RegistryNavLink } from '../../atoms';
-import { WalletButton } from '../WalletButton/WalletButton';
+import { LoginButton } from '../LoginButton/LoginButton';
 import {
   getBorderBottom,
   getHeaderColors,
@@ -132,7 +132,7 @@ const RegistryLayoutHeader: React.FC = () => {
                 onProfileClick={onProfileClick}
               />
             )}
-            <WalletButton />
+            <LoginButton />
           </Box>
         }
       />

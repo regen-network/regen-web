@@ -4,7 +4,11 @@ import { Box } from '@mui/material';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 
-import { Maybe, Scalars } from 'generated/sanity-graphql';
+import {
+  HomePageProjectsSection,
+  Maybe,
+  Scalars,
+} from 'generated/sanity-graphql';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
@@ -12,14 +16,21 @@ import { ProjectCardsSection } from 'components/organisms/ProjectCardsSection/Pr
 
 import { useFeaturedProjects } from './hooks/useFeaturedProjects';
 
+type Props = {
+  title: string;
+  body: Maybe<Scalars['JSON']>;
+  sanityFeaturedProjects: HomePageProjectsSection['projects'];
+};
+
 export function FeaturedProjects({
   title,
   body,
-}: {
-  title: string;
-  body: Maybe<Scalars['JSON']>;
-}): JSX.Element {
-  const { featuredProjects, loading } = useFeaturedProjects();
+  sanityFeaturedProjects,
+}: Props): JSX.Element {
+  const pinnedIds = sanityFeaturedProjects?.map(project =>
+    String(project?.projectId),
+  );
+  const { featuredProjects, loading } = useFeaturedProjects({ pinnedIds });
   const [selectedProject, setSelectedProject] =
     useState<ProjectWithOrderData | null>(null);
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);

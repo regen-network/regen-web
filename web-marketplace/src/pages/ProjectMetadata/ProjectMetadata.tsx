@@ -8,6 +8,7 @@ import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getShaclGraphByUriQuery } from 'lib/queries/react-query/registry-server/graphql/getShaclGraphByUriQuery/getShaclGraphByUriQuery';
 import { getProjectShapeIri } from 'lib/rdf';
 
+import { NotFoundPage } from 'pages/NotFound/NotFound';
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
 import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import { MetadataForm } from 'components/organisms/MetadataForm/MetadataForm';
@@ -62,22 +63,29 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
     const saveAndExit = useProjectSaveAndExit();
 
     return (
-      <ProjectFormTemplate
-        isEdit={isEdit}
-        title="Metadata"
-        offChainProject={offChainProject}
-        onChainProject={onChainProject}
-        loading={loading}
-        saveAndExit={saveAndExit}
-      >
-        <MetadataForm
-          onSubmit={projectMetadataSubmit}
-          initialValues={initialValues}
-          graphData={data?.data}
-          creditClassId={creditClassId}
-          onNext={navigateNext}
-          onPrev={() => navigate(`/project-pages/${projectId}/media`)}
-        />
-      </ProjectFormTemplate>
+      <>
+        {creditClassId ? (
+          <ProjectFormTemplate
+            isEdit={isEdit}
+            title="Metadata"
+            offChainProject={offChainProject}
+            onChainProject={onChainProject}
+            loading={loading}
+            saveAndExit={saveAndExit}
+          >
+            <MetadataForm
+              onSubmit={projectMetadataSubmit}
+              initialValues={initialValues}
+              graphData={data?.data}
+              creditClassId={creditClassId}
+              onNext={navigateNext}
+              onPrev={() => navigate(`/project-pages/${projectId}/media`)}
+            />
+          </ProjectFormTemplate>
+        ) : (
+          // Metadata form is not available for projects without any credit class
+          <NotFoundPage />
+        )}
+      </>
     );
   };

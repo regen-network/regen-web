@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.14.0](https://github.com/regen-network/regen-web/compare/v1.13.0...v1.14.0) (2023-10-23)
+
+### Features
+
+- add regenie chat bot ([#2186](https://github.com/regen-network/regen-web/issues/2186)) ([30cadd0](https://github.com/regen-network/regen-web/commit/30cadd019d76b94395d5aa2f4cc276c0a5a007e7))
+- add user account settings page ([#2167](https://github.com/regen-network/regen-web/issues/2167)) ([f1a1d77](https://github.com/regen-network/regen-web/commit/f1a1d77055f3d63f79919badca3a09744feed943))
+
 # [1.13.0](https://github.com/regen-network/regen-web/compare/v1.12.2...v1.13.0) (2023-09-27)
 
 **Note:** Version bump only for package web-www

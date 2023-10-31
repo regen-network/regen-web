@@ -1,18 +1,18 @@
 import { useCallback } from 'react';
 import { WalletRepo } from '@cosmos-kit/core';
 
-import { WalletModalState } from 'web-components/lib/components/modal/wallet-modal/WalletModal.types';
-
 import { UseStateSetter } from 'types/react/use-state';
 import { WalletContextType } from 'lib/wallet/wallet';
 import { KEPLR_MOBILE } from 'lib/wallet/wallet.constants';
 import { ConnectParams } from 'lib/wallet/wallet.types';
 import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
 
+import { LoginModalState } from 'components/organisms/LoginModal/LoginModal.types';
+
 type Props = {
   connect?: WalletContextType['connect'];
   connectWalletConnect?: WalletRepo['connect'];
-  setModalState: UseStateSetter<WalletModalState>;
+  setModalState: UseStateSetter<LoginModalState>;
   onModalClose: () => void;
 };
 

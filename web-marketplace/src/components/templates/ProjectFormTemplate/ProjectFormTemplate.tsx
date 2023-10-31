@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';
 
+import {
+  getIsOffChainUuid,
+  getIsOnChainId,
+} from '../ProjectDetails/ProjectDetails.utils';
 import { EditFormTemplate } from './EditFormTemplate';
 import { OnboardingFormTemplate } from './OnboardingFormTemplate';
 import { ProjectFormAccessTemplate } from './ProjectFormAccessTemplate';
@@ -53,9 +57,11 @@ const ProjectFormTemplate: React.FC<React.PropsWithChildren<Props>> = ({
       offChainProject={offChainProject}
       adminAddr={adminAddr}
     >
-      {!!onChainProject && isEdit && (
-        <EditFormTemplate>{children}</EditFormTemplate>
-      )}
+      {isEdit &&
+        (!!onChainProject ||
+          (!onChainProject && offChainProject?.published)) && (
+          <EditFormTemplate>{children}</EditFormTemplate>
+        )}
       {!!offChainProject && !isEdit && (
         <OnboardingFormTemplate
           activeStep={0}

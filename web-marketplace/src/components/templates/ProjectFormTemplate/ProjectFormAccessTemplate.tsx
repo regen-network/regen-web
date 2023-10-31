@@ -27,17 +27,18 @@ const ProjectFormAccessTemplate: React.FC<React.PropsWithChildren<Props>> = ({
   const { wallet } = useWallet();
   const isAdmin = adminAddr && adminAddr === wallet?.address;
   const hasProject = !!onChainProject || !!offChainProject;
+
   return (
     <>
       {!loading && !hasProject && <NotFoundPage />}
-      {hasProject && !isAdmin && (
+      {!loading && hasProject && !isAdmin && (
         <ProjectDenied
           isEdit={isEdit}
           address={adminAddr}
           projectId={onChainProject?.id || offChainProject?.id}
         />
       )}
-      {hasProject && isAdmin && <>{children}</>}
+      {!loading && hasProject && isAdmin && <>{children}</>}
     </>
   );
 };

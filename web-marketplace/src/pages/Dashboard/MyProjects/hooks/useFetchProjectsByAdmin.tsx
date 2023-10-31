@@ -71,6 +71,7 @@ export const useFetchProjectByAdmin = ({
   const onlyOffChainProjectsWithData =
     onlyOffChainProjects?.map(project => ({
       offChain: true,
+      published: project?.published,
       ...normalizeProjectWithMetadata({
         offChainProject: project,
         projectMetadata: project?.metadata,

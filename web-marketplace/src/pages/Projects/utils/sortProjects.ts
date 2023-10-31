@@ -78,6 +78,49 @@ function compareQuantityDescending(
   return 0;
 }
 
+// Sort pinned project at the beginning
+export function sortPinnedProject(
+  a: ProjectWithOrderData,
+  b: ProjectWithOrderData,
+  pinnedIds?: string[],
+): number {
+  if (!pinnedIds) return 0;
+
+  const aIdIndex = pinnedIds?.indexOf(a.id);
+  const aOffChainIdIndex = pinnedIds?.indexOf(a.offChainId ?? '');
+  const aSlugIndex = pinnedIds?.indexOf(a.slug ?? '');
+
+  let aIndex = -1;
+  if (aIdIndex >= 0) {
+    aIndex = aIdIndex;
+  } else if (aOffChainIdIndex >= 0) {
+    aIndex = aOffChainIdIndex;
+  } else if (aSlugIndex >= 0) {
+    aIndex = aSlugIndex;
+  }
+
+  const bIdIndex = pinnedIds?.indexOf(b.id);
+  const bOffChainIdIndex = pinnedIds?.indexOf(b.offChainId ?? '');
+  const bSlugIndex = pinnedIds?.indexOf(b.slug ?? '');
+
+  let bIndex = -1;
+  if (bIdIndex >= 0) {
+    bIndex = bIdIndex;
+  } else if (bOffChainIdIndex >= 0) {
+    bIndex = bOffChainIdIndex;
+  } else if (bSlugIndex >= 0) {
+    bIndex = bSlugIndex;
+  }
+
+  if (aIndex >= 0 && bIndex === -1) return -1;
+  if (aIndex === -1 && bIndex >= 0) return 1;
+  if (aIndex >= 0 && bIndex >= 0) {
+    return aIndex < bIndex ? -1 : 1;
+  }
+
+  return 0;
+}
+
 function getQuantities(
   a: ProjectWithOrderData,
   b: ProjectWithOrderData,

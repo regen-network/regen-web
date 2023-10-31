@@ -1,7 +1,7 @@
-import { Wallet } from 'web-components/lib/components/modal/wallet-modal/WalletModal.types';
-
 import { ConnectParams } from 'lib/wallet/wallet.types';
 import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
+
+import { LoginProvider } from '../LoginModal/LoginModal.types';
 
 export type GetWalletsUiConfigParams = {
   connectToWallet: (params: ConnectParams) => Promise<void>;
@@ -9,7 +9,7 @@ export type GetWalletsUiConfigParams = {
 
 export const getAllWalletsUiConfig = ({
   connectToWallet,
-}: GetWalletsUiConfigParams): Wallet[] => [
+}: GetWalletsUiConfigParams): LoginProvider[] => [
   {
     name: 'Keplr Wallet',
     description: 'Keplr Chrome Extension',

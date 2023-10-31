@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.14.0](https://github.com/regen-network/regen-web/compare/v1.13.0...v1.14.0) (2023-10-23)
+
+### Bug Fixes
+
+- max button for create sell order ([#2184](https://github.com/regen-network/regen-web/issues/2184)) ([d8ab4f9](https://github.com/regen-network/regen-web/commit/d8ab4f9630a74f9e6c80b64e47677e7a574b218e))
+- offchain project cards on /projects page ([#2165](https://github.com/regen-network/regen-web/issues/2165)) ([bba7669](https://github.com/regen-network/regen-web/commit/bba7669497dadadef8352d069e30b27de66e8b1a))
+- project card title height ([#2163](https://github.com/regen-network/regen-web/issues/2163)) ([fb4db1e](https://github.com/regen-network/regen-web/commit/fb4db1e524c3ae2294fb8544e959b874a0e43870))
+
+### Features
+
+- add complete tailwind color palette ([#2183](https://github.com/regen-network/regen-web/issues/2183)) ([8eac9b2](https://github.com/regen-network/regen-web/commit/8eac9b2fc52c09bcc1047534c0646ce4ff5256d6))
+- add create project without credit class option ([#2170](https://github.com/regen-network/regen-web/issues/2170)) ([8799232](https://github.com/regen-network/regen-web/commit/87992323367b3ff8581c2924445e3b23d3eb0942))
+- add dynamic certificate label and icon ([#2166](https://github.com/regen-network/regen-web/issues/2166)) ([eeb6a0b](https://github.com/regen-network/regen-web/commit/eeb6a0be61996e0031943a308348ed171a4720a6))
+- add projects and batches to user account dropdown ([#2146](https://github.com/regen-network/regen-web/issues/2146)) ([b2ad8c9](https://github.com/regen-network/regen-web/commit/b2ad8c9a932eb6d3a7b0d1e4fdb0afd66c8f396c))
+- add user account settings page ([#2167](https://github.com/regen-network/regen-web/issues/2167)) ([f1a1d77](https://github.com/regen-network/regen-web/commit/f1a1d77055f3d63f79919badca3a09744feed943))
+- edit project slug ([#2164](https://github.com/regen-network/regen-web/issues/2164)) ([3f15421](https://github.com/regen-network/regen-web/commit/3f154210f2fa5c4f1b6f7a3544f3cdc8e138b377))
+
 # [1.13.0](https://github.com/regen-network/regen-web/compare/v1.12.2...v1.13.0) (2023-09-27)
 
 ### Bug Fixes

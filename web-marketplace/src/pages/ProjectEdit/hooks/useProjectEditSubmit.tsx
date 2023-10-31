@@ -126,6 +126,7 @@ const useProjectEditSubmit = ({
       });
     },
     [
+      creditClassId,
       projectId,
       admin,
       signAndBroadcast,

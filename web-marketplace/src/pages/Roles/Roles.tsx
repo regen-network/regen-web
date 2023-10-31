@@ -26,6 +26,7 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
     projectEditSubmit,
     isLoading: editContextLoading,
   } = useProjectEditContext();
+
   const {
     metadata,
     offChainProject,
@@ -41,6 +42,7 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { rolesSubmit } = useRolesSubmit({
     projectEditSubmit,
     offChainProject,
+    onChainProject,
     metadata,
     isEdit,
     metadataReload,
@@ -89,6 +91,9 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
           onNext={navigateNext}
           onPrev={navigatePrev}
           initialValues={initialValues}
+          isOnChain={
+            !editContextLoading && !!onChainProject && !!wallet?.address
+          }
         />
       </WithLoader>
     </ProjectFormTemplate>

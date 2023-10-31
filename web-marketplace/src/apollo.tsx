@@ -80,6 +80,7 @@ export const AuthApolloProvider = ({
               await reactQueryClient.invalidateQueries({
                 queryKey: [GET_CSRF_QUERY_KEY],
               });
+              // trigger a call to get a new CSRF token and refill the cache earlier
               await getFromCacheOrFetch({
                 query: getCsrfTokenQuery({}),
                 reactQueryClient: reactQueryClient,

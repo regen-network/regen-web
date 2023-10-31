@@ -1,5 +1,6 @@
 fragment projectFields on Project {
   id
+  adminAccountId
   accountByAdminAccountId {
     addr
   }

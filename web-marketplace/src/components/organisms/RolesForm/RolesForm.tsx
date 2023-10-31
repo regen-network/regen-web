@@ -101,7 +101,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
 
   const { data: adminAccountData } = useQuery(
     getAccountByAddrQuery({
-      addr: admin,
+      addr: admin as string,
       client: graphqlClient,
       enabled: !!admin && admin !== initialValues?.admin && !!graphqlClient,
     }),

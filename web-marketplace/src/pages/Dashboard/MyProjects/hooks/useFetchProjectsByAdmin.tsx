@@ -9,7 +9,7 @@ import { useLedger } from 'ledger';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { normalizeProjectWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getProjectsByAdminQuery } from 'lib/queries/react-query/ecocredit/getProjectsByAdmin/getProjectsByAdmin';
-import { getAccountProjectsByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByAddrQuery/getAccountProjectsByAddrQuery';
+import { getAccountProjectsByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
@@ -33,10 +33,10 @@ export const useFetchProjectByAdmin = ({
   const { ecocreditClient } = useLedger();
 
   const { data: accountData, isFetching: isAccountLoading } = useQuery(
-    getAccountProjectsByAddrQuery({
-      addr: adminAddress ?? '',
+    getAccountProjectsByIdQuery({
+      id: adminAccountId,
       client: graphqlClient,
-      enabled: adminAddress !== undefined,
+      enabled: adminAccountId !== undefined,
     }),
   );
 
@@ -48,7 +48,7 @@ export const useFetchProjectByAdmin = ({
     }),
   );
   const offChainProjects =
-    accountData?.accountByAddr?.projectsByAdminAccountId?.nodes;
+    accountData?.accountById?.projectsByAdminAccountId?.nodes;
 
   const { data: sanityCreditClassData } = useQuery(
     getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
@@ -67,7 +67,7 @@ export const useFetchProjectByAdmin = ({
 
   // Get data for projects that are only off chain
   const onlyOffChainProjects =
-    adminAccountId === accountData?.accountByAddr?.id
+    adminAccountId === accountData?.accountById?.id
       ? offChainProjects
           ?.filter(project => !project?.onChainId)
           .filter(project => project?.approved || keepUnapproved)

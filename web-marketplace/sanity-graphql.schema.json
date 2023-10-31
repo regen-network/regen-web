@@ -26189,7 +26189,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "TitleCustomBody",
+              "name": "HomePageProjectsSection",
               "ofType": null
             },
             "isDeprecated": false,
@@ -26362,7 +26362,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TitleCustomBodyFilter",
+              "name": "HomePageProjectsSectionFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -26399,6 +26399,163 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "BottomBannerFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "HomePageProjectsSection",
+        "description": null,
+        "fields": [
+          {
+            "name": "_key",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_type",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "titleCustomBody",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "TitleCustomBody",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "projects",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Project",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "HomePageProjectsSectionFilter",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "_key",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_type",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "titleCustomBody",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TitleCustomBodyFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "HomePageProjectsSectionSorting",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "_key",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_type",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "titleCustomBody",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TitleCustomBodySorting",
               "ofType": null
             },
             "defaultValue": null,
@@ -26517,7 +26674,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TitleCustomBodySorting",
+              "name": "HomePageProjectsSectionSorting",
               "ofType": null
             },
             "defaultValue": null,
@@ -40942,7 +41099,7 @@
           },
           {
             "name": "projectId",
-            "description": "on-chain project id",
+            "description": "on-chain project id, off-chain uuid or slug",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -66655,6 +66812,57 @@
       }
     ],
     "directives": [
+      {
+        "name": "crossDatasetReference",
+        "description": "Field references one or more document in another dataset",
+        "isRepeatable": false,
+        "locations": [
+          "OBJECT",
+          "FIELD_DEFINITION"
+        ],
+        "args": [
+          {
+            "name": "dataset",
+            "description": "Dataset name",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "typeNames",
+            "description": "Strings of the target types names enabled for this reference",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ]
+      },
       {
         "name": "jsonAlias",
         "description": "Field is a \"raw\" JSON alias for a different field",

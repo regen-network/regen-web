@@ -153,8 +153,9 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
       </BackgroundImgSection>
 
       <FeaturedProjects
-        title={projectsSection?.title || 'Featured Projects'}
-        body={projectsSection?.bodyRaw}
+        title={projectsSection?.titleCustomBody?.title || 'Featured Projects'}
+        body={projectsSection?.titleCustomBody?.bodyRaw}
+        sanityFeaturedProjects={projectsSection?.projects}
       />
 
       {creditClasses && (

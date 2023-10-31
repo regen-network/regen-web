@@ -18,6 +18,19 @@ export const addressSchema = z
     },
   );
 
+export const optionalAddressSchema = z
+  .string()
+  .refine(
+    value =>
+      value
+        ? isValidAddress(value, chainInfo.bech32Config.bech32PrefixAccAddr)
+        : true,
+    {
+      message: invalidRegenAddress,
+    },
+  )
+  .optional();
+
 export const adminModalSchema = z
   .object({
     currentAddress: addressSchema,

@@ -266,35 +266,45 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
           </>
         )}
       </ReviewCard>
-      <ReviewCard
-        title="Metadata"
-        onEditClick={() => navigate(`${editPath}/metadata`)}
-      >
-        {isVCS ? (
-          <VCSMetadata metadata={metadata} />
-        ) : (
-          <Box
-            sx={theme => ({
-              backgroundColor: theme.palette.primary.main,
-              maxHeight: theme.spacing(88),
-              fontSize: theme.spacing(3.5),
-              padding: theme.spacing(4),
-              marginTop: theme.spacing(3.5),
-              border: `1px solid ${theme.palette.grey[600]}`,
-              overflowX: 'scroll',
-              overflowY: 'scroll',
-            })}
-          >
-            <pre>
-              {!!metadata &&
-                JSON.stringify(omit(metadata, OMITTED_METADATA_KEYS), null, 2)}
-            </pre>
-          </Box>
-        )}
-      </ReviewCard>
+      {!!creditClassId && (
+        <ReviewCard
+          title="Metadata"
+          onEditClick={() => navigate(`${editPath}/metadata`)}
+        >
+          {isVCS ? (
+            <VCSMetadata metadata={metadata} />
+          ) : (
+            <Box
+              sx={theme => ({
+                backgroundColor: theme.palette.primary.main,
+                maxHeight: theme.spacing(88),
+                fontSize: theme.spacing(3.5),
+                padding: theme.spacing(4),
+                marginTop: theme.spacing(3.5),
+                border: `1px solid ${theme.palette.grey[600]}`,
+                overflowX: 'scroll',
+                overflowY: 'scroll',
+              })}
+            >
+              <pre>
+                {!!metadata &&
+                  JSON.stringify(
+                    omit(metadata, OMITTED_METADATA_KEYS),
+                    null,
+                    2,
+                  )}
+              </pre>
+            </Box>
+          )}
+        </ReviewCard>
+      )}
       <ProjectPageFooter
         onSave={submit}
-        onPrev={() => navigate(`${editPath}/metadata`)}
+        onPrev={() =>
+          creditClassId
+            ? navigate(`${editPath}/metadata`)
+            : navigate(`${editPath}/media`)
+        }
         isSubmitting={isSubmitModalOpen}
       />
       <ProcessingModal open={isSubmitModalOpen} onClose={closeSubmitModal} />

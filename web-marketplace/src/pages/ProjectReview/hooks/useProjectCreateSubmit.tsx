@@ -1,8 +1,12 @@
 import { useCallback } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { MsgCreateProject } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
+import { useQueryClient } from '@tanstack/react-query';
 
+import { useUpdateProjectByIdMutation } from 'generated/graphql';
 import { generateIri, IriFromMetadataSuccess } from 'lib/db/api/metadata-graph';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
+import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
 
 import { SignAndBroadcastType } from '../../../hooks/useMsgClient';
 
@@ -23,6 +27,11 @@ type Return = {
 };
 
 const useProjectCreateSubmit = ({ signAndBroadcast }: Props): Return => {
+  const [updateProject] = useUpdateProjectByIdMutation();
+  const reactQueryClient = useQueryClient();
+  const navigate = useNavigate();
+  const { projectId } = useParams();
+
   const projectCreateSubmit = useCallback(
     async ({
       classId,
@@ -31,36 +40,55 @@ const useProjectCreateSubmit = ({ signAndBroadcast }: Props): Return => {
       jurisdiction,
       referenceId,
     }: MsgCreateProjectValues): Promise<void> => {
-      if (!classId)
-        return Promise.reject('cant create project without a class ID');
+      if (!classId) {
+        // This is an off-chain project without any credit class id,
+        // we just need to set published to true
+        if (projectId) {
+          await updateProject({
+            variables: {
+              input: {
+                id: projectId,
+                projectPatch: {
+                  published: true,
+                },
+              },
+            },
+          });
+          await reactQueryClient.invalidateQueries({
+            queryKey: getProjectByIdKey(projectId),
+          });
+          navigate(`/project-pages/${projectId}/finished`);
+        }
+      } else {
+        // We create the project on-chain
+        let iriResponse:
+          | IriFromMetadataSuccess<Partial<ProjectMetadataLD>>
+          | undefined;
 
-      let iriResponse:
-        | IriFromMetadataSuccess<Partial<ProjectMetadataLD>>
-        | undefined;
+        try {
+          iriResponse = await generateIri(metadata);
+          if (!iriResponse) return;
+        } catch (err) {
+          throw new Error(err as string);
+        }
 
-      try {
-        iriResponse = await generateIri(metadata);
-        if (!iriResponse) return;
-      } catch (err) {
-        throw new Error(err as string);
+        const msg = MsgCreateProject.fromPartial({
+          classId,
+          admin,
+          metadata: iriResponse.iri,
+          jurisdiction,
+          referenceId,
+        });
+
+        const tx = {
+          msgs: [msg],
+          fee: undefined,
+        };
+
+        await signAndBroadcast(tx);
       }
-
-      const msg = MsgCreateProject.fromPartial({
-        classId,
-        admin,
-        metadata: iriResponse.iri,
-        jurisdiction,
-        referenceId,
-      });
-
-      const tx = {
-        msgs: [msg],
-        fee: undefined,
-      };
-
-      await signAndBroadcast(tx);
     },
-    [signAndBroadcast],
+    [navigate, projectId, reactQueryClient, signAndBroadcast, updateProject],
   );
 
   return { projectCreateSubmit };

@@ -55,29 +55,27 @@ export const getMenuItems = (pathname: string): Item[] => [
 interface GetUserMenuItemsParams {
   pathname: string;
   linkComponent: React.FC<NavLinkProps>;
-  theme: Theme;
-  showProjects?: boolean;
   showCreditClasses?: boolean;
   isIssuer?: boolean;
+  isWalletConnected: boolean;
 }
 
 export const getUserMenuItems = ({
   linkComponent,
   pathname,
-  theme,
-  showProjects,
   showCreditClasses,
   isIssuer,
+  isWalletConnected,
 }: GetUserMenuItemsParams): HeaderDropdownItemProps[] =>
   [
-    {
+    isWalletConnected && {
       pathname,
       linkComponent,
       importCallback: (): Promise<any> => import('../../../pages/Dashboard'),
       ...PORTFOLIO,
       icon: <CreditsIcon sx={{ width: 24, height: 20 }} />,
     },
-    showProjects && {
+    {
       pathname,
       linkComponent,
       ...PROJECTS,
@@ -92,11 +90,12 @@ export const getUserMenuItems = ({
       linkComponent,
       ...CREDIT_BATCHES,
     },
-    isBridgeEnabled && {
-      pathname,
-      linkComponent,
-      ...BRIDGE,
-    },
+    isWalletConnected &&
+      isBridgeEnabled && {
+        pathname,
+        linkComponent,
+        ...BRIDGE,
+      },
   ].filter(Boolean) as HeaderDropdownItemProps[];
 
 export const getIsTransparent = (pathname: string): boolean =>

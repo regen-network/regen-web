@@ -35,15 +35,10 @@ import { getSocialsLinks, getUserImages } from './Dashboard.utils';
 import { useProfileItems } from './hooks/useProfileItems';
 
 const Dashboard = (): JSX.Element => {
-  const {
-    showProjects,
-    showCreditClasses,
-    isCreditClassCreator,
-    isProjectAdmin,
-    isIssuer,
-  } = useProfileItems({});
+  const { showCreditClasses, isCreditClassCreator, isProjectAdmin, isIssuer } =
+    useProfileItems({});
   const { activeAccount } = useAuth();
-  const { wallet } = useWallet();
+  const { wallet, isConnected } = useWallet();
   const location = useLocation();
 
   const { avatarImage, backgroundImage } = getUserImages({
@@ -60,11 +55,8 @@ const Dashboard = (): JSX.Element => {
 
   const tabs: IconTabProps[] = useMemo(
     () => [
-      PORTFOLIO,
-      {
-        hidden: !showProjects,
-        ...PROJECTS,
-      },
+      { hidden: !isConnected, ...PORTFOLIO },
+      PROJECTS,
       {
         hidden: !showCreditClasses || creditClasses.length === 0,
         ...CREDIT_CLASSES,
@@ -74,11 +66,11 @@ const Dashboard = (): JSX.Element => {
         ...CREDIT_BATCHES,
       },
       {
-        hidden: !isBridgeEnabled,
+        hidden: !isBridgeEnabled || !isConnected,
         ...BRIDGE,
       },
     ],
-    [isIssuer, showCreditClasses, showProjects, creditClasses.length],
+    [isConnected, showCreditClasses, creditClasses.length, isIssuer],
   );
 
   const activeTab = Math.max(

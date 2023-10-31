@@ -43,23 +43,23 @@ const MyProjects = (): JSX.Element => {
   return (
     <>
       <Grid container spacing={8}>
-        {isIssuer && (
-          <Grid item xs={12} md={6} lg={4}>
-            <CreateProjectCard
-              isFirstProject={isFirstProject}
-              onClick={() =>
-                submitCreateProject({
-                  createProject,
-                  setError,
-                  navigate,
-                  activeAccountId,
-                  reactQueryClient,
-                })
-              }
-              sx={{ height: { xs: '100%' } }}
-            />
-          </Grid>
-        )}
+        <Grid item xs={12} md={6} lg={4}>
+          <CreateProjectCard
+            isFirstProject={isFirstProject}
+            onClick={() =>
+              submitCreateProject({
+                createProject,
+                setError,
+                navigate,
+                activeAccountId,
+                reactQueryClient,
+                isIssuer,
+              })
+            }
+            sx={{ height: { xs: '100%' } }}
+          />
+        </Grid>
+
         {isProjectAdmin &&
           adminProjects?.map((project, i) => {
             return (

@@ -37,26 +37,25 @@ const RegistryLayoutHeader: React.FC = () => {
     activeAccount,
     loading: authLoading,
   } = useAuth();
-  const { wallet, loaded: walletLoaded, disconnect } = useWallet();
+  const { wallet, loaded: walletLoaded, disconnect, isConnected } = useWallet();
   const theme = useTheme<Theme>();
   const navigate = useNavigate();
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
   const isTransparent = useMemo(() => getIsTransparent(pathname), [pathname]);
   const borderBottom = useMemo(() => getBorderBottom(pathname), [pathname]);
 
-  const { showProjects, showCreditClasses, isIssuer } = useProfileItems({});
+  const { showCreditClasses, isIssuer } = useProfileItems({});
   const menuItems = useMemo(() => getMenuItems(pathname), [pathname]);
   const userMenuItems = useMemo(
     () =>
       getUserMenuItems({
         linkComponent: RegistryNavLink,
         pathname,
-        theme,
-        showProjects,
         showCreditClasses,
         isIssuer,
+        isWalletConnected: isConnected,
       }),
-    [isIssuer, pathname, showCreditClasses, showProjects, theme],
+    [isConnected, isIssuer, pathname, showCreditClasses],
   );
   const setAddWalletModalSwitchWarningAtom = useSetAtom(
     addWalletModalSwitchWarningAtom,

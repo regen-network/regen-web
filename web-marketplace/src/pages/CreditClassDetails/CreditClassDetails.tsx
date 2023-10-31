@@ -24,6 +24,7 @@ import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCs
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getCreditClassByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getCreditClassByOnChainIdQuery/getCreditClassByOnChainIdQuery';
 import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
+import { getBuyModalOptionsQuery } from 'lib/queries/react-query/sanity/getBuyModalOptionsQuery/getBuyModalOptionsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
@@ -37,7 +38,6 @@ import { AVG_PRICE_TOOLTIP_CREDIT_CLASS } from 'components/organisms/SellOrdersA
 import { getDisplayParty } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { useLedger } from '../../ledger';
-import { BOOK_CALL_LINK } from './CreditClassDetails.constants';
 import {
   getCreditClassAvgPricePerTonLabel,
   getProjectNameFromProjectsData,
@@ -62,6 +62,14 @@ function CreditClassDetails({
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
+
+  const { data: buyModalOptionsContent } = useQuery(
+    getBuyModalOptionsQuery({ sanityClient: client }),
+  );
+  const buyModalOptions = buyModalOptionsContent?.allBuyModalOptions[0];
+  const scheduleCallLink = String(
+    buyModalOptions?.cards?.[0]?.button?.buttonLink?.buttonHref,
+  );
 
   const { data: contentData } = useAllCreditClassQuery({ client });
   const content = contentData?.allCreditClass?.find(
@@ -146,7 +154,7 @@ function CreditClassDetails({
     projectsWithOrderData,
   });
 
-  const onBookCallButtonClick = () => openLink(BOOK_CALL_LINK, true);
+  const onBookCallButtonClick = () => openLink(scheduleCallLink, true);
   const impact = useImpact({
     offChainCoBenefitsIRIs,
     offChainPrimaryImpactIRI,

@@ -4121,16 +4121,16 @@ export type AccountByIdQuery = (
   )> }
 );
 
-export type AccountProjectsByAddrQueryVariables = Exact<{
-  addr: Scalars['String'];
+export type AccountProjectsByIdQueryVariables = Exact<{
+  id: Scalars['UUID'];
 }>;
 
 
-export type AccountProjectsByAddrQuery = (
+export type AccountProjectsByIdQuery = (
   { __typename?: 'Query' }
-  & { accountByAddr?: Maybe<(
+  & { accountById?: Maybe<(
     { __typename?: 'Account' }
-    & Pick<Account, 'id' | 'addr'>
+    & Pick<Account, 'id'>
     & { projectsByAdminAccountId: (
       { __typename?: 'ProjectsConnection' }
       & { nodes: Array<Maybe<(
@@ -4367,7 +4367,7 @@ export type ProjectBySlugQuery = (
 
 export type ProjectFieldsFragment = (
   { __typename?: 'Project' }
-  & Pick<Project, 'id' | 'onChainId' | 'metadata' | 'approved' | 'published' | 'slug'>
+  & Pick<Project, 'id' | 'adminAccountId' | 'onChainId' | 'metadata' | 'approved' | 'published' | 'slug'>
   & { accountByAdminAccountId?: Maybe<(
     { __typename?: 'Account' }
     & Pick<Account, 'addr'>
@@ -4531,6 +4531,7 @@ export const AccountFieldsFragmentDoc = gql`
 export const ProjectFieldsFragmentDoc = gql`
     fragment projectFields on Project {
   id
+  adminAccountId
   accountByAdminAccountId {
     addr
   }
@@ -4653,11 +4654,10 @@ export function useAccountByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type AccountByIdQueryHookResult = ReturnType<typeof useAccountByIdQuery>;
 export type AccountByIdLazyQueryHookResult = ReturnType<typeof useAccountByIdLazyQuery>;
 export type AccountByIdQueryResult = Apollo.QueryResult<AccountByIdQuery, AccountByIdQueryVariables>;
-export const AccountProjectsByAddrDocument = gql`
-    query AccountProjectsByAddr($addr: String!) {
-  accountByAddr(addr: $addr) {
+export const AccountProjectsByIdDocument = gql`
+    query AccountProjectsById($id: UUID!) {
+  accountById(id: $id) {
     id
-    addr
     projectsByAdminAccountId {
       nodes {
         ...projectFields
@@ -4668,32 +4668,32 @@ export const AccountProjectsByAddrDocument = gql`
     ${ProjectFieldsFragmentDoc}`;
 
 /**
- * __useAccountProjectsByAddrQuery__
+ * __useAccountProjectsByIdQuery__
  *
- * To run a query within a React component, call `useAccountProjectsByAddrQuery` and pass it any options that fit your needs.
- * When your component renders, `useAccountProjectsByAddrQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useAccountProjectsByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAccountProjectsByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useAccountProjectsByAddrQuery({
+ * const { data, loading, error } = useAccountProjectsByIdQuery({
  *   variables: {
- *      addr: // value for 'addr'
+ *      id: // value for 'id'
  *   },
  * });
  */
-export function useAccountProjectsByAddrQuery(baseOptions: Apollo.QueryHookOptions<AccountProjectsByAddrQuery, AccountProjectsByAddrQueryVariables>) {
+export function useAccountProjectsByIdQuery(baseOptions: Apollo.QueryHookOptions<AccountProjectsByIdQuery, AccountProjectsByIdQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AccountProjectsByAddrQuery, AccountProjectsByAddrQueryVariables>(AccountProjectsByAddrDocument, options);
+        return Apollo.useQuery<AccountProjectsByIdQuery, AccountProjectsByIdQueryVariables>(AccountProjectsByIdDocument, options);
       }
-export function useAccountProjectsByAddrLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AccountProjectsByAddrQuery, AccountProjectsByAddrQueryVariables>) {
+export function useAccountProjectsByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AccountProjectsByIdQuery, AccountProjectsByIdQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AccountProjectsByAddrQuery, AccountProjectsByAddrQueryVariables>(AccountProjectsByAddrDocument, options);
+          return Apollo.useLazyQuery<AccountProjectsByIdQuery, AccountProjectsByIdQueryVariables>(AccountProjectsByIdDocument, options);
         }
-export type AccountProjectsByAddrQueryHookResult = ReturnType<typeof useAccountProjectsByAddrQuery>;
-export type AccountProjectsByAddrLazyQueryHookResult = ReturnType<typeof useAccountProjectsByAddrLazyQuery>;
-export type AccountProjectsByAddrQueryResult = Apollo.QueryResult<AccountProjectsByAddrQuery, AccountProjectsByAddrQueryVariables>;
+export type AccountProjectsByIdQueryHookResult = ReturnType<typeof useAccountProjectsByIdQuery>;
+export type AccountProjectsByIdLazyQueryHookResult = ReturnType<typeof useAccountProjectsByIdLazyQuery>;
+export type AccountProjectsByIdQueryResult = Apollo.QueryResult<AccountProjectsByIdQuery, AccountProjectsByIdQueryVariables>;
 export const AllCreditClassesDocument = gql`
     query AllCreditClasses {
   allCreditClasses {

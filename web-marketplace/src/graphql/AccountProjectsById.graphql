@@ -1,7 +1,6 @@
-query AccountProjectsByAddr($addr: String!) {
-  accountByAddr(addr: $addr) {
+query AccountProjectsById($id: UUID!) {
+  accountById(id: $id) {
     id
-    addr
     projectsByAdminAccountId {
       nodes {
         ...projectFields

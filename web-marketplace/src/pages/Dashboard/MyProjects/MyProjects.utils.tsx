@@ -3,7 +3,7 @@ import { QueryClient } from '@tanstack/react-query';
 
 import { useCreateProjectMutation } from 'generated/graphql';
 import { UseStateSetter } from 'types/react/use-state';
-import { getAccountProjectsByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByAddrQuery/getAccountProjectsByAddrQuery.utils';
+import { getAccountProjectsByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery.utils';
 
 type SubmitCreateProjectParams = {
   activeAccountId?: string;
@@ -16,7 +16,6 @@ type SubmitCreateProjectParams = {
 
 export async function submitCreateProject({
   activeAccountId,
-  addr,
   createProject,
   setError,
   navigate,
@@ -35,7 +34,7 @@ export async function submitCreateProject({
     const projectId = res?.data?.createProject?.project?.id;
     if (projectId) {
       await reactQueryClient.invalidateQueries({
-        queryKey: getAccountProjectsByAddrQueryKey({ addr: addr ?? '' }),
+        queryKey: getAccountProjectsByIdQueryKey({ id: activeAccountId }),
       });
       navigate(`/project-pages/${projectId}/choose-credit-class`);
     }

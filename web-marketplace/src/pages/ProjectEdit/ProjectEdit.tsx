@@ -25,6 +25,7 @@ import {
   processingModalAtom,
   txSuccessfulModalAtom,
 } from 'lib/atoms/modals.atoms';
+import { useAuth } from 'lib/auth/auth';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
@@ -71,6 +72,7 @@ function ProjectEdit(): JSX.Element {
   const { projectId } = useParams();
   const { pathname } = useLocation();
   const { wallet } = useWallet();
+  const { activeAccountId } = useAuth();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const lastPathItem = pathname.substring(pathname.lastIndexOf('/') + 1);
   const section = lastPathItem !== 'edit' ? lastPathItem : undefined;
@@ -135,8 +137,8 @@ function ProjectEdit(): JSX.Element {
 
   const isNotAdmin =
     ((onChainProject?.admin && wallet?.address !== onChainProject.admin) ||
-      (offChainProject?.walletByAdminWalletId?.addr &&
-        wallet?.address !== offChainProject?.walletByAdminWalletId?.addr)) &&
+      (offChainProject?.adminAccountId &&
+        activeAccountId !== offChainProject?.adminAccountId)) &&
     !isLoading;
   const hasProject = !!onChainProject || !!offChainProject;
   const isOnChain = !isLoading && !!onChainProject;

@@ -12,6 +12,7 @@ type SubmitCreateProjectParams = {
   navigate: NavigateFunction;
   setError: UseStateSetter<string | null>;
   reactQueryClient: QueryClient;
+  isIssuer: boolean;
 };
 
 export async function submitCreateProject({
@@ -20,6 +21,7 @@ export async function submitCreateProject({
   setError,
   navigate,
   reactQueryClient,
+  isIssuer,
 }: SubmitCreateProjectParams): Promise<void> {
   try {
     const res = await createProject({
@@ -36,7 +38,11 @@ export async function submitCreateProject({
       await reactQueryClient.invalidateQueries({
         queryKey: getAccountProjectsByIdQueryKey({ id: activeAccountId }),
       });
-      navigate(`/project-pages/${projectId}/choose-credit-class`);
+      if (isIssuer) {
+        navigate(`/project-pages/${projectId}/choose-credit-class`);
+      } else {
+        navigate(`/project-pages/${projectId}/basic-info`);
+      }
     }
   } catch (e) {
     setError('Error creating project');

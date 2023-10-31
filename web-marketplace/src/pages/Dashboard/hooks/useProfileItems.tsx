@@ -5,12 +5,13 @@ import { useQueryIsProjectAdmin } from 'hooks/useQueryIsProjectAdmin';
 
 type Props = {
   address?: string | null;
+  accountId?: string;
 };
 
-export const useProfileItems = ({ address }: Props) => {
+export const useProfileItems = ({ address, accountId }: Props) => {
   const { isIssuer } = useQueryIsIssuer({ address });
   const isCreditClassCreator = useQueryIfCreditClassCreator({ address });
-  const { isProjectAdmin } = useQueryIsProjectAdmin({ address });
+  const { isProjectAdmin } = useQueryIsProjectAdmin({ address, accountId });
   const isCreditClassAdmin = useQueryIsClassAdmin({ address });
 
   const showProjects = isIssuer || isProjectAdmin;

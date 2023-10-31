@@ -53,7 +53,6 @@ const MyProjects = (): JSX.Element => {
                   setError,
                   navigate,
                   activeAccountId,
-                  addr: wallet?.address,
                   reactQueryClient,
                 })
               }

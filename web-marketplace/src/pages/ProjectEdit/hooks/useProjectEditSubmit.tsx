@@ -33,7 +33,7 @@ type Props = {
 
 export type UseProjectEditSubmitParams = (
   metadata: NestedPartial<ProjectMetadataLD>,
-  newAdmin?: string,
+  newAdmin?: string | null,
   doUpdateMetadata?: boolean,
   doUpdateAdmin?: boolean,
 ) => Promise<void>;
@@ -50,7 +50,7 @@ const useProjectEditSubmit = ({
   const projectEditSubmit = useCallback(
     async (
       metadata: NestedPartial<ProjectMetadataLD>,
-      newAdmin?: string,
+      newAdmin?: string | null,
       doUpdateMetadata: boolean = true,
       doUpdateAdmin: boolean = false,
     ): Promise<void> => {

@@ -4,6 +4,7 @@ import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { ProjectByIdQuery, ProjectByOnChainIdQuery } from 'generated/graphql';
+import { useAuth } from 'lib/auth/auth';
 import {
   AnchoredProjectMetadataLD,
   ProjectMetadataLD,
@@ -11,12 +12,11 @@ import {
 import { getProjectKey } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery.constants';
 import { getProjectsByAdminKey } from 'lib/queries/react-query/ecocredit/getProjectsByAdmin/getProjectsByAdmin.constants';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
+import { getAccountProjectsByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery.utils';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery.constants';
-import { getWalletByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getWalletByAddrQuery/getWalletByAddrQuery.utils';
-import { useWallet } from 'lib/wallet/wallet';
 
 import { UseProjectEditSubmitParams } from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
 import { BasicInfoFormSchemaType } from 'components/organisms/BasicInfoForm/BasicInfoForm.schema';
@@ -78,7 +78,7 @@ export const useProjectWithMetadata = ({
   const graphqlClient = useApolloClient();
   const reactQueryClient = useQueryClient();
   const { dataClient } = useLedger();
-  const { wallet } = useWallet();
+  const { activeAccount } = useAuth();
 
   const { createOrUpdateProject } = useCreateOrUpdateProject();
   const isOnChainId = getIsOnChainId(projectId);
@@ -137,7 +137,9 @@ export const useProjectWithMetadata = ({
   // Create Reload and Submit callbacks
   const metadataReload = useCallback(async (): Promise<void> => {
     await reactQueryClient.invalidateQueries({
-      queryKey: getWalletByAddrQueryKey(wallet?.address ?? ''),
+      queryKey: getAccountProjectsByIdQueryKey({
+        id: activeAccount?.id,
+      }),
     });
     if (createOrEditOffChain) {
       await reactQueryClient.invalidateQueries({
@@ -157,7 +159,6 @@ export const useProjectWithMetadata = ({
     }
   }, [
     reactQueryClient,
-    wallet?.address,
     createOrEditOffChain,
     editOnChain,
     projectId,

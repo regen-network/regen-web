@@ -12,7 +12,7 @@ import {
   useUpdateProjectByIdMutation,
 } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
-import { getAccountProjectsByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByAddrQuery/getAccountProjectsByAddrQuery.utils';
+import { getAccountProjectsByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery.utils';
 import { getCreditClassByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getCreditClassByOnChainIdQuery/getCreditClassByOnChainIdQuery';
 import { getUnanchoredProjectBaseMetadata } from 'lib/rdf';
 
@@ -79,19 +79,15 @@ export const useCreateOrUpdateProject = () => {
         const projectId = createRes?.data?.createProject?.project?.id;
         if (projectId) {
           await reactQueryClient.invalidateQueries({
-            queryKey: getAccountProjectsByAddrQueryKey({
-              addr: activeAccount?.addr ?? '',
+            queryKey: getAccountProjectsByIdQueryKey({
+              id: activeAccount?.id,
             }),
           });
-          // await reactQueryClient.invalidateQueries({
-          //   queryKey: getProjectByOnChainIdKey(onChainProject.id),
-          // });
           return projectId;
         }
       }
     },
     [
-      activeAccount?.addr,
       activeAccount?.id,
       classData?.data?.creditClassByOnChainId?.id,
       createProject,

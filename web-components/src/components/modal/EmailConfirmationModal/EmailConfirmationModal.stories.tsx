@@ -14,8 +14,8 @@ export default {
       onClick: action('cancel'),
     },
     signInButton: {
-      text: 'sign in',
-      onClick: action('sign in'),
+      text: 'log in',
+      onClick: action('log in'),
     },
   },
   argTypes: {

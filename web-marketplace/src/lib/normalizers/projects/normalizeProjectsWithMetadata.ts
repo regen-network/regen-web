@@ -83,7 +83,7 @@ export const normalizeProjectWithMetadata = ({
     ...projectWithOrderData,
     id: projectId,
     offChainId: offChainProject?.id,
-    slug: offChainProject?.slug,
+    slug: offChainProject?.slug ?? projectWithOrderData?.slug,
     name:
       projectMetadata?.['schema:name'] ||
       projectWithOrderData?.name ||

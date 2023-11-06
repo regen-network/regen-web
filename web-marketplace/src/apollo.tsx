@@ -68,11 +68,7 @@ export const AuthApolloProvider = ({
   };
 
   const errorLink = onError(({ operation, networkError, forward }) => {
-    if (
-      networkError &&
-      networkError.message.includes('status code 403') &&
-      operation.operationName !== 'GetCurrentAccount'
-    ) {
+    if (networkError && networkError.message.includes('status code 403')) {
       const observable = new Observable<FetchResult<Record<string, any>>>(
         observer => {
           (async () => {

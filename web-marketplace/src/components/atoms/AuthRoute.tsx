@@ -14,7 +14,7 @@ const AuthRoute = ({ component: Component }: Props): JSX.Element => {
 
   useEffect(() => {
     if (!loading && !activeAccountId) {
-      navigate('/login');
+      navigate('/login?strict=true');
     }
   }, [navigate, loading, activeAccountId]);
 

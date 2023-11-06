@@ -38,7 +38,7 @@ module.exports = {
         300: 'rgb(var(--blue-300) / <alpha-value>)',
         200: 'rgb(var(--blue-200) / <alpha-value>)',
         100: 'rgb(var(--blue-100) / <alpha-value>)',
-      }
+      },
     },
     spacing: {
       // This spacing scale is based on the actual pixel values converted to REM values.
@@ -52,6 +52,7 @@ module.exports = {
       20: '1.25rem', // 20px
       25: '1.5625rem', // 25px
       30: '1.875rem', // 30px
+      35: '2.1875rem', // 35px
       40: '2.5rem', // 40px
       50: '3.125rem', // 50px
       60: '3.75rem', // 60px

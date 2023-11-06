@@ -5,7 +5,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
@@ -32,6 +32,7 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { OnTxSuccessfulProps } from 'pages/Dashboard/MyEcocredits/MyEcocredits.types';
 import NotFoundPage from 'pages/NotFound';
+import { usePathSection } from 'pages/ProfileEdit/hooks/usePathSection';
 import WithLoader from 'components/atoms/WithLoader';
 import {
   getIsOffChainUuid,
@@ -70,12 +71,10 @@ function ProjectEdit(): JSX.Element {
   const theme = useTheme<Theme>();
   const [saved, setSaved] = useState(false);
   const { projectId } = useParams();
-  const { pathname } = useLocation();
   const { wallet } = useWallet();
   const { activeAccountId } = useAuth();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const lastPathItem = pathname.substring(pathname.lastIndexOf('/') + 1);
-  const section = lastPathItem !== 'edit' ? lastPathItem : undefined;
+  const section = usePathSection();
   const [isWarningModalOpen, setIsWarningModalOpen] = useState<
     string | undefined
   >(undefined);

@@ -14,7 +14,7 @@ export const useProfileItems = ({ address, accountId }: Props) => {
   const { isProjectAdmin } = useQueryIsProjectAdmin({ address, accountId });
   const isCreditClassAdmin = useQueryIsClassAdmin({ address });
 
-  const showProjects = isIssuer || isProjectAdmin;
+  const showProjects = isProjectAdmin || !!accountId;
   const showCreditClasses = isCreditClassCreator || isCreditClassAdmin;
 
   return {

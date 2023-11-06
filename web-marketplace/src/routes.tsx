@@ -152,7 +152,7 @@ export const getRoutes = ({
             apolloClientFactory,
           })}
         />
-        <Route path="profile" element={<AuthRoute component={Dashboard} />}>
+        <Route path="profile" element={<KeplrRoute component={Dashboard} />}>
           <Route
             index
             element={<Navigate to={address ? 'portfolio' : 'projects'} />}
@@ -163,7 +163,7 @@ export const getRoutes = ({
           />
           <Route
             path="projects"
-            element={<AuthRoute component={MyProjects} />}
+            element={<KeplrRoute component={MyProjects} />}
           />
           <Route
             path="credit-classes"

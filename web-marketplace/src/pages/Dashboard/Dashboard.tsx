@@ -35,28 +35,35 @@ import { getSocialsLinks, getUserImages } from './Dashboard.utils';
 import { useProfileItems } from './hooks/useProfileItems';
 
 const Dashboard = (): JSX.Element => {
-  const { showCreditClasses, isCreditClassCreator, isProjectAdmin, isIssuer } =
-    useProfileItems({});
+  const {
+    showCreditClasses,
+    isCreditClassCreator,
+    isProjectAdmin,
+    isIssuer,
+    showProjects,
+  } = useProfileItems({});
   const { activeAccount } = useAuth();
-  const { wallet, isConnected } = useWallet();
+  const { wallet, isConnected, accountByAddr } = useWallet();
   const location = useLocation();
 
+  const account = activeAccount ?? accountByAddr;
+
   const { avatarImage, backgroundImage } = getUserImages({
-    account: activeAccount,
+    account,
   });
   const { creditClasses } = useFetchCreditClassesWithOrder({
     admin: wallet?.address,
   });
 
   const socialsLinks: SocialLink[] = useMemo(
-    () => getSocialsLinks({ account: activeAccount }),
-    [activeAccount],
+    () => getSocialsLinks({ account }),
+    [account],
   );
 
   const tabs: IconTabProps[] = useMemo(
     () => [
       { hidden: !isConnected, ...PORTFOLIO },
-      PROJECTS,
+      { hidden: !showProjects, ...PROJECTS },
       {
         hidden: !showCreditClasses || creditClasses.length === 0,
         ...CREDIT_CLASSES,
@@ -85,7 +92,7 @@ const Dashboard = (): JSX.Element => {
   return (
     <>
       <ProfileHeader
-        name={activeAccount?.name ? activeAccount.name : DEFAULT_NAME}
+        name={account?.name ? account.name : DEFAULT_NAME}
         backgroundImage={backgroundImage}
         avatar={avatarImage}
         infos={{
@@ -93,15 +100,13 @@ const Dashboard = (): JSX.Element => {
             href: getAccountUrl(wallet?.address, true),
             text: wallet?.address ? truncate(wallet?.address) : '',
           },
-          description: activeAccount?.description?.trimEnd() ?? '',
+          description: account?.description?.trimEnd() ?? '',
           socialsLinks,
         }}
         editLink={activeAccount?.id ? '/profile/edit' : ''}
         profileLink={profileLink}
         variant={
-          activeAccount?.type
-            ? profileVariantMapping[activeAccount.type]
-            : 'individual'
+          account?.type ? profileVariantMapping[account.type] : 'individual'
         }
         LinkComponent={Link}
       />

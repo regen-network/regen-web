@@ -43,7 +43,8 @@ services:
     container_name: server_container
     environment:
       CSRF_SECRET: secret
-      CSRF_COOKIE_NAME: cookie
+      CSRF_COOKIE_NAME: regen-dev.x-csrf-token
+      CSRF_COOKIE_SAMESITE: none
       DATABASE_URL: postgres://postgres:password@localhost:5432/server
       SHADOW_DATABASE_URL: postgres://postgres:postgres@localhost:5432/server_shadow
       ROOT_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres

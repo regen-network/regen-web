@@ -38,7 +38,7 @@
   "regen.ecocredit.v1.AllowedBridgeChain": [],
   "regen.ecocredit.v1.AllowedClassCreator": [],
   "regen.ecocredit.v1.Batch": [
-    34,
+    35,
     {
       "denom": "C01-001-20150101-20151231-001",
       "end_date": "2015-12-31T00:00:00Z",
@@ -378,6 +378,16 @@
       "metadata": "regen:13toVfwkfM96d5tRd7SDg27ueCtURq43o1Gxe1yXVSDsSVpFCmLGoVk.rdf",
       "project_key": "9",
       "start_date": "2021-02-16T07:00:00Z"
+    },
+    {
+      "denom": "KSH01-001-20230101-20230501-001",
+      "end_date": "2023-05-01T00:00:00Z",
+      "issuance_date": "2023-09-12T21:24:27.928090045Z",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "key": "35",
+      "metadata": "regen:13toVhGbNGS87PXbTJQY4rtR5XnHmqV3WCq4tyRfcJ6PkgK3aYqQF6z.rdf",
+      "project_key": "22",
+      "start_date": "2023-01-01T00:00:00Z"
     }
   ],
   "regen.ecocredit.v1.BatchBalance": [
@@ -618,6 +628,13 @@
       "escrowed_amount": "0",
       "retired_amount": "0",
       "tradable_amount": "100"
+    },
+    {
+      "address": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "batch_key": "35",
+      "escrowed_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
     }
   ],
   "regen.ecocredit.v1.BatchContract": [],
@@ -705,6 +722,10 @@
     {
       "next_sequence": "2",
       "project_key": "21"
+    },
+    {
+      "next_sequence": "2",
+      "project_key": "22"
     }
   ],
   "regen.ecocredit.v1.BatchSupply": [
@@ -911,10 +932,16 @@
       "cancelled_amount": "0",
       "retired_amount": "0",
       "tradable_amount": "100"
+    },
+    {
+      "batch_key": "35",
+      "cancelled_amount": "0",
+      "retired_amount": "0",
+      "tradable_amount": "100"
     }
   ],
   "regen.ecocredit.v1.Class": [
-    4,
+    5,
     {
       "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
       "credit_type_abbrev": "C",
@@ -942,6 +969,13 @@
       "id": "C04",
       "key": "4",
       "metadata": "regen:13toVgBisQqEmauHntQsW6mwpz71RSTwsjzhn9gxCQ16tdRjHPHTRoK.rdf"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "credit_type_abbrev": "KSH",
+      "id": "KSH01",
+      "key": "5",
+      "metadata": "regen:13toVh3S3R9HK4CcvnWDAQDbpwekWosPNQhVn8drrjziNznPnZdmCm9.rdf"
     }
   ],
   "regen.ecocredit.v1.ClassCreatorAllowlist": {
@@ -969,12 +1003,20 @@
     {
       "class_key": "4",
       "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM="
+    },
+    {
+      "class_key": "5",
+      "issuer": "+oLtisXSV72umUBlz5ALnkiN7FM="
     }
   ],
   "regen.ecocredit.v1.ClassSequence": [
     {
       "credit_type_abbrev": "C",
       "next_sequence": "5"
+    },
+    {
+      "credit_type_abbrev": "KSH",
+      "next_sequence": "2"
     }
   ],
   "regen.ecocredit.v1.CreditType": [
@@ -983,11 +1025,17 @@
       "name": "carbon",
       "precision": 6,
       "unit": "metric ton CO2 equivalent"
+    },
+    {
+      "abbreviation": "KSH",
+      "name": "kilo-sheep-hour",
+      "precision": 6,
+      "unit": "number of sheep * hours grazed / 1000"
     }
   ],
   "regen.ecocredit.v1.OriginTxIndex": [],
   "regen.ecocredit.v1.Project": [
-    21,
+    22,
     {
       "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
       "class_key": "1",
@@ -1176,6 +1224,15 @@
       "key": "21",
       "metadata": "regen:13toVhrafJcnz74vhsQoCwThKsnEoF12tNkUGhR6dqb9L77QoorUmhV.rdf",
       "reference_id": "VCS-1052"
+    },
+    {
+      "admin": "+oLtisXSV72umUBlz5ALnkiN7FM=",
+      "class_key": "5",
+      "id": "KSH01-001",
+      "jurisdiction": "US-CA",
+      "key": "22",
+      "metadata": "regen:13toVgEs67VyTgaLnLGk5ms9BwxGcjvZgiMcbGcgM2ttdWpfDhBHtZx.rdf",
+      "reference_id": ""
     }
   ],
   "regen.ecocredit.v1.ProjectSequence": [
@@ -1190,6 +1247,10 @@
     {
       "class_key": "3",
       "next_sequence": "13"
+    },
+    {
+      "class_key": "5",
+      "next_sequence": "2"
     }
   ]
 }

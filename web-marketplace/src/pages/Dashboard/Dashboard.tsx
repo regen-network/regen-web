@@ -77,7 +77,13 @@ const Dashboard = (): JSX.Element => {
         ...BRIDGE,
       },
     ],
-    [isConnected, showCreditClasses, creditClasses.length, isIssuer],
+    [
+      isConnected,
+      showProjects,
+      showCreditClasses,
+      creditClasses.length,
+      isIssuer,
+    ],
   );
 
   const activeTab = Math.max(

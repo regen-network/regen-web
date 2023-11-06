@@ -18,8 +18,7 @@ import WithLoader from 'components/atoms/WithLoader';
 
 import { useDashboardContext } from '../Dashboard.context';
 import { useFetchProjectByAdmin } from './hooks/useFetchProjectsByAdmin';
-import { DEFAULT_PROJECT } from './MyProjects.constants';
-import { submitCreateProject } from './MyProjects.utils';
+import { getDefaultProject, submitCreateProject } from './MyProjects.utils';
 
 const MyProjects = (): JSX.Element => {
   const [error, setError] = useState<string | null>(null);
@@ -43,22 +42,24 @@ const MyProjects = (): JSX.Element => {
   return (
     <>
       <Grid container spacing={8}>
-        <Grid item xs={12} md={6} lg={4}>
-          <CreateProjectCard
-            isFirstProject={isFirstProject}
-            onClick={() =>
-              submitCreateProject({
-                createProject,
-                setError,
-                navigate,
-                activeAccountId,
-                reactQueryClient,
-                isIssuer,
-              })
-            }
-            sx={{ height: { xs: '100%' } }}
-          />
-        </Grid>
+        {activeAccountId && (
+          <Grid item xs={12} md={6} lg={4}>
+            <CreateProjectCard
+              isFirstProject={isFirstProject}
+              onClick={() =>
+                submitCreateProject({
+                  createProject,
+                  setError,
+                  navigate,
+                  activeAccountId,
+                  reactQueryClient,
+                  isIssuer,
+                })
+              }
+              sx={{ height: { xs: '100%' } }}
+            />
+          </Grid>
+        )}
 
         {isProjectAdmin &&
           adminProjects?.map((project, i) => {
@@ -69,7 +70,7 @@ const MyProjects = (): JSX.Element => {
                   variant="skeleton"
                 >
                   <ProjectCard
-                    {...DEFAULT_PROJECT}
+                    {...getDefaultProject(!activeAccountId)}
                     {...project}
                     onButtonClick={() => {
                       if (

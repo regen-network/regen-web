@@ -57,6 +57,7 @@ interface GetUserMenuItemsParams {
   linkComponent: React.FC<NavLinkProps>;
   showCreditClasses?: boolean;
   isIssuer?: boolean;
+  showProjects?: boolean;
   isWalletConnected: boolean;
 }
 
@@ -65,6 +66,7 @@ export const getUserMenuItems = ({
   pathname,
   showCreditClasses,
   isIssuer,
+  showProjects,
   isWalletConnected,
 }: GetUserMenuItemsParams): HeaderDropdownItemProps[] =>
   [
@@ -75,7 +77,7 @@ export const getUserMenuItems = ({
       ...PORTFOLIO,
       icon: <CreditsIcon sx={{ width: 24, height: 20 }} />,
     },
-    {
+    showProjects && {
       pathname,
       linkComponent,
       ...PROJECTS,

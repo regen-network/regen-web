@@ -129,7 +129,7 @@ const LoginButton = ({ size = 'small' }: Props) => {
     <>
       <div className={styles.root}>
         <>
-          {!activeAccountId && !authLoading && walletLoaded && (
+          {!isConnected && !activeAccountId && !authLoading && walletLoaded && (
             <OutlinedButton onClick={onButtonClick} size={size}>
               log in
             </OutlinedButton>

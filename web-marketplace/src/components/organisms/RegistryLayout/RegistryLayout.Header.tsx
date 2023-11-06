@@ -44,7 +44,8 @@ const RegistryLayoutHeader: React.FC = () => {
   const isTransparent = useMemo(() => getIsTransparent(pathname), [pathname]);
   const borderBottom = useMemo(() => getBorderBottom(pathname), [pathname]);
 
-  const { showCreditClasses, isIssuer } = useProfileItems({});
+  const { showCreditClasses, showProjects, isIssuer, isProjectAdmin } =
+    useProfileItems({});
   const menuItems = useMemo(() => getMenuItems(pathname), [pathname]);
   const userMenuItems = useMemo(
     () =>
@@ -53,9 +54,10 @@ const RegistryLayoutHeader: React.FC = () => {
         pathname,
         showCreditClasses,
         isIssuer,
+        showProjects,
         isWalletConnected: isConnected,
       }),
-    [isConnected, isIssuer, pathname, showCreditClasses],
+    [pathname, showCreditClasses, isIssuer, showProjects, isConnected],
   );
   const setAddWalletModalSwitchWarningAtom = useSetAtom(
     addWalletModalSwitchWarningAtom,
@@ -87,9 +89,8 @@ const RegistryLayoutHeader: React.FC = () => {
         extras={
           <Box display="flex" justifyContent="center" alignItems="center">
             {chainId &&
-              walletLoaded &&
-              !authLoading &&
-              !!activeAccount &&
+              ((!authLoading && !!activeAccount) ||
+                (walletLoaded && isConnected)) &&
               disconnect && (
                 <UserMenuItems
                   address={getAddress({

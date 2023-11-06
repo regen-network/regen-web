@@ -15,6 +15,7 @@ import { Window as KeplrWindow } from '@keplr-wallet/types';
 import { useQuery } from '@tanstack/react-query';
 import truncate from 'lodash/truncate';
 
+import { AccountByAddrQuery } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
@@ -71,7 +72,9 @@ export type WalletContextType = {
   isConnected: boolean;
   accountChanging: boolean;
   isKeplrMobileWeb: boolean;
+  accountByAddr?: AccountByAddrQuery['accountByAddr'];
 };
+
 const WalletContext = createContext<WalletContextType>({
   loaded: false,
   isConnected: false,
@@ -170,13 +173,14 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
-  const { data: accountByAddr, isFetching } = useQuery(
+  const { data: accountByAddrData, isFetching } = useQuery(
     getAccountByAddrQuery({
       client: graphqlClient,
       addr: wallet?.address ?? '',
       enabled: !!wallet?.address && !!graphqlClient && !!csrfData,
     }),
   );
+  const accountByAddr = accountByAddrData?.accountByAddr;
   const loginDisabled = keplrMobileWeb || !!walletConnect;
 
   return (
@@ -190,13 +194,13 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         error,
         signArbitrary,
         accountChanging,
+        accountByAddr,
         isConnected:
           !!wallet?.address &&
           // signArbitrary (used in login) not yet supported by @keplr-wallet/wc-client
           // https://github.com/chainapsis/keplr-wallet/issues/664
           (loginDisabled ||
-            (!!activeAccountId &&
-              accountByAddr?.accountByAddr?.id === activeAccountId)),
+            (!!activeAccountId && accountByAddr?.id === activeAccountId)),
         isKeplrMobileWeb: keplrMobileWeb,
       }}
     >

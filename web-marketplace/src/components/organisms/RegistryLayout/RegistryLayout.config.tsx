@@ -12,8 +12,11 @@ import {
   BRIDGE,
   CREDIT_BATCHES,
   CREDIT_CLASSES,
+  EDIT_PROFILE,
   PORTFOLIO,
+  PROFILE_SETTINGS,
   PROJECTS,
+  SEPARATOR,
 } from 'pages/Dashboard/Dashboard.constants';
 import { Link } from 'components/atoms';
 
@@ -96,6 +99,19 @@ export const getUserMenuItems = ({
       pathname,
       linkComponent,
       ...BRIDGE,
+    },
+    {
+      ...SEPARATOR,
+    },
+    {
+      pathname,
+      linkComponent,
+      ...EDIT_PROFILE,
+    },
+    {
+      pathname,
+      linkComponent,
+      ...PROFILE_SETTINGS,
     },
   ].filter(Boolean) as HeaderDropdownItemProps[];
 

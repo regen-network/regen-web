@@ -42,7 +42,7 @@ import { useUpdateDefaultAvatar } from './hooks/useUpdateDefaultAvatar';
 export interface EditProfileFormProps {
   initialValues?: EditProfileFormSchemaType;
   children?: React.ReactNode;
-  isDirtyRef: MutableRefObject<boolean>;
+  isDirtyRef?: MutableRefObject<boolean>;
   onSubmit: (values: EditProfileFormSchemaType) => Promise<void>;
   onSuccess?: () => void;
   onUpload?: (imageFile: File) => Promise<string>;
@@ -107,7 +107,9 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
     });
 
     useEffect(() => {
-      isDirtyRef.current = isDirty;
+      if (isDirtyRef) {
+        isDirtyRef.current = isDirty;
+      }
     }, [isDirtyRef, isDirty]);
 
     return (
@@ -126,12 +128,6 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
               setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
             }
           }
-        }}
-        sx={{
-          border: theme => `1px solid ${theme.palette.info.light}`,
-          borderRadius: '5px',
-          py: 10,
-          px: { xs: 2.5, sm: 10 },
         }}
       >
         <RadioCard

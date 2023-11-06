@@ -35,6 +35,7 @@ import { storefrontLoader } from 'pages/Marketplace/Storefront/Storefront.loader
 import { projectsLoader } from 'pages/Projects/Projects.loader';
 import Settings from 'pages/Settings';
 import { AuthRoute } from 'components/atoms/AuthRoute';
+import { KeplrOrAuthRoute } from 'components/atoms/KeplrOrAuthRoute';
 import PageLoader from 'components/atoms/PageLoader';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
 import { projectDetailsLoader } from 'components/templates/ProjectDetails/ProjectDetails.loader';
@@ -152,7 +153,10 @@ export const getRoutes = ({
             apolloClientFactory,
           })}
         />
-        <Route path="profile" element={<AuthRoute component={Dashboard} />}>
+        <Route
+          path="profile"
+          element={<KeplrOrAuthRoute component={Dashboard} />}
+        >
           <Route
             index
             element={<Navigate to={address ? 'portfolio' : 'projects'} />}
@@ -163,7 +167,7 @@ export const getRoutes = ({
           />
           <Route
             path="projects"
-            element={<AuthRoute component={MyProjects} />}
+            element={<KeplrOrAuthRoute component={MyProjects} />}
           />
           <Route
             path="credit-classes"

@@ -1,6 +1,9 @@
 import { NavigateFunction } from 'react-router-dom';
 import { QueryClient } from '@tanstack/react-query';
 
+import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCard';
+import EditIcon from 'web-components/lib/components/icons/EditIcon';
+
 import { useCreateProjectMutation } from 'generated/graphql';
 import { UseStateSetter } from 'types/react/use-state';
 import { getAccountProjectsByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery.utils';
@@ -48,3 +51,20 @@ export async function submitCreateProject({
     setError('Error creating project');
   }
 }
+
+export const getDefaultProject = (disabled: boolean): ProjectCardProps => ({
+  name: '',
+  imgSrc: '/jpg/default-project.jpg',
+  place: '',
+  area: 0,
+  areaUnit: 'ha',
+  button: {
+    text: 'Edit project',
+    startIcon: (
+      <EditIcon
+        sx={{ width: 20, height: 20, color: disabled ? 'grey.100' : 'inherit' }}
+      />
+    ),
+    disabled,
+  },
+});

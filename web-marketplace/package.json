@@ -75,7 +75,7 @@
     "url-search-params-polyfill": "^8.1.0",
     "use-analytics": "^0.0.5",
     "vite-plugin-require": "^1.1.10",
-    "web-components": "workspace:1.14.0",
+    "web-components": "workspace:*",
     "zod": "^3.20.2"
   },
   "scripts": {

@@ -67,7 +67,6 @@ export default function NumberTextField({
             item
             className={classes.arrow}
             onClick={(): void =>
-              // @ts-ignore
               setFieldValue(
                 name,
                 max ? Math.min(max, value + increment) : value + increment,
@@ -80,7 +79,6 @@ export default function NumberTextField({
             item
             className={classes.arrow}
             onClick={(): void =>
-              // @ts-ignore
               setFieldValue(
                 name,
                 min ? Math.max(min, value - increment) : value - increment,

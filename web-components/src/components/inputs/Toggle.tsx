@@ -70,7 +70,6 @@ const Toggle: React.FC<React.PropsWithChildren<ToggleProps>> = ({
               <Checkbox
                 sx={{ py: 0.5 }}
                 field={field}
-                // @ts-ignore
                 form={form}
                 meta={meta}
                 indeterminate={false}

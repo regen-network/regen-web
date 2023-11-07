@@ -1,5 +1,4 @@
-import { Account } from 'src/components/user/UserInfoCard';
-
+import { Account } from '../../../components/user/UserInfoCard';
 import { ImageType } from '../../../types/shared/imageType';
 
 export type EcologicalCreditTypeType = {

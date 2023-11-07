@@ -27,10 +27,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { data, isFetching } = useQuery(
-    getAccountsQuery({
-      client: graphqlClient,
-      enabled: !!graphqlClient,
-    }),
+    getAccountsQuery({}),
   );
   const activeAccountId = data?.activeAccountId;
   const authenticatedAccountIds = data?.authenticatedAccountIds;

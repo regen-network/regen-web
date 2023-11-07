@@ -11,6 +11,4 @@ type Accounts = {
 export type ReactQueryGetAccountsQueryResponse =
   QueryObserverOptions<Accounts | null>;
 
-export type ReactQueryGetAccountByIdQueryParams = {
-  client: ApolloClient<NormalizedCacheObject>;
-} & ReactQueryBuilderResponse<ReactQueryGetAccountsQueryResponse>;
+export type ReactQueryGetAccountsQueryParams = ReactQueryBuilderResponse<ReactQueryGetAccountsQueryResponse>;

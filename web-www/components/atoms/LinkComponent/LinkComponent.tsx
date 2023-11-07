@@ -1,4 +1,4 @@
-import { forwardRef, PropsWithChildren } from 'react';
+import { forwardRef } from 'react';
 import { Link as MuiLink } from '@mui/material';
 import Link from 'next/link';
 
@@ -7,7 +7,7 @@ import { getLinkTarget } from 'web-components/lib/utils/linkTarget';
 
 import { isInternalLink } from '@/lib/utils/sanity/button';
 
-type Props = LinkProps & PropsWithChildren;
+type Props = LinkProps;
 
 export const LinkComponent = forwardRef<HTMLAnchorElement, Props>(
   ({ children, ...linkProps }, ref) => (

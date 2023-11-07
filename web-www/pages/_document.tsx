@@ -1,5 +1,4 @@
 import { Head, Html, Main, NextScript } from 'next/document';
-import Script from 'next/script';
 
 import { augmentDocumentWithEmotionCache } from './_app';
 

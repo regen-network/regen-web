@@ -18,7 +18,6 @@
     "web-www"
   ],
   "scripts": {
-    "bootstrap": "lerna bootstrap",
     "build": "bun run build-components && bun run --cwd web-marketplace build",
     "build-www": "bun run build-components && bun run --cwd web-www build",
     "build-components": "bun run --cwd web-components build",

@@ -16,10 +16,9 @@ jobs:
       - name: install
         run: |
           bun install
-          yarn bootstrap
 
       - name: build-app
-        run: yarn build
+        run: bun run build
         env:
           NODE_OPTIONS: '--openssl-legacy-provider --max-old-space-size=10216'
 

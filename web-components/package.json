@@ -32,7 +32,7 @@
     "@mui/styled-engine": "^5.10.8",
     "@mui/styles": "^5.10.10",
     "@mui/system": "^5.10.10",
-    "@mui/x-date-pickers": "5.0.0-alpha.2",
+    "@mui/x-date-pickers": "^5.0.0-alpha.2",
     "@sanity/block-content-to-react": "^3.0.0",
     "@turf/bbox": "^6.0.1",
     "@turf/invariant": "^6.1.2",

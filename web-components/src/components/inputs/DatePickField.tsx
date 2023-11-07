@@ -141,7 +141,6 @@ const DatePickField: React.FC<React.PropsWithChildren<DatePickProps>> = ({
     errors: !!form.errors[field.name],
     optional: !!optional,
     field,
-    // @ts-ignore
     form,
     meta,
   });
@@ -157,7 +156,6 @@ const DatePickField: React.FC<React.PropsWithChildren<DatePickProps>> = ({
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker
             renderInput={params => (
-              // @ts-ignore
               <TextField
                 name={field.name}
                 className={styles.root}

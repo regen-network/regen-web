@@ -111,6 +111,7 @@
     "@storybook/addon-storyshots": "^6.3.12",
     "@types/enzyme": "^3.10.8",
     "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@types/mapbox__mapbox-sdk": "^0.13.6",
     "@types/react-lazyload": "^3.1.0",
     "@types/react-router-hash-link": "^2.4.5",
     "@types/storybook__addon-storyshots": "^5.3.1",

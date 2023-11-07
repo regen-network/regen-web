@@ -113,7 +113,6 @@ type ParseMediaParams = {
     'regen:galleryPhotos' | 'regen:previewPhoto' | 'schema:creditText'
   >;
   geojson: any;
-  // @ts-ignore
   geocodingJurisdictionData?: MapiResponse<GeocodeResponse> | null;
 };
 

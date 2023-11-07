@@ -22,10 +22,7 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "target": "es6",
-    "paths": {
-      "react": ["../node_modules/@types/react"]
-    }
+    "target": "es6"
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["**/*.test.*", "node_modules"]

@@ -2,14 +2,13 @@ import { apiUri } from 'lib/apiUri';
 
 import { GET_ACCOUNTS_QUERY_KEY } from './getAccountsQuery.constants';
 import {
-  ReactQueryGetAccountByIdQueryParams,
+  ReactQueryGetAccountsQueryParams,
   ReactQueryGetAccountsQueryResponse,
 } from './getAccountsQuery.types';
 
 export const getAccountsQuery = ({
-  client,
   ...params
-}: ReactQueryGetAccountByIdQueryParams): ReactQueryGetAccountsQueryResponse => ({
+}: ReactQueryGetAccountsQueryParams): ReactQueryGetAccountsQueryResponse => ({
   queryKey: [GET_ACCOUNTS_QUERY_KEY],
   queryFn: async () => {
     try {

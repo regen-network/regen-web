@@ -66,6 +66,7 @@
     "@types/react-dom": "^18.0.7"
   },
   "resolutions": {
+    "eslint": "^8.42.0",
     "formik-mui": "^5.0.0-alpha.0",
     "formik": "2.2.9",
     "@types/jest": "^29.0.0",
@@ -77,7 +78,7 @@
     "webpack": "4.44.2",
     "react-error-overlay": "6.0.9",
     "@emotion/react": "11.10.6",
-    "tss-react": "4.4.1"
+    "tss-react": "^4.8.2"
   },
   "husky": {
     "hooks": {}

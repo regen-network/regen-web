@@ -22,7 +22,7 @@ export const ProfileEditSettings = () => {
           connect: connectGoogleAccount,
         },
         ...(googleAccounts?.map(account => ({
-          providerName: 'Google',
+          providerName: `${account?.email}`,
           disconnect: () => undefined,
         })) ?? []),
       ]}

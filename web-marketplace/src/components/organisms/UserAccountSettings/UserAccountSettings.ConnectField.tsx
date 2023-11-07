@@ -3,8 +3,8 @@ import React from 'react';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { CopyButton } from 'web-components/lib/components/buttons/CopyButton';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import CloseIcon from 'web-components/lib/components/icons/CloseIcon';
 import { Body } from 'web-components/lib/components/typography';
-import CloseIcon from "web-components/lib/components/icons/CloseIcon";
 
 /** ConnectField is used internally by the UserAccountSettings component to
  * display a single social or wallet connection.
@@ -32,7 +32,7 @@ export const ConnectField = ({
           <Body size="sm">{connect ? 'Disconnected' : 'Connected'}</Body>
         )}
       </div>
-      <div>
+      <div className="ml-auto">
         {connect ? (
           <ContainedButton onClick={connect}>CONNECT</ContainedButton>
         ) : (

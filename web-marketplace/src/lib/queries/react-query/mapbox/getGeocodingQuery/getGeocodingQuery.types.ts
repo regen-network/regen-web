@@ -5,6 +5,7 @@ import { QueryObserverOptions } from '@tanstack/react-query';
 import { ReactQueryBuilderResponse } from '../../types/react-query.types';
 
 export type ReactQueryGeocodingResponse =
+  // @ts-ignore
   QueryObserverOptions<MapiResponse<GeocodeResponse> | null>;
 
 export type ReactQueryGeocodingProps = {

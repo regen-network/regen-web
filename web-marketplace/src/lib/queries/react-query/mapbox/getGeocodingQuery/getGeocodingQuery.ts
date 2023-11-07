@@ -14,6 +14,7 @@ export const getGeocodingQuery = ({
   queryFn: async () => {
     if (!search) return null;
     const response = await geocodingClient
+      // @ts-ignore
       .forwardGeocode({
         query: search,
         limit: 1,

@@ -6,12 +6,12 @@
   "scripts": {
     "remove-previous-files": "shx rm -rf ./lib/* ./tsconfig.tsbuildinfo",
     "copy-assets": "cp ./src/theme/fonts.css ./lib/theme/fonts.css && cp -R ./src/theme/assets ./lib/theme/",
-    "watch": "yarn remove-previous-files && tsc --watch && yarn copy-assets",
-    "build": "yarn remove-previous-files && tsc && yarn copy-assets",
+    "watch": "bun run remove-previous-files && tsc --watch && bun run copy-assets",
+    "build": "bun run remove-previous-files && tsc && bun run copy-assets",
     "lint": "eslint ./src  -c .eslintrc.js --max-warnings 0 --ext .ts,.tsx",
     "lint-fix": "eslint ./src --fix -c .eslintrc.js --ext .ts,.tsx",
     "format": "prettier --write --loglevel warn --ignore-path=../.prettierignore './src/**/*.{ts,tsx,json,md,css}'",
-    "format-and-fix": "yarn format && yarn lint-fix",
+    "format-and-fix": "bun run format && bun run lint-fix",
     "test": "jest"
   },
   "browserslist": [
@@ -70,7 +70,7 @@
     "react-remove-scroll": "^2.3.0",
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",
-    "tss-react": "^4.4.1",
+    "tss-react": "4.4.1",
     "victory": "^36.6.8",
     "yup": "^0.32.11",
     "zxcvbn": "^4.4.2"

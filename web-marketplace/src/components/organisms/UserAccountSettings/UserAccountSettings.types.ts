@@ -42,6 +42,7 @@ type ConnectionState = DisconnectedState | ConnectedState;
 export type SocialProviderInfo = {
   /** The name of the social provider. */
   providerName: string;
+  mail?: string;
 } & ConnectionState;
 
 type WalletConnectedState = {

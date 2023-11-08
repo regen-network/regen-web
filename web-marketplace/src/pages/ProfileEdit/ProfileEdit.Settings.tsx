@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-
 import { useAuth } from 'lib/auth/auth';
 import { apiServerUrl } from 'lib/env';
 
@@ -10,6 +8,12 @@ export const ProfileEditSettings = () => {
   const googleAccounts = authenticatedAccounts?.filter(
     account => !!account?.email,
   );
+  const googleSocialProviders =
+    googleAccounts?.map(account => ({
+      providerName: `Google`,
+      address: `${account?.email}`,
+      disconnect: () => undefined,
+    })) ?? [];
   const connectGoogleAccount = () =>
     (window.location.href = `${apiServerUrl}/marketplace/v1/auth/google`);
 
@@ -21,10 +25,7 @@ export const ProfileEditSettings = () => {
           providerName: 'Google',
           connect: connectGoogleAccount,
         },
-        ...(googleAccounts?.map(account => ({
-          providerName: `${account?.email}`,
-          disconnect: () => undefined,
-        })) ?? []),
+        ...googleSocialProviders,
       ]}
       walletProvider={{
         address: 'regenfoobar3792723djghsdg',

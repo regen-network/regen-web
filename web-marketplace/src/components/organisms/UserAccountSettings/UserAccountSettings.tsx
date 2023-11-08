@@ -30,7 +30,7 @@ export const UserAccountSettings = ({
         <div className="flex flex-col">
           {socialProviders.map(provider => (
             <div
-              key={`${provider.providerName}`}
+              key={`${provider.providerName}${provider.mail ?? ''}`}
               className="border-0 border-b border-solid border-grey-300 py-20
             first:pt-0 last:pb-0 last:border-b-0"
             >

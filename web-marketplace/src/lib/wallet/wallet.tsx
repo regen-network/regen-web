@@ -61,6 +61,7 @@ export type SignArbitraryType = (
 
 export type WalletContextType = {
   wallet?: Wallet;
+  walletConfig?: WalletConfig;
   loaded: boolean;
   connect?: (params: ConnectParams) => Promise<void>;
   disconnect?: () => void;
@@ -187,6 +188,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     <WalletContext.Provider
       value={{
         wallet,
+        walletConfig: walletConfigRef.current,
         loaded: loaded && !isFetching && (loginDisabled || !authLoading),
         connect,
         disconnect,

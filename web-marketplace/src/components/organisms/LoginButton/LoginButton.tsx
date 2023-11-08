@@ -12,9 +12,10 @@ import { useLedger } from 'ledger';
 import { apiUri } from 'lib/apiUri';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { isWaitingForSigningAtom } from 'lib/atoms/tx.atoms';
-import { useAuth } from 'lib/auth/auth';
 import { getBalanceQuery } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
+
+import { useAuthData } from 'hooks/useAuthData';
 
 import { chainId } from '../../../lib/ledger';
 import { useWallet } from '../../../lib/wallet/wallet';
@@ -35,7 +36,7 @@ type Props = {
 
 const LoginButton = ({ size = 'small' }: Props) => {
   const styles = useLoginButtonStyles();
-  const { loading: authLoading, activeAccountId } = useAuth();
+  const { noAccountAndNoWallet } = useAuthData();
   const {
     wallet,
     connect,
@@ -129,7 +130,7 @@ const LoginButton = ({ size = 'small' }: Props) => {
     <>
       <div className={styles.root}>
         <>
-          {!isConnected && !activeAccountId && !authLoading && walletLoaded && (
+          {noAccountAndNoWallet && (
             <OutlinedButton onClick={onButtonClick} size={size}>
               log in
             </OutlinedButton>

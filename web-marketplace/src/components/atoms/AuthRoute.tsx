@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { loaderStyles } from 'styles/loader';
 
 import { useAuth } from 'lib/auth/auth';
+
+import WithLoader from './WithLoader';
 
 interface Props {
   component: React.ComponentType<React.PropsWithChildren<unknown>>;
@@ -18,7 +20,11 @@ const AuthRoute = ({ component: Component }: Props): JSX.Element => {
     }
   }, [navigate, loading, activeAccountId]);
 
-  return <Box sx={{ minHeight: 600 }}>{activeAccountId && <Component />}</Box>;
+  return (
+    <WithLoader isLoading={loading} sx={loaderStyles.withLoaderBlock}>
+      <div className="min-h-[600px]">{activeAccountId && <Component />}</div>
+    </WithLoader>
+  );
 };
 
 export { AuthRoute };

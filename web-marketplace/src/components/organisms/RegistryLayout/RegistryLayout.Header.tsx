@@ -16,6 +16,7 @@ import { useWallet } from 'lib/wallet/wallet';
 import { useProfileItems } from 'pages/Dashboard/hooks/useProfileItems';
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
+import { useAuthData } from 'hooks/useAuthData';
 
 import { chainId } from '../../../lib/ledger';
 import { RegistryIconLink, RegistryNavLink } from '../../atoms';
@@ -32,12 +33,10 @@ import { getAddress } from './RegistryLayout.utils';
 
 const RegistryLayoutHeader: React.FC = () => {
   const { pathname } = useLocation();
-  const {
-    authenticatedAccounts,
-    activeAccount,
-    loading: authLoading,
-  } = useAuth();
-  const { wallet, loaded: walletLoaded, disconnect, isConnected } = useWallet();
+  const { authenticatedAccounts, activeAccount } = useAuth();
+  const { wallet, disconnect, isConnected } = useWallet();
+  const { accountOrWallet } = useAuthData();
+
   const theme = useTheme<Theme>();
   const navigate = useNavigate();
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
@@ -87,40 +86,37 @@ const RegistryLayoutHeader: React.FC = () => {
         pathname={pathname}
         extras={
           <Box display="flex" justifyContent="center" alignItems="center">
-            {chainId &&
-              ((!authLoading && !!activeAccount) ||
-                (walletLoaded && isConnected)) &&
-              disconnect && (
-                <UserMenuItems
-                  address={getAddress({
-                    walletAddress: wallet?.address,
-                    email: activeAccount?.email,
-                  })}
-                  avatar={
-                    activeAccount?.image ? activeAccount?.image : defaultAvatar
-                  }
-                  disconnect={disconnect}
-                  pathname={pathname}
-                  linkComponent={RegistryNavLink}
-                  userMenuItems={userMenuItems}
-                  profiles={
-                    authenticatedAccounts?.map(account => ({
-                      name: account?.name ? account?.name : DEFAULT_NAME,
-                      profileImage: account?.image
-                        ? account?.image
-                        : getDefaultAvatar(account),
-                      address: getAddress({
-                        walletAddress: account?.addr,
-                        email: account?.email,
-                      }),
-                      selected:
-                        activeAccount?.id && activeAccount?.id === account?.id,
-                    })) || []
-                  }
-                  onProfileClick={onProfileClick}
-                  // TODO (#2193): add account functionality
-                />
-              )}
+            {chainId && accountOrWallet && disconnect && (
+              <UserMenuItems
+                address={getAddress({
+                  walletAddress: wallet?.address,
+                  email: activeAccount?.email,
+                })}
+                avatar={
+                  activeAccount?.image ? activeAccount?.image : defaultAvatar
+                }
+                disconnect={disconnect}
+                pathname={pathname}
+                linkComponent={RegistryNavLink}
+                userMenuItems={userMenuItems}
+                profiles={
+                  authenticatedAccounts?.map(account => ({
+                    name: account?.name ? account?.name : DEFAULT_NAME,
+                    profileImage: account?.image
+                      ? account?.image
+                      : getDefaultAvatar(account),
+                    address: getAddress({
+                      walletAddress: account?.addr,
+                      email: account?.email,
+                    }),
+                    selected:
+                      activeAccount?.id && activeAccount?.id === account?.id,
+                  })) || []
+                }
+                onProfileClick={onProfileClick}
+                // TODO (#2193): add account functionality
+              />
+            )}
             <LoginButton />
           </Box>
         }

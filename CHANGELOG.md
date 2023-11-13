@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.1](https://github.com/regen-network/regen-web/compare/v1.14.0...v1.14.1) (2023-11-13)
+
+### Bug Fixes
+
+- credit class buy button ([7a2d952](https://github.com/regen-network/regen-web/commit/7a2d95259adc38607ba911e312756ffa7b829359))
+
 # [1.14.0](https://github.com/regen-network/regen-web/compare/v1.13.0...v1.14.0) (2023-10-23)
 
 ### Bug Fixes

@@ -14,12 +14,14 @@ type Params = {
   signArbitrary?: SignArbitraryType;
   setError: UseStateSetter<unknown>;
   hasKeplrAccount: boolean;
+  isCurrrentAddressAuthenticated: boolean;
 };
 
 export const useConnectKeplrWallet = ({
   signArbitrary,
   setError,
   hasKeplrAccount,
+  isCurrrentAddressAuthenticated,
 }: Params) => {
   const { activeAccountId } = useAuth();
   const { wallet, walletConfig } = useWallet();
@@ -82,7 +84,13 @@ export const useConnectKeplrWallet = ({
   ]);
 
   useEffect(() => {
-    if (!hasKeplrAccount && wallet?.address && signArbitrary && token) {
+    if (
+      !hasKeplrAccount &&
+      isCurrrentAddressAuthenticated &&
+      wallet?.address &&
+      signArbitrary &&
+      token
+    ) {
       connectWallet();
     }
   }, [hasKeplrAccount, signArbitrary, token, wallet?.address, connectWallet]);

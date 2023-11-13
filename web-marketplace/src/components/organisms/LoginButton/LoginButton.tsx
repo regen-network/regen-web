@@ -28,6 +28,7 @@ type Props = {
 
 const LoginButton = ({ size = 'small' }: Props) => {
   const styles = useLoginButtonStyles();
+  const { wallet, walletConnectUri } = useWallet();
 
   const {
     connecting,
@@ -42,7 +43,6 @@ const LoginButton = ({ size = 'small' }: Props) => {
   } = useLoginData();
 
   const { noAccountAndNoWallet } = useAuthData();
-  const { wallet, walletConnectUri } = useWallet();
 
   const { bankClient } = useLedger();
 

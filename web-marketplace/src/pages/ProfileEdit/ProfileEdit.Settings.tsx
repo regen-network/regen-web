@@ -21,7 +21,7 @@ import { useConnectKeplrWallet } from './hooks/useConnectKeplrWallet';
 export const ProfileEditSettings = () => {
   const [error, setError] = useState<unknown>(undefined);
   const { authenticatedAccounts, activeAccount } = useAuth();
-  const { walletConnectUri } = useWallet();
+  const { walletConnectUri, wallet } = useWallet();
 
   const {
     connecting,
@@ -43,6 +43,7 @@ export const ProfileEditSettings = () => {
   const googleAccounts = authenticatedAccounts?.filter(
     account => !!account?.email,
   );
+
   const googleSocialProviders: SocialProviderInfo[] =
     googleAccounts?.map(account => ({
       providerName: `Google`,
@@ -54,11 +55,19 @@ export const ProfileEditSettings = () => {
 
   // Keplr accounts
   const hasKeplrAccount = !!activeAccount?.addr;
+  const isCurrrentAddressAuthenticated =
+    authenticatedAccounts?.some(account => account?.addr === wallet?.address) ??
+    false;
   const walletProviderInfo: WalletProviderInfo = hasKeplrAccount
     ? { address: String(activeAccount?.addr), disconnect: () => void 0 }
     : { connect: onButtonClick };
 
-  useConnectKeplrWallet({ setError, signArbitrary, hasKeplrAccount });
+  useConnectKeplrWallet({
+    setError,
+    signArbitrary,
+    hasKeplrAccount,
+    isCurrrentAddressAuthenticated,
+  });
 
   return (
     <>

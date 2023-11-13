@@ -86,7 +86,7 @@ export const SellOrdersActionsBar = ({
             {BOOK_CALL}
           </OutlinedButton>
         )}
-        {!!onChainProjectId && (
+        {(!!onChainProjectId || !!onChainCreditClassId) && (
           <InfoTooltip
             title={isBuyButtonDisabled ? BUY_DISABLED_TOOLTIP : ''}
             arrow

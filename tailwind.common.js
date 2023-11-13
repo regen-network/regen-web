@@ -2,6 +2,9 @@
 // of each project's tailwind.config.js file.
 module.exports = {
   theme: {
+    fontFamily: {
+      sans: ['"Lato"', '-apple-system', 'sans-serif'],
+    },
     colors: {
       // Make sure these guidelines are followed when adding new colors: https://tailwindcss.com/docs/customizing-colors#using-css-variables
       // Color variables should be added to tailwind.css.
@@ -55,6 +58,7 @@ module.exports = {
       30: '1.875rem', // 30px
       35: '2.1875rem', // 35px
       40: '2.5rem', // 40px
+      45: '2.8125rem', // 45px
       50: '3.125rem', // 50px
       60: '3.75rem', // 60px
     },

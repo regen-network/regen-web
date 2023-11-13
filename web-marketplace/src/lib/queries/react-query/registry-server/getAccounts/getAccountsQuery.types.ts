@@ -1,4 +1,3 @@
-import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import { QueryObserverOptions } from '@tanstack/react-query';
 
 import { ReactQueryBuilderResponse } from '../../types/react-query.types';
@@ -11,6 +10,5 @@ type Accounts = {
 export type ReactQueryGetAccountsQueryResponse =
   QueryObserverOptions<Accounts | null>;
 
-export type ReactQueryGetAccountByIdQueryParams = {
-  client: ApolloClient<NormalizedCacheObject>;
-} & ReactQueryBuilderResponse<ReactQueryGetAccountsQueryResponse>;
+export type ReactQueryGetAccountsQueryParams =
+  ReactQueryBuilderResponse<ReactQueryGetAccountsQueryResponse>;

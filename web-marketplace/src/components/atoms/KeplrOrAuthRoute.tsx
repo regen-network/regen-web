@@ -1,29 +1,29 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { loaderStyles } from 'styles/loader';
 
-import { useAuth } from 'lib/auth/auth';
-import { useWallet } from 'lib/wallet/wallet';
+import { useAuthData } from 'hooks/useAuthData';
+
+import WithLoader from './WithLoader';
 
 interface Props {
   component: React.ComponentType<React.PropsWithChildren<unknown>>;
 }
 
 const KeplrOrAuthRoute = ({ component: Component }: Props): JSX.Element => {
-  const { loaded: walletLoaded, isConnected } = useWallet();
-  const { loading: authLoading, activeAccountId } = useAuth();
+  const { loading, noAccountAndNoWallet, accountOrWallet } = useAuthData();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!authLoading && !activeAccountId && walletLoaded && !isConnected) {
+    if (noAccountAndNoWallet) {
       navigate('/login');
     }
-  }, [navigate, authLoading, activeAccountId, walletLoaded, isConnected]);
+  }, [navigate, noAccountAndNoWallet]);
 
   return (
-    <Box sx={{ minHeight: 600 }}>
-      {(activeAccountId || isConnected) && <Component />}
-    </Box>
+    <WithLoader isLoading={loading} sx={loaderStyles.withLoaderBlock}>
+      <div className="min-h-[600px]">{accountOrWallet && <Component />}</div>
+    </WithLoader>
   );
 };
 

@@ -8,6 +8,7 @@ type Props = {
   children: JSX.Element;
   variant?: Variant;
   sx?: SxProps<Theme>;
+  className?: string;
 };
 
 const WithLoader = ({

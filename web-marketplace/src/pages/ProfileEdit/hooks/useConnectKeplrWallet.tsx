@@ -1,6 +1,7 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { postData } from 'utils/fetch/postData';
+import { effect } from 'zod';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { apiUri } from 'lib/apiUri';
@@ -8,16 +9,20 @@ import { useAuth } from 'lib/auth/auth';
 import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { SignArbitraryType, useWallet } from 'lib/wallet/wallet';
-import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
 
 type Params = {
   signArbitrary?: SignArbitraryType;
   setError: UseStateSetter<unknown>;
+  hasKeplrAccount: boolean;
 };
 
-export const useConnectKeplrWallet = ({ signArbitrary, setError }: Params) => {
+export const useConnectKeplrWallet = ({
+  signArbitrary,
+  setError,
+  hasKeplrAccount,
+}: Params) => {
   const { activeAccountId } = useAuth();
-  const { wallet, walletConfig, connect } = useWallet();
+  const { wallet, walletConfig } = useWallet();
 
   const reactQueryClient = useQueryClient();
 
@@ -62,8 +67,6 @@ export const useConnectKeplrWallet = ({ signArbitrary, setError }: Params) => {
         await reactQueryClient.invalidateQueries({
           queryKey: [GET_ACCOUNTS_QUERY_KEY],
         });
-      } else if (connect) {
-        connect({ walletType: WalletType.Keplr });
       }
     } catch (e) {
       setError(e);
@@ -75,9 +78,12 @@ export const useConnectKeplrWallet = ({ signArbitrary, setError }: Params) => {
     reactQueryClient,
     wallet,
     walletConfig,
-    connect,
     setError,
   ]);
 
-  return connectWallet;
+  useEffect(() => {
+    if (!hasKeplrAccount && wallet?.address && signArbitrary && token) {
+      connectWallet();
+    }
+  }, [hasKeplrAccount, signArbitrary, token, wallet?.address, connectWallet]);
 };

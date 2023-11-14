@@ -9,7 +9,6 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { AccountConnectWalletModal } from 'components/organisms/AccountConnectWalletModal/AccountConnectWalletModal';
 import { useLoginData } from 'components/organisms/LoginButton/hooks/useLoginData';
-import { MobileSigningModal } from 'components/organisms/LoginButton/LoginButton.SigningModal';
 import { UserAccountSettings } from 'components/organisms/UserAccountSettings/UserAccountSettings';
 import {
   SocialProviderInfo,
@@ -21,7 +20,7 @@ import { useConnectKeplrWallet } from './hooks/useConnectKeplrWallet';
 export const ProfileEditSettings = () => {
   const [error, setError] = useState<unknown>(undefined);
   const { authenticatedAccounts, activeAccount } = useAuth();
-  const { walletConnectUri, wallet } = useWallet();
+  const { wallet } = useWallet();
 
   const {
     connecting,
@@ -30,8 +29,6 @@ export const ProfileEditSettings = () => {
     onButtonClick,
     onModalClose,
     qrCodeUri,
-    isWaitingForSigning,
-    setIsWaitingForSigningAtom,
     walletsUiConfig,
   } = useLoginData();
 
@@ -91,14 +88,10 @@ export const ProfileEditSettings = () => {
       <AccountConnectWalletModal
         open={isModalOpen}
         onClose={onModalClose}
-        wallets={walletsUiConfig}
+        wallets={[walletsUiConfig[0]]}
         state={modalState}
         qrCodeUri={qrCodeUri}
         connecting={connecting}
-      />
-      <MobileSigningModal
-        isOpen={isWaitingForSigning && !!walletConnectUri}
-        onClose={() => setIsWaitingForSigningAtom(false)}
       />
     </>
   );

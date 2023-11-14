@@ -1,7 +1,6 @@
 import { useCallback, useEffect } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { postData } from 'utils/fetch/postData';
-import { effect } from 'zod';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { apiUri } from 'lib/apiUri';
@@ -25,7 +24,6 @@ export const useConnectKeplrWallet = ({
 }: Params) => {
   const { activeAccountId } = useAuth();
   const { wallet, walletConfig } = useWallet();
-
   const reactQueryClient = useQueryClient();
 
   // Step 1: Retrieve and save the CSRF tokens
@@ -93,5 +91,12 @@ export const useConnectKeplrWallet = ({
     ) {
       connectWallet();
     }
-  }, [hasKeplrAccount, signArbitrary, token, wallet?.address, connectWallet]);
+  }, [
+    hasKeplrAccount,
+    isCurrrentAddressAuthenticated,
+    signArbitrary,
+    token,
+    wallet?.address,
+    connectWallet,
+  ]);
 };

@@ -38,7 +38,7 @@ export const BRIDGE = {
 export const EDIT_PROFILE = {
   label: 'Edit profile',
   href: '/profile/edit/profile',
-  icon: <EditIcon className="text-[18px]" />,
+  icon: <EditIcon className="w-[24px] text-[18px]" />,
 };
 export const PROFILE_SETTINGS = {
   label: 'Settings',

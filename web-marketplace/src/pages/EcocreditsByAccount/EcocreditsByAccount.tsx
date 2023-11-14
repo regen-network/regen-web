@@ -54,6 +54,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
 
   const { isIssuer, isProjectAdmin, showCreditClasses } = useProfileItems({
     address,
+    accountId: account?.id,
   });
 
   const socialsLinks = useMemo(() => getSocialsLinks({ account }), [account]);

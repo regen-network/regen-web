@@ -56,7 +56,7 @@ export const ProfileEditSettings = () => {
     authenticatedAccounts?.some(account => account?.addr === wallet?.address) ??
     false;
   const walletProviderInfo: WalletProviderInfo = hasKeplrAccount
-    ? { address: String(activeAccount?.addr), disconnect: () => void 0 }
+    ? { address: String(activeAccount?.addr) }
     : { connect: onButtonClick };
 
   useConnectKeplrWallet({

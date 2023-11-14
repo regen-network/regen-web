@@ -35,8 +35,17 @@ export const ConnectField = ({
         )}
       </div>
       <div className="ml-auto">
-        {connect && (
+        {connect ? (
           <ContainedButton onClick={connect}>CONNECT</ContainedButton>
+        ) : (
+          disconnect && (
+            <OutlinedButton onClick={disconnect}>
+              <div className="flex flex-row gap-10 items-center">
+                <CloseIcon className="stroke-brand-400 w-[26px] h-[26px]" />
+                <div>DISCONNECT</div>
+              </div>
+            </OutlinedButton>
+          )
         )}
       </div>
     </div>

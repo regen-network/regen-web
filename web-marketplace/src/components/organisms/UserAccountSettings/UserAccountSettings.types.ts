@@ -31,7 +31,7 @@ type ConnectedState = {
    * A callback for disconnecting from the provider if the provider is already
    * connected.
    */
-  disconnect: () => void;
+  disconnect?: () => void;
 };
 
 type ConnectionState = DisconnectedState | ConnectedState;

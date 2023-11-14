@@ -1,10 +1,11 @@
 import { Box, FormControlLabel, Link, SxProps, Theme } from '@mui/material';
+import { useAtom } from 'jotai';
 
 import { Flex } from 'web-components/lib/components/box';
 import Checkbox from 'web-components/lib/components/inputs/new/CheckBox/Checkbox';
 import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
 
-import { UseStateSetter } from 'types/react/use-state';
+import { useCommunityProjectsAtom } from 'lib/atoms/projects.atoms';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { COMMUNITY_FILTER } from './Projects.constants';
@@ -12,17 +13,14 @@ import { FilterCommunityCreditsEvent } from './Projects.types';
 import { getFilterSelected } from './Projects.utils';
 
 type CommunityFilterProps = {
-  useCommunityProjects?: boolean;
-  setUseCommunityProjects: UseStateSetter<boolean | undefined>;
   sx?: SxProps<Theme>;
 };
 
-export const CommunityFilter = ({
-  useCommunityProjects = false,
-  setUseCommunityProjects,
-  sx,
-}: CommunityFilterProps) => {
+export const CommunityFilter = ({ sx }: CommunityFilterProps) => {
   const { track } = useTracker();
+  const [useCommunityProjects, setUseCommunityProjects] = useAtom(
+    useCommunityProjectsAtom,
+  );
 
   return (
     <Flex sx={sx}>

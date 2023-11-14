@@ -1,24 +1,23 @@
 import { Box, FormControlLabel, SxProps, Theme } from '@mui/material';
+import { useAtom, useSetAtom } from 'jotai';
 
 import { Flex } from 'web-components/lib/components/box';
 import Checkbox from 'web-components/lib/components/inputs/new/CheckBox/Checkbox';
 import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
 
-import { UseStateSetter } from 'types/react/use-state';
+import { useOffChainProjectsAtom } from 'lib/atoms/projects.atoms';
 
 import { OFFCHAIN_FILTER, OFFCHAIN_FILTER_Tooltip } from './Projects.constants';
 
 type CommunityFilterProps = {
-  useOffChainProjects?: boolean;
-  setUseOffChainProjects: UseStateSetter<boolean | undefined>;
   sx?: SxProps<Theme>;
 };
 
-export const OffChainFilter = ({
-  useOffChainProjects = false,
-  setUseOffChainProjects,
-  sx,
-}: CommunityFilterProps) => {
+export const OffChainFilter = ({ sx }: CommunityFilterProps) => {
+  const [useOffChainProjects, setUseOffChainProjects] = useAtom(
+    useOffChainProjectsAtom,
+  );
+
   return (
     <Flex sx={sx}>
       <FormControlLabel

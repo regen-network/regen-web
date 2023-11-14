@@ -52,7 +52,7 @@ export const ProfileEditSettings = () => {
 
   // Keplr accounts
   const hasKeplrAccount = !!activeAccount?.addr;
-  const isCurrrentAddressAuthenticated =
+  const isCurrentAddressAuthenticated =
     authenticatedAccounts?.some(account => account?.addr === wallet?.address) ??
     false;
   const walletProviderInfo: WalletProviderInfo = hasKeplrAccount
@@ -63,7 +63,7 @@ export const ProfileEditSettings = () => {
     setError,
     signArbitrary,
     hasKeplrAccount,
-    isCurrrentAddressAuthenticated,
+    isCurrentAddressAuthenticated,
   });
 
   return (

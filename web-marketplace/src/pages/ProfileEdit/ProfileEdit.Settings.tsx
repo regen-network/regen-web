@@ -6,6 +6,7 @@ import { useAuth } from 'lib/auth/auth';
 import { apiServerUrl } from 'lib/env';
 import { useSignArbitrary } from 'lib/wallet/hooks/useSignArbitrary';
 import { useWallet } from 'lib/wallet/wallet';
+import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
 
 import { AccountConnectWalletModal } from 'components/organisms/AccountConnectWalletModal/AccountConnectWalletModal';
 import { useLoginData } from 'components/organisms/LoginButton/hooks/useLoginData';
@@ -20,7 +21,8 @@ import { useConnectKeplrWallet } from './hooks/useConnectKeplrWallet';
 export const ProfileEditSettings = () => {
   const [error, setError] = useState<unknown>(undefined);
   const { authenticatedAccounts, activeAccount } = useAuth();
-  const { wallet } = useWallet();
+
+  const { connect } = useWallet();
 
   const {
     connecting,
@@ -28,7 +30,6 @@ export const ProfileEditSettings = () => {
     modalState,
     onButtonClick,
     onModalClose,
-    qrCodeUri,
     walletsUiConfig,
   } = useLoginData();
 
@@ -52,9 +53,6 @@ export const ProfileEditSettings = () => {
 
   // Keplr accounts
   const hasKeplrAccount = !!activeAccount?.addr;
-  const isCurrentAddressAuthenticated =
-    authenticatedAccounts?.some(account => account?.addr === wallet?.address) ??
-    false;
   const walletProviderInfo: WalletProviderInfo = hasKeplrAccount
     ? { address: String(activeAccount?.addr) }
     : { connect: onButtonClick };
@@ -63,7 +61,6 @@ export const ProfileEditSettings = () => {
     setError,
     signArbitrary,
     hasKeplrAccount,
-    isCurrentAddressAuthenticated,
   });
 
   return (
@@ -88,9 +85,15 @@ export const ProfileEditSettings = () => {
       <AccountConnectWalletModal
         open={isModalOpen}
         onClose={onModalClose}
-        wallets={[walletsUiConfig[0]]}
+        wallets={[
+          {
+            ...walletsUiConfig[0],
+            onClick: () =>
+              connect &&
+              connect({ walletType: WalletType.Keplr, doLogin: false }),
+          },
+        ]}
         state={modalState}
-        qrCodeUri={qrCodeUri}
         connecting={connecting}
       />
     </>

@@ -53,7 +53,7 @@ export type LoginType = (loginParams: LoginParams) => Promise<void>;
 
 export interface SignArbitraryParams extends LoginParams {
   nonce: string;
-  addAddr?: boolean;
+  connectWallet?: boolean;
 }
 export type SignArbitraryType = (
   signArbitraryParams: SignArbitraryParams,

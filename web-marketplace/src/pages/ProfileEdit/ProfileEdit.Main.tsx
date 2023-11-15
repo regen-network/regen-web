@@ -89,9 +89,6 @@ export const ProfileEditMain = () => {
       await reactQueryClient.invalidateQueries({
         queryKey: getAccountByAddrQueryKey({ addr: wallet?.address }),
       });
-      await reactQueryClient.invalidateQueries({
-        queryKey: getAccountByAddrQueryKey({ addr: wallet?.address }),
-      });
     }
     if (activeAccount) {
       await reactQueryClient.invalidateQueries({

@@ -50,7 +50,7 @@ export const UserAccountSettings = ({
             <a>Learn more»</a>
           </Body>
         </div>
-        <ConnectField name="Keplr or Wallet Connect" {...walletProvider} />
+        <ConnectField name="Keplr" {...walletProvider} />
       </div>
     </div>
   );

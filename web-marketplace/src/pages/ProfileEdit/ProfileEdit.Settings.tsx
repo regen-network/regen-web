@@ -17,10 +17,11 @@ import {
 } from 'components/organisms/UserAccountSettings/UserAccountSettings.types';
 
 import { useConnectKeplrWallet } from './hooks/useConnectKeplrWallet';
+import { socialProviders } from './ProfileEdit.constants';
 
 export const ProfileEditSettings = () => {
   const [error, setError] = useState<unknown>(undefined);
-  const { authenticatedAccounts, activeAccount } = useAuth();
+  const { activeAccount } = useAuth();
 
   const { connect } = useWallet();
 
@@ -37,21 +38,15 @@ export const ProfileEditSettings = () => {
     setError,
   });
 
-  // Google accounts
-  const googleAccounts = authenticatedAccounts?.filter(
-    account => !!account?.email,
-  );
+  // Social providers
+  const _socialProviders = socialProviders.map(p => ({
+    name: p.name,
+    email: activeAccount?.email,
+    connect: activeAccount?.[p.id] ? undefined : p.connect,
+    disconnect: activeAccount?.[p.id] ? p.disconnect : undefined,
+  }));
 
-  const googleSocialProviders: SocialProviderInfo[] =
-    googleAccounts?.map(account => ({
-      providerName: `Google`,
-      address: `${account?.email}`,
-      disconnect: () => undefined,
-    })) ?? [];
-  const connectGoogleAccount = () =>
-    (window.location.href = `${apiServerUrl}/marketplace/v1/auth/google`);
-
-  // Keplr accounts
+  // Keplr account
   const hasKeplrAccount = !!activeAccount?.addr;
   const walletProviderInfo: WalletProviderInfo = hasKeplrAccount
     ? { address: String(activeAccount?.addr) }
@@ -73,13 +68,7 @@ export const ProfileEditSettings = () => {
       )}
       <UserAccountSettings
         email={activeAccount?.email ?? ''}
-        socialProviders={[
-          {
-            providerName: 'Google',
-            connect: connectGoogleAccount,
-          },
-          ...googleSocialProviders,
-        ]}
+        socialProviders={_socialProviders}
         walletProvider={walletProviderInfo}
       />
       <AccountConnectWalletModal

@@ -10,28 +10,29 @@ type Props = SocialProviderInfo & {
   connect?: () => void;
   disconnect?: () => void;
   address?: string;
+  email?: string | null;
 };
 
 /** ConnectField is used internally by the UserAccountSettings component to
  * display a single social or wallet connection.
  */
 export const ConnectField = ({
-  providerName,
+  name,
   connect,
   disconnect,
   address,
-  mail,
+  email,
 }: Props) => {
   return (
     <div className="flex flex-row justify-between flex-wrap gap-y-10">
       <div className="flex flex-col gap-5">
         <Body size="md" color="info.dark-grey">
-          {providerName}
+          {name}
         </Body>
         {address ? (
           <AddressWidget address={address} />
         ) : (
-          <Body size="sm">{mail ? mail : 'Not connected'}</Body>
+          <Body size="sm">{email ? email : 'Not connected'}</Body>
         )}
       </div>
       <div className="ml-auto">

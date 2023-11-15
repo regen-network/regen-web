@@ -12,11 +12,11 @@ const meta: Meta<typeof UserAccountSettings> = {
     email: 'joemcnab@gmail.com',
     socialProviders: [
       {
-        providerName: 'Google',
+        name: 'Google',
         connect: action('connect google'),
       },
       {
-        providerName: 'LinkedIn',
+        name: 'LinkedIn',
         disconnect: action('disconnect linkedin'),
       },
     ],

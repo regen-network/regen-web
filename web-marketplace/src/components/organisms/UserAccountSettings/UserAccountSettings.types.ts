@@ -32,6 +32,11 @@ type ConnectedState = {
    * connected.
    */
   disconnect?: () => void;
+  /**
+   * The email of the connected social provider account. This can be different
+   * from the active account email.
+   */
+  email?: string | null;
 };
 
 type ConnectionState = DisconnectedState | ConnectedState;
@@ -41,8 +46,7 @@ type ConnectionState = DisconnectedState | ConnectedState;
  */
 export type SocialProviderInfo = {
   /** The name of the social provider. */
-  providerName: string;
-  mail?: string;
+  name: string;
 } & ConnectionState;
 
 type WalletConnectedState = {

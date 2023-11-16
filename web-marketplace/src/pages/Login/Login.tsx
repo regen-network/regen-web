@@ -21,7 +21,7 @@ export const Login = () => {
   useEffect(() => {
     if (!strict) {
       // needs a logged-in account (whether it's done through web2 or web3)
-      // or a connected wallet address (through WC, which doesn't support signArbitrary yet 
+      // or a connected wallet address (through WC, which doesn't support signArbitrary yet
       // which is used for logging in via web3)
       if (accountOrWallet) navigate(-1);
       // strictly needs a logged-in account

@@ -6,8 +6,8 @@ export const KEPLR_MOBILE = 'keplr-mobile';
 export const KEPLR_LOGIN_TITLE = 'Regen Network Login';
 export const KEPLR_LOGIN_DESCRIPTION =
   'This is a transaction that allows Regen Network to authenticate you with our application.';
-export const KEPLR_ADD_ADDR_DESCRIPTION =
-  'This is a transaction that allows Regen Network to add an address to your account.';
+export const KEPLR_CONNECT_WALLET_DESCRIPTION =
+  'This is a transaction that allows Regen Network to connect a wallet address to your account.';
 
 export const walletConnectClientMeta = {
   name: 'Regen Marketplace',

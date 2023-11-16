@@ -32,6 +32,8 @@ import ProjectsTab from 'pages/EcocreditsByAccount/ProjectsTab';
 import Faucet from 'pages/Faucet';
 import { homeLoader } from 'pages/Home/Home.loader';
 import { storefrontLoader } from 'pages/Marketplace/Storefront/Storefront.loader';
+import { ProfileEditMain } from 'pages/ProfileEdit/ProfileEdit.Main';
+import { ProfileEditSettings } from 'pages/ProfileEdit/ProfileEdit.Settings';
 import { projectsLoader } from 'pages/Projects/Projects.loader';
 import Settings from 'pages/Settings';
 import { AuthRoute } from 'components/atoms/AuthRoute';
@@ -306,7 +308,16 @@ export const getRoutes = ({
         <Route path="*" element={<NotFoundPage />} />
       </Route>
       <Route path="profile">
-        <Route path="edit" element={<AuthRoute component={ProfileEdit} />} />
+        <Route path="edit" element={<AuthRoute component={ProfileEdit} />}>
+          <Route
+            path="profile"
+            element={<AuthRoute component={ProfileEditMain} />}
+          />
+          <Route
+            path="settings"
+            element={<AuthRoute component={ProfileEditSettings} />}
+          />
+        </Route>
       </Route>
       <Route path="connect-wallet" element={<ConnectWalletPage />} />
       <Route path="login" element={<LoginPage />} />

@@ -182,30 +182,6 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "google",
-            "description": "Unique google identifier for the account.",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "nonce",
             "description": null,
             "args": [],
@@ -223,6 +199,30 @@
           },
           {
             "name": "addr",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "google",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "email",
             "description": null,
             "args": [],
             "type": {
@@ -3567,8 +3567,20 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": "Checks for equality with the object’s `email` field.",
+            "name": "nonce",
+            "description": "Checks for equality with the object’s `nonce` field.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "addr",
+            "description": "Checks for equality with the object’s `addr` field.",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -3591,20 +3603,8 @@
             "deprecationReason": null
           },
           {
-            "name": "nonce",
-            "description": "Checks for equality with the object’s `nonce` field.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "addr",
-            "description": "Checks for equality with the object’s `addr` field.",
+            "name": "email",
+            "description": "Checks for equality with the object’s `email` field.",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -4491,30 +4491,6 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "google",
-            "description": "Unique google identifier for the account.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "nonce",
             "description": null,
             "type": {
@@ -4528,6 +4504,30 @@
           },
           {
             "name": "addr",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "google",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "email",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -4682,30 +4682,6 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "google",
-            "description": "Unique google identifier for the account.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "nonce",
             "description": null,
             "type": {
@@ -4719,6 +4695,30 @@
           },
           {
             "name": "addr",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "google",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "email",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -5026,30 +5026,6 @@
             "deprecationReason": null
           },
           {
-            "name": "EMAIL_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "EMAIL_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "GOOGLE_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "GOOGLE_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "NONCE_ASC",
             "description": null,
             "isDeprecated": false,
@@ -5069,6 +5045,30 @@
           },
           {
             "name": "ADDR_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "GOOGLE_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "GOOGLE_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "EMAIL_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "EMAIL_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -9807,7 +9807,7 @@
           },
           {
             "name": "google",
-            "description": "Unique google identifier for the account.",
+            "description": null,
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -13405,7 +13405,7 @@
             "deprecationReason": null
           },
           {
-            "name": "updateAccountByEmail",
+            "name": "updateAccountByAddr",
             "description": "Updates a single `Account` using a unique key and a patch.",
             "args": [
               {
@@ -13416,7 +13416,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "UpdateAccountByEmailInput",
+                    "name": "UpdateAccountByAddrInput",
                     "ofType": null
                   }
                 },
@@ -13463,7 +13463,7 @@
             "deprecationReason": null
           },
           {
-            "name": "updateAccountByAddr",
+            "name": "updateAccountByEmail",
             "description": "Updates a single `Account` using a unique key and a patch.",
             "args": [
               {
@@ -13474,7 +13474,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "UpdateAccountByAddrInput",
+                    "name": "UpdateAccountByEmailInput",
                     "ofType": null
                   }
                 },
@@ -14188,7 +14188,7 @@
             "deprecationReason": null
           },
           {
-            "name": "deleteAccountByEmail",
+            "name": "deleteAccountByAddr",
             "description": "Deletes a single `Account` using a unique key.",
             "args": [
               {
@@ -14199,7 +14199,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "DeleteAccountByEmailInput",
+                    "name": "DeleteAccountByAddrInput",
                     "ofType": null
                   }
                 },
@@ -14246,7 +14246,7 @@
             "deprecationReason": null
           },
           {
-            "name": "deleteAccountByAddr",
+            "name": "deleteAccountByEmail",
             "description": "Deletes a single `Account` using a unique key.",
             "args": [
               {
@@ -14257,7 +14257,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "DeleteAccountByAddrInput",
+                    "name": "DeleteAccountByEmailInput",
                     "ofType": null
                   }
                 },
@@ -18058,11 +18058,11 @@
             "deprecationReason": null
           },
           {
-            "name": "accountByEmail",
+            "name": "accountByAddr",
             "description": null,
             "args": [
               {
-                "name": "email",
+                "name": "addr",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -18116,11 +18116,11 @@
             "deprecationReason": null
           },
           {
-            "name": "accountByAddr",
+            "name": "accountByEmail",
             "description": null,
             "args": [
               {
-                "name": "addr",
+                "name": "email",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -19730,7 +19730,7 @@
           },
           {
             "name": "google",
-            "description": "Unique google identifier for the account.",
+            "description": null,
             "type": {
               "kind": "NON_NULL",
               "name": null,

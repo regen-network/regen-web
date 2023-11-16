@@ -16,7 +16,7 @@ export const useSignArbitrary = ({ setError }: Props) => {
       walletConfig,
       wallet,
       nonce,
-      addAddr = false,
+      connectWallet = false,
     }: SignArbitraryParams) => {
       try {
         if (wallet?.address) {
@@ -27,7 +27,7 @@ export const useSignArbitrary = ({ setError }: Props) => {
           const signature = await walletClient?.signArbitrary(
             chainInfo.chainId,
             wallet.address,
-            getArbitraryData({ nonce, addAddr }),
+            getArbitraryData({ nonce, connectWallet }),
           );
           return signature;
         }

@@ -109,7 +109,7 @@ const Dashboard = (): JSX.Element => {
           description: account?.description?.trimEnd() ?? '',
           socialsLinks,
         }}
-        editLink={activeAccount?.id ? '/profile/edit' : ''}
+        editLink={activeAccount?.id ? '/profile/edit/profile' : ''}
         profileLink={profileLink}
         variant={
           account?.type ? profileVariantMapping[account.type] : 'individual'

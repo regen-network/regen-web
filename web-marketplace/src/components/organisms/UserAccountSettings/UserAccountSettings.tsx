@@ -1,5 +1,3 @@
-import React from 'react';
-
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
 import { Body, Subtitle } from 'web-components/lib/components/typography';
 
@@ -32,7 +30,7 @@ export const UserAccountSettings = ({
         <div className="flex flex-col">
           {socialProviders.map(provider => (
             <div
-              key={provider.providerName}
+              key={`${provider.name}`}
               className="border-0 border-b border-solid border-grey-300 py-20
             first:pt-0 last:pb-0 last:border-b-0"
             >
@@ -52,10 +50,7 @@ export const UserAccountSettings = ({
             <a>Learn more»</a>
           </Body>
         </div>
-        <ConnectField
-          providerName="Keplr or Wallet Connect"
-          {...walletProvider}
-        />
+        <ConnectField name="Keplr" {...walletProvider} />
       </div>
     </div>
   );

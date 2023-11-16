@@ -42,11 +42,10 @@ export type Account = Node & {
   twitterLink?: Maybe<Scalars['String']>;
   websiteLink?: Maybe<Scalars['String']>;
   creatorId?: Maybe<Scalars['UUID']>;
-  email?: Maybe<Scalars['String']>;
-  /** Unique google identifier for the account. */
-  google?: Maybe<Scalars['String']>;
   nonce: Scalars['String'];
   addr?: Maybe<Scalars['String']>;
+  google?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
   /** Reads a single `Account` that is related to this `Account`. */
   accountByCreatorId?: Maybe<Account>;
   /** Reads and enables pagination through a set of `CreditClass`. */
@@ -500,14 +499,14 @@ export type AccountCondition = {
   websiteLink?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `creatorId` field. */
   creatorId?: Maybe<Scalars['UUID']>;
-  /** Checks for equality with the object’s `email` field. */
-  email?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `google` field. */
-  google?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `nonce` field. */
   nonce?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `addr` field. */
   addr?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `google` field. */
+  google?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `email` field. */
+  email?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `CreditClass` values, with data from `Project`. */
@@ -634,11 +633,10 @@ export type AccountInput = {
   twitterLink?: Maybe<Scalars['String']>;
   websiteLink?: Maybe<Scalars['String']>;
   creatorId?: Maybe<Scalars['UUID']>;
-  email?: Maybe<Scalars['String']>;
-  /** Unique google identifier for the account. */
-  google?: Maybe<Scalars['String']>;
   nonce?: Maybe<Scalars['String']>;
   addr?: Maybe<Scalars['String']>;
+  google?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
 };
 
 /** Represents an update to a `Account`. Fields that are set will be updated. */
@@ -654,11 +652,10 @@ export type AccountPatch = {
   twitterLink?: Maybe<Scalars['String']>;
   websiteLink?: Maybe<Scalars['String']>;
   creatorId?: Maybe<Scalars['UUID']>;
-  email?: Maybe<Scalars['String']>;
-  /** Unique google identifier for the account. */
-  google?: Maybe<Scalars['String']>;
   nonce?: Maybe<Scalars['String']>;
   addr?: Maybe<Scalars['String']>;
+  google?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
 };
 
 export enum AccountType {
@@ -713,14 +710,14 @@ export enum AccountsOrderBy {
   WebsiteLinkDesc = 'WEBSITE_LINK_DESC',
   CreatorIdAsc = 'CREATOR_ID_ASC',
   CreatorIdDesc = 'CREATOR_ID_DESC',
-  EmailAsc = 'EMAIL_ASC',
-  EmailDesc = 'EMAIL_DESC',
-  GoogleAsc = 'GOOGLE_ASC',
-  GoogleDesc = 'GOOGLE_DESC',
   NonceAsc = 'NONCE_ASC',
   NonceDesc = 'NONCE_DESC',
   AddrAsc = 'ADDR_ASC',
   AddrDesc = 'ADDR_DESC',
+  GoogleAsc = 'GOOGLE_ASC',
+  GoogleDesc = 'GOOGLE_DESC',
+  EmailAsc = 'EMAIL_ASC',
+  EmailDesc = 'EMAIL_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -1574,7 +1571,6 @@ export type DeleteAccountByGoogleInput = {
    * payload verbatim. May be used to track mutations by the client.
    */
   clientMutationId?: Maybe<Scalars['String']>;
-  /** Unique google identifier for the account. */
   google: Scalars['String'];
 };
 
@@ -2288,11 +2284,11 @@ export type Mutation = {
   /** Updates a single `Account` using a unique key and a patch. */
   updateAccountById?: Maybe<UpdateAccountPayload>;
   /** Updates a single `Account` using a unique key and a patch. */
-  updateAccountByEmail?: Maybe<UpdateAccountPayload>;
+  updateAccountByAddr?: Maybe<UpdateAccountPayload>;
   /** Updates a single `Account` using a unique key and a patch. */
   updateAccountByGoogle?: Maybe<UpdateAccountPayload>;
   /** Updates a single `Account` using a unique key and a patch. */
-  updateAccountByAddr?: Maybe<UpdateAccountPayload>;
+  updateAccountByEmail?: Maybe<UpdateAccountPayload>;
   /** Updates a single `CreditBatch` using its globally unique id and a patch. */
   updateCreditBatch?: Maybe<UpdateCreditBatchPayload>;
   /** Updates a single `CreditBatch` using a unique key and a patch. */
@@ -2342,11 +2338,11 @@ export type Mutation = {
   /** Deletes a single `Account` using a unique key. */
   deleteAccountById?: Maybe<DeleteAccountPayload>;
   /** Deletes a single `Account` using a unique key. */
-  deleteAccountByEmail?: Maybe<DeleteAccountPayload>;
+  deleteAccountByAddr?: Maybe<DeleteAccountPayload>;
   /** Deletes a single `Account` using a unique key. */
   deleteAccountByGoogle?: Maybe<DeleteAccountPayload>;
   /** Deletes a single `Account` using a unique key. */
-  deleteAccountByAddr?: Maybe<DeleteAccountPayload>;
+  deleteAccountByEmail?: Maybe<DeleteAccountPayload>;
   /** Deletes a single `CreditBatch` using its globally unique id. */
   deleteCreditBatch?: Maybe<DeleteCreditBatchPayload>;
   /** Deletes a single `CreditBatch` using a unique key. */
@@ -2462,8 +2458,8 @@ export type MutationUpdateAccountByIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateAccountByEmailArgs = {
-  input: UpdateAccountByEmailInput;
+export type MutationUpdateAccountByAddrArgs = {
+  input: UpdateAccountByAddrInput;
 };
 
 
@@ -2474,8 +2470,8 @@ export type MutationUpdateAccountByGoogleArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateAccountByAddrArgs = {
-  input: UpdateAccountByAddrInput;
+export type MutationUpdateAccountByEmailArgs = {
+  input: UpdateAccountByEmailInput;
 };
 
 
@@ -2624,8 +2620,8 @@ export type MutationDeleteAccountByIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteAccountByEmailArgs = {
-  input: DeleteAccountByEmailInput;
+export type MutationDeleteAccountByAddrArgs = {
+  input: DeleteAccountByAddrInput;
 };
 
 
@@ -2636,8 +2632,8 @@ export type MutationDeleteAccountByGoogleArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteAccountByAddrArgs = {
-  input: DeleteAccountByAddrInput;
+export type MutationDeleteAccountByEmailArgs = {
+  input: DeleteAccountByEmailInput;
 };
 
 
@@ -3093,9 +3089,9 @@ export type Query = Node & {
   /** Reads and enables pagination through a set of `ShaclGraph`. */
   allShaclGraphs?: Maybe<ShaclGraphsConnection>;
   accountById?: Maybe<Account>;
-  accountByEmail?: Maybe<Account>;
-  accountByGoogle?: Maybe<Account>;
   accountByAddr?: Maybe<Account>;
+  accountByGoogle?: Maybe<Account>;
+  accountByEmail?: Maybe<Account>;
   creditBatchById?: Maybe<CreditBatch>;
   creditBatchByBatchDenom?: Maybe<CreditBatch>;
   creditClassById?: Maybe<CreditClass>;
@@ -3260,8 +3256,8 @@ export type QueryAccountByIdArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
-export type QueryAccountByEmailArgs = {
-  email: Scalars['String'];
+export type QueryAccountByAddrArgs = {
+  addr: Scalars['String'];
 };
 
 
@@ -3272,8 +3268,8 @@ export type QueryAccountByGoogleArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
-export type QueryAccountByAddrArgs = {
-  addr: Scalars['String'];
+export type QueryAccountByEmailArgs = {
+  email: Scalars['String'];
 };
 
 
@@ -3573,7 +3569,6 @@ export type UpdateAccountByGoogleInput = {
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `Account` being updated. */
   accountPatch: AccountPatch;
-  /** Unique google identifier for the account. */
   google: Scalars['String'];
 };
 
@@ -4117,7 +4112,7 @@ export type AccountByIdQuery = (
   { __typename?: 'Query' }
   & { accountById?: Maybe<(
     { __typename?: 'Account' }
-    & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink' | 'addr' | 'email'>
+    & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink' | 'addr' | 'nonce' | 'email' | 'google'>
   )> }
 );
 
@@ -4622,7 +4617,9 @@ export const AccountByIdDocument = gql`
     websiteLink
     twitterLink
     addr
+    nonce
     email
+    google
   }
 }
     `;

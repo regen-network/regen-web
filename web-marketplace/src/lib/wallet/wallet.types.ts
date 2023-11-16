@@ -7,4 +7,5 @@ export type ConnectWalletParams = {
 
 export type ConnectParams = {
   walletType: WalletType;
+  doLogin?: boolean;
 };

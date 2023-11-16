@@ -4112,7 +4112,7 @@ export type AccountByIdQuery = (
   { __typename?: 'Query' }
   & { accountById?: Maybe<(
     { __typename?: 'Account' }
-    & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink' | 'addr' | 'nonce' | 'email' | 'google'>
+    & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink' | 'addr' | 'nonce'>
   )> }
 );
 
@@ -4618,8 +4618,6 @@ export const AccountByIdDocument = gql`
     twitterLink
     addr
     nonce
-    email
-    google
   }
 }
     `;

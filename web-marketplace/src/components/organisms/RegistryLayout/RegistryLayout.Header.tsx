@@ -33,7 +33,12 @@ import { getAddress } from './RegistryLayout.utils';
 
 const RegistryLayoutHeader: React.FC = () => {
   const { pathname } = useLocation();
-  const { authenticatedAccounts, activeAccount } = useAuth();
+  const {
+    authenticatedAccounts,
+    activeAccount,
+    privActiveAccount,
+    privAuthenticatedAccounts,
+  } = useAuth();
   const { wallet, disconnect, isConnected } = useWallet();
   const { accountOrWallet } = useAuthData();
 
@@ -90,7 +95,7 @@ const RegistryLayoutHeader: React.FC = () => {
               <UserMenuItems
                 address={getAddress({
                   walletAddress: wallet?.address,
-                  email: activeAccount?.email,
+                  email: privActiveAccount?.email,
                 })}
                 avatar={
                   activeAccount?.image ? activeAccount?.image : defaultAvatar
@@ -100,14 +105,14 @@ const RegistryLayoutHeader: React.FC = () => {
                 linkComponent={RegistryNavLink}
                 userMenuItems={userMenuItems}
                 profiles={
-                  authenticatedAccounts?.map(account => ({
+                  authenticatedAccounts?.map((account, i) => ({
                     name: account?.name ? account?.name : DEFAULT_NAME,
                     profileImage: account?.image
                       ? account?.image
                       : getDefaultAvatar(account),
                     address: getAddress({
                       walletAddress: account?.addr,
-                      email: account?.email,
+                      email: privAuthenticatedAccounts?.[i].email,
                     }),
                     selected:
                       activeAccount?.id && activeAccount?.id === account?.id,

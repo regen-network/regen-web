@@ -8,6 +8,7 @@ import { useQueries, useQuery } from '@tanstack/react-query';
 
 import { AccountByIdQuery } from 'generated/graphql';
 import { getAccountsQuery } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery';
+import { PrivateAccount } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.types';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 
 export type AuthContextType = {
@@ -15,7 +16,9 @@ export type AuthContextType = {
   activeAccountId?: string;
   authenticatedAccountIds?: string[];
   activeAccount?: AccountByIdQuery['accountById'];
-  authenticatedAccounts?: Array<AccountByIdQuery['accountById']>;
+  privActiveAccount?: PrivateAccount;
+  authenticatedAccounts?: AccountByIdQuery['accountById'][];
+  privAuthenticatedAccounts?: PrivateAccount[];
   loading: boolean;
 };
 
@@ -28,11 +31,11 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { data, isFetching } = useQuery(getAccountsQuery({}));
   const activeAccountId = data?.activeAccountId;
-  const authenticatedAccountIds = data?.authenticatedAccountIds;
+  const privAuthenticatedAccounts = data?.authenticatedAccounts;
 
   const authenticatedAccountsResult = useQueries({
     queries:
-      authenticatedAccountIds?.map(id =>
+      privAuthenticatedAccounts?.map(({ id }) =>
         getAccountByIdQuery({
           client: graphqlClient,
           enabled: !!graphqlClient,
@@ -43,10 +46,13 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const isAuthenticatedAccountsFetching = authenticatedAccountsResult.some(
     authenticatedAccountsQuery => authenticatedAccountsQuery.isFetching,
   );
-  const authenticatedAccounts = authenticatedAccountsResult?.map(
+  const authenticatedAccounts = authenticatedAccountsResult.map(
     result => result.data?.accountById,
   );
   const activeAccount = authenticatedAccounts.find(
+    account => account?.id === activeAccountId,
+  );
+  const privActiveAccount = privAuthenticatedAccounts?.find(
     account => account?.id === activeAccountId,
   );
 
@@ -55,8 +61,10 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
       value={{
         activeAccountId,
         activeAccount,
-        authenticatedAccountIds,
+        authenticatedAccountIds: privAuthenticatedAccounts?.map(({ id }) => id),
         authenticatedAccounts,
+        privActiveAccount,
+        privAuthenticatedAccounts,
         loading: isFetching || isAuthenticatedAccountsFetching,
       }}
     >

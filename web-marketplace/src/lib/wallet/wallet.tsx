@@ -94,6 +94,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const [accountChanging, setAccountChanging] = useState<boolean>(false);
   const {
     activeAccountId,
+    activeAccount,
     authenticatedAccountIds,
     loading: authLoading,
   } = useAuth();
@@ -154,6 +155,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     connectWallet,
     setError,
     setLoaded,
+    activeAccountHasAddr: !authLoading && !!activeAccount?.addr,
   });
   useOnAccountChange({
     connectWallet,

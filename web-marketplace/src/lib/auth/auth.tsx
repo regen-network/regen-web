@@ -49,7 +49,6 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const activeAccount = authenticatedAccounts.find(
     account => account?.id === activeAccountId,
   );
-  console.log('activeAccount', activeAccount);
 
   return (
     <AuthContext.Provider

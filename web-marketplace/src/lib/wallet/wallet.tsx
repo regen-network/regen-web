@@ -53,7 +53,7 @@ export type LoginType = (loginParams: LoginParams) => Promise<void>;
 
 export interface SignArbitraryParams extends LoginParams {
   nonce: string;
-  addAddr?: boolean;
+  connectWallet?: boolean;
 }
 export type SignArbitraryType = (
   signArbitraryParams: SignArbitraryParams,
@@ -61,6 +61,7 @@ export type SignArbitraryType = (
 
 export type WalletContextType = {
   wallet?: Wallet;
+  walletConfig?: WalletConfig;
   loaded: boolean;
   connect?: (params: ConnectParams) => Promise<void>;
   disconnect?: () => void;
@@ -93,6 +94,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const [accountChanging, setAccountChanging] = useState<boolean>(false);
   const {
     activeAccountId,
+    activeAccount,
     authenticatedAccountIds,
     loading: authLoading,
   } = useAuth();
@@ -153,6 +155,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     connectWallet,
     setError,
     setLoaded,
+    activeAccountHasAddr: !authLoading && !!activeAccount?.addr,
   });
   useOnAccountChange({
     connectWallet,
@@ -187,6 +190,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     <WalletContext.Provider
       value={{
         wallet,
+        walletConfig: walletConfigRef.current,
         loaded: loaded && !isFetching && (loginDisabled || !authLoading),
         connect,
         disconnect,

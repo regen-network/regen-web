@@ -9,6 +9,8 @@ query AccountById($id: UUID!) {
     websiteLink
     twitterLink
     addr
+    nonce
     email
+    google
   }
 }

@@ -20,6 +20,7 @@ import CheckedIcon from './CheckedIcon';
 import CheckIcon from './CheckIcon';
 import CloseIcon from './CloseIcon';
 import CoBenefitsIcon from './CoBenefitsIcon';
+import { CogIcon } from './CogIcon';
 import AxlUsdcIcon from './coins/AxlUsdcIcon';
 import EeurIcon from './coins/EeurIcon';
 import EvmosIcon from './coins/EvmosIcon';
@@ -198,6 +199,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<CheckIcon />} label="CheckIcon" />
     <LabeledIcon icon={<CloseIcon />} label="CloseIcon" />
     <LabeledIcon icon={<CoBenefitsIcon />} label="CoBenefitsIcon" />
+    <LabeledIcon icon={<CogIcon />} label="CogIcon" />
     <LabeledIcon icon={<CopyIcon />} label="CopyIcon" />
     <LabeledIcon icon={<CountingIcon />} label="CountingIcon" />
     <LabeledIcon

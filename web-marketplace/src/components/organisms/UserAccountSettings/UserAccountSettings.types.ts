@@ -31,7 +31,12 @@ type ConnectedState = {
    * A callback for disconnecting from the provider if the provider is already
    * connected.
    */
-  disconnect: () => void;
+  disconnect?: () => void;
+  /**
+   * The email of the connected social provider account. This can be different
+   * from the active account email.
+   */
+  email?: string | null;
 };
 
 type ConnectionState = DisconnectedState | ConnectedState;
@@ -41,7 +46,7 @@ type ConnectionState = DisconnectedState | ConnectedState;
  */
 export type SocialProviderInfo = {
   /** The name of the social provider. */
-  providerName: string;
+  name: string;
 } & ConnectionState;
 
 type WalletConnectedState = {

@@ -17,7 +17,7 @@ import { socialProviders } from './ProfileEdit.constants';
 
 export const ProfileEditSettings = () => {
   const [error, setError] = useState<unknown>(undefined);
-  const { activeAccount } = useAuth();
+  const { activeAccount, privActiveAccount } = useAuth();
   const hasKeplrAccount = !!activeAccount?.addr;
   const { connect } = useWallet();
   const signArbitrary = useSignArbitrary({
@@ -41,9 +41,9 @@ export const ProfileEditSettings = () => {
   const _socialProviders = socialProviders.map(p => ({
     name: p.name,
     // TODO: we'll need to replace this with the email from the provider account #2211
-    email: activeAccount?.email,
-    connect: activeAccount?.[p.id] ? undefined : p.connect,
-    disconnect: activeAccount?.[p.id] ? p.disconnect : undefined,
+    email: privActiveAccount?.email,
+    connect: privActiveAccount?.[p.id] ? undefined : p.connect,
+    disconnect: privActiveAccount?.[p.id] ? p.disconnect : undefined,
   }));
 
   // Keplr account
@@ -60,7 +60,7 @@ export const ProfileEditSettings = () => {
         />
       )}
       <UserAccountSettings
-        email={activeAccount?.email ?? ''}
+        email={privActiveAccount?.email ?? ''}
         socialProviders={_socialProviders}
         walletProvider={walletProviderInfo}
       />

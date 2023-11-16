@@ -44,8 +44,6 @@ export type Account = Node & {
   creatorId?: Maybe<Scalars['UUID']>;
   nonce: Scalars['String'];
   addr?: Maybe<Scalars['String']>;
-  google?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
   /** Reads a single `Account` that is related to this `Account`. */
   accountByCreatorId?: Maybe<Account>;
   /** Reads and enables pagination through a set of `CreditClass`. */
@@ -503,10 +501,6 @@ export type AccountCondition = {
   nonce?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `addr` field. */
   addr?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `google` field. */
-  google?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `email` field. */
-  email?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `CreditClass` values, with data from `Project`. */
@@ -635,8 +629,6 @@ export type AccountInput = {
   creatorId?: Maybe<Scalars['UUID']>;
   nonce?: Maybe<Scalars['String']>;
   addr?: Maybe<Scalars['String']>;
-  google?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
 };
 
 /** Represents an update to a `Account`. Fields that are set will be updated. */
@@ -654,8 +646,6 @@ export type AccountPatch = {
   creatorId?: Maybe<Scalars['UUID']>;
   nonce?: Maybe<Scalars['String']>;
   addr?: Maybe<Scalars['String']>;
-  google?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
 };
 
 export enum AccountType {
@@ -714,10 +704,6 @@ export enum AccountsOrderBy {
   NonceDesc = 'NONCE_DESC',
   AddrAsc = 'ADDR_ASC',
   AddrDesc = 'ADDR_DESC',
-  GoogleAsc = 'GOOGLE_ASC',
-  GoogleDesc = 'GOOGLE_DESC',
-  EmailAsc = 'EMAIL_ASC',
-  EmailDesc = 'EMAIL_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -1554,26 +1540,6 @@ export type DeleteAccountByAddrInput = {
   addr: Scalars['String'];
 };
 
-/** All input for the `deleteAccountByEmail` mutation. */
-export type DeleteAccountByEmailInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  email: Scalars['String'];
-};
-
-/** All input for the `deleteAccountByGoogle` mutation. */
-export type DeleteAccountByGoogleInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  google: Scalars['String'];
-};
-
 /** All input for the `deleteAccountById` mutation. */
 export type DeleteAccountByIdInput = {
   /**
@@ -2285,10 +2251,6 @@ export type Mutation = {
   updateAccountById?: Maybe<UpdateAccountPayload>;
   /** Updates a single `Account` using a unique key and a patch. */
   updateAccountByAddr?: Maybe<UpdateAccountPayload>;
-  /** Updates a single `Account` using a unique key and a patch. */
-  updateAccountByGoogle?: Maybe<UpdateAccountPayload>;
-  /** Updates a single `Account` using a unique key and a patch. */
-  updateAccountByEmail?: Maybe<UpdateAccountPayload>;
   /** Updates a single `CreditBatch` using its globally unique id and a patch. */
   updateCreditBatch?: Maybe<UpdateCreditBatchPayload>;
   /** Updates a single `CreditBatch` using a unique key and a patch. */
@@ -2339,10 +2301,6 @@ export type Mutation = {
   deleteAccountById?: Maybe<DeleteAccountPayload>;
   /** Deletes a single `Account` using a unique key. */
   deleteAccountByAddr?: Maybe<DeleteAccountPayload>;
-  /** Deletes a single `Account` using a unique key. */
-  deleteAccountByGoogle?: Maybe<DeleteAccountPayload>;
-  /** Deletes a single `Account` using a unique key. */
-  deleteAccountByEmail?: Maybe<DeleteAccountPayload>;
   /** Deletes a single `CreditBatch` using its globally unique id. */
   deleteCreditBatch?: Maybe<DeleteCreditBatchPayload>;
   /** Deletes a single `CreditBatch` using a unique key. */
@@ -2460,18 +2418,6 @@ export type MutationUpdateAccountByIdArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateAccountByAddrArgs = {
   input: UpdateAccountByAddrInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateAccountByGoogleArgs = {
-  input: UpdateAccountByGoogleInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateAccountByEmailArgs = {
-  input: UpdateAccountByEmailInput;
 };
 
 
@@ -2622,18 +2568,6 @@ export type MutationDeleteAccountByIdArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteAccountByAddrArgs = {
   input: DeleteAccountByAddrInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteAccountByGoogleArgs = {
-  input: DeleteAccountByGoogleInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteAccountByEmailArgs = {
-  input: DeleteAccountByEmailInput;
 };
 
 
@@ -3090,8 +3024,6 @@ export type Query = Node & {
   allShaclGraphs?: Maybe<ShaclGraphsConnection>;
   accountById?: Maybe<Account>;
   accountByAddr?: Maybe<Account>;
-  accountByGoogle?: Maybe<Account>;
-  accountByEmail?: Maybe<Account>;
   creditBatchById?: Maybe<CreditBatch>;
   creditBatchByBatchDenom?: Maybe<CreditBatch>;
   creditClassById?: Maybe<CreditClass>;
@@ -3258,18 +3190,6 @@ export type QueryAccountByIdArgs = {
 /** The root query type which gives access points into the data universe. */
 export type QueryAccountByAddrArgs = {
   addr: Scalars['String'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryAccountByGoogleArgs = {
-  google: Scalars['String'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryAccountByEmailArgs = {
-  email: Scalars['String'];
 };
 
 
@@ -3546,30 +3466,6 @@ export type UpdateAccountByAddrInput = {
   /** An object where the defined keys will be set on the `Account` being updated. */
   accountPatch: AccountPatch;
   addr: Scalars['String'];
-};
-
-/** All input for the `updateAccountByEmail` mutation. */
-export type UpdateAccountByEmailInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** An object where the defined keys will be set on the `Account` being updated. */
-  accountPatch: AccountPatch;
-  email: Scalars['String'];
-};
-
-/** All input for the `updateAccountByGoogle` mutation. */
-export type UpdateAccountByGoogleInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** An object where the defined keys will be set on the `Account` being updated. */
-  accountPatch: AccountPatch;
-  google: Scalars['String'];
 };
 
 /** All input for the `updateAccountById` mutation. */

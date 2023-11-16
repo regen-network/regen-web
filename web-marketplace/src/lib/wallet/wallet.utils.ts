@@ -121,7 +121,7 @@ export const getNonce = async ({
   token,
 }: GetNonceParams): Promise<string> => {
   const nonceRes = await fetch(
-    `${apiUri}/marketplace/v1/web3auth/nonce?` +
+    `${apiUri}/marketplace/v1/wallet-auth/nonce?` +
       new URLSearchParams({
         userAddress: userAddress,
       }),

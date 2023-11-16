@@ -1,0 +1,59 @@
+@startuml
+
+package "Regen Ledger" {
+  frame x/ecocredit {
+    frame Core {
+      [Credit Types]
+      [Credit Classes]
+      [Credit Batches]
+      [Projects]
+    }
+    [Marketplace]
+    [Baskets]
+  }
+  frame x/data {
+    [Data Anchors]
+    [Attestations]
+    [Resolvers]
+  }
+  frame "Governance & Key Management" {
+    [x/authz]
+    [x/gov]
+    [x/group]
+  }
+}
+
+node "Regen Web" {
+  [Project Profiles]
+  [Project Developer Profiles]
+  [Marketplace Listings]
+  [Credit Creation]
+}
+
+"Regen Web" --> "Regen Ledger" : uses
+"Regen Web" --> "Regen Server" : uses
+"Regen Web" --> "Indexer" : queries
+
+package "Regen Server" {
+  database "App Postgres" {
+    folder "Project Data" {
+    }
+
+    folder "Accounts" {
+    }
+  }
+}
+
+"Regen Ledger" <..  "Indexer" : indexes
+"Regen Server" <..  "Indexer" : indexes
+
+package "Indexer" {
+  database "Indexer Postgres" {
+  }
+
+  database "RDF Triple Store" {
+  }
+}
+
+
+@enduml

@@ -1,11 +1,15 @@
-import { useApolloClient } from '@apollo/client';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { normalizeProjectWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getProjectsByAdminQuery } from 'lib/queries/react-query/ecocredit/getProjectsByAdmin/getProjectsByAdmin';
-import { getWalletByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getWalletByAddrQuery/getWalletByAddrQuery';
+import { getAccountProjectsByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
@@ -14,7 +18,7 @@ import { useFetchProjectsWithOrders } from './useFetchProjectsWithOrders';
 
 type Params = {
   keepUnapproved?: boolean;
-  adminAddress?: string;
+  adminAddress?: string | null;
   adminAccountId?: string;
 };
 
@@ -23,15 +27,16 @@ export const useFetchProjectByAdmin = ({
   adminAddress,
   adminAccountId,
 }: Params) => {
-  const graphqlClient = useApolloClient();
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
   const { ecocreditClient } = useLedger();
 
-  const { data: walletData, isFetching: isWalletLoading } = useQuery(
-    getWalletByAddrQuery({
-      addr: adminAddress ?? '',
+  const { data: accountData, isFetching: isAccountLoading } = useQuery(
+    getAccountProjectsByIdQuery({
+      id: adminAccountId,
       client: graphqlClient,
-      enabled: adminAddress !== undefined,
+      enabled: adminAccountId !== undefined,
     }),
   );
 
@@ -39,11 +44,11 @@ export const useFetchProjectByAdmin = ({
     getProjectsByAdminQuery({
       enabled: !!adminAddress && !!ecocreditClient,
       client: ecocreditClient,
-      request: { admin: adminAddress },
+      request: { admin: adminAddress as string },
     }),
   );
   const offChainProjects =
-    walletData?.walletByAddr?.projectsByAdminWalletId?.nodes;
+    accountData?.accountById?.projectsByAdminAccountId?.nodes;
 
   const { data: sanityCreditClassData } = useQuery(
     getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
@@ -62,7 +67,7 @@ export const useFetchProjectByAdmin = ({
 
   // Get data for projects that are only off chain
   const onlyOffChainProjects =
-    adminAccountId === walletData?.walletByAddr?.partyByWalletId?.accountId
+    adminAccountId === accountData?.accountById?.id
       ? offChainProjects
           ?.filter(project => !project?.onChainId)
           .filter(project => project?.approved || keepUnapproved)
@@ -76,7 +81,8 @@ export const useFetchProjectByAdmin = ({
         offChainProject: project,
         projectMetadata: project?.metadata,
         projectPageMetadata: project?.metadata,
-        programParty: project?.creditClassByCreditClassId?.partyByRegistryId,
+        programAccount:
+          project?.creditClassByCreditClassId?.accountByRegistryId,
         sanityClass: findSanityCreditClass({
           sanityCreditClassData,
           creditClassIdOrUrl:
@@ -94,9 +100,9 @@ export const useFetchProjectByAdmin = ({
 
   return {
     adminProjects: projects,
-    walletData,
+    accountData,
     isLoadingAdminProjects:
-      isWalletLoading ||
+      isAccountLoading ||
       isOnChainProjectsLoading ||
       isProjectsMetadataLoading ||
       isClassesMetadataLoading,

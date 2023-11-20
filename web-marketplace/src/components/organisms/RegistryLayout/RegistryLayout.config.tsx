@@ -12,8 +12,11 @@ import {
   BRIDGE,
   CREDIT_BATCHES,
   CREDIT_CLASSES,
+  EDIT_PROFILE,
   PORTFOLIO,
+  PROFILE_SETTINGS,
   PROJECTS,
+  SEPARATOR,
 } from 'pages/Dashboard/Dashboard.constants';
 import { Link } from 'components/atoms';
 
@@ -55,22 +58,22 @@ export const getMenuItems = (pathname: string): Item[] => [
 interface GetUserMenuItemsParams {
   pathname: string;
   linkComponent: React.FC<NavLinkProps>;
-  theme: Theme;
-  showProjects?: boolean;
   showCreditClasses?: boolean;
   isIssuer?: boolean;
+  showProjects?: boolean;
+  isWalletConnected: boolean;
 }
 
 export const getUserMenuItems = ({
   linkComponent,
   pathname,
-  theme,
-  showProjects,
   showCreditClasses,
   isIssuer,
+  showProjects,
+  isWalletConnected,
 }: GetUserMenuItemsParams): HeaderDropdownItemProps[] =>
   [
-    {
+    isWalletConnected && {
       pathname,
       linkComponent,
       importCallback: (): Promise<any> => import('../../../pages/Dashboard'),
@@ -92,10 +95,24 @@ export const getUserMenuItems = ({
       linkComponent,
       ...CREDIT_BATCHES,
     },
-    isBridgeEnabled && {
+    isWalletConnected &&
+      isBridgeEnabled && {
+        pathname,
+        linkComponent,
+        ...BRIDGE,
+      },
+    {
+      ...SEPARATOR,
+    },
+    {
       pathname,
       linkComponent,
-      ...BRIDGE,
+      ...EDIT_PROFILE,
+    },
+    {
+      pathname,
+      linkComponent,
+      ...PROFILE_SETTINGS,
     },
   ].filter(Boolean) as HeaderDropdownItemProps[];
 

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { PartyType } from 'generated/graphql';
+import { AccountType } from 'generated/graphql';
 
 import {
   DEFAULT_PROFILE_AVATARS,
@@ -9,7 +9,7 @@ import {
 } from 'pages/ProfileEdit/ProfileEdit.constants';
 
 type Params = {
-  profileType: PartyType;
+  profileType: AccountType;
   profileImage: string;
   setProfileImage: (value: string) => void;
 };
@@ -20,7 +20,7 @@ export const useUpdateDefaultAvatar = ({
   profileType,
 }: Params) => {
   useEffect(() => {
-    const isOrganization = profileType === PartyType.Organization;
+    const isOrganization = profileType === AccountType.Organization;
     const defaultAvatar = isOrganization
       ? DEFAULT_PROFILE_COMPANY_AVATAR
       : DEFAULT_PROFILE_USER_AVATAR;

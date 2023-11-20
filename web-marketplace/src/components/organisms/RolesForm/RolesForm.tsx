@@ -15,16 +15,15 @@ import EditIcon from 'web-components/lib/components/icons/EditIcon';
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
-import { getWalletByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getWalletByAddrQuery/getWalletByAddrQuery';
+import { useAuth } from 'lib/auth/auth';
+import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 
 import { useCreateProjectContext } from 'pages/ProjectCreate';
 import { RoleSubmitProps } from 'pages/Roles/hooks/useRolesSubmit';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
-import { getPartiesByAccountIdQuery } from '../../../lib/queries/react-query/registry-server/graphql/getPartiesByAccountIdById/getPartiesByAccountIdQuery';
-import { getPartiesByNameOrAddrQuery } from '../../../lib/queries/react-query/registry-server/graphql/getPartiesByNameOrAddr/getPartiesByNameOrAddrQuery';
-import { useWallet } from '../../../lib/wallet/wallet';
+import { getAccountsByNameOrAddrQuery } from '../../../lib/queries/react-query/registry-server/graphql/getAccountsByNameOrAddr/getAccountsByNameOrAddrQuery';
 import { useProjectEditContext } from '../../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../../molecules';
 import { AdminModal } from './components/AdminModal/AdminModal';
@@ -95,18 +94,13 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     form.setValue('admin', value, { shouldDirty: true });
   };
 
-  const { accountId } = useWallet();
+  const { activeAccountId, authenticatedAccountIds, authenticatedAccounts } =
+    useAuth();
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
-  const { data: partiesByAccountId } = useQuery(
-    getPartiesByAccountIdQuery({
-      client: graphqlClient,
-      id: accountId,
-      enabled: !!accountId && !!graphqlClient,
-    }),
-  );
-  const { data: adminWalletData } = useQuery(
-    getWalletByAddrQuery({
+
+  const { data: adminAccountData } = useQuery(
+    getAccountByAddrQuery({
       addr: admin as string,
       client: graphqlClient,
       enabled: !!admin && admin !== initialValues?.admin && !!graphqlClient,
@@ -114,8 +108,8 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   );
 
   const [projectDeveloperValue, setProjectDeveloperValue] = useState('');
-  const { data: partiesProjectDeveloper } = useQuery(
-    getPartiesByNameOrAddrQuery({
+  const { data: accountsProjectDeveloper } = useQuery(
+    getAccountsByNameOrAddrQuery({
       client: graphqlClient,
       enabled: !!graphqlClient && !!projectDeveloperValue,
       input: projectDeveloperValue,
@@ -123,8 +117,8 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   );
 
   const [verifierValue, setVerifierValue] = useState('');
-  const { data: partiesVerifier } = useQuery(
-    getPartiesByNameOrAddrQuery({
+  const { data: accountsVerifier } = useQuery(
+    getAccountsByNameOrAddrQuery({
       client: graphqlClient,
       enabled: !!graphqlClient && !!verifierValue,
       input: verifierValue,
@@ -141,7 +135,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
         try {
           await submit({
             values,
-            adminWalletId: adminWalletData?.walletByAddr?.id,
+            adminAccountId: adminAccountData?.accountByAddr?.id,
             shouldNavigate: shouldNavigateRef?.current,
           });
           if (isEdit && confirmSave) {
@@ -161,10 +155,11 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
           setValue={setProjectDeveloper}
           value={projectDeveloper}
           setDebouncedValue={setProjectDeveloperValue}
-          partiesByAccountId={partiesByAccountId}
-          parties={partiesProjectDeveloper}
+          authenticatedAccounts={authenticatedAccounts}
+          authenticatedAccountIds={authenticatedAccountIds}
+          accounts={accountsProjectDeveloper}
           saveProfile={saveProfile}
-          accountId={accountId}
+          activeAccountId={activeAccountId}
           {...form.register('projectDeveloper')}
         />
         <RoleField
@@ -174,10 +169,11 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
           setValue={setVerifier}
           value={verifier}
           setDebouncedValue={setVerifierValue}
-          partiesByAccountId={partiesByAccountId}
-          parties={partiesVerifier}
+          authenticatedAccounts={authenticatedAccounts}
+          authenticatedAccountIds={authenticatedAccountIds}
+          accounts={accountsVerifier}
           saveProfile={saveProfile}
-          accountId={accountId}
+          activeAccountId={activeAccountId}
           {...form.register('verifier')}
         />
         {isOnChain && admin && (

@@ -1,5 +1,9 @@
 import { useCallback } from 'react';
-import { useApolloClient } from '@apollo/client';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import {
@@ -7,10 +11,10 @@ import {
   useCreateProjectMutation,
   useUpdateProjectByIdMutation,
 } from 'generated/graphql';
+import { useAuth } from 'lib/auth/auth';
+import { getAccountProjectsByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery.utils';
 import { getCreditClassByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getCreditClassByOnChainIdQuery/getCreditClassByOnChainIdQuery';
-import { getWalletByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getWalletByAddrQuery/getWalletByAddrQuery';
 import { getUnanchoredProjectBaseMetadata } from 'lib/rdf';
-import { useWallet } from 'lib/wallet/wallet';
 
 import { useProjectEditContext } from 'pages/ProjectEdit';
 
@@ -20,18 +24,13 @@ type CreateOrUpdateProjectParams = {
 };
 
 export const useCreateOrUpdateProject = () => {
-  const graphqlClient = useApolloClient();
-  const { wallet } = useWallet();
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
+  const reactQueryClient = useQueryClient();
   const { isEdit, onChainProject } = useProjectEditContext();
   const [updateProject] = useUpdateProjectByIdMutation();
   const [createProject] = useCreateProjectMutation();
-  const { data: walletData } = useQuery(
-    getWalletByAddrQuery({
-      addr: wallet?.address ?? '',
-      client: graphqlClient,
-      enabled: wallet?.address !== undefined,
-    }),
-  );
+  const { activeAccount } = useAuth();
   const { data: classData } = useQuery(
     getCreditClassByOnChainIdQuery({
       client: graphqlClient,
@@ -51,7 +50,7 @@ export const useCreateOrUpdateProject = () => {
             input: {
               id: offChainProjectId,
               projectPatch: {
-                adminWalletId: walletData?.walletByAddr?.id,
+                adminAccountId: activeAccount?.id,
                 ...projectPatch,
               },
             },
@@ -71,7 +70,7 @@ export const useCreateOrUpdateProject = () => {
                 onChainId: onChainProject.id,
                 creditClassId:
                   classData?.data?.creditClassByOnChainId?.id || undefined,
-                adminWalletId: walletData?.walletByAddr?.id,
+                adminAccountId: activeAccount?.id,
                 ...projectPatch,
               },
             },
@@ -79,17 +78,23 @@ export const useCreateOrUpdateProject = () => {
         });
         const projectId = createRes?.data?.createProject?.project?.id;
         if (projectId) {
+          await reactQueryClient.invalidateQueries({
+            queryKey: getAccountProjectsByIdQueryKey({
+              id: activeAccount?.id,
+            }),
+          });
           return projectId;
         }
       }
     },
     [
+      activeAccount?.id,
       classData?.data?.creditClassByOnChainId?.id,
       createProject,
       isEdit,
       onChainProject,
+      reactQueryClient,
       updateProject,
-      walletData?.walletByAddr?.id,
     ],
   );
 

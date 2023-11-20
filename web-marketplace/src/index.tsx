@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client';
 import {
   createRoutesFromChildren,
   matchRoutes,
-  RouterProvider,
   useLocation,
   useNavigationType,
 } from 'react-router-dom';
@@ -22,11 +21,12 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Analytics from 'analytics';
 import doNotTrack from 'analytics-plugin-do-not-track';
 import { assets, chains } from 'chain-registry';
-import { getRouter } from 'routes';
+import { Routes } from 'routes';
 import { AnalyticsProvider } from 'use-analytics';
 
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 
+import { AuthProvider } from 'lib/auth/auth';
 import { apolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { reactQueryClient } from 'lib/clients/reactQueryClient';
 import {
@@ -116,34 +116,35 @@ root.render(
       <IntercomProvider appId={intercomId} autoBoot>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <AnalyticsProvider instance={analytics}>
-            <ChainProvider
-              chains={chains.filter(chain => chain.chain_name === 'regen')}
-              assetLists={assets.filter(chain => chain.chain_name === 'regen')}
-              wallets={wallets}
-              walletConnectOptions={{
-                signClient: {
-                  projectId: import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID,
-                  relayUrl: WALLET_CONNECT_RELAY_URL,
-                  metadata: walletConnectClientMeta,
-                },
-              }}
-            >
-              <WalletProvider>
-                <LedgerProvider>
-                  <ThemeProvider>
-                    <Suspense fallback={<PageLoader />}>
-                      <RouterProvider
-                        router={getRouter({
-                          reactQueryClient,
-                          apolloClientFactory,
-                        })}
-                        fallbackElement={<PageLoader />}
-                      />
-                    </Suspense>
-                  </ThemeProvider>
-                </LedgerProvider>
-              </WalletProvider>
-            </ChainProvider>
+            <AuthProvider>
+              <ChainProvider
+                chains={chains.filter(chain => chain.chain_name === 'regen')}
+                assetLists={assets.filter(
+                  chain => chain.chain_name === 'regen',
+                )}
+                wallets={wallets}
+                walletConnectOptions={{
+                  signClient: {
+                    projectId: import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID,
+                    relayUrl: WALLET_CONNECT_RELAY_URL,
+                    metadata: walletConnectClientMeta,
+                  },
+                }}
+              >
+                <WalletProvider>
+                  <LedgerProvider>
+                    <ThemeProvider>
+                      <Suspense fallback={<PageLoader />}>
+                        <Routes
+                          reactQueryClient={reactQueryClient}
+                          apolloClientFactory={apolloClientFactory}
+                        />
+                      </Suspense>
+                    </ThemeProvider>
+                  </LedgerProvider>
+                </WalletProvider>
+              </ChainProvider>
+            </AuthProvider>
           </AnalyticsProvider>
         </LocalizationProvider>
       </IntercomProvider>

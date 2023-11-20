@@ -4,7 +4,7 @@ import TwitterIcon2 from 'web-components/lib/components/icons/social/TwitterIcon
 import WebsiteLinkIcon from 'web-components/lib/components/icons/social/WebsiteLinkIcon';
 import { SocialLink } from 'web-components/lib/components/organisms/ProfileHeader/ProfileHeader.types';
 
-import { Maybe, Party } from 'generated/graphql';
+import { Account } from 'generated/graphql';
 
 import { DEFAULT_PROFILE_BG } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
@@ -12,30 +12,29 @@ import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 /* getSocialsLinks */
 
 type GetSocialsLinksParams = {
-  party?: Pick<
-    Party,
+  account?: Pick<
+    Account,
     | 'id'
     | 'name'
     | 'type'
     | 'image'
     | 'bgImage'
     | 'description'
-    | 'accountId'
     | 'websiteLink'
     | 'twitterLink'
   > | null;
 };
 
 export const getSocialsLinks = ({
-  party,
+  account,
 }: GetSocialsLinksParams): SocialLink[] => {
   return [
     {
-      href: party?.twitterLink,
+      href: account?.twitterLink,
       icon: <TwitterIcon2 />,
     },
     {
-      href: party?.websiteLink,
+      href: account?.websiteLink,
       icon: <WebsiteLinkIcon />,
     },
   ].filter((link): link is SocialLink => {
@@ -46,23 +45,23 @@ export const getSocialsLinks = ({
 /* getSocialsLinks */
 
 type GetUserImagesParams = {
-  party?: Pick<Party, 'type' | 'image' | 'bgImage'> | null;
+  account?: Pick<Account, 'type' | 'image' | 'bgImage'> | null;
 };
 
-export const getUserImages = ({ party }: GetUserImagesParams) => {
-  const backgroundImage = party?.bgImage
+export const getUserImages = ({ account }: GetUserImagesParams) => {
+  const backgroundImage = account?.bgImage
     ? getResizedImageUrl({
-        url: party?.bgImage,
+        url: account?.bgImage,
         width: 1400,
       })
     : DEFAULT_PROFILE_BG;
 
-  const avatarImage = party?.image
+  const avatarImage = account?.image
     ? getResizedImageUrl({
-        url: party?.image,
+        url: account?.image,
         width: 190,
       })
-    : getDefaultAvatar(party);
+    : getDefaultAvatar(account);
 
   return { backgroundImage, avatarImage };
 };

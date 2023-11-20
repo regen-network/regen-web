@@ -1,11 +1,11 @@
-import { Party } from 'web-components/lib/components/user/UserInfo';
+import { Account } from 'web-components/lib/components/user/UserInfo';
 
 import { Stakeholders } from 'components/organisms/Stakeholders/Stakeholders';
 
 interface Props {
-  program?: Party;
-  admin?: Party;
-  issuers?: Party[];
+  program?: Account;
+  admin?: Account;
+  issuers?: Account[];
 }
 
 export const CreditClassDetailsStakeholders = ({
@@ -15,7 +15,7 @@ export const CreditClassDetailsStakeholders = ({
 }: Props) => {
   const stakeholders = [
     {
-      parties: program,
+      accounts: program,
       title: 'program',
       tooltip: (
         <>
@@ -26,7 +26,7 @@ export const CreditClassDetailsStakeholders = ({
       ),
     },
     {
-      parties: admin,
+      accounts: admin,
       title: 'admin',
       tooltip: (
         <>
@@ -36,7 +36,7 @@ export const CreditClassDetailsStakeholders = ({
       ),
     },
     {
-      parties: issuers,
+      accounts: issuers,
       title: 'issuers',
       tooltip: (
         <>

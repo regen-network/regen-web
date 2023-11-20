@@ -32,7 +32,7 @@ const ProjectFormTemplate: React.FC<React.PropsWithChildren<Props>> = ({
   children,
 }) => {
   const adminAddr =
-    onChainProject?.admin || offChainProject?.walletByAdminWalletId?.addr;
+    onChainProject?.admin || offChainProject?.accountByAdminAccountId?.addr;
   const location = useLocation();
   const { pathname } = location;
   const navigate = useNavigate();

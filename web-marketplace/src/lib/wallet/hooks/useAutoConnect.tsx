@@ -10,6 +10,7 @@ type Props = {
   setError: UseStateSetter<unknown>;
   setLoaded: UseStateSetter<boolean>;
   connectWallet: ConnectWalletType;
+  activeAccountHasAddr: boolean;
 };
 
 // Auto connect user if we saved a connection type, from last session, in localstorage
@@ -17,15 +18,17 @@ export const useAutoConnect = ({
   setError,
   setLoaded,
   connectWallet,
+  activeAccountHasAddr,
 }: Props): void => {
   useEffect(() => {
     const autoConnectWalletType = localStorage.getItem(AUTO_CONNECT_WALLET_KEY);
 
     const tryConnectWallet = async (): Promise<void> => {
-      if (autoConnectWalletType) {
+      if (autoConnectWalletType || activeAccountHasAddr) {
         try {
           await connectWallet({
-            walletType: autoConnectWalletType as WalletType,
+            walletType:
+              (autoConnectWalletType as WalletType) ?? WalletType.Keplr,
             doLogin: false,
           });
         } catch (e) {
@@ -36,10 +39,10 @@ export const useAutoConnect = ({
       }
     };
 
-    if (autoConnectWalletType) {
+    if (autoConnectWalletType || activeAccountHasAddr) {
       tryConnectWallet();
     } else {
       setLoaded(true);
     }
-  }, [connectWallet, setError, setLoaded]);
+  }, [connectWallet, setError, setLoaded, activeAccountHasAddr]);
 };

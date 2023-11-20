@@ -6,12 +6,14 @@ import {
   Outlet,
   Route,
   RouteObject,
+  RouterProvider,
 } from 'react-router-dom';
 import { Router } from '@remix-run/router';
 import * as Sentry from '@sentry/react';
 import { QueryClient } from '@tanstack/react-query';
 
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { CertificatePage } from 'pages/Certificate/Certificate';
 import MyBridge from 'pages/Dashboard/MyBridge';
@@ -30,8 +32,13 @@ import ProjectsTab from 'pages/EcocreditsByAccount/ProjectsTab';
 import Faucet from 'pages/Faucet';
 import { homeLoader } from 'pages/Home/Home.loader';
 import { storefrontLoader } from 'pages/Marketplace/Storefront/Storefront.loader';
+import { ProfileEditMain } from 'pages/ProfileEdit/ProfileEdit.Main';
+import { ProfileEditSettings } from 'pages/ProfileEdit/ProfileEdit.Settings';
 import { projectsLoader } from 'pages/Projects/Projects.loader';
 import Settings from 'pages/Settings';
+import { AuthRoute } from 'components/atoms/AuthRoute';
+import { KeplrOrAuthRoute } from 'components/atoms/KeplrOrAuthRoute';
+import PageLoader from 'components/atoms/PageLoader';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
 import { projectDetailsLoader } from 'components/templates/ProjectDetails/ProjectDetails.loader';
 
@@ -55,6 +62,7 @@ const EcocreditsByAccount = lazy(() => import('./pages/EcocreditsByAccount'));
 const ErrorPage = lazy(() => import('./pages/ErrorPage'));
 const Home = lazy(() => import('./pages/Home'));
 const LandStewards = lazy(() => import('./pages/LandStewards'));
+const LoginPage = lazy(() => import('./pages/Login'));
 const Media = lazy(() => import('./pages/Media'));
 const MethodologyDetails = lazy(() => import('./pages/MethodologyDetails'));
 const NotFoundPage = lazy(() => import('./pages/NotFound'));
@@ -73,14 +81,38 @@ const Storefront = lazy(() => import('./pages/Marketplace/Storefront'));
 const ConnectWalletPage = lazy(() => import('./pages/ConnectWalletPage'));
 const ProfileEdit = lazy(() => import('./pages/ProfileEdit'));
 
+type RouterProps = {
+  reactQueryClient: QueryClient;
+  apolloClientFactory: ApolloClientFactory;
+};
+
+export const Routes = ({
+  reactQueryClient,
+  apolloClientFactory,
+}: RouterProps) => {
+  const { wallet } = useWallet();
+  return (
+    <RouterProvider
+      router={getRouter({
+        reactQueryClient,
+        apolloClientFactory,
+        address: wallet?.address,
+      })}
+      fallbackElement={<PageLoader />}
+    />
+  );
+};
+
 type RouterParams = {
   reactQueryClient: QueryClient;
   apolloClientFactory: ApolloClientFactory;
+  address?: string;
 };
 
 export const getRoutes = ({
   reactQueryClient,
   apolloClientFactory,
+  address,
 }: RouterParams): RouteObject[] => {
   return createRoutesFromElements(
     <Route element={<RegistryLayout />}>
@@ -123,15 +155,21 @@ export const getRoutes = ({
             apolloClientFactory,
           })}
         />
-        <Route path="profile" element={<KeplrRoute component={Dashboard} />}>
-          <Route index element={<Navigate to="portfolio" />} />
+        <Route
+          path="profile"
+          element={<KeplrOrAuthRoute component={Dashboard} />}
+        >
+          <Route
+            index
+            element={<Navigate to={address ? 'portfolio' : 'projects'} />}
+          />
           <Route
             path="portfolio"
             element={<KeplrRoute component={MyEcocredits} />}
           />
           <Route
             path="projects"
-            element={<KeplrRoute component={MyProjects} />}
+            element={<KeplrOrAuthRoute component={MyProjects} />}
           />
           <Route
             path="credit-classes"
@@ -179,52 +217,52 @@ export const getRoutes = ({
             />
             <Route
               path="basic-info"
-              element={<KeplrRoute component={BasicInfo} />}
+              element={<AuthRoute component={BasicInfo} />}
             />
             <Route
               path="location"
-              element={<KeplrRoute component={ProjectLocation} />}
+              element={<AuthRoute component={ProjectLocation} />}
             />
             <Route
               path="description"
-              element={<KeplrRoute component={Description} />}
+              element={<AuthRoute component={Description} />}
             />
-            <Route path="media" element={<KeplrRoute component={Media} />} />
+            <Route path="media" element={<AuthRoute component={Media} />} />
             <Route
               path="metadata"
               element={<KeplrRoute component={ProjectMetadata} />}
             />
-            <Route path="roles" element={<KeplrRoute component={Roles} />} />
+            <Route path="roles" element={<AuthRoute component={Roles} />} />
             <Route
               path="review"
-              element={<KeplrRoute component={ProjectReview} />}
+              element={<AuthRoute component={ProjectReview} />}
             />
             <Route
               path="finished"
-              element={<KeplrRoute component={ProjectFinished} />}
+              element={<AuthRoute component={ProjectFinished} />}
             />
-            <Route path="edit" element={<KeplrRoute component={ProjectEdit} />}>
+            <Route path="edit" element={<AuthRoute component={ProjectEdit} />}>
               <Route
                 path="basic-info"
-                element={<KeplrRoute component={BasicInfo} />}
+                element={<AuthRoute component={BasicInfo} />}
               />
               <Route
                 path="location"
-                element={<KeplrRoute component={ProjectLocation} />}
+                element={<AuthRoute component={ProjectLocation} />}
               />
               <Route
                 path="description"
-                element={<KeplrRoute component={Description} />}
+                element={<AuthRoute component={Description} />}
               />
-              <Route path="media" element={<KeplrRoute component={Media} />} />
-              <Route path="roles" element={<KeplrRoute component={Roles} />} />
+              <Route path="media" element={<AuthRoute component={Media} />} />
+              <Route path="roles" element={<AuthRoute component={Roles} />} />
               <Route
                 path="metadata"
                 element={<KeplrRoute component={ProjectMetadata} />}
               />
               <Route
                 path="settings"
-                element={<KeplrRoute component={Settings} />}
+                element={<AuthRoute component={Settings} />}
               />
             </Route>
           </Route>
@@ -270,9 +308,19 @@ export const getRoutes = ({
         <Route path="*" element={<NotFoundPage />} />
       </Route>
       <Route path="profile">
-        <Route path="edit" element={<KeplrRoute component={ProfileEdit} />} />
+        <Route path="edit" element={<AuthRoute component={ProfileEdit} />}>
+          <Route
+            path="profile"
+            element={<AuthRoute component={ProfileEditMain} />}
+          />
+          <Route
+            path="settings"
+            element={<AuthRoute component={ProfileEditSettings} />}
+          />
+        </Route>
       </Route>
       <Route path="connect-wallet" element={<ConnectWalletPage />} />
+      <Route path="login" element={<LoginPage />} />
       <Route path="faucet" element={<Faucet />} />
     </Route>,
   );

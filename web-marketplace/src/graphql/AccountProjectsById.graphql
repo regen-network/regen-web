@@ -1,0 +1,10 @@
+query AccountProjectsById($id: UUID!) {
+  accountById(id: $id) {
+    id
+    projectsByAdminAccountId {
+      nodes {
+        ...projectFields
+      }
+    }
+  }
+}

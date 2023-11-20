@@ -1,47 +1,52 @@
-import React from 'react';
-
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { CopyButton } from 'web-components/lib/components/buttons/CopyButton';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import CloseIcon from 'web-components/lib/components/icons/CloseIcon';
 import { Body } from 'web-components/lib/components/typography';
-import CloseIcon from "web-components/lib/components/icons/CloseIcon";
+
+import { SocialProviderInfo } from './UserAccountSettings.types';
+
+type Props = SocialProviderInfo & {
+  connect?: () => void;
+  disconnect?: () => void;
+  address?: string;
+  email?: string | null;
+};
 
 /** ConnectField is used internally by the UserAccountSettings component to
  * display a single social or wallet connection.
  */
 export const ConnectField = ({
-  providerName,
+  name,
   connect,
   disconnect,
   address,
-}: {
-  providerName: string;
-  connect?: () => void;
-  disconnect?: () => void;
-  address?: string;
-}) => {
+  email,
+}: Props) => {
   return (
     <div className="flex flex-row justify-between flex-wrap gap-y-10">
       <div className="flex flex-col gap-5">
         <Body size="md" color="info.dark-grey">
-          {providerName}
+          {name}
         </Body>
         {address ? (
           <AddressWidget address={address} />
         ) : (
-          <Body size="sm">{connect ? 'Disconnected' : 'Connected'}</Body>
+          <Body size="sm">{email ? email : 'Not connected'}</Body>
         )}
       </div>
-      <div>
+      <div className="ml-auto">
         {connect ? (
           <ContainedButton onClick={connect}>CONNECT</ContainedButton>
         ) : (
-          <OutlinedButton onClick={disconnect}>
-            <div className="flex flex-row gap-10 items-center">
-              <CloseIcon className="stroke-brand-400 w-[26px] h-[26px]" />
-              <div>DISCONNECT</div>
-            </div>
-          </OutlinedButton>
+          disconnect && (
+            <OutlinedButton onClick={disconnect}>
+              <div className="flex flex-row gap-10 items-center">
+                <CloseIcon className="stroke-brand-400 w-[26px] h-[26px]" />
+                <div>DISCONNECT</div>
+              </div>
+            </OutlinedButton>
+          )
         )}
       </div>
     </div>

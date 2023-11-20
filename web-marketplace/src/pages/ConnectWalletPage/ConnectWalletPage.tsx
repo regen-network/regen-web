@@ -8,7 +8,7 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { LoginButton } from 'components/organisms/LoginButton/LoginButton';
 
-import { CONNECT_WALLET_PAGE_TITLE } from './ConnectWalletPage.contants';
+import { CONNECT_WALLET_PAGE_TITLE } from './ConnectWalletPage.constants';
 
 export const ConnectWalletPage = () => {
   const { loaded, isConnected } = useWallet();

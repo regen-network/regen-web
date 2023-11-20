@@ -25,7 +25,7 @@ interface Response {
 }
 
 interface Props {
-  address?: string;
+  address?: string | null;
   creditClassId?: string;
   isPaginatedQuery?: boolean;
 }

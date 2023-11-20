@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-import { PartyType } from 'generated/graphql';
+import { AccountType } from 'generated/graphql';
 
 export const editProfileFormSchema = z.object({
-  profileType: z.custom<PartyType>(),
+  profileType: z.custom<AccountType>(),
   name: z.string(),
   profileImage: z.string(),
   backgroundImage: z.string(),

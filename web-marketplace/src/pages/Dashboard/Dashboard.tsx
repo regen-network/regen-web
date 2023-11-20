@@ -10,12 +10,12 @@ import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 import { containerStyles } from 'web-components/lib/styles/container';
 import { truncate } from 'web-components/lib/utils/truncate';
 
+import { useAuth } from 'lib/auth/auth';
 import { getAccountUrl } from 'lib/block-explorer';
 import { isBridgeEnabled } from 'lib/ledger';
 import { getProfileLink } from 'lib/profileLink';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { usePartyInfos } from 'pages/ProfileEdit/hooks/usePartyInfos';
 import {
   DEFAULT_NAME,
   profileVariantMapping,
@@ -36,33 +36,34 @@ import { useProfileItems } from './hooks/useProfileItems';
 
 const Dashboard = (): JSX.Element => {
   const {
-    showProjects,
     showCreditClasses,
     isCreditClassCreator,
     isProjectAdmin,
     isIssuer,
+    showProjects,
   } = useProfileItems({});
-  const { wallet, accountId, partyByAddr } = useWallet();
+  const { activeAccount } = useAuth();
+  const { wallet, isConnected, accountByAddr } = useWallet();
   const location = useLocation();
-  const { party } = usePartyInfos({ partyByAddr });
-  const { avatarImage, backgroundImage } = getUserImages({ party });
+
+  const account = activeAccount ?? accountByAddr;
+
+  const { avatarImage, backgroundImage } = getUserImages({
+    account,
+  });
   const { creditClasses } = useFetchCreditClassesWithOrder({
     admin: wallet?.address,
   });
 
   const socialsLinks: SocialLink[] = useMemo(
-    () =>
-      getSocialsLinks({ party: partyByAddr?.walletByAddr?.partyByWalletId }),
-    [partyByAddr],
+    () => getSocialsLinks({ account }),
+    [account],
   );
 
   const tabs: IconTabProps[] = useMemo(
     () => [
-      PORTFOLIO,
-      {
-        hidden: !showProjects,
-        ...PROJECTS,
-      },
+      { hidden: !isConnected, ...PORTFOLIO },
+      { hidden: !showProjects, ...PROJECTS },
       {
         hidden: !showCreditClasses || creditClasses.length === 0,
         ...CREDIT_CLASSES,
@@ -72,11 +73,17 @@ const Dashboard = (): JSX.Element => {
         ...CREDIT_BATCHES,
       },
       {
-        hidden: !isBridgeEnabled,
+        hidden: !isBridgeEnabled || !isConnected,
         ...BRIDGE,
       },
     ],
-    [isIssuer, showCreditClasses, showProjects, creditClasses.length],
+    [
+      isConnected,
+      showProjects,
+      showCreditClasses,
+      creditClasses.length,
+      isIssuer,
+    ],
   );
 
   const activeTab = Math.max(
@@ -86,25 +93,27 @@ const Dashboard = (): JSX.Element => {
     0,
   );
 
-  const profileLink = getProfileLink(wallet?.address || party?.id);
+  const profileLink = getProfileLink(wallet?.address || activeAccount?.id);
 
   return (
     <>
       <ProfileHeader
-        name={party?.name ? party.name : DEFAULT_NAME}
+        name={account?.name ? account.name : DEFAULT_NAME}
         backgroundImage={backgroundImage}
         avatar={avatarImage}
         infos={{
           addressLink: {
             href: getAccountUrl(wallet?.address, true),
-            text: truncate(wallet?.address),
+            text: wallet?.address ? truncate(wallet?.address) : '',
           },
-          description: party?.description?.trimEnd() ?? '',
+          description: account?.description?.trimEnd() ?? '',
           socialsLinks,
         }}
-        editLink={accountId ? '/profile/edit' : ''}
+        editLink={activeAccount?.id ? '/profile/edit/profile' : ''}
         profileLink={profileLink}
-        variant={party?.type ? profileVariantMapping[party.type] : 'individual'}
+        variant={
+          account?.type ? profileVariantMapping[account.type] : 'individual'
+        }
         LinkComponent={Link}
       />
       <Box sx={{ bgcolor: 'grey.50' }}>

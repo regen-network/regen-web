@@ -14,10 +14,10 @@ import { DEFAULT_PROJECT } from './ProjectsTab.constants';
 const ProjectsTab = (): JSX.Element => {
   const location = useLocation();
   const { track } = useTracker();
-  const { address, party } = useProfileData();
+  const { address, account } = useProfileData();
 
   const { adminProjects, isLoadingAdminProjects } = useFetchProjectByAdmin({
-    adminAccountId: party?.accountId,
+    adminAccountId: account?.id,
     adminAddress: address,
     keepUnapproved: false,
   });

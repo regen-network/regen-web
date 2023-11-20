@@ -9,7 +9,7 @@ import { headerFontFamily } from 'web-components/lib/theme/muiTheme';
 import { Link } from 'components/atoms';
 
 type Props = {
-  address?: string;
+  address?: string | null;
   projectId?: string;
   isEdit?: boolean;
 };

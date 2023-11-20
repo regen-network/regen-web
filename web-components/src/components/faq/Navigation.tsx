@@ -100,7 +100,7 @@ const Navigation = ({
   const theme = useTheme();
 
   return (
-    <StyledList className={cx(className, classes?.root)}>
+    <StyledList className={cx(classes?.root, className)}>
       {categories.map((name, i) => {
         const selected = !!category && category === name;
         return (

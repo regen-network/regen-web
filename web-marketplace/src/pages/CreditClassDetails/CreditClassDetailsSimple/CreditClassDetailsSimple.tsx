@@ -11,7 +11,7 @@ import { ImpactTags } from 'web-components/lib/components/organisms/ImpactTags/I
 import ReadMore from 'web-components/lib/components/read-more';
 import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
 import { Label, Title } from 'web-components/lib/components/typography';
-import { Party } from 'web-components/lib/components/user/UserInfo';
+import { Account } from 'web-components/lib/components/user/UserInfo';
 
 import { CreditClassByOnChainIdQuery } from 'generated/graphql';
 import { CreditClass } from 'generated/sanity-graphql';
@@ -42,9 +42,9 @@ interface CreditDetailsProps {
   dbClass?: CreditClassByOnChainIdQuery['creditClassByOnChainId'];
   onChainClass: ClassInfo;
   content?: CreditClass;
-  program?: Party;
-  admin?: Party;
-  issuers?: Party[];
+  program?: Account;
+  admin?: Account;
+  issuers?: Account[];
   metadata?: CreditClassMetadataLD;
   impactCards: ProjectImpactCardProps[];
 }

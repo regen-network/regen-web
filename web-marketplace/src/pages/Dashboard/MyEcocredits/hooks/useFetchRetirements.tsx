@@ -7,7 +7,7 @@ import {
 import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
-import { Party } from 'web-components/lib/components/user/UserInfo';
+import { Account } from 'web-components/lib/components/user/UserInfo';
 import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/Table.constants';
 
 import { RetirementsOrderBy } from 'generated/indexer-graphql';
@@ -15,18 +15,18 @@ import { useLedger } from 'ledger';
 import { normalizeRetirement } from 'lib/normalizers/retirements/normalizeRetirement';
 import { getClassIssuersQuery } from 'lib/queries/react-query/ecocredit/getClassIssuersQuery/getClassIssuersQuery';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-import { getPartyByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery';
+import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 import { getAllRetirementsByOwnerQuery } from 'lib/queries/react-query/registry-server/graphql/indexer/getAllRetirementsByOwner/getAllRetirementsByOwner';
 import { getAllRetirementsByOwnerQueryKey } from 'lib/queries/react-query/registry-server/graphql/indexer/getAllRetirementsByOwner/getAllRetirementsByOwner.constants';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { getDisplayPartyOrAddress } from 'components/organisms/DetailsSection/DetailsSection.utils';
+import { getDisplayAccountOrAddress } from 'components/organisms/DetailsSection/DetailsSection.utils';
 import { useProjectsWithMetadata } from 'hooks/projects/useProjectsWithMetadata';
 
 import { getDataFromBatchDenomId } from '../MyEcocredits.utils';
 
 type Props = {
-  address?: string;
+  address?: string | null;
 };
 
 export const useFetchRetirements = ({ address }: Props) => {
@@ -86,11 +86,11 @@ export const useFetchRetirements = ({ address }: Props) => {
     classIssuers => classIssuers.data,
   );
 
-  // #2 retrieve the party for the first issuer of each class
+  // #2 retrieve the account for the first issuer of each class
   const creditClassesIssuerResults = useQueries({
     queries:
       classesIssuers?.map(classIssuers =>
-        getPartyByAddrQuery({
+        getAccountByAddrQuery({
           client: apolloClient,
           addr: classIssuers?.issuers[0] ?? '',
           enabled: !!apolloClient && !!csrfData,
@@ -101,13 +101,16 @@ export const useFetchRetirements = ({ address }: Props) => {
     creditClassIssuer => creditClassIssuer.data,
   );
 
-  // #3 format the party data of the first issuer of each class
+  // #3 format the account data of the first issuer of each class
   const creditClassesIssuer = creditClassesIssuerData
     .map((issuer, index) => {
-      const party = issuer?.walletByAddr?.partyByWalletId;
-      return getDisplayPartyOrAddress(classesIssuers[index]?.issuers[0], party);
+      const account = issuer?.accountByAddr;
+      return getDisplayAccountOrAddress(
+        classesIssuers[index]?.issuers[0],
+        account,
+      );
     })
-    .filter((party: Party | undefined): party is Party => !!party);
+    .filter((account: Account | undefined): account is Account => !!account);
 
   // Normalize retirements
   const normalizedRetirements = allRetirements?.nodes.map((retirement, index) =>

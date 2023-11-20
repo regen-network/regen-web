@@ -1,6 +1,7 @@
 fragment projectFields on Project {
   id
-  walletByAdminWalletId {
+  adminAccountId
+  accountByAdminAccountId {
     addr
   }
   onChainId
@@ -10,8 +11,8 @@ fragment projectFields on Project {
   slug
   creditClassByCreditClassId {
     onChainId
-    partyByRegistryId {
-      ...partyFields
+    accountByRegistryId {
+      ...accountFields
     }
     creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
       nodes {
@@ -20,11 +21,11 @@ fragment projectFields on Project {
       }
     }
   }
-  partyByDeveloperId {
-    ...partyFields
+  accountByDeveloperId {
+    ...accountFields
   }
-  partyByVerifierId {
-    ...partyFields
+  accountByVerifierId {
+    ...accountFields
   }
   documentsByProjectId {
     nodes {

@@ -1,12 +1,12 @@
-import { Party } from 'web-components/lib/components/user/UserInfo';
+import { Account } from 'web-components/lib/components/user/UserInfo';
 
 import { Stakeholders } from 'components/organisms/Stakeholders/Stakeholders';
 
 type Props = {
-  admin?: Party;
-  projectDeveloper?: Party;
-  projectVerifier?: Party;
-  program?: Party;
+  admin?: Account;
+  projectDeveloper?: Account;
+  projectVerifier?: Account;
+  program?: Account;
 };
 
 export const ProjectDetailsStakeholders: React.FC<Props> = ({
@@ -17,7 +17,7 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
 }) => {
   const stakeholders = [
     {
-      parties: program,
+      accounts: program,
       title: 'program',
       tooltip: (
         <>
@@ -28,7 +28,7 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
       ),
     },
     {
-      parties: admin,
+      accounts: admin,
       title: 'admin',
       tooltip: (
         <>
@@ -38,7 +38,7 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
       ),
     },
     {
-      parties: projectDeveloper,
+      accounts: projectDeveloper,
       title: 'project developer',
       tooltip: (
         <>
@@ -49,7 +49,7 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
       ),
     },
     {
-      parties: projectVerifier,
+      accounts: projectVerifier,
       title: 'verifier',
       tooltip: (
         <>

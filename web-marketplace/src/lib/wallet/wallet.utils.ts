@@ -7,7 +7,7 @@ import { LoginEvent, Track } from 'lib/tracker/types';
 import { chainInfo } from './chainInfo/chainInfo';
 import { LoginType, Wallet } from './wallet';
 import {
-  KEPLR_ADD_ADDR_DESCRIPTION,
+  KEPLR_CONNECT_WALLET_DESCRIPTION,
   KEPLR_LOGIN_DESCRIPTION,
   KEPLR_LOGIN_TITLE,
 } from './wallet.constants';
@@ -93,16 +93,19 @@ export const finalizeConnection = async ({
 
 type GetArbitraryDataParams = {
   nonce: string;
-  addAddr?: boolean;
+  /** connectWallet is set to true when connecting a wallet address to an existing web2 account */
+  connectWallet?: boolean;
 };
 
 export const getArbitraryData = ({
   nonce,
-  addAddr = false,
+  connectWallet = false,
 }: GetArbitraryDataParams) =>
   JSON.stringify({
     title: KEPLR_LOGIN_TITLE,
-    description: addAddr ? KEPLR_ADD_ADDR_DESCRIPTION : KEPLR_LOGIN_DESCRIPTION,
+    description: connectWallet
+      ? KEPLR_CONNECT_WALLET_DESCRIPTION
+      : KEPLR_LOGIN_DESCRIPTION,
     nonce,
   });
 
@@ -118,7 +121,7 @@ export const getNonce = async ({
   token,
 }: GetNonceParams): Promise<string> => {
   const nonceRes = await fetch(
-    `${apiUri}/marketplace/v1/web3auth/nonce?` +
+    `${apiUri}/marketplace/v1/wallet-auth/nonce?` +
       new URLSearchParams({
         userAddress: userAddress,
       }),

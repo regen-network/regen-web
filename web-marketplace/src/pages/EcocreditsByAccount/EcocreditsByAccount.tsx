@@ -41,9 +41,9 @@ export const EcocreditsByAccount = (): JSX.Element => {
   const { wallet } = useWallet();
   const location = useLocation();
 
-  const { address, party, isLoading } = useProfileData();
-  const { avatarImage, backgroundImage } = getUserImages({ party });
-  const isProfileNotFound = !address && !party;
+  const { address, account, isLoading } = useProfileData();
+  const { avatarImage, backgroundImage } = getUserImages({ account });
+  const isProfileNotFound = !address && !account;
   const profileLink = accountAddressOrId
     ? getProfileLink(accountAddressOrId)
     : '';
@@ -54,9 +54,10 @@ export const EcocreditsByAccount = (): JSX.Element => {
 
   const { isIssuer, isProjectAdmin, showCreditClasses } = useProfileItems({
     address,
+    accountId: account?.id,
   });
 
-  const socialsLinks = useMemo(() => getSocialsLinks({ party }), [party]);
+  const socialsLinks = useMemo(() => getSocialsLinks({ account }), [account]);
 
   const tabs: IconTabProps[] = useMemo(
     () => [
@@ -121,7 +122,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
         {!isProfileNotFound && (
           <>
             <ProfileHeader
-              name={party?.name ? party?.name : DEFAULT_NAME}
+              name={account?.name ? account?.name : DEFAULT_NAME}
               backgroundImage={backgroundImage}
               avatar={avatarImage}
               infos={{
@@ -131,13 +132,15 @@ export const EcocreditsByAccount = (): JSX.Element => {
                     : `/profiles/${accountAddressOrId}/portfolio`,
                   text: address ? truncate(accountAddressOrId) : '',
                 },
-                description: party?.description?.trimEnd() ?? '',
+                description: account?.description?.trimEnd() ?? '',
                 socialsLinks,
               }}
               editLink=""
               profileLink={profileLink}
               variant={
-                party?.type ? profileVariantMapping[party.type] : 'individual'
+                account?.type
+                  ? profileVariantMapping[account.type]
+                  : 'individual'
               }
               LinkComponent={Link}
             />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
+import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { NotFoundPage } from 'pages/NotFound/NotFound';
@@ -9,7 +10,7 @@ import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';
 import { ProjectDenied } from '../../organisms/ProjectDenied/ProjectDenied';
 
 type Props = {
-  adminAddr?: string;
+  adminAddr?: string | null;
   loading: boolean;
   offChainProject?: OffChainProject;
   onChainProject?: ProjectInfo;
@@ -25,7 +26,11 @@ const ProjectFormAccessTemplate: React.FC<React.PropsWithChildren<Props>> = ({
   isEdit,
 }) => {
   const { wallet } = useWallet();
-  const isAdmin = adminAddr && adminAddr === wallet?.address;
+  const { activeAccountId } = useAuth();
+  const isAdmin =
+    (adminAddr && adminAddr === wallet?.address) ||
+    (offChainProject?.adminAccountId &&
+      offChainProject?.adminAccountId === activeAccountId);
   const hasProject = !!onChainProject || !!offChainProject;
 
   return (

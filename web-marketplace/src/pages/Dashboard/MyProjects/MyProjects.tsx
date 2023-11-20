@@ -9,6 +9,7 @@ import { CreateProjectCard } from 'web-components/lib/components/cards/CreateCar
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 
 import { useCreateProjectMutation } from 'generated/graphql';
+import { useAuth } from 'lib/auth/auth';
 import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -17,8 +18,7 @@ import WithLoader from 'components/atoms/WithLoader';
 
 import { useDashboardContext } from '../Dashboard.context';
 import { useFetchProjectByAdmin } from './hooks/useFetchProjectsByAdmin';
-import { DEFAULT_PROJECT } from './MyProjects.constants';
-import { submitCreateProject } from './MyProjects.utils';
+import { getDefaultProject, submitCreateProject } from './MyProjects.utils';
 
 const MyProjects = (): JSX.Element => {
   const [error, setError] = useState<string | null>(null);
@@ -29,20 +29,20 @@ const MyProjects = (): JSX.Element => {
   const reactQueryClient = useQueryClient();
   const { track } = useTracker();
   const [projectsCurrentStep] = useAtom(projectsCurrentStepAtom);
-  const { wallet, accountId } = useWallet();
+  const { wallet } = useWallet();
+  const { activeAccountId } = useAuth();
 
-  const { adminProjects, walletData, isLoadingAdminProjects } =
-    useFetchProjectByAdmin({
-      adminAccountId: accountId,
-      adminAddress: wallet?.address,
-    });
+  const { adminProjects, isLoadingAdminProjects } = useFetchProjectByAdmin({
+    adminAccountId: activeAccountId,
+    adminAddress: wallet?.address,
+  });
 
   const isFirstProject = !adminProjects || adminProjects?.length < 1;
 
   return (
     <>
       <Grid container spacing={8}>
-        {isIssuer && (
+        {activeAccountId && (
           <Grid item xs={12} md={6} lg={4}>
             <CreateProjectCard
               isFirstProject={isFirstProject}
@@ -51,14 +51,16 @@ const MyProjects = (): JSX.Element => {
                   createProject,
                   setError,
                   navigate,
-                  walletData,
+                  activeAccountId,
                   reactQueryClient,
+                  isIssuer,
                 })
               }
               sx={{ height: { xs: '100%' } }}
             />
           </Grid>
         )}
+
         {isProjectAdmin &&
           adminProjects?.map((project, i) => {
             return (
@@ -68,7 +70,7 @@ const MyProjects = (): JSX.Element => {
                   variant="skeleton"
                 >
                   <ProjectCard
-                    {...DEFAULT_PROJECT}
+                    {...getDefaultProject(!activeAccountId)}
                     {...project}
                     onButtonClick={() => {
                       if (

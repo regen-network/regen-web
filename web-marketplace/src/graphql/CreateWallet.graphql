@@ -1,8 +1,0 @@
-mutation CreateWallet($input: CreateWalletInput!){
-  createWallet(input: $input) {
-    wallet {
-      id
-      addr
-    }
-  }
-}

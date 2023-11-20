@@ -1,0 +1,12 @@
+query AccountByAddr($addr: String!) {
+  accountByAddr(addr: $addr) {
+    id
+    name
+    type
+    image
+    bgImage
+    description
+    websiteLink
+    twitterLink
+  }
+}

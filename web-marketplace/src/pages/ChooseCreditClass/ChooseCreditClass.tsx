@@ -36,7 +36,7 @@ const ChooseCreditClass: React.FC<React.PropsWithChildren<unknown>> = () => {
   );
 
   const project = data?.data?.projectById;
-  const adminAddr = project?.walletByAdminWalletId?.addr;
+  const adminAddr = project?.accountByAdminAccountId?.addr;
   const creditClassLength = creditClassItems?.length;
 
   async function handleSelection(

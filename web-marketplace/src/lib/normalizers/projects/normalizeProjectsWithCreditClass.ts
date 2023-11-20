@@ -3,7 +3,7 @@ import { getClassImageWithProjectDefault } from 'utils/image/classImage';
 
 import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCard';
 
-import { Maybe, PartyFieldsFragment } from 'generated/graphql';
+import { AccountFieldsFragment, Maybe } from 'generated/graphql';
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import {
   AnchoredProjectMetadataBaseLD,
@@ -13,7 +13,7 @@ import {
 
 import {
   findSanityCreditClass,
-  getDisplayParty,
+  getDisplayAccount,
 } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { normalizeClassProjectForBatch } from '../classProjectForBatch/normalizeClassProjectForBatch';
@@ -23,7 +23,7 @@ interface Params {
   projects?: ProjectInfo[] | null;
   projectsMetadata?: (AnchoredProjectMetadataBaseLD | undefined)[];
   projectPagesMetadata?: ProjectPageMetadataLD[];
-  programParties?: Maybe<PartyFieldsFragment | undefined>[];
+  programParties?: Maybe<AccountFieldsFragment | undefined>[];
   classesMetadata?: (CreditClassMetadataLD | undefined)[];
   sanityCreditClassData?: AllCreditClassQuery;
 }
@@ -40,7 +40,7 @@ export const normalizeProjectsWithCreditClass = ({
     const projectMetadata = projectsMetadata?.[index];
     const creditClassMetadata = classesMetadata?.[index];
     const projectPageMetadata = projectPagesMetadata?.[index];
-    const projectParty = programParties?.[index];
+    const projectAccount = programParties?.[index];
     const hasAllClassInfos =
       (projectMetadata !== undefined && !!sanityCreditClassData) ||
       creditClassMetadata !== undefined;
@@ -63,9 +63,9 @@ export const normalizeProjectsWithCreditClass = ({
       metadata: creditClassMetadata,
       sanityClass: creditClass,
     });
-    const program = getDisplayParty(
+    const program = getDisplayAccount(
       creditClassMetadata?.['regen:sourceRegistry'],
-      projectParty,
+      projectAccount,
     );
 
     return {

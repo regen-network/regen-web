@@ -4,17 +4,16 @@ import { postData } from 'utils/fetch/postData';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { apiUri } from 'lib/apiUri';
+import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-import { getPartyByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getPartyByAddrQuery/getPartyByAddrQuery.utils';
 import { LoginParams, SignArbitraryType } from 'lib/wallet/wallet';
 
 type Params = {
   signArbitrary?: SignArbitraryType;
   setError: UseStateSetter<unknown>;
-  setAccountId: UseStateSetter<string | undefined>;
 };
 
-export const useLogin = ({ signArbitrary, setError, setAccountId }: Params) => {
+export const useLogin = ({ signArbitrary, setError }: Params) => {
   const reactQueryClient = useQueryClient();
 
   // Step 1: Retrieve and save the CSRF tokens
@@ -26,7 +25,7 @@ export const useLogin = ({ signArbitrary, setError, setAccountId }: Params) => {
         if (wallet?.address && signArbitrary && token) {
           // Step 2: Retrieve a nonce for the user
           const nonceRes = await fetch(
-            `${apiUri}/marketplace/v1/web3auth/nonce?` +
+            `${apiUri}/marketplace/v1/wallet-auth/nonce?` +
               new URLSearchParams({
                 userAddress: wallet.address,
               }),
@@ -49,17 +48,14 @@ export const useLogin = ({ signArbitrary, setError, setAccountId }: Params) => {
 
           // Step 4: Submit the signature to the login endpoint
           const { user } = await postData({
-            url: `${apiUri}/marketplace/v1/web3auth/login`,
+            url: `${apiUri}/marketplace/v1/wallet-auth/login`,
             data: { signature },
             token,
           });
-          const accountId = user?.id;
+          const accountId = user?.accountId;
           if (accountId) {
-            setAccountId(accountId);
-            reactQueryClient.invalidateQueries({
-              queryKey: getPartyByAddrQueryKey({
-                addr: wallet.address,
-              }),
+            await reactQueryClient.invalidateQueries({
+              queryKey: [GET_ACCOUNTS_QUERY_KEY],
             });
           }
         }
@@ -67,7 +63,7 @@ export const useLogin = ({ signArbitrary, setError, setAccountId }: Params) => {
         setError(e);
       }
     },
-    [signArbitrary, token, setAccountId, reactQueryClient, setError],
+    [signArbitrary, token, reactQueryClient, setError],
   );
 
   return login;

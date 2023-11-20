@@ -2,7 +2,7 @@ import { RadioCardItem } from 'web-components/lib/components/atoms/RadioCard/Rad
 import OrganizationIcon from 'web-components/lib/components/icons/OrganizationIcon';
 import UserIcon from 'web-components/lib/components/icons/UserIcon';
 
-import { PartyType } from 'generated/graphql';
+import { AccountType } from 'generated/graphql';
 
 import {
   DEFAULT_NAME,
@@ -27,13 +27,13 @@ export const radioCardItems: RadioCardItem[] = [
   {
     id: 'individual',
     label: 'Individual',
-    value: PartyType.User,
+    value: AccountType.User,
     icon: <UserIcon />,
   },
   {
     id: 'organization',
     label: 'Organization',
-    value: PartyType.Organization,
+    value: AccountType.Organization,
     icon: <OrganizationIcon />,
   },
 ];

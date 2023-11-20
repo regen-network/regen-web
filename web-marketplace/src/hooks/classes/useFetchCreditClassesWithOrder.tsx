@@ -11,13 +11,15 @@ import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMet
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
 type Props = {
-  admin?: string;
+  admin?: string | null;
   userAddress?: string;
+  fetchAll?: boolean;
 };
 
 export const useFetchCreditClassesWithOrder = ({
   admin,
   userAddress,
+  fetchAll = false,
 }: Props) => {
   const { ecocreditClient, dataClient, marketplaceClient } = useLedger();
   const reactQueryClient = useQueryClient();
@@ -25,7 +27,7 @@ export const useFetchCreditClassesWithOrder = ({
     useQuery(
       getClassesQuery({
         client: ecocreditClient,
-        enabled: !!ecocreditClient && !admin,
+        enabled: !!ecocreditClient && !admin && fetchAll,
       }),
     );
   const allCreditClasses = creditClassesData?.classes;
@@ -37,7 +39,7 @@ export const useFetchCreditClassesWithOrder = ({
     getClassesByAdminQuery({
       client: ecocreditClient,
       enabled: !!ecocreditClient && !!admin,
-      request: { admin },
+      request: { admin: admin as string },
     }),
   );
   const creditClassesByAdmin = creditClassesByAdminData?.classes;

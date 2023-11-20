@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Box from '@mui/material/Box';
 import ReactHtmlParser from 'html-react-parser';
 
@@ -15,6 +15,7 @@ export type HeaderDropdownItemProps = {
     React.PropsWithChildren<React.SVGProps<SVGSVGElement>>
   >;
   icon?: JSX.Element;
+  children?: ReactNode;
   right?: () => JSX.Element;
 };
 
@@ -23,6 +24,7 @@ export const HeaderDropdownItem: React.FC<
 > = ({
   svg: SVG,
   icon,
+  children,
   importCallback,
   linkComponent: LinkComponent,
   ...props
@@ -44,9 +46,12 @@ export const HeaderDropdownItem: React.FC<
         </Box>
       )}
       {icon && <Box mr={3}>{icon}</Box>}
-      <LinkComponent pathname={props.pathname} href={props.href}>
-        {ReactHtmlParser(props.label)}
-      </LinkComponent>
+      {props.pathname && (
+        <LinkComponent pathname={props.pathname} href={props.href}>
+          {ReactHtmlParser(props.label)}
+        </LinkComponent>
+      )}
+      {children && children}
       {props.right && <Box ml={3}>{props.right()}</Box>}
     </Box>
   );

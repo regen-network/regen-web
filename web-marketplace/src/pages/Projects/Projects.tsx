@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Box, SelectChangeEvent, useMediaQuery, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 import { spacing } from 'styles/spacing';
 
 import { Flex } from 'web-components/lib/components/box';
@@ -18,6 +19,12 @@ import {
   useAllProjectsPageQuery,
   useAllSoldOutProjectsQuery,
 } from 'generated/sanity-graphql';
+import {
+  creditClassSelectedFiltersAtom,
+  projectsSortAtom,
+  useCommunityProjectsAtom,
+  useOffChainProjectsAtom,
+} from 'lib/atoms/projects.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { useTracker } from 'lib/tracker/useTracker';
@@ -51,14 +58,14 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { track } = useTracker();
   const location = useLocation();
-  const [useCommunityProjects, setUseCommunityProjects] = useState<
-    boolean | undefined
-  >(undefined);
-  const [useOffChainProjects, setUseOffChainProjects] = useState<
-    boolean | undefined
-  >(undefined);
-  const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useState(
-    {},
+  const [useCommunityProjects, setUseCommunityProjects] = useAtom(
+    useCommunityProjectsAtom,
+  );
+  const [useOffChainProjects, setUseOffChainProjects] = useAtom(
+    useOffChainProjectsAtom,
+  );
+  const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useAtom(
+    creditClassSelectedFiltersAtom,
   );
 
   // Page index starts at 1 for route
@@ -97,11 +104,11 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
     sanitySoldOutProjects,
   });
 
-  const [sort, setSort] = useState<string>(sortOptions[0].value);
+  const [sort, setSort] = useAtom(projectsSortAtom);
   const [selectedProject, setSelectedProject] =
     useState<ProjectWithOrderData | null>(null);
 
-  const { projects, projectsCount, pagesCount, loading, hasCommunityProjects } =
+  const { projects, projectsCount, pagesCount, hasCommunityProjects } =
     useProjects({
       sort,
       offset: page * PROJECTS_PER_PAGE,
@@ -126,11 +133,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
     setUseOffChainProjects(undefined);
   };
 
-  if (
-    loading ||
-    isSanityCreditClassesLoading ||
-    isCreditClassesWithMetadataLoading
-  )
+  if (isSanityCreditClassesLoading || isCreditClassesWithMetadataLoading)
     return <Loading />;
 
   return (
@@ -180,15 +183,9 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
                 </Body>
               </Flex>
               <ProjectsSideFilter
-                creditClassSelectedFilters={creditClassSelectedFilters}
                 creditClassFilters={creditClassFilters}
                 hasCommunityProjects={hasCommunityProjects}
-                useCommunityProjects={useCommunityProjects}
-                useOffChainProjects={useOffChainProjects}
                 showFiltersReset={showFiltersReset}
-                setCreditClassFilter={setCreditClassSelectedFilters}
-                setUseCommunityProjects={setUseCommunityProjects}
-                setUseOffChainProjects={setUseOffChainProjects}
                 resetFilter={resetFilter}
                 sx={{
                   mt: { xs: 6.25, lg: 0 },
@@ -217,6 +214,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
                   Sort by:
                 </Body>
                 <SelectTextFieldBase
+                  defaultValue={sort}
                   options={sortOptions}
                   defaultStyle={false}
                   onChange={handleSort}

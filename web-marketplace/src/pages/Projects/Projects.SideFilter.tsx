@@ -7,6 +7,7 @@ import {
   SxProps,
   Theme,
 } from '@mui/material';
+import { useAtom } from 'jotai';
 import { sxToArray } from 'utils/mui/sxToArray';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -15,7 +16,10 @@ import Checkbox from 'web-components/lib/components/inputs/new/CheckBox/Checkbox
 import { CollapseList } from 'web-components/lib/components/organisms/CollapseList/CollapseList';
 import { Subtitle } from 'web-components/lib/components/typography';
 
-import { UseStateSetter } from 'types/react/use-state';
+import {
+  creditClassSelectedFiltersAtom,
+  useCommunityProjectsAtom,
+} from 'lib/atoms/projects.atoms';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { CommunityFilter } from './Projects.CommunityFilter';
@@ -34,32 +38,25 @@ import { getFilterSelected } from './Projects.utils';
 
 type Props = {
   creditClassFilters?: CreditClassFilter[];
-  creditClassSelectedFilters: Record<string, boolean>;
   hasCommunityProjects: boolean;
-  useCommunityProjects?: boolean;
   useOffChainProjects?: boolean;
   showFiltersReset: boolean;
-  setCreditClassFilter: UseStateSetter<Record<string, boolean>>;
-  setUseCommunityProjects: UseStateSetter<boolean | undefined>;
-  setUseOffChainProjects: UseStateSetter<boolean | undefined>;
   resetFilter: () => void;
   sx?: SxProps<Theme>;
 };
 
 export const ProjectsSideFilter = ({
   creditClassFilters = [],
-  creditClassSelectedFilters,
   hasCommunityProjects,
-  useCommunityProjects,
-  useOffChainProjects,
   showFiltersReset,
-  setCreditClassFilter,
-  setUseCommunityProjects,
-  setUseOffChainProjects,
   resetFilter,
   sx = [],
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useAtom(
+    creditClassSelectedFiltersAtom,
+  );
+  const [useCommunityProjects] = useAtom(useCommunityProjectsAtom);
   const filteredCreditClassFilters = creditClassFilters.filter(
     ({ isCommunity }) =>
       useCommunityProjects || (!useCommunityProjects && !isCommunity),
@@ -126,7 +123,7 @@ export const ProjectsSideFilter = ({
                               creditClassSelectedFilters?.[path] ?? false
                             }
                             onChange={event => {
-                              setCreditClassFilter({
+                              setCreditClassSelectedFilters({
                                 ...creditClassSelectedFilters,
                                 [path]: event.target.checked,
                               });
@@ -170,8 +167,6 @@ export const ProjectsSideFilter = ({
                 </Subtitle>
 
                 <CommunityFilter
-                  useCommunityProjects={useCommunityProjects}
-                  setUseCommunityProjects={setUseCommunityProjects}
                   sx={{
                     mr: { xs: 0, lg: 7.5 },
                     width: { xs: '100%', lg: 'auto' },
@@ -189,8 +184,6 @@ export const ProjectsSideFilter = ({
               </Subtitle>
 
               <OffChainFilter
-                useOffChainProjects={useOffChainProjects}
-                setUseOffChainProjects={setUseOffChainProjects}
                 sx={{
                   mr: { xs: 0, lg: 7.5 },
                   width: { xs: '100%', lg: 'auto' },

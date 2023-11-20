@@ -1,4 +1,5 @@
 import { useAuth } from 'lib/auth/auth';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
 import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator';
@@ -13,13 +14,15 @@ type Props = {
 
 export const useProfileItems = ({ address, accountId }: Props) => {
   const { activeAccountId } = useAuth();
+  const { wallet } = useWallet();
+  const walletAddress = wallet?.address;
+  const activeAddress = address ?? walletAddress;
   const { isIssuer } = useQueryIsIssuer({ address });
   const isCreditClassCreator = useQueryIfCreditClassCreator({ address });
   const { isProjectAdmin } = useQueryIsProjectAdmin({ address, accountId });
   const isCreditClassAdmin = useQueryIsClassAdmin({ address });
-
   const { creditClasses } = useFetchCreditClassesWithOrder({
-    admin: address,
+    admin: activeAddress,
   });
 
   const activeAccountProfile = !!activeAccountId && !accountId && !address;

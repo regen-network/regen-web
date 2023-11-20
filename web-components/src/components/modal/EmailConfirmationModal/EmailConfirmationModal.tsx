@@ -1,13 +1,12 @@
 import { ReactNode, useRef } from 'react';
 import { Box, Link } from '@mui/material';
 
-import ContainedButton from 'src/components/buttons/ContainedButton';
-import { TextButton } from 'src/components/buttons/TextButton';
-import { ConfirmationCode } from 'src/components/inputs/new/ConfirmationCode/ConfirmationCode';
-import { ConfirmationCodeRef } from 'src/components/inputs/new/ConfirmationCode/ConfirmationCode.types';
-import { ButtonType } from 'src/types/shared/buttonType';
-import { LinkType } from 'src/types/shared/linkType';
-
+import ContainedButton from '../../../components/buttons/ContainedButton';
+import { TextButton } from '../../../components/buttons/TextButton';
+import { ConfirmationCode } from '../../../components/inputs/new/ConfirmationCode/ConfirmationCode';
+import { ConfirmationCodeRef } from '../../../components/inputs/new/ConfirmationCode/ConfirmationCode.types';
+import { ButtonType } from '../../../types/shared/buttonType';
+import { LinkType } from '../../../types/shared/linkType';
 import { Body, Title } from '../../typography';
 import Modal, { RegenModalProps } from '..';
 import {

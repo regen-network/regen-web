@@ -30,7 +30,7 @@ export const useProfileItems = ({ address, accountId }: Props) => {
 
   return {
     showProjects,
-    showCreditClasses: showCreditClasses,
+    showCreditClasses,
     isCreditClassCreator: false && isCreditClassCreator,
     isProjectAdmin: isProjectAdmin,
     isIssuer: isIssuer,

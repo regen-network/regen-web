@@ -34,16 +34,17 @@ import { getSocialsLinks, getUserImages } from './Dashboard.utils';
 import { useProfileItems } from './hooks/useProfileItems';
 
 const Dashboard = (): JSX.Element => {
+  const { wallet, accountByAddr, isConnected } = useWallet();
   const {
     showCreditClasses,
     isCreditClassCreator,
     isProjectAdmin,
     isIssuer,
     showProjects,
-  } = useProfileItems({});
-  const { activeAccount } = useAuth();
-  const { wallet, isConnected, accountByAddr } = useWallet();
+  } = useProfileItems({ address: wallet?.address });
   const location = useLocation();
+
+  const { activeAccount } = useAuth();
 
   const account = activeAccount ?? accountByAddr;
 
@@ -73,17 +74,7 @@ const Dashboard = (): JSX.Element => {
         ...BRIDGE,
       },
     ],
-<<<<<<< HEAD
-    [
-      isConnected,
-      showProjects,
-      showCreditClasses,
-      creditClasses.length,
-      isIssuer,
-    ],
-=======
-    [isIssuer, showCreditClasses, showProjects],
->>>>>>> f358ec360 (fix: hide credit class entry if no credit class)
+    [isConnected, isIssuer, showCreditClasses, showProjects],
   );
 
   const activeTab = Math.max(

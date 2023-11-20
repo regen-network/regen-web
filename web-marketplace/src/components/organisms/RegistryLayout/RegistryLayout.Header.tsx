@@ -48,7 +48,9 @@ const RegistryLayoutHeader: React.FC = () => {
   const isTransparent = useMemo(() => getIsTransparent(pathname), [pathname]);
   const borderBottom = useMemo(() => getBorderBottom(pathname), [pathname]);
 
-  const { showCreditClasses, showProjects, isIssuer } = useProfileItems({});
+  const { showProjects, showCreditClasses, isIssuer } = useProfileItems({
+    address: wallet?.address,
+  });
   const menuItems = useMemo(() => getMenuItems(pathname), [pathname]);
   const userMenuItems = useMemo(
     () =>

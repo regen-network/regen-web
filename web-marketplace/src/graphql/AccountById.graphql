@@ -10,7 +10,5 @@ query AccountById($id: UUID!) {
     twitterLink
     addr
     nonce
-    email
-    google
   }
 }

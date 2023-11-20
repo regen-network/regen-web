@@ -25,7 +25,7 @@ export const useLogin = ({ signArbitrary, setError }: Params) => {
         if (wallet?.address && signArbitrary && token) {
           // Step 2: Retrieve a nonce for the user
           const nonceRes = await fetch(
-            `${apiUri}/marketplace/v1/web3auth/nonce?` +
+            `${apiUri}/marketplace/v1/wallet-auth/nonce?` +
               new URLSearchParams({
                 userAddress: wallet.address,
               }),
@@ -48,7 +48,7 @@ export const useLogin = ({ signArbitrary, setError }: Params) => {
 
           // Step 4: Submit the signature to the login endpoint
           const { user } = await postData({
-            url: `${apiUri}/marketplace/v1/web3auth/login`,
+            url: `${apiUri}/marketplace/v1/wallet-auth/login`,
             data: { signature },
             token,
           });

@@ -2,9 +2,15 @@ import { QueryObserverOptions } from '@tanstack/react-query';
 
 import { ReactQueryBuilderResponse } from '../../types/react-query.types';
 
+export type PrivateAccount = {
+  id: string;
+  email: string | null;
+  google: string | null;
+};
+
 type Accounts = {
   activeAccountId: string;
-  authenticatedAccountIds: string[];
+  authenticatedAccounts?: Array<PrivateAccount>;
 };
 
 export type ReactQueryGetAccountsQueryResponse =

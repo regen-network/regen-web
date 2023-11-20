@@ -47,7 +47,7 @@ export const useConnectWalletToAccount = ({
 
         // Step 3: Submit the signature for keplr wallet connect endpoint
         await postData({
-          url: `${apiUri}/marketplace/v1/web3auth/connect-wallet`,
+          url: `${apiUri}/marketplace/v1/wallet-auth/connect-wallet`,
           data: { signature, accountId: activeAccountId },
           token,
         });

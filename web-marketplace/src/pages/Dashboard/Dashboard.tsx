@@ -21,7 +21,6 @@ import {
   profileVariantMapping,
 } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { Link } from 'components/atoms';
-import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
 
 import {
   BRIDGE,
@@ -35,6 +34,7 @@ import { getSocialsLinks, getUserImages } from './Dashboard.utils';
 import { useProfileItems } from './hooks/useProfileItems';
 
 const Dashboard = (): JSX.Element => {
+  const { wallet, accountByAddr, isConnected } = useWallet();
   const {
     showCreditClasses,
     isCreditClassCreator,
@@ -42,17 +42,14 @@ const Dashboard = (): JSX.Element => {
     isIssuer,
     showProjects,
   } = useProfileItems({});
-  const { activeAccount } = useAuth();
-  const { wallet, isConnected, accountByAddr } = useWallet();
   const location = useLocation();
+
+  const { activeAccount } = useAuth();
 
   const account = activeAccount ?? accountByAddr;
 
   const { avatarImage, backgroundImage } = getUserImages({
     account,
-  });
-  const { creditClasses } = useFetchCreditClassesWithOrder({
-    admin: wallet?.address,
   });
 
   const socialsLinks: SocialLink[] = useMemo(
@@ -65,7 +62,7 @@ const Dashboard = (): JSX.Element => {
       { hidden: !isConnected, ...PORTFOLIO },
       { hidden: !showProjects, ...PROJECTS },
       {
-        hidden: !showCreditClasses || creditClasses.length === 0,
+        hidden: !showCreditClasses,
         ...CREDIT_CLASSES,
       },
       {
@@ -77,13 +74,7 @@ const Dashboard = (): JSX.Element => {
         ...BRIDGE,
       },
     ],
-    [
-      isConnected,
-      showProjects,
-      showCreditClasses,
-      creditClasses.length,
-      isIssuer,
-    ],
+    [isConnected, isIssuer, showCreditClasses, showProjects],
   );
 
   const activeTab = Math.max(

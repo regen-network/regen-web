@@ -1,7 +1,6 @@
 import { Box, Link } from '@mui/material';
 
-import OutlinedButton from 'src/components/buttons/OutlinedButton';
-
+import OutlinedButton from '../../../components/buttons/OutlinedButton';
 import WalletErrorIcon from '../../../components/icons/WalletErrorIcon';
 import { ButtonType } from '../../../types/shared/buttonType';
 import { LinkType } from '../../../types/shared/linkType';

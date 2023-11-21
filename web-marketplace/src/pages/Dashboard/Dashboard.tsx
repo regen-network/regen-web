@@ -41,7 +41,7 @@ const Dashboard = (): JSX.Element => {
     isProjectAdmin,
     isIssuer,
     showProjects,
-  } = useProfileItems({ address: wallet?.address });
+  } = useProfileItems({});
   const location = useLocation();
 
   const { activeAccount } = useAuth();

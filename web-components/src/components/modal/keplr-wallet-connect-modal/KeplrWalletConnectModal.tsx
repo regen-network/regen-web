@@ -49,7 +49,9 @@ const KeplrWalletConnectModal = ({
         </Body>
         <Body sx={{ mt: 2 }}>
           {'Learn how to '}
-          <Link href={helpLink.href}>{helpLink.text}</Link>
+          <Link href={helpLink.href} target="_blank">
+            {helpLink.text}
+          </Link>
         </Body>
         <OutlinedButton
           onClick={onClick}

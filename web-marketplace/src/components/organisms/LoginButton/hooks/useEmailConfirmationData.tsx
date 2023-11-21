@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
-import { postData, PostParams } from 'utils/fetch/postData';
-import { capitalizeWord } from 'utils/string/capitalizeWord';
 
 import { apiUri } from 'lib/apiUri';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
+import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 
 import {
@@ -14,36 +13,16 @@ import {
   EMAIL_CONFIRMATION_SUCCES,
   RESEND_SUCCES,
 } from '../LoginButton.constants';
+import { getEmailModalError } from '../utils/getEmailModalError';
+import { onPostData } from './onLoginPostData';
 
 export const useEmailConfirmationData = () => {
+  const reactQueryClient = useQueryClient();
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
-  const [emailModalError, setEmailModalError] = useState('');
+  const [emailModalErrorCode, setEmailModalErrorCode] = useState('');
   const [email, setEmail] = useState('');
   const setBannerText = useSetAtom(bannerTextAtom);
   const { data: token } = useQuery(getCsrfTokenQuery({}));
-
-  const onPostData = async ({
-    data,
-    token,
-    url,
-    defaultError,
-  }: PostParams & { defaultError: string }) => {
-    try {
-      const response: { error?: string } = await postData({
-        url: url,
-        data,
-        token,
-      });
-      if (response.error) {
-        const errorMessage = capitalizeWord(
-          response.error.replace(/[._]/g, ' '),
-        );
-        setEmailModalError(errorMessage ?? defaultError);
-      }
-    } catch (e: unknown) {
-      setEmailModalError(defaultError);
-    }
-  };
 
   const onConfirmationModalClose = () => setIsConfirmationModalOpen(false);
   const onResendPasscode = async () => {
@@ -55,6 +34,7 @@ export const useEmailConfirmationData = () => {
         },
         token,
         defaultError: DEFAULT_RESEND_ERROR,
+        setEmailModalErrorCode,
       });
       setBannerText(RESEND_SUCCES);
     }
@@ -69,13 +49,22 @@ export const useEmailConfirmationData = () => {
         },
         token,
         defaultError: DEFAULT_VALIDATE_ERROR,
+        onSuccess: async () => {
+          await reactQueryClient.invalidateQueries([GET_ACCOUNTS_QUERY_KEY]);
+          setBannerText(EMAIL_CONFIRMATION_SUCCES);
+          onConfirmationModalClose();
+        },
+        setEmailModalErrorCode,
       });
-      setBannerText(EMAIL_CONFIRMATION_SUCCES);
-      onConfirmationModalClose();
     } else {
-      setEmailModalError('');
+      setEmailModalErrorCode('');
     }
   };
+
+  const emailModalError = getEmailModalError({
+    errorCode: emailModalErrorCode,
+    onResend: onResendPasscode,
+  });
 
   return {
     email,

@@ -1,29 +1,28 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { postData } from 'utils/fetch/postData';
 
-import { UseStateSetter } from 'types/react/use-state';
 import { apiUri } from 'lib/apiUri';
 import { useAuth } from 'lib/auth/auth';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getAccountByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery.utils';
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
-import { SignArbitraryType, useWallet } from 'lib/wallet/wallet';
+import { useSignArbitrary } from 'lib/wallet/hooks/useSignArbitrary';
+import { useWallet } from 'lib/wallet/wallet';
 
 type Params = {
-  signArbitrary?: SignArbitraryType;
-  setError: UseStateSetter<unknown>;
-  hasKeplrAccount: boolean;
+  setError: (e: unknown) => void;
 };
 
-export const useConnectWalletToAccount = ({
-  signArbitrary,
-  setError,
-  hasKeplrAccount,
-}: Params) => {
+export const useConnectWalletToAccount = ({ setError }: Params) => {
   const { activeAccountId, activeAccount, loading } = useAuth();
   const { wallet, walletConfig } = useWallet();
   const reactQueryClient = useQueryClient();
+  const isConnectingWalletRef = useRef(false);
+  const hasKeplrAccount = !!activeAccount?.addr;
+  const signArbitrary = useSignArbitrary({
+    setError,
+  });
 
   // Step 1: Retrieve and save the CSRF tokens
   const { data: token } = useQuery(getCsrfTokenQuery({}));
@@ -76,5 +75,19 @@ export const useConnectWalletToAccount = ({
     setError,
   ]);
 
-  return connectWalletToAccount;
+  // Step 5: trigger connect wallet callback whenever wallet address is available
+  const shouldConnectAccount =
+    !loading && !hasKeplrAccount && wallet?.address && token;
+
+  const connectWalletCallback = useCallback(async () => {
+    isConnectingWalletRef.current = true;
+    await connectWalletToAccount();
+    isConnectingWalletRef.current = false;
+  }, [connectWalletToAccount]);
+
+  useEffect(() => {
+    if (shouldConnectAccount && !isConnectingWalletRef.current) {
+      connectWalletCallback();
+    }
+  }, [connectWalletCallback, shouldConnectAccount]);
 };

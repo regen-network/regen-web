@@ -3,7 +3,6 @@ import { useState } from 'react';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 
 import { useAuth } from 'lib/auth/auth';
-import { useSignArbitrary } from 'lib/wallet/hooks/useSignArbitrary';
 import { useWallet } from 'lib/wallet/wallet';
 import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
 
@@ -20,14 +19,7 @@ export const ProfileEditSettings = () => {
   const { activeAccount, privActiveAccount } = useAuth();
   const hasKeplrAccount = !!activeAccount?.addr;
   const { connect } = useWallet();
-  const signArbitrary = useSignArbitrary({
-    setError,
-  });
-  const connectWalletToAccount = useConnectWalletToAccount({
-    setError,
-    signArbitrary,
-    hasKeplrAccount,
-  });
+  useConnectWalletToAccount({ setError });
   const {
     connecting,
     isModalOpen,
@@ -70,13 +62,12 @@ export const ProfileEditSettings = () => {
         wallets={[
           {
             ...walletsUiConfig[0],
-            onClick: async () => {
+            onClick: () => {
               connect &&
-                (await connect({
+                connect({
                   walletType: WalletType.Keplr,
                   doLogin: false,
-                }));
-              await connectWalletToAccount();
+                });
             },
           },
         ]}

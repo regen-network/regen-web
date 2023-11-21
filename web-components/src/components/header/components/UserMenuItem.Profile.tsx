@@ -7,6 +7,7 @@ import UserAvatar from '../../user/UserAvatar';
 import { OnProfileClickType } from './UserMenuItem.types';
 
 export type UserMenuItemProfileProps = {
+  id: string;
   profileImage: string;
   name: string;
   address?: string | null;
@@ -15,6 +16,7 @@ export type UserMenuItemProfileProps = {
 };
 
 const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
+  id,
   profileImage,
   name,
   address,
@@ -30,7 +32,7 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
         backgroundColor: selected ? 'grey.50' : 'primary.main',
         cursor: 'pointer',
       }}
-      onClick={() => onProfileClick && onProfileClick(selected)}
+      onClick={() => onProfileClick && onProfileClick(id, selected)}
     >
       <Grid container>
         <Grid item mr={3} position="relative">

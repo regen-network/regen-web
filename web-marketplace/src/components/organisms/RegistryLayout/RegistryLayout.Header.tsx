@@ -1,15 +1,12 @@
 import React, { useMemo } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
-import { useSetAtom } from 'jotai';
 
 import Header from 'web-components/lib/components/header';
-import { OnProfileClickType } from 'web-components/lib/components/header/components/UserMenuItem.types';
 import { UserMenuItems } from 'web-components/lib/components/header/components/UserMenuItems';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { addWalletModalSwitchWarningAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -21,6 +18,7 @@ import { useAuthData } from 'hooks/useAuthData';
 import { chainId } from '../../../lib/ledger';
 import { RegistryIconLink, RegistryNavLink } from '../../atoms';
 import { LoginButton } from '../LoginButton/LoginButton';
+import { useOnProfileClick } from './hooks/useOnProfileClick';
 import {
   getBorderBottom,
   getHeaderColors,
@@ -41,9 +39,7 @@ const RegistryLayoutHeader: React.FC = () => {
   } = useAuth();
   const { wallet, disconnect, isConnected } = useWallet();
   const { accountOrWallet } = useAuthData();
-
   const theme = useTheme<Theme>();
-  const navigate = useNavigate();
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
   const isTransparent = useMemo(() => getIsTransparent(pathname), [pathname]);
   const borderBottom = useMemo(() => getBorderBottom(pathname), [pathname]);
@@ -62,13 +58,7 @@ const RegistryLayoutHeader: React.FC = () => {
       }),
     [pathname, showCreditClasses, isIssuer, showProjects, isConnected],
   );
-  const setAddWalletModalSwitchWarningAtom = useSetAtom(
-    addWalletModalSwitchWarningAtom,
-  );
-  const onProfileClick: OnProfileClickType = (isSelected: boolean) =>
-    isSelected
-      ? navigate('/profile')
-      : setAddWalletModalSwitchWarningAtom(atom => void (atom.open = true));
+  const onProfileClick = useOnProfileClick();
 
   const defaultAvatar = getDefaultAvatar(activeAccount);
 
@@ -94,7 +84,9 @@ const RegistryLayoutHeader: React.FC = () => {
             {chainId && accountOrWallet && disconnect && (
               <UserMenuItems
                 address={getAddress({
-                  walletAddress: wallet?.address,
+                  walletAddress: activeAccount
+                    ? activeAccount.addr
+                    : wallet?.address,
                   email: privActiveAccount?.email,
                 })}
                 avatar={
@@ -106,6 +98,7 @@ const RegistryLayoutHeader: React.FC = () => {
                 userMenuItems={userMenuItems}
                 profiles={
                   authenticatedAccounts?.map((account, i) => ({
+                    id: account?.id,
                     name: account?.name ? account?.name : DEFAULT_NAME,
                     profileImage: account?.image
                       ? account?.image

@@ -65,7 +65,7 @@ export const finalizeConnection = async ({
   track,
   login,
   doLogin = true,
-}: FinalizeConnectionParams): Promise<void> => {
+}: FinalizeConnectionParams): Promise<Wallet | undefined> => {
   try {
     await walletClient?.enable(chainInfo.chainId);
   } catch (e) {
@@ -86,6 +86,7 @@ export const finalizeConnection = async ({
     // signArbitrary (used in login) not yet supported by @keplr-wallet/wc-client
     // https://github.com/chainapsis/keplr-wallet/issues/664
     if (login && doLogin) await login({ walletConfig, wallet });
+    return wallet;
   }
 };
 

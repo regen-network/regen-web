@@ -27,12 +27,14 @@ export const ExtraComponent = (): JSX.Element => {
           addAccount={async () => {}}
           profiles={[
             {
+              id: '123',
               name: 'Mary Smith',
               address: 'regen189df...dklads',
               profileImage: '/illustrations/frog.jpg',
               selected: true,
             },
             {
+              id: '456',
               name: 'Unnamed',
               address: 'regen91kd01...120d',
               profileImage: '/illustrations/frog.jpg',

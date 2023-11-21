@@ -1,1 +1,4 @@
-export type OnProfileClickType = (isSelected: boolean) => void;
+export type OnProfileClickType = (
+  accountId: string,
+  isSelected: boolean,
+) => Promise<void>;

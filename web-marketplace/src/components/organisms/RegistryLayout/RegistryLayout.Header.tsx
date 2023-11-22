@@ -11,6 +11,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { getWalletAddress } from 'pages/Dashboard/Dashboard.utils';
 import { useProfileItems } from 'pages/Dashboard/hooks/useProfileItems';
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
@@ -97,9 +98,7 @@ const RegistryLayoutHeader: React.FC = () => {
             {chainId && accountOrWallet && disconnect && (
               <UserMenuItems
                 address={getAddress({
-                  walletAddress: activeAccount
-                    ? activeAccount.addr
-                    : wallet?.address,
+                  walletAddress: getWalletAddress({ activeAccount, wallet }),
                   email: privActiveAccount?.email,
                 })}
                 avatar={

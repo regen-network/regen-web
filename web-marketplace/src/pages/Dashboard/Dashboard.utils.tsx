@@ -4,7 +4,8 @@ import TwitterIcon2 from 'web-components/lib/components/icons/social/TwitterIcon
 import WebsiteLinkIcon from 'web-components/lib/components/icons/social/WebsiteLinkIcon';
 import { SocialLink } from 'web-components/lib/components/organisms/ProfileHeader/ProfileHeader.types';
 
-import { Account } from 'generated/graphql';
+import { Account, AccountByIdQuery } from 'generated/graphql';
+import { Wallet } from 'lib/wallet/wallet';
 
 import { DEFAULT_PROFILE_BG } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
@@ -64,4 +65,16 @@ export const getUserImages = ({ account }: GetUserImagesParams) => {
     : getDefaultAvatar(account);
 
   return { backgroundImage, avatarImage };
+};
+
+type GetWalletAddressParams = {
+  activeAccount?: AccountByIdQuery['accountById'];
+  wallet?: Wallet;
+};
+
+export const getWalletAddress = ({
+  activeAccount,
+  wallet,
+}: GetWalletAddressParams) => {
+  return activeAccount ? activeAccount.addr : wallet?.address;
 };

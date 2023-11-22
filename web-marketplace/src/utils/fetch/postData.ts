@@ -1,4 +1,4 @@
-type Params = {
+export type PostParams = {
   url: string;
   data: any;
   token: string;
@@ -10,8 +10,8 @@ export const postData = async ({
   data,
   token,
   method = 'POST',
-}: Params) => {
-  const response = await fetch(url, {
+}: PostParams) => {
+  const rawResponse = await fetch(url, {
     method,
     headers: new Headers({
       Accept: 'application/json',
@@ -22,9 +22,9 @@ export const postData = async ({
     body: JSON.stringify(data),
   });
 
-  if (response.status !== 200) {
-    throw Error(response.statusText);
+  try {
+    return rawResponse.json();
+  } catch (e) {
+    throw Error(rawResponse.statusText);
   }
-
-  return response.json();
 };

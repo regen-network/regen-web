@@ -1,6 +1,6 @@
 export type PostParams = {
   url: string;
-  data: any;
+  data?: any;
   token: string;
   method?: 'POST' | 'PUT';
 };

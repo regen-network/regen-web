@@ -31,7 +31,7 @@ type ConnectedState = {
    * A callback for disconnecting from the provider if the provider is already
    * connected.
    */
-  disconnect?: () => void;
+  disconnect?: () => Promise<void>;
   /**
    * The email of the connected social provider account. This can be different
    * from the active account email.

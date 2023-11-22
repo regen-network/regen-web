@@ -6,6 +6,7 @@ export type PrivateAccount = {
   id: string;
   email: string | null;
   google: string | null;
+  google_email: string | null;
 };
 
 type Accounts = {

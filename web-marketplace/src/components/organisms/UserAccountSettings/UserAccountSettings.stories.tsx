@@ -17,12 +17,16 @@ const meta: Meta<typeof UserAccountSettings> = {
       },
       {
         name: 'LinkedIn',
-        disconnect: action('disconnect linkedin'),
+        disconnect: async () => {
+          action('disconnect linkedin')();
+        },
       },
     ],
     walletProvider: {
       address: 'regenfoobar3792723djghsdg',
-      disconnect: action('disconnect wallet'),
+      disconnect: async () => {
+        action('disconnect wallet')();
+      },
     },
   },
 };

@@ -7,14 +7,14 @@ import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 
+import { onPostData } from '../../LoginButton/hooks/onLoginPostData';
 import {
   DEFAULT_RESEND_ERROR,
   DEFAULT_VALIDATE_ERROR,
   EMAIL_CONFIRMATION_SUCCES,
   RESEND_SUCCES,
-} from '../LoginButton.constants';
-import { getEmailModalError } from '../utils/getEmailModalError';
-import { onPostData } from './onLoginPostData';
+} from '../../LoginButton/LoginButton.constants';
+import { getEmailModalError } from '../../LoginButton/utils/getEmailModalError';
 
 export const useEmailConfirmationData = () => {
   const reactQueryClient = useQueryClient();

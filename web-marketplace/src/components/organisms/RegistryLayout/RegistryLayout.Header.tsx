@@ -17,7 +17,11 @@ import { useAuthData } from 'hooks/useAuthData';
 
 import { chainId } from '../../../lib/ledger';
 import { RegistryIconLink, RegistryNavLink } from '../../atoms';
+import { useLoginData } from '../LoginButton/hooks/useLoginData';
 import { LoginButton } from '../LoginButton/LoginButton';
+import { socialProviders } from '../LoginButton/LoginButton.constants';
+import { LoginFlow } from '../LoginFlow/LoginFlow';
+import { LoginModal } from '../LoginModal/LoginModal';
 import { useOnProfileClick } from './hooks/useOnProfileClick';
 import {
   getBorderBottom,
@@ -66,6 +70,16 @@ const RegistryLayoutHeader: React.FC = () => {
     ? headerColors[pathname]
     : theme.palette.primary.light;
 
+  const {
+    connecting,
+    isModalOpen,
+    modalState,
+    onButtonClick,
+    onModalClose,
+    qrCodeUri,
+    walletsUiConfig,
+  } = useLoginData();
+
   return (
     <>
       <Header
@@ -112,12 +126,20 @@ const RegistryLayoutHeader: React.FC = () => {
                   })) || []
                 }
                 onProfileClick={onProfileClick}
-                // TODO (#2193): add account functionality
+                addAccount={onButtonClick}
               />
             )}
             <LoginButton />
           </Box>
         }
+      />
+      <LoginFlow
+        isModalOpen={isModalOpen}
+        onModalClose={onModalClose}
+        wallets={walletsUiConfig} // TODO: remove if mobile + remove WC in all cases
+        modalState={modalState}
+        qrCodeUri={qrCodeUri}
+        connecting={connecting}
       />
     </>
   );

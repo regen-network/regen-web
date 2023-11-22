@@ -135,6 +135,7 @@ const RegistryLayoutHeader: React.FC = () => {
         isModalOpen={isModalOpen}
         onModalClose={onModalClose}
         // We can't have a logged-in account with WC (because it doesn't support signArbitrary)
+        // so there's no wallet available on mobile and only Keplr on desktop
         wallets={checkIsMobile() ? [] : [walletsUiConfig[0]]}
         modalState={modalState}
         qrCodeUri={qrCodeUri}

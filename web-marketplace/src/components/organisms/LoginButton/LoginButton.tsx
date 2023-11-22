@@ -39,8 +39,6 @@ const LoginButton = ({ size = 'small' }: Props) => {
     modalState,
     onModalClose,
     qrCodeUri,
-    isWaitingForSigning,
-    setIsWaitingForSigningAtom,
     walletsUiConfig,
     onButtonClick,
   } = useLoginData();
@@ -67,7 +65,14 @@ const LoginButton = ({ size = 'small' }: Props) => {
             </OutlinedButton>
           )}
         </>
-        <LoginFlow />
+        <LoginFlow
+          isModalOpen={isModalOpen}
+          onModalClose={onModalClose}
+          wallets={walletsUiConfig} // TODO: remove if mobile + remove WC in all cases
+          modalState={modalState}
+          qrCodeUri={qrCodeUri}
+          connecting={connecting}
+        />
       </div>
     </>
   ) : (

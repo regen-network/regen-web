@@ -37,9 +37,7 @@ export const useLoginData = () => {
   const qrUrl = current?.qrUrl;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isWaitingForSigning, setIsWaitingForSigningAtom] = useAtom(
-    isWaitingForSigningAtom,
-  );
+  const [isWaitingForSigning] = useAtom(isWaitingForSigningAtom);
   const [modalState, setModalState] = useState<LoginModalState>('select');
   const [connecting, setConnecting] = useState<boolean>(false);
   const [qrCodeUri, setQrCodeUri] = useState<string | undefined>();
@@ -99,7 +97,5 @@ export const useLoginData = () => {
     connecting,
     onButtonClick,
     onModalClose,
-    isWaitingForSigning,
-    setIsWaitingForSigningAtom,
   };
 };

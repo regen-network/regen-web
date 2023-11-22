@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
+import { isMobile as checkIsMobile } from '@walletconnect/browser-utils';
 
 import Header from 'web-components/lib/components/header';
 import { UserMenuItems } from 'web-components/lib/components/header/components/UserMenuItems';
@@ -19,9 +20,7 @@ import { chainId } from '../../../lib/ledger';
 import { RegistryIconLink, RegistryNavLink } from '../../atoms';
 import { useLoginData } from '../LoginButton/hooks/useLoginData';
 import { LoginButton } from '../LoginButton/LoginButton';
-import { socialProviders } from '../LoginButton/LoginButton.constants';
 import { LoginFlow } from '../LoginFlow/LoginFlow';
-import { LoginModal } from '../LoginModal/LoginModal';
 import { useOnProfileClick } from './hooks/useOnProfileClick';
 import {
   getBorderBottom,
@@ -136,7 +135,8 @@ const RegistryLayoutHeader: React.FC = () => {
       <LoginFlow
         isModalOpen={isModalOpen}
         onModalClose={onModalClose}
-        wallets={walletsUiConfig} // TODO: remove if mobile + remove WC in all cases
+        // We can't have a logged-in account with WC (because it doesn't support signArbitrary)
+        wallets={checkIsMobile() ? [] : [walletsUiConfig[0]]}
         modalState={modalState}
         qrCodeUri={qrCodeUri}
         connecting={connecting}

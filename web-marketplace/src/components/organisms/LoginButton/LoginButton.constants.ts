@@ -22,3 +22,4 @@ export const DEFAULT_VALIDATE_ERROR =
   'Incorrect code! Double-check the code and try again.';
 export const CODE_EXPIRED_ERROR = 'This code has expired!';
 export const DEFAULT_RESEND_ERROR = 'Failed to resend passcode';
+export const RESEND_TIMER = 60;

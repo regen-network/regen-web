@@ -7,14 +7,17 @@ import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 
-import { onPostData } from '../../LoginButton/hooks/onLoginPostData';
+import { onPostData } from 'components/organisms/LoginButton/hooks/onLoginPostData';
+import { useTimer } from 'components/organisms/LoginButton/hooks/useTimer';
+import { getEmailModalError } from 'components/organisms/LoginButton/utils/getEmailModalError';
+
 import {
   DEFAULT_RESEND_ERROR,
   DEFAULT_VALIDATE_ERROR,
   EMAIL_CONFIRMATION_SUCCES,
   RESEND_SUCCES,
+  RESEND_TIMER,
 } from '../../LoginButton/LoginButton.constants';
-import { getEmailModalError } from '../../LoginButton/utils/getEmailModalError';
 
 export const useEmailConfirmationData = () => {
   const reactQueryClient = useQueryClient();
@@ -23,10 +26,14 @@ export const useEmailConfirmationData = () => {
   const [email, setEmail] = useState('');
   const setBannerText = useSetAtom(bannerTextAtom);
   const { data: token } = useQuery(getCsrfTokenQuery({}));
+  const { timeLeft: resendTimeLeft, startTimer } = useTimer({
+    duration: RESEND_TIMER,
+  });
 
   const onConfirmationModalClose = () => setIsConfirmationModalOpen(false);
   const onResendPasscode = async () => {
-    if (token) {
+    if (token && resendTimeLeft === null) {
+      startTimer();
       await onPostData({
         url: `${apiUri}/marketplace/v1/auth/passcode`,
         data: {
@@ -71,6 +78,7 @@ export const useEmailConfirmationData = () => {
     setEmail,
     emailModalError,
     isConfirmationModalOpen,
+    resendTimeLeft,
     onConfirmationModalClose,
     onMailCodeChange,
     onResendPasscode,

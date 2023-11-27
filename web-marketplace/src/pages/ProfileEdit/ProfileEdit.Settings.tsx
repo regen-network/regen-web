@@ -19,7 +19,6 @@ export const ProfileEditSettings = () => {
   const { activeAccount, privActiveAccount } = useAuth();
   const hasKeplrAccount = !!activeAccount?.addr;
   const { connect } = useWallet();
-  useConnectWalletToAccount({ setError });
   const {
     connecting,
     isModalOpen,
@@ -28,6 +27,8 @@ export const ProfileEditSettings = () => {
     onModalClose,
     walletsUiConfig,
   } = useLoginData();
+
+  useConnectWalletToAccount({ isConnectModalOpened: isModalOpen, setError });
 
   // Social providers
   const _socialProviders = socialProviders.map(p => ({

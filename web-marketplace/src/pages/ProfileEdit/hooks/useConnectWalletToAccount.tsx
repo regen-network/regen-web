@@ -11,10 +11,14 @@ import { useSignArbitrary } from 'lib/wallet/hooks/useSignArbitrary';
 import { useWallet } from 'lib/wallet/wallet';
 
 type Params = {
+  isConnectModalOpened?: boolean;
   setError: (e: unknown) => void;
 };
 
-export const useConnectWalletToAccount = ({ setError }: Params) => {
+export const useConnectWalletToAccount = ({
+  isConnectModalOpened,
+  setError,
+}: Params) => {
   const { activeAccountId, activeAccount, loading } = useAuth();
   const { wallet, walletConfig } = useWallet();
   const reactQueryClient = useQueryClient();
@@ -75,9 +79,13 @@ export const useConnectWalletToAccount = ({ setError }: Params) => {
     setError,
   ]);
 
-  // Step 5: trigger connect wallet callback whenever wallet address is available
+  // Step 5: trigger connect wallet callback whenever wallet address is available and action modal is opened
   const shouldConnectAccount =
-    !loading && !hasKeplrAccount && wallet?.address && token;
+    !loading &&
+    !hasKeplrAccount &&
+    wallet?.address &&
+    token &&
+    isConnectModalOpened;
 
   const connectWalletCallback = useCallback(async () => {
     isConnectingWalletRef.current = true;

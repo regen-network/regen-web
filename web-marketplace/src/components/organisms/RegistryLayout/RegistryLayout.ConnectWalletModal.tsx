@@ -30,6 +30,7 @@ export const RegistryLayoutConnectWalletModal = (): JSX.Element => {
   const { activeAccount, privActiveAccount } = useAuth();
 
   useConnectWalletToAccount({
+    isConnectModalOpened: open,
     setError: e => setError(String(e)),
   });
 

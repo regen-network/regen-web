@@ -29,11 +29,6 @@ export const RegistryLayoutConnectWalletModal = (): JSX.Element => {
   const { open, onClose } = connectWalletModal;
   const { activeAccount, privActiveAccount } = useAuth();
 
-  useConnectWalletToAccount({
-    isConnectModalOpened: open,
-    setError: e => setError(String(e)),
-  });
-
   const isWeb2UserWithoutWallet =
     !!privActiveAccount?.email && !activeAccount?.addr;
 
@@ -45,6 +40,14 @@ export const RegistryLayoutConnectWalletModal = (): JSX.Element => {
   useEffect(() => {
     if (loaded && isConnected) onCloseModal();
   }, [isConnected, loaded, onCloseModal]);
+
+  useConnectWalletToAccount({
+    isConnectModalOpened: open,
+    setError: e => {
+      setError(String(e));
+      onCloseModal();
+    },
+  });
 
   return (
     <>

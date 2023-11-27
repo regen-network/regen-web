@@ -49,11 +49,15 @@ export const useConnectWalletToAccount = ({
         });
 
         // Step 3: Submit the signature for keplr wallet connect endpoint
-        await postData({
+        const response = await postData({
           url: `${apiUri}/marketplace/v1/wallet-auth/connect-wallet`,
           data: { signature, accountId: activeAccountId },
           token,
         });
+
+        if (response.error) {
+          throw Error(response.error);
+        }
 
         // Step 4: Refresh active account
         await reactQueryClient.invalidateQueries({

@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useEffect } from 'react';
 import {
   ApolloClient,
   NormalizedCacheObject,
@@ -7,6 +7,7 @@ import {
 import { useQueries, useQuery } from '@tanstack/react-query';
 
 import { AccountByIdQuery } from 'generated/graphql';
+import { apiUri } from 'lib/apiUri';
 import { getAccountsQuery } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery';
 import { PrivateAccount } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.types';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';

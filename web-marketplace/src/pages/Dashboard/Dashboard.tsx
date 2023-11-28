@@ -45,7 +45,6 @@ const Dashboard = (): JSX.Element => {
   const location = useLocation();
 
   const { activeAccount } = useAuth();
-
   const account = activeAccount ?? accountByAddr;
 
   const { avatarImage, backgroundImage } = getUserImages({

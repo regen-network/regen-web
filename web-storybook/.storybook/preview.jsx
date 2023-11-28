@@ -2,7 +2,7 @@ import React from 'react';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { CssBaseline } from '@mui/material';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { initialize } from 'msw-storybook-addon';
+import { initialize, mswLoader } from 'msw-storybook-addon';
 
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 import 'web-components/src/theme/fonts.css';
@@ -20,10 +20,9 @@ export const decorators = [
       </Router>
     </ThemeProvider>
   ),
-  // mswDecorator
 ];
 
-export const parameters = {
+const parameters = {
   viewport: {
     viewports: {
       ...INITIAL_VIEWPORTS,
@@ -31,5 +30,13 @@ export const parameters = {
   },
 };
 
-// export const loaders = [mswLoader]
+const preview = {
+  parameters,
+  // Provide the MSW addon loader globally
+  loaders: [mswLoader],
+}
+
+export default preview
+
+export const loaders = [mswLoader];
 

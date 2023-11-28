@@ -81,6 +81,11 @@ module.exports = {
         }),
       ],
       optimizeDeps: {
+        include: [
+          '@emotion/react', 
+          '@emotion/styled', 
+          '@mui/material/Tooltip'
+        ],
         esbuildOptions: {
           plugins:
             configType === 'DEVELOPMENT'

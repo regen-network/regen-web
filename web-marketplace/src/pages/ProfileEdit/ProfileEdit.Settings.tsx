@@ -39,11 +39,13 @@ export const ProfileEditSettings = () => {
 
   // Social providers
   const socialProviders = useSocialProviders();
-  const _socialProviders = socialProviders.map(p => ({
-    name: p.name,
-    email: privActiveAccount?.[`${p.id}_email`],
-    connect: privActiveAccount?.[p.id] ? undefined : p.connect,
-    disconnect: privActiveAccount?.[p.id] ? p.disconnect : undefined,
+  const _socialProviders = socialProviders.map(provider => ({
+    name: provider.name,
+    email: privActiveAccount?.[`${provider.id}_email`],
+    connect: privActiveAccount?.[provider.id] ? undefined : provider.connect,
+    disconnect: privActiveAccount?.[provider.id]
+      ? provider.disconnect
+      : undefined,
   }));
 
   // Keplr account

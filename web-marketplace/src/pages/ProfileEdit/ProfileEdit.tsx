@@ -21,7 +21,7 @@ import { ProfileEditNav } from './ProfileEdit.Nav';
 import { ViewProfileButton } from './ProfileEdit.ViewProfile';
 
 export const ProfileEdit = () => {
-  const { loaded, accountChanging } = useWallet();
+  const { accountChanging } = useWallet();
   const { loading } = useAuth();
   const theme = useTheme();
   const [isWarningModalOpen, setIsWarningModalOpen] = useState<
@@ -96,10 +96,7 @@ export const ProfileEdit = () => {
             <ViewProfileButton setIsWarningModalOpen={setIsWarningModalOpen} />
           )}
         </Flex>
-        <WithLoader
-          isLoading={!loaded || accountChanging || loading}
-          sx={{ mx: 'auto' }}
-        >
+        <WithLoader isLoading={accountChanging || loading} sx={{ mx: 'auto' }}>
           <div className="py-50 px-40 rounded-md border border-grey-200 bg-grey-0">
             <Outlet />
           </div>

@@ -24,7 +24,7 @@ type Props = {
 
 export type ConnectWalletType = ({
   walletType,
-}: ConnectWalletParams) => Promise<void>;
+}: ConnectWalletParams) => Promise<Wallet | undefined>;
 
 // This hook returns a callback that performs the wallet connection.
 // The callback is meant to be called by other hooks.
@@ -36,7 +36,10 @@ export const useConnectWallet = ({
   login,
 }: Props): ConnectWalletType => {
   const connectWallet = useCallback(
-    async ({ walletType, doLogin }: ConnectWalletParams): Promise<void> => {
+    async ({
+      walletType,
+      doLogin,
+    }: ConnectWalletParams): Promise<Wallet | undefined> => {
       const walletConfig = walletsConfig.find(
         walletConfig => walletConfig.type === walletType,
       );
@@ -59,7 +62,7 @@ export const useConnectWallet = ({
       }
 
       if (isKeplr) {
-        await finalizeConnection({
+        const wallet = await finalizeConnection({
           setWallet,
           walletClient,
           walletConfig,
@@ -67,6 +70,7 @@ export const useConnectWallet = ({
           login,
           doLogin,
         });
+        return wallet;
       }
     },
     [setWallet, setKeplrMobileWeb, walletConfigRef, track, login],

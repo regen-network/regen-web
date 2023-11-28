@@ -146,5 +146,6 @@ export const useOnAccountChange = ({
     accountByAddr?.accountByAddr?.id,
     token,
     authenticatedAccountIds,
+    reactQueryClient,
   ]);
 };

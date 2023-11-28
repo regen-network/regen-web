@@ -4,7 +4,7 @@ const isMintscan = explorer?.includes('mintscan');
 const isAneka = explorer?.includes('aneka');
 
 export const getAccountUrl = (
-  address: string | undefined,
+  address: string | undefined | null,
   useExplorer?: boolean,
 ): string => {
   if (!address) return '';

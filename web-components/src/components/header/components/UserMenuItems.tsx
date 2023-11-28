@@ -21,7 +21,7 @@ interface UserMenuItemsProps extends HeaderMenuItemBase {
   userMenuItems: HeaderDropdownItemProps[];
   disconnect: () => void;
   profiles: UserMenuItemProfileProps[];
-  addAccount?: () => Promise<void>;
+  addAccount?: () => void;
   onProfileClick?: OnProfileClickType;
 }
 

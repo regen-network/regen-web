@@ -30,7 +30,11 @@ import {
   PROJECTS,
 } from './Dashboard.constants';
 import { dashBoardStyles } from './Dashboard.styles';
-import { getSocialsLinks, getUserImages } from './Dashboard.utils';
+import {
+  getSocialsLinks,
+  getUserImages,
+  getWalletAddress,
+} from './Dashboard.utils';
 import { useProfileItems } from './hooks/useProfileItems';
 
 const Dashboard = (): JSX.Element => {
@@ -85,6 +89,7 @@ const Dashboard = (): JSX.Element => {
   );
 
   const profileLink = getProfileLink(wallet?.address || activeAccount?.id);
+  const walletAddress = getWalletAddress({ activeAccount, wallet });
 
   return (
     <>
@@ -94,8 +99,8 @@ const Dashboard = (): JSX.Element => {
         avatar={avatarImage}
         infos={{
           addressLink: {
-            href: getAccountUrl(wallet?.address, true),
-            text: wallet?.address ? truncate(wallet?.address) : '',
+            href: getAccountUrl(walletAddress, true),
+            text: walletAddress ? truncate(walletAddress) : '',
           },
           description: account?.description?.trimEnd() ?? '',
           socialsLinks,

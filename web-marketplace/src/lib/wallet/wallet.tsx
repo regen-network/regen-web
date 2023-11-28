@@ -23,7 +23,7 @@ import { useTracker } from 'lib/tracker/useTracker';
 
 import { useAutoConnect } from './hooks/useAutoConnect';
 import { useConnect } from './hooks/useConnect';
-import { useConnectWallet } from './hooks/useConnectWallet';
+import { ConnectWalletType, useConnectWallet } from './hooks/useConnectWallet';
 import { useDetectKeplrMobileBrowser } from './hooks/useDetectKeplrMobileBrowser';
 import { useDisconnect } from './hooks/useDisconnect';
 import { useLogin } from './hooks/useLogin';
@@ -64,6 +64,7 @@ export type WalletContextType = {
   walletConfig?: WalletConfig;
   loaded: boolean;
   connect?: (params: ConnectParams) => Promise<void>;
+  connectWallet?: ConnectWalletType;
   disconnect?: () => void;
   handleAddAddress?: () => Promise<void>;
   connectionType?: string;
@@ -193,6 +194,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         walletConfig: walletConfigRef.current,
         loaded: loaded && !isFetching && (loginDisabled || !authLoading),
         connect,
+        connectWallet,
         disconnect,
         connectionType,
         error,

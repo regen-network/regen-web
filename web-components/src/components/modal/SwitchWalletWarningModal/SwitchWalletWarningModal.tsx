@@ -1,7 +1,6 @@
 import { Box } from '@mui/material';
 
-import { SadBeeIcon } from 'src/components/icons/SadBeeIcon';
-
+import { SadBeeIcon } from '../../../components/icons/SadBeeIcon';
 import { Body, Subtitle, Title } from '../../typography';
 import Modal, { RegenModalProps } from '..';
 import {

@@ -12,7 +12,10 @@ import { Account } from 'web-components/lib/components/user/UserInfo';
 
 import { useCreditClassByUriQuery } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
-import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
+import {
+  connectWalletModalAtom,
+  switchWalletModalAtom,
+} from 'lib/atoms/modals.atoms';
 import { openLink } from 'lib/button';
 import { client } from 'lib/clients/sanity';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
@@ -53,7 +56,7 @@ interface CreditDetailsProps {
 function CreditClassDetails({
   isLandSteward,
 }: CreditDetailsProps): JSX.Element {
-  const { wallet } = useWallet();
+  const { wallet, isConnected } = useWallet();
   const { dataClient, ecocreditClient } = useLedger();
   const { creditClassId } = useParams();
   const graphqlClient =
@@ -62,6 +65,7 @@ function CreditClassDetails({
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
+  const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
 
   const { data: buyModalOptionsContent } = useQuery(
     getBuyModalOptionsQuery({ sanityClient: client }),
@@ -237,11 +241,17 @@ function CreditClassDetails({
         isBuyButtonDisabled={isBuyFlowDisabled && Boolean(wallet?.address)}
         isCommunityCredit={isCommunityCredit}
         onBookCallButtonClick={onBookCallButtonClick}
-        onBuyButtonClick={() =>
-          isBuyFlowDisabled
-            ? setConnectWalletModal(atom => void (atom.open = true))
-            : setIsBuyFlowStarted(true)
-        }
+        onBuyButtonClick={() => {
+          if (isBuyFlowDisabled) {
+            setConnectWalletModal(atom => void (atom.open = true));
+          } else {
+            if (isConnected) {
+              setIsBuyFlowStarted(true);
+            } else {
+              setSwitchWalletModalAtom(atom => void (atom.open = true));
+            }
+          }
+        }}
         onChainCreditClassId={onChainClass?.id}
         creditClassName={metadata?.['schema:name']}
         avgPricePerTonLabel={avgPricePerTonLabel}

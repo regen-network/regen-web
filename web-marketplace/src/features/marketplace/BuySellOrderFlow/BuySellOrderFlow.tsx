@@ -3,6 +3,7 @@ import { Location, useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { useQuery } from '@tanstack/react-query';
 import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
+import { useSetAtom } from 'jotai';
 import { getSocialItems } from 'utils/components/ShareSection/getSocialItems';
 import { REGEN_APP_PROJECT_URL } from 'utils/components/ShareSection/getSocialItems.constants';
 
@@ -13,6 +14,7 @@ import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
 
 import { UseStateSetter } from 'types/react/use-state';
+import { switchWalletModalAtom } from 'lib/atoms/modals.atoms';
 import { getHashUrl } from 'lib/block-explorer';
 import { client } from 'lib/clients/sanity';
 import { getBuyModalOptionsQuery } from 'lib/queries/react-query/sanity/getBuyModalOptionsQuery/getBuyModalOptionsQuery';
@@ -72,6 +74,7 @@ export const BuySellOrderFlow = ({
   const { data: buyModalOptionsContent } = useQuery(
     getBuyModalOptionsQuery({ sanityClient: client }),
   );
+  const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
   const buyModalOptions = buyModalOptionsContent?.allBuyModalOptions[0];
   const buyModalOptionsFiltered = isCommunityCredit
     ? {
@@ -221,10 +224,22 @@ export const BuySellOrderFlow = ({
     if (isFlowStarted && isConnected) {
       refetchSellOrders();
       setIsBuyModalOpen(true);
-    } else if (isFlowStarted && !isConnected) {
+    } else if (isFlowStarted && !wallet?.address) {
       setIsBuyModalOptionsOpen(true);
+    } else if (isFlowStarted && !isConnected) {
+      setSwitchWalletModalAtom(atom => {
+        atom.open = true;
+        atom.onClose = () => setIsFlowStarted(false);
+      });
     }
-  }, [isFlowStarted, isConnected, refetchSellOrders]);
+  }, [
+    isFlowStarted,
+    isConnected,
+    refetchSellOrders,
+    wallet?.address,
+    setSwitchWalletModalAtom,
+    setIsFlowStarted,
+  ]);
 
   return (
     <>

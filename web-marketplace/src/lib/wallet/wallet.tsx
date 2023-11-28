@@ -169,6 +169,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     authenticatedAccountIds,
     setAccountChanging,
   });
+
   useDetectKeplrMobileBrowser({
     connectWallet,
     loaded,

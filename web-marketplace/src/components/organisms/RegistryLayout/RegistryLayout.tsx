@@ -17,6 +17,7 @@ import { RegistryLayoutErrorBannerModal } from './RegistryLayout.ErrorBanner';
 import { RegistryLayoutFooter } from './RegistryLayout.Footer';
 import { RegistryLayoutHeader } from './RegistryLayout.Header';
 import { RegistryLayoutProcessingModal } from './RegistryLayout.ProcessingModal';
+import { RegistryLayoutSwitchWalletModal } from './RegistryLayout.SwitchWalletModal';
 import { RegistryLayoutTxErrorModal } from './RegistryLayout.TxErrorModal';
 import { RegistryLayoutTxSuccessfulModal } from './RegistryLayout.TxSuccessfulModal';
 
@@ -38,6 +39,7 @@ const RegistryLayout: React.FC = () => {
       <RegistryLayoutProcessingModal />
       <RegistryLayoutErrorBannerModal />
       <RegistryLayoutConnectWalletModal />
+      <RegistryLayoutSwitchWalletModal />
       <RegistryLayoutAddWalletModalConnect />
       <RegistryLayoutAddWalletModalRemove />
       <RegistryLayoutAddWalletModalSwitch />

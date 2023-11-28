@@ -130,6 +130,11 @@ export const useOnAccountChange = ({
               doLogin: true,
             });
           }
+        } else {
+          await connectWallet({
+            walletType: WalletType.Keplr,
+            doLogin: false,
+          });
         }
       }
     };

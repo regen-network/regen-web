@@ -12,7 +12,10 @@ import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 
 import { Project } from 'generated/graphql';
 import { Maybe } from 'graphql/jsutils/Maybe';
-import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
+import {
+  connectWalletModalAtom,
+  switchWalletModalAtom,
+} from 'lib/atoms/modals.atoms';
 import { onBtnClick } from 'lib/button';
 import {
   AnchoredProjectMetadataLD,
@@ -74,6 +77,7 @@ function ProjectDetails(): JSX.Element {
   const { projectId } = useParams();
   const { ecocreditClient, dataClient } = useLedger();
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
+  const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
   const { wallet, isConnected } = useWallet();
   const graphqlClient = useApolloClient();
   const { track } = useTracker();
@@ -351,11 +355,17 @@ function ProjectDetails(): JSX.Element {
         isBuyButtonDisabled={isBuyFlowDisabled && Boolean(wallet?.address)}
         isCommunityCredit={isCommunityCredit}
         onBookCallButtonClick={onBookCallButtonClick}
-        onBuyButtonClick={() =>
-          isBuyFlowDisabled
-            ? setConnectWalletModal(atom => void (atom.open = true))
-            : setIsBuyFlowStarted(true)
-        }
+        onBuyButtonClick={() => {
+          if (isBuyFlowDisabled) {
+            setConnectWalletModal(atom => void (atom.open = true));
+          } else {
+            if (isConnected) {
+              setIsBuyFlowStarted(true);
+            } else {
+              setSwitchWalletModalAtom(atom => void (atom.open = true));
+            }
+          }
+        }}
         onChainProjectId={onChainProjectId}
         projectName={anchoredMetadata?.['schema:name']}
         onChainCreditClassId={onChainProject?.classId}

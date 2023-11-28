@@ -169,6 +169,7 @@ export const BridgableEcocreditsTable = ({
       </WithLoader>
       <BridgeFlow
         isFlowStarted={!!batchToBridge}
+        resetIsFlowStarted={() => setBatchToBridge(undefined)}
         setBatchToBridge={setBatchToBridge}
         selectedBatch={batchToBridge}
       />

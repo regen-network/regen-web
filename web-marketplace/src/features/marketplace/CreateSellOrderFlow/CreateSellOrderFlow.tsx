@@ -14,9 +14,13 @@ import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccess
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
-import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
+import {
+  connectWalletModalAtom,
+  switchWalletModalAtom,
+} from 'lib/atoms/modals.atoms';
 import { getHashUrl } from 'lib/block-explorer';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
+import { useWallet } from 'lib/wallet/wallet';
 
 import useCreateSellOrderSubmit from 'pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit';
 import { CREATE_SELL_ORDER_TITLE } from 'pages/Dashboard/MyEcocredits/MyEcocredits.constants';
@@ -46,7 +50,9 @@ export const CreateSellOrderFlow = ({
   const [txModalHeader, setTxModalHeader] = useState<string>();
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
+  const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
   const { marketplaceClient } = useLedger();
+  const { isConnected } = useWallet();
   const navigate = useNavigate();
 
   const closeCreateModal = (): void => {
@@ -123,13 +129,27 @@ export const CreateSellOrderFlow = ({
 
   useEffect(() => {
     if (isFlowStarted && accountAddress) {
-      setIsCreateSellOrderOpen(true);
+      if (isConnected) {
+        setIsCreateSellOrderOpen(true);
+      } else {
+        setSwitchWalletModalAtom(atom => {
+          atom.open = true;
+          atom.onClose = () => setIsFlowStarted(false);
+        });
+      }
     } else if (isFlowStarted) {
       setConnectWalletModal(atom => {
         atom.open = true;
       });
     }
-  }, [isFlowStarted, accountAddress, setConnectWalletModal, setIsFlowStarted]);
+  }, [
+    isFlowStarted,
+    accountAddress,
+    setConnectWalletModal,
+    setIsFlowStarted,
+    setSwitchWalletModalAtom,
+    isConnected,
+  ]);
 
   return (
     <>

@@ -22,21 +22,13 @@ export const decorators = [
   ),
 ];
 
-const parameters = {
+export const parameters = {
   viewport: {
     viewports: {
       ...INITIAL_VIEWPORTS,
     },
   },
 };
-
-const preview = {
-  parameters,
-  // Provide the MSW addon loader globally
-  loaders: [mswLoader],
-}
-
-export default preview
 
 export const loaders = [mswLoader];
 

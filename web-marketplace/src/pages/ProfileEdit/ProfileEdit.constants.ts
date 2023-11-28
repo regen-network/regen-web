@@ -1,6 +1,9 @@
+import { postData } from 'utils/fetch/postData';
+
 import { ProfileVariant } from 'web-components/lib/components/organisms/ProfileHeader/ProfileHeader.types';
 
 import { AccountType } from 'generated/graphql';
+import { apiUri } from 'lib/apiUri';
 
 import { SocialProvider } from './ProfileEdit.types';
 
@@ -26,13 +29,3 @@ export const profileVariantMapping: Record<AccountType, ProfileVariant> = {
   ORGANIZATION: 'organization',
   USER: 'individual',
 };
-
-export const socialProviders: SocialProvider[] = [
-  {
-    id: 'google',
-    name: 'Google',
-    // TODO: #2211
-    connect: () => {},
-    disconnect: async () => {},
-  },
-];

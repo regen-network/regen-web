@@ -13,7 +13,7 @@ import { UserAccountSettings } from 'components/organisms/UserAccountSettings/Us
 import { WalletProviderInfo } from 'components/organisms/UserAccountSettings/UserAccountSettings.types';
 
 import { useConnectWalletToAccount } from './hooks/useConnectWalletToAccount';
-import { socialProviders } from './ProfileEdit.constants';
+import { useSocialProviders } from './hooks/useSocialProviders';
 
 export const ProfileEditSettings = () => {
   const [error, setError] = useState<unknown>(undefined);
@@ -38,12 +38,14 @@ export const ProfileEditSettings = () => {
   } = useLoginData();
 
   // Social providers
-  const _socialProviders = socialProviders.map(p => ({
-    name: p.name,
-    // TODO: we'll need to replace this with the email from the provider account #2211
-    email: privActiveAccount?.email,
-    connect: privActiveAccount?.[p.id] ? undefined : p.connect,
-    disconnect: privActiveAccount?.[p.id] ? p.disconnect : undefined,
+  const socialProviders = useSocialProviders();
+  const _socialProviders = socialProviders.map(provider => ({
+    name: provider.name,
+    email: privActiveAccount?.[`${provider.id}_email`],
+    connect: privActiveAccount?.[provider.id] ? undefined : provider.connect,
+    disconnect: privActiveAccount?.[provider.id]
+      ? provider.disconnect
+      : undefined,
   }));
 
   // Keplr account

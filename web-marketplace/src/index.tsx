@@ -46,6 +46,17 @@ import '../../tailwind.css';
 
 const intercomId = import.meta.env.VITE_INTERCOM_APP_ID || '';
 
+async function enableMocking() {
+  if (process.env.NODE_ENV !== 'development') {
+    return;
+  }
+
+  const { worker } = await import('./mocks/browser');
+
+  // `worker.start()` returns a Promise that resolves
+  // once the Service Worker is up and ready to intercept requests.
+  return worker.start();
+}
 // by default do not enable sentry unless the flag is set.
 // this reduces our monthly usage which can quickly run out if this is not set.
 // you can set this flag in local environments if testing changes to sentry.
@@ -109,51 +120,52 @@ const analytics = Analytics({
 
 const container = document.getElementById('root') as HTMLElement;
 const root = createRoot(container);
-
-root.render(
-  <QueryClientProvider client={reactQueryClient}>
-    <AuthApolloProvider apolloClientFactory={apolloClientFactory}>
-      <IntercomProvider appId={intercomId} autoBoot>
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <AnalyticsProvider instance={analytics}>
-            <AuthProvider>
-              <ChainProvider
-                chains={chains.filter(chain => chain.chain_name === 'regen')}
-                assetLists={assets.filter(
-                  chain => chain.chain_name === 'regen',
-                )}
-                wallets={wallets}
-                walletConnectOptions={{
-                  signClient: {
-                    projectId: import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID,
-                    relayUrl: WALLET_CONNECT_RELAY_URL,
-                    metadata: walletConnectClientMeta,
-                  },
-                }}
-              >
-                <WalletProvider>
-                  <LedgerProvider>
-                    <ThemeProvider>
-                      <Suspense fallback={<PageLoader />}>
-                        <Routes
-                          reactQueryClient={reactQueryClient}
-                          apolloClientFactory={apolloClientFactory}
-                        />
-                      </Suspense>
-                    </ThemeProvider>
-                  </LedgerProvider>
-                </WalletProvider>
-              </ChainProvider>
-            </AuthProvider>
-          </AnalyticsProvider>
-        </LocalizationProvider>
-      </IntercomProvider>
-      <Box sx={{ displayPrint: 'none' }}>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </Box>
-    </AuthApolloProvider>
-  </QueryClientProvider>,
-);
+enableMocking().then(() => {
+  root.render(
+    <QueryClientProvider client={reactQueryClient}>
+      <AuthApolloProvider apolloClientFactory={apolloClientFactory}>
+        <IntercomProvider appId={intercomId} autoBoot>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <AnalyticsProvider instance={analytics}>
+              <AuthProvider>
+                <ChainProvider
+                  chains={chains.filter(chain => chain.chain_name === 'regen')}
+                  assetLists={assets.filter(
+                    chain => chain.chain_name === 'regen',
+                  )}
+                  wallets={wallets}
+                  walletConnectOptions={{
+                    signClient: {
+                      projectId: import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID,
+                      relayUrl: WALLET_CONNECT_RELAY_URL,
+                      metadata: walletConnectClientMeta,
+                    },
+                  }}
+                >
+                  <WalletProvider>
+                    <LedgerProvider>
+                      <ThemeProvider>
+                        <Suspense fallback={<PageLoader />}>
+                          <Routes
+                            reactQueryClient={reactQueryClient}
+                            apolloClientFactory={apolloClientFactory}
+                          />
+                        </Suspense>
+                      </ThemeProvider>
+                    </LedgerProvider>
+                  </WalletProvider>
+                </ChainProvider>
+              </AuthProvider>
+            </AnalyticsProvider>
+          </LocalizationProvider>
+        </IntercomProvider>
+        <Box sx={{ displayPrint: 'none' }}>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </Box>
+      </AuthApolloProvider>
+    </QueryClientProvider>,
+  );
+});
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

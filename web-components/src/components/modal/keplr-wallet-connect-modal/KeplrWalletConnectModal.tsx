@@ -1,7 +1,6 @@
 import { Box, Link } from '@mui/material';
 
-import OutlinedButton from 'src/components/buttons/OutlinedButton';
-
+import OutlinedButton from '../../../components/buttons/OutlinedButton';
 import WalletErrorIcon from '../../../components/icons/WalletErrorIcon';
 import { ButtonType } from '../../../types/shared/buttonType';
 import { LinkType } from '../../../types/shared/linkType';
@@ -49,7 +48,9 @@ const KeplrWalletConnectModal = ({
         </Body>
         <Body sx={{ mt: 2 }}>
           {'Learn how to '}
-          <Link href={helpLink.href}>{helpLink.text}</Link>
+          <Link href={helpLink.href} target="_blank">
+            {helpLink.text}
+          </Link>
         </Body>
         <OutlinedButton
           onClick={onClick}

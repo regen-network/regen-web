@@ -38,6 +38,6 @@ export const getCreditClassDetailsTabs = ({
       ),
       hidden:
         !onChainCreditClassId ||
-        (onChainCreditClassId && isEmpty(creditClassMetadata)),
+        (!!onChainCreditClassId && isEmpty(creditClassMetadata)),
     },
   ].filter(tab => tab.hidden !== true);

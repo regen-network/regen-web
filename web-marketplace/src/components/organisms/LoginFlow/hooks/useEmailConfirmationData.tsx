@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
+import { postData } from 'utils/fetch/postData';
 
 import { apiUri } from 'lib/apiUri';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
@@ -11,6 +13,8 @@ import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCs
 import { onPostData } from 'components/organisms/LoginButton/hooks/onLoginPostData';
 import { useTimer } from 'components/organisms/LoginButton/hooks/useTimer';
 import { getEmailModalError } from 'components/organisms/LoginButton/utils/getEmailModalError';
+import { EmailFormSchemaType } from 'components/organisms/LoginModal/LoginModal.schema';
+import { CONNECTED_EMAIL_ERROR_TITLE } from 'components/organisms/UserAccountSettings/UserAccountSettings.constants';
 
 import {
   DEFAULT_RESEND_ERROR,
@@ -20,9 +24,17 @@ import {
   RESEND_TIMER,
 } from '../../LoginButton/LoginButton.constants';
 
-export const useEmailConfirmationData = () => {
+type EmailConfirmationDataParams = {
+  emailConfirmationText?: string;
+};
+
+export const useEmailConfirmationData = ({
+  emailConfirmationText,
+}: EmailConfirmationDataParams) => {
   const reactQueryClient = useQueryClient();
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  const [isConnectedEmailErrorModalOpen, setIsConnectedEmailErrorModalOpen] =
+    useState(false);
   const [emailModalErrorCode, setEmailModalErrorCode] = useState('');
   const [email, setEmail] = useState('');
   const { privActiveAccount } = useAuth();
@@ -37,6 +49,8 @@ export const useEmailConfirmationData = () => {
   });
 
   const onConfirmationModalClose = () => setIsConfirmationModalOpen(false);
+  const onConnectedEmailErrorModalClose = () =>
+    setIsConnectedEmailErrorModalOpen(false);
   const onResendPasscode = async () => {
     if (token && resendTimeLeft === null) {
       startTimer();
@@ -64,7 +78,7 @@ export const useEmailConfirmationData = () => {
         defaultError: DEFAULT_VALIDATE_ERROR,
         onSuccess: async () => {
           await reactQueryClient.invalidateQueries([GET_ACCOUNTS_QUERY_KEY]);
-          setBannerText(EMAIL_CONFIRMATION_SUCCES);
+          setBannerText(emailConfirmationText ?? EMAIL_CONFIRMATION_SUCCES);
           onConfirmationModalClose();
         },
         setEmailModalErrorCode,
@@ -84,6 +98,37 @@ export const useEmailConfirmationData = () => {
       resetTimer();
     }
   }, [email, privActiveAccount?.email, resetTimer]);
+  const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+  const onEmailSubmit = async ({
+    email,
+    callback,
+  }: EmailFormSchemaType & { callback?: () => void }) => {
+    if (token) {
+      try {
+        setEmail(email);
+        const response: { error?: string } = await postData({
+          url: `${apiUri}/marketplace/v1/auth/passcode`,
+          data: {
+            email,
+          },
+          token,
+        });
+        if (response.error) {
+          if (response.error === CONNECTED_EMAIL_ERROR_TITLE) {
+            setIsConnectedEmailErrorModalOpen(true);
+          } else {
+            setErrorBannerTextAtom(response.error);
+          }
+        } else {
+          callback && callback();
+          startTimer();
+          setIsConfirmationModalOpen(true);
+        }
+      } catch (e) {
+        setErrorBannerTextAtom(String(e));
+      }
+    }
+  };
 
   return {
     email,
@@ -96,5 +141,8 @@ export const useEmailConfirmationData = () => {
     onMailCodeChange,
     onResendPasscode,
     setIsConfirmationModalOpen,
+    onEmailSubmit,
+    isConnectedEmailErrorModalOpen,
+    onConnectedEmailErrorModalClose,
   };
 };

@@ -1,10 +1,6 @@
-import { Box } from '@mui/material';
-
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import { CancelButtonFooter } from 'web-components/lib/components/organisms/CancelButtonFooter/CancelButtonFooter';
 import { Body, Title } from 'web-components/lib/components/typography';
-
-import { ReactComponent as SadBee } from '../../assets/svgs/sad-bee.svg';
 
 interface Props extends RegenModalProps {
   navigate: () => void;
@@ -13,9 +9,9 @@ interface Props extends RegenModalProps {
 export const WarningModal = ({ open, onClose, navigate }: Props) => {
   return (
     <Modal open={open} onClose={onClose}>
-      <Box display="flex" justifyContent="center">
-        <SadBee />
-      </Box>
+      <div className="flex justify-center">
+        <img src="/svg/sad-bee.svg" alt="sad bee" />
+      </div>
       <Title variant="h4" align="center" sx={{ my: 5 }}>
         Are you sure you want to discard your changes?
       </Title>

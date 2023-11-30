@@ -1,7 +1,24 @@
+import { useFormState } from 'react-hook-form';
+
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
+import { EmailConfirmationModal } from 'web-components/lib/components/modal/EmailConfirmationModal/EmailConfirmationModal';
 import { Body, Subtitle } from 'web-components/lib/components/typography';
 
+import Form from 'components/molecules/Form/Form';
+import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
+
+import {
+  EMAIL_CONFIRMATION_CANCEL,
+  EMAIL_CONFIRMATION_SUBMIT,
+  RESEND_BUTTON_TEXT,
+  RESEND_TEXT,
+} from '../LoginButton/LoginButton.constants';
+import { useEmailConfirmationData } from '../LoginFlow/hooks/useEmailConfirmationData';
+import { emailFormSchema } from '../LoginModal/LoginModal.schema';
+import { ConnectedEmailErrorModal } from './UserAccountSettings.ConnectedEmailErrorModal';
 import { ConnectField } from './UserAccountSettings.ConnectField';
+import { EMAIL_ADDED } from './UserAccountSettings.constants';
 import { UserAccountSettingsProps } from './UserAccountSettings.types';
 
 /** UserAccountSettings is a component for displaying and managing a user's
@@ -11,13 +28,81 @@ import { UserAccountSettingsProps } from './UserAccountSettings.types';
  * it should be wrapped in a container that provides those styles.
  */
 export const UserAccountSettings = ({
-  email,
+  email: initialEmail,
   socialProviders,
   walletProvider,
 }: UserAccountSettingsProps) => {
+  const {
+    isConfirmationModalOpen,
+    email,
+    emailModalError,
+    onConfirmationModalClose,
+    onMailCodeChange,
+    onResendPasscode,
+    onEmailSubmit,
+    isConnectedEmailErrorModalOpen,
+    onConnectedEmailErrorModalClose,
+  } = useEmailConfirmationData({ emailConfirmationText: EMAIL_ADDED });
+  const form = useZodForm({
+    schema: emailFormSchema,
+    defaultValues: {
+      email: initialEmail,
+    },
+    mode: 'onBlur',
+  });
+  const { errors } = useFormState({
+    control: form.control,
+  });
+
   return (
     <div className="flex flex-col gap-50">
-      <TextField label="Login Email" value={email} disabled={true} />
+      <Form form={form} onSubmit={onEmailSubmit}>
+        <div className="flex items-end justify-end gap-10">
+          <TextField
+            label="Login Email"
+            disabled={!!initialEmail}
+            {...form.register('email')}
+            error={!!errors['email']}
+            helperText={errors['email']?.message}
+          />
+          {!initialEmail && (
+            <div>
+              <ContainedButton
+                sx={{ height: { xs: 50, sm: 60 }, width: '100%' }}
+                type="submit"
+              >
+                connect
+              </ContainedButton>
+            </div>
+          )}
+        </div>
+      </Form>
+      <EmailConfirmationModal
+        resendText={RESEND_TEXT}
+        resendButtonLink={{
+          text: RESEND_BUTTON_TEXT,
+          onClick: onResendPasscode,
+        }}
+        cancelButton={{
+          text: EMAIL_CONFIRMATION_CANCEL,
+          onClick: onConfirmationModalClose,
+        }}
+        signInButton={{
+          text: EMAIL_CONFIRMATION_SUBMIT,
+          disabled: true,
+          onClick: () => void 0,
+        }}
+        mailLink={{ text: email, href: '#' }}
+        onClose={onConfirmationModalClose}
+        open={isConfirmationModalOpen}
+        error={emailModalError}
+        onCodeChange={onMailCodeChange}
+      />
+      <ConnectedEmailErrorModal
+        open={isConnectedEmailErrorModalOpen}
+        onClose={onConnectedEmailErrorModalClose}
+        email={email}
+      />
       <div className="flex flex-col gap-30">
         <div className="flex flex-col gap-10">
           <Subtitle size="lg">Social Accounts</Subtitle>

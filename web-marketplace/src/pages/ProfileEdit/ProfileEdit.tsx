@@ -61,47 +61,54 @@ export const ProfileEdit = () => {
   }, [isDirtyRef, setIsProfileEditDirtyref]);
 
   return (
-    <div className="flex flex-col justify-start items-center lg:items-start lg:flex-row lg:justify-evenly bg-grey-100 p-35 lg:py-50 lg:px-15 min-h-screen">
-      <div className="flex self-start lg:hidden mb-40 lg:mb-25">
-        <div
-          className="w-fit cursor-pointer"
-          role="button"
-          onClick={onBackClick}
-        >
-          <ArrowDownIcon
-            color={theme.palette.secondary.main}
-            className="text-2xl"
-            direction="prev"
-          />
-        </div>
-      </div>
-      <ProfileEditNav
-        section={section}
-        onNavClick={onNavClick}
-        className={cn(
-          'flex-col lg:flex w-full lg:w-fit',
-          section ? 'hidden' : 'flex',
-        )}
-      />
-      <Flex
-        sx={{
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-        className={cn('w-full lg:w-[560px]', section ? 'flex' : 'hidden')}
-      >
-        <Flex justifyContent="space-between" className="mb-25 w-full">
-          <Title variant="h3">{startCase(section)}</Title>
-          {section === 'profile' && (
-            <ViewProfileButton setIsWarningModalOpen={setIsWarningModalOpen} />
-          )}
-        </Flex>
-        <WithLoader isLoading={accountChanging || loading} sx={{ mx: 'auto' }}>
-          <div className="py-50 px-40 rounded-md border border-grey-200 bg-grey-0">
-            <Outlet />
+    <div className="bg-grey-100 ">
+      <div className="flex flex-col justify-start items-center lg:items-start lg:flex-row lg:justify-evenly max-w-[946px] mx-auto p-35 lg:py-50 lg:px-15 min-h-screen">
+        <div className="flex self-start lg:hidden mb-40 lg:mb-25">
+          <div
+            className="w-fit cursor-pointer"
+            role="button"
+            onClick={onBackClick}
+          >
+            <ArrowDownIcon
+              color={theme.palette.secondary.main}
+              className="text-2xl"
+              direction="prev"
+            />
           </div>
-        </WithLoader>
-      </Flex>
+        </div>
+        <ProfileEditNav
+          section={section}
+          onNavClick={onNavClick}
+          className={cn(
+            'flex-col lg:flex w-full lg:w-fit md:mr-50',
+            section ? 'hidden' : 'flex',
+          )}
+        />
+        <Flex
+          sx={{
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+          className={cn('w-full lg:w-[560px]', section ? 'flex' : 'hidden')}
+        >
+          <Flex justifyContent="space-between" className="mb-25 w-full">
+            <Title variant="h3">{startCase(section)}</Title>
+            {section === 'profile' && (
+              <ViewProfileButton
+                setIsWarningModalOpen={setIsWarningModalOpen}
+              />
+            )}
+          </Flex>
+          <WithLoader
+            isLoading={accountChanging || loading}
+            sx={{ mx: 'auto' }}
+          >
+            <div className="py-50 px-40 rounded-md border border-grey-200 bg-grey-0">
+              <Outlet />
+            </div>
+          </WithLoader>
+        </Flex>
+      </div>
       <WarningModal
         open={!!isWarningModalOpen}
         navigate={() => {

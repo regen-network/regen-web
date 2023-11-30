@@ -41,7 +41,7 @@ export const UserAccountSettings = ({
       </div>
       <div className="flex flex-col gap-30">
         <div className="flex flex-col gap-10">
-          <Subtitle>Wallet integration</Subtitle>
+          <Subtitle size="lg">Wallet integration</Subtitle>
           <Body size="sm" color="info.dark-grey">
             Connect a wallet address to be able to perform on chain tasks such
             as buying and selling credits, and creating projects on Regen

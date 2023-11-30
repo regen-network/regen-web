@@ -61,7 +61,7 @@ export const ProfileEdit = () => {
   }, [isDirtyRef, setIsProfileEditDirtyref]);
 
   return (
-    <div className="bg-grey-100 ">
+    <div className="bg-grey-100">
       <div className="flex flex-col justify-start items-center lg:items-start lg:flex-row lg:justify-evenly max-w-[946px] mx-auto p-35 lg:py-50 lg:px-15 min-h-screen">
         <div className="flex self-start lg:hidden mb-40 lg:mb-25">
           <div

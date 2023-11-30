@@ -23,8 +23,8 @@ export const UserAccountSettings = ({
           <Subtitle size="lg">Social Accounts</Subtitle>
           <Body size="sm" color="info.dark-grey">
             Use your social account to log in to Regen Marketplace.&nbsp;
-            {/* TODO: add link or button to learn more when we have the content ready */}
-            <a>Learn more»</a>
+            {/* TODO: add link when we have the content ready */}
+            {/* <a>Learn more»</a> */}
           </Body>
         </div>
         <div className="flex flex-col">
@@ -46,8 +46,8 @@ export const UserAccountSettings = ({
             Connect a wallet address to be able to perform on chain tasks such
             as buying and selling credits, and creating projects on Regen
             Ledger.&nbsp;
-            {/* TODO: add link or button to learn more when we have the content ready */}
-            <a>Learn more»</a>
+            {/* TODO: add link when we have the content ready */}
+            {/* <a>Learn more»</a> */}
           </Body>
         </div>
         <ConnectField name="Keplr" {...walletProvider} />

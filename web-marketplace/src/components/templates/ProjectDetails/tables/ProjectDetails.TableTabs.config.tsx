@@ -1,5 +1,3 @@
-import { isEmpty } from 'lodash';
-
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 
 import { ProjectPageMetadata } from 'components/molecules';
@@ -18,13 +16,8 @@ export const getProjectDetailsTabs = ({
   batchData,
   onChainProjectId,
   projectMetadata,
-}: ProjectDetailsTableTabsProps): IconTabProps[] => {
-  const isAnchoredMetadata = isAnchoredProjectMetadata(
-    projectMetadata,
-    onChainProjectId,
-  );
-
-  return [
+}: ProjectDetailsTableTabsProps): IconTabProps[] =>
+  [
     {
       label: 'Project documentation',
       content: (
@@ -54,7 +47,7 @@ export const getProjectDetailsTabs = ({
       label: 'Additional Info',
       content: (
         <>
-          {isAnchoredMetadata && (
+          {isAnchoredProjectMetadata(projectMetadata, onChainProjectId) && (
             <ProjectPageMetadata
               metadata={projectMetadata}
               onChainProjectId={onChainProjectId}
@@ -62,8 +55,6 @@ export const getProjectDetailsTabs = ({
           )}
         </>
       ),
-      hidden:
-        !isAnchoredMetadata || (isAnchoredMetadata && isEmpty(projectMetadata)),
+      hidden: !isAnchoredProjectMetadata(projectMetadata, onChainProjectId),
     },
   ].filter(tab => tab.hidden !== true);
-};

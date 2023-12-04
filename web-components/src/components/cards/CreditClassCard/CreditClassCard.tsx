@@ -1,10 +1,9 @@
 import { Box, Card, CardMedia, SxProps } from '@mui/material';
 
-import { Account } from 'src/components/user/UserInfoCard';
-
 import { CardRibbon } from '../../../components/atoms/CardRibbon/CardRibbon';
 import { Flex } from '../../../components/box';
 import InfoTooltipWithIcon from '../../../components/tooltip/InfoTooltipWithIcon';
+import { Account } from '../../../components/user/UserInfoCard';
 import { Theme } from '../../../theme/muiTheme';
 import { LinkType } from '../../../types/shared/linkType';
 import { parseText } from '../../../utils/textParser';

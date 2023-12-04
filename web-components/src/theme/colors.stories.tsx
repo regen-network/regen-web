@@ -1,16 +1,22 @@
-import { cn } from "src/utils/styles/cn";
+import { cn } from '../utils/styles/cn';
 
-const Swatch = ({bgColor, className}: {bgColor: string, className?: string}) =>
-  <div className={cn(bgColor, className, "p-10 rounded-md")}>
+const Swatch = ({
+  bgColor,
+  className,
+}: {
+  bgColor: string;
+  className?: string;
+}) => (
+  <div className={cn(bgColor, className, 'p-10 rounded-md')}>
     {bgColor.substring(3)}
   </div>
+);
 
-const Row = ({children}: {children: React.ReactNode}) =>
-  <div className="flex flex-row gap-10">
-    {children}
-  </div>
+const Row = ({ children }: { children: React.ReactNode }) => (
+  <div className="flex flex-row gap-10">{children}</div>
+);
 
-const Pallete = () =>
+const Pallete = () => (
   <div className="flex flex-col gap-30 bg-grey-0 text-grey-700 p-50">
     <Row>
       <Swatch bgColor="bg-brand-400" />
@@ -47,6 +53,7 @@ const Pallete = () =>
       <Swatch bgColor="bg-blue-100" />
     </Row>
   </div>
+);
 
 export default {
   title: 'Colors',
@@ -56,8 +63,9 @@ export default {
 export const Light = {};
 
 export const Dark = {
-  render: () => <div className="dark">
-    <Pallete />
-  </div>
+  render: () => (
+    <div className="dark">
+      <Pallete />
+    </div>
+  ),
 };
-

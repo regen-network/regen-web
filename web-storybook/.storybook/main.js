@@ -72,13 +72,6 @@ module.exports = {
             '../../web-marketplace/src/**/*.svg',
           ),
         }),
-        tsconfigPaths({
-          root: path.resolve(__dirname, '.'),
-          projects: [
-            path.resolve(__dirname, '../../web-components/tsconfig.json'),
-            path.resolve(__dirname, '../../web-marketplace/tsconfig.json'),
-          ],
-        }),
       ],
       optimizeDeps: {
         esbuildOptions: {

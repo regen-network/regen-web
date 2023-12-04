@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { Box } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
+import { makeStyles } from 'tss-react/mui';
 
 import { Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -11,7 +11,7 @@ interface SectionProps {
   children: ReactNode;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   text: {
     fontSize: theme.spacing(4.5),
     [theme.breakpoints.down('md')]: {
@@ -68,7 +68,7 @@ export const MarkdownSection = ({
   title,
   children,
 }: SectionProps): JSX.Element => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   return (
     <Box
       sx={{ m: '0 auto', maxWidth: 1400, px: [2.8, 38], pb: [18.25, 21.25] }}

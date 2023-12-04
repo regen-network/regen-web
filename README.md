@@ -21,18 +21,19 @@ The website for the [Regen Network](https://regen.network) decentralized infrast
   - [Code style](#code-style)
   - [Typography](#typography)
     - [Sizing guide](#sizing-guide)
-  - [Timeout Issue on Slower Connections](#timeout-issue-on-slower-connections)
   - [Netlify](#netlify)
     - [Debugging Netlify deploys](#debugging-netlify-deploys)
 
 ## Installation
 
-This project uses [lerna](https://github.com/lerna/lerna) with [yarn workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) to manage multiple packages:
+This project uses [bun](https://bun.sh/) with [bun workspaces](https://bun.sh/docs/install/workspaces) to manage multiple packages:
 
 - `web-marketplace`: Registry React application
 - `web-components`: React components and [material-ui](https://material-ui.com/) custom theme
 - `web-storybook`: [Storybook](https://storybook.js.org/) config
 - `web-auth`: React application used for Auth0 Custom Universal Login
+
+[Lerna](https://github.com/lerna/lerna) is also used to make release.
 
 ### Prerequisites
 
@@ -51,14 +52,13 @@ Note: `python` and `vips` are dependencies via `sharp`.
 ### Install dependencies
 
 ```sh
-yarn install
-yarn bootstrap
+bun run install
 ```
 
 Prepare some artifacts needed to run in dev mode:
 
 ```sh
-yarn build
+bun run build
 ```
 
 ## Environment variables
@@ -72,7 +72,7 @@ For `web-auth`, follow these [setup instructions](web-auth/README.md#setup).
 First, run:
 
 ```sh
-yarn watch
+bun run watch
 ```
 
 It will watch for changes in `web-components` and rebuild them in `web-components/lib` directory.
@@ -80,19 +80,19 @@ It will watch for changes in `web-components` and rebuild them in `web-component
 Then, to run the registry app:
 
 ```sh
-yarn start
+bun run start
 ```
 
 To run Storybook:
 
 ```sh
-yarn storybook
+bun run storybook
 ```
 
 To run the auth app:
 
 ```sh
-yarn start-auth
+bun run start-auth
 ```
 
 ## Deployment
@@ -102,7 +102,7 @@ yarn start-auth
 Compile `web-components` and `web-marketplace` to `web-components/lib` and `web-marketplace/build` respectively:
 
 ```sh
-yarn build
+bun run build
 ```
 
 #### GraphQL Type generation
@@ -111,13 +111,13 @@ To generate Type definitions from our GraphQL Schema, as well as custom react ho
 
 For `/web-marketplace` there are two commands for the separate sources:
 
-1. `yarn graphql:codegen` - for registry server graphql types
-2. `yarn graphql:codegen-sanity` - for sanity CMS graphql types
+1. `bun run graphql:codegen` - for registry server graphql types
+2. `bun run graphql:codegen-sanity` - for sanity CMS graphql types
 
 which generates types for any **_named_** GraphQL queries and mutations in `web-marketplace/src/graphql/*.graphql` (note - it does not generate types for unnamed queries)
 
 ```sh
-yarn graphql:codegen
+bun run graphql:codegen
 ```
 
 This should be done anytime a `.graphql` file is created or modified.
@@ -132,7 +132,7 @@ In this case, you might want to submit a PR on https://github.com/regen-network/
 Similarly, types can be generated for Sanity GraphQL Schema (from `web-marketplace/src/graphql/sanity/*.graphql`) using:
 
 ```sh
-yarn graphql:codegen-sanity
+bun run graphql:codegen-sanity
 ```
 
 ### Storybook
@@ -140,14 +140,14 @@ yarn graphql:codegen-sanity
 Compile `web-components` and `web-storybook` to `web-components/lib` and `web-storybook/build` respectively:
 
 ```sh
-yarn build-storybook
+bun run build-storybook
 ```
 
 ### Deploying the Custom Login form to Auth0
 
 Please, follow [these instructions](web-auth/README.md#setup) and then:
 
-1. Run `yarn build-auth` command.
+1. Run `bun run build-auth` command.
 2. Copy the code from `./build/index.html`.
 3. Paste it into the Universal Login HTML form from [Auth dashboard](https://manage.auth0.com/dashboard/us/regen-network-registry/login_page) and save.
 
@@ -156,7 +156,7 @@ This could be automated in the future.
 ## Testing
 
 ```sh
-yarn test
+bun run test
 ```
 
 Launches the test runner in the interactive watch mode.
@@ -166,7 +166,7 @@ We're using [StoryShots](https://storybook.js.org/docs/testing/structural-testin
 Update web-components snapshots:
 
 ```sh
-yarn test-update-snapshot
+bun run test-update-snapshot
 ```
 
 ## Code style
@@ -177,7 +177,7 @@ code formatter and linter.
 Code can be formatted and any auto-fixable errors corrected through the command:
 
 ```sh
-yarn format-and-fix
+bun run format-and-fix
 ```
 
 If you are using VsCode, there are suggested workspace settings in `.vscode/settings.json.suggested` - copy those over to your workspace `settings.json` and things should format automatically.
@@ -246,24 +246,6 @@ The `<Body>` component by default will add styles to child `Link` and `ul/ol` el
 |  14px  | 0.875rem | 3.5               |   subtitleSmall, bodySmall, buttonSmall   |    Subtitle, Body, Label     |    textSmall     |
 |  12px  | 0.75rem  | 3                 |  subtitleXSmall bodyXSmall, buttonXSmall  |    Subtitle, Body, Label     |    textXSmall    |
 
-## Timeout Issue on Slower Connections
-
-_some larger packages don't manage to get downloaded in time for yarn's 30 second timeout, you might see an error like this one_
-
-```
-info There appears to be trouble with your network connection. Retrying...
-error An unexpected error occurred: "https://registry.yarnpkg.com/@material-ui/icons/-/icons-4.5.1.tgz: ESOCKETTIMEDOUT".
-info If you think this is a bug, please open a bug report with the information provided in "/Users/jared/Dev/registry/yarn-error.log".
-```
-
-a simple workaround via https://github.com/mui-org/material-ui/issues/12432 is to run
-
-```
-yarn install --network-timeout 500000
-```
-
-instead of `yarn install`
-
 ## Netlify
 
 Currently we use netlify to deploy this application.
@@ -291,5 +273,5 @@ After running the `start-image.sh` script you will drop into the docker containe
 Then you will be able to run any commands, i.e. the build:
 
 ```sh
-/opt/build-bin/build yarn build
+/opt/build-bin/build bun run build
 ```

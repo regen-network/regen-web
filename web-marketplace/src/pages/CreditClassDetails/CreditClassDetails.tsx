@@ -238,11 +238,11 @@ function CreditClassDetails({
         />
       )}
       <SellOrdersActionsBar
-        isBuyButtonDisabled={isBuyFlowDisabled && Boolean(wallet?.address)}
+        isBuyButtonDisabled={isBuyFlowDisabled}
         isCommunityCredit={isCommunityCredit}
         onBookCallButtonClick={onBookCallButtonClick}
         onBuyButtonClick={() => {
-          if (isBuyFlowDisabled) {
+          if (!wallet?.address) {
             setConnectWalletModal(atom => void (atom.open = true));
           } else {
             if (isConnected) {

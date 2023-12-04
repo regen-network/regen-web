@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
 import { apiUri } from 'lib/apiUri';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
+import { useAuth } from 'lib/auth/auth';
 import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 
@@ -24,9 +25,14 @@ export const useEmailConfirmationData = () => {
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [emailModalErrorCode, setEmailModalErrorCode] = useState('');
   const [email, setEmail] = useState('');
+  const { privActiveAccount } = useAuth();
   const setBannerText = useSetAtom(bannerTextAtom);
   const { data: token } = useQuery(getCsrfTokenQuery({}));
-  const { timeLeft: resendTimeLeft, startTimer } = useTimer({
+  const {
+    timeLeft: resendTimeLeft,
+    startTimer,
+    resetTimer,
+  } = useTimer({
     duration: RESEND_TIMER,
   });
 
@@ -72,6 +78,12 @@ export const useEmailConfirmationData = () => {
     errorCode: emailModalErrorCode,
     onResend: onResendPasscode,
   });
+
+  useEffect(() => {
+    if (privActiveAccount?.email === email) {
+      resetTimer();
+    }
+  }, [email, privActiveAccount?.email, resetTimer]);
 
   return {
     email,

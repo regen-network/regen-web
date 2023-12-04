@@ -22,6 +22,7 @@ export type Scalars = {
 
 
 
+
 export type ActionCard = {
   __typename?: 'ActionCard';
   _key?: Maybe<Scalars['String']>;
@@ -1708,6 +1709,8 @@ export type CreditClass = Document & {
   landSteward?: Maybe<LandSteward>;
   icon?: Maybe<Image>;
   program?: Maybe<Program>;
+  retirementLabel?: Maybe<Scalars['String']>;
+  retirementIcon?: Maybe<Image>;
 };
 
 export type CreditClassFilter = {
@@ -1726,6 +1729,8 @@ export type CreditClassFilter = {
   landSteward?: Maybe<LandStewardFilter>;
   icon?: Maybe<ImageFilter>;
   program?: Maybe<ProgramFilter>;
+  retirementLabel?: Maybe<StringFilter>;
+  retirementIcon?: Maybe<ImageFilter>;
 };
 
 export type CreditClassPage = Document & {
@@ -1782,6 +1787,8 @@ export type CreditClassSorting = {
   buyer?: Maybe<BuyerSorting>;
   landSteward?: Maybe<LandStewardSorting>;
   icon?: Maybe<ImageSorting>;
+  retirementLabel?: Maybe<SortOrder>;
+  retirementIcon?: Maybe<ImageSorting>;
 };
 
 export type CreditInfos = {
@@ -2349,6 +2356,7 @@ export type EcologicalCreditCard = Document & {
   offsetMethods?: Maybe<Array<Maybe<OffsetMethod>>>;
   projectActivities?: Maybe<Array<Maybe<ProjectActivity>>>;
   button?: Maybe<Button>;
+  secondaryButton?: Maybe<Button>;
 };
 
 export type EcologicalCreditCardFilter = {
@@ -2367,6 +2375,7 @@ export type EcologicalCreditCardFilter = {
   creditClass?: Maybe<CreditClassFilter>;
   creditInfos?: Maybe<CreditInfosFilter>;
   button?: Maybe<ButtonFilter>;
+  secondaryButton?: Maybe<ButtonFilter>;
 };
 
 export type EcologicalCreditCardSorting = {
@@ -2381,6 +2390,7 @@ export type EcologicalCreditCardSorting = {
   image?: Maybe<CustomImageSorting>;
   creditInfos?: Maybe<CreditInfosSorting>;
   button?: Maybe<ButtonSorting>;
+  secondaryButton?: Maybe<ButtonSorting>;
 };
 
 export type EcologicalCreditCardsSection = {
@@ -3005,7 +3015,7 @@ export type HomePage = Document & {
   _key?: Maybe<Scalars['String']>;
   seo?: Maybe<Seo>;
   heroSection?: Maybe<HomePageTopSection>;
-  projectsSection?: Maybe<TitleCustomBody>;
+  projectsSection?: Maybe<HomePageProjectsSection>;
   creditClassesSection?: Maybe<TitleCustomBody>;
   gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSection>;
   bottomBanner?: Maybe<BottomBanner>;
@@ -3022,10 +3032,30 @@ export type HomePageFilter = {
   _key?: Maybe<StringFilter>;
   seo?: Maybe<SeoFilter>;
   heroSection?: Maybe<HomePageTopSectionFilter>;
-  projectsSection?: Maybe<TitleCustomBodyFilter>;
+  projectsSection?: Maybe<HomePageProjectsSectionFilter>;
   creditClassesSection?: Maybe<TitleCustomBodyFilter>;
   gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSectionFilter>;
   bottomBanner?: Maybe<BottomBannerFilter>;
+};
+
+export type HomePageProjectsSection = {
+  __typename?: 'HomePageProjectsSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  titleCustomBody?: Maybe<TitleCustomBody>;
+  projects?: Maybe<Array<Maybe<Project>>>;
+};
+
+export type HomePageProjectsSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  titleCustomBody?: Maybe<TitleCustomBodyFilter>;
+};
+
+export type HomePageProjectsSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  titleCustomBody?: Maybe<TitleCustomBodySorting>;
 };
 
 export type HomePageSorting = {
@@ -3037,7 +3067,7 @@ export type HomePageSorting = {
   _key?: Maybe<SortOrder>;
   seo?: Maybe<SeoSorting>;
   heroSection?: Maybe<HomePageTopSectionSorting>;
-  projectsSection?: Maybe<TitleCustomBodySorting>;
+  projectsSection?: Maybe<HomePageProjectsSectionSorting>;
   creditClassesSection?: Maybe<TitleCustomBodySorting>;
   bottomBanner?: Maybe<BottomBannerSorting>;
 };
@@ -4701,7 +4731,7 @@ export type Project = Document & {
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
   projectName?: Maybe<Scalars['String']>;
-  /** on-chain project id */
+  /** on-chain project id, off-chain uuid or slug */
   projectId?: Maybe<Scalars['String']>;
   image?: Maybe<CustomImage>;
   location?: Maybe<Scalars['String']>;
@@ -8142,6 +8172,13 @@ export type EcologicalCreditCardFieldsFragment = (
       { __typename?: 'Link' }
       & Pick<Link, 'buttonHref'>
     )> }
+  )>, secondaryButton?: Maybe<(
+    { __typename?: 'Button' }
+    & Pick<Button, 'buttonText'>
+    & { buttonLink?: Maybe<(
+      { __typename?: 'Link' }
+      & Pick<Link, 'buttonHref'>
+    )> }
   )> }
 );
 
@@ -8778,6 +8815,12 @@ export const EcologicalCreditCardFieldsFragmentDoc = gql`
     }
   }
   button {
+    buttonText
+    buttonLink {
+      buttonHref
+    }
+  }
+  secondaryButton {
     buttonText
     buttonLink {
       buttonHref

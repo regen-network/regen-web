@@ -2,6 +2,7 @@ import { Box, Card, SxProps } from '@mui/material';
 
 import { Flex } from '../../../components/box';
 import ContainedButton from '../../../components/buttons/ContainedButton';
+import OutlinedButton from '../../../components/buttons/OutlinedButton';
 import { LinkComponentProp } from '../../../components/tabs/IconTabs';
 import { Body, Title } from '../../../components/typography';
 import { pxToRem, Theme } from '../../../theme/muiTheme';
@@ -24,10 +25,14 @@ const EcologicalCreditCard = ({
   offsetMethodList,
   projectActivitesList,
   button,
+  secondaryButton,
   linkComponent,
   children,
   sx = [],
 }: EcologicalCreditCardProps): JSX.Element => {
+  const hasItems =
+    offsetMethodList.items.length > 0 || projectActivitesList.items.length > 0;
+
   return (
     <Card
       sx={[
@@ -70,30 +75,49 @@ const EcologicalCreditCard = ({
         <Body sx={{ mb: { xs: 3.5, sm: 5 }, fontSize: pxToRem(18) }}>
           {description}
         </Body>
-        <Flex
-          sx={{ mb: { xs: 4, sm: 9 } }}
-          flexDirection={{ xs: 'column', sm: 'row' }}
-        >
-          <EcologicalCreditCardItemList
-            label={offsetMethodList.label}
-            items={offsetMethodList.items}
-            sx={{ width: 318, mr: 5, mb: { xs: 5, sm: 0 } }}
-          />
-          <EcologicalCreditCardItemList
-            label={projectActivitesList.label}
-            items={projectActivitesList.items}
-            sx={{ width: 318 }}
-          />
-        </Flex>
-        {button?.text && (
-          <ContainedButton
-            href={button.href}
-            LinkComponent={linkComponent}
-            sx={{ width: 'fit-content' }}
+        {hasItems && (
+          <Flex
+            sx={{ mb: { xs: 4, sm: 9 } }}
+            flexDirection={{ xs: 'column', sm: 'row' }}
           >
-            {button.text}
-          </ContainedButton>
+            <EcologicalCreditCardItemList
+              label={offsetMethodList.label}
+              items={offsetMethodList.items}
+              sx={{ width: 318, mr: 5, mb: { xs: 5, sm: 0 } }}
+            />
+            <EcologicalCreditCardItemList
+              label={projectActivitesList.label}
+              items={projectActivitesList.items}
+              sx={{ width: 318 }}
+            />
+          </Flex>
         )}
+        <div className="flex flex-col sm:flex-row">
+          {button?.text && (
+            <ContainedButton
+              href={button.href}
+              LinkComponent={linkComponent}
+              sx={{
+                width: { xs: 'w-full', sm: 'fit-content' },
+                mb: { xs: 5, sm: 0 },
+              }}
+            >
+              {button.text}
+            </ContainedButton>
+          )}
+          {secondaryButton?.text && (
+            <OutlinedButton
+              href={secondaryButton.href}
+              LinkComponent={linkComponent}
+              sx={{
+                width: { xs: 'w-full', sm: 'fit-content' },
+                ml: { xs: 0, sm: 5 },
+              }}
+            >
+              {secondaryButton.text}
+            </OutlinedButton>
+          )}
+        </div>
       </Box>
     </Card>
   );

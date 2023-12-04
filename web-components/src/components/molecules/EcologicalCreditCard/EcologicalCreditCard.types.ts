@@ -32,7 +32,11 @@ export type EcologicalCreditCardType = {
   projectActivitesList: EcologicalCreditCardItemListType;
   program?: Account;
   button: {
-    text: string;
-    href: string;
+    text?: string;
+    href?: string;
+  };
+  secondaryButton?: {
+    text?: string;
+    href?: string;
   };
 };

@@ -1,5 +1,3 @@
-import { isEmpty } from 'lodash';
-
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 
 import { CreditBatches } from 'components/organisms';

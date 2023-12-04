@@ -14,7 +14,7 @@ export const socialProviders = [
 
 export const RESEND_TEXT = 'Don’t see anything?';
 export const RESEND_SUCCES = 'New confirmation code sent';
-export const RESEND_BUTTON_TEXT = 'Resend email';
+export const RESEND_BUTTON_TEXT = 'Resend email.';
 export const EMAIL_CONFIRMATION_CANCEL = 'cancel';
 export const EMAIL_CONFIRMATION_SUBMIT = 'log in';
 export const EMAIL_CONFIRMATION_SUCCES = 'Sign in successful';

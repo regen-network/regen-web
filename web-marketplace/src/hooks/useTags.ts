@@ -33,7 +33,9 @@ export const useTags = ({ activities, ecosystemTypes }: Params) => {
   const activityTags: ProjectTagType[] | undefined = activities?.map(
     activity => ({
       name: activity,
-      icon: { src: projectActivityIconsMapping?.[activity] ?? '' },
+      icon: {
+        src: projectActivityIconsMapping?.[activity.toLocaleLowerCase()] ?? '',
+      },
     }),
   );
 
@@ -41,7 +43,8 @@ export const useTags = ({ activities, ecosystemTypes }: Params) => {
     ecosystem => ({
       name: ecosystem,
       icon: {
-        src: projectEcosystemIconsMapping?.[ecosystem] ?? '',
+        src:
+          projectEcosystemIconsMapping?.[ecosystem.toLocaleLowerCase()] ?? '',
       },
     }),
   );

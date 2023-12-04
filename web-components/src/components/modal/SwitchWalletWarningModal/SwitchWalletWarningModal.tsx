@@ -1,5 +1,3 @@
-import { Box } from '@mui/material';
-
 import { SadBeeIcon } from '../../../components/icons/SadBeeIcon';
 import { Body, Subtitle, Title } from '../../typography';
 import Modal, { RegenModalProps } from '..';
@@ -19,14 +17,7 @@ const SwitchWalletWarningModal = ({
 }: KeplrWalletConnectModalProps) => {
   return (
     <Modal open={open} onClose={onClose} isFullscreenMobile={false}>
-      <Box
-        sx={{
-          maxWidth: 460,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
+      <div className="max-w-[460px] flex flex-col items-center">
         <SadBeeIcon className="mb-20" />
         <Title align="center" variant="h4" mb={5}>
           {SWITCH_WALLET_WARNING_MODAL_TITLE}
@@ -37,7 +28,7 @@ const SwitchWalletWarningModal = ({
         <Body size="lg" align="center">
           {SWITCH_WALLET_WARNING_MODAL_MESSAGE}
         </Body>
-      </Box>
+      </div>
     </Modal>
   );
 };

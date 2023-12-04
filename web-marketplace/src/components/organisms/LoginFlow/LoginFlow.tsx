@@ -45,7 +45,6 @@ const LoginFlow = ({
     email,
     emailModalError,
     resendTimeLeft,
-    startResendTimer,
     onConfirmationModalClose,
     onMailCodeChange,
     onResendPasscode,

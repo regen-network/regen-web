@@ -136,7 +136,6 @@ export const useEmailConfirmationData = ({
     emailModalError,
     isConfirmationModalOpen,
     resendTimeLeft,
-    startResendTimer: startTimer,
     onConfirmationModalClose,
     onMailCodeChange,
     onResendPasscode,

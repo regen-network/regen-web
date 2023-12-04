@@ -11,9 +11,9 @@ import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import {
   EMAIL_CONFIRMATION_CANCEL,
   EMAIL_CONFIRMATION_SUBMIT,
-  RESEND_BUTTON_TEXT,
-  RESEND_TEXT,
 } from '../LoginButton/LoginButton.constants';
+import { getResendCodeButtonLink } from '../LoginButton/utils/getResendCodeButtonLink';
+import { getResendCodeLabel } from '../LoginButton/utils/getResendCodeLabel';
 import { useEmailConfirmationData } from '../LoginFlow/hooks/useEmailConfirmationData';
 import { emailFormSchema } from '../LoginModal/LoginModal.schema';
 import { ConnectedEmailErrorModal } from './UserAccountSettings.ConnectedEmailErrorModal';
@@ -36,6 +36,7 @@ export const UserAccountSettings = ({
     isConfirmationModalOpen,
     email,
     emailModalError,
+    resendTimeLeft,
     onConfirmationModalClose,
     onMailCodeChange,
     onResendPasscode,
@@ -78,11 +79,11 @@ export const UserAccountSettings = ({
         </div>
       </Form>
       <EmailConfirmationModal
-        resendText={RESEND_TEXT}
-        resendButtonLink={{
-          text: RESEND_BUTTON_TEXT,
-          onClick: onResendPasscode,
-        }}
+        resendText={getResendCodeLabel({ resendTimeLeft })}
+        resendButtonLink={getResendCodeButtonLink({
+          resendTimeLeft,
+          onResendPasscode,
+        })}
         cancelButton={{
           text: EMAIL_CONFIRMATION_CANCEL,
           onClick: onConfirmationModalClose,

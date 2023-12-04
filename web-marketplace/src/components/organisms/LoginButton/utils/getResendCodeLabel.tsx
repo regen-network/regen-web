@@ -7,5 +7,5 @@ type Params = {
 export const getResendCodeLabel = ({ resendTimeLeft }: Params) => {
   return resendTimeLeft === null
     ? RESEND_TEXT
-    : `Resend after ${resendTimeLeft} seconds`;
+    : `Resend after ${resendTimeLeft} seconds.`;
 };

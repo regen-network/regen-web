@@ -33,11 +33,12 @@ export const useCreditClassDetails = ({ onChainClass, metadata }: Params) => {
   const { data: sanityCreditTypeData } = useQuery(
     getAllCreditTypeQuery({ sanityClient, enabled: !!sanityClient }),
   );
+
   const creditTypeSanity = sanityCreditTypeData?.allCreditType?.find(
     creditType =>
-      creditType.name?.toLowerCase() === creditTypeData?.creditType?.name,
+      creditType.name?.toLowerCase() ===
+      creditTypeData?.creditType?.name.toLocaleLowerCase(),
   );
-
   // Credit Offset Methods
   const { data: sanityOffsetMethodData } = useQuery(
     getAllOffsetMethodQuery({ sanityClient, enabled: !!sanityClient }),

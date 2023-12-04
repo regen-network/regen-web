@@ -83,7 +83,6 @@ export const EmailConfirmationModal = ({
               {resendButtonLink.text}
             </div>
           )}
-          {'.'}
         </div>
         <Box sx={{ display: 'flex', justifyContent: 'end', width: '100%' }}>
           <TextButton

@@ -94,7 +94,7 @@ function ProjectTopSection({
   const creditTypeSanity = sanityCreditTypeData?.allCreditType?.find(
     creditType =>
       creditType.name?.toLowerCase() ===
-      creditTypeData?.creditType?.name?.toLocaleLowerCase(),
+      creditTypeData?.creditType?.name?.toLowerCase(),
   );
   const { data: sanityOffsetMethodData } = useQuery(
     getAllOffsetMethodQuery({ sanityClient, enabled: !!sanityClient }),

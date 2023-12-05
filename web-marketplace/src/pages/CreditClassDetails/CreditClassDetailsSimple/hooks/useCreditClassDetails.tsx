@@ -37,7 +37,7 @@ export const useCreditClassDetails = ({ onChainClass, metadata }: Params) => {
   const creditTypeSanity = sanityCreditTypeData?.allCreditType?.find(
     creditType =>
       creditType.name?.toLowerCase() ===
-      creditTypeData?.creditType?.name.toLocaleLowerCase(),
+      creditTypeData?.creditType?.name.toLowerCase(),
   );
   // Credit Offset Methods
   const { data: sanityOffsetMethodData } = useQuery(

@@ -21,9 +21,9 @@ export const postData = async ({
     credentials: 'include',
     body: JSON.stringify(data),
   });
-
   try {
-    return rawResponse.json();
+    const json = await rawResponse.json();
+    return json;
   } catch (e) {
     throw Error(rawResponse.statusText);
   }

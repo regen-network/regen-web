@@ -45,18 +45,14 @@ const LoginFlow = ({
     email,
     emailModalError,
     resendTimeLeft,
-    startResendTimer,
     onConfirmationModalClose,
     onMailCodeChange,
     onResendPasscode,
-    setIsConfirmationModalOpen,
-    setEmail,
-  } = useEmailConfirmationData();
+    onEmailSubmit,
+  } = useEmailConfirmationData({});
   const [isWaitingForSigning, setIsWaitingForSigningAtom] = useAtom(
     isWaitingForSigningAtom,
   );
-  const { data: token } = useQuery(getCsrfTokenQuery({}));
-  const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
   return (
     <>
@@ -66,23 +62,7 @@ const LoginFlow = ({
         wallets={wallets}
         socialProviders={socialProviders}
         onEmailSubmit={async ({ email }) => {
-          if (token) {
-            try {
-              setEmail(email);
-              await postData({
-                url: `${apiUri}/marketplace/v1/auth/passcode`,
-                data: {
-                  email,
-                },
-                token,
-              });
-              onModalClose();
-              startResendTimer();
-              setIsConfirmationModalOpen(true);
-            } catch (e) {
-              setErrorBannerTextAtom(String(e));
-            }
-          }
+          await onEmailSubmit({ email, callback: onModalClose });
         }}
         state={modalState}
         qrCodeUri={qrCodeUri}

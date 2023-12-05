@@ -41,7 +41,7 @@ const RegistryLayoutHeader: React.FC = () => {
     privActiveAccount,
     privAuthenticatedAccounts,
   } = useAuth();
-  const { wallet, disconnect, isConnected, isWalletConnect } = useWallet();
+  const { wallet, disconnect, isConnected, loginDisabled } = useWallet();
   const { accountOrWallet } = useAuthData();
   const theme = useTheme<Theme>();
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
@@ -59,7 +59,7 @@ const RegistryLayoutHeader: React.FC = () => {
         isIssuer,
         showProjects,
         isWalletConnected: isConnected,
-        isWalletConnect,
+        loginDisabled,
       }),
     [
       pathname,
@@ -67,7 +67,7 @@ const RegistryLayoutHeader: React.FC = () => {
       isIssuer,
       showProjects,
       isConnected,
-      isWalletConnect,
+      loginDisabled,
     ],
   );
   const onProfileClick = useOnProfileClick();
@@ -132,7 +132,7 @@ const RegistryLayoutHeader: React.FC = () => {
                   })) || []
                 }
                 onProfileClick={onProfileClick}
-                addAccount={isWalletConnect ? undefined : onButtonClick}
+                addAccount={loginDisabled ? undefined : onButtonClick}
               />
             )}
             <LoginButton />

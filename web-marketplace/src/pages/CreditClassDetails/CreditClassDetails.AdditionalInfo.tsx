@@ -28,6 +28,8 @@ const AdditionalInfo = <T extends CreditClassMetadataLD>({
   classId,
   metadata,
 }: AdditionalInfoProps<T>): JSX.Element | null => {
+  if (!classId && !metadata) return null;
+
   const sectoralScopes = metadata?.['regen:sectoralScope'];
   const verificationMethod = metadata?.['regen:verificationMethod'];
   const sourceRegistry = metadata?.['regen:sourceRegistry'];
@@ -50,48 +52,50 @@ const AdditionalInfo = <T extends CreditClassMetadataLD>({
         borderRadius: '0 0 8px 8px',
       }}
     >
-      <Body size="lg">{CREDIT_CLASS_DETAILS_ADDITIONAL_INFO_HELPER_TEXT}</Body>
-      <Box sx={{ pt: 7 }}>
-        <Grid container spacing={8}>
-          <Grid item xs={12} sm={6} sx={{ flexDirection: 'column' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Label size="xs" sx={{ mr: 1 }}>
-                class id
-              </Label>
-              <InfoTooltipWithIcon
-                title={CREDIT_CLASS_DETAILS_ADDITIONAL_INFO_CLASS_ID_TOOLTIP}
-                outlined
-              />
-            </Box>
-            <Body size="xl">{classId}</Body>
-          </Grid>
-          <MetaDetail label="registry" value={sourceRegistry} />
-          <MetaDetail
-            label="carbon offset standard"
-            value={carbonOffsetStandard}
-          />
-          <ApprovedMethodologiesList
-            methodologyList={metadata?.['regen:approvedMethodologies']}
-          />
-          <MetaDetail label="project activities" value={projectActivities} />
-          <MetaDetail label="sectoral scopes" value={sectoralScopes} />
-          <MetaDetail label="Tokenization Source" value={tokenizationSource} />
-          <MetaDetail label="ecosystem type" value={ecosystemTypes} />
-          <MetaDetail label="verification method" value={verificationMethod} />
-          <MetaDetail label="measured GHGs" value={measuredGHGs} />
-          <BufferPoolAccounts
-            bufferPoolAccounts={bufferPoolAccounts?.['schema:itemListElement']}
-          />
-          {unknownFields.map(([fieldName, value]) => (
-            <MetaDetail
-              key={fieldName}
-              label={getFieldLabel(fieldName)}
-              value={value}
-              rdfType={getFieldType(fieldName, metadata?.['@context'])}
+      {metadata && (
+        <Body size="lg" sx={{ pb: 7 }}>
+          {CREDIT_CLASS_DETAILS_ADDITIONAL_INFO_HELPER_TEXT}
+        </Body>
+      )}
+      <Grid container spacing={8}>
+        <Grid item xs={12} sm={6} sx={{ flexDirection: 'column' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Label size="xs" sx={{ mr: 1 }}>
+              class id
+            </Label>
+            <InfoTooltipWithIcon
+              title={CREDIT_CLASS_DETAILS_ADDITIONAL_INFO_CLASS_ID_TOOLTIP}
+              outlined
             />
-          ))}
+          </Box>
+          <Body size="xl">{classId}</Body>
         </Grid>
-      </Box>
+        <MetaDetail label="registry" value={sourceRegistry} />
+        <MetaDetail
+          label="carbon offset standard"
+          value={carbonOffsetStandard}
+        />
+        <ApprovedMethodologiesList
+          methodologyList={metadata?.['regen:approvedMethodologies']}
+        />
+        <MetaDetail label="project activities" value={projectActivities} />
+        <MetaDetail label="sectoral scopes" value={sectoralScopes} />
+        <MetaDetail label="Tokenization Source" value={tokenizationSource} />
+        <MetaDetail label="ecosystem type" value={ecosystemTypes} />
+        <MetaDetail label="verification method" value={verificationMethod} />
+        <MetaDetail label="measured GHGs" value={measuredGHGs} />
+        <BufferPoolAccounts
+          bufferPoolAccounts={bufferPoolAccounts?.['schema:itemListElement']}
+        />
+        {unknownFields.map(([fieldName, value]) => (
+          <MetaDetail
+            key={fieldName}
+            label={getFieldLabel(fieldName)}
+            value={value}
+            rdfType={getFieldType(fieldName, metadata?.['@context'])}
+          />
+        ))}
+      </Grid>
     </Box>
   );
 };

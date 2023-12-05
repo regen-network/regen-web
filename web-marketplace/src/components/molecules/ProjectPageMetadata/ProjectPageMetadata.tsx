@@ -26,24 +26,24 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
   metadata,
   onChainProjectId,
 }) => {
-  if (!metadata) return null;
+  if (!onChainProjectId && !metadata) return null;
 
   // Common
-  const startDate = metadata['regen:projectStartDate'];
-  const endDate = metadata['regen:projectEndDate'];
-  const projectType = metadata['regen:projectType'];
+  const startDate = metadata?.['regen:projectStartDate'];
+  const endDate = metadata?.['regen:projectEndDate'];
+  const projectType = metadata?.['regen:projectType'];
 
   // VCS
-  const vcsProjectId = metadata['regen:vcsProjectId'];
+  const vcsProjectId = metadata?.['regen:vcsProjectId'];
 
   // CFC
-  const cfcProjectId = metadata['regen:cfcProjectId'];
-  const projectDesignDocument = metadata['regen:projectDesignDocument'];
+  const cfcProjectId = metadata?.['regen:cfcProjectId'];
+  const projectDesignDocument = metadata?.['regen:projectDesignDocument'];
 
   // Toucan
-  const toucanProjectTokenId = metadata['regen:toucanProjectTokenId'];
+  const toucanProjectTokenId = metadata?.['regen:toucanProjectTokenId'];
 
-  const unknownFields = getProjectUnknownFields(metadata);
+  const unknownFields = metadata ? getProjectUnknownFields(metadata) : [];
 
   return (
     <Box
@@ -55,8 +55,12 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
         borderRadius: '0 0 8px 8px',
       }}
     >
-      <Body size="lg">{PROJECT_PAGE_METADATA_HELPER_TEXT}</Body>
-      <Box sx={{ pt: 7 }}>
+      {metadata && (
+        <Body sx={{ pb: 7 }} size="lg">
+          {PROJECT_PAGE_METADATA_HELPER_TEXT}
+        </Body>
+      )}
+      <Box>
         <Grid container spacing={8}>
           <Grid item xs={12} sm={6} sx={{ flexDirection: 'column' }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -116,20 +120,23 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
             value={startDate}
             rdfType={getFieldType(
               'regen:projectStartDate',
-              metadata['@context'],
+              metadata?.['@context'],
             )}
           />
           <MetaDetail
             label="project end date"
             value={endDate}
-            rdfType={getFieldType('regen:projectEndDate', metadata['@context'])}
+            rdfType={getFieldType(
+              'regen:projectEndDate',
+              metadata?.['@context'],
+            )}
           />
           {unknownFields.map(([fieldName, value]) => (
             <MetaDetail
               key={fieldName}
               label={getFieldLabel(fieldName)}
               value={value}
-              rdfType={getFieldType(fieldName, metadata['@context'])}
+              rdfType={getFieldType(fieldName, metadata?.['@context'])}
             />
           ))}
         </Grid>

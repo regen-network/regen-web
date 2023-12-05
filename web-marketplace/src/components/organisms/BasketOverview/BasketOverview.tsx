@@ -19,6 +19,7 @@ import {
   connectWalletModalAtom,
   switchWalletModalAtom,
 } from 'lib/atoms/modals.atoms';
+import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { basketDetailAtom } from 'pages/BasketDetails/BasketDetails.store';
@@ -74,13 +75,14 @@ export const BasketOverview: React.FC<
   const { classes: styles } = useBasketOverviewStyles();
   const basketPutData = useBasketPutData();
   const basketTakeData = useBasketTakeData();
-  const { wallet, isConnected } = useWallet();
+  const { isConnected } = useWallet();
   const [, setBasketDetailAtom] = useAtom(basketDetailAtom);
   const setConnectWalletModalAtom = useSetAtom(connectWalletModalAtom);
   const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
   const { isLoadingPutData, creditBatchDenoms } = basketPutData;
   const { isLoadingTakeData, basketToken } = basketTakeData;
-  const hasAddress = !!wallet?.address;
+  const { activeAccount } = useAuth();
+  const hasAddress = !!activeAccount?.addr;
   const isPutButtonDisabled =
     (isLoadingPutData || creditBatchDenoms.length === 0) && hasAddress;
   const isTakeButtonDisabled =

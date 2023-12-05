@@ -16,6 +16,7 @@ import {
   connectWalletModalAtom,
   switchWalletModalAtom,
 } from 'lib/atoms/modals.atoms';
+import { useAuth } from 'lib/auth/auth';
 import { onBtnClick } from 'lib/button';
 import {
   AnchoredProjectMetadataLD,
@@ -76,6 +77,7 @@ function ProjectDetails(): JSX.Element {
   const theme = useTheme();
   const { projectId } = useParams();
   const { ecocreditClient, dataClient } = useLedger();
+  const { activeAccount } = useAuth();
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
   const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
   const { wallet, isConnected } = useWallet();
@@ -352,11 +354,11 @@ function ProjectDetails(): JSX.Element {
       )}
 
       <SellOrdersActionsBar
-        isBuyButtonDisabled={isBuyFlowDisabled && Boolean(wallet?.address)}
+        isBuyButtonDisabled={isBuyFlowDisabled}
         isCommunityCredit={isCommunityCredit}
         onBookCallButtonClick={onBookCallButtonClick}
         onBuyButtonClick={() => {
-          if (isBuyFlowDisabled) {
+          if (!activeAccount?.addr) {
             setConnectWalletModal(atom => void (atom.open = true));
           } else {
             if (isConnected) {

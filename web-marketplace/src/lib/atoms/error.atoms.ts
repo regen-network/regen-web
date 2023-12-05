@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 
-type FailedFnType = (csrfToken: string) => Promise<Response>;
+export type FailedFnType = (csrfToken: string) => Promise<Response>;
 
 export const errorCodeAtom = atom('');
 export const errorBannerTextAtom = atom('');

@@ -1,14 +1,12 @@
 import { useCallback } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useSetAtom } from 'jotai';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { apiUri } from 'lib/apiUri';
-import { failedFunctionsWriteAtom } from 'lib/atoms/error.atoms';
 import { CSRF_ERROR } from 'lib/errors/apiErrors';
+import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-import { GET_CSRF_QUERY_KEY } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery.constants';
 
 type Params = {
   setError: UseStateSetter<unknown>;
@@ -17,7 +15,7 @@ type Params = {
 export const useLogout = ({ setError }: Params) => {
   const { data: token } = useQuery(getCsrfTokenQuery({}));
   const reactQueryClient = useQueryClient();
-  const addFailedFunction = useSetAtom(failedFunctionsWriteAtom);
+  const retryCsrfRequest = useRetryCsrfRequest();
 
   const logout = useCallback(async (): Promise<void> => {
     try {
@@ -46,16 +44,13 @@ export const useLogout = ({ setError }: Params) => {
         const bodyResponse = await logoutFn(token);
 
         if (bodyResponse.error === CSRF_ERROR) {
-          await reactQueryClient.invalidateQueries({
-            queryKey: [GET_CSRF_QUERY_KEY],
-          });
-          addFailedFunction(logoutFn);
+          retryCsrfRequest(logoutFn);
         }
       }
     } catch (e) {
       setError(e);
     }
-  }, [token, reactQueryClient, addFailedFunction, setError]);
+  }, [token, reactQueryClient, retryCsrfRequest, setError]);
 
   return logout;
 };

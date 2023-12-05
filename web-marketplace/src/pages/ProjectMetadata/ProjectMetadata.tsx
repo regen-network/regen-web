@@ -41,7 +41,9 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
       metadata,
       metadataSubmit,
     });
-    const creditClassId = offChainProject?.metadata?.['regen:creditClassId'];
+    const creditClassId =
+      offChainProject?.metadata?.['regen:creditClassId'] ??
+      onChainProject?.classId;
 
     const uri = creditClassId ? getProjectShapeIri(creditClassId) : '';
     const { data } = useQuery(

@@ -29,7 +29,7 @@ export type EcologicalCreditCardType = {
   infos: EcologicalCreditInfoType;
   description: string;
   offsetMethodList: EcologicalCreditCardItemListType;
-  projectActivitesList: EcologicalCreditCardItemListType;
+  projectActivitiesList: EcologicalCreditCardItemListType;
   program?: Account;
   button: {
     text?: string;

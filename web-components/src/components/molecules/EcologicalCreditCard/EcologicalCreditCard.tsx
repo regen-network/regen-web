@@ -23,7 +23,7 @@ const EcologicalCreditCard = ({
   infos,
   description,
   offsetMethodList,
-  projectActivitesList,
+  projectActivitiesList,
   button,
   secondaryButton,
   linkComponent,
@@ -31,7 +31,7 @@ const EcologicalCreditCard = ({
   sx = [],
 }: EcologicalCreditCardProps): JSX.Element => {
   const hasItems =
-    offsetMethodList.items.length > 0 || projectActivitesList.items.length > 0;
+    offsetMethodList.items.length > 0 || projectActivitiesList.items.length > 0;
 
   return (
     <Card
@@ -86,8 +86,8 @@ const EcologicalCreditCard = ({
               sx={{ width: 318, mr: 5, mb: { xs: 5, sm: 0 } }}
             />
             <EcologicalCreditCardItemList
-              label={projectActivitesList.label}
-              items={projectActivitesList.items}
+              label={projectActivitiesList.label}
+              items={projectActivitiesList.items}
               sx={{ width: 318 }}
             />
           </Flex>

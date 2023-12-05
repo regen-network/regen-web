@@ -33,7 +33,7 @@ This project uses [bun](https://bun.sh/) with [bun workspaces](https://bun.sh/do
 - `web-storybook`: [Storybook](https://storybook.js.org/) config
 - `web-auth`: React application used for Auth0 Custom Universal Login
 
-[Lerna](https://github.com/lerna/lerna) is also used to make release.
+[Lerna](https://github.com/lerna/lerna) is also used to bump packages versions and push new releases.
 
 ### Prerequisites
 

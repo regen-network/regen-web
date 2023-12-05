@@ -18,6 +18,7 @@ import { RegistryLayoutFooter } from './RegistryLayout.Footer';
 import { RegistryLayoutHeader } from './RegistryLayout.Header';
 import { RegistryLayoutProcessingModal } from './RegistryLayout.ProcessingModal';
 import { RegistryLayoutSwitchWalletModal } from './RegistryLayout.SwitchWalletModal';
+import { RetryFailedFunctions } from './RegistryLayout.RetryFailedFunctions';
 import { RegistryLayoutTxErrorModal } from './RegistryLayout.TxErrorModal';
 import { RegistryLayoutTxSuccessfulModal } from './RegistryLayout.TxSuccessfulModal';
 
@@ -29,6 +30,7 @@ const RegistryLayout: React.FC = () => {
       <RegistryLayoutFooter />
       <PageViewTracking />
       <ScrollToTop />
+      <RetryFailedFunctions />
       <CookiesTopBanner
         privacyUrl={URL_WEB_PRIVACY}
         TOSUrl={URL_REGISTRY_TERMS_SERVICE}

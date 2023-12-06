@@ -175,7 +175,7 @@ type GetIconsMappingParams = {
 
 export const getIconsMapping = ({ data }: GetIconsMappingParams) => {
   return data?.reduce((acc, item) => {
-    acc[item?.name ?? ''] = String(item?.icon?.asset?.url);
+    acc[item?.name?.toLowerCase() ?? ''] = String(item?.icon?.asset?.url);
     return acc;
   }, {} as Record<string, string | undefined>);
 };

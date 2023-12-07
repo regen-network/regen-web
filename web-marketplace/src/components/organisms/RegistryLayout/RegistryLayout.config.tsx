@@ -62,6 +62,7 @@ interface GetUserMenuItemsParams {
   isIssuer?: boolean;
   showProjects?: boolean;
   isWalletConnected: boolean;
+  loginDisabled: boolean;
 }
 
 export const getUserMenuItems = ({
@@ -71,6 +72,7 @@ export const getUserMenuItems = ({
   isIssuer,
   showProjects,
   isWalletConnected,
+  loginDisabled,
 }: GetUserMenuItemsParams): HeaderDropdownItemProps[] =>
   [
     isWalletConnected && {
@@ -101,15 +103,15 @@ export const getUserMenuItems = ({
         linkComponent,
         ...BRIDGE,
       },
-    {
+    !loginDisabled && {
       ...SEPARATOR,
     },
-    {
+    !loginDisabled && {
       pathname,
       linkComponent,
       ...EDIT_PROFILE,
     },
-    {
+    !loginDisabled && {
       pathname,
       linkComponent,
       ...PROFILE_SETTINGS,

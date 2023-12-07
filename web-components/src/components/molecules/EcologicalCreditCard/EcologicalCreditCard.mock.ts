@@ -31,7 +31,7 @@ export const EcologicalCreditCardMock: EcologicalCreditCardProps = {
       },
     ],
   },
-  projectActivitesList: {
+  projectActivitiesList: {
     label: 'offset generation method',
     items: [
       {

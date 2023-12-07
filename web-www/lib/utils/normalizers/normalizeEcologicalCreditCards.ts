@@ -40,6 +40,10 @@ export const normalizeEcologicalCreditCards = ({
         text: card?.button?.buttonText ?? '',
         href: card?.button?.buttonLink?.buttonHref ?? '',
       },
+      secondaryButton: {
+        text: card?.secondaryButton?.buttonText ?? '',
+        href: card?.secondaryButton?.buttonLink?.buttonHref ?? '',
+      },
       offsetMethodList: {
         label: OFFSET_GENERATION_METHOD,
         items:
@@ -51,7 +55,7 @@ export const normalizeEcologicalCreditCards = ({
             },
           })) ?? [],
       },
-      projectActivitesList: {
+      projectActivitiesList: {
         label: PROJECT_ACTIVITIES,
         items:
           card?.projectActivities?.map(projectActivity => ({

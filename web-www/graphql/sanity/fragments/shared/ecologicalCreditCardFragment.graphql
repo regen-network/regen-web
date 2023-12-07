@@ -45,4 +45,10 @@ fragment ecologicalCreditCardFields on EcologicalCreditCard {
       buttonHref
     }
   }
+  secondaryButton {
+    buttonText
+    buttonLink {
+      buttonHref
+    }
+  }
 }

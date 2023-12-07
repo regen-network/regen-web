@@ -65,7 +65,7 @@ export const normalizeEcologicalCreditCards = ({
               },
             })) ?? [],
         },
-        projectActivitesList: {
+        projectActivitiesList: {
           label: PROJECT_ACTIVITIES,
           items:
             card?.projectActivities?.map(projectActivity => ({

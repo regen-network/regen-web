@@ -68,7 +68,7 @@ const useStyles = makeStyles<StyleProps>()(
       '& .slick-dots': {
         bottom: 'auto',
         overflow: 'hidden',
-        height: theme.spacing(6),
+        height: theme.spacing(7.5),
         '& ul': {
           padding: 0,
           whiteSpace: 'nowrap',

@@ -20,7 +20,11 @@ import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccess
 import Section from 'web-components/lib/components/section';
 import { Title } from 'web-components/lib/components/typography';
 
-import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
+import {
+  connectWalletModalAtom,
+  switchWalletModalAtom,
+} from 'lib/atoms/modals.atoms';
+import { useAuth } from 'lib/auth/auth';
 import { getHashUrl } from 'lib/block-explorer';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -60,6 +64,7 @@ export const Storefront = (): JSX.Element => {
   const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
   const isReadyToBuy = selectedSellOrder !== null && selectedAction === 'buy';
   const setConnectWalletModalAtom = useSetAtom(connectWalletModalAtom);
+  const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
   const navigate = useNavigate();
   const location = useLocation();
   const { track } = useTracker();
@@ -118,7 +123,7 @@ export const Storefront = (): JSX.Element => {
     submittedQuantityRef.current = creditCount;
   };
 
-  const { isConnected, wallet } = useWallet();
+  const { isConnected, wallet, activeWalletAddr } = useWallet();
   const {
     signAndBroadcast,
     setDeliverTxResponse,
@@ -126,7 +131,7 @@ export const Storefront = (): JSX.Element => {
     error,
     setError,
   } = useMsgClient(handleTxQueued, handleTxDelivered, handleError);
-
+  const { activeAccount } = useAuth();
   const accountAddress = wallet?.address;
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
@@ -278,8 +283,12 @@ export const Storefront = (): JSX.Element => {
                           refetchSellOrders();
                           setSelectedAction('buy');
                           setSelectedSellOrder(i);
-                          if (!isConnected) {
+                          if (!activeWalletAddr) {
                             setConnectWalletModalAtom(
+                              atom => void (atom.open = true),
+                            );
+                          } else if (!isConnected) {
+                            setSwitchWalletModalAtom(
                               atom => void (atom.open = true),
                             );
                           }

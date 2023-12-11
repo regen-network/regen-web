@@ -14,11 +14,15 @@ import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccess
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
-import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
+import {
+  connectWalletModalAtom,
+  switchWalletModalAtom,
+} from 'lib/atoms/modals.atoms';
 import { getHashUrl } from 'lib/block-explorer';
 import { messageActionEquals } from 'lib/ecocredit/constants';
 import { GET_TXS_EVENT_KEY } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery.constants';
 import { getEventsKey } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery.utils';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { Link } from 'components/atoms';
 import { BridgeModal } from 'components/organisms';
@@ -29,6 +33,7 @@ import useCreditBridgeSubmit from './hooks/useCreditBridgeSubmit';
 
 type Props = {
   isFlowStarted: boolean;
+  resetIsFlowStarted: () => void;
   setBatchToBridge: UseStateSetter<BatchInfoWithBalance | undefined>;
   selectedBatch: BatchInfoWithBalance | undefined;
 };
@@ -36,6 +41,7 @@ type Props = {
 export const BridgeFlow = ({
   selectedBatch,
   isFlowStarted,
+  resetIsFlowStarted,
   setBatchToBridge,
 }: Props): JSX.Element => {
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>(
@@ -48,8 +54,10 @@ export const BridgeFlow = ({
   const [txModalDescription, setTxModalDescription] = useState<string>('');
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
+  const { isConnected } = useWallet();
   const reactQueryClient = useQueryClient();
   const setConnectWalletModalAtom = useSetAtom(connectWalletModalAtom);
+  const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
   const navigate = useNavigate();
 
   const handleTxQueued = (): void => {
@@ -118,10 +126,25 @@ export const BridgeFlow = ({
   });
 
   useEffect(() => {
-    if (selectedBatch && isFlowStarted && !accountAddress) {
-      setConnectWalletModalAtom(atom => void (atom.open = true));
+    if (selectedBatch && isFlowStarted) {
+      if (!accountAddress) {
+        setConnectWalletModalAtom(atom => void (atom.open = true));
+      } else if (!isConnected) {
+        setSwitchWalletModalAtom(atom => {
+          atom.open = true;
+          atom.onClose = () => resetIsFlowStarted();
+        });
+      }
     }
-  }, [selectedBatch, isFlowStarted, accountAddress, setConnectWalletModalAtom]);
+  }, [
+    selectedBatch,
+    isFlowStarted,
+    accountAddress,
+    setConnectWalletModalAtom,
+    setSwitchWalletModalAtom,
+    isConnected,
+    resetIsFlowStarted,
+  ]);
 
   return (
     <>

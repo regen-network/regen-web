@@ -1,6 +1,6 @@
-import React from 'react';
 import { Grid } from '@mui/material';
 import { useAtom, useSetAtom } from 'jotai';
+import React from 'react';
 
 import { Flex } from 'web-components/lib/components/box';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -15,7 +15,10 @@ import {
 import { formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
+import {
+  connectWalletModalAtom,
+  switchWalletModalAtom,
+} from 'lib/atoms/modals.atoms';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { basketDetailAtom } from 'pages/BasketDetails/BasketDetails.store';
@@ -71,12 +74,13 @@ export const BasketOverview: React.FC<
   const { classes: styles } = useBasketOverviewStyles();
   const basketPutData = useBasketPutData();
   const basketTakeData = useBasketTakeData();
-  const { wallet } = useWallet();
+  const { isConnected, activeWalletAddr } = useWallet();
   const [, setBasketDetailAtom] = useAtom(basketDetailAtom);
   const setConnectWalletModalAtom = useSetAtom(connectWalletModalAtom);
+  const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
   const { isLoadingPutData, creditBatchDenoms } = basketPutData;
   const { isLoadingTakeData, basketToken } = basketTakeData;
-  const hasAddress = !!wallet?.address;
+  const hasAddress = !!activeWalletAddr;
   const isPutButtonDisabled =
     (isLoadingPutData || creditBatchDenoms.length === 0) && hasAddress;
   const isTakeButtonDisabled =
@@ -156,9 +160,15 @@ export const BasketOverview: React.FC<
                       sx={{ mr: 5 }}
                       onClick={() => {
                         if (hasAddress) {
-                          setBasketDetailAtom(
-                            atom => void (atom.isPutModalOpen = true),
-                          );
+                          if (isConnected) {
+                            setBasketDetailAtom(
+                              atom => void (atom.isPutModalOpen = true),
+                            );
+                          } else {
+                            setSwitchWalletModalAtom(
+                              atom => void (atom.open = true),
+                            );
+                          }
                         } else {
                           setConnectWalletModalAtom(
                             atom => void (atom.open = true),

@@ -30,11 +30,11 @@ const MyProjects = (): JSX.Element => {
   const { track } = useTracker();
   const [projectsCurrentStep] = useAtom(projectsCurrentStepAtom);
   const { wallet } = useWallet();
-  const { activeAccountId } = useAuth();
+  const { activeAccountId, activeAccount } = useAuth();
 
   const { adminProjects, isLoadingAdminProjects } = useFetchProjectByAdmin({
     adminAccountId: activeAccountId,
-    adminAddress: wallet?.address,
+    adminAddress: activeAccount?.addr ?? wallet?.address,
   });
 
   const isFirstProject = !adminProjects || adminProjects?.length < 1;

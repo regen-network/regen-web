@@ -80,6 +80,7 @@ import { RegenTokenIcon } from './RegenTokenIcon';
 import RegistrationIcon from './RegistrationIcon';
 import RegistryIcon from './RegistryIcon';
 import ReviewIcon from './ReviewIcon';
+import { SadBeeIcon } from './SadBeeIcon';
 import SatelliteIcon from './SatelliteIcon';
 import { SaveIcon } from './SaveIcon';
 import SellOrderNotFoundIcon from './SellOrderNotFoundIcon';
@@ -278,6 +279,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<PrintIcon />} label="PrintIcon" />
     <LabeledIcon icon={<ProjectPageIcon />} label="ProjectPageIcon" />
     <LabeledIcon icon={<ProjectPageIconSmall />} label="ProjectPageIconSmall" />
+    <LabeledIcon icon={<SadBeeIcon />} label="SadBeeIcon" />
     <LabeledIcon icon={<ShareIcon />} label="ShareIcon" />
     <LabeledIcon icon={<PutInBasketIcon />} label="PutInBasketIcon" />
     <LabeledIcon icon={<QuestionIcon />} label="QuestionIcon" />

@@ -18,6 +18,7 @@ import { Wallet } from '../wallet';
 import { getWallet } from '../wallet.utils';
 import { WalletConfig, WalletType } from '../walletsConfig/walletsConfig.types';
 import { ConnectWalletType } from './useConnectWallet';
+import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 
 type Props = {
   wallet: Wallet;
@@ -50,6 +51,7 @@ export const useOnAccountChange = ({
   );
   const { data: token } = useQuery(getCsrfTokenQuery({}));
   const reactQueryClient = useQueryClient();
+  const retryCsrfRequest = useRetryCsrfRequest();
 
   // Set new wallet or directly connect it for Keplr mobile browser
   useEffect(() => {
@@ -118,9 +120,11 @@ export const useOnAccountChange = ({
                 accountId: newAccountId,
               },
               token,
-            });
-            await reactQueryClient.invalidateQueries({
-              queryKey: [GET_ACCOUNTS_QUERY_KEY],
+              retryCsrfRequest,
+              onSuccess: async () =>
+                await reactQueryClient.invalidateQueries({
+                  queryKey: [GET_ACCOUNTS_QUERY_KEY],
+                }),
             });
             setAccountChanging(false);
           } else {

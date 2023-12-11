@@ -1,8 +1,13 @@
+import { FailedFnType } from 'lib/atoms/error.atoms';
+import { CSRF_ERROR } from 'lib/errors/apiErrors';
+
 export type PostParams = {
   url: string;
   data?: any;
   token: string;
   method?: 'POST' | 'PUT';
+  onSuccess?: () => Promise<void>;
+  retryCsrfRequest?: (failedFunction: FailedFnType) => Promise<void>;
 };
 
 export const postData = async ({
@@ -10,21 +15,37 @@ export const postData = async ({
   data,
   token,
   method = 'POST',
+  onSuccess,
+  retryCsrfRequest,
 }: PostParams) => {
-  const rawResponse = await fetch(url, {
-    method,
-    headers: new Headers({
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'X-CSRF-TOKEN': token,
-    }),
-    credentials: 'include',
-    body: JSON.stringify(data),
-  });
-  try {
-    const json = await rawResponse.json();
-    return json;
-  } catch (e) {
-    throw Error(rawResponse.statusText);
+  const postRequest = async (csrfToken: string) => {
+    const rawResponse = await fetch(url, {
+      method,
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': csrfToken,
+      }),
+      credentials: 'include',
+      body: JSON.stringify(data),
+    });
+
+    try {
+      const response = await rawResponse.json();
+      if (!response.error && onSuccess) {
+        await onSuccess();
+      }
+      return response;
+    } catch (e) {
+      throw Error(rawResponse.statusText);
+    }
+  };
+
+  const response = await postRequest(token);
+
+  if (response.error === CSRF_ERROR && retryCsrfRequest) {
+    retryCsrfRequest(postRequest);
   }
+
+  return response;
 };

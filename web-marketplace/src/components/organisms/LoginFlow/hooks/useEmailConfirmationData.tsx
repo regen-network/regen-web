@@ -23,6 +23,7 @@ import {
   RESEND_SUCCES,
   RESEND_TIMER,
 } from '../../LoginButton/LoginButton.constants';
+import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 
 type EmailConfirmationDataParams = {
   emailConfirmationText?: string;
@@ -40,6 +41,7 @@ export const useEmailConfirmationData = ({
   const { privActiveAccount } = useAuth();
   const setBannerText = useSetAtom(bannerTextAtom);
   const { data: token } = useQuery(getCsrfTokenQuery({}));
+  const retryCsrfRequest = useRetryCsrfRequest();
   const {
     timeLeft: resendTimeLeft,
     startTimer,
@@ -62,6 +64,7 @@ export const useEmailConfirmationData = ({
         token,
         defaultError: DEFAULT_RESEND_ERROR,
         setEmailModalErrorCode,
+        retryCsrfRequest,
       });
       setBannerText(RESEND_SUCCES);
     }

@@ -9,6 +9,7 @@ import { getAccountByAddrQueryKey } from 'lib/queries/react-query/registry-serve
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 import { useSignArbitrary } from 'lib/wallet/hooks/useSignArbitrary';
 import { useWallet } from 'lib/wallet/wallet';
+import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 
 type Params = {
   isConnectModalOpened?: boolean;
@@ -24,6 +25,7 @@ export const useConnectWalletToAccount = ({
   const reactQueryClient = useQueryClient();
   const isConnectingWalletRef = useRef(false);
   const hasKeplrAccount = !!activeAccount?.addr;
+  const retryCsrfRequest = useRetryCsrfRequest();
   const signArbitrary = useSignArbitrary({
     setError,
   });
@@ -53,19 +55,21 @@ export const useConnectWalletToAccount = ({
           url: `${apiUri}/marketplace/v1/wallet-auth/connect-wallet`,
           data: { signature, accountId: activeAccountId },
           token,
+          retryCsrfRequest,
+          onSuccess: async () => {
+            // Step 4: Refresh active account
+            await reactQueryClient.invalidateQueries({
+              queryKey: getAccountByAddrQueryKey({ addr: wallet?.address }),
+            });
+            await reactQueryClient.invalidateQueries({
+              queryKey: getAccountByIdQueryKey({ id: activeAccountId }),
+            });
+          },
         });
 
         if (response.error) {
           throw Error(response.error);
         }
-
-        // Step 4: Refresh active account
-        await reactQueryClient.invalidateQueries({
-          queryKey: getAccountByAddrQueryKey({ addr: wallet?.address }),
-        });
-        await reactQueryClient.invalidateQueries({
-          queryKey: getAccountByIdQueryKey({ id: activeAccountId }),
-        });
       }
     } catch (e) {
       setError(e);

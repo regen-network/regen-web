@@ -7,6 +7,7 @@ import { apiUri } from 'lib/apiUri';
 import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { LoginParams, SignArbitraryType } from 'lib/wallet/wallet';
+import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 
 type Params = {
   signArbitrary?: SignArbitraryType;
@@ -15,6 +16,7 @@ type Params = {
 
 export const useLogin = ({ signArbitrary, setError }: Params) => {
   const reactQueryClient = useQueryClient();
+  const retryCsrfRequest = useRetryCsrfRequest();
 
   // Step 1: Retrieve and save the CSRF tokens
   const { data: token } = useQuery(getCsrfTokenQuery({}));
@@ -51,13 +53,12 @@ export const useLogin = ({ signArbitrary, setError }: Params) => {
             url: `${apiUri}/marketplace/v1/wallet-auth/login`,
             data: { signature },
             token,
+            retryCsrfRequest,
+            onSuccess: async () =>
+              await reactQueryClient.invalidateQueries({
+                queryKey: [GET_ACCOUNTS_QUERY_KEY],
+              }),
           });
-          const accountId = user?.accountId;
-          if (accountId) {
-            await reactQueryClient.invalidateQueries({
-              queryKey: [GET_ACCOUNTS_QUERY_KEY],
-            });
-          }
         }
       } catch (e) {
         setError(e);

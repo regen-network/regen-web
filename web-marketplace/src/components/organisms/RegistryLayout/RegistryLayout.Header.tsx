@@ -41,6 +41,7 @@ const RegistryLayoutHeader: React.FC = () => {
     privActiveAccount,
     privAuthenticatedAccounts,
   } = useAuth();
+
   const { wallet, disconnect, isConnected, loginDisabled } = useWallet();
   const { accountOrWallet } = useAuthData();
   const theme = useTheme<Theme>();

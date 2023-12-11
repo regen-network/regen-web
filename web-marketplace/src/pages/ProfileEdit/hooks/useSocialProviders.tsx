@@ -9,11 +9,13 @@ import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 
 import { SocialProvider } from '../ProfileEdit.types';
+import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 
 export const useSocialProviders = () => {
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const { data: token } = useQuery(getCsrfTokenQuery({}));
   const reactQueryClient = useQueryClient();
+  const retryCsrfRequest = useRetryCsrfRequest();
 
   const disconnect = useCallback(
     async (path: string) => {
@@ -22,9 +24,12 @@ export const useSocialProviders = () => {
           await postData({
             url: `${apiUri}${path}`,
             token,
-          });
-          await reactQueryClient.invalidateQueries({
-            queryKey: [GET_ACCOUNTS_QUERY_KEY],
+            retryCsrfRequest,
+            onSuccess: async () => {
+              await reactQueryClient.invalidateQueries({
+                queryKey: [GET_ACCOUNTS_QUERY_KEY],
+              });
+            },
           });
         } catch (e) {
           setErrorBannerTextAtom(String(e));

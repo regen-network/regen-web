@@ -57,7 +57,7 @@ interface CreditDetailsProps {
 function CreditClassDetails({
   isLandSteward,
 }: CreditDetailsProps): JSX.Element {
-  const { wallet, isConnected } = useWallet();
+  const { activeWalletAddr, isConnected } = useWallet();
   const { dataClient, ecocreditClient } = useLedger();
   const { activeAccount } = useAuth();
   const { creditClassId } = useParams();
@@ -244,7 +244,7 @@ function CreditClassDetails({
         isCommunityCredit={isCommunityCredit}
         onBookCallButtonClick={onBookCallButtonClick}
         onBuyButtonClick={() => {
-          if (!activeAccount?.addr) {
+          if (!activeWalletAddr) {
             setConnectWalletModal(atom => void (atom.open = true));
           } else {
             if (isConnected) {

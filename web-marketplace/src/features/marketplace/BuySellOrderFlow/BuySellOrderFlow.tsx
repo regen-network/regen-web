@@ -72,7 +72,7 @@ export const BuySellOrderFlow = ({
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const { activeAccount } = useAuth();
   const { sellOrders, refetchSellOrders } = useFetchSellOrders();
-  const { isConnected, wallet } = useWallet();
+  const { isConnected, wallet, activeWalletAddr } = useWallet();
   const { data: buyModalOptionsContent } = useQuery(
     getBuyModalOptionsQuery({ sanityClient: client }),
   );
@@ -226,7 +226,7 @@ export const BuySellOrderFlow = ({
     if (isFlowStarted && isConnected) {
       refetchSellOrders();
       setIsBuyModalOpen(true);
-    } else if (isFlowStarted && !activeAccount?.addr) {
+    } else if (isFlowStarted && !activeWalletAddr) {
       setIsBuyModalOptionsOpen(true);
     } else if (isFlowStarted && !isConnected) {
       setSwitchWalletModalAtom(atom => {
@@ -240,7 +240,7 @@ export const BuySellOrderFlow = ({
     refetchSellOrders,
     setSwitchWalletModalAtom,
     setIsFlowStarted,
-    activeAccount?.addr,
+    activeWalletAddr,
   ]);
 
   return (

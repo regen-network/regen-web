@@ -123,7 +123,7 @@ export const Storefront = (): JSX.Element => {
     submittedQuantityRef.current = creditCount;
   };
 
-  const { isConnected, wallet } = useWallet();
+  const { isConnected, wallet, activeWalletAddr } = useWallet();
   const {
     signAndBroadcast,
     setDeliverTxResponse,
@@ -283,7 +283,7 @@ export const Storefront = (): JSX.Element => {
                           refetchSellOrders();
                           setSelectedAction('buy');
                           setSelectedSellOrder(i);
-                          if (!activeAccount?.addr) {
+                          if (!activeWalletAddr) {
                             setConnectWalletModalAtom(
                               atom => void (atom.open = true),
                             );

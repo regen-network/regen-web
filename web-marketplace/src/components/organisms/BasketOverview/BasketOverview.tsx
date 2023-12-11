@@ -1,6 +1,6 @@
-import React from 'react';
 import { Grid } from '@mui/material';
 import { useAtom, useSetAtom } from 'jotai';
+import React from 'react';
 
 import { Flex } from 'web-components/lib/components/box';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -19,7 +19,6 @@ import {
   connectWalletModalAtom,
   switchWalletModalAtom,
 } from 'lib/atoms/modals.atoms';
-import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { basketDetailAtom } from 'pages/BasketDetails/BasketDetails.store';
@@ -75,14 +74,13 @@ export const BasketOverview: React.FC<
   const { classes: styles } = useBasketOverviewStyles();
   const basketPutData = useBasketPutData();
   const basketTakeData = useBasketTakeData();
-  const { isConnected } = useWallet();
+  const { isConnected, activeWalletAddr } = useWallet();
   const [, setBasketDetailAtom] = useAtom(basketDetailAtom);
   const setConnectWalletModalAtom = useSetAtom(connectWalletModalAtom);
   const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
   const { isLoadingPutData, creditBatchDenoms } = basketPutData;
   const { isLoadingTakeData, basketToken } = basketTakeData;
-  const { activeAccount } = useAuth();
-  const hasAddress = !!activeAccount?.addr;
+  const hasAddress = !!activeWalletAddr;
   const isPutButtonDisabled =
     (isLoadingPutData || creditBatchDenoms.length === 0) && hasAddress;
   const isTakeButtonDisabled =

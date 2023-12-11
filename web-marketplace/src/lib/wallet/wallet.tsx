@@ -15,7 +15,7 @@ import { Window as KeplrWindow } from '@keplr-wallet/types';
 import { useQuery } from '@tanstack/react-query';
 import truncate from 'lodash/truncate';
 
-import { AccountByAddrQuery } from 'generated/graphql';
+import { AccountByAddrQuery, Maybe } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
@@ -62,6 +62,7 @@ export type SignArbitraryType = (
 export type WalletContextType = {
   wallet?: Wallet;
   walletConfig?: WalletConfig;
+  activeWalletAddr?: Maybe<string>;
   loginDisabled: boolean;
   loaded: boolean;
   connect?: (params: ConnectParams) => Promise<void>;
@@ -189,12 +190,16 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   );
   const accountByAddr = accountByAddrData?.accountByAddr;
   const loginDisabled = keplrMobileWeb || !!walletConnect;
+  const activeWalletAddr = loginDisabled
+    ? wallet?.address
+    : activeAccount?.addr;
 
   return (
     <WalletContext.Provider
       value={{
         wallet,
         walletConfig: walletConfigRef.current,
+        activeWalletAddr,
         loginDisabled,
         loaded: loaded && !isFetching && (loginDisabled || !authLoading),
         connect,

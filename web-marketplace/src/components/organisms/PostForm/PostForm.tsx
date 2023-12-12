@@ -1,6 +1,9 @@
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import CheckboxLabel from 'web-components/lib/components/inputs/new/CheckboxLabel/CheckboxLabel';
-import { ImageDrop } from 'web-components/lib/components/inputs/new/ImageDrop/ImageDrop';
+import {
+  ImageDrop,
+  ImageDropProps,
+} from 'web-components/lib/components/inputs/new/ImageDrop/ImageDrop';
 import { TextAreaField } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField';
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
 import {
@@ -19,7 +22,12 @@ import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/
 import { POST_MAX_TITLE_LENGTH } from './PostForm.constants';
 import { Link } from 'components/atoms';
 import { useEffect } from 'react';
-import { DEFAULT_URL } from '../MediaForm/MediaForm.constants';
+import {
+  DEFAULT_URL,
+  IMAGE_UPLOAD_BUTTON_LABEL,
+  cropAspectMediaForm,
+} from '../MediaForm/MediaForm.constants';
+import { useMediaFormStyles } from '../MediaForm/useMediaFormStyles';
 
 export interface Props {
   initialValues: PostFormSchemaType;
@@ -34,8 +42,15 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
     },
     mode: 'onBlur',
   });
+  const { classes } = useMediaFormStyles();
   const { errors } = form.formState;
   const { setValue } = form;
+
+  const imageDropCommonProps: Partial<ImageDropProps> = {
+    classes: { main: classes.fullSizeMedia },
+    buttonText: IMAGE_UPLOAD_BUTTON_LABEL,
+    fixedCrop: cropAspectMediaForm,
+  };
 
   const title = useWatch({ control: form.control, name: 'title' });
   const files = useWatch({ control: form.control, name: 'files' });
@@ -116,12 +131,13 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
             onDelete={() => getHandleDeleteWithIndex(index)}
             value={url === DEFAULT_URL ? '' : url}
             setValue={setFiles}
-            className="mb-50"
+            className={cn('mb-50', classes.galleryItem)}
             key={field.id}
             fieldIndex={index}
             error={!!errors['files']}
             helperText={errors['files']?.message}
             optional
+            {...imageDropCommonProps}
             {...form.register('files')}
           />
         );

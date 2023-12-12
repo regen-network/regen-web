@@ -35,7 +35,7 @@ export const useSocialProviders = () => {
           setErrorBannerTextAtom(String(e));
         }
     },
-    [reactQueryClient, setErrorBannerTextAtom, token],
+    [retryCsrfRequest, reactQueryClient, setErrorBannerTextAtom, token],
   );
 
   const socialProviders: SocialProvider[] = [

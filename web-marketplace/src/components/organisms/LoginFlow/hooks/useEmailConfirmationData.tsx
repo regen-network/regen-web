@@ -79,6 +79,7 @@ export const useEmailConfirmationData = ({
         },
         token,
         defaultError: DEFAULT_VALIDATE_ERROR,
+        retryCsrfRequest,
         onSuccess: async () => {
           await reactQueryClient.invalidateQueries([GET_ACCOUNTS_QUERY_KEY]);
           setBannerText(emailConfirmationText ?? EMAIL_CONFIRMATION_SUCCES);
@@ -115,6 +116,7 @@ export const useEmailConfirmationData = ({
             email,
           },
           token,
+          retryCsrfRequest,
         });
         if (response.error) {
           if (response.error === CONNECTED_EMAIL_ERROR_TITLE) {
@@ -146,5 +148,6 @@ export const useEmailConfirmationData = ({
     onEmailSubmit,
     isConnectedEmailErrorModalOpen,
     onConnectedEmailErrorModalClose,
+    retryCsrfRequest,
   };
 };

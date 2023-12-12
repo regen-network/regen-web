@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, ReactNode, useState } from 'react';
 import { DropzoneOptions } from 'react-dropzone';
 import { Crop } from 'react-image-crop';
 
@@ -25,7 +25,7 @@ export interface ImageDropProps extends Partial<FieldFormControlProps> {
   credit?: string;
   label?: string;
   name: string;
-  description?: string;
+  description?: ReactNode;
   optional?: boolean | string;
   buttonText?: string;
   fixedCrop?: Partial<Crop>;

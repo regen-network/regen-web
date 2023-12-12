@@ -17,6 +17,7 @@ import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton
 import { useWatch } from 'react-hook-form';
 import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import { POST_MAX_TITLE_LENGTH } from './PostForm.constants';
+import { Link } from 'components/atoms';
 
 export interface Props {
   initialValues: PostFormSchemaType;
@@ -57,8 +58,8 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
         type="text"
         label="Comment"
         description="Write a short comment or longer project update. "
-        rows={3}
-        minRows={3}
+        rows={4}
+        minRows={4}
         multiline
         className="mb-50"
         {...form.register('comment')}
@@ -66,7 +67,12 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
       <ImageDrop
         label={'Files'}
         description={
-          '5MB max. Supported file types include text, spreadsheets, images, and video files. View all supported file types»'
+          <Body>
+            {
+              '5MB max. Supported file types include text, spreadsheets, images, and video files. '
+            }
+            <Link href="#">{'View all supported file types»'}</Link>
+          </Body>
         }
         setValue={() => {}}
         className="mb-50"

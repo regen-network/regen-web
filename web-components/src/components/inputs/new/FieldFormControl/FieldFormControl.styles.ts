@@ -1,8 +1,9 @@
+import { ReactNode } from 'react';
 import { makeStyles } from 'tss-react/mui';
 
 interface StyleProps {
   disabled?: boolean;
-  description?: string;
+  description?: ReactNode;
   error: boolean;
 }
 

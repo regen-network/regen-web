@@ -14,10 +14,12 @@ import { PostFormSchemaType, postFormSchema } from './PostForm.schema';
 import Form from 'components/molecules/Form/Form';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
-import { useWatch } from 'react-hook-form';
+import { useFieldArray, useWatch } from 'react-hook-form';
 import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import { POST_MAX_TITLE_LENGTH } from './PostForm.constants';
 import { Link } from 'components/atoms';
+import { useEffect } from 'react';
+import { DEFAULT_URL } from '../MediaForm/MediaForm.constants';
 
 export interface Props {
   initialValues: PostFormSchemaType;
@@ -33,8 +35,41 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
     mode: 'onBlur',
   });
   const { errors } = form.formState;
+  const { setValue } = form;
 
   const title = useWatch({ control: form.control, name: 'title' });
+  const files = useWatch({ control: form.control, name: 'files' });
+
+  const { fields, append, remove } = useFieldArray({
+    name: 'files',
+    control: form.control,
+  });
+
+  const setFiles = (value: string, fieldIndex: number): void => {
+    if (files?.[fieldIndex]?.['schema:url'] === DEFAULT_URL) {
+      append({
+        'schema:url': DEFAULT_URL,
+      });
+    }
+    setValue(`files.${fieldIndex}.schema:url`, encodeURI(value));
+  };
+
+  const getHandleDeleteWithIndex = async (fieldIndex: number) => {
+    remove(fieldIndex);
+  };
+
+  /* Effect */
+
+  useEffect(() => {
+    if (
+      fields?.length === 0 ||
+      fields?.every(field => field['schema:url'] !== DEFAULT_URL)
+    ) {
+      append({
+        'schema:url': DEFAULT_URL,
+      });
+    }
+  }, [append, fields]);
 
   return (
     <Form className={cn('max-w-[560px]', className)} form={form}>
@@ -64,23 +99,33 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
         className="mb-50"
         {...form.register('comment')}
       />
-      <ImageDrop
-        label={'Files'}
-        description={
-          <Body>
-            {
-              '5MB max. Supported file types include text, spreadsheets, images, and video files. '
+      {fields.map((field, index) => {
+        const url = files?.[index]?.['schema:url'];
+
+        return (
+          <ImageDrop
+            label={'Files'}
+            description={
+              <Body>
+                {
+                  '5MB max. Supported file types include text, spreadsheets, images, and video files. '
+                }
+                <Link href="#">{'View all supported file types»'}</Link>
+              </Body>
             }
-            <Link href="#">{'View all supported file types»'}</Link>
-          </Body>
-        }
-        setValue={() => {}}
-        className="mb-50"
-        error={!!errors['files']}
-        helperText={errors['files']?.message}
-        optional
-        {...form.register('files')}
-      />
+            onDelete={() => getHandleDeleteWithIndex(index)}
+            value={url === DEFAULT_URL ? '' : url}
+            setValue={setFiles}
+            className="mb-50"
+            key={field.id}
+            fieldIndex={index}
+            error={!!errors['files']}
+            helperText={errors['files']?.message}
+            optional
+            {...form.register('files')}
+          />
+        );
+      })}
       <div className="flex flex-col mb-50">
         <Subtitle
           size="lg"

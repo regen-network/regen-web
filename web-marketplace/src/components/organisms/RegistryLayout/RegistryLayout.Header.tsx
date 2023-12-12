@@ -4,9 +4,9 @@ import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
 import { isMobile as checkIsMobile } from '@walletconnect/browser-utils';
 
-import Header from 'web-components/lib/components/header';
-import { UserMenuItems } from 'web-components/lib/components/header/components/UserMenuItems';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import Header from 'web-components/src/components/header';
+import { UserMenuItems } from 'web-components/src/components/header/components/UserMenuItems';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';

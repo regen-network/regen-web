@@ -2,12 +2,12 @@ import React from 'react';
 import { useTheme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
-import { ImageItemProps } from 'web-components/lib/components/image-item';
-import Section from 'web-components/lib/components/section';
-import ImageItems from 'web-components/lib/components/sliders/ImageItems';
-import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import { Body } from 'web-components/lib/components/typography';
-import type { Theme } from 'web-components/lib/theme/muiTheme';
+import { ImageItemProps } from 'web-components/src/components/image-item';
+import Section from 'web-components/src/components/section';
+import ImageItems from 'web-components/src/components/sliders/ImageItems';
+import ResponsiveSlider from 'web-components/src/components/sliders/ResponsiveSlider';
+import { Body } from 'web-components/src/components/typography';
+import type { Theme } from 'web-components/src/theme/muiTheme';
 
 import type { PracticesOutcomesSection as PracticesOutcomesSectionProps } from '../../generated/sanity-graphql';
 import { WrappedImpactCard } from '../atoms';

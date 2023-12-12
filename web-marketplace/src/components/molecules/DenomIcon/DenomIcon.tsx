@@ -8,11 +8,11 @@ import {
   REGEN_DENOM,
 } from 'config/allowedBaseDenoms';
 
-import AxlUsdcIcon from 'web-components/lib/components/icons/coins/AxlUsdcIcon';
-import EeurIcon from 'web-components/lib/components/icons/coins/EeurIcon';
-import EvmosIcon from 'web-components/lib/components/icons/coins/EvmosIcon';
-import GravUsdcIcon from 'web-components/lib/components/icons/coins/GravUsdcIcon';
-import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
+import AxlUsdcIcon from 'web-components/src/components/icons/coins/AxlUsdcIcon';
+import EeurIcon from 'web-components/src/components/icons/coins/EeurIcon';
+import EvmosIcon from 'web-components/src/components/icons/coins/EvmosIcon';
+import GravUsdcIcon from 'web-components/src/components/icons/coins/GravUsdcIcon';
+import { RegenTokenIcon } from 'web-components/src/components/icons/RegenTokenIcon';
 
 export interface Props {
   baseDenom?: string;

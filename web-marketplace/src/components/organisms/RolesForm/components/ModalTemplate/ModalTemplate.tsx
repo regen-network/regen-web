@@ -1,9 +1,9 @@
 import { FieldValues, UseFormReturn } from 'react-hook-form';
 import { Box } from '@mui/material';
 
-import Modal from 'web-components/lib/components/modal';
-import { CancelButtonFooter } from 'web-components/lib/components/organisms/CancelButtonFooter/CancelButtonFooter';
-import { Title } from 'web-components/lib/components/typography';
+import Modal from 'web-components/src/components/modal';
+import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
+import { Title } from 'web-components/src/components/typography';
 
 import Form from 'components/molecules/Form/Form';
 

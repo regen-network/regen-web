@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import CertifiedDocumentIcon from 'web-components/lib/components/icons/CertifiedDocumentIcon';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import CertifiedDocumentIcon from 'web-components/src/components/icons/CertifiedDocumentIcon';
 
 import { VIEW_CERTIFICATE } from './Portfolio.constants';
 

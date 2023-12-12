@@ -3,14 +3,14 @@ import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 import { tableStyles } from 'styles/table';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import NoRetirementCertificatesIcon from 'web-components/lib/components/icons/NoRetirementCertificatesIcon';
+import { BlockContent } from 'web-components/src/components/block-content';
+import NoRetirementCertificatesIcon from 'web-components/src/components/icons/NoRetirementCertificatesIcon';
 import {
   ActionsTable,
   RenderActionButtonsFunc,
   TablePaginationParams,
-} from 'web-components/lib/components/table/ActionsTable';
-import { formatDate, formatNumber } from 'web-components/lib/utils/format';
+} from 'web-components/src/components/table/ActionsTable';
+import { formatDate, formatNumber } from 'web-components/src/utils/format';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { NormalizedRetirement } from 'lib/normalizers/retirements/normalizeRetirement';

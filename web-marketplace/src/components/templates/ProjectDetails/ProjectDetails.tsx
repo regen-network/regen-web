@@ -6,9 +6,9 @@ import { useSetAtom } from 'jotai';
 import { useMemo, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
-import { Gallery } from 'web-components/lib/components/organisms/Gallery/Gallery';
-import SEO from 'web-components/lib/components/seo';
-import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
+import { Gallery } from 'web-components/src/components/organisms/Gallery/Gallery';
+import SEO from 'web-components/src/components/seo';
+import ProjectMedia from 'web-components/src/components/sliders/ProjectMedia';
 
 import { Project } from 'generated/graphql';
 import { Maybe } from 'graphql/jsutils/Maybe';

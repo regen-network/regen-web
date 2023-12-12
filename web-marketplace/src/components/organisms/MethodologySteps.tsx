@@ -1,7 +1,7 @@
 import { makeStyles } from 'tss-react/mui';
 
-import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import OnBoardingSection from 'web-components/src/components/section/OnBoardingSection';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import {
   BasicStepCardSectionFieldsFragment,

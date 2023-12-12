@@ -1,13 +1,13 @@
 import React from 'react';
 import { Box } from '@mui/material';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
+import { BlockContent } from 'web-components/src/components/block-content';
 import {
   Body,
   Label,
   Subtitle,
   Title,
-} from 'web-components/lib/components/typography';
+} from 'web-components/src/components/typography';
 
 import {
   Maybe,

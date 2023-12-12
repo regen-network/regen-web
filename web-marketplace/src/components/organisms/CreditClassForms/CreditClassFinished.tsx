@@ -1,11 +1,11 @@
 import { Link, SxProps } from '@mui/material';
 import { truncate } from 'lodash';
 
-import { Flex } from 'web-components/lib/components/box';
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import { LabeledDetail } from 'web-components/lib/components/text-layouts';
-import { Body, Title } from 'web-components/lib/components/typography';
+import { Flex } from 'web-components/src/components/box';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
+import { LabeledDetail } from 'web-components/src/components/text-layouts';
+import { Body, Title } from 'web-components/src/components/typography';
 
 import { getHashUrl } from 'lib/block-explorer';
 

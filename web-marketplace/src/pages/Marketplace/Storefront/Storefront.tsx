@@ -8,17 +8,17 @@ import { REGEN_APP_PROJECT_URL } from 'utils/components/ShareSection/getSocialIt
 import { Buy1Event } from 'web-marketplace/src/lib/tracker/types';
 import { useTracker } from 'web-marketplace/src/lib/tracker/useTracker';
 
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
-import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
-import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
-import { ConfirmModal as CancelConfirmModal } from 'web-components/lib/components/modal/ConfirmModal';
-import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
-import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
-import { Item } from 'web-components/lib/components/modal/TxModal';
-import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
-import Section from 'web-components/lib/components/section';
-import { Title } from 'web-components/lib/components/typography';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import { TableActionButtons } from 'web-components/src/components/buttons/TableActionButtons';
+import { CelebrateIcon } from 'web-components/src/components/icons/CelebrateIcon';
+import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
+import { ConfirmModal as CancelConfirmModal } from 'web-components/src/components/modal/ConfirmModal';
+import { ProcessingModal } from 'web-components/src/components/modal/ProcessingModal';
+import { TxErrorModal } from 'web-components/src/components/modal/TxErrorModal';
+import { Item } from 'web-components/src/components/modal/TxModal';
+import { TxSuccessfulModal } from 'web-components/src/components/modal/TxSuccessfulModal';
+import Section from 'web-components/src/components/section';
+import { Title } from 'web-components/src/components/typography';
 
 import {
   connectWalletModalAtom,

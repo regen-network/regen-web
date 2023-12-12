@@ -1,9 +1,9 @@
 import { Box } from '@mui/material';
 import QRCode from 'qrcode.react';
 
-import { Center } from 'web-components/lib/components/box';
-import { Loading } from 'web-components/lib/components/loading';
-import { Title } from 'web-components/lib/components/typography';
+import { Center } from 'web-components/src/components/box';
+import { Loading } from 'web-components/src/components/loading';
+import { Title } from 'web-components/src/components/typography';
 
 import { CONNECTING_LABEL, QR_CODE_LABEL } from './LoginModal.Mobile.constants';
 

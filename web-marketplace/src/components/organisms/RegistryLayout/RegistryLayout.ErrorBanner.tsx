@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 
-import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
+import ErrorBanner from 'web-components/src/components/banner/ErrorBanner';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 

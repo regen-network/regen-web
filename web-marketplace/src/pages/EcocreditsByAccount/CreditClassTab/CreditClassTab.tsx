@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Grid } from '@mui/material';
 
-import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';
+import CurrentCreditsIcon from 'web-components/src/components/icons/CurrentCreditsIcon';
 import { CreditClassGridCard } from 'web-components/src/components/molecules/CreditClassGridCard/CreditClassGridCard';
 
 import { useWallet } from 'lib/wallet/wallet';

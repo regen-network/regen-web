@@ -2,11 +2,11 @@ import React from 'react';
 import { Box, CardMedia, SxProps } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import Card from 'web-components/lib/components/cards/Card';
-import { Image } from 'web-components/lib/components/image';
-import ImageGrid from 'web-components/lib/components/image-grid';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { BlockContent } from 'web-components/src/components/block-content';
+import Card from 'web-components/src/components/cards/Card';
+import { Image } from 'web-components/src/components/image';
+import ImageGrid from 'web-components/src/components/image-grid';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { Link } from 'components/atoms';
 

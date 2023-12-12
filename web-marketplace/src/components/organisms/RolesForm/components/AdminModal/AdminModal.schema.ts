@@ -3,7 +3,7 @@ import { z } from 'zod';
 import {
   invalidRegenAddress,
   isValidAddress,
-} from 'web-components/lib/components/inputs/validation';
+} from 'web-components/src/components/inputs/validation';
 
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 

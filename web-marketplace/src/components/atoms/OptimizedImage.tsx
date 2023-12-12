@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Image, ImageProps } from 'web-components/lib/components/image';
+import { Image, ImageProps } from 'web-components/src/components/image';
 
 const imageStorageBaseUrl = import.meta.env.VITE_IMAGE_STORAGE_BASE_URL;
 const apiServerUrl = import.meta.env.VITE_API_URI;

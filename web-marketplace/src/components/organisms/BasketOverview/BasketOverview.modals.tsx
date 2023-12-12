@@ -1,8 +1,8 @@
 import { ERRORS } from 'config/errors';
 import { useAtom, useSetAtom } from 'jotai';
 
-import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
-import { BasketTakeModal } from 'web-components/lib/components/modal/BasketTakeModal';
+import { BasketPutModal } from 'web-components/src/components/modal/BasketPutModal';
+import { BasketTakeModal } from 'web-components/src/components/modal/BasketTakeModal';
 
 import { errorCodeAtom } from 'lib/atoms/error.atoms';
 import {

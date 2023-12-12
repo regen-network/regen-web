@@ -1,7 +1,7 @@
 import { AllowedDenom } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
 import { BatchBalanceInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import { Option } from 'web-components/lib/components/inputs/SelectTextField';
+import { Option } from 'web-components/src/components/inputs/SelectTextField';
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 

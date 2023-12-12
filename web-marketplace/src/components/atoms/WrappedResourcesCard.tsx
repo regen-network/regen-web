@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
-import { getFormattedDate } from 'web-components/lib/utils/format';
-import { getLinkTarget } from 'web-components/lib/utils/linkTarget';
+import { BlockContent } from 'web-components/src/components/block-content';
+import ResourcesCard from 'web-components/src/components/cards/ResourcesCard';
+import { getFormattedDate } from 'web-components/src/utils/format';
+import { getLinkTarget } from 'web-components/src/utils/linkTarget';
 
 import { Maybe, ResourceFieldsFragment } from '../../generated/sanity-graphql';
 import { getBtnHref } from '../../lib/button';

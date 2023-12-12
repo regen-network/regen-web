@@ -4,7 +4,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { postData } from 'utils/fetch/postData';
 
-import { OnProfileClickType } from 'web-components/lib/components/header/components/UserMenuItem.types';
+import { OnProfileClickType } from 'web-components/src/components/header/components/UserMenuItem.types';
 
 import { AccountByIdQuery } from 'generated/graphql';
 import { apiUri } from 'lib/apiUri';

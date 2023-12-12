@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import type { Option } from 'web-components/lib/components/inputs/SelectTextField';
+import type { Option } from 'web-components/src/components/inputs/SelectTextField';
 
 import type { ProjectWithMetadataObj as Project } from '../../../../types/ledger/ecocredit';
 

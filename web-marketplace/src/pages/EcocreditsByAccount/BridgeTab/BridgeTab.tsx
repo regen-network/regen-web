@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
+import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 
 import { Bridge, BridgedEcocreditsTable } from 'components/organisms';
 

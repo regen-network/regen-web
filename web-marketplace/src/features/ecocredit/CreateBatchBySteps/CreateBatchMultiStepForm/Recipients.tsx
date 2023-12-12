@@ -5,7 +5,7 @@ import {
   FormValues,
   Recipient,
   RecipientsFieldArray,
-} from 'web-components/lib/components/form/RecipientsForm';
+} from 'web-components/src/components/form/RecipientsForm';
 
 export type RecipientsFormValues = FormValues;
 export type RecipientFormValues = Recipient;

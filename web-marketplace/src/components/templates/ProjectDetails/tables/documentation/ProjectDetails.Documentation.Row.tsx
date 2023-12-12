@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box } from '@mui/material';
 
-import DocumentIcon from 'web-components/lib/components/icons/DocumentIcon';
-import { formatDate } from 'web-components/lib/utils/format';
+import DocumentIcon from 'web-components/src/components/icons/DocumentIcon';
+import { formatDate } from 'web-components/src/utils/format';
 
 import { Document, Maybe } from 'generated/graphql';
 

@@ -3,8 +3,8 @@ import { useTheme } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from 'tss-react/mui';
 
-import Section from 'web-components/lib/components/section';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import Section from 'web-components/src/components/section';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { Maybe, MoreProjectFieldsFragment } from '../../generated/graphql';
 import { ProjectCards } from './ProjectCards';

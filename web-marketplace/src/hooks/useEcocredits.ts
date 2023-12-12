@@ -5,7 +5,7 @@ import {
   QueryBatchesResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
+import { TablePaginationParams } from 'web-components/src/components/table/ActionsTable';
 
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';

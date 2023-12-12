@@ -4,16 +4,16 @@ import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
-import RadioCard from 'web-components/lib/components/atoms/RadioCard';
-import ControlledFormLabel from 'web-components/lib/components/form/ControlledFormLabel';
-import TwitterIcon2 from 'web-components/lib/components/icons/social/TwitterIcon2';
-import WebsiteLinkIcon from 'web-components/lib/components/icons/social/WebsiteLinkIcon';
-import { ImageField } from 'web-components/lib/components/inputs/new/ImageField/ImageField';
-import { ImageFieldAvatar } from 'web-components/lib/components/inputs/new/ImageField/ImageField.Avatar';
-import { ImageFieldBackground } from 'web-components/lib/components/inputs/new/ImageField/ImageField.Background';
-import { TextAreaField } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField';
-import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
-import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
+import RadioCard from 'web-components/src/components/atoms/RadioCard';
+import ControlledFormLabel from 'web-components/src/components/form/ControlledFormLabel';
+import TwitterIcon2 from 'web-components/src/components/icons/social/TwitterIcon2';
+import WebsiteLinkIcon from 'web-components/src/components/icons/social/WebsiteLinkIcon';
+import { ImageField } from 'web-components/src/components/inputs/new/ImageField/ImageField';
+import { ImageFieldAvatar } from 'web-components/src/components/inputs/new/ImageField/ImageField.Avatar';
+import { ImageFieldBackground } from 'web-components/src/components/inputs/new/ImageField/ImageField.Background';
+import { TextAreaField } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField';
+import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
+import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 

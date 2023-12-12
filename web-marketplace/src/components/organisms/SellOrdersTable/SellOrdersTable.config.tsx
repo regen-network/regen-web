@@ -1,8 +1,8 @@
 import { Box } from '@mui/material';
 import { ELLIPSIS_COLUMN_WIDTH } from 'styles/table';
 
-import QuestionIconOutlined from 'web-components/lib/components/icons/QuestionIconOutlined';
-import InfoTooltip from 'web-components/lib/components/tooltip/InfoTooltip';
+import QuestionIconOutlined from 'web-components/src/components/icons/QuestionIconOutlined';
+import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 
 import {
   PURCHASE_OPTION_TOOLTIP,

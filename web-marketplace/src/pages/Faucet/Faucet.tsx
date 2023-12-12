@@ -1,7 +1,7 @@
 import { Box, CircularProgress } from '@mui/material';
 
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import { Title } from 'web-components/lib/components/typography';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import { Title } from 'web-components/src/components/typography';
 
 import { useWallet } from 'lib/wallet/wallet';
 

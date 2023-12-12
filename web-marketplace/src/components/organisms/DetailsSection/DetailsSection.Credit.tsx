@@ -1,7 +1,7 @@
 import { Box, Grid } from '@mui/material';
 
-import { Flex } from 'web-components/lib/components/box';
-import { Title } from 'web-components/lib/components/typography';
+import { Flex } from 'web-components/src/components/box';
+import { Title } from 'web-components/src/components/typography';
 
 type Props = {
   src: string;

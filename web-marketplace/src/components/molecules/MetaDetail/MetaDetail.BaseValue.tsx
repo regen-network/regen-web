@@ -2,9 +2,9 @@ import { SxProps, Theme } from '@mui/material';
 import { ExpandedTermDefinition } from 'jsonld';
 import { sxToArray } from 'utils/mui/sxToArray';
 
-import { Body } from 'web-components/lib/components/typography';
-import { TextSize } from 'web-components/lib/components/typography/sizing';
-import { formatDate, formatNumber } from 'web-components/lib/utils/format';
+import { Body } from 'web-components/src/components/typography';
+import { TextSize } from 'web-components/src/components/typography/sizing';
+import { formatDate, formatNumber } from 'web-components/src/utils/format';
 
 import { LinkWithArrow } from 'components/atoms';
 

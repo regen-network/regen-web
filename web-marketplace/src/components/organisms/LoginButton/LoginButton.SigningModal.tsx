@@ -1,6 +1,6 @@
-import { Center } from 'web-components/lib/components/box';
-import RegenModal from 'web-components/lib/components/modal';
-import { Title } from 'web-components/lib/components/typography';
+import { Center } from 'web-components/src/components/box';
+import RegenModal from 'web-components/src/components/modal';
+import { Title } from 'web-components/src/components/typography';
 
 interface Props {
   isOpen: boolean;

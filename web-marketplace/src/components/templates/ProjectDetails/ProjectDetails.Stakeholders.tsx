@@ -1,4 +1,4 @@
-import { Account } from 'web-components/lib/components/user/UserInfo';
+import { Account } from 'web-components/src/components/user/UserInfo';
 
 import { Stakeholders } from 'components/organisms/Stakeholders/Stakeholders';
 

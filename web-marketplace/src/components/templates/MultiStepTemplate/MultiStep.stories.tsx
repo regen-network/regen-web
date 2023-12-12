@@ -1,5 +1,5 @@
-import { Center } from 'web-components/lib/components/box';
-import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
+import { Center } from 'web-components/src/components/box';
+import SaveFooter from 'web-components/src/components/fixed-footer/SaveFooter';
 
 import { useMultiStep } from './MultiStep.context';
 import { MultiStepTemplate } from './MultiStepTemplate';

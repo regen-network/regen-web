@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react';
 import { truncate } from 'lodash';
 
-import { Body } from 'web-components/lib/components/typography';
+import { Body } from 'web-components/src/components/typography';
 
 import { DEFAULT_NAME } from '../../../../../pages/ProfileEdit/ProfileEdit.constants';
 import { OptionType } from './RoleField.types';

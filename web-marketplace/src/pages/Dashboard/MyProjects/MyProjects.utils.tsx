@@ -1,8 +1,8 @@
 import { NavigateFunction } from 'react-router-dom';
 import { QueryClient } from '@tanstack/react-query';
 
-import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCard';
-import EditIcon from 'web-components/lib/components/icons/EditIcon';
+import { ProjectCardProps } from 'web-components/src/components/cards/ProjectCard';
+import EditIcon from 'web-components/src/components/icons/EditIcon';
 
 import { useCreateProjectMutation } from 'generated/graphql';
 import { UseStateSetter } from 'types/react/use-state';

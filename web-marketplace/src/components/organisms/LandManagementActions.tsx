@@ -5,11 +5,11 @@ import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from 'tss-react/mui';
 
-import Action, { ActionProps } from 'web-components/lib/components/action';
-import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
-import Section from 'web-components/lib/components/section';
-import { Body } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import Action, { ActionProps } from 'web-components/src/components/action';
+import PrevNextButton from 'web-components/src/components/buttons/PrevNextButton';
+import Section from 'web-components/src/components/section';
+import { Body } from 'web-components/src/components/typography';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 export interface LandManagementActionsProps {
   actions: ActionProps[];

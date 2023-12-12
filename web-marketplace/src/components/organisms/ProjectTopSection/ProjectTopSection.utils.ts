@@ -2,8 +2,8 @@
 import {
   RoundLogoItemsListType,
   RoundLogoItemType,
-} from 'web-components/lib/components/molecules/RoundLogoItemsList/RoundLogoItemsList.types';
-import { ImageType } from 'web-components/lib/types/shared/imageType';
+} from 'web-components/src/components/molecules/RoundLogoItemsList/RoundLogoItemsList.types';
+import { ImageType } from 'web-components/src/types/shared/imageType';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import { ImageFieldsFragment, Sdg } from 'generated/sanity-graphql';

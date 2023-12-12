@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import SEO from 'web-components/lib/components/seo';
+import SEO from 'web-components/src/components/seo';
 
 import { getAllBuyersPageQuery } from 'lib/queries/react-query/sanity/getAllBuyersPageQuery/getAllBuyersPageQuery';
 

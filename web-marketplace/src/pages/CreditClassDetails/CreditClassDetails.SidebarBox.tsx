@@ -1,4 +1,4 @@
-import { Flex } from 'web-components/lib/components/box';
+import { Flex } from 'web-components/src/components/box';
 
 const SideBarBox: React.FC<React.PropsWithChildren<unknown>> = ({
   children,

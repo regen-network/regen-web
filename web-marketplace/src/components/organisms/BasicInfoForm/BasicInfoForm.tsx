@@ -4,10 +4,10 @@ import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import InputLabel from 'web-components/lib/components/inputs/InputLabel';
-import SelectTextField from 'web-components/lib/components/inputs/new/SelectTextField/SelectTextField';
-import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
+import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
+import InputLabel from 'web-components/src/components/inputs/InputLabel';
+import SelectTextField from 'web-components/src/components/inputs/new/SelectTextField/SelectTextField';
+import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 

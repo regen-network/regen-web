@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { ELLIPSIS_COLUMN_WIDTH } from 'styles/table';
 
-import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
+import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';
 
 import { BreakText } from 'components/atoms';
 

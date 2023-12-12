@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
+import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 
 import { useLedger } from 'ledger';
 

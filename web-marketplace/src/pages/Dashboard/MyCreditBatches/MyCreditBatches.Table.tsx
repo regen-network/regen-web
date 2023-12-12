@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import PlusIcon from 'web-components/lib/components/icons/PlusIcon';
-import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
-import { Subtitle } from 'web-components/lib/components/typography';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import PlusIcon from 'web-components/src/components/icons/PlusIcon';
+import { TablePaginationParams } from 'web-components/src/components/table/ActionsTable';
+import { Subtitle } from 'web-components/src/components/typography';
 
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';

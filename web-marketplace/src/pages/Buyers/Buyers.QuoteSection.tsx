@@ -1,4 +1,4 @@
-import { QuoteSection } from 'web-components/lib/components/organisms/QuoteSection/QuoteSection';
+import { QuoteSection } from 'web-components/src/components/organisms/QuoteSection/QuoteSection';
 
 import { AllBuyersPageQuery } from 'generated/sanity-graphql';
 

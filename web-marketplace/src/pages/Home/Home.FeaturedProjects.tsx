@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Box } from '@mui/material';
 
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 
 import {
   HomePageProjectsSection,

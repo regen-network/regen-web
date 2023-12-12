@@ -1,11 +1,11 @@
 import React from 'react';
 import { useMediaQuery, useTheme } from '@mui/material';
 
-import { GettingStartedResourcesCard } from 'web-components/lib/components/cards/GettingStartedResourcesCard';
-import Section from 'web-components/lib/components/section';
-import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { getLinkTarget } from 'web-components/lib/utils/linkTarget';
+import { GettingStartedResourcesCard } from 'web-components/src/components/cards/GettingStartedResourcesCard';
+import Section from 'web-components/src/components/section';
+import ResponsiveSlider from 'web-components/src/components/sliders/ResponsiveSlider';
+import { Theme } from 'web-components/src/theme/muiTheme';
+import { getLinkTarget } from 'web-components/src/utils/linkTarget';
 
 import { GettingStartedResourcesSectionFieldsFragment } from 'generated/sanity-graphql';
 import { getBtnHref } from 'lib/button';

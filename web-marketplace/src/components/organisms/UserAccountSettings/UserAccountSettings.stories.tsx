@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Title } from 'web-components/lib/components/typography';
+import { Title } from 'web-components/src/components/typography';
 
 import { UserAccountSettings } from './UserAccountSettings';
 

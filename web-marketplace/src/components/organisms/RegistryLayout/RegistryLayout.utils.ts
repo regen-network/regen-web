@@ -1,4 +1,4 @@
-import { truncate } from 'web-components/lib/utils/truncate';
+import { truncate } from 'web-components/src/utils/truncate';
 
 type GetAddressParams = {
   walletAddress?: string | null;

@@ -24,7 +24,7 @@ import { assets, chains } from 'chain-registry';
 import { Routes } from 'routes';
 import { AnalyticsProvider } from 'use-analytics';
 
-import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
+import ThemeProvider from 'web-components/src/theme/RegenThemeProvider';
 
 import { AuthProvider } from 'lib/auth/auth';
 import { apolloClientFactory } from 'lib/clients/apolloClientFactory';

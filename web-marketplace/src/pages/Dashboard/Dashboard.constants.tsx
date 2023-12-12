@@ -1,10 +1,10 @@
-import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
-import { CogIcon } from 'web-components/lib/components/icons/CogIcon';
-import { CreditBatchIcon } from 'web-components/lib/components/icons/CreditBatchIcon';
-import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClassIcon';
-import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
-import EditIcon from 'web-components/lib/components/icons/EditIcon';
-import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
+import BridgeIcon from 'web-components/src/components/icons/BridgeIcon';
+import { CogIcon } from 'web-components/src/components/icons/CogIcon';
+import { CreditBatchIcon } from 'web-components/src/components/icons/CreditBatchIcon';
+import { CreditClassIcon } from 'web-components/src/components/icons/CreditClassIcon';
+import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
+import EditIcon from 'web-components/src/components/icons/EditIcon';
+import { ProjectPageIcon } from 'web-components/src/components/icons/ProjectPageIcon';
 
 export const SEPARATOR = {
   children: <div className="h-1 bg-grey-300 w-full my-5" />,

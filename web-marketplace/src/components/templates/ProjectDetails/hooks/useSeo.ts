@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 
-import { Account } from 'web-components/lib/components/user/UserInfo';
+import { Account } from 'web-components/src/components/user/UserInfo';
 
 import {
   AnchoredProjectMetadataBaseLD,

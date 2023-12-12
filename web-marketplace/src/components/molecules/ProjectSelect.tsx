@@ -4,7 +4,7 @@ import { startCase } from 'lodash';
 
 import SelectTextField, {
   Option,
-} from 'web-components/lib/components/inputs/SelectTextField';
+} from 'web-components/src/components/inputs/SelectTextField';
 
 import { useCreditClassByOnChainIdQuery } from '../../generated/graphql';
 

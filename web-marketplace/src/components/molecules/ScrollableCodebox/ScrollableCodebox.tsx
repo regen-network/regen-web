@@ -1,6 +1,6 @@
 import { Box, SxProps } from '@mui/material';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 /** simple div to allow display of json data for now */
 export const ScrollableCodebox = (props: {

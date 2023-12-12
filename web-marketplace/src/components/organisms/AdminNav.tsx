@@ -1,8 +1,8 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 
 const AdminNav = ({
   redirectUri = window.location.origin,

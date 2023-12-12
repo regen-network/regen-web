@@ -14,22 +14,22 @@ import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import {
   StyledTableCell,
   StyledTableContainer,
   StyledTableRow,
   StyledTableSortLabel,
-} from 'web-components/lib/components/table';
-import { useTablePagination } from 'web-components/lib/components/table/hooks/useTablePagination';
+} from 'web-components/src/components/table';
+import { useTablePagination } from 'web-components/src/components/table/hooks/useTablePagination';
 import {
   getComparator,
   Order,
   stableSort,
-} from 'web-components/lib/components/table/Table.utils';
-import { Label } from 'web-components/lib/components/typography';
-import { formatNumber } from 'web-components/lib/utils/format';
-import { truncate } from 'web-components/lib/utils/truncate';
+} from 'web-components/src/components/table/Table.utils';
+import { Label } from 'web-components/src/components/typography';
+import { formatNumber } from 'web-components/src/utils/format';
+import { truncate } from 'web-components/src/utils/truncate';
 
 import { getHashUrl } from 'lib/block-explorer';
 import { ledgerRESTUri } from 'lib/ledger';

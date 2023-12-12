@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAtom } from 'jotai';
 
-import Banner from 'web-components/lib/components/banner';
+import Banner from 'web-components/src/components/banner';
 
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 

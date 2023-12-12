@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 
-import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
-import Stepper from 'web-components/lib/components/stepper';
+import OnBoardingSection from 'web-components/src/components/section/OnBoardingSection';
+import Stepper from 'web-components/src/components/stepper';
 
 import { useMultiStep } from './MultiStep.context';
 

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 
-import RegenModal from 'web-components/lib/components/modal';
-import { Body, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import RegenModal from 'web-components/src/components/modal';
+import { Body, Title } from 'web-components/src/components/typography';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 export const MobileSupportModal = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean | null>(null);

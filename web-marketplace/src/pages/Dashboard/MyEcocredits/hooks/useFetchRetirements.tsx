@@ -6,8 +6,8 @@ import {
 } from '@apollo/client';
 import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
-import { Account } from 'web-components/lib/components/user/UserInfo';
+import { TablePaginationParams } from 'web-components/src/components/table/ActionsTable';
+import { Account } from 'web-components/src/components/user/UserInfo';
 import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/Table.constants';
 
 import { RetirementsOrderBy } from 'generated/indexer-graphql';

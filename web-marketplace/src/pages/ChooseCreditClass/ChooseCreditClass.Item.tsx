@@ -1,8 +1,8 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 
-import { ImageActionCard } from 'web-components/lib/components/cards/ImageActionCard';
-import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClassIcon';
+import { ImageActionCard } from 'web-components/src/components/cards/ImageActionCard';
+import { CreditClassIcon } from 'web-components/src/components/icons/CreditClassIcon';
 
 interface ClassOptionProps {
   title: string;

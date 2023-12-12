@@ -2,10 +2,10 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from 'tss-react/mui';
 
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import FixedFooter from 'web-components/lib/components/fixed-footer';
-import { SaveIcon } from 'web-components/lib/components/icons/SaveIcon';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import FixedFooter from 'web-components/src/components/fixed-footer';
+import { SaveIcon } from 'web-components/src/components/icons/SaveIcon';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 interface Props {
   onSave?: () => void;

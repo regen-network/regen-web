@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Flex } from 'web-components/lib/components/box';
-import ConnectWallet from 'web-components/lib/components/organisms/ConnectWallet';
+import { Flex } from 'web-components/src/components/box';
+import ConnectWallet from 'web-components/src/components/organisms/ConnectWallet';
 
 import { useWallet } from 'lib/wallet/wallet';
 

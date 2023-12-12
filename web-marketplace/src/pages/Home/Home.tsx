@@ -3,11 +3,11 @@ import { Box } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { gradients } from 'styles/gradients';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import { Loading } from 'web-components/lib/components/loading';
-import Modal from 'web-components/lib/components/modal';
-import SEO from 'web-components/lib/components/seo';
-import { Body, Title } from 'web-components/lib/components/typography';
+import { BlockContent } from 'web-components/src/components/block-content';
+import { Loading } from 'web-components/src/components/loading';
+import Modal from 'web-components/src/components/modal';
+import SEO from 'web-components/src/components/seo';
+import { Body, Title } from 'web-components/src/components/typography';
 
 import { SKIPPED_CLASS_ID } from 'lib/env';
 import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';

@@ -2,18 +2,18 @@ import { Grid } from '@mui/material';
 import { useAtom, useSetAtom } from 'jotai';
 import React from 'react';
 
-import { Flex } from 'web-components/lib/components/box';
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import Section from 'web-components/lib/components/section';
-import InfoTooltip from 'web-components/lib/components/tooltip/InfoTooltip';
+import { Flex } from 'web-components/src/components/box';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
+import Section from 'web-components/src/components/section';
+import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import {
   Body,
   Subtitle,
   Title,
-} from 'web-components/lib/components/typography';
-import { formatNumber } from 'web-components/lib/utils/format';
-import { truncate } from 'web-components/lib/utils/truncate';
+} from 'web-components/src/components/typography';
+import { formatNumber } from 'web-components/src/utils/format';
+import { truncate } from 'web-components/src/utils/truncate';
 
 import {
   connectWalletModalAtom,

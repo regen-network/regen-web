@@ -1,7 +1,7 @@
 import { Formik } from 'formik';
 
-import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
-import NotFound from 'web-components/lib/components/views/NotFoundView';
+import SaveFooter from 'web-components/src/components/fixed-footer/SaveFooter';
+import NotFound from 'web-components/src/components/views/NotFoundView';
 
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 

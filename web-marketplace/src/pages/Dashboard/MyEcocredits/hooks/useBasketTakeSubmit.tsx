@@ -3,7 +3,7 @@ import { DeliverTxResponse } from '@cosmjs/stargate';
 import { BasketInfo } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { MsgTake } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
 
-import type { MsgTakeValues } from 'web-components/lib/components/form/BasketTakeForm';
+import type { MsgTakeValues } from 'web-components/src/components/form/BasketTakeForm';
 
 import { takeEventToBatches } from 'lib/events/takeEventToBatches';
 import {

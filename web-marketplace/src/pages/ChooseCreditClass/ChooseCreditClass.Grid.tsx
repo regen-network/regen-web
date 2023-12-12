@@ -2,10 +2,10 @@ import React from 'react';
 import { Box } from '@mui/material';
 import Grid, { GridProps } from '@mui/material/Grid';
 
-import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
-import { Loading } from 'web-components/lib/components/loading';
-import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
-import { Body } from 'web-components/lib/components/typography';
+import ErrorBanner from 'web-components/src/components/banner/ErrorBanner';
+import { Loading } from 'web-components/src/components/loading';
+import OnBoardingSection from 'web-components/src/components/section/OnBoardingSection';
+import { Body } from 'web-components/src/components/typography';
 
 import { Link } from 'components/atoms';
 

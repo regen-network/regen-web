@@ -3,9 +3,9 @@ import { Box } from '@mui/material';
 import { SxProps } from '@mui/system';
 import { sxToArray } from 'utils/mui/sxToArray';
 
-import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { parseText } from 'web-components/lib/utils/textParser';
+import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
+import { Theme } from 'web-components/src/theme/muiTheme';
+import { parseText } from 'web-components/src/utils/textParser';
 
 import { Link } from './Link';
 

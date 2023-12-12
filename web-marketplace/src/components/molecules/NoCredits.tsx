@@ -2,9 +2,9 @@ import React from 'react';
 import { Box, SxProps } from '@mui/material';
 import { sxToArray } from 'utils/mui/sxToArray';
 
-import { StyledTableContainer } from 'web-components/lib/components/table';
-import { Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { StyledTableContainer } from 'web-components/src/components/table';
+import { Title } from 'web-components/src/components/typography';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { ReactComponent as CloudData } from '../../assets/svgs/cloud-data.svg';
 

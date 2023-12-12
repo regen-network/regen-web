@@ -2,10 +2,10 @@ import React from 'react';
 import { Grid, SxProps, Theme } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 
-import CreditsIssuedIcon from 'web-components/lib/components/icons/CreditsIssued';
-import CreditsRetiredIcon from 'web-components/lib/components/icons/CreditsRetired';
-import CreditsTradeableIcon from 'web-components/lib/components/icons/CreditsTradeable';
-import { LabeledNumber } from 'web-components/lib/components/text-layouts';
+import CreditsIssuedIcon from 'web-components/src/components/icons/CreditsIssued';
+import CreditsRetiredIcon from 'web-components/src/components/icons/CreditsRetired';
+import CreditsTradeableIcon from 'web-components/src/components/icons/CreditsTradeable';
+import { LabeledNumber } from 'web-components/src/components/text-layouts';
 
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 import { getCreditsTooltip } from 'pages/Projects/utils/getCreditsTooltip';

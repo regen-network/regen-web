@@ -1,6 +1,6 @@
 import { Box } from '@mui/system';
 
-import { Body, Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/src/components/typography';
 
 import { Link } from 'components/atoms/Link';
 

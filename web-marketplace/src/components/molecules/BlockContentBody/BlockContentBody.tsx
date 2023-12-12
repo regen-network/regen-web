@@ -1,5 +1,5 @@
-import { BlockContent } from 'web-components/lib/components/block-content';
-import { Body } from 'web-components/lib/components/typography';
+import { BlockContent } from 'web-components/src/components/block-content';
+import { Body } from 'web-components/src/components/typography';
 
 import { Scalars } from 'generated/sanity-graphql';
 

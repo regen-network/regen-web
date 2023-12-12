@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
-import { uploadImage } from 'web-components/lib/utils/s3';
+import { uploadImage } from 'web-components/src/utils/s3';
 
 import { useUpdateAccountByIdMutation } from 'generated/graphql';
 import { apiUri } from 'lib/apiUri';

@@ -2,7 +2,7 @@ import { Grid } from '@mui/material';
 import { styled } from '@mui/system';
 import { makeStyles } from 'tss-react/mui';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import topoImg from '../../../assets/background-contour-2.svg';
 

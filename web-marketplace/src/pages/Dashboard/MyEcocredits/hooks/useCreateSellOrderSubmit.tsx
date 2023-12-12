@@ -4,8 +4,8 @@ import { MsgSell } from '@regen-network/api/lib/generated/regen/ecocredit/market
 import { useQueryClient } from '@tanstack/react-query';
 import { getDenomtrace } from 'utils/ibc/getDenomTrace';
 
-import { Item } from 'web-components/lib/components/modal/TxModal';
-import { getFormattedNumber } from 'web-components/lib/utils/format';
+import { Item } from 'web-components/src/components/modal/TxModal';
+import { getFormattedNumber } from 'web-components/src/utils/format';
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';

@@ -1,11 +1,11 @@
 import React from 'react';
 import { makeStyles } from 'tss-react/mui';
 
-import Section from 'web-components/lib/components/section';
+import Section from 'web-components/src/components/section';
 import Timeline, {
   Item,
-} from 'web-components/lib/components/timeline/NewTimeline';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+} from 'web-components/src/components/timeline/NewTimeline';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import {
   Maybe,

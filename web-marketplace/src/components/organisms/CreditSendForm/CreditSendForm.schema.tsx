@@ -4,7 +4,7 @@ import {
   invalidRegenAddress,
   isValidAddress,
   requiredMessage,
-} from 'web-components/lib/components/inputs/validation';
+} from 'web-components/src/components/inputs/validation';
 
 import { RetireFormSchema } from '../CreditRetireForm/CreditRetireForm.schema';
 

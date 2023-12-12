@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Box } from '@mui/material';
 
-import RegenMarketIcon from 'web-components/lib/components/icons/RegenMarketIcon';
+import RegenMarketIcon from 'web-components/src/components/icons/RegenMarketIcon';
 
 export const RegistryIconLink: React.FC<
   React.PropsWithChildren<{ color: string }>

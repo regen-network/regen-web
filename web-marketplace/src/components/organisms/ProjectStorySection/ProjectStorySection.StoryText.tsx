@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
 
-import ReadMore from 'web-components/lib/components/read-more';
-import { Label, Title } from 'web-components/lib/components/typography';
+import ReadMore from 'web-components/src/components/read-more';
+import { Label, Title } from 'web-components/src/components/typography';
 
 import { useProjectStorySectionStyles } from './ProjectStorySection.styles';
 import { StoryTextProps } from './ProjectStorySection.types';

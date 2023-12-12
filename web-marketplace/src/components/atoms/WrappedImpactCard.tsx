@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
+import { BlockContent } from 'web-components/src/components/block-content';
+import ImpactCard from 'web-components/src/components/cards/ImpactCard';
 
 import {
   EcologicalOutcomeFieldsFragment,

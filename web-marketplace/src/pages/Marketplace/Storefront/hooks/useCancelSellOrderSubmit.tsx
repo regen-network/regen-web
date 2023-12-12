@@ -3,11 +3,11 @@ import { Box } from '@mui/material';
 import { MsgCancelSellOrder } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
 import { getDenomtrace } from 'utils/ibc/getDenomTrace';
 
-import { Item } from 'web-components/lib/components/modal/TxModal';
+import { Item } from 'web-components/src/components/modal/TxModal';
 import {
   formatNumber,
   getFormattedNumber,
-} from 'web-components/lib/utils/format';
+} from 'web-components/src/utils/format';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { microToDenom } from 'lib/denom.utils';

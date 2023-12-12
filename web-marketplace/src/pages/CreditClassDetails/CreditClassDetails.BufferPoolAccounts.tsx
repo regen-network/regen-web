@@ -1,5 +1,5 @@
-import { Flex } from 'web-components/lib/components/box';
-import { Body } from 'web-components/lib/components/typography';
+import { Flex } from 'web-components/src/components/box';
+import { Body } from 'web-components/src/components/typography';
 
 import { getAccountUrl } from 'lib/block-explorer';
 import { BufferPoolAccount } from 'lib/db/types/json-ld/credit-class-metadata';

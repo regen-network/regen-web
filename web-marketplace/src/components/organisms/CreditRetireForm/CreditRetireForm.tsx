@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { useFieldArray, useFormState } from 'react-hook-form';
 import { Box } from '@mui/system';
 
-import { RetirementReminder } from 'web-components/lib/components/form/CreditRetireForm';
-import Submit from 'web-components/lib/components/form/Submit';
-import AmountField from 'web-components/lib/components/inputs/new/AmountField/AmountField';
-import { RegenModalProps } from 'web-components/lib/components/modal';
+import { RetirementReminder } from 'web-components/src/components/form/CreditRetireForm';
+import Submit from 'web-components/src/components/form/Submit';
+import AmountField from 'web-components/src/components/inputs/new/AmountField/AmountField';
+import { RegenModalProps } from 'web-components/src/components/modal';
 
 import { BottomCreditRetireFields } from 'components/molecules/BottomCreditRetireFields/BottomCreditRetireFields';
 import Form from 'components/molecules/Form/Form';

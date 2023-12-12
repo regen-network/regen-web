@@ -1,10 +1,10 @@
 import React from 'react';
 import { makeStyles } from 'tss-react/mui';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import Card from 'web-components/lib/components/cards/Card';
-import { Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { BlockContent } from 'web-components/src/components/block-content';
+import Card from 'web-components/src/components/cards/Card';
+import { Title } from 'web-components/src/components/typography';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { Maybe, Scalars } from '../../generated/sanity-graphql';
 import { Methodology } from '../../mocks/mocks';

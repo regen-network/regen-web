@@ -1,4 +1,4 @@
-import { SliderSection } from 'web-components/lib/components/section/SliderSection';
+import { SliderSection } from 'web-components/src/components/section/SliderSection';
 
 import { Maybe, ResourceFieldsFragment } from 'generated/sanity-graphql';
 

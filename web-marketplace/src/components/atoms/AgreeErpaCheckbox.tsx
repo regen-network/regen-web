@@ -4,7 +4,7 @@ import {
   URL_REGISTRY_TERMS_SERVICE,
 } from 'config/globals';
 
-import AgreeCheckbox from 'web-components/lib/components/inputs/AgreeCheckbox';
+import AgreeCheckbox from 'web-components/src/components/inputs/AgreeCheckbox';
 
 interface Props {
   sx?: SxProps<Theme>;

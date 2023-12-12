@@ -1,4 +1,4 @@
-import { formatDate } from 'web-components/lib/utils/format';
+import { formatDate } from 'web-components/src/utils/format';
 
 export const getDateCriteria = (
   minStartDate?: string,

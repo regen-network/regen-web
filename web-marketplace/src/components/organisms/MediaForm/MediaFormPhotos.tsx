@@ -4,11 +4,11 @@ import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
 import {
   ImageDrop,
   ImageDropProps,
-} from 'web-components/lib/components/inputs/new/ImageDrop/ImageDrop';
-import { TextAreaField } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField';
-import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
-import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
-import { UseStateSetter } from 'web-components/lib/types/react/useState';
+} from 'web-components/src/components/inputs/new/ImageDrop/ImageDrop';
+import { TextAreaField } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField';
+import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
+import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { useProjectEditContext } from 'pages';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
-import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
+import SaveFooter from 'web-components/src/components/fixed-footer/SaveFooter';
 
 import { getProjectCreationPercentage } from 'pages/ProjectCreate/ProjectCreate.utils';
 

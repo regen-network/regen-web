@@ -8,7 +8,7 @@ import {
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
-import { Account } from 'web-components/lib/components/user/UserInfo';
+import { Account } from 'web-components/src/components/user/UserInfo';
 
 import { useCreditClassByUriQuery } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';

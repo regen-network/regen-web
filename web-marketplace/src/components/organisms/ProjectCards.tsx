@@ -6,8 +6,8 @@ import Link from '@mui/material/Link';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from 'tss-react/mui';
 
-import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import ProjectCard from 'web-components/src/components/cards/ProjectCard';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { QUDT_UNIT_MAP, qudtUnit } from 'lib/rdf';
 import { useTracker } from 'lib/tracker/useTracker';

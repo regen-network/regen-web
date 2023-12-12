@@ -4,13 +4,13 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import {
   ImageDrop,
   ImageDropProps,
-} from 'web-components/lib/components/inputs/new/ImageDrop/ImageDrop';
-import { Radio } from 'web-components/lib/components/inputs/new/Radio/Radio';
-import { RADIO_PREFERABLE } from 'web-components/lib/components/inputs/new/Radio/Radio.constants';
-import { RadioGroup } from 'web-components/lib/components/inputs/new/RadioGroup/RadioGroup';
-import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
-import { VideoInput } from 'web-components/lib/components/inputs/new/VideoInput/VideoInput';
-import { UseStateSetter } from 'web-components/lib/types/react/useState';
+} from 'web-components/src/components/inputs/new/ImageDrop/ImageDrop';
+import { Radio } from 'web-components/src/components/inputs/new/Radio/Radio';
+import { RADIO_PREFERABLE } from 'web-components/src/components/inputs/new/Radio/Radio.constants';
+import { RadioGroup } from 'web-components/src/components/inputs/new/RadioGroup/RadioGroup';
+import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+import { VideoInput } from 'web-components/src/components/inputs/new/VideoInput/VideoInput';
+import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { apiUri } from 'lib/apiUri';
 import { IMAGE_STORAGE_BASE_URL } from 'lib/env';

@@ -4,17 +4,17 @@ import { quantityFormatNumberOptions } from 'config/decimals';
 import { loaderStyles } from 'styles/loader';
 import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
-import EmptyCartIcon from 'web-components/lib/components/icons/EmptyCartIcon';
-import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
-import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
+import { BlockContent } from 'web-components/src/components/block-content';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import BridgeIcon from 'web-components/src/components/icons/BridgeIcon';
+import EmptyCartIcon from 'web-components/src/components/icons/EmptyCartIcon';
+import { ActionsTable } from 'web-components/src/components/table/ActionsTable';
+import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';
 import {
   DATE_FORMAT_SECONDARY,
   formatDate,
   formatNumber,
-} from 'web-components/lib/utils/format';
+} from 'web-components/src/utils/format';
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { Bridge1Event } from 'lib/tracker/types';

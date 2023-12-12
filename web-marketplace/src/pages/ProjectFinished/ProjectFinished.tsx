@@ -4,12 +4,12 @@ import { useApolloClient } from '@apollo/client';
 import { Box } from '@mui/system';
 import { useQuery } from '@tanstack/react-query';
 
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import EditIcon from 'web-components/lib/components/icons/EditIcon';
-import { CardItem } from 'web-components/lib/components/modal/TxModal';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
-import { truncateHash } from 'web-components/lib/utils/truncate';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
+import EditIcon from 'web-components/src/components/icons/EditIcon';
+import { CardItem } from 'web-components/src/components/modal/TxModal';
+import { Body, Label, Title } from 'web-components/src/components/typography';
+import { truncateHash } from 'web-components/src/utils/truncate';
 
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 

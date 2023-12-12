@@ -1,16 +1,16 @@
 import { Field, Form, Formik, FormikErrors } from 'formik';
 
-import Submit from 'web-components/lib/components/form/Submit';
-import AmountField from 'web-components/lib/components/inputs/AmountField';
-import FormLabel from 'web-components/lib/components/inputs/FormLabel';
-import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
-import TextField from 'web-components/lib/components/inputs/TextField';
+import Submit from 'web-components/src/components/form/Submit';
+import AmountField from 'web-components/src/components/inputs/AmountField';
+import FormLabel from 'web-components/src/components/inputs/FormLabel';
+import SelectTextField from 'web-components/src/components/inputs/SelectTextField';
+import TextField from 'web-components/src/components/inputs/TextField';
 import {
   requirementAgreement,
   validateAmount,
   validatePolygonAddress,
-} from 'web-components/lib/components/inputs/validation';
-import { RegenModalProps } from 'web-components/lib/components/modal';
+} from 'web-components/src/components/inputs/validation';
+import { RegenModalProps } from 'web-components/src/components/modal';
 
 import AgreeErpaCheckbox from 'components/atoms/AgreeErpaCheckbox';
 

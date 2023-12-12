@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 import { postData } from 'utils/fetch/postData';
 
-import { EmailConfirmationModal } from 'web-components/lib/components/modal/EmailConfirmationModal/EmailConfirmationModal';
+import { EmailConfirmationModal } from 'web-components/src/components/modal/EmailConfirmationModal/EmailConfirmationModal';
 
 import { apiUri } from 'lib/apiUri';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';

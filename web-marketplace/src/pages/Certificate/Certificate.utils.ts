@@ -1,5 +1,5 @@
-import { CertificateType } from 'web-components/lib/components/certificate/certificate.types';
-import { truncate } from 'web-components/lib/utils/truncate';
+import { CertificateType } from 'web-components/src/components/certificate/certificate.types';
+import { truncate } from 'web-components/src/utils/truncate';
 
 import { getHashUrl } from 'lib/block-explorer';
 import { NormalizedRetirement } from 'lib/normalizers/retirements/normalizeRetirement';

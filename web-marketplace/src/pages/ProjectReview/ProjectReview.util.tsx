@@ -4,7 +4,7 @@ import {
   getCountryCodeByName,
   getISOString,
   getIsoSubdivision,
-} from 'web-components/lib/utils/locationStandard';
+} from 'web-components/src/utils/locationStandard';
 
 import {
   AnchoredProjectMetadataBaseLD,

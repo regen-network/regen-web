@@ -3,9 +3,9 @@ import { useFormState, useWatch } from 'react-hook-form';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import { TextAreaField } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField';
-import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
+import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
+import { TextAreaField } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField';
+import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 

@@ -1,6 +1,6 @@
 import { makeStyles } from 'tss-react/mui';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 export const useCreditBatchesStyles = makeStyles()((theme: Theme) => ({
   section: {

@@ -26,6 +26,7 @@ import {
 import { MediaFormSchemaType } from './MediaForm.schema';
 import { getHandleDelete } from './MediaForm.utils';
 import { useMediaFormStyles } from './useMediaFormStyles';
+import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
 
 type Props = {
   offChainProjectId?: string;
@@ -125,6 +126,25 @@ export const MediaFormStory = ({
               dropZoneOption={{ maxFiles: 1 }}
               error={!!errors['regen:storyMedia']}
               helperText={errors['regen:storyMedia']?.message}
+              renderModal={({
+                initialImage,
+                open,
+                value,
+                children,
+                onClose,
+                onSubmit,
+              }) => (
+                <CropImageModal
+                  open={open}
+                  onClose={onClose}
+                  onSubmit={onSubmit}
+                  initialImage={initialImage}
+                  fixedCrop={cropAspectMediaForm}
+                  isIgnoreCrop={!!value}
+                >
+                  {children}
+                </CropImageModal>
+              )}
               optional
               {...imageDropCommonProps}
               {...register('regen:storyMedia.schema:url')}

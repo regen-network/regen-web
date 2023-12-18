@@ -141,6 +141,7 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
             fieldIndex={index}
             error={!!errors['files']}
             helperText={errors['files']?.message}
+            renderModal={() => <div />}
             optional
             {...imageDropCommonProps}
             {...form.register('files')}

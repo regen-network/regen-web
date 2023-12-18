@@ -11,6 +11,7 @@ import { ImageDropImage } from './ImageDrop.Image';
 import { useImageDropStyles } from './ImageDrop.styles';
 import { toBase64 } from './ImageDrop.utils';
 import { ImageDropZone } from './ImageDrop.Zone';
+import { ImageDropRenderModalProps } from './ImageDrop.types';
 
 export interface ImageDropProps extends Partial<FieldFormControlProps> {
   className?: string;
@@ -34,6 +35,7 @@ export interface ImageDropProps extends Partial<FieldFormControlProps> {
   children?: React.ReactNode;
   dropZoneOption?: DropzoneOptions;
   isCropSubmitDisabled?: boolean;
+  renderModal: ({}: ImageDropRenderModalProps) => React.ReactNode;
   setValue: (value: string, fieldIndex: number) => void;
   onDelete?: (fileName: string) => Promise<void>;
   onUpload?: (imageFile: File) => Promise<string | undefined>;
@@ -61,6 +63,7 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
       fieldIndex = 0,
       isCropSubmitDisabled = false,
       children,
+      renderModal,
       setValue,
       onUpload,
       onDelete,
@@ -68,7 +71,7 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
     },
     ref,
   ) => {
-    const [cropModalOpen, setCropModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [initialImage, setInitialImage] = useState('');
     const [fileName, setFileName] = useState('');
     const { classes: styles, cx } = useImageDropStyles();
@@ -80,7 +83,7 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
         setFileName(file.name);
         toBase64(file).then(base64String => {
           if (typeof base64String === 'string') {
-            setCropModalOpen(true);
+            setIsModalOpen(true);
             setInitialImage(base64String);
           }
         });
@@ -100,27 +103,27 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
         setFileName(file.name);
         toBase64(file).then(base64String => {
           if (typeof base64String === 'string') {
-            setCropModalOpen(true);
+            setIsModalOpen(true);
             setInitialImage(base64String);
           }
         });
       }
     };
 
-    const handleCropModalClose = (): void => {
+    const onModalClose = (): void => {
       setInitialImage('');
       setFileName('');
-      setCropModalOpen(false);
+      setIsModalOpen(false);
     };
 
-    const onCropModalSubmit = async (
+    const onModalSubmit = async (
       croppedImage: HTMLImageElement,
     ): Promise<void> => {
       const result = await getImageSrc(croppedImage, onUpload, fileName);
 
       if (result) {
         setValue(result, fieldIndex);
-        setCropModalOpen(false);
+        setIsModalOpen(false);
       }
     };
 
@@ -132,7 +135,7 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
       }
     };
 
-    const handleEdit = () => setCropModalOpen(true);
+    const handleEdit = () => setIsModalOpen(true);
 
     return (
       <>
@@ -165,17 +168,13 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
             ref={ref}
           />
         </FieldFormControl>
-        <CropImageModal
-          open={cropModalOpen}
-          onClose={handleCropModalClose}
-          onSubmit={onCropModalSubmit}
-          initialImage={initialImage}
-          fixedCrop={fixedCrop}
-          isCropSubmitDisabled={isCropSubmitDisabled}
-          isIgnoreCrop={!!value}
-        >
-          {children}
-        </CropImageModal>
+        {renderModal({
+          open: isModalOpen,
+          initialImage,
+          children,
+          onClose: onModalClose,
+          onSubmit: onModalSubmit,
+        })}
       </>
     );
   },

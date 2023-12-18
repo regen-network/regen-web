@@ -9,6 +9,7 @@ import { TextAreaField } from 'web-components/lib/components/inputs/new/TextArea
 import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
 import { UseStateSetter } from 'web-components/lib/types/react/useState';
+import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
 
 import { useProjectEditContext } from 'pages';
 
@@ -149,6 +150,25 @@ export const MediaFormPhotos = ({
         dropZoneOption={{ maxFiles: 1 }}
         error={!!errors['regen:previewPhoto']}
         helperText={errors['regen:previewPhoto']?.message}
+        renderModal={({
+          initialImage,
+          open,
+          value,
+          children,
+          onClose,
+          onSubmit,
+        }) => (
+          <CropImageModal
+            open={open}
+            onClose={onClose}
+            onSubmit={onSubmit}
+            initialImage={initialImage}
+            fixedCrop={cropAspectMediaForm}
+            isIgnoreCrop={!!value}
+          >
+            {children}
+          </CropImageModal>
+        )}
         optional
         {...imageDropCommonProps}
         {...register('regen:previewPhoto.schema:url')}
@@ -189,9 +209,28 @@ export const MediaFormPhotos = ({
             key={field.id}
             fieldIndex={index}
             dropZoneOption={{ maxFiles: 1 }}
-            isCropSubmitDisabled={hasFieldError}
             className={classes.galleryItem}
             defaultStyle={isFirst ? true : false}
+            renderModal={({
+              initialImage,
+              open,
+              value,
+              children,
+              onClose,
+              onSubmit,
+            }) => (
+              <CropImageModal
+                open={open}
+                onClose={onClose}
+                onSubmit={onSubmit}
+                initialImage={initialImage}
+                fixedCrop={cropAspectMediaForm}
+                isCropSubmitDisabled={hasFieldError}
+                isIgnoreCrop={!!value}
+              >
+                {children}
+              </CropImageModal>
+            )}
             optional
             {...register(`regen:galleryPhotos.${index}.schema:url`)}
             {...imageDropCommonProps}

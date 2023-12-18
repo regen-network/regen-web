@@ -2,6 +2,7 @@ import { postData, PostParams } from 'utils/fetch/postData';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { FailedFnType } from 'lib/atoms/error.atoms';
+import { CSRF_ERROR } from 'lib/errors/apiErrors';
 
 type Params = PostParams & {
   defaultError: string;
@@ -25,11 +26,10 @@ export const onPostData = async ({
       data,
       token,
       retryCsrfRequest,
+      onSuccess,
     });
-    if (response.error) {
+    if (response.error && response.error !== CSRF_ERROR) {
       setEmailModalErrorCode(response.error);
-    } else {
-      onSuccess && onSuccess();
     }
   } catch (e: unknown) {
     setEmailModalErrorCode(defaultError);

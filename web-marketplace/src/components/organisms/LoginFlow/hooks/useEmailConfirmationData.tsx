@@ -117,17 +117,16 @@ export const useEmailConfirmationData = ({
           },
           token,
           retryCsrfRequest,
+          onSuccess: async () => {
+            callback && callback();
+            startTimer();
+            setIsConfirmationModalOpen(true);
+          },
         });
         if (response.error) {
           if (response.error === CONNECTED_EMAIL_ERROR_TITLE) {
             setIsConnectedEmailErrorModalOpen(true);
-          } else {
-            setErrorBannerTextAtom(response.error);
           }
-        } else {
-          callback && callback();
-          startTimer();
-          setIsConfirmationModalOpen(true);
         }
       } catch (e) {
         setErrorBannerTextAtom(String(e));

@@ -37,6 +37,7 @@ import CreditsRetiredIcon from './CreditsRetired';
 import CreditsTradeableIcon from './CreditsTradeable';
 import CurrentCreditsIcon from './CurrentCreditsIcon';
 import DocumentIcon from './DocumentIcon';
+import { DocumentIconRaw } from './DocumentIconRaw';
 import DropdownIcon from './DropdownIcon';
 import EditIcon from './EditIcon';
 import EmailIcon from './EmailIcon';
@@ -50,6 +51,8 @@ import InfoIcon from './InfoIcon';
 import InfoIconOutlined from './InfoIconOutlined';
 import InterfaceIcon from './InterfaceIcon';
 import LinkIcon from './LinkIcon';
+import { LocationIcon } from './LocationIcon';
+import { LockIcon } from './LockIcon';
 import LocationSearchIcon from './LocationSearchIcon';
 import MinusIcon from './MinusIcon';
 import NoBasketTokensIcon from './NoBasketTokensIcon';
@@ -64,6 +67,7 @@ import PinIcon from './PinIcon';
 import PlayIcon from './PlayIcon';
 import PlusIcon from './PlusIcon';
 import PointerIcon from './PointerIcon';
+import { PostIcon } from './PostIcon';
 import PrintIcon from './PrintIcon';
 import { ProjectPageIcon } from './ProjectPageIcon';
 import { ProjectPageIconSmall } from './ProjectPageIconSmall';
@@ -228,6 +232,7 @@ export const allIcons = (): JSX.Element => (
     />
     <LabeledIcon icon={<DiscordIcon color="blue" />} label="DiscordIcon" />
     <LabeledIcon icon={<DocumentIcon />} label="DocumentIcon" />
+    <LabeledIcon icon={<DocumentIconRaw />} label="DocumentIconRaw" />
     <LabeledIcon icon={<DropdownIcon />} label="DropdownIcon" />
     <LabeledIcon icon={<EditIcon />} label="EditIcon" />
     <LabeledIcon icon={<EeurIcon />} label="EeurIcon" />
@@ -255,7 +260,9 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<LinkedInIcon color="blue" />} label="LinkedInIcon" />
     <LabeledIcon icon={<LinkedInBadgeIcon />} label="LinkedInBadgeIcon" />
     <LabeledIcon icon={<LinkIcon />} label="LinkIcon" />
+    <LabeledIcon icon={<LocationIcon />} label="LocationIcon" />
     <LabeledIcon icon={<LocationSearchIcon />} label="LocationSearchIcon" />
+    <LabeledIcon icon={<LockIcon />} label="LockIcon" />
     <LabeledIcon icon={<MediumIcon color="grey" />} label="MediumIcon" />
     <LabeledIcon icon={<MinusIcon />} label="MinusIcon" />
     <LabeledIcon icon={<NoBasketTokensIcon />} label="NoBasketTokensIcon" />
@@ -276,6 +283,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<PlayIcon height={'20px'} />} label="PlayIcon" />
     <LabeledIcon icon={<PlusIcon />} label="PlusIcon" />
     <LabeledIcon icon={<PointerIcon />} label="PointerIcon" />
+    <LabeledIcon icon={<PostIcon />} label="PostIcon" />
     <LabeledIcon icon={<PrintIcon />} label="PrintIcon" />
     <LabeledIcon icon={<ProjectPageIcon />} label="ProjectPageIcon" />
     <LabeledIcon icon={<ProjectPageIconSmall />} label="ProjectPageIconSmall" />

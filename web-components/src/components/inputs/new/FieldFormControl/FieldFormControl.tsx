@@ -20,7 +20,7 @@ export interface FieldFormControlProps extends DefaultStyleProps {
   description?: ReactNode;
   disabled?: boolean;
   optional?: boolean | string;
-  label?: string;
+  label?: ReactNode;
   onExampleClick?: () => void;
   error?: boolean;
   helperText?: string;

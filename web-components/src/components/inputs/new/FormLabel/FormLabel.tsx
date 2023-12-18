@@ -10,7 +10,7 @@ interface Props {
   description?: ReactNode;
   disabled?: boolean;
   optional?: boolean | string;
-  label?: string;
+  label?: ReactNode;
   onExampleClick?: () => void;
 }
 

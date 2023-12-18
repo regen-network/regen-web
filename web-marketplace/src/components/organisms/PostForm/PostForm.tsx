@@ -1,33 +1,37 @@
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
-import CheckboxLabel from 'web-components/lib/components/inputs/new/CheckboxLabel/CheckboxLabel';
 import {
   ImageDrop,
   ImageDropProps,
 } from 'web-components/lib/components/inputs/new/ImageDrop/ImageDrop';
 import { TextAreaField } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField';
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
-import {
-  Body,
-  Subtitle,
-  Title,
-} from 'web-components/lib/components/typography';
+import { LockIcon } from 'web-components/lib/components/icons/LockIcon';
+import { PostIcon } from 'web-components/lib/components/icons/PostIcon';
+import { DocumentIconRaw } from 'web-components/lib/components/icons/DocumentIconRaw';
+import { LocationIcon } from 'web-components/lib/components/icons/LocationIcon';
+import { Body, Title } from 'web-components/lib/components/typography';
 
-import { cn } from 'web-components/lib/utils/styles/cn';
-import { PostFormSchemaType, postFormSchema } from './PostForm.schema';
-import Form from 'components/molecules/Form/Form';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
-import { useFieldArray, useWatch } from 'react-hook-form';
-import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
-import { POST_MAX_TITLE_LENGTH } from './PostForm.constants';
 import { Link } from 'components/atoms';
+import Form from 'components/molecules/Form/Form';
 import { useEffect } from 'react';
+import { useFieldArray, useWatch } from 'react-hook-form';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import { Radio } from 'web-components/lib/components/inputs/new/Radio/Radio';
+import { RadioGroup } from 'web-components/lib/components/inputs/new/RadioGroup/RadioGroup';
+import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
+import { cn } from 'web-components/lib/utils/styles/cn';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import {
   DEFAULT_URL,
   IMAGE_UPLOAD_BUTTON_LABEL,
   cropAspectMediaForm,
 } from '../MediaForm/MediaForm.constants';
 import { useMediaFormStyles } from '../MediaForm/useMediaFormStyles';
+import {
+  POST_MAX_TITLE_LENGTH,
+  POST_PRIVACY_DESCRIPTION,
+} from './PostForm.constants';
+import { PostFormSchemaType, postFormSchema } from './PostForm.schema';
 
 export interface Props {
   initialValues: PostFormSchemaType;
@@ -54,6 +58,7 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
 
   const title = useWatch({ control: form.control, name: 'title' });
   const files = useWatch({ control: form.control, name: 'files' });
+  const privacy = useWatch({ control: form.control, name: 'privacyType' });
 
   const { fields, append, remove } = useFieldArray({
     name: 'files',
@@ -143,41 +148,69 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
         );
       })}
       <div className="flex flex-col mb-50">
-        <Subtitle
-          size="lg"
-          color="primary.contrastText"
-          as="span"
-          className="mb-10"
+        <RadioGroup
+          label={
+            <span className="inline-flex items-center">
+              <LockIcon className="mr-10" />
+              {'Privacy settings'}
+            </span>
+          }
+          description={POST_PRIVACY_DESCRIPTION}
+          optional
         >
-          {'Privacy settings'}
-        </Subtitle>
-        <CheckboxLabel
-          label={
-            <Body size="lg" color="primary.contrastText" as="span">
-              {'Make the entire post private '}
-            </Body>
-          }
-          className="mb-10"
-          {...form.register('privatePost')}
-        />
-        <CheckboxLabel
-          label={
-            <Body size="lg" color="primary.contrastText" as="span">
-              {'Make the files private '}
-            </Body>
-          }
-          className="mb-10"
-          {...form.register('privateFiles')}
-        />
-        <CheckboxLabel
-          label={
-            <Body size="lg" color="primary.contrastText" as="span">
-              {'Make the location data private '}
-            </Body>
-          }
-          className="mb-10"
-          {...form.register('privateLocation')}
-        />
+          <>
+            <Radio
+              label={
+                <span
+                  className={cn(
+                    'flex items-center',
+                    privacy !== 'private' && 'text-grey-400',
+                  )}
+                >
+                  <PostIcon className="mr-15" />
+                  {'Make the entire post private'}
+                </span>
+              }
+              value={'private'}
+              selectedValue={privacy}
+              sx={{ mb: 2.5 }}
+              {...form.register('privacyType')}
+            />
+            <Radio
+              label={
+                <span
+                  className={cn(
+                    'flex items-center',
+                    privacy !== 'private-files' && 'text-grey-400',
+                  )}
+                >
+                  <DocumentIconRaw className="mr-15" />
+                  {'Make the files private'}
+                </span>
+              }
+              value={'private-files'}
+              selectedValue={privacy}
+              sx={{ mb: 2.5 }}
+              {...form.register('privacyType')}
+            />
+            <Radio
+              label={
+                <span
+                  className={cn(
+                    'flex items-center',
+                    privacy !== 'private-location' && 'text-grey-400',
+                  )}
+                >
+                  <LocationIcon className="mr-15" />
+                  {'Make the location data private'}
+                </span>
+              }
+              value={'private-location'}
+              selectedValue={privacy}
+              {...form.register('privacyType')}
+            />
+          </>
+        </RadioGroup>
       </div>
       <div className="flex justify-end">
         <OutlinedButton className="mr-40">{'Cancel'}</OutlinedButton>

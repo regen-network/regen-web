@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { ReactNode, forwardRef } from 'react';
 import {
   Box,
   FormControlLabel,
@@ -17,7 +17,7 @@ import { RadiotVariant } from './Radio.types';
 
 export interface RadioProps extends RadioPropsMui {
   value?: string;
-  label?: string;
+  label?: ReactNode;
   selectedValue?: string;
   variant?: RadiotVariant;
   optional?: string | boolean;

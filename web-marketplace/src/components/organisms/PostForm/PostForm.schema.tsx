@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { POST_MAX_TITLE_LENGTH } from './PostForm.constants';
+import { PostFormPrivacyType } from './PostForm.types';
 
 export const postFormSchema = z.object({
   title: z.string().max(POST_MAX_TITLE_LENGTH),
@@ -11,9 +12,7 @@ export const postFormSchema = z.object({
       }),
     )
     .optional(),
-  privatePost: z.boolean().optional(),
-  privateFiles: z.boolean().optional(),
-  privateLocation: z.boolean().optional(),
+  privacyType: z.custom<PostFormPrivacyType>(),
 });
 
 export type PostFormSchemaType = z.infer<typeof postFormSchema>;

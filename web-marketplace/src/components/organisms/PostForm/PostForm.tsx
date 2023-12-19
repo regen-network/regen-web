@@ -60,6 +60,8 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
   const files = useWatch({ control: form.control, name: 'files' });
   const privacy = useWatch({ control: form.control, name: 'privacyType' });
 
+  const noFiles = (files?.length ?? 0) <= 1;
+
   const { fields, append, remove } = useFieldArray({
     name: 'files',
     control: form.control,
@@ -163,12 +165,7 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
           <>
             <Radio
               label={
-                <span
-                  className={cn(
-                    'flex items-center',
-                    privacy !== 'private' && 'text-grey-400',
-                  )}
-                >
+                <span className={cn('flex items-center')}>
                   <PostIcon className="mr-15" />
                   {'Make the entire post private'}
                 </span>
@@ -180,35 +177,27 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
             />
             <Radio
               label={
-                <span
-                  className={cn(
-                    'flex items-center',
-                    privacy !== 'private_files' && 'text-grey-400',
-                  )}
-                >
+                <span className={cn('flex items-center')}>
                   <DocumentIconRaw className="mr-15" />
                   {'Make the files private'}
                 </span>
               }
-              value={'private-files'}
+              value={'private_files'}
               selectedValue={privacy}
+              disabled={noFiles}
               sx={{ mb: 2.5 }}
               {...form.register('privacyType')}
             />
             <Radio
               label={
-                <span
-                  className={cn(
-                    'flex items-center',
-                    privacy !== 'private_locations' && 'text-grey-400',
-                  )}
-                >
+                <span className={cn('flex items-center')}>
                   <LocationIcon className="mr-15" />
                   {'Make the location data private'}
                 </span>
               }
-              value={'private-location'}
+              value={'private_locations'}
               selectedValue={privacy}
+              disabled={noFiles}
               {...form.register('privacyType')}
             />
           </>

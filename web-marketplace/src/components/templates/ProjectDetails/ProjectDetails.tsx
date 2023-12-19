@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
-import { Box, Skeleton, useTheme } from '@mui/material';
+import { Box, Skeleton, useMediaQuery, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import cx from 'classnames';
 import { useSetAtom } from 'jotai';
@@ -71,9 +71,15 @@ import {
   parseOffChainProject,
 } from './ProjectDetails.utils';
 import { ProjectDetailsTableTabs } from './tables/ProjectDetails.TableTabs';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';
+import { SHARAMENTSA_PILOT_HANDLE } from './ProjectDetails.config';
+import { Link } from 'components/atoms';
+import { JAGUAR_STRIPE_LINK } from 'lib/env';
 
 function ProjectDetails(): JSX.Element {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { projectId } = useParams();
   const { ecocreditClient, dataClient } = useLedger();
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
@@ -305,6 +311,8 @@ function ProjectDetails(): JSX.Element {
     }));
   }, [credits, projectsWithOrderData]);
 
+  const isSharamentsaPilot = offChainProject?.slug === SHARAMENTSA_PILOT_HANDLE;
+
   if (
     !loadingDb &&
     !loadingAnchoredMetadata &&
@@ -373,7 +381,18 @@ function ProjectDetails(): JSX.Element {
           projectsWithOrderData[0]?.purchaseInfo?.sellInfo?.avgPricePerTonLabel
         }
         avgPricePerTonTooltip={AVG_PRICE_TOOLTIP_PROJECT}
-      />
+      >
+        {isSharamentsaPilot && JAGUAR_STRIPE_LINK && (
+          <Link href={JAGUAR_STRIPE_LINK}>
+            <ContainedButton
+              startIcon={<CurrentCreditsIcon height="18px" width="18px" />}
+              sx={{ height: '100%' }}
+            >
+              {isMobile ? 'BUY' : 'BUY CREDITS'}
+            </ContainedButton>
+          </Link>
+        )}
+      </SellOrdersActionsBar>
 
       <ProjectTopSection
         offChainProject={offChainProject}

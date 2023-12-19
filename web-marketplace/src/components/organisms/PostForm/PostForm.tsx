@@ -105,6 +105,7 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
           <TextAreaFieldChartCounter
             value={title}
             charLimit={POST_MAX_TITLE_LENGTH}
+            sx={{ mb: { xs: 0, sm: 0 } }}
           />
         }
         {...form.register('title')}
@@ -116,7 +117,7 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
         rows={4}
         minRows={4}
         multiline
-        className="mb-50"
+        className="mb-50 mt-0"
         {...form.register('comment')}
       />
       {fields.map((field, index) => {
@@ -136,7 +137,7 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
             onDelete={() => getHandleDeleteWithIndex(index)}
             value={url === DEFAULT_URL ? '' : url}
             setValue={setFiles}
-            className={cn('mb-50', classes.galleryItem)}
+            className={cn('mb-50 mt-0', classes.galleryItem)}
             key={field.id}
             fieldIndex={index}
             error={!!errors['files']}
@@ -182,7 +183,7 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
                 <span
                   className={cn(
                     'flex items-center',
-                    privacy !== 'private-files' && 'text-grey-400',
+                    privacy !== 'private_files' && 'text-grey-400',
                   )}
                 >
                   <DocumentIconRaw className="mr-15" />
@@ -199,7 +200,7 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
                 <span
                   className={cn(
                     'flex items-center',
-                    privacy !== 'private-location' && 'text-grey-400',
+                    privacy !== 'private_locations' && 'text-grey-400',
                   )}
                 >
                   <LocationIcon className="mr-15" />

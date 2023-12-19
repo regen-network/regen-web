@@ -1,4 +1,5 @@
 export type PostFormPrivacyType =
   | 'private'
-  | 'private-files'
-  | 'private-location';
+  | 'private_files'
+  | 'private_locations'
+  | 'public';

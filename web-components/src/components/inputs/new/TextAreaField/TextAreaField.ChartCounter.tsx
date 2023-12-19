@@ -1,8 +1,11 @@
+import { SxProps } from '@mui/system';
 import { Body } from '../../../typography';
+import { Theme } from '../../../../theme/muiTheme';
 
 type Props = {
   value?: string;
   charLimit?: number;
+  sx?: SxProps<Theme>;
 };
 
 const DEFAULT_CHAR_LIMIT = 160;
@@ -10,6 +13,7 @@ const DEFAULT_CHAR_LIMIT = 160;
 export const TextAreaFieldChartCounter = ({
   value,
   charLimit = DEFAULT_CHAR_LIMIT,
+  sx = {},
 }: Props) => {
   const charsLeft = (charLimit || Infinity) - ((value && value.length) || 0);
 
@@ -20,6 +24,7 @@ export const TextAreaFieldChartCounter = ({
         color: charsLeft < 0 ? 'error.main' : 'info.main',
         mt: 1,
         mb: { xs: 3, sm: 4 },
+        ...sx,
       }}
     >
       {`${charsLeft} character${charsLeft === 1 ? '' : 's'} remaining`}

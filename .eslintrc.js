@@ -1,6 +1,6 @@
 module.exports = {
   extends: ['react-app', 'plugin:prettier/recommended'],
-  plugins: ['simple-import-sort'],
+  plugins: ['simple-import-sort', 'flowtype'],
   rules: {
     'no-empty': 'off',
     'no-console': 'warn',

@@ -15,7 +15,6 @@ import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccess
 
 import { UseStateSetter } from 'types/react/use-state';
 import { switchWalletModalAtom } from 'lib/atoms/modals.atoms';
-import { useAuth } from 'lib/auth/auth';
 import { getHashUrl } from 'lib/block-explorer';
 import { client } from 'lib/clients/sanity';
 import { getBuyModalOptionsQuery } from 'lib/queries/react-query/sanity/getBuyModalOptionsQuery/getBuyModalOptionsQuery';
@@ -70,7 +69,6 @@ export const BuySellOrderFlow = ({
   const [txButtonTitle, setTxButtonTitle] = useState<string>('');
   const [txModalHeader, setTxModalHeader] = useState<string>('');
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
-  const { activeAccount } = useAuth();
   const { sellOrders, refetchSellOrders } = useFetchSellOrders();
   const { isConnected, wallet, activeWalletAddr } = useWallet();
   const { data: buyModalOptionsContent } = useQuery(

@@ -8,7 +8,6 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 
-import { useCreateProjectContext } from 'pages/ProjectCreate';
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
 import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import WithLoader from 'components/atoms/WithLoader';

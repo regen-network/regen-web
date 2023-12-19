@@ -7,6 +7,7 @@ import { apiUri } from 'lib/apiUri';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { useAuth } from 'lib/auth/auth';
+import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 
@@ -23,7 +24,6 @@ import {
   RESEND_SUCCES,
   RESEND_TIMER,
 } from '../../LoginButton/LoginButton.constants';
-import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 
 type EmailConfirmationDataParams = {
   emailConfirmationText?: string;

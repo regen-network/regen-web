@@ -11,11 +11,11 @@ import { apiUri } from 'lib/apiUri';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { addWalletModalSwitchWarningAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
+import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { useWallet } from 'lib/wallet/wallet';
 import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
-import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 
 export const useOnProfileClick = () => {
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ export const useOnProfileClick = () => {
         });
       }
     },
-    [reactQueryClient, token],
+    [reactQueryClient, retryCsrfRequest, token],
   );
 
   const checkWallet = useCallback(

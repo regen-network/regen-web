@@ -4,12 +4,12 @@ import { postData } from 'utils/fetch/postData';
 
 import { apiUri } from 'lib/apiUri';
 import { useAuth } from 'lib/auth/auth';
+import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getAccountByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery.utils';
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 import { useSignArbitrary } from 'lib/wallet/hooks/useSignArbitrary';
 import { useWallet } from 'lib/wallet/wallet';
-import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 
 type Params = {
   isConnectModalOpened?: boolean;
@@ -83,6 +83,7 @@ export const useConnectWalletToAccount = ({
     walletConfig,
     activeAccount?.nonce,
     activeAccountId,
+    retryCsrfRequest,
     reactQueryClient,
     setError,
   ]);

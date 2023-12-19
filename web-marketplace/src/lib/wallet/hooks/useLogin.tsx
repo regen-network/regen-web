@@ -4,10 +4,10 @@ import { postData } from 'utils/fetch/postData';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { apiUri } from 'lib/apiUri';
+import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { LoginParams, SignArbitraryType } from 'lib/wallet/wallet';
-import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 
 type Params = {
   signArbitrary?: SignArbitraryType;
@@ -49,7 +49,7 @@ export const useLogin = ({ signArbitrary, setError }: Params) => {
           });
 
           // Step 4: Submit the signature to the login endpoint
-          const { user } = await postData({
+          await postData({
             url: `${apiUri}/marketplace/v1/wallet-auth/login`,
             data: { signature },
             token,
@@ -64,7 +64,7 @@ export const useLogin = ({ signArbitrary, setError }: Params) => {
         setError(e);
       }
     },
-    [signArbitrary, token, reactQueryClient, setError],
+    [signArbitrary, token, retryCsrfRequest, reactQueryClient, setError],
   );
 
   return login;

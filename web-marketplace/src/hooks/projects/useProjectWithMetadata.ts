@@ -159,6 +159,7 @@ export const useProjectWithMetadata = ({
     }
   }, [
     reactQueryClient,
+    activeAccount?.id,
     createOrEditOffChain,
     editOnChain,
     projectId,

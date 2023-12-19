@@ -1,6 +1,6 @@
+import React from 'react';
 import { Grid } from '@mui/material';
 import { useAtom, useSetAtom } from 'jotai';
-import React from 'react';
 
 import { Flex } from 'web-components/lib/components/box';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';

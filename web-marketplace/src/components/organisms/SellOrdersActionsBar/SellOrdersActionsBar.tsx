@@ -16,6 +16,7 @@ import {
   BOOK_CALL,
   BUY_DISABLED_TOOLTIP,
 } from './SellOrdersActionsBar.constants';
+import { ReactNode } from 'react';
 
 type Params = {
   isBuyButtonDisabled: boolean;
@@ -28,6 +29,7 @@ type Params = {
   creditClassName?: string;
   avgPricePerTonLabel?: string;
   avgPricePerTonTooltip?: string;
+  children?: ReactNode;
 };
 
 export const SellOrdersActionsBar = ({
@@ -41,6 +43,7 @@ export const SellOrdersActionsBar = ({
   creditClassName,
   avgPricePerTonLabel,
   avgPricePerTonTooltip,
+  children,
 }: Params): JSX.Element => {
   const location = useLocation();
   const { track } = useTracker();
@@ -114,6 +117,7 @@ export const SellOrdersActionsBar = ({
             </span>
           </InfoTooltip>
         )}
+        {children}
       </Box>
     </StickyBar>
   );

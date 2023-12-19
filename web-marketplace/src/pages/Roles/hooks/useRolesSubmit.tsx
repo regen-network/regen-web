@@ -131,6 +131,7 @@ const useRolesSubmit = ({
       admin,
       metadata,
       isEdit,
+      onChainProject,
       createOrUpdateProject,
       metadataReload,
       projectEditSubmit,

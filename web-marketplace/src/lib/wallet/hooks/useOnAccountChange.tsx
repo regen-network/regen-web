@@ -9,6 +9,7 @@ import { postData } from 'utils/fetch/postData';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { apiUri } from 'lib/apiUri';
+import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
@@ -18,7 +19,6 @@ import { Wallet } from '../wallet';
 import { getWallet } from '../wallet.utils';
 import { WalletConfig, WalletType } from '../walletsConfig/walletsConfig.types';
 import { ConnectWalletType } from './useConnectWallet';
-import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 
 type Props = {
   wallet: Wallet;
@@ -156,5 +156,6 @@ export const useOnAccountChange = ({
     token,
     authenticatedAccountIds,
     reactQueryClient,
+    retryCsrfRequest,
   ]);
 };

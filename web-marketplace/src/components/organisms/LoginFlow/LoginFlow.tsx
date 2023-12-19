@@ -1,13 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
-import { useAtom, useSetAtom } from 'jotai';
-import { postData } from 'utils/fetch/postData';
+import { useAtom } from 'jotai';
 
 import { EmailConfirmationModal } from 'web-components/lib/components/modal/EmailConfirmationModal/EmailConfirmationModal';
 
-import { apiUri } from 'lib/apiUri';
-import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { isWaitingForSigningAtom } from 'lib/atoms/tx.atoms';
-import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import {

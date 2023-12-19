@@ -16,7 +16,6 @@ import {
   connectWalletModalAtom,
   switchWalletModalAtom,
 } from 'lib/atoms/modals.atoms';
-import { useAuth } from 'lib/auth/auth';
 import { openLink } from 'lib/button';
 import { client } from 'lib/clients/sanity';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
@@ -59,7 +58,6 @@ function CreditClassDetails({
 }: CreditDetailsProps): JSX.Element {
   const { activeWalletAddr, isConnected } = useWallet();
   const { dataClient, ecocreditClient } = useLedger();
-  const { activeAccount } = useAuth();
   const { creditClassId } = useParams();
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;

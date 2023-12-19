@@ -54,7 +54,6 @@ import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { getMetadata } from 'lib/db/api/metadata-graph';
 import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
-import { getSupplyQuery } from 'lib/queries/react-query/ecocredit/getSupplyQuery/getSupplyQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 
@@ -67,8 +66,7 @@ import type {
   BatchTotalsForProject,
   ClassProjectInfo,
 } from '../../types/ledger/ecocredit';
-import { ECOCREDIT_MESSAGE_TYPES, messageActionEquals } from './constants';
-import { v1Alpha1BatchDenomMapping } from './ecocredit.config';
+import { ECOCREDIT_MESSAGE_TYPES } from './constants';
 
 const getCosmosServiceClient = async (): Promise<ServiceClientImpl> => {
   const api = await connectToApi();

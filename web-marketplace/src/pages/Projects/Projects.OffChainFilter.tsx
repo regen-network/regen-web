@@ -1,5 +1,5 @@
 import { Box, FormControlLabel, SxProps, Theme } from '@mui/material';
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 
 import { Flex } from 'web-components/lib/components/box';
 import Checkbox from 'web-components/lib/components/inputs/new/CheckBox/Checkbox';

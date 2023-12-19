@@ -15,6 +15,7 @@ import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { useWallet } from 'lib/wallet/wallet';
 import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
+import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 
 export const useOnProfileClick = () => {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ export const useOnProfileClick = () => {
   const reactQueryClient = useQueryClient();
   const { data: token } = useQuery(getCsrfTokenQuery({}));
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+  const retryCsrfRequest = useRetryCsrfRequest();
 
   const updateActiveAccount = useCallback(
     async (accountId: string) => {
@@ -36,9 +38,11 @@ export const useOnProfileClick = () => {
             accountId,
           },
           token,
-        });
-        await reactQueryClient.invalidateQueries({
-          queryKey: [GET_ACCOUNTS_QUERY_KEY],
+          retryCsrfRequest,
+          onSuccess: async () =>
+            await reactQueryClient.invalidateQueries({
+              queryKey: [GET_ACCOUNTS_QUERY_KEY],
+            }),
         });
       }
     },

@@ -23,6 +23,7 @@ import {
   RESEND_SUCCES,
   RESEND_TIMER,
 } from '../../LoginButton/LoginButton.constants';
+import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 
 type EmailConfirmationDataParams = {
   emailConfirmationText?: string;
@@ -40,6 +41,7 @@ export const useEmailConfirmationData = ({
   const { privActiveAccount } = useAuth();
   const setBannerText = useSetAtom(bannerTextAtom);
   const { data: token } = useQuery(getCsrfTokenQuery({}));
+  const retryCsrfRequest = useRetryCsrfRequest();
   const {
     timeLeft: resendTimeLeft,
     startTimer,
@@ -62,6 +64,7 @@ export const useEmailConfirmationData = ({
         token,
         defaultError: DEFAULT_RESEND_ERROR,
         setEmailModalErrorCode,
+        retryCsrfRequest,
       });
       setBannerText(RESEND_SUCCES);
     }
@@ -76,6 +79,7 @@ export const useEmailConfirmationData = ({
         },
         token,
         defaultError: DEFAULT_VALIDATE_ERROR,
+        retryCsrfRequest,
         onSuccess: async () => {
           await reactQueryClient.invalidateQueries([GET_ACCOUNTS_QUERY_KEY]);
           setBannerText(emailConfirmationText ?? EMAIL_CONFIRMATION_SUCCES);
@@ -112,17 +116,17 @@ export const useEmailConfirmationData = ({
             email,
           },
           token,
+          retryCsrfRequest,
+          onSuccess: async () => {
+            callback && callback();
+            startTimer();
+            setIsConfirmationModalOpen(true);
+          },
         });
         if (response.error) {
           if (response.error === CONNECTED_EMAIL_ERROR_TITLE) {
             setIsConnectedEmailErrorModalOpen(true);
-          } else {
-            setErrorBannerTextAtom(response.error);
           }
-        } else {
-          callback && callback();
-          startTimer();
-          setIsConfirmationModalOpen(true);
         }
       } catch (e) {
         setErrorBannerTextAtom(String(e));
@@ -143,5 +147,6 @@ export const useEmailConfirmationData = ({
     onEmailSubmit,
     isConnectedEmailErrorModalOpen,
     onConnectedEmailErrorModalClose,
+    retryCsrfRequest,
   };
 };

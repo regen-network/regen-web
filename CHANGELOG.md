@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/regen-network/regen-web/compare/v1.14.1...v1.15.0) (2023-12-20)
+
+### Features
+
+- add buy button for Sharamentsa pilot ([a6953ff](https://github.com/regen-network/regen-web/commit/a6953ffad28e6336349471493e482f0e0bb0b8fd))
+
 ## [1.14.1](https://github.com/regen-network/regen-web/compare/v1.14.0...v1.14.1) (2023-11-13)
 
 ### Bug Fixes

@@ -1,17 +1,17 @@
-import Map from '.';
-// import Geocoder from 'web-components/lib/components/map/Geocoder';
-// import * as togeojson from '@mapbox/togeojson';
+import { Box } from '@mui/material';
+import { Meta, StoryObj } from '@storybook/react';
+import { FeatureCollection } from 'geojson';
+
+import StaticMap from './StaticMap';
 
 export default {
   title: 'Map',
-  component: Map,
-};
+  component: StaticMap,
+} as Meta<typeof StaticMap>;
 
-// const kml: string = `<?xml version="1.0" encoding="utf-8" ?><kml xmlns="http://www.opengis.net/kml/2.2"><Document id="root_doc"><Schema name="Reveg_upper" id="Reveg_upper"><SimpleField name="tessellate" type="int"></SimpleField></Schema><Folder><name>Reveg_upper</name><Placemark><name>Reveg upper</name><Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style><ExtendedData><SchemaData schemaUrl="#Reveg_upper"><SimpleData name="tessellate">1</SimpleData></SchemaData></ExtendedData><Polygon><outerBoundaryIs><LinearRing><coordinates>139.301964544446,-35.7334349941573 139.302618507057,-35.734016351157 139.30292109905,-35.7311592633386 139.302927249187,-35.7307320552533 139.301964544446,-35.7334349941573</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark></Folder></Document></kml>`;
-// const dom = new DOMParser().parseFromString(kml, 'text/xml');
-// const geojsonFromKml: any = togeojson.kml(dom);
+type Story = StoryObj<typeof StaticMap>;
 
-const geojson = {
+const geojson: FeatureCollection = {
   type: 'FeatureCollection',
   features: [
     {
@@ -107,17 +107,15 @@ const geojson = {
 
 const MAPBOX_TOKEN = import.meta.env.STORYBOOK_MAPBOX_TOKEN || '';
 
-export const map = (): JSX.Element => (
-  <Map geojson={geojson} mapboxToken={MAPBOX_TOKEN} />
-);
+export const Static: Story = {
+  render: args => (
+    <Box sx={{ width: 600, height: 400 }}>
+      <StaticMap {...args} />
+    </Box>
+  ),
+};
 
-// export const geocoder = (): JSX.Element => {
-//   return (
-//     <Geocoder
-//       mapboxToken={import.meta.env.STORYBOOK_MAPBOX_TOKEN || ''}
-//       fullWidth
-//       setFeature={() => {}}
-//       label="Address"
-//     />
-//   );
-// };
+Static.args = {
+  geojson,
+  mapboxToken: MAPBOX_TOKEN,
+};

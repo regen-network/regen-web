@@ -1,7 +1,8 @@
 import { useWatch } from 'react-hook-form';
-import { Feature } from 'geojson';
+import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import { Feature, Point } from 'geojson';
 
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import { LocationPicker } from 'web-components/lib/components/inputs/new/LocationPicker/LocationPicker';
 import { Radio } from 'web-components/lib/components/inputs/new/Radio/Radio';
 import { RadioGroup } from 'web-components/lib/components/inputs/new/RadioGroup/RadioGroup';
 import { TextAreaField } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField';
@@ -10,7 +11,6 @@ import TextField from 'web-components/lib/components/inputs/new/TextField/TextFi
 import { CancelButtonFooter } from 'web-components/lib/components/organisms/CancelButtonFooter/CancelButtonFooter';
 import { Title } from 'web-components/lib/components/typography';
 import { cn } from 'web-components/lib/utils/styles/cn';
-import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
@@ -23,13 +23,15 @@ import {
   editFileFormSchema,
   EditFileFormSchemaType,
 } from './EditFileForm.schema';
+import { EditFileFormLocationType } from './EditFileForm.types';
 
 export interface Props {
   initialValues: EditFileFormSchemaType;
-  projectLocation?: Feature;
+  projectLocation: GeocodeFeature;
   fileLocation?: Feature;
   className?: string;
   onClose: () => void;
+  mapboxToken?: string;
 }
 
 export const EditFileForm = ({
@@ -38,19 +40,21 @@ export const EditFileForm = ({
   projectLocation,
   fileLocation,
   onClose,
+  mapboxToken,
 }: Props): JSX.Element => {
   const form = useZodForm({
     schema: editFileFormSchema,
     defaultValues: {
       ...initialValues,
+      location: initialValues.location || fileLocation || projectLocation,
     },
     mode: 'onBlur',
   });
   const { errors } = form.formState;
   const { setValue } = form;
 
-  const name = useWatch({ control: form.control, name: 'name' });
   const description = useWatch({ control: form.control, name: 'description' });
+  const location = useWatch({ control: form.control, name: 'location' });
   const locationType = useWatch({
     control: form.control,
     name: 'locationType',
@@ -93,6 +97,20 @@ export const EditFileForm = ({
       />
       <div className="flex flex-col mb-40 mt-40 sm:mb-50 sm:mt-50">
         <RadioGroup label="Location" description={FILE_LOCATION_DESCRIPTION}>
+          <div className="h-[309px] sm:h-[409px] pb-10">
+            <LocationPicker
+              value={location}
+              handleChange={value =>
+                setValue('location', value, {
+                  shouldDirty: true,
+                  shouldTouch: true,
+                })
+              }
+              disabled={locationType === 'file' || locationType === 'none'}
+              mapboxToken={mapboxToken}
+              {...form.register('location')}
+            />
+          </div>
           <>
             {fileLocation && (
               <Radio
@@ -101,6 +119,10 @@ export const EditFileForm = ({
                 selectedValue={locationType}
                 sx={{ mb: 2.5 }}
                 {...form.register('locationType')}
+                onChange={e => {
+                  form.setValue('locationType', 'file');
+                  form.setValue('location', fileLocation as Feature);
+                }}
               />
             )}
             <Radio
@@ -110,6 +132,10 @@ export const EditFileForm = ({
               selectedValue={locationType}
               sx={{ mb: 2.5 }}
               {...form.register('locationType')}
+              onChange={e => {
+                form.setValue('locationType', 'none');
+                form.setValue('location', projectLocation as Feature);
+              }}
             />
             <Radio
               label="Choose a specific location on the map"

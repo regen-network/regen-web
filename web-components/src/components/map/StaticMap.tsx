@@ -68,6 +68,7 @@ export default function StaticMap({
         dragRotate={false}
         dragPan={false}
         keyboard={false}
+        scrollZoom={false}
         touchPitch={false}
         touchZoomRotate={false}
         cursor="default"

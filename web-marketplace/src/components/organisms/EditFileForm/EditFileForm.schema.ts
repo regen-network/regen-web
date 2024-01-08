@@ -1,4 +1,5 @@
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import { Feature, Point } from 'geojson';
 import { z } from 'zod';
 
 import { FILE_MAX_DESCRIPTION_LENGTH } from './EditFileForm.constants';
@@ -9,7 +10,7 @@ export const editFileFormSchema = z.object({
   description: z.string().max(FILE_MAX_DESCRIPTION_LENGTH).optional(),
   credit: z.string().optional(),
   locationType: z.custom<EditFileFormLocationType>(),
-  location: z.custom<GeocodeFeature>().nullish(),
+  location: z.custom<Feature>(),
 });
 
 export type EditFileFormSchemaType = z.infer<typeof editFileFormSchema>;

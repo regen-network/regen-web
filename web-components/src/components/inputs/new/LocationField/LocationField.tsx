@@ -21,12 +21,14 @@ interface LocationFieldProps {
   disabled?: boolean;
   placeholder?: string;
   types?: GeocodeQueryType[];
-  token: string;
+  token?: string;
   value: string | GeocodeFeature;
   handleChange: (value: string | GeocodeFeature) => void;
   onBlur: (
     value: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>,
   ) => void;
+  searchIcon?: boolean;
+  showCoordinates?: boolean;
 }
 
 type Props = React.PropsWithChildren<LocationFieldProps>;
@@ -56,6 +58,8 @@ const LocationField = forwardRef<HTMLInputElement, Props>(
       value,
       handleChange,
       onBlur,
+      searchIcon = true,
+      showCoordinates = false,
       ...props
     },
     ref,
@@ -80,11 +84,19 @@ const LocationField = forwardRef<HTMLInputElement, Props>(
             {...props}
             placeholder={placeholder}
             endAdornment={
-              <LocationSearchIcon
-                sx={{ color: 'grey.100', width: 20, height: 22 }}
-              />
+              searchIcon && (
+                <LocationSearchIcon
+                  sx={{ color: 'grey.100', width: 20, height: 22 }}
+                />
+              )
             }
-            value={isGeocodingFeature(value) ? value.place_name : value}
+            value={
+              isGeocodingFeature(value)
+                ? showCoordinates
+                  ? `${value.geometry.coordinates[0]}, ${value.geometry.coordinates[1]} (${value.place_name})`
+                  : value.place_name
+                : value
+            }
             onBlur={e => {
               onBlur(e);
               setTimeout(() => {

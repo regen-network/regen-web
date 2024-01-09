@@ -4,12 +4,13 @@ import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { CircularProgress } from '@mui/material';
 import { Feature, Point } from 'geojson';
 
-import { UseStateSetter } from '../../../../types/react/useState';
 import PinIcon from '../../../icons/PinIcon';
 import { Body } from '../../../typography';
 import LocationField from '../LocationField/LocationField';
 import { isGeocodingFeature } from '../LocationField/LocationField.types';
 import { RestrictedViewState } from './LocationPicker.types';
+
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 const Map = lazy(() => import('react-map-gl'));
 

@@ -145,7 +145,7 @@ export const EditFileForm = ({
             )}
             <Radio
               label="No specific location"
-              // description="file will be associated with the project location by default"
+              description=" (file will be associated with the project location by default)"
               value={'none'}
               selectedValue={locationType}
               sx={{ mb: 2.5 }}

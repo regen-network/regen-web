@@ -92,7 +92,7 @@ export const LocationPicker = ({
         scrollZoom={disabled ? false : { around: 'center' }}
         touchPitch={!disabled}
         touchZoomRotate={disabled ? false : { around: 'center' }}
-        cursor={disabled ? 'default' : 'auto'}
+        cursor={disabled ? 'default' : undefined}
       >
         <div className="absolute top-0 w-[100%]">
           {disabled ? (

@@ -70,10 +70,11 @@ export const EditFileForm = ({
     name: 'locationType',
   });
 
-  const debouncedValue = useDebounce(location, 1000);
+  const debouncedValue = useDebounce(location);
   useEffect(() => {
-    if (!isGeocodingFeature(location)) setDebouncedViewState(debouncedValue);
-  }, [debouncedValue, setDebouncedViewState, location]);
+    if (!isGeocodingFeature(debouncedValue))
+      setDebouncedViewState(debouncedValue);
+  }, [debouncedValue, setDebouncedViewState]);
   // TODO This will need to be used at the upper level component of EditFileForm (EditFileModal)
   // in order to get the place name associated to the center of the current view state (geocodingPlaceName)
   // We use a debounced value so we don't make reverse geocoding queries for every move on the map.

@@ -147,7 +147,6 @@ export const EditFileForm = ({
               disabled={locationType === 'file' || locationType === 'none'}
               mapboxToken={mapboxToken}
               geocodingPlaceName={geocodingPlaceName}
-              setDebouncedViewState={setDebouncedViewState}
               {...form.register('location')}
             />
           </div>

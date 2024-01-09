@@ -6,7 +6,7 @@ import { RegenTextFieldProps } from 'web-components/lib/components/inputs/new/Te
 
 import { UseStateSetter } from 'types/react/use-state';
 
-import { useDebounce } from 'components/organisms/RolesForm/hooks/useDebounce';
+import { useDebounce } from 'hooks/useDebounce';
 
 interface Props extends RegenTextFieldProps {
   value: string;

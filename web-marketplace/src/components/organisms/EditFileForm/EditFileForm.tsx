@@ -2,7 +2,6 @@ import { useWatch } from 'react-hook-form';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Feature, Point } from 'geojson';
 
-import { LocationPicker } from 'web-components/lib/components/inputs/new/LocationPicker/LocationPicker';
 import { Radio } from 'web-components/lib/components/inputs/new/Radio/Radio';
 import { RadioGroup } from 'web-components/lib/components/inputs/new/RadioGroup/RadioGroup';
 import { TextAreaField } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField';
@@ -10,6 +9,7 @@ import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
 import { CancelButtonFooter } from 'web-components/lib/components/organisms/CancelButtonFooter/CancelButtonFooter';
 import { Title } from 'web-components/lib/components/typography';
+import { UseStateSetter } from 'web-components/lib/types/react/useState';
 import { cn } from 'web-components/lib/utils/styles/cn';
 
 import Form from 'components/molecules/Form/Form';
@@ -19,11 +19,15 @@ import {
   FILE_LOCATION_DESCRIPTION,
   FILE_MAX_DESCRIPTION_LENGTH,
 } from './EditFileForm.constants';
+import { LocationPicker } from './EditFileForm.LocationPicker';
 import {
   editFileFormSchema,
   EditFileFormSchemaType,
 } from './EditFileForm.schema';
-import { EditFileFormLocationType } from './EditFileForm.types';
+import {
+  EditFileFormLocationType,
+  RestrictedViewState,
+} from './EditFileForm.types';
 
 export interface Props {
   initialValues: EditFileFormSchemaType;
@@ -32,6 +36,7 @@ export interface Props {
   className?: string;
   onClose: () => void;
   mapboxToken?: string;
+  setDebouncedViewState: UseStateSetter<RestrictedViewState>;
 }
 
 export const EditFileForm = ({
@@ -41,6 +46,7 @@ export const EditFileForm = ({
   fileLocation,
   onClose,
   mapboxToken,
+  setDebouncedViewState,
 }: Props): JSX.Element => {
   const form = useZodForm({
     schema: editFileFormSchema,
@@ -108,6 +114,7 @@ export const EditFileForm = ({
               }
               disabled={locationType === 'file' || locationType === 'none'}
               mapboxToken={mapboxToken}
+              setDebouncedViewState={setDebouncedViewState}
               {...form.register('location')}
             />
           </div>

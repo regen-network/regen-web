@@ -42,4 +42,5 @@ Basic.args = {
   fileLocation,
   projectLocation,
   mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
+  setDebouncedViewState: () => {},
 };

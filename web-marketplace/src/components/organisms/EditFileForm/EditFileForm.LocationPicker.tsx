@@ -1,18 +1,18 @@
 import { forwardRef, lazy, Suspense, useEffect, useRef, useState } from 'react';
 import type { MapRef } from 'react-map-gl';
-import MapboxClient from '@mapbox/mapbox-sdk';
-import mbxGeocoder, {
-  GeocodeFeature,
-  GeocodeQueryType,
-} from '@mapbox/mapbox-sdk/services/geocoding';
-// import Map, { Marker } from 'react-map-gl';
+import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { CircularProgress } from '@mui/material';
 import { Feature, Point } from 'geojson';
 
-import PinIcon from '../../../icons/PinIcon';
-import { Body } from '../../../typography';
-import LocationField from '../LocationField/LocationField';
-import { isGeocodingFeature } from '../LocationField/LocationField.types';
+import PinIcon from 'web-components/lib/components/icons/PinIcon';
+import LocationField from 'web-components/lib/components/inputs/new/LocationField/LocationField';
+import { isGeocodingFeature } from 'web-components/lib/components/inputs/new/LocationField/LocationField.types';
+import { Body } from 'web-components/lib/components/typography';
+import { UseStateSetter } from 'web-components/lib/types/react/useState';
+
+import { useDebounce } from 'hooks/useDebounce';
+
+import { RestrictedViewState } from './EditFileForm.types';
 
 const Map = lazy(() => import('react-map-gl'));
 
@@ -21,21 +21,55 @@ type LocationPickerProps = {
   value: Feature | GeocodeFeature;
   mapboxToken?: string;
   handleChange: (value: Feature | GeocodeFeature) => void;
+  onBlur: (
+    value: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>,
+  ) => void;
+  geocodingPlaceName?: string;
+  setDebouncedViewState: UseStateSetter<RestrictedViewState>;
 };
 
 export const LocationPicker = forwardRef<HTMLDivElement, LocationPickerProps>(
-  ({ value, disabled, mapboxToken, handleChange }, ref) => {
+  (
+    {
+      value,
+      disabled,
+      mapboxToken,
+      handleChange,
+      onBlur,
+      setDebouncedViewState,
+      geocodingPlaceName,
+    },
+    ref,
+  ) => {
     const mapRef = useRef<MapRef | null>(null);
     const point = value.geometry as Point;
-    const baseClient = MapboxClient({ accessToken: mapboxToken });
-    const geocoderService = mbxGeocoder(baseClient);
-    const coordinates = `${point.coordinates[0]}, ${point.coordinates[1]}`;
-    const [viewState, setViewState] = useState({
+    const displayedLocation = `${point.coordinates[0]}, ${
+      point.coordinates[1]
+    } ${geocodingPlaceName ? `(${geocodingPlaceName})` : ''}`;
+    const [viewState, setViewState] = useState<RestrictedViewState>({
       longitude: point.coordinates[0],
       latitude: point.coordinates[1],
       zoom: 5,
     });
     const [locationSearch, setLocationSearch] = useState<string | undefined>();
+
+    const debouncedValue = useDebounce(viewState, 1000);
+    useEffect(() => {
+      if (!isGeocodingFeature(value)) setDebouncedViewState(debouncedValue);
+    }, [debouncedValue, setDebouncedViewState, value]);
+    // TODO This will need to be used at the upper level component of EditFileForm (EditFileModal)
+    // in order to get the place name associated to the center of the current view state (geocodingPlaceName)
+    // We use a debounced value so we don't make reverse geocoding queries for every move on the map.
+    // const { data } = useQuery(
+    //   getGeocodingQuery({
+    //     request: {
+    //       types: ['place'],
+    //       query: [debouncedValue.longitude, debouncedValue.latitude],
+    //     },
+    //     mapboxToken,
+    //     enabled: !!debouncedValue,
+    //   }),
+    // );
 
     useEffect(() => {
       if (
@@ -74,16 +108,6 @@ export const LocationPicker = forwardRef<HTMLDivElement, LocationPickerProps>(
                 coordinates: [evt.viewState.longitude, evt.viewState.latitude],
               },
             });
-            // geocoderService
-            //   .reverseGeocode({
-            //     types: ['place'],
-            //     mode: 'mapbox.places',
-            //     query: [evt.viewState.longitude, evt.viewState.latitude],
-            //   })
-            //   .send()
-            //   .then(({ body }) => {
-            //     console.log(body.features[0]?.place_name);
-            //   });
           }}
           attributionControl={false}
           boxZoom={!disabled}
@@ -102,15 +126,18 @@ export const LocationPicker = forwardRef<HTMLDivElement, LocationPickerProps>(
                 size="md"
                 className="p-20 pb-15 bg-grey-700/[.6] text-grey-0"
               >
-                {isGeocodingFeature(value) ? value.place_name : coordinates}
+                {isGeocodingFeature(value)
+                  ? value.place_name
+                  : displayedLocation}
               </Body>
             ) : (
               <>
                 <LocationField
                   token={mapboxToken}
+                  className="text-grey-500"
                   value={
                     locationSearch ??
-                    (isGeocodingFeature(value) ? value : coordinates)
+                    (isGeocodingFeature(value) ? value : displayedLocation)
                   }
                   handleChange={value => {
                     if (isGeocodingFeature(value)) {
@@ -120,14 +147,15 @@ export const LocationPicker = forwardRef<HTMLDivElement, LocationPickerProps>(
                       setLocationSearch(value);
                     }
                   }}
-                  onBlur={() => {}} // TODO
+                  onBlur={onBlur}
                   searchIcon={false}
                   showCoordinates
                 />
               </>
             )}
           </div>
-
+          {/* We simply absolutely position the location pin at the center,
+          without using a react-map-gl Marker, so the map moves around the pin */}
           <div className="absolute top-[50%] left-[50%]">
             <PinIcon fontSize="large" size={35} />
           </div>

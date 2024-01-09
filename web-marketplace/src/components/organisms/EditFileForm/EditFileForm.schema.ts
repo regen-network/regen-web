@@ -10,7 +10,7 @@ export const editFileFormSchema = z.object({
   description: z.string().max(FILE_MAX_DESCRIPTION_LENGTH).optional(),
   credit: z.string().optional(),
   locationType: z.custom<EditFileFormLocationType>(),
-  location: z.custom<Feature>(),
+  location: z.custom<Feature | GeocodeFeature>(),
 });
 
 export type EditFileFormSchemaType = z.infer<typeof editFileFormSchema>;

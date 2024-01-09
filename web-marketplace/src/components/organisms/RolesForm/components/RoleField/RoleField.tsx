@@ -6,12 +6,13 @@ import EditIcon from 'web-components/lib/components/icons/EditIcon';
 import FieldFormControl from 'web-components/lib/components/inputs/new/FieldFormControl/FieldFormControl';
 import { UseStateSetter } from 'web-components/lib/types/react/useState';
 
+import { useDebounce } from 'hooks/useDebounce';
+
 import {
   AccountByIdQuery,
   GetAccountsByNameOrAddrQuery,
 } from '../../../../../generated/graphql';
 import { DEFAULT_PROFILE_TYPE } from '../../../../../pages/ProfileEdit/ProfileEdit.constants';
-import { useDebounce } from '../../hooks/useDebounce';
 import { ProfileModal } from '../ProfileModal/ProfileModal';
 import { ProfileModalSchemaType } from '../ProfileModal/ProfileModal.schema';
 import { ALL_PROFILES, PLACEHOLDER } from './RoleField.constants';

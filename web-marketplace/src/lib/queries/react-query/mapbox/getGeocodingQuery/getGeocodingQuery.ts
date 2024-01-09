@@ -1,4 +1,4 @@
-import { geocodingClient } from 'lib/clients/mapbox/geocoding';
+import { getGeocodingClient } from 'lib/clients/mapbox/geocoding';
 
 import { getGeocodingKey } from './getGeocodingQuery.constants';
 import {
@@ -7,18 +7,22 @@ import {
 } from './getGeocodingQuery.types';
 
 export const getGeocodingQuery = ({
-  request: { search },
+  request: { reverse = false, query, types },
+  mapboxToken,
   ...params
 }: ReactQueryGeocodingProps): ReactQueryGeocodingResponse => ({
-  queryKey: getGeocodingKey(search),
+  queryKey: getGeocodingKey({ reverse, query, types }),
   queryFn: async () => {
-    if (!search) return null;
-    const response = await geocodingClient
-      .forwardGeocode({
-        query: search,
-        limit: 1,
-      })
-      .send();
+    if (!query) return null;
+    const geocodingClient = getGeocodingClient(mapboxToken);
+    const geocode = reverse
+      ? geocodingClient.reverseGeocode
+      : geocodingClient.forwardGeocode;
+    const response = await geocode({
+      query,
+      limit: 1,
+      types,
+    }).send();
 
     return response;
   },

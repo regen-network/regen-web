@@ -24,10 +24,7 @@ import {
   editFileFormSchema,
   EditFileFormSchemaType,
 } from './EditFileForm.schema';
-import {
-  EditFileFormLocationType,
-  RestrictedViewState,
-} from './EditFileForm.types';
+import { RestrictedViewState } from './EditFileForm.types';
 
 export interface Props {
   initialValues: EditFileFormSchemaType;
@@ -36,7 +33,9 @@ export interface Props {
   className?: string;
   onClose: () => void;
   mapboxToken?: string;
+  geocodingPlaceName?: string;
   setDebouncedViewState: UseStateSetter<RestrictedViewState>;
+  imgSrc?: string;
 }
 
 export const EditFileForm = ({
@@ -46,7 +45,9 @@ export const EditFileForm = ({
   fileLocation,
   onClose,
   mapboxToken,
+  geocodingPlaceName,
   setDebouncedViewState,
+  imgSrc,
 }: Props): JSX.Element => {
   const form = useZodForm({
     schema: editFileFormSchema,
@@ -75,6 +76,15 @@ export const EditFileForm = ({
       >
         Edit your file
       </Title>
+      {imgSrc && (
+        <img
+          className="m-auto pb-40 sm:pb-50"
+          width="180px"
+          height="100%"
+          src={imgSrc}
+          alt="preview"
+        />
+      )}
       <TextField type="text" label="File name" {...form.register('name')} />
       <TextAreaField
         type="text"
@@ -114,6 +124,7 @@ export const EditFileForm = ({
               }
               disabled={locationType === 'file' || locationType === 'none'}
               mapboxToken={mapboxToken}
+              geocodingPlaceName={geocodingPlaceName}
               setDebouncedViewState={setDebouncedViewState}
               {...form.register('location')}
             />

@@ -1,4 +1,5 @@
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 import { Feature } from 'geojson';
 
@@ -35,12 +36,13 @@ const projectLocation = {
 
 Basic.args = {
   initialValues: {
-    name: 'image.png',
+    name: 'image.jpg',
     locationType: 'file',
     location: fileLocation,
   },
   fileLocation,
   projectLocation,
   mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
-  setDebouncedViewState: () => {},
+  imgSrc: '/andover.jpg',
+  setDebouncedViewState: action('setDebouncedViewState'),
 };

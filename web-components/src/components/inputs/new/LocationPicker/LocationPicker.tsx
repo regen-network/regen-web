@@ -4,15 +4,12 @@ import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { CircularProgress } from '@mui/material';
 import { Feature, Point } from 'geojson';
 
-import PinIcon from 'web-components/lib/components/icons/PinIcon';
-import LocationField from 'web-components/lib/components/inputs/new/LocationField/LocationField';
-import { isGeocodingFeature } from 'web-components/lib/components/inputs/new/LocationField/LocationField.types';
-import { Body } from 'web-components/lib/components/typography';
-import { UseStateSetter } from 'web-components/lib/types/react/useState';
-
-import { useDebounce } from 'hooks/useDebounce';
-
-import { RestrictedViewState } from './EditFileForm.types';
+import { UseStateSetter } from '../../../../types/react/useState';
+import PinIcon from '../../../icons/PinIcon';
+import { Body } from '../../../typography';
+import LocationField from '../LocationField/LocationField';
+import { isGeocodingFeature } from '../LocationField/LocationField.types';
+import { RestrictedViewState } from './LocationPicker.types';
 
 const Map = lazy(() => import('react-map-gl'));
 
@@ -25,7 +22,6 @@ type LocationPickerProps = {
     value: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>,
   ) => void;
   geocodingPlaceName?: string;
-  setDebouncedViewState: UseStateSetter<RestrictedViewState>;
 };
 
 export const LocationPicker = ({
@@ -34,7 +30,6 @@ export const LocationPicker = ({
   mapboxToken,
   handleChange,
   onBlur,
-  setDebouncedViewState,
   geocodingPlaceName,
 }: LocationPickerProps): JSX.Element => {
   const mapRef = useRef<MapRef | null>(null);
@@ -48,24 +43,6 @@ export const LocationPicker = ({
     zoom: 5,
   });
   const [locationSearch, setLocationSearch] = useState<string | undefined>();
-
-  const debouncedValue = useDebounce(viewState, 1000);
-  useEffect(() => {
-    if (!isGeocodingFeature(value)) setDebouncedViewState(debouncedValue);
-  }, [debouncedValue, setDebouncedViewState, value]);
-  // TODO This will need to be used at the upper level component of EditFileForm (EditFileModal)
-  // in order to get the place name associated to the center of the current view state (geocodingPlaceName)
-  // We use a debounced value so we don't make reverse geocoding queries for every move on the map.
-  // const { data } = useQuery(
-  //   getGeocodingQuery({
-  //     request: {
-  //       types: ['place'],
-  //       query: [debouncedValue.longitude, debouncedValue.latitude],
-  //     },
-  //     mapboxToken,
-  //     enabled: !!debouncedValue,
-  //   }),
-  // );
 
   useEffect(() => {
     if (

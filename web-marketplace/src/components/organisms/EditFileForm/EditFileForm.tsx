@@ -1,7 +1,9 @@
+import { useEffect } from 'react';
 import { useWatch } from 'react-hook-form';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Feature } from 'geojson';
 
+import { isGeocodingFeature } from 'web-components/lib/components/inputs/new/LocationField/LocationField.types';
 import { Radio } from 'web-components/lib/components/inputs/new/Radio/Radio';
 import { RadioGroup } from 'web-components/lib/components/inputs/new/RadioGroup/RadioGroup';
 import { TextAreaField } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField';
@@ -11,20 +13,22 @@ import { CancelButtonFooter } from 'web-components/lib/components/organisms/Canc
 import { Title } from 'web-components/lib/components/typography';
 import { UseStateSetter } from 'web-components/lib/types/react/useState';
 import { cn } from 'web-components/lib/utils/styles/cn';
+import { LocationPicker } from 'web-components/src/components/inputs/new/LocationPicker/LocationPicker';
+import { RestrictedViewState } from 'web-components/src/components/inputs/new/LocationPicker/LocationPicker.types';
 
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
+import { useDebounce } from 'hooks/useDebounce';
 
 import {
   FILE_LOCATION_DESCRIPTION,
   FILE_MAX_DESCRIPTION_LENGTH,
 } from './EditFileForm.constants';
-import { LocationPicker } from './EditFileForm.LocationPicker';
 import {
   editFileFormSchema,
   EditFileFormSchemaType,
 } from './EditFileForm.schema';
-import { RestrictedViewState } from './EditFileForm.types';
+import {} from './EditFileForm.types';
 
 export interface Props {
   initialValues: EditFileFormSchemaType;
@@ -34,7 +38,7 @@ export interface Props {
   onClose: () => void;
   mapboxToken?: string;
   geocodingPlaceName?: string;
-  setDebouncedViewState: UseStateSetter<RestrictedViewState>;
+  setDebouncedViewState: UseStateSetter<GeocodeFeature | Feature>;
   imgSrc?: string;
 }
 
@@ -66,6 +70,24 @@ export const EditFileForm = ({
     control: form.control,
     name: 'locationType',
   });
+
+  const debouncedValue = useDebounce(location, 1000);
+  useEffect(() => {
+    if (!isGeocodingFeature(location)) setDebouncedViewState(debouncedValue);
+  }, [debouncedValue, setDebouncedViewState, location]);
+  // TODO This will need to be used at the upper level component of EditFileForm (EditFileModal)
+  // in order to get the place name associated to the center of the current view state (geocodingPlaceName)
+  // We use a debounced value so we don't make reverse geocoding queries for every move on the map.
+  // const { data } = useQuery(
+  //   getGeocodingQuery({
+  //     request: {
+  //       types: ['place'],
+  //       query: [longitude, latitude],
+  //     },
+  //     mapboxToken,
+  //     enabled: !!debouncedValue,
+  //   }),
+  // );
 
   return (
     <Form className={cn('max-w-[560px]', className)} form={form}>

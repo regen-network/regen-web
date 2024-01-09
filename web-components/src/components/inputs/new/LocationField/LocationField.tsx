@@ -100,7 +100,7 @@ const LocationField = forwardRef<HTMLInputElement, Props>(
             onBlur={e => {
               onBlur(e);
               setTimeout(() => {
-                setShowResults(false);
+                // setShowResults(false);
               }, 800);
             }}
             onChange={({ target: { value } }) => {

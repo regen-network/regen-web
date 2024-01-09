@@ -131,27 +131,25 @@ export const LocationPicker = forwardRef<HTMLDivElement, LocationPickerProps>(
                   : displayedLocation}
               </Body>
             ) : (
-              <>
-                <LocationField
-                  token={mapboxToken}
-                  className="text-grey-500"
-                  value={
-                    locationSearch ??
-                    (isGeocodingFeature(value) ? value : displayedLocation)
+              <LocationField
+                token={mapboxToken}
+                className="text-grey-500"
+                value={
+                  locationSearch ??
+                  (isGeocodingFeature(value) ? value : displayedLocation)
+                }
+                handleChange={value => {
+                  if (isGeocodingFeature(value)) {
+                    setLocationSearch(undefined);
+                    handleChange(value);
+                  } else {
+                    setLocationSearch(value);
                   }
-                  handleChange={value => {
-                    if (isGeocodingFeature(value)) {
-                      setLocationSearch(undefined);
-                      handleChange(value);
-                    } else {
-                      setLocationSearch(value);
-                    }
-                  }}
-                  onBlur={onBlur}
-                  searchIcon={false}
-                  showCoordinates
-                />
-              </>
+                }}
+                onBlur={onBlur}
+                searchIcon={false}
+                showCoordinates
+              />
             )}
           </div>
           {/* We simply absolutely position the location pin at the center,

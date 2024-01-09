@@ -78,7 +78,7 @@ export const EditFileForm = ({
       </Title>
       {imgSrc && (
         <img
-          className="m-auto pb-40 sm:pb-50"
+          className="block m-auto pb-40 sm:pb-50"
           width="180px"
           height="100%"
           src={imgSrc}

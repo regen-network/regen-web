@@ -1,5 +1,5 @@
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
-import { Feature, Point } from 'geojson';
+import { Feature } from 'geojson';
 import { z } from 'zod';
 
 import { FILE_MAX_DESCRIPTION_LENGTH } from './EditFileForm.constants';

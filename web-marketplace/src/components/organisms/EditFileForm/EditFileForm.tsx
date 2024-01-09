@@ -1,6 +1,6 @@
 import { useWatch } from 'react-hook-form';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
-import { Feature, Point } from 'geojson';
+import { Feature } from 'geojson';
 
 import { Radio } from 'web-components/lib/components/inputs/new/Radio/Radio';
 import { RadioGroup } from 'web-components/lib/components/inputs/new/RadioGroup/RadioGroup';

@@ -130,6 +130,7 @@ export const PostForm = ({
         minRows={4}
         multiline
         className="mb-40 sm:mb-50 mt-0"
+        inputProps={{ className: 'resize-y' }}
         {...form.register('comment')}
       />
       {fields.map((field, index) => {

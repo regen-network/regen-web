@@ -3,15 +3,14 @@ import { DropzoneOptions } from 'react-dropzone';
 import { Crop } from 'react-image-crop';
 
 import { getImageSrc } from '../../../image-crop/canvas-utils';
-import CropImageModal from '../../../modal/CropImageModal';
 import FieldFormControl, {
   FieldFormControlProps,
 } from '../FieldFormControl/FieldFormControl';
 import { ImageDropImage } from './ImageDrop.Image';
 import { useImageDropStyles } from './ImageDrop.styles';
+import { ImageDropRenderModalProps } from './ImageDrop.types';
 import { toBase64 } from './ImageDrop.utils';
 import { ImageDropZone } from './ImageDrop.Zone';
-import { ImageDropRenderModalProps } from './ImageDrop.types';
 
 export interface ImageDropProps extends Partial<FieldFormControlProps> {
   className?: string;

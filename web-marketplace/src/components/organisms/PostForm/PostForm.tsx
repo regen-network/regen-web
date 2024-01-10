@@ -1,37 +1,40 @@
-import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
+import { useEffect } from 'react';
+import { useFieldArray, useWatch } from 'react-hook-form';
+
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import { DocumentIconRaw } from 'web-components/lib/components/icons/DocumentIconRaw';
+import { LocationIcon } from 'web-components/lib/components/icons/LocationIcon';
+import { LockIcon } from 'web-components/lib/components/icons/LockIcon';
+import { PrivateFile } from 'web-components/lib/components/icons/PrivateFile';
+import { UnlockIcon } from 'web-components/lib/components/icons/UnlockIcon';
 import {
   ImageDrop,
   ImageDropProps,
 } from 'web-components/lib/components/inputs/new/ImageDrop/ImageDrop';
+import { Radio } from 'web-components/lib/components/inputs/new/Radio/Radio';
+import { RadioGroup } from 'web-components/lib/components/inputs/new/RadioGroup/RadioGroup';
 import { TextAreaField } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField';
+import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
-import { LockIcon } from 'web-components/lib/components/icons/LockIcon';
-import { PostIcon } from 'web-components/lib/components/icons/PostIcon';
-import { DocumentIconRaw } from 'web-components/lib/components/icons/DocumentIconRaw';
-import { LocationIcon } from 'web-components/lib/components/icons/LocationIcon';
 import { Body, Title } from 'web-components/lib/components/typography';
+import { cn } from 'web-components/lib/utils/styles/cn';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 
 import { Link } from 'components/atoms';
 import Form from 'components/molecules/Form/Form';
-import { useEffect } from 'react';
-import { useFieldArray, useWatch } from 'react-hook-form';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { Radio } from 'web-components/lib/components/inputs/new/Radio/Radio';
-import { RadioGroup } from 'web-components/lib/components/inputs/new/RadioGroup/RadioGroup';
-import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
-import { cn } from 'web-components/lib/utils/styles/cn';
-import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
+
 import {
+  cropAspectMediaForm,
   DEFAULT_URL,
   IMAGE_UPLOAD_BUTTON_LABEL,
-  cropAspectMediaForm,
 } from '../MediaForm/MediaForm.constants';
 import { useMediaFormStyles } from '../MediaForm/useMediaFormStyles';
 import {
   POST_MAX_TITLE_LENGTH,
   POST_PRIVACY_DESCRIPTION,
 } from './PostForm.constants';
-import { PostFormSchemaType, postFormSchema } from './PostForm.schema';
+import { postFormSchema, PostFormSchemaType } from './PostForm.schema';
 
 export interface Props {
   initialValues: PostFormSchemaType;
@@ -160,13 +163,24 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
             </span>
           }
           description={POST_PRIVACY_DESCRIPTION}
-          optional
         >
           <>
             <Radio
               label={
                 <span className={cn('flex items-center')}>
-                  <PostIcon className="mr-15" />
+                  <UnlockIcon className="mr-15" />
+                  {'Make the entire post public'}
+                </span>
+              }
+              value={'public'}
+              selectedValue={privacy}
+              sx={{ mb: 2.5 }}
+              {...form.register('privacyType')}
+            />
+            <Radio
+              label={
+                <span className={cn('flex items-center')}>
+                  <LockIcon className="mr-15" />
                   {'Make the entire post private'}
                 </span>
               }
@@ -178,7 +192,7 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
             <Radio
               label={
                 <span className={cn('flex items-center')}>
-                  <DocumentIconRaw className="mr-15" />
+                  <PrivateFile className="mr-15" />
                   {'Make the files private'}
                 </span>
               }

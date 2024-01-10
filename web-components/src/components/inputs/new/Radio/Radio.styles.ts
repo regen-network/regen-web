@@ -53,7 +53,7 @@ export const useRadioStyles = makeStyles<RadioStylesProps>()(
     },
     radioLabel: {
       '& .MuiFormControlLabel-label': {
-        fontWeight: 700,
+        fontWeight: isSelected ? 700 : 400,
         marginLeft: pxToRem(15),
       },
     },

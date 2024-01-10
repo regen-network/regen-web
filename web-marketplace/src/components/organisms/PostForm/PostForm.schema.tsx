@@ -1,4 +1,5 @@
 import { z } from 'zod';
+
 import { POST_MAX_TITLE_LENGTH } from './PostForm.constants';
 import { PostFormPrivacyType } from './PostForm.types';
 

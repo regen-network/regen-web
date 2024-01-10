@@ -52,8 +52,8 @@ import InfoIconOutlined from './InfoIconOutlined';
 import InterfaceIcon from './InterfaceIcon';
 import LinkIcon from './LinkIcon';
 import { LocationIcon } from './LocationIcon';
-import { LockIcon } from './LockIcon';
 import LocationSearchIcon from './LocationSearchIcon';
+import { LockIcon } from './LockIcon';
 import MinusIcon from './MinusIcon';
 import NoBasketTokensIcon from './NoBasketTokensIcon';
 import NoEcocreditsIcon from './NoEcocreditsIcon';
@@ -67,8 +67,8 @@ import PinIcon from './PinIcon';
 import PlayIcon from './PlayIcon';
 import PlusIcon from './PlusIcon';
 import PointerIcon from './PointerIcon';
-import { PostIcon } from './PostIcon';
 import PrintIcon from './PrintIcon';
+import { PrivateFile } from './PrivateFile';
 import { ProjectPageIcon } from './ProjectPageIcon';
 import { ProjectPageIconSmall } from './ProjectPageIconSmall';
 import PutInBasketIcon from './PutInBasketIcon';
@@ -115,6 +115,7 @@ import TradeableIcon from './TradeableIcon';
 import TrashIcon from './TrashIcon';
 import TrustDocumentIcon from './TrustDocumentIcon';
 import TrustIcon from './TrustIcon';
+import { UnlockIcon } from './UnlockIcon';
 import UserMenuIcon from './UserMenuIcon';
 import VerifiedIcon from './VerifiedIcon';
 import WalletErrorIcon from './WalletErrorIcon';
@@ -283,8 +284,8 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<PlayIcon height={'20px'} />} label="PlayIcon" />
     <LabeledIcon icon={<PlusIcon />} label="PlusIcon" />
     <LabeledIcon icon={<PointerIcon />} label="PointerIcon" />
-    <LabeledIcon icon={<PostIcon />} label="PostIcon" />
     <LabeledIcon icon={<PrintIcon />} label="PrintIcon" />
+    <LabeledIcon icon={<PrivateFile />} label="PrivateFile" />
     <LabeledIcon icon={<ProjectPageIcon />} label="ProjectPageIcon" />
     <LabeledIcon icon={<ProjectPageIconSmall />} label="ProjectPageIconSmall" />
     <LabeledIcon icon={<SadBeeIcon />} label="SadBeeIcon" />
@@ -344,6 +345,7 @@ export const allIcons = (): JSX.Element => (
       label="TwitterIcon2"
     />
     <LabeledIcon icon={<TwitterBadgeIcon />} label="TwitterBadgeIcon" />
+    <LabeledIcon icon={<UnlockIcon />} label="UnlockIcon" />
     <LabeledIcon icon={<UsdcIcon />} label="UsdcIcon" />
     <LabeledIcon icon={<UserMenuIcon />} label="UserMenuIcon" />
     <LabeledIcon icon={<VerifiedIcon color="#000" />} label="VerifiedIcon" />

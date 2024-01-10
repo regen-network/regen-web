@@ -50,6 +50,9 @@ export const LocationPicker = ({
       viewState.longitude !== point.coordinates[0] &&
       viewState.latitude !== point.coordinates[1]
     )
+      // The value can change either on Map move or from a change outside of this component
+      // (in the context of the EditFileForm, by selecting another radio input value), so we update
+      // the map view state accordingly in useEffect.
       setViewState({
         zoom: viewState.zoom,
         longitude: point.coordinates[0],

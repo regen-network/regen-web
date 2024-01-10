@@ -7,26 +7,12 @@ export const LocationIcon = (props: React.SVGProps<SVGSVGElement>) => (
         d="M16 7.17188C16 12.7019 10.0633 16.9629 8.75362 17.8357C8.59668 17.9403 8.40332 17.9403 8.24638 17.8357C6.9367 16.9629 1 12.7019 1 7.17188C1 3.21096 4.35786 0 8.5 0C12.6421 0 16 3.21096 16 7.17188Z"
         fill="currentColor"
       />
-      <ellipse
-        cx="8.50001"
-        cy="7.3125"
-        rx="4.03846"
-        ry="3.9375"
-        fill="white"
-        fill-opacity="0"
-      />
+      <ellipse cx="8.50001" cy="7.3125" rx="4.03846" ry="3.9375" fill="white" />
       <path
         d="M16 7.17188C16 12.7019 10.0633 16.9629 8.75362 17.8357C8.59668 17.9403 8.40332 17.9403 8.24638 17.8357C6.9367 16.9629 1 12.7019 1 7.17188C1 3.21096 4.35786 0 8.5 0C12.6421 0 16 3.21096 16 7.17188Z"
         fill="currentColor"
       />
-      <ellipse
-        cx="8.50001"
-        cy="7.3125"
-        rx="4.03846"
-        ry="3.9375"
-        fill="white"
-        fill-opacity="0"
-      />
+      <ellipse cx="8.50001" cy="7.3125" rx="4.03846" ry="3.9375" fill="white" />
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"
@@ -36,7 +22,7 @@ export const LocationIcon = (props: React.SVGProps<SVGSVGElement>) => (
     </g>
     <defs>
       <clipPath id="clip0_2339_7155">
-        <rect width="24" height="24" fill="white" fill-opacity="0" />
+        <rect width="24" height="24" fill="white" />
       </clipPath>
     </defs>
   </svg>

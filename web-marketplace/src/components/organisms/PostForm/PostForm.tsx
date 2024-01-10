@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useFieldArray, useWatch } from 'react-hook-form';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { DocumentIconRaw } from 'web-components/lib/components/icons/DocumentIconRaw';
 import { LocationIcon } from 'web-components/lib/components/icons/LocationIcon';
 import { LockIcon } from 'web-components/lib/components/icons/LockIcon';
 import { PrivateFile } from 'web-components/lib/components/icons/PrivateFile';
@@ -27,10 +26,10 @@ import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import {
   cropAspectMediaForm,
   DEFAULT_URL,
-  IMAGE_UPLOAD_BUTTON_LABEL,
 } from '../MediaForm/MediaForm.constants';
 import { useMediaFormStyles } from '../MediaForm/useMediaFormStyles';
 import {
+  FILE_UPLOAD_BUTTON_LABEL,
   POST_MAX_TITLE_LENGTH,
   POST_PRIVACY_DESCRIPTION,
 } from './PostForm.constants';
@@ -55,7 +54,7 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
 
   const imageDropCommonProps: Partial<ImageDropProps> = {
     classes: { main: classes.fullSizeMedia },
-    buttonText: IMAGE_UPLOAD_BUTTON_LABEL,
+    buttonText: FILE_UPLOAD_BUTTON_LABEL,
     fixedCrop: cropAspectMediaForm,
   };
 
@@ -98,14 +97,18 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
 
   return (
     <Form className={cn('max-w-[560px]', className)} form={form}>
-      <Title variant="h3" sx={{ textAlign: 'center' }} className="mb-50">
+      <Title
+        variant="h3"
+        sx={{ textAlign: 'center' }}
+        className="mb-40 sm:mb-50"
+      >
         New post
       </Title>
       <TextField
         type="text"
         label="Title"
         description="Summarize this update."
-        className="mb-50"
+        className="mb-40 sm:mb-50"
         helperText={
           <TextAreaFieldChartCounter
             value={title}
@@ -122,7 +125,7 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
         rows={4}
         minRows={4}
         multiline
-        className="mb-50 mt-0"
+        className="mb-40 sm:mb-50 mt-0"
         {...form.register('comment')}
       />
       {fields.map((field, index) => {
@@ -142,7 +145,7 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
             onDelete={() => getHandleDeleteWithIndex(index)}
             value={url === DEFAULT_URL ? '' : url}
             setValue={setFiles}
-            className={cn('mb-50 mt-0', classes.galleryItem)}
+            className={cn('mb-40 sm:mb-50 mt-0', classes.galleryItem)}
             key={field.id}
             fieldIndex={index}
             error={!!errors['files']}
@@ -154,7 +157,7 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
           />
         );
       })}
-      <div className="flex flex-col mb-50">
+      <div className="flex flex-col mb-40 sm:mb-50">
         <RadioGroup
           label={
             <span className="inline-flex items-center">

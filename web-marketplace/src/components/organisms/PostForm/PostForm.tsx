@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useFieldArray, useWatch } from 'react-hook-form';
 
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { LocationIcon } from 'web-components/lib/components/icons/LocationIcon';
 import { LockIcon } from 'web-components/lib/components/icons/LockIcon';
 import { PrivateFile } from 'web-components/lib/components/icons/PrivateFile';
@@ -15,9 +14,9 @@ import { RadioGroup } from 'web-components/lib/components/inputs/new/RadioGroup/
 import { TextAreaField } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField';
 import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
+import { CancelButtonFooter } from 'web-components/lib/components/organisms/CancelButtonFooter/CancelButtonFooter';
 import { Body, Title } from 'web-components/lib/components/typography';
 import { cn } from 'web-components/lib/utils/styles/cn';
-import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 
 import { Link } from 'components/atoms';
 import Form from 'components/molecules/Form/Form';
@@ -38,9 +37,14 @@ import { postFormSchema, PostFormSchemaType } from './PostForm.schema';
 export interface Props {
   initialValues: PostFormSchemaType;
   className?: string;
+  onClose: () => void;
 }
 
-export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
+export const PostForm = ({
+  initialValues,
+  className,
+  onClose,
+}: Props): JSX.Element => {
   const form = useZodForm({
     schema: postFormSchema,
     defaultValues: {
@@ -220,10 +224,7 @@ export const PostForm = ({ initialValues, className }: Props): JSX.Element => {
           </>
         </RadioGroup>
       </div>
-      <div className="flex justify-end">
-        <OutlinedButton className="mr-40">{'Cancel'}</OutlinedButton>
-        <ContainedButton type="submit">{'Publish'}</ContainedButton>
-      </div>
+      <CancelButtonFooter label="publish" onCancel={onClose} type="submit" />
     </Form>
   );
 };

@@ -6,11 +6,11 @@ import { getImageSrc } from '../../../image-crop/canvas-utils';
 import FieldFormControl, {
   FieldFormControlProps,
 } from '../FieldFormControl/FieldFormControl';
-import { ImageDropImage } from './ImageDrop.Image';
-import { useImageDropStyles } from './ImageDrop.styles';
-import { ImageDropRenderModalProps } from './ImageDrop.types';
-import { toBase64 } from './ImageDrop.utils';
-import { ImageDropZone } from './ImageDrop.Zone';
+import { ImageDropImage } from './FileDrop.File';
+import { useImageDropStyles } from './FileDrop.styles';
+import { ImageDropRenderModalProps } from './FileDrop.types';
+import { toBase64 } from './FileDrop.utils';
+import { ImageDropZone } from './FileDrop.Zone';
 
 export interface ImageDropProps extends Partial<FieldFormControlProps> {
   className?: string;
@@ -43,7 +43,7 @@ export interface ImageDropProps extends Partial<FieldFormControlProps> {
 /**
  * Drop an Image File and the Crop Modal will open with your image
  */
-const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
+const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
   (
     {
       className,
@@ -179,4 +179,4 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
   },
 );
 
-export { ImageDrop };
+export { FileDrop };

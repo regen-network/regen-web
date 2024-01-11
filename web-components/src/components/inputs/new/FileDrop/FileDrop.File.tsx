@@ -1,10 +1,10 @@
 import { Box, IconButton, useTheme } from '@mui/material';
 
-import EditIcon from '../../../../components/icons/EditIcon';
-import TrashIcon from '../../../../components/icons/TrashIcon';
-import { Image } from '../../../../components/image';
-import { ImageDropBottomBar } from './ImageDrop.BottomBar';
-import { useImageDropStyles } from './ImageDrop.styles';
+import EditIcon from '../../../icons/EditIcon';
+import TrashIcon from '../../../icons/TrashIcon';
+import { Image } from '../../../image';
+import { ImageDropBottomBar } from './FileDrop.BottomBar';
+import { useImageDropStyles } from './FileDrop.styles';
 
 type Props = {
   value: string;

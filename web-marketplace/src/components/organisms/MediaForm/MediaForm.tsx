@@ -16,7 +16,7 @@ import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import { MetadataSubmitProps } from 'hooks/projects/useProjectWithMetadata';
 
-import { DEFAULT_URL } from './MediaForm.constants';
+import { DEFAULT } from './MediaForm.constants';
 import { mediaFormSchema, MediaFormSchemaType } from './MediaForm.schema';
 import { MediaFormPhotos } from './MediaFormPhotos';
 import { MediaFormStory } from './MediaFormStory';
@@ -64,7 +64,7 @@ export const MediaForm = ({
           const filteredData = {
             'regen:previewPhoto': data['regen:previewPhoto'],
             'regen:galleryPhotos': data['regen:galleryPhotos']?.filter(
-              photo => photo['schema:url'] !== DEFAULT_URL,
+              photo => photo['schema:url'] !== DEFAULT,
             ),
             'regen:storyMedia': data?.['regen:storyMedia'],
           };

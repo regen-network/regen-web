@@ -82,7 +82,7 @@ const useStyles = makeStyles()(theme => ({
 /**
  * Drop an Image File and the Crop Modal will open with your image
  */
-function ImageDrop({
+function FileDrop({
   className,
   classes,
   label,
@@ -264,4 +264,4 @@ function ImageDrop({
   );
 }
 
-export { ImageDrop };
+export { FileDrop };

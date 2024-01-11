@@ -1,6 +1,6 @@
 import { CardMedia, CardMediaProps } from '@mui/material';
 
-import { ImageDropBottomBar } from '../../../components/inputs/new/ImageDrop/ImageDrop.BottomBar';
+import { ImageDropBottomBar } from '../../inputs/new/FileDrop/FileDrop.BottomBar';
 import { sxToArray } from '../../../utils/mui/sxToArray';
 import Card from '../Card';
 

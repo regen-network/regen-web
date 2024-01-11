@@ -4,7 +4,7 @@ import { Box, useMediaQuery, useTheme } from '@mui/material';
 
 import OutlinedButton from '../../../buttons/OutlinedButton';
 import { Label } from '../../../typography';
-import { useImageDropStyles } from './ImageDrop.styles';
+import { useImageDropStyles } from './FileDrop.styles';
 
 type Props = {
   buttonText?: string;
@@ -19,6 +19,7 @@ type Props = {
   };
   handleFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleDrop: (files: File[]) => void;
+  accept?: string | string[];
 };
 
 export const ImageDropZone = forwardRef<HTMLInputElement, Props>(
@@ -32,6 +33,7 @@ export const ImageDropZone = forwardRef<HTMLInputElement, Props>(
       classes,
       handleFileChange,
       handleDrop,
+      accept = 'image/*',
       ...props
     },
     ref,

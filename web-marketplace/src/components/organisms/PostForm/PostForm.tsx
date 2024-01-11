@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import { useFieldArray, useWatch } from 'react-hook-form';
+import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 
 import { LocationIcon } from 'web-components/lib/components/icons/LocationIcon';
 import { LockIcon } from 'web-components/lib/components/icons/LockIcon';
 import { PrivateFile } from 'web-components/lib/components/icons/PrivateFile';
 import { UnlockIcon } from 'web-components/lib/components/icons/UnlockIcon';
 import {
-  ImageDrop,
+  FileDrop,
   ImageDropProps,
-} from 'web-components/lib/components/inputs/new/ImageDrop/ImageDrop';
+} from 'web-components/lib/components/inputs/new/FileDrop/FileDrop';
 import { Radio } from 'web-components/lib/components/inputs/new/Radio/Radio';
 import { RadioGroup } from 'web-components/lib/components/inputs/new/RadioGroup/RadioGroup';
 import { TextAreaField } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField';
@@ -22,10 +23,7 @@ import { Link } from 'components/atoms';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
-import {
-  cropAspectMediaForm,
-  DEFAULT_URL,
-} from '../MediaForm/MediaForm.constants';
+import { cropAspectMediaForm, DEFAULT } from '../MediaForm/MediaForm.constants';
 import { useMediaFormStyles } from '../MediaForm/useMediaFormStyles';
 import {
   FILE_UPLOAD_BUTTON_LABEL,
@@ -38,11 +36,13 @@ export interface Props {
   initialValues: PostFormSchemaType;
   className?: string;
   onClose: () => void;
+  projectLocation: GeocodeFeature;
 }
 
 export const PostForm = ({
   initialValues,
   className,
+  projectLocation,
   onClose,
 }: Props): JSX.Element => {
   const form = useZodForm({
@@ -74,12 +74,14 @@ export const PostForm = ({
   });
 
   const setFiles = (value: string, fieldIndex: number): void => {
-    if (files?.[fieldIndex]?.['schema:url'] === DEFAULT_URL) {
+    if (files?.[fieldIndex]?.['url'] === DEFAULT) {
       append({
-        'schema:url': DEFAULT_URL,
+        url: DEFAULT,
+        name: DEFAULT,
+        location: projectLocation,
       });
     }
-    setValue(`files.${fieldIndex}.schema:url`, encodeURI(value));
+    setValue(`files.${fieldIndex}.url`, encodeURI(value));
   };
 
   const getHandleDeleteWithIndex = async (fieldIndex: number) => {
@@ -91,13 +93,15 @@ export const PostForm = ({
   useEffect(() => {
     if (
       fields?.length === 0 ||
-      fields?.every(field => field['schema:url'] !== DEFAULT_URL)
+      fields?.every(field => field['url'] !== DEFAULT)
     ) {
       append({
-        'schema:url': DEFAULT_URL,
+        url: DEFAULT,
+        name: DEFAULT,
+        location: projectLocation,
       });
     }
-  }, [append, fields]);
+  }, [append, fields, projectLocation]);
 
   return (
     <Form className={cn('max-w-[560px]', className)} form={form}>
@@ -134,10 +138,10 @@ export const PostForm = ({
         {...form.register('comment')}
       />
       {fields.map((field, index) => {
-        const url = files?.[index]?.['schema:url'];
+        const url = files?.[index]?.['url'];
 
         return (
-          <ImageDrop
+          <FileDrop
             label={'Files'}
             description={
               <Body>
@@ -148,7 +152,7 @@ export const PostForm = ({
               </Body>
             }
             onDelete={() => getHandleDeleteWithIndex(index)}
-            value={url === DEFAULT_URL ? '' : url}
+            value={url === DEFAULT ? '' : url}
             setValue={setFiles}
             className={cn('mb-40 sm:mb-50 mt-0', classes.galleryItem)}
             key={field.id}

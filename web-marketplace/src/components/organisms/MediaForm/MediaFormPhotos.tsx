@@ -2,14 +2,14 @@ import { MutableRefObject, useEffect } from 'react';
 import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
 
 import {
-  ImageDrop,
+  FileDrop,
   ImageDropProps,
-} from 'web-components/lib/components/inputs/new/ImageDrop/ImageDrop';
+} from 'web-components/lib/components/inputs/new/FileDrop/FileDrop';
 import { TextAreaField } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField';
 import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
-import { UseStateSetter } from 'web-components/lib/types/react/useState';
 import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
+import { UseStateSetter } from 'web-components/lib/types/react/useState';
 
 import { useProjectEditContext } from 'pages';
 
@@ -18,7 +18,7 @@ import { useHandleUpload } from './hooks/useHandleUpload';
 import {
   CAPTION_CHART_LIMIT,
   cropAspectMediaForm,
-  DEFAULT_URL,
+  DEFAULT,
   GALLERY_PHOTOS,
   GALLERY_PHOTOS_DESCRIPTION,
   IMAGE_UPLOAD_BUTTON_LABEL,
@@ -85,9 +85,9 @@ export const MediaFormPhotos = ({
     isDirtyRef.current = true;
   };
   const setGalleryPhotos = (value: string, fieldIndex: number): void => {
-    if (galleryPhotos?.[fieldIndex]?.['schema:url'] === DEFAULT_URL) {
+    if (galleryPhotos?.[fieldIndex]?.['schema:url'] === DEFAULT) {
       append({
-        'schema:url': DEFAULT_URL,
+        'schema:url': DEFAULT,
         'schema:caption': '',
         'schema:creditText': '',
       });
@@ -127,10 +127,10 @@ export const MediaFormPhotos = ({
   useEffect(() => {
     if (
       fields?.length === 0 ||
-      fields?.every(field => field['schema:url'] !== DEFAULT_URL)
+      fields?.every(field => field['schema:url'] !== DEFAULT)
     ) {
       append({
-        'schema:url': DEFAULT_URL,
+        'schema:url': DEFAULT,
         'schema:caption': '',
         'schema:creditText': '',
       });
@@ -139,7 +139,7 @@ export const MediaFormPhotos = ({
 
   return (
     <>
-      <ImageDrop
+      <FileDrop
         label={MAIN_PHOTO}
         description={MAIN_PHOTO_DESCRIPTION}
         value={previewPhoto?.['schema:url']}
@@ -183,7 +183,7 @@ export const MediaFormPhotos = ({
           error={!!errors['regen:previewPhoto']?.['schema:creditText']}
           optional
         />
-      </ImageDrop>
+      </FileDrop>
       {fields.map((field, index) => {
         const url = galleryPhotos?.[index]?.['schema:url'];
         const isFirst = index === 0;
@@ -193,13 +193,13 @@ export const MediaFormPhotos = ({
           errors['regen:galleryPhotos']?.[index]?.['schema:caption']?.message;
 
         return (
-          <ImageDrop
+          <FileDrop
             label={GALLERY_PHOTOS}
             description={GALLERY_PHOTOS_DESCRIPTION}
             onDelete={getHandleDeleteWithIndex(index)}
             onUpload={handleUpload}
             setValue={setGalleryPhotos}
-            value={url === DEFAULT_URL ? '' : url}
+            value={url === DEFAULT ? '' : url}
             caption={galleryPhotos?.[index]?.['schema:caption']}
             credit={galleryPhotos?.[index]?.['schema:creditText']}
             error={(!!errors['regen:galleryPhotos'] && isLast) || hasFieldError}
@@ -269,7 +269,7 @@ export const MediaFormPhotos = ({
               optional
               {...register(`regen:galleryPhotos.${index}.schema:creditText`)}
             />
-          </ImageDrop>
+          </FileDrop>
         );
       })}
     </>

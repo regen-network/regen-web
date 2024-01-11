@@ -112,7 +112,7 @@ export const GalleryBottomBar = ({
             )}
             {credit && (
               <Box sx={{ display: 'inline-block', fontWeight: 300 }}>
-                {credit}
+                Photo credit: {credit}
               </Box>
             )}
           </Body>

@@ -1,9 +1,9 @@
 import { Box, SxProps } from '@mui/material';
 
-import { Body } from '../../../../components/typography';
+import { Body } from '../../../typography';
 import { Theme } from '../../../../theme/muiTheme';
 import { sxToArray } from '../../../../utils/mui/sxToArray';
-import { PHOTO_CREDIT } from './ImageDrop.constants';
+import { PHOTO_CREDIT } from './FileDrop.constants';
 
 type Props = {
   caption?: string;

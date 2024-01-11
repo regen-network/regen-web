@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
@@ -8,12 +9,15 @@ export const useRetryCsrfRequest = () => {
   const reactQueryClient = useQueryClient();
   const addFailedFunction = useSetAtom(failedFunctionsWriteAtom);
 
-  const retryCsrfRequest = async (failedFunction: FailedFnType) => {
-    await reactQueryClient.invalidateQueries({
-      queryKey: [GET_CSRF_QUERY_KEY],
-    });
-    addFailedFunction(failedFunction);
-  };
+  const retryCsrfRequest = useCallback(
+    async (failedFunction: FailedFnType) => {
+      await reactQueryClient.invalidateQueries({
+        queryKey: [GET_CSRF_QUERY_KEY],
+      });
+      addFailedFunction(failedFunction);
+    },
+    [addFailedFunction, reactQueryClient],
+  );
 
   return retryCsrfRequest;
 };

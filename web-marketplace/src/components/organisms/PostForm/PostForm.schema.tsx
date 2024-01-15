@@ -17,8 +17,7 @@ export const postFormSchema = z.object({
         // TODO add once #2257 merged
         // .max(FILE_MAX_DESCRIPTION_LENGTH),
         credit: z.string().optional(),
-        // TODO add once #2257 merged
-        // locationType: z.custom<EditFileFormLocationType>(),
+        locationType: z.custom<'none' | 'file' | 'custom'>(),
         location: z.custom<Feature | GeocodeFeature>(),
       }),
     )

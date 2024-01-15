@@ -1,16 +1,17 @@
 import React, { forwardRef, ReactNode, useState } from 'react';
 import { DropzoneOptions } from 'react-dropzone';
 import { Crop } from 'react-image-crop';
-
+import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import { Feature } from 'geojson';
 import { getImageSrc } from '../../../image-crop/canvas-utils';
 import FieldFormControl, {
   FieldFormControlProps,
 } from '../FieldFormControl/FieldFormControl';
-import { ImageDropImage } from './FileDrop.File';
-import { useImageDropStyles } from './FileDrop.styles';
-import { ImageDropRenderModalProps } from './FileDrop.types';
+import { FileDropFile } from './FileDrop.File';
+import { useFileDropStyles } from './FileDrop.styles';
+import { FileDropRenderModalProps } from './FileDrop.types';
 import { toBase64 } from './FileDrop.utils';
-import { ImageDropZone } from './FileDrop.Zone';
+import { FileDropZone } from './FileDrop.Zone';
 
 export interface ImageDropProps extends Partial<FieldFormControlProps> {
   className?: string;
@@ -23,6 +24,7 @@ export interface ImageDropProps extends Partial<FieldFormControlProps> {
   value?: string;
   caption?: string;
   credit?: string;
+  location?: GeocodeFeature | Feature;
   label?: string;
   name: string;
   description?: ReactNode;
@@ -34,14 +36,14 @@ export interface ImageDropProps extends Partial<FieldFormControlProps> {
   children?: React.ReactNode;
   dropZoneOption?: DropzoneOptions;
   isCropSubmitDisabled?: boolean;
-  renderModal: ({}: ImageDropRenderModalProps) => React.ReactNode;
+  renderModal: (_: FileDropRenderModalProps) => React.ReactNode;
   setValue: (value: string, fieldIndex: number) => void;
   onDelete?: (fileName: string) => Promise<void>;
   onUpload?: (imageFile: File) => Promise<string | undefined>;
 }
 
 /**
- * Drop an Image File and the Crop Modal will open with your image
+ * Drop file(s) and render a modal for those files
  */
 const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
   (
@@ -58,6 +60,7 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
       value,
       caption,
       credit,
+      location,
       isSubmitting,
       fieldIndex = 0,
       isCropSubmitDisabled = false,
@@ -73,7 +76,7 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [initialImage, setInitialImage] = useState('');
     const [fileName, setFileName] = useState('');
-    const { classes: styles, cx } = useImageDropStyles();
+    const { classes: styles, cx } = useFileDropStyles();
     const isFirstField = fieldIndex === 0;
 
     const handleDrop = (files: File[]): void => {
@@ -147,16 +150,17 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
           {...fieldProps}
         >
           {value && (
-            <ImageDropImage
+            <FileDropFile
               handleDelete={handleDelete}
               handleEdit={handleEdit}
               value={value}
               caption={caption}
               credit={credit}
+              location={location}
               classes={classes}
             />
           )}
-          <ImageDropZone
+          <FileDropZone
             handleDrop={handleDrop}
             handleFileChange={handleFileChange}
             buttonText={buttonText}

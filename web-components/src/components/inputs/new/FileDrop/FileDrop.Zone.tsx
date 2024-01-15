@@ -4,7 +4,7 @@ import { Box, useMediaQuery, useTheme } from '@mui/material';
 
 import OutlinedButton from '../../../buttons/OutlinedButton';
 import { Label } from '../../../typography';
-import { useImageDropStyles } from './FileDrop.styles';
+import { useFileDropStyles } from './FileDrop.styles';
 
 type Props = {
   buttonText?: string;
@@ -22,7 +22,7 @@ type Props = {
   accept?: string | string[];
 };
 
-export const ImageDropZone = forwardRef<HTMLInputElement, Props>(
+export const FileDropZone = forwardRef<HTMLInputElement, Props>(
   (
     {
       buttonText,
@@ -38,7 +38,7 @@ export const ImageDropZone = forwardRef<HTMLInputElement, Props>(
     },
     ref,
   ) => {
-    const { classes: styles, cx } = useImageDropStyles();
+    const { classes: styles, cx } = useFileDropStyles();
     const theme = useTheme();
     const isDesktop = useMediaQuery(theme.breakpoints.up('tablet'));
 

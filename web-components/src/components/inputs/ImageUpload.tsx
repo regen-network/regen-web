@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { deleteImage, uploadImage } from '../../utils/s3';
-import { FileDrop, ImageDropProps } from './FileDrop';
+import { ImageDrop, ImageDropProps } from './ImageDrop';
 import ImageField from './ImageField';
 
 export interface ImageUploadProps extends ImageDropProps {
@@ -32,7 +32,7 @@ function ImageUpload({
   };
 
   return isDrop ? (
-    <FileDrop {...props} onDelete={handleDelete} onUpload={handleUpload} />
+    <ImageDrop {...props} onDelete={handleDelete} onUpload={handleUpload} />
   ) : (
     <ImageField {...props} onUpload={handleUpload} />
   );

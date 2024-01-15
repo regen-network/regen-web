@@ -1,4 +1,4 @@
-export type ImageDropRenderModalProps = {
+export type FileDropRenderModalProps = {
   open: boolean;
   onClose: () => void;
   onSubmit: (image: HTMLImageElement) => Promise<void>;

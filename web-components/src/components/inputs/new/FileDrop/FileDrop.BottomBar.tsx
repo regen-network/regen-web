@@ -1,17 +1,26 @@
-import { Box, SxProps } from '@mui/material';
+import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import { SxProps } from '@mui/material';
+import { Feature } from 'geojson';
 
-import { Body } from '../../../typography';
 import { Theme } from '../../../../theme/muiTheme';
 import { sxToArray } from '../../../../utils/mui/sxToArray';
+import { Body } from '../../../typography';
 import { PHOTO_CREDIT } from './FileDrop.constants';
 
 type Props = {
+  fileName?: string;
   caption?: string;
   credit?: string;
   sx?: SxProps<Theme>;
+  location?: GeocodeFeature | Feature;
 };
 
-export const ImageDropBottomBar = ({ caption, credit, sx = [] }: Props) => (
+export const FileDropBottomBar = ({
+  fileName,
+  caption,
+  credit,
+  sx = [],
+}: Props) => (
   <Body
     size="sm"
     mobileSize="sm"
@@ -28,20 +37,20 @@ export const ImageDropBottomBar = ({ caption, credit, sx = [] }: Props) => (
       ...sxToArray(sx),
     ]}
   >
-    {(caption || credit) && (
-      <Box sx={{ display: 'inline-block', mr: 0.5 }}>
-        {caption && (
-          <Box component="span" sx={{ mr: 1 }}>
+    {(caption || credit || fileName) && (
+      <div className='inline-block'>
+        {/* If there's a caption, we display it, else fallback to the file name */}
+        {caption ? (
+          <span className="mr-1">
             {caption}
-          </Box>
-        )}
+          </span>
+        ) : <span className="mr-1 font-light">{fileName}</span> ? (
+          <></>
+        ) : null}
         {credit && (
-          <Box
-            component="span"
-            sx={{ fontWeight: 300 }}
-          >{`${PHOTO_CREDIT}: ${credit}`}</Box>
+          <span className="font-light">{`${PHOTO_CREDIT}: ${credit}`}</span>
         )}
-      </Box>
+      </div>
     )}
   </Body>
 );

@@ -1,10 +1,12 @@
 import { Box, IconButton, useTheme } from '@mui/material';
+import { Feature } from 'geojson';
 
 import EditIcon from '../../../icons/EditIcon';
 import TrashIcon from '../../../icons/TrashIcon';
 import { Image } from '../../../image';
-import { ImageDropBottomBar } from './FileDrop.BottomBar';
-import { useImageDropStyles } from './FileDrop.styles';
+import { FileDropBottomBar } from './FileDrop.BottomBar';
+import { useFileDropStyles } from './FileDrop.styles';
+import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 
 type Props = {
   value: string;
@@ -12,6 +14,7 @@ type Props = {
   handleEdit: () => void;
   caption?: string;
   credit?: string;
+  location?: Feature | GeocodeFeature;
   classes?: {
     root?: string;
     main?: string;
@@ -19,15 +22,16 @@ type Props = {
   };
 };
 
-export const ImageDropImage = ({
+export const FileDropFile = ({
   value,
   caption,
   credit,
+  location,
   handleDelete,
   handleEdit,
   classes,
 }: Props) => {
-  const { classes: styles, cx } = useImageDropStyles();
+  const { classes: styles, cx } = useFileDropStyles();
   const theme = useTheme();
 
   return (
@@ -53,9 +57,10 @@ export const ImageDropImage = ({
         </IconButton>
       </Box>
       {(caption || credit) && (
-        <ImageDropBottomBar
+        <FileDropBottomBar
           caption={caption}
           credit={credit}
+          location={location}
           sx={{ position: 'absolute', bottom: 0 }}
         />
       )}

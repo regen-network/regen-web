@@ -79,6 +79,7 @@ export const PostForm = ({
         url: DEFAULT,
         name: DEFAULT,
         location: projectLocation,
+        locationType: 'none',
       });
     }
     setValue(`files.${fieldIndex}.url`, encodeURI(value));
@@ -138,7 +139,8 @@ export const PostForm = ({
         {...form.register('comment')}
       />
       {fields.map((field, index) => {
-        const url = files?.[index]?.['url'];
+        const file = files?.[index];
+        const url = file?.url;
 
         return (
           <FileDrop
@@ -153,6 +155,9 @@ export const PostForm = ({
             }
             onDelete={() => getHandleDeleteWithIndex(index)}
             value={url === DEFAULT ? '' : url}
+            caption={file?.description}
+            credit={file?.credit}
+            location={!file?.locationType && file?.locationType === 'none' ? undefined : file?.location}
             setValue={setFiles}
             className={cn('mb-40 sm:mb-50 mt-0', classes.galleryItem)}
             key={field.id}

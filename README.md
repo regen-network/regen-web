@@ -52,7 +52,7 @@ Note: `python` and `vips` are dependencies via `sharp`.
 ### Install dependencies
 
 ```sh
-bun run install
+bun install
 ```
 
 Prepare some artifacts needed to run in dev mode:

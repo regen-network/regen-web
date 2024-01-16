@@ -11,4 +11,4 @@ export const IMAGE_EXTENSIONS = [
   'gif',
 ];
 
-export const VIDEO_EXTENSIONS = ['mpeg', 'mp4', 'webm'] ;
+export const VIDEO_EXTENSIONS = ['mpeg', 'mp4', 'webm'];

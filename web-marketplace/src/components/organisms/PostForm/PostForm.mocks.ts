@@ -8,18 +8,18 @@ export const projectLocation = {
   place_name: 'New York, New York, United States',
   geometry: {
     type: 'Point',
-    coordinates: [-74.0059945, 40.7127492],
+    coordinates: [-74.01592482325455, 40.68983643942107],
   },
 } as GeocodeFeature;
 
-const fileLocation: Feature = {
+const fileLocation = {
   type: 'Feature',
+  place_name: 'New York, New York, United States',
   geometry: {
     type: 'Point',
-    coordinates: [-74.01592482325455, 40.68983643942107],
+    coordinates: [-74.0059945, 40.7127492],
   },
-  properties: [],
-};
+} as GeocodeFeature;
 
 export const initialValues: PostFormSchemaType = {
   title: 'Lorem ipsum',
@@ -29,18 +29,18 @@ export const initialValues: PostFormSchemaType = {
   files: [
     {
       url: 'https://d33wubrfki0l68.cloudfront.net/dd23708ebc4053551bb33e18b7174e73b6e1710b/dea24/static/images/wallpapers/shared-colors@2x.png',
-      name: 'ImageWithoutCaption.png',
-      location: projectLocation,
-      locationType: 'none',
-      mimeType: 'image/png',
-    },
-    {
-      url: 'https://d33wubrfki0l68.cloudfront.net/dd23708ebc4053551bb33e18b7174e73b6e1710b/dea24/static/images/wallpapers/shared-colors@2x.png',
-      name: 'ImageWithDescription.png',
-      description: 'Lorem ipsum.',
+      name: 'image.png',
+      description: 'Image with description and location.',
       credit: 'John Doe',
       location: fileLocation,
       locationType: 'file',
+      mimeType: 'image/png',
+    },
+    {
+      url: 'https://d33wubrfki0l68.cloudfront.net/49de349d12db851952c5556f3c637ca772745316/cfc56/static/images/wallpapers/bridge-02@2x.png',
+      name: 'image-without-description.png',
+      location: projectLocation,
+      locationType: 'none',
       mimeType: 'image/png',
     },
     {

@@ -169,7 +169,7 @@ export const PostForm = ({
             fileName={file?.name}
             mimeType={file?.mimeType}
             location={
-              !file?.locationType && file?.locationType === 'none'
+              file?.locationType === 'none'
                 ? undefined
                 : file?.location
             }

@@ -17,6 +17,11 @@ export const useFileDropStyles = makeStyles()((theme: Theme) => ({
     width: '100%',
     borderRadius: 5,
   },
+  previewVideo: {
+    '& video': {
+      borderRadius: 5,
+    },
+  },
   main: {
     height: '100%',
     width: '100%',

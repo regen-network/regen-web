@@ -10,15 +10,15 @@ export const postFormSchema = z.object({
   comment: z.string(),
   files: z
     .array(
+      // TODO use existing edit file form schema once #2257 merged
       z.object({
         url: z.string(),
         name: z.string(),
         description: z.string().optional(),
-        // TODO add once #2257 merged
-        // .max(FILE_MAX_DESCRIPTION_LENGTH),
         credit: z.string().optional(),
         locationType: z.custom<'none' | 'file' | 'custom'>(),
         location: z.custom<Feature | GeocodeFeature>(),
+        mimeType: z.string(),
       }),
     )
     .optional(),

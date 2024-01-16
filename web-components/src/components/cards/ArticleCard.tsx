@@ -32,7 +32,7 @@ export interface ArticleCardProps {
   play?: boolean;
 }
 
-const useStyles = makeStyles()((theme: Theme) => ({
+export const useArticleCardStyles = makeStyles()((theme: Theme) => ({
   play: {
     background: theme.palette.primary.main,
     borderRadius: '50%',
@@ -59,7 +59,7 @@ export default function ArticleCard({
   type,
   play = false,
 }: ArticleCardProps): JSX.Element {
-  const { classes: styles } = useStyles();
+  const { classes: styles } = useArticleCardStyles();
   const theme = useTheme();
   return (
     <MediaCard

@@ -29,7 +29,7 @@ export const FileDropBottomBar = ({
         color: 'primary.main',
         width: '100%',
         cursor: 'pointer',
-        background: 'rgba(0, 0, 0, 0.7);',
+        background: 'rgba(0, 0, 0, 0.7)',
         borderRadius: '0px 0px 4px 4px',
         py: 2.5,
         px: 5,

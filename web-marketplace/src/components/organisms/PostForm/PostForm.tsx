@@ -25,6 +25,7 @@ import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
 import { cropAspectMediaForm, DEFAULT } from '../MediaForm/MediaForm.constants';
 import { useMediaFormStyles } from '../MediaForm/useMediaFormStyles';
+import { useMetadataFormStyles } from '../MetadataForm/MetadataForm.styles';
 import {
   FILE_UPLOAD_BUTTON_LABEL,
   POST_MAX_TITLE_LENGTH,
@@ -53,6 +54,7 @@ export const PostForm = ({
     mode: 'onBlur',
   });
   const { classes } = useMediaFormStyles();
+  const { classes: textAreaClasses } = useMetadataFormStyles();
   const { errors } = form.formState;
   const { setValue } = form;
 
@@ -73,16 +75,22 @@ export const PostForm = ({
     control: form.control,
   });
 
-  const setFiles = (value: string, fieldIndex: number): void => {
+  const setFiles = (
+    value: string,
+    mimeType: string,
+    fieldIndex: number,
+  ): void => {
     if (files?.[fieldIndex]?.['url'] === DEFAULT) {
       append({
         url: DEFAULT,
         name: DEFAULT,
         location: projectLocation,
         locationType: 'none',
+        mimeType: '',
       });
     }
     setValue(`files.${fieldIndex}.url`, encodeURI(value));
+    setValue(`files.${fieldIndex}.mimeType`, encodeURI(mimeType));
   };
 
   const getHandleDeleteWithIndex = async (fieldIndex: number) => {
@@ -101,6 +109,7 @@ export const PostForm = ({
         name: DEFAULT,
         location: projectLocation,
         locationType: 'none',
+        mimeType: '',
       });
     }
   }, [append, fields, projectLocation]);
@@ -135,8 +144,7 @@ export const PostForm = ({
         rows={4}
         minRows={4}
         multiline
-        className="mb-40 sm:mb-50 mt-0"
-        inputProps={{ className: 'resize-y' }}
+        className={cn(textAreaClasses.field, 'mb-40 sm:mb-50 mt-0')}
         {...form.register('comment')}
       />
       {fields.map((field, index) => {
@@ -159,6 +167,7 @@ export const PostForm = ({
             caption={file?.description}
             credit={file?.credit}
             fileName={file?.name}
+            mimeType={file?.mimeType}
             location={
               !file?.locationType && file?.locationType === 'none'
                 ? undefined

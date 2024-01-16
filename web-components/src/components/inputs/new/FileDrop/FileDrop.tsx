@@ -29,6 +29,7 @@ export interface ImageDropProps extends Partial<FieldFormControlProps> {
   label?: string;
   name: string;
   fileName?: string;
+  mimeType?: string;
   description?: ReactNode;
   optional?: boolean | string;
   buttonText?: string;
@@ -39,7 +40,7 @@ export interface ImageDropProps extends Partial<FieldFormControlProps> {
   dropZoneOption?: DropzoneOptions;
   isCropSubmitDisabled?: boolean;
   renderModal: (_: FileDropRenderModalProps) => React.ReactNode;
-  setValue: (value: string, fieldIndex: number) => void;
+  setValue: (value: string, mimeType: string, fieldIndex: number) => void;
   onDelete?: (fileName: string) => Promise<void>;
   onUpload?: (imageFile: File) => Promise<string | undefined>;
   accept?: string;
@@ -66,6 +67,7 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
       credit,
       fileName,
       location,
+      mimeType,
       isSubmitting,
       fieldIndex = 0,
       isCropSubmitDisabled = false,
@@ -82,14 +84,14 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
   ) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [initialImage, setInitialImage] = useState('');
-    const [files, setFiles] = useState<Array<File>>([]);
+    const [selectedFiles, setSelectedFiles] = useState<Array<File>>([]);
     const { classes: styles, cx } = useFileDropStyles();
     const isFirstField = fieldIndex === 0;
 
     const handleDrop = (files: File[]): void => {
       if (files && files.length > 0) {
         const file = files[0];
-        setFiles(multi ? files : [file]);
+        setSelectedFiles(multi ? files : [file]);
         toBase64(file).then(base64String => {
           if (typeof base64String === 'string') {
             setIsModalOpen(true);
@@ -110,7 +112,7 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
       ) {
         const files = event.target.files;
         const file = files[0];
-        setFiles(multi ? Array.from(files) : [file]);
+        setSelectedFiles(multi ? Array.from(files) : [file]);
         toBase64(file).then(base64String => {
           if (typeof base64String === 'string') {
             setIsModalOpen(true);
@@ -122,8 +124,8 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
 
     const onModalClose = (): void => {
       setInitialImage('');
-      const remainingFiles = files.slice(1);
-      setFiles(remainingFiles);
+      const remainingFiles = selectedFiles.slice(1);
+      setSelectedFiles(remainingFiles);
       setIsModalOpen(false);
       if (multi && remainingFiles.length > 0) {
         toBase64(remainingFiles[0]).then(base64String => {
@@ -138,12 +140,17 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
     const onModalSubmit = async (
       croppedImage: HTMLImageElement,
     ): Promise<void> => {
-      const result = await getImageSrc(croppedImage, onUpload, files[0]?.name);
+      const currentFile = selectedFiles[0];
+      const result = await getImageSrc(
+        croppedImage,
+        onUpload,
+        currentFile.name,
+      );
 
       if (result) {
-        setValue(result, fieldIndex);
-        const remainingFiles = files.slice(1);
-        setFiles(remainingFiles);
+        setValue(result, currentFile.type, fieldIndex);
+        const remainingFiles = selectedFiles.slice(1);
+        setSelectedFiles(remainingFiles);
         setIsModalOpen(false);
         if (multi && remainingFiles.length > 0) {
           toBase64(remainingFiles[0]).then(base64String => {
@@ -158,14 +165,14 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
 
     const handleDelete = async (valueToDelete: string) => {
       setInitialImage('');
-      setFiles([]);
+      setSelectedFiles([]);
       if (onDelete) {
         await onDelete(valueToDelete ?? '');
       }
     };
 
     const handleEdit = () => setIsModalOpen(true);
-
+    console.log(selectedFiles);
     return (
       <>
         <FieldFormControl
@@ -185,6 +192,8 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
               name={fileName}
               credit={credit}
               location={location}
+              mimeType={mimeType}
+              accept={accept}
               classes={classes}
             />
           )}

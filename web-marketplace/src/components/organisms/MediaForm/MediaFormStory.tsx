@@ -126,6 +126,7 @@ export const MediaFormStory = ({
               dropZoneOption={{ maxFiles: 1 }}
               error={!!errors['regen:storyMedia']}
               helperText={errors['regen:storyMedia']?.message}
+              accept="image/*"
               renderModal={({
                 initialImage,
                 open,

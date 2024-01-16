@@ -3,6 +3,7 @@ import { DropzoneOptions } from 'react-dropzone';
 import { Crop } from 'react-image-crop';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Feature } from 'geojson';
+
 import { getImageSrc } from '../../../image-crop/canvas-utils';
 import FieldFormControl, {
   FieldFormControlProps,
@@ -27,6 +28,7 @@ export interface ImageDropProps extends Partial<FieldFormControlProps> {
   location?: GeocodeFeature | Feature;
   label?: string;
   name: string;
+  fileName?: string;
   description?: ReactNode;
   optional?: boolean | string;
   buttonText?: string;
@@ -40,6 +42,8 @@ export interface ImageDropProps extends Partial<FieldFormControlProps> {
   setValue: (value: string, fieldIndex: number) => void;
   onDelete?: (fileName: string) => Promise<void>;
   onUpload?: (imageFile: File) => Promise<string | undefined>;
+  accept?: string;
+  multi?: boolean;
 }
 
 /**
@@ -60,6 +64,7 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
       value,
       caption,
       credit,
+      fileName,
       location,
       isSubmitting,
       fieldIndex = 0,
@@ -69,20 +74,22 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
       setValue,
       onUpload,
       onDelete,
+      accept,
+      multi = false,
       ...fieldProps
     },
     ref,
   ) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [initialImage, setInitialImage] = useState('');
-    const [fileName, setFileName] = useState('');
+    const [files, setFiles] = useState<Array<File>>([]);
     const { classes: styles, cx } = useFileDropStyles();
     const isFirstField = fieldIndex === 0;
 
     const handleDrop = (files: File[]): void => {
       if (files && files.length > 0) {
         const file = files[0];
-        setFileName(file.name);
+        setFiles(multi ? files : [file]);
         toBase64(file).then(base64String => {
           if (typeof base64String === 'string') {
             setIsModalOpen(true);
@@ -101,8 +108,9 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
         event.target.files &&
         event.target.files.length > 0
       ) {
-        const file = event.target.files[0];
-        setFileName(file.name);
+        const files = event.target.files;
+        const file = files[0];
+        setFiles(multi ? Array.from(files) : [file]);
         toBase64(file).then(base64String => {
           if (typeof base64String === 'string') {
             setIsModalOpen(true);
@@ -114,24 +122,43 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
 
     const onModalClose = (): void => {
       setInitialImage('');
-      setFileName('');
+      const remainingFiles = files.slice(1);
+      setFiles(remainingFiles);
       setIsModalOpen(false);
+      if (multi && remainingFiles.length > 0) {
+        toBase64(remainingFiles[0]).then(base64String => {
+          if (typeof base64String === 'string') {
+            setIsModalOpen(true);
+            setInitialImage(base64String);
+          }
+        });
+      }
     };
 
     const onModalSubmit = async (
       croppedImage: HTMLImageElement,
     ): Promise<void> => {
-      const result = await getImageSrc(croppedImage, onUpload, fileName);
+      const result = await getImageSrc(croppedImage, onUpload, files[0]?.name);
 
       if (result) {
         setValue(result, fieldIndex);
+        const remainingFiles = files.slice(1);
+        setFiles(remainingFiles);
         setIsModalOpen(false);
+        if (multi && remainingFiles.length > 0) {
+          toBase64(remainingFiles[0]).then(base64String => {
+            if (typeof base64String === 'string') {
+              setIsModalOpen(true);
+              setInitialImage(base64String);
+            }
+          });
+        }
       }
     };
 
     const handleDelete = async (valueToDelete: string) => {
       setInitialImage('');
-      setFileName('');
+      setFiles([]);
       if (onDelete) {
         await onDelete(valueToDelete ?? '');
       }
@@ -155,6 +182,7 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
               handleEdit={handleEdit}
               value={value}
               caption={caption}
+              name={fileName}
               credit={credit}
               location={location}
               classes={classes}
@@ -168,6 +196,7 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
             hideDragText={hideDragText}
             name={name}
             value={value}
+            accept={accept}
             ref={ref}
           />
         </FieldFormControl>

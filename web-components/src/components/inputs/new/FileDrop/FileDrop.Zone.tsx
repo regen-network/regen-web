@@ -19,7 +19,7 @@ type Props = {
   };
   handleFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleDrop: (files: File[]) => void;
-  accept?: string | string[];
+  accept?: string;
 };
 
 export const FileDropZone = forwardRef<HTMLInputElement, Props>(
@@ -33,7 +33,7 @@ export const FileDropZone = forwardRef<HTMLInputElement, Props>(
       classes,
       handleFileChange,
       handleDrop,
-      accept = 'image/*',
+      accept,
       ...props
     },
     ref,
@@ -43,7 +43,7 @@ export const FileDropZone = forwardRef<HTMLInputElement, Props>(
     const isDesktop = useMediaQuery(theme.breakpoints.up('tablet'));
 
     const { getRootProps, getInputProps } = useDropzone({
-      accept: 'image/*',
+      accept,
       onDropAccepted: handleDrop,
       onDropRejected: () => {},
       noClick: true,
@@ -73,7 +73,7 @@ export const FileDropZone = forwardRef<HTMLInputElement, Props>(
           <input
             type="file"
             hidden
-            accept="image/*"
+            accept={accept}
             id={`btn-file-input-${name}`}
             {...getInputProps({
               defaultValue: '',

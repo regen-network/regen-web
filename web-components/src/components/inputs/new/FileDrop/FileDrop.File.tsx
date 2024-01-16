@@ -1,3 +1,4 @@
+import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Box, IconButton, useTheme } from '@mui/material';
 import { Feature } from 'geojson';
 
@@ -6,12 +7,12 @@ import TrashIcon from '../../../icons/TrashIcon';
 import { Image } from '../../../image';
 import { FileDropBottomBar } from './FileDrop.BottomBar';
 import { useFileDropStyles } from './FileDrop.styles';
-import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 
 type Props = {
   value: string;
   handleDelete: (value: string) => void;
   handleEdit: () => void;
+  name?: string;
   caption?: string;
   credit?: string;
   location?: Feature | GeocodeFeature;
@@ -25,6 +26,7 @@ type Props = {
 export const FileDropFile = ({
   value,
   caption,
+  name,
   credit,
   location,
   handleDelete,
@@ -58,6 +60,7 @@ export const FileDropFile = ({
       </Box>
       {(caption || credit) && (
         <FileDropBottomBar
+          name={name}
           caption={caption}
           credit={credit}
           location={location}

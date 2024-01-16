@@ -8,7 +8,7 @@ import { Body } from '../../../typography';
 import { PHOTO_CREDIT } from './FileDrop.constants';
 
 type Props = {
-  fileName?: string;
+  name?: string;
   caption?: string;
   credit?: string;
   sx?: SxProps<Theme>;
@@ -16,7 +16,7 @@ type Props = {
 };
 
 export const FileDropBottomBar = ({
-  fileName,
+  name,
   caption,
   credit,
   sx = [],
@@ -37,15 +37,13 @@ export const FileDropBottomBar = ({
       ...sxToArray(sx),
     ]}
   >
-    {(caption || credit || fileName) && (
-      <div className='inline-block'>
+    {(caption || credit || name) && (
+      <div className="inline-block">
         {/* If there's a caption, we display it, else fallback to the file name */}
         {caption ? (
-          <span className="mr-1">
-            {caption}
-          </span>
-        ) : <span className="mr-1 font-light">{fileName}</span> ? (
-          <></>
+          <span className="mr-1">{caption}</span>
+        ) : name ? (
+          <span className="mr-1 font-light">{name}</span>
         ) : null}
         {credit && (
           <span className="font-light">{`${PHOTO_CREDIT}: ${credit}`}</span>

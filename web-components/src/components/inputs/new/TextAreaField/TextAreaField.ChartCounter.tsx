@@ -1,6 +1,7 @@
 import { SxProps } from '@mui/system';
-import { Body } from '../../../typography';
+
 import { Theme } from '../../../../theme/muiTheme';
+import { Body } from '../../../typography';
 
 type Props = {
   value?: string;

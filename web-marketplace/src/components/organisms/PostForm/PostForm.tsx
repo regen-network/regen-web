@@ -100,6 +100,7 @@ export const PostForm = ({
         url: DEFAULT,
         name: DEFAULT,
         location: projectLocation,
+        locationType: 'none',
       });
     }
   }, [append, fields, projectLocation]);
@@ -157,7 +158,12 @@ export const PostForm = ({
             value={url === DEFAULT ? '' : url}
             caption={file?.description}
             credit={file?.credit}
-            location={!file?.locationType && file?.locationType === 'none' ? undefined : file?.location}
+            fileName={file?.name}
+            location={
+              !file?.locationType && file?.locationType === 'none'
+                ? undefined
+                : file?.location
+            }
             setValue={setFiles}
             className={cn('mb-40 sm:mb-50 mt-0', classes.galleryItem)}
             key={field.id}
@@ -166,6 +172,7 @@ export const PostForm = ({
             helperText={errors['files']?.message}
             renderModal={() => <div />}
             optional
+            multi
             {...imageDropCommonProps}
             {...form.register('files')}
           />

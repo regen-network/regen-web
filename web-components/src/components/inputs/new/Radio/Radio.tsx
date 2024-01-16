@@ -1,4 +1,4 @@
-import { ReactNode, forwardRef } from 'react';
+import { forwardRef, ReactNode } from 'react';
 import {
   Box,
   FormControlLabel,

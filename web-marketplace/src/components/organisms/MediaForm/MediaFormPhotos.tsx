@@ -150,6 +150,7 @@ export const MediaFormPhotos = ({
         dropZoneOption={{ maxFiles: 1 }}
         error={!!errors['regen:previewPhoto']}
         helperText={errors['regen:previewPhoto']?.message}
+        accept="image/*"
         renderModal={({
           initialImage,
           open,
@@ -211,6 +212,7 @@ export const MediaFormPhotos = ({
             dropZoneOption={{ maxFiles: 1 }}
             className={classes.galleryItem}
             defaultStyle={isFirst ? true : false}
+            accept="image/*"
             renderModal={({
               initialImage,
               open,

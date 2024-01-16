@@ -1,9 +1,9 @@
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
-import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react';
+import { Feature } from 'geojson';
 
 import { PostForm } from './PostForm';
-import { Feature } from 'geojson';
 
 export default {
   title: 'forms/PostForm',
@@ -38,20 +38,24 @@ Basic.args = {
   projectLocation,
   initialValues: {
     title: 'Lorem ipsum',
-    comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
-    privacyType:'public',
-    files: [{
-      url: 'https://d33wubrfki0l68.cloudfront.net/dd23708ebc4053551bb33e18b7174e73b6e1710b/dea24/static/images/wallpapers/shared-colors@2x.png',
-      name: 'ImageWithoutCaption.png',
-      location: projectLocation,
-      locationType: 'none',
-    }, {
-      url: 'https://d33wubrfki0l68.cloudfront.net/dd23708ebc4053551bb33e18b7174e73b6e1710b/dea24/static/images/wallpapers/shared-colors@2x.png',
-      name: 'ImageWithDescription.png',
-      description: 'Lorem ipsum.',
-      credit: 'John Doe',
-      location: fileLocation,
-      locationType: 'file',
-    }]
-  }
+    comment:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
+    privacyType: 'public',
+    files: [
+      {
+        url: 'https://d33wubrfki0l68.cloudfront.net/dd23708ebc4053551bb33e18b7174e73b6e1710b/dea24/static/images/wallpapers/shared-colors@2x.png',
+        name: 'ImageWithoutCaption.png',
+        location: projectLocation,
+        locationType: 'none',
+      },
+      {
+        url: 'https://d33wubrfki0l68.cloudfront.net/dd23708ebc4053551bb33e18b7174e73b6e1710b/dea24/static/images/wallpapers/shared-colors@2x.png',
+        name: 'ImageWithDescription.png',
+        description: 'Lorem ipsum.',
+        credit: 'John Doe',
+        location: fileLocation,
+        locationType: 'file',
+      },
+    ],
+  },
 };

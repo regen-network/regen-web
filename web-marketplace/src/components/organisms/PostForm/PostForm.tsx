@@ -174,7 +174,11 @@ export const PostForm = ({
                 : file?.location
             }
             setValue={setFiles}
-            className={cn('mb-40 sm:mb-50 mt-0', classes.galleryItem)}
+            className={cn(
+              index === fields.length - 1 ? 'mb-40 sm:mb-50' : 'mb-20 sm:mb-30',
+              ' mt-0',
+              classes.galleryItem,
+            )}
             key={field.id}
             fieldIndex={index}
             error={!!errors['files']}

@@ -10,3 +10,4 @@ export const toBase64 = (file: File): Promise<string | ArrayBuffer | null> => {
 
 export const isImage = (mimeType?: string) => mimeType?.includes('image/');
 export const isVideo = (mimeType?: string) => mimeType?.includes('video/');
+export const isAudio = (mimeType?: string) => mimeType?.includes('audio/');

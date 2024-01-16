@@ -172,7 +172,6 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
     };
 
     const handleEdit = () => setIsModalOpen(true);
-    console.log(selectedFiles);
     return (
       <>
         <FieldFormControl

@@ -84,7 +84,11 @@ export const MediaFormPhotos = ({
     });
     isDirtyRef.current = true;
   };
-  const setGalleryPhotos = (value: string, fieldIndex: number): void => {
+  const setGalleryPhotos = (
+    value: string,
+    _: string,
+    fieldIndex: number,
+  ): void => {
     if (galleryPhotos?.[fieldIndex]?.['schema:url'] === DEFAULT) {
       append({
         'schema:url': DEFAULT,

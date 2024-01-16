@@ -5,13 +5,17 @@ import { Feature } from 'geojson';
 
 import { cn } from '../../../../utils/styles/cn';
 import { useArticleCardStyles } from '../../../cards/ArticleCard';
+import { AudioFileIcon } from '../../../icons/AudioFileIcon';
 import EditIcon from '../../../icons/EditIcon';
+import { OtherDocumentsIcon } from '../../../icons/OtherDocumentsIcon';
+import { PdfFileIcon } from '../../../icons/PdfFileIcon';
 import PlayIcon from '../../../icons/PlayIcon';
+import { SpreadsheetFileIcon } from '../../../icons/SpreadsheetFileIcon';
 import TrashIcon from '../../../icons/TrashIcon';
 import { Image } from '../../../image';
 import { FileDropBottomBar } from './FileDrop.BottomBar';
 import { useFileDropStyles } from './FileDrop.styles';
-import { isImage, isVideo } from './FileDrop.utils';
+import { isAudio, isImage, isVideo } from './FileDrop.utils';
 
 type Props = {
   value: string;
@@ -44,29 +48,15 @@ export const FileDropFile = ({
 }: Props) => {
   const { classes: styles, cx } = useFileDropStyles();
   const { classes: articleCardStyles } = useArticleCardStyles();
-
   const theme = useTheme();
 
   return (
     <div className={cx(styles.preview, classes?.main)}>
       {/* If FileDrop only accepts images, we can default to Image,
       even if mimeType is not provided */}
-      {(accept === 'image/*' || isImage(mimeType)) && (
+      {accept === 'image/*' || isImage(mimeType) ? (
         <Image className={styles.previewImage} src={value} backgroundImage />
-      )}
-      {isVideo(mimeType) && (
-        // <CardMedia
-        //   sx={{ width: '100%', borderRadius: 5, height: [210, 318] }}
-        //   // note: the following props are passed to ReactPlayer
-        //   component={ReactPlayer}
-        //   url={value}
-        //   // onReady={() => setVideoLoaded(true)}
-        //   height={isMobile ? 210 : 318}
-        //   fallback={<div>Loading video player...</div>}
-        //   width="100%"
-        // />
-        // <div className="absolute top-0 left-0 rounded-[5px]">
-
+      ) : isVideo(mimeType) ? (
         <>
           <ReactPlayer
             url={value}
@@ -76,11 +66,7 @@ export const FileDropFile = ({
               styles.previewVideo,
               'absolute top-0 left-0 bg-grey-700 rounded-[5px] overflow-hidden',
             )}
-            // className="rounded-[5px] overflow-hidden"
           />
-          {/* <div className="absolute w-[22px] h-[22px] rounded-[50%] bg-grey-0">
-            <PlayIcon width="10.85px" height="10.85px" />
-          </div> */}
           <div className={articleCardStyles.play}>
             <PlayIcon
               width={theme.spacing(8.75)}
@@ -88,7 +74,20 @@ export const FileDropFile = ({
             />
           </div>
         </>
+      ) : (
+        <div className="bg-grey-300 text-grey-400 h-[100%] flex justify-center items-center">
+          {isAudio(mimeType) ? (
+            <AudioFileIcon />
+          ) : mimeType === 'application/pdf' ? (
+            <PdfFileIcon />
+          ) : mimeType === 'text/csv' ? (
+            <SpreadsheetFileIcon />
+          ) : (
+            <OtherDocumentsIcon />
+          )}
+        </div>
       )}
+
       <Box className={styles.buttons}>
         <IconButton
           classes={{ root: styles.button }}

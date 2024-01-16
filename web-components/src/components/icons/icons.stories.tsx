@@ -8,6 +8,7 @@ import ArrowLeftIcon from './ArrowLeft';
 import ArrowRightIcon from './ArrowRight';
 import ArrowSkipLeftIcon from './ArrowSkipLeft';
 import ArrowSkipRightIcon from './ArrowSkipRight';
+import { AudioFileIcon } from './AudioFileIcon';
 import AvailableCreditsIcon from './AvailableCreditsIcon';
 import AvatarIcon from './AvatarIcon';
 import AvatarOutlineIcon from './AvatarOutlineIcon';
@@ -59,7 +60,9 @@ import NoEcocreditsIcon from './NoEcocreditsIcon';
 import { NoProjectIcon } from './NoProjectIcon';
 import NoRetirementCertificatesIcon from './NoRetirementCertificatesIcon';
 import OrganizationIcon from './OrganizationIcon';
+import { OtherDocumentsIcon } from './OtherDocumentsIcon';
 import OutlinedCheckIcon from './OutlinedCheckIcon';
+import { PdfFileIcon } from './PdfFileIcon';
 import PendingIcon from './PendingIcon';
 import PhoneIcon from './PhoneIcon';
 import PinIcon from './PinIcon';
@@ -106,6 +109,7 @@ import WebsiteLinkIcon from './social/WebsiteLinkIcon';
 import YoutubeIcon from './social/YoutubeIcon';
 import SoilSampleIcon from './SoilSampleIcon';
 import { Spinner } from './Spinner';
+import { SpreadsheetFileIcon } from './SpreadsheetFileIcon';
 import SuccessIcon from './SuccessIcon';
 import TakeFromBasketIcon from './TakeFromBasketIcon';
 import TotalCreditsIcon from './TotalCreditsIcon';
@@ -168,6 +172,7 @@ export const allIcons = (): JSX.Element => (
       icon={<ArrowSkipRightIcon sx={{ color: 'secondary.main' }} />}
       label="ArrowSkipRightIcon"
     />
+    <LabeledIcon icon={<AudioFileIcon />} label="AudioFileIcon" />
     <LabeledIcon icon={<AxlUsdcIcon />} label="AxlUsdcIcon" />
     <LabeledIcon icon={<AccountabilityIcon />} label="AccountabilityIcon" />
     <LabeledIcon
@@ -272,7 +277,10 @@ export const allIcons = (): JSX.Element => (
       label="NoRetirementCertificatesIcon"
     />
     <LabeledIcon icon={<OrganizationIcon />} label="OrganizationIcon" />
+
+    <LabeledIcon icon={<OtherDocumentsIcon />} label="OtherDocumentsIcon" />
     <LabeledIcon icon={<OutlinedCheckIcon />} label="OutlinedCheckIcon" />
+    <LabeledIcon icon={<PdfFileIcon />} label="PdfFileIcon" />
     <LabeledIcon icon={<PendingIcon />} label="PendingIcon" />
     <LabeledIcon
       icon={<PhoneIcon sx={{ color: 'secondary.main' }} />}
@@ -325,6 +333,7 @@ export const allIcons = (): JSX.Element => (
     />
     <LabeledIcon icon={<SoilSampleIcon />} label="SoilSampleIcon" />
     <LabeledIcon icon={<Spinner />} label="Spinner" />
+    <LabeledIcon icon={<SpreadsheetFileIcon />} label="SpreadsheetFileIcon" />
     <LabeledIcon icon={<SuccessIcon />} label="SuccessIcon" />
     <LabeledIcon icon={<TakeFromBasketIcon />} label="TakeFromBasketIcon" />
     <LabeledIcon icon={<TelegramIcon color="blue" />} label="TelegramIcon" />

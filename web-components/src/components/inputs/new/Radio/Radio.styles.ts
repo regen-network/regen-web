@@ -52,6 +52,7 @@ export const useRadioStyles = makeStyles<RadioStylesProps>()(
       },
     },
     radioLabel: {
+      alignItems: 'flex-start',
       '& .MuiFormControlLabel-label': {
         fontWeight: isSelected ? 700 : 400,
         marginLeft: pxToRem(15),

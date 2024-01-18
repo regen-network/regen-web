@@ -217,7 +217,7 @@ export const PostForm = ({
               label={
                 <div className={cn('flex items-center')}>
                   <LocationIcon className="mr-15" />
-                  {'Make the files and location data private'}
+                  {'Make the location data private'}
                 </div>
               }
               description={
@@ -281,7 +281,7 @@ export const PostForm = ({
                   </b>
                   <br />
                   <i>
-                    The post and the files still can be shared privately via
+                    The post and files still can be shared privately via
                     secret link.
                   </i>
                 </>

@@ -25,8 +25,8 @@ export interface RadioProps extends RadioPropsMui {
   helperText?: string;
   children?: React.ReactNode;
   sx?: SxProps<Theme>;
-  description?: string | ReactNode;
-  tooltip?: string;
+  description?: ReactNode;
+  tooltip?: ReactNode;
 }
 
 export const Radio = forwardRef<HTMLButtonElement, RadioProps>(

@@ -169,9 +169,7 @@ export const PostForm = ({
             fileName={file?.name}
             mimeType={file?.mimeType}
             location={
-              file?.locationType === 'none'
-                ? undefined
-                : file?.location
+              file?.locationType === 'none' ? undefined : file?.location
             }
             setValue={setFiles}
             className={cn(
@@ -209,6 +207,7 @@ export const PostForm = ({
                   {'Make the entire post public'}
                 </span>
               }
+              tooltip={<b>This post and all of its files will be visible.</b>}
               value={'public'}
               selectedValue={privacy}
               sx={{ mb: 2.5 }}
@@ -216,13 +215,30 @@ export const PostForm = ({
             />
             <Radio
               label={
-                <span className={cn('flex items-center')}>
-                  <LockIcon className="mr-15" />
-                  {'Make the entire post private'}
-                </span>
+                <div className={cn('flex items-center')}>
+                  <LocationIcon className="mr-15" />
+                  {'Make the files and location data private'}
+                </div>
               }
-              value={'private'}
+              description={
+                <span className="ml-[39px]">Post and files are public</span>
+              }
+              tooltip={
+                <>
+                  <b>
+                    Only the locations of the files will be hidden from public
+                    view.
+                  </b>
+                  <br />
+                  <i>
+                    File locations can still be shared privately via a secret
+                    link.
+                  </i>
+                </>
+              }
+              value={'private_locations'}
               selectedValue={privacy}
+              disabled={noFiles}
               sx={{ mb: 2.5 }}
               {...form.register('privacyType')}
             />
@@ -230,8 +246,19 @@ export const PostForm = ({
               label={
                 <span className={cn('flex items-center')}>
                   <PrivateFile className="mr-15" />
-                  {'Make the files private'}
+                  {'Make the files and location data private'}
                 </span>
+              }
+              description={<span className="ml-[39px]">Post is public</span>}
+              tooltip={
+                <>
+                  <b>
+                    All uploaded files and their location data will be hidden
+                    from public view.
+                  </b>
+                  <br />
+                  <i>Files can still be shared privately via secret link.</i>
+                </>
               }
               value={'private_files'}
               selectedValue={privacy}
@@ -242,13 +269,25 @@ export const PostForm = ({
             <Radio
               label={
                 <span className={cn('flex items-center')}>
-                  <LocationIcon className="mr-15" />
-                  {'Make the location data private'}
+                  <LockIcon className="mr-15" />
+                  {'Make the entire post private'}
                 </span>
               }
-              value={'private_locations'}
+              tooltip={
+                <>
+                  <b>
+                    The post and all of its contents will be hidden from public
+                    view.
+                  </b>
+                  <br />
+                  <i>
+                    The post and the files still can be shared privately via
+                    secret link.
+                  </i>
+                </>
+              }
+              value={'private'}
               selectedValue={privacy}
-              disabled={noFiles}
               {...form.register('privacyType')}
             />
           </>

@@ -8,9 +8,10 @@ import {
   SxProps,
 } from '@mui/material';
 
-import { Body } from '../../../../components/typography';
 import { Theme } from '../../../../theme/muiTheme';
 import { sxToArray } from '../../../../utils/mui/sxToArray';
+import QuestionMarkTooltip from '../../../tooltip/QuestionMarkTooltip';
+import { Body } from '../../../typography';
 import { RADIO_DEFAULT_OPTIONAL } from './Radio.constants';
 import { useRadioStyles } from './Radio.styles';
 import { RadiotVariant } from './Radio.types';
@@ -24,6 +25,8 @@ export interface RadioProps extends RadioPropsMui {
   helperText?: string;
   children?: React.ReactNode;
   sx?: SxProps<Theme>;
+  description?: string | ReactNode;
+  tooltip?: string;
 }
 
 export const Radio = forwardRef<HTMLButtonElement, RadioProps>(
@@ -37,6 +40,9 @@ export const Radio = forwardRef<HTMLButtonElement, RadioProps>(
       helperText,
       children,
       sx = [],
+      description,
+      tooltip,
+      disabled,
       ...props
     },
     ref,
@@ -55,10 +61,24 @@ export const Radio = forwardRef<HTMLButtonElement, RadioProps>(
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <FormControlLabel
             value={value}
-            label={label}
+            label={
+              <>
+                {label}
+                {description && (
+                  <Body
+                    component="span"
+                    className={disabled ? 'text-grey-400' : 'text-grey-700'}
+                    size="sm"
+                  >
+                    {description}
+                  </Body>
+                )}
+              </>
+            }
             control={
               <MuiRadio
                 {...props}
+                disabled={disabled}
                 checked={isSelected}
                 checkedIcon={
                   <span
@@ -74,6 +94,19 @@ export const Radio = forwardRef<HTMLButtonElement, RadioProps>(
             className={classes.radioLabel}
           />
           {optional && <Body size="md">{optionalText}</Body>}
+          {tooltip && (
+            <QuestionMarkTooltip
+              color={disabled ? 'grey.100' : undefined}
+              sx={{
+                alignSelf: 'flex-start',
+                marginLeft: 'auto',
+                height: 24,
+                width: 24,
+              }}
+              size="lg"
+              title={tooltip}
+            />
+          )}
         </Box>
         {helperText && (
           <FormHelperText sx={{ ml: 8.75 }}>{helperText}</FormHelperText>

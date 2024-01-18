@@ -2,15 +2,23 @@ import { Box, SxProps, TooltipProps } from '@mui/material';
 
 import { Theme } from '../../theme/muiTheme';
 import { sxToArray } from '../../utils/mui/sxToArray';
-import { Label } from '../typography/Label';
+import { Body } from '../typography/Body';
+import { TextSize } from '../typography/sizing';
 import InfoTooltip from './InfoTooltip';
 
 interface Props {
   title: TooltipProps['title'];
   sx?: SxProps<Theme>;
+  color?: string;
+  size?: TextSize;
 }
 
-export default function QuestionMarkTooltip({ title, sx }: Props): JSX.Element {
+export default function QuestionMarkTooltip({
+  title,
+  sx,
+  color = 'secondary.main',
+  size = 'sm',
+}: Props): JSX.Element {
   return (
     <InfoTooltip arrow placement="top" title={title}>
       <Box
@@ -20,24 +28,24 @@ export default function QuestionMarkTooltip({ title, sx }: Props): JSX.Element {
             width: 17,
             height: 17,
             border: `1px solid`,
-            borderColor: 'secondary.main',
+            borderColor: color,
           },
           ...sxToArray(sx),
         ]}
       >
-        <Label
+        <Body
           sx={{
             cursor: 'default',
             lineHeight: [1],
             textAlign: 'center',
-            color: 'secondary.main',
+            color,
             fontWeight: 'normal',
           }}
-          size="sm"
-          mobileSize="sm"
+          size={size}
+          mobileSize={size}
         >
           ?
-        </Label>
+        </Body>
       </Box>
     </InfoTooltip>
   );

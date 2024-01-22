@@ -28,6 +28,7 @@ import {
   EditFileFormSchemaType,
 } from './EditFileForm.schema';
 import {} from './EditFileForm.types';
+import { isImage } from 'web-components/lib/components/inputs/new/FileDrop/FileDrop.utils';
 
 export interface Props {
   initialValues: EditFileFormSchemaType;
@@ -38,7 +39,6 @@ export interface Props {
   mapboxToken?: string;
   geocodingPlaceName?: string;
   setDebouncedViewState: UseStateSetter<GeocodeFeature | Feature>;
-  imgSrc?: string;
 }
 
 export const EditFileForm = ({
@@ -50,12 +50,11 @@ export const EditFileForm = ({
   mapboxToken,
   geocodingPlaceName,
   setDebouncedViewState,
-  imgSrc,
 }: Props): JSX.Element => {
   const form = useZodForm({
     schema: editFileFormSchema,
     defaultValues: {
-      ...initialValues,
+      ...initialValues, 
       location: initialValues.location || fileLocation || projectLocation,
     },
     mode: 'onBlur',
@@ -63,6 +62,8 @@ export const EditFileForm = ({
   const { errors } = form.formState;
   const { setValue } = form;
 
+  const url = useWatch({ control: form.control, name: 'url' });
+  const mimeType = useWatch({ control: form.control, name: 'mimeType' });
   const description = useWatch({ control: form.control, name: 'description' });
   const location = useWatch({ control: form.control, name: 'location' });
   const locationType = useWatch({
@@ -98,12 +99,12 @@ export const EditFileForm = ({
       >
         Edit your file
       </Title>
-      {imgSrc && (
+      {url && isImage(mimeType) && (
         <img
           className="block m-auto pb-40 sm:pb-50"
           width="180px"
           height="100%"
-          src={imgSrc}
+          src={url}
           alt="preview"
         />
       )}

@@ -36,13 +36,14 @@ const projectLocation = {
 
 Basic.args = {
   initialValues: {
+    url: '/andover.jpg',
     name: 'image.jpg',
     locationType: 'file',
     location: fileLocation,
+    mimeType: 'image/jpeg',
   },
   fileLocation,
   projectLocation,
   mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
-  imgSrc: '/andover.jpg',
   setDebouncedViewState: action('setDebouncedViewState'),
 };

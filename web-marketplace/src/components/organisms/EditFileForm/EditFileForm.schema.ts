@@ -11,6 +11,7 @@ export const editFileFormSchema = z.object({
   credit: z.string().optional(),
   locationType: z.custom<EditFileFormLocationType>(),
   location: z.custom<Feature | GeocodeFeature>(),
+  mimeType: z.string(),
 });
 
 export type EditFileFormSchemaType = z.infer<typeof editFileFormSchema>;

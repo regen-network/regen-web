@@ -1,6 +1,6 @@
 import { Box, Link } from '@mui/material';
 
-import { Body, Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/src/components/typography';
 
 import { IconLabelProps } from './ConnectSection.types';
 

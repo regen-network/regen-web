@@ -8,7 +8,7 @@ import {
   requirementAgreement,
   validateAmount,
   validateMemoLength,
-} from 'web-components/lib/components/inputs/validation';
+} from 'web-components/src/components/inputs/validation';
 
 import { CreditSendFormSchemaType } from './CreditSendForm.schema';
 

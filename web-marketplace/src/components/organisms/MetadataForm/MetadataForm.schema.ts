@@ -4,7 +4,7 @@ import {
   invalidJSON,
   isValidJSON,
   requiredMessage,
-} from 'web-components/lib/components/inputs/validation';
+} from 'web-components/src/components/inputs/validation';
 
 import { ShaclGraphByUriQuery } from 'generated/graphql';
 import { getCompactedPath, getProjectBaseData, validate } from 'lib/rdf';

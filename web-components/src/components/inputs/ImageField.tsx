@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Avatar, Box } from '@mui/material';
-import { DefaultTheme as Theme } from '@mui/styles';
+import { Theme } from '@mui/material/styles';
 import { FieldProps } from 'formik';
 import { makeStyles } from 'tss-react/mui';
 

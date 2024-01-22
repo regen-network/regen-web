@@ -1,4 +1,4 @@
-import { ProfileVariant } from 'web-components/lib/components/organisms/ProfileHeader/ProfileHeader.types';
+import { ProfileVariant } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader.types';
 
 import { AccountType } from 'generated/graphql';
 

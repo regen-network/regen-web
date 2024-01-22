@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
 import { makeStyles } from 'tss-react/mui';
 
-import Card from 'web-components/lib/components/cards/Card';
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
-import Modal from 'web-components/lib/components/modal';
-import { Body, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import Card from 'web-components/src/components/cards/Card';
+import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
+import ControlledTextField from 'web-components/src/components/inputs/ControlledTextField';
+import Modal from 'web-components/src/components/modal';
+import { Body, Title } from 'web-components/src/components/typography';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { getCompactedPath, getProjectBaseData, validate } from 'lib/rdf';
 

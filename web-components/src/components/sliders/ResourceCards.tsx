@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { DefaultTheme as Theme } from '@mui/styles';
+import { Theme } from '@mui/material/styles';
 import { makeStyles } from 'tss-react/mui';
 
 import ResourcesCard, { ResourcesCardProps } from '../cards/ResourcesCard';

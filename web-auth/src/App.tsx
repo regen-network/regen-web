@@ -5,9 +5,9 @@ import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { makeStyles } from 'tss-react/mui';
 import LoginForm, {
   Values,
-} from 'web-components/lib/components/form/LoginForm';
-import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+} from 'web-components/src/components/form/LoginForm';
+import OnBoardingSection from 'web-components/src/components/section/OnBoardingSection';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 const searchParams = new URLSearchParams(window.location.search);
 const state = searchParams.get('state') || undefined;

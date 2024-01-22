@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useSetAtom } from 'jotai';
 
-import { DEFAULT_DURATION } from 'web-components/lib/components/banner/ErrorBanner';
+import { DEFAULT_DURATION } from 'web-components/src/components/banner/ErrorBanner';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';

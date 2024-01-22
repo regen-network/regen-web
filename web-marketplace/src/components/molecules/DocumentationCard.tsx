@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box } from '@mui/material';
 
-import { ImageLeftCard } from 'web-components/lib/components/cards/ImageLeftCard';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
+import { ImageLeftCard } from 'web-components/src/components/cards/ImageLeftCard';
+import { Body, Label, Title } from 'web-components/src/components/typography';
 
 const imageStorageBaseUrl = import.meta.env.VITE_IMAGE_STORAGE_BASE_URL;
 const apiServerUrl = import.meta.env.VITE_API_URI;

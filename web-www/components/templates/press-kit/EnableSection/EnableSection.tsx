@@ -1,11 +1,11 @@
 import Grid from '@mui/material/Grid';
 import Image from 'next/image';
 
-import { Body, Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/src/components/typography';
 
 import { useEnableStyles } from './EnableSection.styles';
 
-import { BlockContent } from '@/../web-components/lib/components/block-content';
+import { BlockContent } from 'web-components/src/components/block-content';
 import { PressKitEnableSectionFieldsFragment } from '@/generated/sanity-graphql';
 import pressKitTopoBg from '@/public/images/press-kit/image-topo-bg.jpg';
 

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { FormControl, FormHelperText, SxProps } from '@mui/material';
-import { DefaultTheme as Theme } from '@mui/styles';
+import { Theme } from '@mui/material/styles';
 
 import FormLabel from '../FormLabel/FormLabel';
 import { useFieldFormControlStyles } from './FieldFormControl.styles';

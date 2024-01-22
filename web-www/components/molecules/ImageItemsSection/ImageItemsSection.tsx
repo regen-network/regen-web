@@ -1,10 +1,10 @@
 import React from 'react';
 import { SxProps } from '@mui/material';
 
-import { ImageItemProps } from 'web-components/lib/components/image-item';
-import Section from 'web-components/lib/components/section';
-import ImageItems from 'web-components/lib/components/sliders/ImageItems';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { ImageItemProps } from 'web-components/src/components/image-item';
+import Section from 'web-components/src/components/section';
+import ImageItems from 'web-components/src/components/sliders/ImageItems';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { ImageItemsSection as ImageItemsSectionProps } from '../../../generated/sanity-graphql';
 import { useImageItemsStyles } from './ImageItemsSection.styles';

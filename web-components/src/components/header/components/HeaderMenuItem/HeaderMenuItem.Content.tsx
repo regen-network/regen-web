@@ -1,4 +1,4 @@
-import { useTheme } from '@mui/styles';
+import { useTheme } from '@mui/material';
 
 import { HeaderDropdown } from '../HeaderDropdown/HeaderDropdown';
 import { NavLinkProps } from '../NavLink';

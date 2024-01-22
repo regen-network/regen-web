@@ -3,10 +3,10 @@ import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 import { tableStyles } from 'styles/table';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import InfoLabel from 'web-components/lib/components/info-label';
-import { formatDate, formatNumber } from 'web-components/lib/utils/format';
-import { truncate } from 'web-components/lib/utils/truncate';
+import { BlockContent } from 'web-components/src/components/block-content';
+import InfoLabel from 'web-components/src/components/info-label';
+import { formatDate, formatNumber } from 'web-components/src/utils/format';
+import { truncate } from 'web-components/src/utils/truncate';
 
 import DenomIcon from 'components/molecules/DenomIcon';
 import DenomLabel from 'components/molecules/DenomLabel';

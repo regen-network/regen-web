@@ -4,18 +4,18 @@ import dayjs from 'dayjs';
 import { loaderStyles } from 'styles/loader';
 import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import { Flex } from 'web-components/lib/components/box';
-import EmptyCartIcon from 'web-components/lib/components/icons/EmptyCartIcon';
-import { InfoLabelVariant } from 'web-components/lib/components/info-label/InfoLabel.types';
-import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
-import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
+import { BlockContent } from 'web-components/src/components/block-content';
+import { Flex } from 'web-components/src/components/box';
+import EmptyCartIcon from 'web-components/src/components/icons/EmptyCartIcon';
+import { InfoLabelVariant } from 'web-components/src/components/info-label/InfoLabel.types';
+import { ActionsTable } from 'web-components/src/components/table/ActionsTable';
+import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';
 import {
   DATE_FORMAT_SECONDARY,
   formatDate,
   formatNumber,
-} from 'web-components/lib/utils/format';
-import { truncateHash } from 'web-components/lib/utils/truncate';
+} from 'web-components/src/utils/format';
+import { truncateHash } from 'web-components/src/utils/truncate';
 
 import { getHashUrl } from 'lib/block-explorer';
 

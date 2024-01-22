@@ -1,6 +1,6 @@
 import { makeStyles } from 'tss-react/mui';
 
-import type { Theme } from 'web-components/lib/theme/muiTheme';
+import type { Theme } from 'web-components/src/theme/muiTheme';
 
 export const useCreditClassDetailsSimpleStyles = makeStyles()(
   (theme: Theme) => ({

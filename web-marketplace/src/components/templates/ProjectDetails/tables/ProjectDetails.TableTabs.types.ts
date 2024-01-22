@@ -1,7 +1,7 @@
 import { SxProps } from '@mui/material';
 
-import { SortCallbacksType } from 'web-components/lib/components/table/ActionsTable';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { SortCallbacksType } from 'web-components/src/components/table/ActionsTable';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { Document } from 'generated/graphql';
 import {

@@ -1,8 +1,8 @@
 import Image from 'next/image';
 
-import EcologicalCreditCard from 'web-components/lib/components/molecules/EcologicalCreditCard';
-import Section from 'web-components/lib/components/organisms/Section';
-import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
+import EcologicalCreditCard from 'web-components/src/components/molecules/EcologicalCreditCard';
+import Section from 'web-components/src/components/organisms/Section';
+import ResponsiveSlider from 'web-components/src/components/sliders/ResponsiveSlider';
 
 import { useEcologicalCreditCardsStyles } from './Home.ecologicalCreditCards.styles';
 

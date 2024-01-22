@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import EmptyState from 'web-components/lib/components/empty-state';
-import NoEcocreditsIcon from 'web-components/lib/components/icons/NoEcocreditsIcon';
-import PlusIcon from 'web-components/lib/components/icons/PlusIcon';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import EmptyState from 'web-components/src/components/empty-state';
+import NoEcocreditsIcon from 'web-components/src/components/icons/NoEcocreditsIcon';
+import PlusIcon from 'web-components/src/components/icons/PlusIcon';
 
 import { useWallet } from 'lib/wallet/wallet';
 

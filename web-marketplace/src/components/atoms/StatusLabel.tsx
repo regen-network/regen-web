@@ -1,8 +1,8 @@
-import ErrorIcon from 'web-components/lib/components/icons/ErrorIcon';
-import PendingIcon from 'web-components/lib/components/icons/PendingIcon';
-import SuccessIcon from 'web-components/lib/components/icons/SuccessIcon';
-import InfoLabel from 'web-components/lib/components/info-label';
-import { InfoLabelVariant } from 'web-components/lib/components/info-label/InfoLabel.types';
+import ErrorIcon from 'web-components/src/components/icons/ErrorIcon';
+import PendingIcon from 'web-components/src/components/icons/PendingIcon';
+import SuccessIcon from 'web-components/src/components/icons/SuccessIcon';
+import InfoLabel from 'web-components/src/components/info-label';
+import { InfoLabelVariant } from 'web-components/src/components/info-label/InfoLabel.types';
 
 const iconStyle = { height: '16px', verticalAlign: 'middle', mb: '2px' };
 

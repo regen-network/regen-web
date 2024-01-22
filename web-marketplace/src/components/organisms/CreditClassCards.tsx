@@ -8,11 +8,11 @@ import { makeStyles } from 'tss-react/mui';
 import {
   BlockContent,
   blocksToText,
-} from 'web-components/lib/components/block-content';
-import { ImageActionCard } from 'web-components/lib/components/cards/ImageActionCard';
-import { ProgramImageChildren } from 'web-components/lib/components/cards/ProjectCard/ProjectCard.ImageChildren';
-import { Account } from 'web-components/lib/components/user/UserInfo';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+} from 'web-components/src/components/block-content';
+import { ImageActionCard } from 'web-components/src/components/cards/ImageActionCard';
+import { ProgramImageChildren } from 'web-components/src/components/cards/ProjectCard/ProjectCard.ImageChildren';
+import { Account } from 'web-components/src/components/user/UserInfo';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { AllCreditClassQuery } from '../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../lib/imgSrc';

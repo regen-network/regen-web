@@ -26,6 +26,7 @@ const nextConfig = {
       },
     ],
   },
+  transpilePackages: ['web-components'],
   async redirects() {
     return [
       {

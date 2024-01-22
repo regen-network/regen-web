@@ -3,7 +3,7 @@ import { ApolloQueryResult } from '@apollo/client';
 import { Box } from '@mui/material';
 import Image from 'next/image';
 
-import CarouselSection from 'web-components/lib/components/organisms/CarouselSection';
+import CarouselSection from 'web-components/src/components/organisms/CarouselSection';
 
 import { PartnersSectionQuery } from '@/generated/sanity-graphql';
 

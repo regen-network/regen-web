@@ -1,7 +1,7 @@
 import React, { useCallback, useRef } from 'react';
 import Slider from 'react-slick';
 import Grid from '@mui/material/Grid';
-import { DefaultTheme as Theme } from '@mui/styles';
+import { Theme } from '@mui/material/styles';
 import { makeStyles } from 'tss-react/mui';
 
 import PrevNextButton from '../buttons/PrevNextButton';

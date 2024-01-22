@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { makeStyles } from 'tss-react/mui';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import topoBackground from '../../assets/background.jpg';
 import {

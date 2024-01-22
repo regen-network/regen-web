@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Fade from '@mui/material/Fade';
-import { DefaultTheme as Theme } from '@mui/styles';
+import { Theme } from '@mui/material/styles';
 import ReactHtmlParser from 'html-react-parser';
 import { makeStyles } from 'tss-react/mui';
 

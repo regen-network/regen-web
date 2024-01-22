@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { makeStyles } from 'tss-react/mui';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import Modal from 'web-components/lib/components/modal';
-import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { BlockContent } from 'web-components/src/components/block-content';
+import Modal from 'web-components/src/components/modal';
+import OnBoardingSection from 'web-components/src/components/section/OnBoardingSection';
+import { Body, Label, Title } from 'web-components/src/components/typography';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import {
   Maybe,

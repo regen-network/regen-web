@@ -3,8 +3,8 @@ import { useFormState } from 'react-hook-form';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import { deleteImage } from 'web-components/lib/utils/s3';
+import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
+import { deleteImage } from 'web-components/src/utils/s3';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { apiServerUrl } from 'lib/env';

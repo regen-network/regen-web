@@ -3,8 +3,8 @@ import { SxProps } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
 import { makeStyles } from 'tss-react/mui';
 
-import Section from 'web-components/lib/components/section';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import Section from 'web-components/src/components/section';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 type Props = {
   img?: string;

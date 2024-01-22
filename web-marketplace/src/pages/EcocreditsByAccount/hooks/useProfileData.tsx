@@ -6,7 +6,7 @@ import {
 } from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
 
-import { isValidAddress } from 'web-components/lib/components/inputs/validation';
+import { isValidAddress } from 'web-components/src/components/inputs/validation';
 
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';

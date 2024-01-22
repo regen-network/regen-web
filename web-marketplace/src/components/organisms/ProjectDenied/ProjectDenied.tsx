@@ -1,10 +1,10 @@
-import { Flex } from 'web-components/lib/components/box';
+import { Flex } from 'web-components/src/components/box';
 import {
   Body,
   Subtitle,
   Title,
-} from 'web-components/lib/components/typography';
-import { headerFontFamily } from 'web-components/lib/theme/muiTheme';
+} from 'web-components/src/components/typography';
+import { headerFontFamily } from 'web-components/src/theme/muiTheme';
 
 import { Link } from 'components/atoms';
 

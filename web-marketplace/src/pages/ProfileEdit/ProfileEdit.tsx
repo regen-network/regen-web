@@ -4,10 +4,10 @@ import { useTheme } from '@mui/material';
 import { useSetAtom } from 'jotai';
 import { startCase } from 'lodash';
 
-import { Flex } from 'web-components/lib/components/box';
-import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
-import { Title } from 'web-components/lib/components/typography';
-import { cn } from 'web-components/lib/utils/styles/cn';
+import { Flex } from 'web-components/src/components/box';
+import ArrowDownIcon from 'web-components/src/components/icons/ArrowDownIcon';
+import { Title } from 'web-components/src/components/typography';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 import { isProfileEditDirtyRef } from 'lib/atoms/ref.atoms';
 import { useAuth } from 'lib/auth/auth';

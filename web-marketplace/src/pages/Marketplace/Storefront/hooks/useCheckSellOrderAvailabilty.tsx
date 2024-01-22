@@ -1,7 +1,7 @@
 import { MutableRefObject, useEffect } from 'react';
 import { ERRORS, errorsMapping } from 'config/errors';
 
-import { Item } from 'web-components/lib/components/modal/TxModal';
+import { Item } from 'web-components/src/components/modal/TxModal';
 
 import { UseStateSetter } from 'types/react/use-state';
 

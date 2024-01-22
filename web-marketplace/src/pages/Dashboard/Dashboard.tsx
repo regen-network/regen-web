@@ -2,13 +2,13 @@ import { useMemo } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
 
-import { Flex } from 'web-components/lib/components/box';
-import { ProfileHeader } from 'web-components/lib/components/organisms/ProfileHeader/ProfileHeader';
-import { SocialLink } from 'web-components/lib/components/organisms/ProfileHeader/ProfileHeader.types';
-import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
-import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
-import { containerStyles } from 'web-components/lib/styles/container';
-import { truncate } from 'web-components/lib/utils/truncate';
+import { Flex } from 'web-components/src/components/box';
+import { ProfileHeader } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader';
+import { SocialLink } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader.types';
+import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
+import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
+import { containerStyles } from 'web-components/src/styles/container';
+import { truncate } from 'web-components/src/utils/truncate';
 
 import { useAuth } from 'lib/auth/auth';
 import { getAccountUrl } from 'lib/block-explorer';

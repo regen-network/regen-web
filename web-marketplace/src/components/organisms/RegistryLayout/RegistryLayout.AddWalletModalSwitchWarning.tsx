@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 
-import { AddWalletModalSwitchWarning } from 'web-components/lib/components/modal/add-wallet-modal/AddWalletModalSwitchWarning';
+import { AddWalletModalSwitchWarning } from 'web-components/src/components/modal/add-wallet-modal/AddWalletModalSwitchWarning';
 
 import { addWalletModalSwitchWarningAtom } from 'lib/atoms/modals.atoms';
 

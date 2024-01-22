@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
-import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
-import { CardsGridContainer } from 'web-components/lib/components/organisms/CardsGridContainer/CardsGridContainer';
-import Section from 'web-components/lib/components/section';
+import ProjectCard from 'web-components/src/components/cards/ProjectCard';
+import { CardsGridContainer } from 'web-components/src/components/organisms/CardsGridContainer/CardsGridContainer';
+import Section from 'web-components/src/components/section';
 
 import { Maybe, Scalars } from 'generated/sanity-graphql';
 import { client as sanityClient } from 'lib/clients/sanity';

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 
-import CookiesTopBanner from 'web-components/lib/components/banner/CookiesTopBanner';
-import Footer from 'web-components/lib/components/footer';
+import CookiesTopBanner from 'web-components/src/components/banner/CookiesTopBanner';
+import Footer from 'web-components/src/components/footer';
 
 import { footerItems } from './Layout.config';
 import { useLayoutStyles } from './Layout.styles';

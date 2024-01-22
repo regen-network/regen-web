@@ -1,10 +1,10 @@
 import { getClassImageWithGreyDefault } from 'utils/image/classImage';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
+import { BlockContent } from 'web-components/src/components/block-content';
 import CreditClassCard, {
   CreditClassCardItemType,
-} from 'web-components/lib/components/cards/CreditClassCard';
-import { Account } from 'web-components/lib/components/user/UserInfoCard';
+} from 'web-components/src/components/cards/CreditClassCard';
+import { Account } from 'web-components/src/components/user/UserInfoCard';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';

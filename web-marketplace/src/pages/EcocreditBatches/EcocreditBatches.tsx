@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 
-import Section from 'web-components/lib/components/section';
-import { Title } from 'web-components/lib/components/typography';
+import Section from 'web-components/src/components/section';
+import { Title } from 'web-components/src/components/typography';
 
 import { CreditBatches } from 'components/organisms';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';

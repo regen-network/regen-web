@@ -1,6 +1,6 @@
 import { useRouteError } from 'react-router-dom';
 
-import ErrorView from 'web-components/lib/components/views/ErrorView';
+import ErrorView from 'web-components/src/components/views/ErrorView';
 
 import UnhappyBee from 'assets/unhappy-bee.png';
 

@@ -1,4 +1,4 @@
-import { Body } from 'web-components/lib/components/typography';
+import { Body } from 'web-components/src/components/typography';
 
 import { LinkWithArrow } from '../../atoms/LinkWithArrow';
 import { BasketGridItem } from './BasketOverview.GridItem';

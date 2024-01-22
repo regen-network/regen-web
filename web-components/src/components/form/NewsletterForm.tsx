@@ -1,7 +1,7 @@
 import React from 'react';
 import { ButtonProps } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import { DefaultTheme as Theme } from '@mui/styles';
+import { Theme } from '@mui/material/styles';
 import axios from 'axios';
 import { Field, Form, Formik } from 'formik';
 import { makeStyles } from 'tss-react/mui';

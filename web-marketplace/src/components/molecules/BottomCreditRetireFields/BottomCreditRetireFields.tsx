@@ -2,14 +2,14 @@ import { Suspense, useEffect } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { Grid } from '@mui/material';
 
-import { Flex } from 'web-components/lib/components/box';
-import LocationCountryField from 'web-components/lib/components/inputs/new/LocationCountryField/LocationCountryField';
-import LocationStateField from 'web-components/lib/components/inputs/new/LocationStateField/LocationStateField';
-import SelectTextField from 'web-components/lib/components/inputs/new/SelectTextField/SelectTextField';
-import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
-import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
-import { Body, Title } from 'web-components/lib/components/typography';
-import { getJurisdictionIsoCode } from 'web-components/lib/utils/locationStandard';
+import { Flex } from 'web-components/src/components/box';
+import LocationCountryField from 'web-components/src/components/inputs/new/LocationCountryField/LocationCountryField';
+import LocationStateField from 'web-components/src/components/inputs/new/LocationStateField/LocationStateField';
+import SelectTextField from 'web-components/src/components/inputs/new/SelectTextField/SelectTextField';
+import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';
+import { Body, Title } from 'web-components/src/components/typography';
+import { getJurisdictionIsoCode } from 'web-components/src/utils/locationStandard';
 
 import { CreditSendFormSchemaType } from 'components/organisms/CreditSendForm/CreditSendForm.schema';
 

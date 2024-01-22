@@ -1,8 +1,8 @@
 import Image from 'next/image';
 
-import { ImageItemProps } from 'web-components/lib/components/image-item';
-import Section from 'web-components/lib/components/section';
-import ImageItems from 'web-components/lib/components/sliders/ImageItems';
+import { ImageItemProps } from 'web-components/src/components/image-item';
+import Section from 'web-components/src/components/section';
+import ImageItems from 'web-components/src/components/sliders/ImageItems';
 
 import { useValuesStyles } from './Home.Values.styles';
 

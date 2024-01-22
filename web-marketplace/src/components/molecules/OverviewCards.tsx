@@ -2,8 +2,8 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from 'tss-react/mui';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import { OverviewCard } from 'web-components/lib/components/cards/OverviewCard';
+import { BlockContent } from 'web-components/src/components/block-content';
+import { OverviewCard } from 'web-components/src/components/cards/OverviewCard';
 
 import { CardFieldsFragment, Maybe } from '../../generated/sanity-graphql';
 

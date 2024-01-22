@@ -1,4 +1,4 @@
-import Section from 'web-components/lib/components/section';
+import Section from 'web-components/src/components/section';
 
 import { useSectionLayoutStyles } from './BasketDetails.styles';
 

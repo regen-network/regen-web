@@ -1,4 +1,4 @@
-import StatCardsSection from 'web-components/lib/components/organisms/StatCardsSection';
+import StatCardsSection from 'web-components/src/components/organisms/StatCardsSection';
 
 import { StatsSectionFieldsFragment } from '@/generated/sanity-graphql';
 import { normalizeStatCards } from '@/lib/utils/normalizers/normalizeStatCards';

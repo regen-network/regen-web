@@ -1,7 +1,7 @@
 import { styled } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 export const useProjectTopSectionStyles = makeStyles()((theme: Theme) => ({
   section: {

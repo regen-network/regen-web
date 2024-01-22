@@ -1,6 +1,6 @@
 import { Formik } from 'formik';
 
-import { Center } from 'web-components/lib/components/box';
+import { Center } from 'web-components/src/components/box';
 
 import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
 

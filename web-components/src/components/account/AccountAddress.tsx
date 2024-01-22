@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { DefaultTheme as Theme } from '@mui/styles';
+import { Theme } from '@mui/styles';
 import { makeStyles } from 'tss-react/mui';
 
 import DropdownIcon from '../icons/DropdownIcon';

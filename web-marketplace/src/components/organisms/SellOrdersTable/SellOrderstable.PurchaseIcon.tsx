@@ -1,5 +1,5 @@
-import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
-import TradeableIcon from 'web-components/lib/components/icons/TradeableIcon';
+import ArrowDownIcon from 'web-components/src/components/icons/ArrowDownIcon';
+import TradeableIcon from 'web-components/src/components/icons/TradeableIcon';
 
 type PurchaseIconsType = 'arrowDown' | 'tradable';
 

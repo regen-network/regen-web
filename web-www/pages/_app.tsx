@@ -4,7 +4,7 @@ import type { AppProps } from 'next/app';
 import { DefaultSeo } from 'next-seo';
 import { createEmotionSsrAdvancedApproach } from 'tss-react/next/pagesDir';
 
-import theme from 'web-components/lib/theme/muiTheme';
+import theme from 'web-components/src/theme/muiTheme';
 
 import '../styles/font.css';
 import '../styles/web-components.css';

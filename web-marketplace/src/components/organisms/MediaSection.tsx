@@ -1,10 +1,10 @@
 import React from 'react';
 import { makeStyles } from 'tss-react/mui';
 
-import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
-import { SliderSection } from 'web-components/lib/components/section/SliderSection';
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { getFormattedDate } from 'web-components/lib/utils/format';
+import ArticleCard from 'web-components/src/components/cards/ArticleCard';
+import { SliderSection } from 'web-components/src/components/section/SliderSection';
+import { Theme } from 'web-components/src/theme/muiTheme';
+import { getFormattedDate } from 'web-components/src/utils/format';
 
 import { Maybe, MediaFieldsFragment } from '../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../lib/imgSrc';

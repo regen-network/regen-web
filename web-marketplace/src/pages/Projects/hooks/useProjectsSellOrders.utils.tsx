@@ -4,8 +4,8 @@ import { QUANTITY_MAX_DECIMALS } from 'config/decimals';
 import { roundFloatNumber } from 'utils/number/format/format';
 import { computeMedianPrice } from 'utils/price/computeMedianPrice';
 
-import { PurchaseInfo } from 'web-components/lib/components/cards/ProjectCard/ProjectCard.types';
-import { formatNumber } from 'web-components/lib/utils/format';
+import { PurchaseInfo } from 'web-components/src/components/cards/ProjectCard/ProjectCard.types';
+import { formatNumber } from 'web-components/src/utils/format';
 
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 

@@ -1,4 +1,3 @@
-import MapboxClient from '@mapbox/mapbox-sdk';
 import mbxGeocoder from '@mapbox/mapbox-sdk/services/geocoding';
 import iso3166, { CountryInfo, SubdivisionInfo } from 'iso-3166-2';
 
@@ -70,8 +69,7 @@ export const getISOString = async (
   if (!stateProvince) {
     return Promise.resolve(countryKey); // no need to search
   }
-  const baseClient = MapboxClient({ accessToken });
-  const geocoderService = mbxGeocoder(baseClient);
+  const geocoderService = mbxGeocoder({ accessToken });
   let placeCode: string | undefined;
 
   await geocoderService

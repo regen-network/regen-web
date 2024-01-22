@@ -1,4 +1,4 @@
-import Navigation from 'web-components/lib/components/faq/Navigation';
+import Navigation from 'web-components/src/components/faq/Navigation';
 
 import { useProjectEditStyles } from './ProjectEdit.styles';
 

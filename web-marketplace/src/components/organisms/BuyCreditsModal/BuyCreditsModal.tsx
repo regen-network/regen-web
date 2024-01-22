@@ -9,28 +9,28 @@ import { useQuery } from '@tanstack/react-query';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 import { RadioGroup } from 'formik-mui';
 
-import { Flex } from 'web-components/lib/components/box';
-import Card from 'web-components/lib/components/cards/Card';
-import Submit from 'web-components/lib/components/form/Submit';
-import { Image } from 'web-components/lib/components/image';
-import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
-import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
-import SelectFieldFallback from 'web-components/lib/components/inputs/SelectFieldFallback';
-import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
-import TextField from 'web-components/lib/components/inputs/TextField';
-import Toggle from 'web-components/lib/components/inputs/Toggle';
+import { Flex } from 'web-components/src/components/box';
+import Card from 'web-components/src/components/cards/Card';
+import Submit from 'web-components/src/components/form/Submit';
+import { Image } from 'web-components/src/components/image';
+import ControlledTextField from 'web-components/src/components/inputs/ControlledTextField';
+import NumberTextField from 'web-components/src/components/inputs/NumberTextField';
+import SelectFieldFallback from 'web-components/src/components/inputs/SelectFieldFallback';
+import SelectTextField from 'web-components/src/components/inputs/SelectTextField';
+import TextField from 'web-components/src/components/inputs/TextField';
+import Toggle from 'web-components/src/components/inputs/Toggle';
 import {
   invalidMemoLength,
   requirementAgreement,
   validateMemoLength,
-} from 'web-components/lib/components/inputs/validation';
-import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
-import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
+} from 'web-components/src/components/inputs/validation';
+import Modal, { RegenModalProps } from 'web-components/src/components/modal';
+import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';
 import {
   Body,
   Subtitle,
   Title,
-} from 'web-components/lib/components/typography';
+} from 'web-components/src/components/typography';
 
 import { useLedger } from 'ledger';
 import { client } from 'lib/clients/sanity';
@@ -61,10 +61,10 @@ import { useFetchUserBalance } from './hooks/useFetchUserBalance';
 import { useRefreshUserBalance } from './hooks/useRefreshUserBalance';
 
 const LocationCountryField = lazy(
-  () => import('web-components/lib/components/inputs/LocationCountryField'),
+  () => import('web-components/src/components/inputs/LocationCountryField'),
 );
 const LocationStateField = lazy(
-  () => import('web-components/lib/components/inputs/LocationStateField'),
+  () => import('web-components/src/components/inputs/LocationStateField'),
 );
 
 export interface Credits {

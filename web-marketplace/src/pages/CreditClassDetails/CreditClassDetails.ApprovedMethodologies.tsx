@@ -1,5 +1,5 @@
-import { Flex } from 'web-components/lib/components/box';
-import { Body, Label } from 'web-components/lib/components/typography';
+import { Flex } from 'web-components/src/components/box';
+import { Body, Label } from 'web-components/src/components/typography';
 
 import { ApprovedMethodologies } from 'lib/db/types/json-ld/methodology';
 

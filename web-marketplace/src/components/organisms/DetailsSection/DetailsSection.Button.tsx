@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
 
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import EyeIcon from 'web-components/lib/components/icons/EyeIcon';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import EyeIcon from 'web-components/src/components/icons/EyeIcon';
 
 type Props = {
   href: string;

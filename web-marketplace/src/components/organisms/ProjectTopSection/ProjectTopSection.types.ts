@@ -3,8 +3,8 @@ import {
   QueryClassResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import { Props as ActionCardProps } from 'web-components/lib/components/molecules/ActionCard/ActionCard';
-import { Account } from 'web-components/lib/components/user/UserInfoCard';
+import { Props as ActionCardProps } from 'web-components/src/components/molecules/ActionCard/ActionCard';
+import { Account } from 'web-components/src/components/user/UserInfoCard';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import { AllCreditClassQuery, SdgByIriQuery } from 'generated/sanity-graphql';

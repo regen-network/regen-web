@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
 
-import { Image } from 'web-components/lib/components/image';
-import { Label, Title } from 'web-components/lib/components/typography';
+import { Image } from 'web-components/src/components/image';
+import { Label, Title } from 'web-components/src/components/typography';
 
 import { DualImageSection } from '../../generated/sanity-graphql';
 

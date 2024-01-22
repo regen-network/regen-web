@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { ProjectImpactCardProps } from 'web-components/lib/components/cards/ProjectImpactCard/ProjectImpactCard';
+import { ProjectImpactCardProps } from 'web-components/src/components/cards/ProjectImpactCard/ProjectImpactCard';
 
 import { client as sanityClient } from 'lib/clients/sanity';
 import {

@@ -3,13 +3,13 @@ import { Field, Form, Formik } from 'formik';
 import { TextField } from 'formik-mui';
 import { AnyObjectSchema, object, string } from 'yup';
 
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import Submit from 'web-components/lib/components/form/Submit';
+import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
+import Submit from 'web-components/src/components/form/Submit';
 import {
   invalidURL,
   requiredMessage,
-} from 'web-components/lib/components/inputs/validation';
-import { RegenModalProps } from 'web-components/lib/components/modal';
+} from 'web-components/src/components/inputs/validation';
+import { RegenModalProps } from 'web-components/src/components/modal';
 
 import { NameUrl } from 'lib/rdf/types';
 

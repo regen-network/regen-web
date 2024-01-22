@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { SortCallbacksType } from 'web-components/lib/components/table/ActionsTable';
-import { Order } from 'web-components/lib/components/table/Table.utils';
+import { SortCallbacksType } from 'web-components/src/components/table/ActionsTable';
+import { Order } from 'web-components/src/components/table/Table.utils';
 
 import { SELL_ORDERS_MAPPING } from 'components/organisms/SellOrdersTable/SellOrdersTable.constants';
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';

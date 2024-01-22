@@ -1,5 +1,5 @@
-import { EcologicalCreditCardType } from 'web-components/lib/components/molecules/EcologicalCreditCard/EcologicalCreditCard.types';
-import { Account } from 'web-components/lib/components/user/UserInfoCard';
+import { EcologicalCreditCardType } from 'web-components/src/components/molecules/EcologicalCreditCard/EcologicalCreditCard.types';
+import { Account } from 'web-components/src/components/user/UserInfoCard';
 
 import {
   AllBuyersPageQuery,

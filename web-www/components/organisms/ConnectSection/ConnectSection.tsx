@@ -2,8 +2,8 @@ import { Grid } from '@mui/material';
 import clsx from 'clsx';
 import { StaticImageData } from 'next/image';
 
-import { Center } from 'web-components/lib/components/box';
-import { Title } from 'web-components/lib/components/typography';
+import { Center } from 'web-components/src/components/box';
+import { Title } from 'web-components/src/components/typography';
 
 import BackgroundSection from '../BackgroundSection/BackgroundSection';
 import { IconLabel } from './ConnectSection.IconLabel';

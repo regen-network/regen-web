@@ -1,6 +1,6 @@
 import { quantityFormatNumberOptions } from 'config/decimals';
 
-import { formatNumber } from 'web-components/lib/utils/format';
+import { formatNumber } from 'web-components/src/utils/format';
 
 import { BatchInfoWithSupply } from '../../../types/ledger/ecocredit';
 import { CreditTotalData } from './CreditTotals.types';

@@ -3,10 +3,10 @@ import { useFormState } from 'react-hook-form';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import ControlledFormLabel from 'web-components/lib/components/form/ControlledFormLabel';
-import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
-import { Body } from 'web-components/lib/components/typography';
+import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
+import ControlledFormLabel from 'web-components/src/components/form/ControlledFormLabel';
+import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+import { Body } from 'web-components/src/components/typography';
 
 import { ShaclGraphByUriQuery } from 'generated/graphql';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';

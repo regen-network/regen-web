@@ -1,6 +1,6 @@
 import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 
-import { Item } from 'web-components/lib/components/modal/ConfirmModal';
+import { Item } from 'web-components/src/components/modal/ConfirmModal';
 
 import {
   DENOM_COINGECKO_ID_MAPPING,

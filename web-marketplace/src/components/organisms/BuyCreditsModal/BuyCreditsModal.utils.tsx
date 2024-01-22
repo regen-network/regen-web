@@ -3,8 +3,8 @@ import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/reg
 import { quantityFormatNumberOptions } from 'config/decimals';
 import { floorFloatNumber } from 'utils/number/format/format';
 
-import { Option } from 'web-components/lib/components/inputs/SelectTextField';
-import { formatNumber } from 'web-components/lib/utils/format';
+import { Option } from 'web-components/src/components/inputs/SelectTextField';
+import { formatNumber } from 'web-components/src/utils/format';
 
 import { microToDenom } from 'lib/denom.utils';
 

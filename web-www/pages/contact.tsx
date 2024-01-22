@@ -6,20 +6,20 @@ import { InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import { NextSeo } from 'next-seo';
 
-import Banner from 'web-components/lib/components/banner';
-import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
-import { BlockContent } from 'web-components/lib/components/block-content';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import Card from 'web-components/lib/components/cards/Card';
-import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
-import TextField from 'web-components/lib/components/inputs/TextField';
+import Banner from 'web-components/src/components/banner';
+import ErrorBanner from 'web-components/src/components/banner/ErrorBanner';
+import { BlockContent } from 'web-components/src/components/block-content';
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import Card from 'web-components/src/components/cards/Card';
+import SelectTextField from 'web-components/src/components/inputs/SelectTextField';
+import TextField from 'web-components/src/components/inputs/TextField';
 import {
   invalidEmailMessage,
   requiredMessage,
   validateEmail,
-} from 'web-components/lib/components/inputs/validation';
-import Section from 'web-components/lib/components/section';
-import { Body, Title } from 'web-components/lib/components/typography';
+} from 'web-components/src/components/inputs/validation';
+import Section from 'web-components/src/components/section';
+import { Body, Title } from 'web-components/src/components/typography';
 
 import SharedFaqSection from '@/components/templates/shared/SharedFaqSection/SharedFaqSection';
 import {

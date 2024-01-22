@@ -2,7 +2,7 @@ import { useApolloClient } from '@apollo/client';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQueries, useQuery } from '@tanstack/react-query';
 
-import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCard';
+import { ProjectCardProps } from 'web-components/src/components/cards/ProjectCard';
 
 import { client as sanityClient } from 'lib/clients/sanity';
 import { normalizeProjectsWithCreditClass } from 'lib/normalizers/projects/normalizeProjectsWithCreditClass';

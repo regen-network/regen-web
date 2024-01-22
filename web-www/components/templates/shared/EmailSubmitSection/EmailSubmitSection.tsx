@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import NewsletterForm from 'web-components/lib/components/form/NewsletterForm';
-import { Label, Title } from 'web-components/lib/components/typography';
+import { BlockContent } from 'web-components/src/components/block-content';
+import NewsletterForm from 'web-components/src/components/form/NewsletterForm';
+import { Label, Title } from 'web-components/src/components/typography';
 
 import { useEmailSubmitSectionStyles } from './EmailSubmitSection.styles';
 

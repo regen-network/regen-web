@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Order } from 'web-components/lib/components/table/Table.utils';
+import { Order } from 'web-components/src/components/table/Table.utils';
 
 import { Document, Maybe } from 'generated/graphql';
 

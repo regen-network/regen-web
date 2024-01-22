@@ -1,6 +1,6 @@
-import { FAQProps } from 'web-components/lib/components/faq';
+import { BlockContent } from 'web-components/src/components/block-content';
+import { FAQProps } from 'web-components/src/components/faq';
 
-import { BlockContent } from '@/../web-components/lib/components/block-content';
 import { FaqPageQuery } from '@/generated/sanity-graphql';
 
 type Params = {

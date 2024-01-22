@@ -2,7 +2,7 @@ import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
 import { useAtom } from 'jotai';
 import { findFirstNonEmptyString } from 'utils/string/findFirstNonEmptyString';
 
-import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
+import { TxErrorModal } from 'web-components/src/components/modal/TxErrorModal';
 
 import { errorCodeAtom } from 'lib/atoms/error.atoms';
 import { errorModalAtom } from 'lib/atoms/modals.atoms';

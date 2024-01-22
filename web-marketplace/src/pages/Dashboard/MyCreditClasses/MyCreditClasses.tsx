@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material';
 
-import EditIcon from 'web-components/lib/components/icons/EditIcon';
+import EditIcon from 'web-components/src/components/icons/EditIcon';
 import { CreditClassGridCard } from 'web-components/src/components/molecules/CreditClassGridCard/CreditClassGridCard';
 
 import { useWallet } from 'lib/wallet/wallet';

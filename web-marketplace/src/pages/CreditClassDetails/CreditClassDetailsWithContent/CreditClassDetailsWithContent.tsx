@@ -8,14 +8,14 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import { makeStyles } from 'tss-react/mui';
 
-import Banner from 'web-components/lib/components/banner';
-import { BlockContent } from 'web-components/lib/components/block-content';
-import { SwitchFooter } from 'web-components/lib/components/fixed-footer/SwitchFooter';
-import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
-import Modal from 'web-components/lib/components/modal';
-import Section from 'web-components/lib/components/section';
-import { Body } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import Banner from 'web-components/src/components/banner';
+import { BlockContent } from 'web-components/src/components/block-content';
+import { SwitchFooter } from 'web-components/src/components/fixed-footer/SwitchFooter';
+import MoreInfoForm from 'web-components/src/components/form/MoreInfoForm';
+import Modal from 'web-components/src/components/modal';
+import Section from 'web-components/src/components/section';
+import { Body } from 'web-components/src/components/typography';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { CreditClassByUriQuery } from 'generated/graphql';
 import { CreditClass } from 'generated/sanity-graphql';

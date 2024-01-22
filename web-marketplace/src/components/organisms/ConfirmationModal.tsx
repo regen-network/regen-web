@@ -2,9 +2,9 @@ import React from 'react';
 import { Avatar, Box, Link } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
-import Card from 'web-components/lib/components/cards/Card';
-import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
+import Card from 'web-components/src/components/cards/Card';
+import Modal, { RegenModalProps } from 'web-components/src/components/modal';
+import { Body, Label, Title } from 'web-components/src/components/typography';
 
 import CowIllustration from '../../assets/cow-illustration.png';
 import CarbonCreditFruit from '../../assets/svgs/carbon-credit-fruit.svg';

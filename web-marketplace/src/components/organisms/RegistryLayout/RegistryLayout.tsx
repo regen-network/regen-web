@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { URL_REGISTRY_TERMS_SERVICE, URL_WEB_PRIVACY } from 'config/globals';
 
-import CookiesTopBanner from 'web-components/lib/components/banner/CookiesTopBanner';
+import CookiesTopBanner from 'web-components/src/components/banner/CookiesTopBanner';
 
 import { PageViewTracking } from 'components/molecules/PageViewTracking';
 

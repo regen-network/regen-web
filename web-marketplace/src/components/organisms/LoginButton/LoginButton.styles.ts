@@ -1,6 +1,6 @@
 import { makeStyles } from '@mui/styles';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 export const useLoginButtonStyles = makeStyles((theme: Theme) => ({
   root: {

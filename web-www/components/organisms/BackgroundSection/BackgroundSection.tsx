@@ -4,7 +4,7 @@ import type { Variant } from '@mui/material/styles/createTypography';
 import clsx from 'clsx';
 import { StaticImageData } from 'next/image';
 
-import { Body, Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/src/components/typography';
 
 import { BackgroundImage } from '../BackgroundImage/BackgroundImage';
 import { useBackgroundSectionStyles } from './BackgroundSection.styles';

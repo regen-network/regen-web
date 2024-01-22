@@ -1,12 +1,12 @@
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import { makeStyles } from 'tss-react/mui';
 
-import Section from 'web-components/lib/components/section';
+import Section from 'web-components/src/components/section';
 import {
   Document,
   DocumentationTable,
-} from 'web-components/lib/components/table/DocumentationTable/DocumentationTable';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+} from 'web-components/src/components/table/DocumentationTable/DocumentationTable';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 export interface DocumentationProps {
   txClient?: ServiceClientImpl;

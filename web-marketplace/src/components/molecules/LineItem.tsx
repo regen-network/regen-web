@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box } from '@mui/material';
 
-import { Body, Label } from 'web-components/lib/components/typography';
-import { parseText } from 'web-components/lib/utils/textParser';
+import { Body, Label } from 'web-components/src/components/typography';
+import { parseText } from 'web-components/src/utils/textParser';
 
 interface LineItemProps {
   label: string;

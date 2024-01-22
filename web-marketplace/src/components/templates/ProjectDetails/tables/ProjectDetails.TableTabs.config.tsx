@@ -1,4 +1,4 @@
-import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
+import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 
 import { ProjectPageMetadata } from 'components/molecules';
 import { CreditBatches } from 'components/organisms';

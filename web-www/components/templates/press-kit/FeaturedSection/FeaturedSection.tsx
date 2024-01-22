@@ -1,6 +1,6 @@
-import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
-import Section from 'web-components/lib/components/section';
-import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
+import ArticleCard from 'web-components/src/components/cards/ArticleCard';
+import Section from 'web-components/src/components/section';
+import ResponsiveSlider from 'web-components/src/components/sliders/ResponsiveSlider';
 
 import { useFeaturedSectionStyles } from './FeaturedSection.styles';
 

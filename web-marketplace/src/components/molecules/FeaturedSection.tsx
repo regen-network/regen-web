@@ -2,13 +2,13 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from 'tss-react/mui';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import GreenCard from 'web-components/lib/components/cards/GreenCard';
-import { Image } from 'web-components/lib/components/image';
-import Section from 'web-components/lib/components/section';
-import { Body, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { BlockContent } from 'web-components/src/components/block-content';
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import GreenCard from 'web-components/src/components/cards/GreenCard';
+import { Image } from 'web-components/src/components/image';
+import Section from 'web-components/src/components/section';
+import { Body, Title } from 'web-components/src/components/typography';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { FeaturedSection as FeaturedSectionProps } from '../../generated/sanity-graphql';
 

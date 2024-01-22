@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from 'tss-react/mui';
 
-import { Step, StepCard } from 'web-components/lib/components/cards/StepCard';
-import { QuestionItem } from 'web-components/lib/components/faq/Question';
-import AccountabilityIcon from 'web-components/lib/components/icons/AccountabilityIcon';
-import FarmerIcon from 'web-components/lib/components/icons/FarmerIcon';
-import InterfaceIcon from 'web-components/lib/components/icons/InterfaceIcon';
-import RegistrationIcon from 'web-components/lib/components/icons/RegistrationIcon';
-import ReviewIcon from 'web-components/lib/components/icons/ReviewIcon';
-import ShadedCreditsIcon from 'web-components/lib/components/icons/ShadedCreditsIcon';
-import TrustDocumentIcon from 'web-components/lib/components/icons/TrustDocumentIcon';
-import TrustIcon from 'web-components/lib/components/icons/TrustIcon';
-import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Step, StepCard } from 'web-components/src/components/cards/StepCard';
+import { QuestionItem } from 'web-components/src/components/faq/Question';
+import AccountabilityIcon from 'web-components/src/components/icons/AccountabilityIcon';
+import FarmerIcon from 'web-components/src/components/icons/FarmerIcon';
+import InterfaceIcon from 'web-components/src/components/icons/InterfaceIcon';
+import RegistrationIcon from 'web-components/src/components/icons/RegistrationIcon';
+import ReviewIcon from 'web-components/src/components/icons/ReviewIcon';
+import ShadedCreditsIcon from 'web-components/src/components/icons/ShadedCreditsIcon';
+import TrustDocumentIcon from 'web-components/src/components/icons/TrustDocumentIcon';
+import TrustIcon from 'web-components/src/components/icons/TrustIcon';
+import OnBoardingSection from 'web-components/src/components/section/OnBoardingSection';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 const useStyles = makeStyles()((theme: Theme) => ({
   content: {

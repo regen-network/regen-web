@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 
-import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
-import { RegenTextFieldProps } from 'web-components/lib/components/inputs/new/TextField/TextField.types';
+import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+import { RegenTextFieldProps } from 'web-components/src/components/inputs/new/TextField/TextField.types';
 
 import { UseStateSetter } from 'types/react/use-state';
 

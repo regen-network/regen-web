@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import { useAtom } from 'jotai';
 
-import { SwitchWalletWarningModal } from 'web-components/lib/components/modal/SwitchWalletWarningModal/SwitchWalletWarningModal';
+import { SwitchWalletWarningModal } from 'web-components/src/components/modal/SwitchWalletWarningModal/SwitchWalletWarningModal';
 
 import { switchWalletModalAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';

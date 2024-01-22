@@ -1,8 +1,8 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 
-import { Loading } from 'web-components/lib/components/loading';
-import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
+import { Loading } from 'web-components/src/components/loading';
+import OnBoardingSection from 'web-components/src/components/section/OnBoardingSection';
 
 import { PlanStepper } from '../../molecules';
 

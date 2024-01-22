@@ -1,7 +1,7 @@
 import { Box, Grid } from '@mui/material';
 
-import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
-import { Body, Label } from 'web-components/lib/components/typography';
+import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';
+import { Body, Label } from 'web-components/src/components/typography';
 
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import {

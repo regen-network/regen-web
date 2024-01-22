@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { Grid } from '@mui/material';
 
-import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
+import ProjectCard from 'web-components/src/components/cards/ProjectCard';
 
 import { useTracker } from 'lib/tracker/useTracker';
 

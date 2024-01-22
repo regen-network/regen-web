@@ -3,7 +3,7 @@ import {
   ProjectInfo,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import { Account } from 'web-components/lib/components/user/UserInfo';
+import { Account } from 'web-components/src/components/user/UserInfo';
 
 import { Maybe } from 'generated/graphql';
 import { RetirementFieldsFragment } from 'generated/indexer-graphql';

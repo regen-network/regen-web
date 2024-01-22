@@ -5,12 +5,12 @@ import { MsgBuyDirect } from '@regen-network/api/lib/generated/regen/ecocredit/m
 import { quantityFormatNumberOptions } from 'config/decimals';
 import { getDenomtrace } from 'utils/ibc/getDenomTrace';
 
-import { Item } from 'web-components/lib/components/modal/TxModal';
+import { Item } from 'web-components/src/components/modal/TxModal';
 import {
   formatNumber,
   getFormattedNumber,
-} from 'web-components/lib/utils/format';
-import { getJurisdictionIsoCode } from 'web-components/lib/utils/locationStandard';
+} from 'web-components/src/utils/format';
+import { getJurisdictionIsoCode } from 'web-components/src/utils/locationStandard';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { microToDenom } from 'lib/denom.utils';

@@ -4,10 +4,10 @@ import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from 'tss-react/mui';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import { OverviewCard } from 'web-components/lib/components/cards/OverviewCard';
-import Section from 'web-components/lib/components/section';
-import { Title } from 'web-components/lib/components/typography';
+import { BlockContent } from 'web-components/src/components/block-content';
+import { OverviewCard } from 'web-components/src/components/cards/OverviewCard';
+import Section from 'web-components/src/components/section';
+import { Title } from 'web-components/src/components/typography';
 
 import { CreditClassByUriQuery } from '../../generated/graphql';
 import {

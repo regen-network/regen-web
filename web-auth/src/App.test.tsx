@@ -1,6 +1,6 @@
 import { MockedProvider } from '@apollo/client/testing';
 import ReactDOM, { unmountComponentAtNode } from 'react-dom';
-import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
+import ThemeProvider from 'web-components/src/theme/RegenThemeProvider';
 
 import App from './App';
 

@@ -2,7 +2,7 @@ import {
   getValidationSchema,
   getValidationSchemaFields,
   initialValues as recipientsInitialValues,
-} from 'web-components/lib/components/form/RecipientsForm';
+} from 'web-components/src/components/form/RecipientsForm';
 
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 

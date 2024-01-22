@@ -1,10 +1,10 @@
 import { SxProps } from '@mui/material';
 import { useRouter } from 'next/router';
 
-import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
-import { CardsGridContainer } from 'web-components/lib/components/organisms/CardsGridContainer/CardsGridContainer';
-import Section from 'web-components/lib/components/organisms/Section';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import ProjectCard from 'web-components/src/components/cards/ProjectCard';
+import { CardsGridContainer } from 'web-components/src/components/organisms/CardsGridContainer/CardsGridContainer';
+import Section from 'web-components/src/components/organisms/Section';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import {
   AllBuyersPageQuery,

@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 
-import { AddWalletModalRemove } from 'web-components/lib/components/modal/add-wallet-modal/AddWalletModalRemove';
+import { AddWalletModalRemove } from 'web-components/src/components/modal/add-wallet-modal/AddWalletModalRemove';
 
 import { addWalletModalRemoveAtom } from 'lib/atoms/modals.atoms';
 

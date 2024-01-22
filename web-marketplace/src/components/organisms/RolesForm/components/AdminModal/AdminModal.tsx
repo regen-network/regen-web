@@ -1,7 +1,7 @@
 import { useFormState } from 'react-hook-form';
 import { Box } from '@mui/material';
 
-import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
+import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 

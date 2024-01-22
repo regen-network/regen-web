@@ -1,7 +1,7 @@
 import { SxProps } from '@mui/material';
 
-import { Body } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Body } from 'web-components/src/components/typography';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 export const RetirementReminder = ({
   sx,

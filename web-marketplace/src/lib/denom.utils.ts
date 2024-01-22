@@ -1,6 +1,6 @@
 import { Decimal, Uint32 } from '@cosmjs/math';
 
-import { MAX_FRACTION_DIGITS } from 'web-components/lib/components/inputs/validation';
+import { MAX_FRACTION_DIGITS } from 'web-components/src/components/inputs/validation';
 
 /**
  * Convert Cosmos-style micro denom (starting with u) to natural denom.

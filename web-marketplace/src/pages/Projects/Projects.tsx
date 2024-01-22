@@ -5,15 +5,15 @@ import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { spacing } from 'styles/spacing';
 
-import { Flex } from 'web-components/lib/components/box';
-import { ProjectCard } from 'web-components/lib/components/cards/ProjectCard';
-import { EmptyState } from 'web-components/lib/components/empty-state/EmptyState';
-import { NoProjectIcon } from 'web-components/lib/components/icons/NoProjectIcon';
-import SelectTextFieldBase from 'web-components/lib/components/inputs/SelectTextFieldBase';
-import { Loading } from 'web-components/lib/components/loading';
-import { Pagination } from 'web-components/lib/components/pagination/Pagination';
-import { Body, Subtitle } from 'web-components/lib/components/typography';
-import { pxToRem } from 'web-components/lib/theme/muiTheme';
+import { Flex } from 'web-components/src/components/box';
+import { ProjectCard } from 'web-components/src/components/cards/ProjectCard';
+import { EmptyState } from 'web-components/src/components/empty-state/EmptyState';
+import { NoProjectIcon } from 'web-components/src/components/icons/NoProjectIcon';
+import SelectTextFieldBase from 'web-components/src/components/inputs/SelectTextFieldBase';
+import { Loading } from 'web-components/src/components/loading';
+import { Pagination } from 'web-components/src/components/pagination/Pagination';
+import { Body, Subtitle } from 'web-components/src/components/typography';
+import { pxToRem } from 'web-components/src/theme/muiTheme';
 
 import {
   useAllProjectsPageQuery,

@@ -1,12 +1,12 @@
 import { atomWithImmer } from 'jotai-immer';
 
-import { RegenModalProps } from 'web-components/lib/components/modal';
-import { AddWalletModalConnectProps } from 'web-components/lib/components/modal/add-wallet-modal/AddWalletModalConnect';
-import { AddWalletModalRemoveProps } from 'web-components/lib/components/modal/add-wallet-modal/AddWalletModalRemove';
-import { ProcessingModalProps } from 'web-components/lib/components/modal/ProcessingModal';
-import { TxErrorModalProps } from 'web-components/lib/components/modal/TxErrorModal';
-import { Item } from 'web-components/lib/components/modal/TxModal';
-import { TxSuccessfulModalProps } from 'web-components/lib/components/modal/TxSuccessfulModal';
+import { RegenModalProps } from 'web-components/src/components/modal';
+import { AddWalletModalConnectProps } from 'web-components/src/components/modal/add-wallet-modal/AddWalletModalConnect';
+import { AddWalletModalRemoveProps } from 'web-components/src/components/modal/add-wallet-modal/AddWalletModalRemove';
+import { ProcessingModalProps } from 'web-components/src/components/modal/ProcessingModal';
+import { TxErrorModalProps } from 'web-components/src/components/modal/TxErrorModal';
+import { Item } from 'web-components/src/components/modal/TxModal';
+import { TxSuccessfulModalProps } from 'web-components/src/components/modal/TxSuccessfulModal';
 
 export const errorModalAtom = atomWithImmer({
   title: '',

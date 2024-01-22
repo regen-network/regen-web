@@ -2,9 +2,9 @@ import React from 'react';
 import { SxProps } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import { Body, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { BlockContent } from 'web-components/src/components/block-content';
+import { Body, Title } from 'web-components/src/components/typography';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { BackgroundImageSection } from '@/components/organisms/BackgroundImageSection/BackgroundImageSection';
 import { Maybe, Scalars } from '@/generated/sanity-graphql';

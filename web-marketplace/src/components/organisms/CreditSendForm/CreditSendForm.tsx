@@ -3,16 +3,16 @@ import { useFieldArray, useFormState, useWatch } from 'react-hook-form';
 import { Box } from '@mui/system';
 import { makeStyles } from 'tss-react/mui';
 
-import { Flex } from 'web-components/lib/components/box';
-import Submit from 'web-components/lib/components/form/Submit';
-import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
-import AmountField from 'web-components/lib/components/inputs/new/AmountField/AmountField';
-import CheckboxLabel from 'web-components/lib/components/inputs/new/CheckboxLabel/CheckboxLabel';
-import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
-import { RegenModalProps } from 'web-components/lib/components/modal';
-import InfoTooltip from 'web-components/lib/components/tooltip/InfoTooltip';
-import { Subtitle } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Flex } from 'web-components/src/components/box';
+import Submit from 'web-components/src/components/form/Submit';
+import InfoIcon from 'web-components/src/components/icons/InfoIcon';
+import AmountField from 'web-components/src/components/inputs/new/AmountField/AmountField';
+import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';
+import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+import { RegenModalProps } from 'web-components/src/components/modal';
+import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
+import { Subtitle } from 'web-components/src/components/typography';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import AgreeErpaCheckbox from 'components/atoms/AgreeErpaCheckboxNew';
 import { BottomCreditRetireFields } from 'components/molecules/BottomCreditRetireFields/BottomCreditRetireFields';

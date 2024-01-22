@@ -3,7 +3,7 @@ import { BasketInfo } from '@regen-network/api/lib/generated/regen/ecocredit/bas
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
-import { Option } from 'web-components/lib/components/inputs/SelectTextField';
+import { Option } from 'web-components/src/components/inputs/SelectTextField';
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { useLedger } from 'ledger';

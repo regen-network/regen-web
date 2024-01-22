@@ -1,6 +1,6 @@
-import Section from 'web-components/lib/components/section';
-import Timeline from 'web-components/lib/components/timeline';
-import { Body } from 'web-components/lib/components/typography';
+import Section from 'web-components/src/components/section';
+import Timeline from 'web-components/src/components/timeline';
+import { Body } from 'web-components/src/components/typography';
 
 import { useTimelineStyles } from './TimelineSection.styles';
 

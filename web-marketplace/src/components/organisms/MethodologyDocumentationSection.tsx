@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles } from 'tss-react/mui';
 
-import EyeIcon from 'web-components/lib/components/icons/EyeIcon';
-import Section from 'web-components/lib/components/section';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import EyeIcon from 'web-components/src/components/icons/EyeIcon';
+import Section from 'web-components/src/components/section';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { Documentation, Maybe, Scalars } from '../../generated/sanity-graphql';
 import { getBtnHref, isInternalLink } from '../../lib/button';

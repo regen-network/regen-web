@@ -1,10 +1,10 @@
 import { useFormikContext } from 'formik';
 
-import { Box } from 'web-components/lib/components/box';
+import { Box } from 'web-components/src/components/box';
 import {
   ItemDisplay,
   ReviewCard,
-} from 'web-components/lib/components/cards/ReviewCard';
+} from 'web-components/src/components/cards/ReviewCard';
 
 import { ScrollableCodebox } from 'components/molecules/ScrollableCodebox';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';

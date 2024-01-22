@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import ProjectImpactCard from 'web-components/lib/components/cards/ProjectImpactCard/ProjectImpactCard';
-import { SliderSection } from 'web-components/lib/components/section/SliderSection';
+import { BlockContent } from 'web-components/src/components/block-content';
+import ProjectImpactCard from 'web-components/src/components/cards/ProjectImpactCard/ProjectImpactCard';
+import { SliderSection } from 'web-components/src/components/section/SliderSection';
 
 import {
   EcologicalImpactRelation,

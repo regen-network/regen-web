@@ -2,9 +2,9 @@ import React from 'react';
 import { Box, useTheme } from '@mui/material';
 import { Dictionary } from 'lodash';
 
-import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
-import { Label, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import ArrowDownIcon from 'web-components/src/components/icons/ArrowDownIcon';
+import { Label, Title } from 'web-components/src/components/typography';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import WithLoader from 'components/atoms/WithLoader';
 

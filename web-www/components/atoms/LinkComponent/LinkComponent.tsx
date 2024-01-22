@@ -2,8 +2,8 @@ import { forwardRef } from 'react';
 import { Link as MuiLink } from '@mui/material';
 import Link from 'next/link';
 
-import { LinkProps } from 'web-components/lib/components/tabs/IconTabs';
-import { getLinkTarget } from 'web-components/lib/utils/linkTarget';
+import { LinkProps } from 'web-components/src/components/tabs/IconTabs';
+import { getLinkTarget } from 'web-components/src/utils/linkTarget';
 
 import { isInternalLink } from '@/lib/utils/sanity/button';
 

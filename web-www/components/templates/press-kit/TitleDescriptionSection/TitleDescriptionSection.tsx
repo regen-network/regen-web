@@ -1,5 +1,5 @@
-import Section from 'web-components/lib/components/section';
-import { TitleBody } from 'web-components/lib/components/text-layouts';
+import Section from 'web-components/src/components/section';
+import { TitleBody } from 'web-components/src/components/text-layouts';
 
 import { useTitleDescriptionStyles } from './TitleDescriptionSection.styles';
 

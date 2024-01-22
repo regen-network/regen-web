@@ -1,6 +1,6 @@
-import { HeaderColors } from 'web-components/lib/components/header';
-import { Item } from 'web-components/lib/components/header/components/HeaderMenuItem/HeaderMenuItem';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { HeaderColors } from 'web-components/src/components/header';
+import { Item } from 'web-components/src/components/header/components/HeaderMenuItem/HeaderMenuItem';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 interface BoolProps {
   [key: string]: boolean;

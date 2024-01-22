@@ -2,13 +2,13 @@ import LazyLoad from 'react-lazyload';
 import { Box, Grid, Skeleton } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 
-import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
-import { ActionCard } from 'web-components/lib/components/molecules/ActionCard/ActionCard';
-import { RoundLogoItemsList } from 'web-components/lib/components/molecules/RoundLogoItemsList/RoundLogoItemsList';
-import { ImpactTags } from 'web-components/lib/components/organisms/ImpactTags/ImpactTags';
-import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
-import Section from 'web-components/lib/components/section';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
+import GlanceCard from 'web-components/src/components/cards/GlanceCard';
+import { ActionCard } from 'web-components/src/components/molecules/ActionCard/ActionCard';
+import { RoundLogoItemsList } from 'web-components/src/components/molecules/RoundLogoItemsList/RoundLogoItemsList';
+import { ImpactTags } from 'web-components/src/components/organisms/ImpactTags/ImpactTags';
+import ProjectPlaceInfo from 'web-components/src/components/place/ProjectPlaceInfo';
+import Section from 'web-components/src/components/section';
+import { Body, Label, Title } from 'web-components/src/components/typography';
 
 import { useLedger } from 'ledger';
 import { client as sanityClient } from 'lib/clients/sanity';

@@ -1,4 +1,4 @@
-import { getLinkTarget } from 'web-components/lib/utils/linkTarget';
+import { getLinkTarget } from 'web-components/src/utils/linkTarget';
 
 import {
   ButtonFieldsFragment,

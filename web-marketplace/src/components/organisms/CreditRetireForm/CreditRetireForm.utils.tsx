@@ -4,7 +4,7 @@ import {
   invalidMemoLength,
   validateAmount,
   validateMemoLength,
-} from 'web-components/lib/components/inputs/validation';
+} from 'web-components/src/components/inputs/validation';
 
 import { CreditRetireFormSchemaType } from './CreditRetireForm.schema';
 

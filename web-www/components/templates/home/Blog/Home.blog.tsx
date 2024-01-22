@@ -1,9 +1,9 @@
 import { ApolloQueryResult } from '@apollo/client';
 import Image from 'next/image';
 
-import { BlogPostProps } from 'web-components/lib/components/blog-post';
-import Section from 'web-components/lib/components/section';
-import BlogPosts from 'web-components/lib/components/sliders/BlogPosts';
+import { BlogPostProps } from 'web-components/src/components/blog-post';
+import Section from 'web-components/src/components/section';
+import BlogPosts from 'web-components/src/components/sliders/BlogPosts';
 
 import { useBlogStyles } from './Home.Blog.styles';
 

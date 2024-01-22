@@ -1,6 +1,6 @@
-import LinkedInBadgeIcon from 'web-components/lib/components/icons/social/LinkedInBadgeIcon';
-import TwitterBadgeIcon from 'web-components/lib/components/icons/social/TwitterBadgeIcon';
-import { SocialItems } from 'web-components/lib/components/share-section/ShareSection.types';
+import LinkedInBadgeIcon from 'web-components/src/components/icons/social/LinkedInBadgeIcon';
+import TwitterBadgeIcon from 'web-components/src/components/icons/social/TwitterBadgeIcon';
+import { SocialItems } from 'web-components/src/components/share-section/ShareSection.types';
 
 import { REGEN_APP_URL } from './getSocialItems.constants';
 

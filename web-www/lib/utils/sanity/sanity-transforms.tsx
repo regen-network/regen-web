@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import type { ArticleCardProps } from 'web-components/lib/components/cards/ArticleCard';
-import type { ResourcesCardProps } from 'web-components/lib/components/cards/ResourcesCard';
-import { formatDate } from 'web-components/lib/utils/format';
+import { BlockContent } from 'web-components/src/components/block-content';
+import type { ArticleCardProps } from 'web-components/src/components/cards/ArticleCard';
+import type { ResourcesCardProps } from 'web-components/src/components/cards/ResourcesCard';
+import { formatDate } from 'web-components/src/utils/format';
 
-import { Document } from '@/../web-components/lib/components/table/DocumentationTable/DocumentationTable';
+import { Document } from 'web-components/src/components/table/DocumentationTable/DocumentationTable';
 import {
   Doc,
   Maybe,

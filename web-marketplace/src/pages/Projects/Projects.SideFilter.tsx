@@ -10,11 +10,11 @@ import {
 import { useAtom } from 'jotai';
 import { sxToArray } from 'utils/mui/sxToArray';
 
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import FilterIcon from 'web-components/lib/components/icons/FilterIcon';
-import Checkbox from 'web-components/lib/components/inputs/new/CheckBox/Checkbox';
-import { CollapseList } from 'web-components/lib/components/organisms/CollapseList/CollapseList';
-import { Subtitle } from 'web-components/lib/components/typography';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import FilterIcon from 'web-components/src/components/icons/FilterIcon';
+import Checkbox from 'web-components/src/components/inputs/new/CheckBox/Checkbox';
+import { CollapseList } from 'web-components/src/components/organisms/CollapseList/CollapseList';
+import { Subtitle } from 'web-components/src/components/typography';
 
 import {
   creditClassSelectedFiltersAtom,

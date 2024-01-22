@@ -3,9 +3,9 @@ import { useFormState, useWatch } from 'react-hook-form';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import LocationField from 'web-components/lib/components/inputs/new/LocationField/LocationField';
-import { isGeocodingFeature } from 'web-components/lib/components/inputs/new/LocationField/LocationField.types';
+import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
+import LocationField from 'web-components/src/components/inputs/new/LocationField/LocationField';
+import { isGeocodingFeature } from 'web-components/src/components/inputs/new/LocationField/LocationField.types';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 

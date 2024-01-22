@@ -1,5 +1,5 @@
-import { Account } from 'web-components/lib/components/user/UserInfo';
-import { truncate } from 'web-components/lib/utils/truncate';
+import { Account } from 'web-components/src/components/user/UserInfo';
+import { truncate } from 'web-components/src/utils/truncate';
 
 import { AccountFieldsFragment, Maybe } from 'generated/graphql';
 

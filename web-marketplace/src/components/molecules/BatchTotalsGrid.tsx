@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, SxProps, Theme } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 
-import { LabeledNumber } from 'web-components/lib/components/text-layouts';
+import { LabeledNumber } from 'web-components/src/components/text-layouts';
 
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 

@@ -5,7 +5,7 @@ import {
   requiredMessage,
   validateAmount,
   validatePrice,
-} from 'web-components/lib/components/inputs/validation';
+} from 'web-components/src/components/inputs/validation';
 
 type Params = {
   availableAmountByBatch?: { [batchDenom: string]: number };

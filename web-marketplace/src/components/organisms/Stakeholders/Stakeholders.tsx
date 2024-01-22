@@ -1,9 +1,9 @@
 import { Grid, TooltipProps } from '@mui/material';
 
-import { CollapseList } from 'web-components/lib/components/organisms/CollapseList/CollapseList';
-import UserInfo, { Account } from 'web-components/lib/components/user/UserInfo';
-import UserInfoWithTitle from 'web-components/lib/components/user/UserInfoWithTitle';
-import { defaultFontFamily } from 'web-components/lib/theme/muiTheme';
+import { CollapseList } from 'web-components/src/components/organisms/CollapseList/CollapseList';
+import UserInfo, { Account } from 'web-components/src/components/user/UserInfo';
+import UserInfoWithTitle from 'web-components/src/components/user/UserInfoWithTitle';
+import { defaultFontFamily } from 'web-components/src/theme/muiTheme';
 
 export type Stakeholder = {
   accounts: Account | Account[] | undefined;

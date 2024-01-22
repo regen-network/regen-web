@@ -9,7 +9,7 @@ import { DevTool } from '@hookform/devtools';
 import { Box, SxProps } from '@mui/material';
 import { sxToArray } from 'utils/mui/sxToArray';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { IS_DEV } from 'lib/env';
 

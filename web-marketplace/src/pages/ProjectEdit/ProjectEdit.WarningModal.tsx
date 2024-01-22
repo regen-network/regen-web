@@ -1,6 +1,6 @@
-import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
-import { CancelButtonFooter } from 'web-components/lib/components/organisms/CancelButtonFooter/CancelButtonFooter';
-import { Body, Title } from 'web-components/lib/components/typography';
+import Modal, { RegenModalProps } from 'web-components/src/components/modal';
+import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
+import { Body, Title } from 'web-components/src/components/typography';
 
 interface Props extends RegenModalProps {
   navigate: () => void;

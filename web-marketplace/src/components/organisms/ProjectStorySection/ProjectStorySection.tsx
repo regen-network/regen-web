@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
 import { sxToArray } from 'utils/mui/sxToArray';
 
-import Section from 'web-components/lib/components/section';
+import Section from 'web-components/src/components/section';
 
 import { StoryMedia } from './ProjectStorySection.StoryMedia';
 import { StoryText } from './ProjectStorySection.StoryText';

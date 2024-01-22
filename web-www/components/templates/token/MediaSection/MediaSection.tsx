@@ -1,10 +1,10 @@
 import React from 'react';
 import { useTheme } from '@mui/material';
 
-import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
-import Section from 'web-components/lib/components/section';
-import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import { Title } from 'web-components/lib/components/typography';
+import ArticleCard from 'web-components/src/components/cards/ArticleCard';
+import Section from 'web-components/src/components/section';
+import ResponsiveSlider from 'web-components/src/components/sliders/ResponsiveSlider';
+import { Title } from 'web-components/src/components/typography';
 
 import { useMediaSectionStyles } from './MediaSection.styles';
 

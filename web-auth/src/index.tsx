@@ -4,7 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
-import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
+import ThemeProvider from 'web-components/src/theme/RegenThemeProvider';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';

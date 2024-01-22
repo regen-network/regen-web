@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import type { BasketInfo } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { MsgPut } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
 
-import type { FormValues as BasketPutFormValues } from 'web-components/lib/components/form/BasketPutForm/BasketPutForm';
+import type { FormValues as BasketPutFormValues } from 'web-components/src/components/form/BasketPutForm/BasketPutForm';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import {

@@ -3,7 +3,7 @@ import { z } from 'zod';
 import {
   positiveNumber,
   requiredMessage,
-} from 'web-components/lib/components/inputs/validation';
+} from 'web-components/src/components/inputs/validation';
 
 export const basicInfoFormSchema = z.object({
   'schema:name': z.string().nonempty(requiredMessage),

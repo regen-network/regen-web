@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useTheme } from '@mui/material';
-import { DefaultTheme as Theme } from '@mui/styles';
+import { Theme } from '@mui/material/styles';
 import { makeStyles } from 'tss-react/mui';
 
 import PlaceInfo from './PlaceInfo';

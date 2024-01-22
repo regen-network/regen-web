@@ -2,7 +2,7 @@ import { makeStyles } from 'tss-react/mui';
 
 import { Theme } from '../../../../theme/muiTheme';
 
-export const useImageDropStyles = makeStyles()((theme: Theme) => ({
+export const useFileDropStyles = makeStyles()((theme: Theme) => ({
   root: {
     height: '100%',
     width: '100%',
@@ -16,6 +16,11 @@ export const useImageDropStyles = makeStyles()((theme: Theme) => ({
     height: '100%',
     width: '100%',
     borderRadius: 5,
+  },
+  previewVideo: {
+    '& video': {
+      borderRadius: 5,
+    },
   },
   main: {
     height: '100%',

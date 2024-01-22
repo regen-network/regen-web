@@ -1,16 +1,18 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, ReactNode, useState } from 'react';
 import { DropzoneOptions } from 'react-dropzone';
 import { Crop } from 'react-image-crop';
+import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import { Feature } from 'geojson';
 
 import { getImageSrc } from '../../../image-crop/canvas-utils';
-import CropImageModal from '../../../modal/CropImageModal';
 import FieldFormControl, {
   FieldFormControlProps,
 } from '../FieldFormControl/FieldFormControl';
-import { ImageDropImage } from './ImageDrop.Image';
-import { useImageDropStyles } from './ImageDrop.styles';
-import { toBase64 } from './ImageDrop.utils';
-import { ImageDropZone } from './ImageDrop.Zone';
+import { FileDropFile } from './FileDrop.File';
+import { useFileDropStyles } from './FileDrop.styles';
+import { FileDropRenderModalProps } from './FileDrop.types';
+import { toBase64 } from './FileDrop.utils';
+import { FileDropZone } from './FileDrop.Zone';
 
 export interface ImageDropProps extends Partial<FieldFormControlProps> {
   className?: string;
@@ -23,9 +25,12 @@ export interface ImageDropProps extends Partial<FieldFormControlProps> {
   value?: string;
   caption?: string;
   credit?: string;
+  location?: GeocodeFeature | Feature;
   label?: string;
   name: string;
-  description?: string;
+  fileName?: string;
+  mimeType?: string;
+  description?: ReactNode;
   optional?: boolean | string;
   buttonText?: string;
   fixedCrop?: Partial<Crop>;
@@ -34,15 +39,18 @@ export interface ImageDropProps extends Partial<FieldFormControlProps> {
   children?: React.ReactNode;
   dropZoneOption?: DropzoneOptions;
   isCropSubmitDisabled?: boolean;
-  setValue: (value: string, fieldIndex: number) => void;
+  renderModal: (_: FileDropRenderModalProps) => React.ReactNode;
+  setValue: (value: string, mimeType: string, fieldIndex: number) => void;
   onDelete?: (fileName: string) => Promise<void>;
   onUpload?: (imageFile: File) => Promise<string | undefined>;
+  accept?: string;
+  multi?: boolean;
 }
 
 /**
- * Drop an Image File and the Crop Modal will open with your image
+ * Drop file(s) and render a modal for those files
  */
-const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
+const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
   (
     {
       className,
@@ -57,30 +65,36 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
       value,
       caption,
       credit,
+      fileName,
+      location,
+      mimeType,
       isSubmitting,
       fieldIndex = 0,
       isCropSubmitDisabled = false,
       children,
+      renderModal,
       setValue,
       onUpload,
       onDelete,
+      accept,
+      multi = false,
       ...fieldProps
     },
     ref,
   ) => {
-    const [cropModalOpen, setCropModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [initialImage, setInitialImage] = useState('');
-    const [fileName, setFileName] = useState('');
-    const { classes: styles, cx } = useImageDropStyles();
+    const [selectedFiles, setSelectedFiles] = useState<Array<File>>([]);
+    const { classes: styles, cx } = useFileDropStyles();
     const isFirstField = fieldIndex === 0;
 
     const handleDrop = (files: File[]): void => {
       if (files && files.length > 0) {
         const file = files[0];
-        setFileName(file.name);
+        setSelectedFiles(multi ? files : [file]);
         toBase64(file).then(base64String => {
           if (typeof base64String === 'string') {
-            setCropModalOpen(true);
+            setIsModalOpen(true);
             setInitialImage(base64String);
           }
         });
@@ -96,44 +110,68 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
         event.target.files &&
         event.target.files.length > 0
       ) {
-        const file = event.target.files[0];
-        setFileName(file.name);
+        const files = event.target.files;
+        const file = files[0];
+        setSelectedFiles(multi ? Array.from(files) : [file]);
         toBase64(file).then(base64String => {
           if (typeof base64String === 'string') {
-            setCropModalOpen(true);
+            setIsModalOpen(true);
             setInitialImage(base64String);
           }
         });
       }
     };
 
-    const handleCropModalClose = (): void => {
+    const onModalClose = (): void => {
       setInitialImage('');
-      setFileName('');
-      setCropModalOpen(false);
+      const remainingFiles = selectedFiles.slice(1);
+      setSelectedFiles(remainingFiles);
+      setIsModalOpen(false);
+      if (multi && remainingFiles.length > 0) {
+        toBase64(remainingFiles[0]).then(base64String => {
+          if (typeof base64String === 'string') {
+            setIsModalOpen(true);
+            setInitialImage(base64String);
+          }
+        });
+      }
     };
 
-    const onCropModalSubmit = async (
+    const onModalSubmit = async (
       croppedImage: HTMLImageElement,
     ): Promise<void> => {
-      const result = await getImageSrc(croppedImage, onUpload, fileName);
+      const currentFile = selectedFiles[0];
+      const result = await getImageSrc(
+        croppedImage,
+        onUpload,
+        currentFile.name,
+      );
 
       if (result) {
-        setValue(result, fieldIndex);
-        setCropModalOpen(false);
+        setValue(result, currentFile.type, fieldIndex);
+        const remainingFiles = selectedFiles.slice(1);
+        setSelectedFiles(remainingFiles);
+        setIsModalOpen(false);
+        if (multi && remainingFiles.length > 0) {
+          toBase64(remainingFiles[0]).then(base64String => {
+            if (typeof base64String === 'string') {
+              setIsModalOpen(true);
+              setInitialImage(base64String);
+            }
+          });
+        }
       }
     };
 
     const handleDelete = async (valueToDelete: string) => {
       setInitialImage('');
-      setFileName('');
+      setSelectedFiles([]);
       if (onDelete) {
         await onDelete(valueToDelete ?? '');
       }
     };
 
-    const handleEdit = () => setCropModalOpen(true);
-
+    const handleEdit = () => setIsModalOpen(true);
     return (
       <>
         <FieldFormControl
@@ -145,16 +183,20 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
           {...fieldProps}
         >
           {value && (
-            <ImageDropImage
+            <FileDropFile
               handleDelete={handleDelete}
               handleEdit={handleEdit}
               value={value}
               caption={caption}
+              name={fileName}
               credit={credit}
+              location={location}
+              mimeType={mimeType}
+              accept={accept}
               classes={classes}
             />
           )}
-          <ImageDropZone
+          <FileDropZone
             handleDrop={handleDrop}
             handleFileChange={handleFileChange}
             buttonText={buttonText}
@@ -162,23 +204,20 @@ const ImageDrop = forwardRef<HTMLInputElement, ImageDropProps>(
             hideDragText={hideDragText}
             name={name}
             value={value}
+            accept={accept}
             ref={ref}
           />
         </FieldFormControl>
-        <CropImageModal
-          open={cropModalOpen}
-          onClose={handleCropModalClose}
-          onSubmit={onCropModalSubmit}
-          initialImage={initialImage}
-          fixedCrop={fixedCrop}
-          isCropSubmitDisabled={isCropSubmitDisabled}
-          isIgnoreCrop={!!value}
-        >
-          {children}
-        </CropImageModal>
+        {renderModal({
+          open: isModalOpen,
+          initialImage,
+          children,
+          onClose: onModalClose,
+          onSubmit: onModalSubmit,
+        })}
       </>
     );
   },
 );
 
-export { ImageDrop };
+export { FileDrop };

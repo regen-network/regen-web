@@ -2,14 +2,15 @@ import { MutableRefObject } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
 import {
-  ImageDrop,
+  FileDrop,
   ImageDropProps,
-} from 'web-components/lib/components/inputs/new/ImageDrop/ImageDrop';
+} from 'web-components/lib/components/inputs/new/FileDrop/FileDrop';
 import { Radio } from 'web-components/lib/components/inputs/new/Radio/Radio';
 import { RADIO_PREFERABLE } from 'web-components/lib/components/inputs/new/Radio/Radio.constants';
 import { RadioGroup } from 'web-components/lib/components/inputs/new/RadioGroup/RadioGroup';
 import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
 import { VideoInput } from 'web-components/lib/components/inputs/new/VideoInput/VideoInput';
+import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
 import { UseStateSetter } from 'web-components/lib/types/react/useState';
 
 import { apiUri } from 'lib/apiUri';
@@ -116,7 +117,7 @@ export const MediaFormStory = ({
           {...register(`regen:storyMedia.@type`)}
         >
           {isImage && (
-            <ImageDrop
+            <FileDrop
               value={url && isImageUrl ? url : ''}
               credit={storyMedia?.['schema:creditText']}
               setValue={setStoryMediaUrl}
@@ -125,6 +126,26 @@ export const MediaFormStory = ({
               dropZoneOption={{ maxFiles: 1 }}
               error={!!errors['regen:storyMedia']}
               helperText={errors['regen:storyMedia']?.message}
+              accept="image/*"
+              renderModal={({
+                initialImage,
+                open,
+                value,
+                children,
+                onClose,
+                onSubmit,
+              }) => (
+                <CropImageModal
+                  open={open}
+                  onClose={onClose}
+                  onSubmit={onSubmit}
+                  initialImage={initialImage}
+                  fixedCrop={cropAspectMediaForm}
+                  isIgnoreCrop={!!value}
+                >
+                  {children}
+                </CropImageModal>
+              )}
               optional
               {...imageDropCommonProps}
               {...register('regen:storyMedia.schema:url')}
@@ -139,7 +160,7 @@ export const MediaFormStory = ({
                 error={!!errors['regen:storyMedia']?.['schema:creditText']}
                 optional
               />
-            </ImageDrop>
+            </FileDrop>
           )}
         </Radio>
       </>

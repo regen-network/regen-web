@@ -1,7 +1,7 @@
 import { CardMedia, CardMediaProps } from '@mui/material';
 
-import { ImageDropBottomBar } from '../../../components/inputs/new/ImageDrop/ImageDrop.BottomBar';
 import { sxToArray } from '../../../utils/mui/sxToArray';
+import { FileDropBottomBar } from '../../inputs/new/FileDrop/FileDrop.BottomBar';
 import Card from '../Card';
 
 const Photo = ({
@@ -18,7 +18,7 @@ const Photo = ({
         src={src}
       />
       {(caption || credit) && (
-        <ImageDropBottomBar
+        <FileDropBottomBar
           caption={caption}
           credit={credit}
           sx={{ position: 'absolute', bottom: 0 }}

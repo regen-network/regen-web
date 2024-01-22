@@ -27,6 +27,8 @@ export default function ControlledFormLabel({
         size="lg"
         as="label"
         sx={{
+          display: 'flex',
+          alignItems: 'center',
           color: disabled ? 'info.main' : 'primary.contrastText',
           '&::after': {
             color: 'info.main',

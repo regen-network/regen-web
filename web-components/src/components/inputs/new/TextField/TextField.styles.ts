@@ -61,13 +61,13 @@ export const useTextFieldStyles = makeStyles<UseStylesParams>()(
         [theme.breakpoints.up('sm')]: {
           paddingLeft: theme.spacing(3.75),
           paddingRight: theme.spacing(3.75),
-          fontSize: theme.spacing(4.5),
+          fontSize: theme.spacing(4),
           height: theme.spacing(15), // 11.25
         },
         [theme.breakpoints.down('sm')]: {
           paddingLeft: theme.spacing(3.25),
           paddingRight: theme.spacing(3.25),
-          fontSize: theme.spacing(4),
+          fontSize: theme.spacing(3.5),
           height: theme.spacing(12.5), // 8.75
         },
         '& .MuiSvgIcon-root': {

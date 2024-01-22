@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Box } from '@mui/material';
 
 import { Flex } from '../../../../components/box';
@@ -7,10 +7,10 @@ import { Body } from '../../../typography';
 
 interface Props {
   className?: string;
-  description?: string;
+  description?: ReactNode;
   disabled?: boolean;
   optional?: boolean | string;
-  label?: string;
+  label?: ReactNode;
   onExampleClick?: () => void;
 }
 

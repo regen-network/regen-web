@@ -8,6 +8,7 @@ import ArrowLeftIcon from './ArrowLeft';
 import ArrowRightIcon from './ArrowRight';
 import ArrowSkipLeftIcon from './ArrowSkipLeft';
 import ArrowSkipRightIcon from './ArrowSkipRight';
+import { AudioFileIcon } from './AudioFileIcon';
 import AvailableCreditsIcon from './AvailableCreditsIcon';
 import AvatarIcon from './AvatarIcon';
 import AvatarOutlineIcon from './AvatarOutlineIcon';
@@ -50,14 +51,18 @@ import InfoIcon from './InfoIcon';
 import InfoIconOutlined from './InfoIconOutlined';
 import InterfaceIcon from './InterfaceIcon';
 import LinkIcon from './LinkIcon';
+import { LocationIcon } from './LocationIcon';
 import LocationSearchIcon from './LocationSearchIcon';
+import { LockIcon } from './LockIcon';
 import MinusIcon from './MinusIcon';
 import NoBasketTokensIcon from './NoBasketTokensIcon';
 import NoEcocreditsIcon from './NoEcocreditsIcon';
 import { NoProjectIcon } from './NoProjectIcon';
 import NoRetirementCertificatesIcon from './NoRetirementCertificatesIcon';
 import OrganizationIcon from './OrganizationIcon';
+import { OtherDocumentsIcon } from './OtherDocumentsIcon';
 import OutlinedCheckIcon from './OutlinedCheckIcon';
+import { PdfFileIcon } from './PdfFileIcon';
 import PendingIcon from './PendingIcon';
 import PhoneIcon from './PhoneIcon';
 import PinIcon from './PinIcon';
@@ -65,6 +70,7 @@ import PlayIcon from './PlayIcon';
 import PlusIcon from './PlusIcon';
 import PointerIcon from './PointerIcon';
 import PrintIcon from './PrintIcon';
+import { PrivateFile } from './PrivateFile';
 import { ProjectPageIcon } from './ProjectPageIcon';
 import { ProjectPageIconSmall } from './ProjectPageIconSmall';
 import PutInBasketIcon from './PutInBasketIcon';
@@ -103,6 +109,7 @@ import WebsiteLinkIcon from './social/WebsiteLinkIcon';
 import YoutubeIcon from './social/YoutubeIcon';
 import SoilSampleIcon from './SoilSampleIcon';
 import { Spinner } from './Spinner';
+import { SpreadsheetFileIcon } from './SpreadsheetFileIcon';
 import SuccessIcon from './SuccessIcon';
 import TakeFromBasketIcon from './TakeFromBasketIcon';
 import TotalCreditsIcon from './TotalCreditsIcon';
@@ -111,6 +118,7 @@ import TradeableIcon from './TradeableIcon';
 import TrashIcon from './TrashIcon';
 import TrustDocumentIcon from './TrustDocumentIcon';
 import TrustIcon from './TrustIcon';
+import { UnlockIcon } from './UnlockIcon';
 import UserMenuIcon from './UserMenuIcon';
 import VerifiedIcon from './VerifiedIcon';
 import WalletErrorIcon from './WalletErrorIcon';
@@ -164,6 +172,7 @@ export const allIcons = (): JSX.Element => (
       icon={<ArrowSkipRightIcon sx={{ color: 'secondary.main' }} />}
       label="ArrowSkipRightIcon"
     />
+    <LabeledIcon icon={<AudioFileIcon />} label="AudioFileIcon" />
     <LabeledIcon icon={<AxlUsdcIcon />} label="AxlUsdcIcon" />
     <LabeledIcon icon={<AccountabilityIcon />} label="AccountabilityIcon" />
     <LabeledIcon
@@ -255,7 +264,9 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<LinkedInIcon color="blue" />} label="LinkedInIcon" />
     <LabeledIcon icon={<LinkedInBadgeIcon />} label="LinkedInBadgeIcon" />
     <LabeledIcon icon={<LinkIcon />} label="LinkIcon" />
+    <LabeledIcon icon={<LocationIcon />} label="LocationIcon" />
     <LabeledIcon icon={<LocationSearchIcon />} label="LocationSearchIcon" />
+    <LabeledIcon icon={<LockIcon />} label="LockIcon" />
     <LabeledIcon icon={<MediumIcon color="grey" />} label="MediumIcon" />
     <LabeledIcon icon={<MinusIcon />} label="MinusIcon" />
     <LabeledIcon icon={<NoBasketTokensIcon />} label="NoBasketTokensIcon" />
@@ -266,7 +277,10 @@ export const allIcons = (): JSX.Element => (
       label="NoRetirementCertificatesIcon"
     />
     <LabeledIcon icon={<OrganizationIcon />} label="OrganizationIcon" />
+
+    <LabeledIcon icon={<OtherDocumentsIcon />} label="OtherDocumentsIcon" />
     <LabeledIcon icon={<OutlinedCheckIcon />} label="OutlinedCheckIcon" />
+    <LabeledIcon icon={<PdfFileIcon />} label="PdfFileIcon" />
     <LabeledIcon icon={<PendingIcon />} label="PendingIcon" />
     <LabeledIcon
       icon={<PhoneIcon sx={{ color: 'secondary.main' }} />}
@@ -277,6 +291,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<PlusIcon />} label="PlusIcon" />
     <LabeledIcon icon={<PointerIcon />} label="PointerIcon" />
     <LabeledIcon icon={<PrintIcon />} label="PrintIcon" />
+    <LabeledIcon icon={<PrivateFile />} label="PrivateFile" />
     <LabeledIcon icon={<ProjectPageIcon />} label="ProjectPageIcon" />
     <LabeledIcon icon={<ProjectPageIconSmall />} label="ProjectPageIconSmall" />
     <LabeledIcon icon={<SadBeeIcon />} label="SadBeeIcon" />
@@ -318,6 +333,7 @@ export const allIcons = (): JSX.Element => (
     />
     <LabeledIcon icon={<SoilSampleIcon />} label="SoilSampleIcon" />
     <LabeledIcon icon={<Spinner />} label="Spinner" />
+    <LabeledIcon icon={<SpreadsheetFileIcon />} label="SpreadsheetFileIcon" />
     <LabeledIcon icon={<SuccessIcon />} label="SuccessIcon" />
     <LabeledIcon icon={<TakeFromBasketIcon />} label="TakeFromBasketIcon" />
     <LabeledIcon icon={<TelegramIcon color="blue" />} label="TelegramIcon" />
@@ -336,6 +352,7 @@ export const allIcons = (): JSX.Element => (
       label="TwitterIcon2"
     />
     <LabeledIcon icon={<TwitterBadgeIcon />} label="TwitterBadgeIcon" />
+    <LabeledIcon icon={<UnlockIcon />} label="UnlockIcon" />
     <LabeledIcon icon={<UsdcIcon />} label="UsdcIcon" />
     <LabeledIcon icon={<UserMenuIcon />} label="UserMenuIcon" />
     <LabeledIcon icon={<VerifiedIcon color="#000" />} label="VerifiedIcon" />

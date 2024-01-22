@@ -32,7 +32,7 @@ export interface ArticleCardProps {
   play?: boolean;
 }
 
-const useStyles = makeStyles()((theme: Theme) => ({
+export const useArticleCardStyles = makeStyles()((theme: Theme) => ({
   play: {
     background: theme.palette.primary.main,
     borderRadius: '50%',
@@ -40,8 +40,8 @@ const useStyles = makeStyles()((theme: Theme) => ({
     height: theme.spacing(17.5),
     position: 'absolute',
     left: '50%',
-    transform: 'translateX(-50%)',
-    top: theme.spacing(15.625),
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -59,7 +59,7 @@ export default function ArticleCard({
   type,
   play = false,
 }: ArticleCardProps): JSX.Element {
-  const { classes: styles } = useStyles();
+  const { classes: styles } = useArticleCardStyles();
   const theme = useTheme();
   return (
     <MediaCard

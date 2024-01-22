@@ -8,5 +8,6 @@ export const useLocationStyles = makeStyles()((theme: Theme) => ({
     backgroundColor: theme.palette.primary.main,
     padding: theme.spacing(1.25),
     cursor: 'pointer',
+    zIndex: 1,
   },
 }));

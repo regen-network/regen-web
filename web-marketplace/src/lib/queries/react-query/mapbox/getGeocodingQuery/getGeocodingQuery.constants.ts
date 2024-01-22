@@ -1,4 +1,12 @@
-export const getGeocodingKey = (search?: string): string[] => [
+import { ReactQueryGeocodingRequest } from './getGeocodingQuery.types';
+
+export const getGeocodingKey = ({
+  reverse,
+  query,
+  types,
+}: ReactQueryGeocodingRequest): string[] => [
   'geocoding',
-  search ?? '',
+  reverse ? 'reverse' : '',
+  typeof query === 'string' ? query : query?.toString() || '',
+  types ? types?.toString() : '',
 ];

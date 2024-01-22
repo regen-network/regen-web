@@ -178,7 +178,7 @@ function ProjectDetails(): JSX.Element {
 
   const { data: geocodingJurisdictionData } = useQuery(
     getGeocodingQuery({
-      request: { search: countryCode },
+      request: { query: countryCode },
       enabled: !!countryCode,
     }),
   );

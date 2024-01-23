@@ -112,7 +112,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
               <Box sx={{ display: 'inline-block' }}>
                 Unlock{' '}
                 <Box sx={{ display: 'inline-block', ...gradients.blueGreen }}>
-                  Regenerative Finance
+                  Regenerative Finances
                 </Box>
                 <Box sx={{ display: { xs: 'none', md: 'inline-block' } }}>
                   with{' '}

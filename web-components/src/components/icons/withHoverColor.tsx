@@ -1,4 +1,4 @@
-import React, { ComponentType, useState } from 'react';
+import { ComponentType, PropsWithChildren, useState, FC } from 'react';
 import { useTheme } from '@mui/material';
 
 export interface Props {
@@ -9,7 +9,7 @@ export interface Props {
 }
 
 function withHoverColor(
-  BaseComponent: ComponentType<React.PropsWithChildren<Props>>,
+  BaseComponent: FC<Props>,
 ) {
   return (props: {
     hoverColor?: string;

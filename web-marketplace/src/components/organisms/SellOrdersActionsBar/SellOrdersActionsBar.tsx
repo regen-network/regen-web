@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { Buy1Event } from 'web-marketplace/src/lib/tracker/types';
@@ -16,7 +17,6 @@ import {
   BOOK_CALL,
   BUY_DISABLED_TOOLTIP,
 } from './SellOrdersActionsBar.constants';
-import { ReactNode } from 'react';
 
 type Params = {
   isBuyButtonDisabled: boolean;

@@ -7,8 +7,8 @@ import {
 import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { TablePaginationParams } from 'web-components/src/components/table/ActionsTable';
-import { Account } from 'web-components/src/components/user/UserInfo';
 import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/Table.constants';
+import { Account } from 'web-components/src/components/user/UserInfo';
 
 import { RetirementsOrderBy } from 'generated/indexer-graphql';
 import { useLedger } from 'ledger';

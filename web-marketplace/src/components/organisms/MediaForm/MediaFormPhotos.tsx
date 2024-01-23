@@ -1,6 +1,7 @@
 import { MutableRefObject, useEffect } from 'react';
 import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
 
+import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
 import {
   FileDrop,
   ImageDropProps,
@@ -9,7 +10,6 @@ import { TextAreaField } from 'web-components/src/components/inputs/new/TextArea
 import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
-import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
 
 import { useProjectEditContext } from 'pages';
 

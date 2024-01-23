@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useTheme } from '@mui/material';
+import { Theme } from '@mui/material/styles';
 import Tab, { TabProps } from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { Theme } from '@mui/material/styles';
 import { makeStyles, withStyles } from 'tss-react/mui';
 
 export interface RegenTab extends Omit<TabProps, 'content'> {

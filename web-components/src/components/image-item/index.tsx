@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import { Variant } from '@mui/material/styles/createTypography';
 import { Theme } from '@mui/material/styles';
+import { Variant } from '@mui/material/styles/createTypography';
 import { SxProps } from '@mui/system';
 import { makeStyles } from 'tss-react/mui';
 

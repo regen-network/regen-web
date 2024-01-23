@@ -3,6 +3,7 @@ import { useWatch } from 'react-hook-form';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Feature } from 'geojson';
 
+import { isImage } from 'web-components/lib/components/inputs/new/FileDrop/FileDrop.utils';
 import { isGeocodingFeature } from 'web-components/lib/components/inputs/new/LocationField/LocationField.types';
 import { LocationPicker } from 'web-components/lib/components/inputs/new/LocationPicker/LocationPicker';
 import { Radio } from 'web-components/lib/components/inputs/new/Radio/Radio';
@@ -28,7 +29,6 @@ import {
   EditFileFormSchemaType,
 } from './EditFileForm.schema';
 import {} from './EditFileForm.types';
-import { isImage } from 'web-components/lib/components/inputs/new/FileDrop/FileDrop.utils';
 
 export interface Props {
   initialValues: EditFileFormSchemaType;
@@ -54,7 +54,7 @@ export const EditFileForm = ({
   const form = useZodForm({
     schema: editFileFormSchema,
     defaultValues: {
-      ...initialValues, 
+      ...initialValues,
       location: initialValues.location || fileLocation || projectLocation,
     },
     mode: 'onBlur',

@@ -1,6 +1,7 @@
 import { MutableRefObject } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
+import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
 import {
   FileDrop,
   ImageDropProps,
@@ -11,7 +12,6 @@ import { RadioGroup } from 'web-components/src/components/inputs/new/RadioGroup/
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 import { VideoInput } from 'web-components/src/components/inputs/new/VideoInput/VideoInput';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
-import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
 
 import { apiUri } from 'lib/apiUri';
 import { IMAGE_STORAGE_BASE_URL } from 'lib/env';

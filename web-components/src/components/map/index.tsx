@@ -9,8 +9,8 @@ import ReactMapGL, {
   WebMercatorViewport,
 } from 'react-map-gl';
 import { useTheme } from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import { Theme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import bbox from '@turf/bbox';
 // import { FeatureCollection } from 'geojson'; TODO
 // import { AllGeoJSON } from '@turf/helpers';

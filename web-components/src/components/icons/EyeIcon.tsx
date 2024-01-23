@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTheme } from '@mui/material';
-import SvgIcon from '@mui/material/SvgIcon';
 import { Theme } from '@mui/material/styles';
+import SvgIcon from '@mui/material/SvgIcon';
 import { makeStyles } from 'tss-react/mui';
 
 const useStyles = makeStyles()((theme: Theme) => ({

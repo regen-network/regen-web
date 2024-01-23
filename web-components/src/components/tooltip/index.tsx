@@ -1,5 +1,5 @@
-import Tooltip, { TooltipProps } from '@mui/material/Tooltip';
 import { Theme } from '@mui/material/styles';
+import Tooltip, { TooltipProps } from '@mui/material/Tooltip';
 import { withStyles } from 'tss-react/mui';
 
 function arrowGenerator(): any {

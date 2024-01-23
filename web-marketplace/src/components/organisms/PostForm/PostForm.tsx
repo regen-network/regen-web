@@ -281,8 +281,8 @@ export const PostForm = ({
                   </b>
                   <br />
                   <i>
-                    The post and files still can be shared privately via
-                    secret link.
+                    The post and files still can be shared privately via secret
+                    link.
                   </i>
                 </>
               }

@@ -55,12 +55,6 @@ Note: `python` and `vips` are dependencies via `sharp`.
 bun install
 ```
 
-Prepare some artifacts needed to run in dev mode:
-
-```sh
-bun run build
-```
-
 ## Environment variables
 
 Set variables in `.env` files in `web-marketplace/` and `web-storybook/` folders based on provided `.env.example` files.
@@ -69,15 +63,7 @@ For `web-auth`, follow these [setup instructions](web-auth/README.md#setup).
 
 ## Development
 
-First, run:
-
-```sh
-bun run watch
-```
-
-It will watch for changes in `web-components` and rebuild them in `web-components/lib` directory.
-
-Then, to run the registry app:
+To run the marketplace app:
 
 ```sh
 bun run start
@@ -89,17 +75,17 @@ To run Storybook:
 bun run storybook
 ```
 
-To run the auth app:
+To run the website:
 
 ```sh
-bun run start-auth
+cd web-www && bun run dev
 ```
 
 ## Deployment
 
-### Registry
+### Marketplace
 
-Compile `web-components` and `web-marketplace` to `web-components/lib` and `web-marketplace/build` respectively:
+Compile `web-marketplace` to `web-marketplace/build` respectively:
 
 ```sh
 bun run build
@@ -122,12 +108,12 @@ bun run graphql:codegen
 
 This should be done anytime a `.graphql` file is created or modified.
 
-As part of https://github.com/regen-network/registry-server/pull/186, we've added some additional filtering features to our GraphQL server (using [postgraphile-plugin-connection-filter](https://github.com/graphile-contrib/postgraphile-plugin-connection-filter)), though we restricted the filters to only work on certain fields and operators for now for [performance and security](https://github.com/graphile-contrib/postgraphile-plugin-connection-filter#performance-and-security) reasons:
-https://github.com/regen-network/registry-server/blob/aa97096c9a8e88e1af97655586e0222e263b8df5/server/Server.ts#L111-L115
+As part of https://github.com/regen-network/regen-server/pull/186, we've added some additional filtering features to our GraphQL server (using [postgraphile-plugin-connection-filter](https://github.com/graphile-contrib/postgraphile-plugin-connection-filter)), though we restricted the filters to only work on certain fields and operators for now for [performance and security](https://github.com/graphile-contrib/postgraphile-plugin-connection-filter#performance-and-security) reasons:
+https://github.com/regen-network/regen-server/blob/aa97096c9a8e88e1af97655586e0222e263b8df5/server/Server.ts#L111-L115
 
 If you try to use a filter that is not allowed yet, you'll get the following error when trying to generate types:
 `GraphQLDocumentError: Field "${fieldName}" is not defined by type "${TableName}Filter".`
-In this case, you might want to submit a PR on https://github.com/regen-network/registry-server first to allow more filtering options.
+In this case, you might want to submit a PR on https://github.com/regen-network/regen-server first to allow more filtering options.
 
 Similarly, types can be generated for Sanity GraphQL Schema (from `web-marketplace/src/graphql/sanity/*.graphql`) using:
 
@@ -137,10 +123,14 @@ bun run graphql:codegen-sanity
 
 ### Storybook
 
-Compile `web-components` and `web-storybook` to `web-components/lib` and `web-storybook/build` respectively:
-
 ```sh
 bun run build-storybook
+```
+
+### Website
+
+```sh
+bun run build-www
 ```
 
 ### Deploying the Custom Login form to Auth0

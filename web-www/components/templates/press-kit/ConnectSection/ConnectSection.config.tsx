@@ -8,7 +8,7 @@ import TelegramIcon from 'web-components/src/components/icons/social/TelegramIco
 import TwitterIcon from 'web-components/src/components/icons/social/TwitterIcon';
 import YoutubeIcon from 'web-components/src/components/icons/social/YoutubeIcon';
 
-import { Theme } from '@/../web-components/lib/theme/muiTheme';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import { IconLabelProps } from '@/components/organisms/ConnectSection/ConnectSection.types';
 
 export const getPressKitConnectIcons = (theme: Theme): IconLabelProps[] => [

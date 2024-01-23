@@ -1,7 +1,7 @@
 import { MutableRefObject, useEffect } from 'react';
 import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
 
-import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
+import CropImageModal from 'web-components/src/components/modal/CropImageModal';
 import {
   FileDrop,
   ImageDropProps,

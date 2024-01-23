@@ -6,8 +6,8 @@ import { useQuery } from '@tanstack/react-query';
 import cx from 'classnames';
 import { useSetAtom } from 'jotai';
 
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import CurrentCreditsIcon from 'web-components/src/components/icons/CurrentCreditsIcon';
 import { Gallery } from 'web-components/src/components/organisms/Gallery/Gallery';
 import SEO from 'web-components/src/components/seo';
 import ProjectMedia from 'web-components/src/components/sliders/ProjectMedia';

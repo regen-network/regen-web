@@ -53,7 +53,7 @@ const LocationField = forwardRef<HTMLInputElement, Props>(
         'address',
         'poi',
       ],
-      token: accessToken,
+      token: accessToken = '',
       value,
       handleChange,
       onBlur,

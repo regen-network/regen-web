@@ -18,11 +18,11 @@
     "web-www"
   ],
   "scripts": {
-    "build": "bun run build-components && bun run --cwd web-marketplace build",
-    "build-www": "bun run build-components && bun run --cwd web-www build",
+    "build": "bun run --cwd web-marketplace build",
+    "build-www": "bun run --cwd web-www build",
     "build-components": "bun run --cwd web-components build",
-    "build-storybook": "bun run build-components && bun run --cwd web-storybook build-storybook",
-    "build-auth": "bun run build-components && bun run --cwd web-auth build",
+    "build-storybook": "bun run --cwd web-storybook build-storybook",
+    "build-auth": "bun run --cwd web-auth build",
     "clean": "find . -iname 'node_modules' -maxdepth 2 | xargs rm -rf",
     "format": "bun run --cwd web-components format & bun run --cwd web-marketplace format & bun run --cwd web-www format",
     "lint": "bun run --cwd web-components lint & bun run --cwd web-marketplace lint & bun run --cwd web-www lint",

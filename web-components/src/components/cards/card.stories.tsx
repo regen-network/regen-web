@@ -7,6 +7,7 @@ import { QuestionItem } from '../faq/Question';
 import CurrentCreditsIcon from '../icons/CurrentCreditsIcon';
 import FarmerIcon from '../icons/FarmerIcon';
 import TrustIcon from '../icons/TrustIcon';
+import { User } from '../user/UserInfoCard';
 import Card from './Card';
 import GlanceCard from './GlanceCard';
 import GreenCard from './GreenCard';
@@ -16,6 +17,7 @@ import ImpactCard from './ImpactCard';
 import MapCard from './MapCard';
 import OnBoardingCard from './OnBoardingCard';
 import { OverviewCard } from './OverviewCard';
+import PostCard from './PostCard';
 import ProjectCard from './ProjectCard';
 import ProjectImpactCard from './ProjectImpactCard/ProjectImpactCard';
 import PurchasedCreditsCard from './PurchasedCreditsCard';
@@ -24,6 +26,11 @@ import { ReviewCard } from './ReviewCard';
 import { ItemDisplay } from './ReviewCard/ReviewCard.ItemDisplay';
 import { Photo } from './ReviewCard/ReviewCard.Photo';
 import { StepCard } from './StepCard';
+
+
+import { parseText } from 'src/utils/textParser';
+import ReactHtmlParser from 'html-react-parser';
+import { Body } from '../typography';
 
 export default {
   title: 'Cards',
@@ -331,3 +338,38 @@ export const reviewCard = (): JSX.Element => (
     <Photo src="/coorong.png" />
   </ReviewCard>
 );
+
+const userNameRaw = (
+  <Box>
+    <p>Odonata</p>
+    <p>{new Date().toString()}</p>
+  </Box>
+);
+
+export const postCard = (): JSX.Element => {
+  const user: User = {
+    name: 'Odonata',
+    type: 'ORGANIZATION',
+    image:
+      'https://cdn.sanity.io/images/jm12rn9t/staging/8b062589b6d8c6850a78bb13ead51d2f6f32b073-29x9.svg',
+  };
+  const signer: User = {
+    name: 'Odonata',
+    // TODO: fix hacky negative margin
+    nameRaw: <Body sx={{ mt: -2, ml: -3 }}>Odonata</Body>,
+    type: 'ORGANIZATION',
+    image:
+      'https://cdn.sanity.io/images/jm12rn9t/staging/8b062589b6d8c6850a78bb13ead51d2f6f32b073-29x9.svg',
+  }
+  return (
+    <PostCard
+      title="Fall 2023 Update"
+      description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      imgSrc="./impactag-smallmap-top-v2.jpg"
+      author={user}
+      authorRole="admin"
+      timestamp="2022-01-31T12:34:56Z"
+      signer={signer}
+    />
+  );
+};

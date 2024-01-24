@@ -6,9 +6,10 @@ import {
 } from '@apollo/client';
 import { StdSignature } from '@cosmjs/launchpad';
 import { OfflineSigner } from '@cosmjs/proto-signing';
-import { State } from '@cosmos-kit/core';
+import { WalletStatus } from '@cosmos-kit/core';
 import {
   useWallet as useCosmosKitWallet,
+  useManager,
   useWalletClient,
 } from '@cosmos-kit/react-lite';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
@@ -71,7 +72,6 @@ export type WalletContextType = {
   handleAddAddress?: () => Promise<void>;
   connectionType?: string;
   error?: unknown;
-  walletConnectUri?: string;
   signArbitrary?: SignArbitraryType;
   isConnected: boolean;
   accountChanging: boolean;
@@ -112,12 +112,13 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
 
   // Connecting via Wallet Connect is handled entirely using @cosmos-kit
   const [walletConnect, setWalletConnect] = useState<boolean>(false);
-  const { status, client: walletConnectClient } = useWalletClient(KEPLR_MOBILE);
+  const { client: walletConnectClient } = useWalletClient(KEPLR_MOBILE);
   const { mainWallet } = useCosmosKitWallet(KEPLR_MOBILE);
+  const { walletRepos } = useManager();
   const address = mainWallet?.getChainWallet('regen')?.address;
-
+  
   useEffect(() => {
-    if (status === State.Done) {
+    if (walletRepos[0]?.current?.walletStatus === WalletStatus.Connected) {
       const offlineSigner =
         walletConnectClient?.getOfflineSignerAmino?.('regen-1');
       if (offlineSigner && address) {
@@ -129,7 +130,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         setWalletConnect(true);
       }
     }
-  }, [address, status, walletConnectClient]);
+  }, [address, walletRepos[0]?.current?.walletStatus, walletConnectClient]);
 
   const signArbitrary = useSignArbitrary({
     setError,

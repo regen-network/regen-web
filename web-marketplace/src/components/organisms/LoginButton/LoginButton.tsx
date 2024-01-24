@@ -57,7 +57,7 @@ const LoginButton = ({ size = 'small' }: Props) => {
         <LoginFlow
           isModalOpen={isModalOpen}
           onModalClose={onModalClose}
-          wallets={walletsUiConfig} // TODO: remove if mobile + remove WC in all cases
+          wallets={walletsUiConfig}
           modalState={modalState}
           qrCodeUri={qrCodeUri}
           connecting={connecting}

@@ -17,7 +17,6 @@ export const useResetModalOnConnect = ({
   wallet,
 }: Props): void => {
   useEffect(() => {
-    console.log('address', wallet?.address)
     if (wallet?.address) {
       setModalState('select');
       setIsModalOpen(false);

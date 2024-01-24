@@ -1,24 +1,19 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { State, WalletStatus } from '@cosmos-kit/core';
 import { useManager } from '@cosmos-kit/react-lite';
-import { useAtom } from 'jotai';
 
-import { isWaitingForSigningAtom } from 'lib/atoms/tx.atoms';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { LoginModalState } from 'components/organisms/LoginModal/LoginModal.types';
 
-import { getMobileConnectUrl, getWalletsUiConfig } from '../LoginButton.utils';
+import { getWalletsUiConfig } from '../LoginButton.utils';
 import { useConnectToWallet } from './useConnectToWallet';
-import { useNavigateToMobileUrl } from './useNavigateToMobileUrl';
 import { useResetModalOnConnect } from './useResetModalOnConnect';
 
 export const useLoginData = () => {
   const {
     wallet,
     connect,
-    loaded: walletLoaded,
-    isConnected,
   } = useWallet();
 
   const { walletRepos } = useManager();
@@ -36,11 +31,9 @@ export const useLoginData = () => {
   const qrUrl = current?.qrUrl;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isWaitingForSigning] = useAtom(isWaitingForSigningAtom);
   const [modalState, setModalState] = useState<LoginModalState>('select');
   const [connecting, setConnecting] = useState<boolean>(false);
   const [qrCodeUri, setQrCodeUri] = useState<string | undefined>();
-  const isConnectedLoaded = walletLoaded ? isConnected : null;
 
   useEffect(() => {
     if (isModalOpen) {

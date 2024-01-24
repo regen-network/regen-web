@@ -34,7 +34,6 @@ const LoginFlow = ({
   qrCodeUri,
   connecting,
 }: Props) => {
-  const { walletConnectUri } = useWallet();
   const {
     isConfirmationModalOpen,
     email,

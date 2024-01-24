@@ -8,8 +8,8 @@ import { StdSignature } from '@cosmjs/launchpad';
 import { OfflineSigner } from '@cosmjs/proto-signing';
 import { WalletStatus } from '@cosmos-kit/core';
 import {
-  useWallet as useCosmosKitWallet,
   useManager,
+  useWallet as useCosmosKitWallet,
   useWalletClient,
 } from '@cosmos-kit/react-lite';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
@@ -116,9 +116,10 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const { mainWallet } = useCosmosKitWallet(KEPLR_MOBILE);
   const { walletRepos } = useManager();
   const address = mainWallet?.getChainWallet('regen')?.address;
-  
+  const walletStatus = walletRepos[0]?.current?.walletStatus;
+
   useEffect(() => {
-    if (walletRepos[0]?.current?.walletStatus === WalletStatus.Connected) {
+    if (walletStatus === WalletStatus.Connected) {
       const offlineSigner =
         walletConnectClient?.getOfflineSignerAmino?.('regen-1');
       if (offlineSigner && address) {
@@ -130,7 +131,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         setWalletConnect(true);
       }
     }
-  }, [address, walletRepos[0]?.current?.walletStatus, walletConnectClient]);
+  }, [address, walletStatus, walletConnectClient]);
 
   const signArbitrary = useSignArbitrary({
     setError,

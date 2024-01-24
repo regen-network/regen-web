@@ -11,10 +11,7 @@ import { useConnectToWallet } from './useConnectToWallet';
 import { useResetModalOnConnect } from './useResetModalOnConnect';
 
 export const useLoginData = () => {
-  const {
-    wallet,
-    connect,
-  } = useWallet();
+  const { wallet, connect } = useWallet();
 
   const { walletRepos } = useManager();
   const [qrState, setQRState] = useState<State>(State.Init); // state of QRCode

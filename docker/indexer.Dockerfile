@@ -1,11 +1,11 @@
-FROM python:3.9-slim
+FROM python:3.9
 
 # Install dependencies
 RUN apt-get update
-RUN apt-get install git libpq-dev gcc postgresql-client -y
+RUN apt-get install libpq-dev postgresql-client nodejs python3-poetry yarnpkg -y
 
 # Set version and chain
-ENV GIT_CHECKOUT='8d3635aa33d4d49db903f947bb357c938d168f8d'
+ENV GIT_CHECKOUT='07ba5fa054e34d2a0587daa944c8e517ff82ce18'
 
 # Clone regen ledger
 RUN git clone https://github.com/regen-network/indexer/ /home/indexer
@@ -16,15 +16,9 @@ WORKDIR /home/indexer
 # Use provided version
 RUN git checkout $GIT_CHECKOUT
 
-# Install python dependencies
-RUN pip install poetry
-RUN pip install load_dotenv
-RUN pip install psycopg2
-RUN pip install sentry_sdk
-RUN pip install tenacity
-
 # Install indexer
 RUN poetry install
+RUN yarnpkg install 
 
 # Copy indexer init script
 COPY docker/scripts/indexer_init.sh /home/indexer/scripts/

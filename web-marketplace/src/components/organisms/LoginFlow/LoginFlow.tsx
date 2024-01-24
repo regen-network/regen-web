@@ -85,7 +85,7 @@ const LoginFlow = ({
         onCodeChange={onMailCodeChange}
       />
       <MobileSigningModal
-        isOpen={isWaitingForSigning && !!walletConnectUri}
+        isOpen={isWaitingForSigning}
         onClose={() => setIsWaitingForSigningAtom(false)}
       />
     </>

@@ -18,7 +18,6 @@ export const useLoginData = () => {
     wallet,
     connect,
     loaded: walletLoaded,
-    walletConnectUri,
     isConnected,
   } = useWallet();
 
@@ -76,16 +75,6 @@ export const useLoginData = () => {
       }),
     [connectToWallet],
   );
-  const mobileConnectUrl = useMemo(
-    () => getMobileConnectUrl({ uri: walletConnectUri }),
-    [walletConnectUri],
-  );
-
-  useNavigateToMobileUrl({
-    mobileConnectUrl,
-    isWaitingForSigning,
-    isConnected: isConnectedLoaded,
-  });
 
   useResetModalOnConnect({ setIsModalOpen, setModalState, wallet });
 

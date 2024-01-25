@@ -65,6 +65,7 @@ services:
     container_name: indexer_container
     environment:
       DATABASE_URL: postgres://postgres:password@localhost:5432/indexer
+      ROOT_DATABASE_URL: postgres://postgres:password@localhost:5432/postgres
       REGEN_API: http://127.0.0.1:1317
       REGEN_RPC: http://127.0.0.1:26657
     entrypoint: ["/bin/sh", "-c", "./scripts/indexer_start.sh"]

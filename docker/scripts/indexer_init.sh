@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # run migrations
-(cd sql && ./run_all_migrations.sh)
+yarnpkg run db-init
 
 # workaround for indexer starting with new chain
 psql "$DATABASE_URL" -c "INSERT INTO chain (

@@ -15,4 +15,4 @@ if [ ! -e $INDEXER_INITIALIZED ]; then
 fi
 
 # start indexer
-python main.py
+poetry run python main.py

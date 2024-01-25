@@ -52,6 +52,8 @@ import {
   getProjectReferenceID,
 } from './ProjectReview.util';
 import { VCSMetadata } from './ProjectReview.VCSMetadata';
+import { useAuth } from 'lib/auth/auth';
+import { getAccountProjectsByIdQueryKey } from '../../lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery.utils';
 
 export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { projectId } = useParams();
@@ -59,6 +61,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { setDeliverTxResponse } = useCreateProjectContext();
   const graphqlClient = useApolloClient();
   const reactQueryClient = useQueryClient();
+  const { activeAccountId } = useAuth();
 
   const { data, isLoading } = useQuery(
     getProjectByIdQuery({
@@ -151,6 +154,11 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
       metadata: getAnchoredProjectMetadata(metadata, creditClassId),
       jurisdiction: jurisdiction || '',
       referenceId,
+    });
+    await reactQueryClient.invalidateQueries({
+      queryKey: getAccountProjectsByIdQueryKey({
+        id: activeAccountId,
+      }),
     });
     await reactQueryClient.invalidateQueries({
       queryKey: [PROJECTS_QUERY_KEY],

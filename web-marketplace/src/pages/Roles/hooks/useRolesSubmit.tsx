@@ -79,6 +79,9 @@ const useRolesSubmit = ({
           doUpdateMetadata = true;
           projectPatch.verifierId = verifier?.id || null;
         }
+        console.log('values.admin',values.admin)
+        console.log('admin',admin)
+        console.log('adminAccountId', adminAccountId)
         if (values.admin && admin !== values.admin) {
           doUpdateAdmin = true;
           projectPatch.adminAccountId = adminAccountId;

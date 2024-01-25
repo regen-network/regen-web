@@ -9,11 +9,11 @@ import { RolesFormSchemaType } from 'components/organisms/RolesForm/RolesForm.sc
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
+import { useAuth } from '../../lib/auth/auth';
 import { useWallet } from '../../lib/wallet/wallet';
 import { useProjectEditContext } from '../ProjectEdit';
 import { useRolesSubmit } from './hooks/useRolesSubmit';
 import { getProjectStakeholderInitialValues } from './Roles.utils';
-import { useAuth } from '../../lib/auth/auth';
 
 const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();

@@ -9,6 +9,7 @@ import { RolesFormSchemaType } from 'components/organisms/RolesForm/RolesForm.sc
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
+import { useAuth } from '../../lib/auth/auth';
 import { useWallet } from '../../lib/wallet/wallet';
 import { useProjectEditContext } from '../ProjectEdit';
 import { useRolesSubmit } from './hooks/useRolesSubmit';
@@ -19,6 +20,7 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { projectId } = useParams();
   const { wallet, loaded } = useWallet();
   const { navigateNext } = useNavigateNext({ step: 'description', projectId });
+  const { activeAccount } = useAuth();
 
   const {
     isEdit,
@@ -56,8 +58,8 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
   const initialValues: RolesFormSchemaType = useMemo(
     () => ({
       // In edit mode, use existing on chain project admin
-      // In creation mode, use current wallet address
-      admin: (isEdit ? onChainProject?.admin : wallet?.address) || '',
+      // In creation mode, use active account wallet address
+      admin: (isEdit ? onChainProject?.admin : activeAccount?.addr) || '',
       projectDeveloper: getProjectStakeholderInitialValues(projectDeveloper),
       verifier: getProjectStakeholderInitialValues(verifier),
     }),
@@ -66,7 +68,7 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
       onChainProject?.admin,
       projectDeveloper,
       verifier,
-      wallet?.address,
+      activeAccount?.addr,
     ],
   );
 

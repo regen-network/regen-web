@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 
-import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
+import { ProcessingModal } from 'web-components/src/components/modal/ProcessingModal';
 
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 

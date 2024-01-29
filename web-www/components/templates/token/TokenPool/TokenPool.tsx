@@ -2,8 +2,8 @@ import { useMediaQuery, useTheme } from '@mui/material';
 import clsx from 'clsx';
 import Image from 'next/image';
 
-import Section from 'web-components/lib/components/section';
-import { Body, Title } from 'web-components/lib/components/typography';
+import Section from 'web-components/src/components/section';
+import { Body, Title } from 'web-components/src/components/typography';
 
 import { useTokenPoolStyles } from './TokenPool.styles';
 

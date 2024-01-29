@@ -3,8 +3,8 @@ import Image, { ImageProps, StaticImageData } from 'next/image';
 
 import { useBackgroundImageStyles } from './BackgroundImage.styles';
 
-import { Theme } from '@/../web-components/lib/theme/muiTheme';
-import { sxToArray } from '@/../web-components/lib/utils/mui/sxToArray';
+import { Theme } from 'web-components/src/theme/muiTheme';
+import { sxToArray } from 'web-components/src/utils/mui/sxToArray';
 
 type Props = {
   src: string | StaticImageData;

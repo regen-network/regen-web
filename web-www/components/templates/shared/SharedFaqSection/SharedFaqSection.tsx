@@ -3,8 +3,8 @@ import { useTheme } from '@mui/material';
 import clsx from 'clsx';
 import Link from 'next/link';
 
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import Section from 'web-components/lib/components/section';
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import Section from 'web-components/src/components/section';
 
 import { useFaqSectionStyles } from './SharedFaqSection.styles';
 

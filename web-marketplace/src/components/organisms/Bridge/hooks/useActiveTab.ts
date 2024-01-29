@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
+import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 
 export function useActiveTab(tabs: IconTabProps[]): number {
   const location = useLocation();

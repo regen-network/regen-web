@@ -3,9 +3,9 @@ import { Box } from '@mui/material';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import cx from 'classnames';
 
-import Section from 'web-components/lib/components/section';
-import Timeline from 'web-components/lib/components/timeline';
-import { getFormattedDate } from 'web-components/lib/utils/format';
+import Section from 'web-components/src/components/section';
+import Timeline from 'web-components/src/components/timeline';
+import { getFormattedDate } from 'web-components/src/utils/format';
 
 import { useWallet } from 'lib/wallet/wallet';
 

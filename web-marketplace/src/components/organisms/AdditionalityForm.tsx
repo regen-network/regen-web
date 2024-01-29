@@ -4,14 +4,14 @@ import { Field, Form, Formik } from 'formik';
 import { RadioGroup } from 'formik-mui';
 import { makeStyles } from 'tss-react/mui';
 
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import ControlledFormLabel from 'web-components/lib/components/form/ControlledFormLabel';
-import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
-import { DatePickField } from 'web-components/lib/components/inputs/DatePickField';
-import Toggle from 'web-components/lib/components/inputs/Toggle';
-import { requiredMessage } from 'web-components/lib/components/inputs/validation';
-import { Subtitle } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
+import ControlledFormLabel from 'web-components/src/components/form/ControlledFormLabel';
+import ControlledTextField from 'web-components/src/components/inputs/ControlledTextField';
+import { DatePickField } from 'web-components/src/components/inputs/DatePickField';
+import Toggle from 'web-components/src/components/inputs/Toggle';
+import { requiredMessage } from 'web-components/src/components/inputs/validation';
+import { Subtitle } from 'web-components/src/components/typography';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 interface AdditionalityFormProps {
   submit: (values: AdditionalityValues) => Promise<void>;

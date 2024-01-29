@@ -1,4 +1,4 @@
-import { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
+import { FooterItemProps as FooterItem } from 'web-components/src/components/footer';
 
 export const footerItems: [FooterItem, FooterItem, FooterItem, FooterItem] = [
   {

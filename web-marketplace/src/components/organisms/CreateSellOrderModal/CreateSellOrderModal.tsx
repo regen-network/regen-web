@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 
-import { RegenModalProps } from 'web-components/lib/components/modal';
-import { FormModalTemplate } from 'web-components/lib/components/modal/FormModalTemplate';
+import { RegenModalProps } from 'web-components/src/components/modal';
+import { FormModalTemplate } from 'web-components/src/components/modal/FormModalTemplate';
 
 import {
   CreateSellOrderForm,

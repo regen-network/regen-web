@@ -1,6 +1,6 @@
 import { AutocompleteRenderGroupParams, Box } from '@mui/material';
 
-import { Label } from 'web-components/lib/components/typography';
+import { Label } from 'web-components/src/components/typography';
 
 type ProfileGroupProps = {
   params: AutocompleteRenderGroupParams;

@@ -1,6 +1,6 @@
-import { RadioCardItem } from 'web-components/lib/components/atoms/RadioCard/RadioCard.types';
-import OrganizationIcon from 'web-components/lib/components/icons/OrganizationIcon';
-import UserIcon from 'web-components/lib/components/icons/UserIcon';
+import { RadioCardItem } from 'web-components/src/components/atoms/RadioCard/RadioCard.types';
+import OrganizationIcon from 'web-components/src/components/icons/OrganizationIcon';
+import UserIcon from 'web-components/src/components/icons/UserIcon';
 
 import { AccountType } from 'generated/graphql';
 

@@ -1,7 +1,7 @@
-import Section from 'web-components/lib/components/section';
+import Section from 'web-components/src/components/section';
 import ProjectMedia, {
   Media,
-} from 'web-components/lib/components/sliders/ProjectMedia';
+} from 'web-components/src/components/sliders/ProjectMedia';
 
 import { usePhotosSectionStyles } from './PhotosSection.styles';
 

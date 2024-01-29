@@ -3,14 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { Box, SxProps } from '@mui/material';
 import { tabsStyles } from 'styles/tabs';
 
-import Card from 'web-components/lib/components/cards/Card';
+import Card from 'web-components/src/components/cards/Card';
 import {
   RenderActionButtonsFunc,
   TablePaginationParams,
-} from 'web-components/lib/components/table/ActionsTable';
-import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
-import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
-import { Label } from 'web-components/lib/components/typography';
+} from 'web-components/src/components/table/ActionsTable';
+import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
+import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
+import { Label } from 'web-components/src/components/typography';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';

@@ -1,9 +1,9 @@
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/styles';
 
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import Header from 'web-components/lib/components/header';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import Header from 'web-components/src/components/header';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import {
   getHeaderColors,

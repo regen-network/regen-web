@@ -7,12 +7,12 @@ import { Box, Card, CardMedia, useMediaQuery, useTheme } from '@mui/material';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { omit } from 'lodash';
 
-import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
-import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/ReviewCard';
-import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.ItemDisplay';
-import { Photo } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.Photo';
-import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
-import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
+import ErrorBanner from 'web-components/src/components/banner/ErrorBanner';
+import { ReviewCard } from 'web-components/src/components/cards/ReviewCard/ReviewCard';
+import { ItemDisplay } from 'web-components/src/components/cards/ReviewCard/ReviewCard.ItemDisplay';
+import { Photo } from 'web-components/src/components/cards/ReviewCard/ReviewCard.Photo';
+import { ProcessingModal } from 'web-components/src/components/modal/ProcessingModal';
+import { TxErrorModal } from 'web-components/src/components/modal/TxErrorModal';
 
 import { useAuth } from 'lib/auth/auth';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';

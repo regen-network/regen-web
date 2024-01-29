@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import clsx from 'clsx';
 
-import { Body, Title } from 'web-components/lib/components/typography/index';
+import { Body, Title } from 'web-components/src/components/typography/index';
 
 import { useHomeFoldStyles } from './Home.HomeFold.styles';
 

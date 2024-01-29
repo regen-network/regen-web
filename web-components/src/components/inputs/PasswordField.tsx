@@ -3,8 +3,8 @@ import { useTheme } from '@mui/material';
 // import zxcvbn, { ZXCVBNScore } from 'zxcvbn';
 // import { ZXCVBNResult } from 'zxcvbn';
 import IconButton from '@mui/material/IconButton';
+import { Theme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { DefaultTheme as Theme } from '@mui/styles';
 import { makeStyles } from 'tss-react/mui';
 
 import EyeIcon from '../icons/EyeIcon';

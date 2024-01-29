@@ -1,14 +1,14 @@
 import { CardContent } from '@mui/material';
 import Image from 'next/image';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import Card from 'web-components/lib/components/cards/Card';
-import Section from 'web-components/lib/components/section';
+import { BlockContent } from 'web-components/src/components/block-content';
+import Card from 'web-components/src/components/cards/Card';
+import Section from 'web-components/src/components/section';
 import {
   Body,
   Subtitle,
   Title,
-} from 'web-components/lib/components/typography';
+} from 'web-components/src/components/typography';
 
 import { useInfoSectionStyles } from './InfoSection.styles';
 

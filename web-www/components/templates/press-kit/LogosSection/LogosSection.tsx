@@ -1,8 +1,8 @@
 import Grid from '@mui/material/Grid';
 
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import RegenIcon from 'web-components/lib/components/icons/RegenIcon';
-import Section from 'web-components/lib/components/section';
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import RegenIcon from 'web-components/src/components/icons/RegenIcon';
+import Section from 'web-components/src/components/section';
 
 import { useLogosSectionStyles } from './LogosSection.styles';
 

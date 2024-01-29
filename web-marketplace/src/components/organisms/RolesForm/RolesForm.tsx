@@ -9,10 +9,10 @@ import { useQuery } from '@tanstack/react-query';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
-import { Flex } from 'web-components/lib/components/box';
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import EditIcon from 'web-components/lib/components/icons/EditIcon';
-import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
+import { Flex } from 'web-components/src/components/box';
+import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
+import EditIcon from 'web-components/src/components/icons/EditIcon';
+import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { useAuth } from 'lib/auth/auth';

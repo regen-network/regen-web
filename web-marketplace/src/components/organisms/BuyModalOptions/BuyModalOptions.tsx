@@ -3,9 +3,9 @@ import { Location } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { useSetAtom } from 'jotai';
 
-import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
-import ActionCard from 'web-components/lib/components/molecules/ActionCard';
-import { Title } from 'web-components/lib/components/typography';
+import Modal, { RegenModalProps } from 'web-components/src/components/modal';
+import ActionCard from 'web-components/src/components/molecules/ActionCard';
+import { Title } from 'web-components/src/components/typography';
 
 import { AllBuyModalOptionsQuery } from 'generated/sanity-graphql';
 import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';

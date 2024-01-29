@@ -1,4 +1,4 @@
-import React, { ComponentType, useState } from 'react';
+import { ComponentType, FC, PropsWithChildren, useState } from 'react';
 import { useTheme } from '@mui/material';
 
 export interface Props {
@@ -8,9 +8,7 @@ export interface Props {
   onMouseLeave: () => void;
 }
 
-function withHoverColor(
-  BaseComponent: ComponentType<React.PropsWithChildren<Props>>,
-) {
+function withHoverColor(BaseComponent: FC<Props>) {
   return (props: {
     hoverColor?: string;
     color?: string;

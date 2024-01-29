@@ -1,13 +1,13 @@
 import { Box, SxProps, useTheme } from '@mui/material';
 import { sxToArray } from 'utils/mui/sxToArray';
 
-import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
-import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
+import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
+import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
 import {
   containerPaddingX,
   containerStyles,
-} from 'web-components/lib/styles/container';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+} from 'web-components/src/styles/container';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 type Props = {
   sx?: SxProps<Theme>;

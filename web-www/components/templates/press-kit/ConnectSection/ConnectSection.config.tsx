@@ -1,14 +1,14 @@
-import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
-import DiscordIcon from 'web-components/lib/components/icons/social/DiscordIcon';
-import FacebookIcon from 'web-components/lib/components/icons/social/FacebookIcon';
-import GithubIcon from 'web-components/lib/components/icons/social/GithubIcon';
-import LinkedInIcon from 'web-components/lib/components/icons/social/LinkedInIcon';
-import MediumIcon from 'web-components/lib/components/icons/social/MediumIcon';
-import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
-import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
-import YoutubeIcon from 'web-components/lib/components/icons/social/YoutubeIcon';
+import EmailIcon from 'web-components/src/components/icons/EmailIcon';
+import DiscordIcon from 'web-components/src/components/icons/social/DiscordIcon';
+import FacebookIcon from 'web-components/src/components/icons/social/FacebookIcon';
+import GithubIcon from 'web-components/src/components/icons/social/GithubIcon';
+import LinkedInIcon from 'web-components/src/components/icons/social/LinkedInIcon';
+import MediumIcon from 'web-components/src/components/icons/social/MediumIcon';
+import TelegramIcon from 'web-components/src/components/icons/social/TelegramIcon';
+import TwitterIcon from 'web-components/src/components/icons/social/TwitterIcon';
+import YoutubeIcon from 'web-components/src/components/icons/social/YoutubeIcon';
 
-import { Theme } from '@/../web-components/lib/theme/muiTheme';
+import { Theme } from 'web-components/src/theme/muiTheme';
 import { IconLabelProps } from '@/components/organisms/ConnectSection/ConnectSection.types';
 
 export const getPressKitConnectIcons = (theme: Theme): IconLabelProps[] => [

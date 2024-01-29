@@ -1,6 +1,6 @@
-import { BlockContent } from 'web-components/lib/components/block-content';
-import Section from 'web-components/lib/components/section';
-import { Body, Title } from 'web-components/lib/components/typography';
+import { BlockContent } from 'web-components/src/components/block-content';
+import Section from 'web-components/src/components/section';
+import { Body, Title } from 'web-components/src/components/typography';
 
 import { useTokenEconomicsStyles } from './TokenEconomics.styles';
 

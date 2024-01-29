@@ -3,9 +3,9 @@ import { Field, Form, Formik } from 'formik';
 import { InferGetStaticPropsType } from 'next';
 import { NextSeo } from 'next-seo';
 
-import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
-import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
-import Section from 'web-components/lib/components/section';
+import ArticleCard from 'web-components/src/components/cards/ArticleCard';
+import SelectTextField from 'web-components/src/components/inputs/SelectTextField';
+import Section from 'web-components/src/components/section';
 
 import { MediaPageDocument, MediaPageQuery } from '@/generated/sanity-graphql';
 import { sanityClient } from '@/lib/clients/sanityClient';

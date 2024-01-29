@@ -14,10 +14,10 @@ import { ERRORS } from 'config/errors';
 import { useSetAtom } from 'jotai';
 import { startCase } from 'lodash';
 
-import Banner from 'web-components/lib/components/banner';
-import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
-import { Label, Title } from 'web-components/lib/components/typography';
-import type { Theme } from 'web-components/lib/theme/muiTheme';
+import Banner from 'web-components/src/components/banner';
+import ArrowDownIcon from 'web-components/src/components/icons/ArrowDownIcon';
+import { Label, Title } from 'web-components/src/components/typography';
+import type { Theme } from 'web-components/src/theme/muiTheme';
 
 import { errorCodeAtom } from 'lib/atoms/error.atoms';
 import {

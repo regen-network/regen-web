@@ -1,5 +1,5 @@
-import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
-import { Body, Title } from 'web-components/lib/components/typography';
+import Modal, { RegenModalProps } from 'web-components/src/components/modal';
+import { Body, Title } from 'web-components/src/components/typography';
 
 import {
   CONNECTED_EMAIL_ERROR_DESCRIPTION_END,

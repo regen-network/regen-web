@@ -5,7 +5,7 @@ import {
   Stepper,
   SxProps,
 } from '@mui/material';
-import { DefaultTheme as Theme } from '@mui/styles';
+import { Theme } from '@mui/material/styles';
 import { makeStyles, withStyles } from 'tss-react/mui';
 
 import RegenStepIcon from './StepIcon';

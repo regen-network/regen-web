@@ -1,12 +1,12 @@
 import React from 'react';
 import { Box, Grid, SxProps, Theme } from '@mui/material';
 
-import { LabeledDetail } from 'web-components/lib/components/text-layouts';
-import { Body } from 'web-components/lib/components/typography';
+import { LabeledDetail } from 'web-components/src/components/text-layouts';
+import { Body } from 'web-components/src/components/typography';
 import {
   DATE_FORMAT_SECONDARY,
   formatDate,
-} from 'web-components/lib/utils/format';
+} from 'web-components/src/utils/format';
 
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { LinkWithArrow } from '../atoms';

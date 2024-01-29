@@ -1,8 +1,8 @@
 import React from 'react';
 import { useTheme } from '@mui/material';
 import Grid, { GridProps } from '@mui/material/Grid';
+import { Theme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { DefaultTheme as Theme } from '@mui/styles';
 import { makeStyles } from 'tss-react/mui';
 
 interface FixedFooterProps {

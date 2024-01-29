@@ -1,7 +1,7 @@
 import { CardMedia } from '@mui/material';
 
-import EcologicalCreditCard from 'web-components/lib/components/molecules/EcologicalCreditCard';
-import Section from 'web-components/lib/components/organisms/Section';
+import EcologicalCreditCard from 'web-components/src/components/molecules/EcologicalCreditCard';
+import Section from 'web-components/src/components/organisms/Section';
 
 import { LinkComponent } from '@/components/atoms/LinkComponent/LinkComponent';
 import { AllBuyersPageQuery } from '@/generated/sanity-graphql';

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 
-import { Item } from 'web-components/lib/components/modal/TxModal';
+import { Item } from 'web-components/src/components/modal/TxModal';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { takeEventToBatches } from 'lib/events/takeEventToBatches';

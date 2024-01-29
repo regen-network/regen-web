@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { useAtom } from 'jotai';
 
-import EyeIcon from 'web-components/lib/components/icons/EyeIcon';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import EyeIcon from 'web-components/src/components/icons/EyeIcon';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { isProfileEditDirtyRef } from 'lib/atoms/ref.atoms';

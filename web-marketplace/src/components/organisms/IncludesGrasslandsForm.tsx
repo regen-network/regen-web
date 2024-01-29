@@ -2,10 +2,10 @@ import React from 'react';
 import { Field, Form, Formik } from 'formik';
 import { RadioGroup } from 'formik-mui';
 
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import ControlledFormLabel from 'web-components/lib/components/form/ControlledFormLabel';
-import Toggle from 'web-components/lib/components/inputs/Toggle';
-import { requiredMessage } from 'web-components/lib/components/inputs/validation';
+import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
+import ControlledFormLabel from 'web-components/src/components/form/ControlledFormLabel';
+import Toggle from 'web-components/src/components/inputs/Toggle';
+import { requiredMessage } from 'web-components/src/components/inputs/validation';
 
 interface IncludesGrasslandsFormProps {
   submit: (values: IncludesGrasslandsValues) => Promise<void>;

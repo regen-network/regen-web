@@ -1,11 +1,11 @@
-import EmptyState from 'web-components/lib/components/empty-state';
-import EmptyCartIcon from 'web-components/lib/components/icons/EmptyCartIcon';
+import EmptyState from 'web-components/src/components/empty-state';
+import EmptyCartIcon from 'web-components/src/components/icons/EmptyCartIcon';
 import {
   ActionsTable,
   RenderActionButtonsFunc,
   SortCallbacksType,
   TablePaginationParams,
-} from 'web-components/lib/components/table/ActionsTable';
+} from 'web-components/src/components/table/ActionsTable';
 
 import { UseStateSetter } from 'types/react/use-state';
 

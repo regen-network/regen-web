@@ -1,7 +1,7 @@
 import { SxProps } from '@mui/material';
 
-import InfoCard from 'web-components/lib/components/molecules/InfoCard';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import InfoCard from 'web-components/src/components/molecules/InfoCard';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { AllBuyModalQuery } from 'generated/sanity-graphql';
 

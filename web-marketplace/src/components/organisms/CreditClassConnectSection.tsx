@@ -1,8 +1,8 @@
 import React from 'react';
 import { makeStyles } from 'tss-react/mui';
 
-import { Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Title } from 'web-components/src/components/typography';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import creditClassConnectImg from '../../assets/credit-class-connect-bg.png';
 import { ConnectSection, Maybe } from '../../generated/sanity-graphql';

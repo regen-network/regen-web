@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 
-import { Flex } from 'web-components/lib/components/box';
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import { Loading } from 'web-components/lib/components/loading';
-import Section from 'web-components/lib/components/section';
-import { Title } from 'web-components/lib/components/typography';
+import { Flex } from 'web-components/src/components/box';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import { Loading } from 'web-components/src/components/loading';
+import Section from 'web-components/src/components/section';
+import { Title } from 'web-components/src/components/typography';
 
 import { useProjectByOnChainIdQuery } from 'generated/graphql';
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';

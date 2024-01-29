@@ -2,7 +2,7 @@
 
 import { ReactElement } from 'react';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
+import { BlockContent } from 'web-components/src/components/block-content';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { SKIPPED_CLASS_ID } from 'lib/env';

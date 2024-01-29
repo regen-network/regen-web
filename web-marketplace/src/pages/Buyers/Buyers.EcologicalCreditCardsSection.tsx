@@ -1,8 +1,8 @@
 import { Box, CardMedia } from '@mui/material';
 
-import { ProgramImageChildren } from 'web-components/lib/components/cards/ProjectCard/ProjectCard.ImageChildren';
-import EcologicalCreditCard from 'web-components/lib/components/molecules/EcologicalCreditCard';
-import Section from 'web-components/lib/components/organisms/Section';
+import { ProgramImageChildren } from 'web-components/src/components/cards/ProjectCard/ProjectCard.ImageChildren';
+import EcologicalCreditCard from 'web-components/src/components/molecules/EcologicalCreditCard';
+import Section from 'web-components/src/components/organisms/Section';
 
 import { AllBuyersPageQuery } from 'generated/sanity-graphql';
 import { SKIPPED_CLASS_ID } from 'lib/env';

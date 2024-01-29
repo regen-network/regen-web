@@ -1,8 +1,8 @@
-import { Flex } from 'web-components/lib/components/box/Box';
-import RegenNetworkIcon from 'web-components/lib/components/icons/RegenNetworkIcon';
-import ToucanIcon from 'web-components/lib/components/icons/ToucanIcon';
-import { RegenModalProps } from 'web-components/lib/components/modal';
-import { FormModalTemplate } from 'web-components/lib/components/modal/FormModalTemplate';
+import { Flex } from 'web-components/src/components/box/Box';
+import RegenNetworkIcon from 'web-components/src/components/icons/RegenNetworkIcon';
+import ToucanIcon from 'web-components/src/components/icons/ToucanIcon';
+import { RegenModalProps } from 'web-components/src/components/modal';
+import { FormModalTemplate } from 'web-components/src/components/modal/FormModalTemplate';
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 

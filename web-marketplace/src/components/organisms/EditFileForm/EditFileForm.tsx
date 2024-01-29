@@ -3,17 +3,18 @@ import { useWatch } from 'react-hook-form';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Feature } from 'geojson';
 
-import { isGeocodingFeature } from 'web-components/lib/components/inputs/new/LocationField/LocationField.types';
-import { LocationPicker } from 'web-components/lib/components/inputs/new/LocationPicker/LocationPicker';
-import { Radio } from 'web-components/lib/components/inputs/new/Radio/Radio';
-import { RadioGroup } from 'web-components/lib/components/inputs/new/RadioGroup/RadioGroup';
-import { TextAreaField } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField';
-import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
-import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
-import { CancelButtonFooter } from 'web-components/lib/components/organisms/CancelButtonFooter/CancelButtonFooter';
-import { Title } from 'web-components/lib/components/typography';
-import { UseStateSetter } from 'web-components/lib/types/react/useState';
-import { cn } from 'web-components/lib/utils/styles/cn';
+import { isImage } from 'web-components/src/components/inputs/new/FileDrop/FileDrop.utils';
+import { isGeocodingFeature } from 'web-components/src/components/inputs/new/LocationField/LocationField.types';
+import { LocationPicker } from 'web-components/src/components/inputs/new/LocationPicker/LocationPicker';
+import { Radio } from 'web-components/src/components/inputs/new/Radio/Radio';
+import { RadioGroup } from 'web-components/src/components/inputs/new/RadioGroup/RadioGroup';
+import { TextAreaField } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField';
+import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
+import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
+import { Title } from 'web-components/src/components/typography';
+import { UseStateSetter } from 'web-components/src/types/react/useState';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
@@ -28,7 +29,6 @@ import {
   EditFileFormSchemaType,
 } from './EditFileForm.schema';
 import {} from './EditFileForm.types';
-import { isImage } from 'web-components/lib/components/inputs/new/FileDrop/FileDrop.utils';
 
 export interface Props {
   initialValues: EditFileFormSchemaType;
@@ -54,7 +54,7 @@ export const EditFileForm = ({
   const form = useZodForm({
     schema: editFileFormSchema,
     defaultValues: {
-      ...initialValues, 
+      ...initialValues,
       location: initialValues.location || fileLocation || projectLocation,
     },
     mode: 'onBlur',

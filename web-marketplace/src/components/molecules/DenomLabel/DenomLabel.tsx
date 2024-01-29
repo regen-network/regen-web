@@ -2,8 +2,8 @@ import { SxProps, Theme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { sxToArray } from 'utils/mui/sxToArray';
 
-import { Label } from 'web-components/lib/components/typography';
-import { LabelSize } from 'web-components/lib/components/typography/sizing';
+import { Label } from 'web-components/src/components/typography';
+import { LabelSize } from 'web-components/src/components/typography/sizing';
 
 import { useLedger } from 'ledger';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';

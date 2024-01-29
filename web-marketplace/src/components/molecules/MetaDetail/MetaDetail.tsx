@@ -4,8 +4,8 @@ import { SxProps } from '@mui/system';
 import { ExpandedTermDefinition } from 'jsonld';
 import { sxToArray } from 'utils/mui/sxToArray';
 
-import { Label } from 'web-components/lib/components/typography';
-import { TextSize } from 'web-components/lib/components/typography/sizing';
+import { Label } from 'web-components/src/components/typography';
+import { TextSize } from 'web-components/src/components/typography/sizing';
 
 import { MetaDetailBaseValue } from './MetaDetail.BaseValue';
 import { Value } from './MetaDetail.types';

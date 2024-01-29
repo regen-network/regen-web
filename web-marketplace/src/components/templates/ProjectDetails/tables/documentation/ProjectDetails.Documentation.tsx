@@ -1,12 +1,12 @@
 import { Box, Link } from '@mui/material';
 
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import CertifiedDocumentIcon from 'web-components/lib/components/icons/CertifiedDocumentIcon';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import CertifiedDocumentIcon from 'web-components/src/components/icons/CertifiedDocumentIcon';
 import {
   ActionsTable,
   SortCallbacksType,
   TablePaginationParams,
-} from 'web-components/lib/components/table/ActionsTable';
+} from 'web-components/src/components/table/ActionsTable';
 
 import { Document } from 'generated/graphql';
 import { UseStateSetter } from 'types/react/use-state';

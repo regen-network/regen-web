@@ -1,5 +1,5 @@
-import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
-import ConnectWallet from 'web-components/lib/components/organisms/ConnectWallet';
+import Modal, { RegenModalProps } from 'web-components/src/components/modal';
+import ConnectWallet from 'web-components/src/components/organisms/ConnectWallet';
 
 import { Link } from 'components/atoms';
 import { LoginButton } from 'components/organisms/LoginButton/LoginButton';

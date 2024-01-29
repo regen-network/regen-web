@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormControl, FormHelperText, SxProps } from '@mui/material';
-import { DefaultTheme as Theme } from '@mui/styles';
+import { Theme } from '@mui/material/styles';
 import { FieldProps, getIn } from 'formik';
 import { makeStyles } from 'tss-react/mui';
 

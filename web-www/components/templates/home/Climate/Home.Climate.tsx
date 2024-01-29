@@ -3,8 +3,8 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import clsx from 'clsx';
 import Image from 'next/image';
 
-import Card from 'web-components/lib/components/cards/Card';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
+import Card from 'web-components/src/components/cards/Card';
+import { Body, Label, Title } from 'web-components/src/components/typography';
 
 import { homeStyles } from '../common/Home.styles';
 import { useClimateStyles } from './Home.Climate.styles';

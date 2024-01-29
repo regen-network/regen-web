@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Stepper from 'web-components/lib/components/stepper';
+import Stepper from 'web-components/src/components/stepper';
 
 import background from '../../assets/topography-pattern-full-1.png';
 

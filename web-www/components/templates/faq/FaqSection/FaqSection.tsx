@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import FAQ, { FAQProps } from 'web-components/lib/components/faq';
-import Section from 'web-components/lib/components/section';
+import FAQ, { FAQProps } from 'web-components/src/components/faq';
+import Section from 'web-components/src/components/section';
 
 import { useFaqStyles } from './FaqSection.styles';
 

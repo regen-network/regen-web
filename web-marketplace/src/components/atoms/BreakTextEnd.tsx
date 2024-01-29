@@ -1,6 +1,6 @@
 import { styled } from '@mui/material';
 
-import { Box } from 'web-components/lib/components/box/Box';
+import { Box } from 'web-components/src/components/box/Box';
 
 export const BreakTextEnd = styled(Box)({
   whiteSpace: 'normal',

@@ -2,17 +2,17 @@ import { useMemo } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 
-import { Flex } from 'web-components/lib/components/box';
-import BridgeIcon from 'web-components/lib/components/icons/BridgeIcon';
-import { CreditBatchIcon } from 'web-components/lib/components/icons/CreditBatchIcon';
-import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClassIcon';
-import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
-import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
-import { ProfileHeader } from 'web-components/lib/components/organisms/ProfileHeader/ProfileHeader';
-import Section from 'web-components/lib/components/section';
-import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
-import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
-import { truncate } from 'web-components/lib/utils/truncate';
+import { Flex } from 'web-components/src/components/box';
+import BridgeIcon from 'web-components/src/components/icons/BridgeIcon';
+import { CreditBatchIcon } from 'web-components/src/components/icons/CreditBatchIcon';
+import { CreditClassIcon } from 'web-components/src/components/icons/CreditClassIcon';
+import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
+import { ProjectPageIcon } from 'web-components/src/components/icons/ProjectPageIcon';
+import { ProfileHeader } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader';
+import Section from 'web-components/src/components/section';
+import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
+import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
+import { truncate } from 'web-components/src/utils/truncate';
 
 import { getAccountUrl } from 'lib/block-explorer';
 import { isBridgeEnabled } from 'lib/ledger';

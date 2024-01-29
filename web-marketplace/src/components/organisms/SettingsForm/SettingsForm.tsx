@@ -9,7 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
+import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { getProjectBySlugQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectBySlugQuery/getProjectBySlugQuery';

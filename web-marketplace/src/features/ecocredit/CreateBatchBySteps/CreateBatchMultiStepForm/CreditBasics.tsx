@@ -4,15 +4,15 @@ import { isPast } from 'date-fns';
 import { Field, FieldArray, useFormikContext } from 'formik';
 import * as Yup from 'yup';
 
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import TrashIcon from 'web-components/lib/components/icons/TrashIcon';
-import { DatePickField } from 'web-components/lib/components/inputs/DatePickField';
-import InputLabel from 'web-components/lib/components/inputs/InputLabel';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
+import TrashIcon from 'web-components/src/components/icons/TrashIcon';
+import { DatePickField } from 'web-components/src/components/inputs/DatePickField';
+import InputLabel from 'web-components/src/components/inputs/InputLabel';
 import SelectTextField, {
   Option,
-} from 'web-components/lib/components/inputs/SelectTextField';
-import TextField from 'web-components/lib/components/inputs/TextField';
+} from 'web-components/src/components/inputs/SelectTextField';
+import TextField from 'web-components/src/components/inputs/TextField';
 import {
   invalidDate,
   invalidJSON,
@@ -21,9 +21,9 @@ import {
   isValidJSON,
   requiredMessage,
   vcsRetirementSerialRE,
-} from 'web-components/lib/components/inputs/validation';
-import { Body } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+} from 'web-components/src/components/inputs/validation';
+import { Body } from 'web-components/src/components/typography';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { NameUrl } from 'lib/rdf/types';
 

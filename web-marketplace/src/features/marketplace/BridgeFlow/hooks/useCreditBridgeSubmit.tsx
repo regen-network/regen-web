@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { MsgBridge } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 
-import type { Item } from 'web-components/lib/components/modal/TxModal';
+import type { Item } from 'web-components/src/components/modal/TxModal';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import type { UseStateSetter } from 'types/react/use-state';

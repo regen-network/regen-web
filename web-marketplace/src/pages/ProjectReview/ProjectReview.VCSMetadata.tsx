@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.ItemDisplay';
-import { formatDate } from 'web-components/lib/utils/format';
+import { ItemDisplay } from 'web-components/src/components/cards/ReviewCard/ReviewCard.ItemDisplay';
+import { formatDate } from 'web-components/src/utils/format';
 
 import { VCSProjectMetadataLD } from 'lib/db/types/json-ld';
 

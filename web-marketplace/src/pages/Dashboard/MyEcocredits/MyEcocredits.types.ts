@@ -1,4 +1,4 @@
-import { Item } from 'web-components/lib/components/modal/TxModal';
+import { Item } from 'web-components/src/components/modal/TxModal';
 
 export interface OnTxSuccessfulProps {
   cardItems: Item[];

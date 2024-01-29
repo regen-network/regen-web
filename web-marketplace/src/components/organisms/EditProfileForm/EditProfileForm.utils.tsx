@@ -1,6 +1,6 @@
 import { UseFormReturn } from 'react-hook-form';
 
-import { requiredMessage } from 'web-components/lib/components/inputs/validation';
+import { requiredMessage } from 'web-components/src/components/inputs/validation';
 
 import { EditProfileFormSchemaType } from './EditProfileForm.schema';
 

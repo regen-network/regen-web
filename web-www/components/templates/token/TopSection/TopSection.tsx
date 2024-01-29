@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { Title } from 'web-components/lib/components/typography';
+import { Title } from 'web-components/src/components/typography';
 
 import {
   tokenTopSectionGradient,

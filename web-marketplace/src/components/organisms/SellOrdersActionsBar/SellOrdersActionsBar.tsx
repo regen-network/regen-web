@@ -1,22 +1,22 @@
+import { ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { Buy1Event } from 'web-marketplace/src/lib/tracker/types';
 import { useTracker } from 'web-marketplace/src/lib/tracker/useTracker';
 
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import { AVG_PRICE_LABEL } from 'web-components/lib/components/cards/ProjectCard/ProjectCard.constants';
-import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';
-import { StickyBar } from 'web-components/lib/components/sticky-bar/StickyBar';
-import InfoTooltip from 'web-components/lib/components/tooltip/InfoTooltip';
-import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
-import { Label, Subtitle } from 'web-components/lib/components/typography';
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import { AVG_PRICE_LABEL } from 'web-components/src/components/cards/ProjectCard/ProjectCard.constants';
+import CurrentCreditsIcon from 'web-components/src/components/icons/CurrentCreditsIcon';
+import { StickyBar } from 'web-components/src/components/sticky-bar/StickyBar';
+import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
+import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';
+import { Label, Subtitle } from 'web-components/src/components/typography';
 
 import {
   BOOK_CALL,
   BUY_DISABLED_TOOLTIP,
 } from './SellOrdersActionsBar.constants';
-import { ReactNode } from 'react';
 
 type Params = {
   isBuyButtonDisabled: boolean;

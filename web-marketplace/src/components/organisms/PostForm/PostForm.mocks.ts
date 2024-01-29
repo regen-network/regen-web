@@ -1,5 +1,4 @@
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
-import { Feature } from 'geojson';
 
 import { PostFormSchemaType } from './PostForm.schema';
 

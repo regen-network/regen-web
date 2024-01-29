@@ -2,22 +2,22 @@ import { useEffect } from 'react';
 import { useFieldArray, useWatch } from 'react-hook-form';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 
-import { LocationIcon } from 'web-components/lib/components/icons/LocationIcon';
-import { LockIcon } from 'web-components/lib/components/icons/LockIcon';
-import { PrivateFile } from 'web-components/lib/components/icons/PrivateFile';
-import { UnlockIcon } from 'web-components/lib/components/icons/UnlockIcon';
+import { LocationIcon } from 'web-components/src/components/icons/LocationIcon';
+import { LockIcon } from 'web-components/src/components/icons/LockIcon';
+import { PrivateFile } from 'web-components/src/components/icons/PrivateFile';
+import { UnlockIcon } from 'web-components/src/components/icons/UnlockIcon';
 import {
   FileDrop,
   ImageDropProps,
-} from 'web-components/lib/components/inputs/new/FileDrop/FileDrop';
-import { Radio } from 'web-components/lib/components/inputs/new/Radio/Radio';
-import { RadioGroup } from 'web-components/lib/components/inputs/new/RadioGroup/RadioGroup';
-import { TextAreaField } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField';
-import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
-import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
-import { CancelButtonFooter } from 'web-components/lib/components/organisms/CancelButtonFooter/CancelButtonFooter';
-import { Body, Title } from 'web-components/lib/components/typography';
-import { cn } from 'web-components/lib/utils/styles/cn';
+} from 'web-components/src/components/inputs/new/FileDrop/FileDrop';
+import { Radio } from 'web-components/src/components/inputs/new/Radio/Radio';
+import { RadioGroup } from 'web-components/src/components/inputs/new/RadioGroup/RadioGroup';
+import { TextAreaField } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField';
+import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
+import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
+import { Body, Title } from 'web-components/src/components/typography';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 import { Link } from 'components/atoms';
 import Form from 'components/molecules/Form/Form';
@@ -281,8 +281,8 @@ export const PostForm = ({
                   </b>
                   <br />
                   <i>
-                    The post and files still can be shared privately via
-                    secret link.
+                    The post and files still can be shared privately via secret
+                    link.
                   </i>
                 </>
               }

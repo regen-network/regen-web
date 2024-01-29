@@ -1,11 +1,11 @@
 import { useFormState, useWatch } from 'react-hook-form';
 
-import RadioCard from 'web-components/lib/components/atoms/RadioCard';
-import { ImageField } from 'web-components/lib/components/inputs/new/ImageField/ImageField';
-import { ImageFieldAvatar } from 'web-components/lib/components/inputs/new/ImageField/ImageField.Avatar';
-import { TextAreaField } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField';
-import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
-import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
+import RadioCard from 'web-components/src/components/atoms/RadioCard';
+import { ImageField } from 'web-components/src/components/inputs/new/ImageField/ImageField';
+import { ImageFieldAvatar } from 'web-components/src/components/inputs/new/ImageField/ImageField.Avatar';
+import { TextAreaField } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField';
+import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
+import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import {

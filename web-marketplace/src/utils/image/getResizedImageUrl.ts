@@ -1,4 +1,4 @@
-import { getOptimizedImageSrc } from 'web-components/lib/utils/optimizedImageSrc';
+import { getOptimizedImageSrc } from 'web-components/src/utils/optimizedImageSrc';
 
 import { API_URI, IMAGE_STORAGE_BASE_URL } from 'lib/env';
 

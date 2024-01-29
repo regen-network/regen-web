@@ -5,17 +5,17 @@ import cx from 'clsx';
 import { quantityFormatNumberOptions } from 'config/decimals';
 import { tableStyles } from 'styles/table';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import NoEcocreditsIcon from 'web-components/lib/components/icons/NoEcocreditsIcon';
-import Section from 'web-components/lib/components/section';
+import { BlockContent } from 'web-components/src/components/block-content';
+import NoEcocreditsIcon from 'web-components/src/components/icons/NoEcocreditsIcon';
+import Section from 'web-components/src/components/section';
 import {
   ActionsTable,
   TablePaginationParams,
-} from 'web-components/lib/components/table/ActionsTable';
-import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { formatDate, formatNumber } from 'web-components/lib/utils/format';
-import { truncateHash } from 'web-components/lib/utils/truncate';
+} from 'web-components/src/components/table/ActionsTable';
+import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';
+import { Theme } from 'web-components/src/theme/muiTheme';
+import { formatDate, formatNumber } from 'web-components/src/utils/format';
+import { truncateHash } from 'web-components/src/utils/truncate';
 
 import type { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';

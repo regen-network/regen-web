@@ -2,8 +2,8 @@ import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Image from 'next/image';
 
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { Body, Title } from 'web-components/lib/components/typography';
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import { Body, Title } from 'web-components/src/components/typography';
 
 import { homeStyles } from '../common/Home.styles';
 import { useLedgerStyles } from './Home.Ledger.styles';

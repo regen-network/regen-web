@@ -3,7 +3,7 @@ import { OrderBy } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/serv
 import { MsgBridge } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 import { useQueries, useQuery } from '@tanstack/react-query';
 
-import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
+import { TablePaginationParams } from 'web-components/src/components/table/ActionsTable';
 import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/Table.constants';
 
 import { BridgedEcocredits } from 'types/ledger/ecocredit';

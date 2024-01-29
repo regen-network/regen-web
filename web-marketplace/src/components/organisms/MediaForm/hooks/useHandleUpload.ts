@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { useSetAtom } from 'jotai';
 
-import { UseStateSetter } from 'web-components/lib/types/react/useState';
-import { uploadImage } from 'web-components/lib/utils/s3';
+import { UseStateSetter } from 'web-components/src/types/react/useState';
+import { uploadImage } from 'web-components/src/utils/s3';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from 'tss-react/mui';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { Maybe, Sdg } from '../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../lib/imgSrc';

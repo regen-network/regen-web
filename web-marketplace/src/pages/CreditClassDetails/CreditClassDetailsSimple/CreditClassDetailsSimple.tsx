@@ -4,14 +4,14 @@ import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/q
 import { useQuery } from '@tanstack/react-query';
 import { getClassImageWithGreyDefault } from 'utils/image/classImage';
 
-import { CardRibbon } from 'web-components/lib/components/atoms/CardRibbon/CardRibbon';
-import { CreditClassCardItem } from 'web-components/lib/components/cards/CreditClassCard/CreditClassCard.Item';
-import { ProjectImpactCardProps } from 'web-components/lib/components/cards/ProjectImpactCard/ProjectImpactCard';
-import { ImpactTags } from 'web-components/lib/components/organisms/ImpactTags/ImpactTags';
-import ReadMore from 'web-components/lib/components/read-more';
-import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
-import { Label, Title } from 'web-components/lib/components/typography';
-import { Account } from 'web-components/lib/components/user/UserInfo';
+import { CardRibbon } from 'web-components/src/components/atoms/CardRibbon/CardRibbon';
+import { CreditClassCardItem } from 'web-components/src/components/cards/CreditClassCard/CreditClassCard.Item';
+import { ProjectImpactCardProps } from 'web-components/src/components/cards/ProjectImpactCard/ProjectImpactCard';
+import { ImpactTags } from 'web-components/src/components/organisms/ImpactTags/ImpactTags';
+import ReadMore from 'web-components/src/components/read-more';
+import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';
+import { Label, Title } from 'web-components/src/components/typography';
+import { Account } from 'web-components/src/components/user/UserInfo';
 
 import { CreditClassByOnChainIdQuery } from 'generated/graphql';
 import { CreditClass } from 'generated/sanity-graphql';

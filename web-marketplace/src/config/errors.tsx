@@ -1,6 +1,6 @@
-import { BrokenLinkIcon } from 'web-components/lib/components/icons/BrokenLinkIcon';
-import RegenNotFoundIcon from 'web-components/lib/components/icons/RegenNotFoundIcon';
-import SellOrderNotFoundIcon from 'web-components/lib/components/icons/SellOrderNotFoundIcon';
+import { BrokenLinkIcon } from 'web-components/src/components/icons/BrokenLinkIcon';
+import RegenNotFoundIcon from 'web-components/src/components/icons/RegenNotFoundIcon';
+import SellOrderNotFoundIcon from 'web-components/src/components/icons/SellOrderNotFoundIcon';
 
 export enum ERRORS {
   DEFAULT = 'default',

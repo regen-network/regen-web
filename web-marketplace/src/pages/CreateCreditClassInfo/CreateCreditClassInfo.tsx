@@ -5,13 +5,13 @@ import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import FixedFooter from 'web-components/lib/components/fixed-footer';
-import Modal from 'web-components/lib/components/modal';
-import Section from 'web-components/lib/components/section';
-import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import { Body, Title } from 'web-components/lib/components/typography';
+import { BlockContent } from 'web-components/src/components/block-content';
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import FixedFooter from 'web-components/src/components/fixed-footer';
+import Modal from 'web-components/src/components/modal';
+import Section from 'web-components/src/components/section';
+import ResponsiveSlider from 'web-components/src/components/sliders/ResponsiveSlider';
+import { Body, Title } from 'web-components/src/components/typography';
 
 import { useAllCreateCreditClassPageQuery } from 'generated/sanity-graphql';
 import { client } from 'lib/clients/sanity';

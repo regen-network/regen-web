@@ -5,7 +5,7 @@ import { URL_REGISTRY_TERMS_SERVICE, URL_WEB_PRIVACY } from 'config/globals';
 import {
   Footer,
   FooterItemProps as FooterItem,
-} from 'web-components/lib/components/footer/footer-new';
+} from 'web-components/src/components/footer/footer-new';
 
 import { Link, RegistryIconLink } from 'components/atoms';
 

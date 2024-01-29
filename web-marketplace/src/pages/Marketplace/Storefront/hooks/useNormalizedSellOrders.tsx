@@ -9,7 +9,7 @@ import { useQueries, useQuery } from '@tanstack/react-query';
 import {
   SortCallbacksType,
   TablePaginationParams,
-} from 'web-components/lib/components/table/ActionsTable';
+} from 'web-components/src/components/table/ActionsTable';
 import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/Table.constants';
 
 import { useLedger } from 'ledger';

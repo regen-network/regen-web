@@ -1,6 +1,6 @@
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import { PurchaseInfo } from 'web-components/lib/components/cards/ProjectCard/ProjectCard.types';
+import { PurchaseInfo } from 'web-components/src/components/cards/ProjectCard/ProjectCard.types';
 
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 

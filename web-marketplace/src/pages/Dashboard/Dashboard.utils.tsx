@@ -1,8 +1,8 @@
 import { getResizedImageUrl } from 'utils/image/getResizedImageUrl';
 
-import TwitterIcon2 from 'web-components/lib/components/icons/social/TwitterIcon2';
-import WebsiteLinkIcon from 'web-components/lib/components/icons/social/WebsiteLinkIcon';
-import { SocialLink } from 'web-components/lib/components/organisms/ProfileHeader/ProfileHeader.types';
+import TwitterIcon2 from 'web-components/src/components/icons/social/TwitterIcon2';
+import WebsiteLinkIcon from 'web-components/src/components/icons/social/WebsiteLinkIcon';
+import { SocialLink } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader.types';
 
 import { Account, AccountByIdQuery } from 'generated/graphql';
 import { Wallet } from 'lib/wallet/wallet';

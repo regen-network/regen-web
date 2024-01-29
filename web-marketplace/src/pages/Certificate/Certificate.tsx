@@ -3,11 +3,11 @@ import { useParams } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import Certificate from 'web-components/lib/components/certificate/index';
-import PrintIcon from 'web-components/lib/components/icons/PrintIcon';
-import ShareIcons from 'web-components/lib/components/icons/ShareIcons';
-import { Title } from 'web-components/lib/components/typography';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import Certificate from 'web-components/src/components/certificate/index';
+import PrintIcon from 'web-components/src/components/icons/PrintIcon';
+import ShareIcons from 'web-components/src/components/icons/ShareIcons';
+import { Title } from 'web-components/src/components/typography';
 
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';

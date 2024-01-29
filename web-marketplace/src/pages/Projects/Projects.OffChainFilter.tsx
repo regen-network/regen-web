@@ -1,9 +1,9 @@
 import { Box, FormControlLabel, SxProps, Theme } from '@mui/material';
 import { useAtom } from 'jotai';
 
-import { Flex } from 'web-components/lib/components/box';
-import Checkbox from 'web-components/lib/components/inputs/new/CheckBox/Checkbox';
-import InfoTooltipWithIcon from 'web-components/lib/components/tooltip/InfoTooltipWithIcon';
+import { Flex } from 'web-components/src/components/box';
+import Checkbox from 'web-components/src/components/inputs/new/CheckBox/Checkbox';
+import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';
 
 import { useOffChainProjectsAtom } from 'lib/atoms/projects.atoms';
 

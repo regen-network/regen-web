@@ -4,9 +4,9 @@ import { Grid } from '@mui/material';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
-import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
-import { CreateProjectCard } from 'web-components/lib/components/cards/CreateCards/CreateProjectCard';
-import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
+import ErrorBanner from 'web-components/src/components/banner/ErrorBanner';
+import { CreateProjectCard } from 'web-components/src/components/cards/CreateCards/CreateProjectCard';
+import ProjectCard from 'web-components/src/components/cards/ProjectCard';
 
 import { useCreateProjectMutation } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';

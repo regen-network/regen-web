@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Box, SxProps } from '@mui/material';
 
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import ProfileNotFoundIcon from 'web-components/src/components/icons/ProfileNotFound';
+import { Title } from 'web-components/src/components/typography';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import {
   PROFILE_NOT_FOUND_BUTTON,

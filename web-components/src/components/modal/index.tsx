@@ -1,7 +1,7 @@
 import React from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 import Modal from '@mui/material/Modal';
-import { DefaultTheme as Theme } from '@mui/styles';
+import { Theme } from '@mui/material/styles';
 import { makeStyles } from 'tss-react/mui';
 
 import CloseIcon from '../icons/CloseIcon';

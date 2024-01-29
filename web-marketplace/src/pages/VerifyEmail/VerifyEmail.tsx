@@ -2,11 +2,11 @@ import React, { useCallback, useState } from 'react';
 import Link from '@mui/material/Link';
 import axios from 'axios';
 
-import Banner from 'web-components/lib/components/banner';
-import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
-import { Body } from 'web-components/lib/components/typography';
+import Banner from 'web-components/src/components/banner';
+import ErrorBanner from 'web-components/src/components/banner/ErrorBanner';
+import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
+import OnBoardingSection from 'web-components/src/components/section/OnBoardingSection';
+import { Body } from 'web-components/src/components/typography';
 
 import { apiUri } from '../../lib/apiUri';
 

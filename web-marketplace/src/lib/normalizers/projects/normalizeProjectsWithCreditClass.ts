@@ -1,7 +1,7 @@
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { getClassImageWithProjectDefault } from 'utils/image/classImage';
 
-import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCard';
+import { ProjectCardProps } from 'web-components/src/components/cards/ProjectCard';
 
 import { AccountFieldsFragment, Maybe } from 'generated/graphql';
 import { AllCreditClassQuery } from 'generated/sanity-graphql';

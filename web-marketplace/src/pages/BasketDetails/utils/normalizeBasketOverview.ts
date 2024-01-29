@@ -6,7 +6,7 @@ import {
 import { QueryClassResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { UseQueryResult } from '@tanstack/react-query';
 
-import { formatDuration } from 'web-components/lib/utils/format';
+import { formatDuration } from 'web-components/src/utils/format';
 
 import { BasketOverviewProps } from 'components/organisms';
 

@@ -5,25 +5,25 @@ import { useQuery } from '@tanstack/react-query';
 import { getSocialItems } from 'utils/components/ShareSection/getSocialItems';
 import { REGEN_APP_PROJECT_URL } from 'utils/components/ShareSection/getSocialItems.constants';
 
-import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
-import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
-import AvailableCreditsIconAlt from 'web-components/lib/components/icons/AvailableCreditsIconAlt';
-import PutInBasketIcon from 'web-components/lib/components/icons/PutInBasketIcon';
-import TakeFromBasketIcon from 'web-components/lib/components/icons/TakeFromBasketIcon';
-import { Option } from 'web-components/lib/components/inputs/SelectTextField';
+import { TableActionButtons } from 'web-components/src/components/buttons/TableActionButtons';
+import ArrowDownIcon from 'web-components/src/components/icons/ArrowDownIcon';
+import AvailableCreditsIconAlt from 'web-components/src/components/icons/AvailableCreditsIconAlt';
+import PutInBasketIcon from 'web-components/src/components/icons/PutInBasketIcon';
+import TakeFromBasketIcon from 'web-components/src/components/icons/TakeFromBasketIcon';
+import { Option } from 'web-components/src/components/inputs/SelectTextField';
 import {
   BASKET_PUT_TITLE,
   BasketPutModal,
-} from 'web-components/lib/components/modal/BasketPutModal';
+} from 'web-components/src/components/modal/BasketPutModal';
 import {
   BASKET_TAKE_TITLE,
   BasketTakeModal,
-} from 'web-components/lib/components/modal/BasketTakeModal';
-import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
-import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
-import { Item } from 'web-components/lib/components/modal/TxModal';
-import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
-import type { Theme } from 'web-components/lib/theme/muiTheme';
+} from 'web-components/src/components/modal/BasketTakeModal';
+import { ProcessingModal } from 'web-components/src/components/modal/ProcessingModal';
+import { TxErrorModal } from 'web-components/src/components/modal/TxErrorModal';
+import { Item } from 'web-components/src/components/modal/TxModal';
+import { TxSuccessfulModal } from 'web-components/src/components/modal/TxSuccessfulModal';
+import type { Theme } from 'web-components/src/theme/muiTheme';
 
 import { useLedger } from 'ledger';
 import { getHashUrl } from 'lib/block-explorer';

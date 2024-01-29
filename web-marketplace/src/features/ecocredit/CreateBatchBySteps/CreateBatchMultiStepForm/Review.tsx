@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import { Link } from '@mui/material';
 import { useFormikContext } from 'formik';
 
-import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/ReviewCard';
-import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.ItemDisplay';
-import { Option } from 'web-components/lib/components/inputs/SelectTextField';
-import { Body, Subtitle } from 'web-components/lib/components/typography';
+import { ReviewCard } from 'web-components/src/components/cards/ReviewCard/ReviewCard';
+import { ItemDisplay } from 'web-components/src/components/cards/ReviewCard/ReviewCard.ItemDisplay';
+import { Option } from 'web-components/src/components/inputs/SelectTextField';
+import { Body, Subtitle } from 'web-components/src/components/typography';
 import {
   formatDate,
   getFormattedNumber,
-} from 'web-components/lib/utils/format';
+} from 'web-components/src/utils/format';
 
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 

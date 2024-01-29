@@ -1,6 +1,6 @@
 import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 
-import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCard';
+import { ProjectCardProps } from 'web-components/src/components/cards/ProjectCard';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 

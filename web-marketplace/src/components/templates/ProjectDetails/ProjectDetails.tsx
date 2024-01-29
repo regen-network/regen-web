@@ -6,9 +6,11 @@ import { useQuery } from '@tanstack/react-query';
 import cx from 'classnames';
 import { useSetAtom } from 'jotai';
 
-import { Gallery } from 'web-components/lib/components/organisms/Gallery/Gallery';
-import SEO from 'web-components/lib/components/seo';
-import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import CurrentCreditsIcon from 'web-components/src/components/icons/CurrentCreditsIcon';
+import { Gallery } from 'web-components/src/components/organisms/Gallery/Gallery';
+import SEO from 'web-components/src/components/seo';
+import ProjectMedia from 'web-components/src/components/sliders/ProjectMedia';
 
 import { Project } from 'generated/graphql';
 import { Maybe } from 'graphql/jsutils/Maybe';
@@ -22,6 +24,7 @@ import {
   CreditClassMetadataLD,
 } from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
+import { JAGUAR_STRIPE_LINK } from 'lib/env';
 import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getGeocodingQuery } from 'lib/queries/react-query/mapbox/getGeocodingQuery/getGeocodingQuery';
@@ -40,6 +43,7 @@ import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellO
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
+import { Link } from 'components/atoms';
 import { DetailsSection } from 'components/organisms/DetailsSection/DetailsSection';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 import { ProjectStorySection } from 'components/organisms/ProjectStorySection/ProjectStorySection';
@@ -56,6 +60,7 @@ import useGeojson from './hooks/useGeojson';
 import useSeo from './hooks/useSeo';
 import { useSortedDocuments } from './hooks/useSortedDocuments';
 import { useStakeholders } from './hooks/useStakeholders';
+import { SHARAMENTSA_PILOT_HANDLE } from './ProjectDetails.config';
 import { JURISDICTION_REGEX } from './ProjectDetails.constant';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProjects';
@@ -71,11 +76,6 @@ import {
   parseOffChainProject,
 } from './ProjectDetails.utils';
 import { ProjectDetailsTableTabs } from './tables/ProjectDetails.TableTabs';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';
-import { SHARAMENTSA_PILOT_HANDLE } from './ProjectDetails.config';
-import { Link } from 'components/atoms';
-import { JAGUAR_STRIPE_LINK } from 'lib/env';
 
 function ProjectDetails(): JSX.Element {
   const theme = useTheme();

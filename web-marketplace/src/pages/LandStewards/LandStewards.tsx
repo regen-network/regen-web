@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { makeStyles } from 'tss-react/mui';
 
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import FixedFooter from 'web-components/lib/components/fixed-footer';
-import Modal from 'web-components/lib/components/modal';
-import SEO from 'web-components/lib/components/seo';
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import FixedFooter from 'web-components/src/components/fixed-footer';
+import Modal from 'web-components/src/components/modal';
+import SEO from 'web-components/src/components/seo';
 
 import { onBtnClick } from 'lib/button';
 

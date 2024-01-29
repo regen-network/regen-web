@@ -9,12 +9,12 @@ import {
 } from '@mui/material';
 import { Field, Form, getIn, useFormikContext } from 'formik';
 
-import FormLabel from 'web-components/lib/components/inputs/FormLabel';
+import FormLabel from 'web-components/src/components/inputs/FormLabel';
 import {
   ImageUpload,
   ImageUploadProps,
-} from 'web-components/lib/components/inputs/ImageUpload';
-import { VideoInput } from 'web-components/lib/components/inputs/VideoInput';
+} from 'web-components/src/components/inputs/ImageUpload';
+import { VideoInput } from 'web-components/src/components/inputs/VideoInput';
 
 import { UrlType } from 'lib/rdf/types';
 

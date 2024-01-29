@@ -1,5 +1,5 @@
-import { GettingStartedResourcesCard } from 'web-components/lib/components/cards/GettingStartedResourcesCard';
-import { getLinkTarget } from 'web-components/lib/utils/linkTarget';
+import { GettingStartedResourcesCard } from 'web-components/src/components/cards/GettingStartedResourcesCard';
+import { getLinkTarget } from 'web-components/src/utils/linkTarget';
 
 import {
   GettingStartedResourcesCard as GettingStartedResourcesCardType,

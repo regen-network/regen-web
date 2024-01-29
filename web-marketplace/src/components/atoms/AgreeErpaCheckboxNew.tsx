@@ -5,8 +5,8 @@ import {
   URL_REGISTRY_TERMS_SERVICE,
 } from 'config/globals';
 
-import CheckboxLabel from 'web-components/lib/components/inputs/new/CheckboxLabel/CheckboxLabel';
-import { Subtitle } from 'web-components/lib/components/typography';
+import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';
+import { Subtitle } from 'web-components/src/components/typography';
 
 interface Props {
   error?: boolean;

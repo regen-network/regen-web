@@ -48,7 +48,7 @@ import {
 import { QueryClient } from '@tanstack/react-query';
 import { uniq } from 'lodash';
 
-import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
+import { TablePaginationParams } from 'web-components/src/components/table/ActionsTable';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { getMetadata } from 'lib/db/api/metadata-graph';

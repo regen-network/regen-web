@@ -1,6 +1,6 @@
-import Section from 'web-components/lib/components/section';
-import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
-import { Title } from 'web-components/lib/components/typography';
+import Section from 'web-components/src/components/section';
+import ResourceCardsSlider from 'web-components/src/components/sliders/ResourceCards';
+import { Title } from 'web-components/src/components/typography';
 
 import { useLedgerStyles } from './resourcesSection.styles';
 

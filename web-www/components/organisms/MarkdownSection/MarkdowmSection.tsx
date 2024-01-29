@@ -3,8 +3,8 @@ import { Box } from '@mui/material';
 import clsx from 'clsx';
 import { makeStyles } from 'tss-react/mui';
 
-import { Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Title } from 'web-components/src/components/typography';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 interface SectionProps {
   title?: string;

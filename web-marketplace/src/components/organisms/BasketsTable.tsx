@@ -2,12 +2,12 @@ import React from 'react';
 import { Box, Grid } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 
-import NoBasketTokensIcon from 'web-components/lib/components/icons/NoBasketTokensIcon';
+import NoBasketTokensIcon from 'web-components/src/components/icons/NoBasketTokensIcon';
 import {
   ActionsTable,
   RenderActionButtonsFunc,
-} from 'web-components/lib/components/table/ActionsTable';
-import { formatNumber } from 'web-components/lib/utils/format';
+} from 'web-components/src/components/table/ActionsTable';
+import { formatNumber } from 'web-components/src/utils/format';
 
 import { ReactComponent as BasketIcon } from '../../assets/svgs/rNCT.svg';
 import { BasketTokens } from '../../hooks/useBasketTokens';

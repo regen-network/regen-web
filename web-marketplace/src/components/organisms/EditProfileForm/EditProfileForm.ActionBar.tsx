@@ -1,8 +1,8 @@
 import { useFormState } from 'react-hook-form';
 import { Box } from '@mui/material';
 
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { StickyBar } from 'web-components/lib/components/sticky-bar/StickyBar';
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import { StickyBar } from 'web-components/src/components/sticky-bar/StickyBar';
 
 import { SAVE } from './EditProfileForm.constants';
 

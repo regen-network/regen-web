@@ -1,6 +1,6 @@
 import { SxProps } from '@mui/material';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { DetailsCard, DetailsSection, Maybe } from 'generated/sanity-graphql';
 import { CompactedNameUrl } from 'lib/rdf/types';

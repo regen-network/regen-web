@@ -12,7 +12,6 @@ import { AudioFileIcon } from './AudioFileIcon';
 import AvailableCreditsIcon from './AvailableCreditsIcon';
 import AvatarIcon from './AvatarIcon';
 import AvatarOutlineIcon from './AvatarOutlineIcon';
-import BlockIcon from './BlockIcon';
 import BreadcrumbIcon from './BreadcrumbIcon';
 import { BrokenLinkIcon } from './BrokenLinkIcon';
 import CelebrateRegenIcon from './CelebrateRegenIcon';
@@ -190,7 +189,6 @@ export const allIcons = (): JSX.Element => (
       icon={<AvailableCreditsIcon sx={{ height: 40 }} />}
       label="AvailableCreditsIcon"
     />
-    <LabeledIcon icon={<BlockIcon color="black" />} label="BlackIcon" />
     <LabeledIcon
       icon={<BreadcrumbIcon direction="down" />}
       label="BreadcrumbIcon"

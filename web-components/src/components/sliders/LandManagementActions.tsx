@@ -3,8 +3,8 @@ import React, { useCallback, useRef } from 'react';
 import Slider from 'react-slick';
 import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
+import { Theme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { DefaultTheme as Theme } from '@mui/styles';
 import { makeStyles } from 'tss-react/mui';
 
 import Action, { ActionProps } from '../action';

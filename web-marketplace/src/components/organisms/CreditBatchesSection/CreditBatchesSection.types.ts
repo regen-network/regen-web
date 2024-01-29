@@ -1,4 +1,4 @@
-import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
+import { TablePaginationParams } from 'web-components/src/components/table/ActionsTable';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import { SdgByIriQuery } from 'generated/sanity-graphql';

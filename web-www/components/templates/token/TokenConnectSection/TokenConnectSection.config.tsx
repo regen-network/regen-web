@@ -1,8 +1,8 @@
-import DiscordIcon from 'web-components/lib/components/icons/social/DiscordIcon';
-import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
-import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
+import DiscordIcon from 'web-components/src/components/icons/social/DiscordIcon';
+import TelegramIcon from 'web-components/src/components/icons/social/TelegramIcon';
+import TwitterIcon from 'web-components/src/components/icons/social/TwitterIcon';
 
-import { Theme } from '@/../web-components/lib/theme/muiTheme';
+import { Theme } from 'web-components/src/theme/muiTheme';
 import { IconLabelProps } from '@/components/organisms/ConnectSection/ConnectSection.types';
 
 type Params = {

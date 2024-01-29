@@ -5,12 +5,12 @@ import { MsgBridge } from '@regen-network/api/lib/generated/regen/ecocredit/v1/t
 import { useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
-import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
-import ErrorIcon from 'web-components/lib/components/icons/ErrorIcon';
-import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
-import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
-import { Item } from 'web-components/lib/components/modal/TxModal';
-import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
+import { CelebrateIcon } from 'web-components/src/components/icons/CelebrateIcon';
+import ErrorIcon from 'web-components/src/components/icons/ErrorIcon';
+import { ProcessingModal } from 'web-components/src/components/modal/ProcessingModal';
+import { TxErrorModal } from 'web-components/src/components/modal/TxErrorModal';
+import { Item } from 'web-components/src/components/modal/TxModal';
+import { TxSuccessfulModal } from 'web-components/src/components/modal/TxSuccessfulModal';
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';

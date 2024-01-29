@@ -1,15 +1,15 @@
 import { MutableRefObject, useEffect } from 'react';
 import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
 
+import CropImageModal from 'web-components/src/components/modal/CropImageModal';
 import {
   FileDrop,
   ImageDropProps,
-} from 'web-components/lib/components/inputs/new/FileDrop/FileDrop';
-import { TextAreaField } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField';
-import { TextAreaFieldChartCounter } from 'web-components/lib/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
-import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
-import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
-import { UseStateSetter } from 'web-components/lib/types/react/useState';
+} from 'web-components/src/components/inputs/new/FileDrop/FileDrop';
+import { TextAreaField } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField';
+import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
+import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { useProjectEditContext } from 'pages';
 

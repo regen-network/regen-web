@@ -1,7 +1,7 @@
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { z } from 'zod';
 
-import { requiredMessage } from 'web-components/lib/components/inputs/validation';
+import { requiredMessage } from 'web-components/src/components/inputs/validation';
 
 export const locationFormSchema = z.object({
   'schema:location': z

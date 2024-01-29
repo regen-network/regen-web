@@ -1,11 +1,11 @@
 import { tabsStyles } from 'styles/tabs';
 
-import { Flex } from 'web-components/lib/components/box';
-import Card from 'web-components/lib/components/cards/Card';
-import { GettingStartedResourcesCard } from 'web-components/lib/components/cards/GettingStartedResourcesCard';
-import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
-import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
-import { getLinkTarget } from 'web-components/lib/utils/linkTarget';
+import { Flex } from 'web-components/src/components/box';
+import Card from 'web-components/src/components/cards/Card';
+import { GettingStartedResourcesCard } from 'web-components/src/components/cards/GettingStartedResourcesCard';
+import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
+import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
+import { getLinkTarget } from 'web-components/src/utils/linkTarget';
 
 import { useAllBridgePageQuery } from 'generated/sanity-graphql';
 import { getBtnHref } from 'lib/button';

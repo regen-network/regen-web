@@ -1,6 +1,6 @@
 import { Box, Grid } from '@mui/material';
 
-import { Label } from 'web-components/lib/components/typography';
+import { Label } from 'web-components/src/components/typography';
 
 interface GridItemProps {
   label: string;

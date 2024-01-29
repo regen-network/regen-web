@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 
-import { EmailConfirmationModal } from 'web-components/lib/components/modal/EmailConfirmationModal/EmailConfirmationModal';
+import { EmailConfirmationModal } from 'web-components/src/components/modal/EmailConfirmationModal/EmailConfirmationModal';
 
 import { isWaitingForSigningAtom } from 'lib/atoms/tx.atoms';
 import { useWallet } from 'lib/wallet/wallet';

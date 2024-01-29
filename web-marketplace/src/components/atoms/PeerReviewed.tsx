@@ -1,7 +1,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 
-import { Label } from 'web-components/lib/components/typography';
+import { Label } from 'web-components/src/components/typography';
 
 import { ReactComponent as Ribbon } from '../../assets/svgs/yellow-ribbon.svg';
 

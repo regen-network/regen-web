@@ -4,17 +4,17 @@ import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
-import Submit from 'web-components/lib/components/form/Submit';
-import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
-import AmountField from 'web-components/lib/components/inputs/new/AmountField/AmountField';
-import CheckboxLabel from 'web-components/lib/components/inputs/new/CheckboxLabel/CheckboxLabel';
+import Submit from 'web-components/src/components/form/Submit';
+import InfoIcon from 'web-components/src/components/icons/InfoIcon';
+import AmountField from 'web-components/src/components/inputs/new/AmountField/AmountField';
+import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';
 import SelectTextField, {
   Option,
-} from 'web-components/lib/components/inputs/new/SelectTextField/SelectTextField';
-import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
-import { RegenModalProps } from 'web-components/lib/components/modal';
-import InfoTooltip from 'web-components/lib/components/tooltip/InfoTooltip';
-import { Subtitle } from 'web-components/lib/components/typography';
+} from 'web-components/src/components/inputs/new/SelectTextField/SelectTextField';
+import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+import { RegenModalProps } from 'web-components/src/components/modal';
+import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
+import { Subtitle } from 'web-components/src/components/typography';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { Sell2Event } from 'lib/tracker/types';

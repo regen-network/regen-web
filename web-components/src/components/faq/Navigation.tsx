@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
-import { DefaultTheme as Theme } from '@mui/styles';
+import { Theme } from '@mui/material/styles';
 import { makeStyles, withStyles } from 'tss-react/mui';
 
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';

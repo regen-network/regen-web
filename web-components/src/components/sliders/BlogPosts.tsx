@@ -1,8 +1,8 @@
 import React from 'react';
 import Slider from 'react-slick';
 import { useTheme } from '@mui/material';
+import { Theme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { DefaultTheme as Theme } from '@mui/styles';
 import { makeStyles } from 'tss-react/mui';
 
 import BlogPost, { BlogPostProps } from '../blog-post';

@@ -1,4 +1,4 @@
-import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCard';
+import { ProjectCardProps } from 'web-components/src/components/cards/ProjectCard';
 
 export const DEFAULT_PROJECT: ProjectCardProps = {
   name: '',

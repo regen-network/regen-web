@@ -1,10 +1,10 @@
 import { forwardRef, useEffect, useState } from 'react';
 import { Autocomplete, TextField } from '@mui/material';
 
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import EditIcon from 'web-components/lib/components/icons/EditIcon';
-import FieldFormControl from 'web-components/lib/components/inputs/new/FieldFormControl/FieldFormControl';
-import { UseStateSetter } from 'web-components/lib/types/react/useState';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import EditIcon from 'web-components/src/components/icons/EditIcon';
+import FieldFormControl from 'web-components/src/components/inputs/new/FieldFormControl/FieldFormControl';
+import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { useDebounce } from 'hooks/useDebounce';
 

@@ -1,4 +1,4 @@
-import { Box } from 'web-components/lib/components/box';
+import { Box } from 'web-components/src/components/box';
 
 import { useWallet } from 'lib/wallet/wallet';
 

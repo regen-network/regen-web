@@ -1,4 +1,4 @@
-import { StatCardType } from 'web-components/lib/components/molecules/StatCard/StatCard.types';
+import { StatCardType } from 'web-components/src/components/molecules/StatCard/StatCard.types';
 
 import { StatsSectionFieldsFragment } from '@/generated/sanity-graphql';
 

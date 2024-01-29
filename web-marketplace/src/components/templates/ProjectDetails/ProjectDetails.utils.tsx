@@ -3,12 +3,12 @@ import { MapiResponse } from '@mapbox/mapbox-sdk/lib/classes/mapi-response';
 import { GeocodeResponse } from '@mapbox/mapbox-sdk/services/geocoding';
 import { getResizedImageUrl } from 'utils/image/getResizedImageUrl';
 
-import PhoneIcon from 'web-components/lib/components/icons/PhoneIcon';
-import StaticMap from 'web-components/lib/components/map/StaticMap';
-import { Props as ActionCardProps } from 'web-components/lib/components/molecules/ActionCard/ActionCard';
-import { GalleryPhoto } from 'web-components/lib/components/organisms/Gallery/Gallery.types';
-import { Asset } from 'web-components/lib/components/sliders/ProjectMedia';
-import { Account } from 'web-components/lib/components/user/UserInfo';
+import PhoneIcon from 'web-components/src/components/icons/PhoneIcon';
+import StaticMap from 'web-components/src/components/map/StaticMap';
+import { Props as ActionCardProps } from 'web-components/src/components/molecules/ActionCard/ActionCard';
+import { GalleryPhoto } from 'web-components/src/components/organisms/Gallery/Gallery.types';
+import { Asset } from 'web-components/src/components/sliders/ProjectMedia';
+import { Account } from 'web-components/src/components/user/UserInfo';
 
 import {
   AccountFieldsFragment,

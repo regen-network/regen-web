@@ -1,12 +1,12 @@
 import { Grid, useMediaQuery, useTheme } from '@mui/material';
 import { sxToArray } from 'utils/mui/sxToArray';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import { CredibilityCard } from 'web-components/lib/components/cards/CredibilityCard/CredibilityCard';
-import Section from 'web-components/lib/components/section';
-import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
-import { headerFontFamily, Theme } from 'web-components/lib/theme/muiTheme';
+import { BlockContent } from 'web-components/src/components/block-content';
+import { CredibilityCard } from 'web-components/src/components/cards/CredibilityCard/CredibilityCard';
+import Section from 'web-components/src/components/section';
+import ResponsiveSlider from 'web-components/src/components/sliders/ResponsiveSlider';
+import { Body, Label, Title } from 'web-components/src/components/typography';
+import { headerFontFamily, Theme } from 'web-components/src/theme/muiTheme';
 
 import { DetailsSectionButton } from './DetailsSection.Button';
 import {

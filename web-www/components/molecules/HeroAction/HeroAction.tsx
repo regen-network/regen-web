@@ -2,10 +2,10 @@ import React from 'react';
 import { Box, Grid } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import { Body, Title } from 'web-components/lib/components/typography';
+import { BlockContent } from 'web-components/src/components/block-content';
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import { Body, Title } from 'web-components/src/components/typography';
 
 import { BackgroundImageSection } from '@/components/organisms/BackgroundImageSection/BackgroundImageSection';
 import { BottomBannerFieldsFragment, Maybe } from '@/generated/sanity-graphql';

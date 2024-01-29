@@ -1,9 +1,9 @@
 import { useFormState } from 'react-hook-form';
 
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
-import { EmailConfirmationModal } from 'web-components/lib/components/modal/EmailConfirmationModal/EmailConfirmationModal';
-import { Body, Subtitle } from 'web-components/lib/components/typography';
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+import { EmailConfirmationModal } from 'web-components/src/components/modal/EmailConfirmationModal/EmailConfirmationModal';
+import { Body, Subtitle } from 'web-components/src/components/typography';
 
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';

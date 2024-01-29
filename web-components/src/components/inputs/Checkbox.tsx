@@ -2,7 +2,7 @@ import React from 'react';
 import MuiCheckbox, {
   CheckboxProps as MuiCheckboxProps,
 } from '@mui/material/Checkbox';
-import { DefaultTheme as Theme } from '@mui/styles';
+import { Theme } from '@mui/material/styles';
 import {
   CheckboxProps as FormikCheckboxProps,
   fieldToCheckbox,

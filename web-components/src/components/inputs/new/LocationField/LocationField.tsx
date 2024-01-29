@@ -1,5 +1,4 @@
 import React, { forwardRef, useState } from 'react';
-import MapboxClient from '@mapbox/mapbox-sdk';
 import mbxGeocoder, {
   GeocodeFeature,
   GeocodeQueryType,
@@ -54,7 +53,7 @@ const LocationField = forwardRef<HTMLInputElement, Props>(
         'address',
         'poi',
       ],
-      token: accessToken,
+      token: accessToken = '',
       value,
       handleChange,
       onBlur,
@@ -64,8 +63,7 @@ const LocationField = forwardRef<HTMLInputElement, Props>(
     },
     ref,
   ) => {
-    const baseClient = MapboxClient({ accessToken });
-    const geocoderService = mbxGeocoder(baseClient);
+    const geocoderService = mbxGeocoder({ accessToken });
     const [features, setFeatures] = useState<GeocodeFeature[]>([]);
     const [showResults, setShowResults] = useState(true);
 

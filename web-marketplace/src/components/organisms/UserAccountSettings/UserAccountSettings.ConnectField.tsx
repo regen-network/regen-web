@@ -1,8 +1,8 @@
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { CopyButton } from 'web-components/lib/components/buttons/CopyButton';
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import CloseIcon from 'web-components/lib/components/icons/CloseIcon';
-import { Body } from 'web-components/lib/components/typography';
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import { CopyButton } from 'web-components/src/components/buttons/CopyButton';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import CloseIcon from 'web-components/src/components/icons/CloseIcon';
+import { Body } from 'web-components/src/components/typography';
 
 import { SocialProviderInfo } from './UserAccountSettings.types';
 

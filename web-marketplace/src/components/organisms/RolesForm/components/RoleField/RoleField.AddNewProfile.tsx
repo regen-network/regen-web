@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 
-import { Label } from 'web-components/lib/components/typography';
+import { Label } from 'web-components/src/components/typography';
 
 import { AccountType } from 'generated/graphql';
 import { UseStateSetter } from 'types/react/use-state';

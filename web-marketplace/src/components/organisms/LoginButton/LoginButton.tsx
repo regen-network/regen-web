@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
 
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 
 import { useLedger } from 'ledger';
 import { getBalanceQuery } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery';

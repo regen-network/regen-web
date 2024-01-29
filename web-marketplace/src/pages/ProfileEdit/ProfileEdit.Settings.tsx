@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
+import ErrorBanner from 'web-components/src/components/banner/ErrorBanner';
 
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';

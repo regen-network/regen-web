@@ -2,9 +2,9 @@ import { useFormState } from 'react-hook-form';
 import { Grid } from '@mui/material';
 import { Box } from '@mui/system';
 
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import TextField from 'web-components/lib/components/inputs/new/TextField/TextField';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+import { Body, Label, Title } from 'web-components/src/components/typography';
 
 import { Link } from 'components/atoms/Link';
 import Form from 'components/molecules/Form/Form';

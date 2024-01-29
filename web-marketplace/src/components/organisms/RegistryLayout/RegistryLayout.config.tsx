@@ -1,10 +1,10 @@
 import { Theme } from '@mui/material';
 
-import { HeaderColors } from 'web-components/lib/components/header';
-import { HeaderDropdownItemProps } from 'web-components/lib/components/header/components/HeaderDropdown/HeaderDropdown.Item';
-import { Item } from 'web-components/lib/components/header/components/HeaderMenuItem/HeaderMenuItem';
-import { NavLinkProps } from 'web-components/lib/components/header/components/NavLink';
-import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
+import { HeaderColors } from 'web-components/src/components/header';
+import { HeaderDropdownItemProps } from 'web-components/src/components/header/components/HeaderDropdown/HeaderDropdown.Item';
+import { Item } from 'web-components/src/components/header/components/HeaderMenuItem/HeaderMenuItem';
+import { NavLinkProps } from 'web-components/src/components/header/components/NavLink';
+import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
 
 import { isBridgeEnabled } from 'lib/ledger';
 

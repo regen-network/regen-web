@@ -1,6 +1,6 @@
 import { makeStyles } from 'tss-react/mui';
 
-import { pxToRem } from '@/../web-components/lib/theme/muiTheme';
+import { pxToRem } from 'web-components/src/theme/muiTheme';
 
 export const useEmailSubmitSectionStyles = makeStyles()(theme => ({
   root: {

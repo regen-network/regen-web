@@ -1,4 +1,4 @@
-import { EcologicalCreditCardType } from 'web-components/lib/components/molecules/EcologicalCreditCard/EcologicalCreditCard.types';
+import { EcologicalCreditCardType } from 'web-components/src/components/molecules/EcologicalCreditCard/EcologicalCreditCard.types';
 
 import {
   EcologicalCreditCardFieldsFragment,

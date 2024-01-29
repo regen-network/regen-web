@@ -6,7 +6,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import mediaQuery from 'css-mediaquery';
 import { useAnalytics } from 'use-analytics';
 
-import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
+import ThemeProvider from 'web-components/src/theme/RegenThemeProvider';
 
 import { apolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { reactQueryClient } from 'lib/clients/reactQueryClient';

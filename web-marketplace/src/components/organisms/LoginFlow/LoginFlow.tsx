@@ -3,7 +3,6 @@ import { useAtom } from 'jotai';
 import { EmailConfirmationModal } from 'web-components/src/components/modal/EmailConfirmationModal/EmailConfirmationModal';
 
 import { isWaitingForSigningAtom } from 'lib/atoms/tx.atoms';
-import { useWallet } from 'lib/wallet/wallet';
 
 import {
   EMAIL_CONFIRMATION_CANCEL,
@@ -34,7 +33,6 @@ const LoginFlow = ({
   qrCodeUri,
   connecting,
 }: Props) => {
-  const { walletConnectUri } = useWallet();
   const {
     isConfirmationModalOpen,
     email,
@@ -85,7 +83,7 @@ const LoginFlow = ({
         onCodeChange={onMailCodeChange}
       />
       <MobileSigningModal
-        isOpen={isWaitingForSigning && !!walletConnectUri}
+        isOpen={isWaitingForSigning}
         onClose={() => setIsWaitingForSigningAtom(false)}
       />
     </>

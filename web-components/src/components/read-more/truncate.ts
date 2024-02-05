@@ -7,7 +7,7 @@ export function truncate(
   str: string,
   maxLength: number,
   restMinLength: number,
-  sentenceBased: boolean,
+  sentenceBased?: boolean,
 ): Texts {
   const regex = /[^\.!\?]+[\.!\?]+/g;
   let sentences: string[] | null = null;

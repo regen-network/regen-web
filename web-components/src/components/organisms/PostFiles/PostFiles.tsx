@@ -86,7 +86,8 @@ const PostFiles = ({ privacyType, files, mapboxToken }: Props) => {
           [maxLng, maxLat],
         ],
         {
-          padding: { top: 100, left: 50, right: 50, bottom: 100 },
+          // TODO update right padding on mobile
+          padding: { top: 100, left: 50, right: 150, bottom: 100 },
           duration: 0,
         },
       );

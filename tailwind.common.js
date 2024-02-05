@@ -62,7 +62,9 @@ module.exports = {
       50: '3.125rem', // 50px
       60: '3.75rem', // 60px
     },
-    extend: {},
+    boxShadow: {
+      'sm': '0px 4px 10px 0px rgba(0, 0, 0, 0.05)',
+    },
   },
   plugins: [],
   corePlugins: {

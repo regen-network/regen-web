@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const OtherDocumentsIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg width="100" height="100" fill="none" {...props}>
+  <svg width="100" height="100" viewBox="0 0 100 100" fill="none" {...props}>
     <path
       d="M30.2083 50C29.633 50 29.1667 49.5336 29.1667 48.9583V46.875C29.1667 46.2997 29.633 45.8333 30.2083 45.8333H69.7917C70.367 45.8333 70.8333 46.2997 70.8333 46.875V48.9583C70.8333 49.5336 70.367 50 69.7917 50H30.2083Z"
       fill="currentColor"

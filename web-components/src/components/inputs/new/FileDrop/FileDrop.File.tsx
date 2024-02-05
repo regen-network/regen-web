@@ -15,7 +15,13 @@ import TrashIcon from '../../../icons/TrashIcon';
 import { Image } from '../../../image';
 import { FileDropBottomBar } from './FileDrop.BottomBar';
 import { useFileDropStyles } from './FileDrop.styles';
-import { isAudio, isImage, isVideo } from './FileDrop.utils';
+import {
+  isAudio,
+  isImage,
+  isPdf,
+  isSpreadSheet,
+  isVideo,
+} from './FileDrop.utils';
 
 type Props = {
   value: string;
@@ -78,9 +84,9 @@ export const FileDropFile = ({
         <div className="bg-grey-300 text-grey-400 h-[100%] flex justify-center items-center">
           {isAudio(mimeType) ? (
             <AudioFileIcon />
-          ) : mimeType === 'application/pdf' ? (
+          ) : isPdf(mimeType) ? (
             <PdfFileIcon />
-          ) : mimeType === 'text/csv' ? (
+          ) : isSpreadSheet(mimeType) ? (
             <SpreadsheetFileIcon />
           ) : (
             <OtherDocumentsIcon />

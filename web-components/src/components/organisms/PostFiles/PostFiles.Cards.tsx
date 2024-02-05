@@ -1,7 +1,8 @@
-import { useCallback, useRef, useState } from 'react';
+import { lazy, Suspense, useCallback, useRef, useState } from 'react';
+import { pdfjs } from 'react-pdf';
 import ReactPlayer from 'react-player/es6';
 import Slider from 'react-slick';
-import { Box } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 
 import { cn } from '../../../utils/styles/cn';
 import ArrowDownIcon from '../../icons/ArrowDownIcon';
@@ -23,6 +24,14 @@ import { Body } from '../../typography';
 import { PostFile } from './PostFiles';
 import { useStyles } from './PostFiles.styles';
 import { getIconForFiles } from './PostFiles.utils';
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.js',
+  import.meta.url,
+).toString();
+
+const Document = lazy(() => import('./lib/Document'));
+const Page = lazy(() => import('./lib/Page'));
 
 type Props = {
   files: Array<PostFile>;
@@ -92,7 +101,15 @@ const PostFilesCards = ({
                 {video ? (
                   <ReactPlayer url={url} width="100%" height="100%" controls />
                 ) : isPdf(mimeType) ? (
-                  <div>TODO PDF preview</div>
+                  <Suspense fallback={<CircularProgress color="secondary" />}>
+                    <Document
+                      className="px-[65px]"
+                      file={url}
+                      loading={<CircularProgress color="secondary" />}
+                    >
+                      <Page height={196} pageNumber={1} />
+                    </Document>
+                  </Suspense>
                 ) : (
                   !isImage(mimeType) && (
                     <div className="flex items-center justify-center h-[100%] text-grey-400">

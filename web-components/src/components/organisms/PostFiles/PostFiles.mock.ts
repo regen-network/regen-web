@@ -18,13 +18,15 @@ export const files = [
   {
     url: '/andover.jpg',
     name: 'image.jpg',
-    description: 'image with description',
+    description:
+      'image with a very very very very very very very very very very long description',
     location: location1,
     mimeType: 'image/jpeg',
   },
   {
     url: 'https://www.shutterstock.com/shutterstock/videos/1030690055/preview/stock-footage-professional-photographer-with-a-professional-camera-out-in-san-francisco-taking-pictures-of-the.webm',
     name: 'video-file.webm',
+    description: 'video with a short description',
     location: location2,
     mimeType: 'video/webm',
   },
@@ -37,7 +39,7 @@ export const files = [
   {
     url: '/csv-file.csv',
     name: 'csv-file.csv',
-    description: 'file',
+    description: 'csv with a short description',
     location: location2,
     mimeType: 'text/csv',
   },

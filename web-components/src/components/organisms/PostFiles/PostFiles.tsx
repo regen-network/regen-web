@@ -18,7 +18,8 @@ import {
   isVideo,
 } from '../../inputs/new/FileDrop/FileDrop.utils';
 import { Body } from '../../typography/Body';
-import { PostFilesCards } from './PostFiles.Cards';
+import { PostFilesCards } from './PostFiles.Cards.Desktop';
+import { PostFilesDrawer } from './PostFiles.Drawer';
 import { useStyles } from './PostFiles.styles';
 import { PostPrivacyType } from './PostFiles.types';
 
@@ -44,7 +45,9 @@ type Props = {
 
 const PostFiles = ({ privacyType, files, mapboxToken }: Props) => {
   const { classes: styles } = useStyles();
-  const [selectedUrl, setSelectedUrl] = useState<string | undefined>();
+  const [selectedUrl, setSelectedUrl] = useState<string | undefined>(
+    files[0]?.url,
+  );
   const [selectedLocation, setSelectedLocation] = useState<Point | undefined>(
     files[0]?.location,
   );
@@ -166,28 +169,34 @@ const PostFiles = ({ privacyType, files, mapboxToken }: Props) => {
                 </Marker>
               );
             })}
-          {selectedLocation && (
-            <Popup
-              className={cn(styles.popup, 'hidden sm:visible')}
-              longitude={selectedLocation.coordinates[0]}
-              latitude={selectedLocation.coordinates[1]}
-              closeButton={false}
-              closeOnClick={false}
-              maxWidth="301px"
-              offset={25}
-            >
-              <PostFilesCards
-                files={
-                  groupByLocation[
-                    `${selectedLocation.coordinates[1]},${selectedLocation.coordinates[0]}`
-                  ]
-                }
-                onClose={() => setSelectedLocation(undefined)}
-                setSelectedUrl={setSelectedUrl}
-                selectedUrl={selectedUrl}
-              />
-            </Popup>
-          )}
+          <div className="hidden sm:block">
+            {selectedLocation && (
+              <Popup
+                className={cn(styles.popup, 'hidden sm:visible')}
+                longitude={selectedLocation.coordinates[0]}
+                latitude={selectedLocation.coordinates[1]}
+                closeButton={false}
+                closeOnClick={false}
+                maxWidth="301px"
+                offset={25}
+              >
+                <PostFilesCards
+                  files={
+                    groupByLocation[
+                      `${selectedLocation.coordinates[1]},${selectedLocation.coordinates[0]}`
+                    ]
+                  }
+                  onClose={() => {
+                    setSelectedLocation(undefined);
+                    setSelectedUrl(undefined);
+                  }}
+                  setSelectedUrl={setSelectedUrl}
+                  selectedUrl={selectedUrl}
+                />
+              </Popup>
+            )}
+            <PostFilesDrawer files={files} selectedUrl={selectedUrl} />
+          </div>
         </Map>
       )}
     </Suspense>

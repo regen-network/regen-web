@@ -1,0 +1,197 @@
+import { lazy, Suspense, useRef, useState } from 'react';
+import type { MapRef } from 'react-map-gl';
+import { CircularProgress } from '@mui/material';
+import bbox from '@turf/bbox';
+import { FeatureCollection, Point } from 'geojson';
+
+import { cn } from '../../../utils/styles/cn';
+import { AudioFileIcon } from '../../icons/AudioFileIcon';
+import { ImageIcon } from '../../icons/ImageIcon';
+import { OtherDocumentsIcon } from '../../icons/OtherDocumentsIcon';
+import { PdfFileIcon } from '../../icons/PdfFileIcon';
+import { SpreadsheetFileIcon } from '../../icons/SpreadsheetFileIcon';
+import {
+  isAudio,
+  isImage,
+  isPdf,
+  isSpreadSheet,
+  isVideo,
+} from '../../inputs/new/FileDrop/FileDrop.utils';
+import { Body } from '../../typography/Body';
+import { PostFilesCards } from './PostFiles.Cards';
+import { useStyles } from './PostFiles.styles';
+import { PostPrivacyType } from './PostFiles.types';
+
+import 'mapbox-gl/dist/mapbox-gl.css';
+// import { Popup }
+const Map = lazy(() => import('react-map-gl'));
+const Marker = lazy(() => import('../../map/lib/Marker'));
+const Popup = lazy(() => import('../../map/lib/Popup'));
+
+export type PostFile = {
+  url: string;
+  name: string;
+  description?: string;
+  credit?: string;
+  location: Point;
+  mimeType: string;
+};
+type Props = {
+  privacyType: PostPrivacyType;
+  files: Array<PostFile>;
+  mapboxToken?: string;
+};
+
+const PostFiles = ({ privacyType, files, mapboxToken }: Props) => {
+  const { classes: styles } = useStyles();
+  const [selectedUrl, setSelectedUrl] = useState<string | undefined>();
+  const [selectedLocation, setSelectedLocation] = useState<Point | undefined>(
+    files[0]?.location,
+  );
+  const mapRef = useRef<MapRef | null>(null);
+  let locations: FeatureCollection | undefined;
+  const isPublic = privacyType === 'public';
+
+  const groupByLocation = files.reduce(
+    (group: { [key: string]: Array<PostFile> }, file) => {
+      const { location } = file;
+      const coord = `${location.coordinates[1]},${location.coordinates[0]}`;
+      group[coord] = group[coord] ?? [];
+      group[coord].push(file);
+      return group;
+    },
+    {},
+  );
+
+  if (isPublic) {
+    locations = {
+      type: 'FeatureCollection',
+      features: Object.values(groupByLocation).map(files => ({
+        type: 'Feature',
+        geometry: files[0].location,
+        properties: [],
+      })),
+    };
+  }
+
+  const onLoad = (): void => {
+    if (locations) {
+      const [minLng, minLat, maxLng, maxLat] = bbox(locations);
+      mapRef.current?.fitBounds(
+        [
+          [minLng, minLat],
+          [maxLng, maxLat],
+        ],
+        {
+          padding: { top: 100, left: 50, right: 50, bottom: 100 },
+          duration: 0,
+        },
+      );
+    }
+  };
+
+  return (
+    <Suspense fallback={<CircularProgress color="secondary" />}>
+      {isPublic && (
+        <Map
+          initialViewState={{
+            zoom: 11,
+            latitude: 0.0,
+            longitude: 0.0,
+          }}
+          ref={mapRef}
+          style={{ width: '100%', height: '100%' }}
+          mapboxAccessToken={mapboxToken}
+          mapStyle="mapbox://styles/mapbox/satellite-streets-v10"
+          onLoad={onLoad}
+          attributionControl={false}
+        >
+          {locations &&
+            locations.features.map((feature, i) => {
+              const geometry = feature.geometry as Point;
+              const group =
+                groupByLocation[
+                  `${geometry.coordinates[1]},${geometry.coordinates[0]}`
+                ];
+
+              const mimeType = group[0].mimeType;
+              return (
+                <Marker
+                  key={i}
+                  latitude={geometry.coordinates[1]}
+                  longitude={geometry.coordinates[0]}
+                >
+                  <div
+                    onClick={() => {
+                      setSelectedLocation(geometry);
+                      // Set first file of group as selected
+                      setSelectedUrl(group[0].url);
+                    }}
+                    className={cn(
+                      'cursor-pointer flex items-center justify-center border border-solid rounded-[30px] h-30 shadow-sm',
+                      selectedLocation === geometry
+                        ? 'bg-grey-700 border-grey-600 text-grey-0'
+                        : 'bg-grey-0 border-grey-300 text-grey-700',
+                      group.length > 1 ? 'py-5 px-15' : 'py-3 px-10',
+                    )}
+                  >
+                    {group.length > 1 && (
+                      <Body
+                        className={cn(
+                          'font-semibold',
+                          selectedLocation === geometry
+                            ? 'text-grey-0'
+                            : 'text-grey-700',
+                        )}
+                        size="xs"
+                      >
+                        {group.length}
+                      </Body>
+                    )}
+                    {group.length === 1 &&
+                      (isImage(mimeType) ? (
+                        <ImageIcon width="24" height="24" />
+                      ) : isVideo(mimeType) ? (
+                        <></>
+                      ) : isAudio(mimeType) ? (
+                        <AudioFileIcon width="24" height="24" />
+                      ) : isPdf(mimeType) ? (
+                        <PdfFileIcon width="24" height="24" />
+                      ) : isSpreadSheet(mimeType) ? (
+                        <SpreadsheetFileIcon width="24" height="24" />
+                      ) : (
+                        <OtherDocumentsIcon width="24" height="24" />
+                      ))}
+                  </div>
+                </Marker>
+              );
+            })}
+          {selectedLocation && (
+            <Popup
+              className={cn(styles.popup, 'hidden sm:visible')}
+              longitude={selectedLocation.coordinates[0]}
+              latitude={selectedLocation.coordinates[1]}
+              closeButton={false}
+              closeOnClick={false}
+              maxWidth="301px"
+              offset={25}
+            >
+              <PostFilesCards
+                files={
+                  groupByLocation[
+                    `${selectedLocation.coordinates[1]},${selectedLocation.coordinates[0]}`
+                  ]
+                }
+                onClose={() => setSelectedLocation(undefined)}
+                setSelectedUrl={setSelectedUrl}
+                selectedUrl={selectedUrl}
+              />
+            </Popup>
+          )}
+        </Map>
+      )}
+    </Suspense>
+  );
+};
+
+export { PostFiles };

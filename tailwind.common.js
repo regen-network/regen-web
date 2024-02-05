@@ -75,6 +75,8 @@ module.exports = {
         'purple-gradient':
           'linear-gradient(179deg,#515D89 19.77%,#7DC9BF 114.05%,#FAEBD1 200.67%)',
       },
+    boxShadow: {
+      'sm': '0px 4px 10px 0px rgba(0, 0, 0, 0.05)',
     },
   },
   plugins: [],

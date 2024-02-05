@@ -49,6 +49,7 @@ import FarmerIcon from './FarmerIcon';
 import FilterIcon from './FilterIcon';
 import { GreenPinIcon } from './GreenPinIcon';
 import { HorizontalDotsIcon } from './HorizontalDotsIcon';
+import { ImageIcon } from './ImageIcon';
 import InfoIcon from './InfoIcon';
 import InfoIconOutlined from './InfoIconOutlined';
 import InterfaceIcon from './InterfaceIcon';
@@ -62,6 +63,7 @@ import NoBasketTokensIcon from './NoBasketTokensIcon';
 import NoEcocreditsIcon from './NoEcocreditsIcon';
 import { NoProjectIcon } from './NoProjectIcon';
 import NoRetirementCertificatesIcon from './NoRetirementCertificatesIcon';
+import { OpenInNewIcon } from './OpenInNewIcon';
 import OrganizationIcon from './OrganizationIcon';
 import { OtherDocumentsIcon } from './OtherDocumentsIcon';
 import OutlinedCheckIcon from './OutlinedCheckIcon';
@@ -125,6 +127,7 @@ import TrustIcon from './TrustIcon';
 import { UnlockIcon } from './UnlockIcon';
 import UserMenuIcon from './UserMenuIcon';
 import VerifiedIcon from './VerifiedIcon';
+import { VideoIcon } from './VideoIcon';
 import WalletErrorIcon from './WalletErrorIcon';
 import { WalletIcon } from './WalletIcon';
 import WhitepaperIcon from './WhitepaperIcon';
@@ -264,6 +267,7 @@ export const allIcons = (): JSX.Element => (
     />
     <LabeledIcon icon={<GravUsdcIcon />} label="GravUsdcIcon" />
     <LabeledIcon icon={<HorizontalDotsIcon />} label="HorizontalDotsIcon" />
+    <LabeledIcon icon={<ImageIcon />} label="ImageIcon" />
     <LabeledIcon icon={<InfoIcon />} label="InfoIcon" />
     <LabeledIcon icon={<InfoIconOutlined />} label="InfoIconOutlined" />
     <LabeledIcon icon={<InstagramIcon />} label="InstagramIcon" />
@@ -284,6 +288,8 @@ export const allIcons = (): JSX.Element => (
       icon={<NoRetirementCertificatesIcon />}
       label="NoRetirementCertificatesIcon"
     />
+    
+    <LabeledIcon icon={<OpenInNewIcon />} label="OpenInNewIcon" />
     <LabeledIcon icon={<OrganizationIcon />} label="OrganizationIcon" />
 
     <LabeledIcon icon={<OtherDocumentsIcon />} label="OtherDocumentsIcon" />
@@ -358,6 +364,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<UsdcIcon />} label="UsdcIcon" />
     <LabeledIcon icon={<UserMenuIcon />} label="UserMenuIcon" />
     <LabeledIcon icon={<VerifiedIcon color="#000" />} label="VerifiedIcon" />
+    <LabeledIcon icon={<VideoIcon />} label="VideoIcon" />
     <LabeledIcon icon={<WalletIcon />} label="WalletIcon" />
     <LabeledIcon
       icon={<WalletErrorIcon sx={{ fontSize: 64 }} />}

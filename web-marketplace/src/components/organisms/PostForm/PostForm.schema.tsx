@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { PostPrivacyType } from 'web-components/src/components/organisms/PostFiles.types';
+import { PostPrivacyType } from 'web-components/src/components/organisms/PostFiles/PostFiles.types';
 
 import { editFileFormSchema } from '../EditFileForm/EditFileForm.schema';
 import { POST_MAX_TITLE_LENGTH } from './PostForm.constants';

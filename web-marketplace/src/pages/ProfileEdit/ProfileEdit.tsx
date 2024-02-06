@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material';
 import { useSetAtom } from 'jotai';
 import { startCase } from 'lodash';
@@ -30,7 +30,7 @@ export const ProfileEdit = () => {
   const setIsProfileEditDirtyref = useSetAtom(isProfileEditDirtyRef);
   const isDirtyRef = useRef<boolean>(false);
   const navigate = useNavigate();
-
+  const { pathname } = useLocation();
   const section = usePathSection();
 
   const onBackClick = (): void => {
@@ -40,7 +40,12 @@ export const ProfileEdit = () => {
     if (isFormDirty) {
       setIsWarningModalOpen(path);
     } else {
-      navigate(path);
+      if (pathname === path) {
+        // On mobile, we want to navigate back to the profile page
+        navigate('/profile');
+      } else {
+        navigate(path);
+      }
     }
   };
 

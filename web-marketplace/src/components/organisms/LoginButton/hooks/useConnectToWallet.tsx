@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { WalletRepo } from '@cosmos-kit/core';
+import { useChain } from '@cosmos-kit/react-lite';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { WalletContextType } from 'lib/wallet/wallet';
@@ -22,8 +23,8 @@ export const useConnectToWallet = ({
   connect,
   connectWalletConnect,
   onModalClose,
-  setModalState,
 }: Props): Response => {
+  const { openView } = useChain('regen');
   const connectToWallet = useCallback(
     async ({ walletType }: ConnectParams): Promise<void> => {
       if (connect && walletType === WalletType.Keplr) {
@@ -34,11 +35,12 @@ export const useConnectToWallet = ({
         connectWalletConnect &&
         walletType === WalletType.WalletConnectKeplr
       ) {
-        setModalState('wallet-mobile');
+        onModalClose();
+        openView();
         await connectWalletConnect(KEPLR_MOBILE, true);
       }
     },
-    [connect, connectWalletConnect, onModalClose, setModalState],
+    [connect, connectWalletConnect, onModalClose, openView],
   );
 
   return connectToWallet;

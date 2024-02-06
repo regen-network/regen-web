@@ -2,11 +2,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { LoginModal, Props } from './LoginModal';
-import {
-  getWalletsMock,
-  socialProvidersMock,
-  uriMock,
-} from './LoginModal.mock';
+import { socialProvidersMock, uriMock, wallets } from './LoginModal.mock';
 import { LoginModalState } from './LoginModal.types';
 
 const meta: Meta<typeof LoginModal> = {
@@ -32,13 +28,10 @@ const Template = (args: Props) => {
     }, 1000);
   };
 
-  const walletsConfig = getWalletsMock({
-    onWalletConnectClick: () => setModalState('wallet-mobile'),
-  });
   return (
     <LoginModal
       {...args}
-      wallets={walletsConfig}
+      wallets={wallets}
       socialProviders={socialProvidersMock}
       state={modalState}
       open={open}
@@ -50,7 +43,6 @@ const Template = (args: Props) => {
 Default.args = {
   onClose: () => undefined,
   qrCodeUri: uriMock,
-  connecting: false,
 };
 
 Default.argTypes = {

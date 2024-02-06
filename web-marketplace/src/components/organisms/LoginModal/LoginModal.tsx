@@ -12,7 +12,6 @@ export interface Props extends RegenModalProps {
   wallets: LoginProvider[];
   socialProviders: LoginProvider[];
   qrCodeUri?: string;
-  connecting: boolean;
   onEmailSubmit: (values: EmailFormSchemaType) => Promise<void>;
 }
 
@@ -23,11 +22,9 @@ const LoginModal = ({
   wallets,
   socialProviders,
   qrCodeUri,
-  connecting,
   onEmailSubmit,
 }: Props): JSX.Element => {
   const isSelectState = state === 'select';
-  const isMobileState = state === 'wallet-mobile';
   return (
     <Modal open={open} onClose={onClose}>
       <Box>
@@ -37,9 +34,6 @@ const LoginModal = ({
             socialProviders={socialProviders}
             onEmailSubmit={onEmailSubmit}
           />
-        )}
-        {isMobileState && (
-          <LoginModalMobile qrCodeUri={qrCodeUri} connecting={connecting} />
         )}
       </Box>
     </Modal>

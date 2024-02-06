@@ -35,6 +35,7 @@ import {
 } from 'lib/wallet/wallet.constants';
 
 import PageLoader from 'components/atoms/PageLoader';
+import { LoginModalMobile } from 'components/organisms/LoginModal/components/LoginModal.Mobile';
 
 import { AuthApolloProvider } from './apollo';
 import { LedgerProvider } from './ledger';
@@ -117,33 +118,34 @@ root.render(
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <AnalyticsProvider instance={analytics}>
             <AuthProvider>
-              <ChainProvider
-                chains={chains.filter(chain => chain.chain_name === 'regen')}
-                assetLists={assets.filter(
-                  chain => chain.chain_name === 'regen',
-                )}
-                wallets={wallets}
-                walletConnectOptions={{
-                  signClient: {
-                    projectId: import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID,
-                    relayUrl: WALLET_CONNECT_RELAY_URL,
-                    metadata: walletConnectClientMeta,
-                  },
-                }}
-              >
-                <WalletProvider>
-                  <LedgerProvider>
-                    <ThemeProvider>
+              <ThemeProvider>
+                <ChainProvider
+                  chains={chains.filter(chain => chain.chain_name === 'regen')}
+                  assetLists={assets.filter(
+                    chain => chain.chain_name === 'regen',
+                  )}
+                  wallets={wallets}
+                  walletModal={LoginModalMobile}
+                  walletConnectOptions={{
+                    signClient: {
+                      projectId: import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID,
+                      relayUrl: WALLET_CONNECT_RELAY_URL,
+                      metadata: walletConnectClientMeta,
+                    },
+                  }}
+                >
+                  <WalletProvider>
+                    <LedgerProvider>
                       <Suspense fallback={<PageLoader />}>
                         <Routes
                           reactQueryClient={reactQueryClient}
                           apolloClientFactory={apolloClientFactory}
                         />
                       </Suspense>
-                    </ThemeProvider>
-                  </LedgerProvider>
-                </WalletProvider>
-              </ChainProvider>
+                    </LedgerProvider>
+                  </WalletProvider>
+                </ChainProvider>
+              </ThemeProvider>
             </AuthProvider>
           </AnalyticsProvider>
         </LocalizationProvider>

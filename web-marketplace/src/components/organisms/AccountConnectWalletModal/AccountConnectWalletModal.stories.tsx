@@ -44,6 +44,4 @@ const Template = (args: Props) => {
 
 Default.args = {
   onClose: () => undefined,
-  qrCodeUri: uriMock,
-  connecting: false,
 };

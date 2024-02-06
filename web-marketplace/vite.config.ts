@@ -47,7 +47,6 @@ export default defineConfig(({ mode }) => {
       vitePluginRequire(),
       visualizer(),
     ],
-    sourcemap: true,
     define: isDev ? { global: {} } : { 'process.env': {} },
     optimizeDeps: {
       esbuildOptions: {

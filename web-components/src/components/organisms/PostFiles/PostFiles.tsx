@@ -196,7 +196,12 @@ const PostFiles = ({ privacyType, files, mapboxToken }: Props) => {
                 />
               </Popup>
             )}
-            <PostFilesDrawer files={files} selectedUrl={selectedUrl} />
+            <PostFilesDrawer
+              files={files}
+              setSelectedUrl={setSelectedUrl}
+              selectedUrl={selectedUrl}
+              setSelectedLocation={setSelectedLocation}
+            />
           </div>
         </Map>
       )}

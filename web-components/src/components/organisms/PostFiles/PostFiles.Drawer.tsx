@@ -1,7 +1,9 @@
 import { lazy, Suspense, useState } from 'react';
 import ReactPlayer from 'react-player/es6';
 import { CircularProgress, Slide } from '@mui/material';
+import { Point } from 'geojson';
 
+import { UseStateSetter } from '../../../types/react/useState';
 import { cn } from '../../../utils/styles/cn';
 import { AudioFileIcon } from '../../icons/AudioFileIcon';
 import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
@@ -25,9 +27,16 @@ const Page = lazy(() => import('./lib/Page'));
 type Props = {
   files: Array<PostFile>;
   selectedUrl?: string;
+  setSelectedUrl: UseStateSetter<string | undefined>;
+  setSelectedLocation: UseStateSetter<Point | undefined>;
 };
 
-const PostFilesDrawer = ({ files, selectedUrl }: Props) => {
+const PostFilesDrawer = ({
+  files,
+  selectedUrl,
+  setSelectedUrl,
+  setSelectedLocation,
+}: Props) => {
   const [open, setOpen] = useState(true);
 
   return (
@@ -55,9 +64,13 @@ const PostFilesDrawer = ({ files, selectedUrl }: Props) => {
               <div
                 className={cn(
                   selectedUrl === file.url ? 'bg-grey-200' : 'bg-grey-0',
-                  'border-solid border-0 border-b border-grey-200 p-10',
+                  'border-solid border-0 border-b border-grey-200 p-10 cursor-pointer',
                 )}
                 key={file.url}
+                onClick={() => {
+                  setSelectedLocation(file.location);
+                  setSelectedUrl(file.url);
+                }}
               >
                 {image || video ? (
                   <>

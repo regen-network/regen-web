@@ -1,9 +1,17 @@
-import { lazy, Suspense, useCallback, useRef, useState } from 'react';
+import {
+  lazy,
+  Suspense,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { pdfjs } from 'react-pdf';
 import ReactPlayer from 'react-player/es6';
 import Slider from 'react-slick';
 import { Box, CircularProgress } from '@mui/material';
 
+import { UseStateSetter } from '../../../types/react/useState';
 import ArrowDownIcon from '../../icons/ArrowDownIcon';
 import { AudioFileIcon } from '../../icons/AudioFileIcon';
 import CloseIcon from '../../icons/CloseIcon';
@@ -32,7 +40,7 @@ const Page = lazy(() => import('./lib/Page'));
 type Props = {
   files: Array<PostFile>;
   onClose: () => void;
-  setSelectedUrl: (url: string) => void;
+  setSelectedUrl: UseStateSetter<string | undefined>;
   selectedUrl?: string;
 };
 
@@ -42,7 +50,8 @@ const PostFilesCards = ({
   setSelectedUrl,
   selectedUrl,
 }: Props) => {
-  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const initialSlide = files.findIndex(file => file.url === selectedUrl);
+  const [selectedIndex, setSelectedIndex] = useState<number>(initialSlide);
   const settings = {
     dots: false,
     infinite: true,
@@ -57,6 +66,12 @@ const PostFilesCards = ({
   };
 
   const slider = useRef<Slider>(null);
+
+  useEffect(() => {
+    if (initialSlide !== selectedIndex) {
+      slider.current?.slickGoTo(initialSlide, true);
+    }
+  }, [initialSlide, selectedIndex]);
 
   const slickPrev = useCallback(() => {
     slider.current?.slickPrev();

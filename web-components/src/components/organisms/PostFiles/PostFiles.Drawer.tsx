@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import ReactPlayer from 'react-player/es6';
 import { CircularProgress, Slide } from '@mui/material';
 import { Point } from 'geojson';
@@ -38,7 +38,12 @@ const PostFilesDrawer = ({
   setSelectedLocation,
 }: Props) => {
   const [open, setOpen] = useState(true);
+  const ref = useRef<HTMLDivElement | null>(null);
 
+  useEffect(() => {
+    const index = files.findIndex(file => file.url === selectedUrl);
+    ref.current?.children[index]?.scrollIntoView({ behavior: 'smooth' });
+  }, [files, selectedUrl]);
   return (
     <>
       <div
@@ -50,12 +55,15 @@ const PostFilesDrawer = ({
       >
         <BreadcrumbIcon
           className="text-grey-400 h-20 w-20"
-          direction={open ? 'prev' : 'next'}
+          direction={open ? 'next' : 'prev'}
         />
       </div>
 
       <Slide direction="left" in={open} mountOnEnter unmountOnExit>
-        <div className="overflow-y-auto border-solid border-0 border-t border-l border-r border-grey-200 absolute top-0 right-0 w-[150px] h-[100%]">
+        <div
+          ref={ref}
+          className="overflow-y-auto border-solid border-0 border-t border-l border-r border-grey-200 absolute top-0 right-0 w-[150px] h-[100%]"
+        >
           {files.map(file => {
             const { mimeType, url, name, description } = file;
             const image = isImage(mimeType);

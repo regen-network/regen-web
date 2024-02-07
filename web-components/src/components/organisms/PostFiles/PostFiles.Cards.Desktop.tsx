@@ -52,16 +52,18 @@ const PostFilesCards = ({
 }: Props) => {
   const initialSlide = files.findIndex(file => file.url === selectedUrl);
   const [selectedIndex, setSelectedIndex] = useState<number>(initialSlide);
+
   const settings = {
+    initialSlide: selectedIndex,
     dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    beforeChange: (_: number, newIndex: number) => {
-      setSelectedIndex(newIndex);
-      setSelectedUrl(files[newIndex].url);
+    afterChange: (currentSlide: number) => {
+      setSelectedIndex(currentSlide);
+      setSelectedUrl(files[currentSlide].url);
     },
   };
 
@@ -70,6 +72,7 @@ const PostFilesCards = ({
   useEffect(() => {
     if (initialSlide !== selectedIndex) {
       slider.current?.slickGoTo(initialSlide, true);
+      setSelectedIndex(initialSlide);
     }
   }, [initialSlide, selectedIndex]);
 

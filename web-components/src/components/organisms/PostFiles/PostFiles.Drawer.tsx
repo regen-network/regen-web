@@ -44,6 +44,7 @@ const PostFilesDrawer = ({
     const index = files.findIndex(file => file.url === selectedUrl);
     ref.current?.children[index]?.scrollIntoView({ behavior: 'smooth' });
   }, [files, selectedUrl]);
+
   return (
     <>
       <div

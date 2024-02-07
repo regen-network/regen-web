@@ -62,7 +62,7 @@ const PostFilesCards = ({
     slidesToScroll: 1,
     arrows: false,
     afterChange: (currentSlide: number) => {
-      setSelectedIndex(currentSlide);
+      if (selectedIndex !== currentSlide) setSelectedIndex(currentSlide);
       setSelectedUrl(files[currentSlide].url);
     },
   };
@@ -85,7 +85,7 @@ const PostFilesCards = ({
   }, [slider]);
 
   return (
-    <>
+    <div className="group">
       <Slider
         {...settings}
         ref={slider}
@@ -150,7 +150,7 @@ const PostFilesCards = ({
       {files.length > 1 && (
         <div
           onClick={slickNext}
-          className="cursor-pointer absolute top-[50%] -translate-y-[50%] right-[25px]"
+          className="hidden group-hover:block cursor-pointer absolute top-[50%] -translate-y-[50%] right-[25px]"
         >
           <ArrowDownIcon
             direction="next"
@@ -161,7 +161,7 @@ const PostFilesCards = ({
       {files.length > 1 && (
         <div
           onClick={slickPrev}
-          className="cursor-pointer absolute top-[50%] -translate-y-[50%] left-[25px]"
+          className="hidden group-hover:block cursor-pointer absolute top-[50%] -translate-y-[50%] left-[25px]"
         >
           <ArrowDownIcon
             direction="prev"
@@ -196,7 +196,7 @@ const PostFilesCards = ({
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

@@ -7,8 +7,10 @@ import { FeatureCollection, Point } from 'geojson';
 import { cn } from '../../../utils/styles/cn';
 import { AudioFileIcon } from '../../icons/AudioFileIcon';
 import { ImageIcon } from '../../icons/ImageIcon';
+import MinusIcon from '../../icons/MinusIcon';
 import { OtherDocumentsIcon } from '../../icons/OtherDocumentsIcon';
 import { PdfFileIcon } from '../../icons/PdfFileIcon';
+import PlusIcon from '../../icons/PlusIcon';
 import { SpreadsheetFileIcon } from '../../icons/SpreadsheetFileIcon';
 import {
   isAudio,
@@ -202,6 +204,18 @@ const PostFiles = ({ privacyType, files, mapboxToken }: Props) => {
               selectedUrl={selectedUrl}
               setSelectedLocation={setSelectedLocation}
             />
+            <div
+              onClick={() => mapRef.current?.zoomOut()}
+              className="cursor-pointer absolute top-20 left-20 h-30 w-30 bg-brand-400 rounded-[5px]"
+            >
+              <MinusIcon className="h-30 w-30 text-grey-0" />
+            </div>
+            <div
+              onClick={() => mapRef.current?.zoomIn()}
+              className="cursor-pointer absolute top-20 left-60 h-30 w-30 bg-brand-400 rounded-[5px]"
+            >
+              <PlusIcon className="h-30 w-30 text-grey-0" />
+            </div>
           </div>
         </Map>
       )}

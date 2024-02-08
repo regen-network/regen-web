@@ -120,7 +120,7 @@ const SocialLinks: React.FC<React.PropsWithChildren<Props>> = ({
           <GithubIcon className={styles.icon} />
         </Link>
         <Link
-          href="https://discord.gg/regen-network"
+          href="https://discord.gg/6ghMcMBjbz"
           rel="noopener noreferrer"
           target="_blank"
         >

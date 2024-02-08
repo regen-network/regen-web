@@ -59,7 +59,7 @@ export const getPressKitConnectIcons = (theme: Theme): IconLabelProps[] => [
         hoverColor={theme.palette.secondary.main}
       />
     ),
-    href: 'https://discord.gg/BDcBJu3',
+    href: 'https://discord.gg/6ghMcMBjbz',
     label: 'Discord community',
     smallSvg: true,
   },

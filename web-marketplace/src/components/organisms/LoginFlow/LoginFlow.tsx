@@ -22,7 +22,6 @@ type Props = {
   wallets: LoginProvider[];
   modalState: LoginModalState;
   qrCodeUri?: string;
-  connecting: boolean;
 };
 
 const LoginFlow = ({
@@ -31,7 +30,6 @@ const LoginFlow = ({
   wallets,
   modalState,
   qrCodeUri,
-  connecting,
 }: Props) => {
   const {
     isConfirmationModalOpen,
@@ -59,7 +57,6 @@ const LoginFlow = ({
         }}
         state={modalState}
         qrCodeUri={qrCodeUri}
-        connecting={connecting}
       />
       <EmailConfirmationModal
         resendText={getResendCodeLabel({ resendTimeLeft })}

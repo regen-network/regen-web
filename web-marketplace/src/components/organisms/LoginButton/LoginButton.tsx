@@ -23,11 +23,9 @@ const LoginButton = ({ size = 'small' }: Props) => {
   const styles = useLoginButtonStyles();
   const { wallet } = useWallet();
   const {
-    connecting,
     isModalOpen,
     modalState,
     onModalClose,
-    qrCodeUri,
     walletsUiConfig,
     onButtonClick,
   } = useLoginData();
@@ -59,8 +57,6 @@ const LoginButton = ({ size = 'small' }: Props) => {
           onModalClose={onModalClose}
           wallets={walletsUiConfig}
           modalState={modalState}
-          qrCodeUri={qrCodeUri}
-          connecting={connecting}
         />
       </div>
     </>

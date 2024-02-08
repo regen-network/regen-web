@@ -20,7 +20,6 @@ export const ProfileEditSettings = () => {
   const hasKeplrAccount = !!activeAccount?.addr;
   const { connect } = useWallet();
   const {
-    connecting,
     isModalOpen,
     modalState,
     onButtonClick,
@@ -75,7 +74,6 @@ export const ProfileEditSettings = () => {
           },
         ]}
         state={modalState}
-        connecting={connecting}
       />
     </>
   );

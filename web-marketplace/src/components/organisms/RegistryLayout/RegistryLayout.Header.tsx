@@ -80,12 +80,10 @@ const RegistryLayoutHeader: React.FC = () => {
     : theme.palette.primary.light;
 
   const {
-    connecting,
     isModalOpen,
     modalState,
     onButtonClick,
     onModalClose,
-    qrCodeUri,
     walletsUiConfig,
   } = useLoginData();
 
@@ -147,8 +145,6 @@ const RegistryLayoutHeader: React.FC = () => {
         // so there's no wallet available on mobile and only Keplr on desktop
         wallets={checkIsMobile() ? [] : [walletsUiConfig[0]]}
         modalState={modalState}
-        qrCodeUri={qrCodeUri}
-        connecting={connecting}
       />
     </>
   );

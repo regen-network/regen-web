@@ -17,8 +17,7 @@ import {
   isSpreadSheet,
   isVideo,
 } from '../../inputs/new/FileDrop/FileDrop.utils';
-import ReadMore from '../../read-more';
-import { Body } from '../../typography';
+import { FileBody } from './components/FileBody';
 import { PostFile } from './PostFiles';
 
 const Document = lazy(() => import('./lib/Document'));
@@ -66,7 +65,7 @@ const PostFilesDrawer = ({
           className="overflow-y-auto border-solid border-0 border-t border-l border-r border-grey-200 absolute top-0 right-0 w-[150px] h-[100%]"
         >
           {files.map(file => {
-            const { mimeType, url, name, description } = file;
+            const { mimeType, url } = file;
             const image = isImage(mimeType);
             const video = isVideo(mimeType);
             return (
@@ -98,22 +97,7 @@ const PostFilesDrawer = ({
                         height="100%"
                       />
                     )}
-                    {description && (
-                      <ReadMore
-                        maxLength={50}
-                        restMinLength={10}
-                        sentenceBased={false}
-                        size="xs"
-                        component="span"
-                        classes={{
-                          root: 'mb-0',
-                          button: 'text-xs',
-                          textContainer: 'p-0',
-                        }}
-                      >
-                        {description}
-                      </ReadMore>
-                    )}
+                    <FileBody file={file} />
                   </>
                 ) : (
                   <>
@@ -142,29 +126,7 @@ const PostFilesDrawer = ({
                         )}{' '}
                       </div>
                     )}
-                    <Body
-                      component="span"
-                      size="xs"
-                      className="text-grey-600 font-bold"
-                    >
-                      {name}
-                    </Body>
-                    {description && (
-                      <ReadMore
-                        maxLength={50}
-                        restMinLength={10}
-                        sentenceBased={false}
-                        size="xs"
-                        component="span"
-                        classes={{
-                          root: 'mb-0',
-                          button: 'text-xs',
-                          textContainer: 'p-0',
-                        }}
-                      >
-                        {description}
-                      </ReadMore>
-                    )}
+                    <FileBody file={file} />
                   </>
                 )}
               </div>

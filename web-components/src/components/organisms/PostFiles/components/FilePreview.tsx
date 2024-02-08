@@ -1,0 +1,90 @@
+import { lazy, Suspense } from 'react';
+import { pdfjs } from 'react-pdf';
+import ReactPlayer from 'react-player/es6';
+import { Box, CircularProgress } from '@mui/material';
+
+import { AudioFileIcon } from '../../../icons/AudioFileIcon';
+import { OtherDocumentsIcon } from '../../../icons/OtherDocumentsIcon';
+import { SpreadsheetFileIcon } from '../../../icons/SpreadsheetFileIcon';
+import {
+  isAudio,
+  isImage,
+  isPdf,
+  isSpreadSheet,
+  isVideo,
+} from '../../../inputs/new/FileDrop/FileDrop.utils';
+import { Body } from '../../../typography';
+import { PostFile } from '../PostFiles';
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.js',
+  import.meta.url,
+).toString();
+
+const Document = lazy(() => import('../lib/Document'));
+const Page = lazy(() => import('../lib/Page'));
+
+type Props = {
+  file: PostFile;
+  className?: string;
+  pdfPageHeight: number;
+  showName?: boolean;
+};
+
+const FilePreview = ({ file, className, pdfPageHeight, showName }: Props) => {
+  const { mimeType, url } = file;
+  const image = isImage(mimeType);
+  const video = isVideo(mimeType);
+  return (
+    <Box
+      className={className}
+      sx={theme => ({
+        position: 'relative',
+        background: `linear-gradient(180deg, rgba(0, 0, 0, 0.00) 62.39%, rgba(0, 0, 0, 0.70) 100%), ${
+          image ? `url(${url})` : `${theme.palette.grey[100]}`
+        }`,
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        outline: 'none',
+        backgroundColor: image || video ? 'primary.contrastText' : undefined,
+      })}
+    >
+      {video ? (
+        <ReactPlayer url={url} width="100%" height="100%" controls />
+      ) : isPdf(mimeType) ? (
+        <Suspense fallback={<CircularProgress color="secondary" />}>
+          <Document
+            className="px-[65px] h-[100%]"
+            file={url}
+            loading={<CircularProgress color="secondary" />}
+          >
+            <Page height={pdfPageHeight} pageNumber={1} />
+          </Document>
+        </Suspense>
+      ) : (
+        !isImage(mimeType) && (
+          <div className="flex items-center justify-center h-[100%] text-grey-400">
+            {isAudio(mimeType) ? (
+              <AudioFileIcon width="50" height="50" />
+            ) : isSpreadSheet(mimeType) ? (
+              <SpreadsheetFileIcon width="50" height="50" />
+            ) : (
+              <OtherDocumentsIcon width="50" height="50" />
+            )}
+            {showName && (
+              <Body
+                className="absolute left-[13px] bottom-[13px] text-grey-0 font-bold"
+                size="xs"
+              >
+                {file.name}
+              </Body>
+            )}
+          </div>
+        )
+      )}
+    </Box>
+  );
+};
+
+export { FilePreview };

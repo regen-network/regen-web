@@ -28,7 +28,6 @@ const PostFilesCardsMobile = ({
   return (
     <Cards
       files={files}
-      onClose={onClose}
       selectedUrl={selectedUrl}
       setSelectedUrl={setSelectedUrl}
       setSelectedLocation={setSelectedLocation}

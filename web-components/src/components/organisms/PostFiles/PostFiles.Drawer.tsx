@@ -5,6 +5,7 @@ import { Point } from 'geojson';
 
 import { UseStateSetter } from '../../../types/react/useState';
 import { cn } from '../../../utils/styles/cn';
+import { PlayButton } from '../../atoms/PlayButton/PlayButton';
 import { AudioFileIcon } from '../../icons/AudioFileIcon';
 import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
 import { OtherDocumentsIcon } from '../../icons/OtherDocumentsIcon';
@@ -90,12 +91,15 @@ const PostFilesDrawer = ({
                       />
                     )}
                     {video && (
-                      <ReactPlayer
-                        className="rounded-sm overflow-hidden"
-                        url={url}
-                        width="100%"
-                        height="100%"
-                      />
+                      <div className="relative">
+                        <ReactPlayer
+                          className="rounded-sm overflow-hidden"
+                          url={url}
+                          width="100%"
+                          height="100%"
+                        />
+                        <PlayButton className="w-[28px] h-[28px] " />
+                      </div>
                     )}
                     <FileBody file={file} />
                   </>

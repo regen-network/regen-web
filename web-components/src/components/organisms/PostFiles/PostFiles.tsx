@@ -105,7 +105,7 @@ const PostFiles = ({ privacyType, files, mapboxToken }: Props) => {
   };
 
   return (
-    <div className="w-[100%] sm:h-[550px] h-[600px]">
+    <div className={cn(styles.map, 'w-[100%] sm:h-[550px] h-[600px]')}>
       <Suspense fallback={<CircularProgress color="secondary" />}>
         {isPublic && (
           <Map
@@ -182,7 +182,10 @@ const PostFiles = ({ privacyType, files, mapboxToken }: Props) => {
                 );
               })}
             <div className="hidden sm:block">
-              {selectedLocation && (
+              {/* We need to check for mobile media query too because `display: none` (`hidden` class) only
+              hides the element from the rendered tree but it's still in the DOM and that might
+              conflict with mobile desired behavior */}
+              {selectedLocation && selectedUrl && !mobile && (
                 <Popup
                   className={styles.popup}
                   longitude={selectedLocation.coordinates[0]}
@@ -226,12 +229,18 @@ const PostFiles = ({ privacyType, files, mapboxToken }: Props) => {
                 <PlusIcon className="h-30 w-30 text-grey-0" />
               </div>
             </div>
-            <PostFilesCardsMobile
-              files={files}
-              setSelectedUrl={setSelectedUrl}
-              selectedUrl={selectedUrl}
-              onClose={() => setSelectedUrl(undefined)}
-            />
+            {selectedLocation && selectedUrl && mobile && (
+              <PostFilesCardsMobile
+                files={files}
+                setSelectedUrl={setSelectedUrl}
+                selectedUrl={selectedUrl}
+                onClose={() => {
+                  setSelectedUrl(undefined);
+                  setSelectedLocation(undefined);
+                }}
+                setSelectedLocation={setSelectedLocation}
+              />
+            )}
           </Map>
         )}
       </Suspense>

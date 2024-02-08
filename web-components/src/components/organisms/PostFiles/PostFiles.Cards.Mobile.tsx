@@ -3,6 +3,7 @@ import { pdfjs } from 'react-pdf';
 import ReactPlayer from 'react-player/es6';
 import Slider from 'react-slick';
 import { Box, CircularProgress } from '@mui/material';
+import { Point } from 'geojson';
 
 import { UseStateSetter } from '../../../types/react/useState';
 import { AudioFileIcon } from '../../icons/AudioFileIcon';
@@ -33,13 +34,15 @@ type Props = {
   files: Array<PostFile>;
   onClose: () => void;
   setSelectedUrl: UseStateSetter<string | undefined>;
-  selectedUrl?: string;
+  setSelectedLocation: UseStateSetter<Point | undefined>;
+  selectedUrl: string;
 };
 
 const PostFilesCardsMobile = ({
   files,
   onClose,
   setSelectedUrl,
+  setSelectedLocation,
   selectedUrl,
 }: Props) => {
   const initialSlide = files.findIndex(file => file.url === selectedUrl);
@@ -55,8 +58,12 @@ const PostFilesCardsMobile = ({
     slidesToScroll: 1,
     arrows: false,
     afterChange: (currentSlide: number) => {
-      if (selectedIndex !== currentSlide) setSelectedIndex(currentSlide);
-      setSelectedUrl(files[currentSlide].url);
+      if (selectedIndex !== currentSlide) {
+        setSelectedIndex(currentSlide);
+      }
+      const file = files[currentSlide];
+      setSelectedUrl(file.url);
+      setSelectedLocation(file.location);
     },
   };
 

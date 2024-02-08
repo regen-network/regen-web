@@ -3,6 +3,13 @@ import { makeStyles } from 'tss-react/mui';
 import { Theme } from '../../../theme/muiTheme';
 
 export const useStyles = makeStyles()((theme: Theme) => ({
+  map: {
+    '& .mapboxgl-ctrl-bottom-left': {
+      [theme.breakpoints.down('sm')]: {
+        top: 0, // position the mapbox logo at the top on mobile so it doesn't overlap with the slider
+      },
+    },
+  },
   popup: {
     '&.mapboxgl-popup': {
       [theme.breakpoints.down('sm')]: {

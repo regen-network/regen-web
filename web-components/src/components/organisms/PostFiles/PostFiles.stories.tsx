@@ -11,11 +11,7 @@ export default {
 type Story = StoryObj<typeof PostFiles>;
 
 export const Public: Story = {
-  render: args => (
-    <div className="w-[100%] h-[550px]">
-      <PostFiles {...args} />
-    </div>
-  ),
+  render: args => <PostFiles {...args} />,
 };
 
 Public.args = {

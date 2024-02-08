@@ -44,7 +44,7 @@ type Props = {
   selectedUrl?: string;
 };
 
-const PostFilesCards = ({
+const PostFilesCardsDesktop = ({
   files,
   onClose,
   setSelectedUrl,
@@ -169,9 +169,6 @@ const PostFilesCards = ({
           />
         </div>
       )}
-      <div className="sm:hidden">
-        <div className="sm:w-[301px] sm:h-[202px] rounded-10 border-3 border-solid border-grey-0"></div>
-      </div>
       <div
         onClick={onClose}
         className="cursor-pointer absolute top-[13px] right-[13px]"
@@ -200,4 +197,4 @@ const PostFilesCards = ({
   );
 };
 
-export { PostFilesCards };
+export { PostFilesCardsDesktop };

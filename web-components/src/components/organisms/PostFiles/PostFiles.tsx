@@ -1,6 +1,6 @@
 import { lazy, Suspense, useRef, useState } from 'react';
 import type { MapRef } from 'react-map-gl';
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, useMediaQuery, useTheme } from '@mui/material';
 import bbox from '@turf/bbox';
 import { FeatureCollection, Point } from 'geojson';
 
@@ -20,7 +20,8 @@ import {
   isVideo,
 } from '../../inputs/new/FileDrop/FileDrop.utils';
 import { Body } from '../../typography/Body';
-import { PostFilesCards } from './PostFiles.Cards.Desktop';
+import { PostFilesCardsDesktop } from './PostFiles.Cards.Desktop';
+import { PostFilesCardsMobile } from './PostFiles.Cards.Mobile';
 import { PostFilesDrawer } from './PostFiles.Drawer';
 import { useStyles } from './PostFiles.styles';
 import { PostPrivacyType } from './PostFiles.types';
@@ -47,6 +48,9 @@ type Props = {
 
 const PostFiles = ({ privacyType, files, mapboxToken }: Props) => {
   const { classes: styles } = useStyles();
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   const [selectedUrl, setSelectedUrl] = useState<string | undefined>(
     files[0]?.url,
   );
@@ -88,8 +92,12 @@ const PostFiles = ({ privacyType, files, mapboxToken }: Props) => {
           [maxLng, maxLat],
         ],
         {
-          // TODO update right padding on mobile
-          padding: { top: 100, left: 50, right: 150, bottom: 100 },
+          padding: {
+            top: mobile ? 50 : 100,
+            left: 50,
+            right: mobile ? 50 : 150,
+            bottom: mobile ? 220 : 100,
+          },
           duration: 0,
         },
       );
@@ -97,129 +105,137 @@ const PostFiles = ({ privacyType, files, mapboxToken }: Props) => {
   };
 
   return (
-    <Suspense fallback={<CircularProgress color="secondary" />}>
-      {isPublic && (
-        <Map
-          initialViewState={{
-            zoom: 11,
-            latitude: 0.0,
-            longitude: 0.0,
-          }}
-          ref={mapRef}
-          style={{ width: '100%', height: '100%' }}
-          mapboxAccessToken={mapboxToken}
-          mapStyle="mapbox://styles/mapbox/satellite-streets-v10"
-          onLoad={onLoad}
-          attributionControl={false}
-        >
-          {locations &&
-            locations.features.map((feature, i) => {
-              const geometry = feature.geometry as Point;
-              const group =
-                groupByLocation[
-                  `${geometry.coordinates[1]},${geometry.coordinates[0]}`
-                ];
+    <div className="w-[100%] sm:h-[550px] h-[600px]">
+      <Suspense fallback={<CircularProgress color="secondary" />}>
+        {isPublic && (
+          <Map
+            initialViewState={{
+              zoom: 11,
+              latitude: 0.0,
+              longitude: 0.0,
+            }}
+            ref={mapRef}
+            style={{ width: '100%', height: '100%' }}
+            mapboxAccessToken={mapboxToken}
+            mapStyle="mapbox://styles/mapbox/satellite-streets-v10"
+            onLoad={onLoad}
+            attributionControl={false}
+          >
+            {locations &&
+              locations.features.map((feature, i) => {
+                const geometry = feature.geometry as Point;
+                const group =
+                  groupByLocation[
+                    `${geometry.coordinates[1]},${geometry.coordinates[0]}`
+                  ];
 
-              const mimeType = group[0].mimeType;
-              return (
-                <Marker
-                  key={i}
-                  latitude={geometry.coordinates[1]}
-                  longitude={geometry.coordinates[0]}
-                >
-                  <div
-                    onClick={() => {
-                      setSelectedLocation(geometry);
-                      // Set first file of group as selected
-                      setSelectedUrl(group[0].url);
-                    }}
-                    className={cn(
-                      'cursor-pointer flex items-center justify-center border border-solid rounded-[30px] h-30 shadow-sm',
-                      selectedLocation === geometry
-                        ? 'bg-grey-700 border-grey-600 text-grey-0'
-                        : 'bg-grey-0 border-grey-300 text-grey-700',
-                      group.length > 1 ? 'py-5 px-15' : 'py-3 px-10',
-                    )}
+                const mimeType = group[0].mimeType;
+                return (
+                  <Marker
+                    key={i}
+                    latitude={geometry.coordinates[1]}
+                    longitude={geometry.coordinates[0]}
                   >
-                    {group.length > 1 && (
-                      <Body
-                        className={cn(
-                          'font-semibold',
-                          selectedLocation === geometry
-                            ? 'text-grey-0'
-                            : 'text-grey-700',
-                        )}
-                        size="xs"
-                      >
-                        {group.length}
-                      </Body>
-                    )}
-                    {group.length === 1 &&
-                      (isImage(mimeType) ? (
-                        <ImageIcon width="24" height="24" />
-                      ) : isVideo(mimeType) ? (
-                        <></>
-                      ) : isAudio(mimeType) ? (
-                        <AudioFileIcon width="24" height="24" />
-                      ) : isPdf(mimeType) ? (
-                        <PdfFileIcon width="24" height="24" />
-                      ) : isSpreadSheet(mimeType) ? (
-                        <SpreadsheetFileIcon width="24" height="24" />
-                      ) : (
-                        <OtherDocumentsIcon width="24" height="24" />
-                      ))}
-                  </div>
-                </Marker>
-              );
-            })}
-          <div className="hidden sm:block">
-            {selectedLocation && (
-              <Popup
-                className={cn(styles.popup, 'hidden sm:visible')}
-                longitude={selectedLocation.coordinates[0]}
-                latitude={selectedLocation.coordinates[1]}
-                closeButton={false}
-                closeOnClick={false}
-                maxWidth="301px"
-                offset={25}
+                    <div
+                      onClick={() => {
+                        setSelectedLocation(geometry);
+                        // Set first file of group as selected
+                        setSelectedUrl(group[0].url);
+                      }}
+                      className={cn(
+                        'cursor-pointer flex items-center justify-center border border-solid rounded-[30px] h-30 shadow-sm',
+                        selectedLocation === geometry
+                          ? 'bg-grey-700 border-grey-600 text-grey-0'
+                          : 'bg-grey-0 border-grey-300 text-grey-700',
+                        group.length > 1 ? 'py-5 px-15' : 'py-3 px-10',
+                      )}
+                    >
+                      {group.length > 1 && (
+                        <Body
+                          className={cn(
+                            'font-semibold',
+                            selectedLocation === geometry
+                              ? 'text-grey-0'
+                              : 'text-grey-700',
+                          )}
+                          size="xs"
+                        >
+                          {group.length}
+                        </Body>
+                      )}
+                      {group.length === 1 &&
+                        (isImage(mimeType) ? (
+                          <ImageIcon width="24" height="24" />
+                        ) : isVideo(mimeType) ? (
+                          <></>
+                        ) : isAudio(mimeType) ? (
+                          <AudioFileIcon width="24" height="24" />
+                        ) : isPdf(mimeType) ? (
+                          <PdfFileIcon width="24" height="24" />
+                        ) : isSpreadSheet(mimeType) ? (
+                          <SpreadsheetFileIcon width="24" height="24" />
+                        ) : (
+                          <OtherDocumentsIcon width="24" height="24" />
+                        ))}
+                    </div>
+                  </Marker>
+                );
+              })}
+            <div className="hidden sm:block">
+              {selectedLocation && (
+                <Popup
+                  className={styles.popup}
+                  longitude={selectedLocation.coordinates[0]}
+                  latitude={selectedLocation.coordinates[1]}
+                  closeButton={false}
+                  closeOnClick={false}
+                  maxWidth="301px"
+                  offset={25}
+                >
+                  <PostFilesCardsDesktop
+                    files={
+                      groupByLocation[
+                        `${selectedLocation.coordinates[1]},${selectedLocation.coordinates[0]}`
+                      ]
+                    }
+                    onClose={() => {
+                      setSelectedLocation(undefined);
+                      setSelectedUrl(undefined);
+                    }}
+                    setSelectedUrl={setSelectedUrl}
+                    selectedUrl={selectedUrl}
+                  />
+                </Popup>
+              )}
+              <PostFilesDrawer
+                files={files}
+                setSelectedUrl={setSelectedUrl}
+                selectedUrl={selectedUrl}
+                setSelectedLocation={setSelectedLocation}
+              />
+              <div
+                onClick={() => mapRef.current?.zoomOut()}
+                className="cursor-pointer absolute top-20 left-20 h-30 w-30 bg-brand-400 rounded-[5px]"
               >
-                <PostFilesCards
-                  files={
-                    groupByLocation[
-                      `${selectedLocation.coordinates[1]},${selectedLocation.coordinates[0]}`
-                    ]
-                  }
-                  onClose={() => {
-                    setSelectedLocation(undefined);
-                    setSelectedUrl(undefined);
-                  }}
-                  setSelectedUrl={setSelectedUrl}
-                  selectedUrl={selectedUrl}
-                />
-              </Popup>
-            )}
-            <PostFilesDrawer
+                <MinusIcon className="h-30 w-30 text-grey-0" />
+              </div>
+              <div
+                onClick={() => mapRef.current?.zoomIn()}
+                className="cursor-pointer absolute top-20 left-60 h-30 w-30 bg-brand-400 rounded-[5px]"
+              >
+                <PlusIcon className="h-30 w-30 text-grey-0" />
+              </div>
+            </div>
+            <PostFilesCardsMobile
               files={files}
               setSelectedUrl={setSelectedUrl}
               selectedUrl={selectedUrl}
-              setSelectedLocation={setSelectedLocation}
+              onClose={() => setSelectedUrl(undefined)}
             />
-            <div
-              onClick={() => mapRef.current?.zoomOut()}
-              className="cursor-pointer absolute top-20 left-20 h-30 w-30 bg-brand-400 rounded-[5px]"
-            >
-              <MinusIcon className="h-30 w-30 text-grey-0" />
-            </div>
-            <div
-              onClick={() => mapRef.current?.zoomIn()}
-              className="cursor-pointer absolute top-20 left-60 h-30 w-30 bg-brand-400 rounded-[5px]"
-            >
-              <PlusIcon className="h-30 w-30 text-grey-0" />
-            </div>
-          </div>
-        </Map>
-      )}
-    </Suspense>
+          </Map>
+        )}
+      </Suspense>
+    </div>
   );
 };
 

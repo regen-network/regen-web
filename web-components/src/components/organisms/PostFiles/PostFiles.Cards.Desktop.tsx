@@ -41,7 +41,7 @@ type Props = {
   files: Array<PostFile>;
   onClose: () => void;
   setSelectedUrl: UseStateSetter<string | undefined>;
-  selectedUrl?: string;
+  selectedUrl: string;
 };
 
 const PostFilesCardsDesktop = ({
@@ -85,7 +85,7 @@ const PostFilesCardsDesktop = ({
   }, [slider]);
 
   return (
-    <div className="group">
+    <div className="hidden sm:block group">
       <Slider
         {...settings}
         ref={slider}

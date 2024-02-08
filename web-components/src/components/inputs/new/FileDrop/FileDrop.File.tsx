@@ -3,13 +3,12 @@ import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Box, IconButton, useTheme } from '@mui/material';
 import { Feature } from 'geojson';
 
+import { PlayButton } from '../../../../components/atoms/PlayButton/PlayButton';
 import { cn } from '../../../../utils/styles/cn';
-import { useArticleCardStyles } from '../../../cards/ArticleCard';
 import { AudioFileIcon } from '../../../icons/AudioFileIcon';
 import EditIcon from '../../../icons/EditIcon';
 import { OtherDocumentsIcon } from '../../../icons/OtherDocumentsIcon';
 import { PdfFileIcon } from '../../../icons/PdfFileIcon';
-import PlayIcon from '../../../icons/PlayIcon';
 import { SpreadsheetFileIcon } from '../../../icons/SpreadsheetFileIcon';
 import TrashIcon from '../../../icons/TrashIcon';
 import { Image } from '../../../image';
@@ -53,7 +52,6 @@ export const FileDropFile = ({
   classes,
 }: Props) => {
   const { classes: styles, cx } = useFileDropStyles();
-  const { classes: articleCardStyles } = useArticleCardStyles();
   const theme = useTheme();
 
   return (
@@ -73,12 +71,7 @@ export const FileDropFile = ({
               'absolute top-0 left-0 bg-grey-700 rounded-[5px] overflow-hidden',
             )}
           />
-          <div className={articleCardStyles.play}>
-            <PlayIcon
-              width={theme.spacing(8.75)}
-              height={theme.spacing(8.75)}
-            />
-          </div>
+          <PlayButton />
         </>
       ) : (
         <div className="bg-grey-300 text-grey-400 h-[100%] flex justify-center items-center">

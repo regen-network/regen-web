@@ -3,6 +3,7 @@ import { pdfjs } from 'react-pdf';
 import ReactPlayer from 'react-player/es6';
 import { Box, CircularProgress } from '@mui/material';
 
+import { PlayButton } from '../../../atoms/PlayButton/PlayButton';
 import { AudioFileIcon } from '../../../icons/AudioFileIcon';
 import { OtherDocumentsIcon } from '../../../icons/OtherDocumentsIcon';
 import { SpreadsheetFileIcon } from '../../../icons/SpreadsheetFileIcon';
@@ -51,7 +52,17 @@ const FilePreview = ({ file, className, pdfPageHeight, showName }: Props) => {
       })}
     >
       {video ? (
-        <ReactPlayer url={url} width="100%" height="100%" controls />
+        <>
+          <ReactPlayer url={url} width="100%" height="100%" />
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={url}
+            className="outline-none cursor-pointer"
+          >
+            <PlayButton className="w-50 h-50 " />
+          </a>
+        </>
       ) : isPdf(mimeType) ? (
         <Suspense fallback={<CircularProgress color="secondary" />}>
           <Document

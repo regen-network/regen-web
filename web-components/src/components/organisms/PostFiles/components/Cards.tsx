@@ -10,7 +10,6 @@ import { getIconForFiles } from '../PostFiles.utils';
 
 type Props = {
   files: Array<PostFile>;
-  onClose: () => void;
   setSelectedUrl: UseStateSetter<string | undefined>;
   setSelectedLocation?: UseStateSetter<Point | undefined>;
   selectedUrl: string;
@@ -20,17 +19,18 @@ type Props = {
   };
   items: React.ReactNode;
   controls?: boolean;
+  infinite?: boolean;
 };
 
 const Cards: React.FC<React.PropsWithChildren<Props>> = ({
   files,
-  onClose,
   setSelectedUrl,
   setSelectedLocation,
   selectedUrl,
   classNames,
   items,
   controls,
+  infinite,
   children,
 }) => {
   const initialSlide = files.findIndex(file => file.url === selectedUrl);
@@ -39,7 +39,7 @@ const Cards: React.FC<React.PropsWithChildren<Props>> = ({
   const settings = {
     initialSlide: selectedIndex,
     dots: false,
-    infinite: true,
+    infinite,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,

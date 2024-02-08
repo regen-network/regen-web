@@ -19,7 +19,7 @@ const PostFilesCardsDesktop = ({
 }: Props) => (
   <Cards
     files={files}
-    onClose={onClose}
+    infinite
     selectedUrl={selectedUrl}
     setSelectedUrl={setSelectedUrl}
     controls

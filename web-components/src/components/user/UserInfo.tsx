@@ -31,7 +31,8 @@ interface UserInfoProps {
   titleComponent?: 'title' | 'subtitle';
   border?: boolean;
   sx?: SxProps<Theme>;
-  avatarSx?: SxProps<Theme>;
+  nameHasPadding?: boolean;
+  // avatarSx?: SxProps<Theme>;
 }
 export default function UserInfo({
   user,
@@ -42,6 +43,7 @@ export default function UserInfo({
   titleComponent = 'title',
   sx = [],
   avatarSx = [],
+  nameHasPadding = true,
 }: UserInfoProps): JSX.Element {
   const sizeVariant = getSizeVariant(size);
   const mobileSizeVariant = getSizeVariant(getMobileSize(size));
@@ -79,15 +81,15 @@ export default function UserInfo({
           size={size}
           border={border}
           icon={user.image}
-          sx={avatarSx}
+          // sx={avatarSx}
         />
       </Grid>
       <Grid
         item
         sx={{
-          ml: size === 'xs' ? 3.5 : 4.8,
+          ml: nameHasPadding ? (size === 'xs' ? 3.5 : 4.8) : 0,
           textAlign: direction === 'column' ? 'center' : 'left',
-          pt: 2,
+          pt: nameHasPadding ? 2 : 0,
         }}
       >
         {user.link ? (

@@ -31,8 +31,8 @@ export default function VerifiedIcon({
               y2="16"
               gradientUnits="userSpaceOnUse"
             >
-              <stop offset="0.00458717" stop-color="#7BC796" />
-              <stop offset="1" stop-color="#C5E6D1" />
+              <stop offset="0.00458717" stopColor="#7BC796" />
+              <stop offset="1" stopColor="#C5E6D1" />
             </linearGradient>
           </defs>
         )}

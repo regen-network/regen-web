@@ -19,7 +19,7 @@ export default function ShareIcon({
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <g clip-path="url(#shareIconClipPath)">
+      <g clipPath="url(#shareIconClipPath)">
         <g filter="url(#shareIconFilter)">
           <path
             fillRule="evenodd"
@@ -37,9 +37,9 @@ export default function ShareIcon({
           width="59"
           height="62"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"

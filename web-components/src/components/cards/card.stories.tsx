@@ -356,11 +356,21 @@ export const postCard = (): JSX.Element => {
   const signer: User = {
     name: 'Odonata',
     // TODO: fix hacky negative margin
-    nameRaw: <Body sx={{ mt: -2, ml: -3 }}>Odonata</Body>,
+    nameRaw: (
+      <Body
+        sx={
+          {
+            /*mt: -2, ml: -3*/
+          }
+        }
+      >
+        Odonata
+      </Body>
+    ),
     type: 'ORGANIZATION',
     image:
       'https://cdn.sanity.io/images/jm12rn9t/staging/8b062589b6d8c6850a78bb13ead51d2f6f32b073-29x9.svg',
-  }
+  };
   return (
     <PostCard
       title="Fall 2023 Update"

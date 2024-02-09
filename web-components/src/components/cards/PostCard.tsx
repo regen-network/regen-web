@@ -1,8 +1,11 @@
 import React, { createContext, ReactNode } from 'react';
+import { AbsoluteCenter, theme } from '@chakra-ui/react';
+import { Brightness1 } from '@mui/icons-material';
 import { Box, Grid, IconButton } from '@mui/material';
 import { DefaultTheme as Theme } from '@mui/styles';
 import { makeStyles } from 'tss-react/mui';
 
+import DocumentIcon from '../icons/DocumentIcon';
 import ShareIcon from '../icons/ShareIcon';
 import VerifiedIcon from '../icons/VerifiedIcon';
 // import { formatDate } from '../../utils/format';
@@ -52,7 +55,22 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
   image: {},
   chip: {},
+  description: {
+    lineClamp: 2,
+    WebkitLineClamp: 2,
+    display: '-webkit-box',
+    WebkitBoxOrient: 'vertical',
+    overflow: 'hidden',
+  },
 }));
+
+const SignerName = ({ name }: { name: string }): JSX.Element => {
+  return (
+    <Body size="sm" sx={{ ml: 2, fontWeight: 800 }}>
+      {name}
+    </Body>
+  );
+};
 
 const NameWithRoleAndTimestamp = ({
   name,
@@ -63,9 +81,16 @@ const NameWithRoleAndTimestamp = ({
   authorRole?: string;
   timestamp: string;
 }): JSX.Element => (
-  <Box sx={{ mt: -2 }}>
+  <Box
+    sx={{
+      // mt: -2
+      ml: 3,
+    }}
+  >
     <Box>
-      <Subtitle sx={{ display: 'inline' }}>{name}</Subtitle>
+      <Subtitle size="sm" sx={{ display: 'inline' }}>
+        {name}
+      </Subtitle>
       <Box
         borderRadius={1}
         // className={classes.chip}
@@ -75,15 +100,23 @@ const NameWithRoleAndTimestamp = ({
           ml: 2,
           backgroundColor: theme => theme.palette.grey['300'],
           display: 'inline-block',
-          fontSize: '12px',
+          fontSize: '10px',
           color: theme => theme.palette.grey['500'],
           textTransform: 'uppercase',
+          fontWeight: 800,
+          letterSpacing: '1px',
         }}
       >
         {authorRole}
       </Box>
     </Box>
-    <Box sx={theme => ({ color: theme.palette.grey['700'] })}>
+    <Box
+      sx={theme => ({
+        color: theme.palette.grey['700'],
+        fontSize: '12px',
+        mt: 1.5,
+      })}
+    >
       {formatDate(timestamp)}
     </Box>
   </Box>
@@ -106,6 +139,7 @@ export default function PostCard({
   const { classes } = useStyles();
 
   const authorWithNameRaw: User = {
+    ...author,
     nameRaw: (
       <NameWithRoleAndTimestamp
         name={author.name}
@@ -113,29 +147,40 @@ export default function PostCard({
         timestamp={timestamp}
       />
     ),
-    ...author,
   };
 
+  const signerWithNameRaw: User | undefined = signer && {
+    ...signer,
+    nameRaw: <SignerName name={signer.name} />,
+  };
+
+  console.log({ signerWithNameRaw });
+
   return (
-    <Card className={classes.root} sx={{ p: 6 }} borderRadius="10px">
+    <Card className={classes.root} sx={{ p: [4, 8] }} borderRadius="10px">
+      <IconButton
+        sx={{
+          position: 'absolute',
+          top: theme => [0, theme.spacing(3)],
+          right: theme => [0, theme.spacing(3)],
+          transform: 'translate(-50%, 50%)',
+          zIndex: 1,
+          borderRadius: theme => theme.spacing(5),
+          backgroundColor: 'white',
+          boxShadow: theme => theme.shadows[1],
+          // height: '34px',
+          // width: '34px',
+        }}
+      >
+        <ShareIcon color="secondary" />
+      </IconButton>
       <Grid
         container
         sx={{ flexWrap: ['wrap-reverse', 'nowrap'], position: 'relative' }}
       >
+        {/* TODO: private indicator */}
         {/* TODO: share/edit button link */}
-        <IconButton
-          sx={{
-            position: 'absolute',
-            top: theme => theme.spacing(-5),
-            right: theme => theme.spacing(-5),
-            zIndex: 1,
-            borderRadius: theme => theme.spacing(5),
-            backgroundColor: 'white',
-            boxShadow: theme => theme.shadows[1],
-          }}
-        >
-          <ShareIcon color="secondary" />
-        </IconButton>
+
         <Grid xs={12} sm={7} item sx={{ pb: [4.5, 0], pr: [0, 2] }}>
           <Subtitle size="xl" mb={2.75}>
             {title}
@@ -143,25 +188,44 @@ export default function PostCard({
 
           {/* TODO: resolve size issue with UserInfo */}
           <UserInfo
-            // size="big"
+            size="md"
             user={authorWithNameRaw}
             sx={{ display: 'flex', alignItems: 'center' }}
+            nameHasPadding={false}
           />
           <Box sx={{ paddingInlineEnd: 2, paddingBlockStart: 4 }}>
-            <Body size="lg" mobileSize="sm" sx={{ pb: 1.5 }}>
+            <Body
+              size="lg"
+              mobileSize="sm"
+              sx={{ pb: 1.5 }}
+              className={classes.description}
+            >
               {description}
             </Body>
           </Box>
-          {signer && (
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          {signerWithNameRaw && (
+            <Box sx={{ display: 'flex', alignItems: 'center', mt: 3 }}>
               <VerifiedIcon color="white" fontSize="medium" hasFill />
-              <Body sx={{ whiteSpace: 'nowrap', mx: 2, fontStyle: 'italic' }}>
+              <Body
+                size="sm"
+                sx={{
+                  whiteSpace: 'nowrap',
+                  mx: 1,
+                  fontStyle: 'italic',
+                  fontWeight: 500,
+                }}
+              >
                 Signed by
               </Body>
               <UserInfo
-                user={signer}
-                // size="small"
-                sx={{ display: 'flex', alignItems: 'center' }}
+                user={signerWithNameRaw}
+                size="xs"
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  ml: 1,
+                }}
+                nameHasPadding={false}
                 // avatarSx={theme => ({
                 //   // height: theme.spacing(1),
                 //   // width: theme.spacing(1),
@@ -172,12 +236,19 @@ export default function PostCard({
             </Box>
           )}
         </Grid>
-        <Grid xs={12} sm={5} item>
+        <Grid
+          xs={12}
+          sm={5}
+          item
+          sx={{
+            mb: [5, 0],
+          }}
+        >
           <Box
             sx={theme => ({
-              height: theme.spacing(49.25),
+              height: theme => ({ sm: '100%', xs: theme.spacing(49.25) }),
               border: `1px solid ${theme.palette.grey[100]}`,
-              borderRadius: '5px',
+              borderRadius: '10px',
               overflow: 'hidden',
               position: 'relative',
             })}
@@ -196,6 +267,22 @@ export default function PostCard({
               )
             )}
             {/* TODO: number of files indicator */}
+            <Box
+              sx={{
+                position: 'absolute',
+                bottom: 0,
+                right: 0,
+                transform: 'translate(-50%, -25%)',
+              }}
+            >
+              <DocumentIcon
+                sx={
+                  {
+                    // fileType="light"
+                  }
+                }
+              />
+            </Box>
           </Box>
         </Grid>
       </Grid>

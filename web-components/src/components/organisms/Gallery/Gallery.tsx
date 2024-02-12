@@ -1,13 +1,18 @@
-import { useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
+import { pdfjs } from 'react-pdf';
 import ReactPlayer from 'react-player/es6';
-import { Box, SxProps, useTheme } from '@mui/material';
+import { Box, CircularProgress, SxProps, useTheme } from '@mui/material';
 import { AnimatePresence, motion, PanInfo } from 'framer-motion';
 import { wrap } from 'popmotion';
 
 import { Theme } from '../../../theme/muiTheme';
 import { sxToArray } from '../../../utils/mui/sxToArray';
 import { PlayButton } from '../../atoms/PlayButton/PlayButton';
-import { isImage, isVideo } from '../../inputs/new/FileDrop/FileDrop.utils';
+import {
+  isImage,
+  isPdf,
+  isVideo,
+} from '../../inputs/new/FileDrop/FileDrop.utils';
 import { GalleryBottomBar } from './Gallery.BottomBar';
 import { galleryVariants, swipeConfidenceThreshold } from './Gallery.config';
 import { GalleryItem } from './Gallery.types';
@@ -18,9 +23,17 @@ export interface Props {
   sx?: SxProps<Theme>;
   allImages?: boolean;
   className?: { root?: string; container?: string };
+  pdfPageHeight?: number;
 }
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.js',
+  import.meta.url,
+).toString();
 
-const Gallery = ({ items, sx, allImages, className }: Props) => {
+const Document = lazy(() => import('../PostFiles/lib/Document'));
+const Page = lazy(() => import('../PostFiles/lib/Page'));
+
+const Gallery = ({ items, sx, allImages, className, pdfPageHeight }: Props) => {
   const [[page, direction], setPage] = useState([0, 0]);
 
   // We may have only a finite number of images (eg: 3), but we paginate them absolutely (eg 1, 2, 3, 4, 5...) and
@@ -97,7 +110,21 @@ const Gallery = ({ items, sx, allImages, className }: Props) => {
               <PlayButton className="w-1O0 h-100 sm:top-[33%]" />
             </motion.div>
           ) : (
-            <motion.div key={page} {...motionSettings} />
+            <motion.div key={page} {...motionSettings}>
+              {isPdf(item?.mimeType) ? (
+                <Suspense fallback={<CircularProgress color="secondary" />}>
+                  <Document
+                    className="px-[300px] h-[100%]"
+                    file={item?.url}
+                    loading={<CircularProgress color="secondary" />}
+                  >
+                    <Page height={pdfPageHeight} pageNumber={1} />
+                  </Document>
+                </Suspense>
+              ) : (
+                <></>
+              )}
+            </motion.div>
           )}
         </AnimatePresence>
       </Box>

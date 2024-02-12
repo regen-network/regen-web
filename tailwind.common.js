@@ -78,6 +78,7 @@ module.exports = {
       },
     boxShadow: {
       'sm': '0px 4px 10px 0px rgba(0, 0, 0, 0.05)',
+      'md': '0px 4px 10px 0px rgba(0, 0, 0, 0.05), 0px 0px 10px 0px rgba(250, 250, 216, 0.80)'
     },
   },
   plugins: [],

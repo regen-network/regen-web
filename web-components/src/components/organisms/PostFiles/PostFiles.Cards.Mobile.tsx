@@ -14,6 +14,7 @@ type Props = {
   setSelectedUrl: UseStateSetter<string | undefined>;
   setSelectedLocation: UseStateSetter<Point | undefined>;
   selectedUrl: string;
+  setAnimateMarker: UseStateSetter<boolean>;
 };
 
 const PostFilesCardsMobile = ({
@@ -22,6 +23,7 @@ const PostFilesCardsMobile = ({
   setSelectedUrl,
   setSelectedLocation,
   selectedUrl,
+  setAnimateMarker,
 }: Props) => {
   const { classes: styles } = useStyles();
 
@@ -35,6 +37,7 @@ const PostFilesCardsMobile = ({
         root: 'sm:hidden pl-[7px] pt-[362px]',
         slider: styles.mobileSlider,
       }}
+      setAnimateMarker={setAnimateMarker}
       items={files.map(file => (
         <div
           key={file.url}

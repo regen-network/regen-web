@@ -1,4 +1,4 @@
-import { lazy, Suspense, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import type { MapRef } from 'react-map-gl';
 import { CircularProgress, useMediaQuery, useTheme } from '@mui/material';
 import bbox from '@turf/bbox';
@@ -57,19 +57,23 @@ const PostFiles = ({ privacyType, files, mapboxToken }: Props) => {
   const [selectedLocation, setSelectedLocation] = useState<Point | undefined>(
     files[0]?.location,
   );
+  const [animateMarker, setAnimateMarker] = useState<boolean>(false);
   const mapRef = useRef<MapRef | null>(null);
   let locations: FeatureCollection | undefined;
   const isPublic = privacyType === 'public';
 
-  const groupByLocation = files.reduce(
-    (group: { [key: string]: Array<PostFile> }, file) => {
-      const { location } = file;
-      const coord = `${location.coordinates[1]},${location.coordinates[0]}`;
-      group[coord] = group[coord] ?? [];
-      group[coord].push(file);
-      return group;
-    },
-    {},
+  useEffect(() => {}, [selectedUrl]);
+
+  const groupByLocation = useMemo(
+    () =>
+      files.reduce((group: { [key: string]: Array<PostFile> }, file) => {
+        const { location } = file;
+        const coord = `${location.coordinates[1]},${location.coordinates[0]}`;
+        group[coord] = group[coord] ?? [];
+        group[coord].push(file);
+        return group;
+      }, {}),
+    [files],
   );
 
   if (isPublic) {
@@ -143,10 +147,12 @@ const PostFiles = ({ privacyType, files, mapboxToken }: Props) => {
                         setSelectedUrl(group[0].url);
                       }}
                       className={cn(
-                        'cursor-pointer flex items-center justify-center border border-solid rounded-[30px] h-30 shadow-sm',
+                        'transition duration-500 cursor-pointer flex items-center justify-center border border-solid rounded-[30px] h-30',
                         selectedLocation === geometry
-                          ? 'bg-grey-700 border-grey-600 text-grey-0'
-                          : 'bg-grey-0 border-grey-300 text-grey-700',
+                          ? animateMarker
+                            ? 'bg-grey-500 border-grey-500 text-grey-0 shadow-md'
+                            : 'bg-grey-700 border-grey-600 text-grey-0 shadow-sm'
+                          : 'bg-grey-0 border-grey-300 text-grey-700 shadow-sm',
                         group.length > 1 ? 'py-5 px-15' : 'py-3 px-10',
                       )}
                     >
@@ -239,6 +245,7 @@ const PostFiles = ({ privacyType, files, mapboxToken }: Props) => {
                   setSelectedLocation(undefined);
                 }}
                 setSelectedLocation={setSelectedLocation}
+                setAnimateMarker={setAnimateMarker}
               />
             )}
           </Map>

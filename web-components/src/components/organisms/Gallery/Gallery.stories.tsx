@@ -15,5 +15,6 @@ const Template: ComponentStory<typeof Gallery> = args => <Gallery {...args} />;
 export const Default = Template.bind({});
 
 Default.args = {
-  photos: galleryImagesMock,
+  items: galleryImagesMock,
+  allImages: true,
 };

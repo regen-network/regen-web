@@ -5,27 +5,27 @@ import { Body, Label } from '../../../components/typography';
 import { containerPaddingX, containerStyles } from '../../../styles/container';
 import { UseStateSetter } from '../../../types/react/useState';
 import ArrowDownIcon from '../../icons/ArrowDownIcon';
-import { GalleryPhoto } from './Gallery.types';
+import { GalleryItem } from './Gallery.types';
 import { paginateGallery } from './Gallery.utils';
 
 type Props = {
-  photos: GalleryPhoto[];
+  items: GalleryItem[];
   imageIndex: number;
   page: number;
   setPage: UseStateSetter<[number, number]>;
 };
 
 export const GalleryBottomBar = ({
-  photos,
+  items,
   imageIndex,
   page,
   setPage,
 }: Props) => {
   const [isShowMore, setIsShowMore] = useState(false);
   const theme = useTheme();
-  const caption = photos[imageIndex]?.caption;
-  const credit = photos[imageIndex]?.credit;
-  const hasCaption = caption !== undefined && caption !== '';
+  const description = items[imageIndex]?.description;
+  const credit = items[imageIndex]?.credit;
+  const hasCaption = description !== undefined && description !== '';
   const hasCredit = credit !== undefined && credit !== '';
 
   return (
@@ -82,7 +82,7 @@ export const GalleryBottomBar = ({
             />
           </ButtonBase>
           <Label size="sm" sx={{ mr: 5, mt: 0.75 }}>
-            {`${imageIndex + 1}/${photos.length}`}
+            {`${imageIndex + 1}/${items.length}`}
           </Label>
         </Box>
         {(hasCaption || hasCredit) && (
@@ -107,8 +107,8 @@ export const GalleryBottomBar = ({
             ]}
             onClick={() => setIsShowMore(isShowMore => !isShowMore)}
           >
-            {caption && (
-              <Box sx={{ display: 'inline-block', mr: 0.5 }}>{caption}</Box>
+            {description && (
+              <Box sx={{ display: 'inline-block', mr: 0.5 }}>{description}</Box>
             )}
             {credit && (
               <Box sx={{ display: 'inline-block', fontWeight: 300 }}>

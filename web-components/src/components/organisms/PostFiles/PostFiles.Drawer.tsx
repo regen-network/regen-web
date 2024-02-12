@@ -98,7 +98,7 @@ const PostFilesDrawer = ({
                           width="100%"
                           height="100%"
                         />
-                        <PlayButton className="w-[28px] h-[28px] " />
+                        <PlayButton className="w-[28px] h-[28px]" />
                       </div>
                     )}
                     <FileBody file={file} />

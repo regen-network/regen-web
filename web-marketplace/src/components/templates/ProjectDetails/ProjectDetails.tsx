@@ -417,7 +417,7 @@ function ProjectDetails(): JSX.Element {
         program={program}
       />
 
-      {hasProjectPhotos && <Gallery photos={projectPhotos} sx={{ mb: 25 }} />}
+      {hasProjectPhotos && <Gallery items={projectPhotos} sx={{ mb: 25 }} />}
 
       <ProjectStorySection
         projectPageMetadata={offChainProjectMetadata}

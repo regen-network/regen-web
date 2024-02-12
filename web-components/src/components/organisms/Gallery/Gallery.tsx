@@ -1,33 +1,64 @@
 import { useState } from 'react';
+import ReactPlayer from 'react-player/es6';
 import { Box, SxProps, useTheme } from '@mui/material';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, PanInfo } from 'framer-motion';
 import { wrap } from 'popmotion';
 
 import { Theme } from '../../../theme/muiTheme';
 import { sxToArray } from '../../../utils/mui/sxToArray';
+import { PlayButton } from '../../atoms/PlayButton/PlayButton';
+import { isImage, isVideo } from '../../inputs/new/FileDrop/FileDrop.utils';
 import { GalleryBottomBar } from './Gallery.BottomBar';
 import { galleryVariants, swipeConfidenceThreshold } from './Gallery.config';
-import { GalleryPhoto } from './Gallery.types';
+import { GalleryItem } from './Gallery.types';
 import { paginateGallery, swipePower } from './Gallery.utils';
 
 export interface Props {
-  photos: GalleryPhoto[];
+  items: GalleryItem[];
   sx?: SxProps<Theme>;
+  allImages?: boolean;
+  className?: { root?: string; container?: string };
 }
 
-const Gallery = ({ photos, sx }: Props) => {
+const Gallery = ({ items, sx, allImages, className }: Props) => {
   const [[page, direction], setPage] = useState([0, 0]);
 
   // We may have only a finite number of images (eg: 3), but we paginate them absolutely (eg 1, 2, 3, 4, 5...) and
   // then wrap that within (eg: 0-2) to find our image ID in the array below. By passing an
   // absolute page index as the `motion` component's `key` prop, `AnimatePresence` will
   // detect it as an entirely new image. So we can infinitely paginate as few as 1 image.
-  const imageIndex = wrap(0, photos.length, page);
+  const imageIndex = wrap(0, items.length, page);
+  const item = items[imageIndex];
 
   const theme = useTheme();
 
+  const motionSettings = {
+    custom: direction,
+    variants: galleryVariants,
+    initial: 'enter',
+    animate: 'center',
+    exit: 'exit',
+    transition: {
+      x: { type: 'spring', stiffness: 300, damping: 30 },
+      opacity: { duration: 0.2 },
+    },
+    drag: 'x' as 'x',
+    dragConstraints: { left: 0, right: 0 },
+    dragElastic: 1,
+    onDragEnd: (_e: Event, { offset, velocity }: PanInfo) => {
+      const swipe = swipePower(offset.x, velocity.x);
+
+      if (swipe < -swipeConfidenceThreshold) {
+        paginateGallery({ newDirection: 1, page, setPage });
+      } else if (swipe > swipeConfidenceThreshold) {
+        paginateGallery({ newDirection: -1, page, setPage });
+      }
+    },
+  };
+
   return (
     <Box
+      className={className?.root}
       sx={[
         {
           position: 'relative',
@@ -39,6 +70,7 @@ const Gallery = ({ photos, sx }: Props) => {
       ]}
     >
       <Box
+        className={className?.container}
         sx={{
           position: 'relative',
           display: 'flex',
@@ -47,7 +79,7 @@ const Gallery = ({ photos, sx }: Props) => {
           aspectRatio: '3/2',
           width: '100%',
           mb: { xs: 10, md: 0 },
-          '& img': {
+          '& > img, > div': {
             width: '100%',
             height: '100%',
             position: 'absolute',
@@ -57,35 +89,20 @@ const Gallery = ({ photos, sx }: Props) => {
         }}
       >
         <AnimatePresence initial={false} custom={direction}>
-          <motion.img
-            key={page}
-            src={photos[imageIndex]?.href}
-            custom={direction}
-            variants={galleryVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{
-              x: { type: 'spring', stiffness: 300, damping: 30 },
-              opacity: { duration: 0.2 },
-            }}
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={1}
-            onDragEnd={(e, { offset, velocity }) => {
-              const swipe = swipePower(offset.x, velocity.x);
-
-              if (swipe < -swipeConfidenceThreshold) {
-                paginateGallery({ newDirection: 1, page, setPage });
-              } else if (swipe > swipeConfidenceThreshold) {
-                paginateGallery({ newDirection: -1, page, setPage });
-              }
-            }}
-          />
+          {allImages || isImage(item?.mimeType) ? (
+            <motion.img key={page} src={item?.url} {...motionSettings} />
+          ) : isVideo(item?.mimeType) ? (
+            <motion.div key={page} {...motionSettings}>
+              <ReactPlayer url={item?.url} width="100%" height="100%" />
+              <PlayButton className="w-1O0 h-100 sm:top-[33%]" />
+            </motion.div>
+          ) : (
+            <motion.div key={page} {...motionSettings} />
+          )}
         </AnimatePresence>
       </Box>
       <GalleryBottomBar
-        photos={photos}
+        items={items}
         imageIndex={imageIndex}
         page={page}
         setPage={setPage}

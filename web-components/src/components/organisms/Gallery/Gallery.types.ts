@@ -1,5 +1,6 @@
-export type GalleryPhoto = {
-  href: string;
-  caption?: string;
+export type GalleryItem = {
+  url: string;
+  description?: string;
   credit?: string;
+  mimeType?: string;
 };

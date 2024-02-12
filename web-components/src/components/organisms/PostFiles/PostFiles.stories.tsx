@@ -29,3 +29,13 @@ PrivateLocations.args = {
   mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
   files,
 };
+
+export const PrivateFiles: Story = {
+  render: args => <PostFiles {...args} />,
+};
+
+PrivateFiles.args = {
+  privacyType: 'private_files',
+  mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
+  files,
+};

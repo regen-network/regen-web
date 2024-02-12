@@ -1,5 +1,6 @@
 import { Point } from 'geojson';
 
+import { PostFilesPrivateFiles } from './PostFiles.PrivateFiles';
 import { PostFilesPrivateLocations } from './PostFiles.PrivateLocations';
 import { PostFilesPublic } from './PostFiles.Public';
 import { PostPrivacyType } from './PostFiles.types';
@@ -26,6 +27,9 @@ const PostFiles = ({ privacyType, files, mapboxToken }: PostFilesProps) => {
       )}
       {privacyType === 'private_locations' && (
         <PostFilesPrivateLocations files={files} />
+      )}
+      {privacyType === 'private_files' && (
+        <PostFilesPrivateFiles files={files} />
       )}
     </div>
   );

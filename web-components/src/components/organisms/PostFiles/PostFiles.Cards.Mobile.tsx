@@ -46,7 +46,7 @@ const PostFilesCardsMobile = ({
             file={file}
           />
 
-          <div className="h-40 bg-grey-0 py-[2px] px-[7px]">
+          <div className="absolute bottom-0 min-h-40 bg-grey-0 py-[2px] px-[7px]">
             <FileBody showMediaName file={file} />
           </div>
           <Buttons onClose={onClose} selectedUrl={selectedUrl} />

@@ -81,7 +81,7 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
         </Body>
         <Fade in={expanded} mountOnEnter unmountOnExit>
           <Body component={component} size={size} mobileSize={mobileSize}>
-            {sentenceBased ? !texts.rest.startsWith('\n') && '\n' : ' '}
+            {sentenceBased ? !texts.rest.startsWith('\n') && '\n' : ''}
             {ReactHtmlParser(texts.rest)}
             {texts.rest && expanded && <Button />}
           </Body>

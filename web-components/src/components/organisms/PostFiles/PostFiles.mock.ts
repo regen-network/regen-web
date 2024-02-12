@@ -19,7 +19,7 @@ export const files = [
     url: '/andover.jpg',
     name: 'image.jpg',
     description:
-      'image with a very very very very very very very very very very long description',
+      'Far far away, behind the word mountains, far from the countries lorem ipsum dolor sit apsicing Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim ven.',
     location: location1,
     mimeType: 'image/jpeg',
   },

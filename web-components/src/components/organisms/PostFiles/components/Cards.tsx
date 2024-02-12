@@ -12,6 +12,7 @@ type Props = {
   files: Array<PostFile>;
   setSelectedUrl: UseStateSetter<string | undefined>;
   setSelectedLocation?: UseStateSetter<Point | undefined>;
+  setAnimateMarker?: UseStateSetter<boolean>;
   selectedUrl: string;
   classNames?: {
     root?: string;
@@ -31,6 +32,7 @@ const Cards: React.FC<React.PropsWithChildren<Props>> = ({
   items,
   controls,
   infinite,
+  setAnimateMarker,
   children,
 }) => {
   const initialSlide = files.findIndex(file => file.url === selectedUrl);
@@ -44,6 +46,14 @@ const Cards: React.FC<React.PropsWithChildren<Props>> = ({
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
+    beforeChange: (currentSlide: number, nextSlide: number) => {
+      const currentLocation = files[currentSlide]?.location;
+      const nextLocation = files[nextSlide]?.location;
+      if (currentLocation === nextLocation && setAnimateMarker) {
+        setAnimateMarker(true);
+        setTimeout(() => setAnimateMarker(false), 500);
+      }
+    },
     afterChange: (currentSlide: number) => {
       if (selectedIndex !== currentSlide) {
         setSelectedIndex(currentSlide);

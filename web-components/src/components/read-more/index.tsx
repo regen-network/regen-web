@@ -87,7 +87,6 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
           {texts.rest && !expanded && <Button />}
         </Body>
         <Fade in={expanded} mountOnEnter unmountOnExit>
-          {/* https://mui.com/guides/migration-v4/#cannot-read-property-scrolltop-of-null */}
           <div
             className={
               applyExpandedClass && texts.truncated.length < applyExpandedClass

@@ -60,7 +60,7 @@ const FilePreview = ({ file, className, pdfPageHeight, showName }: Props) => {
             href={url}
             className="outline-none cursor-pointer"
           >
-            <PlayButton className="w-50 h-50 " />
+            <PlayButton className="w-50 h-50" />
           </a>
         </>
       ) : isPdf(mimeType) ? (

@@ -15,7 +15,6 @@ export function truncate(
 
   if (
     (maxLength === 0 && restMinLength === 0) ||
-    maxLength < restMinLength ||
     (!sentences && sentenceBased) ||
     str.length < maxLength ||
     str.length < restMinLength
@@ -25,7 +24,6 @@ export function truncate(
       rest: '',
     };
   }
-
   let truncated = '',
     tmpTruncated = '';
   let restLength = str.length;
@@ -47,6 +45,7 @@ export function truncate(
       truncated = str.substring(0, maxLength);
     }
   }
-  const rest: string = str.substring(truncated.length + 1);
+  const rest: string = str.substring(truncated.length);
+
   return { truncated, rest };
 }

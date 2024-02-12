@@ -1,3 +1,5 @@
+import { useMediaQuery, useTheme } from '@mui/material';
+
 import PinIcon from '../../icons/PinIcon';
 import Gallery from '../Gallery';
 import { Tag } from './components/Tag';
@@ -6,6 +8,8 @@ import { PostFilesProps } from './PostFiles';
 type Props = Pick<PostFilesProps, 'files'>;
 
 const PostFilesPrivateLocations = ({ files }: Props) => {
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down('sm'));
   return (
     <div className="h-[100%] relative">
       <Tag
@@ -17,7 +21,7 @@ const PostFilesPrivateLocations = ({ files }: Props) => {
       <Gallery
         items={files}
         className={{ root: 'h-[100%]' }}
-        pdfPageHeight={550}
+        pdfPageHeight={mobile ? 340 : 550}
       />
     </div>
   );

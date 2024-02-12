@@ -8,9 +8,15 @@ import { wrap } from 'popmotion';
 import { Theme } from '../../../theme/muiTheme';
 import { sxToArray } from '../../../utils/mui/sxToArray';
 import { PlayButton } from '../../atoms/PlayButton/PlayButton';
+import { AudioFileIcon } from '../../icons/AudioFileIcon';
+import { OpenInNewIcon } from '../../icons/OpenInNewIcon';
+import { OtherDocumentsIcon } from '../../icons/OtherDocumentsIcon';
+import { SpreadsheetFileIcon } from '../../icons/SpreadsheetFileIcon';
 import {
+  isAudio,
   isImage,
   isPdf,
+  isSpreadSheet,
   isVideo,
 } from '../../inputs/new/FileDrop/FileDrop.utils';
 import { GalleryBottomBar } from './Gallery.BottomBar';
@@ -107,14 +113,29 @@ const Gallery = ({ items, sx, allImages, className, pdfPageHeight }: Props) => {
           ) : isVideo(item?.mimeType) ? (
             <motion.div key={page} {...motionSettings}>
               <ReactPlayer url={item?.url} width="100%" height="100%" />
-              <PlayButton className="w-1O0 h-100 sm:top-[33%]" />
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={item?.url}
+                className="outline-none cursor-pointer"
+              >
+                <PlayButton className="w-100 h-100 sm:top-[33%]" />
+              </a>
             </motion.div>
           ) : (
             <motion.div key={page} {...motionSettings}>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={item?.url}
+                className="outline-none cursor-pointer absolute top-20 right-20"
+              >
+                <OpenInNewIcon className="h-[24px] w-[24px] rounded-[50%] text-grey-0 bg-grey-700/[.6] p-3" />
+              </a>
               {isPdf(item?.mimeType) ? (
                 <Suspense fallback={<CircularProgress color="secondary" />}>
                   <Document
-                    className="px-[300px] h-[100%]"
+                    className="px-50 sm:px-[300px] h-[100%]"
                     file={item?.url}
                     loading={<CircularProgress color="secondary" />}
                   >
@@ -122,7 +143,15 @@ const Gallery = ({ items, sx, allImages, className, pdfPageHeight }: Props) => {
                   </Document>
                 </Suspense>
               ) : (
-                <></>
+                <div className="md:h-[550px] bg-grey-300 flex items-center justify-center h-[100%] text-grey-400">
+                  {isAudio(item?.mimeType) ? (
+                    <AudioFileIcon width="100" height="100" />
+                  ) : isSpreadSheet(item?.mimeType) ? (
+                    <SpreadsheetFileIcon width="100" height="100" />
+                  ) : (
+                    <OtherDocumentsIcon width="100" height="100" />
+                  )}
+                </div>
               )}
             </motion.div>
           )}

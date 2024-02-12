@@ -34,7 +34,7 @@ const PostFiles = ({
     <div
       className={cn(
         'w-[100%]',
-        (isPublic || privateLocations || isAdmin) && 'sm:h-[550px]',
+        (isPublic || privateLocations || isAdmin) && 'md:h-[550px]',
       )}
     >
       {isPublic && <PostFilesPublic files={files} mapboxToken={mapboxToken} />}

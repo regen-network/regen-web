@@ -39,3 +39,25 @@ PrivateFiles.args = {
   mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
   files,
 };
+
+export const PrivateLocationsAsAdmin: Story = {
+  render: args => <PostFiles {...args} />,
+};
+
+PrivateLocationsAsAdmin.args = {
+  privacyType: 'private_locations',
+  mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
+  files,
+  isAdmin: true,
+};
+
+export const PrivateFilesAsAdmin: Story = {
+  render: args => <PostFiles {...args} />,
+};
+
+PrivateFilesAsAdmin.args = {
+  privacyType: 'private_files',
+  mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
+  files,
+  isAdmin: true,
+};

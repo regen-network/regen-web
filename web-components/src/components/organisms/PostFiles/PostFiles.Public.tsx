@@ -7,6 +7,7 @@ import { Point } from 'geojson';
 import { cn } from '../../../utils/styles/cn';
 import { AudioFileIcon } from '../../icons/AudioFileIcon';
 import { ImageIcon } from '../../icons/ImageIcon';
+import { LockIcon } from '../../icons/LockIcon';
 import MinusIcon from '../../icons/MinusIcon';
 import { OtherDocumentsIcon } from '../../icons/OtherDocumentsIcon';
 import { PdfFileIcon } from '../../icons/PdfFileIcon';
@@ -20,6 +21,7 @@ import {
   isVideo,
 } from '../../inputs/new/FileDrop/FileDrop.utils';
 import { Body } from '../../typography/Body';
+import { Tag } from './components/Tag';
 import { PostFile, PostFilesProps } from './PostFiles';
 import { PostFilesCardsDesktop } from './PostFiles.Cards.Desktop';
 import { PostFilesCardsMobile } from './PostFiles.Cards.Mobile';
@@ -32,9 +34,18 @@ const Map = lazy(() => import('react-map-gl'));
 const Marker = lazy(() => import('../../map/lib/Marker'));
 const Popup = lazy(() => import('../../map/lib/Popup'));
 
-type Props = Pick<PostFilesProps, 'files' | 'mapboxToken'>;
+type Props = Pick<PostFilesProps, 'files' | 'mapboxToken' | 'isAdmin'> & {
+  privateFiles: true;
+  privateLocations: true;
+};
 
-const PostFilesPublic = ({ files, mapboxToken }: Props) => {
+const PostFilesPublic = ({
+  files,
+  mapboxToken,
+  isAdmin,
+  privateFiles,
+  privateLocations,
+}: Props) => {
   const { classes: styles } = useStyles();
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -229,6 +240,13 @@ const PostFilesPublic = ({ files, mapboxToken }: Props) => {
               }}
               setSelectedLocation={setSelectedLocation}
               setAnimateMarker={setAnimateMarker}
+            />
+          )}
+          {isAdmin && (privateLocations || privateFiles) && (
+            <Tag
+              className="top-20 left-20 sm:left-[110px] absolute bg-error-300"
+              icon={<LockIcon width="18" height="18" />}
+              label={`${privateLocations ? 'Locations' : 'Files'} are private`}
             />
           )}
         </Map>

@@ -17,7 +17,6 @@ const PostFilesPrivateLocations = ({ files }: Props) => {
         label="Location data available on request"
         icon={<PinIcon className="w-[16px] h-[17px]" />}
       />
-
       <Gallery
         items={files}
         className={{ root: 'h-[100%]' }}

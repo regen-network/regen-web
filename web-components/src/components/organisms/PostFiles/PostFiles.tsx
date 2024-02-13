@@ -30,6 +30,7 @@ const PostFiles = ({
   const isPublic = privacyType === 'public';
   const privateLocations = privacyType === 'private_locations';
   const privateFiles = privacyType === 'private_files';
+
   return (
     <div
       className={cn(
@@ -37,9 +38,19 @@ const PostFiles = ({
         (isPublic || privateLocations || isAdmin) && 'md:h-[550px]',
       )}
     >
-      {isPublic && <PostFilesPublic files={files} mapboxToken={mapboxToken} />}
-      {privateLocations && <PostFilesPrivateLocations files={files} />}
-      {privateFiles && <PostFilesPrivateFiles files={files} />}
+      {(isPublic || isAdmin) && (
+        <PostFilesPublic
+          files={files}
+          mapboxToken={mapboxToken}
+          isAdmin={isAdmin}
+          privateLocations={privateLocations}
+          privateFiles={privateFiles}
+        />
+      )}
+      {!isAdmin && privateLocations && (
+        <PostFilesPrivateLocations files={files} />
+      )}
+      {!isAdmin && privateFiles && <PostFilesPrivateFiles />}
     </div>
   );
 };

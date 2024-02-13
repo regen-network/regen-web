@@ -1,32 +1,39 @@
 import { useState } from 'react';
 import { Box, ButtonBase, useTheme } from '@mui/material';
 
-import { Body, Label } from '../../../components/typography';
 import { containerPaddingX, containerStyles } from '../../../styles/container';
 import { UseStateSetter } from '../../../types/react/useState';
 import ArrowDownIcon from '../../icons/ArrowDownIcon';
+import { isImage, isVideo } from '../../inputs/new/FileDrop/FileDrop.utils';
+import { Body, Label } from '../../typography';
 import { GalleryItem } from './Gallery.types';
 import { paginateGallery } from './Gallery.utils';
 
 type Props = {
   items: GalleryItem[];
-  imageIndex: number;
+  itemIndex: number;
   page: number;
   setPage: UseStateSetter<[number, number]>;
 };
 
 export const GalleryBottomBar = ({
   items,
-  imageIndex,
+  itemIndex,
   page,
   setPage,
 }: Props) => {
   const [isShowMore, setIsShowMore] = useState(false);
   const theme = useTheme();
-  const description = items[imageIndex]?.description;
-  const credit = items[imageIndex]?.credit;
-  const hasCaption = description !== undefined && description !== '';
+
+  const item = items[itemIndex];
+  const description = item?.description;
+  const credit = item?.credit;
+  const name = item?.name;
+  const mimeType = item?.mimeType;
+  const hasDescription = description !== undefined && description !== '';
   const hasCredit = credit !== undefined && credit !== '';
+  const image = isImage(mimeType);
+  const video = isVideo(mimeType);
 
   return (
     <Box
@@ -82,10 +89,15 @@ export const GalleryBottomBar = ({
             />
           </ButtonBase>
           <Label size="sm" sx={{ mr: 5, mt: 0.75 }}>
-            {`${imageIndex + 1}/${items.length}`}
+            {`${itemIndex + 1}/${items.length}`}
           </Label>
         </Box>
-        {(hasCaption || hasCredit) && (
+        {name && (!(image || video) || ((image || video) && !hasDescription)) && (
+          <Body size="sm" mobileSize="sm" className="font-bold text-grey-0">
+            {name}&nbsp;
+          </Body>
+        )}
+        {(hasDescription || hasCredit) && (
           <Body
             size="sm"
             mobileSize="sm"

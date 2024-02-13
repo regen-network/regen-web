@@ -46,8 +46,8 @@ const Gallery = ({ items, sx, allImages, className, pdfPageHeight }: Props) => {
   // then wrap that within (eg: 0-2) to find our image ID in the array below. By passing an
   // absolute page index as the `motion` component's `key` prop, `AnimatePresence` will
   // detect it as an entirely new image. So we can infinitely paginate as few as 1 image.
-  const imageIndex = wrap(0, items.length, page);
-  const item = items[imageIndex];
+  const itemIndex = wrap(0, items.length, page);
+  const item = items[itemIndex];
 
   const theme = useTheme();
 
@@ -159,7 +159,7 @@ const Gallery = ({ items, sx, allImages, className, pdfPageHeight }: Props) => {
       </Box>
       <GalleryBottomBar
         items={items}
-        imageIndex={imageIndex}
+        itemIndex={itemIndex}
         page={page}
         setPage={setPage}
       />

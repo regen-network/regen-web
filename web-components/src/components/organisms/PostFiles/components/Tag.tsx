@@ -10,8 +10,8 @@ type Props = {
 const Tag = ({ label, icon, className }: Props) => (
   <div
     className={cn(
+      'flex items-center justify-center z-10 p-[4px] rounded-[3px] bg-warning-400',
       className,
-      'flex items-center justify-center z-10 p-[4px] top-20 left-20 absolute rounded-[3px] bg-warning-400',
     )}
   >
     {icon}

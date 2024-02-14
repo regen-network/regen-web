@@ -23,7 +23,6 @@ import {
   creditClassSelectedFiltersAtom,
   projectsSortAtom,
   useCommunityProjectsAtom,
-  useOffChainProjectsAtom,
 } from 'lib/atoms/projects.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';

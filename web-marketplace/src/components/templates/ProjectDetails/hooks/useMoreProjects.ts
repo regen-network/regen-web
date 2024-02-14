@@ -7,6 +7,7 @@ export default function useMoreProjects(projectId: string) {
     limit: PROJECTS_LIMIT,
     random: true,
     skippedProjectId: projectId,
+    enableOffchainProjectsQuery: false,
   });
 
   return { projectsWithOrderData, loading };

@@ -41,6 +41,8 @@ export interface ProjectsWithOrdersProps {
   pinnedIds?: string[]; // list of on-chain id, uuid or slug to pinned at the top
   sort?: string;
   creditClassFilter?: Record<string, boolean>;
+  useOffChainProjects?: boolean;
+  enableOffchainProjectsQuery?: boolean;
 }
 
 /**
@@ -58,6 +60,8 @@ export function useProjectsWithOrders({
   sort = '',
   projectId,
   creditClassFilter = {},
+  useOffChainProjects = false,
+  enableOffchainProjectsQuery = true,
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
   const { ecocreditClient, marketplaceClient, dataClient } = useLedger();
 
@@ -114,7 +118,7 @@ export function useProjectsWithOrders({
   const { allOffChainProjects, isAllOffChainProjectsLoading } =
     useFetchAllOffChainProjects({
       sanityCreditClassesData: creditClassData,
-      // enabled: useOffChainProjects,
+      enabled: enableOffchainProjectsQuery,
     });
 
   /* Normalization/Filtering/Sorting */
@@ -160,19 +164,22 @@ export function useProjectsWithOrders({
   );
 
   // Merge on-chain and off-chain projects
-  const allProject = creditClassFilter?.[UNREGISTERED_PATH]
-    ? [...projectsWithOrderDataFiltered, ...allOffChainProjects]
-    : projectsWithOrderDataFiltered;
+  const allProject =
+    creditClassFilter?.[UNREGISTERED_PATH] || useOffChainProjects
+      ? [...projectsWithOrderDataFiltered, ...allOffChainProjects]
+      : projectsWithOrderDataFiltered;
 
   // Filter projects by class ID
-  const creditClassSelected = Object.keys(creditClassFilter).filter(
+  const creditClassFilterKeys = Object.keys(creditClassFilter);
+  const creditClassSelected = creditClassFilterKeys.filter(
     creditClassId => creditClassFilter[creditClassId],
   );
 
-  const projectsFilteredByCreditClass = allProject.filter(
-    project =>
-      project.offChain ||
-      creditClassSelected.includes(project.creditClassId ?? ''),
+  const projectsFilteredByCreditClass = allProject.filter(project =>
+    creditClassFilterKeys.length === 0
+      ? true
+      : project.offChain ||
+        creditClassSelected.includes(project.creditClassId ?? ''),
   );
 
   const sortedProjects = sortProjects(projectsFilteredByCreditClass, sort)

@@ -20,7 +20,11 @@ export const useBuySellOrderData = ({
   const { wallet } = useLedger();
 
   const { projectsWithOrderData, loading: loadingProjects } =
-    useProjectsWithOrders({ projectId, classId });
+    useProjectsWithOrders({
+      projectId,
+      classId,
+      enableOffchainProjectsQuery: false,
+    });
 
   const sellOrdersAvailable = projectsWithOrderData[0]?.sellOrders.filter(
     sellOrder => sellOrder.seller !== wallet?.address,

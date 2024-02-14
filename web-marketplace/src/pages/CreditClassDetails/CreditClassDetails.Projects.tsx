@@ -17,6 +17,7 @@ function ProjectsSection({ classId }: Props): JSX.Element {
   const { projectsWithOrderData, loading } = useProjectsWithOrders({
     classId,
     useCommunityProjects: true,
+    enableOffchainProjectsQuery: false,
   });
 
   const [selectedProject, setSelectedProject] =

@@ -14,7 +14,8 @@ import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton
 import FilterIcon from 'web-components/src/components/icons/FilterIcon';
 import Checkbox from 'web-components/src/components/inputs/new/CheckBox/Checkbox';
 import { CollapseList } from 'web-components/src/components/organisms/CollapseList/CollapseList';
-import { Subtitle } from 'web-components/src/components/typography';
+import { Body, Subtitle } from 'web-components/src/components/typography';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 import {
   creditClassSelectedFiltersAtom,
@@ -32,7 +33,10 @@ import {
   UNREGISTERED_PATH,
 } from './Projects.constants';
 import { CreditClassFilter, FilterCreditClassEvent } from './Projects.types';
-import { getFilterSelected } from './Projects.utils';
+import {
+  getCreditClassSelectedFilters,
+  getFilterSelected,
+} from './Projects.utils';
 
 type Props = {
   creditClassFilters?: CreditClassFilter[];
@@ -61,6 +65,10 @@ export const ProjectsSideFilter = ({
       (!useCommunityProjects && !isCommunity),
   );
   const { track } = useTracker();
+
+  const values = Object.values(creditClassSelectedFilters);
+  const selectAllEnabled = values.includes(false);
+  const clearAllEnabled = values.includes(true);
 
   return (
     <>
@@ -108,6 +116,51 @@ export const ProjectsSideFilter = ({
             <Subtitle size="md" sx={{ mb: 3.75 }}>
               {CREDIT_CLASS_FILTER_LABEL}
             </Subtitle>
+            <div className="pb-15 text-grey-500">
+              <Subtitle
+                component="span"
+                size="xs"
+                className={cn(
+                  selectAllEnabled
+                    ? 'text-brand-400 cursor-pointer'
+                    : 'text-grey-400',
+                  'pr-10',
+                )}
+                onClick={() => {
+                  if (selectAllEnabled)
+                    setCreditClassSelectedFilters(
+                      getCreditClassSelectedFilters(
+                        creditClassSelectedFilters,
+                        true,
+                      ),
+                    );
+                }}
+              >
+                Select all
+              </Subtitle>
+              |
+              <Subtitle
+                component="span"
+                size="xs"
+                className={cn(
+                  clearAllEnabled
+                    ? 'cursor-pointer text-brand-400'
+                    : 'text-grey-400',
+                  'pl-10',
+                )}
+                onClick={() => {
+                  if (clearAllEnabled)
+                    setCreditClassSelectedFilters(
+                      getCreditClassSelectedFilters(
+                        creditClassSelectedFilters,
+                        false,
+                      ),
+                    );
+                }}
+              >
+                Clear all
+              </Subtitle>
+            </div>
             <CollapseList
               max={3}
               items={filteredCreditClassFilters.map(({ name, path }) => (

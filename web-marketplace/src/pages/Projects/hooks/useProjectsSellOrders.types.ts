@@ -6,4 +6,5 @@ export interface ProjectsSellOrders {
   projectsCount?: number;
   loading: boolean;
   hasCommunityProjects: boolean;
+  haveOffChainProjects: boolean;
 }

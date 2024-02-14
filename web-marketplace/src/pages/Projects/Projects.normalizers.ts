@@ -2,28 +2,25 @@ import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { SKIPPED_CLASS_ID } from 'lib/env';
 
 import { CreditClassWithMedata } from './hooks/useFetchCreditClasses';
-import { ProjectWithOrderData } from './Projects.types';
+import { UNREGISTERED_PATH, UNREGISTERED_PROJECTS } from './Projects.constants';
+import { CreditClassFilter, ProjectWithOrderData } from './Projects.types';
 
 type NormalizeCreditClassesFilterParams = {
   allProjects: ProjectWithOrderData[];
   sanityCreditClassesData?: AllCreditClassQuery;
   creditClassesWithMetadata?: CreditClassWithMedata[];
+  haveOffChainProjects: boolean;
 };
 
 type NormalizeCreditClassFiltersResponse = {
   creditClassFilters: CreditClassFilter[];
 };
 
-export type CreditClassFilter = {
-  name: string;
-  path: string;
-  isCommunity: boolean;
-};
-
 export const normalizeCreditClassFilters = ({
   allProjects,
   creditClassesWithMetadata,
   sanityCreditClassesData,
+  haveOffChainProjects,
 }: NormalizeCreditClassesFilterParams): NormalizeCreditClassFiltersResponse => {
   const sanityCreditClassIds = sanityCreditClassesData?.allCreditClass.map(
     sanityCreditClass => sanityCreditClass.path,
@@ -33,7 +30,7 @@ export const normalizeCreditClassFilters = ({
     ...new Set(allProjects.map(project => project.creditClassId)),
   ];
 
-  const creditClassFilters =
+  const creditClassFilters: CreditClassFilter[] =
     creditClassesWithMetadata
       ?.filter(
         ({ creditClass }) =>
@@ -50,6 +47,12 @@ export const normalizeCreditClassFilters = ({
           isCommunity,
         };
       }) ?? [];
+
+  if (haveOffChainProjects)
+    creditClassFilters.push({
+      name: UNREGISTERED_PROJECTS,
+      path: UNREGISTERED_PATH,
+    });
 
   return { creditClassFilters };
 };

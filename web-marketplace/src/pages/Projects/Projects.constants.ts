@@ -9,7 +9,6 @@ export const FILTERS_LABEL = 'Filters';
 export const RESET_FILTERS_LABEL = 'Reset filters';
 export const CREDIT_CLASS_FILTER_LABEL = 'Credit Class';
 export const COMMUNITY_FILTER_LABEL = 'Community Credits';
-export const OFFCHAIN_FILTER_LABEL = 'Off-chain Projects';
-export const OFFCHAIN_FILTER_Tooltip =
-  'Off-chain projects are under development and have not yet been created on the Regen Ledger blockchain.';
 export const EMPTY_PROJECTS_LABEL = 'No matching results found';
+export const UNREGISTERED_PATH = 'unregistered';
+export const UNREGISTERED_PROJECTS = 'Unregistered projects';

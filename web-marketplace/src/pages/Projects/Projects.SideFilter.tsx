@@ -27,19 +27,16 @@ import {
   COMMUNITY_FILTER_LABEL,
   CREDIT_CLASS_FILTER_LABEL,
   FILTERS_LABEL,
-  OFFCHAIN_FILTER_LABEL,
   RESET_FILTERS_LABEL,
   SIDE_FILTERS_BUTTON,
+  UNREGISTERED_PATH,
 } from './Projects.constants';
-import { CreditClassFilter } from './Projects.normalizers';
-import { OffChainFilter } from './Projects.OffChainFilter';
-import { FilterCreditClassEvent } from './Projects.types';
+import { CreditClassFilter, FilterCreditClassEvent } from './Projects.types';
 import { getFilterSelected } from './Projects.utils';
 
 type Props = {
   creditClassFilters?: CreditClassFilter[];
   hasCommunityProjects: boolean;
-  useOffChainProjects?: boolean;
   showFiltersReset: boolean;
   resetFilter: () => void;
   sx?: SxProps<Theme>;
@@ -58,8 +55,10 @@ export const ProjectsSideFilter = ({
   );
   const [useCommunityProjects] = useAtom(useCommunityProjectsAtom);
   const filteredCreditClassFilters = creditClassFilters.filter(
-    ({ isCommunity }) =>
-      useCommunityProjects || (!useCommunityProjects && !isCommunity),
+    ({ isCommunity, path }) =>
+      path === UNREGISTERED_PATH ||
+      useCommunityProjects ||
+      (!useCommunityProjects && !isCommunity),
   );
   const { track } = useTracker();
 
@@ -127,15 +126,16 @@ export const ProjectsSideFilter = ({
                                 ...creditClassSelectedFilters,
                                 [path]: event.target.checked,
                               });
-                              track<
-                                'filterCreditClass',
-                                FilterCreditClassEvent
-                              >('filterCreditClass', {
-                                creditClassId: path,
-                                selected: getFilterSelected(
-                                  event.target.checked,
-                                ),
-                              });
+                              if (path !== UNREGISTERED_PATH)
+                                track<
+                                  'filterCreditClass',
+                                  FilterCreditClassEvent
+                                >('filterCreditClass', {
+                                  creditClassId: path,
+                                  selected: getFilterSelected(
+                                    event.target.checked,
+                                  ),
+                                });
                             }}
                           />
                         </Box>
@@ -176,22 +176,6 @@ export const ProjectsSideFilter = ({
               </Box>
             </>
           )}
-          <>
-            <Box sx={{ height: '1px', bgcolor: 'info.light', my: 7.5 }} />
-            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-              <Subtitle size="md" sx={{ mb: 3.75 }}>
-                {OFFCHAIN_FILTER_LABEL}
-              </Subtitle>
-
-              <OffChainFilter
-                sx={{
-                  mr: { xs: 0, lg: 7.5 },
-                  width: { xs: '100%', lg: 'auto' },
-                  order: { xs: 2, lg: 1 },
-                }}
-              />
-            </Box>
-          </>
         </Box>
       </SwipeableDrawer>
     </>

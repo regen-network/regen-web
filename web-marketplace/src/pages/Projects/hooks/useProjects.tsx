@@ -1,22 +1,11 @@
 import { useProjectsWithOrders } from 'hooks/projects/useProjectsWithOrders';
 
 import { PROJECTS_PER_PAGE } from '../Projects.config';
-import { ProjectWithOrderData } from '../Projects.types';
-
-type ResponseType = {
-  allProjects: ProjectWithOrderData[];
-  projects: ProjectWithOrderData[];
-  projectsCount?: number;
-  pagesCount: number;
-  loading: boolean;
-  hasCommunityProjects: boolean;
-};
 
 type Props = {
   sort: string;
   offset?: number;
   useCommunityProjects?: boolean;
-  useOffChainProjects?: boolean;
   creditClassFilter?: Record<string, boolean>;
 };
 
@@ -24,12 +13,12 @@ export const useProjects = ({
   offset = 0,
   sort,
   useCommunityProjects = false,
-  useOffChainProjects = false,
   creditClassFilter = {},
-}: Props): ResponseType => {
+}: Props) => {
   // get normalized projects with sell order data
   const {
     allProjects,
+    haveOffChainProjects,
     projectsWithOrderData,
     projectsCount,
     loading,
@@ -39,7 +28,6 @@ export const useProjects = ({
     offset,
     sort,
     useCommunityProjects,
-    useOffChainProjects,
     creditClassFilter,
   });
 
@@ -47,6 +35,7 @@ export const useProjects = ({
 
   return {
     allProjects,
+    haveOffChainProjects,
     projects: projectsWithOrderData,
     projectsCount,
     pagesCount,

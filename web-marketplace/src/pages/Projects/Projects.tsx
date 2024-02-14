@@ -61,9 +61,6 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [useCommunityProjects, setUseCommunityProjects] = useAtom(
     useCommunityProjectsAtom,
   );
-  const [useOffChainProjects, setUseOffChainProjects] = useAtom(
-    useOffChainProjectsAtom,
-  );
   const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useAtom(
     creditClassSelectedFiltersAtom,
   );
@@ -105,6 +102,7 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   const {
     allProjects,
+    haveOffChainProjects,
     projects,
     projectsCount,
     pagesCount,
@@ -113,7 +111,6 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
     sort,
     offset: page * PROJECTS_PER_PAGE,
     useCommunityProjects,
-    useOffChainProjects,
     creditClassFilter: creditClassSelectedFilters,
   });
 
@@ -121,15 +118,28 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
     creditClassesWithMetadata,
     sanityCreditClassesData,
     allProjects,
+    haveOffChainProjects,
   });
 
   useEffect(() => {
-    setCreditClassSelectedFilters(
-      creditClassFilters.reduce((accumulator, value) => {
-        return { ...accumulator, [value.path]: true };
-      }, {}),
-    );
-  }, [creditClassFilters, setCreditClassSelectedFilters]);
+    // Check all the credit class filters by default
+    if (
+      Object.keys(creditClassSelectedFilters).length !==
+      creditClassFilters.length
+    )
+      setCreditClassSelectedFilters(
+        creditClassFilters.reduce((acc, creditClassFilter) => {
+          return {
+            ...acc,
+            [creditClassFilter.path]: true,
+          };
+        }, {}),
+      );
+  }, [
+    creditClassFilters,
+    creditClassSelectedFilters,
+    setCreditClassSelectedFilters,
+  ]);
 
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
 
@@ -144,7 +154,6 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const resetFilter = () => {
     setCreditClassSelectedFilters({});
     setUseCommunityProjects(undefined);
-    setUseOffChainProjects(undefined);
   };
 
   if (isSanityCreditClassesLoading || isCreditClassesWithMetadataLoading)

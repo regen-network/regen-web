@@ -1,4 +1,5 @@
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
+import { SKIPPED_CLASS_ID } from 'lib/env';
 
 import { CreditClassWithMedata } from './hooks/useFetchCreditClasses';
 
@@ -26,15 +27,17 @@ export const normalizeCreditClassFilters = ({
   );
 
   const creditClassFilters =
-    creditClassesWithMetadata?.map(({ creditClass, metadata }) => {
-      const isCommunity = !sanityCreditClassIds?.includes(creditClass.id);
+    creditClassesWithMetadata
+      ?.filter(({ creditClass }) => creditClass.id !== SKIPPED_CLASS_ID)
+      ?.map(({ creditClass, metadata }) => {
+        const isCommunity = !sanityCreditClassIds?.includes(creditClass.id);
 
-      return {
-        name: metadata?.['schema:name'] ?? creditClass.id,
-        path: creditClass.id,
-        isCommunity,
-      };
-    }) ?? [];
+        return {
+          name: metadata?.['schema:name'] ?? creditClass.id,
+          path: creditClass.id,
+          isCommunity,
+        };
+      }) ?? [];
 
   return { creditClassFilters };
 };

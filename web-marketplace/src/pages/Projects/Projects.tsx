@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Box, SelectChangeEvent, useMediaQuery, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
@@ -122,6 +122,14 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
     sanityCreditClassesData,
     allProjects,
   });
+
+  useEffect(() => {
+    setCreditClassSelectedFilters(
+      creditClassFilters.reduce((accumulator, value) => {
+        return { ...accumulator, [value.path]: true };
+      }, {}),
+    );
+  }, [creditClassFilters, setCreditClassSelectedFilters]);
 
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
 

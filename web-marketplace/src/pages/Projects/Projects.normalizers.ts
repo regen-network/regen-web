@@ -2,8 +2,10 @@ import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { SKIPPED_CLASS_ID } from 'lib/env';
 
 import { CreditClassWithMedata } from './hooks/useFetchCreditClasses';
+import { ProjectWithOrderData } from './Projects.types';
 
 type NormalizeCreditClassesFilterParams = {
+  allProjects: ProjectWithOrderData[];
   sanityCreditClassesData?: AllCreditClassQuery;
   creditClassesWithMetadata?: CreditClassWithMedata[];
 };
@@ -19,6 +21,7 @@ export type CreditClassFilter = {
 };
 
 export const normalizeCreditClassFilters = ({
+  allProjects,
   creditClassesWithMetadata,
   sanityCreditClassesData,
 }: NormalizeCreditClassesFilterParams): NormalizeCreditClassFiltersResponse => {
@@ -26,9 +29,18 @@ export const normalizeCreditClassFilters = ({
     sanityCreditClass => sanityCreditClass.path,
   );
 
+  const creditClassesIdsWithProjects = [
+    ...new Set(allProjects.map(project => project.creditClassId)),
+  ];
+
   const creditClassFilters =
     creditClassesWithMetadata
-      ?.filter(({ creditClass }) => creditClass.id !== SKIPPED_CLASS_ID)
+      ?.filter(
+        ({ creditClass }) =>
+          creditClass.id !== SKIPPED_CLASS_ID &&
+          creditClassesIdsWithProjects.includes(creditClass.id),
+        true,
+      )
       ?.map(({ creditClass, metadata }) => {
         const isCommunity = !sanityCreditClassIds?.includes(creditClass.id);
 

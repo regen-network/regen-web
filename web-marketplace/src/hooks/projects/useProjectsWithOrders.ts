@@ -241,6 +241,7 @@ export function useProjectsWithOrders({
   });
 
   return {
+    allProjects: projectsWithOrderData,
     projectsWithOrderData: projectsWithMetadata,
     projectsCount: projectsFilteredByCreditClass?.length,
     loading:

@@ -4,6 +4,7 @@ import { PROJECTS_PER_PAGE } from '../Projects.config';
 import { ProjectWithOrderData } from '../Projects.types';
 
 type ResponseType = {
+  allProjects: ProjectWithOrderData[];
   projects: ProjectWithOrderData[];
   projectsCount?: number;
   pagesCount: number;
@@ -28,6 +29,7 @@ export const useProjects = ({
 }: Props): ResponseType => {
   // get normalized projects with sell order data
   const {
+    allProjects,
     projectsWithOrderData,
     projectsCount,
     loading,
@@ -44,6 +46,7 @@ export const useProjects = ({
   const pagesCount = Math.ceil((projectsCount ?? 0) / PROJECTS_PER_PAGE);
 
   return {
+    allProjects,
     projects: projectsWithOrderData,
     projectsCount,
     pagesCount,

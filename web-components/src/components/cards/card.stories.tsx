@@ -1,12 +1,16 @@
 import * as React from 'react';
 import { Box, Theme } from '@mui/material';
+import ReactHtmlParser from 'html-react-parser';
 import { makeStyles } from 'tss-react/mui';
 import { Track } from 'web-marketplace/src/lib/tracker/types';
+
+import { parseText } from 'src/utils/textParser';
 
 import { QuestionItem } from '../faq/Question';
 import CurrentCreditsIcon from '../icons/CurrentCreditsIcon';
 import FarmerIcon from '../icons/FarmerIcon';
 import TrustIcon from '../icons/TrustIcon';
+import { Body } from '../typography';
 import { User } from '../user/UserInfoCard';
 import Card from './Card';
 import GlanceCard from './GlanceCard';
@@ -17,7 +21,7 @@ import ImpactCard from './ImpactCard';
 import MapCard from './MapCard';
 import OnBoardingCard from './OnBoardingCard';
 import { OverviewCard } from './OverviewCard';
-import PostCard from './PostCard';
+import PostCard from './PostCard/PostCard';
 import ProjectCard from './ProjectCard';
 import ProjectImpactCard from './ProjectImpactCard/ProjectImpactCard';
 import PurchasedCreditsCard from './PurchasedCreditsCard';
@@ -26,11 +30,6 @@ import { ReviewCard } from './ReviewCard';
 import { ItemDisplay } from './ReviewCard/ReviewCard.ItemDisplay';
 import { Photo } from './ReviewCard/ReviewCard.Photo';
 import { StepCard } from './StepCard';
-
-
-import { parseText } from 'src/utils/textParser';
-import ReactHtmlParser from 'html-react-parser';
-import { Body } from '../typography';
 
 export default {
   title: 'Cards',

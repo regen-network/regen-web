@@ -1,12 +1,15 @@
 import React from 'react';
-import { SvgIcon, useTheme } from '@mui/material';
+import { SvgIcon, SxProps, useTheme } from '@mui/material';
+
+import { Theme } from '../../theme/muiTheme';
 
 export const HorizontalDotsIcon: React.FC<
   React.PropsWithChildren<{
     color?: string;
     className?: string;
+    sx?: SxProps<Theme>;
   }>
-> = ({ className, color, ...props }) => {
+> = ({ className, color, sx, ...props }) => {
   const theme = useTheme();
   color = color || theme.palette.secondary.main;
 
@@ -17,6 +20,7 @@ export const HorizontalDotsIcon: React.FC<
       height="24"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
+      sx={sx}
       {...props}
     >
       <svg

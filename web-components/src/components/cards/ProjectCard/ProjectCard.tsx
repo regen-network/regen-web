@@ -3,7 +3,6 @@ import { SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
 import { Buy1Event, Track } from 'web-marketplace/src/lib/tracker/types';
 
-import { ButtonType } from '../../../types/shared/buttonType';
 import { formatStandardInfo } from '../../../utils/format';
 import { cn } from '../../../utils/styles/cn';
 import OutlinedButton from '../../buttons/OutlinedButton';
@@ -18,6 +17,7 @@ import {
   DEFAULT_BUY_BUTTON,
   PREFINANCE,
   PREFINANCE_BUTTON,
+  PREFINANCE_PRICE_TOOLTIP,
 } from './ProjectCard.constants';
 import { CreditPrice } from './ProjectCard.CreditPrice';
 import { ProgramImageChildren } from './ProjectCard.ImageChildren';
@@ -84,8 +84,12 @@ export function ProjectCard({
   const { classes } = useProjectCardStyles();
 
   const isPrefinanceProject = projectPrefinancing?.isPrefinanceProject;
-  const button = isPrefinanceProject ? PREFINANCE_BUTTON : DEFAULT_BUY_BUTTON; 
-  const { text: buttonText, startIcon: buttonStartIcon, className: buttonClassName } = button;
+  const button = isPrefinanceProject ? PREFINANCE_BUTTON : DEFAULT_BUY_BUTTON;
+  const {
+    text: buttonText,
+    startIcon: buttonStartIcon,
+    className: buttonClassName,
+  } = button;
   const isButtonDisabled =
     button?.disabled !== undefined
       ? button?.disabled
@@ -153,7 +157,9 @@ export function ProjectCard({
           <span className={classes.comingSoonText}>coming soon</span>
         </div>
       )}
-      {purchaseInfo && <div className={classes.separator} />}
+      {(purchaseInfo || isPrefinanceProject) && (
+        <div className={classes.separator} />
+      )}
       {(purchaseInfo || hasButton) && (
         <div className={classes.purchaseInfo}>
           {purchaseInfo?.units && (
@@ -220,7 +226,9 @@ export function ProjectCard({
               <>
                 <CreditPrice
                   priceTooltip={
-                    isPrefinanceProject ? 'TODO' : AVG_PRICE_TOOLTIP
+                    isPrefinanceProject
+                      ? PREFINANCE_PRICE_TOOLTIP
+                      : AVG_PRICE_TOOLTIP
                   }
                   creditsTooltip={creditsTooltip}
                   isSoldOut={isSoldOut}
@@ -247,8 +255,7 @@ export function ProjectCard({
                     size="small"
                     startIcon={buttonStartIcon}
                     disabled={isButtonDisabled}
-                    sx={[{ width: '100%'}, isPrefinanceProject ? {borderImageSlice: 1,
-                      borderImageSource: 'linear-gradient(179deg, #515D89 19.77%, #7DC9BF 114.05%, #FAEBD1 200.67%)',} : {}]}
+                    sx={{ width: '100%' }}
                     className={buttonClassName}
                   >
                     {buttonText}

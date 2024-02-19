@@ -11,6 +11,7 @@ query AllPrefinanceProject {
       isPrefinanceProject
       price
       estimatedIssuance
+      stripePaymentLink
     }
   }
 }

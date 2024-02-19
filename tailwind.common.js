@@ -44,6 +44,9 @@ module.exports = {
       },
       purple: {
         400: 'rgb(var(--purple-400) / <alpha-value>)',
+        300: 'rgb(var(--purple-300) / <alpha-value>)',
+        200: 'rgb(var(--purple-200) / <alpha-value>)',
+        100: 'rgb(var(--purple-100) / <alpha-value>)',
       }
     },
     spacing: {

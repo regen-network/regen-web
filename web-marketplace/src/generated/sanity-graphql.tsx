@@ -8544,7 +8544,7 @@ export type AllPrefinanceProjectQuery = (
     & Pick<Project, 'projectId'>
     & { projectPrefinancing?: Maybe<(
       { __typename?: 'ProjectPrefinancing' }
-      & Pick<ProjectPrefinancing, 'isPrefinanceProject' | 'price' | 'estimatedIssuance'>
+      & Pick<ProjectPrefinancing, 'isPrefinanceProject' | 'price' | 'estimatedIssuance' | 'stripePaymentLink'>
     )> }
   )> }
 );
@@ -10586,6 +10586,7 @@ export const AllPrefinanceProjectDocument = gql`
       isPrefinanceProject
       price
       estimatedIssuance
+      stripePaymentLink
     }
   }
 }

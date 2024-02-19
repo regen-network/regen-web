@@ -77,7 +77,10 @@ interface NormalizeProjectWithMetadataParams {
   projectPrefinancing?: Maybe<
     Pick<
       ProjectPrefinancing,
-      'isPrefinanceProject' | 'price' | 'estimatedIssuance'
+      | 'isPrefinanceProject'
+      | 'price'
+      | 'estimatedIssuance'
+      | 'stripePaymentLink'
     >
   >;
 }

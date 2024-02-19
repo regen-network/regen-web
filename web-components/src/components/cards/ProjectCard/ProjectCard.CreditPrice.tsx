@@ -10,6 +10,7 @@ import {
   CREDITS_AVAILABLE,
   ERROR_CARD_PRICE,
   ESTIMATED_ISSUANCE,
+  ESTIMATED_ISSUANCE_TOOLTIP,
   PRICE,
   SOLD_OUT,
 } from './ProjectCard.constants';
@@ -88,14 +89,28 @@ export const CreditPrice = ({
         </Box>
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <Subtitle
-          size="xs"
-          mobileSize="xxs"
-          color="info.main"
-          sx={{ mb: 1, fontWeight: 800, textTransform: 'uppercase' }}
-        >
-          {isPrefinanceProject ? ESTIMATED_ISSUANCE : CREDITS_AVAILABLE}
-        </Subtitle>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Subtitle
+            size="xs"
+            mobileSize="xxs"
+            color="info.main"
+            sx={{
+              mr: isPrefinanceProject ? 1 : 0,
+              mb: isPrefinanceProject ? 0 : 1,
+              fontWeight: 800,
+              textTransform: 'uppercase',
+            }}
+          >
+            {isPrefinanceProject ? ESTIMATED_ISSUANCE : CREDITS_AVAILABLE}
+          </Subtitle>
+          {isPrefinanceProject && (
+            <InfoTooltipWithIcon
+              title={ESTIMATED_ISSUANCE_TOOLTIP}
+              sx={{ width: 20, height: 20 }}
+              outlined
+            />
+          )}
+        </Box>
         <Body
           size="md"
           mobileSize="sm"

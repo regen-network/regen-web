@@ -63,6 +63,7 @@ const MyProjects = (): JSX.Element => {
 
         {isProjectAdmin &&
           adminProjects?.map((project, i) => {
+            console.log('project', project)
             return (
               <Grid key={i} item xs={12} md={6} lg={4}>
                 <WithLoader

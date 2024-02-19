@@ -41,8 +41,15 @@ export function FeaturedProjects({
         body={body}
         projects={featuredProjects}
         onButtonClick={({ project }) => {
-          setSelectedProject(project);
-          setIsBuyFlowStarted(true);
+          if (project.projectPrefinancing?.isPrefinanceProject) {
+            window.open(
+              project.projectPrefinancing.stripePaymentLink,
+              '_newtab',
+            );
+          } else {
+            setSelectedProject(project);
+            setIsBuyFlowStarted(true);
+          }
         }}
         loading={loading}
       />

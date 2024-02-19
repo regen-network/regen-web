@@ -29,4 +29,5 @@ export type ProjectPrefinancing = {
   isPrefinanceProject: boolean;
   price: string;
   estimatedIssuance: string;
+  stripePaymentLink: string;
 };

@@ -5,4 +5,5 @@ export type ButtonType = {
   startIcon?: ReactNode;
   disabled?: boolean;
   onClick?: (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => void;
+  className?: string;
 };

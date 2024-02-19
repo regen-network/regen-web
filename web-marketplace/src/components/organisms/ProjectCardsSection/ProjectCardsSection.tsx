@@ -9,6 +9,7 @@ import { client as sanityClient } from 'lib/clients/sanity';
 import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 
+import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 import { getCreditsTooltip } from 'pages/Projects/utils/getCreditsTooltip';
 import { getIsSoldOut } from 'pages/Projects/utils/getIsSoldOut';
@@ -85,6 +86,7 @@ export function ProjectCardsSection({
                 isSoldOut={isSoldOut}
                 creditsTooltip={getCreditsTooltip({ isSoldOut, project })}
                 program={project.program}
+                projectPrefinancing={project.projectPrefinancing}
               />
             );
           })}

@@ -42,6 +42,9 @@ module.exports = {
         200: 'rgb(var(--blue-200) / <alpha-value>)',
         100: 'rgb(var(--blue-100) / <alpha-value>)',
       },
+      purple: {
+        400: 'rgb(var(--purple-400) / <alpha-value>)',
+      }
     },
     spacing: {
       // This spacing scale is based on the actual pixel values converted to REM values.

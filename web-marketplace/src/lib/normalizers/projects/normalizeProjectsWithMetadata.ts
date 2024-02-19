@@ -1,13 +1,21 @@
 import { getClassImageWithProjectDefault } from 'utils/image/classImage';
 
+import { formatNumber } from 'web-components/src/utils/format';
+
 import { AccountFieldsFragment, Maybe, Project } from 'generated/graphql';
-import { AllCreditClassQuery, CreditClass } from 'generated/sanity-graphql';
+import {
+  AllCreditClassQuery,
+  AllPrefinanceProjectQuery,
+  CreditClass,
+  ProjectPrefinancing,
+} from 'generated/sanity-graphql';
 import {
   AnchoredProjectMetadataBaseLD,
   CreditClassMetadataLD,
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
 
+import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 import { getDisplayAccount } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
@@ -17,6 +25,7 @@ interface NormalizeProjectsWithOrderDataParams {
   projectPagesMetadata?: ProjectPageMetadataLD[];
   programAccounts?: Maybe<AccountFieldsFragment | undefined>[];
   sanityCreditClassData?: AllCreditClassQuery;
+  prefinanceProjectsData?: AllPrefinanceProjectQuery;
   classesMetadata?: (CreditClassMetadataLD | undefined)[];
 }
 
@@ -26,6 +35,7 @@ export const normalizeProjectsWithMetadata = ({
   projectPagesMetadata,
   programAccounts,
   classesMetadata,
+  prefinanceProjectsData,
 }: NormalizeProjectsWithOrderDataParams): ProjectWithOrderData[] => {
   const projectsWithMetadata = projectsWithOrderData?.map(
     (projectWithOrderData: ProjectWithOrderData, index) => {
@@ -34,6 +44,12 @@ export const normalizeProjectsWithMetadata = ({
       const projectPageMetadata = projectPagesMetadata?.[index];
       const programAccount = programAccounts?.[index];
       const sanityClass = projectWithOrderData.sanityCreditClassData;
+      const prefinanceProject = prefinanceProjectsData?.allProject?.find(
+        project =>
+          project.projectId === projectWithOrderData.offChainId ||
+          project.projectId === projectWithOrderData.id || // on-chain id
+          project.projectId === projectWithOrderData.slug,
+      );
 
       return normalizeProjectWithMetadata({
         projectWithOrderData,
@@ -42,6 +58,7 @@ export const normalizeProjectsWithMetadata = ({
         programAccount,
         classMetadata,
         sanityClass,
+        projectPrefinancing: prefinanceProject?.projectPrefinancing,
       });
     },
   );
@@ -57,6 +74,12 @@ interface NormalizeProjectWithMetadataParams {
   programAccount?: Maybe<AccountFieldsFragment | undefined>;
   classMetadata?: CreditClassMetadataLD | undefined;
   sanityClass?: CreditClass;
+  projectPrefinancing?: Maybe<
+    Pick<
+      ProjectPrefinancing,
+      'isPrefinanceProject' | 'price' | 'estimatedIssuance'
+    >
+  >;
 }
 
 export const normalizeProjectWithMetadata = ({
@@ -67,6 +90,7 @@ export const normalizeProjectWithMetadata = ({
   programAccount,
   classMetadata,
   sanityClass,
+  projectPrefinancing,
 }: NormalizeProjectWithMetadataParams) => {
   const creditClassImage = getClassImageWithProjectDefault({
     metadata: classMetadata,
@@ -106,5 +130,18 @@ export const normalizeProjectWithMetadata = ({
       projectMetadata?.['regen:projectSize']?.['qudt:unit'] ||
       projectWithOrderData?.areaUnit ||
       '',
+    projectPrefinancing: {
+      ...projectPrefinancing,
+      price: projectPrefinancing?.price
+        ? getPriceToDisplay({
+            price: projectPrefinancing?.price,
+          })
+        : undefined,
+      estimatedIssuance: projectPrefinancing?.estimatedIssuance
+        ? formatNumber({
+            num: projectPrefinancing?.estimatedIssuance,
+          })
+        : undefined,
+    },
   } as ProjectWithOrderData;
 };

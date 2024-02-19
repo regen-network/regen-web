@@ -44,6 +44,8 @@ export const normalizeProjectsWithMetadata = ({
       const projectPageMetadata = projectPagesMetadata?.[index];
       const programAccount = programAccounts?.[index];
       const sanityClass = projectWithOrderData.sanityCreditClassData;
+      console.log('projectWithOrderData',projectWithOrderData)
+      console.log('prefinanceProjectsData',prefinanceProjectsData)
       const prefinanceProject = prefinanceProjectsData?.allProject?.find(
         project =>
           project.projectId === projectWithOrderData.offChainId ||

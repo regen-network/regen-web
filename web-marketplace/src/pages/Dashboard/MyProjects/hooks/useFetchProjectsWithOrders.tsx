@@ -4,6 +4,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { useLedger } from 'ledger';
+import { client as sanityClient } from 'lib/clients/sanity';
 import { normalizeProjectsWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
@@ -11,6 +12,7 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 import { useProjectsMetadata } from 'hooks/projects/useProjectsMetadata';
+import { getAllSanityPrefinanceProjectsQuery } from 'lib/queries/react-query/sanity/getAllPrefinanceProjectsQuery/getAllPrefinanceProjectsQuery';
 
 interface Response {
   projects: ProjectWithOrderData[];
@@ -74,7 +76,6 @@ export const useFetchProjectsWithOrders = ({
   );
 
   /* Final Normalization */
-
   const projectsWithMetadata = normalizeProjectsWithMetadata({
     projectsWithOrderData,
     projectsMetadata,
@@ -82,6 +83,7 @@ export const useFetchProjectsWithOrders = ({
     programAccounts,
     classesMetadata,
   });
+
   return {
     projects: projectsWithMetadata,
     isProjectsMetadataLoading,

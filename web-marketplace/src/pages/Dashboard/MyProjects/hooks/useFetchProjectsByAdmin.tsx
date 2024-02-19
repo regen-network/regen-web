@@ -15,6 +15,7 @@ import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/g
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { useFetchProjectsWithOrders } from './useFetchProjectsWithOrders';
+import { getAllSanityPrefinanceProjectsQuery } from 'lib/queries/react-query/sanity/getAllPrefinanceProjectsQuery/getAllPrefinanceProjectsQuery';
 
 type Params = {
   keepUnapproved?: boolean;
@@ -73,8 +74,26 @@ export const useFetchProjectByAdmin = ({
           .filter(project => project?.approved || keepUnapproved)
       : undefined;
 
+  // Sanity prefinance projects
+  const {
+    data: prefinanceProjectsData,
+    isFetching: isLoadingPrefinanceProjects,
+  } = useQuery(
+    getAllSanityPrefinanceProjectsQuery({
+      sanityClient,
+      enabled: !!sanityClient && onlyOffChainProjects && onlyOffChainProjects?.length > 0,
+    }),
+  );
+
   const onlyOffChainProjectsWithData =
-    onlyOffChainProjects?.map(project => ({
+    onlyOffChainProjects?.map(project => {
+      const prefinanceProject = prefinanceProjectsData?.allProject?.find(
+        sanityProject =>
+          sanityProject.projectId === project?.id ||
+          sanityProject.projectId === project?.slug,
+      );
+
+      return {
       offChain: true,
       published: project?.published,
       ...normalizeProjectWithMetadata({
@@ -90,8 +109,9 @@ export const useFetchProjectByAdmin = ({
             project?.metadata?.['regen:creditClassId'] ??
             '',
         }),
+        projectPrefinancing: prefinanceProject?.projectPrefinancing,
       }),
-    })) ?? [];
+    }}) ?? [];
 
   const projects = [
     ...onChainProjectsWithData,
@@ -105,6 +125,7 @@ export const useFetchProjectByAdmin = ({
       isAccountLoading ||
       isOnChainProjectsLoading ||
       isProjectsMetadataLoading ||
-      isClassesMetadataLoading,
+      isClassesMetadataLoading ||
+      isLoadingPrefinanceProjects,
   };
 };

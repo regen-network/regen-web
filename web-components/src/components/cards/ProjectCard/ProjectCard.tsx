@@ -25,6 +25,7 @@ import { PurchaseDetails } from './ProjectCard.PurchaseDetails';
 import { useProjectCardStyles } from './ProjectCard.styles';
 import { ProjectPrefinancing, PurchaseInfo } from './ProjectCard.types';
 import { getAbbreviation } from './ProjectCard.utils';
+import { ButtonType } from '../../../types/shared/buttonType';
 
 export interface ProjectCardProps extends MediaCardProps {
   id?: string;
@@ -51,6 +52,7 @@ export interface ProjectCardProps extends MediaCardProps {
   creditsTooltip?: string;
   disabled?: boolean;
   program?: Account;
+  button?: ButtonType;
   projectPrefinancing?: ProjectPrefinancing;
 }
 
@@ -77,6 +79,7 @@ export function ProjectCard({
   creditsTooltip,
   pathname,
   program,
+  button,
   projectPrefinancing,
   ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
@@ -84,15 +87,15 @@ export function ProjectCard({
   const { classes } = useProjectCardStyles();
 
   const isPrefinanceProject = projectPrefinancing?.isPrefinanceProject;
-  const button = isPrefinanceProject ? PREFINANCE_BUTTON : DEFAULT_BUY_BUTTON;
+  const cardButton = button ?? (isPrefinanceProject ? PREFINANCE_BUTTON : DEFAULT_BUY_BUTTON);
   const {
     text: buttonText,
     startIcon: buttonStartIcon,
     className: buttonClassName,
-  } = button;
+  } = cardButton;
   const isButtonDisabled =
-    button?.disabled !== undefined
-      ? button?.disabled
+  cardButton?.disabled !== undefined
+      ? cardButton?.disabled
       : !purchaseInfo?.sellInfo?.creditsAvailableForUser &&
         !projectPrefinancing?.isPrefinanceProject;
   const hasButton = !!onButtonClick;

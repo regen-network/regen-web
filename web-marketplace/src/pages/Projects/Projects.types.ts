@@ -28,3 +28,9 @@ export type FilterCreditClassEvent = {
   creditClassId: string;
   selected: string;
 };
+
+export type CreditClassFilter = {
+  name: string;
+  path: string;
+  isCommunity?: boolean;
+};

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Box, SelectChangeEvent, useMediaQuery, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
@@ -23,7 +23,6 @@ import {
   creditClassSelectedFiltersAtom,
   projectsSortAtom,
   useCommunityProjectsAtom,
-  useOffChainProjectsAtom,
 } from 'lib/atoms/projects.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
@@ -61,9 +60,6 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [useCommunityProjects, setUseCommunityProjects] = useAtom(
     useCommunityProjectsAtom,
   );
-  const [useOffChainProjects, setUseOffChainProjects] = useAtom(
-    useOffChainProjectsAtom,
-  );
   const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useAtom(
     creditClassSelectedFiltersAtom,
   );
@@ -84,11 +80,6 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
     getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
   );
 
-  const { creditClassFilters } = normalizeCreditClassFilters({
-    creditClassesWithMetadata,
-    sanityCreditClassesData,
-  });
-
   const { data: sanityProjectsPageData } = useAllProjectsPageQuery({
     client: sanityClient,
   });
@@ -108,14 +99,46 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [selectedProject, setSelectedProject] =
     useState<ProjectWithOrderData | null>(null);
 
-  const { projects, projectsCount, pagesCount, hasCommunityProjects } =
-    useProjects({
-      sort,
-      offset: page * PROJECTS_PER_PAGE,
-      useCommunityProjects,
-      useOffChainProjects,
-      creditClassFilter: creditClassSelectedFilters,
-    });
+  const {
+    allProjects,
+    haveOffChainProjects,
+    projects,
+    projectsCount,
+    pagesCount,
+    hasCommunityProjects,
+  } = useProjects({
+    sort,
+    offset: page * PROJECTS_PER_PAGE,
+    useCommunityProjects,
+    creditClassFilter: creditClassSelectedFilters,
+  });
+
+  const { creditClassFilters } = normalizeCreditClassFilters({
+    creditClassesWithMetadata,
+    sanityCreditClassesData,
+    allProjects,
+    haveOffChainProjects,
+  });
+
+  useEffect(() => {
+    // Check all the credit class filters by default
+    if (
+      Object.keys(creditClassSelectedFilters).length !==
+      creditClassFilters.length
+    )
+      setCreditClassSelectedFilters(
+        creditClassFilters.reduce((acc, creditClassFilter) => {
+          return {
+            ...acc,
+            [creditClassFilter.path]: true,
+          };
+        }, {}),
+      );
+  }, [
+    creditClassFilters,
+    creditClassSelectedFilters,
+    setCreditClassSelectedFilters,
+  ]);
 
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
 
@@ -130,7 +153,6 @@ export const Projects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const resetFilter = () => {
     setCreditClassSelectedFilters({});
     setUseCommunityProjects(undefined);
-    setUseOffChainProjects(undefined);
   };
 
   if (isSanityCreditClassesLoading || isCreditClassesWithMetadataLoading)

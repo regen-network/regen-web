@@ -14,7 +14,8 @@ import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton
 import FilterIcon from 'web-components/src/components/icons/FilterIcon';
 import Checkbox from 'web-components/src/components/inputs/new/CheckBox/Checkbox';
 import { CollapseList } from 'web-components/src/components/organisms/CollapseList/CollapseList';
-import { Subtitle } from 'web-components/src/components/typography';
+import { Body, Subtitle } from 'web-components/src/components/typography';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 import {
   creditClassSelectedFiltersAtom,
@@ -27,19 +28,19 @@ import {
   COMMUNITY_FILTER_LABEL,
   CREDIT_CLASS_FILTER_LABEL,
   FILTERS_LABEL,
-  OFFCHAIN_FILTER_LABEL,
   RESET_FILTERS_LABEL,
   SIDE_FILTERS_BUTTON,
+  UNREGISTERED_PATH,
 } from './Projects.constants';
-import { CreditClassFilter } from './Projects.normalizers';
-import { OffChainFilter } from './Projects.OffChainFilter';
-import { FilterCreditClassEvent } from './Projects.types';
-import { getFilterSelected } from './Projects.utils';
+import { CreditClassFilter, FilterCreditClassEvent } from './Projects.types';
+import {
+  getCreditClassSelectedFilters,
+  getFilterSelected,
+} from './Projects.utils';
 
 type Props = {
   creditClassFilters?: CreditClassFilter[];
   hasCommunityProjects: boolean;
-  useOffChainProjects?: boolean;
   showFiltersReset: boolean;
   resetFilter: () => void;
   sx?: SxProps<Theme>;
@@ -58,10 +59,16 @@ export const ProjectsSideFilter = ({
   );
   const [useCommunityProjects] = useAtom(useCommunityProjectsAtom);
   const filteredCreditClassFilters = creditClassFilters.filter(
-    ({ isCommunity }) =>
-      useCommunityProjects || (!useCommunityProjects && !isCommunity),
+    ({ isCommunity, path }) =>
+      path === UNREGISTERED_PATH ||
+      useCommunityProjects ||
+      (!useCommunityProjects && !isCommunity),
   );
   const { track } = useTracker();
+
+  const values = Object.values(creditClassSelectedFilters);
+  const selectAllEnabled = values.includes(false);
+  const clearAllEnabled = values.includes(true);
 
   return (
     <>
@@ -109,6 +116,51 @@ export const ProjectsSideFilter = ({
             <Subtitle size="md" sx={{ mb: 3.75 }}>
               {CREDIT_CLASS_FILTER_LABEL}
             </Subtitle>
+            <div className="pb-15 text-grey-500">
+              <Subtitle
+                component="span"
+                size="xs"
+                className={cn(
+                  selectAllEnabled
+                    ? 'text-brand-400 cursor-pointer'
+                    : 'text-grey-400',
+                  'pr-10',
+                )}
+                onClick={() => {
+                  if (selectAllEnabled)
+                    setCreditClassSelectedFilters(
+                      getCreditClassSelectedFilters(
+                        creditClassSelectedFilters,
+                        true,
+                      ),
+                    );
+                }}
+              >
+                Select all
+              </Subtitle>
+              |
+              <Subtitle
+                component="span"
+                size="xs"
+                className={cn(
+                  clearAllEnabled
+                    ? 'cursor-pointer text-brand-400'
+                    : 'text-grey-400',
+                  'pl-10',
+                )}
+                onClick={() => {
+                  if (clearAllEnabled)
+                    setCreditClassSelectedFilters(
+                      getCreditClassSelectedFilters(
+                        creditClassSelectedFilters,
+                        false,
+                      ),
+                    );
+                }}
+              >
+                Clear all
+              </Subtitle>
+            </div>
             <CollapseList
               max={3}
               items={filteredCreditClassFilters.map(({ name, path }) => (
@@ -127,15 +179,16 @@ export const ProjectsSideFilter = ({
                                 ...creditClassSelectedFilters,
                                 [path]: event.target.checked,
                               });
-                              track<
-                                'filterCreditClass',
-                                FilterCreditClassEvent
-                              >('filterCreditClass', {
-                                creditClassId: path,
-                                selected: getFilterSelected(
-                                  event.target.checked,
-                                ),
-                              });
+                              if (path !== UNREGISTERED_PATH)
+                                track<
+                                  'filterCreditClass',
+                                  FilterCreditClassEvent
+                                >('filterCreditClass', {
+                                  creditClassId: path,
+                                  selected: getFilterSelected(
+                                    event.target.checked,
+                                  ),
+                                });
                             }}
                           />
                         </Box>
@@ -176,22 +229,6 @@ export const ProjectsSideFilter = ({
               </Box>
             </>
           )}
-          <>
-            <Box sx={{ height: '1px', bgcolor: 'info.light', my: 7.5 }} />
-            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-              <Subtitle size="md" sx={{ mb: 3.75 }}>
-                {OFFCHAIN_FILTER_LABEL}
-              </Subtitle>
-
-              <OffChainFilter
-                sx={{
-                  mr: { xs: 0, lg: 7.5 },
-                  width: { xs: '100%', lg: 'auto' },
-                  order: { xs: 2, lg: 1 },
-                }}
-              />
-            </Box>
-          </>
         </Box>
       </SwipeableDrawer>
     </>

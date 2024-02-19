@@ -19,6 +19,7 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { useFetchAllOffChainProjects } from 'pages/Projects/hooks/useOffChainProjects';
 import { ProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders.types';
+import { UNREGISTERED_PATH } from 'pages/Projects/Projects.constants';
 import {
   sortPinnedProject,
   sortProjects,
@@ -34,13 +35,14 @@ export interface ProjectsWithOrdersProps {
   metadata?: boolean; // to discard projects without metadata prop
   random?: boolean; // to shuffle the projects (along with limit allows a random subselection)
   useCommunityProjects?: boolean; // to show community projects
-  useOffChainProjects?: boolean; // to show approved off-chain projects;
   projectId?: string; // to filter by project
   skippedProjectId?: string; // to discard a specific project
   classId?: string; // to filter by class
   pinnedIds?: string[]; // list of on-chain id, uuid or slug to pinned at the top
   sort?: string;
   creditClassFilter?: Record<string, boolean>;
+  useOffChainProjects?: boolean;
+  enableOffchainProjectsQuery?: boolean;
 }
 
 /**
@@ -52,13 +54,14 @@ export function useProjectsWithOrders({
   metadata = false,
   random = false,
   useCommunityProjects = false,
-  useOffChainProjects = false,
   skippedProjectId,
   classId,
   pinnedIds,
   sort = '',
   projectId,
   creditClassFilter = {},
+  useOffChainProjects = false,
+  enableOffchainProjectsQuery = true,
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
   const { ecocreditClient, marketplaceClient, dataClient } = useLedger();
 
@@ -115,7 +118,7 @@ export function useProjectsWithOrders({
   const { allOffChainProjects, isAllOffChainProjectsLoading } =
     useFetchAllOffChainProjects({
       sanityCreditClassesData: creditClassData,
-      enabled: useOffChainProjects,
+      enabled: enableOffchainProjectsQuery,
     });
 
   /* Normalization/Filtering/Sorting */
@@ -161,19 +164,22 @@ export function useProjectsWithOrders({
   );
 
   // Merge on-chain and off-chain projects
-  const allProject = useOffChainProjects
-    ? [...projectsWithOrderDataFiltered, ...allOffChainProjects]
-    : projectsWithOrderDataFiltered;
+  const allProject =
+    creditClassFilter?.[UNREGISTERED_PATH] || useOffChainProjects
+      ? [...projectsWithOrderDataFiltered, ...allOffChainProjects]
+      : projectsWithOrderDataFiltered;
 
   // Filter projects by class ID
-  const creditClassSelected = Object.keys(creditClassFilter).filter(
+  const creditClassFilterKeys = Object.keys(creditClassFilter);
+  const creditClassSelected = creditClassFilterKeys.filter(
     creditClassId => creditClassFilter[creditClassId],
   );
 
   const projectsFilteredByCreditClass = allProject.filter(project =>
-    creditClassSelected.length === 0
+    creditClassFilterKeys.length === 0
       ? true
-      : creditClassSelected.includes(project.creditClassId ?? ''),
+      : project.offChain ||
+        creditClassSelected.includes(project.creditClassId ?? ''),
   );
 
   const sortedProjects = sortProjects(projectsFilteredByCreditClass, sort)
@@ -241,6 +247,8 @@ export function useProjectsWithOrders({
   });
 
   return {
+    allProjects: projectsWithOrderData,
+    haveOffChainProjects: allOffChainProjects?.length > 0,
     projectsWithOrderData: projectsWithMetadata,
     projectsCount: projectsFilteredByCreditClass?.length,
     loading:

@@ -163,7 +163,7 @@ export function ProjectCard({
       {(purchaseInfo || isPrefinanceProject) && (
         <div className={classes.separator} />
       )}
-      {(purchaseInfo || hasButton) && (
+      {(purchaseInfo || hasButton || isPrefinanceProject) && (
         <div className={classes.purchaseInfo}>
           {purchaseInfo?.units && (
             <>

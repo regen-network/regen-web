@@ -5,17 +5,25 @@ import { Buy1Event, Track } from 'web-marketplace/src/lib/tracker/types';
 
 import { ButtonType } from '../../../types/shared/buttonType';
 import { formatStandardInfo } from '../../../utils/format';
+import { cn } from '../../../utils/styles/cn';
 import OutlinedButton from '../../buttons/OutlinedButton';
 import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
+import { PrefinanceIcon } from '../../icons/PrefinanceIcon';
 import ProjectPlaceInfo from '../../place/ProjectPlaceInfo';
+import { Label } from '../../typography';
 import { Account, User } from '../../user/UserInfo';
 import MediaCard, { MediaCardProps } from '../MediaCard';
-import { AVG_PRICE_TOOLTIP, DEFAULT_BUY_BUTTON } from './ProjectCard.constants';
+import {
+  AVG_PRICE_TOOLTIP,
+  DEFAULT_BUY_BUTTON,
+  PREFINANCE,
+  PREFINANCE_BUTTON,
+} from './ProjectCard.constants';
 import { CreditPrice } from './ProjectCard.CreditPrice';
 import { ProgramImageChildren } from './ProjectCard.ImageChildren';
 import { PurchaseDetails } from './ProjectCard.PurchaseDetails';
 import { useProjectCardStyles } from './ProjectCard.styles';
-import { PurchaseInfo } from './ProjectCard.types';
+import { ProjectPrefinancing, PurchaseInfo } from './ProjectCard.types';
 import { getAbbreviation } from './ProjectCard.utils';
 
 export interface ProjectCardProps extends MediaCardProps {
@@ -41,9 +49,9 @@ export interface ProjectCardProps extends MediaCardProps {
   pathname?: string;
   isSoldOut?: boolean;
   creditsTooltip?: string;
-  button?: ButtonType;
   disabled?: boolean;
   program?: Account;
+  projectPrefinancing?: ProjectPrefinancing;
 }
 
 export function ProjectCard({
@@ -68,17 +76,21 @@ export function ProjectCard({
   isSoldOut = false,
   creditsTooltip,
   pathname,
-  button = DEFAULT_BUY_BUTTON,
   program,
+  projectPrefinancing,
   ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
   const { classes } = useProjectCardStyles();
-  const { text: buttonText, startIcon: buttonStartIcon } = button;
+
+  const isPrefinanceProject = projectPrefinancing?.isPrefinanceProject;
+  const button = isPrefinanceProject ? PREFINANCE_BUTTON : DEFAULT_BUY_BUTTON; 
+  const { text: buttonText, startIcon: buttonStartIcon, className: buttonClassName } = button;
   const isButtonDisabled =
     button?.disabled !== undefined
       ? button?.disabled
-      : !purchaseInfo?.sellInfo?.creditsAvailableForUser;
+      : !purchaseInfo?.sellInfo?.creditsAvailableForUser &&
+        !projectPrefinancing?.isPrefinanceProject;
   const hasButton = !!onButtonClick;
 
   const [open, setOpen] = useState<boolean>(true);
@@ -119,6 +131,23 @@ export function ProjectCard({
           color={theme.palette.primary.light}
         />
       </div>
+      {isPrefinanceProject && (
+        <div
+          className={cn(
+            classes.prefinancing,
+            'rounded-r-[5px] flex items-center justify-center px-10 py-[3px] text-grey-0 absolute top-20 left-0',
+          )}
+        >
+          <PrefinanceIcon />
+          <Label
+            className="pl-10  font-extrabold uppercase"
+            component="span"
+            size="xxs"
+          >
+            {PREFINANCE}
+          </Label>
+        </div>
+      )}
       {comingSoon && (
         <div className={classes.comingSoon}>
           <span className={classes.comingSoonText}>coming soon</span>
@@ -190,17 +219,21 @@ export function ProjectCard({
               )}
               <>
                 <CreditPrice
-                  priceTooltip={AVG_PRICE_TOOLTIP}
+                  priceTooltip={
+                    isPrefinanceProject ? 'TODO' : AVG_PRICE_TOOLTIP
+                  }
                   creditsTooltip={creditsTooltip}
                   isSoldOut={isSoldOut}
                   purchaseInfo={purchaseInfo}
                   sx={{ mb: 5 }}
+                  projectPrefinancing={projectPrefinancing}
                 />
                 {onButtonClick && (
                   <OutlinedButton
                     onClick={event => {
                       event.stopPropagation();
                       track &&
+                        !isPrefinanceProject &&
                         track<'buy1', Buy1Event>('buy1', {
                           url: pathname ?? '',
                           cardType: 'project',
@@ -214,7 +247,9 @@ export function ProjectCard({
                     size="small"
                     startIcon={buttonStartIcon}
                     disabled={isButtonDisabled}
-                    sx={{ width: '100%' }}
+                    sx={[{ width: '100%'}, isPrefinanceProject ? {borderImageSlice: 1,
+                      borderImageSource: 'linear-gradient(179deg, #515D89 19.77%, #7DC9BF 114.05%, #FAEBD1 200.67%)',} : {}]}
+                    className={buttonClassName}
                   >
                     {buttonText}
                   </OutlinedButton>

@@ -15,6 +15,7 @@ import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/ma
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
+import { getAllSanityPrefinanceProjectsQuery } from 'lib/queries/react-query/sanity/getAllPrefinanceProjectsQuery/getAllPrefinanceProjectsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useFetchAllOffChainProjects } from 'pages/Projects/hooks/useOffChainProjects';
@@ -108,11 +109,22 @@ export function useProjectsWithOrders({
     }),
   );
 
-  // AllCreditClasses
+  // Sanity credit classes
   const { data: creditClassData, isFetching: isLoadingSanityCreditClasses } =
     useQuery(
       getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
     );
+
+  // Sanity prefinance projects
+  const {
+    data: prefinanceProjectsData,
+    isFetching: isLoadingPrefinanceProjects,
+  } = useQuery(
+    getAllSanityPrefinanceProjectsQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+    }),
+  );
 
   // OffChainProjects
   const { allOffChainProjects, isAllOffChainProjectsLoading } =
@@ -243,6 +255,7 @@ export function useProjectsWithOrders({
     projectPagesMetadata,
     programAccounts,
     sanityCreditClassData: creditClassData,
+    prefinanceProjectsData,
     classesMetadata,
   });
 
@@ -256,6 +269,7 @@ export function useProjectsWithOrders({
       isLoadingProjectsByClass ||
       isLoadingSellOrders ||
       isLoadingSanityCreditClasses ||
+      isLoadingPrefinanceProjects ||
       isLoadingProject ||
       isClassesMetadataLoading ||
       projectsMetadataLoading ||

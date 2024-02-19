@@ -11,11 +11,11 @@ import { normalizeProjectWithMetadata } from 'lib/normalizers/projects/normalize
 import { getProjectsByAdminQuery } from 'lib/queries/react-query/ecocredit/getProjectsByAdmin/getProjectsByAdmin';
 import { getAccountProjectsByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
+import { getAllSanityPrefinanceProjectsQuery } from 'lib/queries/react-query/sanity/getAllPrefinanceProjectsQuery/getAllPrefinanceProjectsQuery';
 
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { useFetchProjectsWithOrders } from './useFetchProjectsWithOrders';
-import { getAllSanityPrefinanceProjectsQuery } from 'lib/queries/react-query/sanity/getAllPrefinanceProjectsQuery/getAllPrefinanceProjectsQuery';
 
 type Params = {
   keepUnapproved?: boolean;
@@ -81,7 +81,10 @@ export const useFetchProjectByAdmin = ({
   } = useQuery(
     getAllSanityPrefinanceProjectsQuery({
       sanityClient,
-      enabled: !!sanityClient && onlyOffChainProjects && onlyOffChainProjects?.length > 0,
+      enabled:
+        !!sanityClient &&
+        onlyOffChainProjects &&
+        onlyOffChainProjects?.length > 0,
     }),
   );
 
@@ -94,24 +97,25 @@ export const useFetchProjectByAdmin = ({
       );
 
       return {
-      offChain: true,
-      published: project?.published,
-      ...normalizeProjectWithMetadata({
-        offChainProject: project,
-        projectMetadata: project?.metadata,
-        projectPageMetadata: project?.metadata,
-        programAccount:
-          project?.creditClassByCreditClassId?.accountByRegistryId,
-        sanityClass: findSanityCreditClass({
-          sanityCreditClassData,
-          creditClassIdOrUrl:
-            project?.creditClassByCreditClassId?.onChainId ??
-            project?.metadata?.['regen:creditClassId'] ??
-            '',
+        offChain: true,
+        published: project?.published,
+        ...normalizeProjectWithMetadata({
+          offChainProject: project,
+          projectMetadata: project?.metadata,
+          projectPageMetadata: project?.metadata,
+          programAccount:
+            project?.creditClassByCreditClassId?.accountByRegistryId,
+          sanityClass: findSanityCreditClass({
+            sanityCreditClassData,
+            creditClassIdOrUrl:
+              project?.creditClassByCreditClassId?.onChainId ??
+              project?.metadata?.['regen:creditClassId'] ??
+              '',
+          }),
+          projectPrefinancing: prefinanceProject?.projectPrefinancing,
         }),
-        projectPrefinancing: prefinanceProject?.projectPrefinancing,
-      }),
-    }}) ?? [];
+      };
+    }) ?? [];
 
   const projects = [
     ...onChainProjectsWithData,

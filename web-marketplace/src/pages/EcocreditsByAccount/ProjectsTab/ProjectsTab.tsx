@@ -26,7 +26,6 @@ const ProjectsTab = (): JSX.Element => {
     <>
       <Grid container spacing={8}>
         {adminProjects?.map((project, i) => {
-          console.log(project)
           return (
             <Grid key={i} item xs={12} md={6} lg={4}>
               <WithLoader isLoading={isLoadingAdminProjects} variant="skeleton">

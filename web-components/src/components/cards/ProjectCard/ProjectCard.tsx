@@ -3,6 +3,7 @@ import { SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
 import { Buy1Event, Track } from 'web-marketplace/src/lib/tracker/types';
 
+import { ButtonType } from '../../../types/shared/buttonType';
 import { formatStandardInfo } from '../../../utils/format';
 import { cn } from '../../../utils/styles/cn';
 import OutlinedButton from '../../buttons/OutlinedButton';
@@ -25,7 +26,6 @@ import { PurchaseDetails } from './ProjectCard.PurchaseDetails';
 import { useProjectCardStyles } from './ProjectCard.styles';
 import { ProjectPrefinancing, PurchaseInfo } from './ProjectCard.types';
 import { getAbbreviation } from './ProjectCard.utils';
-import { ButtonType } from '../../../types/shared/buttonType';
 
 export interface ProjectCardProps extends MediaCardProps {
   id?: string;
@@ -87,14 +87,15 @@ export function ProjectCard({
   const { classes } = useProjectCardStyles();
 
   const isPrefinanceProject = projectPrefinancing?.isPrefinanceProject;
-  const cardButton = button ?? (isPrefinanceProject ? PREFINANCE_BUTTON : DEFAULT_BUY_BUTTON);
+  const cardButton =
+    button ?? (isPrefinanceProject ? PREFINANCE_BUTTON : DEFAULT_BUY_BUTTON);
   const {
     text: buttonText,
     startIcon: buttonStartIcon,
     className: buttonClassName,
   } = cardButton;
   const isButtonDisabled =
-  cardButton?.disabled !== undefined
+    cardButton?.disabled !== undefined
       ? cardButton?.disabled
       : !purchaseInfo?.sellInfo?.creditsAvailableForUser &&
         !projectPrefinancing?.isPrefinanceProject;

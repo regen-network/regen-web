@@ -1,32 +1,39 @@
 import { useState } from 'react';
 import { Box, ButtonBase, useTheme } from '@mui/material';
 
-import { Body, Label } from '../../../components/typography';
 import { containerPaddingX, containerStyles } from '../../../styles/container';
 import { UseStateSetter } from '../../../types/react/useState';
 import ArrowDownIcon from '../../icons/ArrowDownIcon';
-import { GalleryPhoto } from './Gallery.types';
+import { isImage, isVideo } from '../../inputs/new/FileDrop/FileDrop.utils';
+import { Body, Label } from '../../typography';
+import { GalleryItem } from './Gallery.types';
 import { paginateGallery } from './Gallery.utils';
 
 type Props = {
-  photos: GalleryPhoto[];
-  imageIndex: number;
+  items: GalleryItem[];
+  itemIndex: number;
   page: number;
   setPage: UseStateSetter<[number, number]>;
 };
 
 export const GalleryBottomBar = ({
-  photos,
-  imageIndex,
+  items,
+  itemIndex,
   page,
   setPage,
 }: Props) => {
   const [isShowMore, setIsShowMore] = useState(false);
   const theme = useTheme();
-  const caption = photos[imageIndex]?.caption;
-  const credit = photos[imageIndex]?.credit;
-  const hasCaption = caption !== undefined && caption !== '';
+
+  const item = items[itemIndex];
+  const description = item?.description;
+  const credit = item?.credit;
+  const name = item?.name;
+  const mimeType = item?.mimeType;
+  const hasDescription = description !== undefined && description !== '';
   const hasCredit = credit !== undefined && credit !== '';
+  const image = isImage(mimeType);
+  const video = isVideo(mimeType);
 
   return (
     <Box
@@ -82,10 +89,15 @@ export const GalleryBottomBar = ({
             />
           </ButtonBase>
           <Label size="sm" sx={{ mr: 5, mt: 0.75 }}>
-            {`${imageIndex + 1}/${photos.length}`}
+            {`${itemIndex + 1}/${items.length}`}
           </Label>
         </Box>
-        {(hasCaption || hasCredit) && (
+        {name && (!(image || video) || ((image || video) && !hasDescription)) && (
+          <Body size="sm" mobileSize="sm" className="font-bold text-grey-0">
+            {name}&nbsp;
+          </Body>
+        )}
+        {(hasDescription || hasCredit) && (
           <Body
             size="sm"
             mobileSize="sm"
@@ -107,8 +119,8 @@ export const GalleryBottomBar = ({
             ]}
             onClick={() => setIsShowMore(isShowMore => !isShowMore)}
           >
-            {caption && (
-              <Box sx={{ display: 'inline-block', mr: 0.5 }}>{caption}</Box>
+            {description && (
+              <Box sx={{ display: 'inline-block', mr: 0.5 }}>{description}</Box>
             )}
             {credit && (
               <Box sx={{ display: 'inline-block', fontWeight: 300 }}>

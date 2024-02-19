@@ -30,7 +30,7 @@ export default function BreadcrumbIcon({
   const rotate: string = directionRotate[direction];
   const { classes, cx } = useStyles({ rotate });
   const theme = useTheme();
-  color = color || theme.palette.secondary.main;
+  color = color || 'currentColor' || theme.palette.secondary.main;
 
   return (
     <SvgIcon

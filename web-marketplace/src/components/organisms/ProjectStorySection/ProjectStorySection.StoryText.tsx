@@ -31,6 +31,7 @@ export function StoryText({
         {storyTitle}
       </Title>
       <ReadMore
+        mobileSize="md"
         maxLength={450}
         restMinLength={300}
         classes={hasMedia ? { textContainer: classes.readMore } : undefined}

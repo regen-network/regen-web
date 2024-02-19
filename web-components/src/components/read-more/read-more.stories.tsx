@@ -1,9 +1,6 @@
-import ReadMore from '.';
+import { Meta, StoryObj } from '@storybook/react';
 
-export default {
-  title: 'ReadMore',
-  component: ReadMore,
-};
+import ReadMore from '.';
 
 const readMoreText: string =
   'This property is a rare pocket of wetlands and woodlands located near ' +
@@ -24,8 +21,29 @@ const readMoreText: string =
   'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat ' +
   'non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
-export const readMore = (): JSX.Element => (
-  <ReadMore maxLength={700} restMinLength={300}>
-    {readMoreText}
-  </ReadMore>
-);
+export default {
+  title: 'ReadMore',
+  component: ReadMore,
+} as Meta<typeof ReadMore>;
+
+type Story = StoryObj<typeof ReadMore>;
+
+export const Default: Story = {
+  render: args => <ReadMore {...args}>{readMoreText}</ReadMore>,
+};
+
+Default.args = {
+  maxLength: 200,
+  restMinLength: 150,
+  sentenceBased: false,
+  component: 'span',
+};
+
+export const SentenceBased: Story = {
+  render: args => <ReadMore {...args}>{readMoreText}</ReadMore>,
+};
+
+SentenceBased.args = {
+  maxLength: 700,
+  restMinLength: 300,
+};

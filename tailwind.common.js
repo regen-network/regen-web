@@ -41,6 +41,7 @@ module.exports = {
         300: 'rgb(var(--blue-300) / <alpha-value>)',
         200: 'rgb(var(--blue-200) / <alpha-value>)',
         100: 'rgb(var(--blue-100) / <alpha-value>)',
+        50: 'rgb(var(--blue-100) / <alpha-value>)',
       },
     },
     spacing: {
@@ -62,7 +63,10 @@ module.exports = {
       50: '3.125rem', // 50px
       60: '3.75rem', // 60px
     },
-    extend: {},
+    boxShadow: {
+      'sm': '0px 4px 10px 0px rgba(0, 0, 0, 0.05)',
+      'md': '0px 4px 10px 0px rgba(0, 0, 0, 0.05), 0px 0px 10px 0px rgba(250, 250, 216, 0.80)'
+    },
   },
   plugins: [],
   corePlugins: {

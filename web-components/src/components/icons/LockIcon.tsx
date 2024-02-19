@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const LockIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg width="24" height="24" fill="none" {...props}>
+  <svg width="24" height="24" fill="none" viewBox="0 0 24 24" {...props}>
     <path
       d="M13 17.7324C13.5978 17.3866 14 16.7403 14 16C14 14.8954 13.1046 14 12 14C10.8954 14 10 14.8954 10 16C10 16.7403 10.4022 17.3866 11 17.7324V19C11 19.5523 11.4477 20 12 20C12.5523 20 13 19.5523 13 19V17.7324Z"
       fill="currentColor"

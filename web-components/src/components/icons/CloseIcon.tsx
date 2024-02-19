@@ -31,14 +31,14 @@ export default function CloseIcon({
         height="17.9581"
         rx="0.25"
         transform="rotate(-135 7.08997 20.0477)"
-        fill={svgColor || theme.palette.info.dark}
+        fill={svgColor || 'currentColor' || theme.palette.info.dark}
       />
       <rect
         width="2"
         height="17.9581"
         rx="0.25"
         transform="matrix(0.707107 -0.707107 -0.707107 -0.707107 18.42 20.1125)"
-        fill={svgColor || theme.palette.info.dark}
+        fill={svgColor || 'currentColor' || theme.palette.info.dark}
       />
     </SvgIcon>
   );

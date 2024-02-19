@@ -1,4 +1,4 @@
-import { ProjectWithOrderData } from '../Projects.types';
+import { ProjectWithOrderData } from '../AllProjects.types';
 
 export const sortProjects = (
   projects: ProjectWithOrderData[],

@@ -2,11 +2,11 @@ import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 
+import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 import {
   getPurchaseInfo,
   normalizeToUISellOrderInfo,
-} from 'pages/Projects/hooks/useProjectsSellOrders.utils';
-import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
+} from 'pages/Projects/AllProjects/hooks/useProjectsSellOrders.utils';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 

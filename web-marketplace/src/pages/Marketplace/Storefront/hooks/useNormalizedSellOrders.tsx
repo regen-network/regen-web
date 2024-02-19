@@ -22,8 +22,8 @@ import { getAllProjectsQuery } from 'lib/queries/react-query/registry-server/gra
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
 import { useFetchSellOrders } from 'features/marketplace/BuySellOrderFlow/hooks/useFetchSellOrders';
-import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
-import { UISellOrderInfo } from 'pages/Projects/Projects.types';
+import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
+import { normalizeToUISellOrderInfo } from 'pages/Projects/AllProjects/hooks/useProjectsSellOrders.utils';
 import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 

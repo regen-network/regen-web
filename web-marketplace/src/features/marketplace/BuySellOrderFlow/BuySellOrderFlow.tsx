@@ -23,9 +23,9 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import useBuySellOrderSubmit from 'pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit';
 import { useCheckSellOrderAvailabilty } from 'pages/Marketplace/Storefront/hooks/useCheckSellOrderAvailabilty';
-import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
-import { VIEW_ECOCREDITS } from 'pages/Projects/Projects.config';
-import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
+import { VIEW_ECOCREDITS } from 'pages/Projects/AllProjects/AllProjects.config';
+import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
+import { normalizeToUISellOrderInfo } from 'pages/Projects/AllProjects/hooks/useProjectsSellOrders.utils';
 import { Link } from 'components/atoms';
 import { BuyCreditsModal, BuyCreditsValues } from 'components/organisms';
 import { BuyModalOptions } from 'components/organisms/BuyModalOptions/BuyModalOptions';

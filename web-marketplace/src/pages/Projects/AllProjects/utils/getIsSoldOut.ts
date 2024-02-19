@@ -1,4 +1,4 @@
-import { ProjectWithOrderData } from '../Projects.types';
+import { ProjectWithOrderData } from '../AllProjects.types';
 
 type Params = {
   project?: ProjectWithOrderData;

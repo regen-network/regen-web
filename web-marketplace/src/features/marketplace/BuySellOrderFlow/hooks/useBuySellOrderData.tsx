@@ -1,6 +1,6 @@
 import { useLedger } from 'ledger';
 
-import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
+import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 import { useProjectsWithOrders } from 'hooks/projects/useProjectsWithOrders';
 
 type Props = {

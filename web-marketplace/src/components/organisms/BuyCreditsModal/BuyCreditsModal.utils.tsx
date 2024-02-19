@@ -8,7 +8,7 @@ import { formatNumber } from 'web-components/src/utils/format';
 
 import { microToDenom } from 'lib/denom.utils';
 
-import { UISellOrderInfo } from 'pages/Projects/Projects.types';
+import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
 
 import { BuyCreditsValues } from '..';

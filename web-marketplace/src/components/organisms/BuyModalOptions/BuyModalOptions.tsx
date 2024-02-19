@@ -14,7 +14,7 @@ import { Track } from 'lib/tracker/types';
 import { useBuyModalOptionsTracker } from 'lib/tracker/useBuyModalOptionsTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
+import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 
 interface Props extends RegenModalProps {
   content?: AllBuyModalOptionsQuery['allBuyModalOptions'][0];

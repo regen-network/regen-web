@@ -9,7 +9,7 @@ import { formatNumber } from 'web-components/src/utils/format';
 
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
-import { UISellOrderInfo } from '../Projects.types';
+import { UISellOrderInfo } from '../AllProjects.types';
 
 /* getPriceToDisplay */
 

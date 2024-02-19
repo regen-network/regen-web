@@ -9,10 +9,10 @@ import { client as sanityClient } from 'lib/clients/sanity';
 import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 
-import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
-import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
-import { getCreditsTooltip } from 'pages/Projects/utils/getCreditsTooltip';
-import { getIsSoldOut } from 'pages/Projects/utils/getIsSoldOut';
+import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
+import { getPriceToDisplay } from 'pages/Projects/AllProjects/hooks/useProjectsSellOrders.utils';
+import { getCreditsTooltip } from 'pages/Projects/AllProjects/utils/getCreditsTooltip';
+import { getIsSoldOut } from 'pages/Projects/AllProjects/utils/getIsSoldOut';
 import WithLoader from 'components/atoms/WithLoader';
 import BlockContentBody from 'components/molecules/BlockContentBody';
 

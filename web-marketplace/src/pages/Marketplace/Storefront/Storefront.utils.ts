@@ -8,7 +8,7 @@ import {
 } from 'lib/coingecko';
 import { microToDenom } from 'lib/denom.utils';
 
-import { UISellOrderInfo } from 'pages/Projects/Projects.types';
+import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 
 import { NormalizedSellOrder } from './Storefront.types';
 

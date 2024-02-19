@@ -1,6 +1,6 @@
 import { useProjectsWithOrders } from 'hooks/projects/useProjectsWithOrders';
 
-import { PROJECTS_PER_PAGE } from '../Projects.config';
+import { PROJECTS_PER_PAGE } from '../AllProjects.config';
 
 type Props = {
   sort: string;

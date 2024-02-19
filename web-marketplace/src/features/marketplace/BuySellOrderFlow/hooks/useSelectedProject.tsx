@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { UseStateSetter } from 'types/react/use-state';
 
-import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
+import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 
 type Props = {
   projects?: ProjectWithOrderData[] | null | undefined;

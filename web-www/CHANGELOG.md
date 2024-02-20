@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/regen-network/regen-web/compare/v1.14.1...v2.0.0) (2024-02-20)
+
+### Features
+
+- add secondary button to EcologicalCreditCard ([#2237](https://github.com/regen-network/regen-web/issues/2237)) ([6966caa](https://github.com/regen-network/regen-web/commit/6966caafc22795e5588d0c28e725f954a0613766))
+- add sitemap to www ([#2202](https://github.com/regen-network/regen-web/issues/2202)) ([3173a95](https://github.com/regen-network/regen-web/commit/3173a957f33fa75f22e33a6c5316ef2fdeda7d51))
+
 # [1.14.0](https://github.com/regen-network/regen-web/compare/v1.13.0...v1.14.0) (2023-10-23)
 
 ### Features

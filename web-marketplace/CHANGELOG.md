@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/regen-network/regen-web/compare/v1.14.1...v2.0.0) (2024-02-20)
+
+### Bug Fixes
+
+- csrf token refetch ([#2196](https://github.com/regen-network/regen-web/issues/2196)) ([53af644](https://github.com/regen-network/regen-web/commit/53af6448fd20c90629a85b7158f9679b272737c5))
+- edit metadata for on-chain project ([#2242](https://github.com/regen-network/regen-web/issues/2242)) ([f9c0c2e](https://github.com/regen-network/regen-web/commit/f9c0c2e02ab779c32cce6df6a3fd1636fcaac9b1))
+- ESLint + existing lints ([#2252](https://github.com/regen-network/regen-web/issues/2252)) ([d9879cf](https://github.com/regen-network/regen-web/commit/d9879cfdd8c2d35b4e2e9215ea902198e73abc9d))
+- hide credit class entry if no credit class ([#2214](https://github.com/regen-network/regen-web/issues/2214)) ([f9afea6](https://github.com/regen-network/regen-web/commit/f9afea6d52f86a4e8f424eb57bd65a23dcc2c1b5))
+- hide empty additional info on project and credit class pages ([#2231](https://github.com/regen-network/regen-web/issues/2231)) ([0cf312d](https://github.com/regen-network/regen-web/commit/0cf312d088cd98087d78a9c86f05921e123c35a6))
+- hide menu items for wc users ([#2241](https://github.com/regen-network/regen-web/issues/2241)) ([ee0e031](https://github.com/regen-network/regen-web/commit/ee0e03127ee56f755ee8a517d1cae0eca5da4033))
+- issues with Wallet Connect ([#2269](https://github.com/regen-network/regen-web/issues/2269)) ([56dadef](https://github.com/regen-network/regen-web/commit/56dadefa36be87df870d0c12fb0703b4d412cd65))
+- link to view profile ([#2280](https://github.com/regen-network/regen-web/issues/2280)) ([758dece](https://github.com/regen-network/regen-web/commit/758dece2d4ef1bc258769998b90c200f9bbe9b59))
+- navigate to profile page on back click on mobile ([#2274](https://github.com/regen-network/regen-web/issues/2274)) ([3c8b84b](https://github.com/regen-network/regen-web/commit/3c8b84b6e7ecca39c9d63270a28eb2a979501c58))
+- persist projects filters ([#2215](https://github.com/regen-network/regen-web/issues/2215)) ([1f7edd4](https://github.com/regen-network/regen-web/commit/1f7edd4e17095311c1d70fdeadc7a40b7e51caa0))
+- QR code not displayed on first attempt to connect via Wallet Connect on desktop / chromium browsers ([#2279](https://github.com/regen-network/regen-web/issues/2279)) ([69b330a](https://github.com/regen-network/regen-web/commit/69b330a7124b64a49d3ffdd12176126f9c231de5))
+- refetch current account projects after project published ([#2270](https://github.com/regen-network/regen-web/issues/2270)) ([9b6a67e](https://github.com/regen-network/regen-web/commit/9b6a67e7a25e6a7c4e404ea41ada7150dc452d3b))
+- replay http requests with expired CSRF token ([#2245](https://github.com/regen-network/regen-web/issues/2245)) ([b1f8842](https://github.com/regen-network/regen-web/commit/b1f8842f1f5ba3fede671a38450a3831267dd264))
+- UI issues on account settings page ([#2230](https://github.com/regen-network/regen-web/issues/2230)) ([ba2e6b2](https://github.com/regen-network/regen-web/commit/ba2e6b275bde7b2bc6a35d98ff9710d3aa6c2393))
+- updates for jaguar pilot ([#2239](https://github.com/regen-network/regen-web/issues/2239)) ([e280d3a](https://github.com/regen-network/regen-web/commit/e280d3a7e88ea9045ed861bc57d438df35bdb107))
+- useCallback to define retryCsrfRequest to avoid infinite loop ([#2259](https://github.com/regen-network/regen-web/issues/2259)) ([8e84d3e](https://github.com/regen-network/regen-web/commit/8e84d3ef34d2b33214338b3c34d0d618f5327332))
+
+### Features
+
+- add and switch accounts ([#2220](https://github.com/regen-network/regen-web/issues/2220)) ([508a8d9](https://github.com/regen-network/regen-web/commit/508a8d9aadebefe61af1a14ede7c0ad477b9f5b6))
+- add buy button for Sharamentsa pilot ([05a8b02](https://github.com/regen-network/regen-web/commit/05a8b0217d6617552bff37720b0d72e7be553020))
+- add email address and social login options to login popup ([#2172](https://github.com/regen-network/regen-web/issues/2172)) ([7640245](https://github.com/regen-network/regen-web/commit/7640245c6b18eda14e9557dc5a152c5eedfc4181))
+- add email from settings for web3 account ([#2229](https://github.com/regen-network/regen-web/issues/2229)) ([c3b7aae](https://github.com/regen-network/regen-web/commit/c3b7aae82d8748740cfc0c43cbfb16a25fd2add9))
+- add new post form ([#2251](https://github.com/regen-network/regen-web/issues/2251)) ([1890e12](https://github.com/regen-network/regen-web/commit/1890e12234a192fa420a4432cddb094ad114d277))
+- add pinnedIds to useProjectsWithOrders ([#2191](https://github.com/regen-network/regen-web/issues/2191)) ([92d23c9](https://github.com/regen-network/regen-web/commit/92d23c97886ea7e3f541248f898c87b8743ecd17))
+- add secondary button to EcologicalCreditCard ([#2237](https://github.com/regen-network/regen-web/issues/2237)) ([6966caa](https://github.com/regen-network/regen-web/commit/6966caafc22795e5588d0c28e725f954a0613766))
+- add timer to resend passcode action ([#2222](https://github.com/regen-network/regen-web/issues/2222)) ([83d2391](https://github.com/regen-network/regen-web/commit/83d2391c67a9f559751cc3841270ba0adb1b0156))
+- adjust front-end based on web2 login server updates ([#2198](https://github.com/regen-network/regen-web/issues/2198)) ([03e65b6](https://github.com/regen-network/regen-web/commit/03e65b6244c24577443bf08a07995331ecd77df3))
+- change schedule call link ([#2200](https://github.com/regen-network/regen-web/issues/2200)) ([d3f8572](https://github.com/regen-network/regen-web/commit/d3f8572c3ab732f4518946cd011c1a08ccf4b7a1))
+- connect wallet to web2 account on action ([#2219](https://github.com/regen-network/regen-web/issues/2219)) ([06bffa7](https://github.com/regen-network/regen-web/commit/06bffa72b8c4a56d20707ac0a632765c9624ac81))
+- connect/disconnect to/from google ([#2221](https://github.com/regen-network/regen-web/issues/2221)) ([fd541ad](https://github.com/regen-network/regen-web/commit/fd541ad533f1a5efe651f8adafe7326e380b7ab6))
+- display credit class cards on account and profile ([#2181](https://github.com/regen-network/regen-web/issues/2181)) ([96d8025](https://github.com/regen-network/regen-web/commit/96d80257ff62addb476954676f28a82ddcb414fd))
+- edit file form UI ([#2257](https://github.com/regen-network/regen-web/issues/2257)) ([6aea52d](https://github.com/regen-network/regen-web/commit/6aea52d392117935b506c169a0c663c4f27ae359))
+- switch wallet warning modal ([#2227](https://github.com/regen-network/regen-web/issues/2227)) ([3935271](https://github.com/regen-network/regen-web/commit/393527106722148320048a9d85d13358afe4e2f6))
+- update create/edit project forms to handle projects without credit class ([#2178](https://github.com/regen-network/regen-web/issues/2178)) ([4a731ed](https://github.com/regen-network/regen-web/commit/4a731ed3b506fef6d3f53ad3bee3d2e121308610))
+- wire email confirmation code ([#2218](https://github.com/regen-network/regen-web/issues/2218)) ([e1f1135](https://github.com/regen-network/regen-web/commit/e1f1135cf8e19b8f548c08233198a6a5af7e054f))
+
 # [1.15.0](https://github.com/regen-network/regen-web/compare/v1.14.1...v1.15.0) (2023-12-20)
 
 ### Features

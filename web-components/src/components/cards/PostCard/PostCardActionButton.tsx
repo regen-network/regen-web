@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Box, Grid, IconButton, Menu, MenuItem } from '@mui/material';
+import { IconButton, Menu } from '@mui/material';
 
 import { HorizontalDotsIcon } from '../../icons/HorizontalDotsIcon';
 import ShareIcon from '../../icons/ShareIcon';
@@ -10,18 +10,13 @@ const ActionButton = ({
   onClick,
 }: {
   isAdmin?: boolean;
-  adminMenuItems?: JSX.Element;
+  adminMenuItems?: JSX.Element[];
   onClick?: (ev: React.MouseEvent<HTMLButtonElement>) => void;
 }): JSX.Element => {
   const menuAnchor = useRef<HTMLButtonElement | null>(null);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const isOpen = Boolean(anchorEl);
-  // const clickHandler = () => {
-  //   console.log('click handler');
-  //   isAdmin && setAnchorEl(anchorEl);
-  // };
   const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
-    // setAnchorEl(menuAnchor.current);
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
@@ -31,7 +26,7 @@ const ActionButton = ({
   return (
     <React.Fragment>
       <IconButton
-        sx={{
+        sx={theme => ({
           position: 'absolute',
           top: theme => [0, theme.spacing(3)],
           right: theme => [0, theme.spacing(3)],
@@ -42,9 +37,12 @@ const ActionButton = ({
           boxShadow: theme => theme.shadows[1],
           height: '44px',
           width: '44px',
-        }}
+          '&:hover': {
+            backgroundColor: 'rgba(0, 0, 0, 0.6)',
+          },
+        })}
         ref={menuAnchor}
-        onClick={isAdmin ? onClick : handleOpen}
+        onClick={isAdmin ? handleOpen : onClick}
       >
         {isAdmin ? (
           <HorizontalDotsIcon

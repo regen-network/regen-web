@@ -17,8 +17,7 @@ function WhitepaperIcon({
   color,
   onMouseEnter,
   onMouseLeave,
-  sx,
-}: Props & { sx?: SxProps<Theme> }): JSX.Element {
+}: Props): JSX.Element {
   const { classes, cx } = useStyles();
 
   return (
@@ -29,7 +28,6 @@ function WhitepaperIcon({
       xmlns="http://www.w3.org/2000/svg"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      sx={sx}
     >
       <path
         fillRule="evenodd"

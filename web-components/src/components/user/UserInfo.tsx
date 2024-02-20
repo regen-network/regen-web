@@ -42,7 +42,6 @@ export default function UserInfo({
   border = true,
   titleComponent = 'title',
   sx = [],
-  avatarSx = [],
   nameHasPadding = true,
 }: UserInfoProps): JSX.Element {
   const sizeVariant = getSizeVariant(size);

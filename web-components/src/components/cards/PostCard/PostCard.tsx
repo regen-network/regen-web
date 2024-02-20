@@ -5,20 +5,16 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { AbsoluteCenter, theme } from '@chakra-ui/react';
-import { Brightness1 } from '@mui/icons-material';
 import { Box, Button, Grid, IconButton, Menu, MenuItem } from '@mui/material';
 import { DefaultTheme as Theme } from '@mui/styles';
 import { makeStyles } from 'tss-react/mui';
 
-import DocumentIcon from '../../icons/DocumentIcon';
 import LockIcon from '../../icons/LockIcon';
 import VerifiedIcon from '../../icons/VerifiedIcon';
 import WhitepaperIcon from '../../icons/WhitepaperIcon';
-// import { formatDate } from '../../utils/format';
 import { Image, OptimizeImageProps } from '../../image';
 import StaticMap from '../../map/StaticMap';
-import { Body, Label, Subtitle } from '../../typography';
+import { Body, Subtitle } from '../../typography';
 import UserInfo, { User } from '../../user/UserInfo';
 import Card from '../Card';
 import ActionButton from './PostCardActionButton';
@@ -59,7 +55,7 @@ interface PostCardProps extends OptimizeImageProps {
   isAdmin?: boolean;
   numberOfFiles?: number;
   handleClickFile?: (ev: React.MouseEvent) => void;
-  adminMenuItems?: JSX.Element;
+  adminMenuItems?: JSX.Element[];
   handleClickShare?: (ev: React.MouseEvent) => void;
 }
 
@@ -67,8 +63,10 @@ const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     backgroundColor: theme.palette.grey['200'],
   },
-  image: {},
-  chip: {},
+  image: {
+    height: '100%',
+    width: '100%',
+  },
   description: {
     lineClamp: 2,
     WebkitLineClamp: 2,
@@ -77,9 +75,8 @@ const useStyles = makeStyles()((theme: Theme) => ({
     overflow: 'hidden',
   },
   fileIcon: {
-    // height: '24px !important',
-    // width: '24px !important',
-    // ml: theme => theme.spacing(1),
+    height: '24px !important',
+    width: '24px !important',
     ml: '1rem',
   },
 }));
@@ -103,7 +100,6 @@ const NameWithRoleAndTimestamp = ({
 }): JSX.Element => (
   <Box
     sx={{
-      // mt: -2
       ml: 3,
     }}
   >
@@ -113,7 +109,6 @@ const NameWithRoleAndTimestamp = ({
       </Subtitle>
       <Box
         borderRadius={1}
-        // className={classes.chip}
         sx={{
           px: 1.5,
           py: 0.5,
@@ -182,9 +177,11 @@ export default function PostCard({
 
   return (
     <Card className={classes.root} sx={{ p: [4, 8] }} borderRadius="10px">
-      {/* TODO: share icon should be ... for admin */}
-      {/* TODO: share/edit button link */}
-      <ActionButton isAdmin={isAdmin} adminMenuItems={adminMenuItems} />
+      <ActionButton
+        isAdmin={isAdmin}
+        adminMenuItems={adminMenuItems}
+        onClick={handleClickShare}
+      />
       <Grid
         container
         sx={{ flexWrap: ['wrap-reverse', 'nowrap'], position: 'relative' }}
@@ -193,8 +190,6 @@ export default function PostCard({
           <Subtitle size="xl" mb={2.75}>
             {title}
           </Subtitle>
-
-          {/* TODO: resolve size issue with UserInfo */}
           <UserInfo
             size="md"
             user={authorWithNameRaw}
@@ -234,12 +229,6 @@ export default function PostCard({
                   ml: 1,
                 }}
                 nameHasPadding={false}
-                // avatarSx={theme => ({
-                //   // height: theme.spacing(1),
-                //   // width: theme.spacing(1),
-                //   height: '12px',
-                //   width: '12px',
-                // })}
               />
             </Box>
           )}
@@ -303,7 +292,6 @@ export default function PostCard({
                 />
               )
             )}
-            {/* TODO: number of files indicator */}
             {numberOfFiles && (
               <Box
                 sx={{
@@ -314,6 +302,7 @@ export default function PostCard({
                   display: 'flex',
                   alignItems: 'center',
                   color: theme => theme.palette.primary.main,
+                  boxShadow: theme => theme.shadows[1],
                 }}
               >
                 <Button
@@ -325,24 +314,14 @@ export default function PostCard({
                     minWidth: 0,
                   }}
                 >
-                  <Subtitle size="sm" color="white">
+                  <Subtitle
+                    size="sm"
+                    color="white"
+                    sx={{ boxShadow: theme => theme.shadows[1] }}
+                  >
                     {numberOfFiles}
                   </Subtitle>
-                  {/* <DocumentIcon
-                  sx={{
-                    fileType="light",
-                    ml: theme => theme.spacing(1),
-                  }}
-                /> */}
-                  <WhitepaperIcon
-                    sx={{
-                      height: '24px !important',
-                      width: '24px !important',
-                      // ml: theme => theme.spacing(1),
-                      ml: '0.5rem',
-                    }}
-                    className={classes.fileIcon}
-                  />
+                  <WhitepaperIcon className={classes.fileIcon} />
                 </Button>
               </Box>
             )}

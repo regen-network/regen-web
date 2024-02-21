@@ -25,7 +25,7 @@ import useBuySellOrderSubmit from 'pages/Marketplace/Storefront/hooks/useBuySell
 import { useCheckSellOrderAvailabilty } from 'pages/Marketplace/Storefront/hooks/useCheckSellOrderAvailabilty';
 import { VIEW_ECOCREDITS } from 'pages/Projects/AllProjects/AllProjects.config';
 import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
-import { normalizeToUISellOrderInfo } from 'pages/Projects/AllProjects/hooks/useProjectsSellOrders.utils';
+import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { Link } from 'components/atoms';
 import { BuyCreditsModal, BuyCreditsValues } from 'components/organisms';
 import { BuyModalOptions } from 'components/organisms/BuyModalOptions/BuyModalOptions';

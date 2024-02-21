@@ -23,7 +23,7 @@ import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/g
 
 import { useFetchSellOrders } from 'features/marketplace/BuySellOrderFlow/hooks/useFetchSellOrders';
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
-import { normalizeToUISellOrderInfo } from 'pages/Projects/AllProjects/hooks/useProjectsSellOrders.utils';
+import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 

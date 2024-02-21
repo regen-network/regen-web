@@ -6,7 +6,7 @@ import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.typ
 import {
   getPurchaseInfo,
   normalizeToUISellOrderInfo,
-} from 'pages/Projects/AllProjects/hooks/useProjectsSellOrders.utils';
+} from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 

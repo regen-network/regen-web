@@ -67,6 +67,9 @@ const LoginPage = lazy(() => import('./pages/Login'));
 const Media = lazy(() => import('./pages/Media'));
 const MethodologyDetails = lazy(() => import('./pages/MethodologyDetails'));
 const NotFoundPage = lazy(() => import('./pages/NotFound'));
+const PrefinanceProjects = lazy(
+  () => import('./pages/Projects/PrefinanceProjects'),
+);
 const Project = lazy(() => import('./pages/Project'));
 const Projects = lazy(() => import('./pages/Projects'));
 const ProjectCreate = lazy(() => import('./pages/ProjectCreate'));
@@ -142,7 +145,7 @@ export const getRoutes = ({
           element={<Navigate to="/" replace />}
         />
         <Route path="projects" element={<Projects />}>
-          {/* <Route index element={<Navigate to="1" />} /> */}
+          <Route index element={<Navigate to="1" />} />
           <Route
             path=":page"
             element={<AllProjects />}
@@ -150,6 +153,7 @@ export const getRoutes = ({
               queryClient: reactQueryClient,
             })}
           />
+          <Route path="prefinance" element={<PrefinanceProjects />} />
         </Route>
         <Route
           path="project/:projectId"

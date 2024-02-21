@@ -19,12 +19,12 @@ import { getAllSanityPrefinanceProjectsQuery } from 'lib/queries/react-query/san
 import { useWallet } from 'lib/wallet/wallet';
 
 import { UNREGISTERED_PATH } from 'pages/Projects/AllProjects/AllProjects.constants';
-import { useFetchAllOffChainProjects } from 'pages/Projects/AllProjects/hooks/useOffChainProjects';
-import { ProjectsSellOrders } from 'pages/Projects/AllProjects/hooks/useProjectsSellOrders.types';
 import {
   sortPinnedProject,
   sortProjects,
 } from 'pages/Projects/AllProjects/utils/sortProjects';
+import { useFetchAllOffChainProjects } from 'pages/Projects/hooks/useOffChainProjects';
+import { ProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders.types';
 import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 
 import { useLastRandomProjects } from './useLastRandomProjects';

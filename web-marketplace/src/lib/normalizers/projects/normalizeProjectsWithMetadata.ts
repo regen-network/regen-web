@@ -16,7 +16,7 @@ import {
 } from 'lib/db/types/json-ld';
 
 import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
-import { getPriceToDisplay } from 'pages/Projects/AllProjects/hooks/useProjectsSellOrders.utils';
+import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { getDisplayAccount } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 interface NormalizeProjectsWithOrderDataParams {

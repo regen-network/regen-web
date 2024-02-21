@@ -3,7 +3,7 @@ import { getClassImageWithGreenDefault } from 'utils/image/classImage';
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 
-import { getPurchaseInfo } from 'pages/Projects/AllProjects/hooks/useProjectsSellOrders.utils';
+import { getPurchaseInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 import {

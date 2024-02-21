@@ -1,4 +1,4 @@
-import { ProjectWithOrderData } from '../AllProjects.types';
+import { ProjectWithOrderData } from '../AllProjects/AllProjects.types';
 
 export interface ProjectsSellOrders {
   allProjects: ProjectWithOrderData[];

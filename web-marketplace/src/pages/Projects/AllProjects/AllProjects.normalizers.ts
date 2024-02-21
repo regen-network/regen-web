@@ -1,8 +1,11 @@
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { SKIPPED_CLASS_ID } from 'lib/env';
 
-import { CreditClassWithMedata } from './hooks/useFetchCreditClasses';
-import { UNREGISTERED_PATH, UNREGISTERED_PROJECTS } from './AllProjects.constants';
+import { CreditClassWithMedata } from '../hooks/useFetchCreditClasses';
+import {
+  UNREGISTERED_PATH,
+  UNREGISTERED_PROJECTS,
+} from './AllProjects.constants';
 import { CreditClassFilter, ProjectWithOrderData } from './AllProjects.types';
 
 type NormalizeCreditClassesFilterParams = {

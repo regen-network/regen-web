@@ -1,6 +1,6 @@
 import { useProjectsWithOrders } from 'hooks/projects/useProjectsWithOrders';
 
-import { PROJECTS_PER_PAGE } from '../AllProjects.config';
+import { PROJECTS_PER_PAGE } from '../AllProjects/AllProjects.config';
 
 type Props = {
   sort: string;
@@ -24,6 +24,7 @@ export const useProjects = ({
     loading,
     hasCommunityProjects,
     prefinanceProjectsCount,
+    prefinanceProjects,
   } = useProjectsWithOrders({
     limit: PROJECTS_PER_PAGE,
     offset,
@@ -44,5 +45,6 @@ export const useProjects = ({
     loading,
     hasCommunityProjects,
     prefinanceProjectsCount,
+    prefinanceProjects,
   };
 };

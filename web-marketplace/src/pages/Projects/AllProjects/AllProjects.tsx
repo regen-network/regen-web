@@ -27,6 +27,8 @@ import { useTracker } from 'lib/tracker/useTracker';
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 
+import { useFetchCreditClasses } from '../hooks/useFetchCreditClasses';
+import { useProjects } from '../hooks/useProjects';
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
@@ -40,8 +42,6 @@ import {
 import { normalizeCreditClassFilters } from './AllProjects.normalizers';
 import { SideFilter } from './AllProjects.SideFilter';
 import { ProjectWithOrderData } from './AllProjects.types';
-import { useFetchCreditClasses } from './hooks/useFetchCreditClasses';
-import { useProjects } from './hooks/useProjects';
 import { getCreditsTooltip } from './utils/getCreditsTooltip';
 import { getIsSoldOut } from './utils/getIsSoldOut';
 
@@ -163,7 +163,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
             showFiltersReset={showFiltersReset}
             resetFilter={resetFilter}
             sx={{
-              mb: { xs: 6.25, lg: 0 },
+              mb: { xs: 3.75, lg: 0 },
               mr: { xs: 0, lg: 7.5 },
               width: { xs: '100%', lg: 'auto' },
             }}

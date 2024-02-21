@@ -17,7 +17,7 @@ import { client as sanityClient } from 'lib/clients/sanity';
 import { Link } from 'components/atoms';
 import { GettingStartedResourcesSection } from 'components/molecules';
 
-import { useProjects } from './AllProjects/hooks/useProjects';
+import { useProjects } from './hooks/useProjects';
 
 const Projects = (): JSX.Element => {
   const location = useLocation();
@@ -25,11 +25,12 @@ const Projects = (): JSX.Element => {
   const [sort] = useAtom(projectsSortAtom);
   const [creditClassSelectedFilters] = useAtom(creditClassSelectedFiltersAtom);
 
-  const { prefinanceProjectsCount, projectsCount } = useProjects({
-    sort,
-    useCommunityProjects,
-    creditClassFilter: creditClassSelectedFilters,
-  });
+  const { prefinanceProjectsCount, projectsCount, prefinanceProjects } =
+    useProjects({
+      sort,
+      useCommunityProjects,
+      creditClassFilter: creditClassSelectedFilters,
+    });
 
   const tabs: IconTabProps[] = useMemo(
     () => [
@@ -73,9 +74,12 @@ const Projects = (): JSX.Element => {
     sanityProjectsPageData?.allProjectsPage?.[0]
       ?.gettingStartedResourcesSection;
 
+  const prefinanceProjectsContent =
+    sanityProjectsPageData?.allProjectsPage?.[0]?.prefinanceProjects;
+
   return (
     <>
-      <div className="bg-grey-100 pt-25 sm:pt-40 px-15 sm:25">
+      <div className="bg-grey-100 pt-25 sm:pt-40 px-15 sm:25 pb-[80px] sm:pb-[100px]">
         <div className="max-w-[1400px] m-auto grid grid-cols-[repeat(auto-fit,minmax(300px,400px))] gap-[18px] justify-center">
           <IconTabs
             className="col-[1/-1]"
@@ -86,7 +90,7 @@ const Projects = (): JSX.Element => {
             mobileFullWidth
           />
 
-          <Outlet />
+          <Outlet context={{ prefinanceProjects, prefinanceProjectsContent }} />
         </div>
       </div>
       {gettingStartedResourcesSection && (

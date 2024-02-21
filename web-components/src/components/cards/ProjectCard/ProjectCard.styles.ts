@@ -100,8 +100,4 @@ export const useProjectCardStyles = makeStyles()((theme: Theme) => ({
   purchaseDetails: {
     paddingTop: theme.spacing(2),
   },
-  prefinancing: {
-    background:
-      'linear-gradient(179deg, #515D89 19.77%, #7DC9BF 114.05%, #FAEBD1 200.67%)',
-  },
 }));

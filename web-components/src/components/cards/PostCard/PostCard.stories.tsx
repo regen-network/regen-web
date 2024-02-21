@@ -38,8 +38,8 @@ export const Public: Story = {
     author: user,
     authorRole: 'admin',
     timestamp: '2022-01-31T12:34:56Z',
-    // signer: signer,
     isPrivate: false,
+    isAdmin: false,
     handleClickShare: () => {
       console.log('handle share click');
     },
@@ -65,11 +65,13 @@ export const Private: Story = {
     author: user,
     authorRole: 'admin',
     timestamp: '2022-01-31T12:34:56Z',
-    // signer: signer,
     isPrivate: true,
     numberOfFiles: 5,
     isAdmin: true,
     adminMenuItems: adminMenuItems,
+    handleClickFile: () => {
+      console.log('handle file click');
+    },
   },
   render: args => <PostCard {...args} signer={signer} />,
 };

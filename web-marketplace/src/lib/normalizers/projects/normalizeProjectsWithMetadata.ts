@@ -47,7 +47,6 @@ export const normalizeProjectsWithMetadata = ({
       const prefinanceProject = prefinanceProjectsData?.allProject?.find(
         project =>
           project.projectId === projectWithOrderData.offChainId ||
-          project.projectId === projectWithOrderData.id || // on-chain id
           project.projectId === projectWithOrderData.slug,
       );
 

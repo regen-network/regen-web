@@ -23,12 +23,14 @@ export const useProjects = ({
     projectsCount,
     loading,
     hasCommunityProjects,
+    prefinanceProjectsCount,
   } = useProjectsWithOrders({
     limit: PROJECTS_PER_PAGE,
     offset,
     sort,
     useCommunityProjects,
     creditClassFilter,
+    separatePrefinanceProjects: true,
   });
 
   const pagesCount = Math.ceil((projectsCount ?? 0) / PROJECTS_PER_PAGE);
@@ -41,5 +43,6 @@ export const useProjects = ({
     pagesCount,
     loading,
     hasCommunityProjects,
+    prefinanceProjectsCount,
   };
 };

@@ -68,7 +68,7 @@ const Media = lazy(() => import('./pages/Media'));
 const MethodologyDetails = lazy(() => import('./pages/MethodologyDetails'));
 const NotFoundPage = lazy(() => import('./pages/NotFound'));
 const Project = lazy(() => import('./pages/Project'));
-const Projects = lazy(() => import('./pages/Projects/AllProjects'));
+const Projects = lazy(() => import('./pages/Projects'));
 const ProjectCreate = lazy(() => import('./pages/ProjectCreate'));
 const ProjectFinished = lazy(() => import('./pages/ProjectFinished'));
 const ProjectLocation = lazy(() => import('./pages/ProjectLocation'));
@@ -142,7 +142,7 @@ export const getRoutes = ({
           element={<Navigate to="/" replace />}
         />
         <Route path="projects" element={<Projects />}>
-          <Route index element={<Navigate to="1" />} />
+          {/* <Route index element={<Navigate to="1" />} /> */}
           <Route
             path=":page"
             element={<AllProjects />}

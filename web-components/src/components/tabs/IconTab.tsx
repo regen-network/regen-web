@@ -59,9 +59,13 @@ const IconTab = ({
       size={size}
       sx={sxs?.innerContainer}
       label={
-        <Subtitle size={size} sx={{ ml: 1, ...sxs?.inner }}>
-          {label}
-        </Subtitle>
+        typeof label === 'string' ? (
+          <Subtitle size={size} sx={{ ml: 1, ...sxs?.inner }}>
+            {label}
+          </Subtitle>
+        ) : (
+          label
+        )
       }
       {...props}
     >

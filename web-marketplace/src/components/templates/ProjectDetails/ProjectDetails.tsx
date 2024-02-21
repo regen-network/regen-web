@@ -13,6 +13,7 @@ import { PrefinanceIcon } from 'web-components/src/components/icons/PrefinanceIc
 import { Gallery } from 'web-components/src/components/organisms/Gallery/Gallery';
 import SEO from 'web-components/src/components/seo';
 import ProjectMedia from 'web-components/src/components/sliders/ProjectMedia';
+import { Label } from 'web-components/src/components/typography';
 
 import { Project } from 'generated/graphql';
 import { Maybe } from 'graphql/jsutils/Maybe';
@@ -45,6 +46,7 @@ import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellO
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
+import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { Link } from 'components/atoms';
 import { DetailsSection } from 'components/organisms/DetailsSection/DetailsSection';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
@@ -78,7 +80,6 @@ import {
   parseOffChainProject,
 } from './ProjectDetails.utils';
 import { ProjectDetailsTableTabs } from './tables/ProjectDetails.TableTabs';
-import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 
 function ProjectDetails(): JSX.Element {
   const theme = useTheme();
@@ -361,6 +362,7 @@ function ProjectDetails(): JSX.Element {
             imageStorageBaseUrl={mediaData.imageStorageBaseUrl}
             imageCredits={mediaData.imageCredits}
             mobileHeight={theme.spacing(78.75)}
+            isPrefinanceProject={projectPrefinancing?.isPrefinanceProject}
           />
         </Box>
       )}

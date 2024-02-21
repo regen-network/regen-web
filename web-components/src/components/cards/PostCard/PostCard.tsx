@@ -1,15 +1,9 @@
-import React, {
-  createContext,
-  ReactElement,
-  ReactNode,
-  useRef,
-  useState,
-} from 'react';
-import { Box, Button, Grid, IconButton, Menu, MenuItem } from '@mui/material';
+import React from 'react';
+import { Box, Button, Grid } from '@mui/material';
 import { DefaultTheme as Theme } from '@mui/styles';
 import { makeStyles } from 'tss-react/mui';
 
-import LockIcon from '../../icons/LockIcon';
+import { LockIcon } from '../../icons/LockIcon';
 import VerifiedIcon from '../../icons/VerifiedIcon';
 import WhitepaperIcon from '../../icons/WhitepaperIcon';
 import { Image, OptimizeImageProps } from '../../image';
@@ -66,6 +60,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
   image: {
     height: '100%',
     width: '100%',
+    objectFit: 'cover',
   },
   description: {
     lineClamp: 2,
@@ -243,7 +238,10 @@ export default function PostCard({
         >
           <Box
             sx={theme => ({
-              height: theme => ({ sm: '100%', xs: theme.spacing(49.25) }),
+              height: theme => ({
+                sm: theme.spacing(51),
+                xs: theme.spacing(49.25),
+              }),
               border: `1px solid ${theme.palette.grey[100]}`,
               borderRadius: '10px',
               overflow: 'hidden',
@@ -264,11 +262,11 @@ export default function PostCard({
                 }}
               >
                 <LockIcon
-                  sx={{
+                  sx={theme => ({
                     color: theme => theme.palette.primary.contrastText,
                     height: '18px',
                     width: '18px',
-                  }}
+                  })}
                 />
                 <Subtitle size="sm" sx={{ pl: 1 }}>
                   Post is private

@@ -8,7 +8,6 @@ export default function ShareIcon({
   sx,
   ...props
 }: ShareIconProps): JSX.Element {
-  // TODO: review implementation, looks like default color was supposed to be used but it's being ignored
   const defaultColor = '#4FB573';
   return (
     <SvgIcon

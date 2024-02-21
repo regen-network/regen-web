@@ -32,7 +32,6 @@ interface UserInfoProps {
   border?: boolean;
   sx?: SxProps<Theme>;
   nameHasPadding?: boolean;
-  // avatarSx?: SxProps<Theme>;
 }
 export default function UserInfo({
   user,
@@ -80,7 +79,6 @@ export default function UserInfo({
           size={size}
           border={border}
           icon={user.image}
-          // sx={avatarSx}
         />
       </Grid>
       <Grid

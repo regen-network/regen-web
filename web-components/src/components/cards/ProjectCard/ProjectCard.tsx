@@ -140,7 +140,7 @@ export function ProjectCard({
         />
       </div>
       {isPrefinanceProject && (
-        <div className="bg-[linear-gradient(179deg,#515D89_19.77%,#7DC9BF_114.05%,#FAEBD1_200.67%)] rounded-r-[5px] flex items-center justify-center px-10 py-[3px] text-grey-0 absolute top-20 left-0">
+        <div className="bg-purple-gradient rounded-r-[5px] flex items-center justify-center px-10 py-[3px] text-grey-0 absolute top-20 left-0">
           <PrefinanceIcon />
           <Label
             className="pl-10 font-extrabold uppercase"

@@ -68,7 +68,11 @@ module.exports = {
       50: '3.125rem', // 50px
       60: '3.75rem', // 60px
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'purple-gradient': "linear-gradient(179deg,#515D89 19.77%,#7DC9BF 114.05%,#FAEBD1 200.67%)",
+      }
+    },
   },
   plugins: [],
   corePlugins: {

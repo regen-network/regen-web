@@ -143,7 +143,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
   };
 
   if (isSanityCreditClassesLoading || isCreditClassesWithMetadataLoading)
-    return <Loading />;
+    return <Loading sx={{ gridColumn: '1 / -1' }} />;
 
   return (
     <>

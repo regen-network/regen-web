@@ -23,6 +23,8 @@ export function getSizeVariants(
 }
 export function getMobileSize(size: TextSize): TextSize {
   switch (size) {
+    case 'xxs':
+      return 'xxs';
     case 'xs':
       return 'xs';
     case 'sm':

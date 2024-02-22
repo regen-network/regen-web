@@ -126,9 +126,9 @@ export const Prefinance = ({ projectPrefinancing }: Props) => {
             {SUPPORT_ENABLES}
           </Title>
           {supportEnables?.map((item, i) => (
-            <div key={i}>
-              <Body size="md" mobileSize="md" className="pt-10">
-                <SuccessIcon className="text-brand-400 w-[16px] h-[16px] mr-5 sm:mr-10" />
+            <div className="flex pt-10" key={i}>
+              <SuccessIcon className="text-brand-400 w-[16px] h-[16px] mr-5 sm:mr-10 mt-3" />
+              <Body size="md" mobileSize="md">
                 {item}
               </Body>
             </div>

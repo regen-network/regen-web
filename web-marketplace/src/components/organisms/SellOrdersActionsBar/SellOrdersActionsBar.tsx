@@ -72,7 +72,9 @@ export const SellOrdersActionsBar = ({
             sx={{
               display: 'flex',
               flexDirection: 'column',
+              justifyContent: 'space-between',
               mr: { xs: 2, sm: 5 },
+              py: { xs: 1, sm: 1.25 },
             }}
           >
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -94,7 +96,13 @@ export const SellOrdersActionsBar = ({
           <OutlinedButton
             onClick={onBookCallButtonClick}
             size={isMobile ? 'small' : 'medium'}
-            sx={{ mr: { xs: 2, sm: 5 } }}
+            sx={{
+              mr: { xs: 2, sm: 5 },
+              display: {
+                xs: isPrefinanceProject ? 'none' : 'block',
+                sm: 'block',
+              },
+            }}
             className={isPrefinanceProject ? PREFINANCE_BUTTON.className : ''}
           >
             {BOOK_CALL}

@@ -34,7 +34,8 @@ export const ProjectTopSectionCreditClassCard: React.FC<Props> = ({
   methodology,
   program,
 }) =>
-  creditClassSanity || creditClassMetadata ? (
+  (creditClassSanity || creditClassMetadata) &&
+  (creditClassSanity?.path || onChainCreditClassId) ? (
     <Link
       href={`/credit-classes/${
         creditClassSanity?.path || onChainCreditClassId

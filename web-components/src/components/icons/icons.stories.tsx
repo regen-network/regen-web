@@ -45,6 +45,7 @@ import ErrorIcon from './ErrorIcon';
 import EyeIcon from './EyeIcon';
 import FarmerIcon from './FarmerIcon';
 import FilterIcon from './FilterIcon';
+import { GreenPinIcon } from './GreenPinIcon';
 import { HorizontalDotsIcon } from './HorizontalDotsIcon';
 import InfoIcon from './InfoIcon';
 import InfoIconOutlined from './InfoIconOutlined';
@@ -253,6 +254,7 @@ export const allIcons = (): JSX.Element => (
       icon={<FilterIcon sx={{ color: 'secondary.dark' }} />}
       label="FilterIcon"
     />
+    <LabeledIcon icon={<GreenPinIcon />} label="GreenPinIcon" />
     <LabeledIcon icon={<GithubIcon color="grey" />} label="GithubIcon" />
     <LabeledIcon icon={<GravUsdcIcon />} label="GravUsdcIcon" />
     <LabeledIcon icon={<HorizontalDotsIcon />} label="HorizontalDotsIcon" />

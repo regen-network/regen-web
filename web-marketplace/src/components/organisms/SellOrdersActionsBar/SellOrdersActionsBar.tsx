@@ -57,7 +57,7 @@ export const SellOrdersActionsBar = ({
   const { track } = useTracker();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  console.log(prefinancePrice);
+
   return (
     <StickyBar>
       <Box

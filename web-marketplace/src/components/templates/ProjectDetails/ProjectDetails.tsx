@@ -443,6 +443,7 @@ function ProjectDetails(): JSX.Element {
         creditClassMetadata={creditClassMetadata}
         onChainCreditClassId={onChainCreditClassId}
         program={program}
+        projectPrefinancing={projectPrefinancing}
       />
 
       {hasProjectPhotos && <Gallery photos={projectPhotos} sx={{ mb: 25 }} />}

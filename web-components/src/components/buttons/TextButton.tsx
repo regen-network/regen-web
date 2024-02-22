@@ -23,6 +23,7 @@ const LINE_HEIGHTS = {
 interface Props extends ButtonProps {
   textSize?: LabelSize;
   mobileTextSize?: LabelSize;
+  target?: string;
 }
 
 export const TextButton = styled(Button, {

@@ -25,9 +25,9 @@ export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
     return (
       <>
         {prefinanceProjectsContent && (
-          <div className="flex items-center max-w-[696px] col-[1/-1] pt-[7px] sm:pt-[12px] pb-25 sm:pb-30">
+          <div className="flex items-start sm:items-center max-w-[696px] col-[1/-1] pt-[7px] sm:pt-[12px] pb-25 sm:pb-30">
             <img
-              className="pr-15"
+              className="pr-15 w-[75px] h-[75px] sm:w-[122px] sm:h-[122px]"
               src="/svg/prefinancing.svg"
               alt="prefinancing"
             />

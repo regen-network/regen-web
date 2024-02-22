@@ -36,7 +36,7 @@ const Projects = (): JSX.Element => {
     () => [
       {
         label: (
-          <Title variant="h4">
+          <Title variant="h4" mobileVariant="body1">
             All projects{' '}
             <span className="font-medium text-grey-400">({projectsCount})</span>
           </Title>
@@ -46,7 +46,7 @@ const Projects = (): JSX.Element => {
       {
         hidden: !prefinanceProjectsCount,
         label: (
-          <Title variant="h4">
+          <Title variant="h4" mobileVariant="body1">
             Prefinance projects{' '}
             <span className="font-medium text-grey-400">
               ({prefinanceProjectsCount})
@@ -88,6 +88,15 @@ const Projects = (): JSX.Element => {
             activeTab={activeTab}
             linkComponent={Link}
             mobileFullWidth
+            sxs={{
+              tab: {
+                innerContainer: {
+                  '&:first-child': {
+                    marginRight: { sm: 7 },
+                  },
+                },
+              },
+            }}
           />
 
           <Outlet context={{ prefinanceProjects, prefinanceProjectsContent }} />

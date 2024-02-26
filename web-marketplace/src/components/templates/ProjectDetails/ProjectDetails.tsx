@@ -440,7 +440,11 @@ function ProjectDetails(): JSX.Element {
         }}
         otcCard={otcCard}
         creditClassOnChain={creditClassOnChain}
-        creditClassMetadata={creditClassMetadata}
+        creditClassMetadata={
+          creditClassMetadata ||
+          offChainProject?.creditClassByCreditClassId?.creditClassVersionsById
+            ?.nodes?.[0]?.metadata
+        }
         onChainCreditClassId={onChainCreditClassId}
         program={program}
         projectPrefinancing={projectPrefinancing}

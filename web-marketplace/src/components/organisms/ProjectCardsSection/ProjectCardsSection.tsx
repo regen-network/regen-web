@@ -12,7 +12,6 @@ import { useTracker } from 'lib/tracker/useTracker';
 import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 import { getCreditsTooltip } from 'pages/Projects/AllProjects/utils/getCreditsTooltip';
 import { getIsSoldOut } from 'pages/Projects/AllProjects/utils/getIsSoldOut';
-import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import WithLoader from 'components/atoms/WithLoader';
 import BlockContentBody from 'components/molecules/BlockContentBody';
 

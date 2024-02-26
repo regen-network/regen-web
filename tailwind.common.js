@@ -68,7 +68,12 @@ module.exports = {
       50: '3.125rem', // 50px
       60: '3.75rem', // 60px
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'prefinance-gradient': "linear-gradient(24deg, rgba(81, 93, 137, 0.10) 2.82%, rgba(125, 201, 191, 0.10) 23.42%, rgba(250, 235, 209, 0.10) 79.07%)",
+        'purple-gradient': "linear-gradient(179deg,#515D89 19.77%,#7DC9BF 114.05%,#FAEBD1 200.67%)",
+      }
+    },
   },
   plugins: [],
   corePlugins: {

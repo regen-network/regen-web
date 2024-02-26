@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, SxProps, Theme } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 
-import { LabeledNumber } from 'web-components/src/components/text-layouts';
+import { LabeledValue } from 'web-components/src/components/text-layouts';
 
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 
@@ -19,7 +19,7 @@ export const BatchTotalsGrid: React.FC<
     sx={{ justifyContent: 'space-between', ...sx }}
   >
     <GridItem>
-      <LabeledNumber
+      <LabeledValue
         label="Total Credits Issued"
         number={
           +batch.tradableAmount + +batch.retiredAmount + +batch.cancelledAmount
@@ -28,21 +28,21 @@ export const BatchTotalsGrid: React.FC<
       />
     </GridItem>
     <GridItem>
-      <LabeledNumber
+      <LabeledValue
         label="Credits Tradable"
         number={batch.tradableAmount}
         formatNumberOptions={quantityFormatNumberOptions}
       />
     </GridItem>
     <GridItem>
-      <LabeledNumber
+      <LabeledValue
         label="Credits Retired"
         number={batch.retiredAmount}
         formatNumberOptions={quantityFormatNumberOptions}
       />
     </GridItem>
     <GridItem>
-      <LabeledNumber
+      <LabeledValue
         label="Credits Cancelled"
         number={batch.cancelledAmount}
         formatNumberOptions={quantityFormatNumberOptions}

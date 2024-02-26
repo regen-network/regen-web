@@ -1,5 +1,5 @@
 import { LabeledDetail } from './LabeledDetail';
-import { LabeledNumber } from './LabeledNumber';
+import { LabeledValue } from './LabeledValue';
 import { TitleBody } from './TitleBody';
 
 export default {
@@ -16,7 +16,7 @@ export const titleDescription = (): JSX.Element => (
 );
 
 export const labeledNumber = (): JSX.Element => (
-  <LabeledNumber label={'Label'} number={1234} />
+  <LabeledValue label={'Label'} number={1234} />
 );
 
 export const labeledDetail = (): JSX.Element => (

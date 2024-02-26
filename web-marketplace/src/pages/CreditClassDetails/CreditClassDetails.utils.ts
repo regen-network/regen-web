@@ -14,8 +14,8 @@ import {
 import { microToDenom } from 'lib/denom.utils';
 import { getSanityImgSrc } from 'lib/imgSrc';
 
+import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
-import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 import {
   CO_BENEFIT,
   MEASURED_CO_BENEFIT,

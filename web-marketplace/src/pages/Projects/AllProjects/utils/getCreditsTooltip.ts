@@ -1,5 +1,5 @@
-import { NO_CREDITS_TOOLTIP, SOLD_OUT_TOOLTIP } from '../Projects.constants';
-import { ProjectWithOrderData } from '../Projects.types';
+import { NO_CREDITS_TOOLTIP, SOLD_OUT_TOOLTIP } from '../AllProjects.constants';
+import { ProjectWithOrderData } from '../AllProjects.types';
 
 type Params = {
   project?: ProjectWithOrderData;

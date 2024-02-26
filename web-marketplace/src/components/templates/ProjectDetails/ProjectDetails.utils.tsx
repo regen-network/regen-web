@@ -32,11 +32,11 @@ import {
 } from 'lib/db/types/json-ld';
 import { getSanityImgSrc } from 'lib/imgSrc';
 
+import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 import {
   DEFAULT_PROFILE_COMPANY_AVATAR,
   DEFAULT_PROFILE_USER_AVATAR,
 } from 'pages/ProfileEdit/ProfileEdit.constants';
-import { UISellOrderInfo } from 'pages/Projects/Projects.types';
 
 import {
   API_URI,

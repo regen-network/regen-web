@@ -6,7 +6,7 @@ import cx from 'classnames';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
-import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
+import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 import { ProjectCardsSection } from 'components/organisms/ProjectCardsSection/ProjectCardsSection';
 
 import useMoreProjects from './hooks/useMoreProjects';

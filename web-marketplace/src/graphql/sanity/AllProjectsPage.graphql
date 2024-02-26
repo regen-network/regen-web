@@ -3,5 +3,9 @@ query allProjectsPage {
     gettingStartedResourcesSection {
       ...gettingStartedResourcesSectionFields
     }
+    prefinanceProjects {
+      descriptionRaw
+      learnMore
+    }
   }
 }

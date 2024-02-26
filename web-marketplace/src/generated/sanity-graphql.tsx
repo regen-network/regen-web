@@ -8631,6 +8631,9 @@ export type AllProjectsPageQuery = (
     & { gettingStartedResourcesSection?: Maybe<(
       { __typename?: 'GettingStartedResourcesSection' }
       & GettingStartedResourcesSectionFieldsFragment
+    )>, prefinanceProjects?: Maybe<(
+      { __typename?: 'PrefinanceProjects' }
+      & Pick<PrefinanceProjects, 'descriptionRaw' | 'learnMore'>
     )> }
   )> }
 );
@@ -10788,6 +10791,10 @@ export const AllProjectsPageDocument = gql`
   allProjectsPage {
     gettingStartedResourcesSection {
       ...gettingStartedResourcesSectionFields
+    }
+    prefinanceProjects {
+      descriptionRaw
+      learnMore
     }
   }
 }

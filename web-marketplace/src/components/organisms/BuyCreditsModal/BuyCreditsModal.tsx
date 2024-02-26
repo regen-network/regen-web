@@ -40,7 +40,7 @@ import { getBuyModalQuery } from 'lib/queries/react-query/sanity/getBuyModalQuer
 import { Buy2Event } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
-import { UISellOrderInfo } from 'pages/Projects/Projects.types';
+import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 import AgreeErpaCheckbox from 'components/atoms/AgreeErpaCheckbox';
 import { Link as DynamicLink } from 'components/atoms/Link';
 import DenomIcon from 'components/molecules/DenomIcon';

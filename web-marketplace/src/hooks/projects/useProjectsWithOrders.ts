@@ -18,13 +18,13 @@ import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/g
 import { getAllSanityPrefinanceProjectsQuery } from 'lib/queries/react-query/sanity/getAllPrefinanceProjectsQuery/getAllPrefinanceProjectsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { useFetchAllOffChainProjects } from 'pages/Projects/hooks/useOffChainProjects';
-import { ProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders.types';
-import { UNREGISTERED_PATH } from 'pages/Projects/Projects.constants';
+import { UNREGISTERED_PATH } from 'pages/Projects/AllProjects/AllProjects.constants';
 import {
   sortPinnedProject,
   sortProjects,
-} from 'pages/Projects/utils/sortProjects';
+} from 'pages/Projects/AllProjects/utils/sortProjects';
+import { useFetchAllOffChainProjects } from 'pages/Projects/hooks/useOffChainProjects';
+import { ProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders.types';
 import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 
 import { useLastRandomProjects } from './useLastRandomProjects';
@@ -44,6 +44,7 @@ export interface ProjectsWithOrdersProps {
   creditClassFilter?: Record<string, boolean>;
   useOffChainProjects?: boolean;
   enableOffchainProjectsQuery?: boolean;
+  separatePrefinanceProjects?: boolean;
 }
 
 /**
@@ -63,6 +64,7 @@ export function useProjectsWithOrders({
   creditClassFilter = {},
   useOffChainProjects = false,
   enableOffchainProjectsQuery = true,
+  separatePrefinanceProjects = false,
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
   const { ecocreditClient, marketplaceClient, dataClient } = useLedger();
 
@@ -131,6 +133,7 @@ export function useProjectsWithOrders({
     useFetchAllOffChainProjects({
       sanityCreditClassesData: creditClassData,
       enabled: enableOffchainProjectsQuery,
+      prefinanceProjectsData,
     });
 
   /* Normalization/Filtering/Sorting */
@@ -178,7 +181,14 @@ export function useProjectsWithOrders({
   // Merge on-chain and off-chain projects
   const allProject =
     creditClassFilter?.[UNREGISTERED_PATH] || useOffChainProjects
-      ? [...projectsWithOrderDataFiltered, ...allOffChainProjects]
+      ? [
+          ...projectsWithOrderDataFiltered,
+          ...(separatePrefinanceProjects
+            ? allOffChainProjects.filter(
+                project => !project.projectPrefinancing?.isPrefinanceProject,
+              )
+            : allOffChainProjects),
+        ]
       : projectsWithOrderDataFiltered;
 
   // Filter projects by class ID
@@ -259,9 +269,16 @@ export function useProjectsWithOrders({
     classesMetadata,
   });
 
+  const prefinanceProjects = allOffChainProjects.filter(
+    project => project.projectPrefinancing?.isPrefinanceProject,
+  );
+
   return {
     allProjects: projectsWithOrderData,
-    haveOffChainProjects: allOffChainProjects?.length > 0,
+    prefinanceProjects,
+    haveOffChainProjects:
+      allOffChainProjects.length - prefinanceProjects.length > 0,
+    prefinanceProjectsCount: prefinanceProjects.length,
     projectsWithOrderData: projectsWithMetadata,
     projectsCount: projectsFilteredByCreditClass?.length,
     loading:

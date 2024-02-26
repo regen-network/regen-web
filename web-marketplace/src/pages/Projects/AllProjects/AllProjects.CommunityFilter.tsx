@@ -8,9 +8,9 @@ import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoToolt
 import { useCommunityProjectsAtom } from 'lib/atoms/projects.atoms';
 import { useTracker } from 'lib/tracker/useTracker';
 
-import { COMMUNITY_FILTER } from './Projects.constants';
-import { FilterCommunityCreditsEvent } from './Projects.types';
-import { getFilterSelected } from './Projects.utils';
+import { COMMUNITY_FILTER } from './AllProjects.constants';
+import { FilterCommunityCreditsEvent } from './AllProjects.types';
+import { getFilterSelected } from './AllProjects.utils';
 
 type CommunityFilterProps = {
   sx?: SxProps<Theme>;

@@ -7,9 +7,9 @@ import CreditsRetiredIcon from 'web-components/src/components/icons/CreditsRetir
 import CreditsTradeableIcon from 'web-components/src/components/icons/CreditsTradeable';
 import { LabeledValue } from 'web-components/src/components/text-layouts';
 
-import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
-import { getCreditsTooltip } from 'pages/Projects/utils/getCreditsTooltip';
-import { getIsSoldOut } from 'pages/Projects/utils/getIsSoldOut';
+import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
+import { getCreditsTooltip } from 'pages/Projects/AllProjects/utils/getCreditsTooltip';
+import { getIsSoldOut } from 'pages/Projects/AllProjects/utils/getIsSoldOut';
 
 import type { BatchTotalsForProject } from '../../../types/ledger/ecocredit';
 import {

@@ -89,14 +89,13 @@ export const CreditPrice = ({
         </Box>
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, height: 20 }}>
           <Subtitle
             size="xs"
             mobileSize="xxs"
             color="info.main"
             sx={{
               mr: isPrefinanceProject ? 1 : 0,
-              mb: isPrefinanceProject ? 0 : 1,
               fontWeight: 800,
               textTransform: 'uppercase',
             }}

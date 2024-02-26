@@ -3,6 +3,7 @@ import { CircularProgress } from '@mui/material';
 import bbox from '@turf/bbox';
 import { FeatureCollection } from 'geojson';
 
+import { GreenPinIcon } from '../icons/GreenPinIcon';
 import PinIcon from '../icons/PinIcon';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -78,7 +79,7 @@ export default function StaticMap({
           longitude={boundary.longitude}
           style={{ cursor: 'default' }}
         >
-          <PinIcon fontSize="large" size={35} />
+          <GreenPinIcon />
         </Marker>
       </Map>
     </Suspense>

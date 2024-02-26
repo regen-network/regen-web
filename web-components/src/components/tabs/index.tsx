@@ -8,7 +8,7 @@ import { makeStyles, withStyles } from 'tss-react/mui';
 
 export interface RegenTab extends Omit<TabProps, 'content'> {
   content?: JSX.Element;
-  label: string;
+  label: string | JSX.Element;
 }
 
 interface RegenTabsProps {

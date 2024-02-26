@@ -1,4 +1,4 @@
-import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
+import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 import { useProjectsWithOrders } from 'hooks/projects/useProjectsWithOrders';
 
 import { FEATURE_PROJECTS_COUNT, PROJECTS_SORT } from '../Home.constants';

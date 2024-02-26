@@ -8,8 +8,12 @@ import { makeStyles } from 'tss-react/mui';
 
 import { containerPaddingX, containerStyles } from '../../styles/container';
 import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';
+import { PREFINANCE } from '../cards/ProjectCard/ProjectCard.constants';
 import PlayIcon from '../icons/PlayIcon';
+import { PrefinanceIcon } from '../icons/PrefinanceIcon';
 import { Image, OptimizeImageProps } from '../image';
+import { Label } from '../typography';
+import { PrefinanceTag } from './ProjectMedia.PrefinanceTag';
 import { ProjectAsset } from './ProjectMedia.ProjectAsset';
 
 export interface Media {
@@ -26,6 +30,7 @@ interface ProjectMediaProps extends OptimizeImageProps {
   imageCredits?: string;
   xsBorderRadius?: boolean;
   mobileHeight?: string | number;
+  isPrefinanceProject?: boolean | null;
 }
 
 interface StyleProps {
@@ -220,6 +225,7 @@ export default function ProjectMedia({
   imageStorageBaseUrl,
   apiServerUrl,
   imageCredits,
+  isPrefinanceProject,
 }: ProjectMediaProps): JSX.Element {
   const { classes } = useStyles({ mobileHeight, xsBorderRadius });
   const theme = useTheme();
@@ -297,7 +303,10 @@ export default function ProjectMedia({
             <Grid
               container
               columns={15}
-              sx={{ ...containerStyles, ...containerPaddingX }}
+              sx={{
+                ...containerStyles,
+                ...containerPaddingX,
+              }}
             >
               {assets.slice(0, 2).map((a, i) => (
                 <Grid
@@ -315,91 +324,97 @@ export default function ProjectMedia({
                   {i === 0 && isMedia(a) && imageCredits && (
                     <Box className={classes.imageCredits}>{imageCredits}</Box>
                   )}
+                  {i === 0 && isPrefinanceProject && <PrefinanceTag />}
                 </Grid>
               ))}
             </Grid>
           )}
         </>
       ) : (
-        <Slider
-          {...settings}
-          className={classes.root}
-          beforeChange={(oldIndex: number, newIndex: number) => {
-            const indexDifference: number = Math.abs(oldIndex - newIndex);
-            const thumbnailsElement =
-              thumbnailsWrapper && thumbnailsWrapper.current;
-            if (thumbnailsElement) {
-              if (
-                thumbnailsElement.scrollWidth > thumbnailsWrapperWidth &&
-                thumbnailsWrapperWidth > 0
-              ) {
-                const perIndexScroll =
-                  (thumbnailsElement.scrollWidth - thumbnailsWrapperWidth) /
-                  (assets.length - 1);
-                const scroll = indexDifference * perIndexScroll;
-                if (scroll > 0) {
-                  if (oldIndex < newIndex) {
-                    setThumbnailsTranslate(thumbnailsTranslate - scroll);
-                  } else if (oldIndex > newIndex) {
-                    setThumbnailsTranslate(thumbnailsTranslate + scroll);
+        <div className="relative">
+          <Slider
+            {...settings}
+            className={classes.root}
+            beforeChange={(oldIndex: number, newIndex: number) => {
+              const indexDifference: number = Math.abs(oldIndex - newIndex);
+              const thumbnailsElement =
+                thumbnailsWrapper && thumbnailsWrapper.current;
+              if (thumbnailsElement) {
+                if (
+                  thumbnailsElement.scrollWidth > thumbnailsWrapperWidth &&
+                  thumbnailsWrapperWidth > 0
+                ) {
+                  const perIndexScroll =
+                    (thumbnailsElement.scrollWidth - thumbnailsWrapperWidth) /
+                    (assets.length - 1);
+                  const scroll = indexDifference * perIndexScroll;
+                  if (scroll > 0) {
+                    if (oldIndex < newIndex) {
+                      setThumbnailsTranslate(thumbnailsTranslate - scroll);
+                    } else if (oldIndex > newIndex) {
+                      setThumbnailsTranslate(thumbnailsTranslate + scroll);
+                    }
                   }
                 }
               }
-            }
-          }}
-        >
-          {assets.map((item, index) => {
-            if (isMedia(item)) {
-              if (item.type === 'image') {
-                const image =
-                  imageStorageBaseUrl && apiServerUrl ? (
-                    <Image
-                      src={item.src}
-                      className={classes.item}
-                      alt={item.src}
-                      delay={index > 0 ? 1000 : 0}
-                      imageStorageBaseUrl={imageStorageBaseUrl}
-                      apiServerUrl={apiServerUrl}
-                    />
-                  ) : (
-                    <img
-                      src={item.src}
-                      className={classes.item}
-                      alt={item.src}
-                    />
-                  );
+            }}
+          >
+            {assets.map((item, index) => {
+              if (isMedia(item)) {
+                if (item.type === 'image') {
+                  const image =
+                    imageStorageBaseUrl && apiServerUrl ? (
+                      <Image
+                        src={item.src}
+                        className={classes.item}
+                        alt={item.src}
+                        delay={index > 0 ? 1000 : 0}
+                        imageStorageBaseUrl={imageStorageBaseUrl}
+                        apiServerUrl={apiServerUrl}
+                      />
+                    ) : (
+                      <img
+                        src={item.src}
+                        className={classes.item}
+                        alt={item.src}
+                      />
+                    );
 
+                  return (
+                    <div key={index} className={classes.sliderImageContainer}>
+                      {image}{' '}
+                      {imageCredits && (
+                        <div className={classes.imageCredits}>
+                          {imageCredits}
+                        </div>
+                      )}
+                    </div>
+                  );
+                } else if (item.type === 'video') {
+                  return (
+                    <video
+                      key={index}
+                      className={classes.item}
+                      controls
+                      poster={item.preview}
+                    >
+                      <source src={item.src} />
+                    </video>
+                  );
+                } else {
+                  return null;
+                }
+              } else {
                 return (
-                  <div key={index} className={classes.sliderImageContainer}>
-                    {image}{' '}
-                    {imageCredits && (
-                      <div className={classes.imageCredits}>{imageCredits}</div>
-                    )}
+                  <div key={index} className={classes.elementContainer}>
+                    {item}
                   </div>
                 );
-              } else if (item.type === 'video') {
-                return (
-                  <video
-                    key={index}
-                    className={classes.item}
-                    controls
-                    poster={item.preview}
-                  >
-                    <source src={item.src} />
-                  </video>
-                );
-              } else {
-                return null;
               }
-            } else {
-              return (
-                <div key={index} className={classes.elementContainer}>
-                  {item}
-                </div>
-              );
-            }
-          })}
-        </Slider>
+            })}
+          </Slider>
+          {isPrefinanceProject && <PrefinanceTag />}
+        </div>
       )}
     </div>
   );

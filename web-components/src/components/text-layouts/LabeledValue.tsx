@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { Box } from '@mui/material';
 
-import { formatNumber } from '../../utils/format';
+import { formatDate, formatNumber } from '../../utils/format';
 import GradientBadge from '../gradient-badge';
 import InfoTooltipWithIcon from '../tooltip/InfoTooltipWithIcon';
 import { Title } from '../typography';
@@ -14,22 +14,27 @@ type Props = {
   tooltipLabel?: string;
   tooltipNumber?: string;
   number?: number | string;
+  date?: Date | string;
   formatNumberOptions?: {
     minimumFractionDigits?: number;
     maximumFractionDigits?: number;
   };
+  formatDateOption?: string;
 };
 
 /** Grey label over a rounded, formatted number */
-export function LabeledNumber({
+export function LabeledValue({
   label,
   badgeLabel,
   icon,
   tooltipLabel,
   tooltipNumber,
   number,
+  date,
+  formatDateOption,
   formatNumberOptions = {},
-}: Props): JSX.Element {
+  children,
+}: React.PropsWithChildren<Props>): JSX.Element {
   return (
     <LabeledDetail
       label={label}
@@ -42,11 +47,14 @@ export function LabeledNumber({
     >
       {icon && <Box sx={{ mr: 2.5, display: 'inline-flex' }}>{icon}</Box>}
       <Title variant="h3">
-        {formatNumber({
-          num: number,
-          ...formatNumberOptions,
-        })}
+        {number &&
+          formatNumber({
+            num: number,
+            ...formatNumberOptions,
+          })}
+        {date && formatDate(date, formatDateOption)}
       </Title>
+      {children}
       {badgeLabel && <GradientBadge label={badgeLabel} />}
       {tooltipNumber && (
         <InfoTooltipWithIcon title={tooltipNumber} sx={{ ml: 1 }} outlined />

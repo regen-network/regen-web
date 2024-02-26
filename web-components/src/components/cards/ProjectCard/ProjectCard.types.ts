@@ -24,3 +24,10 @@ export interface PurchaseInfo {
     denomLogo?: JSX.Element;
   };
 }
+
+export type ProjectPrefinancing = {
+  isPrefinanceProject: boolean;
+  price: string;
+  estimatedIssuance: string;
+  stripePaymentLink: string;
+};

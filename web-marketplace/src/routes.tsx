@@ -34,7 +34,7 @@ import { homeLoader } from 'pages/Home/Home.loader';
 import { storefrontLoader } from 'pages/Marketplace/Storefront/Storefront.loader';
 import { ProfileEditMain } from 'pages/ProfileEdit/ProfileEdit.Main';
 import { ProfileEditSettings } from 'pages/ProfileEdit/ProfileEdit.Settings';
-import { projectsLoader } from 'pages/Projects/Projects.loader';
+import { projectsLoader } from 'pages/Projects/AllProjects/AllProjects.loader';
 import Settings from 'pages/Settings';
 import { AuthRoute } from 'components/atoms/AuthRoute';
 import { KeplrOrAuthRoute } from 'components/atoms/KeplrOrAuthRoute';
@@ -46,6 +46,7 @@ import { KeplrRoute } from './components/atoms';
 import { ProjectMetadata } from './pages/ProjectMetadata/ProjectMetadata';
 
 const Additionality = lazy(() => import('./pages/Additionality'));
+const AllProjects = lazy(() => import('./pages/Projects/AllProjects'));
 const BasicInfo = lazy(() => import('./pages/BasicInfo'));
 const BatchDetails = lazy(() => import('./pages/BatchDetails'));
 const BasketDetails = lazy(() => import('./pages/BasketDetails'));
@@ -66,6 +67,9 @@ const LoginPage = lazy(() => import('./pages/Login'));
 const Media = lazy(() => import('./pages/Media'));
 const MethodologyDetails = lazy(() => import('./pages/MethodologyDetails'));
 const NotFoundPage = lazy(() => import('./pages/NotFound'));
+const PrefinanceProjects = lazy(
+  () => import('./pages/Projects/PrefinanceProjects'),
+);
 const Project = lazy(() => import('./pages/Project'));
 const Projects = lazy(() => import('./pages/Projects'));
 const ProjectCreate = lazy(() => import('./pages/ProjectCreate'));
@@ -140,13 +144,17 @@ export const getRoutes = ({
           path="methodology-review-process"
           element={<Navigate to="/" replace />}
         />
-        <Route
-          path="projects/:page"
-          element={<Projects />}
-          loader={projectsLoader({
-            queryClient: reactQueryClient,
-          })}
-        />
+        <Route path="projects" element={<Projects />}>
+          <Route index element={<Navigate to="1" />} />
+          <Route
+            path=":page"
+            element={<AllProjects />}
+            loader={projectsLoader({
+              queryClient: reactQueryClient,
+            })}
+          />
+          <Route path="prefinance" element={<PrefinanceProjects />} />
+        </Route>
         <Route
           path="project/:projectId"
           element={<Project />}

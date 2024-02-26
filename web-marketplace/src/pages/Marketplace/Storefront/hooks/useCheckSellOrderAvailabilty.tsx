@@ -5,7 +5,7 @@ import { Item } from 'web-components/src/components/modal/TxModal';
 
 import { UseStateSetter } from 'types/react/use-state';
 
-import { UISellOrderInfo } from 'pages/Projects/Projects.types';
+import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 
 import { checkIsBuyOrderInvalid } from '../Storefront.utils';
 

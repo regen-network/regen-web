@@ -23,7 +23,7 @@ import {
 } from 'lib/atoms/projects.atoms';
 import { useTracker } from 'lib/tracker/useTracker';
 
-import { CommunityFilter } from './Projects.CommunityFilter';
+import { CommunityFilter } from './AllProjects.CommunityFilter';
 import {
   COMMUNITY_FILTER_LABEL,
   CREDIT_CLASS_FILTER_LABEL,
@@ -31,12 +31,12 @@ import {
   RESET_FILTERS_LABEL,
   SIDE_FILTERS_BUTTON,
   UNREGISTERED_PATH,
-} from './Projects.constants';
-import { CreditClassFilter, FilterCreditClassEvent } from './Projects.types';
+} from './AllProjects.constants';
+import { CreditClassFilter, FilterCreditClassEvent } from './AllProjects.types';
 import {
   getCreditClassSelectedFilters,
   getFilterSelected,
-} from './Projects.utils';
+} from './AllProjects.utils';
 
 type Props = {
   creditClassFilters?: CreditClassFilter[];
@@ -46,7 +46,7 @@ type Props = {
   sx?: SxProps<Theme>;
 };
 
-export const ProjectsSideFilter = ({
+export const SideFilter = ({
   creditClassFilters = [],
   hasCommunityProjects,
   showFiltersReset,

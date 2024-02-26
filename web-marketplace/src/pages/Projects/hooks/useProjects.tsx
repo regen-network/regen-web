@@ -1,6 +1,6 @@
 import { useProjectsWithOrders } from 'hooks/projects/useProjectsWithOrders';
 
-import { PROJECTS_PER_PAGE } from '../Projects.config';
+import { PROJECTS_PER_PAGE } from '../AllProjects/AllProjects.config';
 
 type Props = {
   sort: string;
@@ -23,12 +23,15 @@ export const useProjects = ({
     projectsCount,
     loading,
     hasCommunityProjects,
+    prefinanceProjectsCount,
+    prefinanceProjects,
   } = useProjectsWithOrders({
     limit: PROJECTS_PER_PAGE,
     offset,
     sort,
     useCommunityProjects,
     creditClassFilter,
+    separatePrefinanceProjects: true,
   });
 
   const pagesCount = Math.ceil((projectsCount ?? 0) / PROJECTS_PER_PAGE);
@@ -41,5 +44,7 @@ export const useProjects = ({
     pagesCount,
     loading,
     hasCommunityProjects,
+    prefinanceProjectsCount,
+    prefinanceProjects,
   };
 };

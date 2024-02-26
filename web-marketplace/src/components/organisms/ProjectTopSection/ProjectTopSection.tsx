@@ -25,6 +25,7 @@ import {
   IMAGE_STORAGE_BASE_URL,
   MAPBOX_TOKEN,
 } from 'components/templates/ProjectDetails/ProjectDetails.config';
+import { Prefinance } from 'components/templates/ProjectDetails/ProjectDetails.Prefinance';
 import { useTags } from 'hooks/useTags';
 
 import { ProjectBatchTotals } from '../../molecules';
@@ -61,6 +62,7 @@ function ProjectTopSection({
   creditClassMetadata,
   onChainCreditClassId,
   program,
+  projectPrefinancing,
 }: ProjectTopSectionProps): JSX.Element {
   const { classes } = useProjectTopSectionStyles();
   const { ecocreditClient } = useLedger();
@@ -218,6 +220,9 @@ function ProjectTopSection({
             <Body size="xl" mobileSize="md" py={[3.75, 6]}>
               {primaryDescription}
             </Body>
+          )}
+          {projectPrefinancing && (
+            <Prefinance projectPrefinancing={projectPrefinancing} />
           )}
           <ProjectTopSectionCreditClassCard
             creditClassSanity={creditClassSanity}

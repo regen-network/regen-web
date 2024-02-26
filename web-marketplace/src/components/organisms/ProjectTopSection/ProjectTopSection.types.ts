@@ -7,7 +7,11 @@ import { Props as ActionCardProps } from 'web-components/src/components/molecule
 import { Account } from 'web-components/src/components/user/UserInfoCard';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
-import { AllCreditClassQuery, SdgByIriQuery } from 'generated/sanity-graphql';
+import {
+  AllCreditClassQuery,
+  ProjectPrefinancing,
+  SdgByIriQuery,
+} from 'generated/sanity-graphql';
 import {
   BatchInfoWithSupply,
   BatchTotalsForProject,
@@ -19,7 +23,7 @@ import {
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
 
-import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
+import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 
 export type ProjectTopSectionProps = {
   offChainProject?: Maybe<ProjectFieldsFragment>;
@@ -42,6 +46,7 @@ export type ProjectTopSectionProps = {
   creditClassOnChain?: QueryClassResponse | null;
   onChainCreditClassId?: string;
   program?: Account;
+  projectPrefinancing?: ProjectPrefinancing | null;
 };
 
 export type SdgType = SdgByIriQuery['allSdg'][0];

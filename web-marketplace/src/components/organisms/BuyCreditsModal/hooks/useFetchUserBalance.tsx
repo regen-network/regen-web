@@ -5,7 +5,7 @@ import { useLedger } from 'ledger';
 import { getAllBalancesQuery } from 'lib/queries/react-query/cosmos/bank/getAllBalancesQuery/getAllBalancesQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { UISellOrderInfo } from 'pages/Projects/Projects.types';
+import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 
 interface Params {
   selectedSellOrder?: UISellOrderInfo;

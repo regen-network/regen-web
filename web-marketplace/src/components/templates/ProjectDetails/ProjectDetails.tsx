@@ -7,10 +7,13 @@ import cx from 'classnames';
 import { useSetAtom } from 'jotai';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import { PREFINANCE } from 'web-components/src/components/cards/ProjectCard/ProjectCard.constants';
 import CurrentCreditsIcon from 'web-components/src/components/icons/CurrentCreditsIcon';
+import { PrefinanceIcon } from 'web-components/src/components/icons/PrefinanceIcon';
 import { Gallery } from 'web-components/src/components/organisms/Gallery/Gallery';
 import SEO from 'web-components/src/components/seo';
 import ProjectMedia from 'web-components/src/components/sliders/ProjectMedia';
+import { Label } from 'web-components/src/components/typography';
 
 import { Project } from 'generated/graphql';
 import { Maybe } from 'graphql/jsutils/Maybe';
@@ -43,6 +46,7 @@ import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellO
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
+import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { Link } from 'components/atoms';
 import { DetailsSection } from 'components/organisms/DetailsSection/DetailsSection';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
@@ -123,7 +127,7 @@ function ProjectDetails(): JSX.Element {
     getProjectByIdQuery({
       id: projectId as string,
       sanityClient,
-      enabled: !!sanityClient && isOnChainId && !!projectId,
+      enabled: !!sanityClient && !!projectId,
     }),
   );
 
@@ -333,6 +337,9 @@ function ProjectDetails(): JSX.Element {
     setIsBuyFlowStarted,
   });
 
+  const sanityProject = sanityProjectData?.allProject?.[0];
+  const projectPrefinancing = sanityProject?.projectPrefinancing;
+
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO
@@ -355,6 +362,7 @@ function ProjectDetails(): JSX.Element {
             imageStorageBaseUrl={mediaData.imageStorageBaseUrl}
             imageCredits={mediaData.imageCredits}
             mobileHeight={theme.spacing(78.75)}
+            isPrefinanceProject={projectPrefinancing?.isPrefinanceProject}
           />
         </Box>
       )}
@@ -381,6 +389,14 @@ function ProjectDetails(): JSX.Element {
           projectsWithOrderData[0]?.purchaseInfo?.sellInfo?.avgPricePerTonLabel
         }
         avgPricePerTonTooltip={AVG_PRICE_TOOLTIP_PROJECT}
+        prefinancePrice={
+          projectPrefinancing?.price
+            ? getPriceToDisplay({
+                price: projectPrefinancing?.price,
+              })
+            : undefined
+        }
+        isPrefinanceProject={projectPrefinancing?.isPrefinanceProject}
       >
         {isSharamentsaPilot && JAGUAR_STRIPE_LINK && (
           <Link href={JAGUAR_STRIPE_LINK}>
@@ -392,6 +408,18 @@ function ProjectDetails(): JSX.Element {
             </ContainedButton>
           </Link>
         )}
+        {projectPrefinancing?.isPrefinanceProject &&
+          projectPrefinancing?.stripePaymentLink && (
+            <Link href={projectPrefinancing?.stripePaymentLink}>
+              <ContainedButton
+                className="bg-purple-gradient"
+                startIcon={<PrefinanceIcon width="24" height="24" />}
+                sx={{ height: '100%' }}
+              >
+                {PREFINANCE}
+              </ContainedButton>
+            </Link>
+          )}
       </SellOrdersActionsBar>
 
       <ProjectTopSection
@@ -415,6 +443,7 @@ function ProjectDetails(): JSX.Element {
         creditClassMetadata={creditClassMetadata}
         onChainCreditClassId={onChainCreditClassId}
         program={program}
+        projectPrefinancing={projectPrefinancing}
       />
 
       {hasProjectPhotos && <Gallery photos={projectPhotos} sx={{ mb: 25 }} />}
@@ -426,7 +455,7 @@ function ProjectDetails(): JSX.Element {
 
       <DetailsSection
         header={sanityProjectPage?.projectDetailsSection}
-        credibilityCards={sanityProjectData?.allProject?.[0]?.credibilityCards}
+        credibilityCards={sanityProject?.credibilityCards}
         sx={{ pt: { xs: 0 } }}
       >
         <ProjectDetailsStakeholders

@@ -7,10 +7,14 @@ import { Theme } from '../../../theme/muiTheme';
 import { sxToArray } from '../../../utils/mui/sxToArray';
 import {
   AVG_PRICE_LABEL,
+  CREDITS_AVAILABLE,
   ERROR_CARD_PRICE,
+  ESTIMATED_ISSUANCE,
+  ESTIMATED_ISSUANCE_TOOLTIP,
+  PRICE,
   SOLD_OUT,
 } from './ProjectCard.constants';
-import { PurchaseInfo } from './ProjectCard.types';
+import { ProjectPrefinancing, PurchaseInfo } from './ProjectCard.types';
 
 type Props = {
   purchaseInfo?: PurchaseInfo;
@@ -18,6 +22,7 @@ type Props = {
   priceTooltip?: string;
   creditsTooltip?: string;
   sx?: SxProps<Theme>;
+  projectPrefinancing?: ProjectPrefinancing;
 };
 
 export const CreditPrice = ({
@@ -25,9 +30,11 @@ export const CreditPrice = ({
   priceTooltip,
   creditsTooltip,
   isSoldOut,
+  projectPrefinancing,
   sx,
 }: Props) => {
   const avgPricePerTonLabel = purchaseInfo?.sellInfo?.avgPricePerTonLabel;
+  const isPrefinanceProject = projectPrefinancing?.isPrefinanceProject;
 
   return (
     <Box
@@ -51,7 +58,7 @@ export const CreditPrice = ({
               textTransform: 'uppercase',
             }}
           >
-            {AVG_PRICE_LABEL}
+            {isPrefinanceProject ? PRICE : AVG_PRICE_LABEL}
           </Subtitle>
           {priceTooltip && (
             <InfoTooltipWithIcon
@@ -77,19 +84,32 @@ export const CreditPrice = ({
           >
             {purchaseInfo?.sellInfo
               ? avgPricePerTonLabel ?? ERROR_CARD_PRICE
-              : '-'}
+              : projectPrefinancing?.price ?? '-'}
           </Body>
         </Box>
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <Subtitle
-          size="xs"
-          mobileSize="xxs"
-          color="info.main"
-          sx={{ mb: 1, fontWeight: 800 }}
-        >
-          {'CREDITS AVAILABLE'}
-        </Subtitle>
+        <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, height: 20 }}>
+          <Subtitle
+            size="xs"
+            mobileSize="xxs"
+            color="info.main"
+            sx={{
+              mr: isPrefinanceProject ? 1 : 0,
+              fontWeight: 800,
+              textTransform: 'uppercase',
+            }}
+          >
+            {isPrefinanceProject ? ESTIMATED_ISSUANCE : CREDITS_AVAILABLE}
+          </Subtitle>
+          {isPrefinanceProject && (
+            <InfoTooltipWithIcon
+              title={ESTIMATED_ISSUANCE_TOOLTIP}
+              sx={{ width: 20, height: 20 }}
+              outlined
+            />
+          )}
+        </Box>
         <Body
           size="md"
           mobileSize="sm"
@@ -103,7 +123,9 @@ export const CreditPrice = ({
           {isSoldOut ? (
             <GradientBadge label={SOLD_OUT} />
           ) : (
-            purchaseInfo?.sellInfo?.creditsAvailable ?? '0'
+            purchaseInfo?.sellInfo?.creditsAvailable ??
+            projectPrefinancing?.estimatedIssuance ??
+            '0'
           )}
           {creditsTooltip && (
             <InfoTooltipWithIcon

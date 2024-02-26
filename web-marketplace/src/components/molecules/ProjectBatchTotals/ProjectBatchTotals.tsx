@@ -5,11 +5,11 @@ import { quantityFormatNumberOptions } from 'config/decimals';
 import CreditsIssuedIcon from 'web-components/src/components/icons/CreditsIssued';
 import CreditsRetiredIcon from 'web-components/src/components/icons/CreditsRetired';
 import CreditsTradeableIcon from 'web-components/src/components/icons/CreditsTradeable';
-import { LabeledNumber } from 'web-components/src/components/text-layouts';
+import { LabeledValue } from 'web-components/src/components/text-layouts';
 
-import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
-import { getCreditsTooltip } from 'pages/Projects/utils/getCreditsTooltip';
-import { getIsSoldOut } from 'pages/Projects/utils/getIsSoldOut';
+import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
+import { getCreditsTooltip } from 'pages/Projects/AllProjects/utils/getCreditsTooltip';
+import { getIsSoldOut } from 'pages/Projects/AllProjects/utils/getIsSoldOut';
 
 import type { BatchTotalsForProject } from '../../../types/ledger/ecocredit';
 import {
@@ -57,7 +57,7 @@ export function ProjectBatchTotals({
       ]}
     >
       <GridItem>
-        <LabeledNumber
+        <LabeledValue
           label="Credits issued"
           tooltipLabel={ISSUED_CREDITS_TOOLTIP}
           number={totals.tradableAmount + totals.retiredAmount}
@@ -69,7 +69,7 @@ export function ProjectBatchTotals({
         />
       </GridItem>
       <GridItem>
-        <LabeledNumber
+        <LabeledValue
           label="Credits Tradable"
           tooltipLabel={TRADEABLE_CREDITS_TOOLTIP}
           tooltipNumber={getCreditsTooltip({
@@ -86,7 +86,7 @@ export function ProjectBatchTotals({
         />
       </GridItem>
       <GridItem>
-        <LabeledNumber
+        <LabeledValue
           label="Credits Retired"
           tooltipLabel={RETIRED_CREDITS_TOOLTIP}
           number={totals.retiredAmount}

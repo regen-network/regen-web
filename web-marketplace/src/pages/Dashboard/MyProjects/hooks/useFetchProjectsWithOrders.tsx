@@ -9,7 +9,7 @@ import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normali
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
+import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 import { useProjectsMetadata } from 'hooks/projects/useProjectsMetadata';
 
 interface Response {
@@ -74,7 +74,6 @@ export const useFetchProjectsWithOrders = ({
   );
 
   /* Final Normalization */
-
   const projectsWithMetadata = normalizeProjectsWithMetadata({
     projectsWithOrderData,
     projectsMetadata,
@@ -82,6 +81,7 @@ export const useFetchProjectsWithOrders = ({
     programAccounts,
     classesMetadata,
   });
+
   return {
     projects: projectsWithMetadata,
     isProjectsMetadataLoading,

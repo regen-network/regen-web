@@ -11,7 +11,7 @@ import {
 } from 'generated/sanity-graphql';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
-import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
+import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 import { ProjectCardsSection } from 'components/organisms/ProjectCardsSection/ProjectCardsSection';
 
 import { useFeaturedProjects } from './hooks/useFeaturedProjects';
@@ -41,8 +41,15 @@ export function FeaturedProjects({
         body={body}
         projects={featuredProjects}
         onButtonClick={({ project }) => {
-          setSelectedProject(project);
-          setIsBuyFlowStarted(true);
+          if (project.projectPrefinancing?.isPrefinanceProject) {
+            window.open(
+              project.projectPrefinancing.stripePaymentLink,
+              '_newtab',
+            );
+          } else {
+            setSelectedProject(project);
+            setIsBuyFlowStarted(true);
+          }
         }}
         loading={loading}
       />

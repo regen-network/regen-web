@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 
-import { sortOptions } from 'pages/Projects/Projects.config';
+import { sortOptions } from 'pages/Projects/AllProjects/AllProjects.config';
 
 export const useCommunityProjectsAtom = atom<boolean | undefined>(false);
 export const creditClassSelectedFiltersAtom = atom<Record<string, boolean>>({});

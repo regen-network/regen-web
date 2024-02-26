@@ -1,3 +1,3 @@
 export * from './LabeledDetail';
-export * from './LabeledNumber';
+export * from './LabeledValue';
 export * from './TitleBody';

@@ -114,7 +114,8 @@ export type Block = {
   _type?: Maybe<Scalars['String']>;
   children?: Maybe<Array<Maybe<Span>>>;
   style?: Maybe<Scalars['String']>;
-  list?: Maybe<Scalars['String']>;
+  listItem?: Maybe<Scalars['String']>;
+  level?: Maybe<Scalars['Float']>;
 };
 
 export type BlogPost = {
@@ -196,6 +197,8 @@ export type BooleanFilter = {
   eq?: Maybe<Scalars['Boolean']>;
   /** Checks if the value is not equal to the given input. */
   neq?: Maybe<Scalars['Boolean']>;
+  /** Checks if the value is defined. */
+  is_defined?: Maybe<Scalars['Boolean']>;
 };
 
 export type BottomBanner = {
@@ -1154,6 +1157,68 @@ export type ClaimSorting = {
   description?: Maybe<SortOrder>;
 };
 
+export type ClassPrefinanceTimelineItem = {
+  __typename?: 'ClassPrefinanceTimelineItem';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  status?: Maybe<ClassPrefinanceTimelineStatus>;
+  prefinanceTimelineItem?: Maybe<PrefinanceTimelineItem>;
+};
+
+export type ClassPrefinanceTimelineItemFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  status?: Maybe<ClassPrefinanceTimelineStatusFilter>;
+  prefinanceTimelineItem?: Maybe<PrefinanceTimelineItemFilter>;
+};
+
+export type ClassPrefinanceTimelineItemSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  prefinanceTimelineItem?: Maybe<PrefinanceTimelineItemSorting>;
+};
+
+export type ClassPrefinanceTimelineStatus = Document & {
+  __typename?: 'ClassPrefinanceTimelineStatus';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  icon?: Maybe<CustomImage>;
+};
+
+export type ClassPrefinanceTimelineStatusFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  description?: Maybe<StringFilter>;
+  icon?: Maybe<CustomImageFilter>;
+};
+
+export type ClassPrefinanceTimelineStatusSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  description?: Maybe<SortOrder>;
+  icon?: Maybe<CustomImageSorting>;
+};
+
 export type ClimateSection = {
   __typename?: 'ClimateSection';
   _key?: Maybe<Scalars['String']>;
@@ -1956,6 +2021,8 @@ export type DateFilter = {
   lt?: Maybe<Scalars['Date']>;
   /** Checks if the value is lesser than or equal to the given input. */
   lte?: Maybe<Scalars['Date']>;
+  /** Checks if the value is defined. */
+  is_defined?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -1972,6 +2039,8 @@ export type DatetimeFilter = {
   lt?: Maybe<Scalars['DateTime']>;
   /** Checks if the value is lesser than or equal to the given input. */
   lte?: Maybe<Scalars['DateTime']>;
+  /** Checks if the value is defined. */
+  is_defined?: Maybe<Scalars['Boolean']>;
 };
 
 export type DetailsCard = {
@@ -2356,6 +2425,7 @@ export type EcologicalCreditCard = Document & {
   offsetMethods?: Maybe<Array<Maybe<OffsetMethod>>>;
   projectActivities?: Maybe<Array<Maybe<ProjectActivity>>>;
   button?: Maybe<Button>;
+  secondaryButton?: Maybe<Button>;
 };
 
 export type EcologicalCreditCardFilter = {
@@ -2374,6 +2444,7 @@ export type EcologicalCreditCardFilter = {
   creditClass?: Maybe<CreditClassFilter>;
   creditInfos?: Maybe<CreditInfosFilter>;
   button?: Maybe<ButtonFilter>;
+  secondaryButton?: Maybe<ButtonFilter>;
 };
 
 export type EcologicalCreditCardSorting = {
@@ -2388,6 +2459,7 @@ export type EcologicalCreditCardSorting = {
   image?: Maybe<CustomImageSorting>;
   creditInfos?: Maybe<CreditInfosSorting>;
   button?: Maybe<ButtonSorting>;
+  secondaryButton?: Maybe<ButtonSorting>;
 };
 
 export type EcologicalCreditCardsSection = {
@@ -2735,6 +2807,8 @@ export type FloatFilter = {
   lt?: Maybe<Scalars['Float']>;
   /** Checks if the value is lesser than or equal to the given input. */
   lte?: Maybe<Scalars['Float']>;
+  /** Checks if the value is defined. */
+  is_defined?: Maybe<Scalars['Boolean']>;
 };
 
 export type FullStepCardSection = {
@@ -3494,6 +3568,8 @@ export type IntFilter = {
   lt?: Maybe<Scalars['Int']>;
   /** Checks if the value is lesser than or equal to the given input. */
   lte?: Maybe<Scalars['Int']>;
+  /** Checks if the value is defined. */
+  is_defined?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -4446,6 +4522,54 @@ export type PracticesOutcomesSectionSorting = {
   note?: Maybe<SortOrder>;
 };
 
+export type PrefinanceProjects = {
+  __typename?: 'PrefinanceProjects';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+  learnMore?: Maybe<Scalars['String']>;
+};
+
+export type PrefinanceProjectsFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  learnMore?: Maybe<StringFilter>;
+};
+
+export type PrefinanceProjectsSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  learnMore?: Maybe<SortOrder>;
+};
+
+export type PrefinanceTimelineItem = {
+  __typename?: 'PrefinanceTimelineItem';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  /** optional */
+  date?: Maybe<Scalars['Date']>;
+  /** optional if single date */
+  endDate?: Maybe<Scalars['Date']>;
+  /** Timeline items that are done will be written in black text on the timeline while projected items are greyed out. The most recent done item will show up as the current status on the project page. */
+  currentStatus?: Maybe<Scalars['String']>;
+};
+
+export type PrefinanceTimelineItemFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  date?: Maybe<DateFilter>;
+  endDate?: Maybe<DateFilter>;
+  currentStatus?: Maybe<StringFilter>;
+};
+
+export type PrefinanceTimelineItemSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  date?: Maybe<SortOrder>;
+  endDate?: Maybe<SortOrder>;
+  currentStatus?: Maybe<SortOrder>;
+};
+
 export type PresskitAwardsSection = {
   __typename?: 'PresskitAwardsSection';
   _key?: Maybe<Scalars['String']>;
@@ -4727,14 +4851,15 @@ export type Project = Document & {
   /** Current document revision */
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
-  projectName?: Maybe<Scalars['String']>;
   /** on-chain project id, off-chain uuid or slug */
   projectId?: Maybe<Scalars['String']>;
+  projectPrefinancing?: Maybe<ProjectPrefinancing>;
+  credibilityCards?: Maybe<Array<Maybe<DetailsCard>>>;
+  projectName?: Maybe<Scalars['String']>;
   image?: Maybe<CustomImage>;
   location?: Maybe<Scalars['String']>;
   area?: Maybe<Scalars['Float']>;
   areaUnit?: Maybe<Scalars['String']>;
-  credibilityCards?: Maybe<Array<Maybe<DetailsCard>>>;
 };
 
 export type ProjectActivity = Document & {
@@ -4828,8 +4953,9 @@ export type ProjectFilter = {
   _updatedAt?: Maybe<DatetimeFilter>;
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
-  projectName?: Maybe<StringFilter>;
   projectId?: Maybe<StringFilter>;
+  projectPrefinancing?: Maybe<ProjectPrefinancingFilter>;
+  projectName?: Maybe<StringFilter>;
   image?: Maybe<CustomImageFilter>;
   location?: Maybe<StringFilter>;
   area?: Maybe<FloatFilter>;
@@ -4880,6 +5006,108 @@ export type ProjectPageSorting = {
   otcCard?: Maybe<ActionCardSorting>;
 };
 
+export type ProjectPrefinanceTimelineItem = {
+  __typename?: 'ProjectPrefinanceTimelineItem';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  status?: Maybe<ProjectPrefinanceTimelineStatus>;
+  prefinanceTimelineItem?: Maybe<PrefinanceTimelineItem>;
+};
+
+export type ProjectPrefinanceTimelineItemFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  status?: Maybe<ProjectPrefinanceTimelineStatusFilter>;
+  prefinanceTimelineItem?: Maybe<PrefinanceTimelineItemFilter>;
+};
+
+export type ProjectPrefinanceTimelineItemSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  prefinanceTimelineItem?: Maybe<PrefinanceTimelineItemSorting>;
+};
+
+export type ProjectPrefinanceTimelineStatus = Document & {
+  __typename?: 'ProjectPrefinanceTimelineStatus';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  icon?: Maybe<CustomImage>;
+};
+
+export type ProjectPrefinanceTimelineStatusFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  description?: Maybe<StringFilter>;
+  icon?: Maybe<CustomImageFilter>;
+};
+
+export type ProjectPrefinanceTimelineStatusSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  description?: Maybe<SortOrder>;
+  icon?: Maybe<CustomImageSorting>;
+};
+
+export type ProjectPrefinancing = {
+  __typename?: 'ProjectPrefinancing';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  isPrefinanceProject?: Maybe<Scalars['Boolean']>;
+  /** in USD */
+  price?: Maybe<Scalars['Float']>;
+  /** estimated number of credits that will be issued */
+  estimatedIssuance?: Maybe<Scalars['Float']>;
+  stripePaymentLink?: Maybe<Scalars['String']>;
+  prefinanceTermsRaw?: Maybe<Scalars['JSON']>;
+  purchaseAgreementLink?: Maybe<Scalars['String']>;
+  projectedCreditDeliveryDate?: Maybe<Scalars['Date']>;
+  projectTimeline?: Maybe<Array<Maybe<ProjectPrefinanceTimelineItem>>>;
+  classTimeline?: Maybe<Array<Maybe<ClassPrefinanceTimelineItem>>>;
+  supportEnables?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type ProjectPrefinancingFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  isPrefinanceProject?: Maybe<BooleanFilter>;
+  price?: Maybe<FloatFilter>;
+  estimatedIssuance?: Maybe<FloatFilter>;
+  stripePaymentLink?: Maybe<StringFilter>;
+  purchaseAgreementLink?: Maybe<StringFilter>;
+  projectedCreditDeliveryDate?: Maybe<DateFilter>;
+};
+
+export type ProjectPrefinancingSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  isPrefinanceProject?: Maybe<SortOrder>;
+  price?: Maybe<SortOrder>;
+  estimatedIssuance?: Maybe<SortOrder>;
+  stripePaymentLink?: Maybe<SortOrder>;
+  purchaseAgreementLink?: Maybe<SortOrder>;
+  projectedCreditDeliveryDate?: Maybe<SortOrder>;
+};
+
 export type ProjectRating = Document & {
   __typename?: 'ProjectRating';
   /** Document ID */
@@ -4928,8 +5156,9 @@ export type ProjectSorting = {
   _updatedAt?: Maybe<SortOrder>;
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
-  projectName?: Maybe<SortOrder>;
   projectId?: Maybe<SortOrder>;
+  projectPrefinancing?: Maybe<ProjectPrefinancingSorting>;
+  projectName?: Maybe<SortOrder>;
   image?: Maybe<CustomImageSorting>;
   location?: Maybe<SortOrder>;
   area?: Maybe<SortOrder>;
@@ -4950,6 +5179,7 @@ export type ProjectsPage = Document & {
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
   gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSection>;
+  prefinanceProjects?: Maybe<PrefinanceProjects>;
 };
 
 export type ProjectsPageFilter = {
@@ -4962,6 +5192,7 @@ export type ProjectsPageFilter = {
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
   gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSectionFilter>;
+  prefinanceProjects?: Maybe<PrefinanceProjectsFilter>;
 };
 
 export type ProjectsPageSorting = {
@@ -4971,6 +5202,7 @@ export type ProjectsPageSorting = {
   _updatedAt?: Maybe<SortOrder>;
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
+  prefinanceProjects?: Maybe<PrefinanceProjectsSorting>;
 };
 
 export type RegenTeamMember = Document & {
@@ -5232,6 +5464,7 @@ export type RootQuery = {
   CaseStudiesPage?: Maybe<CaseStudiesPage>;
   CaseStudyPage?: Maybe<CaseStudyPage>;
   Claim?: Maybe<Claim>;
+  ClassPrefinanceTimelineStatus?: Maybe<ClassPrefinanceTimelineStatus>;
   CredibilityCard?: Maybe<CredibilityCard>;
   CommunityPage?: Maybe<CommunityPage>;
   ContactPage?: Maybe<ContactPage>;
@@ -5272,6 +5505,7 @@ export type RootQuery = {
   Project?: Maybe<Project>;
   ProjectActivity?: Maybe<ProjectActivity>;
   ProjectEcosystem?: Maybe<ProjectEcosystem>;
+  ProjectPrefinanceTimelineStatus?: Maybe<ProjectPrefinanceTimelineStatus>;
   ProjectPage?: Maybe<ProjectPage>;
   ProjectRating?: Maybe<ProjectRating>;
   ProjectsPage?: Maybe<ProjectsPage>;
@@ -5299,6 +5533,7 @@ export type RootQuery = {
   allCaseStudiesPage: Array<CaseStudiesPage>;
   allCaseStudyPage: Array<CaseStudyPage>;
   allClaim: Array<Claim>;
+  allClassPrefinanceTimelineStatus: Array<ClassPrefinanceTimelineStatus>;
   allCredibilityCard: Array<CredibilityCard>;
   allCommunityPage: Array<CommunityPage>;
   allContactPage: Array<ContactPage>;
@@ -5339,6 +5574,7 @@ export type RootQuery = {
   allProject: Array<Project>;
   allProjectActivity: Array<ProjectActivity>;
   allProjectEcosystem: Array<ProjectEcosystem>;
+  allProjectPrefinanceTimelineStatus: Array<ProjectPrefinanceTimelineStatus>;
   allProjectPage: Array<ProjectPage>;
   allProjectRating: Array<ProjectRating>;
   allProjectsPage: Array<ProjectsPage>;
@@ -5397,6 +5633,11 @@ export type RootQueryCaseStudyPageArgs = {
 
 
 export type RootQueryClaimArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryClassPrefinanceTimelineStatusArgs = {
   id: Scalars['ID'];
 };
 
@@ -5601,6 +5842,11 @@ export type RootQueryProjectEcosystemArgs = {
 };
 
 
+export type RootQueryProjectPrefinanceTimelineStatusArgs = {
+  id: Scalars['ID'];
+};
+
+
 export type RootQueryProjectPageArgs = {
   id: Scalars['ID'];
 };
@@ -5755,6 +6001,14 @@ export type RootQueryAllCaseStudyPageArgs = {
 export type RootQueryAllClaimArgs = {
   where?: Maybe<ClaimFilter>;
   sort?: Maybe<Array<ClaimSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllClassPrefinanceTimelineStatusArgs = {
+  where?: Maybe<ClassPrefinanceTimelineStatusFilter>;
+  sort?: Maybe<Array<ClassPrefinanceTimelineStatusSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -6075,6 +6329,14 @@ export type RootQueryAllProjectActivityArgs = {
 export type RootQueryAllProjectEcosystemArgs = {
   where?: Maybe<ProjectEcosystemFilter>;
   sort?: Maybe<Array<ProjectEcosystemSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllProjectPrefinanceTimelineStatusArgs = {
+  where?: Maybe<ProjectPrefinanceTimelineStatusFilter>;
+  sort?: Maybe<Array<ProjectPrefinanceTimelineStatusSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -7064,6 +7326,8 @@ export type StringFilter = {
   matches?: Maybe<Scalars['String']>;
   in?: Maybe<Array<Scalars['String']>>;
   nin?: Maybe<Array<Scalars['String']>>;
+  /** Checks if the value is defined. */
+  is_defined?: Maybe<Scalars['Boolean']>;
 };
 
 export type Tag = Document & {
@@ -8270,6 +8534,21 @@ export type AllOffsetMethodQuery = (
   )> }
 );
 
+export type AllPrefinanceProjectQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllPrefinanceProjectQuery = (
+  { __typename?: 'RootQuery' }
+  & { allProject: Array<(
+    { __typename?: 'Project' }
+    & Pick<Project, 'projectId'>
+    & { projectPrefinancing?: Maybe<(
+      { __typename?: 'ProjectPrefinancing' }
+      & Pick<ProjectPrefinancing, 'isPrefinanceProject' | 'price' | 'estimatedIssuance' | 'stripePaymentLink'>
+    )> }
+  )> }
+);
+
 export type AllProjectActivityQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -8352,6 +8631,9 @@ export type AllProjectsPageQuery = (
     & { gettingStartedResourcesSection?: Maybe<(
       { __typename?: 'GettingStartedResourcesSection' }
       & GettingStartedResourcesSectionFieldsFragment
+    )>, prefinanceProjects?: Maybe<(
+      { __typename?: 'PrefinanceProjects' }
+      & Pick<PrefinanceProjects, 'descriptionRaw' | 'learnMore'>
     )> }
   )> }
 );
@@ -8702,7 +8984,37 @@ export type ProjectByIdQuery = (
     & { credibilityCards?: Maybe<Array<Maybe<(
       { __typename?: 'DetailsCard' }
       & DetailsCardFieldsFragment
-    )>>> }
+    )>>>, projectPrefinancing?: Maybe<(
+      { __typename?: 'ProjectPrefinancing' }
+      & Pick<ProjectPrefinancing, 'isPrefinanceProject' | 'price' | 'estimatedIssuance' | 'stripePaymentLink' | 'prefinanceTermsRaw' | 'purchaseAgreementLink' | 'projectedCreditDeliveryDate' | 'supportEnables'>
+      & { projectTimeline?: Maybe<Array<Maybe<(
+        { __typename?: 'ProjectPrefinanceTimelineItem' }
+        & { status?: Maybe<(
+          { __typename?: 'ProjectPrefinanceTimelineStatus' }
+          & Pick<ProjectPrefinanceTimelineStatus, 'description'>
+          & { icon?: Maybe<(
+            { __typename?: 'CustomImage' }
+            & CustomImageFieldsFragment
+          )> }
+        )>, prefinanceTimelineItem?: Maybe<(
+          { __typename?: 'PrefinanceTimelineItem' }
+          & Pick<PrefinanceTimelineItem, 'date' | 'endDate' | 'currentStatus'>
+        )> }
+      )>>>, classTimeline?: Maybe<Array<Maybe<(
+        { __typename?: 'ClassPrefinanceTimelineItem' }
+        & { status?: Maybe<(
+          { __typename?: 'ClassPrefinanceTimelineStatus' }
+          & Pick<ClassPrefinanceTimelineStatus, 'description'>
+          & { icon?: Maybe<(
+            { __typename?: 'CustomImage' }
+            & CustomImageFieldsFragment
+          )> }
+        )>, prefinanceTimelineItem?: Maybe<(
+          { __typename?: 'PrefinanceTimelineItem' }
+          & Pick<PrefinanceTimelineItem, 'date' | 'endDate' | 'currentStatus'>
+        )> }
+      )>>> }
+    )> }
   )> }
 );
 
@@ -10269,6 +10581,46 @@ export function useAllOffsetMethodLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type AllOffsetMethodQueryHookResult = ReturnType<typeof useAllOffsetMethodQuery>;
 export type AllOffsetMethodLazyQueryHookResult = ReturnType<typeof useAllOffsetMethodLazyQuery>;
 export type AllOffsetMethodQueryResult = Apollo.QueryResult<AllOffsetMethodQuery, AllOffsetMethodQueryVariables>;
+export const AllPrefinanceProjectDocument = gql`
+    query AllPrefinanceProject {
+  allProject(where: {projectPrefinancing: {isPrefinanceProject: {eq: true}}}) {
+    projectId
+    projectPrefinancing {
+      isPrefinanceProject
+      price
+      estimatedIssuance
+      stripePaymentLink
+    }
+  }
+}
+    `;
+
+/**
+ * __useAllPrefinanceProjectQuery__
+ *
+ * To run a query within a React component, call `useAllPrefinanceProjectQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllPrefinanceProjectQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllPrefinanceProjectQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllPrefinanceProjectQuery(baseOptions?: Apollo.QueryHookOptions<AllPrefinanceProjectQuery, AllPrefinanceProjectQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllPrefinanceProjectQuery, AllPrefinanceProjectQueryVariables>(AllPrefinanceProjectDocument, options);
+      }
+export function useAllPrefinanceProjectLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllPrefinanceProjectQuery, AllPrefinanceProjectQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllPrefinanceProjectQuery, AllPrefinanceProjectQueryVariables>(AllPrefinanceProjectDocument, options);
+        }
+export type AllPrefinanceProjectQueryHookResult = ReturnType<typeof useAllPrefinanceProjectQuery>;
+export type AllPrefinanceProjectLazyQueryHookResult = ReturnType<typeof useAllPrefinanceProjectLazyQuery>;
+export type AllPrefinanceProjectQueryResult = Apollo.QueryResult<AllPrefinanceProjectQuery, AllPrefinanceProjectQueryVariables>;
 export const AllProjectActivityDocument = gql`
     query allProjectActivity {
   allProjectActivity {
@@ -10440,6 +10792,10 @@ export const AllProjectsPageDocument = gql`
     gettingStartedResourcesSection {
       ...gettingStartedResourcesSectionFields
     }
+    prefinanceProjects {
+      descriptionRaw
+      learnMore
+    }
   }
 }
     ${GettingStartedResourcesSectionFieldsFragmentDoc}`;
@@ -10564,9 +10920,46 @@ export const ProjectByIdDocument = gql`
     credibilityCards {
       ...detailsCardFields
     }
+    projectPrefinancing {
+      isPrefinanceProject
+      price
+      estimatedIssuance
+      stripePaymentLink
+      prefinanceTermsRaw
+      purchaseAgreementLink
+      projectedCreditDeliveryDate
+      projectTimeline {
+        status {
+          description
+          icon {
+            ...customImageFields
+          }
+        }
+        prefinanceTimelineItem {
+          date
+          endDate
+          currentStatus
+        }
+      }
+      classTimeline {
+        status {
+          description
+          icon {
+            ...customImageFields
+          }
+        }
+        prefinanceTimelineItem {
+          date
+          endDate
+          currentStatus
+        }
+      }
+      supportEnables
+    }
   }
 }
-    ${DetailsCardFieldsFragmentDoc}`;
+    ${DetailsCardFieldsFragmentDoc}
+${CustomImageFieldsFragmentDoc}`;
 
 /**
  * __useProjectByIdQuery__

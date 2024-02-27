@@ -84,6 +84,7 @@ export default function Header({
                 {menuItems?.map((item, index) => {
                   return (
                     <HeaderMenuItem
+                      sx={{ fontWeight: 800 }}
                       key={index}
                       linkComponent={linkComponent}
                       item={item}

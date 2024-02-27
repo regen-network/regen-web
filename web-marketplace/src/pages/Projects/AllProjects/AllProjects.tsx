@@ -44,6 +44,7 @@ import { SideFilter } from './AllProjects.SideFilter';
 import { ProjectWithOrderData } from './AllProjects.types';
 import { getCreditsTooltip } from './utils/getCreditsTooltip';
 import { getIsSoldOut } from './utils/getIsSoldOut';
+import { useProjectsContext } from '../Projects.context';
 
 export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { page: routePage } = useParams();
@@ -88,17 +89,12 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   const {
     allProjects,
-    haveOffChainProjects,
     projects,
     projectsCount,
-    pagesCount,
+    haveOffChainProjects,
     hasCommunityProjects,
-  } = useProjects({
-    sort,
-    offset: page * PROJECTS_PER_PAGE,
-    useCommunityProjects,
-    creditClassFilter: creditClassSelectedFilters,
-  });
+    pagesCount,
+  } = useProjectsContext();
 
   const { creditClassFilters } = normalizeCreditClassFilters({
     creditClassesWithMetadata,

@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { useAtom } from 'jotai';
 
 import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
@@ -18,19 +18,34 @@ import { Link } from 'components/atoms';
 import { GettingStartedResourcesSection } from 'components/molecules';
 
 import { useProjects } from './hooks/useProjects';
+import { PROJECTS_PER_PAGE } from './AllProjects/AllProjects.config';
 
 const Projects = (): JSX.Element => {
+  const { page: routePage } = useParams();
   const location = useLocation();
   const [useCommunityProjects] = useAtom(useCommunityProjectsAtom);
   const [sort] = useAtom(projectsSortAtom);
   const [creditClassSelectedFilters] = useAtom(creditClassSelectedFiltersAtom);
 
-  const { prefinanceProjectsCount, projectsCount, prefinanceProjects } =
-    useProjects({
-      sort,
-      useCommunityProjects,
-      creditClassFilter: creditClassSelectedFilters,
-    });
+  // Page index starts at 1 for route
+  // Page index starts at 0 for logic
+  const page = Number(routePage) - 1;
+
+  const {
+    allProjects,
+    haveOffChainProjects,
+    projects,
+    projectsCount,
+    pagesCount,
+    hasCommunityProjects,
+    prefinanceProjectsCount,
+    prefinanceProjects,
+  } = useProjects({
+    sort,
+    offset: page * PROJECTS_PER_PAGE,
+    useCommunityProjects,
+    creditClassFilter: creditClassSelectedFilters,
+  });
 
   const tabs: IconTabProps[] = useMemo(
     () => [
@@ -99,7 +114,18 @@ const Projects = (): JSX.Element => {
             }}
           />
 
-          <Outlet context={{ prefinanceProjects, prefinanceProjectsContent }} />
+          <Outlet
+            context={{
+              allProjects,
+              haveOffChainProjects,
+              projects,
+              projectsCount,
+              pagesCount,
+              hasCommunityProjects,
+              prefinanceProjectsCount,
+              prefinanceProjects,
+            }}
+          />
         </div>
       </div>
       {gettingStartedResourcesSection && (

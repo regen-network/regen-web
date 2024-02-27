@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/regen-network/regen-web/compare/v2.0.0...v2.1.0) (2024-02-27)
+
+**Note:** Version bump only for package web-auth
+
 # [2.0.0](https://github.com/regen-network/regen-web/compare/v1.14.1...v2.0.0) (2024-02-20)
 
 **Note:** Version bump only for package web-auth

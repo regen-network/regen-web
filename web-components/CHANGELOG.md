@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/regen-network/regen-web/compare/v2.0.0...v2.1.0) (2024-02-27)
+
+### Bug Fixes
+
+- PinIcon on StaticMap (project page) ([#2293](https://github.com/regen-network/regen-web/issues/2293)) ([456eb2f](https://github.com/regen-network/regen-web/commit/456eb2f8d3009f5641156e8c14024a314a6e25a0))
+
+### Features
+
+- prefinance project card ([#2288](https://github.com/regen-network/regen-web/issues/2288)) ([d37e7c7](https://github.com/regen-network/regen-web/commit/d37e7c7e070539d70659bed5f7a469e223169d86))
+
 # [2.0.0](https://github.com/regen-network/regen-web/compare/v1.14.1...v2.0.0) (2024-02-20)
 
 ### Bug Fixes

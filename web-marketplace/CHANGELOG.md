@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/regen-network/regen-web/compare/v2.0.0...v2.1.0) (2024-02-27)
+
+### Bug Fixes
+
+- projects filters ([#2286](https://github.com/regen-network/regen-web/issues/2286)) ([5434c8f](https://github.com/regen-network/regen-web/commit/5434c8f686f2236d39c49c758e472b8644fd8746))
+
+### Features
+
+- add prefinance project and credit class timeline modal ([#2296](https://github.com/regen-network/regen-web/issues/2296)) ([a466f47](https://github.com/regen-network/regen-web/commit/a466f477748602ee2787a40872eb676e2cf900a2))
+- prefinance project card ([#2288](https://github.com/regen-network/regen-web/issues/2288)) ([d37e7c7](https://github.com/regen-network/regen-web/commit/d37e7c7e070539d70659bed5f7a469e223169d86))
+- use offchain credit class to get primary impact/project benefits ([#2294](https://github.com/regen-network/regen-web/issues/2294)) ([384dbac](https://github.com/regen-network/regen-web/commit/384dbacbe3d7149105f8175a46043fb37b730264))
+
 # [2.0.0](https://github.com/regen-network/regen-web/compare/v1.14.1...v2.0.0) (2024-02-20)
 
 ### Bug Fixes

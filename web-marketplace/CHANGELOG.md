@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://github.com/regen-network/regen-web/compare/v2.1.0...v2.1.1) (2024-02-27)
+
+### Bug Fixes
+
+- use projects context instead of re-using useProjects hook ([a4fe201](https://github.com/regen-network/regen-web/commit/a4fe201c426521f6bc517f618a2eb71101c04ce7))
+
 # [2.1.0](https://github.com/regen-network/regen-web/compare/v2.0.0...v2.1.0) (2024-02-27)
 
 ### Bug Fixes

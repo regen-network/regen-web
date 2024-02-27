@@ -8,3 +8,6 @@ export const PROJECTED_CREDIT_DELIVERY_DATE_TOOLTIP =
   'Delivery dates may vary widely as this project is still in the early stages of development. ';
 export const PROJECT_STATUS = 'project status';
 export const CLASS_STATUS = 'credit class status';
+export const PROJECT_TIMELINE = 'Project timeline';
+export const CLASS_TIMELINE = 'Credit class timeline';
+export const VIEW_TIMELINE = '+ view timeline';

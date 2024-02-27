@@ -13,8 +13,10 @@ import { ProjectPrefinancing } from 'generated/sanity-graphql';
 
 import {
   CLASS_STATUS,
+  CLASS_TIMELINE,
   PREFINANCE_TERMS,
   PROJECT_STATUS,
+  PROJECT_TIMELINE,
   PROJECTED_CREDIT_DELIVERY_DATE,
   PROJECTED_CREDIT_DELIVERY_DATE_TOOLTIP,
   SEE_PURCHASE_AGREEMENTS,
@@ -112,12 +114,18 @@ export const Prefinance = ({ projectPrefinancing }: Props) => {
 
             {projectTimeline && (
               <LabeledValue label={PROJECT_STATUS}>
-                <PrefinanceStatus timeline={projectTimeline} />
+                <PrefinanceStatus
+                  timeline={projectTimeline}
+                  title={PROJECT_TIMELINE}
+                />
               </LabeledValue>
             )}
             {classTimeline && (
               <LabeledValue label={CLASS_STATUS}>
-                <PrefinanceStatus timeline={classTimeline} />
+                <PrefinanceStatus
+                  timeline={classTimeline}
+                  title={CLASS_TIMELINE}
+                />
               </LabeledValue>
             )}
           </div>

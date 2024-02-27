@@ -1,5 +1,6 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
+import { TextButton } from 'web-components/src/components/buttons/TextButton';
 import { Body } from 'web-components/src/components/typography';
 import { formatDate } from 'web-components/src/utils/format';
 import { cn } from 'web-components/src/utils/styles/cn';
@@ -10,13 +11,18 @@ import {
   ProjectPrefinanceTimelineItem,
 } from 'generated/sanity-graphql';
 
+import { VIEW_TIMELINE } from './ProjectDetails.constant';
+import { PrefinanceTimeline } from './ProjectDetails.PrefinanceTimeline';
+import { formatTimelineDates } from './ProjectDetails.utils';
+
 type Props = {
+  title: string;
   timeline:
     | Maybe<ProjectPrefinanceTimelineItem>[]
     | Maybe<ClassPrefinanceTimelineItem>[];
 };
 
-export const PrefinanceStatus = ({ timeline }: Props) => {
+export const PrefinanceStatus = ({ title, timeline }: Props) => {
   const orderedDoneTimeline = useMemo(
     () =>
       timeline
@@ -33,6 +39,8 @@ export const PrefinanceStatus = ({ timeline }: Props) => {
     item => item?.prefinanceTimelineItem?.currentStatus === 'projected',
   );
 
+  const [open, setOpen] = useState(false);
+
   return (
     <>
       {lastDoneItem ? (
@@ -48,16 +56,26 @@ export const PrefinanceStatus = ({ timeline }: Props) => {
               {lastDoneItem.status?.description}
             </Body>
             <Body size="sm" className="">
-              {formatDate(
-                lastDoneItem.prefinanceTimelineItem?.date,
-                'MMM YYYY',
-              )}
+              {lastDoneItem?.prefinanceTimelineItem &&
+                formatTimelineDates(lastDoneItem.prefinanceTimelineItem)}
             </Body>
+            <TextButton
+              onClick={() => setOpen(true)}
+              className="mt-15 text-[11px]"
+            >
+              {VIEW_TIMELINE}
+            </TextButton>
           </div>
         </div>
       ) : (
         '-'
       )}
+      <PrefinanceTimeline
+        timeline={timeline}
+        open={open}
+        onClose={() => setOpen(false)}
+        title={title}
+      />
     </>
   );
 };

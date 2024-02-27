@@ -20,6 +20,7 @@ import {
 import {
   AllCreditClassQuery,
   AllProjectPageQuery,
+  PrefinanceTimelineItem,
 } from 'generated/sanity-graphql';
 import { UseStateSetter } from 'types/react/use-state';
 import { onBtnClick } from 'lib/button';
@@ -32,17 +33,18 @@ import {
 } from 'lib/db/types/json-ld';
 import { getSanityImgSrc } from 'lib/imgSrc';
 
-import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 import {
   DEFAULT_PROFILE_COMPANY_AVATAR,
   DEFAULT_PROFILE_USER_AVATAR,
 } from 'pages/ProfileEdit/ProfileEdit.constants';
+import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
   MAPBOX_TOKEN,
 } from './ProjectDetails.config';
+import { formatDate } from 'web-components/src/utils/format';
 
 type FindSanityCreditClassParams = {
   sanityCreditClassData: AllCreditClassQuery | undefined;
@@ -280,3 +282,6 @@ export const formatOtcCardData = ({
         },
       };
 };
+
+export const formatTimelineDates = (item: PrefinanceTimelineItem) =>
+  `${formatDate(item.date, 'MMM YYYY')}${item.endDate ? ` - ${formatDate(item.endDate, 'MMM YYYY')}` : ''}`;

@@ -7,6 +7,7 @@ type Props = {
   projectDeveloper?: Account;
   projectVerifier?: Account;
   program?: Account;
+  partners?: Account[];
 };
 
 export const ProjectDetailsStakeholders: React.FC<Props> = ({
@@ -14,6 +15,7 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
   admin,
   projectDeveloper,
   projectVerifier,
+  partners,
 }) => {
   const stakeholders = [
     {
@@ -49,7 +51,7 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
       ),
     },
     {
-      accounts: projectVerifier,
+      accounts: projectDeveloper,
       title: 'verifier',
       tooltip: (
         <>
@@ -59,7 +61,17 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
         </>
       ),
     },
+    {
+      accounts: partners,
+      title: 'partners',
+      tooltip: (
+        <>
+          <b>Partners</b> can offer crucial financial support or monitor
+          progress and ensure environmental standards are met.
+        </>
+      ),
+    },
   ];
 
-  return <Stakeholders stakeholders={stakeholders} minSm={4} />;
+  return <Stakeholders stakeholders={stakeholders} />;
 };

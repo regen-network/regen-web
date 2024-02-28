@@ -47,5 +47,5 @@ export const CreditClassDetailsStakeholders = ({
     },
   ];
 
-  return <Stakeholders stakeholders={stakeholders} minSm={6} />;
+  return <Stakeholders stakeholders={stakeholders} />;
 };

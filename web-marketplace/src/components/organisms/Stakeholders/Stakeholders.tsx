@@ -13,17 +13,16 @@ export type Stakeholder = {
 
 type Props = {
   stakeholders: Stakeholder[];
-  minSm: number;
 };
 
-export const Stakeholders = ({ stakeholders, minSm }: Props) => {
+export const Stakeholders = ({ stakeholders }: Props) => {
   const filtered = stakeholders.filter(u =>
     Array.isArray(u.accounts) ? u.accounts.length > 0 : Boolean(u.accounts),
   );
-  const sm = Math.min(12 / filtered.length, minSm);
+  const sm = filtered.length === 4 ? 3 : 4;
 
   return (
-    <Grid container columnSpacing={{ xs: 0, sm: 5 }}>
+    <Grid container columnSpacing={{ xs: 0, sm: 5 }} rowSpacing={{ sm: 10.75 }}>
       {filtered.map(({ accounts, title, tooltip }, i) => {
         const sx =
           i !== filtered.length - 1 ? { mb: { xs: 8.25, sm: 0 } } : undefined;

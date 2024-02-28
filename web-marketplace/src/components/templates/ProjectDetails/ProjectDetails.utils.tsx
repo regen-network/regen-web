@@ -228,11 +228,11 @@ const getAccountFromMetadata = (
 
 export function getDisplayAccount(
   metadataRole?: ProjectStakeholder,
-  party?: Maybe<AccountFieldsFragment>,
+  account?: Maybe<AccountFieldsFragment>,
 ): Account | undefined {
-  const dbAccount = getAccount(party);
+  const dbAccount = getAccount(account);
   if (dbAccount) return dbAccount;
-  // If no party info available for this role, check the metadata
+  // If no account info available for this role, check the metadata
   if (metadataRole) return getAccountFromMetadata(metadataRole);
   return undefined;
 }

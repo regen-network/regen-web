@@ -63,6 +63,12 @@ export type Account = Node & {
   projectsByVerifierId: ProjectsConnection;
   /** Reads and enables pagination through a set of `Project`. */
   projectsByAdminAccountId: ProjectsConnection;
+  /** Reads and enables pagination through a set of `Upload`. */
+  uploadsByAccountId: UploadsConnection;
+  /** Reads and enables pagination through a set of `Post`. */
+  postsByCreatorAccountId: PostsConnection;
+  /** Reads and enables pagination through a set of `ProjectPartner`. */
+  projectPartnersByAccountId: ProjectPartnersConnection;
   /** Reads and enables pagination through a set of `CreditClass`. */
   creditClassesByProjectDeveloperIdAndCreditClassId: AccountCreditClassesByProjectDeveloperIdAndCreditClassIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Account`. */
@@ -81,6 +87,12 @@ export type Account = Node & {
   creditClassesByProjectAdminAccountIdAndCreditClassId: AccountCreditClassesByProjectAdminAccountIdAndCreditClassIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Account`. */
   accountsByProjectAdminAccountIdAndVerifierId: AccountAccountsByProjectAdminAccountIdAndVerifierIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByUploadAccountIdAndProjectId: AccountProjectsByUploadAccountIdAndProjectIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByPostCreatorAccountIdAndProjectId: AccountProjectsByPostCreatorAccountIdAndProjectIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByProjectPartnerAccountIdAndProjectId: AccountProjectsByProjectPartnerAccountIdAndProjectIdManyToManyConnection;
 };
 
 
@@ -150,6 +162,40 @@ export type AccountProjectsByAdminAccountIdArgs = {
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
   filter?: Maybe<ProjectFilter>;
+};
+
+
+export type AccountUploadsByAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<UploadsOrderBy>>;
+  condition?: Maybe<UploadCondition>;
+};
+
+
+export type AccountPostsByCreatorAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<PostsOrderBy>>;
+  condition?: Maybe<PostCondition>;
+  filter?: Maybe<PostFilter>;
+};
+
+
+export type AccountProjectPartnersByAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectPartnersOrderBy>>;
+  condition?: Maybe<ProjectPartnerCondition>;
 };
 
 
@@ -249,6 +295,42 @@ export type AccountAccountsByProjectAdminAccountIdAndVerifierIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AccountsOrderBy>>;
   condition?: Maybe<AccountCondition>;
+};
+
+
+export type AccountProjectsByUploadAccountIdAndProjectIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
+};
+
+
+export type AccountProjectsByPostCreatorAccountIdAndProjectIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
+};
+
+
+export type AccountProjectsByProjectPartnerAccountIdAndProjectIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Account` values, with data from `Project`. */
@@ -648,6 +730,101 @@ export type AccountPatch = {
   addr?: Maybe<Scalars['String']>;
 };
 
+/** A connection to a list of `Project` values, with data from `Post`. */
+export type AccountProjectsByPostCreatorAccountIdAndProjectIdManyToManyConnection = {
+  __typename?: 'AccountProjectsByPostCreatorAccountIdAndProjectIdManyToManyConnection';
+  /** A list of `Project` objects. */
+  nodes: Array<Maybe<Project>>;
+  /** A list of edges which contains the `Project`, info from the `Post`, and the cursor to aid in pagination. */
+  edges: Array<AccountProjectsByPostCreatorAccountIdAndProjectIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Project` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Project` edge in the connection, with data from `Post`. */
+export type AccountProjectsByPostCreatorAccountIdAndProjectIdManyToManyEdge = {
+  __typename?: 'AccountProjectsByPostCreatorAccountIdAndProjectIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Project` at the end of the edge. */
+  node?: Maybe<Project>;
+  /** Reads and enables pagination through a set of `Post`. */
+  postsByProjectId: PostsConnection;
+};
+
+
+/** A `Project` edge in the connection, with data from `Post`. */
+export type AccountProjectsByPostCreatorAccountIdAndProjectIdManyToManyEdgePostsByProjectIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<PostsOrderBy>>;
+  condition?: Maybe<PostCondition>;
+  filter?: Maybe<PostFilter>;
+};
+
+/** A connection to a list of `Project` values, with data from `ProjectPartner`. */
+export type AccountProjectsByProjectPartnerAccountIdAndProjectIdManyToManyConnection = {
+  __typename?: 'AccountProjectsByProjectPartnerAccountIdAndProjectIdManyToManyConnection';
+  /** A list of `Project` objects. */
+  nodes: Array<Maybe<Project>>;
+  /** A list of edges which contains the `Project`, info from the `ProjectPartner`, and the cursor to aid in pagination. */
+  edges: Array<AccountProjectsByProjectPartnerAccountIdAndProjectIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Project` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Project` edge in the connection, with data from `ProjectPartner`. */
+export type AccountProjectsByProjectPartnerAccountIdAndProjectIdManyToManyEdge = {
+  __typename?: 'AccountProjectsByProjectPartnerAccountIdAndProjectIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Project` at the end of the edge. */
+  node?: Maybe<Project>;
+};
+
+/** A connection to a list of `Project` values, with data from `Upload`. */
+export type AccountProjectsByUploadAccountIdAndProjectIdManyToManyConnection = {
+  __typename?: 'AccountProjectsByUploadAccountIdAndProjectIdManyToManyConnection';
+  /** A list of `Project` objects. */
+  nodes: Array<Maybe<Project>>;
+  /** A list of edges which contains the `Project`, info from the `Upload`, and the cursor to aid in pagination. */
+  edges: Array<AccountProjectsByUploadAccountIdAndProjectIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Project` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Project` edge in the connection, with data from `Upload`. */
+export type AccountProjectsByUploadAccountIdAndProjectIdManyToManyEdge = {
+  __typename?: 'AccountProjectsByUploadAccountIdAndProjectIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Project` at the end of the edge. */
+  node?: Maybe<Project>;
+  /** Reads and enables pagination through a set of `Upload`. */
+  uploadsByProjectId: UploadsConnection;
+};
+
+
+/** A `Project` edge in the connection, with data from `Upload`. */
+export type AccountProjectsByUploadAccountIdAndProjectIdManyToManyEdgeUploadsByProjectIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<UploadsOrderBy>>;
+  condition?: Maybe<UploadCondition>;
+};
+
 export enum AccountType {
   User = 'USER',
   Organization = 'ORGANIZATION'
@@ -708,6 +885,58 @@ export enum AccountsOrderBy {
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
 
+
+export type Context = {
+  __typename?: 'Context';
+  column?: Maybe<Scalars['JSON']>;
+};
+
+/** A condition to be used against `Context` object types. All fields are tested for equality and combined with a logical ‘and.’ */
+export type ContextCondition = {
+  /** Checks for equality with the object’s `column` field. */
+  column?: Maybe<Scalars['JSON']>;
+};
+
+/** A filter to be used against `Context` object types. All fields are combined with a logical ‘and.’ */
+export type ContextFilter = {
+  /** Filter by the object’s `column` field. */
+  column?: Maybe<JsonFilter>;
+  /** Checks for all expressions in this list. */
+  and?: Maybe<Array<ContextFilter>>;
+  /** Checks for any expressions in this list. */
+  or?: Maybe<Array<ContextFilter>>;
+  /** Negates the expression. */
+  not?: Maybe<ContextFilter>;
+};
+
+/** A connection to a list of `Context` values. */
+export type ContextsConnection = {
+  __typename?: 'ContextsConnection';
+  /** A list of `Context` objects. */
+  nodes: Array<Maybe<Context>>;
+  /** A list of edges which contains the `Context` and cursor to aid in pagination. */
+  edges: Array<ContextsEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Context` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Context` edge in the connection. */
+export type ContextsEdge = {
+  __typename?: 'ContextsEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Context` at the end of the edge. */
+  node?: Maybe<Context>;
+};
+
+/** Methods to use when ordering `Context`. */
+export enum ContextsOrderBy {
+  Natural = 'NATURAL',
+  ColumnAsc = 'COLUMN_ASC',
+  ColumnDesc = 'COLUMN_DESC'
+}
 
 /** All input for the create `Account` mutation. */
 export type CreateAccountInput = {
@@ -954,6 +1183,43 @@ export type CreateOrganizationPayloadOrganizationEdgeArgs = {
   orderBy?: Maybe<Array<OrganizationsOrderBy>>;
 };
 
+/** All input for the create `Post` mutation. */
+export type CreatePostInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Post` to be created by this mutation. */
+  post: PostInput;
+};
+
+/** The output of our create `Post` mutation. */
+export type CreatePostPayload = {
+  __typename?: 'CreatePostPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Post` that was created by this mutation. */
+  post?: Maybe<Post>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Account` that is related to this `Post`. */
+  accountByCreatorAccountId?: Maybe<Account>;
+  /** Reads a single `Project` that is related to this `Post`. */
+  projectByProjectId?: Maybe<Project>;
+  /** An edge for our `Post`. May be used by Relay 1. */
+  postEdge?: Maybe<PostsEdge>;
+};
+
+
+/** The output of our create `Post` mutation. */
+export type CreatePostPayloadPostEdgeArgs = {
+  orderBy?: Maybe<Array<PostsOrderBy>>;
+};
+
 /** All input for the create `Project` mutation. */
 export type CreateProjectInput = {
   /**
@@ -963,6 +1229,43 @@ export type CreateProjectInput = {
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Project` to be created by this mutation. */
   project: ProjectInput;
+};
+
+/** All input for the create `ProjectPartner` mutation. */
+export type CreateProjectPartnerInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `ProjectPartner` to be created by this mutation. */
+  projectPartner: ProjectPartnerInput;
+};
+
+/** The output of our create `ProjectPartner` mutation. */
+export type CreateProjectPartnerPayload = {
+  __typename?: 'CreateProjectPartnerPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `ProjectPartner` that was created by this mutation. */
+  projectPartner?: Maybe<ProjectPartner>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Project` that is related to this `ProjectPartner`. */
+  projectByProjectId?: Maybe<Project>;
+  /** Reads a single `Account` that is related to this `ProjectPartner`. */
+  accountByAccountId?: Maybe<Account>;
+  /** An edge for our `ProjectPartner`. May be used by Relay 1. */
+  projectPartnerEdge?: Maybe<ProjectPartnersEdge>;
+};
+
+
+/** The output of our create `ProjectPartner` mutation. */
+export type CreateProjectPartnerPayloadProjectPartnerEdgeArgs = {
+  orderBy?: Maybe<Array<ProjectPartnersOrderBy>>;
 };
 
 /** The output of our create `Project` mutation. */
@@ -1026,6 +1329,43 @@ export type CreateShaclGraphPayload = {
 /** The output of our create `ShaclGraph` mutation. */
 export type CreateShaclGraphPayloadShaclGraphEdgeArgs = {
   orderBy?: Maybe<Array<ShaclGraphsOrderBy>>;
+};
+
+/** All input for the create `Upload` mutation. */
+export type CreateUploadInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Upload` to be created by this mutation. */
+  upload: UploadInput;
+};
+
+/** The output of our create `Upload` mutation. */
+export type CreateUploadPayload = {
+  __typename?: 'CreateUploadPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Upload` that was created by this mutation. */
+  upload?: Maybe<Upload>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Account` that is related to this `Upload`. */
+  accountByAccountId?: Maybe<Account>;
+  /** Reads a single `Project` that is related to this `Upload`. */
+  projectByProjectId?: Maybe<Project>;
+  /** An edge for our `Upload`. May be used by Relay 1. */
+  uploadEdge?: Maybe<UploadsEdge>;
+};
+
+
+/** The output of our create `Upload` mutation. */
+export type CreateUploadPayloadUploadEdgeArgs = {
+  orderBy?: Maybe<Array<UploadsOrderBy>>;
 };
 
 export type CreditBatch = Node & {
@@ -1903,6 +2243,54 @@ export type DeleteOrganizationPayloadOrganizationEdgeArgs = {
   orderBy?: Maybe<Array<OrganizationsOrderBy>>;
 };
 
+/** All input for the `deletePostByIri` mutation. */
+export type DeletePostByIriInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  iri: Scalars['String'];
+};
+
+/** All input for the `deletePost` mutation. */
+export type DeletePostInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `Post` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `Post` mutation. */
+export type DeletePostPayload = {
+  __typename?: 'DeletePostPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Post` that was deleted by this mutation. */
+  post?: Maybe<Post>;
+  deletedPostId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Account` that is related to this `Post`. */
+  accountByCreatorAccountId?: Maybe<Account>;
+  /** Reads a single `Project` that is related to this `Post`. */
+  projectByProjectId?: Maybe<Project>;
+  /** An edge for our `Post`. May be used by Relay 1. */
+  postEdge?: Maybe<PostsEdge>;
+};
+
+
+/** The output of our delete `Post` mutation. */
+export type DeletePostPayloadPostEdgeArgs = {
+  orderBy?: Maybe<Array<PostsOrderBy>>;
+};
+
 /** All input for the `deleteProjectById` mutation. */
 export type DeleteProjectByIdInput = {
   /**
@@ -1942,6 +2330,55 @@ export type DeleteProjectInput = {
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Project` to be deleted. */
   nodeId: Scalars['ID'];
+};
+
+/** All input for the `deleteProjectPartnerByProjectIdAndAccountId` mutation. */
+export type DeleteProjectPartnerByProjectIdAndAccountIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  projectId: Scalars['UUID'];
+  accountId: Scalars['UUID'];
+};
+
+/** All input for the `deleteProjectPartner` mutation. */
+export type DeleteProjectPartnerInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `ProjectPartner` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `ProjectPartner` mutation. */
+export type DeleteProjectPartnerPayload = {
+  __typename?: 'DeleteProjectPartnerPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `ProjectPartner` that was deleted by this mutation. */
+  projectPartner?: Maybe<ProjectPartner>;
+  deletedProjectPartnerId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Project` that is related to this `ProjectPartner`. */
+  projectByProjectId?: Maybe<Project>;
+  /** Reads a single `Account` that is related to this `ProjectPartner`. */
+  accountByAccountId?: Maybe<Account>;
+  /** An edge for our `ProjectPartner`. May be used by Relay 1. */
+  projectPartnerEdge?: Maybe<ProjectPartnersEdge>;
+};
+
+
+/** The output of our delete `ProjectPartner` mutation. */
+export type DeleteProjectPartnerPayloadProjectPartnerEdgeArgs = {
+  orderBy?: Maybe<Array<ProjectPartnersOrderBy>>;
 };
 
 /** The output of our delete `Project` mutation. */
@@ -2017,6 +2454,64 @@ export type DeleteShaclGraphPayload = {
 /** The output of our delete `ShaclGraph` mutation. */
 export type DeleteShaclGraphPayloadShaclGraphEdgeArgs = {
   orderBy?: Maybe<Array<ShaclGraphsOrderBy>>;
+};
+
+/** All input for the `deleteUploadByIri` mutation. */
+export type DeleteUploadByIriInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  iri: Scalars['String'];
+};
+
+/** All input for the `deleteUploadByUrl` mutation. */
+export type DeleteUploadByUrlInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  url: Scalars['String'];
+};
+
+/** All input for the `deleteUpload` mutation. */
+export type DeleteUploadInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `Upload` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `Upload` mutation. */
+export type DeleteUploadPayload = {
+  __typename?: 'DeleteUploadPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Upload` that was deleted by this mutation. */
+  upload?: Maybe<Upload>;
+  deletedUploadId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Account` that is related to this `Upload`. */
+  accountByAccountId?: Maybe<Account>;
+  /** Reads a single `Project` that is related to this `Upload`. */
+  projectByProjectId?: Maybe<Project>;
+  /** An edge for our `Upload`. May be used by Relay 1. */
+  uploadEdge?: Maybe<UploadsEdge>;
+};
+
+
+/** The output of our delete `Upload` mutation. */
+export type DeleteUploadPayloadUploadEdgeArgs = {
+  orderBy?: Maybe<Array<UploadsOrderBy>>;
 };
 
 export type Document = Node & {
@@ -2241,10 +2736,16 @@ export type Mutation = {
   createMetadataGraph?: Maybe<CreateMetadataGraphPayload>;
   /** Creates a single `Organization`. */
   createOrganization?: Maybe<CreateOrganizationPayload>;
+  /** Creates a single `Post`. */
+  createPost?: Maybe<CreatePostPayload>;
   /** Creates a single `Project`. */
   createProject?: Maybe<CreateProjectPayload>;
+  /** Creates a single `ProjectPartner`. */
+  createProjectPartner?: Maybe<CreateProjectPartnerPayload>;
   /** Creates a single `ShaclGraph`. */
   createShaclGraph?: Maybe<CreateShaclGraphPayload>;
+  /** Creates a single `Upload`. */
+  createUpload?: Maybe<CreateUploadPayload>;
   /** Updates a single `Account` using its globally unique id and a patch. */
   updateAccount?: Maybe<UpdateAccountPayload>;
   /** Updates a single `Account` using a unique key and a patch. */
@@ -2283,6 +2784,10 @@ export type Mutation = {
   updateOrganizationById?: Maybe<UpdateOrganizationPayload>;
   /** Updates a single `Organization` using a unique key and a patch. */
   updateOrganizationByAccountId?: Maybe<UpdateOrganizationPayload>;
+  /** Updates a single `Post` using its globally unique id and a patch. */
+  updatePost?: Maybe<UpdatePostPayload>;
+  /** Updates a single `Post` using a unique key and a patch. */
+  updatePostByIri?: Maybe<UpdatePostPayload>;
   /** Updates a single `Project` using its globally unique id and a patch. */
   updateProject?: Maybe<UpdateProjectPayload>;
   /** Updates a single `Project` using a unique key and a patch. */
@@ -2291,10 +2796,20 @@ export type Mutation = {
   updateProjectBySlug?: Maybe<UpdateProjectPayload>;
   /** Updates a single `Project` using a unique key and a patch. */
   updateProjectByOnChainId?: Maybe<UpdateProjectPayload>;
+  /** Updates a single `ProjectPartner` using its globally unique id and a patch. */
+  updateProjectPartner?: Maybe<UpdateProjectPartnerPayload>;
+  /** Updates a single `ProjectPartner` using a unique key and a patch. */
+  updateProjectPartnerByProjectIdAndAccountId?: Maybe<UpdateProjectPartnerPayload>;
   /** Updates a single `ShaclGraph` using its globally unique id and a patch. */
   updateShaclGraph?: Maybe<UpdateShaclGraphPayload>;
   /** Updates a single `ShaclGraph` using a unique key and a patch. */
   updateShaclGraphByUri?: Maybe<UpdateShaclGraphPayload>;
+  /** Updates a single `Upload` using its globally unique id and a patch. */
+  updateUpload?: Maybe<UpdateUploadPayload>;
+  /** Updates a single `Upload` using a unique key and a patch. */
+  updateUploadByIri?: Maybe<UpdateUploadPayload>;
+  /** Updates a single `Upload` using a unique key and a patch. */
+  updateUploadByUrl?: Maybe<UpdateUploadPayload>;
   /** Deletes a single `Account` using its globally unique id. */
   deleteAccount?: Maybe<DeleteAccountPayload>;
   /** Deletes a single `Account` using a unique key. */
@@ -2333,6 +2848,10 @@ export type Mutation = {
   deleteOrganizationById?: Maybe<DeleteOrganizationPayload>;
   /** Deletes a single `Organization` using a unique key. */
   deleteOrganizationByAccountId?: Maybe<DeleteOrganizationPayload>;
+  /** Deletes a single `Post` using its globally unique id. */
+  deletePost?: Maybe<DeletePostPayload>;
+  /** Deletes a single `Post` using a unique key. */
+  deletePostByIri?: Maybe<DeletePostPayload>;
   /** Deletes a single `Project` using its globally unique id. */
   deleteProject?: Maybe<DeleteProjectPayload>;
   /** Deletes a single `Project` using a unique key. */
@@ -2341,10 +2860,20 @@ export type Mutation = {
   deleteProjectBySlug?: Maybe<DeleteProjectPayload>;
   /** Deletes a single `Project` using a unique key. */
   deleteProjectByOnChainId?: Maybe<DeleteProjectPayload>;
+  /** Deletes a single `ProjectPartner` using its globally unique id. */
+  deleteProjectPartner?: Maybe<DeleteProjectPartnerPayload>;
+  /** Deletes a single `ProjectPartner` using a unique key. */
+  deleteProjectPartnerByProjectIdAndAccountId?: Maybe<DeleteProjectPartnerPayload>;
   /** Deletes a single `ShaclGraph` using its globally unique id. */
   deleteShaclGraph?: Maybe<DeleteShaclGraphPayload>;
   /** Deletes a single `ShaclGraph` using a unique key. */
   deleteShaclGraphByUri?: Maybe<DeleteShaclGraphPayload>;
+  /** Deletes a single `Upload` using its globally unique id. */
+  deleteUpload?: Maybe<DeleteUploadPayload>;
+  /** Deletes a single `Upload` using a unique key. */
+  deleteUploadByIri?: Maybe<DeleteUploadPayload>;
+  /** Deletes a single `Upload` using a unique key. */
+  deleteUploadByUrl?: Maybe<DeleteUploadPayload>;
   shuffle?: Maybe<ShufflePayload>;
 };
 
@@ -2392,14 +2921,32 @@ export type MutationCreateOrganizationArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreatePostArgs = {
+  input: CreatePostInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateProjectArgs = {
   input: CreateProjectInput;
 };
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateProjectPartnerArgs = {
+  input: CreateProjectPartnerInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateShaclGraphArgs = {
   input: CreateShaclGraphInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateUploadArgs = {
+  input: CreateUploadInput;
 };
 
 
@@ -2518,6 +3065,18 @@ export type MutationUpdateOrganizationByAccountIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdatePostArgs = {
+  input: UpdatePostInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdatePostByIriArgs = {
+  input: UpdatePostByIriInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateProjectArgs = {
   input: UpdateProjectInput;
 };
@@ -2542,6 +3101,18 @@ export type MutationUpdateProjectByOnChainIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateProjectPartnerArgs = {
+  input: UpdateProjectPartnerInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateProjectPartnerByProjectIdAndAccountIdArgs = {
+  input: UpdateProjectPartnerByProjectIdAndAccountIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateShaclGraphArgs = {
   input: UpdateShaclGraphInput;
 };
@@ -2550,6 +3121,24 @@ export type MutationUpdateShaclGraphArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateShaclGraphByUriArgs = {
   input: UpdateShaclGraphByUriInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateUploadArgs = {
+  input: UpdateUploadInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateUploadByIriArgs = {
+  input: UpdateUploadByIriInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateUploadByUrlArgs = {
+  input: UpdateUploadByUrlInput;
 };
 
 
@@ -2668,6 +3257,18 @@ export type MutationDeleteOrganizationByAccountIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeletePostArgs = {
+  input: DeletePostInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeletePostByIriArgs = {
+  input: DeletePostByIriInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteProjectArgs = {
   input: DeleteProjectInput;
 };
@@ -2692,6 +3293,18 @@ export type MutationDeleteProjectByOnChainIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteProjectPartnerArgs = {
+  input: DeleteProjectPartnerInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteProjectPartnerByProjectIdAndAccountIdArgs = {
+  input: DeleteProjectPartnerByProjectIdAndAccountIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteShaclGraphArgs = {
   input: DeleteShaclGraphInput;
 };
@@ -2700,6 +3313,24 @@ export type MutationDeleteShaclGraphArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteShaclGraphByUriArgs = {
   input: DeleteShaclGraphByUriInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteUploadArgs = {
+  input: DeleteUploadInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteUploadByIriArgs = {
+  input: DeleteUploadByIriInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteUploadByUrlArgs = {
+  input: DeleteUploadByUrlInput;
 };
 
 
@@ -2814,6 +3445,125 @@ export type PageInfo = {
   endCursor?: Maybe<Scalars['Cursor']>;
 };
 
+/** Project posts */
+export type Post = Node & {
+  __typename?: 'Post';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
+  iri: Scalars['String'];
+  createdAt?: Maybe<Scalars['Datetime']>;
+  creatorAccountId: Scalars['UUID'];
+  projectId: Scalars['UUID'];
+  privacy: PostPrivacy;
+  contents: Scalars['JSON'];
+  /** Reads a single `Account` that is related to this `Post`. */
+  accountByCreatorAccountId?: Maybe<Account>;
+  /** Reads a single `Project` that is related to this `Post`. */
+  projectByProjectId?: Maybe<Project>;
+};
+
+/** A condition to be used against `Post` object types. All fields are tested for equality and combined with a logical ‘and.’ */
+export type PostCondition = {
+  /** Checks for equality with the object’s `iri` field. */
+  iri?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `createdAt` field. */
+  createdAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `creatorAccountId` field. */
+  creatorAccountId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `projectId` field. */
+  projectId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `privacy` field. */
+  privacy?: Maybe<PostPrivacy>;
+  /** Checks for equality with the object’s `contents` field. */
+  contents?: Maybe<Scalars['JSON']>;
+};
+
+/** A filter to be used against `Post` object types. All fields are combined with a logical ‘and.’ */
+export type PostFilter = {
+  /** Filter by the object’s `contents` field. */
+  contents?: Maybe<JsonFilter>;
+  /** Checks for all expressions in this list. */
+  and?: Maybe<Array<PostFilter>>;
+  /** Checks for any expressions in this list. */
+  or?: Maybe<Array<PostFilter>>;
+  /** Negates the expression. */
+  not?: Maybe<PostFilter>;
+};
+
+/** An input for mutations affecting `Post` */
+export type PostInput = {
+  iri: Scalars['String'];
+  createdAt?: Maybe<Scalars['Datetime']>;
+  creatorAccountId: Scalars['UUID'];
+  projectId: Scalars['UUID'];
+  privacy?: Maybe<PostPrivacy>;
+  contents: Scalars['JSON'];
+};
+
+/** Represents an update to a `Post`. Fields that are set will be updated. */
+export type PostPatch = {
+  iri?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['Datetime']>;
+  creatorAccountId?: Maybe<Scalars['UUID']>;
+  projectId?: Maybe<Scalars['UUID']>;
+  privacy?: Maybe<PostPrivacy>;
+  contents?: Maybe<Scalars['JSON']>;
+};
+
+/**
+ * private: post data including files are private,
+ *    private_files: files including location data are private,
+ *    private_locations: location data is private,
+ *    public: post data including files are public
+ */
+export enum PostPrivacy {
+  Private = 'PRIVATE',
+  PrivateFiles = 'PRIVATE_FILES',
+  PrivateLocations = 'PRIVATE_LOCATIONS',
+  Public = 'PUBLIC'
+}
+
+/** A connection to a list of `Post` values. */
+export type PostsConnection = {
+  __typename?: 'PostsConnection';
+  /** A list of `Post` objects. */
+  nodes: Array<Maybe<Post>>;
+  /** A list of edges which contains the `Post` and cursor to aid in pagination. */
+  edges: Array<PostsEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Post` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Post` edge in the connection. */
+export type PostsEdge = {
+  __typename?: 'PostsEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Post` at the end of the edge. */
+  node?: Maybe<Post>;
+};
+
+/** Methods to use when ordering `Post`. */
+export enum PostsOrderBy {
+  Natural = 'NATURAL',
+  IriAsc = 'IRI_ASC',
+  IriDesc = 'IRI_DESC',
+  CreatedAtAsc = 'CREATED_AT_ASC',
+  CreatedAtDesc = 'CREATED_AT_DESC',
+  CreatorAccountIdAsc = 'CREATOR_ACCOUNT_ID_ASC',
+  CreatorAccountIdDesc = 'CREATOR_ACCOUNT_ID_DESC',
+  ProjectIdAsc = 'PROJECT_ID_ASC',
+  ProjectIdDesc = 'PROJECT_ID_DESC',
+  PrivacyAsc = 'PRIVACY_ASC',
+  PrivacyDesc = 'PRIVACY_DESC',
+  ContentsAsc = 'CONTENTS_ASC',
+  ContentsDesc = 'CONTENTS_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
+
 export type Project = Node & {
   __typename?: 'Project';
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
@@ -2842,6 +3592,18 @@ export type Project = Node & {
   creditBatchesByProjectId: CreditBatchesConnection;
   /** Reads and enables pagination through a set of `Document`. */
   documentsByProjectId: DocumentsConnection;
+  /** Reads and enables pagination through a set of `Upload`. */
+  uploadsByProjectId: UploadsConnection;
+  /** Reads and enables pagination through a set of `Post`. */
+  postsByProjectId: PostsConnection;
+  /** Reads and enables pagination through a set of `ProjectPartner`. */
+  projectPartnersByProjectId: ProjectPartnersConnection;
+  /** Reads and enables pagination through a set of `Account`. */
+  accountsByUploadProjectIdAndAccountId: ProjectAccountsByUploadProjectIdAndAccountIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Account`. */
+  accountsByPostProjectIdAndCreatorAccountId: ProjectAccountsByPostProjectIdAndCreatorAccountIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Account`. */
+  accountsByProjectPartnerProjectIdAndAccountId: ProjectAccountsByProjectPartnerProjectIdAndAccountIdManyToManyConnection;
 };
 
 
@@ -2865,6 +3627,168 @@ export type ProjectDocumentsByProjectIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<DocumentsOrderBy>>;
   condition?: Maybe<DocumentCondition>;
+};
+
+
+export type ProjectUploadsByProjectIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<UploadsOrderBy>>;
+  condition?: Maybe<UploadCondition>;
+};
+
+
+export type ProjectPostsByProjectIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<PostsOrderBy>>;
+  condition?: Maybe<PostCondition>;
+  filter?: Maybe<PostFilter>;
+};
+
+
+export type ProjectProjectPartnersByProjectIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectPartnersOrderBy>>;
+  condition?: Maybe<ProjectPartnerCondition>;
+};
+
+
+export type ProjectAccountsByUploadProjectIdAndAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AccountsOrderBy>>;
+  condition?: Maybe<AccountCondition>;
+};
+
+
+export type ProjectAccountsByPostProjectIdAndCreatorAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AccountsOrderBy>>;
+  condition?: Maybe<AccountCondition>;
+};
+
+
+export type ProjectAccountsByProjectPartnerProjectIdAndAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AccountsOrderBy>>;
+  condition?: Maybe<AccountCondition>;
+};
+
+/** A connection to a list of `Account` values, with data from `Post`. */
+export type ProjectAccountsByPostProjectIdAndCreatorAccountIdManyToManyConnection = {
+  __typename?: 'ProjectAccountsByPostProjectIdAndCreatorAccountIdManyToManyConnection';
+  /** A list of `Account` objects. */
+  nodes: Array<Maybe<Account>>;
+  /** A list of edges which contains the `Account`, info from the `Post`, and the cursor to aid in pagination. */
+  edges: Array<ProjectAccountsByPostProjectIdAndCreatorAccountIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Account` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Account` edge in the connection, with data from `Post`. */
+export type ProjectAccountsByPostProjectIdAndCreatorAccountIdManyToManyEdge = {
+  __typename?: 'ProjectAccountsByPostProjectIdAndCreatorAccountIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Account` at the end of the edge. */
+  node?: Maybe<Account>;
+  /** Reads and enables pagination through a set of `Post`. */
+  postsByCreatorAccountId: PostsConnection;
+};
+
+
+/** A `Account` edge in the connection, with data from `Post`. */
+export type ProjectAccountsByPostProjectIdAndCreatorAccountIdManyToManyEdgePostsByCreatorAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<PostsOrderBy>>;
+  condition?: Maybe<PostCondition>;
+  filter?: Maybe<PostFilter>;
+};
+
+/** A connection to a list of `Account` values, with data from `ProjectPartner`. */
+export type ProjectAccountsByProjectPartnerProjectIdAndAccountIdManyToManyConnection = {
+  __typename?: 'ProjectAccountsByProjectPartnerProjectIdAndAccountIdManyToManyConnection';
+  /** A list of `Account` objects. */
+  nodes: Array<Maybe<Account>>;
+  /** A list of edges which contains the `Account`, info from the `ProjectPartner`, and the cursor to aid in pagination. */
+  edges: Array<ProjectAccountsByProjectPartnerProjectIdAndAccountIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Account` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Account` edge in the connection, with data from `ProjectPartner`. */
+export type ProjectAccountsByProjectPartnerProjectIdAndAccountIdManyToManyEdge = {
+  __typename?: 'ProjectAccountsByProjectPartnerProjectIdAndAccountIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Account` at the end of the edge. */
+  node?: Maybe<Account>;
+};
+
+/** A connection to a list of `Account` values, with data from `Upload`. */
+export type ProjectAccountsByUploadProjectIdAndAccountIdManyToManyConnection = {
+  __typename?: 'ProjectAccountsByUploadProjectIdAndAccountIdManyToManyConnection';
+  /** A list of `Account` objects. */
+  nodes: Array<Maybe<Account>>;
+  /** A list of edges which contains the `Account`, info from the `Upload`, and the cursor to aid in pagination. */
+  edges: Array<ProjectAccountsByUploadProjectIdAndAccountIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Account` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Account` edge in the connection, with data from `Upload`. */
+export type ProjectAccountsByUploadProjectIdAndAccountIdManyToManyEdge = {
+  __typename?: 'ProjectAccountsByUploadProjectIdAndAccountIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Account` at the end of the edge. */
+  node?: Maybe<Account>;
+  /** Reads and enables pagination through a set of `Upload`. */
+  uploadsByAccountId: UploadsConnection;
+};
+
+
+/** A `Account` edge in the connection, with data from `Upload`. */
+export type ProjectAccountsByUploadProjectIdAndAccountIdManyToManyEdgeUploadsByAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<UploadsOrderBy>>;
+  condition?: Maybe<UploadCondition>;
 };
 
 /** A condition to be used against `Project` object types. All fields are tested for equality and combined with a logical ‘and.’ */
@@ -2922,6 +3846,74 @@ export type ProjectInput = {
   published?: Maybe<Scalars['Boolean']>;
   adminAccountId?: Maybe<Scalars['UUID']>;
 };
+
+export type ProjectPartner = Node & {
+  __typename?: 'ProjectPartner';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
+  projectId: Scalars['UUID'];
+  accountId: Scalars['UUID'];
+  /** Reads a single `Project` that is related to this `ProjectPartner`. */
+  projectByProjectId?: Maybe<Project>;
+  /** Reads a single `Account` that is related to this `ProjectPartner`. */
+  accountByAccountId?: Maybe<Account>;
+};
+
+/**
+ * A condition to be used against `ProjectPartner` object types. All fields are
+ * tested for equality and combined with a logical ‘and.’
+ */
+export type ProjectPartnerCondition = {
+  /** Checks for equality with the object’s `projectId` field. */
+  projectId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `accountId` field. */
+  accountId?: Maybe<Scalars['UUID']>;
+};
+
+/** An input for mutations affecting `ProjectPartner` */
+export type ProjectPartnerInput = {
+  projectId: Scalars['UUID'];
+  accountId: Scalars['UUID'];
+};
+
+/** Represents an update to a `ProjectPartner`. Fields that are set will be updated. */
+export type ProjectPartnerPatch = {
+  projectId?: Maybe<Scalars['UUID']>;
+  accountId?: Maybe<Scalars['UUID']>;
+};
+
+/** A connection to a list of `ProjectPartner` values. */
+export type ProjectPartnersConnection = {
+  __typename?: 'ProjectPartnersConnection';
+  /** A list of `ProjectPartner` objects. */
+  nodes: Array<Maybe<ProjectPartner>>;
+  /** A list of edges which contains the `ProjectPartner` and cursor to aid in pagination. */
+  edges: Array<ProjectPartnersEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `ProjectPartner` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `ProjectPartner` edge in the connection. */
+export type ProjectPartnersEdge = {
+  __typename?: 'ProjectPartnersEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `ProjectPartner` at the end of the edge. */
+  node?: Maybe<ProjectPartner>;
+};
+
+/** Methods to use when ordering `ProjectPartner`. */
+export enum ProjectPartnersOrderBy {
+  Natural = 'NATURAL',
+  ProjectIdAsc = 'PROJECT_ID_ASC',
+  ProjectIdDesc = 'PROJECT_ID_DESC',
+  AccountIdAsc = 'ACCOUNT_ID_ASC',
+  AccountIdDesc = 'ACCOUNT_ID_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
 
 /** Represents an update to a `Project`. Fields that are set will be updated. */
 export type ProjectPatch = {
@@ -3006,6 +3998,8 @@ export type Query = Node & {
   node?: Maybe<Node>;
   /** Reads and enables pagination through a set of `Account`. */
   allAccounts?: Maybe<AccountsConnection>;
+  /** Reads and enables pagination through a set of `Context`. */
+  allContexts?: Maybe<ContextsConnection>;
   /** Reads and enables pagination through a set of `CreditBatch`. */
   allCreditBatches?: Maybe<CreditBatchesConnection>;
   /** Reads and enables pagination through a set of `CreditClass`. */
@@ -3018,10 +4012,16 @@ export type Query = Node & {
   allMetadataGraphs?: Maybe<MetadataGraphsConnection>;
   /** Reads and enables pagination through a set of `Organization`. */
   allOrganizations?: Maybe<OrganizationsConnection>;
+  /** Reads and enables pagination through a set of `Post`. */
+  allPosts?: Maybe<PostsConnection>;
   /** Reads and enables pagination through a set of `Project`. */
   allProjects?: Maybe<ProjectsConnection>;
+  /** Reads and enables pagination through a set of `ProjectPartner`. */
+  allProjectPartners?: Maybe<ProjectPartnersConnection>;
   /** Reads and enables pagination through a set of `ShaclGraph`. */
   allShaclGraphs?: Maybe<ShaclGraphsConnection>;
+  /** Reads and enables pagination through a set of `Upload`. */
+  allUploads?: Maybe<UploadsConnection>;
   accountById?: Maybe<Account>;
   accountByAddr?: Maybe<Account>;
   creditBatchById?: Maybe<CreditBatch>;
@@ -3034,10 +4034,14 @@ export type Query = Node & {
   metadataGraphByIri?: Maybe<MetadataGraph>;
   organizationById?: Maybe<Organization>;
   organizationByAccountId?: Maybe<Organization>;
+  postByIri?: Maybe<Post>;
   projectById?: Maybe<Project>;
   projectBySlug?: Maybe<Project>;
   projectByOnChainId?: Maybe<Project>;
+  projectPartnerByProjectIdAndAccountId?: Maybe<ProjectPartner>;
   shaclGraphByUri?: Maybe<ShaclGraph>;
+  uploadByIri?: Maybe<Upload>;
+  uploadByUrl?: Maybe<Upload>;
   /** Reads and enables pagination through a set of `Account`. */
   getAccountsByNameOrAddr?: Maybe<AccountsConnection>;
   getCurrentAccount?: Maybe<Account>;
@@ -3055,10 +4059,16 @@ export type Query = Node & {
   metadataGraph?: Maybe<MetadataGraph>;
   /** Reads a single `Organization` using its globally unique `ID`. */
   organization?: Maybe<Organization>;
+  /** Reads a single `Post` using its globally unique `ID`. */
+  post?: Maybe<Post>;
   /** Reads a single `Project` using its globally unique `ID`. */
   project?: Maybe<Project>;
+  /** Reads a single `ProjectPartner` using its globally unique `ID`. */
+  projectPartner?: Maybe<ProjectPartner>;
   /** Reads a single `ShaclGraph` using its globally unique `ID`. */
   shaclGraph?: Maybe<ShaclGraph>;
+  /** Reads a single `Upload` using its globally unique `ID`. */
+  upload?: Maybe<Upload>;
 };
 
 
@@ -3077,6 +4087,19 @@ export type QueryAllAccountsArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AccountsOrderBy>>;
   condition?: Maybe<AccountCondition>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllContextsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ContextsOrderBy>>;
+  condition?: Maybe<ContextCondition>;
+  filter?: Maybe<ContextFilter>;
 };
 
 
@@ -3156,6 +4179,19 @@ export type QueryAllOrganizationsArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAllPostsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<PostsOrderBy>>;
+  condition?: Maybe<PostCondition>;
+  filter?: Maybe<PostFilter>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryAllProjectsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
@@ -3169,6 +4205,18 @@ export type QueryAllProjectsArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAllProjectPartnersArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectPartnersOrderBy>>;
+  condition?: Maybe<ProjectPartnerCondition>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryAllShaclGraphsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
@@ -3178,6 +4226,18 @@ export type QueryAllShaclGraphsArgs = {
   orderBy?: Maybe<Array<ShaclGraphsOrderBy>>;
   condition?: Maybe<ShaclGraphCondition>;
   filter?: Maybe<ShaclGraphFilter>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllUploadsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<UploadsOrderBy>>;
+  condition?: Maybe<UploadCondition>;
 };
 
 
@@ -3255,6 +4315,12 @@ export type QueryOrganizationByAccountIdArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryPostByIriArgs = {
+  iri: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryProjectByIdArgs = {
   id: Scalars['UUID'];
 };
@@ -3273,8 +4339,27 @@ export type QueryProjectByOnChainIdArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryProjectPartnerByProjectIdAndAccountIdArgs = {
+  projectId: Scalars['UUID'];
+  accountId: Scalars['UUID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryShaclGraphByUriArgs = {
   uri: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryUploadByIriArgs = {
+  iri: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryUploadByUrlArgs = {
+  url: Scalars['String'];
 };
 
 
@@ -3332,13 +4417,31 @@ export type QueryOrganizationArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryPostArgs = {
+  nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryProjectArgs = {
   nodeId: Scalars['ID'];
 };
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryProjectPartnerArgs = {
+  nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryShaclGraphArgs = {
+  nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryUploadArgs = {
   nodeId: Scalars['ID'];
 };
 
@@ -3860,6 +4963,57 @@ export type UpdateOrganizationPayloadOrganizationEdgeArgs = {
   orderBy?: Maybe<Array<OrganizationsOrderBy>>;
 };
 
+/** All input for the `updatePostByIri` mutation. */
+export type UpdatePostByIriInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `Post` being updated. */
+  postPatch: PostPatch;
+  iri: Scalars['String'];
+};
+
+/** All input for the `updatePost` mutation. */
+export type UpdatePostInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `Post` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `Post` being updated. */
+  postPatch: PostPatch;
+};
+
+/** The output of our update `Post` mutation. */
+export type UpdatePostPayload = {
+  __typename?: 'UpdatePostPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Post` that was updated by this mutation. */
+  post?: Maybe<Post>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Account` that is related to this `Post`. */
+  accountByCreatorAccountId?: Maybe<Account>;
+  /** Reads a single `Project` that is related to this `Post`. */
+  projectByProjectId?: Maybe<Project>;
+  /** An edge for our `Post`. May be used by Relay 1. */
+  postEdge?: Maybe<PostsEdge>;
+};
+
+
+/** The output of our update `Post` mutation. */
+export type UpdatePostPayloadPostEdgeArgs = {
+  orderBy?: Maybe<Array<PostsOrderBy>>;
+};
+
 /** All input for the `updateProjectById` mutation. */
 export type UpdateProjectByIdInput = {
   /**
@@ -3907,6 +5061,58 @@ export type UpdateProjectInput = {
   nodeId: Scalars['ID'];
   /** An object where the defined keys will be set on the `Project` being updated. */
   projectPatch: ProjectPatch;
+};
+
+/** All input for the `updateProjectPartnerByProjectIdAndAccountId` mutation. */
+export type UpdateProjectPartnerByProjectIdAndAccountIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `ProjectPartner` being updated. */
+  projectPartnerPatch: ProjectPartnerPatch;
+  projectId: Scalars['UUID'];
+  accountId: Scalars['UUID'];
+};
+
+/** All input for the `updateProjectPartner` mutation. */
+export type UpdateProjectPartnerInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `ProjectPartner` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `ProjectPartner` being updated. */
+  projectPartnerPatch: ProjectPartnerPatch;
+};
+
+/** The output of our update `ProjectPartner` mutation. */
+export type UpdateProjectPartnerPayload = {
+  __typename?: 'UpdateProjectPartnerPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `ProjectPartner` that was updated by this mutation. */
+  projectPartner?: Maybe<ProjectPartner>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Project` that is related to this `ProjectPartner`. */
+  projectByProjectId?: Maybe<Project>;
+  /** Reads a single `Account` that is related to this `ProjectPartner`. */
+  accountByAccountId?: Maybe<Account>;
+  /** An edge for our `ProjectPartner`. May be used by Relay 1. */
+  projectPartnerEdge?: Maybe<ProjectPartnersEdge>;
+};
+
+
+/** The output of our update `ProjectPartner` mutation. */
+export type UpdateProjectPartnerPayloadProjectPartnerEdgeArgs = {
+  orderBy?: Maybe<Array<ProjectPartnersOrderBy>>;
 };
 
 /** The output of our update `Project` mutation. */
@@ -3985,6 +5191,170 @@ export type UpdateShaclGraphPayload = {
 export type UpdateShaclGraphPayloadShaclGraphEdgeArgs = {
   orderBy?: Maybe<Array<ShaclGraphsOrderBy>>;
 };
+
+/** All input for the `updateUploadByIri` mutation. */
+export type UpdateUploadByIriInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `Upload` being updated. */
+  uploadPatch: UploadPatch;
+  iri: Scalars['String'];
+};
+
+/** All input for the `updateUploadByUrl` mutation. */
+export type UpdateUploadByUrlInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `Upload` being updated. */
+  uploadPatch: UploadPatch;
+  url: Scalars['String'];
+};
+
+/** All input for the `updateUpload` mutation. */
+export type UpdateUploadInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `Upload` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `Upload` being updated. */
+  uploadPatch: UploadPatch;
+};
+
+/** The output of our update `Upload` mutation. */
+export type UpdateUploadPayload = {
+  __typename?: 'UpdateUploadPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Upload` that was updated by this mutation. */
+  upload?: Maybe<Upload>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Account` that is related to this `Upload`. */
+  accountByAccountId?: Maybe<Account>;
+  /** Reads a single `Project` that is related to this `Upload`. */
+  projectByProjectId?: Maybe<Project>;
+  /** An edge for our `Upload`. May be used by Relay 1. */
+  uploadEdge?: Maybe<UploadsEdge>;
+};
+
+
+/** The output of our update `Upload` mutation. */
+export type UpdateUploadPayloadUploadEdgeArgs = {
+  orderBy?: Maybe<Array<UploadsOrderBy>>;
+};
+
+/** Storage tracking for project media uploads */
+export type Upload = Node & {
+  __typename?: 'Upload';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
+  iri: Scalars['String'];
+  createdAt?: Maybe<Scalars['Datetime']>;
+  url: Scalars['String'];
+  size: Scalars['Int'];
+  mimetype: Scalars['String'];
+  accountId: Scalars['UUID'];
+  projectId: Scalars['UUID'];
+  /** Reads a single `Account` that is related to this `Upload`. */
+  accountByAccountId?: Maybe<Account>;
+  /** Reads a single `Project` that is related to this `Upload`. */
+  projectByProjectId?: Maybe<Project>;
+};
+
+/** A condition to be used against `Upload` object types. All fields are tested for equality and combined with a logical ‘and.’ */
+export type UploadCondition = {
+  /** Checks for equality with the object’s `iri` field. */
+  iri?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `createdAt` field. */
+  createdAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `url` field. */
+  url?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `size` field. */
+  size?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `mimetype` field. */
+  mimetype?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `accountId` field. */
+  accountId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `projectId` field. */
+  projectId?: Maybe<Scalars['UUID']>;
+};
+
+/** An input for mutations affecting `Upload` */
+export type UploadInput = {
+  iri: Scalars['String'];
+  createdAt?: Maybe<Scalars['Datetime']>;
+  url: Scalars['String'];
+  size: Scalars['Int'];
+  mimetype: Scalars['String'];
+  accountId: Scalars['UUID'];
+  projectId: Scalars['UUID'];
+};
+
+/** Represents an update to a `Upload`. Fields that are set will be updated. */
+export type UploadPatch = {
+  iri?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['Datetime']>;
+  url?: Maybe<Scalars['String']>;
+  size?: Maybe<Scalars['Int']>;
+  mimetype?: Maybe<Scalars['String']>;
+  accountId?: Maybe<Scalars['UUID']>;
+  projectId?: Maybe<Scalars['UUID']>;
+};
+
+/** A connection to a list of `Upload` values. */
+export type UploadsConnection = {
+  __typename?: 'UploadsConnection';
+  /** A list of `Upload` objects. */
+  nodes: Array<Maybe<Upload>>;
+  /** A list of edges which contains the `Upload` and cursor to aid in pagination. */
+  edges: Array<UploadsEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Upload` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Upload` edge in the connection. */
+export type UploadsEdge = {
+  __typename?: 'UploadsEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Upload` at the end of the edge. */
+  node?: Maybe<Upload>;
+};
+
+/** Methods to use when ordering `Upload`. */
+export enum UploadsOrderBy {
+  Natural = 'NATURAL',
+  IriAsc = 'IRI_ASC',
+  IriDesc = 'IRI_DESC',
+  CreatedAtAsc = 'CREATED_AT_ASC',
+  CreatedAtDesc = 'CREATED_AT_DESC',
+  UrlAsc = 'URL_ASC',
+  UrlDesc = 'URL_DESC',
+  SizeAsc = 'SIZE_ASC',
+  SizeDesc = 'SIZE_DESC',
+  MimetypeAsc = 'MIMETYPE_ASC',
+  MimetypeDesc = 'MIMETYPE_DESC',
+  AccountIdAsc = 'ACCOUNT_ID_ASC',
+  AccountIdDesc = 'ACCOUNT_ID_DESC',
+  ProjectIdAsc = 'PROJECT_ID_ASC',
+  ProjectIdDesc = 'PROJECT_ID_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
 
 export type AccountByAddrQueryVariables = Exact<{
   addr: Scalars['String'];
@@ -4281,7 +5651,16 @@ export type ProjectFieldsFragment = (
   )>, accountByVerifierId?: Maybe<(
     { __typename?: 'Account' }
     & AccountFieldsFragment
-  )>, documentsByProjectId: (
+  )>, projectPartnersByProjectId: (
+    { __typename?: 'ProjectPartnersConnection' }
+    & { nodes: Array<Maybe<(
+      { __typename?: 'ProjectPartner' }
+      & { accountByAccountId?: Maybe<(
+        { __typename?: 'Account' }
+        & AccountFieldsFragment
+      )> }
+    )>> }
+  ), documentsByProjectId: (
     { __typename?: 'DocumentsConnection' }
     & { nodes: Array<Maybe<(
       { __typename?: 'Document' }
@@ -4448,6 +5827,13 @@ export const ProjectFieldsFragmentDoc = gql`
   }
   accountByVerifierId {
     ...accountFields
+  }
+  projectPartnersByProjectId {
+    nodes {
+      accountByAccountId {
+        ...accountFields
+      }
+    }
   }
   documentsByProjectId {
     nodes {

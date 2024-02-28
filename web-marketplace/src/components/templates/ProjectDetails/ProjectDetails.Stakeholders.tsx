@@ -51,7 +51,7 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
       ),
     },
     {
-      accounts: projectDeveloper,
+      accounts: projectVerifier,
       title: 'verifier',
       tooltip: (
         <>

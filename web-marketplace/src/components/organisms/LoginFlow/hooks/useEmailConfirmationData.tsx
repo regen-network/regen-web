@@ -1,32 +1,45 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
 import { apiUri } from 'lib/apiUri';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
+import { useAuth } from 'lib/auth/auth';
 import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 
-import { onPostData } from '../../LoginButton/hooks/onLoginPostData';
+import { onPostData } from 'components/organisms/LoginButton/hooks/onLoginPostData';
+import { useTimer } from 'components/organisms/LoginButton/hooks/useTimer';
+import { getEmailModalError } from 'components/organisms/LoginButton/utils/getEmailModalError';
+
 import {
   DEFAULT_RESEND_ERROR,
   DEFAULT_VALIDATE_ERROR,
   EMAIL_CONFIRMATION_SUCCES,
   RESEND_SUCCES,
+  RESEND_TIMER,
 } from '../../LoginButton/LoginButton.constants';
-import { getEmailModalError } from '../../LoginButton/utils/getEmailModalError';
 
 export const useEmailConfirmationData = () => {
   const reactQueryClient = useQueryClient();
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [emailModalErrorCode, setEmailModalErrorCode] = useState('');
   const [email, setEmail] = useState('');
+  const { privActiveAccount } = useAuth();
   const setBannerText = useSetAtom(bannerTextAtom);
   const { data: token } = useQuery(getCsrfTokenQuery({}));
+  const {
+    timeLeft: resendTimeLeft,
+    startTimer,
+    resetTimer,
+  } = useTimer({
+    duration: RESEND_TIMER,
+  });
 
   const onConfirmationModalClose = () => setIsConfirmationModalOpen(false);
   const onResendPasscode = async () => {
-    if (token) {
+    if (token && resendTimeLeft === null) {
+      startTimer();
       await onPostData({
         url: `${apiUri}/marketplace/v1/auth/passcode`,
         data: {
@@ -66,11 +79,19 @@ export const useEmailConfirmationData = () => {
     onResend: onResendPasscode,
   });
 
+  useEffect(() => {
+    if (privActiveAccount?.email === email) {
+      resetTimer();
+    }
+  }, [email, privActiveAccount?.email, resetTimer]);
+
   return {
     email,
     setEmail,
     emailModalError,
     isConfirmationModalOpen,
+    resendTimeLeft,
+    startResendTimer: startTimer,
     onConfirmationModalClose,
     onMailCodeChange,
     onResendPasscode,

@@ -13,11 +13,11 @@ import { useWallet } from 'lib/wallet/wallet';
 import {
   EMAIL_CONFIRMATION_CANCEL,
   EMAIL_CONFIRMATION_SUBMIT,
-  RESEND_BUTTON_TEXT,
-  RESEND_TEXT,
   socialProviders,
 } from '../LoginButton/LoginButton.constants';
 import { MobileSigningModal } from '../LoginButton/LoginButton.SigningModal';
+import { getResendCodeButtonLink } from '../LoginButton/utils/getResendCodeButtonLink';
+import { getResendCodeLabel } from '../LoginButton/utils/getResendCodeLabel';
 import { LoginModal } from '../LoginModal/LoginModal';
 import { LoginModalState, LoginProvider } from '../LoginModal/LoginModal.types';
 import { useEmailConfirmationData } from './hooks/useEmailConfirmationData';
@@ -44,6 +44,8 @@ const LoginFlow = ({
     isConfirmationModalOpen,
     email,
     emailModalError,
+    resendTimeLeft,
+    startResendTimer,
     onConfirmationModalClose,
     onMailCodeChange,
     onResendPasscode,
@@ -75,6 +77,7 @@ const LoginFlow = ({
                 token,
               });
               onModalClose();
+              startResendTimer();
               setIsConfirmationModalOpen(true);
             } catch (e) {
               setErrorBannerTextAtom(String(e));
@@ -86,11 +89,11 @@ const LoginFlow = ({
         connecting={connecting}
       />
       <EmailConfirmationModal
-        resendText={RESEND_TEXT}
-        resendButtonLink={{
-          text: RESEND_BUTTON_TEXT,
-          onClick: onResendPasscode,
-        }}
+        resendText={getResendCodeLabel({ resendTimeLeft })}
+        resendButtonLink={getResendCodeButtonLink({
+          resendTimeLeft,
+          onResendPasscode,
+        })}
         cancelButton={{
           text: EMAIL_CONFIRMATION_CANCEL,
           onClick: onConfirmationModalClose,

@@ -1,11 +1,6 @@
-import { postData } from 'utils/fetch/postData';
-
 import { ProfileVariant } from 'web-components/lib/components/organisms/ProfileHeader/ProfileHeader.types';
 
 import { AccountType } from 'generated/graphql';
-import { apiUri } from 'lib/apiUri';
-
-import { SocialProvider } from './ProfileEdit.types';
 
 export const PROFILE = 'Profile';
 export const VIEW_PROFILE = 'View Profile';

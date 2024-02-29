@@ -85,6 +85,7 @@ const RegistryLayoutHeader: React.FC = () => {
       showProjects,
       isConnected,
       loginDisabled,
+      activeAccount,
     ],
   );
 
@@ -119,10 +120,13 @@ const RegistryLayoutHeader: React.FC = () => {
           <Box display="flex" justifyContent="center" alignItems="center">
             {chainId && accountOrWallet && disconnect && (
               <UserMenuItems
-                address={getAddress({
-                  walletAddress: getWalletAddress({ activeAccount, wallet }),
-                  email: privActiveAccount?.email,
-                })}
+                nameOrAddress={
+                  activeAccount?.name ||
+                  getAddress({
+                    walletAddress: getWalletAddress({ activeAccount, wallet }),
+                    email: privActiveAccount?.email,
+                  })
+                }
                 avatar={
                   activeAccount?.image ? activeAccount?.image : defaultAvatar
                 }

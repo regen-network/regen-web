@@ -10,14 +10,14 @@ import { LogOutIcon } from '../../icons/LogOutIcon';
 import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
 
 interface UserMenuItemsProps extends HeaderMenuItemBase {
-  address?: string | null;
+  nameOrAddress?: string | null;
   avatar: string;
   userMenuItems: HeaderDropdownItemProps[];
   disconnect: () => void;
 }
 
 const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
-  address,
+  nameOrAddress,
   avatar,
   disconnect,
   pathname,
@@ -34,7 +34,7 @@ const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
         item={{
           renderTitle: () => (
             <div className="flex justify-between items-center text-sm w-[164px] sm:w-[194px]">
-              <div className="flex">
+              <div className="flex items-center">
                 <UserAvatar
                   size="small"
                   sx={{
@@ -43,7 +43,7 @@ const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
                   alt="default avatar"
                   src={avatar}
                 />
-                {address}
+                {nameOrAddress}
               </div>
               <BreadcrumbIcon className="w-[12px] h-[12px] text-grey-700" />
             </div>

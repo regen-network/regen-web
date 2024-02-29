@@ -96,6 +96,7 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
           isOnChain={
             !editContextLoading && !!onChainProject && !!wallet?.address
           }
+          projectId={offChainProject?.id}
         />
       </WithLoader>
     </ProjectFormTemplate>

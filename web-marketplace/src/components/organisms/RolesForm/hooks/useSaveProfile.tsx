@@ -34,6 +34,7 @@ export const useSaveProfile = () => {
           addr: profile.address,
           creatorId: activeAccountId,
         };
+
         if (edit) {
           await updateAccount({
             variables: {

@@ -25,7 +25,7 @@ interface Props {
   fixedCrop?: Partial<Crop>;
   children: ReactNode;
   setValue: (value: string) => void;
-  onUpload?: (imageFile: File) => Promise<string>;
+  onUpload?: (imageFile: File) => Promise<string | undefined>;
   sx?: {
     label?: SxProps<Theme>;
     button?: SxProps<Theme>;

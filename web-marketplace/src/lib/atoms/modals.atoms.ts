@@ -1,3 +1,4 @@
+import { AccountSwitchModalProps } from 'components/organisms/AccountSwitchModal/AccountSwitchModal';
 import { atomWithImmer } from 'jotai-immer';
 
 import { RegenModalProps } from 'web-components/src/components/modal';
@@ -62,3 +63,8 @@ export const addWalletModalRemoveAtom = atomWithImmer({
     profileImage: '',
   },
 } as Partial<AddWalletModalRemoveProps>);
+
+export const accountSwitchModalAtom = atomWithImmer({
+  open: false,
+  prevAddr: '',
+} as Partial<AccountSwitchModalProps>);

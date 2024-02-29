@@ -21,6 +21,7 @@ import { RetryFailedFunctions } from './RegistryLayout.RetryFailedFunctions';
 import { RegistryLayoutSwitchWalletModal } from './RegistryLayout.SwitchWalletModal';
 import { RegistryLayoutTxErrorModal } from './RegistryLayout.TxErrorModal';
 import { RegistryLayoutTxSuccessfulModal } from './RegistryLayout.TxSuccessfulModal';
+import { RegistryLayoutAccountSwitchModal } from './RegistryLayout.AccountSwitchModal';
 
 const RegistryLayout: React.FC = () => {
   return (
@@ -46,6 +47,7 @@ const RegistryLayout: React.FC = () => {
       <RegistryLayoutAddWalletModalRemove />
       <RegistryLayoutAddWalletModalSwitch />
       <RegistryLayoutAddWalletModalSwitchWarning />
+      <RegistryLayoutAccountSwitchModal />
     </>
   );
 };

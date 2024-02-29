@@ -35,12 +35,7 @@ import { getAddress } from './RegistryLayout.utils';
 
 const RegistryLayoutHeader: React.FC = () => {
   const { pathname } = useLocation();
-  const {
-    authenticatedAccounts,
-    activeAccount,
-    privActiveAccount,
-    privAuthenticatedAccounts,
-  } = useAuth();
+  const { activeAccount, privActiveAccount } = useAuth();
 
   const { wallet, disconnect, isConnected, loginDisabled } = useWallet();
   const { accountOrWallet } = useAuthData();
@@ -72,7 +67,7 @@ const RegistryLayoutHeader: React.FC = () => {
                 : getDefaultAvatar(activeAccount),
               address: getAddress({
                 walletAddress: activeAccount.addr,
-                email: privAuthenticatedAccounts?.[0].email,
+                email: privActiveAccount?.email,
               }),
               selected: true,
             }
@@ -95,13 +90,8 @@ const RegistryLayoutHeader: React.FC = () => {
     ? headerColors[pathname]
     : theme.palette.primary.light;
 
-  const {
-    isModalOpen,
-    modalState,
-    onButtonClick,
-    onModalClose,
-    walletsUiConfig,
-  } = useLoginData();
+  const { isModalOpen, modalState, onModalClose, walletsUiConfig } =
+    useLoginData();
 
   return (
     <>

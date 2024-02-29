@@ -5,7 +5,6 @@ import UserAvatar from '../../user/UserAvatar';
 import { HeaderDropdownItemProps } from './HeaderDropdown/HeaderDropdown.Item';
 import { HeaderMenuItemBase } from './HeaderMenuItem/HeaderMenuItem';
 import { UserMenuItem } from './UserMenuItem';
-import { useUserMenuItemsStyles } from './UserMenuItems.styles';
 import { LogOutIcon } from '../../icons/LogOutIcon';
 import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
 

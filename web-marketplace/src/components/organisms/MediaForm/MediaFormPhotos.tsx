@@ -217,6 +217,7 @@ export const MediaFormPhotos = ({
             className={classes.galleryItem}
             defaultStyle={isFirst ? true : false}
             accept="image/*"
+            multi
             renderModal={({
               initialImage,
               open,

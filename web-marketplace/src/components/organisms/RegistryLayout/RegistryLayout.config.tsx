@@ -19,6 +19,11 @@ import {
   SEPARATOR,
 } from 'pages/Dashboard/Dashboard.constants';
 import { Link } from 'components/atoms';
+import {
+  UserMenuItemProfile,
+  UserMenuItemProfileProps,
+} from 'web-components/src/components/header/components/UserMenuItem.Profile';
+import { OnProfileClickType } from 'web-components/src/components/header/components/UserMenuItem.types';
 
 export const getMenuItems = (pathname: string): Item[] => [
   {
@@ -63,6 +68,8 @@ interface GetUserMenuItemsParams {
   showProjects?: boolean;
   isWalletConnected: boolean;
   loginDisabled: boolean;
+  profile?: UserMenuItemProfileProps;
+  onProfileClick?: OnProfileClickType;
 }
 
 export const getUserMenuItems = ({
@@ -73,8 +80,15 @@ export const getUserMenuItems = ({
   showProjects,
   isWalletConnected,
   loginDisabled,
+  profile,
+  onProfileClick,
 }: GetUserMenuItemsParams): HeaderDropdownItemProps[] =>
   [
+    profile && {
+      children: (
+        <UserMenuItemProfile {...profile} onProfileClick={onProfileClick} />
+      ),
+    },
     isWalletConnected && {
       pathname,
       linkComponent,
@@ -115,6 +129,9 @@ export const getUserMenuItems = ({
       pathname,
       linkComponent,
       ...PROFILE_SETTINGS,
+    },
+    {
+      ...SEPARATOR,
     },
   ].filter(Boolean) as HeaderDropdownItemProps[];
 

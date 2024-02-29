@@ -172,7 +172,7 @@ export function ProjectCard({
               >
                 <BreadcrumbIcon
                   direction={open ? 'up' : 'down'}
-                  className={classes.icon}
+                  className={cn(classes.icon, 'text-brand-400')}
                 />{' '}
                 view details
               </span>

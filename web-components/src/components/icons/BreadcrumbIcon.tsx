@@ -30,7 +30,6 @@ export default function BreadcrumbIcon({
   const rotate: string = directionRotate[direction];
   const { classes, cx } = useStyles({ rotate });
   const theme = useTheme();
-  color = color || theme.palette.secondary.main;
 
   return (
     <SvgIcon
@@ -44,14 +43,14 @@ export default function BreadcrumbIcon({
         height="23.6375"
         rx="0.25"
         transform="matrix(0.697571 0.716516 -0.697571 0.716516 30.0176 0)"
-        fill={color}
+        fill={color || 'currentColor'}
       />
       <rect
         width="4.27533"
         height="23.6375"
         rx="0.25"
         transform="matrix(-0.697571 0.716516 0.697571 0.716516 2.98236 0)"
-        fill={color}
+        fill={color || 'currentColor'}
       />
     </SvgIcon>
   );

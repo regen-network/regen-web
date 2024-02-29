@@ -1,28 +1,19 @@
 import React from 'react';
-import Box from '@mui/material/Box';
 
-import OutlinedButton from '../../buttons/OutlinedButton';
-import UserMenuIcon from '../../icons/UserMenuIcon';
-import { Subtitle } from '../../typography';
+import { Body } from '../../typography';
 import UserAvatar from '../../user/UserAvatar';
 import { HeaderDropdownItemProps } from './HeaderDropdown/HeaderDropdown.Item';
 import { HeaderMenuItemBase } from './HeaderMenuItem/HeaderMenuItem';
 import { UserMenuItem } from './UserMenuItem';
-import {
-  UserMenuItemProfile,
-  UserMenuItemProfileProps,
-} from './UserMenuItem.Profile';
-import { OnProfileClickType } from './UserMenuItem.types';
 import { useUserMenuItemsStyles } from './UserMenuItems.styles';
+import { LogOutIcon } from '../../icons/LogOutIcon';
+import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
 
 interface UserMenuItemsProps extends HeaderMenuItemBase {
   address?: string | null;
   avatar: string;
   userMenuItems: HeaderDropdownItemProps[];
   disconnect: () => void;
-  profiles: UserMenuItemProfileProps[];
-  addAccount?: () => void;
-  onProfileClick?: OnProfileClickType;
 }
 
 const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
@@ -32,70 +23,43 @@ const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
   pathname,
   linkComponent,
   userMenuItems,
-  profiles,
-  addAccount,
-  onProfileClick,
 }) => {
-  const styles = useUserMenuItemsStyles();
-
   return (
     <>
       <UserMenuItem
         sx={{ mr: 2.5 }}
-        classes={{ paper: styles.paper }}
+        classes={{ paper: 'pt-10 pb-15 px-0' }}
         pathname={pathname}
         linkComponent={linkComponent}
         item={{
           renderTitle: () => (
-            <Box display="flex" alignItems="center" sx={{ fontSize: 14 }}>
-              <UserAvatar
-                size="small"
-                sx={{
-                  mr: 2.75,
-                }}
-                alt="default avatar"
-                src={avatar}
-              />
-              {address}
-            </Box>
+            <div className="flex justify-between items-center text-sm w-[164px] sm:w-[194px]">
+              <div className="flex">
+                <UserAvatar
+                  size="small"
+                  sx={{
+                    mr: 2.75,
+                  }}
+                  alt="default avatar"
+                  src={avatar}
+                />
+                {address}
+              </div>
+              <BreadcrumbIcon className="w-[12px] h-[12px] text-grey-700" />
+            </div>
           ),
           extras: (
-            <Box>
-              {profiles.map((p, i) => (
-                <UserMenuItemProfile
-                  key={i}
-                  {...p}
-                  onProfileClick={onProfileClick}
-                />
-              ))}
-              {addAccount && (
-                <OutlinedButton
-                  onClick={addAccount}
-                  sx={{ py: 12, px: { xs: 6.25, sm: 15 }, mb: 2.5 }}
-                >
-                  + add account
-                </OutlinedButton>
-              )}
-              <Subtitle
+            <div className="flex text-grey-400 cursor-pointer pl-20 py-[6px] items-center">
+              <LogOutIcon />
+              <Body
                 size="sm"
-                color="info.dark"
+                mobileSize="sm"
                 onClick={disconnect}
-                sx={{ cursor: 'pointer' }}
+                className="text-grey-400 pl-[18px]"
               >
                 Log out
-              </Subtitle>
-            </Box>
-          ),
-        }}
-      />
-      <UserMenuItem
-        pathname={pathname}
-        linkComponent={linkComponent}
-        item={{
-          renderTitle: () => (
-            <Box display="flex" alignItems="center">
-              <UserMenuIcon sx={{ color: 'info.dark' }} />
-            </Box>
+              </Body>
+            </div>
           ),
           dropdownItems: userMenuItems,
         }}

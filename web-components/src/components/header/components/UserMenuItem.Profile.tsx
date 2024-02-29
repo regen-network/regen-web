@@ -27,11 +27,13 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
     <Card
       borderColor={selected ? undefined : 'transparent'}
       sx={{
+        mx: 2.5,
         p: 2.5,
         mb: 2.5,
         backgroundColor: selected ? 'grey.50' : 'primary.main',
         cursor: 'pointer',
       }}
+      className="w-full"
       onClick={() => onProfileClick && onProfileClick(id, selected)}
     >
       <Grid container>

@@ -51,6 +51,7 @@ const RegistryLayoutHeader: React.FC = () => {
 
   const { showProjects, showCreditClasses, isIssuer } = useProfileItems({});
   const menuItems = useMemo(() => getMenuItems(pathname), [pathname]);
+  const onProfileClick = useOnProfileClick();
   const userMenuItems = useMemo(
     () =>
       getUserMenuItems({
@@ -61,6 +62,21 @@ const RegistryLayoutHeader: React.FC = () => {
         showProjects,
         isWalletConnected: isConnected,
         loginDisabled,
+        onProfileClick,
+        profile: activeAccount
+          ? {
+              id: activeAccount.id,
+              name: activeAccount.name ? activeAccount.name : DEFAULT_NAME,
+              profileImage: activeAccount.image
+                ? activeAccount.image
+                : getDefaultAvatar(activeAccount),
+              address: getAddress({
+                walletAddress: activeAccount.addr,
+                email: privAuthenticatedAccounts?.[0].email,
+              }),
+              selected: true,
+            }
+          : undefined,
       }),
     [
       pathname,
@@ -71,7 +87,6 @@ const RegistryLayoutHeader: React.FC = () => {
       loginDisabled,
     ],
   );
-  const onProfileClick = useOnProfileClick();
 
   const defaultAvatar = getDefaultAvatar(activeAccount);
 
@@ -115,23 +130,6 @@ const RegistryLayoutHeader: React.FC = () => {
                 pathname={pathname}
                 linkComponent={RegistryNavLink}
                 userMenuItems={userMenuItems}
-                profiles={
-                  authenticatedAccounts?.map((account, i) => ({
-                    id: account?.id,
-                    name: account?.name ? account?.name : DEFAULT_NAME,
-                    profileImage: account?.image
-                      ? account?.image
-                      : getDefaultAvatar(account),
-                    address: getAddress({
-                      walletAddress: account?.addr,
-                      email: privAuthenticatedAccounts?.[i].email,
-                    }),
-                    selected:
-                      activeAccount?.id && activeAccount?.id === account?.id,
-                  })) || []
-                }
-                onProfileClick={onProfileClick}
-                addAccount={loginDisabled ? undefined : onButtonClick}
               />
             )}
             <LoginButton />

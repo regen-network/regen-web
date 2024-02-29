@@ -25,6 +25,7 @@ export const AddNewProfile: React.FC<AddNewProfileProps> = ({
         profileType: AccountType.User,
         name: '',
         profileImage: DEFAULT_PROFILE_USER_AVATAR,
+        address: null,
       });
     }}
   >

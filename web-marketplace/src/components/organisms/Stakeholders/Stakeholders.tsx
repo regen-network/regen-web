@@ -35,7 +35,7 @@ export const Stakeholders = ({ stakeholders }: Props) => {
                   title={title}
                   tooltip={tooltip}
                   fontFamily={defaultFontFamily}
-                  sx={{ mb: 7.5 }}
+                  sx={{ mb: accounts.length > 1 ? { xs: 5, sm: 7.5 } : 7.5 }}
                 />
                 {accounts.length > 1 && (
                   <CollapseList
@@ -45,7 +45,7 @@ export const Stakeholders = ({ stakeholders }: Props) => {
                         user={account}
                         key={account?.name}
                         fontFamily={defaultFontFamily}
-                        sx={{ mb: 7.5 }}
+                        sx={{ mb: { xs: 5, sm: 7.5 } }}
                       />
                     ))}
                   />

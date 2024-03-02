@@ -5,6 +5,7 @@ import {
 } from '@apollo/client';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';
+import { Account } from 'web-components/src/components/user/UserInfo';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import {
@@ -17,7 +18,7 @@ import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/g
 import { useAccountInfo } from 'pages/ProfileEdit/hooks/useAccountInfo';
 import { getDisplayAccountOrAddress } from 'components/organisms/DetailsSection/DetailsSection.utils';
 
-import { getDisplayAccount } from '../ProjectDetails.utils';
+import { getAccount, getDisplayAccount } from '../ProjectDetails.utils';
 
 type Params = {
   anchoredMetadata?: AnchoredProjectMetadataLD;
@@ -62,10 +63,15 @@ export const useStakeholders = ({
   const { account } = useAccountInfo({ accountByAddr });
   const admin = getDisplayAccountOrAddress(adminAddr, account);
 
+  const partners = offChainProject?.projectPartnersByProjectId?.nodes?.map(
+    partner => getAccount(partner?.accountByAccountId),
+  ) as Account[];
+
   return {
     projectDeveloper,
     projectVerifier,
     program,
     admin,
+    partners,
   };
 };

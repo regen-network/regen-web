@@ -27,6 +27,13 @@ fragment projectFields on Project {
   accountByVerifierId {
     ...accountFields
   }
+  projectPartnersByProjectId {
+    nodes {
+      accountByAccountId {
+        ...accountFields
+      }
+    }
+  }
   documentsByProjectId {
     nodes {
       name

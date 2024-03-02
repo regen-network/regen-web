@@ -13,17 +13,16 @@ export type Stakeholder = {
 
 type Props = {
   stakeholders: Stakeholder[];
-  minSm: number;
 };
 
-export const Stakeholders = ({ stakeholders, minSm }: Props) => {
+export const Stakeholders = ({ stakeholders }: Props) => {
   const filtered = stakeholders.filter(u =>
     Array.isArray(u.accounts) ? u.accounts.length > 0 : Boolean(u.accounts),
   );
-  const sm = Math.min(12 / filtered.length, minSm);
+  const sm = filtered.length === 4 ? 3 : 4;
 
   return (
-    <Grid container columnSpacing={{ xs: 0, sm: 5 }}>
+    <Grid container columnSpacing={{ xs: 0, sm: 5 }} rowSpacing={{ sm: 10.75 }}>
       {filtered.map(({ accounts, title, tooltip }, i) => {
         const sx =
           i !== filtered.length - 1 ? { mb: { xs: 8.25, sm: 0 } } : undefined;
@@ -36,7 +35,7 @@ export const Stakeholders = ({ stakeholders, minSm }: Props) => {
                   title={title}
                   tooltip={tooltip}
                   fontFamily={defaultFontFamily}
-                  sx={{ mb: 7.5 }}
+                  sx={{ mb: accounts.length > 1 ? { xs: 5, sm: 7.5 } : 7.5 }}
                 />
                 {accounts.length > 1 && (
                   <CollapseList
@@ -46,7 +45,7 @@ export const Stakeholders = ({ stakeholders, minSm }: Props) => {
                         user={account}
                         key={account?.name}
                         fontFamily={defaultFontFamily}
-                        sx={{ mb: 7.5 }}
+                        sx={{ mb: { xs: 5, sm: 7.5 } }}
                       />
                     ))}
                   />

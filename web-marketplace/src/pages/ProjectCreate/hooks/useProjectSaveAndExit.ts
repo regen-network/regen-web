@@ -12,8 +12,8 @@ export const useProjectSaveAndExit = () => {
       await formRef?.current?.submitForm();
       shouldNavigateRef.current = true;
     }
-    if (formRef?.current?.isFormValid()) {
-      navigate('/ecocredits/projects');
+    if (formRef?.current?.isFormValid() !== false) {
+      navigate('/profile/projects');
     }
   };
 

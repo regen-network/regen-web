@@ -102,6 +102,7 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
             <TextField
               className={cx(classes.parcelField, classes.parcelSize)}
               type="number"
+              customInputProps={{ step: 'any' }}
               sx={{ mt: { xs: 0, sm: 0 } }}
               error={!!errors['regen:projectSize']}
               helperText={

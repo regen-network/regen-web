@@ -1,7 +1,5 @@
 import React from 'react';
 import { Box, Button, Grid } from '@mui/material';
-import { DefaultTheme as Theme } from '@mui/styles';
-import { makeStyles } from 'tss-react/mui';
 
 import { LockIcon } from '../../icons/LockIcon';
 import VerifiedIcon from '../../icons/VerifiedIcon';
@@ -11,28 +9,10 @@ import StaticMap from '../../map/StaticMap';
 import { Body, Subtitle } from '../../typography';
 import UserInfo, { User } from '../../user/UserInfo';
 import Card from '../Card';
+import NameWithRoleAndTimestamp from './PostCard.NameWithRoleAndTimestamp';
+import SignerName from './PostCard.SignerName';
+import usePostCardStyles from './PostCard.styles';
 import ActionButton from './PostCardActionButton';
-
-const formatDate = (dateString: string) => {
-  const date = new Date(dateString);
-
-  const dateOptions: Intl.DateTimeFormatOptions = {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  };
-
-  const timeOptions: Intl.DateTimeFormatOptions = {
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: true,
-  };
-
-  return [
-    date.toLocaleDateString('en-US', dateOptions),
-    date.toLocaleTimeString('en-US', timeOptions),
-  ].join(' | ');
-};
 
 interface PostCardProps extends OptimizeImageProps {
   title: string;
@@ -52,85 +32,6 @@ interface PostCardProps extends OptimizeImageProps {
   adminMenuItems?: JSX.Element[];
   handleClickShare?: (ev: React.MouseEvent) => void;
 }
-
-const useStyles = makeStyles()((theme: Theme) => ({
-  root: {
-    backgroundColor: theme.palette.grey['200'],
-  },
-  image: {
-    height: '100%',
-    width: '100%',
-    objectFit: 'cover',
-  },
-  description: {
-    lineClamp: 2,
-    WebkitLineClamp: 2,
-    display: '-webkit-box',
-    WebkitBoxOrient: 'vertical',
-    overflow: 'hidden',
-  },
-  fileIcon: {
-    height: '24px !important',
-    width: '24px !important',
-    ml: '1rem',
-  },
-}));
-
-const SignerName = ({ name }: { name: string }): JSX.Element => {
-  return (
-    <Body size="sm" sx={{ ml: 2, fontWeight: 800 }}>
-      {name}
-    </Body>
-  );
-};
-
-const NameWithRoleAndTimestamp = ({
-  name,
-  authorRole,
-  timestamp,
-}: {
-  name: string;
-  authorRole?: string;
-  timestamp: string;
-}): JSX.Element => (
-  <Box
-    sx={{
-      ml: 3,
-    }}
-  >
-    <Box>
-      <Subtitle size="sm" sx={{ display: 'inline' }}>
-        {name}
-      </Subtitle>
-      <Box
-        borderRadius={1}
-        sx={{
-          px: 1.5,
-          py: 0.5,
-          ml: 2,
-          backgroundColor: theme => theme.palette.grey['300'],
-          display: 'inline-block',
-          fontSize: '10px',
-          color: theme => theme.palette.grey['500'],
-          textTransform: 'uppercase',
-          fontWeight: 800,
-          letterSpacing: '1px',
-        }}
-      >
-        {authorRole}
-      </Box>
-    </Box>
-    <Box
-      sx={theme => ({
-        color: theme.palette.grey['700'],
-        fontSize: '12px',
-        mt: 1.5,
-      })}
-    >
-      {formatDate(timestamp)}
-    </Box>
-  </Box>
-);
 
 export default function PostCard({
   title,
@@ -152,7 +53,7 @@ export default function PostCard({
   adminMenuItems,
   handleClickShare,
 }: PostCardProps): JSX.Element {
-  const { classes } = useStyles();
+  const { classes } = usePostCardStyles();
 
   const authorWithNameRaw: User = {
     ...author,
@@ -170,6 +71,8 @@ export default function PostCard({
     nameRaw: <SignerName name={signer.name} />,
   };
 
+  const hasImageBlock = imgSrc || (geojson && isGISFile);
+
   return (
     <Card className={classes.root} sx={{ p: [4, 8] }} borderRadius="10px">
       <ActionButton
@@ -181,8 +84,13 @@ export default function PostCard({
         container
         sx={{ flexWrap: ['wrap-reverse', 'nowrap'], position: 'relative' }}
       >
-        <Grid xs={12} sm={7} item sx={{ pb: [4.5, 0], pr: [0, 2] }}>
-          <Subtitle size="xl" mb={2.75}>
+        <Grid
+          xs={12}
+          sm={hasImageBlock ? 7 : 12}
+          item
+          sx={{ pb: [4.5, 0], pr: [0, 2] }}
+        >
+          <Subtitle size="lg" mb={2.75}>
             {title}
           </Subtitle>
           <UserInfo
@@ -192,12 +100,7 @@ export default function PostCard({
             nameHasPadding={false}
           />
           <Box sx={{ paddingInlineEnd: 2, paddingBlockStart: 4 }}>
-            <Body
-              size="lg"
-              mobileSize="sm"
-              sx={{ pb: 1.5 }}
-              className={classes.description}
-            >
+            <Body size="md" sx={{ pb: 1.5 }} className={classes.description}>
               {description}
             </Body>
           </Box>
@@ -205,7 +108,8 @@ export default function PostCard({
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 3 }}>
               <VerifiedIcon color="white" fontSize="medium" hasFill />
               <Body
-                size="sm"
+                size="xs"
+                mobileSize="xs"
                 sx={{
                   whiteSpace: 'nowrap',
                   mx: 1,
@@ -228,103 +132,105 @@ export default function PostCard({
             </Box>
           )}
         </Grid>
-        <Grid
-          xs={12}
-          sm={5}
-          item
-          sx={{
-            mb: [5, 0],
-          }}
-        >
-          <Box
-            sx={theme => ({
-              height: theme => ({
-                sm: theme.spacing(51),
-                xs: theme.spacing(49.25),
-              }),
-              border: `1px solid ${theme.palette.grey[100]}`,
-              borderRadius: '10px',
-              overflow: 'hidden',
-              position: 'relative',
-            })}
+        {hasImageBlock && (
+          <Grid
+            xs={12}
+            sm={5}
+            item
+            sx={{
+              mb: [5, 0],
+            }}
           >
-            {isPrivate && (
-              <Box
-                sx={{
-                  borderRadius: 1,
-                  backgroundColor: theme => theme.palette.error.dark,
-                  position: 'absolute',
-                  top: theme => theme.spacing(3),
-                  left: theme => theme.spacing(3),
-                  display: 'flex',
-                  alignItems: 'center',
-                  p: 1.5,
-                }}
-              >
-                <LockIcon
-                  sx={theme => ({
-                    color: theme => theme.palette.primary.contrastText,
-                    height: '18px',
-                    width: '18px',
-                  })}
-                />
-                <Subtitle size="sm" sx={{ pl: 1 }}>
-                  Post is private
-                </Subtitle>
-              </Box>
-            )}
-            {isPrivate && !isAdmin ? (
-              <Box sx={{ backgroundColor: 'black', height: '100%' }}>
-                Post is Private
-              </Box>
-            ) : geojson && isGISFile ? (
-              <StaticMap geojson={geojson} mapboxToken={mapboxToken} />
-            ) : (
-              imgSrc && (
-                <Image
-                  className={classes.image}
-                  src={imgSrc}
-                  alt={imgSrc}
-                  imageStorageBaseUrl={imageStorageBaseUrl}
-                  apiServerUrl={apiServerUrl}
-                />
-              )
-            )}
-            {numberOfFiles && (
-              <Box
-                sx={{
-                  position: 'absolute',
-                  bottom: 0,
-                  right: 0,
-                  transform: 'translate(-50%, -25%)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  color: theme => theme.palette.primary.main,
-                  boxShadow: theme => theme.shadows[1],
-                }}
-              >
-                <Button
-                  onClick={handleClickFile}
+            <Box
+              sx={theme => ({
+                height: theme => ({
+                  sm: theme.spacing(51),
+                  xs: theme.spacing(49.25),
+                }),
+                border: `1px solid ${theme.palette.grey[100]}`,
+                borderRadius: '10px',
+                overflow: 'hidden',
+                position: 'relative',
+              })}
+            >
+              {isPrivate && (
+                <Box
                   sx={{
-                    p: [0, 0],
-                    border: 'none',
-                    justifyContent: 'end',
-                    minWidth: 0,
+                    borderRadius: 1,
+                    backgroundColor: theme => theme.palette.error.dark,
+                    position: 'absolute',
+                    top: theme => theme.spacing(3),
+                    left: theme => theme.spacing(3),
+                    display: 'flex',
+                    alignItems: 'center',
+                    p: 1.5,
                   }}
                 >
-                  <Subtitle
-                    size="sm"
-                    color="white"
-                    sx={{ boxShadow: theme => theme.shadows[1] }}
-                  >
-                    {numberOfFiles}
+                  <LockIcon
+                    sx={theme => ({
+                      color: theme => theme.palette.primary.contrastText,
+                      height: '18px',
+                      width: '18px',
+                    })}
+                  />
+                  <Subtitle size="sm" sx={{ pl: 1 }}>
+                    Post is private
                   </Subtitle>
-                  <WhitepaperIcon className={classes.fileIcon} />
-                </Button>
-              </Box>
-            )}
-          </Box>
-        </Grid>
+                </Box>
+              )}
+              {isPrivate && !isAdmin ? (
+                <Box sx={{ backgroundColor: 'black', height: '100%' }}>
+                  Post is Private
+                </Box>
+              ) : geojson && isGISFile ? (
+                <StaticMap geojson={geojson} mapboxToken={mapboxToken} />
+              ) : (
+                imgSrc && (
+                  <Image
+                    className={classes.image}
+                    src={imgSrc}
+                    alt={imgSrc}
+                    imageStorageBaseUrl={imageStorageBaseUrl}
+                    apiServerUrl={apiServerUrl}
+                  />
+                )
+              )}
+              {numberOfFiles && (
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    bottom: 0,
+                    right: 0,
+                    transform: 'translate(-50%, -25%)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    color: theme => theme.palette.primary.main,
+                    boxShadow: theme => theme.shadows[1],
+                  }}
+                >
+                  <Button
+                    onClick={handleClickFile}
+                    sx={{
+                      p: [0, 0],
+                      border: 'none',
+                      justifyContent: 'end',
+                      minWidth: 0,
+                    }}
+                  >
+                    <Subtitle
+                      size="sm"
+                      color="white"
+                      sx={{ boxShadow: theme => theme.shadows[1] }}
+                    >
+                      {numberOfFiles}
+                    </Subtitle>
+                    <WhitepaperIcon className={classes.fileIcon} />
+                  </Button>
+                </Box>
+              )}
+            </Box>
+          </Grid>
+        )}
       </Grid>
     </Card>
   );

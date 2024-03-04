@@ -7,7 +7,7 @@ import { CSRF_ERROR } from 'lib/errors/apiErrors';
 type Params = PostParams & {
   defaultError: string;
   setEmailModalErrorCode: UseStateSetter<string>;
-  onSuccess?: () => Promise<void>;
+  onSuccess?: (response: any) => Promise<void>;
   retryCsrfRequest?: (failedFunction: FailedFnType) => Promise<void>;
 };
 

@@ -11,7 +11,6 @@ export interface Props extends RegenModalProps {
   state?: LoginModalState;
   wallets: LoginProvider[];
   socialProviders: LoginProvider[];
-  qrCodeUri?: string;
   onEmailSubmit: (values: EmailFormSchemaType) => Promise<void>;
 }
 
@@ -21,7 +20,6 @@ const LoginModal = ({
   state = 'select',
   wallets,
   socialProviders,
-  qrCodeUri,
   onEmailSubmit,
 }: Props): JSX.Element => {
   const isSelectState = state === 'select';

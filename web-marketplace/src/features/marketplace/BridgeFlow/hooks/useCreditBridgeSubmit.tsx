@@ -52,7 +52,7 @@ const useCreditBridgeSubmit = ({
   const creditBridgeSubmit = useCallback(
     async (values: BridgeFormValues): Promise<void> => {
       const batchDenom = creditBridgeBatch?.denom;
-      track<'bridge2', Bridge2Event>('bridge2', {
+      track<Bridge2Event>('bridge2', {
         batchDenom,
         quantity: values.amount,
         creditClassId: creditBridgeBatch?.classId,
@@ -81,7 +81,7 @@ const useCreditBridgeSubmit = ({
       };
 
       const onError = (err?: Error): void => {
-        track<'bridgeFailure', BridgeFailureEvent>('bridgeFailure', {
+        track<BridgeFailureEvent>('bridgeFailure', {
           batchDenom,
           quantity: values.amount,
           creditClassId: creditBridgeBatch?.classId,
@@ -116,7 +116,7 @@ const useCreditBridgeSubmit = ({
           setTxButtonTitle(BRIDGE_BUTTON_TEXT);
           setTxModalDescription(BRIDGE_TX_DESCRIPTION);
         }
-        track<'bridgeSuccess', BridgeSuccessEvent>('bridgeSuccess', {
+        track<BridgeSuccessEvent>('bridgeSuccess', {
           batchDenom,
           quantity: values.amount,
           creditClassId: creditBridgeBatch?.classId,

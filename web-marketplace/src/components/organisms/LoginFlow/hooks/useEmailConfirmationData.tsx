@@ -24,6 +24,8 @@ import {
   RESEND_SUCCES,
   RESEND_TIMER,
 } from '../../LoginButton/LoginButton.constants';
+import { useTracker } from 'lib/tracker/useTracker';
+import { LoginEvent } from 'lib/tracker/types';
 
 type EmailConfirmationDataParams = {
   emailConfirmationText?: string;
@@ -49,6 +51,7 @@ export const useEmailConfirmationData = ({
   } = useTimer({
     duration: RESEND_TIMER,
   });
+  const { track } = useTracker();
 
   const onConfirmationModalClose = () => setIsConfirmationModalOpen(false);
   const onConnectedEmailErrorModalClose = () =>
@@ -80,10 +83,15 @@ export const useEmailConfirmationData = ({
         token,
         defaultError: DEFAULT_VALIDATE_ERROR,
         retryCsrfRequest,
-        onSuccess: async () => {
+        onSuccess: async response => {
           await reactQueryClient.invalidateQueries([GET_ACCOUNTS_QUERY_KEY]);
           setBannerText(emailConfirmationText ?? EMAIL_CONFIRMATION_SUCCES);
           onConfirmationModalClose();
+          if (response?.user?.accountId)
+            track<LoginEvent>('enterCodeSuccess', {
+              id: response.user.accountId,
+              date: new Date().toUTCString(),
+            });
         },
         setEmailModalErrorCode,
       });

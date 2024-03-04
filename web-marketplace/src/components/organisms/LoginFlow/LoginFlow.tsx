@@ -30,7 +30,6 @@ const LoginFlow = ({
   onModalClose,
   wallets,
   modalState,
-  qrCodeUri,
 }: Props) => {
   const {
     isConfirmationModalOpen,
@@ -58,7 +57,6 @@ const LoginFlow = ({
           await onEmailSubmit({ email, callback: onModalClose });
         }}
         state={modalState}
-        qrCodeUri={qrCodeUri}
       />
       <EmailConfirmationModal
         resendText={getResendCodeLabel({ resendTimeLeft })}

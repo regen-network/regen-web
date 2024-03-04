@@ -82,7 +82,7 @@ export const BridgableEcocreditsTable = ({
               size="small"
               onClick={async () => {
                 setBatchToBridge(bridgableCredits[i]);
-                track<'bridge1', Bridge1Event>('bridge1', {
+                track<Bridge1Event>('bridge1', {
                   batchDenom: bridgableCredits[i].denom,
                   projectId: bridgableCredits[i].projectId,
                   creditClassId: bridgableCredits[i].classId,

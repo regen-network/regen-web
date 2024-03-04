@@ -118,7 +118,7 @@ export const SellOrdersActionsBar = ({
               <ContainedButton
                 startIcon={<CurrentCreditsIcon height="18px" width="18px" />}
                 onClick={() => {
-                  track<'buy1', Buy1Event>('buy1', {
+                  track<Buy1Event>('buy1', {
                     url: location.pathname,
                     buttonLocation: 'stickyNav',
                     projectName,

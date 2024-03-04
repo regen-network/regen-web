@@ -6,7 +6,7 @@ export type PostParams = {
   data?: any;
   token: string;
   method?: 'POST' | 'PUT';
-  onSuccess?: () => Promise<void>;
+  onSuccess?: (response: any) => Promise<void>;
   retryCsrfRequest?: (failedFunction: FailedFnType) => Promise<void>;
 };
 
@@ -33,7 +33,7 @@ export const postData = async ({
     try {
       const response = await rawResponse.json();
       if (!response.error && onSuccess) {
-        await onSuccess();
+        await onSuccess(response);
       }
       return response;
     } catch (e) {

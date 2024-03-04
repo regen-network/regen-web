@@ -26,7 +26,7 @@ export const useBuyModalOptionsTracker = (): useBuyModalOptionsTrackerI => {
     selectedProject,
   }: TrackBuyI): void => {
     if (track && location) {
-      track<'buyKeplr', BuyModalEvent>('buyKeplr', {
+      track<BuyModalEvent>('buyKeplr', {
         url: location.pathname,
         projectId: selectedProject?.id,
         creditClassId: selectedProject?.creditClassId,
@@ -39,7 +39,7 @@ export const useBuyModalOptionsTracker = (): useBuyModalOptionsTrackerI => {
     selectedProject,
   }: TrackBuyI): void => {
     if (track && location) {
-      track<'buyScheduleCall', BuyModalEvent>('buyScheduleCall', {
+      track<BuyModalEvent>('buyScheduleCall', {
         url: location.pathname,
         projectId: selectedProject?.id,
         creditClassId: selectedProject?.creditClassId,

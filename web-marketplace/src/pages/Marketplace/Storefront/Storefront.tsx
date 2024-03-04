@@ -266,7 +266,7 @@ export const Storefront = (): JSX.Element => {
                         startIcon={<CreditsIcon className="text-brand-400" />}
                         size="small"
                         onClick={async () => {
-                          track<'buy1', Buy1Event>('buy1', {
+                          track<Buy1Event>('buy1', {
                             url: location.pathname,
                             buttonLocation: 'sellOrderTable',
                             projectName: normalizedSellOrders[i].project?.name,

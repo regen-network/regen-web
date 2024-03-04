@@ -180,15 +180,15 @@ export const SideFilter = ({
                                 [path]: event.target.checked,
                               });
                               if (path !== UNREGISTERED_PATH)
-                                track<
+                                track<FilterCreditClassEvent>(
                                   'filterCreditClass',
-                                  FilterCreditClassEvent
-                                >('filterCreditClass', {
-                                  creditClassId: path,
-                                  selected: getFilterSelected(
-                                    event.target.checked,
-                                  ),
-                                });
+                                  {
+                                    creditClassId: path,
+                                    selected: getFilterSelected(
+                                      event.target.checked,
+                                    ),
+                                  },
+                                );
                             }}
                           />
                         </Box>

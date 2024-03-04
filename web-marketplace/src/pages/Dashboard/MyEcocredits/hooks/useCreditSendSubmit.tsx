@@ -47,7 +47,7 @@ const useCreditSendSubmit = ({
   const creditSendSubmit = useCallback(
     async (values: CreditSendFormSchemaType): Promise<void> => {
       const batchDenom = credits[creditSendOpen].denom;
-      track<'send2', Send2Event>('send2', {
+      track<Send2Event>('send2', {
         batchDenom,
         quantity: values.amount,
         enableAutoRetire: values.withRetire,
@@ -80,7 +80,7 @@ const useCreditSendSubmit = ({
 
       const batchInfo = credits[creditSendOpen];
       const onError = (err?: Error): void => {
-        track<'sendFailure', SendFailureEvent>('sendFailure', {
+        track<SendFailureEvent>('sendFailure', {
           batchDenom,
           projectId: batchInfo?.projectId,
           projectName: !!batchInfo?.projectName
@@ -93,7 +93,7 @@ const useCreditSendSubmit = ({
         });
       };
       const onSuccess = (): void => {
-        track<'sendSuccess', SendSuccessEvent>('sendSuccess', {
+        track<SendSuccessEvent>('sendSuccess', {
           batchDenom,
           projectId: batchInfo?.projectId,
           projectName: !!batchInfo?.projectName

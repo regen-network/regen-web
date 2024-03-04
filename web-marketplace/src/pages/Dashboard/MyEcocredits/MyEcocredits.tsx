@@ -307,7 +307,7 @@ export const MyEcocredits = (): JSX.Element => {
                       icon: <AvailableCreditsIconAlt sx={sxs.arrow} />,
                       label: CREATE_SELL_ORDER_SHORT,
                       onClick: () => {
-                        track<'sell1', Sell1Event>('sell1', {
+                        track<Sell1Event>('sell1', {
                           projectId: credits[i].projectId,
                           projectName: credits[i]?.projectName,
                           creditClassId: credits[i]?.classId,
@@ -325,7 +325,7 @@ export const MyEcocredits = (): JSX.Element => {
                       ),
                       label: CREDIT_SEND_TITLE,
                       onClick: () => {
-                        track<'send1', Send1Event>('send1', {
+                        track<Send1Event>('send1', {
                           batchDenom: credits[i].denom,
                           projectId: credits[i].projectId,
                           projectName: credits[i]?.projectName,
@@ -344,7 +344,7 @@ export const MyEcocredits = (): JSX.Element => {
                       ),
                       label: CREDIT_RETIRE_TITLE,
                       onClick: () => {
-                        track<'retire1', Retire1Event>('retire1', {
+                        track<Retire1Event>('retire1', {
                           batchDenom: credits[i].denom,
                           projectId: credits[i].projectId,
                           projectName: credits[i]?.projectName,
@@ -363,14 +363,11 @@ export const MyEcocredits = (): JSX.Element => {
                       icon: <PutInBasketIcon />,
                       label: BASKET_PUT_TITLE,
                       onClick: () => {
-                        track<'putInBasket1', PutInBasket1Event>(
-                          'putInBasket1',
-                          {
-                            batchDenom: credits[i].denom,
-                            projectId: credits[i].projectId,
-                            creditClassId: credits[i]?.classId,
-                          },
-                        );
+                        track<PutInBasket1Event>('putInBasket1', {
+                          batchDenom: credits[i].denom,
+                          projectId: credits[i].projectId,
+                          creditClassId: credits[i]?.classId,
+                        });
                         setBasketPutOpen(i);
                       },
                     });

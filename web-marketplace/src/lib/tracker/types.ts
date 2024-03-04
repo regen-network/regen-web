@@ -1,13 +1,19 @@
 // Type for "track" function returned by useTracker
 
-export type Track = <IEventName extends string, IPayload = any>(
-  eventName: IEventName,
+export type Track = <IPayload = any>(
+  eventName: string,
   payload?: IPayload,
 ) => Promise<any>;
 
-// Login tracking event metadata specification
+// Login tracking events metadata specification
 
 export interface LoginEvent {
+  id: string; 
+  account?: string;
+  date: string;
+}
+
+export interface WCLoginEvent {
   account: string;
   date: string;
 }

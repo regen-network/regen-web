@@ -133,11 +133,11 @@ const Question = ({
           {question}
           {open ? (
             <BreadcrumbIcon
-              className={cx(classes.icon, classNames?.icon)}
+              className={cx(classes.icon, classNames?.icon, 'text-brand-400')}
               direction="up"
             />
           ) : (
-            <BreadcrumbIcon className={cx(classes.icon, classNames?.icon)} />
+            <BreadcrumbIcon className={cx(classes.icon, classNames?.icon, 'text-brand-400')} />
           )}
         </Title>
         <Body

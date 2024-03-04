@@ -11,10 +11,11 @@ import { LoginParams, SignArbitraryType } from 'lib/wallet/wallet';
 
 type Params = {
   signArbitrary?: SignArbitraryType;
+  logout?: () => Promise<void>;
   setError: UseStateSetter<unknown>;
 };
 
-export const useLogin = ({ signArbitrary, setError }: Params) => {
+export const useLogin = ({ signArbitrary, setError, logout }: Params) => {
   const reactQueryClient = useQueryClient();
   const retryCsrfRequest = useRetryCsrfRequest();
 
@@ -22,7 +23,11 @@ export const useLogin = ({ signArbitrary, setError }: Params) => {
   const { data: token } = useQuery(getCsrfTokenQuery({}));
 
   const login = useCallback(
-    async ({ walletConfig, wallet }: LoginParams): Promise<void> => {
+    async ({
+      walletConfig,
+      wallet,
+      doLogout = false,
+    }: LoginParams): Promise<void> => {
       try {
         if (wallet?.address && signArbitrary && token) {
           // Step 2: Retrieve a nonce for the user
@@ -48,17 +53,22 @@ export const useLogin = ({ signArbitrary, setError }: Params) => {
             nonce: nonce || '',
           });
 
-          // Step 4: Submit the signature to the login endpoint
-          await postData({
-            url: `${apiUri}/marketplace/v1/wallet-auth/login`,
-            data: { signature },
-            token,
-            retryCsrfRequest,
-            onSuccess: async () =>
-              await reactQueryClient.invalidateQueries({
-                queryKey: [GET_ACCOUNTS_QUERY_KEY],
-              }),
-          });
+          if (signature) {
+            // This is used for logging out of the previous account when switching to a new account in Keplr
+            if (logout && doLogout) await logout();
+
+            // Step 4: Submit the signature to the login endpoint
+            await postData({
+              url: `${apiUri}/marketplace/v1/wallet-auth/login`,
+              data: { signature },
+              token,
+              retryCsrfRequest,
+              onSuccess: async () =>
+                await reactQueryClient.invalidateQueries({
+                  queryKey: [GET_ACCOUNTS_QUERY_KEY],
+                }),
+            });
+          }
         }
       } catch (e) {
         setError(e);

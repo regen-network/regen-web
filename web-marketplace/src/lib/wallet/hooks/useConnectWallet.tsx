@@ -20,6 +20,7 @@ type Props = {
     callback?: (...params: any[]) => any,
   ) => Promise<any>;
   login?: LoginType;
+  logout?: () => Promise<void>;
 };
 
 export type ConnectWalletType = ({
@@ -39,6 +40,7 @@ export const useConnectWallet = ({
     async ({
       walletType,
       doLogin,
+      doLogout,
     }: ConnectWalletParams): Promise<Wallet | undefined> => {
       const walletConfig = walletsConfig.find(
         walletConfig => walletConfig.type === walletType,
@@ -69,6 +71,7 @@ export const useConnectWallet = ({
           track,
           login,
           doLogin,
+          doLogout,
         });
         return wallet;
       }

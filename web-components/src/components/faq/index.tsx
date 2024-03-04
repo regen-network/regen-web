@@ -8,6 +8,7 @@ import { Label } from '../typography';
 import Category from './Category';
 import Navigation from './Navigation';
 import { QuestionItem } from './Question';
+import { cn } from '../../utils/styles/cn';
 
 export interface FAQProps {
   categories: {
@@ -96,7 +97,10 @@ const FAQ = ({
                 top: theme => theme.spacing(12),
               }}
             >
-              <BreadcrumbIcon className={classes.icon} direction="prev" />
+              <BreadcrumbIcon
+                className={cn(classes.icon, 'text-brand-400')}
+                direction="prev"
+              />
               back
             </Label>
             <Category

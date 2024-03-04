@@ -1,53 +1,38 @@
 import React from 'react';
-import Box from '@mui/material/Box';
 
-import OutlinedButton from '../../buttons/OutlinedButton';
-import UserMenuIcon from '../../icons/UserMenuIcon';
-import { Subtitle } from '../../typography';
+import { Body } from '../../typography';
 import UserAvatar from '../../user/UserAvatar';
 import { HeaderDropdownItemProps } from './HeaderDropdown/HeaderDropdown.Item';
 import { HeaderMenuItemBase } from './HeaderMenuItem/HeaderMenuItem';
 import { UserMenuItem } from './UserMenuItem';
-import {
-  UserMenuItemProfile,
-  UserMenuItemProfileProps,
-} from './UserMenuItem.Profile';
-import { OnProfileClickType } from './UserMenuItem.types';
-import { useUserMenuItemsStyles } from './UserMenuItems.styles';
+import { LogOutIcon } from '../../icons/LogOutIcon';
+import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
 
 interface UserMenuItemsProps extends HeaderMenuItemBase {
-  address?: string | null;
+  nameOrAddress?: string | null;
   avatar: string;
   userMenuItems: HeaderDropdownItemProps[];
   disconnect: () => void;
-  profiles: UserMenuItemProfileProps[];
-  addAccount?: () => void;
-  onProfileClick?: OnProfileClickType;
 }
 
 const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
-  address,
+  nameOrAddress,
   avatar,
   disconnect,
   pathname,
   linkComponent,
   userMenuItems,
-  profiles,
-  addAccount,
-  onProfileClick,
 }) => {
-  const styles = useUserMenuItemsStyles();
-
   return (
-    <>
-      <UserMenuItem
-        sx={{ mr: 2.5 }}
-        classes={{ paper: styles.paper }}
-        pathname={pathname}
-        linkComponent={linkComponent}
-        item={{
-          renderTitle: () => (
-            <Box display="flex" alignItems="center" sx={{ fontSize: 14 }}>
+    <UserMenuItem
+      sx={{ mr: 2.5 }}
+      classes={{ paper: 'pt-10 pb-15 px-0' }}
+      pathname={pathname}
+      linkComponent={linkComponent}
+      item={{
+        renderTitle: () => (
+          <div className="flex justify-between items-center text-sm w-[164px] sm:w-[194px]">
+            <div className="flex items-center">
               <UserAvatar
                 size="small"
                 sx={{
@@ -56,51 +41,27 @@ const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
                 alt="default avatar"
                 src={avatar}
               />
-              {address}
-            </Box>
-          ),
-          extras: (
-            <Box>
-              {profiles.map((p, i) => (
-                <UserMenuItemProfile
-                  key={i}
-                  {...p}
-                  onProfileClick={onProfileClick}
-                />
-              ))}
-              {addAccount && (
-                <OutlinedButton
-                  onClick={addAccount}
-                  sx={{ py: 12, px: { xs: 6.25, sm: 15 }, mb: 2.5 }}
-                >
-                  + add account
-                </OutlinedButton>
-              )}
-              <Subtitle
-                size="sm"
-                color="info.dark"
-                onClick={disconnect}
-                sx={{ cursor: 'pointer' }}
-              >
-                Log out
-              </Subtitle>
-            </Box>
-          ),
-        }}
-      />
-      <UserMenuItem
-        pathname={pathname}
-        linkComponent={linkComponent}
-        item={{
-          renderTitle: () => (
-            <Box display="flex" alignItems="center">
-              <UserMenuIcon sx={{ color: 'info.dark' }} />
-            </Box>
-          ),
-          dropdownItems: userMenuItems,
-        }}
-      />
-    </>
+              {nameOrAddress}
+            </div>
+            <BreadcrumbIcon className="w-[12px] h-[12px] text-grey-700 mr-10" />
+          </div>
+        ),
+        extras: (
+          <div className="flex text-grey-400 cursor-pointer pl-20 py-[6px] items-center">
+            <LogOutIcon />
+            <Body
+              size="sm"
+              mobileSize="sm"
+              onClick={disconnect}
+              className="text-grey-400 pl-[18px]"
+            >
+              Log out
+            </Body>
+          </div>
+        ),
+        dropdownItems: userMenuItems,
+      }}
+    />
   );
 };
 

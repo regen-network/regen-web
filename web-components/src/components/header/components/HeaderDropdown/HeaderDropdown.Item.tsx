@@ -4,6 +4,7 @@ import ReactHtmlParser from 'html-react-parser';
 
 import { NavLinkProps } from '../NavLink';
 import { useStyles } from './HeaderDropdown.styles';
+import { cn } from '../../../../utils/styles/cn';
 
 export type HeaderDropdownItemProps = {
   label: string;
@@ -17,6 +18,8 @@ export type HeaderDropdownItemProps = {
   icon?: JSX.Element;
   children?: ReactNode;
   right?: () => JSX.Element;
+  className?: string;
+  labelClassName?: string;
 };
 
 export const HeaderDropdownItem: React.FC<
@@ -27,6 +30,8 @@ export const HeaderDropdownItem: React.FC<
   children,
   importCallback,
   linkComponent: LinkComponent,
+  className,
+  labelClassName,
   ...props
 }) => {
   const { classes: styles } = useStyles();
@@ -37,17 +42,21 @@ export const HeaderDropdownItem: React.FC<
       display="flex"
       flexWrap="nowrap"
       alignItems="center"
-      className={styles.item}
+      className={cn(styles.item, className)}
       onMouseEnter={onHover}
     >
       {SVG && (
-        <Box mr={3}>
+        <Box className="mr-[18px] flex items-center">
           <SVG />
         </Box>
       )}
-      {icon && <Box mr={3}>{icon}</Box>}
+      {icon && <Box className="mr-[18px] flex items-center">{icon}</Box>}
       {props.pathname && (
-        <LinkComponent pathname={props.pathname} href={props.href}>
+        <LinkComponent
+          className={labelClassName}
+          pathname={props.pathname}
+          href={props.href}
+        >
           {ReactHtmlParser(props.label)}
         </LinkComponent>
       )}

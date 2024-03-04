@@ -263,7 +263,7 @@ export const Storefront = (): JSX.Element => {
                     )}
                     {!isOwnSellOrder && (
                       <OutlinedButton
-                        startIcon={<CreditsIcon />}
+                        startIcon={<CreditsIcon className="text-brand-400" />}
                         size="small"
                         onClick={async () => {
                           track<'buy1', Buy1Event>('buy1', {

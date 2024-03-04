@@ -24,7 +24,9 @@ const ChooseCreditClassItem: React.FC<
       imgSrc={imgSrc}
       description={description || ''}
       onClick={onClick}
-      startIcon={<CreditClassIcon sx={{ mt: '-2px' }} />}
+      startIcon={
+        <CreditClassIcon className="text-brand-400" sx={{ mt: '-2px' }} />
+      }
     />
   </Grid>
 );

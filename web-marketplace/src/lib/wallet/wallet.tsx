@@ -50,6 +50,7 @@ declare global {
 export type LoginParams = {
   walletConfig?: WalletConfig;
   wallet?: Wallet;
+  doLogout?: boolean;
 };
 export type LoginType = (loginParams: LoginParams) => Promise<void>;
 
@@ -100,7 +101,6 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const {
     activeAccountId,
     activeAccount,
-    authenticatedAccountIds,
     loading: authLoading,
   } = useAuth();
   const [connectionType, setConnectionType] = useState<string | undefined>(
@@ -140,8 +140,8 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const signArbitrary = useSignArbitrary({
     setError,
   });
-  const login = useLogin({ signArbitrary, setError });
   const logout = useLogout({ setError });
+  const login = useLogin({ signArbitrary, setError, logout });
 
   const connectWallet = useConnectWallet({
     setWallet,
@@ -172,8 +172,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     wallet,
     keplrMobileWeb,
     walletConfigRef,
-    activeAccountId,
-    authenticatedAccountIds,
+    activeAccount,
     setAccountChanging,
   });
 

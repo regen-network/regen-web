@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from '@mui/material/Link';
 import { makeStyles } from 'tss-react/mui';
+import { cn } from '../../../utils/styles/cn';
 
 type UseNavLinkStylesParams = {
   isActive: boolean;
@@ -33,6 +34,7 @@ export type NavLinkProps = {
   /** replaces default styles with passed styles */
   pathname: string;
   overrideClassname?: string;
+  className?: string;
 };
 
 export const NavLink: React.FC<React.PropsWithChildren<NavLinkProps>> = ({
@@ -40,11 +42,14 @@ export const NavLink: React.FC<React.PropsWithChildren<NavLinkProps>> = ({
   href,
   pathname,
   overrideClassname,
+  className,
 }) => {
   const { classes: styles } = useNavLinkStyles({ isActive: pathname === href });
-
   return (
-    <Link className={overrideClassname ?? styles.navLink} href={href}>
+    <Link
+      className={overrideClassname ?? cn(styles.navLink, className)}
+      href={href}
+    >
       {children}
     </Link>
   );

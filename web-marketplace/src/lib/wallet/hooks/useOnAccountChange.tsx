@@ -19,13 +19,16 @@ import { Wallet } from '../wallet';
 import { getWallet } from '../wallet.utils';
 import { WalletConfig, WalletType } from '../walletsConfig/walletsConfig.types';
 import { ConnectWalletType } from './useConnectWallet';
+import { accountSwitchModalAtom } from 'lib/atoms/modals.atoms';
+import { useSetAtom } from 'jotai';
+import { AccountByIdQuery } from 'generated/graphql';
 
 type Props = {
   wallet: Wallet;
   connectWallet: ConnectWalletType;
   keplrMobileWeb: boolean;
   walletConfigRef: MutableRefObject<WalletConfig | undefined>;
-  activeAccountId?: string;
+  activeAccount?: AccountByIdQuery['accountById'];
   authenticatedAccountIds?: string[];
   setAccountChanging: UseStateSetter<boolean>;
 };
@@ -35,7 +38,7 @@ export const useOnAccountChange = ({
   connectWallet,
   keplrMobileWeb,
   walletConfigRef,
-  activeAccountId,
+  activeAccount,
   authenticatedAccountIds,
   setAccountChanging,
 }: Props): void => {
@@ -52,6 +55,7 @@ export const useOnAccountChange = ({
   const { data: token } = useQuery(getCsrfTokenQuery({}));
   const reactQueryClient = useQueryClient();
   const retryCsrfRequest = useRetryCsrfRequest();
+  const setAccountSwitchModalAtom = useSetAtom(accountSwitchModalAtom);
 
   // Set new wallet or directly connect it for Keplr mobile browser
   useEffect(() => {
@@ -68,6 +72,7 @@ export const useOnAccountChange = ({
           connectWallet({ walletType: WalletType.Keplr, doLogin: false });
         } else {
           setAccountChanging(true);
+
           const walletClient = await walletConfigRef.current?.getClient({
             chainInfo,
           });
@@ -76,7 +81,23 @@ export const useOnAccountChange = ({
             walletConfig: walletConfigRef.current,
           });
 
-          if (!!_newWallet) setNewWallet(_newWallet);
+          if (activeAccount?.addr !== _newWallet?.address) {
+            setAccountSwitchModalAtom(
+              atom =>
+                void ((atom.open = true), (atom.prevAddr = wallet?.address)),
+            );
+            if (!!_newWallet) setNewWallet(_newWallet);
+          } else {
+            // The following is to handle the case where the user switches to another account,
+            // but then decide to switch back to the first account without logging in with the new one.
+            await connectWallet({
+              walletType: WalletType.Keplr,
+              doLogin: false,
+            });
+            setNewWallet(undefined);
+            setAccountSwitchModalAtom(atom => void (atom.open = false));
+            setAccountChanging(false);
+          }
         }
       }
     };
@@ -94,9 +115,7 @@ export const useOnAccountChange = ({
     setAccountChanging,
   ]);
 
-  // Perform one of the following actions given the new wallet address:
-  //  - Automatically connect if address part of the authenticated accounts
-  //  - Else, prompt the user to login with keplr
+  // Prompt the user to login to the new account if different from the current account
   useEffect(() => {
     const onAccountChange = async (): Promise<void> => {
       const newAccountId = accountByAddr?.accountByAddr?.id;
@@ -106,40 +125,20 @@ export const useOnAccountChange = ({
         !isFetching &&
         newWallet.address !== wallet?.address
       ) {
-        if (newAccountId !== activeAccountId && token) {
-          if (authenticatedAccountIds?.includes(newAccountId)) {
-            // the new address is part of the authenticated accounts ids, we auto-connect...
-            await connectWallet({
-              walletType: WalletType.Keplr,
-              doLogin: false,
-            });
-            // and update the active account id
-            await postData({
-              url: `${apiUri}/marketplace/v1/auth/accounts`,
-              data: {
-                accountId: newAccountId,
-              },
-              token,
-              retryCsrfRequest,
-              onSuccess: async () =>
-                await reactQueryClient.invalidateQueries({
-                  queryKey: [GET_ACCOUNTS_QUERY_KEY],
-                }),
-            });
-            setAccountChanging(false);
-          } else {
-            // login with keplr so the new account gets added to the authenticated accounts and set as the active account
-            await connectWallet({
-              walletType: WalletType.Keplr,
-              doLogin: true,
-            });
-          }
+        if (newAccountId !== activeAccount?.id && token) {
+          await connectWallet({
+            walletType: WalletType.Keplr,
+            doLogin: true,
+            doLogout: true,
+          });
+          setAccountSwitchModalAtom(atom => void (atom.open = false));
         } else {
           await connectWallet({
             walletType: WalletType.Keplr,
             doLogin: false,
           });
         }
+        setAccountChanging(false);
       }
     };
 
@@ -151,7 +150,7 @@ export const useOnAccountChange = ({
     setAccountChanging,
     wallet,
     walletConfigRef,
-    activeAccountId,
+    activeAccount?.id,
     accountByAddr?.accountByAddr?.id,
     token,
     authenticatedAccountIds,

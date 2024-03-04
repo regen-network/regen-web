@@ -1,27 +1,43 @@
-import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
+import SvgIcon from '@mui/material/SvgIcon';
 
 import { sxToArray } from '../../utils/mui/sxToArray';
+import { SvgLinearGradientProps } from './ProjectPageIcon';
 
-interface EditIconProps extends SvgIconProps {}
-
-export default function EditIcon({ sx, ...props }: EditIconProps): JSX.Element {
+export default function EditIcon({
+  sx,
+  linearGradient,
+  ...props
+}: SvgLinearGradientProps): JSX.Element {
   return (
     <SvgIcon
       sx={[{ color: '#4FB573' }, ...sxToArray(sx)]}
       width="13"
       height="13"
-      viewBox="0 0 13 13"
+      viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <svg fill="none">
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M0.198198 10.3981C0.151314 10.445 0.124974 10.5086 0.124974 10.5749L0.124969 12.6246C0.124969 12.7628 0.237136 12.8748 0.37536 12.8746L2.42156 12.8714C2.48773 12.8713 2.55116 12.845 2.59795 12.7982L10.8856 4.51056L8.48566 2.11065L0.198198 10.3981ZM9.19277 1.40355L11.5927 3.80345L12.439 2.95709C12.8296 2.56656 12.8296 1.93339 12.439 1.54287L11.4534 0.557175C11.0628 0.166651 10.4297 0.166651 10.0391 0.557175L9.19277 1.40355Z"
-          fill="currentColor"
-        />
-      </svg>
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M3.0732 17.5334C3.02632 17.5803 2.99998 17.6439 2.99998 17.7102L2.99997 20.7496C2.99997 20.8878 3.11214 20.9998 3.25036 20.9996L6.28476 20.9949C6.35093 20.9948 6.41436 20.9684 6.46115 20.9217L18.1914 9.19143L14.8033 5.80332L3.0732 17.5334ZM15.5104 5.09621L18.8985 8.48432L20.6757 6.70712C21.0662 6.3166 21.0662 5.68343 20.6757 5.29291L18.7018 3.31902C18.3113 2.92849 17.6781 2.92849 17.2876 3.31902L15.5104 5.09621Z"
+        fill={
+          linearGradient ? 'url(#linear_edit_icon)' : 'currentColor'
+        }
+      />
+      <defs>
+        <linearGradient
+          id="linear_edit_icon"
+          x1="11.9843"
+          y1="3.02612"
+          x2="4.79348"
+          y2="20.9983"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0.00458717" stop-color="#7BC796" />
+          <stop offset="1" stop-color="#C5E6D1" />
+        </linearGradient>
+      </defs>
     </SvgIcon>
   );
 }

@@ -7,8 +7,8 @@ export const LockIcon = (props: React.SVGProps<SVGSVGElement>) => (
       fill="currentColor"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M6 6V10H4C3.44772 10 3 10.4477 3 11V23C3 23.5523 3.44772 24 4 24H20C20.5523 24 21 23.5523 21 23V11C21 10.4477 20.5523 10 20 10H18V6C18 2.68629 15.3137 0 12 0C8.68629 0 6 2.68629 6 6ZM16 10V6C16 3.79086 14.2091 2 12 2C9.79086 2 8 3.79086 8 6V10H16ZM5 22V12H19V22H5Z"
       fill="currentColor"
     />

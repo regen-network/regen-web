@@ -35,12 +35,7 @@ import { getAddress } from './RegistryLayout.utils';
 
 const RegistryLayoutHeader: React.FC = () => {
   const { pathname } = useLocation();
-  const {
-    authenticatedAccounts,
-    activeAccount,
-    privActiveAccount,
-    privAuthenticatedAccounts,
-  } = useAuth();
+  const { activeAccount, privActiveAccount } = useAuth();
 
   const { wallet, disconnect, isConnected, loginDisabled } = useWallet();
   const { accountOrWallet } = useAuthData();
@@ -51,6 +46,7 @@ const RegistryLayoutHeader: React.FC = () => {
 
   const { showProjects, showCreditClasses, isIssuer } = useProfileItems({});
   const menuItems = useMemo(() => getMenuItems(pathname), [pathname]);
+  const onProfileClick = useOnProfileClick();
   const userMenuItems = useMemo(
     () =>
       getUserMenuItems({
@@ -61,6 +57,21 @@ const RegistryLayoutHeader: React.FC = () => {
         showProjects,
         isWalletConnected: isConnected,
         loginDisabled,
+        onProfileClick,
+        profile: activeAccount
+          ? {
+              id: activeAccount.id,
+              name: activeAccount.name ? activeAccount.name : DEFAULT_NAME,
+              profileImage: activeAccount.image
+                ? activeAccount.image
+                : getDefaultAvatar(activeAccount),
+              address: getAddress({
+                walletAddress: activeAccount.addr,
+                email: privActiveAccount?.email,
+              }),
+              selected: true,
+            }
+          : undefined,
       }),
     [
       pathname,
@@ -69,9 +80,9 @@ const RegistryLayoutHeader: React.FC = () => {
       showProjects,
       isConnected,
       loginDisabled,
+      activeAccount,
     ],
   );
-  const onProfileClick = useOnProfileClick();
 
   const defaultAvatar = getDefaultAvatar(activeAccount);
 
@@ -79,13 +90,8 @@ const RegistryLayoutHeader: React.FC = () => {
     ? headerColors[pathname]
     : theme.palette.primary.light;
 
-  const {
-    isModalOpen,
-    modalState,
-    onButtonClick,
-    onModalClose,
-    walletsUiConfig,
-  } = useLoginData();
+  const { isModalOpen, modalState, onModalClose, walletsUiConfig } =
+    useLoginData();
 
   return (
     <>
@@ -104,10 +110,13 @@ const RegistryLayoutHeader: React.FC = () => {
           <Box display="flex" justifyContent="center" alignItems="center">
             {chainId && accountOrWallet && disconnect && (
               <UserMenuItems
-                address={getAddress({
-                  walletAddress: getWalletAddress({ activeAccount, wallet }),
-                  email: privActiveAccount?.email,
-                })}
+                nameOrAddress={
+                  activeAccount?.name ||
+                  getAddress({
+                    walletAddress: getWalletAddress({ activeAccount, wallet }),
+                    email: privActiveAccount?.email,
+                  })
+                }
                 avatar={
                   activeAccount?.image ? activeAccount?.image : defaultAvatar
                 }
@@ -115,23 +124,6 @@ const RegistryLayoutHeader: React.FC = () => {
                 pathname={pathname}
                 linkComponent={RegistryNavLink}
                 userMenuItems={userMenuItems}
-                profiles={
-                  authenticatedAccounts?.map((account, i) => ({
-                    id: account?.id,
-                    name: account?.name ? account?.name : DEFAULT_NAME,
-                    profileImage: account?.image
-                      ? account?.image
-                      : getDefaultAvatar(account),
-                    address: getAddress({
-                      walletAddress: account?.addr,
-                      email: privAuthenticatedAccounts?.[i].email,
-                    }),
-                    selected:
-                      activeAccount?.id && activeAccount?.id === account?.id,
-                  })) || []
-                }
-                onProfileClick={onProfileClick}
-                addAccount={loginDisabled ? undefined : onButtonClick}
               />
             )}
             <LoginButton />

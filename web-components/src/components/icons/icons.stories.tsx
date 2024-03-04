@@ -54,6 +54,7 @@ import LinkIcon from './LinkIcon';
 import { LocationIcon } from './LocationIcon';
 import LocationSearchIcon from './LocationSearchIcon';
 import { LockIcon } from './LockIcon';
+import { LogOutIcon } from './LogOutIcon';
 import MinusIcon from './MinusIcon';
 import NoBasketTokensIcon from './NoBasketTokensIcon';
 import NoEcocreditsIcon from './NoEcocreditsIcon';
@@ -220,10 +221,7 @@ export const allIcons = (): JSX.Element => (
       icon={<CreditBatchLightIcon sx={{ color: 'info.main' }} />}
       label="CreditBatchLightIcon"
     />
-    <LabeledIcon
-      icon={<CreditsIcon sx={{ height: 25 }} />}
-      label="CreditsIcon"
-    />
+    <LabeledIcon icon={<CreditsIcon />} label="CreditsIcon" />
     <LabeledIcon
       icon={<CreditClassIcon sx={{ color: 'secondary.main' }} />}
       label="CreditClassIcon"
@@ -268,6 +266,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<LocationIcon />} label="LocationIcon" />
     <LabeledIcon icon={<LocationSearchIcon />} label="LocationSearchIcon" />
     <LabeledIcon icon={<LockIcon />} label="LockIcon" />
+    <LabeledIcon icon={<LogOutIcon />} label="LogOutIcon" />
     <LabeledIcon icon={<MediumIcon color="grey" />} label="MediumIcon" />
     <LabeledIcon icon={<MinusIcon />} label="MinusIcon" />
     <LabeledIcon icon={<NoBasketTokensIcon />} label="NoBasketTokensIcon" />

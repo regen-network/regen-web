@@ -45,7 +45,6 @@ export const NavLink: React.FC<React.PropsWithChildren<NavLinkProps>> = ({
   className,
 }) => {
   const { classes: styles } = useNavLinkStyles({ isActive: pathname === href });
-  console.log(className);
   return (
     <Link
       className={overrideClassname ?? cn(styles.navLink, className)}

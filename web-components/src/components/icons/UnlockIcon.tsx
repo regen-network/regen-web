@@ -7,8 +7,8 @@ export const UnlockIcon = (props: React.SVGProps<SVGSVGElement>) => (
       fill="currentColor"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M8 6C8 3.79086 9.79086 2 12 2C13.2551 2 14.3752 2.57806 15.1086 3.48247C15.4573 3.91254 16.0454 4.14324 16.5475 3.90996C17.0471 3.67787 17.2711 3.07897 16.9607 2.62385C15.8806 1.03992 14.0618 0 12 0C8.68629 0 6 2.68629 6 6V9H4C3.44772 9 3 9.44771 3 10V23C3 23.5523 3.44772 24 4 24H20C20.5523 24 21 23.5523 21 23V10C21 9.44772 20.5523 9 20 9H8V6ZM19 22V11H5V22H19Z"
       fill="currentColor"
     />

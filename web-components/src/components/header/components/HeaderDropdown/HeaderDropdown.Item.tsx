@@ -46,11 +46,11 @@ export const HeaderDropdownItem: React.FC<
       onMouseEnter={onHover}
     >
       {SVG && (
-        <Box className="mr-[18px]">
+        <Box className="mr-[18px] flex items-center">
           <SVG />
         </Box>
       )}
-      {icon && <Box className="mr-[18px]">{icon}</Box>}
+      {icon && <Box className="mr-[18px] flex items-center">{icon}</Box>}
       {props.pathname && (
         <LinkComponent
           className={labelClassName}

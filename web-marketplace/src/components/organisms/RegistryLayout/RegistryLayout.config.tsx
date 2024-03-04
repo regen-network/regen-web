@@ -94,7 +94,7 @@ export const getUserMenuItems = ({
       linkComponent,
       importCallback: (): Promise<any> => import('../../../pages/Dashboard'),
       ...PORTFOLIO,
-      icon: <CreditsIcon sx={{ width: 24, height: 20 }} />,
+      icon: <CreditsIcon sx={{ width: 24, height: 20 }} linearGradient />,
     },
     showProjects && {
       pathname,

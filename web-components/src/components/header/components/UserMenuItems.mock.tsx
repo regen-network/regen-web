@@ -17,13 +17,13 @@ export const getUserMenuItemsMock = ({
     linkComponent,
     label: 'Portfolio',
     href: '/profile/portfolio',
-    icon: <CreditsIcon sx={{ height: 18, width: 20 }} />,
+    icon: <CreditsIcon sx={{ height: 18, width: 20 }} linearGradient />,
   },
   {
     pathname,
     linkComponent,
     label: 'Bridge',
-    icon: <BridgeIcon />,
+    icon: <BridgeIcon linearGradient />,
     href: '/profile/bridge',
   },
 ];

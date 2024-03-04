@@ -108,7 +108,7 @@ export default function CreditInfo({
         <div className={classes.descriptionTitle}>
           <Title variant="h3">
             <span className={classes.icon}>
-              <CreditsIcon />
+              <CreditsIcon className="text-brand-400" />
             </span>
             {creditClass.name}
           </Title>

@@ -63,30 +63,30 @@ export const EcocreditsByAccount = (): JSX.Element => {
     () => [
       {
         label: 'Portfolio',
-        icon: <CreditsIcon fontSize="small" />,
+        icon: <CreditsIcon fontSize="small" linearGradient />,
         href: `/profiles/${accountAddressOrId}/portfolio`,
       },
       {
         label: 'Projects',
-        icon: <ProjectPageIcon />,
+        icon: <ProjectPageIcon linearGradient />,
         href: `/profiles/${accountAddressOrId}/projects`,
         hidden: !isProjectAdmin,
       },
       {
         label: 'Credit Classes',
-        icon: <CreditClassIcon />,
+        icon: <CreditClassIcon linearGradient />,
         href: `/profiles/${accountAddressOrId}/credit-classes`,
         hidden: !showCreditClasses || creditClasses.length === 0,
       },
       {
         label: 'Credit Batches',
-        icon: <CreditBatchIcon />,
+        icon: <CreditBatchIcon linearGradient />,
         href: `/profiles/${accountAddressOrId}/credit-batches`,
         hidden: !isIssuer,
       },
       {
         label: 'Bridge',
-        icon: <BridgeIcon />,
+        icon: <BridgeIcon linearGradient />,
         href: `/profiles/${accountAddressOrId}/bridge`,
         hidden: !isBridgeEnabled,
       },

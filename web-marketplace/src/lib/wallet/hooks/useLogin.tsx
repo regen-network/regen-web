@@ -8,7 +8,7 @@ import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { LoginParams, SignArbitraryType } from 'lib/wallet/wallet';
-import { LoginEvent, Track } from 'lib/tracker/types';
+import { AccountEvent, Track } from 'lib/tracker/types';
 
 type Params = {
   signArbitrary?: SignArbitraryType;
@@ -77,7 +77,7 @@ export const useLogin = ({
             });
 
             if (res?.user?.accountId && track) {
-              track<LoginEvent>('loginKeplr', {
+              track<AccountEvent>('loginKeplr', {
                 id: res.user.accountId,
                 date: new Date().toUTCString(),
                 account: wallet.address,

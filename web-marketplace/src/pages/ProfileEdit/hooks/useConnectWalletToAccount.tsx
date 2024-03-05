@@ -10,6 +10,8 @@ import { getAccountByAddrQueryKey } from 'lib/queries/react-query/registry-serve
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 import { useSignArbitrary } from 'lib/wallet/hooks/useSignArbitrary';
 import { useWallet } from 'lib/wallet/wallet';
+import { AccountEvent } from 'lib/tracker/types';
+import { useTracker } from 'lib/tracker/useTracker';
 
 type Params = {
   isConnectModalOpened?: boolean;
@@ -29,6 +31,7 @@ export const useConnectWalletToAccount = ({
   const signArbitrary = useSignArbitrary({
     setError,
   });
+  const { track } = useTracker();
 
   // Step 1: Retrieve and save the CSRF tokens
   const { data: token } = useQuery(getCsrfTokenQuery({}));
@@ -57,6 +60,11 @@ export const useConnectWalletToAccount = ({
           token,
           retryCsrfRequest,
           onSuccess: async () => {
+            await track<AccountEvent>('connectWallet', {
+              id: activeAccount?.id,
+              account: wallet.address,
+              date: new Date().toUTCString(),
+            });
             // Step 4: Refresh active account
             await reactQueryClient.invalidateQueries({
               queryKey: getAccountByAddrQueryKey({ addr: wallet?.address }),

@@ -35,7 +35,7 @@ import { useSignArbitrary } from './hooks/useSignArbitrary';
 import { emptySender, KEPLR_MOBILE } from './wallet.constants';
 import { ConnectParams } from './wallet.types';
 import { WalletConfig } from './walletsConfig/walletsConfig.types';
-import { WCLoginEvent } from 'lib/tracker/types';
+import { ConnectEvent } from 'lib/tracker/types';
 
 export interface Wallet {
   offlineSigner?: OfflineSigner;
@@ -130,7 +130,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
           shortAddress: truncate(address),
         });
         setWalletConnect(true);
-        track<WCLoginEvent>('loginWalletConnect', {
+        track<ConnectEvent>('loginWalletConnect', {
           date: new Date().toUTCString(),
           account: address,
         });
@@ -149,6 +149,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     setKeplrMobileWeb,
     walletConfigRef,
     login,
+    track,
   });
 
   const connect = useConnect({ connectWallet, setConnectionType, setError });

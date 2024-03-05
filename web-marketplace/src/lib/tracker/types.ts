@@ -5,15 +5,15 @@ export type Track = <IPayload = any>(
   payload?: IPayload,
 ) => Promise<any>;
 
-// Login tracking events metadata specification
+// Login / Connect tracking events metadata specification
 
-export interface LoginEvent {
+export interface AccountEvent {
   id: string;
-  account?: string;
+  account?: string | null;
   date: string;
 }
 
-export interface WCLoginEvent {
+export interface ConnectEvent {
   account: string;
   date: string;
 }

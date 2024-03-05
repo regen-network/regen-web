@@ -16,6 +16,7 @@ type Props = {
   setKeplrMobileWeb: UseStateSetter<boolean>;
   login?: LoginType;
   logout?: () => Promise<void>;
+  track?: Track;
 };
 
 export type ConnectWalletType = ({
@@ -29,6 +30,7 @@ export const useConnectWallet = ({
   setWallet,
   setKeplrMobileWeb,
   login,
+  track,
 }: Props): ConnectWalletType => {
   const connectWallet = useCallback(
     async ({
@@ -65,6 +67,7 @@ export const useConnectWallet = ({
           login,
           doLogin,
           doLogout,
+          track,
         });
         return wallet;
       }

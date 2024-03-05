@@ -8,8 +8,8 @@ export const useSocialProviders = () => {
     {
       name: 'Google',
       imageUrl: '/png/google.png',
-      onClick: () => {
-        track<GoogleLoginEvent>('loginEmail', {
+      onClick: async () => {
+        await track<GoogleLoginEvent>('loginGoogle', {
           date: new Date().toUTCString(),
         });
         window.location.href = `${apiUri}/marketplace/v1/auth/google`;

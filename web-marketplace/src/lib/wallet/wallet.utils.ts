@@ -15,7 +15,7 @@ import {
   WalletConfig,
   WalletType,
 } from './walletsConfig/walletsConfig.types';
-import { Track } from 'lib/tracker/types';
+import { ConnectEvent, Track } from 'lib/tracker/types';
 
 /* getWallet */
 
@@ -57,6 +57,7 @@ type FinalizeConnectionParams = {
   login?: LoginType;
   doLogin?: boolean;
   doLogout?: boolean;
+  track?: Track;
 };
 
 export const finalizeConnection = async ({
@@ -66,6 +67,7 @@ export const finalizeConnection = async ({
   login,
   doLogin = true,
   doLogout,
+  track,
 }: FinalizeConnectionParams): Promise<Wallet | undefined> => {
   try {
     await walletClient?.enable(chainInfo.chainId);
@@ -78,10 +80,16 @@ export const finalizeConnection = async ({
   if (wallet) {
     setWallet(wallet);
 
+    if (track && walletClient?.mode === 'mobile-web') {
+      track<ConnectEvent>('loginKeplrMobileApp', {
+        account: wallet.address,
+        date: new Date().toUTCString(),
+      });
+    }
+
     // signArbitrary (used in login) not yet supported by @keplr-wallet/wc-client
     // https://github.com/chainapsis/keplr-wallet/issues/664
-    if (login && doLogin)
-      await login({ walletConfig, wallet, doLogout });
+    if (login && doLogin) await login({ walletConfig, wallet, doLogout });
     return wallet;
   }
 };

@@ -13,6 +13,8 @@ import { WalletProviderInfo } from 'components/organisms/UserAccountSettings/Use
 
 import { useConnectWalletToAccount } from './hooks/useConnectWalletToAccount';
 import { useSocialProviders } from './hooks/useSocialProviders';
+import { useTracker } from 'lib/tracker/useTracker';
+import { AccountEvent } from 'lib/tracker/types';
 
 export const ProfileEditSettings = () => {
   const [error, setError] = useState<unknown>(undefined);
@@ -28,6 +30,7 @@ export const ProfileEditSettings = () => {
   } = useLoginData();
 
   useConnectWalletToAccount({ isConnectModalOpened: isModalOpen, setError });
+  const { track } = useTracker();
 
   // Social providers
   const socialProviders = useSocialProviders();

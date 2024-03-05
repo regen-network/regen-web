@@ -10,12 +10,17 @@ import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 
 import { SocialProvider } from '../ProfileEdit.types';
+import { useTracker } from 'lib/tracker/useTracker';
+import { useAuth } from 'lib/auth/auth';
+import { AccountEvent } from 'lib/tracker/types';
 
 export const useSocialProviders = () => {
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const { data: token } = useQuery(getCsrfTokenQuery({}));
   const reactQueryClient = useQueryClient();
   const retryCsrfRequest = useRetryCsrfRequest();
+  const { track } = useTracker();
+  const { activeAccount } = useAuth();
 
   const disconnect = useCallback(
     async (path: string) => {
@@ -26,6 +31,11 @@ export const useSocialProviders = () => {
             token,
             retryCsrfRequest,
             onSuccess: async () => {
+              await track<AccountEvent>('disconnectGoogle', {
+                id: activeAccount?.id,
+                account: activeAccount?.addr,
+                date: new Date().toUTCString(),
+              });
               await reactQueryClient.invalidateQueries({
                 queryKey: [GET_ACCOUNTS_QUERY_KEY],
               });
@@ -42,7 +52,12 @@ export const useSocialProviders = () => {
     {
       id: 'google',
       name: 'Google',
-      connect: () => {
+      connect: async () => {
+        await track<AccountEvent>('connectGoogle', {
+          id: activeAccount?.id,
+          account: activeAccount?.addr,
+          date: new Date().toUTCString(),
+        });
         window.location.href = `${apiUri}/marketplace/v1/auth/google/connect`;
       },
       disconnect: () => disconnect('/marketplace/v1/auth/google/disconnect'),

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/regen-network/regen-web/compare/v2.1.1...v2.2.0) (2024-03-05)
+
+### Bug Fixes
+
+- save and next button behavior ([#2298](https://github.com/regen-network/regen-web/issues/2298)) ([c1d2fc9](https://github.com/regen-network/regen-web/commit/c1d2fc957dd8abb5a77fe8625fe3fee6333195ec))
+
+### Features
+
+- add project partners ([#2301](https://github.com/regen-network/regen-web/issues/2301)) ([45abc16](https://github.com/regen-network/regen-web/commit/45abc1602c6c127ecfab6731529ba29c023de60a))
+
 ## [2.1.1](https://github.com/regen-network/regen-web/compare/v2.1.0...v2.1.1) (2024-02-27)
 
 ### Bug Fixes

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AccountConnectWalletModal, Props } from './AccountConnectWalletModal';
-import { getWalletsMock, uriMock } from './AccountConnectWalletModal.mock';
+import { getWalletsMock } from './AccountConnectWalletModal.mock';
 import { AccountConnectModalState } from './AccountConnectWalletModal.types';
 
 const meta: Meta<typeof AccountConnectWalletModal> = {

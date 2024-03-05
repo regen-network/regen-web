@@ -118,16 +118,16 @@ export const useEmailConfirmationData = ({
   const onEmailSubmit = async ({
     email,
     callback,
-  }: EmailFormSchemaType & { callback?: () => void; connect?: boolean }) => {
+  }: EmailFormSchemaType & { callback?: () => void }) => {
     // an existing account tries to connect an email address from the profile settings
     if (activeAccount) {
-      track<AccountEvent>('connectEmail', {
+      await track<AccountEvent>('connectEmail', {
         id: activeAccount.id,
         account: activeAccount.addr,
         date: new Date().toUTCString(),
       });
     } else {
-      track<EmailLoginEvent>('loginEmail', {
+      await track<EmailLoginEvent>('loginEmail', {
         email,
         date: new Date().toUTCString(),
       });

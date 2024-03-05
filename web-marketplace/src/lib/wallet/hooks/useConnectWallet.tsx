@@ -72,7 +72,7 @@ export const useConnectWallet = ({
         return wallet;
       }
     },
-    [setWallet, setKeplrMobileWeb, walletConfigRef, login],
+    [setWallet, setKeplrMobileWeb, walletConfigRef, track, login],
   );
 
   return connectWallet;

@@ -81,7 +81,7 @@ export const finalizeConnection = async ({
     setWallet(wallet);
 
     if (track && walletClient?.mode === 'mobile-web') {
-      track<ConnectEvent>('loginKeplrMobileApp', {
+      await track<ConnectEvent>('loginKeplrMobileApp', {
         account: wallet.address,
         date: new Date().toUTCString(),
       });

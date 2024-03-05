@@ -77,7 +77,7 @@ export const useLogin = ({
             });
 
             if (res?.user?.accountId && track) {
-              track<AccountEvent>('loginKeplr', {
+              await track<AccountEvent>('loginKeplr', {
                 id: res.user.accountId,
                 date: new Date().toUTCString(),
                 account: wallet.address,

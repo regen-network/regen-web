@@ -15,6 +15,7 @@ import { getResendCodeLabel } from '../LoginButton/utils/getResendCodeLabel';
 import { LoginModal } from '../LoginModal/LoginModal';
 import { LoginModalState, LoginProvider } from '../LoginModal/LoginModal.types';
 import { useEmailConfirmationData } from './hooks/useEmailConfirmationData';
+import { useWallet } from 'lib/wallet/wallet';
 
 type Props = {
   isModalOpen: boolean;
@@ -44,6 +45,7 @@ const LoginFlow = ({
   const [isWaitingForSigning, setIsWaitingForSigningAtom] = useAtom(
     isWaitingForSigningAtom,
   );
+  const { loginDisabled } = useWallet();
 
   return (
     <>
@@ -79,10 +81,12 @@ const LoginFlow = ({
         error={emailModalError}
         onCodeChange={onMailCodeChange}
       />
-      <MobileSigningModal
-        isOpen={isWaitingForSigning}
-        onClose={() => setIsWaitingForSigningAtom(false)}
-      />
+      {loginDisabled && (
+        <MobileSigningModal
+          isOpen={isWaitingForSigning}
+          onClose={() => setIsWaitingForSigningAtom(false)}
+        />
+      )}
     </>
   );
 };

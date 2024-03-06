@@ -6016,7 +6016,7 @@ export type AllCreditClassesLazyQueryHookResult = ReturnType<typeof useAllCredit
 export type AllCreditClassesQueryResult = Apollo.QueryResult<AllCreditClassesQuery, AllCreditClassesQueryVariables>;
 export const AllProjectsDocument = gql`
     query AllProjects {
-  allProjects {
+  allProjects(condition: {approved: true, published: true, onChainId: null}) {
     nodes {
       id
       slug

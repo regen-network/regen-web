@@ -71,7 +71,6 @@ const getApi = async (
   setError: React.Dispatch<unknown>,
   signer?: OfflineSigner,
 ): Promise<void> => {
-  setLoading(true);
   try {
     const regenApi = await connect({ signer });
     setApi(regenApi);
@@ -88,11 +87,12 @@ export const LedgerProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const [api, setApi] = useState<RegenApi | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<unknown>(undefined);
-  const { wallet } = useWallet();
+  const { wallet, loaded } = useWallet();
 
   useEffect(() => {
-    getApi(setApi, setLoading, setError, wallet?.offlineSigner);
-  }, [setApi, setLoading, setError, wallet?.offlineSigner]);
+    if (loaded && !api)
+      getApi(setApi, setLoading, setError, wallet?.offlineSigner);
+  }, [loaded, api, setApi, setLoading, setError, wallet?.offlineSigner]);
 
   return (
     <LedgerContext.Provider value={{ error, loading, api, wallet }}>

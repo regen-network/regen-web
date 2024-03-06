@@ -104,8 +104,6 @@ const Image: React.FC<React.PropsWithChildren<ImageProps>> = ({
       } else {
         setOptimizedSrc(src);
       }
-    } else {
-      setOptimizedSrc(src);
     }
   }, [
     imgRef,
@@ -131,7 +129,7 @@ const Image: React.FC<React.PropsWithChildren<ImageProps>> = ({
             <div
               className={cx(className, classes.background)}
               style={{
-                backgroundImage: `url("${optimizedSrc}"), url("${src}")`,
+                backgroundImage: `url("${optimizedSrc}")`,
               }}
             >
               {children}

@@ -71,6 +71,7 @@ const getApi = async (
   setError: React.Dispatch<unknown>,
   signer?: OfflineSigner,
 ): Promise<void> => {
+  setLoading(true);
   try {
     const regenApi = await connect({ signer });
     setApi(regenApi);

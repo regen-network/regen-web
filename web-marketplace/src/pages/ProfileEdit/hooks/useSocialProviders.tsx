@@ -23,7 +23,7 @@ export const useSocialProviders = () => {
   const { activeAccount } = useAuth();
 
   const disconnect = useCallback(
-    async (path: string) => {
+    async (name: string, path: string) => {
       if (token)
         try {
           await postData({
@@ -31,7 +31,7 @@ export const useSocialProviders = () => {
             token,
             retryCsrfRequest,
             onSuccess: async () => {
-              await track<AccountEvent>('disconnectGoogle', {
+              await track<AccountEvent>(`disconnect${name}`, {
                 id: activeAccount?.id,
                 account: activeAccount?.addr,
                 date: new Date().toUTCString(),
@@ -60,7 +60,8 @@ export const useSocialProviders = () => {
         });
         window.location.href = `${apiUri}/marketplace/v1/auth/google/connect`;
       },
-      disconnect: () => disconnect('/marketplace/v1/auth/google/disconnect'),
+      disconnect: () =>
+        disconnect('Google', '/marketplace/v1/auth/google/disconnect'),
     },
   ];
 

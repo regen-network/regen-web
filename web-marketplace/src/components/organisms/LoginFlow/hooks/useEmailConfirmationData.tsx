@@ -94,6 +94,7 @@ export const useEmailConfirmationData = ({
             });
         },
         setEmailModalErrorCode,
+        track,
       });
     } else {
       setEmailModalErrorCode('');
@@ -103,8 +104,6 @@ export const useEmailConfirmationData = ({
   const emailModalError = getEmailModalError({
     errorCode: emailModalErrorCode,
     onResend: onResendPasscode,
-    track,
-    email,
   });
 
   useEffect(() => {

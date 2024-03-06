@@ -12,7 +12,6 @@ import {
   Maybe,
   ProjectPrefinanceTimelineItem,
 } from 'generated/sanity-graphql';
-import { formatDate } from 'web-components/src/utils/format';
 import { formatTimelineDates } from './ProjectDetails.utils';
 
 type Props = {
@@ -44,7 +43,6 @@ export const PrefinanceTimeline = ({
       {timeline.map((item, index) => {
         const projected =
           item?.prefinanceTimelineItem?.currentStatus === 'projected';
-        console.log(item?.prefinanceTimelineItem?.date);
         return (
           <TimelineItem key={item?.status?.description}>
             <TimelineSeparator>

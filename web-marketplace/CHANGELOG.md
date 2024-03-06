@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.1](https://github.com/regen-network/regen-web/compare/v2.2.0...v2.2.1) (2024-03-06)
+
+### Bug Fixes
+
+- show MobileSigningModal only for keplr mobile ([9bfb120](https://github.com/regen-network/regen-web/commit/9bfb120929b24014653280f2a8e83bf920d2e02d))
+
 # [2.2.0](https://github.com/regen-network/regen-web/compare/v2.1.1...v2.2.0) (2024-03-05)
 
 ### Bug Fixes

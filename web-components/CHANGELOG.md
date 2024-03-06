@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.1](https://github.com/regen-network/regen-web/compare/v2.2.0...v2.2.1) (2024-03-06)
+
+### Bug Fixes
+
+- optimized img src ([15856e2](https://github.com/regen-network/regen-web/commit/15856e217bc39ca8b2ed5c8924faf4862cd02592))
+
 # [2.2.0](https://github.com/regen-network/regen-web/compare/v2.1.1...v2.2.0) (2024-03-05)
 
 **Note:** Version bump only for package web-components

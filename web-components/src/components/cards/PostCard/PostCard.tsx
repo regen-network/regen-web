@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Button, Grid } from '@mui/material';
 
-import { LockIcon } from '../../icons/LockIcon';
 import VerifiedIcon from '../../icons/VerifiedIcon';
 import WhitepaperIcon from '../../icons/WhitepaperIcon';
 import { Image, OptimizeImageProps } from '../../image';
@@ -10,6 +9,7 @@ import { Body, Subtitle } from '../../typography';
 import UserInfo, { User } from '../../user/UserInfo';
 import Card from '../Card';
 import NameWithRoleAndTimestamp from './PostCard.NameWithRoleAndTimestamp';
+import PrivateBadge from './PostCard.PrivateBadge';
 import SignerName from './PostCard.SignerName';
 import usePostCardStyles from './PostCard.styles';
 import ActionButton from './PostCardActionButton';
@@ -80,6 +80,16 @@ export default function PostCard({
         adminMenuItems={adminMenuItems}
         onClick={handleClickShare}
       />
+      {!hasImageBlock && isPrivate && (
+        <PrivateBadge
+          hasImageBlock={hasImageBlock}
+          // sx={theme => ({
+          //   top: hasImageBlock ? theme.spacing(3.5) : theme.spacing(7),
+          //   left: hasImageBlock ? theme.spacing(3) : undefined,
+          //   right: hasImageBlock ? undefined : theme.spacing(20),
+          // })}
+        />
+      )}
       <Grid
         container
         sx={{ flexWrap: ['wrap-reverse', 'nowrap'], position: 'relative' }}
@@ -90,23 +100,23 @@ export default function PostCard({
           item
           sx={{ pb: [4.5, 0], pr: [0, 2] }}
         >
-          <Subtitle size="lg" mb={2.75}>
+          <Subtitle size="xl" mb={2.75}>
             {title}
           </Subtitle>
           <UserInfo
-            size="md"
+            size="lg"
             user={authorWithNameRaw}
             sx={{ display: 'flex', alignItems: 'center' }}
             nameHasPadding={false}
           />
-          <Box sx={{ paddingInlineEnd: 2, paddingBlockStart: 4 }}>
-            <Body size="md" sx={{ pb: 1.5 }} className={classes.description}>
+          <Box sx={{ paddingInlineEnd: 2, paddingBlockStart: 4.5 }}>
+            <Body size="lg" sx={{ pb: 1.5 }} className={classes.description}>
               {description}
             </Body>
           </Box>
           {signerWithNameRaw && (
-            <Box sx={{ display: 'flex', alignItems: 'center', mt: 3 }}>
-              <VerifiedIcon color="white" fontSize="medium" hasFill />
+            <Box sx={{ display: 'flex', alignItems: 'center', mt: 3.5 }}>
+              <VerifiedIcon color="white" hasFill />
               <Body
                 size="xs"
                 mobileSize="xs"
@@ -153,30 +163,8 @@ export default function PostCard({
                 position: 'relative',
               })}
             >
-              {isPrivate && (
-                <Box
-                  sx={{
-                    borderRadius: 1,
-                    backgroundColor: theme => theme.palette.error.dark,
-                    position: 'absolute',
-                    top: theme => theme.spacing(3),
-                    left: theme => theme.spacing(3),
-                    display: 'flex',
-                    alignItems: 'center',
-                    p: 1.5,
-                  }}
-                >
-                  <LockIcon
-                    sx={theme => ({
-                      color: theme => theme.palette.primary.contrastText,
-                      height: '18px',
-                      width: '18px',
-                    })}
-                  />
-                  <Subtitle size="sm" sx={{ pl: 1 }}>
-                    Post is private
-                  </Subtitle>
-                </Box>
+              {hasImageBlock && isPrivate && (
+                <PrivateBadge hasImageBlock={hasImageBlock} />
               )}
               {isPrivate && !isAdmin ? (
                 <Box sx={{ backgroundColor: 'black', height: '100%' }}>

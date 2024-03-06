@@ -30,18 +30,22 @@ function getSize(size?: string): Sizes {
     case 'xl':
       spacing = { xs: 12.5, sm: 16 };
       break;
+    case 'lg':
     case 'big':
       spacing = { xs: 10, sm: 12 };
       break;
+    case 'md':
     case 'medium':
       spacing = { xs: 7.5, sm: 7.5 };
+      spacing = { xs: 10, sm: 10 };
+
       break;
     case 'small':
     case 'sm':
       spacing = { xs: 6.5, sm: 6.5 };
       break;
     case 'xs':
-      spacing = { xs: 5, sm: 6.5 };
+      spacing = { xs: 4, sm: 4 };
       break;
     case 'project':
       spacing = { xs: 8.75, sm: 8.75 };

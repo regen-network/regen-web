@@ -29,6 +29,7 @@ import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 
 import { useLastRandomProjects } from './useLastRandomProjects';
 import { selectProjects } from './useProjectsWithOrders.utils';
+import { useMemo } from 'react';
 
 export interface ProjectsWithOrdersProps {
   limit?: number;
@@ -147,49 +148,76 @@ export function useProjectsWithOrders({
     projects = projectsData?.projects;
   }
 
-  const selectedProjects =
-    selectProjects({
-      projects,
-      sellOrders,
-      metadata,
-      random,
-      skippedProjectId,
-      skippedClassId: !classId && !projectId ? SKIPPED_CLASS_ID : undefined,
-    }) ?? [];
-
+  const skippedClassId = !classId && !projectId ? SKIPPED_CLASS_ID : undefined;
+  const selectedProjects = useMemo(
+    () =>
+      selectProjects({
+        projects,
+        sellOrders,
+        metadata,
+        random,
+        skippedProjectId,
+        skippedClassId,
+      }) ?? [],
+    [projects, sellOrders, metadata, random, skippedProjectId, skippedClassId],
+  );
   const lastRandomProjects = useLastRandomProjects({
     random,
     selectedProjects,
   });
 
-  const projectsWithOrderData = normalizeProjectsWithOrderData({
-    projects: lastRandomProjects ?? selectedProjects,
-    sellOrders,
-    userAddress: wallet?.address,
-    sanityCreditClassData: creditClassData,
-  });
-
-  // Exclude community projects based on sanity credit class data
-  const projectsWithOrderDataFiltered = projectsWithOrderData.filter(
-    project => !!project.sanityCreditClassData || useCommunityProjects,
+  const projectsWithOrderData = useMemo(
+    () =>
+      normalizeProjectsWithOrderData({
+        projects: lastRandomProjects ?? selectedProjects,
+        sellOrders,
+        userAddress: wallet?.address,
+        sanityCreditClassData: creditClassData,
+      }),
+    [
+      lastRandomProjects,
+      sellOrders,
+      selectedProjects,
+      wallet?.address,
+      creditClassData,
+    ],
   );
 
-  const hasCommunityProjects = projectsWithOrderData.some(
-    project => !project.sanityCreditClassData,
+  // Exclude community projects based on sanity credit class data
+  const projectsWithOrderDataFiltered = useMemo(
+    () =>
+      projectsWithOrderData.filter(
+        project => !!project.sanityCreditClassData || useCommunityProjects,
+      ),
+    [projectsWithOrderData, useCommunityProjects],
+  );
+
+  const hasCommunityProjects = useMemo(
+    () => projectsWithOrderData.some(project => !project.sanityCreditClassData),
+    [projectsWithOrderData],
   );
 
   // Merge on-chain and off-chain projects
-  const allProject =
-    creditClassFilter?.[UNREGISTERED_PATH] || useOffChainProjects
-      ? [
-          ...projectsWithOrderDataFiltered,
-          ...(separatePrefinanceProjects
-            ? allOffChainProjects.filter(
-                project => !project.projectPrefinancing?.isPrefinanceProject,
-              )
-            : allOffChainProjects),
-        ]
-      : projectsWithOrderDataFiltered;
+  const allProject = useMemo(
+    () =>
+      creditClassFilter?.[UNREGISTERED_PATH] || useOffChainProjects
+        ? [
+            ...projectsWithOrderDataFiltered,
+            ...(separatePrefinanceProjects
+              ? allOffChainProjects.filter(
+                  project => !project.projectPrefinancing?.isPrefinanceProject,
+                )
+              : allOffChainProjects),
+          ]
+        : projectsWithOrderDataFiltered,
+    [
+      projectsWithOrderDataFiltered,
+      creditClassFilter,
+      useOffChainProjects,
+      allOffChainProjects,
+      separatePrefinanceProjects,
+    ],
+  );
 
   // Filter projects by class ID
   const creditClassFilterKeys = Object.keys(creditClassFilter);
@@ -197,11 +225,15 @@ export function useProjectsWithOrders({
     creditClassId => creditClassFilter[creditClassId],
   );
 
-  const projectsFilteredByCreditClass = allProject.filter(project =>
-    creditClassFilterKeys.length === 0
-      ? true
-      : project.offChain ||
-        creditClassSelected.includes(project.creditClassId ?? ''),
+  const projectsFilteredByCreditClass = useMemo(
+    () =>
+      allProject.filter(project =>
+        creditClassFilterKeys.length === 0
+          ? true
+          : project.offChain ||
+            creditClassSelected.includes(project.creditClassId ?? ''),
+      ),
+    [allProject, creditClassFilterKeys, creditClassSelected],
   );
 
   const sortedProjects = sortProjects(projectsFilteredByCreditClass, sort)
@@ -256,18 +288,30 @@ export function useProjectsWithOrders({
 
   /* Final Normalization */
 
-  const projectsWithMetadata = normalizeProjectsWithMetadata({
-    projectsWithOrderData: sortedProjects,
-    projectsMetadata: projectsMetadata as (
-      | AnchoredProjectMetadataLD
-      | undefined
-    )[],
-    projectPagesMetadata,
-    programAccounts,
-    sanityCreditClassData: creditClassData,
-    prefinanceProjectsData,
-    classesMetadata,
-  });
+  const projectsWithMetadata = useMemo(
+    () =>
+      normalizeProjectsWithMetadata({
+        projectsWithOrderData: sortedProjects,
+        projectsMetadata: projectsMetadata as (
+          | AnchoredProjectMetadataLD
+          | undefined
+        )[],
+        projectPagesMetadata,
+        programAccounts,
+        sanityCreditClassData: creditClassData,
+        prefinanceProjectsData,
+        classesMetadata,
+      }),
+    [
+      sortedProjects,
+      projectsMetadata,
+      projectPagesMetadata,
+      programAccounts,
+      creditClassData,
+      prefinanceProjectsData,
+      classesMetadata,
+    ],
+  );
 
   const prefinanceProjects = allOffChainProjects.filter(
     project => project.projectPrefinancing?.isPrefinanceProject,

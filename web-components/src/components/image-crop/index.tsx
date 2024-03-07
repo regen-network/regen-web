@@ -100,6 +100,7 @@ export default function ImageCrop({
    */
   const onLoad = useCallback(
     (img: HTMLImageElement) => {
+      console.log(img);
       imgRef.current = img;
       const imgWidth = img.width;
       const imgHeight = img.height;
@@ -152,7 +153,7 @@ export default function ImageCrop({
           onComplete={setCompletedCrop}
           circularCrop={circularCrop}
           crossorigin="anonymous"
-          imageStyle={{ maxHeight: mobileMatches ? 380 : 500 }}
+          imageStyle={{ width: '100%', maxHeight: mobileMatches ? 380 : 500 }}
         />
       </div>
       {children}

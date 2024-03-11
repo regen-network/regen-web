@@ -236,9 +236,13 @@ export function useProjectsWithOrders({
     [allProject, creditClassFilterKeys, creditClassSelected],
   );
 
-  const sortedProjects = sortProjects(projectsFilteredByCreditClass, sort)
-    .sort((a, b) => sortPinnedProject(a, b, pinnedIds))
-    .slice(offset, limit ? offset + limit : undefined);
+  const sortedProjects = useMemo(
+    () =>
+      sortProjects(projectsFilteredByCreditClass, sort)
+        .sort((a, b) => sortPinnedProject(a, b, pinnedIds))
+        .slice(offset, limit ? offset + limit : undefined),
+    [projectsFilteredByCreditClass, sort, pinnedIds, offset, limit],
+  );
 
   /* Metadata queries */
 

@@ -14,7 +14,6 @@ import {
 
 /* normalizeprojectsInfosByHandleMap */
 type NormalizeprojectsInfosByHandleMapProps = {
-  offChainProjects: AllProjectsQuery['allProjects'];
   onChainProjects?: ProjectInfoWithMetadata[];
   sanityCreditClassData?: AllCreditClassQuery;
   classesMetadata?: (CreditClassMetadataLD | undefined)[];
@@ -22,7 +21,6 @@ type NormalizeprojectsInfosByHandleMapProps = {
 
 // eslint-disable-next-line
 export const normalizeProjectsInfosByHandleMap = ({
-  offChainProjects,
   onChainProjects = [],
   sanityCreditClassData,
   classesMetadata,
@@ -31,28 +29,6 @@ export const normalizeProjectsInfosByHandleMap = ({
     string,
     { name: string; classIdOrName: string; classId: string }
   >();
-
-  offChainProjects?.nodes?.forEach(project => {
-    const isVCSProject = !!project?.metadata?.['regen:vcsProjectId'];
-    const creditClass = project?.creditClassByCreditClassId;
-    const creditClassVersion = creditClass?.creditClassVersionsById?.nodes[0];
-
-    if (project?.slug) {
-      const creditClassSanity = findSanityCreditClass({
-        sanityCreditClassData,
-        creditClassIdOrUrl:
-          creditClassVersion?.metadata?.['http://schema.org/url']?.['@value'],
-      });
-
-      projectsMap.set(project?.slug, {
-        name: project?.slug,
-        classIdOrName: creditClassSanity?.nameRaw ?? '',
-        classId: isVCSProject
-          ? creditClass?.onChainId
-          : creditClassVersion?.metadata?.['http://schema.org/url']?.['@value'],
-      });
-    }
-  });
 
   onChainProjects.forEach((project, index) => {
     const creditClassSanity = findSanityCreditClass({

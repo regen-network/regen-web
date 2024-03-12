@@ -99,7 +99,7 @@ export const ProfileEditMain = () => {
     }
   }, [activeAccount, reactQueryClient, wallet?.address]);
 
-  const onSuccess = useCallback(async () => {
+  const onSuccess = useCallback(() => {
     setBannerTextAtom(PROFILE_SAVED);
     refreshProfileData();
     navigate('/profile');

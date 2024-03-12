@@ -36,5 +36,8 @@ export async function deleteImage(
   const fileName = imageUrl.split(`${projectId}/`)[1];
   return axios.delete(
     `${apiServerUrl}/marketplace/v1/files/${projectId}/${fileName}`,
+    {
+      withCredentials: true,
+    },
   );
 }

@@ -169,7 +169,7 @@ function ProjectDetails(): JSX.Element {
   const slug = offchainProjectByIdData?.data?.projectById?.slug;
   useEffect(() => {
     if (!!slug) {
-      navigate(`/project/${slug}`);
+      navigate(`/project/${slug}`, { replace: true });
     }
   }, [slug, navigate]);
 

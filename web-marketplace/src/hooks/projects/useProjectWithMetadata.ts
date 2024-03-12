@@ -24,7 +24,7 @@ import { DescriptionSchemaType } from 'components/organisms/DescriptionForm/Desc
 import { SimplifiedLocationFormSchemaType } from 'components/organisms/LocationForm/LocationForm.schema';
 import { MediaFormSchemaType } from 'components/organisms/MediaForm/MediaForm.schema';
 import {
-  getIsOffChainUuid,
+  getIsUuid,
   getIsOnChainId,
 } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
@@ -82,7 +82,7 @@ export const useProjectWithMetadata = ({
 
   const { createOrUpdateProject } = useCreateOrUpdateProject();
   const isOnChainId = getIsOnChainId(projectId);
-  const isOffChainUuid = getIsOffChainUuid(projectId);
+  const isOffChainUuid = getIsUuid(projectId);
 
   // In project creation mode or off-chain project edit mode,
   // we query the off-chain project since there's no on-chain project yet.

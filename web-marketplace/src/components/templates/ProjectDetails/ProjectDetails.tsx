@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { Box, Skeleton, useMediaQuery, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
@@ -73,7 +73,7 @@ import { getMediaBoxStyles } from './ProjectDetails.styles';
 import {
   findSanityCreditClass,
   formatOtcCardData,
-  getIsOffChainUuid,
+  getIsUuid,
   getIsOnChainId,
   getProjectGalleryPhotos,
   parseMedia,
@@ -93,6 +93,7 @@ function ProjectDetails(): JSX.Element {
   const { track } = useTracker();
   const location = useLocation();
   const { isKeplrMobileWeb } = useWallet();
+  const navigate = useNavigate();
 
   const { data: sanityProjectPageData } = useQuery(
     getAllProjectPageQuery({ sanityClient, enabled: !!sanityClient }),
@@ -121,7 +122,7 @@ function ProjectDetails(): JSX.Element {
   // or an chain project id
   // or and off-chain project with an UUID
   const isOnChainId = getIsOnChainId(projectId);
-  const isOffChainUuid = getIsOffChainUuid(projectId);
+  const isOffChainUuid = getIsUuid(projectId);
 
   const { data: sanityProjectData } = useQuery(
     getProjectByIdQuery({
@@ -164,6 +165,15 @@ function ProjectDetails(): JSX.Element {
       id: projectId,
     }),
   );
+
+  const slug =
+    offchainProjectByIdData?.data?.projectById?.slug ||
+    projectByOnChainId?.data?.projectByOnChainId?.slug;
+  useEffect(() => {
+    if (!!slug) {
+      navigate(`/project/${slug}`, { replace: true });
+    }
+  }, [slug, navigate]);
 
   const projectBySlugOnChainId =
     projectBySlug?.data.projectBySlug?.onChainId ?? undefined;

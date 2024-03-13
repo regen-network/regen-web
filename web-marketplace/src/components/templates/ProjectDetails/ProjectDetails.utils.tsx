@@ -67,11 +67,9 @@ export const findSanityCreditClass = ({
 export const getIsOnChainId = (projectId?: string): boolean =>
   !!projectId && /([A-Z]{1}[\d]+)([-])([\d{3,}])\w+/.test(projectId);
 
-export const getIsOffChainUuid = (projectId?: string): boolean =>
-  !!projectId &&
-  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
-    projectId,
-  );
+export const getIsUuid = (str?: string): boolean =>
+  !!str &&
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
 
 type ParseOffChainProjectReturn = {
   offChainProjectMetadata?: ProjectPageMetadataLD & LegacyProjectMetadataLD;
@@ -284,4 +282,6 @@ export const formatOtcCardData = ({
 };
 
 export const formatTimelineDates = (item: PrefinanceTimelineItem) =>
-  `${formatDate(item.date, 'MMM YYYY')}${item.endDate ? ` - ${formatDate(item.endDate, 'MMM YYYY')}` : ''}`;
+  `${formatDate(item.date, 'MMM YYYY')}${
+    item.endDate ? ` - ${formatDate(item.endDate, 'MMM YYYY')}` : ''
+  }`;

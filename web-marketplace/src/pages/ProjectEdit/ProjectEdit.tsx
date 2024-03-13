@@ -35,7 +35,7 @@ import NotFoundPage from 'pages/NotFound';
 import { usePathSection } from 'pages/ProfileEdit/hooks/usePathSection';
 import WithLoader from 'components/atoms/WithLoader';
 import {
-  getIsOffChainUuid,
+  getIsUuid,
   getIsOnChainId,
 } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { useMsgClient } from 'hooks';
@@ -113,7 +113,7 @@ function ProjectEdit(): JSX.Element {
 
   const { signAndBroadcast } = useMsgClient();
   const isOnChainId = getIsOnChainId(projectId);
-  const isOffChainUUid = getIsOffChainUuid(projectId);
+  const isOffChainUUid = getIsUuid(projectId);
   const { data: projectRes, isFetching: isFetchingProject } = useQuery(
     getProjectQuery({
       request: {

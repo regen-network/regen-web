@@ -25,7 +25,7 @@ import {
   RESEND_TIMER,
 } from '../../LoginButton/LoginButton.constants';
 import { useTracker } from 'lib/tracker/useTracker';
-import { LoginEvent } from 'lib/tracker/types';
+import { EmailLoginEvent, LoginEvent } from 'lib/tracker/types';
 
 type EmailConfirmationDataParams = {
   emailConfirmationText?: string;
@@ -103,6 +103,8 @@ export const useEmailConfirmationData = ({
   const emailModalError = getEmailModalError({
     errorCode: emailModalErrorCode,
     onResend: onResendPasscode,
+    track,
+    email,
   });
 
   useEffect(() => {
@@ -115,6 +117,10 @@ export const useEmailConfirmationData = ({
     email,
     callback,
   }: EmailFormSchemaType & { callback?: () => void }) => {
+    track<EmailLoginEvent>('loginEmail', {
+      email,
+      date: new Date().toUTCString(),
+    });
     if (token) {
       try {
         setEmail(email);

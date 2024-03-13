@@ -8,13 +8,22 @@ export type Track = <IPayload = any>(
 // Login tracking events metadata specification
 
 export interface LoginEvent {
-  id: string; 
+  id: string;
   account?: string;
   date: string;
 }
 
 export interface WCLoginEvent {
   account: string;
+  date: string;
+}
+
+export interface EmailLoginEvent {
+  email: string;
+  date: string;
+}
+
+export interface GoogleLoginEvent {
   date: string;
 }
 

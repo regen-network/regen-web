@@ -32,7 +32,24 @@ export const getMenuItems = (pathname: string): Item[] => [
   },
   {
     title: 'Projects',
-    href: '/projects/1',
+    dropdownItems: [
+      {
+        pathname,
+        href: '/projects/1',
+        label: 'All projects',
+        linkComponent: Link,
+        importCallback: (): Promise<any> =>
+          import('../../../pages/Projects/AllProjects'),
+      },
+      {
+        pathname,
+        href: '/projects/prefinance',
+        label: 'Prefinance projects',
+        linkComponent: Link,
+        importCallback: (): Promise<any> =>
+          import('../../../pages/Projects/PrefinanceProjects'),
+      },
+    ],
   },
   {
     title: 'Trade',

@@ -166,7 +166,9 @@ function ProjectDetails(): JSX.Element {
     }),
   );
 
-  const slug = offchainProjectByIdData?.data?.projectById?.slug;
+  const slug =
+    offchainProjectByIdData?.data?.projectById?.slug ||
+    projectByOnChainId?.data?.projectByOnChainId?.slug;
   useEffect(() => {
     if (!!slug) {
       navigate(`/project/${slug}`, { replace: true });

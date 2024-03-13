@@ -26,7 +26,6 @@ export const saveFooter = (): JSX.Element => (
     onSave={submit}
     saveText={'Save and Next'}
     onPrev={() => null}
-    onNext={() => null}
     hideProgress={false}
     saveDisabled={false}
     percentComplete={33}

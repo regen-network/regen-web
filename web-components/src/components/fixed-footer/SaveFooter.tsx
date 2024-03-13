@@ -9,6 +9,9 @@ import ContainedButton from '../buttons/ContainedButton';
 import OutlinedButton from '../buttons/OutlinedButton';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
 import FixedFooter from './';
+import { TextButton } from '../buttons/TextButton';
+import { SAVE_EXIT } from './SaveFooter.constants';
+import { cn } from '../../utils/styles/cn';
 
 const StyledLinearProgress = withStyles(LinearProgress, theme => ({
   root: {
@@ -35,7 +38,6 @@ const StyledLinearProgress = withStyles(LinearProgress, theme => ({
 
 interface Props {
   onPrev?: () => void;
-  onNext?: () => void;
   onSave?: () => void;
   saveDisabled: boolean;
   saveText?: string;
@@ -46,6 +48,7 @@ interface Props {
   // of overall completion, but that would depend on each step living in its own
   // route. Another would just be to pass total steps + current step
   percentComplete: number;
+  saveAndExit?: () => Promise<void>;
 }
 
 type StyleProps = { hideProgress: boolean };
@@ -53,21 +56,9 @@ type StyleProps = { hideProgress: boolean };
 const useStyles = makeStyles<StyleProps>()((theme, { hideProgress }) => ({
   root: {
     marginBottom: hideProgress ? 0 : theme.spacing(1),
-    [theme.breakpoints.up('sm')]: {
-      justifyContent: 'space-between',
-    },
-    [theme.breakpoints.down('sm')]: {
-      justifyContent: 'flex-end',
-    },
   },
   arrows: {
     margin: theme.spacing(0, 2, 0, 0),
-    [theme.breakpoints.up('sm')]: {
-      justifyContent: 'space-between',
-    },
-    [theme.breakpoints.down('sm')]: {
-      justifyContent: 'flex-end',
-    },
   },
   btn: {
     padding: theme.spacing(2, 4),
@@ -80,14 +71,12 @@ const useStyles = makeStyles<StyleProps>()((theme, { hideProgress }) => ({
       fontSize: theme.spacing(3),
     },
   },
-  back: {
-    marginRight: theme.spacing(4),
-  },
 }));
 
 const SaveFooter: React.FC<React.PropsWithChildren<Props>> = ({
-  saveText = 'Save & Next',
+  saveText = 'Save and Next',
   hideProgress = false,
+  saveAndExit,
   ...props
 }) => {
   const { classes, cx } = useStyles({ hideProgress });
@@ -95,11 +84,29 @@ const SaveFooter: React.FC<React.PropsWithChildren<Props>> = ({
 
   return (
     <FixedFooter>
-      <Grid container spacing={4} className={classes.root}>
+      <Grid
+        container
+        spacing={4}
+        justifyContent="space-between"
+        alignItems="center"
+        className={classes.root}
+      >
+        <Grid item>
+          {saveAndExit && (
+            <TextButton
+              className="font-sans normal-case tracking-normal"
+              textSize="sm"
+              onClick={saveAndExit}
+            >
+              {SAVE_EXIT}
+            </TextButton>
+          )}
+        </Grid>
+
         <Grid item className={classes.arrows}>
           {props.onPrev && (
             <OutlinedButton
-              className={cx(classes.btn, classes.back)}
+              className={cn(classes.btn, 'mr-10 sm:mr-20')}
               onClick={props.onPrev}
             >
               <ArrowDownIcon
@@ -109,17 +116,6 @@ const SaveFooter: React.FC<React.PropsWithChildren<Props>> = ({
               />
             </OutlinedButton>
           )}
-          {props.onNext && (
-            <OutlinedButton className={classes.btn} onClick={props.onNext}>
-              <ArrowDownIcon
-                fontSize="small"
-                direction="next"
-                color={theme.palette.secondary.main}
-              />
-            </OutlinedButton>
-          )}
-        </Grid>
-        <Grid item>
           <ContainedButton
             type="submit"
             className={classes.btn}

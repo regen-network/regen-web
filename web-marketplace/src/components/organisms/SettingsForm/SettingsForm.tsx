@@ -30,14 +30,13 @@ import {
 
 interface SettingsFormProps {
   submit: (props: SettingsSubmitProps) => Promise<void>;
-  onNext?: () => void;
   onPrev?: () => void;
   initialValues?: SettingsFormSchemaType;
 }
 
 export const SettingsForm: React.FC<
   React.PropsWithChildren<SettingsFormProps>
-> = ({ initialValues, submit, onNext, onPrev }) => {
+> = ({ initialValues, submit, onPrev }) => {
   const form = useZodForm({
     schema: settingsFormSchema,
     defaultValues: {
@@ -116,7 +115,6 @@ export const SettingsForm: React.FC<
       </OnBoardingCard>
       <ProjectPageFooter
         onPrev={onPrev}
-        onNext={onNext}
         isValid={isValid && !slugTakenError}
         isSubmitting={isSubmitting}
         dirty={isDirty}

@@ -122,6 +122,7 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
               <SaveFooter
                 onPrev={activeStep > 0 ? handleBack : undefined}
                 onSave={submitForm}
+                saveText={activeStep === 2 ? 'submit' : undefined}
                 saveDisabled={!isValid || isSubmitting}
                 percentComplete={percentComplete}
               />

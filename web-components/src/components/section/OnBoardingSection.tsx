@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Link } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
 import { Body } from '../typography';
@@ -11,9 +10,7 @@ interface OnBoardingSectionProps {
   description?: string | JSX.Element;
   headerChildren?: ReactNode;
   formContainer?: boolean; // set max width and center
-  linkText?: string;
   exampleProjectUrl?: string;
-  onLinkClick?: () => void;
   classes?: {
     root?: string;
     title?: string;
@@ -55,30 +52,12 @@ const useStyles = makeStyles()(theme => ({
       margin: 'inherit',
     },
   },
-  link: {
-    color: theme.palette.secondary.main,
-    fontFamily: theme.typography.fontFamily,
-    fontWeight: 'bold',
-    cursor: 'pointer',
-    '&:hover': {
-      textDecoration: 'none',
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3.5),
-      marginLeft: theme.spacing(4),
-    },
-  },
 }));
 
 const OnBoardingSection: React.FC<
   React.PropsWithChildren<OnBoardingSectionProps>
 > = ({
   formContainer = false,
-  linkText,
-  onLinkClick,
   exampleProjectUrl,
   classes,
   title,
@@ -97,16 +76,9 @@ const OnBoardingSection: React.FC<
         titleWrap: cx(titleWrap, !!classes && classes.titleWrap),
       }}
       title={title}
-      titleAlign={onLinkClick ? 'left' : 'center'}
+      titleAlign={'center'}
       titleVariant="h3"
       description={description}
-      topRight={
-        onLinkClick && (
-          <Link className={styles.link} onClick={onLinkClick}>
-            {linkText}
-          </Link>
-        )
-      }
       headerChildren={headerChildren}
     >
       <div

@@ -20,11 +20,11 @@ import { DEFAULT } from './MediaForm.constants';
 import { mediaFormSchema, MediaFormSchemaType } from './MediaForm.schema';
 import { MediaFormPhotos } from './MediaFormPhotos';
 import { MediaFormStory } from './MediaFormStory';
+import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 
 interface MediaFormProps {
   submit: (props: MetadataSubmitProps) => Promise<void>;
   onPrev?: () => void;
-  onNext?: () => void;
   initialValues: MediaFormSchemaType;
   projectId?: string;
 }
@@ -33,7 +33,6 @@ export const MediaForm = ({
   initialValues,
   projectId,
   submit,
-  onNext,
   onPrev,
 }: MediaFormProps): JSX.Element => {
   const form = useZodForm({
@@ -46,6 +45,7 @@ export const MediaForm = ({
   const { isSubmitting, isDirty, isValid } = useFormState({
     control: form.control,
   });
+  const saveAndExit = useProjectSaveAndExit();
 
   const fileNamesToDeleteRef = useRef<string[]>([]);
   const { formRef, shouldNavigateRef } = useCreateProjectContext();
@@ -112,11 +112,11 @@ export const MediaForm = ({
         />
       </OnBoardingCard>
       <ProjectPageFooter
-        onNext={onNext}
         onPrev={onPrev}
         isValid={isValid}
         isSubmitting={isSubmitting}
         dirty={isDirty}
+        saveAndExit={saveAndExit}
       />
     </Form>
   );

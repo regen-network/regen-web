@@ -8,7 +8,6 @@ type Props = {
   submit: UseProjectMetadataSubmitReturn;
   metadata?: string;
   graphData?: ShaclGraphByUriQuery;
-  onNext?: () => void;
   onPrev?: () => void;
   creditClassId?: string;
 };
@@ -18,7 +17,6 @@ export const ProjectMetadataSelectedForm = ({
   isVCS,
   metadata,
   submit,
-  onNext,
   onPrev,
   creditClassId,
 }: Props): JSX.Element => (
@@ -35,7 +33,6 @@ export const ProjectMetadataSelectedForm = ({
     initialValues={{ metadata: metadata ?? '' }}
     graphData={graphData}
     creditClassId={creditClassId}
-    onNext={onNext}
     onPrev={onPrev}
   />
 );

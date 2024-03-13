@@ -29,10 +29,10 @@ import {
   BasicInfoFormSchemaType,
 } from './BasicInfoForm.schema';
 import { useBasicInfoStyles } from './BasicInfoForm.styles';
+import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 
 interface BasicInfoFormProps {
   onSubmit: (props: MetadataSubmitProps) => Promise<void>;
-  onNext?: () => void;
   onPrev?: () => void;
   initialValues?: BasicInfoFormSchemaType;
 }
@@ -40,10 +40,10 @@ interface BasicInfoFormProps {
 const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
   initialValues,
   onSubmit,
-  onNext,
   onPrev,
 }) => {
   const { classes, cx } = useBasicInfoStyles();
+  const saveAndExit = useProjectSaveAndExit();
   const form = useZodForm({
     schema: basicInfoFormSchema,
     defaultValues: {
@@ -132,11 +132,11 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
         </Box>
       </OnBoardingCard>
       <ProjectPageFooter
-        onNext={onNext}
         onPrev={onPrev}
         isValid={isValid}
         isSubmitting={isSubmitting}
         dirty={isDirty}
+        saveAndExit={saveAndExit}
       />
     </Form>
   );

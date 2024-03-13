@@ -10,7 +10,6 @@ import { getProjectShapeIri } from 'lib/rdf';
 
 import { NotFoundPage } from 'pages/NotFound/NotFound';
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
-import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import { MetadataForm } from 'components/organisms/MetadataForm/MetadataForm';
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
@@ -62,8 +61,6 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
       metadata: customMetadata ? JSON.stringify(customMetadata, null, 2) : '',
     };
 
-    const saveAndExit = useProjectSaveAndExit();
-
     return (
       <>
         {creditClassId ? (
@@ -73,14 +70,12 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
             offChainProject={offChainProject}
             onChainProject={onChainProject}
             loading={loading}
-            saveAndExit={saveAndExit}
           >
             <MetadataForm
               onSubmit={projectMetadataSubmit}
               initialValues={initialValues}
               graphData={data?.data}
               creditClassId={creditClassId}
-              onNext={navigateNext}
               onPrev={() => navigate(`/project-pages/${projectId}/media`)}
             />
           </ProjectFormTemplate>

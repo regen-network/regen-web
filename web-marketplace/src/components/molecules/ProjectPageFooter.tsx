@@ -11,11 +11,11 @@ import { EditProjectPageFooter } from './EditProjectPageFooter';
 interface Props {
   onSave?: () => void;
   onPrev?: () => void;
-  onNext?: () => void;
   saveText?: string;
   isValid?: boolean;
   dirty?: boolean;
   isSubmitting: boolean;
+  saveAndExit?: () => Promise<void>;
 }
 
 const ProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
@@ -24,6 +24,7 @@ const ProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
   dirty = true,
   isSubmitting,
   onSave = () => void 0,
+  saveAndExit,
   ...props
 }) => {
   const { isEdit } = useProjectEditContext();
@@ -43,10 +44,10 @@ const ProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
       saveText={saveText || 'Save and Next'}
       onSave={onSave}
       onPrev={props.onPrev}
-      onNext={props.onNext}
-      hideProgress={false} // TODO
+      hideProgress={false}
       saveDisabled={saveDisabled}
       percentComplete={percentage}
+      saveAndExit={saveAndExit}
     />
   );
 };

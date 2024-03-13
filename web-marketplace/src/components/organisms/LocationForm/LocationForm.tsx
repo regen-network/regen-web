@@ -25,11 +25,11 @@ import {
   locationFormSchema,
   LocationFormSchemaType,
 } from './LocationForm.schema';
+import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 
 interface LocationFormProps {
   mapToken: string;
   onSubmit: (props: MetadataSubmitProps) => Promise<void>;
-  onNext?: () => void;
   onPrev?: () => void;
   initialValues?: LocationFormSchemaType;
 }
@@ -38,7 +38,6 @@ const LocationForm: React.FC<LocationFormProps> = ({
   mapToken,
   initialValues,
   onSubmit,
-  onNext,
   onPrev,
 }) => {
   const form = useZodForm({
@@ -107,11 +106,11 @@ const LocationForm: React.FC<LocationFormProps> = ({
         />
       </OnBoardingCard>
       <ProjectPageFooter
-        onNext={onNext}
         onPrev={onPrev}
         isValid={isValid}
         isSubmitting={isSubmitting}
         dirty={isDirty}
+        saveAndExit={saveAndExit}
       />
     </Form>
   );

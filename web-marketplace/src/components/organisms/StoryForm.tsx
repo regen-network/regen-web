@@ -18,7 +18,6 @@ import { ProjectPageFooter } from '../molecules';
 
 interface StoryFormProps {
   submit: (values: StoryValues) => Promise<void>;
-  onNext?: () => void;
   onPrev?: () => void;
   initialValues?: StoryValues;
 }
@@ -319,7 +318,6 @@ const StoryForm: React.FC<React.PropsWithChildren<StoryFormProps>> = ({
               <ProjectPageFooter
                 onSave={submitForm}
                 onPrev={props.onPrev}
-                onNext={props.onNext}
                 isValid={isValid}
                 isSubmitting={isSubmitting}
                 dirty={dirty}

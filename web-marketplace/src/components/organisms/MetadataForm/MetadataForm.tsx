@@ -22,10 +22,10 @@ import {
   MetadataFormSchemaType,
 } from './MetadataForm.schema';
 import { useMetadataFormStyles } from './MetadataForm.styles';
+import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 
 interface MetadataFormFormProps {
   onSubmit: ({ values }: { values: MetadataFormSchemaType }) => Promise<void>;
-  onNext?: () => void;
   onPrev?: () => void;
   initialValues?: MetadataFormSchemaType;
   creditClassId?: string;
@@ -35,7 +35,6 @@ interface MetadataFormFormProps {
 const MetadataForm: React.FC<MetadataFormFormProps> = ({
   initialValues,
   onSubmit,
-  onNext,
   onPrev,
   creditClassId,
   graphData,
@@ -54,6 +53,7 @@ const MetadataForm: React.FC<MetadataFormFormProps> = ({
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const { confirmSave, isEdit, isDirtyRef } = useProjectEditContext();
   const { formRef } = useCreateProjectContext();
+  const saveAndExit = useProjectSaveAndExit();
 
   useEffect(() => {
     isDirtyRef.current = isDirty;
@@ -93,11 +93,11 @@ const MetadataForm: React.FC<MetadataFormFormProps> = ({
         />
       </OnBoardingCard>
       <ProjectPageFooter
-        onNext={onNext}
         onPrev={onPrev}
         isValid={isValid}
         isSubmitting={isSubmitting}
         dirty={isDirty}
+        saveAndExit={saveAndExit}
       />
     </Form>
   );

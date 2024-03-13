@@ -33,10 +33,10 @@ import { RoleField } from './components/RoleField/RoleField';
 import { useSaveProfile } from './hooks/useSaveProfile';
 import { rolesFormSchema, RolesFormSchemaType } from './RolesForm.schema';
 import { useHandleUpload } from '../MediaForm/hooks/useHandleUpload';
+import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 
 interface RolesFormProps {
   submit: (props: RoleSubmitProps) => Promise<void>;
-  onNext?: () => void;
   onPrev?: () => void;
   initialValues?: RolesFormSchemaType;
   isOnChain: boolean;
@@ -47,7 +47,6 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   initialValues,
   projectId,
   submit,
-  onNext,
   onPrev,
   isOnChain,
 }) => {
@@ -130,6 +129,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   );
 
   const saveProfile = useSaveProfile();
+  const saveAndExit = useProjectSaveAndExit();
 
   const [offChainProjectId, setOffChainProjectId] = useState(projectId);
   const { handleUpload } = useHandleUpload({
@@ -225,10 +225,10 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
       </OnBoardingCard>
       <ProjectPageFooter
         onPrev={onPrev}
-        onNext={onNext}
         isValid={isValid}
         isSubmitting={isSubmitting}
         dirty={isDirty}
+        saveAndExit={saveAndExit}
       />
     </Form>
   );

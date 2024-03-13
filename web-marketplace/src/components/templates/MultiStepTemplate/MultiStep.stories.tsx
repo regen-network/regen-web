@@ -33,14 +33,12 @@ const steps = [
 ];
 
 const MultiStepContent = (): JSX.Element => {
-  const { handleNext, handleBack, activeStep, percentComplete } =
-    useMultiStep();
+  const { handleBack, activeStep, percentComplete } = useMultiStep();
   return (
     <Center>
       Content for multi step
       <SaveFooter
         onPrev={activeStep > 0 ? handleBack : undefined}
-        onNext={handleNext}
         onSave={() => null}
         saveDisabled={false}
         percentComplete={percentComplete}

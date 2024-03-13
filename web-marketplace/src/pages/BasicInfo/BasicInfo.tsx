@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
-import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import { useProjectEditContext } from 'pages/ProjectEdit';
 import { BasicInfoForm } from 'components/organisms';
 import { BasicInfoFormSchemaType } from 'components/organisms/BasicInfoForm/BasicInfoForm.schema';
@@ -33,22 +32,15 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
     [metadata],
   );
 
-  const saveAndExit = useProjectSaveAndExit();
-
   return (
     <ProjectFormTemplate
       isEdit={isEdit}
       title="Basic Info"
-      saveAndExit={saveAndExit}
       offChainProject={offChainProject}
       onChainProject={onChainProject}
       loading={loading}
     >
-      <BasicInfoForm
-        onSubmit={metadataSubmit}
-        onNext={navigateNext}
-        initialValues={initialValues}
-      />
+      <BasicInfoForm onSubmit={metadataSubmit} initialValues={initialValues} />
     </ProjectFormTemplate>
   );
 };

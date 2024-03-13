@@ -9,7 +9,6 @@ import { useQuery } from '@tanstack/react-query';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
-import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import WithLoader from 'components/atoms/WithLoader';
 import { MediaFormSchemaType } from 'components/organisms/MediaForm/MediaForm.schema';
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
@@ -60,8 +59,6 @@ const Media = (): JSX.Element => {
     },
   };
 
-  const saveAndExit = useProjectSaveAndExit();
-
   function navigatePrev(): void {
     navigate(`/project-pages/${projectId}/description`);
   }
@@ -70,7 +67,6 @@ const Media = (): JSX.Element => {
     <ProjectFormTemplate
       isEdit={isEdit}
       title="Media"
-      saveAndExit={saveAndExit}
       offChainProject={offChainProject}
       onChainProject={onChainProject}
       loading={loading}
@@ -82,7 +78,6 @@ const Media = (): JSX.Element => {
         <MediaForm
           submit={metadataSubmit}
           initialValues={initialValues}
-          onNext={navigateNext}
           onPrev={navigatePrev}
           projectId={offChainProject?.id}
         />

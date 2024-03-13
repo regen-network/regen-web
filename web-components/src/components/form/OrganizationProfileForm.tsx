@@ -12,7 +12,6 @@ import { requiredMessage } from '../inputs/validation';
 interface FormProps {
   submit: (values: OrgProfileFormValues) => Promise<void>;
   goBack: () => void;
-  skip: () => void;
   initialValues?: OrgProfileFormValues;
   mapToken: string;
 }
@@ -113,7 +112,6 @@ const OrganizationProfileForm: React.FC<React.PropsWithChildren<FormProps>> =
                 onSave={submitForm}
                 saveText={'Save and Next'}
                 onPrev={props.goBack} // TODO
-                onNext={props.skip} // TODO
                 hideProgress={false} // TODO
                 saveDisabled={(submitCount > 0 && !isValid) || isSubmitting} // TODO
                 percentComplete={0} // TODO

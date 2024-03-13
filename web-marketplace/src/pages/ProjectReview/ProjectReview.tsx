@@ -307,6 +307,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
         </ReviewCard>
       )}
       <ProjectPageFooter
+        saveText="submit"
         onSave={submit}
         onPrev={() =>
           creditClassId

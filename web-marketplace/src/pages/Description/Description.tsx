@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
-import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import { useProjectEditContext } from 'pages/ProjectEdit';
 import WithLoader from 'components/atoms/WithLoader';
 import { DescriptionForm } from 'components/organisms/DescriptionForm/DescriptionForm';
@@ -36,8 +35,6 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
     [metadata],
   );
 
-  const saveAndExit = useProjectSaveAndExit();
-
   function navigatePrev(): void {
     navigate(`/project-pages/${projectId}/location`);
   }
@@ -46,7 +43,6 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
     <ProjectFormTemplate
       isEdit={isEdit}
       title="Description"
-      saveAndExit={saveAndExit}
       offChainProject={offChainProject}
       onChainProject={onChainProject}
       loading={loading}
@@ -57,7 +53,6 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
       >
         <DescriptionForm
           onSubmit={metadataSubmit}
-          onNext={navigateNext}
           onPrev={navigatePrev}
           initialValues={initialValues}
         />

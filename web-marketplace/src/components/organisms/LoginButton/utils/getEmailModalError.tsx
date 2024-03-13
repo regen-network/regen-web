@@ -4,6 +4,7 @@ import {
   CODE_EXPIRED_ERROR,
   DEFAULT_VALIDATE_ERROR,
 } from '../LoginButton.constants';
+import { EmailLoginEvent, Track } from 'lib/tracker/types';
 
 type Params = {
   errorCode: string;

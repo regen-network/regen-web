@@ -35,6 +35,7 @@ import { useSignArbitrary } from './hooks/useSignArbitrary';
 import { emptySender, KEPLR_MOBILE } from './wallet.constants';
 import { ConnectParams } from './wallet.types';
 import { WalletConfig } from './walletsConfig/walletsConfig.types';
+import { ConnectEvent } from 'lib/tracker/types';
 
 export interface Wallet {
   offlineSigner?: OfflineSigner;
@@ -98,11 +99,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const [loaded, setLoaded] = useState<boolean>(false);
   const [wallet, setWallet] = useState<Wallet>(emptySender);
   const [accountChanging, setAccountChanging] = useState<boolean>(false);
-  const {
-    activeAccountId,
-    activeAccount,
-    loading: authLoading,
-  } = useAuth();
+  const { activeAccountId, activeAccount, loading: authLoading } = useAuth();
   const [connectionType, setConnectionType] = useState<string | undefined>(
     undefined,
   );
@@ -133,6 +130,10 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
           shortAddress: truncate(address),
         });
         setWalletConnect(true);
+        track<ConnectEvent>('loginWalletConnect', {
+          date: new Date().toUTCString(),
+          account: address,
+        });
       }
     }
   }, [address, walletStatus, walletConnectClient, closeView]);
@@ -141,14 +142,14 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     setError,
   });
   const logout = useLogout({ setError });
-  const login = useLogin({ signArbitrary, setError, logout });
+  const login = useLogin({ signArbitrary, setError, logout, track });
 
   const connectWallet = useConnectWallet({
     setWallet,
     setKeplrMobileWeb,
     walletConfigRef,
-    track,
     login,
+    track,
   });
 
   const connect = useConnect({ connectWallet, setConnectionType, setError });

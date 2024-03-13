@@ -228,7 +228,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
             onSubmit={async (values, { setSubmitting }) => {
               if (!project) return;
               setSubmitting(true);
-              track<'buy2', Buy2Event>('buy2', {
+              track<Buy2Event>('buy2', {
                 url: location.pathname,
                 price: selectedSellOrder?.askAmount,
                 batchDenom: selectedSellOrder?.batchDenom,

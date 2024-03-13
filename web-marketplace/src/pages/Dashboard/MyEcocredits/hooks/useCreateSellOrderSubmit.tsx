@@ -73,7 +73,7 @@ const useCreateSellOrderSubmit = ({
 
       const onError = (err?: Error): void => {
         const batchInfo = credits?.find(batch => batch.denom === batchDenom);
-        track<'sellFailure', SellFailureEvent>('sellFailure', {
+        track<SellFailureEvent>('sellFailure', {
           batchDenom,
           projectId: batchInfo?.projectId,
           projectName: !!batchInfo?.projectName
@@ -88,7 +88,7 @@ const useCreateSellOrderSubmit = ({
       };
       const onSuccess = (): void => {
         const batchInfo = credits?.find(batch => batch.denom === batchDenom);
-        track<'sellSuccess', SellSuccessEvent>('sellSuccess', {
+        track<SellSuccessEvent>('sellSuccess', {
           batchDenom,
           projectId: batchInfo?.projectId,
           projectName: !!batchInfo?.projectName

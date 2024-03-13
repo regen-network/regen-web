@@ -85,7 +85,7 @@ const CreateSellOrderForm: React.FC<Props> = ({
       form={form}
       onSubmit={async values => {
         try {
-          track<'sell2', Sell2Event>('sell2', {
+          track<Sell2Event>('sell2', {
             batchDenom: values.batchDenom,
             price: values.price,
             quantity: values.amount,

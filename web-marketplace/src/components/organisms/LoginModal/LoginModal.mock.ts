@@ -23,5 +23,3 @@ export const socialProvidersMock: LoginProvider[] = [
     onClick: () => void 0,
   },
 ];
-
-export const uriMock = 'https://www.regen.network/';

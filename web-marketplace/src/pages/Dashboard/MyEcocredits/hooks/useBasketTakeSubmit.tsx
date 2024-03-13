@@ -53,7 +53,7 @@ const useBasketTakeSubmit = ({
         basketInfo => basketInfo.basketDenom === values.basketDenom,
       );
 
-      track<'takeFromBasket2', TakeFromBasket2>('takeFromBasket2', {
+      track<TakeFromBasket2>('takeFromBasket2', {
         basketName: basket?.name,
         quantity: amount,
         retireOnTake: values.retireOnTake,
@@ -74,28 +74,22 @@ const useBasketTakeSubmit = ({
       };
 
       const onError = (err?: Error): void => {
-        track<'takeFromBasketFailure', TakeFromBasketFailure>(
-          'takeFromBasketFailure',
-          {
-            basketName: basket?.name,
-            quantity: amount,
-            retireOnTake: values.retireOnTake,
-            errorMessage: err?.message,
-          },
-        );
+        track<TakeFromBasketFailure>('takeFromBasketFailure', {
+          basketName: basket?.name,
+          quantity: amount,
+          retireOnTake: values.retireOnTake,
+          errorMessage: err?.message,
+        });
         onErrorCallback && onErrorCallback(err);
       };
       const onSuccess = (deliverTxResponse?: DeliverTxResponse): void => {
         const batchesFromTake = takeEventToBatches(deliverTxResponse!);
-        track<'takeFromBasketSuccess', TakeFromBasketSuccess>(
-          'takeFromBasketSuccess',
-          {
-            basketName: basket?.name,
-            quantity: amount,
-            retireOnTake: values.retireOnTake,
-            batchDenoms: batchesFromTake?.map(value => value.name),
-          },
-        );
+        track<TakeFromBasketSuccess>('takeFromBasketSuccess', {
+          basketName: basket?.name,
+          quantity: amount,
+          retireOnTake: values.retireOnTake,
+          batchDenoms: batchesFromTake?.map(value => value.name),
+        });
 
         if (basket && amount) {
           const cardItems = [

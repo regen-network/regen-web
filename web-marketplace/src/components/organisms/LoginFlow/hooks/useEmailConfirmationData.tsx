@@ -24,6 +24,8 @@ import {
   RESEND_SUCCES,
   RESEND_TIMER,
 } from '../../LoginButton/LoginButton.constants';
+import { useTracker } from 'lib/tracker/useTracker';
+import { EmailLoginEvent, AccountEvent } from 'lib/tracker/types';
 
 type EmailConfirmationDataParams = {
   emailConfirmationText?: string;
@@ -38,7 +40,7 @@ export const useEmailConfirmationData = ({
     useState(false);
   const [emailModalErrorCode, setEmailModalErrorCode] = useState('');
   const [email, setEmail] = useState('');
-  const { privActiveAccount } = useAuth();
+  const { privActiveAccount, activeAccount } = useAuth();
   const setBannerText = useSetAtom(bannerTextAtom);
   const { data: token } = useQuery(getCsrfTokenQuery({}));
   const retryCsrfRequest = useRetryCsrfRequest();
@@ -49,6 +51,7 @@ export const useEmailConfirmationData = ({
   } = useTimer({
     duration: RESEND_TIMER,
   });
+  const { track } = useTracker();
 
   const onConfirmationModalClose = () => setIsConfirmationModalOpen(false);
   const onConnectedEmailErrorModalClose = () =>
@@ -80,12 +83,18 @@ export const useEmailConfirmationData = ({
         token,
         defaultError: DEFAULT_VALIDATE_ERROR,
         retryCsrfRequest,
-        onSuccess: async () => {
+        onSuccess: async response => {
           await reactQueryClient.invalidateQueries([GET_ACCOUNTS_QUERY_KEY]);
           setBannerText(emailConfirmationText ?? EMAIL_CONFIRMATION_SUCCES);
           onConfirmationModalClose();
+          if (response?.user?.accountId)
+            track<AccountEvent>('enterCodeSuccess', {
+              id: response.user.accountId,
+              date: new Date().toUTCString(),
+            });
         },
         setEmailModalErrorCode,
+        track,
       });
     } else {
       setEmailModalErrorCode('');
@@ -102,11 +111,27 @@ export const useEmailConfirmationData = ({
       resetTimer();
     }
   }, [email, privActiveAccount?.email, resetTimer]);
+
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+
   const onEmailSubmit = async ({
     email,
     callback,
   }: EmailFormSchemaType & { callback?: () => void }) => {
+    // an existing account tries to connect an email address from the profile settings
+    if (activeAccount) {
+      await track<AccountEvent>('connectEmail', {
+        id: activeAccount.id,
+        account: activeAccount.addr,
+        date: new Date().toUTCString(),
+      });
+    } else {
+      await track<EmailLoginEvent>('loginEmail', {
+        email,
+        date: new Date().toUTCString(),
+      });
+    }
+
     if (token) {
       try {
         setEmail(email);

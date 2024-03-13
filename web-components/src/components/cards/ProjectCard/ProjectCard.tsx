@@ -241,7 +241,7 @@ export function ProjectCard({
                       event.stopPropagation();
                       track &&
                         !isPrefinanceProject &&
-                        track<'buy1', Buy1Event>('buy1', {
+                        track<Buy1Event>('buy1', {
                           url: pathname ?? '',
                           cardType: 'project',
                           buttonLocation: 'projectCard',

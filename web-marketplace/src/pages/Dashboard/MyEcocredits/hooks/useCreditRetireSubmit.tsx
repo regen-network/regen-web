@@ -51,7 +51,7 @@ const useCreditRetireSubmit = ({
   const creditRetireSubmit = useCallback(
     async (values: CreditRetireFormSchemaType): Promise<void> => {
       const batchDenom = credits[creditRetireOpen].denom;
-      track<'retire2', Retire2Event>('retire2', {
+      track<Retire2Event>('retire2', {
         batchDenom,
         creditClassId: credits[creditRetireOpen].classId,
         projectId: credits[creditRetireOpen].projectId,
@@ -82,7 +82,7 @@ const useCreditRetireSubmit = ({
       };
 
       const onError = (err?: Error): void => {
-        track<'retireFailure', RetireFailureEvent>('retireFailure', {
+        track<RetireFailureEvent>('retireFailure', {
           batchDenom,
           creditClassId: credits[creditRetireOpen].classId,
           projectId: credits[creditRetireOpen].projectId,
@@ -92,7 +92,7 @@ const useCreditRetireSubmit = ({
         });
       };
       const onSuccess = (): void => {
-        track<'retireSuccess', RetireSuccessEvent>('retireSuccess', {
+        track<RetireSuccessEvent>('retireSuccess', {
           batchDenom,
           creditClassId: credits[creditRetireOpen].classId,
           projectId: credits[creditRetireOpen].projectId,

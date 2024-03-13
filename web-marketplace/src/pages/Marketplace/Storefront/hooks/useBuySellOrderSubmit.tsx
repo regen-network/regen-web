@@ -129,7 +129,7 @@ const useBuySellOrderSubmit = ({
       };
 
       const onError = (err?: Error): void => {
-        track<'buyFailure', BuyFailureEvent>('buyFailure', {
+        track<BuyFailureEvent>('buyFailure', {
           url: location.pathname,
           price: String(price),
           batchDenom: batchDenom,
@@ -142,7 +142,7 @@ const useBuySellOrderSubmit = ({
         });
       };
       const onSuccess = (): void => {
-        track<'buySuccess', BuySuccessEvent>('buySuccess', {
+        track<BuySuccessEvent>('buySuccess', {
           url: location.pathname,
           price: String(price),
           batchDenom: batchDenom,

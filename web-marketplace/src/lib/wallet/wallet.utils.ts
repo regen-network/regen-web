@@ -2,7 +2,6 @@ import truncate from 'lodash/truncate';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { apiUri } from 'lib/apiUri';
-import { LoginEvent, Track } from 'lib/tracker/types';
 
 import { chainInfo } from './chainInfo/chainInfo';
 import { LoginType, Wallet } from './wallet';
@@ -14,7 +13,9 @@ import {
 import {
   WalletClient,
   WalletConfig,
+  WalletType,
 } from './walletsConfig/walletsConfig.types';
+import { ConnectEvent, Track } from 'lib/tracker/types';
 
 /* getWallet */
 
@@ -53,20 +54,20 @@ type FinalizeConnectionParams = {
   walletClient?: WalletClient;
   walletConfig?: WalletConfig;
   setWallet: UseStateSetter<Wallet>;
-  track?: Track;
   login?: LoginType;
   doLogin?: boolean;
   doLogout?: boolean;
+  track?: Track;
 };
 
 export const finalizeConnection = async ({
   walletClient,
   walletConfig,
   setWallet,
-  track,
   login,
   doLogin = true,
   doLogout,
+  track,
 }: FinalizeConnectionParams): Promise<Wallet | undefined> => {
   try {
     await walletClient?.enable(chainInfo.chainId);
@@ -77,18 +78,18 @@ export const finalizeConnection = async ({
 
   const wallet = await getWallet({ walletClient, walletConfig });
   if (wallet) {
-    if (track) {
-      track<'login', LoginEvent>('login', {
-        date: new Date().toUTCString(),
+    setWallet(wallet);
+
+    if (track && walletClient?.mode === 'mobile-web') {
+      await track<ConnectEvent>('loginKeplrMobileApp', {
         account: wallet.address,
+        date: new Date().toUTCString(),
       });
     }
-    setWallet(wallet);
 
     // signArbitrary (used in login) not yet supported by @keplr-wallet/wc-client
     // https://github.com/chainapsis/keplr-wallet/issues/664
-    if (login && doLogin)
-      await login({ walletConfig, wallet, doLogout });
+    if (login && doLogin) await login({ walletConfig, wallet, doLogout });
     return wallet;
   }
 };

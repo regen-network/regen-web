@@ -8,19 +8,15 @@ import { ConnectWalletParams } from '../wallet.types';
 import { finalizeConnection } from '../wallet.utils';
 import { walletsConfig } from '../walletsConfig/walletsConfig';
 import { WalletConfig, WalletType } from '../walletsConfig/walletsConfig.types';
+import { Track } from 'lib/tracker/types';
 
 type Props = {
   walletConfigRef: MutableRefObject<WalletConfig | undefined>;
   setWallet: UseStateSetter<Wallet>;
   setKeplrMobileWeb: UseStateSetter<boolean>;
-  track?: (
-    eventName: string,
-    payload?: any,
-    options?: any,
-    callback?: (...params: any[]) => any,
-  ) => Promise<any>;
   login?: LoginType;
   logout?: () => Promise<void>;
+  track?: Track;
 };
 
 export type ConnectWalletType = ({
@@ -33,8 +29,8 @@ export const useConnectWallet = ({
   walletConfigRef,
   setWallet,
   setKeplrMobileWeb,
-  track,
   login,
+  track,
 }: Props): ConnectWalletType => {
   const connectWallet = useCallback(
     async ({
@@ -68,10 +64,10 @@ export const useConnectWallet = ({
           setWallet,
           walletClient,
           walletConfig,
-          track,
           login,
           doLogin,
           doLogout,
+          track,
         });
         return wallet;
       }

@@ -7,7 +7,6 @@ import { isWaitingForSigningAtom } from 'lib/atoms/tx.atoms';
 import {
   EMAIL_CONFIRMATION_CANCEL,
   EMAIL_CONFIRMATION_SUBMIT,
-  socialProviders,
 } from '../LoginButton/LoginButton.constants';
 import { MobileSigningModal } from '../LoginButton/LoginButton.SigningModal';
 import { getResendCodeButtonLink } from '../LoginButton/utils/getResendCodeButtonLink';
@@ -16,6 +15,7 @@ import { LoginModal } from '../LoginModal/LoginModal';
 import { LoginModalState, LoginProvider } from '../LoginModal/LoginModal.types';
 import { useEmailConfirmationData } from './hooks/useEmailConfirmationData';
 import { useWallet } from 'lib/wallet/wallet';
+import { useSocialProviders } from '../LoginButton/hooks/useSocialProviders';
 
 type Props = {
   isModalOpen: boolean;
@@ -30,7 +30,6 @@ const LoginFlow = ({
   onModalClose,
   wallets,
   modalState,
-  qrCodeUri,
 }: Props) => {
   const {
     isConfirmationModalOpen,
@@ -46,6 +45,7 @@ const LoginFlow = ({
     isWaitingForSigningAtom,
   );
   const { loginDisabled } = useWallet();
+  const socialProviders = useSocialProviders();
 
   return (
     <>
@@ -58,7 +58,6 @@ const LoginFlow = ({
           await onEmailSubmit({ email, callback: onModalClose });
         }}
         state={modalState}
-        qrCodeUri={qrCodeUri}
       />
       <EmailConfirmationModal
         resendText={getResendCodeLabel({ resendTimeLeft })}

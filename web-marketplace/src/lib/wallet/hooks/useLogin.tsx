@@ -8,14 +8,21 @@ import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { LoginParams, SignArbitraryType } from 'lib/wallet/wallet';
+import { AccountEvent, Track } from 'lib/tracker/types';
 
 type Params = {
   signArbitrary?: SignArbitraryType;
   logout?: () => Promise<void>;
   setError: UseStateSetter<unknown>;
+  track?: Track;
 };
 
-export const useLogin = ({ signArbitrary, setError, logout }: Params) => {
+export const useLogin = ({
+  signArbitrary,
+  setError,
+  logout,
+  track,
+}: Params) => {
   const reactQueryClient = useQueryClient();
   const retryCsrfRequest = useRetryCsrfRequest();
 
@@ -58,7 +65,7 @@ export const useLogin = ({ signArbitrary, setError, logout }: Params) => {
             if (logout && doLogout) await logout();
 
             // Step 4: Submit the signature to the login endpoint
-            await postData({
+            const res = await postData({
               url: `${apiUri}/marketplace/v1/wallet-auth/login`,
               data: { signature },
               token,
@@ -68,13 +75,21 @@ export const useLogin = ({ signArbitrary, setError, logout }: Params) => {
                   queryKey: [GET_ACCOUNTS_QUERY_KEY],
                 }),
             });
+
+            if (res?.user?.accountId && track) {
+              await track<AccountEvent>('loginKeplr', {
+                id: res.user.accountId,
+                date: new Date().toUTCString(),
+                account: wallet.address,
+              });
+            }
           }
         }
       } catch (e) {
         setError(e);
       }
     },
-    [signArbitrary, token, retryCsrfRequest, reactQueryClient, setError],
+    [signArbitrary, token, retryCsrfRequest, reactQueryClient, setError, track],
   );
 
   return login;

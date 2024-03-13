@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { LoginModal, Props } from './LoginModal';
-import { socialProvidersMock, uriMock, wallets } from './LoginModal.mock';
+import { socialProvidersMock, wallets } from './LoginModal.mock';
 import { LoginModalState } from './LoginModal.types';
 
 const meta: Meta<typeof LoginModal> = {
@@ -42,7 +42,6 @@ const Template = (args: Props) => {
 
 Default.args = {
   onClose: () => undefined,
-  qrCodeUri: uriMock,
 };
 
 Default.argTypes = {

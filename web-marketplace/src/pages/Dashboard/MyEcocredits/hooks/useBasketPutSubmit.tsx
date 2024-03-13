@@ -53,7 +53,7 @@ const useBasketPutSubmit = ({
         basketInfo => basketInfo.basketDenom === values.basketDenom,
       );
 
-      track<'putInBasket2', PutInBasket2Event>('putInBasket2', {
+      track<PutInBasket2Event>('putInBasket2', {
         quantity: values.amount,
         basketName: basket?.name,
         batchDenom: credit.denom,
@@ -73,30 +73,24 @@ const useBasketPutSubmit = ({
       });
 
       const onError = (err?: Error): void => {
-        track<'putInBasketFailure', PutInBasketFailureEvent>(
-          'putInBasketFailure',
-          {
-            quantity: values.amount,
-            basketName: basket?.name,
-            batchDenom: credit.denom,
-            creditClassId: credit.classId,
-            projectId: credit.projectId,
-            errorMessage: err?.message,
-          },
-        );
+        track<PutInBasketFailureEvent>('putInBasketFailure', {
+          quantity: values.amount,
+          basketName: basket?.name,
+          batchDenom: credit.denom,
+          creditClassId: credit.classId,
+          projectId: credit.projectId,
+          errorMessage: err?.message,
+        });
         onErrorCallback && onErrorCallback(err);
       };
       const onSuccess = (): void => {
-        track<'putInBasketSuccess', PutInBasketSuccessEvent>(
-          'putInBasketSuccess',
-          {
-            quantity: values.amount,
-            basketName: basket?.name,
-            batchDenom: credit.denom,
-            creditClassId: credit.classId,
-            projectId: credit.projectId,
-          },
-        );
+        track<PutInBasketSuccessEvent>('putInBasketSuccess', {
+          quantity: values.amount,
+          basketName: basket?.name,
+          batchDenom: credit.denom,
+          creditClassId: credit.classId,
+          projectId: credit.projectId,
+        });
 
         if (basket && amount) {
           const cardItems = [

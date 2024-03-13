@@ -31,7 +31,7 @@ export const CommunityFilter = ({ sx }: CommunityFilterProps) => {
             checked={useCommunityProjects}
             onChange={event => {
               setUseCommunityProjects(event.target.checked);
-              track<'filterPermissionlessCredits', FilterCommunityCreditsEvent>(
+              track<FilterCommunityCreditsEvent>(
                 'filterPermissionlessCredits',
                 {
                   selected: getFilterSelected(event.target.checked),

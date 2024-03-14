@@ -10,9 +10,9 @@ fragment ecologicalCreditCardFields on EcologicalCreditCard {
       }
     }
   }
-  type {
+  creditCategory {
     name
-    image {
+    icon {
       asset {
         url
       }

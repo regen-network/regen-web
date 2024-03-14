@@ -23,7 +23,7 @@ export type EcologicalCreditCardItemListType = {
 };
 
 export type EcologicalCreditCardType = {
-  type: EcologicalCreditTypeType;
+  creditCategory: EcologicalCreditTypeType;
   image: ImageType;
   title: string;
   infos: EcologicalCreditInfoType;

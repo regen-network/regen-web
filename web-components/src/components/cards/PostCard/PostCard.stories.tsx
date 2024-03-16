@@ -1,8 +1,13 @@
 import React from 'react';
-import { MenuItem } from '@mui/material';
 import { StoryObj } from '@storybook/react';
 
 import PostCard from './PostCard';
+import {
+  DeleteMenuItem,
+  EditMenuItem,
+  SharePrivateMenuItem,
+  SharePublicMenuItem,
+} from './PostCard.MenuItems';
 import { commonArgs, signer } from './PostCard.mock';
 
 type Story = StoryObj<typeof PostCard>;
@@ -26,12 +31,6 @@ export const Public: Story = {
   render: args => <PostCard {...args} signer={signer} />,
 };
 
-const adminMenuItems = [
-  <MenuItem key="1">Menu Item 1</MenuItem>,
-  <MenuItem key="2">Menu Item 2</MenuItem>,
-  <MenuItem key="3">Menu Item 3</MenuItem>,
-];
-
 export const Private: Story = {
   args: {
     ...commonArgs,
@@ -39,7 +38,12 @@ export const Private: Story = {
     numberOfFiles: 5,
     imgSrc: '/coorong.png',
     isAdmin: true,
-    adminMenuItems,
+    adminMenuItems: [
+      <EditMenuItem />,
+      <SharePublicMenuItem />,
+      <SharePrivateMenuItem />,
+      <DeleteMenuItem />,
+    ],
   },
   argTypes: {
     handleClickShare: { action: 'handle share click' },
@@ -53,12 +57,11 @@ export const NoImage: Story = {
     ...commonArgs,
     isPrivate: true,
     numberOfFiles: 5,
-    isAdmin: true,
-    adminMenuItems,
+    isAdmin: false,
   },
   argTypes: {
     handleClickShare: { action: 'handle share click' },
     handleClickFile: { action: 'handle file click' },
   },
   render: args => <PostCard {...args} signer={signer} />,
-}
+};

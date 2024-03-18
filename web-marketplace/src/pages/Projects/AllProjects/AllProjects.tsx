@@ -28,11 +28,9 @@ import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellO
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 
 import { useFetchCreditClasses } from '../hooks/useFetchCreditClasses';
-import { useProjects } from '../hooks/useProjects';
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
-  PROJECTS_PER_PAGE,
   sortOptions,
 } from './AllProjects.config';
 import {

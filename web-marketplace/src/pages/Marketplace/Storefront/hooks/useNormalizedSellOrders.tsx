@@ -18,7 +18,6 @@ import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePri
 import { getBatchQuery } from 'lib/queries/react-query/ecocredit/getBatchQuery/getBatchQuery';
 import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
-import { getAllProjectsQuery } from 'lib/queries/react-query/registry-server/graphql/getAllProjectsQuery/getAllProjectsQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
 import { useFetchSellOrders } from 'features/marketplace/BuySellOrderFlow/hooks/useFetchSellOrders';
@@ -73,11 +72,6 @@ export const useNormalizedSellOrders = (): ResponseType => {
   const uiSellOrdersInfo = useMemo(
     () => sortedSellOrders?.map(normalizeToUISellOrderInfo),
     [sortedSellOrders],
-  );
-
-  // Off-chain stored Projects
-  const { data: offChainProjectData } = useQuery(
-    getAllProjectsQuery({ client: apolloClient, enabled: !!apolloClient }),
   );
 
   // On-chain stored Projects
@@ -148,17 +142,11 @@ export const useNormalizedSellOrders = (): ResponseType => {
   const projectsInfosByHandleMap = useMemo(
     () =>
       normalizeProjectsInfosByHandleMap({
-        offChainProjects: offChainProjectData?.allProjects,
         onChainProjects: projectsWithMetadata,
         sanityCreditClassData,
         classesMetadata,
       }),
-    [
-      classesMetadata,
-      offChainProjectData?.allProjects,
-      projectsWithMetadata,
-      sanityCreditClassData,
-    ],
+    [classesMetadata, projectsWithMetadata, sanityCreditClassData],
   );
 
   const normalizedSellOrders = useMemo(

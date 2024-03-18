@@ -32,12 +32,8 @@ export const useFetchAllOffChainProjects = ({
     getAllProjectsQuery({ client: graphqlClient, enabled }),
   );
 
-  const offChainProjects = allProjectsData?.allProjects?.nodes.filter(
-    project => !project?.onChainId && project?.approved && project?.published,
-  );
-
   const onlyOffChainProjectsWithData =
-    offChainProjects?.map(project => {
+    allProjectsData?.allProjects?.nodes?.map(project => {
       const prefinanceProject = prefinanceProjectsData?.allProject?.find(
         sanityProject =>
           sanityProject.projectId === project?.id ||

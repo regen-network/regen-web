@@ -14,6 +14,7 @@ import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheO
 
 import { client as sanityClient } from '../../../lib/clients/sanity';
 import { getIsOnChainId } from './ProjectDetails.utils';
+import { getAllSanityPrefinanceProjectsQuery } from 'lib/queries/react-query/sanity/getAllPrefinanceProjectsQuery/getAllPrefinanceProjectsQuery';
 
 type LoaderType = {
   queryClient: QueryClient;
@@ -32,6 +33,10 @@ export const projectDetailsLoader =
 
     // Queries
     const allProjectPageQuery = getAllProjectPageQuery({ sanityClient });
+    const allSanityPrefinanceProjectsQuery =
+      getAllSanityPrefinanceProjectsQuery({
+        sanityClient,
+      });
     const allCreditClassesQuery = getAllSanityCreditClassesQuery({
       sanityClient,
     });
@@ -44,7 +49,7 @@ export const projectDetailsLoader =
       enabled: !!projectId && isOnChainId,
       onChainId: projectId ?? '',
     });
-    const ProjectBySlugQuery = getProjectBySlugQuery({
+    const projectBySlugQuery = getProjectBySlugQuery({
       client: apolloClientFactory.getClient(),
       enabled: !!projectId && !isOnChainId,
       slug: projectId as string,
@@ -71,7 +76,7 @@ export const projectDetailsLoader =
       reactQueryClient: queryClient,
     });
     await getFromCacheOrFetch({
-      query: ProjectBySlugQuery,
+      query: projectBySlugQuery,
       reactQueryClient: queryClient,
     });
 
@@ -82,6 +87,10 @@ export const projectDetailsLoader =
     });
     getFromCacheOrFetch({
       query: allCreditClassesQuery,
+      reactQueryClient: queryClient,
+    });
+    getFromCacheOrFetch({
+      query: allSanityPrefinanceProjectsQuery,
       reactQueryClient: queryClient,
     });
     getFromCacheOrFetch({

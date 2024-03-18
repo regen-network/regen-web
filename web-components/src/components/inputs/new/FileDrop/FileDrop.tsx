@@ -13,8 +13,10 @@ import { useFileDropStyles } from './FileDrop.styles';
 import { FileDropRenderModalProps } from './FileDrop.types';
 import { toBase64 } from './FileDrop.utils';
 import { FileDropZone } from './FileDrop.Zone';
+import { Loading } from '../../../../components/loading';
+import { cn } from '../../../../utils/styles/cn';
 
-export interface ImageDropProps extends Partial<FieldFormControlProps> {
+export interface FileDropProps extends Partial<FieldFormControlProps> {
   className?: string;
   classes?: {
     root?: string;
@@ -50,7 +52,7 @@ export interface ImageDropProps extends Partial<FieldFormControlProps> {
 /**
  * Drop file(s) and render a modal for those files
  */
-const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
+const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
   (
     {
       className,
@@ -85,6 +87,8 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [initialImage, setInitialImage] = useState('');
     const [selectedFiles, setSelectedFiles] = useState<Array<File>>([]);
+    const [loading, setLoading] = useState(false);
+
     const { classes: styles, cx } = useFileDropStyles();
     const isFirstField = fieldIndex === 0;
 
@@ -141,17 +145,19 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
       croppedImage: HTMLImageElement,
     ): Promise<void> => {
       const currentFile = selectedFiles[0];
+      setIsModalOpen(false);
+      setLoading(true);
       const result = await getImageSrc(
         croppedImage,
         onUpload,
         currentFile.name,
       );
+      setLoading(false);
 
       if (result) {
         setValue(result, currentFile.type, fieldIndex);
         const remainingFiles = selectedFiles.slice(1);
         setSelectedFiles(remainingFiles);
-        setIsModalOpen(false);
         if (multi && remainingFiles.length > 0) {
           toBase64(remainingFiles[0]).then(base64String => {
             if (typeof base64String === 'string') {
@@ -172,6 +178,7 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
     };
 
     const handleEdit = () => setIsModalOpen(true);
+
     return (
       <>
         <FieldFormControl
@@ -182,7 +189,12 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
           optional={isFirstField ? optional : undefined}
           {...fieldProps}
         >
-          {value && (
+          {loading && (
+            <div className={cn(classes?.main, 'bg-grey-200 mb-10')}>
+              <Loading />
+            </div>
+          )}
+          {!loading && value && (
             <FileDropFile
               handleDelete={handleDelete}
               handleEdit={handleEdit}

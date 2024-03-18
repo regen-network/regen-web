@@ -69,6 +69,7 @@ const useStyles = makeStyles<StyleProps>()((theme, { hideProgress }) => ({
     },
     [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
+      height: theme.spacing(11),
     },
   },
 }));

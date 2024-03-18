@@ -8,7 +8,7 @@ import { PrivateFile } from 'web-components/src/components/icons/PrivateFile';
 import { UnlockIcon } from 'web-components/src/components/icons/UnlockIcon';
 import {
   FileDrop,
-  ImageDropProps,
+  FileDropProps,
 } from 'web-components/src/components/inputs/new/FileDrop/FileDrop';
 import { Radio } from 'web-components/src/components/inputs/new/Radio/Radio';
 import { RadioGroup } from 'web-components/src/components/inputs/new/RadioGroup/RadioGroup';
@@ -58,7 +58,7 @@ export const PostForm = ({
   const { errors } = form.formState;
   const { setValue } = form;
 
-  const imageDropCommonProps: Partial<ImageDropProps> = {
+  const imageDropCommonProps: Partial<FileDropProps> = {
     classes: { main: classes.fullSizeMedia },
     buttonText: FILE_UPLOAD_BUTTON_LABEL,
     fixedCrop: cropAspectMediaForm,

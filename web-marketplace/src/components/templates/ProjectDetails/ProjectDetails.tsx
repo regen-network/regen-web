@@ -27,7 +27,6 @@ import {
   CreditClassMetadataLD,
 } from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
-import { JAGUAR_STRIPE_LINK } from 'lib/env';
 import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getGeocodingQuery } from 'lib/queries/react-query/mapbox/getGeocodingQuery/getGeocodingQuery';
@@ -407,16 +406,6 @@ function ProjectDetails(): JSX.Element {
         }
         isPrefinanceProject={projectPrefinancing?.isPrefinanceProject}
       >
-        {isSharamentsaPilot && JAGUAR_STRIPE_LINK && (
-          <Link href={JAGUAR_STRIPE_LINK}>
-            <ContainedButton
-              startIcon={<CurrentCreditsIcon height="18px" width="18px" />}
-              sx={{ height: '100%' }}
-            >
-              {isMobile ? 'BUY' : 'BUY CREDITS'}
-            </ContainedButton>
-          </Link>
-        )}
         {projectPrefinancing?.isPrefinanceProject &&
           projectPrefinancing?.stripePaymentLink && (
             <Link href={projectPrefinancing?.stripePaymentLink}>

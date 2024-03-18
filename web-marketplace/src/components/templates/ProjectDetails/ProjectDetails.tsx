@@ -347,6 +347,7 @@ function ProjectDetails(): JSX.Element {
 
   const sanityProject = sanityProjectData?.allProject?.[0];
   const projectPrefinancing = sanityProject?.projectPrefinancing;
+  const isPrefinanceProject = projectPrefinancing?.isPrefinanceProject;
 
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
@@ -370,44 +371,45 @@ function ProjectDetails(): JSX.Element {
             imageStorageBaseUrl={mediaData.imageStorageBaseUrl}
             imageCredits={mediaData.imageCredits}
             mobileHeight={theme.spacing(78.75)}
-            isPrefinanceProject={projectPrefinancing?.isPrefinanceProject}
+            isPrefinanceProject={isPrefinanceProject}
           />
         </Box>
       )}
 
-      <SellOrdersActionsBar
-        isBuyButtonDisabled={isBuyFlowDisabled}
-        isCommunityCredit={isCommunityCredit}
-        onBookCallButtonClick={onBookCallButtonClick}
-        onBuyButtonClick={() => {
-          if (!activeWalletAddr) {
-            setConnectWalletModal(atom => void (atom.open = true));
-          } else {
-            if (isConnected) {
-              setIsBuyFlowStarted(true);
+      {(onChainProjectId || isPrefinanceProject) && (
+        <SellOrdersActionsBar
+          isBuyButtonDisabled={isBuyFlowDisabled}
+          isCommunityCredit={isCommunityCredit}
+          onBookCallButtonClick={onBookCallButtonClick}
+          onBuyButtonClick={() => {
+            if (!activeWalletAddr) {
+              setConnectWalletModal(atom => void (atom.open = true));
             } else {
-              setSwitchWalletModalAtom(atom => void (atom.open = true));
+              if (isConnected) {
+                setIsBuyFlowStarted(true);
+              } else {
+                setSwitchWalletModalAtom(atom => void (atom.open = true));
+              }
             }
+          }}
+          onChainProjectId={onChainProjectId}
+          projectName={anchoredMetadata?.['schema:name']}
+          onChainCreditClassId={onChainProject?.classId}
+          avgPricePerTonLabel={
+            projectsWithOrderData[0]?.purchaseInfo?.sellInfo
+              ?.avgPricePerTonLabel
           }
-        }}
-        onChainProjectId={onChainProjectId}
-        projectName={anchoredMetadata?.['schema:name']}
-        onChainCreditClassId={onChainProject?.classId}
-        avgPricePerTonLabel={
-          projectsWithOrderData[0]?.purchaseInfo?.sellInfo?.avgPricePerTonLabel
-        }
-        avgPricePerTonTooltip={AVG_PRICE_TOOLTIP_PROJECT}
-        prefinancePrice={
-          projectPrefinancing?.price
-            ? getPriceToDisplay({
-                price: projectPrefinancing?.price,
-              })
-            : undefined
-        }
-        isPrefinanceProject={projectPrefinancing?.isPrefinanceProject}
-      >
-        {projectPrefinancing?.isPrefinanceProject &&
-          projectPrefinancing?.stripePaymentLink && (
+          avgPricePerTonTooltip={AVG_PRICE_TOOLTIP_PROJECT}
+          prefinancePrice={
+            projectPrefinancing?.price
+              ? getPriceToDisplay({
+                  price: projectPrefinancing?.price,
+                })
+              : undefined
+          }
+          isPrefinanceProject={isPrefinanceProject}
+        >
+          {isPrefinanceProject && projectPrefinancing?.stripePaymentLink && (
             <Link href={projectPrefinancing?.stripePaymentLink}>
               <ContainedButton
                 className="bg-purple-gradient"
@@ -418,7 +420,8 @@ function ProjectDetails(): JSX.Element {
               </ContainedButton>
             </Link>
           )}
-      </SellOrdersActionsBar>
+        </SellOrdersActionsBar>
+      )}
 
       <ProjectTopSection
         offChainProject={offChainProject}

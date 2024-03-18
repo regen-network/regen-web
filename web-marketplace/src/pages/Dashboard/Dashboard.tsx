@@ -88,7 +88,9 @@ const Dashboard = (): JSX.Element => {
     0,
   );
 
-  const profileLink = getProfileLink(wallet?.address || activeAccount?.id);
+  const profileLink = getProfileLink(
+    activeAccount?.addr || activeAccount?.id || wallet?.address,
+  );
   const walletAddress = getWalletAddress({ activeAccount, wallet });
 
   return (

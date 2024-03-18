@@ -23,6 +23,7 @@ import {
   PROFILE_SAVED,
 } from './ProfileEdit.constants';
 import { getDefaultAvatar } from './ProfileEdit.utils';
+import { useNavigate } from 'react-router-dom';
 
 export const ProfileEditMain = () => {
   const [isDirtyRef] = useAtom(isProfileEditDirtyRef);
@@ -31,6 +32,7 @@ export const ProfileEditMain = () => {
   const { activeAccount } = useAuth();
   const [updateAccountById] = useUpdateAccountByIdMutation();
   const reactQueryClient = useQueryClient();
+  const navigate = useNavigate();
   const defaultAvatar = getDefaultAvatar(activeAccount);
 
   const initialValues: EditProfileFormSchemaType = useMemo(
@@ -100,6 +102,7 @@ export const ProfileEditMain = () => {
   const onSuccess = useCallback(() => {
     setBannerTextAtom(PROFILE_SAVED);
     refreshProfileData();
+    navigate('/profile');
   }, [setBannerTextAtom, refreshProfileData]);
 
   const onUpload = useOnUploadCallback({

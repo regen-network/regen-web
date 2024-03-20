@@ -50,8 +50,10 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   onPrev,
   isOnChain,
 }) => {
+  const { formRef, shouldNavigateRef, isDraftRef } = useCreateProjectContext();
   const form = useZodForm({
     schema: rolesFormSchema(isOnChain),
+    draftSchema: rolesFormSchema(isOnChain), // same schema since all fields are optional
     defaultValues: {
       ...initialValues,
     },
@@ -62,7 +64,6 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   });
   const { isDirtyRef } = useProjectEditContext();
   const { confirmSave, isEdit } = useProjectEditContext();
-  const { formRef, shouldNavigateRef } = useCreateProjectContext();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const [adminModalOpen, setAdminModalOpen] = useState<boolean>(false);
 
@@ -142,6 +143,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     <Form
       form={form}
       formRef={formRef}
+      isDraftRef={isDraftRef}
       onSubmit={async values => {
         try {
           await submit({

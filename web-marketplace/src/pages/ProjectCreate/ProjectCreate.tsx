@@ -1,16 +1,16 @@
 import { createContext, MutableRefObject, useRef, useState } from 'react';
 import { Outlet, useOutletContext } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { FormRef } from 'components/molecules/Form/Form';
 
 type ContextType = {
   deliverTxResponse?: DeliverTxResponse;
   setDeliverTxResponse: (deliverTxResponse?: DeliverTxResponse) => void;
   creditClassId?: string;
   setCreditClassId: (creditClassId?: string) => void;
-  formRef?: MutableRefObject<
-    { submitForm: () => void; isFormValid: () => boolean } | undefined
-  >;
+  formRef?: FormRef;
   shouldNavigateRef?: MutableRefObject<boolean>;
+  isDraftRef?: MutableRefObject<boolean>;
 };
 
 const defaultProjectCreateContext = createContext<ContextType>({
@@ -20,6 +20,7 @@ const defaultProjectCreateContext = createContext<ContextType>({
   setCreditClassId: () => void 0,
   formRef: undefined,
   shouldNavigateRef: undefined,
+  isDraftRef: undefined,
 });
 
 export const ProjectCreate = (): JSX.Element => {
@@ -29,6 +30,7 @@ export const ProjectCreate = (): JSX.Element => {
   const [creditClassId, setCreditClassId] = useState<string>('');
   const formRef = useRef();
   const shouldNavigateRef = useRef(true);
+  const isDraftRef = useRef(false);
 
   return (
     <Outlet
@@ -39,6 +41,7 @@ export const ProjectCreate = (): JSX.Element => {
         setCreditClassId,
         formRef,
         shouldNavigateRef,
+        isDraftRef,
       }}
     />
   );

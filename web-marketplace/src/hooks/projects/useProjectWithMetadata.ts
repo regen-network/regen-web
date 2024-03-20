@@ -21,7 +21,7 @@ import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-serve
 import { UseProjectEditSubmitParams } from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
 import { BasicInfoFormSchemaType } from 'components/organisms/BasicInfoForm/BasicInfoForm.schema';
 import { DescriptionSchemaType } from 'components/organisms/DescriptionForm/DescriptionForm.schema';
-import { SimplifiedLocationFormSchemaType } from 'components/organisms/LocationForm/LocationForm.schema';
+import { LocationFormSchemaType } from 'components/organisms/LocationForm/LocationForm.schema';
 import { MediaFormSchemaType } from 'components/organisms/MediaForm/MediaForm.schema';
 import {
   getIsUuid,
@@ -30,6 +30,7 @@ import {
 
 import { useLedger } from '../../ledger';
 import { useCreateOrUpdateProject } from './UseCreateOrUpdateProject';
+import { NestedPartial } from 'types/nested-partial';
 
 export type OffChainProject =
   | ProjectByIdQuery['projectById']
@@ -60,7 +61,7 @@ interface Res {
 
 type Values =
   | BasicInfoFormSchemaType
-  | SimplifiedLocationFormSchemaType
+  | LocationFormSchemaType
   | DescriptionSchemaType
   | MediaFormSchemaType
   | Partial<ProjectMetadataLD>;
@@ -178,7 +179,9 @@ export const useProjectWithMetadata = ({
       }
       try {
         if (isEdit && anchored && !!onChainProject) {
-          await projectEditSubmit(newMetadata);
+          await projectEditSubmit(
+            newMetadata as NestedPartial<ProjectMetadataLD>,
+          );
         } else {
           await createOrUpdateProject({
             offChainProjectId: offChainProject?.id,

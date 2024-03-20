@@ -52,6 +52,10 @@ export const metadataFormSchema = ({ creditClassId, graphData }: Params) =>
       ),
   });
 
+export const metadataFormDraftSchema = z.object({
+  metadata: z.string().optional().nullable(),
+});
+
 export type MetadataFormSchemaType = z.infer<
   ReturnType<typeof metadataFormSchema>
 >;

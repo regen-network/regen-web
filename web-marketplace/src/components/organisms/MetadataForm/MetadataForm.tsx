@@ -18,6 +18,7 @@ import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
 import { ProjectPageFooter } from '../../molecules';
 import {
+  metadataFormDraftSchema,
   metadataFormSchema,
   MetadataFormSchemaType,
 } from './MetadataForm.schema';
@@ -40,11 +41,14 @@ const MetadataForm: React.FC<MetadataFormFormProps> = ({
   graphData,
 }) => {
   const { classes: styles } = useMetadataFormStyles();
+  const { formRef, isDraftRef } = useCreateProjectContext();
   const form = useZodForm({
     schema: metadataFormSchema({ creditClassId, graphData }),
+    draftSchema: metadataFormDraftSchema,
     defaultValues: {
       ...initialValues,
     },
+    isDraftRef,
     mode: 'onBlur',
   });
   const { isValid, isSubmitting, isDirty, errors } = useFormState({
@@ -52,7 +56,6 @@ const MetadataForm: React.FC<MetadataFormFormProps> = ({
   });
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const { confirmSave, isEdit, isDirtyRef } = useProjectEditContext();
-  const { formRef } = useCreateProjectContext();
   const saveAndExit = useProjectSaveAndExit();
 
   useEffect(() => {
@@ -63,6 +66,7 @@ const MetadataForm: React.FC<MetadataFormFormProps> = ({
     <Form
       form={form}
       formRef={formRef}
+      isDraftRef={isDraftRef}
       onSubmit={async values => {
         try {
           await onSubmit({ values });

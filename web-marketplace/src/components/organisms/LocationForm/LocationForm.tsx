@@ -22,6 +22,7 @@ import {
   LOCATION_PLACEHOLDER,
 } from './LocationForm.constants';
 import {
+  locationFormDraftSchema,
   locationFormSchema,
   LocationFormSchemaType,
 } from './LocationForm.schema';
@@ -40,11 +41,14 @@ const LocationForm: React.FC<LocationFormProps> = ({
   onSubmit,
   onPrev,
 }) => {
+  const { formRef, shouldNavigateRef, isDraftRef } = useCreateProjectContext();
   const form = useZodForm({
     schema: locationFormSchema,
+    draftSchema: locationFormDraftSchema,
     defaultValues: {
       ...initialValues,
     },
+    isDraftRef,
     mode: 'onBlur',
   });
   const { isValid, isSubmitting, isDirty, errors } = useFormState({
@@ -55,7 +59,6 @@ const LocationForm: React.FC<LocationFormProps> = ({
 
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const { confirmSave, isEdit, isDirtyRef } = useProjectEditContext();
-  const { formRef, shouldNavigateRef } = useCreateProjectContext();
 
   const location = useWatch({
     control: form.control,
@@ -70,10 +73,11 @@ const LocationForm: React.FC<LocationFormProps> = ({
     <Form
       form={form}
       formRef={formRef}
+      isDraftRef={isDraftRef}
       onSubmit={async values => {
         try {
           const location = values['schema:location'];
-          if (isGeocodingFeature(location)) {
+          if (isDraftRef?.current || isGeocodingFeature(location)) {
             await onSubmit({
               values: { 'schema:location': location },
               shouldNavigate: shouldNavigateRef?.current,

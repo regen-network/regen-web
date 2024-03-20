@@ -44,11 +44,14 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
   onSubmit,
   onPrev,
 }) => {
+  const { formRef, shouldNavigateRef, isDraftRef } = useCreateProjectContext();
   const form = useZodForm({
     schema: descriptionFormSchema,
+    draftSchema: descriptionFormSchema, // same schema since all fields are optional
     defaultValues: {
       ...initialValues,
     },
+    isDraftRef,
     mode: 'onBlur',
   });
   const saveAndExit = useProjectSaveAndExit();
@@ -56,7 +59,6 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
   const { isValid, isSubmitting, isDirty, errors } = useFormState({
     control: form.control,
   });
-  const { formRef, shouldNavigateRef } = useCreateProjectContext();
   const description = useWatch({
     control: form.control,
     name: 'schema:description',
@@ -81,6 +83,7 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
     <Form
       form={form}
       formRef={formRef}
+      isDraftRef={isDraftRef}
       onSubmit={async values => {
         try {
           await onSubmit({

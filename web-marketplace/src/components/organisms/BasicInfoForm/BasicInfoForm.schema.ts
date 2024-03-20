@@ -6,7 +6,7 @@ import {
 } from 'web-components/src/components/inputs/validation';
 
 export const basicInfoFormSchema = z.object({
-  'schema:name': z.string().nonempty(requiredMessage),
+  'schema:name': z.string().min(1, requiredMessage),
   'regen:projectSize': z.object({
     'qudt:numericValue': z
       .number({
@@ -17,5 +17,15 @@ export const basicInfoFormSchema = z.object({
     'qudt:unit': z.string(),
   }),
 });
+
+export const basicInfoFormDraftSchema = z
+  .object({
+    'schema:name': z.string(),
+    'regen:projectSize': z.object({
+      'qudt:numericValue': z.number().optional(),
+      'qudt:unit': z.string(),
+    }),
+  })
+  .partial();
 
 export type BasicInfoFormSchemaType = z.infer<typeof basicInfoFormSchema>;

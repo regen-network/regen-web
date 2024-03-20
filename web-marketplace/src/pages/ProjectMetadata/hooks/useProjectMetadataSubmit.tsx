@@ -30,7 +30,7 @@ export const useProjectMetadataSubmit = ({
   const { shouldNavigateRef } = useCreateProjectContext();
   const projectMetadataSubmit = useCallback(
     async ({ values }: SubmitParams): Promise<void> => {
-      const parsedMetaData = JSON.parse(values.metadata);
+      const parsedMetaData = JSON.parse(values.metadata || '{}');
       const baseMetadata = pick(metadata, [
         '@context',
         ...OMITTED_METADATA_KEYS,

@@ -37,7 +37,7 @@ export const DetailsSection: React.FC<
   const hasClassInfo = header && (methodology || creditClassDoc);
 
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <Section
         visibleOverflow
         sx={{ root: [{ pb: [20, 25] }, ...sxToArray(sx)] }}

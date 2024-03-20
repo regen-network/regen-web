@@ -8,6 +8,7 @@ import { makeStyles } from 'tss-react/mui';
 
 import PrevNextButton from '../buttons/PrevNextButton';
 import { Title } from '../typography';
+import { Root } from '../section';
 
 interface ResponsiveSliderProps {
   items?: JSX.Element[];
@@ -54,6 +55,8 @@ const useStyles = makeStyles<StyleProps>()(
       [theme.breakpoints.up('sm')]: {
         paddingTop: theme.spacing(8),
       },
+      maxWidth: theme.breakpoints.values.lg,
+      margin: '0 auto',
     },
     slider: {
       [theme.breakpoints.down('sm')]: {
@@ -87,6 +90,9 @@ const useStyles = makeStyles<StyleProps>()(
       },
       '& .slick-list': {
         overflow: visibleOverflow ? 'visible' : 'hidden',
+        paddingInline: 'calc((100vw - 100%) / 2)',
+        width: '100%',
+        marginLeft: 'calc((100vw - 100%) / -2)',
         [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
           overflow: 'visible',
         },
@@ -228,7 +234,11 @@ export default function ResponsiveSlider({
     renderTitle || title || (items.length > 1 && arrows && desktop);
 
   return (
-    <div className={cx(styles.root, className || (classes && classes.root))}>
+    <Root
+      visibleOverflow
+      withSlider
+      className={cx(styles.root, className || (classes && classes.root))}
+    >
       {hasHeader && (
         <Grid
           container
@@ -289,6 +299,6 @@ export default function ResponsiveSlider({
           </div>
         ))}
       </Slider>
-    </div>
+    </Root>
   );
 }

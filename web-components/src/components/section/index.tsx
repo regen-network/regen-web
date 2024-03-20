@@ -44,7 +44,7 @@ interface StyleProps {
   titleAlign?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
 }
 
-const Root = styled(Box, {
+export const Root = styled(Box, {
   name: 'RegenSection',
   shouldForwardProp: prop =>
     prop !== 'withSlider' &&

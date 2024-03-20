@@ -11,4 +11,11 @@ export const useSectionStyles = makeStyles()(theme => ({
       textAlign: 'left',
     },
   },
+  hiddenScrollBar: {
+    '-ms-overflow-style': 'none',
+    scrollbarWidth: 'none',
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    },
+  },
 }));

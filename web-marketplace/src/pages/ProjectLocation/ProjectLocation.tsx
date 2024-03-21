@@ -14,7 +14,7 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
-  const { navigateNext } = useNavigateNext({ step: 'roles', projectId });
+  const { navigateNext } = useNavigateNext({ step: 'description', projectId });
 
   const { metadata, metadataSubmit, offChainProject, loading } =
     useProjectWithMetadata({

@@ -259,7 +259,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
           </ItemDisplay>
         )}
       </ReviewCard>
-      <ReviewCard
+      {/* <ReviewCard
         title="Roles"
         onEditClick={() => navigate(`${editPath}/roles`)}
       >
@@ -273,7 +273,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
             </ItemDisplay>
           </>
         )}
-      </ReviewCard>
+      </ReviewCard> */}
       {!!creditClassId && (
         <ReviewCard
           title="Metadata"

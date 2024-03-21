@@ -39,7 +39,7 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
   const saveAndExit = useProjectSaveAndExit();
 
   function navigatePrev(): void {
-    navigate(`/project-pages/${projectId}/roles`);
+    navigate(`/project-pages/${projectId}/location`);
   }
 
   return (

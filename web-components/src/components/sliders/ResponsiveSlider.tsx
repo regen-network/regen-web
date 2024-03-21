@@ -79,19 +79,19 @@ export default function ResponsiveSlider({
     visibleOverflow,
   });
 
-  let slider: any = useRef(null);
+  let sliderRef: any = useRef(null);
 
   const slickPrev = useCallback(() => {
-    if (slider && slider.current) {
-      slider.current.slickPrev();
+    if (sliderRef && sliderRef.current) {
+      sliderRef.current.slickPrev();
     }
-  }, [slider]);
+  }, [sliderRef]);
 
   const slickNext = useCallback(() => {
-    if (slider && slider.current) {
-      slider.current.slickNext();
+    if (sliderRef && sliderRef.current) {
+      sliderRef.current.slickNext();
     }
-  }, [slider]);
+  }, [sliderRef]);
 
   const settings: SlickSettings = {
     rows,
@@ -115,6 +115,27 @@ export default function ResponsiveSlider({
 
   const hasHeader =
     renderTitle || title || (items.length > 1 && arrows && desktop);
+
+  const slider = (
+    <Slider
+      {...settings}
+      ref={sliderRef}
+      className={cx(styles.slider, classes?.slider)}
+      beforeChange={(_, newIdx) => {
+        setCurrSlide(newIdx);
+      }}
+      afterChange={i => {
+        if (onChange) onChange(i);
+      }}
+      adaptiveHeight={adaptiveHeight}
+    >
+      {items.map((item, index) => (
+        <div className={styles.item} key={index}>
+          {item}
+        </div>
+      ))}
+    </Slider>
+  );
 
   return (
     <div className={cx(styles.root, className || (classes && classes.root))}>
@@ -161,28 +182,15 @@ export default function ResponsiveSlider({
           </Grid>
         </Root>
       )}
-      <div className={cn(styles.hiddenScrollBar, 'overflow-x-scroll')}>
-        <Root visibleOverflow={visibleOverflow} withSlider className="pt-0">
-          <Slider
-            {...settings}
-            ref={slider}
-            className={cx(styles.slider, classes?.slider)}
-            beforeChange={(_, newIdx) => {
-              setCurrSlide(newIdx);
-            }}
-            afterChange={i => {
-              if (onChange) onChange(i);
-            }}
-            adaptiveHeight={adaptiveHeight}
-          >
-            {items.map((item, index) => (
-              <div className={styles.item} key={index}>
-                {item}
-              </div>
-            ))}
-          </Slider>
-        </Root>
-      </div>
+      {visibleOverflow ? (
+        <div className={cn(styles.hiddenScrollBar, 'overflow-x-scroll')}>
+          <Root visibleOverflow withSlider className="pt-0">
+            {slider}
+          </Root>
+        </div>
+      ) : (
+        slider
+      )}
     </div>
   );
 }

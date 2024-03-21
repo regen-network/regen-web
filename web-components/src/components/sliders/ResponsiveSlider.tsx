@@ -1,17 +1,15 @@
 import { useCallback, useRef, useState } from 'react';
 import Slider, { Settings as SlickSettings } from 'react-slick';
 import { useTheme } from '@mui/material';
-import Grid from '@mui/material/Grid';
 import { Variant } from '@mui/material/styles/createTypography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-import PrevNextButton from '../buttons/PrevNextButton';
-import { Title } from '../typography';
 import { useStyles } from './ResponsiveSlider.styles';
 import { cn } from '../../utils/styles/cn';
 import { Root } from '../section';
+import { Header } from './ResponsiveSlider.Header';
 
-interface ResponsiveSliderProps {
+export interface ResponsiveSliderProps {
   items?: JSX.Element[];
   titleVariant?: Variant;
   arrows?: boolean;
@@ -116,80 +114,79 @@ export default function ResponsiveSlider({
   const hasHeader =
     renderTitle || title || (items.length > 1 && arrows && desktop);
 
-  const slider = (
-    <Slider
-      {...settings}
-      ref={sliderRef}
-      className={cx(styles.slider, classes?.slider)}
-      beforeChange={(_, newIdx) => {
-        setCurrSlide(newIdx);
-      }}
-      afterChange={i => {
-        if (onChange) onChange(i);
-      }}
-      adaptiveHeight={adaptiveHeight}
-    >
-      {items.map((item, index) => (
-        <div className={styles.item} key={index}>
-          {item}
-        </div>
-      ))}
-    </Slider>
-  );
-
   return (
     <div className={cx(styles.root, className || (classes && classes.root))}>
-      {hasHeader && (
+      {hasHeader && visibleOverflow ? (
         <Root className="pt-0">
-          <Grid
-            container
-            wrap="nowrap"
-            alignItems="center"
-            className={classes && classes.headerWrap}
-          >
-            {renderTitle ? (
-              renderTitle()
-            ) : title ? (
-              <Grid xs={12} sm={8} item>
-                <Title
-                  variant={titleVariant}
-                  className={cx(styles.title, classes && classes.title)}
-                >
-                  {title}
-                </Title>
-              </Grid>
-            ) : null}
-            {items.length > 1 && arrows && desktop && (
-              <Grid
-                xs={renderTitle || title ? 4 : 12}
-                container
-                item
-                justifyContent="flex-end"
-                className={styles.buttons}
-              >
-                <PrevNextButton
-                  direction="prev"
-                  onClick={slickPrev}
-                  disabled={prevDisabled}
-                />
-                <PrevNextButton
-                  direction="next"
-                  onClick={slickNext}
-                  disabled={nextDisabled}
-                />
-              </Grid>
-            )}
-          </Grid>
+          <Header
+            slickPrev={slickPrev}
+            slickNext={slickNext}
+            prevDisabled={prevDisabled}
+            nextDisabled={nextDisabled}
+            classes={classes}
+            renderTitle={renderTitle}
+            title={title}
+            titleVariant={titleVariant}
+            items={items}
+            arrows={arrows}
+          />
         </Root>
+      ) : (
+        <Header
+          slickPrev={slickPrev}
+          slickNext={slickNext}
+          prevDisabled={prevDisabled}
+          nextDisabled={nextDisabled}
+          classes={classes}
+          renderTitle={renderTitle}
+          title={title}
+          titleVariant={titleVariant}
+          items={items}
+          arrows={arrows}
+        />
       )}
       {visibleOverflow ? (
         <div className={cn(styles.hiddenScrollBar, 'overflow-x-scroll')}>
           <Root visibleOverflow withSlider className="pt-0">
-            {slider}
+            <Slider
+              {...settings}
+              ref={sliderRef}
+              className={cx(styles.slider, classes?.slider)}
+              beforeChange={(_, newIdx) => {
+                setCurrSlide(newIdx);
+              }}
+              afterChange={i => {
+                if (onChange) onChange(i);
+              }}
+              adaptiveHeight={adaptiveHeight}
+            >
+              {items.map((item, index) => (
+                <div className={styles.item} key={index}>
+                  {item}
+                </div>
+              ))}
+            </Slider>
           </Root>
         </div>
       ) : (
-        slider
+        <Slider
+          {...settings}
+          ref={sliderRef}
+          className={cx(styles.slider, classes?.slider)}
+          beforeChange={(_, newIdx) => {
+            setCurrSlide(newIdx);
+          }}
+          afterChange={i => {
+            if (onChange) onChange(i);
+          }}
+          adaptiveHeight={adaptiveHeight}
+        >
+          {items.map((item, index) => (
+            <div className={styles.item} key={index}>
+              {item}
+            </div>
+          ))}
+        </Slider>
       )}
     </div>
   );

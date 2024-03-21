@@ -21,8 +21,6 @@ export const useStyles = makeStyles<StyleProps>()(
       [theme.breakpoints.up('sm')]: {
         paddingTop: theme.spacing(8),
       },
-      // maxWidth: theme.breakpoints.values.lg,
-      // margin: '0 auto',
     },
     slider: {
       [theme.breakpoints.down('sm')]: {
@@ -56,9 +54,7 @@ export const useStyles = makeStyles<StyleProps>()(
       },
       '& .slick-list': {
         overflow: visibleOverflow ? 'visible' : 'hidden',
-        paddingInline: 'calc((100vw - 100%) / 2)',
         width: '100%',
-        marginLeft: 'calc((100vw - 100%) / -2)',
         [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
           overflow: 'visible',
         },
@@ -82,20 +78,6 @@ export const useStyles = makeStyles<StyleProps>()(
             },
           },
         },
-      },
-    },
-    buttons: {
-      '& div:last-child': {
-        marginLeft: theme.spacing(2),
-      },
-    },
-    title: {
-      letterSpacing: '1px',
-      textTransform: 'uppercase',
-      fontWeight: 800,
-      color: theme.palette.info.main,
-      [theme.breakpoints.down('sm')]: {
-        fontSize: theme.spacing(3.5),
       },
     },
     dot: {

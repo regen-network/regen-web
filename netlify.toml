@@ -41,8 +41,7 @@ NEXT_PUBLIC_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"
 NEXT_PUBLIC_INTERCOM_APP_ID = "kn5di10s"
 
 [context.deploy-preview.environment]
-NEXT_PUBLIC_SANITY_TAG = "credit"
-VITE_SANITY_TAG = "credit"
+VITE_SANITY_TAG = "default"
 VITE_SANITY_DATASET = "staging"
 VITE_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"
 VITE_API_URI = "https://api-staging.regen.network"

@@ -42,11 +42,11 @@ export const normalizeEcologicalCreditCards = ({
           country: card?.creditInfos?.country ?? '',
           price: card?.creditInfos?.price ?? '',
         },
-        type: {
-          name: card?.type?.name ?? '',
+        creditCategory: {
+          name: card?.creditCategory?.name ?? '',
           icon: {
-            src: card?.type?.image?.asset?.url ?? '',
-            alt: card?.type?.name ?? '',
+            src: card?.creditCategory?.icon?.asset?.url ?? '',
+            alt: card?.creditCategory?.name ?? '',
           },
         },
         program: creditClassProgram,

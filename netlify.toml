@@ -1,98 +1,98 @@
 [context.production.environment]
-  VITE_SANITY_TAG = "default"
-  VITE_SANITY_DATASET = "production"
-  VITE_API_URI = "https://api.regen.network"
-  VITE_BLOCK_EXPLORER="https://www.mintscan.io"
-  VITE_LEDGER_CHAIN_ID = "regen-1"
-  VITE_SENTRY_ENABLED="true"
-  VITE_SENTRY_ENVIRONMENT="production"
-  VITE_ANALYTICS_ENABLED="true"
-  VITE_BRIDGE_CREDIT_CLASS_ID = "C03"
-  VITE_GA_MEASUREMENT_ID="G-6ZGJM8JXYN"
-  VITE_TOUCAN_LINK="https://toucan.earth/overview?chainId=137"
-  VITE_SKIPPED_CLASS_ID="C01"
+VITE_SANITY_TAG = "default"
+VITE_SANITY_DATASET = "production"
+VITE_API_URI = "https://api.regen.network"
+VITE_BLOCK_EXPLORER = "https://www.mintscan.io"
+VITE_LEDGER_CHAIN_ID = "regen-1"
+VITE_SENTRY_ENABLED = "true"
+VITE_SENTRY_ENVIRONMENT = "production"
+VITE_ANALYTICS_ENABLED = "true"
+VITE_BRIDGE_CREDIT_CLASS_ID = "C03"
+VITE_GA_MEASUREMENT_ID = "G-6ZGJM8JXYN"
+VITE_TOUCAN_LINK = "https://toucan.earth/overview?chainId=137"
+VITE_SKIPPED_CLASS_ID = "C01"
 
-  # Next.js environment variables
-  NEXT_PUBLIC_SANITY_DATASET = "production"
-  NEXT_PUBLIC_API_URI = "https://api.regen.network"
-  NEXT_PUBLIC_RECAPTCHA_SITE_KEY = "6LeqBFIaAAAAAPfLave4lUtLBKF2WYXinbaLNFqB"
-  NEXT_PUBLIC_INTERCOM_APP_ID = "kn5di10s"
+# Next.js environment variables
+NEXT_PUBLIC_SANITY_DATASET = "production"
+NEXT_PUBLIC_API_URI = "https://api.regen.network"
+NEXT_PUBLIC_RECAPTCHA_SITE_KEY = "6LeqBFIaAAAAAPfLave4lUtLBKF2WYXinbaLNFqB"
+NEXT_PUBLIC_INTERCOM_APP_ID = "kn5di10s"
 
 [context.dev.environment]
-  VITE_SANITY_TAG = "default"
-  VITE_SANITY_DATASET = "staging"
-  VITE_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"
-  VITE_API_URI = "https://api-staging.regen.network"
-  VITE_INTERCOM_APP_ID = "kn5di10s"
-  VITE_LEDGER_CHAIN_ID = "regen-redwood-1"
-  VITE_LEDGER_CHAIN_NAME = "Regen - Redwood Testnet"
-  VITE_BLOCK_EXPLORER = "https://redwood.regen.aneka.io"
-  VITE_SENTRY_ENVIRONMENT = "development"
-  VITE_TOUCAN_LINK="https://test.app.toucan.earth/?chainId=137"
-  VITE_BRIDGE_API_URI="https://toucan-bridge-staging.herokuapp.com"
-  VITE_BRIDGE_CREDIT_CLASS_ID = "C56"
-  VITE_BRIDGE="true"
-  VITE_SKIPPED_CLASS_ID=""
+VITE_SANITY_TAG = "default"
+VITE_SANITY_DATASET = "staging"
+VITE_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"
+VITE_API_URI = "https://api-staging.regen.network"
+VITE_INTERCOM_APP_ID = "kn5di10s"
+VITE_LEDGER_CHAIN_ID = "regen-redwood-1"
+VITE_LEDGER_CHAIN_NAME = "Regen - Redwood Testnet"
+VITE_BLOCK_EXPLORER = "https://redwood.regen.aneka.io"
+VITE_SENTRY_ENVIRONMENT = "development"
+VITE_TOUCAN_LINK = "https://test.app.toucan.earth/?chainId=137"
+VITE_BRIDGE_API_URI = "https://toucan-bridge-staging.herokuapp.com"
+VITE_BRIDGE_CREDIT_CLASS_ID = "C56"
+VITE_BRIDGE = "true"
+VITE_SKIPPED_CLASS_ID = ""
 
-  # Next.js environment variables
-  NEXT_PUBLIC_SANITY_DATASET = "staging"
-  NEXT_PUBLIC_API_URI = "https://api-staging.regen.network"
-  NEXT_PUBLIC_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"
-  NEXT_PUBLIC_INTERCOM_APP_ID = "kn5di10s"
+# Next.js environment variables
+NEXT_PUBLIC_SANITY_DATASET = "staging"
+NEXT_PUBLIC_API_URI = "https://api-staging.regen.network"
+NEXT_PUBLIC_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"
+NEXT_PUBLIC_INTERCOM_APP_ID = "kn5di10s"
 
 [context.deploy-preview.environment]
-  VITE_SANITY_TAG = "default"
-  VITE_SANITY_DATASET = "staging"
-  VITE_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"
-  VITE_API_URI = "https://api-staging.regen.network"
-  VITE_INTERCOM_APP_ID = "kn5di10s"
-  VITE_LEDGER_CHAIN_ID = "regen-redwood-1"
-  VITE_LEDGER_CHAIN_NAME = "Regen - Redwood Testnet"
-  VITE_BLOCK_EXPLORER = "https://redwood.regen.aneka.io"
-  VITE_SENTRY_ENVIRONMENT = "development"
-  VITE_TOUCAN_LINK="https://test.app.toucan.earth/?chainId=137"
-  VITE_BRIDGE_API_URI="https://toucan-bridge-staging.herokuapp.com"
-  VITE_BRIDGE_CREDIT_CLASS_ID = "C56"
-  VITE_BRIDGE="true"
-  VITE_SKIPPED_CLASS_ID=""
-  VITE_ANALYTICS_ENABLED="true"
+VITE_SANITY_TAG = "default"
+VITE_SANITY_DATASET = "staging"
+VITE_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"
+VITE_API_URI = "https://api-staging.regen.network"
+VITE_INTERCOM_APP_ID = "kn5di10s"
+VITE_LEDGER_CHAIN_ID = "regen-redwood-1"
+VITE_LEDGER_CHAIN_NAME = "Regen - Redwood Testnet"
+VITE_BLOCK_EXPLORER = "https://redwood.regen.aneka.io"
+VITE_SENTRY_ENVIRONMENT = "development"
+VITE_TOUCAN_LINK = "https://test.app.toucan.earth/?chainId=137"
+VITE_BRIDGE_API_URI = "https://toucan-bridge-staging.herokuapp.com"
+VITE_BRIDGE_CREDIT_CLASS_ID = "C56"
+VITE_BRIDGE = "true"
+VITE_SKIPPED_CLASS_ID = ""
+VITE_ANALYTICS_ENABLED = "true"
 
-  # Next.js environment variables
-  NEXT_PUBLIC_SANITY_DATASET = "staging"
-  NEXT_PUBLIC_API_URI = "https://api-staging.regen.network"
-  NEXT_PUBLIC_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"
-  NEXT_PUBLIC_INTERCOM_APP_ID = "kn5di10s"
+# Next.js environment variables
+NEXT_PUBLIC_SANITY_DATASET = "staging"
+NEXT_PUBLIC_API_URI = "https://api-staging.regen.network"
+NEXT_PUBLIC_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"
+NEXT_PUBLIC_INTERCOM_APP_ID = "kn5di10s"
 
 [build.environment]
-  NODE_OPTIONS = "--max-old-space-size=10216"
+NODE_OPTIONS = "--max-old-space-size=10216"
 
 [[redirects]]
-  from = "https://app.regen.network/create-methodology"
-  to = "https://app.regen.network"
-  force = true
-  status = 302
-  
+from = "https://app.regen.network/create-methodology"
+to = "https://app.regen.network"
+force = true
+status = 302
+
 
 [[redirects]]
-  from = "https://app.regen.network/create-methodology/methodology-review-process"
-  to = "https://app.regen.network"
-  force = true
-  status = 302
+from = "https://app.regen.network/create-methodology/methodology-review-process"
+to = "https://app.regen.network"
+force = true
+status = 302
 
 [[redirects]]
-  from = "https://app.regen.network/buyers/"
-  to = "https://www.regen.network/buyers"
-  force = true
-  status = 302
+from = "https://app.regen.network/buyers/"
+to = "https://www.regen.network/buyers"
+force = true
+status = 302
 
 [[redirects]]
-  from = "https://app.regen.network/ecocredits/*"
-  to = "https://app.regen.network/profile/:splat"
-  force = true
-  status = 302
+from = "https://app.regen.network/ecocredits/*"
+to = "https://app.regen.network/profile/:splat"
+force = true
+status = 302
 
 [[redirects]]
-  from = "https://app.regen.network/ecocredits/accounts/*"
-  to = "https://app.regen.network/profiles/:splat"
-  force = true
-  status = 302
+from = "https://app.regen.network/ecocredits/accounts/*"
+to = "https://app.regen.network/profiles/:splat"
+force = true
+status = 302

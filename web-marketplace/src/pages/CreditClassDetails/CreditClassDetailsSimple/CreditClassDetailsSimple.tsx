@@ -128,8 +128,14 @@ const CreditClassDetailsSimple: React.FC<
                   }}
                 >
                   <CardRibbon
-                    icon={{ src: creditTypeSanity?.image?.asset?.url ?? '' }}
-                    label={creditTypeSanity?.name ?? ''}
+                    icon={{
+                      src: creditTypeSanity?.category?.icon?.asset?.url ?? '',
+                    }}
+                    label={
+                      (creditTypeSanity?.category?.name ||
+                        creditTypeSanity?.name) ??
+                      ''
+                    }
                     labelSize="xs"
                     labelMobileSize="xxs"
                     sx={{
@@ -211,8 +217,12 @@ const CreditClassDetailsSimple: React.FC<
         methodology={methodology}
         credit={{
           creditImage: sanityCreditClassPage?.creditImage?.asset?.url,
-          creditTypeUnit: creditTypeData?.creditType?.unit,
-          creditTypeImage: creditTypeSanity?.largeImage?.asset?.url,
+          creditTypeUnit:
+            creditTypeSanity?.unit || creditTypeData?.creditType?.unit,
+          creditTypeImage:
+            creditTypeSanity?.largeImage?.asset?.url ||
+            creditTypeSanity?.category?.largeImage?.asset?.url,
+          creditTypeUnitDefinition: creditTypeSanity?.unitDefinitionRaw,
         }}
       >
         <CreditClassDetailsStakeholders

@@ -228,8 +228,11 @@ function ProjectTopSection({
             creditClassSanity={creditClassSanity}
             creditClassMetadata={creditClassMetadata as CreditClassMetadataLD}
             onChainCreditClassId={onChainCreditClassId}
-            creditTypeName={creditTypeData?.creditType?.name}
-            creditTypeImage={creditTypeSanity?.image?.asset?.url}
+            creditTypeName={
+              creditTypeSanity?.category?.name ||
+              creditTypeData?.creditType?.name
+            }
+            creditTypeImage={creditTypeSanity?.category?.icon?.asset?.url}
             generationMethods={generationMethods}
             methodology={methodology}
             program={program}

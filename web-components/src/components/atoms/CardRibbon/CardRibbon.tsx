@@ -38,7 +38,7 @@ const CardRibbon = ({
       ]}
       alignItems="center"
     >
-      {icon && (
+      {icon?.src && (
         <Box
           component="img"
           src={icon?.src}

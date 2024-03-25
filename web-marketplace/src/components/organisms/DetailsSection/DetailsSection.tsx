@@ -110,6 +110,7 @@ export const DetailsSection: React.FC<
                     <DetailsSectionCredit
                       src={credit.creditTypeImage}
                       label={credit.creditTypeUnit}
+                      learnMore={credit.creditTypeUnitDefinition}
                     />
                   </Grid>
                 </Grid>

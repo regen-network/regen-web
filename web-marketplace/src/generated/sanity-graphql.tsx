@@ -1705,6 +1705,50 @@ export type CredibilityCardSorting = {
   icon?: Maybe<ImageSorting>;
 };
 
+export type CreditCategory = Document & {
+  __typename?: 'CreditCategory';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  icon?: Maybe<Image>;
+  largeImage?: Maybe<Image>;
+};
+
+export type CreditCategoryFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  name?: Maybe<StringFilter>;
+  icon?: Maybe<ImageFilter>;
+  largeImage?: Maybe<ImageFilter>;
+};
+
+export type CreditCategorySorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  name?: Maybe<SortOrder>;
+  icon?: Maybe<ImageSorting>;
+  largeImage?: Maybe<ImageSorting>;
+};
+
 export type CreditCertification = Document & {
   __typename?: 'CreditCertification';
   /** Document ID */
@@ -1895,8 +1939,11 @@ export type CreditType = Document & {
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
-  image?: Maybe<Image>;
   largeImage?: Maybe<Image>;
+  category?: Maybe<CreditCategory>;
+  /** This overrides the on-chain unit */
+  unit?: Maybe<Scalars['String']>;
+  unitDefinitionRaw?: Maybe<Scalars['JSON']>;
 };
 
 export type CreditTypeFilter = {
@@ -1909,8 +1956,9 @@ export type CreditTypeFilter = {
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
   name?: Maybe<StringFilter>;
-  image?: Maybe<ImageFilter>;
   largeImage?: Maybe<ImageFilter>;
+  category?: Maybe<CreditCategoryFilter>;
+  unit?: Maybe<StringFilter>;
 };
 
 export type CreditTypeSection = {
@@ -1950,8 +1998,8 @@ export type CreditTypeSorting = {
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
   name?: Maybe<SortOrder>;
-  image?: Maybe<ImageSorting>;
   largeImage?: Maybe<ImageSorting>;
+  unit?: Maybe<SortOrder>;
 };
 
 export type CrossDatasetReference = {
@@ -2419,7 +2467,7 @@ export type EcologicalCreditCard = Document & {
   title?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<CustomImage>;
-  type?: Maybe<CreditType>;
+  creditCategory?: Maybe<CreditCategory>;
   creditClass?: Maybe<CreditClass>;
   creditInfos?: Maybe<CreditInfos>;
   offsetMethods?: Maybe<Array<Maybe<OffsetMethod>>>;
@@ -2440,7 +2488,7 @@ export type EcologicalCreditCardFilter = {
   title?: Maybe<StringFilter>;
   description?: Maybe<StringFilter>;
   image?: Maybe<CustomImageFilter>;
-  type?: Maybe<CreditTypeFilter>;
+  creditCategory?: Maybe<CreditCategoryFilter>;
   creditClass?: Maybe<CreditClassFilter>;
   creditInfos?: Maybe<CreditInfosFilter>;
   button?: Maybe<ButtonFilter>;
@@ -5470,6 +5518,7 @@ export type RootQuery = {
   ContactPage?: Maybe<ContactPage>;
   CreateCreditClassPage?: Maybe<CreateCreditClassPage>;
   CreateMethodologyPage?: Maybe<CreateMethodologyPage>;
+  CreditCategory?: Maybe<CreditCategory>;
   CreditCertification?: Maybe<CreditCertification>;
   CreditClass?: Maybe<CreditClass>;
   CreditClassPage?: Maybe<CreditClassPage>;
@@ -5539,6 +5588,7 @@ export type RootQuery = {
   allContactPage: Array<ContactPage>;
   allCreateCreditClassPage: Array<CreateCreditClassPage>;
   allCreateMethodologyPage: Array<CreateMethodologyPage>;
+  allCreditCategory: Array<CreditCategory>;
   allCreditCertification: Array<CreditCertification>;
   allCreditClass: Array<CreditClass>;
   allCreditClassPage: Array<CreditClassPage>;
@@ -5663,6 +5713,11 @@ export type RootQueryCreateCreditClassPageArgs = {
 
 
 export type RootQueryCreateMethodologyPageArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryCreditCategoryArgs = {
   id: Scalars['ID'];
 };
 
@@ -6049,6 +6104,14 @@ export type RootQueryAllCreateCreditClassPageArgs = {
 export type RootQueryAllCreateMethodologyPageArgs = {
   where?: Maybe<CreateMethodologyPageFilter>;
   sort?: Maybe<Array<CreateMethodologyPageSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllCreditCategoryArgs = {
+  where?: Maybe<CreditCategoryFilter>;
+  sort?: Maybe<Array<CreditCategorySorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -8331,13 +8394,20 @@ export type AllCreditTypeQuery = (
   { __typename?: 'RootQuery' }
   & { allCreditType: Array<(
     { __typename?: 'CreditType' }
-    & Pick<CreditType, 'name'>
-    & { image?: Maybe<(
+    & Pick<CreditType, 'name' | 'unit' | 'unitDefinitionRaw'>
+    & { largeImage?: Maybe<(
       { __typename?: 'Image' }
       & ImageFieldsFragment
-    )>, largeImage?: Maybe<(
-      { __typename?: 'Image' }
-      & ImageFieldsFragment
+    )>, category?: Maybe<(
+      { __typename?: 'CreditCategory' }
+      & Pick<CreditCategory, 'name'>
+      & { icon?: Maybe<(
+        { __typename?: 'Image' }
+        & ImageFieldsFragment
+      )>, largeImage?: Maybe<(
+        { __typename?: 'Image' }
+        & ImageFieldsFragment
+      )> }
     )> }
   )> }
 );
@@ -8722,10 +8792,10 @@ export type EcologicalCreditCardFieldsFragment = (
         & Pick<SanityImageAsset, 'url'>
       )> }
     )> }
-  )>, type?: Maybe<(
-    { __typename?: 'CreditType' }
-    & Pick<CreditType, 'name'>
-    & { image?: Maybe<(
+  )>, creditCategory?: Maybe<(
+    { __typename?: 'CreditCategory' }
+    & Pick<CreditCategory, 'name'>
+    & { icon?: Maybe<(
       { __typename?: 'Image' }
       & { asset?: Maybe<(
         { __typename?: 'SanityImageAsset' }
@@ -9327,9 +9397,9 @@ export const EcologicalCreditCardFieldsFragmentDoc = gql`
       }
     }
   }
-  type {
+  creditCategory {
     name
-    image {
+    icon {
       asset {
         url
       }
@@ -10236,11 +10306,19 @@ export const AllCreditTypeDocument = gql`
     query allCreditType {
   allCreditType {
     name
-    image {
-      ...imageFields
-    }
     largeImage {
       ...imageFields
+    }
+    unit
+    unitDefinitionRaw
+    category {
+      name
+      icon {
+        ...imageFields
+      }
+      largeImage {
+        ...imageFields
+      }
     }
   }
 }

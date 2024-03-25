@@ -18,7 +18,7 @@ export interface EcologicalCreditCardProps extends EcologicalCreditCardType {
 }
 
 const EcologicalCreditCard = ({
-  type,
+  creditCategory,
   title,
   infos,
   description,
@@ -51,8 +51,8 @@ const EcologicalCreditCard = ({
       <Box sx={{ position: 'relative' }}>
         {children}
         <CardRibbon
-          icon={type.icon}
-          label={type.name}
+          icon={creditCategory.icon}
+          label={creditCategory.name}
           sx={{ position: 'absolute', left: 0, top: 48 }}
         />
       </Box>

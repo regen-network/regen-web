@@ -1,5 +1,6 @@
 import { Suspense, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
+import { HelmetProvider } from 'react-helmet-async';
 import {
   createRoutesFromChildren,
   matchRoutes,
@@ -136,12 +137,14 @@ root.render(
                 >
                   <WalletProvider>
                     <LedgerProvider>
-                      <Suspense fallback={<PageLoader />}>
-                        <Routes
-                          reactQueryClient={reactQueryClient}
-                          apolloClientFactory={apolloClientFactory}
-                        />
-                      </Suspense>
+                      <HelmetProvider>
+                        <Suspense fallback={<PageLoader />}>
+                          <Routes
+                            reactQueryClient={reactQueryClient}
+                            apolloClientFactory={apolloClientFactory}
+                          />
+                        </Suspense>
+                      </HelmetProvider>
                     </LedgerProvider>
                   </WalletProvider>
                 </ChainProvider>

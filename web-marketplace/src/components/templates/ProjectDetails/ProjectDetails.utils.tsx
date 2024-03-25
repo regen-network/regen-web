@@ -285,3 +285,8 @@ export const formatTimelineDates = (item: PrefinanceTimelineItem) =>
   `${formatDate(item.date, 'MMM YYYY')}${
     item.endDate ? ` - ${formatDate(item.endDate, 'MMM YYYY')}` : ''
   }`;
+
+export const getProjectDisplayName = (
+  projectName?: string,
+  onChainProjectId?: string,
+) => projectName ?? (onChainProjectId && `Project ${onChainProjectId}`) ?? '';

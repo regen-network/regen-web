@@ -13,7 +13,6 @@ import { PrefinanceIcon } from 'web-components/src/components/icons/PrefinanceIc
 import { Gallery } from 'web-components/src/components/organisms/Gallery/Gallery';
 import SEO from 'web-components/src/components/seo';
 import ProjectMedia from 'web-components/src/components/sliders/ProjectMedia';
-import { Label } from 'web-components/src/components/typography';
 
 import { Project } from 'generated/graphql';
 import { Maybe } from 'graphql/jsutils/Maybe';
@@ -284,8 +283,7 @@ function ProjectDetails(): JSX.Element {
   const seoData = useSeo({
     projectMetadata,
     projectPageMetadata: offChainProjectMetadata,
-    projectDeveloper,
-    creditClassName,
+    onChainProjectId,
   });
 
   const mediaData = parseMedia({

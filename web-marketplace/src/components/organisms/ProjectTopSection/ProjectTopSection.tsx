@@ -43,6 +43,7 @@ import {
   parseProjectMetadata,
   parseProjectPageMetadata,
 } from './ProjectTopSection.utils';
+import { getProjectDisplayName } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 function ProjectTopSection({
   offChainProject,
@@ -132,8 +133,7 @@ function ProjectTopSection({
     certificationIcons: creditCertificationIconsMapping,
   });
 
-  const displayName =
-    projectName ?? (onChainProjectId && `Project ${onChainProjectId}`) ?? '';
+  const displayName = getProjectDisplayName(projectName, onChainProjectId);
   const creditClassMethodology = parseMethodologies({
     methodologies: creditClassMetadata?.['regen:approvedMethodologies'],
   });

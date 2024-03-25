@@ -6,6 +6,7 @@ import {
   AnchoredProjectMetadataBaseLD,
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
+import { getProjectDisplayName } from '../ProjectDetails.utils';
 
 function getVisibleAccountName(
   account?: Account | undefined,
@@ -16,40 +17,23 @@ function getVisibleAccountName(
 interface UseSeoParams {
   projectMetadata?: AnchoredProjectMetadataBaseLD;
   projectPageMetadata?: ProjectPageMetadataLD;
-  landSteward?: Account;
-  projectDeveloper?: Account;
-  landOwner?: Account;
-  creditClassName: string | undefined;
+  onChainProjectId?: string;
 }
 
 export default function useSeo({
   projectMetadata,
   projectPageMetadata,
-  landSteward,
-  projectDeveloper,
-  landOwner,
-  creditClassName,
+  onChainProjectId,
 }: UseSeoParams) {
-  // this function is used to format credit class metadata into SEO
-  // optimization tags for the project pages. i believe the main use case is at
-  // the very least to get links to a particular credit class page formatting
-  // nicely in twitter/google.
   const location = useLocation();
 
-  const accountName =
-    getVisibleAccountName(landSteward) ||
-    getVisibleAccountName(projectDeveloper) ||
-    getVisibleAccountName(landOwner);
-
-  const metadataLocation = projectMetadata?.['schema:location'];
-  const projectAddress = metadataLocation?.['place_name'];
-
+  const title = getProjectDisplayName(
+    projectMetadata?.['schema:name'],
+    onChainProjectId,
+  );
   const siteMetadata = {
     title: `Regen Marketplace`,
-    description:
-      creditClassName && accountName && projectAddress
-        ? `Learn about ${creditClassName} credits sourced from ${accountName} in ${projectAddress}.`
-        : '',
+    description: projectPageMetadata?.['schema:description'] ?? '',
     author: `Regen Network`,
     siteUrl: `${window.location.origin}`,
   };
@@ -57,9 +41,7 @@ export default function useSeo({
   return {
     location,
     siteMetadata,
-    title: projectMetadata?.['schema:name'],
-    imageUrl:
-      projectPageMetadata?.['schema:image'] ||
-      projectPageMetadata?.['regen:previewPhoto']?.['schema:url'],
+    title,
+    imageUrl: projectPageMetadata?.['regen:previewPhoto']?.['schema:url'],
   };
 }

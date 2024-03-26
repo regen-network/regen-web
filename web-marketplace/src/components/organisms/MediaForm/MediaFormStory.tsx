@@ -3,7 +3,7 @@ import { useFormContext, useWatch } from 'react-hook-form';
 
 import {
   FileDrop,
-  ImageDropProps,
+  FileDropProps,
 } from 'web-components/src/components/inputs/new/FileDrop/FileDrop';
 import { Radio } from 'web-components/src/components/inputs/new/Radio/Radio';
 import { RADIO_PREFERABLE } from 'web-components/src/components/inputs/new/Radio/Radio.constants';
@@ -44,7 +44,7 @@ export const MediaFormStory = ({
   const { isDirtyRef } = useProjectEditContext();
   const { register, control, setValue, formState } = ctx;
   const { errors } = formState;
-  const imageDropCommonProps: Partial<ImageDropProps> = {
+  const imageDropCommonProps: Partial<FileDropProps> = {
     classes: { main: classes.fullSizeMedia },
     buttonText: IMAGE_UPLOAD_BUTTON_LABEL,
     fixedCrop: cropAspectMediaForm,

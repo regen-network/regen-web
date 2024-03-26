@@ -2,7 +2,7 @@ import React from 'react';
 import { useMediaQuery, useTheme } from '@mui/material';
 
 import { GettingStartedResourcesCard } from 'web-components/src/components/cards/GettingStartedResourcesCard';
-import Section from 'web-components/src/components/section';
+import { Root } from 'web-components/src/components/section';
 import ResponsiveSlider from 'web-components/src/components/sliders/ResponsiveSlider';
 import { Theme } from 'web-components/src/theme/muiTheme';
 import { getLinkTarget } from 'web-components/src/utils/linkTarget';
@@ -13,7 +13,7 @@ import { getSanityImgSrc } from 'lib/imgSrc';
 
 import { Link } from 'components/atoms';
 
-import { useSectionStyles } from './GettingStartedResourcesSection.styles';
+import { Title } from 'web-components/src/components/typography';
 
 const GettingStartedResourcesSection: React.FC<
   React.PropsWithChildren<{
@@ -22,21 +22,19 @@ const GettingStartedResourcesSection: React.FC<
 > = ({ section }) => {
   const theme = useTheme<Theme>();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const { classes } = useSectionStyles();
 
   return (
-    <Section
-      visibleOverflow
-      title={section.header || 'Resources for Getting Started'}
-      sx={{ root: { pb: { xs: 20, sm: 30 } } }}
-      classes={{ title: classes.title }}
-    >
+    <div className="overflow-x-hidden pb-[80px] sm:pb-[120px]">
+      <Root>
+        <Title className="text-left sm:text-center" variant="h2" align="center">
+          {section.header || 'Resources for Getting Started'}
+        </Title>
+      </Root>
       <ResponsiveSlider
         visibleOverflow
         mobileItemWidth="80%"
         infinite={false}
         slidesToShow={isMobile ? 1 : 2}
-        classes={{ root: classes.root }}
         items={
           section.resourcesCards?.map((item, i) => (
             <GettingStartedResourcesCard
@@ -57,7 +55,7 @@ const GettingStartedResourcesSection: React.FC<
           )) || []
         }
       />
-    </Section>
+    </div>
   );
 };
 

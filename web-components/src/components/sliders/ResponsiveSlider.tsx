@@ -1,15 +1,15 @@
 import { useCallback, useRef, useState } from 'react';
 import Slider, { Settings as SlickSettings } from 'react-slick';
 import { useTheme } from '@mui/material';
-import Grid from '@mui/material/Grid';
 import { Variant } from '@mui/material/styles/createTypography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { makeStyles } from 'tss-react/mui';
 
-import PrevNextButton from '../buttons/PrevNextButton';
-import { Title } from '../typography';
+import { useStyles } from './ResponsiveSlider.styles';
+import { cn } from '../../utils/styles/cn';
+import { Root } from '../section';
+import { Header } from './ResponsiveSlider.Header';
 
-interface ResponsiveSliderProps {
+export interface ResponsiveSliderProps {
   items?: JSX.Element[];
   titleVariant?: Variant;
   arrows?: boolean;
@@ -32,119 +32,6 @@ interface ResponsiveSliderProps {
   visibleOverflow?: boolean;
   adaptiveHeight?: boolean;
 }
-
-interface StyleProps {
-  gridView: boolean;
-  padding?: string | number;
-  title?: string;
-  mobileItemWidth?: string;
-  itemWidth?: string;
-  visibleOverflow: boolean;
-}
-
-const useStyles = makeStyles<StyleProps>()(
-  (
-    theme,
-    { gridView, mobileItemWidth, itemWidth, padding, title, visibleOverflow },
-  ) => ({
-    root: {
-      [theme.breakpoints.down('sm')]: {
-        paddingTop: theme.spacing(11.75),
-      },
-      [theme.breakpoints.up('sm')]: {
-        paddingTop: theme.spacing(8),
-      },
-    },
-    slider: {
-      [theme.breakpoints.down('sm')]: {
-        width: mobileItemWidth || '70%',
-        paddingTop: title ? theme.spacing(4) : 0,
-      },
-      [theme.breakpoints.up('sm')]: {
-        width: itemWidth || '100%',
-        marginLeft: padding ? `-${padding}` : 0,
-        paddingTop: title ? theme.spacing(8) : 0,
-      },
-      '& .slick-dots': {
-        bottom: 'auto',
-        overflow: 'hidden',
-        height: theme.spacing(7.5),
-        '& ul': {
-          padding: 0,
-          whiteSpace: 'nowrap',
-          margin: '8px 0 -6.5px',
-          '& li': {
-            height: theme.spacing(3.75),
-            width: theme.spacing(3.75),
-            margin: '0 6.5px',
-            '&.slick-active': {
-              '& div': {
-                backgroundColor: theme.palette.secondary.dark,
-              },
-            },
-          },
-        },
-      },
-      '& .slick-list': {
-        overflow: visibleOverflow ? 'visible' : 'hidden',
-        [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-          overflow: 'visible',
-        },
-        '& .slick-slide': {
-          display: 'flex',
-          '& > div': {
-            width: '97%',
-          },
-        },
-      },
-      '& .slick-track': {
-        display: 'flex',
-        '& .slick-slide': {
-          height: 'inherit',
-          display: 'flex',
-          margin: theme.spacing(4, 0),
-          [theme.breakpoints.down('sm')]: {
-            paddingRight: theme.spacing(5),
-            '&:last-child': {
-              paddingRight: 0,
-            },
-          },
-        },
-      },
-    },
-    buttons: {
-      '& div:last-child': {
-        marginLeft: theme.spacing(2),
-      },
-    },
-    title: {
-      letterSpacing: '1px',
-      textTransform: 'uppercase',
-      fontWeight: 800,
-      color: theme.palette.info.main,
-      [theme.breakpoints.down('sm')]: {
-        fontSize: theme.spacing(3.5),
-      },
-    },
-    dot: {
-      height: theme.spacing(3.75),
-      width: theme.spacing(3.75),
-      backgroundColor: theme.palette.grey[100],
-      borderRadius: '50%',
-    },
-    item: {
-      height: '100%',
-      paddingBottom: gridView ? theme.spacing(5) : 0,
-      [theme.breakpoints.up('sm')]: {
-        paddingLeft: padding || theme.spacing(4),
-        paddingRight: padding || theme.spacing(4),
-        '&:last-child': {
-          paddingRight: 0,
-        },
-      },
-    },
-  }),
-);
 
 export default function ResponsiveSlider({
   items = [],
@@ -190,19 +77,19 @@ export default function ResponsiveSlider({
     visibleOverflow,
   });
 
-  let slider: any = useRef(null);
+  let sliderRef: any = useRef(null);
 
   const slickPrev = useCallback(() => {
-    if (slider && slider.current) {
-      slider.current.slickPrev();
+    if (sliderRef && sliderRef.current) {
+      sliderRef.current.slickPrev();
     }
-  }, [slider]);
+  }, [sliderRef]);
 
   const slickNext = useCallback(() => {
-    if (slider && slider.current) {
-      slider.current.slickNext();
+    if (sliderRef && sliderRef.current) {
+      sliderRef.current.slickNext();
     }
-  }, [slider]);
+  }, [sliderRef]);
 
   const settings: SlickSettings = {
     rows,
@@ -229,66 +116,78 @@ export default function ResponsiveSlider({
 
   return (
     <div className={cx(styles.root, className || (classes && classes.root))}>
-      {hasHeader && (
-        <Grid
-          container
-          wrap="nowrap"
-          alignItems="center"
-          className={classes && classes.headerWrap}
-        >
-          {renderTitle ? (
-            renderTitle()
-          ) : title ? (
-            <Grid xs={12} sm={8} item>
-              <Title
-                variant={titleVariant}
-                className={cx(styles.title, classes && classes.title)}
-              >
-                {title}
-              </Title>
-            </Grid>
-          ) : null}
-          {items.length > 1 && arrows && desktop && (
-            <Grid
-              xs={renderTitle || title ? 4 : 12}
-              container
-              item
-              justifyContent="flex-end"
-              className={styles.buttons}
-            >
-              <PrevNextButton
-                direction="prev"
-                onClick={slickPrev}
-                disabled={prevDisabled}
-              />
-              <PrevNextButton
-                direction="next"
-                onClick={slickNext}
-                disabled={nextDisabled}
-              />
-            </Grid>
-          )}
-        </Grid>
+      {hasHeader && visibleOverflow ? (
+        <Root className="pt-0">
+          <Header
+            slickPrev={slickPrev}
+            slickNext={slickNext}
+            prevDisabled={prevDisabled}
+            nextDisabled={nextDisabled}
+            classes={classes}
+            renderTitle={renderTitle}
+            title={title}
+            titleVariant={titleVariant}
+            items={items}
+            arrows={arrows}
+          />
+        </Root>
+      ) : (
+        <Header
+          slickPrev={slickPrev}
+          slickNext={slickNext}
+          prevDisabled={prevDisabled}
+          nextDisabled={nextDisabled}
+          classes={classes}
+          renderTitle={renderTitle}
+          title={title}
+          titleVariant={titleVariant}
+          items={items}
+          arrows={arrows}
+        />
       )}
-
-      <Slider
-        {...settings}
-        ref={slider}
-        className={cx(styles.slider, classes?.slider)}
-        beforeChange={(_, newIdx) => {
-          setCurrSlide(newIdx);
-        }}
-        afterChange={i => {
-          if (onChange) onChange(i);
-        }}
-        adaptiveHeight={adaptiveHeight}
-      >
-        {items.map((item, index) => (
-          <div className={styles.item} key={index}>
-            {item}
-          </div>
-        ))}
-      </Slider>
+      {visibleOverflow ? (
+        <div className={cn(styles.hiddenScrollBar, 'overflow-x-scroll')}>
+          <Root visibleOverflow withSlider className="pt-0">
+            <Slider
+              {...settings}
+              ref={sliderRef}
+              className={cx(styles.slider, classes?.slider)}
+              beforeChange={(_, newIdx) => {
+                setCurrSlide(newIdx);
+              }}
+              afterChange={i => {
+                if (onChange) onChange(i);
+              }}
+              adaptiveHeight={adaptiveHeight}
+            >
+              {items.map((item, index) => (
+                <div className={styles.item} key={index}>
+                  {item}
+                </div>
+              ))}
+            </Slider>
+          </Root>
+        </div>
+      ) : (
+        <Slider
+          {...settings}
+          ref={sliderRef}
+          className={cx(styles.slider, classes?.slider)}
+          beforeChange={(_, newIdx) => {
+            setCurrSlide(newIdx);
+          }}
+          afterChange={i => {
+            if (onChange) onChange(i);
+          }}
+          adaptiveHeight={adaptiveHeight}
+        >
+          {items.map((item, index) => (
+            <div className={styles.item} key={index}>
+              {item}
+            </div>
+          ))}
+        </Slider>
+      )}
     </div>
   );
 }

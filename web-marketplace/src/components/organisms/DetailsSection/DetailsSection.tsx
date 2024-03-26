@@ -15,7 +15,6 @@ import {
   VIEW_METHODOLOGY,
 } from './DetailsSection.constants';
 import { DetailsSectionCredit } from './DetailsSection.Credit';
-import { useSectionStyles } from './DetailsSection.styles';
 import { DetailsSectionProps } from './DetailsSection.types';
 
 export const DetailsSection: React.FC<
@@ -31,17 +30,13 @@ export const DetailsSection: React.FC<
 }) => {
   const theme = useTheme<Theme>();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const { classes } = useSectionStyles();
 
   const hasCredibilityCards = header && credibilityCards?.length;
   const hasClassInfo = header && (methodology || creditClassDoc);
 
   return (
-    <div>
-      <Section
-        visibleOverflow
-        sx={{ root: [{ pb: [20, 25] }, ...sxToArray(sx)] }}
-      >
+    <div className="overflow-x-hidden pb-[80px] sm:pb-[100px]">
+      <Section visibleOverflow sx={{ root: [...sxToArray(sx)] }}>
         {(hasCredibilityCards || hasClassInfo) && (
           <Grid
             container
@@ -118,32 +113,32 @@ export const DetailsSection: React.FC<
           </Grid>
         )}
         {children}
-        {hasCredibilityCards && (
-          <ResponsiveSlider
-            visibleOverflow
-            arrows
-            mobileItemWidth="90%"
-            itemWidth="85%"
-            infinite={false}
-            slidesToShow={isMobile ? 1 : 2}
-            classes={{ headerWrap: classes.headerWrap }}
-            padding={theme.spacing(2.5)}
-            items={credibilityCards.map((card, index) => (
-              <CredibilityCard
-                index={index}
-                title={card?.credibilityCard?.title as string}
-                descriptionRaw={card?.credibilityCard?.descriptionRaw}
-                icon={card?.credibilityCard?.icon?.asset?.url}
-                claims={
-                  card?.claims?.map(claim => ({
-                    description: claim?.description as string,
-                  })) || []
-                }
-              />
-            ))}
-          />
-        )}
       </Section>
+      {hasCredibilityCards && (
+        <ResponsiveSlider
+          classes={{ headerWrap: 'align-flex-end pb-[14px] sm:pb-[34px]' }}
+          visibleOverflow
+          arrows
+          mobileItemWidth="90%"
+          itemWidth="85%"
+          infinite={false}
+          slidesToShow={isMobile ? 1 : 2}
+          padding={theme.spacing(2.5)}
+          items={credibilityCards.map((card, index) => (
+            <CredibilityCard
+              index={index}
+              title={card?.credibilityCard?.title as string}
+              descriptionRaw={card?.credibilityCard?.descriptionRaw}
+              icon={card?.credibilityCard?.icon?.asset?.url}
+              claims={
+                card?.claims?.map(claim => ({
+                  description: claim?.description as string,
+                })) || []
+              }
+            />
+          ))}
+        />
+      )}
     </div>
   );
 };

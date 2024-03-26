@@ -92,7 +92,7 @@ export const SellOrdersActionsBar = ({
             <Subtitle>{prefinancePrice ?? avgPricePerTonLabel}</Subtitle>
           </Box>
         )}
-        {(!isCommunityCredit || !onChainProjectId) && (
+        {(!isCommunityCredit || (!onChainProjectId && isPrefinanceProject)) && (
           <OutlinedButton
             onClick={onBookCallButtonClick}
             size={isMobile ? 'small' : 'medium'}

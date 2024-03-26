@@ -14,6 +14,7 @@ import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
 import EditIcon from 'web-components/src/components/icons/EditIcon';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
+import { apiUri } from 'lib/apiUri';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
@@ -31,6 +32,7 @@ import { ProfileModalSchemaType } from './components/ProfileModal/ProfileModal.s
 import { RoleField } from './components/RoleField/RoleField';
 import { useSaveProfile } from './hooks/useSaveProfile';
 import { rolesFormSchema, RolesFormSchemaType } from './RolesForm.schema';
+import { useHandleUpload } from '../MediaForm/hooks/useHandleUpload';
 
 interface RolesFormProps {
   submit: (props: RoleSubmitProps) => Promise<void>;
@@ -38,10 +40,12 @@ interface RolesFormProps {
   onPrev?: () => void;
   initialValues?: RolesFormSchemaType;
   isOnChain: boolean;
+  projectId?: string;
 }
 
 const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   initialValues,
+  projectId,
   submit,
   onNext,
   onPrev,
@@ -127,6 +131,13 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
 
   const saveProfile = useSaveProfile();
 
+  const [offChainProjectId, setOffChainProjectId] = useState(projectId);
+  const { handleUpload } = useHandleUpload({
+    offChainProjectId,
+    apiServerUrl: apiUri,
+    setOffChainProjectId,
+  });
+
   return (
     <Form
       form={form}
@@ -160,6 +171,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
           accounts={accountsProjectDeveloper}
           saveProfile={saveProfile}
           activeAccountId={activeAccountId}
+          onUpload={handleUpload}
           {...form.register('projectDeveloper')}
         />
         <RoleField
@@ -174,6 +186,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
           accounts={accountsVerifier}
           saveProfile={saveProfile}
           activeAccountId={activeAccountId}
+          onUpload={handleUpload}
           {...form.register('verifier')}
         />
         {isOnChain && admin && (

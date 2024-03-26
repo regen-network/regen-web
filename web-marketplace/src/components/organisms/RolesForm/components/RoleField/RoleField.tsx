@@ -49,6 +49,7 @@ interface Props {
     profile: ProfileModalSchemaType,
     initialValue?: ProfileModalSchemaType | null,
   ) => Promise<{ id: string; creatorId: string } | undefined>;
+  onUpload?: (imageFile: File) => Promise<string | undefined>;
 }
 
 export const RoleField = forwardRef<HTMLInputElement, Props>(
@@ -67,6 +68,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
       accounts,
       saveProfile,
       activeAccountId,
+      onUpload,
     }: Props,
     ref,
   ) => {
@@ -210,6 +212,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
         {profileAdd && (
           <ProfileModal
             initialValues={profileAdd}
+            onUpload={onUpload}
             onClose={closeProfileModal}
             onSubmit={async profile => {
               const account = await saveProfile(profile);

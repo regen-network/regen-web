@@ -31,10 +31,10 @@ import {
   descriptionFormSchema,
   DescriptionSchemaType,
 } from './DescriptionForm.schema';
+import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 
 interface DescriptionFormProps {
   onSubmit: (props: MetadataSubmitProps) => Promise<void>;
-  onNext?: () => void;
   onPrev?: () => void;
   initialValues?: DescriptionSchemaType;
 }
@@ -42,21 +42,23 @@ interface DescriptionFormProps {
 const DescriptionForm: React.FC<DescriptionFormProps> = ({
   initialValues,
   onSubmit,
-  onNext,
   onPrev,
 }) => {
+  const { formRef, shouldNavigateRef, isDraftRef } = useCreateProjectContext();
   const form = useZodForm({
     schema: descriptionFormSchema,
+    draftSchema: descriptionFormSchema, // same schema since all fields are optional
     defaultValues: {
       ...initialValues,
     },
+    isDraftRef,
     mode: 'onBlur',
   });
+  const saveAndExit = useProjectSaveAndExit();
 
   const { isValid, isSubmitting, isDirty, errors } = useFormState({
     control: form.control,
   });
-  const { formRef, shouldNavigateRef } = useCreateProjectContext();
   const description = useWatch({
     control: form.control,
     name: 'schema:description',
@@ -81,6 +83,7 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
     <Form
       form={form}
       formRef={formRef}
+      isDraftRef={isDraftRef}
       onSubmit={async values => {
         try {
           await onSubmit({
@@ -152,11 +155,11 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
         </TextAreaField>
       </OnBoardingCard>
       <ProjectPageFooter
-        onNext={onNext}
         onPrev={onPrev}
         isValid={isValid}
         isSubmitting={isSubmitting}
         dirty={isDirty}
+        saveAndExit={saveAndExit}
       />
     </Form>
   );

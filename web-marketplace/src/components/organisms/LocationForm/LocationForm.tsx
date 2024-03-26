@@ -22,14 +22,15 @@ import {
   LOCATION_PLACEHOLDER,
 } from './LocationForm.constants';
 import {
+  locationFormDraftSchema,
   locationFormSchema,
   LocationFormSchemaType,
 } from './LocationForm.schema';
+import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 
 interface LocationFormProps {
   mapToken: string;
   onSubmit: (props: MetadataSubmitProps) => Promise<void>;
-  onNext?: () => void;
   onPrev?: () => void;
   initialValues?: LocationFormSchemaType;
 }
@@ -38,24 +39,26 @@ const LocationForm: React.FC<LocationFormProps> = ({
   mapToken,
   initialValues,
   onSubmit,
-  onNext,
   onPrev,
 }) => {
+  const { formRef, shouldNavigateRef, isDraftRef } = useCreateProjectContext();
   const form = useZodForm({
     schema: locationFormSchema,
+    draftSchema: locationFormDraftSchema,
     defaultValues: {
       ...initialValues,
     },
+    isDraftRef,
     mode: 'onBlur',
   });
   const { isValid, isSubmitting, isDirty, errors } = useFormState({
     control: form.control,
   });
   const { setValue } = form;
+  const saveAndExit = useProjectSaveAndExit();
 
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const { confirmSave, isEdit, isDirtyRef } = useProjectEditContext();
-  const { formRef, shouldNavigateRef } = useCreateProjectContext();
 
   const location = useWatch({
     control: form.control,
@@ -70,10 +73,11 @@ const LocationForm: React.FC<LocationFormProps> = ({
     <Form
       form={form}
       formRef={formRef}
+      isDraftRef={isDraftRef}
       onSubmit={async values => {
         try {
           const location = values['schema:location'];
-          if (isGeocodingFeature(location)) {
+          if (isDraftRef?.current || isGeocodingFeature(location)) {
             await onSubmit({
               values: { 'schema:location': location },
               shouldNavigate: shouldNavigateRef?.current,
@@ -107,11 +111,11 @@ const LocationForm: React.FC<LocationFormProps> = ({
         />
       </OnBoardingCard>
       <ProjectPageFooter
-        onNext={onNext}
         onPrev={onPrev}
         isValid={isValid}
         isSubmitting={isSubmitting}
         dirty={isDirty}
+        saveAndExit={saveAndExit}
       />
     </Form>
   );

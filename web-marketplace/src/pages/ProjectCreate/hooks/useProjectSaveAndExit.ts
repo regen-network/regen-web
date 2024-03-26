@@ -9,12 +9,10 @@ export const useProjectSaveAndExit = () => {
   const saveAndExit = async (): Promise<void> => {
     if (shouldNavigateRef) {
       shouldNavigateRef.current = false;
-      await formRef?.current?.submitForm();
+      await formRef?.current?.submitForm(true);
       shouldNavigateRef.current = true;
     }
-    if (formRef?.current?.isFormValid() !== false) {
-      navigate('/profile/projects');
-    }
+    navigate('/profile/projects');
   };
 
   return saveAndExit;

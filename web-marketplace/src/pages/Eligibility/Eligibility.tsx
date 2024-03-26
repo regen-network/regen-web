@@ -30,11 +30,7 @@ const Eligibility: React.FC<React.PropsWithChildren<unknown>> = () => {
   }
 
   return (
-    <OnboardingFormTemplate
-      activeStep={0}
-      title="Eligibility"
-      saveAndExit={saveAndExit}
-    >
+    <OnboardingFormTemplate activeStep={0} title="Eligibility">
       <IncludesGrasslandsForm submit={submitIncludesGrasslands} />
     </OnboardingFormTemplate>
   );

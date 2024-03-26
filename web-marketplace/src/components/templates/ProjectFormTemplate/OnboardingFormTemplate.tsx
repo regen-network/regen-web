@@ -10,7 +10,6 @@ type Props = {
   title: string;
   activeStep: number;
   loading?: boolean;
-  saveAndExit?: () => Promise<void>;
 };
 
 const OnboardingFormTemplate: React.FC<React.PropsWithChildren<Props>> =
@@ -18,13 +17,7 @@ const OnboardingFormTemplate: React.FC<React.PropsWithChildren<Props>> =
     return (
       <Box sx={{ bgcolor: 'grey.50' }}>
         <PlanStepper activeStep={props.activeStep} />
-        <OnBoardingSection
-          title={props.title}
-          formContainer
-          linkText="Save & Exit"
-          onLinkClick={props.saveAndExit}
-          // exampleProjectUrl="/project/wilmot"
-        >
+        <OnBoardingSection title={props.title} formContainer>
           {props.loading ? (
             <Loading />
           ) : (

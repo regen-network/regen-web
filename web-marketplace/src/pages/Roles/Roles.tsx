@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
-import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import WithLoader from 'components/atoms/WithLoader';
 import { RolesForm } from 'components/organisms/RolesForm/RolesForm';
 import { RolesFormSchemaType } from 'components/organisms/RolesForm/RolesForm.schema';
@@ -72,8 +71,6 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
     ],
   );
 
-  const saveAndExit = useProjectSaveAndExit();
-
   function navigatePrev(): void {
     navigate(`/project-pages/${projectId}/location`);
   }
@@ -82,7 +79,6 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
     <ProjectFormTemplate
       isEdit={isEdit}
       title="Roles"
-      saveAndExit={saveAndExit}
       offChainProject={offChainProject}
       onChainProject={onChainProject}
       loading={withMetadataLoading}
@@ -90,7 +86,6 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
       <WithLoader isLoading={!loaded || editContextLoading}>
         <RolesForm
           submit={rolesSubmit}
-          onNext={navigateNext}
           onPrev={navigatePrev}
           initialValues={initialValues}
           isOnChain={

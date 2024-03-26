@@ -20,11 +20,11 @@ import { DEFAULT } from './MediaForm.constants';
 import { mediaFormSchema, MediaFormSchemaType } from './MediaForm.schema';
 import { MediaFormPhotos } from './MediaFormPhotos';
 import { MediaFormStory } from './MediaFormStory';
+import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 
 interface MediaFormProps {
   submit: (props: MetadataSubmitProps) => Promise<void>;
   onPrev?: () => void;
-  onNext?: () => void;
   initialValues: MediaFormSchemaType;
   projectId?: string;
 }
@@ -33,22 +33,24 @@ export const MediaForm = ({
   initialValues,
   projectId,
   submit,
-  onNext,
   onPrev,
 }: MediaFormProps): JSX.Element => {
+  const { formRef, shouldNavigateRef, isDraftRef } = useCreateProjectContext();
   const form = useZodForm({
     schema: mediaFormSchema,
+    draftSchema: mediaFormSchema, // same schema since all fields are optional
     defaultValues: {
       ...initialValues,
     },
+    isDraftRef,
     mode: 'onBlur',
   });
   const { isSubmitting, isDirty, isValid } = useFormState({
     control: form.control,
   });
+  const saveAndExit = useProjectSaveAndExit();
 
   const fileNamesToDeleteRef = useRef<string[]>([]);
-  const { formRef, shouldNavigateRef } = useCreateProjectContext();
 
   const { confirmSave, isEdit, isDirtyRef } = useProjectEditContext();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
@@ -57,6 +59,7 @@ export const MediaForm = ({
   return (
     <Form
       formRef={formRef}
+      isDraftRef={isDraftRef}
       form={form}
       onSubmit={async data => {
         try {
@@ -112,11 +115,11 @@ export const MediaForm = ({
         />
       </OnBoardingCard>
       <ProjectPageFooter
-        onNext={onNext}
         onPrev={onPrev}
         isValid={isValid}
         isSubmitting={isSubmitting}
         dirty={isDirty}
+        saveAndExit={saveAndExit}
       />
     </Form>
   );

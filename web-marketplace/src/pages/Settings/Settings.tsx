@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
-import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import WithLoader from 'components/atoms/WithLoader';
 import { SettingsForm } from 'components/organisms/SettingsForm/SettingsForm';
 import { SettingsFormSchemaType } from 'components/organisms/SettingsForm/SettingsForm.schema';
@@ -44,13 +43,10 @@ const Settings: React.FC<React.PropsWithChildren<unknown>> = () => {
     [offChainProject, onChainProject],
   );
 
-  const saveAndExit = useProjectSaveAndExit();
-
   return (
     <ProjectFormTemplate
       isEdit={isEdit}
       title="Settings"
-      saveAndExit={saveAndExit}
       offChainProject={offChainProject}
       onChainProject={onChainProject}
       loading={!offChainProject}

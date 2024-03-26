@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
-import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import { useProjectEditContext } from 'pages/ProjectEdit';
 import { LocationFormSchemaType } from 'components/organisms/LocationForm/LocationForm.schema';
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
@@ -32,8 +31,6 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
     [metadata],
   );
 
-  const saveAndExit = useProjectSaveAndExit();
-
   function navigatePrev(): void {
     navigate(`/project-pages/${projectId}/basic-info`);
   }
@@ -42,7 +39,6 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
     <ProjectFormTemplate
       isEdit={isEdit}
       title="Location"
-      saveAndExit={saveAndExit}
       offChainProject={offChainProject}
       onChainProject={onChainProject}
       loading={loading}
@@ -52,7 +48,6 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
         mapToken={import.meta.env.VITE_MAPBOX_TOKEN as string}
         initialValues={initialValues}
         onPrev={navigatePrev}
-        onNext={navigateNext}
       />
     </ProjectFormTemplate>
   );

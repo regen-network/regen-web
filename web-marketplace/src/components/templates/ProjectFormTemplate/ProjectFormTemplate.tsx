@@ -12,7 +12,6 @@ import { CREATE_PROJECT_URL_REGEX } from './ProjectFormTemplate.constants';
 type Props = {
   isEdit?: boolean;
   title: string;
-  saveAndExit?: () => Promise<void>;
   loading: boolean;
   offChainProject?: OffChainProject;
   onChainProject?: ProjectInfo;
@@ -21,7 +20,6 @@ type Props = {
 const ProjectFormTemplate: React.FC<React.PropsWithChildren<Props>> = ({
   isEdit,
   title,
-  saveAndExit,
   loading,
   offChainProject,
   onChainProject,
@@ -59,11 +57,7 @@ const ProjectFormTemplate: React.FC<React.PropsWithChildren<Props>> = ({
           <EditFormTemplate>{children}</EditFormTemplate>
         )}
       {!!offChainProject && !isEdit && (
-        <OnboardingFormTemplate
-          activeStep={0}
-          title={title}
-          saveAndExit={saveAndExit}
-        >
+        <OnboardingFormTemplate activeStep={0} title={title}>
           {children}
         </OnboardingFormTemplate>
       )}

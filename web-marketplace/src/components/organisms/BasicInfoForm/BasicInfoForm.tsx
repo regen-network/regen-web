@@ -25,14 +25,15 @@ import {
   BASIC_INFO_SIZE_LABEL,
 } from './BasicInfoForm.constants';
 import {
+  basicInfoFormDraftSchema,
   basicInfoFormSchema,
   BasicInfoFormSchemaType,
 } from './BasicInfoForm.schema';
 import { useBasicInfoStyles } from './BasicInfoForm.styles';
+import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 
 interface BasicInfoFormProps {
   onSubmit: (props: MetadataSubmitProps) => Promise<void>;
-  onNext?: () => void;
   onPrev?: () => void;
   initialValues?: BasicInfoFormSchemaType;
 }
@@ -40,15 +41,18 @@ interface BasicInfoFormProps {
 const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
   initialValues,
   onSubmit,
-  onNext,
   onPrev,
 }) => {
   const { classes, cx } = useBasicInfoStyles();
+  const saveAndExit = useProjectSaveAndExit();
+  const { formRef, shouldNavigateRef, isDraftRef } = useCreateProjectContext();
   const form = useZodForm({
     schema: basicInfoFormSchema,
+    draftSchema: basicInfoFormDraftSchema,
     defaultValues: {
       ...initialValues,
     },
+    isDraftRef,
     mode: 'onBlur',
   });
   const { isValid, isSubmitting, isDirty, errors } = useFormState({
@@ -56,7 +60,6 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
   });
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const { confirmSave, isEdit, isDirtyRef } = useProjectEditContext();
-  const { formRef, shouldNavigateRef } = useCreateProjectContext();
 
   useEffect(() => {
     isDirtyRef.current = isDirty;
@@ -66,6 +69,7 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
     <Form
       form={form}
       formRef={formRef}
+      isDraftRef={isDraftRef}
       onSubmit={async values => {
         try {
           await onSubmit({
@@ -132,11 +136,11 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
         </Box>
       </OnBoardingCard>
       <ProjectPageFooter
-        onNext={onNext}
         onPrev={onPrev}
         isValid={isValid}
         isSubmitting={isSubmitting}
         dirty={isDirty}
+        saveAndExit={saveAndExit}
       />
     </Form>
   );

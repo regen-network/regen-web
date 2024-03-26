@@ -18,14 +18,15 @@ import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
 import { ProjectPageFooter } from '../../molecules';
 import {
+  metadataFormDraftSchema,
   metadataFormSchema,
   MetadataFormSchemaType,
 } from './MetadataForm.schema';
 import { useMetadataFormStyles } from './MetadataForm.styles';
+import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 
 interface MetadataFormFormProps {
   onSubmit: ({ values }: { values: MetadataFormSchemaType }) => Promise<void>;
-  onNext?: () => void;
   onPrev?: () => void;
   initialValues?: MetadataFormSchemaType;
   creditClassId?: string;
@@ -35,17 +36,19 @@ interface MetadataFormFormProps {
 const MetadataForm: React.FC<MetadataFormFormProps> = ({
   initialValues,
   onSubmit,
-  onNext,
   onPrev,
   creditClassId,
   graphData,
 }) => {
   const { classes: styles } = useMetadataFormStyles();
+  const { formRef, isDraftRef } = useCreateProjectContext();
   const form = useZodForm({
     schema: metadataFormSchema({ creditClassId, graphData }),
+    draftSchema: metadataFormDraftSchema,
     defaultValues: {
       ...initialValues,
     },
+    isDraftRef,
     mode: 'onBlur',
   });
   const { isValid, isSubmitting, isDirty, errors } = useFormState({
@@ -53,7 +56,7 @@ const MetadataForm: React.FC<MetadataFormFormProps> = ({
   });
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const { confirmSave, isEdit, isDirtyRef } = useProjectEditContext();
-  const { formRef } = useCreateProjectContext();
+  const saveAndExit = useProjectSaveAndExit();
 
   useEffect(() => {
     isDirtyRef.current = isDirty;
@@ -63,6 +66,7 @@ const MetadataForm: React.FC<MetadataFormFormProps> = ({
     <Form
       form={form}
       formRef={formRef}
+      isDraftRef={isDraftRef}
       onSubmit={async values => {
         try {
           await onSubmit({ values });
@@ -93,11 +97,11 @@ const MetadataForm: React.FC<MetadataFormFormProps> = ({
         />
       </OnBoardingCard>
       <ProjectPageFooter
-        onNext={onNext}
         onPrev={onPrev}
         isValid={isValid}
         isSubmitting={isSubmitting}
         dirty={isDirty}
+        saveAndExit={saveAndExit}
       />
     </Form>
   );

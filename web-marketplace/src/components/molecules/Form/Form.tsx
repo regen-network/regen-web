@@ -13,12 +13,18 @@ import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { IS_DEV } from 'lib/env';
 
+export type FormRef = MutableRefObject<
+  | { submitForm: (draft?: boolean) => void; isFormValid: () => boolean }
+  | undefined
+>;
+
 interface Props<T extends FieldValues>
   extends Omit<ComponentProps<'form'>, 'onSubmit'> {
   form: UseFormReturn<T>;
   onSubmit?: SubmitHandler<T>;
   sx?: SxProps<Theme>;
-  formRef?: MutableRefObject<{ submitForm: () => void } | undefined>;
+  formRef?: FormRef;
+  isDraftRef?: MutableRefObject<boolean>;
 }
 
 const Form = <T extends FieldValues>({
@@ -26,6 +32,7 @@ const Form = <T extends FieldValues>({
   onSubmit,
   children,
   formRef,
+  isDraftRef,
   sx = [],
   ...props
 }: Props<T>): JSX.Element => {
@@ -33,8 +40,9 @@ const Form = <T extends FieldValues>({
     isFormValid() {
       return form.formState.isValid;
     },
-    async submitForm() {
+    async submitForm(draft?: boolean) {
       if (onSubmit) {
+        if (isDraftRef) isDraftRef.current = Boolean(draft);
         await form.handleSubmit(onSubmit)();
       }
     },

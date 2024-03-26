@@ -17,7 +17,7 @@ export const ProjectEditNav = ({ section, onNavClick, isOnChain }: Props) => {
         [
           'basic info',
           'location',
-          'roles',
+          // 'roles',
           'description',
           'media',
           isOnChain ? 'metadata' : undefined,

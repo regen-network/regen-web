@@ -240,7 +240,7 @@ export const getRoutes = ({
               path="metadata"
               element={<KeplrRoute component={ProjectMetadata} />}
             />
-            <Route path="roles" element={<AuthRoute component={Roles} />} />
+            {/* <Route path="roles" element={<AuthRoute component={Roles} />} /> */}
             <Route
               path="review"
               element={<AuthRoute component={ProjectReview} />}
@@ -263,7 +263,7 @@ export const getRoutes = ({
                 element={<AuthRoute component={Description} />}
               />
               <Route path="media" element={<AuthRoute component={Media} />} />
-              <Route path="roles" element={<AuthRoute component={Roles} />} />
+              {/* <Route path="roles" element={<AuthRoute component={Roles} />} /> */}
               <Route
                 path="metadata"
                 element={<KeplrRoute component={ProjectMetadata} />}

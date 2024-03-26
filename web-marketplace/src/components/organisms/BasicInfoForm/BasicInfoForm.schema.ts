@@ -22,7 +22,7 @@ export const basicInfoFormDraftSchema = z
   .object({
     'schema:name': z.string(),
     'regen:projectSize': z.object({
-      'qudt:numericValue': z.number().optional(),
+      'qudt:numericValue': z.any().optional(),
       'qudt:unit': z.string(),
     }),
   })

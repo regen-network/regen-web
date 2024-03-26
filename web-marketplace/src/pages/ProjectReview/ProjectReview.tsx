@@ -54,6 +54,7 @@ import {
   getProjectReferenceID,
 } from './ProjectReview.util';
 import { VCSMetadata } from './ProjectReview.VCSMetadata';
+import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 
 export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { projectId } = useParams();
@@ -125,6 +126,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const editPath = `/project-pages/${projectId}`;
   const metadata = project?.metadata as ProjectMetadataLD;
   const jurisdiction = useGetJurisdiction({ metadata });
+  const saveAndExit = useProjectSaveAndExit();
 
   const creditClassId = metadata?.['regen:creditClassId'];
   const isVCS = isVCSCreditClass(creditClassId);
@@ -307,7 +309,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
         </ReviewCard>
       )}
       <ProjectPageFooter
-        saveText="submit"
+        saveText="publish"
         onSave={submit}
         onPrev={() =>
           creditClassId
@@ -315,6 +317,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
             : navigate(`${editPath}/media`)
         }
         isSubmitting={isSubmitModalOpen}
+        saveAndExit={saveAndExit}
       />
       <ProcessingModal open={isSubmitModalOpen} onClose={closeSubmitModal} />
       {error && txModalTitle && (

@@ -27,9 +27,10 @@ import { getDataFromBatchDenomId } from '../MyEcocredits.utils';
 
 type Props = {
   address?: string | null;
+  hideRetirements: boolean;
 };
 
-export const useFetchRetirements = ({ address }: Props) => {
+export const useFetchRetirements = ({ address, hideRetirements }: Props) => {
   const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { wallet } = useWallet();
   const { ecocreditClient } = useLedger();
@@ -49,7 +50,8 @@ export const useFetchRetirements = ({ address }: Props) => {
       client: apolloClient,
       owner: address ?? wallet?.address ?? '',
       orderBy: RetirementsOrderBy.TimestampDesc,
-      enabled: !!apolloClient && (!!wallet?.address || !!address),
+      enabled:
+        !!apolloClient && (!!wallet?.address || !!address) && !hideRetirements,
     }),
   );
   const allRetirements = data?.data.allRetirements;
@@ -68,7 +70,6 @@ export const useFetchRetirements = ({ address }: Props) => {
     useProjectsWithMetadata(projectIds);
 
   // Get class issuer for each retirement
-
   // #1 retrieve issuers for each class id
   const classesIssuersData = useQueries({
     queries:
@@ -135,7 +136,9 @@ export const useFetchRetirements = ({ address }: Props) => {
   // Reload callback
   const reloadRetirements = useCallback((): void => {
     reactQueryClient.invalidateQueries({
-      queryKey: getAllRetirementsByOwnerQueryKey(wallet?.address ?? ''),
+      queryKey: getAllRetirementsByOwnerQueryKey(
+        address ?? wallet?.address ?? '',
+      ),
     });
   }, [reactQueryClient, wallet?.address]);
 

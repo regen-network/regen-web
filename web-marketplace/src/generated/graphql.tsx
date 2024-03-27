@@ -44,6 +44,8 @@ export type Account = Node & {
   creatorId?: Maybe<Scalars['UUID']>;
   nonce: Scalars['String'];
   addr?: Maybe<Scalars['String']>;
+  hideEcocredits?: Maybe<Scalars['Boolean']>;
+  hideRetirements?: Maybe<Scalars['Boolean']>;
   /** Reads a single `Account` that is related to this `Account`. */
   accountByCreatorId?: Maybe<Account>;
   /** Reads and enables pagination through a set of `CreditClass`. */
@@ -583,6 +585,10 @@ export type AccountCondition = {
   nonce?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `addr` field. */
   addr?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `hideEcocredits` field. */
+  hideEcocredits?: Maybe<Scalars['Boolean']>;
+  /** Checks for equality with the object’s `hideRetirements` field. */
+  hideRetirements?: Maybe<Scalars['Boolean']>;
 };
 
 /** A connection to a list of `CreditClass` values, with data from `Project`. */
@@ -711,6 +717,8 @@ export type AccountInput = {
   creatorId?: Maybe<Scalars['UUID']>;
   nonce?: Maybe<Scalars['String']>;
   addr?: Maybe<Scalars['String']>;
+  hideEcocredits?: Maybe<Scalars['Boolean']>;
+  hideRetirements?: Maybe<Scalars['Boolean']>;
 };
 
 /** Represents an update to a `Account`. Fields that are set will be updated. */
@@ -728,6 +736,8 @@ export type AccountPatch = {
   creatorId?: Maybe<Scalars['UUID']>;
   nonce?: Maybe<Scalars['String']>;
   addr?: Maybe<Scalars['String']>;
+  hideEcocredits?: Maybe<Scalars['Boolean']>;
+  hideRetirements?: Maybe<Scalars['Boolean']>;
 };
 
 /** A connection to a list of `Project` values, with data from `Post`. */
@@ -881,6 +891,10 @@ export enum AccountsOrderBy {
   NonceDesc = 'NONCE_DESC',
   AddrAsc = 'ADDR_ASC',
   AddrDesc = 'ADDR_DESC',
+  HideEcocreditsAsc = 'HIDE_ECOCREDITS_ASC',
+  HideEcocreditsDesc = 'HIDE_ECOCREDITS_DESC',
+  HideRetirementsAsc = 'HIDE_RETIREMENTS_ASC',
+  HideRetirementsDesc = 'HIDE_RETIREMENTS_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -5365,7 +5379,7 @@ export type AccountByAddrQuery = (
   { __typename?: 'Query' }
   & { accountByAddr?: Maybe<(
     { __typename?: 'Account' }
-    & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink'>
+    & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink' | 'hideEcocredits' | 'hideRetirements'>
   )> }
 );
 
@@ -5378,7 +5392,7 @@ export type AccountByIdQuery = (
   { __typename?: 'Query' }
   & { accountById?: Maybe<(
     { __typename?: 'Account' }
-    & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink' | 'addr' | 'nonce'>
+    & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink' | 'addr' | 'nonce' | 'hideEcocredits' | 'hideRetirements'>
   )> }
 );
 
@@ -5856,6 +5870,8 @@ export const AccountByAddrDocument = gql`
     description
     websiteLink
     twitterLink
+    hideEcocredits
+    hideRetirements
   }
 }
     `;
@@ -5900,6 +5916,8 @@ export const AccountByIdDocument = gql`
     twitterLink
     addr
     nonce
+    hideEcocredits
+    hideRetirements
   }
 }
     `;

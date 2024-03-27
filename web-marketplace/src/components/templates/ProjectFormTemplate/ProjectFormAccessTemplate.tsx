@@ -36,7 +36,7 @@ const ProjectFormAccessTemplate: React.FC<React.PropsWithChildren<Props>> = ({
       offChainProject?.adminAccountId === activeAccountId);
   const hasProject = !!onChainProject || !!offChainProject;
   const isDraft = !isEdit && !hasProject && projectId === DRAFT_ID;
-  console.log('isDraft', isDraft);
+
   return (
     <>
       {!loading && !hasProject && !isDraft && <NotFoundPage />}

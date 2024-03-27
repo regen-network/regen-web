@@ -19,6 +19,7 @@ import WithLoader from 'components/atoms/WithLoader';
 import { useDashboardContext } from '../Dashboard.context';
 import { useFetchProjectByAdmin } from './hooks/useFetchProjectsByAdmin';
 import { getDefaultProject, submitCreateProject } from './MyProjects.utils';
+import { DRAFT_ID } from './MyProjects.constants';
 
 const MyProjects = (): JSX.Element => {
   const [error, setError] = useState<string | null>(null);
@@ -47,16 +48,13 @@ const MyProjects = (): JSX.Element => {
           <Grid item xs={12} md={6} lg={4}>
             <CreateProjectCard
               isFirstProject={isFirstProject}
-              onClick={() =>
-                submitCreateProject({
-                  createProject,
-                  setError,
-                  navigate,
-                  activeAccountId,
-                  reactQueryClient,
-                  isIssuer,
-                })
-              }
+              onClick={() => {
+                if (isIssuer) {
+                  navigate(`/project-pages/${DRAFT_ID}/choose-credit-class`);
+                } else {
+                  navigate(`/project-pages/${DRAFT_ID}/basic-info`);
+                }
+              }}
               sx={{ height: { xs: '100%' } }}
             />
           </Grid>

@@ -17,68 +17,37 @@ import { ChooseCreditClassItem } from './ChooseCreditClass.Item';
 import { CreateOffchainProjectCard } from './ChooseCreditClass.OffchainCard';
 import { useErrorTimeout } from './hooks/useErrorTimeout';
 import { useGetCreditClassItems } from './hooks/useGetCreditClassOptions';
+import { useAuth } from 'lib/auth/auth';
 
 const ChooseCreditClass: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const graphqlClient = useApolloClient();
-  const reactQueryClient = useQueryClient();
   const [error, setError] = useErrorTimeout();
   const { projectId } = useParams();
   const { creditClassItems, loading } = useGetCreditClassItems();
-  const { setCreditClassId } = useCreateProjectContext();
+  const { setCreditClassId, setCreditClassOnChainId } =
+    useCreateProjectContext();
   const [updateProject] = useUpdateProjectByIdMutation();
-  const { data, isFetching } = useQuery(
-    getProjectByIdQuery({
-      client: graphqlClient,
-      enabled: !!projectId,
-      id: projectId,
-    }),
-  );
+  const { activeAccount } = useAuth();
 
-  const project = data?.data?.projectById;
-  const adminAddr = project?.accountByAdminAccountId?.addr;
+  const adminAddr = activeAccount?.addr;
   const creditClassLength = creditClassItems?.length;
 
-  async function handleSelection(
+  function handleSelection(
     creditClassId?: string,
     creditClassOnChainId?: string,
-  ): Promise<void> {
+  ) {
     const metadata = getProjectCreateBaseData(creditClassOnChainId);
 
-    if (creditClassOnChainId) {
-      setCreditClassId(creditClassOnChainId);
-    }
+    if (creditClassOnChainId) setCreditClassOnChainId(creditClassOnChainId);
+    if (creditClassId) setCreditClassId(creditClassId);
 
-    try {
-      try {
-        await updateProject({
-          variables: {
-            input: {
-              id: projectId,
-              projectPatch: {
-                creditClassId: creditClassId || undefined, // If creditClassId is '', pass undefined instead
-                metadata,
-              },
-            },
-          },
-        });
-        if (!!projectId) {
-          await reactQueryClient.invalidateQueries({
-            queryKey: getProjectByIdKey(projectId),
-          });
-        }
-        navigate(`/project-pages/${projectId}/basic-info`);
-      } catch (e) {
-        setError(`There was a problem updating this project: ${e}`);
-      }
-    } catch (e) {
-      setError(`There was a problem validating this credit class: ${e}`);
-    }
+    navigate(`/project-pages/${projectId}/basic-info`);
   }
   return (
     <ProjectFormAccessTemplate
-      loading={isFetching}
-      offChainProject={project}
+      loading={loading}
+      // offChainProject={project}
       adminAddr={adminAddr}
     >
       <ChooseCreditClassGrid

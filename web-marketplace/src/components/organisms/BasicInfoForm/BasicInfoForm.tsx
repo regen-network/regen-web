@@ -64,7 +64,7 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
   useEffect(() => {
     isDirtyRef.current = isDirty;
   }, [isDirtyRef, isDirty]);
-
+  console.log('form');
   return (
     <Form
       form={form}

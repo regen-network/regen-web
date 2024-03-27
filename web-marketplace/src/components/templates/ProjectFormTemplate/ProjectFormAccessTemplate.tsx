@@ -8,6 +8,8 @@ import { NotFoundPage } from 'pages/NotFound/NotFound';
 import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';
 
 import { ProjectDenied } from '../../organisms/ProjectDenied/ProjectDenied';
+import { useParams } from 'react-router-dom';
+import { DRAFT_ID } from 'pages/Dashboard/MyProjects/MyProjects.constants';
 
 type Props = {
   adminAddr?: string | null;
@@ -25,6 +27,7 @@ const ProjectFormAccessTemplate: React.FC<React.PropsWithChildren<Props>> = ({
   children,
   isEdit,
 }) => {
+  const { projectId } = useParams();
   const { wallet } = useWallet();
   const { activeAccountId } = useAuth();
   const isAdmin =
@@ -32,18 +35,19 @@ const ProjectFormAccessTemplate: React.FC<React.PropsWithChildren<Props>> = ({
     (offChainProject?.adminAccountId &&
       offChainProject?.adminAccountId === activeAccountId);
   const hasProject = !!onChainProject || !!offChainProject;
-
+  const isDraft = !isEdit && !hasProject && projectId === DRAFT_ID;
+  console.log('isDraft', isDraft);
   return (
     <>
-      {!loading && !hasProject && <NotFoundPage />}
-      {!loading && hasProject && !isAdmin && (
+      {!loading && !hasProject && !isDraft && <NotFoundPage />}
+      {!loading && hasProject && !isAdmin && !isDraft && (
         <ProjectDenied
           isEdit={isEdit}
           address={adminAddr}
           projectId={onChainProject?.id || offChainProject?.id}
         />
       )}
-      {!loading && hasProject && isAdmin && <>{children}</>}
+      {!loading && ((hasProject && isAdmin) || isDraft) && <>{children}</>}
     </>
   );
 };

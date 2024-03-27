@@ -41,11 +41,7 @@ export async function submitCreateProject({
       await reactQueryClient.invalidateQueries({
         queryKey: getAccountProjectsByIdQueryKey({ id: activeAccountId }),
       });
-      if (isIssuer) {
-        navigate(`/project-pages/${projectId}/choose-credit-class`);
-      } else {
-        navigate(`/project-pages/${projectId}/basic-info`);
-      }
+      
     }
   } catch (e) {
     setError('Error creating project');

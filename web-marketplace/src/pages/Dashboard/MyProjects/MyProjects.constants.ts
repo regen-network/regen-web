@@ -1,0 +1,1 @@
+export const DRAFT_ID = 'draft';

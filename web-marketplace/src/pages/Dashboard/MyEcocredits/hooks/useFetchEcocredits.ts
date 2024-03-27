@@ -27,12 +27,14 @@ interface Props {
   address?: string | null;
   creditClassId?: string;
   isPaginatedQuery?: boolean;
+  hideEcocredits?: boolean;
 }
 
 export const useFetchEcocredits = ({
   address,
   creditClassId,
   isPaginatedQuery = true,
+  hideEcocredits,
 }: Props): Response => {
   const { ecocreditClient } = useLedger();
   const reactQueryClient = useQueryClient();
@@ -49,7 +51,7 @@ export const useFetchEcocredits = ({
   const balancesQuery = useMemo(
     () =>
       getBalancesQuery({
-        enabled: !!ecocreditClient,
+        enabled: !!ecocreditClient && !hideEcocredits,
         client: ecocreditClient,
         request: {
           address: address ?? wallet?.address,
@@ -97,7 +99,10 @@ export const useFetchEcocredits = ({
 
   // AllCreditClasses
   const { data: creditClassData } = useQuery(
-    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllSanityCreditClassesQuery({
+      sanityClient,
+      enabled: !!sanityClient && !hideEcocredits,
+    }),
   );
 
   // Normalization

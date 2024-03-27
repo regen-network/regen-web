@@ -1,16 +1,33 @@
+import { useNavigate, useParams } from 'react-router-dom';
+
 import { useFetchBaskets } from 'pages/Dashboard/MyEcocredits/hooks/useFetchBaskets';
 import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 import { useFetchRetirements } from 'pages/Dashboard/MyEcocredits/hooks/useFetchRetirements';
 import { Portfolio } from 'components/organisms';
 
 import { useProfileData } from '../hooks/useProfileData';
+import { useEffect } from 'react';
 
 export const PortfolioTab = (): JSX.Element => {
-  const { address } = useProfileData();
+  const { address, account, isLoading } = useProfileData();
+  const { accountAddressOrId } = useParams<{ accountAddressOrId: string }>();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (
+      (!address || (!!account?.hideEcocredits && !!account?.hideRetirements)) &&
+      !isLoading
+    ) {
+      navigate(`/profiles/${accountAddressOrId}/projects`, { replace: true });
+    }
+  }, [address, isLoading]);
+
+  const hideEcocredits = !!account?.hideEcocredits;
+  const hideRetirements = !!account?.hideRetirements;
 
   // Ecocredits
   const { credits, paginationParams, setPaginationParams } = useFetchEcocredits(
-    { address },
+    { address, hideEcocredits },
   );
 
   // Retirement certificates
@@ -18,7 +35,7 @@ export const PortfolioTab = (): JSX.Element => {
     retirements,
     retirementsSetPaginationParams,
     retirementsPaginationParams,
-  } = useFetchRetirements({ address });
+  } = useFetchRetirements({ address, hideRetirements });
 
   // Basket tokens
   const { basketTokens } = useFetchBaskets({
@@ -36,6 +53,8 @@ export const PortfolioTab = (): JSX.Element => {
       onRetirementTableChange={retirementsSetPaginationParams}
       initialPaginationParams={paginationParams}
       isIgnoreOffset
+      hideEcocredits={hideEcocredits}
+      hideRetirements={hideRetirements}
     />
   );
 };

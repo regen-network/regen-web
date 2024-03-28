@@ -19,7 +19,6 @@ const ProjectsTab = (): JSX.Element => {
   const { adminProjects, isLoadingAdminProjects } = useFetchProjectByAdmin({
     adminAccountId: account?.id,
     adminAddress: address,
-    keepUnapproved: false,
   });
 
   return (

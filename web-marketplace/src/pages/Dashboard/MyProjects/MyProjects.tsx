@@ -35,6 +35,7 @@ const MyProjects = (): JSX.Element => {
   const { adminProjects, isLoadingAdminProjects } = useFetchProjectByAdmin({
     adminAccountId: activeAccountId,
     adminAddress: activeAccount?.addr ?? wallet?.address,
+    keepUnpublished: true,
   });
 
   const isFirstProject = !adminProjects || adminProjects?.length < 1;

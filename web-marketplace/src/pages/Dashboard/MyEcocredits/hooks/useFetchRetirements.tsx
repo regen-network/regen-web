@@ -27,7 +27,7 @@ import { getDataFromBatchDenomId } from '../MyEcocredits.utils';
 
 type Props = {
   address?: string | null;
-  hideRetirements: boolean;
+  hideRetirements?: boolean;
 };
 
 export const useFetchRetirements = ({ address, hideRetirements }: Props) => {

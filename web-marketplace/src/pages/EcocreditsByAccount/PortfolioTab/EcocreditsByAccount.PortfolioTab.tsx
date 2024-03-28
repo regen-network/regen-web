@@ -41,6 +41,7 @@ export const PortfolioTab = (): JSX.Element => {
   const { basketTokens } = useFetchBaskets({
     address,
     credits,
+    hideEcocredits,
   });
 
   return (

@@ -20,6 +20,7 @@ import { BasketTokens } from 'hooks/useBasketTokens';
 interface Params {
   credits: BatchInfoWithBalance[];
   address?: string | null;
+  hideEcocredits?: boolean;
 }
 
 interface Response {
@@ -30,7 +31,11 @@ interface Response {
   reloadBasketsBalance: () => Promise<void>;
 }
 
-export const useFetchBaskets = ({ credits, address }: Params): Response => {
+export const useFetchBaskets = ({
+  credits,
+  address,
+  hideEcocredits,
+}: Params): Response => {
   const { basketClient, bankClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
@@ -38,7 +43,7 @@ export const useFetchBaskets = ({ credits, address }: Params): Response => {
   // Baskets
   const { data: basketsData } = useQuery(
     getBasketsQuery({
-      enabled: !!basketClient,
+      enabled: !!basketClient && !hideEcocredits,
       client: basketClient,
       request: {},
     }),

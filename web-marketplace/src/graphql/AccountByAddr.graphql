@@ -8,5 +8,7 @@ query AccountByAddr($addr: String!) {
     description
     websiteLink
     twitterLink
+    hideEcocredits
+    hideRetirements
   }
 }

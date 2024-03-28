@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect, useState } from 'react';
+import React, { PropsWithChildren, useEffect, useMemo, useState } from 'react';
 import { Box, styled, SxProps } from '@mui/material';
 import Tabs, { TabsProps } from '@mui/material/Tabs';
 
@@ -86,6 +86,8 @@ const IconTabs: React.FC<React.PropsWithChildren<IconTabsProps>> = ({
     setValue(activeTab);
   }, [activeTab]);
 
+  const filteredTabs = useMemo(() => tabs.filter(tab => !tab.hidden), [tabs]);
+
   return (
     <div className={className}>
       <Box
@@ -103,12 +105,11 @@ const IconTabs: React.FC<React.PropsWithChildren<IconTabsProps>> = ({
           hideIndicator={hideIndicator}
           mobileFullWidth={mobileFullWidth}
         >
-          {tabs.map((tab, index) => (
+          {filteredTabs.map((tab, index) => (
             <IconTab
               key={`tab-${index}`}
               label={tab.label}
               icon={tab?.icon}
-              hidden={tab?.hidden}
               size={size}
               href={tab.href}
               linkComponent={linkComponent}
@@ -122,12 +123,12 @@ const IconTabs: React.FC<React.PropsWithChildren<IconTabsProps>> = ({
         </StyledTabs>
       </Box>
       {hasContent &&
-        tabs.map((tab, index) => (
+        filteredTabs.map((tab, index) => (
           <TabPanel
             key={index}
             value={value}
             index={index}
-            hidden={tab.hidden || value !== index}
+            hidden={value !== index}
             sxs={{ ...sxs?.panel }}
           >
             {tab.content}

@@ -10,7 +10,6 @@ import { LinkComponentProp } from './IconTabs';
 
 export interface IconTabProps extends RegenTab {
   icon?: JSX.Element;
-  hidden?: boolean;
   size?: TextSize;
   href?: string;
   linkComponent?: LinkComponentProp;
@@ -43,14 +42,13 @@ const StyledTab = styled(Tab, {
 
 const IconTab = ({
   label,
-  hidden,
   size = 'lg',
   sxs,
   href,
   linkComponent,
   ...props
 }: IconTabProps): JSX.Element | null => {
-  return hidden ? null : (
+  return (
     // @ts-ignore
     <StyledTab
       LinkComponent={linkComponent}

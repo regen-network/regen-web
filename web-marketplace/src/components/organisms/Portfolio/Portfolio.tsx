@@ -95,6 +95,16 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
         ),
         hidden: hideRetirements,
       },
+      {
+        label: 'Basket Tokens',
+        content: (
+          <BasketsTable
+            basketTokens={basketTokens}
+            renderActionButtons={renderBasketActionButtons}
+          />
+        ),
+        hidden: hideEcocredits || basketTokens.length === 0,
+      },
     ],
     [
       credits,
@@ -118,16 +128,9 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
           tabs={tabs}
           size={'xl'}
           sxs={tabsStyles.tabsInsideCard}
-          activeTab={hideEcocredits ? 1 : activePortfolioTab}
+          activeTab={activePortfolioTab}
         />
       </Card>
-      <Box sx={{ pt: { xs: 9.25, sm: 8.5 } }}>
-        <Label sx={sxs.title}>basket tokens</Label>
-        <BasketsTable
-          basketTokens={basketTokens}
-          renderActionButtons={renderBasketActionButtons}
-        />
-      </Box>
     </Box>
   );
 };

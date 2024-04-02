@@ -1,8 +1,9 @@
+import { isValidElement } from 'react';
 import { Link, SxProps } from '@mui/material';
 import Grid, { GridDirection } from '@mui/material/Grid';
 
 import { headerFontFamily, Theme } from '../../theme/muiTheme';
-import { BlockContent } from '../block-content';
+import { BlockContent, SanityBlockContent } from '../block-content';
 import { Body, Subtitle, Title } from '../typography';
 import { getMobileSize, getSizeVariant, TextSize } from '../typography/sizing';
 import UserAvatar from './UserAvatar';
@@ -10,7 +11,7 @@ import { UserInfoTypes } from './UserInfo.types';
 
 export interface User {
   name: string;
-  nameRaw?: string | JSX.Element;
+  nameRaw?: string | JSX.Element | SanityBlockContent;
   type: UserInfoTypes;
   location?: string;
   image?: string | null;
@@ -30,6 +31,7 @@ interface UserInfoProps {
   titleComponent?: 'title' | 'subtitle';
   border?: boolean;
   sx?: SxProps<Theme>;
+  nameHasPadding?: boolean;
 }
 export default function UserInfo({
   user,
@@ -39,13 +41,18 @@ export default function UserInfo({
   border = true,
   titleComponent = 'title',
   sx = [],
+  nameHasPadding = true,
 }: UserInfoProps): JSX.Element {
   const sizeVariant = getSizeVariant(size);
   const mobileSizeVariant = getSizeVariant(getMobileSize(size));
   const TitleComponent = titleComponent === 'title' ? Title : Subtitle;
   const { name: userName, nameRaw } = user;
   const name = nameRaw ? (
-    <BlockContent content={nameRaw} />
+    isValidElement(nameRaw) ? (
+      nameRaw
+    ) : (
+      <BlockContent content={nameRaw} />
+    )
   ) : (
     <TitleComponent
       sx={({ typography }) => {
@@ -77,9 +84,9 @@ export default function UserInfo({
       <Grid
         item
         sx={{
-          ml: size === 'xs' ? 3.5 : 4.8,
+          ml: nameHasPadding ? (size === 'xs' ? 3.5 : 4.8) : 0,
           textAlign: direction === 'column' ? 'center' : 'left',
-          pt: 2,
+          pt: nameHasPadding ? 2 : 0,
         }}
       >
         {user.link ? (

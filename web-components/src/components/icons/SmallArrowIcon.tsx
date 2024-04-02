@@ -56,21 +56,21 @@ export default function SmallArrowIcon({
         height="11.5067"
         rx="0.25"
         transform="rotate(-90 0 5.13013)"
-        fill="#4FB573"
+        fill="currentColor"
       />
       <rect
         width="1.31038"
         height="6.19649"
         rx="0.25"
         transform="matrix(0.689918 -0.723888 0.689918 0.723888 7.8208 0.948547)"
-        fill="#4FB573"
+        fill="currentColor"
       />
       <rect
         width="1.31038"
         height="6.19649"
         rx="0.25"
         transform="matrix(0.689918 0.723888 0.689918 -0.723888 7.81836 8.05145)"
-        fill="#4FB573"
+        fill="currentColor"
       />
     </SvgIcon>
   );

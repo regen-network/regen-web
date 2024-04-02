@@ -2,7 +2,6 @@ import React from 'react';
 import { Box } from '@mui/material';
 import Grid, { GridProps } from '@mui/material/Grid';
 
-import ErrorBanner from 'web-components/src/components/banner/ErrorBanner';
 import { Loading } from 'web-components/src/components/loading';
 import OnBoardingSection from 'web-components/src/components/section/OnBoardingSection';
 import { Body } from 'web-components/src/components/typography';
@@ -13,18 +12,16 @@ import {
   CHOOSE_CREDIT_CLASS_DESCRIPTION,
   CHOOSE_CREDIT_CLASS_HREF,
   CHOOSE_CREDIT_CLASS_LINK,
-  ERROR_TIMEOUT,
 } from './ChooseCreditClass.config';
 
 interface TemplateProps {
   justifyContent?: GridProps['justifyContent'];
-  error: string;
   loading?: boolean;
   isIssuer?: boolean;
 }
 
 const ChooseCreditClassGrid: React.FC<React.PropsWithChildren<TemplateProps>> =
-  ({ justifyContent = 'flex-start', error, loading, isIssuer, children }) => {
+  ({ justifyContent = 'flex-start', loading, isIssuer, children }) => {
     return (
       <Box
         sx={theme => ({
@@ -58,7 +55,6 @@ const ChooseCreditClassGrid: React.FC<React.PropsWithChildren<TemplateProps>> =
           >
             {loading ? <Loading /> : children}
           </Grid>
-          {error && <ErrorBanner text={error} duration={ERROR_TIMEOUT} />}
         </OnBoardingSection>
       </Box>
     );

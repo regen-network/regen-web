@@ -1,14 +1,11 @@
-import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
-import ErrorBanner from 'web-components/src/components/banner/ErrorBanner';
 import { CreateProjectCard } from 'web-components/src/components/cards/CreateCards/CreateProjectCard';
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
 
-import { useCreateProjectMutation } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
@@ -18,15 +15,13 @@ import WithLoader from 'components/atoms/WithLoader';
 
 import { useDashboardContext } from '../Dashboard.context';
 import { useFetchProjectByAdmin } from './hooks/useFetchProjectsByAdmin';
-import { getDefaultProject, submitCreateProject } from './MyProjects.utils';
+import { getDefaultProject } from './MyProjects.utils';
+import { DRAFT_ID } from './MyProjects.constants';
 
 const MyProjects = (): JSX.Element => {
-  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
   const { isIssuer, isProjectAdmin } = useDashboardContext();
-  const [createProject] = useCreateProjectMutation();
-  const reactQueryClient = useQueryClient();
   const { track } = useTracker();
   const [projectsCurrentStep] = useAtom(projectsCurrentStepAtom);
   const { wallet } = useWallet();
@@ -47,16 +42,13 @@ const MyProjects = (): JSX.Element => {
           <Grid item xs={12} md={6} lg={4}>
             <CreateProjectCard
               isFirstProject={isFirstProject}
-              onClick={() =>
-                submitCreateProject({
-                  createProject,
-                  setError,
-                  navigate,
-                  activeAccountId,
-                  reactQueryClient,
-                  isIssuer,
-                })
-              }
+              onClick={() => {
+                if (isIssuer) {
+                  navigate(`/project-pages/${DRAFT_ID}/choose-credit-class`);
+                } else {
+                  navigate(`/project-pages/${DRAFT_ID}/basic-info`);
+                }
+              }}
               sx={{ height: { xs: '100%' } }}
             />
           </Grid>
@@ -98,7 +90,6 @@ const MyProjects = (): JSX.Element => {
             );
           })}
       </Grid>
-      {error && <ErrorBanner text={error} />}
     </>
   );
 };

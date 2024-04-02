@@ -9,6 +9,8 @@ type ContextType = {
   creditClassId?: string;
   setCreditClassId: (creditClassId?: string) => void;
   formRef?: FormRef;
+  creditClassOnChainId?: string;
+  setCreditClassOnChainId: (creditClassId?: string) => void;
   shouldNavigateRef?: MutableRefObject<boolean>;
   isDraftRef?: MutableRefObject<boolean>;
 };
@@ -18,6 +20,8 @@ const defaultProjectCreateContext = createContext<ContextType>({
   setDeliverTxResponse: () => void 0,
   creditClassId: undefined,
   setCreditClassId: () => void 0,
+  creditClassOnChainId: undefined,
+  setCreditClassOnChainId: () => void 0,
   formRef: undefined,
   shouldNavigateRef: undefined,
   isDraftRef: undefined,
@@ -28,6 +32,7 @@ export const ProjectCreate = (): JSX.Element => {
   const [deliverTxResponse, setDeliverTxResponse] =
     useState<DeliverTxResponse>();
   const [creditClassId, setCreditClassId] = useState<string>('');
+  const [creditClassOnChainId, setCreditClassOnChainId] = useState<string>('');
   const formRef = useRef();
   const shouldNavigateRef = useRef(true);
   const isDraftRef = useRef(false);
@@ -39,6 +44,8 @@ export const ProjectCreate = (): JSX.Element => {
         setDeliverTxResponse,
         creditClassId,
         setCreditClassId,
+        creditClassOnChainId,
+        setCreditClassOnChainId,
         formRef,
         shouldNavigateRef,
         isDraftRef,

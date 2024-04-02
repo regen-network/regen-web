@@ -31,6 +31,9 @@ import {
 } from './BasicInfoForm.schema';
 import { useBasicInfoStyles } from './BasicInfoForm.styles';
 import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
+import { useSubmitCreateProject } from './hooks/useSubmitCreateProject';
+import { DRAFT_ID } from 'pages/Dashboard/MyProjects/MyProjects.constants';
+import { useParams } from 'react-router-dom';
 
 interface BasicInfoFormProps {
   onSubmit: (props: MetadataSubmitProps) => Promise<void>;
@@ -44,6 +47,7 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
   onPrev,
 }) => {
   const { classes, cx } = useBasicInfoStyles();
+  const { projectId } = useParams();
   const saveAndExit = useProjectSaveAndExit();
   const { formRef, shouldNavigateRef, isDraftRef } = useCreateProjectContext();
   const form = useZodForm({
@@ -60,6 +64,7 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
   });
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const { confirmSave, isEdit, isDirtyRef } = useProjectEditContext();
+  const { submitCreateProject } = useSubmitCreateProject();
 
   useEffect(() => {
     isDirtyRef.current = isDirty;
@@ -72,13 +77,20 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
       isDraftRef={isDraftRef}
       onSubmit={async values => {
         try {
-          await onSubmit({
-            values,
-            shouldNavigate: shouldNavigateRef?.current,
-          });
-          if (isEdit && confirmSave) {
-            confirmSave();
-            form.reset({}, { keepValues: true });
+          if (!isEdit && projectId === DRAFT_ID) {
+            await submitCreateProject({
+              values,
+              shouldNavigate: shouldNavigateRef?.current,
+            });
+          } else {
+            await onSubmit({
+              values,
+              shouldNavigate: shouldNavigateRef?.current,
+            });
+            if (isEdit && confirmSave) {
+              confirmSave();
+              form.reset({}, { keepValues: true });
+            }
           }
         } catch (e) {
           setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);

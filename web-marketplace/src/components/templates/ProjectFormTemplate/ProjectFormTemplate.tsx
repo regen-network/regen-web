@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';
@@ -8,6 +8,7 @@ import { EditFormTemplate } from './EditFormTemplate';
 import { OnboardingFormTemplate } from './OnboardingFormTemplate';
 import { ProjectFormAccessTemplate } from './ProjectFormAccessTemplate';
 import { CREATE_PROJECT_URL_REGEX } from './ProjectFormTemplate.constants';
+import { DRAFT_ID } from 'pages/Dashboard/MyProjects/MyProjects.constants';
 
 type Props = {
   isEdit?: boolean;
@@ -25,6 +26,7 @@ const ProjectFormTemplate: React.FC<React.PropsWithChildren<Props>> = ({
   onChainProject,
   children,
 }) => {
+  const { projectId } = useParams();
   const adminAddr =
     onChainProject?.admin || offChainProject?.accountByAdminAccountId?.addr;
   const location = useLocation();
@@ -56,7 +58,7 @@ const ProjectFormTemplate: React.FC<React.PropsWithChildren<Props>> = ({
           (!onChainProject && offChainProject?.published)) && (
           <EditFormTemplate>{children}</EditFormTemplate>
         )}
-      {!!offChainProject && !isEdit && (
+      {(!!offChainProject || projectId === DRAFT_ID) && !isEdit && (
         <OnboardingFormTemplate activeStep={0} title={title}>
           {children}
         </OnboardingFormTemplate>

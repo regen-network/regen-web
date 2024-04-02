@@ -31,10 +31,13 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
     }),
   );
 
-  const projectOnChainId = data?.data?.projectById?.onChainId;
-  const projectOffChainId = data?.data?.projectById?.id;
+  const project = data?.data?.projectById;
+  const projectOnChainId = project?.onChainId;
+  const projectOffChainId = project?.id;
   const currentProjectId = projectOnChainId ?? projectOffChainId;
-  const projectUrl = `${window.location.origin}/project/${currentProjectId}`;
+  const projectUrl = `${window.location.origin}/project/${
+    project?.slug ?? currentProjectId
+  }`;
 
   return (
     <OnboardingFormTemplate

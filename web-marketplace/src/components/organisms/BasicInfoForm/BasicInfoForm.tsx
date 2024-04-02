@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useFormState } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
+import slugify from 'slug';
 
 import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
 import InputLabel from 'web-components/src/components/inputs/InputLabel';
@@ -12,7 +14,9 @@ import TextField from 'web-components/src/components/inputs/new/TextField/TextFi
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
 import { useProjectEditContext } from 'pages';
+import { DRAFT_ID } from 'pages/Dashboard/MyProjects/MyProjects.constants';
 import { useCreateProjectContext } from 'pages/ProjectCreate';
+import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import { MetadataSubmitProps } from 'hooks/projects/useProjectWithMetadata';
@@ -30,10 +34,7 @@ import {
   BasicInfoFormSchemaType,
 } from './BasicInfoForm.schema';
 import { useBasicInfoStyles } from './BasicInfoForm.styles';
-import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import { useSubmitCreateProject } from './hooks/useSubmitCreateProject';
-import { DRAFT_ID } from 'pages/Dashboard/MyProjects/MyProjects.constants';
-import { useParams } from 'react-router-dom';
 
 interface BasicInfoFormProps {
   onSubmit: (props: MetadataSubmitProps) => Promise<void>;
@@ -70,32 +71,65 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
     isDirtyRef.current = isDirty;
   }, [isDirtyRef, isDirty]);
 
+  const submitUntilSuccess = useCallback(
+    async (values: BasicInfoFormSchemaType, slugIndex: number) => {
+      try {
+        const slugEnd = slugIndex ? `-${slugIndex + 1}` : '';
+        const slug = `${slugify(values['schema:name'])}${slugEnd}`;
+        if (!isEdit && projectId === DRAFT_ID) {
+          await submitCreateProject({
+            values,
+            shouldNavigate: shouldNavigateRef?.current,
+            projectInput: {
+              slug,
+            },
+          });
+        } else {
+          await onSubmit({
+            values,
+            shouldNavigate: shouldNavigateRef?.current,
+            projectPatch:
+              !!values['schema:name'] &&
+              initialValues?.['schema:name'] !== values['schema:name']
+                ? {
+                    slug,
+                  }
+                : undefined,
+          });
+          if (isEdit && confirmSave) {
+            confirmSave();
+            form.reset({}, { keepValues: true });
+          }
+        }
+      } catch (e) {
+        if (
+          (e as Error)?.message.includes(
+            'duplicate key value violates unique constraint "project_slug_key"',
+          )
+        ) {
+          submitUntilSuccess(values, slugIndex + 1);
+        } else setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
+      }
+    },
+    [
+      confirmSave,
+      form,
+      initialValues,
+      isEdit,
+      onSubmit,
+      projectId,
+      setErrorBannerTextAtom,
+      shouldNavigateRef,
+      submitCreateProject,
+    ],
+  );
+
   return (
     <Form
       form={form}
       formRef={formRef}
       isDraftRef={isDraftRef}
-      onSubmit={async values => {
-        try {
-          if (!isEdit && projectId === DRAFT_ID) {
-            await submitCreateProject({
-              values,
-              shouldNavigate: shouldNavigateRef?.current,
-            });
-          } else {
-            await onSubmit({
-              values,
-              shouldNavigate: shouldNavigateRef?.current,
-            });
-            if (isEdit && confirmSave) {
-              confirmSave();
-              form.reset({}, { keepValues: true });
-            }
-          }
-        } catch (e) {
-          setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
-        }
-      }}
+      onSubmit={values => submitUntilSuccess(values, 0)}
     >
       <OnBoardingCard>
         <TextField

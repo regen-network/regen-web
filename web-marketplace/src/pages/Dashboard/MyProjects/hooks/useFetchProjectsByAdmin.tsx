@@ -18,13 +18,13 @@ import { findSanityCreditClass } from 'components/templates/ProjectDetails/Proje
 import { useFetchProjectsWithOrders } from './useFetchProjectsWithOrders';
 
 type Params = {
-  keepUnapproved?: boolean;
+  keepUnpublished?: boolean;
   adminAddress?: string | null;
   adminAccountId?: string;
 };
 
 export const useFetchProjectByAdmin = ({
-  keepUnapproved = true,
+  keepUnpublished = false,
   adminAddress,
   adminAccountId,
 }: Params) => {
@@ -69,9 +69,10 @@ export const useFetchProjectByAdmin = ({
   // Get data for projects that are only off chain
   const onlyOffChainProjects =
     adminAccountId === accountData?.accountById?.id
-      ? offChainProjects
-          ?.filter(project => !project?.onChainId)
-          .filter(project => project?.approved || keepUnapproved)
+      ? offChainProjects?.filter(
+          project =>
+            !project?.onChainId && (project?.published || keepUnpublished),
+        )
       : undefined;
 
   // Sanity prefinance projects

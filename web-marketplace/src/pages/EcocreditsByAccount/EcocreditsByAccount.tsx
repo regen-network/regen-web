@@ -65,6 +65,8 @@ export const EcocreditsByAccount = (): JSX.Element => {
         label: 'Portfolio',
         icon: <CreditsIcon fontSize="small" linearGradient />,
         href: `/profiles/${accountAddressOrId}/portfolio`,
+        hidden:
+          !address || (!!account?.hideEcocredits && !!account?.hideRetirements),
       },
       {
         label: 'Projects',
@@ -88,7 +90,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
         label: 'Bridge',
         icon: <BridgeIcon linearGradient />,
         href: `/profiles/${accountAddressOrId}/bridge`,
-        hidden: !isBridgeEnabled,
+        hidden: !isBridgeEnabled || !address,
       },
     ],
     [

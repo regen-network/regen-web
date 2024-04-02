@@ -34,6 +34,8 @@ export interface PortfolioProps {
   retirementsPaginationParams?: TablePaginationParams;
   activePortfolioTab?: number;
   isIgnoreOffset?: boolean;
+  hideEcocredits?: boolean;
+  hideRetirements?: boolean;
 }
 
 const sxs = {
@@ -55,8 +57,11 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
   retirementsPaginationParams,
   activePortfolioTab = 0,
   isIgnoreOffset = false,
+  hideEcocredits,
+  hideRetirements,
 }) => {
   const navigate = useNavigate();
+
   const tabs: IconTabProps[] = useMemo(
     () => [
       {
@@ -70,6 +75,7 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
             isIgnoreOffset={isIgnoreOffset}
           />
         ),
+        hidden: hideEcocredits,
       },
       {
         label: 'Retirement Certificates',
@@ -87,6 +93,17 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
             initialPaginationParams={retirementsPaginationParams}
           />
         ),
+        hidden: hideRetirements,
+      },
+      {
+        label: 'Basket Tokens',
+        content: (
+          <BasketsTable
+            basketTokens={basketTokens}
+            renderActionButtons={renderBasketActionButtons}
+          />
+        ),
+        hidden: hideEcocredits || basketTokens.length === 0,
       },
     ],
     [
@@ -99,6 +116,8 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
       retirementsPaginationParams,
       isIgnoreOffset,
       navigate,
+      hideEcocredits,
+      hideRetirements,
     ],
   );
 
@@ -112,13 +131,6 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
           activeTab={activePortfolioTab}
         />
       </Card>
-      <Box sx={{ pt: { xs: 9.25, sm: 8.5 } }}>
-        <Label sx={sxs.title}>basket tokens</Label>
-        <BasketsTable
-          basketTokens={basketTokens}
-          renderActionButtons={renderBasketActionButtons}
-        />
-      </Box>
     </Box>
   );
 };

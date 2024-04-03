@@ -34,10 +34,8 @@ export async function deleteImage(
   apiServerUrl: string | undefined,
 ): Promise<void> {
   const fileName = imageUrl.split(`${projectId}/`)[1];
-  return axios.delete(
-    `${apiServerUrl}/marketplace/v1/files/${projectId}/${fileName}`,
-    {
-      withCredentials: true,
-    },
-  );
+  await fetch(`${apiServerUrl}/marketplace/v1/files/${projectId}/${fileName}`, {
+    method: 'DELETE',
+    credentials: 'include',
+  });
 }

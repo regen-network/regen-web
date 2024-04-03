@@ -76,12 +76,13 @@ export const MediaFormStory = ({
   });
   const handleDelete = getHandleDelete({
     fileNamesToDeleteRef,
-    callback: () => {
-      setValue('regen:storyMedia', {
-        '@type': '',
-        'schema:url': '',
-        'schema:creditText': '',
-      });
+    callback: (doSetValue: boolean = true) => {
+      if (doSetValue)
+        setValue('regen:storyMedia', {
+          '@type': '',
+          'schema:url': '',
+          'schema:creditText': '',
+        });
       isDirtyRef.current = true;
     },
   });

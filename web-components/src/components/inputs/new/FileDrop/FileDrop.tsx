@@ -4,7 +4,7 @@ import { Crop } from 'react-image-crop';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Feature } from 'geojson';
 
-import { getImageSrc } from '../../../image-crop/canvas-utils';
+import { getImageSrc, srcToFile } from '../../../image-crop/canvas-utils';
 import FieldFormControl, {
   FieldFormControlProps,
 } from '../FieldFormControl/FieldFormControl';
@@ -13,8 +13,6 @@ import { useFileDropStyles } from './FileDrop.styles';
 import { FileDropRenderModalProps } from './FileDrop.types';
 import { toBase64 } from './FileDrop.utils';
 import { FileDropZone } from './FileDrop.Zone';
-import { Loading } from '../../../../components/loading';
-import { cn } from '../../../../utils/styles/cn';
 
 export interface FileDropProps extends Partial<FieldFormControlProps> {
   className?: string;
@@ -43,7 +41,7 @@ export interface FileDropProps extends Partial<FieldFormControlProps> {
   isCropSubmitDisabled?: boolean;
   renderModal: (_: FileDropRenderModalProps) => React.ReactNode;
   setValue: (value: string, mimeType: string, fieldIndex: number) => void;
-  onDelete?: (fileName: string) => Promise<void>;
+  onDelete?: (fileName: string, doSetValue?: boolean) => Promise<void>;
   onUpload?: (imageFile: File) => Promise<string | undefined>;
   accept?: string;
   multi?: boolean;
@@ -85,9 +83,9 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
     ref,
   ) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isEdit, setIsEdit] = useState(false);
     const [initialImage, setInitialImage] = useState('');
     const [selectedFiles, setSelectedFiles] = useState<Array<File>>([]);
-    const [loading, setLoading] = useState(false);
 
     const { classes: styles, cx } = useFileDropStyles();
     const isFirstField = fieldIndex === 0;
@@ -144,20 +142,24 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
     const onModalSubmit = async (
       croppedImage: HTMLImageElement,
     ): Promise<void> => {
+      // Delete file that has been edited
+      if (isEdit && onDelete && value) {
+        if (onDelete) {
+          await onDelete(value, false);
+        }
+      }
       const currentFile = selectedFiles[0];
-      setIsModalOpen(false);
-      setLoading(true);
-      const result = await getImageSrc(
+      const result = await getImageSrc({
         croppedImage,
         onUpload,
-        currentFile.name,
-      );
-      setLoading(false);
+        fileName: currentFile.name,
+      });
 
       if (result) {
         setValue(result, currentFile.type, fieldIndex);
         const remainingFiles = selectedFiles.slice(1);
         setSelectedFiles(remainingFiles);
+        setIsModalOpen(false);
         if (multi && remainingFiles.length > 0) {
           toBase64(remainingFiles[0]).then(base64String => {
             if (typeof base64String === 'string') {
@@ -177,7 +179,22 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
       }
     };
 
-    const handleEdit = () => setIsModalOpen(true);
+    const handleEdit = async () => {
+      if (value) {
+        const fileName = decodeURI(value.split('/').pop() || '');
+        if (fileName) {
+          const file = await srcToFile(value, fileName);
+          setSelectedFiles([file]);
+          toBase64(file).then(base64String => {
+            if (typeof base64String === 'string') {
+              setIsEdit(true);
+              setIsModalOpen(true);
+              setInitialImage(base64String);
+            }
+          });
+        }
+      }
+    };
 
     return (
       <>
@@ -189,12 +206,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
           optional={isFirstField ? optional : undefined}
           {...fieldProps}
         >
-          {loading && (
-            <div className={cn(classes?.main, 'bg-grey-200 mb-10')}>
-              <Loading />
-            </div>
-          )}
-          {!loading && value && (
+          {value && (
             <FileDropFile
               handleDelete={handleDelete}
               handleEdit={handleEdit}

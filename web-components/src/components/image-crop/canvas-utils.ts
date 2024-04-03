@@ -71,22 +71,29 @@ export function canvasToBlob(
   });
 }
 
-export function srcToFile(
+export async function srcToFile(
   src: string,
   fileName: string,
-  mimeType: string,
+  mimeType?: string,
 ): Promise<File> {
-  return fetch(src)
-    .then(res => res.arrayBuffer())
-    .then(buf => new File([buf], fileName, { type: mimeType }));
+  const res = await fetch(src);
+  const buf = await res.arrayBuffer();
+  return new File([buf], fileName, { type: mimeType });
 }
 
-export async function getImageSrc(
-  croppedImage: HTMLImageElement,
-  onUpload?: (file: File) => Promise<string | undefined>,
-  fileName?: string,
-  fileType?: string,
-): Promise<string | undefined> {
+type GetImageSrcParams = {
+  croppedImage: HTMLImageElement;
+  onUpload?: (file: File) => Promise<string | undefined>;
+  fileName?: string;
+  fileType?: string;
+};
+
+export async function getImageSrc({
+  croppedImage,
+  onUpload,
+  fileName,
+  fileType,
+}: GetImageSrcParams): Promise<string | undefined> {
   let result: string | undefined = croppedImage.src;
   const timestamp = new Date().getTime();
   const fileNameWithTimestamp = `${timestamp}-${fileName}`;

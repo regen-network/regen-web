@@ -4,12 +4,12 @@ import { MutableRefObject } from 'react';
 
 export type getHandleDeleteParams = {
   fileNamesToDeleteRef: MutableRefObject<string[]>;
-  callback?: () => void;
+  callback?: (doSetValue: boolean) => void;
 };
 
 export const getHandleDelete =
   ({ fileNamesToDeleteRef, callback }: getHandleDeleteParams) =>
-  async (fileName: string): Promise<void> => {
+  async (fileName: string, doSetValue: boolean = true): Promise<void> => {
     fileNamesToDeleteRef.current.push(fileName);
-    callback && callback();
+    callback && callback(doSetValue);
   };

@@ -80,6 +80,7 @@ const Media = (): JSX.Element => {
           initialValues={initialValues}
           onPrev={navigatePrev}
           projectId={offChainProject?.id}
+          navigateNext={navigateNext}
         />
       </WithLoader>
     </ProjectFormTemplate>

@@ -109,19 +109,20 @@ export const MediaFormPhotos = ({
   });
   const handleDelete = getHandleDelete({
     fileNamesToDeleteRef,
-    callback: () => {
-      setValue('regen:previewPhoto', {
-        'schema:url': '',
-        'schema:creditText': '',
-      });
+    callback: (doSetValue: boolean = true) => {
+      if (doSetValue)
+        setValue('regen:previewPhoto', {
+          'schema:url': '',
+          'schema:creditText': '',
+        });
       isDirtyRef.current = true;
     },
   });
   const getHandleDeleteWithIndex = (fieldIndex: number) =>
     getHandleDelete({
       fileNamesToDeleteRef,
-      callback: () => {
-        remove(fieldIndex);
+      callback: (doSetValue: boolean = true) => {
+        if (doSetValue) remove(fieldIndex);
         isDirtyRef.current = true;
       },
     });

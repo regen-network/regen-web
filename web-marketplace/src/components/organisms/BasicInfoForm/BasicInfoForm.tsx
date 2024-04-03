@@ -89,6 +89,7 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
             values,
             shouldNavigate: shouldNavigateRef?.current,
             projectPatch:
+              !isEdit &&
               !!values['schema:name'] &&
               initialValues?.['schema:name'] !== values['schema:name']
                 ? {

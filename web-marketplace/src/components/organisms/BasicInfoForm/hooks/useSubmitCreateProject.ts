@@ -34,31 +34,34 @@ export const useSubmitCreateProject = () => {
     }: SubmitCreateProjectParams) => {
       const metadata = getProjectCreateBaseData(creditClassOnChainId);
 
-      try {
-        const res = await createProject({
-          variables: {
-            input: {
-              project: {
-                adminAccountId: activeAccountId,
-                creditClassId: creditClassId || undefined, // If creditClassId is '', pass undefined instead
-                metadata: { ...metadata, ...values },
-                ...projectInput,
-              },
+      const res = await createProject({
+        variables: {
+          input: {
+            project: {
+              adminAccountId: activeAccountId,
+              creditClassId: creditClassId || undefined, // If creditClassId is '', pass undefined instead
+              metadata: { ...metadata, ...values },
+              ...projectInput,
             },
           },
+        },
+      });
+      const projectId = res?.data?.createProject?.project?.id;
+      if (projectId) {
+        await reactQueryClient.invalidateQueries({
+          queryKey: getAccountProjectsByIdQueryKey({ id: activeAccountId }),
         });
-        const projectId = res?.data?.createProject?.project?.id;
-        if (projectId) {
-          await reactQueryClient.invalidateQueries({
-            queryKey: getAccountProjectsByIdQueryKey({ id: activeAccountId }),
-          });
-          if (shouldNavigate) navigate(`/project-pages/${projectId}/location`);
-        }
-      } catch (e) {
-        throw new Error('Error creating project');
+        if (shouldNavigate) navigate(`/project-pages/${projectId}/location`);
       }
     },
-    [],
+    [
+      activeAccountId,
+      createProject,
+      creditClassId,
+      creditClassOnChainId,
+      navigate,
+      reactQueryClient,
+    ],
   );
   return { submitCreateProject };
 };

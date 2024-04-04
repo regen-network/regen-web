@@ -103,6 +103,7 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
           }
         }
       } catch (e) {
+        console.log('e', e);
         if (
           (e as Error)?.message.includes(
             'duplicate key value violates unique constraint "project_slug_key"',

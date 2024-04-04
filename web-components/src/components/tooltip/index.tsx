@@ -86,8 +86,11 @@ const CustomTooltip = withStyles(Tooltip, (theme: Theme) => ({
   popperArrow: arrowGenerator(),
 }));
 
-const RegenTooltip = (props: TooltipProps): JSX.Element => (
-  <CustomTooltip enterTouchDelay={100} {...props} />
-);
+const RegenTooltip = (props: TooltipProps): JSX.Element =>
+  props.title ? (
+    <CustomTooltip enterTouchDelay={100} {...props} />
+  ) : (
+    <>{props.children}</>
+  );
 
 export default RegenTooltip;

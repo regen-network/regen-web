@@ -50,6 +50,32 @@ export type ActionCardSorting = {
   image?: Maybe<CustomImageSorting>;
 };
 
+export type BannerCard = {
+  __typename?: 'BannerCard';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+  image?: Maybe<CustomImage>;
+  buttonLabel?: Maybe<Scalars['String']>;
+};
+
+export type BannerCardFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  image?: Maybe<CustomImageFilter>;
+  buttonLabel?: Maybe<StringFilter>;
+};
+
+export type BannerCardSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  image?: Maybe<CustomImageSorting>;
+  buttonLabel?: Maybe<SortOrder>;
+};
+
 export type BasicStepCardSection = {
   __typename?: 'BasicStepCardSection';
   _key?: Maybe<Scalars['String']>;
@@ -4842,6 +4868,44 @@ export type PresskitTimelineSectionSorting = {
   completedItemIndex?: Maybe<SortOrder>;
 };
 
+export type ProfilePage = Document & {
+  __typename?: 'ProfilePage';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  bannerCard?: Maybe<BannerCard>;
+};
+
+export type ProfilePageFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  bannerCard?: Maybe<BannerCardFilter>;
+};
+
+export type ProfilePageSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  bannerCard?: Maybe<BannerCardSorting>;
+};
+
 export type Program = Document & {
   __typename?: 'Program';
   /** Document ID */
@@ -4899,7 +4963,7 @@ export type Project = Document & {
   /** Current document revision */
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
-  /** on-chain project id, off-chain uuid or slug */
+  /** Slug should be the prefered option if the project has a slug, otherwise it might result in the data below not being displayed on the project page. */
   projectId?: Maybe<Scalars['String']>;
   projectPrefinancing?: Maybe<ProjectPrefinancing>;
   credibilityCards?: Maybe<Array<Maybe<DetailsCard>>>;
@@ -5023,6 +5087,7 @@ export type ProjectPage = Document & {
   /** Current document revision */
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
+  bannerCard?: Maybe<BannerCard>;
   /** This content will appear on all project pages */
   gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSection>;
   projectDetailsSection?: Maybe<DetailsSection>;
@@ -5038,6 +5103,7 @@ export type ProjectPageFilter = {
   _updatedAt?: Maybe<DatetimeFilter>;
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
+  bannerCard?: Maybe<BannerCardFilter>;
   gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSectionFilter>;
   projectDetailsSection?: Maybe<DetailsSectionFilter>;
   otcCard?: Maybe<ActionCardFilter>;
@@ -5050,6 +5116,7 @@ export type ProjectPageSorting = {
   _updatedAt?: Maybe<SortOrder>;
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
+  bannerCard?: Maybe<BannerCardSorting>;
   projectDetailsSection?: Maybe<DetailsSectionSorting>;
   otcCard?: Maybe<ActionCardSorting>;
 };
@@ -5555,6 +5622,7 @@ export type RootQuery = {
   ProjectActivity?: Maybe<ProjectActivity>;
   ProjectEcosystem?: Maybe<ProjectEcosystem>;
   ProjectPrefinanceTimelineStatus?: Maybe<ProjectPrefinanceTimelineStatus>;
+  ProfilePage?: Maybe<ProfilePage>;
   ProjectPage?: Maybe<ProjectPage>;
   ProjectRating?: Maybe<ProjectRating>;
   ProjectsPage?: Maybe<ProjectsPage>;
@@ -5625,6 +5693,7 @@ export type RootQuery = {
   allProjectActivity: Array<ProjectActivity>;
   allProjectEcosystem: Array<ProjectEcosystem>;
   allProjectPrefinanceTimelineStatus: Array<ProjectPrefinanceTimelineStatus>;
+  allProfilePage: Array<ProfilePage>;
   allProjectPage: Array<ProjectPage>;
   allProjectRating: Array<ProjectRating>;
   allProjectsPage: Array<ProjectsPage>;
@@ -5898,6 +5967,11 @@ export type RootQueryProjectEcosystemArgs = {
 
 
 export type RootQueryProjectPrefinanceTimelineStatusArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryProfilePageArgs = {
   id: Scalars['ID'];
 };
 
@@ -6400,6 +6474,14 @@ export type RootQueryAllProjectEcosystemArgs = {
 export type RootQueryAllProjectPrefinanceTimelineStatusArgs = {
   where?: Maybe<ProjectPrefinanceTimelineStatusFilter>;
   sort?: Maybe<Array<ProjectPrefinanceTimelineStatusSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllProfilePageArgs = {
+  where?: Maybe<ProfilePageFilter>;
+  sort?: Maybe<Array<ProfilePageSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -8656,7 +8738,10 @@ export type AllProjectPageQuery = (
   { __typename?: 'RootQuery' }
   & { allProjectPage: Array<(
     { __typename?: 'ProjectPage' }
-    & { gettingStartedResourcesSection?: Maybe<(
+    & { bannerCard?: Maybe<(
+      { __typename?: 'BannerCard' }
+      & BannerCardFieldsFragment
+    )>, gettingStartedResourcesSection?: Maybe<(
       { __typename?: 'GettingStartedResourcesSection' }
       & GettingStartedResourcesSectionFieldsFragment
     )>, projectDetailsSection?: Maybe<(
@@ -8719,6 +8804,15 @@ export type AllSoldOutProjectsQuery = (
       { __typename?: 'Project' }
       & Pick<Project, 'projectName' | 'projectId'>
     )>>> }
+  )> }
+);
+
+export type BannerCardFieldsFragment = (
+  { __typename?: 'BannerCard' }
+  & Pick<BannerCard, 'title' | 'descriptionRaw' | 'buttonLabel'>
+  & { image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
   )> }
 );
 
@@ -9368,6 +9462,16 @@ export const ReviewSectionFieldsFragmentDoc = gql`
 }
     ${ButtonFieldsFragmentDoc}
 ${BasicStepCardSectionFieldsFragmentDoc}`;
+export const BannerCardFieldsFragmentDoc = gql`
+    fragment bannerCardFields on BannerCard {
+  title
+  descriptionRaw
+  image {
+    ...customImageFields
+  }
+  buttonLabel
+}
+    ${CustomImageFieldsFragmentDoc}`;
 export const BottomBannerFieldsFragmentDoc = gql`
     fragment bottomBannerFields on BottomBanner {
   title
@@ -10776,6 +10880,9 @@ export type AllProjectEcosystemQueryResult = Apollo.QueryResult<AllProjectEcosys
 export const AllProjectPageDocument = gql`
     query allProjectPage {
   allProjectPage {
+    bannerCard {
+      ...bannerCardFields
+    }
     gettingStartedResourcesSection {
       ...gettingStartedResourcesSectionFields
     }
@@ -10797,7 +10904,8 @@ export const AllProjectPageDocument = gql`
     }
   }
 }
-    ${GettingStartedResourcesSectionFieldsFragmentDoc}
+    ${BannerCardFieldsFragmentDoc}
+${GettingStartedResourcesSectionFieldsFragmentDoc}
 ${ButtonFieldsFragmentDoc}
 ${CustomImageFieldsFragmentDoc}`;
 

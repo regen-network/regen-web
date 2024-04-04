@@ -1,19 +1,17 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
-import { Box, Skeleton, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Skeleton, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import cx from 'classnames';
 import { useSetAtom } from 'jotai';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import { PREFINANCE } from 'web-components/src/components/cards/ProjectCard/ProjectCard.constants';
-import CurrentCreditsIcon from 'web-components/src/components/icons/CurrentCreditsIcon';
 import { PrefinanceIcon } from 'web-components/src/components/icons/PrefinanceIcon';
 import { Gallery } from 'web-components/src/components/organisms/Gallery/Gallery';
 import SEO from 'web-components/src/components/seo';
 import ProjectMedia from 'web-components/src/components/sliders/ProjectMedia';
-import { Label } from 'web-components/src/components/typography';
 
 import { Project } from 'generated/graphql';
 import { Maybe } from 'graphql/jsutils/Maybe';
@@ -63,7 +61,7 @@ import useGeojson from './hooks/useGeojson';
 import useSeo from './hooks/useSeo';
 import { useSortedDocuments } from './hooks/useSortedDocuments';
 import { useStakeholders } from './hooks/useStakeholders';
-import { SHARAMENTSA_PILOT_HANDLE } from './ProjectDetails.config';
+import { ProjectDetailsBannerCard } from './ProjectDetails.BannerCard';
 import { JURISDICTION_REGEX } from './ProjectDetails.constant';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProjects';
@@ -72,8 +70,8 @@ import { getMediaBoxStyles } from './ProjectDetails.styles';
 import {
   findSanityCreditClass,
   formatOtcCardData,
-  getIsUuid,
   getIsOnChainId,
+  getIsUuid,
   getProjectGalleryPhotos,
   parseMedia,
   parseOffChainProject,
@@ -82,7 +80,6 @@ import { ProjectDetailsTableTabs } from './tables/ProjectDetails.TableTabs';
 
 function ProjectDetails(): JSX.Element {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { projectId } = useParams();
   const { ecocreditClient, dataClient } = useLedger();
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
@@ -323,8 +320,6 @@ function ProjectDetails(): JSX.Element {
     }));
   }, [credits, projectsWithOrderData]);
 
-  const isSharamentsaPilot = offChainProject?.slug === SHARAMENTSA_PILOT_HANDLE;
-
   if (
     !loadingDb &&
     !loadingAnchoredMetadata &&
@@ -356,6 +351,12 @@ function ProjectDetails(): JSX.Element {
         siteMetadata={seoData.siteMetadata}
         title={seoData.title}
         imageUrl={seoData.imageUrl}
+      />
+
+      <ProjectDetailsBannerCard
+        offChainProject={offChainProject}
+        onChainProject={onChainProject}
+        content={sanityProjectPage?.bannerCard}
       />
 
       {mediaData.assets.length === 0 && loadingDb && (

@@ -357,6 +357,7 @@ function ProjectDetails(): JSX.Element {
         offChainProject={offChainProject}
         onChainProject={onChainProject}
         content={sanityProjectPage?.bannerCard}
+        slug={slug}
       />
 
       {mediaData.assets.length === 0 && loadingDb && (

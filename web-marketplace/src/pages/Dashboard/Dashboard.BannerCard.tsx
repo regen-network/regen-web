@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
 import BannerCard from 'web-components/src/components/molecules/BannerCard';
-import Section from 'web-components/src/components/section';
 
 import { getSanityImgSrc } from 'lib/imgSrc';
 import { getAllProfilePageQuery } from 'lib/queries/react-query/sanity/getAllProfilePageQuery/getAllProfilePageQuery';

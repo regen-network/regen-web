@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useAtom } from 'jotai';
 
@@ -22,12 +23,14 @@ type Props = {
   offChainProject?: Maybe<Pick<Project, 'id' | 'adminAccountId'>>;
   onChainProject?: ProjectInfo;
   content?: Maybe<BannerCardFieldsFragment>;
+  slug?: Maybe<string>;
 };
 
 export const ProjectDetailsBannerCard = ({
   offChainProject,
   onChainProject,
   content,
+  slug,
 }: Props) => {
   const { activeAccountId, activeAccount } = useAuth();
   const { wallet, loginDisabled } = useWallet();
@@ -35,28 +38,42 @@ export const ProjectDetailsBannerCard = ({
     projectsBannerCardAtom,
   );
   const [copySuccessBanner, setCopySuccessBanner] = useState(false);
+  const { projectId } = useParams();
 
   const isCurrentAdmin = loginDisabled
     ? wallet?.address === onChainProject?.admin
     : activeAccountId &&
       (offChainProject?.adminAccountId === activeAccountId ||
         onChainProject?.admin === activeAccount?.addr);
-  const projectId = offChainProject?.id ?? onChainProject?.id;
+  const offChainOrOnChainprojectId = offChainProject?.id ?? onChainProject?.id;
 
   useEffect(() => {
     // Set project banner viewed on component unmount
     return () => {
-      if (!projectsBannerCard[projectId])
-        setProjectsBannerCard({ ...projectsBannerCard, [projectId]: true });
+      if (
+        !!offChainOrOnChainprojectId &&
+        (!slug || (!!slug && projectId === slug)) &&
+        !projectsBannerCard[offChainOrOnChainprojectId]
+      )
+        setProjectsBannerCard({
+          ...projectsBannerCard,
+          [offChainOrOnChainprojectId]: true,
+        });
     };
-  }, [projectId, projectsBannerCard, setProjectsBannerCard]);
+  }, [
+    offChainOrOnChainprojectId,
+    projectId,
+    projectsBannerCard,
+    setProjectsBannerCard,
+    slug,
+  ]);
 
   return (
     <>
       {content &&
       (offChainProject || onChainProject) &&
       isCurrentAdmin &&
-      !projectsBannerCard[projectId] ? (
+      !projectsBannerCard[offChainOrOnChainprojectId] ? (
         <Section className="pt-10 sm:pt-30 pb-20 sm:pb-0">
           <BannerCard
             title={content.title as string}

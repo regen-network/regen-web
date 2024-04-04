@@ -44,7 +44,7 @@ export const ProjectDetailsBannerCard = ({
   const projectId = offChainProject?.id ?? onChainProject?.id;
 
   useEffect(() => {
-    // Set project viewed on component unmount
+    // Set project banner viewed on component unmount
     return () => {
       if (!projectsBannerCard[projectId])
         setProjectsBannerCard({ ...projectsBannerCard, [projectId]: true });

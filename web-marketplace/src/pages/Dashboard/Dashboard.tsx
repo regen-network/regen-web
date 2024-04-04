@@ -22,6 +22,7 @@ import {
 } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { Link } from 'components/atoms';
 
+import { DashboardBannerCard } from './Dashboard.BannerCard';
 import {
   BRIDGE,
   CREDIT_BATCHES,
@@ -114,8 +115,10 @@ const Dashboard = (): JSX.Element => {
         }
         LinkComponent={Link}
       />
+
       <Box sx={{ bgcolor: 'grey.50' }}>
         <Box sx={{ pt: 15, ...containerStyles, px: { xs: 5, sm: 10 } }}>
+          <DashboardBannerCard />
           <IconTabs
             aria-label="dashboard tabs"
             tabs={tabs}

@@ -8701,6 +8701,20 @@ export type AllPrefinanceProjectQuery = (
   )> }
 );
 
+export type AllProfilePageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllProfilePageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allProfilePage: Array<(
+    { __typename?: 'ProfilePage' }
+    & { bannerCard?: Maybe<(
+      { __typename?: 'BannerCard' }
+      & BannerCardFieldsFragment
+    )> }
+  )> }
+);
+
 export type AllProjectActivityQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -10803,6 +10817,42 @@ export function useAllPrefinanceProjectLazyQuery(baseOptions?: Apollo.LazyQueryH
 export type AllPrefinanceProjectQueryHookResult = ReturnType<typeof useAllPrefinanceProjectQuery>;
 export type AllPrefinanceProjectLazyQueryHookResult = ReturnType<typeof useAllPrefinanceProjectLazyQuery>;
 export type AllPrefinanceProjectQueryResult = Apollo.QueryResult<AllPrefinanceProjectQuery, AllPrefinanceProjectQueryVariables>;
+export const AllProfilePageDocument = gql`
+    query AllProfilePage {
+  allProfilePage {
+    bannerCard {
+      ...bannerCardFields
+    }
+  }
+}
+    ${BannerCardFieldsFragmentDoc}`;
+
+/**
+ * __useAllProfilePageQuery__
+ *
+ * To run a query within a React component, call `useAllProfilePageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllProfilePageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllProfilePageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllProfilePageQuery(baseOptions?: Apollo.QueryHookOptions<AllProfilePageQuery, AllProfilePageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllProfilePageQuery, AllProfilePageQueryVariables>(AllProfilePageDocument, options);
+      }
+export function useAllProfilePageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllProfilePageQuery, AllProfilePageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllProfilePageQuery, AllProfilePageQueryVariables>(AllProfilePageDocument, options);
+        }
+export type AllProfilePageQueryHookResult = ReturnType<typeof useAllProfilePageQuery>;
+export type AllProfilePageLazyQueryHookResult = ReturnType<typeof useAllProfilePageLazyQuery>;
+export type AllProfilePageQueryResult = Apollo.QueryResult<AllProfilePageQuery, AllProfilePageQueryVariables>;
 export const AllProjectActivityDocument = gql`
     query allProjectActivity {
   allProjectActivity {

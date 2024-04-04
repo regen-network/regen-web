@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useAtom } from 'jotai';
 
@@ -41,13 +41,22 @@ export const ProjectDetailsBannerCard = ({
     : activeAccountId &&
       (offChainProject?.adminAccountId === activeAccountId ||
         onChainProject?.admin === activeAccount?.addr);
+  const projectId = offChainProject?.id ?? onChainProject?.id;
+
+  useEffect(() => {
+    // Set project viewed on component unmount
+    return () => {
+      if (!projectsBannerCard[projectId])
+        setProjectsBannerCard({ ...projectsBannerCard, [projectId]: true });
+    };
+  }, [projectId, projectsBannerCard, setProjectsBannerCard]);
 
   return (
     <>
       {content &&
       (offChainProject || onChainProject) &&
       isCurrentAdmin &&
-      !projectsBannerCard[offChainProject?.id || onChainProject?.id] ? (
+      !projectsBannerCard[projectId] ? (
         <Section className="pt-10 sm:pt-30 pb-20 sm:pb-0">
           <BannerCard
             title={content.title as string}

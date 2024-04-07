@@ -68,7 +68,7 @@ function CertificatePage(): JSX.Element {
           </Title>
           <ShareIcons
             xsSize={theme.spacing(10)}
-            url={`${window.location.origin}/buyers`}
+            url={`${window.location.origin}/certificate/${certificateId}`}
           />
         </Grid>
         <Grid item xs={12} md={6}>

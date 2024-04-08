@@ -38,7 +38,6 @@ export const ProjectDetailsBannerCard = ({
     projectsBannerCardAtom,
   );
   const [copySuccessBanner, setCopySuccessBanner] = useState(false);
-  const { projectId } = useParams();
 
   const isCurrentAdmin = loginDisabled
     ? wallet?.address === onChainProject?.admin
@@ -46,27 +45,6 @@ export const ProjectDetailsBannerCard = ({
       (offChainProject?.adminAccountId === activeAccountId ||
         onChainProject?.admin === activeAccount?.addr);
   const offChainOrOnChainprojectId = offChainProject?.id ?? onChainProject?.id;
-
-  useEffect(() => {
-    // Set project banner viewed on component unmount
-    return () => {
-      if (
-        !!offChainOrOnChainprojectId &&
-        (!slug || (!!slug && projectId === slug)) &&
-        !projectsBannerCard[offChainOrOnChainprojectId]
-      )
-        setProjectsBannerCard({
-          ...projectsBannerCard,
-          [offChainOrOnChainprojectId]: true,
-        });
-    };
-  }, [
-    offChainOrOnChainprojectId,
-    projectId,
-    projectsBannerCard,
-    setProjectsBannerCard,
-    slug,
-  ]);
 
   return (
     <>
@@ -89,6 +67,12 @@ export const ProjectDetailsBannerCard = ({
               copyTextToClipboard(window.location.href);
               setCopySuccessBanner(true);
             }}
+            onClose={() =>
+              setProjectsBannerCard({
+                ...projectsBannerCard,
+                [offChainOrOnChainprojectId]: true,
+              })
+            }
             tooltip={COPY_TOOLTIP}
           />
         </Section>

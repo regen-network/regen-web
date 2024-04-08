@@ -19,5 +19,6 @@ export const Default: Story = {
     image: { src: '/profile/farmer.svg', alt: 'farmer' },
     buttonLabel: 'share profile',
     onClick: action('click'),
+    onClose: action('close'),
   },
 };

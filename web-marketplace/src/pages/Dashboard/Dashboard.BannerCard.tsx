@@ -21,13 +21,6 @@ export const DashboardBannerCard = () => {
   const navigate = useNavigate();
   const content = sanityProfilePageData?.allProfilePage?.[0]?.bannerCard;
 
-  useEffect(() => {
-    // Set profile banner viewed on component unmount
-    return () => {
-      if (!profileBannerCard) setProfileBannerCard(true);
-    };
-  }, [profileBannerCard, setProfileBannerCard]);
-
   return (
     <>
       {content && !profileBannerCard ? (
@@ -42,6 +35,9 @@ export const DashboardBannerCard = () => {
             buttonLabel={content.buttonLabel as string}
             onClick={() => {
               navigate('/profile/edit/profile');
+            }}
+            onClose={() => {
+              setProfileBannerCard(true);
             }}
           />
         </div>

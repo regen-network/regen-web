@@ -1,10 +1,14 @@
+import { useState } from 'react';
 import ReactPlayer from 'react-player/es6';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
-import { Box, IconButton, useTheme } from '@mui/material';
+import { Box, IconButton, Popover, useTheme } from '@mui/material';
 import { Feature } from 'geojson';
+
+import { Body } from 'src/components/typography/Body';
 
 import { cn } from '../../../../utils/styles/cn';
 import { useArticleCardStyles } from '../../../cards/ArticleCard';
+import ArrowDownIcon from '../../../icons/ArrowDownIcon';
 import { AudioFileIcon } from '../../../icons/AudioFileIcon';
 import { DragIcon } from '../../../icons/DragIcon';
 import EditIcon from '../../../icons/EditIcon';
@@ -33,7 +37,8 @@ type Props = {
     main?: string;
     button?: string;
   };
-  drag?: boolean;
+  moveUp?: () => void;
+  moveDown?: () => void;
 };
 
 export const FileDropFile = ({
@@ -47,11 +52,25 @@ export const FileDropFile = ({
   handleDelete,
   handleEdit,
   classes,
-  drag,
+  moveUp,
+  moveDown,
 }: Props) => {
   const { classes: styles, cx } = useFileDropStyles();
   const { classes: articleCardStyles } = useArticleCardStyles();
   const theme = useTheme();
+
+  const [anchorEl, setAnchorEl] = useState<SVGSVGElement | null>(null);
+
+  const handleClick = (event: React.MouseEvent<SVGSVGElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
 
   return (
     <div className={cx(styles.preview, classes?.main)}>
@@ -110,13 +129,60 @@ export const FileDropFile = ({
           <TrashIcon color={theme.palette.error.dark} />
         </IconButton>
       </Box>
-      {drag && (
-        <DragIcon
-          className="cursor-grab absolute top-0 right-0"
-          // onPointerDown={e => {
-          //   dragControls.start(e);
-          // }}
-        />
+      {(moveUp || moveDown) && (
+        <>
+          <DragIcon
+            className="cursor-grab absolute top-0 right-0"
+            // onPointerDown={e => {
+            //   dragControls.start(e);
+            // }}
+            onClick={handleClick}
+          />
+          <Popover
+            className="sm:hidden"
+            classes={{
+              paper:
+                'w-[216px] p-20 rounded-[2px] shadow-[0_0_4px_0_rgba(0,0,0,0.05)]',
+            }}
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right',
+            }}
+          >
+            {moveUp && (
+              <Body
+                className={moveDown && 'pb-20'}
+                mobileSize="sm"
+                onClick={() => {
+                  moveUp();
+                  handleClose();
+                }}
+              >
+                <div className="flex items-center justify-between">
+                  Move up <ArrowDownIcon direction="up" />
+                </div>
+              </Body>
+            )}
+            {moveDown && (
+              <Body
+                mobileSize="sm"
+                onClick={() => {
+                  moveDown();
+                  handleClose();
+                }}
+              >
+                <div className="flex items-center justify-between">
+                  Move down
+                  <ArrowDownIcon direction="down" />
+                </div>
+              </Body>
+            )}
+          </Popover>
+        </>
       )}
 
       {(caption || credit || name) && (

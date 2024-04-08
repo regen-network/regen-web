@@ -207,7 +207,12 @@ export const MediaFormPhotos = ({
 
           return (
             <FileDrop
-              drag
+              moveUp={isFirst ? undefined : () => move(index, index - 1)}
+              moveDown={
+                index === fields.length - 2
+                  ? undefined
+                  : () => move(index, index + 1)
+              }
               onDelete={getHandleDeleteWithIndex(index)}
               onUpload={handleUpload}
               setValue={setGalleryPhotos}

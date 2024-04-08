@@ -3,7 +3,7 @@ import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
 
 import {
   FileDrop,
-  ImageDropProps,
+  FileDropProps,
 } from 'web-components/src/components/inputs/new/FileDrop/FileDrop';
 import { TextAreaField } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField';
 import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
@@ -60,7 +60,7 @@ export const MediaFormPhotos = ({
   // we need to manually keep track of the dirty state.
   // Update this ref whenever an action is performed in the form
   const { isDirtyRef } = useProjectEditContext();
-  const imageDropCommonProps: Partial<ImageDropProps> = {
+  const imageDropCommonProps: Partial<FileDropProps> = {
     classes: { main: classes.fullSizeMedia },
     buttonText: IMAGE_UPLOAD_BUTTON_LABEL,
     fixedCrop: cropAspectMediaForm,
@@ -109,19 +109,20 @@ export const MediaFormPhotos = ({
   });
   const handleDelete = getHandleDelete({
     fileNamesToDeleteRef,
-    callback: () => {
-      setValue('regen:previewPhoto', {
-        'schema:url': '',
-        'schema:creditText': '',
-      });
+    callback: (doSetValue: boolean = true) => {
+      if (doSetValue)
+        setValue('regen:previewPhoto', {
+          'schema:url': '',
+          'schema:creditText': '',
+        });
       isDirtyRef.current = true;
     },
   });
   const getHandleDeleteWithIndex = (fieldIndex: number) =>
     getHandleDelete({
       fileNamesToDeleteRef,
-      callback: () => {
-        remove(fieldIndex);
+      callback: (doSetValue: boolean = true) => {
+        if (doSetValue) remove(fieldIndex);
         isDirtyRef.current = true;
       },
     });

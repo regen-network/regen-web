@@ -48,6 +48,7 @@ export const useHandleUpload = ({
         }
       } catch (e) {
         setErrorBannerTextAtom(String(e));
+        throw new Error(String(e));
       }
     },
     [

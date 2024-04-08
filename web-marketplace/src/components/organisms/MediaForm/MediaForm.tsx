@@ -10,6 +10,7 @@ import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { apiServerUrl } from 'lib/env';
 
 import { useCreateProjectContext } from 'pages/ProjectCreate';
+import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import { useProjectEditContext } from 'pages/ProjectEdit';
 import { ProjectPageFooter } from 'components/molecules';
 import Form from 'components/molecules/Form/Form';
@@ -20,13 +21,13 @@ import { DEFAULT } from './MediaForm.constants';
 import { mediaFormSchema, MediaFormSchemaType } from './MediaForm.schema';
 import { MediaFormPhotos } from './MediaFormPhotos';
 import { MediaFormStory } from './MediaFormStory';
-import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 
 interface MediaFormProps {
   submit: (props: MetadataSubmitProps) => Promise<void>;
   onPrev?: () => void;
   initialValues: MediaFormSchemaType;
   projectId?: string;
+  navigateNext: () => void;
 }
 
 export const MediaForm = ({
@@ -34,6 +35,7 @@ export const MediaForm = ({
   projectId,
   submit,
   onPrev,
+  navigateNext,
 }: MediaFormProps): JSX.Element => {
   const { formRef, shouldNavigateRef, isDraftRef } = useCreateProjectContext();
   const form = useZodForm({
@@ -74,20 +76,23 @@ export const MediaForm = ({
           // Submit
           await submit({
             values: filteredData,
-            shouldNavigate: shouldNavigateRef?.current,
+            shouldNavigate: false,
           });
           // Delete any images that were removed on S3
           await Promise.all(
-            fileNamesToDeleteRef?.current.map(
-              async fileName =>
-                await deleteImage(
-                  offChainProjectId ?? '',
-                  fileName,
-                  apiServerUrl,
-                ),
-            ),
+            fileNamesToDeleteRef?.current.map(async fileName => {
+              await deleteImage(
+                offChainProjectId ?? '',
+                fileName,
+                apiServerUrl,
+              );
+            }),
           );
           fileNamesToDeleteRef.current = [];
+
+          if (!isEdit && shouldNavigateRef?.current) {
+            navigateNext();
+          }
           // Save callback
           if (isEdit && confirmSave) {
             confirmSave();

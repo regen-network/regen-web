@@ -12,5 +12,9 @@ const initialValues: MediaFormSchemaType = {
 };
 
 export const mediaForm = () => (
-  <MediaForm initialValues={initialValues} submit={async () => void null} />
+  <MediaForm
+    initialValues={initialValues}
+    submit={async () => void null}
+    navigateNext={() => void null}
+  />
 );

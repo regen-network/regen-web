@@ -4,7 +4,7 @@ import { Crop } from 'react-image-crop';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Feature } from 'geojson';
 
-import { getImageSrc } from '../../../image-crop/canvas-utils';
+import { getImageSrc, srcToFile } from '../../../image-crop/canvas-utils';
 import FieldFormControl, {
   FieldFormControlProps,
 } from '../FieldFormControl/FieldFormControl';
@@ -14,7 +14,7 @@ import { FileDropRenderModalProps } from './FileDrop.types';
 import { toBase64 } from './FileDrop.utils';
 import { FileDropZone } from './FileDrop.Zone';
 
-export interface ImageDropProps extends Partial<FieldFormControlProps> {
+export interface FileDropProps extends Partial<FieldFormControlProps> {
   className?: string;
   classes?: {
     root?: string;
@@ -41,7 +41,7 @@ export interface ImageDropProps extends Partial<FieldFormControlProps> {
   isCropSubmitDisabled?: boolean;
   renderModal: (_: FileDropRenderModalProps) => React.ReactNode;
   setValue: (value: string, mimeType: string, fieldIndex: number) => void;
-  onDelete?: (fileName: string) => Promise<void>;
+  onDelete?: (fileName: string, doSetValue?: boolean) => Promise<void>;
   onUpload?: (imageFile: File) => Promise<string | undefined>;
   accept?: string;
   multi?: boolean;
@@ -50,7 +50,7 @@ export interface ImageDropProps extends Partial<FieldFormControlProps> {
 /**
  * Drop file(s) and render a modal for those files
  */
-const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
+const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
   (
     {
       className,
@@ -83,8 +83,10 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
     ref,
   ) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isEdit, setIsEdit] = useState(false);
     const [initialImage, setInitialImage] = useState('');
     const [selectedFiles, setSelectedFiles] = useState<Array<File>>([]);
+
     const { classes: styles, cx } = useFileDropStyles();
     const isFirstField = fieldIndex === 0;
 
@@ -140,12 +142,18 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
     const onModalSubmit = async (
       croppedImage: HTMLImageElement,
     ): Promise<void> => {
+      // Delete file that has been edited
+      if (isEdit && onDelete && value) {
+        if (onDelete) {
+          await onDelete(value, false);
+        }
+      }
       const currentFile = selectedFiles[0];
-      const result = await getImageSrc(
+      const result = await getImageSrc({
         croppedImage,
         onUpload,
-        currentFile.name,
-      );
+        fileName: currentFile.name,
+      });
 
       if (result) {
         setValue(result, currentFile.type, fieldIndex);
@@ -171,7 +179,23 @@ const FileDrop = forwardRef<HTMLInputElement, ImageDropProps>(
       }
     };
 
-    const handleEdit = () => setIsModalOpen(true);
+    const handleEdit = async () => {
+      if (value) {
+        const fileName = decodeURI(value.split('/').pop() || '');
+        if (fileName) {
+          const file = await srcToFile(value, fileName);
+          setSelectedFiles([file]);
+          toBase64(file).then(base64String => {
+            if (typeof base64String === 'string') {
+              setIsEdit(true);
+              setIsModalOpen(true);
+              setInitialImage(base64String);
+            }
+          });
+        }
+      }
+    };
+
     return (
       <>
         <FieldFormControl

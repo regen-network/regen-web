@@ -1,13 +1,14 @@
 import React, { useCallback, useRef, useState } from 'react';
 import ReactCrop, { Crop } from 'react-image-crop';
-import { Button } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
 import { Theme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from 'tss-react/mui';
 
 import ContainedButton from '../buttons/ContainedButton';
+import { Loading } from '../loading';
 import { getCroppedImg } from './canvas-utils';
-import { APPLY, CANCEL, UPDATE } from './ImageCrop.constants';
+import { APPLY, CANCEL, UPDATE, UPLOADING } from './ImageCrop.constants';
 
 import 'react-image-crop/dist/ReactCrop.css';
 
@@ -100,7 +101,6 @@ export default function ImageCrop({
    */
   const onLoad = useCallback(
     (img: HTMLImageElement) => {
-      console.log(img);
       imgRef.current = img;
       const imgWidth = img.width;
       const imgHeight = img.height;
@@ -171,7 +171,18 @@ export default function ImageCrop({
             isCropSubmitDisabled
           }
         >
-          {isIgnoreCrop ? UPDATE : APPLY}
+          {loading ? (
+            <>
+              <div className="h-20">
+                <CircularProgress size={20} color="secondary" />
+              </div>
+              <span className="ml-5">{UPLOADING}</span>
+            </>
+          ) : isIgnoreCrop ? (
+            UPDATE
+          ) : (
+            APPLY
+          )}
         </ContainedButton>
       </div>
     </div>

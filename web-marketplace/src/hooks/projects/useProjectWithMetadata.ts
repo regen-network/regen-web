@@ -4,6 +4,7 @@ import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { ProjectByIdQuery, ProjectByOnChainIdQuery } from 'generated/graphql';
+import { NestedPartial } from 'types/nested-partial';
 import { useAuth } from 'lib/auth/auth';
 import {
   AnchoredProjectMetadataLD,
@@ -24,13 +25,12 @@ import { DescriptionSchemaType } from 'components/organisms/DescriptionForm/Desc
 import { LocationFormSchemaType } from 'components/organisms/LocationForm/LocationForm.schema';
 import { MediaFormSchemaType } from 'components/organisms/MediaForm/MediaForm.schema';
 import {
-  getIsUuid,
   getIsOnChainId,
+  getIsUuid,
 } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { useLedger } from '../../ledger';
 import { useCreateOrUpdateProject } from './UseCreateOrUpdateProject';
-import { NestedPartial } from 'types/nested-partial';
 
 export type OffChainProject =
   | ProjectByIdQuery['projectById']

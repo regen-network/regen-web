@@ -4,8 +4,6 @@ import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Box, IconButton, Popover, useTheme } from '@mui/material';
 import { Feature } from 'geojson';
 
-import { Body } from 'src/components/typography/Body';
-
 import { cn } from '../../../../utils/styles/cn';
 import { useArticleCardStyles } from '../../../cards/ArticleCard';
 import ArrowDownIcon from '../../../icons/ArrowDownIcon';
@@ -18,6 +16,7 @@ import PlayIcon from '../../../icons/PlayIcon';
 import { SpreadsheetFileIcon } from '../../../icons/SpreadsheetFileIcon';
 import TrashIcon from '../../../icons/TrashIcon';
 import { Image } from '../../../image';
+import { Body } from '../../../typography/Body';
 import { FileDropBottomBar } from './FileDrop.BottomBar';
 import { useFileDropStyles } from './FileDrop.styles';
 import { isAudio, isImage, isVideo } from './FileDrop.utils';

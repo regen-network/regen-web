@@ -166,7 +166,12 @@ export const PostForm = ({
 
           return (
             <FileDrop
-              drag
+              moveUp={index === 0 ? undefined : () => move(index, index - 1)}
+              moveDown={
+                index === fields.length - 2
+                  ? undefined
+                  : () => move(index, index + 1)
+              }
               onDelete={() => getHandleDeleteWithIndex(index)}
               value={url === DEFAULT ? '' : url}
               caption={file?.description}

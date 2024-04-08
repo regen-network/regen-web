@@ -2,6 +2,7 @@ import React, { forwardRef, ReactNode, useState } from 'react';
 import { DropzoneOptions } from 'react-dropzone';
 import { Crop } from 'react-image-crop';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import { DragControls } from 'framer-motion';
 import { Feature } from 'geojson';
 
 import { getImageSrc, srcToFile } from '../../../image-crop/canvas-utils';
@@ -45,6 +46,7 @@ export interface FileDropProps extends Partial<FieldFormControlProps> {
   onUpload?: (imageFile: File) => Promise<string | undefined>;
   accept?: string;
   multi?: boolean;
+  dragControls?: DragControls;
 }
 
 /**
@@ -78,6 +80,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
       onDelete,
       accept,
       multi = false,
+      dragControls,
       ...fieldProps
     },
     ref,
@@ -220,6 +223,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
               mimeType={mimeType}
               accept={accept}
               classes={classes}
+              dragControls={dragControls}
             />
           )}
           <FileDropZone

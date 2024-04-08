@@ -1,10 +1,12 @@
-import { MutableRefObject, useEffect } from 'react';
+import { MutableRefObject, useCallback, useEffect } from 'react';
 import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
+import { Reorder, useDragControls } from 'framer-motion';
 
 import {
   FileDrop,
   FileDropProps,
 } from 'web-components/src/components/inputs/new/FileDrop/FileDrop';
+import FormLabel from 'web-components/src/components/inputs/new/FormLabel/FormLabel';
 import { TextAreaField } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField';
 import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
@@ -66,16 +68,20 @@ export const MediaFormPhotos = ({
     fixedCrop: cropAspectMediaForm,
   };
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append, remove, move } = useFieldArray({
     name: 'regen:galleryPhotos',
     control: control,
   });
+  const dragControls = useDragControls();
 
   /* Watcher */
 
   const previewPhoto = useWatch({ control, name: 'regen:previewPhoto' });
   const galleryPhotos = useWatch({ control, name: 'regen:galleryPhotos' });
-
+  console.log(
+    'galleryPhotos',
+    galleryPhotos?.map(v => v['schema:caption']),
+  );
   /* Setter */
 
   const setPreviewPhoto = (value: string): void => {
@@ -142,6 +148,25 @@ export const MediaFormPhotos = ({
     }
   }, [append, fields]);
 
+  const setItems = useCallback(
+    (newOrder: any[]) => {
+      let source = -1,
+        destination = -1;
+      for (let i = 0; i < newOrder.length; i++) {
+        if (newOrder[i] !== fields[i]) {
+          if (source < 0) {
+            source = i;
+          } else if (destination < 0) {
+            destination = i;
+            break;
+          }
+        }
+      }
+      move(source, destination);
+    },
+    [fields, move],
+  );
+
   return (
     <>
       <FileDrop
@@ -190,96 +215,118 @@ export const MediaFormPhotos = ({
           optional
         />
       </FileDrop>
-      {fields.map((field, index) => {
-        const url = galleryPhotos?.[index]?.['schema:url'];
-        const isFirst = index === 0;
-        const isLast = index === fields.length - 1;
-        const hasFieldError = !!errors['regen:galleryPhotos']?.[index];
-        const fieldErrorMessage =
-          errors['regen:galleryPhotos']?.[index]?.['schema:caption']?.message;
 
-        return (
-          <FileDrop
-            label={GALLERY_PHOTOS}
-            description={GALLERY_PHOTOS_DESCRIPTION}
-            onDelete={getHandleDeleteWithIndex(index)}
-            onUpload={handleUpload}
-            setValue={setGalleryPhotos}
-            value={url === DEFAULT ? '' : url}
-            caption={galleryPhotos?.[index]?.['schema:caption']}
-            credit={galleryPhotos?.[index]?.['schema:creditText']}
-            error={(!!errors['regen:galleryPhotos'] && isLast) || hasFieldError}
-            helperText={
-              fieldErrorMessage ?? errors['regen:galleryPhotos']?.message
-            }
-            key={field.id}
-            fieldIndex={index}
-            dropZoneOption={{ maxFiles: 1 }}
-            className={classes.galleryItem}
-            defaultStyle={isFirst ? true : false}
-            accept="image/*"
-            multi
-            renderModal={({
-              initialImage,
-              open,
-              value,
-              children,
-              onClose,
-              onSubmit,
-            }) => (
-              <CropImageModal
-                open={open}
-                onClose={onClose}
-                onSubmit={onSubmit}
-                initialImage={initialImage}
-                fixedCrop={cropAspectMediaForm}
-                isCropSubmitDisabled={hasFieldError}
-                isIgnoreCrop={!!value}
-              >
-                {children}
-              </CropImageModal>
-            )}
-            optional
-            {...register(`regen:galleryPhotos.${index}.schema:url`)}
-            {...imageDropCommonProps}
-          >
-            <TextAreaField
-              type="text"
-              label="Caption"
-              rows={3}
-              minRows={3}
-              multiline
-              optional
-              helperText={
-                errors['regen:galleryPhotos']?.[index]?.['schema:caption']
-                  ?.message
-              }
+      <FormLabel
+        className="mb-[9px] mt-40"
+        label={GALLERY_PHOTOS}
+        description={GALLERY_PHOTOS_DESCRIPTION}
+      />
+      <Reorder.Group
+        axis="y"
+        values={fields}
+        onReorder={setItems}
+        className="list-none pl-0"
+      >
+        {fields.map((field, index) => {
+          const url = galleryPhotos?.[index]?.['schema:url'];
+          const isFirst = index === 0;
+          const isLast = index === fields.length - 1;
+          const hasFieldError = !!errors['regen:galleryPhotos']?.[index];
+          const fieldErrorMessage =
+            errors['regen:galleryPhotos']?.[index]?.['schema:caption']?.message;
+
+          const fileDrop = (
+            <FileDrop
+              dragControls={dragControls}
+              onDelete={getHandleDeleteWithIndex(index)}
+              onUpload={handleUpload}
+              setValue={setGalleryPhotos}
+              value={url === DEFAULT ? '' : url}
+              caption={galleryPhotos?.[index]?.['schema:caption']}
+              credit={galleryPhotos?.[index]?.['schema:creditText']}
               error={
-                !!errors['regen:galleryPhotos']?.[index]?.['schema:caption']
+                (!!errors['regen:galleryPhotos'] && isLast) || hasFieldError
               }
-              {...register(`regen:galleryPhotos.${index}.schema:caption`)}
+              helperText={
+                fieldErrorMessage ?? errors['regen:galleryPhotos']?.message
+              }
+              fieldIndex={index}
+              dropZoneOption={{ maxFiles: 1 }}
+              className={classes.galleryItem}
+              defaultStyle={isFirst ? true : false}
+              accept="image/*"
+              multi
+              renderModal={({
+                initialImage,
+                open,
+                value,
+                children,
+                onClose,
+                onSubmit,
+              }) => (
+                <CropImageModal
+                  open={open}
+                  onClose={onClose}
+                  onSubmit={onSubmit}
+                  initialImage={initialImage}
+                  fixedCrop={cropAspectMediaForm}
+                  isCropSubmitDisabled={hasFieldError}
+                  isIgnoreCrop={!!value}
+                >
+                  {children}
+                </CropImageModal>
+              )}
+              optional
+              {...register(`regen:galleryPhotos.${index}.schema:url`)}
+              {...imageDropCommonProps}
             >
-              <TextAreaFieldChartCounter
-                value={galleryPhotos?.[index]?.['schema:caption']}
-                charLimit={CAPTION_CHART_LIMIT}
+              <TextAreaField
+                type="text"
+                label="Caption"
+                rows={3}
+                minRows={3}
+                multiline
+                optional
+                helperText={
+                  errors['regen:galleryPhotos']?.[index]?.['schema:caption']
+                    ?.message
+                }
+                error={
+                  !!errors['regen:galleryPhotos']?.[index]?.['schema:caption']
+                }
+                {...register(`regen:galleryPhotos.${index}.schema:caption`)}
+              >
+                <TextAreaFieldChartCounter
+                  value={galleryPhotos?.[index]?.['schema:caption']}
+                  charLimit={CAPTION_CHART_LIMIT}
+                />
+              </TextAreaField>
+              <TextField
+                type="text"
+                label="Photo credit"
+                helperText={
+                  errors['regen:galleryPhotos']?.[index]?.['schema:creditText']
+                    ?.message
+                }
+                error={
+                  !!errors['regen:galleryPhotos']?.[index]?.[
+                    'schema:creditText'
+                  ]
+                }
+                optional
+                {...register(`regen:galleryPhotos.${index}.schema:creditText`)}
               />
-            </TextAreaField>
-            <TextField
-              type="text"
-              label="Photo credit"
-              helperText={
-                errors['regen:galleryPhotos']?.[index]?.['schema:creditText']
-                  ?.message
-              }
-              error={
-                !!errors['regen:galleryPhotos']?.[index]?.['schema:creditText']
-              }
-              optional
-              {...register(`regen:galleryPhotos.${index}.schema:creditText`)}
-            />
-          </FileDrop>
-        );
-      })}
+            </FileDrop>
+          );
+          return isLast ? (
+            fileDrop
+          ) : (
+            <Reorder.Item className="relative" key={field.id} value={field}>
+              {fileDrop}
+            </Reorder.Item>
+          );
+        })}
+      </Reorder.Group>
     </>
   );
 };

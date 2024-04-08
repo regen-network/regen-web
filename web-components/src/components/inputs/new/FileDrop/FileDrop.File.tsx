@@ -1,11 +1,13 @@
 import ReactPlayer from 'react-player/es6';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Box, IconButton, useTheme } from '@mui/material';
+import { DragControls } from 'framer-motion';
 import { Feature } from 'geojson';
 
 import { cn } from '../../../../utils/styles/cn';
 import { useArticleCardStyles } from '../../../cards/ArticleCard';
 import { AudioFileIcon } from '../../../icons/AudioFileIcon';
+import { DragIcon } from '../../../icons/DragIcon';
 import EditIcon from '../../../icons/EditIcon';
 import { OtherDocumentsIcon } from '../../../icons/OtherDocumentsIcon';
 import { PdfFileIcon } from '../../../icons/PdfFileIcon';
@@ -32,6 +34,7 @@ type Props = {
     main?: string;
     button?: string;
   };
+  dragControls?: DragControls;
 };
 
 export const FileDropFile = ({
@@ -45,6 +48,7 @@ export const FileDropFile = ({
   handleDelete,
   handleEdit,
   classes,
+  dragControls,
 }: Props) => {
   const { classes: styles, cx } = useFileDropStyles();
   const { classes: articleCardStyles } = useArticleCardStyles();
@@ -107,6 +111,18 @@ export const FileDropFile = ({
           <TrashIcon color={theme.palette.error.dark} />
         </IconButton>
       </Box>
+      {dragControls && (
+        <DragIcon
+          className="cursor-grab absolute top-0 right-0"
+          onPointerDown={e => {
+            console.log(e);
+            dragControls.start(e);
+          }}
+        >
+          O
+        </DragIcon>
+      )}
+
       {(caption || credit || name) && (
         <FileDropBottomBar
           name={name}

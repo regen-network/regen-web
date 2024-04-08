@@ -1,7 +1,6 @@
 import ReactPlayer from 'react-player/es6';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Box, IconButton, useTheme } from '@mui/material';
-import { DragControls } from 'framer-motion';
 import { Feature } from 'geojson';
 
 import { cn } from '../../../../utils/styles/cn';
@@ -34,7 +33,7 @@ type Props = {
     main?: string;
     button?: string;
   };
-  dragControls?: DragControls;
+  drag?: boolean;
 };
 
 export const FileDropFile = ({
@@ -48,7 +47,7 @@ export const FileDropFile = ({
   handleDelete,
   handleEdit,
   classes,
-  dragControls,
+  drag,
 }: Props) => {
   const { classes: styles, cx } = useFileDropStyles();
   const { classes: articleCardStyles } = useArticleCardStyles();
@@ -111,16 +110,13 @@ export const FileDropFile = ({
           <TrashIcon color={theme.palette.error.dark} />
         </IconButton>
       </Box>
-      {dragControls && (
+      {drag && (
         <DragIcon
           className="cursor-grab absolute top-0 right-0"
-          onPointerDown={e => {
-            console.log(e);
-            dragControls.start(e);
-          }}
-        >
-          O
-        </DragIcon>
+          // onPointerDown={e => {
+          //   dragControls.start(e);
+          // }}
+        />
       )}
 
       {(caption || credit || name) && (

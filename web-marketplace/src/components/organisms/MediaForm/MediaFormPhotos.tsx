@@ -1,12 +1,11 @@
-import { MutableRefObject, useCallback, useEffect } from 'react';
+import { MutableRefObject, useEffect } from 'react';
 import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
-import { Reorder, useDragControls } from 'framer-motion';
 
 import {
   FileDrop,
   FileDropProps,
 } from 'web-components/src/components/inputs/new/FileDrop/FileDrop';
-import FormLabel from 'web-components/src/components/inputs/new/FormLabel/FormLabel';
+import { ReorderFields } from 'web-components/src/components/inputs/new/ReorderFields/ReorderFields';
 import { TextAreaField } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField';
 import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
@@ -72,16 +71,12 @@ export const MediaFormPhotos = ({
     name: 'regen:galleryPhotos',
     control: control,
   });
-  const dragControls = useDragControls();
 
   /* Watcher */
 
   const previewPhoto = useWatch({ control, name: 'regen:previewPhoto' });
   const galleryPhotos = useWatch({ control, name: 'regen:galleryPhotos' });
-  console.log(
-    'galleryPhotos',
-    galleryPhotos?.map(v => v['schema:caption']),
-  );
+
   /* Setter */
 
   const setPreviewPhoto = (value: string): void => {
@@ -148,25 +143,6 @@ export const MediaFormPhotos = ({
     }
   }, [append, fields]);
 
-  const setItems = useCallback(
-    (newOrder: any[]) => {
-      let source = -1,
-        destination = -1;
-      for (let i = 0; i < newOrder.length; i++) {
-        if (newOrder[i] !== fields[i]) {
-          if (source < 0) {
-            source = i;
-          } else if (destination < 0) {
-            destination = i;
-            break;
-          }
-        }
-      }
-      move(source, destination);
-    },
-    [fields, move],
-  );
-
   return (
     <>
       <FileDrop
@@ -216,18 +192,12 @@ export const MediaFormPhotos = ({
         />
       </FileDrop>
 
-      <FormLabel
-        className="mb-[9px] mt-40"
+      <ReorderFields
         label={GALLERY_PHOTOS}
         description={GALLERY_PHOTOS_DESCRIPTION}
-      />
-      <Reorder.Group
-        axis="y"
-        values={fields}
-        onReorder={setItems}
-        className="list-none pl-0"
-      >
-        {fields.map((field, index) => {
+        fields={fields}
+        move={move}
+        getFieldElement={(_: Record<'id', string>, index: number) => {
           const url = galleryPhotos?.[index]?.['schema:url'];
           const isFirst = index === 0;
           const isLast = index === fields.length - 1;
@@ -235,9 +205,9 @@ export const MediaFormPhotos = ({
           const fieldErrorMessage =
             errors['regen:galleryPhotos']?.[index]?.['schema:caption']?.message;
 
-          const fileDrop = (
+          return (
             <FileDrop
-              dragControls={dragControls}
+              drag
               onDelete={getHandleDeleteWithIndex(index)}
               onUpload={handleUpload}
               setValue={setGalleryPhotos}
@@ -318,15 +288,8 @@ export const MediaFormPhotos = ({
               />
             </FileDrop>
           );
-          return isLast ? (
-            fileDrop
-          ) : (
-            <Reorder.Item className="relative" key={field.id} value={field}>
-              {fileDrop}
-            </Reorder.Item>
-          );
-        })}
-      </Reorder.Group>
+        }}
+      />
     </>
   );
 };

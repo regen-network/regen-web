@@ -12,6 +12,7 @@ import {
 } from 'web-components/src/components/inputs/new/FileDrop/FileDrop';
 import { Radio } from 'web-components/src/components/inputs/new/Radio/Radio';
 import { RadioGroup } from 'web-components/src/components/inputs/new/RadioGroup/RadioGroup';
+import { ReorderFields } from 'web-components/src/components/inputs/new/ReorderFields/ReorderFields';
 import { TextAreaField } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField';
 import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
@@ -70,7 +71,7 @@ export const PostForm = ({
 
   const noFiles = (files?.length ?? 0) <= 1;
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append, remove, move } = useFieldArray({
     name: 'files',
     control: form.control,
   });
@@ -147,48 +148,55 @@ export const PostForm = ({
         className={cn(textAreaClasses.field, 'mb-40 sm:mb-50 mt-0')}
         {...form.register('comment')}
       />
-      {fields.map((field, index) => {
-        const file = files?.[index];
-        const url = file?.url;
+      <ReorderFields
+        label={'Files'}
+        description={
+          <Body>
+            {
+              '5MB max. Supported file types include text, spreadsheets, images, and video files. '
+            }
+            <Link href="#">{'View all supported file types»'}</Link>
+          </Body>
+        }
+        fields={fields}
+        move={move}
+        getFieldElement={(_: Record<'id', string>, index: number) => {
+          const file = files?.[index];
+          const url = file?.url;
 
-        return (
-          <FileDrop
-            label={'Files'}
-            description={
-              <Body>
-                {
-                  '5MB max. Supported file types include text, spreadsheets, images, and video files. '
-                }
-                <Link href="#">{'View all supported file types»'}</Link>
-              </Body>
-            }
-            onDelete={() => getHandleDeleteWithIndex(index)}
-            value={url === DEFAULT ? '' : url}
-            caption={file?.description}
-            credit={file?.credit}
-            fileName={file?.name}
-            mimeType={file?.mimeType}
-            location={
-              file?.locationType === 'none' ? undefined : file?.location
-            }
-            setValue={setFiles}
-            className={cn(
-              index === fields.length - 1 ? 'mb-40 sm:mb-50' : 'mb-20 sm:mb-30',
-              ' mt-0',
-              classes.galleryItem,
-            )}
-            key={field.id}
-            fieldIndex={index}
-            error={!!errors['files']}
-            helperText={errors['files']?.message}
-            renderModal={() => <div />}
-            optional
-            multi
-            {...imageDropCommonProps}
-            {...form.register('files')}
-          />
-        );
-      })}
+          return (
+            <FileDrop
+              drag
+              onDelete={() => getHandleDeleteWithIndex(index)}
+              value={url === DEFAULT ? '' : url}
+              caption={file?.description}
+              credit={file?.credit}
+              fileName={file?.name}
+              mimeType={file?.mimeType}
+              location={
+                file?.locationType === 'none' ? undefined : file?.location
+              }
+              setValue={setFiles}
+              className={cn(
+                index === fields.length - 1
+                  ? 'mb-40 sm:mb-50'
+                  : 'mb-20 sm:mb-30',
+                ' mt-0',
+                classes.galleryItem,
+              )}
+              fieldIndex={index}
+              error={!!errors['files']}
+              helperText={errors['files']?.message}
+              renderModal={() => <div />}
+              optional
+              multi
+              {...imageDropCommonProps}
+              {...form.register('files')}
+            />
+          );
+        }}
+      />
+
       <div className="flex flex-col mb-40 sm:mb-50">
         <RadioGroup
           label={

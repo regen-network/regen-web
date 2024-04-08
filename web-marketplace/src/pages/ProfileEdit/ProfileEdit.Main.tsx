@@ -1,4 +1,5 @@
 import { useCallback, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 
@@ -10,6 +11,7 @@ import { getAccountByAddrQueryKey } from 'lib/queries/react-query/registry-serve
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { profileBannerCardAtom } from 'pages/Dashboard/Dashboard.store';
 import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfileForm';
 import { EditProfileFormActionBar } from 'components/organisms/EditProfileForm/EditProfileForm.ActionBar';
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
@@ -23,7 +25,6 @@ import {
   PROFILE_SAVED,
 } from './ProfileEdit.constants';
 import { getDefaultAvatar } from './ProfileEdit.utils';
-import { useNavigate } from 'react-router-dom';
 
 export const ProfileEditMain = () => {
   const [isDirtyRef] = useAtom(isProfileEditDirtyRef);
@@ -34,6 +35,9 @@ export const ProfileEditMain = () => {
   const reactQueryClient = useQueryClient();
   const navigate = useNavigate();
   const defaultAvatar = getDefaultAvatar(activeAccount);
+  const [profileBannerCard, setProfileBannerCard] = useAtom(
+    profileBannerCardAtom,
+  );
 
   const initialValues: EditProfileFormSchemaType = useMemo(
     () => ({
@@ -82,8 +86,26 @@ export const ProfileEditMain = () => {
           },
         },
       });
+      // hide the banner if a user has set name, profile image, background image and one of the external links
+      if (
+        !profileBannerCard[activeAccount?.id] &&
+        name &&
+        profileImage &&
+        backgroundImage &&
+        (twitterLink || websiteLink)
+      ) {
+        setProfileBannerCard({
+          ...profileBannerCard,
+          [activeAccount?.id]: true,
+        });
+      }
     },
-    [activeAccount, updateAccountById],
+    [
+      activeAccount?.id,
+      profileBannerCard,
+      setProfileBannerCard,
+      updateAccountById,
+    ],
   );
 
   const refreshProfileData = useCallback(async () => {
@@ -103,7 +125,7 @@ export const ProfileEditMain = () => {
     setBannerTextAtom(PROFILE_SAVED);
     refreshProfileData();
     navigate('/profile');
-  }, [setBannerTextAtom, refreshProfileData]);
+  }, [setBannerTextAtom, refreshProfileData, navigate]);
 
   const onUpload = useOnUploadCallback({
     updateAccountById,

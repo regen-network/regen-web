@@ -5,6 +5,7 @@ import { useAtom } from 'jotai';
 
 import BannerCard from 'web-components/src/components/molecules/BannerCard';
 
+import { useAuth } from 'lib/auth/auth';
 import { getSanityImgSrc } from 'lib/imgSrc';
 import { getAllProfilePageQuery } from 'lib/queries/react-query/sanity/getAllProfilePageQuery/getAllProfilePageQuery';
 
@@ -18,12 +19,13 @@ export const DashboardBannerCard = () => {
   const [profileBannerCard, setProfileBannerCard] = useAtom(
     profileBannerCardAtom,
   );
+  const { activeAccount } = useAuth();
   const navigate = useNavigate();
   const content = sanityProfilePageData?.allProfilePage?.[0]?.bannerCard;
 
   return (
     <>
-      {content && !profileBannerCard ? (
+      {content && !profileBannerCard[activeAccount?.id] ? (
         <div className="pb-[36px] sm:pb-20">
           <BannerCard
             title={content.title as string}
@@ -37,7 +39,10 @@ export const DashboardBannerCard = () => {
               navigate('/profile/edit/profile');
             }}
             onClose={() => {
-              setProfileBannerCard(true);
+              setProfileBannerCard({
+                ...profileBannerCard,
+                [activeAccount?.id]: true,
+              });
             }}
           />
         </div>

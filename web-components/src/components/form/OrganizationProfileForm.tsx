@@ -67,7 +67,11 @@ const OrganizationProfileForm: React.FC<React.PropsWithChildren<FormProps>> =
       >
         {({ submitForm, isSubmitting, isValid, submitCount }) => {
           return (
-            <Form>
+            <Form
+              placeholder={undefined}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
+            >
               <OnBoardingCard>
                 <Field
                   component={ControlledTextField}

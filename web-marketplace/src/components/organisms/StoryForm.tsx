@@ -245,7 +245,12 @@ const StoryForm: React.FC<React.PropsWithChildren<StoryFormProps>> = ({
       >
         {({ submitForm, isValid, isSubmitting, dirty }) => {
           return (
-            <Form translate="yes">
+            <Form
+              translate="yes"
+              placeholder={undefined}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
+            >
               <OnBoardingCard className={styles.storyCard}>
                 <Field
                   charLimit={500}

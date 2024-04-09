@@ -38,7 +38,13 @@ export const CreditClassForm = (props: {
     disabledFields.includes(field);
 
   return (
-    <Form translate="yes" id={props.id}>
+    <Form
+      translate="yes"
+      id={props.id}
+      placeholder={undefined}
+      onPointerEnterCapture={undefined}
+      onPointerLeaveCapture={undefined}
+    >
       <OnBoardingCard>
         <Field
           component={ControlledTextField}

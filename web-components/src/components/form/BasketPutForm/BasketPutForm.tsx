@@ -72,7 +72,11 @@ const BasketPutForm: React.FC<React.PropsWithChildren<FormProps>> = ({
       onSubmit={onSubmit}
     >
       {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
-        <Form>
+        <Form
+          placeholder={undefined}
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
+        >
           {hasManyBatchDenoms && (
             <Field
               name="batchDenom"

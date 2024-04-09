@@ -137,7 +137,11 @@ const BasketTakeForm: React.FC<React.PropsWithChildren<FormProps>> = ({
       onSubmit={submitHandler}
     >
       {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
-        <Form>
+        <Form
+          placeholder={undefined}
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
+        >
           <>
             <AmountField
               name="amount"

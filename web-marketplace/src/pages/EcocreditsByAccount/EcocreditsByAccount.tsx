@@ -11,6 +11,7 @@ import { ProfileHeader } from 'web-components/src/components/organisms/ProfileHe
 import Section from 'web-components/src/components/section';
 import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
+import { LinkComponentType } from 'web-components/src/types/shared/linkComponentType';
 import { truncate } from 'web-components/src/utils/truncate';
 
 import { getAccountUrl } from 'lib/block-explorer';
@@ -139,7 +140,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
                   ? profileVariantMapping[account.type]
                   : 'individual'
               }
-              LinkComponent={Link}
+              LinkComponent={Link as LinkComponentType}
             />
             <Box sx={{ backgroundColor: 'grey.50' }}>
               <Section sx={{ root: { pt: { xs: 15 } } }}>

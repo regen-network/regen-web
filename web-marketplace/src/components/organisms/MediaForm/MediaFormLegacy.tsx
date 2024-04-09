@@ -70,7 +70,12 @@ const MediaFormLegacy = (): JSX.Element => {
   };
 
   return (
-    <Form translate="yes">
+    <Form
+      translate="yes"
+      placeholder={undefined}
+      onPointerEnterCapture={undefined}
+      onPointerLeaveCapture={undefined}
+    >
       <Field
         {...largeImgFieldProps}
         buttonText="+ Add preview Photo"

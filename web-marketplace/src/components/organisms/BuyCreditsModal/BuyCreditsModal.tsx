@@ -262,7 +262,12 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
             }) => {
               return (
                 <div>
-                  <Form translate="yes">
+                  <Form
+                    translate="yes"
+                    placeholder={undefined}
+                    onPointerEnterCapture={undefined}
+                    onPointerLeaveCapture={undefined}
+                  >
                     <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
                       {'Sell order'}
                     </Title>

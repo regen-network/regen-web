@@ -8,6 +8,7 @@ import { SocialLink } from 'web-components/src/components/organisms/ProfileHeade
 import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
 import { containerStyles } from 'web-components/src/styles/container';
+import { LinkComponentType } from 'web-components/src/types/shared/linkComponentType';
 import { truncate } from 'web-components/src/utils/truncate';
 
 import { useAuth } from 'lib/auth/auth';
@@ -113,7 +114,7 @@ const Dashboard = (): JSX.Element => {
         variant={
           account?.type ? profileVariantMapping[account.type] : 'individual'
         }
-        LinkComponent={Link}
+        LinkComponent={Link as LinkComponentType}
       />
 
       <Box sx={{ bgcolor: 'grey.50' }}>

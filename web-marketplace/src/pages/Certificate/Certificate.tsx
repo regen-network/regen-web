@@ -8,6 +8,7 @@ import Certificate from 'web-components/src/components/certificate/index';
 import PrintIcon from 'web-components/src/components/icons/PrintIcon';
 import ShareIcons from 'web-components/src/components/icons/ShareIcons';
 import { Title } from 'web-components/src/components/typography';
+import { LinkComponentType } from 'web-components/src/types/shared/linkComponentType';
 
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
@@ -48,7 +49,7 @@ function CertificatePage(): JSX.Element {
             <Certificate
               {...certificateData}
               background="/svg/topology.svg"
-              linkComponent={Link}
+              linkComponent={Link as LinkComponentType}
             />
           </WithLoader>
         </div>

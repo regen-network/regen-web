@@ -3,6 +3,7 @@ import { Grid } from '@mui/material';
 
 import CurrentCreditsIcon from 'web-components/src/components/icons/CurrentCreditsIcon';
 import { CreditClassGridCard } from 'web-components/src/components/molecules/CreditClassGridCard/CreditClassGridCard';
+import { LinkComponentType } from 'web-components/src/types/shared/linkComponentType';
 
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -52,7 +53,7 @@ export const CreditClassTab = () => {
                       ?.creditsAvailableForUser ?? 0) === 0,
                 }}
                 href={`/credit-classes/${creditClass.id}`}
-                LinkComponent={Link}
+                LinkComponent={Link as LinkComponentType}
               />
             </Grid>
           ))}

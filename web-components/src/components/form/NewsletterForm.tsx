@@ -161,7 +161,11 @@ export default function NewsletterForm({
           );
         }
         return (
-          <Form>
+          <Form
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          >
             <Grid container wrap="nowrap" className={classes.grid}>
               <Grid item xs={gridXs.textField}>
                 <Field

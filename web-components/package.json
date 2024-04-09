@@ -30,7 +30,7 @@
     "@math.gl/web-mercator": "^4.0.0",
     "@mui/icons-material": "^5.1.0",
     "@mui/lab": "^5.0.0-alpha.54",
-    "@mui/material": "^5.10.10",
+    "@mui/material": "~5.14.17",
     "@mui/styled-engine": "^5.10.8",
     "@mui/styles": "^5.10.10",
     "@mui/system": "^5.10.10",

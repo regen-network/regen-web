@@ -25,6 +25,7 @@ import {
 import { Body } from 'web-components/src/components/typography';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
+import { useAuth } from 'lib/auth/auth';
 import { NameUrl } from 'lib/rdf/types';
 
 import { AddCertificationModal } from 'components/organisms/Modals/AddCertificationModal/AddCertificationModal';
@@ -100,7 +101,10 @@ export default function CreditBasics({
   saveProjectOptionSelected,
 }: Props): React.ReactElement {
   const { wallet } = useWallet();
-  const projects = useQueryProjectsByIssuer(wallet!.address); // TODO: We should not use the typescript bypass! here (should try to avoid using period)
+  const { activeAccount } = useAuth();
+  const projects = useQueryProjectsByIssuer(
+    activeAccount?.addr || wallet?.address,
+  );
 
   const { values, validateForm } = useFormikContext<CreditBasicsFormValues>();
   const { projectId } = values;

@@ -13,7 +13,7 @@ import { getClassesByIssuerQuery } from 'lib/queries/react-query/registry-server
 import { useLedger } from '../ledger';
 import type { ProjectWithMetadataObj as Project } from '../types/ledger/ecocredit';
 
-export default function useQueryProjectsByIssuer(issuer: string): Project[] {
+export default function useQueryProjectsByIssuer(issuer?: string): Project[] {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { ecocreditClient, dataClient } = useLedger();

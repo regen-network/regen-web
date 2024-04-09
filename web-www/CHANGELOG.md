@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/regen-network/regen-web/compare/v2.2.1...v2.3.0) (2024-04-09)
+
+### Features
+
+- add overrides for credit type and unit information in Sanity for Credit Class pages APP-2 ([#2324](https://github.com/regen-network/regen-web/issues/2324)) ([4eb5a22](https://github.com/regen-network/regen-web/commit/4eb5a22456fe2319fbb5cf5f6c0724a4a3af481f))
+
 ## [2.2.1](https://github.com/regen-network/regen-web/compare/v2.2.0...v2.2.1) (2024-03-06)
 
 **Note:** Version bump only for package web-www

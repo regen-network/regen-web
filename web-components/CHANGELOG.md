@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/regen-network/regen-web/compare/v2.2.1...v2.3.0) (2024-04-09)
+
+### Bug Fixes
+
+- add credentials to DELETE /files request ([#2318](https://github.com/regen-network/regen-web/issues/2318)) ([148c4a4](https://github.com/regen-network/regen-web/commit/148c4a41846804771fa993b575556d4a7ac2813c))
+- roles form missing image upload and empty wallet address bug ([#2305](https://github.com/regen-network/regen-web/issues/2305)) ([a89a743](https://github.com/regen-network/regen-web/commit/a89a7433db9d432f4ee2d915ea7c1192bea33026))
+- safari horizontal scroll with content overflow APP-1 ([#2328](https://github.com/regen-network/regen-web/issues/2328)) ([55231bb](https://github.com/regen-network/regen-web/commit/55231bbffbafe4c167750ad561f62462c1edf7b6))
+
+### Features
+
+- add loading spinner when file gets uploaded APP-10 ([#2326](https://github.com/regen-network/regen-web/issues/2326)) ([c0fc8b3](https://github.com/regen-network/regen-web/commit/c0fc8b31669bacd95b4e945ed69f6cb22b0d4206))
+- add new web2 login tracking events ([#2310](https://github.com/regen-network/regen-web/issues/2310)) ([fa2347a](https://github.com/regen-network/regen-web/commit/fa2347aea088c0a3b840a0f0f4914af127f7f0a2))
+- add overrides for credit type and unit information in Sanity for Credit Class pages APP-2 ([#2324](https://github.com/regen-network/regen-web/issues/2324)) ([4eb5a22](https://github.com/regen-network/regen-web/commit/4eb5a22456fe2319fbb5cf5f6c0724a4a3af481f))
+- Add Post Card component APP-49 ([#2272](https://github.com/regen-network/regen-web/issues/2272)) ([73789a8](https://github.com/regen-network/regen-web/commit/73789a808e36339a0dbb26c85f77953987421ffa))
+- APP-81 Hide ecocredits tab or certificates tab on profiles if tab is "hidden" or if user has no Keplr wallet ([#2333](https://github.com/regen-network/regen-web/issues/2333)) ([ceaa502](https://github.com/regen-network/regen-web/commit/ceaa502053dea3ae62f60d237f373e1569b2e139))
+
 ## [2.2.1](https://github.com/regen-network/regen-web/compare/v2.2.0...v2.2.1) (2024-03-06)
 
 ### Bug Fixes

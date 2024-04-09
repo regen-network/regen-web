@@ -1,6 +1,6 @@
 {
   "name": "web-components",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "private": true,
   "main": "build/index.js",
   "scripts": {

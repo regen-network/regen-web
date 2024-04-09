@@ -44,7 +44,12 @@ export default function MediaPage({
                 values.category === 'all' ? items : grouped[values.category];
               return (
                 <>
-                  <Form className={styles.form}>
+                  <Form
+                    className={styles.form}
+                    placeholder={undefined}
+                    onPointerEnterCapture={undefined}
+                    onPointerLeaveCapture={undefined}
+                  >
                     <Box
                       sx={{
                         display: 'inline-flex',

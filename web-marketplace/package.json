@@ -20,7 +20,7 @@
     "@mapbox/mapbox-sdk": "^0.15.3",
     "@mapbox/togeojson": "^0.16.0",
     "@mui/lab": "^5.0.0-alpha.54",
-    "@mui/material": "~5.14.17",
+    "@mui/material": "^5.10.10",
     "@mui/styles": "^5.10.10",
     "@rdfjs/parser-jsonld": "^2.1.0",
     "@regen-network/api": "0.6.0",

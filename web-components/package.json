@@ -71,7 +71,7 @@
     "react-lazyload": "^3.2.0",
     "react-map-gl": "^7.1.7",
     "react-phone-input-2": "^2.13.9",
-    "react-player": "^2.11.1",
+    "react-player": "2.13.0",
     "react-remove-scroll": "^2.3.0",
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",

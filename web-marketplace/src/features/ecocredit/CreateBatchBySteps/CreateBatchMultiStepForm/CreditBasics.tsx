@@ -103,7 +103,7 @@ export default function CreditBasics({
   const { wallet } = useWallet();
   const { activeAccount } = useAuth();
   const projects = useQueryProjectsByIssuer(
-    activeAccount?.addr || wallet?.address,
+    activeAccount?.addr ?? wallet?.address,
   );
 
   const { values, validateForm } = useFormikContext<CreditBasicsFormValues>();

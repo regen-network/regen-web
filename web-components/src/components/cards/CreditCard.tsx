@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import Credits from '../credits';
 import CreditPlaceInfo from '../place/CreditPlaceInfo';
 import { Body } from '../typography';
-import MediaCard from './MediaCard';
+import MediaCard from './MediaCard/MediaCard';
 
 export interface CreditInfo {
   name: string;

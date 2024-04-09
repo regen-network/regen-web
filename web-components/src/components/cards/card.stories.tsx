@@ -117,6 +117,7 @@ export const projectCard = (): JSX.Element => (
       tag="biodiversity"
       onClick={onClick}
       sx={{ maxWidth: 338 }}
+      draft
     />
   </Box>
 );

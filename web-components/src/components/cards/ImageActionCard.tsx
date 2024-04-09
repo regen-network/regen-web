@@ -5,8 +5,8 @@ import { makeStyles } from 'tss-react/mui';
 import { Theme } from '../../theme/muiTheme';
 import { parseText } from '../../utils/textParser';
 import OutlinedButton from '../buttons/OutlinedButton';
-import MediaCard from '../cards/MediaCard';
 import { Body, Title } from '../typography';
+import MediaCard from './MediaCard/MediaCard';
 
 const useStyles = makeStyles()((theme: Theme) => ({
   root: {

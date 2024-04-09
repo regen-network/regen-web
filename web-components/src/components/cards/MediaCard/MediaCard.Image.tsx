@@ -2,8 +2,10 @@ import { ReactNode } from 'react';
 import { ClassNameMap, styled } from '@mui/material';
 import cx from 'clsx';
 
-import { Image } from '../image';
-import { Label } from '../typography';
+import { DraftDocumentIcon } from '../../icons/DraftDocumentIcon';
+import { Image } from '../../image';
+import { Body, Label } from '../../typography';
+import { DRAFT } from './MediaCard.constants';
 
 type Props = {
   imageClassName?: string;
@@ -14,6 +16,7 @@ type Props = {
   backgroundGradient: boolean;
   tag?: string;
   children?: ReactNode;
+  draft?: boolean;
 };
 
 const BackgroundGradient = styled('div')({
@@ -36,6 +39,7 @@ export const MediaCardImage = ({
   imgSrc,
   tag,
   children,
+  draft,
 }: Props): JSX.Element => (
   <Image
     className={cx(imageClassName, classes.image)}
@@ -62,6 +66,16 @@ export const MediaCardImage = ({
       >
         {tag}
       </Label>
+    )}
+    {draft && (
+      <Body
+        size="xs"
+        className="flex items-center absolute bottom-20 right-20 bg-grey-0 rounded-[50px] px-10 py-[6px] border border-solid border-grey-300"
+      >
+        <DraftDocumentIcon />
+        &nbsp;
+        {DRAFT}
+      </Body>
     )}
     {children}
   </Image>

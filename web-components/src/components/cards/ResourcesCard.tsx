@@ -6,7 +6,7 @@ import { parseText } from '../../utils/textParser';
 import OutlinedButton from '../buttons/OutlinedButton';
 import EyeIcon from '../icons/EyeIcon';
 import { Body, Label } from '../typography';
-import MediaCard from './MediaCard';
+import MediaCard from './MediaCard/MediaCard';
 
 export interface ResourcesCardProps {
   image: { publicURL: string };

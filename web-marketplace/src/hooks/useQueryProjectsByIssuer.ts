@@ -1,60 +1,65 @@
-import { useEffect, useState } from 'react';
-import { QueryProjectsByAdminResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
+import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { useQueries, useQuery } from '@tanstack/react-query';
 
-import { getMetadata } from 'lib/db/api/metadata-graph';
+import { getProjectsByClassQuery } from 'lib/queries/react-query/ecocredit/getProjectsByClass/getProjectsByClassQuery';
+import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
+import { getClassesByIssuerQuery } from 'lib/queries/react-query/registry-server/graphql/indexer/getClassesByIssuer/getClassesByIssuer';
 
 import { useLedger } from '../ledger';
 import type { ProjectWithMetadataObj as Project } from '../types/ledger/ecocredit';
-import useEcocreditQuery from './useEcocreditQuery';
 
 export default function useQueryProjectsByIssuer(issuer: string): Project[] {
-  const { data: projectsResponse } =
-    useEcocreditQuery<QueryProjectsByAdminResponse>({
-      query: 'projectsByAdmin',
-      params: { admin: issuer },
-    });
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
+  const { ecocreditClient, dataClient } = useLedger();
 
-  const [projects, setProjects] = useState<Project[]>([]);
-  const { dataClient } = useLedger();
+  const { data: classesByIssuerData } = useQuery(
+    getClassesByIssuerQuery({
+      enabled: !!issuer && !!graphqlClient,
+      client: graphqlClient,
+      issuer,
+    }),
+  );
+  const classIds = classesByIssuerData?.data?.allClassIssuers?.nodes?.map(
+    n => n?.classId,
+  );
 
-  useEffect(() => {
-    if (!projectsResponse?.projects) return;
+  const projectsResults = useQueries({
+    queries:
+      classIds?.map(classId =>
+        getProjectsByClassQuery({
+          enabled: !!classId && !!ecocreditClient,
+          client: ecocreditClient,
+          request: { classId },
+        }),
+      ) || [],
+  });
+  const projects = projectsResults
+    .map(res => {
+      return res.data?.projects;
+    })
+    .flat();
 
-    let ignore = false;
+  const projectsMetadatasResults = useQueries({
+    queries: projects.map(project =>
+      getMetadataQuery({
+        iri: project?.metadata,
+        dataClient,
+        enabled: !!dataClient,
+      }),
+    ),
+  });
+  const projectsMetadata = projectsMetadatasResults.map(
+    queryResult => queryResult.data,
+  );
 
-    const fetchData = async (): Promise<void> => {
-      try {
-        const _projects = await Promise.all(
-          projectsResponse.projects.map(async project => {
-            let metadata;
-            if (project.metadata.length) {
-              try {
-                metadata = await getMetadata(project.metadata, dataClient);
-              } catch (error) {
-                // eslint-disable-next-line
-                console.error(error);
-              }
-            }
-            return {
-              ...project,
-              metadata,
-            };
-          }),
-        );
-        if (!ignore) {
-          setProjects(_projects);
-        }
-      } catch (error) {
-        // eslint-disable-next-line
-        console.error(error);
-      }
-    };
-    fetchData();
-
-    return () => {
-      ignore = true;
-    };
-  }, [dataClient, projectsResponse?.projects]);
-
-  return projects;
+  return projects.map((project, i) => ({
+    ...(project as ProjectInfo),
+    metadata: projectsMetadata[i],
+  }));
 }

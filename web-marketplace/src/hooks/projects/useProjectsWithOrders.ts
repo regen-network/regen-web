@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useApolloClient } from '@apollo/client';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -29,7 +30,6 @@ import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 
 import { useLastRandomProjects } from './useLastRandomProjects';
 import { selectProjects } from './useProjectsWithOrders.utils';
-import { useMemo } from 'react';
 
 export interface ProjectsWithOrdersProps {
   limit?: number;

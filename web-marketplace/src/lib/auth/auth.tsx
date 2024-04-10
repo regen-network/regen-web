@@ -64,28 +64,24 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   );
 
   // hide the banner if a user has already set name, profile image, background image and one of the external links
+  const shouldSetProfileBannerCard =
+    !profileBannerCard[activeAccount?.id] &&
+    activeAccount?.name &&
+    activeAccount?.image &&
+    activeAccount?.bgImage &&
+    (activeAccount?.twitterLink || activeAccount?.websiteLink);
   useEffect(() => {
-    if (
-      !profileBannerCard[activeAccount?.id] &&
-      activeAccount?.name &&
-      activeAccount?.image &&
-      activeAccount?.bgImage &&
-      (activeAccount?.twitterLink || activeAccount?.websiteLink)
-    ) {
+    if (shouldSetProfileBannerCard) {
       setProfileBannerCard({
         ...profileBannerCard,
         [activeAccount?.id]: true,
       });
     }
   }, [
-    activeAccount?.bgImage,
     activeAccount?.id,
-    activeAccount?.image,
-    activeAccount?.name,
-    activeAccount?.twitterLink,
-    activeAccount?.websiteLink,
     profileBannerCard,
     setProfileBannerCard,
+    shouldSetProfileBannerCard,
   ]);
 
   return (

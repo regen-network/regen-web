@@ -3,7 +3,11 @@ import { useApolloClient } from '@apollo/client';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { ProjectByIdQuery, ProjectByOnChainIdQuery } from 'generated/graphql';
+import {
+  ProjectByIdQuery,
+  ProjectByOnChainIdQuery,
+  ProjectPatch,
+} from 'generated/graphql';
 import { NestedPartial } from 'types/nested-partial';
 import { useAuth } from 'lib/auth/auth';
 import {
@@ -49,6 +53,7 @@ export interface MetadataSubmitProps {
   values: Values;
   overwrite?: boolean;
   shouldNavigate?: boolean;
+  projectPatch?: ProjectPatch;
 }
 
 interface Res {
@@ -172,31 +177,25 @@ export const useProjectWithMetadata = ({
       values,
       overwrite = false,
       shouldNavigate = true,
+      projectPatch = {},
     }: MetadataSubmitProps): Promise<void> => {
       let newMetadata = values;
       if (!overwrite) {
         newMetadata = { ...metadata, ...values };
       }
-      try {
-        if (isEdit && anchored && !!onChainProject) {
-          await projectEditSubmit(
-            newMetadata as NestedPartial<ProjectMetadataLD>,
-          );
-        } else {
-          await createOrUpdateProject({
-            offChainProjectId: offChainProject?.id,
-            projectPatch: { metadata: newMetadata },
-          });
+      if (isEdit && anchored && !!onChainProject) {
+        await projectEditSubmit(
+          newMetadata as NestedPartial<ProjectMetadataLD>,
+        );
+      } else {
+        await createOrUpdateProject({
+          offChainProjectId: offChainProject?.id,
+          projectPatch: { metadata: newMetadata, ...projectPatch },
+        });
 
-          !isEdit && shouldNavigate && navigateNext();
-        }
-        await metadataReload();
-      } catch (e) {
-        // TODO: Should we display the error banner here?
-        // https://github.com/regen-network/regen-registry/issues/554
-        // eslint-disable-next-line no-console
-        console.log(e);
+        !isEdit && shouldNavigate && navigateNext();
       }
+      await metadataReload();
     },
     [
       metadata,

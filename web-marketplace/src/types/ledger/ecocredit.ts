@@ -43,7 +43,7 @@ export type ClassID = 'C01' | 'C02' | 'C03';
 type GenericObject = { [key: string]: any };
 
 export interface ProjectWithMetadataObj extends Omit<ProjectInfo, 'metadata'> {
-  metadata: GenericObject;
+  metadata?: GenericObject;
 }
 
 export type BridgedTxStatus =

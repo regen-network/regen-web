@@ -40,7 +40,10 @@ const LinkWithArrow: React.FC<React.PropsWithChildren<LinkWithArrowProps>> = ({
           rel="noreferrer"
         >
           {parseText(label)}
-          <SmallArrowIcon sx={{ ml: 2, mb: 0.3, height: 9, width: 13 }} />
+          <SmallArrowIcon
+            className="text-brand-400"
+            sx={{ ml: 2, mb: 0.3, height: 9, width: 13 }}
+          />
         </Link>
       ) : (
         <Box className={className} sx={sxToArray(sx)}>

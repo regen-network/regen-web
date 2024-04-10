@@ -11,3 +11,4 @@ export const CLASS_STATUS = 'credit class status';
 export const PROJECT_TIMELINE = 'Project timeline';
 export const CLASS_TIMELINE = 'Credit class timeline';
 export const VIEW_TIMELINE = '+ view timeline';
+export const COPY_TOOLTIP = 'Copy link to project page';

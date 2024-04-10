@@ -1,0 +1,8 @@
+fragment bannerCardFields on BannerCard {
+  title
+  descriptionRaw
+  image {
+    ...customImageFields
+  }
+  buttonLabel
+}

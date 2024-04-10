@@ -206,7 +206,10 @@ const ProfileHeader = ({
                     setShowProfileLinkSuccessBanner(true);
                   }}
                 >
-                  <ShareIcon sx={{ ml: 2, cursor: 'pointer' }} />
+                  <ShareIcon
+                    className="text-grey-0"
+                    sx={{ ml: 2, cursor: 'pointer' }}
+                  />
                 </Link>
               </InfoTooltip>
             )}

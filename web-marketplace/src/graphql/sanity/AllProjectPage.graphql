@@ -1,5 +1,8 @@
 query allProjectPage {
   allProjectPage {
+    bannerCard {
+      ...bannerCardFields
+    }
     gettingStartedResourcesSection {
       ...gettingStartedResourcesSectionFields
     }

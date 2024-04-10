@@ -1,0 +1,7 @@
+query AllProfilePage {
+  allProfilePage {
+    bannerCard {
+      ...bannerCardFields
+    }
+  }
+}

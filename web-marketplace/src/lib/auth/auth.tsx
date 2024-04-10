@@ -1,15 +1,18 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useEffect } from 'react';
 import {
   ApolloClient,
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
 import { useQueries, useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { AccountByIdQuery } from 'generated/graphql';
 import { getAccountsQuery } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery';
 import { PrivateAccount } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.types';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
+
+import { profileBannerCardAtom } from 'pages/Dashboard/Dashboard.store';
 
 export type AuthContextType = {
   error?: unknown;
@@ -55,6 +58,31 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const privActiveAccount = privAuthenticatedAccounts?.find(
     account => account?.id === activeAccountId,
   );
+
+  const [profileBannerCard, setProfileBannerCard] = useAtom(
+    profileBannerCardAtom,
+  );
+
+  // hide the banner if a user has already set name, profile image, background image and one of the external links
+  const shouldSetProfileBannerCard =
+    !profileBannerCard[activeAccount?.id] &&
+    activeAccount?.name &&
+    activeAccount?.image &&
+    activeAccount?.bgImage &&
+    (activeAccount?.twitterLink || activeAccount?.websiteLink);
+  useEffect(() => {
+    if (shouldSetProfileBannerCard) {
+      setProfileBannerCard({
+        ...profileBannerCard,
+        [activeAccount?.id]: true,
+      });
+    }
+  }, [
+    activeAccount?.id,
+    profileBannerCard,
+    setProfileBannerCard,
+    shouldSetProfileBannerCard,
+  ]);
 
   return (
     <AuthContext.Provider

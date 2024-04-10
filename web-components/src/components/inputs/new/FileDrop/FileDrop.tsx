@@ -86,6 +86,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
     const [isEdit, setIsEdit] = useState(false);
     const [initialImage, setInitialImage] = useState('');
     const [selectedFiles, setSelectedFiles] = useState<Array<File>>([]);
+    const [nextFieldIndex, setNextFieldIndex] = useState(0);
 
     const { classes: styles, cx } = useFileDropStyles();
     const isFirstField = fieldIndex === 0;
@@ -156,11 +157,12 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
       });
 
       if (result) {
-        setValue(result, currentFile.type, fieldIndex);
+        setValue(result, currentFile.type, fieldIndex + nextFieldIndex);
         const remainingFiles = selectedFiles.slice(1);
         setSelectedFiles(remainingFiles);
         setIsModalOpen(false);
         if (multi && remainingFiles.length > 0) {
+          setNextFieldIndex(current => current + 1);
           toBase64(remainingFiles[0]).then(base64String => {
             if (typeof base64String === 'string') {
               setIsModalOpen(true);

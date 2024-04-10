@@ -1,6 +1,6 @@
 import { getResizedImageUrl } from 'utils/image/getResizedImageUrl';
 
-import TwitterIcon2 from 'web-components/src/components/icons/social/TwitterIcon2';
+import TwitterIcon from 'web-components/src/components/icons/social/TwitterIcon';
 import WebsiteLinkIcon from 'web-components/src/components/icons/social/WebsiteLinkIcon';
 import { SocialLink } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader.types';
 
@@ -32,7 +32,7 @@ export const getSocialsLinks = ({
   return [
     {
       href: account?.twitterLink,
-      icon: <TwitterIcon2 />,
+      icon: <TwitterIcon color="currentColor" />,
     },
     {
       href: account?.websiteLink,

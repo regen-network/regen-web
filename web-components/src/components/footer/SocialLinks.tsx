@@ -3,13 +3,11 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import { makeStyles } from 'tss-react/mui';
 
+import { cn } from '../../utils/styles/cn';
 import DiscordIcon from '../icons/social/DiscordIcon';
-import FacebookIcon from '../icons/social/FacebookIcon';
 import GithubIcon from '../icons/social/GithubIcon';
-import InstagramIcon from '../icons/social/InstagramIcon';
 import LinkedInIcon from '../icons/social/LinkedInIcon';
 import MediumIcon from '../icons/social/MediumIcon';
-import TelegramIcon from '../icons/social/TelegramIcon';
 import TwitterIcon from '../icons/social/TwitterIcon';
 import YoutubeIcon from '../icons/social/YoutubeIcon';
 import { Label } from '../typography';
@@ -24,7 +22,6 @@ const useStyles = makeStyles()(theme => ({
       justifyContent: 'center',
     },
     [theme.breakpoints.down('sm')]: {
-      marginLeft: theme.spacing(-2),
       justifyContent: 'space-between',
     },
   },
@@ -32,8 +29,6 @@ const useStyles = makeStyles()(theme => ({
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(12.75),
       height: theme.spacing(12.75),
-      marginLeft: theme.spacing(2.5),
-      marginRight: theme.spacing(2.5),
     },
     [theme.breakpoints.down('sm')]: {
       width: theme.spacing(7.75),
@@ -62,62 +57,48 @@ const SocialLinks: React.FC<React.PropsWithChildren<Props>> = ({
       >
         join the community
       </Label>
-      <Grid container wrap="nowrap" className={styles.social}>
-        <Link
-          href="https://www.instagram.com/regennetwork/"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <InstagramIcon className={styles.icon} />
-        </Link>
-        <Link
-          href="http://t.me/regennetwork_public"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <TelegramIcon className={styles.icon} />
-        </Link>
-        <Link
-          href="https://facebook.com/weareregennetwork"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <FacebookIcon className={styles.icon} />
-        </Link>
+      <Grid
+        container
+        alignItems="center"
+        wrap="nowrap"
+        className={styles.social}
+      >
         <Link
           href="http://twitter.com/regen_network"
           rel="noopener noreferrer"
           target="_blank"
         >
-          <TwitterIcon className={styles.icon} />
+          <TwitterIcon className="w-[17px] h-[16px] sm:w-[23px] sm:h-[22px] sm:mx-10" />
         </Link>
         <Link
           href="https://www.linkedin.com/company/regen-network/"
           rel="noopener noreferrer"
           target="_blank"
         >
-          <LinkedInIcon className={styles.icon} />
+          <LinkedInIcon className={cn(styles.icon, 'sm:mx-10')} />
         </Link>
         <Link
           href="https://medium.com/regen-network"
           rel="noopener noreferrer"
           target="_blank"
         >
-          <MediumIcon className={styles.icon} />
+          <MediumIcon className={cn(styles.icon, 'sm:mx-10')} />
         </Link>
         <Link
           href="https://www.youtube.com/channel/UCICD2WukTY0MbQdQ9Quew3g"
           rel="noopener noreferrer"
           target="_blank"
         >
-          <YoutubeIcon className={cx(styles.smallIcon, styles.icon)} />
+          <YoutubeIcon
+            className={cx(styles.smallIcon, styles.icon, 'sm:mx-10')}
+          />
         </Link>
         <Link
           href="https://github.com/regen-network/"
           rel="noopener noreferrer"
           target="_blank"
         >
-          <GithubIcon className={styles.icon} />
+          <GithubIcon className={cn(styles.icon, 'sm:mx-10')} />
         </Link>
         <Link
           href="https://discord.gg/6ghMcMBjbz"
@@ -125,7 +106,12 @@ const SocialLinks: React.FC<React.PropsWithChildren<Props>> = ({
           target="_blank"
         >
           <DiscordIcon
-            className={cx(styles.smallIcon, styles.icon, styles.discord)}
+            className={cx(
+              styles.smallIcon,
+              styles.icon,
+              styles.discord,
+              'sm:mx-10',
+            )}
           />
         </Link>
       </Grid>

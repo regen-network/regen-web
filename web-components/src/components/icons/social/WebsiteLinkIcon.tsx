@@ -1,15 +1,8 @@
-import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
+import React from 'react';
 
-interface IconProps extends SvgIconProps {}
-
-export default function WebsiteLinkIcon({ sx = [], ...props }: IconProps) {
+export default function WebsiteLinkIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <SvgIcon
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 40 40"
-      sx={[{ fill: 'none' }, ...(Array.isArray(sx) ? sx : [sx])]}
-      {...props}
-    >
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" {...props}>
       <rect
         x={2.121}
         width={13.622}
@@ -28,6 +21,6 @@ export default function WebsiteLinkIcon({ sx = [], ...props }: IconProps) {
         stroke="currentColor"
         strokeWidth={3}
       />
-    </SvgIcon>
+    </svg>
   );
 }

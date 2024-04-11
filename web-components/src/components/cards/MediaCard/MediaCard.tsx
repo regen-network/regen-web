@@ -3,11 +3,11 @@ import { CardMedia, SxProps } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 import { makeStyles } from 'tss-react/mui';
 
-import type { Theme } from '../../theme/muiTheme';
-import { parseText } from '../../utils/textParser';
-import { OptimizeImageProps } from '../image';
-import { Title } from '../typography';
-import Card from './Card';
+import type { Theme } from '../../../theme/muiTheme';
+import { parseText } from '../../../utils/textParser';
+import { OptimizeImageProps } from '../../image';
+import { Title } from '../../typography';
+import Card from '../Card';
 import { MediaCardImage } from './MediaCard.Image';
 
 export interface MediaCardProps extends OptimizeImageProps {
@@ -30,6 +30,7 @@ export interface MediaCardProps extends OptimizeImageProps {
   truncateTitle?: boolean;
   imageChildren?: ReactNode;
   sx?: SxProps<Theme>;
+  draft?: boolean;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -61,6 +62,7 @@ export default function MediaCard({
   apiServerUrl,
   imageChildren,
   sx = [],
+  draft,
 }: MediaCardProps): JSX.Element {
   const { classes, cx } = useStyles();
   const optimizedImage = useCallback(
@@ -74,6 +76,7 @@ export default function MediaCard({
         imgSrc={imgSrc}
         tag={tag}
         children={imageChildren}
+        draft={draft}
       />
     ),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -85,6 +88,7 @@ export default function MediaCard({
       imageStorageBaseUrl,
       imgSrc,
       tag,
+      draft,
       // do not add imageChildren here
       // this would make the card image blinking
     ],

@@ -1,6 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Grid } from '@mui/material';
-import { useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
 import { CreateProjectCard } from 'web-components/src/components/cards/CreateCards/CreateProjectCard';
@@ -15,8 +14,8 @@ import WithLoader from 'components/atoms/WithLoader';
 
 import { useDashboardContext } from '../Dashboard.context';
 import { useFetchProjectByAdmin } from './hooks/useFetchProjectsByAdmin';
-import { getDefaultProject } from './MyProjects.utils';
 import { DRAFT_ID } from './MyProjects.constants';
+import { getDefaultProject } from './MyProjects.utils';
 
 const MyProjects = (): JSX.Element => {
   const navigate = useNavigate();
@@ -65,6 +64,7 @@ const MyProjects = (): JSX.Element => {
                   <ProjectCard
                     {...getDefaultProject(!activeAccountId)}
                     {...project}
+                    draft={project.offChain && !project.published}
                     onButtonClick={() => {
                       if (
                         !project.offChain ||

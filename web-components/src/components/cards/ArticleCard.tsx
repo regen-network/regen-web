@@ -6,7 +6,7 @@ import { makeStyles } from 'tss-react/mui';
 import OutlinedButton from '../buttons/OutlinedButton';
 import PlayIcon from '../icons/PlayIcon';
 import { Body } from '../typography';
-import MediaCard from './MediaCard';
+import MediaCard from './MediaCard/MediaCard';
 
 function getBtnText(type?: string | null): string {
   switch (type) {

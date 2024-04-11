@@ -12,7 +12,7 @@ import { PrefinanceIcon } from '../../icons/PrefinanceIcon';
 import ProjectPlaceInfo from '../../place/ProjectPlaceInfo';
 import { Label } from '../../typography';
 import { Account, User } from '../../user/UserInfo';
-import MediaCard, { MediaCardProps } from '../MediaCard';
+import MediaCard, { MediaCardProps } from '../MediaCard/MediaCard';
 import {
   AVG_PRICE_TOOLTIP,
   DEFAULT_BUY_BUTTON,

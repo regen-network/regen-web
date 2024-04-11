@@ -3,7 +3,6 @@ import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 
 import { Flex } from 'web-components/src/components/box';
-import BridgeIcon from 'web-components/src/components/icons/BridgeIcon';
 import { CreditBatchIcon } from 'web-components/src/components/icons/CreditBatchIcon';
 import { CreditClassIcon } from 'web-components/src/components/icons/CreditClassIcon';
 import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
@@ -15,7 +14,6 @@ import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
 import { truncate } from 'web-components/src/utils/truncate';
 
 import { getAccountUrl } from 'lib/block-explorer';
-import { isBridgeEnabled } from 'lib/ledger';
 import { getProfileLink } from 'lib/profileLink';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -86,15 +84,12 @@ export const EcocreditsByAccount = (): JSX.Element => {
         href: `/profiles/${accountAddressOrId}/credit-batches`,
         hidden: !isIssuer,
       },
-      {
-        label: 'Bridge',
-        icon: <BridgeIcon linearGradient />,
-        href: `/profiles/${accountAddressOrId}/bridge`,
-        hidden: !isBridgeEnabled || !address,
-      },
     ],
     [
+      account?.hideEcocredits,
+      account?.hideRetirements,
       accountAddressOrId,
+      address,
       creditClasses.length,
       isIssuer,
       isProjectAdmin,

@@ -44,4 +44,11 @@ export const useProjectStorySectionStyles = makeStyles()((theme: Theme) => ({
       },
     },
   },
+  expanded: {
+    [theme.breakpoints.up('md')]: {
+      '& > p:first-child': {
+        width: '67%',
+      },
+    },
+  },
 }));

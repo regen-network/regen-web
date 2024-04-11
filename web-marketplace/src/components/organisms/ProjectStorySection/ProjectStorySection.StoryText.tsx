@@ -33,7 +33,12 @@ export function StoryText({
       <ReadMore
         maxLength={450}
         restMinLength={300}
-        classes={hasMedia ? { textContainer: classes.readMore } : undefined}
+        applyExpandedClass={233}
+        classes={
+          hasMedia
+            ? { textContainer: classes.readMore, expanded: classes.expanded }
+            : undefined
+        }
       >
         {story}
       </ReadMore>

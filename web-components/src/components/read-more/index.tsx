@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Fade from '@mui/material/Fade';
 import { Theme } from '@mui/material/styles';
 import ReactHtmlParser from 'html-react-parser';
@@ -16,7 +16,9 @@ export interface ReadMoreProps {
     root?: string;
     textContainer?: string;
     description?: string;
+    expanded?: string;
   };
+  applyExpandedClass?: number;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -57,6 +59,7 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
   restMinLength = 300,
   children,
   classes,
+  applyExpandedClass,
 }) => {
   const { classes: styles, cx } = useStyles();
   const [expanded, setExpanded] = useState(false);
@@ -67,6 +70,10 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
       onClick={() => setExpanded(!expanded)}
       expanded={expanded}
     />
+  );
+  const rest = useMemo(
+    () => texts.rest.split('\n').filter(text => !!text),
+    [texts],
   );
 
   return (
@@ -80,12 +87,35 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
         </Body>
         <Fade in={expanded} mountOnEnter unmountOnExit>
           {/* https://mui.com/guides/migration-v4/#cannot-read-property-scrolltop-of-null */}
-          <div>
-            <Body size="xl" mobileSize="md">
-              {!texts.rest.startsWith('\n') && '\n'}
-              <span className={styles.text}>{ReactHtmlParser(texts.rest)}</span>
-              {texts.rest && expanded && <Button />}
-            </Body>
+          <div
+            className={
+              applyExpandedClass && texts.truncated.length < applyExpandedClass
+                ? classes?.expanded
+                : ''
+            }
+          >
+            {!texts.rest.startsWith('\n') && (
+              <Body size="xl" mobileSize="md">
+                {'\n'}
+              </Body>
+            )}
+            {rest.map((text, i) => (
+              <Body size="xl" mobileSize="md">
+                {rest && i === 0 && expanded && (
+                  <>
+                    <br />
+                  </>
+                )}
+                <span className={styles.text}>{ReactHtmlParser(text)}</span>
+                {rest && i === rest.length - 1 && expanded && <Button />}
+                {rest && i !== rest.length - 1 && expanded && (
+                  <>
+                    <br />
+                    <br />
+                  </>
+                )}
+              </Body>
+            ))}
           </div>
         </Fade>
       </div>

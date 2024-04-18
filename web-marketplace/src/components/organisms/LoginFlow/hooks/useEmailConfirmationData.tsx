@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { postData } from 'utils/fetch/postData';
@@ -14,7 +13,6 @@ import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCs
 import { AccountEvent, EmailLoginEvent } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
-import { DRAFT_ID } from 'pages/Dashboard/MyProjects/MyProjects.constants';
 import { onPostData } from 'components/organisms/LoginButton/hooks/onLoginPostData';
 import { useTimer } from 'components/organisms/LoginButton/hooks/useTimer';
 import { getEmailModalError } from 'components/organisms/LoginButton/utils/getEmailModalError';
@@ -31,13 +29,11 @@ import {
 
 type EmailConfirmationDataParams = {
   emailConfirmationText?: string;
-  createProject?: boolean;
   isConnectingRef?: React.MutableRefObject<boolean>;
 };
 
 export const useEmailConfirmationData = ({
   emailConfirmationText,
-  createProject,
   isConnectingRef,
 }: EmailConfirmationDataParams) => {
   const reactQueryClient = useQueryClient();
@@ -58,7 +54,6 @@ export const useEmailConfirmationData = ({
     duration: RESEND_TIMER,
   });
   const { track } = useTracker();
-  const navigate = useNavigate();
 
   const onConfirmationModalClose = () => setIsConfirmationModalOpen(false);
   const onConnectedEmailErrorModalClose = () =>

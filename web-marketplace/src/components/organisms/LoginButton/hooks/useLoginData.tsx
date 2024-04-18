@@ -42,7 +42,6 @@ export const useLoginData = ({
 
   const connectToWallet = useConnectToWallet({
     isConnectingRef,
-    navigateCreateProject: createProject ? navigate : undefined,
     onModalClose,
     setModalState,
     connect,

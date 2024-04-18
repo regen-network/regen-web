@@ -1,5 +1,4 @@
 import { MutableRefObject, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { Track } from 'lib/tracker/types';
@@ -38,7 +37,6 @@ export const useConnectWallet = ({
       walletType,
       doLogin,
       doLogout,
-      navigateCreateProject,
     }: ConnectWalletParams): Promise<Wallet | undefined> => {
       const walletConfig = walletsConfig.find(
         walletConfig => walletConfig.type === walletType,
@@ -70,7 +68,6 @@ export const useConnectWallet = ({
           doLogin,
           doLogout,
           track,
-          navigateCreateProject,
         });
 
         return wallet;

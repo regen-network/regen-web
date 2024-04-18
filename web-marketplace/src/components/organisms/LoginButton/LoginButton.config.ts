@@ -1,5 +1,3 @@
-import { NavigateFunction } from 'react-router-dom';
-
 import { ConnectParams } from 'lib/wallet/wallet.types';
 import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
 

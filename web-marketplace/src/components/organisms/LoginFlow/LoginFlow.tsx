@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { useAtom } from 'jotai';
 
 import { EmailConfirmationModal } from 'web-components/src/components/modal/EmailConfirmationModal/EmailConfirmationModal';

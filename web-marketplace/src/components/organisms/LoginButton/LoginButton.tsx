@@ -28,7 +28,7 @@ const LoginButton = ({ size = 'small' }: Props) => {
     onModalClose,
     walletsUiConfig,
     onButtonClick,
-  } = useLoginData();
+  } = useLoginData({});
   const { noAccountAndNoWallet } = useAuthData();
 
   const { bankClient } = useLedger();

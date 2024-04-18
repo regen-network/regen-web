@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { postData } from 'utils/fetch/postData';
@@ -10,7 +11,10 @@ import { useAuth } from 'lib/auth/auth';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
+import { AccountEvent, EmailLoginEvent } from 'lib/tracker/types';
+import { useTracker } from 'lib/tracker/useTracker';
 
+import { DRAFT_ID } from 'pages/Dashboard/MyProjects/MyProjects.constants';
 import { onPostData } from 'components/organisms/LoginButton/hooks/onLoginPostData';
 import { useTimer } from 'components/organisms/LoginButton/hooks/useTimer';
 import { getEmailModalError } from 'components/organisms/LoginButton/utils/getEmailModalError';
@@ -24,15 +28,17 @@ import {
   RESEND_SUCCES,
   RESEND_TIMER,
 } from '../../LoginButton/LoginButton.constants';
-import { useTracker } from 'lib/tracker/useTracker';
-import { EmailLoginEvent, AccountEvent } from 'lib/tracker/types';
 
 type EmailConfirmationDataParams = {
   emailConfirmationText?: string;
+  createProject?: boolean;
+  isConnectingRef?: React.MutableRefObject<boolean>;
 };
 
 export const useEmailConfirmationData = ({
   emailConfirmationText,
+  createProject,
+  isConnectingRef,
 }: EmailConfirmationDataParams) => {
   const reactQueryClient = useQueryClient();
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
@@ -52,6 +58,7 @@ export const useEmailConfirmationData = ({
     duration: RESEND_TIMER,
   });
   const { track } = useTracker();
+  const navigate = useNavigate();
 
   const onConfirmationModalClose = () => setIsConfirmationModalOpen(false);
   const onConnectedEmailErrorModalClose = () =>
@@ -87,6 +94,7 @@ export const useEmailConfirmationData = ({
           await reactQueryClient.invalidateQueries([GET_ACCOUNTS_QUERY_KEY]);
           setBannerText(emailConfirmationText ?? EMAIL_CONFIRMATION_SUCCES);
           onConfirmationModalClose();
+          if (isConnectingRef) isConnectingRef.current = true;
           if (response?.user?.accountId)
             track<AccountEvent>('enterCodeSuccess', {
               id: response.user.accountId,

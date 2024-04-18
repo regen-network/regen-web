@@ -2,6 +2,7 @@ import truncate from 'lodash/truncate';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { apiUri } from 'lib/apiUri';
+import { ConnectEvent, Track } from 'lib/tracker/types';
 
 import { chainInfo } from './chainInfo/chainInfo';
 import { LoginType, Wallet } from './wallet';
@@ -15,7 +16,6 @@ import {
   WalletConfig,
   WalletType,
 } from './walletsConfig/walletsConfig.types';
-import { ConnectEvent, Track } from 'lib/tracker/types';
 
 /* getWallet */
 

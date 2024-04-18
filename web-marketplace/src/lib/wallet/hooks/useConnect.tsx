@@ -28,7 +28,11 @@ export const useConnect = ({
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
   const connect = useCallback(
-    async ({ walletType, doLogin }: ConnectParams): Promise<void> => {
+    async ({
+      walletType,
+      doLogin,
+      navigateCreateProject,
+    }: ConnectParams): Promise<void> => {
       try {
         if (walletType === WalletType.Keplr && !window.keplr) {
           throw new Error(
@@ -36,7 +40,7 @@ export const useConnect = ({
           );
         }
 
-        await connectWallet({ walletType, doLogin });
+        await connectWallet({ walletType, doLogin, navigateCreateProject });
         setConnectionType(walletType);
 
         if (walletType === WalletType.Keplr) {

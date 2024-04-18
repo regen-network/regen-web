@@ -17,7 +17,7 @@ export const useProfileItems = ({ address, accountId }: Props) => {
   const { wallet } = useWallet();
   const walletAddress = wallet?.address;
   const activeAddress = address ?? walletAddress;
-  const { isIssuer } = useQueryIsIssuer({ address });
+  const { isIssuer, isLoadingIsIssuer } = useQueryIsIssuer({ address });
   const isCreditClassCreator = useQueryIfCreditClassCreator({ address });
   const { isProjectAdmin } = useQueryIsProjectAdmin({ address, accountId });
   const isCreditClassAdmin = useQueryIsClassAdmin({ address });
@@ -37,5 +37,6 @@ export const useProfileItems = ({ address, accountId }: Props) => {
     isCreditClassCreator: false && isCreditClassCreator,
     isProjectAdmin: isProjectAdmin,
     isIssuer: isIssuer,
+    isLoadingIsIssuer,
   };
 };

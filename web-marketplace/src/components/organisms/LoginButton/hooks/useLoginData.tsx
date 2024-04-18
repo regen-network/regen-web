@@ -38,7 +38,7 @@ export const useLoginData = ({
   const onModalClose = useCallback((): void => {
     setIsModalOpen(false);
     setModalState('select');
-  }, []);
+  }, [setIsModalOpen, setModalState]);
 
   const connectToWallet = useConnectToWallet({
     isConnectingRef,

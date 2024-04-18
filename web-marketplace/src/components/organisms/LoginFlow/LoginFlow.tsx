@@ -44,7 +44,7 @@ const LoginFlow = ({
     onMailCodeChange,
     onResendPasscode,
     onEmailSubmit,
-  } = useEmailConfirmationData({ createProject, isConnectingRef });
+  } = useEmailConfirmationData({ isConnectingRef });
   const [isWaitingForSigning, setIsWaitingForSigningAtom] = useAtom(
     isWaitingForSigningAtom,
   );

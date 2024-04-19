@@ -13,7 +13,7 @@ export const useSocialProviders = (createProject: boolean = false) => {
           date: new Date().toUTCString(),
         });
         window.location.href = `${apiUri}/marketplace/v1/auth/google${
-          createProject ? '?createProject=t' : ''
+          createProject ? '?route=project-pages/draft/basic-info' : ''
         }`;
       },
     },

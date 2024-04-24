@@ -16,6 +16,7 @@ import { DRAFT_ID } from 'pages/Dashboard/MyProjects/MyProjects.constants';
 import { useWallet } from '../../../lib/wallet/wallet';
 import { useLoginData } from '../LoginButton/hooks/useLoginData';
 import { LoginFlow } from '../LoginFlow/LoginFlow';
+import { LIST_PROJECT } from './ListProject.constants';
 
 const ListProject = () => {
   const { wallet } = useWallet();
@@ -46,7 +47,7 @@ const ListProject = () => {
   return (
     <div>
       <Body
-        className="font-bold bg-clip-text cursor-pointer pt-[2px] pr-10 sm:pr-50 bg-[linear-gradient(202deg,#4FB573_14.67%,#B9E1C7_97.14%)]"
+        className="text-[11px] sm:text-base font-bold bg-clip-text cursor-pointer pt-[2px] pr-10 sm:pr-50 bg-[linear-gradient(202deg,#4FB573_14.67%,#B9E1C7_97.14%)]"
         sx={{
           textFillColor: 'transparent',
         }}
@@ -61,7 +62,7 @@ const ListProject = () => {
             : onButtonClick
         }
       >
-        +List a project
+        {LIST_PROJECT}
       </Body>
       <LoginFlow
         createProject

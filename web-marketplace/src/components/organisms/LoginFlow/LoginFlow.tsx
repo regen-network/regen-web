@@ -3,7 +3,9 @@ import { useAtom } from 'jotai';
 import { EmailConfirmationModal } from 'web-components/src/components/modal/EmailConfirmationModal/EmailConfirmationModal';
 
 import { isWaitingForSigningAtom } from 'lib/atoms/tx.atoms';
+import { useWallet } from 'lib/wallet/wallet';
 
+import { useSocialProviders } from '../LoginButton/hooks/useSocialProviders';
 import {
   EMAIL_CONFIRMATION_CANCEL,
   EMAIL_CONFIRMATION_SUBMIT,
@@ -14,8 +16,6 @@ import { getResendCodeLabel } from '../LoginButton/utils/getResendCodeLabel';
 import { LoginModal } from '../LoginModal/LoginModal';
 import { LoginModalState, LoginProvider } from '../LoginModal/LoginModal.types';
 import { useEmailConfirmationData } from './hooks/useEmailConfirmationData';
-import { useWallet } from 'lib/wallet/wallet';
-import { useSocialProviders } from '../LoginButton/hooks/useSocialProviders';
 
 type Props = {
   isModalOpen: boolean;
@@ -23,6 +23,8 @@ type Props = {
   wallets: LoginProvider[];
   modalState: LoginModalState;
   qrCodeUri?: string;
+  createProject?: boolean;
+  isConnectingRef?: React.MutableRefObject<boolean>;
 };
 
 const LoginFlow = ({
@@ -30,6 +32,8 @@ const LoginFlow = ({
   onModalClose,
   wallets,
   modalState,
+  createProject,
+  isConnectingRef,
 }: Props) => {
   const {
     isConfirmationModalOpen,
@@ -40,12 +44,12 @@ const LoginFlow = ({
     onMailCodeChange,
     onResendPasscode,
     onEmailSubmit,
-  } = useEmailConfirmationData({});
+  } = useEmailConfirmationData({ isConnectingRef });
   const [isWaitingForSigning, setIsWaitingForSigningAtom] = useAtom(
     isWaitingForSigningAtom,
   );
   const { loginDisabled } = useWallet();
-  const socialProviders = useSocialProviders();
+  const socialProviders = useSocialProviders(createProject);
 
   return (
     <>

@@ -15,6 +15,7 @@ type Props = {
   connectWalletConnect?: WalletRepo['connect'];
   setModalState: UseStateSetter<LoginModalState>;
   onModalClose: () => void;
+  isConnectingRef?: React.MutableRefObject<boolean>;
 };
 
 type Response = ({ walletType }: ConnectParams) => Promise<void>;
@@ -23,12 +24,15 @@ export const useConnectToWallet = ({
   connect,
   connectWalletConnect,
   onModalClose,
+  isConnectingRef,
 }: Props): Response => {
   const { openView } = useChain('regen');
+
   const connectToWallet = useCallback(
     async ({ walletType }: ConnectParams): Promise<void> => {
       if (connect && walletType === WalletType.Keplr) {
         await connect({ walletType });
+        if (isConnectingRef) isConnectingRef.current = true;
         onModalClose();
       }
       if (

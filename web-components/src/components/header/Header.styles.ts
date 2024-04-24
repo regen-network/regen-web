@@ -70,7 +70,7 @@ export const useHeaderStyles = makeStyles<StyleProps>()(
         },
         '& li.MuiMenuItem-root, li.MuiMenuItem-root > div': {
           display: 'flex',
-          alignSelf: 'baseline',
+          alignSelf: 'end',
           backgroundColor: 'inherit',
           textDecoration: 'none',
         },

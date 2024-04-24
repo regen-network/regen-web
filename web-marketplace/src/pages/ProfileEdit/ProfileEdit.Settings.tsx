@@ -25,7 +25,7 @@ export const ProfileEditSettings = () => {
     onButtonClick,
     onModalClose,
     walletsUiConfig,
-  } = useLoginData();
+  } = useLoginData({});
 
   useConnectWalletToAccount({ isConnectModalOpened: isModalOpen, setError });
 

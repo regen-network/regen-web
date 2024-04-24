@@ -19,6 +19,7 @@ import { useAuthData } from 'hooks/useAuthData';
 
 import { chainId } from '../../../lib/ledger';
 import { RegistryIconLink, RegistryNavLink } from '../../atoms';
+import { ListProject } from '../ListProject/ListProject';
 import { useLoginData } from '../LoginButton/hooks/useLoginData';
 import { LoginButton } from '../LoginButton/LoginButton';
 import { LoginFlow } from '../LoginFlow/LoginFlow';
@@ -80,7 +81,9 @@ const RegistryLayoutHeader: React.FC = () => {
       showProjects,
       isConnected,
       loginDisabled,
+      onProfileClick,
       activeAccount,
+      privActiveAccount?.email,
     ],
   );
 
@@ -91,7 +94,7 @@ const RegistryLayoutHeader: React.FC = () => {
     : theme.palette.primary.light;
 
   const { isModalOpen, modalState, onModalClose, walletsUiConfig } =
-    useLoginData();
+    useLoginData({});
 
   return (
     <>
@@ -108,6 +111,7 @@ const RegistryLayoutHeader: React.FC = () => {
         pathname={pathname}
         extras={
           <Box display="flex" justifyContent="center" alignItems="center">
+            <ListProject />
             {chainId && accountOrWallet && disconnect && (
               <UserMenuItems
                 nameOrAddress={

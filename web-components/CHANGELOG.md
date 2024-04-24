@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/regen-network/regen-web/compare/v2.3.0...v2.4.0) (2024-04-24)
+
+### Features
+
+- add list project CTA ([3c951e9](https://github.com/regen-network/regen-web/commit/3c951e9529048ff9d1942b189f684324b5aa2547))
+
 # [2.3.0](https://github.com/regen-network/regen-web/compare/v2.2.1...v2.3.0) (2024-04-09)
 
 ### Bug Fixes

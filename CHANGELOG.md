@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/regen-network/regen-web/compare/v2.3.0...v2.4.0) (2024-04-24)
+
+### Bug Fixes
+
+- add ListProject ([af27d19](https://github.com/regen-network/regen-web/commit/af27d195787f85d19478311f5ce56f23b72888ad))
+- clean up ([93fc78d](https://github.com/regen-network/regen-web/commit/93fc78d0afd8d780ae33bf09c106a9015dc173f4))
+- lint ([e340960](https://github.com/regen-network/regen-web/commit/e34096065793714b399f26cc50b9022ceef7f1af))
+- mobile font size ([9c821af](https://github.com/regen-network/regen-web/commit/9c821af1d237722012f7d0c2d53af5c0a5b5beab))
+- ts error ([46b1377](https://github.com/regen-network/regen-web/commit/46b1377cb1d01a863a8bc3ae1b593655f6807f52))
+
+### Features
+
+- add list project CTA ([3c951e9](https://github.com/regen-network/regen-web/commit/3c951e9529048ff9d1942b189f684324b5aa2547))
+
 # [2.3.0](https://github.com/regen-network/regen-web/compare/v2.2.1...v2.3.0) (2024-04-09)
 
 ### Bug Fixes

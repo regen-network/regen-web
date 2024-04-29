@@ -2,6 +2,7 @@ import { Grid } from '@mui/material';
 
 import EditIcon from 'web-components/src/components/icons/EditIcon';
 import { CreditClassGridCard } from 'web-components/src/components/molecules/CreditClassGridCard/CreditClassGridCard';
+import { LinkComponentType } from 'web-components/src/types/shared/linkComponentType';
 
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -34,7 +35,7 @@ export const MyCreditClasses = (): JSX.Element => {
                 disabled: true,
               }}
               href={`/credit-classes/${creditClass.id}`}
-              LinkComponent={Link}
+              LinkComponent={Link as LinkComponentType}
             />
           </Grid>
         ))}

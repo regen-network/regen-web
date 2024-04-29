@@ -3,9 +3,9 @@ import React from 'react';
 import { BlockContent } from 'web-components/src/components/block-content';
 import type { ArticleCardProps } from 'web-components/src/components/cards/ArticleCard';
 import type { ResourcesCardProps } from 'web-components/src/components/cards/ResourcesCard';
+import { Document } from 'web-components/src/components/table/DocumentationTable/DocumentationTable';
 import { formatDate } from 'web-components/src/utils/format';
 
-import { Document } from 'web-components/src/components/table/DocumentationTable/DocumentationTable';
 import {
   Doc,
   Maybe,

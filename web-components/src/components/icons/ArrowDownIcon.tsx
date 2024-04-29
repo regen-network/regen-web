@@ -12,7 +12,7 @@ export type Direction =
   | 'upRight';
 
 interface ArrowDownIconProps {
-  color: string;
+  color?: string;
   className?: string;
   fontSize?: SvgIconProps['fontSize'];
   direction?: Direction;

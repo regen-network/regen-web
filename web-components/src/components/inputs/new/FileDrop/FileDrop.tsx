@@ -45,6 +45,8 @@ export interface FileDropProps extends Partial<FieldFormControlProps> {
   onUpload?: (imageFile: File) => Promise<string | undefined>;
   accept?: string;
   multi?: boolean;
+  moveUp?: () => void;
+  moveDown?: () => void;
 }
 
 /**
@@ -78,6 +80,8 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
       onDelete,
       accept,
       multi = false,
+      moveUp,
+      moveDown,
       ...fieldProps
     },
     ref,
@@ -220,6 +224,8 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
               mimeType={mimeType}
               accept={accept}
               classes={classes}
+              moveUp={moveUp}
+              moveDown={moveDown}
             />
           )}
           <FileDropZone

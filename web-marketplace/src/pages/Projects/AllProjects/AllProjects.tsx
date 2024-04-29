@@ -28,6 +28,7 @@ import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellO
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 
 import { useFetchCreditClasses } from '../hooks/useFetchCreditClasses';
+import { useProjectsContext } from '../Projects.context';
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
@@ -42,7 +43,6 @@ import { SideFilter } from './AllProjects.SideFilter';
 import { ProjectWithOrderData } from './AllProjects.types';
 import { getCreditsTooltip } from './utils/getCreditsTooltip';
 import { getIsSoldOut } from './utils/getIsSoldOut';
-import { useProjectsContext } from '../Projects.context';
 
 export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { page: routePage } = useParams();

@@ -42,7 +42,7 @@ export const useFileDropStyles = makeStyles()((theme: Theme) => ({
   },
   buttons: {
     position: 'absolute',
-    right: 0,
+    left: 0,
     top: 0,
     margin: theme.spacing(2),
     padding: theme.spacing(2),

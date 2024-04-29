@@ -56,9 +56,6 @@ const Gallery = ({ photos, sx }: Props) => {
           },
         }}
       >
-        {/* // TODO Update framer-motion to latest version and remove comments below after NextJS upgrade */}
-        {/* We are forced to use an old version of framer-motion that has a TS issue because of our current react-scripts version */}
-        {/* @ts-ignore */}
         <AnimatePresence initial={false} custom={direction}>
           <motion.img
             key={page}

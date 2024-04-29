@@ -1,10 +1,10 @@
 import { Box, BoxProps, SxProps } from '@mui/material';
 import Image, { ImageProps, StaticImageData } from 'next/image';
 
-import { useBackgroundImageStyles } from './BackgroundImage.styles';
-
 import { Theme } from 'web-components/src/theme/muiTheme';
 import { sxToArray } from 'web-components/src/utils/mui/sxToArray';
+
+import { useBackgroundImageStyles } from './BackgroundImage.styles';
 
 type Props = {
   src: string | StaticImageData;

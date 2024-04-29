@@ -22,10 +22,11 @@ export interface Option {
   label: string;
 }
 
-export interface SelectTextFieldProps extends DefaultStyleProps, SelectProps {
-  options?: Option[];
-  label?: string;
-}
+export type SelectTextFieldProps = DefaultStyleProps &
+  SelectProps & {
+    options?: Option[];
+    label?: string;
+  };
 
 interface StyleProps {
   defaultStyle: boolean;

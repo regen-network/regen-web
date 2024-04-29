@@ -10,6 +10,8 @@ import { useAuth } from 'lib/auth/auth';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
+import { AccountEvent, EmailLoginEvent } from 'lib/tracker/types';
+import { useTracker } from 'lib/tracker/useTracker';
 
 import { onPostData } from 'components/organisms/LoginButton/hooks/onLoginPostData';
 import { useTimer } from 'components/organisms/LoginButton/hooks/useTimer';
@@ -24,15 +26,15 @@ import {
   RESEND_SUCCES,
   RESEND_TIMER,
 } from '../../LoginButton/LoginButton.constants';
-import { useTracker } from 'lib/tracker/useTracker';
-import { EmailLoginEvent, AccountEvent } from 'lib/tracker/types';
 
 type EmailConfirmationDataParams = {
   emailConfirmationText?: string;
+  isConnectingRef?: React.MutableRefObject<boolean>;
 };
 
 export const useEmailConfirmationData = ({
   emailConfirmationText,
+  isConnectingRef,
 }: EmailConfirmationDataParams) => {
   const reactQueryClient = useQueryClient();
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
@@ -87,6 +89,7 @@ export const useEmailConfirmationData = ({
           await reactQueryClient.invalidateQueries([GET_ACCOUNTS_QUERY_KEY]);
           setBannerText(emailConfirmationText ?? EMAIL_CONFIRMATION_SUCCES);
           onConfirmationModalClose();
+          if (isConnectingRef) isConnectingRef.current = true;
           if (response?.user?.accountId)
             track<AccountEvent>('enterCodeSuccess', {
               id: response.user.accountId,

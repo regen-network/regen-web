@@ -70,11 +70,7 @@ const BridgeForm = ({
       onSubmit={onSubmit}
     >
       {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
-        <Form
-          placeholder={undefined}
-          onPointerEnterCapture={undefined}
-          onPointerLeaveCapture={undefined}
-        >
+        <Form>
           <Field
             name="target"
             label="Chain"

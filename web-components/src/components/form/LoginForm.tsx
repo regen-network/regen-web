@@ -115,11 +115,7 @@ const LoginForm: React.FC<React.PropsWithChildren<LoginFormProps>> = ({
       }) => {
         return (
           <div>
-            <Form
-              placeholder={undefined}
-              onPointerEnterCapture={undefined}
-              onPointerLeaveCapture={undefined}
-            >
+            <Form>
               <OnBoardingCard>
                 <Body size="lg" mb={5}>
                   {loginFromSignup ? (

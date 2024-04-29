@@ -321,11 +321,7 @@ const CreditRetireForm: React.FC<FormProps> = ({
       onSubmit={onSubmit}
     >
       {({ submitForm, isSubmitting, isValid, submitCount, status }) => (
-        <Form
-          placeholder={undefined}
-          onPointerEnterCapture={undefined}
-          onPointerLeaveCapture={undefined}
-        >
+        <Form>
           <RetirementReminder sx={{ textAlign: 'center', mb: 8 }} />
           <CreditRetireFields
             availableTradableAmount={availableTradableAmount}

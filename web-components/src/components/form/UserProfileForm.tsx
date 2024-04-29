@@ -60,11 +60,7 @@ const UserProfileForm: React.FC<React.PropsWithChildren<UserProfileFormProps>> =
       >
         {({ submitForm, isSubmitting, isValid, submitCount }) => {
           return (
-            <Form
-              placeholder={undefined}
-              onPointerEnterCapture={undefined}
-              onPointerLeaveCapture={undefined}
-            >
+            <Form>
               <OnBoardingCard>
                 <Field
                   component={ControlledTextField}

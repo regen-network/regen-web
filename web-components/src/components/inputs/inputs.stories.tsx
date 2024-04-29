@@ -29,11 +29,7 @@ function ToggleVariants(): JSX.Element {
     >
       {({ handleChange, values }) => {
         return (
-          <Form
-            placeholder={undefined}
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
-          >
+          <Form>
             <OnBoardingCard>
               <Field
                 label="No-till"
@@ -201,11 +197,7 @@ export const datePickField = (): JSX.Element => (
   >
     {() => {
       return (
-        <Form
-          placeholder={undefined}
-          onPointerEnterCapture={undefined}
-          onPointerLeaveCapture={undefined}
-        >
+        <Form>
           <Field component={DatePickField} name="date" label="Date" />
         </Form>
       );
@@ -225,11 +217,7 @@ export const selectTextField = (): JSX.Element => (
   >
     {() => {
       return (
-        <Form
-          placeholder={undefined}
-          onPointerEnterCapture={undefined}
-          onPointerLeaveCapture={undefined}
-        >
+        <Form>
           <Field
             name="batchDenom"
             label="Choose ecocredits batch"

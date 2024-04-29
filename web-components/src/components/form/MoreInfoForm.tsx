@@ -130,13 +130,7 @@ export default function MoreInfoForm({
         }) => {
           return (
             <div>
-              <Form
-                className={classes.form}
-                translate="yes"
-                placeholder={undefined}
-                onPointerEnterCapture={undefined}
-                onPointerLeaveCapture={undefined}
-              >
+              <Form className={classes.form} translate="yes">
                 <Field
                   component={TextField}
                   label="Your full name"

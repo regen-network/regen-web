@@ -121,11 +121,7 @@ export const RecipientsForm: React.FC<React.PropsWithChildren<FormProps>> = ({
       onSubmit={onSubmit}
     >
       {() => (
-        <Form
-          placeholder={undefined}
-          onPointerEnterCapture={undefined}
-          onPointerLeaveCapture={undefined}
-        >
+        <Form>
           <RecipientsFieldArray mapboxToken={mapboxToken} />
           <Card>
             <OutlinedButton type="submit">Next</OutlinedButton>

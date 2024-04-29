@@ -93,11 +93,7 @@ export const AdditionalityForm: React.FC<
     >
       {({ values, handleChange }) => {
         return (
-          <Form
-            placeholder={undefined}
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
-          >
+          <Form>
             <OnBoardingCard className={classes.card}>
               <ControlledFormLabel>
                 Which regenerative practices have you been applying and for how

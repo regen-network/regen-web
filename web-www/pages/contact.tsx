@@ -133,12 +133,7 @@ export default function ContactPage({
                   const hasBeenSubmitted = submitCount > 0 && !isSubmitting;
                   return (
                     <div>
-                      <Form
-                        translate="yes"
-                        placeholder={undefined}
-                        onPointerEnterCapture={undefined}
-                        onPointerLeaveCapture={undefined}
-                      >
+                      <Form translate="yes">
                         <div>
                           <Grid container>
                             <Grid item xs={12} sm={6} sx={{ pr: [0, 3.75] }}>

@@ -54,11 +54,7 @@ export const IncludesGrasslandsForm: React.FC<
     >
       {({ values }) => {
         return (
-          <Form
-            placeholder={undefined}
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
-          >
+          <Form>
             <OnBoardingCard>
               <ControlledFormLabel>
                 Does your project include grasslands?

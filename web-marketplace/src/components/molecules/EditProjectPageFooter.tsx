@@ -1,11 +1,16 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from 'tss-react/mui';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import FixedFooter from 'web-components/src/components/fixed-footer';
+import EyeIcon from 'web-components/src/components/icons/EyeIcon';
 import { SaveIcon } from 'web-components/src/components/icons/SaveIcon';
 import { Theme } from 'web-components/src/theme/muiTheme';
+
+import { VIEW_PROJECT } from 'pages/ProjectFinished/ProjectFinished.constants';
 
 interface Props {
   onSave?: () => void;
@@ -20,18 +25,17 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
   btn: {
     display: 'flex',
-    padding: theme.spacing(2, 4),
     minWidth: 0,
     justifyContent: 'center',
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(21),
+      padding: theme.spacing(2, 4),
       height: theme.typography.pxToRem(60),
-      width: theme.typography.pxToRem(181.11),
     },
     [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(18),
       height: theme.typography.pxToRem(50),
-      width: theme.typography.pxToRem(131),
+      padding: theme.spacing(2, 3.5),
     },
   },
   saveIcon: {
@@ -49,10 +53,23 @@ const EditProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
   saveDisabled,
 }) => {
   const { classes: styles } = useStyles();
+  const { projectId } = useParams();
 
   return (
     <FixedFooter>
-      <Grid container className={styles.root}>
+      <Grid container className={styles.root} gap={{ xs: 2.5, sm: 3.75 }}>
+        <Grid item className="">
+          <OutlinedButton className={styles.btn}>
+            <a
+              href={`/project/${projectId}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <EyeIcon className={styles.saveIcon} />
+              {VIEW_PROJECT}
+            </a>
+          </OutlinedButton>
+        </Grid>
         <Grid item>
           <ContainedButton
             type="submit"

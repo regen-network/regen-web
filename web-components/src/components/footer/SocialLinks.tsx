@@ -6,6 +6,7 @@ import { makeStyles } from 'tss-react/mui';
 import { cn } from '../../utils/styles/cn';
 import DiscordIcon from '../icons/social/DiscordIcon';
 import GithubIcon from '../icons/social/GithubIcon';
+import HyloIcon from '../icons/social/HyloIcon';
 import LinkedInIcon from '../icons/social/LinkedInIcon';
 import MediumIcon from '../icons/social/MediumIcon';
 import TwitterIcon from '../icons/social/TwitterIcon';
@@ -113,6 +114,13 @@ const SocialLinks: React.FC<React.PropsWithChildren<Props>> = ({
               'sm:mx-10',
             )}
           />
+        </Link>
+        <Link
+          href="https://www.hylo.com/groups/regen-methodology-development"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <HyloIcon className={cx(styles.smallIcon, styles.icon, 'sm:mx-10')} />
         </Link>
       </Grid>
     </div>

@@ -101,6 +101,7 @@ import SmallArrowIcon from './SmallArrowIcon';
 import DiscordIcon from './social/DiscordIcon';
 import FacebookIcon from './social/FacebookIcon';
 import GithubIcon from './social/GithubIcon';
+import HyloIcon from './social/HyloIcon';
 import InstagramIcon from './social/InstagramIcon';
 import LinkedInBadgeIcon from './social/LinkedInBadgeIcon';
 import LinkedInIcon from './social/LinkedInIcon';
@@ -108,7 +109,6 @@ import MediumIcon from './social/MediumIcon';
 import TelegramIcon from './social/TelegramIcon';
 import TwitterBadgeIcon from './social/TwitterBadgeIcon';
 import TwitterIcon from './social/TwitterIcon';
-import TwitterIcon2 from './social/TwitterIcon2';
 import WebsiteLinkIcon from './social/WebsiteLinkIcon';
 import YoutubeIcon from './social/YoutubeIcon';
 import SoilSampleIcon from './SoilSampleIcon';
@@ -258,6 +258,10 @@ export const allIcons = (): JSX.Element => (
     />
     <LabeledIcon icon={<GreenPinIcon />} label="GreenPinIcon" />
     <LabeledIcon icon={<GithubIcon color="grey" />} label="GithubIcon" />
+    <LabeledIcon
+      icon={<HyloIcon color="grey" className="w-40 h-40" />}
+      label="HyloIcon"
+    />
     <LabeledIcon icon={<GravUsdcIcon />} label="GravUsdcIcon" />
     <LabeledIcon icon={<HorizontalDotsIcon />} label="HorizontalDotsIcon" />
     <LabeledIcon icon={<InfoIcon />} label="InfoIcon" />

@@ -23,6 +23,9 @@ export const IconLabel = ({
       >
         <Box
           sx={theme => ({
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
             bgcolor: 'secondary.main',
             background:
               'linear-gradient(201.8deg, #4FB573 14.67%, #B9E1C7 97.14%);',

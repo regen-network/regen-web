@@ -1,6 +1,7 @@
 import EmailIcon from 'web-components/src/components/icons/EmailIcon';
 import DiscordIcon from 'web-components/src/components/icons/social/DiscordIcon';
 import GithubIcon from 'web-components/src/components/icons/social/GithubIcon';
+import HyloIcon from 'web-components/src/components/icons/social/HyloIcon';
 import LinkedInIcon from 'web-components/src/components/icons/social/LinkedInIcon';
 import MediumIcon from 'web-components/src/components/icons/social/MediumIcon';
 import TwitterIcon from 'web-components/src/components/icons/social/TwitterIcon';
@@ -72,6 +73,17 @@ export const getPressKitConnectIcons = (theme: Theme): IconLabelProps[] => [
     ),
     href: 'https://github.com/regen-network/',
     label: 'Github',
+  },
+  {
+    icon: (
+      <HyloIcon
+        color={theme.palette.primary.main}
+        hoverColor={theme.palette.secondary.main}
+        className="!w-40 !h-40 sm:!w-50 sm:!h-50"
+      />
+    ),
+    href: 'https://www.hylo.com/groups/regen-methodology-development',
+    label: 'Hylo',
   },
   {
     icon: (

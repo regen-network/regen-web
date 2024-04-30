@@ -19,6 +19,7 @@ import {
   connectWalletModalAtom,
   switchWalletModalAtom,
 } from 'lib/atoms/modals.atoms';
+import { useAuth } from 'lib/auth/auth';
 import { onBtnClick } from 'lib/button';
 import {
   AnchoredProjectMetadataLD,
@@ -90,6 +91,7 @@ function ProjectDetails(): JSX.Element {
   const location = useLocation();
   const { isKeplrMobileWeb } = useWallet();
   const navigate = useNavigate();
+  const { activeAccount } = useAuth();
 
   const { data: sanityProjectPageData } = useQuery(
     getAllProjectPageQuery({ sanityClient, enabled: !!sanityClient }),
@@ -344,6 +346,11 @@ function ProjectDetails(): JSX.Element {
   const projectPrefinancing = sanityProject?.projectPrefinancing;
   const isPrefinanceProject = projectPrefinancing?.isPrefinanceProject;
 
+  const isAdmin =
+    (!!activeAccount?.addr && onChainProject?.admin === activeAccount?.addr) ||
+    (!!activeAccount?.id &&
+      offChainProject?.adminAccountId === activeAccount?.id);
+
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO
@@ -378,11 +385,12 @@ function ProjectDetails(): JSX.Element {
         </Box>
       )}
 
-      {(onChainProjectId || isPrefinanceProject) && (
+      {(onChainProjectId || isPrefinanceProject || isAdmin) && (
         <SellOrdersActionsBar
           isBuyButtonDisabled={isBuyFlowDisabled}
           isCommunityCredit={isCommunityCredit}
           onBookCallButtonClick={onBookCallButtonClick}
+          isAdmin={isAdmin}
           onBuyButtonClick={() => {
             if (!activeWalletAddr) {
               setConnectWalletModal(atom => void (atom.open = true));
@@ -395,6 +403,7 @@ function ProjectDetails(): JSX.Element {
             }
           }}
           onChainProjectId={onChainProjectId}
+          offChainProjectId={offChainProject?.id}
           projectName={anchoredMetadata?.['schema:name']}
           onChainCreditClassId={onChainProject?.classId}
           avgPricePerTonLabel={

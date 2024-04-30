@@ -17,8 +17,8 @@ import { client as sanityClient } from 'lib/clients/sanity';
 import { Link } from 'components/atoms';
 import { GettingStartedResourcesSection } from 'components/molecules';
 
-import { useProjects } from './hooks/useProjects';
 import { PROJECTS_PER_PAGE } from './AllProjects/AllProjects.config';
+import { useProjects } from './hooks/useProjects';
 
 const Projects = (): JSX.Element => {
   const { page: routePage } = useParams();

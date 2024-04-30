@@ -45,7 +45,6 @@ export interface ProjectsWithOrdersProps {
   creditClassFilter?: Record<string, boolean>;
   useOffChainProjects?: boolean;
   enableOffchainProjectsQuery?: boolean;
-  separatePrefinanceProjects?: boolean;
 }
 
 /**
@@ -65,7 +64,6 @@ export function useProjectsWithOrders({
   creditClassFilter = {},
   useOffChainProjects = false,
   enableOffchainProjectsQuery = true,
-  separatePrefinanceProjects = false,
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
   const { ecocreditClient, marketplaceClient, dataClient } = useLedger();
 
@@ -201,21 +199,13 @@ export function useProjectsWithOrders({
   const allProject = useMemo(
     () =>
       creditClassFilter?.[UNREGISTERED_PATH] || useOffChainProjects
-        ? [
-            ...projectsWithOrderDataFiltered,
-            ...(separatePrefinanceProjects
-              ? allOffChainProjects.filter(
-                  project => !project.projectPrefinancing?.isPrefinanceProject,
-                )
-              : allOffChainProjects),
-          ]
+        ? [...projectsWithOrderDataFiltered, ...allOffChainProjects]
         : projectsWithOrderDataFiltered,
     [
       projectsWithOrderDataFiltered,
       creditClassFilter,
       useOffChainProjects,
       allOffChainProjects,
-      separatePrefinanceProjects,
     ],
   );
 
@@ -324,8 +314,7 @@ export function useProjectsWithOrders({
   return {
     allProjects: projectsWithOrderData,
     prefinanceProjects,
-    haveOffChainProjects:
-      allOffChainProjects.length - prefinanceProjects.length > 0,
+    haveOffChainProjects: allOffChainProjects.length,
     prefinanceProjectsCount: prefinanceProjects.length,
     projectsWithOrderData: projectsWithMetadata,
     projectsCount: projectsFilteredByCreditClass?.length,

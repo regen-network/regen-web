@@ -420,17 +420,19 @@ function ProjectDetails(): JSX.Element {
           }
           isPrefinanceProject={isPrefinanceProject}
         >
-          {isPrefinanceProject && projectPrefinancing?.stripePaymentLink && (
-            <Link href={projectPrefinancing?.stripePaymentLink}>
-              <ContainedButton
-                className="bg-purple-gradient"
-                startIcon={<PrefinanceIcon width="24" height="24" />}
-                sx={{ height: '100%' }}
-              >
-                {PREFINANCE}
-              </ContainedButton>
-            </Link>
-          )}
+          {!isAdmin &&
+            isPrefinanceProject &&
+            projectPrefinancing?.stripePaymentLink && (
+              <Link href={projectPrefinancing?.stripePaymentLink}>
+                <ContainedButton
+                  className="bg-purple-gradient"
+                  startIcon={<PrefinanceIcon width="24" height="24" />}
+                  sx={{ height: '100%' }}
+                >
+                  {PREFINANCE}
+                </ContainedButton>
+              </Link>
+            )}
         </SellOrdersActionsBar>
       )}
 

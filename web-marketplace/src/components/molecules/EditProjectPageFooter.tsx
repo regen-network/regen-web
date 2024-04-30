@@ -58,7 +58,7 @@ const EditProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
   return (
     <FixedFooter>
       <Grid container className={styles.root} gap={{ xs: 2.5, sm: 3.75 }}>
-        <Grid item className="">
+        <Grid item>
           <OutlinedButton className={styles.btn}>
             <a
               href={`/project/${projectId}`}

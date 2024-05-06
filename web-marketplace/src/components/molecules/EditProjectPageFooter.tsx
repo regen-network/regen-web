@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from 'tss-react/mui';
 
@@ -54,20 +54,18 @@ const EditProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
 }) => {
   const { classes: styles } = useStyles();
   const { projectId } = useParams();
+  const navigate = useNavigate();
 
   return (
     <FixedFooter>
       <Grid container className={styles.root} gap={{ xs: 2.5, sm: 3.75 }}>
         <Grid item>
-          <OutlinedButton className={styles.btn}>
-            <a
-              href={`/project/${projectId}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <EyeIcon className={styles.saveIcon} />
-              {VIEW_PROJECT}
-            </a>
+          <OutlinedButton
+            className={styles.btn}
+            onClick={() => navigate(`/project/${projectId}`)}
+          >
+            <EyeIcon className={styles.saveIcon} />
+            {VIEW_PROJECT}
           </OutlinedButton>
         </Grid>
         <Grid item>

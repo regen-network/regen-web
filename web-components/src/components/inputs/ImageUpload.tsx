@@ -27,7 +27,7 @@ function ImageUpload({
 
   const handleDelete = async (fileName: string): Promise<void> => {
     if (projectId) {
-      deleteImage(projectId, fileName, apiServerUrl);
+      deleteImage('projects', projectId, fileName, apiServerUrl);
     }
   };
 
